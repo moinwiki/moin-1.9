@@ -169,7 +169,7 @@ class ActionBase:
         _ = self._
         form = self.form
 
-        if form.has_key(self.form_cancel):
+        if self.form_cancel in form:
             self.render_cancel()
             return
 
@@ -183,7 +183,7 @@ class ActionBase:
             error = self.check_condition()
         if error:
             self.render_msg(error)
-        elif form.has_key(self.form_trigger): # user hit the trigger button
+        elif self.form_trigger in form: # user hit the trigger button
             if self.ticket_ok():
                 success, self.error = self.do_action()
             else:
@@ -240,7 +240,7 @@ def do_format(pagename, request):
         It also does not count in statistics and also does not set the cacheable flag.
         DEPRECATED: remove this action when we don't need it any more for compatibility.
     """
-    if not request.form.has_key('mimetype'):
+    if 'mimetype' not in request.form:
         request.form['mimetype'] = [u"text/plain"]
     do_show(pagename, request, count_hit=0, cacheable=0)
 

@@ -125,7 +125,7 @@ def checkSpelling(page, request, own_form=1):
     _ = request.getText
 
     # first check to see if we we're called with a "newwords" parameter
-    if request.form.has_key('button_newwords'):
+    if 'button_newwords' in request.form:
         _addLocalWords(request)
 
     # load words
@@ -152,10 +152,8 @@ def checkSpelling(page, request, own_form=1):
             return ""
         w_enc = word.encode(config.charset)
         wl_enc = word.lower().encode(config.charset)
-        if not (wordsdict.has_key(w_enc) or
-                wordsdict.has_key(wl_enc) or
-                localwords.has_key(w_enc) or
-                localwords.has_key(wl_enc) ):
+        if not (w_enc in wordsdict or wl_enc in wordsdict or
+                w_enc in localwords or wl_enc in localwords):
             if not num_re.match(word):
                 badwords[word] = 1
         return ""

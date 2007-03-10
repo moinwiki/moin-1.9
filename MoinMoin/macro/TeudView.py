@@ -33,7 +33,7 @@ def execute(macro, args):
     xslfile = xmldoc.getDataPath('webde.xsl')
     pagename = macro.formatter.page.page_name
 
-    if macro.form.has_key('module'):
+    if 'module' in macro.form:
         modname = macro.form["module"][0]
         try:
             object = pydoc.locate(modname)

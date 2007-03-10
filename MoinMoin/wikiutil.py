@@ -632,7 +632,7 @@ def resolve_wiki(request, wikiurl):
     """
     _interwiki_list = load_wikimap(request)
     wikiname, pagename, linktext = split_wiki(wikiurl)
-    if _interwiki_list.has_key(wikiname):
+    if wikiname in _interwiki_list:
         return (wikiname, _interwiki_list[wikiname], pagename, False)
     else:
         return (wikiname, request.getScriptname(), "/InterWiki", True)
@@ -912,7 +912,7 @@ class MimeType(object):
             if value[0] == '"' and value[-1] == '"': # remove quotes
                 value = value[1:-1]
             self.params[key.lower()] = value
-        if self.params.has_key('charset'):
+        if 'charset' in self.params:
             self.charset = self.params['charset'].lower()
         self.sanitize()
 
@@ -1367,7 +1367,7 @@ class ParameterParser:
 
             parameter_list.append(value)
             if match.group("name"):
-                if not self.param_dict.has_key(match.group("name")):
+                if match.group("name") not in self.param_dict:
                     raise ValueError, "Unknown parameter name '%s'" % match.group("name")
                 nr = self.param_dict[match.group("name")]
                 if check_list[nr]:
@@ -1532,7 +1532,7 @@ def link_tag(request, params, text=None, formatter=None, on=None, **kw):
     """
     if formatter is None:
         formatter = request.html_formatter
-    if kw.has_key('css_class'):
+    if 'css_class' in kw:
         css_class = kw['css_class']
         del kw['css_class'] # one time is enough
     else:

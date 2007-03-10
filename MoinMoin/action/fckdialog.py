@@ -95,7 +95,7 @@ function OnChange( sMacro )
             selected = ' selected="selected"'
         else:
             selected = ''
-        if help.has_key(macro):
+        if macro in help:
             macros.append('<option value="%s"%s>%s</option>' %
                           (help[macro].group('prototype'), selected, macro))
         else:
@@ -110,7 +110,7 @@ function OnChange( sMacro )
 
     helptexts = []
     for macro in macro_list(request):
-        if help.has_key(macro):
+        if macro in help:
             match = help[macro]
             prototype = match.group('prototype')
             helptext = match.group('help')

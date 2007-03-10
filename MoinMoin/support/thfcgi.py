@@ -408,7 +408,7 @@ class Request:
                      }
 
             for name in rec.values.keys():
-                if params.has_key(name):
+                if name in params:
                     # We known this value, include in reply
                     reply_rec.values[name] = params[name]
 
@@ -571,7 +571,7 @@ class FCGI:
     def _check_good_addrs(self, addr):
         """Check if request is done from the right server."""
         # Apaches mod_fastcgi seems not to use FCGI_WEB_SERVER_ADDRS. 
-        if os.environ.has_key('FCGI_WEB_SERVER_ADDRS'):
+        if 'FCGI_WEB_SERVER_ADDRS' in os.environ:
             good_addrs = os.environ['FCGI_WEB_SERVER_ADDRS'].split(',')
             good_addrs = [addr.strip() for addr in good_addrs] # Remove whitespace
         else:

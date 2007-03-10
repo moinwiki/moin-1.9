@@ -1155,12 +1155,12 @@ def process_file(file, name='UNDEF', debug=0):
         hdr.tags['JPEGThumbnail'] = file.read(size)
 
     # deal with MakerNote contained in EXIF IFD
-    if hdr.tags.has_key('EXIF MakerNote'):
+    if 'EXIF MakerNote' in hdr.tags:
         hdr.decode_maker_note()
 
     # Sometimes in a TIFF file, a JPEG thumbnail is hidden in the MakerNote
     # since it's not allowed in a uncompressed TIFF IFD
-    if not hdr.tags.has_key('JPEGThumbnail'):
+    if 'JPEGThumbnail' not in hdr.tags:
         thumb_off = hdr.tags.get('MakerNote JPEGThumbnail')
         if thumb_off:
             file.seek(offset+thumb_off.values[0])
@@ -1199,6 +1199,6 @@ if __name__ == '__main__':
                       (i, FIELD_TYPES[data[i].field_type][2], data[i].printable)
             except:
                 print 'error', i, '"', data[i], '"'
-        if data.has_key('JPEGThumbnail'):
+        if 'JPEGThumbnail' in data:
             print 'File has JPEG thumbnail'
         print

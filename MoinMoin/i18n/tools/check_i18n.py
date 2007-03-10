@@ -90,7 +90,7 @@ class TextFinder:
 
     def walk(self, node):
         """ Walk through all nodes """
-        if self._visited.has_key(node):
+        if node in self._visited:
             # We visited this node already
             return
             
@@ -140,12 +140,12 @@ class TextFinder:
         self._found = self._found + 1
 
         # Create key for this text if needed
-        if not self._dictionary.has_key(text):
+        if text not in self._dictionary:
             self._dictionary[text] = {}
 
         # Create key for this filename if needed   
         textInfo = self._dictionary[text]
-        if not textInfo.has_key(self._filename):
+        if self._filename not in textInfo:
             textInfo[self._filename] = [self._lineno]
         else:
             textInfo[self._filename].append(self._lineno)
@@ -205,12 +205,12 @@ class Report:
 
         # Collect missing texts
         for text in self.__sourceDict:
-            if not self.__langDict.has_key(text):
+            if text not in self.__langDict:
                 self.__missing[text] = self.__sourceDict[text]
 
         # Collect unused texts
         for text in self.__langDict:
-            if not self.__sourceDict.has_key(text):
+            if text not in self.__sourceDict:
                 self.__unused[text] = self.__langDict[text]
         self.__ready = 1
         

@@ -44,7 +44,7 @@ class PackagePages:
         _ = self.request.getText
         form = self.request.form
 
-        if form.has_key('cancel'):
+        if 'cancel' in form:
             # User canceled
             return self.page.send_page()
 

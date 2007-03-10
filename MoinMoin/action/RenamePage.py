@@ -58,7 +58,7 @@ class RenamePage(ActionBase):
         success, msg = self.page.renamePage(newpagename, comment)
 
         rename_subpages = 0
-        if form.has_key('rename_subpages'):
+        if 'rename_subpages' in form:
             try:
                 rename_subpages = int(form['rename_subpages'][0])
             except:

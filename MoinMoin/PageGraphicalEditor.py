@@ -85,7 +85,7 @@ class PageGraphicalEditor(PageEditor.PageEditor):
 
         # check if we want to load a draft
         use_draft = None
-        if form.has_key('button_load_draft'):
+        if 'button_load_draft' in form:
             wanted_draft_timestamp = int(form.get('draft_ts', ['0'])[0])
             if wanted_draft_timestamp:
                 draft = self._load_draft()
@@ -162,7 +162,7 @@ Please review the page and save then. Do not save this page as it is!""")
             # If the page exists, we get the text from the page.
             # TODO: maybe warn if template argument was ignored because the page exists?
             raw_body = self.get_raw_body()
-        elif form.has_key('template'):
+        elif 'template' in form:
             # If the page does not exists, we try to get the content from the template parameter.
             template_page = wikiutil.unquoteWikiname(form['template'][0])
             if request.user.may.read(template_page):
@@ -370,8 +370,8 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         badwords_re = None
         if preview is not None:
             if SpellCheck and (
-                    form.has_key('button_spellcheck') or
-                    form.has_key('button_newwords')):
+                    'button_spellcheck' in form or
+                    'button_newwords' in form):
                 badwords, badwords_re, msg = SpellCheck.checkSpelling(self, request, own_form=0)
                 request.write("<p>%s</p>" % msg)
         request.write('</fieldset>')

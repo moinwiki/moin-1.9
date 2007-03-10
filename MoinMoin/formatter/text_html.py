@@ -151,10 +151,10 @@ def extend_attribute_dictionary(attributedict, ns, name, value):
 
     key = ns, name
     if value is None:
-        if attributedict.has_key(key):
+        if key in attributedict:
             del attributedict[key]
     else:
-        if ns == 'html' and attributedict.has_key(key):
+        if ns == 'html' and key in attributedict:
             if name == 'class':
                 # CSS classes are appended by space-separated list
                 value = attributedict[key] + ' ' + value
@@ -274,15 +274,15 @@ class Formatter(FormatterBase):
                 extend_attribute_dictionary(attributes, a_ns, a_name, v)
 
         # Add title attribute if missing, but it has an alt.
-        if attributes.has_key(('html', 'alt')) and not attributes.has_key(('html', 'title')):
+        if ('html', 'alt') in attributes and ('html', 'title') not in attributes:
             attributes[('html', 'title')] = attributes[('html', 'alt')]
 
         # Force both lang and xml:lang to be present and identical if
         # either exists.  The lang takes precedence over xml:lang if
         # both exist.
-        #if attributes.has_key(('html', 'lang')):
+        #if ('html', 'lang') in attributes:
         #    attributes[('xml', 'lang')] = attributes[('html', 'lang')]
-        #elif attributes.has_key(('xml', 'lang')):
+        #elif ('xml', 'lang') in attributes:
         #    attributes[('html', 'lang')] = attributes[('xml', 'lang')]
 
         # Check all the HTML attributes to see if they are known and
@@ -559,7 +559,7 @@ class Formatter(FormatterBase):
             attrs = self._langAttr()
 
             # Handle the URL mapping
-            if url is None and kw.has_key('href'):
+            if url is None and 'href' in kw:
                 url = kw['href']
                 del kw['href']
             if url is not None:
@@ -612,7 +612,7 @@ class Formatter(FormatterBase):
         attrs = self._langAttr()
         if name:
             attrs['href'] = '#%s' % name
-        if kw.has_key('href'):
+        if 'href' in kw:
             del kw['href']
         if on:
             str = self._open('a', attr=attrs, **kw)

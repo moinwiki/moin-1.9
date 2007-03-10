@@ -165,7 +165,7 @@ class Formatter(text_html.Formatter):
         }
 
     def _style_to_attributes(self, attrs):
-        if not attrs.has_key('style'):
+        if 'style' not in attrs:
             return attrs
         unknown = []
         for entry in attrs['style'].split(';'):
@@ -175,7 +175,7 @@ class Formatter(text_html.Formatter):
                 unknown.append(entry)
                 continue
             key, value = key.strip(), value.strip()
-            if self.style2attribute.has_key(key):
+            if key in self.style2attribute:
                 attrs[self.style2attribute[key]] = value
             else:
                 unknown.append("%s:%s" % (key, value))

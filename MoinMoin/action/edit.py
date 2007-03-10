@@ -15,7 +15,7 @@ def execute(pagename, request):
     """ edit a page """
     _ = request.getText
 
-    if request.form.has_key('button_preview') and request.form.has_key('button_spellcheck'):
+    if 'button_preview' in request.form and 'button_spellcheck' in request.form:
         # multiple buttons pressed at once? must be some spammer/bot
         request.makeForbidden403()
         request.surge_protect(kick_him=True) # get rid of him
@@ -56,7 +56,7 @@ def execute(pagename, request):
     rstrip = int(request.form.get('rstrip', ['0'])[0])
     trivial = int(request.form.get('trivial', ['0'])[0])
 
-    if request.form.has_key('button_switch'):
+    if 'button_switch' in request.form:
         if editor == 'text':
             editor = 'gui'
         else: # 'gui'
@@ -71,12 +71,12 @@ def execute(pagename, request):
         pg = PageEditor(request, pagename)
 
     # is invoked without savetext start editing
-    if savetext is None or request.form.has_key('button_load_draft'):
+    if savetext is None or 'button_load_draft' in request.form:
         pg.sendEditor()
         return
 
     # did user hit cancel button?
-    cancelled = request.form.has_key('button_cancel')
+    cancelled = 'button_cancel' in request.form
 
     if request.cfg.edit_ticketing:
         ticket = request.form.get('ticket', [''])[0]
@@ -137,13 +137,13 @@ def execute(pagename, request):
         savetext += category + u'\n' # Should end with newline!
 
     # Preview, spellcheck or spellcheck add new words
-    if (request.form.has_key('button_preview') or
-        request.form.has_key('button_spellcheck') or
-        request.form.has_key('button_newwords')):
+    if ('button_preview' in request.form or
+        'button_spellcheck' in request.form or
+        'button_newwords' in request.form):
         pg.sendEditor(preview=savetext, comment=comment)
 
     # Preview with mode switch
-    elif request.form.has_key('button_switch'):
+    elif 'button_switch' in request.form:
         pg.sendEditor(preview=savetext, comment=comment, staytop=1)
 
     # Save new text

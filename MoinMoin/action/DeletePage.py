@@ -57,7 +57,7 @@ class DeletePage(ActionBase):
         success, msg = self.page.deletePage(comment)
         msgs = msg
         delete_subpages = 0
-        if form.has_key('delete_subpages'):
+        if 'delete_subpages' in form:
             try:
                 delete_subpages = int(form['delete_subpages'][0])
             except:

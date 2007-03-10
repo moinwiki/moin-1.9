@@ -14,7 +14,7 @@ def execute(pagename, request):
     form = request.form
 
     # get the MIME type
-    if form.has_key('mimetype'):
+    if 'mimetype' in form:
         mimetype = form['mimetype'][0]
     else:
         mimetype = "text/html"

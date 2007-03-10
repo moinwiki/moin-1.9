@@ -23,7 +23,7 @@ def checkTitleSearch(request):
     True (might happen with Safari) if this isn't an advanced search.
 """
     form = request.form
-    if form.has_key('titlesearch') and form.has_key('fullsearch'):
+    if 'titlesearch' in form and 'fullsearch' in form:
         ret = -1 # spammer / bot
     else:
         try:

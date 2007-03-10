@@ -20,7 +20,7 @@ class FarmConfig(DefaultConfig):
         except Cookie.CookieError:
             # ignore invalid cookies
             cookie = None
-        if cookie and cookie.has_key(cookiename):
+        if cookie and cookiename in cookie:
             import urllib
             cookievalue = cookie[cookiename].value
             # +++ now we decode and parse the cookie value - edit this to fit your needs.

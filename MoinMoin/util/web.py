@@ -232,7 +232,7 @@ class Color:
             self.r = (color >> 16) & 255
             self.g = (color >> 8) & 255
             self.b = color & 255
-        elif not self.COLORS.has_key(color):
+        elif color not in self.COLORS:
             raise ValueError("Unknown color name '%s'" % color)
         else:
             # known color name

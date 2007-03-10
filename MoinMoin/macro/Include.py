@@ -100,7 +100,7 @@ def execute(macro, text, args_re=re.compile(_args_re_pattern), title_re=re.compi
     for inc_name in pagelist:
         if not request.user.may.read(inc_name):
             continue
-        if this_page._macroInclude_pagelist.has_key(inc_name):
+        if inc_name in this_page._macroInclude_pagelist:
             result.append(u'<p><strong class="error">Recursive include of "%s" forbidden</strong></p>' % (inc_name,))
             continue
         if skipitems:

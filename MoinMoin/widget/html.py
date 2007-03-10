@@ -61,7 +61,7 @@ class Element:
     def __init__(self, **kw):
         for key in kw.keys():
             key = key.lower()
-            if not self._ATTRS.has_key(key):
+            if key not in self._ATTRS:
                 raise AttributeError(
                     "Invalid HTML attribute %r for tag <%s>" % (
                         key, self.tagname()))
@@ -78,7 +78,7 @@ class Element:
         if _SORT_ATTRS: attrs.sort()
         for key, val in attrs:
             key = key.lower()
-            if self._BOOL_ATTRS.has_key(key):
+            if key in self._BOOL_ATTRS:
                 if val: result.append(key)
             else:
                 result.append(u'%s="%s"' % (key, wikiutil.escape(val, 1)))

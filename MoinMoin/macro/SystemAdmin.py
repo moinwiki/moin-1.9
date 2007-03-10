@@ -44,7 +44,7 @@ def execute(macro, args):
     result.append(f.linebreak())
 
     # add chosen content
-    if _MENU.has_key(choice):
+    if choice in _MENU:
         result.append(f.rawHTML(_MENU[choice][1](request)))
 
     return ''.join(result)

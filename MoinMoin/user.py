@@ -378,7 +378,7 @@ class User:
 
         # Remove ignored checkbox values from user data
         for key, label in self._cfg.user_checkbox_fields:
-            if user_data.has_key(key) and key in self._cfg.user_checkbox_disable:
+            if key in user_data and key in self._cfg.user_checkbox_disable:
                 del user_data[key]
 
         # Copy user data into user object
