@@ -134,7 +134,7 @@ def draw(pagename, request):
     maxdata = len(colors) - 1
     if len(data) > maxdata:
         others = [x[0] for x in data[maxdata:]]
-        data = data[:maxdata] + [(reduce(operator.add, others, 0), _('Others').encode('iso-8859-1', 'replace'))] # gdchart can't do utf-8
+        data = data[:maxdata] + [(sum(others), _('Others').encode('iso-8859-1', 'replace'))] # gdchart can't do utf-8
 
     # shift front to end if others is very small
     if data[-1][0] * 10 < data[0][0]:
@@ -146,7 +146,7 @@ def draw(pagename, request):
     # give us a chance to develop this
     if _debug:
         return "<p>data = %s</p>" % \
-            '<br>'.join(map(wikiutil.escape, map(repr, [labels, data])))
+            '<br>'.join([wikiutil.escape(repr(x)) for x in [labels, data]])
 
     # create image
     image = cStringIO.StringIO()

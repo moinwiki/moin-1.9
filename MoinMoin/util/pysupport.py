@@ -42,8 +42,8 @@ def getPackageModules(packagefile):
         pyre = re.compile(r"^([^_].*)\.py$")
         dirlist = os.listdir(packagedir)
 
-    pyfiles = filter(None, map(pyre.match, dirlist))
-    modules = map(lambda x: x.group(1), pyfiles)
+    matches = [pyre.match(fn) for fn in dirlist]
+    modules = [match.group(1) for match in matches if match]
 
     modules.sort()
     return modules

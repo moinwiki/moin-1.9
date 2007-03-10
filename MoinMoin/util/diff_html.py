@@ -121,8 +121,8 @@ def diff(request, old, new):
                 rightresult += escape(rightpane[thismatch[1]:thismatch[1] + thismatch[2]])
                 charlast = (thismatch[0] + thismatch[2], thismatch[1] + thismatch[2])
 
-        leftpane = '<br>\n'.join(map(indent, leftresult.splitlines()))
-        rightpane = '<br>\n'.join(map(indent, rightresult.splitlines()))
+        leftpane = '<br>\n'.join([indent(x) for x in leftresult.splitlines()])
+        rightpane = '<br>\n'.join([indent(x) for x in rightresult.splitlines()])
 
         # removed width="50%%"
         result += """

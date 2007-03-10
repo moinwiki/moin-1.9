@@ -83,7 +83,7 @@ def draw(pagename, request):
     # give us a chance to develop this
     if _debug:
         return "<p>data = %s</p>" % \
-            '<br>'.join(map(wikiutil.escape, map(repr, [labels, data])))
+            '<br>'.join([wikiutil.escape(repr(x)) for x in [labels, data]])
 
     # create image
     image = cStringIO.StringIO()

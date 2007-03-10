@@ -356,7 +356,7 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
 def _get_files(request, pagename):
     attach_dir = getAttachDir(request, pagename)
     if os.path.isdir(attach_dir):
-        files = map(lambda a: a.decode(config.charset), os.listdir(attach_dir))
+        files = [fn.decode(config.charset) for fn in os.listdir(attach_dir)]
         files.sort()
         return files
     return []

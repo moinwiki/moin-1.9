@@ -30,7 +30,7 @@ class Request(RequestBase):
             self.http_accept_language = (sa.headers.getheader('accept-language')
                                          or self.http_accept_language)
             self.http_user_agent = sa.headers.getheader('user-agent', '')
-            co = filter(None, sa.headers.getheaders('cookie'))
+            co = [c for c in sa.headers.getheaders('cookie') if c]
             self.saved_cookie = ', '.join(co) or ''
             self.if_modified_since = sa.headers.getheader('if-modified-since')
             self.if_none_match = sa.headers.getheader('if-none-match')

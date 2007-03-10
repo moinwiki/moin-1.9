@@ -109,7 +109,7 @@ class Parser:
         'dl_rule': dl_rule,
         'url_rule': url_rule,
         'word_rule': word_rule,
-        'smiley': u'|'.join(map(re.escape, config.smileys))}
+        'smiley': u'|'.join([re.escape(s) for s in config.smileys])}
 
     # Don't start p before these 
     no_new_p_before = ("heading rule table tableZ tr td "
@@ -341,7 +341,7 @@ class Parser:
         if word.startswith(wikiutil.PARENT_PREFIX):
             if not text:
                 text = word
-            word = '/'.join(filter(None, self.formatter.page.page_name.split('/')[:-1] + [word[wikiutil.PARENT_PREFIX_LEN:]]))
+            word = '/'.join([x for x in self.formatter.page.page_name.split('/')[:-1] + [word[wikiutil.PARENT_PREFIX_LEN:]] if x])
 
         if not text:
             # if a simple, self-referencing link, emit it as plain text

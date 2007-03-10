@@ -707,7 +707,7 @@ def filterCategoryPages(request, pagelist):
     @return: only the category pages of pagelist
     """
     func = request.cfg.cache.page_category_regex.search
-    return filter(func, pagelist)
+    return [pn for pn in pagelist if func(pn)]
 
 
 def getLocalizedPage(request, pagename): # was: getSysPage
@@ -824,7 +824,7 @@ def AbsPageName(request, context, pagename):
     @return: the absolute page name
     """
     if pagename.startswith(PARENT_PREFIX):
-        pagename = '/'.join(filter(None, context.split('/')[:-1] + [pagename[PARENT_PREFIX_LEN:]]))
+        pagename = '/'.join([x for x in context.split('/')[:-1] + [pagename[PARENT_PREFIX_LEN:]] if x])
     elif pagename.startswith(CHILD_PREFIX):
         pagename = context + '/' + pagename[CHILD_PREFIX_LEN:]
     return pagename
