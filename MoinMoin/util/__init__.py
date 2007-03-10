@@ -89,7 +89,7 @@ def dumpFormData(form):
     from MoinMoin import wikiutil
 
     result = '<dt><strong>Form entries</strong></dt>'
-    for k in form.keys():
+    for k in form:
         v = form.get(k, ["<empty>"])
         v = "|".join(v)
         result = result + '<dd><em>%s</em>=%s</dd>' % (k, wikiutil.escape(v))

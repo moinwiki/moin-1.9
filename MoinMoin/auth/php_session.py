@@ -52,7 +52,7 @@ class php_session:
         except Cookie.CookieError: # ignore invalid cookies
             cookie = None
         if cookie:
-            for cookiename in cookie.keys():
+            for cookiename in cookie:
                 cookievalue = urllib.unquote(cookie[cookiename].value).decode('iso-8859-1')
                 session = _PHPsessionParser.loadSession(cookievalue, path=self.s_path, prefix=self.s_prefix)
                 if session:

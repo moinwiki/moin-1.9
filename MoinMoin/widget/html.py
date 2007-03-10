@@ -59,7 +59,7 @@ class Element:
     }
 
     def __init__(self, **kw):
-        for key in kw.keys():
+        for key in kw:
             key = key.lower()
             if key not in self._ATTRS:
                 raise AttributeError(

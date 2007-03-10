@@ -69,7 +69,7 @@ class PageHits:
     def filterReadableHits(self, hits):
         """ Filter out hits the user many not see """
         userMayRead = self.request.user.may.read
-        for pagename in hits.keys():
+        for pagename in hits:
             page = Page(self.request, pagename)
             if page.exists() and userMayRead(pagename):
                 continue

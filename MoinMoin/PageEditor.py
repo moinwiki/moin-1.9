@@ -745,7 +745,7 @@ Try a different name.""") % (newpagename,)
 
             # send email to all subscribers
             results = [_('Status of sending notification mails:')]
-            for lang in subscribers.keys():
+            for lang in subscribers:
                 emails = [u.email for u in subscribers[lang]]
                 names = [u.name for u in subscribers[lang]]
                 mailok, status = self._sendNotification(comment, emails, lang, revisions, trivial)

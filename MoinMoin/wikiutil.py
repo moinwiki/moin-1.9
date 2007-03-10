@@ -1386,7 +1386,7 @@ class ParameterParser:
                 parameter_list[nr] = value
 
             #Let's populate and map our dictionary to what's been found
-            for name in self.param_dict.keys():
+            for name in self.param_dict:
                 tmp = self.param_dict[name]
                 parameter_dict[name]=parameter_list[tmp]
 
@@ -1467,7 +1467,7 @@ def mapURL(request, url):
     # check whether we have to map URLs
     if request.cfg.url_mappings:
         # check URL for the configured prefixes
-        for prefix in request.cfg.url_mappings.keys():
+        for prefix in request.cfg.url_mappings:
             if url.startswith(prefix):
                 # substitute prefix with replacement value
                 return request.cfg.url_mappings[prefix] + url[len(prefix):]

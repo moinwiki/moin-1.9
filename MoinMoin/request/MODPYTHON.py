@@ -84,7 +84,7 @@ class Request(RequestBase):
         form = util.FieldStorage(self.mpyreq)
 
         args = {}
-        for key in form.keys():
+        for key in form:
             if key is None:
                 continue
             values = form[key]

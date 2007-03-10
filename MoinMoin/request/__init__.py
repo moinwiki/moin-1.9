@@ -96,7 +96,7 @@ class Clock:
 
     def dump(self):
         outlist = []
-        for timer in self.timings.keys():
+        for timer in self.timings:
             value = self.value(timer)
             outlist.append("%s = %s" % (timer, value))
         outlist.sort()

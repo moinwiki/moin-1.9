@@ -105,7 +105,7 @@ class DirectMonitor(AbstractMonitor):
             return
         dumpfile = dumpfile or sys.stderr
         cur_frames = sys._current_frames()
-        for i in cur_frames.keys():
+        for i in cur_frames:
             s = StringIO()
             print >>s, "\nDumping thread (id %s):" % (i, )
             traceback.print_stack(cur_frames[i], file=s)

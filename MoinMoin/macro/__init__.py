@@ -80,7 +80,7 @@ class Macro:
 
     # we need the lang macros to execute when html is generated,
     # to have correct dir and lang html attributes
-    for lang in i18n.wikiLanguages().keys():
+    for lang in i18n.wikiLanguages():
         Dependencies[lang] = []
 
 
@@ -197,8 +197,7 @@ class Macro:
                     map[word] = [name]
 
         # Sort ignoring case
-        all_words = map.keys()
-        tmp = [(word.upper(), word) for word in all_words]
+        tmp = [(word.upper(), word) for word in map]
         tmp.sort()
         all_words = [item[1] for item in tmp]
 

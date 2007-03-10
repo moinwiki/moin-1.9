@@ -220,7 +220,7 @@ class Record:
 
         elif self.rec_type == FCGI_GET_VALUES or self.rec_type == FCGI_PARAMS:
             content = ""
-            for i in self.values.keys():
+            for i in self.values:
                 content = content + self.write_pair(i, self.values[i])
 
         elif self.rec_type == FCGI_END_REQUEST:
@@ -407,7 +407,7 @@ class Request:
                       'FCGI_MPXS_CONNS': FCGI_MPXS_CONNS,
                      }
 
-            for name in rec.values.keys():
+            for name in rec.values:
                 if name in params:
                     # We known this value, include in reply
                     reply_rec.values[name] = params[name]
