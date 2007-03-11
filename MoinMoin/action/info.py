@@ -94,19 +94,7 @@ def execute(pagename, request):
 
         def render_action(text, query, **kw):
             kw.update(dict(rel='nofollow'))
-            if 0: # XXX diff button doesnt work
-                params_html = []
-                for k, v in query.items():
-                    params_html.append('<input type="hidden" name="%s" value="%s">' % (k, v))
-                params_html = ''.join(params_html)
-                html = '''
-<form>
-<input type="submit" value="%s">
-%s
-</form>
-''' % (text, params_html)
-            else:
-                html = page.link_to(request, text, querystr=query, **kw)
+            html = page.link_to(request, text, querystr=query, **kw)
             return html
 
         # read in the complete log of this page
