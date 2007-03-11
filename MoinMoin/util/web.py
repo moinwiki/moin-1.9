@@ -25,16 +25,6 @@ def getIntegerInput(request, fieldname, default=None, minval=None, maxval=None):
         return result
 
 
-def getLinkIcon(request, formatter, scheme):
-    """ Get icon for fancy links, or '' if user doesn't want them.
-    """
-    if scheme in ["mailto", "news", "telnet", "ftp", "file"]:
-        icon = scheme
-    else:
-        icon = "www"
-
-    return request.theme.make_icon(icon)
-
 def makeSelection(name, values, selectedval=None, size=1):
     """ Make a HTML <select> element named `name` from a value list.
         The list can either be a list of strings, or a list of

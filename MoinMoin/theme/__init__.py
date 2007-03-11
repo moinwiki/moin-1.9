@@ -2,7 +2,7 @@
 """
     MoinMoin - Theme Package
 
-    @copyright: 2003-2006 by MoinMoin:ThomasWaldmann
+    @copyright: 2003-2007 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -521,15 +521,8 @@ class ThemeBase:
             alt = alt % vars
         except KeyError, err:
             alt = 'KeyError: %s' % str(err)
-        if self.request:
-            alt = self.request.getText(alt, formatted=False)
-        try:
-            tag = self.request.formatter.image(src=img, alt=alt, width=w, height=h)
-        except AttributeError: # XXX FIXME if we have no formatter or no request 
-            tag = '<img src="%s" alt="%s" width="%s" height="%s">' % (
-                img, alt, w, h)
-            import warnings
-            warnings.warn("calling themes without correct request", DeprecationWarning)
+        alt = self.request.getText(alt, formatted=False)
+        tag = self.request.formatter.image(src=img, alt=alt, width=w, height=h)
         return tag
 
     def make_iconlink(self, which, d):

@@ -83,9 +83,6 @@ class Parser:
     def __call__(self, toktype, toktext, (srow,scol), (erow,ecol), line):
         """ Token handler.
         """
-        if 0: print "type", toktype, token.tok_name[toktype], "text", toktext, \
-                    "start", srow,scol, "end", erow,ecol, "<br>"
-
         # calculate new positions
         oldpos = self.pos
         newpos = self.lines[srow] + scol
