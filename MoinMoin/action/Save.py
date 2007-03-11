@@ -1,17 +1,16 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - Action macro for saving a page
+    MoinMoin - Action for saving a page
 
-    MODIFICATION HISTORY:
-        @copyright: 2007 by Reimar Bauer 
-        @license: GNU GPL, see COPYING for details.
+    @copyright: 2007 by Reimar Bauer 
+    @license: GNU GPL, see COPYING for details.
 """
 
 from MoinMoin.Page import Page
 
 def execute(pagename, request):
-    if request.user.may.read(pagename):
-        thispage = Page(request, pagename)
-        thispage.save_raw()
-
-
+    if not request.user.may.read(pagename):
+        Page(request, pagename).send_page()
+    else:
+        rev = request.rev or 0
+        Page(request, pagename, rev=rev).send_raw(content_disposition='attachment')
