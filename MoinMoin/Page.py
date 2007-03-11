@@ -873,8 +873,7 @@ class Page:
         request.clock.start('send_page')
         _ = request.getText
         emit_headers = keywords.get('emit_headers', 1)
-        # determine modes
-        print_mode = 'action' in request.form and request.form['action'][0] == 'print'
+        print_mode = keywords.get('print_mode', 0)
         if print_mode:
             media = 'media' in request.form and request.form['media'][0] or 'print'
         else:

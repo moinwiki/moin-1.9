@@ -219,7 +219,7 @@ def do_raw(pagename, request):
         rev = request.rev or 0
         Page(request, pagename, rev=rev).send_raw()
 
-def do_show(pagename, request, count_hit=1, cacheable=1):
+def do_show(pagename, request, content_only=0, count_hit=1, cacheable=1, print_mode=0):
     """ show a page, either current revision or the revision given by rev form value.
         if count_hit is non-zero, we count the request for statistics.
     """
@@ -231,7 +231,11 @@ def do_show(pagename, request, count_hit=1, cacheable=1):
         rev = request.rev or 0
         if rev == 0:
             request.cacheable = cacheable
-        Page(request, pagename, rev=rev, formatter=mimetype).send_page(count_hit=count_hit)
+        Page(request, pagename, rev=rev, formatter=mimetype).send_page(
+            count_hit=count_hit,
+            print_mode=print_mode,
+            content_only=content_only,
+        )
 
 def do_format(pagename, request):
     """ send a page using a specific formatter given by mimetype form key.
@@ -246,14 +250,11 @@ def do_format(pagename, request):
 
 def do_content(pagename, request):
     """ same as do_show, but we only show the content """
-    request.emit_http_headers()
-    page = Page(request, pagename)
-    request.write('<!-- Transclusion of %s -->' % request.getQualifiedURL(page.url(request)))
-    page.send_page(count_hit=0, content_only=1)
+    do_show(pagename, request, count_hit=0, content_only=1)
 
 def do_print(pagename, request):
-    """ same as do_show, but send_page will notice the print mode """
-    do_show(pagename, request)
+    """ same as do_show, but with print_mode set """
+    do_show(pagename, request, print_mode=1)
 
 def do_recall(pagename, request):
     """ same as do_show, but never caches and never counts hits """
