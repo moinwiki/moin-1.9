@@ -23,7 +23,7 @@ from MoinMoin.Page import Page
 #############################################################################
 
 def _check(request, pagename, user, right):
-    if pagename == request.page.page_name:
+    if request.page is not None and pagename == request.page.page_name:
         p = request.page # reuse is good
     else:
         p = Page(request, pagename)
