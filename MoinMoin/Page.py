@@ -830,8 +830,12 @@ class Page:
         return subscriber_list
 
 
-    def send_raw(self):
-        """ Output the raw page data (action=raw) """
+    def send_raw(self, content_disposition=None):
+        """ Output the raw page data (action=raw).
+            With no content_disposition, the browser usually just displays the
+            data on the screen, with content_disposition='attachment', it will
+            offer a dialogue to save it to disk (used by Save action).            
+        """
         request = self.request
         request.setHttpHeader("Content-type: text/plain; charset=%s" % config.charset)
         if self.exists():
@@ -842,36 +846,17 @@ class Page:
             request.setHttpHeader("Last-Modified: %s" % util.timefuncs.formathttpdate(os.path.getmtime(self._text_filename())))
             text = self.get_raw_body()
             text = self.encodeTextMimeType(text)
-        else:
-            request.setHttpHeader('Status: 404 NOTFOUND')
-            text = u"Page %s not found." % self.page_name
-
-        request.emit_http_headers()
-        request.write(text)
-
-
-    def save_raw(self):
-        """ Output the raw page data to a file  """
-        request = self.request
-        request.setHttpHeader("Content-type: text/plain; charset=%s" % config.charset)
-        if self.exists() and request.user.may.read(self.page_name):
-            # use the correct last-modified value from the on-disk file
-            # to ensure cacheability where supported. Because we are sending
-            # RAW (file) content, the file mtime is correct as Last-Modified header.
-            request.setHttpHeader("Status: 200 OK")
-            request.setHttpHeader("Last-Modified: %s" % util.timefuncs.formathttpdate(os.path.getmtime(self._text_filename())))
-            file_name = "%s.txt" % self.page_name
-            text = self.get_raw_body()
-            text = self.encodeTextMimeType(text)
             request.setHttpHeader("Content-Length: %d" % len(text))
-            request.setHttpHeader('Content-Disposition: %s; filename="%s"' % ('attachment', file_name))
+            if content_disposition:
+                file_name = "%s.txt" % self.page_name
+                request.setHttpHeader('Content-Disposition: %s; filename="%s"' % (
+                                      content_disposition, file_name))
         else:
             request.setHttpHeader('Status: 404 NOTFOUND')
             text = u"Page %s not found." % self.page_name
 
         request.emit_http_headers()
         request.write(text)
-
 
     def send_page(self, msg=None, **keywords):
         """ Output the formatted page.
