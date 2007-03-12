@@ -24,7 +24,7 @@ def execute(pagename, request):
                 'then call revert to this (older) revision again.')
     else:
         newpg = PageEditor(request, pagename)
-    
+
         revstr = '%08d' % rev
         try:
             msg = newpg.saveText(pg.get_raw_body(), 0, extra=revstr, action="SAVE/REVERT")
@@ -32,4 +32,13 @@ def execute(pagename, request):
         except newpg.SaveError, msg:
             msg = unicode(msg)
         request.reset()
+
+        key = request.form.get('key', ['text_html'])[0]
+
+        # Remove cache entry (if exists)
+        pg = Page(request, pagename)
+        from MoinMoin import caching
+        caching.CacheEntry(request, pg, key, scope='item').remove()
+        caching.CacheEntry(request, pg, "pagelinks", scope='item').remove()
+
     pg.send_page(msg=msg)
