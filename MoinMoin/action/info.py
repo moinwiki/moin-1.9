@@ -188,10 +188,7 @@ def execute(pagename, request):
 
     request.emit_http_headers()
 
-    # This action uses page or wiki language
-    # TODO: currently page.language is broken and not available now.
-    lang = page.language or request.cfg.language_default
-    request.setContentLanguage(lang)
+    request.setContentLanguage(request.lang)
     f = request.formatter
 
     request.theme.send_title(_('Info for "%s"') % (title,), page=page)

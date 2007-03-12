@@ -280,10 +280,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         self.sendconfirmleaving() # TODO update state of flgChange to make this work, see PageEditor
 
         # Add textarea with page text
-
-        # TODO: currently self.language is None at this point.
-        # We have to do processing instructions parsing earlier, or move page language into meta file.
-        lang = self.language or request.cfg.language_default
+        lang = self.pi.get('language', request.cfg.language_default)
         contentlangdirection = i18n.getDirection(lang) # 'ltr' or 'rtl'
         uilanguage = request.lang
         url_prefix_static = request.cfg.url_prefix_static

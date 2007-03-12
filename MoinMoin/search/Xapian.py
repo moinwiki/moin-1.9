@@ -381,27 +381,20 @@ class Index(BaseIndex):
 
         @param page: the page instance
         """
-        body = page.get_raw_body()
+        lang = None
         default_lang = page.request.cfg.language_default
-
-        lang = ''
 
         # if we should stem, we check if we have stemmer for the
         # language available
         if page.request.cfg.xapian_stemming:
-            for line in body.split('\n'):
-                if line.startswith('#language'):
-                    lang = line.split(' ')[1]
-                    try:
-                        Stemmer(lang)
-                    except KeyError:
-                        # lang is not stemmable
-                        break
-                    else:
-                        # lang is stemmable
-                        return (lang, lang)
-                elif not line.startswith('#'):
-                    break
+            lang = page.pi['language']
+            try:
+                Stemmer(lang)
+                # if there is no exception, lang is stemmable
+                return (lang, lang)
+            except KeyError:
+                # lang is not stemmable
+                pass
 
         if not lang:
             # no lang found at all.. fallback to default language
