@@ -1506,6 +1506,9 @@ class Page(object):
             lastRevision = self.getRevList()[0]
         except IndexError:
             return security.AccessControlList(self.request.cfg)
+        if self.rev == lastRevision:
+            return self.pi['acl']
+
         return Page(self.request, self.page_name, rev=lastRevision).parseACL()
 
     def clean_acl_cache(self):
