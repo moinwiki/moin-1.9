@@ -282,8 +282,12 @@ class ActionClass(object):
                 # XXX add locking, acquire read-lock on sp
                 if debug:
                     self.log_status(ActionClass.INFO, raw_suffix="Processing %r" % sp)
-    
+
                 local_pagename = sp.local_name
+                if not self.request.user.may.write(local_pagename):
+                    self.log_status(ActionClass.WARN, _("Skipped page %s because of no write access to local page."), (local_pagename, ))
+                    return
+
                 current_page = PageEditor(self.request, local_pagename) # YYY direct access
                 comment = u"Local Merge - %r" % (remote.get_interwiki_name() or remote.get_iwid())
 
