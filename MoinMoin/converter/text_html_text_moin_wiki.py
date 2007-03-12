@@ -6,7 +6,7 @@
 """
 
 import re, os
-import xml.dom.minidom
+import xml.dom.minidom # HINT: the nodes in parse result tree need .has_key(), "x in ..." does not work
 from xml.dom import Node
 
 from MoinMoin import config, wikiutil, error
@@ -1095,9 +1095,9 @@ class convert_tree(visitor):
         if href:
             title = class_ = interwikiname = None
 
-            if "title" in node.attributes:
+            if node.attributes.has_key("title"):
                 title = node.attributes.get("title").nodeValue
-            if "class" in node.attributes:
+            if node.attributes.has_key("class"):
                 class_ = node.attributes.get("class").nodeValue
 
             text = self.node_list_text_only(node.childNodes)
@@ -1179,22 +1179,22 @@ class convert_tree(visitor):
 
     def process_img(self, node):
         src = None
-        if "src" in node.attributes:
+        if node.attributes.has_key("src"):
             src = wikiutil.url_unquote(node.attributes.get("src").nodeValue)
         title = None
-        if "title" in node.attributes:
+        if node.attributes.has_key("title"):
             title = node.attributes.get("title").nodeValue
         alt = None
-        if "alt" in node.attributes:
+        if node.attributes.has_key("alt"):
             alt = node.attributes.get("alt").nodeValue
         width = None
-        if "width" in node.attributes:
+        if node.attributes.has_key("width"):
             width = node.attributes.get("width").nodeValue
         height = None
-        if "height" in node.attributes:
+        if node.attributes.has_key("height"):
             height = node.attributes.get("height").nodeValue
         target = None
-        if "target" in node.attributes:
+        if node.attributes.has_key("target"):
             target = node.attributes.get("target").nodeValue
 
         # Attachment image
