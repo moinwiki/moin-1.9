@@ -178,7 +178,7 @@ def execute(macro, args):
         if target is None or _is_URL(target):
             if _is_URL(image):
                 # Get image name http://here.com/dir/image.png -> image.png
-                kw['alt'] = wikiutil.taintfilename(formatter.text(image.split('/')[-1])) # XXX
+                kw['alt'] = wikiutil.taintfilename(formatter.text(image.split('/')[-1]))
             else:
                 kw['alt'] = attname
         else:
