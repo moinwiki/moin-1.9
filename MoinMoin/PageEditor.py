@@ -385,12 +385,9 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 ''' % (button_spellcheck, cancel_button_text,))
 
         # Add textarea with page text
-
-        # TODO: currently self.language is None at this point.
-        # We have to do processing instructions parsing earlier, or move page language into meta file.
-        lang = self.language or request.cfg.language_default
-
         self.sendconfirmleaving()
+
+        lang = self.pi.get('language', request.cfg.language_default)
 
         request.write(
             u'''\
@@ -452,7 +449,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         request.write("</form>")
 
         # QuickHelp originally by Georg Mischler <schorsch@lightingwiki.com>
-        markup = self.pi_format or request.cfg.default_markup
+        markup = self.pi['format'] or request.cfg.default_markup
         quickhelp = request.cfg.editor_quickhelp.get(markup, "")
         if quickhelp:
             request.write(request.formatter.div(1, id="editor-help"))
@@ -905,22 +902,6 @@ Try a different name.""") % (newpagename,)
         except caching.CacheError:
             return None
 
-    def _get_pragmas(self, text):
-        pragmas = {}
-        for line in text.split('\n'):
-            if not line or line[0] != '#':
-                # end of pragmas
-                break
-
-            if len(line) > 1 and line[1] == '#':
-                # a comment within pragmas
-                continue
-
-            verb, args = (line[1:]+' ').split(' ', 1)
-            pragmas[verb.lower()] = args.strip()
-
-        return pragmas
-
     def copy_underlay_page(self):
         # renamed from copypage to avoid conflicts with copyPage
         """
@@ -950,8 +931,7 @@ Try a different name.""") % (newpagename,)
         """
         request = self.request
         _ = self._
-        #is_deprecated = "deprecated" in self._get_pragmas(text)
-        was_deprecated = "deprecated" in self._get_pragmas(self.get_raw_body())
+        was_deprecated = self.pi.get('deprecated', False)
 
         self.copy_underlay_page()
 

@@ -67,7 +67,7 @@ def execute(pagename, request):
         rev2 = 0
 
     # Start output
-    # This action generate content in the user language
+    # This action generates content in the user language
     request.setContentLanguage(request.lang)
 
     request.emit_http_headers()

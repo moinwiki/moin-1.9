@@ -1102,7 +1102,7 @@ actionsMenuInit('%(label)s');
 
             The GUI editor currently only works for wiki format.
         """
-        return page.pi_format == 'wiki'
+        return page.pi['format'] == 'wiki'
 
     def editorLink(self, page):
         """ Return a link to the editor 
@@ -1497,8 +1497,8 @@ var gui_editor_link_text = "%(text)s";
         else:
             user_head.append(request.cfg.html_head_normal)
 
-        if keywords.has_key('pi_refresh') and keywords['pi_refresh']:
-            user_head.append('<meta http-equiv="refresh" content="%(delay)d;URL=%(url)s">' % keywords['pi_refresh'])
+        if 'pi_refresh' in keywords and keywords['pi_refresh']:
+            user_head.append('<meta http-equiv="refresh" content="%d;URL=%s">' % keywords['pi_refresh'])
 
         # output buffering increases latency but increases throughput as well
         output = []

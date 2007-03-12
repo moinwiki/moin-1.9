@@ -217,7 +217,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
 
     request.emit_http_headers()
 
-    # This action generate data using the user language
+    # This action generates data using the user language
     request.setContentLanguage(request.lang)
 
     request.theme.send_title(title % needle, form=request.form,

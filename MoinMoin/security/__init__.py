@@ -15,7 +15,7 @@
 """
 
 import re
-from MoinMoin import user
+from MoinMoin import wikiutil, user
 from MoinMoin.Page import Page
 
 #############################################################################
@@ -371,34 +371,9 @@ class ACLStringIterator:
         return modifier, entries, rights
 
 
-def parseACL(request, body):
-    """ Parse acl lines on page and return ACL object
-
-    Use ACL object may(request, dowhat) to get acl rights.
-    """
-    acl_lines = []
-    while body and body[0] == '#':
-        # extract first line
-        try:
-            line, body = body.split('\n', 1)
-        except ValueError:
-            line = body
-            body = ''
-
-        # end parsing on empty (invalid) PI
-        if line == "#":
-            break
-
-        # skip comments (lines with two hash marks)
-        if line[1] == '#':
-            continue
-
-        tokens = line.split(None, 1)
-        if tokens[0].lower() == "#acl":
-            if len(tokens) == 2:
-                args = tokens[1].rstrip()
-            else:
-                args = ""
-            acl_lines.append(args)
+def parseACL(request, text):
+    """ Parse acl lines from text and return ACL object """
+    pi, dummy = wikiutil.get_processing_instructions(text)
+    acl_lines = [args for verb, args in pi if verb == 'acl']
     return AccessControlList(request.cfg, acl_lines)
 

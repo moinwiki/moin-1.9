@@ -1643,29 +1643,35 @@ def renderText(request, Parser, text, line_anchors=False):
     del out
     return result
 
+def get_processing_instructions(body):
+    """ Extract the processing instructions / acl / etc. at the beginning of a page's body.
+    
+        Hint: if you have a Page object p, you already have the result of this function in
+              p.meta and (even better) parsed/processed stuff in p.pi.
+    
+        Returns a list of (pi, restofline) tuples and a string with the rest of the body.
+    """
+    pi = []
+    while body.startswith('#'):
+        try:
+            line, body = body.split('\n', 1) # extract first line
+        except ValueError:
+            line = body
+            body = ''
 
-def getProcessingInstructions(text):
-    """creates dict of processing instructions from raw wiki markup"""
-    kw = {}
-    for line in text.split('\n'):
-        if line.startswith('#'):
-            for pi in ("format", "refresh", "redirect", "deprecated", "pragma", "form", "acl", "language"):
-                if line[1:].lower().startswith(pi):
-                    kw[pi] = line[len(pi)+1:].strip()
-                    break
-    return kw
+        # end parsing on empty (invalid) PI
+        if line == "#":
+            body = line + '\n' + body
+            break
 
+        if line[1] == '#':# two hash marks are a comment
+            comment = line[2:]
+            if not comment.startswith(' '):
+                # we don't require a blank after the ##, so we put one there
+                comment = ' ' + comment
+                line = '##%s' % comment
 
-def getParser(request, text):
-    """gets the parser from raw wiki murkup"""
-    # check for XML content
-    if text and text[:5] == '<?xml':
-        pi_format = "xslt"
-    else:
-        # check processing instructions
-        pi = getProcessingInstructions(text)
-        pi_format = pi.get("format", request.cfg.default_markup or "wiki").lower()
+        verb, args = (line[1:] + ' ').split(' ', 1) # split at the first blank
+        pi.append((verb.lower(), args.strip()))
 
-    Parser = searchAndImportPlugin(request.cfg, "parser", pi_format)
-    return Parser
-
+    return pi, body

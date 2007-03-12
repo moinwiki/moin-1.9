@@ -99,13 +99,10 @@ class ItemCache:
                                # avoids threading race conditions
 
 
-class Page:
+class Page(object):
     """Page - Manage an (immutable) page associated with a WikiName.
        To change a page's content, use the PageEditor class.
     """
-
-    # Header regular expression, used to get header boundaries
-    header_re = r'(^#+.*(?:\n\s*)+)+'
 
     def __init__(self, request, page_name, **kw):
         """
@@ -144,12 +141,14 @@ class Page:
 
         self.output_charset = config.charset # correct for wiki pages
 
-        self._raw_body = None
-        self._raw_body_modified = 0
         self._text_filename_force = None
         self.hilite_re = None
-        self.language = None
-        self.pi_format = None
+
+        self.__body = None # unicode page body == metadata + data
+        self.__body_modified = 0 # was __body modified in RAM so it differs from disk?
+        self.__meta = None # list of raw tuples of page metadata (currently: the # stuff at top of the page)
+        self.__pi = None # dict of preprocessed page metadata (processing instructions)
+        self.__data = None # unicode page data = body - metadata
 
         self.reset()
 
@@ -177,6 +176,88 @@ class Page:
 
         # path to normal / underlay page dir
         self._pagepath = [normalpath, underlaypath]
+
+    def get_body(self):
+        if self.__body is None:
+            # try to open file
+            try:
+                f = codecs.open(self._text_filename(), 'rb', config.charset)
+            except IOError, er:
+                import errno
+                if er.errno == errno.ENOENT:
+                    # just doesn't exist, return empty text (note that we
+                    # never store empty pages, so this is detectable and also
+                    # safe when passed to a function expecting a string)
+                    return ""
+                else:
+                    raise
+
+            # read file content and make sure it is closed properly
+            try:
+                text = f.read()
+                text = self.decodeTextMimeType(text)
+                self.__body = text
+            finally:
+                f.close()
+        return self.__body    
+    def set_body(self, newbody):
+        self.__body = newbody
+    body = property(fget=get_body, fset=set_body)
+
+    def get_meta(self):
+        if self.__meta is None:
+            self.__meta, self.__data = wikiutil.get_processing_instructions(self.body)
+        return self.__meta
+    meta = property(fget=get_meta)
+
+    def get_data(self):
+        if self.__data is None:
+            self.__meta, self.__data = wikiutil.get_processing_instructions(self.body)
+        return self.__data
+    data = property(fget=get_data)
+
+    def get_pi(self):
+        if self.__pi is None:
+            self.__pi = self.parse_processing_instructions()
+        return self.__pi
+    pi = property(fget=get_pi)
+    
+    def getlines(self):
+        """ Return a list of all lines in body.
+
+        @rtype: list
+        @return: list of strs body_lines
+        """
+        return self.body.split('\n')
+
+    def get_raw_body(self):
+        """ Load the raw markup from the page file.
+
+        @rtype: unicode
+        @return: raw page contents of this page
+        """
+        return self.body
+
+    def get_raw_body_str(self):
+        """ Returns the raw markup from the page file, as a string.
+
+        @rtype: str
+        @return: raw page contents of this page
+        """
+        return self.body.encode("utf-8")
+
+    def set_raw_body(self, body, modified=0):
+        """ Set the raw body text (prevents loading from disk).
+
+        TODO: this should not be a public function, as Page is immutable.
+
+        @param body: raw body text
+        @param modified: 1 means that we internally modified the raw text and
+            that it is not in sync with the page file on disk.  This is
+            used e.g. by PageEditor when previewing the page.
+        """
+        self.body = body
+        self.__body_modified = modified
 
     def get_current_from_pagedir(self, pagedir):
         """ get the current revision number from an arbitrary pagedir.
@@ -385,24 +466,6 @@ class Page:
 
         return self.getPageStatus(*args, **kw)[1]
 
-    def split_title(self, force=0):
-        """
-        Return a string with the page name split by spaces, if the user wants that.
-
-        @param force: if != 0, then force splitting the page_name
-        @rtype: unicode
-        @return: pagename of this page, splitted into space separated words
-        """
-        request = self.request
-        if not force and not request.user.wikiname_add_spaces:
-            return self.page_name
-
-        # look for the end of words and the start of a new word,
-        # and insert a space there
-        split_re = re.compile('([%s])([%s])' % (config.chars_lower, config.chars_upper))
-        splitted = split_re.sub(r'\1 \2', self.page_name)
-        return splitted
-
     def _text_filename(self, **kw):
         """
         The name of the page file, possibly of an older page.
@@ -583,8 +646,8 @@ class Page:
         @return: page size, 0 for non-existent pages.
         """
         if rev == self.rev: # same revision as self
-            if self._raw_body is not None:
-                return len(self._raw_body)
+            if self.__body is not None:
+                return len(self.__body)
 
         try:
             return os.path.getsize(self._text_filename(rev=rev))
@@ -638,64 +701,23 @@ class Page:
                 wikiutil.version2timestamp(t))
         return result
 
-    def getlines(self):
-        """ Return a list of all lines in body.
+    def split_title(self, force=0):
+        """
+        Return a string with the page name split by spaces, if the user wants that.
 
-        @rtype: list
-        @return: list of strs body_lines"""
-        lines = self.get_raw_body().split('\n')
-        return lines
-
-    def get_raw_body(self):
-        """ Load the raw markup from the page file.
-
+        @param force: if != 0, then force splitting the page_name
         @rtype: unicode
-        @return: raw page contents of this page
+        @return: pagename of this page, splitted into space separated words
         """
-        if self._raw_body is None:
-            # try to open file
-            try:
-                f = codecs.open(self._text_filename(), 'rb', config.charset)
-            except IOError, er:
-                import errno
-                if er.errno == errno.ENOENT:
-                    # just doesn't exist, return empty text (note that we
-                    # never store empty pages, so this is detectable and also
-                    # safe when passed to a function expecting a string)
-                    return ""
-                else:
-                    raise
+        request = self.request
+        if not force and not request.user.wikiname_add_spaces:
+            return self.page_name
 
-            # read file content and make sure it is closed properly
-            try:
-                text = f.read()
-                text = self.decodeTextMimeType(text)
-                self.set_raw_body(text)
-            finally:
-                f.close()
-
-        return self._raw_body
-
-    def get_raw_body_str(self):
-        """ Returns the raw markup from the page file, as a string.
-
-        @rtype: str
-        @return: raw page contents of this page
-        """
-        return self.get_raw_body().encode("utf-8")
-
-    def set_raw_body(self, body, modified=0):
-        """ Set the raw body text (prevents loading from disk).
-
-        TODO: this should not be a public function, as Page is immutable.
-
-        @param body: raw body text
-        @param modified: 1 means that we internally modified the raw text and
-            that it is not in sync with the page file on disk.  This is
-            used e.g. by PageEditor when previewing the page.
-        """
-        self._raw_body = body
-        self._raw_body_modified = modified
+        # look for the end of words and the start of a new word,
+        # and insert a space there
+        split_re = re.compile('([%s])([%s])' % (config.chars_lower, config.chars_upper))
+        splitted = split_re.sub(r'\1 \2', self.page_name)
+        return splitted
 
     def url(self, request, querystr=None, anchor=None, relative=True, **kw):
         """ Return complete URL for this page, including scriptname.
@@ -797,7 +819,7 @@ class Page:
         if self.cfg.SecurityPolicy:
             UserPerms = self.cfg.SecurityPolicy
         else:
-            from security import Default as UserPerms
+            from MoinMoin.security import Default as UserPerms
 
         # get email addresses of the all wiki user which have a profile stored;
         # add the address only if the user has subscribed to the page and
@@ -829,6 +851,82 @@ class Page:
 
         return subscriber_list
 
+    def parse_processing_instructions(self):
+        """ parse page text and extract processing instructions
+            return a dict of PIs and the non-PI rest of the body
+        """
+        from MoinMoin import i18n
+        from MoinMoin import security
+        pi = {} # we collect the processing instructions here
+    
+        body = self.body
+        if body.startswith('<?xml'): # check for XML content
+            pi['lines'] = 0
+            pi['format'] = "xslt"
+            pi['formatargs'] = ''
+            return pi
+
+        meta = self.meta
+
+        # default is wiki markup
+        pi['format'] = self.cfg.default_markup or "wiki"
+        pi['formatargs'] = ''
+        pi['lines'] = len(meta)
+        request = self.request
+        acl = []
+        
+        for verb, args in meta:
+            if verb == "format": # markup format
+                format, formatargs = (args + ' ').split(' ', 1)
+                pi['format'] = format.lower()
+                pi['formatargs'] = formatargs.strip()
+
+            elif verb == "acl":
+                acl.append(args)
+
+            elif verb == "language":
+                # Page language. Check if args is a known moin language
+                if args in i18n.wikiLanguages():
+                    pi['language'] = args
+
+            elif verb == "refresh":
+                if self.cfg.refresh:
+                    try:
+                        mindelay, targetallowed = self.cfg.refresh
+                        args = args.split()
+                        if len(args) >= 1:
+                            delay = max(int(args[0]), mindelay)
+                        if len(args) >= 2:
+                            target = args[1]
+                        else:
+                            target = self.page_name
+                        if '://' in target:
+                            if targetallowed == 'internal':
+                                raise ValueError
+                            elif targetallowed == 'external':
+                                url = target
+                        else:
+                            url = Page(request, target).url(request)
+                        pi['refresh'] = (delay, url)
+                    except (ValueError,):
+                        pass
+
+            elif verb == "redirect":
+                pi['redirect'] = args
+
+            elif verb == "deprecated":
+                pi['deprecated'] = True
+
+            elif verb == "pragma":
+                try:
+                    key, val = args.split(' ', 1)
+                except (ValueError, TypeError):
+                    pass
+                else:
+                    request.setPragma(key, val)
+
+        pi['acl'] = security.AccessControlList(request.cfg, acl)
+        return pi
 
     def send_raw(self, content_disposition=None):
         """ Output the raw page data (action=raw).
@@ -844,8 +942,7 @@ class Page:
             # RAW (file) content, the file mtime is correct as Last-Modified header.
             request.setHttpHeader("Status: 200 OK")
             request.setHttpHeader("Last-Modified: %s" % util.timefuncs.formathttpdate(os.path.getmtime(self._text_filename())))
-            text = self.get_raw_body()
-            text = self.encodeTextMimeType(text)
+            text = self.encodeTextMimeType(self.body)
             request.setHttpHeader("Content-Length: %d" % len(text))
             if content_disposition:
                 file_name = "%s.txt" % self.page_name
@@ -869,30 +966,42 @@ class Page:
         @keyword omit_footnotes: if True, do not send footnotes (used by include macro)
         """
         request = self.request
-        from MoinMoin import i18n
-        request.clock.start('send_page')
         _ = request.getText
+        request.clock.start('send_page')
         emit_headers = keywords.get('emit_headers', 1)
-        print_mode = keywords.get('print_mode', 0)
-        if print_mode:
-            media = 'media' in request.form and request.form['media'][0] or 'print'
-        else:
-            media = 'screen'
         content_only = keywords.get('content_only', 0)
         omit_footnotes = keywords.get('omit_footnotes', 0)
         content_id = keywords.get('content_id', 'content')
         do_cache = keywords.get('do_cache', 1)
         send_missing_page = keywords.get('send_missing_page', 0)
+        print_mode = keywords.get('print_mode', 0)
+        if print_mode:
+            media = 'media' in request.form and request.form['media'][0] or 'print'
+        else:
+            media = 'screen'
         self.hilite_re = (keywords.get('hilite_re') or
                           request.form.get('highlight', [None])[0])
-        if msg is None: msg = ""
+        if msg is None:
+            msg = ""
 
         # count hit?
         if keywords.get('count_hit', 0):
             eventlog.EventLog(request).add(request, 'VIEWPAGE', {'pagename': self.page_name})
 
         # load the text
-        body = self.get_raw_body()
+        body = self.data
+        pi = self.pi
+
+        if 'redirect' in pi and not (
+            'action' in request.form or 'redirect' in request.form or content_only):
+            # redirect to another page
+            # note that by including "action=show", we prevent endless looping
+            # (see code in "request") or any cascaded redirection
+            request.http_redirect('%s/%s?action=show&redirect=%s' % (
+                request.getScriptname(),
+                wikiutil.quoteWikinameURL(pi['redirect']),
+                wikiutil.url_quote_plus(self.page_name, ''),))
+            return
 
         # if necessary, load the formatter
         if self.default_formatter:
@@ -911,123 +1020,24 @@ class Page:
         if self.hilite_re:
             self.formatter.set_highlight_re(self.hilite_re)
 
-        # default is wiki markup
-        pi_format = self.cfg.default_markup or "wiki"
-        pi_formatargs = ''
-        pi_redirect = None
-        pi_refresh = None
-        pi_formtext = []
-        pi_formfields = []
-        pi_lines = 0
+        if 'deprecated' in pi:
+            # deprecated page, append last backup version to current contents
+            # (which should be a short reason why the page is deprecated)
+            msg = '%s<strong>%s</strong><br>%s' % (
+                self.formatter.smiley('/!\\'),
+                _('The backed up content of this page is deprecated and will not be included in search results!'),
+                msg)
 
-        # check for XML content
-        if body and body[:5] == '<?xml':
-            pi_format = "xslt"
+            revisions = self.getRevList()
+            if len(revisions) >= 2: # XXX shouldn't that be ever the case!? Looks like not.
+                oldpage = Page(request, self.page_name, rev=revisions[1])
+                body += oldpage.get_raw_body()
+                del oldpage
 
-        # check processing instructions
-        while body and body[0] == '#':
-            pi_lines += 1
+        lang = self.pi.get('language', request.cfg.language_default)
+        request.setContentLanguage(lang)
 
-            # extract first line
-            try:
-                line, body = body.split('\n', 1)
-            except ValueError:
-                line = body
-                body = ''
-
-            # end parsing on empty (invalid) PI
-            if line == "#":
-                body = line + '\n' + body
-                break
-
-            # skip comments (lines with two hash marks)
-            if line[1] == '#': continue
-
-            # parse the PI
-            verb, args = (line[1:]+' ').split(' ', 1)
-            verb = verb.lower()
-            args = args.strip()
-
-            # check the PIs
-            if verb == "format":
-                # markup format
-                pi_format, pi_formatargs = (args+' ').split(' ', 1)
-                pi_format = pi_format.lower()
-                pi_formatargs = pi_formatargs.strip()
-            elif verb == "refresh":
-                if self.cfg.refresh:
-                    try:
-                        mindelay, targetallowed = self.cfg.refresh
-                        args = args.split()
-                        if len(args) >= 1:
-                            delay = max(int(args[0]), mindelay)
-                        if len(args) >= 2:
-                            target = args[1]
-                        else:
-                            target = self.page_name
-                        if '://' in target:
-                            if targetallowed == 'internal':
-                                raise ValueError
-                            elif targetallowed == 'external':
-                                url = target
-                        else:
-                            url = Page(request, target).url(request)
-                        pi_refresh = {'delay': delay, 'url': url, }
-                    except (ValueError,):
-                        pi_refresh = None
-            elif verb == "redirect":
-                # redirect to another page
-                # note that by including "action=show", we prevent
-                # endless looping (see code in "request") or any
-                # cascaded redirection
-                pi_redirect = args
-                if 'action' in request.form or 'redirect' in request.form or content_only:
-                    continue
-
-                request.http_redirect('%s/%s?action=show&redirect=%s' % (
-                    request.getScriptname(),
-                    wikiutil.quoteWikinameURL(pi_redirect),
-                    wikiutil.url_quote_plus(self.page_name, ''),))
-                return
-            elif verb == "deprecated":
-                # deprecated page, append last backup version to current contents
-                # (which should be a short reason why the page is deprecated)
-                msg = '%s<strong>%s</strong><br>%s' % (
-                    self.formatter.smiley('/!\\'),
-                    _('The backed up content of this page is deprecated and will not be included in search results!'),
-                    msg)
-
-                revisions = self.getRevList()
-                if len(revisions) >= 2: # XXX shouldn't that be ever the case!? Looks like not.
-                    oldpage = Page(request, self.page_name, rev=revisions[1])
-                    body += oldpage.get_raw_body()
-                    del oldpage
-            elif verb == "pragma":
-                # store a list of name/value pairs for general use
-                try:
-                    key, val = args.split(' ', 1)
-                except (ValueError, TypeError):
-                    pass
-                else:
-                    request.setPragma(key, val)
-            elif verb == "acl":
-                # We could build it here, but there's no request.
-                pass
-            elif verb == "language":
-                # Page language. Check if args is a known moin language
-                if args in i18n.wikiLanguages():
-                    self.language = args
-                    request.setContentLanguage(self.language)
-            else:
-                # unknown PI ==> end PI parsing, and show invalid PI as text
-                body = line + '\n' + body
-                break
-
-        # Save values for later use
-        self.pi_format = pi_format
-
-        # start document output
-        
+        # start document output        
         page_exists = self.exists()
         if not content_only:
             if emit_headers:
@@ -1070,9 +1080,9 @@ class Page:
                         _('Redirected from page "%(page)s"') % {'page':
                             wikiutil.link_tag(request, wikiutil.quoteWikinameURL(redir) + "?action=show", self.formatter.text(redir))},
                         msg)
-                if pi_redirect:
+                if 'redirect' in pi:
                     msg = '<strong>%s</strong><br>%s' % (
-                        _('This page redirects to page "%(page)s"') % {'page': wikiutil.escape(pi_redirect)},
+                        _('This page redirects to page "%(page)s"') % {'page': wikiutil.escape(pi['redirect'])},
                         msg)
 
                 # Page trail
@@ -1085,26 +1095,12 @@ class Page:
 
                 request.theme.send_title(title, page=self, msg=msg,
                                     print_mode=print_mode,
-                                    media=media, pi_refresh=pi_refresh,
+                                    media=media, pi_refresh=pi.get('refresh'),
                                     allow_doubleclick=1, trail=trail,
                                     )
 
-                # user-defined form preview?
-                # TODO: check if this is also an RTL form - then add ui_lang_attr
-                if pi_formtext:
-                    pi_formtext.append('<input type="hidden" name="fieldlist" value="%s">\n' %
-                        "|".join(pi_formfields))
-                    pi_formtext.append('</form></table>\n')
-                    pi_formtext.append(_(
-                        '~-If you submit this form, the submitted values'
-                        ' will be displayed.\nTo use this form on other pages, insert a\n'
-                        '[[BR]][[BR]]\'\'\'{{{    [[Form("%(pagename)s")]]}}}\'\'\'[[BR]][[BR]]\n'
-                        'macro call.-~\n'
-                    ) % {'pagename': self.formatter.text(self.page_name)})
-                    request.write(''.join(pi_formtext))
-
         # Load the parser
-        Parser = wikiutil.searchAndImportPlugin(request.cfg, "parser", self.pi_format)
+        Parser = wikiutil.searchAndImportPlugin(request.cfg, "parser", pi['format'])
 
         # start wiki content div
         request.write(self.formatter.startContent(content_id))
@@ -1127,9 +1123,9 @@ class Page:
         else:
             # parse the text and send the page content
             self.send_page_content(request, Parser, body,
-                                   format_args=pi_formatargs,
+                                   format_args=pi['formatargs'],
                                    do_cache=do_cache,
-                                   start_line=pi_lines)
+                                   start_line=pi['lines'])
 
             # check for pending footnotes
             if getattr(request, 'footnotes', None) and not omit_footnotes:
@@ -1158,8 +1154,7 @@ class Page:
                 links = self.formatter.pagelinks
                 cache.update(links)
 
-        # restore old formatter (hopefully we dont throw any exception
-        # that is catched again)
+        # restore old formatter (hopefully we dont throw any exception that is catched again)
         if old_formatter is no_formatter:
             del request.formatter
         else:
@@ -1191,11 +1186,11 @@ class Page:
         """
         if (not self.rev and
             not self.hilite_re and
-            not self._raw_body_modified and
+            not self.__body_modified and
             self.getFormatterName() in self.cfg.caching_formats):
             # Everything is fine, now check the parser:
             if parser is None:
-                parser = wikiutil.searchAndImportPlugin(self.request.cfg, "parser", self.pi_format)
+                parser = wikiutil.searchAndImportPlugin(self.request.cfg, "parser", self.pi['format'])
             return getattr(parser, 'caching', False)
         return False
 
@@ -1354,22 +1349,10 @@ class Page:
         @rtype: unicode
         @return: page text, excluding the header
         """
-
-        # Lazy compile regex on first use. All instances share the
-        # same regex, compiled once when the first call in an instance is done.
-        if isinstance(self.__class__.header_re, (str, unicode)):
-            self.__class__.header_re = re.compile(self.__class__.header_re, re.MULTILINE | re.UNICODE)
-
-        body = self.get_raw_body() or ''
-        header = self.header_re.search(body)
-        if header:
-            start += header.end()
-
-        # Return length characters from start of text
         if length is None:
-            return body[start:]
+            return self.data[start:]
         else:
-            return body[start:start + length]
+            return self.data[start:start+length]
 
     def getPageHeader(self, start=0, length=None):
         """ Convenience function to get the page header
@@ -1377,21 +1360,13 @@ class Page:
         @rtype: unicode
         @return: page header
         """
-
-        # Lazy compile regex on first use. All instances share the
-        # same regex, compiled once when the first call in an instance is done.
-        if isinstance(self.__class__.header_re, (str, unicode)):
-            self.__class__.header_re = re.compile(self.__class__.header_re, re.MULTILINE | re.UNICODE)
-
-        body = self.get_raw_body() or ''
-        header = self.header_re.search(body)
+        header = ['#%s %s' % t for t in self.meta]
+        header = '\n'.join(header)
         if header:
-            text = header.group()
-            # Return length characters from start of text
             if length is None:
-                return text[start:]
+                return header[start:]
             else:
-                return text[start:start + length]
+                return header[start:start+length]
         return ''
 
     def getPageLinks(self, request):
@@ -1526,14 +1501,12 @@ class Page:
         """
         from MoinMoin import security
         if self.exists() and self.rev == 0:
-            return security.parseACL(self.request, self.get_raw_body())
+            return self.pi['acl']
         try:
             lastRevision = self.getRevList()[0]
         except IndexError:
             return security.AccessControlList(self.request.cfg)
-        body = Page(self.request, self.page_name,
-                    rev=lastRevision).get_raw_body()
-        return security.parseACL(self.request, body)
+        return Page(self.request, self.page_name, rev=lastRevision).parseACL()
 
     def clean_acl_cache(self):
         """
