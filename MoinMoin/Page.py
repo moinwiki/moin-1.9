@@ -202,6 +202,8 @@ class Page(object):
         return self.__body    
     def set_body(self, newbody):
         self.__body = newbody
+        self.__meta = None
+        self.__data = None
     body = property(fget=get_body, fset=set_body)
 
     def get_meta(self):
