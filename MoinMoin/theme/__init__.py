@@ -1075,7 +1075,7 @@ actionsMenuInit('%(label)s');
                  # we just use <a> to get same style as other links, but we add some dummy
                  # link target to get correct mouseover pointer appearance. return false
                  # keeps the browser away from jumping to the link target:: 
-                 editbar_actions.append('<a href="#" id="toggleCommentsButton" onClick="toggleComments();return false;">%s</a>' % _('Comments'))
+                 editbar_actions.append('<a href="#" class="toggleCommentsButton" onClick="toggleComments();return false;">%s</a>' % _('Comments'))
              elif editbar_item == 'Edit':
                  editbar_actions.append(self.editorLink(page))
              elif editbar_item == 'Info':
