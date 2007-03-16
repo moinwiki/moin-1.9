@@ -1147,13 +1147,13 @@ class convert_tree(visitor):
                 if text == pagename:
                     self.text.append(wikiutil.pagelinkmarkup(pagename))
                 # relative link /SubPage
-                elif href.endswith(text):
+                elif text.startswith('/') and href.endswith(text):
                     if pagename.startswith(self.pagename): # is this a subpage of us?
                         self.text.append(wikiutil.pagelinkmarkup(pagename[len(self.pagename):]))
                     else:
                         self.text.append(wikiutil.pagelinkmarkup(pagename))
                 # relative link ../
-                elif href.endswith(text.lstrip("..").lstrip("/")):
+                elif text.startswith('../') and href.endswith(text[3:]):
                     self.text.append(wikiutil.pagelinkmarkup(text))
                 # labeled link
                 else:
