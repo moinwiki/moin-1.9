@@ -306,7 +306,7 @@ class ActionClass(object):
 
                 if matching_tags:
                     newest_tag = matching_tags[-1]
-    
+
                     local_change = newest_tag.current_rev != sp.local_rev
                     remote_change = newest_tag.remote_rev != sp.remote_rev
 
@@ -468,10 +468,17 @@ class ActionClass(object):
                 else:
                     very_current_remote_rev = current_remote_rev
 
+
                 if local_change_done:
                     self.remove_rollback(rollback_local_change)
 
-                tags.add(remote_wiki=remote_full_iwid, remote_rev=very_current_remote_rev, current_rev=new_local_rev, direction=direction, normalised_name=sp.name)
+                # this is needed at least for direction both and cgi sync to standalone for immutable pages on both
+                # servers. It is not needed for the opposite direction
+                try:
+                    tags.add(remote_wiki=remote_full_iwid, remote_rev=very_current_remote_rev, current_rev=new_local_rev, direction=direction, normalised_name=sp.name)
+                except:
+                    self.log_status(ActionClass.ERROR, _("The page %s could not be merged because you are not allowed to modify the page in the remote wiki."), (sp.name, ))
+                    return
 
                 if sp.local_mime_type != MIMETYPE_MOIN or not wikiutil.containsConflictMarker(merged_text):
                     self.log_status(ActionClass.INFO, _("Page %s successfully merged."), (sp.name, ))
