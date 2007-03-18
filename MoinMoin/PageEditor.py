@@ -498,6 +498,9 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         if not newpagename:
             return False, _("You can't copy to an empty pagename.")
 
+        if not self.request.user.may.write(newpagename):
+            return False, _('You are not allowed to copy this page!')
+    
         newpage = PageEditor(request, newpagename)
 
         pageexists_error = _("""'''A page with the name {{{'%s'}}} already exists.'''
