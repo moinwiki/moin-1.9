@@ -631,6 +631,8 @@ def do_upload(pagename, request):
     # can't access the client filename
     if rename:
         target = rename
+        # clear rename its only once wanted
+        request.form['rename'][0] = u''
     elif filename:
         target = filename
     else:

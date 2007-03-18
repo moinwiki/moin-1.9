@@ -42,10 +42,12 @@ class LoginHandler:
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.""") % name
 
+            # we do NOT check this, we don't want to disclose whether a user
+            # exists or not to not help an attacker.
             # Check that user exists
-            elif not user.getUserId(request, name):
-                error = _('Unknown user name: {{{"%s"}}}. Please enter'
-                             ' user name and password.') % name
+            #elif not user.getUserId(request, name):
+            #    error = _('Unknown user name: {{{"%s"}}}. Please enter'
+            #                 ' user name and password.') % name
 
             # Require password
             else:
