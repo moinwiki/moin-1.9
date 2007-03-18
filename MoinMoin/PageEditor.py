@@ -498,6 +498,9 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         if not newpagename:
             return False, _("You can't copy to an empty pagename.")
 
+        if not self.request.user.may.write(newpagename):
+            return False, _('You are not allowed to copy this page!')
+    
         newpage = PageEditor(request, newpagename)
 
         pageexists_error = _("""'''A page with the name {{{'%s'}}} already exists.'''
@@ -995,12 +998,6 @@ Try a different name.""") % (newpagename,)
             f = file(clfn, 'w')
             f.write(revstr+'\n')
             f.close()
-
-            # we need to update request.rev here to get the right revision used for
-            # action links rendered by the final send_page() call (#preview display)
-            # XXX this is not the right place to do this as you could use this function
-            # to save any other page than the currently displayed one
-            #request.rev = rev
 
             if not deleted:
                 # save to page file

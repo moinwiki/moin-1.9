@@ -171,5 +171,7 @@ def execute(pagename, request):
         if backto:
             pg = Page(request, backto)
 
+        # sets revision number to default for further actions
+        request.rev = 0
         pg.send_page(msg=savemsg)
 
