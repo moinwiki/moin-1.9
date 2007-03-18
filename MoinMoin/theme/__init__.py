@@ -1095,7 +1095,7 @@ actionsMenuInit('%(label)s');
         _ = self.request.getText
         return page.link_to(self.request,
                             text=_(self.request.cfg.supplementation_page_name, formatted=False),
-                            querystr={'action': 'supplementation'}, id='supplementation', rel='nofollow')
+                            querystr={'action': 'supplementation'}, css_class='nbsupplementation', rel='nofollow')
 
     def guiworks(self, page):
         """ Return whether the gui editor / converter can work for that page.
@@ -1179,7 +1179,7 @@ var gui_editor_link_text = "%(text)s";
         _ = self.request.getText
         return page.link_to(self.request,
                             text=_('Info', formatted=False),
-                            querystr={'action': 'info'}, id='info', rel='nofollow')
+                            querystr={'action': 'info'}, css_class='nbinfo', rel='nofollow')
 
     def subscribeLink(self, page):
         """ Return subscribe/unsubscribe link to valid users
@@ -1195,7 +1195,7 @@ var gui_editor_link_text = "%(text)s";
             text = _("Unsubscribe", formatted=False)
         else:
             text = _("Subscribe", formatted=False)
-        return page.link_to(self.request, text=text, querystr={'action': 'subscribe'}, id='subscribe', rel='nofollow')
+        return page.link_to(self.request, text=text, querystr={'action': 'subscribe'}, css_class='nbsubscribe', rel='nofollow')
 
     def quicklinkLink(self, page):
         """ Return add/remove quicklink link
@@ -1211,14 +1211,14 @@ var gui_editor_link_text = "%(text)s";
             text = _("Remove Link", formatted=False)
         else:
             text = _("Add Link", formatted=False)
-        return page.link_to(self.request, text=text, querystr={'action': 'quicklink'}, id='quicklink', rel='nofollow')
+        return page.link_to(self.request, text=text, querystr={'action': 'quicklink'}, css_class='nbquicklink', rel='nofollow')
 
     def attachmentsLink(self, page):
         """ Return link to page attachments """
         _ = self.request.getText
         return page.link_to(self.request,
                             text=_('Attachments', formatted=False),
-                            querystr={'action': 'AttachFile'}, id='attachments', rel='nofollow')
+                            querystr={'action': 'AttachFile'}, css_class='nbattachments', rel='nofollow')
 
     def startPage(self):
         """ Start page div with page language and direction
