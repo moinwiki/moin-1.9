@@ -670,7 +670,7 @@ class ThemeBase:
             # TODO: on new action, page info will not show.
             # A better solution will be if the action itself answer the question: showPageInfo().
             contentActions = [u'', u'show', u'refresh', u'preview', u'diff',
-                              u'subscribe', u'RenamePage', u'DeletePage',
+                              u'subscribe', u'RenamePage', u'CopyPage', u'DeletePage',
                               u'SpellCheck', u'print']
             return self.request.action in contentActions
         return False
