@@ -596,14 +596,14 @@ Try a different name.""") % (newpagename,)
             savetext = u"## page was renamed from %s\n%s" % (self.page_name, savetext)
             newpage.saveText(savetext, 0, comment=comment, index=0, extra=self.page_name, action='SAVE/RENAME')
             # delete pagelinks
-            arena = self
+            arena = newpage
             key = 'pagelinks'
             cache = caching.CacheEntry(request, arena, key, scope='item')
             cache.remove()
 
             # clean the cache
             for formatter_name in self.cfg.caching_formats:
-                arena = self
+                arena = newpage
                 key = formatter_name
                 cache = caching.CacheEntry(request, arena, key, scope='item')
                 cache.remove()
