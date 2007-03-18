@@ -100,7 +100,6 @@ def _loadDict(request):
 
 def _addLocalWords(request):
     from MoinMoin.PageEditor import PageEditor
-
     # get the new words as a string (if any are marked at all)
     try:
         newwords = request.form['newwords']
@@ -209,7 +208,13 @@ def checkSpelling(page, request, own_form=1):
 
 def execute(pagename, request):
     _ = request.getText
+
     page = Page(request, pagename)
+    if not request.user.may.write(request.cfg.page_local_spelling_words):
+        msg = _("You can't save spelling words.")
+        page.send_page(msg=msg)
+        return
+
     if request.user.may.read(pagename):
         badwords, badwords_re, msg = checkSpelling(page, request)
     else:
