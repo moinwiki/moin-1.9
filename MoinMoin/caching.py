@@ -9,6 +9,7 @@
 import os
 import tempfile
 
+from MoinMoin import config
 from MoinMoin.util import filesys, lock, pickle, PICKLE_PROTOCOL
 
 
@@ -118,6 +119,7 @@ class CacheEntry:
                     os.close(tmp_handle)
                     # this is either atomic or happening with real locks set:
                     filesys.rename(tmp_fname, fname)
+                    filesys.chmod(fname, 0666 & config.umask) # fix mode that mkstemp chose
                 finally:
                     if self.locking:
                         self.wlock.release()
