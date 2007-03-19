@@ -11,7 +11,7 @@
 
 Dependencies = ['pages']
 
-import operator, sys, os
+import sys, os
 from StringIO import StringIO
 
 from MoinMoin import wikiutil, version
@@ -57,23 +57,6 @@ class SystemInfo:
         _ = self.request.getText
         request = self.request
 
-        try:
-            import Ft
-            ftversion = Ft.__version__
-        except ImportError:
-            ftversion = None
-        except AttributeError:
-            ftversion = 'N/A'
-
-        t_count = None
-        try:
-            from threading import activeCount
-            t_count = activeCount()
-        except ImportError:
-            pass
-
-        # Get the full pagelist in the wiki
-
         buf = StringIO()
 
         row = lambda label, value, buf=buf: buf.write(u'<dt>%s</dt><dd>%s</dd>' % (label, value))
@@ -81,6 +64,7 @@ class SystemInfo:
         buf.write(u'<dl>')
         row(_('Python Version'), sys.version)
         row(_('MoinMoin Version'), _('Release %s [Revision %s]') % (version.release, version.revision))
+
         if not request.user.valid:
             # for an anonymous user it ends here.
             buf.write(u'</dl>')
@@ -88,9 +72,20 @@ class SystemInfo:
 
         if request.user.isSuperUser():
             # superuser gets all page dependent stuff only
+            try:
+                import Ft
+                ftversion = Ft.__version__
+            except ImportError:
+                ftversion = None
+            except AttributeError:
+                ftversion = 'N/A'
+    
             if ftversion:
                 row(_('4Suite Version'), ftversion)
 
+            # TODO add python-xml check and display it
+
+            # Get the full pagelist of the wiki
             pagelist = request.rootpage.getPageList(user='')
             systemPages = []
             totalsize = 0
@@ -112,7 +107,7 @@ class SystemInfo:
             edlog = editlog.EditLog(request)
             row(_('Entries in edit log'), "%s (%s)" % (edlog.lines(), self.formatInReadableUnits(edlog.size())))
 
-        # This puts a heavy load on the server when the log is large
+            # This puts a heavy load on the server when the log is large
             eventlogger = eventlog.EventLog(request)
             row('Event log', self.formatInReadableUnits(eventlogger.size()))
 
@@ -156,6 +151,12 @@ class SystemInfo:
         row(_('Xapian search'), xapRow)
         row(_('Xapian Version'), xapVersion)
         row(_('Xapian stemming'), xapState[request.cfg.xapian_stemming])
+
+        try:
+            from threading import activeCount
+            t_count = activeCount()
+        except ImportError:
+            t_count = None
 
         row(_('Active threads'), t_count or _('N/A'))
         buf.write(u'</dl>')
