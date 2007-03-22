@@ -158,7 +158,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
     stripped = needle.strip()
     if len(stripped) == 0:
         err = _('Please use a more selective search term instead '
-                'of {{{"%s"}}}') % needle
+                'of {{{"%s"}}}') % wikiutil.escape(needle)
         Page(request, pagename).send_page(msg=err)
         return
     needle = stripped
@@ -182,7 +182,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
         results = searchPages(request, query, sort, mtime, historysearch)
     except ValueError: # catch errors in the search query
         err = _('Your search query {{{"%s"}}} is invalid. Please refer to '
-                'HelpOnSearching for more information.') % needle
+                'HelpOnSearching for more information.') % wikiutil.escape(needle)
         Page(request, pagename).send_page(msg=err)
         return
 
@@ -203,7 +203,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
 
         err = _('Your search query {{{"%s"}}} didn\'t return any results. '
                 'Please change some terms and refer to HelpOnSearching for '
-                'more information.%s') % (needle,
+                'more information.%s') % (wikiutil.escape(needle),
                     titlesearch and ''.join([
                         '<br>',
                         _('(!) Consider performing a'), ' ',
@@ -220,7 +220,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
     # This action generates data using the user language
     request.setContentLanguage(request.lang)
 
-    request.theme.send_title(title % needle, form=request.form,
+    request.theme.send_title(title % wikiutil.escape(needle), form=request.form,
             pagename=pagename, msg=msg)
 
     # Start content (important for RTL support)
