@@ -65,7 +65,7 @@ def getAttachDir(request, pagename, create=0):
             os.makedirs(attach_dir)
     else:
         # send file via CGI, from page storage area
-        if pagename == request.page.page_name:
+        if request.page and pagename == request.page.page_name:
             page  = request.page # reusing existing page obj is faster
         else:
             page = Page(request, pagename)
