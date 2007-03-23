@@ -1104,14 +1104,11 @@ class Page(object):
         # Load the parser
         Parser = wikiutil.searchAndImportPlugin(request.cfg, "parser", pi['format'])
 
-        # start wiki content div
-        request.write(self.formatter.startContent(content_id))
-
         # new page?
         if not page_exists and (not content_only or (content_only
                                                      and send_missing_page)):
             if self.default_formatter and not content_only:
-                self._emptyPageText(request)
+                self._emptyPageText(request) # this recursively calls send_page
             elif content_only and send_missing_page:
                 # We should send MissingPage but it is not there
                 import warnings
@@ -1123,6 +1120,9 @@ class Page(object):
         elif not request.user.may.read(self.page_name):
             request.write("<strong>%s</strong><br>" % _("You are not allowed to view this page."))
         else:
+            # start wiki content div
+            request.write(self.formatter.startContent(content_id))
+
             # parse the text and send the page content
             self.send_page_content(request, Parser, body,
                                    format_args=pi['formatargs'],
@@ -1134,8 +1134,8 @@ class Page(object):
                 from MoinMoin.macro.FootNote import emit_footnotes
                 request.write(emit_footnotes(request, self.formatter))
 
-        # end wiki content div
-        request.write(self.formatter.endContent())
+            # end wiki content div
+            request.write(self.formatter.endContent())
 
         # end document output
         if not content_only:
