@@ -1378,20 +1378,20 @@ class Page(object):
         @rtype: list
         @return: page names this page links to
         """
-        if not self.exists():
-            return []
-        cache = caching.CacheEntry(request, self, 'pagelinks', scope='item', do_locking=False, use_pickle=True)
-        if cache.needsUpdate(self._text_filename()):
-            links = self.parsePageLinks(request)
-            cache.update(links)
-            return links
-        try:
-            links = cache.content()
-            return links
-        except caching.CacheError:
-            links = self.parsePageLinks(request)
-            cache.update(links)
-            return links
+        if self.exists():
+            cache = caching.CacheEntry(request, self, 'pagelinks', scope='item', do_locking=False, use_pickle=True)
+            if cache.needsUpdate(self._text_filename()):
+                links = self.parsePageLinks(request)
+                cache.update(links)
+            else:
+                try:
+                    links = cache.content()
+                except caching.CacheError:
+                    links = self.parsePageLinks(request)
+                    cache.update(links)
+        else:
+            links = []
+        return links
 
     def parsePageLinks(self, request):
         """ Parse page links by formatting with a pagelinks formatter 
