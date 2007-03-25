@@ -109,3 +109,8 @@ class NoConfigMatchedError(Exception):
     """ we didn't find a configuration for this URL """
     pass
 
+class ConvertError(FatalError):
+    """ Raise when html to storage format (e.g. 'wiki') conversion fails """
+    name = "MoinMoin Convert Error"
+
+

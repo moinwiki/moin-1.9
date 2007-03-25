@@ -13,7 +13,7 @@ from MoinMoin.Page import Page
 from MoinMoin.widget import html
 from MoinMoin.widget.dialog import Status
 from MoinMoin.util import web
-from MoinMoin.parser.text_moin_wiki import Parser
+from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
 
 def execute(pagename, request):
     if not request.user.may.write(pagename):
@@ -28,7 +28,7 @@ class PageGraphicalEditor(PageEditor.PageEditor):
 
     def word_rule(self):
         regex = re.compile(r"\(\?<![^)]*?\)")
-        word_rule = regex.sub("", Parser.word_rule)
+        word_rule = regex.sub("", WikiParser.word_rule)
         return repr(word_rule)[1:]
 
     def sendEditor(self, **kw):
@@ -233,6 +233,10 @@ Please review the page and save then. Do not save this page as it is!""")
         # Send revision of the page our edit is based on
         request.write('<input type="hidden" name="rev" value="%d">' % (rev,))
 
+        # Add src format (e.g. 'wiki') into a hidden form field, so that
+        # we can load the correct converter after POSTing.
+        request.write('<input type="hidden" name="format" value="%s">' % self.pi['format'])
+        
         # Create and send a ticket, so we can check the POST
         request.write('<input type="hidden" name="ticket" value="%s">' % wikiutil.createTicket(request))
 
@@ -318,7 +322,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         from MoinMoin.formatter.text_gedit import Formatter
         self.formatter = Formatter(request)
         self.formatter.page = self
-        output = request.redirectedOutput(self.send_page_content, request, Parser, raw_body, do_cache=False)
+        output = request.redirectedOutput(self.send_page_content, request, raw_body, format=self.pi['format'], do_cache=False)
         output = repr(output)
         if output[0] == 'u':
             output = output[1:]

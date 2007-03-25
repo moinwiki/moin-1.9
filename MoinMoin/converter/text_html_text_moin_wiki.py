@@ -10,6 +10,7 @@ import xml.dom.minidom # HINT: the nodes in parse result tree need .has_key(), "
 from xml.dom import Node
 
 from MoinMoin import config, wikiutil, error
+from MoinMoin.error import ConvertError
 
 # Portions (C) International Organization for Standardization 1986
 # Permission to copy in any form is granted for use with
@@ -403,11 +404,6 @@ def pagename_from_url(url_frag):
         elif not "'" in pagename:
             qpagename = "'%s'" % pagename
     return pagename, qpagename
-
-class ConvertError(error.FatalError):
-    """ Raise when html to wiki conversion fails """
-    name = "MoinMoin Convert Error"
-
 
 class visitor(object):
     def do(self, tree):

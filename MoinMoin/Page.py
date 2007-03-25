@@ -1101,9 +1101,6 @@ class Page(object):
                                     allow_doubleclick=1, trail=trail,
                                     )
 
-        # Load the parser
-        Parser = wikiutil.searchAndImportPlugin(request.cfg, "parser", pi['format'])
-
         # new page?
         if not page_exists and (not content_only or (content_only
                                                      and send_missing_page)):
@@ -1124,7 +1121,8 @@ class Page(object):
             request.write(self.formatter.startContent(content_id))
 
             # parse the text and send the page content
-            self.send_page_content(request, Parser, body,
+            self.send_page_content(request, body,
+                                   format=pi['format'],
                                    format_args=pi['formatargs'],
                                    do_cache=do_cache,
                                    start_line=pi['lines'])
@@ -1196,17 +1194,18 @@ class Page(object):
             return getattr(parser, 'caching', False)
         return False
 
-    def send_page_content(self, request, Parser, body, format_args='',
-                          do_cache=1, **kw):
+    def send_page_content(self, request, body, format='wiki', format_args='', do_cache=1, **kw):
         """ Output the formatted wiki page, using caching if possible
 
         @param request: the request object
-        @param Parser: Parser class
         @param body: text of the wiki page
+        @param format: format of content, default 'wiki'
         @param format_args: #format arguments, used by some parsers
         @param do_cache: if True, use cached content
         """
         request.clock.start('send_page_content')
+        # Load the parser
+        Parser = wikiutil.searchAndImportPlugin(request.cfg, "parser", format)
         parser = Parser(body, request, format_args=format_args, **kw)
 
         if not (do_cache and self.canUseCache(Parser)):
