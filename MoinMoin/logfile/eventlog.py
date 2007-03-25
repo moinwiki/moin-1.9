@@ -1,5 +1,7 @@
 """
     MoinMoin event log class
+    
+    The global event-log is mainly used for statistics (e.g. EventStats).
 
     @license: GNU GPL, see COPYING for details.
 """

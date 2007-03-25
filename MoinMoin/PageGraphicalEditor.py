@@ -2,6 +2,8 @@
 """
     MoinMoin - Call the GUI editor (FCKeditor)
 
+    Same as PageEditor, but we use the HTML based GUI editor here.
+
     @copyright: (c) Bastian Blank, Florian Festi, Thomas Waldmann
     @license: GNU GPL, see COPYING for details.
 """
