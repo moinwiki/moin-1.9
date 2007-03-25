@@ -1,6 +1,9 @@
 """
     MoinMoin edit log class
 
+    This is used for accessing the global edit-log (e.g. by RecentChanges) as
+    well as for the local edit-log (e.g. PageEditor, info action).
+
     @license: GNU GPL, see COPYING for details.
 """
 

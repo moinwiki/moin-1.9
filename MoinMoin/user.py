@@ -1,6 +1,12 @@
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - User Accounts
+    
+    This module contains functions to access user accounts (list all users, get
+    some specific user). User instances are used to access the user profile of
+    some specific user (name, password, email, bookmark, trail, settings, ...).
+
+    The UserPreferences form support stuff is in module userform.
 
     @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.

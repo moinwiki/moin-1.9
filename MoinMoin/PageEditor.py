@@ -1,6 +1,8 @@
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - PageEditor class
+    
+    PageEditor is used for r/w access to a wiki page (edit, rename, delete operations).
 
     @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>
                 2005-2006 by MoinMoin:ThomasWaldmann

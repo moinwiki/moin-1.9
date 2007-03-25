@@ -1,6 +1,13 @@
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - Page class
+    
+    Page is used for read-only access to a wiki page. For r/w access see PageEditor.
+    A Page object is used to access a wiki page (in general) as well as to access
+    some specific revision of a wiki page.
+    
+    The RootPage is some virtual page located at / and is mainly used to do namespace
+    operations like getting the page list. 
 
     @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>,
                 2005-2007 by MoinMoin:ThomasWaldmann,
