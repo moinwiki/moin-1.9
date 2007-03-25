@@ -1113,6 +1113,7 @@ def getPlugins(kind, cfg):
 def searchAndImportPlugin(cfg, type, name, what=None):
     type2classname = {"parser": "Parser",
                       "formatter": "Formatter",
+                      "converter": "convert",
     }
     if what is None:
         what = type2classname[type]

@@ -85,10 +85,16 @@ def execute(pagename, request):
             pg.send_page(msg=msg)
             return
 
-    # convert input from Graphical editor
-    from MoinMoin.converter.text_html_text_moin_wiki import convert, ConvertError
+    from MoinMoin.error import ConvertError
     try:
         if lasteditor == 'gui':
+            # convert input from Graphical editor
+            format = request.form.get('format', ['wiki'])[0]
+            if format == 'wiki':
+                converter_name = 'text_html_text_moin_wiki'
+            else:
+                converter_name = 'undefined' # XXX we don't have other converters yet
+            convert = wikiutil.searchAndImportPlugin(request.cfg, "converter", converter_name)
             savetext = convert(request, pagename, savetext)
 
         # IMPORTANT: normalize text from the form. This should be done in

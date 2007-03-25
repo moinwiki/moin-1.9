@@ -14,9 +14,10 @@ from MoinMoin.converter import text_html_text_moin_wiki as converter
 from MoinMoin.parser.text_moin_wiki import Parser
 from MoinMoin.formatter.text_gedit import Formatter
 from MoinMoin.request import Clock
+from MoinMoin.error import import ConvertError
 
 convert = converter.convert
-error = converter.ConvertError
+error = ConvertError
 
 
 class BaseTests(unittest.TestCase):
