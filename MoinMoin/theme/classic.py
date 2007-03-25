@@ -14,7 +14,6 @@
 
 from MoinMoin import caching
 from MoinMoin.theme import ThemeBase
-from MoinMoin.Page import Page
 
 
 class Theme(ThemeBase):

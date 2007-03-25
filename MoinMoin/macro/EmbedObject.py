@@ -119,7 +119,7 @@
         2007-02-10 OliverSiemoneit: alt and noembed tags added for AccessibleMoin; fixed
                    output abstraction violation.
 """
-import os, mimetypes
+import mimetypes
 
 from MoinMoin import wikiutil
 from MoinMoin.action import AttachFile

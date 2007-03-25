@@ -22,7 +22,7 @@
 """
 
 from twisted.application import internet, service
-from twisted.web import script, static, server, vhost, resource, util
+from twisted.web import static, server, vhost, resource
 from twisted.internet import threads, reactor
 
 try:

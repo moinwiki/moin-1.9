@@ -117,7 +117,7 @@ def text(pagename, request):
 
 
 def draw(pagename, request):
-    import shutil, cStringIO, operator
+    import shutil, cStringIO
     from MoinMoin.stats.chart import Chart, ChartData, Color
 
     _ = request.getText
