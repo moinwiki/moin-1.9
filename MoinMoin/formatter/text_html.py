@@ -633,8 +633,7 @@ class Formatter(FormatterBase):
         pagename, filename = AttachFile.absoluteName(url, self.page.page_name)
         #self.request.log("attachment_link: url %s pagename %s filename %s" % (url, pagename, filename))
         fname = wikiutil.taintfilename(filename)
-        fpath = AttachFile.getFilename(self.request, pagename, fname)
-        if not os.path.exists(fpath):
+        if not AttachFile.exists(self.request, pagename, fname):
             linktext = _('Upload new attachment "%(filename)s"')
             return wikiutil.link_tag(
                 self.request,
@@ -651,8 +650,7 @@ class Formatter(FormatterBase):
         _ = self.request.getText
         pagename, filename = AttachFile.absoluteName(url, self.page.page_name)
         fname = wikiutil.taintfilename(filename)
-        fpath = AttachFile.getFilename(self.request, pagename, fname)
-        if not os.path.exists(fpath):
+        if not AttachFile.exists(self.request, pagename, fname):
             linktext = _('Upload new attachment "%(filename)s"')
             return wikiutil.link_tag(
                 self.request,
@@ -673,16 +671,16 @@ class Formatter(FormatterBase):
         fname = fname + u".png"
         filename = filename + u".png"
         # fallback for old gif drawings (1.1 -> 1.2)
-        fpath = AttachFile.getFilename(self.request, pagename, fname)
-        if not os.path.exists(fpath):
+        exists = AttachFile.exists(self.request, pagename, fname)
+        if not exists:
             gfname = fname[:-4] + u".gif"
             gfilename = filename[:-4] + u".gif"
-            gfpath = AttachFile.getFilename(self.request, pagename, gfname)
-            if os.path.exists(gfpath):
-                fname, filename, fpath = gfname, gfilename, gfpath
+            exists = AttachFile.exists(self.request, pagename, gfname)
+            if exists:
+                fname, filename = gfname, gfilename
 
         # check whether attachment exists, possibly point to upload form
-        if not os.path.exists(fpath):
+        if not exists:
             linktext = _('Create new drawing "%(filename)s"')
             return wikiutil.link_tag(
                 self.request,

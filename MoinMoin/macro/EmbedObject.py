@@ -256,9 +256,8 @@ class EmbedObject:
             return "%s%s%s" % (self.formatter.sysmsg(1), self.formatter.text(msg), self.formatter.sysmsg(0))
 
         pagename, attname = AttachFile.absoluteName(self.target, self.formatter.page.page_name)
-        attachment_fname = AttachFile.getFilename(self.request, pagename, attname)
 
-        if not os.path.exists(attachment_fname):
+        if not AttachFile.exists(self.request, pagename, attname):
             linktext = _('Upload new attachment "%(filename)s"')
             return wikiutil.link_tag(self.request,
                 ('%s?action=AttachFile&rename=%s' % (
