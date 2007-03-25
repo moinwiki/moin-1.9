@@ -85,8 +85,6 @@ class Formatter(text_html.Formatter):
         _ = self.request.getText
         pagename = self.page.page_name
         image = url + u'.png'
-        fname = wikiutil.taintfilename(image)
-        fpath = AttachFile.getFilename(self.request, pagename, fname)
         return self.image(
             title="drawing:%s" % wikiutil.quoteWikinameURL(url),
             src=AttachFile.getAttachUrl(pagename, image, self.request, addts=1))

@@ -143,8 +143,7 @@ def execute(macro, args):
                 pagename, attname = AttachFile.absoluteName(target, formatter.page.page_name)
                 target = AttachFile.getAttachUrl(pagename, target, request, do='view')
 
-            attachment_fname = AttachFile.getFilename(request, pagename, attname)
-            if not os.path.exists(attachment_fname):
+            if not AttachFile.exists(request, pagename, attname):
                 linktext = _('Upload new attachment "%(filename)s"')
                 return wikiutil.link_tag(request,
                                          ('%s?action=AttachFile&rename=%s' % (
@@ -165,8 +164,7 @@ def execute(macro, args):
     else:
         pagename, attname = AttachFile.absoluteName(image, formatter.page.page_name)
         kw['src'] = AttachFile.getAttachUrl(pagename, attname, request)
-        attachment_fname = AttachFile.getFilename(request, pagename, attname)
-        if not os.path.exists(attachment_fname):
+        if not AttachFile.exists(request, pagename, attname):
             linktext = _('Upload new attachment "%(filename)s"')
             return wikiutil.link_tag(request,
                                      ('%s?action=AttachFile&rename=%s' % (

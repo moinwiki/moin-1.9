@@ -148,6 +148,10 @@ def getFilename(request, pagename, filename):
     """
     return os.path.join(getAttachDir(request, pagename), filename).encode(config.charset)
 
+def exists(request, pagename, filename):
+    """ check if page <pagename> has a file <filename> attached """
+    fpath = getFilename(request, pagename, filename)
+    return os.path.exists(fpath)
 
 def info(pagename, request):
     """ Generate snippet with info on the attachment for page `pagename`.

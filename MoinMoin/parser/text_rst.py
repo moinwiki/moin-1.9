@@ -349,11 +349,8 @@ class MoinTranslator(html4css1.HTMLTranslator):
             # From here down, all links are handled by docutils (except 
             # missing attachments), just fixup node['refuri'].
             if prefix == 'attachment':
-                attach_file = AttachFile.getFilename(self.request, 
-                        self.request.page.page_name, link)
-                if not os.path.exists(attach_file):
-                    # Attachment doesn't exist, give to MoinMoin to insert
-                    # upload text.
+                if not AttachFile.exists(self.request, self.request.page.page_name, link):
+                    # Attachment doesn't exist, give to MoinMoin to insert upload text.
                     self.process_wiki_text(refuri)
                     self.wiki_text = self.fixup_wiki_formatting(self.wiki_text)
                     self.add_wiki_markup()
@@ -408,9 +405,7 @@ class MoinTranslator(html4css1.HTMLTranslator):
             attach_name = uri.split(':', 1)[1]
         # if prefix isn't URL, try to display in page
         if not prefix.lower() in ('file', 'http', 'https', 'ftp'):
-            attach_file = AttachFile.getFilename(self.request, 
-                    self.request.page.page_name, attach_name)
-            if not os.path.exists(attach_file):
+            if not AttachFile.exists(self.request, self.request.page.page_name, attach_name):
                 # Attachment doesn't exist, MoinMoin should process it
                 if prefix == '':
                     prefix = 'inline:'
