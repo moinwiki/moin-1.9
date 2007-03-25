@@ -15,8 +15,6 @@ import StringIO
 import __builtin__
 import sys
 
-import os
-
 # docutils imports are below
 from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
 from MoinMoin.Page import Page

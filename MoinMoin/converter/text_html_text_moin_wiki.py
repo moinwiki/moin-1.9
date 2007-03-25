@@ -9,7 +9,7 @@ import re, os
 import xml.dom.minidom # HINT: the nodes in parse result tree need .has_key(), "x in ..." does not work
 from xml.dom import Node
 
-from MoinMoin import config, wikiutil, error
+from MoinMoin import config, wikiutil
 from MoinMoin.error import ConvertError
 
 # Portions (C) International Organization for Standardization 1986

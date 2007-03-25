@@ -92,7 +92,6 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os
 from MoinMoin import wikiutil
 from MoinMoin.action import AttachFile
 
