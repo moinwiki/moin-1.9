@@ -9,10 +9,7 @@
 from MoinMoin.Page import Page
 
 def execute(pagename, request):
-    """ Subscribe or unsubscribe the user to pagename
-    
-    TODO: what if subscribe failed? no message is displayed.
-    """
+    """ Subscribe or unsubscribe the user to pagename """
     _ = request.getText
     cfg = request.cfg
     msg = None
@@ -45,6 +42,7 @@ def execute(pagename, request):
         # Try to subscribe
         if request.user.subscribe(pagename):
             msg = _('You have been subscribed to this page.')
+        else: # should not happen
+            msg = _('You could not get subscribed to this page.')
 
     Page(request, pagename).send_page(msg=msg)
-
