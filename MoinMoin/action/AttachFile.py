@@ -15,15 +15,14 @@
     4. /pathname/fname, do=view[&mimetype=type]:create a page
        to view the content of the file
 
-    To insert an attachment into the page, use the "attachment:" pseudo
-    schema.
+    To insert an attachment into the page, use the "attachment:" pseudo schema.
 
-    @copyright: 2001 by Ken Sugino (sugino@mediaone.net)
-    @copyright: 2001-2004 by Jürgen Hermann <jh@web.de>
-    @copyright: 2005 MoinMoin:ReimarBauer
-    @copyright: 2005 MoinMoin:AlexanderSchremmer
-    @copyright: 2005 DiegoOngaro at ETSZONE (diego@etszone.com)
-    @copyright: 2006 MoinMoin:ReimarBauer
+    @copyright: 2001 by Ken Sugino (sugino@mediaone.net),
+                2001-2004 by Jürgen Hermann <jh@web.de>,
+                2005 MoinMoin:AlexanderSchremmer,
+                2005 DiegoOngaro at ETSZONE (diego@etszone.com),
+                2005-2006 MoinMoin:ReimarBauer,
+                2007 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -146,12 +145,19 @@ def getFilename(request, pagename, filename):
         @rtype: string (in config.charset encoding)
         @return: complete path/filename of attached file
     """
-    return os.path.join(getAttachDir(request, pagename), filename).encode(config.charset)
+    if isinstance(filename, unicode):
+        filename = filename.encode(config.charset)
+    return os.path.join(getAttachDir(request, pagename), filename)
 
 def exists(request, pagename, filename):
     """ check if page <pagename> has a file <filename> attached """
     fpath = getFilename(request, pagename, filename)
     return os.path.exists(fpath)
+
+def size(request, pagename, filename):
+    """ return file size of file attachment """
+    fpath = getFilename(request, pagename, filename)
+    return os.path.getsize(fpath)
 
 def info(pagename, request):
     """ Generate snippet with info on the attachment for page `pagename`.
@@ -878,7 +884,6 @@ def unzip_file(pagename, request):
     if not filename:
         return # error msg already sent in _access_file
 
-    attachment_path = getAttachDir(request, pagename)
     single_file_size = request.cfg.unzip_single_file_size
     attachments_file_space = request.cfg.unzip_attachments_space
     attachments_file_count = request.cfg.unzip_attachments_count
@@ -890,7 +895,7 @@ def unzip_file(pagename, request):
         fsize = 0.0
         fcount = 0
         for file in files:
-            fsize += float(os.stat(getFilename(request, pagename, file))[6]) # in byte
+            fsize += float(size(request, pagename, file))
             fcount += 1
 
         available_attachments_file_space = attachments_file_space - fsize
