@@ -1,0 +1,74 @@
+# -*- coding: iso-8859-1 -*-
+"""
+    MoinMoin - login action
+
+    The real login is done in MoinMoin.request.
+    Here is only some user notification in case something went wrong.
+
+    @copyright: 2005-2006 Radomirs Cirskis <nad2000@gmail.com>,
+                2006 MoinMoin:ThomasWaldmann
+    @license: GNU GPL, see COPYING for details.
+"""
+
+from MoinMoin import user, userform
+from MoinMoin.Page import Page
+
+def execute(pagename, request):
+    return LoginHandler(pagename, request).handle()
+
+class LoginHandler:
+    def __init__(self, pagename, request):
+        self.request = request
+        self._ = request.getText
+        self.cfg = request.cfg
+        self.pagename = pagename
+        self.page = Page(request, pagename)
+
+    def handle(self):
+        _ = self._
+        request = self.request
+        form = request.form
+
+        error = None
+
+        islogin = form.get('login', [''])[0]
+
+        if islogin: # user pressed login button
+            # Trying to login with a user name and a password
+            # Require valid user name
+            name = form.get('name', [''])[0]
+            if not user.isValidName(request, name):
+                 error = _("""Invalid user name {{{'%s'}}}.
+Name may contain any Unicode alpha numeric character, with optional one
+space between words. Group page name is not allowed.""") % name
+
+            # we do NOT check this, we don't want to disclose whether a user
+            # exists or not to not help an attacker.
+            # Check that user exists
+            #elif not user.getUserId(request, name):
+            #    error = _('Unknown user name: {{{"%s"}}}. Please enter'
+            #                 ' user name and password.') % name
+
+            # Require password
+            else:
+                password = form.get('password', [None])[0]
+                if not password:
+                    error = _("Missing password. Please enter user name and password.")
+                else:
+                    if not request.user.valid:
+                        error = _("Sorry, login failed.")
+
+            return self.page.send_page(msg=error)
+
+        else: # show login form
+            request.emit_http_headers()
+            request.theme.send_title(_("Login"), pagename=self.pagename)
+            # Start content (important for RTL support)
+            request.write(request.formatter.startContent("content"))
+
+            request.write(userform.getLogin(request))
+
+            request.write(request.formatter.endContent())
+            request.theme.send_footer(self.pagename)
+            request.theme.send_closing_html()
+
