@@ -243,7 +243,12 @@ def escape(s, quote=0):
 def clean_comment(comment):
     """ Clean comment - replace CR, LF, TAB by whitespace, delete control chars
         TODO: move this to config, create on first call then return cached.
+        TODO: rename to clean_whatever
     """
+    # alias name could be empty
+    if len(comment) == 0:
+        return ''
+    
     # we only have input fields with max 200 chars, but spammers send us more
     if len(comment) > 201:
         comment = u''
