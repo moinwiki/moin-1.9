@@ -4,6 +4,7 @@
     This is used for accessing the global edit-log (e.g. by RecentChanges) as
     well as for the local edit-log (e.g. PageEditor, info action).
 
+    @copyright: 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 

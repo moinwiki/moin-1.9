@@ -2,7 +2,7 @@
 """
     MoinMoin - MoinMoin Wiki Markup Parser
 
-    @copyright: 2000, 2001, 2002 by Jürgen Hermann <jh@web.de>,
+    @copyright: 2000-2002 Juergen Hermann <jh@web.de>,
                 2006 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """

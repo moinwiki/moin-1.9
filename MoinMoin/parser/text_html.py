@@ -2,7 +2,7 @@
 """
     MoinMoin - HTML Parser
 
-    @copyright: 2006 by MoinMoin:AlexanderSchremmer
+    @copyright: 2006 MoinMoin:AlexanderSchremmer
     @license: GNU GPL, see COPYING for details.
 """
 

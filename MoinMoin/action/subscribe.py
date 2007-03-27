@@ -2,8 +2,8 @@
 """
     MoinMoin - subscribe to a page to get notified when it changes
 
-    @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>,
-                2006 by MoinMoin:ThomasWaldmann
+    @copyright: 2000-2004 Juergen Hermann <jh@web.de>,
+                2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 from MoinMoin.Page import Page

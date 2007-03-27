@@ -6,7 +6,7 @@
     authentication at the SMB server). This can be used if you need access
     to files on some share via the wiki, but needs more code to be useful.
 
-    @copyright: 2006 by MoinMoin:ThomasWaldmann
+    @copyright: 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 

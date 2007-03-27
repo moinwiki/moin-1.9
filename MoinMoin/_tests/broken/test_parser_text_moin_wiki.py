@@ -5,7 +5,7 @@
     TODO: these are actually parser+formatter tests. We should have
     parser only tests here.
 
-    @copyright: 2003-2004 by Jürgen Hermann <jh@web.de>
+    @copyright: 2003-2004 by Juergen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
 

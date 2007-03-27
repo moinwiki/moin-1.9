@@ -2,7 +2,7 @@
 """
     MoinMoin - Import Script Package
 
-    @copyright: 2006 by Thomas Waldmann
+    @copyright: 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 

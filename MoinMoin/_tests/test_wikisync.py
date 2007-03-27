@@ -1,9 +1,9 @@
 # -*- coding: iso-8859-1 -*-
 """
-MoinMoin - MoinMoin.wikisync tests
+    MoinMoin - MoinMoin.wikisync tests
 
-@copyright: 2006 MoinMoin:AlexanderSchremmer
-@license: GNU GPL, see COPYING for details.
+    @copyright: 2006 MoinMoin:AlexanderSchremmer
+    @license: GNU GPL, see COPYING for details.
 """
 
 from unittest import TestCase

@@ -18,8 +18,8 @@
               WikiWiki
                    OriginalWiki
 
-    @copyright: 2001 by Steve Howell <showell@zipcon.com>
-    @copyright: 2001-2004 by Jürgen Hermann <jh@web.de>
+    @copyright: 2001 Steve Howell <showell@zipcon.com>,
+                2001-2004 Juergen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
 

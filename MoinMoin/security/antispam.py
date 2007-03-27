@@ -6,7 +6,7 @@
     If started from commandline, it prints a merged list (moinmaster + MT) on
     stdout, and what it got additionally from MT on stderr.
     
-    @copyright: 2005 by Thomas Waldmann
+    @copyright: 2005 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details
 """
 

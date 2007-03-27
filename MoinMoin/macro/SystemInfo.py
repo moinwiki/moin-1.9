@@ -4,7 +4,7 @@
 
     This macro shows some info about your wiki, wiki software and your system.
 
-    @copyright: 2006 MoinMoin:ThomasWaldmann
+    @copyright: 2006 MoinMoin:ThomasWaldmann,
                 2007 ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """

@@ -4,7 +4,7 @@
 
     This action allows you to delete a page.
 
-    @copyright: 2006 MoinMoin:ThomasWaldmann
+    @copyright: 2006 MoinMoin:ThomasWaldmann,
                 2007 ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """

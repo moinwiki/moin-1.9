@@ -5,8 +5,8 @@
     The real login is done in MoinMoin.request.
     Here is only some user notification in case something went wrong.
 
-    @copyright: 2005-2006 by Radomirs Cirskis <nad2000@gmail.com>
-    @copyright: 2006 by Thomas Waldmann
+    @copyright: 2005-2006 Radomirs Cirskis <nad2000@gmail.com>,
+                2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 

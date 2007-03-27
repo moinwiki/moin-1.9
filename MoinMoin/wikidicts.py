@@ -2,8 +2,8 @@
 """
     MoinMoin - Dictionary / Group Functions
 
-    @copyright: 2003-2006 by Thomas Waldmann, MoinMoin:ThomasWaldmann
-    @copyright: 2003 by Gustavo Niemeyer, http://moin.conectiva.com.br/GustavoNiemeyer
+    @copyright: 2003-2006 MoinMoin:ThomasWaldmann,
+                2003 by Gustavo Niemeyer, http://moin.conectiva.com.br/GustavoNiemeyer
     @license: GNU GPL, see COPYING for details.
 """
 import re, time

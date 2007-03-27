@@ -2,7 +2,7 @@
 """
     MoinMoin - MoinMoin.util.pysupport Tests
 
-    @copyright: 2004 by Jürgen Hermann <ograf@bitart.de>
+    @copyright: 2004 Oliver Graf <ograf@bitart.de>
     @license: GNU GPL, see COPYING for details.
 """
 

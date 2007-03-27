@@ -3,7 +3,7 @@
     MoinMoin - CGI Request Implementation for std. CGI web servers
     like Apache or IIS or others.
 
-    @copyright: 2001-2003 by Jürgen Hermann <jh@web.de>,
+    @copyright: 2001-2003 by Juergen Hermann <jh@web.de>,
                 2003-2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """

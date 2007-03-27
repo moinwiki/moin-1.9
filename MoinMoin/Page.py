@@ -9,7 +9,7 @@
     The RootPage is some virtual page located at / and is mainly used to do namespace
     operations like getting the page list. 
 
-    @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>,
+    @copyright: 2000-2004 by Juergen Hermann <jh@web.de>,
                 2005-2007 by MoinMoin:ThomasWaldmann,
                 2006 by MoinMoin:FlorianFesti.
                 2007 by ReimarBauer

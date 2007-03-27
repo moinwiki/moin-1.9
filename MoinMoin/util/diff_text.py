@@ -2,7 +2,7 @@
 """
     MoinMoin - simple text diff (uses difflib)
 
-    @copyright: 2006 by MoinMoin:ThomasWaldmann
+    @copyright: 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 from MoinMoin.support import difflib

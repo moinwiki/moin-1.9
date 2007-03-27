@@ -4,7 +4,7 @@
 
     Depends on: antiword command from antiword package
     
-    @copyright: 2006 by ThomasWaldmann MoinMoin:ThomasWaldmann
+    @copyright: 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 

@@ -4,7 +4,7 @@
 
     Supply common server utilities.
 
-    @copyright: 2004 by Nir Soffer
+    @copyright: 2004 Nir Soffer
     @license: GNU GPL, see COPYING for details.
 """
 

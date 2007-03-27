@@ -4,7 +4,7 @@
 
     This is the backend of the search form. Search pages and print results.
     
-    @copyright: 2001 by Jürgen Hermann <jh@web.de>
+    @copyright: 2001 by Juergen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
 

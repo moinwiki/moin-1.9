@@ -4,8 +4,8 @@
 
     This code was tested with 4Suite 1.0a4 and 1.0b1
 
-    @copyright: 2005 by Henry Ho <henryho167 AT hotmail DOT com>
-    @copyright: 2005 by MoinMoin:AlexanderSchremmer
+    @copyright: 2005 Henry Ho <henryho167 AT hotmail DOT com>,
+                2005 MoinMoin:AlexanderSchremmer
     @license: GNU GPL, see COPYING for details.
 
     DOCBOOK Parser:

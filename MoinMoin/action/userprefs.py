@@ -11,7 +11,7 @@
     changed. After submitting the form, the user is presented the
     same page he/she was seeing before, and the trail is not modified.
 
-    @copyright: 2006 by Radomir Dopieralski
+    @copyright: 2006 Radomir Dopieralski
     @license: GNU GPL, see COPYING for details.
 """
 

@@ -5,7 +5,7 @@
     You must run this script as owner of the wiki files, usually this is the
     web server user.
 
-    @copyright: 2006 by MoinMoin:ThomasWaldmann
+    @copyright: 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 

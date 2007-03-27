@@ -28,9 +28,9 @@
 
     Significant contributions to this module by R. Church <rc@ghostbitch.org>
 
-    @copyright: 2001-2004 MoinMoin:JürgenHermann
-    @copyright: 2005      MoinMoin:AlexanderSchremmer
-    @copyright: 2005      MoinMoin:NirSoffer
+    @copyright: 2001-2004 MoinMoin:JuergenHermann,
+                2005 MoinMoin:AlexanderSchremmer,
+                2005 MoinMoin:NirSoffer
     @license: GNU GPL, see COPYING for details.
 """
 

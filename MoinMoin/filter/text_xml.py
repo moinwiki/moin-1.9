@@ -2,7 +2,7 @@
 """
     MoinMoin - text/xml file Filter
 
-    @copyright: 2006 by ThomasWaldmann MoinMoin:ThomasWaldmann
+    @copyright: 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 

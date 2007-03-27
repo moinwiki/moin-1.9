@@ -8,8 +8,8 @@
     If pagename isn't set, the current pagename is used.
     If mime_type isn't given, all files are listed.
 
-    @copyright: 2004 Jacob Cohen, Nigel Metheringham
-    @copyright: 2006 Reimar Bauer
+    @copyright: 2004 Jacob Cohen, Nigel Metheringham,
+                2006 Reimar Bauer
     @license: GNU GPL, see COPYING for details.
 """
 

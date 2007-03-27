@@ -2,7 +2,7 @@
 """
     MoinMoin - set or delete bookmarks (in time) for RecentChanges
 
-    @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>,
+    @copyright: 2000-2004 by Juergen Hermann <jh@web.de>,
                 2006 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """

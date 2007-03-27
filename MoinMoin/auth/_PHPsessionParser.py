@@ -1,8 +1,7 @@
 """
     MoinMoin - Parsing of PHP session files
 
-    @copyright: 2005 by MoinMoin:AlexanderSchremmer
-        - Thanks to Spreadshirt
+    @copyright: 2005 MoinMoin:AlexanderSchremmer (Thanks to Spreadshirt)
     @license: GNU GPL, see COPYING for details.
 """
 

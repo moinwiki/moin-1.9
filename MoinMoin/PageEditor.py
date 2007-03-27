@@ -4,8 +4,8 @@
     
     PageEditor is used for r/w access to a wiki page (edit, rename, delete operations).
 
-    @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>
-                2005-2006 by MoinMoin:ThomasWaldmann
+    @copyright: 2000-2004 by Juergen Hermann <jh@web.de>,
+                2005-2007 by MoinMoin:ThomasWaldmann,
                 2007 by ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """

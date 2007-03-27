@@ -2,7 +2,7 @@
 """
     MoinMoin - MoinMoin.macro Tests
 
-    @copyright: 2003-2004 by Jürgen Hermann <jh@web.de>,
+    @copyright: 2003-2004 by Juergen Hermann <jh@web.de>,
                 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """

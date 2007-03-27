@@ -5,7 +5,7 @@
     This macro has the main purpose of being used by extensions that write
     data to wiki pages but want to ensure that it is properly translated.
 
-    @copyright: 2006 by MoinMoin:AlexanderSchremmer
+    @copyright: 2006 MoinMoin:AlexanderSchremmer
     @license: GNU GPL, see COPYING for details.
 """
 

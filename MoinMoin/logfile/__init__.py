@@ -4,7 +4,7 @@
 
     This module supports buffered log reads, iterating forward and backward line-by-line, etc.
 
-    @copyright: 2005-2007 by Thomas Waldmann (MoinMoin:ThomasWaldmann)
+    @copyright: 2005-2007 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 import logging

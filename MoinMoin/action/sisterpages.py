@@ -6,7 +6,7 @@
     can implement SisterWiki functionality easily.
     See: http://usemod.com/cgi-bin/mb.pl?SisterSitesImplementationGuide
     
-    @copyright: 2007 by MoinMoin:ThomasWaldmann
+    @copyright: 2007 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 

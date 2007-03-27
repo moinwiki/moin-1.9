@@ -8,7 +8,7 @@
           A lot of code here is duplicated in stats.useragents.
           Maybe both can use same base class, maybe some parts are useful to other code.
 
-    @copyright: 2002-2004 by Jürgen Hermann <jh@web.de>
+    @copyright: 2002-2004 Juergen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
 

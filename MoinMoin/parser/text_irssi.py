@@ -2,8 +2,8 @@
 """
     MoinMoin - IRC Log Parser (irssi style logs)
 
-    @copyright: 2004 by Thomas Waldmann
-    @copyright: 2006 by Georg Brandl (support for /actions)
+    @copyright: 2004 Thomas Waldmann,
+                2006 Georg Brandl (support for /actions)
     @license: GNU GPL, see COPYING for details.
 """
 

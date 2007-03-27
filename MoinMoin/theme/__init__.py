@@ -2,7 +2,7 @@
 """
     MoinMoin - Theme Package
 
-    @copyright: 2003-2007 by MoinMoin:ThomasWaldmann
+    @copyright: 2003-2007 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 

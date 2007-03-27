@@ -2,7 +2,7 @@
 """
     MoinMoin - Plain Text Parser, fallback for text/*
 
-    @copyright: 2000, 2001, 2002 by Jürgen Hermann <jh@web.de>
+    @copyright: 2000-2002 Juergen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
 

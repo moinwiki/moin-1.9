@@ -2,9 +2,8 @@
    MoinMoin - Subscribeuser - Action
    Subscribe a user to a page
 
-   @copyright: Daniela Nicklas <nicklas@informatik.uni-stuttgart.de>, 2003
-   @copyright: 2005 MoinMoin:AlexanderSchremmer
-   
+   @copyright: 2003 Daniela Nicklas <nicklas@informatik.uni-stuttgart.de>,
+               2005 MoinMoin:AlexanderSchremmer
    @license: GNU GPL, see COPYING for details.
 """
 

@@ -5,7 +5,7 @@
     Created by and for crw.
     Later it was rewritten by Nir Soffer for MoinMoin release 1.3.
 
-    @copyright: 2005 by Nir Soffer
+    @copyright: 2005 Nir Soffer
     @license: GNU GPL, see COPYING for details.  
 """
 

@@ -3,9 +3,9 @@
 
     Create a new page with optional template. Can be used with NewPage.py macro.
 
-    @copyright: 2004 Vito Miliano (vito_moinnewpagewithtemplate@perilith.com)
-    @copyright: 2004 by Nir Soffer <nirs@freeshell.org>
-    @copyright: 2004 Alexander Schremmer <alex AT alexanderweb DOT de>
+    @copyright: 2004 Vito Miliano (vito_moinnewpagewithtemplate@perilith.com),
+                2004 Nir Soffer <nirs@freeshell.org>,
+                2004 Alexander Schremmer <alex AT alexanderweb DOT de>
     @license: GNU GPL, see COPYING for details.
 """
 

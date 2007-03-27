@@ -1,8 +1,8 @@
 """
     MoinMoin - Binary patching and diffing
 
-    @copyright: 2005 Matt Mackall <mpm@selenic.com>
-    @copyright: 2006 MoinMoin:AlexanderSchremmer
+    @copyright: 2005 Matt Mackall <mpm@selenic.com>,
+                2006 MoinMoin:AlexanderSchremmer
     
     Algorithm taken from mercurial's mdiff.py
     

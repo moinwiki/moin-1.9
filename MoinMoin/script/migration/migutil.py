@@ -2,7 +2,7 @@
 """
     MoinMoin - utility functions used by the migration scripts
 
-    @copyright: 2005 by Thomas Waldmann (MoinMoin:ThomasWaldmann)
+    @copyright: 2005 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 import os, sys, shutil

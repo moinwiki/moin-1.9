@@ -13,7 +13,7 @@
                mig scripts ONCE and in correct order manually before attempting
                to use the new style migration stuff.
                
-    @copyright: 2006 by Thomas Waldmann
+    @copyright: 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 

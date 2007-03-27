@@ -2,8 +2,8 @@
 """
     MoinMoin - ReStructured Text Parser
 
-    @copyright: 2004 by Matthew Gilbert <gilbert AT voxmea DOT net>
-        and by Alexander Schremmer <alex AT alexanderweb DOT de>
+    @copyright: 2004 Matthew Gilbert <gilbert AT voxmea DOT net>,
+                2004 Alexander Schremmer <alex AT alexanderweb DOT de>
     @license: GNU GPL, see COPYING for details.
 
     REQUIRES docutils 0.3.10 or later (must be later than December 30th, 2005)

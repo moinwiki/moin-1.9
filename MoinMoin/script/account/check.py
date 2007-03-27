@@ -2,7 +2,7 @@
 """
     MoinMoin - check / process user accounts
 
-    @copyright: 2003-2006 by MoinMoin:ThomasWaldmann
+    @copyright: 2003-2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 
     Why is this needed?

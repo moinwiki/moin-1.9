@@ -2,7 +2,8 @@
 """
     MoinMoin - UserPreferences Form and User Browser
 
-    @copyright: 2001-2004 by Jürgen Hermann <jh@web.de>
+    @copyright: 2001-2004 Juergen Hermann <jh@web.de>,
+                2003-2007 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 

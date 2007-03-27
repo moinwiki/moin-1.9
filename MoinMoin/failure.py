@@ -1,10 +1,10 @@
 # -*- coding: iso-8859-1 -*-
 """ MoinMoin failure
 
-Handle fatal errors by showing a message and debugging information.
+    Handle fatal errors by showing a message and debugging information.
 
-@copyright: 2004, 2005 by Nir Soffer <nirs@freeshell.org>
-@license: GNU GPL, see COPYING for details.
+    @copyright: 2004-2005 Nir Soffer <nirs@freeshell.org>
+    @license: GNU GPL, see COPYING for details.
 """
 import sys, os, logging
 

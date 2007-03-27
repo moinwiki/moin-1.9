@@ -4,7 +4,7 @@
 
     We try to support more than ASCII here.
 
-    @copyright: 2006 by ThomasWaldmann MoinMoin:ThomasWaldmann
+    @copyright: 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 

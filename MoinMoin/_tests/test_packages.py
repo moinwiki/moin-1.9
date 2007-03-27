@@ -1,9 +1,9 @@
 # -*- coding: iso-8859-1 -*-
 """
-MoinMoin - MoinMoin.packages tests
+    MoinMoin - MoinMoin.packages tests
 
-@copyright: 2005 MoinMoin:AlexanderSchremmer
-@license: GNU GPL, see COPYING for details.
+    @copyright: 2005 MoinMoin:AlexanderSchremmer
+    @license: GNU GPL, see COPYING for details.
 """
 
 from unittest import TestCase

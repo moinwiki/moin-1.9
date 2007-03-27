@@ -5,7 +5,7 @@
     Refer to the FullSearch documentation for details.
     This macro is cached regardless of the validity of the data.
 
-    @copyright: 2005 by MoinMoin:AlexanderSchremmer
+    @copyright: 2005 MoinMoin:AlexanderSchremmer
     @license: GNU GPL, see COPYING for details.
 """
 

@@ -5,6 +5,7 @@
 
     http://feedvalidator.org/
 
+    @copyright: 2006-2007 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 import StringIO, re, time

@@ -4,7 +4,7 @@
 
     Depends on: "xls2csv" command from "catdoc" package
     
-    @copyright: 2006 by ThomasWaldmann MoinMoin:ThomasWaldmann
+    @copyright: 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 

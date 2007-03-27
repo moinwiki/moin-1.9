@@ -2,7 +2,7 @@
 """
     MoinMoin - dialog
 
-    @copyright: 2004 by Nir Soffer <nirs@freeshell.org>
+    @copyright: 2004 Nir Soffer <nirs@freeshell.org>
     @license: GNU GPL, see COPYING for details.
 """
 

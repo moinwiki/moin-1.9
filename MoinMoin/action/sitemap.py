@@ -4,7 +4,7 @@
 
     Generate a URL list of all your pages (using google's sitemap XML format).
 
-    @copyright: 2006 by Thomas Waldmann, MoinMoin:ThomasWaldmann
+    @copyright: 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 import time

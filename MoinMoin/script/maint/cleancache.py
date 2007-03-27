@@ -12,7 +12,7 @@
     text_html is the name of the cache file used for compiled pages formatted
     by the wiki text to html formatter,
 
-    @copyright: 2005-2006 by MoinMoin:ThomasWaldmann
+    @copyright: 2005-2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 

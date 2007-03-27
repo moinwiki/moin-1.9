@@ -17,7 +17,7 @@
 
     Then run this code with twistd -y yourcode.py. See moin_twisted script.
 
-    @copyright: 2004 by Thomas Waldmann, Oliver Graf, Nir Soffer
+    @copyright: 2004 Thomas Waldmann, Oliver Graf, Nir Soffer
     @license: GNU GPL, see COPYING for details.
 """
 

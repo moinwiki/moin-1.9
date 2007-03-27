@@ -6,7 +6,7 @@
     reading some .htpasswd file) or Twisted (will accept HTTP auth against
     password stored in moin user profile, but currently will NOT ask for auth).
 
-    @copyright: 2006 by MoinMoin:ThomasWaldmann
+    @copyright: 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 from MoinMoin import config, user

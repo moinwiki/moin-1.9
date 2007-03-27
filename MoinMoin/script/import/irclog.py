@@ -10,8 +10,8 @@
     Usage:
     moin --config-dir=... --wiki-url=... import irclog --author=IrcLogImporter --file-dir=.
     
-    @copyright: 2005 by MoinMoin:AlexanderSchremmer
-                2006 by MoinMoin:ThomasWaldmann
+    @copyright: 2005 MoinMoin:AlexanderSchremmer,
+                2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 

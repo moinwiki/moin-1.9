@@ -105,8 +105,6 @@
 
 
     MODIFICATION HISTORY:
-        @copyright: 2006 by Reimar Bauer (R.Bauer@fz-juelich.de)      
-        @license: GNU GPL, see COPYING for details.
         initial version: 1.5.0-1
         svg was added by AndrewArmstrong
         2006-05-04 TomSi: added mp3 support
@@ -118,6 +116,9 @@
         2006-10-08 RB type is needed on some platforms, some more keywords added
         2007-02-10 OliverSiemoneit: alt and noembed tags added for AccessibleMoin; fixed
                    output abstraction violation.
+
+    @copyright: 2006 Reimar Bauer (R.Bauer@fz-juelich.de)      
+    @license: GNU GPL, see COPYING for details.
 """
 import mimetypes
 

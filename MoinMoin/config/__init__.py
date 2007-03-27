@@ -2,7 +2,7 @@
 """
     MoinMoin - site-wide configuration defaults (NOT per single wiki!)
 
-    @copyright: 2005-2006 by Thomas Waldmann (MoinMoin:ThomasWaldmann)
+    @copyright: 2005-2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 import re

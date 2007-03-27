@@ -2,8 +2,8 @@
 """
     MoinMoin - Package Installer
 
-    @copyright: 2005 by MoinMoin:AlexanderSchremmer
-                2007 by ReimarBauer
+    @copyright: 2005 MoinMoin:AlexanderSchremmer,
+                2007 ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 

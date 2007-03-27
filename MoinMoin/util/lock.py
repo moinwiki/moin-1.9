@@ -2,7 +2,7 @@
 """
     MoinMoin - locking functions
 
-    @copyright: 2005 by Florian Festi, Nir Soffer
+    @copyright: 2005 Florian Festi, Nir Soffer
     @license: GNU GPL, see COPYING for details.
 """
 

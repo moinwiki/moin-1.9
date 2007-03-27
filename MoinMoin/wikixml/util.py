@@ -2,7 +2,7 @@
 """
     MoinMoin - XML Utilities
 
-    @copyright: 2001 by Jürgen Hermann <jh@web.de>
+    @copyright: 2001 Juergen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
 

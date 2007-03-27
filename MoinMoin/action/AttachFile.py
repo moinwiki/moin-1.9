@@ -18,7 +18,7 @@
     To insert an attachment into the page, use the "attachment:" pseudo schema.
 
     @copyright: 2001 by Ken Sugino (sugino@mediaone.net),
-                2001-2004 by Jürgen Hermann <jh@web.de>,
+                2001-2004 by Juergen Hermann <jh@web.de>,
                 2005 MoinMoin:AlexanderSchremmer,
                 2005 DiegoOngaro at ETSZONE (diego@etszone.com),
                 2005-2006 MoinMoin:ReimarBauer,

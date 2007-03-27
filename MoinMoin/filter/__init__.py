@@ -2,7 +2,7 @@
 """
     MoinMoin - Filter Package
 
-    @copyright: 2006 by Thomas Waldmann
+    @copyright: 2006 Thomas Waldmann
     @license: GNU GPL, see COPYING for details.
 """
 

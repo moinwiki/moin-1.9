@@ -2,7 +2,7 @@
 """
 	MoinMoin - Java Source Parser
 
-    @copyright: 2002 by Taesu Pyo <bigflood@hitel.net>
+    @copyright: 2002 Taesu Pyo <bigflood@hitel.net>
     @license: GNU GPL, see COPYING for details.
 
 """

@@ -6,7 +6,7 @@
     As it is, this script is mostly useful for the MoinMoin release maintainer
     using: moin ... --wiki-url=moinmaster.wikiwikiweb.de/ maint globaledit
     
-    @copyright: 2004-2006 by MoinMoin:ThomasWaldmann
+    @copyright: 2004-2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 debug = False

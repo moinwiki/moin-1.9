@@ -2,7 +2,8 @@
 """
     MoinMoin caching module
 
-    @copyright: 2001-2004 by Jürgen Hermann <jh@web.de>
+    @copyright: 2001-2004 by Juergen Hermann <jh@web.de>,
+                2006-2007 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 

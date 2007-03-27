@@ -8,7 +8,7 @@
     If you want modified behaviour, just override the stuff you
     want to change in the child class.
 
-    @copyright: 2003-2006 by MoinMoin:ThomasWaldmann
+    @copyright: 2003-2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 

@@ -20,8 +20,8 @@
     when really necessary (like for transferring binary files like
     attachments maybe).
 
-    @copyright: 2003-2006 MoinMoin:ThomasWaldmann
-    @copyright: 2004-2006 MoinMoin:AlexanderSchremmer
+    @copyright: 2003-2006 MoinMoin:ThomasWaldmann,
+                2004-2006 MoinMoin:AlexanderSchremmer
     @license: GNU GPL, see COPYING for details
 """
 from MoinMoin.util import pysupport

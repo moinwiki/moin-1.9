@@ -5,9 +5,9 @@
     Collect and emit footnotes. Note that currently footnote
     text cannot contain wiki markup.
 
-    @copyright: 2002 by Jürgen Hermann <jh@web.de>
-                2007 Reimar Bauer
-                2007 by Johannes Berg
+    @copyright: 2002 Juergen Hermann <jh@web.de>,
+                2007 Reimar Bauer,
+                2007 Johannes Berg
     @license: GNU GPL, see COPYING for details.
 """
 

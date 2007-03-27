@@ -4,7 +4,7 @@
 
     Shows the current traceback of all threads.
 
-    @copyright: 2006 by MoinMoin:AlexanderSchremmer
+    @copyright: 2006 MoinMoin:AlexanderSchremmer
     @license: GNU GPL, see COPYING for details.
 """
 import os, time

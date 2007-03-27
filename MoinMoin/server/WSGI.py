@@ -1,7 +1,7 @@
 """
     MoinMoin - WSGI application
 
-    @copyright: 2005 by Anakim Border <akborder@gmail.com>
+    @copyright: 2005 Anakim Border <akborder@gmail.com>
     @license: GNU GPL, see COPYING for details.
 """
 

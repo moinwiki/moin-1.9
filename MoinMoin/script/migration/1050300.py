@@ -4,7 +4,7 @@
 
     We add a filter plugin dir here.
 
-    @copyright: 2006 by Thomas Waldmann
+    @copyright: 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 from MoinMoin.script.migration.migutil import opj, listdir, copy_file, move_file, copy_dir, makedir

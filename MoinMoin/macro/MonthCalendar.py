@@ -6,8 +6,8 @@
     The days are links to Wiki pages following this naming convention:
     BasePageName/year-month-day
 
-    @copyright: 2002-2005 by Thomas Waldmann <ThomasWaldmann@gmx.de>
-    @license: GNU GPL - see COPYING for details.
+    @copyright: 2002-2005 MoinMoin:ThomasWaldmann
+    @license: GNU GPL, see COPYING for details.
 
     Revisions:
     * first revision without a number (=1.0):

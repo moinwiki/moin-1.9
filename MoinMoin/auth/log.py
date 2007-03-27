@@ -5,7 +5,7 @@
     This does nothing except logging the auth parameters (the password is NOT
     logged, of course).
 
-    @copyright: 2006 by MoinMoin:ThomasWaldmann
+    @copyright: 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 

@@ -5,7 +5,7 @@
     This action allows you to rename a page.
 
     @copyright: 2002-2004 Michael Reinsch <mr@uue.org>,
-                2006 MoinMoin:ThomasWaldmann
+                2006 MoinMoin:ThomasWaldmann,
                 2007 ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """

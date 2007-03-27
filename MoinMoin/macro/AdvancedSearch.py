@@ -4,6 +4,8 @@
 
     [[AdvancedSearch]]
         displays advanced search dialog.
+
+    @license: GNU GPL, see COPYING for details.
 """
 
 from MoinMoin.i18n import languages

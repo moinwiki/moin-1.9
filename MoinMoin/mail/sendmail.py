@@ -2,7 +2,7 @@
 """
     MoinMoin - email helper functions
 
-    @copyright: 2003 by Jürgen Hermann <jh@web.de>
+    @copyright: 2003 Juergen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
 

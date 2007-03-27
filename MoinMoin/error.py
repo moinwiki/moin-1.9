@@ -3,7 +3,7 @@
 
     Supply Error class and sub classes used to raise various errors
 
-    @copyright: 2004, 2005 by Nir Soffer <nirs@freeshell.org>
+    @copyright: 2004-2005 Nir Soffer <nirs@freeshell.org>
     @license: GNU GPL, see COPYING for details.
 """
 

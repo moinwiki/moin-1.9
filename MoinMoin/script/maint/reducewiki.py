@@ -20,7 +20,7 @@
         * data/pages/PageName/attachments/*
           -> just copy
 
-    @copyright: 2005-2006 by MoinMoin:ThomasWaldmann
+    @copyright: 2005-2006 MoinMoin:ThomasWaldmann
     @license: GPL, see COPYING for details
 """
 

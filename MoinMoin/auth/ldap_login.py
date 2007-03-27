@@ -5,7 +5,7 @@
     This code only creates a user object, the session has to be established by
     the auth.moin_session auth plugin.
     
-    @copyright: 2006 by MoinMoin:ThomasWaldmann, Nick Phillips
+    @copyright: 2006 MoinMoin:ThomasWaldmann, Nick Phillips
     @license: GNU GPL, see COPYING for details.
 """
 import sys

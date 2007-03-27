@@ -6,8 +6,8 @@
     with the same word as the current pagename. If only one matching
     page is found, that page is displayed directly.
 
-    @copyright: (c) 2001 by Richard Jones <richard@bizarsoftware.com.au>
-    @copyright: (c) 2001 by Jürgen Hermann <jh@web.de>
+    @copyright: 2001 Richard Jones <richard@bizarsoftware.com.au>,
+                2001 Juergen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
 

@@ -2,7 +2,7 @@
 """
     MoinMoin - Action for saving a page
 
-    @copyright: 2007 by Reimar Bauer 
+    @copyright: 2007 Reimar Bauer 
     @license: GNU GPL, see COPYING for details.
 """
 

@@ -2,7 +2,7 @@
 """
     MoinMoin - auth plugin doing a check against MySQL group db
 
-    @copyright: 2006 by Nick Phillips
+    @copyright: 2006 Nick Phillips
     @license: GNU GPL, see COPYING for details.
 """
 

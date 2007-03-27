@@ -2,7 +2,7 @@
 """
     MoinMoin - modern theme
 
-    @copyright: 2003-2005 by Nir Soffer, Thomas Waldmann
+    @copyright: 2003-2005 Nir Soffer, Thomas Waldmann
     @license: GNU GPL, see COPYING for details.
 """
 

@@ -2,7 +2,7 @@
 """
     MoinMoin - Create an action link
 
-    @copyright: 2004 by Johannes Berg <johannes@sipsolutions.de>
+    @copyright: 2004 Johannes Berg <johannes@sipsolutions.de>
     @license: GNU GPL, see COPYING for details.
 """
 

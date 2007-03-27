@@ -4,8 +4,8 @@
 
     Displays page history, some general page infos and statistics.
 
-    @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>,
-                2006 by MoinMoin:ThomasWaldmann
+    @copyright: 2000-2004 Juergen Hermann <jh@web.de>,
+                2006-2007 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 

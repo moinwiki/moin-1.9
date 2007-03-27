@@ -4,7 +4,7 @@
 
     This macro creates charts from the data in "event.log".
 
-    @copyright: 2002-2004 by Jürgen Hermann <jh@web.de>
+    @copyright: 2002-2004 Juergen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
 

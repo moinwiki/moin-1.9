@@ -2,8 +2,8 @@
 """
     MoinMoin - Side by side diffs
 
-    @copyright: 2002 by Jürgen Hermann <jh@web.de>
-    @copyright: 2002 by Scott Moonen <smoonen@andstuff.org>
+    @copyright: 2002 Juergen Hermann <jh@web.de>,
+                2002 Scott Moonen <smoonen@andstuff.org>
     @license: GNU GPL, see COPYING for details.
 """
 

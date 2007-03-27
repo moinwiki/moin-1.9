@@ -8,7 +8,7 @@
     Teud: http://purl.net/wiki/python/TeudProject
     4XSLT: http://4suite.org/
 
-    @copyright: 2001 by Jürgen Hermann <jh@web.de>
+    @copyright: 2001 Juergen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
 

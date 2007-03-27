@@ -4,7 +4,7 @@
     It also helps MoinMoin development team  to improve xmlrpc stuff and get
     some statistics about MoinMoin usage.
 
-    @copyright: 2004 Thomas Waldmann
+    @copyright: 2004 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.    
 """
 

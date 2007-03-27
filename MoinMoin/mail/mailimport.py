@@ -4,8 +4,8 @@
     Just call this script with the URL of the wiki as a single argument
     and feed the mail into stdin.
 
-    @copyright: 2006 by MoinMoin:AlexanderSchremmer,
-                2006 by MoinMoin:ThomasWaldmann
+    @copyright: 2006 MoinMoin:AlexanderSchremmer,
+                2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 

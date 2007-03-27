@@ -3,7 +3,8 @@
 """
     MoinMoin - Version Information
 
-    @copyright: 2000-2006 by Jürgen Hermann <jh@web.de>
+    @copyright: 2000-2006 Juergen Hermann <jh@web.de>,
+                2003-2007 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 import sys

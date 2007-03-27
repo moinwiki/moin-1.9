@@ -1,7 +1,7 @@
 """
     MoinMoin - convert from html to wiki markup
 
-    @copyright: (c) Bastian Blank, Florian Festi, Thomas Waldmann, Reimar Bauer
+    @copyright: 2005-2006 Bastian Blank, Florian Festi, Thomas Waldmann, Reimar Bauer
     @license: GNU GPL, see COPYING for details.
 """
 

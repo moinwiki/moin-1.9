@@ -11,7 +11,7 @@
 
     Using "form" directly is deprecated and should be replaced by "request.form".
 
-    @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>,
+    @copyright: 2000-2004 Juergen Hermann <jh@web.de>,
                 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """

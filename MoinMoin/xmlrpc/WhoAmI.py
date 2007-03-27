@@ -1,9 +1,8 @@
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - Tells who you are and whether the wiki trusts you.
-               
 
-    @copyright: 2005 by Thomas Waldmann (MoinMoin:ThomasWaldmann)
+    @copyright: 2005 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 

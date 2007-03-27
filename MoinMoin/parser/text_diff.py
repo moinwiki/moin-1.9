@@ -2,8 +2,8 @@
 """
     MoinMoin - Diff Parser - highlights diff tool output
 
-    @copyright: 2006 by Emilio Lopes, inspired by previous work
-                done by Fabien Ninoles and Jürgen Hermann
+    @copyright: 2006 Emilio Lopes, inspired by previous work
+                done by Fabien Ninoles and Juergen Hermann
     @license: GNU GPL, see COPYING for details.
 """
 

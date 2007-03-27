@@ -4,7 +4,7 @@
 
     See "base.py" for the formatter interface.
 
-    @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>
+    @copyright: 2000-2004 by Juergen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
 import re

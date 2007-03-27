@@ -2,8 +2,9 @@
 """
     MoinMoin - Wiki Utility Functions
 
-    @copyright: 2000 - 2004 by Jürgen Hermann <jh@web.de>
-                2007 by Reimar Bauer
+    @copyright: 2000-2004 Juergen Hermann <jh@web.de>,
+                2005-2007 MoinMoin:ThomasWaldmann,
+                2007 Reimar Bauer
     @license: GNU GPL, see COPYING for details.
 """
 

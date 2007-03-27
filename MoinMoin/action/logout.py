@@ -5,7 +5,7 @@
     The real logout is done in MoinMoin.request.
     Here is just some stuff to notify the user.
 
-    @copyright: 2005-2006 by Radomirs Cirskis <nad2000@gmail.com>
+    @copyright: 2005-2006 Radomirs Cirskis <nad2000@gmail.com>
     @license: GNU GPL, see COPYING for details.
 """
 

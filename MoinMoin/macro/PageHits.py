@@ -2,7 +2,7 @@
 """
     MoinMoin - per page hit statistics
 
-    @copyright: 2004-2005 ThomasWaldmann (MoinMoin:ThomasWaldmann)
+    @copyright: 2004-2005 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details
 
 """

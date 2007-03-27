@@ -8,7 +8,7 @@
          * You need to configure eGroupware in the "header setup" to use
            "php sessions plus restore"
 
-    @copyright: 2005 by MoinMoin:AlexanderSchremmer (Thanks to Spreadshirt)
+    @copyright: 2005 MoinMoin:AlexanderSchremmer (Thanks to Spreadshirt)
     @license: GNU GPL, see COPYING for details.
 """
 

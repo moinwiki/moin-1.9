@@ -2,7 +2,7 @@
 """
     MoinMoin - RandomPage Macro
 
-    @copyright: 2000 by Jürgen Hermann <jh@web.de>
+    @copyright: 2000 Juergen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
 

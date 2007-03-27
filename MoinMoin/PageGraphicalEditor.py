@@ -4,7 +4,8 @@
 
     Same as PageEditor, but we use the HTML based GUI editor here.
 
-    @copyright: (c) Bastian Blank, Florian Festi, Thomas Waldmann
+    @copyright: 2006 Bastian Blank, Florian Festi,
+                2006-2007 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 import re

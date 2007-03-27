@@ -7,7 +7,7 @@
     Perhaps this should be rewritten using another CSV lib
     because the standard module csv does not support unicode.
 
-    @copyright: 2004 by Oliver Graf <ograf@bitart.de>, Alexander Schremmer
+    @copyright: 2004 Oliver Graf <ograf@bitart.de>, Alexander Schremmer
     @license: GNU GPL, see COPYING for details.
 """
 

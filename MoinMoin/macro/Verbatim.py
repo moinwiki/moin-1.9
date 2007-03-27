@@ -2,7 +2,7 @@
 """
     Outputs the text verbatimly.
 
-    @copyright: 2005 by Thomas Waldmann
+    @copyright: 2005 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details
 """
 

@@ -1,16 +1,16 @@
 # -*- coding: ascii -*-
 """
-Thread monitor - Check the state of all threads.
+    Thread monitor - Check the state of all threads.
 
-Just call activate_hook() as early as possible in program execution.
-Then you can trigger the output of tracebacks of all threads
-by calling trigger_dump().
+    Just call activate_hook() as early as possible in program execution.
+    Then you can trigger the output of tracebacks of all threads
+    by calling trigger_dump().
 
-Usage of Python 2.5 is recommended because it allows for a much safer
-and faster frame extraction.
+    Usage of Python 2.5 is recommended because it allows for a much safer
+    and faster frame extraction.
 
-@copyright: 2006 Alexander Schremmer <alex AT alexanderweb DOT de>
-@license: GNU GPL Version 2
+    @copyright: 2006 Alexander Schremmer <alex AT alexanderweb DOT de>
+    @license: GNU GPL Version 2
 """
 
 

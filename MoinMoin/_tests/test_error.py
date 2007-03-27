@@ -2,8 +2,8 @@
 """
     MoinMoin - MoinMoin.error Tests
 
-@copyright: 2003-2004 by Nir Soffer <nirs AT freeshell DOT org>
-@license: GNU GPL, see COPYING for details.
+    @copyright: 2003-2004 by Nir Soffer <nirs AT freeshell DOT org>
+    @license: GNU GPL, see COPYING for details.
 """
 
 import unittest

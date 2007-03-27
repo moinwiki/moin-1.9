@@ -22,8 +22,8 @@
     TODO: If we need to have context for some cases, either we add a context argument,
           or make another macro that uses context, which may be easier to use.
 
-    @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>,
-                2005 MoinMoin:FranzPletz
+    @copyright: 2000-2004 Juergen Hermann <jh@web.de>,
+                2006 MoinMoin:FranzPletz
     @license: GNU GPL, see COPYING for details.
 """
 

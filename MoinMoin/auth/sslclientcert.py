@@ -5,8 +5,8 @@
     Currently not supported for Twisted web server, but only for web servers
     setting SSL_CLIENT_* environment (e.g. Apache).
     
-    @copyright: 2006 by MoinMoin:ThomasWaldmann,
-                2003 by Martin v. Löwis
+    @copyright: 2003 Martin v. Loewis,
+                2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 

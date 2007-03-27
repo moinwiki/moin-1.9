@@ -9,9 +9,9 @@
     * stylesheet can be extended to support other format:
         e.g. Docbook parser using docbook->html .xsl stylesheet
 
-    @copyright: 2001, 2003 by Jürgen Hermann <jh@web.de>
-    @copyright: 2005 by Henry Ho <henryho167@hotmail.com>
-    @copyright: 2005 by MoinMoin:AlexanderSchremmer
+    @copyright: 2001-2003 Juergen Hermann <jh@web.de>,
+                2005 Henry Ho <henryho167@hotmail.com>,
+                2005 by MoinMoin:AlexanderSchremmer
     @license: GNU GPL, see COPYING for details.
 """
 

@@ -20,8 +20,8 @@
     TODO: as soon as we have some "farm / server plugin dir", extend this to
           load translations from there, too.
 
-    @copyright: 2001-2004 by Jürgen Hermann <jh@web.de>,
-                2005-2006 by MoinMoin:ThomasWaldmann
+    @copyright: 2001-2004 Juergen Hermann <jh@web.de>,
+                2005-2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 debug = 0

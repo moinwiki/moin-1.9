@@ -2,9 +2,8 @@
 """
     MoinMoin - Action macro for page creation from file or attach file to current page
 
-    MODIFICATION HISTORY:
-        @copyright: 2007 by Reimar Bauer 
-        @license: GNU GPL, see COPYING for details.
+    @copyright: 2007 Reimar Bauer 
+    @license: GNU GPL, see COPYING for details.
 """
 import os
 from MoinMoin import wikiutil, config

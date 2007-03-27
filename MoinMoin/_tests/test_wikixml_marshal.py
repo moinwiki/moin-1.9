@@ -2,7 +2,7 @@
 """
     MoinMoin - MoinMoin.wikixml.marshal Tests
 
-    @copyright: 2002-2004 by Jürgen Hermann <jh@web.de>
+    @copyright: 2002-2004 by Juergen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
 

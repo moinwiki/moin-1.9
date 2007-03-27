@@ -15,8 +15,8 @@
     Additionally, all words on the page "LocalSpellingWords" are added to
     the list of valid words, if that page exists.
 
-    @copyright: 2001 by Richard Jones <richard@bizarsoftware.com.au>  
-    @copyright: 2001-2004 by Jürgen Hermann <jh@web.de>  
+    @copyright: 2001 Richard Jones <richard@bizarsoftware.com.au>,
+                2001-2004 Juergen Hermann <jh@web.de>  
     @license: GNU GPL, see COPYING for details.  
 """
 

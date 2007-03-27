@@ -2,7 +2,7 @@
 """
     MoinMoin - MyPages - assisting creation of Homepage subpages
 
-    @copyright: (c) Bastian Blank, Florian Festi, Thomas Waldmann
+    @copyright: 2005-2006 Bastian Blank, Florian Festi, Thomas Waldmann
     @license: GNU GPL, see COPYING for details.
 """
 

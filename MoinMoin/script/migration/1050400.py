@@ -4,7 +4,7 @@
 
     Nothing to do, we just return the new data dir revision.
 
-    @copyright: 2006 by Thomas Waldmann
+    @copyright: 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 

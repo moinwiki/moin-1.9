@@ -4,7 +4,7 @@
 
     This action shows all sync tags related to a specific page.
 
-    @copyright: 2006 by MoinMoin:AlexanderSchremmer
+    @copyright: 2006 MoinMoin:AlexanderSchremmer
     @license: GNU GPL, see COPYING for details.
 """
 
