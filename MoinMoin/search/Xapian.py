@@ -11,6 +11,7 @@ debug = True
 import os, re
 
 import xapian
+from xapian import Query
 
 from MoinMoin.support.xapwrap import document as xapdoc
 from MoinMoin.support.xapwrap import index as xapidx
@@ -27,7 +28,7 @@ except ImportError:
     Stemmer = None
 
 
-class UnicodeQuery(xapian.Query):
+class UnicodeQuery(Query):
     """ Xapian query object which automatically encodes unicode strings """
     def __init__(self, *args, **kwargs):
         """
@@ -43,7 +44,7 @@ class UnicodeQuery(xapian.Query):
                 term = [t.encode(self.encoding) for t in term]
             nargs.append(term)
 
-        xapian.Query.__init__(self, *nargs, **kwargs)
+        Query.__init__(self, *nargs, **kwargs)
 
 
 ##############################################################################

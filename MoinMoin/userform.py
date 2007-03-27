@@ -64,7 +64,7 @@ class UserSettingsHandler:
                 return _("""This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.""")
             try:
-                email = form['email'][0].lower()
+                email = wikiutil.clean_comment(form['email'][0].lower())
             except KeyError:
                 return _("Please provide a valid email address!")
 
@@ -125,7 +125,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
                     return "Can't encode password: %s" % str(err)
 
             # try to get the (required) email
-            email = form.get('email', [''])[0]
+            email = wikiutil.clean_comment(form.get('email', [''])[0])
             theuser.email = email.strip()
             if not theuser.email:
                 return _("Please provide your email address. If you lose your"
@@ -215,7 +215,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
 
             if not 'email' in theuser.auth_attribs:
                 # try to get the email
-                email = form.get('email', [theuser.email])[0]
+                email = wikiutil.clean_comment(form.get('email', [theuser.email])[0])
                 theuser.email = email.strip()
 
             # Require email
@@ -235,7 +235,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
 
             if not 'aliasname' in theuser.auth_attribs:
                 # aliasname
-                theuser.aliasname = form.get('aliasname', [''])[0]
+                theuser.aliasname = wikiutil.clean_comment(form.get('aliasname', [''])[0])
 
             # editor size
             theuser.edit_rows = util.web.getIntegerInput(self.request, 'edit_rows', theuser.edit_rows, 10, 60)

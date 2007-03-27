@@ -473,7 +473,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         """
         User clicked on Cancel button. If edit locking is active,
         delete the current lock file.
-        
+
         @param newtext: the edited text (which has been cancelled)
         @param rev: not used!?
         """
@@ -489,7 +489,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
     def copyPage(self, newpagename, comment=None):
         """
         Copy the current version of the page (keeping the backups, logs and attachments).
-        
+
         @param comment: Comment given by user
         @rtype: unicode
         @return: success flag, error message
@@ -502,7 +502,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 
         if not self.request.user.may.write(newpagename):
             return False, _('You are not allowed to copy this page!')
-    
+
         newpage = PageEditor(request, newpagename)
 
         pageexists_error = _("""'''A page with the name {{{'%s'}}} already exists.'''
@@ -525,8 +525,9 @@ Try a different name.""") % (newpagename,)
             self.error = None
             if not comment:
                 comment = u"## page was copied from %s" % self.page_name
-            if request.user.may.write(newpagename):
-                # If current user has write access
+            if request.user.may.write(self.page_name):
+                # ToDo: check difference to request.user.may.write(newpagename)
+                # If current user has write access to the old page
                 # Save page text with a comment about the old name
                 savetext = u"## page was copied from %s\n%s" % (self.page_name, savetext)
                 newpage.saveText(savetext, 0, comment=comment, index=0, extra=self.page_name, action='SAVE')
@@ -555,7 +556,7 @@ Try a different name.""") % (newpagename,)
         """
         Rename the current version of the page (making a backup before deletion
         and keeping the backups, logs and attachments).
-        
+
         @param comment: Comment given by user
         @rtype: unicode
         @return: success flag, error message
@@ -633,7 +634,7 @@ Try a different name.""") % (newpagename,)
         """
         Delete the current version of the page (making a backup before deletion
         and keeping the backups, logs and attachments).
-        
+
         @param comment: Comment given by user
         @rtype: unicode
         @return: success flag, error message
@@ -835,7 +836,7 @@ Try a different name.""") % (newpagename,)
         You should normalize any text you enter into a page, for
         example, when getting new text from the editor, or when setting
         new text manually.
-                
+
         @param text: text to normalize (unicode)
         @keyword stripspaces: if 1, strip spaces from text
         @rtype: unicode
@@ -928,7 +929,7 @@ Try a different name.""") % (newpagename,)
 
     def _write_file(self, text, action='SAVE', comment=u'', extra=u'', deleted=False):
         """ Write the text to the page file (and make a backup of old page).
-        
+
         @param text: text to save for this page
         @param deleted: if True, then don't write page content (used by deletePage)
         @rtype: int
@@ -1257,7 +1258,7 @@ To leave the editor, press the Cancel button.""") % {
     def release(self, force=0):
         """ 
         Release lock, if we own it.
-        
+
         @param force: if 1, unconditionally release the lock.
         """
         if self.locktype:
