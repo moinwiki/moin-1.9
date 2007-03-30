@@ -23,14 +23,14 @@ class EditedSystemPages:
 
         # Get page list for current user (use this as admin), filter
         # pages that are both underlay and standard pages.
-        def filter(name):
+        def filterfn(name):
             page = Page(self.request, name)
             return (page.isStandardPage(includeDeleted=0) and
                     page.isUnderlayPage(includeDeleted=0))
 
         # Get page filtered page list. We don't need to filter by
         # exists, because our filter check this already.
-        pages = self.request.rootpage.getPageList(filter=filter, exists=0)
+        pages = self.request.rootpage.getPageList(filter=filterfn, exists=0)
 
         # Format as numberd list, sorted by page name         
         pages.sort()

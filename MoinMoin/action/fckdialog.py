@@ -211,7 +211,7 @@ def link_dialog(request):
         pages = [p.page_name for p in searchresult.hits]
         pages.sort()
         pages[0:0] = [name]
-        page_list ='''
+        page_list = '''
          <tr>
           <td colspan=2>
            <select id="sctPagename" size="1" onchange="OnChangePagename(this.value);">

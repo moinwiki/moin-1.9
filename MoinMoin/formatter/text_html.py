@@ -712,7 +712,11 @@ class Formatter(FormatterBase):
                 # add alt and title tags to areas
                 map = re.sub('href\s*=\s*"((?!%TWIKIDRAW%).+?)"', r'href="\1" alt="\1" title="\1"', map)
                 # add in edit links plus alt and title attributes
-                map = map.replace('%TWIKIDRAW%"', edit_link + '" alt="' + _('Edit drawing %(filename)s') % {'filename': self.text(fname)} + '" title="' + _('Edit drawing %(filename)s') % {'filename': self.text(fname)} + '"')
+                map = map.replace('%TWIKIDRAW%"',
+                                  edit_link + 
+                                  '" alt="' + _('Edit drawing %(filename)s') % {'filename': self.text(fname)} + 
+                                  '" title="' + _('Edit drawing %(filename)s') % {'filename': self.text(fname)} +
+                                  '"')
                 # unxml, because 4.01 concrete will not validate />
                 map = map.replace('/>', '>')
                 return (map + self.image(

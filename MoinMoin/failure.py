@@ -103,10 +103,10 @@ function toggleDebugInfo() {
     def formatAllTracebacks(self, formatFuction):
         """ Format multiple tracebacks using formatFunction """
         tracebacks = []
-        for type, value, tb in self.exceptions():
-            if type is None:
+        for ttype, tvalue, tb in self.exceptions():
+            if ttype is None:
                 break
-            tracebacks.append(formatFuction((type, value, tb)))
+            tracebacks.append(formatFuction((ttype, tvalue, tb)))
             del tb
         return ''.join(tracebacks)
 

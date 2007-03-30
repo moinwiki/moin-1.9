@@ -123,7 +123,8 @@ class TableOfContents:
     def parse_line(self, line, pagename):
         # FIXME this also finds "headlines" in {{{ code sections }}}:
         match = self.head_re.match(line)
-        if not match: return
+        if not match:
+            return
         title_text = match.group('htext').strip()
         pntt = pagename + title_text
         self.titles.setdefault(pntt, 0)
@@ -131,8 +132,8 @@ class TableOfContents:
 
         # Get new indent level
         newindent = len(match.group('hmarker'))
-        if newindent > self.maxdepth: return
-        if newindent < self.mindepth: return
+        if newindent > self.maxdepth or newindent < self.mindepth:
+            return
         if not self.indent:
             self.baseindent = newindent - 1
             self.indent = self.baseindent

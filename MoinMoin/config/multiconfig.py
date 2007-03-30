@@ -172,7 +172,8 @@ def getConfig(url):
 
 # This is a way to mark some text for the gettext tools so that they don't
 # get orphaned. See http://www.python.org/doc/current/lib/node278.html.
-def _(text): return text
+def _(text):
+    return text
 
 
 class CacheClass:

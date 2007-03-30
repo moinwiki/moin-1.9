@@ -37,7 +37,8 @@ debug = False
 directions_map = {"up": UP, "down": DOWN, "both": BOTH}
 
 
-class ActionStatus(Exception): pass
+class ActionStatus(Exception):
+    pass
 
 
 class ActionClass(object):

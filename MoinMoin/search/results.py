@@ -510,7 +510,7 @@ class SearchResults:
 
             # Add text after last match and finish the line
             if match.end < end:
-               output.append(f.text(body[match.end:end]))
+                output.append(f.text(body[match.end:end]))
             output.append(f.text(u'...'))
             output.append(f.linebreak(preformatted=0))
 

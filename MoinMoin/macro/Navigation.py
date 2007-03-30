@@ -25,10 +25,10 @@ def _getParent(pagename):
 def _getPages(request, filter_regex=None):
     """ Return a (filtered) list of pages names.
     """
-    filter = None
+    filterfn = None
     if filter_regex:
-        filter = re.compile(filter_regex).match
-    pages = request.rootpage.getPageList(filter=filter)
+        filterfn = re.compile(filter_regex).match
+    pages = request.rootpage.getPageList(filter=filterfn)
     pages.sort()
     return pages
 

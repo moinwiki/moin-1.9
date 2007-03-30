@@ -140,7 +140,7 @@ class Macro:
             return self.defaultDependency
 
     def _macro_TitleSearch(self, args):
-        from FullSearch import search_box
+        from MoinMoin.search.FullSearch import search_box
         return search_box("titlesearch", self)
 
     def _macro_GoTo(self, args):
@@ -182,22 +182,22 @@ class Macro:
         if allpages:
             pages = request.rootpage.getPageList()
         else:
-            def filter(name):
+            def nosyspage(name):
                 return not wikiutil.isSystemPage(request, name)
-            pages = request.rootpage.getPageList(filter=filter)
+            pages = request.rootpage.getPageList(filter=nosyspage)
 
         word_re = re.compile(word_re, re.UNICODE)
-        map = {}
+        wordmap = {}
         for name in pages:
             for word in word_re.findall(name):
                 try:
-                    if not map[word].count(name):
-                        map[word].append(name)
+                    if not wordmap[word].count(name):
+                        wordmap[word].append(name)
                 except KeyError:
-                    map[word] = [name]
+                    wordmap[word] = [name]
 
         # Sort ignoring case
-        tmp = [(word.upper(), word) for word in map]
+        tmp = [(word.upper(), word) for word in wordmap]
         tmp.sort()
         all_words = [item[1] for item in tmp]
 
@@ -280,9 +280,9 @@ class Macro:
         interwiki_list = wikiutil.load_wikimap(self.request)
         buf = StringIO()
         buf.write('<dl>')
-        list = interwiki_list.items() # this is where we cached it
-        list.sort()
-        for tag, url in list:
+        iwlist = interwiki_list.items() # this is where we cached it
+        iwlist.sort()
+        for tag, url in iwlist:
             buf.write('<dt><tt><a href="%s">%s</a></tt></dt>' % (
                 wikiutil.join_wiki(url, 'RecentChanges'), tag))
             if '$PAGE' not in url:
@@ -403,7 +403,7 @@ class Macro:
 
     def _macro_MailTo(self, args):
         from MoinMoin.mail.sendmail import decodeSpamSafeEmail
-        result=''
+        result = ''
         args = args or ''
         if ',' not in args:
             email = args

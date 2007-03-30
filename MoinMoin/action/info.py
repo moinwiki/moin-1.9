@@ -93,8 +93,7 @@ def execute(pagename, request):
 
         def render_action(text, query, **kw):
             kw.update(dict(rel='nofollow'))
-            html = page.link_to(request, text, querystr=query, **kw)
-            return html
+            return page.link_to(request, text, querystr=query, **kw)
 
         # read in the complete log of this page
         log = editlog.EditLog(request, rootpagename=pagename)

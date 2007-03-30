@@ -89,21 +89,21 @@ class CacheEntry:
 
         return needsupdate
 
-    def copyto(self, filename):
-        # currently unused function
-        import shutil
-        tmpfname = self._tmpfilename()
-        fname = self._filename()
-        if not self.locking or self.locking and self.wlock.acquire(1.0):
-            try:
-                shutil.copyfile(filename, tmpfname)
-                # this is either atomic or happening with real locks set:
-                filesys.rename(tmpfname, fname)
-            finally:
-                if self.locking:
-                    self.wlock.release()
-        else:
-            self.request.log("Can't acquire write lock in %s" % self.lock_dir)
+#    def copyto(self, filename):
+#        # currently unused function
+#        import shutil
+#        tmpfname = self._tmpfilename()
+#        fname = self._filename()
+#        if not self.locking or self.locking and self.wlock.acquire(1.0):
+#            try:
+#                shutil.copyfile(filename, tmpfname)
+#                # this is either atomic or happening with real locks set:
+#                filesys.rename(tmpfname, fname)
+#            finally:
+#                if self.locking:
+#                    self.wlock.release()
+#        else:
+#            self.request.log("Can't acquire write lock in %s" % self.lock_dir)
 
     def update(self, content):
         try:

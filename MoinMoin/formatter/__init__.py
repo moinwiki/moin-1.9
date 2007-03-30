@@ -356,6 +356,6 @@ class FormatterBase:
         """
         return ""
 
-    def comment(self, text):
+    def comment(self, text, **kw):
         return ""
 

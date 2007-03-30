@@ -36,10 +36,12 @@ def normalise_pagename(page_name, prefix):
         return page_name
 
 
-class UnsupportedWikiException(Exception): pass
+class UnsupportedWikiException(Exception):
+    pass
 
 
-class NotAllowedException(Exception): pass
+class NotAllowedException(Exception):
+    pass
 
 
 class SyncPage(object):
@@ -424,7 +426,7 @@ class AbstractTagStore(object):
         """ Removes all tags. """
         return NotImplemented
 
-    def fetch(self, iwid_full=None, iw_name=None):
+    def fetch(self, iwid_full=None, direction=None):
         """ Fetches tags by a special IWID or interwiki name. """
         return NotImplemented
 

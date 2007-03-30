@@ -198,7 +198,7 @@ def execute(macro, text, args_re=re.compile(_args_re_pattern), title_re=re.compi
                 request._page_headings.setdefault(pntt, 0)
                 request._page_headings[pntt] += 1
                 if request._page_headings[pntt] > 1:
-                    hid += '-%d'%(request._page_headings[pntt],)
+                    hid += '-%d' % (request._page_headings[pntt], )
                 result.append(
                     macro.formatter.heading(1, level, id=hid) +
                     inc_page.link_to(request, heading, css_class="include-heading-link") +

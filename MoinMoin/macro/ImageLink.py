@@ -120,7 +120,8 @@ def execute(macro, args):
         if '=' in arg:
             key, value = arg.split('=', 1)
             # avoid that urls with "=" are interpreted as keyword
-            if key.lower() not in kwAllowed: continue
+            if key.lower() not in kwAllowed:
+                continue
             kw_count += 1
             kw[str(key.lower())] = wikiutil.escape(value, quote=1)
 

@@ -60,9 +60,9 @@ def edit_logfile_append(self, pagename, pagefile, rev, action, logname='edit-log
     event_logfile(self, pagename, pagefile)
 
 # Parsing and (un)quoting for script files
-def packLine(list, separator="|"):
-    """ Packs a list into a string that is separated by `separator`. """
-    return '|'.join([x.replace('\\', '\\\\').replace(separator, '\\' + separator) for x in list])
+def packLine(items, separator="|"):
+    """ Packs a list of items into a string that is separated by `separator`. """
+    return '|'.join([item.replace('\\', '\\\\').replace(separator, '\\' + separator) for item in items])
 
 def unpackLine(string, separator="|"):
     """ Unpacks a string that was packed by packLine. """

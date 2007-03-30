@@ -34,8 +34,8 @@ def runTest(request):
         request.write('PyXML is missing\n')
 
     request.write('Python Path:\n')
-    for dir in sys.path:
-        request.write('   %s\n' % dir)
+    for path in sys.path:
+        request.write('   %s\n' % path)
 
     # check if the request is a local one
     import socket
@@ -58,12 +58,14 @@ def runTest(request):
     # check eventlog access
     log = eventlog.EventLog(request)
     msg = log.sanityCheck()
-    if msg: request.write("*** %s\n" % msg)
+    if msg:
+        request.write("*** %s\n" % msg)
 
     # check editlog access
     log = editlog.EditLog(request)
     msg = log.sanityCheck()
-    if msg: request.write("*** %s\n" % msg)
+    if msg:
+        request.write("*** %s\n" % msg)
 
     # keep some values to ourselves
     request.write("\nServer Environment:\n")

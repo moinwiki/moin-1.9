@@ -38,9 +38,9 @@ def _getWordsFiles(request):
 
     # validate candidate list (leave out directories!)
     wordsfiles = []
-    for file in candidates:
-        if os.path.isfile(file) and os.access(file, os.F_OK | os.R_OK):
-            wordsfiles.append(file)
+    for f in candidates:
+        if os.path.isfile(f) and os.access(f, os.F_OK | os.R_OK):
+            wordsfiles.append(f)
 
     # return validated file list
     return wordsfiles
@@ -55,13 +55,13 @@ def _loadWordsFile(request, dict, filename):
     request.clock.start('spellread')
     try:
         try:
-            file = codecs.open(filename, 'rt', config.charset)
-            lines = file.readlines()
+            f = codecs.open(filename, 'rt', config.charset)
+            lines = f.readlines()
         except UnicodeError:
-            file = codecs.open(filename, 'rt', 'iso-8859-1')
-            lines = file.readlines()
+            f = codecs.open(filename, 'rt', 'iso-8859-1')
+            lines = f.readlines()
     finally:
-        file.close()
+        f.close()
     _loadWords(lines, dict)
     request.clock.stop('spellread')
 
@@ -159,7 +159,8 @@ def checkSpelling(page, request, own_form=1):
 
     # do the checking
     for line in text.split('\n'):
-        if line == '' or line[0] == '#': continue
+        if line == '' or line[0] == '#':
+            continue
         word_re.sub(checkword, line)
 
     if badwords:

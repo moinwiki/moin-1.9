@@ -36,11 +36,11 @@ def execute(macro, args):
     if 'module' in macro.form:
         modname = macro.form["module"][0]
         try:
-            object = pydoc.locate(modname)
+            obj = pydoc.locate(modname)
         except pydoc.ErrorDuringImport, value:
             return "Error while loading module %s: %s" % (modname, value)
         else:
-            xmlstr = xmldoc.xml.document(object, encoding=config.charset)
+            xmlstr = xmldoc.xml.document(obj, encoding=config.charset)
 
         navigation = '<a href="%s">Index</a>' % pagename
         pathlen = modname.count('.')

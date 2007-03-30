@@ -65,8 +65,8 @@ def getUserId(request, searchName):
         except caching.CacheError:
             _name2id = {}
         cfg.cache.name2id = _name2id
-    id = _name2id.get(searchName, None)
-    if id is None:
+    uid = _name2id.get(searchName, None)
+    if uid is None:
         for userid in getUserList(request):
             name = User(request, id=userid).name
             _name2id[name] = userid
@@ -78,8 +78,8 @@ def getUserId(request, searchName):
             cache.update(_name2id)
         except caching.CacheError:
             pass
-        id = _name2id.get(searchName, None)
-    return id
+        uid = _name2id.get(searchName, None)
+    return uid
 
 
 def getUserIdentification(request, username=None):
@@ -855,11 +855,11 @@ class User:
         data = '\n'.join(self._trail) + '\n'
         path = self.__filename() + ".trail"
         try:
-            file = codecs.open(path, "w", config.charset)
+            f = codecs.open(path, "w", config.charset)
             try:
-                file.write(data)
+                f.write(data)
             finally:
-                file.close()
+                f.close()
         except (IOError, OSError), err:
             self._request.log("Can't save trail file: %s" % str(err))
 

@@ -473,10 +473,10 @@ class UserSettings:
             buttons = [("select_user", _('Select User'))]
             button_cell = []
             for name, label in buttons:
-                 button_cell.extend([
-                     html.INPUT(type="submit", name=name, value=label),
-                     ' ',
-                 ])
+                button_cell.extend([
+                    html.INPUT(type="submit", name=name, value=label),
+                    ' ',
+                ])
             self.make_row('', button_cell)
 
         if self.request.user.valid and not create_only:

@@ -80,7 +80,7 @@ class Parser:
         self.request.write(self.formatter.code_line(0))
         self.request.write(formatter.code_area(0, self._code_id))
 
-    def __call__(self, toktype, toktext, (srow,scol), (erow,ecol), line):
+    def __call__(self, toktype, toktext, (srow, scol), (erow, ecol), line):
         """ Token handler.
         """
         # calculate new positions

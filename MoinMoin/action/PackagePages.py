@@ -21,7 +21,8 @@ from MoinMoin.packages import MOIN_PACKAGE_FILE, packLine, unpackLine
 from MoinMoin.action import AttachFile
 from MoinMoin.action.AttachFile import _get_files
 
-class ActionError(Exception): pass
+class ActionError(Exception):
+    pass
 
 class PackagePages:
     def __init__(self, pagename, request):

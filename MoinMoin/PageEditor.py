@@ -180,9 +180,10 @@ class PageEditor(Page):
                     else:
                         msg = edit_lock_message
             except OSError, err:
-                if err.errno != errno.ENAMETOOLONG:
-                    raise err
-                msg = _("Page name is too long, try shorter name.")
+                if err.errno == errno.ENAMETOOLONG:
+                    msg = _("Page name is too long, try shorter name.")
+                else:
+                    raise
 
         # Did one of the prechecks fail?
         if msg:
@@ -411,8 +412,8 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         request.write("</p>")
 
         # Category selection
-        filter = self.cfg.cache.page_category_regex.search
-        cat_pages = request.rootpage.getPageList(filter=filter)
+        filterfn = self.cfg.cache.page_category_regex.search
+        cat_pages = request.rootpage.getPageList(filter=filterfn)
         cat_pages.sort()
         cat_pages = [wikiutil.pagelinkmarkup(p) for p in cat_pages]
         cat_pages.insert(0, ('', _('<No addition>', formatted=False)))
@@ -773,11 +774,11 @@ Try a different name.""") % (newpagename,)
         now = time.time()
         # default: UTC
         zone = "Z"
-        user = self.request.user
+        u = self.request.user
 
         # setup the timezone
-        if user.valid and user.tz_offset:
-            tz = user.tz_offset
+        if u.valid and u.tz_offset:
+            tz = u.tz_offset
             # round to minutes
             tz -= tz % 60
             minutes = tz / 60
@@ -802,24 +803,24 @@ Try a different name.""") % (newpagename,)
         # TODO: Allow addition of variables via wikiconfig or a global wiki dict.
         request = self.request
         now = self._get_local_timestamp()
-        user = request.user
-        signature = user.signature()
+        u = request.user
+        signature = u.signature()
         variables = {
             'PAGE': self.page_name,
             'TIME': "[[DateTime(%s)]]" % now,
             'DATE': "[[Date(%s)]]" % now,
-            'ME': user.name,
+            'ME': u.name,
             'USERNAME': signature,
             'USER': "-- %s" % signature,
             'SIG': "-- %s [[DateTime(%s)]]" % (signature, now),
         }
 
-        if user.valid and user.name:
-            if user.email:
-                variables['MAILTO'] = "[[MailTo(%s)]]" % user.email
+        if u.valid and u.name:
+            if u.email:
+                variables['MAILTO'] = "[[MailTo(%s)]]" % u.email
             # Users can define their own variables via
             # UserHomepage/MyDict, which override the default variables.
-            userDictPage = user.name + "/MyDict"
+            userDictPage = u.name + "/MyDict"
             if request.dicts.has_dict(userDictPage):
                 variables.update(request.dicts.dict(userDictPage))
 

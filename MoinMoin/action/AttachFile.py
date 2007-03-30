@@ -122,10 +122,12 @@ def getIndicator(request, pagename):
     """
     _ = request.getText
     attach_dir = getAttachDir(request, pagename)
-    if not os.path.exists(attach_dir): return ''
+    if not os.path.exists(attach_dir):
+        return ''
 
     files = os.listdir(attach_dir)
-    if not files: return ''
+    if not files:
+        return ''
 
     attach_count = _('[%d attachments]') % len(files)
     attach_icon = request.theme.make_icon('attach', vars={'attach_count': attach_count})
@@ -283,16 +285,16 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
     if mime_type != '*':
         files = [fname for fname in files if mime_type == mimetypes.guess_type(fname)[0]]
 
-    str = ""
+    html = ""
     if files:
         if showheader:
-            str = str + _(
+            html += _(
                 "To refer to attachments on a page, use '''{{{attachment:filename}}}''', \n"
                 "as shown below in the list of files. \n"
                 "Do '''NOT''' use the URL of the {{{[get]}}} link, \n"
                 "since this is subject to change and can break easily."
             )
-        str = str + "<ul>"
+        html += "<ul>"
 
         label_del = _("del")
         label_move = _("move")
@@ -352,15 +354,15 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
             parmdict['viewlink'] = viewlink
             parmdict['del_link'] = del_link
             parmdict['move_link'] = move_link
-            str = str + ('<li>[%(del_link)s%(move_link)s'
+            html += ('<li>[%(del_link)s%(move_link)s'
                 '<a href="%(get_url)s">%(label_get)s</a>&nbsp;| %(viewlink)s]'
                 ' (%(fmtime)s, %(fsize)s KB) attachment:<strong>%(file)s</strong></li>') % parmdict
-        str = str + "</ul>"
+        html += "</ul>"
     else:
         if showheader:
-            str = '%s<p>%s</p>' % (str, _("No attachments stored for %(pagename)s") % {'pagename': wikiutil.escape(pagename)})
+            html += '<p>%s</p>' % (_("No attachments stored for %(pagename)s") % {'pagename': wikiutil.escape(pagename)})
 
-    return str
+    return html
 
 
 def _get_files(request, pagename):
@@ -587,14 +589,14 @@ def execute(pagename, request):
         else:
             msg = _('You are not allowed to get attachments from this page.')
     elif request.form['do'][0] == 'unzip':
-         if request.user.may.delete(pagename) and request.user.may.read(pagename) and request.user.may.write(pagename):
+        if request.user.may.delete(pagename) and request.user.may.read(pagename) and request.user.may.write(pagename):
             unzip_file(pagename, request)
-         else:
+        else:
             msg = _('You are not allowed to unzip attachments of this page.')
     elif request.form['do'][0] == 'install':
-         if request.user.isSuperUser():
+        if request.user.isSuperUser():
             install_package(pagename, request)
-         else:
+        else:
             msg = _('You are not allowed to install files.')
     elif request.form['do'][0] == 'view':
         if request.user.may.read(pagename):
@@ -711,7 +713,8 @@ def del_file(pagename, request):
     _ = request.getText
 
     filename, fpath = _access_file(pagename, request)
-    if not filename: return # error msg already sent in _access_file
+    if not filename:
+        return # error msg already sent in _access_file
 
     # delete file
     os.remove(fpath)
@@ -751,8 +754,8 @@ def move_file(request, pagename, new_pagename, attachment, new_attachment):
         else:
             upload_form(pagename, request, msg=_("Nothing changed"))
     else:
-         upload_form(pagename, request, msg=_("Page %(newpagename)s does not exists or you don't have enough rights.") % {
-             'newpagename': new_pagename})
+        upload_form(pagename, request, msg=_("Page %(newpagename)s does not exists or you don't have enough rights.") % {
+            'newpagename': new_pagename})
 
 def attachment_move(pagename, request):
     _ = request.getText
@@ -776,7 +779,8 @@ def send_moveform(pagename, request):
     _ = request.getText
 
     filename, fpath = _access_file(pagename, request)
-    if not filename: return # error msg already sent in _access_file
+    if not filename:
+        return # error msg already sent in _access_file
 
     # move file
     d = {'action': 'AttachFile',
@@ -894,8 +898,8 @@ def unzip_file(pagename, request):
     if files:
         fsize = 0.0
         fcount = 0
-        for file in files:
-            fsize += float(size(request, pagename, file))
+        for f in files:
+            fsize += float(size(request, pagename, f))
             fcount += 1
 
         available_attachments_file_space = attachments_file_space - fsize
@@ -963,7 +967,8 @@ def send_viewfile(pagename, request):
     _ = request.getText
 
     filename, fpath = _access_file(pagename, request)
-    if not filename: return
+    if not filename:
+        return
 
     request.write('<h2>' + _("Attachment '%(filename)s'") % {'filename': filename} + '</h2>')
 
@@ -1007,7 +1012,8 @@ def view_file(pagename, request):
     _ = request.getText
 
     filename, fpath = _access_file(pagename, request)
-    if not filename: return
+    if not filename:
+        return
 
     # send header & title
     request.emit_http_headers()
