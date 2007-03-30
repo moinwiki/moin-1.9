@@ -228,7 +228,7 @@ class BaseIndex:
         """
         self.update_queue.append(pagename)
         if now:
-           self._do_queued_updates_InNewThread()
+            self._do_queued_updates_InNewThread()
 
     def remove_item(self, pagename, attachment=None, now=1):
         """ Removes a page and all its revisions or a single attachment

@@ -719,10 +719,10 @@ def s2n_intel(str):
 # ratio object that eventually will be able to reduce itself to lowest
 # common denominator for printing
 def gcd(a, b):
-   if b == 0:
-      return a
-   else:
-      return gcd(b, a % b)
+    if b == 0:
+        return a
+    else:
+        return gcd(b, a % b)
 
 class Ratio:
     def __init__(self, num, den):
@@ -1073,14 +1073,14 @@ class EXIF_header:
 # process an image file (expects an open file object)
 # this is the function that has to deal with all the arbitrary nasty bits
 # of the EXIF standard
-def process_file(file, name='UNDEF', debug=0):
+def process_file(f, name='UNDEF', debug=0):
     # determine whether it's a JPEG or TIFF
-    data = file.read(12)
+    data = f.read(12)
     if data[0:4] in ['II*\x00', 'MM\x00*']:
         # it's a TIFF file
-        file.seek(0)
-        endian = file.read(1)
-        file.read(1)
+        f.seek(0)
+        endian = f.read(1)
+        f.read(1)
         offset = 0
     elif data[0:2] == '\xFF\xD8':
         # it's a JPEG file
@@ -1088,14 +1088,14 @@ def process_file(file, name='UNDEF', debug=0):
         fake_exif = 0
         while data[2] == '\xFF' and data[6:10] in ('JFIF', 'JFXX', 'OLYM'):
             length = ord(data[4])*256+ord(data[5])
-            file.read(length-8)
+            f.read(length-8)
             # fake an EXIF beginning of file
-            data = '\xFF\x00'+file.read(10)
+            data = '\xFF\x00'+f.read(10)
             fake_exif = 1
         if data[2] == '\xFF' and data[6:10] == 'Exif':
             # detected EXIF header
-            offset = file.tell()
-            endian = file.read(1)
+            offset = f.tell()
+            endian = f.read(1)
         else:
             # no EXIF information
             return {}
@@ -1106,7 +1106,7 @@ def process_file(file, name='UNDEF', debug=0):
     # deal with the EXIF info we found
     if debug:
         print {'I': 'Intel', 'M': 'Motorola'}[endian], 'format'
-    hdr = EXIF_header(file, endian, offset, fake_exif, debug)
+    hdr = EXIF_header(f, endian, offset, fake_exif, debug)
     ifd_list = hdr.list_IFDs()
     ctr = 0
     for i in ifd_list:
@@ -1150,9 +1150,9 @@ def process_file(file, name='UNDEF', debug=0):
     # JPEG thumbnail (thankfully the JPEG data is stored as a unit)
     thumb_off = hdr.tags.get('Thumbnail JPEGInterchangeFormat')
     if thumb_off:
-        file.seek(offset+thumb_off.values[0])
+        f.seek(offset+thumb_off.values[0])
         size = hdr.tags['Thumbnail JPEGInterchangeFormatLength'].values[0]
-        hdr.tags['JPEGThumbnail'] = file.read(size)
+        hdr.tags['JPEGThumbnail'] = f.read(size)
 
     # deal with MakerNote contained in EXIF IFD
     if 'EXIF MakerNote' in hdr.tags:
@@ -1163,8 +1163,8 @@ def process_file(file, name='UNDEF', debug=0):
     if 'JPEGThumbnail' not in hdr.tags:
         thumb_off = hdr.tags.get('MakerNote JPEGThumbnail')
         if thumb_off:
-            file.seek(offset+thumb_off.values[0])
-            hdr.tags['JPEGThumbnail'] = file.read(thumb_off.field_length)
+            f.seek(offset+thumb_off.values[0])
+            hdr.tags['JPEGThumbnail'] = f.read(thumb_off.field_length)
 
     return hdr.tags
 
@@ -1178,13 +1178,13 @@ if __name__ == '__main__':
 
     for filename in sys.argv[1:]:
         try:
-            file = open(filename, 'rb')
+            f = open(filename, 'rb')
         except:
             print filename, 'unreadable'
             print
             continue
-        print filename+':'
-        data = process_file(file, 1) # with debug info
+        print filename + ':'
+        data = process_file(f, 1) # with debug info
         if not data:
             print 'No EXIF information found'
             continue

@@ -36,31 +36,31 @@ class Parser(ParserBase):
     def setupRules(self):
         ParserBase.setupRules(self)
 
-        self.addRulePair("Comment","/[*]","[*]/")
-        self.addRule("Comment","//.*$")
-        self.addRulePair("String",'L?"',r'$|[^\\](\\\\)*"')
-        self.addRule("Char",r"'\\.'|'[^\\]'")
-        self.addRule("Number",r"[0-9](\.[0-9]*)?(eE[+-][0-9])?[flFLdD]?|0[xX][0-9a-fA-F]+[Ll]?")
-        self.addRule("Preprc",r"^\s*#(.*\\\n)*(.*(?!\\))$")
-        self.addRule("ID","[a-zA-Z_][0-9a-zA-Z_]*")
-        self.addRule("SPChar",r"[~!%^&*()+=|\[\]:;,.<>/?{}-]")
+        self.addRulePair("Comment", "/[*]","[*]/")
+        self.addRule("Comment", "//.*$")
+        self.addRulePair("String", 'L?"', r'$|[^\\](\\\\)*"')
+        self.addRule("Char", r"'\\.'|'[^\\]'")
+        self.addRule("Number", r"[0-9](\.[0-9]*)?(eE[+-][0-9])?[flFLdD]?|0[xX][0-9a-fA-F]+[Ll]?")
+        self.addRule("Preprc", r"^\s*#(.*\\\n)*(.*(?!\\))$")
+        self.addRule("ID", "[a-zA-Z_][0-9a-zA-Z_]*")
+        self.addRule("SPChar", r"[~!%^&*()+=|\[\]:;,.<>/?{}-]")
 
-        reserved_words = ['struct','class','union','enum',
-        'int','float','double','signed','unsigned','char','short','void','bool',
-        'long','register','auto','operator',
-        'static','const','private','public','protected','virtual','explicit',
-        'new','delete','this',
-        'if','else','while','for','do','switch','case','default','sizeof',
-        'dynamic_cast','static_cast','const_cast','reinterpret_cast','typeid',
-        'try','catch','throw','throws','return','continue','break','goto']
+        reserved_words = ['struct', 'class', 'union', 'enum',
+        'int', 'float', 'double', 'signed', 'unsigned', 'char', 'short', 'void', 'bool',
+        'long', 'register', 'auto', 'operator',
+        'static', 'const', 'private', 'public', 'protected', 'virtual', 'explicit',
+        'new', 'delete', 'this',
+        'if', 'else', 'while', 'for', 'do', 'switch', 'case', 'default', 'sizeof',
+        'dynamic_cast', 'static_cast', 'const_cast', 'reinterpret_cast', 'typeid',
+        'try', 'catch', 'throw', 'throws', 'return', 'continue', 'break', 'goto']
 
         reserved_words2 = ['extern', 'volatile', 'typedef', 'friend',
-                           '__declspec', 'inline','__asm','thread','naked',
-                           'dllimport','dllexport','namespace','using',
-                           'template','typename','goto']
+                           '__declspec', 'inline', '__asm', 'thread', 'naked',
+                           'dllimport', 'dllexport', 'namespace', 'using',
+                           'template', 'typename', 'goto']
 
-        special_words = ['std','string','vector','map','set','cout','cin','cerr', 'endl']
-        constant_words = ['true','false','NULL']
+        special_words = ['std', 'string', 'vector', 'map', 'set', 'cout', 'cin', 'cerr', 'endl']
+        constant_words = ['true', 'false', 'NULL']
 
         self.addReserved(reserved_words)
         self.addConstant(constant_words)

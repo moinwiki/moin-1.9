@@ -85,6 +85,8 @@ coverage:
 	@python tests/maketestwiki.py
 	@python -u -m trace --count --coverdir=cover --missing tests/runtests.py
 
+pylint:
+	@pylint --disable-msg=W0511,W0302,W0131,C0101,W0612,W0613,W0702,W0703,W0704,W0706,W0142,W0201 --disable-msg-cat=R --parseable=y MoinMoin
 
 clean: clean-testwiki clean-pyc
 	rm -rf build

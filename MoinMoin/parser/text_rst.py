@@ -148,7 +148,7 @@ class MoinWriter(html4css1.Writer):
         self.nodes = []
         # Make sure it's a supported docutils version.
         required_version = (0, 3, 10)
-        current_version = tuple([int(i) for i in (docutils.__version__.split('.')+['0','0'])[:3]])
+        current_version = tuple([int(i) for i in (docutils.__version__.split('.') + ['0', '0'])[:3]])
         if current_version < required_version:
             err = 'ERROR: The installed docutils version is %s;' % ('.'.join([str(i) for i in current_version]))
             err += ' version %s or later is required.' % ('.'.join([str(i) for i in required_version]))

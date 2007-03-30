@@ -13,8 +13,8 @@ def execute(self, args):
     # we don't want to spend much CPU for spiders requesting nonexisting pages
     if not self.request.isSpiderAgent:
         # Get list of template pages readable by current user
-        filter = self.request.cfg.cache.page_template_regex.search
-        templates = self.request.rootpage.getPageList(filter=filter)
+        filterfn = self.request.cfg.cache.page_template_regex.search
+        templates = self.request.rootpage.getPageList(filter=filterfn)
         result = []
         if templates:
             templates.sort()

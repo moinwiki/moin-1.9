@@ -124,7 +124,7 @@ class EditLogLine:
             title = wikiutil.escape('???' + title)
             text = wikiutil.escape(info[:idx])
         else:
-            raise "unknown EditorData type"
+            raise Exception("unknown EditorData type")
         return '<span title="%s">%s</span>' % (title, text)
 
 
@@ -146,43 +146,43 @@ class EditLog(LogFile):
         self.uid_override = kw.get('uid_override', None)
 
     def add(self, request, mtime, rev, action, pagename, host=None, extra=u'', comment=u''):
-            """ Generate a line for the editlog.
-    
-            If `host` is None, it's read from request vars.
-            """
-            if host is None:
-                host = request.remote_addr
+        """ Generate a line for the editlog.
 
-            if request.cfg.log_reverse_dns_lookups:
-                import socket
-                try:
-                    hostname = socket.gethostbyaddr(host)[0]
-                    hostname = unicode(hostname, config.charset)
-                except (socket.error, UnicodeError):
-                    hostname = host
-            else:
+        If `host` is None, it's read from request vars.
+        """
+        if host is None:
+            host = request.remote_addr
+
+        if request.cfg.log_reverse_dns_lookups:
+            import socket
+            try:
+                hostname = socket.gethostbyaddr(host)[0]
+                hostname = unicode(hostname, config.charset)
+            except (socket.error, UnicodeError):
                 hostname = host
+        else:
+            hostname = host
 
-            remap_chars = {u'\t': u' ', u'\r': u' ', u'\n': u' ', }
-            comment = comment.translate(remap_chars)
-            user_id = request.user.valid and request.user.id or ''
+        remap_chars = {u'\t': u' ', u'\r': u' ', u'\n': u' ', }
+        comment = comment.translate(remap_chars)
+        user_id = request.user.valid and request.user.id or ''
 
-            if self.uid_override is not None:
-                user_id = ''
-                hostname = self.uid_override
-                host = ''
+        if self.uid_override is not None:
+            user_id = ''
+            hostname = self.uid_override
+            host = ''
 
-            line = u"\t".join((str(long(mtime)), # has to be long for py 2.2.x
-                               "%08d" % rev,
-                               action,
-                               wikiutil.quoteWikinameFS(pagename),
-                               host,
-                               hostname,
-                               user_id,
-                               extra,
-                               comment,
-                               )) + "\n"
-            self._add(line)
+        line = u"\t".join((str(long(mtime)), # has to be long for py 2.2.x
+                           "%08d" % rev,
+                           action,
+                           wikiutil.quoteWikinameFS(pagename),
+                           host,
+                           hostname,
+                           user_id,
+                           extra,
+                           comment,
+                           )) + "\n"
+        self._add(line)
 
     def parser(self, line):
         """ Parser edit log line into fields """

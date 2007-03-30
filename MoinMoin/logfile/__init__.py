@@ -264,7 +264,7 @@ class LogFile:
                 self.__buffer = self.__buffer2
 
         if self.__lineno is not None:
-             self.__lineno += lines
+            self.__lineno += lines
         return False
 
     def __next(self):

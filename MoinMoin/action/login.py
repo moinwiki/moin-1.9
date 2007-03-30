@@ -38,7 +38,7 @@ class LoginHandler:
             # Require valid user name
             name = form.get('name', [''])[0]
             if not user.isValidName(request, name):
-                 error = _("""Invalid user name {{{'%s'}}}.
+                error = _("""Invalid user name {{{'%s'}}}.
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.""") % name
 

@@ -83,10 +83,10 @@ class Formatter(FormatterBase):
 
     def rule(self, size=0, **kw):
         return "\n<br/>%s<br/>\n" % ("-" * 78,) # <hr/> not supported in stylebook
-        if size:
-            return '<hr size="%d"/>\n' % (size,)
-        else:
-            return '<hr/>\n'
+#        if size:
+#            return '<hr size="%d"/>\n' % (size,)
+#        else:
+#            return '<hr/>\n'
 
     def icon(self, type):
         return '<icon type="%s" />' % type            
@@ -158,7 +158,7 @@ class Formatter(FormatterBase):
 
         id_text = ''
         if id:
-          id_text = ' id="%s"' % id
+            id_text = ' id="%s"' % id
 
         return result + '<s%d%s title="' % (depth, id_text)
 

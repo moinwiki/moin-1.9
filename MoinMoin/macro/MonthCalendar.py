@@ -10,7 +10,7 @@
     @license: GNU GPL, see COPYING for details.
 
     Revisions:
-    * first revision without a number (=1.0):
+    * first rLevision without a number (=1.0):
         * was only online for a few hours and then replaced by 1.1
     * 1.1:
         * changed name to MonthCalendar to avoid conflict with "calendar" under case-insensitive OSes like Win32
@@ -219,7 +219,7 @@ def parseargs(args, defpagename, defyear, defmonth, defoffset, defoffset2, defhe
 
     stranniversary = args.group('anniversary')
     if stranniversary:
-            parmanniversary = int(stranniversary)
+        parmanniversary = int(stranniversary)
     else:
         parmanniversary = defanniversary
 

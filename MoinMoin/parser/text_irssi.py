@@ -55,9 +55,11 @@ class Parser:
 
         def write_tbl_cell(text, code=1, add_style=''):
             write(fmt.table_cell(1, style=tbl_style+add_style))
-            if code: write(fmt.code(1))
+            if code:
+                write(fmt.code(1))
             write(text)
-            if code: write(fmt.code(0))
+            if code:
+                write(fmt.code(0))
             write(fmt.table_cell(0))
           
         write(fmt.table(1))

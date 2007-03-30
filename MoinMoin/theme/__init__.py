@@ -1066,28 +1066,28 @@ actionsMenuInit('%(label)s');
         _ = self.request.getText
         editbar_actions = []
         for editbar_item in self.request.cfg.edit_bar:
-             if editbar_item == 'Discussion':
-                 if not self.request.cfg.supplementation_page and self.request.getPragma('supplementation-page', 1) in ('on', '1'):
-                     editbar_actions.append(self.supplementation_page_nameLink(page))
-                 elif self.request.cfg.supplementation_page and not self.request.getPragma('supplementation-page', 1) in ('off', '0'):
-                     editbar_actions.append(self.supplementation_page_nameLink(page))
-             elif editbar_item == 'Comments':
-                 # we just use <a> to get same style as other links, but we add some dummy
-                 # link target to get correct mouseover pointer appearance. return false
-                 # keeps the browser away from jumping to the link target:: 
-                 editbar_actions.append('<a href="#" class="toggleCommentsButton" onClick="toggleComments();return false;">%s</a>' % _('Comments'))
-             elif editbar_item == 'Edit':
-                 editbar_actions.append(self.editorLink(page))
-             elif editbar_item == 'Info':
-                 editbar_actions.append(self.infoLink(page))
-             elif editbar_item == 'Subscribe':
-                 editbar_actions.append(self.subscribeLink(page))
-             elif editbar_item == 'Quicklink':
-                 editbar_actions.append(self.quicklinkLink(page))
-             elif editbar_item == 'Attachments':
-                 editbar_actions.append(self.attachmentsLink(page))
-             elif editbar_item == 'ActionsMenu':
-                 editbar_actions.append(self.actionsMenu(page))
+            if editbar_item == 'Discussion':
+                if not self.request.cfg.supplementation_page and self.request.getPragma('supplementation-page', 1) in ('on', '1'):
+                    editbar_actions.append(self.supplementation_page_nameLink(page))
+                elif self.request.cfg.supplementation_page and not self.request.getPragma('supplementation-page', 1) in ('off', '0'):
+                    editbar_actions.append(self.supplementation_page_nameLink(page))
+            elif editbar_item == 'Comments':
+                # we just use <a> to get same style as other links, but we add some dummy
+                # link target to get correct mouseover pointer appearance. return false
+                # keeps the browser away from jumping to the link target:: 
+                editbar_actions.append('<a href="#" class="toggleCommentsButton" onClick="toggleComments();return false;">%s</a>' % _('Comments'))
+            elif editbar_item == 'Edit':
+                editbar_actions.append(self.editorLink(page))
+            elif editbar_item == 'Info':
+                editbar_actions.append(self.infoLink(page))
+            elif editbar_item == 'Subscribe':
+                editbar_actions.append(self.subscribeLink(page))
+            elif editbar_item == 'Quicklink':
+                editbar_actions.append(self.quicklinkLink(page))
+            elif editbar_item == 'Attachments':
+                editbar_actions.append(self.attachmentsLink(page))
+            elif editbar_item == 'ActionsMenu':
+                editbar_actions.append(self.actionsMenu(page))
         return editbar_actions
 
     def supplementation_page_nameLink(self, page):

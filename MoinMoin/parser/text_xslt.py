@@ -109,7 +109,7 @@ class Parser:
                 text = text.expandtabs()
                 text = text.replace('\n', '<br>\n')
                 text = text.replace(' ', '&nbsp;')
-                before = _('%(errortype)s processing error') % {'errortype': etype,}
+                before = _('%(errortype)s processing error') % {'errortype': etype, }
                 title = u"<strong>%s: %s</strong><p>" % (before, msg)
                 self.request.write(title)
                 self.request.write(text.decode(config.charset))

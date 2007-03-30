@@ -144,7 +144,7 @@ def wikiMatches(pagename, pages, start_re=None, end_re=None):
     if match:
         start = match.group(1)
     else:
-       start = words[0]
+        start = words[0]
 
     match = end_re.search(pagename)
     if match:

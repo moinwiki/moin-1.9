@@ -568,7 +568,8 @@ def load_wikimap(request):
         lines += Page(request, INTERWIKI_PAGE).get_raw_body().splitlines()
 
         for line in lines:
-            if not line or line[0] == '#': continue
+            if not line or line[0] == '#':
+                continue
             try:
                 line = "%s %s/InterWiki" % (line, request.getScriptname())
                 wikitag, urlprefix, dummy = line.split(None, 2)
@@ -875,8 +876,8 @@ MIMETYPES_sanitize_mapping = {
 }
 
 MIMETYPES_spoil_mapping = {} # inverse mapping of above
-for key, value in MIMETYPES_sanitize_mapping.items():
-    MIMETYPES_spoil_mapping[value] = key
+for _key, _value in MIMETYPES_sanitize_mapping.items():
+    MIMETYPES_spoil_mapping[_value] = _key
 
 
 class MimeType(object):
@@ -1209,8 +1210,10 @@ def parseAttributes(request, attrstring, endtoken=None, extension=None):
         except ValueError, err:
             msg = str(err)
             break
-        if not key: break
-        if endtoken and key == endtoken: break
+        if not key:
+            break
+        if endtoken and key == endtoken:
+            break
 
         # call extension function with the current token, the parser, and the dict
         if extension:
@@ -1336,7 +1339,7 @@ class ParameterParser:
         return "%s, %s, optional:%s" % (self.param_list, self.param_dict,
                                         self.optional)
 
-    def parse_parameters(self, input):
+    def parse_parameters(self, params):
         """
         (4, 2)
         """
@@ -1348,8 +1351,8 @@ class ParameterParser:
         i = 0
         start = 0
         named = False
-        while start < len(input):
-            match = re.match(self.param_re, input[start:])
+        while start < len(params):
+            match = re.match(self.param_re, params[start:])
             if not match:
                 raise ValueError, "Misformatted value"
             start += match.end()
@@ -1392,10 +1395,10 @@ class ParameterParser:
                 nr = i
                 parameter_list[nr] = value
 
-            #Let's populate and map our dictionary to what's been found
+            # Let's populate and map our dictionary to what's been found
             for name in self.param_dict:
                 tmp = self.param_dict[name]
-                parameter_dict[name]=parameter_list[tmp]
+                parameter_dict[name] = parameter_list[tmp]
 
             i += 1
 
@@ -1644,7 +1647,7 @@ def renderText(request, Parser, text, line_anchors=False):
     out = StringIO.StringIO()
     request.redirect(out)
     wikiizer = Parser(text, request)
-    wikiizer.format(request.formatter,inhibit_p=True)
+    wikiizer.format(request.formatter, inhibit_p=True)
     result = out.getvalue()
     request.redirect()
     del out

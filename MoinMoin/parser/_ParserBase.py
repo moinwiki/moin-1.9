@@ -96,7 +96,7 @@ class FormatTextID(FormatTextBase):
             sword = word.lower()
         else:
             sword = word
-        return self.fmt.get(sword,self.def_fmt).formatString(formatter, word)
+        return self.fmt.get(sword, self.def_fmt).formatString(formatter, word)
 
 class FormattingRuleSingle:
     
@@ -156,7 +156,7 @@ class ParserBase:
     def setupRules(self):
         self.def_format = FormatText('Default')
         self.ID_format = FormatTextID('ID', self._ignore_case)
-        self.addRuleFormat("ID",self.ID_format)
+        self.addRuleFormat("ID", self.ID_format)
         self.addRuleFormat("Operator")
         self.addRuleFormat("Char")
         self.addRuleFormat("Comment")
@@ -176,18 +176,18 @@ class ParserBase:
         self._formatting_rule_index += 1
         n = "%s_%s" % (name, self._formatting_rule_index)
         f = FormattingRuleSingle(name, str_re, self._ignore_case)
-        self._formatting_rules.append((n,f))
+        self._formatting_rules.append((n, f))
         self._formatting_rules_n2r[n] = f
 
     def addRulePair(self, name, start_re, end_re):
         self._formatting_rule_index += 1
-        n = "%s_%s" % (name,self._formatting_rule_index)
+        n = "%s_%s" % (name, self._formatting_rule_index)
         f = FormattingRulePair(name, start_re, end_re, self._ignore_case)
-        self._formatting_rules.append((n,f))
+        self._formatting_rules.append((n, f))
         self._formatting_rules_n2r[n] = f
 
     def addWords(self, words, fmt):
-        if not isinstance(fmt,FormatTextBase):
+        if not isinstance(fmt, FormatTextBase):
             fmt = FormatText(fmt)
         for w in words:
             self.ID_format.addFormat(w, fmt)
@@ -210,13 +210,13 @@ class ParserBase:
         self.setupRules()
 
         l = []
-        for n,f in self._formatting_rules:
-            l.append("(?P<%s>%s)" % (n,f.getStartRe()))
+        for n, f in self._formatting_rules:
+            l.append("(?P<%s>%s)" % (n, f.getStartRe()))
         
         if self._ignore_case:
-            scan_re = re.compile("|".join(l),re.M|re.I)
+            scan_re = re.compile("|".join(l), re.M|re.I)
         else:
-            scan_re = re.compile("|".join(l),re.M)
+            scan_re = re.compile("|".join(l), re.M)
 
         self.lastpos = 0
         self.line = self.raw
@@ -256,11 +256,13 @@ class ParserBase:
 
     def write_match(self, formatter, match):
         for n, hit in match.groupdict().items():
-            if not hit: continue
+            if not hit:
+            	continue
             r = self._formatting_rules_n2r[n]
             s = r.getText(self, hit)
-            c = self.rule_fmt.get(r.name,None)
-            if not c: c = self.def_format
+            c = self.rule_fmt.get(r.name, None)
+            if not c:
+            	c = self.def_format
             first = 1
             for line in s.expandtabs(4).split('\n'):
                 if not first:

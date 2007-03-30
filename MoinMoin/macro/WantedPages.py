@@ -38,7 +38,7 @@ def execute(macro, args):
         # Skip system pages, because missing translations are not wanted pages,
         # unless you are a translator and clicked "Include system pages"
         if not allpages and wikiutil.isSystemPage(request, name):
-                continue
+            continue
 
         # Add links to pages which does not exists in pages dict
         links = page.getPageLinks(request)
@@ -59,7 +59,8 @@ def execute(macro, args):
     result = []
     result.append(macro.formatter.number_list(1))
     for name in wantednames:
-        if not name: continue
+        if not name:
+            continue
         result.append(macro.formatter.listitem(1))
         # Add link to the wanted page
         result.append(macro.formatter.pagelink(1, name, generated=1))

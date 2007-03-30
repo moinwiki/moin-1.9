@@ -662,7 +662,8 @@ class Page(object):
             return os.path.getsize(self._text_filename(rev=rev))
         except EnvironmentError, e:
             import errno
-            if e.errno == errno.ENOENT: return 0
+            if e.errno == errno.ENOENT:
+                return 0
             raise
 
     def mtime_usecs(self):
@@ -838,16 +839,20 @@ class Page(object):
         userlist = user.getUserList(request)
         subscriber_list = {}
         for uid in userlist:
-            if uid == request.user.id and not include_self: continue # no self notification
+            if uid == request.user.id and not include_self:
+                continue # no self notification
             subscriber = user.User(request, uid)
 
             # This is a bit wrong if return_users=1 (which implies that the caller will process
             # user attributes and may, for example choose to send an SMS)
             # So it _should_ be "not (subscriber.email and return_users)" but that breaks at the moment.
-            if not subscriber.email: continue # skip empty email addresses
-            if trivial and not subscriber.want_trivial: continue # skip uninterested subscribers
+            if not subscriber.email:
+                continue # skip empty email addresses
+            if trivial and not subscriber.want_trivial:
+                continue # skip uninterested subscribers
 
-            if not UserPerms(subscriber).read(self.page_name): continue
+            if not UserPerms(subscriber).read(self.page_name):
+                continue
 
             if subscriber.isSubscribedTo(pageList):
                 lang = subscriber.language or request.cfg.language_default

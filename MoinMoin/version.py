@@ -10,7 +10,7 @@
 import sys
 
 try:
-    from patchlevel import patchlevel
+    from MoinMoin.patchlevel import patchlevel
 except:
     patchlevel = 'release'
 

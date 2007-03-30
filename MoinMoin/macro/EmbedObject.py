@@ -170,7 +170,7 @@ class EmbedObject:
         mtype = mime_type.split('/')
 
         if self.alt == "":
-            self.alt = "%(text)s %(mime_type)s" % {'text': _("Embedded"), 'mime_type': mime_type,}
+            self.alt = "%(text)s %(mime_type)s" % {'text': _("Embedded"), 'mime_type': mime_type, }
 
         if mtype[0] == 'video':
             return '''

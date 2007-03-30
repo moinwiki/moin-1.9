@@ -5,7 +5,7 @@
     @copyright: 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
-import EXIF
+from MoinMoin.filter import EXIF
 
 def execute(indexobj, filename):
     """ Extract some EXIF data """

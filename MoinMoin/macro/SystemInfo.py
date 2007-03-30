@@ -164,4 +164,4 @@ class SystemInfo:
         return buf.getvalue()
 
 def execute(macro, args):
-        return SystemInfo(macro, args).render()
+    return SystemInfo(macro, args).render()

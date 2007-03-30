@@ -79,33 +79,32 @@ class NormalizePagenameTestCase(unittest.TestCase):
 
 class GroupPagesTestCase(unittest.TestCase):
 
-   def setUp(self):
-       self.config = TestConfig(self.request,
-                                page_group_regex=r'.+Group')
+    def setUp(self):
+        self.config = TestConfig(self.request, page_group_regex=r'.+Group')
 
-   def tearDown(self):
-       del self.config
+    def tearDown(self):
+        del self.config
 
-   def testNormalizeGroupName(self):
-       """ request: normalize pagename: restrict groups to alpha numeric Unicode
-       
-       Spaces should normalize after invalid chars removed!
-       """
-       import re
-       group = re.compile(r'.+Group', re.UNICODE)
-       cases = (
-           # current acl chars
-           (u'Name,:Group', u'NameGroup'),
-           # remove than normalize spaces
-           (u'Name ! @ # $ % ^ & * ( ) + Group', u'Name Group'),
-           )
-       for test, expected in cases:
-           # validate we are testing valid group names
-           assert group.search(test)
-           result = self.request.normalizePagename(test)
-           self.assertEqual(result, expected,
-                            ('Expected "%(expected)s" but got "%(result)s"') %
-                            locals())
+    def testNormalizeGroupName(self):
+        """ request: normalize pagename: restrict groups to alpha numeric Unicode
+        
+        Spaces should normalize after invalid chars removed!
+        """
+        import re
+        group = re.compile(r'.+Group', re.UNICODE)
+        cases = (
+            # current acl chars
+            (u'Name,:Group', u'NameGroup'),
+            # remove than normalize spaces
+            (u'Name ! @ # $ % ^ & * ( ) + Group', u'Name Group'),
+            )
+        for test, expected in cases:
+            # validate we are testing valid group names
+            assert group.search(test)
+            result = self.request.normalizePagename(test)
+            self.assertEqual(result, expected,
+                             ('Expected "%(expected)s" but got "%(result)s"') %
+                             locals())
 
 
 class HTTPDateTests(unittest.TestCase):
