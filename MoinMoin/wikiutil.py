@@ -241,31 +241,22 @@ def escape(s, quote=0):
         s = s.replace('"', "&quot;")
     return s
 
-def clean_comment(comment):
-    """ Clean comment - replace CR, LF, TAB by whitespace, delete control chars
-        TODO: move this to config, create on first call then return cached.
-        TODO: rename to clean_whatever
-        @param comment: unicode text to clean
+def clean_input(text, max_len=201):
+    """ Clean input:
+        replace CR, LF, TAB by whitespace
+        delete control chars
+
+        @param text: unicode text to clean
         @rtype: unicode
         @return: cleaned text
     """
-    # alias name could be empty
     # we only have input fields with max 200 chars, but spammers send us more
-    l = len(comment)
-    if l == 0 or l > 201:
+    l = len(text)
+    if l == 0 or l > max_len:
         return u''
-    
-    remap_chars = {
-        ord(u'\t'): u' ',
-        ord(u'\r'): u' ',
-        ord(u'\n'): u' ',
-    }
-    control_chars = u'\x00\x01\x02\x03\x04\x05\x06\x07\x08\x0b\x0c\x0e\x0f' \
-                    '\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f'
-    for c in control_chars:
-        remap_chars[ord(c)] = None
-    comment = comment.translate(remap_chars)
-    return comment
+    else:
+        return text.translate(config.clean_input_translation_map)
+
 
 def make_breakable(text, maxlen):
     """ make a text breakable by inserting spaces into nonbreakable parts

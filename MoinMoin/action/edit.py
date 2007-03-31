@@ -109,7 +109,7 @@ def execute(pagename, request):
         pg.sendCancel(savetext or "", rev)
         return
 
-    comment = wikiutil.clean_comment(comment)
+    comment = wikiutil.clean_input(comment)
 
     # Add category
 

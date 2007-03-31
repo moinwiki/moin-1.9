@@ -53,7 +53,7 @@ class CopyPage(ActionBase):
         newpagename = form.get('newpagename', [u''])[0]
         newpagename = self.request.normalizePagename(newpagename)
         comment = form.get('comment', [u''])[0]
-        comment = wikiutil.clean_comment(comment)
+        comment = wikiutil.clean_input(comment)
 
         self.page = PageEditor(self.request, self.pagename)
         success, msg = self.page.copyPage(newpagename, comment)
