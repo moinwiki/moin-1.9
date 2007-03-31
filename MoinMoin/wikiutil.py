@@ -245,14 +245,16 @@ def clean_comment(comment):
     """ Clean comment - replace CR, LF, TAB by whitespace, delete control chars
         TODO: move this to config, create on first call then return cached.
         TODO: rename to clean_whatever
+        @param comment: unicode text to clean
+        @rtype: unicode
+        @return: cleaned text
     """
     # alias name could be empty
-    if len(comment) == 0:
-        return ''
-    
     # we only have input fields with max 200 chars, but spammers send us more
-    if len(comment) > 201:
-        comment = u''
+    l = len(comment)
+    if l == 0 or l > 201:
+        return u''
+    
     remap_chars = {
         ord(u'\t'): u' ',
         ord(u'\r'): u' ',
@@ -261,7 +263,7 @@ def clean_comment(comment):
     control_chars = u'\x00\x01\x02\x03\x04\x05\x06\x07\x08\x0b\x0c\x0e\x0f' \
                     '\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f'
     for c in control_chars:
-        remap_chars[c] = None
+        remap_chars[ord(c)] = None
     comment = comment.translate(remap_chars)
     return comment
 
