@@ -48,7 +48,7 @@ class Load(ActionBase):
 
         target = filename
         if rename:
-            target = wikiutil.clean_comment(rename.strip())
+            target = wikiutil.clean_input(rename.strip())
 
         # preprocess the filename
         # strip leading drive and path (IE misbehaviour)

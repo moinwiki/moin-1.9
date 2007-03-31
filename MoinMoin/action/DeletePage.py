@@ -49,7 +49,7 @@ class DeletePage(ActionBase):
         """ Delete pagename """
         form = self.form
         comment = form.get('comment', [u''])[0]
-        comment = wikiutil.clean_comment(comment)
+        comment = wikiutil.clean_input(comment)
 
         # Create a page editor that does not do editor backups, because
         # delete generates a "deleted" version of the page.
