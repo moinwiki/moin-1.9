@@ -169,6 +169,10 @@ Version 1.6.current:
       invalidation based on global edit-log. We currently use it to cache page
       acls, speedup Page.get_rev and reading the page local edit-log.
     * Added wikiutil.renderText parse and format raw wiki markup with all page elements
+    * The user file format has changed, old files will be read correctly but
+      will silently be upgraded to the new format so old versions will not
+      read the new files correctly (this only affects 'subscribed_pages' and
+      'quicklinks' which will be lost when downgrading.)
 
   New Features:
     * The action menu now calls the actions for the revision of the page you
