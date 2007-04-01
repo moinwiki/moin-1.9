@@ -362,7 +362,12 @@ class User:
                 key, val = line.strip().split('=', 1)
                 if key not in self._cfg.user_transient_fields and key[0] != '_':
                     # Decode list values
-                    if key in ['quicklinks', 'subscribed_pages']:
+                    if key.endswith('[]'):
+                        key = key[:-2]
+                        val = decodeList(val)
+                    # for compatibility reading old files, keep these explicit
+                    # we will store them with [] appended
+                    elif key in ['quicklinks', 'subscribed_pages']:
                         val = decodeList(val)
                     user_data[key] = val
             except ValueError:
@@ -522,7 +527,8 @@ class User:
         for key, value in attrs:
             if key not in self._cfg.user_transient_fields and key[0] != '_':
                 # Encode list values
-                if key in ['quicklinks', 'subscribed_pages']:
+                if isinstance(value, list):
+                    key += '[]'
                     value = encodeList(value)
                 line = u"%s=%s\n" % (key, unicode(value))
                 data.write(line)
