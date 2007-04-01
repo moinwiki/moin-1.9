@@ -140,7 +140,7 @@ class Macro:
             return self.defaultDependency
 
     def _macro_TitleSearch(self, args):
-        from MoinMoin.search.FullSearch import search_box
+        from MoinMoin.macro.FullSearch import search_box
         return search_box("titlesearch", self)
 
     def _macro_GoTo(self, args):
