@@ -1147,6 +1147,11 @@ Please review the page and save then. Do not save this page as it is!""")
                     else:
                         index.update_page(self.page_name)
 
+            # Update page trail with the page we just saved.
+            # This is needed for NewPage macro with backto because it does not
+            # send the page we just saved.
+            request.user.addTrail(self.page_name)
+
         # remove lock (forcibly if we were allowed to break it by the UI)
         # !!! this is a little fishy, since the lock owner might not notice
         # we broke his lock ==> but revision checking during preview will
