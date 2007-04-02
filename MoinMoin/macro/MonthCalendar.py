@@ -376,7 +376,7 @@ def execute(macro, text):
                 else:
                     link = "%s/%4d-%02d-%02d" % (page, year, month, day)
                 daypage = Page(request, link)
-                if daypage.exists():
+                if daypage.exists() and request.user.may.read(link):
                     csslink = "cal-usedday"
                     query = {}
                     r, g, b, u = (255, 0, 0, 1)
