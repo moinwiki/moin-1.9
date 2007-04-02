@@ -6,7 +6,7 @@
     The days are links to Wiki pages following this naming convention:
     BasePageName/year-month-day
 
-    @copyright: 2002-2005 MoinMoin:ThomasWaldmann
+    @copyright: 2002-2007 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 
     Revisions:
@@ -147,9 +147,10 @@ nonexisting day pages:
 
 Dependencies = ['namespace', 'time', ]
 
+import re, calendar, time
+
 from MoinMoin import wikiutil
 from MoinMoin.Page import Page
-import re, calendar, time
 
 # The following line sets the calendar to have either Sunday or Monday as
 # the first day of the week. Only SUNDAY or MONDAY (case sensitive) are
@@ -158,27 +159,31 @@ import re, calendar, time
 # XXX change here ----------------vvvvvv
 calendar.setfirstweekday(calendar.MONDAY)
 
-def cliprgb(r, g, b): # don't use 255!
-    if r < 0: r = 0
-    if r > 254: r = 254
-    if b < 0: b = 0
-    if b > 254: b = 254
-    if g < 0: g = 0
-    if g > 254: g = 254
-    return r, g, b
+def cliprgb(r, g, b):
+    """ clip r,g,b values into range 0..254 """
+    def clip(x):
+        """ clip x value into range 0..254 """
+        if x < 0:
+            x = 0
+        elif x > 254:
+            x = 254
+        return x
+    return clip(r), clip(g), clip(b)
 
 def yearmonthplusoffset(year, month, offset):
-    month = month+offset
+    """ calculate new year/month from year/month and offset """
+    month += offset
     # handle offset and under/overflows - quick and dirty, yes!
     while month < 1:
-        month = month + 12
-        year = year - 1
+        month += 12
+        year -= 1
     while month > 12:
-        month = month - 12
-        year = year + 1
+        month -= 12
+        year += 1
     return year, month
 
 def parseargs(args, defpagename, defyear, defmonth, defoffset, defoffset2, defheight6, defanniversary, deftemplate):
+    """ parse macro arguments """
     strpagename = args.group('basepage')
     if strpagename:
         parmpagename = wikiutil.unquoteWikiname(strpagename)
@@ -187,47 +192,29 @@ def parseargs(args, defpagename, defyear, defmonth, defoffset, defoffset2, defhe
     # multiple pagenames separated by "*" - split into list of pagenames
     parmpagename = re.split(r'\*', parmpagename)
 
-    stryear = args.group('year')
-    if stryear:
-        parmyear = int(stryear)
-    else:
-        parmyear = defyear
-
-    strmonth = args.group('month')
-    if strmonth:
-        parmmonth = int(strmonth)
-    else:
-        parmmonth = defmonth
-
-    stroffset = args.group('offset')
-    if stroffset:
-        parmoffset = int(stroffset)
-    else:
-        parmoffset = defoffset
-
-    stroffset2 = args.group('offset2')
-    if stroffset2:
-        parmoffset2 = int(stroffset2)
-    else:
-        parmoffset2 = defoffset2
-
-    strheight6 = args.group('height6')
-    if strheight6:
-        parmheight6 = int(strheight6)
-    else:
-        parmheight6 = defheight6
-
-    stranniversary = args.group('anniversary')
-    if stranniversary:
-        parmanniversary = int(stranniversary)
-    else:
-        parmanniversary = defanniversary
-
     strtemplate = args.group('template')
     if strtemplate:
         parmtemplate = wikiutil.unquoteWikiname(strtemplate)
     else:
         parmtemplate = deftemplate
+
+    def getint(args, name, default):
+        s = args.group(name)
+        i = default
+        if s:
+            try:
+                i = int(s)
+            except:
+                pass
+        return i
+
+    parmyear = getint(args, 'year', defyear)
+    parmmonth = getint(args, 'month', defmonth)
+    parmoffset = getint(args, 'offset', defoffset)
+    parmoffset2 = getint(args, 'offset2', defoffset2)
+    parmheight6 = getint(args, 'height6', defheight6)
+    parmanniversary = getint(args, 'anniversary', defanniversary)
+
     return parmpagename, parmyear, parmmonth, parmoffset, parmoffset2, parmheight6, parmanniversary, parmtemplate
 
 # FIXME:                          vvvvvv is there a better way for matching a pagename ?
