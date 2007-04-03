@@ -155,7 +155,7 @@ class RequestBase(object):
 
         # session handling. users cannot rely on a session being
         # created, but we should always set request.session
-        self.session = None
+        self.session = {}
 
         # setuid handling requires an attribute in the request
         # that stores the real user
