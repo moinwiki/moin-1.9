@@ -47,11 +47,8 @@ class php_session:
             return dec(username), dec(email), dec(name)
 
         user_obj = kw.get('user_obj')
-        try:
-            cookie = Cookie.SimpleCookie(request.saved_cookie)
-        except Cookie.CookieError: # ignore invalid cookies
-            cookie = None
-        if cookie:
+        cookie = kw.get('cookie')
+        if not cookie is None:
             for cookiename in cookie:
                 cookievalue = urllib.unquote(cookie[cookiename].value).decode('iso-8859-1')
                 session = _PHPsessionParser.loadSession(cookievalue, path=self.s_path, prefix=self.s_prefix)
