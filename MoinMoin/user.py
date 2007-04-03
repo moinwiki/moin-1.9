@@ -182,7 +182,6 @@ def encodeList(items):
     line = '\t'.join(line)
     return line
 
-
 def decodeList(line):
     """ Decode list of items from user data file
     
@@ -196,6 +195,39 @@ def decodeList(line):
         if not item:
             continue
         items.append(item)
+    return items
+
+def encodeDict(items):
+    """ Encode dict of items in user data file
+
+    Items are separated by '\t' characters.
+    Each item is key:value.
+    
+    @param items: dict of unicode:unicode
+    @rtype: unicode
+    @return: dict encoded as unicode
+    """
+    line = []
+    for key, value in items.items():
+        item = u'%s:%s' % (key, value)
+        line.append(item)
+    line = '\t'.join(line)
+    return line
+
+def decodeDict(line):
+    """ Decode dict of key:value pairs from user data file
+    
+    @param line: line containing a dict, encoded with encodeDict
+    @rtype: dict
+    @return: dict  unicode:unicode items
+    """
+    items = {}
+    for item in line.split('\t'):
+        item = item.strip()
+        if not item:
+            continue        
+        key, value = item.split(':', 1)
+        items[key] = value
     return items
 
 
@@ -225,6 +257,7 @@ class User:
         self.auth_username = auth_username
         self.auth_method = kw.get('auth_method', 'internal')
         self.auth_attribs = kw.get('auth_attribs', ())
+        self.bookmarks = {} # interwikiname: bookmark
 
         # create some vars automatically
         self.__dict__.update(self._cfg.user_form_defaults)
@@ -323,13 +356,6 @@ class User:
         """
         return os.path.join(self._cfg.user_dir, self.id or "...NONE...")
 
-    def __bookmark_filename(self):
-        if self._cfg.interwikiname:
-            return (self.__filename() + "." + self._cfg.interwikiname +
-                    ".bookmark")
-        else:
-            return self.__filename() + ".bookmark"
-
     def exists(self):
         """ Do we have a user account for this user?
         
@@ -365,6 +391,10 @@ class User:
                     if key.endswith('[]'):
                         key = key[:-2]
                         val = decodeList(val)
+                    # Decode dict values
+                    elif key.endswith('{}'):
+                        key = key[:-2]
+                        val = decodeDict(val)
                     # for compatibility reading old files, keep these explicit
                     # we will store them with [] appended
                     elif key in ['quicklinks', 'subscribed_pages']:
@@ -530,6 +560,10 @@ class User:
                 if isinstance(value, list):
                     key += '[]'
                     value = encodeList(value)
+                # Encode dict values
+                elif isinstance(value, dict):
+                    key += '{}'
+                    value = encodeDict(value)
                 line = u"%s=%s\n" % (key, unicode(value))
                 data.write(line)
         data.close()
@@ -580,10 +614,10 @@ class User:
         @param tm: timestamp
         """
         if self.valid:
-            bm_fn = self.__bookmark_filename()
-            bmfile = open(bm_fn, "w")
-            bmfile.write(str(tm)+"\n")
-            bmfile.close()
+            interwikiname = unicode(self._cfg.interwikiname or '')
+            bookmark = unicode(tm)
+            self.bookmarks[interwikiname] = bookmark
+            self.save()
 
     def getBookmark(self):
         """ Get bookmark timestamp.
@@ -592,12 +626,11 @@ class User:
         @return: bookmark timestamp or None
         """
         bm = None
-        bm_fn = self.__bookmark_filename()
-
-        if self.valid and os.path.exists(bm_fn):
+        interwikiname = unicode(self._cfg.interwikiname or '')
+        if self.valid:
             try:
-                bm = long(open(bm_fn, 'r').readline()) # must be long for py 2.2
-            except (OSError, ValueError):
+                bm = int(self.bookmarks[interwikiname])
+            except (ValueError, KeyError):
                 pass
         return bm
 
@@ -607,13 +640,13 @@ class User:
         @rtype: int
         @return: 0 on success, 1 on failure
         """
-        bm_fn = self.__bookmark_filename()
+        interwikiname = unicode(self._cfg.interwikiname or '')
         if self.valid:
-            if os.path.exists(bm_fn):
-                try:
-                    os.unlink(bm_fn)
-                except OSError:
-                    return 1
+            try:
+                del self.bookmarks[interwikiname]
+            except KeyError:
+                return 1
+            self.save()
             return 0
         return 1
 
