@@ -302,7 +302,7 @@ def setSessionCookie(request, u, secret=None, securitystringcache=None,
     if session:
         session.rename(secret)
     else:
-        session = SessionData(request, secret, maxage)
+        session = SessionData(request, secret, expires)
     request.session = session
 
 def deleteCookie(request, cookie_name):
@@ -328,8 +328,8 @@ def setAnonCookie(request, session_name):
     if not hasattr(request.cfg, 'anonymous_cookie_lifetime'):
         return
     lifetime = request.cfg.anonymous_cookie_lifetime * 3600
-    request.session = SessionData(request, session_name, lifetime)
     expires = time.time() + lifetime
+    request.session = SessionData(request, session_name, expires)
     setCookie(request, MOIN_SESSION, session_name, lifetime, expires)
 
 
