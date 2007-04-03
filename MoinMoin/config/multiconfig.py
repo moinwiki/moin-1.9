@@ -555,7 +555,7 @@ reStructuredText Quick Reference
         for dirname in ('user', 'cache', 'plugin'):
             name = dirname + '_dir'
             if not getattr(self, name, None):
-                setattr(self, name, os.path.join(data_dir, dirname))
+                setattr(self, name, os.path.abspath(os.path.join(data_dir, dirname)))
 
         # Try to decode certain names which allow unicode
         self._decode()
