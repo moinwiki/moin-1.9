@@ -824,7 +824,7 @@ class User:
         # TODO: acquire lock here, so multiple processes don't clobber
         # each one trail.
 
-        if self.valid and (self.show_page_trail or self.remember_last_visit):
+        if not self.valid or self.show_page_trail or self.remember_last_visit:
             # load trail if not known
             self.getTrail()
 
@@ -858,16 +858,7 @@ class User:
         Save using one write call, which should be fine in most cases,
         but will fail in rare cases without real file locking.
         """
-        data = '\n'.join(self._trail) + '\n'
-        path = self.__filename() + ".trail"
-        try:
-            f = codecs.open(path, "w", config.charset)
-            try:
-                f.write(data)
-            finally:
-                f.close()
-        except (IOError, OSError), err:
-            self._request.log("Can't save trail file: %s" % str(err))
+        self._request.session['trail'] = self._trail
 
     def getTrail(self):
         """ Return list of recently visited pages.
@@ -875,13 +866,9 @@ class User:
         @rtype: list
         @return: pages in trail
         """
-        if self.valid and (self.show_page_trail or self.remember_last_visit) \
-                and not self._trail \
-                and os.path.exists(self.__filename() + ".trail"):
-            try:
-                trail = codecs.open(self.__filename() + ".trail", 'r', config.charset).readlines()
-            except (OSError, ValueError):
-                trail = []
+        if not self._trail and (
+           not self.valid or self.show_page_trail or self.remember_last_visit):
+            trail = self._request.session.get('trail', [])
             trail = [t.strip() for t in trail]
             trail = [t for t in trail if t]
             self._trail = trail[-self._cfg.trail_size:]
