@@ -171,6 +171,9 @@ class SessionData:
         else:
             self.ce.update(self._data)
 
+    def get(self, name, default):
+        return self._data.get(name, default)
+
     def delete(self):
         if self.ce.exists():
             self.ce.remove()

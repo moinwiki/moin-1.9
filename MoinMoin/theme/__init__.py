@@ -579,7 +579,7 @@ class ThemeBase:
         request = self.request
         user = request.user
         html = ''
-        if user.valid and user.show_page_trail:
+        if not user.valid or user.show_page_trail:
             trail = user.getTrail()
             if trail:
                 items = []
