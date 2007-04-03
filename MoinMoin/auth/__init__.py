@@ -79,6 +79,7 @@ class UserSecurityStringCache:
         # user_dir in a farm work properly
         cache_name = sha(userid + request.cfg.user_dir).hexdigest()
         self.ce = CacheEntry(request, 'ussc', cache_name, 'farm', use_pickle=True)
+        self.request = request
 
     def _get(self):
         """Internal: get string dict and LRU list from cache"""
@@ -117,7 +118,7 @@ class UserSecurityStringCache:
             while secidx in lru:
                 secidx = random.randint(0, MAX_STORED_SECRETS*5)
         for idx in lru[MAX_STORED_SECRETS-1:]:
-            data = SessionData(secrets[idx])
+            data = SessionData(self.request, secrets[idx])
             data.delete()
             del secrets[idx]
         lru = lru[:MAX_STORED_SECRETS-1]
