@@ -152,19 +152,28 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
             return result
 
 
-        # Select user profile (su user) - only works with cookie auth active.
+        # Select user profile (su user) - only works with logged-in user session support
         if form.has_key('select_user'):
-            if (wikiutil.checkTicket(self.request, self.request.form['ticket'][0]) and
+            if (self.request.session and
+                wikiutil.checkTicket(self.request, self.request.form['ticket'][0]) and
                 self.request.request_method == 'POST' and
-                self.request.user.isSuperUser()):
+                (self.request.user.isSuperUser() or
+                 (not self.request._setuid_real_user is None
+                  and (self.request._setuid_real_user.isSuperUser())))):
                 su_user = form.get('selected_user', [''])[0]
                 uid = user.getUserId(self.request, su_user)
-                theuser = user.User(self.request, uid)
-                theuser.disabled = None
-                theuser.save()
-                from MoinMoin import auth
-                auth.setSessionCookie(self.request, theuser)
-                self.request.user = theuser
+                if (not self.request._setuid_real_user is None
+                    and uid == self.request._setuid_real_user.id):
+                    del self.request.session['setuid']
+                    self.request.user = self.request._setuid_real_user
+                    self.request._setuid_real_user = None
+                else:
+                    theuser = user.User(self.request, uid)
+                    theuser.disabled = None
+                    self.request.session['setuid'] = uid
+                    self.request._setuid_real_user = self.request.user
+                    # now continue as the other user
+                    self.request.user = theuser
                 return  _("Use UserPreferences to change settings of the selected user account")
             else:
                 return _("Use UserPreferences to change your settings or create an account.")
@@ -466,7 +475,9 @@ class UserSettings:
         _ = self._
         self.make_form()
 
-        if self.request.user.isSuperUser():
+        if (self.request.user.isSuperUser() or
+            (not self.request._setuid_real_user is None and
+             self.request._setuid_real_user.isSuperUser())):
             ticket = wikiutil.createTicket(self.request)
             self.make_row(_('Select User'), [self._user_select()])
             self._form.append(html.INPUT(type="hidden", name="ticket", value="%s" % ticket))
