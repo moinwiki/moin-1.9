@@ -225,7 +225,6 @@ class DefaultConfig:
     cookie_domain = None # use '.domain.tld" for a farm with hosts in that domain
     cookie_path = None   # use '/wikifarm" for a farm with pathes below that path
     cookie_lifetime = 12 # 12 hours from now
-    cookie_secret = '1234' # secret value for crypting session cookie - you should change this :)
 
     data_dir = './data/'
     data_underlay_dir = './underlay/'
