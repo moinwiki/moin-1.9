@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - modular authentication code
+    MoinMoin - modular authentication and session code
 
     Here are some methods moin can use in cfg.auth authentication method list.
     The methods from that list get called (from request.py) in that sequence.
@@ -38,11 +38,14 @@
     It also gives a kw arg "auth_method" that tells the name of the auth
     method that authentified the user.
 
-    TODO: check against other cookie work (see wiki)  
-          
+    The moin_session method also defines request.session for both logged-in
+    as well as not logged-in users.
+
     @copyright: 2005-2006 Bastian Blank, Florian Festi, MoinMoin:ThomasWaldmann,
                           MoinMoin:AlexanderSchremmer, Nick Phillips,
                           MoinMoin:FrankieChow, MoinMoin:NirSoffer
+    @copyright: 2007      MoinMoin:JohannesBerg
+
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -114,6 +117,8 @@ class UserSecurityStringCache:
             while secidx in lru:
                 secidx = random.randint(0, MAX_STORED_SECRETS*5)
         for idx in lru[MAX_STORED_SECRETS-1:]:
+            data = SessionData(secrets[idx])
+            data.delete()
             del secrets[idx]
         lru = lru[:MAX_STORED_SECRETS-1]
         lru.insert(0, secidx)
@@ -136,6 +141,46 @@ class UserSecurityStringCache:
         if secidx in secrets:
             return secrets[secidx]
         return ''
+
+class SessionData:
+    def __init__(self, request, name):
+        # we can use farm scope since the session name is totally random
+        # this means that the session is kept over multiple wikis in a farm
+        # when they share user_dir and cookies
+        self.ce = CacheEntry(request, 'session', name, 'farm', use_pickle=True)
+        self.request = request
+        if self.ce.exists():
+            self._data = self.ce.content()
+        else:
+            self._data = {}
+
+    def __setitem__(self, name, value):
+        self._data[name] = value
+        self.ce.update(self._data)
+
+    def __getitem__(self, name):
+        return self._data[name]
+
+    def __contains__(self, name):
+        return name in self._data
+
+    def __delitem__(self, name):
+        del self._data[name]
+        if len(self._data) == 0:
+            self.ce.remove()
+        else:
+            self.ce.update(self._data)
+
+    def delete(self):
+        if self.ce.exists():
+            self.ce.remove()
+
+    def rename(self, newname):
+        self.ce.remove()
+        self.ce = CacheEntry(self.request, 'session', newname, 'farm', use_pickle=True)
+        if len(self._data):
+            self.ce.update(self._data)
+
 
 def generate_security_string(length):
     """ generate a random length (length/2 .. length) string with random content """
@@ -182,17 +227,8 @@ def getCookieLifetime(request, u):
         return -lifetime
     return lifetime
 
-def setCookie(request, u, cookie_name, cookie_string, maxage, expires):
-    """ Set cookie for the user obj u
-    
-    cfg.cookie_lifetime and the user 'remember_me' setting set the
-    lifetime of the cookie. lifetime in int hours, see table:
-    
-    value   cookie lifetime
-    ----------------------------------------------------------------
-     = 0    forever, ignoring user 'remember_me' setting
-     > 0    n hours, or forever if user checked 'remember_me'
-     < 0    -n hours, ignoring user 'remember_me' setting
+def setCookie(request, cookie_name, cookie_string, maxage, expires):
+    """ Set cookie, raw helper.
     """
     cookie = makeCookie(request, cookie_name, cookie_string, maxage, expires)
     # Set cookie
@@ -200,8 +236,19 @@ def setCookie(request, u, cookie_name, cookie_string, maxage, expires):
     # IMPORTANT: Prevent caching of current page and cookie
     request.disableHttpCaching()
 
-def setSessionCookie(request, u, secret=None, securitystringcache=None, secidx=None):
-    """ Set moin_session cookie for user obj u """
+def setSessionCookie(request, u, secret=None, securitystringcache=None,
+                     secidx=None, session=None):
+    """ Set moin_session cookie for user obj u
+
+    cfg.cookie_lifetime and the user 'remember_me' setting set the
+    lifetime of the cookie. lifetime in in hours, see table:
+    
+    value   cookie lifetime
+    ----------------------------------------------------------------
+     = 0    forever, ignoring user 'remember_me' setting
+     > 0    n hours, or forever if user checked 'remember_me'
+     < 0    -n hours, ignoring user 'remember_me' setting
+    """
     import base64
     maxage = getCookieLifetime(request, u)
     expires = time.time() + maxage
@@ -220,7 +267,14 @@ def setSessionCookie(request, u, secret=None, securitystringcache=None, secidx=N
     cookie_body = "username=%s:id=%s:expires=%d:secidx=%d" % (enc_username, enc_id, expires, secidx)
     cookie_hash = sign_cookie_data(request, cookie_body, secret)
     cookie_string = ':'.join([cookie_hash, cookie_body])
-    setCookie(request, u, MOIN_SESSION, cookie_string, maxage, expires)
+    setCookie(request, MOIN_SESSION, cookie_string, maxage, expires)
+
+    # move session data to new identifier
+    if session:
+        session.rename(secret)
+    else:
+        session = SessionData(request, secret)
+    request.session = session
 
 def deleteCookie(request, cookie_name):
     """ Delete the user cookie by sending expired cookie with null value
@@ -240,6 +294,15 @@ def deleteCookie(request, cookie_name):
     request.setHttpHeader(cookie)
     # IMPORTANT: Prevent caching of current page and cookie        
     request.disableHttpCaching()
+
+def setAnonCookie(request, session_name):
+    if not hasattr(request.cfg, 'anonymous_cookie_lifetime'):
+        return
+    request.session = SessionData(request, session_name)
+    lifetime = request.cfg.anonymous_cookie_lifetime * 3600
+    expires = time.time() + lifetime
+    setCookie(request, MOIN_SESSION, session_name, lifetime, expires)
+
 
 def moin_login(request, **kw):
     """ handle login from moin login form, session has to be established later by moin_session """
@@ -279,7 +342,6 @@ def moin_session(request, **kw):
     login = kw.get('login')
     logout = kw.get('logout')
     user_obj = kw.get('user_obj')
-    cookie = kw.get('cookie')
 
     cfg = request.cfg
     verbose = False
@@ -287,6 +349,14 @@ def moin_session(request, **kw):
         verbose = cfg.moin_session_verbose
 
     cookie_name = MOIN_SESSION
+
+    # load up our cookie
+    cookie = kw.get('cookie')
+    if cookie is not None and cookie_name in cookie:
+        cookievalue = cookie[cookie_name].value
+        cookieitems = cookievalue.split(':', 1)
+    else:
+        cookievalue = None
 
     if verbose: request.log("auth.moin_session: name=%s login=%r logout=%r user_obj=%r" % (username, login, logout, user_obj))
 
@@ -298,7 +368,11 @@ def moin_session(request, **kw):
             # Yes - set up session cookie
             if verbose: request.log("moin_session got valid user from previous auth method, setting cookie...")
             if verbose: request.log("moin_session got auth_username %s." % user_obj.auth_username)
-            setSessionCookie(request, user_obj)
+            sessiondata = None
+            if cookievalue and len(cookieitems) == 1:
+                # we have an anonymous session so migrate the data
+                sessiondata = SessionData(request, cookievalue)
+            setSessionCookie(request, user_obj, session=sessiondata)
             return user_obj, True # we make continuing possible, e.g. for smbmount
         else:
             # No other method succeeded, so allow continuation...
@@ -306,17 +380,18 @@ def moin_session(request, **kw):
             if verbose: request.log("moin_session did not get valid user from previous auth method, doing nothing")
             return user_obj, True
 
-    if not (cookie is not None and cookie_name in cookie):
+    if cookievalue is None:
         # No valid cookie
         if verbose: request.log("either no cookie or no %s key" % cookie_name)
         return user_obj, True
 
-    try:
-        cookie_hash, cookie_body = cookie[cookie_name].value.split(':', 1)
-    except ValueError:
-        # Invalid cookie
-        if verbose: request.log("invalid cookie format: (%s)" % cookie[cookie_name].value)
+    if len(cookieitems) == 1:
+        # non-logged in session
+        setAnonCookie(request, cookieitems[0])
         return user_obj, True
+
+    # otherwise we have a signed cookie
+    cookie_hash, cookie_body = cookieitems
 
     # Parse cookie, be careful
     params = {'username': '', 'id': '', 'expires': 0, 'secidx': -1, }
@@ -348,6 +423,9 @@ def moin_session(request, **kw):
 
     if verbose: request.log("Cookie OK, authenticated.")
 
+    # use the security string as the session identifier now
+    request.session = SessionData(request, secstring)
+
     # XXX Should name be in auth_attribs?
     u = user.User(request,
                   id=params['id'],
@@ -362,6 +440,8 @@ def moin_session(request, **kw):
         # delete secret for this cookie
         ussc.remove(secidx)
         deleteCookie(request, cookie_name)
+        request.session.delete()
+        request.session = None
         return u, True # we return a invalidated user object, so that
                        # following auth methods can get the name of
                        # the user who logged out
@@ -369,3 +449,19 @@ def moin_session(request, **kw):
     setSessionCookie(request, u, securitystringcache=ussc, secidx=secidx)
     return u, True # use True to get other methods called, too
 
+def moin_anon_session(request, **kw):
+    """Anonymous session support.
+
+    If you need sessions for anonymous users add this to the config.auth list
+    and set config.anonymous_cookie_lifetime (in hours, can be fractional.)
+    """
+    user_obj = kw.get('user_obj')
+
+    if request.session or not hasattr(request.cfg, 'anonymous_cookie_lifetime'):
+        return user_obj, True
+
+    # moin_session can handle this cookie and migrate
+    # the session to a known one when you log in
+    session_name = generate_security_string(32)
+    setAnonCookie(request, session_name)
+    return user_obj, True
