@@ -10,6 +10,7 @@
 import os, re, time, sys, cgi, StringIO
 import logging
 import copy
+import Cookie
 
 try:
     set
@@ -569,6 +570,12 @@ class RequestBase(object):
                                           user_obj=None)
         return u
 
+    def parse_cookie(self):
+        try:
+            return Cookie.SimpleCookie(self.saved_cookie)
+        except Cookie.CookieError:
+            return None
+
     def get_user_default_unknown(self, **kw):
         """ call do_auth and if it doesnt return a user object, make some "Unknown User" """
         user_obj = self.get_user_default_None(**kw)
@@ -583,9 +590,11 @@ class RequestBase(object):
         login = kw.get('login')
         logout = kw.get('logout')
         user_obj = kw.get('user_obj')
+        cookie = self.parse_cookie()
         for auth in self.cfg.auth:
             user_obj, continue_flag = auth(self, name=name, password=password,
-                                           login=login, logout=logout, user_obj=user_obj)
+                                           login=login, logout=logout, user_obj=user_obj,
+                                           cookie=cookie)
             if not continue_flag:
                 break
         return user_obj

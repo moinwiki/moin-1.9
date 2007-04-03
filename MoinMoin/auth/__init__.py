@@ -12,6 +12,8 @@
        logout: True if user has clicked on Logout button
        user_obj: the user_obj we have until now (user_obj returned from
                  previous auth method or None for first auth method)
+       cookie: a Cookie.SimpleCookie instance containing the cookies for
+               this request, or None if no (valid) cookies were set
        (we maybe add some more here)
 
     Use code like this to get them:
@@ -19,6 +21,7 @@
         password = kw.get('password') or ''
         login = kw.get('login')
         logout = kw.get('logout')
+        cookie = kw.get('cookie')
         request.log("got name=%s len(password)=%d login=%r logout=%r" % (name, len(password), login, logout))
     
     The called auth method then must return a tuple (user_obj, continue_flag).
@@ -276,6 +279,7 @@ def moin_session(request, **kw):
     login = kw.get('login')
     logout = kw.get('logout')
     user_obj = kw.get('user_obj')
+    cookie = kw.get('cookie')
 
     cfg = request.cfg
     verbose = False
@@ -301,14 +305,6 @@ def moin_session(request, **kw):
             # XXX Cookie clear here???
             if verbose: request.log("moin_session did not get valid user from previous auth method, doing nothing")
             return user_obj, True
-
-    try:
-        if verbose: request.log("trying to get cookie...")
-        cookie = Cookie.SimpleCookie(request.saved_cookie)
-    except Cookie.CookieError:
-        # ignore invalid cookies, else user can't relogin
-        if verbose: request.log("caught Cookie.CookieError")
-        cookie = None
 
     if not (cookie is not None and cookie_name in cookie):
         # No valid cookie
