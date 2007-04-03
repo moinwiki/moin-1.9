@@ -153,6 +153,10 @@ class RequestBase(object):
         self.page = None
         self._dicts = None
 
+        # session handling. users cannot rely on a session being
+        # created, but we should always set request.session
+        self.session = None
+
         # Check for dumb proxy requests
         # TODO relying on request_uri will not work on all servers, especially
         # not on external non-Apache servers
