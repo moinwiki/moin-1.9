@@ -57,7 +57,7 @@ def generate_security_string(length):
     safe = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-'
     return ''.join([random.choice(safe) for i in range(random_length)])
 
-def make_security_hash(request, data, securitystring=''):
+def sign_cookie_data(request, data, securitystring=''):
     """ generate a hash string based on site configuration's cfg.cookie_secret,
         securitystring and the data.
     """
@@ -82,7 +82,22 @@ def makeCookie(request, cookie_name, cookie_string, maxage, expires):
     c[cookie_name]['expires'] = request.httpDate(when=expires, rfc='850')
     return c.output()
 
-def setCookie(request, u, cookie_name, cookie_string):
+def getCookieLifetime(request, u):
+    """ Get cookie lifetime for the user object u
+    """
+    lifetime = int(request.cfg.cookie_lifetime) * 3600
+    forever = 10 * 365 * 24 * 3600 # 10 years
+    if not lifetime:
+        return forever
+    elif lifetime > 0:
+        if u.remember_me:
+            return forever
+        return lifetime
+    elif lifetime < 0:
+        return -lifetime
+    return lifetime
+
+def setCookie(request, u, cookie_name, cookie_string, maxage, expires):
     """ Set cookie for the user obj u
     
     cfg.cookie_lifetime and the user 'remember_me' setting set the
@@ -94,21 +109,6 @@ def setCookie(request, u, cookie_name, cookie_string):
      > 0    n hours, or forever if user checked 'remember_me'
      < 0    -n hours, ignoring user 'remember_me' setting
     """
-    # Calculate cookie maxage and expires
-    lifetime = int(request.cfg.cookie_lifetime) * 3600
-    forever = 10 * 365 * 24 * 3600 # 10 years
-    now = time.time()
-    if not lifetime:
-        maxage = forever
-    elif lifetime > 0:
-        if u.remember_me:
-            maxage = forever
-        else:
-            maxage = lifetime
-    elif lifetime < 0:
-        maxage = (-lifetime)
-    expires = now + maxage
-
     cookie = makeCookie(request, cookie_name, cookie_string, maxage, expires)
     # Set cookie
     request.setHttpHeader(cookie)
@@ -118,14 +118,14 @@ def setCookie(request, u, cookie_name, cookie_string):
 def setSessionCookie(request, u):
     """ Set moin_session cookie for user obj u """
     import base64
-    cfg = request.cfg
-    enc_username = base64.encodestring(u.auth_username)
-    enc_id = base64.encodestring(u.id)
-    # XXX - should include expiry!
-    cookie_body = "username=%s:id=%s" % (enc_username, enc_id)
-    cookie_hash = make_security_hash(request, cookie_body)
+    maxage = getCookieLifetime(request, u)
+    expires = time.time() + maxage
+    enc_username = base64.encodestring(u.auth_username).replace('\n', '')
+    enc_id = base64.encodestring(u.id).replace('\n', '')
+    cookie_body = "username=%s:id=%s:expires=%d" % (enc_username, enc_id, expires)
+    cookie_hash = sign_cookie_data(request, cookie_body)
     cookie_string = ':'.join([cookie_hash, cookie_body])
-    setCookie(request, u, MOIN_SESSION, cookie_string)
+    setCookie(request, u, MOIN_SESSION, cookie_string, maxage, expires)
 
 def deleteCookie(request, cookie_name):
     """ Delete the user cookie by sending expired cookie with null value
@@ -230,7 +230,7 @@ def moin_session(request, **kw):
         if verbose: request.log("invalid cookie format: (%s)" % cookie[cookie_name].value)
         return user_obj, True
 
-    if cookie_hash != make_security_hash(request, cookie_body):
+    if cookie_hash != sign_cookie_data(request, cookie_body):
         # Invalid cookie
         # XXX Cookie clear here???
         if verbose: request.log("cookie recovered had invalid hash")
@@ -238,11 +238,17 @@ def moin_session(request, **kw):
 
     # We can trust the cookie
     if verbose: request.log("Cookie OK, authenticated.")
-    params = {'username': '', 'id': '', }
+    params = {'username': '', 'id': '', 'expires': 0, }
     cookie_pairs = cookie_body.split(":")
     for key, value in [pair.split("=", 1) for pair in cookie_pairs]:
-        params[key] = base64.decodestring(value) # assuming all values are base64 encoded
-    # XXX Should check expiry from cookie
+        if isinstance(params[key], str):
+            params[key] = base64.decodestring(value)
+        elif isinstance(params[key], int):
+            params[key] = int(value)
+    if params['expires'] < time.time():
+        # XXX Cookie clear here???
+        if verbose: request.log("cookie expired")
+        return user_obj, True
     # XXX Should name be in auth_attribs?
     u = user.User(request,
                   id=params['id'],
