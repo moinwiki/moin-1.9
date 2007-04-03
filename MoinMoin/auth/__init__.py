@@ -140,11 +140,10 @@ def generate_security_string(length):
     safe = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-'
     return ''.join([random.choice(safe) for i in range(random_length)])
 
-def sign_cookie_data(request, data, securitystring=''):
-    """ generate a hash string based on site configuration's cfg.cookie_secret,
-        securitystring and the data.
+def sign_cookie_data(request, data, securitystring):
+    """ generate a hash string based the securitystring and the data.
     """
-    return hmac.new(request.cfg.cookie_secret + securitystring, data).hexdigest()
+    return hmac.new(securitystring, data).hexdigest()
 
 def makeCookie(request, cookie_name, cookie_string, maxage, expires):
     """ create an appropriate cookie """
@@ -216,7 +215,7 @@ def setSessionCookie(request, u, secret=None, securitystringcache=None, secidx=N
     else:
         secidx = securitystringcache.insert(secret)
     cookie_body = "username=%s:id=%s:expires=%d:secidx=%d" % (enc_username, enc_id, expires, secidx)
-    cookie_hash = sign_cookie_data(request, cookie_body, securitystring=secret)
+    cookie_hash = sign_cookie_data(request, cookie_body, secret)
     cookie_string = ':'.join([cookie_hash, cookie_body])
     setCookie(request, u, MOIN_SESSION, cookie_string, maxage, expires)
 
@@ -346,7 +345,7 @@ def moin_session(request, **kw):
 
     ussc = UserSecurityStringCache(request, params['id'])
     secstring = ussc.getsecret(secidx)
-    if cookie_hash != sign_cookie_data(request, cookie_body, securitystring=secstring):
+    if cookie_hash != sign_cookie_data(request, cookie_body, secstring):
         # XXX Cookie clear here???
         if verbose: request.log("cookie recovered had invalid hash")
         return user_obj, True
