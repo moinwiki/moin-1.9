@@ -157,6 +157,10 @@ class RequestBase(object):
         # created, but we should always set request.session
         self.session = None
 
+        # setuid handling requires an attribute in the request
+        # that stores the real user
+        self._setuid_real_user = None
+
         # Check for dumb proxy requests
         # TODO relying on request_uri will not work on all servers, especially
         # not on external non-Apache servers
@@ -209,6 +213,12 @@ class RequestBase(object):
             i18n.i18n_init(self)
 
             self.user = self.get_user_from_form()
+            # setuid handling
+            if self.session and 'setuid' in self.session:
+                self._setuid_real_user = self.user
+                uid = self.session['setuid']
+                self.user = user.User(self, uid)
+                self.user.disabled = None
 
             if self.action != 'xmlrpc':
                 if not self.forbidden and self.isForbidden():
