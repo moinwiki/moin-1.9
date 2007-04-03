@@ -338,6 +338,8 @@ Version 1.6.current:
     * action DeletePage and RenamePage could now be used for subpages of a page too
     * Added Action CopyPage so you can use now an existing page or page hierarchy as template for a new page, see FeatureRequests/CloneOrCopyPages
       TODO: we need a copy icon in RC
+    * Session handling for logged-in users and (not by default due to expiry
+      problems) anonymous users.
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
@@ -399,6 +401,9 @@ Version 1.6.current:
       telling us what we missed.
     * Avoid infinite recursion in Page.parsePageLinks.
     * Now ImageLink could be used with InterwikiLinks for pages
+    * Cookies were made more secure by signing each cookie with its own
+      secret and checking expiry, that way a cookie can no longer be stolen
+      and used again after logging out.
 
   Other changes:
     * HINT: if you run standard CGI, copy and edit the new moin.cgi from
