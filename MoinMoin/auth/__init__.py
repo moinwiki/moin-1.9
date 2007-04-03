@@ -51,7 +51,7 @@
 
 import time, Cookie
 from MoinMoin import user
-from MoinMoin.caching import CacheEntry
+from MoinMoin.caching import CacheEntry, get_cache_list
 
 # cookie names
 MOIN_SESSION = 'MOIN_SESSION'
@@ -79,6 +79,7 @@ class UserSecurityStringCache:
         # user_dir in a farm work properly
         cache_name = sha(userid + request.cfg.user_dir).hexdigest()
         self.ce = CacheEntry(request, 'ussc', cache_name, 'farm', use_pickle=True)
+        self.request = request
 
     def _get(self):
         """Internal: get string dict and LRU list from cache"""
@@ -117,7 +118,7 @@ class UserSecurityStringCache:
             while secidx in lru:
                 secidx = random.randint(0, MAX_STORED_SECRETS*5)
         for idx in lru[MAX_STORED_SECRETS-1:]:
-            data = SessionData(secrets[idx])
+            data = SessionData(self.request, secrets[idx], 0)
             data.delete()
             del secrets[idx]
         lru = lru[:MAX_STORED_SECRETS-1]
@@ -143,7 +144,7 @@ class UserSecurityStringCache:
         return ''
 
 class SessionData:
-    def __init__(self, request, name):
+    def __init__(self, request, name, expires):
         # we can use farm scope since the session name is totally random
         # this means that the session is kept over multiple wikis in a farm
         # when they share user_dir and cookies
@@ -152,11 +153,35 @@ class SessionData:
         if self.ce.exists():
             self._data = self.ce.content()
         else:
-            self._data = {}
+            self._data = {'expires': expires + 3600}
+        # Set 'expires' an hour later than it should actually expire.
+        # That way, the expiry code will delete the item an hour later
+        # than it has actually expired, but that is acceptable and we
+        # don't need to update the file all the time
+        if expires and (not 'expires' in self or self['expires'] < expires):
+            self['expires'] = expires + 3600
+
+        # every once a while, clean up deleted sessions:
+        if random.randint(0, 999) == 0:
+            self._cleanup()
+
+    def _cleanup(self):
+        list = get_cache_list(self.request, 'session', 'farm')
+        tnow = time.time()
+        for name in list:
+            entry = CacheEntry(self.request, 'session', name, 'farm', use_pickle=True)
+            try:
+                data = entry.content()
+                if 'expires' in data and data['expires'] < tnow:
+                    entry.remove()
+            except CacheError:
+                pass
 
     def __setitem__(self, name, value):
         self._data[name] = value
-        self.ce.update(self._data)
+        # if we have only one item it must be 'expires'
+        if len(self._data) > 1:
+            self.ce.update(self._data)
 
     def __getitem__(self, name):
         return self._data[name]
@@ -166,7 +191,8 @@ class SessionData:
 
     def __delitem__(self, name):
         del self._data[name]
-        if len(self._data) == 0:
+        # if just one item is left it'll be 'expires'
+        if len(self._data) == 1:
             self.ce.remove()
         else:
             self.ce.update(self._data)
@@ -276,7 +302,7 @@ def setSessionCookie(request, u, secret=None, securitystringcache=None,
     if session:
         session.rename(secret)
     else:
-        session = SessionData(request, secret)
+        session = SessionData(request, secret, maxage)
     request.session = session
 
 def deleteCookie(request, cookie_name):
@@ -301,8 +327,8 @@ def deleteCookie(request, cookie_name):
 def setAnonCookie(request, session_name):
     if not hasattr(request.cfg, 'anonymous_cookie_lifetime'):
         return
-    request.session = SessionData(request, session_name)
     lifetime = request.cfg.anonymous_cookie_lifetime * 3600
+    request.session = SessionData(request, session_name, lifetime)
     expires = time.time() + lifetime
     setCookie(request, MOIN_SESSION, session_name, lifetime, expires)
 
@@ -373,8 +399,9 @@ def moin_session(request, **kw):
             if verbose: request.log("moin_session got auth_username %s." % user_obj.auth_username)
             sessiondata = None
             if cookievalue and len(cookieitems) == 1:
-                # we have an anonymous session so migrate the data
-                sessiondata = SessionData(request, cookievalue)
+                # we have an anonymous session so migrate the data, since we
+                # will migrate it we don't need a proper expiry value
+                sessiondata = SessionData(request, cookievalue, 0)
             setSessionCookie(request, user_obj, session=sessiondata)
             return user_obj, True # we make continuing possible, e.g. for smbmount
         else:
@@ -426,9 +453,6 @@ def moin_session(request, **kw):
 
     if verbose: request.log("Cookie OK, authenticated.")
 
-    # use the security string as the session identifier now
-    request.session = SessionData(request, secstring)
-
     # XXX Should name be in auth_attribs?
     u = user.User(request,
                   id=params['id'],
@@ -443,8 +467,8 @@ def moin_session(request, **kw):
         # delete secret for this cookie
         ussc.remove(secidx)
         deleteCookie(request, cookie_name)
-        request.session.delete()
-        request.session = None
+        session = SessionData(request, secstring, 0)
+        session.delete()
         return u, True # we return a invalidated user object, so that
                        # following auth methods can get the name of
                        # the user who logged out

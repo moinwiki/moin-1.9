@@ -18,6 +18,30 @@ class CacheError(Exception):
     """ raised if we have trouble reading or writing to the cache """
     pass
 
+def get_arena_dir(request, arena, scope):
+    if scope == 'page_or_wiki': # XXX DEPRECATED, remove later
+        if isinstance(arena, str):
+            return os.path.join(request.cfg.cache_dir, request.cfg.siteid, arena)
+        else: # arena is in fact a page object
+            return arena.getPagePath('cache', check_create=1)
+    elif scope == 'item': # arena is a Page instance
+        # we could move cache out of the page directory and store it to cache_dir
+        return arena.getPagePath('cache', check_create=1)
+    elif scope == 'wiki':
+        return os.path.join(request.cfg.cache_dir, request.cfg.siteid, arena)
+    elif scope == 'farm':
+        return os.path.join(request.cfg.cache_dir, '__common__', arena)
+    return None
+
+
+def get_cache_list(request, arena, scope):
+    arena_dir = get_arena_dir(request, arena, scope)
+    try:
+        return filesys.dclistdir(arena_dir)
+    except OSError:
+        return []
+
+
 class CacheEntry:
     def __init__(self, request, arena, key, scope='page_or_wiki', do_locking=True, use_pickle=False):
         """ init a cache entry
@@ -35,18 +59,7 @@ class CacheEntry:
         self.key = key
         self.locking = do_locking
         self.use_pickle = use_pickle
-        if scope == 'page_or_wiki': # XXX DEPRECATED, remove later
-            if isinstance(arena, str):
-                self.arena_dir = os.path.join(request.cfg.cache_dir, request.cfg.siteid, arena)
-            else: # arena is in fact a page object
-                self.arena_dir = arena.getPagePath('cache', check_create=1)
-        elif scope == 'item': # arena is a Page instance
-            # we could move cache out of the page directory and store it to cache_dir
-            self.arena_dir = arena.getPagePath('cache', check_create=1)
-        elif scope == 'wiki':
-            self.arena_dir = os.path.join(request.cfg.cache_dir, request.cfg.siteid, arena)
-        elif scope == 'farm':
-            self.arena_dir = os.path.join(request.cfg.cache_dir, '__common__', arena)
+        self.arena_dir = get_arena_dir(request, arena, scope)
         if not os.path.exists(self.arena_dir):
             os.makedirs(self.arena_dir)
         if self.locking:
@@ -113,7 +126,7 @@ class CacheEntry:
             if not self.locking or self.locking and self.wlock.acquire(1.0):
                 try:
                     # we do not write content to old inode, but to a new file
-                    # se we don't need to lock when we just want to read the file
+                    # so we don't need to lock when we just want to read the file
                     # (at least on POSIX, this works)
                     tmp_handle, tmp_fname = tempfile.mkstemp('.tmp', self.key, self.arena_dir)
                     os.write(tmp_handle, content)
