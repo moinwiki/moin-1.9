@@ -12,6 +12,7 @@ import os
 import logging
 
 from MoinMoin import config
+from MoinMoin.support import logging_fix
 
 def switchUID(uid, gid):
     """ Switch identity to safe user and group
