@@ -41,31 +41,29 @@
     The moin_session method also defines request.session for both logged-in
     as well as not logged-in users.
 
-    @copyright: 2005-2006 Bastian Blank, Florian Festi, MoinMoin:ThomasWaldmann,
+    @copyright: 2005-2006 Bastian Blank, Florian Festi,
                           MoinMoin:AlexanderSchremmer, Nick Phillips,
-                          MoinMoin:FrankieChow, MoinMoin:NirSoffer
-    @copyright: 2007      MoinMoin:JohannesBerg
+                          MoinMoin:FrankieChow, MoinMoin:NirSoffer,
+                2005-2007 MoinMoin:ThomasWaldmann,
+                2007      MoinMoin:JohannesBerg
 
     @license: GNU GPL, see COPYING for details.
 """
 
 import time, Cookie
-from MoinMoin import user
-from MoinMoin.caching import CacheEntry, get_cache_list
+import hmac, sha, random
+
+from MoinMoin import user, caching
 
 # cookie names
 MOIN_SESSION = 'MOIN_SESSION'
 
-# maximum number of stored secrets, i.e. maximum number of
-# different machines a user can use concurrently without having
-# to log in again
+# maximum number of stored secrets, i.e. maximum number of different machines
+# a user can use concurrently without having to log in again
 MAX_STORED_SECRETS = 20
 
-import hmac, random
-from sha import sha
-
 class UserSecurityStringCache:
-    """UserSecurityStringCache -- cache a list of secrets for user cookies
+    """ UserSecurityStringCache -- cache a list of secrets for user cookies
 
     In order to avoid cookie stealing even after a user has logged out we
     keep a list of secrets (in the cache) associated with a user and verify
@@ -74,27 +72,25 @@ class UserSecurityStringCache:
     This class manages the secrets and their LRU expiry.
     """
     def __init__(self, request, userid):
-        # we use 'farm' scope but hash the user_dir into the
-        # secret cache name to make both shared and non-shared
-        # user_dir in a farm work properly
-        cache_name = sha(userid + request.cfg.user_dir).hexdigest()
-        self.ce = CacheEntry(request, 'ussc', cache_name, 'farm', use_pickle=True)
+        # we use 'farm' scope but hash the user_dir into the secret cache name
+        # to make both shared and non-shared user_dir in a farm work properly
+        cache_name = sha.sha(userid + request.cfg.user_dir).hexdigest()
+        self.ce = caching.CacheEntry(request, 'ussc', cache_name, 'farm', use_pickle=True)
         self.request = request
 
-    def _get(self):
-        """Internal: get string dict and LRU list from cache"""
+    def _load(self):
+        """ Internal: load string dict and LRU list from cache """
         if self.ce.exists():
             return self.ce.content()
         return {}, []
 
     def update(self, secidx):
-        """ tell the secret string cache that the secret identified
-            was used
+        """ tell the secret string cache that the secret identified was used
 
         @param secidx: the index of that secret or None if a new one
                        shall be assigned
         """
-        secrets, lru = self._get()
+        secrets, lru = self._load()
         # just move this secret to the front of the LRU queue
         lru.remove(secidx)
         lru.insert(0, secidx)
@@ -107,7 +103,7 @@ class UserSecurityStringCache:
         @rtype: int
         @return: the new secret index
         """
-        secrets, lru = self._get()
+        secrets, lru = self._load()
         # find a new unused index
         # try one that we'll expire first
         if len(lru) >= MAX_STORED_SECRETS:
@@ -132,23 +128,35 @@ class UserSecurityStringCache:
 
         @param secidx: the index of the secret to be removed
         """
-        secrets, lru = self._get()
+        secrets, lru = self._load()
         del secrets[secidx]
-        lru = [idx for idx in lru if idx != secidx]
-        self.ce.update((secrets,lru))
+        lru.remove(secidx)
+        self.ce.update((secrets, lru))
 
     def getsecret(self, secidx):
-        secrets, lru = self._get()
+        """ get a secret from the cache
+
+        @param secidx: the index of the secret to get
+        """
+        secrets, lru = self._load()
         if secidx in secrets:
             return secrets[secidx]
         return ''
 
 class SessionData:
+    """ SessionData -- store data for a session
+
+    This stores session data in memory and also maintains a cache of it on
+    disk, so the same data will be loaded from disk cache in the next request
+    of the same session.
+    
+    Once in a while, expired session's cache files will be automatically cleaned up.
+    """
     def __init__(self, request, name, expires):
         # we can use farm scope since the session name is totally random
         # this means that the session is kept over multiple wikis in a farm
         # when they share user_dir and cookies
-        self.ce = CacheEntry(request, 'session', name, 'farm', use_pickle=True)
+        self.ce = caching.CacheEntry(request, 'session', name, 'farm', use_pickle=True)
         self.request = request
         if self.ce.exists():
             self._data = self.ce.content()
@@ -166,15 +174,15 @@ class SessionData:
             self._cleanup()
 
     def _cleanup(self):
-        list = get_cache_list(self.request, 'session', 'farm')
+        cachelist = caching.get_cache_list(self.request, 'session', 'farm')
         tnow = time.time()
-        for name in list:
-            entry = CacheEntry(self.request, 'session', name, 'farm', use_pickle=True)
+        for name in cachelist:
+            entry = caching.CacheEntry(self.request, 'session', name, 'farm', use_pickle=True)
             try:
                 data = entry.content()
                 if 'expires' in data and data['expires'] < tnow:
                     entry.remove()
-            except CacheError:
+            except caching.CacheError:
                 pass
 
     def __setitem__(self, name, value):
@@ -206,7 +214,7 @@ class SessionData:
 
     def rename(self, newname):
         self.ce.remove()
-        self.ce = CacheEntry(self.request, 'session', newname, 'farm', use_pickle=True)
+        self.ce = caching.CacheEntry(self.request, 'session', newname, 'farm', use_pickle=True)
         if len(self._data):
             self.ce.update(self._data)
 
@@ -218,8 +226,7 @@ def generate_security_string(length):
     return ''.join([random.choice(safe) for i in range(random_length)])
 
 def sign_cookie_data(request, data, securitystring):
-    """ generate a hash string based the securitystring and the data.
-    """
+    """ generate a hash string based the securitystring and the data """
     return hmac.new(securitystring, data).hexdigest()
 
 def makeCookie(request, cookie_name, cookie_string, maxage, expires):
@@ -242,8 +249,7 @@ def makeCookie(request, cookie_name, cookie_string, maxage, expires):
     return c.output()
 
 def getCookieLifetime(request, u):
-    """ Get cookie lifetime for the user object u
-    """
+    """ Get cookie lifetime for the user object u """
     lifetime = int(request.cfg.cookie_lifetime) * 3600
     forever = 10 * 365 * 24 * 3600 # 10 years
     if not lifetime:
@@ -257,8 +263,7 @@ def getCookieLifetime(request, u):
     return lifetime
 
 def setCookie(request, cookie_name, cookie_string, maxage, expires):
-    """ Set cookie, raw helper.
-    """
+    """ Set cookie, raw helper. """
     cookie = makeCookie(request, cookie_name, cookie_string, maxage, expires)
     # Set cookie
     request.setHttpHeader(cookie)
@@ -317,7 +322,7 @@ def deleteCookie(request, cookie_name):
     cookie_string = ''
     maxage = 0
     # Set expires to one year ago for older clients
-    expires = time.time() - (3600 * 24 * 365) # 1 year ago
+    expires = time.time() - 3600 * 24 * 365 # 1 year ago
     cookie = makeCookie(request, cookie_name, cookie_string, maxage, expires)
     # Set cookie
     request.setHttpHeader(cookie)
@@ -325,6 +330,11 @@ def deleteCookie(request, cookie_name):
     request.disableHttpCaching()
 
 def setAnonCookie(request, session_name):
+    """ Set moin_session cookie for anon user
+
+    cfg.anonymous_cookie_lifetime [h] sets the lifetime of the cookie, if
+    defined. if not defined, we do not set the cookie.
+    """
     if not hasattr(request.cfg, 'anonymous_cookie_lifetime'):
         return
     lifetime = request.cfg.anonymous_cookie_lifetime * 3600
@@ -477,7 +487,7 @@ def moin_session(request, **kw):
     return u, True # use True to get other methods called, too
 
 def moin_anon_session(request, **kw):
-    """Anonymous session support.
+    """ Anonymous session support.
 
     If you need sessions for anonymous users add this to the config.auth list
     and set config.anonymous_cookie_lifetime (in hours, can be fractional.)
