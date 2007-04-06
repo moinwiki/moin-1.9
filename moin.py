@@ -2,7 +2,8 @@
 """
     Start script for the standalone Wiki server.
 
-    @copyright: 2004-2006 Thomas Waldmann, Nir Soffer, Alexander Schremmer
+    @copyright: 2004-2006 Nir Soffer, Alexander Schremmer,
+                2004-2007 MoinMoin:Thomas Waldmann
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -18,7 +19,7 @@ try:
         raise PythonTooOldError
 except:
     sys.exit("Unfortunately, your installed Python is too old. Please download at "
-             "least Python 2.3.0 (Python 2.4.3 is recommended).\n\n"
+             "least Python 2.3.0 (the latest Python 2.4.x or 2.5.x release is recommended).\n\n"
              "You can get Python here: http://www.python.org/download/")
 
 
