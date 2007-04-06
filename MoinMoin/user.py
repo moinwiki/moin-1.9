@@ -853,10 +853,10 @@ class User:
     # -----------------------------------------------------------------
     # Trail
 
-    def addTrail(self, pagename):
+    def addTrail(self, page):
         """ Add page to trail.
         
-        @param pagename: the page name to add to the trail
+        @param page: the page (object) to add to the trail
         """
         # TODO: acquire lock here, so multiple processes don't clobber
         # each one trail.
@@ -865,12 +865,11 @@ class User:
             # load trail if not known
             self.getTrail()
 
+            pagename = page.page_name
             # Add only existing pages that the user may read
             if self._request:
-                from MoinMoin.Page import Page
-                page = Page(self._request, pagename)
                 if not (page.exists() and
-                        self._request.user.may.read(page.page_name)):
+                        self._request.user.may.read(pagename)):
                     return
 
             # Save interwiki links internally
