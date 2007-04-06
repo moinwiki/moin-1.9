@@ -341,7 +341,7 @@ Version 1.6.current:
       TODO: we need a copy icon in RC
     * Session handling for logged-in users and (not by default due to expiry
       problems) anonymous users.
-    * interwiki auth: You need to define cfg.trusted_wikis and
+    * Interwiki auth: You need to define cfg.trusted_wikis and
        cfg.user_autocreate to use it. Logging in works by entering:
       Name: RemoteWikiName RemoteUserName
       Password: remotepass
@@ -349,6 +349,8 @@ Version 1.6.current:
       map and tries to authenticate there using RemoteUserName and remotepass.
       If it succeeds, the remote wiki will return the remote user profile items
       and your local moin will autocreate an account with these values.
+    * Antispam master url is now configurable via cfg.antispam_master_url.
+      The default is to fetch the antispam patterns from MoinMaster wiki.
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
