@@ -858,9 +858,6 @@ class User:
         
         @param page: the page (object) to add to the trail
         """
-        # TODO: acquire lock here, so multiple processes don't clobber
-        # each one trail.
-
         if not self.valid or self.show_page_trail or self.remember_last_visit:
             # load trail if not known
             self.getTrail()
@@ -885,8 +882,6 @@ class User:
             self._trail = self._trail[-(self._cfg.trail_size-1):]
             self._trail.append(pagename)
             self.saveTrail()
-
-        # TODO: release lock here
 
     def saveTrail(self):
         """ Save trail file
