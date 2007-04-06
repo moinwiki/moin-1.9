@@ -167,6 +167,10 @@ class EmbedObject:
 
     def embed(self, mime_type, file):
         _ = self._
+        
+        if mime_type is None:
+            return _("Not supported mimetype of file: %s" % self.target)
+
         mtype = mime_type.split('/')
 
         if self.alt == "":
