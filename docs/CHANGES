@@ -322,7 +322,7 @@ Version 1.6.current:
       * action=sisterpages will generate a list of url pagename lines for all
         pages in your moin wiki.
       * action=pollsistersites will poll all sister sites listed in
-        cfg.sistersites = { 'OtherWiki': 'http://server/?action=sisterpages', ...}
+        cfg.sistersites = [('OtherWiki', 'http://otherwiki.org/?action=sisterpages'), ...]
       * if the current page exists on some sister wiki, a link to it will be
         added to the navibar.
       You can use sister wikis for adding another dimension to your wiki UI: use
