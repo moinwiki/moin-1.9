@@ -214,7 +214,7 @@ class Macro:
                 current_letter = letter
             if letter not in index_letters:
                 index_letters.append(letter)
-            links = map[word]
+            links = wordmap[word]
             if len(links) and links[0] != word: # show word fragment as on WordIndex
                 output.append(fmt.strong(1))
                 output.append(word)
