@@ -1102,7 +1102,7 @@ class Page(object):
                 # Page trail
                 trail = None
                 if not print_mode:
-                    request.user.addTrail(self.page_name)
+                    request.user.addTrail(self)
                     trail = request.user.getTrail()
 
                 title = self.split_title()
