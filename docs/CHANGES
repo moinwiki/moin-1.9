@@ -251,6 +251,7 @@ Version 1.6.current:
       * interwikiName -- method to get the IWID and the interwiki moniker
       * getAllPagesEx -- method to get the pagelist in a special way (revnos,
         no system pages etc.)
+      * getUser -- method to remotely authenticate a user and get profile data
     * IWID support - i.e. every wiki instance has a unique ID
     * The list of InterWiki sites is editable in the wiki (page InterWikiMap),
       it is getting reloaded every minute
@@ -340,6 +341,14 @@ Version 1.6.current:
       TODO: we need a copy icon in RC
     * Session handling for logged-in users and (not by default due to expiry
       problems) anonymous users.
+    * interwiki auth: You need to define cfg.trusted_wikis and
+       cfg.user_autocreate to use it. Logging in works by entering:
+      Name: RemoteWikiName RemoteUserName
+      Password: remotepass
+      Then moin contacts RemoteWikiName after looking it up in the interwiki
+      map and tries to authenticate there using RemoteUserName and remotepass.
+      If it succeeds, the remote wiki will return the remote user profile items
+      and your local moin will autocreate an account with these values.
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
