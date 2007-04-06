@@ -21,12 +21,12 @@
                 2001-2004 by Juergen Hermann <jh@web.de>,
                 2005 MoinMoin:AlexanderSchremmer,
                 2005 DiegoOngaro at ETSZONE (diego@etszone.com),
-                2005-2006 MoinMoin:ReimarBauer,
+                2005-2007 MoinMoin:ReimarBauer,
                 2007 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, time, zipfile
+import os, time, zipfile, mimetypes
 from MoinMoin import config, wikiutil, packages
 from MoinMoin.Page import Page
 from MoinMoin.util import filesys, timefuncs
@@ -65,7 +65,7 @@ def getAttachDir(request, pagename, create=0):
     else:
         # send file via CGI, from page storage area
         if request.page and pagename == request.page.page_name:
-            page  = request.page # reusing existing page obj is faster
+            page = request.page # reusing existing page obj is faster
         else:
             page = Page(request, pagename)
         attach_dir = page.getPagePath("attachments", check_create=create)
@@ -1003,9 +1003,25 @@ def send_viewfile(pagename, request):
         request.write("</pre>")
         return
 
-    request.write('<p>' + _("Unknown file type, cannot display this attachment inline.") + '</p>')
-    request.write('<a href="%s">%s</a>' % (
-        getAttachUrl(pagename, filename, request, escaped=1), wikiutil.escape(filename)))
+    # reuse class tmp from Despam to define macro
+    from MoinMoin.action.Despam import tmp
+    macro = tmp()
+    macro.request = request
+    macro.formatter = request.html_formatter
+
+    # use EmbedObject to view valid mime types 
+    from MoinMoin.macro.EmbedObject import EmbedObject
+    mime_type, enc = mimetypes.guess_type(filename)
+    if mime_type is None:
+        request.write('<p>' + _("Unknown file type, cannot display this attachment inline.") + '</p>')
+        request.write('For using an external program follow this link <a href="%s">%s</a>' % (
+             getAttachUrl(pagename, filename, request, escaped=1), wikiutil.escape(filename)))
+        return
+
+    url = getAttachUrl(pagename, filename, request, escaped=1)
+
+    request.write(request.formatter.rawHTML(EmbedObject.embed(EmbedObject(macro, wikiutil.escape(filename)), mime_type, url)))
+    return
 
 
 def view_file(pagename, request):
