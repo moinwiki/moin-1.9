@@ -17,7 +17,7 @@ from MoinMoin.util import timefuncs
 
 def execute(pagename, request):
     status = []
-    for sistername, sisterurl in request.cfg.sistersites.items():
+    for sistername, sisterurl in request.cfg.sistersites:
         arena = 'sisters'
         key = sistername
         cache = caching.CacheEntry(request, arena, key, scope='farm', use_pickle=True)

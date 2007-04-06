@@ -373,11 +373,11 @@ reStructuredText Quick Reference
     quicklinks_default = [] # preload user quicklinks with this page list
     refresh = None # (minimum_delay, type), e.g.: (2, 'internal')
     rss_cache = 60 # suggested caching time for RecentChanges RSS, in seconds
-    sistersites = {
-        #'Self': 'http://localhost:8080/?action=sisterpages',
-        'EmacsWiki': 'http://www.emacswiki.org/cgi-bin/test?action=sisterpages',
-        'JspWiki': 'http://www.jspwiki.org/SisterSites.jsp',
-    } # dict {sistersitename: sisterpagelistfetchurl}
+    sistersites = [
+        #('Self', 'http://localhost:8080/?action=sisterpages'),
+        ('EmacsWiki', 'http://www.emacswiki.org/cgi-bin/test?action=sisterpages'),
+        ('JspWiki', 'http://www.jspwiki.org/SisterSites.jsp'),
+    ] # list of (sistersitename, sisterpagelistfetchurl)
     shared_intermap = None # can be string or list of strings (filenames)
     show_hosts = True
     show_interwiki = False

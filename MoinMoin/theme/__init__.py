@@ -446,7 +446,7 @@ class ThemeBase:
             items.append(item % (cls, link))
 
         # Add sister pages.
-        for sistername in request.cfg.sistersites: # TODO: sort sistersites?
+        for sistername, sisterurl in request.cfg.sistersites:
             if sistername == request.cfg.interwikiname: # it is THIS wiki
                 cls = 'sisterwiki current'
                 items.append(item % (cls, sistername))
