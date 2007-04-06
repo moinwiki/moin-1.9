@@ -2,6 +2,9 @@
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - FastCGI Driver Script
+    
+    TODO: this should be refactored so it uses MoinMoin.server package
+          (see how Twisted, WSGI and Standalone use it)
 
     @copyright: 2004-2005 by Oliver Graf <ograf@bitart.de>
     @license: GNU GPL, see COPYING for details.

@@ -22,6 +22,8 @@
     look into INSTALL.html to see how you can fix the bug on your own
     (a simple one line change).
 
+    TODO: this should be refactored so it uses MoinMoin.server package
+          (see how Twisted, WSGI and Standalone use it)
 
     @copyright: 2004-2005 by Oliver Graf <ograf@bitart.de>
     @license: GNU GPL, see COPYING for details.
