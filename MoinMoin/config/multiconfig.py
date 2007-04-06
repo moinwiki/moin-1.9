@@ -195,6 +195,7 @@ class DefaultConfig:
 
     actions_excluded = [] # ['DeletePage', 'AttachFile', 'RenamePage', 'test', ]
     allow_xslt = False
+    antispam_master_url = "http://moinmaster.wikiwikiweb.de:8000/?action=xmlrpc2"
     attachments = None # {'dir': path, 'url': url-prefix}
     auth = [authmodule.moin_login, authmodule.moin_session, ]
 
