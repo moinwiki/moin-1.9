@@ -3,7 +3,7 @@
 """
     MoinMoin - CGI Driver Script
 
-    @copyright: 2000-2005 by Jürgen Hermann <jh@web.de>
+    @copyright: 2000-2005 by Juergen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
 

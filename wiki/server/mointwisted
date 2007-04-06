@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 """
-mointwisted - control MoinMoin Twisted server
+    mointwisted - control MoinMoin Twisted server
 
-@copyright: 2004-2005 Thomas Waldmann, Nir Soffer
-@license: GNU GPL, see COPYING for details.
+    @copyright: 2004-2005 Thomas Waldmann, Nir Soffer
+    @license: GNU GPL, see COPYING for details.
 """
 
 # Add the path to mointwisted.py directory 
