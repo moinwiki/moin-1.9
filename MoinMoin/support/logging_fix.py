@@ -1,6 +1,9 @@
-# -*- coding: utf-8 -*-
+# -*- coding: iso-8859-1 -*-
 """
-Python 2.3's logging module has no .log, this provides it.
+    Python 2.3's logging module has no .log, this provides it.
+
+    @copyright: 2007 MoinMoin:JohannesBerg 
+    @license: GNU GPL, see COPYING for details.
 """
 
 import logging
