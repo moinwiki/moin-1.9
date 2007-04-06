@@ -560,6 +560,15 @@ class XmlRpcBase:
         from MoinMoin import version
         return (version.project, version.release, version.revision)
 
+    def xmlrpc_getUser(self, username, password):
+        u = self.request.get_user_default_None(name=username, password=password, login=1)
+        if u is None:
+            return "Authentication failed"
+        else:
+            userdata = dict(u.persistent_items())
+            del userdata['enc_password']
+            del userdata['last_saved']
+            return userdata
 
     # authorization methods
 

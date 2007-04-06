@@ -530,6 +530,11 @@ class User:
         # No encoded password match, this must be wrong password
         return False, False
 
+    def persistent_items(self):
+        """ items we want to store into the user profile """
+        return [(key, value) for key, value in vars(self).items()
+                    if key not in self._cfg.user_transient_fields and key[0] != '_']
+
     def save(self):
         """ Save user account data to user account file on disk.
 
@@ -552,20 +557,19 @@ class User:
         data.write("# Data saved '%s' for id '%s'\n" % (
             time.strftime(self._cfg.datetime_fmt, time.localtime(time.time())),
             self.id))
-        attrs = vars(self).items()
+        attrs = self.persistent_items()
         attrs.sort()
         for key, value in attrs:
-            if key not in self._cfg.user_transient_fields and key[0] != '_':
-                # Encode list values
-                if isinstance(value, list):
-                    key += '[]'
-                    value = encodeList(value)
-                # Encode dict values
-                elif isinstance(value, dict):
-                    key += '{}'
-                    value = encodeDict(value)
-                line = u"%s=%s\n" % (key, unicode(value))
-                data.write(line)
+            # Encode list values
+            if isinstance(value, list):
+                key += '[]'
+                value = encodeList(value)
+            # Encode dict values
+            elif isinstance(value, dict):
+                key += '{}'
+                value = encodeDict(value)
+            line = u"%s=%s\n" % (key, unicode(value))
+            data.write(line)
         data.close()
 
         if not self.disabled:
