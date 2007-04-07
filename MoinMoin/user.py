@@ -8,6 +8,12 @@
 
     The UserPreferences form support stuff is in module userform.
 
+    TODO:
+    * code is a mixture of highlevel user stuff and lowlevel storage functions,
+      this has to get separated into:
+      * user object highlevel stuff
+      * storage code
+
     @copyright: 2000-2004 Juergen Hermann <jh@web.de>,
                 2003-2007 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
@@ -36,16 +42,14 @@ def getUserList(request):
     return userlist
 
 def get_by_email_address(request, email_address):
-    """ Searches for a user with a particular e-mail address and
-        returns it."""
+    """ Searches for a user with a particular e-mail address and returns it. """
     for uid in getUserList(request):
         theuser = User(request, uid)
         if theuser.valid and theuser.email.lower() == email_address.lower():
             return theuser
 
 def getUserId(request, searchName):
-    """
-    Get the user ID for a specific user NAME.
+    """ Get the user ID for a specific user NAME.
 
     @param searchName: the user name to look up
     @rtype: string
@@ -83,8 +87,7 @@ def getUserId(request, searchName):
 
 
 def getUserIdentification(request, username=None):
-    """ 
-    Return user name or IP or '<unknown>' indicator.
+    """ Return user name or IP or '<unknown>' indicator.
     
     @param request: the request object
     @param username: (optional) user name
@@ -232,7 +235,7 @@ def decodeDict(line):
 
 
 class User:
-    """A MoinMoin User"""
+    """ A MoinMoin User """
 
     def __init__(self, request, id=None, name="", password=None, auth_username="", **kw):
         """ Initialize User object
@@ -910,9 +913,11 @@ class User:
     # Other
 
     def isCurrentUser(self):
+        """ Check if this user object is the user doing the current request """
         return self._request.user.name == self.name
 
     def isSuperUser(self):
+        """ Check if this user is superuser """
         request = self._request
         if request.cfg.DesktopEdition and request.remote_addr == '127.0.0.1':
             # the DesktopEdition gives any local user superuser powers
@@ -928,7 +933,7 @@ class User:
         return host or _("<unknown>")
 
     def wikiHomeLink(self):
-        """ return wiki markup usable as a link to the user homepage,
+        """ Return wiki markup usable as a link to the user homepage,
             it doesn't matter whether it already exists or not.
         """
         wikiname, pagename = wikiutil.getInterwikiHomePage(self._request, self.name)
@@ -957,6 +962,9 @@ class User:
             return self.host()
 
     def mailAccountData(self, cleartext_passwd=None):
+        """ Mail a user who forgot his password a message enabling
+            him to login again.
+        """
         from MoinMoin.mail import sendmail
         from MoinMoin.wikiutil import getLocalizedPage
         _ = self._request.getText
