@@ -20,7 +20,7 @@
     when really necessary (like for transferring binary files like
     attachments maybe).
 
-    @copyright: 2003-2006 MoinMoin:ThomasWaldmann,
+    @copyright: 2003-2007 MoinMoin:ThomasWaldmann,
                 2004-2006 MoinMoin:AlexanderSchremmer
     @license: GNU GPL, see COPYING for details
 """
@@ -39,6 +39,7 @@ from MoinMoin.action import AttachFile
 _debug = 0
 
 class XmlRpcBase:
+    """ XMLRPC base class with common functionality of wiki xmlrpc v1 and v2 """
     def __init__(self, request):
         """
         Initialize an XmlRpcBase object.
@@ -53,20 +54,20 @@ class XmlRpcBase:
     #############################################################################
 
     def _instr(self, text):
-        """ Convert inbound string from utf-8.
+        """ Convert inbound string.
         
-        @param text: the text to convert
-        @rtype: str
-        @return: string in config.charset
+        @param text: the text to convert (encoded str or unicode)
+        @rtype: unicode
+        @return: text as unicode
         """
         raise NotImplementedError("please implement _instr in derived class")
 
     def _outstr(self, text):
-        """ Convert outbound string to utf-8.
+        """ Convert outbound string.
 
-        @param text: the text to convert XXX unicode? str? both?
+        @param text: the text to convert (encoded str or unicode)
         @rtype: str
-        @return: string in utf-8
+        @return: text as encoded str
         """
         raise NotImplementedError("please implement _outstr in derived class")
 
@@ -145,6 +146,9 @@ class XmlRpcBase:
             sys.stderr.write(response + '\n\n')
 
     def dispatch(self, method, params):
+        """ call dispatcher - for method==xxx it either locates a method called
+            xmlrpc_xxx or loads a plugin from plugin/xmlrpc/xxx.py
+        """
         method = method.replace(".", "_")
 
         try:
@@ -278,14 +282,14 @@ class XmlRpcBase:
 
         if options['include_revno']:
             pages = []
-            for x in pagelist:
-                revno = x.get_real_rev()
-                if options["mark_deleted"] and not x.exists():
+            for page in pagelist:
+                revno = page.get_real_rev()
+                if options["mark_deleted"] and not page.exists():
                     revno = -revno
-                pages.append([self._outstr(x.page_name), revno])
+                pages.append([self._outstr(page.page_name), revno])
             return pages
         else:
-            return [self._outstr(x) for x in pagelist]
+            return [self._outstr(page) for page in pagelist]
 
     def xmlrpc_getRecentChanges(self, date):
         """ Get RecentChanges since date
@@ -545,6 +549,9 @@ class XmlRpcBase:
         return xmlrpclib.Boolean(1)
 
     def xmlrpc_searchPages(self, query_string):
+        """ Searches pages for query_string.
+            Returns a list of tuples (foundpagename, context)
+        """
         from MoinMoin import search
         results = search.searchPages(self.request, query_string)
         results.formatter = self.request.html_formatter
@@ -561,6 +568,10 @@ class XmlRpcBase:
         return (version.project, version.release, version.revision)
 
     def xmlrpc_getUser(self, username, password):
+        """ Tries to authenticate username/password.
+            If it succeeds, it returns a dict of items from user profile.
+            If it fails, it returns a str with an error msg.
+        """
         u = self.request.get_user_default_None(name=username, password=password, login=1)
         if u is None:
             return "Authentication failed"
