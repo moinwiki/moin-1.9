@@ -4,6 +4,13 @@
     This is used for accessing the global edit-log (e.g. by RecentChanges) as
     well as for the local edit-log (e.g. PageEditor, info action).
 
+    TODO:
+    * when we have items with separate data and metadata storage, we do not
+      need the local edit-log file any more (because everything in it will be
+      stored into the revision's metadata).
+    * maybe we can even get rid of the global edit-log as we know it now (and just
+      maintaining a cache of recent changes metadata)
+
     @copyright: 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
@@ -129,7 +136,9 @@ class EditLogLine:
 
 
 class EditLog(LogFile):
-
+    """ Used for accessing the global edit-log (e.g. by RecentChanges) as
+        well as for the local edit-log (e.g. PageEditor, info action).
+    """
     def __init__(self, request, filename=None, buffer_size=4096, **kw):
         if filename is None:
             rootpagename = kw.get('rootpagename', None)
@@ -146,7 +155,7 @@ class EditLog(LogFile):
         self.uid_override = kw.get('uid_override', None)
 
     def add(self, request, mtime, rev, action, pagename, host=None, extra=u'', comment=u''):
-        """ Generate a line for the editlog.
+        """ Generate (and add) a line to the edit-log.
 
         If `host` is None, it's read from request vars.
         """
@@ -185,7 +194,7 @@ class EditLog(LogFile):
         self._add(line)
 
     def parser(self, line):
-        """ Parser edit log line into fields """
+        """ Parse edit-log line into fields """
         fields = line.strip().split('\t')
         # Pad empty fields
         missing = self._NUM_FIELDS - len(fields)
@@ -202,6 +211,7 @@ class EditLog(LogFile):
         return result
 
     def set_filter(self, **kw):
+        """ optionally filter for specific pagenames, addrs, hostnames, userids """
         expr = "1"
         for field in ['pagename', 'addr', 'hostname', 'userid']:
             if field in kw:
