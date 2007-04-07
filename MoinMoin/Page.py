@@ -9,9 +9,27 @@
     The RootPage is some virtual page located at / and is mainly used to do namespace
     operations like getting the page list. 
 
+    Currently, this is all a big mixture between high-level page code, intermediate 
+    data/underlay layering code, caching code and low-level filesystem storage code.
+    To see the filesystem storage layout we use, best is to look into data/pages/
+    (underlay dir uses the same format).
+
+    TODO:
+    * Cleanly separate the code into packages for:
+      * Page (or rather: Item)
+      * Layering
+      * Cache
+      * Storage
+    * ACLs should be handled on a low layer, raising an Exception when access
+      is denied, so we won't have security issues just because someone forgot to check
+      user.may.read(secretpage).
+    * The distinction between a item and a item revision should be clearer.
+    * Items can be anything, not just wiki pages, but also files of any mimetype.
+      The mimetype hierarchy should be modelled by a MimeTypeItem class hierarchy.
+
     @copyright: 2000-2004 by Juergen Hermann <jh@web.de>,
                 2005-2007 by MoinMoin:ThomasWaldmann,
-                2006 by MoinMoin:FlorianFesti.
+                2006 by MoinMoin:FlorianFesti,
                 2007 by ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
@@ -107,13 +125,11 @@ class ItemCache:
 
 
 class Page(object):
-    """Page - Manage an (immutable) page associated with a WikiName.
-       To change a page's content, use the PageEditor class.
+    """ Page - Manage an (immutable) page associated with a WikiName.
+        To change a page's content, use the PageEditor class.
     """
-
     def __init__(self, request, page_name, **kw):
-        """
-        Create page object.
+        """ Create page object.
 
         Note that this is a 'lean' operation, since the text for the page
         is loaded on demand. Thus, things like `Page(name).link_to()` are
@@ -184,6 +200,8 @@ class Page(object):
         # path to normal / underlay page dir
         self._pagepath = [normalpath, underlaypath]
 
+    # now we define some properties to lazy load some attributes on first access:
+    
     def get_body(self):
         if self.__body is None:
             # try to open file
@@ -211,25 +229,25 @@ class Page(object):
         self.__body = newbody
         self.__meta = None
         self.__data = None
-    body = property(fget=get_body, fset=set_body)
+    body = property(fget=get_body, fset=set_body) # complete page text
 
     def get_meta(self):
         if self.__meta is None:
             self.__meta, self.__data = wikiutil.get_processing_instructions(self.body)
         return self.__meta
-    meta = property(fget=get_meta)
+    meta = property(fget=get_meta) # processing instructions, ACLs (upper part of page text)
 
     def get_data(self):
         if self.__data is None:
             self.__meta, self.__data = wikiutil.get_processing_instructions(self.body)
         return self.__data
-    data = property(fget=get_data)
+    data = property(fget=get_data) # content (lower part of page text)
 
     def get_pi(self):
         if self.__pi is None:
             self.__pi = self.parse_processing_instructions()
         return self.__pi
-    pi = property(fget=get_pi)
+    pi = property(fget=get_pi) # processed meta stuff
     
     def getlines(self):
         """ Return a list of all lines in body.
@@ -243,7 +261,7 @@ class Page(object):
         """ Load the raw markup from the page file.
 
         @rtype: unicode
-        @return: raw page contents of this page
+        @return: raw page contents of this page, unicode
         """
         return self.body
 
@@ -251,7 +269,7 @@ class Page(object):
         """ Returns the raw markup from the page file, as a string.
 
         @rtype: str
-        @return: raw page contents of this page
+        @return: raw page contents of this page, utf-8-encoded
         """
         return self.body.encode("utf-8")
 
@@ -269,8 +287,8 @@ class Page(object):
         self.__body_modified = modified
 
     def get_current_from_pagedir(self, pagedir):
-        """ get the current revision number from an arbitrary pagedir.
-            does not modify page object's state, uncached, direct disk access.
+        """ Get the current revision number from an arbitrary pagedir.
+            Does not modify page object's state, uncached, direct disk access.
             @param pagedir: the pagedir with the 'current' file to read
             @return: int currentrev
         """
@@ -285,10 +303,9 @@ class Page(object):
         return rev
 
     def get_rev_dir(self, pagedir, rev=0):
-        """Get a revision of a page from an arbitrary pagedir.
+        """ Get a revision of a page from an arbitrary pagedir.
         
-        Does not modify page object's state, uncached, direct disk
-        access.
+        Does not modify page object's state, uncached, direct disk access.
 
         @param pagedir: the path to the page storage area
         @param rev: int revision to get (default is 0 and means the current
@@ -335,7 +352,7 @@ class Page(object):
             self.page_name = realPath[-len(self.page_name):]
 
     def get_rev(self, use_underlay=-1, rev=0):
-        """Get information about a revision.
+        """ Get information about a revision.
 
         filename, number, and (existance test) of this page and revision.
 
@@ -384,7 +401,7 @@ class Page(object):
         return data
 
     def current_rev(self):
-        """Return number of current revision.
+        """ Return number of current revision.
         
         This is the same as get_rev()[1].
         
@@ -394,8 +411,8 @@ class Page(object):
         return rev
 
     def get_real_rev(self):
-        """Returns the real revision number of this page. A rev=0 is
-        translated to the current revision.
+        """ Returns the real revision number of this page.
+            A rev==0 is translated to the current revision.
 
         @returns: revision number > 0
         @rtype: int
@@ -405,9 +422,8 @@ class Page(object):
         return self.rev
 
     def getPageBasePath(self, use_underlay=-1):
-        """
-        Get full path to a page-specific storage area. `args` can
-        contain additional path components that are added to the base path.
+        """ Get full path to a page-specific storage area. `args` can
+            contain additional path components that are added to the base path.
 
         @param use_underlay: force using a specific pagedir, default -1
                                 -1 = automatically choose page dir
@@ -439,9 +455,8 @@ class Page(object):
         return underlay, path
 
     def getPageStatus(self, *args, **kw):
-        """
-        Get full path to a page-specific storage area. `args` can
-        contain additional path components that are added to the base path.
+        """ Get full path to a page-specific storage area. `args` can
+            contain additional path components that are added to the base path.
 
         @param args: additional path components
         @keyword use_underlay: force using a specific pagedir, default '-1'
@@ -471,13 +486,11 @@ class Page(object):
         return underlay, fullpath
 
     def getPagePath(self, *args, **kw):
-        """Return path to the page storage area."""
-
+        """ Return path to the page storage area. """
         return self.getPageStatus(*args, **kw)[1]
 
     def _text_filename(self, **kw):
-        """
-        The name of the page file, possibly of an older page.
+        """ The name of the page file, possibly of an older page.
 
         @keyword rev: page revision, overriding self.rev
         @rtype: string
@@ -512,8 +525,7 @@ class Page(object):
         return log
 
     def last_edit(self, request):
-        """
-        Return the last edit.
+        """ Return the last edit.
         This is used by MoinMoin/xmlrpc/__init__.py.
 
         @param request: the request object
@@ -614,9 +626,9 @@ class Page(object):
         the higher level methods isUnderlayPage and isStandardPage for
         cleaner code.
 
-        @param rev: revision to look for. Default check current
-        @param domain: where to look for the page. Default look in all,
-            available values: 'underlay', 'standard'
+        @param rev: revision to look for. Default: check current
+        @param domain: where to look for the page. Default: look in all,
+                       available values: 'underlay', 'standard'
         @param includeDeleted: ignore page state, just check its pagedir
         @rtype: bool
         @return: true, if page exists
@@ -667,8 +679,7 @@ class Page(object):
             raise
 
     def mtime_usecs(self):
-        """
-        Get modification timestamp of this page.
+        """ Get modification timestamp of this page.
 
         @rtype: long
         @return: mtime of page (or 0 if page does not exist)
@@ -696,9 +707,7 @@ class Page(object):
         return mtime
 
     def mtime_printable(self, request):
-        """
-        Get printable (as per user's preferences) modification
-        timestamp of this page.
+        """ Get printable (as per user's preferences) modification timestamp of this page.
 
         @rtype: string
         @return: formatted string with mtime of page
@@ -712,8 +721,7 @@ class Page(object):
         return result
 
     def split_title(self, force=0):
-        """
-        Return a string with the page name split by spaces, if the user wants that.
+        """ Return a string with the page name split by spaces, if the user wants that.
 
         @param force: if != 0, then force splitting the page_name
         @rtype: unicode
@@ -806,8 +814,7 @@ class Page(object):
         return link
 
     def getSubscribers(self, request, **kw):
-        """
-        Get all subscribers of this page.
+        """ Get all subscribers of this page.
 
         @param request: the request object
         @keyword include_self: if 1, include current user (default: 0)
@@ -866,8 +873,8 @@ class Page(object):
         return subscriber_list
 
     def parse_processing_instructions(self):
-        """ parse page text and extract processing instructions
-            return a dict of PIs and the non-PI rest of the body
+        """ Parse page text and extract processing instructions,
+            return a dict of PIs and the non-PI rest of the body.
         """
         from MoinMoin import i18n
         from MoinMoin import security
@@ -971,6 +978,8 @@ class Page(object):
 
     def send_page(self, msg=None, **keywords):
         """ Output the formatted page.
+
+        TODO: "kill send_page(), quick" (since 2002 :)
 
         @param msg: if given, display message in header area
         @keyword content_only: if 1, omit http headers, page header and footer
@@ -1255,7 +1264,6 @@ class Page(object):
             import MoinMoin
             if hasattr(MoinMoin, '__loader__'):
                 __file__ = os.path.join(MoinMoin.__loader__.archive, 'dummy')
-
             try:
                 exec code
             except "CacheNeedsUpdate": # convert the exception
@@ -1304,8 +1312,7 @@ class Page(object):
         return code
 
     def _emptyPageText(self, request):
-        """
-        Output the default page content for new pages.
+        """ Output the default page content for new pages.
 
         @param request: the request object
         """
@@ -1320,8 +1327,7 @@ class Page(object):
 
 
     def getRevList(self):
-        """
-        Get a page revision list of this page, including the current version,
+        """ Get a page revision list of this page, including the current version,
         sorted by revision number in descending order (current page first).
 
         @rtype: list of ints
@@ -1342,8 +1348,7 @@ class Page(object):
         return revisions
 
     def olderrevision(self, rev=0):
-        """
-        Get revision of the next older page revision than rev.
+        """ Get revision of the next older page revision than rev.
         rev == 0 means this page objects revision (that may be an old
         revision already!)
         """
@@ -1590,9 +1595,8 @@ class RootPage(Page):
         Page.__init__(self, request, page_name)
 
     def getPageBasePath(self, use_underlay=0):
-        """
-        Get full path to a page-specific storage area. `args` can
-        contain additional path components that are added to the base path.
+        """ Get full path to a page-specific storage area. `args` can
+            contain additional path components that are added to the base path.
 
         @param use_underlay: force using a specific pagedir, default 0:
                                 1 = use underlay page dir
@@ -1796,5 +1800,3 @@ class RootPage(Page):
         self.request.clock.stop('getPageCount')
 
         return count
-
-
