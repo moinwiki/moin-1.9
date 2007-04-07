@@ -4,6 +4,9 @@
 
     Same as PageEditor, but we use the HTML based GUI editor here.
 
+    TODO:
+    * see PageEditor.py
+
     @copyright: 2006 Bastian Blank, Florian Festi,
                 2006-2007 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
@@ -28,15 +31,14 @@ def execute(pagename, request):
 
 
 class PageGraphicalEditor(PageEditor.PageEditor):
-
+    """ Same as PageEditor, but use the GUI editor (FCKeditor) """
     def word_rule(self):
         regex = re.compile(r"\(\?<![^)]*?\)")
         word_rule = regex.sub("", WikiParser.word_rule)
         return repr(word_rule)[1:]
 
     def sendEditor(self, **kw):
-        """
-        Send the editor form page.
+        """ Send the editor form page.
 
         @keyword preview: if given, show this text in preview mode
         @keyword staytop: don't go to #preview

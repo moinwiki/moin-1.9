@@ -4,6 +4,12 @@
     
     PageEditor is used for r/w access to a wiki page (edit, rename, delete operations).
 
+    TODO:
+    * See comments in Page.py, most apply here, too.
+    * The editor code should be modularized so we will be able to use it for any
+      text/* mimetype data with some special features enabled depending on the
+      mimetype (e.g. enable wiki markup help when editing wiki mimetype).
+  
     @copyright: 2000-2004 by Juergen Hermann <jh@web.de>,
                 2005-2007 by MoinMoin:ThomasWaldmann,
                 2007 by ReimarBauer
@@ -48,10 +54,9 @@ addLoadEvent(countdown)
 ### PageEditor - Edit pages
 #############################################################################
 class PageEditor(Page):
-    """Editor for a wiki page."""
+    """ Editor for a wiki page. """
 
     # exceptions for .saveText()
-
     class SaveError(error.Error):
         pass
     class AccessDenied(SaveError):
@@ -70,8 +75,7 @@ class PageEditor(Page):
         pass
 
     def __init__(self, request, page_name, **keywords):
-        """
-        Create page editor object.
+        """ Create page editor object.
         
         @param page_name: name of the page
         @param request: the request object
@@ -118,7 +122,7 @@ class PageEditor(Page):
         return False
 
     def sendconfirmleaving(self):
-        """ to prevent moving away from the page without saving it """
+        """ Prevents moving away from the page without saving it. """
         _ = self._
         self.request.write(u'''\
 <script type="text/javascript">
@@ -131,8 +135,7 @@ class PageEditor(Page):
 ''' % _("Your changes are not saved!"))
 
     def sendEditor(self, **kw):
-        """
-        Send the editor form page.
+        """ Send the editor form page.
 
         @keyword preview: if given, show this text in preview mode
         @keyword staytop: don't go to #preview
@@ -471,9 +474,8 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         request.theme.send_closing_html()
 
     def sendCancel(self, newtext, rev):
-        """
-        User clicked on Cancel button. If edit locking is active,
-        delete the current lock file.
+        """ User clicked on Cancel button.
+            If edit locking is active, delete the current lock file.
 
         @param newtext: the edited text (which has been cancelled)
         @param rev: not used!?
@@ -488,8 +490,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         page.send_page(msg=_('Edit was cancelled.'))
 
     def copyPage(self, newpagename, comment=None):
-        """
-        Copy the current version of the page (keeping the backups, logs and attachments).
+        """ Copy the current version of the page (keeping the backups, logs and attachments).
 
         @param comment: Comment given by user
         @rtype: unicode
@@ -554,9 +555,8 @@ Try a different name.""") % (newpagename,)
                 return False, _('Could not copy page because of file system error: %s.') % unicode(err)
 
     def renamePage(self, newpagename, comment=None):
-        """
-        Rename the current version of the page (making a backup before deletion
-        and keeping the backups, logs and attachments).
+        """ Rename the current version of the page (making a backup before deletion
+            and keeping the backups, logs and attachments).
 
         @param comment: Comment given by user
         @rtype: unicode
@@ -632,9 +632,8 @@ Try a different name.""") % (newpagename,)
                 return False, _('Could not rename page because of file system error: %s.') % unicode(err)
 
     def deletePage(self, comment=None):
-        """
-        Delete the current version of the page (making a backup before deletion
-        and keeping the backups, logs and attachments).
+        """ Delete the current version of the page (making a backup before deletion
+            and keeping the backups, logs and attachments).
 
         @param comment: Comment given by user
         @rtype: unicode
@@ -675,8 +674,8 @@ Try a different name.""") % (newpagename,)
         return success, msg
 
     def _sendNotification(self, comment, emails, email_lang, revisions, trivial):
-        """
-        Send notification email for a single language.
+        """ Send notification email for a single language.
+
         @param comment: editor's comment given when saving the page
         @param emails: list of email addresses
         @param email_lang: language of emails
@@ -733,8 +732,7 @@ Try a different name.""") % (newpagename,)
 
 
     def _notifySubscribers(self, comment, trivial):
-        """
-        Send email to all subscribers of this page.
+        """ Send email to all subscribers of this page.
 
         @param comment: editor's comment given when saving the page
         @param trivial: editor's suggestion that the change is trivial (Subscribers may ignore this)
@@ -765,8 +763,7 @@ Try a different name.""") % (newpagename,)
         return ''
 
     def _get_local_timestamp(self):
-        """
-        Returns the string that can be used by the TIME substitution.
+        """ Returns the string that can be used by the TIME substitution.
 
         @return: str with a timestamp in it
         """
@@ -793,8 +790,7 @@ Try a different name.""") % (newpagename,)
         return time.strftime("%Y-%m-%dT%H:%M:%S", timefuncs.tmtuple(now)) + zone
 
     def _expand_variables(self, text):
-        """
-        Expand @VARIABLE@ in `text`and return the expanded text.
+        """ Expand @VARIABLE@ in `text`and return the expanded text.
         
         @param text: current text of wikipage
         @rtype: string
@@ -911,9 +907,7 @@ Try a different name.""") % (newpagename,)
 
     def copy_underlay_page(self):
         # renamed from copypage to avoid conflicts with copyPage
-        """
-        Copy a page from underlay directory to page directory
-        """
+        """ Copy a page from underlay directory to page directory """
         src = self.getPagePath(use_underlay=1, check_create=0)
         dst = self.getPagePath(use_underlay=0, check_create=0)
         if src and dst and src != dst and os.path.exists(src):
@@ -1161,9 +1155,7 @@ Please review the page and save then. Do not save this page as it is!""")
 
 
 class PageLock:
-    """
-    PageLock - Lock pages
-    """
+    """ PageLock - Lock pages """
     # TODO: race conditions throughout, need to lock file during queries & update
     def __init__(self, pageobj):
         """
@@ -1195,8 +1187,7 @@ class PageLock:
 
 
     def acquire(self):
-        """
-        Begin an edit lock depending on the mode chosen in the config.
+        """ Begin an edit lock depending on the mode chosen in the config.
 
         @rtype: tuple
         @return: tuple is returned containing 2 values:
@@ -1262,8 +1253,7 @@ To leave the editor, press the Cancel button.""") % {
 
 
     def release(self, force=0):
-        """ 
-        Release lock, if we own it.
+        """ Release lock, if we own it.
 
         @param force: if 1, unconditionally release the lock.
         """
@@ -1276,12 +1266,12 @@ To leave the editor, press the Cancel button.""") % {
 
 
     def _filename(self):
-        """get path and filename for edit-lock file"""
+        """ Get path and filename for edit-lock file. """
         return self.pageobj.getPagePath('edit-lock', isfile=1)
 
 
     def _readLockFile(self):
-        """Load lock info if not yet loaded."""
+        """ Load lock info if not yet loaded. """
         _ = self._
         self.owner = None
         self.owner_html = wikiutil.escape(_("<unknown>"))
@@ -1300,7 +1290,7 @@ To leave the editor, press the Cancel button.""") % {
 
 
     def _writeLockFile(self):
-        """Write new lock file."""
+        """ Write new lock file. """
         self._deleteLockFile()
         try:
             editlog.EditLog(self.request, filename=self._filename()).add(
@@ -1309,7 +1299,7 @@ To leave the editor, press the Cancel button.""") % {
             pass
 
     def _deleteLockFile(self):
-        """Delete the lock file unconditionally."""
+        """ Delete the lock file unconditionally. """
         try:
             os.remove(self._filename())
         except OSError:
