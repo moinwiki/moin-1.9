@@ -804,10 +804,16 @@ class Page(object):
         if not self.exists():
             kw['css_class'] = 'nonexistent'
 
+        attachment_indicator = kw.get('attachment_indicator')
+        if attachment_indicator is None:
+            attachment_indicator = 0 # default is off
+        else:
+            del kw['attachment_indicator'] # avoid having this as <a> tag attribute
+
         link = self.link_to_raw(request, text, querystr, anchor, **kw)
 
         # Create a link to attachments if any exist
-        if kw.get('attachment_indicator', 0):
+        if attachment_indicator:
             from MoinMoin.action import AttachFile
             link += AttachFile.getIndicator(request, self.page_name)
 
