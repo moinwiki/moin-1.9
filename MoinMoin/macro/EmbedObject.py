@@ -17,7 +17,7 @@
          application/pdf
          application/ogg
          application/vnd.visio
-         
+
          image/x-ms-bmp
          image/svg+xml
          image/tiff
@@ -26,21 +26,21 @@
          audio/mpeg
          audio/midi
          audio/x-wav
-                         
+
          video/fli
          video/mpeg
          video/quicktime
          video/x-msvideo
-                         
+
          chemical/x-pdb
 
          x-world/x-vrml  
-           
+
     INPUTS:
         attachment: name of attachment
 
     KEYWORD PARAMETERS:
-        
+
         Dependent on the mimetype class a different set of keywords is used from the defaults
 
            width = ""
@@ -54,10 +54,10 @@
            repeat = false
            autostart = false
            menu = true
-      
+
 
         All do use width, height, mime_type, alt   
-        
+
         in addition:
            'video' do use  repeat, autostart, menu, op
            'audio' do use   play, repeat, autostart, op, hidden
@@ -72,7 +72,7 @@
         one since it does not describe the content really but only the type of content.
         Compare these alt texts: "Embedded application/pdf" vs. "MoinMoin Tutorial embedded
         as PDF file"
-    
+
     EXAMPLE:
         [[EmbedObject]]
         [[EmbedObject(example.swf,alt=A flash movie showing the rotating moin logo)]]
@@ -81,14 +81,14 @@
         [[EmbedObject(example.svg)]]
         [[EmbedObject(example.mp3)]]
         [[EmbedObject(example.vss)]]
-         
+
         [[EmbedObject(example.swf,width=637,height=392)]]
         [[EmbedObject(SlideShow/example.swf,width=637,height=392)]]
         [[EmbedObject(SlideShow/example.swf,width=637,height=392)]]
         [[EmbedObject(SlideShow/example.swf,width=637,height=392,play=true,loop=false)]]
         [[EmbedObject(SlideShow/example.swf,width=637,height=392,quality=low)]]
 
- 
+
     PROCEDURE:
         If the attachment file isn't uploaded yet the attachment line will be shown.
         If you give only one size argument, e.g. width only, the other one will be calculated.
@@ -99,7 +99,7 @@
 
         Please add needed mimetypes as objects.
 
-           
+
     RESTRICTIONS:
         Some mimetypes do ignore all used keywords. May be they do use different names.        
 
@@ -116,11 +116,11 @@
         2006-10-08 RB type is needed on some platforms, some more keywords added
         2007-02-10 OliverSiemoneit: alt and noembed tags added for AccessibleMoin; fixed
                    output abstraction violation.
+        2007-04-08: RB refactored / optimisation
 
-    @copyright: 2006 Reimar Bauer (R.Bauer@fz-juelich.de)      
+    @copyright: 2006-2007 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
-import mimetypes
 
 from MoinMoin import wikiutil
 from MoinMoin.action import AttachFile
@@ -147,6 +147,32 @@ class EmbedObject:
         self.hidden = "false"
         self.menu = "true"
         self.target = None
+        self.approved_mimetypes = [
+                                  "application/x-shockwave-flash",
+                                  "application/x-dvi",
+                                  "application/postscript",
+                                  "application/pdf",
+                                  "application/ogg",
+                                  "application/vnd.visio",
+
+                                  "image/x-ms-bmp",
+                                  "image/svg+xml",
+                                  "image/tiff",
+                                  "image/x-photoshop",
+
+                                  "audio/mpeg",
+                                  "audio/midi",
+                                  "audio/x-wav",
+
+                                  "video/fli",
+                                  "video/mpeg",
+                                  "video/quicktime",
+                                  "video/x-msvideo",
+
+                                  "chemical/x-pdb",
+
+                                  "x-world/x-vrml",
+                                 ]
 
         if args:
             args = args.split(',')
@@ -165,18 +191,26 @@ class EmbedObject:
                     argc -= kw_count
             self.target = args[0]
 
-    def embed(self, mime_type, file):
+
+    def embed(self, mt, file):
         _ = self._
-        
-        if mime_type is None:
+
+        if not mt:
             return _("Not supported mimetype of file: %s" % self.target)
 
-        mtype = mime_type.split('/')
+        mime_type = "%s/%s" % (mt.major, mt.minor,)
+        if not mime_type in self.approved_mimetypes:
+            return "%s%s%s" % (self.macro.formatter.sysmsg(1),
+                               self.macro.formatter.text('Embedding of object by choosen formatter not possible'),
+                               self.macro.formatter.sysmsg(0))
 
-        if self.alt == "":
-            self.alt = "%(text)s %(mime_type)s" % {'text': _("Embedded"), 'mime_type': mime_type, }
+        if self.alt is "":
+            self.alt = "%(text)s %(mime_type)s" % {
+                           'text': _("Embedded"), 
+                           'mime_type': mime_type,
+                        }
 
-        if mtype[0] == 'video':
+        if mt.major == 'video':
             return '''
 <OBJECT>
 <EMBED SRC="%(file)s" WIDTH="%(width)s" HEIGHT="%(height)s" REPEAT="%(repeat)s" AUTOSTART="%(autostart)s" OP="%(op)s" MENU="%(menu)s" TYPE="%(type)s"></EMBED>
@@ -195,7 +229,7 @@ class EmbedObject:
     "alt": self.alt,
 }
 
-        if mtype[0] in ['image', 'chemical', 'x-world']:
+        if mt.major in ['image', 'chemical', 'x-world']:
             return '''
 <OBJECT>
 <EMBED SRC="%(file)s" WIDTH="%(width)s" HEIGHT="%(height)s" TYPE="%(type)s"></EMBED>
@@ -210,11 +244,7 @@ class EmbedObject:
     "alt": self.alt,
 }
 
-        if mtype[0] == 'audio':
-            if self.width == "":
-                self.width = "60"
-            if self.height == "":
-                self.height = "20"
+        if mt.major == 'audio':
             return '''
 <OBJECT>
 <EMBED SRC="%(file)s" WIDTH="%(width)s" HEIGHT="%(height)s" REPEAT="%(repeat)s" AUTOSTART="%(autostart)s" OP="%(op)s" PLAY="%(play)s" HIDDEN="%(hidden)s" TYPE="%(type)s"></EMBED>
@@ -222,8 +252,8 @@ class EmbedObject:
 <p>%(alt)s</p>
 </NOEMBED>
 </OBJECT>''' % {
-    "width": self.width,
-    "height": self.height,
+    "width": self.width or "60",
+    "height": self.height or "20",
     "file": file,
     "play": self.play,
     "repeat": self.repeat,
@@ -234,7 +264,7 @@ class EmbedObject:
     "alt": self.alt,
 }
 
-        if mtype[0] == 'application':
+        if mt.major == 'application':
             return '''
 <OBJECT>
 <EMBED SRC="%(file)s" WIDTH="%(width)s" HEIGHT="%(height)s" AUTOSTART="%(autostart)s" PLAY="%(play)s" LOOP="%(loop)s" MENU="%(menu)s" TYPE="%(type)s"> </EMBED>
@@ -253,6 +283,7 @@ class EmbedObject:
     "alt": self.alt,
 }
 
+
     def render(self):
         _ = self._
 
@@ -260,59 +291,23 @@ class EmbedObject:
             msg = 'Not enough arguments to EmbedObject macro! Try [[EmbedObject(attachment [,width=width] [,height=height] [,alt=Embedded mimetpye/xy])]]'
             return "%s%s%s" % (self.formatter.sysmsg(1), self.formatter.text(msg), self.formatter.sysmsg(0))
 
-        pagename, attname = AttachFile.absoluteName(self.target, self.formatter.page.page_name)
+        pagename, fname = AttachFile.absoluteName(self.target, self.formatter.page.page_name)
 
-        if not AttachFile.exists(self.request, pagename, attname):
+        if not AttachFile.exists(self.request, pagename, fname):
             linktext = _('Upload new attachment "%(filename)s"')
             return wikiutil.link_tag(self.request,
                 ('%s?action=AttachFile&rename=%s' % (
                 wikiutil.quoteWikinameURL(pagename),
-                wikiutil.url_quote_plus(attname))),
-                linktext % {'filename': attname})
+                wikiutil.url_quote_plus(fname))),
+                linktext % {'filename': fname})
 
-        url = AttachFile.getAttachUrl(pagename, attname, self.request)
-        mime_type, enc = mimetypes.guess_type(attname)
+        url = AttachFile.getAttachUrl(pagename, fname, self.request)
 
-        if mime_type in ["application/x-shockwave-flash",
-                         "application/x-dvi",
-                         "application/postscript",
-                         "application/pdf",
-                         "application/ogg",
-                         "application/vnd.visio",
-
-                         "image/x-ms-bmp",
-                         "image/svg+xml",
-                         "image/tiff",
-                         "image/x-photoshop",
-
-                         "audio/mpeg",
-                         "audio/midi",
-                         "audio/x-wav",
-
-                         "video/fli",
-                         "video/mpeg",
-                         "video/quicktime",
-                         "video/x-msvideo",
-
-                         "chemical/x-pdb",
-
-                         "x-world/x-vrml",
-                       ]:
-            # XXX Should better use formatter.embed if available?
-            try:
-                return self.macro.formatter.rawHTML(self.embed(mime_type, url))
-            except:
-                return "%s%s%s" % (self.macro.formatter.sysmsg(1),
-                                   self.macro.formatter.text('Embedding of object by choosen formatter not possible'),
-                                   self.macro.formatter.sysmsg(0))
-
-        else:
-            msg = 'Not supported mimetype %(mimetype)s ' % {"mimetype": mime_type}
-            return "%s%s%s" % (self.macro.formatter.sysmsg(1),
-                       self.macro.formatter.text(msg),
-                       self.macro.formatter.sysmsg(0))
+        mt = wikiutil.MimeType(filename=fname)
+        mimestr = "%s/%s" % (mt.major, mt.minor,)
+        # XXX Should better use formatter.embed if available?
+        return self.macro.formatter.rawHTML(self.embed(mt, url))
 
 
 def execute(macro, args):
     return EmbedObject(macro, args).render()
-
