@@ -222,9 +222,23 @@ class Parser:
 
         # inline the attachment if it's major mimetype is text
         mt = wikiutil.MimeType(filename=fname)
-        if scheme == 'inline' and mt.major == 'text':
-            return self.formatter.attachment_inlined(fname, text)
-
+        if scheme == 'inline':
+            if mt.major == 'text':
+                return self.formatter.attachment_inlined(fname, text)
+            else:
+                # use EmbedObject for other mimetypes
+                from MoinMoin.macro.EmbedObject import EmbedObject
+                from MoinMoin.action import AttachFile
+                if not mt is None:
+                    # reuse class tmp from Despam to define macro
+                    from MoinMoin.action.Despam import tmp
+                    macro = tmp()
+                    macro.request = self.request
+                    macro.formatter = self.request.html_formatter
+                    pagename = self.formatter.page.page_name
+                    url = AttachFile.getAttachUrl(pagename, fname, self.request, escaped=1)
+                    return self.formatter.rawHTML(EmbedObject.embed(EmbedObject(macro, wikiutil.escape(fname)), mt, url))
+    
         return self.formatter.attachment_link(fname, text)
 
     def _u_repl(self, word):
