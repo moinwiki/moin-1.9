@@ -128,13 +128,8 @@ Version 1.6.current:
       This call pre-processes the headers list (encoding from unicode, making
       sure that there is exactly ONE content-type header, etc.) and then
       calls a server specific helper _emit_http_headers to emit it.
-      CGI works
-      STANDALONE works
-      FCGI works
-      TWISTED works
-      CLI ?
-      MODPY ?
-      WSGI ?
+      Tested successfully: CGI, STANDALONE, FCGI, TWISTED
+      TODO: CLI, MODPY, WSGI
     * setResponseCode request method DEPRECATED (it only worked for Twisted
       anyway), just use emit_http_headers and include a Status: XXX header.
       Method will vanish with moin 1.7.
