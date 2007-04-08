@@ -9,6 +9,8 @@
 
 # MoinMoin additions
 MoinMaster http://moinmaster.wikiwikiweb.de/
+MoinTest http://test.wikiwikiweb.de/
+
 # for Germany: bookzilla.de instead of amazon == supporting GNU/Linux and 5% for FSF Europe
 # ISBN http://bookzilla.de/shop/action/advancedSearch?action=search&isbn=
 ISBN http://www.amazon.com/exec/obidos/ISBN=
