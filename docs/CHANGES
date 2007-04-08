@@ -86,13 +86,8 @@ Version 1.6.current:
     * moved / splitted request.py into MoinMoin/request/*
       Most stuff will be broken, please help fixing it (usually some imports
       will be missing and the adaptor script will need a change maybe):
-      CGI works
-      CLI works
-      STANDALONE works
-      FCGI works
-      TWISTED works
-      MODPY ?
-      WSGI ?
+      Tested successfully: CGI, CLI, STANDALONE, FCGI, TWISTED
+      TODO: MODPY, WSGI
     * moved util/antispam.py to security/antispam.py,
       moved util/autoadmin.py to security/autoadmin.py,
       moved security.py to security/__init__.py,
