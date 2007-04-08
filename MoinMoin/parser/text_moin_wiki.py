@@ -220,8 +220,9 @@ class Parser:
         if not kw.get('pretty_url', 0) and wikiutil.isPicture(fname):
             return self.formatter.attachment_image(fname)
 
-        # inline the attachment
-        if scheme == 'inline':
+        # inline the attachment if it's major mimetype is text
+        mt = wikiutil.MimeType(filename=fname)
+        if scheme == 'inline' and mt.major == 'text':
             return self.formatter.attachment_inlined(fname, text)
 
         return self.formatter.attachment_link(fname, text)
