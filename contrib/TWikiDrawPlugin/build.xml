@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<project name="TWikiDrawPlugin" default="build" basedir=".">
+    <property name="src.home" value="."/>
+    <property name="build.home" value="build"/>
+    <property name="dest.home" value="build"/>
+
+    <target name="-init">
+        <mkdir dir="${build.home}"/>
+        <mkdir dir="${build.home}/classes"/>
+        <mkdir dir="${dest.home}"/>
+    </target>
+
+    <target name="build" depends="-init" description="Build TWikiDrawPlugin JAR">
+        <javac destdir="${build.home}/classes" source="1.3" target="1.1">
+            <src path="${src.home}/packages"/>
+            <src path="${src.home}/src"/>
+        </javac>
+
+        <jar destfile="${dest.home}/twikidraw.jar">
+            <fileset dir="${build.home}/classes"/>
+        </jar>
+    </target>
+
+    <target name="clean" description="Remove generated files">
+        <delete dir="${build.home}"/>
+    </target>
+
+	<target name="rebuild" depends="clean, build" description="Rebuild TWikiDrawPlugin JAR"/>
+</project> 
