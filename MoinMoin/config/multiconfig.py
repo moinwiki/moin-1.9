@@ -327,6 +327,29 @@ reStructuredText Quick Reference
         'application/xhtml+xml',
     ]
 
+    mimetypes_embed = [
+        'application/x-shockwave-flash',
+        'application/x-dvi',
+        'application/postscript',
+        'application/pdf',
+        'application/ogg',
+        'application/vnd.visio',
+        'image/x-ms-bmp',
+        'image/svg+xml',
+        'image/tiff',
+        'image/x-photoshop',
+        'audio/mpeg',
+        'audio/midi',
+        'audio/x-wav',
+        'video/fli',
+        'video/mpeg',
+        'video/quicktime',
+        'video/x-msvideo',
+        'chemical/x-pdb',
+        'x-world/x-vrml',
+    ]
+
+
     navi_bar = [u'RecentChanges', u'FindPage', u'HelpContents', ]
     nonexist_qm = False
 

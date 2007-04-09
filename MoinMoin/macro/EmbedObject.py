@@ -147,32 +147,6 @@ class EmbedObject:
         self.hidden = "false"
         self.menu = "true"
         self.target = None
-        self.approved_mimetypes = [
-                                  "application/x-shockwave-flash",
-                                  "application/x-dvi",
-                                  "application/postscript",
-                                  "application/pdf",
-                                  "application/ogg",
-                                  "application/vnd.visio",
-
-                                  "image/x-ms-bmp",
-                                  "image/svg+xml",
-                                  "image/tiff",
-                                  "image/x-photoshop",
-
-                                  "audio/mpeg",
-                                  "audio/midi",
-                                  "audio/x-wav",
-
-                                  "video/fli",
-                                  "video/mpeg",
-                                  "video/quicktime",
-                                  "video/x-msvideo",
-
-                                  "chemical/x-pdb",
-
-                                  "x-world/x-vrml",
-                                 ]
 
         if args:
             args = args.split(',')
@@ -199,7 +173,7 @@ class EmbedObject:
             return _("Not supported mimetype of file: %s" % self.target)
 
         mime_type = "%s/%s" % (mt.major, mt.minor,)
-        if not mime_type in self.approved_mimetypes:
+        if not mime_type in self.request.cfg.mimetypes_embed:
             return "%s%s%s" % (self.macro.formatter.sysmsg(1),
                                self.macro.formatter.text('Embedding of object by choosen formatter not possible'),
                                self.macro.formatter.sysmsg(0))
