@@ -166,7 +166,7 @@ class EmbedObject:
             self.target = args[0]
 
 
-    def embed(self, mt, file):
+    def embed(self, mt, url):
         _ = self._
 
         if not mt:
@@ -187,14 +187,14 @@ class EmbedObject:
         if mt.major == 'video':
             return '''
 <OBJECT>
-<EMBED SRC="%(file)s" WIDTH="%(width)s" HEIGHT="%(height)s" REPEAT="%(repeat)s" AUTOSTART="%(autostart)s" OP="%(op)s" MENU="%(menu)s" TYPE="%(type)s"></EMBED>
+<EMBED SRC="%(url)s" WIDTH="%(width)s" HEIGHT="%(height)s" REPEAT="%(repeat)s" AUTOSTART="%(autostart)s" OP="%(op)s" MENU="%(menu)s" TYPE="%(type)s"></EMBED>
 <NOEMBED>
 <p>%(alt)s</p>
 </NOEMBED>
 </OBJECT>''' % {
     "width": self.width,
     "height": self.height,
-    "file": file,
+    "url": url,
     "repeat": self.repeat,
     "autostart": self.autostart,
     "op": self.op,
@@ -206,14 +206,14 @@ class EmbedObject:
         if mt.major in ['image', 'chemical', 'x-world']:
             return '''
 <OBJECT>
-<EMBED SRC="%(file)s" WIDTH="%(width)s" HEIGHT="%(height)s" TYPE="%(type)s"></EMBED>
+<EMBED SRC="%(url)s" WIDTH="%(width)s" HEIGHT="%(height)s" TYPE="%(type)s"></EMBED>
 <NOEMBED>
 <p>%(alt)s</p>
 </NOEMBED>
 </OBJECT>''' % {
     "width": self.width,
     "height": self.height,
-    "file": file,
+    "url": url,
     "type": mime_type,
     "alt": self.alt,
 }
@@ -221,14 +221,14 @@ class EmbedObject:
         if mt.major == 'audio':
             return '''
 <OBJECT>
-<EMBED SRC="%(file)s" WIDTH="%(width)s" HEIGHT="%(height)s" REPEAT="%(repeat)s" AUTOSTART="%(autostart)s" OP="%(op)s" PLAY="%(play)s" HIDDEN="%(hidden)s" TYPE="%(type)s"></EMBED>
+<EMBED SRC="%(url)s" WIDTH="%(width)s" HEIGHT="%(height)s" REPEAT="%(repeat)s" AUTOSTART="%(autostart)s" OP="%(op)s" PLAY="%(play)s" HIDDEN="%(hidden)s" TYPE="%(type)s"></EMBED>
 <NOEMBED>
 <p>%(alt)s</p>
 </NOEMBED>
 </OBJECT>''' % {
     "width": self.width or "60",
     "height": self.height or "20",
-    "file": file,
+    "url": url,
     "play": self.play,
     "repeat": self.repeat,
     "autostart": self.autostart,
@@ -241,14 +241,14 @@ class EmbedObject:
         if mt.major == 'application':
             return '''
 <OBJECT>
-<EMBED SRC="%(file)s" WIDTH="%(width)s" HEIGHT="%(height)s" AUTOSTART="%(autostart)s" PLAY="%(play)s" LOOP="%(loop)s" MENU="%(menu)s" TYPE="%(type)s"> </EMBED>
+<EMBED SRC="%(url)s" WIDTH="%(width)s" HEIGHT="%(height)s" AUTOSTART="%(autostart)s" PLAY="%(play)s" LOOP="%(loop)s" MENU="%(menu)s" TYPE="%(type)s"> </EMBED>
 <NOEMBED>
 <p>%(alt)s</p>
 </NOEMBED>
 </OBJECT>''' % {
     "width": self.width,
     "height": self.height,
-    "file": file,
+    "url": url,
     "autostart": self.autostart,
     "play": self.play,
     "loop": self.loop,
