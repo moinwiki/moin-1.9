@@ -175,7 +175,8 @@ class ThemeBase:
         @return: string with html
         """
         if html:
-            if callable(html): html = html(self.request)
+            if callable(html):
+                html = html(self.request)
         return html
 
     def logo(self):

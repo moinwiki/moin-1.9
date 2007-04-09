@@ -891,7 +891,7 @@ class RequestBase(object):
         name = u'/'.join(normalized)
         return name
 
-    def read(self, n):
+    def read(self, n=None):
         """ Read n bytes from input stream. """
         raise NotImplementedError
 

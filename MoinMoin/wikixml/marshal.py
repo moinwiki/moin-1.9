@@ -50,7 +50,8 @@ class Marshal:
 
         if element:
             for prefix in self.PRIVATE_PREFIXES:
-                if element.startswith(prefix): return ''
+                if element.startswith(prefix):
+                    return ''
             content = ['<%s>' % element]
         else:
             content = []

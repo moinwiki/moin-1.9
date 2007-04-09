@@ -5,7 +5,8 @@
 
 """
 
-def _(text): pass
+def _(text):
+    pass
 
 _('FrontPage')
 _('RecentChanges')

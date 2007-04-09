@@ -59,7 +59,8 @@ class Request(RequestBase):
             sys.stdout.flush()
         except IOError, ex:
             import errno
-            if ex.errno != errno.EPIPE: raise
+            if ex.errno != errno.EPIPE:
+                raise
 
     def isForbidden(self):
         """ Nothing is forbidden """

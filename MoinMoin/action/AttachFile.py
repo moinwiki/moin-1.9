@@ -275,7 +275,6 @@ def _access_file(pagename, request):
 
 
 def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
-    import mimetypes
     _ = request.getText
 
     # access directory

@@ -102,7 +102,8 @@ class DataBrowserWidget(base.Widget):
         result.append(fmt.table_row(1))
         for idx in range(len(self.data.columns)):
             col = self.data.columns[idx]
-            if col.hidden: continue
+            if col.hidden:
+                continue
             result.append(fmt.table_cell(1))
             result.append(fmt.strong(1))
             result.append(col.label or col.name)

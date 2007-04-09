@@ -75,11 +75,13 @@ class Element:
     def _openingtag(self):
         result = [self.tagname()]
         attrs = self.attrs.items()
-        if _SORT_ATTRS: attrs.sort()
+        if _SORT_ATTRS:
+            attrs.sort()
         for key, val in attrs:
             key = key.lower()
             if key in self._BOOL_ATTRS:
-                if val: result.append(key)
+                if val:
+                    result.append(key)
             else:
                 result.append(u'%s="%s"' % (key, wikiutil.escape(val, 1)))
         return ' '.join(result)
