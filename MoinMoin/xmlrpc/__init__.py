@@ -5,7 +5,7 @@
     If you want to use wikirpc function "putPage", read the comments in
     xmlrpc_putPage or it won't work!
     
-    Parts of this code are based on Jürgen Hermann's wikirpc.py,
+    Parts of this code are based on Juergen Hermann's wikirpc.py,
     Les Orchard's "xmlrpc.cgi" and further work by Gustavo Niemeyer.
 
     See http://www.ecyrd.com/JSPWiki/Wiki.jsp?page=WikiRPCInterface
