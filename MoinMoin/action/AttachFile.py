@@ -305,6 +305,7 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
         label_install = _("install")
 
         for file in files:
+            mt = wikiutil.MimeType(filename=file)
             st = os.stat(os.path.join(attach_dir, file).encode(config.charset))
             fsize = "%.1f" % (float(st.st_size) / 1024)
             fmtime = request.user.getFormattedDateTime(st.st_mtime)
@@ -342,11 +343,11 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
             else:
                 viewlink = '<a href="%(baseurl)s/%(urlpagename)s?action=%(action)s&amp;do=view&amp;target=%(urlfile)s">%(label_view)s</a>' % parmdict
 
-            if (packages.ZipPackage(request, os.path.join(attach_dir, file).encode(config.charset)).isPackage() and
+            if (packages.ZipPackage(request, os.path.join(attach_dir, file).encode(config.charset)).isPackage() and mt.minor == 'zip' and
                 request.user.isSuperUser()):
                 viewlink += ' | <a href="%(baseurl)s/%(urlpagename)s?action=%(action)s&amp;do=install&amp;target=%(urlfile)s">%(label_install)s</a>' % parmdict
             elif (zipfile.is_zipfile(os.path.join(attach_dir, file).encode(config.charset)) and
-                request.user.may.read(pagename) and request.user.may.delete(pagename)
+                mt.minor == 'zip' and request.user.may.read(pagename) and request.user.may.delete(pagename)
                 and request.user.may.write(pagename)):
                 viewlink += ' | <a href="%(baseurl)s/%(urlpagename)s?action=%(action)s&amp;do=unzip&amp;target=%(urlfile)s">%(label_unzip)s</a>' % parmdict
 
@@ -990,11 +991,11 @@ def send_viewfile(pagename, request):
         return
 
     package = packages.ZipPackage(request, fpath)
-    if package.isPackage():
+    if package.isPackage() and mt.minor == 'zip':
         request.write("<pre><b>%s</b>\n%s</pre>" % (_("Package script:"), wikiutil.escape(package.getScript())))
         return
 
-    if zipfile.is_zipfile(fpath):
+    if zipfile.is_zipfile(fpath) and mt.minor == 'zip':
         zf = zipfile.ZipFile(fpath, mode='r')
         request.write("<pre>%-46s %19s %12s\n" % (_("File Name"), _("Modified")+" "*5, _("Size")))
         for zinfo in zf.filelist:
