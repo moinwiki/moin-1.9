@@ -23,7 +23,10 @@ from MoinMoin.search.queryparser import Match, TextMatch, TitleMatch
 ##############################################################################
 
 class UpdateQueue:
-    """ Represents a locked page queue on the disk """
+    """ Represents a locked page queue on the disk
+
+        XXX: check whether we just can use the caching module
+    """
 
     def __init__(self, f, lock_dir):
         """
