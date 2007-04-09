@@ -240,6 +240,8 @@ class User:
     def __init__(self, request, id=None, name="", password=None, auth_username="", **kw):
         """ Initialize User object
         
+        TODO: when this gets refactored, use "uid" not builtin "id"
+
         @param request: the request object
         @param id: (optional) user ID
         @param name: (optional) user name

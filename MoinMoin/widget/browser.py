@@ -76,9 +76,9 @@ class DataBrowserWidget(base.Widget):
 
         # fill in the empty field we left blank
         unique[1] = self._empty
-        sorted = unique[3:]
-        sorted.sort()
-        unique = unique[:3] + sorted
+        sortedlist = unique[3:]
+        sortedlist.sort()
+        unique = unique[:3] + sortedlist
         return '\n'.join([self._makeoption(item, item == value) for item in unique])
 
     def format(self):

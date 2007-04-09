@@ -346,9 +346,9 @@ class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         Components that mean special things to the local file system
         (e.g. drive or directory names) are ignored.
         """
-        file = wikiutil.url_unquote(uri, want_unicode=False)
-        file.replace('\\', '/')
-        words = file.split('/')
+        path = wikiutil.url_unquote(uri, want_unicode=False)
+        path = path.replace('\\', '/')
+        words = path.split('/')
         words = filter(None, words)
 
         path = self.server.htdocs

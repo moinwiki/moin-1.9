@@ -311,16 +311,16 @@ class SearchResults:
         f = formatter
         write = self.buffer.write
         if numbered:
-            list = lambda on: f.number_list(on, start=hitsFrom+1)
+            lst = lambda on: f.number_list(on, start=hitsFrom+1)
         else:
-            list = f.bullet_list
+            lst = f.bullet_list
 
         if paging and len(self.hits) <= request.cfg.search_results_per_page:
             paging = False
 
         # Add pages formatted as list
         if self.hits:
-            write(list(1))
+            write(lst(1))
 
             if paging:
                 hitsTo = hitsFrom + request.cfg.search_results_per_page
@@ -356,7 +356,7 @@ class SearchResults:
                     f.listitem(0),
                     ]
                 write(''.join(item))
-            write(list(0))
+            write(lst(0))
             if paging:
                 write(self.formatPageLinks(hitsFrom=hitsFrom,
                     hitsPerPage=request.cfg.search_results_per_page,
