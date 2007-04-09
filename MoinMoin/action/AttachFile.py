@@ -413,13 +413,13 @@ def send_link_rel(request, pagename):
         scriptName = request.getScriptname()
         pagename_quoted = wikiutil.quoteWikinameURL(pagename)
 
-        for file in files:
+        for fname in files:
             url = "%s/%s?action=%s&do=view&target=%s" % (
                 scriptName, pagename_quoted,
-                action_name, wikiutil.url_quote_plus(file))
+                action_name, wikiutil.url_quote_plus(fname))
 
             request.write(u'<link rel="Appendix" title="%s" href="%s">\n' % (
-                wikiutil.escape(file), wikiutil.escape(url)))
+                wikiutil.escape(fname), wikiutil.escape(url)))
 
 
 def send_hotdraw(pagename, request):

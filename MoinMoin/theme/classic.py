@@ -89,7 +89,7 @@ class Theme(ThemeBase):
         @rtype: string
         @return: page header html
         """
-        dict = {
+        newdict = {
             'config_header1_html': self.emit_custom_html(self.cfg.page_header1),
             'config_header2_html': self.emit_custom_html(self.cfg.page_header2),
             'search_form_html': self.searchform(d),
@@ -103,7 +103,7 @@ class Theme(ThemeBase):
             'trail_html': self.trail(d),
             'startpage_html': self.startPage(),
         }
-        dict.update(d)
+        newdict.update(d)
 
         html = """
 %(config_header1_html)s
@@ -125,7 +125,7 @@ class Theme(ThemeBase):
 %(config_header2_html)s
 
 %(startpage_html)s
-""" % dict
+""" % newdict
         return html
 
     def editorheader(self, d):

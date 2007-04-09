@@ -29,6 +29,9 @@ class LineBuffer:
     """
     def __init__(self, file, offset, size, forward=True):
         """
+        
+        TODO: when this gets refactored, don't use "file" (is a builtin)
+
         @param file: open file object
         @param offset: position in file to start from
         @param size: aproximate number of bytes to read
