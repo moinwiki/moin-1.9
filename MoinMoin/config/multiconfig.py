@@ -300,7 +300,7 @@ reStructuredText Quick Reference
     log_reverse_dns_lookups = True  # if we do reverse dns lookups for logging hostnames
                                     # instead of just IPs
 
-    xapian_search = False # disabled until xapian is finished
+    xapian_search = False
     xapian_index_dir = None
     xapian_stemming = True
     xapian_index_history = True
@@ -474,7 +474,7 @@ reStructuredText Quick Reference
     user_checkbox_defaults = {'mailto_author':       0,
                               'edit_on_doubleclick': 0,
                               'remember_last_visit': 0,
-                              'show_comments': 0,
+                              'show_comments':       0,
                               'show_nonexist_qm':    nonexist_qm,
                               'show_page_trail':     1,
                               'show_toolbar':        1,
@@ -529,7 +529,7 @@ reStructuredText Quick Reference
 
     unzip_single_file_size = 2.0 * 1000**2
     unzip_attachments_space = 200.0 * 1000**2
-    unzip_attachments_count = 51 # 1 zip file + 50 files contained in it
+    unzip_attachments_count = 101 # 1 zip file + 100 files contained in it
 
     xmlrpc_putpage_enabled = False # if False, putpage will write to a test page only
     xmlrpc_putpage_trusted_only = True # if True, you will need to be http auth authenticated
