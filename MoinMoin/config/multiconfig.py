@@ -328,7 +328,6 @@ reStructuredText Quick Reference
     ]
 
     mimetypes_embed = [
-        'application/x-shockwave-flash',
         'application/x-dvi',
         'application/postscript',
         'application/pdf',
@@ -433,6 +432,8 @@ reStructuredText Quick Reference
 
     theme_default = 'modern'
     theme_force = False
+    
+    traceback_email = False
 
     trail_size = 5
     tz_offset = 0.0 # default time zone offset in hours from UTC

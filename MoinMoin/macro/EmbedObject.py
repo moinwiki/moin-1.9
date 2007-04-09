@@ -173,10 +173,14 @@ class EmbedObject:
             return _("Not supported mimetype of file: %s" % self.target)
 
         mime_type = "%s/%s" % (mt.major, mt.minor,)
-        if not mime_type in self.request.cfg.mimetypes_embed:
-            return "%s%s%s" % (self.macro.formatter.sysmsg(1),
-                               self.macro.formatter.text('Embedding of object by choosen formatter not possible'),
-                               self.macro.formatter.sysmsg(0))
+        dangerous = mime_type in self.request.cfg.mimetypes_xss_protect
+        
+        if not mime_type in self.request.cfg.mimetypes_embed or dangerous:
+            kw = {'src': url}
+            return "%s: %s%s%s" % (self.macro.formatter.text('Embedding of object by choosen formatter not possible'),
+                               self.macro.formatter.url(1, kw['src']),
+                               self.macro.formatter.text(self.target),
+                               self.macro.formatter.url(0))
 
         if self.alt is "":
             self.alt = "%(text)s %(mime_type)s" % {
