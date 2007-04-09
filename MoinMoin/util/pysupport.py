@@ -36,8 +36,8 @@ def getPackageModules(packagefile):
     if not in_plugin_dir(packagedir) and hasattr(moinmodule, '__loader__'):
         pyre = re.compile(r"^([^_].*)\.py(?:c|o)$")
         zipfiles = moinmodule.__loader__._files
-        dirlist = [file[0].replace(r'/', '\\').split('\\')[-1]
-                   for file in zipfiles.values() if packagedir in file[0]]
+        dirlist = [entry[0].replace(r'/', '\\').split('\\')[-1]
+                   for entry in zipfiles.values() if packagedir in entry[0]]
     else:
         pyre = re.compile(r"^([^_].*)\.py$")
         dirlist = os.listdir(packagedir)

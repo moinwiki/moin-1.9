@@ -755,14 +755,14 @@ class RequestBase(object):
 
     def redirectedOutput(self, function, *args, **kw):
         """ Redirect output during function, return redirected output """
-        buffer = StringIO.StringIO()
-        self.redirect(buffer)
+        buf = StringIO.StringIO()
+        self.redirect(buf)
         try:
             function(*args, **kw)
         finally:
             self.redirect()
-        text = buffer.getvalue()
-        buffer.close()
+        text = buf.getvalue()
+        buf.close()
         return text
 
     def redirect(self, file=None):
