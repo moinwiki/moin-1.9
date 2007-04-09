@@ -54,7 +54,8 @@ class Request(RequestBase):
             sys.stdout.flush()
         except IOError, ex:
             import errno
-            if ex.errno != errno.EPIPE: raise
+            if ex.errno != errno.EPIPE:
+                raise
 
     def _emit_http_headers(self, headers):
         """ private method to send out preprocessed list of HTTP headers """

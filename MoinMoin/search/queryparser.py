@@ -169,7 +169,8 @@ class AndExpression(BaseExpression):
         result = []
         for s in self._subterms:
             highlight_re = s.highlight_re()
-            if highlight_re: result.append(highlight_re)
+            if highlight_re:
+                result.append(highlight_re)
 
         return '|'.join(result)
 
@@ -910,7 +911,8 @@ class QueryParser:
         ops = match.group("OPS")
         if ops == '(':
             result = self._or_expression()
-            if match.group("NEG"): result.negate()
+            if match.group("NEG"):
+                result.negate()
             return result
         elif ops == ')':
             return None

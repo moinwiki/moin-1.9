@@ -2,6 +2,8 @@
 """
     MoinMoin - MoinMoin.security Tests
 
+    TODO: when refactoring this, do not use "iter" (is a builtin)
+
     @copyright: 2003-2004 by Juergen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """

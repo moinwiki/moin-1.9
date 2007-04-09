@@ -36,7 +36,8 @@ class XMLGenerator(saxutils.XMLGenerator):
 
     def simpleNode(self, tag, value, attr={}):
         self.startNode(tag, attr)
-        if value: self.characters(value)
+        if value:
+            self.characters(value)
         self.endNode(tag)
 
     def startDocument(self):

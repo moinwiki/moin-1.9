@@ -94,7 +94,8 @@ def get_data(pagename, request, filterpage=None):
                 while ratchet_time:
                     ratchet_time -= 86400
                     rday = tuple(request.user.getTime(ratchet_time)[0:3])
-                    if rday <= day: break
+                    if rday <= day:
+                        break
                     days.append(request.user.getFormattedDate(ratchet_time))
                     views.append(0)
                     edits.append(0)
