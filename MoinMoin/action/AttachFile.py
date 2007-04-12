@@ -979,9 +979,21 @@ def send_viewfile(pagename, request):
             getAttachUrl(pagename, filename, request, escaped=1), timestamp, wikiutil.escape(filename, 1)))
         return
     elif mt.major == 'text':
+        ext = os.path.splitext(filename)[1]
+        Parser = wikiutil.getParserForExtension(request.cfg, ext)
+        if Parser is not None:
+            try:
+                content = file(fpath, 'r').read()
+                content = wikiutil.decodeUnknownInput(content)
+                colorizer = Parser(content, request, filename=filename)
+                colorizer.format(request.formatter)
+                return
+            except IOError:
+                pass
+
+
         request.write(request.formatter.preformatted(1))
-        # Try to decode file contents. It may return junk, but we
-        # don't have enough information on attachments.
+        # If we have text but no colorizing parser we try to decode file contents. 
         content = open(fpath, 'r').read()
         content = wikiutil.decodeUnknownInput(content)
         content = wikiutil.escape(content)
