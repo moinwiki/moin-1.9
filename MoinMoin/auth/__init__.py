@@ -205,7 +205,7 @@ class SessionData:
         else:
             self.ce.update(self._data)
 
-    def get(self, name, default):
+    def get(self, name, default=None):
         return self._data.get(name, default)
 
     def delete(self):
@@ -418,6 +418,9 @@ def moin_session(request, **kw):
             # No other method succeeded, so allow continuation...
             # XXX Cookie clear here???
             if verbose: request.log("moin_session did not get valid user from previous auth method, doing nothing")
+            if len(cookieitems) == 1:
+                # keep non-logged in session
+                setAnonCookie(request, cookieitems[0])
             return user_obj, True
 
     if cookievalue is None:
@@ -494,7 +497,7 @@ def moin_anon_session(request, **kw):
     """
     user_obj = kw.get('user_obj')
 
-    if request.session or not hasattr(request.cfg, 'anonymous_cookie_lifetime'):
+    if request.session != {} or not hasattr(request.cfg, 'anonymous_cookie_lifetime'):
         return user_obj, True
 
     # moin_session can handle this cookie and migrate
