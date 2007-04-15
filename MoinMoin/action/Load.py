@@ -66,14 +66,15 @@ class Load(ActionBase):
                          'target': target, 'filename': filename}
                 return status, msg
 
-            if exists and self.request.user.may.delete(self.pagename):
-                try:
-                    os.remove(fpath)
-                except:
-                    pass
-            else:
-                msg = _("You are not allowed to delete attachments on this page.")
-                return status, msg
+            if exists and overwrite:
+                if self.request.user.may.delete(self.pagename):
+                    try:
+                        os.remove(fpath)
+                    except:
+                        pass
+                else:
+                    msg = _("You are not allowed to delete attachments on this page.")
+                    return status, msg
 
             AttachFile.add_attachment(self.request, self.pagename, target, filecontent)
             bytes = len(filecontent)
