@@ -5,7 +5,7 @@
     This macro shows some info about your wiki, wiki software and your system.
 
     @copyright: 2006 MoinMoin:ThomasWaldmann,
-                2007 ReimarBauer
+                2007 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -164,4 +164,4 @@ class SystemInfo:
         return buf.getvalue()
 
 def execute(macro, args):
-    return SystemInfo(macro, args).render()
+        return SystemInfo(macro, args).render()

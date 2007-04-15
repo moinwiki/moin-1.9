@@ -4,7 +4,7 @@
 
     This action allows you to copy a page.
 
-    @copyright: 2007 ReimarBauer
+    @copyright: 2007 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 import re

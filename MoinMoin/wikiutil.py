@@ -4,7 +4,7 @@
 
     @copyright: 2000-2004 Juergen Hermann <jh@web.de>,
                 2005-2007 MoinMoin:ThomasWaldmann,
-                2007 Reimar Bauer
+                2007 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 

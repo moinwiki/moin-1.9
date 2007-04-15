@@ -88,7 +88,7 @@
 # 15-FEB-04 CEC Finally fixed bit shift warning by converting Y to 0L.
 #
 #############
-# 2006-08-04 ReimarBauer added an optional parameter name to process_file and dump_IFD. Using this parameter the 
+# 2006-08-04 MoinMoin:ReimarBauer added an optional parameter name to process_file and dump_IFD. Using this parameter the 
 #            loop is breaked after that tag_name is processed.
 #            Example:
 #                    f = open(infile, 'rb')
