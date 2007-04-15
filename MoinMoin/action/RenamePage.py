@@ -6,7 +6,7 @@
 
     @copyright: 2002-2004 Michael Reinsch <mr@uue.org>,
                 2006 MoinMoin:ThomasWaldmann,
-                2007 ReimarBauer
+                2007 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 import re

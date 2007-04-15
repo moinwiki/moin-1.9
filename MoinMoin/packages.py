@@ -3,7 +3,7 @@
     MoinMoin - Package Installer
 
     @copyright: 2005 MoinMoin:AlexanderSchremmer,
-                2007 ReimarBauer
+                2007 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 
