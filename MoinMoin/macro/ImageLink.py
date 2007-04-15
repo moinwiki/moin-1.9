@@ -87,7 +87,7 @@
 
     @copyright: 2001 by Jeff Kunce,
                 2004 by Marcin Zalewski,
-                2004-2006 by Reimar Bauer,
+                2004-2006 by MoinMoin:ReimarBauer,
                 2006 by Thomas Waldmann
     @license: GNU GPL, see COPYING for details.
 """

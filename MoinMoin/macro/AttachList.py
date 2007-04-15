@@ -9,7 +9,7 @@
     If mime_type isn't given, all files are listed.
 
     @copyright: 2004 Jacob Cohen, Nigel Metheringham,
-                2006 Reimar Bauer
+                2006 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 

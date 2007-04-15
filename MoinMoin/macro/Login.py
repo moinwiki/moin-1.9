@@ -3,7 +3,7 @@
     MoinMoin - login and sendmail form
 
     @copyright: 2005-2006 Radomirs Cirskis <nad2000@gmail.com>,
-                2007 Reimar Bauer, Oliver Siemoneit
+                2007 MoinMoin:Reimar Bauer, Oliver Siemoneit
     @license: GNU GPL, see COPYING for details.
 """
 from MoinMoin.widget import html

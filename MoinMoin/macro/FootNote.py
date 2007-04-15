@@ -6,7 +6,7 @@
     text cannot contain wiki markup.
 
     @copyright: 2002 Juergen Hermann <jh@web.de>,
-                2007 Reimar Bauer,
+                2007 MoinMoin:ReimarBauer,
                 2007 Johannes Berg
     @license: GNU GPL, see COPYING for details.
 """
