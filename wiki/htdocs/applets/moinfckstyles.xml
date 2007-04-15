@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+ * FCKeditor styles for usage with MoinMoin
+-->
+<Styles>
+	<Style name="Big" element="big" />
+	<Style name="Small" element="small" />
+	<Style name="Typewriter" element="tt">
+         <Attribute name="css" value="backtick" />
+        </Style>
+</Styles>
