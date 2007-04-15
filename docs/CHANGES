@@ -220,7 +220,11 @@ Version 1.6.current:
     * We use rel="nofollow" for some action links in the hope that some search
       engines don't fetch the targets (if they do, they will just get 403 and
       cause unnecessary traffic).
-    * Included EmbedObject macro for embedding shockwave flash, mp3, visio, ...
+    * Included EmbedObject macro for embedding different major mimetypes:
+      application, audio, image, video, chemical, x-world. 
+      You are able to change the defaults of allowed mimetypes in the config var mimetypes_embed.
+      The config var mimetypes_xss_protect is used to deny mimetypes. The order of both variables  
+      is Allow, Deny  (mimetypes_embed, mimetypes_xss_protect)
     * @SIG@ etc. generate local time stamps now, no difference visible on page
       view.
     * Speeded up linkto search by avoiding read locks on the pagelinks file.
@@ -342,6 +346,11 @@ Version 1.6.current:
       and your local moin will autocreate an account with these values.
     * Antispam master url is now configurable via cfg.antispam_master_url.
       The default is to fetch the antispam patterns from MoinMaster wiki.
+    * inline is changed to use mimetypes of EmbedObject too. e.g.
+      inline:song.mp3 embeds the audio controls into your page
+    * action=view does use mimetypes of EmbedObject too and text files will be shown
+      by using their colorized parsers
+
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
