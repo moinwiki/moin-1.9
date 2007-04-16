@@ -658,8 +658,11 @@ class Formatter(FormatterBase):
                  (wikiutil.quoteWikinameURL(pagename),
                   wikiutil.url_quote_plus(fname))),
                 linktext % {'filename': self.text(fname)})
+        if not 'alt' in kw:
+            kw['alt'] = _('Inlined image: %(url)s') % {'url': self.text(url)}
         return self.image(
             title="attachment:%s" % url,
+            alt=kw['alt'],
             src=AttachFile.getAttachUrl(pagename, filename, self.request, addts=1),
             css="attachment")
 
