@@ -658,8 +658,11 @@ class Formatter(FormatterBase):
                  (wikiutil.quoteWikinameURL(pagename),
                   wikiutil.url_quote_plus(fname))),
                 linktext % {'filename': self.text(fname)})
+        if not 'alt' in kw:
+            kw['alt'] = _('Inlined image: %(url)s') % {'url': self.text(url)}
         return self.image(
             title="attachment:%s" % url,
+            alt=kw['alt'],
             src=AttachFile.getAttachUrl(pagename, filename, self.request, addts=1),
             css="attachment")
 
@@ -681,7 +684,7 @@ class Formatter(FormatterBase):
 
         # check whether attachment exists, possibly point to upload form
         if not exists:
-            linktext = _('Create new drawing "%(filename)s"')
+            linktext = _('Create new drawing "%(filename)s (opens in new window)"')
             return wikiutil.link_tag(
                 self.request,
                 ('%s?action=AttachFile&rename=%s%s' %
@@ -712,25 +715,24 @@ class Formatter(FormatterBase):
                 # add alt and title tags to areas
                 map = re.sub('href\s*=\s*"((?!%TWIKIDRAW%).+?)"', r'href="\1" alt="\1" title="\1"', map)
                 # add in edit links plus alt and title attributes
-                map = map.replace('%TWIKIDRAW%"',
-                                  edit_link + 
-                                  '" alt="' + _('Edit drawing %(filename)s') % {'filename': self.text(fname)} + 
-                                  '" title="' + _('Edit drawing %(filename)s') % {'filename': self.text(fname)} +
-                                  '"')
+                alt = title =  _('Edit drawing %(filename)s (opens in new window)') % {'filename': self.text(fname)}
+                map = map.replace('%TWIKIDRAW%"', '%s" alt="%s" title="%s"' % (edit_link, alt, title))
                 # unxml, because 4.01 concrete will not validate />
                 map = map.replace('/>', '>')
+                alt = title = _('Clickable drawing: %(filename)s') % {'filename': self.text(fname)}
                 return (map + self.image(
-                    alt=drawing,
-                    src=AttachFile.getAttachUrl(
-                    pagename, filename, self.request,
-                    addts=1),
+                    alt=alt,
+                    title=title,
+                    src=AttachFile.getAttachUrl(pagename, filename, self.request, addts=1),
                     usemap='#'+mapid, css="drawing"))
         else:
+            alt = title =  _('Edit drawing %(filename)s (opens in new window)') % {'filename': self.text(fname)}
             return wikiutil.link_tag(self.request,
                                      edit_link,
-                                     self.image(alt=url,
+                                     self.image(alt=alt,
+                                                title=title,
                                                 src=AttachFile.getAttachUrl(pagename, filename, self.request, addts=1), css="drawing"),
-                                     title="%s" % (_('Edit drawing %(filename)s') % {'filename': self.text(fname)}))
+                                     title=title)
 
 
     # Text ##############################################################
