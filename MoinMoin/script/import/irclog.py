@@ -10,7 +10,7 @@
     Usage:
     moin --config-dir=... --wiki-url=... import irclog --author=IrcLogImporter --file-dir=.
     
-    @copyright: 2005 MoinMoin:AlexanderSchremmer,
+    @copyright: 2005-2007 MoinMoin:AlexanderSchremmer
                 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
@@ -20,6 +20,11 @@ def filename_function(filename):
     filename = filename.lstrip('#')
     splitted = filename.split('.')
     return '/'.join(splitted[0:2])
+
+class IAmRoot(object):
+    def __getattr__(self, name):
+        return lambda *args, **kwargs: True
+
 
 import os
 
@@ -50,23 +55,35 @@ class PluginScript(MoinScript):
             "--file-dir", dest="file_dir", default='.',
             help="read files from DIRECTORY"
         )
+        self.parser.add_option("--acl", dest="acl", default="", help="Set a specific ACL for the pages.")
 
     def mainloop(self):
         self.init_request()
         request = self.request
+        request.user.may = IAmRoot()
+        request.cfg.mail_enabled = False
         for root, dirs, files in os.walk(self.options.file_dir):
             files.sort()
-            for filename in files[:-1]: # do not push the last file as it is constantly written to
+            for filename in files: 
                 pagename = self.options.page + filename_function(filename)
-                print "Pushing %r as %r" % (filename, pagename)
-                p = PageEditor(request, pagename, do_editor_backup=0, uid_override=self.options.author)
+                #print "Pushing %r as %r" % (filename, pagename)
+                p = PageEditor(request, pagename, do_editor_backup=0, uid_override=self.options.author, do_revision_backup=0)
                 if p.exists():
-                    continue
+                    if filename != files[-1]:
+                        continue
+                else:
+                    p = PageEditor(request, pagename, do_editor_backup=0, uid_override=self.options.author)
+
                 fileObj = open(os.path.join(root, filename), 'rb')
                 try:
-                    p.saveText("#format plain\n" + decodeLinewise(fileObj.read()), 0)
+                    acl = ""
+                    if self.options.acl:
+                        acl = "#acl %s\n" % (self.options.acl, )
+                    p.saveText(acl + "#format plain\n" + decodeLinewise(fileObj.read()), 0)
+                except PageEditor.Unchanged, e:
+                    pass
                 except PageEditor.SaveError, e:
                     print "Got %r" % (e, )
                 fileObj.close()
-        print "Finished."
+        #print "Finished."
 
