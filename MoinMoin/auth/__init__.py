@@ -418,7 +418,7 @@ def moin_session(request, **kw):
             # No other method succeeded, so allow continuation...
             # XXX Cookie clear here???
             if verbose: request.log("moin_session did not get valid user from previous auth method, doing nothing")
-            if len(cookieitems) == 1:
+            if cookievalue and len(cookieitems) == 1:
                 # keep non-logged in session
                 setAnonCookie(request, cookieitems[0])
             return user_obj, True
