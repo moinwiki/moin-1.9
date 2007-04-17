@@ -131,7 +131,8 @@ def execute(pagename, request):
                 size = 0
                 if line.action != 'ATTDEL':
                     from MoinMoin.action import AttachFile
-                    size = AttachFile.size(request, pagename, filename)
+                    if AttachFile.exists(request, pagename, filename):
+                        size = AttachFile.size(request, pagename, filename)
                     if line.action == 'ATTNEW':
                         actions.append(render_action(_('view'), {'action': 'AttachFile', 'do': 'view', 'target': '%s' % filename}))
                     elif line.action == 'ATTDRW':
