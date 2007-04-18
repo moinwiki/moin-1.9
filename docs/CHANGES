@@ -28,6 +28,24 @@ Known main issues:
     and improving it and after having made a backup with some other, proven
     method. USE BOTH ON YOUR OWN RISK!
 
+Version 1.7.current:
+    This is the active development branch. All changes get done here and
+    critical stuff gets committed with -m "... (backport needed)" and then
+    backported to older releases that we still maintain. :)
+
+  Developer notes (these should be moved to the end in the release):
+    * ...
+
+  New Features:
+    * ...
+
+  Bugfixes:
+    * ...
+
+  Other changes:
+    * ...
+
+
 Branch moin-1.6-xapian:
   /!\ This needs to be merged together with Franz' CHANGES file into the section
       below.
@@ -59,10 +77,6 @@ Branch moin-1.6-xapian:
 
 
 Version 1.6.current:
-    This is the active development branch. All changes get done here and
-    critical stuff gets committed with -m "... (backport to 1.5)" and then
-    backported to 1.5. :) Commits to 1.5 done in any other way are likely to
-    get reverted.
 
   Developer notes (these should be moved to the end in the release):
     * Page.url() does not escape any more. You have to use wikiutil.escape()
