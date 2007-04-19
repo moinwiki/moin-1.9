@@ -157,6 +157,7 @@ class TestConfig:
             setattr(self.request.cfg, key, value)
         for key in self.new:
             delattr(self.request.cfg, key)
+    __del__ = restore # XXX __del__ semantics are currently broken
 
 
 class Module(py.test.collect.Module):
