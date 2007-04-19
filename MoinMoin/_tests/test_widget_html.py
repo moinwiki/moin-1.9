@@ -9,7 +9,7 @@
 import unittest
 from MoinMoin.widget import html
 
-class HTMLWidgetsTestCase(unittest.TestCase):
+class TestHTMLWidgets(unittest.TestCase):
     """widget.html: testing html widgets"""
 
     def testCreate(self):

@@ -8,11 +8,13 @@
 
 import unittest, os
 
-from MoinMoin._tests import TestConfig, TestSkipped
+import py
+
 from MoinMoin import user, caching
 from MoinMoin.util import filesys
 
-class EncodePasswordTestCase(unittest.TestCase):
+
+class TestEncodePassword(unittest.TestCase):
     """user: encode passwords tests"""
 
     def testAscii(self):
@@ -35,7 +37,7 @@ class EncodePasswordTestCase(unittest.TestCase):
                          'Expected "%(expected)s" but got "%(result)s"' % locals())
 
 
-class LoginWithPasswordTestCase(unittest.TestCase):
+class TestLoginWithPassword(unittest.TestCase):
     """user: login tests"""
 
     def setUp(self):
@@ -153,8 +155,7 @@ class LoginWithPasswordTestCase(unittest.TestCase):
         # Validate that we are not modifying existing user data file!
         if self.user.exists():
             self.user = None
-            raise TestSkipped("Test user exists, will not override existing"
-                              " user data file!")
+            py.test.skip("Test user exists, will not override existing user data file!")
 
         # Save test user
         self.user.save()
@@ -162,14 +163,13 @@ class LoginWithPasswordTestCase(unittest.TestCase):
         # Validate user creation
         if not self.user.exists():
             self.user = None
-            raise TestSkipped("Can't create test user")
+            py.test.skip("Can't create test user")
 
 
-class GroupNameTestCase(unittest.TestCase):
+class TestGroupName(unittest.TestCase):
 
     def setUp(self):
-        self.config = TestConfig(self.request,
-                                 page_group_regex=r'.+Group')
+        self.config = self.TestConfig(page_group_regex=r'.+Group')
 
     def tearDown(self):
         del self.config
@@ -187,7 +187,7 @@ class GroupNameTestCase(unittest.TestCase):
                         'Expected "%(expected)s" but got "%(result)s"' % locals())
 
 
-class IsValidNameTestCase(unittest.TestCase):
+class TestIsValidName(unittest.TestCase):
 
     def testNonAlnumCharacters(self):
         """ user: isValidName: reject unicode non alpha numeric characters

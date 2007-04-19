@@ -10,7 +10,6 @@
 
 import unittest
 from MoinMoin import module_tested
-from MoinMoin._tests import TestConfig
 
 
 class SimplestTestCase(unittest.TestCase):
@@ -52,9 +51,8 @@ class ComplexTestCase(unittest.TestCase):
 
         Some test needs specific config values, or they will fail.
         """
-        self.config = TestConfig(self.request,
-                                 defaults=['this option', 'that option'],
-                                 another_option='non default value')
+        self.config = self.TestConfig(defaults=['this option', 'that option'],
+                                      another_option='non default value')
 
     def tearDown(self):
         """ Stuff that should run after each test

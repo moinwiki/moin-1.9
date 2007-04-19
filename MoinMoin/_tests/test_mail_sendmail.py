@@ -13,7 +13,7 @@ from MoinMoin.mail import sendmail
 from MoinMoin import config
 
 
-class decodeSpamSafeEmailTestCase(unittest.TestCase):
+class TestdecodeSpamSafeEmail(unittest.TestCase):
     """mail.sendmail: testing mail"""
 
     _tests = (
@@ -45,7 +45,7 @@ class decodeSpamSafeEmailTestCase(unittest.TestCase):
                              locals())
 
 
-class EncodeAddressTests(unittest.TestCase):
+class TestEncodeAddress(unittest.TestCase):
     """ Address encoding tests
     
     See http://www.faqs.org/rfcs/rfc2822.html section 3.4. 

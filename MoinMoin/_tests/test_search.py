@@ -10,7 +10,7 @@ import unittest
 from MoinMoin import search
 
 
-class QuotingBugTests(unittest.TestCase):
+class TestQuotingBug(unittest.TestCase):
     """search: quoting bug tests 
     
     http://moinmoin.wikiwikiweb.de/MoinMoinBugs/SearchOneCharString

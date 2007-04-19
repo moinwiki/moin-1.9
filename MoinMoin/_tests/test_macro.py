@@ -14,7 +14,7 @@ from MoinMoin.parser.text import Parser
 from MoinMoin.formatter.text_html import Formatter
 
 
-class MacroTestCase(unittest.TestCase):
+class TestMacro(unittest.TestCase):
     def testTrivialMacro(self):
         """macro: trivial macro works"""
         m = self._make_macro()

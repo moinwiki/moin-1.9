@@ -9,16 +9,14 @@
 """
 
 import unittest
-from MoinMoin._tests import TestConfig
-from MoinMoin import security, _tests
+from MoinMoin import security
 
 acliter = security.ACLStringIterator
 
-class ACLStringIteratorTestCase(unittest.TestCase):
+class TestACLStringIterator(unittest.TestCase):
 
     def setUp(self):
-        self.config = TestConfig(self.request,
-                                 defaults=['acl_rights_valid', 'acl_rights_before'])
+        self.config = self.TestConfig(defaults=['acl_rights_valid', 'acl_rights_before'])
     def tearDown(self):
         del self.config
 
@@ -179,14 +177,14 @@ class ACLStringIteratorTestCase(unittest.TestCase):
         self.assertEqual(rights, [])
 
 
-class AclTestCase(unittest.TestCase):
+class TestAcl(unittest.TestCase):
     """ security: testing access control list
 
     TO DO: test unknown user?
     """
     def setUp(self):
         # Backup user
-        self.config = TestConfig(self.request, defaults=['acl_rights_valid', 'acl_rights_before'])
+        self.config = self.TestConfig(defaults=['acl_rights_valid', 'acl_rights_before'])
         self.savedUser = self.request.user.name
 
     def tearDown(self):

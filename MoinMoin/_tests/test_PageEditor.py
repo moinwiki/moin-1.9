@@ -7,12 +7,14 @@
 """
 
 import unittest
+
+import py
+
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
-from MoinMoin._tests import TestConfig, TestSkiped
 
 
-class ExpandVarsTestCase(unittest.TestCase):
+class TestExpandVars(unittest.TestCase):
     """PageEditor: testing page editor"""
 
     pagename = u'AutoCreatedMoinMoinTemporaryTestPage'
@@ -36,7 +38,7 @@ class ExpandVarsTestCase(unittest.TestCase):
                 'Expected "%(expected)s" but got "%(result)s"' % locals())
 
 
-class ExpandUserNameTest(unittest.TestCase):
+class TestExpandUserName(unittest.TestCase):
     """ Base class for user name tests
     
     Set user name during tests.
@@ -56,7 +58,7 @@ class ExpandUserNameTest(unittest.TestCase):
         return self.page._expand_variables(self.variable)
 
 
-class ExpandCamelCaseName(ExpandUserNameTest):
+class TestExpandCamelCaseName(TestExpandUserName):
 
     name = u'UserName'
 
@@ -65,34 +67,34 @@ class ExpandCamelCaseName(ExpandUserNameTest):
         self.assertEqual(self.expand(), self.name)
 
 
-class ExpandExtendedName(ExpandUserNameTest):
+class TestExpandExtendedName(TestExpandUserName):
 
     name = u'user name'
 
     def testExtendedNamesEnabled(self):
         """ PageEditor: expand @USERNAME@ extended name - enabled """
         try:
-            config = TestConfig(self.request)
+            config = self.TestConfig()
             self.assertEqual(self.expand(), u'["%s"]' % self.name)
         finally:
             del config
 
 
-class ExpandMailto(ExpandUserNameTest):
+class TestExpandMailto(TestExpandUserName):
 
     variable = u'@MAILTO@'
     name = u'user name'
     email = 'user@example.com'
 
     def setUp(self):
-        ExpandUserNameTest.setUp(self)
+        TestExpandUserName.setUp(self)
         self.savedValid = self.request.user.valid
         self.request.user.valid = 1
         self.savedEmail = self.request.user.email
         self.request.user.email = self.email
 
     def tearDown(self):
-        ExpandUserNameTest.tearDown(self)
+        TestExpandUserName.tearDown(self)
         self.request.user.valid = self.savedValid
         self.request.user.email = self.savedEmail
 
@@ -101,7 +103,7 @@ class ExpandMailto(ExpandUserNameTest):
         self.assertEqual(self.expand(), u'[[MailTo(%s)]]' % self.email)
 
 
-class ExpandPrivateVariables(ExpandUserNameTest):
+class TestExpandPrivateVariables(TestExpandUserName):
 
     variable = u'@ME@'
     name = u'AutoCreatedMoinMoinTemporaryTestUser'
@@ -109,14 +111,14 @@ class ExpandPrivateVariables(ExpandUserNameTest):
     shouldDeleteTestPage = True
 
     def setUp(self):
-        ExpandUserNameTest.setUp(self)
+        TestExpandUserName.setUp(self)
         self.savedValid = self.request.user.valid
         self.request.user.valid = 1
         self.createTestPage()
         self.deleteCaches()
 
     def tearDown(self):
-        ExpandUserNameTest.tearDown(self)
+        TestExpandUserName.tearDown(self)
         self.request.user.valid = self.savedValid
         self.deleteTestPage()
 
@@ -135,8 +137,7 @@ class ExpandPrivateVariables(ExpandUserNameTest):
         path = self.dictPagePath()
         if os.path.exists(path):
             self.shouldDeleteTestPage = False
-            raise TestSkiped("%s exists. Won't overwrite exiting page" %
-                             self.dictPage)
+            py.test.skip("%s exists. Won't overwrite exiting page" % self.dictPage)
         try:
             os.mkdir(path)
             revisionsDir = os.path.join(path, 'revisions')
@@ -146,7 +147,7 @@ class ExpandPrivateVariables(ExpandUserNameTest):
             text = u' ME:: %s\n' % self.name
             file(os.path.join(revisionsDir, current), 'w').write(text)
         except Exception, err:
-            raise TestSkiped("Can not be create test page: %s" % err)
+            py.test.skip("Can not be create test page: %s" % err)
 
     def deleteCaches(self):
         """ Force the wiki to scan the test page into the dicts """

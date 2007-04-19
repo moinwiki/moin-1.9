@@ -9,12 +9,11 @@
 from unittest import TestCase
 import re
 
-from MoinMoin._tests import TestConfig
 from MoinMoin.Page import Page
 from MoinMoin import wikiutil
 
 
-class FormatterTestCase(TestCase):
+class TestFormatter(TestCase):
     def testSyntaxReference(self):
         formatters = wikiutil.getPlugins("formatter", self.request.cfg)
         for f_name in formatters:
