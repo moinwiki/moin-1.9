@@ -18,7 +18,7 @@ class Config(DefaultConfig):
     acl_rights_default = u"All:read,write,delete,revert,admin"
     surge_action_limits = None # no surge protection
     sitename = u'MoinMoin DesktopEdition'
-    logo_string = u'<img src="/moin_static160/common/moinmoin.png" alt="MoinMoin Logo">'
+    logo_string = u'<img src="/moin_static170/common/moinmoin.png" alt="MoinMoin Logo">'
     page_front_page = u'FrontPage' # change to some better value
     page_credits = [
         '<a href="http://moinmoin.wikiwikiweb.de/">MoinMoin DesktopEdition Powered</a>',
