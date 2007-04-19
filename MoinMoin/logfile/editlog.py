@@ -172,8 +172,7 @@ class EditLog(LogFile):
         else:
             hostname = host
 
-        remap_chars = {u'\t': u' ', u'\r': u' ', u'\n': u' ', }
-        comment = comment.translate(remap_chars)
+        comment = wikiutil.clean_input(comment)
         user_id = request.user.valid and request.user.id or ''
 
         if self.uid_override is not None:
