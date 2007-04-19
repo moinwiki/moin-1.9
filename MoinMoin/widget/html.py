@@ -599,6 +599,8 @@ class TD(CompositeElement):
         'align': None,
         'class': None,
         'valign': None,
+        'colspan': None,
+        'rowspan': None,
     }
 
 class TEXTAREA(CompositeElement):
