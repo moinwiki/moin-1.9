@@ -7,10 +7,13 @@
 """
 
 from unittest import TestCase
+
+import py
+
 from MoinMoin.Page import Page
-from MoinMoin._tests import TestConfig
-from MoinMoin._tests import TestSkiped as TestSkipped
+from MoinMoin.PageEditor import PageEditor
 from MoinMoin.packages import Package, ScriptEngine, MOIN_PACKAGE_FILE, packLine, unpackLine
+
 
 class DebugPackage(Package, ScriptEngine):
     """ Used for debugging, does not need a real .zip file. """
@@ -43,13 +46,13 @@ installplugin|foo|local|parser|testy
     def isPackage(self):
         return True
 
-class UnsafePackageTestcase(TestCase):
+class TestUnsafePackage(TestCase):
     """ Tests various things in the packages package. Note that this package does
         not care to clean up and needs to run in a test wiki because of that. """
 
     def setUp(self):
         if not getattr(self.request.cfg, 'is_test_wiki', False):
-            raise TestSkipped('This test needs to be run using the test wiki.')
+            py.test.skip('This test needs to be run using the test wiki.')
 
     def testBasicPackageThings(self):
         myPackage = DebugPackage(self.request, 'test')
@@ -59,7 +62,12 @@ class UnsafePackageTestcase(TestCase):
         self.assertEqual(testseite2.getPageText(), "Hello world, I am the file testdatei")
         self.assert_(testseite2.isUnderlayPage())
 
-class QuotingTestCase(TestCase):
+    def tearDown(self):
+        DebugPackage(self.request, u"""moinmoinpackage|1
+DeletePage|FooPage|Test ...
+""").installPackage()
+
+class TestQuoting(TestCase):
     def testQuoting(self):
         for line in ([':foo', 'is\\', 'ja|', u't|ü', u'baAzß'], [], ['', '']):
             self.assertEqual(line, unpackLine(packLine(line)))

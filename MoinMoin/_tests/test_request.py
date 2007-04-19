@@ -9,10 +9,9 @@
 """
 
 import unittest
-from MoinMoin._tests import TestConfig
 from MoinMoin import config
 
-class NormalizePagenameTestCase(unittest.TestCase):
+class TestNormalizePagename(unittest.TestCase):
 
     def testPageInvalidChars(self):
         """ request: normalize pagename: remove invalid unicode chars
@@ -77,10 +76,10 @@ class NormalizePagenameTestCase(unittest.TestCase):
                              locals())
 
 
-class GroupPagesTestCase(unittest.TestCase):
+class TestGroupPages(unittest.TestCase):
 
     def setUp(self):
-        self.config = TestConfig(self.request, page_group_regex=r'.+Group')
+        self.config = self.TestConfig(page_group_regex=r'.+Group')
 
     def tearDown(self):
         del self.config
@@ -107,7 +106,7 @@ class GroupPagesTestCase(unittest.TestCase):
                              locals())
 
 
-class HTTPDateTests(unittest.TestCase):
+class TestHTTPDate(unittest.TestCase):
 
     def testRFC1123Date(self):
         """ request: httpDate default rfc1123 """

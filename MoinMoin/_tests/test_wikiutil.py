@@ -7,11 +7,10 @@
 """
 
 import unittest
-from MoinMoin._tests import TestConfig
 from MoinMoin import wikiutil
 
 
-class SystemPageTestCase(unittest.TestCase):
+class TestSystemPage(unittest.TestCase):
     systemPages = (
         # First level, on SystemPagesGroup
         'SystemPagesInEnglishGroup',
@@ -33,7 +32,7 @@ class SystemPageTestCase(unittest.TestCase):
                 '"%(name)s" is NOT a system page' % locals())
 
 
-class TemplatePageTestCase(unittest.TestCase):
+class TestTemplatePage(unittest.TestCase):
     good = (
         'aTemplate',
         'MyTemplate',
@@ -48,10 +47,9 @@ class TemplatePageTestCase(unittest.TestCase):
 
     # require default page_template_regex config
     def setUp(self):
-        self.config = TestConfig(self.request,
-                                 defaults=['page_template_regex'])
+        self.config = self.TestConfig(defaults=['page_template_regex'])
     def tearDown(self):
-        del self.config
+        self.config.restore()
 
     def testTemplatePage(self):
         """wikiutil: good template names accepted, bad rejected"""

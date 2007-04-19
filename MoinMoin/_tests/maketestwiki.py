@@ -12,11 +12,13 @@ Usage:
 
 import os, sys, shutil, errno, tarfile
 
-moinpath = os.path.join(os.path.dirname(sys.argv[0]), os.pardir)
-sys.path.insert(0, os.path.abspath(moinpath))
+filename = globals().get("__file__") or sys.argv[0]
+moinpath = os.path.abspath(os.path.join(os.path.dirname(filename), os.pardir, os.pardir))
+sys.path.insert(0, moinpath)
 
-WIKI = os.path.abspath(os.path.join('tests', 'wiki'))
-SHARE = os.path.abspath('wiki')
+WIKI = os.path.abspath(os.path.join(moinpath, 'tests', 'wiki'))
+SHARE = os.path.abspath(os.path.join(moinpath, 'wiki'))
+
 
 def removeTestWiki():
     print 'removing old wiki ...'
@@ -28,17 +30,12 @@ def removeTestWiki():
                     (err.errno == 3 and os.name == 'nt')):
                 raise
 
+
 def copyData():
     print 'copying data ...'
     src = os.path.join(SHARE, 'data')
     dst = os.path.join(WIKI, 'data')
     shutil.copytree(src, dst)
-    # Remove arch-ids dirs
-    for path, dirs, files in os.walk(dst):
-        for dir in dirs[:]:
-            if dir == '.arch-ids':
-                shutil.rmtree(os.path.join(path, dir))
-                dirs.remove(dir)
 
 
 def untarUnderlay():
@@ -49,13 +46,15 @@ def untarUnderlay():
     tar.close()
 
 
-def run():
+def run(skip_if_existing=False):
     try:
         os.makedirs(WIKI)
     except OSError, e:
         if e.errno != errno.EEXIST:
             raise
 
+    if skip_if_existing and os.path.exists(os.path.join(WIKI, 'data')):
+        return
     removeTestWiki()
     copyData()
     untarUnderlay()

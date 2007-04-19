@@ -9,7 +9,7 @@
 import unittest
 from MoinMoin import Page
 
-class existsTestCase(unittest.TestCase):
+class TestExists(unittest.TestCase):
     """Page: testing wiki page"""
 
     def testExists(self):

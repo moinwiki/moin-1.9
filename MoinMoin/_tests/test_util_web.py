@@ -12,7 +12,7 @@ from MoinMoin.util import web
 from MoinMoin.widget import html
 
 
-class MakeQueryStringTestCase(unittest.TestCase):
+class TestMakeQueryString(unittest.TestCase):
     """util.web: making query string"""
 
     def testMakeQueryStringFromArgument(self):
@@ -56,7 +56,7 @@ class MakeQueryStringTestCase(unittest.TestCase):
                               'but got "%(result)s"') % locals())
         
 
-class MakeSelectionTestCase(unittest.TestCase):
+class TestMakeSelection(unittest.TestCase):
     """util.web: creating html select"""
 
     values = ('one', 'two', 'simple', ('complex', 'A tuple & <escaped text>'))

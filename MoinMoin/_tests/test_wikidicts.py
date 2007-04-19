@@ -12,7 +12,7 @@ import re
 from MoinMoin import wikidicts
 from MoinMoin import Page
 
-class GroupPageTestCase(unittest.TestCase):
+class TestGroupPage(unittest.TestCase):
 
     def testCamelCase(self):
         """ wikidicts: initFromText: CamelCase links """
@@ -68,7 +68,7 @@ Ignore previous line and this text.
         return group.members()
 
 
-class DictPageTestCase(unittest.TestCase):
+class TestDictPage(unittest.TestCase):
 
     def testGroupMembers(self):
         """ wikidicts: create dict from keys and values in text """

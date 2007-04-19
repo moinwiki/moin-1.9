@@ -8,10 +8,9 @@
 
 import unittest
 from MoinMoin import error
-from MoinMoin._tests import TestConfig
 
 
-class EncodingTestCase(unittest.TestCase):
+class TestEncoding(unittest.TestCase):
     """ MoinMoin errors do work with unicode transparently """
 
     def testCreateWithUnicode(self):

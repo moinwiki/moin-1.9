@@ -50,7 +50,7 @@ underlay:
 	cd $(share); rm -rf underlay.tar.bz2; tar cjf underlay.tar.bz2 underlay
 
 pagepacks:
-	@python tests/maketestwiki.py
+	@python MoinMoin/_tests/maketestwiki.py
 	@MoinMoin/script/moin.py --config-dir=$(testwiki)/.. maint mkpagepacks
 	cd $(share) ; rm -rf underlay
 	cp -a $(testwiki)/underlay $(share)/
@@ -77,12 +77,12 @@ update:
 update-underlay:
 	cd $(share); rm -rf underlay; tar xjf underlay.tar.bz2
 
-test: 
-	@python tests/maketestwiki.py
-	@python tests/runtests.py
+test:
+	@echo Testing is now done using \`py.test\`. py.test can be installed by downloading from http://codespeak.net/py/dist/download.html
+	@echo Writing tests is explained on http://codespeak.net/py/dist/test.html
 
 coverage:
-	@python tests/maketestwiki.py
+	@python MoinMoin/_tests/maketestwiki.py
 	@python -u -m trace --count --coverdir=cover --missing tests/runtests.py
 
 pylint:

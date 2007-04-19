@@ -10,7 +10,7 @@ import unittest
 import array
 from MoinMoin.wikixml import marshal
 
-class MarshalTestCase(unittest.TestCase):
+class TestMarshal(unittest.TestCase):
     """Testing Marshal used for ...XXX"""
 
     class Data:

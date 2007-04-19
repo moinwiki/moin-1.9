@@ -9,11 +9,13 @@
 """
 
 import unittest, tempfile, os, time, shutil
-from MoinMoin._tests import TestConfig, TestSkiped
+
+import py
+
 from MoinMoin.util.lock import ExclusiveLock
 
 
-class ExclusiveLockTests(unittest.TestCase):
+class TestExclusiveLock(unittest.TestCase):
     
     def setUp(self):
         self.test_dir = tempfile.mkdtemp('', 'lock_')
@@ -57,7 +59,7 @@ class ExclusiveLockTests(unittest.TestCase):
         """
         lock = ExclusiveLock(self.lock_dir)
         if not lock.acquire(0.1):
-            raise TestSkiped("can't acquire lock")
+            py.test.skip("can't acquire lock")
         lock.release()
         self.failUnless(lock.acquire(0.1), 
                         "Could not acquire lock after release")
@@ -66,7 +68,7 @@ class ExclusiveLockTests(unittest.TestCase):
         """ util.lock: ExclusiveLock: isLocked """
         lock = ExclusiveLock(self.lock_dir)
         if not lock.acquire(0.1):
-            raise TestSkiped("can't acquire lock")
+            py.test.skip("can't acquire lock")
         self.failUnless(lock.isLocked(), "lock state wrong")
         lock.release()
         self.failIf(lock.isLocked(), "lock state wrong")
@@ -75,7 +77,7 @@ class ExclusiveLockTests(unittest.TestCase):
         """ util.lock: ExclusiveLock: exists """
         lock = ExclusiveLock(self.lock_dir)
         if not lock.acquire(0.1):
-            raise TestSkiped("can't acquire lock")
+            py.test.skip("can't acquire lock")
         self.failUnless(lock.exists(), "lock should exists")
 
     def testIsExpired(self):
@@ -83,7 +85,7 @@ class ExclusiveLockTests(unittest.TestCase):
         timeout = 2.0
         lock = ExclusiveLock(self.lock_dir, timeout=timeout)
         if not lock.acquire(0.1):
-            raise TestSkiped("can't acquire lock")
+            py.test.skip("can't acquire lock")
         self.failIf(lock.isExpired(), "lock should not be expired yet")
         time.sleep(timeout)
         self.failUnless(lock.isExpired(), "lock should be expired")
@@ -93,7 +95,7 @@ class ExclusiveLockTests(unittest.TestCase):
         timeout = 2.0
         lock = ExclusiveLock(self.lock_dir, timeout=timeout)
         if not lock.acquire(0.1):
-            raise TestSkiped("can't acquire lock")
+            py.test.skip("can't acquire lock")
         self.failIf(lock.expire(), "lock should not be expired yet")
         time.sleep(timeout)
         self.failUnless(lock.expire(), "lock should be expired")
@@ -103,7 +105,7 @@ class ExclusiveLockTests(unittest.TestCase):
         first = ExclusiveLock(self.lock_dir)
         second = ExclusiveLock(self.lock_dir)
         if not first.acquire(0.1):
-            raise TestSkiped("can't acquire lock")
+            py.test.skip("can't acquire lock")
         self.failIf(second.acquire(0.1), "first lock is not exclusive")                
 
     def testAcquireAfterTimeout(self):
@@ -115,9 +117,9 @@ class ExclusiveLockTests(unittest.TestCase):
         first = ExclusiveLock(self.lock_dir, timeout)
         second = ExclusiveLock(self.lock_dir, timeout)
         if not first.acquire(0.1):
-            raise TestSkiped("can't acquire lock")
+            py.test.skip("can't acquire lock")
         if second.acquire(0.1):
-            raise TestSkiped("first lock is not exclusive")
+            py.test.skip("first lock is not exclusive")
         # Second lock should be acquired after timeout
         self.failUnless(second.acquire(timeout + 0.1), 
                         "can't acquire after timeout")
