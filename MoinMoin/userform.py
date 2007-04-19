@@ -22,7 +22,7 @@ def savedata(request):
 
     Return error msg or None.  
     """
-    return UserSettingsHandler(request).handleData()
+    return UserSettingsHandler(request).handle_form()
 
 
 class UserSettingsHandler:
@@ -33,7 +33,7 @@ class UserSettingsHandler:
         self._ = request.getText
         self.cfg = request.cfg
 
-    def decodePageList(self, key):
+    def _decode_pagelist(self, key):
         """ Decode list of pages from form input
 
         Each line is a page name, empty lines ignored.
@@ -52,47 +52,138 @@ class UserSettingsHandler:
             items.append(item)
         return items
 
-    def handleData(self):
+    def _account_sendmail(self):
         _ = self._
         form = self.request.form
 
-        if form.has_key('cancel'):
-            return
-
-        if form.has_key('account_sendmail'):
-            if not self.cfg.mail_enabled:
-                return _("""This wiki is not enabled for mail processing.
+        if not self.cfg.mail_enabled:
+            return _("""This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.""")
+        try:
+            email = wikiutil.clean_input(form['email'][0].lower())
+        except KeyError:
+            return _("Please provide a valid email address!")
+
+        u = user.get_by_email_address(self.request, email)
+        if u:
+            msg = u.mailAccountData()
+            return wikiutil.escape(msg)
+
+        return _("Found no account matching the given email address '%(email)s'!") % {'email': email}
+
+    def _create_user(self):
+        _ = self._
+        form = self.request.form
+
+        if self.request.request_method != 'POST':
+            return _("Use UserPreferences to change your settings or create an account.")
+        # Create user profile
+        if form.has_key('create'):
+            theuser = self.request.get_user_from_form()
+        else:
+            theuser = user.User(self.request, auth_method="request:152")
+
+        # Require non-empty name
+        try:
+            theuser.name = form['name'][0]
+        except KeyError:
+            return _("Empty user name. Please enter a user name.")
+
+        # Don't allow creating users with invalid names
+        if not user.isValidName(self.request, theuser.name):
+            return _("""Invalid user name {{{'%s'}}}.
+Name may contain any Unicode alpha numeric character, with optional one
+space between words. Group page name is not allowed.""") % wikiutil.escape(theuser.name)
+
+        # Name required to be unique. Check if name belong to another user.
+        if user.getUserId(self.request, theuser.name):
+            return _("This user name already belongs to somebody else.")
+
+        # try to get the password and pw repeat
+        password = form.get('password', [''])[0]
+        password2 = form.get('password2', [''])[0]
+
+        # Check if password is given and matches with password repeat
+        if password != password2:
+            return _("Passwords don't match!")
+        if not password:
+            return _("Please specify a password!")
+
+        # Encode password
+        if password and not password.startswith('{SHA}'):
             try:
-                email = wikiutil.clean_input(form['email'][0].lower())
-            except KeyError:
-                return _("Please provide a valid email address!")
+                theuser.enc_password = user.encodePassword(password)
+            except UnicodeError, err:
+                # Should never happen
+                return "Can't encode password: %s" % str(err)
 
-            u = user.get_by_email_address(self.request, email)
-            if u:
-                msg = u.mailAccountData()
-                return wikiutil.escape(msg)
+        # try to get the email, for new users it is required
+        email = wikiutil.clean_input(form.get('email', [''])[0])
+        theuser.email = email.strip()
+        if not theuser.email:
+            return _("Please provide your email address. If you lose your"
+                     " login information, you can get it by email.")
 
-            return _("Found no account matching the given email address '%(email)s'!") % {'email': wikiutil.escape(email)}
+        # Email should be unique - see also MoinMoin/script/accounts/moin_usercheck.py
+        if theuser.email and self.request.cfg.user_email_unique:
+            users = user.getUserList(self.request)
+            for uid in users:
+                if uid == theuser.id:
+                    continue
+                thisuser = user.User(self.request, uid)
+                if thisuser.email == theuser.email and not thisuser.disabled:
+                    return _("This email already belongs to somebody else.")
 
-        if (form.has_key('create') or
-            form.has_key('create_only') or
-            form.has_key('create_and_mail')):
-            if self.request.request_method != 'POST':
-                return _("Use UserPreferences to change your settings or create an account.")
-            # Create user profile
-            if form.has_key('create'):
-                theuser = self.request.get_user_from_form()
+        # save data
+        theuser.save()
+        if form.has_key('create_and_mail'):
+            theuser.mailAccountData()
+
+        result = _("User account created! You can use this account to login now...")
+        if _debug:
+            result = result + util.dumpFormData(form)
+        return result
+
+    def _select_user(self):
+        _ = self._
+        form = self.request.form
+
+        if (wikiutil.checkTicket(self.request, self.request.form['ticket'][0]) and
+            self.request.request_method == 'POST' and
+            (self.request.user.isSuperUser() or
+             (not self.request._setuid_real_user is None
+              and (self.request._setuid_real_user.isSuperUser())))):
+            su_user = form.get('selected_user', [''])[0]
+            uid = user.getUserId(self.request, su_user)
+            if (not self.request._setuid_real_user is None
+                and uid == self.request._setuid_real_user.id):
+                del self.request.session['setuid']
+                self.request.user = self.request._setuid_real_user
+                self.request._setuid_real_user = None
             else:
-                theuser = user.User(self.request, auth_method="request:152")
+                theuser = user.User(self.request, uid)
+                theuser.disabled = None
+                self.request.session['setuid'] = uid
+                self.request._setuid_real_user = self.request.user
+                # now continue as the other user
+                self.request.user = theuser
+            return  _("Use UserPreferences to change settings of the selected user account")
+        else:
+            return _("Use UserPreferences to change your settings or create an account.")
 
+    def _save_user_prefs(self):
+        _ = self._
+        form = self.request.form
+
+        if self.request.request_method != 'POST':
+            return _("Use UserPreferences to change your settings or create an account.")
+        theuser = self.request.get_user_from_form()
+
+        if not 'name' in theuser.auth_attribs:
             # Require non-empty name
-            try:
-                theuser.name = form['name'][0]
-            except KeyError:
-                return _("Empty user name. Please enter a user name.")
+            theuser.name = form.get('name', [theuser.name])[0]
 
-            # Don't allow users with invalid names
+            # Don't allow changing the name to an invalid one
             if not user.isValidName(self.request, theuser.name):
                 return _("""Invalid user name {{{'%s'}}}.
 Name may contain any Unicode alpha numeric character, with optional one
@@ -100,13 +191,14 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
 
             # Is this an existing user trying to change information or a new user?
             # Name required to be unique. Check if name belong to another user.
-            newuser = 1
             if user.getUserId(self.request, theuser.name):
                 if theuser.name != self.request.user.name:
                     return _("This user name already belongs to somebody else.")
-                else:
-                    newuser = 0
 
+            if not theuser.name:
+                return _("Empty user name. Please enter a user name.")
+
+        if not 'password' in theuser.auth_attribs:
             # try to get the password and pw repeat
             password = form.get('password', [''])[0]
             password2 = form.get('password2', [''])[0]
@@ -114,8 +206,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
             # Check if password is given and matches with password repeat
             if password != password2:
                 return _("Passwords don't match!")
-            if not password and newuser:
-                return _("Please specify a password!")
+
             # Encode password
             if password and not password.startswith('{SHA}'):
                 try:
@@ -124,108 +215,10 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
                     # Should never happen
                     return "Can't encode password: %s" % str(err)
 
-            # try to get the (required) email
-            email = wikiutil.clean_input(form.get('email', [''])[0])
+        if not 'email' in theuser.auth_attribs:
+            # try to get the email
+            email = wikiutil.clean_input(form.get('email', [theuser.email])[0])
             theuser.email = email.strip()
-            if not theuser.email:
-                return _("Please provide your email address. If you lose your"
-                         " login information, you can get it by email.")
-
-            # Email should be unique - see also MoinMoin/script/accounts/moin_usercheck.py
-            if theuser.email and self.request.cfg.user_email_unique:
-                users = user.getUserList(self.request)
-                for uid in users:
-                    if uid == theuser.id:
-                        continue
-                    thisuser = user.User(self.request, uid)
-                    if thisuser.email == theuser.email and not thisuser.disabled:
-                        return _("This email already belongs to somebody else.")
-
-            # save data
-            theuser.save()
-            if form.has_key('create_and_mail'):
-                theuser.mailAccountData()
-
-            result = _("User account created! You can use this account to login now...")
-            if _debug:
-                result = result + util.dumpFormData(form)
-            return result
-
-
-        # Select user profile (su user) - only works with logged-in user session support
-        if form.has_key('select_user'):
-            if (self.request.session and
-                wikiutil.checkTicket(self.request, self.request.form['ticket'][0]) and
-                self.request.request_method == 'POST' and
-                (self.request.user.isSuperUser() or
-                 (not self.request._setuid_real_user is None
-                  and (self.request._setuid_real_user.isSuperUser())))):
-                su_user = form.get('selected_user', [''])[0]
-                uid = user.getUserId(self.request, su_user)
-                if (not self.request._setuid_real_user is None
-                    and uid == self.request._setuid_real_user.id):
-                    del self.request.session['setuid']
-                    self.request.user = self.request._setuid_real_user
-                    self.request._setuid_real_user = None
-                else:
-                    theuser = user.User(self.request, uid)
-                    theuser.disabled = None
-                    self.request.session['setuid'] = uid
-                    self.request._setuid_real_user = self.request.user
-                    # now continue as the other user
-                    self.request.user = theuser
-                return  _("Use UserPreferences to change settings of the selected user account")
-            else:
-                return _("Use UserPreferences to change your settings or create an account.")
-
-        if form.has_key('save'): # Save user profile
-            if self.request.request_method != 'POST':
-                return _("Use UserPreferences to change your settings or create an account.")
-            theuser = self.request.get_user_from_form()
-
-            if not 'name' in theuser.auth_attribs:
-                # Require non-empty name
-                theuser.name = form.get('name', [theuser.name])[0]
-            if not theuser.name:
-                return _("Empty user name. Please enter a user name.")
-
-            # Don't allow users with invalid names
-            if not user.isValidName(self.request, theuser.name):
-                return _("""Invalid user name {{{'%s'}}}.
-Name may contain any Unicode alpha numeric character, with optional one
-space between words. Group page name is not allowed.""") % wikiutil.escape(theuser.name)
-
-            # Is this an existing user trying to change information or a new user?
-            # Name required to be unique. Check if name belong to another user.
-            newuser = 1
-            if user.getUserId(self.request, theuser.name):
-                if theuser.name != self.request.user.name:
-                    return _("This user name already belongs to somebody else.")
-                else:
-                    newuser = 0
-
-            if not 'password' in theuser.auth_attribs:
-                # try to get the password and pw repeat
-                password = form.get('password', [''])[0]
-                password2 = form.get('password2', [''])[0]
-
-                # Check if password is given and matches with password repeat
-                if password != password2:
-                    return _("Passwords don't match!")
-                if not password and newuser:
-                    return _("Please specify a password!")
-                # Encode password
-                if password and not password.startswith('{SHA}'):
-                    try:
-                        theuser.enc_password = user.encodePassword(password)
-                    except UnicodeError, err:
-                        # Should never happen
-                        return "Can't encode password: %s" % str(err)
-
-            if not 'email' in theuser.auth_attribs:
-                # try to get the email
-                email = wikiutil.clean_input(form.get('email', [theuser.email])[0])
-                theuser.email = email.strip()
 
             # Require email
             if not theuser.email:
@@ -242,92 +235,115 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
                     if thisuser.email == theuser.email:
                         return _("This email already belongs to somebody else.")
 
-            if not 'aliasname' in theuser.auth_attribs:
-                # aliasname
-                theuser.aliasname = wikiutil.clean_input(form.get('aliasname', [''])[0])
+        if not 'aliasname' in theuser.auth_attribs:
+            # aliasname
+            theuser.aliasname = wikiutil.clean_input(form.get('aliasname', [''])[0])
 
-            # editor size
-            theuser.edit_rows = util.web.getIntegerInput(self.request, 'edit_rows', theuser.edit_rows, 10, 60)
+        # editor size
+        theuser.edit_rows = util.web.getIntegerInput(self.request, 'edit_rows', theuser.edit_rows, 10, 60)
 
-            # try to get the editor
-            theuser.editor_default = form.get('editor_default', [self.cfg.editor_default])[0]
-            theuser.editor_ui = form.get('editor_ui', [self.cfg.editor_ui])[0]
+        # try to get the editor
+        theuser.editor_default = form.get('editor_default', [self.cfg.editor_default])[0]
+        theuser.editor_ui = form.get('editor_ui', [self.cfg.editor_ui])[0]
 
-            # time zone
-            theuser.tz_offset = util.web.getIntegerInput(self.request, 'tz_offset', theuser.tz_offset, -84600, 84600)
+        # time zone
+        theuser.tz_offset = util.web.getIntegerInput(self.request, 'tz_offset', theuser.tz_offset, -84600, 84600)
 
-            # datetime format
-            try:
-                dt_d_combined = UserSettings._date_formats.get(form['datetime_fmt'][0], '')
-                theuser.datetime_fmt, theuser.date_fmt = dt_d_combined.split(' & ')
-            except (KeyError, ValueError):
-                theuser.datetime_fmt = '' # default
-                theuser.date_fmt = '' # default
+        # datetime format
+        try:
+            dt_d_combined = UserSettings._date_formats.get(form['datetime_fmt'][0], '')
+            theuser.datetime_fmt, theuser.date_fmt = dt_d_combined.split(' & ')
+        except (KeyError, ValueError):
+            theuser.datetime_fmt = '' # default
+            theuser.date_fmt = '' # default
 
-            # try to get the (optional) theme
-            theme_name = form.get('theme_name', [self.cfg.theme_default])[0]
-            if theme_name != theuser.theme_name:
-                # if the theme has changed, load the new theme
-                # so the user has a direct feedback
-                # WARNING: this should be refactored (i.e. theme load
-                # after userform handling), cause currently the
-                # already loaded theme is just replaced (works cause
-                # nothing has been emitted yet)
-                theuser.theme_name = theme_name
-                if self.request.loadTheme(theuser.theme_name) > 0:
-                    theme_name = wikiutil.escape(theme_name)
-                    return _("The theme '%(theme_name)s' could not be loaded!") % locals()
+        # try to get the (optional) theme
+        theme_name = form.get('theme_name', [self.cfg.theme_default])[0]
+        if theme_name != theuser.theme_name:
+            # if the theme has changed, load the new theme
+            # so the user has a direct feedback
+            # WARNING: this should be refactored (i.e. theme load
+            # after userform handling), cause currently the
+            # already loaded theme is just replaced (works cause
+            # nothing has been emitted yet)
+            theuser.theme_name = theme_name
+            if self.request.loadTheme(theuser.theme_name) > 0:
+                theme_name = wikiutil.escape(theme_name)
+                return _("The theme '%(theme_name)s' could not be loaded!") % locals()
 
-            # try to get the (optional) preferred language
-            theuser.language = form.get('language', [''])[0]
+        # try to get the (optional) preferred language
+        theuser.language = form.get('language', [''])[0]
 
-            # I want to handle all inputs from user_form_fields, but
-            # don't want to handle the cases that have already been coded
-            # above.
-            # This is a horribly fragile kludge that's begging to break.
-            # Something that might work better would be to define a
-            # handler for each form field, instead of stuffing them all in
-            # one long and inextensible method.  That would allow for
-            # plugins to provide methods to validate their fields as well.
-            already_handled = ['name', 'password', 'password2', 'email',
-                               'aliasname', 'edit_rows', 'editor_default',
-                               'editor_ui', 'tz_offset', 'datetime_fmt',
-                               'theme_name', 'language']
-            for field in self.cfg.user_form_fields:
-                key = field[0]
-                if ((key in self.cfg.user_form_disable)
-                    or (key in already_handled)):
-                    continue
-                default = self.cfg.user_form_defaults[key]
-                value = form.get(key, [default])[0]
-                setattr(theuser, key, value)
+        # I want to handle all inputs from user_form_fields, but
+        # don't want to handle the cases that have already been coded
+        # above.
+        # This is a horribly fragile kludge that's begging to break.
+        # Something that might work better would be to define a
+        # handler for each form field, instead of stuffing them all in
+        # one long and inextensible method.  That would allow for
+        # plugins to provide methods to validate their fields as well.
+        already_handled = ['name', 'password', 'password2', 'email',
+                           'aliasname', 'edit_rows', 'editor_default',
+                           'editor_ui', 'tz_offset', 'datetime_fmt',
+                           'theme_name', 'language']
+        for field in self.cfg.user_form_fields:
+            key = field[0]
+            if ((key in self.cfg.user_form_disable)
+                or (key in already_handled)):
+                continue
+            default = self.cfg.user_form_defaults[key]
+            value = form.get(key, [default])[0]
+            setattr(theuser, key, value)
 
-            # checkbox options
-            if not newuser:
-                for key, label in self.cfg.user_checkbox_fields:
-                    if key not in self.cfg.user_checkbox_disable and key not in self.cfg.user_checkbox_remove:
-                        value = form.get(key, ["0"])[0]
-                        try:
-                            value = int(value)
-                        except ValueError:
-                            pass
-                        else:
-                            setattr(theuser, key, value)
+        # checkbox options
+        for key, label in self.cfg.user_checkbox_fields:
+            if key not in self.cfg.user_checkbox_disable and key not in self.cfg.user_checkbox_remove:
+                value = form.get(key, ["0"])[0]
+                try:
+                    value = int(value)
+                except ValueError:
+                    pass
+                else:
+                    setattr(theuser, key, value)
 
-            # quicklinks for navibar
-            theuser.quicklinks = self.decodePageList('quicklinks')
+        # quicklinks for navibar
+        theuser.quicklinks = self._decode_pagelist('quicklinks')
 
-            # subscription for page change notification
-            theuser.subscribed_pages = self.decodePageList('subscribed_pages')
+        # subscription for page change notification
+        theuser.subscribed_pages = self._decode_pagelist('subscribed_pages')
 
-            # save data
-            theuser.save()
-            self.request.user = theuser
+        # save data
+        theuser.save()
+        self.request.user = theuser
 
-            result = _("User preferences saved!")
-            if _debug:
-                result = result + util.dumpFormData(form)
-            return result
+        result = _("User preferences saved!")
+        if _debug:
+            result = result + util.dumpFormData(form)
+        return result
+
+
+    def handle_form(self):
+        _ = self._
+        form = self.request.form
+
+        if form.has_key('cancel'):
+            return
+
+        if form.has_key('account_sendmail'):
+            return self._account_sendmail()
+
+        if (form.has_key('create') or
+            form.has_key('create_only') or
+            form.has_key('create_and_mail')):
+            return self._create_user()
+
+
+        # Select user profile (su user)
+        if form.has_key('select_user'):
+            return self._select_user()
+
+        if form.has_key('save'): # Save user profile
+            return self._save_user_prefs()
 
 
 #############################################################################
