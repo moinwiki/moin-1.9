@@ -137,6 +137,8 @@ class RequestBase(object):
         # request. we do it for all request types to avoid similar problems.
         set_umask()
 
+        self._finishers = []
+
         # Decode values collected by sub classes
         self.path_info = self.decodePagename(self.path_info)
 
@@ -1408,12 +1410,18 @@ space between words. Group page name is not allowed.""") % self.user.name
         Delete circular references - all object that we create using self.name = class(self).
         This helps Python to collect these objects and keep our memory footprint lower.
         """
+        for method in self._finishers:
+            method(self)
+
         try:
             del self.user
             del self.theme
             del self.dicts
         except:
             pass
+
+    def add_finisher(self, method):
+        self._finishers.append(method)
 
     # Debug ------------------------------------------------------------
 
