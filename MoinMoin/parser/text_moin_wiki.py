@@ -4,6 +4,7 @@
 
     @copyright: 2000-2002 Juergen Hermann <jh@web.de>,
                 2006 by MoinMoin:ThomasWaldmann
+                2007 by MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -152,6 +153,8 @@ class Parser:
         # 'found_parser' == we found a valid parser (was: 2)
         # 'no_parser' == we have no (valid) parser, use a normal <pre>...</pre> (was: 3)
         self.in_pre = None
+        # needed for nested {{{
+        self.in_nested_pre = 0
 
         self.in_table = 0
         self.inhibit_p = 0 # if set, do not auto-create a <p>aragraph
@@ -807,6 +810,7 @@ class Parser:
     def _parser_repl(self, word):
         """Handle parsed code displays."""
         if word.startswith('{{{'):
+            self.in_nested_pre = 1
             word = word[3:]
 
         self.parser = None
@@ -840,12 +844,19 @@ class Parser:
         """Handle code displays."""
         word = word.strip()
         if word == '{{{' and not self.in_pre:
+            self.in_nested_pre = 1
             self.in_pre = 'no_parser'
             return self._closeP() + self.formatter.preformatted(1)
-        elif word == '}}}' and self.in_pre:
+        elif word == '}}}' and self.in_pre and self.in_nested_pre == 1:
             self.in_pre = None
             self.inhibit_p = 0
+            self.in_nested_pre = 0
             return self.formatter.preformatted(0)
+        elif word == '}}}' and self.in_pre and self.in_nested_pre > 1:
+            self.in_nested_pre -= 1
+            if self.in_nested_pre < 0:
+                self.in_nested_pre = 0
+            return self.formatter.text(word)
         return self.formatter.text(word)
 
 
@@ -1138,6 +1149,8 @@ class Parser:
 
             # Scan line, format and write
             scanning_re = self.in_pre and pre_scan_re or scan_re
+            if '{{{' in line:
+                self.in_nested_pre += 1
             formatted_line = self.scan(scanning_re, line, inhibit_p=inhibit_p)
             self.request.write(formatted_line)
             if self.in_pre == 'no_parser':
