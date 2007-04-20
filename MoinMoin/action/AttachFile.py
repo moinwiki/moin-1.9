@@ -1002,7 +1002,7 @@ def send_viewfile(pagename, request):
         return
 
     package = packages.ZipPackage(request, fpath)
-    if package.isPackage() and mt.minor == 'zip':
+    if package.isPackage():
         request.write("<pre><b>%s</b>\n%s</pre>" % (_("Package script:"), wikiutil.escape(package.getScript())))
         return
 
