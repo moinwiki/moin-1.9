@@ -572,7 +572,8 @@ class XmlRpcBase:
             If it succeeds, it returns a dict of items from user profile.
             If it fails, it returns a str with an error msg.
         """
-        u = self.request.get_user_default_None(name=username, password=password, login=1)
+        u = self.request.handle_auth(None, username=username,
+                                     password=password, login=True)
         if u is None:
             return "Authentication failed"
         else:
@@ -587,8 +588,9 @@ class XmlRpcBase:
         """ Returns a token which can be used for authentication
             in other XMLRPC calls. If the token is empty, the username
             or the password were wrong. """
-        u = user.User(self.request, name=username, password=password, auth_method='xmlrpc_gettoken')
-        if u.valid:
+        u = self.request.handle_auth(None, username=username,
+                                     password=password, login=True)
+        if u and u.valid:
             return u.id
         else:
             return ""
