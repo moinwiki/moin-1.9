@@ -137,6 +137,8 @@ class RequestBase(object):
         # request. we do it for all request types to avoid similar problems.
         set_umask()
 
+        self._finishers = []
+
         # Decode values collected by sub classes
         self.path_info = self.decodePagename(self.path_info)
 
@@ -147,15 +149,13 @@ class RequestBase(object):
         # Pages meta data that we collect in one request
         self.pages = {}
 
+        self._page_headings = {}
+
         self.user_headers = []
         self.cacheable = 0 # may this output get cached by http proxies/caches?
         self.http_caching_disabled = 0 # see disableHttpCaching()
         self.page = None
         self._dicts = None
-
-        # session handling. users cannot rely on a session being
-        # created, but we should always set request.session
-        self.session = {}
 
         # setuid handling requires an attribute in the request
         # that stores the real user
@@ -212,13 +212,29 @@ class RequestBase(object):
             self.i18n = i18n
             i18n.i18n_init(self)
 
-            self.user = self.get_user_from_form()
-            # setuid handling
-            if self.session and 'setuid' in self.session:
+            # authentication might require translated forms, so
+            # have a try at guessing the language from the browser
+            lang = i18n.requestLanguage(self, try_user=False)
+            self.getText = lambda text, i18n=self.i18n, request=self, lang=lang, **kv: i18n.getText(text, request, lang, kv.get('formatted', True))
+
+            # session handler start, auth
+            self.parse_cookie()
+            user_obj = self.cfg.session_handler.start(self, self._cookie)
+            shfinisher = lambda request: self.cfg.session_handler.finish(request, self._cookie, request.user)
+            self.add_finisher(shfinisher)
+            self.user = self._handle_auth_form(user_obj)
+            del user_obj
+            self.cfg.session_handler.after_auth(self, self._cookie, self.user)
+            if not self.user:
+                self.user = user.User(self, auth_method='request:invalid')
+
+            # setuid handling, check isSuperUser() because the user
+            # might have lost the permission between requests
+            if 'setuid' in self.session and self.user.isSuperUser():
                 self._setuid_real_user = self.user
                 uid = self.session['setuid']
-                self.user = user.User(self, uid)
-                self.user.disabled = None
+                self.user = user.User(self, uid, auth_method='setuid')
+                self.user.disabled = False
 
             if self.action != 'xmlrpc':
                 if not self.forbidden and self.isForbidden():
@@ -573,45 +589,65 @@ class RequestBase(object):
             path, query = uri, ''
         return wikiutil.url_unquote(path, want_unicode=False), query
 
-    def get_user_from_form(self):
-        """ read the maybe present UserPreferences form and call get_user with the values """
-        name = self.form.get('name', [None])[0]
+    def _handle_auth_form(self, user_obj):
+        username = self.form.get('name', [None])[0]
         password = self.form.get('password', [None])[0]
         login = 'login' in self.form
         logout = 'logout' in self.form
-        u = self.get_user_default_unknown(name=name, password=password,
-                                          login=login, logout=logout,
-                                          user_obj=None)
-        return u
+        stage = self.form.get('stage', [None])[0]
+        return self.handle_auth(user_obj, username=username, password=password,
+                                login=login, logout=logout, stage=stage)
 
-    def parse_cookie(self):
-        try:
-            return Cookie.SimpleCookie(self.saved_cookie)
-        except Cookie.CookieError:
-            return None
-
-    def get_user_default_unknown(self, **kw):
-        """ call do_auth and if it doesnt return a user object, make some "Unknown User" """
-        user_obj = self.get_user_default_None(**kw)
-        if user_obj is None:
-            user_obj = user.User(self, auth_method="request:427")
-        return user_obj
-
-    def get_user_default_None(self, **kw):
-        """ loop over auth handlers, return a user obj or None """
-        name = kw.get('name')
+    def handle_auth(self, user_obj, **kw):
+        username = kw.get('username')
         password = kw.get('password')
         login = kw.get('login')
         logout = kw.get('logout')
-        user_obj = kw.get('user_obj')
-        cookie = self.parse_cookie()
+        stage = kw.get('stage')
+        extra = {}
+        if login:
+            extra['username'] = username
+            extra['password'] = password
+            if stage:
+                extra['multistage'] = True
+        login_msgs = []
+        self._login_multistage = None
+
+        if logout and 'setuid' in self.session:
+            del self.session['setuid']
+            return user_obj
+
         for auth in self.cfg.auth:
-            user_obj, continue_flag = auth(self, name=name, password=password,
-                                           login=login, logout=logout, user_obj=user_obj,
-                                           cookie=cookie)
-            if not continue_flag:
+            if logout:
+                user_obj, cont = auth.logout(self, user_obj, **extra)
+            elif login:
+                if stage and auth.name != stage:
+                    continue
+                user_obj, cont, multistage, msg = auth.login(self,
+                                                             user_obj,
+                                                             **extra)
+                if stage:
+                    stage = None
+                    del extra['multistage']
+                if multistage:
+                    self._login_multistage = multistage
+                    self._login_multistage_name = auth.name
+                    return user_obj
+                if msg and not msg in login_msgs:
+                    login_msgs.append(msg)
+            else:
+                user_obj, cont = auth.request(self, user_obj, **extra)
+            if not cont:
                 break
+
+        self._login_messages = login_msgs
         return user_obj
+
+    def parse_cookie(self):
+        try:
+            self._cookie = Cookie.SimpleCookie(self.saved_cookie)
+        except Cookie.CookieError:
+            self._cookie = None
 
     def reset(self):
         """ Reset request state.
@@ -1025,6 +1061,7 @@ class RequestBase(object):
 
     def makeForbidden(self, resultcode, msg):
         statusmsg = {
+            401: 'Authorization required',
             403: 'FORBIDDEN',
             404: 'Not found',
             503: 'Service unavailable',
@@ -1113,18 +1150,8 @@ class RequestBase(object):
                 self.setHttpHeader("Vary: Cookie,User-Agent,Accept-Language")
 
             # Handle request. We have these options:
-            # 1. If user has a bad user name, delete its bad cookie and
-            # send him to UserPreferences to make a new account.
-            if not user.isValidName(self, self.user.name):
-                msg = _("""Invalid user name {{{'%s'}}}.
-Name may contain any Unicode alpha numeric character, with optional one
-space between words. Group page name is not allowed.""") % self.user.name
-                self.user = self.get_user_default_unknown(name=self.user.name, logout=True)
-                page = wikiutil.getLocalizedPage(self, 'UserPreferences')
-                page.send_page(msg=msg)
-
-            # 2. Or jump to page where user left off
-            elif not pagename and self.user.remember_last_visit:
+            # 1. jump to page where user left off
+            if not pagename and self.user.remember_last_visit:
                 pagetrail = self.user.getTrail()
                 if pagetrail:
                     # Redirect to last page visited
@@ -1139,7 +1166,7 @@ space between words. Group page name is not allowed.""") % self.user.name
                 self.http_redirect(url)
                 return self.finish()
 
-            # 3. Or handle action
+            # 2. handle action
             else:
                 # pagename could be empty after normalization e.g. '///' -> ''
                 # Use localized FrontPage if pagename is empty
@@ -1179,12 +1206,13 @@ space between words. Group page name is not allowed.""") % self.user.name
                     else:
                         handler(self.page.page_name, self)
 
-            # every action that didn't use to raise MoinMoinNoFooter must call this now:
+            # every action that didn't use to raise MoinMoinFinish must call this now:
             # self.theme.send_closing_html()
 
         except MoinMoinFinish:
             pass
         except Exception, err:
+            self.finish()
             self.fail(err)
 
         return self.finish()
@@ -1408,12 +1436,18 @@ space between words. Group page name is not allowed.""") % self.user.name
         Delete circular references - all object that we create using self.name = class(self).
         This helps Python to collect these objects and keep our memory footprint lower.
         """
+        for method in self._finishers:
+            method(self)
+
         try:
             del self.user
             del self.theme
             del self.dicts
         except:
             pass
+
+    def add_finisher(self, method):
+        self._finishers.append(method)
 
     # Debug ------------------------------------------------------------
 

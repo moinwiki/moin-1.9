@@ -14,22 +14,25 @@
 
 import Cookie, urllib
 from MoinMoin import user
-from MoinMoin.auth import _PHPsessionParser
+from MoinMoin.auth import _PHPsessionParser, BaseAuth
 
-class php_session:
+class PHPSessionAuth(BaseAuth):
     """ PHP session cookie authentication """
+
+    name = 'php_session'
+
     def __init__(self, apps=['egw'], s_path="/tmp", s_prefix="sess_"):
         """ @param apps: A list of the enabled applications. See above for
             possible keys.
             @param s_path: The path where the PHP sessions are stored.
             @param s_prefix: The prefix of the session files.
         """
-
+        BaseAuth.__init__(self)
         self.s_path = s_path
         self.s_prefix = s_prefix
         self.apps = apps
 
-    def __call__(self, request, **kw):
+    def request(self, request, user_obj, **kw):
         def handle_egroupware(session):
             """ Extracts name, fullname and email from the session. """
             username = session['egw_session']['session_lid'].split("@", 1)[0]
@@ -46,8 +49,6 @@ class php_session:
 
             return dec(username), dec(email), dec(name)
 
-        user_obj = kw.get('user_obj')
-        cookie = kw.get('cookie')
         if not cookie is None:
             for cookiename in cookie:
                 cookievalue = urllib.unquote(cookie[cookiename].value).decode('iso-8859-1')
@@ -59,7 +60,8 @@ class php_session:
             else:
                 return user_obj, True
 
-            user = user.User(request, name=username, auth_username=username)
+            user = user.User(request, name=username, auth_username=username,
+                             auth_method=self.name)
 
             changed = False
             if name != user.aliasname:

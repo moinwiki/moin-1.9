@@ -78,10 +78,7 @@ Contact the owner of the wiki, who can enable email.""")
         if self.request.request_method != 'POST':
             return _("Use UserPreferences to change your settings or create an account.")
         # Create user profile
-        if form.has_key('create'):
-            theuser = self.request.get_user_from_form()
-        else:
-            theuser = user.User(self.request, auth_method="request:152")
+        theuser = user.User(self.request, auth_method="new-user")
 
         # Require non-empty name
         try:
@@ -161,13 +158,13 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
                 self.request.user = self.request._setuid_real_user
                 self.request._setuid_real_user = None
             else:
-                theuser = user.User(self.request, uid)
+                theuser = user.User(self.request, uid, auth_method='setuid')
                 theuser.disabled = None
                 self.request.session['setuid'] = uid
                 self.request._setuid_real_user = self.request.user
                 # now continue as the other user
                 self.request.user = theuser
-            return  _("Use UserPreferences to change settings of the selected user account")
+            return  _("Use UserPreferences to change settings of the selected user account, log out to get back to your account.")
         else:
             return _("Use UserPreferences to change your settings or create an account.")
 
@@ -177,7 +174,9 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
 
         if self.request.request_method != 'POST':
             return _("Use UserPreferences to change your settings or create an account.")
-        theuser = self.request.get_user_from_form()
+        theuser = self.request.user
+        if not theuser:
+            return
 
         if not 'name' in theuser.auth_attribs:
             # Require non-empty name
@@ -424,9 +423,15 @@ class UserSettings:
     def _user_select(self):
         options = []
         users = user.getUserList(self.request)
+        realuid = None
+        if hasattr(self.request, '_setuid_real_user') and self.request._setuid_real_user:
+            realuid = self.request._setuid_real_user.id
+        else:
+            realuid = self.request.user.id
         for uid in users:
-            name = user.User(self.request, id=uid).name # + '/' + uid # for debugging
-            options.append((name, name))
+            if uid != realuid:
+                name = user.User(self.request, id=uid).name # + '/' + uid # for debugging
+                options.append((name, name))
         options.sort()
 
         size = min(5, len(options))
@@ -490,6 +495,7 @@ class UserSettings:
         """ Create the complete HTML form code. """
         _ = self._
         self.make_form()
+        superuserform = u''
 
         if (self.request.user.isSuperUser() or
             (not self.request._setuid_real_user is None and
@@ -505,6 +511,8 @@ class UserSettings:
                     ' ',
                 ])
             self.make_row('', button_cell)
+            superuserform = unicode(self._form)
+            self.make_form()
 
         if self.request.user.valid and not create_only:
             buttons = [('save', _('Save')), ('cancel', _('Cancel')), ]
@@ -630,7 +638,7 @@ class UserSettings:
                 ])
         self.make_row('', button_cell)
 
-        return unicode(self._form)
+        return superuserform + unicode(self._form)
 
 
 def getUserForm(request, create_only=False):
@@ -681,17 +689,20 @@ class Login:
         self._form.append(html.P().append(hint))
         self._form.append(html.Raw("</div>"))
 
-        self.make_row(_('Name'), [
-            html.INPUT(
-                type="text", size="32", name="name",
-            ),
-        ])
+        cfg = request.cfg
+        if 'username' in cfg.auth_login_inputs:
+            self.make_row(_('Name'), [
+                html.INPUT(
+                    type="text", size="32", name="name",
+                ),
+            ])
 
-        self.make_row(_('Password'), [
-            html.INPUT(
-                type="password", size="32", name="password",
-            ),
-        ])
+        if 'password' in cfg.auth_login_inputs:
+            self.make_row(_('Password'), [
+                html.INPUT(
+                    type="password", size="32", name="password",
+                ),
+            ])
 
         self.make_row('', [
             html.INPUT(

@@ -9,13 +9,23 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-def log(request, **kw):
-    """ just log the call, do nothing else """
-    username = kw.get('name')
-    password = kw.get('password')
-    login = kw.get('login')
-    logout = kw.get('logout')
-    user_obj = kw.get('user_obj')
-    request.log("auth.log: name=%s login=%r logout=%r user_obj=%r" % (username, login, logout, user_obj))
-    return user_obj, True
+from MoinMoin.auth import BaseAuth
 
+class AuthLog(BaseAuth):
+    """ just log the call, do nothing else """
+    name = "log"
+
+    def log(self, request, action, user_obj, kw):
+        request.log('auth.log: %s: user_obj=%r kw=%r' % (action, user_obj, kw))
+
+    def login(self, request, user_obj, **kw):
+        self.log(request, 'login', user_obj, kw)
+        return user_obj, True, None, None
+
+    def request(self, request, user_obj, **kw):
+        self.log(request, 'session', user_obj, kw)
+        return user_obj, True
+
+    def logout(self, request, user_obj, **kw):
+        self.log(request, 'logout', user_obj, kw)
+        return user_obj, True

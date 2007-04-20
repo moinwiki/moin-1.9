@@ -22,6 +22,12 @@ class LogoutHandler:
 
     def handle(self):
         _ = self._
-        message = _("You are now logged out.")
+        # if the user really was logged out say so,
+        # but if the user manually added ?action=logout
+        # and that isn't really supported, then don't
+        if not self.request.user.valid:
+            message = _("You are now logged out.")
+        else:
+            message = None
         return self.page.send_page(msg=message)
 

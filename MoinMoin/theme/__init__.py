@@ -277,11 +277,12 @@ class ThemeBase:
             userlinks.append(d['page'].link_to(request, text=_('Preferences'),
                                                querystr={'action': 'userprefs'}, id='userprefs', rel='nofollow'))
 
-        if request.cfg.show_login:
-            if request.user.valid:
+        if request.user.valid:
+            if request.user.auth_method in request.cfg.auth_can_logout:
                 userlinks.append(d['page'].link_to(request, text=_('Logout', formatted=False),
                                                    querystr={'action': 'logout', 'logout': 'logout'}, id='logout', rel='nofollow'))
-            else:
+        else:
+            if request.cfg.auth_have_login:
                 userlinks.append(d['page'].link_to(request, text=_("Login", formatted=False),
                                                    querystr={'action': 'login'}, id='login', rel='nofollow'))
 

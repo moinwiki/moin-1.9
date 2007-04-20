@@ -12,6 +12,7 @@
 
 from MoinMoin import user, userform
 from MoinMoin.Page import Page
+from MoinMoin.widget import html
 
 def execute(pagename, request):
     return LoginHandler(pagename, request).handle()
@@ -24,6 +25,33 @@ class LoginHandler:
         self.pagename = pagename
         self.page = Page(request, pagename)
 
+    def handle_multistage(self):
+        """Handle a multistage request.
+
+        If the auth handler wants a multistage request, we
+        now set up the login form for that.
+        """
+        _ = self._
+        request = self.request
+        form = html.FORM(method='POST', name='logincontinue')
+        form.append(html.INPUT(type='hidden', name='login', value='login'))
+        form.append(html.INPUT(type='hidden', name='stage',
+                               value=request._login_multistage_name))
+
+        request.emit_http_headers()
+        request.theme.send_title(_("Login"), pagename=self.pagename)
+        # Start content (important for RTL support)
+        request.write(request.formatter.startContent("content"))
+
+        extra = request._login_multistage(request, form)
+        request.write(unicode(form))
+        if extra:
+            request.write(extra)
+
+        request.write(request.formatter.endContent())
+        request.theme.send_footer(self.pagename)
+        request.theme.send_closing_html()
+
     def handle(self):
         _ = self._
         request = self.request
@@ -34,30 +62,14 @@ class LoginHandler:
         islogin = form.get('login', [''])[0]
 
         if islogin: # user pressed login button
-            # Trying to login with a user name and a password
-            # Require valid user name
-            name = form.get('name', [''])[0]
-            if not user.isValidName(request, name):
-                error = _("""Invalid user name {{{'%s'}}}.
-Name may contain any Unicode alpha numeric character, with optional one
-space between words. Group page name is not allowed.""") % name
-
-            # we do NOT check this, we don't want to disclose whether a user
-            # exists or not to not help an attacker.
-            # Check that user exists
-            #elif not user.getUserId(request, name):
-            #    error = _('Unknown user name: {{{"%s"}}}. Please enter'
-            #                 ' user name and password.') % name
-
-            # Require password
-            else:
-                password = form.get('password', [None])[0]
-                if not password:
-                    error = _("Missing password. Please enter user name and password.")
-                else:
-                    if not request.user.valid:
-                        error = _("Sorry, login failed.")
-
+            if request._login_multistage:
+                return self.handle_multistage()
+            error = []
+            if hasattr(request, '_login_messages'):
+                for msg in request._login_messages:
+                    error.append('<p>')
+                    error.append(msg)
+                error = ''.join(error)
             return self.page.send_page(msg=error)
 
         else: # show login form
