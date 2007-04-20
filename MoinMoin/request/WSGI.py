@@ -60,9 +60,6 @@ class Request(RequestBase):
     def flush(self):
         pass
 
-    def finish(self):
-        pass
-
     def output(self):
         # called by MoinMoin.server.wsgi
         return self.stdout.getvalue()
