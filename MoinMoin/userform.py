@@ -495,6 +495,7 @@ class UserSettings:
         """ Create the complete HTML form code. """
         _ = self._
         self.make_form()
+        superuserform = u''
 
         if (self.request.user.isSuperUser() or
             (not self.request._setuid_real_user is None and
@@ -510,6 +511,8 @@ class UserSettings:
                     ' ',
                 ])
             self.make_row('', button_cell)
+            superuserform = unicode(self._form)
+            self.make_form()
 
         if self.request.user.valid and not create_only:
             buttons = [('save', _('Save')), ('cancel', _('Cancel')), ]
@@ -635,7 +638,7 @@ class UserSettings:
                 ])
         self.make_row('', button_cell)
 
-        return unicode(self._form)
+        return superuserform + unicode(self._form)
 
 
 def getUserForm(request, create_only=False):
