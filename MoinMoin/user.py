@@ -889,12 +889,9 @@ class User:
             self.saveTrail()
 
     def saveTrail(self):
-        """ Save trail file
-
-        Save using one write call, which should be fine in most cases,
-        but will fail in rare cases without real file locking.
-        """
-        self._request.session['trail'] = self._trail
+        """ Save trail into session """
+        if not self._request.session.is_new:
+            self._request.session['trail'] = self._trail
 
     def getTrail(self):
         """ Return list of recently visited pages.
