@@ -14,6 +14,7 @@ import time
 
 from MoinMoin import config, error, util, wikiutil
 import MoinMoin.auth as authmodule
+from MoinMoin import session
 from MoinMoin.packages import packLine
 from MoinMoin.security import AccessControlList
 
@@ -138,6 +139,25 @@ use the wikiconfig.py file from the distribution.
     'err': err,
 }
         raise error.ConfigurationError(msg)
+
+    # postprocess configuration
+    # 'setuid' special auth method auth method can log out
+    cfg.auth_can_logout = ['setuid']
+    cfg.auth_login_inputs = []
+    found_names = []
+    for auth in cfg.auth:
+        if not auth.name:
+            raise error.ConfigurationError("Auth methods must have a name.")
+        if auth.name in found_names:
+            raise error.ConfigurationError("Auth method names must be unique.")
+        found_names.append(auth.name)
+        if auth.logout_possible and auth.name:
+            cfg.auth_can_logout.append(auth.name)
+        for input in auth.login_inputs:
+            if not input in cfg.auth_login_inputs:
+                cfg.auth_login_inputs.append(input)
+    cfg.auth_have_login = len(cfg.auth_login_inputs) > 0
+
     return cfg
 
 
@@ -197,7 +217,8 @@ class DefaultConfig:
     allow_xslt = False
     antispam_master_url = "http://moinmaster.wikiwikiweb.de:8000/?action=xmlrpc2"
     attachments = None # {'dir': path, 'url': url-prefix}
-    auth = [authmodule.moin_login, authmodule.moin_session, ]
+    auth = [authmodule.MoinLogin()]
+    session_handler = session.DefaultSessionHandler()
 
     backup_compression = 'gz'
     backup_users = []
@@ -403,7 +424,6 @@ reStructuredText Quick Reference
     shared_intermap = None # can be string or list of strings (filenames)
     show_hosts = True
     show_interwiki = False
-    show_login = True
     show_names = True
     show_section_numbers = 0
     show_timings = False

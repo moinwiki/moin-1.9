@@ -4,11 +4,13 @@
 # See the +++ places for customizing it to your needs. You need to put this
 # code into your farmconfig.py or wikiconfig.py.
 
-# HINT: this code is slightly outdated, if you fix it to work with 1.6, please send us a copy.
+# HINT: this code is slightly outdated, if you fix it to work with 1.7, please send us a copy.
 from MoinMoin.config.multiconfig import DefaultConfig
+from MoinMoin.auth import BaseAuth
 
-class FarmConfig(DefaultConfig):
-    def external_cookie(request, **kw):
+class ExternalCookie(BaseAuth):
+    name = 'external_cookie'
+    def request(request, user_obj, **kw):
         """ authenticate via external cookie """
         import Cookie
         user = None
@@ -44,7 +46,7 @@ class FarmConfig(DefaultConfig):
 
             from MoinMoin.user import User
             # giving auth_username to User constructor means that authentication has already been done.
-            user = User(request, name=auth_username, auth_username=auth_username)
+            user = User(request, name=auth_username, auth_username=auth_username, auth_method=self.name)
 
             changed = False
             if aliasname != user.aliasname: # was the aliasname externally updated?
@@ -58,10 +60,10 @@ class FarmConfig(DefaultConfig):
                 try_next = False # stop processing auth method list
         return user, try_next
 
-    from MoinMoin.auth import moin_login, moin_session
-    from MoinMoin.auth.http import http
-    # first try the external_cookie, then http basic auth, then the usual moin_cookie
-    auth = [external_cookie, http, moin_login, moin_session]
+class FarmConfig(DefaultConfig):
+    from MoinMoin.auth import MoinLogin
+    # use ExternalCookie, also allow the usual moin login
+    auth = [ExternalCookie(), MoinLogin()]
 
     # ... (rest of your config follows here) ...
 
