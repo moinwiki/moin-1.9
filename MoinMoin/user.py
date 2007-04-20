@@ -48,6 +48,47 @@ def get_by_email_address(request, email_address):
         if theuser.valid and theuser.email.lower() == email_address.lower():
             return theuser
 
+def _getUserIdByKey(request, key, search):
+    """ Get the user ID for a specified key/value pair.
+
+    This method must only be called for keys that are
+    guaranteed to be unique.
+
+    @param key: the key to look in
+    @param search: the value to look for
+    @return the corresponding user ID or None
+    """
+    if not search or not key:
+        return None
+    cfg = request.cfg
+    cachekey = '%s2id' % key
+    try:
+        _key2id = getattr(cfg.cache, cachekey)
+    except AttributeError:
+        arena = 'user'
+        cache = caching.CacheEntry(request, arena, cachekey, scope='wiki', use_pickle=True)
+        try:
+            _key2id = cache.content()
+        except caching.CacheError:
+            _key2id = {}
+        setattr(cfg.cache, cachekey, _key2id)
+    uid = _key2id.get(search, None)
+    if uid is None:
+        for userid in getUserList(request):
+            u = User(request, id=userid)
+            if hasattr(u, key):
+                value = getattr(u, key)
+                _key2id[value] = userid
+        arena = 'user'
+        cache = caching.CacheEntry(request, arena, cachekey, scope='wiki', use_pickle=True)
+        try:
+            cache.update(_key2id)
+        except caching.CacheError:
+            pass
+        uid = _key2id.get(search, None)
+    return uid
+
+
 def getUserId(request, searchName):
     """ Get the user ID for a specific user NAME.
 
@@ -55,35 +96,7 @@ def getUserId(request, searchName):
     @rtype: string
     @return: the corresponding user ID or None
     """
-    if not searchName:
-        return None
-    cfg = request.cfg
-    try:
-        _name2id = cfg.cache.name2id
-    except AttributeError:
-        arena = 'user'
-        key = 'name2id'
-        cache = caching.CacheEntry(request, arena, key, scope='wiki', use_pickle=True)
-        try:
-            _name2id = cache.content()
-        except caching.CacheError:
-            _name2id = {}
-        cfg.cache.name2id = _name2id
-    uid = _name2id.get(searchName, None)
-    if uid is None:
-        for userid in getUserList(request):
-            name = User(request, id=userid).name
-            _name2id[name] = userid
-        cfg.cache.name2id = _name2id
-        arena = 'user'
-        key = 'name2id'
-        cache = caching.CacheEntry(request, arena, key, scope='wiki', use_pickle=True)
-        try:
-            cache.update(_name2id)
-        except caching.CacheError:
-            pass
-        uid = _name2id.get(searchName, None)
-    return uid
+    return _getUserIdByKey(request, 'name', searchName)
 
 
 def getUserIdentification(request, username=None):
