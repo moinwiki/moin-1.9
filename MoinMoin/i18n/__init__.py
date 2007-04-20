@@ -255,7 +255,7 @@ def getText(original, request, lang, formatted=True):
     return translated
 
 
-def requestLanguage(request):
+def requestLanguage(request, try_user=True):
     """ 
     Return the user interface language for this request.
     
@@ -270,13 +270,14 @@ def requestLanguage(request):
     text is fixed, we are caching the request language locally."
 
     @param request: the request object
+    @param try_user: try getting language from request.user
     @keyword usecache: whether to get the value form the local cache or
                        actually look for it. This will update the cache data.
     @rtype: string
     @return: ISO language code, e.g. 'en'
     """
     # Return the user language preferences for registered users
-    if request.user.valid and request.user.language:
+    if try_user and request.user.valid and request.user.language:
         return request.user.language
 
     # Or try to return one of the user browser accepted languages, if it

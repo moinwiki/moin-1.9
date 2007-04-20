@@ -149,6 +149,8 @@ class RequestBase(object):
         # Pages meta data that we collect in one request
         self.pages = {}
 
+        self._page_headings = {}
+
         self.user_headers = []
         self.cacheable = 0 # may this output get cached by http proxies/caches?
         self.http_caching_disabled = 0 # see disableHttpCaching()
@@ -213,6 +215,11 @@ class RequestBase(object):
             from MoinMoin import i18n
             self.i18n = i18n
             i18n.i18n_init(self)
+
+            # authentication might require translated forms, so
+            # have a try at guessing the language from the browser
+            lang = i18n.requestLanguage(self, try_user=False)
+            self.getText = lambda text, i18n=self.i18n, request=self, lang=lang, **kv: i18n.getText(text, request, lang, kv.get('formatted', True))
 
             self.user = self.get_user_from_form()
             # setuid handling
