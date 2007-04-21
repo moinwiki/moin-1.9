@@ -270,7 +270,6 @@ class User:
         """
         self._cfg = request.cfg
         self.valid = 0
-        self.trusted = 0
         self.id = id
         self.auth_username = auth_username
         self.auth_method = kw.get('auth_method', 'internal')
@@ -323,8 +322,6 @@ class User:
                 check_pass = 1
         if self.id:
             self.load_from_id(check_pass)
-            if self.name == self.auth_username:
-                self.trusted = 1
         elif self.name:
             self.id = getUserId(self._request, self.name)
             if self.id:
@@ -433,8 +430,6 @@ class User:
             valid, changed = self._validatePassword(user_data)
             if not valid:
                 return
-            else:
-                self.trusted = 1
 
         # Remove ignored checkbox values from user data
         for key, label in self._cfg.user_checkbox_fields:

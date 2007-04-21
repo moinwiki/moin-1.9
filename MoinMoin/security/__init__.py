@@ -277,11 +277,13 @@ class AccessControlList:
         return None
 
     def _special_Trusted(self, request, name, dowhat, rightsdict):
-        """ check if user <name> is known AND even has logged in using a password.
-            does not work for subsription emails that should be sent to <user>,
+        """ check if user <name> is known AND has logged in using a trusted
+            authentication method.
+            Does not work for subsription emails that should be sent to <user>,
             as he is not logged in in that case.
         """
-        if request.user.trusted and name == request.user.name:
+        if (request.user.name == name and
+            request.user.auth_method in request.cfg.trusted_auth_methods):
             return rightsdict.get(dowhat)
         return None
 
