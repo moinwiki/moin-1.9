@@ -221,7 +221,7 @@ class DefaultConfig:
     # default to http and xmlrpc_applytoken to get old semantics
     # xmlrpc_applytoken shall be removed once that code is changed
     # to have proper session handling and use request.handle_auth()
-    trusted_auth_methods = ['xmlrpc_applytoken']
+    trusted_auth_methods = ['http', 'xmlrpc_applytoken']
     session_handler = session.DefaultSessionHandler()
 
     backup_compression = 'gz'
