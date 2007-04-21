@@ -37,13 +37,16 @@ Version 1.7.current:
     * ...
 
   New Features:
-    * ...
+    * cfg.trusted_auth_methods
+    * new session handling system
+    * new authentication plugin system
 
   Bugfixes:
     * ...
 
   Other changes:
-    * ...
+    * cfg.show_login is gone, see code in theme/__init__.py, this affects
+      many themes!
 
 
 Branch moin-1.6-xapian:
