@@ -165,7 +165,10 @@ class SessionHandler(object):
         When a request is received, first the cookie is read into a
         Cookie.SimpleCookie instance, this is passed to the selected
         session handler's (cfg.session_handler) start method (see below)
-        which must return a MoinMoin.user.User instance (or None).
+        which must return a MoinMoin.user.User instance (or None). The
+        session handler is also responsible for string the user object's
+        auth_method and auth_attribs fields across sessions as those are
+        not saved to the user file.
 
         Then, all authentication methods are called with this user object,
         they can modify it or return a different one.
@@ -356,6 +359,7 @@ class DefaultSessionHandler(SessionHandler):
             if 'user.id' in sessiondata:
                 uid = sessiondata['user.id']
                 method = sessiondata['user.auth_method']
+                attribs = sessiondata['user.auth_attribs']
                 # Only allow valid methods that are still in the auth list.
                 # This is necessary to kick out clients who authenticated in
                 # the past # with a method that was removed from the auth
@@ -364,7 +368,8 @@ class DefaultSessionHandler(SessionHandler):
                     for auth in request.cfg.auth:
                         if auth.name == method:
                             user_obj = User(request, id=uid,
-                                            auth_method=method)
+                                            auth_method=method,
+                                            auth_attribs=attribs)
                             if user_obj:
                                 sessiondata.is_stored = True
             else:
@@ -384,6 +389,7 @@ class DefaultSessionHandler(SessionHandler):
         if user_obj and user_obj.valid:
             session['user.id'] = user_obj.id
             session['user.auth_method'] = user_obj.auth_method
+            session['user.auth_attribs'] = user_obj.auth_attribs
             lifetime = _get_cookie_lifetime(request, user_obj)
             _set_session_cookie(request, session.name, lifetime)
         else:
