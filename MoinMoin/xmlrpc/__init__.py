@@ -522,7 +522,8 @@ class XmlRpcBase:
         # and make very very sure that nobody untrusted can access your wiki
         # via network or somebody will raid your wiki some day!
 
-        if self.request.cfg.xmlrpc_putpage_trusted_only and not self.request.user.trusted:
+        if (self.request.cfg.xmlrpc_putpage_trusted_only and 
+            not self.request.user.auth_method in self.request.cfg.trusted_auth_methods):
             return xmlrpclib.Fault(1, "You are not allowed to edit this page")
 
         # also check ACLs
@@ -847,7 +848,8 @@ class XmlRpcBase:
 
         if not self.request.cfg.xmlrpc_putpage_enabled:
             return xmlrpclib.Boolean(0)
-        if self.request.cfg.xmlrpc_putpage_trusted_only and not self.request.user.trusted:
+        if (self.request.cfg.xmlrpc_putpage_trusted_only and 
+            not self.request.user.auth_method in self.request.cfg.trusted_auth_methods):
             return xmlrpclib.Fault(1, "You are not allowed to edit this page")
         # also check ACLs
         if not self.request.user.may.write(pagename):

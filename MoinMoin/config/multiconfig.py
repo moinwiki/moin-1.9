@@ -218,6 +218,10 @@ class DefaultConfig:
     antispam_master_url = "http://moinmaster.wikiwikiweb.de:8000/?action=xmlrpc2"
     attachments = None # {'dir': path, 'url': url-prefix}
     auth = [authmodule.MoinLogin()]
+    # default to http and xmlrpc_applytoken to get old semantics
+    # xmlrpc_applytoken shall be removed once that code is changed
+    # to have proper session handling and use request.handle_auth()
+    trusted_auth_methods = ['xmlrpc_applytoken']
     session_handler = session.DefaultSessionHandler()
 
     backup_compression = 'gz'
@@ -565,7 +569,7 @@ reStructuredText Quick Reference
     user_form_remove = []
 
     # attributes we do NOT save to the userpref file
-    user_transient_fields = ['id', 'valid', 'may', 'auth_username', 'trusted', 'password', 'password2', 'auth_method', 'auth_attribs', ]
+    user_transient_fields = ['id', 'valid', 'may', 'auth_username', 'password', 'password2', 'auth_method', 'auth_attribs', ]
 
     user_homewiki = 'Self' # interwiki name for where user homepages are located
 

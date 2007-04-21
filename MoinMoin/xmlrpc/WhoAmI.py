@@ -12,7 +12,6 @@ def execute(xmlrpcobj, *args):
     if not username:
         username = "<unknown user>"
     valid = request.user.valid
-    trusted = request.user.trusted
-    result = "You are %s. valid=%d, trusted=%d." % (username.encode("utf-8"), valid, trusted)
+    result = "You are %s. valid=%d." % (username.encode("utf-8"), valid)
     return xmlrpcobj._outstr(result)
 
