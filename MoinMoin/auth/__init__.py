@@ -124,6 +124,10 @@ class MoinLogin(BaseAuth):
         username = kw.get('username')
         password = kw.get('password')
 
+        # simply continue if something else already logged in successfully
+        if user_obj and user_obj.valid:
+            return user_obj, True, None, None
+
         if not username and not password:
             return user_obj, True, None, None
 
