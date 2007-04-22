@@ -156,6 +156,7 @@ class Parser:
         # needed for nested {{{
         self.in_nested_pre = 0
 
+        self.no_862 = False
         self.in_table = 0
         self.inhibit_p = 0 # if set, do not auto-create a <p>aragraph
         self.titles = request._page_headings
@@ -910,8 +911,8 @@ class Parser:
             if lastpos < match.start():
 
                 ###result.append(u'<span class="info">[add text before match: <tt>"%s"</tt>]</span>' % line[lastpos:match.start()])
-
-                if not (inhibit_p or self.inhibit_p or self.in_pre or self.formatter.in_p):
+                # self.no_862 is added to solve the issue of macros called inline 
+                if not (inhibit_p or self.inhibit_p or self.in_pre or self.formatter.in_p or self.no_862) :
                     result.append(self.formatter.paragraph(1, css_class="line862"))
                 result.append(self.formatter.text(line[lastpos:match.start()]))
 
@@ -1008,6 +1009,8 @@ class Parser:
 
         # Main loop
         for line in self.lines:
+            if ']][[' in line.replace(' ',''):
+                self.no_862 = True
             self.lineno += 1
             self.line_anchor_printed = 0
             if not self.in_table:
