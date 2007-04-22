@@ -10,7 +10,7 @@
     @license: GNU GPL, see COPYING for details.
 
     Revisions:
-    * first rLevision without a number (=1.0):
+    * first revision without a number (=1.0):
         * was only online for a few hours and then replaced by 1.1
     * 1.1:
         * changed name to MonthCalendar to avoid conflict with "calendar" under case-insensitive OSes like Win32
@@ -299,10 +299,10 @@ def execute(macro, text):
     qpagenames = '*'.join([wikiutil.quoteWikinameURL(pn) for pn in parmpagename])
     qtemplate = wikiutil.quoteWikinameURL(parmtemplate)
     querystr = "calparms=%%s,%d,%d,%d,%%d,%%s" % (parmyear, parmmonth, parmoffset)
-    prevlink = p.url(request, querystr % (qpagenames, parmoffset2 - 1, qtemplate))
-    nextlink = p.url(request, querystr % (qpagenames, parmoffset2 + 1, qtemplate))
-    prevylink = p.url(request, querystr % (qpagenames, parmoffset2 - 12, qtemplate))
-    nextylink = p.url(request, querystr % (qpagenames, parmoffset2 + 12, qtemplate))
+    prevlink = p.url(request, querystr % (qpagenames, parmoffset2 - 1, qtemplate), relative=False)
+    nextlink = p.url(request, querystr % (qpagenames, parmoffset2 + 1, qtemplate), relative=False)
+    prevylink = p.url(request, querystr % (qpagenames, parmoffset2 - 12, qtemplate), relative=False)
+    nextylink = p.url(request, querystr % (qpagenames, parmoffset2 + 12, qtemplate), relative=False)
     prevmonth = formatter.url(1, prevlink, 'cal-link') + '&lt;' + formatter.url(0)
     nextmonth = formatter.url(1, nextlink, 'cal-link') + '&gt;' + formatter.url(0)
     prevyear = formatter.url(1, prevylink, 'cal-link') + '&lt;&lt;' + formatter.url(0)
@@ -415,7 +415,7 @@ def execute(macro, text):
                             r, g, b = (r, g+colorstep, b)
                 r, g, b = cliprgb(r, g, b)
                 style = 'background-color:#%02x%02x%02x' % (r, g, b)
-                fmtlink = formatter.url(1, daypage.url(request, query), csslink, **onmouse) + str(day) + formatter.url(0)
+                fmtlink = formatter.url(1, daypage.url(request, query, relative=False), csslink, **onmouse) + str(day) + formatter.url(0)
                 if day == currentday and month == currentmonth and year == currentyear:
                     cssday = "cal-today"
                     fmtlink = "<b>%s</b>" % fmtlink # for browser with CSS probs
