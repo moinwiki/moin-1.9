@@ -925,7 +925,7 @@ class MimeType(object):
         format = format.lower()
         if format in ('plain', 'csv', 'rst', 'docbook', 'latex', 'tex', 'html', 'css',
                       'xml', 'python', 'perl', 'php', 'ruby', 'javascript',
-                      'cplusplus', 'java', 'pascal', 'diff', 'gettext', 'xslt', ):
+                      'cplusplus', 'java', 'pascal', 'diff', 'gettext', 'text_html_text_moin_wiki', 'xslt',):
             mimetype = 'text', format
         else:
             mapping = {
