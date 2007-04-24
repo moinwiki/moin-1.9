@@ -8,7 +8,7 @@
 """
 
 import MySQLdb
-from MoinMoin.auth import BaseAuth
+from MoinMoin.auth import BaseAuth, CancelLogin, ContinueLogin
 
 class MysqlGroupAuth(BaseAuth):
     """ Authorize via MySQL group DB.
@@ -37,7 +37,7 @@ class MysqlGroupAuth(BaseAuth):
             # No other method succeeded, so we cannot authorize
             # but maybe some following auth methods can still "fix" that.
             if verbose: request.log("auth.mysql_group did not get valid user from previous auth method")
-            return user_obj, True, None, None
+            return ContinueLogin(user_obj)
 
         # Got a valid user object - we can do stuff!
         if verbose:
@@ -56,7 +56,7 @@ class MysqlGroupAuth(BaseAuth):
             info = sys.exc_info()
             request.log("auth.mysql_group: authorization failed due to exception connecting to DB, traceback follows...")
             request.log(''.join(traceback.format_exception(*info)))
-            return None, False, None, _('Failed to connect to database.')
+            return CancelLogin(_('Failed to connect to database.'))
 
         c = m.cursor()
         c.execute(self.mysql_group_query, user_obj.auth_username)
@@ -64,13 +64,13 @@ class MysqlGroupAuth(BaseAuth):
         if results:
             # Checked out OK
             if verbose: request.log("auth.mysql_group got %d results -- authorized!" % len(results))
-            return user_obj, True, None, None # we make continuing possible, e.g. for smbmount
+            return ContinueLogin(user_obj)
         else:
             if verbose: request.log("auth.mysql_group did not get match from DB -- not authorized")
-            return None, False, None, None
+            return CancelLogin(_("Invalid username or password."))
 
     # XXX do we really want this? could it be enough to check when they log in?
     # of course then when you change the DB people who are logged in can still do stuff...
     def request(self, request, user_obj, **kw):
-        u, cont, multi, msg = self.login(request, user_obj, **kw)
-        return u, cont
+        retval = self.login(request, user_obj, **kw)
+        return retval.user_obj, retval.continue_flag

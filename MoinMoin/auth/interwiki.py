@@ -11,7 +11,7 @@ verbose = False
 
 import xmlrpclib
 from MoinMoin import auth, wikiutil, user
-from MoinMoin.auth import BaseAuth
+from MoinMoin.auth import BaseAuth, ContinueLogin, CancelLogin
 
 class InterwikiAuth(BaseAuth):
     name = 'interwiki'
@@ -27,7 +27,7 @@ class InterwikiAuth(BaseAuth):
         password = kw.get('password')
 
         if not username or not password:
-            return user_obj, True, None, None
+            return ContinueLogin(user_obj)
 
         if verbose: request.log("interwiki auth: trying to auth %r" % username)
         username = username.replace(' ', ':', 1) # Hack because ':' is not allowed in name field
@@ -35,13 +35,13 @@ class InterwikiAuth(BaseAuth):
 
         if verbose: request.log("interwiki auth: resolve wiki returned: %r %r %r %r" % (wikitag, wikiurl, name, err))
         if err or wikitag not in self.trusted_wikis:
-            return user_obj, True, None, None
+            return ContinueLogin(user_obj)
 
         homewiki = xmlrpclib.Server(wikiurl + "?action=xmlrpc2")
         account_data = homewiki.getUser(name, password)
         if isinstance(account_data, str):
             if verbose: request.log("interwiki auth: %r wiki said: %s" % (wikitag, account_data))
-            return user_obj, True, None, account_data
+            return ContinueLogin(None, account_data)
 
         # TODO: check remote auth_attribs
         u = user.User(request, name=name, auth_method=self.name, auth_attribs=('name', 'aliasname', 'password', 'email', ))
@@ -51,4 +51,4 @@ class InterwikiAuth(BaseAuth):
         u.valid = True
         u.create_or_update(True)
         if verbose: request.log("interwiki: successful auth for %r" % name)
-        return u, True, None, None
+        return ContinueLogin(u)

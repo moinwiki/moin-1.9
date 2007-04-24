@@ -16,7 +16,7 @@ import sys
 import ldap
 
 from MoinMoin import user
-from MoinMoin.auth import BaseAuth
+from MoinMoin.auth import BaseAuth, CancelLogin, ContinueLogin
 
 class LDAPAuth(BaseAuth):
     """ get authentication data from form, authenticate against LDAP (or Active Directory),
@@ -32,6 +32,7 @@ class LDAPAuth(BaseAuth):
     def login(self, request, user_obj, **kw):
         username = kw.get('username')
         password = kw.get('password')
+        _ = request.getText
 
         cfg = request.cfg
         verbose = cfg.ldap_verbose
@@ -39,7 +40,7 @@ class LDAPAuth(BaseAuth):
         # we require non-empty password as ldap bind does a anon (not password
         # protected) bind if the password is empty and SUCCEEDS!
         if not password:
-            return user_obj, True, None, None
+            return ContinueLogin(user_obj, _('Missing password. Please enter user name and password.'))
 
         try:
             try:
@@ -93,7 +94,7 @@ class LDAPAuth(BaseAuth):
                         request.log("LDAP: Search found more than one (%d) matches for %s." % (result_length, filterstr))
                     if result_length == 0:
                         if verbose: request.log("LDAP: Search found no matches for %s." % (filterstr, ))
-                    return None, False, None # if ldap returns unusable results, we veto the user and don't let him in
+                    return CancelLogin(_("Invalid username or password."))
 
                 dn, ldap_dict = lusers[0]
                 if verbose: request.log("LDAP: DN found is %s, trying to bind with pw" % dn)
@@ -124,16 +125,16 @@ class LDAPAuth(BaseAuth):
 
             except ldap.INVALID_CREDENTIALS, err:
                 request.log("LDAP: invalid credentials (wrong password?) for dn %s (username: %s)" % (dn, username))
-                return None, False, None, None # if ldap says no, we veto the user and don't let him in
+                return CancelLogin(_("Invalid username or password."))
 
             if u:
                 u.create_or_update(True)
-            return u, True, None, None
+            return ContinueLogin(u)
 
         except:
             import traceback
             info = sys.exc_info()
             request.log("LDAP: caught an exception, traceback follows...")
             request.log(''.join(traceback.format_exception(*info)))
-            return None, False, None, None # something went completely wrong, in doubt we veto the login
+            return CancelLogin(None)
 

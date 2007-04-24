@@ -9,7 +9,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin.auth import BaseAuth
+from MoinMoin.auth import BaseAuth, ContinueLogin
 
 class AuthLog(BaseAuth):
     """ just log the call, do nothing else """
@@ -20,7 +20,7 @@ class AuthLog(BaseAuth):
 
     def login(self, request, user_obj, **kw):
         self.log(request, 'login', user_obj, kw)
-        return user_obj, True, None, None
+        return ContinueLogin(user_obj)
 
     def request(self, request, user_obj, **kw):
         self.log(request, 'session', user_obj, kw)
