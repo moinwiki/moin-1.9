@@ -11,7 +11,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin.auth import BaseAuth
+from MoinMoin.auth import BaseAuth, CancelLogin, ContinueLogin
 
 class SMBMount(BaseAuth):
     """ auth plugin for (un)mounting an smb share """
@@ -75,7 +75,7 @@ class SMBMount(BaseAuth):
         password = kw.get('password')
         if user_obj and user_obj.valid:
             do_smb(request, username, password, True)
-        return user_obj, True, None, None
+        return ContinueLogin(user_obj)
 
     def logout(self, request, user_obj, **kw):
         if user_obj and not user_obj.valid:

@@ -20,6 +20,8 @@ except:
 from MoinMoin import config, wikiutil, user, caching, error
 from MoinMoin.config import multiconfig
 from MoinMoin.util import IsWin9x
+from MoinMoin import auth
+from urllib import quote, quote_plus
 
 # umask setting --------------------------------------------------------
 def set_umask(new_mask=0777^config.umask):
@@ -138,6 +140,8 @@ class RequestBase(object):
         set_umask()
 
         self._finishers = []
+
+        self._auth_redirected = False
 
         # Decode values collected by sub classes
         self.path_info = self.decodePagename(self.path_info)
@@ -617,26 +621,35 @@ class RequestBase(object):
             del self.session['setuid']
             return user_obj
 
-        for auth in self.cfg.auth:
+        for authmethod in self.cfg.auth:
             if logout:
-                user_obj, cont = auth.logout(self, user_obj, **extra)
+                user_obj, cont = authmethod.logout(self, user_obj, **extra)
             elif login:
-                if stage and auth.name != stage:
+                if stage and authmethod.name != stage:
                     continue
-                user_obj, cont, multistage, msg = auth.login(self,
-                                                             user_obj,
-                                                             **extra)
+                ret = authmethod.login(self, user_obj, **extra)
+                user_obj = ret.user_obj
+                cont = ret.continue_flag
                 if stage:
                     stage = None
                     del extra['multistage']
-                if multistage:
-                    self._login_multistage = multistage
-                    self._login_multistage_name = auth.name
+                if ret.multistage:
+                    self._login_multistage = ret.multistage
+                    self._login_multistage_name = authmethod.name
                     return user_obj
+                if ret.redirect_to:
+                    nextstage = auth.get_multistage_continuation_url(self, authmethod.name)
+                    url = ret.redirect_to
+                    url = url.replace('%return_form', quote_plus(nextstage))
+                    url = url.replace('%return', quote(nextstage))
+                    self._auth_redirected = True
+                    self.http_redirect(url)
+                    return user_obj
+                msg = ret.message
                 if msg and not msg in login_msgs:
                     login_msgs.append(msg)
             else:
-                user_obj, cont = auth.request(self, user_obj, **extra)
+                user_obj, cont = authmethod.request(self, user_obj, **extra)
             if not cont:
                 break
 
@@ -1096,7 +1109,7 @@ class RequestBase(object):
 
     def run(self):
         # Exit now if __init__ failed or request is forbidden
-        if self.failed or self.forbidden:
+        if self.failed or self.forbidden or self._auth_redirected:
             # Don't sleep() here, it binds too much of our resources!
             return self.finish()
 

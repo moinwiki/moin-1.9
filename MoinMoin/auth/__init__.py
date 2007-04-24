@@ -28,21 +28,30 @@
     and 'continue' is a boolean to indicate whether the next authentication
     method should be tried.
 
-    The 'login' method must return a tuple
-        (user_obj, continue, multistage, message).
+    The 'login' method must return an instance of MoinMoin.auth.LoginReturn
+    which contains the members
+      * user_obj
+      * continue_flag
+      * multistage
+      * message
+      * redirect_to
 
-    The user_obj and continue values have the same semantics as for the request
-    and logout methods.
+    There are some helpful subclasses derived from this class for the most
+    common cases, namely ContinueLogin(), CancelLogin(), MultistageFormLogin()
+    and MultistageRedirectLogin().
+
+    The user_obj and continue_flag members have the same semantics as for the
+    request and logout methods.
 
     The messages that are returned by the various auth methods will be
     displayed to the user, since they will all be displayed usually auth
     methods will use the message feature only along with returning False for
     the continue flag.
 
-    The multistage item in the tuple must evaluate to false or be callable.
-    If it is callable, this indicates that the authentication method requires
-    a second login stage. In that case, the multistage item will be called
-    with the request as the only parameter. It should return an instance of
+    The multistage member must evaluate to false or be callable. If it is
+    callable, this indicates that the authentication method requires a second
+    login stage. In that case, the multistage item will be called with the
+    request as the only parameter. It should return an instance of
     MoinMoin.widget.html.FORM and the generic code will append some required
     hidden fields to it. It is also permissible to return some valid HTML,
     but that feature has very limited use since it breaks the authentication
@@ -54,10 +63,18 @@
     methods should take care to recheck everything and not assume the user
     has gone through all previous stages.
 
-    After the user has submitted the required form, execution of the auth
-    login methods resumes with the auth item that requested the multistage
-    login and its login method is called with the 'multistage' keyword
-    parameter set to True.
+    If the multistage login requires querying an external site that involves
+    a redirect, the redirect_to member may be set instead of the multistage
+    member. If this is set it must be a URL that user should be redirected to.
+    Since the user must be able to come back to the authentication, any
+    "%return" in the URL is replaced with the url-encoded form of the URL
+    to the next authentication stage, any "%return_form" is replaced with
+    the url-plus-encoded form (spaces encoded as +) of the same URL.
+
+    After the user has submitted the required form or has been redirected back
+    from the external site, execution of the auth login methods resumes with
+    the auth item that requested the multistage login and its login method is
+    called with the 'multistage' keyword parameter set to True.
 
     Each authentication method instance must also contain the members
      * login_inputs: a list of required inputs, currently supported are
@@ -93,7 +110,60 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import user
+from MoinMoin import user, wikiutil
+
+
+def get_multistage_continuation_url(request, auth_name, extra_fields={}):
+    """get_continuation_url - return a multistage continuation URL
+
+       This function returns a URL that when loaded continues a multistage
+       authentication at the auth method requesting it (parameter auth_name.)
+       Additional fields are added to the URL from the extra_fields dict.
+
+       @param request: the Moin request
+       @param auth_name: name of the auth method requesting the continuation
+       @param extra_fields: extra GET fields to add to the URL
+    """
+    # logically, this belongs to request, but semantically it should
+    # live in auth so people do auth.get_multistage_continuation_url()
+    fields = {'action': 'login',
+              'login': '1',
+              'stage': auth_name}
+    fields.update(extra_fields)
+    qstr = wikiutil.makeQueryString(fields)
+    return ''.join([request.getBaseURL(), '?', qstr])
+
+
+class LoginReturn(object):
+    """ LoginReturn - base class for auth method login() return value"""
+    def __init__(self, user_obj, continue_flag, message=None, multistage=None,
+                 redirect_to=None):
+        self.user_obj = user_obj
+        self.continue_flag = continue_flag
+        self.message = message
+        self.multistage = multistage
+        self.redirect_to = redirect_to
+
+class ContinueLogin(LoginReturn):
+    """ ContinueLogin - helper for auth method login that just continues """
+    def __init__(self, user_obj, message=None):
+        LoginReturn.__init__(self, user_obj, True, message=message)
+
+class CancelLogin(LoginReturn):
+    """ CancelLogin - cancel login showing a message """
+    def __init__(self, message):
+        LoginReturn.__init__(self, None, False, message=message)
+
+class MultistageFormLogin(LoginReturn):
+    """ MultistageFormLogin - require user to fill in another form """
+    def __init__(self, multistage):
+        LoginReturn.__init__(self, None, False, multistage=multistage)
+
+class MultistageRedirectLogin(LoginReturn):
+    """ MultistageRedirectLogin - redirect user to another site before continuing login """
+    def __init__(self, url):
+        LoginReturn.__init__(self, None, False, redirect_to=url)
+
 
 class BaseAuth:
     name = None
@@ -102,7 +172,7 @@ class BaseAuth:
     def __init__(self):
         pass
     def login(self, request, user_obj, **kw):
-        return user_obj, True, None, None
+        return ContinueLogin(user_obj)
     def request(self, request, user_obj, **kw):
         return user_obj, True
     def logout(self, request, user_obj, **kw):
@@ -126,10 +196,10 @@ class MoinLogin(BaseAuth):
 
         # simply continue if something else already logged in successfully
         if user_obj and user_obj.valid:
-            return user_obj, True, None, None
+            return ContinueLogin(user_obj)
 
         if not username and not password:
-            return user_obj, True, None, None
+            return ContinueLogin(user_obj)
 
         _ = request.getText
 
@@ -138,12 +208,12 @@ class MoinLogin(BaseAuth):
         if verbose: request.log("moin_login performing login action")
 
         if username and not password:
-            return user_obj, True, None, _('Missing password. Please enter user name and password.')
+            return ContinueLogin(user_obj, _('Missing password. Please enter user name and password.'))
 
         u = user.User(request, name=username, password=password, auth_method=self.name)
         if u.valid:
             if verbose: request.log("moin_login got valid user...")
-            return u, True, None, None
+            return ContinueLogin(u)
         else:
             if verbose: request.log("moin_login not valid, previous valid=%d." % user_obj.valid)
-            return user_obj, True, None, _("Invalid username or password.")
+            return ContinueLogin(user_obj, _("Invalid username or password."))
