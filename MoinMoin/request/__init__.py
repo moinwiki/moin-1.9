@@ -226,6 +226,8 @@ class RequestBase(object):
             user_obj = self.cfg.session_handler.start(self, self._cookie)
             shfinisher = lambda request: self.cfg.session_handler.finish(request, self._cookie, request.user)
             self.add_finisher(shfinisher)
+            # set self.user even if _handle_auth_form raises an Exception
+            self.user = None
             self.user = self._handle_auth_form(user_obj)
             del user_obj
             self.cfg.session_handler.after_auth(self, self._cookie, self.user)
@@ -1451,6 +1453,8 @@ class RequestBase(object):
         """
         for method in self._finishers:
             method(self)
+        # only execute finishers once
+        self._finishers = []
 
         try:
             del self.user
