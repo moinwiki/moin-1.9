@@ -65,7 +65,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc  README docs/CHANGES docs/INSTALL.html docs/licenses/COPYING
 
 %changelog
-* Do Jun  8 2006 Johannes Poehlmann
+* Thu Jun  8 2006 Johannes Poehlmann
 - Fix RPM build errror "Files listet twice" 
   Replaced files list and just package all of /usr.
 
