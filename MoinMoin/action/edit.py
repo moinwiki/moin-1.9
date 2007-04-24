@@ -94,7 +94,7 @@ def execute(pagename, request):
                 converter_name = 'text_html_text_moin_wiki'
             else:
                 converter_name = 'undefined' # XXX we don't have other converters yet
-            convert = wikiutil.searchAndImportPlugin(request.cfg, "converter", converter_name)
+            convert = wikiutil.importPlugin(request.cfg, "converter", converter_name, 'convert')
             savetext = convert(request, pagename, savetext)
 
         # IMPORTANT: normalize text from the form. This should be done in
