@@ -1240,13 +1240,6 @@ class RequestBase(object):
         url = self.getQualifiedURL(url)
         self.emit_http_headers(["Status: 302 Found", "Location: %s" % url])
 
-    def http_headers(self, more_headers=[]):
-        """ wrapper for old, deprecated http_headers call,
-            new code only calls emit_http_headers.
-            Remove in moin 1.7.
-        """
-        self.emit_http_headers(more_headers)
-
     def emit_http_headers(self, more_headers=[]):
         """ emit http headers after some preprocessing / checking
 
@@ -1326,12 +1319,6 @@ class RequestBase(object):
             thus multiple calls with the same header type do NOT work in the end!
         """
         self.user_headers.append(header)
-
-    def setResponseCode(self, code, message=None):
-        """ DEPRECATED, will vanish in moin 1.7,
-            just use a Status: <code> <message> header and emit_http_headers.
-        """
-        pass
 
     def fail(self, err):
         """ Fail when we can't continue
