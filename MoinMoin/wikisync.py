@@ -259,6 +259,11 @@ class MoinRemoteWiki(RemoteWiki):
             return [("applyAuthToken", (self.token, ))]
         return []
 
+    def delete_auth_token(self):
+        if self.token:
+            self.connection.deleteAuthToken(self.token)
+            self.token = None
+
     # Methods implementing the RemoteWiki interface
 
     def get_interwiki_name(self):

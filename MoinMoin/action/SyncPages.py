@@ -219,6 +219,8 @@ class ActionClass(object):
                 self.page.saveText(self.page.get_raw_body() + "\n\n" + self.generate_log_table(), 0)
                 # XXX release readlock on self.page
 
+                remote.delete_auth_token()
+
         return self.page.send_page(msg=msg)
 
     def sync(self, params, local, remote):
