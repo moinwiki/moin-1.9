@@ -13,8 +13,8 @@
 import Cookie
 from MoinMoin import caching
 from MoinMoin.user import User
-import random
-import time
+from MoinMoin.util import random_string
+import time, random
 
 class SessionData(object):
     """
@@ -231,18 +231,8 @@ class SessionHandler(object):
 
 _MOIN_SESSION = 'MOIN_SESSION'
 
-_SECURITY_STRING_CHARS = 'abcdefghijklmnopqrstuvwxyz0123456789_-'
-
-def _generate_security_string(length):
-    """ generate a random length (length/2 .. length)
-        string with random content
-
-        @param length: the maximum length
-        @return: the random string
-    """
-    random_length = random.randint(length/2, length)
-    return ''.join([random.choice(_SECURITY_STRING_CHARS)
-                    for i in range(random_length)])
+_SESSION_NAME_CHARS = 'abcdefghijklmnopqrstuvwxyz0123456789_-'
+_SESSION_NAME_LEN = 32
 
 
 def _make_cookie(request, cookie_name, cookie_string, maxage, expires):
@@ -322,7 +312,8 @@ def _get_session_name(cookie):
     if _MOIN_SESSION in cookie:
         session_name = cookie[_MOIN_SESSION].value
         session_name = ''.join([c for c in session_name
-                                if c in _SECURITY_STRING_CHARS])
+                                if c in _SESSION_NAME_CHARS])
+        session_name = session_name[:_SESSION_NAME_LEN]
     return session_name
 
 
@@ -376,7 +367,8 @@ class DefaultSessionHandler(SessionHandler):
                 store = hasattr(request.cfg, 'anonymous_cookie_lifetime')
                 sessiondata.is_stored = store
         else:
-            session_name = _generate_security_string(32)
+            session_name = random_string(_SESSION_NAME_LEN,
+                                         _SESSION_NAME_CHARS)
             store = hasattr(request.cfg, 'anonymous_cookie_lifetime')
             sessiondata = self.dataclass(request, session_name)
             sessiondata.is_new = True

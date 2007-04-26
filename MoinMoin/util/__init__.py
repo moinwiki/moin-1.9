@@ -125,7 +125,16 @@ class simpleIO:
         self.buffer = None
 
 
-def random_string(length):
-    chars = ''.join([chr(random.randint(0, 255)) for dummy in xrange(length)])
-    return chars
+def random_string(length, allowed_chars=None):
+    """ Generate a random string with given length consisting
+        of the given characters.
 
+        @param length: length of the string
+        @param allowed_chars: string with allowed characters or None
+                              to indicate all 256 byte values should be used
+        @return: random string
+    """
+    if allowed_chars is None:
+        return ''.join([chr(random.randint(0, 255)) for dummy in xrange(length)])
+
+    return ''.join([random.choice(allowed_chars) for dummy in xrange(length)])
