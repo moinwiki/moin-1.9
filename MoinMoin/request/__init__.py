@@ -601,10 +601,11 @@ class RequestBase(object):
         login = 'login' in self.form
         logout = 'logout' in self.form
         stage = self.form.get('stage', [None])[0]
-        return self.handle_auth(user_obj, username=username, password=password,
-                                login=login, logout=logout, stage=stage)
+        return self.handle_auth(user_obj, attended=True, username=username,
+                                password=password, login=login, logout=logout,
+                                stage=stage)
 
-    def handle_auth(self, user_obj, **kw):
+    def handle_auth(self, user_obj, attended=False, **kw):
         username = kw.get('username')
         password = kw.get('password')
         login = kw.get('login')
@@ -612,6 +613,7 @@ class RequestBase(object):
         stage = kw.get('stage')
         extra = {}
         if login:
+            extra['attended'] = attended
             extra['username'] = username
             extra['password'] = password
             if stage:

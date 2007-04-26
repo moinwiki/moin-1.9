@@ -9,6 +9,9 @@
       * request(request, user_obj, **kw)
     
     The kw arguments that are passed in are currently:
+       attended: boolean indicating whether a user (attended=True) or
+                 a machine is requesting login, multistage auth is not
+                 currently possible for machine logins [login only]
        username: the value of the 'username' form field (or None)
                  [login only]
        password: the value of the 'password' form field (or None)
