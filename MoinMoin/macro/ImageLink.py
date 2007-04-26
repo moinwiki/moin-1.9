@@ -30,6 +30,7 @@
         [[ImageLink(münchen.png,http://www.muenchen.de,width=50)]]
         [[ImageLink(http://webcam.portalmuc.de/images/webcam/webcam_marienplatz.jpg)]]
         [[ImageLink(example.png,alt=whateveryouwant(üöä))]]
+        [[ImageLink(http://moinmoin.wikiwikiweb.de/OliverSiemoneit?action=AttachFile&do=get&target=screenshot.png,width=647,height=517,alt=OliverSiemoneit?action=AttachFile&do=get&target=screenshot,FrontPage)]] 
 
     History:
         Jeff Kunce: 
@@ -87,15 +88,14 @@
 
     @copyright: 2001 by Jeff Kunce,
                 2004 by Marcin Zalewski,
-                2004-2006 by MoinMoin:ReimarBauer,
-                2006 by Thomas Waldmann
+                2006 by MoinMoin:ThomasWaldmann,
+                2004-2007 by MoinMoin:ReimarBauer
+                
     @license: GNU GPL, see COPYING for details.
 """
 
 from MoinMoin import wikiutil
 from MoinMoin.action import AttachFile
-
-kwAllowed = ['width', 'height', 'alt']
 
 def _is_URL(text):
     """ Answer true if text is an URL.
@@ -103,36 +103,54 @@ def _is_URL(text):
     """
     return '://' in text
 
-def execute(macro, args):
-    request = macro.request
-    _ = request.getText
-    formatter = macro.formatter
+def explore_args(args, kwAllowed):
+    """ 
+    explore args for positional and keyword parameters
+    """
     if args:
         args = args.split(',')
         args = [arg.strip() for arg in args]
     else:
         args = []
 
-    argc = len(args)
     kw_count = 0
     kw = {} # create a dictionary for the formatter.image call
+    pp = [] # positional parameter
+
+    if not kwAllowed:
+        return pp, 0, kw, 0
+
     for arg in args:
         if '=' in arg:
             key, value = arg.split('=', 1)
             # avoid that urls with "=" are interpreted as keyword
             if key.lower() not in kwAllowed:
+                if not kw_count and _is_URL(arg):
+                    # assuming that this is the image
+                    pp.append(wikiutil.escape(arg, quote=1))
                 continue
             kw_count += 1
             kw[str(key.lower())] = wikiutil.escape(value, quote=1)
+        else:
+            pp.append(wikiutil.escape(arg, quote=1))
 
-    argc -= kw_count
-    if not argc or argc and not args[0]:
+    return pp, len(pp), kw, len(kw)
+
+def execute(macro, args):
+    request = macro.request
+    _ = request.getText
+    formatter = macro.formatter
+
+    kwAllowed = ['width', 'height', 'alt']
+    pp, pp_count, kw, kw_count = explore_args(args, kwAllowed)
+
+    if not pp_count or pp_count and not pp[0]:
         msg = 'Not enough arguments to ImageLink macro! e.g. [[ImageLink(example.png, WikiName, width=200)]].'
         return "%s%s%s" % (formatter.sysmsg(1), formatter.text(msg), formatter.sysmsg(0))
 
-    image = args[0]
-    if argc >= 2 and args[1]:
-        target = args[1]
+    image = pp[0]
+    if pp_count >= 2 and pp[1]:
+        target = pp[1]
         if target.startswith('attachment:') or target.startswith('inline:'):
             if target.startswith('attachment:'):
                 target = (target.split('attachment:'))[1]
@@ -153,7 +171,7 @@ def execute(macro, args):
 
             kw['src'] = AttachFile.getAttachUrl(pagename, image, request)
 
-    elif argc == 1:
+    elif pp_count == 1:
         pagename, attname = AttachFile.absoluteName(image, formatter.page.page_name)
         target = AttachFile.getAttachUrl(pagename, image, request)
     else:
@@ -185,7 +203,7 @@ def execute(macro, args):
     if target is None:
         target = kw['src']
 
-    if argc == 1:
+    if pp_count == 1:
         return "%s%s%s" % (formatter.url(1, kw['src']),
                            formatter.image(**kw),
                            formatter.url(0))
