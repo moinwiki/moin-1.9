@@ -97,34 +97,28 @@ class Formatter(text_html.Formatter):
     def macro(self, macro_obj, name, args):
         #use ImageLink for resized images
         if name == "ImageLink" and args is not None:
+
+            from MoinMoin.macro import ImageLink
             pagename = self.page.page_name
-            if args:
-                args = [arg.strip() for arg in args.split(',')]
-            else:
-                args = []
-            url = None
-            kw = {}
+
+            kwAllowed = ['width', 'height', 'alt']
+            pp, pp_count, kw, kw_count = ImageLink.explore_args(args, kwAllowed)
+
             kw['src'] = None
-            pos = 0
-            for arg in args:
-                if '=' in arg:
-                    key, value = arg.split('=')
-                    if key == 'width' and value:
-                        kw['width'] = value
-                    elif key == 'height' and value:
-                        kw['height'] = value
-                    elif key == 'alt' and value:
-                        kw['alt'] = value
-                else:
-                    if pos == 0 and arg:
-                        url = arg
-                        if url.startswith('http:'):
-                            kw['src'] = url
-                        else:
-                            kw['title'] = "attachment:%s" % wikiutil.quoteWikinameURL(url)
-                    elif pos == 1 and arg:
-                        kw['target'] = arg
-                    pos += 1
+            url = None
+
+            if pp_count >= 1:
+                url = pp[0]
+
+            if pp_count == 2:
+                kw['target'] = pp[1]
+
+            if ImageLink._is_URL(url):
+                kw['src'] = url
+                kw['title'] = url
+            else:
+                kw['title'] = "attachment:%s" % wikiutil.quoteWikinameURL(url)
+
             if kw['src'] is None:
                 if '/' in url:
                     pagename, target = AttachFile.absoluteName(url, pagename)
