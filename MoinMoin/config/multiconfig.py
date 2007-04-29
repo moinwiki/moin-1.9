@@ -423,8 +423,8 @@ reStructuredText Quick Reference
     rss_cache = 60 # suggested caching time for RecentChanges RSS, in seconds
     sistersites = [
         #('Self', 'http://localhost:8080/?action=sisterpages'),
-        ('EmacsWiki', 'http://www.emacswiki.org/cgi-bin/test?action=sisterpages'),
-        ('JspWiki', 'http://www.jspwiki.org/SisterSites.jsp'),
+        #('EmacsWiki', 'http://www.emacswiki.org/cgi-bin/test?action=sisterpages'),
+        #('JspWiki', 'http://www.jspwiki.org/SisterSites.jsp'),
     ] # list of (sistersitename, sisterpagelistfetchurl)
     shared_intermap = None # can be string or list of strings (filenames)
     show_hosts = True
@@ -712,7 +712,6 @@ reStructuredText Quick Reference
             The full IWID containing the interwiki name is available as cfg.iwid_full
             This method is called by the property.
         """
-
         try:
             iwid = self.meta_dict['IWID']
         except KeyError:
