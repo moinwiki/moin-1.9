@@ -189,8 +189,6 @@ class Parser:
         # TODO: maybe support [wiki:Page http://wherever/image.png] ?
         scheme, rest = target_and_text.split(':', 1)
         wikiname, pagename, text = wikiutil.split_wiki(rest)
-        if not pagename:
-            pagename = self.formatter.page.page_name
         if not text:
             text = pagename
         #self.request.log("interwiki: split_wiki -> %s.%s.%s" % (wikiname,pagename,text))
