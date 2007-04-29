@@ -292,10 +292,6 @@ Version 1.6.current:
     * cfg.quicklinks_default and cfg.subscribed_pages_default can be used to
       preload new user profiles with configurable values.
     * added support for ircs: URLs (secure IRC)
-    * it is allowed now to use interwiki links with empty pagename, like
-      MoinMoin: (no page name after the colon). MoinMoin then uses the current
-      page name as the default. This is a useful abbreviation for TwinPages in
-      other wikis.
     * it is now supported to resize an image from within the gui editor 
     * we now log a rename action as SAVE/RENAME in edit-log and display
       appropriate comments if the user did not supply an own comment.
