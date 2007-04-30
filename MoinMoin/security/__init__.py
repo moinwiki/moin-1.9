@@ -11,11 +11,11 @@
     Then assign your new class to "SecurityPolicy" in wikiconfig;
     and I mean the class, not an instance of it!
 
-    @copyright: 2000-2004 Juergen Hermann <jh@web.de>
-                2003 by Thomas Waldmann, http://linuxwiki.de/ThomasWaldmann
-                2003 by Gustavo Niemeyer, http://moin.conectiva.com.br/GustavoNiemeyer
-                2005 by Oliver Graf
-                2007 by Alexander Schremmer
+    @copyright: 2000-2004 Juergen Hermann <jh@web.de>,
+                2003 MoinMoin:ThomasWaldmann,
+                2003 Gustavo Niemeyer,
+                2005 Oliver Graf,
+                2007 Alexander Schremmer
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -29,7 +29,7 @@ from MoinMoin.Page import Page
 
 def _check(request, pagename, user, right):
     if request.cfg.acl_hierarchic:
-        return _checkHierarchicly(request, pagename, user, right)
+        return _checkHierarchically(request, pagename, user, right)
 
     if request.page is not None and pagename == request.page.page_name:
         p = request.page # reuse is good
@@ -39,26 +39,22 @@ def _check(request, pagename, user, right):
     return acl.may(request, user, right)
 
     
-def _checkHierarchicly(request, pagename, username, attr):
-    """ Get permission by transversing page hierarchy
+def _checkHierarchically(request, pagename, username, attr):
+    """ Get permission by traversing page hierarchy
 
-    We check each page in the hierarchy. We start
-    with the deepest page and recurse to the top of the tree. If one of those 
-    permits, True is returned. 
+    We check each page in the hierarchy. We start with the deepest page and
+    recurse to the top of the tree. If one of those permits, True is returned. 
 
-    This method should not be called by users, use __getattr__
-    instead. 
+    This method should not be called by users, use __getattr__ instead. 
 
     @param request: the current request object
-    @param pagename: pagename to get permission from
+    @param pagename: pagename to get permissions from
     @param username: the user name
     @param attr: the attribute to check
 
     @rtype: bool
     @return: True if you have permission or False
     """
-    from MoinMoin.Page import Page
-
     # Use page hierarchy
     pages = pagename.split('/')
 
@@ -71,7 +67,7 @@ def _checkHierarchicly(request, pagename, username, attr):
     some_acl = False
     for i in range(len(pages), 0, -1):
         # Create the next pagename in the hierarchy
-        # starting with the leave, going to the root
+        # starting at the leaf, going to the root
         name = '/'.join(pages[:i])
         # Get page acl and ask for permission
         acl = Page(request, name).getACL(request)
@@ -101,7 +97,7 @@ class Permissions:
 
     When sub classing this class, you must extend the class methods, not
     replace them, or you might break the acl in the wiki. Correct sub
-    classing look like this:
+    classing looks like this:
 
     def read(self, pagename):
         # Your special security rule
