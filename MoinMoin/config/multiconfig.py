@@ -212,6 +212,7 @@ class DefaultConfig:
     acl_rights_before = u""
     acl_rights_after = u""
     acl_rights_valid = ['read', 'write', 'delete', 'revert', 'admin']
+    acl_hierarchic = False
 
     actions_excluded = [] # ['DeletePage', 'AttachFile', 'RenamePage', 'test', ]
     allow_xslt = False
