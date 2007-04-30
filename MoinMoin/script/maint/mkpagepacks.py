@@ -142,7 +142,7 @@ class PluginScript(MoinScript):
         request = self.request
         request.form = request.args = request.setup_args()
 
-        if not ('tests/wiki' in request.cfg.data_dir and 'tests/wiki' in request.cfg.data_underlay_dir):
+        if not ('tests/wiki' in request.cfg.data_dir.replace("\\", "/") and 'tests/wiki' in request.cfg.data_underlay_dir.replace("\\", "/")):
             import sys
             print sys.path
             print "NEVER EVER RUN THIS ON A REAL WIKI!!! This must be run on a local testwiki."
