@@ -37,34 +37,59 @@ def _check(request, pagename, user, right):
 class Permissions:
     """ Basic interface for user permissions and system policy.
 
-        Note that you still need to allow some of the related actions, this
-        just controls their behaviour, not their activation.
+    Note that you still need to allow some of the related actions, this
+    just controls their behavior, not their activation.
+
+    When sub classing this class, you must extend the class methods, not
+    replace them, or you might break the acl in the wiki. Correct sub
+    classing look like this:
+
+    def read(self, pagename):
+        # Your special security rule
+        if something:
+            return false
+
+        # Do not return True or you break acl!
+        # This call will use the default acl rules
+        return Permissions.read(pagename)
     """
 
     def __init__(self, user):
-        """ Calculate the permissons `user` has.
-        """
         self.name = user.name
         self.request = user._request
+        self.user = user
 
     def save(self, editor, newtext, rev, **kw):
         """ Check whether user may save a page.
 
-            `editor` is the PageEditor instance, the other arguments are
-            those of the `PageEditor.saveText` method.
+        `editor` is the PageEditor instance, the other arguments are
+        those of the `PageEditor.saveText` method.
+
+        @param editor: PageEditor instance.
+        @param newtext: new page text, you can enable of disable saving according
+            to the content of the text, e.g. prevent link spam.
+        @param rev: new revision number? XXX
+        @param kw: XXX
+        @rtype: bool
+        @return: True if you can save or False
         """
         return self.write(editor.page_name)
 
     def __getattr__(self, attr):
-        """ if attr is one of the rights in acl_rights_valid, then return a
-            checking function for it. Else raise an error.
+        """ Shortcut to export getPermission function for all known ACL rights
+        
+        if attr is one of the rights in acl_rights_valid, then return a
+        checking function for it. Else raise an AttributeError.
+
+        @param attr: one of ACL rights as defined in acl_rights_valid
+        @rtype: function
+        @return: checking function for that right, accepting a pagename
         """
         request = self.request
-        if attr in request.cfg.acl_rights_valid:
-            return lambda pagename: _check(self.request, pagename, self.name, attr)
-            ##return lambda pagename, Page=Page, request=request, attr=attr: Page(request, pagename).getACL(request).may(request, self.name, attr)
-        else:
+        if attr not in request.cfg.acl_rights_valid:
             raise AttributeError, attr
+        return lambda pagename: _check(self.request, pagename, self.name, attr)
+
 
 # make an alias for the default policy
 Default = Permissions
