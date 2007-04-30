@@ -1,6 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - Wiki Security Interface
+    MoinMoin - Wiki Security Interface and Access Control Lists
+
 
     This implements the basic interface for user permissions and
     system policy. If you want to define your own policy, inherit
@@ -11,6 +12,8 @@
     and I mean the class, not an instance of it!
 
     @copyright: 2000-2004 Juergen Hermann <jh@web.de>
+    @copyright: 2003 by Thomas Waldmann, http://linuxwiki.de/ThomasWaldmann
+    @copyright: 2003 by Gustavo Niemeyer, http://moin.conectiva.com.br/GustavoNiemeyer
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -63,19 +66,9 @@ class Permissions:
         else:
             raise AttributeError, attr
 
-
 # make an alias for the default policy
 Default = Permissions
 
-
-# moved from MoinMoin.wikiacl ------------------------------------------------
-"""
-    MoinMoin Access Control Lists
-
-    @copyright: 2003 by Thomas Waldmann, http://linuxwiki.de/ThomasWaldmann
-    @copyright: 2003 by Gustavo Niemeyer, http://moin.conectiva.com.br/GustavoNiemeyer
-    @license: GNU GPL, see COPYING for details.
-"""
 
 class AccessControlList:
     ''' Access Control List
@@ -254,7 +247,7 @@ class AccessControlList:
                 allowed = rightsdict.get(dowhat)
             if allowed is not None:
                 return allowed
-        return 0
+        return allowed # should be None
 
     def getString(self, b='#acl ', e='\n'):
         """print the acl strings we were fed with"""

@@ -1018,7 +1018,7 @@ Please review the page and save then. Do not save this page as it is!""")
             # of wating for next request.
             acl = self.getACL(request)
             if (not request.user.may.admin(self.page_name) and
-                parseACL(request, newtext) != acl and
+                parseACL(request, newtext).acl != acl.acl and
                 action != "SAVE/REVERT"):
                 msg = _("You can't change ACLs on this page since you have no admin rights on it!")
                 raise self.NoAdmin, msg
