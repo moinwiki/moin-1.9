@@ -11,7 +11,7 @@
 import re
 from MoinMoin import config, wikiutil, macro
 
-Dependencies = []
+Dependencies = ['user'] # {{{#!wiki comment ... }}} has different output depending on the user's profile settings 
 
 class Parser:
     """
@@ -26,7 +26,7 @@ class Parser:
 
     # allow caching
     caching = 1
-    Dependencies = []
+    Dependencies = Dependencies
 
     # some common strings
     PARENT_PREFIX = wikiutil.PARENT_PREFIX
