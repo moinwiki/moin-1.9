@@ -258,11 +258,7 @@ class Parser:
         """Handle remarks."""
         # XXX we don't really enforce the correct sequence /* ... */ here
         self.is_remark = not self.is_remark
-        span_kw = {
-            'style': self.request.user.show_comments and "display:''" or "display:none",
-            'class': "comment",
-        }
-        return self.formatter.span(self.is_remark, **span_kw)
+        return self.formatter.span(self.is_remark, css_class='comment')
 
     def _small_repl(self, word):
         """Handle small."""
@@ -1008,11 +1004,7 @@ class Parser:
         self.in_processing_instructions = 1
 
         if self.wrapping_div_class:
-            div_kw = {'css_class': self.wrapping_div_class, }
-            if 'comment' in self.wrapping_div_class.split():
-                # show comment divs depending on user profile (and wiki configuration)
-                div_kw['style'] = self.request.user.show_comments and "display:''" or "display:none"
-            self.request.write(self.formatter.div(1, **div_kw))
+            self.request.write(self.formatter.div(1, css_class=self.wrapping_div_class))
 
         # Main loop
         for line in self.lines:

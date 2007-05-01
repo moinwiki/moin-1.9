@@ -1353,15 +1353,34 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
         return self._close(tag)
 
     def div(self, on, **kw):
+        css_class = kw.get('css_class')
+        # the display of comment class divs depends on a user setting:
+        if css_class and 'comment' in css_class.split():
+            style = kw.get('style')
+            display = self.request.user.show_comments and "display:''" or "display:none"
+            if not style:
+                style = display
+            else:
+                style += "; %s" % display
+            kw['style'] = style
         tag = 'div'
         if on:
             return self._open(tag, **kw)
         return self._close(tag)
 
     def span(self, on, **kw):
+        css_class = kw.get('css_class')
+        # the display of comment class spans depends on a user setting:
+        if css_class and 'comment' in css_class.split():
+            style = kw.get('style')
+            display = self.request.user.show_comments and "display:''" or "display:none"
+            if not style:
+                style = display
+            else:
+                style += "; %s" % display
+            kw['style'] = style
         tag = 'span'
         if on:
             return self._open(tag, **kw)
         return self._close(tag)
-
 
