@@ -380,9 +380,17 @@ reStructuredText Quick Reference
     notification_bot_uri = None
 
     page_credits = [
-        '<a href="http://moinmoin.wikiwikiweb.de/">MoinMoin Powered</a>',
-        '<a href="http://www.python.org/">Python Powered</a>',
-        '<a href="http://validator.w3.org/check?uri=referer">Valid HTML 4.01</a>',
+        # Feel free to add other credits, but PLEASE do NOT change or remove the
+        # following links - you help us (and the projects) by keeping them "as is":
+        '<a href="http://moinmoin.wikiwikiweb.de/" title="This site uses the MoinMoin Wiki software.">MoinMoin Powered</a>',
+        '<a href="http://moinmoin.wikiwikiweb.de/Python" title="MoinMoin is written in Python.">Python Powered</a>',
+
+        # Optional credits:
+        # if you think it can be maybe misunderstood as applying to content or topic your wiki,
+        # feel free to remove this one:
+        '<a href="http://moinmoin.wikiwikiweb.de/GPL" title="MoinMoin is GPL licensed.">GPL licensed</a>',
+        # if you don't need/want to check the html output, feel free to remove this one:
+        '<a href="http://validator.w3.org/check?uri=referer" title="Click here to validate this page.">Valid HTML 4.01</a>',
         ]
     page_footer1 = ''
     page_footer2 = ''
