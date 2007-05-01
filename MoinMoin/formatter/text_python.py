@@ -164,6 +164,20 @@ if moincode_timestamp > %d or cfg_mtime is None or cfg_mtime > %d:
 
     smiley = icon
 
+    def span(self, on, **kw):
+        if on and 'comment' in kw.get('css_class', '').split():
+            return self.__insert_code('request.write(%s.span(%r, **%r))' %
+                                      (self.__formatter, on, kw))
+        else:
+            return self.formatter.span(on, **kw)
+
+    def div(self, on, **kw):
+        if on and 'comment' in kw.get('css_class', '').split():
+            return self.__insert_code('request.write(%s.div(%r, **%r))' %
+                                      (self.__formatter, on, kw))
+        else:
+            return self.formatter.div(on, **kw)
+
     def macro(self, macro_obj, name, args):
         if self.__is_static(macro_obj.get_dependencies(name)):
             return macro_obj.execute(name, args)
