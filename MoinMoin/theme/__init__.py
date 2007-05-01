@@ -52,7 +52,7 @@ class ThemeBase:
         # FileAttach
         'attach':     ("%(attach_count)s",       "moin-attach.png",  7, 15),
         # RecentChanges
-        'rss':        (_("[RSS]"),               "moin-rss.png",    36, 14),
+        'rss':        (_("[RSS]"),               "moin-rss.png",    24, 24),
         'deleted':    (_("[DELETED]"),           "moin-deleted.png",60, 12),
         'updated':    (_("[UPDATED]"),           "moin-updated.png",60, 12),
         'renamed':    (_("[RENAMED]"),           "moin-renamed.png",60, 12),
