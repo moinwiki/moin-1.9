@@ -91,6 +91,9 @@ pre.comment:before {
 }
 
 
+/* .comment css definition must be top of .red/.green/.blue or it won't work */
+.comment { color: #555555; background-color: #DDDDFF; }
+
 .red { background-color: #FFCCCC; }
 .green { background-color: #CCFFCC; }
 .blue { background-color: #CCCCFF; }
@@ -99,7 +102,6 @@ pre.comment:before {
 .dashed { border: 2px dashed #000000; padding: 2px; }
 .dotted { border: 2px dotted #000000; padding: 2px; }
 
-.comment { color: #555555; background-color: #DDDDFF; }
 
 table
 {
