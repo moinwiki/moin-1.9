@@ -527,10 +527,8 @@ Try a different name.""") % (newpagename,)
             self.error = None
             if not comment:
                 comment = u"## page was copied from %s" % self.page_name
-            if request.user.may.write(self.page_name):
-                # ToDo: check difference to request.user.may.write(newpagename)
-                # If current user has write access to the old page
-                # Save page text with a comment about the old name
+            if request.user.may.write(newpagename):
+                # Save page text with a comment about the old name and log entry
                 savetext = u"## page was copied from %s\n%s" % (self.page_name, savetext)
                 newpage.saveText(savetext, 0, comment=comment, index=0, extra=self.page_name, action='SAVE')
             else:

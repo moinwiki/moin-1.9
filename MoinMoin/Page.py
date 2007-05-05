@@ -1511,8 +1511,14 @@ class Page(object):
             #logging.debug("currrev: %r, cachedaclrev: %r" % (currentRevision, aclRevision))
             if aclRevision != currentRevision:
                 acl = self.parseACL()
-                cache_data = (currentRevision, acl)
-                request.cfg.cache.meta.putItem(request, cache_name, cache_key, cache_data)
+                if currentRevision != 99999999:
+                    # don't use cache for non existing pages
+                    # otherwise in the process of creating copies by filesys.copytree (PageEditor.copyPage)
+                    # the first may test will create a cache entry with the default_acls for a non existing page 
+                    # At the time the page is created acls on that page would be ignored until the process
+                    # is completed by adding a log entry into edit-log
+                    cache_data = (currentRevision, acl)
+                    request.cfg.cache.meta.putItem(request, cache_name, cache_key, cache_data)
             self.__acl = acl
             request.clock.stop('getACL')
             return acl
