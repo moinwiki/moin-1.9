@@ -5,6 +5,7 @@
     TODO: when refactoring this, do not use "iter" (is a builtin)
 
     @copyright: 2003-2004 by Juergen Hermann <jh@web.de>
+                2007 by MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -239,4 +240,38 @@ class TestAcl(unittest.TestCase):
             for right in mayNot:
                 self.failIf(acl.may(self.request, user, right),
                     '"%(user)s" should NOT be allowed to "%(right)s"' % locals())
+
+    def testACLsWithoutEditLogEntry(self):
+        """ tests what are the page rights if edit-log entry doesn't exist
+            for a page where no access is given to
+        """
+        import os
+        from MoinMoin.Page import Page
+        pagename = u'AutoCreatedMoinMoinTemporaryTestPage'
+
+        result = self.request.user.may.write(pagename)
+        page = Page(self.request, pagename)
+        path = page.getPagePath(use_underlay=0, check_create=0)
+        if os.path.exists(path):
+            py.test.skip("%s exists. Won't overwrite exiting page" % self.dictPage)
+        try:
+            os.mkdir(path)
+            revisionsDir = os.path.join(path, 'revisions')
+            os.mkdir(revisionsDir)
+            current = '00000001'
+            file(os.path.join(path, 'current'), 'w').write('%s\n' % current)
+            text = u'#acl All: \n'
+            file(os.path.join(revisionsDir, current), 'w').write(text)
+        except Exception, err:
+            py.test.skip("Can not be create test page: %s" % err)
+
+        result = self.request.user.may.write(pagename)
+        expected = False
+
+        if os.path.exists(path):
+            import shutil
+            shutil.rmtree(path, True)
+
+        self.assertEqual(result, expected,
+                         ('Expected "%(expected)s" but got "%(result)s"') % locals())
 
