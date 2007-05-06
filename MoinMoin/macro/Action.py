@@ -13,6 +13,7 @@
         Same with custom text.
 
     @copyright: 2004 Johannes Berg <johannes@sipsolutions.de>
+                2007 by MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -34,10 +35,16 @@ class ActionLink:
     def getValidActions(self):  
         """ lists all valid actions """
         from MoinMoin import action
-        actions = [x for x in action.modules
+        # builtin
+        actions = action.names
+        # global
+        glob_actions = [x for x in action.modules
                    if not x in self.macro.request.cfg.actions_excluded]
+        # local
         loc_actions = [x for x in wikiutil.wikiPlugins('action', self.macro.cfg)
                        if not x in self.macro.request.cfg.actions_excluded]
+        if glob_actions:
+            actions.append(glob_actions)
         if loc_actions:
             actions.append(loc_actions)
         return actions
