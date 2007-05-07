@@ -365,6 +365,8 @@ Version 1.6.current:
       inline:song.mp3 embeds the audio controls into your page
     * action=view does use mimetypes of EmbedObject too and text files will be shown
       by using their colorized parsers
+    * Hierarchical ACLs are now supported, i.e. pages inheriting permissions
+      from higher-level pages. See HelpOnAccessControlLists.
 
 
   Bugfixes:
