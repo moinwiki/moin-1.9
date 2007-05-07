@@ -233,6 +233,8 @@ class EditLog(LogFile):
         items = []
         for line in self:
             items.append(line.pagename)
+            if line.action == 'SAVE/RENAME':
+                items.append(line.extra) # == old page name
 
         newposition = self.position()
         logging.log(logging.NOTSET, "editlog.news: new pos: %r new items: %r", newposition, items)
