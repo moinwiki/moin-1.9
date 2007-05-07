@@ -31,23 +31,20 @@ class ActionLink:
         self.macro = macro
         self.request = macro.request
         self.args = self.getArgs(args)
-        
-    def getValidActions(self):  
+
+    def getValidActions(self):
         """ lists all valid actions """
         from MoinMoin import action
         # builtin
-        actions = action.names
+        actions_builtin = action.names
         # global
-        glob_actions = [x for x in action.modules
-                   if not x in self.macro.request.cfg.actions_excluded]
+        actions_global = ([x for x in action.modules
+                           if not x in self.macro.request.cfg.actions_excluded])
         # local
-        loc_actions = [x for x in wikiutil.wikiPlugins('action', self.macro.cfg)
-                       if not x in self.macro.request.cfg.actions_excluded]
-        if glob_actions:
-            actions.append(glob_actions)
-        if loc_actions:
-            actions.append(loc_actions)
-        return actions
+        actions_local = ([x for x in wikiutil.wikiPlugins('action', self.macro.cfg)
+                          if not x in self.macro.request.cfg.actions_excluded])
+
+        return actions_builtin + actions_global + actions_local
 
     def getArgs(self, argstr):
         """ Temporary function until Oliver Graf args parser is finished
@@ -91,5 +88,4 @@ class ActionLink:
 def execute(macro, args):
     """ Temporary glue code to use with moin current macro system """
     return ActionLink(macro, args).renderInText()
-
 
