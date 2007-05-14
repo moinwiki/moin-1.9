@@ -164,4 +164,7 @@ class SystemInfo:
         return buf.getvalue()
 
 def execute(macro, args):
-        return SystemInfo(macro, args).render()
+    if self.request.isSpiderAgent: # reduce bot cpu usage
+        return ''
+    return SystemInfo(macro, args).render()
+
