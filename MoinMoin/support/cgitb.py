@@ -532,7 +532,7 @@ class View:
     def formatOneTextTraceback(self, info):
         """ Separate to enable formatting multiple tracebacks. """
         import traceback
-        return ''.join(traceback.format_exception(*info))
+        return pydoc.html.escape(''.join(traceback.format_exception(*info)))
 
     def textTracebackTemplate(self):
         return '''
