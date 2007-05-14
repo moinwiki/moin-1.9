@@ -13,6 +13,8 @@ def execute(macro, args):
 
     if macro.request.mode_getpagelinks: # prevent recursion
         return ''
+    if macro.request.isSpiderAgent: # reduce bot cpu usage
+        return ''
 
     # delete all linked pages from a dict of all pages
     pages = macro.request.rootpage.getPageDict()

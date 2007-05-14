@@ -481,7 +481,7 @@ reStructuredText Quick Reference
     # a regex of HTTP_USER_AGENTS that should be excluded from logging
     # and receive a FORBIDDEN for anything except viewing a page
     ua_spiders = ('archiver|cfetch|crawler|curl|gigabot|googlebot|holmes|htdig|httrack|httpunit|jeeves|larbin|leech|'
-                  'linkbot|linkmap|linkwalk|mercator|mirror|msnbot|neomo|nutbot|omniexplorer|puf|robot|scooter|seekbot|'
+                  'linkbot|linkmap|linkwalk|mercator|mirror|msnbot|msrbot|neomo|nutbot|omniexplorer|puf|robot|scooter|seekbot|'
                   'sherlock|slurp|sitecheck|spider|teleport|voyager|webreaper|wget')
 
     # Wiki identity

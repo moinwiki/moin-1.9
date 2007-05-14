@@ -17,6 +17,8 @@ def execute(macro, args):
     # prevent recursion
     if request.mode_getpagelinks:
         return ''
+    if request.isSpiderAgent: # reduce bot cpu usage
+        return ''
 
     # Get allpages switch from the form
     allpages = int(request.form.get('allpages', [0])[0]) != 0

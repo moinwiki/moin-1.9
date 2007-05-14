@@ -252,6 +252,8 @@ class Macro:
         return self._make_index(args)
 
     def _macro_WordIndex(self, args):
+        if self.request.isSpiderAgent: # reduce bot cpu usage
+            return ''
         word_re = u'[%s][%s]+' % (config.chars_upper, config.chars_lower)
         return self._make_index(args, word_re=word_re)
 

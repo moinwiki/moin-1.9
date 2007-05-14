@@ -9,6 +9,9 @@
 Dependencies = ["pages"]
 
 def execute(macro, args):
+    if macro.request.isSpiderAgent: # reduce bot cpu usage
+        return ''
+
     # get list of pages and their objects
     pages = macro.request.rootpage.getPageDict()
 

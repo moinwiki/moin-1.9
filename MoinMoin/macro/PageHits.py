@@ -21,6 +21,8 @@ class PageHits:
 
     def execute(self):
         """ Execute the macro and return output """
+        if self.request.isSpiderAgent: # reduce bot cpu usage
+            return ''
         cacheDate, hits = self.cachedHits()
         self.addHitsFromLog(hits, cacheDate)
         self.filterReadableHits(hits)
