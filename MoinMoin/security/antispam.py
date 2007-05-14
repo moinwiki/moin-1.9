@@ -67,10 +67,9 @@ def getblacklist(request, pagename, do_update):
     """
     from MoinMoin.PageEditor import PageEditor
     p = PageEditor(request, pagename, uid_override="Antispam subsystem")
-    invalidate_cache = False
+    mymtime = wikiutil.version2timestamp(p.mtime_usecs())
     if do_update:
         tooold = time.time() - 1800
-        mymtime = wikiutil.version2timestamp(p.mtime_usecs())
         failure = caching.CacheEntry(request, "antispam", "failure", scope='wiki')
         fail_time = failure.mtime() # only update if no failure in last hour
         if (mymtime < tooold) and (fail_time < tooold):
@@ -114,12 +113,11 @@ def getblacklist(request, pagename, do_update):
                     if isinstance(response, dict) and 'faultCode' in response:
                         raise WikirpcError("failed to get BadContent data", response)
                     p._write_file(response)
+                    mymtime = wikiutil.version2timestamp(p.mtime_usecs())
                 else:
                     failure.update("") # we didn't get a modified version, this avoids
                                        # permanent polling for every save when there
                                        # is no updated master page
-
-                invalidate_cache = True
 
             except (socket.error, xmlrpclib.ProtocolError), err:
                 # Log the error
@@ -142,7 +140,7 @@ def getblacklist(request, pagename, do_update):
             socket.setdefaulttimeout(old_timeout)
 
     blacklist = p.get_raw_body()
-    return invalidate_cache, makelist(blacklist)
+    return mymtime, makelist(blacklist)
 
 
 class SecurityPolicy(Permissions):
@@ -157,22 +155,23 @@ class SecurityPolicy(Permissions):
             request.clock.start('antispam')
 
             blacklist = []
-            invalidate_cache = not getattr(request.cfg.cache, "antispam_blacklist", None)
+            latest_mtime = 0
             for pn in BLACKLISTPAGES:
                 do_update = (pn != "LocalBadContent")
-                invalidate_cache_necessary, blacklist_entries = getblacklist(request, pn, do_update)
+                blacklist_mtime, blacklist_entries = getblacklist(request, pn, do_update)
                 blacklist += blacklist_entries
-                invalidate_cache |= invalidate_cache_necessary
+                latest_mtime = max(latest_mtime, blacklist_mtime)
 
             if blacklist:
-                if invalidate_cache:
+                invalid_cache = not getattr(request.cfg.cache, "antispam_blacklist", None)
+                if invalid_cache or request.cfg.cache.antispam_blacklist[0] < latest_mtime:
                     mmblcache = []
                     for blacklist_re in blacklist:
                         try:
                             mmblcache.append(re.compile(blacklist_re, re.I))
                         except re.error, err:
                             dprint("Error in regex '%s': %s. Please check the pages %s." % (blacklist_re, str(err), ', '.join(BLACKLISTPAGES)))
-                    request.cfg.cache.antispam_blacklist = mmblcache
+                    request.cfg.cache.antispam_blacklist = (latest_mtime, mmblcache)
 
                 from MoinMoin.Page import Page
 
@@ -186,7 +185,7 @@ class SecurityPolicy(Permissions):
                 difference = newset.difference(oldset)
                 addedtext = ''.join(difference)
 
-                for blacklist_re in request.cfg.cache.antispam_blacklist:
+                for blacklist_re in request.cfg.cache.antispam_blacklist[1]:
                     match = blacklist_re.search(addedtext)
                     if match:
                         # Log error and raise SaveError, PageEditor
