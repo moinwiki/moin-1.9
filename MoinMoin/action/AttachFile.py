@@ -544,18 +544,21 @@ def execute(pagename, request):
     _ = request.getText
 
     msg = None
+    do = request.form.get('do')
+    if do is not None:
+        do = do[0]
     if action_name in request.cfg.actions_excluded:
         msg = _('File attachments are not allowed in this wiki!')
     elif 'do' not in request.form:
         upload_form(pagename, request)
-    elif request.form['do'][0] == 'savedrawing':
+    elif do == 'savedrawing':
         if request.user.may.write(pagename):
             save_drawing(pagename, request)
             request.emit_http_headers()
             request.write("OK")
         else:
             msg = _('You are not allowed to save a drawing on this page.')
-    elif request.form['do'][0] == 'upload':
+    elif do == 'upload':
         if request.user.may.write(pagename):
             if 'file' in request.form:
                 do_upload(pagename, request)
@@ -565,17 +568,17 @@ def execute(pagename, request):
                 msg = _("No file content. Delete non ASCII characters from the file name and try again.")
         else:
             msg = _('You are not allowed to attach a file to this page.')
-    elif request.form['do'][0] == 'del':
+    elif do == 'del':
         if request.user.may.delete(pagename):
             del_file(pagename, request)
         else:
             msg = _('You are not allowed to delete attachments on this page.')
-    elif request.form['do'][0] == 'move':
+    elif do == 'move':
         if request.user.may.delete(pagename):
             send_moveform(pagename, request)
         else:
             msg = _('You are not allowed to move attachments from this page.')
-    elif request.form['do'][0] == 'attachment_move':
+    elif do == 'attachment_move':
         if 'cancel' in request.form:
             msg = _('Move aborted!')
             error_msg(pagename, request, msg)
@@ -588,28 +591,28 @@ def execute(pagename, request):
             attachment_move(pagename, request)
         else:
             msg = _('You are not allowed to move attachments from this page.')
-    elif request.form['do'][0] == 'get':
+    elif do == 'get':
         if request.user.may.read(pagename):
             get_file(pagename, request)
         else:
             msg = _('You are not allowed to get attachments from this page.')
-    elif request.form['do'][0] == 'unzip':
+    elif do == 'unzip':
         if request.user.may.delete(pagename) and request.user.may.read(pagename) and request.user.may.write(pagename):
             unzip_file(pagename, request)
         else:
             msg = _('You are not allowed to unzip attachments of this page.')
-    elif request.form['do'][0] == 'install':
+    elif do == 'install':
         if request.user.isSuperUser():
             install_package(pagename, request)
         else:
             msg = _('You are not allowed to install files.')
-    elif request.form['do'][0] == 'view':
+    elif do == 'view':
         if request.user.may.read(pagename):
             view_file(pagename, request)
         else:
             msg = _('You are not allowed to view attachments of this page.')
     else:
-        msg = _('Unsupported upload action: %s') % (request.form['do'][0],)
+        msg = _('Unsupported upload action: %s') % (wikiutil.escape(do),)
 
     if msg:
         error_msg(pagename, request, msg)
