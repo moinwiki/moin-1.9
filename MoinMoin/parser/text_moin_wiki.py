@@ -3,7 +3,7 @@
     MoinMoin - MoinMoin Wiki Markup Parser
 
     @copyright: 2000-2002 Juergen Hermann <jh@web.de>,
-                2006 by MoinMoin:ThomasWaldmann
+                2006-2007 MoinMoin:ThomasWaldmann,
                 2007 by MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
@@ -66,7 +66,7 @@ class Parser:
 
     # the big, fat, ugly one ;)
     formatting_rules = ur"""(?P<ent_numeric>&#(\d{1,5}|x[0-9a-fA-F]+);)
-(?:(?P<emph_ibb>'''''(?=[^']+'''))
+(?P<emph_ibb>'''''(?=[^']+'''))
 (?P<emph_ibi>'''''(?=[^']+''))
 (?P<emph_ib_or_bi>'{5}(?=[^']))
 (?P<emph>'{2,3})
@@ -82,7 +82,7 @@ class Parser:
 (?P<remark>(/\* ?| ?\*/))
 (?P<rule>-{4,})
 (?P<comment>^\#\#.*$)
-(?P<macro>\[\[(%%(macronames)s)(?:\(.*?\))?\]\]))
+(?P<macro>\[\[(%%(macronames)s)(?:\(.*?\))?\]\])
 (?P<ol>%(ol_rule)s)
 (?P<dl>%(dl_rule)s)
 (?P<li>^\s+\*\s*)
