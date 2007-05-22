@@ -611,7 +611,9 @@ class RequestBase(object):
         login = kw.get('login')
         logout = kw.get('logout')
         stage = kw.get('stage')
-        extra = {}
+        extra = {
+            'cookie': self._cookie,
+        }
         if login:
             extra['attended'] = attended
             extra['username'] = username
