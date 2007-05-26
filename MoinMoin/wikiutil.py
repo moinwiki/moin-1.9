@@ -1537,7 +1537,8 @@ def link_tag(request, params, text=None, formatter=None, on=None, **kw):
     @return: formatted link tag
     """
     if formatter is None:
-        formatter = request.html_formatter
+        from MoinMoin.formatter.text_html import Formatter
+        formatter = Formatter(request)
     if 'css_class' in kw:
         css_class = kw['css_class']
         del kw['css_class'] # one time is enough
