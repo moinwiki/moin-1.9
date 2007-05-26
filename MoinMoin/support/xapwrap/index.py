@@ -308,7 +308,7 @@ class ExceptionTranslater:
                     db.add_database(xapian.Database(path))
                 return klass(db)
             else:
-                return klass(xapian.open(*args, **kwargs))
+                return klass(xapian.WriteableDatabase(*args, **kwargs))
         except (IOError, RuntimeError, ValueError), e:
             errorMsg = e.args[0]
             for subString, exceptionClass in klass.exceptionStrMap.iteritems():
