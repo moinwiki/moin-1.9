@@ -179,7 +179,7 @@ Version 1.6.current:
                                     to False if no stemmer installed
         search_results_per_page 10  determines how many hits should be
                                     shown on a fullsearch action
-        xapian_index_history True   indexes all revisions of pages to
+        xapian_index_history False  indexes all revisions of pages to
                                     allow searching in their history
     * The action menu now calls the actions for the revision of the page you
       are currently viewing. If you are viewing the current page revision, you
