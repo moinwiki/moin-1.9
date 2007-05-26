@@ -585,7 +585,10 @@ class ReadOnlyIndex:
         q = query.prepare(self.qp)
         # uggg. this mess is due to the fact that xapain Query objects
         # don't hash in a sane way.
-        qString = q.get_description()
+        try:
+            qString = q.get_description() # deprecated since xapian 1.0, removal in 1.1
+        except AttributeError:
+            qString = str(q)
 
         # the only thing we use sortKey for is to set sort index
         if sortKey is not None:
