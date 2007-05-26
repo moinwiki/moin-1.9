@@ -144,7 +144,10 @@ class SystemInfo:
 
         try:
             import xapian
-            xapVersion = xapian.xapian_version_string()
+            try:
+                xapVersion = xapian.version_string()
+            except AttributeError:
+                xapVersion = xapian.xapian_version_string() # deprecated since xapian 0.9.6, removal in 1.1.0
         except ImportError:
             xapVersion = _('Xapian and/or Python Xapian bindings not installed')
 
