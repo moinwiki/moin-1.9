@@ -902,6 +902,8 @@ class Page(object):
         # default is wiki markup
         pi['format'] = self.cfg.default_markup or "wiki"
         pi['formatargs'] = ''
+        # default language from cfg
+        pi['language'] = self.cfg.language_default or "en"
         pi['lines'] = len(meta)
         acl = []
         
