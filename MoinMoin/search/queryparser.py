@@ -796,7 +796,7 @@ class DomainSearch(BaseExpression):
     def search(self, page):
         checks = {'underlay': page.isUnderlayPage,
                   'standard': page.isStandardPage,
-                  'system': wikiutil.isSystemPage(page.request, page.page_name),
+                  'system': lambda page: wikiutil.isSystemPage(page.request, page.page_name),
                  }
 
         try:
