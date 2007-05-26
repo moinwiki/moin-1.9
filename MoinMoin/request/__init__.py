@@ -259,6 +259,11 @@ class RequestBase(object):
             self.getText = lambda text, i18n=self.i18n, request=self, lang=self.lang, **kv: i18n.getText(text, request, lang, kv.get('formatted', True))
 
             self.reset()
+
+            from MoinMoin.formatter.text_html import Formatter
+            self.html_formatter = Formatter(self)
+            self.formatter = self.html_formatter
+
             self.clock.stop('base__init__')
 
     def surge_protect(self, kick_him=False):
@@ -1156,9 +1161,6 @@ class RequestBase(object):
         self.clock.start('run')
 
         from MoinMoin.Page import Page
-        from MoinMoin.formatter.text_html import Formatter
-        self.html_formatter = Formatter(self)
-        self.formatter = self.html_formatter
 
         self.initTheme()
 
