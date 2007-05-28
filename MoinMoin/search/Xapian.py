@@ -381,6 +381,21 @@ class Index(BaseIndex):
         except (OSError, IOError):
             pass
 
+    def verify_language(self, value):
+        """ Verifies if language is available for Stemming algorithms
+        @value: language code
+        """
+        from Stemmer import algorithms
+        stemmer_langs = algorithms()
+        from MoinMoin import i18n
+        langs = i18n.wikiLanguages().items()
+        langs.sort(lambda x, y: cmp(x[1]['x-language-in-english'], y[1]['x-language-in-english']))
+        for lang in langs:
+            if value == lang[0] and lang[1]['x-language-in-english'].lower() in stemmer_langs:
+                return True
+        if debug: request.log("%s (no stemming possible)" % (value,))
+        return False
+
     def _get_languages(self, page):
         """ Get language of a page and the language to stem it in
 
@@ -393,13 +408,16 @@ class Index(BaseIndex):
         # language available
         if page.request.cfg.xapian_stemming:
             lang = page.pi['language']
-            try:
-                Stemmer(lang)
-                # if there is no exception, lang is stemmable
-                return (lang, lang)
-            except KeyError:
-                # lang is not stemmable
-                pass
+            # Stemmer(lang) has an exception bug if the language is not available
+            # TypeError: exceptions must be strings, classes, or instances, not exceptions.KeyError
+            if self.verify_language(lang):
+                try:
+                    Stemmer(lang)
+                    # if there is no exception, lang is stemmable
+                    return (lang, lang)
+                except KeyError:
+                    # lang is not stemmable
+                    pass
 
         if not lang:
             # no lang found at all.. fallback to default language
