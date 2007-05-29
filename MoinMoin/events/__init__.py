@@ -18,20 +18,22 @@ event_handlers = None
 # Create a list of extension actions from the package directory
 modules = pysupport.getPackageModules(__file__)
 
-class Event:
+class Observable:
     """A class handling information common to all events."""
+    pass
+        
+class PageEvent(Observable):
+    """An event related to a page change"""
     
     def __init__(self, request, page):
         self.request = request
         self.page = page
         
-class PageChangedEvent(Event):
+class PageChangedEvent(PageEvent):
     pass
-
-class PageRenamedEvent(Event):
+class PageRenamedEvent(PageEvent):
     pass
-
-class PageDeletedEvent(Event):
+class PageDeletedEvent(PageEvent):
     pass
         
 def register_handlers(cfg):
