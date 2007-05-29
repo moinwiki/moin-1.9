@@ -935,7 +935,10 @@ class Parser:
         if not (inhibit_p or self.in_pre or self.in_li or self.in_dd or self.inhibit_p or
                 self.formatter.in_p) and lastpos < len(line):
             result.append(self.formatter.paragraph(1, css_class="line874"))
-        result.append(self.formatter.text(line[lastpos:]))
+        if '}}}' in line and len(line[lastpos:].strip()) > 0:
+            result.append(wikiutil.renderText(self.request, Parser, line[lastpos:].strip()))
+        else:
+            result.append(self.formatter.text(line[lastpos:]))
         return u''.join(result)
 
     def replace(self, match, inhibit_p=False):
