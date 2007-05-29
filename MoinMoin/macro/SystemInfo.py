@@ -166,8 +166,8 @@ class SystemInfo:
             stemVersion = _('!PyStemmer not installed')
  
         row(_('Stemming for Xapian'), xapState[request.cfg.xapian_stemming])
-        row(_('PyStemmer Version'), stemVersion)
-        row(_('PyStemmer stems'), ', '.join(stems) or nonestr)
+        row(_('!PyStemmer Version'), stemVersion)
+        row(_('!PyStemmer stems'), ', '.join(stems) or nonestr)
 
         try:
             from threading import activeCount
