@@ -153,7 +153,21 @@ class SystemInfo:
 
         row(_('Xapian search'), xapRow)
         row(_('Xapian Version'), xapVersion)
-        row(_('Xapian stemming'), xapState[request.cfg.xapian_stemming])
+ 
+        stems = [nonestr]
+        try:
+            import Stemmer
+            try:
+                stems = Stemmer.algorithms()
+                stemVersion = Stemmer.version()
+            except:
+                 stemVersion = _('!PyStemmer not installed')
+        except ImportError:
+            stemVersion = _('!PyStemmer not installed')
+ 
+        row(_('Snowball stemming'), xapState[request.cfg.xapian_stemming])
+        row(_('Snowball Version'), stemVersion)
+        row(_('Snowball stems'), ', '.join(stems) or nonestr)
 
         try:
             from threading import activeCount
