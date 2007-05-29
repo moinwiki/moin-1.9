@@ -26,7 +26,6 @@ from MoinMoin.logfile import editlog, eventlog
 from MoinMoin.util import filesys, timefuncs, web
 from MoinMoin.mail import sendmail
 
-
 # used for merging
 conflict_markers = ("\n---- /!\\ '''Edit conflict - other version:''' ----\n",
                     "\n---- /!\\ '''Edit conflict - your version:''' ----\n",
@@ -1129,6 +1128,10 @@ Please review the page and save then. Do not save this page as it is!""")
             # send notification mails
             if request.cfg.mail_enabled:
                 msg = msg + self._notifySubscribers(comment, trivial)
+                
+                from MoinMoin import events
+                e = events.PageChangedEvent(request, self)
+                events.send_event(e)
 
             if kw.get('index', 1) and request.cfg.xapian_search:
                 from MoinMoin.search.Xapian import Index
