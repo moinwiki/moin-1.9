@@ -165,9 +165,9 @@ class SystemInfo:
         except ImportError:
             stemVersion = _('!PyStemmer not installed')
  
-        row(_('Snowball stemming'), xapState[request.cfg.xapian_stemming])
-        row(_('Snowball Version'), stemVersion)
-        row(_('Snowball stems'), ', '.join(stems) or nonestr)
+        row(_('Stemming for Xapian'), xapState[request.cfg.xapian_stemming])
+        row(_('PyStemmer Version'), stemVersion)
+        row(_('PyStemmer stems'), ', '.join(stems) or nonestr)
 
         try:
             from threading import activeCount
