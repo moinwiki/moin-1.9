@@ -623,7 +623,7 @@ class UserSettings:
             buttons.append(("account_sendmail", _('Mail me my account data')))
             
         if self.cfg.jabber_enabled:
-            buttons.append(("account_sendjabber", _('Send my my account data with Jabber')))
+            buttons.append(("account_sendjabber", _('Send me my account data with Jabber')))
 
         if create_only:
             buttons = [("create_only", _('Create Profile'))]
