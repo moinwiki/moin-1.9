@@ -24,7 +24,7 @@ class InternalError(CompositeError): pass
 try:
     dom = getDOMImplementation("4DOM")
 except ImportError:
-    raise InternalError("You need to install PyXML to use the DocBook formatter.")
+    raise InternalError("You need to install 4suite to use the DocBook formatter.")
 
 class DocBookOutputFormatter:
     """
