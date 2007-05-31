@@ -6,11 +6,12 @@
     operations. Developed as a Google Summer of Code 
     project.
 
-@copyright: 2007 by Karol Nowak <grywacz@gmail.com>
-@license: GNU GPL, see COPYING for details.
+    @copyright: 2007 by Karol Nowak <grywacz@gmail.com>
+    @license: GNU GPL, see COPYING for details.
 """
 
 import time
+import Queue
 from threading import Thread
 
 from pyxmpp.client import Client
@@ -18,6 +19,8 @@ from pyxmpp.jid import JID
 from pyxmpp.streamtls import TLSSettings
 from pyxmpp.message import Message
 from pyxmpp.presence import Presence
+
+from xmlrpcbot import NotificationCommand
 
 class XMPPBot(Client, Thread):
     """A simple XMPP bot"""
@@ -33,26 +36,59 @@ class XMPPBot(Client, Thread):
         
         self.from_commands = from_commands
         self.to_commands = to_commands   
-        jid = "%s@%s/%s" % (config.node, config.server, config.resource)
+        jid = "%s@%s/%s" % (config.xmpp_node, config.xmpp_server, config.xmpp_resource)
         
         self.config = config
-        self.jid = JID(node_or_jid = jid, domain = config.server, resource = config.resource)
+        self.jid = JID(node_or_jid = jid, domain = config.xmpp_server, resource = config.xmpp_resource)
         self.tlsconfig = TLSSettings(require = True, verify_peer = False)
-        Client.__init__(self, self.jid, self.config.password, self.config.server, tls_settings = self.tlsconfig)
+        Client.__init__(self, self.jid, self.config.xmpp_password, self.config.xmpp_server, tls_settings = self.tlsconfig)
             
     def run(self):
         """Start the bot - enter the event loop"""
         
-        if self.config.verbose == True:
+        if self.config:
             self.log("Starting the jabber bot.")
             
         self.connect()
         self.loop()
         
+    def loop(self, timeout=1):
+        """Main event loop - stream and command handling"""
+        
+        while 1:
+            stream=self.get_stream()
+            if not stream:
+                break
+            act=stream.loop_iter(timeout)
+            if not act:
+                self.poll_commands()
+                self.idle()
+        
+    def poll_commands(self):
+        """Checks for new commands in the input queue and executes them"""
+        
+        try:
+            command = self.to_commands.get_nowait()
+            self.handle_command(command)
+        except Queue.Empty:
+            pass
+        
+    def handle_command(self, command):
+        """Excecutes commands from other components"""
+        
+        if isinstance(command, NotificationCommand):
+            jid = JID(node_or_jid=command.jid)
+            text = command.text
+            self.send_message(jid, text)
+        
+    def send_message(self, to, text, type=u"chat"):
+        message = Message(to_jid = to, body = text, stanza_type=type)
+        self.get_stream().send(message)
+    
     def handle_message(self, message):
         """Handles incoming messages"""
         
-        if self.config.verbose == True:
+        if self.config:
             self.log( "Received a message from %s." % (message.get_from_jid().as_utf8(),) )
             
         text = message.get_body()
@@ -66,8 +102,7 @@ class XMPPBot(Client, Thread):
         response = self.reply_help()
         
         if not response == u"":
-            message = Message(to_jid = sender, body = response, stanza_type=u"chat")
-            self.get_stream().send(message)
+            self.send_message(sender, response)
         
     def handle_presence(self):
         pass
@@ -98,13 +133,13 @@ class XMPPBot(Client, Thread):
     def authenticated(self):
         """Called when authentication succeedes"""
         
-        if self.config.verbose == True:
+        if self.config:
             self.log("Authenticated.")
             
     def authorized(self):
         """Called when authorization succeedes"""
         
-        if self.config.verbose == True:
+        if self.config:
             self.log("Authorized.")
         
         stream = self.get_stream()
@@ -121,41 +156,41 @@ class XMPPBot(Client, Thread):
     def connected(self):
         """Called when connections has been established"""
         
-        if self.config.verbose == True:
+        if self.config:
             self.log("Connected.")
             
     def disconnected(self):
         """Called when disconnection occurs"""
         
-        if self.config.verbose == True:
+        if self.config:
             self.log("Disconnected.")
             
     def roster_updated(self, item = None):
         """Called when roster gets updated"""
         
-        if self.config.verbose == True:
+        if self.config:
             self.log("Updating roster.")
             
  #   def session_started(self):
  #       """Called when session has been successfully started"""
  #       
- #       if self.config.verbose == True:
+ #       if self.config.verbose:
  #           self.log("Session started.")
             
     def stream_closed(self, stream):
         """Called when stream closes"""
         
-        if self.config.verbose == True:
+        if self.config.verbose:
             self.log("Stream closed.")
             
     def stream_created(self, stream):
         """Called when stream gets created"""
         
-        if self.config.verbose == True:
+        if self.config.verbose:
             self.log("Stream created.")
             
     def stream_error(self, error):
         """Called when stream error gets received"""
         
-        if self.config.verbose == True:
+        if self.config.verbose:
             self.log("Received a stream error.")
