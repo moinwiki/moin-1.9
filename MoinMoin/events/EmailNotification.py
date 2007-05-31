@@ -13,54 +13,21 @@ from MoinMoin import user
 from MoinMoin.Page import Page
 from MoinMoin.mail import sendmail
 from MoinMoin.events import *
+from MoinMoin.events.notification_common import page_changed_notification
 
 def sendNotification(request, page, comment, emails, email_lang, revisions, trivial):
     """ Send notification email for a single language.
 
     @param comment: editor's comment given when saving the page
     @param emails: list of email addresses
-    @param email_lang: language of emails
+    @param email_lang: language of email
     @param revisions: revisions of this page (newest first!)
     @param trivial: the change is marked as trivial
     @rtype: int
     @return: sendmail result
     """
     _ = request.getText
-    page._ = lambda s, formatted=True, r=request, l=email_lang: r.getText(s, formatted=formatted, lang=l)
-
-    if len(revisions) >= 2:
-        querystr = {'action': 'diff',
-                    'rev2': str(revisions[0]),
-                    'rev1': str(revisions[1])}
-    else:
-        querystr = {}
-    pagelink = request.getQualifiedURL(page.url(request, querystr, relative=False))
-
-    mailBody = _("Dear Wiki user,\n\n"
-        'You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.\n\n'
-        "The following page has been changed by %(editor)s:\n"
-        "%(pagelink)s\n\n", formatted=False) % {
-            'editor': page.uid_override or user.getUserIdentification(request),
-            'pagelink': pagelink,
-            'sitename': page.cfg.sitename or request.getBaseURL(),
-    }
-
-    if comment:
-        mailBody = mailBody + \
-            _("The comment on the change is:\n%(comment)s\n\n", formatted=False) % {'comment': comment}
-
-    # append a diff (or append full page text if there is no diff)
-    if len(revisions) < 2:
-        mailBody = mailBody + \
-            _("New page:\n", formatted=False) + \
-            page.get_raw_body()
-    else:
-        lines = wikiutil.pagediff(request, page.page_name, revisions[1],
-                                  page.page_name, revisions[0])
-        if lines:
-            mailBody = mailBody + "%s\n%s\n" % (("-" * 78), '\n'.join(lines))
-        else:
-            mailBody = mailBody + _("No differences found!\n", formatted=False)
+    mailBody = page_changed_notification(request, page, comment, email_lang, revisions, trivial)
 
     return sendmail.sendmail(request, emails,
         _('[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s', formatted=False) % {
@@ -82,6 +49,7 @@ def notifySubscribers(request, page, comment, trivial):
     """
     _ = request.getText
     subscribers = page.getSubscribers(request, return_users=1, trivial=trivial)
+    
     if subscribers:
         # get a list of old revisions, and append a diff
         revisions = page.getRevList()
