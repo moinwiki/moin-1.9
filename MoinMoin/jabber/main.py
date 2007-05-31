@@ -30,7 +30,7 @@ if __name__ == "__main__":
         raise SystemExit
     
     # TODO: actually accept options from the help string
-    
+
     commands_from_xmpp = Queue()
     commands_to_xmpp = Queue()
     
