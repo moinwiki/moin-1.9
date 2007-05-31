@@ -11,6 +11,7 @@
 
 from MoinMoin import wikiutil
 from MoinMoin.util import pysupport
+from MoinMoin.wikiutil import PluginAttributeError
 
 # A list of available event handlers
 event_handlers = None
@@ -68,7 +69,11 @@ def register_handlers(cfg):
     names = wikiutil.getPlugins("events", cfg)
 
     for name in names:
-        handler = wikiutil.importPlugin(cfg, "events", name, "handle")
+        try:
+            handler = wikiutil.importPlugin(cfg, "events", name, "handle")
+        except PluginAttributeError:
+            handler = None
+            pass
         
         if handler is not None:
             event_handlers.append(handler)
