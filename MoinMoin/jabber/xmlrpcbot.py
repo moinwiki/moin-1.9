@@ -29,6 +29,9 @@ class XMLRPCClient(Thread):
     the XMPP component"""
     
     def __init__(self, config, commands):
+        """
+        @param commands: an output command queue
+        """
         Thread.__init__(self)
         self.commands = commands
         
@@ -40,7 +43,10 @@ class XMLRPCServer(Thread, SimpleXMLRPCServer):
     
     It waits for notifications requests coming from wiki,
     creates command objects and puts them on a queue for
-    later processing by the XMPP component"""
+    later processing by the XMPP component
+    
+    @param commands: an input command queue
+    """
     
     def __init__(self, config, commands):
         Thread.__init__(self)
