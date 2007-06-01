@@ -46,7 +46,7 @@ class XMPPBot(Client, Thread):
     def run(self):
         """Start the bot - enter the event loop"""
         
-        if self.config:
+        if self.config.verbose:
             self.log("Starting the jabber bot.")
             
         self.connect()
@@ -88,7 +88,7 @@ class XMPPBot(Client, Thread):
     def handle_message(self, message):
         """Handles incoming messages"""
         
-        if self.config:
+        if self.config.verbose:
             self.log( "Received a message from %s." % (message.get_from_jid().as_utf8(),) )
             
         text = message.get_body()
@@ -133,13 +133,13 @@ class XMPPBot(Client, Thread):
     def authenticated(self):
         """Called when authentication succeedes"""
         
-        if self.config:
+        if self.config.verbose:
             self.log("Authenticated.")
             
     def authorized(self):
         """Called when authorization succeedes"""
         
-        if self.config:
+        if self.config.verbose:
             self.log("Authorized.")
         
         stream = self.get_stream()
@@ -156,19 +156,19 @@ class XMPPBot(Client, Thread):
     def connected(self):
         """Called when connections has been established"""
         
-        if self.config:
+        if self.config.verbose:
             self.log("Connected.")
             
     def disconnected(self):
         """Called when disconnection occurs"""
         
-        if self.config:
+        if self.config.verbose:
             self.log("Disconnected.")
             
     def roster_updated(self, item = None):
         """Called when roster gets updated"""
         
-        if self.config:
+        if self.config.verbose:
             self.log("Updating roster.")
             
  #   def session_started(self):
