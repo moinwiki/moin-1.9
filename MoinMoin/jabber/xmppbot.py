@@ -66,7 +66,6 @@ class Contact:
                 max_prio_show = res['show']
                 
         if max_prio_show == u'dnd':
-            print "DND!!!!"
             return True
         else:
             return False
@@ -158,7 +157,7 @@ class XMPPBot(Client, Thread):
         except Queue.Empty:
             return False
         
-    def handle_command(self, command):
+    def handle_command(self, command, ignore_dnd = False):
         """Excecutes commands from other components"""
         
         if isinstance(command, NotificationCommand):
@@ -169,7 +168,7 @@ class XMPPBot(Client, Thread):
             # Check if contact is DoNotDisturb. If so, queue the message for delayed delivery
             try:
                 contact = self.contacts[jid_text]
-                if contact.is_dnd():
+                if contact.is_dnd() and not ignore_dnd:
                     contact.messages.append(command)
                     return
             except KeyError:
@@ -225,16 +224,17 @@ class XMPPBot(Client, Thread):
                 contact = self.contacts[bare_jid]
                 
                 if self.config.verbose:
-                    self.log(contact + ", going OFFLINE.")
+                    self.log(str(contact) + ", going OFFLINE.")
                 
                 try:
-                    self.contacts.remove_resource(jid.resource)
-                    if len(contact.resources) == 0:
+                    if len(contact.resources) == 1:
                         # Send queued messages now, as we can't guarantee to be alive
                         # the next time this contact becomes available
-                        self.send_queued_messages(contact)
+                        self.send_queued_messages(contact, ignore_dnd = True)
                         del self.contacts[bare_jid]
                     else:
+                        contact.remove_resource(jid.resource)
+                        
                         # The highest-priority resource, which used to be DnD might
                         # have gone offline. If so, try to deliver messages now.
                         if not contact.is_dnd():
@@ -259,7 +259,7 @@ class XMPPBot(Client, Thread):
                 
                 # Unknown resource, add it to the list
                 else:
-                    contact.add_resource(resource, show, priority)
+                    contact.add_resource(jid.resource, show, priority)
 
                 # Either way check, if we can deliver queued messages now
                 if not contact.is_dnd():
@@ -276,10 +276,10 @@ class XMPPBot(Client, Thread):
         
         return True
     
-    def send_queued_messages(self, contact):
+    def send_queued_messages(self, contact, ignore_dnd = False):
         """Sends messages queued for the contact"""
         for command in contact.messages:
-            self.handle_command(command)
+            self.handle_command(command, ignore_dnd)
                     
     def reply_help(self):
         """Constructs a generic help message
