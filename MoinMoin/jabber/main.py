@@ -18,7 +18,7 @@ from xmppbot import XMPPBot
 from xmlrpcbot import XMLRPCServer, XMLRPCClient
 from Queue import Queue
 
-if __name__ == "__main__":
+def main():
     args = sys.argv
     
     if "--help" in args:
@@ -46,3 +46,5 @@ if __name__ == "__main__":
     except KeyboardInterrupt, i:
         print i
         sys.exit(0)
+        
+if __name__ == "__main__": main()
