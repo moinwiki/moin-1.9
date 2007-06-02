@@ -214,11 +214,11 @@ class XMPPBot(Client, Thread):
         p = Presence(stanza)
         show = p.get_show()
         priority = p.get_priority()
-        type = p.get_stanza_type()
+        presence_type = p.get_stanza_type()
         jid = p.get_from_jid()
         bare_jid = jid.bare().as_utf8()
         
-        if type == u"unavailable":
+        if presence_type == u"unavailable":
             # If we get presence, this contact should already be known
             if bare_jid in self.contacts:    
                 contact = self.contacts[bare_jid]
@@ -246,7 +246,7 @@ class XMPPBot(Client, Thread):
             else:
                 self.log("Unavailable presence from unknown contact? Weirdness.")
                 
-        elif type == u"available" or type is None:
+        elif presence_type == u"available" or presence_type is None:
             if bare_jid in self.contacts:    
                 contact = self.contacts[bare_jid]
                 
@@ -272,7 +272,7 @@ class XMPPBot(Client, Thread):
                     self.log(self.contacts[bare_jid])
         else:
             # TODO: subscriptions and errors
-            print type
+            print presence_type
         
         return True
     
@@ -312,11 +312,6 @@ class XMPPBot(Client, Thread):
         stream.set_presence_handler("unavailable", self.handle_presence)
         
         self.request_session()
-  #      self.request_roster()
-        
-        # Make the bot oficially available
-  #      p = Presence(from_jid = stream.me, stanza_type=u"available", show=u"chat", status=self.config.status)
-  #      stream.send(p)
             
     def connected(self):
         """Called when connections has been established"""
