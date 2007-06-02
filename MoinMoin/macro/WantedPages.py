@@ -26,7 +26,7 @@ def execute(macro, args):
     label = (_('Include system pages'), _('Exclude system pages'))[allpages]
     page = macro.formatter.page
     controlbar = macro.formatter.div(1, css_class="controlbar") + \
-                 page.link_to(request, label, querystr={'allpages': '%d' % allpages and '0' or '1'}) + \
+                 page.link_to(request, label, querystr={'allpages': '%s' % (allpages and '0' or '1')}) + \
                  macro.formatter.div(0)
 
     # Get page dict readable by current user
