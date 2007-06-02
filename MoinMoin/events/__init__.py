@@ -73,7 +73,6 @@ def register_handlers(cfg):
             handler = wikiutil.importPlugin(cfg, "events", name, "handle")
         except PluginAttributeError:
             handler = None
-            pass
         
         if handler is not None:
             event_handlers.append(handler)
