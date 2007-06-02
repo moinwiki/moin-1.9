@@ -40,7 +40,7 @@ class XMLRPCClient(Thread):
         """Starts the server / thread"""
         pass
 
-class XMLRPCServer(Thread, SimpleXMLRPCServer):
+class XMLRPCServer(Thread):
     """XMLRPC Server
     
     It waits for notifications requests coming from wiki,
@@ -54,13 +54,13 @@ class XMLRPCServer(Thread, SimpleXMLRPCServer):
         Thread.__init__(self)
         self.commands = commands
         self.verbose = config.verbose
-        SimpleXMLRPCServer.__init__(self, (config.xmlrpc_host, config.xmlrpc_port))
+        self.server = SimpleXMLRPCServer((config.xmlrpc_host, config.xmlrpc_port))
         
     def run(self):
         """Starts the server / thread"""
         
-        self.register_function(self.send_notification)
-        self.serve_forever()
+        self.server.register_function(self.send_notification)
+        self.server.serve_forever()
         
     def log(self, message):
         """Logs a message and its timestamp"""
