@@ -34,8 +34,10 @@ class XMLRPCClient(Thread):
         """
         Thread.__init__(self)
         self.commands = commands
+        self.config = config
         
     def run(self):
+        """Starts the server / thread"""
         pass
 
 class XMLRPCServer(Thread, SimpleXMLRPCServer):
@@ -50,9 +52,9 @@ class XMLRPCServer(Thread, SimpleXMLRPCServer):
     
     def __init__(self, config, commands):
         Thread.__init__(self)
-        SimpleXMLRPCServer.__init__(self, (config.xmlrpc_host, config.xmlrpc_port) )
         self.commands = commands
         self.verbose = config.verbose
+        SimpleXMLRPCServer.__init__(self, (config.xmlrpc_host, config.xmlrpc_port))
         
     def run(self):
         """Starts the server / thread"""

@@ -18,13 +18,12 @@ from pyxmpp.client import Client
 from pyxmpp.jid import JID
 from pyxmpp.streamtls import TLSSettings
 from pyxmpp.message import Message
-from pyxmpp.presence import Presence
 
 from xmlrpcbot import NotificationCommand
 
 class Contact:
     """Abstraction of a roster item / contact
-    
+ 
     This class handles some logic related to keeping track of
     contact availability, status, etc."""
     
@@ -40,9 +39,12 @@ class Contact:
         self.messages = []
         
     def add_resource(self, resource, show, priority):
-        self.resources.append( {'resource': resource, 'show': show, 'priority': priority} )
+        """Adds information about a connected resource"""
+        res = {'resource': resource, 'show': show, 'priority': priority}
+        self.resources.append(res)
     
     def remove_resource(self, resource):
+        """Removes information about a connected resource"""
         for i in xrange(len(self.resources)):
             if self.resources[i]['resource'] == resource:
                 del self.resources[i]
@@ -60,7 +62,7 @@ class Contact:
         max_prio_show = self.resources[0]['show']
         
         for res in self.resources:
-            # TODO: check RFC for behaviour when 2 resources have identical priority
+            # TODO: check RFC for behaviour of 2 resources with the same priority
             if res['priority'] > max_prio:
                 max_prio = res['priority']
                 max_prio_show = res['show']
@@ -87,13 +89,14 @@ class Contact:
         """Checks if contact uses a given resource"""
     
         for res in self.resources:
-            if res['resource'] == resource: return True
+            if res['resource'] == resource: 
+                return True
         else:
             return False        
         
     def __str__(self):
         retval = "%s (%s) has %d queued messages"
-        resources = ", ".join(r['resource'] + " is " + r['show'] for r in self.resources)
+        resources = ", ".join([r['resource'] + " is " + r['show'] for r in self.resources])
         return retval % (self.jid.as_utf8(), resources, len(self.messages))
 
 
@@ -114,13 +117,13 @@ class XMPPBot(Client, Thread):
         jid = u"%s@%s/%s" % (config.xmpp_node, config.xmpp_server, config.xmpp_resource)
         
         self.config = config
-        self.jid = JID(node_or_jid = jid, domain = config.xmpp_server, resource = config.xmpp_resource)
+        self.jid = JID(node_or_jid=jid, domain=config.xmpp_server, resource=config.xmpp_resource)
         self.tlsconfig = TLSSettings(require = True, verify_peer = False)
         
         # A dictionary of contact objects, ordered by bare JID
         self.contacts = { }
         
-        Client.__init__(self, self.jid, self.config.xmpp_password, self.config.xmpp_server, tls_settings = self.tlsconfig)
+        Client.__init__(self, self.jid, config.xmpp_password, config.xmpp_server, tls_settings = self.tlsconfig)
             
     def run(self):
         """Start the bot - enter the event loop"""
@@ -165,7 +168,8 @@ class XMPPBot(Client, Thread):
             jid_text = jid.bare().as_utf8()
             text = command.text
             
-            # Check if contact is DoNotDisturb. If so, queue the message for delayed delivery
+            # Check if contact is DoNotDisturb. 
+            # If so, queue the message for delayed delivery.
             try:
                 contact = self.contacts[jid_text]
                 if contact.is_dnd() and not ignore_dnd:
@@ -176,21 +180,22 @@ class XMPPBot(Client, Thread):
             
             self.send_message(jid, text)
         
-    def send_message(self, to, text, type=u"chat"):
+    def send_message(self, jid, text, msg_type=u"chat"):
         """Sends a message
         
-        @param to: JID to send the message to
+        @param jid: JID to send the message to
         @param text: message's body
         @param type: message type, as defined in RFC"""
         
-        message = Message(to_jid = to, body = text, stanza_type=type)
+        message = Message(to_jid = jid, body = text, stanza_type=msg_type)
         self.get_stream().send(message)
     
     def handle_message(self, message):
         """Handles incoming messages"""
         
         if self.config.verbose:
-            self.log( "Received a message from %s." % (message.get_from_jid().as_utf8(),) )
+            msg = "Message from %s." % (message.get_from_jid().as_utf8(),)
+            self.log(msg)
             
         text = message.get_body()
         sender = message.get_from_jid()
@@ -205,75 +210,80 @@ class XMPPBot(Client, Thread):
         if not response == u"":
             self.send_message(sender, response)
         
-    def handle_presence(self, stanza):
-        """Handles <presence /> stanzas"""
+    def handle_unavailable_presence(self, stanza):
+        """Handles unavailable presence stanzas"""
         
         if self.config.verbose:
-            self.log("Handling presence.")
+            self.log("Handling unavailable presence.")
         
-        p = Presence(stanza)
-        show = p.get_show()
-        priority = p.get_priority()
-        presence_type = p.get_stanza_type()
-        jid = p.get_from_jid()
+        jid = stanza.get_from_jid()
         bare_jid = jid.bare().as_utf8()
         
-        if presence_type == u"unavailable":
-            # If we get presence, this contact should already be known
-            if bare_jid in self.contacts:    
-                contact = self.contacts[bare_jid]
-                
-                if self.config.verbose:
-                    self.log(str(contact) + ", going OFFLINE.")
-                
-                try:
-                    if len(contact.resources) == 1:
-                        # Send queued messages now, as we can't guarantee to be alive
-                        # the next time this contact becomes available
-                        self.send_queued_messages(contact, ignore_dnd = True)
-                        del self.contacts[bare_jid]
-                    else:
-                        contact.remove_resource(jid.resource)
-                        
-                        # The highest-priority resource, which used to be DnD might
-                        # have gone offline. If so, try to deliver messages now.
-                        if not contact.is_dnd():
-                            self.send_queued_messages(contact)
-                        
-                except ValueError:
-                    self.log("Weirdness. Unknown contact (resource) going offline...")
-                
-            else:
-                self.log("Unavailable presence from unknown contact? Weirdness.")
-                
-        elif presence_type == u"available" or presence_type is None:
-            if bare_jid in self.contacts:    
-                contact = self.contacts[bare_jid]
-                
-                if self.config.verbose:
-                    self.log(contact)                
-                    
-                # The resource is already known, so update it
-                if contact.uses_resource(bare_jid):
-                    contact.set_show(bare_jid, show)
-                
-                # Unknown resource, add it to the list
+        # If we get presence, this contact should already be known
+        if bare_jid in self.contacts:    
+            contact = self.contacts[bare_jid]
+            
+            if self.config.verbose:
+                self.log(str(contact) + ", going OFFLINE.")
+            
+            try:
+                # Send queued messages now, as we can't guarantee to be 
+                # alive the next time this contact becomes available.
+                if len(contact.resources) == 1:    
+                    self.send_queued_messages(contact, ignore_dnd=True)
+                    del self.contacts[bare_jid]
                 else:
-                    contact.add_resource(jid.resource, show, priority)
-
-                # Either way check, if we can deliver queued messages now
-                if not contact.is_dnd():
-                    self.send_queued_messages(contact)
+                    contact.remove_resource(jid.resource)
                     
-            else:
-                self.contacts[bare_jid] = Contact(jid, jid.resource, priority, show)
-                
-                if self.config.verbose:
-                    self.log(self.contacts[bare_jid])
+                    # The highest-priority resource, which used to be DnD might
+                    # have gone offline. If so, try to deliver messages now.
+                    if not contact.is_dnd():
+                        self.send_queued_messages(contact)
+                    
+            except ValueError:
+                self.log("Unknown contact (resource) going offline...")
+            
         else:
-            # TODO: subscriptions and errors
-            print presence_type
+            self.log("Unavailable presence from unknown contact.")
+                
+        # Confirm that we've handled this stanza
+        return True
+    
+    def handle_available_presence(self, presence):
+        """Handles available presence stanzas"""
+        if self.config.verbose:
+            self.log("Handling available presence.")
         
+        show = presence.get_show()
+        priority = presence.get_priority()
+        jid = presence.get_from_jid()
+        bare_jid = jid.bare().as_utf8()
+               
+        if bare_jid in self.contacts:    
+            contact = self.contacts[bare_jid]
+            
+            if self.config.verbose:
+                self.log(contact)                
+                
+            # The resource is already known, so update it
+            if contact.uses_resource(bare_jid):
+                contact.set_show(bare_jid, show)
+            
+            # Unknown resource, add it to the list
+            else:
+                contact.add_resource(jid.resource, show, priority)
+
+            # Either way check, if we can deliver queued messages now
+            if not contact.is_dnd():
+                self.send_queued_messages(contact)
+                
+        else:
+            self.contacts[bare_jid] = Contact(jid, jid.resource, priority, show)
+            
+            if self.config.verbose:
+                self.log(self.contacts[bare_jid])
+        
+        # Confirm that we've handled this stanza
         return True
     
     def send_queued_messages(self, contact, ignore_dnd = False):
@@ -308,8 +318,8 @@ class XMPPBot(Client, Thread):
         
         stream = self.get_stream()
         stream.set_message_handler("normal", self.handle_message)
-        stream.set_presence_handler("available", self.handle_presence)
-        stream.set_presence_handler("unavailable", self.handle_presence)
+        stream.set_presence_handler("available", self.handle_available_presence)
+        stream.set_presence_handler("unavailable", self.handle_unavailable_presence)
         
         self.request_session()
             
@@ -330,8 +340,10 @@ class XMPPBot(Client, Thread):
         
         if self.config.verbose:
             self.log("Updating roster.")
+            
+            contacts = [ str(c) for c in self.roster.get_items() ]
             print "Groups:", self.roster.get_groups()
-            print "Contacts:", " ".join( [str(c) for c in self.roster.get_items()] )
+            print "Contacts:", " ".join(contacts)
             
  #   def session_started(self):
  #       """Called when session has been successfully started"""
