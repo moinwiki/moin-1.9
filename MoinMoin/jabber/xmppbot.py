@@ -29,7 +29,7 @@ class Contact:
     
     def __init__(self, jid, resource, priority, show):
         self.jid = jid
-        self.resources = [{'resource': resource, 'show': show, 'priority': priority}]
+        self.resources = { resource: {'show': show, 'priority': priority} }
 
         # Queued messages, waiting for contact to change its "show"
         # status to something different than "dnd". The messages should
@@ -40,15 +40,13 @@ class Contact:
         
     def add_resource(self, resource, show, priority):
         """Adds information about a connected resource"""
-        res = {'resource': resource, 'show': show, 'priority': priority}
-        self.resources.append(res)
+        self.resources[resource] = {'show': show, 'priority': priority}
     
     def remove_resource(self, resource):
         """Removes information about a connected resource"""
-        for i in xrange(len(self.resources)):
-            if self.resources[i]['resource'] == resource:
-                del self.resources[i]
-                return
+        
+        if self.resources.has_key(resource):
+            del self.resources[resource]
         else:
             raise ValueError("No such resource!")
         
@@ -58,14 +56,15 @@ class Contact:
         The contact is DND if its resource with the highest priority is DND
         """
         
-        max_prio = self.resources[0]['priority']
-        max_prio_show = self.resources[0]['show']
+        # Priority can't be lower than -128
+        max_prio = -129
+        max_prio_show = u"dnd"
         
-        for res in self.resources:
+        for resource in self.resources.itervalues():
             # TODO: check RFC for behaviour of 2 resources with the same priority
-            if res['priority'] > max_prio:
-                max_prio = res['priority']
-                max_prio_show = res['show']
+            if resource['priority'] > max_prio:
+                max_prio = resource['priority']
+                max_prio_show = resource['show']
                 
         if max_prio_show == u'dnd':
             return True
@@ -79,25 +78,19 @@ class Contact:
         @param show: new value of the show property
         @raise ValueError: no resource with given name has been found
         """
-        for res in self.resources:
-            if res['resource'] == resource:
-                res['show'] = show
+        if self.resources.has_key(resource):
+            self.resources[resource]['show'] = show
         else:
             raise ValueError("There's no such resource")
     
     def uses_resource(self, resource):
         """Checks if contact uses a given resource"""
-    
-        for res in self.resources:
-            if res['resource'] == resource: 
-                return True
-        else:
-            return False        
+        return self.resources.has_key(resource)
         
     def __str__(self):
         retval = "%s (%s) has %d queued messages"
-        resources = ", ".join([r['resource'] + " is " + r['show'] for r in self.resources])
-        return retval % (self.jid.as_utf8(), resources, len(self.messages))
+        res = ", ".join([name + " is " + res['show'] for name, res in self.resources.items()])
+        return retval % (self.jid.as_utf8(), res, len(self.messages))
 
 
 class XMPPBot(Client, Thread):
@@ -260,18 +253,18 @@ class XMPPBot(Client, Thread):
         bare_jid = jid.bare().as_utf8()
                
         if bare_jid in self.contacts:    
-            contact = self.contacts[bare_jid]
-            
-            if self.config.verbose:
-                self.log(contact)                
+            contact = self.contacts[bare_jid]              
                 
             # The resource is already known, so update it
-            if contact.uses_resource(bare_jid):
-                contact.set_show(bare_jid, show)
+            if contact.uses_resource(jid.resource):
+                contact.set_show(jid.resource, show)
             
             # Unknown resource, add it to the list
             else:
                 contact.add_resource(jid.resource, show, priority)
+
+            if self.config.verbose:
+                self.log(contact)  
 
             # Either way check, if we can deliver queued messages now
             if not contact.is_dnd():
