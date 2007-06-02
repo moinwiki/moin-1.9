@@ -621,6 +621,9 @@ class UserSettings:
 
         if self.cfg.mail_enabled:
             buttons.append(("account_sendmail", _('Mail me my account data')))
+            
+        if self.cfg.jabber_enabled:
+            buttons.append(("account_sendjabber", _('Send me my account data with Jabber')))
 
         if create_only:
             buttons = [("create_only", _('Create Profile'))]
@@ -731,6 +734,7 @@ def do_user_browser(request):
         #Column('id', label=('ID'), align='right'),
         Column('name', label=('Username')),
         Column('email', label=('Email')),
+        Column('jabber', label=('Jabber')),
         Column('action', label=_('Action')),
     ]
 
@@ -750,12 +754,21 @@ def do_user_browser(request):
             (request.formatter.url(1, 'mailto:' + account.email, css='mailto', do_escape=0) +
              request.formatter.text(account.email) +
              request.formatter.url(0)),
+            (request.formatter.url(1, 'xmpp:' + account.jid, css='mailto', do_escape=0) +
+             request.formatter.text(account.jid) +
+             request.formatter.url(0)),
             request.page.link_to(request, text=_('Mail me my account data'),
                                  querystr={"action":"userform",
                                            "email": account.email,
                                            "account_sendmail": "1",
                                            "sysadm": "users", },
-                                 rel='nofollow')
+                                 rel='nofollow'),
+            request.page.link_to(request, text=_('Send me my accound data with Jabber'),
+                                 querystr={"action":"userform",
+                                           "jid": account.jid,
+                                           "account_sendjabber": "1",
+                                           "sysadm": "users", },
+                                  rel='nofollow'),
         ))
 
     if data:

@@ -1,0 +1,81 @@
+# -*- coding: iso-8859-1 -*-
+"""
+    MoinMoin - jabber notification plugin for event system
+
+    This code sends notifications using a separate daemon.
+
+@copyright: 2007 by Karol Nowak <grywacz@gmail.com>
+@license: GNU GPL, see COPYING for details.
+"""
+
+import xmlrpclib
+from MoinMoin.events import PageEvent, PageChangedEvent
+from MoinMoin.events.notification_common import page_changed_notification
+
+# XML RPC Server object used to communicate with notification bot
+server = None
+
+def handle(event):
+    global server
+
+    request = event.request
+    trivial = event.trivial
+    comment = event.comment
+    page = event.page
+    cfg = request.cfg
+    
+    _ = request.getText
+    
+    # Check for desired event type and if notification bot is configured
+    if not isinstance(event, PageEvent) or cfg.jabber_enabled is None:
+        return
+    
+    # Create an XML RPC server object only if it doesn't exist
+    if server is None:
+        server = xmlrpclib.Server("http://" + cfg.bot_host)
+    
+    subscribers = page.getSubscribers(request, return_users=1, trivial=event.trivial)
+    
+    if subscribers:
+        # get a list of old revisions, and append a diff
+        revisions = page.getRevList()
+        
+        # send notifications to all subscribers
+        results = [_('Status of sending notifications:')]
+        for lang in subscribers:
+            jids = [u.jid for u in subscribers[lang]]
+            names = [u.name for u in subscribers[lang]]
+            jabberok, status = sendNotification(request, page, comment, jids, lang, revisions, trivial)
+            recipients = ", ".join(names)
+            results.append(_('[%(lang)s] %(recipients)s: %(status)s') % {
+                'lang': lang, 'recipients': recipients, 'status': status})
+
+        # Return notifications sent results. Ignore trivial - we don't have
+        # to lie. If notification was sent, just tell about it.
+        return '<p>\n%s\n</p> ' % '<br>'.join(results)
+
+    # No notifications sent, no message.
+    return ''
+
+
+def sendNotification(request, page, comment, jids, message_lang, revisions, trivial):
+    """ Send notifications for a single language.
+
+    @param comment: editor's comment given when saving the page
+    @param jids: list of Jabber IDs
+    @param message_lang: language of notification
+    @param revisions: revisions of this page (newest first!)
+    @param trivial: the change is marked as trivial
+    """
+    _ = request.getText
+    msg = page_changed_notification(request, page, comment, message_lang, revisions, trivial)
+    
+    for jid in jids:
+        # FIXME: for now, stop sending notifications on first error
+        try:
+            server.send_notification(jid, msg)
+        except Exception, desc:
+            print "XML RPC error:", desc
+            return (0, _("Notifications not sent"))
+        
+    return (1, _("Notifications sent OK"))

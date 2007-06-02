@@ -733,6 +733,11 @@ class User:
         if pagename not in self.subscribed_pages:
             self.subscribed_pages.append(pagename)
             self.save()
+            
+            # Send a notification
+            from MoinMoin.events import SubscribedToPageEvent, send_event
+            e = SubscribedToPageEvent(self._request, pagename, self.name)
+            send_event(e)
             return True
 
         return False

@@ -224,7 +224,8 @@ class Page(object):
                 self.__body = text
             finally:
                 f.close()
-        return self.__body    
+        return self.__body
+      
     def set_body(self, newbody):
         self.__body = newbody
         self.__meta = None
