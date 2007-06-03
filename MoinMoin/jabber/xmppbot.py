@@ -112,12 +112,12 @@ class XMPPBot(Client, Thread):
         
         self.config = config
         self.jid = JID(node_or_jid=jid, domain=config.xmpp_server, resource=config.xmpp_resource)
-        self.tlsconfig = TLSSettings(require = True, verify_peer = False)
+        self.tlsconfig = TLSSettings(require = True, verify_peer=False)
         
         # A dictionary of contact objects, ordered by bare JID
         self.contacts = { }
         
-        Client.__init__(self, self.jid, config.xmpp_password, config.xmpp_server, tls_settings = self.tlsconfig)
+        Client.__init__(self, self.jid, config.xmpp_password, config.xmpp_server, tls_settings=self.tlsconfig)
             
     def run(self):
         """Start the bot - enter the event loop"""
@@ -154,7 +154,7 @@ class XMPPBot(Client, Thread):
         except Queue.Empty:
             return False
         
-    def handle_command(self, command, ignore_dnd = False):
+    def handle_command(self, command, ignore_dnd=False):
         """Excecutes commands from other components"""
         
         if isinstance(command, NotificationCommand):
@@ -181,7 +181,7 @@ class XMPPBot(Client, Thread):
         @param text: message's body
         @param type: message type, as defined in RFC"""
         
-        message = Message(to_jid = jid, body = text, stanza_type=msg_type)
+        message = Message(to_jid=jid, body=text, stanza_type=msg_type)
         self.get_stream().send(message)
     
     def handle_message(self, message):
@@ -280,7 +280,7 @@ class XMPPBot(Client, Thread):
         # Confirm that we've handled this stanza
         return True
     
-    def send_queued_messages(self, contact, ignore_dnd = False):
+    def send_queued_messages(self, contact, ignore_dnd=False):
         """Sends messages queued for the contact"""
         for command in contact.messages:
             self.handle_command(command, ignore_dnd)
@@ -329,7 +329,7 @@ class XMPPBot(Client, Thread):
         if self.config.verbose:
             self.log("Disconnected.")
             
-    def roster_updated(self, item = None):
+    def roster_updated(self, item=None):
         """Called when roster gets updated"""
         
         if self.config.verbose:
