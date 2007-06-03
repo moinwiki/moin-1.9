@@ -43,7 +43,7 @@ def getUserList(request):
 
 def get_by_filter(request, filter):
     """ Searches for an user with a given filter """
-    for uind in getUserList(request):
+    for uid in getUserList(request):
         theuser = User(request, uid)
         if filter(theuser):
             return theuser

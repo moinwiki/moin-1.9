@@ -462,6 +462,7 @@ reStructuredText Quick Reference
 
     user_autocreate = False # do we auto-create user profiles
     user_email_unique = True # do we check whether a user's email is unique?
+    user_jid_unique = True # do we check whether a user's email is unique?
 
     # a regex of HTTP_USER_AGENTS that should be excluded from logging
     # and receive a FORBIDDEN for anything except viewing a page

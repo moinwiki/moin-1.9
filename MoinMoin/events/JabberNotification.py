@@ -9,7 +9,7 @@
 """
 
 import xmlrpclib
-from MoinMoin.events import PageEvent, PageChangedEvent
+from MoinMoin.events import PageEvent, PageChangedEvent, JabberIDSetEvent
 from MoinMoin.events.notification_common import page_changed_notification
 
 
@@ -20,6 +20,27 @@ server = None
 def handle(event):
     global server
 
+    cfg = event.request.cfg
+
+    # Check for desired event type and if notification bot is configured
+    if cfg.jabber_enabled is None:
+        return
+    
+    # Create an XML RPC server object only if it doesn't exist
+    if server is None:
+        server = xmlrpclib.Server("http://" + cfg.bot_host)
+    
+    if isinstance(event, PageEvent):
+        handle_page_changed(event)
+    elif isinstance(event, JabberIDSetEvent):
+        handle_jid_changed(event)
+
+def handle_jid_changed(event):
+    print "JID changed"
+
+def handle_page_changed(event):
+    """ Handles events related to page changes """
+    
     request = event.request
     trivial = event.trivial
     comment = event.comment
@@ -28,16 +49,7 @@ def handle(event):
     
     _ = request.getText
     
-    # Check for desired event type and if notification bot is configured
-    if not isinstance(event, PageEvent) or cfg.jabber_enabled is None:
-        return
-    
-    # Create an XML RPC server object only if it doesn't exist
-    if server is None:
-        server = xmlrpclib.Server("http://" + cfg.bot_host)
-    
     subscribers = page.getSubscribers(request, return_users=1, trivial=event.trivial)
-    
     if subscribers:
         # get a list of old revisions, and append a diff
         revisions = page.getRevList()
@@ -47,7 +59,7 @@ def handle(event):
         for lang in subscribers:
             jids = [u.jid for u in subscribers[lang]]
             names = [u.name for u in subscribers[lang]]
-            jabberok, status = sendNotification(request, page, comment, jids, lang, revisions, trivial)
+            jabberok, status = send_notification(request, page, comment, jids, lang, revisions, trivial)
             recipients = ", ".join(names)
             results.append(_('[%(lang)s] %(recipients)s: %(status)s') % {
                 'lang': lang, 'recipients': recipients, 'status': status})
@@ -59,8 +71,7 @@ def handle(event):
     # No notifications sent, no message.
     return ''
 
-
-def sendNotification(request, page, comment, jids, message_lang, revisions, trivial):
+def send_notification(request, page, comment, jids, message_lang, revisions, trivial):
     """ Send notifications for a single language.
 
     @param comment: editor's comment given when saving the page
