@@ -15,6 +15,7 @@ from MoinMoin.mail import sendmail
 from MoinMoin.events import *
 from MoinMoin.events.notification_common import page_changed_notification
 
+
 def sendNotification(request, page, comment, emails, email_lang, revisions, trivial):
     """ Send notification email for a single language.
 
@@ -70,6 +71,7 @@ def notifySubscribers(request, page, comment, trivial):
 
     # No mail sent, no message.
     return ''
+
 
 def handle(event):
     if not isinstance(event, PageChangedEvent):

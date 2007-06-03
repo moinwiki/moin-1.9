@@ -12,6 +12,7 @@
 from MoinMoin import user, wikiutil
 from MoinMoin.Page import Page
 
+
 def page_changed_notification(request, page, comment, lang, revisions, trivial):
     """ Prepare a notification text for a single language
 

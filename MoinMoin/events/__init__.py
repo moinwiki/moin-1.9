@@ -13,20 +13,24 @@ from MoinMoin import wikiutil
 from MoinMoin.util import pysupport
 from MoinMoin.wikiutil import PluginAttributeError
 
+
 # A list of available event handlers
 event_handlers = None
 
 # Create a list of extension actions from the package directory
 modules = pysupport.getPackageModules(__file__)
 
+
 class Observable:
     """A class handling information common to all events."""
     
     def __init__(self, request):
         self.request = request
+
         
 class PageEvent(Observable):
     """An event related to a page change"""
+
         
 class PageChangedEvent(PageEvent):
     def __init__(self, request, page, comment, trivial):
@@ -34,6 +38,7 @@ class PageChangedEvent(PageEvent):
         self.page = page
         self.comment = comment
         self.trivial = trivial
+
         
 class PageRenamedEvent(PageEvent):
     pass
@@ -42,6 +47,7 @@ class PageDeletedEvent(PageEvent):
 class FileAttachedEvent(PageEvent):
     pass
 
+
 class PageRevertedEvent(PageEvent):
     def __init__(self, request, pagename, previous, current):
         Observable.__init__(self, request)
@@ -49,11 +55,13 @@ class PageRevertedEvent(PageEvent):
         self.previous = previous
         self.current = current    
 
+
 class SubscribedToPageEvent(PageEvent):
     def __init__(self, request, pagename, username):
         Observable.__init__(self, request)    
         self.pagename = pagename
         self.username = username
+
 
 def register_handlers(cfg):
     """Create a list of available event handlers.
@@ -76,6 +84,7 @@ def register_handlers(cfg):
         
         if handler is not None:
             event_handlers.append(handler)
+
 
 def send_event(event):
     """Function called from outside to process an event"""
