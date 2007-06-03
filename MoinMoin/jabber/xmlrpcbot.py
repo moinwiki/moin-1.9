@@ -17,7 +17,6 @@ from SimpleXMLRPCServer import SimpleXMLRPCServer
 
 class NotificationCommand:
     """Class representing a notification request"""
-    
     def __init__(self, jid, text):
         self.jid = jid
         self.text = text
