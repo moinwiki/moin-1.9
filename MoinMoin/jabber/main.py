@@ -18,6 +18,7 @@ from xmppbot import XMPPBot
 from xmlrpcbot import XMLRPCServer, XMLRPCClient
 from Queue import Queue
 
+
 def main():
     args = sys.argv
     
@@ -46,5 +47,6 @@ def main():
     except KeyboardInterrupt, i:
         print i
         sys.exit(0)
+
         
 if __name__ == "__main__": main()

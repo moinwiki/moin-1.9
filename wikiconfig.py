@@ -43,3 +43,9 @@ class Config(DefaultConfig):
     
     # Notification  -----------------------------------------------------
     bot_host = u"localhost:8000"
+    
+    # A secret shared with notification bot, must be the same in both
+    # configs for communication to work
+    #
+    # *************** CHANGE THIS! *************** 
+    secret = u"8yFAS(E-,.c-93adj'uff;3AW#(UDJ,.df3OA($HG"

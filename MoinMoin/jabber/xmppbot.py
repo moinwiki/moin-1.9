@@ -21,6 +21,7 @@ from pyxmpp.message import Message
 
 from xmlrpcbot import NotificationCommand
 
+
 class Contact:
     """Abstraction of a roster item / contact
  
@@ -217,7 +218,7 @@ class XMPPBot(Client, Thread):
             contact = self.contacts[bare_jid]
             
             if self.config.verbose:
-                self.log(str(contact) + ", going OFFLINE.")
+                self.log("%s, going OFFLINE." % contact)
             
             try:
                 # Send queued messages now, as we can't guarantee to be 
