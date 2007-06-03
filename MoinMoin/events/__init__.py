@@ -21,20 +21,19 @@ event_handlers = None
 modules = pysupport.getPackageModules(__file__)
 
 
-class Observable:
+class Event:
     """A class handling information common to all events."""
-    
     def __init__(self, request):
         self.request = request
 
         
-class PageEvent(Observable):
+class PageEvent(Event):
     """An event related to a page change"""
 
         
 class PageChangedEvent(PageEvent):
     def __init__(self, request, page, comment, trivial):
-        Observable.__init__(self, request)
+        Event.__init__(self, request)
         self.page = page
         self.comment = comment
         self.trivial = trivial
@@ -50,7 +49,7 @@ class FileAttachedEvent(PageEvent):
 
 class PageRevertedEvent(PageEvent):
     def __init__(self, request, pagename, previous, current):
-        Observable.__init__(self, request)
+        Event.__init__(self, request)
         self.pagename = pagename
         self.previous = previous
         self.current = current    
@@ -58,10 +57,17 @@ class PageRevertedEvent(PageEvent):
 
 class SubscribedToPageEvent(PageEvent):
     def __init__(self, request, pagename, username):
-        Observable.__init__(self, request)    
+        Event.__init__(self, request)    
         self.pagename = pagename
         self.username = username
 
+
+class JabberIDSetEvent(Event):
+    """ Sent when user changes her Jabber ID """
+    def __init__(self, request, jid):
+        Event.__init__(self, request)
+        self.jid = jid
+        
 
 def register_handlers(cfg):
     """Create a list of available event handlers.

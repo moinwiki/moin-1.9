@@ -9,6 +9,7 @@
 
 import time
 from MoinMoin import user, util, wikiutil
+from MoinMoin.events import send_event, JabberIDSetEvent
 from MoinMoin.widget import html
 
 _debug = 0
@@ -226,13 +227,28 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
 
             # Email should be unique - see also MoinMoin/script/accounts/moin_usercheck.py
             if theuser.email and self.request.cfg.user_email_unique:
-                users = user.getUserList(self.request)
-                for uid in users:
-                    if uid == theuser.id:
-                        continue
-                    thisuser = user.User(self.request, uid, auth_method='userform:283')
-                    if thisuser.email == theuser.email:
-                        return _("This email already belongs to somebody else.")
+                other = user.get_by_email_address(self.request, theuser.email)
+                if other is not None and other.id != theuser.id:
+                    return _("This email already belongs to somebody else.")
+                    
+        if not 'jid' in theuser.auth_attribs:
+            # try to get the jid
+            jid = wikiutil.clean_input(form.get('jid', [theuser.jid])[0]).strip()
+            
+            jid_changed = False
+            if theuser.jid != jid:
+                jid_changed = True
+                
+            theuser.jid = jid
+            
+            if theuser.jid and self.request.cfg.user_jid_unique:
+                other = user.get_by_jabber_id(self.request, theuser.jid)
+                if other is not None and other.id != theuser.id:
+                    return _("This jabber id already belongs to somebody else.")
+            
+            if jid_changed:
+                event = JabberIDSetEvent(self.request, theuser.jid)
+                send_event(event)
 
         if not 'aliasname' in theuser.auth_attribs:
             # aliasname
@@ -284,7 +300,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
         already_handled = ['name', 'password', 'password2', 'email',
                            'aliasname', 'edit_rows', 'editor_default',
                            'editor_ui', 'tz_offset', 'datetime_fmt',
-                           'theme_name', 'language']
+                           'theme_name', 'language', 'jid']
         for field in self.cfg.user_form_fields:
             key = field[0]
             if ((key in self.cfg.user_form_disable)
