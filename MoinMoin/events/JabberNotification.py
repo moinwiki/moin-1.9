@@ -12,8 +12,10 @@ import xmlrpclib
 from MoinMoin.events import PageEvent, PageChangedEvent
 from MoinMoin.events.notification_common import page_changed_notification
 
+
 # XML RPC Server object used to communicate with notification bot
 server = None
+
 
 def handle(event):
     global server
