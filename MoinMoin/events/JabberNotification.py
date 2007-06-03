@@ -75,9 +75,9 @@ def sendNotification(request, page, comment, jids, message_lang, revisions, triv
     for jid in jids:
         # FIXME: for now, stop sending notifications on first error
         try:
-            server.send_notification(jid, msg)
-        except Exception, desc:
-            print "XML RPC error:", desc
+            server.send_notification(request.cfg.secret, jid, msg)
+        except xmlrpclib.Error, err:
+            print _("XML RPC error: "), str(err)
             return (0, _("Notifications not sent"))
         
     return (1, _("Notifications sent OK"))
