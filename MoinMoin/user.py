@@ -41,12 +41,22 @@ def getUserList(request):
     userlist = [f for f in files if user_re.match(f)]
     return userlist
 
-def get_by_email_address(request, email_address):
-    """ Searches for a user with a particular e-mail address and returns it. """
-    for uid in getUserList(request):
+def get_by_filter(request, filter):
+    """ Searches for an user with a given filter """
+    for uind in getUserList(request):
         theuser = User(request, uid)
-        if theuser.valid and theuser.email.lower() == email_address.lower():
+        if filter(theuser):
             return theuser
+
+def get_by_email_address(request, email_address):
+    """ Searches for an user with a particular e-mail address and returns it. """
+    filter = lambda user: user.valid and user.email.lower() == email_address.lower()
+    return get_by_filter(request, filter)
+        
+def get_by_jabber_id(request, jabber_id):
+    """ Searches for an user with a perticular jabber id and returns it. """
+    filter = lambda user: user.valid and user.jid.lower() == jabber_id.lower()
+    return get_by_filter(request, filter)
 
 def _getUserIdByKey(request, key, search):
     """ Get the user ID for a specified key/value pair.
