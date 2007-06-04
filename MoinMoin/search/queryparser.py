@@ -387,10 +387,7 @@ class TitleSearch(BaseExpression):
         """ Page filter function for single title search """
         def filter(name):
             match = self.search_re.search(name)
-            if ((self.negated and match) or
-                (not self.negated and not match)):
-                return False
-            return True
+            return bool(self.negated) ^ bool(match)
         return filter
 
     def search(self, page):
