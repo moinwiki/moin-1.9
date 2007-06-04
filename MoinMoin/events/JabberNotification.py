@@ -23,7 +23,7 @@ def handle(event):
     cfg = event.request.cfg
 
     # Check for desired event type and if notification bot is configured
-    if cfg.jabber_enabled is None:
+    if not cfg.jabber_enabled:
         return
     
     # Create an XML RPC server object only if it doesn't exist
@@ -89,6 +89,9 @@ def send_notification(request, page, comment, jids, message_lang, revisions, tri
             server.send_notification(request.cfg.secret, jid, msg)
         except xmlrpclib.Error, err:
             print _("XML RPC error: "), str(err)
+            return (0, _("Notifications not sent"))
+        except Exception, err:
+            print _("Low-level communication error: "), str(err)
             return (0, _("Notifications not sent"))
         
     return (1, _("Notifications sent OK"))
