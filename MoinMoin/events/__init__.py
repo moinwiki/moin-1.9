@@ -29,11 +29,13 @@ class Event:
         
 class PageEvent(Event):
     """An event related to a page change"""
+    def __init__(self, request):
+        Event.__init__(self, request)
 
         
 class PageChangedEvent(PageEvent):
     def __init__(self, request, page, comment, trivial):
-        Event.__init__(self, request)
+        PageEvent.__init__(self, request)
         self.page = page
         self.comment = comment
         self.trivial = trivial
@@ -49,7 +51,7 @@ class FileAttachedEvent(PageEvent):
 
 class PageRevertedEvent(PageEvent):
     def __init__(self, request, pagename, previous, current):
-        Event.__init__(self, request)
+        PageEvent.__init__(self, request)
         self.pagename = pagename
         self.previous = previous
         self.current = current    
@@ -57,7 +59,7 @@ class PageRevertedEvent(PageEvent):
 
 class SubscribedToPageEvent(PageEvent):
     def __init__(self, request, pagename, username):
-        Event.__init__(self, request)    
+        PageEvent.__init__(self, request)    
         self.pagename = pagename
         self.username = username
 
