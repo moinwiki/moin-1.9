@@ -15,7 +15,7 @@ from MoinMoin.wikiutil import PluginAttributeError
 
 
 # A list of available event handlers
-event_handlers = None
+_event_handlers = None
 
 # Create a list of extension actions from the package directory
 modules = pysupport.getPackageModules(__file__)
@@ -70,8 +70,17 @@ class JabberIDSetEvent(Event):
         Event.__init__(self, request)
         self.jid = jid
         
-
-def register_handlers(cfg):
+class JabberIDUnsetEvent(Event):
+    """ Sent when Jabber ID is no longer used
+    
+    Obviously this will be usually sent along with JabberIDSetEvent,
+    because we require user's jabber id to be unique by default.
+    """
+    def __init__(self, request, jid):
+        Event.__init__(self, request)
+        self.jid = jid
+        
+def _register_handlers(cfg):
     """Create a list of available event handlers.
     
     Each handler is a handle() function defined in an plugin,
@@ -79,9 +88,9 @@ def register_handlers(cfg):
     
     TODO: maybe make it less dumb? ;-)"""
     
-    global event_handlers
+    global _event_handlers
 
-    event_handlers = []
+    _event_handlers = []
     names = wikiutil.getPlugins("events", cfg)
 
     for name in names:
@@ -91,7 +100,7 @@ def register_handlers(cfg):
             handler = None
         
         if handler is not None:
-            event_handlers.append(handler)
+            _event_handlers.append(handler)
 
 
 def send_event(event):
@@ -101,11 +110,11 @@ def send_event(event):
     msg = []
     
     # Find all available event handlers
-    if event_handlers is None:
-        register_handlers(event.request.cfg)
+    if _event_handlers is None:
+        _register_handlers(event.request.cfg)
     
     # Try to handle the event with each available handler (for now)
-    for handle in event_handlers:
+    for handle in _event_handlers:
         retval = handle(event)
         if isinstance(retval, unicode):
             msg.append(retval)

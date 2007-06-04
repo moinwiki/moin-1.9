@@ -9,7 +9,7 @@
 """
 
 import xmlrpclib
-from MoinMoin.events import PageEvent, PageChangedEvent, JabberIDSetEvent
+from MoinMoin.events import *
 from MoinMoin.events.notification_common import page_changed_notification
 
 
@@ -33,10 +33,15 @@ def handle(event):
     if isinstance(event, PageEvent):
         handle_page_changed(event)
     elif isinstance(event, JabberIDSetEvent):
-        handle_jid_changed(event)
+        handle_jid_set(event)
+    elif isinstance(event, JabberIDUnsetEvent):
+        handle_jid_unset(event)
 
-def handle_jid_changed(event):
-    print "JID changed"
+def handle_jid_set(event):
+    pass
+
+def handle_jid_unset(event):
+    pass
 
 def handle_page_changed(event):
     """ Handles events related to page changes """
