@@ -9,6 +9,9 @@
 """
 
 import xmlrpclib
+
+from MoinMoin.user import User, getUserList
+
 from MoinMoin.events import *
 from MoinMoin.events.notification_common import page_changed_notification
 
@@ -32,13 +35,38 @@ def handle(event):
     
     if isinstance(event, PageEvent):
         return handle_page_changed(event)
-    elif isinstance(event, JabberIDSetEvent):
-        return handle_jid_set(event)
-    elif isinstance(event, JabberIDUnsetEvent):
-        return handle_jid_unset(event)
+    elif isinstance(event, JabberIDSetEvent) or isinstance(event, JabberIDUnsetEvent):
+        return handle_jid_changed(event)
+    
 
-def handle_jid_set(event):
-    pass
+def handle_jid_changed(event):
+    """ Handle events sent when user's JID changes """
+    
+    request = event.request
+    _ = request.getText
+    notification_list = []
+    
+    ids = getUserList(request)
+    for id in ids:
+        usr = User(request, id)
+        if usr.isSuperUser():
+            notification_list.append(usr)
+    
+    # FIXME: stops sending notifications on first error
+    try:
+        if isinstance(event, JabberIDSetEvent):
+            for jid in notification_list:
+                server.addJIDToRoster(request.cfg.secret, jid)
+        else:
+            for jid in notification_list:
+                server.removeJIDFromRoster(request.cfg.secret, jid)        
+                
+    except xmlrpclib.Error, err:
+        print _("XML RPC error: "), str(err)
+        return (0, _("Notifications not sent"))
+    except Exception, err:
+        print _("Low-level communication error: "), str(err)
+        return (0, _("Notifications not sent"))
 
 def handle_jid_unset(event):
     pass
@@ -89,7 +117,7 @@ def send_notification(request, page, comment, jids, message_lang, revisions, tri
     msg = page_changed_notification(request, page, comment, message_lang, revisions, trivial)
     
     for jid in jids:
-        # FIXME: for now, stop sending notifications on first error
+        # FIXME: stops sending notifications on first error
         try:
             server.send_notification(request.cfg.secret, jid, msg)
         except xmlrpclib.Error, err:
