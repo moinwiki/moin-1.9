@@ -31,11 +31,11 @@ def handle(event):
         server = xmlrpclib.Server("http://" + cfg.bot_host)
     
     if isinstance(event, PageEvent):
-        handle_page_changed(event)
+        return handle_page_changed(event)
     elif isinstance(event, JabberIDSetEvent):
-        handle_jid_set(event)
+        return handle_jid_set(event)
     elif isinstance(event, JabberIDUnsetEvent):
-        handle_jid_unset(event)
+        return handle_jid_unset(event)
 
 def handle_jid_set(event):
     pass
