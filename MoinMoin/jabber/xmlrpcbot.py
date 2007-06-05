@@ -14,22 +14,7 @@ import time, xmlrpclib
 from threading import Thread
 from SimpleXMLRPCServer import SimpleXMLRPCServer
 
-
-class NotificationCommand:
-    """Class representing a notification request"""
-    def __init__(self, jid, text):
-        self.jid = jid
-        self.text = text
-        
-class AddJIDToRosterCommand:
-    """Class representing a request to add a new jid to roster"""
-    def __init__(self, jid):
-        self.jid = jid
-        
-class RemoveJIDFromRosterCommand:
-    """Class representing a request to remove a jid from roster"""
-    def __init__(self, jid):
-        self.jid = jid
+from commands import *
 
 
 class XMLRPCClient(Thread):
