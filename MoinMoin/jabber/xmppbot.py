@@ -19,7 +19,7 @@ from pyxmpp.jid import JID
 from pyxmpp.streamtls import TLSSettings
 from pyxmpp.message import Message
 
-from xmlrpcbot import NotificationCommand
+from commands import *
 
 
 class Contact:
