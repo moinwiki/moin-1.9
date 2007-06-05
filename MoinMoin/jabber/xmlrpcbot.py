@@ -20,6 +20,16 @@ class NotificationCommand:
     def __init__(self, jid, text):
         self.jid = jid
         self.text = text
+        
+class AddJIDToRosterCommand:
+    """Class representing a request to add a new jid to roster"""
+    def __init__(self, jid):
+        self.jid = jid
+        
+class RemoveJIDFromRosterCommand:
+    """Class representing a request to remove a jid from roster"""
+    def __init__(self, jid):
+        self.jid = jid
 
 
 class XMLRPCClient(Thread):
@@ -62,7 +72,15 @@ class XMLRPCServer(Thread):
     def run(self):
         """Starts the server / thread"""
         
-        self.server.register_function(self.send_notification)
+        # Register methods having an "export" attribute as XML RPC functions and 
+        # decorate them with a check for a shared (wiki-bot) secret.
+        items = self.__class__.__dict__.items()
+        methods = [(name, func) for (name, func) in items if callable(func) 
+                   and "export" in func.__dict__]
+
+        for name, func in methods:
+            self.server.register_function(self.secret_check(func), name)
+        
         self.server.serve_forever()
         
     def log(self, message):
@@ -71,12 +89,38 @@ class XMLRPCServer(Thread):
         t = time.localtime( time.time() )
         print time.strftime("%H:%M:%S", t), message
 
-    def send_notification(self, secret, jid, text):
-        """Instructs the XMPP component to send a notification"""
+    def secret_check(self, function):
+        """Adds a check for a secret to a given function
         
-        if secret != self.secret:
-            raise xmlrpclib.Fault(1, "You are not allowed to use this bot!")
+        Using this one does not have to worry about checking for the secret
+        in every XML RPC function.
+        """
+        def protected_func(secret, *args):
+            if secret != self.secret:
+                raise xmlrpclib.Fault(1, "You are not allowed to use this bot!")
+            else:
+                return function(self, *args)
             
-        n = NotificationCommand(jid, text)
-        self.commands.put_nowait(n)
+        return protected_func
+    
+    
+    def send_notification(self, jid, text):
+        """Instructs the XMPP component to send a notification"""           
+        c = NotificationCommand(jid, text)
+        self.commands.put_nowait(c)
         return True
+    send_notification.export = True
+    
+    def addJIDToRoster(self, jid):
+        """Instructs the XMPP component to add a new JID to its roster"""  
+        c = AddJIDToRosterCommand(jid)
+        self.commands.put_nowait(c)
+        return True
+    addJIDToRoster.export = True
+    
+    def removeJIDFromRoster(self, jid):
+        """Instructs the XMPP component to remove a JID from its roster"""      
+        c = RemoveJIDFromRosterCommand(jid)
+        self.commands.put_nowait(c)
+        return True
+    removeJIDFromRoster.export = True
