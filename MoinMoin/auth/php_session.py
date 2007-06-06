@@ -49,6 +49,7 @@ class PHPSessionAuth(BaseAuth):
 
             return dec(username), dec(email), dec(name)
 
+        cookie = kw.get('cookie')
         if not cookie is None:
             for cookiename in cookie:
                 cookievalue = urllib.unquote(cookie[cookiename].value).decode('iso-8859-1')

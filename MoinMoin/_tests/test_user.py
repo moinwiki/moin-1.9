@@ -136,7 +136,36 @@ class TestLoginWithPassword(unittest.TestCase):
         theUser = user.User(self.request, name=name, password=password)
         self.assertEqual(theUser.enc_password, expected,
                          "User password was not replaced with new")
+        
+    def testSubscriptionSubscribedPage(self):
+        """ user: tests isSubscribedTo  """
+        pagename = u'HelpMiscellaneous'
+        name = u'__Jürgen Herman__'
+        password = name
+        self.createUser(name, password, charset='iso-8859-1')
+        # Login - this should replace the old password in the user file
+        theUser = user.User(self.request, name=name, password=password)
+        theUser.subscribe(pagename)
+        expected = True
+        result = theUser.isSubscribedTo(pagename)
+        self.assertEqual(result, expected,
+                 'Expected "%(expected)s" but got "%(result)s"' % locals())
 
+    def testSubscriptionSubPage(self):
+        """ user: tests isSubscribedTo on a subpage """
+        pagename = u'HelpMiscellaneous'
+        testPagename = u'HelpMiscellaneous/FrequentlyAskedQuestions'
+        name = u'__Jürgen Herman__'
+        password = name
+        self.createUser(name, password, charset='iso-8859-1')
+        # Login - this should replace the old password in the user file
+        theUser = user.User(self.request, name=name, password=password)
+        theUser.subscribe(pagename)
+        expected = False
+        result = theUser.isSubscribedTo(testPagename)
+        self.assertEqual(result, expected,
+                 'Expected "%(expected)s" but got "%(result)s"' % locals())
+        
     # Helpers ---------------------------------------------------------
 
     def createUser(self, name, password, charset='utf-8'):

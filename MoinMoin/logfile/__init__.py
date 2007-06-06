@@ -143,8 +143,18 @@ class LogFile:
                 # Open the file (NOT using codecs.open, it breaks our offset calculation. We decode it later.).
                 # Use binary mode in order to retain \r - otherwise the offset calculation would fail.
                 self._input = file(self.__filename, "rb",)
-            except IOError:
-                raise StopIteration
+            except IOError, err:
+                if err.errno == 2: # POSIX errno.ENOENT "file not found"
+                    try:
+                        # XXX workaround if edit-log does not exist: just create it empty
+                        f = file(self.__filename, "ab")
+                        f.write('')
+                        f.close()
+                        self._input = file(self.__filename, "rb",)
+                        return self._input
+                    except:
+                        pass
+                    raise StopIteration
             return self._input
         elif name == "_output":
             self._output = codecs.open(self.__filename, 'a', config.charset)

@@ -107,6 +107,10 @@ def execute(pagename, request):
 
     if cancelled:
         pg.sendCancel(savetext or "", rev)
+        pagedir = pg.getPagePath(check_create=0)
+        import os
+        if not os.listdir(pagedir):
+            os.removedirs(pagedir)
         return
 
     comment = wikiutil.clean_input(comment)
