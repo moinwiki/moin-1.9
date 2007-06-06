@@ -905,6 +905,12 @@ class Parser:
         lastpos = 0
 
         ###result.append(u'<span class="info">[scan: <tt>"%s"</tt>]</span>' % line)
+        if line.count('{{{') > 1: 
+            self.in_nested_pre = line.count('{{{') -  line.count('}}}')
+            if line.startswith('{{{'):
+                line = line[3:].strip()
+            self.in_pre = 'no_parser'
+            return "%s%s%s" % (self.formatter.paragraph(1), self.formatter.preformatted(1), line)
 
         for match in scan_re.finditer(line):
             # Add text before the match
@@ -929,7 +935,10 @@ class Parser:
         if not (inhibit_p or self.in_pre or self.in_li or self.in_dd or self.inhibit_p or
                 self.formatter.in_p) and lastpos < len(line):
             result.append(self.formatter.paragraph(1, css_class="line874"))
-        result.append(self.formatter.text(line[lastpos:]))
+        if '}}}' in line and len(line[lastpos:].strip()) > 0:
+            result.append(wikiutil.renderText(self.request, Parser, line[lastpos:].strip()))
+        else:
+            result.append(self.formatter.text(line[lastpos:]))
         return u''.join(result)
 
     def replace(self, match, inhibit_p=False):
