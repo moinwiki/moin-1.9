@@ -39,9 +39,6 @@ class SMBMount(BaseAuth):
         web_username = self.smb_dir_user
         web_uid = pwd.getpwnam(web_username)[2] # XXX better just use current uid?
 
-        if not login: # logout -> we don't have username in form
-            username = user_obj.name # so we take it from previous auth method
-
         mountpoint = self.smb_mountpoint_fn(username)
         if login:
             cmd = u"sudo mount -t cifs -o user=%(user)s,domain=%(domain)s,uid=%(uid)d,dir_mode=%(dir_mode)s,file_mode=%(file_mode)s,iocharset=%(iocharset)s //%(server)s/%(share)s %(mountpoint)s >>%(log)s 2>&1"
@@ -74,10 +71,10 @@ class SMBMount(BaseAuth):
         username = kw.get('username')
         password = kw.get('password')
         if user_obj and user_obj.valid:
-            do_smb(request, username, password, True)
+            self.do_smb(request, username, password, True)
         return ContinueLogin(user_obj)
 
     def logout(self, request, user_obj, **kw):
         if user_obj and not user_obj.valid:
-            do_smb(request, None, None, False)
+            self.do_smb(request, user_obj.name, None, False)
         return user_obj, True

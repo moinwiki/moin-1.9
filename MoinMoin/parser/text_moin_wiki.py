@@ -3,7 +3,7 @@
     MoinMoin - MoinMoin Wiki Markup Parser
 
     @copyright: 2000-2002 Juergen Hermann <jh@web.de>,
-                2006 by MoinMoin:ThomasWaldmann
+                2006-2007 MoinMoin:ThomasWaldmann,
                 2007 by MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
@@ -66,7 +66,7 @@ class Parser:
 
     # the big, fat, ugly one ;)
     formatting_rules = ur"""(?P<ent_numeric>&#(\d{1,5}|x[0-9a-fA-F]+);)
-(?:(?P<emph_ibb>'''''(?=[^']+'''))
+(?P<emph_ibb>'''''(?=[^']+'''))
 (?P<emph_ibi>'''''(?=[^']+''))
 (?P<emph_ib_or_bi>'{5}(?=[^']))
 (?P<emph>'{2,3})
@@ -82,7 +82,7 @@ class Parser:
 (?P<remark>(/\* ?| ?\*/))
 (?P<rule>-{4,})
 (?P<comment>^\#\#.*$)
-(?P<macro>\[\[(%%(macronames)s)(?:\(.*?\))?\]\]))
+(?P<macro>\[\[(%%(macronames)s)(?:\(.*?\))?\]\])
 (?P<ol>%(ol_rule)s)
 (?P<dl>%(dl_rule)s)
 (?P<li>^\s+\*\s*)
@@ -905,6 +905,12 @@ class Parser:
         lastpos = 0
 
         ###result.append(u'<span class="info">[scan: <tt>"%s"</tt>]</span>' % line)
+        if line.count('{{{') > 1: 
+            self.in_nested_pre = line.count('{{{') -  line.count('}}}')
+            if line.startswith('{{{'):
+                line = line[3:].strip()
+            self.in_pre = 'no_parser'
+            return "%s%s%s" % (self.formatter.paragraph(1), self.formatter.preformatted(1), line)
 
         for match in scan_re.finditer(line):
             # Add text before the match
@@ -929,7 +935,10 @@ class Parser:
         if not (inhibit_p or self.in_pre or self.in_li or self.in_dd or self.inhibit_p or
                 self.formatter.in_p) and lastpos < len(line):
             result.append(self.formatter.paragraph(1, css_class="line874"))
-        result.append(self.formatter.text(line[lastpos:]))
+        if '}}}' in line and len(line[lastpos:].strip()) > 0:
+            result.append(wikiutil.renderText(self.request, Parser, line[lastpos:].strip()))
+        else:
+            result.append(self.formatter.text(line[lastpos:]))
         return u''.join(result)
 
     def replace(self, match, inhibit_p=False):

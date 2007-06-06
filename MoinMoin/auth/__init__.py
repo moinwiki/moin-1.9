@@ -16,6 +16,8 @@
                  [login only]
        password: the value of the 'password' form field (or None)
                  [login only]
+       cookie: a Cookie.SimpleCookie instance containing the cookie
+               that the browser sent
        multistage: boolean indicating multistage login continuation
                    [may not be present, login only]
 
