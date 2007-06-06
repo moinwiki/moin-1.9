@@ -254,24 +254,22 @@ class TestAcl(unittest.TestCase):
         path = page.getPagePath(use_underlay=0, check_create=0)
         if os.path.exists(path):
             py.test.skip("%s exists. Won't overwrite exiting page" % self.dictPage)
+
         try:
-            os.mkdir(path)
-            revisionsDir = os.path.join(path, 'revisions')
-            os.mkdir(revisionsDir)
-            current = '00000001'
-            file(os.path.join(path, 'current'), 'w').write('%s\n' % current)
-            text = u'#acl All: \n'
-            file(os.path.join(revisionsDir, current), 'w').write(text)
-        except Exception, err:
-            py.test.skip("Can not be create test page: %s" % err)
-
-        result = self.request.user.may.write(pagename)
-        expected = False
-
-        if os.path.exists(path):
-            import shutil
-            shutil.rmtree(path, True)
-
-        self.assertEqual(result, expected,
-                         ('Expected "%(expected)s" but got "%(result)s"') % locals())
+            try:
+                os.mkdir(path)
+                revisionsDir = os.path.join(path, 'revisions')
+                os.mkdir(revisionsDir)
+                current = '00000001'
+                file(os.path.join(path, 'current'), 'w').write('%s\n' % current)
+                text = u'#acl All: \n'
+                file(os.path.join(revisionsDir, current), 'w').write(text)
+            except Exception, err:
+                py.test.skip("Can not be create test page: %s" % err)
+    
+            assert not self.request.user.may.write(pagename)
+        finally:
+            if os.path.exists(path):
+                import shutil
+                shutil.rmtree(path, True)
 
