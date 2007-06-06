@@ -18,6 +18,7 @@ from pyxmpp.client import Client
 from pyxmpp.jid import JID
 from pyxmpp.streamtls import TLSSettings
 from pyxmpp.message import Message
+from pyxmpp.presence import Presence
 
 from commands import *
 
@@ -157,6 +158,7 @@ class XMPPBot(Client, Thread):
     def handle_command(self, command, ignore_dnd=False):
         """Excecutes commands from other components"""
         
+        # Handle normal notifications
         if isinstance(command, NotificationCommand):
             jid = JID(node_or_jid=command.jid)
             jid_text = jid.bare().as_utf8()
@@ -173,6 +175,38 @@ class XMPPBot(Client, Thread):
                 pass
             
             self.send_message(jid, text)
+            
+        # Handle subscribtion management commands
+        if isinstance(command, AddJIDToRosterCommand):
+            jid = JID(node_or_jid=command.jid)
+            self.ask_for_subscription(jid)
+            
+        if isinstance(command, RemoveJIDFromRosterCommand):
+            jid = JID(node_or_jid=command.jid)
+            self.remove_subscription(jid)
+            
+    def ask_for_subscription(self, jid):
+        """Sends a <presence/> stanza with type="subscribe"
+        
+        Bot tries to subscribe to every contact's presence, so that
+        it can honor special cases, like DoNotDisturb setting.
+        
+        @param jid: Jabber ID of entity we're subscribing to
+        @type jid: pyxmpp.jid.JID
+        
+        """
+        stanza = Presence(to_jid=jid, stanza_type="subscribe")
+        self.get_stream().send(stanza)
+        
+    def remove_subscription(self, jid):
+        """Sends a <presence/> stanza with type="unsubscribed
+        
+        @param jid: Jabber ID of entity whose subscription we cancel
+        @type jid: JID
+        
+        """
+        stanza = Presence(to_jid=jid, stanza_type="unsubscribed")
+        self.get_stream().send(stanza)
         
     def send_message(self, jid, text, msg_type=u"chat"):
         """Sends a message
@@ -203,6 +237,19 @@ class XMPPBot(Client, Thread):
         
         if not response == u"":
             self.send_message(sender, response)
+            
+    def handle_unsubscribed_presence(self, stanza):
+        """Handles unsubscribed presence stanzas"""
+        
+        # FiXME: what policy should we adopt in this case?
+        pass
+    
+    def handle_subscribe_presence(self, stanza):
+        """Handles subscribe presence stanzas (requests)"""
+        
+        # FIXME: Let's just accept all subscribtion requests for now
+        response = stanza.make_accept_response()
+        self.get_stream().send(response)
         
     def handle_unavailable_presence(self, stanza):
         """Handles unavailable presence stanzas"""
@@ -314,6 +361,8 @@ class XMPPBot(Client, Thread):
         stream.set_message_handler("normal", self.handle_message)
         stream.set_presence_handler("available", self.handle_available_presence)
         stream.set_presence_handler("unavailable", self.handle_unavailable_presence)
+        stream.set_presence_handler("unsubscribed", self.handle_unsubscribed_presence)
+        stream.set_presence_handler("subscribe", self.handle_subscribe_presence)
         
         self.request_session()
             
