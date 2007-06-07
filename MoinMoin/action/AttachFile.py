@@ -30,6 +30,7 @@ import os, time, zipfile, mimetypes
 from MoinMoin import config, wikiutil, packages
 from MoinMoin.Page import Page
 from MoinMoin.util import filesys, timefuncs
+from MoinMoin.events import FileAttachedEvent, send_event
 
 action_name = __name__.split('.')[-1]
 
@@ -219,6 +220,10 @@ def add_attachment(request, pagename, target, filecontent, overwrite=0):
             stream.close()
 
         _addLogEntry(request, 'ATTNEW', pagename, target)
+        
+        event = FileAttachedEvent(request, pagename, target, len(filecontent))
+        messages = send_event(event)
+        msg = "".join(messages)
 
         if request.cfg.xapian_search:
             from MoinMoin.search.Xapian import Index

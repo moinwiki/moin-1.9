@@ -45,8 +45,14 @@ class PageRenamedEvent(PageEvent):
     pass
 class PageDeletedEvent(PageEvent):
     pass
+
+
 class FileAttachedEvent(PageEvent):
-    pass
+    def __init__(self, request, pagename, attachment_name, size):
+        self.request = request
+        self.pagename = pagename
+        self.attachment_name = attachment_name
+        self.size = size
 
 
 class PageRevertedEvent(PageEvent):
