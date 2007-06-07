@@ -20,7 +20,8 @@ from pyxmpp.streamtls import TLSSettings
 from pyxmpp.message import Message
 from pyxmpp.presence import Presence
 
-from commands import *
+from jabberbot.commands import NotificationCommand, AddJIDToRosterCommand
+from jabberbot.commands import RemoveJIDFromRosterCommand
 
 
 class Contact:

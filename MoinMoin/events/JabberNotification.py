@@ -11,9 +11,11 @@
 import xmlrpclib
 
 from MoinMoin.user import User, getUserList
+from MoinMoin.Page import Page
 
 from MoinMoin.events import *
-from MoinMoin.events.notification_common import page_changed_notification
+from MoinMoin.events.messages import page_changed_notification
+from MoinMoin.events.messages import file_attached_notification
 
 
 # XML RPC Server object used to communicate with notification bot
@@ -33,14 +35,16 @@ def handle(event):
     if server is None:
         server = xmlrpclib.Server("http://" + cfg.bot_host)
     
-    if isinstance(event, PageEvent):
+    if isinstance(event, PageChangedEvent):
         return handle_page_changed(event)
     elif isinstance(event, JabberIDSetEvent) or isinstance(event, JabberIDUnsetEvent):
         return handle_jid_changed(event)
+    elif isinstance(event, FileAttachedEvent):
+        return handle_file_attached(event)
     
 
 def handle_jid_changed(event):
-    """ Handle events sent when user's JID changes """
+    """ Handles events sent when user's JID changes """
     
     request = event.request
     _ = request.getText
@@ -58,9 +62,41 @@ def handle_jid_changed(event):
         print _("Low-level communication error: "), str(err)
         return (0, _("Notifications not sent"))
 
-def handle_jid_unset(event):
-    pass
 
+def handle_file_attached(event):
+    """Handles event sent when a file is attached to a page"""
+    
+    request = event.request
+    pagename = event.pagename
+    size = event.size
+    attach_name = event.attachment_name
+    page = Page(request, pagename)
+    
+    _ = request.getText
+    
+    subscribers = page.getSubscribers(request, return_users=1)
+    if subscribers:
+        # send notifications to all subscribers
+        results = [_('Status of sending notifications:')]
+        
+        for lang in subscribers:
+            jids = [u.jid for u in subscribers[lang]]
+            names = [u.name for u in subscribers[lang]]
+            msg = file_attached_notification(request, pagename, lang, attach_name, size)
+            print msg
+            jabberok, status = send_notification(request, jids, msg)
+            recipients = ", ".join(names)
+            results.append(_('[%(lang)s] %(recipients)s: %(status)s') % {
+                'lang': lang, 'recipients': recipients, 'status': status})
+
+        # Return notifications sent results. Ignore trivial - we don't have
+        # to lie. If notification was sent, just tell about it.
+        return '<p>\n%s\n</p> ' % '<br>'.join(results)
+
+    # No notifications sent, no message.
+    return ''
+        
+        
 def handle_page_changed(event):
     """ Handles events related to page changes """
     
@@ -82,7 +118,8 @@ def handle_page_changed(event):
         for lang in subscribers:
             jids = [u.jid for u in subscribers[lang]]
             names = [u.name for u in subscribers[lang]]
-            jabberok, status = send_notification(request, page, comment, jids, lang, revisions, trivial)
+            msg = page_changed_notification(request, page, comment, lang, revisions, trivial)
+            jabberok, status = send_notification(request, jids, msg)
             recipients = ", ".join(names)
             results.append(_('[%(lang)s] %(recipients)s: %(status)s') % {
                 'lang': lang, 'recipients': recipients, 'status': status})
@@ -94,7 +131,7 @@ def handle_page_changed(event):
     # No notifications sent, no message.
     return ''
 
-def send_notification(request, page, comment, jids, message_lang, revisions, trivial):
+def send_notification(request, jids, message):
     """ Send notifications for a single language.
 
     @param comment: editor's comment given when saving the page
@@ -104,12 +141,11 @@ def send_notification(request, page, comment, jids, message_lang, revisions, tri
     @param trivial: the change is marked as trivial
     """
     _ = request.getText
-    msg = page_changed_notification(request, page, comment, message_lang, revisions, trivial)
     
     for jid in jids:
         # FIXME: stops sending notifications on first error
         try:
-            server.send_notification(request.cfg.secret, jid, msg)
+            server.send_notification(request.cfg.secret, jid, message)
         except xmlrpclib.Error, err:
             print _("XML RPC error: "), str(err)
             return (0, _("Notifications not sent"))

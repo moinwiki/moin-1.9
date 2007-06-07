@@ -14,7 +14,8 @@ import time, xmlrpclib
 from threading import Thread
 from SimpleXMLRPCServer import SimpleXMLRPCServer
 
-from commands import *
+from jabberbot.commands import NotificationCommand, AddJIDToRosterCommand
+from jabberbot.commands import RemoveJIDFromRosterCommand
 
 
 class XMLRPCClient(Thread):

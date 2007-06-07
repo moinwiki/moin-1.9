@@ -11,6 +11,7 @@
 
 from MoinMoin import user, wikiutil
 from MoinMoin.Page import Page
+from MoinMoin.action.AttachFile import getAttachUrl
 
 
 def page_changed_notification(request, page, comment, lang, revisions, trivial):
@@ -62,3 +63,29 @@ def page_changed_notification(request, page, comment, lang, revisions, trivial):
             messageBody = messageBody + _("No differences found!\n", formatted=False)
             
     return messageBody
+
+def file_attached_notification(request, pagename, lang, attach_name, attach_size):
+    
+    _ = request.getText
+    page = Page(request, pagename)
+    pagelink = request.getQualifiedURL(page.url(request, {}, relative=False))
+    attachlink = request.getBaseURL() + getAttachUrl(pagename, attach_name, request)
+    
+    messageBody = _("Dear Wiki user.\n\n"
+        'You have subscribed to a wiki page "%(sitename)s" for change notification.\n\n'
+        "An attachment has been added to the following page by %(editor)s:\n"
+        "%(pagelink)s\n\n"
+        "Following detailed information is available:\n"
+        "Attachment name: %(attach_name)s\n"
+        "Attachment size: %(attach_size)s\n"
+        "Download link: %(attach_get)s", formatted=False) % {
+            'editor': user.getUserIdentification(request),
+            'pagelink': pagelink,
+            'sitename': page.cfg.sitename or request.getBaseURL(),
+            'attach_name': attach_name,
+            'attach_size': attach_size,
+            'attach_get': attachlink,
+    }
+        
+    return messageBody
+
