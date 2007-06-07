@@ -44,22 +44,12 @@ def handle_jid_changed(event):
     
     request = event.request
     _ = request.getText
-    notification_list = []
     
-    ids = getUserList(request)
-    for id in ids:
-        usr = User(request, id)
-        if usr.isSuperUser():
-            notification_list.append(usr)
-    
-    # FIXME: stops sending notifications on first error
     try:
         if isinstance(event, JabberIDSetEvent):
-            for jid in notification_list:
-                server.addJIDToRoster(request.cfg.secret, jid)
+            server.addJIDToRoster(request.cfg.secret, event.jid)
         else:
-            for jid in notification_list:
-                server.removeJIDFromRoster(request.cfg.secret, jid)        
+            server.removeJIDFromRoster(request.cfg.secret, event.jid)        
                 
     except xmlrpclib.Error, err:
         print _("XML RPC error: "), str(err)
