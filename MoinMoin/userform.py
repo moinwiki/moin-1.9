@@ -235,7 +235,8 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
             # try to get the jid
             jid = wikiutil.clean_input(form.get('jid', [theuser.jid])[0]).strip()
             
-            jid_changed = theuser.jid != jid                
+            jid_changed = theuser.jid != jid
+            previous_jid = theuser.jid           
             theuser.jid = jid
             
             if theuser.jid and self.request.cfg.user_jid_unique:
@@ -245,7 +246,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
             
             if jid_changed:
                 set_event = JabberIDSetEvent(self.request, theuser.jid)
-                unset_event = JabberIDUnsetEvent(self.request, theuser.jid)
+                unset_event = JabberIDUnsetEvent(self.request, previous_jid)
                 send_event(set_event)
                 send_event(unset_event)
 
