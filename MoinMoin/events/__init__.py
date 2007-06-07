@@ -43,8 +43,14 @@ class PageChangedEvent(PageEvent):
         
 class PageRenamedEvent(PageEvent):
     pass
+
+
 class PageDeletedEvent(PageEvent):
-    pass
+    def __init__(self, request, page, comment):
+        PageEvent.__init__(self, request)
+        self.request = request
+        self.page = page
+        self.comment = comment
 
 
 class FileAttachedEvent(PageEvent):
