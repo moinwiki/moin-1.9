@@ -296,6 +296,9 @@ class XMPPBot(Client, Thread):
             self.log("Handling available presence.")
         
         show = presence.get_show()
+        if show is None:
+            show = u'available'
+            
         priority = presence.get_priority()
         jid = presence.get_from_jid()
         bare_jid = jid.bare().as_utf8()
@@ -312,7 +315,7 @@ class XMPPBot(Client, Thread):
                 contact.add_resource(jid.resource, show, priority)
 
             if self.config.verbose:
-                self.log(contact)  
+                self.log(contact)
 
             # Either way check, if we can deliver queued messages now
             if not contact.is_dnd():
