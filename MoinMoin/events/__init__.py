@@ -49,6 +49,7 @@ class PageDeletedEvent(PageEvent):
 
 class FileAttachedEvent(PageEvent):
     def __init__(self, request, pagename, attachment_name, size):
+        PageEvent.__init__(self, request)
         self.request = request
         self.pagename = pagename
         self.attachment_name = attachment_name
