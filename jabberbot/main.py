@@ -12,11 +12,11 @@
 
 import sys
 import os
+from Queue import Queue
 
 from config import Config
-from xmppbot import XMPPBot
-from xmlrpcbot import XMLRPCServer, XMLRPCClient
-from Queue import Queue
+from jabberbot.xmppbot import XMPPBot
+from jabberbot.xmlrpcbot import XMLRPCServer, XMLRPCClient
 
 
 def main():
