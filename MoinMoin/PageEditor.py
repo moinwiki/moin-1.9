@@ -25,6 +25,7 @@ from MoinMoin.widget.dialog import Status
 from MoinMoin.logfile import editlog, eventlog
 from MoinMoin.util import filesys, timefuncs, web
 from MoinMoin.mail import sendmail
+from MoinMoin.events import PageDeletedEvent, send_event
 
 # used for merging
 conflict_markers = ("\n---- /!\\ '''Edit conflict - other version:''' ----\n",
@@ -645,6 +646,9 @@ Try a different name.""") % (newpagename,)
             raise self.AccessDenied, msg
 
         try:
+            event = PageDeletedEvent(request, self, comment)
+            send_event(event)
+            
             msg = self.saveText(u"deleted\n", 0, comment=comment or u'', index=1, deleted=True)
             msg = msg.replace(
                 _("Thank you for your changes. Your attention to detail is appreciated."),

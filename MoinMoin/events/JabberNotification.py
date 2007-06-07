@@ -16,6 +16,7 @@ from MoinMoin.Page import Page
 from MoinMoin.events import *
 from MoinMoin.events.messages import page_changed_notification
 from MoinMoin.events.messages import file_attached_notification
+from MoinMoin.events.messages import page_deleted_notification
 
 
 # XML RPC Server object used to communicate with notification bot
@@ -41,6 +42,8 @@ def handle(event):
         return handle_jid_changed(event)
     elif isinstance(event, FileAttachedEvent):
         return handle_file_attached(event)
+    elif isinstance(event, PageDeletedEvent):
+        return handle_page_deleted(event)
     
 
 def handle_jid_changed(event):
@@ -95,7 +98,7 @@ def handle_file_attached(event):
 
     # No notifications sent, no message.
     return ''
-        
+
         
 def handle_page_changed(event):
     """ Handles events related to page changes """
@@ -104,7 +107,6 @@ def handle_page_changed(event):
     trivial = event.trivial
     comment = event.comment
     page = event.page
-    cfg = request.cfg
     
     _ = request.getText
     
@@ -130,6 +132,40 @@ def handle_page_changed(event):
 
     # No notifications sent, no message.
     return ''
+
+
+def handle_page_deleted(event):
+    """Handles event sent when a page is deleted"""
+    
+    request = event.request
+    comment = event.comment
+    page = event.page
+    
+    _ = request.getText
+    
+    subscribers = page.getSubscribers(request, return_users=1)
+    if subscribers:
+        # get a list of old revisions, and append a diff
+        revisions = page.getRevList()
+        
+        # send notifications to all subscribers
+        results = [_('Status of sending notifications:')]
+        for lang in subscribers:
+            jids = [u.jid for u in subscribers[lang]]
+            names = [u.name for u in subscribers[lang]]
+            msg = page_deleted_notification(request, page, comment, lang)
+            jabberok, status = send_notification(request, jids, msg)
+            recipients = ", ".join(names)
+            results.append(_('[%(lang)s] %(recipients)s: %(status)s') % {
+                'lang': lang, 'recipients': recipients, 'status': status})
+
+        # Return notifications sent results. Ignore trivial - we don't have
+        # to lie. If notification was sent, just tell about it.
+        return '<p>\n%s\n</p> ' % '<br>'.join(results)
+
+    # No notifications sent, no message.
+    return ''
+
 
 def send_notification(request, jids, message):
     """ Send notifications for a single language.

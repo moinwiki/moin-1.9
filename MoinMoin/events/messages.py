@@ -15,7 +15,7 @@ from MoinMoin.action.AttachFile import getAttachUrl
 
 
 def page_changed_notification(request, page, comment, lang, revisions, trivial):
-    """ Prepare a notification text for a single language
+    """ Prepare a page change notification text for a single language
 
     @param comment: editor's comment given when saving the page
     @param lang: language of notifications
@@ -64,17 +64,43 @@ def page_changed_notification(request, page, comment, lang, revisions, trivial):
             
     return messageBody
 
+def page_deleted_notification(request, page, comment, lang):
+    """ Prepare a page deletion notification text for a single language """
+    
+    _ = request.getText
+    page._ = lambda s, formatted=True, r=request, l=lang: r.getText(s, formatted=formatted, lang=l)
+    
+    pagelink = request.getQualifiedURL(page.url(request, {}, relative=False))
+    
+    messageBody = _("Dear wiki user,\n\n"
+        'You have subscribed to a wiki page "%(sitename)s" for change notification.\n\n'
+        "The following page has been deleted by %(editor)s:\n"
+        "%(pagelink)s\n\n", formatted=False) % {
+            'editor': page.uid_override or user.getUserIdentification(request),
+            'pagelink': pagelink,
+            'sitename': page.cfg.sitename or request.getBaseURL(),
+    }
+        
+    if comment:
+        messageBody = messageBody + \
+            _("The comment on the change is:\n%(comment)s", formatted=False) % {'comment': comment}
+        
+    return messageBody
+                                                                          
+
 def file_attached_notification(request, pagename, lang, attach_name, attach_size):
+    """ Prepare an attachment added notification text for a single language """
     
     _ = request.getText
     page = Page(request, pagename)
     pagelink = request.getQualifiedURL(page.url(request, {}, relative=False))
     attachlink = request.getBaseURL() + getAttachUrl(pagename, attach_name, request)
     
-    messageBody = _("Dear Wiki user.\n\n"
+    page._ = lambda s, formatted=True, r=request, l=lang: r.getText(s, formatted=formatted, lang=l)
+    
+    messageBody = _("Dear Wiki user,\n\n"
         'You have subscribed to a wiki page "%(sitename)s" for change notification.\n\n'
         "An attachment has been added to the following page by %(editor)s:\n"
-        "%(pagelink)s\n\n"
         "Following detailed information is available:\n"
         "Attachment name: %(attach_name)s\n"
         "Attachment size: %(attach_size)s\n"
