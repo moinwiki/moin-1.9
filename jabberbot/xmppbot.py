@@ -1,10 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - a XMPP bot
-
-    This is a bot for notification and simple editing
-    operations. Developed as a Google Summer of Code 
-    project.
+    MoinMoin - jabber bot
 
     @copyright: 2007 by Karol Nowak <grywacz@gmail.com>
     @license: GNU GPL, see COPYING for details.
@@ -69,10 +65,7 @@ class Contact:
                 max_prio = resource['priority']
                 max_prio_show = resource['show']
                 
-        if max_prio_show == u'dnd':
-            return True
-        else:
-            return False
+        return max_prio_show == u'dnd'
         
     def set_show(self, resource, show):
         """Sets show property for a given resource
@@ -231,7 +224,7 @@ class XMPPBot(Client, Thread):
         command = text.split()
         
         # Ignore empty commands
-        if len(command) == 0:
+        if not command:
             return
         
         response = self.reply_help()
