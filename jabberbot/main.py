@@ -2,10 +2,6 @@
 """
     MoinMoin - jabber bot main file
 
-    This is a bot for notification and simple editing
-    operations. Developed as a Google Summer of Code 
-    project.
-
     @copyright: 2007 by Karol Nowak <grywacz@gmail.com>
     @license: GNU GPL, see COPYING for details.
 """
@@ -14,7 +10,7 @@ import sys
 import os
 from Queue import Queue
 
-from config import Config
+from config import BotConfig
 from jabberbot.xmppbot import XMPPBot
 from jabberbot.xmlrpcbot import XMLRPCServer, XMLRPCClient
 
@@ -36,9 +32,9 @@ def main():
     commands_to_xmpp = Queue()
     
     try:
-        xmpp_bot = XMPPBot(Config, commands_from_xmpp, commands_to_xmpp)
-        xmlrpc_client = XMLRPCClient(Config, commands_from_xmpp)
-        xmlrpc_server = XMLRPCServer(Config, commands_to_xmpp)
+        xmpp_bot = XMPPBot(BotConfig, commands_from_xmpp, commands_to_xmpp)
+        xmlrpc_client = XMLRPCClient(BotConfig, commands_from_xmpp)
+        xmlrpc_server = XMLRPCServer(BotConfig, commands_to_xmpp)
         
         xmpp_bot.start()
         xmlrpc_client.start()
