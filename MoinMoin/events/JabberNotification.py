@@ -13,11 +13,8 @@ import xmlrpclib
 from MoinMoin.user import User, getUserList
 from MoinMoin.Page import Page
 
-from MoinMoin.events import *
-from MoinMoin.events.messages import page_changed_notification
-from MoinMoin.events.messages import file_attached_notification
-from MoinMoin.events.messages import page_deleted_notification
-
+import MoinMoin.events as ev
+from MoinMoin.events.messages import page_change_message
 
 # XML RPC Server object used to communicate with notification bot
 server = None
@@ -36,13 +33,13 @@ def handle(event):
     if server is None:
         server = xmlrpclib.Server("http://" + cfg.bot_host)
     
-    if isinstance(event, PageChangedEvent):
+    if isinstance(event, ev.PageChangedEvent):
         return handle_page_changed(event)
-    elif isinstance(event, JabberIDSetEvent) or isinstance(event, JabberIDUnsetEvent):
+    elif isinstance(event, ev.JabberIDSetEvent) or isinstance(event, ev.JabberIDUnsetEvent):
         return handle_jid_changed(event)
-    elif isinstance(event, FileAttachedEvent):
+    elif isinstance(event, ev.FileAttachedEvent):
         return handle_file_attached(event)
-    elif isinstance(event, PageDeletedEvent):
+    elif isinstance(event, ev.PageDeletedEvent):
         return handle_page_deleted(event)
     
 
@@ -70,90 +67,43 @@ def handle_file_attached(event):
     """Handles event sent when a file is attached to a page"""
     
     request = event.request
-    pagename = event.pagename
-    size = event.size
-    attach_name = event.attachment_name
-    page = Page(request, pagename)
-    
-    _ = request.getText
+    page = Page(request, event.pagename) 
     
     subscribers = page.getSubscribers(request, return_users=1)
-    if subscribers:
-        # send notifications to all subscribers
-        results = [_('Status of sending notifications:')]
-        
-        for lang in subscribers:
-            jids = [u.jid for u in subscribers[lang]]
-            names = [u.name for u in subscribers[lang]]
-            msg = file_attached_notification(request, pagename, lang, attach_name, size)
-            print msg
-            jabberok, status = send_notification(request, jids, msg)
-            recipients = ", ".join(names)
-            results.append(_('[%(lang)s] %(recipients)s: %(status)s') % {
-                'lang': lang, 'recipients': recipients, 'status': status})
-
-        # Return notifications sent results. Ignore trivial - we don't have
-        # to lie. If notification was sent, just tell about it.
-        return '<p>\n%s\n</p> ' % '<br>'.join(results)
-
-    # No notifications sent, no message.
-    return ''
+    page_change("attachment_added", request, page, subscribers, attach_name=event.attachment_name, attach_size=event.size)
 
         
 def handle_page_changed(event):
     """ Handles events related to page changes """
     
     request = event.request
-    trivial = event.trivial
-    comment = event.comment
     page = event.page
     
-    _ = request.getText
-    
     subscribers = page.getSubscribers(request, return_users=1, trivial=event.trivial)
-    if subscribers:
-        # get a list of old revisions, and append a diff
-        revisions = page.getRevList()
-        
-        # send notifications to all subscribers
-        results = [_('Status of sending notifications:')]
-        for lang in subscribers:
-            jids = [u.jid for u in subscribers[lang]]
-            names = [u.name for u in subscribers[lang]]
-            msg = page_changed_notification(request, page, comment, lang, revisions, trivial)
-            jabberok, status = send_notification(request, jids, msg)
-            recipients = ", ".join(names)
-            results.append(_('[%(lang)s] %(recipients)s: %(status)s') % {
-                'lang': lang, 'recipients': recipients, 'status': status})
-
-        # Return notifications sent results. Ignore trivial - we don't have
-        # to lie. If notification was sent, just tell about it.
-        return '<p>\n%s\n</p> ' % '<br>'.join(results)
-
-    # No notifications sent, no message.
-    return ''
-
+    page_change("page_changed", request, page, subscribers, revisions=page.getRevList(), comment=event.comment)
+    
 
 def handle_page_deleted(event):
     """Handles event sent when a page is deleted"""
     
     request = event.request
-    comment = event.comment
     page = event.page
+    
+    subscribers = page.getSubscribers(request, return_users=1)
+    page_change("page_deleted", request, page, subscribers)
+    
+
+def page_change(type, request, page, subscribers, **kwargs):
     
     _ = request.getText
     
-    subscribers = page.getSubscribers(request, return_users=1)
     if subscribers:
-        # get a list of old revisions, and append a diff
-        revisions = page.getRevList()
-        
         # send notifications to all subscribers
         results = [_('Status of sending notifications:')]
         for lang in subscribers:
             jids = [u.jid for u in subscribers[lang]]
             names = [u.name for u in subscribers[lang]]
-            msg = page_deleted_notification(request, page, comment, lang)
+            msg = page_change_message(type, request, page, lang, **kwargs)
             jabberok, status = send_notification(request, jids, msg)
             recipients = ", ".join(names)
             results.append(_('[%(lang)s] %(recipients)s: %(status)s') % {
@@ -165,7 +115,6 @@ def handle_page_deleted(event):
 
     # No notifications sent, no message.
     return ''
-
 
 def send_notification(request, jids, message):
     """ Send notifications for a single language.
