@@ -462,3 +462,21 @@ class TestBlock(ParserTestCase):
                          'Expected "%(expected)s" but got "%(result)s"' % locals())
 
 
+    def testUrlAfterBlock(self):
+        """ parser.wiki: tests url after block element """
+        case = 'some text {{{some block text\n}}} and a URL http://moinmo.in/'
+        result = self.parse(case).strip()
+        match = result.endswith('</a>')
+        expected = True
+        self.assert_(match is True,
+                     'Expected "%(expected)s" but got "%(result)s"' % locals())
+
+    def testWikiNameAfterBlock(self):
+        """ parser.wiki: tests WikiName expanded to url after block element """
+        case = 'some text {{{some block text\n}}} and a WikiName'
+        result = self.parse(case).strip()
+        match = result.endswith('</a>')
+        expected = True
+        self.assert_(match is True,
+                     'Expected "%(expected)s" but got "%(result)s"' % locals())
+
