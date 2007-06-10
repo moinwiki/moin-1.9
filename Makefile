@@ -36,7 +36,7 @@ check-tabs:
 
 # Create documentation
 epydoc: patchlevel
-	@epydoc -o ../html-1.7 -n MoinMoin -u http://moinmo.in MoinMoin
+	@epydoc -o ../html-1.7 --name=MoinMoin --url=http://moinmo.in/ --graph=all --graph-font=Arial MoinMoin
 
 # Create new underlay directory from MoinMaster
 # Should be used only on TW machine
