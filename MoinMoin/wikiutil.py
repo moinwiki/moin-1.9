@@ -1343,6 +1343,10 @@ class ParameterParser:
         i = 0
         start = 0
         named = False
+
+        if not params:
+            params = '""'
+        
         while start < len(params):
             match = re.match(self.param_re, params[start:])
             if not match:
@@ -1366,7 +1370,7 @@ class ParameterParser:
                 type = 'n'
             else:
                 value = None
-
+            
             parameter_list.append(value)
             if match.group("name"):
                 if match.group("name") not in self.param_dict:
@@ -1395,8 +1399,7 @@ class ParameterParser:
             i += 1
 
         return parameter_list, parameter_dict
-
-
+    
 """ never used:
     def _check_type(value, type, format):
         if type == 'n' and 's' in format: # n as s
