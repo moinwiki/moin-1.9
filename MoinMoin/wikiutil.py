@@ -1374,6 +1374,7 @@ class ParameterParser:
             parameter_list.append(value)
             if match.group("name"):
                 if match.group("name") not in self.param_dict:
+                    # TODO we should think on inheritance of parameters
                     raise ValueError, "Unknown parameter name '%s'" % match.group("name")
                 nr = self.param_dict[match.group("name")]
                 if check_list[nr]:
