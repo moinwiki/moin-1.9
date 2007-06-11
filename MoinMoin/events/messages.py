@@ -87,7 +87,7 @@ def page_change_message(type, request, page, lang, **kwargs):
     else:
         raise UnknownChangeType()
     
-    if 'comment' in kwargs:
+    if 'comment' in kwargs and kwargs['comment'] is not None:
         messageBody = messageBody + \
             _("The comment on the change is:\n%(comment)s\n\n", formatted=False) % {'comment': kwargs['comment']}
             
