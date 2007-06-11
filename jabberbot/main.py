@@ -10,7 +10,7 @@ import sys
 import os
 from Queue import Queue
 
-from config import BotConfig
+from jabberbot.config import BotConfig
 from jabberbot.xmppbot import XMPPBot
 from jabberbot.xmlrpcbot import XMLRPCServer, XMLRPCClient
 
