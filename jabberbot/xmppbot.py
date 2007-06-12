@@ -16,6 +16,7 @@ from pyxmpp.streamtls import TLSSettings
 from pyxmpp.message import Message
 from pyxmpp.presence import Presence
 
+import jabberbot.commands as cmd
 from jabberbot.commands import NotificationCommand, AddJIDToRosterCommand
 from jabberbot.commands import RemoveJIDFromRosterCommand
 
@@ -111,9 +112,16 @@ class XMPPBot(Client, Thread):
         
         # A dictionary of contact objects, ordered by bare JID
         self.contacts = { }
+
+        self.known_xmlrpc_cmds = [cmd.GetPage, cmd.GetPageHTML] 
+        self.internal_commands = ["ping", "help"]
         
-        Client.__init__(self, self.jid, config.xmpp_password, config.xmpp_server, tls_settings=self.tlsconfig)
-            
+        self.xmlrpc_commands = {}
+        for command, name in [(command, command.__name__) for command in self.known_xmlrpc_cmds]:
+            self.xmlrpc_commands[name] = command
+        
+        Client.__init__(self, self.jid, config.xmpp_password, config.xmpp_server, tls_settings=self.tlsconfig)   
+    
     def run(self):
         """Start the bot - enter the event loop"""
         
@@ -227,10 +235,53 @@ class XMPPBot(Client, Thread):
         if not command:
             return
         
-        response = self.reply_help()
+        if command[0] in self.internal_commands:
+            response = self.handle_internal_command(command)
+        elif command[0] in self.xmlrpc_commands.keys():
+            response = self.handle_xmlrpc_command(command)
+        else:
+            response = self.reply_help()
         
         if not response == u"":
             self.send_message(sender, response)
+            
+    def handle_internal_command(self, command):
+        if command[0] == "ping":
+            return "pong"
+        elif command[0] == "help":
+            if len(command) == 1:
+                return self.reply_help()
+            else:
+                return self.help_on(command[1])
+        else:
+            return self.reply_help()
+        
+    def help_on(self, command):
+        if command == "help":
+            return u"""The "help" command prints a short, helpful message about a given topic or function.\n\nUsage: help [topic_or_function]"""
+        
+        elif command == "ping":
+            return u"""The "ping" command returns a "pong" message as soon as it's received."""
+        
+        # Here we have to deal with help messages of external (xmlrpc) commands
+        else:
+            classobj = self.xmlrpc_commands[command]
+            help_str = u"%s - %s\n\nUsage: %s"
+            return help_str % (command, classobj.description, classobj.parameter_list)
+        
+        
+    def handle_xmlrpc_command(self, command):
+        command_class = self.xmlrpc_commands[command[0]]
+        
+        try:
+            instance = command_class.__new__(command_class)
+            instance.__init__(instance, *command[1:])
+            self.from_commands.put_nowait(instance)
+            
+        # This happens when user specifies wrong parameters
+        except TypeError:
+            help = u"You've specified a wrong parameter list. The call should look like:\n\n%s"
+            return help % (command_class.get_invocation_help(), )
             
     def handle_unsubscribed_presence(self, stanza):
         """Handles unsubscribed presence stanzas"""
@@ -334,7 +385,11 @@ class XMPPBot(Client, Thread):
         
         It's sent in response to an uknown message or the "help" command."""
         
-        return u"""Hello there! I'm a MoinMoin Notification Bot. Too bad I can't say anything more (yet!)."""
+        help = u"""Hello there! I'm a MoinMoin Notification Bot. Available commands:\n\n%s\n%s"""
+        internal = ", ".join(self.internal_commands)
+        xmlrpc = ", ".join(self.xmlrpc_commands.keys())
+        
+        return help % (internal, xmlrpc)
     
     def log(self, message):
         """Logs a message and its timestamp"""
