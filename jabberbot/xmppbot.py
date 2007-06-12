@@ -17,9 +17,6 @@ from pyxmpp.message import Message
 from pyxmpp.presence import Presence
 
 import jabberbot.commands as cmd
-from jabberbot.commands import NotificationCommand, AddJIDToRosterCommand
-from jabberbot.commands import RemoveJIDFromRosterCommand
-
 
 class Contact:
     """Abstraction of a roster item / contact
@@ -177,7 +174,7 @@ class XMPPBot(Client, Thread):
         
         """
         # Handle normal notifications
-        if isinstance(command, NotificationCommand):
+        if isinstance(command, cmd.NotificationCommand):
             jid = JID(node_or_jid=command.jid)
             jid_text = jid.bare().as_utf8()
             text = command.text
@@ -195,11 +192,11 @@ class XMPPBot(Client, Thread):
             self.send_message(jid, text)
             
         # Handle subscribtion management commands
-        if isinstance(command, AddJIDToRosterCommand):
+        if isinstance(command, cmd.AddJIDToRosterCommand):
             jid = JID(node_or_jid=command.jid)
             self.ask_for_subscription(jid)
             
-        if isinstance(command, RemoveJIDFromRosterCommand):
+        if isinstance(command, cmd.RemoveJIDFromRosterCommand):
             jid = JID(node_or_jid=command.jid)
             self.remove_subscription(jid)
             
@@ -300,15 +297,15 @@ class XMPPBot(Client, Thread):
         # Here we have to deal with help messages of external (xmlrpc) commands
         else:
             classobj = self.xmlrpc_commands[command]
-            help_str = u"%s - %s\n\nUsage: %s"
-            return help_str % (command, classobj.description, classobj.parameter_list)
+            help_str = u"%s - %s\n\nUsage: %s %s"
+            return help_str % (command, classobj.description, command, classobj.parameter_list)
         
         
     def handle_xmlrpc_command(self, command):
         """Creates a command object, and puts it the command queuq
         
         @param command: a valid name of available xmlrpc command
-        @type command: str
+        @type command: list representing a command, name and parameters
         
         """
         command_class = self.xmlrpc_commands[command[0]]
