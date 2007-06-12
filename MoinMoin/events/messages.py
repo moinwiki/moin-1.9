@@ -98,7 +98,7 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
     
     if 'comment' in kwargs and kwargs['comment'] is not None:
         messageBody = messageBody + \
-            _("The comment on the change is:\n%(comment)s\n\n", formatted=False) % {'comment': kwargs['comment']}
+            _("The comment on the change is:\n%(comment)s", formatted=False) % {'comment': kwargs['comment']}
             
     return messageBody
     
