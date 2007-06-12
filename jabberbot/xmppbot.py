@@ -39,12 +39,21 @@ class Contact:
         self.messages = []
         
     def add_resource(self, resource, show, priority):
-        """Adds information about a connected resource"""
+        """Adds information about a connected resource
+        
+        @param resource: resource name
+        @param show: a show presence property, as defined in XMPP
+        @param priority: priority of the given resource
+        
+        """
         self.resources[resource] = {'show': show, 'priority': priority}
     
     def remove_resource(self, resource):
-        """Removes information about a connected resource"""
+        """Removes information about a connected resource
         
+        @param resource: resource name
+        
+        """
         if self.resources.has_key(resource):
             del self.resources[resource]
         else:
@@ -54,8 +63,8 @@ class Contact:
         """Checks if contact is DoNotDisturb
         
         The contact is DND if its resource with the highest priority is DND
-        """
         
+        """      
         # Priority can't be lower than -128
         max_prio = -129
         max_prio_show = u"dnd"
@@ -74,6 +83,7 @@ class Contact:
         @param resource: resource to alter
         @param show: new value of the show property
         @raise ValueError: no resource with given name has been found
+        
         """
         if self.resources.has_key(resource):
             self.resources[resource]['show'] = show
@@ -94,12 +104,12 @@ class XMPPBot(Client, Thread):
     """A simple XMPP bot"""
        
     def __init__(self, config, from_commands, to_commands):
-        """A constructor.
+        """A constructor
         
         @param from_commands: a Queue object used to send commands to other (xmlrpc) threads
         @param to_commands: a Queue object used to receive commands from other threads
-        """
         
+        """
         Thread.__init__(self)
         
         self.from_commands = from_commands
@@ -148,8 +158,9 @@ class XMPPBot(Client, Thread):
     def poll_commands(self):
         """Checks for new commands in the input queue and executes them
         
-        @return: True if any command has been executed, False otherwise."""
+        @return: True if any command has been executed, False otherwise.
         
+        """
         try:
             command = self.to_commands.get_nowait()
             self.handle_command(command)
@@ -158,8 +169,13 @@ class XMPPBot(Client, Thread):
             return False
         
     def handle_command(self, command, ignore_dnd=False):
-        """Excecutes commands from other components"""
+        """Excecutes commands from other components
         
+        @param command: a command to execute
+        @type command: any class defined in commands.py (FIXME?)
+        @param ignore_dnd: if command results in user interaction, should DnD be ignored?
+        
+        """
         # Handle normal notifications
         if isinstance(command, NotificationCommand):
             jid = JID(node_or_jid=command.jid)
@@ -215,14 +231,19 @@ class XMPPBot(Client, Thread):
         
         @param jid: JID to send the message to
         @param text: message's body
-        @param type: message type, as defined in RFC"""
+        @param type: message type, as defined in RFC
         
+        """
         message = Message(to_jid=jid, body=text, stanza_type=msg_type)
         self.get_stream().send(message)
     
     def handle_message(self, message):
-        """Handles incoming messages"""
+        """Handles incoming messages
         
+        @param message: a message stanza to parse
+        @type message: pyxmpp.message.Message
+        
+        """    
         if self.config.verbose:
             msg = "Message from %s." % (message.get_from_jid().as_utf8(),)
             self.log(msg)
@@ -246,6 +267,11 @@ class XMPPBot(Client, Thread):
             self.send_message(sender, response)
             
     def handle_internal_command(self, command):
+        """Handles internal commands, that can be completed by the XMPP bot itself
+        
+        @param command: list representing a command
+        
+        """
         if command[0] == "ping":
             return "pong"
         elif command[0] == "help":
@@ -254,9 +280,17 @@ class XMPPBot(Client, Thread):
             else:
                 return self.help_on(command[1])
         else:
+            # For unknown command return a generic help message
             return self.reply_help()
         
     def help_on(self, command):
+        """Returns a help message on a given topic
+        
+        @param command: a command to describe in a help message
+        @type command: str or unicode
+        @return: a help message
+        
+        """
         if command == "help":
             return u"""The "help" command prints a short, helpful message about a given topic or function.\n\nUsage: help [topic_or_function]"""
         
@@ -271,6 +305,12 @@ class XMPPBot(Client, Thread):
         
         
     def handle_xmlrpc_command(self, command):
+        """Creates a command object, and puts it the command queuq
+        
+        @param command: a valid name of available xmlrpc command
+        @type command: str
+        
+        """
         command_class = self.xmlrpc_commands[command[0]]
         
         try:
@@ -297,8 +337,11 @@ class XMPPBot(Client, Thread):
         self.get_stream().send(response)
         
     def handle_unavailable_presence(self, stanza):
-        """Handles unavailable presence stanzas"""
+        """Handles unavailable presence stanzas
         
+        @type stanza: pyxmpp.presence.Presence
+        
+        """
         if self.config.verbose:
             self.log("Handling unavailable presence.")
         
@@ -336,7 +379,11 @@ class XMPPBot(Client, Thread):
         return True
     
     def handle_available_presence(self, presence):
-        """Handles available presence stanzas"""
+        """Handles available presence stanzas
+        
+        @type presence: pyxmpp.presence.Presence
+        
+        """
         if self.config.verbose:
             self.log("Handling available presence.")
         
@@ -376,15 +423,22 @@ class XMPPBot(Client, Thread):
         return True
     
     def send_queued_messages(self, contact, ignore_dnd=False):
-        """Sends messages queued for the contact"""
+        """Sends messages queued for the contact
+        
+        @param contact: a contact whose queued messages are to be sent
+        @type contact: jabberbot.xmppbot.Contact
+        @param ignore_dnd: should contact's DnD status be ignored?
+        
+        """
         for command in contact.messages:
             self.handle_command(command, ignore_dnd)
                     
     def reply_help(self):
         """Constructs a generic help message
         
-        It's sent in response to an uknown message or the "help" command."""
+        It's sent in response to an uknown message or the "help" command.
         
+        """
         help = u"""Hello there! I'm a MoinMoin Notification Bot. Available commands:\n\n%s\n%s"""
         internal = ", ".join(self.internal_commands)
         xmlrpc = ", ".join(self.xmlrpc_commands.keys())

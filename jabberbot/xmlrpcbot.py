@@ -87,21 +87,38 @@ class XMLRPCServer(Thread):
     
     
     def send_notification(self, jid, text):
-        """Instructs the XMPP component to send a notification"""           
+        """Instructs the XMPP component to send a notification
+        
+        @param jid: a jid to send a message to (bare jid)
+        @type jid: str or unicode
+        @param text: a message body
+        @type text: unicode
+        
+        """
         c = NotificationCommand(jid, text)
         self.commands.put_nowait(c)
         return True
     send_notification.export = True
     
     def addJIDToRoster(self, jid):
-        """Instructs the XMPP component to add a new JID to its roster"""  
+        """Instructs the XMPP component to add a new JID to its roster
+        
+        @param jid: a jid to add, this must be a bare jid
+        @type jid: str or unicode, 
+        
+        """  
         c = AddJIDToRosterCommand(jid)
         self.commands.put_nowait(c)
         return True
     addJIDToRoster.export = True
     
     def removeJIDFromRoster(self, jid):
-        """Instructs the XMPP component to remove a JID from its roster"""      
+        """Instructs the XMPP component to remove a JID from its roster
+        
+        @param jid: a jid to remove, this must be a bare jid
+        @type jid: str or unicode
+        
+        """
         c = RemoveJIDFromRosterCommand(jid)
         self.commands.put_nowait(c)
         return True
