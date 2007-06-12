@@ -10,9 +10,7 @@ import time, xmlrpclib
 from threading import Thread
 from SimpleXMLRPCServer import SimpleXMLRPCServer
 
-from jabberbot.commands import NotificationCommand, AddJIDToRosterCommand
-from jabberbot.commands import RemoveJIDFromRosterCommand
-
+import jabberbot.commands as cmd
 
 class XMLRPCClient(Thread):
     """XMLRPC Client
@@ -95,7 +93,7 @@ class XMLRPCServer(Thread):
         @type text: unicode
         
         """
-        c = NotificationCommand(jid, text)
+        c = cmd.NotificationCommand(jid, text)
         self.commands.put_nowait(c)
         return True
     send_notification.export = True
@@ -107,7 +105,7 @@ class XMLRPCServer(Thread):
         @type jid: str or unicode, 
         
         """  
-        c = AddJIDToRosterCommand(jid)
+        c = cmd.AddJIDToRosterCommand(jid)
         self.commands.put_nowait(c)
         return True
     addJIDToRoster.export = True
@@ -119,7 +117,7 @@ class XMLRPCServer(Thread):
         @type jid: str or unicode
         
         """
-        c = RemoveJIDFromRosterCommand(jid)
+        c = cmd.RemoveJIDFromRosterCommand(jid)
         self.commands.put_nowait(c)
         return True
     removeJIDFromRoster.export = True
