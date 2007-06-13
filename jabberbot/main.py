@@ -33,7 +33,7 @@ def main():
     
     try:
         xmpp_bot = XMPPBot(BotConfig, commands_from_xmpp, commands_to_xmpp)
-        xmlrpc_client = XMLRPCClient(BotConfig, commands_from_xmpp)
+        xmlrpc_client = XMLRPCClient(BotConfig, commands_from_xmpp, commands_to_xmpp)
         xmlrpc_server = XMLRPCServer(BotConfig, commands_to_xmpp)
         
         xmpp_bot.start()
