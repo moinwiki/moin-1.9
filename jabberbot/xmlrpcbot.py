@@ -6,11 +6,14 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+import Queue
 import time, xmlrpclib
 from threading import Thread
 from SimpleXMLRPCServer import SimpleXMLRPCServer
 
 import jabberbot.commands as cmd
+from jabberbot.multicall import MultiCall
+
 
 class XMLRPCClient(Thread):
     """XMLRPC Client
@@ -19,16 +22,71 @@ class XMLRPCClient(Thread):
     a wiki, as inctructed by command objects received from
     the XMPP component"""
     
-    def __init__(self, config, commands):
+    def __init__(self, config, commands_in, commands_out):
         """
         @param commands: an output command queue
         """
         Thread.__init__(self)
-        self.commands = commands
+        self.commands_in = commands_in
+        self.commands_out = commands_out
         self.config = config
-        
+        self.url = config.wiki_url + "?action=xmlrpc2"
+        self.connection = self.create_connection()
+        self.token = None
+        self.multicall = None
+
     def run(self):
         """Starts the server / thread"""
+        while True:
+            try:
+                command = self.commands_in.get(True, 2)
+                self.execute_command(command)
+            except Queue.Empty:
+                pass
+            
+    def create_connection(self):
+        return xmlrpclib.ServerProxy(self.url, allow_none=True, verbose=self.config.verbose)
+                
+    def execute_command(self, command):
+        """Execute commands coming from the XMPP component"""
+        
+        # FIXME: make this kind of automatic
+        if isinstance(command, cmd.GetPage):
+            self.get_page(command)
+        elif isinstance(command, cmd.GetPageHTML):
+            self.get_page_html(command)
+    
+    def get_auth_token(self):
+        token = self.connection.getAuthToken("grzywacz", "ppp")
+        if token:
+            self.token = token
+    
+    def get_page(self, command):
+        if self.multicall is not None:
+            del self.multicall
+        self.multicall = MultiCall(self.connection)
+        
+        if not self.token:
+            self.get_auth_token()
+            
+        if not self.token:
+            # FIXME: notify the user that he may not have full rights on the wiki
+            pass
+        
+        self.multicall.applyAuthToken(self.token)
+        self.multicall.getPage(command.pagename)
+        token_result, getpage_result = self.multicall()
+
+        # We get a dict only when Fault happens
+        if isinstance(getpage_result, dict):
+            error_str = u"""The page couldn't be retrieved. The reason is: "%s"."""
+            command.data = error_str % getpage_result["faultString"]
+        else:
+            command.data = getpage_result
+     
+        self.commands_out.put_nowait(command)
+    
+    def get_page_html(self, command):
         pass
 
 

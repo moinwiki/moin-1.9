@@ -46,7 +46,7 @@ class BaseDataCommand(object):
     
     def __init__(self, jid):
         self.jid = jid
-        self.payload = None
+        self.data = None
         
 class GetPage(BaseDataCommand):
     

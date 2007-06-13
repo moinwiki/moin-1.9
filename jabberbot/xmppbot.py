@@ -196,9 +196,13 @@ class XMPPBot(Client, Thread):
             jid = JID(node_or_jid=command.jid)
             self.ask_for_subscription(jid)
             
-        if isinstance(command, cmd.RemoveJIDFromRosterCommand):
+        elif isinstance(command, cmd.RemoveJIDFromRosterCommand):
             jid = JID(node_or_jid=command.jid)
             self.remove_subscription(jid)
+            
+        elif isinstance(command, cmd.GetPage):
+            msg = u"""Here's the page "%s" that you've requested:\n\n%s"""
+            self.send_message(command.jid, msg % (command.pagename, command.data))
             
     def ask_for_subscription(self, jid):
         """Sends a <presence/> stanza with type="subscribe"
@@ -256,7 +260,7 @@ class XMPPBot(Client, Thread):
         if command[0] in self.internal_commands:
             response = self.handle_internal_command(command)
         elif command[0] in self.xmlrpc_commands.keys():
-            response = self.handle_xmlrpc_command(command)
+            response = self.handle_xmlrpc_command(sender, command)
         else:
             response = self.reply_help()
         
@@ -301,8 +305,8 @@ class XMPPBot(Client, Thread):
             return help_str % (command, classobj.description, command, classobj.parameter_list)
         
         
-    def handle_xmlrpc_command(self, command):
-        """Creates a command object, and puts it the command queuq
+    def handle_xmlrpc_command(self, sender, command):
+        """Creates a command object, and puts it the command queue
         
         @param command: a valid name of available xmlrpc command
         @type command: list representing a command, name and parameters
@@ -310,15 +314,18 @@ class XMPPBot(Client, Thread):
         """
         command_class = self.xmlrpc_commands[command[0]]
         
+        # Add sender's JID to the argument list
+        command.insert(1, sender.as_utf8())
+        
         try:
             instance = command_class.__new__(command_class)
-            instance.__init__(instance, *command[1:])
+            instance.__init__(*command[1:])
             self.from_commands.put_nowait(instance)
             
         # This happens when user specifies wrong parameters
         except TypeError:
-            help = u"You've specified a wrong parameter list. The call should look like:\n\n%s"
-            return help % (command_class.get_invocation_help(), )
+            help = u"You've specified a wrong parameter list. The call should look like:\n\n%s %s"
+            return help % (command[0], command_class.parameter_list)
             
     def handle_unsubscribed_presence(self, stanza):
         """Handles unsubscribed presence stanzas"""
