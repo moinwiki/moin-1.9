@@ -622,7 +622,7 @@ class XmlRpcBase:
 
     def xmlrpc_applyAuthToken(self, auth_token):
         """ Applies the auth token and thereby authenticates the user. """
-        centry = caching.CacheEntry(self.request, 'xmlrpc-session', token,
+        centry = caching.CacheEntry(self.request, 'xmlrpc-session', auth_token,
                                     scope='farm', use_pickle=True)
         try:
             expiry, uid = centry.content()
@@ -644,7 +644,7 @@ class XmlRpcBase:
 
     def xmlrpc_deleteAuthToken(self, auth_token):
         """ Delete the given auth token. """
-        centry = caching.CacheEntry(self.request, 'xmlrpc-session', token,
+        centry = caching.CacheEntry(self.request, 'xmlrpc-session', auth_token,
                                     scope='farm', use_pickle=True)
         try:
             centry.remove()
