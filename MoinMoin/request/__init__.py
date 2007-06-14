@@ -661,6 +661,9 @@ class RequestBase(object):
 
         self._login_messages = login_msgs
         return user_obj
+    
+    def handle_jid_auth(self, jid):
+        return user.get_by_jabber_id(self, jid)
 
     def parse_cookie(self):
         try:

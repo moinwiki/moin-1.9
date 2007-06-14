@@ -587,38 +587,66 @@ class XmlRpcBase:
             return userdata
 
     # authorization methods
+    
+    def _cleanup_stale_tokens(request):
+        items = caching.get_cache_list(request, 'xmlrpc-session', 'farm')
+        tnow = time.time()
+        for item in items:
+            centry = caching.CacheEntry(self.request, 'xmlrpc-session', item,
+                                        scope='farm', use_pickle=True)
+            try:
+                expiry, uid = centry.content()
+                if expiry < tnow:
+                    centry.remove()
+            except caching.CacheError:
+                pass
+            
+    def _generate_auth_token(self):
+        token = random_string(32, 'abcdefghijklmnopqrstuvwxyz0123456789')
+        centry = caching.CacheEntry(self.request, 'xmlrpc-session', token,
+                                    scope='farm', use_pickle=True)
+        centry.update((time.time() + 15*3600, u.id))
+        return token
 
     def xmlrpc_getAuthToken(self, username, password, *args):
         """ Returns a token which can be used for authentication
             in other XMLRPC calls. If the token is empty, the username
             or the password were wrong. """
 
-        def _cleanup_stale_tokens(request):
-            items = caching.get_cache_list(request, 'xmlrpc-session', 'farm')
-            tnow = time.time()
-            for item in items:
-                centry = caching.CacheEntry(self.request, 'xmlrpc-session', item,
-                                            scope='farm', use_pickle=True)
-                try:
-                    expiry, uid = centry.content()
-                    if expiry < tnow:
-                        centry.remove()
-                except caching.CacheError:
-                    pass
-
         if randint(0, 99) == 0:
             _cleanup_stale_tokens(self.request)
 
         u = self.request.handle_auth(None, username=username,
                                      password=password, login=True)
+        
         if u and u.valid:
-            token = random_string(32, 'abcdefghijklmnopqrstuvwxyz0123456789')
-            centry = caching.CacheEntry(self.request, 'xmlrpc-session', token,
-                                        scope='farm', use_pickle=True)
-            centry.update((time.time() + 15*3600, u.id))
-            return token
+            return _generate_auth_token()
         else:
             return ""
+        
+    def xmlrpc_getJabberAuthToken(self, jid, secret):
+        """Returns a token which can be used for authentication.
+        
+        This token can be used in other XMLRPC calls. Generation of
+        token depends on user's JID and a secret shared between wiki
+        and Jabber bot.
+        
+        @param jid: a bare Jabber ID
+        
+        """
+        
+        if self.cfg.secret != secret:
+            return ""
+        
+        if randint(0, 99) == 0:
+            _cleanup_stale_tokens(self.request)
+            
+        u = self.request.handle_jid_auth(jid)
+        
+        if u and u.valid:
+            return _generate_auth_token()
+        else:
+            return ""            
 
     def xmlrpc_applyAuthToken(self, auth_token):
         """ Applies the auth token and thereby authenticates the user. """
