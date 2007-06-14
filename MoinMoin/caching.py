@@ -43,22 +43,26 @@ def get_cache_list(request, arena, scope):
 
 
 class CacheEntry:
-    def __init__(self, request, arena, key, scope='page_or_wiki', do_locking=True, use_pickle=False):
+    def __init__(self, request, arena, key, scope='page_or_wiki', do_locking=True,
+                 use_pickle=False, use_encode=False):
         """ init a cache entry
             @param request: the request object
             @param arena: either a string or a page object, when we want to use
                           page local cache area
             @param key: under which key we access the cache content
-            @param lock: if there should be a lock, normally True
             @param scope: the scope where we are caching:
                           'item' - an item local cache
                           'wiki' - a wiki local cache
                           'farm' - a cache for the whole farm
+            @param do_locking: if there should be a lock, normally True
+            @param use_pickle: if data should be pickled/unpickled (nice for arbitrary cache content)
+            @param use_encode: if data should be encoded/decoded (nice for readable cache files)
         """
         self.request = request
         self.key = key
         self.locking = do_locking
         self.use_pickle = use_pickle
+        self.use_encode = use_encode
         self.arena_dir = get_arena_dir(request, arena, scope)
         if not os.path.exists(self.arena_dir):
             os.makedirs(self.arena_dir)
@@ -123,6 +127,8 @@ class CacheEntry:
             fname = self._filename()
             if self.use_pickle:
                 content = pickle.dumps(content, PICKLE_PROTOCOL)
+            elif self.use_encode:
+                content = content.encode(config.charset)
             if not self.locking or self.locking and self.wlock.acquire(1.0):
                 try:
                     # we do not write content to old inode, but to a new file
@@ -169,6 +175,8 @@ class CacheEntry:
                 self.request.log("Can't acquire read lock in %s" % self.lock_dir)
             if self.use_pickle:
                 data = pickle.loads(data)
+            elif self.use_encode:
+                data = data.decode(config.charset)
             return data
         except (pickle.UnpicklingError, IOError, EOFError, ValueError), err:
             raise CacheError(str(err))
