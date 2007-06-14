@@ -288,7 +288,7 @@ class RequestBase(object):
 
         try:
             # if we have common farm users, we could also use scope='farm':
-            cache = caching.CacheEntry(self, 'surgeprotect', 'surge-log', scope='wiki')
+            cache = caching.CacheEntry(self, 'surgeprotect', 'surge-log', scope='wiki', use_encode=True)
             if cache.exists():
                 data = cache.content()
                 data = data.split("\n")
