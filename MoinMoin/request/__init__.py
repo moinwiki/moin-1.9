@@ -1130,6 +1130,8 @@ class RequestBase(object):
         self.html_formatter = Formatter(self)
         self.formatter = self.html_formatter
 
+        self.initTheme()
+
         action_name = self.action
         if action_name == 'xmlrpc':
             from MoinMoin import xmlrpc
@@ -1141,8 +1143,6 @@ class RequestBase(object):
 
         # parse request data
         try:
-            self.initTheme()
-
             # The last component in path_info is the page name, if any
             path = self.getPathinfo()
 
