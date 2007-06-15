@@ -206,8 +206,8 @@ class XMPPBot(Client, Thread):
         
         elif isinstance(command, cmd.GetPageList):
             msg = u"""That's the list of pages accesible to you:\n\n%s"""
-            list = "\n".join(command.data)
-            self.send_message(command.jid, msg % (list, ))
+            pagelist = "\n".join(command.data)
+            self.send_message(command.jid, msg % (pagelist, ))
             
         elif isinstance(command, cmd.GetPageInfo):
             msg = u"""Here's some more detailed information on page "%s":\n\n%s"""
@@ -333,8 +333,8 @@ class XMPPBot(Client, Thread):
             
         # This happens when user specifies wrong parameters
         except TypeError:
-            help = u"You've specified a wrong parameter list. The call should look like:\n\n%s %s"
-            return help % (command[0], command_class.parameter_list)
+            msg = u"You've specified a wrong parameter list. The call should look like:\n\n%s %s"
+            return msg % (command[0], command_class.parameter_list)
             
     def handle_unsubscribed_presence(self, stanza):
         """Handles unsubscribed presence stanzas"""
@@ -452,11 +452,11 @@ class XMPPBot(Client, Thread):
         It's sent in response to an uknown message or the "help" command.
         
         """
-        help = u"""Hello there! I'm a MoinMoin Notification Bot. Available commands:\n\n%s\n%s"""
+        msg = u"""Hello there! I'm a MoinMoin Notification Bot. Available commands:\n\n%s\n%s"""
         internal = ", ".join(self.internal_commands)
         xmlrpc = ", ".join(self.xmlrpc_commands.keys())
         
-        return help % (internal, xmlrpc)
+        return msg % (internal, xmlrpc)
     
     def log(self, message):
         """Logs a message and its timestamp"""

@@ -227,8 +227,8 @@ class XMLRPCServer(Thread):
         @type text: unicode
         
         """
-        c = cmd.NotificationCommand(jid, text)
-        self.commands.put_nowait(c)
+        command = cmd.NotificationCommand(jid, text)
+        self.commands.put_nowait(command)
         return True
     send_notification.export = True
     
@@ -239,8 +239,8 @@ class XMLRPCServer(Thread):
         @type jid: str or unicode, 
         
         """  
-        c = cmd.AddJIDToRosterCommand(jid)
-        self.commands.put_nowait(c)
+        command = cmd.AddJIDToRosterCommand(jid)
+        self.commands.put_nowait(command)
         return True
     addJIDToRoster.export = True
     
@@ -251,7 +251,7 @@ class XMLRPCServer(Thread):
         @type jid: str or unicode
         
         """
-        c = cmd.RemoveJIDFromRosterCommand(jid)
-        self.commands.put_nowait(c)
+        command = cmd.RemoveJIDFromRosterCommand(jid)
+        self.commands.put_nowait(command)
         return True
     removeJIDFromRoster.export = True
