@@ -25,7 +25,7 @@ from MoinMoin.widget.dialog import Status
 from MoinMoin.logfile import editlog, eventlog
 from MoinMoin.util import filesys, timefuncs, web
 from MoinMoin.mail import sendmail
-
+from MoinMoin.events import PageDeletedEvent, send_event
 
 # used for merging
 conflict_markers = ("\n---- /!\\ '''Edit conflict - other version:''' ----\n",
@@ -646,6 +646,9 @@ Try a different name.""") % (newpagename,)
             raise self.AccessDenied, msg
 
         try:
+            event = PageDeletedEvent(request, self, comment)
+            send_event(event)
+            
             msg = self.saveText(u"deleted\n", 0, comment=comment or u'', index=1, deleted=True)
             msg = msg.replace(
                 _("Thank you for your changes. Your attention to detail is appreciated."),
@@ -670,95 +673,6 @@ Try a different name.""") % (newpagename,)
             cache = caching.CacheEntry(request, arena, key, scope='item')
             cache.remove()
         return success, msg
-
-    def _sendNotification(self, comment, emails, email_lang, revisions, trivial):
-        """ Send notification email for a single language.
-
-        @param comment: editor's comment given when saving the page
-        @param emails: list of email addresses
-        @param email_lang: language of emails
-        @param revisions: revisions of this page (newest first!)
-        @param trivial: the change is marked as trivial
-        @rtype: int
-        @return: sendmail result
-        """
-        request = self.request
-        _ = lambda s, formatted=True, r=request, l=email_lang: r.getText(s, formatted=formatted, lang=l)
-
-        if len(revisions) >= 2:
-            querystr = {'action': 'diff',
-                        'rev2': str(revisions[0]),
-                        'rev1': str(revisions[1])}
-        else:
-            querystr = {}
-        pagelink = request.getQualifiedURL(self.url(request, querystr, relative=False))
-
-        mailBody = _("Dear Wiki user,\n\n"
-            'You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.\n\n'
-            "The following page has been changed by %(editor)s:\n"
-            "%(pagelink)s\n\n", formatted=False) % {
-                'editor': self.uid_override or user.getUserIdentification(request),
-                'pagelink': pagelink,
-                'sitename': self.cfg.sitename or request.getBaseURL(),
-        }
-
-        if comment:
-            mailBody = mailBody + \
-                _("The comment on the change is:\n%(comment)s\n\n", formatted=False) % {'comment': comment}
-
-        # append a diff (or append full page text if there is no diff)
-        if len(revisions) < 2:
-            mailBody = mailBody + \
-                _("New page:\n", formatted=False) + \
-                self.get_raw_body()
-        else:
-            lines = wikiutil.pagediff(request, self.page_name, revisions[1],
-                                      self.page_name, revisions[0])
-            if lines:
-                mailBody = mailBody + "%s\n%s\n" % (("-" * 78), '\n'.join(lines))
-            else:
-                mailBody = mailBody + _("No differences found!\n", formatted=False)
-
-        return sendmail.sendmail(request, emails,
-            _('[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s', formatted=False) % {
-                'trivial': (trivial and _("Trivial ", formatted=False)) or "",
-                'sitename': self.cfg.sitename or "Wiki",
-                'pagename': self.page_name,
-                'username': self.uid_override or user.getUserIdentification(request),
-            },
-            mailBody, mail_from=self.cfg.mail_from)
-
-
-    def _notifySubscribers(self, comment, trivial):
-        """ Send email to all subscribers of this page.
-
-        @param comment: editor's comment given when saving the page
-        @param trivial: editor's suggestion that the change is trivial (Subscribers may ignore this)
-        @rtype: string
-        @return: message, indicating success or errors.
-        """
-        _ = self._
-        subscribers = self.getSubscribers(self.request, return_users=1, trivial=trivial)
-        if subscribers:
-            # get a list of old revisions, and append a diff
-            revisions = self.getRevList()
-
-            # send email to all subscribers
-            results = [_('Status of sending notification mails:')]
-            for lang in subscribers:
-                emails = [u.email for u in subscribers[lang]]
-                names = [u.name for u in subscribers[lang]]
-                mailok, status = self._sendNotification(comment, emails, lang, revisions, trivial)
-                recipients = ", ".join(names)
-                results.append(_('[%(lang)s] %(recipients)s: %(status)s') % {
-                    'lang': lang, 'recipients': recipients, 'status': status})
-
-            # Return mail sent results. Ignore trivial - we don't have
-            # to lie. If mail was sent, just tell about it.
-            return '<p>\n%s\n</p> ' % '<br>'.join(results)
-
-        # No mail sent, no message.
-        return ''
 
     def _get_local_timestamp(self):
         """ Returns the string that can be used by the TIME substitution.
@@ -1126,9 +1040,11 @@ Please review the page and save then. Do not save this page as it is!""")
             self.clean_acl_cache()
             self._save_draft(None, None) # everything fine, kill the draft for this page
 
-            # send notification mails
-            if request.cfg.mail_enabled:
-                msg = msg + self._notifySubscribers(comment, trivial)
+            # send notifications
+            from MoinMoin import events
+            e = events.PageChangedEvent(self.request, self, comment, trivial)
+            messages = events.send_event(e)
+            msg = msg + "".join(messages)
 
             if kw.get('index', 1) and request.cfg.xapian_search:
                 from MoinMoin.search.Xapian import Index

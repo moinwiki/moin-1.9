@@ -5,7 +5,14 @@ sa
 cover
 tests/wiki
 wiki/underlay
+wiki/data
 wiki/data/edit-log
 wiki/data/event-log
 wiki/data/cache
-
+wiki/data/pages
+wiki/data/user
+wiki/htdocs
+.settings
+.pydevproject
+.*.swp
+.project

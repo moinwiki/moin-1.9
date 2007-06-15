@@ -661,6 +661,9 @@ class RequestBase(object):
 
         self._login_messages = login_msgs
         return user_obj
+    
+    def handle_jid_auth(self, jid):
+        return user.get_by_jabber_id(self, jid)
 
     def parse_cookie(self):
         try:
@@ -1127,6 +1130,8 @@ class RequestBase(object):
         self.html_formatter = Formatter(self)
         self.formatter = self.html_formatter
 
+        self.initTheme()
+
         action_name = self.action
         if action_name == 'xmlrpc':
             from MoinMoin import xmlrpc
@@ -1138,8 +1143,6 @@ class RequestBase(object):
 
         # parse request data
         try:
-            self.initTheme()
-
             # The last component in path_info is the page name, if any
             path = self.getPathinfo()
 
