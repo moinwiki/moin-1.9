@@ -201,17 +201,21 @@ class XmlRpcBase:
             try:
                 # XXX A marshalling error in any response will fail the entire
                 # multicall. If someone cares they should fix this.
-                results.append([self.dispatch(method_name, params)])
-            except xmlrpclib.Fault, fault:
-                results.append(
-                    {'faultCode': fault.faultCode,
-                     'faultString': fault.faultString}
-                    )
+                result = self.dispatch(method_name, params)
+                
+                if not isinstance(result, xmlrpclib.Fault):
+                    results.append([result])
+                else:
+                    results.append(
+                        {'faultCode': result.faultCode,
+                         'faultString': result.faultString}
+                        )
             except:
                 results.append(
                     {'faultCode': 1,
                      'faultString': "%s:%s" % (sys.exc_type, sys.exc_value)}
                     )
+                
         return results
 
     #############################################################################
