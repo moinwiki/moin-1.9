@@ -81,15 +81,16 @@ class XMLRPCClient(Thread):
                 self.multicall.applyAuthToken(self.token)
    
             try:
-                function(self, command)
-                self.commands_out.put_nowait(command)
-            except xmlrpclib.Fault, fault:
-                msg = u"""Your request has failed. The reason is:\n%s"""
-                notification = cmd.NotificationCommand(command.jid, msg % (fault.faultString, ))
-                self.commands_out.put_nowait(notification)
-
-            del self.token
-            del self.multicall
+                try:
+                    function(self, command)
+                    self.commands_out.put_nowait(command)
+                except xmlrpclib.Fault, fault:
+                    msg = u"""Your request has failed. The reason is:\n%s"""
+                    notification = cmd.NotificationCommand(command.jid, msg % (fault.faultString, ))
+                    self.commands_out.put_nowait(notification)
+            finally:
+                del self.token
+                del self.multicall
                 
         return wrapped_func
     
