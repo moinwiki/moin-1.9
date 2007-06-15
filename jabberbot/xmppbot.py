@@ -120,7 +120,7 @@ class XMPPBot(Client, Thread):
         # A dictionary of contact objects, ordered by bare JID
         self.contacts = { }
 
-        self.known_xmlrpc_cmds = [cmd.GetPage, cmd.GetPageHTML, cmd.GetPageList] 
+        self.known_xmlrpc_cmds = [cmd.GetPage, cmd.GetPageHTML, cmd.GetPageList, cmd.GetPageInfo] 
         self.internal_commands = ["ping", "help"]
         
         self.xmlrpc_commands = {}
@@ -208,6 +208,10 @@ class XMPPBot(Client, Thread):
             msg = u"""That's the list of pages accesible to you:\n\n%s"""
             list = "\n".join(command.data)
             self.send_message(command.jid, msg % (list, ))
+            
+        elif isinstance(command, cmd.GetPageInfo):
+            msg = u"""Here's some more detailed information on page "%s":\n\n%s"""
+            self.send_message(command.jid, msg % (command.pagename, command.data))
             
     def ask_for_subscription(self, jid):
         """Sends a <presence/> stanza with type="subscribe"

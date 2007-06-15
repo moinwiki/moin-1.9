@@ -57,93 +57,112 @@ class XMLRPCClient(Thread):
             self.get_page_html(command)
         elif isinstance(command, cmd.GetPageList):
             self.get_page_list(command)
+        elif isinstance(command, cmd.GetPageInfo):
+            self.get_page_info(command)
     
     def get_auth_token(self, jid):
         token = self.connection.getAuthToken(jid, self.config.secret)
         if token:
             self.token = token
     
-    def get_page(self, command):
-        self.token = None
-        self.multicall = MultiCall(self.connection)
-        self.get_auth_token(command.jid)
+    def _xmlrpc_decorator(function):
+        """A decorator function, which adds some maintenance code
+        
+        This function takes care of preparing a MultiCall object and
+        an authentication token, and deleting them at the end.
+        
+        """
+        def wrapped_func(self, command):
+            self.token = None
+            self.multicall = MultiCall(self.connection)
+            self.get_auth_token(command.jid)
             
+            if self.token:
+                self.multicall.applyAuthToken(self.token)
+   
+            try:
+                function(self, command)
+                self.commands_out.put_nowait(command)
+            except xmlrpclib.Fault, fault:
+                msg = u"""Your request has failed. The reason is:\n%s"""
+                notification = cmd.NotificationCommand(command.jid, msg % (fault.faultString, ))
+                self.commands_out.put_nowait(notification)
+
+            del self.token
+            del self.multicall
+                
+        return wrapped_func
+    
+    def get_page(self, command):
+        """Returns a raw page"""
+        
+        self.multicall.getPage(command.pagename)
+        
         if not self.token:
             # FIXME: notify the user that he may not have full rights on the wiki
-            self.multicall.getPage(command.pagename)
             getpage_result = self.multicall()
         else:
-            self.multicall.applyAuthToken(self.token)
-            self.multicall.getPage(command.pagename)
-            token_result, getpage_result = self.multicall()
+            getpage_result, token_result = self.multicall()
 
-        # We get a dict only when Fault happens
-        if isinstance(getpage_result[0], dict):
-            error_str = u"""The page couldn't be retrieved. The reason is: "%s"."""
-            command.data = error_str % getpage_result[0]["faultString"]
-        else:
-            command.data = getpage_result[0]
-     
-        self.commands_out.put_nowait(command)
+        # FIXME: warn if token turned out being wrong
+        command.data = getpage_result[0]
+            
+    get_page = _xmlrpc_decorator(get_page)
         
-        del self.multicall
-        del self.token
         
     def get_page_html(self, command):
-        self.token = None
-        self.multicall = MultiCall(self.connection)
-        self.get_auth_token(command.jid)
-            
-        if not self.token:
-            # FIXME: notify the user that he may not have full rights on the wiki
-            self.multicall.getPageHTML(command.pagename)
-            getpage_result = self.multicall()
-        else:
-            self.multicall.applyAuthToken(self.token)
-            self.multicall.getPageHTML(command.pagename)
-            token_result, getpage_result = self.multicall()
-
-        # We get a dict only when Fault happens
-        if isinstance(getpage_result[0], dict):
-            error_str = u"""The page couldn't be retrieved. The reason is: "%s"."""
-            command.data = error_str % getpage_result[0]["faultString"]
-        else:
-            command.data = getpage_result[0]
-     
-        self.commands_out.put_nowait(command)
+        """Returns a html-formatted page"""
         
-        del self.multicall
-        del self.token
+        self.multicall.getPageHTML(command.pagename)
+        
+        if not self.token:
+            # FIXME: notify the user that he may not have full rights on the wiki    
+            getpagehtml_result = self.multicall()
+        else:
+            token_result, getpagehtml_result = self.multicall()
+
+        # FIXME: warn if token turned out being wrong
+        command.data = getpagehtml_result[0]
+            
+    get_page_html = _xmlrpc_decorator(get_page_html)
+        
         
     def get_page_list(self, command):
-        self.token = None
-        self.multicall = MultiCall(self.connection)
-        self.get_auth_token(command.jid)
+        """Returns a list of all accesible pages"""
         
         txt = u"""This command may take a while to complete, please be patient..."""
         info = cmd.NotificationCommand(command.jid, txt)
         self.commands_out.put_nowait(info)
         
+        self.multicall.getAllPages()
+        
         if not self.token:
             # FIXME: notify the user that he may not have full rights on the wiki
-            self.multicall.getAllPages()
-            getpage_result = self.multicall()
+            getpagelist_result = self.multicall()
         else:
-            self.multicall.applyAuthToken(self.token)
-            self.multicall.getAllPages()
-            token_result, getpage_result = self.multicall()
+            token_result, getpagelist_result = self.multicall()
 
-        # We get a dict only when Fault happens
-        if isinstance(getpage_result[0], dict):
-            error_str = u"""List couldn't be retrieved. The reason is: "%s"."""
-            command.data = error_str % getpage_result[0]["faultString"]
-        else:
-            command.data = getpage_result[0]
-     
-        self.commands_out.put_nowait(command)
+        # FIXME: warn if token turned out being wrong
+        command.data = getpagelist_result[0]
+            
+    get_page_list = _xmlrpc_decorator(get_page_list)
+    
+    
+    def get_page_info(self, command):
+        """Returns detailed information about a given page"""
         
-        del self.multicall
-        del self.token
+        self.multicall.getPageInfo(command.pagename)
+        
+        if not self.token:
+            # FIXME: notify the user that he may not have full rights on the wiki
+            getpageinfo_result = self.multicall()
+        else:
+            token_result, getpageinfo_result = self.multicall()
+        
+        # FIXME: warn if token turned out being wrong
+        command.data = getpageinfo_result[0]
+        
+    get_page_info = _xmlrpc_decorator(get_page_info)
 
 
 class XMLRPCServer(Thread):

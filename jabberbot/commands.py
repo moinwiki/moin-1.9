@@ -73,3 +73,12 @@ class GetPageList(BaseDataCommand):
     
     def __init__(self, jid):
         BaseDataCommand.__init__(self, jid)
+
+class GetPageInfo(BaseDataCommand):
+    
+    description = u"show detailed information about a page"
+    parameter_list = u"pagename"
+    
+    def __init__(self, jid, pagename):
+        BaseDataCommand.__init__(self, jid)
+        self.pagename = pagename
