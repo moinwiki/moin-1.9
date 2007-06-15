@@ -41,12 +41,22 @@ def getUserList(request):
     userlist = [f for f in files if user_re.match(f)]
     return userlist
 
-def get_by_email_address(request, email_address):
-    """ Searches for a user with a particular e-mail address and returns it. """
+def get_by_filter(request, filter_func):
+    """ Searches for an user with a given filter function """
     for uid in getUserList(request):
         theuser = User(request, uid)
-        if theuser.valid and theuser.email.lower() == email_address.lower():
+        if filter_func(theuser):
             return theuser
+
+def get_by_email_address(request, email_address):
+    """ Searches for an user with a particular e-mail address and returns it. """
+    filter_func = lambda user: user.valid and user.email.lower() == email_address.lower()
+    return get_by_filter(request, filter_func)
+        
+def get_by_jabber_id(request, jabber_id):
+    """ Searches for an user with a perticular jabber id and returns it. """
+    filter_func = lambda user: user.valid and user.jid.lower() == jabber_id.lower()
+    return get_by_filter(request, filter_func)
 
 def _getUserIdByKey(request, key, search):
     """ Get the user ID for a specified key/value pair.
@@ -733,6 +743,11 @@ class User:
         if pagename not in self.subscribed_pages:
             self.subscribed_pages.append(pagename)
             self.save()
+            
+            # Send a notification
+            from MoinMoin.events import SubscribedToPageEvent, send_event
+            e = SubscribedToPageEvent(self._request, pagename, self.name)
+            send_event(e)
             return True
 
         return False

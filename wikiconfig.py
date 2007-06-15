@@ -26,3 +26,26 @@ class Config(DefaultConfig):
     ]
     # ^^^ DON'T TOUCH THIS EXCEPT IF YOU KNOW WHAT YOU DO ^^^
 
+    # Mail --------------------------------------------------------------
+
+    # Configure to enable subscribing to pages (disabled by default)
+    # or sending forgotten passwords.
+
+    # SMTP server, e.g. "mail.provider.com" (None to disable mail)
+    mail_smarthost = "omoikane"
+    mail_sendmail = "/usr/sbin/sendmail -t -i"
+
+    # The return address, e.g u"Jürgen Wiki <noreply@mywiki.org>" [Unicode]
+    mail_from = u"karol@omoikane"
+
+    # "user pwd" if you need to use SMTP AUTH
+    # mail_login = "grzywacz"
+    
+    # Notification  -----------------------------------------------------
+    bot_host = u"localhost:8000"
+    
+    # A secret shared with notification bot, must be the same in both
+    # configs for communication to work
+    #
+    # *************** CHANGE THIS! *************** 
+    secret = u"8yFAS(E-,.c-93adj'uff;3AW#(UDJ,.df3OA($HG"

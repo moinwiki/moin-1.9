@@ -9,6 +9,7 @@
 
 import time
 from MoinMoin import user, util, wikiutil
+from MoinMoin.events import send_event, JabberIDSetEvent, JabberIDUnsetEvent
 from MoinMoin.widget import html
 
 _debug = 0
@@ -226,13 +227,28 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
 
             # Email should be unique - see also MoinMoin/script/accounts/moin_usercheck.py
             if theuser.email and self.request.cfg.user_email_unique:
-                users = user.getUserList(self.request)
-                for uid in users:
-                    if uid == theuser.id:
-                        continue
-                    thisuser = user.User(self.request, uid, auth_method='userform:283')
-                    if thisuser.email == theuser.email:
-                        return _("This email already belongs to somebody else.")
+                other = user.get_by_email_address(self.request, theuser.email)
+                if other is not None and other.id != theuser.id:
+                    return _("This email already belongs to somebody else.")
+                    
+        if not 'jid' in theuser.auth_attribs:
+            # try to get the jid
+            jid = wikiutil.clean_input(form.get('jid', [theuser.jid])[0]).strip()
+            
+            jid_changed = theuser.jid != jid
+            previous_jid = theuser.jid           
+            theuser.jid = jid
+            
+            if theuser.jid and self.request.cfg.user_jid_unique:
+                other = user.get_by_jabber_id(self.request, theuser.jid)
+                if other is not None and other.id != theuser.id:
+                    return _("This jabber id already belongs to somebody else.")
+            
+            if jid_changed:
+                set_event = JabberIDSetEvent(self.request, theuser.jid)
+                unset_event = JabberIDUnsetEvent(self.request, previous_jid)
+                send_event(set_event)
+                send_event(unset_event)
 
         if not 'aliasname' in theuser.auth_attribs:
             # aliasname
@@ -284,7 +300,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
         already_handled = ['name', 'password', 'password2', 'email',
                            'aliasname', 'edit_rows', 'editor_default',
                            'editor_ui', 'tz_offset', 'datetime_fmt',
-                           'theme_name', 'language']
+                           'theme_name', 'language', 'jid']
         for field in self.cfg.user_form_fields:
             key = field[0]
             if ((key in self.cfg.user_form_disable)
@@ -621,6 +637,9 @@ class UserSettings:
 
         if self.cfg.mail_enabled:
             buttons.append(("account_sendmail", _('Mail me my account data')))
+            
+        if self.cfg.jabber_enabled:
+            buttons.append(("account_sendjabber", _('Send me my account data with Jabber')))
 
         if create_only:
             buttons = [("create_only", _('Create Profile'))]
@@ -731,6 +750,7 @@ def do_user_browser(request):
         #Column('id', label=('ID'), align='right'),
         Column('name', label=('Username')),
         Column('email', label=('Email')),
+        Column('jabber', label=('Jabber')),
         Column('action', label=_('Action')),
     ]
 
@@ -750,12 +770,21 @@ def do_user_browser(request):
             (request.formatter.url(1, 'mailto:' + account.email, css='mailto', do_escape=0) +
              request.formatter.text(account.email) +
              request.formatter.url(0)),
+            (request.formatter.url(1, 'xmpp:' + account.jid, css='mailto', do_escape=0) +
+             request.formatter.text(account.jid) +
+             request.formatter.url(0)),
             request.page.link_to(request, text=_('Mail me my account data'),
                                  querystr={"action":"userform",
                                            "email": account.email,
                                            "account_sendmail": "1",
                                            "sysadm": "users", },
-                                 rel='nofollow')
+                                 rel='nofollow'),
+            request.page.link_to(request, text=_('Send me my accound data with Jabber'),
+                                 querystr={"action":"userform",
+                                           "jid": account.jid,
+                                           "account_sendjabber": "1",
+                                           "sysadm": "users", },
+                                  rel='nofollow'),
         ))
 
     if data:
