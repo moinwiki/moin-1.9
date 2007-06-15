@@ -120,7 +120,7 @@ class XMPPBot(Client, Thread):
         # A dictionary of contact objects, ordered by bare JID
         self.contacts = { }
 
-        self.known_xmlrpc_cmds = [cmd.GetPage, cmd.GetPageHTML] 
+        self.known_xmlrpc_cmds = [cmd.GetPage, cmd.GetPageHTML, cmd.GetPageList] 
         self.internal_commands = ["ping", "help"]
         
         self.xmlrpc_commands = {}
@@ -200,9 +200,14 @@ class XMPPBot(Client, Thread):
             jid = JID(node_or_jid=command.jid)
             self.remove_subscription(jid)
             
-        elif isinstance(command, cmd.GetPage):
+        elif isinstance(command, cmd.GetPage) or isinstance(command, cmd.GetPageHTML):
             msg = u"""Here's the page "%s" that you've requested:\n\n%s"""
             self.send_message(command.jid, msg % (command.pagename, command.data))
+        
+        elif isinstance(command, cmd.GetPageList):
+            msg = u"""That's the list of pages accesible to you:\n\n%s"""
+            list = "\n".join(command.data)
+            self.send_message(command.jid, msg % (list, ))
             
     def ask_for_subscription(self, jid):
         """Sends a <presence/> stanza with type="subscribe"

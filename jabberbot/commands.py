@@ -65,3 +65,11 @@ class GetPageHTML(BaseDataCommand):
     def __init__(self, jid, pagename):
         BaseDataCommand.__init__(self, jid)
         self.pagename = pagename
+        
+class GetPageList(BaseDataCommand):
+    
+    description = u"get a list of accesible pages"
+    parameter_list = u""
+    
+    def __init__(self, jid):
+        BaseDataCommand.__init__(self, jid)

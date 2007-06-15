@@ -55,6 +55,8 @@ class XMLRPCClient(Thread):
             self.get_page(command)
         elif isinstance(command, cmd.GetPageHTML):
             self.get_page_html(command)
+        elif isinstance(command, cmd.GetPageList):
+            self.get_page_list(command)
     
     def get_auth_token(self, jid):
         token = self.connection.getAuthToken(jid, self.config.secret)
@@ -86,9 +88,62 @@ class XMLRPCClient(Thread):
         
         del self.multicall
         del self.token
-    
+        
     def get_page_html(self, command):
-        pass
+        self.token = None
+        self.multicall = MultiCall(self.connection)
+        self.get_auth_token(command.jid)
+            
+        if not self.token:
+            # FIXME: notify the user that he may not have full rights on the wiki
+            self.multicall.getPageHTML(command.pagename)
+            getpage_result = self.multicall()
+        else:
+            self.multicall.applyAuthToken(self.token)
+            self.multicall.getPageHTML(command.pagename)
+            token_result, getpage_result = self.multicall()
+
+        # We get a dict only when Fault happens
+        if isinstance(getpage_result[0], dict):
+            error_str = u"""The page couldn't be retrieved. The reason is: "%s"."""
+            command.data = error_str % getpage_result[0]["faultString"]
+        else:
+            command.data = getpage_result[0]
+     
+        self.commands_out.put_nowait(command)
+        
+        del self.multicall
+        del self.token
+        
+    def get_page_list(self, command):
+        self.token = None
+        self.multicall = MultiCall(self.connection)
+        self.get_auth_token(command.jid)
+        
+        txt = u"""This command may take a while to complete, please be patient..."""
+        info = cmd.NotificationCommand(command.jid, txt)
+        self.commands_out.put_nowait(info)
+        
+        if not self.token:
+            # FIXME: notify the user that he may not have full rights on the wiki
+            self.multicall.getAllPages()
+            getpage_result = self.multicall()
+        else:
+            self.multicall.applyAuthToken(self.token)
+            self.multicall.getAllPages()
+            token_result, getpage_result = self.multicall()
+
+        # We get a dict only when Fault happens
+        if isinstance(getpage_result[0], dict):
+            error_str = u"""List couldn't be retrieved. The reason is: "%s"."""
+            command.data = error_str % getpage_result[0]["faultString"]
+        else:
+            command.data = getpage_result[0]
+     
+        self.commands_out.put_nowait(command)
+        
+        del self.multicall
+        del self.token
 
 
 class XMLRPCServer(Thread):
