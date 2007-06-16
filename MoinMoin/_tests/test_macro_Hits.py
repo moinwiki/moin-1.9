@@ -6,8 +6,7 @@
 
     @license: GNU GPL, see COPYING for details.
 """
-import os, py, unittest
-from StringIO import StringIO
+import os, unittest
 from MoinMoin import macro
 from MoinMoin.logfile import eventlog
 from MoinMoin.Page import Page
