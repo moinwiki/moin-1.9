@@ -885,13 +885,16 @@ class Page(object):
         """
         from MoinMoin import i18n
         from MoinMoin import security
+        request = self.request
         pi = {} # we collect the processing instructions here
-    
+
         body = self.body
+        # TODO: remove this hack once we have separate metadata and can use mimetype there
         if body.startswith('<?xml'): # check for XML content
             pi['lines'] = 0
             pi['format'] = "xslt"
             pi['formatargs'] = ''
+            pi['acl'] = security.AccessControlList(request.cfg, []) # avoid KeyError on acl check
             return pi
 
         meta = self.meta
@@ -900,7 +903,6 @@ class Page(object):
         pi['format'] = self.cfg.default_markup or "wiki"
         pi['formatargs'] = ''
         pi['lines'] = len(meta)
-        request = self.request
         acl = []
         
         for verb, args in meta:
