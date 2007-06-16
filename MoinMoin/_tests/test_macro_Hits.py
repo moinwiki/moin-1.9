@@ -1,7 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - MoinMoin.macro Hits tested
-    Module names must start with 'test_' to be included in the tests.
 
     @copyright: 2007 MoinMoin:ReimarBauer
 
