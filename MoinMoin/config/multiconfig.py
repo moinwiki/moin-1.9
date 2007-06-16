@@ -462,6 +462,7 @@ reStructuredText Quick Reference
 
     user_autocreate = False # do we auto-create user profiles
     user_email_unique = True # do we check whether a user's email is unique?
+    user_jid_unique = True # do we check whether a user's email is unique?
 
     # a regex of HTTP_USER_AGENTS that should be excluded from logging
     # and receive a FORBIDDEN for anything except viewing a page
@@ -546,6 +547,7 @@ reStructuredText Quick Reference
         ('password', _('Password'), "password", "36", ''),
         ('password2', _('Password repeat'), "password", "36", _('(Only for password change or new account)')),
         ('email', _('Email'), "text", "36", ''),
+        ('jid', _('Jabber ID'), "text", "36", ''),
         ('css_url', _('User CSS URL'), "text", "40", _('(Leave it empty for disabling user CSS)')),
         ('edit_rows', _('Editor size'), "text", "3", ''),
     ]
@@ -556,6 +558,7 @@ reStructuredText Quick Reference
         'password': '',
         'password2': '',
         'email': '',
+        'jid': '',
         'css_url': '',
         'edit_rows': "20",
     }
@@ -656,6 +659,9 @@ reStructuredText Quick Reference
 
         # check if mail is possible and set flag:
         self.mail_enabled = (self.mail_smarthost is not None or self.mail_sendmail is not None) and self.mail_from
+        
+        # check if jabber bot is available and set flag:
+        self.jabber_enabled = self.bot_host is not None
 
         # Cache variables for the properties below
         self._iwid = self._iwid_full = self._meta_dict = None
