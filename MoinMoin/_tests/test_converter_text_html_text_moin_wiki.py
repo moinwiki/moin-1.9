@@ -1134,6 +1134,3 @@ class TestConvertBrokenBrowser(TestBase):
 """
         self.do(test, output)
 
-if __name__ == '__main__':
-    unittest.main()
-
