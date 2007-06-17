@@ -8,30 +8,19 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import xmlrpclib
-
 from MoinMoin.user import User, getUserList
 from MoinMoin.Page import Page
 
 import MoinMoin.events as ev
 from MoinMoin.events.messages import page_change_message
 
-# XML RPC Server object used to communicate with notification bot
-server = None
-
 
 def handle(event):
-    global server
-
     cfg = event.request.cfg
 
     # Check for desired event type and if notification bot is configured
     if not cfg.jabber_enabled:
         return
-    
-    # Create an XML RPC server object only if it doesn't exist
-    if server is None:
-        server = xmlrpclib.Server("http://" + cfg.bot_host)
     
     if isinstance(event, ev.PageChangedEvent):
         return handle_page_changed(event)
@@ -49,6 +38,7 @@ def handle_jid_changed(event):
     """ Handles events sent when user's JID changes """
     
     request = event.request
+    server = request.cfg.xmlrpc_server
     _ = request.getText
     
     try:
@@ -69,6 +59,7 @@ def handle_file_attached(event):
     """Handles event sent when a file is attached to a page"""
     
     request = event.request
+    server = request.cfg.xmlrpc_server
     page = Page(request, event.pagename) 
     
     subscribers = page.getSubscribers(request, return_users=1)
@@ -79,6 +70,7 @@ def handle_page_changed(event):
     """ Handles events related to page changes """
     
     request = event.request
+    server = request.cfg.xmlrpc_server
     page = event.page
     
     subscribers = page.getSubscribers(request, return_users=1, trivial=event.trivial)
@@ -89,6 +81,7 @@ def handle_page_deleted(event):
     """Handles event sent when a page is deleted"""
     
     request = event.request
+    server = request.cfg.xmlrpc_server
     page = event.page
     
     subscribers = page.getSubscribers(request, return_users=1)
@@ -151,6 +144,7 @@ def send_notification(request, jids, message):
     @param trivial: the change is marked as trivial
     """
     _ = request.getText
+    server = request.cfg.xmlrpc_server
     
     for jid in jids:
         # FIXME: stops sending notifications on first error
