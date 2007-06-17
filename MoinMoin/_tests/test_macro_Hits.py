@@ -6,7 +6,7 @@
 
     @license: GNU GPL, see COPYING for details.
 """
-import os, unittest
+import os, unittest # LEGACY UNITTEST, PLEASE DO NOT IMPORT unittest IN NEW TESTS, PLEASE CONSULT THE py.test DOCS
 from MoinMoin import macro
 from MoinMoin.logfile import eventlog
 from MoinMoin.Page import Page
