@@ -13,7 +13,7 @@ from MoinMoin import user
 from MoinMoin.Page import Page
 from MoinMoin.mail import sendmail
 from MoinMoin.events import *
-from MoinMoin.events.notification_common import page_changed_notification
+from MoinMoin.events.messages import page_change_message
 
 
 def sendNotification(request, page, comment, emails, email_lang, revisions, trivial):
@@ -28,7 +28,8 @@ def sendNotification(request, page, comment, emails, email_lang, revisions, triv
     @return: sendmail result
     """
     _ = request.getText
-    mailBody = page_changed_notification(request, page, comment, email_lang, revisions, trivial)
+    mailBody = page_change_message("page_changed", request, page, email_lang, 
+                                   comment=comment, revisions=revisions)
 
     return sendmail.sendmail(request, emails,
         _('[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s', formatted=False) % {
