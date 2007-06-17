@@ -662,6 +662,11 @@ reStructuredText Quick Reference
         
         # check if jabber bot is available and set flag:
         self.jabber_enabled = self.bot_host is not None
+        
+        # if we are to use the jabber bot, instantiate a server object for future use
+        if self.jabber_enabled:
+            from xmlrpclib import Server
+            self.xmlrpc_server = Server("http://" + self.bot_host, )
 
         # Cache variables for the properties below
         self._iwid = self._iwid_full = self._meta_dict = None
