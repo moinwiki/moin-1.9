@@ -9,7 +9,7 @@
 
 import time
 from MoinMoin import user, util, wikiutil
-from MoinMoin.events import send_event, JabberIDSetEvent, JabberIDUnsetEvent
+import MoinMoin.events as events
 from MoinMoin.widget import html
 
 _debug = 0
@@ -134,6 +134,10 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
 
         # save data
         theuser.save()
+        
+        user_created = events.UserCreatedEvent(self.request, theuser)
+        events.send_event(user_created)
+        
         if form.has_key('create_and_mail'):
             theuser.mailAccountData()
 
@@ -245,10 +249,10 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
                     return _("This jabber id already belongs to somebody else.")
             
             if jid_changed:
-                set_event = JabberIDSetEvent(self.request, theuser.jid)
-                unset_event = JabberIDUnsetEvent(self.request, previous_jid)
-                send_event(set_event)
-                send_event(unset_event)
+                set_event = events.JabberIDSetEvent(self.request, theuser.jid)
+                unset_event = events.JabberIDUnsetEvent(self.request, previous_jid)
+                events.send_event(unset_event)
+                events.send_event(set_event)
 
         if not 'aliasname' in theuser.auth_attribs:
             # aliasname

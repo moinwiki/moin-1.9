@@ -240,8 +240,9 @@ class XMPPBot(Client, Thread):
         """Sends a message
         
         @param jid: JID to send the message to
-        @param text: message's body
+        @param text: message's body: 
         @param type: message type, as defined in RFC
+        @type jid: pyxmpp.jid.JID
         
         """
         message = Message(to_jid=jid, body=text, stanza_type=msg_type)
