@@ -93,6 +93,13 @@ class JabberIDUnsetEvent(Event):
         Event.__init__(self, request)
         self.jid = jid
         
+class UserCreatedEvent(Event):
+    """ Sent when a new user has been created """
+    
+    def __init__(self, request, user):
+        Event.__init__(self, request)
+        self.user = user
+        
 def _register_handlers(cfg):
     """Create a list of available event handlers.
     
