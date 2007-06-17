@@ -41,6 +41,8 @@ def handle(event):
         return handle_file_attached(event)
     elif isinstance(event, ev.PageDeletedEvent):
         return handle_page_deleted(event)
+    elif isinstance(event, ev.UserCreatedEvent):
+        return handle_user_created(event)
     
 
 def handle_jid_changed(event):
@@ -50,7 +52,7 @@ def handle_jid_changed(event):
     _ = request.getText
     
     try:
-        if isinstance(event, JabberIDSetEvent):
+        if isinstance(event, ev.JabberIDSetEvent):
             server.addJIDToRoster(request.cfg.secret, event.jid)
         else:
             server.removeJIDFromRoster(request.cfg.secret, event.jid)        
@@ -91,6 +93,29 @@ def handle_page_deleted(event):
     
     subscribers = page.getSubscribers(request, return_users=1)
     page_change("page_deleted", request, page, subscribers)
+
+
+def handle_user_created(event):
+    """Handles an event sent when a new user is being created"""
+    
+    user_ids = getUserList(event.request)
+    jids = []
+    msg = u"""Dear Superuser, a new user has just been created. Details follow:
+    User name: %s
+    Email address: %s
+    """
+
+    email = event.user.email or u"NOT SET"
+    
+    for id in user_ids:
+        usr = User(event.request, id=id)
+        
+        # Currently send this only to super users
+        # TODO: make it possible to disable this notification
+        if usr.isSuperUser() and usr.jid:
+            jids.append(usr.jid)
+            
+    send_notification(event.request, jids, msg % (event.user.name, email))
     
 
 def page_change(type, request, page, subscribers, **kwargs):
