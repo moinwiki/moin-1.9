@@ -695,8 +695,8 @@ class User:
         The subscription list may contain page names or interwiki page
         names. e.g 'Page Name' or 'WikiName:Page_Name'
         
-        TODO: check if its fast enough when calling with many users
-        from page.getSubscribersList()
+        TODO: check if it's fast enough when getting called for many
+              users from page.getSubscribersList()
         
         @param pagelist: list of pages to check for subscription
         @rtype: bool
