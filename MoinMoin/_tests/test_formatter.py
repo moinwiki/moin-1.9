@@ -39,5 +39,5 @@ class TestFormatter(TestCase):
         #page.formatter.setPage(page)
         #page.hilite_re = None
 
-        return self.request.redirectedOutput(page.send_page)
+        return self.request.redirectedOutput(page.send_page, content_only=1)
 

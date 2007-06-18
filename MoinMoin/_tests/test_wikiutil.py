@@ -62,35 +62,35 @@ class TestTemplatePage(unittest.TestCase):
 
 
 class TestParmeterParser(unittest.TestCase):
- 
+
     def testNoWantedArguments(self):
         args = ''
         argParser = wikiutil.ParameterParser('')
         self.arg_list, self.arg_dict = argParser.parse_parameters(args)
-        result = len(self.arg_dict) > 0
-        expected = False
-        self.assert_(result is expected,
+        result = len(self.arg_dict)
+        expected = 0
+        self.assert_(result == expected,
                      'Expected "%(expected)s" but got "%(result)s"' % locals())
 
     def testWantedArguments(self):
-        test_args = ('', 
+        test_args = ('',
                      'width=100',
                      'width=100, height=200', )
-       
+
         argParser = wikiutil.ParameterParser("%(width)s%(height)s")
-        for args in test_args: 
+        for args in test_args:
             self.arg_list, self.arg_dict = argParser.parse_parameters(args)
-            result = len(self.arg_dict) == 2
-            expected = True
-            self.assert_(result is expected,
+            result = len(self.arg_dict)
+            expected = 2
+            self.assert_(result == expected,
                          'Expected "%(expected)s" but got "%(result)s"' % locals())
-      
+
     def testTooMuchWantedArguments(self):
         args = 'width=100, height=200, alt=Example'
         argParser = wikiutil.ParameterParser("%(width)s%(height)s")
         self.arg_list, self.arg_dict = argParser.parse_parameters(args)
-        result = len(self.arg_dict) == 2
-        expected = True
-        self.assert_(result is expected,
-                     'Expected "%(expected)s" but got "%(result)s"' % locals())  
-      
+        result = len(self.arg_dict)
+        expected = 2
+        self.assert_(result == expected,
+                     'Expected "%(expected)s" but got "%(result)s"' % locals())
+
