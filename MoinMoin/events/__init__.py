@@ -17,11 +17,14 @@ from MoinMoin.wikiutil import PluginAttributeError
 # A list of available event handlers
 _event_handlers = None
 
+# A list of event types that user can subscribe to
+_subscribable_events = None
+
 # Create a list of extension actions from the package directory
 modules = pysupport.getPackageModules(__file__)
 
 
-class Event:
+class Event(object):
     """A class handling information common to all events."""
     def __init__(self, request):
         self.request = request
@@ -34,6 +37,10 @@ class PageEvent(Event):
 
         
 class PageChangedEvent(PageEvent):
+    
+    description = u"""Page has been modified (edit, creation, deletion)"""
+    req_superuser = False
+    
     def __init__(self, request, page, comment, trivial):
         PageEvent.__init__(self, request)
         self.page = page
@@ -46,6 +53,10 @@ class PageRenamedEvent(PageEvent):
 
 
 class PageDeletedEvent(PageEvent):
+    
+    description = u"""Page has been deleted"""
+    req_superuser = False
+    
     def __init__(self, request, page, comment):
         PageEvent.__init__(self, request)
         self.request = request
@@ -54,6 +65,10 @@ class PageDeletedEvent(PageEvent):
 
 
 class FileAttachedEvent(PageEvent):
+    
+    description = u"""A new attachment has been added"""
+    req_superuser = False
+    
     def __init__(self, request, pagename, attachment_name, size):
         PageEvent.__init__(self, request)
         self.request = request
@@ -63,6 +78,10 @@ class FileAttachedEvent(PageEvent):
 
 
 class PageRevertedEvent(PageEvent):
+    
+    description = u"""A page has been reverted to a previous state"""
+    req_superuser = False
+    
     def __init__(self, request, pagename, previous, current):
         PageEvent.__init__(self, request)
         self.pagename = pagename
@@ -71,6 +90,10 @@ class PageRevertedEvent(PageEvent):
 
 
 class SubscribedToPageEvent(PageEvent):
+    
+    description = u"""An user has subscribed to a page"""
+    req_superuser = True
+    
     def __init__(self, request, pagename, username):
         PageEvent.__init__(self, request)    
         self.pagename = pagename
@@ -79,6 +102,7 @@ class SubscribedToPageEvent(PageEvent):
 
 class JabberIDSetEvent(Event):
     """ Sent when user changes her Jabber ID """
+    
     def __init__(self, request, jid):
         Event.__init__(self, request)
         self.jid = jid
@@ -88,10 +112,21 @@ class JabberIDUnsetEvent(Event):
     
     Obviously this will be usually sent along with JabberIDSetEvent,
     because we require user's jabber id to be unique by default.
+    
     """
     def __init__(self, request, jid):
         Event.__init__(self, request)
         self.jid = jid
+        
+class UserCreatedEvent(Event):
+    """ Sent when a new user has been created """
+    
+    description = u"""A new account has been created"""
+    req_superuser = True
+    
+    def __init__(self, request, user):
+        Event.__init__(self, request)
+        self.user = user
         
 def _register_handlers(cfg):
     """Create a list of available event handlers.
@@ -133,3 +168,22 @@ def send_event(event):
             msg.append(retval)
             
     return msg
+
+def get_subscribable_events():
+    """Create and return a list of user-visible events
+    
+    @return: A list of user-visible events described by dictionaries
+    @rtype: dict
+    """
+    global _subscribable_events
+    defs = globals()
+    
+    if not _subscribable_events:
+        _subscribable_events = {}
+        
+        for ev in defs.values():
+            if type(ev) is type and issubclass(ev, Event) and ev.__dict__.has_key("description"):
+                _subscribable_events[ev.__name__] = {'desc': ev.description,
+                                                     'superuser': ev.req_superuser}
+    
+    return _subscribable_events

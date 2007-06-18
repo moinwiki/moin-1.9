@@ -16,22 +16,13 @@ from MoinMoin.Page import Page
 import MoinMoin.events as ev
 from MoinMoin.events.messages import page_change_message
 
-# XML RPC Server object used to communicate with notification bot
-server = None
-
 
 def handle(event):
-    global server
-
     cfg = event.request.cfg
 
     # Check for desired event type and if notification bot is configured
     if not cfg.jabber_enabled:
         return
-    
-    # Create an XML RPC server object only if it doesn't exist
-    if server is None:
-        server = xmlrpclib.Server("http://" + cfg.bot_host)
     
     if isinstance(event, ev.PageChangedEvent):
         return handle_page_changed(event)
@@ -41,16 +32,19 @@ def handle(event):
         return handle_file_attached(event)
     elif isinstance(event, ev.PageDeletedEvent):
         return handle_page_deleted(event)
+    elif isinstance(event, ev.UserCreatedEvent):
+        return handle_user_created(event)
     
 
 def handle_jid_changed(event):
     """ Handles events sent when user's JID changes """
     
     request = event.request
+    server = request.cfg.notification_server
     _ = request.getText
     
     try:
-        if isinstance(event, JabberIDSetEvent):
+        if isinstance(event, ev.JabberIDSetEvent):
             server.addJIDToRoster(request.cfg.secret, event.jid)
         else:
             server.removeJIDFromRoster(request.cfg.secret, event.jid)        
@@ -63,13 +57,36 @@ def handle_jid_changed(event):
         return (0, _("Notifications not sent"))
 
 
+def _filter_subscriber_list(event, subscribers):
+    """Filter a list of page subscribers to honor event subscriptions
+    
+    @param subscribers: list of subscribers (dict of lists, language is the key)
+    @type subscribers: dict
+    
+    """
+    event_name = event.__class__.__name__
+    
+    # Filter the list by removing users who don't want to receive
+    # notifications about this type of event
+    for lang in subscribers.keys():
+        userlist = []
+        
+        for usr in subscribers[lang]:
+            if event_name in usr.subscribed_events:
+                userlist.append(usr)
+                
+        subscribers[lang] = userlist
+
 def handle_file_attached(event):
     """Handles event sent when a file is attached to a page"""
     
     request = event.request
-    page = Page(request, event.pagename) 
+    server = request.cfg.notification_server
+    page = Page(request, event.pagename)
     
     subscribers = page.getSubscribers(request, return_users=1)
+    _filter_subscriber_list(event, subscribers)
+    
     page_change("attachment_added", request, page, subscribers, attach_name=event.attachment_name, attach_size=event.size)
 
         
@@ -77,9 +94,12 @@ def handle_page_changed(event):
     """ Handles events related to page changes """
     
     request = event.request
+    server = request.cfg.notification_server
     page = event.page
     
-    subscribers = page.getSubscribers(request, return_users=1, trivial=event.trivial)
+    subscribers = page.getSubscribers(request, return_users=1, trivial=event.trivial)    
+    _filter_subscriber_list(event, subscribers)
+
     page_change("page_changed", request, page, subscribers, revisions=page.getRevList(), comment=event.comment)
     
 
@@ -87,10 +107,37 @@ def handle_page_deleted(event):
     """Handles event sent when a page is deleted"""
     
     request = event.request
+    server = request.cfg.notification_server
     page = event.page
     
     subscribers = page.getSubscribers(request, return_users=1)
+    _filter_subscriber_list(event, subscribers)
+    
     page_change("page_deleted", request, page, subscribers)
+
+
+def handle_user_created(event):
+    """Handles an event sent when a new user is being created"""
+    
+    user_ids = getUserList(event.request)
+    jids = []
+    event_name = event.__class__.__name__
+    msg = u"""Dear Superuser, a new user has just been created. Details follow:
+    User name: %s
+    Email address: %s
+    """
+
+    email = event.user.email or u"NOT SET"
+    
+    for id in user_ids:
+        usr = User(event.request, id=id)
+        
+        # Currently send this only to super users
+        # TODO: make it possible to disable this notification
+        if usr.isSuperUser() and usr.jid and event_name in usr.subscribed_events:
+            jids.append(usr.jid)
+            
+    send_notification(event.request, jids, msg % (event.user.name, email))
     
 
 def page_change(type, request, page, subscribers, **kwargs):
@@ -101,7 +148,7 @@ def page_change(type, request, page, subscribers, **kwargs):
         # send notifications to all subscribers
         results = [_('Status of sending notifications:')]
         for lang in subscribers:
-            jids = [u.jid for u in subscribers[lang]]
+            jids = [u.jid for u in subscribers[lang] if u.jid]
             names = [u.name for u in subscribers[lang]]
             msg = page_change_message(type, request, page, lang, **kwargs)
             jabberok, status = send_notification(request, jids, msg)
@@ -126,8 +173,10 @@ def send_notification(request, jids, message):
     @param trivial: the change is marked as trivial
     """
     _ = request.getText
+    server = request.cfg.notification_server
     
     for jid in jids:
+                
         # FIXME: stops sending notifications on first error
         try:
             server.send_notification(request.cfg.secret, jid, message)

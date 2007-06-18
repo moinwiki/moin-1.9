@@ -167,7 +167,7 @@ class Config(DefaultConfig):
     # Notification bot options ------------------------------------------
     
     # Host and port on which the notification bot runs
-    bot_host = u"localhost:8000"
+    notification_bot_uri = u"http://localhost:8000"
     
     # A secret shared with notification bot, must be the same in both
     # configs for communication to work.
