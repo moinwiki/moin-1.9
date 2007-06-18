@@ -435,6 +435,7 @@ reStructuredText Quick Reference
     siteid = 'default'
     stylesheets = [] # list of tuples (media, csshref) to insert after theme css, before user css
     subscribed_pages_default = [] # preload user subscribed pages with this page list
+    subscribed_events_default = [] # preload user subscribed events with this list
     superuser = [] # list of unicode user names that have super powers :)
     supplementation_page = False
     supplementation_page_name = u'Discussion'

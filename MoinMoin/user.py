@@ -315,6 +315,7 @@ class User:
         self.datetime_fmt = ""
         self.quicklinks = self._cfg.quicklinks_default
         self.subscribed_pages = self._cfg.subscribed_pages_default
+        self.subscribed_events = self._cfg.subscribed_events_default
         self.theme_name = self._cfg.theme_default
         self.editor_default = self._cfg.editor_default
         self.editor_ui = self._cfg.editor_ui
@@ -422,7 +423,7 @@ class User:
                         val = decodeDict(val)
                     # for compatibility reading old files, keep these explicit
                     # we will store them with [] appended
-                    elif key in ['quicklinks', 'subscribed_pages']:
+                    elif key in ['quicklinks', 'subscribed_pages', 'subscribed_events']:
                         val = decodeList(val)
                     user_data[key] = val
             except ValueError:
