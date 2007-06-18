@@ -173,6 +173,11 @@ class XMPPBot(Client, Thread):
         @param ignore_dnd: if command results in user interaction, should DnD be ignored?
         
         """
+        
+        if not command.jid:
+            self.log("Received a command with empty jid, looks like a bug!")
+            return
+        
         # Handle normal notifications
         if isinstance(command, cmd.NotificationCommand):
             jid = JID(node_or_jid=command.jid)
