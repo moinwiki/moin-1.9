@@ -31,7 +31,7 @@ class TestSimpleStuff:
         # injected for you into the test class by moin test framework.
         result = module_tested.some_function(self.request, 'test_value')
         expected = 'expected value'
-        assert result == expected, ('Expected "%(expected)s" but got "%(result)s"') % locals()
+        assert result == expected
 
 
 class TestComplexStuff:
@@ -63,8 +63,7 @@ class TestComplexStuff:
         """ module_tested: function should... """
         for description, test, expected in self._tests:
             result = self._helper_function(test)
-            assert result == expected, ('%(description)s: expected "%(expected)s" '
-                              'but got "%(result)s"') % locals()
+            assert result == expected
 
     def _helper_fuction(self, test):
         """ Some tests needs extra  work to run

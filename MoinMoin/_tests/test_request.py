@@ -8,7 +8,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import unittest
+import unittest # LEGACY UNITTEST, PLEASE DO NOT IMPORT unittest IN NEW TESTS, PLEASE CONSULT THE py.test DOCS
 from MoinMoin import config
 
 class TestNormalizePagename(unittest.TestCase):

@@ -8,7 +8,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import unittest, tempfile, os, time, shutil
+import unittest, tempfile, os, time, shutil # LEGACY UNITTEST, PLEASE DO NOT IMPORT unittest IN NEW TESTS, PLEASE CONSULT THE py.test DOCS
 
 import py
 

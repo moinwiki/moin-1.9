@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import unittest, os
+import unittest, os # LEGACY UNITTEST, PLEASE DO NOT IMPORT unittest IN NEW TESTS, PLEASE CONSULT THE py.test DOCS
 
 import py
 

@@ -6,7 +6,7 @@ MoinMoin - MoinMoin.text_html_text_moin_wiki Tests
 @license: GNU GPL, see COPYING for details.
 """
 
-import unittest
+import unittest # LEGACY UNITTEST, PLEASE DO NOT IMPORT unittest IN NEW TESTS, PLEASE CONSULT THE py.test DOCS
 
 import py
 py.test.skip("Many broken tests, much broken code, broken, broken, broken.")
@@ -1133,7 +1133,4 @@ class TestConvertBrokenBrowser(TestBase):
 
 """
         self.do(test, output)
-
-if __name__ == '__main__':
-    unittest.main()
 
