@@ -237,7 +237,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
                     
         if not 'jid' in theuser.auth_attribs:
             # try to get the jid
-            jid = wikiutil.clean_input(form.get('jid', [theuser.jid])[0]).strip()
+            jid = wikiutil.clean_input(form.get('jid', "")).strip()
             
             jid_changed = theuser.jid != jid
             previous_jid = theuser.jid           
