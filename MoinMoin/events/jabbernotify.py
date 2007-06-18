@@ -8,6 +8,8 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+import xmlrpclib
+
 from MoinMoin.user import User, getUserList
 from MoinMoin.Page import Page
 
@@ -55,14 +57,36 @@ def handle_jid_changed(event):
         return (0, _("Notifications not sent"))
 
 
+def _filter_subscriber_list(event, subscribers):
+    """Filter a list of page subscribers to honor event subscriptions
+    
+    @param subscribers: list of subscribers (dict of lists, language is the key)
+    @type subscribers: dict
+    
+    """
+    event_name = event.__class__.__name__
+    
+    # Filter the list by removing users who don't want to receive
+    # notifications about this type of event
+    for lang in subscribers.keys():
+        userlist = []
+        
+        for usr in subscribers[lang]:
+            if event_name in usr.subscribed_events:
+                userlist.append(usr)
+                
+        subscribers[lang] = userlist
+
 def handle_file_attached(event):
     """Handles event sent when a file is attached to a page"""
     
     request = event.request
     server = request.cfg.xmlrpc_server
-    page = Page(request, event.pagename) 
+    page = Page(request, event.pagename)
     
     subscribers = page.getSubscribers(request, return_users=1)
+    _filter_subscriber_list(event, subscribers)
+    
     page_change("attachment_added", request, page, subscribers, attach_name=event.attachment_name, attach_size=event.size)
 
         
@@ -73,7 +97,9 @@ def handle_page_changed(event):
     server = request.cfg.xmlrpc_server
     page = event.page
     
-    subscribers = page.getSubscribers(request, return_users=1, trivial=event.trivial)
+    subscribers = page.getSubscribers(request, return_users=1, trivial=event.trivial)    
+    _filter_subscriber_list(event, subscribers)
+
     page_change("page_changed", request, page, subscribers, revisions=page.getRevList(), comment=event.comment)
     
 
@@ -85,6 +111,8 @@ def handle_page_deleted(event):
     page = event.page
     
     subscribers = page.getSubscribers(request, return_users=1)
+    _filter_subscriber_list(event, subscribers)
+    
     page_change("page_deleted", request, page, subscribers)
 
 
@@ -93,6 +121,7 @@ def handle_user_created(event):
     
     user_ids = getUserList(event.request)
     jids = []
+    event_name = event.__class__.__name__
     msg = u"""Dear Superuser, a new user has just been created. Details follow:
     User name: %s
     Email address: %s
@@ -105,7 +134,7 @@ def handle_user_created(event):
         
         # Currently send this only to super users
         # TODO: make it possible to disable this notification
-        if usr.isSuperUser() and usr.jid:
+        if usr.isSuperUser() and usr.jid and event_name in usr.subscribed_events:
             jids.append(usr.jid)
             
     send_notification(event.request, jids, msg % (event.user.name, email))
@@ -119,7 +148,7 @@ def page_change(type, request, page, subscribers, **kwargs):
         # send notifications to all subscribers
         results = [_('Status of sending notifications:')]
         for lang in subscribers:
-            jids = [u.jid for u in subscribers[lang]]
+            jids = [u.jid for u in subscribers[lang] if u.jid]
             names = [u.name for u in subscribers[lang]]
             msg = page_change_message(type, request, page, lang, **kwargs)
             jabberok, status = send_notification(request, jids, msg)
@@ -147,6 +176,7 @@ def send_notification(request, jids, message):
     server = request.cfg.xmlrpc_server
     
     for jid in jids:
+                
         # FIXME: stops sending notifications on first error
         try:
             server.send_notification(request.cfg.secret, jid, message)
