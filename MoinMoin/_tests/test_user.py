@@ -51,6 +51,7 @@ class TestLoginWithPassword(unittest.TestCase):
 
         # Prevent user list caching - we create and delete users too fast for that.
         filesys.dcdisable()
+        self.user = None
 
     def tearDown(self):
         """ Run after each test
@@ -72,7 +73,10 @@ class TestLoginWithPassword(unittest.TestCase):
 
         # Remove user name to id cache, or next test will fail
         caching.CacheEntry(self.request, 'user', 'name2id', scope='wiki').remove()
-        del self.request.cfg.cache.name2id
+        try:
+            del self.request.cfg.cache.name2id
+        except:
+            pass
 
         # Prevent user list caching - we create and delete users too fast for that.
         filesys.dcdisable()
@@ -136,7 +140,7 @@ class TestLoginWithPassword(unittest.TestCase):
         theUser = user.User(self.request, name=name, password=password)
         self.assertEqual(theUser.enc_password, expected,
                          "User password was not replaced with new")
-        
+
     def testSubscriptionSubscribedPage(self):
         """ user: tests isSubscribedTo  """
         pagename = u'HelpMiscellaneous'
@@ -147,7 +151,7 @@ class TestLoginWithPassword(unittest.TestCase):
         theUser = user.User(self.request, name=name, password=password)
         theUser.subscribe(pagename)
         expected = True
-        result = theUser.isSubscribedTo(pagename)
+        result = theUser.isSubscribedTo([pagename]) # list(!) of pages to check
         self.assertEqual(result, expected,
                  'Expected "%(expected)s" but got "%(result)s"' % locals())
 
@@ -162,10 +166,10 @@ class TestLoginWithPassword(unittest.TestCase):
         theUser = user.User(self.request, name=name, password=password)
         theUser.subscribe(pagename)
         expected = False
-        result = theUser.isSubscribedTo(testPagename)
+        result = theUser.isSubscribedTo([testPagename]) # list(!) of pages to check
         self.assertEqual(result, expected,
                  'Expected "%(expected)s" but got "%(result)s"' % locals())
-        
+
     # Helpers ---------------------------------------------------------
 
     def createUser(self, name, password, charset='utf-8'):
