@@ -175,10 +175,6 @@ class XMPPBot(Client, Thread):
         """
         # Handle normal notifications
         if isinstance(command, cmd.NotificationCommand):
-            if not command.jid:
-                self.log("Received a command with empty jid, looks like a bug!")
-                return
-            
             jid = JID(node_or_jid=command.jid)
             jid_text = jid.bare().as_utf8()
             text = command.text
