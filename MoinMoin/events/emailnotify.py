@@ -16,7 +16,7 @@ from MoinMoin.events import *
 from MoinMoin.events.messages import page_change_message
 
 
-def sendNotification(request, page, comment, emails, email_lang, revisions, trivial):
+def send_notification(request, page, comment, emails, email_lang, revisions, trivial):
     """ Send notification email for a single language.
 
     @param comment: editor's comment given when saving the page
@@ -41,7 +41,7 @@ def sendNotification(request, page, comment, emails, email_lang, revisions, triv
         mailBody, mail_from=page.cfg.mail_from)
 
 
-def notifySubscribers(request, page, comment, trivial):
+def notify_subscribers(request, page, comment, trivial):
     """ Send email to all subscribers of given page.
 
     @param comment: editor's comment given when saving the page
@@ -61,7 +61,7 @@ def notifySubscribers(request, page, comment, trivial):
         for lang in subscribers:
             emails = [u.email for u in subscribers[lang]]
             names = [u.name for u in subscribers[lang]]
-            mailok, status = sendNotification(request, page, comment, emails, lang, revisions, trivial)
+            mailok, status = send_notification(request, page, comment, emails, lang, revisions, trivial)
             recipients = ", ".join(names)
             results.append(_('[%(lang)s] %(recipients)s: %(status)s') % {
                 'lang': lang, 'recipients': recipients, 'status': status})
@@ -81,4 +81,4 @@ def handle(event):
     if not event.request.cfg.mail_enabled:
         return
     
-    return notifySubscribers(event.request, event.page, event.comment, event.trivial)
+    return notify_subscribers(event.request, event.page, event.comment, event.trivial)
