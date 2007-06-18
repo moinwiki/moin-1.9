@@ -40,7 +40,7 @@ def handle_jid_changed(event):
     """ Handles events sent when user's JID changes """
     
     request = event.request
-    server = request.cfg.xmlrpc_server
+    server = request.cfg.notification_server
     _ = request.getText
     
     try:
@@ -81,7 +81,7 @@ def handle_file_attached(event):
     """Handles event sent when a file is attached to a page"""
     
     request = event.request
-    server = request.cfg.xmlrpc_server
+    server = request.cfg.notification_server
     page = Page(request, event.pagename)
     
     subscribers = page.getSubscribers(request, return_users=1)
@@ -94,7 +94,7 @@ def handle_page_changed(event):
     """ Handles events related to page changes """
     
     request = event.request
-    server = request.cfg.xmlrpc_server
+    server = request.cfg.notification_server
     page = event.page
     
     subscribers = page.getSubscribers(request, return_users=1, trivial=event.trivial)    
@@ -107,7 +107,7 @@ def handle_page_deleted(event):
     """Handles event sent when a page is deleted"""
     
     request = event.request
-    server = request.cfg.xmlrpc_server
+    server = request.cfg.notification_server
     page = event.page
     
     subscribers = page.getSubscribers(request, return_users=1)
@@ -173,7 +173,7 @@ def send_notification(request, jids, message):
     @param trivial: the change is marked as trivial
     """
     _ = request.getText
-    server = request.cfg.xmlrpc_server
+    server = request.cfg.notification_server
     
     for jid in jids:
                 

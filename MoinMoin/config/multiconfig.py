@@ -376,6 +376,7 @@ reStructuredText Quick Reference
 
     navi_bar = [u'RecentChanges', u'FindPage', u'HelpContents', ]
     nonexist_qm = False
+    notification_bot_uri = None
 
     page_credits = [
         '<a href="http://moinmoin.wikiwikiweb.de/">MoinMoin Powered</a>',
@@ -662,12 +663,12 @@ reStructuredText Quick Reference
         self.mail_enabled = (self.mail_smarthost is not None or self.mail_sendmail is not None) and self.mail_from
         
         # check if jabber bot is available and set flag:
-        self.jabber_enabled = self.bot_host is not None
+        self.jabber_enabled = self.notification_bot_uri is not None
         
         # if we are to use the jabber bot, instantiate a server object for future use
         if self.jabber_enabled:
             from xmlrpclib import Server
-            self.xmlrpc_server = Server("http://" + self.bot_host, )
+            self.notification_server = Server(self.notification_bot_uri, )
 
         # Cache variables for the properties below
         self._iwid = self._iwid_full = self._meta_dict = None
