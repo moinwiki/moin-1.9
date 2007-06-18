@@ -16,13 +16,13 @@ from MoinMoin.util.lock import ExclusiveLock
 
 
 class TestExclusiveLock(unittest.TestCase):
-    
+
     def setUp(self):
         self.test_dir = tempfile.mkdtemp('', 'lock_')
         self.test_dir_mtime_goal = time.time()
         self.test_dir_mtime_reported = os.stat(self.test_dir).st_mtime
         self.lock_dir = os.path.join(self.test_dir, "lock")
-        
+
     def tearDown(self):
         shutil.rmtree(self.test_dir)
 
@@ -46,7 +46,7 @@ class TestExclusiveLock(unittest.TestCase):
     def testTimeout(self):
         """ util.lock: ExclusiveLock: raise ValueError for timeout < 2.0 """
         self.assertRaises(ValueError, ExclusiveLock, self.lock_dir, timeout=1.0)
-        
+
     def testAcquire(self):
         """ util.lock: ExclusiveLock: acquire """
         lock = ExclusiveLock(self.lock_dir)
@@ -61,7 +61,7 @@ class TestExclusiveLock(unittest.TestCase):
         if not lock.acquire(0.1):
             py.test.skip("can't acquire lock")
         lock.release()
-        self.failUnless(lock.acquire(0.1), 
+        self.failUnless(lock.acquire(0.1),
                         "Could not acquire lock after release")
 
     def testIsLocked(self):
@@ -106,7 +106,7 @@ class TestExclusiveLock(unittest.TestCase):
         second = ExclusiveLock(self.lock_dir)
         if not first.acquire(0.1):
             py.test.skip("can't acquire lock")
-        self.failIf(second.acquire(0.1), "first lock is not exclusive")                
+        self.failIf(second.acquire(0.1), "first lock is not exclusive")
 
     def testAcquireAfterTimeout(self):
         """ util.lock: ExclusiveLock: acquire after timeout
@@ -121,9 +121,9 @@ class TestExclusiveLock(unittest.TestCase):
         if second.acquire(0.1):
             py.test.skip("first lock is not exclusive")
         # Second lock should be acquired after timeout
-        self.failUnless(second.acquire(timeout + 0.1), 
+        self.failUnless(second.acquire(timeout + 0.1),
                         "can't acquire after timeout")
-            
+
     def unlock(self, lock, delay):
         time.sleep(delay)
         lock.release()

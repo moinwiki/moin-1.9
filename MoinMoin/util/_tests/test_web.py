@@ -39,22 +39,22 @@ class TestMakeQueryString(unittest.TestCase):
                          'Expected "%(expected)s" but got "%(result)s"' % locals())
 
     def testMakeQueryStringFromArgumentAndKeywords(self):
-        """ util.web: make query sting from argument and keywords """        
-        
+        """ util.web: make query sting from argument and keywords """
+
         tests = (
             # description,      arg,                    expected
-            ('kw ignored',      'a=1',                  'a=1'),             
-            ('kw added to arg', {'a': 1},               'a=1&b=kw'),             
-            ('kw override arg',  {'a': 1, 'b': 'arg'},   'a=1&b=kw'),
+            ('kw ignored',      'a=1',                  'a=1'),
+            ('kw added to arg', {'a': 1},               'a=1&b=kw'),
+            ('kw override arg', {'a': 1, 'b': 'arg'},   'a=1&b=kw'),
             )
-        
+
         for description, arg, expected in tests:
             # Call makeQueryString with both arg and keyword
             result = wikiutil.makeQueryString(arg, b='kw')
             self.assertEqual(result, expected,
                              ('%(description)s: expected "%(expected)s" '
                               'but got "%(result)s"') % locals())
-        
+
 
 class TestMakeSelection(unittest.TestCase):
     """util.web: creating html select"""
@@ -71,7 +71,7 @@ class TestMakeSelection(unittest.TestCase):
         u'<option value="complex">A tuple &amp; &lt;escaped text&gt;</option>'
         u'</select>'
         )
-        
+
     def testMakeSelectNoSelection(self):
         """util.web: creating html select with no selection"""
         expected = self.expected
@@ -85,7 +85,7 @@ class TestMakeSelection(unittest.TestCase):
         result = unicode(web.makeSelection('test', self.values, 'three', size=1))
         self.assertEqual(result, expected,
                          'Expected "%(expected)s" but got "%(result)s"' % locals())
-        
+
     def testMakeSelectWithSelectedItem(self):
         """util.web: creating html select with selected item"""
         expected = self.expected.replace('value="two"', 'selected value="two"')
