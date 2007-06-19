@@ -8,6 +8,7 @@
 
 import Queue
 import time, xmlrpclib
+import datetime
 from threading import Thread
 from SimpleXMLRPCServer import SimpleXMLRPCServer
 
@@ -161,7 +162,28 @@ class XMLRPCClient(Thread):
             token_result, getpageinfo_result = self.multicall()
         
         # FIXME: warn if token turned out being wrong
-        command.data = getpageinfo_result[0]
+        
+        author = getpageinfo_result[0]['author']
+        if author.startswith("Self:"):
+            author = getpageinfo_result[0]['author'][5:]
+        
+        datestr = str(getpageinfo_result[0]['lastModified'])
+        date = u"%(year)s-%(month)s-%(day)s at %(time)s" % {
+                    'year': datestr[:4],
+                    'month': datestr[4:6],
+                    'day': datestr[6:8],
+                    'time': datestr[9:17],
+                }
+        
+        msg = u"""Last author: %(author)s
+Last modification: %(modification)s
+Current version: %(version)s""" % {
+             'author': author,
+             'modification': date,
+             'version': getpageinfo_result[0]['version'],
+         }
+        
+        command.data = msg
         
     get_page_info = _xmlrpc_decorator(get_page_info)
 

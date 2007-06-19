@@ -215,7 +215,7 @@ class XMPPBot(Client, Thread):
             self.send_message(command.jid, msg % (pagelist, ))
             
         elif isinstance(command, cmd.GetPageInfo):
-            msg = u"""Here's some more detailed information on page "%s":\n\n%s"""
+            msg = u"""Following detailed information on page "%s" is available::\n\n%s"""
             self.send_message(command.jid, msg % (command.pagename, command.data))
             
     def ask_for_subscription(self, jid):
