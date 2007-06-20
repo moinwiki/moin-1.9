@@ -10,9 +10,10 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, re, time, tarfile
+import os, re, time
 
 from MoinMoin import wikiutil
+from MoinMoin.support import tarfile
 
 def addFiles(path, tar, exclude):
     """ Add files in path to tar """
