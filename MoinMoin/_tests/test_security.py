@@ -9,6 +9,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+import py
 import unittest # LEGACY UNITTEST, PLEASE DO NOT IMPORT unittest IN NEW TESTS, PLEASE CONSULT THE py.test DOCS
 from MoinMoin import security
 
@@ -245,6 +246,7 @@ class TestAcl(unittest.TestCase):
         """ tests what are the page rights if edit-log entry doesn't exist
             for a page where no access is given to
         """
+        py.test.skip("test tricks out the caching system, page modifications without making an edit-log entry are not supported")
         import os
         from MoinMoin.Page import Page
         pagename = u'AutoCreatedMoinMoinTemporaryTestPage'
