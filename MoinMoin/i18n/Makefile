@@ -8,7 +8,7 @@ DOMAIN = MoinMoin
 -include POTFILES
 
 POTFILES.in POTFILES:
-	tools/mk_POTFILES.py
+	@python tools/mk_POTFILES.py
 
 .nop.po-update:
 	@lang=`echo $@ | sed -e 's/\.MoinMoin\.po-update$$//'`; \
@@ -29,7 +29,7 @@ POTFILES.in POTFILES:
 
 # remove "--no-location" if you want to have file names and line numbers
 # that's bad for merging branches - this is why we don't use it
-$(DOMAIN).pot-update: $(POTFILES) POTFILES
+$(DOMAIN).pot-update: $(POTFILES) POTFILES.in
 	xgettext --default-domain=$(DOMAIN) --directory=.. \
 	  --files-from=POTFILES.in \
 	  --no-location \
@@ -49,7 +49,7 @@ $(DOMAIN).pot-update: $(POTFILES) POTFILES
 	  fi; \
 	}
 
-$(DOMAIN).pot:
+$(DOMAIN).pot: $(POTFILES) POTFILES.in
 	$(MAKE) $(DOMAIN).pot-update
 
 $(POFILES):
@@ -62,7 +62,7 @@ $(POFILES):
 
 $(NOPFILES):
 
-update-po:
+update-po: clean
 	$(MAKE) $(DOMAIN).pot-update
 	$(MAKE) $(UPDATEPOFILES)
 
