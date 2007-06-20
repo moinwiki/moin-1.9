@@ -10,11 +10,13 @@ Usage:
 @license: GNU GPL, see COPYING for details.
 """
 
-import os, sys, shutil, errno, tarfile
+import os, sys, shutil, errno
 
 filename = globals().get("__file__") or sys.argv[0]
 moinpath = os.path.abspath(os.path.join(os.path.dirname(filename), os.pardir, os.pardir))
 sys.path.insert(0, moinpath)
+
+from MoinMoin.support import tarfile
 
 WIKI = os.path.abspath(os.path.join(moinpath, 'tests', 'wiki'))
 SHARE = os.path.abspath(os.path.join(moinpath, 'wiki'))
