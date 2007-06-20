@@ -575,23 +575,24 @@ class XmlRpcBase:
         from MoinMoin import version
         return (version.project, version.release, version.revision)
 
-    def xmlrpc_getUser(self, username, password):
-        """ Tries to authenticate username/password.
-            If it succeeds, it returns a dict of items from user profile.
-            If it fails, it returns a str with an error msg.
+
+    # user profile data transfer
+
+    def xmlrpc_getUserProfile(self):
+        """ Return the user profile data for the current user.
+            Use this in a single multicall after applyAuthToken.
+            If we have a valid user, returns a dict of items from user profile.
+            Otherwise, return an empty dict.
         """
-        u = self.request.handle_auth(None, username=username,
-                                     password=password, login=True)
-        if u is None:
-            return "Authentication failed"
+        u = self.request.user
+        if not u.valid:
+            userdata = {}
         else:
             userdata = dict(u.persistent_items())
-            del userdata['enc_password']
-            del userdata['last_saved']
-            return userdata
+        return userdata
 
     # authorization methods
-    
+
     def _cleanup_stale_tokens(request):
         items = caching.get_cache_list(request, 'xmlrpc-session', 'farm')
         tnow = time.time()

@@ -261,7 +261,10 @@ Version 1.6.current:
       * interwikiName -- method to get the IWID and the interwiki moniker
       * getAllPagesEx -- method to get the pagelist in a special way (revnos,
         no system pages etc.)
-      * getUser -- method to remotely authenticate a user and get profile data
+      * getAuthToken -- make and authentication token by supplying username/password
+      * applyAuthToken -- set request.user for following xmlrpc calls (within the
+                          same multicall)
+      * getUserProfile -- method to get user profile data for request.user
     * IWID support - i.e. every wiki instance has a unique ID
     * The list of InterWiki sites is editable in the wiki (page InterWikiMap),
       it is getting reloaded every minute
