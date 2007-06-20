@@ -118,6 +118,12 @@ class Formatter(FormatterBase):
     def code(self, on, **kw):
         return ['<code>', '</code>'][not on]
 
+    def small(self, on, **kw):
+        return ['<small>', '</small>'][not on]
+
+    def big(self, on, **kw):
+        return ['<big>', '</big>'][not on]
+
     def sup(self, on, **kw):
         return ['<sup>', '</sup>'][not on]
 
