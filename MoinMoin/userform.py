@@ -333,7 +333,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
         
         # subscription to various events
         available = events.get_subscribable_events()
-        theuser.subscribed_events = [ev for ev in form.get('events')]
+        theuser.subscribed_events = [ev for ev in form.get('events', [])]
 
         # save data
         theuser.save()
