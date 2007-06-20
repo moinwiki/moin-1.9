@@ -16,9 +16,15 @@ from MoinMoin import wikiutil
 class TestFormatter(TestCase):
     def testSyntaxReference(self):
         formatters = wikiutil.getPlugins("formatter", self.request.cfg)
+
+        try:
+            from xml.dom import getDOMImplementation
+            dom = getDOMImplementation("4DOM")
+        except ImportError:
+            # if we don't have 4suite installed, the docbook formatter would just raise an exception
+            formatters.remove('text_docbook')
+
         for f_name in formatters:
-            #if f_name in ('dom_xml', ):
-            #    continue
             try:
                 formatter = wikiutil.importPlugin(self.request.cfg, "formatter", f_name, "Formatter")
             except wikiutil.PluginAttributeError:

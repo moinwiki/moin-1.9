@@ -11,6 +11,10 @@ import unittest # LEGACY UNITTEST, PLEASE DO NOT IMPORT unittest IN NEW TESTS, P
 from MoinMoin import wikiutil
 
 
+class TestSystemPagesGroup:
+    def testSystemPagesGroupNotEmpty(self):
+        assert self.request.dicts.members('SystemPagesGroup')
+
 class TestSystemPage(unittest.TestCase):
     systemPages = (
         # First level, on SystemPagesGroup
