@@ -36,7 +36,7 @@ def execute(pagename, request):
     try:
         rev2 = int(request.form.get('rev2', [0])[0])
     except StandardError:
-        rev1 = 0
+        rev2 = 0
 
     if rev1 == -1 and rev2 == 0:
         rev1 = request.rev
