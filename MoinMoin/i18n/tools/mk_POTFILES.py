@@ -8,7 +8,7 @@ startdir = os.path.join("..") # MoinMoin
 
 # Define a blacklist.
 
-blacklist = ["_tests", os.path.join("script", "old"), "support"]
+blacklist = ["_tests", os.path.join("script", "old"), "support", "filter/EXIF.py"]
 
 # Define an output file for the filenames.
 
