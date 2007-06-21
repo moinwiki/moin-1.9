@@ -26,3 +26,9 @@ class Config(DefaultConfig):
     ]
     # ^^^ DON'T TOUCH THIS EXCEPT IF YOU KNOW WHAT YOU DO ^^^
 
+    # developers, add your testing config values in this file
+    # (and don't add it to your repository):
+    try:
+        from wikiconfig_local import *
+    except ImportError:
+        pass
