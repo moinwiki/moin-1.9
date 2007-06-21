@@ -848,6 +848,36 @@ class RequestBase(object):
             msg = msg.encode(config.charset)
         logging.info(msg)
 
+    def timing_log(self, start, action):
+        """ Log to timing log (for performance analysis) """
+        indicator = ''
+        if start:
+            total = "vvv"
+        else:
+            self.clock.stop('total') # make sure it is stopped
+            total_secs = self.clock.timings['total']
+            # we add some stuff that is easy to grep when searching for peformance problems:
+            if total_secs > 50:
+                indicator += '!4!'
+            elif total_secs > 20:
+               indicator += '!3!'
+            elif total_secs > 10:
+                indicator += '!2!'
+            elif total_secs > 2:
+                indicator += '!1!'
+            total = self.clock.value('total')
+            # use + for existing pages, - for non-existing pages
+            indicator += self.page.exists() and '+' or '-'
+            if self.isSpiderAgent:
+                indicator += "B"
+
+        # Add time stamp and process ID
+        pid = os.getpid()
+        t = time.time()
+        timestr = time.strftime("%Y%m%d %H%M%S", time.gmtime(t))
+        msg = '%s %5d %-6s %4s %-10s %s\n' % (timestr, pid, total, indicator, action, self.url)
+        self.log(msg)
+
     def write(self, *data):
         """ Write to output stream. """
         raise NotImplementedError
@@ -1143,6 +1173,9 @@ class RequestBase(object):
 
         # parse request data
         try:
+            if self.cfg.log_timing:
+                self.timing_log(True, action)
+
             # The last component in path_info is the page name, if any
             path = self.getPathinfo()
 
@@ -1236,6 +1269,9 @@ class RequestBase(object):
         except Exception, err:
             self.finish()
             self.fail(err)
+
+        if self.cfg.log_timing:
+            self.timing_log(False, action)
 
         return self.finish()
 
