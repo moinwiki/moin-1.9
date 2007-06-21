@@ -325,6 +325,7 @@ reStructuredText Quick Reference
 
     log_reverse_dns_lookups = True  # if we do reverse dns lookups for logging hostnames
                                     # instead of just IPs
+    log_timing = False              # update <data_dir>/timing.log?
 
     xapian_search = False
     xapian_index_dir = None
