@@ -1,12 +1,3 @@
--             email = ldap_dict.get(cfg.ldap_email_attribute, [''])[0]
--             email = email.decode(coding)
---- 98,107 ----
-              l.simple_bind_s(dn, password.encode(coding))
-              if verbose: request.log("LDAP: Bound with dn %s (username: %s)" % (dn, username))
-  
-  
-              aliasname = ''
-              try:
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - LDAP / Active Directory authentication
@@ -70,19 +61,19 @@ class LDAPAuth(BaseAuth):
                     #ldap.set_option(ldap.OPT_X_TLS_CERTFILE, LDAP_CACERTFILE)
                     #ldap.set_option(ldap.OPT_X_TLS_CACERTFILE,'/etc/httpd/ssl.crt/myCA-cacerts.pem')
 
-                if verbose: request.log("LDAP: Trying to initialize %s." % server)
+                if verbose: request.log("LDAP: Trying to initialize %r." % server)
                 l = ldap.initialize(server)
-                if verbose: request.log("LDAP: Connected to LDAP server %s." % server)
+                if verbose: request.log("LDAP: Connected to LDAP server %r." % server)
 
                 # you can use %(username)s and %(password)s here to get the stuff entered in the form:
                 ldap_binddn = cfg.ldap_binddn % locals()
                 ldap_bindpw = cfg.ldap_bindpw % locals()
                 l.simple_bind_s(ldap_binddn.encode(coding), ldap_bindpw.encode(coding))
-                if verbose: request.log("LDAP: Bound with binddn %s" % ldap_binddn)
+                if verbose: request.log("LDAP: Bound with binddn %r" % ldap_binddn)
 
                 # you can use %(username)s here to get the stuff entered in the form:
                 filterstr = cfg.ldap_filter % locals()
-                if verbose: request.log("LDAP: Searching %s" % filterstr)
+                if verbose: request.log("LDAP: Searching %r" % filterstr)
                 lusers = l.search_st(cfg.ldap_base, cfg.ldap_scope, filterstr.encode(coding),
                                      attrlist=[cfg.ldap_email_attribute,
                                                cfg.ldap_aliasname_attribute,
@@ -93,22 +84,22 @@ class LDAPAuth(BaseAuth):
                 lusers = [(dn, ldap_dict) for dn, ldap_dict in lusers if dn is not None]
                 if verbose:
                     for dn, ldap_dict in lusers:
-                        request.log("LDAP: dn:%s" % dn)
+                        request.log("LDAP: dn:%r" % dn)
                         for key, val in ldap_dict.items():
-                            request.log("    %s: %s" % (key, val))
+                            request.log("    %r: %r" % (key, val))
 
                 result_length = len(lusers)
                 if result_length != 1:
                     if result_length > 1:
-                        request.log("LDAP: Search found more than one (%d) matches for %s." % (result_length, filterstr))
+                        request.log("LDAP: Search found more than one (%d) matches for %r." % (result_length, filterstr))
                     if result_length == 0:
-                        if verbose: request.log("LDAP: Search found no matches for %s." % (filterstr, ))
+                        if verbose: request.log("LDAP: Search found no matches for %r." % (filterstr, ))
                     return CancelLogin(_("Invalid username or password."))
 
                 dn, ldap_dict = lusers[0]
-                if verbose: request.log("LDAP: DN found is %s, trying to bind with pw" % dn)
+                if verbose: request.log("LDAP: DN found is %r, trying to bind with pw" % dn)
                 l.simple_bind_s(dn, password.encode(coding))
-                if verbose: request.log("LDAP: Bound with dn %s (username: %s)" % (dn, username))
+                if verbose: request.log("LDAP: Bound with dn %r (username: %r)" % (dn, username))
 
                 if getattr(cfg, "ldap_email_callback", None) is None:
                     email = ldap_dict.get(cfg.ldap_email_attribute, [''])[0].decode(coding)
@@ -132,10 +123,10 @@ class LDAPAuth(BaseAuth):
                 u.aliasname = aliasname
                 u.email = email
                 u.remember_me = 0 # 0 enforces cookie_lifetime config param
-                if verbose: request.log("LDAP: creating userprefs with name %s email %s alias %s" % (username, email, aliasname))
+                if verbose: request.log("LDAP: creating userprefs with name %r email %r alias %r" % (username, email, aliasname))
 
             except ldap.INVALID_CREDENTIALS, err:
-                request.log("LDAP: invalid credentials (wrong password?) for dn %s (username: %s)" % (dn, username))
+                request.log("LDAP: invalid credentials (wrong password?) for dn %r (username: %r)" % (dn, username))
                 return CancelLogin(_("Invalid username or password."))
 
             if u:
