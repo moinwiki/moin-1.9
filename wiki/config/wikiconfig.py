@@ -38,7 +38,7 @@ class Config(DefaultConfig):
     # Wiki logo. You can use an image, text or both. [Unicode]
     # For no logo or text, use '' - the default is to show the sitename.
     # See also url_prefix setting below!
-    logo_string = u'<img src="/wiki/common/moinmoin.png" alt="MoinMoin Logo">'
+    logo_string = u'<img src="/moin_static170/common/moinmoin.png" alt="MoinMoin Logo">'
 
     # name of entry page / front page [Unicode], choose one of those:
 
