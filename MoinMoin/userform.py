@@ -796,25 +796,30 @@ def do_user_browser(request):
 
         data.addRow((
             #request.formatter.code(1) + uid + request.formatter.code(0),
+            # 0
             request.formatter.rawHTML(namelink),
+            # 1
             (request.formatter.url(1, 'mailto:' + account.email, css='mailto', do_escape=0) +
              request.formatter.text(account.email) +
              request.formatter.url(0)),
+            # 2
             (request.formatter.url(1, 'xmpp:' + account.jid, css='mailto', do_escape=0) +
              request.formatter.text(account.jid) +
              request.formatter.url(0)),
-            request.page.link_to(request, text=_('Mail me my account data'),
+            # 3
+            (request.page.link_to(request, text=_('Mail me my account data'),
                                  querystr={"action":"userform",
                                            "email": account.email,
                                            "account_sendmail": "1",
                                            "sysadm": "users", },
-                                 rel='nofollow'),
-            request.page.link_to(request, text=_('Send me my accound data with Jabber'),
+                                 rel='nofollow')
+            + " " +
+            request.page.link_to(request, text=_('Send me my account data with Jabber'),
                                  querystr={"action":"userform",
                                            "jid": account.jid,
                                            "account_sendjabber": "1",
                                            "sysadm": "users", },
-                                  rel='nofollow'),
+                                  rel='nofollow'))
         ))
 
     if data:
