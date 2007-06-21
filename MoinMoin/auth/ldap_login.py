@@ -1,3 +1,12 @@
+-             email = ldap_dict.get(cfg.ldap_email_attribute, [''])[0]
+-             email = email.decode(coding)
+--- 98,107 ----
+              l.simple_bind_s(dn, password.encode(coding))
+              if verbose: request.log("LDAP: Bound with dn %s (username: %s)" % (dn, username))
+  
+  
+              aliasname = ''
+              try:
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - LDAP / Active Directory authentication
@@ -101,8 +110,10 @@ class LDAPAuth(BaseAuth):
                 l.simple_bind_s(dn, password.encode(coding))
                 if verbose: request.log("LDAP: Bound with dn %s (username: %s)" % (dn, username))
 
-                email = ldap_dict.get(cfg.ldap_email_attribute, [''])[0]
-                email = email.decode(coding)
+                if getattr(cfg, "ldap_email_callback", None) is None:
+                    email = ldap_dict.get(cfg.ldap_email_attribute, [''])[0].decode(coding)
+                else:
+                    email = cfg.ldap_email_callback(ldap_dict)
 
                 aliasname = ''
                 try:
