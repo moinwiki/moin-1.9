@@ -174,27 +174,28 @@ class XMPPBot(Client, Thread):
         
         """
         
-        if not command.jid:
+        if not command.jids:
             self.log("Received a command with empty jid, looks like a bug!")
             return
         
         # Handle normal notifications
         if isinstance(command, cmd.NotificationCommand):
-            jid = JID(node_or_jid=command.jid)
-            jid_text = jid.bare().as_utf8()
-            text = command.text
-            
-            # Check if contact is DoNotDisturb. 
-            # If so, queue the message for delayed delivery.
-            try:
-                contact = self.contacts[jid_text]
-                if contact.is_dnd() and not ignore_dnd:
-                    contact.messages.append(command)
-                    return
-            except KeyError:
-                pass
-            
-            self.send_message(jid, text)
+            for recipient in command.jids:
+                jid = JID(recipient)
+                jid_text = jid.bare().as_utf8()
+                text = command.text
+                
+                # Check if contact is DoNotDisturb. 
+                # If so, queue the message for delayed delivery.
+                try:
+                    contact = self.contacts[jid_text]
+                    if contact.is_dnd() and not ignore_dnd:
+                        contact.messages.append(command)
+                        return
+                except KeyError:
+                    pass
+                
+                self.send_message(jid, text)
             
         # Handle subscribtion management commands
         if isinstance(command, cmd.AddJIDToRosterCommand):
