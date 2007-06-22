@@ -2,13 +2,12 @@
 """
     MoinMoin - Dictionary / Group Functions
 
-    @copyright: 2003-2006 MoinMoin:ThomasWaldmann,
-                2003 by Gustavo Niemeyer, http://moin.conectiva.com.br/GustavoNiemeyer
+    @copyright: 2003-2007 MoinMoin:ThomasWaldmann,
+                2003 by Gustavo Niemeyer
     @license: GNU GPL, see COPYING for details.
 """
 import re, time
 
-#import copy #broken, see comments at top of this file:
 from MoinMoin.support import copy
 
 from MoinMoin import caching, wikiutil, Page, logfile
@@ -32,6 +31,7 @@ class DictBase:
 
         Create a dict from a wiki page.
         """
+        self._dict = {}
         self.name = name
 
         self.initRegex()
@@ -54,7 +54,7 @@ class DictBase:
 
     def values(self):
         return self._dict.values()
-    
+
     def get_dict(self):
         return self._dict
 
@@ -67,8 +67,12 @@ class DictBase:
     def __getitem__(self, key):
         return self._dict[key]
 
+    def __len__(self):
+        return len(self._dict)
+
     def __repr__(self):
         return "<DictBase name=%r items=%r>" % (self.name, self._dict.items())
+
 
 class Dict(DictBase):
     """ Mapping of keys to values in a wiki page
@@ -91,13 +95,13 @@ class Dict(DictBase):
 
         Invoked by __init__, also useful for testing without a page.
         """
-        self._dict = {}
         for match in self.regex.finditer(text):
             key, val = match.groups()
             self._dict[key] = val
 
     def __repr__(self):
         return "<Dict name=%r items=%r>" % (self.name, self._dict.items())
+
 
 class Group(DictBase):
     """ Group of users, of pages, of whatever
@@ -124,21 +128,25 @@ class Group(DictBase):
 
         Invoked by __init__, also useful for testing without a page.
         """
-        self._dict = {}
         for match in self.regex.finditer(text):
-            self._dict[match.group('member')] = 1
+            member = match.group('member')
+            self.addmember(member)
 
     def members(self):
+        """ return the group's members """
         return self._dict.keys()
 
     def addmembers(self, members):
+        """ add a list of members to the group """
         for m in members:
             self.addmember(m)
 
     def addmember(self, member):
+        """ add a member to the group """
         self._dict[member] = 1
 
     def has_member(self, member):
+        """ check if the group has member <member> """
         return self._dict.has_key(member)
 
     def _expandgroup(self, groupdict, name):
@@ -186,7 +194,7 @@ class Group(DictBase):
 
 
 class DictDict:
-    """a dictionary of Dict objects
+    """ a dictionary of Dict objects
 
        Config:
            cfg.page_dict_regex
@@ -204,11 +212,12 @@ class DictDict:
         self.picklever = DICTS_PICKLE_VERSION
 
     def has_key(self, dictname, key):
+        """ check if we have key <key> in dict <dictname> """
         dict = self.dictdict.get(dictname)
         return dict and dict.has_key(key)
 
     def keys(self, dictname):
-        """get keys of dict <dictname>"""
+        """ get keys of dict <dictname> """
         try:
             dict = self.dictdict[dictname]
         except KeyError:
@@ -216,7 +225,7 @@ class DictDict:
         return dict.keys()
 
     def values(self, dictname):
-        """get values of dict <dictname>"""
+        """ get values of dict <dictname> """
         try:
             dict = self.dictdict[dictname]
         except KeyError:
@@ -224,7 +233,7 @@ class DictDict:
         return dict.values()
 
     def dict(self, dictname):
-        """get dict <dictname>"""
+        """ get dict <dictname> """
         try:
             dict = self.dictdict[dictname]
         except KeyError:
@@ -232,14 +241,15 @@ class DictDict:
         return dict
 
     def adddict(self, request, dictname):
-        """add a new dict (will be read from the wiki page)"""
+        """ add a new dict (will be read from the wiki page) """
         self.dictdict[dictname] = Dict(request, dictname)
 
     def has_dict(self, dictname):
+        """ check if we have a dict <dictname> """
         return self.dictdict.has_key(dictname)
 
     def keydict(self, key):
-        """list all dicts that contain key"""
+        """ list all dicts that contain key """
         dictlist = []
         for dict in self.dictdict.values():
             if dict.has_key(key):
@@ -248,7 +258,7 @@ class DictDict:
 
 
 class GroupDict(DictDict):
-    """a dictionary of Group objects
+    """ a dictionary of Group objects
 
        Config:
            cfg.page_group_regex
@@ -268,11 +278,12 @@ class GroupDict(DictDict):
         self.picklever = DICTS_PICKLE_VERSION
 
     def has_member(self, groupname, member):
+        """ check if we have <member> as a member of group <groupname> """
         group = self.dictdict.get(groupname)
         return group and group.has_member(member)
 
     def members(self, groupname):
-        """get members of group <groupname>"""
+        """ get members of group <groupname> """
         try:
             group = self.dictdict[groupname]
         except KeyError:
@@ -280,16 +291,17 @@ class GroupDict(DictDict):
         return group.members()
 
     def addgroup(self, request, groupname):
-        """add a new group (will be read from the wiki page)"""
+        """ add a new group (will be read from the wiki page) """
         grp = Group(request, groupname)
         self.dictdict[groupname] = grp
         self.groupdict[groupname] = grp
 
     def hasgroup(self, groupname):
+        """ check if we have a dict <dictname> """
         return self.groupdict.has_key(groupname)
 
     def membergroups(self, member):
-        """list all groups where member is a member of"""
+        """ list all groups where member is a member of """
         grouplist = []
         for group in self.dictdict.values():
             if group.has_member(member):
@@ -297,7 +309,7 @@ class GroupDict(DictDict):
         return grouplist
 
     def scandicts(self):
-        """scan all pages matching the dict / group regex and init the dictdict"""
+        """ scan all pages matching the dict / group regex and init the dictdict """
         dump = 0
         request = self.request
 
