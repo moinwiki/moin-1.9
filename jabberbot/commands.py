@@ -12,8 +12,8 @@
 # First, XML RPC -> XMPP commands
 class NotificationCommand:
     """Class representing a notification request"""
-    def __init__(self, jid, text):
-        self.jid = jid
+    def __init__(self, jids, text):
+        self.jids = jids
         self.text = text
         
 class AddJIDToRosterCommand:

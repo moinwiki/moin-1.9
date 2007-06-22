@@ -15,6 +15,9 @@ from SimpleXMLRPCServer import SimpleXMLRPCServer
 import jabberbot.commands as cmd
 from jabberbot.multicall import MultiCall
 
+class ConfigurationError(Exception):
+    def __init__(self, message):
+        self.message = message
 
 class XMLRPCClient(Thread):
     """XMLRPC Client
@@ -28,6 +31,10 @@ class XMLRPCClient(Thread):
         @param commands: an output command queue
         """
         Thread.__init__(self)
+        
+        if not config.secret:
+            raise ConfigurationError("You must set a (long) secret string!")
+        
         self.commands_in = commands_in
         self.commands_out = commands_out
         self.config = config
@@ -202,7 +209,12 @@ class XMLRPCServer(Thread):
         Thread.__init__(self)
         self.commands = commands
         self.verbose = config.verbose
-        self.secret = config.secret
+        
+        if config.secret:
+            self.secret = config.secret
+        else:
+            raise ConfigurationError("You must set a (long) secret string")
+        
         self.server = SimpleXMLRPCServer((config.xmlrpc_host, config.xmlrpc_port))
         
     def run(self):
@@ -240,7 +252,7 @@ class XMLRPCServer(Thread):
         return protected_func
     
     
-    def send_notification(self, jid, text):
+    def send_notification(self, jids, text):
         """Instructs the XMPP component to send a notification
         
         @param jid: a jid to send a message to (bare jid)
@@ -249,7 +261,7 @@ class XMLRPCServer(Thread):
         @type text: unicode
         
         """
-        command = cmd.NotificationCommand(jid, text)
+        command = cmd.NotificationCommand(jids, text)
         self.commands.put_nowait(command)
         return True
     send_notification.export = True
