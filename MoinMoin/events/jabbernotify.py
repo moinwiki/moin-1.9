@@ -23,7 +23,7 @@ def handle(event):
     # Check for desired event type and if notification bot is configured
     if not cfg.jabber_enabled:
         return
-    
+
     if isinstance(event, ev.PageChangedEvent):
         return handle_page_changed(event)
     elif isinstance(event, ev.JabberIDSetEvent) or isinstance(event, ev.JabberIDUnsetEvent):
@@ -92,14 +92,12 @@ def handle_file_attached(event):
         
 def handle_page_changed(event):
     """ Handles events related to page changes """
-    
     request = event.request
     server = request.cfg.notification_server
     page = event.page
     
     subscribers = page.getSubscribers(request, return_users=1, trivial=event.trivial)    
     _filter_subscriber_list(event, subscribers)
-
     page_change("page_changed", request, page, subscribers, revisions=page.getRevList(), comment=event.comment)
     
 
@@ -112,7 +110,6 @@ def handle_page_deleted(event):
     
     subscribers = page.getSubscribers(request, return_users=1)
     _filter_subscriber_list(event, subscribers)
-    
     page_change("page_deleted", request, page, subscribers)
 
 
