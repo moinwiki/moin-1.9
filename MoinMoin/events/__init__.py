@@ -120,6 +120,10 @@ class UserCreatedEvent(Event):
         Event.__init__(self, request)
         self.user = user
         
+class EventResult:
+    """ This is a base class for messages passed from event handlers """
+    pass
+        
 def get_handlers(cfg):
     """Create a list of available event handlers.
     
@@ -158,7 +162,7 @@ def send_event(event):
     # Try to handle the event with each available handler (for now)
     for handle in cfg.event_handlers:
         retval = handle(event)
-        if isinstance(retval, unicode):
+        if retval:
             msg.append(retval)
             
     return msg

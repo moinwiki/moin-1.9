@@ -6,12 +6,12 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin.request.CLI import Request
 import MoinMoin.events as events
+import MoinMoin.events.notification as notification
 
 def test_get_handlers(request):
     """Test if there are any event handlers. There should be some internal ones"""
-    
+
     assert events.get_handlers(request.cfg)
 
 def test_send_event(request):
@@ -20,13 +20,14 @@ def test_send_event(request):
     return_string = u"test_send_event"
     
     def event_handler(event):
-        return return_string
+        return notification.Failure("Just a test")
     
     request.cfg.event_handlers = [event_handler]
     event = events.Event(request)
     
-    print "A proper event handler should be called, and an 1-element list of messages returned"
-    assert events.send_event(event)[0] == return_string
+    print "A proper event handler must be called and an 1-element list of results returned"
+    results = events.send_event(event)
+    assert issubclass(results[0].__class__, events.EventResult)
 
 def test_subscribable_events(request):
     """Test if there are any subscribable events. There should be some."""
