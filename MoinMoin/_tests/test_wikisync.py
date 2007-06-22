@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from unittest import TestCase
+from unittest import TestCase # LEGACY UNITTEST, PLEASE DO NOT IMPORT unittest IN NEW TESTS, PLEASE CONSULT THE py.test DOCS
 
 import py
 
@@ -36,3 +36,4 @@ class TestUnsafeSync(TestCase):
     def tearDown(self):
         tags = TagStore(self.page)
         tags.clear()
+
