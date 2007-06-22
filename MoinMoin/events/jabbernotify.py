@@ -10,13 +10,18 @@
 
 import xmlrpclib
 
+try:
+    set
+except:
+    from sets import Set as set
+    
 from MoinMoin import error
 from MoinMoin.Page import Page
 from MoinMoin.user import User, getUserList
-from MoinMoin.events.messages import page_change_message
+import MoinMoin.events.notification as notification
 
 import MoinMoin.events as ev
-
+    
 
 def handle(event):
     cfg = event.request.cfg
@@ -55,11 +60,9 @@ def handle_jid_changed(event):
             server.removeJIDFromRoster(request.cfg.secret, event.jid)        
                 
     except xmlrpclib.Error, err:
-        print _("XML RPC error: "), str(err)
-        return (0, _("Notifications not sent"))
+        print _("XML RPC error: %s") % (str(err),)
     except Exception, err:
-        print _("Low-level communication error: "), str(err)
-        return (0, _("Notifications not sent"))
+        print _("Low-level communication error: $s") % (str(err),)
 
 
 def _filter_subscriber_list(event, subscribers):
@@ -92,7 +95,8 @@ def handle_file_attached(event):
     subscribers = page.getSubscribers(request, return_users=1)
     _filter_subscriber_list(event, subscribers)
     
-    page_change("attachment_added", request, page, subscribers, attach_name=event.attachment_name, attach_size=event.size)
+    return page_change("attachment_added", request, page, subscribers, \
+                       attach_name=event.attachment_name, attach_size=event.size)
 
         
 def handle_page_changed(event):
@@ -103,7 +107,8 @@ def handle_page_changed(event):
     
     subscribers = page.getSubscribers(request, return_users=1, trivial=event.trivial)    
     _filter_subscriber_list(event, subscribers)
-    page_change("page_changed", request, page, subscribers, revisions=page.getRevList(), comment=event.comment)
+    return page_change("page_changed", request, page, subscribers, \
+                       revisions=page.getRevList(), comment=event.comment)
     
 
 def handle_page_deleted(event):
@@ -115,7 +120,7 @@ def handle_page_deleted(event):
     
     subscribers = page.getSubscribers(request, return_users=1)
     _filter_subscriber_list(event, subscribers)
-    page_change("page_deleted", request, page, subscribers)
+    return page_change("page_deleted", request, page, subscribers)
 
 
 def handle_user_created(event):
@@ -137,56 +142,42 @@ def handle_user_created(event):
         # Currently send this only to super users
         # TODO: make it possible to disable this notification
         if usr.isSuperUser() and usr.jid and event_name in usr.subscribed_events:
-            jids.append(usr.jid)
-            
-    send_notification(event.request, jids, msg % (event.user.name, email))
+            send_notification(event.request, [usr.jid], msg % (event.user.name, email))
     
 
 def page_change(type, request, page, subscribers, **kwargs):
-    
+    """Sends notification about page being changed in some way"""
     _ = request.getText
     
+    # send notifications to all subscribers
     if subscribers:
-        # send notifications to all subscribers
-        results = [_('Status of sending notifications:')]
+        recipients = set()
+        
         for lang in subscribers:
             jids = [u.jid for u in subscribers[lang] if u.jid]
-            names = [u.name for u in subscribers[lang]]
-            msg = page_change_message(type, request, page, lang, **kwargs)
-            jabberok, status = send_notification(request, jids, msg)
-            recipients = ", ".join(names)
-            results.append(_('[%(lang)s] %(recipients)s: %(status)s') % {
-                'lang': lang, 'recipients': recipients, 'status': status})
+            names = [u.name for u in subscribers[lang] if u.jid]
+            msg = notification.page_change_message(type, request, page, lang, **kwargs)
+            result = send_notification(request, jids, msg)
 
-        # Return notifications sent results. Ignore trivial - we don't have
-        # to lie. If notification was sent, just tell about it.
-        return '<p>\n%s\n</p> ' % '<br>'.join(results)
-
-    # No notifications sent, no message.
-    return ''
+            if result:
+                recipients.update(names)
+        
+        if recipients:
+            return notification.Success(recipients)
 
 def send_notification(request, jids, message):
     """ Send notifications for a single language.
 
     @param comment: editor's comment given when saving the page
-    @param jids: list of Jabber IDs
-    @param message_lang: language of notification
-    @param revisions: revisions of this page (newest first!)
-    @param trivial: the change is marked as trivial
+    @param jids: an iterable of Jabber IDs to send the message to
     """
     _ = request.getText
     server = request.cfg.notification_server
     
-    for jid in jids:
-                
-        # FIXME: stops sending notifications on first error
-        try:
-            server.send_notification(request.cfg.secret, jid, message)
-        except xmlrpclib.Error, err:
-            print _("XML RPC error: "), str(err)
-            return (0, _("Notifications not sent"))
-        except Exception, err:
-            print _("Low-level communication error: "), str(err)
-            return (0, _("Notifications not sent"))
-        
-    return (1, _("Notifications sent OK"))
+    try:
+        server.send_notification(request.cfg.secret, jids, message)
+        return True
+    except xmlrpclib.Error, err:
+        print _("XML RPC error: %s") % (str(err),)
+    except Exception, err:
+        print _("Low-level communication error: %s") % (str(err),)

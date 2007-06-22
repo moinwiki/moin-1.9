@@ -18,6 +18,11 @@
 
 import os, time, codecs, errno
 
+try:
+    set
+except:
+    from sets import Set as set
+    
 from MoinMoin import caching, config, user, wikiutil, error
 from MoinMoin.Page import Page
 from MoinMoin.widget import html
@@ -26,6 +31,7 @@ from MoinMoin.logfile import editlog, eventlog
 from MoinMoin.util import filesys, timefuncs, web
 from MoinMoin.mail import sendmail
 from MoinMoin.events import PageDeletedEvent, send_event
+import MoinMoin.events.notification as notification
 
 # used for merging
 conflict_markers = ("\n---- /!\\ '''Edit conflict - other version:''' ----\n",
@@ -1043,8 +1049,16 @@ Please review the page and save then. Do not save this page as it is!""")
             # send notifications
             from MoinMoin import events
             e = events.PageChangedEvent(self.request, self, comment, trivial)
-            messages = events.send_event(e)
-            msg = msg + "".join(messages)
+            results = events.send_event(e)
+
+            recipients = set()
+            for result in results:
+                if isinstance(result, notification.Success):
+                    recipients.update(result.recipients)
+
+            if recipients:
+                info = _("Notifications sent to:")
+                msg = msg + "<p>%s %s</p>" % (info, ",".join(recipients))
 
             if kw.get('index', 1) and request.cfg.xapian_search:
                 from MoinMoin.search.Xapian import Index
