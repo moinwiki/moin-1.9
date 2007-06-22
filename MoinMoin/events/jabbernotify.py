@@ -10,11 +10,12 @@
 
 import xmlrpclib
 
-from MoinMoin.user import User, getUserList
+from MoinMoin import error
 from MoinMoin.Page import Page
+from MoinMoin.user import User, getUserList
+from MoinMoin.events.messages import page_change_message
 
 import MoinMoin.events as ev
-from MoinMoin.events.messages import page_change_message
 
 
 def handle(event):
@@ -23,6 +24,10 @@ def handle(event):
     # Check for desired event type and if notification bot is configured
     if not cfg.jabber_enabled:
         return
+    
+    if not cfg.secret:
+        errmsg = "You must set a (long) secret string to send notifications!"
+        raise error.ConfigurationError(errmsg)
 
     if isinstance(event, ev.PageChangedEvent):
         return handle_page_changed(event)
