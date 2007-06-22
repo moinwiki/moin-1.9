@@ -6,13 +6,13 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from unittest import TestCase
 
 import py
 
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.packages import Package, ScriptEngine, MOIN_PACKAGE_FILE, packLine, unpackLine
+
 
 
 class DebugPackage(Package, ScriptEngine):
@@ -26,6 +26,7 @@ print|foo
 ReplaceUnderlay|testdatei|TestSeite2
 IgnoreExceptions|True
 DeletePage|TestSeiteDoesNotExist|Test ...
+DeletePage|FooPage|Test ...
 IgnoreExceptions|False
 AddRevision|foofile|FooPage
 AddRevision|foofile|FooPage
@@ -46,29 +47,40 @@ installplugin|foo|local|parser|testy
     def isPackage(self):
         return True
 
-class TestUnsafePackage(TestCase):
+
+class TestUnsafePackage:
     """ Tests various things in the packages package. Note that this package does
         not care to clean up and needs to run in a test wiki because of that. """
 
-    def setUp(self):
+    def setup_class(self):
         if not getattr(self.request.cfg, 'is_test_wiki', False):
             py.test.skip('This test needs to be run using the test wiki.')
 
-    def testBasicPackageThings(self):
-        myPackage = DebugPackage(self.request, 'test')
-        myPackage.installPackage()
-        self.assertEqual(myPackage.msg, "foo\n")
-        testseite2 = Page(self.request, 'TestSeite2')
-        self.assertEqual(testseite2.getPageText(), "Hello world, I am the file testdatei")
-        self.assert_(testseite2.isUnderlayPage())
 
-    def tearDown(self):
+    def teardown_class(self):
         DebugPackage(self.request, u"""moinmoinpackage|1
 DeletePage|FooPage|Test ...
 """).installPackage()
 
-class TestQuoting(TestCase):
+    def gain_superuser_rights(self):
+        self.request.user.name = "SuperUserName"
+        self.request.user.valid = 1
+        self.request.user.may.name = self.request.user.name
+        self.request.cfg.superuser.append(self.request.user.name)
+        self.request.user.auth_method = self.request.cfg.trusted_auth_methods[0]
+
+    def testBasicPackageThings(self):
+        self.gain_superuser_rights()
+        myPackage = DebugPackage(self.request, 'test')
+        myPackage.installPackage()
+        assert myPackage.msg == u'foo\nFooPage added \n'
+        testseite2 = Page(self.request, 'TestSeite2')
+        assert testseite2.getPageText() == "Hello world, I am the file testdatei"
+        assert testseite2.isUnderlayPage()
+
+
+class TestQuoting:
     def testQuoting(self):
         for line in ([':foo', 'is\\', 'ja|', u't|ü', u'baAzß'], [], ['', '']):
-            self.assertEqual(line, unpackLine(packLine(line)))
+            assert line == unpackLine(packLine(line))
 

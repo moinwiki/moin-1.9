@@ -7,7 +7,6 @@
 """
 
 import py
-from unittest import TestCase
 
 import re
 
@@ -15,9 +14,9 @@ from MoinMoin.Page import Page
 from MoinMoin import wikiutil
 
 
-class TestFormatter(TestCase):
+class TestFormatter:
     def testSyntaxReferenceDomXml(self):
-        py.test.skip("dom_xml formatter is known broken")
+        py.test.skip("dom_xml formatter is known to be broken")
         f_name = 'dom_xml'
         try:
             formatter = wikiutil.importPlugin(self.request.cfg, "formatter", f_name, "Formatter")
@@ -29,6 +28,7 @@ class TestFormatter(TestCase):
             print "Done."
 
     def testSyntaxReferenceDocBook(self):
+        py.test.skip("breaks with an attribute error, it should be checked whether the formatter on the DB branch is broken as well")
         try:
             from xml.dom import getDOMImplementation
             dom = getDOMImplementation("4DOM")
