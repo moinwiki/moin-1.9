@@ -79,7 +79,7 @@ def _filter_subscriber_list(event, subscribers):
         userlist = []
         
         for usr in subscribers[lang]:
-            if event_name in usr.subscribed_events:
+            if event_name in usr.subscribed_events and usr.notify_by_jabber:
                 userlist.append(usr)
                 
         subscribers[lang] = userlist
@@ -137,6 +137,8 @@ def handle_user_created(event):
     
     for id in user_ids:
         usr = User(event.request, id=id)
+        if not usr.notify_by_jabber:
+            continue
         
         # Currently send this only to super users
         # TODO: make it possible to disable this notification
