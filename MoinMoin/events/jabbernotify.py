@@ -19,7 +19,6 @@ from MoinMoin import error
 from MoinMoin.Page import Page
 from MoinMoin.user import User, getUserList
 import MoinMoin.events.notification as notification
-
 import MoinMoin.events as ev
     
 
@@ -60,9 +59,9 @@ def handle_jid_changed(event):
             server.removeJIDFromRoster(request.cfg.secret, event.jid)        
                 
     except xmlrpclib.Error, err:
-        print _("XML RPC error: %s") % (str(err),)
+        ev.logger.error(_("XML RPC error: %s"), str(err))
     except Exception, err:
-        print _("Low-level communication error: $s") % (str(err),)
+        ev.logger.error(_("Low-level communication error: $s"), str(err))
 
 
 def _filter_subscriber_list(event, subscribers):
@@ -178,6 +177,6 @@ def send_notification(request, jids, message):
         server.send_notification(request.cfg.secret, jids, message)
         return True
     except xmlrpclib.Error, err:
-        print _("XML RPC error: %s") % (str(err),)
+        ev.logger.error(_("XML RPC error: %s"), str(err))
     except Exception, err:
-        print _("Low-level communication error: %s") % (str(err),)
+        ev.logger.error(_("Low-level communication error: %s"), str(err),)
