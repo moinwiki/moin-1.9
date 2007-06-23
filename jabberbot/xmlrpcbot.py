@@ -7,8 +7,7 @@
 """
 
 import Queue
-import time, xmlrpclib
-import datetime
+import datetime, logging, time, xmlrpclib
 from threading import Thread
 from SimpleXMLRPCServer import SimpleXMLRPCServer
 
@@ -31,9 +30,13 @@ class XMLRPCClient(Thread):
         @param commands: an output command queue
         """
         Thread.__init__(self)
+        self.log = logging.getLogger("log")
         
         if not config.secret:
-            raise ConfigurationError("You must set a (long) secret string!")
+            error = "You must set a (long) secret string!"
+            self.log.critical(error)
+            raise ConfigurationError(error)
+        
         
         self.commands_in = commands_in
         self.commands_out = commands_out
@@ -140,7 +143,7 @@ class XMLRPCClient(Thread):
         """Returns a list of all accesible pages"""
         
         txt = u"""This command may take a while to complete, please be patient..."""
-        info = cmd.NotificationCommand(command.jid, txt)
+        info = cmd.NotificationCommand([command.jid], txt)
         self.commands_out.put_nowait(info)
         
         self.multicall.getAllPages()
@@ -209,11 +212,14 @@ class XMLRPCServer(Thread):
         Thread.__init__(self)
         self.commands = commands
         self.verbose = config.verbose
+        self.log = logging.getLogger("log")
         
         if config.secret:
             self.secret = config.secret
         else:
-            raise ConfigurationError("You must set a (long) secret string")
+            error = "You must set a (long) secret string"
+            self.log.critical(error)
+            raise ConfigurationError(error)
         
         self.server = SimpleXMLRPCServer((config.xmlrpc_host, config.xmlrpc_port))
         
@@ -230,12 +236,6 @@ class XMLRPCServer(Thread):
             self.server.register_function(self.secret_check(func), name)
         
         self.server.serve_forever()
-        
-    def log(self, message):
-        """Logs a message and its timestamp"""
-        
-        t = time.localtime( time.time() )
-        print time.strftime("%H:%M:%S", t), message
 
     def secret_check(self, function):
         """Adds a check for a secret to a given function
