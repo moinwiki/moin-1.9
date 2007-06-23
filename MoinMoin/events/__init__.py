@@ -9,12 +9,20 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+import logging
+
 from MoinMoin import wikiutil
 from MoinMoin.util import pysupport
 from MoinMoin.wikiutil import PluginAttributeError
 
 # Create a list of extension actions from the package directory
 modules = pysupport.getPackageModules(__file__)
+
+# A module-wide Logger, don't use it from outside
+logger = logging.getLogger("events")
+logger.setLevel(logging.DEBUG)
+logger.addHandler(logging.StreamHandler())
+
 
 class Event(object):
     """A class handling information common to all events."""
