@@ -65,8 +65,8 @@ def notify_subscribers(request, page, comment, trivial):
 
         # send email to all subscribers
         for lang in subscribers:
-            emails = [u.email for u in subscribers[lang]]
-            names = [u.name for u in subscribers[lang]]
+            emails = [u.email for u in subscribers[lang] if u.notify_by_email]
+            names = [u.name for u in subscribers[lang] if u.notify_by_email]
             result = send_notification(request, page, comment, emails, lang, revisions, trivial)
             if result:
                 recipients.update(names)
