@@ -35,7 +35,7 @@ use_threads = False
 charset = 'utf-8'
 
 # Regex to find lower->upper transitions (word boundaries in WikiNames), used by split_title
-split_regex = re.compile('([%s])([%s])' % (chars_lower, chars_upper))
+split_regex = re.compile('([%s])([%s])' % (chars_lower, chars_upper), re.UNICODE)
 
 # Invalid characters - invisible characters that should not be in page
 # names. Prevent user confusion and wiki abuse, e.g u'\u202aFrontPage'.
