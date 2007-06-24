@@ -485,8 +485,17 @@ def hotshotProfileDecorator(func, profile):
 
 def quit(signo, stackframe):
     """ Signal handler for aborting signals """
-    global httpd
+    global httpd, config
     logging.info("Thanks for using MoinMoin!")
+
+    fname = config.pycallgraph_output
+    if fname:
+         import pycallgraph
+         if fname.endswith('.png'):
+             pycallgraph.make_dot_graph(fname)
+         elif fname.endswith('.dot'):
+             pycallgraph.save_dot(fname)
+         
     if httpd:
         httpd.die()
 
@@ -550,7 +559,7 @@ class StandaloneConfig(Config):
     # Development options
     memoryProfile = None
     hotshotProfile = None
-
+    pycallgraph_output = None
 
 def run(configClass):
     """ Create and run a moin server
@@ -579,6 +588,20 @@ def run(configClass):
         config.memoryProfile.sample()
         MoinRequestHandler.serve_moin = memoryProfileDecorator(
             MoinRequestHandler.serve_moin, config.memoryProfile)
+
+    # initialize pycallgraph, if wanted
+    if config.pycallgraph_output:
+        try:
+            import pycallgraph
+            pycallgraph.settings['include_stdlib'] = False
+            pcg_filter = pycallgraph.GlobbingFilter(exclude=['pycallgraph.*',
+                                                             'unknown.*',
+                                                    ],
+                                                    max_depth=9999)
+            pycallgraph.start_trace(reset=True, filter_func=pcg_filter)
+        except ImportError:
+            config.pycallgraph_output = None
+
 
     registerSignalHandlers(quit)
     httpd = makeServer(config)
