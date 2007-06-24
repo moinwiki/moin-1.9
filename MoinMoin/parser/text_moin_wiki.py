@@ -1055,7 +1055,10 @@ class Parser:
                 if self.in_pre == 'found_parser':
                     # processing mode
                     try:
-                        endpos = line.index("}}}")
+                        if line.endswith("}}}"):
+                            endpos = len(line) - 3
+                        else:
+                            endpos = line.index("}}}")
                     except ValueError:
                         self.parser_lines.append(line)
                         continue
