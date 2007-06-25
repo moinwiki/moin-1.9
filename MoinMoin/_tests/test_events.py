@@ -6,8 +6,11 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+import py
+
 import MoinMoin.events as events
 import MoinMoin.events.notification as notification
+from MoinMoin.Page import Page
 
 def test_get_handlers(request):
     """Test if there are any event handlers. There should be some internal ones"""
@@ -34,5 +37,12 @@ def test_subscribable_events(request):
     
     print "There should be at least a few subscribable events!"
     assert events.get_subscribable_events()
+
+def test_page_change_message(request):
+    page = Page(request, "FrontPage")
+    
+    print "Provided with a dumb change type argument, this should raise an exception!"
+    py.test.raises(notification.UnknownChangeType, notification.page_change_message, 
+                   "StupidType", request, page, "en", revisions=page.getRevList())
     
 coverage_modules = ["MoinMoin.events"]
