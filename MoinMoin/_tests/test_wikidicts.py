@@ -93,7 +93,7 @@ Next line has key with empty value
         assert d['Last'] == 'last item'
         assert len(d) == 4
 
-class GroupDictTestCase:
+class TestGroupDicts:
 
     def testSystemPagesGroupInDicts(self):
         """ wikidict: names in SystemPagesGroup should be in request.dicts
@@ -102,10 +102,16 @@ class GroupDictTestCase:
 
         Assume that the SystemPagesGroup is in the data or the underlay dir.
         """
-        assert Page.Page(self.request, 'SystemPagesGroup').exists(), \
-               "SystemPagesGroup is missing, Can't run test"
+        assert Page.Page(self.request, 'SystemPagesGroup').exists(), "SystemPagesGroup is missing, Can't run test"
         systemPages = wikidicts.Group(self.request, 'SystemPagesGroup')
+        #print repr(systemPages)
+        #print repr(self.request.dicts['SystemPagesGroup'])
         for member in systemPages.members():
-            self.assert_(self.request.dicts.has_member('SystemPagesGroup', member),
-                         '%s should be in request.dict' % member)
+            assert self.request.dicts.has_member('SystemPagesGroup', member), '%s should be in request.dict' % member
+
+        members, groups = self.request.dicts.expand_group('SystemPagesGroup')
+        assert 'SystemPagesInEnglishGroup' in groups
+        assert 'RecentChanges' in members
+        assert 'HelpContents' in members
+
 

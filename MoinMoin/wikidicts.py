@@ -13,69 +13,43 @@ from MoinMoin.support import copy
 from MoinMoin import caching, wikiutil, Page, logfile
 from MoinMoin.logfile.editlog import EditLog
 
-# Version of the internal data structure which is pickled
-# Please increment if you have changed the structure
-DICTS_PICKLE_VERSION = 5
+# Version of the internal data structure which is pickled.
+# Please increment if you have changed the structure.
+DICTS_PICKLE_VERSION = 6
 
 
-class DictBase:
+class DictBase(dict):
     """ Base class for wiki dicts
 
-    To use this class, sub class it and override regex and initFromText.
+    To use this class, subclass it and override regex and initFromText.
     """
-    # Regular expression used to parse text - sub class should override this
+    def __init__(self, request=None, pagename=None):
+        dict.__init__(self)
+        self.name = None
+        if request is not None and pagename is not None:
+            self.loadFromPage(request, pagename)
+
+    # Regular expression used to parse text - subclass should override this
     regex = ''
-
-    def __init__(self, request, name):
-        """ Initialize, starting from <nothing>.
-
-        Create a dict from a wiki page.
-        """
-        self._dict = {}
-        self.name = name
-
-        self.initRegex()
-
-        # Get text from page named 'name'
-        p = Page.Page(request, name)
-        text = p.get_raw_body()
-        self.initFromText(text)
-
     def initRegex(cls):
         """ Make it a class attribute to avoid it being pickled. """
         cls.regex = re.compile(cls.regex, re.MULTILINE | re.UNICODE)
     initRegex = classmethod(initRegex)
 
+    def loadFromPage(self, request, name):
+        """ load the dict from wiki page <name>'s content """
+        self.name = name
+        self.initRegex()
+        text = Page.Page(request, name).get_raw_body()
+        self.initFromText(text)
+
     def initFromText(self, text):
-        raise NotImplementedError('sub classes should override this')
-
-    def keys(self):
-        return self._dict.keys()
-
-    def values(self):
-        return self._dict.values()
-
-    def get_dict(self):
-        return self._dict
-
-    def has_key(self, key):
-        return self._dict.has_key(key)
-
-    def get(self, key, default):
-        return self._dict.get(key, default)
-
-    def __getitem__(self, key):
-        return self._dict[key]
-
-    def __len__(self):
-        return len(self._dict)
-
-    def __repr__(self):
-        return "<DictBase name=%r items=%r>" % (self.name, self._dict.items())
+        """ parse the wiki page text and init the dict from it """
+        raise NotImplementedError('subclasses should override this')
 
 
 class Dict(DictBase):
-    """ Mapping of keys to values in a wiki page
+    """ Mapping of keys to values in a wiki page.
 
        How a Dict definition page should look like:
 
@@ -91,20 +65,16 @@ class Dict(DictBase):
     regex = r'^ (?P<key>.+?):: (?P<val>.*?) *$'
 
     def initFromText(self, text):
-        """ Create dict from keys and values in text
-
-        Invoked by __init__, also useful for testing without a page.
-        """
         for match in self.regex.finditer(text):
             key, val = match.groups()
-            self._dict[key] = val
+            self[key] = val
 
     def __repr__(self):
-        return "<Dict name=%r items=%r>" % (self.name, self._dict.items())
+        return "<Dict name=%r items=%r>" % (self.name, self.items())
 
 
 class Group(DictBase):
-    """ Group of users, of pages, of whatever
+    """ Group of users, of pages, of whatever.
 
     How a Group definition page should look like:
 
@@ -116,25 +86,21 @@ class Group(DictBase):
      * memberN
     any text ignored
 
-    if there are any free links using ["free link"] notation, the markup
-    is stripped from the member 
+    If there are any free links using ["free link"] notation, the markup
+    is stripped from the member.
     """
-    # * Member - ignore all but first level list items, strip whitespace
-    # Strip free links markup if exists
+    # * Member - ignore all but first level list items, strip whitespace,
+    # strip free links markup if exists.
     regex = r'^ \* +(?:\[\")?(?P<member>.+?)(?:\"\])? *$'
 
     def initFromText(self, text):
-        """ Create dict from group members in text
-
-        Invoked by __init__, also useful for testing without a page.
-        """
         for match in self.regex.finditer(text):
             member = match.group('member')
             self.addmember(member)
 
     def members(self):
         """ return the group's members """
-        return self._dict.keys()
+        return self.keys()
 
     def addmembers(self, members):
         """ add a list of members to the group """
@@ -143,54 +109,14 @@ class Group(DictBase):
 
     def addmember(self, member):
         """ add a member to the group """
-        self._dict[member] = 1
+        self[member] = 1
 
     def has_member(self, member):
         """ check if the group has member <member> """
-        return self._dict.has_key(member)
-
-    def _expandgroup(self, groupdict, name):
-        """ Recursively expand group
-
-        If a group contain another group, the members of that group are
-        added into the the group. The group name itself is not replaced.
-
-        Given two groups:
-
-            MainGruop = [A, SubGroup]
-            SubGroup = [B, C]
-
-        MainGroup is expanded to:
-
-            MainGroup = [A, SubGroup, B, C]
-            
-        This behavior is important for things like SystemPagesGroup,
-        when we like to know if a page is a system page group. page may
-        be a page or a page group, like SystemPagesGroupInFrenchGroup.
-
-        This behavior has no meaning for users groups used in ACL,
-        because user can not use a group name. Note that if you allow a
-        user to use a group name, one can gain a sub group privileges by
-        registering a user with that group name.
-        """
-        groupmembers = groupdict.members(name)
-        members = {}
-        for member in groupmembers:
-            # Skip self duplicates
-            if member == self.name:
-                continue
-            # Add member and its children
-            members[member] = 1
-            if groupdict.hasgroup(member):
-                members.update(self._expandgroup(groupdict, member))
-        return members
-
-    def expandgroups(self, groupdict):
-        """ Invoke _expandgroup to recursively expand groups """
-        self._dict = self._expandgroup(groupdict, self.name)
+        return self.has_key(member)
 
     def __repr__(self):
-        return "<Group name=%r items=%r>" % (self.name, self._dict.keys())
+        return "<Group name=%r items=%r>" % (self.name, self.keys())
 
 
 class DictDict:
@@ -213,32 +139,32 @@ class DictDict:
 
     def has_key(self, dictname, key):
         """ check if we have key <key> in dict <dictname> """
-        dict = self.dictdict.get(dictname)
-        return dict and dict.has_key(key)
+        d = self.dictdict.get(dictname)
+        return d and d.has_key(key)
 
     def keys(self, dictname):
         """ get keys of dict <dictname> """
         try:
-            dict = self.dictdict[dictname]
+            d = self.dictdict[dictname]
         except KeyError:
             return []
-        return dict.keys()
+        return d.keys()
 
     def values(self, dictname):
         """ get values of dict <dictname> """
         try:
-            dict = self.dictdict[dictname]
+            d = self.dictdict[dictname]
         except KeyError:
             return []
-        return dict.values()
+        return d.values()
 
     def dict(self, dictname):
         """ get dict <dictname> """
         try:
-            dict = self.dictdict[dictname]
+            d = self.dictdict[dictname]
         except KeyError:
             return {}
-        return dict
+        return d
 
     def adddict(self, request, dictname):
         """ add a new dict (will be read from the wiki page) """
@@ -251,9 +177,9 @@ class DictDict:
     def keydict(self, key):
         """ list all dicts that contain key """
         dictlist = []
-        for dict in self.dictdict.values():
-            if dict.has_key(key):
-                dictlist.append(dict.name)
+        for d in self.dictdict.values():
+            if d.has_key(key):
+                dictlist.append(d.name)
         return dictlist
 
 
@@ -293,12 +219,15 @@ class GroupDict(DictDict):
     def addgroup(self, request, groupname):
         """ add a new group (will be read from the wiki page) """
         grp = Group(request, groupname)
-        self.dictdict[groupname] = grp
         self.groupdict[groupname] = grp
+        self.expand_groups()
 
     def hasgroup(self, groupname):
         """ check if we have a dict <dictname> """
         return self.groupdict.has_key(groupname)
+
+    def __getitem__(self, name):
+        return self.groupdict[name]
 
     def membergroups(self, member):
         """ list all groups where member is a member of """
@@ -308,8 +237,52 @@ class GroupDict(DictDict):
                 grouplist.append(group.name)
         return grouplist
 
+    def expand_groups(self):
+        """ copy expanded groups to self.dictdict """
+        for name in self.groupdict:
+            members, groups = self.expand_group(name)
+            members.update(groups)
+            grp = Group()
+            grp.update(members)
+            self.dictdict[name] = grp
+
+    def expand_group(self, name):
+        """ Recursively expand group <name>, using the groupdict (which is a not expanded
+            dict of all group names -> group dicts). We return a flat list of group member
+            names and group names.
+
+        Given a groupdict (self) with two groups:
+
+            MainGroup: [A, SubGroup]
+            SubGroup: [B, C]
+
+        MainGroup is expanded to:
+
+            self.expand_group('MainGroup') -> [A, B, C], [MainGroup, SubGroup]
+        """
+        groups = {name: 1}
+        members = {}
+        groupmembers = self[name].keys()
+        for member in groupmembers:
+            # Skip duplicates
+            if member in groups:
+                continue
+            # Add member and its children
+            if self.hasgroup(member):
+                new_members, new_groups = self.expand_group(member)
+                groups.update(new_groups)
+                members.update(new_members)
+            else:
+                members[member] = 1
+        return members, groups
+
     def scandicts(self):
-        """ scan all pages matching the dict / group regex and init the dictdict """
+        """ scan all pages matching the dict / group regex and init the dictdict
+        
+        TODO: the pickle would be updated via an event handler
+              and every process checks the pickle regularly
+              before reading the cache, the writer has to acquire a writelock
+        """
         dump = 0
         request = self.request
 
@@ -346,14 +319,14 @@ class GroupDict(DictDict):
             # check for new groups / dicts from time to time...
             if now - self.namespace_timestamp >= wikiutil.timestamp2version(60): # 60s
                 # Get all pages in the wiki - without user filtering using filter
-                #function - this make the page list about 10 times faster.
+                # function - this make the page list about 10 times faster.
                 dictpages = request.rootpage.getPageList(user='', filter=isdict)
                 grouppages = request.rootpage.getPageList(user='', filter=isgroup)
 
                 # remove old entries when dict or group page have been deleted,
                 # add entries when pages have been added
                 # use copies because the dicts are shared via cfg.cache.DICTS_DATA
-                #  and must not be modified
+                # and must not be modified
                 olddictdict = self.dictdict.copy()
                 oldgroupdict = self.groupdict.copy()
                 self.dictdict = {}
@@ -406,13 +379,7 @@ class GroupDict(DictDict):
         }
 
         if dump:
-            # copy unexpanded groups to self.dictdict
-            for name, grp in self.groupdict.items():
-                self.dictdict[name] = copy.deepcopy(grp)
-            # expand groups
-            for name in self.groupdict:
-                self.dictdict[name].expandgroups(self)
-
+            self.expand_groups()
             cache = caching.CacheEntry(request, arena, key, scope='wiki', use_pickle=True)
             cache.update(data)
 
