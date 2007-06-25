@@ -734,8 +734,7 @@ class Page(object):
 
         # look for the end of words and the start of a new word,
         # and insert a space there
-        split_re = re.compile('([%s])([%s])' % (config.chars_lower, config.chars_upper))
-        splitted = split_re.sub(r'\1 \2', self.page_name)
+        splitted = config.split_regex.sub(r'\1 \2', self.page_name)
         return splitted
 
     def url(self, request, querystr=None, anchor=None, relative=True, **kw):

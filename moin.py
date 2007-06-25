@@ -127,6 +127,11 @@ class DefaultConfig(StandaloneConfig):
     # Not compatible with threads - use with SimpleServer only.
     ## hotshotProfile = name + '.prof'
 
+    # Using pycallgraph to make nice graphics of how moin works internally
+    # hint: using zgrviewer to view .dot is much more effective than using
+    #       some .png viewer
+    ##pycallgraph_output = 'moin-pycallgraph.dot' # can be either .dot or .png
+    ##serverClass = 'SimpleServer' # pycallgraph doesn't support multithreading
 
 try:
     from wikiserverconfig import Config
