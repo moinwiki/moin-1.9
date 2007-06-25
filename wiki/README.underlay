@@ -1,0 +1,8 @@
+Please unpack the underlay directory like this
+
+  tar xjf underlay.tar.bz2
+
+or use the directory from the current release distribution
+
+We plan to move the file onto a webpage where a script can fetch it
+automatically.
