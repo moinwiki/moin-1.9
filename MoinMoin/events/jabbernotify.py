@@ -41,6 +41,8 @@ def handle(event):
         return handle_file_attached(event)
     elif isinstance(event, ev.PageDeletedEvent):
         return handle_page_deleted(event)
+    elif isinstance(event, ev.PageRenamedEvent):
+        return handle_page_renamed(event)
     elif isinstance(event, ev.UserCreatedEvent):
         return handle_user_created(event)
     
@@ -88,7 +90,6 @@ def handle_file_attached(event):
     """Handles event sent when a file is attached to a page"""
     
     request = event.request
-    server = request.cfg.notification_server
     page = Page(request, event.pagename)
     
     subscribers = page.getSubscribers(request, return_users=1)
@@ -101,7 +102,6 @@ def handle_file_attached(event):
 def handle_page_changed(event):
     """ Handles events related to page changes """
     request = event.request
-    server = request.cfg.notification_server
     page = event.page
     
     subscribers = page.getSubscribers(request, return_users=1, trivial=event.trivial)    
@@ -114,12 +114,22 @@ def handle_page_deleted(event):
     """Handles event sent when a page is deleted"""
     
     request = event.request
-    server = request.cfg.notification_server
     page = event.page
     
     subscribers = page.getSubscribers(request, return_users=1)
     _filter_subscriber_list(event, subscribers)
     return page_change("page_deleted", request, page, subscribers)
+
+def handle_page_renamed(event):
+    """Handles event sent when a page is renamed"""
+    
+    request = event.request
+    page = event.page
+    old_name = event.old_page.page_name
+    
+    subscribers = page.getSubscribers(request, return_users=1)
+    _filter_subscriber_list(event, subscribers)
+    return page_change("page_renamed", request, page, subscribers, oldname=old.page_name)
 
 
 def handle_user_created(event):

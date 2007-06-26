@@ -123,6 +123,17 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
                 'pagelink': pagelink,
                 'sitename': page.cfg.sitename or request.getBaseURL(),
         }
+            
+    elif msgtype == "page_renamed":
+        messageBody = _("Dear wiki user,\n\n"
+            'You have subscribed to a wiki page "%(sitename)s" for change notification.\n\n'
+            "The following page has been renamed from %(oldname)s by %(editor)s:\n"
+            "%(pagelink)s\n\n", formatted=False) % {
+                'editor': page.uid_override or user.getUserIdentification(request),
+                'pagelink': pagelink,
+                'sitename': page.cfg.sitename or request.getBaseURL(),
+                'oldname': kwargs['old_name']
+        }
     else:
         raise UnknownChangeType()
     
