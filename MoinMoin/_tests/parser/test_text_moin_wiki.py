@@ -21,7 +21,7 @@ from MoinMoin.parser.text_moin_wiki import Parser
 
 class ParserTestCase(unittest.TestCase):
     """ Helper class that provide a parsing method """
-    
+
     def parse(self, body):
         """Parse body and return html
 
@@ -36,7 +36,7 @@ class ParserTestCase(unittest.TestCase):
         self.request.formatter = page.formatter
         page.formatter.setPage(page)
         page.hilite_re = None
-        
+
         output = StringIO()
         saved_write = self.request.write
         self.request.write = output.write
@@ -68,7 +68,7 @@ class TestParagraphs(ParserTestCase):
         expected = re.compile(r'<p>\s*Second\s*</p>')
         self.assert_(expected.search(result),
                      '"%s" not in "%s"' % (expected.pattern, result))
-        
+
     def testParagraphAfterBlockMarkup(self):
         """ parser.wiki: create paragraph after block markup """
         py.test.skip("Broken because of line numbers")
@@ -99,7 +99,7 @@ class TestHeadings(ParserTestCase):
         global state saved in request.
         """
         self.config = self.TestConfig(show_section_numbers=0)
-    
+
     def tearDown(self):
         del self.config
 
@@ -117,7 +117,7 @@ class TestHeadings(ParserTestCase):
             '=  head  =\n' # both
                  )
         expected = self.parse('= head =')
-        for test in tests:            
+        for test in tests:
             result = self.parse(test)
             self.assertEqual(result, expected,
                 'Expected "%(expected)s" but got "%(result)s"' % locals())
@@ -130,7 +130,7 @@ class TestTOC(ParserTestCase):
         global state saved in request.
         """
         self.config = self.TestConfig(show_section_numbers=0)
-    
+
     def tearDown(self):
         del self.config
 
@@ -156,7 +156,7 @@ Text
         result = self.parse(withWhitespace)
         self.assertEqual(result, expected,
             'Expected "%(expected)s" but got "%(result)s"' % locals())
-        
+
 
 class TestDateTimeMacro(ParserTestCase):
    """ Test DateTime macro
@@ -167,9 +167,9 @@ class TestDateTimeMacro(ParserTestCase):
    TODO: when this test fail, does it mean that moin code fail on that
    machine? - can we fix this?
    """
-   
+
    text = 'AAA %s AAA'
-   needle = re.compile(text %  r'(.+)')
+   needle = re.compile(text % r'(.+)')
    _tests = (
        # test                                   expected
        ('[[DateTime(1970-01-06T00:00:00)]]',   '1970-01-06 00:00:00'),
@@ -182,10 +182,10 @@ class TestDateTimeMacro(ParserTestCase):
    def setUp(self):
        """ Require default date and time format config values """
        self.config = self.TestConfig(defaults=('date_fmt', 'datetime_fmt'))
-   
+
    def tearDown(self):
        del self.config
-   
+
    def testDateTimeMacro(self):
        """ parser.wiki: DateTime macro """
        note = """
@@ -200,13 +200,13 @@ class TestDateTimeMacro(ParserTestCase):
            result = self.needle.search(html).group(1)
            self.assertEqual(result, expected,
                'Expected "%(expected)s" but got "%(result)s"; %(note)s' % locals())
-                       
+
 
 class TestTextFormatingTestCase(ParserTestCase):
     """ Test wiki markup """
-    
+
     text = 'AAA %s AAA'
-    needle = re.compile(text %  r'(.+)')
+    needle = re.compile(text % r'(.+)')
     _tests = (
         # test,                     expected
         ('no format',               'no format'),
@@ -218,7 +218,7 @@ class TestTextFormatingTestCase(ParserTestCase):
         ("'''Mix at ''end'''''",    '<strong>Mix at <em>end</em></strong>'),
         ("''Mix at '''end'''''",    '<em>Mix at <strong>end</strong></em>'),
         )
-    
+
     def testTextFormating(self):
         """ parser.wiki: text formating """
         for test, expected in self._tests:
@@ -253,7 +253,7 @@ class TestInlineCrossing(ParserTestCase):
     """
     This test case fail with current parser/formatter and should be fixed in 2.0
     """
-    
+
     def disabled_testInlineCrossing(self):
         """ parser.wiki: prevent inline crossing <a><b></a></b> """
 
@@ -263,10 +263,10 @@ class TestInlineCrossing(ParserTestCase):
         result = self.parse(test)
         self.assert_(needle.search(result),
                      'Expected "%(expected)s" but got "%(result)s"' % locals())
-       
+
 
 class TestEscapeHTML(ParserTestCase):
-    
+
     def testEscapeInTT(self):
         """ parser.wiki: escape html markup in `tt` """
         test = 'text `<escape-me>` text\n'
@@ -284,7 +284,7 @@ class TestEscapeHTML(ParserTestCase):
 }}}
 '''
         self._test(test)
-        
+
     def testEscapeInPreHashbang(self):
         """ parser.wiki: escape html markup in pre with hashbang """
         test = '''{{{#!
@@ -292,7 +292,7 @@ class TestEscapeHTML(ParserTestCase):
 }}}
 '''
         self._test(test)
-        
+
     def testEscapeInPythonCodeArea(self):
         """ parser.wiki: escape html markup in python code area """
         test = '''{{{#!python
@@ -325,7 +325,7 @@ class TestEscapeHTML(ParserTestCase):
         expected = r'&lt;escape-me&gt;'
         result = self.parse(test)
         self.assert_(re.search(expected, result),
-                     'Expected "%(expected)s" but got "%(result)s"' % locals())         
+                     'Expected "%(expected)s" but got "%(result)s"' % locals())
 
 
 class TestEscapeWikiTableMarkup(ParserTestCase):
@@ -347,7 +347,7 @@ class TestEscapeWikiTableMarkup(ParserTestCase):
 }}}
 '''
         self.do(test)
-        
+
     def testEscapeInPreHashbang(self):
         """ parser.wiki: escape wiki table  markup in pre with hashbang """
         test = '''{{{#!
@@ -355,7 +355,7 @@ class TestEscapeWikiTableMarkup(ParserTestCase):
 }}}
 '''
         self.do(test)
-        
+
     def testEscapeInPythonCodeArea(self):
         """ parser.wiki: escape wiki table markup in python code area """
         test = '''{{{#!python
@@ -368,7 +368,7 @@ class TestEscapeWikiTableMarkup(ParserTestCase):
         expected = r'&lt;tablewidth="80"&gt;'
         result = self.parse(test)
         self.assert_(re.search(expected, result),
-                     'Expected "%(expected)s" but got "%(result)s"' % locals())         
+                     'Expected "%(expected)s" but got "%(result)s"' % locals())
 
 
 class TestRule(ParserTestCase):
@@ -395,7 +395,7 @@ class TestRule(ParserTestCase):
         py.test.skip("Broken because of line numbers")
 
         for size in range(5, 11):
-            test = '-' * size         
+            test = '-' * size
             result = self.parse(test)
             expected = '<hr class="hr%d">' % (size - 4)
             self.assert_(expected in result,
@@ -404,7 +404,7 @@ class TestRule(ParserTestCase):
     def testLongRule(self):
         """ parser.wiki: ------------ long rule shortened to hr6 """
         py.test.skip("Broken because of line numbers")
-        test = '-' * 254        
+        test = '-' * 254
         result = self.parse(test)
         expected = '<hr class="hr6">'
         self.assert_(expected in result,
@@ -438,7 +438,7 @@ class TestBlock(ParserTestCase):
             match = needle.search(result)
             self.assert_(match is not None,
                          'Expected "%(expected)s" but got "%(result)s"' % locals())
-            
+
     def testEmptyLineBeforeBlock(self):
         """ parser.wiki: empty lines before block element ignored
         
@@ -466,7 +466,7 @@ class TestBlock(ParserTestCase):
         cases = ('some text {{{some block text\n}}} and a URL http://moinmo.in/',
                  'some text {{{some block text\n}}} and a WikiName')
 
-        for case in cases:          
+        for case in cases:
             result = self.parse(case).strip()
             match = result.endswith('</a>')
             expected = True
@@ -487,7 +487,7 @@ pattern = re.compile(r'{{{This is some nested text}}}')}}}"""
         expected = True
 
         assert expected == result
-        
+
     def testColorizedPythonParserAndNestingPreBracketsWithLinebreak(self):
         """ tests nested {{{ }}} for the python colorized parser 
         """
@@ -518,7 +518,7 @@ You can use {{{brackets}}}}}}"""
         expected = True
 
         assert expected == result
-        
+
     def testNestingPreBracketsWithLinebreak(self):
         """ tests nested {{{ }}} for the wiki parser 
         """
@@ -547,4 +547,5 @@ You can use {{{brackets}}}}}}"""
         result = 'Example <span class="anchor" id="line-0"></span><ul><li style="list-style-type:none"><span class="anchor" id="line-0"></span><pre>You can use {{{brackets}}}</pre>' in output
         expected = True
 
-        assert expected == result
+        assert expected == resulti
+ 
