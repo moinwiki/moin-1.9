@@ -536,7 +536,7 @@ Try a different name.""") % (newpagename,)
             if request.user.may.write(newpagename):
                 # Save page text with a comment about the old name and log entry
                 savetext = u"## page was copied from %s\n%s" % (self.page_name, savetext)
-                newpage.saveText(savetext, 0, comment=comment, index=0, extra=self.page_name, action='SAVE')
+                newpage.saveText(savetext, 0, comment=comment, index=0, extra=self.page_name, action='SAVE', page_edit=False)
             else:
                 # if user is  not able to write to the page itselfs we set a log entry only
                 from MoinMoin import packages
@@ -605,7 +605,7 @@ Try a different name.""") % (newpagename,)
             self.error = None
             # Save page text with a comment about the old name
             savetext = u"## page was renamed from %s\n%s" % (self.page_name, savetext)
-            newpage.saveText(savetext, 0, comment=comment, index=0, extra=self.page_name, action='SAVE/RENAME')
+            newpage.saveText(savetext, 0, comment=comment, index=0, extra=self.page_name, action='SAVE/RENAME', page_edit=False)
             # delete pagelinks
             arena = newpage
             key = 'pagelinks'
@@ -658,7 +658,7 @@ Try a different name.""") % (newpagename,)
             event = PageDeletedEvent(request, self, comment)
             send_event(event)
             
-            msg = self.saveText(u"deleted\n", 0, comment=comment or u'', index=1, deleted=True)
+            msg = self.saveText(u"deleted\n", 0, comment=comment or u'', index=1, deleted=True, page_edit=False)
             msg = msg.replace(
                 _("Thank you for your changes. Your attention to detail is appreciated."),
                 _('Page "%s" was successfully deleted!') % (self.page_name,))
@@ -966,6 +966,7 @@ Try a different name.""") % (newpagename,)
         @keyword action: action for editlog (default: SAVE)
         @keyword index: needs indexing, not already handled (default: 1)
         @keyword deleted: if True, then don't save page content (used by DeletePage, default: False)
+        @keyword page_edit: if False (default: True), don't send a PageChangedEvent
         @rtype: unicode
         @return: error msg
         """
@@ -974,6 +975,7 @@ Try a different name.""") % (newpagename,)
         self._save_draft(newtext, rev, **kw)
         action = kw.get('action', 'SAVE')
         deleted = kw.get('deleted', False)
+        page_edit = kw.get('page_edit', True)
 
         #!!! need to check if we still retain the lock here
         #!!! rev check is not enough since internal operations use "0"
@@ -1049,19 +1051,20 @@ Please review the page and save then. Do not save this page as it is!""")
             self.clean_acl_cache()
             self._save_draft(None, None) # everything fine, kill the draft for this page
 
-            # send notifications
-            from MoinMoin import events
-            e = events.PageChangedEvent(self.request, self, comment, trivial)
-            results = events.send_event(e)
+            if page_edit:
+                # send notifications
+                from MoinMoin import events
+                e = events.PageChangedEvent(self.request, self, comment, trivial)
+                results = events.send_event(e)
 
-            recipients = set()
-            for result in results:
-                if isinstance(result, notification.Success):
-                    recipients.update(result.recipients)
+                recipients = set()
+                for result in results:
+                    if isinstance(result, notification.Success):
+                        recipients.update(result.recipients)
 
-            if recipients:
-                info = _("Notifications sent to:")
-                msg = msg + "<p>%s %s</p>" % (info, ",".join(recipients))
+                        if recipients:
+                            info = _("Notifications sent to:")
+                            msg = msg + "<p>%s %s</p>" % (info, ",".join(recipients))
 
             if kw.get('index', 1) and request.cfg.xapian_search:
                 from MoinMoin.search.Xapian import Index
