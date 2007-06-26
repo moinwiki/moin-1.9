@@ -28,10 +28,6 @@ def handle(event):
     # Check for desired event type and if notification bot is configured
     if not cfg.jabber_enabled:
         return
-    
-    if not cfg.secret:
-        errmsg = "You must set a (long) secret string to send notifications!"
-        raise error.ConfigurationError(errmsg)
 
     if isinstance(event, ev.PageChangedEvent):
         return handle_page_changed(event)

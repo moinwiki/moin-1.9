@@ -683,6 +683,14 @@ reStructuredText Quick Reference
         
         # if we are to use the jabber bot, instantiate a server object for future use
         if self.jabber_enabled:
+            
+            errmsg = "You must set a (long) secret string to send notifications!"
+            try:
+                if not self.secret:
+                    raise error.ConfigurationError(errmsg)
+            except AttributeError, err:
+                    raise error.ConfigurationError(errmsg)
+            
             from xmlrpclib import Server
             self.notification_server = Server(self.notification_bot_uri, )
             
