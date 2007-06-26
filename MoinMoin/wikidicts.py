@@ -198,10 +198,8 @@ class GroupDict(DictDict):
     def reset(self):
         self.dictdict = {}
         self.groupdict = {} # unexpanded groups
-        self.namespace_timestamp = 0
-        self.pageupdate_timestamp = 0
-        self.base_timestamp = 0
         self.picklever = DICTS_PICKLE_VERSION
+        self.disk_cache_mtime = 0
 
     def has_member(self, groupname, member):
         """ check if we have <member> as a member of group <groupname> """
@@ -276,113 +274,83 @@ class GroupDict(DictDict):
                 members[member] = 1
         return members, groups
 
-    def scandicts(self):
-        """ scan all pages matching the dict / group regex and init the dictdict
-        
-        TODO: the pickle would be updated via an event handler
-              and every process checks the pickle regularly
-              before reading the cache, the writer has to acquire a writelock
-        """
-        dump = 0
+    def load_dicts(self):
+        """ load the dict from the cache """
         request = self.request
-
-        # Save now in our internal version format
-        now = wikiutil.timestamp2version(int(time.time()))
-        try:
-            lastchange = EditLog(request).date()
-        except logfile.LogMissing:
-            lastchange = 0
-            dump = 1
-
+        rescan = False
         arena = 'wikidicts'
         key = 'dicts_groups'
+        cache = caching.CacheEntry(request, arena, key, scope='wiki', use_pickle=True)
+        current_disk_cache_mtime = cache.mtime()
         try:
             self.__dict__.update(self.cfg.cache.DICTS_DATA)
+            if current_disk_cache_mtime > self.disk_cache_mtime:
+                self.reset()
+                raise AttributeError # not fresh, force load from disk
+            else:
+                return
         except AttributeError:
             try:
-                cache = caching.CacheEntry(request, arena, key, scope='wiki', use_pickle=True)
                 data = cache.content()
                 self.__dict__.update(data)
+                self.disk_cache_mtime = current_disk_cache_mtime
 
                 # invalidate the cache if the pickle version changed
                 if self.picklever != DICTS_PICKLE_VERSION:
-                    self.reset()
-                    dump = 1
+                    raise # force rescan
             except:
                 self.reset()
-                dump = 1
+                rescan = True
 
-        if lastchange >= self.namespace_timestamp or dump:
-            isdict = self.cfg.cache.page_dict_regex.search
-            isgroup = self.cfg.cache.page_group_regex.search
-
-            # check for new groups / dicts from time to time...
-            if now - self.namespace_timestamp >= wikiutil.timestamp2version(60): # 60s
-                # Get all pages in the wiki - without user filtering using filter
-                # function - this make the page list about 10 times faster.
-                dictpages = request.rootpage.getPageList(user='', filter=isdict)
-                grouppages = request.rootpage.getPageList(user='', filter=isgroup)
-
-                # remove old entries when dict or group page have been deleted,
-                # add entries when pages have been added
-                # use copies because the dicts are shared via cfg.cache.DICTS_DATA
-                # and must not be modified
-                olddictdict = self.dictdict.copy()
-                oldgroupdict = self.groupdict.copy()
-                self.dictdict = {}
-                self.groupdict = {}
-
-                for pagename in dictpages:
-                    if olddictdict.has_key(pagename):
-                        # keep old
-                        self.dictdict[pagename] = olddictdict[pagename]
-                        del olddictdict[pagename]
-                    else:
-                        self.adddict(request, pagename)
-                        dump = 1
-
-                for pagename in grouppages:
-                    if olddictdict.has_key(pagename):
-                        # keep old
-                        self.dictdict[pagename] = olddictdict[pagename]
-                        self.groupdict[pagename] = oldgroupdict[pagename]
-                        del olddictdict[pagename]
-                    else:
-                        self.addgroup(request, pagename)
-                        dump = 1
-
-                if olddictdict: # dict page was deleted
-                    dump = 1
-
-                self.namespace_timestamp = now
-
-            # check if groups / dicts have been modified on disk
-            for pagename in self.dictdict.keys():
-                if Page.Page(request, pagename).mtime_usecs() >= self.pageupdate_timestamp:
-                    if isdict(pagename):
-                        self.adddict(request, pagename)
-                    elif isgroup(pagename):
-                        self.addgroup(request, pagename)
-                    dump = 1
-            self.pageupdate_timestamp = now
-
-            if not self.base_timestamp:
-                self.base_timestamp = int(time.time())
+        if rescan:
+            self.scan_dicts()
+            self.load_dicts() # try again
+            return
 
         data = {
-            "namespace_timestamp": self.namespace_timestamp,
-            "pageupdate_timestamp": self.pageupdate_timestamp,
-            "base_timestamp": self.base_timestamp,
+            "disk_cache_mtime": self.disk_cache_mtime,
             "dictdict": self.dictdict,
             "groupdict": self.groupdict,
             "picklever": self.picklever
         }
 
-        if dump:
-            self.expand_groups()
-            cache = caching.CacheEntry(request, arena, key, scope='wiki', use_pickle=True)
-            cache.update(data)
-
         # remember it (persistent environments)
         self.cfg.cache.DICTS_DATA = data
 
+    def scan_dicts(self):
+        """ scan all pages matching the dict / group regex and
+            cache the results on disk
+        """
+        request = self.request
+        self.reset()
+
+        # XXX get cache write lock here
+        scan_begin_time = time.time()
+
+        # Get all pages in the wiki - without user filtering using filter
+        # function - this makes the page list about 10 times faster.
+        isdict = self.cfg.cache.page_dict_regex.search
+        dictpages = request.rootpage.getPageList(user='', filter=isdict)
+        for pagename in dictpages:
+            self.adddict(request, pagename)
+
+        isgroup = self.cfg.cache.page_group_regex.search
+        grouppages = request.rootpage.getPageList(user='', filter=isgroup)
+        for pagename in grouppages:
+            self.addgroup(request, pagename)
+
+        scan_end_time = time.time()
+        self.expand_groups()
+
+        arena = 'wikidicts'
+        key = 'dicts_groups'
+        cache = caching.CacheEntry(request, arena, key, scope='wiki', use_pickle=True)
+        data = {
+            "scan_begin_time": scan_begin_time,
+            "scan_end_time": scan_end_time,
+            "dictdict": self.dictdict,
+            "groupdict": self.groupdict,
+            "picklever": self.picklever
+        }
+        cache.update(data)
+        # XXX release cache write lock here
