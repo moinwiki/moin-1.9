@@ -184,7 +184,6 @@ class Parser:
             result.append(self.formatter.definition_desc(0))
         #result.append("<!-- close item end -->\n")
 
-
     def interwiki(self, target_and_text, **kw):
         # TODO: maybe support [wiki:Page http://wherever/image.png] ?
         scheme, rest = target_and_text.split(':', 1)
@@ -240,7 +239,7 @@ class Parser:
                     pagename = self.formatter.page.page_name
                     url = AttachFile.getAttachUrl(pagename, fname, self.request, escaped=1)
                     return self.formatter.rawHTML(EmbedObject.embed(EmbedObject(macro, wikiutil.escape(fname)), mt, url))
-    
+
         return self.formatter.attachment_link(fname, text)
 
     def _u_repl(self, word):
@@ -280,7 +279,7 @@ class Parser:
 
     def _emph_repl(self, word):
         """Handle emphasis, i.e. '' and '''."""
-        ##print "#", self.is_b, self.is_em, "#"
+        ## print "#", self.is_b, self.is_em, "#"
         if len(word) == 3:
             self.is_b = not self.is_b
             if self.is_em and self.is_b:
@@ -310,7 +309,7 @@ class Parser:
 
     def _emph_ib_or_bi_repl(self, word):
         """Handle mixed emphasis, exactly five '''''."""
-        ##print "*", self.is_b, self.is_em, "*"
+        ## print "*", self.is_b, self.is_em, "*"
         b_before_em = self.is_b > self.is_em > 0
         self.is_b = not self.is_b
         self.is_em = not self.is_em
@@ -318,7 +317,6 @@ class Parser:
             return self.formatter.strong(self.is_b) + self.formatter.emphasis(self.is_em)
         else:
             return self.formatter.emphasis(self.is_em) + self.formatter.strong(self.is_b)
-
 
     def _sup_repl(self, word):
         """Handle superscript."""
@@ -344,7 +342,6 @@ class Parser:
             result = result + self.formatter.rule(size)
         return result
 
-
     def _word_repl(self, word, text=None):
         """Handle WikiNames."""
 
@@ -355,7 +352,6 @@ class Parser:
             if not text:
                 text = word
             word = '/'.join([x for x in self.formatter.page.page_name.split('/')[:-1] + [word[wikiutil.PARENT_PREFIX_LEN:]] if x])
-
         if not text:
             # if a simple, self-referencing link, emit it as plain text
             if word == self.formatter.page.page_name:
@@ -407,7 +403,6 @@ class Parser:
                     self.formatter.text(word) +
                     self.formatter.url(0))
 
-
     def _wikiname_bracket_repl(self, text):
         """Handle special-char wikinames with link text, like:
            ["Jim O'Brian" Jim's home page] or ['Hello "world"!' a page with doublequotes]i
@@ -425,7 +420,6 @@ class Parser:
             return self._word_repl(target, linktext)
         else:
             return self.formatter.text(text)
-
 
     def _url_bracket_repl(self, word):
         """Handle bracketed URLs."""
@@ -470,13 +464,11 @@ class Parser:
                     self.formatter.text(words[1]) +
                     self.formatter.url(0))
 
-
     def _email_repl(self, word):
         """Handle email addresses (without a leading mailto:)."""
         return (self.formatter.url(1, "mailto:" + word, css='mailto') +
                 self.formatter.text(word) +
                 self.formatter.url(0))
-
 
     def _ent_repl(self, word):
         """Handle SGML entities."""
@@ -544,11 +536,9 @@ class Parser:
         ])
         return ''.join(result)
 
-
     def _indent_level(self):
         """Return current char-wise indent level."""
         return len(self.list_indents) and self.list_indents[-1]
-
 
     def _indent_to(self, new_level, list_type, numtype, numstart):
         """Close and open lists."""
@@ -606,7 +596,6 @@ class Parser:
         self.in_list = self.list_types != []
         return ''.join(closelist) + ''.join(openlist)
 
-
     def _undent(self):
         """Close all open lists."""
         result = []
@@ -624,13 +613,11 @@ class Parser:
         self.list_types = []
         return ''.join(result)
 
-
     def _tt_repl(self, word):
         """Handle inline code."""
         return self.formatter.code(1) + \
             self.formatter.text(word[3:-3]) + \
             self.formatter.code(0)
-
 
     def _tt_bt_repl(self, word):
         """Handle backticked inline code."""
@@ -638,7 +625,6 @@ class Parser:
         return self.formatter.code(1, css="backtick") + \
             self.formatter.text(word[1:-1]) + \
             self.formatter.code(0)
-
 
     def _getTableAttrs(self, attrdef):
         # skip "|" and initial "<"
@@ -775,7 +761,6 @@ class Parser:
         else:
             return self.formatter.text(word)
 
-
     def _heading_repl(self, word):
         """Handle section headings."""
         import sha
@@ -854,13 +839,11 @@ class Parser:
             return self.formatter.text(word)
         return self.formatter.text(word)
 
-
     def _smiley_repl(self, word):
         """Handle smileys."""
         return self.formatter.smiley(word)
 
     _smileyA_repl = _smiley_repl
-
 
     def _comment_repl(self, word):
         # if we are in a paragraph, we must close it so that normal text following
@@ -1069,7 +1052,6 @@ class Parser:
                         else:
                             if self.in_nested_pre == 1:
                                 endpos = line.index("}}}")
-
                             else:
                                 self.parser_lines.append(line)
                                 if "}}}" in line:
