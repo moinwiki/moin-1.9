@@ -30,7 +30,7 @@ from MoinMoin.widget.dialog import Status
 from MoinMoin.logfile import editlog, eventlog
 from MoinMoin.util import filesys, timefuncs, web
 from MoinMoin.mail import sendmail
-from MoinMoin.events import PageDeletedEvent, send_event
+from MoinMoin.events import PageDeletedEvent, PageRenamedEvent, send_event
 import MoinMoin.events.notification as notification
 
 # used for merging
@@ -625,6 +625,9 @@ Try a different name.""") % (newpagename,)
                 if index.exists():
                     index.remove_item(self.page_name, now=0)
                     index.update_page(newpagename)
+                    
+            event = PageRenamedEvent(request, newpage, comment)
+            send_event(event)
 
             return True, None
         except OSError, err:
