@@ -487,4 +487,64 @@ pattern = re.compile(r'{{{This is some nested text}}}')}}}"""
         expected = True
 
         assert expected == result
+        
+    def testColorizedPythonParserAndNestingPreBracketsWithLinebreak(self):
+        """ tests nested {{{ }}} for the python colorized parser 
+        """
 
+        raw = """{{{
+#!python
+import re
+pattern = re.compile(r'{{{This is some nested text}}}')
+}}}"""
+        output = self.parse(raw)
+        output = ''.join(output)
+        print output
+        result = "r'{{{This is some nested text}}}'" in output
+        expected = True
+
+        assert expected == result
+
+    def testNestingPreBrackets(self):
+        """ tests nested {{{ }}} for the wiki parser 
+        """
+
+        raw = """{{{
+Example
+You can use {{{brackets}}}}}}"""
+        output = self.parse(raw)
+        output = ''.join(output)
+        result = 'You can use {{{brackets}}}' in output
+        expected = True
+
+        assert expected == result
+        
+    def testNestingPreBracketsWithLinebreak(self):
+        """ tests nested {{{ }}} for the wiki parser 
+        """
+
+        raw = """{{{
+Example
+You can use {{{brackets}}}
+}}}"""
+        output = self.parse(raw)
+        output = ''.join(output)
+        print output
+        result = 'You can use {{{brackets}}}' in output
+        expected = True
+
+        assert expected == result
+
+    def testTextBeforeNestingPreBrackets(self):
+        """ tests text before nested {{{ }}} for the wiki parser 
+        """
+
+        raw = """Example
+        {{{
+You can use {{{brackets}}}}}}"""
+        output = self.parse(raw)
+        output = ''.join(output)
+        result = 'Example <span class="anchor" id="line-0"></span><ul><li style="list-style-type:none"><span class="anchor" id="line-0"></span><pre>You can use {{{brackets}}}</pre>' in output
+        expected = True
+
+        assert expected == result

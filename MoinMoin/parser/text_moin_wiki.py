@@ -1010,7 +1010,7 @@ class Parser:
         for line in self.lines:
             if ']][[' in line.replace(' ',''):
                 self.no_862 = True
-            self.lineno += 1
+
             self.line_anchor_printed = 0
             if not self.in_table:
                 self.request.write(self._line_anchordef())
@@ -1052,13 +1052,30 @@ class Parser:
                         self.request.write(self._closeP() +
                                            self.formatter.preformatted(1))
                         self.in_pre = 'no_parser'
+
                 if self.in_pre == 'found_parser':
+                    self.in_nested_pre += line.count('{{{')
+                    if self.in_nested_pre - line.count('}}}') == 0:
+                        self.in_nested_pre = 1
                     # processing mode
                     try:
                         if line.endswith("}}}"):
-                            endpos = len(line) - 3
+                            if self.in_nested_pre == 1:
+                                endpos = len(line) - 3
+                            else:
+                                self.parser_lines.append(line)
+                                self.in_nested_pre -= 1
+                                continue
                         else:
-                            endpos = line.index("}}}")
+                            if self.in_nested_pre == 1:
+                                endpos = line.index("}}}")
+
+                            else:
+                                self.parser_lines.append(line)
+                                if "}}}" in line:
+                                    self.in_nested_pre -= 1
+                                continue
+
                     except ValueError:
                         self.parser_lines.append(line)
                         continue
@@ -1169,6 +1186,7 @@ class Parser:
 
         if self.wrapping_div_class:
             self.request.write(self.formatter.div(0))
+
 
     # Private helpers ------------------------------------------------------------
 
