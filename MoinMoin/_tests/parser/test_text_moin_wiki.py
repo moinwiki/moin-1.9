@@ -547,5 +547,5 @@ You can use {{{brackets}}}}}}"""
         result = 'Example <span class="anchor" id="line-0"></span><ul><li style="list-style-type:none"><span class="anchor" id="line-0"></span><pre>You can use {{{brackets}}}</pre>' in output
         expected = True
 
-        assert expected == resulti
+        assert expected == result
  
