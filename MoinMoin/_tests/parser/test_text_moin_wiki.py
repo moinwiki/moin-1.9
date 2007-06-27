@@ -548,4 +548,19 @@ You can use {{{brackets}}}}}}"""
         expected = True
 
         assert expected == result
- 
+
+    def testManyNestingPreBrackets(self):
+        """ tests two nestings  ({{{ }}} and {{{ }}}) in one line for the wiki parser 
+        """
+
+        raw = """{{{
+Test {{{brackets}}} and test {{{brackets}}}
+}}}"""
+        output = self.parse(raw)
+        output = ''.join(output)
+        result = '</span><p><pre>Test {{{brackets}}} and test {{{brackets}}}' in output
+        expected = True
+
+        assert expected == result
+
+

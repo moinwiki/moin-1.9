@@ -884,6 +884,8 @@ class Parser:
         ###result.append(u'<span class="info">[scan: <tt>"%s"</tt>]</span>' % line)
         if line.count('{{{') > 1: 
             self.in_nested_pre = line.count('{{{') -  line.count('}}}')
+            if self.in_nested_pre == 0:
+                self.in_nested_pre = 1
             if line.startswith('{{{'):
                 line = line[3:].strip()
             self.in_pre = 'no_parser'
@@ -1032,9 +1034,10 @@ class Parser:
                         self.parser_name = parser_name
                         continue
                     else:
-                        self.request.write(self._closeP() +
-                                           self.formatter.preformatted(1))
-                        self.in_pre = 'no_parser'
+                         if not line.count('{{{') > 1:
+                             self.request.write(self._closeP() +
+                                 self.formatter.preformatted(1))
+                         self.in_pre = 'no_parser'
 
                 if self.in_pre == 'found_parser':
                     self.in_nested_pre += line.count('{{{')
@@ -1159,6 +1162,7 @@ class Parser:
             self.request.write(formatted_line)
             if self.in_pre == 'no_parser':
                 self.request.write(self.formatter.linebreak())
+                
 
         # Close code displays, paragraphs, tables and open lists
         self.request.write(self._undent())
