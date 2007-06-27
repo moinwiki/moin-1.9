@@ -75,7 +75,7 @@ class XMLRPCClient(Thread):
         token = self.connection.getAuthToken(jid, self.config.secret)
         if token:
             self.token = token
-    
+                
     def _xmlrpc_decorator(function):
         """A decorator function, which adds some maintenance code
         
@@ -86,19 +86,25 @@ class XMLRPCClient(Thread):
         def wrapped_func(self, command):
             self.token = None
             self.multicall = MultiCall(self.connection)
-            self.get_auth_token(command.jid)
+            jid = command.jid
             
-            if self.token:
-                self.multicall.applyAuthToken(self.token)
-   
             try:
                 try:
+                    self.get_auth_token(command.jid)
+                    if self.token:
+                        self.multicall.applyAuthToken(self.token)
+                        
                     function(self, command)
                     self.commands_out.put_nowait(command)
                 except xmlrpclib.Fault, fault:
                     msg = u"""Your request has failed. The reason is:\n%s"""
-                    notification = cmd.NotificationCommand(command.jid, msg % (fault.faultString, ))
+                    notification = cmd.NotificationCommand([jid], msg % (fault.faultString, ))
                     self.commands_out.put_nowait(notification)
+                except xmlrpclib.Error, err:
+                    msg = u"""A serious error occured while processing your request:\n%s"""
+                    notification = cmd.NotificationCommand([jid], msg % (str(err), ))
+                    self.commands_out.put_nowait(notification)
+                    
             finally:
                 del self.token
                 del self.multicall
@@ -255,8 +261,8 @@ class XMLRPCServer(Thread):
     def send_notification(self, jids, text):
         """Instructs the XMPP component to send a notification
         
-        @param jid: a jid to send a message to (bare jid)
-        @type jid: str or unicode
+        @param jids: a list of JIDs to send a message to (bare JIDs)
+        @type jids: a list of str or unicode
         @param text: a message body
         @type text: unicode
         
