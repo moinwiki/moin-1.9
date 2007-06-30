@@ -11,6 +11,27 @@ import unittest # LEGACY UNITTEST, PLEASE DO NOT IMPORT unittest IN NEW TESTS, P
 from MoinMoin import wikiutil
 
 
+class TestQueryStringSupport:
+    tests = [
+        ('', {}, {}),
+        ('key1=value1', {'key1': 'value1'}, {'key1': u'value1'}),
+        ('key1=value1&key2=value2', {'key1': 'value1', 'key2': 'value2'}, {'key1': u'value1', 'key2': u'value2'}),
+        ('rc_de=Aktuelle%C3%84nderungen', {'rc_de': 'Aktuelle\xc3\x84nderungen'}, {'rc_de': u'Aktuelle\xc4nderungen'}),
+    ]
+    def testParseQueryString(self):
+        for qstr, expected_str, expected_unicode in self.tests:
+            assert wikiutil.parseQueryString(qstr, want_unicode=False) == expected_str
+            assert wikiutil.parseQueryString(qstr, want_unicode=True) == expected_unicode
+            assert wikiutil.parseQueryString(unicode(qstr), want_unicode=False) == expected_str
+            assert wikiutil.parseQueryString(unicode(qstr), want_unicode=True) == expected_unicode
+
+    def testMakeQueryString(self):
+        for qstr, in_str, in_unicode in self.tests:
+            assert wikiutil.parseQueryString(wikiutil.makeQueryString(in_unicode, want_unicode=False), want_unicode=False) == in_str
+            assert wikiutil.parseQueryString(wikiutil.makeQueryString(in_str, want_unicode=False), want_unicode=False) == in_str
+            assert wikiutil.parseQueryString(wikiutil.makeQueryString(in_unicode, want_unicode=True), want_unicode=True) == in_unicode
+            assert wikiutil.parseQueryString(wikiutil.makeQueryString(in_str, want_unicode=True), want_unicode=True) == in_unicode
+
 class TestSystemPagesGroup:
     def testSystemPagesGroupNotEmpty(self):
         assert self.request.dicts.members('SystemPagesGroup')
