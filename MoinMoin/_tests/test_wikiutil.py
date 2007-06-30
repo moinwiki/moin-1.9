@@ -32,6 +32,27 @@ class TestQueryStringSupport:
             assert wikiutil.parseQueryString(wikiutil.makeQueryString(in_unicode, want_unicode=True), want_unicode=True) == in_unicode
             assert wikiutil.parseQueryString(wikiutil.makeQueryString(in_str, want_unicode=True), want_unicode=True) == in_unicode
 
+class TestTickets:
+    def testTickets(self):
+        from MoinMoin.Page import Page
+        # page name with double quotes
+        self.request.page = Page(self.request, u'bla"bla')
+        ticket1 = wikiutil.createTicket(self.request)
+        assert wikiutil.checkTicket(self.request, ticket1)
+        # page name with non-ASCII chars
+        self.request.page = Page(self.request, u'\xc4rger')
+        ticket2 = wikiutil.createTicket(self.request)
+        assert wikiutil.checkTicket(self.request, ticket2)
+        # same page with another action
+        self.request.page = Page(self.request, u'\xc4rger')
+        self.request.action = 'another'
+        ticket3 = wikiutil.createTicket(self.request)
+        assert wikiutil.checkTicket(self.request, ticket3)
+
+        assert ticket1 != ticket2
+        assert ticket2 != ticket3
+
+
 class TestSystemPagesGroup:
     def testSystemPagesGroupNotEmpty(self):
         assert self.request.dicts.members('SystemPagesGroup')

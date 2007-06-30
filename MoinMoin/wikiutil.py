@@ -1605,7 +1605,22 @@ def pagediff(request, pagename1, rev1, pagename2, rev2, **kw):
 def createTicket(request, tm=None):
     """Create a ticket using a site-specific secret (the config)"""
     import sha
-    ticket = tm or "%010x" % time.time()
+    if tm is None:
+        tm = "%010x" % time.time()
+
+    # make the ticket specific to the page and action:
+    try:
+        pagename = quoteWikinameURL(request.page.page_name)
+    except:
+        pagename = 'None'
+
+    try:
+        action = request.action
+    except:
+        action = 'None'
+
+
+    ticket = "%s.%s.%s" % (tm, pagename, action)
     digest = sha.new()
     digest.update(ticket)
 
