@@ -494,6 +494,8 @@ def quoteName(name):
 
 def unquoteName(name):
     """ if there are quotes around the name, strip them """
+    if not name:
+        return name
     for quote_char in QUOTE_CHARS:
         if quote_char == name[0] == name[-1]:
             return name[1:-1]
