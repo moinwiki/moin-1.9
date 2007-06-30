@@ -32,6 +32,7 @@ class TestQueryStringSupport:
             assert wikiutil.parseQueryString(wikiutil.makeQueryString(in_unicode, want_unicode=True), want_unicode=True) == in_unicode
             assert wikiutil.parseQueryString(wikiutil.makeQueryString(in_str, want_unicode=True), want_unicode=True) == in_unicode
 
+
 class TestTickets:
     def testTickets(self):
         from MoinMoin.Page import Page
@@ -51,6 +52,53 @@ class TestTickets:
 
         assert ticket1 != ticket2
         assert ticket2 != ticket3
+
+
+class TestCleanInput:
+    def testCleanInput(self):
+        tests = [(u"", u""), # empty
+                 (u"aaa\r\n\tbbb", u"aaa   bbb"), # ws chars -> blanks
+                 (u"aaa\x00\x01bbb", u"aaabbb"), # strip weird chars
+                 (u"a"*500, u""), # too long
+                ]
+        for instr, outstr in tests:
+            assert wikiutil.clean_input(instr) == outstr
+
+
+class TestNameQuoting:
+    tests = [(u"", u"''"), # empty
+             (u"test", u"'test'"), # nothing special
+             (u"Sarah O'Connor", u"\"Sarah O'Connor\""), # contains ', quote with "
+             (u'Just "something" quoted', u'\'Just "something" quoted\''), # contains ", quote with '
+            ]
+    def testQuoteName(self):
+        for name, qname in self.tests:
+            assert wikiutil.quoteName(name) == qname
+
+    def testUnquoteName(self):
+        for name, qname in self.tests:
+            assert wikiutil.unquoteName(qname) == name
+
+
+class TestInterWiki:
+    def testSplitWiki(self):
+        tests = [('SomePage', ('Self', 'SomePage', '')),
+                 ('OtherWiki:OtherPage', ('OtherWiki', 'OtherPage', '')),
+                 ('MoinMoin:"Page with blanks" link title', ("MoinMoin", "Page with blanks", "link title")),
+                 ("MoinMoin:'Page with blanks' link title", ("MoinMoin", "Page with blanks", "link title")),
+                 ('attachment:"filename with blanks.txt" other title', ("attachment", "filename with blanks.txt", "other title")),
+                ]
+        for markup, (wikiname, pagename, linktext) in tests:
+            assert wikiutil.split_wiki(markup) == (wikiname, pagename, linktext)
+
+    def testJoinWiki(self):
+        tests = [(('http://example.org/', u'SomePage'), 'http://example.org/SomePage'),
+                 (('http://example.org/?page=$PAGE&action=show', u'SomePage'), 'http://example.org/?page=SomePage&action=show'),
+                 (('http://example.org/', u'Aktuelle\xc4nderungen'), 'http://example.org/Aktuelle%C3%84nderungen'),
+                 (('http://example.org/$PAGE/show', u'Aktuelle\xc4nderungen'), 'http://example.org/Aktuelle%C3%84nderungen/show'),
+                ]
+        for (baseurl, pagename), url in tests:
+            assert wikiutil.join_wiki(baseurl, pagename) == url
 
 
 class TestSystemPagesGroup:
