@@ -257,7 +257,7 @@ class TestInlineCrossing(ParserTestCase):
     def disabled_testInlineCrossing(self):
         """ parser.wiki: prevent inline crossing <a><b></a></b> """
 
-        expected = ("<p><em>a<strong>ab</strong></em><strong>b</strong>\s*</p>")
+        expected = (r"<p><em>a<strong>ab</strong></em><strong>b</strong>\s*</p>")
         test = "''a'''ab''b'''\n"
         needle = re.compile(expected)
         result = self.parse(test)
