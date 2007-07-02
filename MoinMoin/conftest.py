@@ -162,23 +162,8 @@ class TestConfig:
     __del__ = restore # XXX __del__ semantics are currently broken
 
 
-class Module(py.test.collect.Module):
-    def __init__(self, *args, **kwargs):
-        self.request = init_test_request()
-        super(Module, self).__init__(*args, **kwargs)
 
-    def run(self, *args, **kwargs):
-        if coverage is not None:
-            coverage_modules.update(getattr(self.obj, 'coverage_modules', []))
-        return super(Module, self).run(*args, **kwargs)
-
-    def join(self, name):
-        obj = getattr(self.obj, name)
-        if isclass(obj):
-            return MoinClassCollector(name, parent=self)
-        elif hasattr(obj, 'func_code'):
-            return MoinTestFunction(name, parent=self)
-
+# py.test customization starts here
 
 class MoinTestFunction(py.test.collect.Function):
     def execute(self, target, *args):
@@ -198,3 +183,18 @@ class MoinClassCollector(py.test.collect.Class):
         cls.request = self.parent.request
         cls.TestConfig = TestConfig(cls.request)
         super(MoinClassCollector, self).setup()
+
+
+class Module(py.test.collect.Module):
+    Class = MoinClassCollector
+    Function = MoinTestFunction
+
+    def __init__(self, *args, **kwargs):
+        self.request = init_test_request()
+        super(Module, self).__init__(*args, **kwargs)
+
+    def run(self, *args, **kwargs):
+        if coverage is not None:
+            coverage_modules.update(getattr(self.obj, 'coverage_modules', []))
+        return super(Module, self).run(*args, **kwargs)
+
