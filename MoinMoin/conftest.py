@@ -4,17 +4,16 @@ MoinMoin Testing Framework
 --------------------------
 
 All test modules must be named test_modulename to be included in the
-test suit. If you are testing a package, name the test module
+test suite. If you are testing a package, name the test module
 test_package_module.
 
 Tests that need the current request, for example to create a page
 instance, can refer to self.request. It is injected into all test case
 classes by the framework.
 
-Tests that require certain configuration, like section_numbers = 1, must
-use a TestConfig to create the required configuration before the
-test. Deleting the TestConfig instance will restore the previous
-configuration.
+Tests that require a certain configuration, like section_numbers = 1, must
+use a TestConfig to create the required configuration before the test.
+Deleting the TestConfig instance will restore the previous configuration.
 
 @copyright: 2005 Nir Soffer, 2007 Alexander Schremmer
 @license: GNU GPL, see COPYING for details.
@@ -89,8 +88,8 @@ def init_test_request(static_state=[False]):
 class TestConfig:
     """ Custom configuration for unit tests
     
-    Some test assume specific configuration, and will fail if the wiki admin
-    will change the configuration. For example, DateTime macro test assume 
+    Some tests assume a specific configuration, and will fail if the wiki admin
+    changed the configuration. For example, DateTime macro test assume 
     the default datetime_fmt.
     
     When you set custom values in a TestConfig, the previous values are saved,
