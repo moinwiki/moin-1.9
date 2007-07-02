@@ -349,7 +349,7 @@ class RequestBase(object):
         if self._dicts is None:
             from MoinMoin import wikidicts
             dicts = wikidicts.GroupDict(self)
-            dicts.scandicts()
+            dicts.load_dicts()
             self._dicts = dicts
         return self._dicts
 
