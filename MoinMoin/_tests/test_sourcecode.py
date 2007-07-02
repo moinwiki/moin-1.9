@@ -28,6 +28,27 @@ FIX_TS_RE = re.compile(r' +$', re.M) # 'fix' mode: everything matching the trail
 
 PEP8_CHECKS = True
 
+def check_file(path):
+    if path.lower().endswith('.py'):
+        f = file(path, 'rb')
+        data = f.read()
+        f.close()
+        assert '\t' not in data, "%r contains tabs (please use 4 space chars for indenting)!" % (reldir,)
+        assert not data or data.endswith('\n'), "%r does not end with a newline char!" % (reldir,)
+        assert '\r\n' not in data, "%r contains crlf line endings (please use UNIX style, lf only)!" % (reldir,)
+        if TRAILING_SPACES != 'ignore':
+            if TRAILING_SPACES == 'test':
+                assert ' \n' not in data, "%r contains line(s) with trailing spaces!" % (reldir,)
+            elif TRAILING_SPACES == 'fix':
+                data = FIX_TS_RE.sub('', data)
+                f = file(path, 'wb')
+                f.write(data)
+                f.close()
+        if PEP8_CHECKS:
+            # Please read and follow PEP8 - rerun this test until it does not fail any more,
+            # any type of error is only reported ONCE (even if there are multiple).
+            assert pep8_error_count(path) == 0
+
 def test_sourcecode():
     def walk(reldir):
         if reldir in EXCLUDE:
@@ -37,25 +58,7 @@ def test_sourcecode():
         else:
             path = ROOT
         if os.path.isfile(path):
-            if path.lower().endswith('.py'):
-                f = file(path, 'rb')
-                data = f.read()
-                f.close()
-                assert '\t' not in data, "%r contains tabs (please use 4 space chars for indenting)!" % (reldir,)
-                assert not data or data.endswith('\n'), "%r does not end with a newline char!" % (reldir,)
-                assert '\r\n' not in data, "%r contains crlf line endings (please use UNIX style, lf only)!" % (reldir,)
-                if TRAILING_SPACES != 'ignore':
-                    if TRAILING_SPACES == 'test':
-                        assert ' \n' not in data, "%r contains line(s) with trailing spaces!" % (reldir,)
-                    elif TRAILING_SPACES == 'fix':
-                        data = FIX_TS_RE.sub('', data)
-                        f = file(path, 'wb')
-                        f.write(data)
-                        f.close()
-                if PEP8_CHECKS:
-                    # Please read and follow PEP8 - rerun this test until it does not fail any more,
-                    # any type of error is only reported ONCE (even if there are multiple).
-                    assert pep8_error_count(path) == 0
+            yield check_file, path
         elif os.path.isdir(path):
             for entry in os.listdir(path):
                 if not entry.startswith('.'):
