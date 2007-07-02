@@ -3,14 +3,14 @@ Verify that the MoinMoin source files
  * have no tabs,
  * end with \n,
  * have no crlf (Windows style) line endings,
- * have no trailing spaces at line endings (test currently disabled).
- 
+ * have no trailing spaces at line endings.
+
 @copyright: 2006 by Armin Rigo,
             2007 adapted and extended for MoinMoin by MoinMoin:ThomasWaldmann.
 @license: MIT licensed
 """
 
-import os
+import os, re
 
 from MoinMoin.conftest import moindir
 
@@ -22,6 +22,10 @@ EXCLUDE = [
     '/wiki/htdocs/applets/FCKeditor', # 3rd party GUI editor
 ]
 
+TRAILING_SPACES = 'ignore' # 'ignore', 'test' or 'fix'
+                           # use 'fix' with extreme caution and in a separate changeset!
+FIX_TS_RE = re.compile(r' +$', re.M) # 'fix' mode: everything matching the trailing space re will be removed
+
 def test_sourcecode():
     def walk(reldir):
         if reldir in EXCLUDE:
@@ -32,14 +36,20 @@ def test_sourcecode():
             path = ROOT
         if os.path.isfile(path):
             if path.lower().endswith('.py'):
-                f = open(path, 'r')
+                f = file(path, 'rb')
                 data = f.read()
                 f.close()
                 assert '\t' not in data, "%r contains tabs (please use 4 space chars for indenting)!" % (reldir,)
                 assert not data or data.endswith('\n'), "%r does not end with a newline char!" % (reldir,)
                 assert '\r\n' not in data, "%r contains crlf line endings (please use UNIX style, lf only)!" % (reldir,)
-                #triggers too often currently, developers please clean up your src files!
-                #assert ' \n' not in data, "%r contains line(s) with trailing spaces!" % (reldir,)
+                if TRAILING_SPACES != 'ignore':
+                    if TRAILING_SPACES == 'test':
+                        assert ' \n' not in data, "%r contains line(s) with trailing spaces!" % (reldir,)
+                    elif TRAILING_SPACES == 'fix':
+                        data = FIX_TS_RE.sub('', data)
+                        f = file(path, 'wb')
+                        f.write(data)
+                        f.close()
         elif os.path.isdir(path):
             for entry in os.listdir(path):
                 if not entry.startswith('.'):
