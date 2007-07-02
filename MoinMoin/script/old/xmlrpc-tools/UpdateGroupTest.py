@@ -19,12 +19,12 @@ def run():
 
     groupname = "TestGroup"
     groupdesc = "This is just a test."
-    groupmembers = ["TestUser1", "TestUser2",]
+    groupmembers = ["TestUser1", "TestUser2", ]
     print mywiki.UpdateGroup(groupname, groupdesc, groupmembers)
 
     groupname = "TestAclGroup"
     groupdesc = "This is just a test."
-    groupmembers = ["TestUser3",]
+    groupmembers = ["TestUser3", ]
     print mywiki.UpdateGroup(groupname, groupdesc, groupmembers, "All:read,write,delete,revert")
 
     del mywiki
@@ -37,7 +37,7 @@ def run():
 
     groupname = "TestGroup"
     groupdesc = "This is just a test."
-    groupmembers = ["WrongUser1", "WrongUser2",]
+    groupmembers = ["WrongUser1", "WrongUser2", ]
     print mywiki.UpdateGroup(groupname, groupdesc, groupmembers)
 
 

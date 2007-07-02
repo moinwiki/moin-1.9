@@ -34,7 +34,7 @@ def sendBackup(request):
         "Content-Disposition: inline; filename=\"%s\"" % filename, ])
 
     tar = tarfile.open(fileobj=request, mode="w|%s" % request.cfg.backup_compression)
-    # allow GNU tar's longer file/pathnames 
+    # allow GNU tar's longer file/pathnames
     tar.posix = False
     exclude = re.compile("|".join(request.cfg.backup_exclude))
     for path in request.cfg.backup_include:
@@ -49,7 +49,7 @@ def restoreBackup(request, pagename):
     targetdir = request.cfg.backup_restore_target_dir
     try:
         tar = tarfile.open(fileobj=file(filename), mode="r|%s" % request.cfg.backup_compression)
-        # allow GNU tar's longer file/pathnames 
+        # allow GNU tar's longer file/pathnames
         tar.posix = False
         files = []
         dirs = []

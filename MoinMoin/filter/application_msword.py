@@ -3,7 +3,7 @@
     MoinMoin - msword filter
 
     Depends on: antiword command from antiword package
-    
+
     @copyright: 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """

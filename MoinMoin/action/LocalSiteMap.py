@@ -2,8 +2,8 @@
 """
     MoinMoin - LocalSiteMap action
 
-    The LocalSiteMap action gives you a page that shows 
-    nearby links.  This is an example of what appears on the 
+    The LocalSiteMap action gives you a page that shows
+    nearby links.  This is an example of what appears on the
     page (names are linkable on the real page):
 
     MoinMoin

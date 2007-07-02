@@ -6,7 +6,7 @@
     Later it was rewritten by Nir Soffer for MoinMoin release 1.3.
 
     @copyright: 2005 Nir Soffer
-    @license: GNU GPL, see COPYING for details.  
+    @license: GNU GPL, see COPYING for details.
 """
 
 from MoinMoin.theme import ThemeBase
@@ -54,7 +54,7 @@ class Theme(ThemeBase):
     def header(self, d):
         """
         Assemble page header
-        
+
         @param d: parameter dictionary
         @rtype: string
         @return: page header html
@@ -96,7 +96,7 @@ class Theme(ThemeBase):
     def editorheader(self, d):
         """
         Assemble page header for editor
-        
+
         @param d: parameter dictionary
         @rtype: string
         @return: page header html
@@ -133,7 +133,7 @@ class Theme(ThemeBase):
 
     def footer(self, d, **keywords):
         """ Assemble wiki footer
-        
+
         @param d: parameter dictionary
         @keyword ...:...
         @rtype: unicode
@@ -162,7 +162,7 @@ class Theme(ThemeBase):
 
 def execute(request):
     """ Generate and return a theme object
-        
+
     @param request: the request object
     @rtype: MoinTheme
     @return: Theme object

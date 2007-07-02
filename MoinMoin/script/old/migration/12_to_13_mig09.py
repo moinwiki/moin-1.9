@@ -62,7 +62,7 @@ def convert_quicklinks(string):
     # No need to convert new style list
     if '\t' in string:
         return string
-        
+
     names = [name.strip() for name in string.split(',')]
     names = [wikiutil.unquoteWikiname(name) for name in names if name != '']
     string = user.encodeList(names)
@@ -81,7 +81,7 @@ def convert_subscribed_pages(string):
     string = user.encodeList(names)
     return string
 
-    
+
 def convertUserData(text):
     """ Convert user data
 
@@ -105,7 +105,7 @@ def convertUserData(text):
     # Join back, append newline to last line
     text = u'\n'.join(lines) + u'\n'
     return text
-        
+
 
 def convertUsers(srcdir, dstdir):
     """ Convert users files
@@ -114,7 +114,7 @@ def convertUsers(srcdir, dstdir):
     @param dstdir: new users dir
     """
     charset = 'utf-8'
-    
+
     # Create dstdir
     if not os.path.exists(dstdir):
         try:
@@ -143,7 +143,7 @@ def convertUsers(srcdir, dstdir):
 
 
 if __name__ == '__main__':
-          
+
     # Backup original dir
     datadir = 'data'
     origdir = 'data.pre-mig9'

@@ -30,14 +30,14 @@ def execute(pagename, request):
     # No matches
     if not matches:
         Page(request, pagename).send_page(
-             msg=_('No pages like "%s"!') % (pagename,))
+             msg=_('No pages like "%s"!') % (pagename, ))
         return
 
     # One match - display it
     if len(matches) == 1:
         Page(request, matches.keys()[0]).send_page(
              msg=_('Exactly one page like "%s" found, redirecting to page.') % (
-            pagename,))
+            pagename, ))
         return
 
     # more than one match, list 'em
@@ -59,9 +59,9 @@ def execute(pagename, request):
     request.theme.send_footer(pagename)
     request.theme.send_closing_html()
 
-def findMatches(pagename, request, s_re=None, e_re=None,):
+def findMatches(pagename, request, s_re=None, e_re=None):
     """ Find like pages
-    
+
     @param pagename: name to match
     @param request: current reqeust
     @param s_re: start re for wiki matching
@@ -207,8 +207,8 @@ def showMatches(pagename, request, start, end, matches, show_count=True):
     _showMatchGroup(request, matches, keys, 8, pagename, show_count)
     _showMatchGroup(request, matches, keys, 4, "%s/..." % pagename, show_count)
     _showMatchGroup(request, matches, keys, 3, "%s...%s" % (start, end), show_count)
-    _showMatchGroup(request, matches, keys, 1, "%s..." % (start,), show_count)
-    _showMatchGroup(request, matches, keys, 2, "...%s" % (end,), show_count)
+    _showMatchGroup(request, matches, keys, 1, "%s..." % (start, ), show_count)
+    _showMatchGroup(request, matches, keys, 2, "...%s" % (end, ), show_count)
 
 
 def _showMatchGroup(request, matches, keys, match, title, show_count=True):

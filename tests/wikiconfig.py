@@ -19,7 +19,7 @@ class Config(DefaultConfig):
     data_dir = os.path.join(_base_dir, "data")
     data_underlay_dir = os.path.join(_base_dir, "underlay")
 
-    show_hosts = 1                  
-    # used to check if it is really a wiki we may modify 
+    show_hosts = 1
+    # used to check if it is really a wiki we may modify
     is_test_wiki = True
 

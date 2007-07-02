@@ -15,12 +15,12 @@ class NotificationCommand:
     def __init__(self, jid, text):
         self.jid = jid
         self.text = text
-        
+
 class AddJIDToRosterCommand:
     """Class representing a request to add a new jid to roster"""
     def __init__(self, jid):
         self.jid = jid
-        
+
 class RemoveJIDFromRosterCommand:
     """Class representing a request to remove a jid from roster"""
     def __init__(self, jid):
@@ -33,52 +33,52 @@ class RemoveJIDFromRosterCommand:
 
 class BaseDataCommand(object):
     """Base class for all commands used by the XMPP component.
-    
+
     It has to support an optional data payload and store JID the
     request has come from and provide a help string for its parameters.
     """
-    
+
     # Description of what the command does
     description = u""
-    
+
     # Parameter list in a human-readable format
     parameter_list = u""
-    
+
     def __init__(self, jid):
         self.jid = jid
         self.data = None
-        
+
 class GetPage(BaseDataCommand):
-    
+
     description = u"retrieve raw content of a named page"
     parameter_list = u"pagename"
-    
+
     def __init__(self, jid, pagename):
         BaseDataCommand.__init__(self, jid)
         self.pagename = pagename
-        
+
 class GetPageHTML(BaseDataCommand):
-    
+
     description = u"retrieve HTML-formatted content of a named page"
     parameter_list = u"pagename"
-    
+
     def __init__(self, jid, pagename):
         BaseDataCommand.__init__(self, jid)
         self.pagename = pagename
-        
+
 class GetPageList(BaseDataCommand):
-    
+
     description = u"get a list of accesible pages"
     parameter_list = u""
-    
+
     def __init__(self, jid):
         BaseDataCommand.__init__(self, jid)
 
 class GetPageInfo(BaseDataCommand):
-    
+
     description = u"show detailed information about a page"
     parameter_list = u"pagename"
-    
+
     def __init__(self, jid, pagename):
         BaseDataCommand.__init__(self, jid)
         self.pagename = pagename

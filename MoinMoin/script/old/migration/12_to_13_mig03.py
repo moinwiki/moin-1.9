@@ -15,7 +15,7 @@
     * data/cache/pagelinks/PageName -> data/pages/PageName/cache/pagelinks
     * data/cache/charts/hitcounts-PageName -> data/pages/PageName/cache/hitcounts
 
-    
+
     Steps for a successful migration:
 
         1. Stop your wiki and make a backup of old data and code
@@ -90,7 +90,7 @@ def convert_textdir(dir_from, dir_to, is_backupdir=0):
 def convert_pagedir(dir_from, dir_to):
     os.mkdir(dir_to)
     for dname_from in listdir(dir_from):
-        print "%s" % (dname_from,)
+        print "%s" % (dname_from, )
         dname_to = dname_from
         shutil.copytree(opj(dir_from, dname_from), opj(dir_to, dname_to), 1)
         try:
@@ -105,11 +105,11 @@ def convert_editlog(file_from, file_to, dir_to):
         timestamp = data[2]
         data[2] = str(long(float(timestamp))) # we only want integer (must be long for py 2.2.x)
         data = '\t'.join(data)
-        
+
         f = open(file_to, 'a')
         f.write(data)
         f.close()
-        
+
         try:
             file_to2 = opj(dir_to, pagename, 'edit-log')
             f = open(file_to2, 'a')
@@ -127,7 +127,7 @@ except OSError:
 
 convert_pagedir(opj(origdir, 'pages'), opj('data', 'pages'))
 
-convert_textdir(opj(origdir,'text'), 'data')
+convert_textdir(opj(origdir, 'text'), 'data')
 
 convert_textdir(opj(origdir, 'backup'), 'data', 1)
 

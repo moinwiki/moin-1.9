@@ -56,7 +56,7 @@ def diff(request, old, new):
 </span>
 </td>
 </tr>
-""" % (_('Deletions are marked like this.'), _('Additions are marked like this.'),)
+""" % (_('Deletions are marked like this.'), _('Additions are marked like this.'), )
 
     # Print all differences
     for match in linematch:

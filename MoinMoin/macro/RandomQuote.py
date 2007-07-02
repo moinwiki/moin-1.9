@@ -7,14 +7,14 @@
     Usage:
         [[RandomQuote()]]
         [[RandomQuote(WikiTips)]]
-    
+
     Comments:
         It will look for list delimiters on the page in question.
         It will ignore anything that is not in an "*" list.
 
     @copyright: 2002-2004 Juergen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
-    
+
     Originally written by Thomas Waldmann.
     Gustavo Niemeyer added wiki markup parsing of the quotes.
 """

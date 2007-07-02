@@ -46,10 +46,10 @@ def makeSelection(name, values, selectedval=None, size=1):
 
 def makeMultiSelection(name, values, selectedvals=None, size=5):
     """Make a HTML multiple <select> element with named `name` from a value list.
-    
+
     The list can either be a list of strings, or a list of (value, label) tuples.
     `selectedvals` is a list of values that should be pre-selected.
-    
+
     """
     from MoinMoin.widget import html
     result = html.SELECT(name=name, size="%d" % int(size), multiple=True)
@@ -60,13 +60,13 @@ def makeMultiSelection(name, values, selectedvals=None, size=5):
             value=val[0], selected=(val[0] in selectedvals))
             .append(html.Text(val[1]))
         )
-    
+
     return result
 
 class Color:
     """ RGB-Triple that automatically converts from and to
         "#RRGGBB" encoding, and also takes Netscape color names.
-        
+
         The color values are stored in the attributes `r`, `g` and `b`.
 
         Example:
@@ -226,7 +226,7 @@ class Color:
 
     def __init__(self, color):
         """ Init color value, the 'color' parameter may be
-            another Color instance, a tuple containing 3 color values, 
+            another Color instance, a tuple containing 3 color values,
             a Netscape color name or a HTML color ("#RRGGBB").
         """
         if isinstance(color, tuple) and len(color) == 3:

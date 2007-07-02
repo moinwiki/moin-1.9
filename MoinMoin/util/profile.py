@@ -6,7 +6,7 @@ long running process.
 Typical usage:
 
  1. Create a profiler:
-    
+
     from MoinMoin.util.profile import Profiler
     profiler = Profiler('my log')
 
@@ -26,7 +26,7 @@ You can customize the profiler when you create it:
    lower for more accurate results.
 
  * collect (default 0):
-    
+
    Use gc.collect to force a memory cleanup each sample. Keeps the
    memory usage much lower, but your profile data will not reflect the
    real world memory usage of the application.
@@ -51,7 +51,7 @@ class Profiler:
     """
     def __init__(self, name, requestsPerSample=100, collect=0):
         """ Initialize a profiler
-        
+
         @param name: profiler name, used in the log file name
         @param requestsPerSample: how many request to run between samples
         @param collect: should call gc.collect() in each sample
@@ -87,9 +87,9 @@ class Profiler:
 
         You can call this to make samples between the samples done each
         requestsPerSample, for example, at startup.
-        
+
         Invoke common methods for all profilers. Some profilers like
-        TwistedProfiler override this method. 
+        TwistedProfiler override this method.
         """
         self._setData()
         self._setMemory()
@@ -114,7 +114,7 @@ class Profiler:
         """ Get process memory usage
 
         Private method used by profilers.
-        
+
         Uses ps call, maybe we should use procfs on Linux or maybe
         getrusage system call (using the ctypes module).
         """
@@ -151,7 +151,7 @@ class TwistedProfiler(Profiler):
 
     def sample(self):
         """ Make a sample of memory usage and log it
-        
+
         On twisted we can't just call ps - we have to use deferred,
         which will call us using a callback when its finished, and then
         we log.

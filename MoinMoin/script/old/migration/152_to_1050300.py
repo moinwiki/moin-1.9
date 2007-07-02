@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 """
     Migration from moin 1.5.2 to moin 1.5.3
-    
+
     We just make sure that there is a "meta" file in your data directory that
     stores the "revision" level of it (so future mig scripts can tell if they
     need to run or not [e.g. because you already have run them]).
-    
+
     This is the last "old style" migration script.
 
     Steps for a successful migration:
@@ -13,14 +13,14 @@
         1. You do NOT need to stop your wiki for this mig script.
 
         2. Change directory to: .../MoinMoin/script/old/migration
-        
+
         3. Run this script as a user who may write to the data_dir of your wiki
            and supply the pathes to the data_dir you want to migrate. If you
            have multiple wikis, you may specify multiple pathes on the command
            line:
 
            sudo -u www-data ./152_to_1050300.py /my/path/to/data
-                                 
+
         4. That's it.
            Future mig scripts now can auto-detect the data_dir revision level.
 
@@ -58,7 +58,7 @@ def migrate(dirlist):
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
-        data_dirs = ['data',]
+        data_dirs = ['data', ]
     else:
         data_dirs = sys.argv[1:]
     migrate(data_dirs)

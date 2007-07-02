@@ -6,7 +6,7 @@
     * data/user/<uid>.bookmark -> convert to usecs
     * data/edit-log and data/pages/PageName/edit-log -> convert to usecs
     * data/event-log -> convert to usecs
-    
+
     Steps for a successful migration:
 
         1. Stop your wiki and make a backup of old data and code
@@ -55,7 +55,7 @@ def convert_ts(ts_from):
     return long(ts_to) # must be long for py 2.2.x
 
 def convert_eventlog(file_from, file_to):
-    if not os.path.exists(file_from): 
+    if not os.path.exists(file_from):
         return
     f = open(file_to, 'a')
     for l in open(file_from):
@@ -66,9 +66,9 @@ def convert_eventlog(file_from, file_to):
         data = '\t'.join(data)
         f.write(data)
     f.close()
-        
+
 def convert_editlog(file_from, file_to):
-    if not os.path.exists(file_from): 
+    if not os.path.exists(file_from):
         return
     f = open(file_to, 'a')
     for l in open(file_from):
@@ -79,7 +79,7 @@ def convert_editlog(file_from, file_to):
         data = '\t'.join(data)
         f.write(data)
     f.close()
-        
+
 def convert_pagedir(dir_from, dir_to, is_backupdir=0):
     os.mkdir(dir_to)
     for pagedir in listdir(dir_from):
@@ -87,7 +87,7 @@ def convert_pagedir(dir_from, dir_to, is_backupdir=0):
         text_to = opj(dir_to, pagedir, 'text')
         os.mkdir(opj(dir_to, pagedir))
         copy_file(text_from, text_to)
-        
+
         backupdir_from = opj(dir_from, pagedir, 'backup')
         backupdir_to = opj(dir_to, pagedir, 'backup')
         if os.path.exists(backupdir_from):
@@ -97,11 +97,11 @@ def convert_pagedir(dir_from, dir_to, is_backupdir=0):
                 backup_from = opj(backupdir_from, ts)
                 backup_to = opj(backupdir_to, ts_usec)
                 copy_file(backup_from, backup_to)
-        
+
         editlog_from = opj(dir_from, pagedir, 'edit-log')
         editlog_to = opj(dir_to, pagedir, 'edit-log')
         convert_editlog(editlog_from, editlog_to)
-        
+
         #cachedir_from = opj(dir_from, pagedir, 'cache')
         #cachedir_to = opj(dir_to, pagedir, 'cache')
         #if os.path.exists(cachedir_from):

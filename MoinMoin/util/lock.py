@@ -11,7 +11,7 @@ import os, sys, tempfile, time, errno
 
 class Timer:
     """ Simple count down timer
-    
+
     Useful for code that needs to complete a task within some timeout.
     """
     defaultSleep = 0.25
@@ -58,7 +58,7 @@ class Timer:
 
 class ExclusiveLock:
     """ Exclusive lock
-    
+
     Uses a directory as portable lock method. On all platforms,
     creating a directory will fail if the directory exists.
 
@@ -73,7 +73,7 @@ class ExclusiveLock:
 
     def __init__(self, dir, timeout=None):
         """ Init a write lock
-        
+
         @param dir: the lock directory. Since this lock uses a empty
             filename, the dir is the lockDir.
         @param timeout: while trying to acquire, the lock will expire
@@ -93,8 +93,8 @@ class ExclusiveLock:
         self._locked = False
 
     def acquire(self, timeout=None):
-        """ Try to acquire a lock. 
-        
+        """ Try to acquire a lock.
+
         Try to create the lock directory. If it fails because another
         lock exists, try to expire the other lock. Repeat after little
         sleep until timeout passed.
@@ -132,8 +132,8 @@ class ExclusiveLock:
         return os.path.exists(self.lockDir)
 
     def isExpired(self):
-        """ Return True if too old or missing; False otherwise 
-        
+        """ Return True if too old or missing; False otherwise
+
         TODO: Since stat returns times using whole seconds, this is
         quite broken. Maybe use OS specific calls like Carbon.File on
         Mac OS X?
@@ -179,10 +179,10 @@ class ExclusiveLock:
 
 class WriteLock(ExclusiveLock):
     """ Exclusive Read/Write Lock
-    
+
     When a resource is locked with this lock, clients can't read
     or write the resource.
-    
+
     This super-exclusive lock can't be acquired if there are any other
     locks, either WriteLock or ReadLocks. When trying to acquire, this
     lock will try to expire all existing ReadLocks.
@@ -191,7 +191,7 @@ class WriteLock(ExclusiveLock):
 
     def __init__(self, dir, timeout=None, readlocktimeout=None):
         """ Init a write lock
-        
+
         @param dir: the lock directory. Every resource should have one
             lock directory, which may contain read or write locks.
         @param timeout: while trying to acquire, the lock will expire
@@ -207,12 +207,12 @@ class WriteLock(ExclusiveLock):
 
     def acquire(self, timeout=None):
         """ Acquire an exclusive write lock
-        
+
         Try to acquire an exclusive lock, then try to expire existing
         read locks. If timeout has not passed, the lock is acquired.
         Otherwise, the exclusive lock is released and the lock is not
         acquired.
-        
+
         Return True if lock acquired, False otherwise.
         """
         if self._locked:
@@ -257,18 +257,18 @@ class WriteLock(ExclusiveLock):
 
 class ReadLock(ExclusiveLock):
     """ Read lock
-    
+
     The purpose of this lock is to mark the resource as read only.
     Multiple ReadLocks can be acquired for same resource, but no
     WriteLock can be acquired until all ReadLocks are released.
-    
+
     Allows only one lock per instance.
     """
     fileName = 'read_lock_'
 
     def __init__(self, dir, timeout=None):
         """ Init a read lock
-        
+
         @param dir: the lock directory. Every resource should have one
             lock directory, which may contain read or write locks.
         @param timeout: while trying to acquire, the lock will expire
@@ -280,10 +280,10 @@ class ReadLock(ExclusiveLock):
 
     def acquire(self, timeout=None):
         """ Try to acquire a 'read' lock
-        
+
         To prevent race conditions, acquire first an exclusive lock,
         then acquire a read lock. Finally release the exclusive lock so
-        other can have read lock, too. 
+        other can have read lock, too.
         """
         if self._locked:
             raise RuntimeError("lock already locked")
@@ -300,7 +300,7 @@ class ReadLock(ExclusiveLock):
 
 class LazyReadLock(ReadLock):
     """ Lazy Read lock
-    
+
     See ReadLock, but we do an optimization here:
     If (and ONLY if) the resource protected by this lock is updated in a POSIX
     style "write new content to tmpfile, rename tmpfile -> origfile", then reading
@@ -354,7 +354,7 @@ class LazyReadLock(ReadLock):
 
 class LazyWriteLock(WriteLock):
     """ Lazy Write lock
-    
+
     See WriteLock and LazyReadLock docs.
     """
     def __init__(self, dir, timeout=None):

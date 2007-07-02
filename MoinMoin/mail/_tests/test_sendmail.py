@@ -47,10 +47,10 @@ class TestdecodeSpamSafeEmail(unittest.TestCase):
 
 class TestEncodeAddress(unittest.TestCase):
     """ Address encoding tests
-    
-    See http://www.faqs.org/rfcs/rfc2822.html section 3.4. 
+
+    See http://www.faqs.org/rfcs/rfc2822.html section 3.4.
     Address Specification.
-            
+
     mailbox     =   name-addr / addr-spec
     name-addr   =   [display-name] angle-addr
     angle-addr  =   [CFWS] "<" addr-spec ">" [CFWS] / obs-angle-addr
@@ -90,8 +90,8 @@ class TestEncodeAddress(unittest.TestCase):
                              expected)
 
     def testEmptyAddress(self):
-        """ mail.sendmail: encode address with empty address: 'Phrase <>' 
-        
+        """ mail.sendmail: encode address with empty address: 'Phrase <>'
+
         Let the smtp server handle this. We may raise error in such
         case, but we don't do error checking for mail addresses.
         """
@@ -102,8 +102,8 @@ class TestEncodeAddress(unittest.TestCase):
                              expected)
 
     def testInvalidAddress(self):
-        """ mail.sendmail: encode invalid address 'Phrase <blah' 
-        
+        """ mail.sendmail: encode invalid address 'Phrase <blah'
+
         Assume that this is a simple address. This address will
         probably cause an error when trying to send mail. Junk in, junk
         out.

@@ -20,7 +20,7 @@ Dependencies = ['pages']
 
 def form_get(request, name, default=''):
     """ Fetches a form field
-    
+
     @param request: current request
     @param name: name of the field
     @keyword default: value if not present (default: '')

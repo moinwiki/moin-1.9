@@ -1,15 +1,15 @@
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - Page class
-    
+
     Page is used for read-only access to a wiki page. For r/w access see PageEditor.
     A Page object is used to access a wiki page (in general) as well as to access
     some specific revision of a wiki page.
-    
-    The RootPage is some virtual page located at / and is mainly used to do namespace
-    operations like getting the page list. 
 
-    Currently, this is all a big mixture between high-level page code, intermediate 
+    The RootPage is some virtual page located at / and is mainly used to do namespace
+    operations like getting the page list.
+
+    Currently, this is all a big mixture between high-level page code, intermediate
     data/underlay layering code, caching code and low-level filesystem storage code.
     To see the filesystem storage layout we use, best is to look into data/pages/
     (underlay dir uses the same format).
@@ -201,7 +201,7 @@ class Page(object):
         self._pagepath = [normalpath, underlaypath]
 
     # now we define some properties to lazy load some attributes on first access:
-    
+
     def get_body(self):
         if self.__body is None:
             # try to open file
@@ -225,7 +225,7 @@ class Page(object):
             finally:
                 f.close()
         return self.__body
-      
+
     def set_body(self, newbody):
         self.__body = newbody
         self.__meta = None
@@ -249,7 +249,7 @@ class Page(object):
             self.__pi = self.parse_processing_instructions()
         return self.__pi
     pi = property(fget=get_pi) # processed meta stuff
-    
+
     def getlines(self):
         """ Return a list of all lines in body.
 
@@ -305,7 +305,7 @@ class Page(object):
 
     def get_rev_dir(self, pagedir, rev=0):
         """ Get a revision of a page from an arbitrary pagedir.
-        
+
         Does not modify page object's state, uncached, direct disk access.
 
         @param pagedir: the path to the page storage area
@@ -330,21 +330,21 @@ class Page(object):
 
     def _setRealPageName(self, pagedir):
         """ Set page_name to the real case of page name
-        
+
         On case insensitive file system, "pagename" exists even if the
         real page name is "PageName" or "PAGENAME". This leads to
         confusion in urls, links and logs.
         See MoinMoinBugs/MacHfsPlusCaseInsensitive
-        
+
         Correct the case of the page name. Elements created from the
         page name in reset() are not updated because it's too messy, and
         this fix seems to be enough for 1.3.
-        
+
         Problems to fix later:
-        
+
          - ["helponnavigation"] link to HelpOnNavigation but not
            considered as backlink.
-        
+
         @param pagedir: the storage path to the page directory
         """
         realPath = util.filesys.realPathCase(pagedir)
@@ -403,9 +403,9 @@ class Page(object):
 
     def current_rev(self):
         """ Return number of current revision.
-        
+
         This is the same as get_rev()[1].
-        
+
         @return: int revision
         """
         pagefile, rev, exists = self.get_rev()
@@ -476,7 +476,7 @@ class Page(object):
         isfile = kw.get('isfile', 0)
         use_underlay = kw.get('use_underlay', -1)
         underlay, path = self.getPageBasePath(use_underlay)
-        fullpath = os.path.join(*((path,) + args))
+        fullpath = os.path.join(*((path, ) + args))
         if check_create:
             if isfile:
                 dirname, filename = os.path.split(fullpath)
@@ -509,7 +509,7 @@ class Page(object):
     # XXX TODO do not use mtime() calls any more
     def _last_edited(self, request):
         # as it is implemented now, this is rather a _last_changed as it just uses
-        # the last log entry, which could be not only from an edit, but also from 
+        # the last log entry, which could be not only from an edit, but also from
         # an attachment operation. See different semantics in .mtime().
         cache_name = self.page_name
         cache_key = 'lastlog'
@@ -940,7 +940,7 @@ class Page(object):
                         else:
                             url = Page(request, target).url(request)
                         pi['refresh'] = (delay, url)
-                    except (ValueError,):
+                    except (ValueError, ):
                         pass
 
             elif verb == "redirect":
@@ -964,7 +964,7 @@ class Page(object):
         """ Output the raw page data (action=raw).
             With no content_disposition, the browser usually just displays the
             data on the screen, with content_disposition='attachment', it will
-            offer a dialogue to save it to disk (used by Save action).            
+            offer a dialogue to save it to disk (used by Save action).
         """
         request = self.request
         request.setHttpHeader("Content-type: text/plain; charset=%s" % config.charset)
@@ -1034,7 +1034,7 @@ class Page(object):
             request.http_redirect('%s/%s?action=show&redirect=%s' % (
                 request.getScriptname(),
                 wikiutil.quoteWikinameURL(pi['redirect']),
-                wikiutil.url_quote_plus(self.page_name, ''),))
+                wikiutil.url_quote_plus(self.page_name, ''), ))
             return
 
         # if necessary, load the formatter
@@ -1071,7 +1071,7 @@ class Page(object):
         lang = self.pi.get('language', request.cfg.language_default)
         request.setContentLanguage(lang)
 
-        # start document output        
+        # start document output
         page_exists = self.exists()
         if not content_only:
             if emit_headers:
@@ -1421,12 +1421,12 @@ class Page(object):
         return links
 
     def parsePageLinks(self, request):
-        """ Parse page links by formatting with a pagelinks formatter 
-        
+        """ Parse page links by formatting with a pagelinks formatter
+
         This is a old hack to get the pagelinks by rendering the page
         with send_page. We can remove this hack after factoring
         send_page and send_page_content into small reuseable methods.
-        
+
         More efficient now by using special pagelinks formatter and
         redirecting possible output into null file.
         """
@@ -1491,7 +1491,7 @@ class Page(object):
 
     def getACL(self, request):
         """ Get cached ACLs of this page.
-        
+
         Return cached ACL or invoke parseACL and update the cache.
 
         @param request: the request object
@@ -1519,7 +1519,7 @@ class Page(object):
                 if currentRevision != 99999999:
                     # don't use cache for non existing pages
                     # otherwise in the process of creating copies by filesys.copytree (PageEditor.copyPage)
-                    # the first may test will create a cache entry with the default_acls for a non existing page 
+                    # the first may test will create a cache entry with the default_acls for a non existing page
                     # At the time the page is created acls on that page would be ignored until the process
                     # is completed by adding a log entry into edit-log
                     cache_data = (currentRevision, acl)
@@ -1529,8 +1529,8 @@ class Page(object):
             return acl
 
     def parseACL(self):
-        """ Return ACLs parsed from the last available revision 
-        
+        """ Return ACLs parsed from the last available revision
+
         The effective ACL is always from the last revision, even if
         you access an older revision.
         """
@@ -1583,7 +1583,7 @@ class Page(object):
 
     def isConflict(self):
         """ Returns true if there is a known editing conflict for that page.
-        
+
         @return: true if there is a known conflict.
         """
 
@@ -1592,7 +1592,7 @@ class Page(object):
 
     def setConflict(self, state):
         """ Sets the editing conflict flag.
-        
+
         @param state: bool, true if there is a conflict.
         """
         cache = caching.CacheEntry(self.request, self, 'conflict', scope='item')

@@ -4,7 +4,7 @@
 
     This macro creates a pie chart of the type of user agents
     accessing the wiki.
-    
+
     TODO: should be refactored after hitcounts.
 
     @copyright: 2002-2004 Juergen Hermann <jh@web.de>

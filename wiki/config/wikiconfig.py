@@ -21,7 +21,7 @@
     Also, the URL http://moinmoin.wikiwikiweb.de/HelpOnConfiguration has
     a list of config options.
 
-    ** Please do not use this file for a wiki farm. Use the sample file 
+    ** Please do not use this file for a wiki farm. Use the sample file
     from the wikifarm directory instead! **
 """
 
@@ -137,7 +137,7 @@ class Config(DefaultConfig):
 
     # Language options --------------------------------------------------
 
-    # See http://moinmoin.wikiwikiweb.de/ConfigMarket for configuration in 
+    # See http://moinmoin.wikiwikiweb.de/ConfigMarket for configuration in
     # YOUR language that other people contributed.
 
     # The main wiki language, set the direction of the wiki pages
@@ -153,7 +153,7 @@ class Config(DefaultConfig):
     # Content options ---------------------------------------------------
 
     # Show users hostnames in RecentChanges
-    show_hosts = 1                  
+    show_hosts = 1
 
     # Enable graphical charts, requires gdchart.
     #chart_options = {'width': 600, 'height': 300}

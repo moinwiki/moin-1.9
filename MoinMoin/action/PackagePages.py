@@ -82,7 +82,7 @@ class PackagePages:
         if not pages:
             raise ActionError(self.makeform(_('No pages like "%s"!') % wikiutil.escape(pagelist)))
 
-        pagelist = ', '.join([getattr(page, "page_name") for page in  pages])
+        pagelist = ', '.join([getattr(page, "page_name") for page in pages])
         target = wikiutil.taintfilename(packagename)
 
         if not target:

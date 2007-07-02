@@ -8,7 +8,7 @@
 
 def execute(indexobj, filename):
     """ Image data filtering not implemented yet.
-    
+
         TODO: maybe extract comments or time stamps from jpegs and png.
     """
     return u""

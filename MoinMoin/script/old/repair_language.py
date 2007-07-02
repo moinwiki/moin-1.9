@@ -85,20 +85,20 @@ def repairText(text):
 
     # Get text lines
     lines = text.splitlines()
-    
+
     # Look in page header
     for i in range(len(lines)):
         line = lines[i]
         if not line.startswith(u'#'):
             break # end of header
-        
+
         if line.startswith(needle):
             # Get language from rest of line
             lang = line[len(needle):].strip()
             # Normalize language names. Language files are named xx_yy,
             # but iso names use xx-yy. This can confuse people.
             lang = lang.replace(u"_", u"-")
-                
+
             # Validate lang, make new style language processing
             # instruction.
             if lang in valid_languages:
@@ -114,18 +114,18 @@ def repairText(text):
 
 def processPages(path, repair):
     """ Process page directory
-    
+
     @param repair: repair or just test
     """
     charset = 'utf-8'
-    
+
     pages = [p for p in listdir(path) if os.path.isdir(os.path.join(path, p))]
     for page in pages:
         revdir = os.path.join(path, page, 'revisions')
         if not os.path.isdir(revdir):
             print 'Error: %s: missing revisions directory' % page
             continue
-        
+
         for rev in listdir(revdir):
             revpath = os.path.join(revdir, rev)
             # Open file, read text
@@ -152,16 +152,16 @@ if __name__ == '__main__':
         print "Error: could not find 'pages' directory"
         print 'Run this script from your wiki data directory'
         print __doc__
-        sys.exit(1)   
-    
-    options = {'verify': 0, 'repair': 1,}
-    
+        sys.exit(1)
+
+    options = {'verify': 0, 'repair': 1, }
+
     if len(sys.argv) != 2 or sys.argv[1] not in options:
         print __doc__
         sys.exit(1)
 
     processPages(path, repair=options[sys.argv[1]])
-    
+
 
 
 

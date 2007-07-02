@@ -23,7 +23,7 @@ def macro_dialog(request):
   <title>Insert Macro</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta content="noindex,nofollow" name="robots">
-  <script src="%s/applets/FCKeditor/editor/dialog/common/fck_dialog_common.js" type="text/javascript"></script>  
+  <script src="%s/applets/FCKeditor/editor/dialog/common/fck_dialog_common.js" type="text/javascript"></script>
   <script language="javascript">
 
 var oEditor = window.parent.InnerDialogLoaded() ;
@@ -34,11 +34,11 @@ window.onload = function ()
 {
  // First of all, translate the dialog box texts
  oEditor.FCKLanguageManager.TranslatePage( document ) ;
- 
+
  OnChange( "BR" );
- 
+
  // Show the "Ok" button.
- window.parent.SetOkButton( true ) ; 
+ window.parent.SetOkButton( true ) ;
 }
 
 function Ok()
@@ -48,7 +48,7 @@ function Ok()
   alert( FCKLang.MacroErrNoName ) ;
   return false ;
  }
- 
+
  FCKMacros.Add( txtName.value ) ;
  return true ;
 }
@@ -218,7 +218,7 @@ def link_dialog(request):
            %s
            </select>
           <td>
-         </tr> 
+         </tr>
 ''' % "\n".join(['<option value="%s">%s</option>' % (page, page)
                  for page in pages])
     else:
@@ -250,19 +250,19 @@ def link_dialog(request):
 <!--
  * FCKeditor - The text editor for internet
  * Copyright (C) 2003-2004 Frederico Caldeira Knabben
- * 
+ *
  * Licensed under the terms of the GNU Lesser General Public License:
  *   http://www.opensource.org/licenses/lgpl-license.php
- * 
+ *
  * For further information visit:
  *   http://www.fckeditor.net/
- * 
+ *
  * File Name: fck_link.html
  *  Link dialog window.
- * 
+ *
  * Version:  2.0 FC (Preview)
  * Modified: 2005-02-18 23:55:22
- * 
+ *
  * File Authors:
  *   Frederico Caldeira Knabben (fredck@fckeditor.net)
 -->
@@ -308,7 +308,7 @@ def link_dialog(request):
         </tr>
         %(page_list)s
        </table>
-       </form> 
+       </form>
       </td>
      </tr>
     </table>
@@ -356,7 +356,7 @@ def link_dialog(request):
     </table>
     <br />
    </div>
-  </div> 
+  </div>
  </body>
 </html>
 ''' % locals())
@@ -384,7 +384,7 @@ def attachment_dialog(request):
            %s
            </select>
           <td>
-         </tr> 
+         </tr>
 ''' % "\n".join(['<option value="%s">%s</option>' % (page, page)
                  for page in pages])
     else:
@@ -400,19 +400,19 @@ def attachment_dialog(request):
 <!--
  * FCKeditor - The text editor for internet
  * Copyright (C) 2003-2004 Frederico Caldeira Knabben
- * 
+ *
  * Licensed under the terms of the GNU Lesser General Public License:
  *   http://www.opensource.org/licenses/lgpl-license.php
- * 
+ *
  * For further information visit:
  *   http://www.fckeditor.net/
- * 
+ *
  * File Name: fck_attachment.html
  *  Attachment dialog window.
- * 
+ *
  * Version:  2.0 FC (Preview)
  * Modified: 2005-02-18 23:55:22
- * 
+ *
  * File Authors:
  *   Frederico Caldeira Knabben (fredck@fckeditor.net)
 -->
@@ -445,12 +445,12 @@ def attachment_dialog(request):
          </td>
         </tr>
        </table>
-       </form> 
+       </form>
       </td>
      </tr>
     </table>
    </div>
-  </div> 
+  </div>
  </body>
 </html>
 ''' % locals())
@@ -466,13 +466,13 @@ def image_dialog(request):
 <!--
  * FCKeditor - The text editor for internet
  * Copyright (C) 2003-2004 Frederico Caldeira Knabben
- * 
+ *
  * Licensed under the terms of the GNU Lesser General Public License:
  *   http://www.opensource.org/licenses/lgpl-license.php
- * 
+ *
  * For further information visit:
  *   http://www.fckeditor.net/
- * 
+ *
  * File Authors:
  *   Frederico Caldeira Knabben (fredck@fckeditor.net)
  *   Florian Festi

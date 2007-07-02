@@ -62,7 +62,7 @@ except ImportError:
         def __init__(self, raw, request, **kw):
             self.raw = raw
             self.request = request
-    
+
         def format(self, formatter):
             _ = self.request.getText
             from MoinMoin.parser.text import Parser as TextParser
@@ -70,7 +70,7 @@ except ImportError:
                                formatter.rawHTML(_('Rendering of reStructured text is not possible, please install Docutils.')) +
                                formatter.sysmsg(0))
             TextParser(self.raw, self.request).format(formatter)
-    
+
     # Create a pseudo docutils environment
     docutils = html4css1 = dummyUrllib2()
     html4css1.HTMLTranslator = html4css1.Writer = object
@@ -90,7 +90,7 @@ for i in sys.modules.keys():
         sys.modules[i].open = dummyOpen
         sys.modules[i].urllib2 = dummyUrllib2
         sys.modules[i].__import__ = safe_import
-        
+
 # --- End of dummy-code --------------------------------------------------------
 
 def html_escape_unicode(node):
@@ -104,7 +104,7 @@ def html_escape_unicode(node):
 class MoinWriter(html4css1.Writer):
 
     config_section = 'MoinMoin writer'
-    config_section_dependencies = ('writers',)
+    config_section_dependencies = ('writers', )
 
     #"""Final translated form of `document`."""
     output = None
@@ -162,7 +162,7 @@ class MoinWriter(html4css1.Writer):
                                  self)
         self.document.walkabout(visitor)
         self.visitor = visitor
-        # Docutils 0.5 and later require the writer to have the visitor 
+        # Docutils 0.5 and later require the writer to have the visitor
         # attributes.
         if (hasattr(html4css1.Writer, 'visitor_attributes')):
             for attr in html4css1.Writer.visitor_attributes:
@@ -183,9 +183,9 @@ class Parser:
         parser = MoinDirectives(self.request)
 
         parts = publish_parts(
-            source = self.raw,
-            writer = MoinWriter(formatter, self.request),
-            settings_overrides = {
+            source=self.raw,
+            writer=MoinWriter(formatter, self.request),
+            settings_overrides={
                 'halt_level': 5,
                 'traceback': True,
                 'file_insertion_enabled': 0,
@@ -213,14 +213,14 @@ class Parser:
 class RawHTMLList(list):
     """
         RawHTMLList catches all html appended to internal HTMLTranslator lists.
-        It passes the HTML through the MoinMoin rawHTML formatter to strip 
+        It passes the HTML through the MoinMoin rawHTML formatter to strip
         markup when necessary. This is to support other formatting outputs
         (such as ?action=show&mimetype=text/plain).
     """
-    
+
     def __init__(self, formatter):
         self.formatter = formatter
-        
+
     def append(self, text):
         f = sys._getframe()
         if f.f_back.f_code.co_filename.endswith('html4css1.py'):
@@ -249,7 +249,7 @@ class MoinTranslator(html4css1.HTMLTranslator):
         self.wiki_text = ''
         self.setup_wiki_handlers()
         self.setup_admonitions_handlers()
-        
+
         # Make all internal lists RawHTMLLists, see RawHTMLList class
         # comment for more information.
         for i in self.__dict__:
@@ -335,16 +335,16 @@ class MoinTranslator(html4css1.HTMLTranslator):
             link = refuri
             if ':' in refuri:
                 prefix, link = refuri.lstrip().split(':', 1)
-            
+
             # First see if MoinMoin should handle completely. Exits through add_wiki_markup.
-            if ((refuri.startswith('[[') and refuri.endswith(']]')) or 
+            if ((refuri.startswith('[[') and refuri.endswith(']]')) or
                     (prefix == 'drawing') or
                     (prefix == 'inline')):
                 self.process_wiki_text(refuri)
                 self.wiki_text = self.fixup_wiki_formatting(self.wiki_text)
                 self.add_wiki_markup()
 
-            # From here down, all links are handled by docutils (except 
+            # From here down, all links are handled by docutils (except
             # missing attachments), just fixup node['refuri'].
             if prefix == 'attachment':
                 if not AttachFile.exists(self.request, self.request.page.page_name, link):
@@ -353,10 +353,10 @@ class MoinTranslator(html4css1.HTMLTranslator):
                     self.wiki_text = self.fixup_wiki_formatting(self.wiki_text)
                     self.add_wiki_markup()
                 # Attachment exists, just get a link to it.
-                node['refuri'] = AttachFile.getAttachUrl(self.request.page.page_name, 
+                node['refuri'] = AttachFile.getAttachUrl(self.request.page.page_name,
                         link, self.request)
                 if not [i for i in node.children if i.__class__ == docutils.nodes.image]:
-                    node['classes'].append(prefix)                
+                    node['classes'].append(prefix)
             elif prefix == 'wiki':
                 wikitag, wikiurl, wikitail, err = wikiutil.resolve_wiki(self.request, link)
                 wikiurl = wikiutil.mapURL(self.request, wikiurl)
@@ -368,8 +368,8 @@ class MoinTranslator(html4css1.HTMLTranslator):
                     node['classes'].append('interwiki')
             elif prefix != '':
                 # Some link scheme (http, file, https, mailto, etc.), add class
-                # information if the reference doesn't have a child image (don't 
-                # want additional markup for images with targets). 
+                # information if the reference doesn't have a child image (don't
+                # want additional markup for images with targets).
                 # Don't touch the refuri.
                 if not [i for i in node.children if i.__class__ == docutils.nodes.image]:
                     node['classes'].append(prefix)
@@ -412,8 +412,8 @@ class MoinTranslator(html4css1.HTMLTranslator):
                 self.add_wiki_markup()
             # Attachment exists, get a link to it.
             # create the url
-            node['uri'] = AttachFile.getAttachUrl(self.request.page.page_name, 
-                    attach_name, self.request, addts = 1)
+            node['uri'] = AttachFile.getAttachUrl(self.request.page.page_name,
+                    attach_name, self.request, addts=1)
             if not node.hasattr('alt'):
                 node['alt'] = node.get('name', uri)
         html4css1.HTMLTranslator.visit_image(self, node)
@@ -450,7 +450,7 @@ class MoinTranslator(html4css1.HTMLTranslator):
             'literal_block': 'preformatted',
             # Simple Lists
             # bullet-lists are handled completely by docutils because it uses
-            # the node context to decide when to make a compact list 
+            # the node context to decide when to make a compact list
             # (no <p> tags).
             'list_item': 'listitem',
             # Definition List
@@ -487,8 +487,8 @@ class MoinTranslator(html4css1.HTMLTranslator):
             self.wiki_text = ''
             self.request.write(self.formatter.div(0))
             self.body.append(self.wiki_text)
-            
-        return visit_func, depart_func 
+
+        return visit_func, depart_func
 
     def setup_admonitions_handlers(self):
         """
@@ -560,7 +560,7 @@ class MoinDirectives:
             return
 
         if len(content):
-            page = Page(page_name = content[0], request = self.request)
+            page = Page(page_name=content[0], request=self.request)
             if page.exists():
                 text = page.get_raw_body()
                 lines = text.split('\n')
@@ -568,7 +568,7 @@ class MoinDirectives:
                 if lines[0].startswith("#format"):
                     del lines[0]
             else:
-                lines = [_("**Could not find the referenced page: %s**") % (content[0],)]
+                lines = [_("**Could not find the referenced page: %s**") % (content[0], )]
             # Insert the text from the included document and then continue
             # parsing
             state_machine.insert_input(lines, 'MoinDirectives')
@@ -594,7 +594,7 @@ class MoinDirectives:
                 macro = content[0]
             else:
                 macro = '[[%s]]' % content[0]
-            ref = reference(macro, refuri = macro)
+            ref = reference(macro, refuri=macro)
             ref['name'] = macro
             return [ref]
         return

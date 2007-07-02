@@ -65,8 +65,8 @@ class Request(RequestBase):
         RequestBase.run(self)
 
     def setup_args(self):
-        """ Return args dict 
-        
+        """ Return args dict
+
         Twisted already parsed args, including __filename__ hacking,
         but did not decode the values.
         """
@@ -119,8 +119,8 @@ class Request(RequestBase):
                 self.twistd.setHeader(key, value)
 
     def http_redirect(self, url):
-        """ Redirect to a fully qualified, or server-rooted URL 
-        
+        """ Redirect to a fully qualified, or server-rooted URL
+
         @param url: relative or absolute url, ascii using url encoding.
         """
         url = self.getQualifiedURL(url)

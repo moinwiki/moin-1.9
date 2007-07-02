@@ -136,8 +136,8 @@ SubPage calendars:
 Anniversary Calendars: (no year data)
 [[MonthCalendar(Yearly,,,+1,,6,1)]]
 
-This creates calendars of the format Yearly/MM-DD 
-By leaving out the year, you can set birthdays, and anniversaries in this 
+This creates calendars of the format Yearly/MM-DD
+By leaving out the year, you can set birthdays, and anniversaries in this
 calendar and not have to re-enter each year.
 
 This creates a calendar which uses MonthCalendarTemplate for directly editing
@@ -249,7 +249,7 @@ def execute(macro, text):
         text2 = macro.form['calparms'][0]
         args2 = args_re.match(text2)
         if not args2:
-            return ('<p><strong class="error">%s</strong></p>' % _('Invalid MonthCalendar calparms "%s"!')) % (text2,)
+            return ('<p><strong class="error">%s</strong></p>' % _('Invalid MonthCalendar calparms "%s"!')) % (text2, )
         else:
             has_calparms = 1 # yes!
             cparmpagename, cparmyear, cparmmonth, cparmoffset, cparmoffset2, cparmheight6, cparmanniversary, cparmtemplate = \
@@ -264,7 +264,7 @@ def execute(macro, text):
         # parse and check arguments
         args = args_re.match(text)
         if not args:
-            return ('<p><strong class="error">%s</strong></p>' % _('Invalid MonthCalendar arguments "%s"!')) % (text,)
+            return ('<p><strong class="error">%s</strong></p>' % _('Invalid MonthCalendar arguments "%s"!')) % (text, )
         else:
             parmpagename, parmyear, parmmonth, parmoffset, parmoffset2, parmheight6, anniversary, parmtemplate = \
                 parseargs(args, thispage, currentyear, currentmonth, 0, 0, 0, 0, '')

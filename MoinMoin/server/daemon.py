@@ -54,8 +54,8 @@ class Error(Exception):
 
 
 class Daemon:
-    """ A background process 
-    
+    """ A background process
+
     Represent a background process, which may be running or not. The
     process can be started, stopped, restarted or killed.
     """
@@ -63,7 +63,7 @@ class Daemon:
 
     def __init__(self, name, function, *args, **kw):
         """ Create a daemon
-        
+
         @param name: name of the process (determines pid filename, too)
         @param function: the server main function, will block until the
             server is done.
@@ -97,8 +97,8 @@ class Daemon:
             self.removePID()
 
     def do_stop(self):
-        """ Stop the daemon process 
-        
+        """ Stop the daemon process
+
         Terminate or raise an error we can't handle here. On success,
         the pid file will be cleaned by the terminated process.
         """
@@ -109,7 +109,7 @@ class Daemon:
 
     def do_kill(self):
         """ Kill the daemon process
-        
+
         Kill or raise an error which we can't handle here. Clean the
         pid file for the killed process.
         """
@@ -163,7 +163,7 @@ class Daemon:
 
     def readPID(self):
         """ Return the pid from the pid file
-        
+
         If there is no pid file, return None. If pid file is corrupted,
         remove it. If its not readable, raise.
         """
@@ -180,7 +180,7 @@ class Daemon:
 
     def daemonize(self):
         """ Make the current process a daemon
-        
+
         See http://www.erlenstar.demon.co.uk/unix/faq_toc.html#TOC16
         """
         if os.fork():   # launch child and...
@@ -218,8 +218,8 @@ class Daemon:
 
 
 class DaemonScript(Daemon):
-    """ A script controlling a daemon 
-    
+    """ A script controlling a daemon
+
     TODO: add --pid-dir option?
     """
 

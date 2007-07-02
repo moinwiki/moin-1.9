@@ -10,6 +10,7 @@ from MoinMoin.auth import BaseAuth
 
 class ExternalCookie(BaseAuth):
     name = 'external_cookie'
+
     def request(request, user_obj, **kw):
         """ authenticate via external cookie """
         import Cookie
@@ -50,9 +51,11 @@ class ExternalCookie(BaseAuth):
 
             changed = False
             if aliasname != user.aliasname: # was the aliasname externally updated?
-                user.aliasname = aliasname ; changed = True # yes -> update user profile
+                user.aliasname = aliasname
+                changed = True # yes -> update user profile
             if email != user.email: # was the email addr externally updated?
-                user.email = email ; changed = True # yes -> update user profile
+                user.email = email
+                changed = True # yes -> update user profile
 
             if user:
                 user.create_or_update(changed)

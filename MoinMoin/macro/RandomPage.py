@@ -16,7 +16,7 @@ Dependencies = ["time"]
 def execute(macro, args):
     request = macro.request
 
-    # get number of wanted links        
+    # get number of wanted links
     try:
         links = max(int(args), 1)
     except StandardError:

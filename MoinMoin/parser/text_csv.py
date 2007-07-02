@@ -31,7 +31,7 @@ class Parser:
         # parse extra arguments for excludes
         self.exclude = []
         self.separator = ';'
-        for arg in kw.get('format_args','').split():
+        for arg in kw.get('format_args', '').split():
             if arg[0] == '-':
                 try:
                     idx = int(arg[1:])

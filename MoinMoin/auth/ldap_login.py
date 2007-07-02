@@ -118,7 +118,7 @@ class LDAPAuth(BaseAuth):
                         aliasname = sn
                 aliasname = aliasname.decode(coding)
 
-                u = user.User(request, auth_username=username, password="{SHA}NotStored", auth_method=self.name, auth_attribs=('name', 'password', 'email', 'mailto_author',))
+                u = user.User(request, auth_username=username, password="{SHA}NotStored", auth_method=self.name, auth_attribs=('name', 'password', 'email', 'mailto_author', ))
                 u.name = username
                 u.aliasname = aliasname
                 u.email = email
