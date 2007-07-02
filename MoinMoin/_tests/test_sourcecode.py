@@ -13,7 +13,8 @@ from MoinMoin.conftest import moindir
 ROOT = str(moindir)
 
 EXCLUDE = [
-    '/wiki/htdocs/applets/FCKeditor',
+     '/MoinMoin/support', # 3rd party libs or non-broken stdlib stuff
+    '/wiki/htdocs/applets/FCKeditor', # 3rd party GUI editor
 ]
 
 def test_no_tabs():
@@ -30,6 +31,7 @@ def test_no_tabs():
                 data = f.read()
                 f.close()
                 assert '\t' not in data, "%r contains tabs!" % (reldir,)
+                assert not data or data.endswith('\n'), "%r does not end with a newline char!" % (reldir,)
         elif os.path.isdir(path):
             for entry in os.listdir(path):
                 if not entry.startswith('.'):

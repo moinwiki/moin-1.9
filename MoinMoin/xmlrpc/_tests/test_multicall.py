@@ -25,4 +25,4 @@ def test_fault_serialization():
     result = xmlrpc.xmlrpc_system_multicall(args)
     assert(type(result[0]) == dict)
     assert(result[0].has_key("faultCode") and result[0].has_key("faultString"))
-    
+
