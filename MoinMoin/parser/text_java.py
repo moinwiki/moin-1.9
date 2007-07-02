@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-	MoinMoin - Java Source Parser
+    MoinMoin - Java Source Parser
 
     @copyright: 2002 Taesu Pyo <bigflood@hitel.net>
     @license: GNU GPL, see COPYING for details.
