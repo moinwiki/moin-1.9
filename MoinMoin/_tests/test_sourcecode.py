@@ -13,7 +13,11 @@ from MoinMoin.conftest import moindir
 ROOT = str(moindir)
 
 EXCLUDE = [
-     '/MoinMoin/support', # 3rd party libs or non-broken stdlib stuff
+        '/wiki/config/mailimportconf.py',
+        '/MoinMoin/formatter/text_html.py',
+        '/MoinMoin/parser/text_diff.py',
+    '/contrib/DesktopEdition/setup_py2exe.py', # has crlf
+    '/MoinMoin/support', # 3rd party libs or non-broken stdlib stuff
     '/wiki/htdocs/applets/FCKeditor', # 3rd party GUI editor
 ]
 
@@ -30,8 +34,9 @@ def test_no_tabs():
                 f = open(path, 'r')
                 data = f.read()
                 f.close()
-                assert '\t' not in data, "%r contains tabs!" % (reldir,)
+                assert '\t' not in data, "%r contains tabs (please use 4 space chars for indenting)!" % (reldir,)
                 assert not data or data.endswith('\n'), "%r does not end with a newline char!" % (reldir,)
+                assert '\r\n' not in data, "%r contains crlf line endings (please use UNIX style, lf only)!" % (reldir,)
         elif os.path.isdir(path):
             for entry in os.listdir(path):
                 if not entry.startswith('.'):
