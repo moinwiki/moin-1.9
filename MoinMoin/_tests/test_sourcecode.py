@@ -13,9 +13,6 @@ from MoinMoin.conftest import moindir
 ROOT = str(moindir)
 
 EXCLUDE = [
-        '/wiki/config/mailimportconf.py',
-        '/MoinMoin/formatter/text_html.py',
-        '/MoinMoin/parser/text_diff.py',
     '/contrib/DesktopEdition/setup_py2exe.py', # has crlf
     '/MoinMoin/support', # 3rd party libs or non-broken stdlib stuff
     '/wiki/htdocs/applets/FCKeditor', # 3rd party GUI editor
