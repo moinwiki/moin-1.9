@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-	MoinMoin - Pascal Source Parser
+    MoinMoin - Pascal Source Parser
 
     @copyright: 2004-2005 Johannes Berg <johannes@sipsolutions.net>
     @license: GNU GPL, see COPYING for details.

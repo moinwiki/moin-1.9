@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-	MoinMoin - C++ Source Parser
+    MoinMoin - C++ Source Parser
 
     @copyright: 2002 Taesu Pyo <bigflood@hitel.net>
     @license: GNU GPL, see COPYING for details.

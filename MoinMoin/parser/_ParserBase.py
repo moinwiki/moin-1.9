@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-	MoinMoin - Base Source Parser
+    MoinMoin - Base Source Parser
 
     @copyright: 2002 by Taesu Pyo <bigflood@hitel.net>
     @license: GNU GPL, see COPYING for details.
@@ -257,12 +257,12 @@ class ParserBase:
     def write_match(self, formatter, match):
         for n, hit in match.groupdict().items():
             if not hit:
-            	continue
+                continue
             r = self._formatting_rules_n2r[n]
             s = r.getText(self, hit)
             c = self.rule_fmt.get(r.name, None)
             if not c:
-            	c = self.def_format
+                c = self.def_format
             first = 1
             for line in s.expandtabs(4).split('\n'):
                 if not first:

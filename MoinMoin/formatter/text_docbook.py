@@ -489,7 +489,7 @@ class Formatter(FormatterBase):
 
         self._handleNode("table", on, sanitized_attrs)
         if on:
-            self._addEmptyNode("caption") #dtd for table requires caption		
+            self._addEmptyNode("caption") #dtd for table requires caption
         self._handleNode("tgroup", on)
         self._handleNode("tbody", on)
         return ""

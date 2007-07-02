@@ -13,8 +13,6 @@ from MoinMoin.conftest import moindir
 ROOT = str(moindir)
 
 EXCLUDE = [
-    '/MoinMoin/parser',
-    '/MoinMoin/formatter',
     '/wiki/htdocs/applets/FCKeditor',
 ]
 
