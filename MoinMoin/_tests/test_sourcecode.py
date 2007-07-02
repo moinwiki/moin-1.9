@@ -26,7 +26,7 @@ TRAILING_SPACES = 'ignore' # 'ignore', 'test' or 'fix'
                            # use 'fix' with extreme caution and in a separate changeset!
 FIX_TS_RE = re.compile(r' +$', re.M) # 'fix' mode: everything matching the trailing space re will be removed
 
-PEP8_CHECKS = False
+PEP8_CHECKS = True
 
 def test_sourcecode():
     def walk(reldir):
@@ -53,7 +53,9 @@ def test_sourcecode():
                         f.write(data)
                         f.close()
                 if PEP8_CHECKS:
-                    assert pep8_checker(path) == 0
+                    # Please read and follow PEP8 - rerun this test until it does not fail any more,
+                    # any type of error is only reported ONCE (even if there are multiple).
+                    assert pep8_error_count(path) == 0
         elif os.path.isdir(path):
             for entry in os.listdir(path):
                 if not entry.startswith('.'):
@@ -63,9 +65,11 @@ def test_sourcecode():
     EXCLUDE = dict([(path, True) for path in EXCLUDE]) # dict lookup is faster
     walk('')
 
-def pep8_checker(path):
-    import pep8
-    #pep8.process_options(['pep8', '--ignore=E401,E501,W', path])
-    pep8.process_options(['pep8', path])
+import pep8
+pep8.process_options(['pep8', '--ignore=E302,E401,E501,E701,W', 'dummy_path'])
+#pep8.process_options(['pep8', path])
+
+def pep8_error_count(path):
     error_count = pep8.Checker(path).check_all()
     return error_count
+

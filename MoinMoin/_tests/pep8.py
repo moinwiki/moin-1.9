@@ -642,8 +642,10 @@ class Checker:
         """
         if options.quiet == 1 and not self.file_errors:
             message(self.filename)
-        self.file_errors += 1
         code = text[:4]
+        if ignore_code(code):
+            return
+        self.file_errors += 1
         options.counters[code] = options.counters.get(code, 0) + 1
         options.messages[code] = text[5:]
         if options.quiet:
@@ -654,8 +656,6 @@ class Checker:
                 return
             if base[0] == 'E' and code[0] == 'W':
                 return
-        if ignore_code(code):
-            return
         if options.counters[code] == 1 or options.repeat:
             message("%s:%s:%d: %s" %
                     (self.filename, line_number, offset + 1, text))
