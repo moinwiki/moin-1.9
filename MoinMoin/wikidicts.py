@@ -62,7 +62,7 @@ class Dict(DictBase):
        any text ignored
     """
     # Key:: Value - ignore all but key:: value pairs, strip whitespace
-    regex = r'^ (?P<key>.+?):: (?P<val>.*?) *$'
+    regex = r'^ (?P<key>.+?):: (?P<val>.*?) *$' # exactly one space after the :: is required
 
     def initFromText(self, text):
         for match in self.regex.finditer(text):
