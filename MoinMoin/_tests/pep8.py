@@ -187,6 +187,21 @@ def maximum_line_length(physical_line):
         return 79, "E501 line too long (%d characters)" % length
 
 
+def crlf_lines(physical_line):
+    """
+    Line contains CR (e.g. as a CRLF line ending).
+
+    Many free software projects have a strong focus on POSIX platforms (like
+    Linux, *BSD, Unix, Mac OS X, etc.) and they all use LF-only line endings.
+    Only Win32 platform uses CRLF line endings.
+    So if you have a Win32-only source code using CRLF line endings, you might
+    want to exclude this test.
+    """
+    pos = physical_line.find('\r')
+    if pos >= 0:
+        return pos, "W293 line contains CR char(s)"
+
+
 ##############################################################################
 # Plugins (check functions) for logical lines
 ##############################################################################

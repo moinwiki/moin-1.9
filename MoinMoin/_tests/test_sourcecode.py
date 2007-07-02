@@ -24,39 +24,31 @@ EXCLUDE = [
     '/wiki/htdocs/applets/FCKeditor', # 3rd party GUI editor
 ]
 
-TRAILING_SPACES = 'test' # 'ignore', 'test' or 'fix'
-                         # use 'fix' with extreme caution and in a separate changeset!
+TRAILING_SPACES = 'nochange' # 'nochange' or 'fix'
+                             # use 'fix' with extreme caution and in a separate changeset!
 FIX_TS_RE = re.compile(r' +$', re.M) # 'fix' mode: everything matching the trailing space re will be removed
 
-PEP8_CHECKS = True
 
 def pep8_error_count(path):
     # process_options initializes some data structures and MUST be called before each Checker().check_all()
-    pep8.process_options(['pep8', '--ignore=E202,E221,E222,E241,E301,E302,E401,E501,E701,W', '--show-source', 'dummy_path'])
+    pep8.process_options(['pep8', '--ignore=E202,E221,E222,E241,E301,E302,E401,E501,E701,W391,W601,W602', '--show-source', 'dummy_path'])
     error_count = pep8.Checker(path).check_all()
     return error_count
 
 def check_file(reldir, path):
     if path.lower().endswith('.py'):
-        f = file(path, 'rb')
-        data = f.read()
-        f.close()
-        assert '\t' not in data, "%r contains tabs (please use 4 space chars for indenting)!" % (reldir, )
-        assert not data or data.endswith('\n'), "%r does not end with a newline char!" % (reldir, )
-        assert '\r\n' not in data, "%r contains crlf line endings (please use UNIX style, lf only)!" % (reldir, )
-        if TRAILING_SPACES != 'ignore':
-            if TRAILING_SPACES == 'test':
-                assert ' \n' not in data, "%r contains line(s) with trailing spaces!" % (reldir, )
-            elif TRAILING_SPACES == 'fix':
-                data = FIX_TS_RE.sub('', data)
-                f = file(path, 'wb')
-                f.write(data)
-                f.close()
-        if PEP8_CHECKS:
-            # Please read and follow PEP8 - rerun this test until it does not fail any more,
-            # any type of error is only reported ONCE (even if there are multiple).
-            error_count = pep8_error_count(path)
-            assert error_count == 0
+        if TRAILING_SPACES == 'fix':
+            f = file(path, 'rb')
+            data = f.read()
+            f.close()
+            data = FIX_TS_RE.sub('', data)
+            f = file(path, 'wb')
+            f.write(data)
+            f.close()
+        # Please read and follow PEP8 - rerun this test until it does not fail any more,
+        # any type of error is only reported ONCE (even if there are multiple).
+        error_count = pep8_error_count(path)
+        assert error_count == 0
 
 def test_sourcecode():
     def walk(reldir):
@@ -78,3 +70,4 @@ def test_sourcecode():
     EXCLUDE = dict([(path, True) for path in EXCLUDE]) # dict lookup is faster
     for _ in walk(''):
         yield _
+
