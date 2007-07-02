@@ -2,38 +2,39 @@
 """
     MoinMoin - MoinMoin.wikidicts tests
 
-    @copyright: 2003-2004 by Juergen Hermann <jh@web.de>
+    @copyright: 2003-2004 by Juergen Hermann <jh@web.de>,
+                2007 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
-import unittest # LEGACY UNITTEST, PLEASE DO NOT IMPORT unittest IN NEW TESTS, PLEASE CONSULT THE py.test DOCS
+import py
 import re
 
 from MoinMoin import wikidicts
 from MoinMoin import Page
 
-class TestGroupPage(unittest.TestCase):
+class TestGroupPage:
 
     def testCamelCase(self):
         """ wikidicts: initFromText: CamelCase links """
         text = """
  * CamelCase
 """
-        self.assertEqual(self.getMembers(text), ['CamelCase'])
+        assert self.getMembers(text) == ['CamelCase']
 
     def testExtendedName(self):
         """ wikidicts: initFromText: extended names """
         text = """
  * extended name
 """
-        self.assertEqual(self.getMembers(text), ['extended name'])
+        assert self.getMembers(text) == ['extended name']
 
     def testExtendedLink(self):
         """ wikidicts: initFromText: extended link """
         text = """
  * ["extended link"]
 """
-        self.assertEqual(self.getMembers(text), ['extended link'])
+        assert self.getMembers(text) == ['extended link']
 
     def testIgnoreSecondLevelList(self):
         """ wikidicts: initFromText: ignore non first level items """
@@ -43,7 +44,7 @@ class TestGroupPage(unittest.TestCase):
     * forth level
      * and then some...
 """
-        self.assertEqual(self.getMembers(text), [])
+        assert self.getMembers(text) == []
 
     def testIgnoreOther(self):
         """ wikidicts: initFromText: ignore anything but first level list itmes """
@@ -53,14 +54,14 @@ class TestGroupPage(unittest.TestCase):
 
 Ignore previous line and this text.
 """
-        self.assertEqual(self.getMembers(text), ['take this'])
+        assert self.getMembers(text) == ['take this']
 
     def testStripWhitespace(self):
         """ wikidicts: initFromText: strip whitespace around items """
         text = """
  *   take this  
 """
-        self.assertEqual(self.getMembers(text), ['take this'])
+        assert self.getMembers(text) == ['take this']
 
     def getMembers(self, text):
         group = wikidicts.Group(self.request, '')
@@ -68,7 +69,7 @@ Ignore previous line and this text.
         return group.members()
 
 
-class TestDictPage(unittest.TestCase):
+class TestDictPage:
 
     def testGroupMembers(self):
         """ wikidicts: create dict from keys and values in text """
@@ -86,13 +87,13 @@ Next line has key with empty value
 '''
         d = wikidicts.Dict(self.request, '')
         d.initFromText(text)
-        self.assertEqual(d['First'], 'first item')
-        self.assertEqual(d['text with spaces'], 'second item')
-        self.assertEqual(d['Empty string'], '')
-        self.assertEqual(d['Last'], 'last item')
+        assert d['First'] == 'first item'
+        assert d['text with spaces'] == 'second item'
+        assert d['Empty string'] == ''
+        assert d['Last'] == 'last item'
+        assert len(d) == 4
 
-
-class GroupDictTestCase(unittest.TestCase):
+class TestGroupDicts:
 
     def testSystemPagesGroupInDicts(self):
         """ wikidict: names in SystemPagesGroup should be in request.dicts
@@ -101,10 +102,16 @@ class GroupDictTestCase(unittest.TestCase):
 
         Assume that the SystemPagesGroup is in the data or the underlay dir.
         """
-        assert Page.Page(self.request, 'SystemPagesGroup').exists(), \
-               "SystemPagesGroup is missing, Can't run test"
+        assert Page.Page(self.request, 'SystemPagesGroup').exists(), "SystemPagesGroup is missing, Can't run test"
         systemPages = wikidicts.Group(self.request, 'SystemPagesGroup')
+        #print repr(systemPages)
+        #print repr(self.request.dicts['SystemPagesGroup'])
         for member in systemPages.members():
-            self.assert_(self.request.dicts.has_member('SystemPagesGroup', member),
-                         '%s should be in request.dict' % member)
+            assert self.request.dicts.has_member('SystemPagesGroup', member), '%s should be in request.dict' % member
+
+        members, groups = self.request.dicts.expand_group('SystemPagesGroup')
+        assert 'SystemPagesInEnglishGroup' in groups
+        assert 'RecentChanges' in members
+        assert 'HelpContents' in members
+
 
