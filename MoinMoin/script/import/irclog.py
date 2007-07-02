@@ -9,7 +9,7 @@
 
     Usage:
     moin --config-dir=... --wiki-url=... import irclog --author=IrcLogImporter --file-dir=.
-    
+
     @copyright: 2005-2007 MoinMoin:AlexanderSchremmer
                 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
@@ -64,7 +64,7 @@ class PluginScript(MoinScript):
         request.cfg.mail_enabled = False
         for root, dirs, files in os.walk(self.options.file_dir):
             files.sort()
-            for filename in files: 
+            for filename in files:
                 pagename = self.options.page + filename_function(filename)
                 #print "Pushing %r as %r" % (filename, pagename)
                 p = PageEditor(request, pagename, do_editor_backup=0, uid_override=self.options.author, do_revision_backup=0)

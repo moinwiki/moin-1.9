@@ -87,14 +87,14 @@ def init_test_request(static_state=[False]):
 
 class TestConfig:
     """ Custom configuration for unit tests
-    
+
     Some tests assume a specific configuration, and will fail if the wiki admin
-    changed the configuration. For example, DateTime macro test assume 
+    changed the configuration. For example, DateTime macro test assume
     the default datetime_fmt.
-    
+
     When you set custom values in a TestConfig, the previous values are saved,
     and when the TestConfig is called specifically, they are restored automatically.
-    
+
     Typical Usage
     -------------
     ::
@@ -108,7 +108,7 @@ class TestConfig:
     """
 
     def __init__(self, request):
-        """ Create temporary configuration for a test 
+        """ Create temporary configuration for a test
 
         @param request: current request
         """
@@ -117,7 +117,7 @@ class TestConfig:
         self.new = []  # New added attributes
 
     def __call__(self, defaults=(), **custom):
-        """ Initialise a temporary configuration for a test 
+        """ Initialise a temporary configuration for a test
 
         @param defaults: list of keys that should use the default value
         @param custom: other keys using non default values, or new keys
@@ -130,7 +130,7 @@ class TestConfig:
 
     def setDefaults(self, defaults=()):
         """ Set default values for keys in defaults list
-        
+
         Non existing default will raise an AttributeError.
         """
         from MoinMoin.config import multiconfig
@@ -151,8 +151,8 @@ class TestConfig:
         setattr(self.request.cfg, key, value)
 
     def restore(self):
-        """ Restore previous request.cfg 
-        
+        """ Restore previous request.cfg
+
         Set old keys to old values and delete new keys.
         """
         for key, value in self.old.items():

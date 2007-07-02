@@ -88,7 +88,7 @@ class RenamePage(ActionBase):
 
             d = {
                 'subpage': subpages,
-                'subpages_checked':('', 'checked')[self.request.form.get('subpages_checked', ['0'])[0] == '1'],
+                'subpages_checked': ('', 'checked')[self.request.form.get('subpages_checked', ['0'])[0] == '1'],
                 'subpage_label': _('Rename all /subpages too?'),
                 'pagename': wikiutil.escape(self.pagename),
                 'newname_label': _("New name"),
@@ -104,13 +104,13 @@ class RenamePage(ActionBase):
 <table>
     <tr>
     <dd>
-        %(subpage_label)s<input type="checkbox" name="rename_subpages" value="1" %(subpages_checked)s> 
+        %(subpage_label)s<input type="checkbox" name="rename_subpages" value="1" %(subpages_checked)s>
     </dd>
     <dd>
         <class="label"><subpage> %(subpage)s</subpage>
-    </dd>   
+    </dd>
     </tr>
-</table>       
+</table>
 <table>
     <tr>
         <td class="label"><label>%(newname_label)s</label></td>
@@ -132,7 +132,7 @@ class RenamePage(ActionBase):
     </tr>
 </table>
 ''' % d
-        
+
         else:
             d = {
                 'pagename': wikiutil.escape(self.pagename),

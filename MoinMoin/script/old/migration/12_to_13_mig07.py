@@ -2,7 +2,7 @@
 """
     12_to_13.py - converting CRLF / LF style to the future standard
     Use this to convert from 1.3 pre patch-275 to patch-275.
-    
+
     Changes:
     * use OS style for logs (== no change, same as it was)
     * use CRLF for page files on any platform (text/* mandates it!) -
@@ -30,7 +30,7 @@ def tocrlf(fni, fno):
     fi = open(fni, "rb")
     data = fi.read()
     fi.close()
-    data = data.replace("\r","")
+    data = data.replace("\r", "")
     lines = data.split("\n")
     data = "\r\n".join(lines)
     if data[-2:] != "\r\n":
@@ -38,18 +38,18 @@ def tocrlf(fni, fno):
     fo = open(fno, "wb")
     fo.write(data)
     fo.close()
-    st=os.stat(fni)
-    os.utime(fno, (st.st_atime,st.st_mtime))
-                
+    st = os.stat(fni)
+    os.utime(fno, (st.st_atime, st.st_mtime))
+
 def process_pagedirs(dir_from, dir_to):
     pagelist = listdir(dir_from)
     for pagename in pagelist:
         pagedir_from = opj(dir_from, pagename)
         pagedir_to = opj(dir_to, pagename)
-        
+
         # first we copy all, even the stuff we convert later:
         copy_dir(pagedir_from, pagedir_to)
-        
+
         rev_from = opj(pagedir_from, 'revisions')
         rev_to = opj(pagedir_to, 'revisions')
         if os.path.exists(rev_from):
@@ -68,7 +68,7 @@ except OSError:
     print "You need to be in the directory where your copy of the 'data' directory is located."
     sys.exit(1)
 
-os.makedirs(opj('data','pages'))
+os.makedirs(opj('data', 'pages'))
 
 process_pagedirs(opj(origdir, 'pages'), opj('data', 'pages'))
 

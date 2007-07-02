@@ -55,7 +55,7 @@ def execute(macro, args):
             formatter.anchorlink(1, fwdlink_id, id=backlink_id),
             formatter.text(str(showidx+1)),
             formatter.anchorlink(0),
-            formatter.sup(0),)
+            formatter.sup(0), )
 
     # nothing to do or emit
     return ''

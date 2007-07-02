@@ -56,7 +56,7 @@ def importName(modulename, name):
     names only in runtime.
 
     Any error raised here must be handled by the caller.
-    
+
     @param modulename: full qualified mudule name, e.g. x.y.z
     @param name: name to import from modulename
     @rtype: any object

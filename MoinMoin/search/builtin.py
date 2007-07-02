@@ -1,7 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - search engine internals
-    
+
     @copyright: 2005 MoinMoin:FlorianFesti,
                 2005 MoinMoin:NirSoffer,
                 2005 MoinMoin:AlexanderSchremmer,
@@ -43,7 +43,7 @@ class UpdateQueue:
 
     def append(self, pagename):
         """ Append a page to queue
-        
+
         @param pagename: string to save
         """
         if not self.writeLock.acquire(60.0):
@@ -69,7 +69,7 @@ class UpdateQueue:
 
     def remove(self, pages):
         """ Remove pages from the queue
-        
+
         When the queue is empty, the queue file is removed, so exists()
         can tell if there is something waiting in the queue.
 
@@ -96,7 +96,7 @@ class UpdateQueue:
 
     def _decode(self, data):
         """ Decode queue data
-        
+
         @param data: the data to decode
         """
         pages = data.splitlines()
@@ -104,7 +104,7 @@ class UpdateQueue:
 
     def _filterDuplicates(self, pages):
         """ Filter duplicates in page list, keeping the order
-        
+
         @param pages: list of pages to filter
         """
         unique = []
@@ -117,7 +117,7 @@ class UpdateQueue:
 
     def _read(self):
         """ Read and return queue data
-        
+
         This does not do anything with the data so we can release the
         lock as soon as possible, enabling others to update the queue.
         """
@@ -134,7 +134,7 @@ class UpdateQueue:
 
     def _write(self, pages):
         """ Write pages to queue file
-        
+
         Requires queue write locking.
 
         @param pages: list of pages to write
@@ -148,8 +148,8 @@ class UpdateQueue:
             f.close()
 
     def _removeFile(self):
-        """ Remove queue file 
-        
+        """ Remove queue file
+
         Requires queue write locking.
         """
         try:
@@ -205,14 +205,14 @@ class BaseIndex:
 
     def _search(self, query):
         """ Actually perfom the search (read-lock acquired)
-        
+
         @param query: the search query objects tree
         """
         raise NotImplemented('...')
 
     def search(self, query, **kw):
         """ Search for items in the index
-        
+
         @param query: the search query objects to pass to the index
         """
         #if not self.read_lock.acquire(1.0):
@@ -246,7 +246,7 @@ class BaseIndex:
 
     def indexPages(self, files=None, mode='update'):
         """ Index all pages (and files, if given)
-        
+
         Can be called only from a script. To index pages during a user
         request, use indexPagesInNewThread.
         @keyword files: iterator or list of files to index additionally
@@ -268,7 +268,7 @@ class BaseIndex:
 
     def indexPagesInNewThread(self, files=None, mode='update'):
         """ Index all pages in a new thread
-        
+
         Should be called from a user request. From a script, use indexPages.
         """
         # Prevent rebuilding the index just after it was finished
@@ -292,9 +292,9 @@ class BaseIndex:
 
     def _index_pages(self, request, files=None, mode='update'):
         """ Index all pages (and all given files)
-        
+
         This should be called from indexPages or indexPagesInNewThread only!
-        
+
         This may take some time, depending on the size of the wiki and speed
         of the machine.
 
@@ -319,7 +319,7 @@ class BaseIndex:
 
     def _do_queued_updates_InNewThread(self):
         """ do queued index updates in a new thread
-        
+
         Should be called from a user request. From a script, use indexPages.
         """
         if not self.lock.acquire(1.0):
@@ -337,7 +337,7 @@ class BaseIndex:
             from threading import Thread
             indexThread = Thread(
                     target=lockedDecorator(self._do_queued_updates),
-                    args=(self._indexingRequest(self.request),))
+                    args=(self._indexingRequest(self.request), ))
             indexThread.setDaemon(True)
 
             # Join the index thread after current request finish, prevent
@@ -356,7 +356,7 @@ class BaseIndex:
 
     def _do_queued_updates(self, request, amount=5):
         """ Perform updates in the queues (read-lock acquired)
-        
+
         @param request: the current request
         @keyword amount: how many updates to perform at once (default: 5)
         """
@@ -368,7 +368,7 @@ class BaseIndex:
 
     def contentfilter(self, filename):
         """ Get a filter for content of filename and return unicode content.
-        
+
         @param filename: name of the file
         """
         request = self.request
@@ -392,7 +392,7 @@ class BaseIndex:
 
     def _indexingRequest(self, request):
         """ Return a new request that can be used for index building.
-        
+
         This request uses a security policy that lets the current user
         read any page. Without this policy some pages will not render,
         which will create broken pagelinks index.
@@ -500,7 +500,7 @@ class Search:
 
     def _xapianSearch(self):
         """ Search using Xapian
-        
+
         Get a list of pages using fast xapian search and
         return moin search in those pages if needed.
         """
@@ -561,7 +561,7 @@ class Search:
 
     def _xapianMatchDecider(self, term, pos):
         """ Returns correct Match object for a Xapian match
-        
+
         @param term: the term as string
         @param pos: starting position of the match
         """
@@ -572,7 +572,7 @@ class Search:
 
     def _xapianMatch(self, uid, page=None):
         """ Get all relevant Xapian matches per document id
-        
+
         @param uid: the id of the document in the xapian index
         """
         positions = {}
@@ -593,8 +593,8 @@ class Search:
         return matches
 
     def _moinSearch(self, pages=None):
-        """ Search pages using moin's built-in full text search 
-        
+        """ Search pages using moin's built-in full text search
+
         Return list of tuples (page, match). The list may contain
         deleted pages or pages the user may not read.
 
@@ -611,7 +611,7 @@ class Search:
 
     def _moinMatch(self, page, uid=None):
         """ Get all matches from regular moinSearch
-        
+
         @param page: the current page instance
         """
         if page:
@@ -666,8 +666,8 @@ class Search:
         return hits
 
     def _getPageList(self):
-        """ Get list of pages to search in 
-        
+        """ Get list of pages to search in
+
         If the query has a page filter, use it to filter pages before
         searching. If not, get a unfiltered page list. The filtering
         will happen later on the hits, which is faster with current
@@ -683,7 +683,7 @@ class Search:
 
     def _filter(self, hits):
         """ Filter out deleted or acl protected pages
-        
+
         @param hits: list of hits
         """
         userMayRead = self.request.user.may.read

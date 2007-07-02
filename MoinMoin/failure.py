@@ -13,16 +13,16 @@ from MoinMoin.support import cgitb
 
 class View(cgitb.View):
     """ Display an error message and debugging information
-    
+
     Additions to cgitb.View:
      - Multiple tracebacks support
      - Debugging information is shown only in debug mode
      - Moin application information
      - General help text and links
      - Handle multiple paragraphs in exception message
-     
+
     cgitb is heavily modified cgitb, but fully backward compatible with
-    the standard cgitb. It should not contain any moin specific code.  
+    the standard cgitb. It should not contain any moin specific code.
 
     cgitb was refactored to be easy to customize by applications
     developers. This moin specific subclass is an example.
@@ -54,7 +54,7 @@ function toggleDebugInfo() {
 
     def stylesheet(self):
         return cgitb.View.stylesheet(self) + """
-.cgitb .buttons {margin: 0.5em 0; padding: 5px 10px;}        
+.cgitb .buttons {margin: 0.5em 0; padding: 5px 10px;}
 .cgitb .buttons li {display: inline; margin: 0; padding: 0 0.25em;}
 """
 
@@ -133,7 +133,7 @@ function toggleDebugInfo() {
 
 def handle(request, err):
     """ Handle failures
-    
+
     Display fancy error view, or fallback to simple text traceback
     """
     if 'MOIN_DEBUG' in os.environ:
@@ -158,7 +158,7 @@ def handle(request, err):
 
 def printTextException(request, info=None):
     """ Simple text exception that should never fail
-    
+
     Print all exceptions in a composite error.
     """
     import traceback

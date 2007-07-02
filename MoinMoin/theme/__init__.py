@@ -19,11 +19,11 @@ rss_supported = '_xmlplus' in xml.__file__
 
 
 class ThemeBase:
-    """ Base class for themes 
-    
-    This class supply all the standard template that sub classes can 
-    use without rewriting the same code. If you want to change certain 
-    elements, override them. 
+    """ Base class for themes
+
+    This class supply all the standard template that sub classes can
+    use without rewriting the same code. If you want to change certain
+    elements, override them.
     """
 
     name = 'base'
@@ -36,26 +36,26 @@ class ThemeBase:
         # key         alt                        icon filename      w   h
         # ------------------------------------------------------------------
         # navibar
-        'help':       ("%(page_help_contents)s", "moin-help.png",   12, 11),
-        'find':       ("%(page_find_page)s",     "moin-search.png", 12, 12),
-        'diff':       (_("Diffs"),               "moin-diff.png",   15, 11),
-        'info':       (_("Info"),                "moin-info.png",   12, 11),
-        'edit':       (_("Edit"),                "moin-edit.png",   12, 12),
-        'unsubscribe':(_("Unsubscribe"),         "moin-unsubscribe.png",  14, 10),
-        'subscribe':  (_("Subscribe"),           "moin-subscribe.png",14, 10),
-        'raw':        (_("Raw"),                 "moin-raw.png",    12, 13),
-        'xml':        (_("XML"),                 "moin-xml.png",    20, 13),
-        'print':      (_("Print"),               "moin-print.png",  16, 14),
-        'view':       (_("View"),                "moin-show.png",   12, 13),
-        'home':       (_("Home"),                "moin-home.png",   13, 12),
-        'up':         (_("Up"),                  "moin-parent.png", 15, 13),
+        'help':        ("%(page_help_contents)s", "moin-help.png",   12, 11),
+        'find':        ("%(page_find_page)s",     "moin-search.png", 12, 12),
+        'diff':        (_("Diffs"),               "moin-diff.png",   15, 11),
+        'info':        (_("Info"),                "moin-info.png",   12, 11),
+        'edit':        (_("Edit"),                "moin-edit.png",   12, 12),
+        'unsubscribe': (_("Unsubscribe"),         "moin-unsubscribe.png", 14, 10),
+        'subscribe':   (_("Subscribe"),           "moin-subscribe.png", 14, 10),
+        'raw':         (_("Raw"),                 "moin-raw.png",    12, 13),
+        'xml':         (_("XML"),                 "moin-xml.png",    20, 13),
+        'print':       (_("Print"),               "moin-print.png",  16, 14),
+        'view':        (_("View"),                "moin-show.png",   12, 13),
+        'home':        (_("Home"),                "moin-home.png",   13, 12),
+        'up':          (_("Up"),                  "moin-parent.png", 15, 13),
         # FileAttach
         'attach':     ("%(attach_count)s",       "moin-attach.png",  7, 15),
         # RecentChanges
         'rss':        (_("[RSS]"),               "moin-rss.png",    24, 24),
-        'deleted':    (_("[DELETED]"),           "moin-deleted.png",60, 12),
-        'updated':    (_("[UPDATED]"),           "moin-updated.png",60, 12),
-        'renamed':    (_("[RENAMED]"),           "moin-renamed.png",60, 12),
+        'deleted':    (_("[DELETED]"),           "moin-deleted.png", 60, 12),
+        'updated':    (_("[UPDATED]"),           "moin-updated.png", 60, 12),
+        'renamed':    (_("[RENAMED]"),           "moin-renamed.png", 60, 12),
         'conflict':   (_("[CONFLICT]"),          "moin-conflict.png", 60, 12),
         'new':        (_("[NEW]"),               "moin-new.png",    31, 12),
         'diffrc':     (_("[DIFF]"),              "moin-diff.png",   15, 11),
@@ -149,7 +149,7 @@ class ThemeBase:
     def __init__(self, request):
         """
         Initialize the theme object.
-        
+
         @param request: the request object
         """
         self.request = request
@@ -168,7 +168,7 @@ class ThemeBase:
     def emit_custom_html(self, html):
         """
         generate custom HTML code in `html`
-        
+
         @param html: a string or a callable object, in which case
                      it is called and its return value is used
         @rtype: string
@@ -185,7 +185,7 @@ class ThemeBase:
         The logo contain an image and or text or any html markup the
         admin inserted in the config file. Everything it enclosed inside
         a div with id="logo".
-        
+
         @rtype: unicode
         @return: logo html
         """
@@ -198,7 +198,7 @@ class ThemeBase:
 
     def interwiki(self, d):
         """ Assemble the interwiki name display, linking to page_front_page
-        
+
         @param d: parameter dictionary
         @rtype: string
         @return: interwiki html
@@ -214,7 +214,7 @@ class ThemeBase:
 
     def title(self, d):
         """ Assemble the title (now using breadcrumbs)
-        
+
         @param d: parameter dictionary
         @rtype: string
         @return: title html
@@ -250,7 +250,7 @@ class ThemeBase:
 
     def username(self, d):
         """ Assemble the username / userprefs link
-        
+
         @param d: parameter dictionary
         @rtype: unicode
         @return: username html
@@ -301,7 +301,7 @@ class ThemeBase:
         the [page title] or [url title] syntax. In this case, we don't
         use localization, and the links goes to page or to the url, not
         the localized version of page.
-        
+
         Supported syntax:
             * PageName
             * WikiName:PageName
@@ -376,14 +376,14 @@ class ThemeBase:
 
     def shortenPagename(self, name):
         """ Shorten page names
-        
+
         Shorten very long page names that tend to break the user
         interface. The short name is usually fine, unless really stupid
         long names are used (WYGIWYD).
 
         If you don't like to do this in your theme, or want to use
         different algorithm, override this method.
-        
+
         @param name: page name, unicode
         @rtype: unicode
         @return: shortened version.
@@ -510,7 +510,7 @@ class ThemeBase:
         This is the central routine for making <img> tags for icons!
         All icons stuff except the top left logo and search field icons are
         handled here.
-        
+
         @param icon: icon id (dict key)
         @param vars: ...
         @rtype: string
@@ -551,7 +551,7 @@ class ThemeBase:
         """ Assemble the msg display
 
         Display a message with a widget or simple strings with a clear message link.
-        
+
         @param d: parameter dictionary
         @rtype: unicode
         @return: msg display html
@@ -573,7 +573,7 @@ class ThemeBase:
 
     def trail(self, d):
         """ Assemble page trail
-        
+
         @param d: parameter dictionary
         @rtype: unicode
         @return: trail html
@@ -612,7 +612,7 @@ class ThemeBase:
 
     def html_stylesheets(self, d):
         """ Assemble html head stylesheet links
-        
+
         @param d: parameter dictionary
         @rtype: string
         @return: stylesheets links
@@ -683,7 +683,7 @@ class ThemeBase:
         Since page information uses translated text, it uses the ui
         language and direction. It looks strange sometimes, but
         translated text using page direction looks worse.
-        
+
         @param page: current page
         @rtype: unicode
         @return: page last edit information
@@ -710,7 +710,7 @@ class ThemeBase:
     def searchform(self, d):
         """
         assemble HTML code for the search forms
-        
+
         @param d: parameter dictionary
         @rtype: unicode
         @return: search form html
@@ -755,7 +755,7 @@ searchBlur(e);
     def showversion(self, d, **keywords):
         """
         assemble HTML code for copyright and version display
-        
+
         @param d: parameter dictionary
         @rtype: string
         @return: copyright and version display html
@@ -803,13 +803,13 @@ var search_hint = "%(search_hint)s";
 
     def rsshref(self, page):
         """ Create rss href, used for rss button and head link
-        
+
         @rtype: unicode
         @return: rss href
         """
         request = self.request
         url = page.url(request, querystr={
-                'action':'rss_rc', 'ddiffs': '1', 'unique': '1', }, escape=0, relative=False)
+                'action': 'rss_rc', 'ddiffs': '1', 'unique': '1', }, escape=0, relative=False)
         return url
 
     def rsslink(self, d):
@@ -832,7 +832,7 @@ var search_hint = "%(search_hint)s";
 
     def html_head(self, d):
         """ Assemble html head
-        
+
         @param d: parameter dictionary
         @rtype: unicode
         @return: html head
@@ -864,7 +864,7 @@ var search_hint = "%(search_hint)s";
 
     def actionsMenu(self, page):
         """ Create actions menu list and items data dict
-        
+
         The menu will contain the same items always, but items that are
         not available will be disabled (some broken browsers will let
         you select disabled options though).
@@ -875,7 +875,7 @@ var search_hint = "%(search_hint)s";
 
         TODO: Move actionsMenuInit() into body onload - requires that the theme will render body,
               it is currently done in wikiutil/page.
-        
+
         @param page: current page, Page object
         @rtype: unicode
         @return: actions menu html fragment
@@ -962,7 +962,7 @@ var search_hint = "%(search_hint)s";
 
         # Add custom actions not in the standard menu, except for
         # some actions like AttachFile (we have them on top level)
-        more = [item for item in available if not item in titles and not item in ('AttachFile',)]
+        more = [item for item in available if not item in titles and not item in ('AttachFile', )]
         more.sort()
         if more:
             # Add separator
@@ -972,9 +972,9 @@ var search_hint = "%(search_hint)s";
             # Add more actions (all enabled)
             for action in more:
                 data = {'action': action, 'disabled': ''}
-                # Always add spaces: AttachFile -> Attach File 
+                # Always add spaces: AttachFile -> Attach File
                 # XXX do not create page just for using split_title -
-                # creating pages for non-existant does 2 storage lookups 
+                # creating pages for non-existant does 2 storage lookups
                 #title = Page(request, action).split_title(force=1)
                 title = action
                 # Use translated version if available
@@ -1016,7 +1016,7 @@ actionsMenuInit('%(label)s');
         """ Assemble the page edit bar.
 
         Create html on first call, then return cached html.
-                
+
         @param d: parameter dictionary
         @rtype: unicode
         @return: iconbar html
@@ -1060,7 +1060,7 @@ actionsMenuInit('%(label)s');
         return False
 
     def editbarItems(self, page):
-        """ Return list of items to show on the editbar 
+        """ Return list of items to show on the editbar
 
         This is separate method to make it easy to customize the
         edtibar in sub classes.
@@ -1076,7 +1076,7 @@ actionsMenuInit('%(label)s');
             elif editbar_item == 'Comments':
                 # we just use <a> to get same style as other links, but we add some dummy
                 # link target to get correct mouseover pointer appearance. return false
-                # keeps the browser away from jumping to the link target:: 
+                # keeps the browser away from jumping to the link target::
                 editbar_actions.append('<a href="#" class="toggleCommentsButton" onClick="toggleComments();return false;">%s</a>' % _('Comments'))
             elif editbar_item == 'Edit':
                 editbar_actions.append(self.editorLink(page))
@@ -1107,10 +1107,10 @@ actionsMenuInit('%(label)s');
         return page.pi['format'] == 'wiki'
 
     def editorLink(self, page):
-        """ Return a link to the editor 
-        
+        """ Return a link to the editor
+
         If the user can't edit, return a disabled edit link.
-        
+
         If the user want to show both editors, it will display "Edit
         (Text)", otherwise as "Edit".
         """
@@ -1147,7 +1147,7 @@ actionsMenuInit('%(label)s');
 
     def guiEditorScript(self, d):
         """ Return a script that set the gui editor link variables
-        
+
         The link will be created only when javascript is enabled and
         the browser is compatible with the editor.
         """
@@ -1165,7 +1165,7 @@ actionsMenuInit('%(label)s');
 var gui_editor_link_href = "%(url)s";
 var gui_editor_link_text = "%(text)s";
 //-->
-</script>        
+</script>
 """ % {'url': page.url(self.request, querystr={'action': 'edit', 'editor': 'gui', }, relative=False),
        'text': _('Edit (GUI)', formatted=False),
       }
@@ -1185,7 +1185,7 @@ var gui_editor_link_text = "%(text)s";
 
     def subscribeLink(self, page):
         """ Return subscribe/unsubscribe link to valid users
-        
+
         @rtype: unicode
         @return: subscribe or unsubscribe link
         """
@@ -1201,7 +1201,7 @@ var gui_editor_link_text = "%(text)s";
 
     def quicklinkLink(self, page):
         """ Return add/remove quicklink link
-        
+
         @rtype: unicode
         @return: link to add or remove a quicklink
         """
@@ -1224,15 +1224,15 @@ var gui_editor_link_text = "%(text)s";
 
     def startPage(self):
         """ Start page div with page language and direction
-        
+
         @rtype: unicode
         @return: page div with language and direction attribtues
         """
         return u'<div id="page"%s>\n' % self.content_lang_attr()
 
     def endPage(self):
-        """ End page div 
-        
+        """ End page div
+
         Add an empty page bottom div to prevent floating elements to
         float out of the page bottom over the footer.
         """
@@ -1242,10 +1242,10 @@ var gui_editor_link_text = "%(text)s";
 
     def header(self, d, **kw):
         """ Assemble page header
-        
+
         Default behavior is to start a page div. Sub class and add
         footer items.
-        
+
         @param d: parameter dictionary
         @rtype: string
         @return: page header html
@@ -1256,7 +1256,7 @@ var gui_editor_link_text = "%(text)s";
 
     def footer(self, d, **keywords):
         """ Assemble page footer
-        
+
         Default behavior is to end page div. Sub class and add
         footer items.
 
@@ -1272,7 +1272,7 @@ var gui_editor_link_text = "%(text)s";
     def recentchanges_entry(self, d):
         """
         Assemble a single recentchanges entry (table row)
-        
+
         @param d: parameter dictionary
         @rtype: string
         @return: recentchanges entry html
@@ -1317,7 +1317,7 @@ var gui_editor_link_text = "%(text)s";
     def recentchanges_daybreak(self, d):
         """
         Assemble a rc daybreak indication (table row)
-        
+
         @param d: parameter dictionary
         @rtype: string
         @return: recentchanges daybreak html
@@ -1334,7 +1334,7 @@ var gui_editor_link_text = "%(text)s";
     def recentchanges_header(self, d):
         """
         Assemble the recentchanges header (intro + open table)
-        
+
         @param d: parameter dictionary
         @rtype: string
         @return: recentchanges header html
@@ -1368,7 +1368,7 @@ var gui_editor_link_text = "%(text)s";
                             str(day),
                             self.request.formatter, rel='nofollow'))
             days = ' | '.join(days)
-            html += (_("Show %s days.") % (days,))
+            html += (_("Show %s days.") % (days, ))
 
         if d['rc_update_bookmark']:
             html += " %(rc_update_bookmark)s %(rc_curr_bookmark)s" % d
@@ -1381,7 +1381,7 @@ var gui_editor_link_text = "%(text)s";
     def recentchanges_footer(self, d):
         """
         Assemble the recentchanges footer (close table)
-        
+
         @param d: parameter dictionary
         @rtype: string
         @return: recentchanges footer html
@@ -1528,9 +1528,9 @@ var gui_editor_link_text = "%(text)s";
         output.append('<link rel="Start" href="%s/%s">\n' % (scriptname, wikiutil.quoteWikinameURL(page_front_page)))
         if pagename:
             output.append('<link rel="Alternate" title="%s" href="%s/%s?action=raw">\n' % (
-                _('Wiki Markup'), scriptname, pagename_quoted,))
+                _('Wiki Markup'), scriptname, pagename_quoted, ))
             output.append('<link rel="Alternate" media="print" title="%s" href="%s/%s?action=print">\n' % (
-                _('Print View'), scriptname, pagename_quoted,))
+                _('Print View'), scriptname, pagename_quoted, ))
 
             # !!! currently disabled due to Mozilla link prefetching, see
             # http://www.mozilla.org/projects/netlib/Link_Prefetching_FAQ.html

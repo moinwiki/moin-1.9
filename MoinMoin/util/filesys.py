@@ -126,7 +126,7 @@ if sys.platform == 'darwin':
         HFS and HFS+ file systems, are case preserving but case
         insensitive. You can't have 'file' and 'File' in the same
         directory, but you can get the real name of 'file'.
-        
+
         @param path: string
         @rtype: string
         @return the real case of path or None
@@ -155,7 +155,7 @@ def dclistdir(path):
         return os.listdir(path)
     else:
         return dircache.listdir(path)
-        
+
 def dcreset():
     if sys.platform == 'win32' or not DCENABLED:
         return

@@ -1,7 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - RPC Aggregator
-    
+
     Aggregates RPC calls into MultiCall batches in order to increase
     the speed.
 

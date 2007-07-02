@@ -60,10 +60,10 @@ def convert_eventlog(fname_from, fname_to, enc_from, enc_to):
     print "%s -> %s" % (fname_from, fname_to)
     file_from = open(fname_from)
     file_to = open(fname_to, "w")
-        
+
     for line in file_from:
-        line = line.replace('\r','')
-        line = line.replace('\n','')
+        line = line.replace('\r', '')
+        line = line.replace('\n', '')
         fields = line.split('\t')
         kvpairs = fields[2]
         kvpairs = kvpairs.split('&')
@@ -76,15 +76,15 @@ def convert_eventlog(fname_from, fname_to, enc_from, enc_to):
             val = convert_string(val, enc_from, enc_to)
             key = urllib.quote(key)
             val = urllib.quote(val)
-            kvlist.append("%s=%s" % (key,val))
+            kvlist.append("%s=%s" % (key, val))
         fields[2] = '&'.join(kvlist)
         line = '\t'.join(fields) + '\n'
         file_to.write(line)
 
     file_to.close()
     file_from.close()
-    st=os.stat(fname_from)
-    os.utime(fname_to, (st.st_atime,st.st_mtime))
+    st = os.stat(fname_from)
+    os.utime(fname_to, (st.st_atime, st.st_mtime))
 
 origdir = 'data.pre-mig6'
 
@@ -95,7 +95,7 @@ except OSError:
     sys.exit(1)
 
 copy_dir(origdir, 'data')
-os.remove(opj('data','event-log')) # old format
+os.remove(opj('data', 'event-log')) # old format
 convert_eventlog(opj(origdir, 'event-log'), opj('data', 'event-log'), from_encoding, to_encoding)
 
 

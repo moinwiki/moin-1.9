@@ -23,13 +23,13 @@ class LineBuffer:
     """
     Reads lines from a file
         self.len      number of lines in self.lines
-        self.lines    list of lines (unicode) 
+        self.lines    list of lines (unicode)
         self.offsets  list of file offsets for each line. additionally the position
                       after the last read line is stored into self.offsets[-1]
     """
     def __init__(self, file, offset, size, forward=True):
         """
-        
+
         TODO: when this gets refactored, don't use "file" (is a builtin)
 
         @param file: open file object
@@ -104,7 +104,7 @@ class LogFile:
 
     def reverse(self):
         """ yield log entries in reverse direction starting from last one
-        
+
         @rtype: iterator
         """
         self.to_end()
@@ -118,11 +118,11 @@ class LogFile:
 
     def sanityCheck(self):
         """ Check for log file write access.
-        
+
         @rtype: string (error message) or None
         """
         if not os.access(self.__filename, os.W_OK):
-            return "The log '%s' is not writable!" % (self.__filename,)
+            return "The log '%s' is not writable!" % (self.__filename, )
         return None
 
     def __getattr__(self, name):
@@ -142,7 +142,7 @@ class LogFile:
             try:
                 # Open the file (NOT using codecs.open, it breaks our offset calculation. We decode it later.).
                 # Use binary mode in order to retain \r - otherwise the offset calculation would fail.
-                self._input = file(self.__filename, "rb",)
+                self._input = file(self.__filename, "rb", )
             except IOError, err:
                 if err.errno == 2: # POSIX errno.ENOENT "file not found"
                     try:
@@ -150,7 +150,7 @@ class LogFile:
                         f = file(self.__filename, "ab")
                         f.write('')
                         f.close()
-                        self._input = file(self.__filename, "rb",)
+                        self._input = file(self.__filename, "rb", )
                         return self._input
                     except:
                         pass
@@ -164,9 +164,9 @@ class LogFile:
 
     def size(self):
         """ Return log size in bytes
-        
+
         Return 0 if the file does not exists. Raises other OSError.
-        
+
         @return: size of log file in bytes
         @rtype: Int
         """
@@ -179,11 +179,11 @@ class LogFile:
 
     def lines(self):
         """ Return number of lines in the log file
-        
+
         Return 0 if the file does not exists. Raises other OSError.
 
         Expensive for big log files - O(n)
-        
+
         @return: size of log file in lines
         @rtype: Int
         """
@@ -219,7 +219,7 @@ class LogFile:
         It adjusts .__lineno if set.
         This function is not aware of filters!
 
-        @param lines: number of lines, may be negative to move backward 
+        @param lines: number of lines, may be negative to move backward
         @rtype: boolean
         @return: True if moving more than to the beginning and moving
                  to the end or beyond
@@ -357,7 +357,7 @@ class LogFile:
 
     def position(self):
         """ Return the current file position
-        
+
         This can be converted into a String using back-ticks and then be rebuild.
         For this plain file implementation position is an Integer.
         """
@@ -375,7 +375,7 @@ class LogFile:
         if self.__buffer2:
             logging.log(self.loglevel, "b2 %r %r" % (self.__buffer2.offsets[0], self.__buffer2.offsets[-1]))
         if self.__buffer1 and self.__buffer1.offsets[0] <= position < self.__buffer1.offsets[-1]:
-            # position is in .__buffer1 
+            # position is in .__buffer1
             self.__rel_index = self.__buffer1.offsets.index(position)
             self.__buffer = self.__buffer1
         elif self.__buffer2 and self.__buffer2.offsets[0] <= position < self.__buffer2.offsets[-1]:
@@ -386,7 +386,7 @@ class LogFile:
             # we already have one buffer directly before where we want to go
             self.__buffer2 = LineBuffer(self._input,
                                         position,
-                                        self.buffer_size)            
+                                        self.buffer_size)
             self.__buffer = self.__buffer2
             self.__rel_index = 0
         elif self.__buffer2 and self.__buffer2.offsets[-1] == position:
@@ -394,7 +394,7 @@ class LogFile:
             self.__buffer1 = self.__buffer2
             self.__buffer2 = LineBuffer(self._input,
                                         position,
-                                        self.buffer_size)            
+                                        self.buffer_size)
             self.__buffer = self.__buffer2
             self.__rel_index = 0
         else:
@@ -417,7 +417,7 @@ class LogFile:
 
     def calculate_line_no(self):
         """ Calculate the current line number from buffer offsets
-        
+
         If line number is unknown it is calculated by parsing the whole file.
         This may be expensive.
         """

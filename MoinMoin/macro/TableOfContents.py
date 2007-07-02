@@ -151,7 +151,7 @@ class TableOfContents:
         # Add the heading
         unique_id = ''
         if self.titles[pntt] > 1:
-            unique_id = '-%d' % (self.titles[pntt],)
+            unique_id = '-%d' % (self.titles[pntt], )
 
         # close last listitem if same level
         if self.indent == newindent:

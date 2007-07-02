@@ -18,7 +18,7 @@ class TestHTMLWidgets(unittest.TestCase):
         TO DO: add tests for all elements by HTML 4 spec.
         """
         tests = (
-            # description, call, expected           
+            # description, call, expected
             ('Create text', html.Text('<br> &'), '&lt;br&gt; &amp;'),
             ('Create raw html', html.Raw('<br> &amp;'), '<br> &amp;'),
             ('Create br', html.BR(), '<br>'),

@@ -35,7 +35,7 @@ class Parser:
                     ((\d{1,4} [-/]?)+      # Date as one or more - or /-separated groups of digits (if it exists)
                      [T ])?                # Date/time separator: T or space
                     (\d?\d [:.]?)+         # Time as one or more :/.-separated groups of 1 or 2 digits (if it exists)
-                )  
+                )
             (\]|\))?\s+)?                  # Closing bracket or paren for the timestamp (if it exists) plus whitespace
         """
         std_pattern = re.compile(timestamp + r"""
@@ -61,7 +61,7 @@ class Parser:
             if code:
                 write(fmt.code(0))
             write(fmt.table_cell(0))
-          
+
         write(fmt.table(1))
         for line in lines:
             # maybe it's a standard line

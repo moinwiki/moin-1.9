@@ -16,10 +16,10 @@
 
     Of course, if you just attach the file, you won't be able to edit it in
     the wiki. So the #format method is better for online editing.
-    
+
     Requirements:
     =============
-    
+
     * requires Python 2.4 and installed "gettext" package (msgfmt)
     * requires wiki page content to be in config.charset, so do not put non-
       utf-8 content into a utf-8 wiki or it will crash.
@@ -35,16 +35,17 @@ from MoinMoin import config
 
 class Parser:
     extensions = ['.po']
-    def __init__ (self, raw, request, **kw):
+
+    def __init__(self, raw, request, **kw):
         self.raw = raw
         self.request = request
 
     def format(self, formatter):
         PIPE = subprocess.PIPE
         STDOUT = subprocess.STDOUT
-        p = subprocess.Popen(("msgfmt", "-c", "--statistics", "-",), shell=False,
+        p = subprocess.Popen(("msgfmt", "-c", "--statistics", "-", ), shell=False,
                              stdin=PIPE, stdout=PIPE, stderr=STDOUT)
-        
+
         charset = config.charset
         textin = self.raw.encode(charset)
         out = p.communicate(input=textin)[0]
@@ -73,3 +74,4 @@ class Parser:
                   ]
 
         self.request.write(''.join(textout))
+

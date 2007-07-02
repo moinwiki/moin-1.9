@@ -1,8 +1,8 @@
 # -*- coding: iso-8859-1 -*-
-"""  
+"""
     MoinMoin - Spelling Action
-     
-    Word adding based on code by Christian Bird <chris.bird@lineo.com> 
+
+    Word adding based on code by Christian Bird <chris.bird@lineo.com>
 
     This action checks for spelling errors in a page using one or several
     word lists.
@@ -16,8 +16,8 @@
     the list of valid words, if that page exists.
 
     @copyright: 2001 Richard Jones <richard@bizarsoftware.com.au>,
-                2001-2004 Juergen Hermann <jh@web.de>  
-    @license: GNU GPL, see COPYING for details.  
+                2001-2004 Juergen Hermann <jh@web.de>
+    @license: GNU GPL, see COPYING for details.
 """
 
 import os, re, codecs
@@ -169,7 +169,7 @@ def checkSpelling(page, request, own_form=1):
 
         # build regex recognizing the bad words
         badwords_re = r'(^|(?<!\w))(%s)(?!\w)'
-        badwords_re = badwords_re % ("|".join([re.escape(bw) for bw in badwords]),)
+        badwords_re = badwords_re % ("|".join([re.escape(bw) for bw in badwords]), )
         badwords_re = re.compile(badwords_re, re.UNICODE)
 
         lsw_msg = ''
@@ -192,7 +192,7 @@ def checkSpelling(page, request, own_form=1):
 
         checkbox = '<input type="checkbox" name="newwords" value="%(word)s">%(word)s&nbsp;&nbsp;'
         msg = msg + (
-            " ".join([checkbox % { 'word': wikiutil.escape(w), } for w in badwords]) +
+            " ".join([checkbox % {'word': wikiutil.escape(w), } for w in badwords]) +
             '<p><input type="submit" name="button_newwords" value="%s"></p>' %
                 _('Add checked words to dictionary')
         )

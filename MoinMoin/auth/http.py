@@ -57,7 +57,7 @@ class HTTPAuth(BaseAuth):
             auth_type = env.get('AUTH_TYPE', '')
             if auth_type in ['Basic', 'Digest', 'NTLM', 'Negotiate', ]:
                 username = env.get('REMOTE_USER', '').decode(config.charset)
-                if auth_type in ('NTLM', 'Negotiate',):
+                if auth_type in ('NTLM', 'Negotiate', ):
                     # converting to standard case so the user can even enter wrong case
                     # (added since windows does not distinguish between e.g.
                     #  "Mike" and "mike")

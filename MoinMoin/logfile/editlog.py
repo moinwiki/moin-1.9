@@ -202,7 +202,7 @@ class EditLog(LogFile):
         result = EditLogLine(self._usercache)
         (result.ed_time_usecs, result.rev, result.action,
          result.pagename, result.addr, result.hostname, result.userid,
-         result.extra, result.comment,) = fields[:self._NUM_FIELDS]
+         result.extra, result.comment, ) = fields[:self._NUM_FIELDS]
         if not result.hostname:
             result.hostname = result.addr
         result.pagename = wikiutil.unquoteWikiname(result.pagename.encode('ascii'))

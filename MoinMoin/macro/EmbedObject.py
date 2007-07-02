@@ -10,7 +10,7 @@
     CALLING SEQUENCE:
         [[EmbedObject(attachment[,width=width][,height=height][,alt=Embedded mimetpye/xy])]]
 
-    SUPPORTED MIMETYPES:  
+    SUPPORTED MIMETYPES:
          application/x-shockwave-flash
          application/x-dvi
          application/postscript
@@ -34,7 +34,7 @@
 
          chemical/x-pdb
 
-         x-world/x-vrml  
+         x-world/x-vrml
 
     INPUTS:
         attachment: name of attachment
@@ -56,7 +56,7 @@
            menu = true
 
 
-        All do use width, height, mime_type, alt   
+        All do use width, height, mime_type, alt
 
         in addition:
            'video' do use  repeat, autostart, menu, op
@@ -93,15 +93,15 @@
         If the attachment file isn't uploaded yet the attachment line will be shown.
         If you give only one size argument, e.g. width only, the other one will be calculated.
 
-        By the swftools it is possible to get the swf size returned. I don't know if it is 
-        possible to get sizes for svg, pdf and others detected too, that's the reason why 
+        By the swftools it is possible to get the swf size returned. I don't know if it is
+        possible to get sizes for svg, pdf and others detected too, that's the reason why
         I haven't added it by now.
 
         Please add needed mimetypes as objects.
 
 
     RESTRICTIONS:
-        Some mimetypes do ignore all used keywords. May be they do use different names.        
+        Some mimetypes do ignore all used keywords. May be they do use different names.
 
 
     MODIFICATION HISTORY:
@@ -172,9 +172,9 @@ class EmbedObject:
         if not mt:
             return _("Not supported mimetype of file: %s" % self.target)
 
-        mime_type = "%s/%s" % (mt.major, mt.minor,)
+        mime_type = "%s/%s" % (mt.major, mt.minor, )
         dangerous = mime_type in self.request.cfg.mimetypes_xss_protect
-        
+
         if not mime_type in self.request.cfg.mimetypes_embed or dangerous:
             kw = {'src': url}
             return "%s: %s%s%s" % (self.macro.formatter.text('Embedding of object by choosen formatter not possible'),
@@ -184,7 +184,7 @@ class EmbedObject:
 
         if self.alt is "":
             self.alt = "%(text)s %(mime_type)s" % {
-                           'text': _("Embedded"), 
+                           'text': _("Embedded"),
                            'mime_type': mime_type,
                         }
 
@@ -282,7 +282,7 @@ class EmbedObject:
         url = AttachFile.getAttachUrl(pagename, fname, self.request)
 
         mt = wikiutil.MimeType(filename=fname)
-        mimestr = "%s/%s" % (mt.major, mt.minor,)
+        mimestr = "%s/%s" % (mt.major, mt.minor, )
         # XXX Should better use formatter.embed if available?
         return self.macro.formatter.rawHTML(self.embed(mt, url))
 

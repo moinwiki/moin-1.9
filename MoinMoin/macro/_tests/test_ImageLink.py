@@ -70,10 +70,10 @@ class TestHits:
         assert result == expected
 
     def testImageLinkTwoParamsOneKeyword(self):
-        """ macro ImageLink test: [[ImageLink(http://static.wikiwikiweb.de/logos/moindude.png, alt=The old dude, FrontPage)]] 
-        order of keywords to parameter list is independent 
+        """ macro ImageLink test: [[ImageLink(http://static.wikiwikiweb.de/logos/moindude.png, alt=The old dude, FrontPage)]]
+        order of keywords to parameter list is independent
         """
-        self.shouldDeleteTestPage = True 
+        self.shouldDeleteTestPage = True
 
         result = self._test_macro('ImageLink', 'http://static.wikiwikiweb.de/logos/moindude.png, alt=The old dude, FrontPage')
         expected = '<a href="./FrontPage"><img alt="The old dude" src="http://static.wikiwikiweb.de/logos/moindude.png" title="The old dude" /></a>'

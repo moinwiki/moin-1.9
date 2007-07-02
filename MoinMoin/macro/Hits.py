@@ -9,7 +9,7 @@
 
         all: if set to 1 then cummulative hits over all wiki pages is returned. Default is 0
         filter: if set to SAVEPAGE then the saved pages are counted. Default is VIEWPAGE.
-    
+
    @copyright: 2004-2007 MoinMoin:ReimarBauer
                2005 BenjaminVrolijk
    @license: GNU GPL, see COPYING for details.
@@ -49,7 +49,7 @@ class Hits:
             pagename = event[2].get('pagename', None)
             if not kw["all"]:
                 if pagename == formatter.page.page_name:
-                   self.count += 1
+                    self.count += 1
             else:
                 self.count += 1
 

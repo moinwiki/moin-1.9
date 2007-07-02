@@ -28,7 +28,7 @@ class TestExclusiveLock(unittest.TestCase):
 
     def testBrokenTimeAPI(self):
         """ util.lock: os.stat().mtime consistency with time.time()
-        
+
             the timestamp os.stat reports as st_mtime on a fresh file should
             be the same (or at least almost the same) as the time time.time()
             reported at this time.
@@ -53,8 +53,8 @@ class TestExclusiveLock(unittest.TestCase):
         self.failUnless(lock.acquire(0.1), "Could not acquire lock")
 
     def testRelease(self):
-        """ util.lock: ExclusiveLock: release 
-        
+        """ util.lock: ExclusiveLock: release
+
         After releasing a lock, new one could be acquired.
         """
         lock = ExclusiveLock(self.lock_dir)
@@ -110,7 +110,7 @@ class TestExclusiveLock(unittest.TestCase):
 
     def testAcquireAfterTimeout(self):
         """ util.lock: ExclusiveLock: acquire after timeout
-        
+
         Lock with one lock, try to acquire another after timeout.
         """
         timeout = 2.0 # minimal timout

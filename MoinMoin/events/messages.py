@@ -18,33 +18,33 @@ class UnknownChangeType:
 
 def page_change_message(msgtype, request, page, lang, **kwargs):
     """Prepare a notification text for a page change of given type
-    
+
     @param msgtype: a type of message to send (page_changed, attachment_added, ...)
     @type msgtype: str or unicode
     @param **kwargs: a dictionary of additional parameters, which depend on msgtype
-    
+
     @return: a formatted, ready to send message
     @rtype: unicode
-    
+
     """
-    
+
     _ = request.getText
     page._ = lambda s, formatted=True, r=request, l=lang: r.getText(s, formatted=formatted, lang=l)
     querystr = {}
-    
-    if msgtype == "page_changed": 
+
+    if msgtype == "page_changed":
         revisions = kwargs['revisions']
         if len(kwargs['revisions']) >= 2:
             querystr = {'action': 'diff',
                     'rev2': str(revisions[0]),
                     'rev1': str(revisions[1])}
-        
+
     if msgtype == "attachment_added":
         attachlink = request.getBaseURL() + \
                         getAttachUrl(page.page_name, kwargs['attach_name'], request)
-        
+
     pagelink = request.getQualifiedURL(page.url(request, querystr, relative=False))
-    
+
     if msgtype == "page_changed":
         messageBody = _("Dear Wiki user,\n\n"
         'You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.\n\n'
@@ -54,7 +54,7 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
             'pagelink': pagelink,
             'sitename': page.cfg.sitename or request.getBaseURL(),
         }
-            
+
         # append a diff (or append full page text if there is no diff)
         if len(revisions) < 2:
             messageBody = messageBody + \
@@ -67,7 +67,7 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
                 messageBody = messageBody + "%s\n%s\n" % (("-" * 78), '\n'.join(lines))
             else:
                 messageBody = messageBody + _("No differences found!\n", formatted=False)
-                
+
     elif msgtype == "attachment_added":
         messageBody = _("Dear Wiki user,\n\n"
         'You have subscribed to a wiki page "%(sitename)s" for change notification.\n\n'
@@ -83,7 +83,7 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
             'attach_size': kwargs['attach_size'],
             'attach_get': attachlink,
         }
-        
+
     elif msgtype == "page_deleted":
         messageBody = _("Dear wiki user,\n\n"
             'You have subscribed to a wiki page "%(sitename)s" for change notification.\n\n'
@@ -95,10 +95,10 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
         }
     else:
         raise UnknownChangeType()
-    
+
     if 'comment' in kwargs and kwargs['comment'] is not None:
         messageBody = messageBody + \
             _("The comment on the change is:\n%(comment)s", formatted=False) % {'comment': kwargs['comment']}
-            
+
     return messageBody
-    
+

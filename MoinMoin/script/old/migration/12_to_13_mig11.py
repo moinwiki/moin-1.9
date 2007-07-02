@@ -5,7 +5,7 @@
     Although we supply those files in the new "empty wiki template" in
     wiki/data, many people forgot to update their plugin directories,
     so we do that via this mig script now.
-    
+
     Steps for a successful migration:
 
         1. Stop your wiki and make a backup of old data and code

@@ -39,7 +39,7 @@ from compiler.ast import Name, Const, CallFunc, Getattr
 
 class TextFinder:
     """ Walk through AST tree and collect text from gettext calls
-        
+
     Find all calls to gettext function in the source tree and collect
     the texts in a dict. Use compiler to create an abstract syntax tree
     from each source file, then find the nodes for gettext function
@@ -52,7 +52,7 @@ class TextFinder:
 
     Note that TextFinder will only retrieve text from function calls
     with a constant argument like _('text'). Calls like _('text' % locals()),
-    _('text 1' + 'text 2') are marked as bad call in the report, and the 
+    _('text 1' + 'text 2') are marked as bad call in the report, and the
     text is not retrieved into the dictionary.
 
     Note also that texts in source can appear several times in the same
@@ -62,18 +62,18 @@ class TextFinder:
     The dictionary value for each text is a dictionary of filenames each
     containing a list of (best guess) lines numbers containning the text.
     """
-    
+
     def __init__(self, name='_'):
         """ Init with the gettext function name or '_'"""
         self._name = name       # getText function name
         self._dictionary = {}   # Unique texts in the found texts
         self._found = 0         # All good calls including duplicates
         self._bad = 0           # Bad calls: _('%s' % var) or _('a' + 'b')
-    
+
     def setFilename(self, filename):
         """Remember the filename we are parsing"""
-        self._filename = filename 
-        
+        self._filename = filename
+
     def visitModule(self, node):
         """ Start the search from the top node of a module
 
@@ -83,7 +83,7 @@ class TextFinder:
         This is the place to initialize module specific data.
         """
         self._visited = {}  # init node cache - we will visit each node once
-        self._lineno = 'NA' # init line number  
+        self._lineno = 'NA' # init line number
 
         # Start walking in the module node
         self.walk(node)
@@ -93,9 +93,9 @@ class TextFinder:
         if node in self._visited:
             # We visited this node already
             return
-            
-        self._visited[node] = 1            
-        if not self.parseNode(node):           
+
+        self._visited[node] = 1
+        if not self.parseNode(node):
             for child in node.getChildNodes():
                 self.walk(child)
 
@@ -107,12 +107,12 @@ class TextFinder:
         if node.lineno is not None:
             self._lineno = node.lineno
 
-        if node.__class__ == CallFunc and node.args: 
+        if node.__class__ == CallFunc and node.args:
             child = node.node
-            klass = child.__class__            
+            klass = child.__class__
             if (# Standard call _('text')
                 (klass == Name and child.name == self._name) or
-                # A call to an object attribute: object._('text') 
+                # A call to an object attribute: object._('text')
                 (klass == Getattr and child.attrname == self._name)):
                 if node.args[0].__class__ == Const:
                     # Good call with a constant _('text')
@@ -121,10 +121,10 @@ class TextFinder:
                     self.addBadCall(node)
                 return 1
         return 0
-            
+
     def addText(self, text):
         """ Add text to dictionary and count found texts.
-        
+
         Note that number of texts in dictionary could be different from
         the number of texts found, because some texts appear several
         times in the code.
@@ -136,14 +136,14 @@ class TextFinder:
         self._lineno is the last line number we checked. It may be the line
         number of the text, or near it.
         """
-        
+
         self._found = self._found + 1
 
         # Create key for this text if needed
         if text not in self._dictionary:
             self._dictionary[text] = {}
 
-        # Create key for this filename if needed   
+        # Create key for this filename if needed
         textInfo = self._dictionary[text]
         if self._filename not in textInfo:
             textInfo[self._filename] = [self._lineno]
@@ -157,18 +157,18 @@ class TextFinder:
         print "<!> Warning: non-constant _ call:"
         print " `%s`" % str(node)
         print " `%s`:%s" % (self._filename, self._lineno)
-        
+
     # Accessors
-    
+
     def dictionary(self):
         return self._dictionary
-            
+
     def bad(self):
         return self._bad
-        
+
     def found(self):
         return self._found
-        
+
 
 def visit(path, visitor):
     visitor.setFilename(path)
@@ -213,36 +213,34 @@ class Report:
             if text not in self.__sourceDict:
                 self.__unused[text] = self.__langDict[text]
         self.__ready = 1
-        
+
     def summary(self):
         """Return summary dict"""
         summary = {
             'name': i18n.languages[self.__lang][i18n.ENAME].encode(output_encoding),
             'maintainer': i18n.languages[self.__lang][i18n.MAINTAINER],
-            'total' : len(self.__langDict),
+            'total': len(self.__langDict),
             'missing': len(self.__missing),
             'unused': len(self.__unused),
             'error': self.__error
             }
         return summary
-        
+
     def missing(self):
         return self.__missing
 
     def unused(self):
         return self.__unused
-    
-        
+
 
 if __name__ == '__main__':
-
     import time
-    
+
     # Check that we run from the root directory where MoinMoin package lives
     # or from the i18n directory when this script lives
     if os.path.exists('MoinMoin/__init__.py'):
         # Running from the root directory
-        MoinMoin_dir = os.curdir   
+        MoinMoin_dir = os.curdir
     elif os.path.exists(os.path.join(os.pardir, 'i18n')):
         # Runing from i18n
         MoinMoin_dir = os.path.join(os.pardir, os.pardir)
@@ -254,10 +252,10 @@ if __name__ == '__main__':
     sys.path.insert(0, MoinMoin_dir)
     from MoinMoin import i18n
     from MoinMoin.util import pysupport
-    
+
     textFinder = TextFinder()
     found = 0
-    unique = 0   
+    unique = 0
     bad = 0
 
     # Find gettext calls in the source
@@ -268,17 +266,17 @@ if __name__ == '__main__':
                 path = os.path.join(root, name)
                 #print '%(path)s:' % locals(),
                 visit(path, textFinder)
-                
+
                 # Report each file's results
                 new_unique = len(textFinder.dictionary()) - unique
                 new_found = textFinder.found() - found
                 #print '%(new_unique)d (of %(new_found)d)' % locals()
-                                
+
                 # Warn about bad calls - these should be fixed!
                 new_bad = textFinder.bad() - bad
                 #if new_bad:
                 #    print '### Warning: %(new_bad)d bad call(s)' % locals()
-                
+
                 unique = unique + new_unique
                 bad = bad + new_bad
                 found = found + new_found
@@ -294,7 +292,7 @@ if __name__ == '__main__':
     print "To recreate this report run `make check-i18n` and paste here"
     print
     print '----'
-    print 
+    print
     print '[[TableOfContents(2)]]'
     print
     print
@@ -310,21 +308,21 @@ if __name__ == '__main__':
     if bad:
         print '\n%(bad)d bad calls.' % locals()
     print
-    
+
     # Check languages from the command line or from moin.i18n against
     # the source
     if sys.argv[1:]:
         languages = sys.argv[1:]
     else:
         languages = i18n.languages.keys()
-        for lang in blacklist_langs: 
+        for lang in blacklist_langs:
             # problems, maybe due to encoding?
             if lang in languages:
                 languages.remove(lang)
     if 'en' in languages:
         languages.remove('en') # there is no en lang file
     languages.sort()
-    
+
     # Create report for all languages
     report = {}
     for lang in languages:
@@ -335,7 +333,7 @@ if __name__ == '__main__':
            "||<:>'''Unused'''||")
     for lang in languages:
         print ("||%(name)s||<)>%(total)s||<)>%(missing)s||<)>%(unused)s||"
-               ) % report[lang].summary() 
+               ) % report[lang].summary()
 
     # Print details
     for lang in languages:
@@ -358,18 +356,18 @@ section below and modify i18n, so that it will match again.
 """
             for text in report[lang].missing():
                 print " 1. `%r`" % text
-                
+
         # Print unused texts, if any
         if report[lang].unused():
             print """
 === Possibly unused texts ===
 
-Be ''very careful'' and double-check before removing any of these 
+Be ''very careful'' and double-check before removing any of these
 potentially unused items.
 
 This program can't detect references done from wiki pages, from
 UserPreferences options, from Icon titles etc.!
-"""        
+"""
             for text in report[lang].unused():
                 print " 1. `%r`" % text
 

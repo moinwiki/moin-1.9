@@ -6,13 +6,14 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+
 class BotConfig:
     # Node name (username on the jabber server) to be used
     xmpp_node = u"moinbot"
 
     # Server to be used
     xmpp_server = u"jabber.example.com"
-    
+
     # Port to connect to or None, if default
     xmpp_port = None
 
@@ -21,23 +22,23 @@ class BotConfig:
 
     # Password used to connect to the xmpp server
     xmpp_password = u""
-    
+
     # Status message that the bot should set
     xmpp_status = u"Ready to serve!"
-        
-    # Set to True if bot should be verbose about actions it 
+
+    # Set to True if bot should be verbose about actions it
     # is performing. Useful for debuging.
     verbose = True
 
     # Interface to listen on for XML RPC traffic
     xmlrpc_host = u"localhost"
-    
+
     # Port to listen on for XML RPC traffic
     xmlrpc_port = 8000
-    
+
     # Url where wiki is located (for reverse XML RPC traffic)
     wiki_url = u"http://localhost:8080/"
-    
+
     # A secret shared with Wiki , must be the same in both
     # configs for communication to work.
     #

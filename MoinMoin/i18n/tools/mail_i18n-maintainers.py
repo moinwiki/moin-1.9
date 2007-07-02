@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 """
-    read mail text from standard input and 
+    read mail text from standard input and
     send an email to all i18n maintainers
     %(lang)s will be replaced by language
-    
+
     @copyright: 2004 Thomas Waldmann
     @license: GNU GPL, see COPYING for details
 """
@@ -21,11 +21,11 @@ def sendmail(mfrom, mto, subject, text):
     """
     Send a mail to the address(es) in 'to', with the given subject and
     mail body 'text'.
-    
+
     Return a tuple of success or error indicator and message.
 
     TODO: code duplicated from MoinMoin/util/mail.py
-    
+
     @param mfrom: source email address
     @param to: target email address
     @param subject: subject of email
@@ -38,14 +38,14 @@ def sendmail(mfrom, mto, subject, text):
     from email.Header import Header
     from email.Utils import formatdate
     global charset, mail_smarthost, mail_login
-    
+
     # Create a text/plain message
     msg = MIMEText(text, 'plain', charset)
     msg['From'] = mfrom
     msg['To'] = ', '.join(mto)
     msg['Subject'] = Header(subject, charset)
     msg['Date'] = formatdate()
-    
+
     try:
         server = smtplib.SMTP(mail_smarthost)
         try:
@@ -64,7 +64,7 @@ def sendmail(mfrom, mto, subject, text):
         return (0, str(e))
     except (os.error, socket.error), e:
         return (0, "Connection to mailserver '%(server)s' failed: %(reason)s" % {
-            'server': mail_smarthost, 
+            'server': mail_smarthost,
             'reason': str(e)
         })
 

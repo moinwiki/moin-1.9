@@ -129,7 +129,7 @@ class Formatter(FormatterBase):
             if self._in_list > 0:
                 self._in_list += 1
                 self._did_para = 1
-                return ' %d. ' % (self._in_list-1,)
+                return ' %d. ' % (self._in_list-1, )
             elif self._in_list < 0:
                 self._did_para = 1
                 return u' * '

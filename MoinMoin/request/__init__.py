@@ -110,8 +110,8 @@ class Clock:
 
 def cgiMetaVariable(header, scheme='http'):
     """ Return CGI meta variable for header name
-    
-    e.g 'User-Agent' -> 'HTTP_USER_AGENT'    
+
+    e.g 'User-Agent' -> 'HTTP_USER_AGENT'
     See http://www.faqs.org/rfcs/rfc3875.html section 4.1.18
     """
     var = '%s_%s' % (scheme, header)
@@ -273,7 +273,7 @@ class RequestBase(object):
         limits = self.cfg.surge_action_limits
         if not limits:
             return False
-                                    
+
         validuser = self.user.valid
         current_id = validuser and self.user.name or self.remote_addr
         if not validuser and current_id.startswith('127.'): # localnet
@@ -370,8 +370,8 @@ class RequestBase(object):
     def setAcceptedCharsets(self, accept_charset):
         """ Set accepted_charsets by parsing accept-charset header
 
-        Set self.accepted_charsets to an ordered list based on http_accept_charset. 
-        
+        Set self.accepted_charsets to an ordered list based on http_accept_charset.
+
         Reference: http://www.w3.org/Protocols/rfc2616/rfc2616.txt
 
         TODO: currently no code use this value.
@@ -387,7 +387,7 @@ class RequestBase(object):
                 accept_charset += ',iso-8859-1'
 
             # Make a list, sorted by quality value, using Schwartzian Transform
-            # Create list of tuples (value, name) , sort, extract names  
+            # Create list of tuples (value, name) , sort, extract names
             for item in accept_charset.split(','):
                 if ';' in item:
                     name, qval = item.split(';')
@@ -403,7 +403,7 @@ class RequestBase(object):
 
     def _setup_vars_from_std_env(self, env):
         """ Set common request variables from CGI environment
-        
+
         Parse a standard CGI environment as created by common web servers.
         Reference: http://www.faqs.org/rfcs/rfc3875.html
 
@@ -437,7 +437,7 @@ class RequestBase(object):
 
     def setHttpReferer(self, referer):
         """ Set http_referer, making sure its ascii
-        
+
         IE might send non-ascii value.
         """
         value = ''
@@ -447,8 +447,8 @@ class RequestBase(object):
         self.http_referer = value
 
     def setIsSSL(self, env):
-        """ Set is_ssl 
-        
+        """ Set is_ssl
+
         @param env: dict like object containing cgi meta variables
         """
         self.is_ssl = bool(env.get('SSL_PROTOCOL') or
@@ -456,8 +456,8 @@ class RequestBase(object):
                            env.get('HTTPS') == 'on')
 
     def setHost(self, host=None):
-        """ Set http_host 
-        
+        """ Set http_host
+
         Create from server name and port if missing. Previous code
         default to localhost.
         """
@@ -471,12 +471,12 @@ class RequestBase(object):
 
     def fixURI(self, env):
         """ Fix problems with script_name and path_info
-        
+
         Handle the strange charset semantics on Windows and other non
         posix systems. path_info is transformed into the system code
         page by the web server. Additionally, paths containing dots let
         most webservers choke.
-        
+
         Broken environment variables in different environments:
                 path_info script_name
         Apache1     X          X      PI does not contain dots
@@ -511,10 +511,10 @@ class RequestBase(object):
                 self.path_info = self.path_info[len(self.script_name):]
 
     def setURL(self, env):
-        """ Set url, used to locate wiki config 
-        
+        """ Set url, used to locate wiki config
+
         This is the place to manipulate url parts as needed.
-        
+
         @param env: dict like object containing cgi meta variables or http headers.
         """
         # If we serve on localhost:8000 and use a proxy on
@@ -529,16 +529,16 @@ class RequestBase(object):
 
     def rewriteHost(self, env):
         """ Rewrite http_host transparently
-        
+
         Get the proxy host using 'X-Forwarded-Host' header, added by
         Apache 2 and other proxy software.
-        
+
         TODO: Will not work for Apache 1 or others that don't add this header.
-        
+
         TODO: If we want to add an option to disable this feature it
         should be in the server script, because the config is not
         loaded at this point, and must be loaded after url is set.
-        
+
         @param env: dict like object containing cgi meta variables or http headers.
         """
         proxy_host = (env.get(self.proxy_host) or
@@ -548,7 +548,7 @@ class RequestBase(object):
 
     def rewriteURI(self, env):
         """ Rewrite request_uri, script_name and path_info transparently
-        
+
         Useful when running mod python or when running behind a proxy,
         e.g run on localhost:8000/ and serve as example.com/wiki/.
 
@@ -559,10 +559,10 @@ class RequestBase(object):
             <Location /my/wiki/>
                 RequestHeader set X-Moin-Location /my/wiki/
             </location>
-        
+
         TODO: does not work for Apache 1 and others that do not allow
         setting custom headers per request.
-        
+
         @param env: dict like object containing cgi meta variables or http headers.
         """
         location = (env.get(self.moin_location) or
@@ -591,7 +591,7 @@ class RequestBase(object):
 
     def splitURI(self, uri):
         """ Return path and query splited from uri
-        
+
         Just like CGI environment, the path is unquoted, the query is not.
         """
         if '?' in uri:
@@ -666,7 +666,7 @@ class RequestBase(object):
 
         self._login_messages = login_msgs
         return user_obj
-    
+
     def handle_jid_auth(self, jid):
         return user.get_by_jabber_id(self, jid)
 
@@ -765,7 +765,7 @@ class RequestBase(object):
         """ Create a dict of avaiable actions
 
         Return cached version if avaiable.
-       
+
         @rtype: dict
         @return: dict of all known actions
         """
@@ -865,7 +865,7 @@ class RequestBase(object):
             if total_secs > 50:
                 indicator += '!4!'
             elif total_secs > 20:
-               indicator += '!3!'
+                indicator += '!3!'
             elif total_secs > 10:
                 indicator += '!2!'
             elif total_secs > 2:
@@ -915,7 +915,7 @@ class RequestBase(object):
         an existing page.
 
         See http://www.w3.org/TR/REC-html40/appendix/notes.html#h-B.2.1
-        
+
         @param name: page name, string
         @rtype: unicode
         @return decoded page name
@@ -944,14 +944,14 @@ class RequestBase(object):
         return name
 
     def normalizePagename(self, name):
-        """ Normalize page name 
+        """ Normalize page name
 
         Prevent creating page names with invisible characters or funny
         whitespace that might confuse the users or abuse the wiki, or
         just does not make sense.
 
         Restrict even more group pages, so they can be used inside acl lines.
-        
+
         @param name: page name, unicode
         @rtype: unicode
         @return: decoded and sanitized page name
@@ -973,7 +973,7 @@ class RequestBase(object):
                 page = u''.join([c for c in page
                                  if c.isalnum() or c.isspace()])
 
-            # Normalize white space. Each name can contain multiple 
+            # Normalize white space. Each name can contain multiple
             # words separated with only one space. Split handle all
             # 30 unicode spaces (isspace() == True)
             page = u' '.join(page.split())
@@ -1029,7 +1029,7 @@ class RequestBase(object):
         return forbidden
 
     def setup_args(self):
-        """ Return args dict 
+        """ Return args dict
         First, we parse the query string (usually this is used in GET methods,
         but TwikiDraw uses ?action=AttachFile&do=savedrawing plus posted stuff).
         Second, we update what we got in first step by the stuff we get from
@@ -1071,8 +1071,8 @@ class RequestBase(object):
         return self.decodeArgs(args)
 
     def decodeArgs(self, args):
-        """ Decode args dict 
-        
+        """ Decode args dict
+
         Decoding is done in a separate path because it is reused by
         other methods and sub classes.
         """
@@ -1279,7 +1279,7 @@ class RequestBase(object):
 
     def http_redirect(self, url):
         """ Redirect to a fully qualified, or server-rooted URL
-        
+
         @param url: relative or absolute url, ascii using url encoding.
         """
         url = self.getQualifiedURL(url)
@@ -1292,7 +1292,7 @@ class RequestBase(object):
             Encodes to ASCII if it gets unicode headers.
             Make sure we have exactly one Content-Type and one Status header.
             Make sure Status header string begins with a integer number.
-        
+
             For emitting, it calls the server specific _emit_http_headers
             method.
 
@@ -1349,7 +1349,7 @@ class RequestBase(object):
 
     def _emit_http_headers(self, headers):
         """ server specific method to emit http headers.
-        
+
             @param headers: a list of http header strings in this FIXED order:
                 1. status header (always present and valid, e.g. "200 OK")
                 2. content type header (always present)
@@ -1359,7 +1359,7 @@ class RequestBase(object):
 
     def setHttpHeader(self, header):
         """ Save header for later send.
-        
+
             Attention: although we use a list here, some implementations use a dict,
             thus multiple calls with the same header type do NOT work in the end!
         """
@@ -1368,14 +1368,14 @@ class RequestBase(object):
     def fail(self, err):
         """ Fail when we can't continue
 
-        Send 500 status code with the error name. Reference: 
+        Send 500 status code with the error name. Reference:
         http://www.w3.org/Protocols/rfc2616/rfc2616-sec6.html#sec6.1.1
 
-        Log the error, then let failure module handle it. 
+        Log the error, then let failure module handle it.
 
         @param err: Exception instance or subclass.
         """
-        self.failed = 1 # save state for self.run()            
+        self.failed = 1 # save state for self.run()
         # we should not generate the headers two times
         if not getattr(self, 'sent_headers', 0):
             self.emit_http_headers(['Status: 500 MoinMoin Internal Error'])
@@ -1450,7 +1450,7 @@ class RequestBase(object):
         share the same caching proxy.
 
         AVOID using no-cache and no-store for attachments as it is completely broken on IE!
-        
+
         Details: http://support.microsoft.com/support/kb/articles/Q234/0/67.ASP
         """
         if level <= self.http_caching_disabled:
@@ -1479,7 +1479,7 @@ class RequestBase(object):
 
     def finish(self):
         """ General cleanup on end of request
-        
+
         Delete circular references - all object that we create using self.name = class(self).
         This helps Python to collect these objects and keep our memory footprint lower.
         """

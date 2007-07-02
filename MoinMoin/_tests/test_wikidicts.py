@@ -59,7 +59,7 @@ Ignore previous line and this text.
     def testStripWhitespace(self):
         """ wikidicts: initFromText: strip whitespace around items """
         text = """
- *   take this  
+ *   take this
 """
         assert self.getMembers(text) == ['take this']
 
@@ -82,14 +82,14 @@ Text ignored
 
 Empty lines ignored, so is this text
 Next line has key with empty value
- Empty string:: 
+ Empty string::\x20
  Last:: last item
 '''
         d = wikidicts.Dict(self.request, '')
         d.initFromText(text)
         assert d['First'] == 'first item'
         assert d['text with spaces'] == 'second item'
-        assert d['Empty string'] == ''
+        assert d['Empty string'] == '' # XXX fails if trailing blank is missing
         assert d['Last'] == 'last item'
         assert len(d) == 4
 

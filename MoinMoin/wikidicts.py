@@ -59,7 +59,7 @@ class Dict(DictBase):
         key2:: value2 containing spaces
         ...
         keyn:: ....
-       any text ignored      
+       any text ignored
     """
     # Key:: Value - ignore all but key:: value pairs, strip whitespace
     regex = r'^ (?P<key>.+?):: (?P<val>.*?) *$'

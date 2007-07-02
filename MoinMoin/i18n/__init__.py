@@ -16,7 +16,7 @@
         browserLanguages() -- return the browser accepted languages
         getDirection(lang) -- return the lang direction either 'ltr' or 'rtl'
         getText(str, request) -- return str translation
-    
+
     TODO: as soon as we have some "farm / server plugin dir", extend this to
           load translations from there, too.
 
@@ -41,7 +41,7 @@ translations = {}
 
 def po_filename(request, language, domain):
     """ we use MoinMoin/i18n/<language>[.<domain>].mo as filename for the PO file.
-    
+
         TODO: later, when we have a farm scope plugin dir, we can also load
               language data from there.
     """
@@ -256,16 +256,16 @@ def getText(original, request, lang, formatted=True):
 
 
 def requestLanguage(request, try_user=True):
-    """ 
+    """
     Return the user interface language for this request.
-    
+
     The user interface language is taken from the user preferences for
     registered users, or request environment, or the default language of
     the wiki, or English.
 
     This should be called once per request, then you should get the value from
     request object lang attribute.
-    
+
     Unclear what this means: "Until the code for get
     text is fixed, we are caching the request language locally."
 
@@ -306,7 +306,7 @@ def wikiLanguages():
 def browserLanguages(request):
     """
     Return the accepted languages as set in the user browser.
-    
+
     Parse the HTTP headers and extract the accepted languages, according to:
     http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4
 

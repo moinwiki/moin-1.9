@@ -56,7 +56,7 @@ class Parser(XsltParser):
         self.db_xsl = os.path.join(docbook_html_directory, 'docbook.xsl')
         self.db_compiled_xsl = os.path.join(docbook_html_directory, 'db_compiled.dat')
 
-        self.wikiParser = WikiParser(raw = self.raw, request = self.request, pretty_url=1)
+        self.wikiParser = WikiParser(raw=self.raw, request=self.request, pretty_url=1)
         self.key = 'docbook'
 
     def format(self, formatter):
@@ -112,7 +112,7 @@ class Parser(XsltParser):
                     found = re.search('alt="(?P<alt>.*?)"', splitResult[index])
                     if found:
                         imageAlt = found.group('alt')
-                    splitResult[index] = self.wikiParser.attachment( ('attachment:' + imageSrc, "") )
+                    splitResult[index] = self.wikiParser.attachment(('attachment:' + imageSrc, ""))
                     if imageAlt: # restore alt
                         splitResult[index] = re.sub('alt=".*?"', 'alt="%s"' % imageAlt, splitResult[index])
 
@@ -165,7 +165,7 @@ def _compile_xsl(XSLT_FILE, XSLT_COMPILED_FILE):
     from Ft.Lib import Uri
 
     # New docbook processor
-    db_processor=Processor()
+    db_processor = Processor()
 
     # Docbook Stylesheet
     my_sheet_uri = Uri.OsPathToUri(XSLT_FILE, 1)

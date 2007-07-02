@@ -299,7 +299,7 @@ def execute(macro, args, **kw):
         hilite = line.ed_time_usecs > (bookmark_usecs or line.ed_time_usecs)
 
         if ((this_day != day or (not hilite and not max_days))) and len(pages) > 0:
-            # new day or bookmark reached: print out stuff 
+            # new day or bookmark reached: print out stuff
             this_day = day
             for p in pages:
                 ignore_pages[p] = None
@@ -340,7 +340,7 @@ def execute(macro, args, **kw):
             pages[line.pagename] = [line]
     else:
         if len(pages) > 0:
-            # end of loop reached: print out stuff 
+            # end of loop reached: print out stuff
             # XXX duplicated code from above
             # but above does not trigger if we have the first day in wiki history
             for p in pages:

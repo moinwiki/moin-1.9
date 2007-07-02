@@ -47,16 +47,16 @@ def parse_start_step(request, args):
     attrs, msg = wikiutil.parseAttributes(request, args)
     if not msg:
         try:
-            start = int(attrs.get('start','"1"')[1:-1])
+            start = int(attrs.get('start', '"1"')[1:-1])
         except ValueError:
             pass
         try:
-            step = int(attrs.get('step','"1"')[1:-1])
+            step = int(attrs.get('step', '"1"')[1:-1])
         except ValueError:
             pass
-        if attrs.get('numbers','"on"')[1:-1].lower() in ('off', 'false', 'no'):
+        if attrs.get('numbers', '"on"')[1:-1].lower() in ('off', 'false', 'no'):
             nums = 0
-        elif attrs.get('numbers','"on"')[1:-1].lower() in ('none', 'disable'):
+        elif attrs.get('numbers', '"on"')[1:-1].lower() in ('none', 'disable'):
             nums = -1
     return nums, start, step, attrs
 
@@ -64,7 +64,7 @@ class FormatTextBase:
     pass
 
 class FormatText(FormatTextBase):
-    
+
     def __init__(self, fmt):
         self.fmt = fmt
 
@@ -74,7 +74,7 @@ class FormatText(FormatTextBase):
                 formatter.code_token(0, self.fmt))
 
 class FormatTextID(FormatTextBase):
-    
+
     def __init__(self, fmt, icase=0):
         if not isinstance(fmt, FormatText):
             self.def_fmt = FormatText(fmt)
@@ -87,10 +87,10 @@ class FormatTextID(FormatTextBase):
         if self._ignore_case:
             word = word.lower()
         self.fmt[word] = fmt
-        
+
     def setDefaultFormat(self, fmt):
         self.def_fmt = fmt
-        
+
     def formatString(self, formatter, word):
         if self._ignore_case:
             sword = word.lower()
@@ -99,19 +99,19 @@ class FormatTextID(FormatTextBase):
         return self.fmt.get(sword, self.def_fmt).formatString(formatter, word)
 
 class FormattingRuleSingle:
-    
+
     def __init__(self, name, str_re, icase=0):
         self.name = name
         self.str_re = str_re
-        
+
     def getStartRe(self):
         return self.str_re
-    
+
     def getText(self, parser, hit):
         return hit
 
 class FormattingRulePair:
-    
+
     def __init__(self, name, str_begin, str_end, icase=0):
         self.name = name
         self.str_begin = str_begin
@@ -120,10 +120,10 @@ class FormattingRulePair:
             self.end_re = re.compile(str_end, re.M|re.I)
         else:
             self.end_re = re.compile(str_end, re.M)
-        
+
     def getStartRe(self):
         return self.str_begin
-    
+
     def getText(self, parser, hit):
         match = self.end_re.search(parser.line, parser.lastpos)
         if not match:
@@ -140,11 +140,11 @@ class FormattingRulePair:
 class ParserBase:
 
     parsername = 'ParserBase'
-    
+
     def __init__(self, raw, request, **kw):
         self.raw = raw
         self.request = request
-        self.show_nums, self.num_start, self.num_step, attrs = parse_start_step(request, kw.get('format_args',''))
+        self.show_nums, self.num_start, self.num_step, attrs = parse_start_step(request, kw.get('format_args', ''))
 
         self._ignore_case = 0
         self._formatting_rules = []
@@ -197,13 +197,13 @@ class ParserBase:
 
     def addConstant(self, words):
         self.addWords(words, self.constant_word_format)
-        
+
     def addRuleFormat(self, name, fmt=None):
         if fmt is None:
             fmt = FormatText(name)
         self.rule_fmt[name] = fmt
 
-    def format(self, formatter, form = None):
+    def format(self, formatter, form=None):
         """ Send the text.
         """
 
@@ -212,7 +212,7 @@ class ParserBase:
         l = []
         for n, f in self._formatting_rules:
             l.append("(?P<%s>%s)" % (n, f.getStartRe()))
-        
+
         if self._ignore_case:
             scan_re = re.compile("|".join(l), re.M|re.I)
         else:
@@ -226,7 +226,7 @@ class ParserBase:
 
         self.request.write(formatter.code_line(1))
             #formatter, len('%d' % (self.line_count,)))
-        
+
         match = scan_re.search(self.line)
 
         while match and self.lastpos < len(self.line):

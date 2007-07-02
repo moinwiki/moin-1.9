@@ -82,7 +82,7 @@ class Parser:
                 # setting up vars for xslt Processor
                 out_file = StringIO.StringIO()
                 wiki_resolver = MoinResolver(
-                                    handlers={self.base_scheme: self._resolve_page,},
+                                    handlers={self.base_scheme: self._resolve_page, },
                                     base_scheme=self.base_scheme)
                 input_factory = InputSource.InputSourceFactory(resolver=wiki_resolver)
 
