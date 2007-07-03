@@ -1,12 +1,10 @@
 """
-Verify that the MoinMoin source files
- * have no tabs,
- * end with \n,
- * have no crlf (Windows style) line endings,
- * have no trailing spaces at line endings.
+Verify that the MoinMoin source files conform (mostly) to PEP8 coding style.
 
-@copyright: 2006 by Armin Rigo,
-            2007 adapted and extended for MoinMoin by MoinMoin:ThomasWaldmann.
+Additionally, we check that the files have no crlf (Windows style) line endings.
+
+@copyright: 2006 by Armin Rigo (originally only testing for tab chars),
+            2007 adapted and extended (calling the PEP8 checker for most stuff) by MoinMoin:ThomasWaldmann.
 @license: MIT licensed
 """
 
