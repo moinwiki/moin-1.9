@@ -33,20 +33,19 @@ def pep8_error_count(path):
     error_count = pep8.Checker(path).check_all()
     return error_count
 
-def check_file(reldir, path):
-    if path.lower().endswith('.py'):
-        if TRAILING_SPACES == 'fix':
-            f = file(path, 'rb')
-            data = f.read()
-            f.close()
-            data = FIX_TS_RE.sub('', data)
-            f = file(path, 'wb')
-            f.write(data)
-            f.close()
-        # Please read and follow PEP8 - rerun this test until it does not fail any more,
-        # any type of error is only reported ONCE (even if there are multiple).
-        error_count = pep8_error_count(path)
-        assert error_count == 0
+def check_py_file(reldir, path):
+    if TRAILING_SPACES == 'fix':
+        f = file(path, 'rb')
+        data = f.read()
+        f.close()
+        data = FIX_TS_RE.sub('', data)
+        f = file(path, 'wb')
+        f.write(data)
+        f.close()
+    # Please read and follow PEP8 - rerun this test until it does not fail any more,
+    # any type of error is only reported ONCE (even if there are multiple).
+    error_count = pep8_error_count(path)
+    assert error_count == 0
 
 def test_sourcecode():
     def walk(reldir):
@@ -57,7 +56,8 @@ def test_sourcecode():
         else:
             path = ROOT
         if os.path.isfile(path):
-            yield check_file, reldir, path
+            if path.lower().endswith('.py'):
+                yield check_py_file, reldir, path
         elif os.path.isdir(path):
             for entry in os.listdir(path):
                 if not entry.startswith('.'):
