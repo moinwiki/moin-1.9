@@ -54,7 +54,7 @@ def handle_jid_changed(event):
         if isinstance(event, ev.JabberIDSetEvent):
             server.addJIDToRoster(request.cfg.secret, event.jid)
         else:
-            server.removeJIDFromRoster(request.cfg.secret, event.jid)        
+            server.removeJIDFromRoster(request.cfg.secret, event.jid)
 
     except xmlrpclib.Error, err:
         ev.logger.error(_("XML RPC error: %s"), str(err))
@@ -100,7 +100,7 @@ def handle_page_changed(event):
     request = event.request
     page = event.page
 
-    subscribers = page.getSubscribers(request, return_users=1, trivial=event.trivial)    
+    subscribers = page.getSubscribers(request, return_users=1, trivial=event.trivial)
     _filter_subscriber_list(event, subscribers)
     return page_change("page_changed", request, page, subscribers, \
                        revisions=page.getRevList(), comment=event.comment)

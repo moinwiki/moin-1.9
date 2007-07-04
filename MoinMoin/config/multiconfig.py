@@ -695,7 +695,7 @@ reStructuredText Quick Reference
             self.notification_server = Server(self.notification_bot_uri, )
 
             # Add checkbox fields that allow user to select means of notification
-            self.user_checkbox_fields.extend([ 
+            self.user_checkbox_fields.extend([
                   ('notify_by_email', lambda _: _('Notify me about changes via email')),
                   ('notify_by_jabber', lambda _: _('Notify me about changes via jabber')),
                   ])
@@ -741,7 +741,7 @@ reStructuredText Quick Reference
         return property(getter)
     iwid = make_iwid_property("_iwid")
     iwid_full = make_iwid_property("_iwid_full")
-    
+
     # lazily load a list of events a user can subscribe to
     def make_subscribable_events_prop():
         def getter(self):
