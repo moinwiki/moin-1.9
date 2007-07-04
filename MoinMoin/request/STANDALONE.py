@@ -35,14 +35,14 @@ class Request(RequestBase):
             self.if_modified_since = sa.headers.getheader('if-modified-since')
             self.if_none_match = sa.headers.getheader('if-none-match')
 
-            # Copy rest from standalone request   
+            # Copy rest from standalone request
             self.server_name = sa.server.server_name
             self.server_port = str(sa.server.server_port)
             self.request_method = sa.command
             self.request_uri = sa.path
             self.remote_addr = sa.client_address[0]
 
-            # Values that need more work                        
+            # Values that need more work
             self.path_info, self.query_string = self.splitURI(sa.path)
             self.setHttpReferer(sa.headers.getheader('referer'))
             self.setHost(sa.headers.getheader('host'))
@@ -62,9 +62,9 @@ class Request(RequestBase):
 
     def read(self, n=None):
         """ Read from input stream
-        
+
         Since self.rfile.read() will block, content-length will be used instead.
-        
+
         TODO: test with n > content length, or when calling several times
         with smaller n but total over content length.
         """

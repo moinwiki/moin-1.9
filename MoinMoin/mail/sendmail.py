@@ -14,11 +14,11 @@ _transdict = {"AT": "@", "DOT": ".", "DASH": "-"}
 
 
 def encodeAddress(address, charset):
-    """ Encode email address to enable non ascii names 
-    
+    """ Encode email address to enable non ascii names
+
     e.g. '"Jürgen Hermann" <jh@web.de>'. According to the RFC, the name
     part should be encoded, the address should not.
-    
+
     @param address: email address, posibly using '"name" <address>' format
     @type address: unicode
     @param charset: sepcifying both the charset and the encoding, e.g
@@ -40,9 +40,9 @@ def encodeAddress(address, charset):
 
 def sendmail(request, to, subject, text, **kw):
     """ Create and send a text/plain message
-        
+
     Return a tuple of success or error indicator and message.
-    
+
     @param request: the request object
     @param to: recipients (list)
     @param subject: subject of email (unicode)
@@ -148,7 +148,7 @@ def decodeSpamSafeEmail(address):
 
     Decode a spam-safe email address in `address` by applying the
     following rules:
-    
+
     Known all-uppercase words and their translation:
         "DOT"   -> "."
         "AT"    -> "@"
@@ -158,7 +158,7 @@ def decodeSpamSafeEmail(address):
     Use that to make it even harder for spam bots!
 
     Blanks (spaces) simply get stripped.
-    
+
     @param address: obfuscated email address string
     @rtype: string
     @return: decoded email address

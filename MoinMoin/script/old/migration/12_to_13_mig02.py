@@ -3,7 +3,7 @@
     migration from moin 1.3 < patch-78 to moin 1.3 >= patch-78
     * switch quoting mechanism from (xx)(xx) to (xxxx)
     * charset isn't changed, it was utf-8 before and will be utf-8 after
-    
+
     Steps for a successful migration:
         1. stop your wiki and make a backup
         2. make a copy of the wiki's "data" directory to your working dir
@@ -41,7 +41,7 @@ from MoinMoin import wikiutil
 from MoinMoin.script.migration.migutil import opj, listdir, copy_file, copy_dir
 
 # this is a copy of the wikiutil.unquoteWikiname of moin--main--1.3--patch-77
-def unquoteWikinameOld(filename, charsets=[from_encoding,]):
+def unquoteWikinameOld(filename, charsets=[from_encoding, ]):
     """
     Return decoded original filename when given an encoded filename.
     @param filename: encoded filename
@@ -60,11 +60,11 @@ def unquoteWikinameOld(filename, charsets=[from_encoding,]):
             close = filename[i+3]
             if close != ')':
                 raise Exception('filename encoding invalid')
-            i+=4
-            fn = fn + chr( 16 * int(c1,16) + int(c2, 16) )
+            i += 4
+            fn = fn + chr(16 * int(c1, 16) + int(c2, 16))
         else:
             fn = fn + c
-            i+=1
+            i += 1
     return wikiutil.decodeUserInput(fn, charsets)
 
 
@@ -73,13 +73,13 @@ def convert_string(str, enc_from, enc_to):
 
 
 def qf_convert_string(str, enc_from, enc_to):
-    """ Convert filename from pre patch 78 quoting to new quoting 
-    
-    The old quoting function from patch 77 can convert name ONLY from 
-    the old way to the new, so if you have a partially converted 
-    directory, as it the situation as of moin--main--1.3--patch-86, 
+    """ Convert filename from pre patch 78 quoting to new quoting
+
+    The old quoting function from patch 77 can convert name ONLY from
+    the old way to the new, so if you have a partially converted
+    directory, as it the situation as of moin--main--1.3--patch-86,
     it does not work.
-    
+
     The new unquoting function is backward compatible, and can unquote
     both post and pre patch 78 file names.
     """
@@ -96,8 +96,8 @@ def convert_file(fname_from, fname_to, enc_from, enc_to):
         file_to.write(convert_string(line, enc_from, enc_to))
     file_to.close()
     file_from.close()
-    st=os.stat(fname_from)
-    os.utime(fname_to, (st.st_atime,st.st_mtime))
+    st = os.stat(fname_from)
+    os.utime(fname_to, (st.st_atime, st.st_mtime))
 
 
 def convert_textdir(dir_from, dir_to, enc_from, enc_to, is_backupdir=0):

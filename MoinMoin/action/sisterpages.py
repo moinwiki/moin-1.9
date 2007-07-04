@@ -5,7 +5,7 @@
     This action generates a list of page urls and page names, so that other wikis
     can implement SisterWiki functionality easily.
     See: http://usemod.com/cgi-bin/mb.pl?SisterSitesImplementationGuide
-    
+
     @copyright: 2007 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """

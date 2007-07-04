@@ -1,7 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - SecurityPolicy implementing auto admin rights for some users and some groups.
-    
+
     AutoAdminGroup page contains users which automatically get admin rights
     on their homepage and subpages of it. E.g. if ThomasWaldmann is in
     AutoAdminGroup (or in a group contained in AutoAdminGroup), he gets
@@ -12,7 +12,7 @@
     E.g. if SomeProject/AdminGroup is in AutoAdminGroup and ThomasWaldmann is
     in SomeProject/AdminGroup, then ThomasWaldmann gets admin rights on pages
     SomeProject and SomeProject/*.
-    
+
     Further, it can autocreate the UserName/XxxxGroup (see grouppages var) when
     a user save his homepage. Alternatively, this could be also done manually by
     the user using *Template pages.
@@ -35,7 +35,7 @@
      * see if there is a HomepageTemplate with a prepared ACL line and some
        other magic already on it. It is a good idea to have your homepage
        read- and writeable for everybody as a means of open communication.
-       
+
      * For creating personal (or private) subpages of your homepage, use the
        ReadWritePageTemplate, ReadPageTemplate or PrivatePageTemplate.
        They usually have some prepared ACL line on them, e.g.:
@@ -45,7 +45,7 @@
        YourName/ReadGroup) for allowing read/write or read-only access to
        Now you only have to maintain 2 subpages (maybe they even have been
        auto- created for you)
-     
+
     Usage (for project people):
      * see if there is some <ProjectName>Template with a prepared ACL line for
        your project pages and use it for creating new subpages.

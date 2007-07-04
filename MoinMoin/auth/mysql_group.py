@@ -12,7 +12,7 @@ from MoinMoin.auth import BaseAuth, CancelLogin, ContinueLogin
 
 class MysqlGroupAuth(BaseAuth):
     """ Authorize via MySQL group DB.
-    
+
     We require an already-authenticated user_obj and
     check that the user is part of an authorized group.
     """

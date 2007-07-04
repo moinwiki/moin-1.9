@@ -55,7 +55,7 @@ class TestLoginWithPassword(unittest.TestCase):
 
     def tearDown(self):
         """ Run after each test
-        
+
         Remove user and reset user listing cache.
         """
         # Remove user file and user
@@ -88,7 +88,7 @@ class TestLoginWithPassword(unittest.TestCase):
         password = name
         self.createUser(name, password)
 
-        # Try to "login"           
+        # Try to "login"
         theUser = user.User(self.request, name=name, password=password)
         self.failUnless(theUser.valid, "Can't login with ascii password")
 
@@ -105,9 +105,9 @@ class TestLoginWithPassword(unittest.TestCase):
 
     def testOldNonAsciiPassword(self):
         """ user: login with non-ascii password in pre 1.3 user file
-        
-        When trying to login with an old non-ascii password in the user 
-        file, utf-8 encoded password will not match. In this case, try 
+
+        When trying to login with an old non-ascii password in the user
+        file, utf-8 encoded password will not match. In this case, try
         all other encoding available on pre 1.3 before failing.
         """
         # Create test user
@@ -117,14 +117,14 @@ class TestLoginWithPassword(unittest.TestCase):
         password = name
         self.createUser(name, password, charset='iso-8859-1')
 
-        # Try to "login"           
+        # Try to "login"
         theUser = user.User(self.request, name=name, password=password)
         self.failUnless(theUser.valid, "Can't login with old unicode password")
 
     def testReplaceOldNonAsciiPassword(self):
         """ user: login replace old non-ascii password in pre 1.3 user file
-        
-        When trying to login with an old non-ascii password in the user 
+
+        When trying to login with an old non-ascii password in the user
         file, the password hash should be replaced with new utf-8 hash.
         """
         # Create test user
@@ -133,7 +133,7 @@ class TestLoginWithPassword(unittest.TestCase):
         name = u'__Jürgen Herman__'
         password = name
         self.createUser(name, password, charset='iso-8859-1')
-        # Login - this should replace the old password in the user file         
+        # Login - this should replace the old password in the user file
         theUser = user.User(self.request, name=name, password=password)
         # Login again - the password should be new unicode password
         expected = user.encodePassword(password)
@@ -173,8 +173,8 @@ class TestLoginWithPassword(unittest.TestCase):
     # Helpers ---------------------------------------------------------
 
     def createUser(self, name, password, charset='utf-8'):
-        """ helper to create test user 
-        
+        """ helper to create test user
+
         charset is used to create user with pre 1.3 password hash
         """
         # Hack self.request form to contain the password

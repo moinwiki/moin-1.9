@@ -1,7 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - User Accounts
-    
+
     This module contains functions to access user accounts (list all users, get
     some specific user). User instances are used to access the user profile of
     some specific user (name, password, email, bookmark, trail, settings, ...).
@@ -52,7 +52,7 @@ def get_by_email_address(request, email_address):
     """ Searches for an user with a particular e-mail address and returns it. """
     filter_func = lambda user: user.valid and user.email.lower() == email_address.lower()
     return get_by_filter(request, filter_func)
-        
+
 def get_by_jabber_id(request, jabber_id):
     """ Searches for an user with a perticular jabber id and returns it. """
     filter_func = lambda user: user.valid and user.jid.lower() == jabber_id.lower()
@@ -111,7 +111,7 @@ def getUserId(request, searchName):
 
 def getUserIdentification(request, username=None):
     """ Return user name or IP or '<unknown>' indicator.
-    
+
     @param request: the request object
     @param username: (optional) user name
     @rtype: string
@@ -162,7 +162,7 @@ def normalizeName(name):
     in user names.
 
     Prevent using ':' and ',' which are reserved by acl.
-    
+
     @param name: user name, unicode
     @rtype: unicode
     @return: user name that can be used in acl lines
@@ -173,7 +173,7 @@ def normalizeName(name):
     # Strip non alpha numeric characters (except username_allowedchars), keep white space
     name = ''.join([c for c in name if c.isalnum() or c.isspace() or c in username_allowedchars])
 
-    # Normalize white space. Each name can contain multiple 
+    # Normalize white space. Each name can contain multiple
     # words separated with only one space.
     name = ' '.join(name.split())
 
@@ -193,7 +193,7 @@ def encodeList(items):
     """ Encode list of items in user data file
 
     Items are separated by '\t' characters.
-    
+
     @param items: list unicode strings
     @rtype: unicode
     @return: list encoded as unicode
@@ -210,7 +210,7 @@ def encodeList(items):
 
 def decodeList(line):
     """ Decode list of items from user data file
-    
+
     @param line: line containing list of items, encoded with encodeList
     @rtype: list of unicode strings
     @return: list of items in encoded in line
@@ -228,7 +228,7 @@ def encodeDict(items):
 
     Items are separated by '\t' characters.
     Each item is key:value.
-    
+
     @param items: dict of unicode:unicode
     @rtype: unicode
     @return: dict encoded as unicode
@@ -242,7 +242,7 @@ def encodeDict(items):
 
 def decodeDict(line):
     """ Decode dict of key:value pairs from user data file
-    
+
     @param line: line containing a dict, encoded with encodeDict
     @rtype: dict
     @return: dict  unicode:unicode items
@@ -251,7 +251,7 @@ def decodeDict(line):
     for item in line.split('\t'):
         item = item.strip()
         if not item:
-            continue        
+            continue
         key, value = item.split(':', 1)
         items[key] = value
     return items
@@ -262,7 +262,7 @@ class User:
 
     def __init__(self, request, id=None, name="", password=None, auth_username="", **kw):
         """ Initialize User object
-        
+
         TODO: when this gets refactored, use "uid" not builtin "id"
 
         @param request: the request object
@@ -378,7 +378,7 @@ class User:
 
     def __filename(self):
         """ Get filename of the user's file on disk
-        
+
         @rtype: string
         @return: full path and filename of user account file
         """
@@ -386,7 +386,7 @@ class User:
 
     def exists(self):
         """ Do we have a user account for this user?
-        
+
         @rtype: bool
         @return: true, if we have a user account
         """
@@ -399,7 +399,7 @@ class User:
 
         This loads all member variables, except "id" and "valid" and
         those starting with an underscore.
-        
+
         @param check_pass: If 1, then self.enc_password must match the
                            password in the user account file.
         """
@@ -606,7 +606,7 @@ class User:
 
     def getTime(self, tm):
         """ Get time in user's timezone.
-        
+
         @param tm: time (UTC UNIX timestamp)
         @rtype: int
         @return: tm tuple adjusted for user's timezone
@@ -640,7 +640,7 @@ class User:
 
     def setBookmark(self, tm):
         """ Set bookmark timestamp.
-        
+
         @param tm: timestamp
         """
         if self.valid:
@@ -651,7 +651,7 @@ class User:
 
     def getBookmark(self):
         """ Get bookmark timestamp.
-        
+
         @rtype: int
         @return: bookmark timestamp or None
         """
@@ -685,7 +685,7 @@ class User:
 
     def getSubscriptionList(self):
         """ Get list of pages this user has subscribed to
-        
+
         @rtype: list
         @return: pages this user has subscribed to
         """
@@ -693,13 +693,13 @@ class User:
 
     def isSubscribedTo(self, pagelist):
         """ Check if user subscription matches any page in pagelist.
-        
+
         The subscription list may contain page names or interwiki page
         names. e.g 'Page Name' or 'WikiName:Page_Name'
-        
+
         TODO: check if it's fast enough when getting called for many
               users from page.getSubscribersList()
-        
+
         @param pagelist: list of pages to check for subscription
         @rtype: bool
         @return: if user is subscribed any page in pagelist
@@ -746,7 +746,7 @@ class User:
         if pagename not in self.subscribed_pages:
             self.subscribed_pages.append(pagename)
             self.save()
-            
+
             # Send a notification
             from MoinMoin.events import SubscribedToPageEvent, send_event
             e = SubscribedToPageEvent(self._request, pagename, self.name)
@@ -801,7 +801,7 @@ class User:
 
     def isQuickLinkedTo(self, pagelist):
         """ Check if user quicklink matches any page in pagelist.
-        
+
         @param pagelist: list of pages to check for quicklinks
         @rtype: bool
         @return: if user has quicklinked any page in pagelist
@@ -819,8 +819,8 @@ class User:
         return False
 
     def addQuicklink(self, pagename):
-        """ Adds a page to the user quicklinks 
-        
+        """ Adds a page to the user quicklinks
+
         If the wiki has an interwiki name, all links are saved as
         interwiki names. If not, as simple page name.
 
@@ -848,10 +848,10 @@ class User:
         return changed
 
     def removeQuicklink(self, pagename):
-        """ Remove a page from user quicklinks 
-        
+        """ Remove a page from user quicklinks
+
         Remove both interwiki and simple name from quicklinks.
-        
+
         @param pagename: page name
         @type pagename: unicode
         @rtype: bool
@@ -871,7 +871,7 @@ class User:
         return changed
 
     def _interWikiName(self, pagename):
-        """ Return the inter wiki name of a page name 
+        """ Return the inter wiki name of a page name
 
         @param pagename: page name
         @type pagename: unicode
@@ -886,7 +886,7 @@ class User:
 
     def addTrail(self, page):
         """ Add page to trail.
-        
+
         @param page: the page (object) to add to the trail
         """
         if not self.valid or self.show_page_trail or self.remember_last_visit:
@@ -921,7 +921,7 @@ class User:
 
     def getTrail(self):
         """ Return list of recently visited pages.
-        
+
         @rtype: list
         @return: pages in trail
         """
@@ -973,10 +973,10 @@ class User:
 
     def signature(self):
         """ Return user signature using wiki markup
-        
+
         Users sign with a link to their homepage.
         Visitors return their host address.
-        
+
         TODO: The signature use wiki format only, for example, it will
         not create a link when using rst format. It will also break if
         we change wiki syntax.

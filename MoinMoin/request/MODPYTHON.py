@@ -41,11 +41,11 @@ class Request(RequestBase):
     def fixURI(self, env):
         """ Fix problems with script_name and path_info using
         PythonOption directive to rewrite URI.
-        
+
         This is needed when using Apache 1 or other server which does
         not support adding custom headers per request. With mod_python we
         can use the PythonOption directive:
-        
+
             <Location /url/to/mywiki/>
                 PythonOption X-Moin-Location /url/to/mywiki/
             </location>
@@ -54,7 +54,7 @@ class Request(RequestBase):
         when Moin is invoked as a mod_python handler with apache1, so we
         must build both using request_uri and the provided PythonOption.
         """
-        # Be compatible with release 1.3.5 "Location" option 
+        # Be compatible with release 1.3.5 "Location" option
         # TODO: Remove in later release, we should have one option only.
         old_location = 'Location'
         options_table = self.mpyreq.get_options()
@@ -75,8 +75,8 @@ class Request(RequestBase):
         RequestBase.fixURI(self, env)
 
     def _setup_args_from_cgi_form(self):
-        """ Override to use mod_python.util.FieldStorage 
-        
+        """ Override to use mod_python.util.FieldStorage
+
         It's little different from cgi.FieldStorage, so we need to
         duplicate the conversion code.
         """

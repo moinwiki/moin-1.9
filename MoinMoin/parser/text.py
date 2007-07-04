@@ -21,7 +21,7 @@ class Parser:
     ## which is used as fallback
     extensions = '*'
     Dependencies = []
-    
+
     def __init__(self, raw, request, **kw):
         self.raw = raw
         self.request = request

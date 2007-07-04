@@ -141,10 +141,10 @@ class ScriptEngine:
                     os.chmod(target, config.umask )
                     action = 'ATTNEW'
                     edit_logfile_append(self, pagename, path, rev, action, logname='edit-log',
-                                       comment=u'%(filename)s' % {"filename":filename}, author=author)
+                                       comment=u'%(filename)s' % {"filename": filename}, author=author)
                 self.msg += u"%(filename)s attached \n" % {"filename": filename}
             else:
-                self.msg += u"%(filename)s not attached \n" % {"filename":filename}
+                self.msg += u"%(filename)s not attached \n" % {"filename": filename}
         else:
             self.msg += u"action add attachment: not enough rights - nothing done \n"
 
@@ -168,10 +168,10 @@ class ScriptEngine:
                 os.remove(target)
                 action = 'ATTDEL'
                 edit_logfile_append(self, pagename, path, rev, action, logname='edit-log',
-                                    comment=u'%(filename)s' % {"filename":filename}, author=author)
-                self.msg += u"%(filename)s removed \n" % {"filename":filename}
+                                    comment=u'%(filename)s' % {"filename": filename}, author=author)
+                self.msg += u"%(filename)s removed \n" % {"filename": filename}
             else:
-                self.msg += u"%(filename)s not exists \n" % {"filename":filename}
+                self.msg += u"%(filename)s not exists \n" % {"filename": filename}
         else:
             self.msg += u"action delete attachment: not enough rights - nothing done \n"
 

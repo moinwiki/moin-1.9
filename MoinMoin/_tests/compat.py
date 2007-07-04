@@ -9,8 +9,8 @@ class TestCaseUnit(py.test.collect.Function):
         honouring setUp and tearDown semantics.
     """
     def execute(self, session):
-        boundmethod = self.obj 
-        instance = boundmethod.im_self 
+        boundmethod = self.obj
+        instance = boundmethod.im_self
         instance.setUp()
         try:
             boundmethod()

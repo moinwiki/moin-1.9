@@ -13,7 +13,7 @@ It does NOT handle:
     * attachments
     * user account data
     * MoinMoin code or config running the wiki
-    
+
 So this is definitely NOT a complete backup.
 
 GPL software, 2003-08-10 Thomas Waldmann
@@ -29,14 +29,14 @@ def run():
     #srcwiki = xmlrpclib.ServerProxy("http://devel.linuxwiki.org/moin--cvs/__xmlrpc/?action=xmlrpc2", transport=srctrans)
     srcwiki = xmlrpclib.ServerProxy("http://devel.linuxwiki.org/moin--cvs/?action=xmlrpc2")
 
-    backup={}
+    backup = {}
     allpages = srcwiki.getAllPages()
     for pagename in allpages:
         pagedata = srcwiki.getPage(pagename)
         print "Got %s." % pagename
-        backup[pagename]=pagedata
+        backup[pagename] = pagedata
 
-    backupfile = open("wikibackup.pickle","w")
+    backupfile = open("wikibackup.pickle", "w")
     pickle.dump(backup, backupfile, PICKLE_PROTOCOL)
     backupfile.close()
 

@@ -20,24 +20,23 @@ class ConfigurationError(Exception):
 
 class XMLRPCClient(Thread):
     """XMLRPC Client
-    
+
     It's responsible for performing XMLRPC operations on
     a wiki, as inctructed by command objects received from
     the XMPP component"""
-    
+
     def __init__(self, config, commands_in, commands_out):
         """
         @param commands: an output command queue
         """
         Thread.__init__(self)
         self.log = logging.getLogger("log")
-        
+
         if not config.secret:
             error = "You must set a (long) secret string!"
             self.log.critical(error)
             raise ConfigurationError(error)
-        
-        
+
         self.commands_in = commands_in
         self.commands_out = commands_out
         self.config = config

@@ -29,15 +29,15 @@ class Event(object):
     def __init__(self, request):
         self.request = request
 
-        
+
 class PageEvent(Event):
     """An event related to a page change"""
     def __init__(self, request):
         Event.__init__(self, request)
 
-        
+
 class PageChangedEvent(PageEvent):
-    
+
     description = u"""Page has been modified (edit, creation, deletion)"""
     req_superuser = False
     

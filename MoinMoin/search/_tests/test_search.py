@@ -11,10 +11,10 @@ from MoinMoin import search
 
 
 class TestQuotingBug(unittest.TestCase):
-    """search: quoting bug tests 
-    
+    """search: quoting bug tests
+
     http://moinmoin.wikiwikiweb.de/MoinMoinBugs/SearchOneCharString
-    
+
     This is only a little stupid test for the isQuoted method, because
     testing parsed queries is much more work.
     """

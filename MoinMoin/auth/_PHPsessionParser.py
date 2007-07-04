@@ -138,7 +138,8 @@ if __name__ == '__main__':
 
     #print s
     p_s = loadSession("...")
-    import pprint; pprint.pprint(p_s)
+    import pprint
+    pprint.pprint(p_s)
     print time.clock() - a
     print listSessions()
 

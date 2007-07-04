@@ -26,10 +26,10 @@ _config_cache = {}
 
 def _importConfigModule(name):
     """ Import and return configuration module and its modification time
-    
+
     Handle all errors except ImportError, because missing file is not
     always an error.
-    
+
     @param name: module name
     @rtype: tuple
     @return: module, modification time
@@ -90,7 +90,7 @@ use wikiconfig.py.
 
 
 def _makeConfig(name):
-    """ Create and return a config instance 
+    """ Create and return a config instance
 
     Timestamp config with either module mtime or farmconfig mtime. This
     mtime can be used later to invalidate older caches.
@@ -263,11 +263,11 @@ class DefaultConfig:
     default_markup = 'wiki'
     docbook_html_dir = r"/usr/share/xml/docbook/stylesheet/nwalsh/html/" # correct for debian sarge
 
-    edit_bar = ['Edit', 'Comments', 'Discussion', 'Info', 'Subscribe', 'Quicklink', 'Attachments', 'ActionsMenu'] 
+    edit_bar = ['Edit', 'Comments', 'Discussion', 'Info', 'Subscribe', 'Quicklink', 'Attachments', 'ActionsMenu']
     editor_default = 'text' # which editor is called when nothing is specified
     editor_ui = 'freechoice' # which editor links are shown on user interface
     editor_force = False
-    editor_quickhelp = {# editor markup hints quickhelp 
+    editor_quickhelp = {# editor markup hints quickhelp
         'wiki': _("""\
  Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim(''')]]'''bold'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''bold italics'''''[[Verbatim(''''')]]; [[Verbatim('')]]''mixed ''[[Verbatim(''')]]'''''bold'''[[Verbatim(''')]] and italics''[[Verbatim('')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
@@ -283,15 +283,15 @@ Emphasis: <i>*italic*</i> <b>**bold**</b> ``monospace``<br/>
 Headings: Heading 1  Heading 2  Heading 3
           =========  ---------  ~~~~~~~~~
 
-Horizontal rule: ---- 
-Links: TrailingUnderscore_ `multi word with backticks`_ external_ 
+Horizontal rule: ----
+Links: TrailingUnderscore_ `multi word with backticks`_ external_
 
 .. _external: http://external-site.net/foo/
 
 Lists: * bullets; 1., a. numbered items.
 </pre>
 <br/>
-(!) For more help, see the 
+(!) For more help, see the
 <a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
 reStructuredText Quick Reference
 </a>.
@@ -348,7 +348,7 @@ reStructuredText Quick Reference
 
     # some dangerous mimetypes (we don't use "content-disposition: inline" for them when a user
     # downloads such attachments, because the browser might execute e.g. Javascript contained
-    # in the HTML and steal your moin cookie or do other nasty stuff) 
+    # in the HTML and steal your moin cookie or do other nasty stuff)
     mimetypes_xss_protect = [
         'text/html',
         'application/x-shockwave-flash',
@@ -677,25 +677,25 @@ reStructuredText Quick Reference
 
         # check if mail is possible and set flag:
         self.mail_enabled = (self.mail_smarthost is not None or self.mail_sendmail is not None) and self.mail_from
-        
+
         # check if jabber bot is available and set flag:
         self.jabber_enabled = self.notification_bot_uri is not None
-        
+
         # if we are to use the jabber bot, instantiate a server object for future use
         if self.jabber_enabled:
-            
+
             errmsg = "You must set a (long) secret string to send notifications!"
             try:
                 if not self.secret:
                     raise error.ConfigurationError(errmsg)
             except AttributeError, err:
                     raise error.ConfigurationError(errmsg)
-            
+
             from xmlrpclib import Server
             self.notification_server = Server(self.notification_bot_uri, )
-            
+
             # Add checkbox fields that allow user to select means of notification
-            self.user_checkbox_fields.extend([            
+            self.user_checkbox_fields.extend([ 
                   ('notify_by_email', lambda _: _('Notify me about changes via email')),
                   ('notify_by_jabber', lambda _: _('Notify me about changes via jabber')),
                   ])
@@ -703,7 +703,6 @@ reStructuredText Quick Reference
             new_defaults = {'notify_by_email': 1, 'notify_by_jabber': 0}
             self.user_checkbox_defaults.update(new_defaults)
 
-            
         # Cache variables for the properties below
         self._iwid = self._iwid_full = self._meta_dict = None
 
@@ -720,7 +719,7 @@ reStructuredText Quick Reference
 
         if self.url_prefix_local is None:
             self.url_prefix_local = self.url_prefix_static
-            
+
         # Register a list of available event handlers - this has to stay at the
         # end, because loading plugins depends on having a config object
         self.event_handlers = events.get_handlers(self)
@@ -774,7 +773,7 @@ reStructuredText Quick Reference
 
     def _config_check(self):
         """ Check namespace and warn about unknown names
-        
+
         Warn about names which are not used by DefaultConfig, except
         modules, classes, _private or __magic__ names.
 
@@ -796,13 +795,13 @@ configuration for typos before requesting support or reporting a bug.
 
     def _decode(self):
         """ Try to decode certain names, ignore unicode values
-        
-        Try to decode str using utf-8. If the decode fail, raise FatalError. 
+
+        Try to decode str using utf-8. If the decode fail, raise FatalError.
 
         Certain config variables should contain unicode values, and
         should be defined with u'text' syntax. Python decode these if
         the file have a 'coding' line.
-        
+
         This will allow utf-8 users to use simple strings using, without
         using u'string'. Other users will have to use u'string' for
         these names, because we don't know what is the charset of the
@@ -898,7 +897,7 @@ also the spelling of the directory name.
                     plugin_parent_dir = os.path.abspath(os.path.join(self.plugin_dir, '..'))
                     fp, path, info = imp.find_module('plugin', [plugin_parent_dir])
                     try:
-                        # Load the module and set in sys.modules             
+                        # Load the module and set in sys.modules
                         module = imp.load_module(name, fp, path, info)
                         sys.modules[self.siteid].plugin = module
                     finally:
@@ -935,6 +934,6 @@ that the data/plugin directory has an __init__.py file.
         """ Make it possible to access a config object like a dict """
         return getattr(self, item)
 
-# remove the gettext pseudo function 
+# remove the gettext pseudo function
 del _
 

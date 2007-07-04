@@ -7,7 +7,7 @@
         http://purl.net/wiki/moinmaster/HelpOnMacros/Include
 
     for detailed docs.
-    
+
     @copyright: 2000-2004 Juergen Hermann <jh@web.de>,
                 2000-2001 Richard Jones <richard@bizarsoftware.com.au>
     @license: GNU GPL, see COPYING for details.
@@ -60,7 +60,7 @@ def execute(macro, text, args_re=re.compile(_args_re_pattern), title_re=re.compi
     # parse and check arguments
     args = text and args_re.match(text)
     if not args:
-        return (_sysmsg % ('error', _('Invalid include arguments "%s"!')) % (text,))
+        return (_sysmsg % ('error', _('Invalid include arguments "%s"!')) % (text, ))
 
     # prepare including page
     result = []
@@ -101,7 +101,7 @@ def execute(macro, text, args_re=re.compile(_args_re_pattern), title_re=re.compi
         if not request.user.may.read(inc_name):
             continue
         if inc_name in this_page._macroInclude_pagelist:
-            result.append(u'<p><strong class="error">Recursive include of "%s" forbidden</strong></p>' % (inc_name,))
+            result.append(u'<p><strong class="error">Recursive include of "%s" forbidden</strong></p>' % (inc_name, ))
             continue
         if skipitems:
             skipitems -= 1
@@ -231,8 +231,8 @@ def execute(macro, text, args_re=re.compile(_args_re_pattern), title_re=re.compi
         if editlink and not (level or print_mode):
             result.extend([
                 macro.formatter.div(1, css_class="include-link"),
-                inc_page.link_to(request, '[%s]' % (inc_name,), css_class="include-page-link"),
-                inc_page.link_to(request, '[%s]' % (_('edit'),), css_class="include-edit-link", querystr={'action': 'edit', 'backto': request._Include_backto}),
+                inc_page.link_to(request, '[%s]' % (inc_name, ), css_class="include-page-link"),
+                inc_page.link_to(request, '[%s]' % (_('edit'), ), css_class="include-edit-link", querystr={'action': 'edit', 'backto': request._Include_backto}),
                 macro.formatter.div(0),
             ])
         # XXX page.link_to is wrong now, it escapes the edit_icon html as it escapes normal text

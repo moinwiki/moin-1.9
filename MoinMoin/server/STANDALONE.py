@@ -8,18 +8,18 @@
     It is not well tested in public wikis with heavy load. In these case
     you might want to use twisted, fast cgi or mod python, or if you
     can't use those, cgi.
-        
+
     Minimal usage:
 
         from MoinMoin.server.STANDALONE import StandaloneConfig, run
-        
+
         class Config(StandaloneConfig):
             docs = '/usr/share/moin/wiki/htdocs'
             user = 'www-data'
             group = 'www-data'
-            
+
         run(Config)
-        
+
     See more options in StandaloneConfig class.
 
     For security, the server will not run as root. If you try to run it
@@ -49,7 +49,7 @@ config = None
 
 class SimpleServer(BaseHTTPServer.HTTPServer):
     """ Simplest server, serving one request after another
-    
+
     This server is good for personal wiki, or when lowest memory
     footprint is needed.
     """
@@ -96,11 +96,11 @@ class SimpleServer(BaseHTTPServer.HTTPServer):
 
 
 class ThreadingServer(SimpleServer):
-    """ Serve each request in a new thread 
-    
+    """ Serve each request in a new thread
+
     This server is used since release 1.3 and seems to work nice with
     little load.
-    
+
     From release 1.3.5 there is a thread limit, that should help to
     limit the load on the server.
     """
@@ -114,7 +114,7 @@ class ThreadingServer(SimpleServer):
 
     def process_request(self, request, client_address):
         """ Start a new thread to process the request
-        
+
         If the thread limit has been reached, wait on the lock. The
         next thread will notify when finished.
         """
@@ -132,8 +132,8 @@ class ThreadingServer(SimpleServer):
             self.lock.release()
 
     def process_request_thread(self, request, client_address):
-        """ Called for each request on a new thread 
-        
+        """ Called for each request on a new thread
+
         Notify the main thread on the end of each request.
         """
         try:
@@ -150,7 +150,7 @@ class ThreadingServer(SimpleServer):
 
 
 class ThreadPoolServer(SimpleServer):
-    """ Threading server using a pool of threads 
+    """ Threading server using a pool of threads
 
     This is a new experimental server, using a pool of threads instead
     of creating new thread for each request. This is similar to Apache
@@ -158,7 +158,7 @@ class ThreadPoolServer(SimpleServer):
 
     This server is 5 times faster than ThreadingServer for static
     files, and about the same for wiki pages.
-    
+
     TODO: sometimes the server won't exit on Conrol-C, and continue to
     run with few threads (you can kill it with kill -9). Same problem
     exist with the twisted server. When the problem is finally solved,
@@ -184,8 +184,8 @@ class ThreadPoolServer(SimpleServer):
         SimpleServer.serve_forever(self)
 
     def process_request(self, request, client_address):
-        """ Called for each request 
-        
+        """ Called for each request
+
         Insert the request into the queue. If the queue is full, wait
         until one of the request threads pop a request. During the wait,
         new connections might be dropped.
@@ -202,8 +202,8 @@ class ThreadPoolServer(SimpleServer):
             self.lock.release()
 
     def serve_forever_thread(self):
-        """ The main loop of request threads 
-        
+        """ The main loop of request threads
+
         Pop a request from the queue and process it.
         """
         while not self._abort:
@@ -216,8 +216,8 @@ class ThreadPoolServer(SimpleServer):
         # sys.stderr.write('thread exiting...\n')
 
     def pop_request(self):
-        """ Pop a request from the queue 
-        
+        """ Pop a request from the queue
+
         If the queue is empty, wait for notification. If the queue was
         full, notify the main thread which may be waiting.
         """
@@ -257,11 +257,11 @@ class ThreadPoolServer(SimpleServer):
 
 
 class ForkingServer(SocketServer.ForkingMixIn, SimpleServer):
-    """ Serve each request in a new process 
-    
+    """ Serve each request in a new process
+
     This is new untested server, first tests show rather pathetic cgi
     like performance. No data is cached between requests.
-    
+
     The mixin has its own process limit.
     """
     max_children = 10
@@ -309,7 +309,7 @@ class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     do_GET = do_ALL
     do_HEAD = do_ALL
 
-    # -------------------------------------------------------------------    
+    # -------------------------------------------------------------------
     # Serve methods
 
     def serve_static_file(self):
@@ -365,7 +365,7 @@ class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
         if bad_uri:
             self.log_error("Detected bad request URI '%s', translated to '%s'"
-                           % (uri, path,))
+                           % (uri, path, ))
         return path
 
     def end_headers(self):
@@ -378,7 +378,7 @@ class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
     def copyfile(self, source, outputfile):
         """Copy all data between two file objects.
-        
+
         Modify the base class method to change the buffer size. Test
         shows that for the typical static files we serve, 8K buffer is
         faster than the default 16K buffer.
@@ -446,7 +446,7 @@ else:
             if self.handshake(tls_connection):
                 self.RequestHandlerClass(tls_connection, client_address, self)
             else:
-                # This will probably fail because the TLSConnection has 
+                # This will probably fail because the TLSConnection has
                 # already written SSL stuff to the socket. But not sure what
                 # else we should do.
                 SecureRequestRedirect(sock, client_address, self)
@@ -490,12 +490,12 @@ def quit(signo, stackframe):
 
     fname = config.pycallgraph_output
     if fname:
-         import pycallgraph
-         if fname.endswith('.png'):
-             pycallgraph.make_dot_graph(fname)
-         elif fname.endswith('.dot'):
-             pycallgraph.save_dot(fname)
-         
+        import pycallgraph
+        if fname.endswith('.png'):
+            pycallgraph.make_dot_graph(fname)
+        elif fname.endswith('.dot'):
+            pycallgraph.save_dot(fname)
+
     if httpd:
         httpd.die()
 
@@ -512,8 +512,8 @@ def registerSignalHandlers(func):
 
 
 def makeServer(config):
-    """ Create a new server, based on the the platform capabilities 
-    
+    """ Create a new server, based on the the platform capabilities
+
     Try to create the server class specified in the config. If threads
     are not available, fallback to ForkingServer. If fork is not
     available, fallback to a SimpleServer.
@@ -563,9 +563,9 @@ class StandaloneConfig(Config):
 
 def run(configClass):
     """ Create and run a moin server
-    
+
     See StandaloneConfig for available options
-    
+
     @param configClass: config class
     """
     # Run only once!

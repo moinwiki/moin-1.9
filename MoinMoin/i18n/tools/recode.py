@@ -37,7 +37,7 @@ import sys
 
 def error(msg):
     sys.stderr.write(msg + '\n')
-    
+
 def run():
     try:
         cmd, src_enc, dst_enc = sys.argv

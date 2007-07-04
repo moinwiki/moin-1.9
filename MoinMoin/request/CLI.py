@@ -70,7 +70,7 @@ class Request(RequestBase):
 
     def getQualifiedURL(self, uri=None):
         """ Return a full URL starting with schema and host
-        
+
         TODO: does this create correct pages when you render wiki pages
               within a cli request?!
         """
@@ -86,8 +86,8 @@ class Request(RequestBase):
         pass
 
     def http_redirect(self, url):
-        """ Redirect to a fully qualified, or server-rooted URL 
-        
+        """ Redirect to a fully qualified, or server-rooted URL
+
         TODO: Does this work for rendering redirect pages?
         """
         raise Exception("Redirect not supported for command line tools!")

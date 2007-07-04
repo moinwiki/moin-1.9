@@ -3,12 +3,12 @@
     MoinMoin - cleancache script
 
     globally delete cache files in data/pages/PageName/cache/ directories
-    
+
     You will usually do this after changing MoinMoin code, by either upgrading
     version, installing or removing macros. This often makes the text_html
     files invalid, so you have to remove them (the wiki will recreate them
     automatically).
-    
+
     text_html is the name of the cache file used for compiled pages formatted
     by the wiki text to html formatter,
 

@@ -25,7 +25,7 @@ class Theme(ThemeBase):
 
     def footer(self, d, **keywords):
         """ Assemble wiki footer
-        
+
         @param d: parameter dictionary
         @keyword ...:...
         @rtype: unicode
@@ -60,7 +60,7 @@ class Theme(ThemeBase):
     def iconbar(self, d):
         """
         Assemble the iconbar
-        
+
         @param d: parameter dictionary
         @rtype: string
         @return: iconbar html
@@ -84,7 +84,7 @@ class Theme(ThemeBase):
     def header(self, d):
         """
         Assemble page header
-        
+
         @param d: parameter dictionary
         @rtype: string
         @return: page header html
@@ -131,7 +131,7 @@ class Theme(ThemeBase):
     def editorheader(self, d):
         """
         Assemble page header for editor
-        
+
         @param d: parameter dictionary
         @rtype: string
         @return: page header html
@@ -162,7 +162,7 @@ class Theme(ThemeBase):
     def edit_link(self, d, **keywords):
         """
         Assemble EditText link (or indication that page cannot be edited)
-        
+
         @param d: parameter dictionary
         @rtype: string
         @return: edittext link html
@@ -173,7 +173,7 @@ class Theme(ThemeBase):
     def availableactions(self, d):
         """
         assemble HTML code for the available actions
-        
+
         @param d: parameter dictionary
         @rtype: string
         @return: available actions html
@@ -188,7 +188,7 @@ class Theme(ThemeBase):
             available = list(available)
             available.sort()
             for action in available:
-                # Always add spaces: AttachFile -> Attach File 
+                # Always add spaces: AttachFile -> Attach File
                 # XXX do not make a page object just for split_title
                 #title = Page(request, action).split_title(force=1)
                 title = action
@@ -215,7 +215,7 @@ class Theme(ThemeBase):
 def execute(request):
     """
     Generate and return a theme object
-        
+
     @param request: the request object
     @rtype: MoinTheme
     @return: Theme object

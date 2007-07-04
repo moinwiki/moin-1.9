@@ -12,8 +12,8 @@ from MoinMoin.support.BasicAuthTransport import BasicAuthTransport
 #srcwiki = xmlrpclib.ServerProxy("http://moinmaster.wikiwikiweb.de/FrontPage?action=xmlrpc")
 user = "YourWikiName"
 password = "yourbasicauthpassword"
-srctrans = BasicAuthTransport(user,password)
-dsttrans = BasicAuthTransport(user,password)
+srctrans = BasicAuthTransport(user, password)
+dsttrans = BasicAuthTransport(user, password)
 srcwiki = xmlrpclib.ServerProxy("http://devel.linuxwiki.org/moin--cvs/__xmlrpc/?action=xmlrpc2", transport=srctrans)
 dstwiki = xmlrpclib.ServerProxy("http://devel.linuxwiki.org/moin--cvs/__xmlrpc/?action=xmlrpc2", transport=dsttrans)
 

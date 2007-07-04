@@ -62,7 +62,7 @@ from MoinMoin.script.migration.migutil import opj, listdir, copy_file, copy_dir
 def unquoteFilename12(filename, encoding):
     """
     Return decoded original filename when given an encoded filename.
-    
+
     @param filename: encoded filename
     @rtype: string
     @return: decoded, original filename
@@ -83,7 +83,7 @@ def convert_string(str, enc_from, enc_to):
     except UnicodeDecodeError: # try again with iso
         newstr = str.decode('iso-8859-1')
     return newstr.encode(enc_to)
-    
+
 def qf_convert_string(str, enc_from, enc_to):
     str = unquoteWikiname12(str, enc_from)
     str = wikiutil.quoteWikinameFS(str, enc_to)
@@ -99,14 +99,14 @@ def convert_file(fname_from, fname_to, enc_from, enc_to):
         file_to.write(convert_string(line, enc_from, enc_to))
     file_to.close()
     file_from.close()
-    st=os.stat(fname_from)
-    os.utime(fname_to, (st.st_atime,st.st_mtime))
+    st = os.stat(fname_from)
+    os.utime(fname_to, (st.st_atime, st.st_mtime))
 
 def convert_textdir(dir_from, dir_to, enc_from, enc_to, is_backupdir=0):
     os.mkdir(dir_to)
     for fname_from in listdir(dir_from):
         if is_backupdir:
-            fname, timestamp = fname_from.split('.',1)
+            fname, timestamp = fname_from.split('.', 1)
             timestamp = str(wikiutil.timestamp2version(float(timestamp)))
         else:
             fname = fname_from
@@ -115,7 +115,7 @@ def convert_textdir(dir_from, dir_to, enc_from, enc_to, is_backupdir=0):
             fname_to = '.'.join([fname, timestamp])
         else:
             fname_to = fname
-        convert_file(opj(dir_from, fname_from), opj( dir_to, fname_to),
+        convert_file(opj(dir_from, fname_from), opj(dir_to, fname_to),
                      enc_from, enc_to)
 
 def convert_pagedir(dir_from, dir_to, enc_from, enc_to):
@@ -141,8 +141,8 @@ def convert_editlog(log_from, log_to, enc_from, enc_to):
         file_from = open(log_from)
         file_to = open(log_to, "w")
         for line in file_from:
-            line = line.replace('\r','')
-            line = line.replace('\n','')
+            line = line.replace('\r', '')
+            line = line.replace('\n', '')
             if not line.strip(): # skip empty lines
                 continue
             fields = line.split('\t')

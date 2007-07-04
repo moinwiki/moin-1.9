@@ -171,7 +171,7 @@ class FormatterBase:
     def nowikiword(self, text):
         return self.text(text)
 
-    # Text and Text Attributes ########################################### 
+    # Text and Text Attributes ###########################################
 
     def text(self, text, **kw):
         if not self._highlight_re:

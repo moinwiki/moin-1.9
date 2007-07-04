@@ -33,8 +33,7 @@ def send_notification(request, page, comment, emails, email_lang, revisions, tri
     @return: sendmail result
     """
     _ = request.getText
-    mailBody = notification.page_change_message("page_changed", request, page, email_lang, 
-                                   comment=comment, revisions=revisions)
+    mailBody = notification.page_change_message("page_changed", request, page, email_lang, comment=comment, revisions=revisions)
 
     return sendmail.sendmail(request, emails,
         _('[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s', formatted=False) % {
@@ -56,10 +55,10 @@ def notify_subscribers(request, page, comment, trivial):
     """
     _ = request.getText
     subscribers = page.getSubscribers(request, return_users=1, trivial=trivial)
-    
+
     if subscribers:
         recipients = set()
-        
+
         # get a list of old revisions, and append a diff
         revisions = page.getRevList()
 
@@ -70,7 +69,7 @@ def notify_subscribers(request, page, comment, trivial):
             result = send_notification(request, page, comment, emails, lang, revisions, trivial)
             if result:
                 recipients.update(names)
-    
+
         if recipients:
             return notification.Success(recipients)
 
@@ -78,3 +77,4 @@ def notify_subscribers(request, page, comment, trivial):
 def handle(event):
     if isinstance(event, PageChangedEvent) and event.request.cfg.mail_enabled:
         return notify_subscribers(event.request, event.page, event.comment, event.trivial)
+

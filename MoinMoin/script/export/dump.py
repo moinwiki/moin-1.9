@@ -147,7 +147,7 @@ class PluginScript(script.MoinScript):
             script.log('Writing "%s"...' % file)
             try:
                 pagehtml = ''
-                request.url = urlbase + pagename # add current pagename to url base 
+                request.url = urlbase + pagename # add current pagename to url base
                 page = Page.Page(request, pagename)
                 request.page = page
                 try:

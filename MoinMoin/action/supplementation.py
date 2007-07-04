@@ -1,12 +1,12 @@
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin -  This Action is used to create a supplementation subpage e.g. a Discussion page below a comon page
-        
+
     Note:
     derived from the newpage macro by Vito Miliano (vito_moinnewpagewithtemplate@perilith.com) et al
 
-    @copyright: 2006-2007 MoinMoin:ReimarBauer  
-    @license: GNU GPL, see COPYING for details.  
+    @copyright: 2006-2007 MoinMoin:ReimarBauer
+    @license: GNU GPL, see COPYING for details.
 """
 from MoinMoin.Page import Page
 from MoinMoin.wikiutil import quoteWikinameURL

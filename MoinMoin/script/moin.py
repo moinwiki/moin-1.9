@@ -5,7 +5,7 @@
     a sub-command.
 
     Usage: moin cmdmodule cmdname [options]
-               
+
     @copyright: 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """

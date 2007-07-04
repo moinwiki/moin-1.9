@@ -86,7 +86,7 @@ class TestGroupPages(unittest.TestCase):
 
     def testNormalizeGroupName(self):
         """ request: normalize pagename: restrict groups to alpha numeric Unicode
-        
+
         Spaces should normalize after invalid chars removed!
         """
         import re

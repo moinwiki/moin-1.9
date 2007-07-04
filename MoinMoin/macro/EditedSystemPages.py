@@ -32,7 +32,7 @@ class EditedSystemPages:
         # exists, because our filter check this already.
         pages = self.request.rootpage.getPageList(filter=filterfn, exists=0)
 
-        # Format as numberd list, sorted by page name         
+        # Format as numberd list, sorted by page name
         pages.sort()
         result = []
         f = self.formatter

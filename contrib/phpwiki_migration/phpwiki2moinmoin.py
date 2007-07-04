@@ -61,15 +61,15 @@ host = "localhost"
 db = "wiki"
 user = "wiki"
 passwd = "wiki"
-# 
+#
 # This is a part of an SQL request (part of the WHERE, actually) that
 # allows you to select which pages get moved over
-# 
+#
 # do only those pages:
 pagename = ""
-# Example: 
+# Example:
 #pagename = "pagename='ParseTest' AND"
-# 
+#
 # the path to the moinmoin wiki, leave empty if you know what you're
 # doing
 wikipath = '/var/local/lib/wiki'
@@ -81,11 +81,11 @@ wikipath = '/var/local/lib/wiki'
 # safe.
 editExistingPages = 0
 
-# 
+#
 # END OF CONFIGURATION DIRECTIVES
-# 
+#
 # XXX: the interactive way will be something like this:
-# 
+#
 # print "I will need the host/database/username/password of the phpwiki"
 # print "Host:",
 # host = raw_input()
@@ -97,7 +97,7 @@ editExistingPages = 0
 # passwd = getpass()
 # print "Pagename:"
 # pagename = raw_input()
-# 
+#
 # But right now this script DOES NOT COMPLETELY WORK, so it often has
 # to be ran and reran.
 
@@ -140,7 +140,7 @@ def blockparser(text, markup):
                                         result += [match.group(1)]
                                 result += ['}}}']
                                 if match.group(2) != '':
-                                        result += [lineparser(match.group(2),markup)]
+                                        result += [lineparser(match.group(2), markup)]
                                 pre = 0
                         else:
                                 # don't parse pre data
@@ -155,14 +155,14 @@ def blockparser(text, markup):
                                 # not what's after
                                 pre = match.group(2)
                                 if match.group(1) != '':
-                                        result += [lineparser(match.group(1),markup)]
+                                        result += [lineparser(match.group(1), markup)]
                                 result += ['{{{']
-                                if match.group(3) != '':        
+                                if match.group(3) != '':
                                         result += [match.group(3)]
 
                         else:
                                 # "common case": normal line parsing
-                                result += [lineparser(line,markup)]
+                                result += [lineparser(line, markup)]
 
         text = "\n".join(result)
         return text
@@ -175,33 +175,33 @@ def blockparser(text, markup):
 # markup is 1 (old style) or 2 (new style)
 def lineparser(text, markup):
         # headlines
-        p=re.compile('^!!!(.*)$',re.MULTILINE)
-        text = p.sub(r'= \1 =',text)
-        p=re.compile('^!!(.*)$',re.MULTILINE)
-        text = p.sub(r'== \1 ==',text)
-        p=re.compile('^!(.*)$',re.MULTILINE)
-        text = p.sub(r'=== \1 ===',text)
+        p = re.compile('^!!!(.*)$', re.MULTILINE)
+        text = p.sub(r'= \1 =', text)
+        p = re.compile('^!!(.*)$', re.MULTILINE)
+        text = p.sub(r'== \1 ==', text)
+        p = re.compile('^!(.*)$', re.MULTILINE)
+        text = p.sub(r'=== \1 ===', text)
 
         # pictures
-        p=re.compile('^\s*\[(http:.*(png|jpg|gif))\]',re.MULTILINE)
-        text = p.sub(r'\n\1',text)
+        p = re.compile('^\s*\[(http:.*(png|jpg|gif))\]', re.MULTILINE)
+        text = p.sub(r'\n\1', text)
 
         # links
         # the links like [http://]
-        p=re.compile('(?<!~)\[(http|https|ftp|nntp|news|mailto|telnet|file)(://.*?)\]',re.MULTILINE)
-        text = p.sub(r'\1\2',text)
-        
+        p = re.compile('(?<!~)\[(http|https|ftp|nntp|news|mailto|telnet|file)(://.*?)\]', re.MULTILINE)
+        text = p.sub(r'\1\2', text)
+
         # the [links like this]
-        p=re.compile('(?<!~|#)\[([^]\|]*)\]',re.MULTILINE)
-        text = p.sub(r'["\1"]',text)
+        p = re.compile('(?<!~|#)\[([^]\|]*)\]', re.MULTILINE)
+        text = p.sub(r'["\1"]', text)
 
         # links like [foo | http://...]
-        q=re.compile('(?<!~|#)\[([^]#]*?)\s*\|\s*([^]#\s]+?://[^]\s]+?)\]',re.MULTILINE)
-        text = q.sub(r'[\2 \1]',text)
+        q = re.compile('(?<!~|#)\[([^]#]*?)\s*\|\s*([^]#\s]+?://[^]\s]+?)\]', re.MULTILINE)
+        text = q.sub(r'[\2 \1]', text)
 
         # [fooo | bar]
-        p=re.compile('(?<!~|#)\[([^]]*?)\s*\|\s*([^]\s]+?)\]',re.MULTILINE)
-        text = p.sub(r'[:\2:\1]',text)
+        p = re.compile('(?<!~|#)\[([^]]*?)\s*\|\s*([^]\s]+?)\]', re.MULTILINE)
+        text = p.sub(r'[:\2:\1]', text)
 
         # XXX: the following constructs are broken. I don't know how
         # to express that in Moin
@@ -213,48 +213,48 @@ def lineparser(text, markup):
         # #[howdy|foo] => [[Anchor(foo)]]howdy
         #
         # rest should just go along
-        p=re.compile('#\[([^]|]*)\]', re.MULTILINE)
+        p = re.compile('#\[([^]|]*)\]', re.MULTILINE)
         text = p.sub(r'[[Anchor(\1)]]\1', text)
-        p=re.compile('#\[\|+([^]\|]*)\]', re.MULTILINE)
+        p = re.compile('#\[\|+([^]\|]*)\]', re.MULTILINE)
         text = p.sub(r'[[Anchor(\1)]]', text)
-        p=re.compile('#\[([^]\|]*)\|+([^]\|]*)\]', re.MULTILINE)
+        p = re.compile('#\[([^]\|]*)\|+([^]\|]*)\]', re.MULTILINE)
         text = p.sub(r'[[Anchor(\2)]]\1', text)
 
         # indented text
         # this might work for old style
         if markup == 1:
-                p=re.compile('^ (.*)$')
-                text = p.sub(r'{{{\n\1\n}}}',text)
+                p = re.compile('^ (.*)$')
+                text = p.sub(r'{{{\n\1\n}}}', text)
 
         # lists (regexp taken from phpwiki/lib/BlockParser.php:1.37)
-        p=re.compile('^\ {0,4}\
+        p = re.compile('^\ {0,4}\
                 (?: \+\
                   | -(?!-)\
                   | [o](?=\ )\
                   | [*] (?!(?=\S)[^*]*(?<=\S)[*](?:\\s|[-)}>"\'\\/:.,;!?_*=]) )\
-                )\ *(?=\S)',re.MULTILINE|re.VERBOSE)
-        text = p.sub(r' * ',text)
-        p=re.compile(' {0,4}(?:\\# (?!\[.*\])) *(?=\S)',re.MULTILINE)
-        text = p.sub(r' 1. ',text)
+                )\ *(?=\S)', re.MULTILINE|re.VERBOSE)
+        text = p.sub(r' * ', text)
+        p = re.compile(' {0,4}(?:\\# (?!\[.*\])) *(?=\S)', re.MULTILINE)
+        text = p.sub(r' 1. ', text)
 
         if markup == 1:
                 # bold (old style)
-                p=re.compile('__(\w*)',re.MULTILINE)
-                text = p.sub(r"'''\1",text)
-                p=re.compile('(\w*)__',re.MULTILINE)
-                text = p.sub(r"\1'''",text)
+                p = re.compile('__(\w*)', re.MULTILINE)
+                text = p.sub(r"'''\1", text)
+                p = re.compile('(\w*)__', re.MULTILINE)
+                text = p.sub(r"\1'''", text)
                 # emphasis is the same
         else:
                 # XXX: this doesn't do anything yet
-                # 
+                #
                 # translated from getStartRegexp() in
                 # phpwiki/lib/InlineParser.php:418
-                i = "_ (?! _)";
-                b = "\\* (?! \\*)";
-                tt = "= (?! =)";
+                i = "_ (?! _)"
+                b = "\\* (?! \\*)"
+                tt = "= (?! =)"
 
                 # any of the three.
-                any = "(?: " + i + "|" + b + "|" + tt + ")";
+                any = "(?: " + i + "|" + b + "|" + tt + ")"
 
                 # Any of [_*=] is okay if preceded by space or one of [-"'/:]
                 # _ or * is okay after = as long as not immediately followed by =
@@ -270,58 +270,58 @@ def lineparser(text, markup):
                         "(?<= < ) " + any + " (?! > )|" + \
                         "(?<= \\( ) " + any + " (?! \\) )" + \
                         ")"
-                
+
                 # Any of the above must be immediately followed by non-whitespace.
-                start_regexp = start + "(?= \S)";
-                
+                start_regexp = start + "(?= \S)"
+
 
         # PLUGINS
 
         # calendar plugin
-        p=re.compile('<\?plugin Calendar month=(\d*) year=(\d*)\?>',re.MULTILINE)
-        text = p.sub(r'[[MonthCalendar(,\2,\1)]]',text)
-        p=re.compile('<\?plugin Calendar\?>',re.MULTILINE)
-        text = p.sub(r'[[MonthCalendar]]',text)
+        p = re.compile('<\?plugin Calendar month=(\d*) year=(\d*)\?>', re.MULTILINE)
+        text = p.sub(r'[[MonthCalendar(,\2,\1)]]', text)
+        p = re.compile('<\?plugin Calendar\?>', re.MULTILINE)
+        text = p.sub(r'[[MonthCalendar]]', text)
 
         # BackLinks
-        p=re.compile('<\?plugin\s+BackLinks.*?\?>', re.MULTILINE)
-        text = p.sub(r"[[FullSearch()]]",text)
+        p = re.compile('<\?plugin\s+BackLinks.*?\?>', re.MULTILINE)
+        text = p.sub(r"[[FullSearch()]]", text)
 
         # FullSearch
-        p=re.compile('<\?plugin\s+FullTextSearch.*?(s=.*?)?\?>', re.MULTILINE)
-        text = p.sub(r'[[FullSearch()]]',text)
+        p = re.compile('<\?plugin\s+FullTextSearch.*?(s=.*?)?\?>', re.MULTILINE)
+        text = p.sub(r'[[FullSearch()]]', text)
 
         # RecentChanges
-        p=re.compile('<\?plugin\s+RecentChanges.*?\?>', re.MULTILINE)
-        text = p.sub(r'[[RecentChanges]]',text)
-        
+        p = re.compile('<\?plugin\s+RecentChanges.*?\?>', re.MULTILINE)
+        text = p.sub(r'[[RecentChanges]]', text)
+
         # tables (old style)
-        p=re.compile('^(\|.*)$',re.MULTILINE)
-        text = p.sub(r'\1|',text)
-        p=re.compile('\|',re.MULTILINE)
-        text = p.sub(r'||',text)
-        p=re.compile('\|\|<',re.MULTILINE)
-        text = p.sub(r'||<(>',text)
-        p=re.compile('\|\|>',re.MULTILINE)
-        text = p.sub(r'||<)>',text)
+        p = re.compile('^(\|.*)$', re.MULTILINE)
+        text = p.sub(r'\1|', text)
+        p = re.compile('\|', re.MULTILINE)
+        text = p.sub(r'||', text)
+        p = re.compile('\|\|<', re.MULTILINE)
+        text = p.sub(r'||<(>', text)
+        p = re.compile('\|\|>', re.MULTILINE)
+        text = p.sub(r'||<)>', text)
 
         if markup == 2:
                 # moinmoin tables are on one line
-                p=re.compile('\|\|\s*\n',re.MULTILINE)
-                text = p.sub(r'||',text)
-        
+                p = re.compile('\|\|\s*\n', re.MULTILINE)
+                text = p.sub(r'||', text)
+
         # mailto
-        p=re.compile('mailto:',re.MULTILINE)
-        text = p.sub(r'',text)
+        p = re.compile('mailto:', re.MULTILINE)
+        text = p.sub(r'', text)
 
         # line breaks
-        p=re.compile('(?<!~)%%%',re.MULTILINE)
-        text = p.sub(r'[[BR]]',text)
+        p = re.compile('(?<!~)%%%', re.MULTILINE)
+        text = p.sub(r'[[BR]]', text)
 
         # unescape
         # This must stay the last filter or things will break real bad
-        p=re.compile('~(~?)',re.MULTILINE)
-        text = p.sub(r'\1',text)
+        p = re.compile('~(~?)', re.MULTILINE)
+        text = p.sub(r'\1', text)
 
         return text
 
@@ -345,18 +345,18 @@ db = MySQLdb.connect(
                 host=host,
                 db=db,
                 user=user,
-                passwd=passwd
+                passwd=passwd,
         )
-cursor = db.cursor();
+cursor = db.cursor()
 
-stmt="SELECT pagename,content,versiondata FROM page,recent,version WHERE " + pagename + \
-      " page.id=version.id AND version.id=recent.id AND version=latestversion" + \
-      " ORDER BY pagename"
+stmt = "SELECT pagename,content,versiondata FROM page,recent,version WHERE " + pagename + \
+       " page.id=version.id AND version.id=recent.id AND version=latestversion" + \
+       " ORDER BY pagename"
 cursor.execute(stmt)
 
 # loop over the matching phpwiki pages
 result = cursor.fetchall()
-for pagename,content,versiondata in result:
+for pagename, content, versiondata in result:
         utf8pagename = unicode(pagename, 'latin-1')
         request = Request(utf8pagename)
         page = PageEditor(utf8pagename, request)
@@ -365,11 +365,11 @@ for pagename,content,versiondata in result:
         if not editExistingPages and page.exists():
                 print " already exists, skipping"
                 continue
-        
+
         # find out in the serialized field what markup type (old
         # style?) this page is in
         match = re.compile('s:6:"markup";s:[0-9]*:"([0-9]*)";').search(versiondata)
-        if match != None:
+        if match is not None:
                 # markup is 1 (old style) or 2 (new style)
                 markup = match.group(1)
         else:
@@ -382,9 +382,9 @@ for pagename,content,versiondata in result:
         print (markup == 2 and [""] or ["(old style)"])[0],
 
         # do the actual parsing of this page and save it
-        text=blockparser(content,markup)
+        text = blockparser(content, markup)
         try:
-                err = page.saveText(unicode(text,'latin-1'), '0')
+                err = page.saveText(unicode(text, 'latin-1'), '0')
         # the exceptions thrown by saveText are errors or messages, so
         # just print both
         except Exception, msg:
@@ -392,8 +392,9 @@ for pagename,content,versiondata in result:
         else:
                 if err:
                         print err,
-                
+
         # the EOL
         print
-        
+
 db.close
+

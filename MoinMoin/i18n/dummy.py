@@ -1,6 +1,6 @@
 """
     This is a dummy file to feed some stuff into gettext system
-    that it would not get otherwise - for automatic generation 
+    that it would not get otherwise - for automatic generation
     of the translation files.
 
 """

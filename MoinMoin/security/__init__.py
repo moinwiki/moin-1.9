@@ -38,14 +38,14 @@ def _check(request, pagename, user, right):
     acl = p.getACL(request) # this will be fast in a reused page obj
     return acl.may(request, user, right)
 
-    
+
 def _checkHierarchically(request, pagename, username, attr):
     """ Get permission by traversing page hierarchy
 
     We check each page in the hierarchy. We start with the deepest page and
-    recurse to the top of the tree. If one of those permits, True is returned. 
+    recurse to the top of the tree. If one of those permits, True is returned.
 
-    This method should not be called by users, use __getattr__ instead. 
+    This method should not be called by users, use __getattr__ instead.
 
     @param request: the current request object
     @param pagename: pagename to get permissions from
@@ -62,7 +62,7 @@ def _checkHierarchically(request, pagename, username, attr):
     allowed = request.cfg.cache.acl_rights_before.may(request, username, attr)
     if allowed is not None:
         return allowed
-    
+
     # Get permission
     some_acl = False
     for i in range(len(pages), 0, -1):
@@ -131,7 +131,7 @@ class Permissions:
 
     def __getattr__(self, attr):
         """ Shortcut to export getPermission function for all known ACL rights
-        
+
         if attr is one of the rights in acl_rights_valid, then return a
         checking function for it. Else raise an AttributeError.
 
@@ -155,7 +155,7 @@ class AccessControlList:
     Control who may do what on or with a wiki page.
 
     Syntax of an ACL string:
-    
+
         [+|-]User[,User,...]:[right[,right,...]] [[+|-]SomeGroup:...] ...
         ... [[+|-]Known:...] [[+|-]All:...]
 
@@ -195,9 +195,9 @@ class AccessControlList:
         right list are automatically set to NO.
 
     Using Prefixes
-        
+
         To make the system more flexible, there are also two modifiers:
-        the prefixes "+" and "-". 
+        the prefixes "+" and "-".
 
             +SomeUser:read -OtherUser:write
 
@@ -207,13 +207,13 @@ class AccessControlList:
         above acl line does not define if he can or can not write. He
         will be able to write if acl_rights_before or acl_rights_after
         allow this (see configuration options).
-        
+
         Using prefixes, this acl line:
-        
+
             SomeUser:read,write SomeGroup:read,write,admin All:read
 
         Can be written as:
-        
+
             -SomeUser:admin SomeGroup:read,write,admin All:read
 
         Or even:
@@ -225,7 +225,7 @@ class AccessControlList:
         useful on the moin configuration entries though.
 
    Configuration options
-   
+
        cfg.acl_rights_default
            It is is ONLY used when no other ACLs are given.
            Default: "Known:read,write,delete All:read,write",
@@ -239,7 +239,7 @@ class AccessControlList:
            When the page has ACL entries, this will be inserted AFTER
            any page entries.
            Default: ""
-       
+
        cfg.acl_rights_valid
            These are the acceptable (known) rights (and the place to
            extend, if necessary).

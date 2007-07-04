@@ -49,12 +49,12 @@ def getNames(cfg):
 #############################################################################
 
 class Macro:
-    """ Macro handler 
-    
-    There are three kinds of macros: 
+    """ Macro handler
+
+    There are three kinds of macros:
      * Builtin Macros - implemented in this file and named _macro_[name]
      * Language Pseudo Macros - any lang the wiki knows can be use as
-       macro and is implemented here by _m_lang() 
+       macro and is implemented here by _m_lang()
      * External macros - implemented in either MoinMoin.macro package, or
        in the specific wiki instance in the plugin/macro directory
     """
@@ -96,10 +96,10 @@ class Macro:
         self.name = None
 
     def execute(self, macro_name, args):
-        """ Get and execute a macro 
-        
+        """ Get and execute a macro
+
         Try to get a plugin macro, or a builtin macro or a language
-        macro, or just raise ImportError. 
+        macro, or just raise ImportError.
         """
         self.name = macro_name
         try:
@@ -117,7 +117,7 @@ class Macro:
 
     def _m_lang(self, text):
         """ Set the current language for page content.
-        
+
             Language macro are used in two ways:
              * [lang] - set the current language until next lang macro
              * [lang(text)] - insert text with specific lang inside page
@@ -207,7 +207,7 @@ class Macro:
         for word in all_words:
             letter = wikiutil.getUnicodeIndexGroup(word)
             if letter != current_letter:
-                cssid = "idx" + wikiutil.quoteWikinameURL(letter).replace('%','')
+                cssid = "idx" + wikiutil.quoteWikinameURL(letter).replace('%', '')
                 output.append(fmt.heading(1, 2, id=cssid)) # fmt.anchordef didn't work
                 output.append(fmt.text(letter.replace('~', 'Others')))
                 output.append(fmt.heading(0, 2))
@@ -234,7 +234,7 @@ class Macro:
         def _make_index_key(index_letters):
             index_letters.sort()
             def letter_link(ch):
-                cssid = "idx" + wikiutil.quoteWikinameURL(ch).replace('%','')
+                cssid = "idx" + wikiutil.quoteWikinameURL(ch).replace('%', '')
                 return fmt.anchorlink(1, cssid) + fmt.text(ch.replace('~', 'Others')) + fmt.anchorlink(0)
             links = [letter_link(letter) for letter in index_letters]
             return ' | '.join(links)
@@ -296,7 +296,7 @@ class Macro:
 
     def _macro_PageCount(self, args):
         """ Return number of pages readable by current user
-        
+
         Return either an exact count (slow!) or fast count including
         deleted pages.
         """
@@ -324,7 +324,7 @@ class Macro:
             needle_re = re.compile(args or '', re.IGNORECASE)
         except re.error, e:
             return "<strong>%s: %s</strong>" % (
-                _("ERROR in regex '%s'") % (args,), e)
+                _("ERROR in regex '%s'") % (args, ), e)
 
         # Get page list readable by current user, filtered by needle
         hits = self.request.rootpage.getPageList(filter=needle_re.search)
@@ -365,7 +365,7 @@ class Macro:
                 tm = (year, month, day, hour, minute, second, 0, 0, 0)
             except ValueError, e:
                 return "<strong>%s: %s</strong>" % (
-                    _("Bad timestamp '%s'") % (args,), e)
+                    _("Bad timestamp '%s'") % (args, ), e)
             # as mktime wants a localtime argument (but we only have UTC),
             # we adjust by our local timezone's offset
             try:
@@ -378,7 +378,7 @@ class Macro:
                 tm = float(args)
             except ValueError, e:
                 return "<strong>%s: %s</strong>" % (
-                    _("Bad timestamp '%s'") % (args,), e)
+                    _("Bad timestamp '%s'") % (args, ), e)
         return format_date(tm)
 
     def _macro_Date(self, args):
@@ -424,10 +424,10 @@ class Macro:
         else:
             # unknown user, maybe even a spambot, so
             # just return text as given in macro args
-            
+
             if text:
                 result = self.formatter.text(text+" ")
-            
+
             result += self.formatter.code(1) + \
                 self.formatter.text("<%s>" % email) + \
                 self.formatter.code(0)

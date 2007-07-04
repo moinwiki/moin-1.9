@@ -10,7 +10,7 @@ from MoinMoin.support import difflib
 def diff(oldlines, newlines, **kw):
     """
     Find changes between oldlines and newlines.
-    
+
     @param oldlines: list of old text lines
     @param newlines: list of new text lines
     @keyword ignorews: if 1: ignore whitespace

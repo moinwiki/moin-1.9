@@ -1,16 +1,16 @@
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - reducewiki script
-    
+
     Use this script to reduce a data/ directory to the latest page revision of
     each non-deleted page (plus all attachments).
-    
+
     This is used to make the distributed underlay directory, but can also be
     used for other purposes.
 
     Usage: moin ... maint reducewiki --target-dir=myunderlay
-    
-    So we change like this:      
+
+    So we change like this:
         * data/pages/PageName/revisions/{1,2,3,4}
           -> data/pages/revisions/1  (with content of 4)
         * data/pages/PageName/current (pointing to e.g. 4)

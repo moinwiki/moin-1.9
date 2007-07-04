@@ -79,7 +79,7 @@ class SystemInfo:
                 ftversion = None
             except AttributeError:
                 ftversion = 'N/A'
-    
+
             if ftversion:
                 row(_('4Suite Version'), ftversion)
 
@@ -153,7 +153,7 @@ class SystemInfo:
 
         row(_('Xapian search'), xapRow)
         row(_('Xapian Version'), xapVersion)
- 
+
         stems = [nonestr]
         try:
             import Stemmer
@@ -161,10 +161,10 @@ class SystemInfo:
                 stems = Stemmer.algorithms()
                 stemVersion = Stemmer.version()
             except:
-                 stemVersion = _('!PyStemmer not installed')
+                stemVersion = _('!PyStemmer not installed')
         except ImportError:
             stemVersion = _('!PyStemmer not installed')
- 
+
         row(_('Stemming for Xapian'), xapState[request.cfg.xapian_stemming])
         row(_('!PyStemmer Version'), stemVersion)
         row(_('!PyStemmer stems'), ', '.join(stems) or nonestr)

@@ -3,7 +3,7 @@
 
     Run this server with mointwisted script on Linux or Mac OS X, or
     mointwisted.cmd on Windows.
-    
+
     @copyright: 2004-2005 Thomas Waldmann, Oliver Graf, Nir Soffer
     @license: GNU GPL, see COPYING for details.
 """
@@ -53,7 +53,7 @@ class Config(TwistedConfig):
     port = 8080
 
     # Interfaces (default [''])
-    # The interfaces the server will listen to. 
+    # The interfaces the server will listen to.
     # [''] - listen to all interfaces defined on the server
     # ['red.wikicolors.org', 'blue.wikicolors.org'] - listen to some
     # If '' is in the list, other ignored.

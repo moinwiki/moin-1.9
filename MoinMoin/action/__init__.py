@@ -14,12 +14,12 @@
     User actions starting with a lowercase letter can be used to work
     together with a user macro; those actions a likely to work only if
     invoked BY that macro, and are thus hidden from the user interface.
-    
+
     Additionally to the usual stuff, we provide an ActionBase class here with
     some of the usual base functionality for an action, like checking
     actions_excluded, making and checking tickets, rendering some form,
     displaying errors and doing stuff after an action.
-    
+
     @copyright: 2000-2004 Juergen Hermann <jh@web.de>,
                 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.

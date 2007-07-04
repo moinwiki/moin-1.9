@@ -26,7 +26,7 @@ class ChartData:
     def __init__(self, data, color='black'):
         """
         Create a data set.
-        
+
         @param data: tuple / list of numbers
         @param color: rendering color (triple, '#RRGGBB' or color name)
         """

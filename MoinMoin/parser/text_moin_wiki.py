@@ -11,7 +11,7 @@
 import re
 from MoinMoin import config, wikiutil, macro
 
-Dependencies = ['user'] # {{{#!wiki comment ... }}} has different output depending on the user's profile settings 
+Dependencies = ['user'] # {{{#!wiki comment ... }}} has different output depending on the user's profile settings
 
 class Parser:
     """
@@ -112,7 +112,7 @@ class Parser:
         'word_rule': word_rule,
         'smiley': u'|'.join([re.escape(s) for s in config.smileys])}
 
-    # Don't start p before these 
+    # Don't start p before these
     no_new_p_before = ("heading rule table tableZ tr td "
                        "ul ol dl dt dd li li_none indent "
                        "macro parser pre")
@@ -882,8 +882,8 @@ class Parser:
         lastpos = 0
 
         ###result.append(u'<span class="info">[scan: <tt>"%s"</tt>]</span>' % line)
-        if line.count('{{{') > 1: 
-            self.in_nested_pre = line.count('{{{') -  line.count('}}}')
+        if line.count('{{{') > 1:
+            self.in_nested_pre = line.count('{{{') - line.count('}}}')
             if self.in_nested_pre == 0:
                 self.in_nested_pre = 1
             if line.startswith('{{{'):
@@ -896,8 +896,8 @@ class Parser:
             if lastpos < match.start():
 
                 ###result.append(u'<span class="info">[add text before match: <tt>"%s"</tt>]</span>' % line[lastpos:match.start()])
-                # self.no_862 is added to solve the issue of macros called inline 
-                if not (inhibit_p or self.inhibit_p or self.in_pre or self.formatter.in_p or self.no_862) :
+                # self.no_862 is added to solve the issue of macros called inline
+                if not (inhibit_p or self.inhibit_p or self.in_pre or self.formatter.in_p or self.no_862):
                     result.append(self.formatter.paragraph(1, css_class="line862"))
                 result.append(self.formatter.text(line[lastpos:match.start()]))
 
@@ -993,7 +993,7 @@ class Parser:
 
         # Main loop
         for line in self.lines:
-            if ']][[' in line.replace(' ',''):
+            if ']][[' in line.replace(' ', ''):
                 self.no_862 = True
 
             self.line_anchor_printed = 0
@@ -1034,10 +1034,10 @@ class Parser:
                         self.parser_name = parser_name
                         continue
                     else:
-                         if not line.count('{{{') > 1:
-                             self.request.write(self._closeP() +
-                                 self.formatter.preformatted(1))
-                         self.in_pre = 'no_parser'
+                        if not line.count('{{{') > 1:
+                            self.request.write(self._closeP() +
+                                self.formatter.preformatted(1))
+                        self.in_pre = 'no_parser'
 
                 if self.in_pre == 'found_parser':
                     self.in_nested_pre += line.count('{{{')
@@ -1125,7 +1125,7 @@ class Parser:
                 self.request.write(self._indent_to(indlen, indtype, numtype, numstart))
 
                 # Table mode
-                # TODO: move into function?                
+                # TODO: move into function?
                 if (not self.in_table and line[indlen:indlen + 2] == "||"
                     and line.endswith("|| ") and len(line) >= 5 + indlen):
                     # Start table
@@ -1162,7 +1162,7 @@ class Parser:
             self.request.write(formatted_line)
             if self.in_pre == 'no_parser':
                 self.request.write(self.formatter.linebreak())
-                
+
 
         # Close code displays, paragraphs, tables and open lists
         self.request.write(self._undent())

@@ -201,7 +201,7 @@ class Navigation:
         filter_regex = '^%s/' % re.escape(parent)
         pos, size, links = _getLinks(request, self.pagename, filter_regex)
         pos += 1
-        links = zip(labels, (parent,) + links)
+        links = zip(labels, (parent, ) + links)
 
         # generate links to neighborhood
         for label, name in links:

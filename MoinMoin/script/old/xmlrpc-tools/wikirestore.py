@@ -14,7 +14,7 @@ It does NOT handle:
     * attachments
     * user account data
     * MoinMoin code or config running the wiki
-    
+
 So this is definitely NOT a complete restore.
 
 GPL software, 2003-10-24 Thomas Waldmann
@@ -26,11 +26,11 @@ def run():
 
     user = "ThomasWaldmann"
     password = "xxxxxxxxxxxx"
-    dsttrans = BasicAuthTransport(user,password)
+    dsttrans = BasicAuthTransport(user, password)
     dstwiki = xmlrpclib.ServerProxy("http://devel.linuxwiki.org/moin--cvs/__xmlrpc/?action=xmlrpc2", transport=dsttrans)
     #dstwiki = xmlrpclib.ServerProxy("http://devel.linuxwiki.org/moin--cvs/?action=xmlrpc2")
 
-    backupfile = open("wikibackup.pickle","r")
+    backupfile = open("wikibackup.pickle", "r")
     backup = pickle.load(backupfile)
     backupfile.close()
 
@@ -41,3 +41,4 @@ def run():
 
 if __name__ == "__main__":
     run()
+

@@ -7,7 +7,7 @@
       * login(request, user_obj, **kw)
       * logout(request, user_obj, **kw)
       * request(request, user_obj, **kw)
-    
+
     The kw arguments that are passed in are currently:
        attended: boolean indicating whether a user (attended=True) or
                  a machine is requesting login, multistage auth is not
