@@ -21,15 +21,15 @@
     =====================
 
     General syntax: moin [options] account check [check-options]
-    
+
     [options] usually should be:
         --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
-    
+
     [check-options] see below:
-    
+
     0. Check the settings at top of the code!
        Making a backup of your wiki might be also a great idea.
-       
+
     1. Best is to first look at duplicate user names:
        moin ... account check --usersunique
 
@@ -47,11 +47,11 @@
 
     4. After cleaning up, do 1. and 2. again. There should be no output now, if
        everything is OK.
-       
+
     5. Optionally you may want to make wikinames out of the user names
        moin ... account check --wikinames
        moin ... account check --wikinames --save
-        
+
 """
 
 # ----------------------------------------------------------------------------

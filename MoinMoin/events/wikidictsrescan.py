@@ -19,16 +19,16 @@ def handle(event):
         if cfg.cache.page_dict_regex.search(pagename) or \
            cfg.cache.page_group_regex.search(pagename):
             return handle_groupsdicts_changed(event)
-    
+
 
 def handle_groupsdicts_changed(event):
     """ Handles events related to groups and dicts page changes:
         Scans all pages matching the dict / group regex and pickles the
         data to disk.
-    """    
+    """
     request = event.request
     page = event.page
-    
+
     logging.debug("groupsdicts changed: %r, scan_dicts started", page.page_name)
     gd = wikidicts.GroupDict(request)
     gd.scan_dicts()

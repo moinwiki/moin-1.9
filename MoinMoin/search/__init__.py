@@ -1,7 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - search engine
-    
+
     @copyright: 2005 MoinMoin:FlorianFesti,
                 2005 MoinMoin:NirSoffer,
                 2005 MoinMoin:AlexanderSchremmer,
@@ -15,7 +15,7 @@ from MoinMoin.search.builtin import Search
 
 def searchPages(request, query, sort='weight', mtime=None, historysearch=None, **kw):
     """ Search the text of all pages for query.
-    
+
     @param request: current request
     @param query: the expression (string or query objects) we want to search for
     @keyword sort: sorting of the search results, either 'weight' or 'page_name'

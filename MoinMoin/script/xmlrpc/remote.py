@@ -32,7 +32,7 @@ class PluginScript(MoinScript):
 
         s = xmlrpclib.ServerProxy(url)
 
-        # TODO handle stdin 
+        # TODO handle stdin
         # xmlrpclib.Binary(sys.stdin.read())
         result = s.RemoteScript(secret, self.argv)
         # TODO handle stdout, stderr

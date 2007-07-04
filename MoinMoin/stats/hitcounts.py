@@ -166,7 +166,7 @@ def text(pagename, request, params=''):
 
     for i in xrange(len(days)-1, -1, -1):
         d, v, e = days[i], views[i], edits[i]
-        # sum up views and edits to step days 
+        # sum up views and edits to step days
         sd += 1
         cnt += 1
         sv += v

@@ -3,7 +3,7 @@
     MoinMoin - fullsearch action
 
     This is the backend of the search form. Search pages and print results.
-    
+
     @copyright: 2001 by Juergen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
@@ -16,7 +16,7 @@ from MoinMoin.support.parsedatetime.parsedatetime import Calendar
 def checkTitleSearch(request):
     """ Return 1 for title search, 0 for full text search, -1 for idiot spammer
         who tries to press all buttons at once.
-    
+
     When used in FullSearch macro, we have 'titlesearch' parameter with
     '0' or '1'. In standard search, we have either 'titlesearch' or
     'fullsearch' with localized string. If both missing, default to

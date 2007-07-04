@@ -1,17 +1,17 @@
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - binary file Filter
-    
+
     Processes any binary file and extracts ASCII content from it.
-    
+
     We ignore any file with a file extension on the blacklist, because
     we either can't handle it or it usually has no indexable content.
-    
+
     Due to speed reasons, we only read the first maxread bytes from a file.
-    
+
     For reducing the amount of trash, we only return words with
     length >= minwordlen.
-    
+
     Depends on: nothing (pure python)
 
     @copyright: 2006 MoinMoin:ThomasWaldmann

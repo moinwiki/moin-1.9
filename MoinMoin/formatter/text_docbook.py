@@ -5,7 +5,7 @@
     @copyright: 2005 by Mikko Virkkil <mvirkkil@cc.hut.fi>
     @copyright: 2005 by MoinMoin:AlexanderSchremmer (small modifications)
     @copyright: 2005 by MoinMoin:Petr Pytelka <pyta@lightcomp.com> (small modifications)
-    
+
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -198,7 +198,7 @@ class Formatter(FormatterBase):
             self.text('\\n')
         else:
             #this should not happen
-            #self.text('CRAP') 
+            #self.text('CRAP')
             pass
         return ""
 
@@ -263,7 +263,7 @@ class Formatter(FormatterBase):
 ### Inline ##########################################################
 
     def _handleFormatting(self, name, on, attributes=()):
-        # We add all the elements we create to the list of elements that should not contain a section        
+        # We add all the elements we create to the list of elements that should not contain a section
         if name not in self.section_should_break:
             self.section_should_break.append(name)
 
@@ -489,7 +489,7 @@ class Formatter(FormatterBase):
 
         self._handleNode("table", on, sanitized_attrs)
         if on:
-            self._addEmptyNode("caption") #dtd for table requires caption		
+            self._addEmptyNode("caption") #dtd for table requires caption
         self._handleNode("tgroup", on)
         self._handleNode("tbody", on)
         return ""
@@ -540,20 +540,20 @@ class Formatter(FormatterBase):
         return '' # No clue why something should be done here
 
     def code_token(self, on, tok_type):
-        toks_map = {'ID':'methodname',
-                    'Operator':'',
-                    'Char':'',
-                    'Comment':'lineannotation',
-                    'Number':'',
-                    'String':'phrase',
-                    'SPChar':'',
-                    'ResWord':'token',
-                    'ConsWord':'symbol',
-                    'Error':'errortext',
-                    'ResWord2':'',
-                    'Special':'',
-                    'Preprc':'',
-                    'Text':''}
+        toks_map = {'ID': 'methodname',
+                    'Operator': '',
+                    'Char': '',
+                    'Comment': 'lineannotation',
+                    'Number': '',
+                    'String': 'phrase',
+                    'SPChar': '',
+                    'ResWord': 'token',
+                    'ConsWord': 'symbol',
+                    'Error': 'errortext',
+                    'ResWord2': '',
+                    'Special': '',
+                    'Preprc': '',
+                    'Text': ''}
         if toks_map.has_key(tok_type) and toks_map[tok_type] != '':
             return self._handleFormatting(toks_map[tok_type], on)
         else:

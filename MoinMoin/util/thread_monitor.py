@@ -50,7 +50,7 @@ class LegacyMonitor(AbstractMonitor):
     dumped = set()
     to_dump = set()
     hook_enabled = False
-    
+
     def dump(cls, label):
         df = cls.dump_file or sys.stderr
         s = StringIO()
@@ -80,7 +80,7 @@ class LegacyMonitor(AbstractMonitor):
             cls.dump_file = dumpfile
         cls.dumping = True
     trigger_dump = classmethod(trigger_dump)
-    
+
     def activate_hook(cls):
         sys.setprofile(cls.dump_hook)
         threading.setprofile(cls.dump_hook)

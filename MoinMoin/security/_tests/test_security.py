@@ -216,17 +216,17 @@ class TestAcl(unittest.TestCase):
             ('Admin2',              ('read', 'write', 'admin', 'revert', 'delete')),
             ('Admin3',              ('read', 'write', 'admin')),
             ('JoeDoe',              ('read', 'write')),
-            ('SomeGuy',             ('read',)),
+            ('SomeGuy',             ('read', )),
             # Extended names or mix of extended and CamelCase
-            ('name with spaces',    ('read','write',)),
-            ('another one',         ('read','write',)),
-            ('CamelCase',           ('read','write',)),
-            ('extended name',       ('read','write',)),
+            ('name with spaces',    ('read', 'write', )),
+            ('another one',         ('read', 'write', )),
+            ('CamelCase',           ('read', 'write', )),
+            ('extended name',       ('read', 'write', )),
             # Blocking bad guys
             ('BadGuy',              ()),
             # All other users - every one not mentioned in the acl lines
-            ('All',                 ('read',)),
-            ('Anonymous',           ('read',)),
+            ('All',                 ('read', )),
+            ('Anonymous',           ('read', )),
             )
 
         # Check rights
@@ -268,7 +268,7 @@ class TestAcl(unittest.TestCase):
                 file(os.path.join(revisionsDir, current), 'w').write(text)
             except Exception, err:
                 py.test.skip("Can not be create test page: %s" % err)
-    
+
             assert not self.request.user.may.write(pagename)
         finally:
             if os.path.exists(path):

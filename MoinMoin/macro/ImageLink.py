@@ -6,7 +6,7 @@
     as either attachment or URL) and links to either an URL or a wiki page.
     Optionally the size of the image can be adjusted.
     If no target is given the link will point to the image itself.
-    
+
     Syntax:
         [[ImageLink(image, [target,] [width=width, [height=height]])]]
 
@@ -30,16 +30,16 @@
         [[ImageLink(münchen.png,http://www.muenchen.de,width=50)]]
         [[ImageLink(http://webcam.portalmuc.de/images/webcam/webcam_marienplatz.jpg)]]
         [[ImageLink(example.png,alt=whateveryouwant(üöä))]]
-        [[ImageLink(http://moinmoin.wikiwikiweb.de/OliverSiemoneit?action=AttachFile&do=get&target=screenshot.png,width=647,height=517,alt=OliverSiemoneit?action=AttachFile&do=get&target=screenshot,FrontPage)]] 
+        [[ImageLink(http://moinmoin.wikiwikiweb.de/OliverSiemoneit?action=AttachFile&do=get&target=screenshot.png,width=647,height=517,alt=OliverSiemoneit?action=AttachFile&do=get&target=screenshot,FrontPage)]]
 
     History:
-        Jeff Kunce: 
+        Jeff Kunce:
             wrote the first published version of this macro in 2001.
-        
+
         Reimar Bauer:
             2004 intitial new version for MoinMoin 1.2
-        
-        Marcin Zalewski:   
+
+        Marcin Zalewski:
             Implemented wikiutil.link_tag and macro.formatter.pagelink.
             Added title attribute to the created link. One could generalize that to
             add arbitrary attributes.
@@ -50,8 +50,8 @@
             with a corresponding value to add class to <img> element. To add class to <a> element
             one needs to add 'css_class' key with a corresponding value to the dictionary passed to
             pagelink call.
-        
-       Reimar Bauer:    
+
+       Reimar Bauer:
             2004-12-23 Adapted to MoinMoin Version 1.3.1-1
             2004-12-23 Syntax change Version 1.3.1-2
                    width and height and probably other keywords must be given as keywords (e.g. height=20)
@@ -61,26 +61,26 @@
             2005-03-28 Version 1.3.3-6 feature request added by CDPark:
                        "Can we use an external image? And an external target?"
             2005-04-16 Version 1.3.3-7 no default alt tag definition as requested by CDPark and AlexanderSchremmer
-       
+
        Chong-Dae Park:
             2005-04-17 Version 1.3.3-8 code refactored
                        IMG with no alt tag is not recommended in the HTML standard.
                        It keeps a user specified alt tag. If there is none, it tries to make on using the WikiName
                        or image name instead.
-       
+
        Reimar Bauer:
             2005-04-21 Version 1.3.3-9 bug fixed
                        When the image does not exist yet, it gives you a "Upload Image" link, this link does not
                        work. I suspect that this only is a problem on sub-pages, caused by incorrect escaping of
                         "/". -- CraigJohnson
- 
+
             2005-12-19 Versiom 1.5.0-10 feature added to link to images on different wiki pages
             2006-02-14 Version 1.5.2-11 bug fixed for filename of attached image is Chinese (encode added)
             2006-02-22 Version 1.5.2-12 code refactored
 
       Thomas Waldmann
             2006-03-10 code refactored
-            
+
       Reimar Bauer
              2006-09-22 bug fix of image linked to attachment and inline
              2006-10-08 patch of DavidLinke added and keys now only lowercase used
@@ -90,7 +90,7 @@
                 2004 by Marcin Zalewski,
                 2006 by MoinMoin:ThomasWaldmann,
                 2004-2007 by MoinMoin:ReimarBauer
-                
+
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -104,7 +104,7 @@ def _is_URL(text):
     return '://' in text
 
 def explore_args(args, kwAllowed):
-    """ 
+    """
     explore args for positional and keyword parameters
     """
     if args:

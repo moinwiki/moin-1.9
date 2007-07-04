@@ -9,12 +9,12 @@
     Minimal usage:
 
         from MoinMoin.server.CGI import CgiConfig, run
-        
+
         class Config(CgiConfig):
             pass
 
         run(Config)
-        
+
     See more options in CgiConfig class.
 
     @copyright: 2006 MoinMoin:ThomasWaldmann
@@ -43,9 +43,9 @@ class CgiConfig(Config):
 
 def run(configClass):
     """ Create and run a Cgi Request
-    
+
     See CgiConfig for available options
-    
+
     @param configClass: config class
     """
 

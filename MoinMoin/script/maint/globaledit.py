@@ -5,7 +5,7 @@
     The changes being done are hardcoded in function do_edit.
     As it is, this script is mostly useful for the MoinMoin release maintainer
     using: moin ... --wiki-url=moinmaster.wikiwikiweb.de/ maint globaledit
-    
+
     @copyright: 2004-2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """

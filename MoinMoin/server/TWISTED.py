@@ -7,12 +7,12 @@
     Minimal usage:
 
         from MoinMoin.server.TWISTED import TwistedConfig, makeApp
-        
+
         class Config(TwistedConfig):
             docs = '/usr/share/moin/wiki/htdocs'
             user = 'www-data'
             group = 'www-data'
-            
+
         application = makeApp(Config)
 
     Then run this code with twistd -y yourcode.py. See moin_twisted script.

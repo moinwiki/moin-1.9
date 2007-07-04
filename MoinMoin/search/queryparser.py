@@ -1,7 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - search query parser
-    
+
     @copyright: 2005 MoinMoin:FlorianFesti,
                 2005 MoinMoin:NirSoffer,
                 2005 MoinMoin:AlexanderSchremmer,
@@ -63,7 +63,7 @@ class BaseExpression:
 
     def costs(self):
         """ Return estimated time to calculate this term
-        
+
         Number is relative to other terms and has no real unit.
         It allows to do the fast searches first.
         """
@@ -223,7 +223,7 @@ class OrExpression(AndExpression):
 
     def search(self, page):
         """ Search page with terms
-        
+
         @param page: the page instance
         """
 
@@ -254,7 +254,7 @@ class TextSearch(BaseExpression):
 
         @param pattern: pattern to search for, ascii string or unicode
         @param use_re: treat pattern as re of plain text, bool
-        @param case: do case sensitive search, bool 
+        @param case: do case sensitive search, bool
         """
         self._pattern = unicode(pattern)
         self.negated = 0
@@ -365,7 +365,7 @@ class TitleSearch(BaseExpression):
 
         @param pattern: pattern to search for, ascii string or unicode
         @param use_re: treat pattern as re of plain text, bool
-        @param case: do case sensitive search, bool 
+        @param case: do case sensitive search, bool
         """
         self._pattern = unicode(pattern)
         self.negated = 0
@@ -489,7 +489,7 @@ class LinkSearch(BaseExpression):
 
         @param pattern: pattern to search for, ascii string or unicode
         @param use_re: treat pattern as re of plain text, bool
-        @param case: do case sensitive search, bool 
+        @param case: do case sensitive search, bool
         """
         # used for search in links
         self._pattern = pattern
@@ -586,7 +586,7 @@ class LanguageSearch(BaseExpression):
 
         @param pattern: pattern to search for, ascii string or unicode
         @param use_re: treat pattern as re of plain text, bool
-        @param case: do case sensitive search, bool 
+        @param case: do case sensitive search, bool
         """
         # iso language code, always lowercase
         self._pattern = pattern.lower()
@@ -711,7 +711,7 @@ class MimetypeSearch(BaseExpression):
 
         @param pattern: pattern to search for, ascii string or unicode
         @param use_re: treat pattern as re of plain text, bool
-        @param case: do case sensitive search, bool 
+        @param case: do case sensitive search, bool
         """
         self._pattern = pattern.lower()
         self.negated = 0
@@ -771,7 +771,7 @@ class DomainSearch(BaseExpression):
 
         @param pattern: pattern to search for, ascii string or unicode
         @param use_re: treat pattern as re of plain text, bool
-        @param case: do case sensitive search, bool 
+        @param case: do case sensitive search, bool
         """
         self._pattern = pattern.lower()
         self.negated = 0

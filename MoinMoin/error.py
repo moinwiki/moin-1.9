@@ -16,7 +16,7 @@ class Error(Exception):
 
     Use this class when you raise errors or create sub classes that
     may be used to display non ASCII error message.
-    
+
     Standard errors work safely only with strings using ascii or
     unicode. This class can be used safely with both strings using
     config.charset and unicode.
@@ -24,7 +24,7 @@ class Error(Exception):
     You can init this class with either unicode or string using
     config.charset encoding. On output, the class will convert the string
     to unicode or the unicode to string, using config.charset.
-            
+
     When you want to render an error, use unicode() or str() as needed.
     """
 
@@ -67,12 +67,12 @@ class CompositeError(Error):
 
         class InternalError(CompositeError):
             ''' Raise for internal errors '''
-        
+
         try:
             # code that might fail...
         except HairyLowLevelError:
             raise InternalError("Sorry, internal error occurred")
-            
+
     When showing a traceback, both InternalError traceback and
     HairyLowLevelError traceback are available.
     """

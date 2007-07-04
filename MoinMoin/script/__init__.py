@@ -147,7 +147,7 @@ class Script:
     def logRuntime(self):
         """ Print the total command run time. """
         if self.options.show_timing:
-            log("Needed %.3f secs." % (time.clock() - _start_time,))
+            log("Needed %.3f secs." % (time.clock() - _start_time, ))
 
 
 class MoinScript(Script):
@@ -191,7 +191,7 @@ class MoinScript(Script):
         if len(args) < 2:
             self.parser.print_help()
             fatal("""You must specify a command module and name:
-            
+
 moin ... account check ...
 moin ... account create ...
 moin ... account disable ...
@@ -224,7 +224,7 @@ General options:
     --wiki-url=wiki.example.org/
         Mandatory for most commands and specifies the url of the wiki you like
         to operate on.
-        
+
 Specific options:
     Most commands need additional parameters after command subcommand.
 

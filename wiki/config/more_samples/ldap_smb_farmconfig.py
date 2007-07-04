@@ -10,7 +10,7 @@
     MoinMoin - Configuration for a wiki farm
 
     This is a sample configuration for a farm using ldap and smb auth plugins.
-    
+
     It works like this:
     * user logs in via moin's form on UserPreferences
     * ldap_login plugin checks username/password against LDAP
@@ -229,7 +229,7 @@ class FarmConfig(DefaultConfig):
 
     # Language options --------------------------------------------------
 
-    # See http://moinmoin.wikiwikiweb.de/ConfigMarket for configuration in 
+    # See http://moinmoin.wikiwikiweb.de/ConfigMarket for configuration in
     # YOUR language that other people contributed.
 
     # The main wiki language, set the direction of the wiki pages

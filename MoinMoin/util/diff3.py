@@ -1,7 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - diff3 algorithm
-    
+
     @copyright: 2002 Florian Festi
     @license: GNU GPL, see COPYING for details.
 """
@@ -18,7 +18,7 @@ def text_merge(old, other, new, allow_conflicts=1, *markers):
 
 def merge(old, other, new, allow_conflicts=1, *markers):
     """ do line by line diff3 merge
-        input must be lists containing single lines   
+        input must be lists containing single lines
     """
     if not markers:
         markers = default_markers
@@ -156,7 +156,7 @@ def tripple_match(old, other, new, other_match, new_match):
 
 def match(list1, list2, nr1, nr2, maxcount=3):
     """ return the number matching items after the given positions
-        maximum maxcount lines are are processed 
+        maximum maxcount lines are are processed
     """
     i = 0
     len1 = len(list1)

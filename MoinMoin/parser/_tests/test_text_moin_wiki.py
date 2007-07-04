@@ -136,7 +136,7 @@ class TestTOC(ParserTestCase):
 
     def testHeadingWithWhiteSpace(self):
         """ parser.wiki: TOC links to headings with white space
-        
+
         See bug: TableOfContentsBreakOnExtraSpaces.
 
         Does not test TOC or heading formating, just verify that spaces
@@ -159,47 +159,47 @@ Text
 
 
 class TestDateTimeMacro(ParserTestCase):
-   """ Test DateTime macro
+    """ Test DateTime macro
 
-   Might fail due to libc problems, therefore the fail message warn
-   about this.
+    Might fail due to libc problems, therefore the fail message warn
+    about this.
 
-   TODO: when this test fail, does it mean that moin code fail on that
-   machine? - can we fix this?
-   """
+    TODO: when this test fail, does it mean that moin code fail on that
+    machine? - can we fix this?
+    """
 
-   text = 'AAA %s AAA'
-   needle = re.compile(text % r'(.+)')
-   _tests = (
-       # test                                   expected
-       ('[[DateTime(1970-01-06T00:00:00)]]',   '1970-01-06 00:00:00'),
-       ('[[DateTime(259200)]]',                '1970-01-04 00:00:00'),
-       ('[[DateTime(2003-03-03T03:03:03)]]',   '2003-03-03 03:03:03'),
-       ('[[DateTime(2000-01-01T00:00:00Z)]]',  '2000-01-01 00:00:00'),
-       ('[[Date(2002-02-02T01:02:03Z)]]',      '2002-02-02'),
-       )
+    text = 'AAA %s AAA'
+    needle = re.compile(text % r'(.+)')
+    _tests = (
+        # test                                   expected
+        ('[[DateTime(1970-01-06T00:00:00)]]',   '1970-01-06 00:00:00'),
+        ('[[DateTime(259200)]]',                '1970-01-04 00:00:00'),
+        ('[[DateTime(2003-03-03T03:03:03)]]',   '2003-03-03 03:03:03'),
+        ('[[DateTime(2000-01-01T00:00:00Z)]]',  '2000-01-01 00:00:00'),
+        ('[[Date(2002-02-02T01:02:03Z)]]',      '2002-02-02'),
+        )
 
-   def setUp(self):
-       """ Require default date and time format config values """
-       self.config = self.TestConfig(defaults=('date_fmt', 'datetime_fmt'))
+    def setUp(self):
+        """ Require default date and time format config values """
+        self.config = self.TestConfig(defaults=('date_fmt', 'datetime_fmt'))
 
-   def tearDown(self):
-       del self.config
+    def tearDown(self):
+        del self.config
 
-   def testDateTimeMacro(self):
-       """ parser.wiki: DateTime macro """
-       note = """
-   
-   If this fails, it is likely a problem in your python / libc,
-   not in moin.  See also:
-   <http://sourceforge.net/tracker/index.php?func=detail&
+    def testDateTimeMacro(self):
+        """ parser.wiki: DateTime macro """
+        note = """
+
+    If this fails, it is likely a problem in your python / libc,
+    not in moin.  See also:
+    <http://sourceforge.net/tracker/index.php?func=detail&
        aid=902172&group_id=5470&atid=105470>"""
 
-       for test, expected in self._tests:
-           html = self.parse(self.text % test)
-           result = self.needle.search(html).group(1)
-           self.assertEqual(result, expected,
-               'Expected "%(expected)s" but got "%(result)s"; %(note)s' % locals())
+        for test, expected in self._tests:
+            html = self.parse(self.text % test)
+            result = self.needle.search(html).group(1)
+            self.assertEqual(result, expected,
+                'Expected "%(expected)s" but got "%(result)s"; %(note)s' % locals())
 
 
 class TestTextFormatingTestCase(ParserTestCase):
@@ -441,7 +441,7 @@ class TestBlock(ParserTestCase):
 
     def testEmptyLineBeforeBlock(self):
         """ parser.wiki: empty lines before block element ignored
-        
+
         Empty lines separate paragraphs, but should be ignored if a block
         element follow.
 
@@ -474,7 +474,7 @@ class TestBlock(ParserTestCase):
                          'Expected "%(expected)s" but got "%(result)s"' % locals())
 
     def testColorizedPythonParserAndNestingPreBrackets(self):
-        """ tests nested {{{ }}} for the python colorized parser 
+        """ tests nested {{{ }}} for the python colorized parser
         """
 
         raw = """{{{
@@ -489,7 +489,7 @@ pattern = re.compile(r'{{{This is some nested text}}}')}}}"""
         assert expected == result
 
     def testColorizedPythonParserAndNestingPreBracketsWithLinebreak(self):
-        """ tests nested {{{ }}} for the python colorized parser 
+        """ tests nested {{{ }}} for the python colorized parser
         """
 
         raw = """{{{
@@ -506,7 +506,7 @@ pattern = re.compile(r'{{{This is some nested text}}}')
         assert expected == result
 
     def testNestingPreBrackets(self):
-        """ tests nested {{{ }}} for the wiki parser 
+        """ tests nested {{{ }}} for the wiki parser
         """
 
         raw = """{{{
@@ -520,7 +520,7 @@ You can use {{{brackets}}}}}}"""
         assert expected == result
 
     def testNestingPreBracketsWithLinebreak(self):
-        """ tests nested {{{ }}} for the wiki parser 
+        """ tests nested {{{ }}} for the wiki parser
         """
 
         raw = """{{{
@@ -536,7 +536,7 @@ You can use {{{brackets}}}
         assert expected == result
 
     def testTextBeforeNestingPreBrackets(self):
-        """ tests text before nested {{{ }}} for the wiki parser 
+        """ tests text before nested {{{ }}} for the wiki parser
         """
 
         raw = """Example
@@ -550,7 +550,7 @@ You can use {{{brackets}}}}}}"""
         assert expected == result
 
     def testManyNestingPreBrackets(self):
-        """ tests two nestings  ({{{ }}} and {{{ }}}) in one line for the wiki parser 
+        """ tests two nestings  ({{{ }}} and {{{ }}}) in one line for the wiki parser
         """
 
         raw = """{{{

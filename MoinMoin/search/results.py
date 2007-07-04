@@ -1,7 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - search results processing
-    
+
     @copyright: 2005 MoinMoin:FlorianFesti,
                 2005 MoinMoin:NirSoffer,
                 2005 MoinMoin:AlexanderSchremmer,
@@ -21,7 +21,7 @@ from MoinMoin.Page import Page
 
 class Match(object):
     """ Base class for all Matches (found pieces of pages).
-    
+
     This class represents a empty True value as returned from negated searches.
     """
     # Default match weight
@@ -75,7 +75,7 @@ class TextMatch(Match):
 
 class TitleMatch(Match):
     """ Represents a match in the page title
-    
+
     Has more weight than a match in the page content.
     """
     # Matches in titles are much more important in wikis. This setting
@@ -128,7 +128,7 @@ class FoundPage:
 
         @param unique: return only unique matches (bool)
         @param sort: match attribute to sort by (string)
-        @param type: type of match to return (Match or sub class) 
+        @param type: type of match to return (Match or sub class)
         @rtype: list
         @return: list of matches
         """
@@ -491,7 +491,7 @@ class SearchResults:
                 if matches[j].start >= start:
                     break
 
-            # Add all matches in context and the text between them 
+            # Add all matches in context and the text between them
             while True:
                 match = matches[j]
                 # Ignore matches behind the current position
@@ -536,7 +536,7 @@ class SearchResults:
 
         This function is needed only because we don't have yet a weight
         algorithm for page text matches.
-        
+
         Try to find the first match in the page text. If we can't find
         one, we return the first match and start=0.
 
@@ -746,7 +746,7 @@ class SearchResults:
 
     def querystring(self, querydict=None):
         """ Return query string, used in the page link
-        
+
         @keyword querydict: use these parameters (default: None)
         """
         if querydict is None:
@@ -758,7 +758,7 @@ class SearchResults:
 
     def formatInfo(self, formatter, page):
         """ Return formatted match info
-        
+
         @param formatter: the formatter instance to use
         @param page: the current page instance
         """

@@ -17,7 +17,7 @@ srcurlformat = "http://moinmaster.wikiwikiweb.de/%s?action=raw"
 user = "YourWikiName"
 password = "yourbasicauthpassword"
 srcwiki = xmlrpclib.ServerProxy("http://moinmaster.wikiwikiweb.de/?action=xmlrpc2")
-dsttrans = BasicAuthTransport(user,password)
+dsttrans = BasicAuthTransport(user, password)
 dstwiki = xmlrpclib.ServerProxy("http://devel.linuxwiki.org/moin--main/__xmlrpc/?action=xmlrpc2", transport=dsttrans)
 
 def rawGetPage(srcurl, pagename, encoding='iso-8859-1'):
@@ -29,7 +29,7 @@ def transferpage(srcurlformat, dstwiki, pagename):
     pagedata = srcwiki.getPage(pagename)
     #pagedata = rawGetPage(srcurlformat, pagename, 'iso-8859-1')
     rc = dstwiki.putPage(pagename, pagedata)
-    print "Transferred %s. Len = %d, rc = %s" % (pagename.encode('ascii','replace'), len(pagedata), str(rc))
+    print "Transferred %s. Len = %d, rc = %s" % (pagename.encode('ascii', 'replace'), len(pagedata), str(rc))
 
 def run():
     allsystempagesgroup = 'AllSystemPagesGroup'

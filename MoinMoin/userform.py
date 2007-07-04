@@ -21,7 +21,7 @@ _debug = 0
 def savedata(request):
     """ Handle POST request of the user preferences form.
 
-    Return error msg or None.  
+    Return error msg or None.
     """
     return UserSettingsHandler(request).handle_form()
 
@@ -134,10 +134,10 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
 
         # save data
         theuser.save()
-        
+
         user_created = events.UserCreatedEvent(self.request, theuser)
         events.send_event(user_created)
-        
+
         if form.has_key('create_and_mail'):
             theuser.mailAccountData()
 
@@ -234,20 +234,20 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
                 other = user.get_by_email_address(self.request, theuser.email)
                 if other is not None and other.id != theuser.id:
                     return _("This email already belongs to somebody else.")
-                    
+
         if not 'jid' in theuser.auth_attribs:
             # try to get the jid
             jid = wikiutil.clean_input(form.get('jid', "")[0]).strip()
-            
+
             jid_changed = theuser.jid != jid
-            previous_jid = theuser.jid           
+            previous_jid = theuser.jid
             theuser.jid = jid
-            
+
             if theuser.jid and self.request.cfg.user_jid_unique:
                 other = user.get_by_jabber_id(self.request, theuser.jid)
                 if other is not None and other.id != theuser.id:
                     return _("This jabber id already belongs to somebody else.")
-            
+
             if jid_changed:
                 set_event = events.JabberIDSetEvent(self.request, theuser.jid)
                 unset_event = events.JabberIDUnsetEvent(self.request, previous_jid)
@@ -330,7 +330,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
 
         # subscription for page change notification
         theuser.subscribed_pages = self._decode_pagelist('subscribed_pages')
-        
+
         # subscription to various events
         available = self.request.cfg.subscribable_events
         theuser.subscribed_events = [ev for ev in form.get('events', [])]
@@ -470,14 +470,14 @@ class UserSettings:
             options.append((theme, theme))
 
         return util.web.makeSelection('theme_name', options, cur_theme)
-    
+
     def _event_select(self):
         """ Create event subscription list. """
-        
+
         event_list = self.request.cfg.subscribable_events
         selected = self.request.user.subscribed_events
         super = self.request.user.isSuperUser()
-        
+
         # Create a list of (value, name) tuples for display in <select>
         # Only include super-user visible events if current user has these rights.
         # It's cosmetic - the check for super-user rights should be performed
@@ -486,7 +486,7 @@ class UserSettings:
         for key in event_list.keys():
             if not event_list[key]['superuser'] or super:
                 allowed.append((key, event_list[key]['desc']))
-        
+
         return util.web.makeMultiSelection('events', allowed, selectedvals=selected)
 
     def _editor_default_select(self):
@@ -621,7 +621,7 @@ class UserSettings:
                 html.TEXTAREA(name="quicklinks", rows="6", cols="50")
                     .append('\n'.join(self.request.user.getQuickLinks())),
             ], valign="top")
-            
+
             # FIXME: this depends on Jabber ATM, but may not do so in the future
             if self.cfg.jabber_enabled:
                 self.make_row(_('Subscribed events'), [self._event_select()])
@@ -667,7 +667,7 @@ class UserSettings:
 
         if self.cfg.mail_enabled:
             buttons.append(("account_sendmail", _('Mail me my account data')))
-            
+
         if self.cfg.jabber_enabled:
             buttons.append(("account_sendjabber", _('Send me my account data with Jabber')))
 
@@ -808,14 +808,14 @@ def do_user_browser(request):
              request.formatter.url(0)),
             # 3
             (request.page.link_to(request, text=_('Mail me my account data'),
-                                 querystr={"action":"userform",
+                                 querystr={"action": "userform",
                                            "email": account.email,
                                            "account_sendmail": "1",
                                            "sysadm": "users", },
                                  rel='nofollow')
             + " " +
             request.page.link_to(request, text=_('Send me my account data with Jabber'),
-                                 querystr={"action":"userform",
+                                 querystr={"action": "userform",
                                            "jid": account.jid,
                                            "account_sendjabber": "1",
                                            "sysadm": "users", },

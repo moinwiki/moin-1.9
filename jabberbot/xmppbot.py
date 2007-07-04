@@ -19,13 +19,13 @@ import jabberbot.commands as cmd
 
 class Contact:
     """Abstraction of a roster item / contact
- 
+
     This class handles some logic related to keeping track of
     contact availability, status, etc."""
-    
+
     def __init__(self, jid, resource, priority, show):
         self.jid = jid
-        self.resources = { resource: {'show': show, 'priority': priority} }
+        self.resources = {resource: {'show': show, 'priority': priority}}
 
         # Queued messages, waiting for contact to change its "show"
         # status to something different than "dnd". The messages should
@@ -33,14 +33,14 @@ class Contact:
         # "dnd", as we can't guarantee, that the bot will be up and running
         # the next time she becomes "available".
         self.messages = []
-        
+
     def add_resource(self, resource, show, priority):
         """Adds information about a connected resource
-        
+
         @param resource: resource name
         @param show: a show presence property, as defined in XMPP
         @param priority: priority of the given resource
-        
+
         """
         self.resources[resource] = {'show': show, 'priority': priority}
     
@@ -118,7 +118,7 @@ class XMPPBot(Client, Thread):
         self.tlsconfig = TLSSettings(require = True, verify_peer=False)
         
         # A dictionary of contact objects, ordered by bare JID
-        self.contacts = { }
+        self.contacts = {}
 
         self.known_xmlrpc_cmds = [cmd.GetPage, cmd.GetPageHTML, cmd.GetPageList, cmd.GetPageInfo] 
         self.internal_commands = ["ping", "help"]
@@ -255,7 +255,7 @@ class XMPPBot(Client, Thread):
         
         """    
         if self.config.verbose:
-            msg = "Message from %s." % (message.get_from_jid().as_utf8(),)
+            msg = "Message from %s." % (message.get_from_jid().as_utf8(), )
             self.log.debug(msg)
             
         text = message.get_body()

@@ -5,7 +5,7 @@
     some statistics about MoinMoin usage.
 
     @copyright: 2004 MoinMoin:ThomasWaldmann
-    @license: GNU GPL, see COPYING for details.    
+    @license: GNU GPL, see COPYING for details.
 """
 
 import os, time

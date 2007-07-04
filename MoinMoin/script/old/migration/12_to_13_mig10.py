@@ -4,7 +4,7 @@
     We fix 2 issues here:
     * we forgot to handle edit-lock files. We simply delete them now.
     * we convert attachment names to utf-8
-    
+
     Steps for a successful migration:
 
         1. Stop your wiki and make a backup of old data and code
@@ -14,7 +14,7 @@
         3. make sure that from_encoding and to_encoding matches your needs (see
            beginning of script below and config.charset in moin_config.py) and
            run python2.3 12_to_13_mig10.py from your working dir
-        
+
         4. If there was no error, you will find:
             data.pre-mig10 - the script renames your data directory copy to that name
             data - converted data dir
@@ -74,10 +74,10 @@ def migrate(dir_to):
                     f.decode(to_encoding)
                 except UnicodeDecodeError:
                     fnew = f.decode(from_encoding).encode(to_encoding)
-                    os.rename(os.path.join(root,f), os.path.join(root, fnew))
+                    os.rename(os.path.join(root, f), os.path.join(root, fnew))
                     print 'renamed', f, '\n ->', fnew, ' in dir:', root
 
-        
+
 origdir = 'data.pre-mig10'
 destdir = 'data'
 

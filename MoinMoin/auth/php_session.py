@@ -1,7 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - PHP session cookie authentication
-    
+
     Currently supported systems:
 
         * eGroupware 1.2 ("egw")

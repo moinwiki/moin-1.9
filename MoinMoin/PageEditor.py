@@ -1,7 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - PageEditor class
-    
+
     PageEditor is used for r/w access to a wiki page (edit, rename, delete operations).
 
     TODO:
@@ -9,7 +9,7 @@
     * The editor code should be modularized so we will be able to use it for any
       text/* mimetype data with some special features enabled depending on the
       mimetype (e.g. enable wiki markup help when editing wiki mimetype).
-  
+
     @copyright: 2000-2004 by Juergen Hermann <jh@web.de>,
                 2005-2007 by MoinMoin:ThomasWaldmann,
                 2007 by MoinMoin:ReimarBauer
@@ -22,7 +22,7 @@ try:
     set
 except:
     from sets import Set as set
-    
+
 from MoinMoin import caching, config, user, wikiutil, error
 from MoinMoin.Page import Page
 from MoinMoin.widget import html
@@ -82,7 +82,7 @@ class PageEditor(Page):
 
     def __init__(self, request, page_name, **keywords):
         """ Create page editor object.
-        
+
         @param page_name: name of the page
         @param request: the request object
         @keyword do_revision_backup: if 0, suppress making a page backup per revision
@@ -282,11 +282,11 @@ Please review the page and save then. Do not save this page as it is!""")
             if request.user.may.read(template_page):
                 raw_body = Page(request, template_page).get_raw_body()
                 if raw_body:
-                    request.write(_("[Content of new page loaded from %s]") % (template_page,), '<br>')
+                    request.write(_("[Content of new page loaded from %s]") % (template_page, ), '<br>')
                 else:
-                    request.write(_("[Template %s not found]") % (template_page,), '<br>')
+                    request.write(_("[Template %s not found]") % (template_page, ), '<br>')
             else:
-                request.write(_("[You may not read %s]") % (template_page,), '<br>')
+                request.write(_("[You may not read %s]") % (template_page, ), '<br>')
 
         # Make backup on previews - but not for new empty pages
         if not use_draft and preview and raw_body:
@@ -329,7 +329,7 @@ Please review the page and save then. Do not save this page as it is!""")
 
         # Generate default content for new pages
         if not raw_body:
-            raw_body = _('Describe %s here.') % (self.page_name,)
+            raw_body = _('Describe %s here.') % (self.page_name, )
 
         # send form
         request.write('<form id="editor" method="post" action="%s/%s#preview" onSubmit="flgChange = false;">' % (
@@ -345,7 +345,7 @@ Please review the page and save then. Do not save this page as it is!""")
         request.write(unicode(html.INPUT(type="hidden", name="action", value="edit")))
 
         # Send revision of the page our edit is based on
-        request.write('<input type="hidden" name="rev" value="%d">' % (rev,))
+        request.write('<input type="hidden" name="rev" value="%d">' % (rev, ))
 
         # Create and send a ticket, so we can check the POST
         request.write('<input type="hidden" name="ticket" value="%s">' % wikiutil.createTicket(request))
@@ -376,12 +376,12 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         request.write('''
 <input class="button" type="submit" name="button_save" value="%s" onClick="flgChange = false;">
 <input class="button" type="submit" name="button_preview" value="%s" onClick="flgChange = false;">
-''' % (save_button_text, _('Preview'),))
+''' % (save_button_text, _('Preview'), ))
 
         if not (request.cfg.editor_force and request.cfg.editor_default == 'text'):
             request.write('''
 <input id="switch2gui" style="display: none;" class="button" type="submit" name="button_switch" value="%s">
-''' % (_('GUI Mode'),))
+''' % (_('GUI Mode'), ))
 
         if loadable_draft:
             request.write('''
@@ -394,7 +394,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 %s
 <input class="button" type="submit" name="button_cancel" value="%s">
 <input type="hidden" name="editor" value="text">
-''' % (button_spellcheck, cancel_button_text,))
+''' % (button_spellcheck, cancel_button_text, ))
 
         # Add textarea with page text
         self.sendconfirmleaving()
@@ -514,7 +514,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         newpage = PageEditor(request, newpagename)
 
         pageexists_error = _("""'''A page with the name {{{'%s'}}} already exists.'''
-Try a different name.""") % (newpagename,)
+Try a different name.""") % (newpagename, )
 
         # Check whether a page with the new name already exists
         if newpage.exists(includeDeleted=1):
@@ -581,7 +581,7 @@ Try a different name.""") % (newpagename,)
 
         pageexists_error = _("""'''A page with the name {{{'%s'}}} already exists.'''
 
-Try a different name.""") % (newpagename,)
+Try a different name.""") % (newpagename, )
 
         # Check whether a page with the new name already exists
         if newpage.exists(includeDeleted=1):
@@ -625,7 +625,7 @@ Try a different name.""") % (newpagename,)
                 if index.exists():
                     index.remove_item(self.page_name, now=0)
                     index.update_page(newpagename)
-                    
+
             event = PageRenamedEvent(request, newpage, comment)
             send_event(event)
 
@@ -657,11 +657,11 @@ Try a different name.""") % (newpagename,)
         try:
             event = PageDeletedEvent(request, self, comment)
             send_event(event)
-            
+
             msg = self.saveText(u"deleted\n", 0, comment=comment or u'', index=1, deleted=True, notify=False)
             msg = msg.replace(
                 _("Thank you for your changes. Your attention to detail is appreciated."),
-                _('Page "%s" was successfully deleted!') % (self.page_name,))
+                _('Page "%s" was successfully deleted!') % (self.page_name, ))
 
         except self.SaveError, message:
             # XXX do not only catch base class SaveError here, but
@@ -712,7 +712,7 @@ Try a different name.""") % (newpagename,)
 
     def _expand_variables(self, text):
         """ Expand @VARIABLE@ in `text`and return the expanded text.
-        
+
         @param text: current text of wikipage
         @rtype: string
         @return: new text of wikipage, variables replaced
@@ -1039,7 +1039,7 @@ Please review the page and save then. Do not save this page as it is!""")
             # set success msg
             msg = _("Thank you for your changes. Your attention to detail is appreciated.")
 
-            # determine action for edit log 
+            # determine action for edit log
             if action == 'SAVE' and not self.exists():
                 action = 'SAVENEW'
             comment = kw.get('comment', u'')

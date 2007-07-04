@@ -4,7 +4,7 @@
 
     If you want to use wikirpc function "putPage", read the comments in
     xmlrpc_putPage or it won't work!
-    
+
     Parts of this code are based on Juergen Hermann's wikirpc.py,
     Les Orchard's "xmlrpc.cgi" and further work by Gustavo Niemeyer.
 
@@ -53,12 +53,12 @@ class XmlRpcBase:
         self.cfg = request.cfg
 
     #############################################################################
-    ### Helper functions           
+    ### Helper functions
     #############################################################################
 
     def _instr(self, text):
         """ Convert inbound string.
-        
+
         @param text: the text to convert (encoded str or unicode)
         @rtype: unicode
         @return: text as unicode
@@ -76,7 +76,7 @@ class XmlRpcBase:
 
     def _inlob(self, text):
         """ Convert inbound base64-encoded utf-8 to Large OBject.
-        
+
         @param text: the text to convert
         @rtype: unicode
         @return: text
@@ -87,7 +87,7 @@ class XmlRpcBase:
 
     def _outlob(self, text):
         """ Convert outbound Large OBject to base64-encoded utf-8.
-        
+
         @param text: the text, either unicode or utf-8 string
         @rtype: str
         @return: xmlrpc Binary object
@@ -101,7 +101,7 @@ class XmlRpcBase:
 
     def _dump_exc(self):
         """ Convert an exception to a string.
-        
+
         @rtype: str
         @return: traceback as string
         """
@@ -133,7 +133,7 @@ class XmlRpcBase:
                 response = xmlrpclib.dumps(response)
             else:
                 # wrap response in a singleton tuple
-                response = (response,)
+                response = (response, )
 
                 # serialize it
                 response = xmlrpclib.dumps(response, methodresponse=1)
@@ -202,7 +202,7 @@ class XmlRpcBase:
                 # XXX A marshalling error in any response will fail the entire
                 # multicall. If someone cares they should fix this.
                 result = self.dispatch(method_name, params)
-                
+
                 if not isinstance(result, xmlrpclib.Fault):
                     results.append([result])
                 else:
@@ -215,7 +215,7 @@ class XmlRpcBase:
                     {'faultCode': 1,
                      'faultString': "%s:%s" % (sys.exc_type, sys.exc_value)}
                     )
-                
+
         return results
 
     #############################################################################
@@ -356,7 +356,7 @@ class XmlRpcBase:
 
     def xmlrpc_getPageInfoVersion(self, pagename, rev):
         """ Return page information for specific revision
-        
+
         @param pagename: the name of the page (utf-8)
         @param rev: revision to get info about (int)
         @rtype: dict
@@ -414,7 +414,7 @@ class XmlRpcBase:
 
     def xmlrpc_getPageVersion(self, pagename, rev):
         """ Get raw text from specific revision of pagename
-        
+
         @param pagename: pagename (utf-8)
         @param rev: revision number (int)
         @rtype: str
@@ -447,7 +447,7 @@ class XmlRpcBase:
 
     def xmlrpc_getPageHTMLVersion(self, pagename, rev):
         """ Get HTML of from specific revision of pagename
-        
+
         @param pagename: the page name (utf-8)
         @param rev: revision number (int)
         @rtype: str
@@ -529,7 +529,7 @@ class XmlRpcBase:
         # and make very very sure that nobody untrusted can access your wiki
         # via network or somebody will raid your wiki some day!
 
-        if (self.request.cfg.xmlrpc_putpage_trusted_only and 
+        if (self.request.cfg.xmlrpc_putpage_trusted_only and
             not self.request.user.auth_method in self.request.cfg.trusted_auth_methods):
             return xmlrpclib.Fault(1, "You are not allowed to edit this page")
 
@@ -605,7 +605,7 @@ class XmlRpcBase:
                     centry.remove()
             except caching.CacheError:
                 pass
-            
+
     def _generate_auth_token(self):
         token = random_string(32, 'abcdefghijklmnopqrstuvwxyz0123456789')
         centry = caching.CacheEntry(self.request, 'xmlrpc-session', token,
@@ -623,35 +623,35 @@ class XmlRpcBase:
 
         u = self.request.handle_auth(None, username=username,
                                      password=password, login=True)
-        
+
         if u and u.valid:
             return _generate_auth_token()
         else:
             return ""
-        
+
     def xmlrpc_getJabberAuthToken(self, jid, secret):
         """Returns a token which can be used for authentication.
-        
+
         This token can be used in other XMLRPC calls. Generation of
         token depends on user's JID and a secret shared between wiki
         and Jabber bot.
-        
+
         @param jid: a bare Jabber ID
-        
+
         """
-        
+
         if self.cfg.secret != secret:
             return ""
-        
+
         if randint(0, 99) == 0:
             _cleanup_stale_tokens(self.request)
-            
+
         u = self.request.handle_jid_auth(jid)
-        
+
         if u and u.valid:
             return _generate_auth_token()
         else:
-            return ""            
+            return ""
 
     def xmlrpc_applyAuthToken(self, auth_token):
         """ Applies the auth token and thereby authenticates the user. """
@@ -881,7 +881,7 @@ class XmlRpcBase:
     def xmlrpc_listAttachments(self, pagename):
         """ Get all attachments associated with pagename
         Deprecated.
-        
+
         @param pagename: pagename (utf-8)
         @rtype: list
         @return: a list of utf-8 attachment names
@@ -896,7 +896,7 @@ class XmlRpcBase:
 
     def xmlrpc_getAttachment(self, pagename, attachname):
         """ Get attachname associated with pagename
-        
+
         @param pagename: pagename (utf-8)
         @param attachname: attachment name (utf-8)
         @rtype base64
@@ -915,7 +915,7 @@ class XmlRpcBase:
 
     def xmlrpc_putAttachment(self, pagename, attachname, data):
         """ Set attachname associated with pagename to data
-        
+
         @param pagename: pagename (utf-8)
         @param attachname: attachment name (utf-8)
         @param data: file data (base64)
@@ -929,7 +929,7 @@ class XmlRpcBase:
 
         if not self.request.cfg.xmlrpc_putpage_enabled:
             return xmlrpclib.Boolean(0)
-        if (self.request.cfg.xmlrpc_putpage_trusted_only and 
+        if (self.request.cfg.xmlrpc_putpage_trusted_only and
             not self.request.user.auth_method in self.request.cfg.trusted_auth_methods):
             return xmlrpclib.Fault(1, "You are not allowed to edit this page")
         # also check ACLs

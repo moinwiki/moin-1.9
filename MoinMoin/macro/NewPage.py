@@ -26,7 +26,7 @@ class NewPage:
     Usage:
 
         [[NewPage(template, buttonLabel, parentPage)]]
-        
+
     Examples:
 
         [[NewPage]]
@@ -35,7 +35,7 @@ class NewPage:
             page will not use a template.
 
         [[NewPage(BugTemplate, Create New Bug, MoinMoinBugs)]]
-        
+
             Create an input field with button labeled 'Create New
             Bug'.  The new page will use the BugTemplate template,
             and create the page as a subpage of MoinMoinBugs.

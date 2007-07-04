@@ -89,7 +89,7 @@ class CopyPage(ActionBase):
 
             d = {
                 'subpage': subpages,
-                'subpages_checked':('', 'checked')[self.request.form.get('subpages_checked', ['0'])[0] == '1'],
+                'subpages_checked': ('', 'checked')[self.request.form.get('subpages_checked', ['0'])[0] == '1'],
                 'subpage_label': _('Copy all /subpages too?'),
                 'pagename': wikiutil.escape(self.pagename),
                 'newname_label': _("New name"),
@@ -105,13 +105,13 @@ class CopyPage(ActionBase):
 <table>
     <tr>
     <dd>
-        %(subpage_label)s<input type="checkbox" name="copy_subpages" value="1" %(subpages_checked)s> 
+        %(subpage_label)s<input type="checkbox" name="copy_subpages" value="1" %(subpages_checked)s>
     </dd>
     <dd>
         <class="label"><subpage> %(subpage)s</subpage>
-    </dd>   
+    </dd>
     </tr>
-</table>       
+</table>
 <table>
     <tr>
         <td class="label"><label>%(newname_label)s</label></td>

@@ -1,7 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - display unused or trash page directories in data/pages
-    
+
     Then please review the output before running it!
 
     @copyright: 2005-2006 MoinMoin:ThomasWaldmann

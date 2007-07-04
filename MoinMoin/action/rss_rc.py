@@ -236,8 +236,8 @@ def execute(pagename, request):
             handler.simpleNode(('wiki', 'status'), ('deleted', 'updated')[page.exists()])
             handler.simpleNode(('wiki', 'diff'), full_url(request, page, querystr={'action': 'diff'}))
             handler.simpleNode(('wiki', 'history'), full_url(request, page, querystr={'action': 'info'}))
-            # handler.simpleNode(('wiki', 'importance'), ) # ( major | minor ) 
-            # handler.simpleNode(('wiki', 'version'), ) # ( #PCDATA ) 
+            # handler.simpleNode(('wiki', 'importance'), ) # ( major | minor )
+            # handler.simpleNode(('wiki', 'version'), ) # ( #PCDATA )
 
             handler.endNode('item')
 

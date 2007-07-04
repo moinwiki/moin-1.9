@@ -14,7 +14,7 @@ class Theme(ThemeBase):
 
     def header(self, d, **kw):
         """ Assemble wiki header
-        
+
         @param d: parameter dictionary
         @rtype: unicode
         @return: page header html
@@ -50,7 +50,7 @@ class Theme(ThemeBase):
 
     def editorheader(self, d, **kw):
         """ Assemble wiki header for editor
-        
+
         @param d: parameter dictionary
         @rtype: unicode
         @return: page header html
@@ -75,7 +75,7 @@ class Theme(ThemeBase):
 
     def footer(self, d, **keywords):
         """ Assemble wiki footer
-        
+
         @param d: parameter dictionary
         @keyword ...:...
         @rtype: unicode
@@ -106,7 +106,7 @@ class Theme(ThemeBase):
 def execute(request):
     """
     Generate and return a theme object
-        
+
     @param request: the request object
     @rtype: MoinTheme
     @return: Theme object

@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-	MoinMoin - C++ Source Parser
+    MoinMoin - C++ Source Parser
 
     @copyright: 2002 Taesu Pyo <bigflood@hitel.net>
     @license: GNU GPL, see COPYING for details.
@@ -32,11 +32,11 @@ class Parser(ParserBase):
     parsername = "ColorizedCPlusPlus"
     extensions = ['.c', '.h', '.cpp', '.c++']
     Dependencies = []
-    
+
     def setupRules(self):
         ParserBase.setupRules(self)
 
-        self.addRulePair("Comment", "/[*]","[*]/")
+        self.addRulePair("Comment", "/[*]", "[*]/")
         self.addRule("Comment", "//.*$")
         self.addRulePair("String", 'L?"', r'$|[^\\](\\\\)*"')
         self.addRule("Char", r"'\\.'|'[^\\]'")
@@ -65,6 +65,6 @@ class Parser(ParserBase):
         self.addReserved(reserved_words)
         self.addConstant(constant_words)
 
-        self.addWords(reserved_words2,'ResWord2')
-        self.addWords(special_words,'Special')
+        self.addWords(reserved_words2, 'ResWord2')
+        self.addWords(special_words, 'Special')
 

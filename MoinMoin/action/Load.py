@@ -2,7 +2,7 @@
 """
     MoinMoin - Action macro for page creation from file or attach file to current page
 
-    @copyright: 2007 MoinMoin:ReimarBauer 
+    @copyright: 2007 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 import os

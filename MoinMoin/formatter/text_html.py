@@ -252,7 +252,7 @@ class Formatter(FormatterBase):
 
         Setting a value to None rather than a string (or string
         coercible) will remove that attribute from the list.
-        
+
         If the list of allowed_attrs is provided, then an error is
         raised if an HTML attribute is encountered that is not in that
         list (or is not a common attribute which is always allowed or
@@ -326,7 +326,7 @@ class Formatter(FormatterBase):
 
     def _open(self, tag, newline=False, attr=None, allowed_attrs=None, **kw):
         """ Open a tag with optional attributes (INTERNAL USE BY HTML FORMATTER ONLY!)
-        
+
         @param tag: html tag, string
         @param newline: render tag so following data is on a separate line
         @param attr: dict with tag attributes
@@ -396,7 +396,7 @@ class Formatter(FormatterBase):
             result.append('</%s>' % (tag))
             tagstr = ''.join(result)
         else:
-            # Inline elements 
+            # Inline elements
             # Pull from stack, ignore order, that is not our problem.
             # The code that calls us should keep correct calling order.
             if tag in self._inlineStack:
@@ -425,7 +425,7 @@ class Formatter(FormatterBase):
 
         # Setup id
         if content_id != 'content':
-            aid = 'top_%s' % (content_id,)
+            aid = 'top_%s' % (content_id, )
         else:
             aid = 'top'
         self._content_ids.append(content_id)
@@ -454,7 +454,7 @@ class Formatter(FormatterBase):
         except:
             cid = 'content'
         if cid != 'content':
-            aid = 'bottom_%s' % (cid,)
+            aid = 'bottom_%s' % (cid, )
         else:
             aid = 'bottom'
 
@@ -465,9 +465,9 @@ class Formatter(FormatterBase):
 
     def lang(self, on, lang_name):
         """ Insert text with specific lang and direction.
-        
+
             Enclose within span tag if lang_name is different from
-            the current lang    
+            the current lang
         """
         tag = 'span'
         if lang_name != self.request.current_lang:
@@ -715,7 +715,7 @@ class Formatter(FormatterBase):
                 # add alt and title tags to areas
                 map = re.sub('href\s*=\s*"((?!%TWIKIDRAW%).+?)"', r'href="\1" alt="\1" title="\1"', map)
                 # add in edit links plus alt and title attributes
-                alt = title =  _('Edit drawing %(filename)s (opens in new window)') % {'filename': self.text(fname)}
+                alt = title = _('Edit drawing %(filename)s (opens in new window)') % {'filename': self.text(fname)}
                 map = map.replace('%TWIKIDRAW%"', '%s" alt="%s" title="%s"' % (edit_link, alt, title))
                 # unxml, because 4.01 concrete will not validate />
                 map = map.replace('/>', '>')
@@ -726,7 +726,7 @@ class Formatter(FormatterBase):
                     src=AttachFile.getAttachUrl(pagename, filename, self.request, addts=1),
                     usemap='#'+mapid, css="drawing"))
         else:
-            alt = title =  _('Edit drawing %(filename)s (opens in new window)') % {'filename': self.text(fname)}
+            alt = title = _('Edit drawing %(filename)s (opens in new window)') % {'filename': self.text(fname)}
             return wikiutil.link_tag(self.request,
                                      edit_link,
                                      self.image(alt=alt,
@@ -1025,7 +1025,7 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
 
     def linebreak(self, preformatted=1):
         """Creates a line break in the HTML output.
-        
+
         If preformatted is true a <br> element is inserted, otherwise
         the linebreak will only be visible in the HTML source.
         """
@@ -1035,7 +1035,7 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
 
     def paragraph(self, on, **kw):
         """Creates a paragraph with a <p> element.
-        
+
         Call once with on=1 to start the region, and a second time
         with on=0 to end it.
         """

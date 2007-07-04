@@ -26,14 +26,14 @@ class Failure(Result):
         """
         self.reason = reason
         self.recipient = None
-        
+
     def __str__(self):
         return self.reason or u""
-    
+
 
 class Success(Result):
     """ Used to indicate successfull notifications """
-    
+
     def __init__(self, recipients):
         """
         @param recipients: a set of recipients

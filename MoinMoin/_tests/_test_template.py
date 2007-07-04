@@ -22,10 +22,10 @@ class TestSimpleStuff:
     See http://codespeak.net/py/dist/test.html for reference.
     """
     def testSimplest(self):
-        """ module_tested: test description... 
-        
+        """ module_tested: test description...
+
         Function name MUST start with 'test' to be included in the
-        tests. 
+        tests.
         """
         # You can access the current request with self.request. It is
         # injected for you into the test class by moin test framework.

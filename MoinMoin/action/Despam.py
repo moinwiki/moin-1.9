@@ -1,7 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - Despam action
-    
+
     Mass revert changes done by some specific author / bot.
 
     @copyright: 2005 by ???, Thomas Waldmann
@@ -114,7 +114,7 @@ def revert_page(request, pagename, editor):
                 rev = line.rev
                 break
 
-    if rev == u"00000000": # page created by spammer 
+    if rev == u"00000000": # page created by spammer
         comment = u"Page deleted by Despam action"
         pg = PageEditor.PageEditor(request, pagename, do_editor_backup=0)
         try:

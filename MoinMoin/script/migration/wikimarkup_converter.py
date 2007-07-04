@@ -622,7 +622,7 @@ class Parser:
     # SCANNING ---------------------------------------------------------------
     def scan(self, scan_re, line):
         """ Scans one line
-        
+
         Append text before match, invoke replace() with match, and add text after match.
         """
         result = []
@@ -756,7 +756,7 @@ class Parser:
                 self.request.write(self._indent_to(indlen, indtype, numtype, numstart))
 
                 # Table mode
-                # TODO: move into function?                
+                # TODO: move into function?
                 if (not self.in_table and line[indlen:indlen + 2] == "||"
                     and line.endswith("|| ") and len(line) >= 5 + indlen):
                     # Start table

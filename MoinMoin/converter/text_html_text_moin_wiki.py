@@ -632,7 +632,7 @@ class convert_tree(visitor):
                     before, indent, markup = self._get_list_item_markup(node, i)
                     self.text.extend([before, indent, markup])
                     self.process_list_item(i, indent)
-                elif name in ('ol', 'ul',):
+                elif name in ('ol', 'ul', ):
                     self.process_list(i)
                 elif name == 'dl':
                     self.process_dl(i)
@@ -663,7 +663,7 @@ class convert_tree(visitor):
         for i in node.childNodes:
             name = i.localName
 
-            if name in ('p', 'pre', 'ol', 'ul', 'dl', 'table',) and pending:
+            if name in ('p', 'pre', 'ol', 'ul', 'dl', 'table', ) and pending:
                 self.empty_paragraph_queue(pending, indent, need_indent)
                 need_indent = True
 
@@ -678,7 +678,7 @@ class convert_tree(visitor):
                     self.text.append(indent)
                 self.process_preformatted_item(i)
                 found = True
-            elif name in ('ol', 'ul',):
+            elif name in ('ol', 'ul', ):
                 self.process_list(i)
                 found = True
             elif name == 'dl':
@@ -715,9 +715,9 @@ class convert_tree(visitor):
                     self.text.append(self.new_line)
                     self.text.append(" " * self.depth)
                     self.process_pre(i)
-                elif name in ('h1', 'h2', 'h3', 'h4', 'h5', 'h6',):
+                elif name in ('h1', 'h2', 'h3', 'h4', 'h5', 'h6', ):
                     self.process_heading(i)
-                elif name in ('ol', 'ul',):
+                elif name in ('ol', 'ul', ):
                     self.process_list(i)
                 elif name == 'dl':
                     self.process_dl(i)
@@ -747,7 +747,7 @@ class convert_tree(visitor):
         if name is None:
             return
 
-        if name in ('h1', 'h2', 'h3', 'h4', 'h5', 'h6',): # headers are not allowed here (e.g. inside a ul li),
+        if name in ('h1', 'h2', 'h3', 'h4', 'h5', 'h6', ): # headers are not allowed here (e.g. inside a ul li),
             text = self.node_list_text_only(node.childNodes).strip() # but can be inserted via the editor
             self.text.append(text)                          # so we just drop the header markup and keep the text
             return
@@ -758,9 +758,9 @@ class convert_tree(visitor):
             return
 
         command_close = None
-        if name in ('em', 'i',):
+        if name in ('em', 'i', ):
             command = "''"
-        elif name in ('strong', 'b',):
+        elif name in ('strong', 'b', ):
             command = "'''"
         elif name == 'u':
             command = "__"
@@ -993,7 +993,7 @@ class convert_tree(visitor):
                 elif name == 'caption':
                     self.process_caption(node, i, style)
                     style = ''
-                elif name  in ('col', 'colgroup', ):
+                elif name in ('col', 'colgroup', ):
                     pass # we don't support these, but we just ignore them
                 else:
                     raise ConvertError("process_table: Don't support %s element" % name)

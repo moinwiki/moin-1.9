@@ -71,7 +71,7 @@ def execute(pagename, request):
     request.setContentLanguage(request.lang)
 
     request.emit_http_headers()
-    request.theme.send_title(_('Diff for "%s"') % (pagename,), pagename=pagename, allow_doubleclick=1)
+    request.theme.send_title(_('Diff for "%s"') % (pagename, ), pagename=pagename, allow_doubleclick=1)
 
     if rev1 > 0 and rev2 > 0 and rev1 > rev2 or rev1 == 0 and rev2 > 0:
         rev1, rev2 = rev2, rev1
@@ -100,7 +100,7 @@ def execute(pagename, request):
     request.write(f.paragraph(1, css_class="diff-header"))
     request.write(f.text(_('Differences between revisions %d and %d') % (oldpage.get_real_rev(), newpage.get_real_rev())))
     if edit_count > 1:
-        request.write(f.text(' ' + _('(spanning %d versions)') % (edit_count,)))
+        request.write(f.text(' ' + _('(spanning %d versions)') % (edit_count, )))
     request.write(f.paragraph(0))
 
     if request.user.show_fancy_diff:

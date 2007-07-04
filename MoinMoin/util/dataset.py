@@ -25,7 +25,7 @@ class Column:
         """ Init a column
 
         keys in kw that not in slots are ignored.
-        
+
         @param name: column name, unicode or ascii
         @param kw: column meta data, unicode or ascii
         """
@@ -36,11 +36,11 @@ class Column:
 
 class Dataset:
     """ Base dataset.
-    
+
     Holds a 2-dimensional data set (m rows of n columns) and associated
     meta-data (column titles, etc.).
 
-    Note: Dataset rows and column must contain only ascii or Unicode values!  
+    Note: Dataset rows and column must contain only ascii or Unicode values!
     """
 
     def __init__(self, data_id=None):

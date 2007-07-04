@@ -42,7 +42,7 @@ class Parser:
         self.form = request.form
         self._ = request.getText
 
-        self.show_num, self.num_start, self.num_step, attrs = parse_start_step(request, kw.get('format_args',''))
+        self.show_num, self.num_start, self.num_step, attrs = parse_start_step(request, kw.get('format_args', ''))
 
     def format(self, formatter):
         """ Parse and send the colored source.
@@ -63,7 +63,7 @@ class Parser:
         self.formatter = formatter
         self.request.write(formatter.code_line(1))
         #len('%d' % (len(self.lines)-1, )))
-        
+
         # parse the source and write it
         self.pos = 0
         text = StringIO.StringIO(self.raw)
@@ -72,7 +72,7 @@ class Parser:
         except tokenize.TokenError, ex:
             msg = ex[0]
             line = ex[1][0]
-            errmsg = (self.formatter.linebreak() + 
+            errmsg = (self.formatter.linebreak() +
                       self.formatter.strong(1) + "ERROR: %s" % msg + self.formatter.strong(0) +
                       self.formatter.linebreak() +
                       wikiutil.escape(self.raw[self.lines[line]:]))

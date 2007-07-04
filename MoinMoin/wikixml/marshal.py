@@ -15,7 +15,7 @@ class Marshal:
         ITEM_CONTAINER (default "item") can be overwritten by derived
         classes; if ROOT_CONTAINER is `None`, the usually generated
         container element is omitted, the same is true for ITEM_CONTAINER.
-        
+
         PRIVATE_PREFIXES is a list of prefixes of tagnames that are
         treated as private, i.e. things that should not be serialized.
         Default is to omit all properties starting with an underscore.
@@ -41,7 +41,7 @@ class Marshal:
 
     def __toXML(self, element, data):
         """ Recursive helper method that transforms an object to XML.
-        
+
             Returns a list of strings, which constitute the XML document.
         """
         # map tag names

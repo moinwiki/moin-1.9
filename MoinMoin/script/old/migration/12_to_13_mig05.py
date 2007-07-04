@@ -12,8 +12,8 @@
           designed, as it has separate fields for timestamp and version),
           but we now have to keep the timestamp somewhere else. The appropriate
           place is of course the edit-log.
-    
-    So we change like this:      
+
+    So we change like this:
         * data/pages/PageName/backup/<UTC timestamp in usecs>
           -> data/pages/PageName/revisions/<revno>
     A page save is now done like that:
@@ -25,7 +25,7 @@
             * save to revisions/<revno>
             * mv 'notcurrent' 'current'
         * else give error msg and let user retry save
-            
+
     * data/user/<uid>.bookmark stays in usecs
     * data/event-log stays in usecs
     * data/edit-log and data/pages/PageName/edit-log stay in usecs and:
@@ -35,7 +35,7 @@
          * PageRev is identical to the filename in revisions/ directory
          * Extra is used for some stuff formerly put into comment field, like
            revert info or attach filename
-           
+
     Steps for a successful migration:
 
         1. Stop your wiki and make a backup of old data and code
@@ -89,17 +89,17 @@ def gather_editlog(dir_from, el_from):
     """ this gathers everything that is in edit-log into internal
         data structures, converting to the future format
     """
-    if not os.path.exists(el_from): 
+    if not os.path.exists(el_from):
         return
     for l in open(el_from):
         data = l.rstrip('\n').split('\t')
         origlen = len(data)
         while len(data) < 7: data.append('')
-        (pagename,ip,timestamp,host,id,comment,action) = data
+        (pagename, ip, timestamp, host, id, comment, action) = data
         if origlen == 6:
             action = comment
             comment = ''
-        
+
         extra = ''
         if action == 'SAVE/REVERT': # we missed to convert that in mig4
             ts = long(comment) # must be long for py 2.2.x
@@ -109,17 +109,17 @@ def gather_editlog(dir_from, el_from):
                 extra = str(ts)
             # later we convert this timestamp to a revision number
             comment = ''
-        if action in ['ATTNEW','ATTDRW','ATTDEL',]:
+        if action in ['ATTNEW', 'ATTDRW', 'ATTDEL', ]:
             extra = comment # filename
             comment = '' # so we can use comments on ATT* in future
 
         timestamp = long(timestamp) # must be long for py 2.2.x
-        data = [timestamp,'',action,pagename,ip,host,id,extra,comment]
-        
+        data = [timestamp, '', action, pagename, ip, host, id, extra, comment]
+
         entry = info.get(pagename, {})
         entry[timestamp] = [None, data]
         info[pagename] = entry
-        
+
 def gather_pagedirs(dir_from, is_backupdir=0):
     """ this gathers information from the pagedirs, i.e. text and backup
         files (and also the local editlog) and tries to merge/synchronize
@@ -130,22 +130,22 @@ def gather_pagedirs(dir_from, is_backupdir=0):
     for pagename in pagelist:
         editlog_from = opj(dir_from, pagename, 'edit-log')
         gather_editlog(dir_from, editlog_from)
-         
+
         entry = info.get(pagename, {})
 
         loglist = [] # editlog timestamps of page revisions
-        for ts,data in entry.items():
-            if data[1][2] in ['SAVE','SAVENEW','SAVE/REVERT',]:
+        for ts, data in entry.items():
+            if data[1][2] in ['SAVE', 'SAVENEW', 'SAVE/REVERT', ]:
                 loglist.append(ts)
         loglist.sort()
         lleftover = loglist[:]
-        
+
         # remember the latest log entry
         if lleftover:
             llatest = lleftover[-1]
         else:
             llatest = None
-            
+
         backupdir_from = opj(dir_from, pagename, 'backup')
         if os.path.exists(backupdir_from):
             backuplist = listdir(backupdir_from)
@@ -157,7 +157,7 @@ def gather_pagedirs(dir_from, is_backupdir=0):
                     entry[ts][0] = backup_from
                     lleftover.remove(ts)
                     bleftover.remove(bfile)
-            
+
         text_from = opj(dir_from, pagename, 'text')
         found_text = False
         if os.path.exists(text_from): # we have a text file, it should match latest log entry
@@ -171,7 +171,7 @@ def gather_pagedirs(dir_from, is_backupdir=0):
                     found_text = True
             else: # we have no log entries left 8(
                 ts = wikiutil.timestamp2version(mtime)
-                data = [ts,'','SAVE', pagename,'','','','','missing editlog entry for this page version']
+                data = [ts, '', 'SAVE', pagename, '', '', '', '', 'missing editlog entry for this page version']
                 entry[ts] = [text_from, data]
         else:
             # this page was maybe deleted, so we remember for later:
@@ -179,7 +179,7 @@ def gather_pagedirs(dir_from, is_backupdir=0):
             if llatest in lleftover: # if a page is deleted, the last log entry has no file
                 entry[llatest][0] = None
                 lleftover.remove(llatest)
-                        
+
         if os.path.exists(backupdir_from):
             backuplist = listdir(backupdir_from)
             for bfile in backuplist:
@@ -197,20 +197,20 @@ def gather_pagedirs(dir_from, is_backupdir=0):
                         lleftover.remove(ts)
                         bleftover.remove(bfile)
                         print "Warning: Win32 daylight saving bug encountered & fixed!"
-                        
+
             if len(bleftover) == 1 and len(lleftover) == 1: # only 1 left, must be this
                 backup_from = opj(backupdir_from, bleftover[0])
                 entry[lleftover[0]][0] = backup_from
                 lleftover = []
                 bleftover = []
-            
+
             # fake some log entries
             for bfile in bleftover:
                 backup_from = opj(backupdir_from, bfile)
                 bts = long(bfile) # must be long py 2.2.x
-                data = [ts,'','SAVE',pagename,'','','','','missing editlog entry for this page version']
+                data = [ts, '', 'SAVE', pagename, '', '', '', '', 'missing editlog entry for this page version']
                 entry[bts] = [backup_from, data]
-                
+
         # check if we still haven't matched the "text" file
         if not found_text and os.path.exists(text_from):
             if llatest in lleftover: # latest log entry still free
@@ -219,14 +219,14 @@ def gather_pagedirs(dir_from, is_backupdir=0):
             else: # log for "text" file is missing or latest was taken by other rev 8(
                 mtime = os.path.getmtime(text_from)
                 ts = wikiutil.timestamp2version(mtime) # take mtime, we have nothing better
-                data = [ts,'','SAVE', pagename,'','','','','missing editlog entry for this page version']
+                data = [ts, '', 'SAVE', pagename, '', '', '', '', 'missing editlog entry for this page version']
                 entry[ts] = [text_from, data]
-                
+
         # delete unmatching log entries
         for ts in lleftover:
             #print "XXX Deleting leftover log entry: %r" % entry[ts]
             del entry[ts]
-        
+
         info[pagename] = entry
 
 def remove_trash(dir_from):
@@ -270,7 +270,7 @@ def generate_pages(dir_from, dir_to):
                     file_to = opj(pagedir, 'revisions', revstr)
                     copy_file(file_from, file_to)
             f.close()
-                
+
             curr_file = opj(pagedir, 'current')
             f = open(curr_file, 'w')
             f.write(revstr)
@@ -280,7 +280,7 @@ def generate_pages(dir_from, dir_to):
         if os.path.exists(att_from):
             att_to = opj(pagedir, 'attachments')
             copy_dir(att_from, att_to)
-        
+
 
 def generate_editlog(dir_from, dir_to):
     editlog = {}
@@ -289,10 +289,10 @@ def generate_editlog(dir_from, dir_to):
         for ts in entry:
             file_from, data = entry[ts]
             editlog[ts] = data
-    
+
     tslist = editlog.keys()
     tslist.sort()
-    
+
     editlog_file = opj(dir_to, 'edit-log')
     f = open(editlog_file, 'w')
     for ts in tslist:
@@ -300,7 +300,7 @@ def generate_editlog(dir_from, dir_to):
         f.write('\t'.join(data)+'\n')
     f.close()
 
-        
+
 origdir = 'data.pre-mig5'
 
 # Backup original dir and create new empty dir

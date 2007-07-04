@@ -9,7 +9,7 @@
       to convert those entries to use revno == 99999999 and renumber the
       normal entries so we have no missing numbers in between
     * edit-log's action field sometimes was empty (default: SAVE)
-    
+
     Steps for a successful migration:
 
         1. Stop your wiki and make a backup of old data and code
@@ -60,21 +60,21 @@ def gather_editlog(el_from, forcepagename=None):
     """ this gathers everything that is in edit-log into internal
         data structures, converting to the future format
     """
-    if not os.path.exists(el_from): 
+    if not os.path.exists(el_from):
         return
     for l in open(el_from):
         data = l.rstrip('\n').rstrip('\r').split('\t')
         while len(data) < 9:
             data.append('')
-        (timestampstr,revstr,action,pagename,ip,host,id,extra,comment) = data
-        
+        (timestampstr, revstr, action, pagename, ip, host, id, extra, comment) = data
+
         if forcepagename: # we use this for edit-log in pagedirs (for renamed pages!)
             pagename = forcepagename
 
         if not action: # FIX: sometimes action is empty ...
             action = 'SAVE'
 
-        if action in ['ATTNEW','ATTDRW','ATTDEL',]:
+        if action in ['ATTNEW', 'ATTDRW', 'ATTDEL', ]:
             revstr = '99999999' # FIXES revno
             # use reserved value, ATT action doesn't create new rev of anything
 
@@ -84,15 +84,15 @@ def gather_editlog(el_from, forcepagename=None):
             comment = 'missing edit-log entry for this revision' # more precise
             extra = ''
             id = ''
-            
+
         rev = int(revstr)
-        data = [timestampstr,rev,action,pagename,ip,host,id,extra,comment]
-        
+        data = [timestampstr, rev, action, pagename, ip, host, id, extra, comment]
+
         entry = info.get(pagename, {})
         timestamp = long(timestampstr) # must be long for py 2.2.x
         entry[timestamp] = [99999999, data] # new revno, data
         info[pagename] = entry
-        
+
 def gather_pagedirs(dir_from):
     """ this gathers edit-log information from the pagedirs, just to make sure
     """
@@ -104,7 +104,7 @@ def gather_pagedirs(dir_from):
 
 
 def generate_pages(dir_from, dir_to):
-    revactions = ['SAVE','SAVENEW','SAVE/REVERT',] # these actions create revisions
+    revactions = ['SAVE', 'SAVENEW', 'SAVE/REVERT', ] # these actions create revisions
     for pn in info:
         entry = info.get(pn, {})
         tslist = entry.keys()
@@ -119,7 +119,7 @@ def generate_pages(dir_from, dir_to):
             for ts in tslist:
                 data = entry[ts][1]
                 datanew = data[:]
-                (timestamp,rev,action,pagename,ip,host,id,extra,comment) = data
+                (timestamp, rev, action, pagename, ip, host, id, extra, comment) = data
                 revstr = '%08d' % rev
                 if action in revactions:
                     revnew += 1
@@ -133,20 +133,20 @@ def generate_pages(dir_from, dir_to):
                     revertrevnew = 0
                     for ts2 in tslist:
                         data2 = entry[ts2][1]
-                        (timestamp2,rev2,action2,pagename2,ip2,host2,id2,extra2,comment2) = data2
+                        (timestamp2, rev2, action2, pagename2, ip2, host2, id2, extra2, comment2) = data2
                         if rev2 == revertrevold:
                             revertrevnew = entry[ts2][0]
                     datanew[7] = '%08d' % revertrevnew
-                    
+
                 datanew[1] = revnewstr
                 f.write('\t'.join(datanew)+'\n') # does make a CRLF on win32 in the file
-                
+
                 if action in revactions: # we DO have a page rev for this one
                     file_from = opj(dir_from, 'pages', pn, 'revisions', revstr)
                     file_to = opj(revdir, revnewstr)
                     copy_file(file_from, file_to)
             f.close()
-            
+
             # check if page exists or is deleted in orig dir
             pagedir_from = opj(dir_from, 'pages', pn)
             revdir_from = opj(pagedir_from, 'revisions')
@@ -156,7 +156,7 @@ def generate_pages(dir_from, dir_to):
                 page_exists = 1
             except:
                 page_exists = 0
-                
+
             # re-make correct DELETED status!
             if page_exists:
                 curr_file = opj(pagedir, 'current')
@@ -168,7 +168,7 @@ def generate_pages(dir_from, dir_to):
         if os.path.exists(att_from):
             att_to = opj(pagedir, 'attachments')
             copy_dir(att_from, att_to)
-        
+
 
 def generate_editlog(dir_from, dir_to):
     editlog = {}
@@ -177,10 +177,10 @@ def generate_editlog(dir_from, dir_to):
         for ts in entry:
             file_from, data = entry[ts]
             editlog[ts] = data
-    
+
     tslist = editlog.keys()
     tslist.sort()
-    
+
     editlog_file = opj(dir_to, 'edit-log')
     f = open(editlog_file, 'w')
     for ts in tslist:
@@ -190,7 +190,7 @@ def generate_editlog(dir_from, dir_to):
         f.write('\t'.join(datatmp)+'\n')
     f.close()
 
-        
+
 origdir = 'data.pre-mig8'
 
 # Backup original dir and create new empty dir

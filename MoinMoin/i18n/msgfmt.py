@@ -116,7 +116,7 @@ class MsgFmt(object):
             # terminated; the NUL does not count into the size.
             offsets.append((len(ids), len(id), len(strs), len(self.messages[id])))
             ids += id + '\0'
-            strs += self.messages[id] +  '\0'
+            strs += self.messages[id] + '\0'
         output = []
         # The header is 7 32-bit unsigned integers.  We don't use hash tables, so
         # the keys start right after the index tables.

@@ -18,8 +18,8 @@ class Dialog(base.Widget):
     """
 
     def __init__(self, request, **kw):
-        """ Initialize a dialog 
-        
+        """ Initialize a dialog
+
         @param request: current request
         @keyword content: dialong content
         """
@@ -32,7 +32,7 @@ class Dialog(base.Widget):
 
 class Status(base.Widget):
     """ Status widget
-    
+
     Use Status when you want to present to the user status information,
     and no interaction needed.
 
@@ -43,8 +43,8 @@ class Status(base.Widget):
     """
 
     def __init__(self, request, **kw):
-        """ Initialize a dialog 
-        
+        """ Initialize a dialog
+
         @param request: current request
         @keyword content: status message content
         """

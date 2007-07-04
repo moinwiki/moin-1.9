@@ -17,7 +17,7 @@ from distutils.command.build_scripts import build_scripts
 from MoinMoin.version import release, revision
 
 # we need this for distutils from python 2.3 compatibility, python 2.4 has the
-# 'package_data' keyword to the 'setup' function to install data in packages 
+# 'package_data' keyword to the 'setup' function to install data in packages
 # see http://wiki.python.org/moin/DistutilsInstallDataScattered
 from distutils.command.install_data import install_data
 class smart_install_data(install_data):
@@ -124,7 +124,7 @@ class build_scripts_create(build_scripts):
             <packagename>.script.<mangled_scriptname>
 
         The mangling of script names replaces '-' and '/' characters
-        with '-' and '.', so that they are valid module paths. 
+        with '-' and '.', so that they are valid module paths.
     """
     package_name = None
 
@@ -212,7 +212,7 @@ setup_args = {
 A WikiWikiWeb is a collaborative hypertext environment, with an
 emphasis on easy access to and modification of information. MoinMoin
 is a Python WikiClone that allows you to easily set up your own wiki,
-only requiring a Python installation. 
+only requiring a Python installation.
 """,
     'packages': [
         'MoinMoin',
@@ -296,7 +296,7 @@ except distutils.errors.DistutilsPlatformError, ex:
 POSSIBLE CAUSE
 
 "distutils" often needs developer support installed to work
-correctly, which is usually located in a separate package 
+correctly, which is usually located in a separate package
 called "python%d.%d-dev(el)".
 
 Please contact the system administrator to have it installed.

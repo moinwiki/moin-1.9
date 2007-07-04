@@ -206,7 +206,7 @@ def add_attachment(request, pagename, target, filecontent, overwrite=0):
     fpath = os.path.join(attach_dir, target).encode(config.charset)
     exists = os.path.exists(fpath)
     if exists and not overwrite:
-        msg = _("Attachment '%(target)s' already exists.") % { 'target': target, }
+        msg = _("Attachment '%(target)s' already exists.") % {'target': target, }
     else:
         if exists:
             try:
@@ -220,15 +220,15 @@ def add_attachment(request, pagename, target, filecontent, overwrite=0):
             stream.close()
 
         _addLogEntry(request, 'ATTNEW', pagename, target)
-        
+
         event = FileAttachedEvent(request, pagename, target, len(filecontent))
-        results = events.send_event(event)    
-        
+        results = events.send_event(event)
+
         recipients = []
         for result in results:
             if isinstance(results, notification.Success):
                 recipients.append(result.recipient)
-                
+
         if recipients:
             info = _("Notifications sent to:")
             msg = msg + "<p>%s %s</p>" % (info, ",".join(recipients))
@@ -620,7 +620,7 @@ def execute(pagename, request):
         else:
             msg = _('You are not allowed to view attachments of this page.')
     else:
-        msg = _('Unsupported upload action: %s') % (wikiutil.escape(do),)
+        msg = _('Unsupported upload action: %s') % (wikiutil.escape(do), )
 
     if msg:
         error_msg(pagename, request, msg)
@@ -760,7 +760,7 @@ def move_file(request, pagename, new_pagename, attachment, new_attachment):
             return
 
         if new_attachment_path != attachment_path:
-        # move file  
+        # move file
             filesys.rename(attachment_path, new_attachment_path)
             _addLogEntry(request, 'ATTDEL', pagename, attachment)
             _addLogEntry(request, 'ATTNEW', new_pagename, new_attachment)
@@ -1009,7 +1009,7 @@ def send_viewfile(pagename, request):
 
 
         request.write(request.formatter.preformatted(1))
-        # If we have text but no colorizing parser we try to decode file contents. 
+        # If we have text but no colorizing parser we try to decode file contents.
         content = open(fpath, 'r').read()
         content = wikiutil.decodeUnknownInput(content)
         content = wikiutil.escape(content)
@@ -1037,7 +1037,7 @@ def send_viewfile(pagename, request):
     macro.request = request
     macro.formatter = request.html_formatter
 
-    # use EmbedObject to view valid mime types 
+    # use EmbedObject to view valid mime types
     from MoinMoin.macro.EmbedObject import EmbedObject
     if mt is None:
         request.write('<p>' + _("Unknown file type, cannot display this attachment inline.") + '</p>')
