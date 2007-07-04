@@ -29,7 +29,7 @@ def test_send_event(request):
 
     request.cfg.event_handlers = [event_handler]
     event = events.Event(request)
-    
+
     print "A proper event handler must be called and an 1-element list of results returned"
     results = events.send_event(event)
     assert issubclass(results[0].__class__, events.EventResult)
@@ -42,11 +42,11 @@ def test_subscribable_events(request):
 
 def test_page_change_message(request):
     page = Page(request, "FrontPage")
-    
+
     print "Provided with a dumb change type argument, this should raise an exception!"
-    py.test.raises(notification.UnknownChangeType, notification.page_change_message, 
+    py.test.raises(notification.UnknownChangeType, notification.page_change_message,
                    "StupidType", request, page, "en", revisions=page.getRevList())
-    
+
 def test_filter_subscriber_list(request):
     user = User(request)
     event = events.Event(request)
@@ -66,7 +66,7 @@ def test_filter_subscriber_list(request):
     subscribers = {"en": [user]}
     jabbernotify._filter_subscriber_list(event, subscribers)
     assert not subscribers["en"]
-   
+
     print "User is not subscribed to this event, but wants to get notfied by jabber."
     print "The list should be empty."
     user.notify_by_jabber = True
