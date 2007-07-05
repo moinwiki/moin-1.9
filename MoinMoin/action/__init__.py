@@ -140,10 +140,12 @@ class ActionBase:
 
         form_html = '''
 %(error_html)s
-<form method="post" action="" method="%(method)s" enctype="%(enctype)s">
+<form action="" method="%(method)s" enctype="%(enctype)s">
+<div>
 <input type="hidden" name="action" value="%(actionname)s">
 %(ticket_html)s
 %(user_html)s
+</div>
 </form>''' % d
 
         return Dialog(self.request, content=form_html)
