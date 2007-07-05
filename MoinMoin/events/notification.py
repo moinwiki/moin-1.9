@@ -11,9 +11,38 @@
 
 from MoinMoin import user, wikiutil
 from MoinMoin.Page import Page
-from MoinMoin.action.AttachFile import getAttachUrl
+from MoinMoin.events import EventResult
+
+class Result(EventResult):
+    """ A base class for results of notification handlers"""
+    pass
+
+class Failure(Result):
+    """ Used to report a failure in sending notifications """
+    def __init__(self, reason, recipients = None):
+        """
+        @param recipients: a set of recipients
+        @type recipients: set
+        """
+        self.reason = reason
+        self.recipient = None
+
+    def __str__(self):
+        return self.reason or u""
+
+
+class Success(Result):
+    """ Used to indicate successfull notifications """
+
+    def __init__(self, recipients):
+        """
+        @param recipients: a set of recipients
+        @type recipients: set
+        """
+        self.recipients = recipients
 
 class UnknownChangeType:
+    """ Used to signal an invalid page change event """
     pass
 
 def page_change_message(msgtype, request, page, lang, **kwargs):
@@ -27,6 +56,7 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
     @rtype: unicode
 
     """
+    from MoinMoin.action.AttachFile import getAttachUrl
 
     _ = request.getText
     page._ = lambda s, formatted=True, r=request, l=lang: r.getText(s, formatted=formatted, lang=l)
@@ -92,6 +122,17 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
                 'editor': page.uid_override or user.getUserIdentification(request),
                 'pagelink': pagelink,
                 'sitename': page.cfg.sitename or request.getBaseURL(),
+        }
+
+    elif msgtype == "page_renamed":
+        messageBody = _("Dear wiki user,\n\n"
+            'You have subscribed to a wiki page "%(sitename)s" for change notification.\n\n'
+            "The following page has been renamed from %(oldname)s by %(editor)s:\n"
+            "%(pagelink)s\n\n", formatted=False) % {
+                'editor': page.uid_override or user.getUserIdentification(request),
+                'pagelink': pagelink,
+                'sitename': page.cfg.sitename or request.getBaseURL(),
+                'oldname': kwargs['old_name']
         }
     else:
         raise UnknownChangeType()

@@ -6,8 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import sys
-import os
+import logging, os, sys
 from Queue import Queue
 
 from jabberbot.config import BotConfig
@@ -26,8 +25,11 @@ def main():
 
         raise SystemExit
 
-    # TODO: actually accept options from the help string
+    log = logging.getLogger("log")
+    log.setLevel(logging.DEBUG)
+    log.addHandler(logging.StreamHandler())
 
+    # TODO: actually accept options from the help string
     commands_from_xmpp = Queue()
     commands_to_xmpp = Queue()
 

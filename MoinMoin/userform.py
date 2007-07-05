@@ -237,7 +237,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
 
         if not 'jid' in theuser.auth_attribs:
             # try to get the jid
-            jid = wikiutil.clean_input(form.get('jid', "")).strip()
+            jid = wikiutil.clean_input(form.get('jid', "")[0]).strip()
 
             jid_changed = theuser.jid != jid
             previous_jid = theuser.jid
@@ -332,7 +332,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
         theuser.subscribed_pages = self._decode_pagelist('subscribed_pages')
 
         # subscription to various events
-        available = events.get_subscribable_events()
+        available = self.request.cfg.subscribable_events
         theuser.subscribed_events = [ev for ev in form.get('events', [])]
 
         # save data
@@ -474,7 +474,7 @@ class UserSettings:
     def _event_select(self):
         """ Create event subscription list. """
 
-        event_list = events.get_subscribable_events()
+        event_list = self.request.cfg.subscribable_events
         selected = self.request.user.subscribed_events
         super = self.request.user.isSuperUser()
 

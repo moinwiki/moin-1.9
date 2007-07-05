@@ -285,6 +285,8 @@ class User:
         self.auth_method = kw.get('auth_method', 'internal')
         self.auth_attribs = kw.get('auth_attribs', ())
         self.bookmarks = {} # interwikiname: bookmark
+        self.notify_by_email = True
+        self.notify_by_jabber = False
 
         # create some vars automatically
         self.__dict__.update(self._cfg.user_form_defaults)
