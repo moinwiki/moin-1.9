@@ -7,7 +7,7 @@
 """
 
 from MoinMoin.xmlrpc import XmlRpcBase
-from MoinMoin.request.CLI import Request
+from MoinMoin.request.request_cli import Request
 from xmlrpclib import Fault
 
 def xmlrpc_return_fault():
