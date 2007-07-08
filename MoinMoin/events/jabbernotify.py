@@ -23,6 +23,8 @@ import MoinMoin.events as ev
 
 
 def handle(event):
+    """An event handler"""
+    
     cfg = event.request.cfg
 
     # Check for desired event type and if notification bot is configured
@@ -131,9 +133,10 @@ def handle_page_renamed(event):
 def handle_user_created(event):
     """Handles an event sent when a new user is being created"""
 
-    user_ids = getUserList(event.request)
     jids = []
+    user_ids = getUserList(event.request)
     event_name = event.__class__.__name__
+    email = event.user.email or u"NOT SET"
     msg = u"""Dear Superuser, a new user has just been created. Details follow:
     User name: %s
     Email address: %s
@@ -147,9 +150,10 @@ def handle_user_created(event):
             continue
 
         # Currently send this only to super users
-        # TODO: make it possible to disable this notification
         if usr.isSuperUser() and usr.jid and event_name in usr.subscribed_events:
-            send_notification(event.request, [usr.jid], msg % (event.user.name, email))
+            jids.append(usr.jid)
+    
+    send_notification(event.request, jids, msg % (event.user.name, email))
 
 
 def page_change(type, request, page, subscribers, **kwargs):
