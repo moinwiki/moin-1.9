@@ -110,13 +110,18 @@ class XMLRPCClient(Thread):
 
         return wrapped_func
 
+    def warn_no_credentials(self, jid):
+        msg = u"""Credentials check failed, you may be unable to see all information."""
+        warning = cmd.NotificationCommand([jid], msg)
+        self.commands_out.put_nowait(warning)
+        
     def get_page(self, command):
         """Returns a raw page"""
 
         self.multicall.getPage(command.pagename)
 
         if not self.token:
-            # FIXME: notify the user that he may not have full rights on the wiki
+            self.warn_no_credentials(command.jid)
             getpage_result = self.multicall()
         else:
             getpage_result, token_result = self.multicall()
@@ -133,7 +138,7 @@ class XMLRPCClient(Thread):
         self.multicall.getPageHTML(command.pagename)
 
         if not self.token:
-            # FIXME: notify the user that he may not have full rights on the wiki
+            self.warn_no_credentials(command.jid)
             getpagehtml_result = self.multicall()
         else:
             token_result, getpagehtml_result = self.multicall()
