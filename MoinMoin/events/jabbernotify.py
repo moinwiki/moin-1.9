@@ -24,7 +24,7 @@ import MoinMoin.events as ev
 
 def handle(event):
     """An event handler"""
-    
+
     cfg = event.request.cfg
 
     # Check for desired event type and if notification bot is configured
@@ -152,7 +152,7 @@ def handle_user_created(event):
         # Currently send this only to super users
         if usr.isSuperUser() and usr.jid and event_name in usr.subscribed_events:
             jids.append(usr.jid)
-    
+
     send_notification(event.request, jids, msg % (event.user.name, email))
 
 
