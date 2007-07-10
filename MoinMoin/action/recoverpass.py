@@ -47,16 +47,21 @@ def execute(pagename, request):
 
         request.write(request.formatter.startContent("content"))
 
-        # THIS IS A BIG HACK. IT NEEDS TO BE CLEANED UP
-        request.write(Settings(request).create_form(recover_only=True))
+        if not request.cfg.mail_enabled:
+            request.write(_("""This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email."""))
+        else:
+            # THIS IS A BIG HACK. IT NEEDS TO BE CLEANED UP
+            request.write(Settings(request).create_form(recover_only=True))
 
-        request.write(_("""
+            request.write(_("""
 == Recovering a lost password ==
 [[BR]]
 If you have forgotten your password, provide your email address and click on '''Mail me my account data'''.
 [[BR]]
 The email you get contains the encrypted password (so even if someone intercepts the mail, he won't know your REAL password). Just copy and paste it into the login mask into the password field and log in.
 After logging in you should change your password."""))
+
         request.write(request.formatter.endContent())
 
         request.theme.send_footer(pagename)
