@@ -39,6 +39,9 @@ class UserPrefBase(object):
             hidden fields
               * action: set to "userprefs"
               * handler: set to the plugin name
+            It can additionally contain the hidden field
+            'sub' set to the plugin name if the plugin needs
+            multiple forms (wizard-like.)
         '''
         raise NotImplementedError
 
