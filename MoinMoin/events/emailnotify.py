@@ -104,9 +104,9 @@ def handle_user_created(event):
     body = _("""Dear Superuser, a new user has just been created. Details follow:
     
     User name: %(username)s
-    Email address: %(useremail)s)""") % {
+    Email address: %(useremail)s""", formatted=False) % {
          'username': event.user.name,
-         'useremail': email
+         'useremail': email,
          }
 
     from_address = cfg.mail_from

@@ -114,7 +114,7 @@ class XMLRPCClient(Thread):
         msg = u"""Credentials check failed, you may be unable to see all information."""
         warning = cmd.NotificationCommand([jid], msg)
         self.commands_out.put_nowait(warning)
-        
+
     def get_page(self, command):
         """Returns a raw page"""
 
