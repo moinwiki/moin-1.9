@@ -110,7 +110,7 @@ if wikipath:
         sys.path.append(wikipath)
 
 from MoinMoin.PageEditor import PageEditor
-from MoinMoin.request.CLI import Request
+from MoinMoin.request.request_cli import Request
 
 # the block parser deals with the whole text to be converted
 #

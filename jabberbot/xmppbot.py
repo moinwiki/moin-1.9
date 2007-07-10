@@ -6,8 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import time
-import Queue
+import logging, time, Queue
 from threading import Thread
 
 from pyxmpp.client import Client
@@ -17,7 +16,6 @@ from pyxmpp.message import Message
 from pyxmpp.presence import Presence
 
 import jabberbot.commands as cmd
-
 
 class Contact:
     """Abstraction of a roster item / contact
@@ -115,8 +113,9 @@ class XMPPBot(Client, Thread):
         jid = u"%s@%s/%s" % (config.xmpp_node, config.xmpp_server, config.xmpp_resource)
 
         self.config = config
+        self.log = logging.getLogger("log")
         self.jid = JID(node_or_jid=jid, domain=config.xmpp_server, resource=config.xmpp_resource)
-        self.tlsconfig = TLSSettings(require=True, verify_peer=False)
+        self.tlsconfig = TLSSettings(require = True, verify_peer=False)
 
         # A dictionary of contact objects, ordered by bare JID
         self.contacts = {}
@@ -133,9 +132,7 @@ class XMPPBot(Client, Thread):
     def run(self):
         """Start the bot - enter the event loop"""
 
-        if self.config.verbose:
-            self.log("Starting the jabber bot.")
-
+        self.log.info("Starting the jabber bot.")
         self.connect()
         self.loop()
 
@@ -150,8 +147,7 @@ class XMPPBot(Client, Thread):
             act = stream.loop_iter(timeout)
             if not act:
                 # Process all available commands
-                while self.poll_commands():
-                    pass
+                while self.poll_commands(): pass
                 self.idle()
 
     def poll_commands(self):
@@ -175,28 +171,24 @@ class XMPPBot(Client, Thread):
         @param ignore_dnd: if command results in user interaction, should DnD be ignored?
 
         """
-
-        if not command.jid:
-            self.log("Received a command with empty jid, looks like a bug!")
-            return
-
         # Handle normal notifications
         if isinstance(command, cmd.NotificationCommand):
-            jid = JID(node_or_jid=command.jid)
-            jid_text = jid.bare().as_utf8()
-            text = command.text
+            for recipient in command.jids:
+                jid = JID(recipient)
+                jid_text = jid.bare().as_utf8()
+                text = command.text
 
-            # Check if contact is DoNotDisturb.
-            # If so, queue the message for delayed delivery.
-            try:
-                contact = self.contacts[jid_text]
-                if contact.is_dnd() and not ignore_dnd:
-                    contact.messages.append(command)
-                    return
-            except KeyError:
-                pass
+                # Check if contact is DoNotDisturb.
+                # If so, queue the message for delayed delivery.
+                try:
+                    contact = self.contacts[jid_text]
+                    if contact.is_dnd() and not ignore_dnd:
+                        contact.messages.append(command)
+                        return
+                except KeyError:
+                    pass
 
-            self.send_message(jid, text)
+                self.send_message(jid, text)
 
         # Handle subscribtion management commands
         if isinstance(command, cmd.AddJIDToRosterCommand):
@@ -264,7 +256,7 @@ class XMPPBot(Client, Thread):
         """
         if self.config.verbose:
             msg = "Message from %s." % (message.get_from_jid().as_utf8(), )
-            self.log(msg)
+            self.log.debug(msg)
 
         text = message.get_body()
         sender = message.get_from_jid()
@@ -321,6 +313,7 @@ class XMPPBot(Client, Thread):
             help_str = u"%s - %s\n\nUsage: %s %s"
             return help_str % (command, classobj.description, command, classobj.parameter_list)
 
+
     def handle_xmlrpc_command(self, sender, command):
         """Creates a command object, and puts it the command queue
 
@@ -362,8 +355,7 @@ class XMPPBot(Client, Thread):
         @type stanza: pyxmpp.presence.Presence
 
         """
-        if self.config.verbose:
-            self.log("Handling unavailable presence.")
+        self.log.debug("Handling unavailable presence.")
 
         jid = stanza.get_from_jid()
         bare_jid = jid.bare().as_utf8()
@@ -373,7 +365,7 @@ class XMPPBot(Client, Thread):
             contact = self.contacts[bare_jid]
 
             if self.config.verbose:
-                self.log("%s, going OFFLINE." % contact)
+                self.log.debug("%s, going OFFLINE." % contact)
 
             try:
                 # Send queued messages now, as we can't guarantee to be
@@ -390,10 +382,10 @@ class XMPPBot(Client, Thread):
                         self.send_queued_messages(contact)
 
             except ValueError:
-                self.log("Unknown contact (resource) going offline...")
+                self.log.error("Unknown contact (resource) going offline...")
 
         else:
-            self.log("Unavailable presence from unknown contact.")
+            self.log.error("Unavailable presence from unknown contact.")
 
         # Confirm that we've handled this stanza
         return True
@@ -404,8 +396,7 @@ class XMPPBot(Client, Thread):
         @type presence: pyxmpp.presence.Presence
 
         """
-        if self.config.verbose:
-            self.log("Handling available presence.")
+        self.log.debug("Handling available presence.")
 
         show = presence.get_show()
         if show is None:
@@ -427,7 +418,7 @@ class XMPPBot(Client, Thread):
                 contact.add_resource(jid.resource, show, priority)
 
             if self.config.verbose:
-                self.log(contact)
+                self.log.debug(contact)
 
             # Either way check, if we can deliver queued messages now
             if not contact.is_dnd():
@@ -435,9 +426,7 @@ class XMPPBot(Client, Thread):
 
         else:
             self.contacts[bare_jid] = Contact(jid, jid.resource, priority, show)
-
-            if self.config.verbose:
-                self.log(self.contacts[bare_jid])
+            self.log.debug(self.contacts[bare_jid])
 
         # Confirm that we've handled this stanza
         return True
@@ -465,23 +454,14 @@ class XMPPBot(Client, Thread):
 
         return msg % (internal, xmlrpc)
 
-    def log(self, message):
-        """Logs a message and its timestamp"""
-
-        t = time.localtime(time.time())
-        print time.strftime("%H:%M:%S", t), message
-
     def authenticated(self):
         """Called when authentication succeedes"""
-
-        if self.config.verbose:
-            self.log("Authenticated.")
+        self.log.info("Authenticated.")
 
     def authorized(self):
         """Called when authorization succeedes"""
 
-        if self.config.verbose:
-            self.log("Authorized.")
+        self.log.info("Authorized.")
 
         stream = self.get_stream()
         stream.set_message_handler("normal", self.handle_message)
@@ -494,46 +474,24 @@ class XMPPBot(Client, Thread):
 
     def connected(self):
         """Called when connections has been established"""
-
-        if self.config.verbose:
-            self.log("Connected.")
+        self.log.info("Connected.")
 
     def disconnected(self):
         """Called when disconnection occurs"""
-
-        if self.config.verbose:
-            self.log("Disconnected.")
+        self.log.info("Disconnected.")
 
     def roster_updated(self, item=None):
         """Called when roster gets updated"""
-
-        if self.config.verbose:
-            self.log("Updating roster.")
-
-            contacts = [str(c) for c in self.roster.get_items()]
-            print "Groups:", self.roster.get_groups()
-            print "Contacts:", " ".join(contacts)
-
- #   def session_started(self):
- #       """Called when session has been successfully started"""
- #
- #       if self.config.verbose:
- #           self.log("Session started.")
+        self.log.debug("Updating roster.")
 
     def stream_closed(self, stream):
         """Called when stream closes"""
-
-        if self.config.verbose:
-            self.log("Stream closed.")
+        self.log.debug("Stream closed.")
 
     def stream_created(self, stream):
         """Called when stream gets created"""
-
-        if self.config.verbose:
-            self.log("Stream created.")
+        self.log.debug("Stream created.")
 
     def stream_error(self, error):
         """Called when stream error gets received"""
-
-        if self.config.verbose:
-            self.log("Received a stream error.")
+        self.log.error("Received a stream error.")

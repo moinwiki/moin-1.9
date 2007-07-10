@@ -14,6 +14,7 @@ import time
 
 from MoinMoin import config, error, util, wikiutil
 import MoinMoin.auth as authmodule
+import MoinMoin.events as events
 from MoinMoin import session
 from MoinMoin.packages import packLine
 from MoinMoin.security import AccessControlList
@@ -446,6 +447,7 @@ reStructuredText Quick Reference
     show_version = False
     siteid = 'default'
     stylesheets = [] # list of tuples (media, csshref) to insert after theme css, before user css
+    _subscribable_events = None # A list of event types that user can subscribe to
     subscribed_pages_default = [] # preload user subscribed pages with this page list
     subscribed_events_default = [] # preload user subscribed events with this list
     superuser = [] # list of unicode user names that have super powers :)
@@ -681,8 +683,25 @@ reStructuredText Quick Reference
 
         # if we are to use the jabber bot, instantiate a server object for future use
         if self.jabber_enabled:
+
+            errmsg = "You must set a (long) secret string to send notifications!"
+            try:
+                if not self.secret:
+                    raise error.ConfigurationError(errmsg)
+            except AttributeError, err:
+                    raise error.ConfigurationError(errmsg)
+
             from xmlrpclib import Server
             self.notification_server = Server(self.notification_bot_uri, )
+
+            # Add checkbox fields that allow user to select means of notification
+            self.user_checkbox_fields.extend([
+                  ('notify_by_email', lambda _: _('Notify me about changes via email')),
+                  ('notify_by_jabber', lambda _: _('Notify me about changes via jabber')),
+                  ])
+
+            new_defaults = {'notify_by_email': 1, 'notify_by_jabber': 0}
+            self.user_checkbox_defaults.update(new_defaults)
 
         # Cache variables for the properties below
         self._iwid = self._iwid_full = self._meta_dict = None
@@ -701,6 +720,10 @@ reStructuredText Quick Reference
         if self.url_prefix_local is None:
             self.url_prefix_local = self.url_prefix_static
 
+        # Register a list of available event handlers - this has to stay at the
+        # end, because loading plugins depends on having a config object
+        self.event_handlers = events.get_handlers(self)
+
 
     def load_meta_dict(self):
         """ The meta_dict contains meta data about the wiki instance. """
@@ -718,6 +741,15 @@ reStructuredText Quick Reference
         return property(getter)
     iwid = make_iwid_property("_iwid")
     iwid_full = make_iwid_property("_iwid_full")
+
+    # lazily load a list of events a user can subscribe to
+    def make_subscribable_events_prop():
+        def getter(self):
+            if getattr(self, "_subscribable_events", None) is None:
+                self._subscribable_events = events.get_subscribable_events()
+            return getattr(self, "_subscribable_events")
+        return property(getter)
+    subscribable_events = make_subscribable_events_prop()
 
     def load_IWID(self):
         """ Loads the InterWikiID of this instance. It is used to identify the instance

@@ -27,7 +27,7 @@ sys.path.insert(0, '/path/to/wikiconfig')
 ## import os
 ## os.environ['MOIN_DEBUG'] = '1'
 
-from MoinMoin.server.TWISTED import TwistedConfig, makeApp
+from MoinMoin.server.server_twisted import TwistedConfig, makeApp
 
 
 class Config(TwistedConfig):

@@ -11,7 +11,7 @@
 """
 
 from MoinMoin import config, user
-from MoinMoin.request import TWISTED
+from MoinMoin.request import request_twisted
 from MoinMoin.auth import BaseAuth
 
 class SSLClientCertAuth(BaseAuth):
@@ -34,7 +34,7 @@ class SSLClientCertAuth(BaseAuth):
         u = None
         changed = False
         # check if we are running Twisted
-        if isinstance(request, TWISTED.Request):
+        if isinstance(request, request_twisted.Request):
             return user_obj, True # not supported if we run twisted
             # Addendum: this seems to need quite some twisted insight and coding.
             # A pointer i got on #twisted: divmod's vertex.sslverify
