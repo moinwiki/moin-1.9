@@ -279,7 +279,7 @@ class ScriptEngine:
                 raise RuntimeScriptException(_("Installation of '%(filename)s' failed.") % {
                     'filename': filename} + "\n" + package.msg)
         else:
-            raise RuntimeScriptException(_('The file %s is not a MoinMoin package file.' % filename))
+            raise RuntimeScriptException(_('The file %s is not a MoinMoin package file.') % filename)
 
         self.msg += package.msg
 
