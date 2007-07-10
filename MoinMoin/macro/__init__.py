@@ -25,7 +25,7 @@ from MoinMoin import wikiutil, i18n
 from MoinMoin.Page import Page
 
 names = ["TitleSearch", "WordIndex", "TitleIndex",
-         "GoTo", "InterWiki", "PageCount", "UserPreferences",
+         "GoTo", "InterWiki", "PageCount",
          # Macros with arguments
          "Icon", "PageList", "Date", "DateTime", "Anchor", "MailTo", "GetVal",
          "TemplateList",
@@ -71,7 +71,6 @@ class Macro:
         "PageList": ["namespace"],
         "Date": ["time"],
         "DateTime": ["time"],
-        "UserPreferences": ["time"],
         "Anchor": [],
         "Mailto": ["user"],
         "GetVal": ["pages"],
@@ -386,19 +385,6 @@ class Macro:
 
     def _macro_DateTime(self, args):
         return self.__get_Date(args, self.request.user.getFormattedDateTime)
-
-
-    def _macro_UserPreferences(self, args):
-        from MoinMoin import userform
-
-        create_only = False
-        if isinstance(args, unicode):
-            args = args.strip(" '\"")
-            create_only = (args.lower() == "createonly")
-
-        return self.formatter.rawHTML(userform.getUserForm(
-            self.request,
-            create_only=create_only))
 
     def _macro_Anchor(self, args):
         return self.formatter.anchordef(args or "anchor")

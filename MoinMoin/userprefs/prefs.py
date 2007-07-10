@@ -8,31 +8,39 @@
 """
 
 import time
-from MoinMoin import user, util, wikiutil
-import MoinMoin.events as events
+from MoinMoin import user, util, wikiutil, events
 from MoinMoin.widget import html
+from MoinMoin.userprefs import UserPrefBase
+
+
+#################################################################
+# This is a mess.
+#
+# This plugin is also used by the 'recoverpass' and 'newaccount'
+# actions, and really shouldn't be.
+#
+# The plan for refactoring would be:
+#  1. make the mentioned actions create their own forms and not
+#     use the code here
+#  2. split the plugin into multiple preferences pages:
+#    - account details (name, email, timezone, ...)
+#    - change password
+#    - wiki settings (editor, fancy diffs, theme, ...)
+#    - notification settings (trivial, subscribed pages, ...)
+#    - quick links (or leave in wiki settings?)
+####
+
 
 _debug = 0
 
-#############################################################################
-### Form POST Handling
-#############################################################################
-
-def savedata(request):
-    """ Handle POST request of the user preferences form.
-
-    Return error msg or None.
-    """
-    return UserSettingsHandler(request).handle_form()
-
-
-class UserSettingsHandler:
-
+class Settings(UserPrefBase):
     def __init__(self, request):
         """ Initialize user settings form. """
+        UserPrefBase.__init__(self, request)
         self.request = request
         self._ = request.getText
         self.cfg = request.cfg
+        self.title = self._("Preferences")
 
     def _decode_pagelist(self, key):
         """ Decode list of pages from form input
@@ -52,126 +60,6 @@ class UserSettingsHandler:
                 continue
             items.append(item)
         return items
-
-    def _account_sendmail(self):
-        _ = self._
-        form = self.request.form
-
-        if not self.cfg.mail_enabled:
-            return _("""This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.""")
-        try:
-            email = wikiutil.clean_input(form['email'][0].lower())
-        except KeyError:
-            return _("Please provide a valid email address!")
-
-        u = user.get_by_email_address(self.request, email)
-        if u:
-            msg = u.mailAccountData()
-            return wikiutil.escape(msg)
-
-        return _("Found no account matching the given email address '%(email)s'!") % {'email': email}
-
-    def _create_user(self):
-        _ = self._
-        form = self.request.form
-
-        if self.request.request_method != 'POST':
-            return _("Use UserPreferences to change your settings or create an account.")
-        # Create user profile
-        theuser = user.User(self.request, auth_method="new-user")
-
-        # Require non-empty name
-        try:
-            theuser.name = form['name'][0]
-        except KeyError:
-            return _("Empty user name. Please enter a user name.")
-
-        # Don't allow creating users with invalid names
-        if not user.isValidName(self.request, theuser.name):
-            return _("""Invalid user name {{{'%s'}}}.
-Name may contain any Unicode alpha numeric character, with optional one
-space between words. Group page name is not allowed.""") % wikiutil.escape(theuser.name)
-
-        # Name required to be unique. Check if name belong to another user.
-        if user.getUserId(self.request, theuser.name):
-            return _("This user name already belongs to somebody else.")
-
-        # try to get the password and pw repeat
-        password = form.get('password', [''])[0]
-        password2 = form.get('password2', [''])[0]
-
-        # Check if password is given and matches with password repeat
-        if password != password2:
-            return _("Passwords don't match!")
-        if not password:
-            return _("Please specify a password!")
-
-        # Encode password
-        if password and not password.startswith('{SHA}'):
-            try:
-                theuser.enc_password = user.encodePassword(password)
-            except UnicodeError, err:
-                # Should never happen
-                return "Can't encode password: %s" % str(err)
-
-        # try to get the email, for new users it is required
-        email = wikiutil.clean_input(form.get('email', [''])[0])
-        theuser.email = email.strip()
-        if not theuser.email:
-            return _("Please provide your email address. If you lose your"
-                     " login information, you can get it by email.")
-
-        # Email should be unique - see also MoinMoin/script/accounts/moin_usercheck.py
-        if theuser.email and self.request.cfg.user_email_unique:
-            users = user.getUserList(self.request)
-            for uid in users:
-                if uid == theuser.id:
-                    continue
-                thisuser = user.User(self.request, uid)
-                if thisuser.email == theuser.email and not thisuser.disabled:
-                    return _("This email already belongs to somebody else.")
-
-        # save data
-        theuser.save()
-
-        user_created = events.UserCreatedEvent(self.request, theuser)
-        events.send_event(user_created)
-
-        if form.has_key('create_and_mail'):
-            theuser.mailAccountData()
-
-        result = _("User account created! You can use this account to login now...")
-        if _debug:
-            result = result + util.dumpFormData(form)
-        return result
-
-    def _select_user(self):
-        _ = self._
-        form = self.request.form
-
-        if (wikiutil.checkTicket(self.request, self.request.form['ticket'][0]) and
-            self.request.request_method == 'POST' and
-            (self.request.user.isSuperUser() or
-             (not self.request._setuid_real_user is None
-              and (self.request._setuid_real_user.isSuperUser())))):
-            su_user = form.get('selected_user', [''])[0]
-            uid = user.getUserId(self.request, su_user)
-            if (not self.request._setuid_real_user is None
-                and uid == self.request._setuid_real_user.id):
-                del self.request.session['setuid']
-                self.request.user = self.request._setuid_real_user
-                self.request._setuid_real_user = None
-            else:
-                theuser = user.User(self.request, uid, auth_method='setuid')
-                theuser.disabled = None
-                self.request.session['setuid'] = uid
-                self.request._setuid_real_user = self.request.user
-                # now continue as the other user
-                self.request.user = theuser
-            return  _("Use UserPreferences to change settings of the selected user account, log out to get back to your account.")
-        else:
-            return _("Use UserPreferences to change your settings or create an account.")
 
     def _save_user_prefs(self):
         _ = self._
@@ -270,7 +158,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
 
         # datetime format
         try:
-            dt_d_combined = UserSettings._date_formats.get(form['datetime_fmt'][0], '')
+            dt_d_combined = Settings._date_formats.get(form['datetime_fmt'][0], '')
             theuser.datetime_fmt, theuser.date_fmt = dt_d_combined.split(' & ')
         except (KeyError, ValueError):
             theuser.datetime_fmt = '' # default
@@ -352,29 +240,10 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
         if form.has_key('cancel'):
             return
 
-        if form.has_key('account_sendmail'):
-            return self._account_sendmail()
-
-        if (form.has_key('create') or
-            form.has_key('create_only') or
-            form.has_key('create_and_mail')):
-            return self._create_user()
-
-
-        # Select user profile (su user)
-        if form.has_key('select_user'):
-            return self._select_user()
-
         if form.has_key('save'): # Save user profile
             return self._save_user_prefs()
 
-
-#############################################################################
-### Form Generation
-#############################################################################
-
-class UserSettings:
-    """ User login and settings management. """
+    # form generation part
 
     _date_formats = { # datetime_fmt & date_fmt
         'iso': '%Y-%m-%d %H:%M:%S & %Y-%m-%d',
@@ -382,13 +251,6 @@ class UserSettings:
         'euro': '%d.%m.%Y %H:%M:%S & %d.%m.%Y',
         'rfc': '%a %b %d %H:%M:%S %Y & %a %b %d %Y',
     }
-
-    def __init__(self, request):
-        """ Initialize user settings form.
-        """
-        self.request = request
-        self._ = request.getText
-        self.cfg = request.cfg
 
     def _tz_select(self):
         """ Create time zone selection. """
@@ -444,24 +306,6 @@ class UserSettings:
 
         return util.web.makeSelection('language', options, cur_lang)
 
-    def _user_select(self):
-        options = []
-        users = user.getUserList(self.request)
-        realuid = None
-        if hasattr(self.request, '_setuid_real_user') and self.request._setuid_real_user:
-            realuid = self.request._setuid_real_user.id
-        else:
-            realuid = self.request.user.id
-        for uid in users:
-            if uid != realuid:
-                name = user.User(self.request, id=uid).name # + '/' + uid # for debugging
-                options.append((name, name))
-        options.sort()
-
-        size = min(5, len(options))
-        current_user = self.request.user.name
-        return util.web.makeSelection('selected_user', options, current_user, size=size)
-
     def _theme_select(self):
         """ Create theme selection. """
         cur_theme = self.request.user.valid and self.request.user.theme_name or self.cfg.theme_default
@@ -506,7 +350,7 @@ class UserSettings:
                   ]
         return util.web.makeSelection('editor_ui', options, editor_ui)
 
-    def make_form(self):
+    def _make_form(self):
         """ Create the FORM, and the TABLE with the input fields
         """
         sn = self.request.getScriptname()
@@ -519,7 +363,6 @@ class UserSettings:
         lang_attr = self.request.theme.ui_lang_attr()
         self._form.append(html.Raw('<div class="userpref"%s>' % lang_attr))
 
-        self._form.append(html.INPUT(type="hidden", name="action", value="userform"))
         self._form.append(self._table)
         self._form.append(html.Raw("</div>"))
 
@@ -533,30 +376,12 @@ class UserSettings:
         ]))
 
 
-    def asHTML(self, create_only=False):
+    def create_form(self, create_only=False, recover_only=False):
         """ Create the complete HTML form code. """
         _ = self._
-        self.make_form()
-        superuserform = u''
+        self._make_form()
 
-        if (self.request.user.isSuperUser() or
-            (not self.request._setuid_real_user is None and
-             self.request._setuid_real_user.isSuperUser())):
-            ticket = wikiutil.createTicket(self.request)
-            self.make_row(_('Select User'), [self._user_select()])
-            self._form.append(html.INPUT(type="hidden", name="ticket", value="%s" % ticket))
-            buttons = [("select_user", _('Select User'))]
-            button_cell = []
-            for name, label in buttons:
-                button_cell.extend([
-                    html.INPUT(type="submit", name=name, value=label),
-                    ' ',
-                ])
-            self.make_row('', button_cell)
-            superuserform = unicode(self._form)
-            self.make_form()
-
-        if self.request.user.valid and not create_only:
+        if self.request.user.valid and not create_only and not recover_only:
             buttons = [('save', _('Save')), ('cancel', _('Cancel')), ]
             uf_remove = self.cfg.user_form_remove
             uf_disable = self.cfg.user_form_disable
@@ -649,7 +474,9 @@ class UserSettings:
                     ] + warning,
                     valign="top"
                 )
-        else: # not logged in
+            self._form.append(html.INPUT(type="hidden", name="action", value="userprefs"))
+            self._form.append(html.INPUT(type="hidden", name="handler", value="prefs"))
+        elif not recover_only:
             # Login / register interface
             buttons = [
                 # IMPORTANT: login should be first to be the default
@@ -664,12 +491,19 @@ class UserSettings:
                               [html.INPUT(type=type, size=length, name=key,
                                           value=''),
                                ' ', _(textafter), ])
+            self._form.append(html.INPUT(type="hidden", name="action", value="newaccount"))
+        else:
+            for key, label, type, length, textafter in self.cfg.user_form_fields:
+                if key == 'email':
+                    self.make_row(_(label),
+                              [html.INPUT(type=type, size=length, name=key,
+                                          value=''),
+                               ' ', _(textafter), ])
+            buttons = []
+            self._form.append(html.INPUT(type="hidden", name="action", value="recoverpass"))
 
-        if self.cfg.mail_enabled:
+        if recover_only and self.cfg.mail_enabled:
             buttons.append(("account_sendmail", _('Mail me my account data')))
-
-        if self.cfg.jabber_enabled:
-            buttons.append(("account_sendjabber", _('Send me my account data with Jabber')))
 
         if create_only:
             buttons = [("create_only", _('Create Profile'))]
@@ -687,148 +521,4 @@ class UserSettings:
                 ])
         self.make_row('', button_cell)
 
-        return superuserform + unicode(self._form)
-
-
-def getUserForm(request, create_only=False):
-    """ Return HTML code for the user settings. """
-    return UserSettings(request).asHTML(create_only=create_only)
-
-
-class Login:
-    """ User login. """
-
-    def __init__(self, request):
-        """ Initialize user settings form.
-        """
-        self.request = request
-        self._ = request.getText
-        self.cfg = request.cfg
-
-    def make_row(self, label, cell, **kw):
-        """ Create a row in the form table.
-        """
-        self._table.append(html.TR().extend([
-            html.TD(**kw).extend([html.B().append(label), '   ']),
-            html.TD().extend(cell),
-        ]))
-
-
-    def asHTML(self):
-        """ Create the complete HTML form code. """
-        _ = self._
-        request = self.request
-        sn = request.getScriptname()
-        pi = request.getPathinfo()
-        action = u"%s%s" % (sn, pi)
-        userprefslink = wikiutil.getLocalizedPage(request, "UserPreferences").link_to(request, rel='nofollow')
-        sendmypasswordlink = wikiutil.getLocalizedPage(request, "SendMyPassword").link_to(request, rel='nofollow')
-        hint = _("To create an account, see the %(userprefslink)s page. To recover a lost password, go to %(sendmypasswordlink)s.") % {
-                 'userprefslink': userprefslink,
-                 'sendmypasswordlink': sendmypasswordlink}
-        self._form = html.FORM(action=action, name="loginform")
-        self._table = html.TABLE(border="0")
-
-        # Use the user interface language and direction
-        lang_attr = request.theme.ui_lang_attr()
-        self._form.append(html.Raw('<div class="userpref"%s>' % lang_attr))
-
-        self._form.append(html.INPUT(type="hidden", name="action", value="login"))
-        self._form.append(self._table)
-        self._form.append(html.P().append(hint))
-        self._form.append(html.Raw("</div>"))
-
-        cfg = request.cfg
-        if 'username' in cfg.auth_login_inputs:
-            self.make_row(_('Name'), [
-                html.INPUT(
-                    type="text", size="32", name="name",
-                ),
-            ])
-
-        if 'password' in cfg.auth_login_inputs:
-            self.make_row(_('Password'), [
-                html.INPUT(
-                    type="password", size="32", name="password",
-                ),
-            ])
-
-        self.make_row('', [
-            html.INPUT(
-                type="submit", name='login', value=_('Login')
-            ),
-        ])
-
         return unicode(self._form)
-
-def getLogin(request):
-    """ Return HTML code for the login. """
-    return Login(request).asHTML()
-
-#############################################################################
-### User account administration
-#############################################################################
-
-def do_user_browser(request):
-    """ Browser for SystemAdmin macro. """
-    from MoinMoin.util.dataset import TupleDataset, Column
-    from MoinMoin.Page import Page
-    _ = request.getText
-
-    data = TupleDataset()
-    data.columns = [
-        #Column('id', label=('ID'), align='right'),
-        Column('name', label=('Username')),
-        Column('email', label=('Email')),
-        Column('jabber', label=('Jabber')),
-        Column('action', label=_('Action')),
-    ]
-
-    # Iterate over users
-    for uid in user.getUserList(request):
-        account = user.User(request, uid)
-
-        userhomepage = Page(request, account.name)
-        if userhomepage.exists():
-            namelink = userhomepage.link_to(request)
-        else:
-            namelink = account.name
-
-        data.addRow((
-            #request.formatter.code(1) + uid + request.formatter.code(0),
-            # 0
-            request.formatter.rawHTML(namelink),
-            # 1
-            (request.formatter.url(1, 'mailto:' + account.email, css='mailto', do_escape=0) +
-             request.formatter.text(account.email) +
-             request.formatter.url(0)),
-            # 2
-            (request.formatter.url(1, 'xmpp:' + account.jid, css='mailto', do_escape=0) +
-             request.formatter.text(account.jid) +
-             request.formatter.url(0)),
-            # 3
-            (request.page.link_to(request, text=_('Mail me my account data'),
-                                 querystr={"action": "userform",
-                                           "email": account.email,
-                                           "account_sendmail": "1",
-                                           "sysadm": "users", },
-                                 rel='nofollow')
-            + " " +
-            request.page.link_to(request, text=_('Send me my account data with Jabber'),
-                                 querystr={"action": "userform",
-                                           "jid": account.jid,
-                                           "account_sendjabber": "1",
-                                           "sysadm": "users", },
-                                  rel='nofollow'))
-        ))
-
-    if data:
-        from MoinMoin.widget.browser import DataBrowserWidget
-
-        browser = DataBrowserWidget(request)
-        browser.setData(data)
-        return browser.toHTML()
-
-    # No data
-    return ''
-
