@@ -136,14 +136,13 @@ def handle_user_created(event):
     jids = []
     user_ids = getUserList(event.request)
     event_name = event.__class__.__name__
+    
     email = event.user.email or u"NOT SET"
-    msg = u"""Dear Superuser, a new user has just been created. Details follow:
-    User name: %s
-    Email address: %s
-    """
-
-    email = event.user.email or u"NOT SET"
-
+    sitename = event.request.cfg.sitename
+    username = event.user.name
+    
+    data = notification.user_created_message(sitename, username, email)
+    
     for id in user_ids:
         usr = User(event.request, id=id)
         if not usr.notify_by_jabber:
@@ -153,7 +152,7 @@ def handle_user_created(event):
         if usr.isSuperUser() and usr.jid and event_name in usr.subscribed_events:
             jids.append(usr.jid)
 
-    send_notification(event.request, jids, msg % (event.user.name, email))
+    send_notification(event.request, jids, msg % (event.user.name, email), data['subject'])
 
 
 def page_change(type, request, page, subscribers, **kwargs):
@@ -176,7 +175,7 @@ def page_change(type, request, page, subscribers, **kwargs):
         if recipients:
             return notification.Success(recipients)
 
-def send_notification(request, jids, message):
+def send_notification(request, jids, message, subject=""):
     """ Send notifications for a single language.
 
     @param comment: editor's comment given when saving the page
@@ -186,7 +185,7 @@ def send_notification(request, jids, message):
     server = request.cfg.notification_server
 
     try:
-        server.send_notification(request.cfg.secret, jids, message)
+        server.send_notification(request.cfg.secret, jids, message, subject)
         return True
     except xmlrpclib.Error, err:
         ev.logger.error(_("XML RPC error: %s"), str(err))
