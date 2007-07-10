@@ -170,14 +170,14 @@ class EmbedObject:
         _ = self._
 
         if not mt:
-            return _("Not supported mimetype of file: %s" % self.target)
+            return _("Not supported mimetype of file: %s") % self.target
 
         mime_type = "%s/%s" % (mt.major, mt.minor, )
         dangerous = mime_type in self.request.cfg.mimetypes_xss_protect
 
         if not mime_type in self.request.cfg.mimetypes_embed or dangerous:
             kw = {'src': url}
-            return "%s: %s%s%s" % (self.macro.formatter.text('Embedding of object by choosen formatter not possible'),
+            return "%s: %s%s%s" % (self.macro.formatter.text(_('Embedding of object by choosen formatter not possible')),
                                self.macro.formatter.url(1, kw['src']),
                                self.macro.formatter.text(self.target),
                                self.macro.formatter.url(0))
@@ -266,7 +266,7 @@ class EmbedObject:
         _ = self._
 
         if not self.target:
-            msg = 'Not enough arguments to EmbedObject macro! Try [[EmbedObject(attachment [,width=width] [,height=height] [,alt=Embedded mimetpye/xy])]]'
+            msg = _('Not enough arguments to EmbedObject macro! Try [[EmbedObject(attachment [,width=width] [,height=height] [,alt=Embedded mimetpye/xy])]]', formatted=False)
             return "%s%s%s" % (self.formatter.sysmsg(1), self.formatter.text(msg), self.formatter.sysmsg(0))
 
         pagename, fname = AttachFile.absoluteName(self.target, self.formatter.page.page_name)

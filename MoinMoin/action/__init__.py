@@ -33,7 +33,7 @@ from MoinMoin.Page import Page
 modules = pysupport.getPackageModules(__file__)
 
 # builtin-stuff (see do_<name> below):
-names = ['show', 'recall', 'raw', 'format', 'content', 'print', 'refresh', 'goto', 'userform', ]
+names = ['show', 'recall', 'raw', 'format', 'content', 'print', 'refresh', 'goto', ]
 
 class ActionBase:
     """ action base class with some generic stuff to inherit
@@ -278,12 +278,6 @@ def do_goto(pagename, request):
     """ redirect to another page """
     target = request.form.get('target', [''])[0]
     request.http_redirect(Page(request, target).url(request, relative=False))
-
-def do_userform(pagename, request):
-    """ save data posted from UserPreferences """
-    from MoinMoin import userform
-    savemsg = userform.savedata(request)
-    Page(request, pagename).send_page(msg=savemsg)
 
 # Dispatching ----------------------------------------------------------------
 def getNames(cfg):
