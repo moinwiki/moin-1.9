@@ -143,3 +143,14 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
 
     return messageBody
 
+def user_created_message(sitename, username, email):
+    subject = _("New user account created on %(sitename)s") % {'sitename': sitename or "Wiki"}
+    body = _("""Dear Superuser, a new user has just been created. Details follow:
+    
+    User name: %(username)s
+    Email address: %(useremail)s""", formatted=False) % {
+         'username': username,
+         'useremail': email,
+         }
+    
+    return {'subject': subject, 'body': body}

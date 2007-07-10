@@ -262,7 +262,7 @@ class XMLRPCServer(Thread):
         return protected_func
 
 
-    def send_notification(self, jids, text):
+    def send_notification(self, jids, text, subject):
         """Instructs the XMPP component to send a notification
 
         @param jids: a list of JIDs to send a message to (bare JIDs)
@@ -271,7 +271,7 @@ class XMLRPCServer(Thread):
         @type text: unicode
 
         """
-        command = cmd.NotificationCommand(jids, text)
+        command = cmd.NotificationCommand(jids, text, subject)
         self.commands.put_nowait(command)
         return True
     send_notification.export = True

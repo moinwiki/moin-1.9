@@ -12,12 +12,13 @@
 # First, XML RPC -> XMPP commands
 class NotificationCommand:
     """Class representing a notification request"""
-    def __init__(self, jids, text):
+    def __init__(self, jids, text, subject=""):
         if type(jids) != list:
             raise Exception("jids argument must be a list!")
 
         self.jids = jids
         self.text = text
+        self.subject = subject
 
 class AddJIDToRosterCommand:
     """Class representing a request to add a new jid to roster"""
