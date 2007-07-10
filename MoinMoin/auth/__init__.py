@@ -20,6 +20,8 @@
                that the browser sent
        multistage: boolean indicating multistage login continuation
                    [may not be present, login only]
+       openid_identifier: the OpenID identifier we got from the form
+                          (or None) [login only]
 
     More may be added.
 
@@ -85,6 +87,7 @@
      * login_inputs: a list of required inputs, currently supported are
                       - 'username': username entry field
                       - 'password': password entry field
+                      - 'openid_identifier': OpenID entry field
      * logout_possible: boolean indicating whether this auth methods
                         supports logging out
      * name: name of the auth method, must be the same as given as the

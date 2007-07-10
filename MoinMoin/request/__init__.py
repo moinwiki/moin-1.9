@@ -603,16 +603,18 @@ class RequestBase(object):
     def _handle_auth_form(self, user_obj):
         username = self.form.get('name', [None])[0]
         password = self.form.get('password', [None])[0]
+        oid = self.form.get('openid_identifier', [None])[0]
         login = 'login' in self.form
         logout = 'logout' in self.form
         stage = self.form.get('stage', [None])[0]
         return self.handle_auth(user_obj, attended=True, username=username,
                                 password=password, login=login, logout=logout,
-                                stage=stage)
+                                stage=stage, openid_identifier=oid)
 
     def handle_auth(self, user_obj, attended=False, **kw):
         username = kw.get('username')
         password = kw.get('password')
+        oid = kw.get('openid_identifier')
         login = kw.get('login')
         logout = kw.get('logout')
         stage = kw.get('stage')
@@ -623,6 +625,7 @@ class RequestBase(object):
             extra['attended'] = attended
             extra['username'] = username
             extra['password'] = password
+            extra['openid_identifier'] = oid
             if stage:
                 extra['multistage'] = True
         login_msgs = []
