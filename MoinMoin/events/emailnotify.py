@@ -98,13 +98,19 @@ def handle_user_created(event):
     event_name = event.__class__.__name__
     email = event.user.email or u"NOT SET"
     _ = event.request.getText
+    cfg = event.request.cfg
 
-    title = _("New user account created on %(sitename)s")
+    title = _("New user account created on %(sitename)s") % {'sitename': cfg.sitename or "Wiki"}
     body = _("""Dear Superuser, a new user has just been created. Details follow:
-    User name: %s
-    Email address: %s)""")
+    
+    User name: %(username)s
+    Email address: %(useremail)s)""") % {
+         'username': event.user.name,
+         'useremail': email
+         }
 
-    data = {'from': event.request.cfg.mail_from, 'title': title, 'body': body}
+    from_address = cfg.mail_from
+    data = {'title': title, 'body': body}
     emails = []
 
     for id in user_ids:
@@ -116,7 +122,7 @@ def handle_user_created(event):
         if usr.isSuperUser() and event_name in usr.subscribed_events:
             emails.append(usr.email)
 
-    send_notification(event.request, emails, data)
+    send_notification(event.request, from_address, emails, data)
 
 def handle(event):
     """An event handler"""
@@ -128,4 +134,3 @@ def handle(event):
         return notify_subscribers(event.request, event.page, event.comment, event.trivial)
     elif isinstance(event, UserCreatedEvent):
         return handle_user_created(event)
-
