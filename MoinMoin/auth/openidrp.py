@@ -233,3 +233,8 @@ document.getElementById("openid_message").submit();
                     self._openid_form(request, form, form_html)
                 ret = MultistageFormLogin(mcall)
                 return ret
+
+    def login_hint(self, request):
+        _ = request.getText
+        return _("If you do not have an account yet, you can still log in "
+                 "with your OpenID and create one during login.")
