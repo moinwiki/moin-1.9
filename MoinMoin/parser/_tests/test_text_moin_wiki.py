@@ -161,22 +161,30 @@ Text
 class TestDateTimeMacro(ParserTestCase):
     """ Test DateTime macro
 
-    Might fail due to libc problems, therefore the fail message warn
-    about this.
+    If you get failures in these tests, it might be because:
+    * libc problems (some are just broken/incorrect)
+    * changes in the timezone of a country (e.g. Lithuania seems
+      to have changed the tz it is in, see comments below). Our
+      timestamps are in UTC, but we use mktime(), which is the inverse
+      function of localtime() (NOT of gmtime()), so we have to fix
+      our calculation with the tzoffset. Problem: we can't easily find
+      out the tzoffset some location had at some time in the past.
+      Badly enough, we also don't have an inverse function of gmtime().
 
-    TODO: when this test fail, does it mean that moin code fail on that
-    machine? - can we fix this?
+    If some of these tests fail and show differences of e.g. 1 hour,
+    you might see your timestamps being off by 1 hour in the wiki.
+    If you can live with that, this will cause no other problems.
     """
 
     text = 'AAA %s AAA'
     needle = re.compile(text % r'(.+)')
     _tests = (
         # test                                   expected
-        ('[[DateTime(1970-01-06T00:00:00)]]',   '1970-01-06 00:00:00'),
         ('[[DateTime(259200)]]',                '1970-01-04 00:00:00'),
         ('[[DateTime(2003-03-03T03:03:03)]]',   '2003-03-03 03:03:03'),
-        ('[[DateTime(2000-01-01T00:00:00Z)]]',  '2000-01-01 00:00:00'),
+        ('[[DateTime(2000-01-01T00:00:00Z)]]',  '2000-01-01 00:00:00'), # works for Europe/Vilnius
         ('[[Date(2002-02-02T01:02:03Z)]]',      '2002-02-02'),
+        ('[[DateTime(1970-01-06T00:00:00)]]',   '1970-01-06 00:00:00'), # fails e.g. for Europe/Vilnius
         )
 
     def setUp(self):
@@ -191,9 +199,10 @@ class TestDateTimeMacro(ParserTestCase):
         note = """
 
     If this fails, it is likely a problem in your python / libc,
-    not in moin.  See also:
-    <http://sourceforge.net/tracker/index.php?func=detail&
-       aid=902172&group_id=5470&atid=105470>"""
+    not in moin.  See also: <http://sourceforge.net/tracker/index.php?func=detail&aid=902172&group_id=5470&atid=105470>
+    
+    It can also be related to TZ changes a country historically made.
+    """
 
         for test, expected in self._tests:
             html = self.parse(self.text % test)
