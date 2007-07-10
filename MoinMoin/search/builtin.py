@@ -399,7 +399,7 @@ class BaseIndex:
 
         @param request: current request
         """
-        from MoinMoin.request.CLI import Request
+        from MoinMoin.request.request_cli import Request
         from MoinMoin.security import Permissions
         request = Request(request.url)
         class SecurityPolicy(Permissions):

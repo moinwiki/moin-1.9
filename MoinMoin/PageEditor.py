@@ -18,6 +18,11 @@
 
 import os, time, codecs, errno
 
+try:
+    set
+except:
+    from sets import Set as set
+
 from MoinMoin import caching, config, user, wikiutil, error
 from MoinMoin.Page import Page
 from MoinMoin.widget import html
@@ -25,7 +30,8 @@ from MoinMoin.widget.dialog import Status
 from MoinMoin.logfile import editlog, eventlog
 from MoinMoin.util import filesys, timefuncs, web
 from MoinMoin.mail import sendmail
-from MoinMoin.events import PageDeletedEvent, send_event
+from MoinMoin.events import PageDeletedEvent, PageRenamedEvent, send_event
+import MoinMoin.events.notification as notification
 
 # used for merging
 conflict_markers = ("\n---- /!\\ '''Edit conflict - other version:''' ----\n",
@@ -530,7 +536,7 @@ Try a different name.""") % (newpagename, )
             if request.user.may.write(newpagename):
                 # Save page text with a comment about the old name and log entry
                 savetext = u"## page was copied from %s\n%s" % (self.page_name, savetext)
-                newpage.saveText(savetext, 0, comment=comment, index=0, extra=self.page_name, action='SAVE')
+                newpage.saveText(savetext, 0, comment=comment, index=0, extra=self.page_name, action='SAVE', notify=False)
             else:
                 # if user is  not able to write to the page itselfs we set a log entry only
                 from MoinMoin import packages
@@ -599,7 +605,7 @@ Try a different name.""") % (newpagename, )
             self.error = None
             # Save page text with a comment about the old name
             savetext = u"## page was renamed from %s\n%s" % (self.page_name, savetext)
-            newpage.saveText(savetext, 0, comment=comment, index=0, extra=self.page_name, action='SAVE/RENAME')
+            newpage.saveText(savetext, 0, comment=comment, index=0, extra=self.page_name, action='SAVE/RENAME', notify=False)
             # delete pagelinks
             arena = newpage
             key = 'pagelinks'
@@ -619,6 +625,9 @@ Try a different name.""") % (newpagename, )
                 if index.exists():
                     index.remove_item(self.page_name, now=0)
                     index.update_page(newpagename)
+
+            event = PageRenamedEvent(request, newpage, comment)
+            send_event(event)
 
             return True, None
         except OSError, err:
@@ -649,7 +658,7 @@ Try a different name.""") % (newpagename, )
             event = PageDeletedEvent(request, self, comment)
             send_event(event)
 
-            msg = self.saveText(u"deleted\n", 0, comment=comment or u'', index=1, deleted=True)
+            msg = self.saveText(u"deleted\n", 0, comment=comment or u'', index=1, deleted=True, notify=False)
             msg = msg.replace(
                 _("Thank you for your changes. Your attention to detail is appreciated."),
                 _('Page "%s" was successfully deleted!') % (self.page_name, ))
@@ -957,6 +966,7 @@ Try a different name.""") % (newpagename, )
         @keyword action: action for editlog (default: SAVE)
         @keyword index: needs indexing, not already handled (default: 1)
         @keyword deleted: if True, then don't save page content (used by DeletePage, default: False)
+        @keyword notify: if False (default: True), don't send a PageChangedEvent
         @rtype: unicode
         @return: error msg
         """
@@ -965,6 +975,7 @@ Try a different name.""") % (newpagename, )
         self._save_draft(newtext, rev, **kw)
         action = kw.get('action', 'SAVE')
         deleted = kw.get('deleted', False)
+        notify = kw.get('notify', True)
 
         #!!! need to check if we still retain the lock here
         #!!! rev check is not enough since internal operations use "0"
@@ -1040,11 +1051,20 @@ Please review the page and save then. Do not save this page as it is!""")
             self.clean_acl_cache()
             self._save_draft(None, None) # everything fine, kill the draft for this page
 
-            # send notifications
-            from MoinMoin import events
-            e = events.PageChangedEvent(self.request, self, comment, trivial)
-            messages = events.send_event(e)
-            msg = msg + "".join(messages)
+            if notify:
+                # send notifications
+                from MoinMoin import events
+                e = events.PageChangedEvent(self.request, self, comment, trivial)
+                results = events.send_event(e)
+
+                recipients = set()
+                for result in results:
+                    if isinstance(result, notification.Success):
+                        recipients.update(result.recipients)
+
+                        if recipients:
+                            info = _("Notifications sent to:")
+                            msg = msg + "<p>%s %s</p>" % (info, ",".join(recipients))
 
             if kw.get('index', 1) and request.cfg.xapian_search:
                 from MoinMoin.search.Xapian import Index

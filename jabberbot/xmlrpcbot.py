@@ -7,14 +7,16 @@
 """
 
 import Queue
-import time, xmlrpclib
-import datetime
+import datetime, logging, time, xmlrpclib
 from threading import Thread
 from SimpleXMLRPCServer import SimpleXMLRPCServer
 
 import jabberbot.commands as cmd
 from jabberbot.multicall import MultiCall
 
+class ConfigurationError(Exception):
+    def __init__(self, message):
+        self.message = message
 
 class XMLRPCClient(Thread):
     """XMLRPC Client
@@ -28,6 +30,13 @@ class XMLRPCClient(Thread):
         @param commands: an output command queue
         """
         Thread.__init__(self)
+        self.log = logging.getLogger("log")
+
+        if not config.secret:
+            error = "You must set a (long) secret string!"
+            self.log.critical(error)
+            raise ConfigurationError(error)
+
         self.commands_in = commands_in
         self.commands_out = commands_out
         self.config = config
@@ -76,24 +85,35 @@ class XMLRPCClient(Thread):
         def wrapped_func(self, command):
             self.token = None
             self.multicall = MultiCall(self.connection)
-            self.get_auth_token(command.jid)
-
-            if self.token:
-                self.multicall.applyAuthToken(self.token)
+            jid = command.jid
 
             try:
                 try:
+                    self.get_auth_token(command.jid)
+                    if self.token:
+                        self.multicall.applyAuthToken(self.token)
+
                     function(self, command)
                     self.commands_out.put_nowait(command)
                 except xmlrpclib.Fault, fault:
                     msg = u"""Your request has failed. The reason is:\n%s"""
-                    notification = cmd.NotificationCommand(command.jid, msg % (fault.faultString, ))
+                    notification = cmd.NotificationCommand([jid], msg % (fault.faultString, ))
                     self.commands_out.put_nowait(notification)
+                except xmlrpclib.Error, err:
+                    msg = u"""A serious error occured while processing your request:\n%s"""
+                    notification = cmd.NotificationCommand([jid], msg % (str(err), ))
+                    self.commands_out.put_nowait(notification)
+
             finally:
                 del self.token
                 del self.multicall
 
         return wrapped_func
+
+    def warn_no_credentials(self, jid):
+        msg = u"""Credentials check failed, you may be unable to see all information."""
+        warning = cmd.NotificationCommand([jid], msg)
+        self.commands_out.put_nowait(warning)
 
     def get_page(self, command):
         """Returns a raw page"""
@@ -101,7 +121,7 @@ class XMLRPCClient(Thread):
         self.multicall.getPage(command.pagename)
 
         if not self.token:
-            # FIXME: notify the user that he may not have full rights on the wiki
+            self.warn_no_credentials(command.jid)
             getpage_result = self.multicall()
         else:
             getpage_result, token_result = self.multicall()
@@ -118,7 +138,7 @@ class XMLRPCClient(Thread):
         self.multicall.getPageHTML(command.pagename)
 
         if not self.token:
-            # FIXME: notify the user that he may not have full rights on the wiki
+            self.warn_no_credentials(command.jid)
             getpagehtml_result = self.multicall()
         else:
             token_result, getpagehtml_result = self.multicall()
@@ -133,7 +153,7 @@ class XMLRPCClient(Thread):
         """Returns a list of all accesible pages"""
 
         txt = u"""This command may take a while to complete, please be patient..."""
-        info = cmd.NotificationCommand(command.jid, txt)
+        info = cmd.NotificationCommand([command.jid], txt)
         self.commands_out.put_nowait(info)
 
         self.multicall.getAllPages()
@@ -202,7 +222,15 @@ class XMLRPCServer(Thread):
         Thread.__init__(self)
         self.commands = commands
         self.verbose = config.verbose
-        self.secret = config.secret
+        self.log = logging.getLogger("log")
+
+        if config.secret:
+            self.secret = config.secret
+        else:
+            error = "You must set a (long) secret string"
+            self.log.critical(error)
+            raise ConfigurationError(error)
+
         self.server = SimpleXMLRPCServer((config.xmlrpc_host, config.xmlrpc_port))
 
     def run(self):
@@ -219,12 +247,6 @@ class XMLRPCServer(Thread):
 
         self.server.serve_forever()
 
-    def log(self, message):
-        """Logs a message and its timestamp"""
-
-        t = time.localtime(time.time())
-        print time.strftime("%H:%M:%S", t), message
-
     def secret_check(self, function):
         """Adds a check for a secret to a given function
 
@@ -240,16 +262,16 @@ class XMLRPCServer(Thread):
         return protected_func
 
 
-    def send_notification(self, jid, text):
+    def send_notification(self, jids, text):
         """Instructs the XMPP component to send a notification
 
-        @param jid: a jid to send a message to (bare jid)
-        @type jid: str or unicode
+        @param jids: a list of JIDs to send a message to (bare JIDs)
+        @type jids: a list of str or unicode
         @param text: a message body
         @type text: unicode
 
         """
-        command = cmd.NotificationCommand(jid, text)
+        command = cmd.NotificationCommand(jids, text)
         self.commands.put_nowait(command)
         return True
     send_notification.export = True

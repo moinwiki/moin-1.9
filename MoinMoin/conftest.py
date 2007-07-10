@@ -71,13 +71,13 @@ except ImportError:
 
 
 def init_test_request(static_state=[False]):
-    from MoinMoin.request import CLI
+    from MoinMoin.request import request_cli
     from MoinMoin.user import User
     from MoinMoin.formatter.text_html import Formatter as HtmlFormatter
     if not static_state[0]:
         maketestwiki.run(True)
         static_state[0] = True
-    request = CLI.Request()
+    request = request_cli.Request()
     request.form = request.args = request.setup_args()
     request.user = User(request)
     request.html_formatter = HtmlFormatter(request)

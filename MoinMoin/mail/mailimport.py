@@ -17,7 +17,7 @@ from MoinMoin import user, wikiutil
 from MoinMoin.action.AttachFile import add_attachment, AttachmentAlreadyExists
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
-from MoinMoin.request.CLI import Request as RequestCLI
+from MoinMoin.request.request_cli import Request as RequestCLI
 # python, at least up to 2.4, ships a broken parser for headers
 from MoinMoin.support.HeaderFixed import decode_header
 

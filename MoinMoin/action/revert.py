@@ -27,7 +27,7 @@ def execute(pagename, request):
 
         revstr = '%08d' % rev
         try:
-            msg = newpg.saveText(pg.get_raw_body(), 0, extra=revstr, action="SAVE/REVERT")
+            msg = newpg.saveText(pg.get_raw_body(), 0, extra=revstr, action="SAVE/REVERT", notify=False)
             pg = newpg
         except newpg.SaveError, msg:
             msg = unicode(msg)
