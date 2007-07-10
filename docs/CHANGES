@@ -40,6 +40,7 @@ Version 1.7.current:
     * cfg.trusted_auth_methods
     * new session handling system
     * new authentication plugin system
+    * new preferences plugin system, see MoinMoin/userprefs/__init__.py
 
   Bugfixes:
     * ...
@@ -47,7 +48,7 @@ Version 1.7.current:
   Other changes:
     * cfg.show_login is gone, see code in theme/__init__.py, this affects
       many themes!
-
+    * needs a new userprefs/ plugin directory
 
 Version 1.6.current:
 
