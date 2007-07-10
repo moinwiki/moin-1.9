@@ -37,14 +37,14 @@ def prep_page_changed_mail(request, page, comment, email_lang, revisions, trivia
     _ = request.getText
     mailBody = notification.page_change_message("page_changed", request, page, email_lang, comment=comment, revisions=revisions)
 
-    title = _('[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s', formatted=False) % {
+    subject = _('[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s', formatted=False) % {
             'trivial': (trivial and _("Trivial ", formatted=False)) or "",
             'sitename': page.cfg.sitename or "Wiki",
             'pagename': page.page_name,
             'username': page.uid_override or user.getUserIdentification(request),
         }
 
-    return {'title': title, 'body': mailBody}
+    return {'subject': subject, 'body': mailBody}
 
 
 def send_notification(request, from_address, emails, data):
@@ -55,7 +55,7 @@ def send_notification(request, from_address, emails, data):
     @rtype int
 
     """
-    return sendmail.sendmail(request, emails, data['title'], data['body'], mail_from=from_address)
+    return sendmail.sendmail(request, emails, data['subject'], data['body'], mail_from=from_address)
 
 
 def notify_subscribers(request, page, comment, trivial):
@@ -93,25 +93,17 @@ def notify_subscribers(request, page, comment, trivial):
 def handle_user_created(event):
     """Sends an email to super users that have subscribed to this event type"""
 
-    user_ids = getUserList(event.request)
     emails = []
-    event_name = event.__class__.__name__
-    email = event.user.email or u"NOT SET"
     _ = event.request.getText
-    cfg = event.request.cfg
+    user_ids = getUserList(event.request)
+    event_name = event.__class__.__name__
 
-    title = _("New user account created on %(sitename)s") % {'sitename': cfg.sitename or "Wiki"}
-    body = _("""Dear Superuser, a new user has just been created. Details follow:
-    
-    User name: %(username)s
-    Email address: %(useremail)s""", formatted=False) % {
-         'username': event.user.name,
-         'useremail': email,
-         }
+    from_address = event.request.cfg.mail_from
+    email = event.user.email or u"NOT SET"
+    sitename = event.request.cfg.sitename
+    username = event.user.name
 
-    from_address = cfg.mail_from
-    data = {'title': title, 'body': body}
-    emails = []
+    data = notification.user_created_message(sitename, username, email)
 
     for id in user_ids:
         usr = User(event.request, id=id)

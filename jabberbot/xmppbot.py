@@ -235,7 +235,7 @@ class XMPPBot(Client, Thread):
         stanza = Presence(to_jid=jid, stanza_type="unsubscribed")
         self.get_stream().send(stanza)
 
-    def send_message(self, jid, text, msg_type=u"chat"):
+    def send_message(self, jid, text, subject="", msg_type=u"chat"):
         """Sends a message
 
         @param jid: JID to send the message to
@@ -244,7 +244,7 @@ class XMPPBot(Client, Thread):
         @type jid: pyxmpp.jid.JID
 
         """
-        message = Message(to_jid=jid, body=text, stanza_type=msg_type)
+        message = Message(to_jid=jid, body=text, stanza_type=msg_type, subject=subject)
         self.get_stream().send(message)
 
     def handle_message(self, message):
