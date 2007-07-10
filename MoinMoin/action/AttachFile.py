@@ -884,7 +884,7 @@ def install_package(pagename, request):
         if package.msg != "":
             msg += "<br><pre>" + wikiutil.escape(package.msg) + "</pre>"
     else:
-        msg = _('The file %s is not a MoinMoin package file.' % wikiutil.escape(target))
+        msg = _('The file %s is not a MoinMoin package file.') % wikiutil.escape(target)
 
     upload_form(pagename, request, msg=msg)
 
@@ -967,7 +967,7 @@ def unzip_file(pagename, request):
                             "files are too big, .zip files only, exist already or "
                             "reside in folders.") % {'filename': filename}
         else:
-            msg = _('The file %(filename)s is not a .zip file.' % {'filename': filename})
+            msg = _('The file %(filename)s is not a .zip file.') % {'filename': filename}
 
     upload_form(pagename, request, msg=wikiutil.escape(msg))
 

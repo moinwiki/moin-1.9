@@ -63,11 +63,11 @@ def restoreBackup(request, pagename):
         #files = "<br>".join(files)
         filecount = len(files)
         dircount = len(dirs)
-        return sendMsg(request, pagename, msg=_(
-            'Restored Backup: %(filename)s to target dir: %(targetdir)s.\nFiles: %(filecount)d, Directories: %(dircount)d' %
-                locals()))
+        return sendMsg(request, pagename,
+            msg=_('Restored Backup: %(filename)s to target dir: %(targetdir)s.\nFiles: %(filecount)d, Directories: %(dircount)d') %
+                locals())
     except:
-        return sendMsg(request, pagename, msg=_("Restoring backup: %(filename)s to target dir: %(targetdir)s failed." % locals()))
+        return sendMsg(request, pagename, msg=_("Restoring backup: %(filename)s to target dir: %(targetdir)s failed.") % locals())
 
 def sendBackupForm(request, pagename):
     _ = request.getText
@@ -140,5 +140,4 @@ def execute(pagename, request):
         sendBackupForm(request, pagename)
     else:
         return sendMsg(request, pagename,
-                       msg=_('Unknown backup subaction: %s.' % dowhat))
-
+                       msg=_('Unknown backup subaction: %s.') % dowhat)
