@@ -70,6 +70,14 @@ class Login:
                 ),
             ])
 
+        if 'openid_identifier' in cfg.auth_login_inputs:
+            self.make_row(_('OpenID'), [
+                html.INPUT(
+                    type="text", size="32", name="openid_identifier",
+                    id="openididentifier"
+                ),
+            ])
+
         self.make_row('', [
             html.INPUT(
                 type="submit", name='login', value=_('Login')

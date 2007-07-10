@@ -88,7 +88,11 @@ def _getUserIdByKey(request, key, search):
             u = User(request, id=userid)
             if hasattr(u, key):
                 value = getattr(u, key)
-                _key2id[value] = userid
+                if isinstance(value, list):
+                    for val in value:
+                        _key2id[val] = userid
+                else:
+                    _key2id[value] = userid
         arena = 'user'
         cache = caching.CacheEntry(request, arena, cachekey, scope='wiki', use_pickle=True)
         try:
@@ -107,6 +111,16 @@ def getUserId(request, searchName):
     @return: the corresponding user ID or None
     """
     return _getUserIdByKey(request, 'name', searchName)
+
+
+def getUserIdByOpenId(request, openid):
+    """ Get the user ID for a specific OpenID.
+
+    @param openid: the openid to look up
+    @rtype: string
+    @return: the corresponding user ID or None
+    """
+    return _getUserIdByKey(request, 'openids', openid)
 
 
 def getUserIdentification(request, username=None):
