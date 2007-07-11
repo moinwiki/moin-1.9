@@ -55,16 +55,18 @@ def _create_page(request, cancel=False):
     pagename = request.page.page_name
 
     if 'handler' in request.form:
-        return _create_prefs_page(request), None, _handle_submission(request)
+        msg = _handle_submission(request)
+    else:
+        msg = None
 
     sub = request.form.get('sub', [''])[0]
     try:
         cls = wikiutil.importPlugin(request.cfg, 'userprefs', sub, 'Settings')
     except wikiutil.PluginMissingError:
-        return _create_prefs_page(request), None, None
+        return _create_prefs_page(request), None, msg
 
     obj = cls(request)
-    return obj.create_form(), obj.title, None
+    return obj.create_form(), obj.title, msg
 
 
 def execute(pagename, request):
