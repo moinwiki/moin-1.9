@@ -62,4 +62,4 @@ class UserPrefBase(object):
             title should be listed or not and whether
             submissions are accepted.
         '''
-        return True
+        return self.request.user and self.request.user.valid

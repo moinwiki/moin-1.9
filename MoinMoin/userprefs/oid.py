@@ -29,7 +29,7 @@ class Settings(UserPrefBase):
     def allowed(self):
         for authm in self.request.cfg.auth:
             if isinstance(authm, OpenIDAuth):
-                return True
+                return UserPrefBase.allowed(self)
         return False
 
     def _handle_remove(self):
