@@ -12,8 +12,9 @@
                 2007 MoinMoin:JohannesBerg
     @license: GNU GPL, see COPYING for details.
 """
+
 from MoinMoin import config, user
-from MoinMoin.request import TWISTED, CLI, STANDALONE
+from MoinMoin.request import request_twisted, request_cli, request_standalone
 from MoinMoin.auth import BaseAuth
 from base64 import decodestring
 
@@ -33,7 +34,7 @@ class HTTPAuth(BaseAuth):
 
         # for standalone, request authorization and verify it,
         # deny access if it isn't verified
-        if isinstance(request, STANDALONE.Request):
+        if isinstance(request, request_standalone.Request):
             request.setHttpHeader('WWW-Authenticate: Basic realm="MoinMoin"')
             auth = request.headers.get('Authorization')
             if auth:
@@ -45,14 +46,14 @@ class HTTPAuth(BaseAuth):
             if not u:
                 request.makeForbidden(401, _('You need to log in.'))
         # for Twisted, just check
-        elif isinstance(request, TWISTED.Request):
+        elif isinstance(request, request_twisted.Request):
             username = request.twistd.getUser().decode(config.charset)
             password = request.twistd.getPassword().decode(config.charset)
             # when using Twisted http auth, we use username and password from
             # the moin user profile, so both can be changed by user.
             u = user.User(request, auth_username=username, password=password,
                           auth_method=self.name, auth_attribs=())
-        elif not isinstance(request, CLI.Request):
+        elif not isinstance(request, request_cli.Request):
             env = request.env
             auth_type = env.get('AUTH_TYPE', '')
             if auth_type in ['Basic', 'Digest', 'NTLM', 'Negotiate', ]:

@@ -6,7 +6,7 @@
 
     Minimal usage:
 
-        from MoinMoin.server.TWISTED import TwistedConfig, makeApp
+        from MoinMoin.server.server_twisted import TwistedConfig, makeApp
 
         class Config(TwistedConfig):
             docs = '/usr/share/moin/wiki/htdocs'
@@ -35,7 +35,7 @@ from twisted.python import threadable
 threadable.init(1)
 
 # MoinMoin imports
-from MoinMoin.request import TWISTED
+from MoinMoin.request import request_twisted
 from MoinMoin.server import Config
 
 # Set threads flag, so other code can use proper locking
@@ -75,7 +75,7 @@ class WikiRoot(resource.Resource):
         else:
             if config.memoryProfile:
                 config.memoryProfile.addRequest()
-            req = TWISTED.Request(request, name, reactor, properties=config.properties)
+            req = request_twisted.Request(request, name, reactor, properties=config.properties)
             if config.hotshotProfile:
                 threads.deferToThread(config.hotshotProfile.runcall, req.run)
             else:

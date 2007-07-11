@@ -8,7 +8,7 @@
 
     Minimal usage:
 
-        from MoinMoin.server.CGI import CgiConfig, run
+        from MoinMoin.server.server_cgi import CgiConfig, run
 
         class Config(CgiConfig):
             pass
@@ -22,7 +22,7 @@
 """
 
 from MoinMoin.server import Config
-from MoinMoin.request import CGI
+from MoinMoin.request import request_cgi
 
 # Server globals
 config = None
@@ -56,7 +56,7 @@ def run(configClass):
         config.hotshotProfile = hotshot.Profile(config.hotshotProfile)
         config.hotshotProfile.start()
 
-    request = CGI.Request(properties=config.properties)
+    request = request_cgi.Request(properties=config.properties)
     request.run()
 
     if config.hotshotProfile:

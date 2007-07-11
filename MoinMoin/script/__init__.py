@@ -45,7 +45,7 @@ class ScriptRequest(object):
 
 class ScriptRequestCLI(ScriptRequest):
     """ When a script runs directly on the shell, we just use the CLI request
-        object (see MoinMoin.request.CLI) to do I/O (which will use stdin/out/err).
+        object (see MoinMoin.request.request_cli) to do I/O (which will use stdin/out/err).
     """
     def __init__(self, request):
         self.request = request
@@ -172,11 +172,11 @@ class MoinScript(Script):
 
     def init_request(self):
         """ create request """
-        from MoinMoin.request import CLI
+        from MoinMoin.request import request_cli
         if self.options.wiki_url:
-            self.request = CLI.Request(self.options.wiki_url, self.options.page)
+            self.request = request_cli.Request(self.options.wiki_url, self.options.page)
         else:
-            self.request = CLI.Request(pagename=self.options.page)
+            self.request = request_cli.Request(pagename=self.options.page)
 
     def mainloop(self):
         # Insert config dir or the current directory to the start of the path.

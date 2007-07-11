@@ -16,7 +16,7 @@ modules = pysupport.getPackageModules(__file__)
 
 class UserPrefBase(object):
     '''
-        Base class for Settings objections
+        Base class for Settings objects
 
         To get a new page in the wiki settings, create
         a new 'userprefs' plugin and in it declare a class
@@ -35,7 +35,7 @@ class UserPrefBase(object):
     def create_form(self):
         '''
             This method should return HTML code for at least
-            one form. Each created form *must* contained the
+            one form. Each created form *must* contain the
             hidden fields
               * action: set to "userprefs"
               * handler: set to the plugin name
