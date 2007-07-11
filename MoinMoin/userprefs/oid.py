@@ -69,7 +69,8 @@ class Settings(UserPrefBase):
             qstr = wikiutil.makeQueryString({'action': 'userprefs',
                                              'handler': 'oid',
                                              'oid.return': '1'})
-            return_to = ''.join([request.getBaseURL(), '?', qstr])
+            return_to = '%s/%s' % (request.getBaseURL(),
+                                   request.page.url(request, qstr))
             trust_root = request.getBaseURL()
             if oidreq.shouldSendRedirect():
                 redirect_url = oidreq.redirectURL(trust_root, return_to)
@@ -92,7 +93,8 @@ class Settings(UserPrefBase):
         qstr = wikiutil.makeQueryString({'action': 'userprefs',
                                          'handler': 'oid',
                                          'oid.return': '1'})
-        return_to = ''.join([request.getBaseURL(), '?', qstr])
+        return_to = '%s/%s' % (request.getBaseURL(),
+                               request.page.url(request, qstr))
         info = oidconsumer.complete(query, return_to=return_to)
         if info.status == consumer.FAILURE:
             return _('OpenID error: %s.') % info.message
