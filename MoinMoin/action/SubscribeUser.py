@@ -116,8 +116,8 @@ Example:
         request_url = "localhost/"
 
     # Setup MoinMoin environment
-    from MoinMoin.request import CLI
-    request = CLI.Request(url=request_url)
+    from MoinMoin.request import request_cli
+    request = request_cli.Request(url=request_url)
     request.form = request.args = request.setup_args()
 
     from MoinMoin.formatter.text_plain import Formatter

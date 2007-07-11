@@ -14,7 +14,7 @@ config.use_threads = use_threads
 del config
 
 from flup.server.fcgi import WSGIServer
-from MoinMoin.server.WSGI import moinmoinApp
+from MoinMoin.server.server_wsgi import moinmoinApp
 import os
 
 if __name__ == '__main__':

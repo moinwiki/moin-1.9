@@ -43,4 +43,4 @@ class BotConfig:
     # configs for communication to work.
     #
     # CHANGE IT TO A LONG RANDOM STRING, OR YOU WILL HAVE A SECURITY ISSUE!
-    secret = u"8yFAS(E-,.c-93adj'uff;3AW#(UDJ,.df3OA($HG"
+    secret = u""

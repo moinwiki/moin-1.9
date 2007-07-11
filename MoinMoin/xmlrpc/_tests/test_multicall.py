@@ -7,14 +7,13 @@
 """
 
 from MoinMoin.xmlrpc import XmlRpcBase
-from MoinMoin.request.CLI import Request
 from xmlrpclib import Fault
 
 def xmlrpc_return_fault():
     return Fault(666, "Fault description")
 
-def test_fault_serialization():
-    xmlrpc = XmlRpcBase(Request())
+def test_fault_serialization(request):
+    xmlrpc = XmlRpcBase(request)
     xmlrpc.xmlrpc_return_fault = xmlrpc_return_fault
     args = [{'methodName': 'return_fault', 'params': []}]
 
@@ -23,6 +22,6 @@ def test_fault_serialization():
     8b7d6d70fc95 for details"""
 
     result = xmlrpc.xmlrpc_system_multicall(args)
-    assert(type(result[0]) == dict)
-    assert(result[0].has_key("faultCode") and result[0].has_key("faultString"))
+    assert type(result[0]) == dict
+    assert result[0].has_key("faultCode") and result[0].has_key("faultString")
 

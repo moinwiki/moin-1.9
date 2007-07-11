@@ -11,7 +11,7 @@
 
     Minimal usage:
 
-        from MoinMoin.server.STANDALONE import StandaloneConfig, run
+        from MoinMoin.server.server_standalone import StandaloneConfig, run
 
         class Config(StandaloneConfig):
             docs = '/usr/share/moin/wiki/htdocs'
@@ -39,7 +39,7 @@ import BaseHTTPServer, SimpleHTTPServer, SocketServer
 
 from MoinMoin import version, wikiutil
 from MoinMoin.server import Config, switchUID
-from MoinMoin.request import STANDALONE
+from MoinMoin.request import request_standalone
 from MoinMoin.util import timefuncs
 
 # Server globals
@@ -333,7 +333,7 @@ class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         self.expires = 0
 
         try:
-            req = STANDALONE.Request(self, properties=config.properties)
+            req = request_standalone.Request(self, properties=config.properties)
             req.run()
         except socket.error, err:
             # Ignore certain errors
