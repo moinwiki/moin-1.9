@@ -514,6 +514,9 @@ reStructuredText Quick Reference
 
     url_mappings = {}
 
+    # allow disabling certain userpreferences plugins
+    disabled_userprefs = []
+
     user_checkbox_fields = [
         ('mailto_author', lambda _: _('Publish my email (not my wiki homepage) in author info')),
         ('edit_on_doubleclick', lambda _: _('Open editor on double click')),

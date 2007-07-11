@@ -20,15 +20,20 @@ def _handle_submission(request):
     """
     _ = request.getText
     sub = request.form.get('handler', [None])[0]
+
+    if sub in request.cfg.disabled_userprefs:
+        return None
+
     try:
         cls = wikiutil.importPlugin(request.cfg, 'userprefs', sub, 'Settings')
     except wikiutil.PluginMissingError:
-        return _("No such preferences plugin")
+        # we never show this plugin to click on so no need to
+        # give a message here
+        return None
 
     obj = cls(request)
     if not obj.allowed():
-        # intentionally do not let the user know this exists
-        return _("No such preferences plugin")
+        return None
     return obj.handle_form()
 
 def _create_prefs_page(request, sel=None):
@@ -40,6 +45,8 @@ def _create_prefs_page(request, sel=None):
     items = html.UL()
     ret.append(items)
     for sub in plugins:
+        if sub in request.cfg.disabled_userprefs:
+            continue
         cls = wikiutil.importPlugin(request.cfg, 'userprefs', sub, 'Settings')
         obj = cls(request)
         if not obj.allowed():
@@ -61,7 +68,7 @@ def _create_page(request, cancel=False):
 
     sub = request.form.get('sub', [''])[0]
     cls = None
-    if sub:
+    if sub and not sub in request.cfg.disabled_userprefs:
         try:
             cls = wikiutil.importPlugin(request.cfg, 'userprefs', sub, 'Settings')
         except wikiutil.PluginMissingError:
