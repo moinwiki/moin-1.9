@@ -9,6 +9,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+import MoinMoin.user
 from MoinMoin import user, wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.events import EventResult
@@ -69,10 +70,6 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
                     'rev2': str(revisions[0]),
                     'rev1': str(revisions[1])}
 
-    if msgtype == "attachment_added":
-        attachlink = request.getBaseURL() + \
-                        getAttachUrl(page.page_name, kwargs['attach_name'], request)
-
     pagelink = request.getQualifiedURL(page.url(request, querystr, relative=False))
 
     if msgtype == "page_changed":
@@ -98,22 +95,6 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
             else:
                 messageBody = messageBody + _("No differences found!\n", formatted=False)
 
-    elif msgtype == "attachment_added":
-        messageBody = _("Dear Wiki user,\n\n"
-        'You have subscribed to a wiki page "%(sitename)s" for change notification.\n\n'
-        "An attachment has been added to the following page by %(editor)s:\n"
-        "Following detailed information is available:\n"
-        "Attachment name: %(attach_name)s\n"
-        "Attachment size: %(attach_size)s\n"
-        "Download link: %(attach_get)s", formatted=False) % {
-            'editor': user.getUserIdentification(request),
-            'pagelink': pagelink,
-            'sitename': page.cfg.sitename or request.getBaseURL(),
-            'attach_name': kwargs['attach_name'],
-            'attach_size': kwargs['attach_size'],
-            'attach_get': attachlink,
-        }
-
     elif msgtype == "page_deleted":
         messageBody = _("Dear wiki user,\n\n"
             'You have subscribed to a wiki page "%(sitename)s" for change notification.\n\n'
@@ -137,20 +118,86 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
     else:
         raise UnknownChangeType()
 
-    if 'comment' in kwargs and kwargs['comment'] is not None:
+    if 'comment' in kwargs and kwargs['comment']:
         messageBody = messageBody + \
             _("The comment on the change is:\n%(comment)s", formatted=False) % {'comment': kwargs['comment']}
 
     return messageBody
 
-def user_created_message(sitename, username, email):
+def user_created_message(request, sitename, username, email):
+    """Formats a message used to notify about accounts being created
+
+    @return: a dict containing message body and subject
+    """
+    _ = request.getText
     subject = _("New user account created on %(sitename)s") % {'sitename': sitename or "Wiki"}
     body = _("""Dear Superuser, a new user has just been created. Details follow:
-    
+
     User name: %(username)s
     Email address: %(useremail)s""", formatted=False) % {
          'username': username,
          'useremail': email,
          }
-    
+
     return {'subject': subject, 'body': body}
+
+def attachment_added(request, page_name, attach_name, attach_size):
+    """Formats a message used to notify about new attachments
+
+    @return: a dict containing message body and subject
+    """
+    from MoinMoin.action.AttachFile import getAttachUrl
+
+    _ = request.getText
+    page = Page(request, page_name)
+    attachlink = request.getBaseURL() + getAttachUrl(page_name, attach_name, request)
+    pagelink = request.getQualifiedURL(page.url(request, {}, relative=False))
+
+    subject = _("New attachment added to page %(pagename)s on %(sitename)s") % {
+                'pagename': page_name,
+                'sitename': request.cfg.sitename or request.getBaseURL(),
+                }
+
+    body = _("Dear Wiki user,\n\n"
+    'You have subscribed to a wiki page "%(page_name)s" for change notification. '
+    "An attachment has been added to that page by %(editor)s. "
+    "Following detailed information is available:\n\n"
+    "Attachment name: %(attach_name)s\n"
+    "Attachment size: %(attach_size)s\n"
+    "Download link: %(attach_get)s", formatted=False) % {
+        'editor': user.getUserIdentification(request),
+        'pagelink': pagelink,
+        'page_name': page_name,
+        'attach_name': attach_name,
+        'attach_size': attach_size,
+        'attach_get': attachlink,
+    }
+
+    return {'body': body, 'subject': subject}
+
+
+def filter_subscriber_list(event, subscribers, for_jabber):
+    """Filter a list of page subscribers to honor event subscriptions
+
+    @param subscribers: list of subscribers (dict of lists, language is the key)
+    @param for_jabber: require jid and notify_by_jabber
+    @type subscribers: dict
+
+    """
+    event_name = event.__class__.__name__
+
+    # Filter the list by removing users who don't want to receive
+    # notifications about this type of event
+    for lang in subscribers.keys():
+        userlist = []
+
+        if for_jabber:
+            for usr in subscribers[lang]:
+                if usr.jid and usr.notify_by_jabber and event_name in usr.subscribed_events:
+                    userlist.append(usr)
+        else:
+            for usr in subscribers[lang]:
+                if usr.notify_by_email and event_name in usr.subscribed_events:
+                    userlist.append(usr)
+
+        subscribers[lang] = userlist
