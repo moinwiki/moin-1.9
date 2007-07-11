@@ -54,33 +54,37 @@ def test_filter_subscriber_list(request):
     print "User is subscribed to this event and wants to get notified by jabber."
     print "This means, that he should stay on the list."
     user.notify_by_jabber = True
+    user.jid = "user@example.com"
     user.subscribed_events = [events.Event.__name__]
     subscribers = {"en": [user]}
-    jabbernotify._filter_subscriber_list(event, subscribers)
+    notification.filter_subscriber_list(event, subscribers, True)
     assert subscribers["en"]
 
     print "User is subscribed to this event, but doesn't want to get notified by jabber."
     print "The list should be empty."
     user.notify_by_jabber = False
+    user.jid = "user@example.com"
     user.subscribed_events = [events.Event.__name__]
     subscribers = {"en": [user]}
-    jabbernotify._filter_subscriber_list(event, subscribers)
+    notification.filter_subscriber_list(event, subscribers, True)
     assert not subscribers["en"]
 
     print "User is not subscribed to this event, but wants to get notfied by jabber."
     print "The list should be empty."
     user.notify_by_jabber = True
+    user.jid = "user@example.com"
     user.subscribed_events = []
     subscribers = {"en": [user]}
-    jabbernotify._filter_subscriber_list(event, subscribers)
+    notification.filter_subscriber_list(event, subscribers, True)
     assert not subscribers["en"]
 
     print "User is neither subscribed to this event, nor wants jabber notifications."
     print "The list should be empty."
     user.notify_by_jabber = False
     user.subscribed_events = []
+    user.jid = "user@example.com"
     subscribers = {"en": [user]}
-    jabbernotify._filter_subscriber_list(event, subscribers)
+    notification.filter_subscriber_list(event, subscribers, True)
     assert not subscribers["en"]
 
 coverage_modules = ["MoinMoin.events"]
