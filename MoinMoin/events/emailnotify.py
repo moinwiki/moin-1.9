@@ -17,7 +17,7 @@ except:
 from MoinMoin import user
 from MoinMoin.Page import Page
 from MoinMoin.mail import sendmail
-from MoinMoin.events import PageChangedEvent, UserCreatedEvent
+from MoinMoin.events import PageChangedEvent, UserCreatedEvent, FileAttachedEvent
 from MoinMoin.user import User, getUserList
 import MoinMoin.events.notification as notification
 
@@ -103,7 +103,7 @@ def handle_user_created(event):
     sitename = event.request.cfg.sitename
     username = event.user.name
 
-    data = notification.user_created_message(sitename, username, email)
+    data = notification.user_created_message(event.request, sitename, username, email)
 
     for id in user_ids:
         usr = User(event.request, id=id)
@@ -111,10 +111,40 @@ def handle_user_created(event):
             continue
 
         # Currently send this only to super users
-        if usr.isSuperUser() and event_name in usr.subscribed_events:
+        if usr.isSuperUser() and event_name in usr.subscribed_events and usr.notify_by_email:
             emails.append(usr.email)
 
     send_notification(event.request, from_address, emails, data)
+
+
+def handle_file_attached(event):
+    """Sends an email to super users that have subscribed to this event type"""
+
+    names = set()
+    _ = event.request.getText
+    event_name = event.__class__.__name__
+    from_address = event.request.cfg.mail_from
+    request = event.request
+    page = Page(request, event.pagename)
+
+    subscribers = page.getSubscribers(request, return_users=1)
+    notification.filter_subscriber_list(event, subscribers, False)
+    data = notification.attachment_added(request, event.pagename, event.name, event.size)
+
+    for lang in subscribers:
+        emails = []
+
+        for usr in subscribers[lang]:
+            if usr.notify_by_email and event_name in usr.subscribed_events:
+                emails.append(usr.email)
+            else:
+                continue
+
+            if send_notification(request, from_address, emails, data):
+                names.update(usr.name)
+
+    return notification.Success(names)
+
 
 def handle(event):
     """An event handler"""
@@ -126,3 +156,5 @@ def handle(event):
         return notify_subscribers(event.request, event.page, event.comment, event.trivial)
     elif isinstance(event, UserCreatedEvent):
         return handle_user_created(event)
+    elif isinstance(event, FileAttachedEvent):
+        return handle_file_attached(event)

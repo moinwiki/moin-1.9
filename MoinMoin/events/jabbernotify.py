@@ -64,37 +64,31 @@ def handle_jid_changed(event):
         ev.logger.error(_("Low-level communication error: $s"), str(err))
 
 
-def _filter_subscriber_list(event, subscribers):
-    """Filter a list of page subscribers to honor event subscriptions
-
-    @param subscribers: list of subscribers (dict of lists, language is the key)
-    @type subscribers: dict
-
-    """
-    event_name = event.__class__.__name__
-
-    # Filter the list by removing users who don't want to receive
-    # notifications about this type of event
-    for lang in subscribers.keys():
-        userlist = []
-
-        for usr in subscribers[lang]:
-            if event_name in usr.subscribed_events and usr.notify_by_jabber:
-                userlist.append(usr)
-
-        subscribers[lang] = userlist
-
 def handle_file_attached(event):
     """Handles event sent when a file is attached to a page"""
 
+    names = set()
     request = event.request
     page = Page(request, event.pagename)
+    event_name = event.__class__.__name__
 
     subscribers = page.getSubscribers(request, return_users=1)
-    _filter_subscriber_list(event, subscribers)
+    notification.filter_subscriber_list(event, subscribers, True)
 
-    return page_change("attachment_added", request, page, subscribers, \
-                       attach_name=event.attachment_name, attach_size=event.size)
+    for lang in subscribers.keys():
+        jids = []
+        data = notification.attachment_added(request, event.pagename, event.name, event.size)
+
+        for usr in subscribers[lang]:
+            if usr.notify_by_jabber and usr.jid and event_name in usr.subscribed_events:
+                jids.append(usr.jid)
+            else:
+                continue
+
+            if send_notification(request, jids, data['body'], data['subject']):
+                names.update(usr.name)
+
+    return notification.Success(names)
 
 
 def handle_page_changed(event):
@@ -103,7 +97,7 @@ def handle_page_changed(event):
     page = event.page
 
     subscribers = page.getSubscribers(request, return_users=1, trivial=event.trivial)
-    _filter_subscriber_list(event, subscribers)
+    notification.filter_subscriber_list(event, subscribers, True)
     return page_change("page_changed", request, page, subscribers, \
                        revisions=page.getRevList(), comment=event.comment)
 
@@ -115,7 +109,7 @@ def handle_page_deleted(event):
     page = event.page
 
     subscribers = page.getSubscribers(request, return_users=1)
-    _filter_subscriber_list(event, subscribers)
+    notification.filter_subscriber_list(event, subscribers, True)
     return page_change("page_deleted", request, page, subscribers)
 
 def handle_page_renamed(event):
@@ -126,7 +120,7 @@ def handle_page_renamed(event):
     old_name = event.old_page.page_name
 
     subscribers = page.getSubscribers(request, return_users=1)
-    _filter_subscriber_list(event, subscribers)
+    notification.filter_subscriber_list(event, subscribers, True)
     return page_change("page_renamed", request, page, subscribers, oldname=old.page_name)
 
 
@@ -136,13 +130,13 @@ def handle_user_created(event):
     jids = []
     user_ids = getUserList(event.request)
     event_name = event.__class__.__name__
-    
+
     email = event.user.email or u"NOT SET"
     sitename = event.request.cfg.sitename
     username = event.user.name
-    
-    data = notification.user_created_message(sitename, username, email)
-    
+
+    data = notification.user_created_message(event.request, sitename, username, email)
+
     for id in user_ids:
         usr = User(event.request, id=id)
         if not usr.notify_by_jabber:
