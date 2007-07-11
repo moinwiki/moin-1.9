@@ -60,12 +60,19 @@ def _create_page(request, cancel=False):
         msg = None
 
     sub = request.form.get('sub', [''])[0]
-    try:
-        cls = wikiutil.importPlugin(request.cfg, 'userprefs', sub, 'Settings')
-    except wikiutil.PluginMissingError:
+    cls = None
+    if sub:
+        try:
+            cls = wikiutil.importPlugin(request.cfg, 'userprefs', sub, 'Settings')
+        except wikiutil.PluginMissingError:
+            # cls is already None
+            pass
+
+    obj = cls and cls(request)
+
+    if not obj or not obj.allowed():
         return _create_prefs_page(request), None, msg
 
-    obj = cls(request)
     return obj.create_form(), obj.title, msg
 
 
