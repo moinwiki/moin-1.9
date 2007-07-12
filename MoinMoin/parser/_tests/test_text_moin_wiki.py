@@ -573,3 +573,23 @@ Test {{{brackets}}} and test {{{brackets}}}
         assert expected == result
 
 
+class TestLinkingMarkup(ParserTestCase):
+    """ Test wiki markup """
+
+    text = 'AAA %s AAA'
+    needle = re.compile(text % r'(.+)')
+    _tests = (
+        # test,                     expected
+        ('["something"]',           '<a class="nonexistent" href="./something">something</a>'),
+        ("['something']",           "['something']"),
+        )
+
+    def testTextFormating(self):
+        """ parser.wiki: text formating """
+        for test, expected in self._tests:
+            html = self.parse(self.text % test)
+            result = self.needle.search(html).group(1)
+            self.assertEqual(result, expected,
+                             'Expected "%(expected)s" but got "%(result)s"' % locals())
+
+
