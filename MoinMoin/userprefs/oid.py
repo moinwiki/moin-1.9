@@ -9,12 +9,16 @@
 from MoinMoin import wikiutil, user
 from MoinMoin.widget import html
 from MoinMoin.userprefs import UserPrefBase
-from MoinMoin.auth.openidrp import OpenIDAuth
 import sha
-from MoinMoin.util.moinoid import MoinOpenIDStore
-from openid.consumer import consumer
-from openid.yadis.discover import DiscoveryFailure
-from openid.fetchers import HTTPFetchingError
+try:
+    from MoinMoin.auth.openidrp import OpenIDAuth
+    from MoinMoin.util.moinoid import MoinOpenIDStore
+    from openid.consumer import consumer
+    from openid.yadis.discover import DiscoveryFailure
+    from openid.fetchers import HTTPFetchingError
+    _openid_disabled = False
+except ImportError:
+    _openid_disabled = True
 
 
 class Settings(UserPrefBase):
@@ -27,6 +31,8 @@ class Settings(UserPrefBase):
         self.title = self._("OpenID settings")
 
     def allowed(self):
+        if _openid_disabled:
+            return False
         for authm in self.request.cfg.auth:
             if isinstance(authm, OpenIDAuth):
                 return UserPrefBase.allowed(self)
