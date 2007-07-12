@@ -23,6 +23,7 @@ class Settings(UserPrefBase):
         _ = request.getText
         self.cfg = request.cfg
         self.title = _("Change password")
+        self.name = 'changepass'
 
 
     def allowed(self):
@@ -60,60 +61,22 @@ class Settings(UserPrefBase):
                 return "Can't encode password: %s" % str(err)
 
 
-    def _make_form(self):
-        """ Create the FORM, and the TABLE with the input fields
-        """
-        _ = self._
-        sn = self.request.getScriptname()
-        pi = self.request.getPathinfo()
-        action = u"%s%s" % (sn, pi)
-        self._form = html.FORM(action=action)
-        self._table = html.TABLE(border="0")
-
-        # Use the user interface language and direction
-        lang_attr = self.request.theme.ui_lang_attr()
-        self._form.append(html.Raw('<div class="userpref"%s>' % lang_attr))
-
-        self._form.append(html.STRONG().append(html.P().append(html.Text(
-            _("To change your password, enter a new password twice.")))))
-
-        self._form.append(self._table)
-        self._form.append(html.Raw("</div>"))
-
-
-    def _make_row(self, label, cell, **kw):
-        """ Create a row in the form table.
-        """
-        self._table.append(html.TR().extend([
-            html.TD(**kw).extend([html.B().append(label), '   ']),
-            html.TD().extend(cell),
-        ]))
-
-
     def create_form(self, create_only=False, recover_only=False):
         """ Create the complete HTML form code. """
         _ = self._
-        self._make_form()
+        form = self.make_form(html.Text(_("To change your password, "
+                                          "enter a new password twice.")))
 
-        self._make_row(_('Password'),
-                       [html.INPUT(type="password", size=36, name="password")])
-        self._make_row(_('Password repeat'),
-                       [html.INPUT(type="password", size=36, name="password2")])
-
-        self._form.append(html.INPUT(type="hidden", name="action",
-                                     value="userprefs"))
-        self._form.append(html.INPUT(type="hidden", name="handler",
-                                     value="changepass"))
+        self.make_row(_('Password'),
+                      [html.INPUT(type="password", size=36, name="password")])
+        self.make_row(_('Password repeat'),
+                      [html.INPUT(type="password", size=36, name="password2")])
 
         # Add buttons
-        self._form.append(html.INPUT(type="hidden", name="action",
-                                     value="userprefs"))
-        self._form.append(html.INPUT(type="hidden", name="handler",
-                                     value="changepass"))
-
-        self._make_row('', [
-                html.INPUT(type="submit", name='save', value=_("Save")),
+        self.make_row('', [
+                html.INPUT(type="submit", name='save', value=_("Change password")),
+                ' ',
                 html.INPUT(type="submit", name='cancel', value=_("Cancel")),
               ])
 
-        return unicode(self._form)
+        return unicode(form)

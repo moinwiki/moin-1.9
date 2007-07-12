@@ -35,6 +35,7 @@ class Settings(UserPrefBase):
         self._ = request.getText
         self.cfg = request.cfg
         self.title = self._("Preferences")
+        self.name = 'prefs'
 
     def _decode_pagelist(self, key):
         """ Decode list of pages from form input
@@ -327,36 +328,11 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
                   ]
         return util.web.makeSelection('editor_ui', options, editor_ui)
 
-    def _make_form(self):
-        """ Create the FORM, and the TABLE with the input fields
-        """
-        sn = self.request.getScriptname()
-        pi = self.request.getPathinfo()
-        action = u"%s%s" % (sn, pi)
-        self._form = html.FORM(action=action)
-        self._table = html.TABLE(border="0")
-
-        # Use the user interface language and direction
-        lang_attr = self.request.theme.ui_lang_attr()
-        self._form.append(html.Raw('<div class="userpref"%s>' % lang_attr))
-
-        self._form.append(self._table)
-        self._form.append(html.Raw("</div>"))
-
-
-    def make_row(self, label, cell, **kw):
-        """ Create a row in the form table.
-        """
-        self._table.append(html.TR().extend([
-            html.TD(**kw).extend([html.B().append(label), '   ']),
-            html.TD().extend(cell),
-        ]))
-
 
     def create_form(self):
         """ Create the complete HTML form code. """
         _ = self._
-        self._make_form()
+        self._form = self.make_form()
 
         if self.request.user.valid:
             buttons = [('save', _('Save')), ('cancel', _('Cancel')), ]

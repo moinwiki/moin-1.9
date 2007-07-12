@@ -8,6 +8,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 from MoinMoin.util import pysupport
+from MoinMoin.widget import html
 
 
 # create a list of extension actions from the package directory
@@ -30,7 +31,8 @@ class UserPrefBase(object):
         '''
         self.request = request
         self._ = request.getText
-        title = 'No name set'
+        self.name = None
+        self.title = 'No name set'
 
     def create_form(self):
         '''
@@ -63,3 +65,38 @@ class UserPrefBase(object):
             submissions are accepted.
         '''
         return self.request.user and self.request.user.valid
+
+    def make_form(self, explanation=None):
+        '''
+            To have a consistent UI, use this method for most
+            preferences forms and then call make_row(). See
+            existing plugins, e.g. changepass.py.
+        '''
+        action = self.request.page.url(self.request)
+        _form = html.FORM(action=action)
+        _form.append(html.INPUT(type="hidden", name="action", value="userprefs"))
+        _form.append(html.INPUT(type="hidden", name="handler", value=self.name))
+
+        self._table = html.TABLE(border="0")
+
+        # Use the user interface language and direction
+        lang_attr = self.request.theme.ui_lang_attr()
+        _form.append(html.Raw('<div class="userpref"%s>' % lang_attr))
+        para = html.P()
+        _form.append(para)
+        if explanation:
+            para.append(explanation)
+
+        para.append(self._table)
+        _form.append(html.Raw("</div>"))
+
+        return _form
+
+    def make_row(self, label, cell, **kw):
+        '''
+           Create a row in the form table.
+        '''
+        self._table.append(html.TR().extend([
+            html.TD(**kw).extend([html.B().append(label), '   ']),
+            html.TD().extend(cell),
+        ]))
