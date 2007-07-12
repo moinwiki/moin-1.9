@@ -53,9 +53,9 @@ class Settings(UserPrefBase):
                 self.request._setuid_real_user = self.request.user
                 # now continue as the other user
                 self.request.user = theuser
-            return  _("Use UserPreferences to change settings of the selected user account, log out to get back to your account.")
+            return  _("You can now change the settings of the selected user account; log out to get back to your account.")
         else:
-            return _("Use UserPreferences to change your settings or create an account.")
+            return None
 
 
     def _user_select(self):
@@ -83,7 +83,6 @@ class Settings(UserPrefBase):
         pi = self.request.getPathinfo()
         action = u"%s%s" % (sn, pi)
         self._form = html.FORM(action=action)
-        self._table = html.TABLE(border="0")
 
         # Use the user interface language and direction
         lang_attr = self.request.theme.ui_lang_attr()
@@ -91,17 +90,7 @@ class Settings(UserPrefBase):
 
         self._form.append(html.INPUT(type="hidden", name="action", value="userprefs"))
         self._form.append(html.INPUT(type="hidden", name="handler", value="suid"))
-        self._form.append(self._table)
         self._form.append(html.Raw("</div>"))
-
-
-    def _make_row(self, label, cell, **kw):
-        """ Create a row in the form table.
-        """
-        self._table.append(html.TR().extend([
-            html.TD(**kw).extend([html.B().append(label), '   ']),
-            html.TD().extend(cell),
-        ]))
 
 
     def create_form(self):
@@ -113,17 +102,16 @@ class Settings(UserPrefBase):
             (not self.request._setuid_real_user is None and
              self.request._setuid_real_user.isSuperUser())):
             ticket = wikiutil.createTicket(self.request)
-            self._make_row(_('Select User'), [self._user_select()])
+            self._form.append(html.P().append(
+                              html.Text(_('As the superuser, you can temporarily '
+                                          'assume the identity of another user.'))))
+            self._form.append(html.P().append(self._user_select()))
             self._form.append(html.INPUT(type="hidden", name="ticket", value="%s" % ticket))
-            buttons = [("select_user", _('Select User')),
-                       ("cancel", _('Cancel'))]
-            button_cell = []
-            for name, label in buttons:
-                button_cell.extend([
-                    html.INPUT(type="submit", name=name, value=label),
-                    ' ',
-                ])
-            self._make_row('', button_cell)
+            self._form.append(html.INPUT(type="submit", name="select_user",
+                                         value=_('Select User')))
+            self._form.append(html.Text(' '))
+            self._form.append(html.INPUT(type="submit", name="cancel",
+                                         value=_('Cancel')))
             return unicode(self._form)
 
         return u''
