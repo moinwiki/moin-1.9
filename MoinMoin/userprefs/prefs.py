@@ -16,13 +16,8 @@ from MoinMoin.userprefs import UserPrefBase
 #################################################################
 # This is a mess.
 #
-# This plugin is also used by the 'newaccount'
-# action and really shouldn't be.
-#
 # The plan for refactoring would be:
-#  1. make the 'newaccount' action create its own form and not
-#     use the code here
-#  2. split the plugin into multiple preferences pages:
+# split the plugin into multiple preferences pages:
 #    - account details (name, email, timezone, ...)
 #    - change password
 #    - wiki settings (editor, fancy diffs, theme, ...)
@@ -376,12 +371,12 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
         ]))
 
 
-    def create_form(self, recover_only=False):
+    def create_form(self):
         """ Create the complete HTML form code. """
         _ = self._
         self._make_form()
 
-        if self.request.user.valid and not recover_only:
+        if self.request.user.valid:
             buttons = [('save', _('Save')), ('cancel', _('Cancel')), ]
             uf_remove = self.cfg.user_form_remove
             uf_disable = self.cfg.user_form_disable
@@ -476,34 +471,6 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
                 )
             self._form.append(html.INPUT(type="hidden", name="action", value="userprefs"))
             self._form.append(html.INPUT(type="hidden", name="handler", value="prefs"))
-        elif not recover_only:
-            # Login / register interface
-            buttons = [
-                # IMPORTANT: login should be first to be the default
-                # button when a user hits ENTER.
-                #('login', _('Login')),  # we now have a Login macro
-                ('create', _('Create Profile')),
-                ('cancel', _('Cancel')),
-            ]
-            for key, label, type, length, textafter in self.cfg.user_form_fields:
-                if key in ('name', 'password', 'password2', 'email'):
-                    self.make_row(_(label),
-                              [html.INPUT(type=type, size=length, name=key,
-                                          value=''),
-                               ' ', _(textafter), ])
-            self._form.append(html.INPUT(type="hidden", name="action", value="newaccount"))
-        else:
-            for key, label, type, length, textafter in self.cfg.user_form_fields:
-                if key == 'email':
-                    self.make_row(_(label),
-                              [html.INPUT(type=type, size=length, name=key,
-                                          value=''),
-                               ' ', _(textafter), ])
-            buttons = []
-            self._form.append(html.INPUT(type="hidden", name="action", value="recoverpass"))
-
-        if recover_only and self.cfg.mail_enabled:
-            buttons.append(("account_sendmail", _('Mail me my account data')))
 
         # Add buttons
         button_cell = []
