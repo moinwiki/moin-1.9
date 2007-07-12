@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import wikiutil
+from MoinMoin import wikiutil, user
 from MoinMoin.widget import html
 from MoinMoin.userprefs import UserPrefBase
 from MoinMoin.auth.openidrp import OpenIDAuth
@@ -34,6 +34,8 @@ class Settings(UserPrefBase):
 
     def _handle_remove(self):
         _ = self.request.getText
+        if not hasattr(self.request.user, 'openids'):
+            return
         openids = self.request.user.openids[:]
         for oid in self.request.user.openids:
             name = "rm-%s" % sha.new(oid).hexdigest()
@@ -50,8 +52,11 @@ class Settings(UserPrefBase):
         request = self.request
 
         openid_id = request.form.get('openid_identifier', [''])[0]
+        if not openid_id:
+            return _("No OpenID.")
 
-        if openid_id in request.user.openids:
+        if (hasattr(self.request.user, 'openids') and
+            openid_id in request.user.openids):
             return _("OpenID is already present.")
 
         oidconsumer = consumer.Consumer(request.session,
@@ -101,12 +106,19 @@ class Settings(UserPrefBase):
         elif info.status == consumer.CANCEL:
             return _('Verification canceled.')
         elif info.status == consumer.SUCCESS:
-            if not info.identity_url in request.user.openids:
-                request.user.openids.append(info.identity_url)
-                request.user.save()
-                return _("OpenID added successfully.")
-            else:
+            if not hasattr(self.request.user, 'openids'):
+                request.user.openids = []
+
+            if info.identity_url in request.user.openids:
                 return _("OpenID is already present.")
+
+            if user.getUserIdByOpenId(request, info.identity_url):
+                return _("This OpenID is already used for another account.")
+
+            # all fine
+            request.user.openids.append(info.identity_url)
+            request.user.save()
+            return _("OpenID added successfully.")
         else:
             return _('OpenID failure.')
 
@@ -199,7 +211,7 @@ document.getElementById("openid_message").submit();
             del request.session['openid.prefs.form_html']
             return ''.join([txt, oidhtml, submitjs])
 
-        if request.user.openids:
+        if hasattr(request.user, 'openids') and request.user.openids:
             self._oidlist()
         self._addoidform()
 
