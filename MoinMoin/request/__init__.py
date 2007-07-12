@@ -240,7 +240,9 @@ class RequestBase(object):
                 self._setuid_real_user = self.user
                 uid = self.session['setuid']
                 self.user = user.User(self, uid, auth_method='setuid')
-                self.user.disabled = False
+                # set valid to True so superusers can even switch
+                # to disable accounts
+                self.user.valid = True
 
             if self.action != 'xmlrpc':
                 if not self.forbidden and self.isForbidden():
