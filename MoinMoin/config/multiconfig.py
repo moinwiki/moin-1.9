@@ -565,8 +565,6 @@ reStructuredText Quick Reference
     user_form_fields = [
         ('name', _('Name'), "text", "36", _("(Use Firstname''''''Lastname)")),
         ('aliasname', _('Alias-Name'), "text", "36", ''),
-        ('password', _('Password'), "password", "36", ''),
-        ('password2', _('Password repeat'), "password", "36", _('(Only for password change or new account)')),
         ('email', _('Email'), "text", "36", ''),
         ('jid', _('Jabber ID'), "text", "36", ''),
         ('css_url', _('User CSS URL'), "text", "40", _('(Leave it empty for disabling user CSS)')),

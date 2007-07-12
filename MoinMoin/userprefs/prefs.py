@@ -19,7 +19,6 @@ from MoinMoin.userprefs import UserPrefBase
 # The plan for refactoring would be:
 # split the plugin into multiple preferences pages:
 #    - account details (name, email, timezone, ...)
-#    - change password
 #    - wiki settings (editor, fancy diffs, theme, ...)
 #    - notification settings (trivial, subscribed pages, ...)
 #    - quick links (or leave in wiki settings?)
@@ -84,23 +83,6 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
 
             if not theuser.name:
                 return _("Empty user name. Please enter a user name.")
-
-        if not 'password' in theuser.auth_attribs:
-            # try to get the password and pw repeat
-            password = form.get('password', [''])[0]
-            password2 = form.get('password2', [''])[0]
-
-            # Check if password is given and matches with password repeat
-            if password != password2:
-                return _("Passwords don't match!")
-
-            # Encode password
-            if password and not password.startswith('{SHA}'):
-                try:
-                    theuser.enc_password = user.encodePassword(password)
-                except UnicodeError, err:
-                    # Should never happen
-                    return "Can't encode password: %s" % str(err)
 
         if not 'email' in theuser.auth_attribs:
             # try to get the email
@@ -184,7 +166,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
         # handler for each form field, instead of stuffing them all in
         # one long and inextensible method.  That would allow for
         # plugins to provide methods to validate their fields as well.
-        already_handled = ['name', 'password', 'password2', 'email',
+        already_handled = ['name', 'email',
                            'aliasname', 'edit_rows', 'editor_default',
                            'editor_ui', 'tz_offset', 'datetime_fmt',
                            'theme_name', 'language', 'jid']
@@ -381,11 +363,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
             uf_remove = self.cfg.user_form_remove
             uf_disable = self.cfg.user_form_disable
             for attr in self.request.user.auth_attribs:
-                if attr == 'password':
-                    uf_remove.append(attr)
-                    uf_remove.append('password2')
-                else:
-                    uf_disable.append(attr)
+                uf_disable.append(attr)
             for key, label, type, length, textafter in self.cfg.user_form_fields:
                 default = self.cfg.user_form_defaults[key]
                 if not key in uf_remove:
