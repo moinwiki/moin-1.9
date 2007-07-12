@@ -482,7 +482,7 @@ class MetaDict(dict):
 
 # Quoting of wiki names, file names, etc. (in the wiki markup) -----------------------------------
 
-QUOTE_CHARS = u"'\""
+QUOTE_CHARS = u'"'
 
 def quoteName(name):
     """ put quotes around a given name """
