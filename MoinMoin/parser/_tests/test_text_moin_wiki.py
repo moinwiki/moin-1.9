@@ -579,9 +579,11 @@ class TestLinkingMarkup(ParserTestCase):
     text = 'AAA %s AAA'
     needle = re.compile(text % r'(.+)')
     _tests = (
-        # test,                     expected
-        ('["something"]',           '<a class="nonexistent" href="./something">something</a>'),
-        ("['something']",           "['something']"),
+        # test,                       expected
+        ('["something"]',             '<a class="nonexistent" href="./something">something</a>'),
+        ("['something']",             "['something']"),
+        ('MoinMoin:"something"',      '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/something" title="MoinMoin">something</a>'),
+        ("MoinMoin:'something else'", '<a class="nonexistent" href="./MoinMoin">MoinMoin</a>:\'something else\''),
         )
 
     def testTextFormating(self):
@@ -590,6 +592,6 @@ class TestLinkingMarkup(ParserTestCase):
             html = self.parse(self.text % test)
             result = self.needle.search(html).group(1)
             self.assertEqual(result, expected,
-                             'Expected "%(expected)s" but got "%(result)s"' % locals())
+                             'Expected "%(expected)s" but got "%(result)s"\n' % locals())
 
 
