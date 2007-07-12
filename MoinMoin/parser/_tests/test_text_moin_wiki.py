@@ -593,7 +593,4 @@ class TestLinkingMarkup(ParserTestCase):
         for test, expected in self._tests:
             html = self.parse(self.text % test)
             result = self.needle.search(html).group(1)
-            self.assertEqual(result, expected,
-                             'Expected "%(expected)s" but got "%(result)s"\n' % locals())
-
-
+            assert result == expected
