@@ -16,11 +16,11 @@ from MoinMoin.userprefs import UserPrefBase
 #################################################################
 # This is a mess.
 #
-# This plugin is also used by the 'recoverpass' and 'newaccount'
-# actions, and really shouldn't be.
+# This plugin is also used by the 'newaccount'
+# action and really shouldn't be.
 #
 # The plan for refactoring would be:
-#  1. make the mentioned actions create their own forms and not
+#  1. make the 'newaccount' action create its own form and not
 #     use the code here
 #  2. split the plugin into multiple preferences pages:
 #    - account details (name, email, timezone, ...)
@@ -376,12 +376,12 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
         ]))
 
 
-    def create_form(self, create_only=False, recover_only=False):
+    def create_form(self, recover_only=False):
         """ Create the complete HTML form code. """
         _ = self._
         self._make_form()
 
-        if self.request.user.valid and not create_only and not recover_only:
+        if self.request.user.valid and not recover_only:
             buttons = [('save', _('Save')), ('cancel', _('Cancel')), ]
             uf_remove = self.cfg.user_form_remove
             uf_disable = self.cfg.user_form_disable
@@ -504,12 +504,6 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
 
         if recover_only and self.cfg.mail_enabled:
             buttons.append(("account_sendmail", _('Mail me my account data')))
-
-        if create_only:
-            buttons = [("create_only", _('Create Profile'))]
-            if self.cfg.mail_enabled:
-                buttons.append(("create_and_mail", "%s + %s" %
-                                (_('Create Profile'), _('Email'))))
 
         # Add buttons
         button_cell = []
