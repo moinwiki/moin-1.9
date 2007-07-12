@@ -20,13 +20,13 @@ class Settings(UserPrefBase):
         self._ = request.getText
         self.cfg = request.cfg
         self.title = self._("Switch user")
+        self.name = 'suid'
 
-    def _is_super_user(self):
-        return (self.request.user.isSuperUser() or
-                (not self.request._setuid_real_user is None
-                 and (self.request._setuid_real_user.isSuperUser())))
-
-    allowed = _is_super_user
+    def allowed(self):
+        return (UserPrefBase.allowed(self) and
+                self.request.user.isSuperUser() or
+                (not self.request._setuid_real_user is None and
+                 (self.request._setuid_real_user.isSuperUser())))
 
     def handle_form(self):
         _ = self._
@@ -36,7 +36,7 @@ class Settings(UserPrefBase):
             return
 
         if (wikiutil.checkTicket(self.request, self.request.form['ticket'][0]) and
-            self.request.request_method == 'POST' and self._is_super_user()):
+            self.request.request_method == 'POST'):
             su_user = form.get('selected_user', [''])[0]
             uid = user.getUserId(self.request, su_user)
             if not uid:
@@ -76,42 +76,18 @@ class Settings(UserPrefBase):
         current_user = self.request.user.name
         return util.web.makeSelection('selected_user', options, current_user, size=size)
 
-    def _make_form(self):
-        """ Create the FORM, and the TABLE with the input fields
-        """
-        sn = self.request.getScriptname()
-        pi = self.request.getPathinfo()
-        action = u"%s%s" % (sn, pi)
-        self._form = html.FORM(action=action)
-
-        # Use the user interface language and direction
-        lang_attr = self.request.theme.ui_lang_attr()
-        self._form.append(html.Raw('<div class="userpref"%s>' % lang_attr))
-
-        self._form.append(html.INPUT(type="hidden", name="action", value="userprefs"))
-        self._form.append(html.INPUT(type="hidden", name="handler", value="suid"))
-        self._form.append(html.Raw("</div>"))
-
-
     def create_form(self):
         """ Create the complete HTML form code. """
         _ = self._
-        self._make_form()
+        form = self.make_form(html.Text(_('As a superuser, you can temporarily '
+                                          'assume the identity of another user.')))
 
-        if (self.request.user.isSuperUser() or
-            (not self.request._setuid_real_user is None and
-             self.request._setuid_real_user.isSuperUser())):
-            ticket = wikiutil.createTicket(self.request)
-            self._form.append(html.P().append(
-                              html.Text(_('As the superuser, you can temporarily '
-                                          'assume the identity of another user.'))))
-            self._form.append(html.P().append(self._user_select()))
-            self._form.append(html.INPUT(type="hidden", name="ticket", value="%s" % ticket))
-            self._form.append(html.INPUT(type="submit", name="select_user",
-                                         value=_('Select User')))
-            self._form.append(html.Text(' '))
-            self._form.append(html.INPUT(type="submit", name="cancel",
-                                         value=_('Cancel')))
-            return unicode(self._form)
-
-        return u''
+        ticket = wikiutil.createTicket(self.request)
+        self.make_row('Select User', [self._user_select()], valign="top")
+        form.append(html.INPUT(type="hidden", name="ticket", value="%s" % ticket))
+        self.make_row('', [html.INPUT(type="submit", name="select_user",
+                                      value=_('Select User')),
+                           ' ',
+                           html.INPUT(type="submit", name="cancel",
+                                      value=_('Cancel'))])
+        return unicode(form)
