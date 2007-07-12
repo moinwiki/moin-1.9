@@ -583,7 +583,9 @@ class TestLinkingMarkup(ParserTestCase):
         ('["something"]',             '<a class="nonexistent" href="./something">something</a>'),
         ("['something']",             "['something']"),
         ('MoinMoin:"something"',      '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/something" title="MoinMoin">something</a>'),
-        ("MoinMoin:'something else'", '<a class="nonexistent" href="./MoinMoin">MoinMoin</a>:\'something else\''),
+        ('MoinMoin:"with space"',     '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/with%20space" title="MoinMoin">with space</a>'),
+        ('RFC:"1 2 3"',               '<a class="interwiki" href="http://www.ietf.org/rfc/rfc1%202%203" title="RFC">1 2 3</a>'),
+        ("RFC:'something else'",      "RFC:'something else'"),
         )
 
     def testTextFormating(self):
