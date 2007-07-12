@@ -48,7 +48,9 @@ class Settings(UserPrefBase):
                 self.request._setuid_real_user = None
             else:
                 theuser = user.User(self.request, uid, auth_method='setuid')
-                theuser.disabled = None
+                # set valid to True so superusers can even switch
+                # to disable accounts
+                theuser.valid = True
                 self.request.session['setuid'] = uid
                 self.request._setuid_real_user = self.request.user
                 # now continue as the other user

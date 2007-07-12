@@ -203,6 +203,10 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
 
         # save data
         theuser.save()
+        if theuser.disabled:
+            # set valid to false so the current request won't
+            # show the user as logged-in any more
+            theuser.valid = False
         self.request.user = theuser
 
         result = _("User preferences saved!")
