@@ -637,9 +637,7 @@ class XmlRpcBase:
         and Jabber bot.
 
         @param jid: a bare Jabber ID
-
         """
-
         if self.cfg.secret != secret:
             return ""
 
