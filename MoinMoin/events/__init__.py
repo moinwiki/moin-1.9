@@ -67,8 +67,19 @@ class PageDeletedEvent(PageEvent):
 
     def __init__(self, request, page, comment):
         PageEvent.__init__(self, request)
-        self.request = request
         self.page = page
+        self.comment = comment
+
+
+class PageCopiedEvent(PageEvent):
+
+    description = u"""Page has been copied"""
+    req_superuser = False
+
+    def __init__(self, request, page, old_page, comment):
+        PageEvent.__init__(self, request)
+        self.page = page
+        self.old_page = old_page
         self.comment = comment
 
 
@@ -178,6 +189,9 @@ def send_event(event):
     # Try to handle the event with each available handler (for now)
     for handle in cfg.event_handlers:
         retval = handle(event)
+
+        assert retval is None or isinstance(retval, EventResult)
+
         if retval:
             msg.append(retval)
 
