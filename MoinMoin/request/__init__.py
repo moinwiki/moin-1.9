@@ -240,7 +240,9 @@ class RequestBase(object):
                 self._setuid_real_user = self.user
                 uid = self.session['setuid']
                 self.user = user.User(self, uid, auth_method='setuid')
-                self.user.disabled = False
+                # set valid to True so superusers can even switch
+                # to disable accounts
+                self.user.valid = True
 
             if self.action != 'xmlrpc':
                 if not self.forbidden and self.isForbidden():
@@ -603,16 +605,18 @@ class RequestBase(object):
     def _handle_auth_form(self, user_obj):
         username = self.form.get('name', [None])[0]
         password = self.form.get('password', [None])[0]
+        oid = self.form.get('openid_identifier', [None])[0]
         login = 'login' in self.form
         logout = 'logout' in self.form
         stage = self.form.get('stage', [None])[0]
         return self.handle_auth(user_obj, attended=True, username=username,
                                 password=password, login=login, logout=logout,
-                                stage=stage)
+                                stage=stage, openid_identifier=oid)
 
     def handle_auth(self, user_obj, attended=False, **kw):
         username = kw.get('username')
         password = kw.get('password')
+        oid = kw.get('openid_identifier')
         login = kw.get('login')
         logout = kw.get('logout')
         stage = kw.get('stage')
@@ -623,6 +627,7 @@ class RequestBase(object):
             extra['attended'] = attended
             extra['username'] = username
             extra['password'] = password
+            extra['openid_identifier'] = oid
             if stage:
                 extra['multistage'] = True
         login_msgs = []
