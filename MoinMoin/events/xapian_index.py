@@ -48,7 +48,7 @@ def handle_deleted(event):
     """Updates Xapian index when a page is deleted"""
     event = ev.PageChangedEvent(event.request, event.page, event.comment, False)
     handle_changed(event, deleted=True)
-    print "deleted"
+
 
 def handle(event):
     if isinstance(event, ev.PageRenamedEvent):
