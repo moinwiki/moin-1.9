@@ -30,7 +30,7 @@ from MoinMoin.widget.dialog import Status
 from MoinMoin.logfile import editlog, eventlog
 from MoinMoin.util import filesys, timefuncs, web
 from MoinMoin.mail import sendmail
-from MoinMoin.events import PageDeletedEvent, PageRenamedEvent, send_event
+from MoinMoin.events import PageDeletedEvent, PageRenamedEvent, PageCopiedEvent, send_event
 import MoinMoin.events.notification as notification
 
 # used for merging
@@ -536,7 +536,7 @@ Try a different name.""") % (newpagename, )
             if request.user.may.write(newpagename):
                 # Save page text with a comment about the old name and log entry
                 savetext = u"## page was copied from %s\n%s" % (self.page_name, savetext)
-                newpage.saveText(savetext, 0, comment=comment, index=0, extra=self.page_name, action='SAVE', notify=False)
+                newpage.saveText(savetext, 0, comment=comment, extra=self.page_name, action='SAVE', notify=False)
             else:
                 # if user is  not able to write to the page itselfs we set a log entry only
                 from MoinMoin import packages
@@ -544,11 +544,9 @@ Try a different name.""") % (newpagename, )
                 packages.edit_logfile_append(self, newpagename, newpath, rev, 'SAVENEW', logname='edit-log',
                                        comment=comment, author=u"CopyPage action")
 
-            if request.cfg.xapian_search:
-                from MoinMoin.search.Xapian import Index
-                index = Index(request)
-                if index.exists():
-                    index.update_page(newpagename)
+            event = PageCopiedEvent(request, newpage, self, comment)
+            send_event(event)
+
             return True, None
         except OSError, err:
             # Try to understand what happened. Maybe its better to check
@@ -605,7 +603,7 @@ Try a different name.""") % (newpagename, )
             self.error = None
             # Save page text with a comment about the old name
             savetext = u"## page was renamed from %s\n%s" % (self.page_name, savetext)
-            newpage.saveText(savetext, 0, comment=comment, index=0, extra=self.page_name, action='SAVE/RENAME', notify=False)
+            newpage.saveText(savetext, 0, comment=comment, extra=self.page_name, action='SAVE/RENAME', notify=False)
             # delete pagelinks
             arena = newpage
             key = 'pagelinks'
@@ -619,14 +617,7 @@ Try a different name.""") % (newpagename, )
                 cache = caching.CacheEntry(request, arena, key, scope='item')
                 cache.remove()
 
-            if request.cfg.xapian_search:
-                from MoinMoin.search.Xapian import Index
-                index = Index(request)
-                if index.exists():
-                    index.remove_item(self.page_name, now=0)
-                    index.update_page(newpagename)
-
-            event = PageRenamedEvent(request, newpage, comment)
+            event = PageRenamedEvent(request, newpage, self, comment)
             send_event(event)
 
             return True, None
@@ -658,10 +649,13 @@ Try a different name.""") % (newpagename, )
             event = PageDeletedEvent(request, self, comment)
             send_event(event)
 
-            msg = self.saveText(u"deleted\n", 0, comment=comment or u'', index=1, deleted=True, notify=False)
+            msg = self.saveText(u"deleted\n", 0, comment=comment or u'', deleted=True, notify=False)
             msg = msg.replace(
                 _("Thank you for your changes. Your attention to detail is appreciated."),
                 _('Page "%s" was successfully deleted!') % (self.page_name, ))
+
+            event = PageDeletedEvent(request, self, comment)
+            send_event(event)
 
         except self.SaveError, message:
             # XXX do not only catch base class SaveError here, but
@@ -1065,15 +1059,6 @@ Please review the page and save then. Do not save this page as it is!""")
                         if recipients:
                             info = _("Notifications sent to:")
                             msg = msg + "<p>%s %s</p>" % (info, ",".join(recipients))
-
-            if kw.get('index', 1) and request.cfg.xapian_search:
-                from MoinMoin.search.Xapian import Index
-                index = Index(request)
-                if index.exists():
-                    if deleted:
-                        index.remove_item(self.page_name)
-                    else:
-                        index.update_page(self.page_name)
 
             # Update page trail with the page we just saved.
             # This is needed for NewPage macro with backto because it does not
