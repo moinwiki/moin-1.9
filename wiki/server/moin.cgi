@@ -26,7 +26,7 @@ sys.path.insert(0, '/path/to/wikiconfig')
 ## import os
 ## os.environ['MOIN_DEBUG'] = '1'
 
-from MoinMoin.server.CGI import CgiConfig, run
+from MoinMoin.server.server_cgi import CgiConfig, run
 
 class Config(CgiConfig):
     # Server name
