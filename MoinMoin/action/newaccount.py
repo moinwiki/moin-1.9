@@ -10,7 +10,6 @@ from MoinMoin import user, wikiutil, util
 from MoinMoin.Page import Page
 from MoinMoin.widget import html
 import MoinMoin.events as events
-from MoinMoin.userprefs.prefs import Settings
 
 
 _debug = False
@@ -90,6 +89,59 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
     return result
 
 
+def _create_form(request):
+    _ = request.getText
+    url = request.page.url(request)
+    ret = html.FORM(action=url)
+    ret.append(html.INPUT(type='hidden', name='action', value='newaccount'))
+    lang_attr = request.theme.ui_lang_attr()
+    ret.append(html.Raw('<div class="userpref"%s>' % lang_attr))
+    tbl = html.TABLE(border="0")
+    ret.append(tbl)
+    ret.append(html.Raw('</div>'))
+
+    row = html.TR()
+    tbl.append(row)
+    row.append(html.TD().append(html.STRONG().append(
+                                  html.Text(_("Name")))))
+    row.append(html.TD().append(html.INPUT(type="text", size="36",
+                                           name="name")))
+
+    row = html.TR()
+    tbl.append(row)
+    row.append(html.TD().append(html.STRONG().append(
+                                  html.Text(_("Password")))))
+    row.append(html.TD().append(html.INPUT(type="password", size="36",
+                                           name="password")))
+
+    row = html.TR()
+    tbl.append(row)
+    row.append(html.TD().append(html.STRONG().append(
+                                  html.Text(_("Password repeat")))))
+    row.append(html.TD().append(html.INPUT(type="password", size="36",
+                                           name="password2")))
+
+    row = html.TR()
+    tbl.append(row)
+    row.append(html.TD().append(html.STRONG().append(html.Text(_("Email")))))
+    row.append(html.TD().append(html.INPUT(type="text", size="36",
+                                           name="email")))
+
+    row = html.TR()
+    tbl.append(row)
+    row.append(html.TD())
+    td = html.TD()
+    row.append(td)
+    td.append(html.INPUT(type="submit", name="create_only",
+                         value=_('Create Profile')))
+    if request.cfg.mail_enabled:
+        td.append(html.Text(' '))
+        td.append(html.INPUT(type="submit", name="create_and_mail",
+                             value="%s + %s" % (_('Create Profile'),
+                                                _('Email'))))
+
+    return unicode(ret)
+
 def execute(pagename, request):
     pagename = pagename
     page = Page(request, pagename)
@@ -108,7 +160,7 @@ def execute(pagename, request):
         request.write(request.formatter.startContent("content"))
 
         # THIS IS A BIG HACK. IT NEEDS TO BE CLEANED UP
-        request.write(Settings(request).create_form(create_only=True))
+        request.write(_create_form(request))
 
         request.write(request.formatter.endContent())
 

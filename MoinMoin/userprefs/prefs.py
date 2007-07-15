@@ -16,15 +16,9 @@ from MoinMoin.userprefs import UserPrefBase
 #################################################################
 # This is a mess.
 #
-# This plugin is also used by the 'recoverpass' and 'newaccount'
-# actions, and really shouldn't be.
-#
 # The plan for refactoring would be:
-#  1. make the mentioned actions create their own forms and not
-#     use the code here
-#  2. split the plugin into multiple preferences pages:
+# split the plugin into multiple preferences pages:
 #    - account details (name, email, timezone, ...)
-#    - change password
 #    - wiki settings (editor, fancy diffs, theme, ...)
 #    - notification settings (trivial, subscribed pages, ...)
 #    - quick links (or leave in wiki settings?)
@@ -41,6 +35,7 @@ class Settings(UserPrefBase):
         self._ = request.getText
         self.cfg = request.cfg
         self.title = self._("Preferences")
+        self.name = 'prefs'
 
     def _decode_pagelist(self, key):
         """ Decode list of pages from form input
@@ -89,23 +84,6 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
 
             if not theuser.name:
                 return _("Empty user name. Please enter a user name.")
-
-        if not 'password' in theuser.auth_attribs:
-            # try to get the password and pw repeat
-            password = form.get('password', [''])[0]
-            password2 = form.get('password2', [''])[0]
-
-            # Check if password is given and matches with password repeat
-            if password != password2:
-                return _("Passwords don't match!")
-
-            # Encode password
-            if password and not password.startswith('{SHA}'):
-                try:
-                    theuser.enc_password = user.encodePassword(password)
-                except UnicodeError, err:
-                    # Should never happen
-                    return "Can't encode password: %s" % str(err)
 
         if not 'email' in theuser.auth_attribs:
             # try to get the email
@@ -189,7 +167,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
         # handler for each form field, instead of stuffing them all in
         # one long and inextensible method.  That would allow for
         # plugins to provide methods to validate their fields as well.
-        already_handled = ['name', 'password', 'password2', 'email',
+        already_handled = ['name', 'email',
                            'aliasname', 'edit_rows', 'editor_default',
                            'editor_ui', 'tz_offset', 'datetime_fmt',
                            'theme_name', 'language', 'jid']
@@ -225,6 +203,10 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
 
         # save data
         theuser.save()
+        if theuser.disabled:
+            # set valid to false so the current request won't
+            # show the user as logged-in any more
+            theuser.valid = False
         self.request.user = theuser
 
         result = _("User preferences saved!")
@@ -350,47 +332,18 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
                   ]
         return util.web.makeSelection('editor_ui', options, editor_ui)
 
-    def _make_form(self):
-        """ Create the FORM, and the TABLE with the input fields
-        """
-        sn = self.request.getScriptname()
-        pi = self.request.getPathinfo()
-        action = u"%s%s" % (sn, pi)
-        self._form = html.FORM(action=action)
-        self._table = html.TABLE(border="0")
 
-        # Use the user interface language and direction
-        lang_attr = self.request.theme.ui_lang_attr()
-        self._form.append(html.Raw('<div class="userpref"%s>' % lang_attr))
-
-        self._form.append(self._table)
-        self._form.append(html.Raw("</div>"))
-
-
-    def make_row(self, label, cell, **kw):
-        """ Create a row in the form table.
-        """
-        self._table.append(html.TR().extend([
-            html.TD(**kw).extend([html.B().append(label), '   ']),
-            html.TD().extend(cell),
-        ]))
-
-
-    def create_form(self, create_only=False, recover_only=False):
+    def create_form(self):
         """ Create the complete HTML form code. """
         _ = self._
-        self._make_form()
+        self._form = self.make_form()
 
-        if self.request.user.valid and not create_only and not recover_only:
+        if self.request.user.valid:
             buttons = [('save', _('Save')), ('cancel', _('Cancel')), ]
             uf_remove = self.cfg.user_form_remove
             uf_disable = self.cfg.user_form_disable
             for attr in self.request.user.auth_attribs:
-                if attr == 'password':
-                    uf_remove.append(attr)
-                    uf_remove.append('password2')
-                else:
-                    uf_disable.append(attr)
+                uf_disable.append(attr)
             for key, label, type, length, textafter in self.cfg.user_form_fields:
                 default = self.cfg.user_form_defaults[key]
                 if not key in uf_remove:
@@ -476,40 +429,6 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
                 )
             self._form.append(html.INPUT(type="hidden", name="action", value="userprefs"))
             self._form.append(html.INPUT(type="hidden", name="handler", value="prefs"))
-        elif not recover_only:
-            # Login / register interface
-            buttons = [
-                # IMPORTANT: login should be first to be the default
-                # button when a user hits ENTER.
-                #('login', _('Login')),  # we now have a Login macro
-                ('create', _('Create Profile')),
-                ('cancel', _('Cancel')),
-            ]
-            for key, label, type, length, textafter in self.cfg.user_form_fields:
-                if key in ('name', 'password', 'password2', 'email'):
-                    self.make_row(_(label),
-                              [html.INPUT(type=type, size=length, name=key,
-                                          value=''),
-                               ' ', _(textafter), ])
-            self._form.append(html.INPUT(type="hidden", name="action", value="newaccount"))
-        else:
-            for key, label, type, length, textafter in self.cfg.user_form_fields:
-                if key == 'email':
-                    self.make_row(_(label),
-                              [html.INPUT(type=type, size=length, name=key,
-                                          value=''),
-                               ' ', _(textafter), ])
-            buttons = []
-            self._form.append(html.INPUT(type="hidden", name="action", value="recoverpass"))
-
-        if recover_only and self.cfg.mail_enabled:
-            buttons.append(("account_sendmail", _('Mail me my account data')))
-
-        if create_only:
-            buttons = [("create_only", _('Create Profile'))]
-            if self.cfg.mail_enabled:
-                buttons.append(("create_and_mail", "%s + %s" %
-                                (_('Create Profile'), _('Email'))))
 
         # Add buttons
         button_cell = []

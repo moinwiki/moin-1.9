@@ -9,7 +9,6 @@
 from MoinMoin import user, wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.widget import html
-from MoinMoin.userprefs.prefs import Settings
 
 def _do_recover(request):
     _ = request.getText
@@ -28,6 +27,33 @@ Contact the owner of the wiki, who can enable email.""")
         return wikiutil.escape(msg)
 
     return _("Found no account matching the given email address '%(email)s'!") % {'email': email}
+
+def _create_form(request):
+    _ = request.getText
+    url = request.page.url(request)
+    ret = html.FORM(action=url)
+    ret.append(html.INPUT(type='hidden', name='action', value='recoverpass'))
+    lang_attr = request.theme.ui_lang_attr()
+    ret.append(html.Raw('<div class="userpref"%s>' % lang_attr))
+    tbl = html.TABLE(border="0")
+    ret.append(tbl)
+    ret.append(html.Raw('</div>'))
+
+    row = html.TR()
+    tbl.append(row)
+    row.append(html.TD().append(html.STRONG().append(html.Text(_("Email")))))
+    row.append(html.TD().append(html.INPUT(type="text", size="36",
+                                           name="email")))
+
+    row = html.TR()
+    tbl.append(row)
+    row.append(html.TD())
+    td = html.TD()
+    row.append(td)
+    td.append(html.INPUT(type="submit", name="account_sendmail",
+                         value=_('Mail me my account data')))
+
+    return unicode(ret)
 
 
 def execute(pagename, request):
@@ -51,8 +77,7 @@ def execute(pagename, request):
             request.write(_("""This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email."""))
         else:
-            # THIS IS A BIG HACK. IT NEEDS TO BE CLEANED UP
-            request.write(Settings(request).create_form(recover_only=True))
+            request.write(_create_form(request))
 
             request.write(_("""
 == Recovering a lost password ==

@@ -395,3 +395,8 @@ form.dialog {
 	font-weight: bold;
 }
 
+#openididentifier {
+    background: url(../../common/openid.png) no-repeat;
+    background-position: 0 50%;
+    padding-left: 18px;
+}

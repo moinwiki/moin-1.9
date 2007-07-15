@@ -457,4 +457,8 @@ table.navigation {
     margin: 2px;
 }
         
-
+#openididentifier {
+    background: url(../../common/openid.png) no-repeat;
+    background-position: 0 50%;
+    padding-left: 18px;
+}

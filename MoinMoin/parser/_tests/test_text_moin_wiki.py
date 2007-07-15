@@ -573,3 +573,24 @@ Test {{{brackets}}} and test {{{brackets}}}
         assert expected == result
 
 
+class TestLinkingMarkup(ParserTestCase):
+    """ Test wiki markup """
+
+    text = 'AAA %s AAA'
+    needle = re.compile(text % r'(.+)')
+    _tests = (
+        # test,                       expected
+        ('["something"]',             '<a class="nonexistent" href="./something">something</a>'),
+        ("['something']",             "['something']"),
+        ('MoinMoin:"something"',      '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/something" title="MoinMoin">something</a>'),
+        ('MoinMoin:"with space"',     '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/with%20space" title="MoinMoin">with space</a>'),
+        ('RFC:"1 2 3"',               '<a class="interwiki" href="http://www.ietf.org/rfc/rfc1%202%203" title="RFC">1 2 3</a>'),
+        ("RFC:'something else'",      "RFC:'something else'"),
+        )
+
+    def testTextFormating(self):
+        """ parser.wiki: text formating """
+        for test, expected in self._tests:
+            html = self.parse(self.text % test)
+            result = self.needle.search(html).group(1)
+            assert result == expected
