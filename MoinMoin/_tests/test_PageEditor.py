@@ -169,3 +169,25 @@ class TestExpandPrivateVariables(TestExpandUserName):
         page = Page(self.request, self.dictPage)
         return page.getPagePath(use_underlay=0, check_create=0)
 
+
+def testSave(request):
+    """Test if saveText() is interrupted if PagePreSave event handler returns Abort"""
+
+    def handler(event):
+        from MoinMoin.events import Abort
+        return Abort("This is just a test")
+
+    def dummy_write(self, *args, **kwargs):
+        print "PageEditor can't save a page if Abort is returned from PreSave event handlers"
+        assert False
+
+    pagename = u'AutoCreatedMoinMoinTemporaryTestPage'
+    testtext = u'ThisIsSomeStupidTestPageText!!'
+
+    cfg = request.cfg
+    cfg.event_handlers = [handler]
+    
+    editor = PageEditor(request, pagename)
+    editor._write_file = dummy_write
+    editor.saveText(testtext, 0)
+

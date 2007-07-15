@@ -147,9 +147,31 @@ class UserCreatedEvent(Event):
         Event.__init__(self, request)
         self.user = user
 
+class PagePreSaveEvent(Event):
+    """ Event sent when a page is about to be saved
+
+    This can be used to abort a save, for instance,
+    if handler returns
+
+    """
+    def __init__(self, request, page_editor, new_text):
+        Event.__init__(self, request)
+        self.page_editor = page_editor
+        self.new_text = new_text
+
+
 class EventResult:
     """ This is a base class for messages passed from event handlers """
     pass
+
+class Abort(EventResult):
+    """ Result returned if handler wants to abort operation that sent the event """
+    def __init__(self, reason):
+        """
+        @param reason: human-readable reason of failure
+        """
+        self.reason = reason
+        
 
 def get_handlers(cfg):
     """Create a list of available event handlers.
