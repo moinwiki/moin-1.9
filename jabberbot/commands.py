@@ -14,11 +14,11 @@ class NotificationCommand:
     """Class representing a notification request"""
     def __init__(self, jids, text, subject="", async=True):
         """A constructor
-        
+
         @param jids: a list of jids to sent this message to
         @type jids: list
         @param async: async notifications get queued if contact is DnD
-        
+
         """
         if type(jids) != list:
             raise Exception("jids argument must be a list!")
@@ -94,3 +94,13 @@ class GetPageInfo(BaseDataCommand):
     def __init__(self, jid, pagename):
         BaseDataCommand.__init__(self, jid)
         self.pagename = pagename
+
+class Search(BaseDataCommand):
+
+    description = u"perform a wiki search"
+    parameter_list = u"{title|text} term"
+
+    def __init__(self, jid, term, search_type):
+        BaseDataCommand.__init__(self, jid)
+        self.term = term
+        self.search_type = search_type
