@@ -50,11 +50,11 @@ from MoinMoin import config
 config.use_threads = max_threads > 1
 del config
 
-from MoinMoin.request import FCGI
+from MoinMoin.request import request_fcgi
 from MoinMoin.support import thfcgi
 
 def handle_request(req, env, form):
-    request = FCGI.Request(req, env, form)
+    request = request_fcgi.Request(req, env, form)
     request.run()
 
 if __name__ == '__main__':
