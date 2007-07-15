@@ -41,6 +41,7 @@ Version 1.7.current:
     * new session handling system
     * new authentication plugin system
     * new preferences plugin system, see MoinMoin/userprefs/__init__.py
+    * new notification system with an optional jabber notification bot
 
   Bugfixes:
     * ...
