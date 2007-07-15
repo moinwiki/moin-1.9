@@ -94,3 +94,13 @@ class GetPageInfo(BaseDataCommand):
     def __init__(self, jid, pagename):
         BaseDataCommand.__init__(self, jid)
         self.pagename = pagename
+        
+class Search(BaseDataCommand):
+    
+    description = u"perform a wiki search"
+    parameter_list = u"{title|text} term"
+    
+    def __init__(self, jid, term, search_type):
+        BaseDataCommand.__init__(self, jid)
+        self.term = term
+        self.search_type = search_type
