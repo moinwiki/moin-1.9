@@ -121,7 +121,7 @@ def handle_page_renamed(event):
 
     subscribers = page.getSubscribers(request, return_users=1)
     notification.filter_subscriber_list(event, subscribers, True)
-    return page_change("page_renamed", request, page, subscribers, oldname=old.page_name)
+    return page_change("page_renamed", request, page, subscribers, oldname=old_name)
 
 
 def handle_user_created(event):

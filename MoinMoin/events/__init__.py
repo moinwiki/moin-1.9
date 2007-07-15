@@ -67,8 +67,19 @@ class PageDeletedEvent(PageEvent):
 
     def __init__(self, request, page, comment):
         PageEvent.__init__(self, request)
-        self.request = request
         self.page = page
+        self.comment = comment
+
+
+class PageCopiedEvent(PageEvent):
+
+    description = u"""Page has been copied"""
+    req_superuser = False
+
+    def __init__(self, request, page, old_page, comment):
+        PageEvent.__init__(self, request)
+        self.page = page
+        self.old_page = old_page
         self.comment = comment
 
 
@@ -136,9 +147,31 @@ class UserCreatedEvent(Event):
         Event.__init__(self, request)
         self.user = user
 
+class PagePreSaveEvent(Event):
+    """ Event sent when a page is about to be saved
+
+    This can be used to abort a save, for instance,
+    if handler returns
+
+    """
+    def __init__(self, request, page_editor, new_text):
+        Event.__init__(self, request)
+        self.page_editor = page_editor
+        self.new_text = new_text
+
+
 class EventResult:
     """ This is a base class for messages passed from event handlers """
     pass
+
+class Abort(EventResult):
+    """ Result returned if handler wants to abort operation that sent the event """
+    def __init__(self, reason):
+        """
+        @param reason: human-readable reason of failure
+        """
+        self.reason = reason
+
 
 def get_handlers(cfg):
     """Create a list of available event handlers.
@@ -178,6 +211,9 @@ def send_event(event):
     # Try to handle the event with each available handler (for now)
     for handle in cfg.event_handlers:
         retval = handle(event)
+
+        assert retval is None or isinstance(retval, EventResult)
+
         if retval:
             msg.append(retval)
 
