@@ -3,10 +3,11 @@
     MoinMoin - modular authentication handling
 
     Each authentication method is an object instance containing
-    three methods:
+    four methods:
       * login(request, user_obj, **kw)
       * logout(request, user_obj, **kw)
       * request(request, user_obj, **kw)
+      * login_hint(request)
 
     The kw arguments that are passed in are currently:
        attended: boolean indicating whether a user (attended=True) or
@@ -20,6 +21,12 @@
                that the browser sent
        multistage: boolean indicating multistage login continuation
                    [may not be present, login only]
+       openid_identifier: the OpenID identifier we got from the form
+                          (or None) [login only]
+
+    login_hint() should return a HTML text that is displayed to the user right
+    below the login form, it should tell the user what to do in case of a
+    forgotten password and how to create an account (if applicable.)
 
     More may be added.
 
@@ -85,6 +92,7 @@
      * login_inputs: a list of required inputs, currently supported are
                       - 'username': username entry field
                       - 'password': password entry field
+                      - 'openid_identifier': OpenID entry field
      * logout_possible: boolean indicating whether this auth methods
                         supports logging out
      * name: name of the auth method, must be the same as given as the
@@ -184,6 +192,8 @@ class BaseAuth:
         if self.name and user_obj and user_obj.auth_method == self.name:
             user_obj.valid = False
         return user_obj, True
+    def login_hint(self, request):
+        return None
 
 class MoinLogin(BaseAuth):
     """ handle login from moin login form """
@@ -222,3 +232,12 @@ class MoinLogin(BaseAuth):
         else:
             if verbose: request.log("moin_login not valid, previous valid=%d." % user_obj.valid)
             return ContinueLogin(user_obj, _("Invalid username or password."))
+
+    def login_hint(self, request):
+        _ = request.getText
+        userprefslink = request.page.url(request, querystr={'action': 'newaccount'})
+        sendmypasswordlink = request.page.url(request, querystr={'action': 'recoverpass'})
+        return _('If you do not have an account, <a href="%(userprefslink)s">you can create one now</a>. '
+                 '<a href="%(sendmypasswordlink)s">Forgot your password?</a>', formatted=False) % {
+               'userprefslink': userprefslink,
+               'sendmypasswordlink': sendmypasswordlink}

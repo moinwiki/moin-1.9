@@ -66,10 +66,10 @@ class TestCleanInput:
 
 
 class TestNameQuoting:
-    tests = [(u"", u"''"), # empty
-             (u"test", u"'test'"), # nothing special
-             (u"Sarah O'Connor", u"\"Sarah O'Connor\""), # contains ', quote with "
-             (u'Just "something" quoted', u'\'Just "something" quoted\''), # contains ", quote with '
+    tests = [(u"", u'""'), # empty
+             (u"test", u'"test"'), # nothing special
+             (u"Sarah O'Connor", u"\"Sarah O'Connor\""),
+             (u'Just "something" quoted', u'"Just ""something"" quoted"'),
             ]
     def testQuoteName(self):
         for name, qname in self.tests:
@@ -85,7 +85,13 @@ class TestInterWiki:
         tests = [('SomePage', ('Self', 'SomePage', '')),
                  ('OtherWiki:OtherPage', ('OtherWiki', 'OtherPage', '')),
                  ('MoinMoin:"Page with blanks" link title', ("MoinMoin", "Page with blanks", "link title")),
-                 ("MoinMoin:'Page with blanks' link title", ("MoinMoin", "Page with blanks", "link title")),
+                 ('MoinMoin:"Page with blanks"link title', ("MoinMoin", "Page with blanks", "link title")),
+                 ('MoinMoin:"Page with blanks"', ("MoinMoin", "Page with blanks", "")),
+                 ('MoinMoin:"Page with ""quote""" link title', ("MoinMoin", 'Page with "quote"', "link title")),
+                 ('MoinMoin:"Page with """"double-quote"""link title', ("MoinMoin", 'Page with ""double-quote"', "link title")),
+                 ('MoinMoin:"""starts with quote"link title', ("MoinMoin", '"starts with quote', "link title")),
+                 ('MoinMoin:"ends with quote"""link title', ("MoinMoin", 'ends with quote"', "link title")),
+                 ('MoinMoin:"""page with quotes around"""link title', ("MoinMoin", '"page with quotes around"', "link title")),
                  ('attachment:"filename with blanks.txt" other title', ("attachment", "filename with blanks.txt", "other title")),
                 ]
         for markup, (wikiname, pagename, linktext) in tests:

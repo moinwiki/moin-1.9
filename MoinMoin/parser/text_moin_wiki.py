@@ -33,9 +33,7 @@ class Parser:
     # quoted strings (we require that there is at least one char (that is not the quoting char)
     # inside to not confuse stuff like '''Contact:''' (just a bold Contact:) with interwiki markup
     # OtherWiki:'Page with blanks'
-    sq_string = ur"('[^']+?')" # single quoted string
-    dq_string = ur"(\"[^\"]+?\")" # double quoted string
-    q_string = ur"(%s|%s)" % (sq_string, dq_string) # quoted string
+    dq_string = ur'("([^"]|"")+?"(?!"))' # double quoted string
     attachment_schemas = ["attachment", "inline", "drawing"]
     punct_pattern = re.escape(u'''"\'}]|:,.)?!''')
     punct_no_quote_pattern = re.escape(u'''}]|:,.)?!''')
@@ -50,12 +48,12 @@ class Parser:
         'subpages': wikiutil.CHILD_PREFIX + '?',
         'parent': ur'(?:%s)?' % re.escape(PARENT_PREFIX),
     }
-    url_rule = ur'%(url_guard)s(%(url)s)\:(([^\s\<%(punct)s]|([%(punctnq)s][^\s\<%(punct)s]))+|%(q_string)s)' % {
+    url_rule = ur'%(url_guard)s(%(url)s)\:(([^\s\<%(punct)s]|([%(punctnq)s][^\s\<%(punct)s]))+|%(dq_string)s)' % {
         'url_guard': ur'(^|(?<!\w))',
         'url': url_pattern,
         'punct': punct_pattern,
         'punctnq': punct_no_quote_pattern,
-        'q_string': q_string,
+        'dq_string': dq_string,
     }
 
     ol_rule = ur"^\s+(?:[0-9]+|[aAiI])\.(?:#\d+)?\s"
@@ -91,7 +89,7 @@ class Parser:
 (?P<tableZ>\|\| $)
 (?P<table>(?:\|\|)+(?:<[^>]*?>)?(?!\|? $))
 (?P<heading>^\s*(?P<hmarker>=+)\s.*\s(?P=hmarker) $)
-(?P<interwiki>[A-Z][a-zA-Z]+\:(%(q_string)s|([^\s'\"\:\<\|]([^\s%(punct)s]|([%(punct)s][^\s%(punct)s]))+)))
+(?P<interwiki>[A-Z][a-zA-Z]+\:(%(dq_string)s|([^\s'\"\:\<\|]([^\s%(punct)s]|([%(punct)s][^\s%(punct)s]))+)))
 (?P<word>%(word_rule)s)
 (?P<url_bracket>\[((%(url)s)\:|#|\:)[^\s\]]+(\s[^\]]+)?\])
 (?P<url>%(url_rule)s)
@@ -100,12 +98,12 @@ class Parser:
 (?P<smileyA>^(%(smiley)s)(?=\s))
 (?P<ent_symbolic>&[a-zA-Z]+;)
 (?P<ent>[<>&])
-(?P<wikiname_bracket>\[%(q_string)s.*?\])
+(?P<wikiname_bracket>\[%(dq_string)s.*?\])
 (?P<tt_bt>`.*?`)"""  % {
 
         'url': url_pattern,
         'punct': punct_pattern,
-        'q_string': q_string,
+        'dq_string': dq_string,
         'ol_rule': ol_rule,
         'dl_rule': dl_rule,
         'url_rule': url_rule,
@@ -405,16 +403,10 @@ class Parser:
 
     def _wikiname_bracket_repl(self, text):
         """Handle special-char wikinames with link text, like:
-           ["Jim O'Brian" Jim's home page] or ['Hello "world"!' a page with doublequotes]i
+           ["Jim O'Brian" Jim's home page] or ["Hello ""world""!" a page with doublequotes]
         """
         word = text[1:-1] # strip brackets
-        first_char = word[0]
-        if first_char in wikiutil.QUOTE_CHARS:
-            # split on closing quote
-            target, linktext = word[1:].split(first_char, 1)
-        else: # not quoted
-            # split on whitespace
-            target, linktext = word.split(None, 1)
+        empty, target, linktext = wikiutil.split_wiki(':%s' % word)
         if target:
             linktext = linktext.strip()
             return self._word_repl(target, linktext)
