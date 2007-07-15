@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import logging, time, Queue
+import logging, time, libxml2, Queue
 from threading import Thread
 
 from pyxmpp.client import Client
@@ -14,6 +14,8 @@ from pyxmpp.jid import JID
 from pyxmpp.streamtls import TLSSettings
 from pyxmpp.message import Message
 from pyxmpp.presence import Presence
+from pyxmpp.iq import Iq
+import pyxmpp.jabber.dataforms as forms
 
 import jabberbot.commands as cmd
 
@@ -25,7 +27,7 @@ class Contact:
 
     def __init__(self, jid, resource, priority, show):
         self.jid = jid
-        self.resources = {resource: {'show': show, 'priority': priority}}
+        self.resources = {resource: {'show': show, 'priority': priority, 'forms': False}}
 
         # Queued messages, waiting for contact to change its "show"
         # status to something different than "dnd". The messages should
@@ -43,6 +45,16 @@ class Contact:
 
         """
         self.resources[resource] = {'show': show, 'priority': priority}
+        
+    def set_supports_forms(self, resource):
+        if resource in self.resources:
+            self.resources[resource]["forms"] = True
+
+    def supports_forms(self, resource):
+        if resource in self.resources:
+            return self.resources[resource]["forms"]
+        else:
+            return False
 
     def remove_resource(self, resource):
         """Removes information about a connected resource
@@ -121,11 +133,11 @@ class XMPPBot(Client, Thread):
         self.contacts = {}
 
         self.known_xmlrpc_cmds = [cmd.GetPage, cmd.GetPageHTML, cmd.GetPageList, cmd.GetPageInfo]
-        self.internal_commands = ["ping", "help"]
+        self.internal_commands = ["ping", "help", "search"]
 
         self.xmlrpc_commands = {}
         for command, name in [(command, command.__name__) for command in self.known_xmlrpc_cmds]:
-            self.xmlrpc_commands[name] = command
+            self.xmlrpc_commands[name.lower()] = command
 
         Client.__init__(self, self.jid, config.xmpp_password, config.xmpp_server, tls_settings=self.tlsconfig)
 
@@ -182,7 +194,7 @@ class XMPPBot(Client, Thread):
                 # If so, queue the message for delayed delivery.
                 try:
                     contact = self.contacts[jid_text]
-                    if contact.is_dnd() and not ignore_dnd:
+                    if command.async and contact.is_dnd() and not ignore_dnd:
                         contact.messages.append(command)
                         return
                 except KeyError:
@@ -235,7 +247,7 @@ class XMPPBot(Client, Thread):
         stanza = Presence(to_jid=jid, stanza_type="unsubscribed")
         self.get_stream().send(stanza)
 
-    def send_message(self, jid, text, subject="", msg_type=u"chat"):
+    def send_message(self, jid, text, subject="", msg_type=u"chat", form=None):
         """Sends a message
 
         @param jid: JID to send the message to
@@ -246,6 +258,47 @@ class XMPPBot(Client, Thread):
         """
         message = Message(to_jid=jid, body=text, stanza_type=msg_type, subject=subject)
         self.get_stream().send(message)
+
+    def send_form(self, jid, form):
+        pass
+
+    def send_search_form(self, jid):
+        help_form = u"Submit this form to perform a wiki search"
+
+        title_search = forms.Option("t", "Title search")
+        full_search = forms.Option("f", "Full-text search")
+
+        form = forms.Form(xmlnode_or_type="form", title="Wiki search", instructions=help_form)
+        form.add_field(name="search_type", options=[title_search, full_search], field_type="list-single", label="Search type")
+        form.add_field(name="search", field_type="text-single", label="Search text")
+
+        message = Message(to_jid=jid, body="Please specify the search criteria.", subject="Wiki search")
+        message.add_content(form)
+        self.get_stream().send(message)
+
+    def is_internal(self, command):
+        """Check if a given command is internal
+
+        @type command: unicode
+
+        """
+        for cmd in self.internal_commands:
+            if cmd.lower() == command:
+                return True
+
+        return False
+
+    def is_xmlrpc(self, command):
+        """Checks if a given commands requires interaction via XMLRPC
+
+        @type command: unicode
+
+        """
+        for cmd in self.xmlrpc_commands:
+            if cmd.lower() == command:
+                return True
+
+        return False
 
     def handle_message(self, message):
         """Handles incoming messages
@@ -260,15 +313,15 @@ class XMPPBot(Client, Thread):
 
         text = message.get_body()
         sender = message.get_from_jid()
-        command = text.split()
-
-        # Ignore empty commands
-        if not command:
+        if text:
+            command = text.split()
+            command[0] = command[0].lower()
+        else:
             return
 
-        if command[0] in self.internal_commands:
-            response = self.handle_internal_command(command)
-        elif command[0] in self.xmlrpc_commands.keys():
+        if self.is_internal(command[0]):
+            response = self.handle_internal_command(sender, command)
+        elif self.is_xmlrpc(command[0]):
             response = self.handle_xmlrpc_command(sender, command)
         else:
             response = self.reply_help()
@@ -276,7 +329,7 @@ class XMPPBot(Client, Thread):
         if not response == u"":
             self.send_message(sender, response)
 
-    def handle_internal_command(self, command):
+    def handle_internal_command(self, sender, command):
         """Handles internal commands, that can be completed by the XMPP bot itself
 
         @param command: list representing a command
@@ -289,6 +342,13 @@ class XMPPBot(Client, Thread):
                 return self.reply_help()
             else:
                 return self.help_on(command[1])
+        elif command[0] == "search":
+            jid = sender.bare().as_utf8()
+            resource = sender.resource
+            if self.contacts[jid].supports_forms(resource):
+                self.send_search_form(sender)
+            else:
+                print "booo"
         else:
             # For unknown command return a generic help message
             return self.reply_help()
@@ -309,9 +369,12 @@ class XMPPBot(Client, Thread):
 
         # Here we have to deal with help messages of external (xmlrpc) commands
         else:
-            classobj = self.xmlrpc_commands[command]
-            help_str = u"%s - %s\n\nUsage: %s %s"
-            return help_str % (command, classobj.description, command, classobj.parameter_list)
+            if command in self.xmlrpc_commands:
+                classobj = self.xmlrpc_commands[command]
+                help_str = u"%s - %s\n\nUsage: %s %s"
+                return help_str % (command, classobj.description, command, classobj.parameter_list)
+            else:
+                return u"""Unknown command "%s" """ % (command,)
 
 
     def handle_xmlrpc_command(self, sender, command):
@@ -416,6 +479,7 @@ class XMPPBot(Client, Thread):
             # Unknown resource, add it to the list
             else:
                 contact.add_resource(jid.resource, show, priority)
+                self.supports_dataforms(jid)
 
             if self.config.verbose:
                 self.log.debug(contact)
@@ -426,10 +490,42 @@ class XMPPBot(Client, Thread):
 
         else:
             self.contacts[bare_jid] = Contact(jid, jid.resource, priority, show)
+            self.supports_dataforms(jid)
             self.log.debug(self.contacts[bare_jid])
 
         # Confirm that we've handled this stanza
         return True
+
+    def supports_dataforms(self, jid):
+        """Check if a clients supports data forms.
+
+        This is not the recommended way of discovering support
+        for data forms, but it's easy to implement, so it'll be
+        like that for now. The proper way to do this is described
+        in XEP-0115 (Entity Capabilities)
+
+        @param jid: FULL (user@host/resource) jabber id to query
+        @type jid: unicode
+
+        """
+        query = Iq(to_jid=jid, stanza_type="get")
+        query.new_query("http://jabber.org/protocol/disco#info")
+        self.get_stream().set_response_handlers(query, self.handle_disco_result, None)
+        self.get_stream().send(query)
+        
+    def handle_disco_result(self, stanza):
+        """Handler for <iq> service discovery results
+        
+        Works with elements qualified by http://jabber.org/protocol/disco#info ns
+        
+        @param stanza: a received result stanza
+        """
+        payload = stanza.get_query()
+        supports = payload.xpathEval('//*[@var="jabber:x:data"]')
+        if supports:
+            jid = stanza.get_from_jid()
+            self.contacts[jid.bare().as_utf8()].set_supports_forms(jid.resource)
+        
 
     def send_queued_messages(self, contact, ignore_dnd=False):
         """Sends messages queued for the contact
