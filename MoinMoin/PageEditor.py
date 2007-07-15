@@ -1031,7 +1031,7 @@ Please review the page and save then. Do not save this page as it is!""")
 
         presave = PagePreSaveEvent(request, self, newtext)
         results = send_event(presave)
-        
+
         for result in results:
             if isinstance(result, Abort):
                 # XXX: this should return a list of messages to the sorrounding context

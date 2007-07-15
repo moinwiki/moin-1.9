@@ -186,7 +186,7 @@ def testSave(request):
 
     cfg = request.cfg
     cfg.event_handlers = [handler]
-    
+
     editor = PageEditor(request, pagename)
     editor._write_file = dummy_write
     editor.saveText(testtext, 0)
