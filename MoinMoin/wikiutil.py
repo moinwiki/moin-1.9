@@ -482,23 +482,19 @@ class MetaDict(dict):
 
 # Quoting of wiki names, file names, etc. (in the wiki markup) -----------------------------------
 
+# don't ever change this
 QUOTE_CHARS = u'"'
 
 def quoteName(name):
     """ put quotes around a given name """
-    for quote_char in QUOTE_CHARS:
-        if quote_char not in name:
-            return u"%s%s%s" % (quote_char, name, quote_char)
-    else:
-        return name # XXX we need to be able to escape the quote char for worst case
+    return '"%s"' % name.replace('"', '""')
 
 def unquoteName(name):
     """ if there are quotes around the name, strip them """
     if not name:
         return name
-    for quote_char in QUOTE_CHARS:
-        if quote_char == name[0] == name[-1]:
-            return name[1:-1]
+    if '"' == name[0] == name[-1]:
+        return name[1:-1].replace('""', '"')
     else:
         return name
 
@@ -610,9 +606,21 @@ def split_wiki(wikiurl):
         except ValueError:
             wikiname, rest = 'Self', wikiurl
     if rest:
-        first_char = rest[0]
-        if first_char in QUOTE_CHARS: # quoted pagename
-            pagename_linktext = rest[1:].split(first_char, 1)
+        if rest[0] == '"': # quoted pagename
+            idx = 1
+            max = len(rest)
+            while idx < max:
+                if idx + 1 < max:
+                    next = rest[idx + 1]
+                else:
+                    next = None
+                if next == rest[idx] == '"':
+                    idx += 2
+                    continue
+                if next != '"' and rest[idx] == '"':
+                    break
+                idx += 1
+            pagename_linktext = rest[1:idx].replace('""', '"'), rest[idx+1:]
         else: # not quoted, split on whitespace
             pagename_linktext = rest.split(None, 1)
     else:

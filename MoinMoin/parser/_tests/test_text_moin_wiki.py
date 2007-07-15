@@ -586,11 +586,26 @@ class TestLinkingMarkup(ParserTestCase):
         ('MoinMoin:"with space"',     '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/with%20space" title="MoinMoin">with space</a>'),
         ('RFC:"1 2 3"',               '<a class="interwiki" href="http://www.ietf.org/rfc/rfc1%202%203" title="RFC">1 2 3</a>'),
         ("RFC:'something else'",      "RFC:'something else'"),
+        ('["with "" quote"]',         '<a class="nonexistent" href="./with%20%22%20quote">with " quote</a>'),
+        ('MoinMoin:"with "" quote"',  '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/with%20%22%20quote" title="MoinMoin">with " quote</a>'),
         )
 
     def testTextFormating(self):
         """ parser.wiki: text formating """
+        together_test = []
+        together_expected = []
         for test, expected in self._tests:
+            html = self.parse(self.text % test)
+            result = self.needle.search(html).group(1)
+            assert result == expected
+            together_test.append(test)
+            together_expected.append(expected)
+
+        # now test all together to make sure one quoting doesn't
+        # "leak" into the next
+        for joint in ('', 'lala " lala ', 'lala "" lala '):
+            test = joint.join(together_test)
+            expected = joint.join(together_expected)
             html = self.parse(self.text % test)
             result = self.needle.search(html).group(1)
             assert result == expected
