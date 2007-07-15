@@ -171,7 +171,7 @@ class Abort(EventResult):
         @param reason: human-readable reason of failure
         """
         self.reason = reason
-        
+
 
 def get_handlers(cfg):
     """Create a list of available event handlers.
