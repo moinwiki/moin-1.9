@@ -45,7 +45,7 @@ class Contact:
 
         """
         self.resources[resource] = {'show': show, 'priority': priority}
-        
+
     def set_supports_forms(self, resource):
         if resource in self.resources:
             self.resources[resource]["forms"] = True
@@ -132,8 +132,8 @@ class XMPPBot(Client, Thread):
         # A dictionary of contact objects, ordered by bare JID
         self.contacts = {}
 
-        self.known_xmlrpc_cmds = [cmd.GetPage, cmd.GetPageHTML, cmd.GetPageList, cmd.GetPageInfo]
-        self.internal_commands = ["ping", "help", "search"]
+        self.known_xmlrpc_cmds = [cmd.GetPage, cmd.GetPageHTML, cmd.GetPageList, cmd.GetPageInfo, cmd.Search]
+        self.internal_commands = ["ping", "help", "searchform"]
 
         self.xmlrpc_commands = {}
         for command, name in [(command, command.__name__) for command in self.known_xmlrpc_cmds]:
@@ -333,6 +333,8 @@ class XMPPBot(Client, Thread):
         """Handles internal commands, that can be completed by the XMPP bot itself
 
         @param command: list representing a command
+        @param sender: JID of sender
+        @type sender: pyxmpp.jid.JID
 
         """
         if command[0] == "ping":
@@ -342,16 +344,31 @@ class XMPPBot(Client, Thread):
                 return self.reply_help()
             else:
                 return self.help_on(command[1])
-        elif command[0] == "search":
+        elif command[0] == "searchform":
             jid = sender.bare().as_utf8()
             resource = sender.resource
             if self.contacts[jid].supports_forms(resource):
                 self.send_search_form(sender)
             else:
-                print "booo"
+                msg = u"This command requires a client supporting Data Forms"
+                self.send_message(sender, msg, u"Error")
         else:
             # For unknown command return a generic help message
             return self.reply_help()
+
+    def do_search(self, jid, term, search_type):
+        """Performs a Wiki search of term
+
+        @param jid: Jabber ID of user performing a search
+        @type jid: pyxmpp.jid.JID
+        @param term: term to search for
+        @type term: unicode
+        @param search_type: type of search; either "text" or "title"
+        @type search_type: unicode
+
+        """
+        search = cmd.Search(jid, term, search_type)
+        self.from_commands.put_nowait(search)
 
     def help_on(self, command):
         """Returns a help message on a given topic
@@ -367,6 +384,9 @@ class XMPPBot(Client, Thread):
         elif command == "ping":
             return u"""The "ping" command returns a "pong" message as soon as it's received."""
 
+        elif command == "searchform":
+            return u"""searchform - perform a wiki search using a form"""
+
         # Here we have to deal with help messages of external (xmlrpc) commands
         else:
             if command in self.xmlrpc_commands:
@@ -374,8 +394,7 @@ class XMPPBot(Client, Thread):
                 help_str = u"%s - %s\n\nUsage: %s %s"
                 return help_str % (command, classobj.description, command, classobj.parameter_list)
             else:
-                return u"""Unknown command "%s" """ % (command,)
-
+                return u"""Unknown command "%s" """ % (command, )
 
     def handle_xmlrpc_command(self, sender, command):
         """Creates a command object, and puts it the command queue
@@ -512,12 +531,12 @@ class XMPPBot(Client, Thread):
         query.new_query("http://jabber.org/protocol/disco#info")
         self.get_stream().set_response_handlers(query, self.handle_disco_result, None)
         self.get_stream().send(query)
-        
+
     def handle_disco_result(self, stanza):
         """Handler for <iq> service discovery results
-        
+
         Works with elements qualified by http://jabber.org/protocol/disco#info ns
-        
+
         @param stanza: a received result stanza
         """
         payload = stanza.get_query()
@@ -525,7 +544,7 @@ class XMPPBot(Client, Thread):
         if supports:
             jid = stanza.get_from_jid()
             self.contacts[jid.bare().as_utf8()].set_supports_forms(jid.resource)
-        
+
 
     def send_queued_messages(self, contact, ignore_dnd=False):
         """Sends messages queued for the contact
