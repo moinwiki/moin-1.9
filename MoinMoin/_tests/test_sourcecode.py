@@ -18,8 +18,11 @@ ROOT = str(moindir)
 
 EXCLUDE = [
     '/contrib/DesktopEdition/setup_py2exe.py', # has crlf
+    '/contrib/TWikiDrawPlugin', # 3rd party java stuff
     '/MoinMoin/support', # 3rd party libs or non-broken stdlib stuff
     '/wiki/htdocs/applets/FCKeditor', # 3rd party GUI editor
+    '/tests/wiki', # this is our test wiki
+    '/wiki/htdocs', # this is our dist static stuff
 ]
 
 TRAILING_SPACES = 'nochange' # 'nochange' or 'fix'
@@ -50,6 +53,7 @@ def check_py_file(reldir, path):
 def test_sourcecode():
     def walk(reldir):
         if reldir in EXCLUDE:
+            #print "Skippping %r..." % reldir
             return
         if reldir:
             path = os.path.join(ROOT, *reldir.split('/'))
