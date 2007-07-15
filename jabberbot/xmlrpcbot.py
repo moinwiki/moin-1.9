@@ -29,7 +29,7 @@ class XMLRPCClient(Thread):
         """A constructor
 
         @param commands_out: an output command queue (to xmpp)
-        @param commands_in: an inpu command queue (from xmpp)
+        @param commands_in: an input command queue (from xmpp)
 
         """
         Thread.__init__(self)
