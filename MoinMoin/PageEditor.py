@@ -30,7 +30,8 @@ from MoinMoin.widget.dialog import Status
 from MoinMoin.logfile import editlog, eventlog
 from MoinMoin.util import filesys, timefuncs, web
 from MoinMoin.mail import sendmail
-from MoinMoin.events import PageDeletedEvent, PageRenamedEvent, PageCopiedEvent, send_event
+from MoinMoin.events import PageDeletedEvent, PageRenamedEvent, PageCopiedEvent
+from MoinMoin.events import PagePreSaveEvent, Abort, send_event
 import MoinMoin.events.notification as notification
 
 # used for merging
@@ -1028,7 +1029,16 @@ Please review the page and save then. Do not save this page as it is!""")
                 msg = _("You can't change ACLs on this page since you have no admin rights on it!")
                 raise self.NoAdmin, msg
 
-        # save only if no error occurred (msg is empty)
+        presave = PagePreSaveEvent(request, self, newtext)
+        results = send_event(presave)
+        
+        for result in results:
+            if isinstance(result, Abort):
+                # XXX: this should return a list of messages to the sorrounding context
+                # XXX: rather than dumbly concatenate them. Fix in the future.
+                msg = msg + result.reason
+
+        # save only if no error occurred (msg is empty) and no abort has been requested
         if not msg:
             # set success msg
             msg = _("Thank you for your changes. Your attention to detail is appreciated.")
