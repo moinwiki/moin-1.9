@@ -7,8 +7,8 @@
 """
 
 import Queue
-import datetime, logging, time, xmlrpclib
 from threading import Thread
+import datetime, logging, time, xmlrpclib
 from SimpleXMLRPCServer import SimpleXMLRPCServer
 
 import jabberbot.commands as cmd
@@ -26,8 +26,11 @@ class XMLRPCClient(Thread):
     the XMPP component"""
 
     def __init__(self, config, commands_in, commands_out):
-        """
-        @param commands: an output command queue
+        """A constructor
+
+        @param commands_out: an output command queue (to xmpp)
+        @param commands_in: an inpu command queue (from xmpp)
+
         """
         Thread.__init__(self)
         self.log = logging.getLogger("log")
@@ -70,6 +73,10 @@ class XMLRPCClient(Thread):
         elif isinstance(command, cmd.GetPageInfo):
             self.get_page_info(command)
 
+    def report_error(self, jid, text):
+        report = cmd.NotificationCommand(jid, text, u"Error", async=False)
+        self.commands_out.put_nowait(report)
+
     def get_auth_token(self, jid):
         token = self.connection.getAuthToken(jid, self.config.secret)
         if token:
@@ -86,6 +93,8 @@ class XMLRPCClient(Thread):
             self.token = None
             self.multicall = MultiCall(self.connection)
             jid = command.jid
+            if type(jid) is not list:
+                jid = [jid]
 
             try:
                 try:
@@ -97,12 +106,16 @@ class XMLRPCClient(Thread):
                     self.commands_out.put_nowait(command)
                 except xmlrpclib.Fault, fault:
                     msg = u"""Your request has failed. The reason is:\n%s"""
-                    notification = cmd.NotificationCommand([jid], msg % (fault.faultString, ))
-                    self.commands_out.put_nowait(notification)
+                    self.log.error(str(fault))
+                    self.report_error(jid, msg % (fault.faultString, ))
                 except xmlrpclib.Error, err:
                     msg = u"""A serious error occured while processing your request:\n%s"""
-                    notification = cmd.NotificationCommand([jid], msg % (str(err), ))
-                    self.commands_out.put_nowait(notification)
+                    self.log.error(str(err))
+                    self.report_error(jid, msg % (str(err), ))
+                except Exception, exc:
+                    msg = u"An internal error has occured, please contact the administrator."
+                    self.log.critical(str(exc))
+                    self.report_error(jid, msg)
 
             finally:
                 del self.token
@@ -112,7 +125,7 @@ class XMLRPCClient(Thread):
 
     def warn_no_credentials(self, jid):
         msg = u"""Credentials check failed, you may be unable to see all information."""
-        warning = cmd.NotificationCommand([jid], msg)
+        warning = cmd.NotificationCommand([jid], msg, async=False)
         self.commands_out.put_nowait(warning)
 
     def get_page(self, command):
@@ -153,7 +166,7 @@ class XMLRPCClient(Thread):
         """Returns a list of all accesible pages"""
 
         txt = u"""This command may take a while to complete, please be patient..."""
-        info = cmd.NotificationCommand([command.jid], txt)
+        info = cmd.NotificationCommand([command.jid], txt, async=False)
         self.commands_out.put_nowait(info)
 
         self.multicall.getAllPages()
