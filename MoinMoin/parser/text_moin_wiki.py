@@ -91,7 +91,7 @@ class Parser:
 (?P<tableZ>\|\| $)
 (?P<table>(?:\|\|)+(?:<[^>]*?>)?(?!\|? $))
 (?P<heading>^\s*(?P<hmarker>=+)\s.*\s(?P=hmarker) $)
-(?P<interwiki>[A-Z][a-zA-Z]+\:(%(q_string)s|([^\s'\"\:\<\|]([^\s%(punct)s]|([%(punct)s][^\s%(punct)s]))+)))
+(?P<interwiki>[A-Z][a-zA-Z]+\:(%(dq_string)s|([^\s'\"\:\<\|]([^\s%(punct)s]|([%(punct)s][^\s%(punct)s]))+)))
 (?P<word>%(word_rule)s)
 (?P<url_bracket>\[((%(url)s)\:|#|\:)[^\s\]]+(\s[^\]]+)?\])
 (?P<url>%(url_rule)s)
@@ -100,12 +100,12 @@ class Parser:
 (?P<smileyA>^(%(smiley)s)(?=\s))
 (?P<ent_symbolic>&[a-zA-Z]+;)
 (?P<ent>[<>&])
-(?P<wikiname_bracket>\[%(q_string)s.*?\])
+(?P<wikiname_bracket>\[%(dq_string)s.*?\])
 (?P<tt_bt>`.*?`)"""  % {
 
         'url': url_pattern,
         'punct': punct_pattern,
-        'q_string': q_string,
+        'dq_string': dq_string,
         'ol_rule': ol_rule,
         'dl_rule': dl_rule,
         'url_rule': url_rule,

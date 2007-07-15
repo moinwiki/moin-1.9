@@ -37,12 +37,11 @@ class Login:
         sn = request.getScriptname()
         pi = request.getPathinfo()
         action = u"%s%s" % (sn, pi)
-        userprefslink = request.page.url(request, querystr={'action': 'newaccount'})
-        sendmypasswordlink = request.page.url(request, querystr={'action': 'recoverpass'})
-        hint = _('If you do not have an account, <a href="%(userprefslink)s">you can create one now</a>. '
-                 '<a href="%(sendmypasswordlink)s">Forgot your password?</a>', formatted=False) % {
-                 'userprefslink': userprefslink,
-                 'sendmypasswordlink': sendmypasswordlink}
+        hints = []
+        for authm in request.cfg.auth:
+            hint = authm.login_hint(request)
+            if hint:
+                hints.append(hint)
         self._form = html.FORM(action=action, name="loginform")
         self._table = html.TABLE(border="0")
 
@@ -52,7 +51,8 @@ class Login:
 
         self._form.append(html.INPUT(type="hidden", name="action", value="login"))
         self._form.append(self._table)
-        self._form.append(html.P().append(html.Raw(hint)))
+        for hint in hints:
+            self._form.append(html.P().append(html.Raw(hint)))
         self._form.append(html.Raw("</div>"))
 
         cfg = request.cfg
@@ -67,6 +67,14 @@ class Login:
             self.make_row(_('Password'), [
                 html.INPUT(
                     type="password", size="32", name="password",
+                ),
+            ])
+
+        if 'openid_identifier' in cfg.auth_login_inputs:
+            self.make_row(_('OpenID'), [
+                html.INPUT(
+                    type="text", size="32", name="openid_identifier",
+                    id="openididentifier"
                 ),
             ])
 
