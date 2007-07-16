@@ -12,7 +12,7 @@ import py
 
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
-
+from MoinMoin._tests.common import gain_superuser_rights
 
 class TestExpandVars(unittest.TestCase):
     """PageEditor: testing page editor"""
@@ -177,17 +177,23 @@ def testSave(request):
         from MoinMoin.events import Abort
         return Abort("This is just a test")
 
-    def dummy_write(self, *args, **kwargs):
-        print "PageEditor can't save a page if Abort is returned from PreSave event handlers"
-        assert False
+    pagename = u'AutoCreatedMoinMoinTemporaryTestPageFortestSave'
+    testtext = u'ThisIsSomeStupidTestPageText!'
 
-    pagename = u'AutoCreatedMoinMoinTemporaryTestPage'
-    testtext = u'ThisIsSomeStupidTestPageText!!'
-
+    gain_superuser_rights(request)
     cfg = request.cfg
     cfg.event_handlers = [handler]
 
+    page = Page(request, pagename)
+    if page.exists():
+        deleter = PageEditor(request, pagename)
+        deleter.deletePage()
+        print 'BODY:', deleter.body
+    
     editor = PageEditor(request, pagename)
-    editor._write_file = dummy_write
+    print 'BODY:', editor.body
     editor.saveText(testtext, 0)
-
+    
+    print "PageEditor can't save a page if Abort is returned from PreSave event handlers"
+    page = Page(request, pagename)
+    assert page.body != testtext
