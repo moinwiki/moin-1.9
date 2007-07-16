@@ -12,7 +12,7 @@ import py
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.packages import Package, ScriptEngine, MOIN_PACKAGE_FILE, packLine, unpackLine
-
+from MoinMoin._tests.common import gain_superuser_rights
 
 
 class DebugPackage(Package, ScriptEngine):
@@ -62,15 +62,9 @@ class TestUnsafePackage:
 DeletePage|FooPage|Test ...
 """).installPackage()
 
-    def gain_superuser_rights(self):
-        self.request.user.name = "SuperUserName"
-        self.request.user.valid = 1
-        self.request.user.may.name = self.request.user.name
-        self.request.cfg.superuser.append(self.request.user.name)
-        self.request.user.auth_method = self.request.cfg.trusted_auth_methods[0]
 
     def testBasicPackageThings(self):
-        self.gain_superuser_rights()
+        gain_superuser_rights(self.request)
         myPackage = DebugPackage(self.request, 'test')
         myPackage.installPackage()
         assert myPackage.msg == u'foo\nFooPage added \n'
