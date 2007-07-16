@@ -647,9 +647,6 @@ Try a different name.""") % (newpagename, )
             raise self.AccessDenied, msg
 
         try:
-            event = PageDeletedEvent(request, self, comment)
-            send_event(event)
-
             msg = self.saveText(u"deleted\n", 0, comment=comment or u'', deleted=True, notify=False)
             msg = msg.replace(
                 _("Thank you for your changes. Your attention to detail is appreciated."),
