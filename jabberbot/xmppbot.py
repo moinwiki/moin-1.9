@@ -18,6 +18,9 @@ from pyxmpp.iq import Iq
 import pyxmpp.jabber.dataforms as forms
 
 import jabberbot.commands as cmd
+from jabberbot.i18n import getText
+
+_ = getText
 
 class Contact:
     """Abstraction of a roster item / contact
@@ -212,17 +215,25 @@ class XMPPBot(Client, Thread):
             self.remove_subscription(jid)
 
         elif isinstance(command, cmd.GetPage) or isinstance(command, cmd.GetPageHTML):
-            msg = u"""Here's the page "%s" that you've requested:\n\n%s"""
-            self.send_message(command.jid, msg % (command.pagename, command.data))
+            msg = _("""Here's the page "%(pagename)s" that you've requested:\n\n%(data)s""")
+            self.send_message(command.jid, msg % {
+                      'pagename': command.pagename, 
+                      'data': command.data,
+            })
 
         elif isinstance(command, cmd.GetPageList):
-            msg = u"""That's the list of pages accesible to you:\n\n%s"""
+            msg = _("That's the list of pages accesible to you:\n\n%s")
             pagelist = "\n".join(command.data)
             self.send_message(command.jid, msg % (pagelist, ))
 
         elif isinstance(command, cmd.GetPageInfo):
-            msg = u"""Following detailed information on page "%s" is available::\n\n%s"""
-            self.send_message(command.jid, msg % (command.pagename, command.data))
+            msg = _("""Following detailed information on page "%(pagename)s" \
+is available::\n\n%(data)s""")
+            
+            self.send_message(command.jid, msg % { 
+                      'pagename': command.pagename, 
+                      'data': command.data,
+            })
 
     def ask_for_subscription(self, jid):
         """Sends a <presence/> stanza with type="subscribe"
@@ -263,16 +274,16 @@ class XMPPBot(Client, Thread):
         pass
 
     def send_search_form(self, jid):
-        help_form = u"Submit this form to perform a wiki search"
+        help_form = _("Submit this form to perform a wiki search")
 
-        title_search = forms.Option("t", "Title search")
-        full_search = forms.Option("f", "Full-text search")
+        title_search = forms.Option("t", _("Title search"))
+        full_search = forms.Option("f", _("Full-text search"))
 
-        form = forms.Form(xmlnode_or_type="form", title="Wiki search", instructions=help_form)
+        form = forms.Form(xmlnode_or_type="form", title=_("Wiki search"), instructions=help_form)
         form.add_field(name="search_type", options=[title_search, full_search], field_type="list-single", label="Search type")
-        form.add_field(name="search", field_type="text-single", label="Search text")
+        form.add_field(name="search", field_type="text-single", label=_("Search text"))
 
-        message = Message(to_jid=jid, body="Please specify the search criteria.", subject="Wiki search")
+        message = Message(to_jid=jid, body=_("Please specify the search criteria."), subject=_("Wiki search"))
         message.add_content(form)
         self.get_stream().send(message)
 
@@ -350,7 +361,7 @@ class XMPPBot(Client, Thread):
             if self.contacts[jid].supports_forms(resource):
                 self.send_search_form(sender)
             else:
-                msg = u"This command requires a client supporting Data Forms"
+                msg = _("This command requires a client supporting Data Forms")
                 self.send_message(sender, msg, u"Error")
         else:
             # For unknown command return a generic help message
@@ -379,22 +390,27 @@ class XMPPBot(Client, Thread):
 
         """
         if command == "help":
-            return u"""The "help" command prints a short, helpful message about a given topic or function.\n\nUsage: help [topic_or_function]"""
+            return _("""The "help" command prints a short, helpful message \
+about a given topic or function.\n\nUsage: help [topic_or_function]""")
 
         elif command == "ping":
-            return u"""The "ping" command returns a "pong" message as soon as it's received."""
+            return _("""The "ping" command returns a "pong" message as soon \
+as it's received.""")
 
         elif command == "searchform":
-            return u"""searchform - perform a wiki search using a form"""
+            return _("""searchform - perform a wiki search using a form""")
 
         # Here we have to deal with help messages of external (xmlrpc) commands
         else:
             if command in self.xmlrpc_commands:
                 classobj = self.xmlrpc_commands[command]
-                help_str = u"%s - %s\n\nUsage: %s %s"
-                return help_str % (command, classobj.description, command, classobj.parameter_list)
+                help_str = _("%(command)s - %(description)s\n\nUsage: %(command)s %(params)s")
+                return help_str % { 'command': command, 
+                                    'description': classobj.description, 
+                                    'params': classobj.parameter_list,
+                                  }
             else:
-                return u"""Unknown command "%s" """ % (command, )
+                return _("""Unknown command "%s" """) % (command, )
 
     def handle_xmlrpc_command(self, sender, command):
         """Creates a command object, and puts it the command queue
@@ -415,8 +431,10 @@ class XMPPBot(Client, Thread):
 
         # This happens when user specifies wrong parameters
         except TypeError:
-            msg = u"You've specified a wrong parameter list. The call should look like:\n\n%s %s"
-            return msg % (command[0], command_class.parameter_list)
+            msg = _("You've specified a wrong parameter list. \
+The call should look like:\n\n%(command)s %(params)s")
+            
+            return msg % {'command': command[0], 'params': command_class.parameter_list}
 
     def handle_unsubscribed_presence(self, stanza):
         """Handles unsubscribed presence stanzas"""
@@ -563,7 +581,8 @@ class XMPPBot(Client, Thread):
         It's sent in response to an uknown message or the "help" command.
 
         """
-        msg = u"""Hello there! I'm a MoinMoin Notification Bot. Available commands:\n\n%s\n%s"""
+        msg = _("Hello there! I'm a MoinMoin Notification Bot. Available commands:\
+\n\n%(internal)s\n%(xmlrpc)s")
         internal = ", ".join(self.internal_commands)
         xmlrpc = ", ".join(self.xmlrpc_commands.keys())
 
