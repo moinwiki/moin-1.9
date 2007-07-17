@@ -593,7 +593,7 @@ class XmlRpcBase:
 
     # authorization methods
 
-    def _cleanup_stale_tokens(request):
+    def _cleanup_stale_tokens(self, request):
         items = caching.get_cache_list(request, 'xmlrpc-session', 'farm')
         tnow = time.time()
         for item in items:
