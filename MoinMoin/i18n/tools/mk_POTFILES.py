@@ -1,10 +1,16 @@
 #!/usr/bin/env python
 
 import os
+from sys import argv
 
 # Define the starting directory.
 
-startdir = os.path.join("..") # MoinMoin
+startdir = ""
+
+if len(argv) == 2:
+    startdir = os.path.join(argv[1])
+else:
+    startdir = os.path.join("..") # MoinMoin
 
 # Define a blacklist.
 
@@ -77,10 +83,10 @@ if __name__ == "__main__":
     outfile.write("POTFILES = \\\n")
     try:
         for file in files[:-1]:
-            outfile.write("\t" + os.path.join("..", file) + " \\\n")
+            outfile.write("\t" + os.path.join(startdir, file) + " \\\n")
         if files[-1]:
             file = files[-1]
-            outfile.write("\t" + os.path.join("..", file) + "\n")
+            outfile.write("\t" + os.path.join(startdir, file) + "\n")
     finally:
         outfile.close()
 
