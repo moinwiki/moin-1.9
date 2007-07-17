@@ -217,7 +217,7 @@ class XMPPBot(Client, Thread):
         elif isinstance(command, cmd.GetPage) or isinstance(command, cmd.GetPageHTML):
             msg = _("""Here's the page "%(pagename)s" that you've requested:\n\n%(data)s""")
             self.send_message(command.jid, msg % {
-                      'pagename': command.pagename, 
+                      'pagename': command.pagename,
                       'data': command.data,
             })
 
@@ -229,9 +229,9 @@ class XMPPBot(Client, Thread):
         elif isinstance(command, cmd.GetPageInfo):
             msg = _("""Following detailed information on page "%(pagename)s" \
 is available::\n\n%(data)s""")
-            
-            self.send_message(command.jid, msg % { 
-                      'pagename': command.pagename, 
+
+            self.send_message(command.jid, msg % {
+                      'pagename': command.pagename,
                       'data': command.data,
             })
 
@@ -405,9 +405,9 @@ as it's received.""")
             if command in self.xmlrpc_commands:
                 classobj = self.xmlrpc_commands[command]
                 help_str = _("%(command)s - %(description)s\n\nUsage: %(command)s %(params)s")
-                return help_str % { 'command': command, 
-                                    'description': classobj.description, 
-                                    'params': classobj.parameter_list,
+                return help_str % {'command': command,
+                                   'description': classobj.description,
+                                   'params': classobj.parameter_list,
                                   }
             else:
                 return _("""Unknown command "%s" """) % (command, )
@@ -433,7 +433,7 @@ as it's received.""")
         except TypeError:
             msg = _("You've specified a wrong parameter list. \
 The call should look like:\n\n%(command)s %(params)s")
-            
+
             return msg % {'command': command[0], 'params': command_class.parameter_list}
 
     def handle_unsubscribed_presence(self, stanza):

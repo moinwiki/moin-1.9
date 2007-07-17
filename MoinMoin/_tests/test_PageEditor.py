@@ -189,11 +189,11 @@ def testSave(request):
         deleter = PageEditor(request, pagename)
         deleter.deletePage()
         print 'BODY:', deleter.body
-    
+
     editor = PageEditor(request, pagename)
     print 'BODY:', editor.body
     editor.saveText(testtext, 0)
-    
+
     print "PageEditor can't save a page if Abort is returned from PreSave event handlers"
     page = Page(request, pagename)
     assert page.body != testtext
