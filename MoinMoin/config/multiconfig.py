@@ -205,6 +205,9 @@ class CacheClass:
 class DefaultConfig:
     """ default config values """
 
+    # internal dict for plugin `modules' lists
+    _site_plugin_lists = {}
+
     # setting DesktopEdition = True gives all local users special powers - ONLY use for MMDE style usage!
     DesktopEdition = False
 
