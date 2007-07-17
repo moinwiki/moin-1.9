@@ -6,13 +6,15 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import Queue
-from threading import Thread
-import datetime, logging, time, xmlrpclib
+import datetime, logging, time, xmlrpclib, Queue
 from SimpleXMLRPCServer import SimpleXMLRPCServer
+from threading import Thread
 
 import jabberbot.commands as cmd
 from jabberbot.multicall import MultiCall
+from jabberbot.i18n import getText
+
+_ = getText
 
 class ConfigurationError(Exception):
     def __init__(self, message):
@@ -36,7 +38,7 @@ class XMLRPCClient(Thread):
         self.log = logging.getLogger("log")
 
         if not config.secret:
-            error = "You must set a (long) secret string!"
+            error = _("You must set a (long) secret string!")
             self.log.critical(error)
             raise ConfigurationError(error)
 
@@ -74,7 +76,7 @@ class XMLRPCClient(Thread):
             self.get_page_info(command)
 
     def report_error(self, jid, text):
-        report = cmd.NotificationCommand(jid, text, u"Error", async=False)
+        report = cmd.NotificationCommand(jid, text, _("Error"), async=False)
         self.commands_out.put_nowait(report)
 
     def get_auth_token(self, jid):
@@ -105,15 +107,15 @@ class XMLRPCClient(Thread):
                     function(self, command)
                     self.commands_out.put_nowait(command)
                 except xmlrpclib.Fault, fault:
-                    msg = u"""Your request has failed. The reason is:\n%s"""
+                    msg = _("Your request has failed. The reason is:\n%s")
                     self.log.error(str(fault))
                     self.report_error(jid, msg % (fault.faultString, ))
                 except xmlrpclib.Error, err:
-                    msg = u"""A serious error occured while processing your request:\n%s"""
+                    msg = _("A serious error occured while processing your request:\n%s")
                     self.log.error(str(err))
                     self.report_error(jid, msg % (str(err), ))
                 except Exception, exc:
-                    msg = u"An internal error has occured, please contact the administrator."
+                    msg = _("An internal error has occured, please contact the administrator.")
                     self.log.critical(str(exc))
                     self.report_error(jid, msg)
 
@@ -124,7 +126,7 @@ class XMLRPCClient(Thread):
         return wrapped_func
 
     def warn_no_credentials(self, jid):
-        msg = u"""Credentials check failed, you may be unable to see all information."""
+        msg = _("Credentials check failed, you may be unable to see all information.")
         warning = cmd.NotificationCommand([jid], msg, async=False)
         self.commands_out.put_nowait(warning)
 
@@ -165,7 +167,7 @@ class XMLRPCClient(Thread):
     def get_page_list(self, command):
         """Returns a list of all accesible pages"""
 
-        txt = u"""This command may take a while to complete, please be patient..."""
+        txt = _("This command may take a while to complete, please be patient...")
         info = cmd.NotificationCommand([command.jid], txt, async=False)
         self.commands_out.put_nowait(info)
 
@@ -208,9 +210,9 @@ class XMLRPCClient(Thread):
                     'time': datestr[9:17],
                 }
 
-        msg = u"""Last author: %(author)s
+        msg = _("""Last author: %(author)s
 Last modification: %(modification)s
-Current version: %(version)s""" % {
+Current version: %(version)s""") % {
              'author': author,
              'modification': date,
              'version': getpageinfo_result[0]['version'],
@@ -240,7 +242,7 @@ class XMLRPCServer(Thread):
         if config.secret:
             self.secret = config.secret
         else:
-            error = "You must set a (long) secret string"
+            error = _("You must set a (long) secret string")
             self.log.critical(error)
             raise ConfigurationError(error)
 
@@ -268,7 +270,7 @@ class XMLRPCServer(Thread):
         """
         def protected_func(secret, *args):
             if secret != self.secret:
-                raise xmlrpclib.Fault(1, "You are not allowed to use this bot!")
+                raise xmlrpclib.Fault(1, _("You are not allowed to use this bot!"))
             else:
                 return function(self, *args)
 
