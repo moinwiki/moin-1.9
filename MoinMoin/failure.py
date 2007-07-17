@@ -9,6 +9,8 @@
 import sys, os, logging
 
 from MoinMoin.support import cgitb
+from MoinMoin.error import ConfigurationError
+from traceback import extract_tb
 
 
 class View(cgitb.View):
@@ -61,20 +63,31 @@ function toggleDebugInfo() {
     def formatMessage(self):
         """ handle multiple paragraphs messages and add general help """
         f = self.formatter
-        text = [self.formatExceptionMessage(self.info),
+        text = [self.formatExceptionMessage(self.info)]
+
+        if self.info[0] == ConfigurationError:
+            tbt = extract_tb(self.info[1].exceptions()[-1][2])[-1]
+            text.append(
+                f.paragraph('Error in your configuration file "%s"'
+                            ' around line %d.' % tbt[:2]))
+        else:
+            text.append(
                 f.paragraph("If you want to report a bug, please save "
-                            "this page and  attach it to your bug report."), ]
+                            "this page and  attach it to your bug report."))
         return ''.join(text)
 
     def formatButtons(self):
         """ Add 'buttons' to the error dialog """
         f = self.formatter
         buttons = [f.link('javascript:toggleDebugInfo()',
-                          'Show debugging information'),
+                          'Show debugging information')]
+        if self.info[0] != ConfigurationError:
+            buttons.append(
                    f.link('http://moinmoin.wikiwikiweb.de/MoinMoinBugs',
-                          'Report bug'),
+                          'Report bug'))
+            buttons.append(
                    f.link('http://moinmoin.wikiwikiweb.de/FrontPage',
-                          'Visit MoinMoin wiki'), ]
+                          'Visit MoinMoin wiki'))
         return f.list(buttons, {'class': 'buttons'})
 
     def formatDebugInfo(self):
@@ -143,9 +156,14 @@ def handle(request, err):
     logging.error('%s: %s' % (err.__class__.__name__, str(err)), exc_info=savedError)
     try:
         debug = 'debug' in getattr(request, 'form', {})
-        handler = cgitb.Hook(file=request,
-                             display=request.cfg.traceback_show,
-                             logdir=request.cfg.traceback_log_dir,
+        # default to True here to allow an admin setting up the wiki
+        # to see the errors made in the configuration file
+        display = True
+        logdir = None
+        if hasattr(request, 'cfg'):
+            display = request.cfg.traceback_show
+            logdir = request.cfg.traceback_log_dir
+        handler = cgitb.Hook(file=request, display=display, logdir=logdir,
                              viewClass=View, debug=debug)
         handler.handle()
     except:
