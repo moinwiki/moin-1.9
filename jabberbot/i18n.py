@@ -10,7 +10,7 @@ translations = None
 
 def getText(original, lang="en"):
     global translations
-    
+
     if not translations:
         init_i18n()
 
@@ -21,4 +21,4 @@ def getText(original, lang="en"):
 
 def init_i18n():
     global translations
-    translations = {'en': { } }
+    translations = {'en': {}}
