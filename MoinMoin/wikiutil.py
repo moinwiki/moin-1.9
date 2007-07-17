@@ -1090,16 +1090,25 @@ def builtinPlugins(kind):
 def wikiPlugins(kind, cfg):
     """ Gets a list of modules in data/plugin/'kind'
 
-    Require valid plugin directory. e.g missing 'parser' directory or
-    missing '__init__.py' file will raise errors.
-
     @param kind: what kind of modules we look for
     @rtype: list
     @return: module names
     """
     # Wiki plugins are located in wikiconfig.plugin module
     modulename = '%s.plugin.%s' % (cfg.siteid, kind)
-    return pysupport.importName(modulename, "modules")
+
+    # short-cut if we've loaded the list already
+    # (or already failed to load it)
+    if kind in cfg._site_plugin_lists:
+        return cfg._site_plugin_lists[kind]
+
+    try:
+        plugins = pysupport.importName(modulename, "modules")
+        cfg._site_plugin_lists[kind] = plugins
+        return plugins
+    except ImportError:
+        cfg._site_plugin_lists[kind] = []
+        return []
 
 
 def getPlugins(kind, cfg):
