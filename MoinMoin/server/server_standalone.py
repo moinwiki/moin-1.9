@@ -77,6 +77,9 @@ class SimpleServer(BaseHTTPServer.HTTPServer):
         if config.hotshotProfile:
             config.hotshotProfile.close()
 
+        if config.cProfile and config.cProfileProfile:
+            config.cProfile.dump_stats(config.cProfileProfile)
+
         # Set abort flag, then make request to wake the server
         self._abort = 1
         try:
@@ -561,6 +564,18 @@ class StandaloneConfig(Config):
     hotshotProfile = None
     pycallgraph_output = None
 
+def cProfileDecorator(func, profile):
+    """ Return a profiled function """
+    profile.moin_requests_done = 0
+    def profiledFunction(*args, **kw):
+        profile.moin_requests_done += 1
+        if profile.moin_requests_done == 1:
+            # Don't profile first request, it's not interesting
+            return func(*args, **kw)
+        return profile.runcall(func, *args, **kw)
+
+    return profiledFunction
+
 def run(configClass):
     """ Create and run a moin server
 
@@ -575,6 +590,9 @@ def run(configClass):
 
     config = configClass()
 
+    if config.hotshotProfile and config.cProfileProfile:
+        raise RuntimeError("You cannot run two profilers simultaneously.")
+
     # Install hotshot profiled serve_moin method. To compare with other
     # servers, we profile the part that create and run the request.
     if config.hotshotProfile:
@@ -582,6 +600,14 @@ def run(configClass):
         config.hotshotProfile = hotshot.Profile(config.hotshotProfile)
         MoinRequestHandler.serve_moin = hotshotProfileDecorator(
             MoinRequestHandler.serve_moin, config.hotshotProfile)
+
+    if config.cProfileProfile:
+        import cProfile
+        # Create a new cProfile.Profile object using config.cProfileProfile
+        # as the path for the output file.
+        config.cProfile = cProfile.Profile()
+        MoinRequestHandler.serve_moin = cProfileDecorator(
+            MoinRequestHandler.serve_moin, config.cProfile)
 
     # Install a memory profiled serve_moin method
     if config.memoryProfile:
