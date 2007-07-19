@@ -113,7 +113,7 @@ class PageRevertedEvent(PageEvent):
 
 class SubscribedToPageEvent(PageEvent):
 
-    description = _(u"""An user has subscribed to a page""")
+    description = _(u"""A user has subscribed to a page""")
     req_superuser = True
 
     def __init__(self, request, pagename, username):
