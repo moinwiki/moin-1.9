@@ -20,7 +20,6 @@ from MoinMoin.userprefs import UserPrefBase
 # split the plugin into multiple preferences pages:
 #    - account details (name, email, timezone, ...)
 #    - wiki settings (editor, fancy diffs, theme, ...)
-#    - notification settings (trivial, subscribed pages, ...)
 #    - quick links (or leave in wiki settings?)
 ####
 
@@ -34,7 +33,8 @@ class Settings(UserPrefBase):
         self.request = request
         self._ = request.getText
         self.cfg = request.cfg
-        self.title = self._("Preferences")
+        _ = self._
+        self.title = _("Preferences", formatted=False)
         self.name = 'prefs'
 
     def _decode_pagelist(self, key):
@@ -194,13 +194,6 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
         # quicklinks for navibar
         theuser.quicklinks = self._decode_pagelist('quicklinks')
 
-        # subscription for page change notification
-        theuser.subscribed_pages = self._decode_pagelist('subscribed_pages')
-
-        # subscription to various events
-        available = events.get_subscribable_events()
-        theuser.subscribed_events = [ev for ev in form.get('events', [])]
-
         # save data
         theuser.save()
         if theuser.disabled:
@@ -297,24 +290,6 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
 
         return util.web.makeSelection('theme_name', options, cur_theme)
 
-    def _event_select(self):
-        """ Create event subscription list. """
-
-        event_list = events.get_subscribable_events()
-        selected = self.request.user.subscribed_events
-        super = self.request.user.isSuperUser()
-
-        # Create a list of (value, name) tuples for display in <select>
-        # Only include super-user visible events if current user has these rights.
-        # It's cosmetic - the check for super-user rights should be performed
-        # in event handling code as well!
-        allowed = []
-        for key in event_list.keys():
-            if not event_list[key]['superuser'] or super:
-                allowed.append((key, event_list[key]['desc']))
-
-        return util.web.makeMultiSelection('events', allowed, selectedvals=selected)
-
     def _editor_default_select(self):
         """ Create editor selection. """
         editor_default = self.request.user.valid and self.request.user.editor_default or self.cfg.editor_default
@@ -400,33 +375,6 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
                     .append('\n'.join(self.request.user.getQuickLinks())),
             ], valign="top")
 
-            # FIXME: this depends on Jabber ATM, but may not do so in the future
-            if self.cfg.jabber_enabled:
-                self.make_row(_('Subscribed events'), [self._event_select()])
-
-            # subscribed pages
-            if self.cfg.mail_enabled:
-                # Get list of subscribe pages, DO NOT sort! it should
-                # stay in the order the user entered it in his input
-                # box.
-                notifylist = self.request.user.getSubscriptionList()
-
-                warning = []
-                if not self.request.user.email:
-                    warning = [
-                        html.BR(),
-                        html.SMALL(Class="warning").append(
-                            _("This list does not work, unless you have"
-                              " entered a valid email address!")
-                        )]
-
-                self.make_row(
-                    html.Raw(_('Subscribed wiki pages (one regex per line)')),
-                    [html.TEXTAREA(name="subscribed_pages", rows="6", cols="50").append(
-                        '\n'.join(notifylist)),
-                    ] + warning,
-                    valign="top"
-                )
             self._form.append(html.INPUT(type="hidden", name="action", value="userprefs"))
             self._form.append(html.INPUT(type="hidden", name="handler", value="prefs"))
 

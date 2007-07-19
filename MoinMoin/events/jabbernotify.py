@@ -80,7 +80,7 @@ def handle_file_attached(event):
         data = notification.attachment_added(request, event.pagename, event.name, event.size)
 
         for usr in subscribers[lang]:
-            if usr.notify_by_jabber and usr.jid and event_name in usr.subscribed_events:
+            if usr.jid and event_name in usr.jabber_subscribed_events:
                 jids.append(usr.jid)
             else:
                 continue
@@ -139,11 +139,9 @@ def handle_user_created(event):
 
     for id in user_ids:
         usr = User(event.request, id=id)
-        if not usr.notify_by_jabber:
-            continue
 
         # Currently send this only to super users
-        if usr.isSuperUser() and usr.jid and event_name in usr.subscribed_events:
+        if usr.isSuperUser() and usr.jid and event_name in usr.jabber_subscribed_events:
             jids.append(usr.jid)
 
     send_notification(event.request, jids, msg % (event.user.name, email), data['subject'])

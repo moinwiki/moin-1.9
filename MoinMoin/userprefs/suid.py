@@ -19,7 +19,8 @@ class Settings(UserPrefBase):
         self.request = request
         self._ = request.getText
         self.cfg = request.cfg
-        self.title = self._("Switch user")
+        _ = self._
+        self.title = _("Switch user", formatted=False)
         self.name = 'suid'
 
     def allowed(self):
