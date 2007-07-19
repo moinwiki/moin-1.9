@@ -22,7 +22,7 @@ class Settings(UserPrefBase):
         self._ = request.getText
         _ = request.getText
         self.cfg = request.cfg
-        self.title = _("Change password")
+        self.title = _("Change password", formatted=False)
         self.name = 'changepass'
 
 
