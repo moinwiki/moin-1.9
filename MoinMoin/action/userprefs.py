@@ -51,7 +51,8 @@ def _create_prefs_page(request, sel=None):
         obj = cls(request)
         if not obj.allowed():
             continue
-        url = request.page.url(request, {'action': 'userprefs', 'sub': sub})
+        url = request.page.url(request, {'action': 'userprefs', 'sub': sub},
+                               relative=False)
         lnk = html.LI().append(html.A(href=url).append(html.Text(obj.title)))
         items.append(lnk)
     return unicode(ret)
