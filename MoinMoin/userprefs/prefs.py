@@ -290,24 +290,6 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
 
         return util.web.makeSelection('theme_name', options, cur_theme)
 
-    def _event_select(self):
-        """ Create event subscription list. """
-
-        event_list = events.get_subscribable_events()
-        selected = self.request.user.subscribed_events
-        super = self.request.user.isSuperUser()
-
-        # Create a list of (value, name) tuples for display in <select>
-        # Only include super-user visible events if current user has these rights.
-        # It's cosmetic - the check for super-user rights should be performed
-        # in event handling code as well!
-        allowed = []
-        for key in event_list.keys():
-            if not event_list[key]['superuser'] or super:
-                allowed.append((key, event_list[key]['desc']))
-
-        return util.web.makeMultiSelection('events', allowed, selectedvals=selected)
-
     def _editor_default_select(self):
         """ Create editor selection. """
         editor_default = self.request.user.valid and self.request.user.editor_default or self.cfg.editor_default
