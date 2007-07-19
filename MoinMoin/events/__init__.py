@@ -53,7 +53,7 @@ class PageRenamedEvent(PageEvent):
     description = u"""Page has been renamed"""
     req_superuser = False
 
-    def __init__(self, request, page, old_page, comment):
+    def __init__(self, request, page, old_page, comment=""):
         PageEvent.__init__(self, request)
         self.page = page
         self.old_page = old_page
