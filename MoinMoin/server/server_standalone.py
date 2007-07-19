@@ -77,7 +77,7 @@ class SimpleServer(BaseHTTPServer.HTTPServer):
         if config.hotshotProfile:
             config.hotshotProfile.close()
 
-        if config.cProfile and config.cProfileProfile:
+        if config.cProfileProfile and config.cProfile:
             config.cProfile.dump_stats(config.cProfileProfile)
 
         # Set abort flag, then make request to wake the server
@@ -562,6 +562,8 @@ class StandaloneConfig(Config):
     # Development options
     memoryProfile = None
     hotshotProfile = None
+    cProfile = None # internal use only
+    cProfileProfile = None
     pycallgraph_output = None
 
 def cProfileDecorator(func, profile):
