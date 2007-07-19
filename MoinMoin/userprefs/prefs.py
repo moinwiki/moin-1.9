@@ -34,7 +34,8 @@ class Settings(UserPrefBase):
         self.request = request
         self._ = request.getText
         self.cfg = request.cfg
-        self.title = self._("Preferences")
+        _ = self._
+        self.title = _("Preferences", formatted=False)
         self.name = 'prefs'
 
     def _decode_pagelist(self, key):
