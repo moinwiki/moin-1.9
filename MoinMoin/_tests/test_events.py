@@ -51,40 +51,36 @@ def test_filter_subscriber_list(request):
     user = User(request)
     event = events.Event(request)
 
-    print "User is subscribed to this event and wants to get notified by jabber."
+    print "User is subscribed to this event on jabber."
     print "This means, that he should stay on the list."
-    user.notify_by_jabber = True
     user.jid = "user@example.com"
-    user.subscribed_events = [events.Event.__name__]
+    user.jabber_subscribed_events = [events.Event.__name__]
     subscribers = {"en": [user]}
     notification.filter_subscriber_list(event, subscribers, True)
     assert subscribers["en"]
 
-    print "User is subscribed to this event, but doesn't want to get notified by jabber."
+    print "User is not subscribed to this event on jabber."
     print "The list should be empty."
-    user.notify_by_jabber = False
     user.jid = "user@example.com"
-    user.subscribed_events = [events.Event.__name__]
+    user.jabber_subscribed_events = []
     subscribers = {"en": [user]}
     notification.filter_subscriber_list(event, subscribers, True)
     assert not subscribers["en"]
 
-    print "User is not subscribed to this event, but wants to get notfied by jabber."
-    print "The list should be empty."
-    user.notify_by_jabber = True
-    user.jid = "user@example.com"
-    user.subscribed_events = []
+    print "User is subscribed to this event on email."
+    print "This means, that he should stay on the list."
+    user.email = "user@example.com"
+    user.email_subscribed_events = [events.Event.__name__]
     subscribers = {"en": [user]}
-    notification.filter_subscriber_list(event, subscribers, True)
-    assert not subscribers["en"]
+    notification.filter_subscriber_list(event, subscribers, False)
+    assert subscribers["en"]
 
-    print "User is neither subscribed to this event, nor wants jabber notifications."
+    print "User is not subscribed to this event on email."
     print "The list should be empty."
-    user.notify_by_jabber = False
-    user.subscribed_events = []
-    user.jid = "user@example.com"
+    user.email = "user@example.com"
+    user.email_subscribed_events = []
     subscribers = {"en": [user]}
-    notification.filter_subscriber_list(event, subscribers, True)
+    notification.filter_subscriber_list(event, subscribers, False)
     assert not subscribers["en"]
 
 coverage_modules = ["MoinMoin.events"]

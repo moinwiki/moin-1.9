@@ -697,15 +697,6 @@ reStructuredText Quick Reference
             from xmlrpclib import Server
             self.notification_server = Server(self.notification_bot_uri, )
 
-            # Add checkbox fields that allow user to select means of notification
-            self.user_checkbox_fields.extend([
-                  ('notify_by_email', lambda _: _('Notify me about changes via email')),
-                  ('notify_by_jabber', lambda _: _('Notify me about changes via jabber')),
-                  ])
-
-            new_defaults = {'notify_by_email': 1, 'notify_by_jabber': 0}
-            self.user_checkbox_defaults.update(new_defaults)
-
         # Cache variables for the properties below
         self._iwid = self._iwid_full = self._meta_dict = None
 
