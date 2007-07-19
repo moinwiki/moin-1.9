@@ -534,7 +534,6 @@ reStructuredText Quick Reference
         ('show_fancy_diff', lambda _: _('Show fancy diffs')),
         ('wikiname_add_spaces', lambda _: _('Add spaces to displayed wiki names')),
         ('remember_me', lambda _: _('Remember login information')),
-        ('want_trivial', lambda _: _('Subscribe to trivial changes')),
 
         ('disabled', lambda _: _('Disable this account forever')),
         # if an account is disabled, it may be used for looking up
