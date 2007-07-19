@@ -74,6 +74,8 @@ class XMLRPCClient(Thread):
             self.get_page_list(command)
         elif isinstance(command, cmd.GetPageInfo):
             self.get_page_info(command)
+        elif isinstance(command, cmd.GetUserLanguage):
+            self.get_language_by_jid(command)
 
     def report_error(self, jid, text):
         report = cmd.NotificationCommand(jid, text, _("Error"), async=False)
@@ -221,6 +223,15 @@ Current version: %(version)s""") % {
         command.data = msg
 
     get_page_info = _xmlrpc_decorator(get_page_info)
+
+    def get_language_by_jid(self, command):
+        """Returns language of the a user identified by the given JID"""
+
+        server = xmlrpclib.ServerProxy(self.config.wiki_url + "?action=xmlrpc2")
+        language = server.getUserLanguageByJID(command.jid)
+
+        command.language = language or "en"
+        self.commands_out.put_nowait(command)
 
 
 class XMLRPCServer(Thread):

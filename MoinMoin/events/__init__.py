@@ -23,6 +23,9 @@ logger = logging.getLogger("events")
 logger.setLevel(logging.DEBUG)
 logger.addHandler(logging.StreamHandler())
 
+# Dummy pseudo-getText function used in event descriptions,
+# so that they get into .po files
+_ = lambda x: x
 
 class Event(object):
     """A class handling information common to all events."""
@@ -38,7 +41,7 @@ class PageEvent(Event):
 
 class PageChangedEvent(PageEvent):
 
-    description = u"""Page has been modified (edit, creation, deletion)"""
+    description = _(u"""Page has been modified (edit, creation, deletion)""")
     req_superuser = False
 
     def __init__(self, request, page, comment, trivial):
@@ -50,10 +53,10 @@ class PageChangedEvent(PageEvent):
 
 class PageRenamedEvent(PageEvent):
 
-    description = u"""Page has been renamed"""
+    description = _(u"""Page has been renamed""")
     req_superuser = False
 
-    def __init__(self, request, page, old_page, comment):
+    def __init__(self, request, page, old_page, comment=""):
         PageEvent.__init__(self, request)
         self.page = page
         self.old_page = old_page
@@ -62,7 +65,7 @@ class PageRenamedEvent(PageEvent):
 
 class PageDeletedEvent(PageEvent):
 
-    description = u"""Page has been deleted"""
+    description = _(u"""Page has been deleted""")
     req_superuser = False
 
     def __init__(self, request, page, comment):
@@ -73,7 +76,7 @@ class PageDeletedEvent(PageEvent):
 
 class PageCopiedEvent(PageEvent):
 
-    description = u"""Page has been copied"""
+    description = _(u"""Page has been copied""")
     req_superuser = False
 
     def __init__(self, request, page, old_page, comment):
@@ -85,7 +88,7 @@ class PageCopiedEvent(PageEvent):
 
 class FileAttachedEvent(PageEvent):
 
-    description = u"""A new attachment has been added"""
+    description = _(u"""A new attachment has been added""")
     req_superuser = False
 
     def __init__(self, request, pagename, name, size):
@@ -98,7 +101,7 @@ class FileAttachedEvent(PageEvent):
 
 class PageRevertedEvent(PageEvent):
 
-    description = u"""A page has been reverted to a previous state"""
+    description = _(u"""A page has been reverted to a previous state""")
     req_superuser = False
 
     def __init__(self, request, pagename, previous, current):
@@ -110,7 +113,7 @@ class PageRevertedEvent(PageEvent):
 
 class SubscribedToPageEvent(PageEvent):
 
-    description = u"""An user has subscribed to a page"""
+    description = _(u"""An user has subscribed to a page""")
     req_superuser = True
 
     def __init__(self, request, pagename, username):
@@ -140,7 +143,7 @@ class JabberIDUnsetEvent(Event):
 class UserCreatedEvent(Event):
     """ Sent when a new user has been created """
 
-    description = u"""A new account has been created"""
+    description = _(u"""A new account has been created""")
     req_superuser = True
 
     def __init__(self, request, user):
@@ -233,3 +236,6 @@ def get_subscribable_events():
             subscribable_events[ev.__name__] = {'desc': ev.description,
                                                  'superuser': ev.req_superuser}
     return subscribable_events
+
+# Get rid of the dummy getText so that it doesn't get imported with *
+del _

@@ -591,6 +591,22 @@ class XmlRpcBase:
             userdata = dict(u.persistent_items())
         return userdata
 
+    def xmlrpc_getUserLanguageByJID(self, jid):
+        """ Returns user's language given his/her Jabber ID
+
+        It makes no sense to consider this a secret, right? Therefore
+        an authentication token is not required. We return a default
+        of "en" if user is not found.
+
+        TODO: surge protection? Do we fear account enumeration?
+        """
+        retval = "en"
+        u = user.get_by_jabber_id(self.request, jid)
+        if u:
+            retval = u.language
+
+        return retval
+
     # authorization methods
 
     def _cleanup_stale_tokens(self, request):
@@ -941,6 +957,15 @@ class XmlRpcBase:
         open(filename, 'wb+').write(data.data)
         AttachFile._addLogEntry(self.request, 'ATTNEW', pagename, filename)
         return xmlrpclib.Boolean(1)
+
+
+    def xmlrpc_getBotTranslations(self):
+        """ Return translations to be used by notification bot
+
+        @return: a dict (indexed by language) of dicts of translated strings (indexed by original ones)
+        """
+        from MoinMoin.i18n import bot_translations
+        return bot_translations(self.request)
 
     # XXX END WARNING XXX
 
