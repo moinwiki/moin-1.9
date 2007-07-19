@@ -127,6 +127,10 @@ class DefaultConfig(StandaloneConfig):
     # Not compatible with threads - use with SimpleServer only.
     ## hotshotProfile = name + '.prof'
 
+    # cProfile profile (default commented)
+    # Use with SimpleServer only.
+    ## cProfileProfile = name + '.prof'
+
     # Using pycallgraph to make nice graphics of how moin works internally
     # hint: using zgrviewer to view .dot is much more effective than using
     #       some .png viewer

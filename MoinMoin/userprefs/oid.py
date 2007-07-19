@@ -29,14 +29,14 @@ class Settings(UserPrefBase):
         self._ = request.getText
         self.cfg = request.cfg
         self.title = self._("OpenID settings")
-
-    def allowed(self):
-        if _openid_disabled:
-            return False
-        for authm in self.request.cfg.auth:
-            if isinstance(authm, OpenIDAuth):
-                return UserPrefBase.allowed(self)
-        return False
+        openid_auth = False
+        if not _openid_disabled:
+            for authm in self.request.cfg.auth:
+                if isinstance(authm, OpenIDAuth):
+                    openid_auth = True
+                    break
+        if not openid_auth:
+            self.allowed = lambda: False
 
     def _handle_remove(self):
         _ = self.request.getText
