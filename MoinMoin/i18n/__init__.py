@@ -39,13 +39,13 @@ languages = None
 
 translations = {}
 
-def po_filename(request, language, domain):
+def po_filename(request, language, domain, i18n_dir='i18n'):
     """ we use MoinMoin/i18n/<language>[.<domain>].mo as filename for the PO file.
 
         TODO: later, when we have a farm scope plugin dir, we can also load
               language data from there.
     """
-    return os.path.join(request.cfg.moinmoin_dir, 'i18n', "%s.%s.po" % (language, domain))
+    return os.path.join(request.cfg.moinmoin_dir, i18n_dir, "%s.%s.po" % (language, domain))
 
 def i18n_init(request):
     """ this is called early from request initialization and makes sure we
@@ -87,6 +87,30 @@ def i18n_init(request):
                 pass
     request.clock.stop('i18n_init')
 
+def bot_translations(request):
+    """Return translations to be used by notification bot
+
+    This is called by XML RPC code.
+
+    @return: a dict (indexed by language) of dicts of translated strings (indexed by original ones)
+    """
+    translations = {}
+    po_dir = os.path.join('i18n', 'jabberbot')
+    encoding = 'utf-8'
+
+    for lang_file in glob.glob(po_filename(request, i18n_dir=po_dir, language='*', domain='JabberBot')):
+        language, domain, ext = os.path.basename(lang_file).split('.')
+        t = Translation(language, domain)
+        f = file(lang_file)
+        t.load_po(f)
+        f.close()
+        t.loadLanguage(request, trans_dir=po_dir)
+        translations[language] = {}
+
+        for key, text in t.raw.items():
+            translations[language][key] = text
+
+    return translations
 
 class Translation(object):
     """ This class represents a translation. Usually this is a translation
@@ -161,10 +185,10 @@ class Translation(object):
         text = text.strip()
         return text
 
-    def loadLanguage(self, request):
+    def loadLanguage(self, request, trans_dir="i18n"):
         request.clock.start('loadLanguage')
         cache = caching.CacheEntry(request, arena='i18n', key=self.language, scope='farm', use_pickle=True)
-        langfilename = po_filename(request, self.language, self.domain)
+        langfilename = po_filename(request, self.language, self.domain, i18n_dir=trans_dir)
         needsupdate = cache.needsUpdate(langfilename)
         if debug:
             request.log("i18n: langfilename %s needsupdate %d" % (langfilename, needsupdate))
