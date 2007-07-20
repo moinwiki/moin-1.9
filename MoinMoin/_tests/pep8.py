@@ -102,6 +102,8 @@ raise_comma_match = re.compile(r'raise\s+\w+\s*(,)').match
 equals_boolean_search = re.compile(r'([!=]=\s*(True|False))|((True|False)\s*[!=]=)').search
 equals_None_search = re.compile(r'([!=]=\s*None)|(None\s*[!=]=)').search
 
+not_one_ws_around_operators_match = re.compile(r'^[^\(\[]+[^\s](\+|\-|\*|/|%|\^|&|\||=|<|>|>>|<<|\+=|\-=|\*=|/=|%=|\^=|&=|\|=|==|<=|>=|>>=|<<=|!=|<>)[^\s][^\)\]]+$').match
+
 operators = """
 +  -  *  /  %  ^  &  |  =  <  >  >>  <<
 += -= *= /= %= ^= &= |= == <= >= >>= <<=
@@ -318,7 +320,7 @@ def whitespace_before_parameters(logical_line, tokens):
         prev_end = end
 
 
-def whitespace_around_operator(logical_line):
+def extra_whitespace_around_operator(logical_line):
     """
     Avoid extraneous whitespace in the following situations:
 
@@ -339,6 +341,15 @@ def whitespace_around_operator(logical_line):
         found = line.find(operator + '\t')
         if found > -1:
             return found, "E224 tab after operator"
+
+
+def whitespace_around_operator(logical_line):
+    """
+    Have exactly 1 space left and right of the operator.
+    """
+    match = not_one_ws_around_operators_match(logical_line)
+    if match and not 'lambda' in logical_line:
+        return match.start(1), "E225 operators shall be surrounded by a single space on each side %s" % logical_line
 
 
 def whitespace_around_comma(logical_line):
