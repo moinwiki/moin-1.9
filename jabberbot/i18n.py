@@ -22,8 +22,6 @@ def getText(original, lang="en"):
     if not translations:
         init_i18n()
 
-    # get the matching entry in the mapping table
-    translated = original
     try:
         return translations[lang][original]
     except KeyError:
