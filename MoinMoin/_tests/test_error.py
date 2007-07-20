@@ -43,3 +43,5 @@ class TestEncoding(unittest.TestCase):
         err = error.Error(test)
         self.assertEqual('%(message)s' % err, test)
 
+coverage_modules = ['MoinMoin.error']
+

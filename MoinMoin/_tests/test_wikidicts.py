@@ -114,4 +114,5 @@ class TestGroupDicts:
         assert 'RecentChanges' in members
         assert 'HelpContents' in members
 
+coverage_modules = ['MoinMoin.wikidicts']
 

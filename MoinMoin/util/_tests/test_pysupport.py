@@ -124,3 +124,4 @@ class Parser:
                 if err.errno != errno.ENOENT:
                     raise
 
+coverage_modules = ['MoinMoin.util.pysupport']

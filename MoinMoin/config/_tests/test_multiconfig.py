@@ -63,4 +63,5 @@ class TestPasswordChecker:
                     print "%r: %s" % (pw, pw_error)
                     assert result == (pw_error is None)
 
+coverage_modules = ['MoinMoin.config.multiconfig']
 
