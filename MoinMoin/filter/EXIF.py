@@ -738,8 +738,8 @@ class Ratio:
     def reduce(self):
         div = gcd(self.num, self.den)
         if div > 1:
-            self.num = self.num/div
-            self.den = self.den/div
+            self.num = self.num / div
+            self.den = self.den / div
 
 # for ease of dealing with tags
 class IFD_Tag:
@@ -845,7 +845,7 @@ class EXIF_header:
             typelen = FIELD_TYPES[field_type][0]
             count = self.s2n(entry+4, 4)
             offset = entry+8
-            if count*typelen > 4:
+            if count * typelen > 4:
                 # offset is not the value; it's a pointer to the value
                 # if relative we set things up so s2n will seek to the right
                 # place when it adds self.offset.  Note that this 'relative'
@@ -879,7 +879,7 @@ class EXIF_header:
                     else:
                         value = self.s2n(offset, typelen, signed)
                     values.append(value)
-                    offset = offset+typelen
+                    offset = offset + typelen
             # now "values" is either a string or an array
             if count == 1 and field_type != 2:
                 printable = str(values[0])
@@ -924,24 +924,24 @@ class EXIF_header:
 
         # fix up large value offset pointers into data area
         for i in range(entries):
-            entry = thumb_ifd+2+12*i
+            entry = thumb_ifd + 2 + 12 * i
             tag = self.s2n(entry, 2)
             field_type = self.s2n(entry+2, 2)
             typelen = FIELD_TYPES[field_type][0]
             count = self.s2n(entry+4, 4)
             oldoff = self.s2n(entry+8, 4)
             # start of the 4-byte pointer area in entry
-            ptr = i*12+18
+            ptr = i * 12 + 18
             # remember strip offsets location
             if tag == 0x0111:
                 strip_off = ptr
-                strip_len = count*typelen
+                strip_len = count * typelen
             # is it in the data area?
-            if count*typelen > 4:
+            if count * typelen > 4:
                 # update offset pointer (nasty "strings are immutable" crap)
                 # should be able to say "tiff[ptr:ptr+4]=newoff"
                 newoff = len(tiff)
-                tiff = tiff[:ptr]+self.n2s(newoff, 4)+tiff[ptr+4:]
+                tiff = tiff[:ptr] + self.n2s(newoff, 4) + tiff[ptr+4:]
                 # remember strip offsets location
                 if tag == 0x0111:
                     strip_off = newoff

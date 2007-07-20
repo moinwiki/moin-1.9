@@ -38,5 +38,5 @@ class PluginScript(MoinScript):
         # TODO handle stdout, stderr
 
         if result != "OK":
-            print >>sys.stderr, result
+            print >> sys.stderr, result
 
