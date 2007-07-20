@@ -1055,7 +1055,11 @@ Please review the page and save then. Do not save this page as it is!""")
             if notify:
                 # send notifications
                 from MoinMoin import events
-                e = events.PageChangedEvent(self.request, self, comment, trivial)
+
+                if trivial:
+                    e = events.TrivialPageChangedEvent(self.request, self, comment)
+                else:
+                    e = events.PageChangedEvent(self.request, self, comment)
                 results = events.send_event(e)
 
                 recipients = set()
