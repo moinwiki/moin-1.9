@@ -958,6 +958,8 @@ class XmlRpcBase:
         AttachFile._addLogEntry(self.request, 'ATTNEW', pagename, filename)
         return xmlrpclib.Boolean(1)
 
+    # XXX END WARNING XXX
+
 
     def xmlrpc_getBotTranslations(self):
         """ Return translations to be used by notification bot
@@ -966,8 +968,6 @@ class XmlRpcBase:
         """
         from MoinMoin.i18n import bot_translations
         return bot_translations(self.request)
-
-    # XXX END WARNING XXX
 
 
 class XmlRpc1(XmlRpcBase):
