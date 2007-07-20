@@ -12,7 +12,9 @@ from MoinMoin import user, util, wikiutil
 from MoinMoin.widget import html
 from MoinMoin.userprefs import UserPrefBase
 
+
 class Settings(UserPrefBase):
+
     def __init__(self, request):
         """ Initialize setuid settings form. """
         UserPrefBase.__init__(self, request)
@@ -33,11 +35,11 @@ class Settings(UserPrefBase):
         _ = self._
         form = self.request.form
 
-        if form.has_key('cancel'):
+        if 'cancel' in form:
             return
 
-        if (wikiutil.checkTicket(self.request, self.request.form['ticket'][0]) and
-            self.request.request_method == 'POST'):
+        if (wikiutil.checkTicket(self.request, self.request.form['ticket'][0])
+            and self.request.request_method == 'POST'):
             uid = form.get('selected_user', [''])[0]
             if not uid:
                 return _("No user selected")
@@ -54,7 +56,6 @@ class Settings(UserPrefBase):
             return  _("You can now change the settings of the selected user account; log out to get back to your account.")
         else:
             return None
-
 
     def _user_select(self):
         options = []
