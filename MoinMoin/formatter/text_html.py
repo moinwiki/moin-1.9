@@ -710,7 +710,7 @@ class Formatter(FormatterBase):
             except OSError:
                 pass
             else:
-                mapid = 'ImageMapOf'+drawing
+                mapid = 'ImageMapOf' + drawing
                 # replace MAPNAME
                 map = map.replace('%MAPNAME%', mapid)
                 # add alt and title tags to areas

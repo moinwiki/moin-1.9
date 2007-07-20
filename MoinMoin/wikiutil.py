@@ -386,7 +386,7 @@ def version2timestamp(v):
     """ Convert version number to UNIX timestamp (float).
         This must ONLY be used for display purposes.
     """
-    return v/1000000.0
+    return v / 1000000.0
 
 
 # This is the list of meta attribute names to be treated as integers.
@@ -1664,7 +1664,7 @@ def checkTicket(request, ticket):
         # invalid or empty ticket
         return False
     now = time.time()
-    if timestamp < now - 10*3600:
+    if timestamp < now - 10 * 3600:
         # we don't accept tickets older than 10h
         return False
     ourticket = createTicket(request, timestamp_str)
