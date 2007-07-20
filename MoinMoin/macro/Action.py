@@ -75,12 +75,11 @@ class ActionLink:
         text = self.args.get('text', action)
         text = _(text, formatted=False)
         text = wikiutil.escape(text, 1)
+        action, args = action.split('&', 1)
         if action in self.getValidActions():
-            # Escape user input
-            action = wikiutil.escape(action, 1)
             # Create link
             page = self.macro.formatter.page
-            link = page.link_to(self.request, text, querystr='action=%s' % action)
+            link = page.link_to(self.request, text, querystr='action=%s&%s' % (action, args))
             return link
         else:
             return text
