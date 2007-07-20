@@ -41,14 +41,24 @@ class PageEvent(Event):
 
 class PageChangedEvent(PageEvent):
 
-    description = _(u"""Page has been modified (edit, creation, deletion)""")
+    description = _(u"""Page has been modified""")
     req_superuser = False
 
-    def __init__(self, request, page, comment, trivial):
+    def __init__(self, request, page, comment):
         PageEvent.__init__(self, request)
         self.page = page
         self.comment = comment
-        self.trivial = trivial
+
+
+class TrivialPageChangedEvent(PageEvent):
+
+    description = _(u"Page has been modified in a trivial fashion")
+    req_superuser = False
+
+    def __init__(self, request, page, comment):
+        PageEvent.__init__(self, request)
+        self.page = page
+        self.comment = comment
 
 
 class PageRenamedEvent(PageEvent):
