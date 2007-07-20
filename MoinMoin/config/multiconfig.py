@@ -447,15 +447,18 @@ reStructuredText Quick Reference
         try:
             # in any case, do a very simple built-in check to avoid the worst passwords
             if len(password) < 6:
-                raise ValueError("Password too short!")
+                raise ValueError("Password too short.")
+            if len(set(password)) < 4:
+                raise ValueError("Password has not enough different characters.")
 
             username_lower = username.lower()
             password_lower = password.lower()
             if username in password or password in username or \
                username_lower in password_lower or password_lower in username_lower:
-                raise ValueError("Password too easy (containment)")
+                raise ValueError("Password too easy (containment).")
 
             keyboards = (ur"`1234567890-=qwertyuiop[]\asdfghjkl;'zxcvbnm,./", # US kbd
+                         ur"^1234567890ß´qwertzuiopü+asdfghjklöä#yxcvbnm,.-", # german kbd
                         ) # add more keyboards!
             for kbd in keyboards:
                 rev_kbd = kbd[::-1]
