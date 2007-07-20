@@ -76,3 +76,15 @@ class TestFormatter:
 
         return self.request.redirectedOutput(page.send_page, content_only=1)
 
+
+coverage_modules = ['MoinMoin.formatter',
+                    'MoinMoin.formatter.text_html',
+                    'MoinMoin.formatter.text_gedit',
+                    'MoinMoin.formatter.text_xml',
+                    #'MoinMoin.formatter.text_docbook',
+                    'MoinMoin.formatter.text_plain',
+                    #'MoinMoin.formatter.dom_xml',
+                    'MoinMoin.formatter.text_python',
+                    'MoinMoin.formatter.pagelinks',
+                   ]
+
