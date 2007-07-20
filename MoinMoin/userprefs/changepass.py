@@ -35,12 +35,13 @@ class Settings(UserPrefBase):
 
     def handle_form(self):
         _ = self._
-        form = self.request.form
+        request = self.request
+        form = request.form
 
         if form.has_key('cancel'):
             return
 
-        if self.request.request_method != 'POST':
+        if request.request_method != 'POST':
             return
 
         password = form.get('password', [''])[0]
@@ -50,15 +51,19 @@ class Settings(UserPrefBase):
         if password != password2:
             return _("Passwords don't match!")
 
-        # Encode password
-        if password and not password.startswith('{SHA}'):
-            try:
-                self.request.user.enc_password = user.encodePassword(password)
-                self.request.user.save()
-                return _("Your password has been changed.")
-            except UnicodeError, err:
-                # Should never happen
-                return "Can't encode password: %s" % str(err)
+        pw_checker = request.cfg.password_checker
+        if pw_checker:
+            pw_error = pw_checker(request.user.name, password)
+            if pw_error:
+                return _("Password not acceptable: %s") % pw_error
+
+        try:
+            self.request.user.enc_password = user.encodePassword(password)
+            self.request.user.save()
+            return _("Your password has been changed.")
+        except UnicodeError, err:
+            # Should never happen
+            return "Can't encode password: %s" % str(err)
 
 
     def create_form(self, create_only=False, recover_only=False):

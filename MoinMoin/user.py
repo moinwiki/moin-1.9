@@ -329,8 +329,8 @@ class User:
         self.datetime_fmt = ""
         self.quicklinks = self._cfg.quicklinks_default
         self.subscribed_pages = self._cfg.subscribed_pages_default
-        self.email_subscribed_events = self._cfg.subscribed_events_default
-        self.jabber_subscribed_events = []
+        self.email_subscribed_events = self._cfg.email_subscribed_events_default
+        self.jabber_subscribed_events = self._cfg.jabber_subscribed_events_default
         self.theme_name = self._cfg.theme_default
         self.editor_default = self._cfg.editor_default
         self.editor_ui = self._cfg.editor_ui
