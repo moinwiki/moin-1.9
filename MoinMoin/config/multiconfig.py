@@ -208,9 +208,6 @@ class CacheClass:
 class DefaultConfig:
     """ default config values """
 
-    # internal dict for plugin `modules' lists
-    _site_plugin_lists = {}
-
     # setting DesktopEdition = True gives all local users special powers - ONLY use for MMDE style usage!
     DesktopEdition = False
 
@@ -680,6 +677,10 @@ reStructuredText Quick Reference
                 self.chart_options = None
 
         # post process
+
+        # internal dict for plugin `modules' lists
+        self._site_plugin_lists = {}
+
         # we replace any string placeholders with config values
         # e.g u'%(page_front_page)s' % self
         self.navi_bar = [elem % self for elem in self.navi_bar]
