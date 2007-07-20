@@ -228,7 +228,14 @@ Current version: %(version)s""") % {
         """Returns language of the a user identified by the given JID"""
 
         server = xmlrpclib.ServerProxy(self.config.wiki_url + "?action=xmlrpc2")
-        language = server.getUserLanguageByJID(command.jid)
+        try:
+            language = server.getUserLanguageByJID(command.jid)
+        except xmlrpclib.Fault, fault:
+            self.log.error(str(fault))
+        except xmlrpclib.Error, err:
+            self.log.error(str(err))
+        except Exception, exc:
+            self.log.critical(str(exc))
 
         command.language = language or "en"
         self.commands_out.put_nowait(command)
