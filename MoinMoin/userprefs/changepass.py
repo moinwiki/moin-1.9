@@ -57,15 +57,13 @@ class Settings(UserPrefBase):
             if pw_error:
                 return _("Password not acceptable: %s") % pw_error
 
-        # Encode password
-        if password and not password.startswith('{SHA}'):
-            try:
-                self.request.user.enc_password = user.encodePassword(password)
-                self.request.user.save()
-                return _("Your password has been changed.")
-            except UnicodeError, err:
-                # Should never happen
-                return "Can't encode password: %s" % str(err)
+        try:
+            self.request.user.enc_password = user.encodePassword(password)
+            self.request.user.save()
+            return _("Your password has been changed.")
+        except UnicodeError, err:
+            # Should never happen
+            return "Can't encode password: %s" % str(err)
 
 
     def create_form(self, create_only=False, recover_only=False):
