@@ -93,7 +93,7 @@ class Settings(UserPrefBase):
         if not self._only:
             buttons = [html.INPUT(type="submit", name="select_user",
                                   value=_('Select User')),
-                       ' ',]
+                       ' ', ]
         else:
             buttons = []
         buttons.append(html.INPUT(type="submit", name="cancel",
