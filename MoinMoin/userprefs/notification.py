@@ -126,14 +126,15 @@ class Settings(UserPrefBase):
                         type='checkbox',
                         checked=checked,
                         name='subscribe:%s:%s' % (notiftype, evname))))
-            tr.append(html.TD().append(html.Raw(evdescr)))
+            tr.append(html.TD().append(html.Raw(self.request.getText(evdescr))))
 
         return table
 
     def create_form(self):
         """ Create the complete HTML form code. """
         _ = self._
-        self._form = self.make_form()
+        self._form = self.make_form(
+            _('Select the events you want to be notified about.'))
 
         self._form.append(html.INPUT(type="hidden", name="action", value="userprefs"))
         self._form.append(html.INPUT(type="hidden", name="handler", value="prefs"))
@@ -149,19 +150,17 @@ class Settings(UserPrefBase):
 
         self.make_row(_('Subscribed events'), [self._event_select()])
 
-        # subscribed pages
-        if self.cfg.mail_enabled:
-            # Get list of subscribe pages, DO NOT sort! it should
-            # stay in the order the user entered it in his input
-            # box.
-            notifylist = self.request.user.getSubscriptionList()
+        # Get list of subscribe pages, DO NOT sort! it should
+        # stay in the order the user entered it in his input
+        # box.
+        notifylist = self.request.user.getSubscriptionList()
 
-            self.make_row(
-                html.Raw(_('Subscribed wiki pages[[BR]](one regex per line)')),
-                [html.TEXTAREA(name="subscribed_pages", rows="6", cols="50").append(
-                    '\n'.join(notifylist)), ],
-                valign="top"
-            )
+        self.make_row(
+            html.Raw(_('Subscribed wiki pages[[BR]](one regex per line)')),
+            [html.TEXTAREA(name="subscribed_pages", rows="6", cols="50").append(
+                '\n'.join(notifylist)), ],
+            valign="top"
+        )
 
         # Add buttons
         self.make_row('', [
