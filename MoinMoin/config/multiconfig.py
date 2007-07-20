@@ -652,8 +652,8 @@ reStructuredText Quick Reference
 
     user_homewiki = 'Self' # interwiki name for where user homepages are located
 
-    unzip_single_file_size = 2.0 * 1000**2
-    unzip_attachments_space = 200.0 * 1000**2
+    unzip_single_file_size = 2.0 * 1000 ** 2
+    unzip_attachments_space = 200.0 * 1000 ** 2
     unzip_attachments_count = 101 # 1 zip file + 100 files contained in it
 
     xmlrpc_putpage_enabled = False # if False, putpage will write to a test page only
