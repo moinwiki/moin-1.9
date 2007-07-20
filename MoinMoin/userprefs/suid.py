@@ -38,24 +38,19 @@ class Settings(UserPrefBase):
 
         if (wikiutil.checkTicket(self.request, self.request.form['ticket'][0]) and
             self.request.request_method == 'POST'):
-            su_user = form.get('selected_user', [''])[0]
-            uid = user.getUserId(self.request, su_user)
+            uid = form.get('selected_user', [''])[0]
             if not uid:
                 return _("No user selected")
-            if (not self.request._setuid_real_user is None
-                and uid == self.request._setuid_real_user.id):
-                del self.request.session['setuid']
-                self.request.user = self.request._setuid_real_user
-                self.request._setuid_real_user = None
-            else:
-                theuser = user.User(self.request, uid, auth_method='setuid')
-                # set valid to True so superusers can even switch
-                # to disable accounts
-                theuser.valid = True
-                self.request.session['setuid'] = uid
-                self.request._setuid_real_user = self.request.user
-                # now continue as the other user
-                self.request.user = theuser
+            theuser = user.User(self.request, uid, auth_method='setuid')
+            if not theuser or not theuser.exists():
+                return _("No user selected")
+            # set valid to True so superusers can even switch
+            # to disable accounts
+            theuser.valid = True
+            self.request.session['setuid'] = uid
+            self.request._setuid_real_user = self.request.user
+            # now continue as the other user
+            self.request.user = theuser
             return  _("You can now change the settings of the selected user account; log out to get back to your account.")
         else:
             return None
@@ -71,12 +66,19 @@ class Settings(UserPrefBase):
             realuid = self.request.user.id
         for uid in users:
             if uid != realuid:
-                name = user.User(self.request, id=uid).name # + '/' + uid # for debugging
-                options.append((name, name))
-        options.sort()
+                name = user.User(self.request, id=uid).name
+                options.append((uid, name))
+        options.sort(lambda x, y: cmp(x[1].lower(), y[1].lower()))
 
         size = min(5, len(options))
-        current_user = self.request.user.name
+        current_user = self.request.user.id
+
+        if not options:
+            _ = self._
+            self._only = True
+            return _("You are the only user.")
+
+        self._only = False
         return util.web.makeSelection('selected_user', options, current_user, size=size)
 
     def create_form(self):
@@ -88,9 +90,13 @@ class Settings(UserPrefBase):
         ticket = wikiutil.createTicket(self.request)
         self.make_row('Select User', [self._user_select()], valign="top")
         form.append(html.INPUT(type="hidden", name="ticket", value="%s" % ticket))
-        self.make_row('', [html.INPUT(type="submit", name="select_user",
-                                      value=_('Select User')),
-                           ' ',
-                           html.INPUT(type="submit", name="cancel",
-                                      value=_('Cancel'))])
+        if not self._only:
+            buttons = [html.INPUT(type="submit", name="select_user",
+                                  value=_('Select User')),
+                       ' ',]
+        else:
+            buttons = []
+        buttons.append(html.INPUT(type="submit", name="cancel",
+                                  value=_('Cancel')))
+        self.make_row('', buttons)
         return unicode(form)
