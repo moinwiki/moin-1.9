@@ -10,6 +10,7 @@ import logging, os, sys
 from Queue import Queue
 
 from jabberbot.config import BotConfig
+from jabberbot.i18n import init_i18n
 from jabberbot.xmppbot import XMPPBot
 from jabberbot.xmlrpcbot import XMLRPCServer, XMLRPCClient
 
@@ -28,6 +29,8 @@ def main():
     log = logging.getLogger("log")
     log.setLevel(logging.DEBUG)
     log.addHandler(logging.StreamHandler())
+
+    init_i18n(BotConfig)
 
     # TODO: actually accept options from the help string
     commands_from_xmpp = Queue()
