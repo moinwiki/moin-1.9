@@ -43,6 +43,12 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
     password = form.get('password', [''])[0]
     password2 = form.get('password2', [''])[0]
 
+    pw_checker = request.cfg.password_checker
+    if pw_checker:
+        pw_error = pw_checker(theuser.name, password)
+        if pw_error:
+            return _("Password not acceptable: %s") % pw_error
+
     # Check if password is given and matches with password repeat
     if password != password2:
         return _("Passwords don't match!")
