@@ -396,7 +396,7 @@ class SearchResults:
             write(f.definition_list(1))
 
             if paging:
-                hitsTo = hitsFrom+request.cfg.search_results_per_page
+                hitsTo = hitsFrom + request.cfg.search_results_per_page
                 displayHits = self.hits[hitsFrom:hitsTo]
             else:
                 displayHits = self.hits
@@ -697,7 +697,7 @@ class SearchResults:
             ]) for i in page_range])
 
         # next page available
-        if cur_page < pages-1:
+        if cur_page < pages - 1:
             textlinks.append(''.join([
                 f.url(1, href=page_url(cur_page+1)),
                 f.text(_('Next')),
