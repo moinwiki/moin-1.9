@@ -12,18 +12,22 @@ import py
 class TestPasswordChecker:
     username = u"SomeUser"
     tests_builtin = [
-        (u'', False),
-        (u'1966', False),
-        (u'asdfghjk', False),
-        (u'mnbvcx', False),
-        (u'12345678', False),
-        (username, False),
-        (u'Moin-2007', True),
+        (u'', False), # empty
+        (u'1966', False), # too short
+        (u'asdfghjk', False), # keyboard sequence
+        (u'QwertZuiop', False), # german keyboard sequence, with uppercase
+        (u'mnbvcx', False), # reverse keyboard sequence
+        (u'12345678', False), # keyboard sequence, too easy
+        (u'aaaaaaaa', False), # not enough different chars
+        (u'BBBaaaddd', False), # not enough different chars
+        (username, False), # username == password
+        (username[1:-1], False), # password in username
+        (u"XXX%sXXX" % username, False), # username in password
+        (u'Moin-2007', True), # this should be OK
     ]
     tests_crack = tests_builtin + [
-        (u'aaaaaaaa', False),
-        (u'secret', False),
-        (u'password', False),
+        (u'secret', False), # word from dictionary
+        (u'password', False), # word from dictionary
     ]
     def testBuiltinPasswordChecker(self):
         pw_checker = self.request.cfg.password_checker
