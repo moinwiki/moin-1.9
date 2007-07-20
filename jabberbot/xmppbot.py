@@ -204,6 +204,8 @@ class XMPPBot(Client, Thread):
         @param ignore_dnd: if command results in user interaction, should DnD be ignored?
 
         """
+        _ = self.getText(command.jid)
+        
         # Handle normal notifications
         if isinstance(command, cmd.NotificationCommand):
             for recipient in command.jids:
@@ -233,7 +235,6 @@ class XMPPBot(Client, Thread):
             self.remove_subscription(jid)
 
         elif isinstance(command, cmd.GetPage) or isinstance(command, cmd.GetPageHTML):
-            _ = self.getText(command.jid)
             msg = _(u"""Here's the page "%(pagename)s" that you've requested:\n\n%(data)s""")
 
             self.send_message(command.jid, msg % {
@@ -242,14 +243,12 @@ class XMPPBot(Client, Thread):
             })
 
         elif isinstance(command, cmd.GetPageList):
-            _ = self.getText(command.jid)
             msg = _("uThat's the list of pages accesible to you:\n\n%s")
             pagelist = u"\n".join(command.data)
 
             self.send_message(command.jid, msg % (pagelist, ))
 
         elif isinstance(command, cmd.GetPageInfo):
-            _ = self.getText(command.jid)
             msg = _("""Following detailed information on page "%(pagename)s" \
 is available::\n\n%(data)s""")
 
