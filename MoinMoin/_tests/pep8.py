@@ -99,6 +99,8 @@ default_exclude = '.svn,CVS,*.pyc,*.pyo'
 
 indent_match = re.compile(r'([ \t]*)').match
 raise_comma_match = re.compile(r'raise\s+\w+\s*(,)').match
+equals_boolean_search = re.compile(r'([!=]=\s*(True|False))|((True|False)\s*[!=]=)').search
+equals_None_search = re.compile(r'([!=]=\s*None)|(None\s*[!=]=)').search
 
 operators = """
 +  -  *  /  %  ^  &  |  =  <  >  >>  <<
@@ -413,6 +415,34 @@ def python_3000_raise_comma(logical_line):
     match = raise_comma_match(logical_line)
     if match:
         return match.start(1), "W602 deprecated form of raising exception"
+
+
+def dumb_equals_boolean(logical_line):
+    """
+    Using "if x == True:" or "if x == False:" is wrong in any case:
+
+    First if you already have a boolean, you don't need to compare it to
+    another boolean. Just use "if x:" or "if not x:".
+
+    Second, even if you have some sort of "tristate logic", not only using
+    True/False, but other values, then you want to use "if x is True:" or
+    "if x is False:" because there is exactly one True and one False object.
+    """
+    match = equals_boolean_search(logical_line)
+    if match:
+        return match.start(1), "E798 don't use 'x == <boolean>', but just 'x' or 'not x' or 'x is <boolean>'"
+
+
+def dumb_equals_None(logical_line):
+    """
+    Using "if x == None:" is wrong in any case:
+
+    You either want to use "if x is None:" (there is only 1 None object) or -
+    in some simple cases - just "if not x:".
+    """
+    match = equals_None_search(logical_line)
+    if match:
+        return match.start(1), "E799 don't use 'x == None', but just 'x is None' or 'not x'"
 
 
 ##############################################################################
