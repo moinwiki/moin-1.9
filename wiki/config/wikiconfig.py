@@ -95,6 +95,11 @@ class Config(DefaultConfig):
     # All acl_rights_xxx options must use unicode [Unicode]
     #acl_rights_before = u"YourName:read,write,delete,revert,admin"
 
+    # The default (ENABLED) password_checker will keep users from choosing too
+    # short or too easy passwords. If you don't like this and your site has
+    # rather low security requirements, feel free to DISABLE the checker by:
+    #password_checker = None # None means "don't do any password strength checks"
+
     # Link spam protection for public wikis (Uncomment to enable)
     # Needs a reliable internet connection.
     #from MoinMoin.security.antispam import SecurityPolicy

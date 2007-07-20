@@ -8,10 +8,9 @@
 """
 import re, time
 
-from MoinMoin.support import copy
-
 from MoinMoin import caching, wikiutil, Page, logfile
 from MoinMoin.logfile.editlog import EditLog
+
 
 # Version of the internal data structure which is pickled.
 # Please increment if you have changed the structure.

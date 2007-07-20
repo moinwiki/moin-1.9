@@ -9,7 +9,6 @@
 
 import os, re, time, sys, cgi, StringIO
 import logging
-import copy
 import Cookie
 
 try:
@@ -300,15 +299,15 @@ class RequestBase(object):
                         t = int(t)
                         maxnum, dt = limits.get(action, default_limit)
                         if t >= now - dt:
-                            events = surgedict.setdefault(id, copy.copy({}))
-                            timestamps = events.setdefault(action, copy.copy([]))
+                            events = surgedict.setdefault(id, {})
+                            timestamps = events.setdefault(action, [])
                             timestamps.append((t, surge_indicator))
                     except StandardError:
                         pass
 
             maxnum, dt = limits.get(current_action, default_limit)
-            events = surgedict.setdefault(current_id, copy.copy({}))
-            timestamps = events.setdefault(current_action, copy.copy([]))
+            events = surgedict.setdefault(current_id, {})
+            timestamps = events.setdefault(current_action, [])
             surge_detected = len(timestamps) > maxnum
 
             surge_indicator = surge_detected and "!" or ""
@@ -320,8 +319,8 @@ class RequestBase(object):
             if current_action != 'AttachFile': # don't add AttachFile accesses to all or picture galleries will trigger SP
                 current_action = 'all' # put a total limit on user's requests
                 maxnum, dt = limits.get(current_action, default_limit)
-                events = surgedict.setdefault(current_id, copy.copy({}))
-                timestamps = events.setdefault(current_action, copy.copy([]))
+                events = surgedict.setdefault(current_id, {})
+                timestamps = events.setdefault(current_action, [])
 
                 if kick_him: # ban this guy, NOW
                     timestamps.extend([(now + self.cfg.surge_lockout_time, "!")] * (2*maxnum))

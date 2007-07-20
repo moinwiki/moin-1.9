@@ -447,15 +447,18 @@ reStructuredText Quick Reference
         try:
             # in any case, do a very simple built-in check to avoid the worst passwords
             if len(password) < 6:
-                raise ValueError("Password too short!")
+                raise ValueError("Password too short.")
+            if len(set(password)) < 4:
+                raise ValueError("Password has not enough different characters.")
 
             username_lower = username.lower()
             password_lower = password.lower()
             if username in password or password in username or \
                username_lower in password_lower or password_lower in username_lower:
-                raise ValueError("Password too easy (containment)")
+                raise ValueError("Password too easy (containment).")
 
             keyboards = (ur"`1234567890-=qwertyuiop[]\asdfghjkl;'zxcvbnm,./", # US kbd
+                         ur"^1234567890ß´qwertzuiopü+asdfghjklöä#yxcvbnm,.-", # german kbd
                         ) # add more keyboards!
             for kbd in keyboards:
                 rev_kbd = kbd[::-1]
@@ -649,8 +652,8 @@ reStructuredText Quick Reference
 
     user_homewiki = 'Self' # interwiki name for where user homepages are located
 
-    unzip_single_file_size = 2.0 * 1000**2
-    unzip_attachments_space = 200.0 * 1000**2
+    unzip_single_file_size = 2.0 * 1000 ** 2
+    unzip_attachments_space = 200.0 * 1000 ** 2
     unzip_attachments_count = 101 # 1 zip file + 100 files contained in it
 
     xmlrpc_putpage_enabled = False # if False, putpage will write to a test page only
