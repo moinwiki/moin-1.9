@@ -204,8 +204,6 @@ class XMPPBot(Client, Thread):
         @param ignore_dnd: if command results in user interaction, should DnD be ignored?
 
         """
-        _ = self.getText(command.jid)
-        
         # Handle normal notifications
         if isinstance(command, cmd.NotificationCommand):
             for recipient in command.jids:
@@ -224,6 +222,8 @@ class XMPPBot(Client, Thread):
                     pass
 
                 self.send_message(jid, text)
+
+        _ = self.getText(command.jid)
 
         # Handle subscribtion management commands
         if isinstance(command, cmd.AddJIDToRosterCommand):
