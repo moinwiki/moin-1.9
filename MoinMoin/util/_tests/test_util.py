@@ -51,3 +51,4 @@ class TestUtil:
         expected = length
         assert result == expected, ('Expected length "%(expected)s" but got "%(result)s"') % locals()
 
+coverage_modules = ['MoinMoin.util']

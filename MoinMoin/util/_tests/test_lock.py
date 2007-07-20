@@ -128,3 +128,5 @@ class TestExclusiveLock(unittest.TestCase):
         time.sleep(delay)
         lock.release()
 
+coverage_modules = ['MoinMoin.util.lock']
+

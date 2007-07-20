@@ -197,3 +197,7 @@ def testSave(request):
     print "PageEditor can't save a page if Abort is returned from PreSave event handlers"
     page = Page(request, pagename)
     assert page.body != testtext
+
+
+coverage_modules = ['MoinMoin.PageEditor']
+

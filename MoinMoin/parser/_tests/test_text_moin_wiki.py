@@ -609,3 +609,7 @@ class TestLinkingMarkup(ParserTestCase):
             html = self.parse(self.text % test)
             result = self.needle.search(html).group(1)
             assert result == expected
+
+
+coverage_modules = ['MoinMoin.parser.text_moin_wiki']
+

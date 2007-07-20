@@ -275,3 +275,5 @@ class TestAcl(unittest.TestCase):
                 import shutil
                 shutil.rmtree(path, True)
 
+coverage_modules = ['MoinMoin.security']
+

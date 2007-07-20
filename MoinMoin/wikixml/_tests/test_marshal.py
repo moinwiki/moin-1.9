@@ -54,3 +54,6 @@ class TestMarshal(unittest.TestCase):
         self.assertEqual(objXML, expected,
             'Expected "%(expected)s" but got "%(objXML)s"' % locals())
 
+
+coverage_modules = ['MoinMoin.wikixml.marshal']
+

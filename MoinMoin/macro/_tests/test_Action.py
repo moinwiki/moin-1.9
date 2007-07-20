@@ -61,3 +61,6 @@ class TestAction:
 
         assert result == expected
 
+
+coverage_modules = ['MoinMoin.macro.Action']
+

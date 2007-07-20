@@ -34,3 +34,6 @@ class TestQuotingBug(unittest.TestCase):
         for case in tests:
             self.assertEqual(self.parser.isQuoted(case), False)
 
+
+coverage_modules = ['MoinMoin.search']
+
