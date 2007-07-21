@@ -1349,9 +1349,6 @@ class ParameterParser:
                                         self.optional)
 
     def parse_parameters(self, params):
-        """
-        (4, 2)
-        """
         #Default list to "None"s
         parameter_list = [None] * len(self.param_list)
         parameter_dict = dict([(key, None) for key in self.param_dict])
@@ -1396,6 +1393,7 @@ class ParameterParser:
                     raise ValueError("parameter '%s' specified twice" % name)
                 else:
                     check_list[nr] = 1
+                value = self._check_type(value, type, self.param_list[nr])
                 parameter_dict[name] = value
                 parameter_list[nr] = value
                 named = True
@@ -1405,7 +1403,7 @@ class ParameterParser:
                 nr = i
                 if nr not in self.param_dict.values():
                     fixed_count = nr + 1
-                parameter_list[nr] = value
+                parameter_list[nr] = self._check_type(value, type, self.param_list[nr])
 
             # Let's populate and map our dictionary to what's been found
             for name in self.param_dict:
@@ -1419,8 +1417,7 @@ class ParameterParser:
 
         return fixed_count, parameter_dict
 
-""" never used:
-    def _check_type(value, type, format):
+    def _check_type(self, value, type, format):
         if type == 'n' and 's' in format: # n as s
             return value
 
@@ -1431,36 +1428,21 @@ class ParameterParser:
             if 'f' in format:
                 return float(value) # i -> f
             elif 'b' in format:
-                return value # i -> b
-        elif type == 'f':
-            if 'b' in format:
-                return value  # f -> b
+                return value != 0 # i -> b
         elif type == 's':
             if 'b' in format:
-                return value.lower() != 'false' # s-> b
+                if value.lower() == 'false':
+                    return False # s-> b
+                elif value.lower() == 'true':
+                    return True # s-> b
+                else:
+                    raise ValueError('%r does not match format %r' % (value, format))
 
         if 's' in format: # * -> s
             return str(value)
-        else:
-            pass # XXX error
 
-def main():
-    pattern = "%i%sf%s%ifs%(a)s|%(b)s"
-    param = ' 4,"DI\'NG", b=retry, a="DING"'
+        raise ValueError('%r does not match format %r' % (value, format))
 
-    #p_list, p_dict = parse_parameters(param)
-
-    print 'Pattern :', pattern
-    print 'Param :', param
-
-    P = ParameterParser(pattern)
-    print P
-    print P.parse_parameters(param)
-
-
-if __name__=="__main__":
-    main()
-"""
 
 #############################################################################
 ### Misc
