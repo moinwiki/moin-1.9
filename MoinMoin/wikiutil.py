@@ -3,6 +3,8 @@
     MoinMoin - Wiki Utility Functions
 
     @copyright: 2000-2004 Juergen Hermann <jh@web.de>,
+                2004 by Florian Festi,
+                2006 by Mikko Virkkil,
                 2005-2007 MoinMoin:ThomasWaldmann,
                 2007 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
@@ -1303,10 +1305,6 @@ class ParameterParser:
             ("John Smith", male=True)
         this will result in the following dict:
             {"name": "John Smith", "age": None, "male": True}
-
-        @copyright: 2004 by Florian Festi,
-                    2006 by Mikko Virkkilä
-        @license: GNU GPL, see COPYING for details.
     """
 
     def __init__(self, pattern):
@@ -1356,22 +1354,18 @@ class ParameterParser:
         """
         #Default list to "None"s
         parameter_list = [None] * len(self.param_list)
-        parameter_dict = {}
+        parameter_dict = dict([(key, None) for key in self.param_dict])
         check_list = [0] * len(self.param_list)
 
         i = 0
         start = 0
         named = False
 
-        if not params:
-            params = '""'
-
         while start < len(params):
             match = re.match(self.param_re, params[start:])
             if not match:
-                raise ValueError, "Misformatted value"
+                raise ValueError("malformed parameters")
             start += match.end()
-            value = None
             if match.group("int"):
                 value = int(match.group("int"))
                 type = 'i'
@@ -1388,25 +1382,24 @@ class ParameterParser:
                 value = match.group("name_param")
                 type = 'n'
             else:
-                value = None
+                raise ValueError("Parameter parser code does not fit param_re regex")
 
             parameter_list.append(value)
-            if match.group("name"):
-                if match.group("name") not in self.param_dict:
+            name = match.group("name")
+            if name:
+                if name not in self.param_dict:
                     # TODO we should think on inheritance of parameters
-                    raise ValueError, "Unknown parameter name '%s'" % match.group("name")
-                nr = self.param_dict[match.group("name")]
+                    raise ValueError("unknown parameter name '%s'" % name)
+                nr = self.param_dict[name]
                 if check_list[nr]:
-                    #raise ValueError, "Parameter specified twice"
-                    #TODO: Something saner that raising an exception. This is pretty good, since it ignores it.
-                    pass
+                    raise ValueError("parameter '%s' specified twice" % name)
                 else:
                     check_list[nr] = 1
-                parameter_dict[match.group("name")] = value
+                parameter_dict[name] = value
                 parameter_list[nr] = value
                 named = True
             elif named:
-                raise ValueError, "Only named parameters allowed"
+                raise ValueError("only named parameters allowed after first named parameter")
             else:
                 nr = i
                 parameter_list[nr] = value

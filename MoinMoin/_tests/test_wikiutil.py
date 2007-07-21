@@ -162,39 +162,55 @@ class TestTemplatePage(unittest.TestCase):
                 '"%(name)s" is NOT a valid template name' % locals())
 
 
-class TestParmeterParser(unittest.TestCase):
+class TestParmeterParser:
 
-    def testNoWantedArguments(self):
-        args = ''
-        argParser = wikiutil.ParameterParser('')
-        self.arg_list, self.arg_dict = argParser.parse_parameters(args)
-        result = len(self.arg_dict)
-        expected = 0
-        self.assert_(result == expected,
-                     'Expected "%(expected)s" but got "%(result)s"' % locals())
+    def testParameterParser(self):
+        tests = [
+            # trivial
+            ('', '', {}),
 
-    def testWantedArguments(self):
-        test_args = ('',
-                     'width=100',
-                     'width=100, height=200', )
+            # boolean
+            ("%(t)b%(f)b", '', {'t': None, 'f': None}),
+            ("%(t)b%(f)b", 't=1', {'t': True, 'f': None}),
+            ("%(t)b%(f)b", 'f=False', {'t': None, 'f': False}),
+            ("%(t)b%(f)b", 't=True, f=0', {'t': True, 'f': False}),
 
-        argParser = wikiutil.ParameterParser("%(width)s%(height)s")
-        for args in test_args:
-            self.arg_list, self.arg_dict = argParser.parse_parameters(args)
-            result = len(self.arg_dict)
-            expected = 2
-            self.assert_(result == expected,
-                         'Expected "%(expected)s" but got "%(result)s"' % locals())
+            # integer
+            ("%(width)i%(height)i", '', {'width': None, 'height': None}),
+            ("%(width)i%(height)i", 'width=100', {'width': 100, 'height': None}),
+            ("%(width)i%(height)i", 'height=200', {'width': None, 'height': 200}),
+            ("%(width)i%(height)i", 'width=100, height=200', {'width': 100, 'height': 200}),
+
+            # float
+            ("%(width)f%(height)f", '', {'width': None, 'height': None}),
+            ("%(width)f%(height)f", 'width=100.0', {'width': 100.0, 'height': None}),
+            ("%(width)f%(height)f", 'height=2.0E2', {'width': None, 'height': 200.0}),
+            ("%(width)f%(height)f", 'width=1000.0E-1, height=200.0', {'width': 100.0, 'height': 200.0}),
+
+            # string
+            ("%(width)s%(height)s", '', {'width': None, 'height': None}),
+            ("%(width)s%(height)s", 'width="really wide"', {'width': 'really wide', 'height': None}),
+            ("%(width)s%(height)s", 'height="not too high"', {'width': None, 'height': 'not too high'}),
+            ("%(width)s%(height)s", 'width="really wide", height="not too high"', {'width': 'really wide', 'height': 'not too high'}),
+            # XXX for the next 2 tests: unclear: wanted str, given int, shall that give int?
+            ("%(width)s%(height)s", 'width=100', {'width': 100, 'height': None}),
+            ("%(width)s%(height)s", 'width=100, height=200', {'width': 100, 'height': 200}),
+        ]
+        for format, args, result in tests:
+            argParser = wikiutil.ParameterParser(format)
+            arg_list, arg_dict = argParser.parse_parameters(args)
+            assert arg_dict == result
 
     def testTooMuchWantedArguments(self):
-        py.test.skip("fails because of unfinished wikiutil.ParameterParser code crashing")
         args = 'width=100, height=200, alt=Example'
         argParser = wikiutil.ParameterParser("%(width)s%(height)s")
-        self.arg_list, self.arg_dict = argParser.parse_parameters(args)
-        result = len(self.arg_dict)
-        expected = 2
-        self.assert_(result == expected,
-                     'Expected "%(expected)s" but got "%(result)s"' % locals())
+        py.test.raises(ValueError, argParser.parse_parameters, args)
+
+    def testMalformedArguments(self):
+        args = '='
+        argParser = wikiutil.ParameterParser("%(width)s%(height)s")
+        py.test.raises(ValueError, argParser.parse_parameters, args)
+
 
 coverage_modules = ['MoinMoin.wikiutil']
 
