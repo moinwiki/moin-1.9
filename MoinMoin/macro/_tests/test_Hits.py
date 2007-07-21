@@ -105,3 +105,5 @@ class TestHits:
         assert result == expected
 
 
+coverage_modules = ['MoinMoin.macro.Hits']
+

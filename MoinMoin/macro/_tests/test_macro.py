@@ -32,3 +32,6 @@ class TestMacro(unittest.TestCase):
         m = macro.Macro(p)
         return m
 
+
+coverage_modules = ['MoinMoin.macro']
+

@@ -25,3 +25,6 @@ def test_fault_serialization(request):
     assert type(result[0]) == dict
     assert result[0].has_key("faultCode") and result[0].has_key("faultString")
 
+
+coverage_modules = ['MoinMoin.xmlrpc']
+

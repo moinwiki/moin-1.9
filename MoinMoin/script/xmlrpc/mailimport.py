@@ -35,5 +35,5 @@ class PluginScript(MoinScript):
         result = s.ProcessMail(secret, xmlrpclib.Binary(input.read()))
 
         if result != "OK":
-            print >>sys.stderr, result
+            print >> sys.stderr, result
 

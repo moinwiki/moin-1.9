@@ -155,9 +155,9 @@ class PluginScript(script.MoinScript):
                     pagehtml = request.redirectedOutput(page.send_page, count_hit=0, content_only=1)
                 except:
                     errcnt = errcnt + 1
-                    print >>sys.stderr, "*** Caught exception while writing page!"
-                    print >>errlog, "~" * 78
-                    print >>errlog, file # page filename
+                    print >> sys.stderr, "*** Caught exception while writing page!"
+                    print >> errlog, "~" * 78
+                    print >> errlog, file # page filename
                     import traceback
                     traceback.print_exc(None, errlog)
             finally:
@@ -186,5 +186,5 @@ class PluginScript(script.MoinScript):
 
         errlog.close()
         if errcnt:
-            print >>sys.stderr, "*** %d error(s) occurred, see '%s'!" % (errcnt, errfile)
+            print >> sys.stderr, "*** %d error(s) occurred, see '%s'!" % (errcnt, errfile)
 

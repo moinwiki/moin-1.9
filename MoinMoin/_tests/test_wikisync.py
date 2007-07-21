@@ -37,3 +37,5 @@ class TestUnsafeSync(TestCase):
         tags = TagStore(self.page)
         tags.clear()
 
+coverage_modules = ['MoinMoin.wikisync']
+

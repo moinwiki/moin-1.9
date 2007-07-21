@@ -66,3 +66,5 @@ BBB 003
         assert result == expected, ('Expected "%(expected)s" but got "%(result)s"') % locals()
 
 
+coverage_modules = ['MoinMoin.util.diff_text']
+
