@@ -1359,6 +1359,7 @@ class ParameterParser:
 
         i = 0
         start = 0
+        fixed_count = 0
         named = False
 
         while start < len(params):
@@ -1384,7 +1385,7 @@ class ParameterParser:
             else:
                 raise ValueError("Parameter parser code does not fit param_re regex")
 
-            parameter_list.append(value)
+            #parameter_list.append(value)
             name = match.group("name")
             if name:
                 if name not in self.param_dict:
@@ -1402,6 +1403,8 @@ class ParameterParser:
                 raise ValueError("only named parameters allowed after first named parameter")
             else:
                 nr = i
+                if nr not in self.param_dict.values():
+                    fixed_count = nr + 1
                 parameter_list[nr] = value
 
             # Let's populate and map our dictionary to what's been found
@@ -1411,7 +1414,10 @@ class ParameterParser:
 
             i += 1
 
-        return parameter_list, parameter_dict
+        for i in range(fixed_count):
+            parameter_dict[i] = parameter_list[i]
+
+        return fixed_count, parameter_dict
 
 """ never used:
     def _check_type(value, type, format):
