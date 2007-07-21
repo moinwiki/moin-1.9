@@ -199,9 +199,9 @@ class TestParmeterParser:
             ("%(width)s%(height)s", 'width="really wide"', 0, {'width': 'really wide', 'height': None}),
             ("%(width)s%(height)s", 'height="not too high"', 0, {'width': None, 'height': 'not too high'}),
             ("%(width)s%(height)s", 'width="really wide", height="not too high"', 0, {'width': 'really wide', 'height': 'not too high'}),
-            # XXX for the next 2 tests: unclear: wanted str, given int, shall that give int?
-            ("%(width)s%(height)s", 'width=100', 0, {'width': 100, 'height': None}),
-            ("%(width)s%(height)s", 'width=100, height=200', 0, {'width': 100, 'height': 200}),
+            # conversion from given type to expected type
+            ("%(width)s%(height)s", 'width=100', 0, {'width': '100', 'height': None}),
+            ("%(width)s%(height)s", 'width=100, height=200', 0, {'width': '100', 'height': '200'}),
 
             # complex test
             ("%i%sf%s%ifs%(a)s|%(b)s", ' 4,"DI\'NG", b=retry, a="DING"', 2, {0: 4, 1: "DI'NG", 'a': 'DING', 'b': 'retry'}),
@@ -220,6 +220,16 @@ class TestParmeterParser:
     def testMalformedArguments(self):
         args = '='
         argParser = wikiutil.ParameterParser("%(width)s%(height)s")
+        py.test.raises(ValueError, argParser.parse_parameters, args)
+
+    def testWrongTypeFixedPosArgument(self):
+        args = '0.0'
+        argParser = wikiutil.ParameterParser("%b")
+        py.test.raises(ValueError, argParser.parse_parameters, args)
+
+    def testWrongTypeNamedArgument(self):
+        args = 'flag=0.0'
+        argParser = wikiutil.ParameterParser("%(flag)b")
         py.test.raises(ValueError, argParser.parse_parameters, args)
 
 
