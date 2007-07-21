@@ -222,7 +222,7 @@ class XMPPBot(Client, Thread):
                     pass
 
                 self.send_message(jid, text)
-                
+
             return
 
         _ = self.getText(command.jid)
@@ -312,8 +312,8 @@ is available::\n\n%(data)s""")
         search_type2 = _("Full-text search")
         search_label = _("Search type")
         search_label2 = _("Search text")
-        
-        
+
+
         title_search = forms.Option("t", search_type1)
         full_search = forms.Option("f", search_type2)
 
