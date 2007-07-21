@@ -229,7 +229,7 @@ Current version: %(version)s""") % {
 
         server = xmlrpclib.ServerProxy(self.config.wiki_url + "?action=xmlrpc2")
         language = "en"
-        
+
         try:
             language = server.getUserLanguageByJID(command.jid)
         except xmlrpclib.Fault, fault:
