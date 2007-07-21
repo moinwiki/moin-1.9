@@ -158,39 +158,59 @@ class TestParmeterParser:
     def testParameterParser(self):
         tests = [
             # trivial
-            ('', '', {}),
+            ('', '', 0, {}),
+
+            # fixed
+            ('%s%i%f%b', '"test",42,23.0,True', 4, {0: 'test', 1: 42, 2: 23.0, 3: True}),
+
+            # fixed and named
+            ('%s%(x)i%(y)i', '"test"', 1, {0: 'test', 'x': None, 'y': None}),
+            ('%s%(x)i%(y)i', '"test",1', 1, {0: 'test', 'x': 1, 'y': None}),
+            ('%s%(x)i%(y)i', '"test",1,2', 1, {0: 'test', 'x': 1, 'y': 2}),
+            ('%s%(x)i%(y)i', '"test",x=1', 1, {0: 'test', 'x': 1, 'y': None}),
+            ('%s%(x)i%(y)i', '"test",x=1,y=2', 1, {0: 'test', 'x': 1, 'y': 2}),
+            ('%s%(x)i%(y)i', '"test",y=2', 1, {0: 'test', 'x': None, 'y': 2}),
+
+            # test mixed acceptance
+            ("%ifs", '100', 1, {0: 100}),
+            ("%ifs", '100.0', 1, {0: 100.0}),
+            ("%ifs", '"100"', 1, {0: "100"}),
 
             # boolean
-            ("%(t)b%(f)b", '', {'t': None, 'f': None}),
-            ("%(t)b%(f)b", 't=1', {'t': True, 'f': None}),
-            ("%(t)b%(f)b", 'f=False', {'t': None, 'f': False}),
-            ("%(t)b%(f)b", 't=True, f=0', {'t': True, 'f': False}),
+            ("%(t)b%(f)b", '', 0, {'t': None, 'f': None}),
+            ("%(t)b%(f)b", 't=1', 0, {'t': True, 'f': None}),
+            ("%(t)b%(f)b", 'f=False', 0, {'t': None, 'f': False}),
+            ("%(t)b%(f)b", 't=True, f=0', 0, {'t': True, 'f': False}),
 
             # integer
-            ("%(width)i%(height)i", '', {'width': None, 'height': None}),
-            ("%(width)i%(height)i", 'width=100', {'width': 100, 'height': None}),
-            ("%(width)i%(height)i", 'height=200', {'width': None, 'height': 200}),
-            ("%(width)i%(height)i", 'width=100, height=200', {'width': 100, 'height': 200}),
+            ("%(width)i%(height)i", '', 0, {'width': None, 'height': None}),
+            ("%(width)i%(height)i", 'width=100', 0, {'width': 100, 'height': None}),
+            ("%(width)i%(height)i", 'height=200', 0, {'width': None, 'height': 200}),
+            ("%(width)i%(height)i", 'width=100, height=200', 0, {'width': 100, 'height': 200}),
 
             # float
-            ("%(width)f%(height)f", '', {'width': None, 'height': None}),
-            ("%(width)f%(height)f", 'width=100.0', {'width': 100.0, 'height': None}),
-            ("%(width)f%(height)f", 'height=2.0E2', {'width': None, 'height': 200.0}),
-            ("%(width)f%(height)f", 'width=1000.0E-1, height=200.0', {'width': 100.0, 'height': 200.0}),
+            ("%(width)f%(height)f", '', 0, {'width': None, 'height': None}),
+            ("%(width)f%(height)f", 'width=100.0', 0, {'width': 100.0, 'height': None}),
+            ("%(width)f%(height)f", 'height=2.0E2', 0, {'width': None, 'height': 200.0}),
+            ("%(width)f%(height)f", 'width=1000.0E-1, height=200.0', 0, {'width': 100.0, 'height': 200.0}),
 
             # string
-            ("%(width)s%(height)s", '', {'width': None, 'height': None}),
-            ("%(width)s%(height)s", 'width="really wide"', {'width': 'really wide', 'height': None}),
-            ("%(width)s%(height)s", 'height="not too high"', {'width': None, 'height': 'not too high'}),
-            ("%(width)s%(height)s", 'width="really wide", height="not too high"', {'width': 'really wide', 'height': 'not too high'}),
+            ("%(width)s%(height)s", '', 0, {'width': None, 'height': None}),
+            ("%(width)s%(height)s", 'width="really wide"', 0, {'width': 'really wide', 'height': None}),
+            ("%(width)s%(height)s", 'height="not too high"', 0, {'width': None, 'height': 'not too high'}),
+            ("%(width)s%(height)s", 'width="really wide", height="not too high"', 0, {'width': 'really wide', 'height': 'not too high'}),
             # XXX for the next 2 tests: unclear: wanted str, given int, shall that give int?
-            ("%(width)s%(height)s", 'width=100', {'width': 100, 'height': None}),
-            ("%(width)s%(height)s", 'width=100, height=200', {'width': 100, 'height': 200}),
-        ]
-        for format, args, result in tests:
+            ("%(width)s%(height)s", 'width=100', 0, {'width': 100, 'height': None}),
+            ("%(width)s%(height)s", 'width=100, height=200', 0, {'width': 100, 'height': 200}),
+
+            # complex test
+            ("%i%sf%s%ifs%(a)s|%(b)s", ' 4,"DI\'NG", b=retry, a="DING"', 2, {0: 4, 1: "DI'NG", 'a': 'DING', 'b': 'retry'}),
+
+            ]
+        for format, args, expected_fixed_count, expected_dict in tests:
             argParser = wikiutil.ParameterParser(format)
-            arg_list, arg_dict = argParser.parse_parameters(args)
-            assert arg_dict == result
+            fixed_count, arg_dict = argParser.parse_parameters(args)
+            assert (fixed_count, arg_dict) == (expected_fixed_count, expected_dict)
 
     def testTooMuchWantedArguments(self):
         args = 'width=100, height=200, alt=Example'

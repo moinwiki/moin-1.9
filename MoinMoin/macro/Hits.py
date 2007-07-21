@@ -27,7 +27,7 @@ class Hits:
         self.this_page = macro.formatter.page.page_name
         argParser = wikiutil.ParameterParser("%(all)s%(filter)s")
         try:
-            self.arg_list, self.arg_dict = argParser.parse_parameters(args)
+            self.fixed_count, self.arg_dict = argParser.parse_parameters(args)
             self.error = None
         except ValueError, err:
             self.error = str(err)
