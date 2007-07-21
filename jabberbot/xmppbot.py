@@ -222,6 +222,8 @@ class XMPPBot(Client, Thread):
                     pass
 
                 self.send_message(jid, text)
+                
+            return
 
         _ = self.getText(command.jid)
 
@@ -302,16 +304,22 @@ is available::\n\n%(data)s""")
     def send_search_form(self, jid):
         _ = self.getText(jid)
 
-        # This encode may look weird, but due to some pyxmpp oddness we have
-        # to provide an unicode string. Maybe this should be fixed upstream...
+        # These encode()s may look weird, but due to some pyxmpp oddness we have
+        # to provide an utf-8 string instead of unicode. Bug reported, patches submitted...
+        form_title = _("Wiki search").encode("utf-8")
         help_form = _("Submit this form to perform a wiki search").encode("utf-8")
+        search_type1 = _("Title search")
+        search_type2 = _("Full-text search")
+        search_label = _("Search type")
+        search_label2 = _("Search text")
+        
+        
+        title_search = forms.Option("t", search_type1)
+        full_search = forms.Option("f", search_type2)
 
-        title_search = forms.Option("t", _("Title search")) #.decode("utf-8"))
-        full_search = forms.Option("f", _("Full-text search"))#.decode("utf-8"))
-
-        form = forms.Form(xmlnode_or_type="form", title=_("Wiki search"), instructions=help_form)
-        form.add_field(name="search_type", options=[title_search, full_search], field_type="list-single", label=_("Search type"))
-        form.add_field(name="search", field_type="text-single", label=_("Search text"))
+        form = forms.Form(xmlnode_or_type="form", title=form_title, instructions=help_form)
+        form.add_field(name="search_type", options=[title_search, full_search], field_type="list-single", label=search_label)
+        form.add_field(name="search", field_type="text-single", label=search_label2)
 
         message = Message(to_jid=jid, body=_("Please specify the search criteria."), subject=_("Wiki search"))
         message.add_content(form)
