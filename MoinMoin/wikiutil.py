@@ -1308,7 +1308,7 @@ class ParameterParser:
     """
 
     def __init__(self, pattern):
-        #parameter_re = "([^\"',]*(\"[^\"]*\"|'[^']*')?[^\"',]*)[,)]"
+        # parameter_re = "([^\"',]*(\"[^\"]*\"|'[^']*')?[^\"',]*)[,)]"
         name = "(?P<%s>[a-zA-Z_][a-zA-Z0-9_]*)"
         int_re = r"(?P<int>-?\d+)"
         bool_re = r"(?P<bool>(([10])|([Tt]rue)|([Ff]alse)))"
@@ -1341,7 +1341,7 @@ class ParameterParser:
                 named = True
                 self.param_dict[match.group('name')[1:-1]] = i
             elif named:
-                raise ValueError, "Named parameter expected"
+                raise ValueError("Named parameter expected")
             i += 1
 
     def __str__(self):
@@ -1349,7 +1349,7 @@ class ParameterParser:
                                         self.optional)
 
     def parse_parameters(self, params):
-        #Default list to "None"s
+        # Default list/dict entries to None
         parameter_list = [None] * len(self.param_list)
         parameter_dict = dict([(key, None) for key in self.param_dict])
         check_list = [0] * len(self.param_list)
@@ -1365,24 +1365,23 @@ class ParameterParser:
                 raise ValueError("malformed parameters")
             start += match.end()
             if match.group("int"):
-                value = int(match.group("int"))
-                type = 'i'
+                pvalue = int(match.group("int"))
+                ptype = 'i'
             elif match.group("bool"):
-                value = (match.group("bool") == "1") or (match.group("bool") == "True") or (match.group("bool") == "true")
-                type = 'b'
+                pvalue = (match.group("bool") == "1") or (match.group("bool") == "True") or (match.group("bool") == "true")
+                ptype = 'b'
             elif match.group("float"):
-                value = float(match.group("float"))
-                type = 'f'
+                pvalue = float(match.group("float"))
+                ptype = 'f'
             elif match.group("string"):
-                value = match.group("string")[1:-1]
-                type = 's'
+                pvalue = match.group("string")[1:-1]
+                ptype = 's'
             elif match.group("name_param"):
-                value = match.group("name_param")
-                type = 'n'
+                pvalue = match.group("name_param")
+                ptype = 'n'
             else:
                 raise ValueError("Parameter parser code does not fit param_re regex")
 
-            #parameter_list.append(value)
             name = match.group("name")
             if name:
                 if name not in self.param_dict:
@@ -1393,9 +1392,9 @@ class ParameterParser:
                     raise ValueError("parameter '%s' specified twice" % name)
                 else:
                     check_list[nr] = 1
-                value = self._check_type(value, type, self.param_list[nr])
-                parameter_dict[name] = value
-                parameter_list[nr] = value
+                pvalue = self._check_type(pvalue, ptype, self.param_list[nr])
+                parameter_dict[name] = pvalue
+                parameter_list[nr] = pvalue
                 named = True
             elif named:
                 raise ValueError("only named parameters allowed after first named parameter")
@@ -1403,7 +1402,7 @@ class ParameterParser:
                 nr = i
                 if nr not in self.param_dict.values():
                     fixed_count = nr + 1
-                parameter_list[nr] = self._check_type(value, type, self.param_list[nr])
+                parameter_list[nr] = self._check_type(pvalue, ptype, self.param_list[nr])
 
             # Let's populate and map our dictionary to what's been found
             for name in self.param_dict:
@@ -1417,31 +1416,31 @@ class ParameterParser:
 
         return fixed_count, parameter_dict
 
-    def _check_type(self, value, type, format):
-        if type == 'n' and 's' in format: # n as s
-            return value
+    def _check_type(self, pvalue, ptype, format):
+        if ptype == 'n' and 's' in format: # n as s
+            return pvalue
 
-        if type in format:
-            return value # x -> x
+        if ptype in format:
+            return pvalue # x -> x
 
-        if type == 'i':
+        if ptype == 'i':
             if 'f' in format:
-                return float(value) # i -> f
+                return float(pvalue) # i -> f
             elif 'b' in format:
-                return value != 0 # i -> b
-        elif type == 's':
+                return pvalue != 0 # i -> b
+        elif ptype == 's':
             if 'b' in format:
-                if value.lower() == 'false':
+                if pvalue.lower() == 'false':
                     return False # s-> b
-                elif value.lower() == 'true':
+                elif pvalue.lower() == 'true':
                     return True # s-> b
                 else:
-                    raise ValueError('%r does not match format %r' % (value, format))
+                    raise ValueError('%r does not match format %r' % (pvalue, format))
 
         if 's' in format: # * -> s
-            return str(value)
+            return str(pvalue)
 
-        raise ValueError('%r does not match format %r' % (value, format))
+        raise ValueError('%r does not match format %r' % (pvalue, format))
 
 
 #############################################################################
