@@ -120,3 +120,5 @@ class TestHTTPDate(unittest.TestCase):
                              'wrong date string')
 
 
+coverage_modules = ['MoinMoin.request']
+

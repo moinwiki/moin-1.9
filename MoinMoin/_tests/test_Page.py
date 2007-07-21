@@ -61,3 +61,5 @@ class TestRootPage:
         assert u'' not in pagelist
 
 
+coverage_modules = ['MoinMoin.Page']
+

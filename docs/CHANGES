@@ -42,6 +42,9 @@ Version 1.7.current:
     * new authentication plugin system
     * new preferences plugin system, see MoinMoin/userprefs/__init__.py
     * new notification system with an optional jabber notification bot
+    * cfg.password_checker (default: use some simple builtin checks for too
+      easy passwords and, if available, python-crack).
+      Use password_checker = None to disable password checking.
 
   Bugfixes:
     * ...

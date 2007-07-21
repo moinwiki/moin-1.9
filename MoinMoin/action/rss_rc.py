@@ -200,7 +200,7 @@ def execute(pagename, request):
                 for idx in range(rl):
                     rev = revisions[idx]
                     if rev <= item.rev:
-                        if idx+1 < rl:
+                        if idx + 1 < rl:
                             lines = wikiutil.pagediff(request, item.pagename, revisions[idx+1], item.pagename, 0, ignorews=1)
                             if len(lines) > 20:
                                 lines = lines[:20] + ['...\n']

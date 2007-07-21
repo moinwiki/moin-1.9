@@ -1134,3 +1134,6 @@ class TestConvertBrokenBrowser(TestBase):
 """
         self.do(test, output)
 
+
+coverage_modules = ['MoinMoin.converter.text_html_text_moin_wiki']
+

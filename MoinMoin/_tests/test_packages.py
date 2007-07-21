@@ -78,3 +78,5 @@ class TestQuoting:
         for line in ([':foo', 'is\\', 'ja|', u't|ü', u'baAzß'], [], ['', '']):
             assert line == unpackLine(packLine(line))
 
+coverage_modules = ['MoinMoin.packages']
+

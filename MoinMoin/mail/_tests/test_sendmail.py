@@ -113,3 +113,6 @@ class TestEncodeAddress(unittest.TestCase):
         self.failUnlessEqual(sendmail.encodeAddress(address, self.charset),
                              expected)
 
+
+coverage_modules = ['MoinMoin.mail.sendmail']
+
