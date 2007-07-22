@@ -133,10 +133,11 @@ class Macro:
 
         try:
             return fn(self, *positional, **kwargs)
-        except TypeError, e:
-            return u'[[%s]]' % str(e)
-        except ValueError, e:
-            return u'[[%s: %s]]' % (macro_name, str(e))
+        except (ValueError, TypeError), e:
+            return self.format_error(e)
+
+    def format_error(self, err):
+        return u'[[%s: %s]]' % (self.name, str(err))
 
     def execute(self, macro_name, args):
         """ Get and execute a macro
