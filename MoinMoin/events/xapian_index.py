@@ -1,9 +1,11 @@
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - (re)building of Xapian indices
+
+    @copyright: 2007 MoinMoin:KarolNowak
+    @license: GNU GPL, see COPYING for details.
 """
 import MoinMoin.events as ev
-
 
 def handle_renamed(event):
     """Updates Xapian index when a page changes its name"""
@@ -46,8 +48,20 @@ def handle_changed(event, deleted=False):
 
 def handle_deleted(event):
     """Updates Xapian index when a page is deleted"""
-    event = ev.PageChangedEvent(event.request, event.page, event.comment, False)
+    event = ev.PageChangedEvent(event.request, event.page, event.comment)
     handle_changed(event, deleted=True)
+
+
+def handle_attached(event):
+    """Updates Xapian index when a new attachment is added"""
+
+    request = event.request
+
+    if request.cfg.xapian_search:
+        from MoinMoin.search.Xapian import Index
+        index = Index(request)
+        if index.exists():
+            index.update_page(request.page.page_name)
 
 
 def handle(event):
@@ -59,3 +73,5 @@ def handle(event):
         handle_changed(event)
     elif isinstance(event, ev.PageDeletedEvent):
         handle_deleted(event)
+    elif isinstance(event, ev.FileAttachedEvent):
+        handle_attached(event)

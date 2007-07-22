@@ -27,6 +27,7 @@ logger.addHandler(logging.StreamHandler())
 # so that they get into .po files
 _ = lambda x: x
 
+
 class Event(object):
     """A class handling information common to all events."""
     def __init__(self, request):

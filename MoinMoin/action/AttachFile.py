@@ -27,6 +27,7 @@
 """
 
 import os, time, zipfile, mimetypes
+
 from MoinMoin import config, wikiutil, packages
 from MoinMoin.Page import Page
 from MoinMoin.util import filesys, timefuncs
@@ -223,22 +224,7 @@ def add_attachment(request, pagename, target, filecontent, overwrite=0):
         _addLogEntry(request, 'ATTNEW', pagename, target)
 
         event = FileAttachedEvent(request, pagename, target, len(filecontent))
-        results = send_event(event)
-
-        recipients = []
-        for result in results:
-            if isinstance(results, notification.Success):
-                recipients.append(result.recipient)
-
-        if recipients:
-            info = _("Notifications sent to:")
-            msg = msg + "<p>%s %s</p>" % (info, ",".join(recipients))
-
-        if request.cfg.xapian_search:
-            from MoinMoin.search.Xapian import Index
-            index = Index(request)
-            if index.exists():
-                index.update_page(pagename)
+        send_event(event)
 
         return target
 
