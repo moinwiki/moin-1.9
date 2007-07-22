@@ -6,18 +6,19 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import datetime, logging, time, xmlrpclib, Queue
+import logging, xmlrpclib, Queue
 from SimpleXMLRPCServer import SimpleXMLRPCServer
 from threading import Thread
 
 import jabberbot.commands as cmd
 from jabberbot.multicall import MultiCall
-from jabberbot.i18n import getText
+from jabberbot.i18n import get_text
 
-_ = getText
+_ = get_text
 
 class ConfigurationError(Exception):
     def __init__(self, message):
+        Exception.__init__()
         self.message = message
 
 class XMLRPCClient(Thread):
@@ -207,7 +208,7 @@ class XMLRPCClient(Thread):
         else:
             token_result, getpageinfo_result = self.multicall()
             if token_result != u"SUCCESS":
-                self.warn_no_credentials(jid)
+                self.warn_no_credentials(command.jid)
 
         author = getpageinfo_result['author']
         if author.startswith("Self:"):

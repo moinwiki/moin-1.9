@@ -7,10 +7,10 @@
 """
 import logging, xmlrpclib
 
-translations = None
+TRANSLATIONS = None
 
 
-def getText(original, lang="en"):
+def get_text(original, lang="en"):
     """ Return a translation of text in the user's language.
 
         @type original: unicode
@@ -18,12 +18,12 @@ def getText(original, lang="en"):
     if original == u"":
         return u""
 
-    global translations
-    if not translations:
+    global TRANSLATIONS
+    if not TRANSLATIONS:
         init_i18n()
 
     try:
-        return translations[lang][original]
+        return TRANSLATIONS[lang][original]
     except KeyError:
         return original
 
@@ -34,8 +34,8 @@ def init_i18n(config):
     @type config: jabberbot.config.BotConfig
 
     """
-    global translations
-    translations = request_translations(config) or {'en': {}}
+    global TRANSLATIONS
+    TRANSLATIONS = request_translations(config) or {'en': {}}
 
 
 def request_translations(config):

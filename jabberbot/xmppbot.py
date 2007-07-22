@@ -68,10 +68,12 @@ class Contact:
         self.last_online = None
 
     def set_supports_forms(self, resource):
+        """Flag the given resource as supporting Data Forms"""
         if resource in self.resources:
             self.resources[resource]["forms"] = True
 
     def supports_forms(self, resource):
+        """Check if the given resource supports Data Forms"""
         if resource in self.resources:
             return self.resources[resource]["forms"]
         else:
@@ -212,8 +214,8 @@ class XMPPBot(Client, Thread):
             if not contact.is_valid(current_time):
                 del self.contacts[jid]
 
-    def getText(self, jid):
-        """Returns a getText function (_) for the given JID
+    def get_text(self, jid):
+        """Returns a gettext function (_) for the given JID
 
         @param jid: bare Jabber ID of the user we're going to communicate with
         @type jid: str or pyxmpp.jid.JID
@@ -228,7 +230,7 @@ class XMPPBot(Client, Thread):
         if jid in self.contacts:
             language = self.contacts[jid].language
 
-        return lambda text: i18n.getText(text, lang=language)
+        return lambda text: i18n.get_text(text, lang=language)
 
     def poll_commands(self):
         """Checks for new commands in the input queue and executes them
@@ -272,7 +274,7 @@ class XMPPBot(Client, Thread):
 
             return
 
-        _ = self.getText(command.jid)
+        _ = self.get_text(command.jid)
 
         # Handle subscribtion management commands
         if isinstance(command, cmd.AddJIDToRosterCommand):
@@ -333,7 +335,7 @@ is available::\n\n%(data)s""")
         stanza = Presence(to_jid=jid, stanza_type="unsubscribed")
         self.get_stream().send(stanza)
 
-    def send_message(self, jid, text, subject="", msg_type=u"chat", form=None):
+    def send_message(self, jid, text, subject="", msg_type=u"chat"):
         """Sends a message
 
         @param jid: JID to send the message to
@@ -349,7 +351,7 @@ is available::\n\n%(data)s""")
         pass
 
     def send_search_form(self, jid):
-        _ = self.getText(jid)
+        _ = self.get_text(jid)
 
         # These encode()s may look weird, but due to some pyxmpp oddness we have
         # to provide an utf-8 string instead of unicode. Bug reported, patches submitted...
@@ -378,8 +380,8 @@ is available::\n\n%(data)s""")
         @type command: unicode
 
         """
-        for cmd in self.internal_commands:
-            if cmd.lower() == command:
+        for internal_cmd in self.internal_commands:
+            if internal_cmd.lower() == command:
                 return True
 
         return False
@@ -390,8 +392,8 @@ is available::\n\n%(data)s""")
         @type command: unicode
 
         """
-        for cmd in self.xmlrpc_commands:
-            if cmd.lower() == command:
+        for xmlrpc_cmd in self.xmlrpc_commands:
+            if xmlrpc_cmd.lower() == command:
                 return True
 
         return False
@@ -433,7 +435,7 @@ is available::\n\n%(data)s""")
         @type sender: pyxmpp.jid.JID
 
         """
-        _ = self.getText(sender)
+        _ = self.get_text(sender)
 
         if command[0] == "ping":
             return "pong"
@@ -476,7 +478,7 @@ is available::\n\n%(data)s""")
         @return: a help message
 
         """
-        _ = self.getText(jid)
+        _ = self.get_text(jid)
 
         if command == "help":
             return _("""The "help" command prints a short, helpful message \
@@ -508,7 +510,7 @@ as it's received.""")
         @type command: list representing a command, name and parameters
 
         """
-        _ = self.getText(sender)
+        _ = self.get_text(sender)
         command_class = self.xmlrpc_commands[command[0]]
 
         # Add sender's JID to the argument list
@@ -681,7 +683,7 @@ The call should look like:\n\n%(command)s %(params)s")
         It's sent in response to an uknown message or the "help" command.
 
         """
-        _ = self.getText(jid)
+        _ = self.get_text(jid)
 
         msg = _("Hello there! I'm a MoinMoin Notification Bot. Available commands:\
 \n\n%(internal)s\n%(xmlrpc)s")
