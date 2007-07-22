@@ -622,11 +622,16 @@ class XmlRpcBase:
             except caching.CacheError:
                 pass
 
-    def _generate_auth_token(self):
+    def _generate_auth_token(self, usr):
+        """Generate a token that can be used to authorize next requests
+
+        @type usr: MoinMoin.user
+
+        """
         token = random_string(32, 'abcdefghijklmnopqrstuvwxyz0123456789')
         centry = caching.CacheEntry(self.request, 'xmlrpc-session', token,
                                     scope='farm', use_pickle=True)
-        centry.update((time.time() + 15*3600, u.id))
+        centry.update((time.time() + 15*3600, usr.id))
         return token
 
     def xmlrpc_getAuthToken(self, username, password, *args):
@@ -641,7 +646,7 @@ class XmlRpcBase:
                                      password=password, login=True)
 
         if u and u.valid:
-            return _generate_auth_token()
+            return self._generate_auth_token(u)
         else:
             return ""
 
@@ -663,7 +668,7 @@ class XmlRpcBase:
         u = self.request.handle_jid_auth(jid)
 
         if u and u.valid:
-            return _generate_auth_token()
+            return self._generate_auth_token(u)
         else:
             return ""
 
