@@ -107,8 +107,8 @@ def handle_user_created(event):
 
     data = notification.user_created_message(event.request, sitename, username, email)
 
-    for id in user_ids:
-        usr = User(event.request, id=id)
+    for usr_id in user_ids:
+        usr = User(event.request, id=usr_id)
 
         # Currently send this only to super users
         if usr.isSuperUser() and event_name in usr.email_subscribed_events:

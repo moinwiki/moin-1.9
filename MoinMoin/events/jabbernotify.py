@@ -149,7 +149,7 @@ def handle_user_created(event):
     send_notification(event.request, jids, data['body'], data['subject'])
 
 
-def page_change(type, request, page, subscribers, **kwargs):
+def page_change(change_type, request, page, subscribers, **kwargs):
     """Sends notification about page being changed in some way"""
     _ = request.getText
 
@@ -160,7 +160,7 @@ def page_change(type, request, page, subscribers, **kwargs):
         for lang in subscribers:
             jids = [u.jid for u in subscribers[lang] if u.jid]
             names = [u.name for u in subscribers[lang] if u.jid]
-            msg = notification.page_change_message(type, request, page, lang, **kwargs)
+            msg = notification.page_change_message(change_type, request, page, lang, **kwargs)
             result = send_notification(request, jids, msg)
 
             if result:
