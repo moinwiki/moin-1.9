@@ -6,11 +6,10 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import unittest # LEGACY UNITTEST, PLEASE DO NOT IMPORT unittest IN NEW TESTS, PLEASE CONSULT THE py.test DOCS
 from MoinMoin import search
 
 
-class TestQuotingBug(unittest.TestCase):
+class TestQuotingBug:
     """search: quoting bug tests
 
     http://moinmoin.wikiwikiweb.de/MoinMoinBugs/SearchOneCharString
@@ -19,20 +18,18 @@ class TestQuotingBug(unittest.TestCase):
     testing parsed queries is much more work.
     """
 
-    def setUp(self):
-        self.parser = search.QueryParser()
-
     def testIsQuoted(self):
         """ search: quoting bug - quoted terms """
+        parser = search.QueryParser()
         for case in ('"yes"', "'yes'"):
-            self.assertEqual(self.parser.isQuoted(case), True)
+            assert parser.isQuoted(case)
 
     def testIsNot(self):
         """ search: quoting bug - unquoted terms """
-        tests = ('', "'", '"', '""', "''", "'\"", '"no', 'no"', "'no",
-                 "no'", '"no\'')
+        tests = ('', "'", '"', '""', "''", "'\"", '"no', 'no"', "'no", "no'", '"no\'')
+        parser = search.QueryParser()
         for case in tests:
-            self.assertEqual(self.parser.isQuoted(case), False)
+            assert not parser.isQuoted(case)
 
 
 coverage_modules = ['MoinMoin.search']

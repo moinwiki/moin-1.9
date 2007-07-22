@@ -7,21 +7,18 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import unittest # LEGACY UNITTEST, PLEASE DO NOT IMPORT unittest IN NEW TESTS, PLEASE CONSULT THE py.test DOCS
-
 from MoinMoin import macro
 from MoinMoin.parser.text import Parser
 from MoinMoin.formatter.text_html import Formatter
 
 
-class TestMacro(unittest.TestCase):
+class TestMacro:
     def testTrivialMacro(self):
         """macro: trivial macro works"""
         m = self._make_macro()
         expected = m.formatter.linebreak(0)
         result = m.execute("BR", "")
-        self.assertEqual(result, expected,
-            'Expected "%(expected)s" but got "%(result)s"' % locals())
+        assert result == expected
 
     def _make_macro(self):
         """Test helper"""
