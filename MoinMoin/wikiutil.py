@@ -1191,6 +1191,139 @@ def getParserForExtension(cfg, extension):
 ### Parameter parsing
 #############################################################################
 
+def parse_quoted_separated(args, separator=',', name_value=True, seplimit=0):
+    """
+    Parses the given arguments according to the other parameters.
+    If name_value is True, it parses keyword arguments (name=value)
+    and returns the keyword arguments in the second return value
+    (a dict) and positional arguments that occurred after any keyword
+    argument in the third return value (a list).
+    The first return value always contains the positional arguments,
+    if name_value is False only it is present.
+
+    Arguments can be quoted with a double-quote ('"') and the quote
+    can be escaped by doubling it, the separator and equal sign (for
+    keyword args) can both be quoted, when keyword args are enabled
+    then the name of a keyword argument can also be quoted.
+
+    Arguments that are not given are returned as None, while the
+    empty string can be achieved by quoting it.
+
+    If a name or value does not start with a quote, then the quote
+    character looses its special meaning for that name or value.
+
+    @param args: arguments to parse
+    @param separator: the argument separator, defaults to a comma (',')
+    @param name_value: indicates whether to parse keyword arguments
+    @param seplimit: limits the number of parsed arguments
+    @rtype: tuple, list
+    @returns: if name_value is False, returns a list of arguments,
+              otherwise a list of positional, a dict of keyword and
+              a list of trailing arguments
+    """
+    idx = 0
+    max = len(args)
+    ret_positional = [] # positional argument return value
+    ret_trailing = []   # trailing arguments return value
+    positional = ret_positional
+    keyword = {}        # keyword arguments
+    curname = ''        # current name, initially value as well (name=value)
+    cur = None          # current value
+    cur_quoted = False  # indicates whether value was quoted,
+                        # needed None vs. u'' handling
+    quoted = False      # we're inside quotes
+    skipquote = False   # next quote is a quoted quote
+    noquote = False     # no quotes expected because word didn't start with one
+    seplimit_reached = False # number of separators exhausted
+    separator_count = 0 # number of separators encountered
+    SPACE = [' ', '\t', ]
+    nextitemsep = [separator]   # used for skipping trailing space
+    if name_value:
+        nextitemsep.append('=')
+    while idx < max:
+        char = args[idx]
+        next = None
+        if idx + 1 < max:
+            next = args[idx+1]
+        if not quoted and char in SPACE:
+            spaces = ''
+            # accumulate all space
+            while char in SPACE and idx < max - 1:
+                spaces += char
+                idx += 1
+                char = args[idx]
+            # remove space if args end with it
+            if char in SPACE and idx == max - 1:
+                break
+            # remove space at end of argument
+            if char in nextitemsep:
+                continue
+            idx -= 1
+            if not cur is None:
+                if cur:
+                    cur = cur + spaces
+            elif curname:
+                curname = curname + spaces
+        elif not quoted and name_value and char == '=':
+            if cur is None:
+                cur = ''
+                cur_quoted = False
+            else:
+                cur += '='
+            noquote = False
+        elif not quoted and not seplimit_reached and char == separator:
+            if cur is None:
+                cur = curname
+                curname = None
+            if not cur and not cur_quoted:
+                cur = None
+            if curname is not None:
+                keyword[curname] = cur
+                positional = ret_trailing
+            else:
+                positional.append(cur)
+            curname = ''
+            cur = None
+            noquote = False
+            cur_quoted = False
+            separator_count += 1
+            if seplimit and separator_count >= seplimit:
+                seplimit_reached = True
+                nextitemsep.remove(separator)
+        elif not quoted and not noquote and char == '"':
+            quoted = True
+            cur_quoted = True
+        elif quoted and not skipquote and char == '"' and next != '"':
+            quoted = False
+        elif quoted and char == '"' and next == '"':
+            skipquote = True
+        else:
+            if cur is not None:
+                cur = cur + char
+            else:
+                curname = curname + char
+            skipquote = False
+            noquote = True
+
+        idx += 1
+
+    if cur is None:
+        cur = curname
+        curname = None
+    cur_present = cur is not None
+    if not cur and not cur_quoted:
+        cur = None
+    if curname is not None:
+        keyword[curname] = cur
+    elif cur_present:
+        positional.append(cur)
+
+    if name_value:
+        return ret_positional, keyword, ret_trailing
+    else:
+        return ret_positional
+
+
 def parseAttributes(request, attrstring, endtoken=None, extension=None):
     """
     Parse a list of attributes and return a dict plus a possible

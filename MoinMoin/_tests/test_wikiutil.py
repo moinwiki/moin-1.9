@@ -233,5 +233,76 @@ class TestParmeterParser:
         py.test.raises(ValueError, argParser.parse_parameters, args)
 
 
+class TestParamParsing:
+    def testMacroArgs(self):
+        abcd = [u'a', u'b', u'c', u'd']
+        abcd_dict = {u'a': u'1', u'b': u'2', u'c': u'3', u'd': u'4'}
+        tests = [
+                  # regular and quoting tests
+                  (u'd = 4,c=3,b=2,a= 1 ',    ([], abcd_dict, [])),
+                  (u'a,b,c,d',                (abcd, {}, [])),
+                  (u' a , b , c , d ',        (abcd, {}, [])),
+                  (u'   a   ',                ([u'a'], {}, [])),
+                  (u'"  a  "',                ([u'  a  '], {}, [])),
+                  (u'a,b,c,d, "a,b,c,d"',     (abcd+[u'a,b,c,d'], {}, [])),
+                  (u'quote " :), b',          ([u'quote " :)', u'b'], {}, [])),
+                  (u'"quote "" :)", b',       ([u'quote " :)', u'b'], {}, [])),
+                  (u'=7',                     ([], {u'': u'7'}, [])),
+                  (u',,',                     ([None, None, None], {}, [])),
+                  (u',"",',                   ([None, u'', None], {}, [])),
+                  (u',"", ""',                ([None, u'', u''], {}, [])),
+                  (u'  ""  ,"", ""',          ([u'', u'', u''], {}, [])),
+                  # some name=value test
+                  (u'd = 4,c=3,b=2,a= 1 ',    ([], abcd_dict, [])),
+                  (u'd=d,e="a,b,c,d"',        ([], {u'd':u'd',
+                                                    u'e':u'a,b,c,d'}, [])),
+                  (u'd = d,e = "a,b,c,d"',    ([], {u'd':u'd',
+                                                    u'e':u'a,b,c,d'}, [])),
+                  (u'd = d, e = "a,b,c,d"',   ([], {u'd':u'd',
+                                                    u'e':u'a,b,c,d'}, [])),
+                  # can quote both name and value:
+                  (u'd = d," e "= "a,b,c,d"', ([], {u'd':u'd',
+                                                    u' e ':u'a,b,c,d'}, [])),
+                  # trailing args
+                  (u'1,2,a=b,3,4',            ([u'1', u'2'], {u'a': u'b'},
+                                               [u'3', u'4'])),
+                ]
+        for args, expected in tests:
+            result = wikiutil.parse_quoted_separated(args)
+            assert expected == result
+
+    def testLimited(self):
+        tests = [
+                  # regular and quoting tests
+                  (u'd = 4,c=3,b=2,a= 1 ',    ([], {u'd': u'4',
+                                                    u'c': u'3,b=2,a= 1'}, [])),
+                  (u'a,b,c,d',                ([u'a', u'b,c,d'], {}, [])),
+                  (u'a=b,b,c,d',              ([], {u'a': u'b'}, [u'b,c,d'])),
+                ]
+        for args, expected in tests:
+            result = wikiutil.parse_quoted_separated(args, seplimit=1)
+            assert expected == result
+
+    def testNoNameValue(self):
+        abcd = [u'a', u'b', u'c', u'd']
+        tests = [
+                  # regular and quoting tests
+                  (u'd = 4,c=3,b=2,a= 1 ',    [u'd = 4', u'c=3',
+                                               u'b=2', u'a= 1']),
+                  (u'a,b,c,d',                abcd),
+                  (u' a , b , c , d ',        abcd),
+                  (u'   a   ',                [u'a']),
+                  (u'"  a  "',                [u'  a  ']),
+                  (u'a,b,c,d, "a,b,c,d"',     abcd+[u'a,b,c,d']),
+                  (u'quote " :), b',          [u'quote " :)', u'b']),
+                  (u'"quote "" :)", b',       [u'quote " :)', u'b']),
+                  (u'd=d,e="a,b,c,d"',        [u'd=d', u'e="a', u'b',
+                                               u'c', u'd"']),
+                ]
+        for args, expected in tests:
+            result = wikiutil.parse_quoted_separated(args, name_value=False)
+            assert expected == result
+
+
 coverage_modules = ['MoinMoin.wikiutil']
 
