@@ -1,0 +1,35 @@
+# -*- coding: iso-8859-1 -*-
+"""
+    MoinMoin - wikidicts notification plugin for event system
+
+    When a Group or Dict page changes, we rescan them and recreate the cache.
+
+    @copyright: 2007 by MoinMoin:ThomasWaldmann
+    @license: GNU GPL, see COPYING for details.
+"""
+import logging
+
+from MoinMoin import events as ev
+from MoinMoin import wikidicts
+
+def handle(event):
+    if isinstance(event, ev.PageChangedEvent): # "changed" includes creation and deletion
+        cfg = event.request.cfg
+        pagename = event.page.page_name
+        if cfg.cache.page_dict_regex.search(pagename) or \
+           cfg.cache.page_group_regex.search(pagename):
+            return handle_groupsdicts_changed(event)
+
+
+def handle_groupsdicts_changed(event):
+    """ Handles events related to groups and dicts page changes:
+        Scans all pages matching the dict / group regex and pickles the
+        data to disk.
+    """
+    request = event.request
+    page = event.page
+
+    logging.debug("groupsdicts changed: %r, scan_dicts started", page.page_name)
+    gd = wikidicts.GroupDict(request)
+    gd.scan_dicts()
+    logging.debug("groupsdicts changed: scan_dicts finished")
