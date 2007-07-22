@@ -1206,8 +1206,9 @@ def parse_quoted_separated(args, separator=',', name_value=True, seplimit=0):
     keyword args) can both be quoted, when keyword args are enabled
     then the name of a keyword argument can also be quoted.
 
-    Arguments that are not given are returned as None, while the
-    empty string can be achieved by quoting it.
+    Values that are not given are returned as None, while the
+    empty string as a value can be achieved by quoting it; keys
+    are never returned as None.
 
     If a name or value does not start with a quote, then the quote
     character looses its special meaning for that name or value.
