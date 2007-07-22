@@ -1325,22 +1325,23 @@ def parse_quoted_separated(args, separator=',', name_value=True, seplimit=0):
         return ret_positional
 
 
-def get_boolean(request, arg, name=None, default=None):
+def get_bool(request, arg, name=None, default=None):
     """
     For use with values returned from parse_quoted_separated or given
     as macro parameters, return a boolean from a unicode string.
-    Valid input is 'true'/'false', 'yes'/'no' and '1'/'0' or the empty
-    string or None for the default value.
+    Valid input is 'true'/'false', 'yes'/'no' and '1'/'0' or None for
+    the default value.
 
     @param request: A request instance
     @param arg: The argument, may be None or a unicode string
     @param name: Name of the argument, for error messages
-    @param default: default value if arg is empty; should be the same
-                    as any default value for arg
-    @rtype: boolean
+    @param default: default value if arg is None
+    @rtype: boolean or None
     @returns: the boolean value of the string according to above rules
+              (or default value)
     """
     _ = request.getText
+    assert default is None or isinstance(default, bool)
     if arg is None:
         return default
     elif not isinstance(arg, unicode):
@@ -1350,8 +1351,6 @@ def get_boolean(request, arg, name=None, default=None):
         return False
     elif arg in [u'1', u'true', u'yes']:
         return True
-    elif arg == u'':
-        return default
     else:
         if name:
             raise ValueError(_('Argument "%s" must be a boolean value') % name)
@@ -1364,23 +1363,23 @@ def get_int(request, arg, name=None, default=None):
     For use with values returned from parse_quoted_separated or given
     as macro parameters, return an integer from a unicode string
     containing the decimal representation of a number.
-    The empty string or None are valid input and yield the default value.
+    None is a valid input and yields the default value.
 
     @param request: A request instance
     @param arg: The argument, may be None or a unicode string
     @param name: Name of the argument, for error messages
-    @param default: default value if arg is empty; should be the same
-                    as any default value for arg
-    @rtype: int or long
-    @returns: the integer value of the string
+    @param default: default value if arg is None
+    @rtype: int or None
+    @returns: the integer value of the string (or default value)
     """
     _ = request.getText
+    assert default is None or isinstance(default, int)
     if arg is None:
         return default
     elif not isinstance(arg, unicode):
         raise TypeError('argument must be None or unicode')
     try:
-        arg = int(arg)
+        return int(arg)
     except ValueError:
         if name:
             raise ValueError(_('Argument "%s" must be an integer value') % name)
@@ -1392,49 +1391,49 @@ def get_float(request, arg, name=None, default=None):
     """
     For use with values returned from parse_quoted_separated or given
     as macro parameters, return a float from a unicode string.
-    The empty string or None are valid input and yield the default value.
+    None is a valid input and yields the default value.
 
     @param request: A request instance
     @param arg: The argument, may be None or a unicode string
     @param name: Name of the argument, for error messages
-    @param default: default value if arg is empty; should be the same
-                    as any default value for arg
-    @rtype: float
-    @returns: the float value of the string
+    @param default: default return value if arg is None
+    @rtype: float or None
+    @returns: the float value of the string (or default value)
     """
     _ = request.getText
+    assert default is None or isinstance(default, float)
     if arg is None:
         return default
     elif not isinstance(arg, unicode):
         raise TypeError('argument must be None or unicode')
     try:
-        arg = float(arg)
+        return float(arg)
     except ValueError:
         if name:
             raise ValueError(
                 _('Argument "%s" must be a floating point value') % name)
         else:
-            raise ValueError(_('Argument must be an integer value'))
+            raise ValueError(_('Argument must be a floating point value'))
 
 
 def get_unicode(request, arg, name=None, default=None):
     """
     For use with values returned from parse_quoted_separated or given
     as macro parameters, return a unicode string from a unicode string.
-    The empty string or None are valid input and yield the default value.
+    None is a valid input and yields the default value.
 
     @param request: A request instance
     @param arg: The argument, may be None or a unicode string
     @param name: Name of the argument, for error messages
-    @param default: default value if arg is empty; should be the same
-                    as any default value for arg
-    @rtype: float
-    @returns: the float value of the string
+    @param default: default return value if arg is None;
+    @rtype: unicode or None
+    @returns: the unicode string (or default value)
     """
+    assert default is None or isinstance(default, unicode)
     if arg is None:
         return default
     elif not isinstance(arg, unicode):
-        raise TypeError('argument must be None or unicode')
+        raise TypeError('Argument must be None or unicode')
 
     return arg
 
