@@ -26,7 +26,7 @@ from MoinMoin import wikiutil, i18n
 from MoinMoin.Page import Page
 
 names = ["TitleSearch", "WordIndex", "TitleIndex",
-         "GoTo", "InterWiki", "PageCount",
+         "GoTo", "PageCount",
          # Macros with arguments
          "Icon", "PageList", "Date", "DateTime", "Anchor", "MailTo", "GetVal",
          "TemplateList",
@@ -66,7 +66,6 @@ class Macro:
         "Goto": [],
         "WordIndex": ["namespace"],
         "TitleIndex": ["namespace"],
-        "InterWiki": ["pages"],  # if interwikimap is editable
         "PageCount": ["namespace"],
         "Icon": ["user"], # users have different themes and user prefs
         "PageList": ["namespace"],
@@ -325,23 +324,6 @@ class Macro:
         results = search.searchPages(self.request, needle,
                 titlesearch=1, case=case, sort='page_name')
         return results.pageList(self.request, self.formatter, paging=False)
-
-    def macro_InterWiki(self):
-        from StringIO import StringIO
-        interwiki_list = wikiutil.load_wikimap(self.request)
-        buf = StringIO()
-        buf.write('<dl>')
-        iwlist = interwiki_list.items() # this is where we cached it
-        iwlist.sort()
-        for tag, url in iwlist:
-            buf.write('<dt><tt><a href="%s">%s</a></tt></dt>' % (
-                wikiutil.join_wiki(url, 'RecentChanges'), tag))
-            if '$PAGE' not in url:
-                buf.write('<dd><tt><a href="%s">%s</a></tt></dd>' % (url, url))
-            else:
-                buf.write('<dd><tt>%s</tt></dd>' % url)
-        buf.write('</dl>')
-        return self.formatter.rawHTML(buf.getvalue())
 
     def macro_PageCount(self, exists=None):
         """ Return number of pages readable by current user
