@@ -83,9 +83,6 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
     # save data
     theuser.save()
 
-    user_created = events.UserCreatedEvent(request, theuser)
-    events.send_event(user_created)
-
     if form.has_key('create_and_mail'):
         theuser.mailAccountData()
 
