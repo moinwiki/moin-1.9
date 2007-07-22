@@ -24,7 +24,7 @@ unsafe_names = ("id", "key", "val", "user_data", "enc_password")
 
 import os, time, sha, codecs
 
-from MoinMoin import config, caching, wikiutil, i18n
+from MoinMoin import config, caching, wikiutil, i18n, events
 from MoinMoin.util import timefuncs, filesys
 
 
@@ -325,6 +325,7 @@ class User:
         #self.edit_cols = 80
         self.tz_offset = int(float(self._cfg.tz_offset) * 3600)
         self.language = ""
+        self.loaded = False
         self.date_fmt = ""
         self.datetime_fmt = ""
         self.quicklinks = self._cfg.quicklinks_default
@@ -492,6 +493,9 @@ class User:
         if not self.disabled:
             self.valid = 1
 
+        # Mark this user as loaded from disk, so UserCreatedEvent is not sent
+        self.loaded = True
+
         # If user data has been changed, save fixed user data.
         if changed:
             self.save()
@@ -613,6 +617,10 @@ class User:
 
         if not self.disabled:
             self.valid = 1
+
+        if not self.loaded:
+            event = events.UserCreatedEvent(self._request, self)
+            events.send_event(event)
 
     # -----------------------------------------------------------------
     # Time and date formatting
