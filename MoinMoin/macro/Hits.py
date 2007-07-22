@@ -2,12 +2,13 @@
 """
     MoinMoin - Hits Macro
 
-    This macro is used to show the cummulative hits of the wikipage where the Macro is called from.
-    Optional you could count how much this or all pages was changed or viewed.
+    This macro is used to show the cumulative hits of the wikipage where the Macro is called from.
+    Optionally you could count how much this page or all pages were changed or viewed.
 
     [[Hits([all=(0,1)],[filter=(VIEWPAGE,SAVEPAGE)]]
 
-        all: if set to 1 then cummulative hits over all wiki pages is returned. Default is 0
+        all: if set to 1/True/yes then cumulative hits over all wiki pages is returned.
+             Default is 0/False/no.
         filter: if set to SAVEPAGE then the saved pages are counted. Default is VIEWPAGE.
 
    @copyright: 2004-2007 MoinMoin:ReimarBauer,
@@ -20,42 +21,24 @@ Dependencies = ['time'] # do not cache
 from MoinMoin import wikiutil
 from MoinMoin.logfile import eventlog
 
-class Hits:
-    def __init__(self, macro, args):
-        self.request = macro.request
-        self.formatter = macro.formatter
-        self.this_page = macro.formatter.page.page_name
-        argParser = wikiutil.ParameterParser("%(all)s%(filter)s")
-        try:
-            self.fixed_count, self.arg_dict = argParser.parse_parameters(args)
-            self.error = None
-        except ValueError, err:
-            self.error = str(err)
 
-    def renderInText(self):
-        if self.error:
-            text = "Hits macro: %s" % self.error
-        else:
-            text = "%d" % self.getHits()
-        return self.formatter.text(text)
+def macro_Hits(macro, all=None, filter=None):
+    request = macro.request
+    _ = request.getText
+    this_page = macro.formatter.page.page_name
+    event_filter = str(wikiutil.get_unicode(request, filter, 'filter', u'VIEWPAGE'))
+    filters_possible = ('VIEWPAGE', 'SAVEPAGE')
+    if not event_filter in filters_possible:
+        raise ValueError(_("filter argument must be one of %s") % (', '.join(filters_possible)))
+    count_all_pages = wikiutil.get_bool(request, all, 'all', False)
 
-    def getHits(self):
-        event_filter = self.arg_dict["filter"]
-        if not event_filter:
-            event_filter = "VIEWPAGE"
-        count_all_pages = self.arg_dict["all"]
+    event_log = eventlog.EventLog(request)
+    event_log.set_filter([event_filter])
+    count = 0
+    for event in event_log.reverse():
+        pagename = event[2].get('pagename')
+        if count_all_pages or pagename == this_page:
+            count += 1
 
-        event_log = eventlog.EventLog(self.request)
-        event_log.set_filter([event_filter])
-        count = 0
-        for event in event_log.reverse():
-            pagename = event[2].get('pagename')
-            if count_all_pages or pagename == self.this_page:
-                count += 1
-
-        return count
-
-def execute(macro, args):
-    """ Temporary glue code to use with moin current macro system """
-    return Hits(macro, args).renderInText()
+    return u'%d' % count
 
