@@ -12,7 +12,8 @@
     Using "form" directly is deprecated and should be replaced by "request.form".
 
     @copyright: 2000-2004 Juergen Hermann <jh@web.de>,
-                2006 MoinMoin:ThomasWaldmann
+                2006-2007 MoinMoin:ThomasWaldmann,
+                2007 MoinMoin:JohannesBerg
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -52,7 +53,7 @@ class Macro:
     """ Macro handler
 
     There are three kinds of macros:
-     * Builtin Macros - implemented in this file and named _macro_[name]
+     * Builtin Macros - implemented in this file and named macro_[name]
      * Language Pseudo Macros - any lang the wiki knows can be use as
        macro and is implemented here by _m_lang()
      * External macros - implemented in either MoinMoin.macro package, or
@@ -155,8 +156,8 @@ class Macro:
                 execute = wikiutil.importPlugin(self.cfg, 'macro', macro_name)
         except wikiutil.PluginMissingError:
             try:
-                builtins = self.__class__
-                execute = getattr(builtins, '_macro_' + macro_name)
+                call = getattr(self.__class__, 'macro_%s' % macro_name)
+                execute = lambda _self, _args: _self._wrap(macro_name, call, _args)
             except AttributeError:
                 if macro_name in i18n.wikiLanguages():
                     execute = builtins._m_lang
@@ -188,14 +189,13 @@ class Macro:
         except wikiutil.PluginError:
             return self.defaultDependency
 
-    def _macro_TitleSearch(self, args):
+    def macro_TitleSearch(self):
         from MoinMoin.macro.FullSearch import search_box
         return search_box("titlesearch", self)
 
-    def _macro_GoTo(self, args):
+    def macro_GoTo(self):
         """ Make a goto box
 
-        @param args: macro arguments
         @rtype: unicode
         @return: goto box html fragment
         """
@@ -212,7 +212,7 @@ class Macro:
         html = u'\n'.join(html)
         return self.formatter.rawHTML(html)
 
-    def _make_index(self, args, word_re=u'.+'):
+    def _make_index(self, word_re=u'.+'):
         """ make an index page (used for TitleIndex and WordIndex macro)
 
             word_re is a regex used for splitting a pagename into fragments
@@ -297,27 +297,26 @@ class Macro:
         return u''.join(output)
 
 
-    def _macro_TitleIndex(self, args):
-        return self._make_index(args)
+    def macro_TitleIndex(self):
+        return self._make_index()
 
-    def _macro_WordIndex(self, args):
+    def macro_WordIndex(self):
         if self.request.isSpiderAgent: # reduce bot cpu usage
             return ''
         word_re = u'[%s][%s]+' % (config.chars_upper, config.chars_lower)
-        return self._make_index(args, word_re=word_re)
+        return self._make_index(word_re=word_re)
 
 
-    def _macro_PageList(self, needle):
+    def macro_PageList(self, needle=None):
         from MoinMoin import search
         _ = self._
         case = 0
 
         # If called with empty or no argument, default to regex search for .+, the full page list.
-        if not needle:
-            needle = 'regex:.+'
+        needle = wikiutil.get_unicode(request, needle, 'needle', u'regex:.+')
 
         # With whitespace argument, return same error message as FullSearch
-        elif needle.isspace():
+        if not needle.strip():
             err = _('Please use a more selective search term instead of {{{"%s"}}}') % needle
             return '<span class="error">%s</span>' % err
 
@@ -326,7 +325,7 @@ class Macro:
                 titlesearch=1, case=case, sort='page_name')
         return results.pageList(self.request, self.formatter, paging=False)
 
-    def _macro_InterWiki(self, args):
+    def macro_InterWiki(self):
         from StringIO import StringIO
         interwiki_list = wikiutil.load_wikimap(self.request)
         buf = StringIO()
@@ -343,37 +342,39 @@ class Macro:
         buf.write('</dl>')
         return self.formatter.rawHTML(buf.getvalue())
 
-    def _macro_PageCount(self, args):
+    def macro_PageCount(self, exists=None):
         """ Return number of pages readable by current user
 
         Return either an exact count (slow!) or fast count including
         deleted pages.
+
+        TODO: make macro syntax more sane
         """
+        exists = wikiutil.get_unicode(self.request, exists, 'exists')
         # Check input
-        options = {None: 0, '': 0, 'exists': 1}
-        try:
-            exists = options[args]
-        except KeyError:
+        only_existing = False
+        if exists == u'exists':
+            only_existing = True
+        elif exists:
             # Wrong argument, return inline error message
             arg = self.formatter.text(args)
             return (self.formatter.span(1, css_class="error") +
                     'Wrong argument: %s' % arg +
                     self.formatter.span(0))
 
-        count = self.request.rootpage.getPageCount(exists=exists)
+        count = self.request.rootpage.getPageCount(exists=only_existing)
         return self.formatter.text("%d" % count)
 
-    def _macro_Icon(self, args):
-        icon = args.lower()
-        return self.formatter.icon(icon)
+    def macro_Icon(self, icon):
+        return self.formatter.icon(icon.lower())
 
-    def _macro_TemplateList(self, args):
+    def macro_TemplateList(self, arg):
         _ = self._
         try:
-            needle_re = re.compile(args or '', re.IGNORECASE)
+            needle_re = re.compile(arg, re.IGNORECASE)
         except re.error, e:
             return "<strong>%s: %s</strong>" % (
-                _("ERROR in regex '%s'") % (args, ), e)
+                _("ERROR in regex '%s'") % (arg, ), e)
 
         # Get page list readable by current user, filtered by needle
         hits = self.request.rootpage.getPageList(filter=needle_re.search)
@@ -430,26 +431,18 @@ class Macro:
                     _("Bad timestamp '%s'") % (args, ), e)
         return format_date(tm)
 
-    def _macro_Date(self, args):
-        return self.__get_Date(args, self.request.user.getFormattedDate)
+    def macro_Date(self, stamp=None):
+        return self.__get_Date(stamp, self.request.user.getFormattedDate)
 
-    def _macro_DateTime(self, args):
-        return self.__get_Date(args, self.request.user.getFormattedDateTime)
+    def macro_DateTime(self, stamp=None):
+        return self.__get_Date(stamp, self.request.user.getFormattedDateTime)
 
-    def _macro_Anchor(self, args):
-        return self.formatter.anchordef(args or "anchor")
+    def macro_Anchor(self, anchor):
+        return self.formatter.anchordef(anchor or "anchor")
 
-    def _macro_MailTo(self, args):
+    def macro_MailTo(self, email, text=None):
+        text = wikiutil.get_unicode(self.request, text, 'text', u'')
         from MoinMoin.mail.sendmail import decodeSpamSafeEmail
-        result = ''
-        args = args or ''
-        if ',' not in args:
-            email = args
-            text = ''
-        else:
-            email, text = args.split(',', 1)
-
-        email, text = email.strip(), text.strip()
 
         if self.request.user.valid:
             # decode address and generate mailto: link
@@ -470,8 +463,7 @@ class Macro:
 
         return result
 
-    def _macro_GetVal(self, args):
-        page, key = args.split(',')
+    def macro_GetVal(self, page, key):
         d = self.request.dicts.dict(page)
         result = d.get(key, '')
         return self.formatter.text(result)
