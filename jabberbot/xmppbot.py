@@ -292,7 +292,7 @@ class XMPPBot(Client, Thread):
             })
 
         elif isinstance(command, cmd.GetPageList):
-            msg = _("uThat's the list of pages accesible to you:\n\n%s")
+            msg = _("That's the list of pages accesible to you:\n\n%s")
             pagelist = u"\n".join(command.data)
 
             self.send_message(command.jid, msg % (pagelist, ))
