@@ -1324,6 +1324,122 @@ def parse_quoted_separated(args, separator=',', name_value=True, seplimit=0):
         return ret_positional
 
 
+def get_boolean(request, arg, name=None, default=None):
+    """
+    For use with values returned from parse_quoted_separated or given
+    as macro parameters, return a boolean from a unicode string.
+    Valid input is 'true'/'false', 'yes'/'no' and '1'/'0' or the empty
+    string or None for the default value.
+
+    @param request: A request instance
+    @param arg: The argument, may be None or a unicode string
+    @param name: Name of the argument, for error messages
+    @param default: default value if arg is empty; should be the same
+                    as any default value for arg
+    @rtype: boolean
+    @returns: the boolean value of the string according to above rules
+    """
+    _ = request.getText
+    if arg is None:
+        return default
+    elif not isinstance(arg, unicode):
+        raise TypeError('argument must be None or unicode')
+    arg = arg.lower()
+    if arg in [u'0', u'false', u'no']:
+        return False
+    elif arg in [u'1', u'true', u'yes']:
+        return True
+    elif arg == u'':
+        return default
+    else:
+        if name:
+            raise ValueError(_('Argument "%s" must be a boolean value') % name)
+        else:
+            raise ValueError(_('Argument must be a boolean value'))
+
+
+def get_int(request, arg, name=None, default=None):
+    """
+    For use with values returned from parse_quoted_separated or given
+    as macro parameters, return an integer from a unicode string.
+    The empty string or None are valid input and yield the default value.
+
+    @param request: A request instance
+    @param arg: The argument, may be None or a unicode string
+    @param name: Name of the argument, for error messages
+    @param default: default value if arg is empty; should be the same
+                    as any default value for arg
+    @rtype: int or long
+    @returns: the integer value of the string
+    """
+    _ = request.getText
+    if arg is None:
+        return default
+    elif not isinstance(arg, unicode):
+        raise TypeError('argument must be None or unicode')
+    try:
+        arg = int(arg, 0)
+    except ValueError:
+        if name:
+            raise ValueError(_('Argument "%s" must be an integer value') % name)
+        else:
+            raise ValueError(_('Argument must be an integer value'))
+
+
+def get_float(request, arg, name=None, default=None):
+    """
+    For use with values returned from parse_quoted_separated or given
+    as macro parameters, return a float from a unicode string.
+    The empty string or None are valid input and yield the default value.
+
+    @param request: A request instance
+    @param arg: The argument, may be None or a unicode string
+    @param name: Name of the argument, for error messages
+    @param default: default value if arg is empty; should be the same
+                    as any default value for arg
+    @rtype: float
+    @returns: the float value of the string
+    """
+    _ = request.getText
+    if arg is None:
+        return default
+    elif not isinstance(arg, unicode):
+        raise TypeError('argument must be None or unicode')
+    try:
+        arg = float(arg)
+    except ValueError:
+        if name:
+            raise ValueError(
+                _('Argument "%s" must be a floating point value') % name)
+        else:
+            raise ValueError(_('Argument must be an integer value'))
+
+
+def get_unicode(request, arg, name=None, default=None):
+    """
+    For use with values returned from parse_quoted_separated or given
+    as macro parameters, return a unicode string from a unicode string.
+    The empty string or None are valid input and yield the default value.
+
+    @param request: A request instance
+    @param arg: The argument, may be None or a unicode string
+    @param name: Name of the argument, for error messages
+    @param default: default value if arg is empty; should be the same
+                    as any default value for arg
+    @rtype: float
+    @returns: the float value of the string
+    """
+    _ = request.getText
+    if arg is None:
+        return default
+    elif not isinstance(arg, unicode):
+        raise TypeError('argument must be None or unicode')
+    elif arg == u'':
+        return default
+
+    return arg
+
+
 def parseAttributes(request, attrstring, endtoken=None, extension=None):
     """
     Parse a list of attributes and return a dict plus a possible
