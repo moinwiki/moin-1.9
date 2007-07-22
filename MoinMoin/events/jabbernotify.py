@@ -146,7 +146,7 @@ def handle_user_created(event):
         if usr.isSuperUser() and usr.jid and event_name in usr.jabber_subscribed_events:
             jids.append(usr.jid)
 
-    send_notification(event.request, jids, msg % (event.user.name, email), data['subject'])
+    send_notification(event.request, jids, data['body'], data['subject'])
 
 
 def page_change(type, request, page, subscribers, **kwargs):
