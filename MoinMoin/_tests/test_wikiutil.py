@@ -315,4 +315,144 @@ class TestParamParsing:
             assert expected == result
 
 
+class TestArgGetters:
+    def testGetBoolean(self):
+        tests = [
+            # default testing for None value
+            (None, None, None, None),
+            (None, None, False, False),
+            (None, None, True, True),
+
+            # some real values
+            (u'0', None, None, False),
+            (u'1', None, None, True),
+            (u'false', None, None, False),
+            (u'true', None, None, True),
+            (u'FALSE', None, None, False),
+            (u'TRUE', None, None, True),
+            (u'no', None, None, False),
+            (u'yes', None, None, True),
+            (u'NO', None, None, False),
+            (u'YES', None, None, True),
+        ]
+        for arg, name, default, expected in tests:
+            assert wikiutil.get_bool(self.request, arg, name, default) == expected
+
+    def testGetBooleanRaising(self):
+        # wrong default type
+        py.test.raises(AssertionError, wikiutil.get_bool, self.request, None, None, 42)
+
+        # anything except None or unicode raises TypeError
+        py.test.raises(TypeError, wikiutil.get_bool, self.request, True)
+        py.test.raises(TypeError, wikiutil.get_bool, self.request, 42)
+        py.test.raises(TypeError, wikiutil.get_bool, self.request, 42.0)
+        py.test.raises(TypeError, wikiutil.get_bool, self.request, '')
+        py.test.raises(TypeError, wikiutil.get_bool, self.request, tuple())
+        py.test.raises(TypeError, wikiutil.get_bool, self.request, [])
+        py.test.raises(TypeError, wikiutil.get_bool, self.request, {})
+
+        # any value not convertable to boolean raises ValueError
+        py.test.raises(ValueError, wikiutil.get_bool, self.request, u'')
+        py.test.raises(ValueError, wikiutil.get_bool, self.request, u'42')
+        py.test.raises(ValueError, wikiutil.get_bool, self.request, u'wrong')
+        py.test.raises(ValueError, wikiutil.get_bool, self.request, u'"True"') # must not be quoted!
+
+    def testGetInt(self):
+        tests = [
+            # default testing for None value
+            (None, None, None, None),
+            (None, None, -23, -23),
+            (None, None, 42, 42),
+
+            # some real values
+            (u'0', None, None, 0),
+            (u'42', None, None, 42),
+            (u'-23', None, None, -23),
+        ]
+        for arg, name, default, expected in tests:
+            assert wikiutil.get_int(self.request, arg, name, default) == expected
+
+    def testGetIntRaising(self):
+        # wrong default type
+        py.test.raises(AssertionError, wikiutil.get_int, self.request, None, None, 42.23)
+
+        # anything except None or unicode raises TypeError
+        py.test.raises(TypeError, wikiutil.get_int, self.request, True)
+        py.test.raises(TypeError, wikiutil.get_int, self.request, 42)
+        py.test.raises(TypeError, wikiutil.get_int, self.request, 42.0)
+        py.test.raises(TypeError, wikiutil.get_int, self.request, '')
+        py.test.raises(TypeError, wikiutil.get_int, self.request, tuple())
+        py.test.raises(TypeError, wikiutil.get_int, self.request, [])
+        py.test.raises(TypeError, wikiutil.get_int, self.request, {})
+
+        # any value not convertable to int raises ValueError
+        py.test.raises(ValueError, wikiutil.get_int, self.request, u'')
+        py.test.raises(ValueError, wikiutil.get_int, self.request, u'23.42')
+        py.test.raises(ValueError, wikiutil.get_int, self.request, u'wrong')
+        py.test.raises(ValueError, wikiutil.get_int, self.request, u'"4711"') # must not be quoted!
+
+    def testGetFloat(self):
+        tests = [
+            # default testing for None value
+            (None, None, None, None),
+            (None, None, -23.42, -23.42),
+            (None, None, 42.23, 42.23),
+
+            # some real values
+            (u'0', None, None, 0),
+            (u'42.23', None, None, 42.23),
+            (u'-23.42', None, None, -23.42),
+            (u'-23.42E3', None, None, -23.42E3),
+            (u'23.42E-3', None, None, 23.42E-3),
+        ]
+        for arg, name, default, expected in tests:
+            assert wikiutil.get_float(self.request, arg, name, default) == expected
+
+    def testGetFloatRaising(self):
+        # wrong default type
+        py.test.raises(AssertionError, wikiutil.get_float, self.request, None, None, u'42')
+
+        # anything except None or unicode raises TypeError
+        py.test.raises(TypeError, wikiutil.get_float, self.request, True)
+        py.test.raises(TypeError, wikiutil.get_float, self.request, 42)
+        py.test.raises(TypeError, wikiutil.get_float, self.request, 42.0)
+        py.test.raises(TypeError, wikiutil.get_float, self.request, '')
+        py.test.raises(TypeError, wikiutil.get_float, self.request, tuple())
+        py.test.raises(TypeError, wikiutil.get_float, self.request, [])
+        py.test.raises(TypeError, wikiutil.get_float, self.request, {})
+
+        # any value not convertable to int raises ValueError
+        py.test.raises(ValueError, wikiutil.get_float, self.request, u'')
+        py.test.raises(ValueError, wikiutil.get_float, self.request, u'wrong')
+        py.test.raises(ValueError, wikiutil.get_float, self.request, u'"47.11"') # must not be quoted!
+
+    def testGetUnicode(self):
+        tests = [
+            # default testing for None value
+            (None, None, None, None),
+            (None, None, u'', u''),
+            (None, None, u'abc', u'abc'),
+
+            # some real values
+            (u'', None, None, u''),
+            (u'abc', None, None, u'abc'),
+            (u'"abc"', None, None, u'"abc"'),
+        ]
+        for arg, name, default, expected in tests:
+            assert wikiutil.get_unicode(self.request, arg, name, default) == expected
+
+    def testGetUnicodeRaising(self):
+        # wrong default type
+        py.test.raises(AssertionError, wikiutil.get_unicode, self.request, None, None, 42)
+
+        # anything except None or unicode raises TypeError
+        py.test.raises(TypeError, wikiutil.get_unicode, self.request, True)
+        py.test.raises(TypeError, wikiutil.get_unicode, self.request, 42)
+        py.test.raises(TypeError, wikiutil.get_unicode, self.request, 42.0)
+        py.test.raises(TypeError, wikiutil.get_unicode, self.request, '')
+        py.test.raises(TypeError, wikiutil.get_unicode, self.request, tuple())
+        py.test.raises(TypeError, wikiutil.get_unicode, self.request, [])
+        py.test.raises(TypeError, wikiutil.get_unicode, self.request, {})
+
+
 coverage_modules = ['MoinMoin.wikiutil']
