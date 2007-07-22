@@ -254,15 +254,26 @@ class TestParamParsing:
                   (u'  ""  ,"", ""',          ([u'', u'', u''], {}, [])),
                   # some name=value test
                   (u'd = 4,c=3,b=2,a= 1 ',    ([], abcd_dict, [])),
-                  (u'd=d,e="a,b,c,d"',        ([], {u'd':u'd',
-                                                    u'e':u'a,b,c,d'}, [])),
-                  (u'd = d,e = "a,b,c,d"',    ([], {u'd':u'd',
-                                                    u'e':u'a,b,c,d'}, [])),
-                  (u'd = d, e = "a,b,c,d"',   ([], {u'd':u'd',
-                                                    u'e':u'a,b,c,d'}, [])),
+                  (u'd=d,e="a,b,c,d"',        ([], {u'd': u'd',
+                                                    u'e': u'a,b,c,d'}, [])),
+                  (u'd = d,e = "a,b,c,d"',    ([], {u'd': u'd',
+                                                    u'e': u'a,b,c,d'}, [])),
+                  (u'd = d, e = "a,b,c,d"',   ([], {u'd': u'd',
+                                                    u'e': u'a,b,c,d'}, [])),
+                  (u'd = , e = "a,b,c,d"',    ([], {u'd': None,
+                                                    u'e': u'a,b,c,d'}, [])),
+                  (u'd = "", e = "a,b,c,d"',  ([], {u'd': u'',
+                                                    u'e': u'a,b,c,d'}, [])),
+                  (u'd = "", e = ',           ([], {u'd': u'', u'e': None},
+                                               [])),
+                  (u'd = "", e = ""',         ([], {u'd': u'', u'e': u''},
+                                               [])),
+                  # no, None as key isn't accepted
+                  (u' = "",  e = ""',         ([], {u'': u'', u'e': u''},
+                                               [])),
                   # can quote both name and value:
-                  (u'd = d," e "= "a,b,c,d"', ([], {u'd':u'd',
-                                                    u' e ':u'a,b,c,d'}, [])),
+                  (u'd = d," e "= "a,b,c,d"', ([], {u'd': u'd',
+                                                    u' e ': u'a,b,c,d'}, [])),
                   # trailing args
                   (u'1,2,a=b,3,4',            ([u'1', u'2'], {u'a': u'b'},
                                                [u'3', u'4'])),
@@ -293,7 +304,7 @@ class TestParamParsing:
                   (u' a , b , c , d ',        abcd),
                   (u'   a   ',                [u'a']),
                   (u'"  a  "',                [u'  a  ']),
-                  (u'a,b,c,d, "a,b,c,d"',     abcd+[u'a,b,c,d']),
+                  (u'a,b,c,d, "a,b,c,d"',     abcd + [u'a,b,c,d']),
                   (u'quote " :), b',          [u'quote " :)', u'b']),
                   (u'"quote "" :)", b',       [u'quote " :)', u'b']),
                   (u'd=d,e="a,b,c,d"',        [u'd=d', u'e="a', u'b',
@@ -305,4 +316,3 @@ class TestParamParsing:
 
 
 coverage_modules = ['MoinMoin.wikiutil']
-
