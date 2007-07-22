@@ -1361,7 +1361,8 @@ def get_boolean(request, arg, name=None, default=None):
 def get_int(request, arg, name=None, default=None):
     """
     For use with values returned from parse_quoted_separated or given
-    as macro parameters, return an integer from a unicode string.
+    as macro parameters, return an integer from a unicode string
+    containing the decimal representation of a number.
     The empty string or None are valid input and yield the default value.
 
     @param request: A request instance
@@ -1378,7 +1379,7 @@ def get_int(request, arg, name=None, default=None):
     elif not isinstance(arg, unicode):
         raise TypeError('argument must be None or unicode')
     try:
-        arg = int(arg, 0)
+        arg = int(arg)
     except ValueError:
         if name:
             raise ValueError(_('Argument "%s" must be an integer value') % name)
@@ -1434,8 +1435,6 @@ def get_unicode(request, arg, name=None, default=None):
         return default
     elif not isinstance(arg, unicode):
         raise TypeError('argument must be None or unicode')
-    elif arg == u'':
-        return default
 
     return arg
 
