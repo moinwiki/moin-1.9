@@ -138,7 +138,8 @@ class Macro:
             return self.format_error(e)
 
     def format_error(self, err):
-        return u'[[%s: %s]]' % (self.name, str(err))
+        """ format an error object for output instead of normal macro output """
+        return u'[[%s: %s]]' % (self.name, unicode(err))
 
     def execute(self, macro_name, args):
         """ Get and execute a macro
@@ -313,7 +314,7 @@ class Macro:
         case = 0
 
         # If called with empty or no argument, default to regex search for .+, the full page list.
-        needle = wikiutil.get_unicode(request, needle, 'needle', u'regex:.+')
+        needle = wikiutil.get_unicode(self.request, needle, 'needle', u'regex:.+')
 
         # With whitespace argument, return same error message as FullSearch
         if not needle.strip():
@@ -365,16 +366,20 @@ class Macro:
         count = self.request.rootpage.getPageCount(exists=only_existing)
         return self.formatter.text("%d" % count)
 
-    def macro_Icon(self, icon):
+    def macro_Icon(self, icon=None):
+        icon = wikiutil.get_unicode(self.request, icon, 'icon')
+        if icon is None:
+            raise ValueError("You need to give an Icon name")
         return self.formatter.icon(icon.lower())
 
-    def macro_TemplateList(self, arg):
+    def macro_TemplateList(self, needle=None):
+        # TODO: this should be renamed (RegExPageNameList?), it does not list only Templates...
         _ = self._
+        needle = wikiutil.get_unicode(self.request, needle, 'needle', u'.+')
         try:
-            needle_re = re.compile(arg, re.IGNORECASE)
-        except re.error, e:
-            return "<strong>%s: %s</strong>" % (
-                _("ERROR in regex '%s'") % (arg, ), e)
+            needle_re = re.compile(needle, re.IGNORECASE)
+        except re.error, err:
+            raise ValueError("Error in regex %r: %s" % (needle, err))
 
         # Get page list readable by current user, filtered by needle
         hits = self.request.rootpage.getPageList(filter=needle_re.search)
@@ -394,7 +399,7 @@ class Macro:
 
     def __get_Date(self, args, format_date):
         _ = self._
-        if not args:
+        if args is None:
             tm = time.time() # always UTC
         elif len(args) >= 19 and args[4] == '-' and args[7] == '-' \
                 and args[10] == 'T' and args[13] == ':' and args[16] == ':':
@@ -413,9 +418,8 @@ class Macro:
                         if sign == '-':
                             tzoffset = -tzoffset
                 tm = (year, month, day, hour, minute, second, 0, 0, 0)
-            except ValueError, e:
-                return "<strong>%s: %s</strong>" % (
-                    _("Bad timestamp '%s'") % (args, ), e)
+            except ValueError, err:
+                raise ValueError("Bad timestamp %r: %s" % (args, err))
             # as mktime wants a localtime argument (but we only have UTC),
             # we adjust by our local timezone's offset
             try:
@@ -426,9 +430,8 @@ class Macro:
             # try raw seconds since epoch in UTC
             try:
                 tm = float(args)
-            except ValueError, e:
-                return "<strong>%s: %s</strong>" % (
-                    _("Bad timestamp '%s'") % (args, ), e)
+            except ValueError, err:
+                raise ValueError("Bad timestamp %r: %s" % (args, err))
         return format_date(tm)
 
     def macro_Date(self, stamp=None):
@@ -437,11 +440,16 @@ class Macro:
     def macro_DateTime(self, stamp=None):
         return self.__get_Date(stamp, self.request.user.getFormattedDateTime)
 
-    def macro_Anchor(self, anchor):
-        return self.formatter.anchordef(anchor or "anchor")
+    def macro_Anchor(self, anchor=None):
+        anchor = wikiutil.get_unicode(self.request, anchor, 'anchor', u'anchor')
+        return self.formatter.anchordef(anchor)
 
-    def macro_MailTo(self, email, text=None):
-        text = wikiutil.get_unicode(self.request, text, 'text', u'')
+    def macro_MailTo(self, email=None, text=None):
+        email = wikiutil.get_unicode(self.request, email, 'email')
+        if email is None:
+            raise ValueError("You need to give an (obfuscated) email address")
+        text =  wikiutil.get_unicode(self.request, text, 'text')
+
         from MoinMoin.mail.sendmail import decodeSpamSafeEmail
 
         if self.request.user.valid:
@@ -463,7 +471,11 @@ class Macro:
 
         return result
 
-    def macro_GetVal(self, page, key):
+    def macro_GetVal(self, page=None, key=None):
+        page = wikiutil.get_unicode(self.request, page, 'page')
+        key = wikiutil.get_unicode(self.request, key, 'key')
+        if page is None or key is None:
+            raise ValueError("You need to give: pagename, key")
         d = self.request.dicts.dict(page)
         result = d.get(key, '')
         return self.formatter.text(result)
