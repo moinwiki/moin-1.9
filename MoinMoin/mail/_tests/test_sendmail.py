@@ -6,14 +6,13 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import unittest # LEGACY UNITTEST, PLEASE DO NOT IMPORT unittest IN NEW TESTS, PLEASE CONSULT THE py.test DOCS
 from email.Charset import Charset, QP
 from email.Header import Header
 from MoinMoin.mail import sendmail
 from MoinMoin import config
 
 
-class TestdecodeSpamSafeEmail(unittest.TestCase):
+class TestdecodeSpamSafeEmail:
     """mail.sendmail: testing mail"""
 
     _tests = (
@@ -39,13 +38,10 @@ class TestdecodeSpamSafeEmail(unittest.TestCase):
     def testDecodeSpamSafeMail(self):
         """mail.sendmail: decoding spam safe mail"""
         for coded, expected in self._tests:
-            result = sendmail.decodeSpamSafeEmail(coded)
-            self.assertEqual(result, expected,
-                             'Expected "%(expected)s" but got "%(result)s"' %
-                             locals())
+            assert sendmail.decodeSpamSafeEmail(coded) == expected
 
 
-class TestEncodeAddress(unittest.TestCase):
+class TestEncodeAddress:
     """ Address encoding tests
 
     See http://www.faqs.org/rfcs/rfc2822.html section 3.4.
@@ -63,31 +59,27 @@ class TestEncodeAddress(unittest.TestCase):
         """ mail.sendmail: encode simple address: local@domain """
         address = u'local@domain'
         expected = address.encode(config.charset)
-        self.failUnlessEqual(sendmail.encodeAddress(address, self.charset),
-                             expected)
+        assert sendmail.encodeAddress(address, self.charset) == expected
 
     def testComposite(self):
         """ mail.sendmail: encode address: 'Phrase <local@domain>' """
         address = u'Phrase <local@domain>'
         phrase = str(Header(u'Phrase '.encode('utf-8'), self.charset))
         expected = phrase + '<local@domain>'
-        self.failUnlessEqual(sendmail.encodeAddress(address, self.charset),
-                             expected)
+        assert sendmail.encodeAddress(address, self.charset) == expected
 
     def testCompositeUnicode(self):
         """ mail.sendmail: encode Uncode address: 'ויקי <local@domain>' """
         address = u'ויקי <local@domain>'
         phrase = str(Header(u'ויקי '.encode('utf-8'), self.charset))
         expected = phrase + '<local@domain>'
-        self.failUnlessEqual(sendmail.encodeAddress(address, self.charset),
-                             expected)
+        assert sendmail.encodeAddress(address, self.charset) == expected
 
     def testEmptyPhrase(self):
         """ mail.sendmail: encode address with empty phrase: '<local@domain>' """
         address = u'<local@domain>'
         expected = address.encode(config.charset)
-        self.failUnlessEqual(sendmail.encodeAddress(address, self.charset),
-                             expected)
+        assert sendmail.encodeAddress(address, self.charset) == expected
 
     def testEmptyAddress(self):
         """ mail.sendmail: encode address with empty address: 'Phrase <>'
@@ -98,8 +90,7 @@ class TestEncodeAddress(unittest.TestCase):
         address = u'Phrase <>'
         phrase = str(Header(u'Phrase '.encode('utf-8'), self.charset))
         expected = phrase + '<>'
-        self.failUnlessEqual(sendmail.encodeAddress(address, self.charset),
-                             expected)
+        assert sendmail.encodeAddress(address, self.charset) == expected
 
     def testInvalidAddress(self):
         """ mail.sendmail: encode invalid address 'Phrase <blah'
@@ -110,8 +101,7 @@ class TestEncodeAddress(unittest.TestCase):
         """
         address = u'Phrase <blah'
         expected = address.encode(config.charset)
-        self.failUnlessEqual(sendmail.encodeAddress(address, self.charset),
-                             expected)
+        assert sendmail.encodeAddress(address, self.charset) == expected
 
 
 coverage_modules = ['MoinMoin.mail.sendmail']
