@@ -1431,7 +1431,6 @@ def get_unicode(request, arg, name=None, default=None):
     @rtype: float
     @returns: the float value of the string
     """
-    _ = request.getText
     if arg is None:
         return default
     elif not isinstance(arg, unicode):
