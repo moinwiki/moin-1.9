@@ -171,34 +171,34 @@ class TestExpandPrivateVariables(TestExpandUserName):
 
 
 class TestSave:
-    
+
     def setup_method(self, method):
         self.old_handlers = self.request.cfg.event_handlers
         gain_superuser_rights(self.request)
-        
+
     def teardown_method(self, method):
         self.request.cfg.event_handlers = self.old_handlers
-        
+
     def testSaveAbort(self):
         """Test if saveText() is interrupted if PagePreSave event handler returns Abort"""
-    
+
         def handler(event):
             from MoinMoin.events import Abort
             return Abort("This is just a test")
-    
+
         pagename = u'AutoCreatedMoinMoinTemporaryTestPageFortestSave'
         testtext = u'ThisIsSomeStupidTestPageText!'
 
         self.request.cfg.event_handlers = [handler]
-        
+
         page = Page(self.request, pagename)
         if page.exists():
             deleter = PageEditor(self.request, pagename)
             deleter.deletePage()
-    
+
         editor = PageEditor(self.request, pagename)
         editor.saveText(testtext, 0)
-    
+
         print "PageEditor can't save a page if Abort is returned from PreSave event handlers"
         page = Page(self.request, pagename)
         assert page.body != testtext
