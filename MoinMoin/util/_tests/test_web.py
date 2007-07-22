@@ -6,13 +6,12 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import unittest # LEGACY UNITTEST, PLEASE DO NOT IMPORT unittest IN NEW TESTS, PLEASE CONSULT THE py.test DOCS
 from MoinMoin import wikiutil
 from MoinMoin.util import web
 from MoinMoin.widget import html
 
 
-class TestMakeQueryString(unittest.TestCase):
+class TestMakeQueryString:
     """util.web: making query string"""
 
     def testMakeQueryStringFromArgument(self):
@@ -26,17 +25,11 @@ class TestMakeQueryString(unittest.TestCase):
             )
 
         for description, arg, expected in tests:
-            result = wikiutil.makeQueryString(arg)
-            self.assertEqual(result, expected,
-                             ('%(description)s: expected "%(expected)s" '
-                              'but got "%(result)s"') % locals())
+            assert wikiutil.makeQueryString(arg) == expected
 
     def testMakeQueryStringFromKeywords(self):
         """ util.web: make query sting from keywords """
-        expected = 'a=1&b=string'
-        result = wikiutil.makeQueryString(a=1, b='string')
-        self.assertEqual(result, expected,
-                         'Expected "%(expected)s" but got "%(result)s"' % locals())
+        assert wikiutil.makeQueryString(a=1, b='string') == 'a=1&b=string'
 
     def testMakeQueryStringFromArgumentAndKeywords(self):
         """ util.web: make query sting from argument and keywords """
@@ -50,48 +43,41 @@ class TestMakeQueryString(unittest.TestCase):
 
         for description, arg, expected in tests:
             # Call makeQueryString with both arg and keyword
-            result = wikiutil.makeQueryString(arg, b='kw')
-            self.assertEqual(result, expected,
-                             ('%(description)s: expected "%(expected)s" '
-                              'but got "%(result)s"') % locals())
+            assert wikiutil.makeQueryString(arg, b='kw') == expected
 
 
-class TestMakeSelection(unittest.TestCase):
+class TestMakeSelection:
     """util.web: creating html select"""
 
     values = ('one', 'two', 'simple', ('complex', 'A tuple & <escaped text>'))
 
-    def setUp(self):
-        html._SORT_ATTRS = 1
-        self.expected = (
+    html._SORT_ATTRS = 1
+    expected = (
         u'<select name="test" size="1">'
         u'<option value="one">one</option>'
         u'<option value="two">two</option>'
         u'<option value="simple">simple</option>'
         u'<option value="complex">A tuple &amp; &lt;escaped text&gt;</option>'
         u'</select>'
-        )
+    )
 
     def testMakeSelectNoSelection(self):
         """util.web: creating html select with no selection"""
         expected = self.expected
         result = unicode(web.makeSelection('test', self.values, size=1))
-        self.assertEqual(result, expected,
-                         'Expected "%(expected)s" but got "%(result)s"' % locals())
+        assert result == expected
 
     def testMakeSelectNoSelection2(self):
         """util.web: creating html select with non existing selection"""
         expected = self.expected
         result = unicode(web.makeSelection('test', self.values, 'three', size=1))
-        self.assertEqual(result, expected,
-                         'Expected "%(expected)s" but got "%(result)s"' % locals())
+        assert result == expected
 
     def testMakeSelectWithSelectedItem(self):
         """util.web: creating html select with selected item"""
         expected = self.expected.replace('value="two"', 'selected value="two"')
         result = unicode(web.makeSelection('test', self.values, 'two', size=1))
-        self.assertEqual(result, expected,
-                         'Expected "%(expected)s" but got "%(result)s"' % locals())
+        assert result == expected
 
 
 coverage_modules = ['MoinMoin.util.web']
