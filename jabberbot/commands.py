@@ -57,6 +57,11 @@ class BaseDataCommand(object):
     parameter_list = u""
 
     def __init__(self, jid):
+        """A constructor
+
+        @param jid: Jabber ID to send the reply to
+        @type jid: unicode
+        """
         self.jid = jid
         self.data = None
 
