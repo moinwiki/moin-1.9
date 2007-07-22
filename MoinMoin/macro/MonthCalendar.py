@@ -87,6 +87,8 @@
         * do a correct calculation of "today" using user's timezone
     * 2.2:
         * added template argument for specifying an edit template for new pages
+    * 2.3:
+        * adapted to moin 1.7 new macro parameter parsing
 
     Usage:
         [[MonthCalendar(BasePage,year,month,monthoffset,monthoffset2,height6)]]
@@ -182,54 +184,24 @@ def yearmonthplusoffset(year, month, offset):
         year += 1
     return year, month
 
-def parseargs(args, defpagename, defyear, defmonth, defoffset, defoffset2, defheight6, defanniversary, deftemplate):
+def parseargs(request, args, defpagename, defyear, defmonth, defoffset, defoffset2, defheight6, defanniversary, deftemplate):
     """ parse macro arguments """
-    strpagename = args.group('basepage')
-    if strpagename:
-        parmpagename = wikiutil.unquoteWikiname(strpagename)
-    else:
-        parmpagename = defpagename
+    args = wikiutil.parse_quoted_separated(args, name_value=False)
+    args += [None] * 8 # fill up with None to trigger defaults
+    parmpagename, parmyear, parmmonth, parmoffset, parmoffset2, parmheight6, parmanniversary, parmtemplate = args[:8]
+    parmpagename = wikiutil.get_unicode(request, parmpagename, 'pagename', defpagename)
+    parmyear = wikiutil.get_int(request, parmyear, 'year', defyear)
+    parmmonth = wikiutil.get_int(request, parmmonth, 'month', defmonth)
+    parmoffset = wikiutil.get_int(request, parmoffset, 'offset', defoffset)
+    parmoffset2 = wikiutil.get_int(request, parmoffset2, 'offset2', defoffset2)
+    parmheight6 = wikiutil.get_bool(request, parmheight6, 'height6', defheight6)
+    parmanniversary = wikiutil.get_bool(request, parmanniversary, 'anniversary', defanniversary)
+    parmtemplate = wikiutil.get_unicode(request, parmtemplate, 'template', deftemplate)
+
     # multiple pagenames separated by "*" - split into list of pagenames
     parmpagename = re.split(r'\*', parmpagename)
 
-    strtemplate = args.group('template')
-    if strtemplate:
-        parmtemplate = wikiutil.unquoteWikiname(strtemplate)
-    else:
-        parmtemplate = deftemplate
-
-    def getint(args, name, default):
-        s = args.group(name)
-        i = default
-        if s:
-            try:
-                i = int(s)
-            except:
-                pass
-        return i
-
-    parmyear = getint(args, 'year', defyear)
-    parmmonth = getint(args, 'month', defmonth)
-    parmoffset = getint(args, 'offset', defoffset)
-    parmoffset2 = getint(args, 'offset2', defoffset2)
-    parmheight6 = getint(args, 'height6', defheight6)
-    parmanniversary = getint(args, 'anniversary', defanniversary)
-
     return parmpagename, parmyear, parmmonth, parmoffset, parmoffset2, parmheight6, parmanniversary, parmtemplate
-
-# FIXME:                          vvvvvv is there a better way for matching a pagename ?
-_arg_basepage = r'\s*(?P<basepage>[^, ]+)?\s*'
-_arg_year = r',\s*(?P<year>\d+)?\s*'
-_arg_month = r',\s*(?P<month>\d+)?\s*'
-_arg_offset = r',\s*(?P<offset>[+-]?\d+)?\s*'
-_arg_offset2 = r',\s*(?P<offset2>[+-]?\d+)?\s*'
-_arg_height6 = r',\s*(?P<height6>[+-]?\d+)?\s*'
-_arg_anniversary = r',\s*(?P<anniversary>[+-]?\d+)?\s*'
-_arg_template = r',\s*(?P<template>[^, ]+)?\s*' # XXX see basepage comment
-_args_re_pattern = r'^(%s)?(%s)?(%s)?(%s)?(%s)?(%s)?(%s)?(%s)?$' % \
-                     (_arg_basepage, _arg_year, _arg_month,
-                      _arg_offset, _arg_offset2, _arg_height6, _arg_anniversary, _arg_template)
-
 
 def execute(macro, text):
     request = macro.request
@@ -240,34 +212,29 @@ def execute(macro, text):
     if request.mode_getpagelinks:
         return ''
 
-    args_re = re.compile(_args_re_pattern)
-
     currentyear, currentmonth, currentday, h, m, s, wd, yd, ds = request.user.getTime(time.time())
     thispage = formatter.page.page_name
     # does the url have calendar params (= somebody has clicked on prev/next links in calendar) ?
     if 'calparms' in macro.form:
+        has_calparms = 1 # yes!
         text2 = macro.form['calparms'][0]
-        args2 = args_re.match(text2)
-        if not args2:
-            return ('<p><strong class="error">%s</strong></p>' % _('Invalid MonthCalendar calparms "%s"!')) % (text2, )
-        else:
-            has_calparms = 1 # yes!
+        try:
             cparmpagename, cparmyear, cparmmonth, cparmoffset, cparmoffset2, cparmheight6, cparmanniversary, cparmtemplate = \
-                parseargs(args2, thispage, currentyear, currentmonth, 0, 0, 0, 0, '')
+                parseargs(request, text2, thispage, currentyear, currentmonth, 0, 0, False, False, u'')
+        except (ValueError, TypeError), err:
+            return macro.format_error(err)
     else:
         has_calparms = 0
 
     if text is None: # macro call without parameters
+        text = u''
+
+    # parse and check arguments
+    try:
         parmpagename, parmyear, parmmonth, parmoffset, parmoffset2, parmheight6, anniversary, parmtemplate = \
-            [thispage], currentyear, currentmonth, 0, 0, 0, 0, ''
-    else:
-        # parse and check arguments
-        args = args_re.match(text)
-        if not args:
-            return ('<p><strong class="error">%s</strong></p>' % _('Invalid MonthCalendar arguments "%s"!')) % (text, )
-        else:
-            parmpagename, parmyear, parmmonth, parmoffset, parmoffset2, parmheight6, anniversary, parmtemplate = \
-                parseargs(args, thispage, currentyear, currentmonth, 0, 0, 0, 0, '')
+            parseargs(request, text, thispage, currentyear, currentmonth, 0, 0, False, False, u'')
+    except (ValueError, TypeError), err:
+        return macro.format_error(err)
 
     # does url have calendar params and is THIS the right calendar to modify (we can have multiple
     # calendars on the same page)?

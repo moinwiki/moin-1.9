@@ -1345,7 +1345,7 @@ def get_bool(request, arg, name=None, default=None):
     if arg is None:
         return default
     elif not isinstance(arg, unicode):
-        raise TypeError('argument must be None or unicode')
+        raise TypeError('Argument must be None or unicode')
     arg = arg.lower()
     if arg in [u'0', u'false', u'no']:
         return False
@@ -1377,7 +1377,7 @@ def get_int(request, arg, name=None, default=None):
     if arg is None:
         return default
     elif not isinstance(arg, unicode):
-        raise TypeError('argument must be None or unicode')
+        raise TypeError('Argument must be None or unicode')
     try:
         return int(arg)
     except ValueError:
@@ -1405,7 +1405,7 @@ def get_float(request, arg, name=None, default=None):
     if arg is None:
         return default
     elif not isinstance(arg, unicode):
-        raise TypeError('argument must be None or unicode')
+        raise TypeError('Argument must be None or unicode')
     try:
         return float(arg)
     except ValueError:
