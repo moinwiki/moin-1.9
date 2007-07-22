@@ -27,10 +27,18 @@ class Contact:
     This class handles some logic related to keeping track of
     contact availability, status, etc."""
 
+    # Default Time To Live of a contact. If there are no registered
+    # resources for that period of time, the contact should be removed
+    default_ttl = 3600 * 24 # default of one day
+
     def __init__(self, jid, resource, priority, show, language=None):
         self.jid = jid
         self.resources = {resource: {'show': show, 'priority': priority, 'forms': False}}
         self.language = language
+
+        # The last time when this contact was seen online.
+        # This value has meaning for offline contacts only.
+        self.last_online = None
 
         # Queued messages, waiting for contact to change its "show"
         # status to something different than "dnd". The messages should
@@ -39,6 +47,14 @@ class Contact:
         # the next time she becomes "available".
         self.messages = []
 
+    def is_valid(self, current_time):
+        """Check if this contact entry is still valid and should be kept
+
+        @param time: current time in seconds
+
+        """
+        # No resources == offline
+        return self.resources or current_time < self.last_online + self.default_ttl
 
     def add_resource(self, resource, show, priority):
         """Adds information about a connected resource
@@ -49,6 +65,7 @@ class Contact:
 
         """
         self.resources[resource] = {'show': show, 'priority': priority}
+        self.last_online = None
 
     def set_supports_forms(self, resource):
         if resource in self.resources:
@@ -71,6 +88,9 @@ class Contact:
         else:
             raise ValueError("No such resource!")
 
+        if not self.resources:
+            self.last_online = time.time()
+
     def is_dnd(self):
         """Checks if contact is DoNotDisturb
 
@@ -87,7 +107,8 @@ class Contact:
                 max_prio = resource['priority']
                 max_prio_show = resource['show']
 
-        return max_prio_show == u'dnd'
+        # If there are no resources the contact is offline, not dnd
+        return self.resources and max_prio_show == u'dnd'
 
     def set_show(self, resource, show):
         """Sets show property for a given resource
@@ -135,6 +156,12 @@ class XMPPBot(Client, Thread):
         # A dictionary of contact objects, ordered by bare JID
         self.contacts = {}
 
+        # The last time when contacts were checked for expiration, in seconds
+        self.last_expiration = time.time()
+
+        # How often should the contacts be checked for expiration, in seconds
+        self.contact_check = 600
+
         self.known_xmlrpc_cmds = [cmd.GetPage, cmd.GetPageHTML, cmd.GetPageList, cmd.GetPageInfo, cmd.Search]
         self.internal_commands = ["ping", "help", "searchform"]
 
@@ -154,7 +181,7 @@ class XMPPBot(Client, Thread):
     def loop(self, timeout=1):
         """Main event loop - stream and command handling"""
 
-        while 1:
+        while True:
             stream = self.get_stream()
             if not stream:
                 break
@@ -164,6 +191,26 @@ class XMPPBot(Client, Thread):
                 # Process all available commands
                 while self.poll_commands(): pass
                 self.idle()
+
+    def idle(self):
+        """Do some maintenance"""
+
+        Client.idle(self)
+
+        current_time = time.time()
+        if self.last_expiration + self.contact_check < current_time:
+            self.expire_contacts(current_time)
+            self.last_expiration = current_time
+
+    def expire_contacts(self, current_time):
+        """Check which contats have been offline for too long and should be removed
+
+        @param current_time: current time in seconds
+
+        """
+        for jid, contact in self.contacts.items():
+            if not contact.is_valid(current_time):
+                del self.contacts[jid]
 
     def getText(self, jid):
         """Returns a getText function (_) for the given JID
@@ -515,7 +562,7 @@ The call should look like:\n\n%(command)s %(params)s")
                 # alive the next time this contact becomes available.
                 if len(contact.resources) == 1:
                     self.send_queued_messages(contact, ignore_dnd=True)
-                    del self.contacts[bare_jid]
+                    contact.remove_resource(jid.resource)
                 else:
                     contact.remove_resource(jid.resource)
 
@@ -571,15 +618,20 @@ The call should look like:\n\n%(command)s %(params)s")
         else:
             self.contacts[bare_jid] = Contact(jid, jid.resource, priority, show)
             self.supports_dataforms(jid)
-
-            # Request user's language now. This is suboptimal, but caching
-            # should fix it in the future.
-            request = cmd.GetUserLanguage(bare_jid)
-            self.from_commands.put_nowait(request)
+            self.get_user_language(bare_jid)
             self.log.debug(self.contacts[bare_jid])
 
         # Confirm that we've handled this stanza
         return True
+
+    def get_user_language(self, jid):
+        """Request user's language setting from the wiki
+
+        @param jid: bare Jabber ID of the user to query for
+        @type jid: unicode
+        """
+        request = cmd.GetUserLanguage(jid)
+        self.from_commands.put_nowait(request)
 
     def supports_dataforms(self, jid):
         """Check if a clients supports data forms.
