@@ -445,6 +445,11 @@ reStructuredText Quick Reference
                      some string with an error msg, if the password is problematic.
         """
         try:
+            set
+        except:
+            from sets import Set as set
+
+        try:
             # in any case, do a very simple built-in check to avoid the worst passwords
             if len(password) < 6:
                 raise ValueError("Password too short.")
