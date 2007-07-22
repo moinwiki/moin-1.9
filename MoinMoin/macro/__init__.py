@@ -63,18 +63,18 @@ class Macro:
 
     Dependencies = {
         "TitleSearch": ["namespace"],
-        "Goto": [],
+        "PageList": ["namespace"],
+        "TemplateList": ["namespace"],
         "WordIndex": ["namespace"],
         "TitleIndex": ["namespace"],
         "PageCount": ["namespace"],
+        "Goto": [],
         "Icon": ["user"], # users have different themes and user prefs
-        "PageList": ["namespace"],
         "Date": ["time"],
         "DateTime": ["time"],
         "Anchor": [],
         "Mailto": ["user"],
         "GetVal": ["pages"],
-        "TemplateList": ["namespace"],
         }
 
     # we need the lang macros to execute when html is generated,
@@ -193,24 +193,47 @@ class Macro:
         from MoinMoin.macro.FullSearch import search_box
         return search_box("titlesearch", self)
 
-    def macro_GoTo(self):
-        """ Make a goto box
-
-        @rtype: unicode
-        @return: goto box html fragment
-        """
+    def macro_PageList(self, needle=None):
+        from MoinMoin import search
         _ = self._
-        html = [
-            u'<form method="get" action="">',
-            u'<div>',
-            u'<input type="hidden" name="action" value="goto">',
-            u'<input type="text" name="target" size="30">',
-            u'<input type="submit" value="%s">' % _("Go To Page"),
-            u'</div>',
-            u'</form>',
-            ]
-        html = u'\n'.join(html)
-        return self.formatter.rawHTML(html)
+        case = 0
+
+        # If called with empty or no argument, default to regex search for .+, the full page list.
+        needle = wikiutil.get_unicode(self.request, needle, 'needle', u'regex:.+')
+
+        # With whitespace argument, return same error message as FullSearch
+        if not needle.strip():
+            err = _('Please use a more selective search term instead of {{{"%s"}}}') % needle
+            return '<span class="error">%s</span>' % err
+
+        # Return a title search for needle, sorted by name.
+        results = search.searchPages(self.request, needle,
+                titlesearch=1, case=case, sort='page_name')
+        return results.pageList(self.request, self.formatter, paging=False)
+
+    def macro_TemplateList(self, needle=None):
+        # TODO: this should be renamed (RegExPageNameList?), it does not list only Templates...
+        _ = self._
+        needle = wikiutil.get_unicode(self.request, needle, 'needle', u'.+')
+        try:
+            needle_re = re.compile(needle, re.IGNORECASE)
+        except re.error, err:
+            raise ValueError("Error in regex %r: %s" % (needle, err))
+
+        # Get page list readable by current user, filtered by needle
+        hits = self.request.rootpage.getPageList(filter=needle_re.search)
+        hits.sort()
+
+        result = []
+        result.append(self.formatter.bullet_list(1))
+        for pagename in hits:
+            result.append(self.formatter.listitem(1))
+            result.append(self.formatter.pagelink(1, pagename, generated=1))
+            result.append(self.formatter.text(pagename))
+            result.append(self.formatter.pagelink(0, pagename))
+            result.append(self.formatter.listitem(0))
+        result.append(self.formatter.bullet_list(0))
+        return ''.join(result)
 
     def _make_index(self, word_re=u'.+'):
         """ make an index page (used for TitleIndex and WordIndex macro)
@@ -306,24 +329,24 @@ class Macro:
         word_re = u'[%s][%s]+' % (config.chars_upper, config.chars_lower)
         return self._make_index(word_re=word_re)
 
+    def macro_GoTo(self):
+        """ Make a goto box
 
-    def macro_PageList(self, needle=None):
-        from MoinMoin import search
+        @rtype: unicode
+        @return: goto box html fragment
+        """
         _ = self._
-        case = 0
-
-        # If called with empty or no argument, default to regex search for .+, the full page list.
-        needle = wikiutil.get_unicode(self.request, needle, 'needle', u'regex:.+')
-
-        # With whitespace argument, return same error message as FullSearch
-        if not needle.strip():
-            err = _('Please use a more selective search term instead of {{{"%s"}}}') % needle
-            return '<span class="error">%s</span>' % err
-
-        # Return a title search for needle, sorted by name.
-        results = search.searchPages(self.request, needle,
-                titlesearch=1, case=case, sort='page_name')
-        return results.pageList(self.request, self.formatter, paging=False)
+        html = [
+            u'<form method="get" action="">',
+            u'<div>',
+            u'<input type="hidden" name="action" value="goto">',
+            u'<input type="text" name="target" size="30">',
+            u'<input type="submit" value="%s">' % _("Go To Page"),
+            u'</div>',
+            u'</form>',
+            ]
+        html = u'\n'.join(html)
+        return self.formatter.rawHTML(html)
 
     def macro_PageCount(self, exists=None):
         """ Return number of pages readable by current user
@@ -353,31 +376,6 @@ class Macro:
         if icon is None:
             raise ValueError("You need to give an Icon name")
         return self.formatter.icon(icon.lower())
-
-    def macro_TemplateList(self, needle=None):
-        # TODO: this should be renamed (RegExPageNameList?), it does not list only Templates...
-        _ = self._
-        needle = wikiutil.get_unicode(self.request, needle, 'needle', u'.+')
-        try:
-            needle_re = re.compile(needle, re.IGNORECASE)
-        except re.error, err:
-            raise ValueError("Error in regex %r: %s" % (needle, err))
-
-        # Get page list readable by current user, filtered by needle
-        hits = self.request.rootpage.getPageList(filter=needle_re.search)
-        hits.sort()
-
-        result = []
-        result.append(self.formatter.bullet_list(1))
-        for pagename in hits:
-            result.append(self.formatter.listitem(1))
-            result.append(self.formatter.pagelink(1, pagename, generated=1))
-            result.append(self.formatter.text(pagename))
-            result.append(self.formatter.pagelink(0, pagename))
-            result.append(self.formatter.listitem(0))
-        result.append(self.formatter.bullet_list(0))
-        return ''.join(result)
-
 
     def __get_Date(self, args, format_date):
         _ = self._
