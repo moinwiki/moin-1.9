@@ -94,6 +94,50 @@ class Macro:
         # Initialized on execute
         self.name = None
 
+    def _wrap(self, macro_name, fn, args):
+        """
+        Parses arguments for a macro call and calls the macro
+        function with the arguments.
+        """
+        if args:
+            positional, keyword, trailing = \
+                wikiutil.parse_quoted_separated(args)
+
+            kwargs = {}
+            nonascii = {}
+            for kw in keyword:
+                try:
+                    kwargs[str(kw)] = keyword[kw]
+                except UnicodeEncodeError:
+                    nonascii[kw] = keyword[kw]
+
+            # add trailing args as keyword argument if present,
+            # otherwise remove if the user entered some
+            # (so macros don't get a string where they expect a list)
+            if trailing:
+                kwargs['_trailing_args'] = trailing
+            elif '_trailing_args' in kwargs:
+                del kwargs['_trailing_args']
+
+            # add nonascii args as keyword argument if present,
+            # otherwise remove if the user entered some
+            # (so macros don't get a string where they expect a list)
+            if nonascii:
+                kwargs['_non_ascii_kwargs'] = nonascii
+            elif '_non_ascii_kwargs' in kwargs:
+                del kwargs['_non_ascii_kwargs']
+
+        else:
+            positional = []
+            kwargs = {}
+
+        try:
+            return fn(self, *positional, **kwargs)
+        except TypeError, e:
+            return u'[[%s]]' % str(e)
+        except ValueError, e:
+            return u'[[%s: %s]]' % (macro_name, str(e))
+
     def execute(self, macro_name, args):
         """ Get and execute a macro
 
@@ -102,7 +146,12 @@ class Macro:
         """
         self.name = macro_name
         try:
-            execute = wikiutil.importPlugin(self.cfg, 'macro', macro_name)
+            try:
+                call = wikiutil.importPlugin(self.cfg, 'macro', macro_name,
+                                             function='macro_%s' % macro_name)
+                execute = lambda _self, _args: _self._wrap(macro_name, call, _args)
+            except wikiutil.PluginAttributeError:
+                execute = wikiutil.importPlugin(self.cfg, 'macro', macro_name)
         except wikiutil.PluginMissingError:
             try:
                 builtins = self.__class__
