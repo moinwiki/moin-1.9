@@ -6,10 +6,11 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import unittest # LEGACY UNITTEST, PLEASE DO NOT IMPORT unittest IN NEW TESTS, PLEASE CONSULT THE py.test DOCS
+import py
+
 from MoinMoin.widget import html
 
-class TestHTMLWidgets(unittest.TestCase):
+class TestHTMLWidgets:
     """widget.html: testing html widgets"""
 
     def testCreate(self):
@@ -28,16 +29,14 @@ class TestHTMLWidgets(unittest.TestCase):
 
         for description, obj, expected in tests:
             result = unicode(obj)
-            self.assertEqual(result, expected,
-                             ('%(description)s: expected "%(expected)s" '
-                              'but got "%(result)s"') % locals())
+            assert result == expected
 
     def testInvalidAttributes(self):
-        """widegt.html: invalid attributes raises exception
+        """widget.html: invalid attributes raises exception
 
         TO DO: add tests for all elements by HTML 4 spec.
         """
-        self.assertRaises(AttributeError, html.BR, name='foo')
+        py.test.raises(AttributeError, html.BR, name='foo')
 
 
     def testCompositeElements(self):
@@ -61,8 +60,7 @@ class TestHTMLWidgets(unittest.TestCase):
         for action, data, expected in actions:
             action(data)
             result = unicode(element)
-            self.assertEqual(result, expected,
-                             'Expected "%(expected)s" but got "%(result)s"' % locals())
+            assert result == expected
 
 coverage_modules = ['MoinMoin.widget.html']
 
