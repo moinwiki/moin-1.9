@@ -874,15 +874,6 @@ class Parser:
         lastpos = 0
 
         ###result.append(u'<span class="info">[scan: <tt>"%s"</tt>]</span>' % line)
-        if line.count('{{{') > 1:
-            self.in_nested_pre = line.count('{{{') - line.count('}}}')
-            if self.in_nested_pre == 0:
-                self.in_nested_pre = 1
-            if line.startswith('{{{'):
-                line = line[3:].strip()
-            self.in_pre = 'no_parser'
-            return "%s%s%s" % (self.formatter.paragraph(1), self.formatter.preformatted(1), line)
-
         for match in scan_re.finditer(line):
             # Add text before the match
             if lastpos < match.start():

@@ -561,6 +561,7 @@ You can use {{{brackets}}}}}}"""
     def testManyNestingPreBrackets(self):
         """ tests two nestings  ({{{ }}} and {{{ }}}) in one line for the wiki parser
         """
+        py.test.skip("Broken because not implemented yet")
 
         raw = """{{{
 Test {{{brackets}}} and test {{{brackets}}}
