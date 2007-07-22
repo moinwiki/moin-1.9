@@ -10,10 +10,11 @@
         all: if set to 1 then cummulative hits over all wiki pages is returned. Default is 0
         filter: if set to SAVEPAGE then the saved pages are counted. Default is VIEWPAGE.
 
-   @copyright: 2004-2007 MoinMoin:ReimarBauer
+   @copyright: 2004-2007 MoinMoin:ReimarBauer,
                2005 BenjaminVrolijk
    @license: GNU GPL, see COPYING for details.
 """
+
 Dependencies = ['time'] # do not cache
 
 from MoinMoin import wikiutil
@@ -21,39 +22,38 @@ from MoinMoin.logfile import eventlog
 
 class Hits:
     def __init__(self, macro, args):
-        self.macro = macro
         self.request = macro.request
         self.formatter = macro.formatter
+        self.this_page = macro.formatter.page.page_name
         argParser = wikiutil.ParameterParser("%(all)s%(filter)s")
         try:
-            self.arg_list, self.arg_dict = argParser.parse_parameters(args)
-        except ValueError:
-            # TODO Set defaults until raise in ParameterParser.parse_parameters is changed
-            self.arg_dict = {}
-            self.arg_dict["filter"] = None
-            self.arg_dict["all"] = 0
-
-        self.count = 0
+            self.fixed_count, self.arg_dict = argParser.parse_parameters(args)
+            self.error = None
+        except ValueError, err:
+            self.error = str(err)
 
     def renderInText(self):
-        return self.formatter.text("%s" % (self.getHits()))
+        if self.error:
+            text = "Hits macro: %s" % self.error
+        else:
+            text = "%d" % self.getHits()
+        return self.formatter.text(text)
 
     def getHits(self):
-        formatter = self.macro.formatter
-        kw = self.arg_dict
-        if not kw["filter"]: kw["filter"] = "VIEWPAGE"
+        event_filter = self.arg_dict["filter"]
+        if not event_filter:
+            event_filter = "VIEWPAGE"
+        count_all_pages = self.arg_dict["all"]
 
         event_log = eventlog.EventLog(self.request)
-        event_log.set_filter([kw["filter"]])
+        event_log.set_filter([event_filter])
+        count = 0
         for event in event_log.reverse():
-            pagename = event[2].get('pagename', None)
-            if not kw["all"]:
-                if pagename == formatter.page.page_name:
-                    self.count += 1
-            else:
-                self.count += 1
+            pagename = event[2].get('pagename')
+            if count_all_pages or pagename == self.this_page:
+                count += 1
 
-        return self.count
+        return count
 
 def execute(macro, args):
     """ Temporary glue code to use with moin current macro system """

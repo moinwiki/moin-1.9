@@ -2,12 +2,13 @@
 """
     MoinMoin - MoinMoin.wikiutil Tests
 
-    @copyright: 2003-2004 by Juergen Hermann <jh@web.de>
+    @copyright: 2003-2004 by Juergen Hermann <jh@web.de>,
+                2007 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
 import py
-import unittest # LEGACY UNITTEST, PLEASE DO NOT IMPORT unittest IN NEW TESTS, PLEASE CONSULT THE py.test DOCS
+
 from MoinMoin import wikiutil
 
 
@@ -111,7 +112,7 @@ class TestSystemPagesGroup:
     def testSystemPagesGroupNotEmpty(self):
         assert self.request.dicts.members('SystemPagesGroup')
 
-class TestSystemPage(unittest.TestCase):
+class TestSystemPage:
     systemPages = (
         # First level, on SystemPagesGroup
         'SystemPagesInEnglishGroup',
@@ -126,14 +127,12 @@ class TestSystemPage(unittest.TestCase):
     def testSystemPage(self):
         """wikiutil: good system page names accepted, bad rejected"""
         for name in self.systemPages:
-            self.assert_(wikiutil.isSystemPage(self.request, name),
-                '"%(name)s" is a system page' % locals())
+            assert wikiutil.isSystemPage(self.request, name)
         for name in self.notSystemPages:
-            self.failIf(wikiutil.isSystemPage(self.request, name),
-                '"%(name)s" is NOT a system page' % locals())
+            assert not  wikiutil.isSystemPage(self.request, name)
 
 
-class TestTemplatePage(unittest.TestCase):
+class TestTemplatePage:
     good = (
         'aTemplate',
         'MyTemplate',
@@ -146,55 +145,93 @@ class TestTemplatePage(unittest.TestCase):
         'XTemplateInFront',
     )
 
-    # require default page_template_regex config
-    def setUp(self):
-        self.config = self.TestConfig(defaults=['page_template_regex'])
-    def tearDown(self):
-        self.config.restore()
-
     def testTemplatePage(self):
         """wikiutil: good template names accepted, bad rejected"""
         for name in self.good:
-            self.assert_(wikiutil.isTemplatePage(self.request, name),
-                '"%(name)s" is a valid template name' % locals())
+            assert  wikiutil.isTemplatePage(self.request, name)
         for name in self.bad:
-            self.failIf(wikiutil.isTemplatePage(self.request, name),
-                '"%(name)s" is NOT a valid template name' % locals())
+            assert not wikiutil.isTemplatePage(self.request, name)
 
 
-class TestParmeterParser(unittest.TestCase):
+class TestParmeterParser:
 
-    def testNoWantedArguments(self):
-        args = ''
-        argParser = wikiutil.ParameterParser('')
-        self.arg_list, self.arg_dict = argParser.parse_parameters(args)
-        result = len(self.arg_dict)
-        expected = 0
-        self.assert_(result == expected,
-                     'Expected "%(expected)s" but got "%(result)s"' % locals())
+    def testParameterParser(self):
+        tests = [
+            # trivial
+            ('', '', 0, {}),
 
-    def testWantedArguments(self):
-        test_args = ('',
-                     'width=100',
-                     'width=100, height=200', )
+            # fixed
+            ('%s%i%f%b', '"test",42,23.0,True', 4, {0: 'test', 1: 42, 2: 23.0, 3: True}),
 
-        argParser = wikiutil.ParameterParser("%(width)s%(height)s")
-        for args in test_args:
-            self.arg_list, self.arg_dict = argParser.parse_parameters(args)
-            result = len(self.arg_dict)
-            expected = 2
-            self.assert_(result == expected,
-                         'Expected "%(expected)s" but got "%(result)s"' % locals())
+            # fixed and named
+            ('%s%(x)i%(y)i', '"test"', 1, {0: 'test', 'x': None, 'y': None}),
+            ('%s%(x)i%(y)i', '"test",1', 1, {0: 'test', 'x': 1, 'y': None}),
+            ('%s%(x)i%(y)i', '"test",1,2', 1, {0: 'test', 'x': 1, 'y': 2}),
+            ('%s%(x)i%(y)i', '"test",x=1', 1, {0: 'test', 'x': 1, 'y': None}),
+            ('%s%(x)i%(y)i', '"test",x=1,y=2', 1, {0: 'test', 'x': 1, 'y': 2}),
+            ('%s%(x)i%(y)i', '"test",y=2', 1, {0: 'test', 'x': None, 'y': 2}),
+
+            # test mixed acceptance
+            ("%ifs", '100', 1, {0: 100}),
+            ("%ifs", '100.0', 1, {0: 100.0}),
+            ("%ifs", '"100"', 1, {0: "100"}),
+
+            # boolean
+            ("%(t)b%(f)b", '', 0, {'t': None, 'f': None}),
+            ("%(t)b%(f)b", 't=1', 0, {'t': True, 'f': None}),
+            ("%(t)b%(f)b", 'f=False', 0, {'t': None, 'f': False}),
+            ("%(t)b%(f)b", 't=True, f=0', 0, {'t': True, 'f': False}),
+
+            # integer
+            ("%(width)i%(height)i", '', 0, {'width': None, 'height': None}),
+            ("%(width)i%(height)i", 'width=100', 0, {'width': 100, 'height': None}),
+            ("%(width)i%(height)i", 'height=200', 0, {'width': None, 'height': 200}),
+            ("%(width)i%(height)i", 'width=100, height=200', 0, {'width': 100, 'height': 200}),
+
+            # float
+            ("%(width)f%(height)f", '', 0, {'width': None, 'height': None}),
+            ("%(width)f%(height)f", 'width=100.0', 0, {'width': 100.0, 'height': None}),
+            ("%(width)f%(height)f", 'height=2.0E2', 0, {'width': None, 'height': 200.0}),
+            ("%(width)f%(height)f", 'width=1000.0E-1, height=200.0', 0, {'width': 100.0, 'height': 200.0}),
+
+            # string
+            ("%(width)s%(height)s", '', 0, {'width': None, 'height': None}),
+            ("%(width)s%(height)s", 'width="really wide"', 0, {'width': 'really wide', 'height': None}),
+            ("%(width)s%(height)s", 'height="not too high"', 0, {'width': None, 'height': 'not too high'}),
+            ("%(width)s%(height)s", 'width="really wide", height="not too high"', 0, {'width': 'really wide', 'height': 'not too high'}),
+            # conversion from given type to expected type
+            ("%(width)s%(height)s", 'width=100', 0, {'width': '100', 'height': None}),
+            ("%(width)s%(height)s", 'width=100, height=200', 0, {'width': '100', 'height': '200'}),
+
+            # complex test
+            ("%i%sf%s%ifs%(a)s|%(b)s", ' 4,"DI\'NG", b=retry, a="DING"', 2, {0: 4, 1: "DI'NG", 'a': 'DING', 'b': 'retry'}),
+
+            ]
+        for format, args, expected_fixed_count, expected_dict in tests:
+            argParser = wikiutil.ParameterParser(format)
+            fixed_count, arg_dict = argParser.parse_parameters(args)
+            assert (fixed_count, arg_dict) == (expected_fixed_count, expected_dict)
 
     def testTooMuchWantedArguments(self):
-        py.test.skip("fails because of unfinished wikiutil.ParameterParser code crashing")
         args = 'width=100, height=200, alt=Example'
         argParser = wikiutil.ParameterParser("%(width)s%(height)s")
-        self.arg_list, self.arg_dict = argParser.parse_parameters(args)
-        result = len(self.arg_dict)
-        expected = 2
-        self.assert_(result == expected,
-                     'Expected "%(expected)s" but got "%(result)s"' % locals())
+        py.test.raises(ValueError, argParser.parse_parameters, args)
+
+    def testMalformedArguments(self):
+        args = '='
+        argParser = wikiutil.ParameterParser("%(width)s%(height)s")
+        py.test.raises(ValueError, argParser.parse_parameters, args)
+
+    def testWrongTypeFixedPosArgument(self):
+        args = '0.0'
+        argParser = wikiutil.ParameterParser("%b")
+        py.test.raises(ValueError, argParser.parse_parameters, args)
+
+    def testWrongTypeNamedArgument(self):
+        args = 'flag=0.0'
+        argParser = wikiutil.ParameterParser("%(flag)b")
+        py.test.raises(ValueError, argParser.parse_parameters, args)
+
 
 coverage_modules = ['MoinMoin.wikiutil']
 
