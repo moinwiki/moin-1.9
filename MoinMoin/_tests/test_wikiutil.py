@@ -493,7 +493,7 @@ def _test_invoke_int_fixed(a, b, i=int):
 
 class TestExtensionInvoking:
     def _test_invoke_bool(self, b=bool):
-        assert b == False
+        assert b is False
 
     def _test_invoke_bool_def(self, v=bool, b=False):
         assert b == v
