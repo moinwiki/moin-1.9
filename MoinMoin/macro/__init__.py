@@ -247,10 +247,9 @@ class Macro:
                 titlesearch=1, case=case, sort='page_name')
         return results.pageList(self.request, self.formatter, paging=False)
 
-    def macro_TemplateList(self, needle=None):
+    def macro_TemplateList(self, needle=u'.+'):
         # TODO: this should be renamed (RegExPageNameList?), it does not list only Templates...
         _ = self._
-        needle = wikiutil.get_unicode(self.request, needle, 'needle', u'.+')
         try:
             needle_re = re.compile(needle, re.IGNORECASE)
         except re.error, err:
@@ -384,10 +383,10 @@ class Macro:
         html = u'\n'.join(html)
         return self.formatter.rawHTML(html)
 
-    def macro_Icon(self, icon=None):
-        icon = wikiutil.get_unicode(self.request, icon, 'icon')
-        if icon is None:
-            raise ValueError("You need to give an Icon name")
+    def macro_Icon(self, icon=u''):
+        # empty icon name isn't valid either
+        if not icon:
+            raise ValueError("You need to give a non-empty icon name")
         return self.formatter.icon(icon.lower())
 
     def __get_Date(self, args, format_date):
@@ -437,11 +436,9 @@ class Macro:
         anchor = wikiutil.get_unicode(self.request, anchor, 'anchor', u'anchor')
         return self.formatter.anchordef(anchor)
 
-    def macro_MailTo(self, email=None, text=None):
-        email = wikiutil.get_unicode(self.request, email, 'email')
-        if email is None:
+    def macro_MailTo(self, email, text=u''):
+        if not email:
             raise ValueError("You need to give an (obfuscated) email address")
-        text =  wikiutil.get_unicode(self.request, text, 'text')
 
         from MoinMoin.mail.sendmail import decodeSpamSafeEmail
 
