@@ -278,6 +278,13 @@ class TestParamParsing:
                   # trailing args
                   (u'1,2,a=b,3,4',            ([u'1', u'2'], {u'a': u'b'},
                                                [u'3', u'4'])),
+                  # can quote quotes:
+                  (u'd = """d"',              ([], {u'd': u'"d'}, [])),
+                  (u'd = """d"""',            ([], {u'd': u'"d"'}, [])),
+                  (u'd = "d"" ", e=7',        ([], {u'd': u'd" ', u'e': u'7'},
+                                               [])),
+                  (u'd = "d""", e=8',         ([], {u'd': u'd"', u'e': u'8'},
+                                               [])),
                 ]
         for args, expected in tests:
             result = wikiutil.parse_quoted_separated(args)
