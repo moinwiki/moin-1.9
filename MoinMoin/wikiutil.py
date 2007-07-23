@@ -1555,6 +1555,7 @@ def invoke_extension_function(request, function, args, fixed_args=[]):
 
     kwargs = {}
     kwargs_to_pass = {}
+    trailing_args = []
 
     if args:
         assert isinstance(args, unicode)
@@ -1567,13 +1568,7 @@ def invoke_extension_function(request, function, args, fixed_args=[]):
             except UnicodeEncodeError:
                 kwargs_to_pass[kw] = keyword[kw]
 
-        # add trailing args as keyword argument if present,
-        # otherwise remove if the user entered some
-        # (so macros don't get a string where they expect a list)
-        if trailing:
-            kwargs['_trailing_args'] = trailing
-        elif '_trailing_args' in kwargs:
-            del kwargs['_trailing_args']
+        trailing_args.extend(trailing)
 
     else:
         positional = []
@@ -1616,10 +1611,16 @@ def invoke_extension_function(request, function, args, fixed_args=[]):
             defaults[argname] = defaultlist[idx - defstart]
 
     if positional:
-        raise ValueError(_('Too many arguments'))
-    if '_trailing_args' in kwargs and not allow_trailing:
-        raise ValueError(_('Cannot have arguments without name following'
-                           ' named arguments'))
+        if not allow_trailing:
+            raise ValueError(_('Too many arguments'))
+        trailing_args.extend(positional)
+
+    if trailing_args:
+        if not allow_trailing:
+            raise ValueError(_('Cannot have arguments without name following'
+                               ' named arguments'))
+        kwargs['_trailing_args'] = trailing_args
+
     # type-convert all keyword arguments to the type
     # that the default value indicates
     for argname in kwargs.keys()[:]:
