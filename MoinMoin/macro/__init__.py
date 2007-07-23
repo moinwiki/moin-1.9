@@ -108,6 +108,12 @@ class Macro:
             return wikiutil.get_float(self.request, value, name, default)
         elif isinstance(default, unicode):
             return wikiutil.get_unicode(self.request, value, name, default)
+        elif default is bool:
+            return wikiutil.get_bool(self.request, value, name)
+        elif default is int or default is long:
+            return wikiutil.get_int(self.request, value, name)
+        elif default is float:
+            return wikiutil.get_float(self.request, value, name)
         return value
 
     def _wrap(self, macro_name, fn, args):
@@ -121,6 +127,7 @@ class Macro:
         it to the macro function. That way, macros need not call the
         wikiutil.get_* functions for any arguments that have a default.
         """
+        _ = self.request.getText
         if args:
             positional, keyword, trailing = \
                 wikiutil.parse_quoted_separated(args)
@@ -183,6 +190,8 @@ class Macro:
                 # iterate through all arguments, but if no more positional
                 # arguments are given then skip converting them
                 if idx >= len(positional):
+                    if isinstance(default, type):
+                        raise ValueError(_("Not enough arguments"))
                     continue
 
                 # use the default right away if it's not given,
@@ -461,7 +470,7 @@ class Macro:
         anchor = wikiutil.get_unicode(self.request, anchor, 'anchor', u'anchor')
         return self.formatter.anchordef(anchor)
 
-    def macro_MailTo(self, email, text=u''):
+    def macro_MailTo(self, email=unicode, text=u''):
         if not email:
             raise ValueError("You need to give an (obfuscated) email address")
 
