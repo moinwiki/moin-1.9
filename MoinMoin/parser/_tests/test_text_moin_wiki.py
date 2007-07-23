@@ -580,7 +580,7 @@ Test {{{brackets}}} and test {{{brackets}}}
         raw = 'def {{{ghi}}} jkl {{{mno}}} pqr'
         output = ''.join(self.parse(raw))
         # expected output copied from 1.5
-        expected = 'def <tt>ghi</tt> jkl <tt>mno</tt> pqr'
+        expected = 'def <tt>ghi</tt> jkl <tt>mno</tt><span class="anchor" id="line-0"></span>pqr'
         assert expected in output
 
 class TestLinkingMarkup(ParserTestCase):
