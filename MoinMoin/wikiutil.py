@@ -1486,6 +1486,22 @@ def get_choice(request, arg, name=None, choices=[None]):
     return arg
 
 
+class required_arg:
+    """
+    Wrap a type in this class and give it as default argument
+    for a function passed to invoke_extension_function() in
+    order to get generic checking that the argument is given.
+    """
+    def __init__(self, argtype):
+        """
+        Initialise a required_arg
+        @param argtype: the type the argument should have
+        """
+        if not isinstance(argtype, type):
+            raise TypeError("argtype must be a type")
+        self.argtype = argtype
+
+
 def invoke_extension_function(request, function, args, fixed_args=[]):
     """
     Parses arguments for an extension call and calls the extension
@@ -1529,6 +1545,8 @@ def invoke_extension_function(request, function, args, fixed_args=[]):
             return get_int(request, value, name)
         elif default is float:
             return get_float(request, value, name)
+        elif isinstance(default, required_arg):
+            return _convert_arg(request, value, default.argtype, name)
         return value
 
     assert isinstance(fixed_args, list) or isinstance(fixed_args, tuple)
@@ -1612,6 +1630,10 @@ def invoke_extension_function(request, function, args, fixed_args=[]):
             # went wrong (if it does)
             kwargs[argname] = _convert_arg(request, kwargs[argname],
                                            defaults[argname], argname)
+            if (kwargs[argname] is None
+                and isinstance(defaults[argname], required_arg)):
+                raise ValueError(_('Argument "%s" is required') % argname)
+
         if not argname in argnames:
             # move argname into _kwargs parameter
             kwargs_to_pass[argname] = kwargs[argname]
