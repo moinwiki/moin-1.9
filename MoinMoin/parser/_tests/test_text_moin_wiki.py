@@ -573,6 +573,15 @@ Test {{{brackets}}} and test {{{brackets}}}
 
         assert expected == result
 
+    def testMultipleShortPreSections(self):
+        """
+        tests two single {{{ }}} in one line
+        """
+        raw = 'def {{{ghi}}} jkl {{{mno}}} pqr'
+        output = ''.join(self.parse(raw))
+        # expected output copied from 1.5
+        expected = 'def <tt>ghi</tt> jkl <tt>mno</tt> pqr'
+        assert expected in output
 
 class TestLinkingMarkup(ParserTestCase):
     """ Test wiki markup """
