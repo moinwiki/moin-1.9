@@ -101,7 +101,7 @@ class Macro:
         return the value itself.
         """
         if isinstance(default, bool):
-            return wikiutil.get_boolean(self.request, value, name, default)
+            return wikiutil.get_bool(self.request, value, name, default)
         elif isinstance(default, int) or isinstance(default, long):
             return wikiutil.get_int(self.request, value, name, default)
         elif isinstance(default, float):
