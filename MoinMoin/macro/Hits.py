@@ -22,23 +22,14 @@ from MoinMoin import wikiutil
 from MoinMoin.logfile import eventlog
 
 
-def macro_Hits(macro, all=None, filter=None):
-    request = macro.request
-    _ = request.getText
+def macro_Hits(macro, all=False, filter=(u'VIEWPAGE', u'SAVEPAGE')):
     this_page = macro.formatter.page.page_name
-    event_filter = str(wikiutil.get_unicode(request, filter, 'filter', u'VIEWPAGE'))
-    filters_possible = ('VIEWPAGE', 'SAVEPAGE')
-    if not event_filter in filters_possible:
-        raise ValueError(_("filter argument must be one of %s") % (', '.join(filters_possible)))
-    count_all_pages = wikiutil.get_bool(request, all, 'all', False)
-
-    event_log = eventlog.EventLog(request)
-    event_log.set_filter([event_filter])
+    event_log = eventlog.EventLog(macro.request)
+    event_log.set_filter([str(filter)])
     count = 0
     for event in event_log.reverse():
         pagename = event[2].get('pagename')
-        if count_all_pages or pagename == this_page:
+        if all or pagename == this_page:
             count += 1
 
     return u'%d' % count
-
