@@ -1533,11 +1533,12 @@ def invoke_extension_function(request, function, args, fixed_args=[]):
 
     assert isinstance(fixed_args, list) or isinstance(fixed_args, tuple)
 
+    _ = request.getText
+
     if args:
         assert isinstance(args, unicode)
 
-        positional, keyword, trailing = \
-            parse_quoted_separated(args)
+        positional, keyword, trailing = parse_quoted_separated(args)
 
         kwargs = {}
         nonascii = {}
@@ -1583,30 +1584,48 @@ def invoke_extension_function(request, function, args, fixed_args=[]):
     defstart = argc - len(defaultlist)
 
     defaults = {}
+    # reverse to be able to pop() things off
+    positional.reverse()
+    allow_non_ascii_kw = False
+    allow_trailing = False
     # convert all arguments to keyword arguments,
     # fill all arguments that weren't given with None
     for idx in range(argc):
         argname = argnames[idx]
-        if argname in ['_non_ascii_kwargs', '_trailing_args']:
+        if argname == '_non_ascii_kwargs':
+            allow_non_ascii_kw = True
             continue
-        if idx < len(positional):
-            kwargs[argname] = positional[idx]
+        if argname == '_trailing_args':
+            allow_trailing = True
+            continue
+        if positional:
+            kwargs[argname] = positional.pop()
         if not argname in kwargs:
             kwargs[argname] = None
         if idx >= defstart:
             defaults[argname] = defaultlist[idx - defstart]
 
+    if positional:
+        raise ValueError(_('Too many arguments'))
+    if '_trailing_args' in kwargs and not allow_trailing:
+        raise ValueError(_('Cannot have arguments without name following'
+                           ' named arguments'))
+    if '_non_ascii_kwargs' in kwargs and not allow_non_ascii_kw:
+        raise ValueError(_(u'No argument named "%s"') % (
+            kwargs['_non_ascii_kwargs'].keys()[0]))
+
     # type-convert all keyword arguments to the type
     # that the default value indicates
-    for argname in defaults:
-        default = defaults[argname]
-
-        # the value of 'argname' from kwargs will be put into the
-        # macro's 'argname' argument, so convert that giving the
-        # name to the converter so the user is told which argument
-        # went wrong (if it does)
-        kwargs[argname] = _convert_arg(request, kwargs[argname],
-                                       default, argname)
+    for argname in kwargs:
+        if not varkw and not argname in argnames:
+            raise ValueError(_('No argument named "%s"') % argname)
+        if argname in defaults:
+            # the value of 'argname' from kwargs will be put into the
+            # macro's 'argname' argument, so convert that giving the
+            # name to the converter so the user is told which argument
+            # went wrong (if it does)
+            kwargs[argname] = _convert_arg(request, kwargs[argname],
+                                           defaults[argname], argname)
 
     return function(*fixed_args, **kwargs)
 
