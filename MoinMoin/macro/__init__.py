@@ -24,6 +24,8 @@ import re, time, os
 from MoinMoin import action, config, util
 from MoinMoin import wikiutil, i18n
 from MoinMoin.Page import Page
+from inspect import getargspec
+
 
 names = ["TitleSearch", "WordIndex", "TitleIndex", "GoTo",
          # Macros with arguments
@@ -91,6 +93,17 @@ class Macro:
         # Initialized on execute
         self.name = None
 
+    def _convert_arg(self, value, default, name=None):
+        if isinstance(default, bool):
+            return wikiutil.get_boolean(self.request, value, name, default)
+        elif isinstance(default, int) or isinstance(default, long):
+            return wikiutil.get_int(self.request, value, name, default)
+        elif isinstance(default, float):
+            return wikiutil.get_float(self.request, value, name, default)
+        elif isinstance(default, unicode):
+            return wikiutil.get_unicode(self.request, value, name, default)
+        return value
+
     def _wrap(self, macro_name, fn, args):
         """
         Parses arguments for a macro call and calls the macro
@@ -128,7 +141,33 @@ class Macro:
             positional = []
             kwargs = {}
 
+        args, varargs, varkw, defaults = getargspec(fn)
+        argc = len(args) - 1
+        if not defaults:
+            defaults = []
+
+        # if the first (macro) parameter has a default too...
+        if argc < len(defaults):
+            defaults = defaults[1:]
+        defstart = argc - len(defaults)
+
         try:
+            for idx in range(defstart, argc):
+                argname = args[idx + 1]
+                default = defaults[idx - defstart]
+                if argname in kwargs:
+                    kwargs[argname] = self._convert_arg(kwargs[argname],
+                                                        default, argname)
+
+                if idx >= len(positional):
+                    continue
+
+                if positional[idx] is None:
+                    positional[idx] = default
+                else:
+                    positional[idx] = self._convert_arg(positional[idx],
+                                                        default)
+
             return fn(self, *positional, **kwargs)
         except (ValueError, TypeError), e:
             return self.format_error(e)
