@@ -569,6 +569,7 @@ class TestExtensionInvoking:
         py.test.raises(ValueError, ief, self.request,
                        self._test_invoke_float_None, u'i=""')
         ief(self.request, self._test_trailing, u'a=7, a')
+        ief(self.request, self._test_trailing, u'7, a')
         ief(self.request, self._test_arbitrary_kw, u'test=x, \xc3=test',
             [{u'\xc3': 'test', 'test': u'x'}])
         ief(self.request, self._test_arbitrary_kw, u'test=x, "\xc3"=test',
