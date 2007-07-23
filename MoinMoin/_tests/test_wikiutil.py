@@ -539,7 +539,7 @@ class TestExtensionInvoking:
                        self._test_invoke_int_None, u'""')
         py.test.raises(ValueError, ief, self.request,
                        self._test_invoke_int_None, u'i=""')
-        py.test.raises(TypeError, ief, self.request,
+        py.test.raises(ValueError, ief, self.request,
                        _test_invoke_int_fixed, u'a=7', [7, 8])
         ief(self.request, _test_invoke_int_fixed, u'i=1', [7, 8])
         py.test.raises(ValueError, ief, self.request,
