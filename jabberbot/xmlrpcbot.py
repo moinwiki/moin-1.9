@@ -79,7 +79,7 @@ class XMLRPCClient(Thread):
     def report_error(self, jid, text, data={}):
         # Dummy function, so that the string appears in a .po file
         _ = lambda x: x
-        
+
         report = cmd.NotificationCommandI18n(jid, text, _("Error"), data, async=False)
         self.commands_out.put_nowait(report)
 
@@ -104,7 +104,7 @@ class XMLRPCClient(Thread):
         def wrapped_func(self, command):
             # Dummy function, so that the string appears in a .po file
             _ = lambda x: x
-            
+
             self.token = None
             self.multicall = MultiCall(self.connection)
             jid = command.jid
@@ -119,9 +119,9 @@ class XMLRPCClient(Thread):
 
                     if function(self, command) != u"SUCCESS":
                         self.warn_no_credentials(command.jid)
-                    
+
                     self.commands_out.put_nowait(command)
-                    
+
                 except xmlrpclib.Fault, fault:
                     msg = _("Your request has failed. The reason is:\n%(error)s")
                     self.log.error(str(fault))
@@ -143,14 +143,14 @@ class XMLRPCClient(Thread):
 
     def warn_no_credentials(self, jid):
         """Warn a given JID that credentials check failed
-        
+
         @param jid: full JID to notify about failure
         @type jid: str
-        
+
         """
         # Dummy function, so that the string appears in a .po file
         _ = lambda x: x
-        
+
         msg = _("Credentials check failed, you may be unable to see all information.")
         warning = cmd.NotificationCommandI18n([jid], msg, async=False)
         self.commands_out.put_nowait(warning)
@@ -160,7 +160,7 @@ class XMLRPCClient(Thread):
 
         token_result = u"FAILURE"
         self.multicall.getPage(command.pagename)
-        
+
         if not self.token:
             getpage_result = self.multicall()[0]
         else:
@@ -168,7 +168,7 @@ class XMLRPCClient(Thread):
 
         command.data = getpage_result
         return token_result
-        
+
 
     get_page = _xmlrpc_decorator(get_page)
 
@@ -192,10 +192,10 @@ class XMLRPCClient(Thread):
 
     def get_page_list(self, command):
         """Returns a list of all accesible pages"""
-                
+
         # Dummy function, so that the string appears in a .po file
         _ = lambda x: x
-        
+
         token_result = u"FAILURE"
         txt = _("This command may take a while to complete, please be patient...")
         info = cmd.NotificationCommandI18n([command.jid], txt, async=False)
