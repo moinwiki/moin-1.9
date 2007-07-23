@@ -12,7 +12,8 @@
     Using "form" directly is deprecated and should be replaced by "request.form".
 
     @copyright: 2000-2004 Juergen Hermann <jh@web.de>,
-                2006 MoinMoin:ThomasWaldmann
+                2006-2007 MoinMoin:ThomasWaldmann,
+                2007 MoinMoin:JohannesBerg
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -24,11 +25,10 @@ from MoinMoin import action, config, util
 from MoinMoin import wikiutil, i18n
 from MoinMoin.Page import Page
 
-names = ["TitleSearch", "WordIndex", "TitleIndex",
-         "GoTo", "InterWiki", "PageCount",
+
+names = ["TitleSearch", "WordIndex", "TitleIndex", "GoTo",
          # Macros with arguments
-         "Icon", "PageList", "Date", "DateTime", "Anchor", "MailTo", "GetVal",
-         "TemplateList",
+         "Icon", "PageList", "Date", "DateTime", "Anchor", "MailTo", "GetVal", "TemplateList",
 ]
 
 #############################################################################
@@ -52,7 +52,7 @@ class Macro:
     """ Macro handler
 
     There are three kinds of macros:
-     * Builtin Macros - implemented in this file and named _macro_[name]
+     * Builtin Macros - implemented in this file and named macro_[name]
      * Language Pseudo Macros - any lang the wiki knows can be use as
        macro and is implemented here by _m_lang()
      * External macros - implemented in either MoinMoin.macro package, or
@@ -62,19 +62,17 @@ class Macro:
 
     Dependencies = {
         "TitleSearch": ["namespace"],
-        "Goto": [],
+        "PageList": ["namespace"],
+        "TemplateList": ["namespace"],
         "WordIndex": ["namespace"],
         "TitleIndex": ["namespace"],
-        "InterWiki": ["pages"],  # if interwikimap is editable
-        "PageCount": ["namespace"],
+        "Goto": [],
         "Icon": ["user"], # users have different themes and user prefs
-        "PageList": ["namespace"],
         "Date": ["time"],
         "DateTime": ["time"],
         "Anchor": [],
         "Mailto": ["user"],
         "GetVal": ["pages"],
-        "TemplateList": ["namespace"],
         }
 
     # we need the lang macros to execute when html is generated,
@@ -94,6 +92,17 @@ class Macro:
         # Initialized on execute
         self.name = None
 
+    def _wrap(self, function, args, fixed=[]):
+        try:
+            return wikiutil.invoke_extension_function(self.request, function,
+                                                      args, fixed)
+        except ValueError, e:
+            return self.format_error(e)
+
+    def format_error(self, err):
+        """ format an error object for output instead of normal macro output """
+        return self.formatter.text(u'[[%s: %s]]' % (self.name, err.args[0]))
+
     def execute(self, macro_name, args):
         """ Get and execute a macro
 
@@ -102,11 +111,16 @@ class Macro:
         """
         self.name = macro_name
         try:
+            call = wikiutil.importPlugin(self.cfg, 'macro', macro_name,
+                                         function='macro_%s' % macro_name)
+            execute = lambda _self, _args: _self._wrap(call, _args, [self])
+        except wikiutil.PluginAttributeError:
+            # fall back to old execute() method, no longer recommended
             execute = wikiutil.importPlugin(self.cfg, 'macro', macro_name)
         except wikiutil.PluginMissingError:
             try:
-                builtins = self.__class__
-                execute = getattr(builtins, '_macro_' + macro_name)
+                call = getattr(self, 'macro_%s' % macro_name)
+                execute = lambda _self, _args: _self._wrap(call, _args)
             except AttributeError:
                 if macro_name in i18n.wikiLanguages():
                     execute = builtins._m_lang
@@ -138,31 +152,52 @@ class Macro:
         except wikiutil.PluginError:
             return self.defaultDependency
 
-    def _macro_TitleSearch(self, args):
+    def macro_TitleSearch(self):
         from MoinMoin.macro.FullSearch import search_box
         return search_box("titlesearch", self)
 
-    def _macro_GoTo(self, args):
-        """ Make a goto box
-
-        @param args: macro arguments
-        @rtype: unicode
-        @return: goto box html fragment
-        """
+    def macro_PageList(self, needle=None):
+        from MoinMoin import search
         _ = self._
-        html = [
-            u'<form method="get" action="">',
-            u'<div>',
-            u'<input type="hidden" name="action" value="goto">',
-            u'<input type="text" name="target" size="30">',
-            u'<input type="submit" value="%s">' % _("Go To Page"),
-            u'</div>',
-            u'</form>',
-            ]
-        html = u'\n'.join(html)
-        return self.formatter.rawHTML(html)
+        case = 0
 
-    def _make_index(self, args, word_re=u'.+'):
+        # If called with empty or no argument, default to regex search for .+, the full page list.
+        needle = wikiutil.get_unicode(self.request, needle, 'needle', u'regex:.+')
+
+        # With whitespace argument, return same error message as FullSearch
+        if not needle.strip():
+            err = _('Please use a more selective search term instead of {{{"%s"}}}') % needle
+            return '<span class="error">%s</span>' % err
+
+        # Return a title search for needle, sorted by name.
+        results = search.searchPages(self.request, needle,
+                titlesearch=1, case=case, sort='page_name')
+        return results.pageList(self.request, self.formatter, paging=False)
+
+    def macro_TemplateList(self, needle=u'.+'):
+        # TODO: this should be renamed (RegExPageNameList?), it does not list only Templates...
+        _ = self._
+        try:
+            needle_re = re.compile(needle, re.IGNORECASE)
+        except re.error, err:
+            raise ValueError("Error in regex %r: %s" % (needle, err))
+
+        # Get page list readable by current user, filtered by needle
+        hits = self.request.rootpage.getPageList(filter=needle_re.search)
+        hits.sort()
+
+        result = []
+        result.append(self.formatter.bullet_list(1))
+        for pagename in hits:
+            result.append(self.formatter.listitem(1))
+            result.append(self.formatter.pagelink(1, pagename, generated=1))
+            result.append(self.formatter.text(pagename))
+            result.append(self.formatter.pagelink(0, pagename))
+            result.append(self.formatter.listitem(0))
+        result.append(self.formatter.bullet_list(0))
+        return ''.join(result)
+
+    def _make_index(self, word_re=u'.+'):
         """ make an index page (used for TitleIndex and WordIndex macro)
 
             word_re is a regex used for splitting a pagename into fragments
@@ -247,103 +282,43 @@ class Macro:
         return u''.join(output)
 
 
-    def _macro_TitleIndex(self, args):
-        return self._make_index(args)
+    def macro_TitleIndex(self):
+        return self._make_index()
 
-    def _macro_WordIndex(self, args):
+    def macro_WordIndex(self):
         if self.request.isSpiderAgent: # reduce bot cpu usage
             return ''
         word_re = u'[%s][%s]+' % (config.chars_upper, config.chars_lower)
-        return self._make_index(args, word_re=word_re)
+        return self._make_index(word_re=word_re)
 
+    def macro_GoTo(self):
+        """ Make a goto box
 
-    def _macro_PageList(self, needle):
-        from MoinMoin import search
-        _ = self._
-        case = 0
-
-        # If called with empty or no argument, default to regex search for .+, the full page list.
-        if not needle:
-            needle = 'regex:.+'
-
-        # With whitespace argument, return same error message as FullSearch
-        elif needle.isspace():
-            err = _('Please use a more selective search term instead of {{{"%s"}}}') % needle
-            return '<span class="error">%s</span>' % err
-
-        # Return a title search for needle, sorted by name.
-        results = search.searchPages(self.request, needle,
-                titlesearch=1, case=case, sort='page_name')
-        return results.pageList(self.request, self.formatter, paging=False)
-
-    def _macro_InterWiki(self, args):
-        from StringIO import StringIO
-        interwiki_list = wikiutil.load_wikimap(self.request)
-        buf = StringIO()
-        buf.write('<dl>')
-        iwlist = interwiki_list.items() # this is where we cached it
-        iwlist.sort()
-        for tag, url in iwlist:
-            buf.write('<dt><tt><a href="%s">%s</a></tt></dt>' % (
-                wikiutil.join_wiki(url, 'RecentChanges'), tag))
-            if '$PAGE' not in url:
-                buf.write('<dd><tt><a href="%s">%s</a></tt></dd>' % (url, url))
-            else:
-                buf.write('<dd><tt>%s</tt></dd>' % url)
-        buf.write('</dl>')
-        return self.formatter.rawHTML(buf.getvalue())
-
-    def _macro_PageCount(self, args):
-        """ Return number of pages readable by current user
-
-        Return either an exact count (slow!) or fast count including
-        deleted pages.
+        @rtype: unicode
+        @return: goto box html fragment
         """
-        # Check input
-        options = {None: 0, '': 0, 'exists': 1}
-        try:
-            exists = options[args]
-        except KeyError:
-            # Wrong argument, return inline error message
-            arg = self.formatter.text(args)
-            return (self.formatter.span(1, css_class="error") +
-                    'Wrong argument: %s' % arg +
-                    self.formatter.span(0))
-
-        count = self.request.rootpage.getPageCount(exists=exists)
-        return self.formatter.text("%d" % count)
-
-    def _macro_Icon(self, args):
-        icon = args.lower()
-        return self.formatter.icon(icon)
-
-    def _macro_TemplateList(self, args):
         _ = self._
-        try:
-            needle_re = re.compile(args or '', re.IGNORECASE)
-        except re.error, e:
-            return "<strong>%s: %s</strong>" % (
-                _("ERROR in regex '%s'") % (args, ), e)
+        html = [
+            u'<form method="get" action="">',
+            u'<div>',
+            u'<input type="hidden" name="action" value="goto">',
+            u'<input type="text" name="target" size="30">',
+            u'<input type="submit" value="%s">' % _("Go To Page"),
+            u'</div>',
+            u'</form>',
+            ]
+        html = u'\n'.join(html)
+        return self.formatter.rawHTML(html)
 
-        # Get page list readable by current user, filtered by needle
-        hits = self.request.rootpage.getPageList(filter=needle_re.search)
-        hits.sort()
-
-        result = []
-        result.append(self.formatter.bullet_list(1))
-        for pagename in hits:
-            result.append(self.formatter.listitem(1))
-            result.append(self.formatter.pagelink(1, pagename, generated=1))
-            result.append(self.formatter.text(pagename))
-            result.append(self.formatter.pagelink(0, pagename))
-            result.append(self.formatter.listitem(0))
-        result.append(self.formatter.bullet_list(0))
-        return ''.join(result)
-
+    def macro_Icon(self, icon=u''):
+        # empty icon name isn't valid either
+        if not icon:
+            raise ValueError("You need to give a non-empty icon name")
+        return self.formatter.icon(icon.lower())
 
     def __get_Date(self, args, format_date):
         _ = self._
-        if not args:
+        if args is None:
             tm = time.time() # always UTC
         elif len(args) >= 19 and args[4] == '-' and args[7] == '-' \
                 and args[10] == 'T' and args[13] == ':' and args[16] == ':':
@@ -362,9 +337,8 @@ class Macro:
                         if sign == '-':
                             tzoffset = -tzoffset
                 tm = (year, month, day, hour, minute, second, 0, 0, 0)
-            except ValueError, e:
-                return "<strong>%s: %s</strong>" % (
-                    _("Bad timestamp '%s'") % (args, ), e)
+            except ValueError, err:
+                raise ValueError("Bad timestamp %r: %s" % (args, err))
             # as mktime wants a localtime argument (but we only have UTC),
             # we adjust by our local timezone's offset
             try:
@@ -375,31 +349,25 @@ class Macro:
             # try raw seconds since epoch in UTC
             try:
                 tm = float(args)
-            except ValueError, e:
-                return "<strong>%s: %s</strong>" % (
-                    _("Bad timestamp '%s'") % (args, ), e)
+            except ValueError, err:
+                raise ValueError("Bad timestamp %r: %s" % (args, err))
         return format_date(tm)
 
-    def _macro_Date(self, args):
-        return self.__get_Date(args, self.request.user.getFormattedDate)
+    def macro_Date(self, stamp=None):
+        return self.__get_Date(stamp, self.request.user.getFormattedDate)
 
-    def _macro_DateTime(self, args):
-        return self.__get_Date(args, self.request.user.getFormattedDateTime)
+    def macro_DateTime(self, stamp=None):
+        return self.__get_Date(stamp, self.request.user.getFormattedDateTime)
 
-    def _macro_Anchor(self, args):
-        return self.formatter.anchordef(args or "anchor")
+    def macro_Anchor(self, anchor=None):
+        anchor = wikiutil.get_unicode(self.request, anchor, 'anchor', u'anchor')
+        return self.formatter.anchordef(anchor)
 
-    def _macro_MailTo(self, args):
+    def macro_MailTo(self, email=unicode, text=u''):
+        if not email:
+            raise ValueError("You need to give an (obfuscated) email address")
+
         from MoinMoin.mail.sendmail import decodeSpamSafeEmail
-        result = ''
-        args = args or ''
-        if ',' not in args:
-            email = args
-            text = ''
-        else:
-            email, text = args.split(',', 1)
-
-        email, text = email.strip(), text.strip()
 
         if self.request.user.valid:
             # decode address and generate mailto: link
@@ -420,8 +388,11 @@ class Macro:
 
         return result
 
-    def _macro_GetVal(self, args):
-        page, key = args.split(',')
+    def macro_GetVal(self, page=None, key=None):
+        page = wikiutil.get_unicode(self.request, page, 'page')
+        key = wikiutil.get_unicode(self.request, key, 'key')
+        if page is None or key is None:
+            raise ValueError("You need to give: pagename, key")
         d = self.request.dicts.dict(page)
         result = d.get(key, '')
         return self.formatter.text(result)

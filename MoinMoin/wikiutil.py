@@ -3,6 +3,8 @@
     MoinMoin - Wiki Utility Functions
 
     @copyright: 2000-2004 Juergen Hermann <jh@web.de>,
+                2004 by Florian Festi,
+                2006 by Mikko Virkkil,
                 2005-2007 MoinMoin:ThomasWaldmann,
                 2007 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
@@ -17,6 +19,9 @@ import urllib
 
 from MoinMoin import config
 from MoinMoin.util import pysupport, lock
+from inspect import getargspec
+from types import MethodType
+
 
 # Exceptions
 class InvalidFileNameError(Exception):
@@ -1189,6 +1194,461 @@ def getParserForExtension(cfg, extension):
 ### Parameter parsing
 #############################################################################
 
+def parse_quoted_separated(args, separator=',', name_value=True, seplimit=0):
+    """
+    Parses the given arguments according to the other parameters.
+    If name_value is True, it parses keyword arguments (name=value)
+    and returns the keyword arguments in the second return value
+    (a dict) and positional arguments that occurred after any keyword
+    argument in the third return value (a list).
+    The first return value always contains the positional arguments,
+    if name_value is False only it is present.
+
+    Arguments can be quoted with a double-quote ('"') and the quote
+    can be escaped by doubling it, the separator and equal sign (for
+    keyword args) can both be quoted, when keyword args are enabled
+    then the name of a keyword argument can also be quoted.
+
+    Values that are not given are returned as None, while the
+    empty string as a value can be achieved by quoting it; keys
+    are never returned as None.
+
+    If a name or value does not start with a quote, then the quote
+    character looses its special meaning for that name or value.
+
+    @param args: arguments to parse
+    @param separator: the argument separator, defaults to a comma (',')
+    @param name_value: indicates whether to parse keyword arguments
+    @param seplimit: limits the number of parsed arguments
+    @rtype: tuple, list
+    @returns: if name_value is False, returns a list of arguments,
+              otherwise a list of positional, a dict of keyword and
+              a list of trailing arguments
+    """
+    idx = 0
+    if not isinstance(args, unicode):
+        raise TypeError('args must be unicode')
+    max = len(args)
+    ret_positional = [] # positional argument return value
+    ret_trailing = []   # trailing arguments return value
+    positional = ret_positional
+    keyword = {}        # keyword arguments
+    curname = u''       # current name, initially value as well (name=value)
+    cur = None          # current value
+    cur_quoted = False  # indicates whether value was quoted,
+                        # needed None vs. u'' handling
+    quoted = False      # we're inside quotes
+    skipquote = 0       # next quote is a quoted quote
+    noquote = False     # no quotes expected because word didn't start with one
+    seplimit_reached = False # number of separators exhausted
+    separator_count = 0 # number of separators encountered
+    SPACE = [' ', '\t', ]
+    nextitemsep = [separator]   # used for skipping trailing space
+    if name_value:
+        nextitemsep.append('=')
+    while idx < max:
+        char = args[idx]
+        next = None
+        if idx + 1 < max:
+            next = args[idx+1]
+        if skipquote:
+            skipquote -= 1
+        if not quoted and char in SPACE:
+            spaces = ''
+            # accumulate all space
+            while char in SPACE and idx < max - 1:
+                spaces += char
+                idx += 1
+                char = args[idx]
+            # remove space if args end with it
+            if char in SPACE and idx == max - 1:
+                break
+            # remove space at end of argument
+            if char in nextitemsep:
+                continue
+            idx -= 1
+            if not cur is None:
+                if cur:
+                    cur = cur + spaces
+            elif curname:
+                curname = curname + spaces
+        elif not quoted and name_value and char == '=':
+            if cur is None:
+                cur = u''
+                cur_quoted = False
+            else:
+                cur += '='
+            noquote = False
+        elif not quoted and not seplimit_reached and char == separator:
+            if cur is None:
+                cur = curname
+                curname = None
+            if not cur and not cur_quoted:
+                cur = None
+            if curname is not None:
+                keyword[curname] = cur
+                positional = ret_trailing
+            else:
+                positional.append(cur)
+            curname = u''
+            cur = None
+            noquote = False
+            cur_quoted = False
+            separator_count += 1
+            if seplimit and separator_count >= seplimit:
+                seplimit_reached = True
+                nextitemsep.remove(separator)
+        elif not quoted and not noquote and char == '"':
+            quoted = True
+            cur_quoted = True
+        elif quoted and not skipquote and char == '"':
+            if next == '"':
+                skipquote = 2 # will be decremented right away
+            else:
+                quoted = False
+        else:
+            if cur is not None:
+                cur = cur + char
+            else:
+                curname = curname + char
+            noquote = True
+
+        idx += 1
+
+    if cur is None:
+        cur = curname
+        curname = None
+    cur_present = cur is not None
+    if not cur and not cur_quoted:
+        cur = None
+    if curname is not None:
+        keyword[curname] = cur
+    elif cur_present:
+        positional.append(cur)
+
+    if name_value:
+        return ret_positional, keyword, ret_trailing
+    else:
+        return ret_positional
+
+
+def get_bool(request, arg, name=None, default=None):
+    """
+    For use with values returned from parse_quoted_separated or given
+    as macro parameters, return a boolean from a unicode string.
+    Valid input is 'true'/'false', 'yes'/'no' and '1'/'0' or None for
+    the default value.
+
+    @param request: A request instance
+    @param arg: The argument, may be None or a unicode string
+    @param name: Name of the argument, for error messages
+    @param default: default value if arg is None
+    @rtype: boolean or None
+    @returns: the boolean value of the string according to above rules
+              (or default value)
+    """
+    _ = request.getText
+    assert default is None or isinstance(default, bool)
+    if arg is None:
+        return default
+    elif not isinstance(arg, unicode):
+        raise TypeError('Argument must be None or unicode')
+    arg = arg.lower()
+    if arg in [u'0', u'false', u'no']:
+        return False
+    elif arg in [u'1', u'true', u'yes']:
+        return True
+    else:
+        if name:
+            raise ValueError(
+                _('Argument "%s" must be a boolean value, not "%s"') % (
+                    name, arg))
+        else:
+            raise ValueError(
+                _('Argument must be a boolean value, not "%s"') % arg)
+
+
+def get_int(request, arg, name=None, default=None):
+    """
+    For use with values returned from parse_quoted_separated or given
+    as macro parameters, return an integer from a unicode string
+    containing the decimal representation of a number.
+    None is a valid input and yields the default value.
+
+    @param request: A request instance
+    @param arg: The argument, may be None or a unicode string
+    @param name: Name of the argument, for error messages
+    @param default: default value if arg is None
+    @rtype: int or None
+    @returns: the integer value of the string (or default value)
+    """
+    _ = request.getText
+    assert default is None or isinstance(default, int)
+    if arg is None:
+        return default
+    elif not isinstance(arg, unicode):
+        raise TypeError('Argument must be None or unicode')
+    try:
+        return int(arg)
+    except ValueError:
+        if name:
+            raise ValueError(
+                _('Argument "%s" must be an integer value, not "%s"') % (
+                    name, arg))
+        else:
+            raise ValueError(
+                _('Argument must be an integer value, not "%s"') % arg)
+
+
+def get_float(request, arg, name=None, default=None):
+    """
+    For use with values returned from parse_quoted_separated or given
+    as macro parameters, return a float from a unicode string.
+    None is a valid input and yields the default value.
+
+    @param request: A request instance
+    @param arg: The argument, may be None or a unicode string
+    @param name: Name of the argument, for error messages
+    @param default: default return value if arg is None
+    @rtype: float or None
+    @returns: the float value of the string (or default value)
+    """
+    _ = request.getText
+    assert default is None or isinstance(default, float)
+    if arg is None:
+        return default
+    elif not isinstance(arg, unicode):
+        raise TypeError('Argument must be None or unicode')
+    try:
+        return float(arg)
+    except ValueError:
+        if name:
+            raise ValueError(
+                _('Argument "%s" must be a floating point value, not "%s"') % (
+                    name, arg))
+        else:
+            raise ValueError(
+                _('Argument must be a boolean value, not "%s"') % arg)
+
+
+def get_unicode(request, arg, name=None, default=None):
+    """
+    For use with values returned from parse_quoted_separated or given
+    as macro parameters, return a unicode string from a unicode string.
+    None is a valid input and yields the default value.
+
+    @param request: A request instance
+    @param arg: The argument, may be None or a unicode string
+    @param name: Name of the argument, for error messages
+    @param default: default return value if arg is None;
+    @rtype: unicode or None
+    @returns: the unicode string (or default value)
+    """
+    assert default is None or isinstance(default, unicode)
+    if arg is None:
+        return default
+    elif not isinstance(arg, unicode):
+        raise TypeError('Argument must be None or unicode')
+
+    return arg
+
+
+def get_choice(request, arg, name=None, choices=[None]):
+    """
+    For use with values returned from parse_quoted_separated or given
+    as macro parameters, return a unicode string that must be in the
+    choices given. None is a valid input and yields first of the valid
+    choices.
+
+    @param request: A request instance
+    @param arg: The argument, may be None or a unicode string
+    @param name: Name of the argument, for error messages
+    @param choices: the possible choices
+    @rtype: unicode or None
+    @returns: the unicode string (or default value)
+    """
+    assert isinstance(choices, tuple) or isinstance(choices, list)
+    if arg is None:
+        return choices[0]
+    elif not isinstance(arg, unicode):
+        raise TypeError('Argument must be None or unicode')
+    elif not arg in choices:
+        _ = request.getText
+        if name:
+            raise ValueError(
+                _('Argument "%s" must be one of "%s", not "%s"') % (
+                    name, '", "'.join(choices), arg))
+        else:
+            raise ValueError(
+                _('Argument must be one of "%s", not "%s"') % (
+                    '", "'.join(choices), arg))
+
+    return arg
+
+
+class required_arg:
+    """
+    Wrap a type in this class and give it as default argument
+    for a function passed to invoke_extension_function() in
+    order to get generic checking that the argument is given.
+    """
+    def __init__(self, argtype):
+        """
+        Initialise a required_arg
+        @param argtype: the type the argument should have
+        """
+        if not isinstance(argtype, type):
+            raise TypeError("argtype must be a type")
+        self.argtype = argtype
+
+
+def invoke_extension_function(request, function, args, fixed_args=[]):
+    """
+    Parses arguments for an extension call and calls the extension
+    function with the arguments.
+
+    If the macro function has a default value that is a bool,
+    int, long, float or unicode object, then the given value
+    is converted to the type of that default value before passing
+    it to the macro function. That way, macros need not call the
+    wikiutil.get_* functions for any arguments that have a default.
+
+    @param request: the request object
+    @param function: the function to invoke
+    @param args: unicode string with arguments (or evaluating to False)
+    @param fixed_args: fixed arguments to pass as the first arguments
+    @returns: the return value from the function called
+    """
+
+    def _convert_arg(request, value, default, name=None):
+        """
+        Using the get_* functions, convert argument to the type of the default
+        if that is any of bool, int, long, float or unicode; if the default
+        is the type itself then convert to that type (keeps None) or if the
+        default is a list require one of the list items.
+
+        In other cases return the value itself.
+        """
+        if isinstance(default, bool):
+            return get_bool(request, value, name, default)
+        elif isinstance(default, int) or isinstance(default, long):
+            return get_int(request, value, name, default)
+        elif isinstance(default, float):
+            return get_float(request, value, name, default)
+        elif isinstance(default, unicode):
+            return get_unicode(request, value, name, default)
+        elif isinstance(default, tuple) or isinstance(default, list):
+            return get_choice(request, value, name, default)
+        elif default is bool:
+            return get_bool(request, value, name)
+        elif default is int or default is long:
+            return get_int(request, value, name)
+        elif default is float:
+            return get_float(request, value, name)
+        elif isinstance(default, required_arg):
+            return _convert_arg(request, value, default.argtype, name)
+        return value
+
+    assert isinstance(fixed_args, list) or isinstance(fixed_args, tuple)
+
+    _ = request.getText
+
+    kwargs = {}
+    kwargs_to_pass = {}
+    trailing_args = []
+
+    if args:
+        assert isinstance(args, unicode)
+
+        positional, keyword, trailing = parse_quoted_separated(args)
+
+        for kw in keyword:
+            try:
+                kwargs[str(kw)] = keyword[kw]
+            except UnicodeEncodeError:
+                kwargs_to_pass[kw] = keyword[kw]
+
+        trailing_args.extend(trailing)
+
+    else:
+        positional = []
+
+    argnames, varargs, varkw, defaultlist = getargspec(function)
+    # self is implicit!
+    if isinstance(function, MethodType):
+        argnames = argnames[1:]
+    fixed_argc = len(fixed_args)
+    argnames = argnames[fixed_argc:]
+    argc = len(argnames)
+    if not defaultlist:
+        defaultlist = []
+
+    # if the fixed parameters have defaults too...
+    if argc < len(defaultlist):
+        defaultlist = defaultlist[fixed_argc:]
+    defstart = argc - len(defaultlist)
+
+    defaults = {}
+    # reverse to be able to pop() things off
+    positional.reverse()
+    allow_kwargs = False
+    allow_trailing = False
+    # convert all arguments to keyword arguments,
+    # fill all arguments that weren't given with None
+    for idx in range(argc):
+        argname = argnames[idx]
+        if argname == '_kwargs':
+            allow_kwargs = True
+            continue
+        if argname == '_trailing_args':
+            allow_trailing = True
+            continue
+        if positional:
+            kwargs[argname] = positional.pop()
+        if not argname in kwargs:
+            kwargs[argname] = None
+        if idx >= defstart:
+            defaults[argname] = defaultlist[idx - defstart]
+
+    if positional:
+        if not allow_trailing:
+            raise ValueError(_('Too many arguments'))
+        trailing_args.extend(positional)
+
+    if trailing_args:
+        if not allow_trailing:
+            raise ValueError(_('Cannot have arguments without name following'
+                               ' named arguments'))
+        kwargs['_trailing_args'] = trailing_args
+
+    # type-convert all keyword arguments to the type
+    # that the default value indicates
+    for argname in kwargs.keys()[:]:
+        if argname in defaults:
+            # the value of 'argname' from kwargs will be put into the
+            # macro's 'argname' argument, so convert that giving the
+            # name to the converter so the user is told which argument
+            # went wrong (if it does)
+            kwargs[argname] = _convert_arg(request, kwargs[argname],
+                                           defaults[argname], argname)
+            if (kwargs[argname] is None
+                and isinstance(defaults[argname], required_arg)):
+                raise ValueError(_('Argument "%s" is required') % argname)
+
+        if not argname in argnames:
+            # move argname into _kwargs parameter
+            kwargs_to_pass[argname] = kwargs[argname]
+            del kwargs[argname]
+
+    if kwargs_to_pass:
+        kwargs['_kwargs'] = kwargs_to_pass
+        if not allow_kwargs:
+            raise ValueError(_(u'No argument named "%s"') % (
+                kwargs_to_pass.keys()[0]))
+
+    return function(*fixed_args, **kwargs)
+
+
 def parseAttributes(request, attrstring, endtoken=None, extension=None):
     """
     Parse a list of attributes and return a dict plus a possible
@@ -1303,14 +1763,10 @@ class ParameterParser:
             ("John Smith", male=True)
         this will result in the following dict:
             {"name": "John Smith", "age": None, "male": True}
-
-        @copyright: 2004 by Florian Festi,
-                    2006 by Mikko Virkkilä
-        @license: GNU GPL, see COPYING for details.
     """
 
     def __init__(self, pattern):
-        #parameter_re = "([^\"',]*(\"[^\"]*\"|'[^']*')?[^\"',]*)[,)]"
+        # parameter_re = "([^\"',]*(\"[^\"]*\"|'[^']*')?[^\"',]*)[,)]"
         name = "(?P<%s>[a-zA-Z_][a-zA-Z0-9_]*)"
         int_re = r"(?P<int>-?\d+)"
         bool_re = r"(?P<bool>(([10])|([Tt]rue)|([Ff]alse)))"
@@ -1343,7 +1799,7 @@ class ParameterParser:
                 named = True
                 self.param_dict[match.group('name')[1:-1]] = i
             elif named:
-                raise ValueError, "Named parameter expected"
+                raise ValueError("Named parameter expected")
             i += 1
 
     def __str__(self):
@@ -1351,65 +1807,60 @@ class ParameterParser:
                                         self.optional)
 
     def parse_parameters(self, params):
-        """
-        (4, 2)
-        """
-        #Default list to "None"s
+        # Default list/dict entries to None
         parameter_list = [None] * len(self.param_list)
-        parameter_dict = {}
+        parameter_dict = dict([(key, None) for key in self.param_dict])
         check_list = [0] * len(self.param_list)
 
         i = 0
         start = 0
+        fixed_count = 0
         named = False
-
-        if not params:
-            params = '""'
 
         while start < len(params):
             match = re.match(self.param_re, params[start:])
             if not match:
-                raise ValueError, "Misformatted value"
+                raise ValueError("malformed parameters")
             start += match.end()
-            value = None
             if match.group("int"):
-                value = int(match.group("int"))
-                type = 'i'
+                pvalue = int(match.group("int"))
+                ptype = 'i'
             elif match.group("bool"):
-                value = (match.group("bool") == "1") or (match.group("bool") == "True") or (match.group("bool") == "true")
-                type = 'b'
+                pvalue = (match.group("bool") == "1") or (match.group("bool") == "True") or (match.group("bool") == "true")
+                ptype = 'b'
             elif match.group("float"):
-                value = float(match.group("float"))
-                type = 'f'
+                pvalue = float(match.group("float"))
+                ptype = 'f'
             elif match.group("string"):
-                value = match.group("string")[1:-1]
-                type = 's'
+                pvalue = match.group("string")[1:-1]
+                ptype = 's'
             elif match.group("name_param"):
-                value = match.group("name_param")
-                type = 'n'
+                pvalue = match.group("name_param")
+                ptype = 'n'
             else:
-                value = None
+                raise ValueError("Parameter parser code does not fit param_re regex")
 
-            parameter_list.append(value)
-            if match.group("name"):
-                if match.group("name") not in self.param_dict:
+            name = match.group("name")
+            if name:
+                if name not in self.param_dict:
                     # TODO we should think on inheritance of parameters
-                    raise ValueError, "Unknown parameter name '%s'" % match.group("name")
-                nr = self.param_dict[match.group("name")]
+                    raise ValueError("unknown parameter name '%s'" % name)
+                nr = self.param_dict[name]
                 if check_list[nr]:
-                    #raise ValueError, "Parameter specified twice"
-                    #TODO: Something saner that raising an exception. This is pretty good, since it ignores it.
-                    pass
+                    raise ValueError("parameter '%s' specified twice" % name)
                 else:
                     check_list[nr] = 1
-                parameter_dict[match.group("name")] = value
-                parameter_list[nr] = value
+                pvalue = self._check_type(pvalue, ptype, self.param_list[nr])
+                parameter_dict[name] = pvalue
+                parameter_list[nr] = pvalue
                 named = True
             elif named:
-                raise ValueError, "Only named parameters allowed"
+                raise ValueError("only named parameters allowed after first named parameter")
             else:
                 nr = i
-                parameter_list[nr] = value
+                if nr not in self.param_dict.values():
+                    fixed_count = nr + 1
+                parameter_list[nr] = self._check_type(pvalue, ptype, self.param_list[nr])
 
             # Let's populate and map our dictionary to what's been found
             for name in self.param_dict:
@@ -1418,50 +1869,37 @@ class ParameterParser:
 
             i += 1
 
-        return parameter_list, parameter_dict
+        for i in range(fixed_count):
+            parameter_dict[i] = parameter_list[i]
 
-""" never used:
-    def _check_type(value, type, format):
-        if type == 'n' and 's' in format: # n as s
-            return value
+        return fixed_count, parameter_dict
 
-        if type in format:
-            return value # x -> x
+    def _check_type(self, pvalue, ptype, format):
+        if ptype == 'n' and 's' in format: # n as s
+            return pvalue
 
-        if type == 'i':
+        if ptype in format:
+            return pvalue # x -> x
+
+        if ptype == 'i':
             if 'f' in format:
-                return float(value) # i -> f
+                return float(pvalue) # i -> f
             elif 'b' in format:
-                return value # i -> b
-        elif type == 'f':
+                return pvalue != 0 # i -> b
+        elif ptype == 's':
             if 'b' in format:
-                return value  # f -> b
-        elif type == 's':
-            if 'b' in format:
-                return value.lower() != 'false' # s-> b
+                if pvalue.lower() == 'false':
+                    return False # s-> b
+                elif pvalue.lower() == 'true':
+                    return True # s-> b
+                else:
+                    raise ValueError('%r does not match format %r' % (pvalue, format))
 
         if 's' in format: # * -> s
-            return str(value)
-        else:
-            pass # XXX error
+            return str(pvalue)
 
-def main():
-    pattern = "%i%sf%s%ifs%(a)s|%(b)s"
-    param = ' 4,"DI\'NG", b=retry, a="DING"'
+        raise ValueError('%r does not match format %r' % (pvalue, format))
 
-    #p_list, p_dict = parse_parameters(param)
-
-    print 'Pattern :', pattern
-    print 'Param :', param
-
-    P = ParameterParser(pattern)
-    print P
-    print P.parse_parameters(param)
-
-
-if __name__=="__main__":
-    main()
-"""
 
 #############################################################################
 ### Misc
