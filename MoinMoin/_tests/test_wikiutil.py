@@ -474,4 +474,101 @@ class TestArgGetters:
         py.test.raises(TypeError, wikiutil.get_unicode, self.request, {})
 
 
+def _test_invoke_int(i=int):
+    assert i == 1
+
+
+def _test_invoke_int_fixed(a, b, i=int):
+    assert a == 7
+    assert b == 8
+    assert i == 1 or i is None
+
+
+class TestExtensionInvoking:
+    def _test_invoke_bool(self, b=bool):
+        assert b == False
+
+    def _test_invoke_bool_def(self, v=bool, b=False):
+        assert b == v
+        assert isinstance(b, bool)
+        assert isinstance(v, bool)
+
+    def _test_invoke_int_None(self, i=int):
+        assert i == 1 or i is None
+
+    def _test_invoke_float_None(self, i=float):
+        assert i == 1.4 or i is None
+
+    def _test_invoke_choice(self, a, choice=[u'a', u'b', u'c']):
+        assert a == 7
+        assert choice == u'a'
+
+    def _test_invoke_choicet(self, a, choice=(u'a', u'b', u'c')):
+        assert a == 7
+        assert choice == u'a'
+
+    def _test_trailing(self, a, _trailing_args=[]):
+        assert _trailing_args == [u'a']
+
+    def _test_arbitrary_kw(self, expect, _non_ascii_kwargs={}, **kw):
+        assert _non_ascii_kwargs == expect
+        assert kw == {'test': u'x'}
+
+    def testInvoke(self):
+        ief = wikiutil.invoke_extension_function
+        ief(self.request, self._test_invoke_bool, u'False')
+        ief(self.request, self._test_invoke_bool, u'b=False')
+        ief(self.request, _test_invoke_int, u'1')
+        ief(self.request, _test_invoke_int, u'i=1')
+        ief(self.request, self._test_invoke_bool_def, u'False, False')
+        ief(self.request, self._test_invoke_bool_def, u'b=False, v=False')
+        ief(self.request, self._test_invoke_bool_def, u'False')
+        ief(self.request, self._test_invoke_int_None, u'i=1')
+        ief(self.request, self._test_invoke_int_None, u'i=')
+        ief(self.request, self._test_invoke_int_None, u'')
+        py.test.raises(ValueError, ief, self.request,
+                       self._test_invoke_int_None, u'x')
+        py.test.raises(ValueError, ief, self.request,
+                       self._test_invoke_int_None, u'""')
+        py.test.raises(ValueError, ief, self.request,
+                       self._test_invoke_int_None, u'i=""')
+        py.test.raises(TypeError, ief, self.request,
+                       _test_invoke_int_fixed, u'a=7', [7, 8])
+        ief(self.request, _test_invoke_int_fixed, u'i=1', [7, 8])
+        py.test.raises(ValueError, ief, self.request,
+                       _test_invoke_int_fixed, u'i=""', [7, 8])
+        ief(self.request, _test_invoke_int_fixed, u'i=', [7, 8])
+
+        for choicefn in (self._test_invoke_choice, self._test_invoke_choicet):
+            ief(self.request, choicefn, u'', [7])
+            ief(self.request, choicefn, u'choice=a', [7])
+            ief(self.request, choicefn, u'choice=', [7])
+            ief(self.request, choicefn, u'choice="a"', [7])
+            py.test.raises(ValueError, ief, self.request,
+                           choicefn, u'x', [7])
+            py.test.raises(ValueError, ief, self.request,
+                           choicefn, u'choice=x', [7])
+
+        ief(self.request, self._test_invoke_float_None, u'i=1.4')
+        ief(self.request, self._test_invoke_float_None, u'i=')
+        ief(self.request, self._test_invoke_float_None, u'')
+        ief(self.request, self._test_invoke_float_None, u'1.4')
+        py.test.raises(ValueError, ief, self.request,
+                       self._test_invoke_float_None, u'x')
+        py.test.raises(ValueError, ief, self.request,
+                       self._test_invoke_float_None, u'""')
+        py.test.raises(ValueError, ief, self.request,
+                       self._test_invoke_float_None, u'i=""')
+        ief(self.request, self._test_trailing, u'a=7, a')
+        ief(self.request, self._test_arbitrary_kw, u'test=x, \xc3=test',
+            [{u'\xc3': 'test'}])
+        ief(self.request, self._test_arbitrary_kw, u'test=x, "\xc3"=test',
+            [{u'\xc3': 'test'}])
+        ief(self.request, self._test_arbitrary_kw, u'test=x, "7 \xc3"=test',
+            [{u'7 \xc3': 'test'}])
+        ief(self.request, self._test_arbitrary_kw, u'test=x, 7 \xc3=test',
+            [{u'7 \xc3': 'test'}])
+        ief(self.request, self._test_arbitrary_kw, u'7 \xc3=test, test= x ',
+            [{u'7 \xc3': 'test'}])
+
 coverage_modules = ['MoinMoin.wikiutil']
