@@ -111,12 +111,12 @@ class Macro:
         """
         self.name = macro_name
         try:
-            try:
-                call = wikiutil.importPlugin(self.cfg, 'macro', macro_name,
-                                             function='macro_%s' % macro_name)
-                execute = lambda _self, _args: _self._wrap(call, _args, [self])
-            except wikiutil.PluginAttributeError:
-                execute = wikiutil.importPlugin(self.cfg, 'macro', macro_name)
+            call = wikiutil.importPlugin(self.cfg, 'macro', macro_name,
+                                         function='macro_%s' % macro_name)
+            execute = lambda _self, _args: _self._wrap(call, _args, [self])
+        except wikiutil.PluginAttributeError:
+            # fall back to old execute() method, no longer recommended
+            execute = wikiutil.importPlugin(self.cfg, 'macro', macro_name)
         except wikiutil.PluginMissingError:
             try:
                 call = getattr(self, 'macro_%s' % macro_name)
