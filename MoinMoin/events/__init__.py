@@ -42,6 +42,7 @@ class PageEvent(Event):
 
 class PageChangedEvent(PageEvent):
 
+    name = u"PageChangedEvent"
     description = _(u"""Page has been modified""")
     req_superuser = False
 
@@ -53,6 +54,7 @@ class PageChangedEvent(PageEvent):
 
 class TrivialPageChangedEvent(PageEvent):
 
+    name = u"TrivialPageChangedEvent"
     description = _(u"Page has been modified in a trivial fashion")
     req_superuser = False
 
@@ -64,6 +66,7 @@ class TrivialPageChangedEvent(PageEvent):
 
 class PageRenamedEvent(PageEvent):
 
+    name = u"PageRenamedEvent"
     description = _(u"""Page has been renamed""")
     req_superuser = False
 
@@ -76,6 +79,7 @@ class PageRenamedEvent(PageEvent):
 
 class PageDeletedEvent(PageEvent):
 
+    name = u"PageDeletedEvent"
     description = _(u"""Page has been deleted""")
     req_superuser = False
 
@@ -87,6 +91,7 @@ class PageDeletedEvent(PageEvent):
 
 class PageCopiedEvent(PageEvent):
 
+    name = u"PageCopiedEvent"
     description = _(u"""Page has been copied""")
     req_superuser = False
 
@@ -99,6 +104,7 @@ class PageCopiedEvent(PageEvent):
 
 class FileAttachedEvent(PageEvent):
 
+    name = u"FileAttachedEvent"
     description = _(u"""A new attachment has been added""")
     req_superuser = False
 
@@ -112,6 +118,7 @@ class FileAttachedEvent(PageEvent):
 
 class PageRevertedEvent(PageEvent):
 
+    name = u"PageRevertedEvent"
     description = _(u"""A page has been reverted to a previous state""")
     req_superuser = False
 
@@ -124,6 +131,7 @@ class PageRevertedEvent(PageEvent):
 
 class SubscribedToPageEvent(PageEvent):
 
+    name = u"SubscribedToPageEvent"
     description = _(u"""A user has subscribed to a page""")
     req_superuser = True
 
@@ -154,6 +162,7 @@ class JabberIDUnsetEvent(Event):
 class UserCreatedEvent(Event):
     """ Sent when a new user has been created """
 
+    name = u"UserCreatedEvent"
     description = _(u"""A new account has been created""")
     req_superuser = True
 
@@ -243,9 +252,9 @@ def get_subscribable_events():
     subscribable_events = {}
 
     for ev in defs.values():
-        if type(ev) is type and issubclass(ev, Event) and ev.__dict__.has_key("description"):
-            subscribable_events[ev.__name__] = {'desc': ev.description,
-                                                 'superuser': ev.req_superuser}
+        if type(ev) is type and issubclass(ev, Event) and ev.__dict__.has_key("description") and ev.__dict__.has_key("name"):
+            subscribable_events[ev.name] = {'desc': ev.description, 'superuser': ev.req_superuser}
+
     return subscribable_events
 
 # Get rid of the dummy getText so that it doesn't get imported with *
