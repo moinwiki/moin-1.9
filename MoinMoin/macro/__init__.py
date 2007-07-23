@@ -96,7 +96,7 @@ class Macro:
         try:
             return wikiutil.invoke_extension_function(self.request, function,
                                                       args, fixed)
-        except (TypeError, ValueError), e:
+        except ValueError, e:
             return self.format_error(e)
 
     def format_error(self, err):
