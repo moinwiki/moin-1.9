@@ -24,7 +24,6 @@ import re, time, os
 from MoinMoin import action, config, util
 from MoinMoin import wikiutil, i18n
 from MoinMoin.Page import Page
-from inspect import getargspec
 
 
 names = ["TitleSearch", "WordIndex", "TitleIndex", "GoTo",
@@ -93,113 +92,11 @@ class Macro:
         # Initialized on execute
         self.name = None
 
-    def _convert_arg(self, value, default, name=None):
-        """
-        Using the wikiutil argument parser get_* functions,
-        convert argument to the type of the default if that is
-        any of bool, int, long, float or unicode; otherwise
-        return the value itself.
-        """
-        if isinstance(default, bool):
-            return wikiutil.get_bool(self.request, value, name, default)
-        elif isinstance(default, int) or isinstance(default, long):
-            return wikiutil.get_int(self.request, value, name, default)
-        elif isinstance(default, float):
-            return wikiutil.get_float(self.request, value, name, default)
-        elif isinstance(default, unicode):
-            return wikiutil.get_unicode(self.request, value, name, default)
-        elif isinstance(default, tuple) or isinstance(default, list):
-            return wikiutil.get_choice(self.request, value, name, default)
-        elif default is bool:
-            return wikiutil.get_bool(self.request, value, name)
-        elif default is int or default is long:
-            return wikiutil.get_int(self.request, value, name)
-        elif default is float:
-            return wikiutil.get_float(self.request, value, name)
-        return value
-
-    def _wrap(self, macro_name, fn, args):
-        """
-        Parses arguments for a macro call and calls the macro
-        function with the arguments.
-
-        If the macro function has a default value that is a bool,
-        int, long, float or unicode object, then the given value
-        is converted to the type of that default value before passing
-        it to the macro function. That way, macros need not call the
-        wikiutil.get_* functions for any arguments that have a default.
-        """
-        _ = self.request.getText
-        if args:
-            positional, keyword, trailing = \
-                wikiutil.parse_quoted_separated(args)
-
-            kwargs = {}
-            nonascii = {}
-            for kw in keyword:
-                try:
-                    kwargs[str(kw)] = keyword[kw]
-                except UnicodeEncodeError:
-                    nonascii[kw] = keyword[kw]
-
-            # add trailing args as keyword argument if present,
-            # otherwise remove if the user entered some
-            # (so macros don't get a string where they expect a list)
-            if trailing:
-                kwargs['_trailing_args'] = trailing
-            elif '_trailing_args' in kwargs:
-                del kwargs['_trailing_args']
-
-            # add nonascii args as keyword argument if present,
-            # otherwise remove if the user entered some
-            # (so macros don't get a string where they expect a list)
-            if nonascii:
-                kwargs['_non_ascii_kwargs'] = nonascii
-            elif '_non_ascii_kwargs' in kwargs:
-                del kwargs['_non_ascii_kwargs']
-
-        else:
-            positional = []
-            kwargs = {}
-
-        argnames, varargs, varkw, defaultlist = getargspec(fn)
-        argnames = argnames[1:]
-        argc = len(argnames)
-        if not defaultlist:
-            defaultlist = []
-
-        # if the first (macro) parameter has a default too...
-        if argc < len(defaultlist):
-            defaultlist = defaultlist[1:]
-        defstart = argc - len(defaultlist)
-
-        defaults = {}
-        # convert all arguments to keyword arguments,
-        # fill all arguments that weren't given with None
-        for idx in range(argc):
-            if idx < len(positional):
-                kwargs[argnames[idx]] = positional[idx]
-            if not argnames[idx] in kwargs:
-                kwargs[argnames[idx]] = None
-            if idx >= defstart:
-                defaults[argnames[idx]] = defaultlist[idx - defstart]
-
+    def _wrap(self, function, args, fixed=[]):
         try:
-            # type-convert all keyword arguments to the type
-            # that the default value indicates
-            for idx in range(defstart, argc):
-                argname = argnames[idx]
-                default = defaults.get(argname, None)
-
-                # the value of 'argname' from kwargs will be put into the
-                # macro's 'argname' argument, so convert that giving the
-                # name to the converter so the user is told which argument
-                # went wrong (if it does)
-                kwargs[argname] = self._convert_arg(kwargs[argname],
-                                                    default, argname)
-
-            return fn(self, **kwargs)
-        except (ValueError, TypeError), e:
+            return wikiutil.invoke_extension_function(self.request, function,
+                                                      args, fixed)
+        except (TypeError, ValueError), e:
             return self.format_error(e)
 
     def format_error(self, err):
@@ -217,13 +114,13 @@ class Macro:
             try:
                 call = wikiutil.importPlugin(self.cfg, 'macro', macro_name,
                                              function='macro_%s' % macro_name)
-                execute = lambda _self, _args: _self._wrap(macro_name, call, _args)
+                execute = lambda _self, _args: _self._wrap(call, _args, [self])
             except wikiutil.PluginAttributeError:
                 execute = wikiutil.importPlugin(self.cfg, 'macro', macro_name)
         except wikiutil.PluginMissingError:
             try:
-                call = getattr(self.__class__, 'macro_%s' % macro_name)
-                execute = lambda _self, _args: _self._wrap(macro_name, call, _args)
+                call = getattr(self, 'macro_%s' % macro_name)
+                execute = lambda _self, _args: _self._wrap(call, _args)
             except AttributeError:
                 if macro_name in i18n.wikiLanguages():
                     execute = builtins._m_lang

@@ -19,6 +19,9 @@ import urllib
 
 from MoinMoin import config
 from MoinMoin.util import pysupport, lock
+from inspect import getargspec
+from types import MethodType
+
 
 # Exceptions
 class InvalidFileNameError(Exception):
@@ -1479,6 +1482,128 @@ def get_choice(request, arg, name=None, choices=[None]):
                     '", "'.join(choices), arg))
 
     return arg
+
+
+def invoke_extension_function(request, function, args, fixed_args=[]):
+    """
+    Parses arguments for an extension call and calls the extension
+    function with the arguments.
+
+    If the macro function has a default value that is a bool,
+    int, long, float or unicode object, then the given value
+    is converted to the type of that default value before passing
+    it to the macro function. That way, macros need not call the
+    wikiutil.get_* functions for any arguments that have a default.
+
+    @param request: the request object
+    @param function: the function to invoke
+    @param args: unicode string with arguments (or evaluating to False)
+    @param fixed_args: fixed arguments to pass as the first arguments
+    @returns: the return value from the function called
+    """
+
+    def _convert_arg(request, value, default, name=None):
+        """
+        Using the get_* functions, convert argument to the type of the default
+        if that is any of bool, int, long, float or unicode; if the default
+        is the type itself then convert to that type (keeps None) or if the
+        default is a list require one of the list items.
+
+        In other cases return the value itself.
+        """
+        if isinstance(default, bool):
+            return get_bool(request, value, name, default)
+        elif isinstance(default, int) or isinstance(default, long):
+            return get_int(request, value, name, default)
+        elif isinstance(default, float):
+            return get_float(request, value, name, default)
+        elif isinstance(default, unicode):
+            return get_unicode(request, value, name, default)
+        elif isinstance(default, tuple) or isinstance(default, list):
+            return get_choice(request, value, name, default)
+        elif default is bool:
+            return get_bool(request, value, name)
+        elif default is int or default is long:
+            return get_int(request, value, name)
+        elif default is float:
+            return get_float(request, value, name)
+        return value
+
+    assert isinstance(fixed_args, list) or isinstance(fixed_args, tuple)
+
+    if args:
+        assert isinstance(args, unicode)
+
+        positional, keyword, trailing = \
+            parse_quoted_separated(args)
+
+        kwargs = {}
+        nonascii = {}
+        for kw in keyword:
+            try:
+                kwargs[str(kw)] = keyword[kw]
+            except UnicodeEncodeError:
+                nonascii[kw] = keyword[kw]
+
+        # add trailing args as keyword argument if present,
+        # otherwise remove if the user entered some
+        # (so macros don't get a string where they expect a list)
+        if trailing:
+            kwargs['_trailing_args'] = trailing
+        elif '_trailing_args' in kwargs:
+            del kwargs['_trailing_args']
+
+        # add nonascii args as keyword argument if present,
+        # otherwise remove if the user entered some
+        # (so macros don't get a string where they expect a list)
+        if nonascii:
+            kwargs['_non_ascii_kwargs'] = nonascii
+        elif '_non_ascii_kwargs' in kwargs:
+            del kwargs['_non_ascii_kwargs']
+
+    else:
+        positional = []
+        kwargs = {}
+
+    argnames, varargs, varkw, defaultlist = getargspec(function)
+    # self is implicit!
+    if isinstance(function, MethodType):
+        argnames = argnames[1:]
+    fixed_argc = len(fixed_args)
+    argnames = argnames[fixed_argc:]
+    argc = len(argnames)
+    if not defaultlist:
+        defaultlist = []
+
+    # if the fixed parameters have defaults too...
+    if argc < len(defaultlist):
+        defaultlist = defaultlist[fixed_argc:]
+    defstart = argc - len(defaultlist)
+
+    defaults = {}
+    # convert all arguments to keyword arguments,
+    # fill all arguments that weren't given with None
+    for idx in range(argc):
+        if idx < len(positional):
+            kwargs[argnames[idx]] = positional[idx]
+        if not (argnames[idx] in kwargs):
+            kwargs[argnames[idx]] = None
+        if idx >= defstart:
+            defaults[argnames[idx]] = defaultlist[idx - defstart]
+
+    # type-convert all keyword arguments to the type
+    # that the default value indicates
+    for argname in defaults:
+        default = defaults[argname]
+
+        # the value of 'argname' from kwargs will be put into the
+        # macro's 'argname' argument, so convert that giving the
+        # name to the converter so the user is told which argument
+        # went wrong (if it does)
+        kwargs[argname] = _convert_arg(request, kwargs[argname],
+                                       default, argname)
+
+    return function(*fixed_args, **kwargs)
 
 
 def parseAttributes(request, attrstring, endtoken=None, extension=None):
