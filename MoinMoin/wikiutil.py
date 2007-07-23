@@ -1353,9 +1353,12 @@ def get_bool(request, arg, name=None, default=None):
         return True
     else:
         if name:
-            raise ValueError(_('Argument "%s" must be a boolean value') % name)
+            raise ValueError(
+                _('Argument "%s" must be a boolean value, not "%s"') % (
+                    name, arg))
         else:
-            raise ValueError(_('Argument must be a boolean value'))
+            raise ValueError(
+                _('Argument must be a boolean value, not "%s"') % arg)
 
 
 def get_int(request, arg, name=None, default=None):
@@ -1382,9 +1385,12 @@ def get_int(request, arg, name=None, default=None):
         return int(arg)
     except ValueError:
         if name:
-            raise ValueError(_('Argument "%s" must be an integer value') % name)
+            raise ValueError(
+                _('Argument "%s" must be an integer value, not "%s"') % (
+                    name, arg))
         else:
-            raise ValueError(_('Argument must be an integer value'))
+            raise ValueError(
+                _('Argument must be an integer value, not "%s"') % arg)
 
 
 def get_float(request, arg, name=None, default=None):
@@ -1411,9 +1417,11 @@ def get_float(request, arg, name=None, default=None):
     except ValueError:
         if name:
             raise ValueError(
-                _('Argument "%s" must be a floating point value') % name)
+                _('Argument "%s" must be a floating point value, not "%s"') % (
+                    name, arg))
         else:
-            raise ValueError(_('Argument must be a floating point value'))
+            raise ValueError(
+                _('Argument must be a boolean value, not "%s"') % arg)
 
 
 def get_unicode(request, arg, name=None, default=None):
