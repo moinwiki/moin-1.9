@@ -69,7 +69,7 @@ class TestHits:
         eventlog.EventLog(self.request).add(self.request, 'VIEWPAGE', {'pagename': self.pagename})
         eventlog.EventLog(self.request).add(self.request, 'VIEWPAGE', {'pagename': self.pagename})
 
-        result = self._test_macro('Hits', '')
+        result = self._test_macro(u'Hits', u'')
         expected = "3"
         assert result == expected
 
@@ -82,7 +82,7 @@ class TestHits:
         eventlog.EventLog(self.request).add(self.request, 'VIEWPAGE', {'pagename': self.pagename})
         eventlog.EventLog(self.request).add(self.request, 'VIEWPAGE', {'pagename': self.pagename})
 
-        result = self._test_macro('Hits', 'all=1')
+        result = self._test_macro(u'Hits', u'all=1')
         expected = "6"
         assert result == expected
 
@@ -92,7 +92,7 @@ class TestHits:
 
         # simulate a log entry SAVEPAGE for WikiSandBox to destinguish current page
         eventlog.EventLog(self.request).add(self.request, 'SAVEPAGE', {'pagename': 'WikiSandBox'})
-        result = self._test_macro('Hits', 'filter=SAVEPAGE')
+        result = self._test_macro(u'Hits', u'filter=SAVEPAGE')
         expected = "2"
         assert result == expected
 
@@ -100,7 +100,7 @@ class TestHits:
         """ macro test: 'all=1, filter=SAVEPAGE' for Hits (all pages are counted for SAVEPAGE)"""
         self.shouldDeleteTestPage = True
 
-        result = self._test_macro('Hits', 'all=1, filter=SAVEPAGE')
+        result = self._test_macro(u'Hits', u'all=1, filter=SAVEPAGE')
         expected = "3"
         assert result == expected
 
