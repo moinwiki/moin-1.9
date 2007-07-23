@@ -266,6 +266,7 @@ class TestParamParsing:
                                                     u'e': u'a,b,c,d'}, [])),
                   (u'd = "", e = ',           ([], {u'd': u'', u'e': None},
                                                [])),
+                  (u'd=""',                   ([], {u'd': u''}, [])),
                   (u'd = "", e = ""',         ([], {u'd': u'', u'e': u''},
                                                [])),
                   # no, None as key isn't accepted
@@ -281,6 +282,14 @@ class TestParamParsing:
         for args, expected in tests:
             result = wikiutil.parse_quoted_separated(args)
             assert expected == result
+            for val in result[0]:
+                assert val is None or isinstance(val, unicode)
+            for val in result[1].keys():
+                assert val is None or isinstance(val, unicode)
+            for val in result[1].values():
+                assert val is None or isinstance(val, unicode)
+            for val in result[2]:
+                assert val is None or isinstance(val, unicode)
 
     def testLimited(self):
         tests = [
@@ -293,6 +302,14 @@ class TestParamParsing:
         for args, expected in tests:
             result = wikiutil.parse_quoted_separated(args, seplimit=1)
             assert expected == result
+            for val in result[0]:
+                assert val is None or isinstance(val, unicode)
+            for val in result[1].keys():
+                assert val is None or isinstance(val, unicode)
+            for val in result[1].values():
+                assert val is None or isinstance(val, unicode)
+            for val in result[2]:
+                assert val is None or isinstance(val, unicode)
 
     def testNoNameValue(self):
         abcd = [u'a', u'b', u'c', u'd']
@@ -313,6 +330,8 @@ class TestParamParsing:
         for args, expected in tests:
             result = wikiutil.parse_quoted_separated(args, name_value=False)
             assert expected == result
+            for val in result:
+                assert val is None or isinstance(val, unicode)
 
 
 class TestArgGetters:
