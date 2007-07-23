@@ -1448,6 +1448,39 @@ def get_unicode(request, arg, name=None, default=None):
     return arg
 
 
+def get_choice(request, arg, name=None, choices=[None]):
+    """
+    For use with values returned from parse_quoted_separated or given
+    as macro parameters, return a unicode string that must be in the
+    choices given. None is a valid input and yields first of the valid
+    choices.
+
+    @param request: A request instance
+    @param arg: The argument, may be None or a unicode string
+    @param name: Name of the argument, for error messages
+    @param choices: the possible choices
+    @rtype: unicode or None
+    @returns: the unicode string (or default value)
+    """
+    assert isinstance(choices, tuple) or isinstance(choices, list)
+    if arg is None:
+        return choices[0]
+    elif not isinstance(arg, unicode):
+        raise TypeError('Argument must be None or unicode')
+    elif not arg in choices:
+        _ = request.getText
+        if name:
+            raise ValueError(
+                _('Argument "%s" must be one of "%s", not "%s"') % (
+                    name, '", "'.join(choices), arg))
+        else:
+            raise ValueError(
+                _('Argument must be one of "%s", not "%s"') % (
+                    '", "'.join(choices), arg))
+
+    return arg
+
+
 def parseAttributes(request, attrstring, endtoken=None, extension=None):
     """
     Parse a list of attributes and return a dict plus a possible
