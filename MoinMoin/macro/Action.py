@@ -75,7 +75,7 @@ class ActionLink:
         text = self.args.get('text', action)
         text = _(text, formatted=False)
         text = wikiutil.escape(text, 1)
-        action, args = action.split('&', 1)
+        action, args = (action.split('&') + [None] * 2)[:2]
         if action in self.getValidActions():
             # Create link
             page = self.macro.formatter.page
