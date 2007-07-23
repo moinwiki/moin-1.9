@@ -94,6 +94,12 @@ class Macro:
         self.name = None
 
     def _convert_arg(self, value, default, name=None):
+        """
+        Using the wikiutil argument parser get_* functions,
+        convert argument to the type of the default if that is
+        any of bool, int, long, float or unicode; otherwise
+        return the value itself.
+        """
         if isinstance(default, bool):
             return wikiutil.get_boolean(self.request, value, name, default)
         elif isinstance(default, int) or isinstance(default, long):
@@ -108,6 +114,12 @@ class Macro:
         """
         Parses arguments for a macro call and calls the macro
         function with the arguments.
+
+        If the macro function has a default value that is a bool,
+        int, long, float or unicode object, then the given value
+        is converted to the type of that default value before passing
+        it to the macro function. That way, macros need not call the
+        wikiutil.get_* functions for any arguments that have a default.
         """
         if args:
             positional, keyword, trailing = \
@@ -152,16 +164,29 @@ class Macro:
         defstart = argc - len(defaults)
 
         try:
+            # convert each positional argument and each
+            # given keyword argument that is named in the function
+            # to the type of the default value for that argument
+            # (if the argument has a default, that is)
             for idx in range(defstart, argc):
                 argname = args[idx + 1]
                 default = defaults[idx - defstart]
+
+                # the value of 'argname' from kwargs will be put into the
+                # macro's 'argname' argument, so convert that giving the
+                # name to the converter so the user is told which argument
+                # went wrong (if it does)
                 if argname in kwargs:
                     kwargs[argname] = self._convert_arg(kwargs[argname],
                                                         default, argname)
 
+                # iterate through all arguments, but if no more positional
+                # arguments are given then skip converting them
                 if idx >= len(positional):
                     continue
 
+                # use the default right away if it's not given,
+                # otherwise convert to the type of the default
                 if positional[idx] is None:
                     positional[idx] = default
                 else:
