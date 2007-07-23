@@ -1238,7 +1238,7 @@ def parse_quoted_separated(args, separator=',', name_value=True, seplimit=0):
     cur_quoted = False  # indicates whether value was quoted,
                         # needed None vs. u'' handling
     quoted = False      # we're inside quotes
-    skipquote = False   # next quote is a quoted quote
+    skipquote = 0       # next quote is a quoted quote
     noquote = False     # no quotes expected because word didn't start with one
     seplimit_reached = False # number of separators exhausted
     separator_count = 0 # number of separators encountered
@@ -1251,6 +1251,8 @@ def parse_quoted_separated(args, separator=',', name_value=True, seplimit=0):
         next = None
         if idx + 1 < max:
             next = args[idx+1]
+        if skipquote:
+            skipquote -= 1
         if not quoted and char in SPACE:
             spaces = ''
             # accumulate all space
@@ -1299,16 +1301,16 @@ def parse_quoted_separated(args, separator=',', name_value=True, seplimit=0):
         elif not quoted and not noquote and char == '"':
             quoted = True
             cur_quoted = True
-        elif quoted and not skipquote and char == '"' and next != '"':
-            quoted = False
-        elif quoted and char == '"' and next == '"':
-            skipquote = True
+        elif quoted and not skipquote and char == '"':
+            if next == '"':
+                skipquote = 2 # will be decremented right away
+            else:
+                quoted = False
         else:
             if cur is not None:
                 cur = cur + char
             else:
                 curname = curname + char
-            skipquote = False
             noquote = True
 
         idx += 1
