@@ -343,7 +343,7 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
                 viewlink = '<a href="%(baseurl)s/%(urlpagename)s?action=%(action)s&amp;do=view&amp;target=%(urlfile)s">%(label_view)s</a>' % parmdict
 
             if (packages.ZipPackage(request, os.path.join(attach_dir, file).encode(config.charset)).isPackage() and
-                 request.user.isSuperUser()):
+                 request.user.isSuperUser() and request.user.may.write(pagename)):
                 viewlink += ' | <a href="%(baseurl)s/%(urlpagename)s?action=%(action)s&amp;do=install&amp;target=%(urlfile)s">%(label_install)s</a>' % parmdict
             elif (zipfile.is_zipfile(os.path.join(attach_dir, file).encode(config.charset)) and
                 mt.minor == 'zip' and request.user.may.read(pagename) and request.user.may.delete(pagename)
