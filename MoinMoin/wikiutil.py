@@ -1535,18 +1535,19 @@ def invoke_extension_function(request, function, args, fixed_args=[]):
 
     _ = request.getText
 
+    kwargs = {}
+    kwargs_to_pass = {}
+
     if args:
         assert isinstance(args, unicode)
 
         positional, keyword, trailing = parse_quoted_separated(args)
 
-        kwargs = {}
-        nonascii = {}
         for kw in keyword:
             try:
                 kwargs[str(kw)] = keyword[kw]
             except UnicodeEncodeError:
-                nonascii[kw] = keyword[kw]
+                kwargs_to_pass[kw] = keyword[kw]
 
         # add trailing args as keyword argument if present,
         # otherwise remove if the user entered some
@@ -1556,17 +1557,8 @@ def invoke_extension_function(request, function, args, fixed_args=[]):
         elif '_trailing_args' in kwargs:
             del kwargs['_trailing_args']
 
-        # add nonascii args as keyword argument if present,
-        # otherwise remove if the user entered some
-        # (so macros don't get a string where they expect a list)
-        if nonascii:
-            kwargs['_non_ascii_kwargs'] = nonascii
-        elif '_non_ascii_kwargs' in kwargs:
-            del kwargs['_non_ascii_kwargs']
-
     else:
         positional = []
-        kwargs = {}
 
     argnames, varargs, varkw, defaultlist = getargspec(function)
     # self is implicit!
@@ -1586,14 +1578,14 @@ def invoke_extension_function(request, function, args, fixed_args=[]):
     defaults = {}
     # reverse to be able to pop() things off
     positional.reverse()
-    allow_non_ascii_kw = False
+    allow_kwargs = False
     allow_trailing = False
     # convert all arguments to keyword arguments,
     # fill all arguments that weren't given with None
     for idx in range(argc):
         argname = argnames[idx]
-        if argname == '_non_ascii_kwargs':
-            allow_non_ascii_kw = True
+        if argname == '_kwargs':
+            allow_kwargs = True
             continue
         if argname == '_trailing_args':
             allow_trailing = True
@@ -1610,15 +1602,9 @@ def invoke_extension_function(request, function, args, fixed_args=[]):
     if '_trailing_args' in kwargs and not allow_trailing:
         raise ValueError(_('Cannot have arguments without name following'
                            ' named arguments'))
-    if '_non_ascii_kwargs' in kwargs and not allow_non_ascii_kw:
-        raise ValueError(_(u'No argument named "%s"') % (
-            kwargs['_non_ascii_kwargs'].keys()[0]))
-
     # type-convert all keyword arguments to the type
     # that the default value indicates
-    for argname in kwargs:
-        if not varkw and not argname in argnames:
-            raise ValueError(_('No argument named "%s"') % argname)
+    for argname in kwargs.keys()[:]:
         if argname in defaults:
             # the value of 'argname' from kwargs will be put into the
             # macro's 'argname' argument, so convert that giving the
@@ -1626,6 +1612,16 @@ def invoke_extension_function(request, function, args, fixed_args=[]):
             # went wrong (if it does)
             kwargs[argname] = _convert_arg(request, kwargs[argname],
                                            defaults[argname], argname)
+        if not argname in argnames:
+            # move argname into _kwargs parameter
+            kwargs_to_pass[argname] = kwargs[argname]
+            del kwargs[argname]
+
+    if kwargs_to_pass:
+        kwargs['_kwargs'] = kwargs_to_pass
+        if not allow_kwargs:
+            raise ValueError(_(u'No argument named "%s"') % (
+                kwargs_to_pass.keys()[0]))
 
     return function(*fixed_args, **kwargs)
 

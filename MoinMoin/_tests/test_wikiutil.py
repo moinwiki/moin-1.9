@@ -517,9 +517,8 @@ class TestExtensionInvoking:
     def _test_trailing(self, a, _trailing_args=[]):
         assert _trailing_args == [u'a']
 
-    def _test_arbitrary_kw(self, expect, _non_ascii_kwargs={}, **kw):
-        assert _non_ascii_kwargs == expect
-        assert kw == {'test': u'x'}
+    def _test_arbitrary_kw(self, expect, _kwargs={}):
+        assert _kwargs == expect
 
     def testInvoke(self):
         ief = wikiutil.invoke_extension_function
@@ -568,14 +567,14 @@ class TestExtensionInvoking:
                        self._test_invoke_float_None, u'i=""')
         ief(self.request, self._test_trailing, u'a=7, a')
         ief(self.request, self._test_arbitrary_kw, u'test=x, \xc3=test',
-            [{u'\xc3': 'test'}])
+            [{u'\xc3': 'test', 'test': u'x'}])
         ief(self.request, self._test_arbitrary_kw, u'test=x, "\xc3"=test',
-            [{u'\xc3': 'test'}])
+            [{u'\xc3': 'test', 'test': u'x'}])
         ief(self.request, self._test_arbitrary_kw, u'test=x, "7 \xc3"=test',
-            [{u'7 \xc3': 'test'}])
+            [{u'7 \xc3': 'test', 'test': u'x'}])
         ief(self.request, self._test_arbitrary_kw, u'test=x, 7 \xc3=test',
-            [{u'7 \xc3': 'test'}])
+            [{u'7 \xc3': 'test', 'test': u'x'}])
         ief(self.request, self._test_arbitrary_kw, u'7 \xc3=test, test= x ',
-            [{u'7 \xc3': 'test'}])
+            [{u'7 \xc3': 'test', 'test': u'x'}])
 
 coverage_modules = ['MoinMoin.wikiutil']
