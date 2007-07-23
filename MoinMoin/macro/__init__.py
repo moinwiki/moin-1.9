@@ -25,11 +25,9 @@ from MoinMoin import action, config, util
 from MoinMoin import wikiutil, i18n
 from MoinMoin.Page import Page
 
-names = ["TitleSearch", "WordIndex", "TitleIndex",
-         "GoTo", "PageCount",
+names = ["TitleSearch", "WordIndex", "TitleIndex", "GoTo",
          # Macros with arguments
-         "Icon", "PageList", "Date", "DateTime", "Anchor", "MailTo", "GetVal",
-         "TemplateList",
+         "Icon", "PageList", "Date", "DateTime", "Anchor", "MailTo", "GetVal", "TemplateList",
 ]
 
 #############################################################################
@@ -67,7 +65,6 @@ class Macro:
         "TemplateList": ["namespace"],
         "WordIndex": ["namespace"],
         "TitleIndex": ["namespace"],
-        "PageCount": ["namespace"],
         "Goto": [],
         "Icon": ["user"], # users have different themes and user prefs
         "Date": ["time"],
@@ -347,29 +344,6 @@ class Macro:
             ]
         html = u'\n'.join(html)
         return self.formatter.rawHTML(html)
-
-    def macro_PageCount(self, exists=None):
-        """ Return number of pages readable by current user
-
-        Return either an exact count (slow!) or fast count including
-        deleted pages.
-
-        TODO: make macro syntax more sane
-        """
-        exists = wikiutil.get_unicode(self.request, exists, 'exists')
-        # Check input
-        only_existing = False
-        if exists == u'exists':
-            only_existing = True
-        elif exists:
-            # Wrong argument, return inline error message
-            arg = self.formatter.text(args)
-            return (self.formatter.span(1, css_class="error") +
-                    'Wrong argument: %s' % arg +
-                    self.formatter.span(0))
-
-        count = self.request.rootpage.getPageCount(exists=only_existing)
-        return self.formatter.text("%d" % count)
 
     def macro_Icon(self, icon=None):
         icon = wikiutil.get_unicode(self.request, icon, 'icon')
