@@ -1584,12 +1584,15 @@ def invoke_extension_function(request, function, args, fixed_args=[]):
     # convert all arguments to keyword arguments,
     # fill all arguments that weren't given with None
     for idx in range(argc):
+        argname = argnames[idx]
+        if argname in ['_non_ascii_kwargs', '_trailing_args']:
+            continue
         if idx < len(positional):
-            kwargs[argnames[idx]] = positional[idx]
-        if not (argnames[idx] in kwargs):
-            kwargs[argnames[idx]] = None
+            kwargs[argname] = positional[idx]
+        if not argname in kwargs:
+            kwargs[argname] = None
         if idx >= defstart:
-            defaults[argnames[idx]] = defaultlist[idx - defstart]
+            defaults[argname] = defaultlist[idx - defstart]
 
     # type-convert all keyword arguments to the type
     # that the default value indicates
