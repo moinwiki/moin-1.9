@@ -30,7 +30,7 @@ TRAILING_SPACES = 'nochange' # 'nochange' or 'fix'
 FIX_TS_RE = re.compile(r' +$', re.M) # 'fix' mode: everything matching the trailing space re will be removed
 
 RECENTLY = time.time() - 7 * 24*60*60 # we only check stuff touched recently.
-RECENTLY = 0 # check everything!
+#RECENTLY = 0 # check everything!
 # After doing a fresh clone, this procedure is recommended:
 # 1. Run the tests once to see if everything is OK (as cloning updates the mtime,
 #    it will test every file).
