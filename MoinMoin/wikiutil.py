@@ -1223,12 +1223,14 @@ def parse_quoted_separated(args, separator=',', name_value=True, seplimit=0):
               a list of trailing arguments
     """
     idx = 0
+    if not isinstance(args, unicode):
+        raise TypeError('args must be unicode')
     max = len(args)
     ret_positional = [] # positional argument return value
     ret_trailing = []   # trailing arguments return value
     positional = ret_positional
     keyword = {}        # keyword arguments
-    curname = ''        # current name, initially value as well (name=value)
+    curname = u''       # current name, initially value as well (name=value)
     cur = None          # current value
     cur_quoted = False  # indicates whether value was quoted,
                         # needed None vs. u'' handling
@@ -1267,7 +1269,7 @@ def parse_quoted_separated(args, separator=',', name_value=True, seplimit=0):
                 curname = curname + spaces
         elif not quoted and name_value and char == '=':
             if cur is None:
-                cur = ''
+                cur = u''
                 cur_quoted = False
             else:
                 cur += '='
@@ -1283,7 +1285,7 @@ def parse_quoted_separated(args, separator=',', name_value=True, seplimit=0):
                 positional = ret_trailing
             else:
                 positional.append(cur)
-            curname = ''
+            curname = u''
             cur = None
             noquote = False
             cur_quoted = False
