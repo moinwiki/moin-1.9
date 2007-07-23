@@ -135,7 +135,7 @@ class Macro:
 
     def format_error(self, err):
         """ format an error object for output instead of normal macro output """
-        return u'[[%s: %s]]' % (self.name, unicode(err))
+        return self.formatter.text(u'[[%s: %s]]' % (self.name, unicode(err)))
 
     def execute(self, macro_name, args):
         """ Get and execute a macro
