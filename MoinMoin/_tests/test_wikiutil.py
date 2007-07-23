@@ -506,6 +506,9 @@ class TestExtensionInvoking:
     def _test_invoke_float_None(self, i=float):
         assert i == 1.4 or i is None
 
+    def _test_invoke_float_required(self, i=wikiutil.required_arg(float)):
+        assert i == 1.4
+
     def _test_invoke_choice(self, a, choice=[u'a', u'b', u'c']):
         assert a == 7
         assert choice == u'a'
@@ -576,5 +579,11 @@ class TestExtensionInvoking:
             [{u'7 \xc3': 'test', 'test': u'x'}])
         ief(self.request, self._test_arbitrary_kw, u'7 \xc3=test, test= x ',
             [{u'7 \xc3': 'test', 'test': u'x'}])
+        py.test.raises(ValueError, ief, self.request,
+                       self._test_invoke_float_required, u'')
+        ief(self.request, self._test_invoke_float_required, u'1.4')
+        ief(self.request, self._test_invoke_float_required, u'i=1.4')
+        py.test.raises(ValueError, ief, self.request,
+                       self._test_invoke_float_required, u',')
 
 coverage_modules = ['MoinMoin.wikiutil']
