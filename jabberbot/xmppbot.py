@@ -258,7 +258,13 @@ class XMPPBot(Client, Thread):
             for recipient in command.jids:
                 jid = JID(recipient)
                 jid_text = jid.bare().as_utf8()
-                text = command.text
+
+                if isinstance(command, cmd.NotificationCommandI18n):
+                    # Translate&interpolate the message with data
+                    gettext_func = self.get_text(recipient)
+                    text = command.translate(gettext_func)
+                else:
+                    text = command.text
 
                 # Check if contact is DoNotDisturb.
                 # If so, queue the message for delayed delivery.
@@ -300,13 +306,32 @@ class XMPPBot(Client, Thread):
             self.send_message(command.jid, msg % (pagelist, ))
 
         elif isinstance(command, cmd.GetPageInfo):
-            msg = _("""Following detailed information on page "%(pagename)s" \
-is available::\n\n%(data)s""")
+            intro = _("""Following detailed information on page "%(pagename)s" \
+is available:""")
 
-            self.send_message(command.jid, msg % {
-                      'pagename': command.pagename,
-                      'data': command.data,
-            })
+            if command.data['author'].startswith("Self:"):
+                author = command.data['author'][5:]
+            else:
+                author = command.data['author']
+
+            datestr = str(command.data['lastModified'])
+            date = u"%(year)s-%(month)s-%(day)s at %(time)s" % {
+                        'year': datestr[:4],
+                        'month': datestr[4:6],
+                        'day': datestr[6:8],
+                        'time': datestr[9:17],
+            }
+
+            msg = _("""Last author: %(author)s
+Last modification: %(modification)s
+Current version: %(version)s""") % {
+             'author': author,
+             'modification': date,
+             'version': command.data['version'],
+            }
+
+            self.send_message(command.jid, intro % {'pagename': command.pagename})
+            self.send_message(command.jid, msg)
 
         elif isinstance(command, cmd.GetUserLanguage):
             if command.jid in self.contacts:

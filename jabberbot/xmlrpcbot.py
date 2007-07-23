@@ -14,8 +14,6 @@ import jabberbot.commands as cmd
 from jabberbot.multicall import MultiCall
 from jabberbot.i18n import get_text
 
-_ = get_text
-
 class ConfigurationError(Exception):
     def __init__(self, message):
         Exception.__init__()
@@ -39,7 +37,7 @@ class XMLRPCClient(Thread):
         self.log = logging.getLogger("log")
 
         if not config.secret:
-            error = _("You must set a (long) secret string!")
+            error = "You must set a (long) secret string!"
             self.log.critical(error)
             raise ConfigurationError(error)
 
@@ -78,8 +76,11 @@ class XMLRPCClient(Thread):
         elif isinstance(command, cmd.GetUserLanguage):
             self.get_language_by_jid(command)
 
-    def report_error(self, jid, text):
-        report = cmd.NotificationCommand(jid, text, _("Error"), async=False)
+    def report_error(self, jid, text, data={}):
+        # Dummy function, so that the string appears in a .po file
+        _ = lambda x: x
+
+        report = cmd.NotificationCommandI18n(jid, text, _("Error"), data, async=False)
         self.commands_out.put_nowait(report)
 
     def get_auth_token(self, jid):
@@ -101,6 +102,9 @@ class XMLRPCClient(Thread):
 
         """
         def wrapped_func(self, command):
+            # Dummy function, so that the string appears in a .po file
+            _ = lambda x: x
+
             self.token = None
             self.multicall = MultiCall(self.connection)
             jid = command.jid
@@ -113,16 +117,19 @@ class XMLRPCClient(Thread):
                     if self.token:
                         self.multicall.applyAuthToken(self.token)
 
-                    function(self, command)
+                    if function(self, command) != u"SUCCESS":
+                        self.warn_no_credentials(command.jid)
+
                     self.commands_out.put_nowait(command)
+
                 except xmlrpclib.Fault, fault:
-                    msg = _("Your request has failed. The reason is:\n%s")
+                    msg = _("Your request has failed. The reason is:\n%(error)s")
                     self.log.error(str(fault))
-                    self.report_error(jid, msg % (fault.faultString, ))
+                    self.report_error(jid, msg, {'error': fault.faultString})
                 except xmlrpclib.Error, err:
-                    msg = _("A serious error occured while processing your request:\n%s")
+                    msg = _("A serious error occured while processing your request:\n%(error)s")
                     self.log.error(str(err))
-                    self.report_error(jid, msg % (str(err), ))
+                    self.report_error(jid, msg, {'error': str(err)})
                 except Exception, exc:
                     msg = _("An internal error has occured, please contact the administrator.")
                     self.log.critical(str(exc))
@@ -135,24 +142,33 @@ class XMLRPCClient(Thread):
         return wrapped_func
 
     def warn_no_credentials(self, jid):
+        """Warn a given JID that credentials check failed
+
+        @param jid: full JID to notify about failure
+        @type jid: str
+
+        """
+        # Dummy function, so that the string appears in a .po file
+        _ = lambda x: x
+
         msg = _("Credentials check failed, you may be unable to see all information.")
-        warning = cmd.NotificationCommand([jid], msg, async=False)
+        warning = cmd.NotificationCommandI18n([jid], msg, async=False)
         self.commands_out.put_nowait(warning)
 
     def get_page(self, command):
         """Returns a raw page"""
 
+        token_result = u"FAILURE"
         self.multicall.getPage(command.pagename)
 
         if not self.token:
-            self.warn_no_credentials(command.jid)
             getpage_result = self.multicall()[0]
         else:
             token_result, getpage_result = self.multicall()
-            if token_result != u"SUCCESS":
-                self.warn_no_credentials(command.jid)
 
         command.data = getpage_result
+        return token_result
+
 
     get_page = _xmlrpc_decorator(get_page)
 
@@ -160,17 +176,16 @@ class XMLRPCClient(Thread):
     def get_page_html(self, command):
         """Returns a html-formatted page"""
 
+        token_result = u"FAILURE"
         self.multicall.getPageHTML(command.pagename)
 
         if not self.token:
-            self.warn_no_credentials(command.jid)
             getpagehtml_result = self.multicall()[0]
         else:
             token_result, getpagehtml_result = self.multicall()
-            if token_result != u"SUCCESS":
-                self.warn_no_credentials(command.jid)
 
         command.data = getpagehtml_result
+        return token_result
 
     get_page_html = _xmlrpc_decorator(get_page_html)
 
@@ -178,21 +193,23 @@ class XMLRPCClient(Thread):
     def get_page_list(self, command):
         """Returns a list of all accesible pages"""
 
+        # Dummy function, so that the string appears in a .po file
+        _ = lambda x: x
+
+        token_result = u"FAILURE"
         txt = _("This command may take a while to complete, please be patient...")
-        info = cmd.NotificationCommand([command.jid], txt, async=False)
+        info = cmd.NotificationCommandI18n([command.jid], txt, async=False)
         self.commands_out.put_nowait(info)
 
         self.multicall.getAllPages()
 
         if not self.token:
-            # FIXME: notify the user that he may not have full rights on the wiki
             getpagelist_result = self.multicall()[0]
         else:
             token_result, getpagelist_result = self.multicall()
-            if token_result != u"SUCCESS":
-                self.warn_no_credentials(command.jid)
 
         command.data = getpagelist_result
+        return token_result
 
     get_page_list = _xmlrpc_decorator(get_page_list)
 
@@ -200,37 +217,16 @@ class XMLRPCClient(Thread):
     def get_page_info(self, command):
         """Returns detailed information about a given page"""
 
+        token_result = u"FAILURE"
         self.multicall.getPageInfo(command.pagename)
 
         if not self.token:
-            self.warn_no_credentials(command.jid)
             getpageinfo_result = self.multicall()[0]
         else:
             token_result, getpageinfo_result = self.multicall()
-            if token_result != u"SUCCESS":
-                self.warn_no_credentials(command.jid)
 
-        author = getpageinfo_result['author']
-        if author.startswith("Self:"):
-            author = getpageinfo_result['author'][5:]
-
-        datestr = str(getpageinfo_result['lastModified'])
-        date = u"%(year)s-%(month)s-%(day)s at %(time)s" % {
-                    'year': datestr[:4],
-                    'month': datestr[4:6],
-                    'day': datestr[6:8],
-                    'time': datestr[9:17],
-                }
-
-        msg = _("""Last author: %(author)s
-Last modification: %(modification)s
-Current version: %(version)s""") % {
-             'author': author,
-             'modification': date,
-             'version': getpageinfo_result['version'],
-         }
-
-        command.data = msg
+        command.data = getpageinfo_result
+        return token_result
 
     get_page_info = _xmlrpc_decorator(get_page_info)
 
@@ -300,7 +296,7 @@ class XMLRPCServer(Thread):
         """
         def protected_func(secret, *args):
             if secret != self.secret:
-                raise xmlrpclib.Fault(1, _("You are not allowed to use this bot!"))
+                raise xmlrpclib.Fault(1, "You are not allowed to use this bot!")
             else:
                 return function(self, *args)
 

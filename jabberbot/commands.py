@@ -28,6 +28,29 @@ class NotificationCommand:
         self.subject = subject
         self.async = async
 
+class NotificationCommandI18n(NotificationCommand):
+    """Notification request that should be translated by the XMPP bot"""
+    def __init__(self, jids, text, data={}, subject="", async=True):
+        """A constructor
+
+        Params as in NotificationCommand.
+
+        @param text: text to send, use %(foo)s syntax to interpolate it with data
+        @param data: dictionary of strings to interpolate into a translated message
+        @type data: dict
+
+        """
+        NotificationCommand.__init__(self, jids, text, subject, async)
+        self.data = data
+
+    def translate(self, gettext_func):
+        """Translate the message using a provided gettext function
+
+        @param gettext_func: a unary gettext function
+        @return: translated message
+        """
+        return gettext_func(self.text) % self.data
+
 class AddJIDToRosterCommand:
     """Class representing a request to add a new jid to roster"""
     def __init__(self, jid):
