@@ -258,7 +258,7 @@ class XMPPBot(Client, Thread):
             for recipient in command.jids:
                 jid = JID(recipient)
                 jid_text = jid.bare().as_utf8()
-                
+
                 if isinstance(command, cmd.NotificationCommandI18n):
                     # Translate&interpolate the message with data
                     gettext_func = self.get_text(recipient)
@@ -308,7 +308,7 @@ class XMPPBot(Client, Thread):
         elif isinstance(command, cmd.GetPageInfo):
             intro = _("""Following detailed information on page "%(pagename)s" \
 is available:""")
-            
+
             if command.data['author'].startswith("Self:"):
                 author = command.data['author'][5:]
             else:
@@ -321,7 +321,7 @@ is available:""")
                         'day': datestr[6:8],
                         'time': datestr[9:17],
             }
-        
+
             msg = _("""Last author: %(author)s
 Last modification: %(modification)s
 Current version: %(version)s""") % {
