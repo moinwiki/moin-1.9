@@ -108,6 +108,8 @@ class Macro:
             return wikiutil.get_float(self.request, value, name, default)
         elif isinstance(default, unicode):
             return wikiutil.get_unicode(self.request, value, name, default)
+        elif isinstance(default, tuple) or isinstance(default, list):
+            return wikiutil.get_choice(self.request, value, name, default)
         elif default is bool:
             return wikiutil.get_bool(self.request, value, name)
         elif default is int or default is long:
@@ -160,49 +162,43 @@ class Macro:
             positional = []
             kwargs = {}
 
-        args, varargs, varkw, defaults = getargspec(fn)
-        argc = len(args) - 1
-        if not defaults:
-            defaults = []
+        argnames, varargs, varkw, defaultlist = getargspec(fn)
+        argnames = argnames[1:]
+        argc = len(argnames)
+        if not defaultlist:
+            defaultlist = []
 
         # if the first (macro) parameter has a default too...
-        if argc < len(defaults):
-            defaults = defaults[1:]
-        defstart = argc - len(defaults)
+        if argc < len(defaultlist):
+            defaultlist = defaultlist[1:]
+        defstart = argc - len(defaultlist)
+
+        defaults = {}
+        # convert all arguments to keyword arguments,
+        # fill all arguments that weren't given with None
+        for idx in range(argc):
+            if idx < len(positional):
+                kwargs[argnames[idx]] = positional[idx]
+            if not argnames[idx] in kwargs:
+                kwargs[argnames[idx]] = None
+            if idx >= defstart:
+                defaults[argnames[idx]] = defaultlist[idx - defstart]
 
         try:
-            # convert each positional argument and each
-            # given keyword argument that is named in the function
-            # to the type of the default value for that argument
-            # (if the argument has a default, that is)
+            # type-convert all keyword arguments to the type
+            # that the default value indicates
             for idx in range(defstart, argc):
-                argname = args[idx + 1]
-                default = defaults[idx - defstart]
+                argname = argnames[idx]
+                default = defaults.get(argname, None)
 
                 # the value of 'argname' from kwargs will be put into the
                 # macro's 'argname' argument, so convert that giving the
                 # name to the converter so the user is told which argument
                 # went wrong (if it does)
-                if argname in kwargs:
-                    kwargs[argname] = self._convert_arg(kwargs[argname],
-                                                        default, argname)
+                kwargs[argname] = self._convert_arg(kwargs[argname],
+                                                    default, argname)
 
-                # iterate through all arguments, but if no more positional
-                # arguments are given then skip converting them
-                if idx >= len(positional):
-                    if isinstance(default, type):
-                        raise ValueError(_("Not enough arguments"))
-                    continue
-
-                # use the default right away if it's not given,
-                # otherwise convert to the type of the default
-                if positional[idx] is None:
-                    positional[idx] = default
-                else:
-                    positional[idx] = self._convert_arg(positional[idx],
-                                                        default)
-
-            return fn(self, *positional, **kwargs)
+            return fn(self, **kwargs)
         except (ValueError, TypeError), e:
             return self.format_error(e)
 
