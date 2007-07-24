@@ -16,7 +16,7 @@ from jabberbot.i18n import get_text
 
 class ConfigurationError(Exception):
     def __init__(self, message):
-        Exception.__init__()
+        Exception.__init__(self)
         self.message = message
 
 class XMLRPCClient(Thread):
