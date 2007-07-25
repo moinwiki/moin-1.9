@@ -721,8 +721,10 @@ class TestAnchorNames:
     def test_anchor_name_encoding(self):
         tests = [
             # text                    expected output
-            (u'\xf6\xf6ll\xdf\xdf',   '.2BAPYA9g-ll.2BAN8A3w-'),
+            (u'\xf6\xf6ll\xdf\xdf',   'A.2BAPYA9g-ll.2BAN8A3w-'),
             (u'level 2',              'level_2'),
+            (u'',                     'A'),
+            (u'123',                  'A123'),
         ]
         for text, expected in tests:
             yield self._check, text, expected
