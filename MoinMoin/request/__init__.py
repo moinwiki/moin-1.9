@@ -152,8 +152,6 @@ class RequestBase(object):
         # Pages meta data that we collect in one request
         self.pages = {}
 
-        self._page_headings = {}
-
         self.user_headers = []
         self.cacheable = 0 # may this output get cached by http proxies/caches?
         self.http_caching_disabled = 0 # see disableHttpCaching()
@@ -695,10 +693,6 @@ class RequestBase(object):
 
         # caches unique ids
         self._page_ids = {}
-        # keeps track of pagename/heading combinations
-        # parsers should use this dict and not a local one, so that
-        # macros like TableOfContents in combination with Include can work
-        self._page_headings = {}
 
         if hasattr(self, "_fmt_hd_counters"):
             del self._fmt_hd_counters
@@ -1386,9 +1380,11 @@ class RequestBase(object):
         from MoinMoin import failure
         failure.handle(self, err)
 
-    def makeUniqueID(self, base):
+    def make_unique_id(self, base):
         """
         Generates a unique ID using a given base name. Appends a running count to the base.
+
+        Needs to stay deterministic!
 
         @param base: the base of the id
         @type base: unicode
@@ -1402,7 +1398,10 @@ class RequestBase(object):
         self._page_ids[base] = count
         if count == 0:
             return base
-        return u'%s_%04d' % (base, count)
+        return u'%s-%d' % (base, count)
+
+    def reset_unique_ids(self):
+        self._page_ids = {}
 
     def httpDate(self, when=None, rfc='1123'):
         """ Returns http date string, according to rfc2068

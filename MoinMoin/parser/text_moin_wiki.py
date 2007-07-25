@@ -157,7 +157,6 @@ class Parser:
         self.no_862 = False
         self.in_table = 0
         self.inhibit_p = 0 # if set, do not auto-create a <p>aragraph
-        self.titles = request._page_headings
 
         # holds the nesting level (in chars) of open lists
         self.list_indents = []
@@ -767,17 +766,15 @@ class Parser:
         # when included the same page multiple times
         title_text = h[level:-level].strip()
         pntt = self.formatter.page.page_name + title_text
-        self.titles.setdefault(pntt, 0)
-        self.titles[pntt] += 1
 
-        unique_id = ''
-        if self.titles[pntt] > 1:
-            unique_id = '-%d' % self.titles[pntt]
-        result = self._closeP()
-        result += self.formatter.heading(1, depth, id="head-"+sha.new(pntt.encode(config.charset)).hexdigest()+unique_id)
+        id = 'head-' + sha.new(pntt.encode(config.charset)).hexdigest()
 
-        return (result + self.formatter.text(title_text) +
-                self.formatter.heading(0, depth))
+        return ''.join([
+            self._closeP(),
+            self.formatter.heading(1, depth, id=id),
+            self.formatter.text(title_text),
+            self.formatter.heading(0, depth),
+        ])
 
     def _parser_repl(self, word):
         """Handle parsed code displays."""

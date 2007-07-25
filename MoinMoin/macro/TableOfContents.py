@@ -26,7 +26,9 @@ class TOCFormatter(FormatterBase):
         return text
 
     def heading(self, on, depth, **kw):
-        id = kw.get('id', '')
+        id = kw.get('id', None)
+        if not id is None:
+            id = self.request.make_unique_id(kw['id'])
         self.in_heading = on
         if on:
             self.collected_headings.append([depth, id, u''])
@@ -120,8 +122,7 @@ Prints a table of contents.
                                             count_hit=False,
                                             omit_footnotes=True)
 
-    # workaround for include macro
-    macro.request._page_headings = {}
+    macro.request.reset_unique_ids()
 
     _ = macro.request.getText
 
