@@ -9,7 +9,7 @@
 import re
 from MoinMoin.formatter import FormatterBase
 from MoinMoin.Page import Page
-from MoinMoin.wikiutil import PluginAttributeError, importPlugin
+from MoinMoin import wikiutil
 
 
 Dependencies = ['page']
@@ -36,11 +36,11 @@ class TOCFormatter(FormatterBase):
         try:
             # plugins that are defined in the macro class itself
             # can't generate headings this way, but that's fine
-            gen_headings = importPlugin(self.request.cfg, 'macro',
-                                        name, 'generates_headings')
+            gen_headings = wikiutil.importPlugin(self.request.cfg, 'macro',
+                                                 name, 'generates_headings')
             if gen_headings:
                 return FormatterBase.macro(self, macro_obj, name, args)
-        except PluginAttributeError:
+        except (wikiutil.PluginMissingError, wikiutil.PluginAttributeError):
             pass
         return ''
 
