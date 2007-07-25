@@ -1382,7 +1382,7 @@ def get_int(request, arg, name=None, default=None):
     @returns: the integer value of the string (or default value)
     """
     _ = request.getText
-    assert default is None or isinstance(default, int)
+    assert default is None or isinstance(default, (int, long))
     if arg is None:
         return default
     elif not isinstance(arg, unicode):
@@ -1413,7 +1413,7 @@ def get_float(request, arg, name=None, default=None):
     @returns: the float value of the string (or default value)
     """
     _ = request.getText
-    assert default is None or isinstance(default, float)
+    assert default is None or isinstance(default, (int, long, float))
     if arg is None:
         return default
     elif not isinstance(arg, unicode):
@@ -1499,7 +1499,7 @@ def get_choice(request, arg, name=None, choices=[None]):
     @rtype: unicode or None
     @returns: the unicode string (or default value)
     """
-    assert isinstance(choices, tuple) or isinstance(choices, list)
+    assert isinstance(choices, (tuple, list))
     if arg is None:
         return choices[0]
     elif not isinstance(arg, unicode):
@@ -1564,7 +1564,7 @@ def invoke_extension_function(request, function, args, fixed_args=[]):
         # if extending this, extend required_arg as well!
         if isinstance(default, bool):
             return get_bool(request, value, name, default)
-        elif isinstance(default, int) or isinstance(default, long):
+        elif isinstance(default, (int, long)):
             return get_int(request, value, name, default)
         elif isinstance(default, float):
             return get_float(request, value, name, default)
@@ -1572,7 +1572,7 @@ def invoke_extension_function(request, function, args, fixed_args=[]):
             return get_complex(request, value, name, default)
         elif isinstance(default, unicode):
             return get_unicode(request, value, name, default)
-        elif isinstance(default, tuple) or isinstance(default, list):
+        elif isinstance(default, (tuple, list)):
             return get_choice(request, value, name, default)
         elif default is bool:
             return get_bool(request, value, name)
@@ -1586,7 +1586,7 @@ def invoke_extension_function(request, function, args, fixed_args=[]):
             return _convert_arg(request, value, default.argtype, name)
         return value
 
-    assert isinstance(fixed_args, list) or isinstance(fixed_args, tuple)
+    assert isinstance(fixed_args, (list, tuple))
 
     _ = request.getText
 
