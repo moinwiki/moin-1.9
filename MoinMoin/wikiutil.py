@@ -19,8 +19,7 @@ import urllib
 
 from MoinMoin import config
 from MoinMoin.util import pysupport, lock
-from inspect import getargspec
-from types import MethodType
+from inspect import getargspec, isfunction, isclass, ismethod
 
 
 # Exceptions
@@ -1573,10 +1572,18 @@ def invoke_extension_function(request, function, args, fixed_args=[]):
     else:
         positional = []
 
-    argnames, varargs, varkw, defaultlist = getargspec(function)
+    if isfunction(function) or ismethod(function):
+        argnames, varargs, varkw, defaultlist = getargspec(function)
+    elif isclass(function):
+        (argnames, varargs,
+         varkw, defaultlist) = getargspec(function.__init__.im_func)
+    else:
+        raise TypeError('function must be a function, method or class')
+
     # self is implicit!
-    if isinstance(function, MethodType):
+    if ismethod(function) or isclass(function):
         argnames = argnames[1:]
+
     fixed_argc = len(fixed_args)
     argnames = argnames[fixed_argc:]
     argc = len(argnames)
