@@ -98,7 +98,6 @@ class TOCFormatter(FormatterBase):
     parser = _anything_return_empty
     div = _anything_return_empty
     span = _anything_return_empty
-    rawHTML = _anything_return_empty
     escapedText = _anything_return_empty
     comment = _anything_return_empty
 
@@ -120,6 +119,9 @@ Prints a table of contents.
                                             content_only=True,
                                             count_hit=False,
                                             omit_footnotes=True)
+
+    # workaround for include macro
+    macro.request._page_headings = {}
 
     _ = macro.request.getText
 
