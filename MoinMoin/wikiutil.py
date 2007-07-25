@@ -1427,7 +1427,40 @@ def get_float(request, arg, name=None, default=None):
                     name, arg))
         else:
             raise ValueError(
-                _('Argument must be a boolean value, not "%s"') % arg)
+                _('Argument must be a floating point value, not "%s"') % arg)
+
+
+def get_complex(request, arg, name=None, default=None):
+    """
+    For use with values returned from parse_quoted_separated or given
+    as macro parameters, return a complex from a unicode string.
+    None is a valid input and yields the default value.
+
+    @param request: A request instance
+    @param arg: The argument, may be None or a unicode string
+    @param name: Name of the argument, for error messages
+    @param default: default return value if arg is None
+    @rtype: complex or None
+    @returns: the complex value of the string (or default value)
+    """
+    _ = request.getText
+    assert default is None or isinstance(default, (int, long, float, complex))
+    if arg is None:
+        return default
+    elif not isinstance(arg, unicode):
+        raise TypeError('Argument must be None or unicode')
+    try:
+        # allow writing 'i' instead of 'j'
+        arg = arg.replace('i', 'j').replace('I', 'j')
+        return complex(arg)
+    except ValueError:
+        if name:
+            raise ValueError(
+                _('Argument "%s" must be a complex value, not "%s"') % (
+                    name, arg))
+        else:
+            raise ValueError(
+                _('Argument must be a complex value, not "%s"') % arg)
 
 
 def get_unicode(request, arg, name=None, default=None):
@@ -1534,6 +1567,8 @@ def invoke_extension_function(request, function, args, fixed_args=[]):
             return get_int(request, value, name, default)
         elif isinstance(default, float):
             return get_float(request, value, name, default)
+        elif isinstance(default, complex):
+            return get_complex(request, value, name, default)
         elif isinstance(default, unicode):
             return get_unicode(request, value, name, default)
         elif isinstance(default, tuple) or isinstance(default, list):
@@ -1544,6 +1579,8 @@ def invoke_extension_function(request, function, args, fixed_args=[]):
             return get_int(request, value, name)
         elif default is float:
             return get_float(request, value, name)
+        elif default is complex:
+            return get_complex(request, value, name)
         elif isinstance(default, required_arg):
             return _convert_arg(request, value, default.argtype, name)
         return value

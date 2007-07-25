@@ -452,6 +452,53 @@ class TestArgGetters:
         py.test.raises(ValueError, wikiutil.get_float, self.request, u'wrong')
         py.test.raises(ValueError, wikiutil.get_float, self.request, u'"47.11"') # must not be quoted!
 
+    def testGetComplex(self):
+        tests = [
+            # default testing for None value
+            (None, None, None, None),
+            (None, None, -23.42, -23.42),
+            (None, None, 42.23, 42.23),
+
+            # some real values
+            (u'0', None, None, 0),
+            (u'42.23', None, None, 42.23),
+            (u'-23.42', None, None, -23.42),
+            (u'-23.42E3', None, None, -23.42E3),
+            (u'23.42E-3', None, None, 23.42E-3),
+            (u'23.42E-3+3.04j', None, None, 23.42E-3+3.04j),
+            (u'3.04j', None, None, 3.04j),
+            (u'-3.04j', None, None, -3.04j),
+            (u'23.42E-3+3.04i', None, None, 23.42E-3+3.04j),
+            (u'3.04i', None, None, 3.04j),
+            (u'-3.04i', None, None, -3.04j),
+            (u'-3', None, None, -3L),
+            (u'-300000000000000000000', None, None, -300000000000000000000L),
+        ]
+        for arg, name, default, expected in tests:
+            assert wikiutil.get_complex(self.request, arg, name, default) == expected
+
+    def testGetComplexRaising(self):
+        # wrong default type
+        py.test.raises(AssertionError, wikiutil.get_complex, self.request, None, None, u'42')
+
+        # anything except None or unicode raises TypeError
+        py.test.raises(TypeError, wikiutil.get_complex, self.request, True)
+        py.test.raises(TypeError, wikiutil.get_complex, self.request, 42)
+        py.test.raises(TypeError, wikiutil.get_complex, self.request, 42.0)
+        py.test.raises(TypeError, wikiutil.get_complex, self.request, 3j)
+        py.test.raises(TypeError, wikiutil.get_complex, self.request, '')
+        py.test.raises(TypeError, wikiutil.get_complex, self.request, tuple())
+        py.test.raises(TypeError, wikiutil.get_complex, self.request, [])
+        py.test.raises(TypeError, wikiutil.get_complex, self.request, {})
+
+        # any value not convertable to int raises ValueError
+        py.test.raises(ValueError, wikiutil.get_complex, self.request, u'')
+        py.test.raises(ValueError, wikiutil.get_complex, self.request, u'3jj')
+        py.test.raises(ValueError, wikiutil.get_complex, self.request, u'3Ij')
+        py.test.raises(ValueError, wikiutil.get_complex, self.request, u'3i-3i')
+        py.test.raises(ValueError, wikiutil.get_complex, self.request, u'wrong')
+        py.test.raises(ValueError, wikiutil.get_complex, self.request, u'"47.11"') # must not be quoted!
+
     def testGetUnicode(self):
         tests = [
             # default testing for None value
@@ -654,6 +701,20 @@ class TestExtensionInvoking:
         assert ief(self.request, has_many_defaults, u'd=4,c=3,b=2', [1])
         assert ief(self.request, has_many_defaults, u'd=4,c=3', [1, 2])
         assert ief(self.request, has_many_defaults, u'd=4', [1, 2, 3])
+
+    def testInvokeComplex(self):
+        ief = wikiutil.invoke_extension_function
+
+        def has_complex(a=complex, b=complex):
+            assert a == b
+            return True
+
+        assert ief(self.request, has_complex, u'3-3i, 3-3j')
+        assert ief(self.request, has_complex, u'2i, 2j')
+        assert ief(self.request, has_complex, u'b=2i, a=2j')
+        assert ief(self.request, has_complex, u'2.007, 2.007')
+        assert ief(self.request, has_complex, u'2.007', [2.007])
+        assert ief(self.request, has_complex, u'b=2.007', [2.007])
 
 
 coverage_modules = ['MoinMoin.wikiutil']
