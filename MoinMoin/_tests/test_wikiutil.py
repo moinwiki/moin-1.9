@@ -481,16 +481,6 @@ class TestArgGetters:
         py.test.raises(TypeError, wikiutil.get_unicode, self.request, {})
 
 
-def _test_invoke_int(i=int):
-    assert i == 1
-
-
-def _test_invoke_int_fixed(a, b, i=int):
-    assert a == 7
-    assert b == 8
-    assert i == 1 or i is None
-
-
 class TestExtensionInvoking:
     def _test_invoke_bool(self, b=bool):
         assert b is False
@@ -524,6 +514,14 @@ class TestExtensionInvoking:
         assert _kwargs == expect
 
     def testInvoke(self):
+        def _test_invoke_int(i=int):
+            assert i == 1
+
+        def _test_invoke_int_fixed(a, b, i=int):
+            assert a == 7
+            assert b == 8
+            assert i == 1 or i is None
+
         ief = wikiutil.invoke_extension_function
         ief(self.request, self._test_invoke_bool, u'False')
         ief(self.request, self._test_invoke_bool, u'b=False')
@@ -586,5 +584,76 @@ class TestExtensionInvoking:
         ief(self.request, self._test_invoke_float_required, u'i=1.4')
         py.test.raises(ValueError, ief, self.request,
                        self._test_invoke_float_required, u',')
+
+    def testConstructors(self):
+        ief = wikiutil.invoke_extension_function
+
+        # new style class
+        class TEST1(object):
+            def __init__(self, a=int):
+                self.constructed = True
+                assert a == 7
+
+        class TEST2(TEST1):
+            pass
+
+        obj = ief(self.request, TEST1, u'a=7')
+        assert isinstance(obj, TEST1)
+        assert obj.constructed
+        py.test.raises(ValueError, ief, self.request, TEST1, u'b')
+
+        obj = ief(self.request, TEST2, u'a=7')
+        assert isinstance(obj, TEST1)
+        assert isinstance(obj, TEST2)
+        assert obj.constructed
+        py.test.raises(ValueError, ief, self.request, TEST2, u'b')
+
+        # old style class
+        class TEST3:
+            def __init__(self, a=int):
+                self.constructed = True
+                assert a == 7
+
+        class TEST4(TEST3):
+            pass
+
+        obj = ief(self.request, TEST3, u'a=7')
+        assert isinstance(obj, TEST3)
+        assert obj.constructed
+        py.test.raises(ValueError, ief, self.request, TEST3, u'b')
+
+        obj = ief(self.request, TEST4, u'a=7')
+        assert isinstance(obj, TEST3)
+        assert isinstance(obj, TEST4)
+        assert obj.constructed
+        py.test.raises(ValueError, ief, self.request, TEST4, u'b')
+
+    def testFailing(self):
+        ief = wikiutil.invoke_extension_function
+
+        py.test.raises(TypeError, ief, self.request, hex, u'15')
+        py.test.raises(TypeError, ief, self.request, cmp, u'15')
+        py.test.raises(AttributeError, ief, self.request, unicode, u'15')
+
+    def testAllDefault(self):
+        ief = wikiutil.invoke_extension_function
+
+        def has_many_defaults(a=1, b=2, c=3, d=4):
+            assert a == 1
+            assert b == 2
+            assert c == 3
+            assert d == 4
+            return True
+
+        assert ief(self.request, has_many_defaults, u'1, 2, 3, 4')
+        assert ief(self.request, has_many_defaults, u'2, 3, 4', [1])
+        assert ief(self.request, has_many_defaults, u'3, 4', [1, 2])
+        assert ief(self.request, has_many_defaults, u'4', [1, 2, 3])
+        assert ief(self.request, has_many_defaults, u'', [1, 2, 3, 4])
+        assert ief(self.request, has_many_defaults, u'd=4,c=3,b=2,a=1')
+        assert ief(self.request, has_many_defaults, u'd=4,c=3,b=2', [1])
+        assert ief(self.request, has_many_defaults, u'd=4,c=3', [1, 2])
+        assert ief(self.request, has_many_defaults, u'd=4', [1, 2, 3])
+
 
 coverage_modules = ['MoinMoin.wikiutil']
