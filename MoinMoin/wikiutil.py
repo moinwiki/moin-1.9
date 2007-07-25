@@ -1529,8 +1529,8 @@ class required_arg:
         Initialise a required_arg
         @param argtype: the type the argument should have
         """
-        if not isinstance(argtype, type):
-            raise TypeError("argtype must be a type")
+        if not argtype in (bool, int, long, float, complex, unicode):
+            raise TypeError("argtype must be a valid type")
         self.argtype = argtype
 
 
@@ -1561,6 +1561,7 @@ def invoke_extension_function(request, function, args, fixed_args=[]):
 
         In other cases return the value itself.
         """
+        # if extending this, extend required_arg as well!
         if isinstance(default, bool):
             return get_bool(request, value, name, default)
         elif isinstance(default, int) or isinstance(default, long):
