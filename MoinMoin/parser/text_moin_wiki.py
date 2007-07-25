@@ -11,6 +11,7 @@
 import re
 from MoinMoin import config, wikiutil, macro
 
+
 Dependencies = ['user'] # {{{#!wiki comment ... }}} has different output depending on the user's profile settings
 
 class Parser:
@@ -754,20 +755,14 @@ class Parser:
 
     def _heading_repl(self, word):
         """Handle section headings."""
-        import sha
-
         h = word.strip()
         level = 1
         while h[level:level+1] == '=':
             level += 1
         depth = min(5, level)
 
-        # FIXME: needed for Included pages but might still result in unpredictable results
-        # when included the same page multiple times
         title_text = h[level:-level].strip()
-        pntt = self.formatter.page.page_name + title_text
-
-        id = 'head-' + sha.new(pntt.encode(config.charset)).hexdigest()
+        id = wikiutil.anchor_name_from_text(title_text)
 
         return ''.join([
             self._closeP(),
