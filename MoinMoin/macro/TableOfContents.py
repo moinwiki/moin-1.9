@@ -2,172 +2,152 @@
 """
     MoinMoin - TableOfContents Macro
 
-    Optional integer argument: maximal depth of listing.
-
-    @copyright: 2000-2002 Juergen Hermann <jh@web.de>
+    @copyright: 2007 MoinMoin:JohannesBerg
     @license: GNU GPL, see COPYING for details.
 """
 
-import re, sha
-from MoinMoin import config, wikiutil
+import re
+from MoinMoin.formatter import FormatterBase
+from MoinMoin.Page import Page
+from MoinMoin.wikiutil import PluginAttributeError, importPlugin
 
-#Dependencies = ["page"]
-Dependencies = ["time"] # works around MoinMoinBugs/TableOfContentsLacksLinks
 
-# from macro Include (keep in sync!)
-_arg_heading = r'(?P<heading>,)\s*(|(?P<hquote>[\'"])(?P<htext>.+?)(?P=hquote))'
-_arg_level = r',\s*(?P<level>\d*)'
-_arg_from = r'(,\s*from=(?P<fquote>[\'"])(?P<from>.+?)(?P=fquote))?'
-_arg_to = r'(,\s*to=(?P<tquote>[\'"])(?P<to>.+?)(?P=tquote))?'
-_arg_sort = r'(,\s*sort=(?P<sort>(ascending|descending)))?'
-_arg_items = r'(,\s*items=(?P<items>\d+))?'
-_arg_skipitems = r'(,\s*skipitems=(?P<skipitems>\d+))?'
-_arg_titlesonly = r'(,\s*(?P<titlesonly>titlesonly))?'
-_arg_editlink = r'(,\s*(?P<editlink>editlink))?'
-_args_re_pattern = r'^(?P<name>[^,]+)(%s(%s)?%s%s%s%s%s%s%s)?$' % (
-    _arg_heading, _arg_level, _arg_from, _arg_to, _arg_sort, _arg_items,
-    _arg_skipitems, _arg_titlesonly, _arg_editlink)
+Dependencies = ['page']
 
-# from Include, too, but with extra htext group around header text
-_title_re = r"^(?P<heading>(?P<hmarker>=+)\s(?P<htext>.*)\s(?P=hmarker))$"
+class TOCFormatter(FormatterBase):
+    def __init__(self, request, **kw):
+        FormatterBase.__init__(self, request, **kw)
+        self.in_heading = False
+        self.collected_headings = request._tocfm_collected_headings
 
-class TableOfContents:
-    """
-    TOC Macro wraps all global variables without disturbing threads
-    """
+    def _text(self, text):
+        if self.in_heading:
+            self.collected_headings[-1][2] += text
+        return text
 
-    def __init__(self, macro, args):
-        self.macro = macro
-        self._ = self.macro.request.getText
+    def heading(self, on, depth, **kw):
+        id = kw.get('id', '')
+        self.in_heading = on
+        if on:
+            self.collected_headings.append([depth, id, u''])
+        return ''
 
-        self.inc_re = re.compile(r"^\[\[Include\((.*)\)\]\]")
-        self.arg_re = re.compile(_args_re_pattern)
-        self.head_re = re.compile(_title_re) # single lines only
-        self.pre_re = re.compile(r'\{\{\{.+?\}\}\}', re.S)
-
-        self.result = []
-        self.baseindent = 0
-        self.indent = 0
-        self.lineno = 0
-        self.titles = {}
-
-        self.include_macro = None
-
+    def macro(self, macro_obj, name, args):
         try:
-            self.mindepth = int(macro.request.getPragma('section-numbers', 1))
-        except (ValueError, TypeError):
-            self.mindepth = 1
+            # plugins that are defined in the macro class itself
+            # can't generate headings this way, but that's fine
+            gen_headings = importPlugin(self.request.cfg, 'macro',
+                                        name, 'generates_headings')
+            if gen_headings:
+                return FormatterBase.macro(self, macro_obj, name, args)
+        except PluginAttributeError:
+            pass
+        return ''
 
-        try:
-            self.maxdepth = max(int(args), 1)
-        except (ValueError, TypeError):
-            self.maxdepth = 99
+    def _anything_return_empty(self, *args, **kw):
+        return ''
 
-    def IncludeMacro(self, *args, **kwargs):
-        if self.include_macro is None:
-            self.include_macro = wikiutil.importPlugin(self.macro.request.cfg,
-                                                       'macro', "Include")
-        return self.pre_re.sub('', self.include_macro(*args, **kwargs)).split('\n')
+    lang = _anything_return_empty
+    sysmsg = _anything_return_empty
+    startDocument = _anything_return_empty
+    endDocument = _anything_return_empty
+    startContent = _anything_return_empty
+    endContent = _anything_return_empty
+    pagelink = _anything_return_empty
+    interwikilink = _anything_return_empty
+    url = _anything_return_empty
+    attachment_link = _anything_return_empty
+    attachment_image = _anything_return_empty
+    attachment_drawing = _anything_return_empty
+    attachment_inlined = _anything_return_empty
+    anchordef = _anything_return_empty
+    line_anchordef = _anything_return_empty
+    anchorlink = _anything_return_empty
+    line_anchorlink = _anything_return_empty
+    image = _anything_return_empty
+    smiley = _anything_return_empty
+    nowikiword = _anything_return_empty
+    strong = _anything_return_empty
+    emphasis = _anything_return_empty
+    underline = _anything_return_empty
+    highlight = _anything_return_empty
+    sup = _anything_return_empty
+    sub = _anything_return_empty
+    strike = _anything_return_empty
+    code = _anything_return_empty
+    preformatted = _anything_return_empty
+    small = _anything_return_empty
+    big = _anything_return_empty
+    code_area = _anything_return_empty
+    code_line = _anything_return_empty
+    code_token = _anything_return_empty
+    linebreak = _anything_return_empty
+    paragraph = _anything_return_empty
+    rule = _anything_return_empty
+    icon = _anything_return_empty
+    number_list = _anything_return_empty
+    bullet_list = _anything_return_empty
+    listitem = _anything_return_empty
+    definition_list = _anything_return_empty
+    definition_term = _anything_return_empty
+    definition_desc = _anything_return_empty
+    table = _anything_return_empty
+    table_row = _anything_return_empty
+    table_cell = _anything_return_empty
+    _get_bang_args = _anything_return_empty
+    parser = _anything_return_empty
+    div = _anything_return_empty
+    span = _anything_return_empty
+    rawHTML = _anything_return_empty
+    escapedText = _anything_return_empty
+    comment = _anything_return_empty
 
-    def run(self):
-        _ = self._
-        self.result.append(self.macro.formatter.div(1, css_class="table-of-contents"))
-        self.result.append(self.macro.formatter.paragraph(1, css_class="table-of-contents-heading"))
-        self.result.append(self.macro.formatter.escapedText(_('Contents')))
-        self.result.append(self.macro.formatter.paragraph(0))
+def macro_TableOfContents(macro, maxdepth=int):
+    """
+Prints a table of contents.
 
-        self.process_lines(self.pre_re.sub('', self.macro.parser.raw).split('\n'),
-                           self.macro.formatter.page.page_name)
-        # Close pending lists
-        for dummy in range(self.baseindent, self.indent):
-            self.result.append(self.macro.formatter.listitem(0))
-            self.result.append(self.macro.formatter.number_list(0))
-        self.result.append(self.macro.formatter.div(0))
-        return ''.join(self.result)
+ maxdepth:: maximum depth the table of contents is generated for (defaults to unlimited)
+    """
+    if maxdepth is None:
+        maxdepth = 99
 
-    def process_lines(self, lines, pagename):
-        for line in lines:
-            # Filter out the headings
-            self.lineno = self.lineno + 1
-            match = self.inc_re.match(line)
-            if match:
-                # this is an [[Include()]] line.
-                # now parse the included page and do the work on it.
+    pname = macro.formatter.page.page_name
 
-                ## get heading and level from Include() line.
-                tmp = self.arg_re.match(match.group(1))
-                if tmp and tmp.group("name"):
-                    inc_pagename = tmp.group("name")
-                else:
-                    # no pagename?  ignore it
-                    continue
-                if tmp.group("heading") and tmp.group("hquote"):
-                    if tmp.group("htext"):
-                        heading = tmp.group("htext")
-                    else:
-                        heading = inc_pagename
-                    if tmp.group("level"):
-                        level = int(tmp.group("level"))
-                    else:
-                        level = 1
-                    inc_page_lines = ["%s %s %s" % ("=" * level, heading, "=" * level)]
-                else:
-                    inc_page_lines = []
+    macro.request._tocfm_collected_headings = []
+    tocfm = TOCFormatter(macro.request)
+    p = Page(macro.request, pname, formatter=tocfm, rev=macro.request.rev)
+    output = macro.request.redirectedOutput(p.send_page,
+                                            content_only=True,
+                                            count_hit=False,
+                                            omit_footnotes=True)
 
-                inc_page_lines = inc_page_lines + self.IncludeMacro(self.macro, match.group(1), called_by_toc=1)
+    _ = macro.request.getText
 
-                self.process_lines(inc_page_lines, inc_pagename)
-            else:
-                self.parse_line(line, pagename)
+    result = [
+        macro.formatter.div(1, css_class="table-of-contents"),
+        macro.formatter.paragraph(1, css_class="table-of-contents-heading"),
+        macro.formatter.text(_('Contents', formatted=False)),
+        macro.formatter.paragraph(0),
+    ]
 
-    def parse_line(self, line, pagename):
-        # FIXME this also finds "headlines" in {{{ code sections }}}:
-        match = self.head_re.match(line)
-        if not match:
-            return
-        title_text = match.group('htext').strip()
-        pntt = pagename + title_text
-        self.titles.setdefault(pntt, 0)
-        self.titles[pntt] += 1
+    lastlvl = 0
 
-        # Get new indent level
-        newindent = len(match.group('hmarker'))
-        if newindent > self.maxdepth or newindent < self.mindepth:
-            return
-        if not self.indent:
-            self.baseindent = newindent - 1
-            self.indent = self.baseindent
+    for lvl, id, txt in macro.request._tocfm_collected_headings:
+        if lvl > maxdepth or not id:
+            continue
+        while lastlvl > lvl:
+            result.append(macro.formatter.number_list(0))
+            lastlvl -= 1
+        while lastlvl < lvl:
+            result.append(macro.formatter.number_list(1))
+            lastlvl += 1
+        result.extend([
+            macro.formatter.listitem(1),
+            macro.formatter.anchorlink(1, id),
+            macro.formatter.text(txt),
+            macro.formatter.anchorlink(0),
+            macro.formatter.listitem(0),
+        ])
 
-        # Close lists
-        for dummy in range(0, self.indent-newindent):
-            self.result.append(self.macro.formatter.listitem(0))
-            self.result.append(self.macro.formatter.number_list(0))
-
-        # Open Lists
-        for dummy in range(0, newindent-self.indent):
-            self.result.append(self.macro.formatter.number_list(1))
-            self.result.append(self.macro.formatter.listitem(1))
-
-        # Add the heading
-        unique_id = ''
-        if self.titles[pntt] > 1:
-            unique_id = '-%d' % (self.titles[pntt], )
-
-        # close last listitem if same level
-        if self.indent == newindent:
-            self.result.append(self.macro.formatter.listitem(0))
-
-        if self.indent >= newindent:
-            self.result.append(self.macro.formatter.listitem(1))
-        self.result.append(self.macro.formatter.anchorlink(1,
-            "head-" + sha.new(pntt.encode(config.charset)).hexdigest() + unique_id) +
-                           self.macro.formatter.text(title_text) +
-                           self.macro.formatter.anchorlink(0))
-
-        # Set new indent level
-        self.indent = newindent
-
-def execute(macro, args):
-    toc = TableOfContents(macro, args)
-    return toc.run()
-
+    result.append(macro.formatter.div(0))
+    return ''.join(result)
