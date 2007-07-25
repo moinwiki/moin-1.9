@@ -947,7 +947,7 @@ function togglenumber(did, nstart, nstep) {
         """
         _ = self.request.getText
         res = []
-        ci = self.request.makeUniqueID('CA-%s_%03d' % (code_id, self._code_area_num))
+        ci = self.request.make_unique_id('CA-%s_%03d' % (code_id, self._code_area_num))
         if on:
             # Open a code area
             self._in_code_area = 1
@@ -1206,6 +1206,10 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
             self.request._fmt_hd_counters[-1] = self.request._fmt_hd_counters[-1] + 1
             number = '.'.join([str(x) for x in self.request._fmt_hd_counters[self._show_section_numbers-1:]])
             if number: number += ". "
+
+        # make ID unique
+        if 'id' in kw:
+            kw['id'] = self.request.make_unique_id(kw['id'])
 
         # Add space before heading, easier to check source code
         result = '\n' + self._open('h%d' % heading_depth, **kw)
