@@ -201,11 +201,12 @@ def execute(macro, text, args_re=re.compile(_args_re_pattern), title_re=re.compi
                 request._page_headings[pntt] += 1
                 if request._page_headings[pntt] > 1:
                     hid += '-%d' % (request._page_headings[pntt], )
-                result.append(
-                    macro.formatter.heading(1, level, id=hid) +
-                    inc_page.link_to(request, heading, css_class="include-heading-link") +
-                    macro.formatter.heading(0, level)
-                )
+                link = inc_page.link_to(request, heading, css_class="include-heading-link")
+                result.extend([
+                    macro.formatter.heading(1, level, id=hid),
+                    macro.formatter.rawHTML(link),
+                    macro.formatter.heading(0, level),
+                ])
 
         # set or increment include marker
         this_page._macroInclude_pagelist[inc_name] = \
