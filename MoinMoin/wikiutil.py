@@ -2099,6 +2099,10 @@ def pagediff(request, pagename1, rev1, pagename2, rev2, **kw):
     lines = diff_text.diff(lines1, lines2, **kw)
     return lines
 
+def anchor_name_from_text(text):
+    quoted = urllib.quote_plus(text.encode('utf-7'))
+    return quoted.replace('%', '.').replace('+', '_')
+
 
 ########################################################################
 ### Tickets - used by RenamePage and DeletePage

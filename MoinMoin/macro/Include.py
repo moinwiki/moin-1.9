@@ -18,7 +18,7 @@ Dependencies = ["time"] # works around MoinMoinBugs/TableOfContentsLacksLinks
 
 generates_headings = True
 
-import re, StringIO, sha
+import re, StringIO
 from MoinMoin import wikiutil, config
 from MoinMoin.Page import Page
 
@@ -191,8 +191,7 @@ def execute(macro, text, args_re=re.compile(_args_re_pattern), title_re=re.compi
                               macro.formatter.text(heading) +
                               macro.formatter.heading(0, level))
             else:
-                pntt = (inc_name + heading).encode(config.charset)
-                hid = "head-" + sha.new(pntt).hexdigest()
+                hid = wikiutil.anchor_name_from_text(heading)
                 link = inc_page.link_to(request, heading, css_class="include-heading-link")
                 result.extend([
                     macro.formatter.heading(1, level, id=hid),
