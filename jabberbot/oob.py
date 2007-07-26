@@ -1,7 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - Out Of Band Data (XEP-066) implementation
-    
+
     This is used by the xmpp thread to send URIs to clients
     in a structured manner.
 
@@ -14,15 +14,15 @@ from pyxmpp.presence import Presence
 
 def add_urls(stanza, data):
     """Adds a URL to a message or presence stanza
-    
+
     Adds an <x> element qualified by the jabber:x:oob namespace
     to the stanza's payload
-    
+
     @param stanza: message or presence stanza to add the URL info to
     @type stanza: pyxmpp.message.Message or pyxmpp.presence.Presence
     @param data: a list of dictionaries containing (url, description), as unicode
     @type data: list
-    
+
     """
     if not (isinstance(stanza, Presence) or isinstance(stanza, Message)):
         raise TypeError("Stanza must be either of type Presence or Message!")

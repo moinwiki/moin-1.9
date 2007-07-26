@@ -12,7 +12,7 @@
 # First, XML RPC -> XMPP commands
 class NotificationCommand:
     """Class representing a notification request"""
-    def __init__(self, jids, text, subject="", async=True):
+    def __init__(self, jids, notification, msg_type="message", async=True):
         """A constructor
 
         @param jids: a list of jids to sent this message to
@@ -23,25 +23,20 @@ class NotificationCommand:
         if type(jids) != list:
             raise Exception("jids argument must be a list!")
 
+        self.notification = notification
         self.jids = jids
-        self.text = text
-        self.subject = subject
         self.async = async
+        self.msg_type = msg_type
 
 class NotificationCommandI18n(NotificationCommand):
     """Notification request that should be translated by the XMPP bot"""
-    def __init__(self, jids, text, data={}, subject="", async=True):
+    def __init__(self, jids, notification, msg_type="message", async=True):
         """A constructor
 
         Params as in NotificationCommand.
 
-        @param text: text to send, use %(foo)s syntax to interpolate it with data
-        @param data: dictionary of strings to interpolate into a translated message
-        @type data: dict
-
         """
-        NotificationCommand.__init__(self, jids, text, subject, async)
-        self.data = data
+        NotificationCommand.__init__(self, jids, notification, msg_type, async)
 
     def translate(self, gettext_func):
         """Translate the message using a provided gettext function
@@ -49,7 +44,10 @@ class NotificationCommandI18n(NotificationCommand):
         @param gettext_func: a unary gettext function
         @return: translated message
         """
-        return gettext_func(self.text) % self.data
+        if self.notification.has_key('data'):
+            return gettext_func(self.notification['text']) % self.notification['data']
+        else:
+            return gettext_func(self.notification['text'])
 
 class AddJIDToRosterCommand:
     """Class representing a request to add a new jid to roster"""
