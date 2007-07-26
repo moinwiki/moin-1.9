@@ -433,9 +433,11 @@ class Parser:
                 words = words * 2
 
             if words[0].startswith('#'): # anchor link
-                return (self.formatter.url(1, words[0]) +
-                        self.formatter.text(words[1]) +
-                        self.formatter.url(0))
+                res = []
+                res.append(self.formatter.anchorlink(1, words[0][1:]))
+                res.append(self.formatter.text(words[1]))
+                res.append(self.formatter.anchorlink(0))
+                return ''.join(res)
         else:
             scheme, rest = scheme_and_rest
             if scheme == "wiki":
