@@ -452,6 +452,53 @@ class TestArgGetters:
         py.test.raises(ValueError, wikiutil.get_float, self.request, u'wrong')
         py.test.raises(ValueError, wikiutil.get_float, self.request, u'"47.11"') # must not be quoted!
 
+    def testGetComplex(self):
+        tests = [
+            # default testing for None value
+            (None, None, None, None),
+            (None, None, -23.42, -23.42),
+            (None, None, 42.23, 42.23),
+
+            # some real values
+            (u'0', None, None, 0),
+            (u'42.23', None, None, 42.23),
+            (u'-23.42', None, None, -23.42),
+            (u'-23.42E3', None, None, -23.42E3),
+            (u'23.42E-3', None, None, 23.42E-3),
+            (u'23.42E-3+3.04j', None, None, 23.42E-3+3.04j),
+            (u'3.04j', None, None, 3.04j),
+            (u'-3.04j', None, None, -3.04j),
+            (u'23.42E-3+3.04i', None, None, 23.42E-3+3.04j),
+            (u'3.04i', None, None, 3.04j),
+            (u'-3.04i', None, None, -3.04j),
+            (u'-3', None, None, -3L),
+            (u'-300000000000000000000', None, None, -300000000000000000000L),
+        ]
+        for arg, name, default, expected in tests:
+            assert wikiutil.get_complex(self.request, arg, name, default) == expected
+
+    def testGetComplexRaising(self):
+        # wrong default type
+        py.test.raises(AssertionError, wikiutil.get_complex, self.request, None, None, u'42')
+
+        # anything except None or unicode raises TypeError
+        py.test.raises(TypeError, wikiutil.get_complex, self.request, True)
+        py.test.raises(TypeError, wikiutil.get_complex, self.request, 42)
+        py.test.raises(TypeError, wikiutil.get_complex, self.request, 42.0)
+        py.test.raises(TypeError, wikiutil.get_complex, self.request, 3j)
+        py.test.raises(TypeError, wikiutil.get_complex, self.request, '')
+        py.test.raises(TypeError, wikiutil.get_complex, self.request, tuple())
+        py.test.raises(TypeError, wikiutil.get_complex, self.request, [])
+        py.test.raises(TypeError, wikiutil.get_complex, self.request, {})
+
+        # any value not convertable to int raises ValueError
+        py.test.raises(ValueError, wikiutil.get_complex, self.request, u'')
+        py.test.raises(ValueError, wikiutil.get_complex, self.request, u'3jj')
+        py.test.raises(ValueError, wikiutil.get_complex, self.request, u'3Ij')
+        py.test.raises(ValueError, wikiutil.get_complex, self.request, u'3i-3i')
+        py.test.raises(ValueError, wikiutil.get_complex, self.request, u'wrong')
+        py.test.raises(ValueError, wikiutil.get_complex, self.request, u'"47.11"') # must not be quoted!
+
     def testGetUnicode(self):
         tests = [
             # default testing for None value
@@ -479,16 +526,6 @@ class TestArgGetters:
         py.test.raises(TypeError, wikiutil.get_unicode, self.request, tuple())
         py.test.raises(TypeError, wikiutil.get_unicode, self.request, [])
         py.test.raises(TypeError, wikiutil.get_unicode, self.request, {})
-
-
-def _test_invoke_int(i=int):
-    assert i == 1
-
-
-def _test_invoke_int_fixed(a, b, i=int):
-    assert a == 7
-    assert b == 8
-    assert i == 1 or i is None
 
 
 class TestExtensionInvoking:
@@ -524,6 +561,14 @@ class TestExtensionInvoking:
         assert _kwargs == expect
 
     def testInvoke(self):
+        def _test_invoke_int(i=int):
+            assert i == 1
+
+        def _test_invoke_int_fixed(a, b, i=int):
+            assert a == 7
+            assert b == 8
+            assert i == 1 or i is None
+
         ief = wikiutil.invoke_extension_function
         ief(self.request, self._test_invoke_bool, u'False')
         ief(self.request, self._test_invoke_bool, u'b=False')
@@ -586,5 +631,106 @@ class TestExtensionInvoking:
         ief(self.request, self._test_invoke_float_required, u'i=1.4')
         py.test.raises(ValueError, ief, self.request,
                        self._test_invoke_float_required, u',')
+
+    def testConstructors(self):
+        ief = wikiutil.invoke_extension_function
+
+        # new style class
+        class TEST1(object):
+            def __init__(self, a=int):
+                self.constructed = True
+                assert a == 7
+
+        class TEST2(TEST1):
+            pass
+
+        obj = ief(self.request, TEST1, u'a=7')
+        assert isinstance(obj, TEST1)
+        assert obj.constructed
+        py.test.raises(ValueError, ief, self.request, TEST1, u'b')
+
+        obj = ief(self.request, TEST2, u'a=7')
+        assert isinstance(obj, TEST1)
+        assert isinstance(obj, TEST2)
+        assert obj.constructed
+        py.test.raises(ValueError, ief, self.request, TEST2, u'b')
+
+        # old style class
+        class TEST3:
+            def __init__(self, a=int):
+                self.constructed = True
+                assert a == 7
+
+        class TEST4(TEST3):
+            pass
+
+        obj = ief(self.request, TEST3, u'a=7')
+        assert isinstance(obj, TEST3)
+        assert obj.constructed
+        py.test.raises(ValueError, ief, self.request, TEST3, u'b')
+
+        obj = ief(self.request, TEST4, u'a=7')
+        assert isinstance(obj, TEST3)
+        assert isinstance(obj, TEST4)
+        assert obj.constructed
+        py.test.raises(ValueError, ief, self.request, TEST4, u'b')
+
+    def testFailing(self):
+        ief = wikiutil.invoke_extension_function
+
+        py.test.raises(TypeError, ief, self.request, hex, u'15')
+        py.test.raises(TypeError, ief, self.request, cmp, u'15')
+        py.test.raises(AttributeError, ief, self.request, unicode, u'15')
+
+    def testAllDefault(self):
+        ief = wikiutil.invoke_extension_function
+
+        def has_many_defaults(a=1, b=2, c=3, d=4):
+            assert a == 1
+            assert b == 2
+            assert c == 3
+            assert d == 4
+            return True
+
+        assert ief(self.request, has_many_defaults, u'1, 2, 3, 4')
+        assert ief(self.request, has_many_defaults, u'2, 3, 4', [1])
+        assert ief(self.request, has_many_defaults, u'3, 4', [1, 2])
+        assert ief(self.request, has_many_defaults, u'4', [1, 2, 3])
+        assert ief(self.request, has_many_defaults, u'', [1, 2, 3, 4])
+        assert ief(self.request, has_many_defaults, u'd=4,c=3,b=2,a=1')
+        assert ief(self.request, has_many_defaults, u'd=4,c=3,b=2', [1])
+        assert ief(self.request, has_many_defaults, u'd=4,c=3', [1, 2])
+        assert ief(self.request, has_many_defaults, u'd=4', [1, 2, 3])
+
+    def testInvokeComplex(self):
+        ief = wikiutil.invoke_extension_function
+
+        def has_complex(a=complex, b=complex):
+            assert a == b
+            return True
+
+        assert ief(self.request, has_complex, u'3-3i, 3-3j')
+        assert ief(self.request, has_complex, u'2i, 2j')
+        assert ief(self.request, has_complex, u'b=2i, a=2j')
+        assert ief(self.request, has_complex, u'2.007, 2.007')
+        assert ief(self.request, has_complex, u'2.007', [2.007])
+        assert ief(self.request, has_complex, u'b=2.007', [2.007])
+
+
+class TestAnchorNames:
+    def test_anchor_name_encoding(self):
+        tests = [
+            # text                    expected output
+            (u'\xf6\xf6ll\xdf\xdf',   'A.2BAPYA9g-ll.2BAN8A3w-'),
+            (u'level 2',              'level_2'),
+            (u'',                     'A'),
+            (u'123',                  'A123'),
+        ]
+        for text, expected in tests:
+            yield self._check, text, expected
+
+    def _check(self, text, expected):
+        encoded = wikiutil.anchor_name_from_text(text)
+        assert expected == encoded
 
 coverage_modules = ['MoinMoin.wikiutil']

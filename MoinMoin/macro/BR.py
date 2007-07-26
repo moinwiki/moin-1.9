@@ -10,6 +10,8 @@
 
 Dependencies = []
 
-def execute(macro, args):
+def macro_BR(macro):
+    """
+    Creates a linebreak.
+    """
     return macro.formatter.linebreak(0)
-
