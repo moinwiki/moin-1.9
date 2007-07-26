@@ -72,7 +72,7 @@ def handle_file_attached(event):
     names = set()
     request = event.request
     page = Page(request, event.pagename)
-    event_name = event.__class__.__name__
+    event_name = event.name
 
     subscribers = page.getSubscribers(request, return_users=1)
     notification.filter_subscriber_list(event, subscribers, True)
@@ -131,7 +131,7 @@ def handle_user_created(event):
 
     jids = []
     user_ids = getUserList(event.request)
-    event_name = event.__class__.__name__
+    event_name = event.name
 
     email = event.user.email or u"NOT SET"
     sitename = event.request.cfg.sitename
@@ -169,17 +169,21 @@ def page_change(change_type, request, page, subscribers, **kwargs):
         if recipients:
             return notification.Success(recipients)
 
-def send_notification(request, jids, message, subject=""):
+def send_notification(request, jids, message, subject="", url_list=[]):
     """ Send notifications for a single language.
 
-    @param comment: editor's comment given when saving the page
     @param jids: an iterable of Jabber IDs to send the message to
+    @param message: message text
+    @param subject: subject of the message, makes little sense for chats
+    @param url_list: a list of dicts containing URLs and their descriptions
+
     """
     _ = request.getText
     server = request.cfg.notification_server
 
     try:
-        server.send_notification(request.cfg.secret, jids, message, subject)
+        cmd_data = {'text': message, 'subject': subject, 'url_list': url_list}
+        server.send_notification(request.cfg.secret, jids, cmd_data)
         return True
     except xmlrpclib.Error, err:
         ev.logger.error(_("XML RPC error: %s"), str(err))

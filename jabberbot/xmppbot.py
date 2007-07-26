@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import logging, time, libxml2, Queue
+import logging, time, Queue
 from threading import Thread
 
 from pyxmpp.client import Client
@@ -19,6 +19,7 @@ import pyxmpp.jabber.dataforms as forms
 
 import jabberbot.commands as cmd
 import jabberbot.i18n as i18n
+import jabberbot.oob as oob
 
 
 class Contact:
@@ -259,12 +260,13 @@ class XMPPBot(Client, Thread):
                 jid = JID(recipient)
                 jid_text = jid.bare().as_utf8()
 
+                _ = self.get_text(jid_text)
+                text = command.notification['text']
+
                 if isinstance(command, cmd.NotificationCommandI18n):
                     # Translate&interpolate the message with data
                     gettext_func = self.get_text(recipient)
                     text = command.translate(gettext_func)
-                else:
-                    text = command.text
 
                 # Check if contact is DoNotDisturb.
                 # If so, queue the message for delayed delivery.
@@ -276,7 +278,7 @@ class XMPPBot(Client, Thread):
                 except KeyError:
                     pass
 
-                self.send_message(jid, text)
+                self.send_message(jid, command.notification, command.msg_type)
 
             return
 
@@ -294,16 +296,14 @@ class XMPPBot(Client, Thread):
         elif isinstance(command, cmd.GetPage) or isinstance(command, cmd.GetPageHTML):
             msg = _(u"""Here's the page "%(pagename)s" that you've requested:\n\n%(data)s""")
 
-            self.send_message(command.jid, msg % {
-                      'pagename': command.pagename,
-                      'data': command.data,
-            })
+            cmd_data = {'text': msg % {'pagename': command.pagename, 'data': command.data}}
+            self.send_message(command.jid, cmd_data)
 
         elif isinstance(command, cmd.GetPageList):
             msg = _("That's the list of pages accesible to you:\n\n%s")
             pagelist = u"\n".join(command.data)
 
-            self.send_message(command.jid, msg % (pagelist, ))
+            self.send_message(command.jid, {'text': msg % (pagelist, )})
 
         elif isinstance(command, cmd.GetPageInfo):
             intro = _("""Following detailed information on page "%(pagename)s" \
@@ -330,8 +330,8 @@ Current version: %(version)s""") % {
              'version': command.data['version'],
             }
 
-            self.send_message(command.jid, intro % {'pagename': command.pagename})
-            self.send_message(command.jid, msg)
+            self.send_message(command.jid, {'text': intro % {'pagename': command.pagename}})
+            self.send_message(command.jid, {'text': msg})
 
         elif isinstance(command, cmd.GetUserLanguage):
             if command.jid in self.contacts:
@@ -360,16 +360,25 @@ Current version: %(version)s""") % {
         stanza = Presence(to_jid=jid, stanza_type="unsubscribed")
         self.get_stream().send(stanza)
 
-    def send_message(self, jid, text, subject="", msg_type=u"chat"):
+    def send_message(self, jid, data, msg_type=u"chat"):
         """Sends a message
 
         @param jid: JID to send the message to
-        @param text: message's body:
-        @param type: message type, as defined in RFC
+        @param data: dictionary containing notification data
+        @param msg_type: message type, as defined in RFC
         @type jid: pyxmpp.jid.JID
 
         """
-        message = Message(to_jid=jid, body=text, stanza_type=msg_type, subject=subject)
+        if data.has_key('subject'):
+            subject = data['subject']
+        else:
+            subject = ''
+
+        message = Message(to_jid=jid, body=data['text'], stanza_type=msg_type, subject=subject)
+
+        if data.has_key('url_list'):
+            oob.add_urls(message, data['url_list'])
+
         self.get_stream().send(message)
 
     def send_form(self, jid, form):
@@ -450,7 +459,7 @@ Current version: %(version)s""") % {
             response = self.reply_help(sender)
 
         if response:
-            self.send_message(sender, response)
+            self.send_message(sender, {'text': response})
 
     def handle_internal_command(self, sender, command):
         """Handles internal commands, that can be completed by the XMPP bot itself
