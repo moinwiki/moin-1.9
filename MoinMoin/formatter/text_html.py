@@ -179,14 +179,6 @@ class Formatter(FormatterBase):
 
     def __init__(self, request, **kw):
         FormatterBase.__init__(self, request, **kw)
-
-        # inline tags stack. When an inline tag is called, it goes into
-        # the stack. When a block element starts, all inline tags in
-        # the stack are closed.
-        self._inlineStack = []
-
-        # stack of all tags
-        self._tag_stack = []
         self._indent_level = 0
 
         self._in_code = 0 # used by text_gedit
@@ -355,19 +347,9 @@ class Formatter(FormatterBase):
             tagstr = ''.join(result)
         else:
             # Inline elements
-            # Add to inlineStack
-            if not is_self_closing:
-                # Only push on stack if we expect a close-tag later
-                self._inlineStack.append(tag)
-            # Format
             tagstr = '<%s%s%s>' % (tag,
                                       self._formatAttributes(attr, allowed_attrs, **kw),
                                       is_self_closing)
-        # XXX SENSE ???
-        #if not self.close:
-        #    self._tag_stack.append(tag)
-        #    if tag in _indenting_tags:
-        #        self._indent_level += 1
         return tagstr
 
     def _close(self, tag, newline=False):
@@ -383,32 +365,15 @@ class Formatter(FormatterBase):
             tagstr = ''
         elif tag in _blocks:
             # Block elements
-            # Close all tags in inline stack
-            # Work on a copy, because close(inline) manipulate the stack
             result = []
-            stack = self._inlineStack[:]
-            stack.reverse()
-            for inline in stack:
-                result.append(self._close(inline))
-            # Format with newline
             if newline:
                 result.append(self._newline())
             result.append('</%s>' % (tag))
             tagstr = ''.join(result)
         else:
             # Inline elements
-            # Pull from stack, ignore order, that is not our problem.
-            # The code that calls us should keep correct calling order.
-            if tag in self._inlineStack:
-                self._inlineStack.remove(tag)
             tagstr = '</%s>' % tag
 
-        # XXX see other place marked with "SENSE"
-        #if tag in _self_closing_tags:
-        #    self._tag_stack.pop()
-        #    if tag in _indenting_tags:
-        #        # decrease indent level
-        #        self._indent_level -= 1
         if newline:
             tagstr += self._newline()
         return tagstr
