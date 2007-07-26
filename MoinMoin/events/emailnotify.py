@@ -80,7 +80,7 @@ def notify_subscribers(request, page, comment, trivial):
         # send email to all subscribers
         for lang in subscribers:
             users = [u for u in subscribers[lang]
-                     if ev.PageChangedEvent.__name__ in u.email_subscribed_events]
+                     if ev.PageChangedEvent.name in u.email_subscribed_events]
             emails = [u.email for u in users]
             names = [u.name for u in users]
             data = prep_page_changed_mail(request, page, comment, lang, revisions, trivial)
@@ -98,7 +98,7 @@ def handle_user_created(event):
     emails = []
     _ = event.request.getText
     user_ids = getUserList(event.request)
-    event_name = event.__class__.__name__
+    event_name = event.name
 
     from_address = event.request.cfg.mail_from
     email = event.user.email or u"NOT SET"
@@ -122,7 +122,7 @@ def handle_file_attached(event):
 
     names = set()
     _ = event.request.getText
-    event_name = event.__class__.__name__
+    event_name = event.name
     from_address = event.request.cfg.mail_from
     request = event.request
     page = Page(request, event.pagename)
