@@ -2101,7 +2101,7 @@ def pagediff(request, pagename1, rev1, pagename2, rev2, **kw):
 
 def anchor_name_from_text(text):
     quoted = urllib.quote_plus(text.encode('utf-7'))
-    res = quoted.replace('%', '.').replace('+', '_')
+    res = quoted.replace('%', '.').replace('+', '').replace('_', '')
     if not res[:1].isalpha():
         return 'A%s' % res
     return res
