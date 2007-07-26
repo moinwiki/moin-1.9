@@ -1267,8 +1267,8 @@ class RequestBase(object):
         except MoinMoinFinish:
             pass
         except Exception, err:
-            self.finish()
             self.fail(err)
+            self.finish()
 
         if self.cfg.log_timing:
             self.timing_log(False, action)
