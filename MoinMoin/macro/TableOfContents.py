@@ -2,6 +2,25 @@
 """
     MoinMoin - TableOfContents Macro
 
+    The macro works as follows: First, it renders the page using
+    the TOCFormatter (below) to get access to the outline of the
+    page. During the page rendering, only macros whose
+    'generates_headings' property is set and True are rendered,
+    most macros don't generate any headings and thus need not be
+    executed speeding up the process considerably.
+
+    The generated outline is then written to the output.
+
+    However, this is not all. Consider included pages that include
+    a TOC themselves! First of all, TOCs don't generate headings
+    so we avoid recursion during the collection process. Secondly,
+    we always keep track of which content we are in and the
+    formatter's heading method is responsible for making all
+    IDs they generate unique. We use the same algorithm to make
+    the IDs unique during the TOCFormatter rendering step so that
+    in the end we can output the same IDs and the TOC is linked
+    correctly, even in the case of multiple nested inclusions.
+
     @copyright: 2007 MoinMoin:JohannesBerg
     @license: GNU GPL, see COPYING for details.
 """
@@ -12,7 +31,8 @@ from MoinMoin.Page import Page
 from MoinMoin import wikiutil
 
 
-Dependencies = ['page']
+# cannot be cached because of TOCs in included pages
+Dependencies = ['time']
 
 class TOCFormatter(FormatterBase):
     def __init__(self, request, **kw):
@@ -25,10 +45,20 @@ class TOCFormatter(FormatterBase):
             self.collected_headings[-1][2] += text
         return text
 
+    def startContent(self, *args, **kw):
+        res = FormatterBase.startContent(self, *args, **kw)
+        self.collected_headings.append([1, self.request.include_id, None])
+        return res
+
+    def endContent(self):
+        res = FormatterBase.endContent(self)
+        self.collected_headings.append([0, self.request.include_id, None])
+        return res
+
     def heading(self, on, depth, **kw):
         id = kw.get('id', None)
         if not id is None:
-            id = self.request.make_unique_id(kw['id'])
+            id = self.request.make_unique_id(id, self.request.include_id)
         self.in_heading = on
         if on:
             self.collected_headings.append([depth, id, u''])
@@ -53,8 +83,6 @@ class TOCFormatter(FormatterBase):
     sysmsg = _anything_return_empty
     startDocument = _anything_return_empty
     endDocument = _anything_return_empty
-    startContent = _anything_return_empty
-    endContent = _anything_return_empty
     pagelink = _anything_return_empty
     interwikilink = _anything_return_empty
     url = _anything_return_empty
@@ -114,7 +142,9 @@ Prints a table of contents.
 
     pname = macro.formatter.page.page_name
 
+    macro.request.push_unique_ids()
     macro.request._tocfm_collected_headings = []
+
     tocfm = TOCFormatter(macro.request)
     p = Page(macro.request, pname, formatter=tocfm, rev=macro.request.rev)
     output = macro.request.redirectedOutput(p.send_page,
@@ -122,7 +152,7 @@ Prints a table of contents.
                                             count_hit=False,
                                             omit_footnotes=True)
 
-    macro.request.reset_unique_ids()
+    macro.request.pop_unique_ids()
 
     _ = macro.request.getText
 
@@ -134,23 +164,48 @@ Prints a table of contents.
     ]
 
     lastlvl = 0
+    old_incl_id = macro.request.include_id
+    macro.request.include_id = None
 
     for lvl, id, txt in macro.request._tocfm_collected_headings:
+        if txt is None:
+            incl_id = id
+            continue
         if lvl > maxdepth or not id:
             continue
+        if incl_id:
+            id = '%s.%s' % (wikiutil.anchor_name_from_text(incl_id), id)
+        need_li = lastlvl >= lvl
         while lastlvl > lvl:
-            result.append(macro.formatter.number_list(0))
+            result.extend([
+                macro.formatter.listitem(0),
+                macro.formatter.number_list(0),
+            ])
             lastlvl -= 1
         while lastlvl < lvl:
-            result.append(macro.formatter.number_list(1))
+            result.extend([
+                macro.formatter.number_list(1),
+                macro.formatter.listitem(1),
+            ])
             lastlvl += 1
+        if need_li:
+            result.extend([
+                macro.formatter.listitem(0),
+                macro.formatter.listitem(1),
+            ])
         result.extend([
-            macro.formatter.listitem(1),
+            '\n',
             macro.formatter.anchorlink(1, id),
             macro.formatter.text(txt),
             macro.formatter.anchorlink(0),
-            macro.formatter.listitem(0),
         ])
+
+    while lastlvl > 0:
+        macro.formatter.listitem(0),
+        result.append(macro.formatter.number_list(0))
+        lastlvl -= 1
+
+    macro.request.include_id = old_incl_id
 
     result.append(macro.formatter.div(0))
     return ''.join(result)

@@ -11,6 +11,7 @@
 import time
 from MoinMoin import wikiutil
 
+
 class Formatter:
     """
         Inserts '<<<>>>' into the page and adds python code to
@@ -76,10 +77,23 @@ if moincode_timestamp > %d or cfg_mtime is None or cfg_mtime > %d:
                                  # this object reusable
         return "".join(source)
 
+    def __cache_if_no_id(self, name, *args, **kw):
+        if not 'id' in kw:
+            return getattr(self.formatter, name)(*args, **kw)
+        else:
+            return __insert_code('request.write(%s.%s(*%r, **%r))' %
+                (self.__formatter, name, args, kw))
+
     def __getattr__(self, name):
-        """ For every thing we have no method/attribute use the formatter
         """
-        return getattr(self.formatter, name)
+        For every thing we have no method/attribute use the formatter
+        unless there's an ID in the keywords.
+        """
+        attr = getattr(self.formatter, name)
+        if callable(attr):
+            return lambda *args, **kw: self.__cache_if_no_id(name, *args, **kw)
+        else:
+            return attr
 
     def __insert_code(self, call):
         """ returns the python code
@@ -180,6 +194,8 @@ if moincode_timestamp > %d or cfg_mtime is None or cfg_mtime > %d:
 
     def macro(self, macro_obj, name, args):
         if self.__is_static(macro_obj.get_dependencies(name)):
+            # XXX: why is this necessary??
+            macro_obj.formatter = self
             return macro_obj.execute(name, args)
         else:
             return self.__insert_code(
@@ -197,10 +213,63 @@ if moincode_timestamp > %d or cfg_mtime is None or cfg_mtime > %d:
             Dependencies = self.defaultDependencies
 
         if self.__is_static(Dependencies):
-            return self.formatter.parser(parser_name, lines)
+            # XXX: copied from FormatterBase because we can't inherit from it
+            parser = wikiutil.searchAndImportPlugin(self.request.cfg, "parser", parser_name)
+
+            args = self._get_bang_args(lines[0])
+            if args is not None:
+                lines = lines[1:]
+            p = parser('\n'.join(lines), self.request, format_args=args)
+            p.format(self)
+            del p
+            return ''
         else:
             return self.__insert_code('%s%s.parser(%r, %r)' %
                                       (self.__adjust_formatter_state(),
                                        self.__formatter,
                                        parser_name, lines))
 
+    def startContent(self, content_id='content', newline=True, **kw):
+        # we need to tell the request about the start of the content
+        return self.__insert_code('request.write(%s.startContent(content_id=%r, newline=%r, **%r))' %
+            (self.__formatter, content_id, newline, kw))
+
+    def endContent(self, newline=True):
+        # we need to tell the request about the end of the content
+        return self.__insert_code('request.write(%s.endContent(newline=%r))' %
+            (self.__formatter, newline))
+
+    def anchorlink(self, on, name='', **kw):
+        # anchorlink depends on state now, namely the include ID in the request.
+        if on:
+            return self.__insert_code('request.write(%s.anchorlink(on=%r, name=%r, **%r))' %
+                (self.__formatter, on, name, kw))
+        else:
+            return self.formatter.anchorlink(on, name=name, **kw)
+
+    def line_anchorlink(self, on, lineno=0):
+        # anchorlink depends on state now, namely the include ID in the request.
+        if on:
+            return self.__insert_code('request.write(%s.anchorlink(on=%r, %r))' %
+                (self.__formatter, on, lineno))
+        else:
+            return self.formatter.line_anchorlink(on, lineno)
+
+    def code_area(self, on, code_id, code_type='code', show=0, start=-1, step=-1):
+        if on:
+            # update state of the HTML formatter
+            self.formatter._in_code_area = 1
+            self.formatter._in_code_line = 0
+            self.formatter._code_area_state = [None, show, start, step, start]
+            return self.__insert_code('request.write(%s.code_area(True, %r, %r, %r, %r, %r))' %
+                (self.__formatter, code_id, code_type, show, start, step))
+        else:
+            return self.formatter.code_area(False, code_id, code_type, show, start, step)
+
+    def line_anchordef(self, lineno):
+        return self.__insert_code('request.write(%s.line_anchordef(%r))' %
+            (self.__formatter, lineno))
+
+    def anchordef(self, id):
+        return self.__insert_code('request.write(%s.anchordef(%r))' %
+            (self.__formatter, id))
