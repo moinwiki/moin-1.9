@@ -692,7 +692,7 @@ class RequestBase(object):
         self.current_lang = self.cfg.language_default
 
         # caches unique ids
-        self._page_ids = {}
+        self.init_unique_ids()
 
         if hasattr(self, "_fmt_hd_counters"):
             del self._fmt_hd_counters
@@ -1380,7 +1380,7 @@ class RequestBase(object):
         from MoinMoin import failure
         failure.handle(self, err)
 
-    def make_unique_id(self, base):
+    def make_unique_id(self, base, namespace=None):
         """
         Generates a unique ID using a given base name. Appends a running count to the base.
 
@@ -1388,20 +1388,72 @@ class RequestBase(object):
 
         @param base: the base of the id
         @type base: unicode
+        @param namespace: the namespace for the ID, used when including pages
 
-        @returns: an unique id
+        @returns: a unique (relatively to the namespace) ID
         @rtype: unicode
         """
         if not isinstance(base, unicode):
             base = unicode(str(base), 'ascii', 'ignore')
-        count = self._page_ids.get(base, -1) + 1
-        self._page_ids[base] = count
-        if count == 0:
+        if not namespace in self._page_ids:
+            self._page_ids[namespace] = {}
+        count = self._page_ids[namespace].get(base, -1) + 1
+        self._page_ids[namespace][base] = count
+        if not count:
             return base
         return u'%s-%d' % (base, count)
 
-    def reset_unique_ids(self):
+    def init_unique_ids(self):
+        '''Initialise everything needed for unique IDs'''
+        self._unique_id_stack = []
+        self._page_ids = {None: {}}
+        self.include_id = None
+        self._include_stack = []
+
+    def push_unique_ids(self):
+        '''
+        Used by the TOC macro, this ensures that the ID namespaces
+        are reset to the status when the current include started.
+        This guarantees that doing the ID enumeration twice results
+        in the same results, on any level.
+        '''
+        self._unique_id_stack.append((self._page_ids, self.include_id))
+        self.include_id, pids = self._include_stack[-1]
+        # make a copy of the containing ID namespaces, that is to say
+        # go back to the level we had at the previous include
         self._page_ids = {}
+        for namespace in pids:
+            self._page_ids[namespace] = pids[namespace].copy()
+
+    def pop_unique_ids(self):
+        '''
+        Used by the TOC macro to reset the ID namespaces after
+        having parsed the page for TOC generation and after
+        printing the TOC.
+        '''
+        self._page_ids, self.include_id = self._unique_id_stack.pop()
+
+    def begin_include(self, base):
+        '''
+        Called by the formatter when a document begins, which means
+        that include causing nested documents gives us an include
+        stack in self._include_id_stack.
+        '''
+        pids = {}
+        for namespace in self._page_ids:
+            pids[namespace] = self._page_ids[namespace].copy()
+        self._include_stack.append((self.include_id, pids))
+        self.include_id = self.make_unique_id(base)
+        if self.include_id == base:
+            self.include_id = None
+
+    def end_include(self):
+        '''
+        Called by the formatter when a document ends, restores
+        the current include ID to the previous one and discards
+        the page IDs state we kept around for push_unique_ids().
+        '''
+        self.include_id, pids = self._include_stack.pop()
 
     def httpDate(self, when=None, rfc='1123'):
         """ Returns http date string, according to rfc2068

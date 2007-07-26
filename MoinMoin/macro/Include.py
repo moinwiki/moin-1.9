@@ -52,7 +52,7 @@ def extract_titles(body, title_re):
         titles.append((title_text, level))
     return titles
 
-def execute(macro, text, args_re=re.compile(_args_re_pattern), title_re=re.compile(_title_re, re.M), called_by_toc=0):
+def execute(macro, text, args_re=re.compile(_args_re_pattern), title_re=re.compile(_title_re, re.M)):
     request = macro.request
     _ = request.getText
 
@@ -172,10 +172,6 @@ def execute(macro, text, args_re=re.compile(_args_re_pattern), title_re=re.compi
         ##result.append("*** f=%s t=%s ***" % (from_re, to_re))
         ##result.append("*** f=%d t=%d ***" % (from_pos, to_pos))
 
-        if called_by_toc:
-            result.append(inc_page.get_raw_body())
-            continue
-
         if not hasattr(request, "_Include_backto"):
             request._Include_backto = this_page.page_name
 
@@ -207,9 +203,9 @@ def execute(macro, text, args_re=re.compile(_args_re_pattern), title_re=re.compi
         strfile = StringIO.StringIO()
         request.redirect(strfile)
         try:
-            cid = request.make_unique_id("Include_%s" % wikiutil.quoteWikinameURL(inc_page.page_name))
-            inc_page.send_page(content_only=1, content_id=cid,
-                               omit_footnotes=True)
+            inc_page.send_page(content_only=True,
+                               omit_footnotes=True,
+                               count_hit=False)
             result.append(strfile.getvalue())
         finally:
             request.redirect()

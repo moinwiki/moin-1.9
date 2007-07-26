@@ -69,9 +69,13 @@ class FormatterBase:
         return ""
 
     def startContent(self, content_id="content", **kw):
+        if self.page:
+            self.request.begin_include(self.page.page_name)
         return ""
 
     def endContent(self):
+        if self.page:
+            self.request.end_include()
         return ""
 
     # Links ##############################################################
@@ -309,6 +313,7 @@ class FormatterBase:
         """ parser_name MUST be valid!
             writes out the result instead of returning it!
         """
+        # attention: this is copied into text_python!
         parser = wikiutil.searchAndImportPlugin(self.request.cfg, "parser", parser_name)
 
         args = self._get_bang_args(lines[0])
@@ -359,3 +364,9 @@ class FormatterBase:
     def comment(self, text, **kw):
         return ""
 
+    def make_id_unique(self, id):
+        id = self.request.make_unique_id(id, self.request.include_id)
+        if self.request.include_id:
+            id = '%s.%s' % (
+                wikiutil.anchor_name_from_text(self.request.include_id), id)
+        return id
