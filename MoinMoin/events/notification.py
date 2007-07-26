@@ -185,7 +185,7 @@ def filter_subscriber_list(event, subscribers, for_jabber):
     @type subscribers: dict
 
     """
-    event_name = event.__class__.__name__
+    event_name = event.name
 
     # Filter the list by removing users who don't want to receive
     # notifications about this type of event

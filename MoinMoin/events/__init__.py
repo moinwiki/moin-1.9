@@ -30,12 +30,19 @@ _ = lambda x: x
 
 class Event(object):
     """A class handling information common to all events."""
+
+    # NOTE: each Event subclass must have a unique name attribute
+    name = u"Event"
+
     def __init__(self, request):
         self.request = request
 
 
 class PageEvent(Event):
     """An event related to a page change"""
+
+    name = u"PageEvent"
+
     def __init__(self, request):
         Event.__init__(self, request)
 
@@ -177,6 +184,9 @@ class PagePreSaveEvent(Event):
     if handler returns
 
     """
+
+    name = u"PagePreSaveEvent"
+
     def __init__(self, request, page_editor, new_text):
         Event.__init__(self, request)
         self.page_editor = page_editor
