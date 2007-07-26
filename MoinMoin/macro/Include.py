@@ -16,9 +16,12 @@
 #Dependencies = ["pages"] # included page
 Dependencies = ["time"] # works around MoinMoinBugs/TableOfContentsLacksLinks
 
+generates_headings = True
+
 import re, StringIO
-from MoinMoin import wikiutil
+from MoinMoin import wikiutil, config
 from MoinMoin.Page import Page
+
 
 _sysmsg = '<p><strong class="%s">%s</strong></p>'
 
@@ -188,22 +191,13 @@ def execute(macro, text, args_re=re.compile(_args_re_pattern), title_re=re.compi
                               macro.formatter.text(heading) +
                               macro.formatter.heading(0, level))
             else:
-                import sha
-                from MoinMoin import config
-                # this heading id might produce duplicate ids,
-                # if the same page is included multiple times
-                # Encode stuf we feed into sha module.
-                pntt = (inc_name + heading).encode(config.charset)
-                hid = "head-" + sha.new(pntt).hexdigest()
-                request._page_headings.setdefault(pntt, 0)
-                request._page_headings[pntt] += 1
-                if request._page_headings[pntt] > 1:
-                    hid += '-%d' % (request._page_headings[pntt], )
-                result.append(
-                    macro.formatter.heading(1, level, id=hid) +
-                    inc_page.link_to(request, heading, css_class="include-heading-link") +
-                    macro.formatter.heading(0, level)
-                )
+                hid = wikiutil.anchor_name_from_text(heading)
+                link = inc_page.link_to(request, heading, css_class="include-heading-link")
+                result.extend([
+                    macro.formatter.heading(1, level, id=hid),
+                    macro.formatter.rawHTML(link),
+                    macro.formatter.heading(0, level),
+                ])
 
         # set or increment include marker
         this_page._macroInclude_pagelist[inc_name] = \
@@ -213,7 +207,7 @@ def execute(macro, text, args_re=re.compile(_args_re_pattern), title_re=re.compi
         strfile = StringIO.StringIO()
         request.redirect(strfile)
         try:
-            cid = request.makeUniqueID("Include_%s" % wikiutil.quoteWikinameURL(inc_page.page_name))
+            cid = request.make_unique_id("Include_%s" % wikiutil.quoteWikinameURL(inc_page.page_name))
             inc_page.send_page(content_only=1, content_id=cid,
                                omit_footnotes=True)
             result.append(strfile.getvalue())
