@@ -1444,7 +1444,9 @@ class RequestBase(object):
             pids[namespace] = self._page_ids[namespace].copy()
         self._include_stack.append((self.include_id, pids))
         self.include_id = self.make_unique_id(base)
-        if self.include_id == base:
+        # if it's the page name then set it to None so we don't
+        # prepend anything to IDs, but otherwise keep it.
+        if self.page and self.page.page_name == self.include_id:
             self.include_id = None
 
     def end_include(self):
