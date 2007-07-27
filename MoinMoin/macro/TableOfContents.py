@@ -201,7 +201,7 @@ Prints a table of contents.
         ])
 
     while lastlvl > 0:
-        macro.formatter.listitem(0),
+        result.append(macro.formatter.listitem(0))
         result.append(macro.formatter.number_list(0))
         lastlvl -= 1
 
