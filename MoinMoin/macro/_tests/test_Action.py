@@ -53,11 +53,11 @@ class TestAction:
     def testActionCallingRaw(self):
         """ module_tested: executes raw by macro Action on existing page"""
 
-        expected = '<a href="./AutoCreatedMoinMoinTemporaryTestPageForAction?action=raw">raw</a>'
+        expected = '<a href="AutoCreatedMoinMoinTemporaryTestPageForAction?action=raw">raw</a>'
         text = '= title1 =\n||A||B||\n'
         self._createTestPage(text)
         m = self._make_macro()
-        result = Action.execute(m, 'raw')
+        result = Action.macro_Action(m, 'raw')
 
         assert result == expected
 
