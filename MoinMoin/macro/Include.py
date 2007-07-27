@@ -187,11 +187,12 @@ def execute(macro, text, args_re=re.compile(_args_re_pattern), title_re=re.compi
                               macro.formatter.text(heading) +
                               macro.formatter.heading(0, level))
             else:
-                hid = wikiutil.anchor_name_from_text(heading)
-                link = inc_page.link_to(request, heading, css_class="include-heading-link")
+                url = inc_page.url(request, relative=False)
                 result.extend([
-                    macro.formatter.heading(1, level, id=hid),
-                    macro.formatter.rawHTML(link),
+                    macro.formatter.heading(1, level, id=heading),
+                    macro.formatter.url(1, url, css="include-heading-link"),
+                    macro.formatter.text(heading),
+                    macro.formatter.url(0),
                     macro.formatter.heading(0, level),
                 ])
 
