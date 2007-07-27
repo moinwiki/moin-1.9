@@ -57,9 +57,9 @@ class TOCFormatter(FormatterBase):
 
     def heading(self, on, depth, **kw):
         id = kw.get('id', None)
-        if not id is None:
-            id = self.request.make_unique_id(id, self.request.include_id)
         self.in_heading = on
+        if not id is None:
+            id = self.request._tocfm_orig_formatter.make_id_unique(id)
         if on:
             self.collected_headings.append([depth, id, u''])
         return ''
@@ -143,7 +143,9 @@ Prints a table of contents.
     pname = macro.formatter.page.page_name
 
     macro.request.push_unique_ids()
+
     macro.request._tocfm_collected_headings = []
+    macro.request._tocfm_orig_formatter = macro.formatter
 
     tocfm = TOCFormatter(macro.request)
     p = Page(macro.request, pname, formatter=tocfm, rev=macro.request.rev)
@@ -151,8 +153,6 @@ Prints a table of contents.
                                             content_only=True,
                                             count_hit=False,
                                             omit_footnotes=True)
-
-    macro.request.pop_unique_ids()
 
     _ = macro.request.getText
 
@@ -164,17 +164,17 @@ Prints a table of contents.
     ]
 
     lastlvl = 0
-    old_incl_id = macro.request.include_id
-    macro.request.include_id = None
 
     for lvl, id, txt in macro.request._tocfm_collected_headings:
         if txt is None:
             incl_id = id
             continue
-        if lvl > maxdepth or not id:
+        if lvl > maxdepth or id is None:
             continue
-        if incl_id:
-            id = '%s.%s' % (wikiutil.anchor_name_from_text(incl_id), id)
+
+        # will be reset by pop_unique_ids below
+        macro.request.include_id = incl_id
+
         need_li = lastlvl >= lvl
         while lastlvl > lvl:
             result.extend([
@@ -205,7 +205,7 @@ Prints a table of contents.
         result.append(macro.formatter.number_list(0))
         lastlvl -= 1
 
-    macro.request.include_id = old_incl_id
+    macro.request.pop_unique_ids()
 
     result.append(macro.formatter.div(0))
     return ''.join(result)

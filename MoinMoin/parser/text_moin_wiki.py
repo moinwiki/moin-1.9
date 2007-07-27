@@ -764,11 +764,10 @@ class Parser:
         depth = min(5, level)
 
         title_text = h[level:-level].strip()
-        id = wikiutil.anchor_name_from_text(title_text)
 
         return ''.join([
             self._closeP(),
-            self.formatter.heading(1, depth, id=id),
+            self.formatter.heading(1, depth, id=title_text),
             self.formatter.text(title_text),
             self.formatter.heading(0, depth),
         ])

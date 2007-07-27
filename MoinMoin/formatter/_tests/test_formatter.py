@@ -77,6 +77,47 @@ class TestFormatter:
         return self.request.redirectedOutput(page.send_page, content_only=1)
 
 
+class TestIdIdempotency:
+    def test_sanitize_to_id_idempotent(self):
+        def _verify(formatter, id):
+            origid = formatter.sanitize_to_id(id)
+            id = origid
+            for i in xrange(3):
+                id = formatter.sanitize_to_id(id)
+                assert id == origid
+
+        formatters = wikiutil.getPlugins("formatter", self.request.cfg)
+
+        testids = [
+            r"tho/zeequeen&angu\za",
+            r"quuirahz\iphohsaij,i",
+            r"ashuifa+it[ohchieque",
+            r"ohyie-lakoo`duaghaib",
+            r"eixaepumuqu[ie\ba|eh",
+            r"theegieque;zahmeitie",
+            r"pahcooje&rahkeiz$oez",
+            r"ohjeeng*iequao%fai?p",
+            r"ahfoodahmepooquepee;",
+            r"ubed_aex;ohwebeixah%",
+            r"eitiekicaejuelae=g^u",
+            r"",
+            r'  ',
+            r'--123',
+            r'__$$',
+            r'@@',
+            u'\xf6\xf6llasdf\xe4',
+        ]
+
+        for f_name in formatters:
+            try:
+                formatter = wikiutil.importPlugin(self.request.cfg, "formatter",
+                                                  f_name, "Formatter")
+                f = formatter(self.request)
+                for id in testids:
+                    yield _verify, f, id
+            except wikiutil.PluginAttributeError:
+                pass
+
 coverage_modules = ['MoinMoin.formatter',
                     'MoinMoin.formatter.text_html',
                     'MoinMoin.formatter.text_gedit',
