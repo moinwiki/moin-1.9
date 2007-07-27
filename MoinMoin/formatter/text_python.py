@@ -81,7 +81,7 @@ if moincode_timestamp > %d or cfg_mtime is None or cfg_mtime > %d:
         if not 'id' in kw:
             return getattr(self.formatter, name)(*args, **kw)
         else:
-            return __insert_code('request.write(%s.%s(*%r, **%r))' %
+            return self.__insert_code('request.write(%s.%s(*%r, **%r))' %
                 (self.__formatter, name, args, kw))
 
     def __getattr__(self, name):
@@ -100,6 +100,10 @@ if moincode_timestamp > %d or cfg_mtime is None or cfg_mtime > %d:
         """
         self.code_fragments.append(call)
         return '<<<>>>'
+
+    def __insert_fmt_call(self, function, *args, **kw):
+        return self.__insert_code('request.write(%s.%s(*%r, **%r))' % (
+            self.__formatter, function, args, kw))
 
     def __is_static(self, dependencies):
         for dep in dependencies:
@@ -139,24 +143,16 @@ if moincode_timestamp > %d or cfg_mtime is None or cfg_mtime > %d:
                                       (self.__formatter, on, kw))
 
     def attachment_link(self, url, text, **kw):
-        return self.__insert_code(
-            'request.write(%s.attachment_link(%r, %r, **%r))' %
-            (self.__formatter, url, text, kw))
+        return self.__insert_fmt_call('attachment_link', url, text, **kw)
 
     def attachment_image(self, url, **kw):
-        return self.__insert_code(
-            'request.write(%s.attachment_image(%r, **%r))' %
-            (self.__formatter, url, kw))
+        return self.__insert_fmt_call('attachment_image', url, **kw)
 
     def attachment_drawing(self, url, text, **kw):
-        return self.__insert_code(
-            'request.write(%s.attachment_drawing(%r, %r, **%r))' %
-            (self.__formatter, url, text, kw))
+        return self.__insert_fmt_call('attachment_drawing', url, text, **kw)
 
     def attachment_inlined(self, url, text, **kw):
-        return self.__insert_code(
-            'request.write(%s.attachment_inlined(%r, %r, **%r))' %
-            (self.__formatter, url, text, kw))
+        return self.__insert_fmt_call('attachment_inlined', url, text, **kw)
 
     def heading(self, on, depth, **kw):
         if on:
@@ -173,22 +169,19 @@ if moincode_timestamp > %d or cfg_mtime is None or cfg_mtime > %d:
         if self.__is_static(['user']):
             return self.formatter.icon(type)
         else:
-            return self.__insert_code('request.write(%s.icon(%r))' %
-                                      (self.__formatter, type))
+            return self.__insert_fmt_call('icon', type)
 
     smiley = icon
 
     def span(self, on, **kw):
         if on and 'comment' in kw.get('css_class', '').split():
-            return self.__insert_code('request.write(%s.span(%r, **%r))' %
-                                      (self.__formatter, on, kw))
+            return self.__insert_fmt_call('span', on, **kw)
         else:
             return self.formatter.span(on, **kw)
 
     def div(self, on, **kw):
         if on and 'comment' in kw.get('css_class', '').split():
-            return self.__insert_code('request.write(%s.div(%r, **%r))' %
-                                      (self.__formatter, on, kw))
+            return self.__insert_fmt_call('div', on, **kw)
         else:
             return self.formatter.div(on, **kw)
 
@@ -231,27 +224,23 @@ if moincode_timestamp > %d or cfg_mtime is None or cfg_mtime > %d:
 
     def startContent(self, content_id='content', newline=True, **kw):
         # we need to tell the request about the start of the content
-        return self.__insert_code('request.write(%s.startContent(content_id=%r, newline=%r, **%r))' %
-            (self.__formatter, content_id, newline, kw))
+        return self.__insert_fmt_call('startContent', content_id, newline, **kw)
 
     def endContent(self, newline=True):
         # we need to tell the request about the end of the content
-        return self.__insert_code('request.write(%s.endContent(newline=%r))' %
-            (self.__formatter, newline))
+        return self.__insert_fmt_call('endContent', newline)
 
     def anchorlink(self, on, name='', **kw):
         # anchorlink depends on state now, namely the include ID in the request.
         if on:
-            return self.__insert_code('request.write(%s.anchorlink(on=%r, name=%r, **%r))' %
-                (self.__formatter, on, name, kw))
+            return self.__insert_fmt_call('anchorlink', on, name, **kw)
         else:
             return self.formatter.anchorlink(on, name=name, **kw)
 
     def line_anchorlink(self, on, lineno=0):
         # anchorlink depends on state now, namely the include ID in the request.
         if on:
-            return self.__insert_code('request.write(%s.anchorlink(on=%r, %r))' %
-                (self.__formatter, on, lineno))
+            return self.__insert_fmt_call('line_anchorlink', on, lineno)
         else:
             return self.formatter.line_anchorlink(on, lineno)
 
@@ -261,15 +250,13 @@ if moincode_timestamp > %d or cfg_mtime is None or cfg_mtime > %d:
             self.formatter._in_code_area = 1
             self.formatter._in_code_line = 0
             self.formatter._code_area_state = [None, show, start, step, start]
-            return self.__insert_code('request.write(%s.code_area(True, %r, %r, %r, %r, %r))' %
-                (self.__formatter, code_id, code_type, show, start, step))
+            return self.__insert_fmt_call('code_area', on, code_id, code_type, show,
+                                          start, step)
         else:
             return self.formatter.code_area(False, code_id, code_type, show, start, step)
 
     def line_anchordef(self, lineno):
-        return self.__insert_code('request.write(%s.line_anchordef(%r))' %
-            (self.__formatter, lineno))
+        return self.__insert_fmt_call('line_anchordef', lineno)
 
     def anchordef(self, id):
-        return self.__insert_code('request.write(%s.anchordef(%r))' %
-            (self.__formatter, id))
+        return self.__insert_fmt_call('anchordef', id)
