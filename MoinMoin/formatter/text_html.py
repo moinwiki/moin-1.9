@@ -338,11 +338,13 @@ class Formatter(FormatterBase):
         id = None
         if not is_unique:
             if attr and 'id' in attr:
-                attr['id'] = self.make_id_unique(attr['id'])
-                id = attr['id']
+                id = self.make_id_unique(attr['id'])
+                id = self.qualify_id(id)
+                attr['id'] = id
             if 'id' in kw:
-                kw['id'] = self.make_id_unique(kw['id'])
-                id = kw['id']
+                id = self.make_id_unique(kw['id'])
+                id = self.qualify_id(id)
+                kw['id'] = id
         else:
             if attr and 'id' in attr:
                 id = attr['id']
@@ -561,7 +563,8 @@ class Formatter(FormatterBase):
         # line-numbered code sections (from line_achordef() method).
         #return '<a id="%s"></a>' % (id, ) # do not use - this breaks PRE sections for IE
         id = self.make_id_unique(id)
-        return '<span class="anchor" id="%s"></span>' % wikiutil.escape(id, 1)
+        id = self.qualify_id(id)
+        return '<span class="anchor" id="%s"></span>' % id
 
     def line_anchordef(self, lineno):
         if line_anchors:
@@ -585,11 +588,8 @@ class Formatter(FormatterBase):
         """
         attrs = self._langAttr()
         if name:
-            if self.request.include_id:
-                attrs['href'] = '#%s.%s' % (
-                    wikiutil.anchor_name_from_text(self.request.include_id), name)
-            else:
-                attrs['href'] = '#%s' % name
+            name = self.sanitize_to_id(name)
+            attrs['href'] = '#' + self.qualify_id(name)
         if 'href' in kw:
             del kw['href']
         if on:
@@ -915,7 +915,7 @@ function togglenumber(did, nstart, nstep) {
         must be unique within the document.  The show, start, and step are
         used for line numbering.
 
-B        Note this is not like most formatter methods, it can not take any
+        Note this is not like most formatter methods, it can not take any
         extra keyword arguments.
 
         Call once with on=1 to start the region, and a second time
@@ -924,7 +924,9 @@ B        Note this is not like most formatter methods, it can not take any
         _ = self.request.getText
         res = []
         if on:
-            ci = self.make_id_unique('CA-%s' % code_id)
+            code_id = self.sanitize_to_id('CA-%s' % code_id)
+            ci = self.qualify_id(self.make_id_unique(code_id))
+
             # Open a code area
             self._in_code_area = 1
             self._in_code_line = 0
@@ -1361,3 +1363,5 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
             return self._open(tag, **kw)
         return self._close(tag)
 
+    def sanitize_to_id(self, text):
+        return wikiutil.anchor_name_from_text(text)
