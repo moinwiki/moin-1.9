@@ -87,6 +87,12 @@ class TestIdIdempotency:
                 assert id == origid
 
         formatters = wikiutil.getPlugins("formatter", self.request.cfg)
+        try:
+            from xml.dom import getDOMImplementation
+            dom = getDOMImplementation("4DOM")
+        except ImportError:
+            # if we don't have 4suite installed, the docbook formatter would just raise an exception
+            formatters.remove('text_docbook')
 
         testids = [
             r"tho/zeequeen&angu\za",
