@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from conv160 import DataConverter
+from _conv160 import DataConverter
 
 def execute(script, data_dir, rev):
     # the first pass just creates <data_dir>/rename1.txt
