@@ -1,13 +1,16 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - dummy migration terminator script
+    MoinMoin - 1st pass of 1.6 migration
 
-    This must be the last migration script.
-
-    @copyright: 2006 by Thomas Waldmann
+    @copyright: 2007 by Thomas Waldmann
     @license: GNU GPL, see COPYING for details.
 """
 
+from conv160 import DataConverter
+
 def execute(script, data_dir, rev):
-    return None
+    # the first pass just creates <data_dir>/rename1.txt
+    dc = DataConverter(data_dir, None)
+    dc.pass1()
+    return 1059999
 
