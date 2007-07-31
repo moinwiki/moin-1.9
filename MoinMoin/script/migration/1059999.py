@@ -8,7 +8,7 @@
 
 import os, shutil
 
-from conv160 import DataConverter
+from _conv160 import DataConverter
 
 def execute(script, data_dir, rev):
     rename_map1 = os.path.join(data_dir, 'rename1.txt')
