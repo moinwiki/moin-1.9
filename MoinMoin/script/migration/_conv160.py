@@ -11,7 +11,7 @@
        -----------------------------------------------------
        old         MainPage/Sub_Page   MainPage(2f)Sub_Page
        new         MainPage/Sub Page   MainPage(2f)Sub(20)Page    or
-       new         MainPage/Sub_Page   MainPage(2f)Sub_Page       (user has to decide by editing rename.txt)
+       new         MainPage/Sub_Page   MainPage(2f)Sub_Page       (user has to decide by editing rename1.txt)
 
 
                    markup
@@ -348,9 +348,17 @@ class User:
         fname = opj(users_dir, self.uid)
         f = file(fname, "w")
         for key, value in self.profile.items():
+            if key in ('subscribed_pages', 'quicklinks'):
+                pages = value.decode('utf-8').split(u'\t')
+                for i in range(len(pages)):
+                    pagename = pages[i]
+                    # XXX strip wiki name from interwiki link here
+                    if ('PAGE', pagename) in self.renames:
+                        pages[i] = self.renames[('PAGE', pagename)]
+                value = u'\t'.join(pages).encode('utf-8')
             f.write("%s=%s\n" % (key, value))
         f.close()
-        # write bookmarks
+        # write bookmarks XXX check if we can use the new integrated bookmarks
         for wiki, bookmark in self.bookmarks.items():
             fname = opj(users_dir, "%s.%s.bookmark" % (self.uid, wiki))
             f = file(fname, "w")
