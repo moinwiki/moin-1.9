@@ -181,10 +181,7 @@ class EditLog:
 
 
 class PageRev:
-    """ a single revision of a page
-        TODO: add some magic, that reads data from disk on first access
-              and frees memory after the write() call has written it out
-    """
+    """ a single revision of a page """
     def __init__(self, request, rev_dir, rev):
         self.request = request
         self.rev_dir = rev_dir
@@ -336,12 +333,12 @@ class User:
         self.profile = {}
         fname = opj(self.users_dir, self.uid)
         # read user profile
-        f = file(fname, "r")
+        f = codecs.open(fname, 'r', 'utf-8')
         for line in f:
-            line = line.replace('\r', '').replace('\n', '')
-            if not line.strip() or line.startswith('#'): # skip empty or comment lines
+            line = line.replace(u'\r', '').replace(u'\n', '')
+            if not line.strip() or line.startswith(u'#'): # skip empty or comment lines
                 continue
-            key, value = line.split('=', 1)
+            key, value = line.split(u'=', 1)
             self.profile[key] = value
         f.close()
         # read bookmarks
@@ -358,29 +355,29 @@ class User:
     def write(self, users_dir):
         """ write profile and bookmarks data to disk """
         fname = opj(users_dir, self.uid)
-        f = file(fname, "w")
+        f = codecs.open(fname, 'w', 'utf-8')
         for key, value in self.profile.items():
-            if key in ('subscribed_pages', 'quicklinks'):
-                pages = value.decode('utf-8').split(u'\t')
+            if key in (u'subscribed_pages', u'quicklinks'):
+                pages = value.split(u'\t')
                 for i in range(len(pages)):
                     pagename = pages[i]
                     try:
-                        interwiki, pagename = pagename.split(':', 1)
+                        interwiki, pagename = pagename.split(u':', 1)
                     except:
-                        interwiki, pagename = 'Self', pagename
+                        interwiki, pagename = u'Self', pagename
                     # XXX we should check that interwiki == own wikiname
                     if ('PAGE', pagename) in self.renames:
                         pagename = self.renames[('PAGE', pagename)]
-                        pages[i] = '%s:%s' % (interwiki, pagename)
+                        pages[i] = u'%s:%s' % (interwiki, pagename)
                 key += '[]' # we have lists here
-                value = u'\t'.join(pages).encode('utf-8')
-                f.write("%s=%s\n" % (key, value))
+                value = u'\t'.join(pages)
+                f.write(u"%s=%s\n" % (key, value))
             else:
-                f.write("%s=%s\n" % (key, value))
+                f.write(u"%s=%s\n" % (key, value))
         bookmark_entries = [u'%s:%s' % item for item in self.bookmarks.items()]
-        key = "bookmarks{}"
-        value = u'\t'.join(bookmark_entries).encode('utf-8')
-        f.write("%s=%s\n" % (key, value))
+        key = u"bookmarks{}"
+        value = u'\t'.join(bookmark_entries)
+        f.write(u"%s=%s\n" % (key, value))
         f.close()
         # don't care about trail
 
@@ -392,7 +389,7 @@ class User:
 
 class DataConverter(object):
     def __init__(self, request, src_data_dir, dest_data_dir):
-        self.request = request # XXX TODO make it available in every object
+        self.request = request
         self.sdata = src_data_dir
         self.ddata = dest_data_dir
         self.pages = {}
