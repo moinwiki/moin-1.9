@@ -77,7 +77,8 @@ def markup_converter(text, renames):
 
 
 class EventLog:
-    def __init__(self, fname):
+    def __init__(self, request, fname):
+        self.request = request
         self.fname = fname
         self.data = None
         self.renames = {}
@@ -126,7 +127,8 @@ class EventLog:
 
 
 class EditLog:
-    def __init__(self, fname):
+    def __init__(self, request, fname):
+        self.request = request
         self.fname = fname
         self.data = None
         self.renames = {}
@@ -183,7 +185,8 @@ class PageRev:
         TODO: add some magic, that reads data from disk on first access
               and frees memory after the write() call has written it out
     """
-    def __init__(self, rev_dir, rev):
+    def __init__(self, request, rev_dir, rev):
+        self.request = request
         self.rev_dir = rev_dir
         self.rev = rev
 
@@ -213,7 +216,8 @@ class PageRev:
 
 class Attachment:
     """ a single attachment """
-    def __init__(self, attach_dir, attfile):
+    def __init__(self, request, attach_dir, attfile):
+        self.request = request
         self.path = opj(attach_dir, attfile)
         self.name = attfile.decode('utf-8')
 
@@ -226,7 +230,8 @@ class Attachment:
 
 class Page:
     """ represents a page with all related data """
-    def __init__(self, pages_dir, qpagename):
+    def __init__(self, request, pages_dir, qpagename):
+        self.request = request
         self.name = wikiutil.unquoteWikiname(qpagename)
         self.name_old = self.name # renaming: still original name when self.name has the new name
         self.page_dir = opj(pages_dir, qpagename)
@@ -250,7 +255,7 @@ class Page:
         # read edit-log
         editlog_fname = opj(page_dir, 'edit-log')
         if os.path.exists(editlog_fname):
-            self.editlog = EditLog(editlog_fname)
+            self.editlog = EditLog(self.request, editlog_fname)
         # read page revisions
         rev_dir = opj(page_dir, 'revisions')
         if os.path.exists(rev_dir):
@@ -260,14 +265,14 @@ class Page:
             self.revlist = revlist
             self.revisions = {}
             for rev in revlist:
-                self.revisions[rev] = PageRev(rev_dir, rev)
+                self.revisions[rev] = PageRev(self.request, rev_dir, rev)
         # read attachment filenames
         attach_dir = opj(page_dir, 'attachments')
         if os.path.exists(attach_dir):
             self.attachments = {}
             attlist = listdir(attach_dir)
             for attfile in attlist:
-                a = Attachment(attach_dir, attfile)
+                a = Attachment(self.request, attach_dir, attfile)
                 self.attachments[a.name] = a
 
     def write(self, pages_dir):
@@ -319,7 +324,8 @@ class Page:
 
 class User:
     """ represents a user with all related data """
-    def __init__(self, users_dir, uid):
+    def __init__(self, request, users_dir, uid):
+        self.request = request
         self.uid = uid
         self.users_dir = users_dir
         self.profile = None
@@ -460,7 +466,7 @@ class DataConverter(object):
         pages_dir = opj(self.sdata, 'pages')
         pagelist = listdir(pages_dir)
         for qpagename in pagelist:
-            p = Page(pages_dir, qpagename)
+            p = Page(self.request, pages_dir, qpagename)
             self.pages[p.name] = p
 
         # create User objects in memory
@@ -468,12 +474,12 @@ class DataConverter(object):
         userlist = listdir(users_dir)
         userlist = [fn for fn in userlist if not fn.endswith(".trail") and not fn.endswith(".bookmark")]
         for userid in userlist:
-            u = User(users_dir, userid)
+            u = User(self.request, users_dir, userid)
             self.users[u.uid] = u
 
         # create log objects in memory
-        self.editlog = EditLog(opj(self.sdata, 'edit-log'))
-        self.eventlog = EventLog(opj(self.sdata, 'event-log'))
+        self.editlog = EditLog(self.request, opj(self.sdata, 'edit-log'))
+        self.eventlog = EventLog(self.request, opj(self.sdata, 'event-log'))
 
     def write_dest(self):
         self.init_dest()
@@ -498,14 +504,4 @@ class DataConverter(object):
         copy_dir(opj(self.sdata, 'plugin'), opj(self.ddata, 'plugin'))
         copy_file(opj(self.sdata, 'intermap.txt'), opj(self.ddata, 'intermap.txt'))
 
-
-if __name__ == '__main__':
-    origdir = 'data'
-    destdir = 'data-new'
-    dc = DataConverter(origdir, destdir)
-    passno = int(sys.argv[1])
-    if passno == 1:
-        dc.pass1()
-    elif passno == 2:
-        dc.pass2()
 
