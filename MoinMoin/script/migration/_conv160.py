@@ -27,23 +27,29 @@
        old         attachment:file%20with%20blanks.txt
        new         attachment:"file with blanks.txt"
 
+    c) users: move bookmarks from separate files into user profile
+    d) users: generate new name[] for lists and name{} for dicts
 
     TODO:
         * process page content / convert markup
-        * rename pages in user subscribed pages
-        * rename pages in user quicklinks
 
     DONE:
         pass 1
         * creating the rename.txt works
         pass 2
-        * renaming of pagedirs works
+        * renaming of pages works
+         * renamed pagedirs
          * renamed page names in global edit-log
          * renamed page names in local edit-log
          * renamed page names in event-log
+         * renamed pages in user subscribed pages
+         * renamed pages in user quicklinks
         * renaming of attachments works
+         * renamed attachment files
          * renamed attachment names in global edit-log
          * renamed attachment names in local edit-log
+        * migrate separate user bookmark files into user profiles
+        * support new dict/list syntax in user profiles
 
     @copyright: 2007 by Thomas Waldmann
     @license: GNU GPL, see COPYING for details.
@@ -352,18 +358,24 @@ class User:
                 pages = value.decode('utf-8').split(u'\t')
                 for i in range(len(pages)):
                     pagename = pages[i]
-                    # XXX strip wiki name from interwiki link here
+                    try:
+                        interwiki, pagename = pagename.split(':', 1)
+                    except:
+                        interwiki, pagename = 'Self', pagename
+                    # XXX we should check that interwiki == own wikiname
                     if ('PAGE', pagename) in self.renames:
-                        pages[i] = self.renames[('PAGE', pagename)]
+                        pagename = self.renames[('PAGE', pagename)]
+                        pages[i] = '%s:%s' % (interwiki, pagename)
+                key += '[]' # we have lists here
                 value = u'\t'.join(pages).encode('utf-8')
-            f.write("%s=%s\n" % (key, value))
+                f.write("%s=%s\n" % (key, value))
+            else:
+                f.write("%s=%s\n" % (key, value))
+        bookmark_entries = [u'%s:%s' % item for item in self.bookmarks.items()]
+        key = "bookmarks{}"
+        value = u'\t'.join(bookmark_entries).encode('utf-8')
+        f.write("%s=%s\n" % (key, value))
         f.close()
-        # write bookmarks XXX check if we can use the new integrated bookmarks
-        for wiki, bookmark in self.bookmarks.items():
-            fname = opj(users_dir, "%s.%s.bookmark" % (self.uid, wiki))
-            f = file(fname, "w")
-            f.write("%d\n" % bookmark)
-            f.close()
         # don't care about trail
 
     def copy(self, users_dir, renames):
@@ -373,7 +385,8 @@ class User:
 
 
 class DataConverter(object):
-    def __init__(self, src_data_dir, dest_data_dir):
+    def __init__(self, request, src_data_dir, dest_data_dir):
+        self.request = request # XXX TODO make it available in every object
         self.sdata = src_data_dir
         self.ddata = dest_data_dir
         self.pages = {}
