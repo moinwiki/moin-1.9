@@ -26,6 +26,8 @@ def execute(script, data_dir, rev):
     src_data_dir = os.path.abspath(os.path.join(data_dir, '..', 'data.pre160')) # keep the orig data_dir here
     dst_data_dir = data_dir
     shutil.move(data_dir, src_data_dir)
+    os.mkdir(dst_data_dir)
+    shutil.move(os.path.join(src_data_dir, 'cache'), os.path.join(dst_data_dir, 'cache')) # mig script has locks there
     dc = DataConverter(None, src_data_dir, dst_data_dir) # XXX TODO None -> script.request
     dc.pass2()
     return 1060000

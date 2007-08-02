@@ -498,7 +498,10 @@ class DataConverter(object):
         self.eventlog.copy(opj(self.ddata, 'event-log'), self.renames)
 
     def init_dest(self):
-        os.makedirs(self.ddata)
+        try:
+            os.makedirs(self.ddata)
+        except:
+            pass
         os.makedirs(opj(self.ddata, 'pages'))
         os.makedirs(opj(self.ddata, 'user'))
         copy_dir(opj(self.sdata, 'plugin'), opj(self.ddata, 'plugin'))
