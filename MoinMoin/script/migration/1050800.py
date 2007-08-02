@@ -11,7 +11,7 @@ from _conv160 import DataConverter
 
 def execute(script, data_dir, rev):
     # the first pass just creates <data_dir>/rename1.txt
-    dc = DataConverter(data_dir, None)
+    dc = DataConverter(None, data_dir, None) # XXX TODO None -> script.request
     dc.pass1()
     return 1059999
 
