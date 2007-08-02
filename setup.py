@@ -220,6 +220,7 @@ only requiring a Python installation.
         'MoinMoin.auth',
         'MoinMoin.config',
         'MoinMoin.converter',
+        'MoinMoin.events',
         'MoinMoin.filter',
         'MoinMoin.formatter',
         'MoinMoin.i18n',
