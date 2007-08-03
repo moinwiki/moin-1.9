@@ -18,16 +18,13 @@
 
 import os, time, codecs, errno
 
-try:
-    set
-except:
-    from sets import Set as set
 
 from MoinMoin import caching, config, user, wikiutil, error
 from MoinMoin.Page import Page
 from MoinMoin.widget import html
 from MoinMoin.widget.dialog import Status
 from MoinMoin.logfile import editlog, eventlog
+from MoinMoin.support.python_compatibility import set
 from MoinMoin.util import filesys, timefuncs, web
 from MoinMoin.mail import sendmail
 from MoinMoin.events import PageDeletedEvent, PageRenamedEvent, PageCopiedEvent
