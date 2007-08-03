@@ -9,9 +9,9 @@
 """
 
 from MoinMoin.i18n import languages
-from MoinMoin.support import sorted
 from MoinMoin.widget import html
 from MoinMoin.util.web import makeSelection
+from MoinMoin.support.python_compatibility import sorted
 
 import mimetypes
 

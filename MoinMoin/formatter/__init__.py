@@ -69,9 +69,13 @@ class FormatterBase:
         return ""
 
     def startContent(self, content_id="content", **kw):
+        if self.page:
+            self.request.begin_include(self.page.page_name)
         return ""
 
     def endContent(self):
+        if self.page:
+            self.request.end_include()
         return ""
 
     # Links ##############################################################
@@ -309,6 +313,7 @@ class FormatterBase:
         """ parser_name MUST be valid!
             writes out the result instead of returning it!
         """
+        # attention: this is copied into text_python!
         parser = wikiutil.searchAndImportPlugin(self.request.cfg, "parser", parser_name)
 
         args = self._get_bang_args(lines[0])
@@ -359,3 +364,40 @@ class FormatterBase:
     def comment(self, text, **kw):
         return ""
 
+    # ID handling #################################################
+
+    def sanitize_to_id(self, text):
+        '''
+        Take 'text' and return something that is a valid ID
+        for this formatter.
+        The default returns the first non-space character of the string.
+
+        Because of the way this is used, it must be idempotent,
+        i.e. calling it on an already sanitized id must yield the
+        original id.
+        '''
+        return text.strip()[:1]
+
+    def make_id_unique(self, id):
+        '''
+        Take an ID and make it unique in the current namespace.
+        '''
+        ns = self.request.include_id
+        if not ns is None:
+            ns = self.sanitize_to_id(ns)
+        id = self.sanitize_to_id(id)
+        id = self.request.make_unique_id(id, ns)
+        return id
+
+    def qualify_id(self, id):
+        '''
+        Take an ID and return a string that is qualified by
+        the current namespace; this default implementation
+        is suitable if the dot ('.') is valid in IDs for your
+        formatter.
+        '''
+        ns = self.request.include_id
+        if not ns is None:
+            ns = self.sanitize_to_id(ns)
+            return '%s.%s' % (ns, id)
+        return id

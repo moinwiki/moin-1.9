@@ -640,7 +640,7 @@ class XmlRpcBase:
             or the password were wrong. """
 
         if randint(0, 99) == 0:
-            _cleanup_stale_tokens(self.request)
+            self._cleanup_stale_tokens(self.request)
 
         u = self.request.handle_auth(None, username=username,
                                      password=password, login=True)
@@ -663,7 +663,7 @@ class XmlRpcBase:
             return ""
 
         if randint(0, 99) == 0:
-            _cleanup_stale_tokens(self.request)
+            self._cleanup_stale_tokens(self.request)
 
         u = self.request.handle_jid_auth(jid)
 

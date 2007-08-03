@@ -40,6 +40,10 @@ def test_generate_auth_token(request):
     assert type(token) == str or type(token) == unicode
     assert len(token) == 32
 
+def test_getAuthToken(request):
+    """ Tests if getAuthToken passes without crashing """
+    xmlrpc = XmlRpcBase(request)
+    assert xmlrpc.xmlrpc_getAuthToken("Foo", "bar") == ""
 
 coverage_modules = ['MoinMoin.xmlrpc']
 

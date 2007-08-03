@@ -12,12 +12,6 @@ import re
 import traceback
 import StringIO # not relevant for speed, so we do not need cStringIO
 
-# Compatiblity to Python 2.3
-try:
-    set
-except NameError:
-    from sets import Set as set
-
 
 from MoinMoin import wikiutil
 from MoinMoin.packages import unpackLine, packLine
@@ -26,6 +20,7 @@ from MoinMoin.Page import Page
 from MoinMoin.wikidicts import Dict
 from MoinMoin.wikisync import TagStore, UnsupportedWikiException, SyncPage, NotAllowedException
 from MoinMoin.wikisync import MoinLocalWiki, MoinRemoteWiki, UP, DOWN, BOTH, MIMETYPE_MOIN
+from MoinMoin.support.python_compatibility import set
 from MoinMoin.util.bdiff import decompress, patch, compress, textdiff
 from MoinMoin.util import diff3, rpc_aggregator
 

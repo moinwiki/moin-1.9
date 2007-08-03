@@ -57,7 +57,7 @@ class TestAction:
         text = '= title1 =\n||A||B||\n'
         self._createTestPage(text)
         m = self._make_macro()
-        result = Action.execute(m, 'raw')
+        result = Action.macro_Action(m, 'raw')
 
         assert result == expected
 

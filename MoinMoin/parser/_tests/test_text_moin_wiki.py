@@ -40,8 +40,9 @@ class ParserTestCase(unittest.TestCase):
         output = StringIO()
         saved_write = self.request.write
         self.request.write = output.write
+        self.request.page = page
         try:
-            Parser(body, self.request).format(page.formatter)
+            page.send_page(content_only=True, do_cache=False)
         finally:
             self.request.write = saved_write
         return output.getvalue()
@@ -472,15 +473,17 @@ class TestBlock(ParserTestCase):
 
     def testUrlAfterBlock(self):
         """ parser.wiki: tests url after block element """
-        cases = ('some text {{{some block text\n}}} and a URL http://moinmo.in/',
-                 'some text {{{some block text\n}}} and a WikiName')
+        case = 'some text {{{some block text\n}}} and a URL http://moinmo.in/'
 
-        for case in cases:
-            result = self.parse(case).strip()
-            match = result.endswith('</a>')
-            expected = True
-            self.assert_(match is True,
-                         'Expected "%(expected)s" but got "%(result)s"' % locals())
+        result = self.parse(case)
+        assert result.find('and a URL <a ') > -1
+
+    def testWikiNameAfterBlock(self):
+        """ parser.wiki: tests url after block element """
+        case = 'some text {{{some block text\n}}} and a WikiName'
+
+        result = self.parse(case)
+        assert result.find('and a <a ') > -1
 
     def testColorizedPythonParserAndNestingPreBrackets(self):
         """ tests nested {{{ }}} for the python colorized parser
@@ -492,10 +495,7 @@ import re
 pattern = re.compile(r'{{{This is some nested text}}}')}}}"""
         output = self.parse(raw)
         output = ''.join(output)
-        result = "r'{{{This is some nested text}}}'" in output
-        expected = True
-
-        assert expected == result
+        assert "r'{{{This is some nested text}}}'" in output
 
     def testColorizedPythonParserAndNestingPreBracketsWithLinebreak(self):
         """ tests nested {{{ }}} for the python colorized parser
@@ -508,11 +508,7 @@ pattern = re.compile(r'{{{This is some nested text}}}')
 }}}"""
         output = self.parse(raw)
         output = ''.join(output)
-        print output
-        result = "r'{{{This is some nested text}}}'" in output
-        expected = True
-
-        assert expected == result
+        assert "r'{{{This is some nested text}}}'" in output
 
     def testNestingPreBrackets(self):
         """ tests nested {{{ }}} for the wiki parser
@@ -523,10 +519,7 @@ Example
 You can use {{{brackets}}}}}}"""
         output = self.parse(raw)
         output = ''.join(output)
-        result = 'You can use {{{brackets}}}' in output
-        expected = True
-
-        assert expected == result
+        assert 'You can use {{{brackets}}}' in output
 
     def testNestingPreBracketsWithLinebreak(self):
         """ tests nested {{{ }}} for the wiki parser
@@ -539,10 +532,7 @@ You can use {{{brackets}}}
         output = self.parse(raw)
         output = ''.join(output)
         print output
-        result = 'You can use {{{brackets}}}' in output
-        expected = True
-
-        assert expected == result
+        assert 'You can use {{{brackets}}}' in output
 
     def testTextBeforeNestingPreBrackets(self):
         """ tests text before nested {{{ }}} for the wiki parser
@@ -553,10 +543,7 @@ You can use {{{brackets}}}
 You can use {{{brackets}}}}}}"""
         output = self.parse(raw)
         output = ''.join(output)
-        result = 'Example <span class="anchor" id="line-0"></span><ul><li style="list-style-type:none"><span class="anchor" id="line-0"></span><pre>You can use {{{brackets}}}</pre>' in output
-        expected = True
-
-        assert expected == result
+        assert 'Example <span class="anchor" id="line-0-1"></span><ul><li style="list-style-type:none"><span class="anchor" id="line-0-2"></span><pre>You can use {{{brackets}}}</pre>' in output
 
     def testManyNestingPreBrackets(self):
         """ tests two nestings  ({{{ }}} and {{{ }}}) in one line for the wiki parser
@@ -580,7 +567,7 @@ Test {{{brackets}}} and test {{{brackets}}}
         raw = 'def {{{ghi}}} jkl {{{mno}}} pqr'
         output = ''.join(self.parse(raw))
         # expected output copied from 1.5
-        expected = 'def <tt>ghi</tt> jkl <tt>mno</tt><span class="anchor" id="line-0"></span>pqr'
+        expected = 'def <tt>ghi</tt> jkl <tt>mno</tt><span class="anchor" id="line-0-1"></span>pqr'
         assert expected in output
 
 class TestLinkingMarkup(ParserTestCase):
@@ -622,4 +609,3 @@ class TestLinkingMarkup(ParserTestCase):
 
 
 coverage_modules = ['MoinMoin.parser.text_moin_wiki']
-

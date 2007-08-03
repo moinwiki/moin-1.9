@@ -21,6 +21,7 @@ from MoinMoin.events import PageRevertedEvent, FileAttachedEvent
 from MoinMoin import session
 from MoinMoin.packages import packLine
 from MoinMoin.security import AccessControlList
+from MoinMoin.support.python_compatibility import set
 
 _url_re_cache = None
 _farmconfig_mtime = None
@@ -444,10 +445,6 @@ reStructuredText Quick Reference
             @return: None if there is no problem with the password,
                      some string with an error msg, if the password is problematic.
         """
-        try:
-            set
-        except:
-            from sets import Set as set
 
         try:
             # in any case, do a very simple built-in check to avoid the worst passwords
