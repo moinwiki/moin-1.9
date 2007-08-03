@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - migration from base rev 105xxyy
@@ -58,9 +57,6 @@
 import os.path, sys
 import codecs, urllib, glob
 
-# Insert THIS moin dir first into sys path, or you would run another version of moin!
-sys.path.insert(0, '../../..')
-
 from MoinMoin import config, wikiutil
 from MoinMoin.script.migration.migutil import opj, listdir, copy_file, move_file, copy_dir
 
@@ -94,13 +90,7 @@ class EventLog:
             fields = line.split('\t')
             timestamp, action, kvpairs = fields
             timestamp = int(timestamp)
-            kvpairs = kvpairs.split('&')
-            kvdict = {}
-            for kvpair in kvpairs:
-                key, val = kvpair.split('=')
-                key = urllib.unquote(key).decode('utf-8')
-                val = urllib.unquote(val).decode('utf-8')
-                kvdict[key] = val
+            kvdict = wikiutil.parseQueryString(kvpairs)
             data.append((timestamp, action, kvdict))
         self.data = data
 
@@ -108,14 +98,11 @@ class EventLog:
         """ write complete event-log to disk """
         f = file(fname, 'w')
         for timestamp, action, kvdict in self.data:
-            kvlist = []
-            for k, v in kvdict.items():
-                if k == 'pagename' and ('PAGE', v) in self.renames:
-                    v = self.renames[('PAGE', v)]
-                k = urllib.quote(k.encode('utf-8'))
-                v = urllib.quote(v.encode('utf-8'))
-                kvlist.append("%s=%s" % (k, v))
-            fields = str(timestamp), action, '&'.join(kvlist)
+            pagename = kvdict.get('pagename')
+            if pagename and ('PAGE', pagename) in self.renames:
+                kvdict['pagename'] = self.renames[('PAGE', pagename)]
+            kvpairs = wikiutil.makeQueryString(kvdict, want_unicode=False)
+            fields = str(timestamp), action, kvpairs
             line = '\t'.join(fields) + '\n'
             f.write(line)
         f.close()
@@ -333,7 +320,7 @@ class User:
         self.profile = {}
         fname = opj(self.users_dir, self.uid)
         # read user profile
-        f = codecs.open(fname, 'r', 'utf-8')
+        f = codecs.open(fname, 'r', config.charset)
         for line in f:
             line = line.replace(u'\r', '').replace(u'\n', '')
             if not line.strip() or line.startswith(u'#'): # skip empty or comment lines
@@ -355,7 +342,7 @@ class User:
     def write(self, users_dir):
         """ write profile and bookmarks data to disk """
         fname = opj(users_dir, self.uid)
-        f = codecs.open(fname, 'w', 'utf-8')
+        f = codecs.open(fname, 'w', config.charset)
         for key, value in self.profile.items():
             if key in (u'subscribed_pages', u'quicklinks'):
                 pages = value.split(u'\t')
@@ -365,10 +352,10 @@ class User:
                         interwiki, pagename = pagename.split(u':', 1)
                     except:
                         interwiki, pagename = u'Self', pagename
-                    # XXX we should check that interwiki == own wikiname
-                    if ('PAGE', pagename) in self.renames:
-                        pagename = self.renames[('PAGE', pagename)]
-                        pages[i] = u'%s:%s' % (interwiki, pagename)
+                    if interwiki == u'Self' or interwiki == self.request.cfg.interwikiname:
+                        if ('PAGE', pagename) in self.renames:
+                            pagename = self.renames[('PAGE', pagename)]
+                            pages[i] = u'%s:%s' % (interwiki, pagename)
                 key += '[]' # we have lists here
                 value = u'\t'.join(pages)
                 f.write(u"%s=%s\n" % (key, value))
