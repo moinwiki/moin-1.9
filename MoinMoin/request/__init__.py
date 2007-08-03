@@ -11,13 +11,9 @@ import os, re, time, sys, cgi, StringIO
 import logging
 import Cookie
 
-try:
-    set
-except:
-    from sets import Set as set
-
 from MoinMoin import config, wikiutil, user, caching, error
 from MoinMoin.config import multiconfig
+from MoinMoin.support.python_compatibility import set
 from MoinMoin.util import IsWin9x
 from MoinMoin import auth
 from urllib import quote, quote_plus

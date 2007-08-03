@@ -7,15 +7,11 @@
 """
 import os.path, re
 
-try:
-    set
-except:
-    from sets import Set as set
-
 from MoinMoin.formatter import FormatterBase
 from MoinMoin import wikiutil, i18n
 from MoinMoin.Page import Page
 from MoinMoin.action import AttachFile
+from MoinMoin.support.python_compatibility import set
 
 # insert IDs into output wherever they occur
 # warning: breaks toggle line numbers javascript
