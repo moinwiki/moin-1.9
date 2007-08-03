@@ -28,11 +28,7 @@ def execute(script, data_dir, rev):
     shutil.move(data_dir, src_data_dir)
     os.mkdir(dst_data_dir)
     shutil.move(os.path.join(src_data_dir, 'cache'), os.path.join(dst_data_dir, 'cache')) # mig script has locks there
-    dc = DataConverter(None, src_data_dir, dst_data_dir) # XXX TODO None -> script.request
+    dc = DataConverter(script.request, src_data_dir, dst_data_dir)
     dc.pass2()
     return 1060000
-
-
-if __name__ == '__main__':
-    execute(None, './data', None)
 
