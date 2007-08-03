@@ -433,9 +433,11 @@ class Parser:
                 words = words * 2
 
             if words[0].startswith('#'): # anchor link
-                return (self.formatter.url(1, words[0]) +
-                        self.formatter.text(words[1]) +
-                        self.formatter.url(0))
+                res = []
+                res.append(self.formatter.anchorlink(1, words[0][1:]))
+                res.append(self.formatter.text(words[1]))
+                res.append(self.formatter.anchorlink(0))
+                return ''.join(res)
         else:
             scheme, rest = scheme_and_rest
             if scheme == "wiki":
@@ -762,11 +764,10 @@ class Parser:
         depth = min(5, level)
 
         title_text = h[level:-level].strip()
-        id = wikiutil.anchor_name_from_text(title_text)
 
         return ''.join([
             self._closeP(),
-            self.formatter.heading(1, depth, id=id),
+            self.formatter.heading(1, depth, id=title_text),
             self.formatter.text(title_text),
             self.formatter.heading(0, depth),
         ])

@@ -7,15 +7,15 @@
 """
 import os.path, re
 
-try:
-    set
-except:
-    from sets import Set as set
-
 from MoinMoin.formatter import FormatterBase
 from MoinMoin import wikiutil, i18n
 from MoinMoin.Page import Page
 from MoinMoin.action import AttachFile
+from MoinMoin.support.python_compatibility import set
+
+# insert IDs into output wherever they occur
+# warning: breaks toggle line numbers javascript
+_id_debug = False
 
 line_anchors = True
 prettyprint = False
@@ -179,24 +179,14 @@ class Formatter(FormatterBase):
 
     def __init__(self, request, **kw):
         FormatterBase.__init__(self, request, **kw)
-
-        # inline tags stack. When an inline tag is called, it goes into
-        # the stack. When a block element starts, all inline tags in
-        # the stack are closed.
-        self._inlineStack = []
-
-        # stack of all tags
-        self._tag_stack = []
         self._indent_level = 0
 
         self._in_code = 0 # used by text_gedit
         self._in_code_area = 0
         self._in_code_line = 0
-        self._code_area_num = 0
         self._code_area_js = 0
         self._code_area_state = ['', 0, -1, -1, 0]
         self._show_section_numbers = None
-        self._content_ids = []
         self.pagelink_preclosed = False
         self._is_included = kw.get('is_included', False)
         self.request = request
@@ -324,19 +314,38 @@ class Formatter(FormatterBase):
             return ' '.join(all)
         return ''
 
-    def _open(self, tag, newline=False, attr=None, allowed_attrs=None, **kw):
+    def _open(self, tag, newline=False, attr=None, allowed_attrs=None,
+              is_unique=False, **kw):
         """ Open a tag with optional attributes (INTERNAL USE BY HTML FORMATTER ONLY!)
 
         @param tag: html tag, string
         @param newline: render tag so following data is on a separate line
         @param attr: dict with tag attributes
         @param allowed_attrs: list of allowed attributes for this element
+        @param is_unique: ID is already unique
         @param kw: arbitrary attributes and values
         @rtype: string ?
         @return: open tag with attributes as a string
         """
         # If it is self-closing, then don't expect a closing tag later on.
         is_self_closing = (tag in _self_closing_tags) and ' /' or ''
+
+        # make ID unique
+        id = None
+        if not is_unique:
+            if attr and 'id' in attr:
+                id = self.make_id_unique(attr['id'])
+                id = self.qualify_id(id)
+                attr['id'] = id
+            if 'id' in kw:
+                id = self.make_id_unique(kw['id'])
+                id = self.qualify_id(id)
+                kw['id'] = id
+        else:
+            if attr and 'id' in attr:
+                id = attr['id']
+            if 'id' in kw:
+                id = kw['id']
 
         if tag in _blocks:
             # Block elements
@@ -352,22 +361,14 @@ class Formatter(FormatterBase):
             result.append('<%s%s%s>' % (tag, attributes, is_self_closing))
             if newline:
                 result.append(self._newline())
+            if _id_debug and id:
+                result.append('(%s) ' % id)
             tagstr = ''.join(result)
         else:
             # Inline elements
-            # Add to inlineStack
-            if not is_self_closing:
-                # Only push on stack if we expect a close-tag later
-                self._inlineStack.append(tag)
-            # Format
             tagstr = '<%s%s%s>' % (tag,
                                       self._formatAttributes(attr, allowed_attrs, **kw),
                                       is_self_closing)
-        # XXX SENSE ???
-        #if not self.close:
-        #    self._tag_stack.append(tag)
-        #    if tag in _indenting_tags:
-        #        self._indent_level += 1
         return tagstr
 
     def _close(self, tag, newline=False):
@@ -383,32 +384,15 @@ class Formatter(FormatterBase):
             tagstr = ''
         elif tag in _blocks:
             # Block elements
-            # Close all tags in inline stack
-            # Work on a copy, because close(inline) manipulate the stack
             result = []
-            stack = self._inlineStack[:]
-            stack.reverse()
-            for inline in stack:
-                result.append(self._close(inline))
-            # Format with newline
             if newline:
                 result.append(self._newline())
             result.append('</%s>' % (tag))
             tagstr = ''.join(result)
         else:
             # Inline elements
-            # Pull from stack, ignore order, that is not our problem.
-            # The code that calls us should keep correct calling order.
-            if tag in self._inlineStack:
-                self._inlineStack.remove(tag)
             tagstr = '</%s>' % tag
 
-        # XXX see other place marked with "SENSE"
-        #if tag in _self_closing_tags:
-        #    self._tag_stack.pop()
-        #    if tag in _indenting_tags:
-        #        # decrease indent level
-        #        self._indent_level -= 1
         if newline:
             tagstr += self._newline()
         return tagstr
@@ -419,23 +403,19 @@ class Formatter(FormatterBase):
         """ Start page content div.
 
         A link anchor is provided at the beginning of the div, with
-        an id of 'top' or 'top_xxxx' if the content_id argument is
-        set to 'xxxx'.
+        an id of 'top' (modified by the request ID cache).
         """
 
-        # Setup id
-        if content_id != 'content':
-            aid = 'top_%s' % (content_id, )
-        else:
-            aid = 'top'
-        self._content_ids.append(content_id)
+        if hasattr(self, 'page'):
+            self.request.begin_include(self.page.page_name)
+
         result = []
         # Use the content language
         attr = self._langAttr(self.request.content_lang)
         attr['id'] = content_id
         result.append(self._open('div', newline=False, attr=attr,
                                  allowed_attrs=['align'], **kw))
-        result.append(self.anchordef(aid))
+        result.append(self.anchordef('top'))
         if newline:
             result.append('\n')
         return ''.join(result)
@@ -444,23 +424,14 @@ class Formatter(FormatterBase):
         """ Close page content div.
 
         A link anchor is provided at the end of the div, with
-        an id of 'bottom' or 'bottom_xxxx' if the content_id argument
-        to the previus startContent() call was set to 'xxxx'.
+        an id of 'bottom' (modified by the request ID cache).
         """
 
-        # Setup id
-        try:
-            cid = self._content_ids.pop()
-        except:
-            cid = 'content'
-        if cid != 'content':
-            aid = 'bottom_%s' % (cid, )
-        else:
-            aid = 'bottom'
-
         result = []
-        result.append(self.anchordef(aid))
+        result.append(self.anchordef('bottom'))
         result.append(self._close('div', newline=newline))
+        if hasattr(self, 'page'):
+            self.request.end_include()
         return ''.join(result)
 
     def lang(self, on, lang_name):
@@ -587,7 +558,9 @@ class Formatter(FormatterBase):
         # Don't add newlines, \n, as it will break pre and
         # line-numbered code sections (from line_achordef() method).
         #return '<a id="%s"></a>' % (id, ) # do not use - this breaks PRE sections for IE
-        return '<span class="anchor" id="%s"></span>' % wikiutil.escape(id, 1)
+        id = self.make_id_unique(id)
+        id = self.qualify_id(id)
+        return '<span class="anchor" id="%s"></span>' % id
 
     def line_anchordef(self, lineno):
         if line_anchors:
@@ -609,10 +582,10 @@ class Formatter(FormatterBase):
         The id argument, if provided, is instead the id of this link
         itself and not of the target element the link references.
         """
-
         attrs = self._langAttr()
         if name:
-            attrs['href'] = '#%s' % name
+            name = self.sanitize_to_id(name)
+            attrs['href'] = '#' + self.qualify_id(name)
         if 'href' in kw:
             del kw['href']
         if on:
@@ -835,7 +808,6 @@ class Formatter(FormatterBase):
         non-break spaces.
         """
         tag = 'tt'
-        # Maybe we don't need this, because we have tt will be in inlineStack.
         self._in_code = on
         if on:
             return self._open(tag, allowed_attrs=[], **kw)
@@ -947,12 +919,15 @@ function togglenumber(did, nstart, nstep) {
         """
         _ = self.request.getText
         res = []
-        ci = self.request.make_unique_id('CA-%s_%03d' % (code_id, self._code_area_num))
         if on:
+            code_id = self.sanitize_to_id('CA-%s' % code_id)
+            ci = self.qualify_id(self.make_id_unique(code_id))
+
             # Open a code area
             self._in_code_area = 1
             self._in_code_line = 0
-            self._code_area_state = [ci, show, start, step, start]
+            # id in here no longer used
+            self._code_area_state = [None, show, start, step, start]
 
             # Open the code div - using left to right always!
             attr = {'class': 'codearea', 'lang': 'en', 'dir': 'ltr'}
@@ -970,13 +945,13 @@ function togglenumber(did, nstart, nstep) {
 document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
                 class="codenumbers">%s<\/a>');
 </script>
-''' % (self._code_area_state[0], self._code_area_state[2], self._code_area_state[3],
+''' % (ci, self._code_area_state[2], self._code_area_state[3],
        _("Toggle line numbers"))
                 res.append(toggleLineNumbersLink)
 
             # Open pre - using left to right always!
-            attr = {'id': self._code_area_state[0], 'lang': 'en', 'dir': 'ltr'}
-            res.append(self._open('pre', newline=True, attr=attr))
+            attr = {'id': ci, 'lang': 'en', 'dir': 'ltr'}
+            res.append(self._open('pre', newline=True, attr=attr, is_unique=True))
         else:
             # Close code area
             res = []
@@ -987,7 +962,6 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
 
             # Update state
             self._in_code_area = 0
-            self._code_area_num += 1
 
         return ''.join(res)
 
@@ -1207,17 +1181,13 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
             number = '.'.join([str(x) for x in self.request._fmt_hd_counters[self._show_section_numbers-1:]])
             if number: number += ". "
 
-        # make ID unique
-        if 'id' in kw:
-            kw['id'] = self.request.make_unique_id(kw['id'])
-
         # Add space before heading, easier to check source code
         result = '\n' + self._open('h%d' % heading_depth, **kw)
 
         if self.request.user.show_topbottom:
             result += "%s%s%s%s%s%s" % (
-                       self.url(1, "#bottom", do_escape=0), self.icon('bottom'), self.url(0),
-                       self.url(1, "#top", do_escape=0), self.icon('top'), self.url(0))
+                       self.anchorlink(1, "bottom"), self.icon('bottom'), self.anchorlink(0),
+                       self.anchorlink(1, "top"), self.icon('top'), self.anchorlink(0))
 
         return "%s%s" % (result, number)
 
@@ -1389,3 +1359,5 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
             return self._open(tag, **kw)
         return self._close(tag)
 
+    def sanitize_to_id(self, text):
+        return wikiutil.anchor_name_from_text(text)

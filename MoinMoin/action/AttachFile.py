@@ -554,9 +554,16 @@ def execute(pagename, request):
         else:
             msg = _('You are not allowed to save a drawing on this page.')
     elif do == 'upload':
-        if request.user.may.write(pagename):
+        overwrite = 0
+        if 'overwrite' in request.form:
+            try:
+                overwrite = int(request.form['overwrite'][0])
+            except:
+                pass
+        if (not overwrite and request.user.may.write(pagename)) or \
+           (overwrite and request.user.may.write(pagename) and request.user.may.delete(pagename)):
             if 'file' in request.form:
-                do_upload(pagename, request)
+                do_upload(pagename, request, overwrite)
             else:
                 # This might happen when trying to upload file names
                 # with non-ascii characters on Safari.
@@ -625,7 +632,7 @@ def upload_form(pagename, request, msg=''):
     request.theme.send_footer(pagename)
     request.theme.send_closing_html()
 
-def do_upload(pagename, request):
+def do_upload(pagename, request, overwrite):
     _ = request.getText
 
     # make filename
@@ -635,12 +642,6 @@ def do_upload(pagename, request):
     rename = None
     if 'rename' in request.form:
         rename = request.form['rename'][0].strip()
-    overwrite = 0
-    if 'overwrite' in request.form:
-        try:
-            overwrite = int(request.form['overwrite'][0])
-        except:
-            pass
 
     # if we use twisted, "rename" field is NOT optional, because we
     # can't access the client filename
