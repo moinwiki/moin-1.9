@@ -24,15 +24,22 @@ def test_wiki_conversion(request):
         ('some_text', {}, 'some_text'),
         ('["some_text"]', {}, '["some_text"]'),
         ('some_page', rename_some_page, 'some_page'), # not a link
+
         # page rename changes result
         ('["some_page"]', rename_some_page, '["some page"]'),
         ('[:some_page]', rename_some_page, '["some page"]'),
         ('[:some_page:]', rename_some_page, '["some page"]'),
         ('[:some_page:some text]', rename_some_page, '["some page" some text]'),
+        ('Self:some_page', rename_some_page, '["some page"]'),
+        ('wiki:Self:some_page', rename_some_page, '["some page"]'),
+        ('[wiki:Self:some_page]', rename_some_page, '["some page"]'),
+        ('[wiki:Self:some_page some text]', rename_some_page, '["some page" some text]'),
+
         # other markup changes we do
         ('[:other page]', {}, '["other page"]'),
         ('[:other page:]', {}, '["other page"]'),
         ('[:other page:other text]', {}, '["other page" other text]'),
+        # FAILS ('Self:CamelCase', {}, 'CamelCase'),
 
         # "nothing changed" checks
         ('attachment:OtherPage/with_underscore', rename_some_file, 'attachment:OtherPage/with_underscore'),
