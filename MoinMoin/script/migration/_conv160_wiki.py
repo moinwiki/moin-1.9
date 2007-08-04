@@ -29,20 +29,25 @@ from MoinMoin import i18n
 i18n.wikiLanguages = lambda : []
 from MoinMoin import config, wikiutil
 from MoinMoin.parser.text_moin_wiki import Parser
+from MoinMoin.action import AttachFile
 
 class Converter(Parser):
-    def __init__(self, request, raw, renames):
+    def __init__(self, request, pagename, raw, renames):
         self.request = request
+        self.pagename = pagename
         self.raw = raw
         self.renames = renames
         self.in_pre = False
         self._ = None
 
-    def _replace(self, item_type, item_name):
+    def _replace(self, key):
         """ replace a item_name if it is in the renames dict """
-        key = (item_type, item_name)
+        if key[0] == 'PAGE':
+            item_name = key[1] # pagename
+        elif key[0] == 'FILE':
+            item_name = key[2] # filename, key[1] is pagename
         try:
-            return self.renames[key]
+            return self.renames[key] # new pagename or new filename
         except KeyError:
             return item_name
 
@@ -110,10 +115,10 @@ class Converter(Parser):
         target_and_anchor = target.split('#', 1)
         if len(target_and_anchor) > 1:
             target, anchor = target_and_anchor
-            target = self._replace('PAGE', target)
+            target = self._replace(('PAGE', target))
             return '%s#%s' % (target, anchor)
         else:
-            target = self._replace('PAGE', target)
+            target = self._replace(('PAGE', target))
             return target
 
     def interwiki(self, target_and_text, **kw):
@@ -125,7 +130,7 @@ class Converter(Parser):
         #self.request.log("interwiki: split_wiki -> %s.%s.%s" % (wikiname,pagename,text))
 
         if wikiname.lower() == 'self': # [wiki:Self:LocalPage text] or [:LocalPage:text]
-            return target_and_text # self._word_repl(pagename, text)
+            return '[%s %s]' % (wikiutil.quoteName(pagename), text) # ["LocalPage" text]
 
         # check for image URL, and possibly return IMG tag
         if not kw.get('pretty_url', 0) and wikiutil.isPicture(pagename):
@@ -141,22 +146,25 @@ class Converter(Parser):
         _ = self._
         #self.request.log("attachment: target_and_text %s" % target_and_text)
         scheme, fname, text = wikiutil.split_wiki(target_and_text)
-        if not text:
-            text = fname
+        pagename, fname = AttachFile.absoluteName(fname, self.pagename)
+        from_this_page = pagename == self.pagename
+        fname = self._replace(('FILE', pagename, fname))
+        if '%20' in fname:
+            fname = fname.replace('%20', ' ')
+        fname = self._replace(('FILE', pagename, fname))
+        pagename = self._replace(('PAGE', pagename))
+        if from_this_page:
+            name = fname
+        else:
+            name = "%s/%s" % (pagename, fname)
+        if ' ' in name:
+            qname = wikiutil.quoteName(name)
+        else:
+            qname = name
 
-        if scheme == 'drawing':
-            return target_and_text # self.formatter.attachment_drawing(fname, text)
-
-        # check for image, and possibly return IMG tag (images are always inlined)
-        if not kw.get('pretty_url', 0) and wikiutil.isPicture(fname):
-            return target_and_text # self.formatter.attachment_image(fname)
-
-        # inline the attachment
-        if scheme == 'inline':
-            return target_and_text # self.formatter.attachment_inlined(fname, text)
-
-        return target_and_text # self.formatter.attachment_link(fname, text)
-
+        if text:
+            text = ' ' + text
+        return "%s:%s%s" % (scheme, qname, text)
 
     def _url_repl(self, word):
         """Handle literal URLs including inline images."""
@@ -186,12 +194,16 @@ class Converter(Parser):
             # split on closing quote
             target, linktext = word[1:].split(first_char, 1)
             target = self._replace_target(target)
-            return '[%s%s%s%s]' % (first_char, target, first_char, linktext)
+            target = wikiutil.quoteName(target)
         else: # not quoted
             # split on whitespace
             target, linktext = word.split(None, 1)
-            target = target.replace("_", " ")
-            return '[%s%s%s]' % (target, word[len(target)], linktext)
+            target = self._replace_target(target)
+            if ' ' in target:
+                target = wikiutil.quoteName(target)
+        if linktext:
+            linktext = ' ' + linktext
+        return '[%s%s]' % (target, linktext)
 
 
     def _url_bracket_repl(self, word):
@@ -203,8 +215,15 @@ class Converter(Parser):
             words = word[1:].split(':', 1)
             words[0] = self._replace_target(words[0])
             if len(words) == 1:
-                return '[:%s]' % words[0]
-            return '[:%s:%s]' % (words[0], words[1])
+                link = words[0]
+                link = wikiutil.quoteName(link)
+                return '[%s]' % link # use freelink
+            else:
+                link, text = words
+                link = wikiutil.quoteName(link)
+                if text:
+                    text = ' ' + text
+                return '[%s%s]' % (link, text) # use freelink with text
 
         return '[%s]' % word
 
@@ -307,7 +326,7 @@ class Converter(Parser):
             formatted_line = self.scan(scanning_re, line)
             self.request.write(formatted_line + '\r\n')
 
-def convert_wiki(intext, renames):
+def convert_wiki(pagename, intext, renames):
     """ Convert content written in wiki markup """
     import StringIO
     request = StringIO.StringIO()
@@ -315,7 +334,7 @@ def convert_wiki(intext, renames):
     if not intext.endswith('\r\n'):
         intext += '\r\n'
         noeol = True
-    p = Converter(request, intext, renames)
+    p = Converter(request, pagename, intext, renames)
     p.convert()
     res = request.getvalue()
     if noeol:
