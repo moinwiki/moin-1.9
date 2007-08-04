@@ -32,8 +32,8 @@ from MoinMoin.parser.text_moin_wiki import Parser
 from MoinMoin.action import AttachFile
 
 class Converter(Parser):
-    def __init__(self, request, pagename, raw, renames):
-        self.request = request
+    def __init__(self, pagename, raw, renames):
+        self.request = None
         self.pagename = pagename
         self.raw = raw
         self.renames = renames
@@ -126,7 +126,8 @@ class Converter(Parser):
         wikiname, pagename, text = wikiutil.split_wiki(rest)
         #self.request.log("interwiki: split_wiki -> %s.%s.%s" % (wikiname,pagename,text))
 
-        if wikiname.lower() == 'self': # [wiki:Self:LocalPage text] or [:LocalPage:text]
+        wikiname_lower = wikiname.lower()
+        if wikiname_lower == 'self' or wikiname_lower == self.request.cfg.interwikiname: # [wiki:Self:LocalPage text] or [:LocalPage:text]
             pagename = self._replace(('PAGE', pagename))
             if not text:
                 return '[%s]' % wikiutil.quoteName(pagename) # ["LocalPage"]
@@ -169,8 +170,14 @@ class Converter(Parser):
 
     def _interwiki_repl(self, word):
         """Handle InterWiki links."""
-        # XXX if we have access to the cfg, we can limit this to really existings interwiki identifiers
-        return self.interwiki("wiki:" + word)
+        wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, word)
+        if wikitag_bad:
+            return word
+        else:
+            result = self.interwiki("wiki:" + word)
+            if result.startswith("wiki:"):
+                result = result[5:]
+            return result
 
     def _url_repl(self, word):
         """Handle literal URLs including inline images."""
@@ -289,10 +296,11 @@ class Converter(Parser):
 
         return ""
 
-    def convert(self):
+    def convert(self, request):
         """ For each line, scan through looking for magic
             strings, outputting verbatim any intervening text.
         """
+        self.request = request
         # prepare regex patterns
         rules = self.formatting_rules.replace('\n', '|')
         if 1: # self.cfg.bang_meta:
@@ -346,17 +354,14 @@ class Converter(Parser):
             formatted_line = self.scan(scanning_re, line)
             self.request.write(formatted_line + '\r\n')
 
-def convert_wiki(pagename, intext, renames):
+def convert_wiki(request, pagename, intext, renames):
     """ Convert content written in wiki markup """
-    import StringIO
-    request = StringIO.StringIO()
     noeol = False
     if not intext.endswith('\r\n'):
         intext += '\r\n'
         noeol = True
-    p = Converter(request, pagename, intext, renames)
-    p.convert()
-    res = request.getvalue()
+    p = Converter(pagename, intext, renames)
+    res = request.redirectedOutput(p.convert, request)
     if noeol:
         res = res[:-2]
     return res

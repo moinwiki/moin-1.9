@@ -64,14 +64,14 @@ import mimetypes # this MUST be after wikiutil import!
 
 from _conv160_wiki import convert_wiki
 
-def markup_converter(pagename, text, renames):
+def markup_converter(request, pagename, text, renames):
     """ Convert the <text> content of page <pagename>, using <renames> dict
         to rename links correctly. Additionally, convert some changed markup.
     """
     if "#format wiki" not in text and "#format" in text:
         return text # this is not a wiki page, leave it as is
 
-    text = convert_wiki(pagename, text, renames)
+    text = convert_wiki(request, pagename, text, renames)
     return text
 
 
@@ -189,7 +189,7 @@ class PageRev:
     def write(self, data, rev_dir, rev=None):
         if rev is None:
             rev = self.rev
-        data = markup_converter(self.pagename, data, self.renames)
+        data = markup_converter(self.request, self.pagename, data, self.renames)
         fname = opj(rev_dir, '%08d' % rev)
         data = data.encode(config.charset)
         f = file(fname, "wb")
