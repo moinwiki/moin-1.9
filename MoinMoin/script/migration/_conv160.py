@@ -54,7 +54,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os.path, sys
+import os.path
 import codecs, urllib, glob
 
 from MoinMoin import config, wikiutil
@@ -62,13 +62,16 @@ from MoinMoin.script.migration.migutil import opj, listdir, copy_file, move_file
 
 import mimetypes # this MUST be after wikiutil import!
 
+from _conv160_wiki import convert_wiki
+
 def markup_converter(text, renames):
     """ Convert the <text> content of some Page, using <renames> dict to rename
         links correctly. Additionally, convert some changed markup.
     """
     if "#format wiki" not in text and "#format" in text:
         return text # this is not a wiki page, leave it as is
-    # TODO convert markup of page
+
+    text = convert_wiki(text, renames)
     return text
 
 
