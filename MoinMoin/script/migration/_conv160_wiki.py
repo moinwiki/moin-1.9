@@ -78,7 +78,6 @@ class Converter(Parser):
     _heading_repl = return_word
     _email_repl = return_word
     _macro_repl = return_word
-    _interwiki_repl = return_word
     _word_repl = return_word
     _indent_repl = return_word
     _li_none_repl = return_word
@@ -125,12 +124,14 @@ class Converter(Parser):
         # TODO: maybe support [wiki:Page http://wherever/image.png] ?
         scheme, rest = target_and_text.split(':', 1)
         wikiname, pagename, text = wikiutil.split_wiki(rest)
-        if not text:
-            text = pagename
         #self.request.log("interwiki: split_wiki -> %s.%s.%s" % (wikiname,pagename,text))
 
         if wikiname.lower() == 'self': # [wiki:Self:LocalPage text] or [:LocalPage:text]
-            return '[%s %s]' % (wikiutil.quoteName(pagename), text) # ["LocalPage" text]
+            pagename = self._replace(('PAGE', pagename))
+            if not text:
+                return '[%s]' % wikiutil.quoteName(pagename) # ["LocalPage"]
+            else:
+                return '[%s %s]' % (wikiutil.quoteName(pagename), text) # ["LocalPage" text]
 
         # check for image URL, and possibly return IMG tag
         if not kw.get('pretty_url', 0) and wikiutil.isPicture(pagename):
@@ -166,12 +167,17 @@ class Converter(Parser):
             text = ' ' + text
         return "%s:%s%s" % (scheme, qname, text)
 
+    def _interwiki_repl(self, word):
+        """Handle InterWiki links."""
+        # XXX if we have access to the cfg, we can limit this to really existings interwiki identifiers
+        return self.interwiki("wiki:" + word)
+
     def _url_repl(self, word):
         """Handle literal URLs including inline images."""
         scheme = word.split(":", 1)[0]
 
         if scheme == "wiki":
-            return word # self.interwiki(word)
+            return self.interwiki(word)
 
         if scheme in self.attachment_schemas:
             return self.attachment(word)
@@ -225,8 +231,22 @@ class Converter(Parser):
                     text = ' ' + text
                 return '[%s%s]' % (link, text) # use freelink with text
 
-        return '[%s]' % word
+        scheme_and_rest = word.split(":", 1)
+        if len(scheme_and_rest) == 2: # scheme given
+            scheme, rest = scheme_and_rest
+            if scheme == "wiki":
+                return self.interwiki(word, pretty_url=1)
+            if scheme in self.attachment_schemas:
+                return self.attachment(word, pretty_url=1)
 
+        words = word.split(None, 1)
+        if len(words) == 1:
+            link, text = words[0], ''
+        else:
+            link, text = words
+        if text:
+            text = ' ' + text
+        return '[%s%s]' % (link, text)
 
     # SCANNING ---------------------------------------------------------------
     def scan(self, scan_re, line):
