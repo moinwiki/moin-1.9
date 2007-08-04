@@ -21,6 +21,7 @@ def test_wiki_conversion(request):
         # "nothing changed" checks
         ('', {}, ''),
         ('CamelCase', {}, 'CamelCase'),
+        ('MoinMaster:CamelCase', {}, 'MoinMaster:CamelCase'),
         ('some_text', {}, 'some_text'),
         ('["some_text"]', {}, '["some_text"]'),
         ('some_page', rename_some_page, 'some_page'), # not a link
@@ -55,5 +56,5 @@ def test_wiki_conversion(request):
         ('attachment:OtherPage/keep%20blank', rename_some_file, 'attachment:"OtherPage/keep blank"'),
     ]
     for data, renames, expected in tests:
-        assert convert_wiki(pagename, data, renames) == expected
+        assert convert_wiki(request, pagename, data, renames) == expected
 
