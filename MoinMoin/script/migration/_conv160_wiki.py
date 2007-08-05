@@ -26,7 +26,7 @@
 
 import re, codecs
 from MoinMoin import i18n
-i18n.wikiLanguages = lambda : []
+i18n.wikiLanguages = lambda: []
 from MoinMoin import config, wikiutil
 from MoinMoin.parser.text_moin_wiki import Parser
 from MoinMoin.action import AttachFile
