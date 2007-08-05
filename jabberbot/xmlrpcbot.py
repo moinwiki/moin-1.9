@@ -306,10 +306,15 @@ class XMLRPCServer(Thread):
     def send_notification(self, jids, notification):
         """Instructs the XMPP component to send a notification
 
+        The notification dict has following entries:
+        'text' - notification text (REQUIRED)
+        'subject' - notification subject
+        'url_list' - a list of dicts describing attached URLs
+
         @param jids: a list of JIDs to send a message to (bare JIDs)
         @type jids: a list of str or unicode
-        @param text: a message body
-        @type text: unicode
+        @param notification: dictionary with notification data
+        @type notification: dict
 
         """
         command = cmd.NotificationCommand(jids, notification, async=True)
