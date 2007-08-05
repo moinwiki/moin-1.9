@@ -110,7 +110,7 @@ class Converter(Parser):
 
     # LINKS ------------------------------------------------------------------
     def _intelli_quote(self, name):
-        quote_triggers = ' "()' # XXX add more
+        quote_triggers = u''' "\'}]|:,.()?!''' # see also wiki parser
         quote_it = [True for c in quote_triggers if c in name]
         if quote_it:
             return wikiutil.quoteName(name)
