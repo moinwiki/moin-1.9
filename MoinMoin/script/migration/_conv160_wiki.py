@@ -77,7 +77,6 @@ class Converter(Parser):
     _ent_symbolic_repl = return_word
     _heading_repl = return_word
     _email_repl = return_word
-    _macro_repl = return_word
     _word_repl = return_word
     _indent_repl = return_word
     _li_none_repl = return_word
@@ -108,9 +107,13 @@ class Converter(Parser):
         self.in_pre = True
         return origw
 
+    def _macro_repl(self, word):
+        # XXX later check whether some to be renamed pagename is used as macro param
+        return word
+
     # LINKS ------------------------------------------------------------------
     def _intelli_quote(self, name):
-        quote_triggers = u''' "\'}]|:,.()?!''' # see also wiki parser
+        quote_triggers = u''' "'()[]''' # u''' "\'}]|:,.()?!''' # see also wiki parser
         quote_it = [True for c in quote_triggers if c in name]
         if quote_it:
             return wikiutil.quoteName(name)

@@ -5,7 +5,6 @@
     TODO:
     * add some ../some_page test
     * add some /some_page test
-    * add more quote_triggers
     * fix parser/converter anchor link handling
     * emit a warning if we find some page name that was renamed as a macro argument?
     * shall we support camelcase renaming?
@@ -15,21 +14,6 @@
       or ` ` will have to get handled manually.
     * converter does not touch macro arguments, they will have to get handled
       manually
-
-Remaining problems:
-
- [wiki:/RecommendPage]
- [wiki:/farms farms]
-
- [wiki:MacroMarket/EmbedObject EO]
- [wiki:SeaPig/BrianDorsey]            ambiguity!!! can be resolved with some interwiki map lookup
-                                      and transformed to wiki:SeaPig:BrianDorsey if SeaPig is in 
-                                      interwiki map, but no page SeaPig exists.
-
- [:MeatBall:CleanLinking meatball-wiki: clean linking]
- [:Infrastructure:Infrastructure] optimize to ["Infrastructure"]
- [attachment:My%20Attachment.jpg:it works]
- [wiki:LinuxWiki: LinuxWiki.de] 
 
     @copyright: 2007 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
@@ -51,6 +35,20 @@ def test_wiki_conversion(request):
         # NEEDED? ('CamelCase', {}, 'CamelCase'),
         # FAILS ('RenameThis', rename_some_page, 'ThisRenamed'),
         # NEEDED? ('!RenameThis', {}, '!RenameThis'), # not a link
+
+        # FAILING tests:
+        #('[wiki:/OtherPage]', rename_some_page, '[wiki:/OtherPage]'),
+        #('[wiki:/OtherPage other page]', rename_some_page, '[wiki:/OtherPage other page]'),
+        # ('[:Something:Something]', {}, '["Something"]'),
+        #('[attachment:My%20Attachment.jpg:it works]', {}, '[attachment:"My Attachment.jpg" it works]'),
+        #('[wiki:LinuxWiki: LinuxWiki.de]', {}, '[wiki:LinuxWiki: LinuxWiki.de]'),
+        #('[:MeatBall:CleanLinking meatball-wiki: clean linking]', {}, '[:MeatBall:CleanLinking meatball-wiki: clean linking]'),
+
+        # ambiguity!!! can be resolved with some interwiki map lookup
+        # and transformed to wiki:SeaPig:BrianDorsey if SeaPig is in 
+        # interwiki map, but no page SeaPig exists.
+        #('[wiki:MacroMarket/EmbedObject EO]', {}, '["MacroMarket/EmbedObject" EO]'),
+        ('[wiki:SeaPig/BrianDorsey]', {}, '[wiki:SeaPig:BrianDorsey]'),
 
         # "nothing changed" checks
         ('', {}, ''),
