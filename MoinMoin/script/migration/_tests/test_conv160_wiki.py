@@ -5,9 +5,16 @@
     TODO:
     * add some ../some_page test
     * add some /some_page test
+    * add more quote_triggers
     * fix parser/converter anchor link handling
-    * emit a warning if we find some page name that was renamed as a macro argument
+    * emit a warning if we find some page name that was renamed as a macro argument?
     * shall we support camelcase renaming?
+
+    Limitations of this converter:
+    * converter does not touch "pre sections", thus markup examples in {{{ }}}
+      or ` ` will have to get handled manually.
+    * converter does not touch macro arguments, they will have to get handled
+      manually
 
     @copyright: 2007 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
@@ -43,6 +50,9 @@ def test_wiki_conversion(request):
         ('http://some_server/some_page', rename_some_page, 'http://some_server/some_page'), # external link
         ('[http://some_server/some_page]', rename_some_page, '[http://some_server/some_page]'), # external link
         ('[#some_page]', rename_some_page, '[#some_page]'), # link to anchor that has same name
+        ('[attachment:some_page.png]', rename_some_page, '[attachment:some_page.png]'), # att, not page
+        ('[attachment:some_page.png test picture]', rename_some_page, '[attachment:some_page.png test picture]'), # att, not page
+        ('[attachment:some_page.txt attachment:some_page.png]', rename_some_page, '[attachment:some_page.txt attachment:some_page.png]'),
 
         # page rename changes result
         ('["some_page"]', rename_some_page, '["some page"]'),
@@ -51,15 +61,15 @@ def test_wiki_conversion(request):
         ('[:some_page:some text]', rename_some_page, '["some page" some text]'),
         ('Self:some_page', rename_some_page, '["some page"]'),
         ('wiki:Self:some_page', rename_some_page, '["some page"]'),
-        # XXX FAILS ('wiki:Self:some_page#some_anchor', rename_some_page, '["some page"#some_anchor]'),
-        ('[wiki:Self:some_page]', rename_some_page, '["some page"]'),
         ('[wiki:Self:some_page some text]', rename_some_page, '["some page" some text]'),
+        # XXX FAILS ('wiki:Self:some_page#some_anchor', rename_some_page, '["some page"#some_anchor]'),
 
         # other markup changes we do
         ('[:other page]', {}, '["other page"]'),
         ('[:other page:]', {}, '["other page"]'),
         ('[:other page:other text]', {}, '["other page" other text]'),
         # FAILS ('Self:CamelCase', {}, 'CamelCase'),
+        ('[wiki:WikiPedia:Lynx_%28web_browser%29 Lynx]', {}, '[wiki:WikiPedia:"Lynx_(web_browser)" Lynx]'),
 
         # "nothing changed" checks
         ('attachment:OtherPage/with_underscore', rename_some_file, 'attachment:OtherPage/with_underscore'),

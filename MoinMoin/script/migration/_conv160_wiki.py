@@ -109,6 +109,13 @@ class Converter(Parser):
         return origw
 
     # LINKS ------------------------------------------------------------------
+    def _intelli_quote(self, name):
+        quote_triggers = ' "()' # XXX add more
+        quote_it = [True for c in quote_triggers if c in name]
+        if quote_it:
+            return wikiutil.quoteName(name)
+        else:
+            return name
 
     def _replace_target(self, target):
         target_and_anchor = target.split('#', 1)
@@ -121,32 +128,17 @@ class Converter(Parser):
             return target
 
     def interwiki(self, target_and_text, **kw):
-        # TODO: maybe support [wiki:Page http://wherever/image.png] ?
         scheme, rest = target_and_text.split(':', 1)
         wikiname, pagename, text = wikiutil.split_wiki(rest)
-        #self.request.log("interwiki: split_wiki -> %s.%s.%s" % (wikiname,pagename,text))
-
-        wikiname_lower = wikiname.lower()
-        if wikiname_lower == 'self' or wikiname_lower == self.request.cfg.interwikiname: # [wiki:Self:LocalPage text] or [:LocalPage:text]
+        if wikiname in ('Self', self.request.cfg.interwikiname): # our wiki
             pagename = self._replace(('PAGE', pagename))
-            if not text:
-                return '[%s]' % wikiutil.quoteName(pagename) # ["LocalPage"]
-            else:
-                return '[%s %s]' % (wikiutil.quoteName(pagename), text) # ["LocalPage" text]
-
-        # check for image URL, and possibly return IMG tag
-        if not kw.get('pretty_url', 0) and wikiutil.isPicture(pagename):
-            dummy, wikiurl, dummy, wikitag_bad = wikiutil.resolve_wiki(self.request, rest)
-            href = wikiutil.join_wiki(wikiurl, pagename)
-            #self.request.log("interwiki: join_wiki -> %s.%s.%s" % (wikiurl,pagename,href))
-            return target_and_text # self.formatter.image(src=href)
-
-        return target_and_text # wikiname, pagename, text
+        #pagename = pagename.replace('_', ' ') # better not touch this
+        pagename = wikiutil.url_unquote(pagename)
+        return scheme, wikiname, pagename, text
 
     def attachment(self, target_and_text, **kw):
         """ This gets called on attachment URLs """
         _ = self._
-        #self.request.log("attachment: target_and_text %s" % target_and_text)
         scheme, fname, text = wikiutil.split_wiki(target_and_text)
         pagename, fname = AttachFile.absoluteName(fname, self.pagename)
         from_this_page = pagename == self.pagename
@@ -159,14 +151,10 @@ class Converter(Parser):
             name = fname
         else:
             name = "%s/%s" % (pagename, fname)
-        if ' ' in name:
-            qname = wikiutil.quoteName(name)
-        else:
-            qname = name
-
+        name = self._intelli_quote(name)
         if text:
             text = ' ' + text
-        return "%s:%s%s" % (scheme, qname, text)
+        return "%s:%s%s" % (scheme, name, text)
 
     def _interwiki_repl(self, word):
         """Handle InterWiki links."""
@@ -174,17 +162,24 @@ class Converter(Parser):
         if wikitag_bad:
             return word
         else:
-            result = self.interwiki("wiki:" + word)
-            if result.startswith("wiki:"):
-                result = result[5:]
-            return result
+            scheme, wikiname, pagename, text = self.interwiki("wiki:" + word)
+            if wikiname == 'Self':
+                return '["%s"]' % pagename # optimize special case
+            else:
+                pagename = self._intelli_quote(pagename)
+                return "%s:%s" % (wikiname, pagename)
 
     def _url_repl(self, word):
         """Handle literal URLs including inline images."""
         scheme = word.split(":", 1)[0]
 
         if scheme == "wiki":
-            return self.interwiki(word)
+            scheme, wikiname, pagename, text = self.interwiki(word)
+            if wikiname == 'Self':
+                return '["%s"]' % pagename # optimize special case
+            else:
+                pagename = self._intelli_quote(pagename)
+                return "%s:%s:%s" % (scheme, wikiname, pagename)
 
         if scheme in self.attachment_schemas:
             return self.attachment(word)
@@ -212,8 +207,7 @@ class Converter(Parser):
             # split on whitespace
             target, linktext = word.split(None, 1)
             target = self._replace_target(target)
-            if ' ' in target:
-                target = wikiutil.quoteName(target)
+            target = self._intelli_quote(target)
         if linktext:
             linktext = ' ' + linktext
         return '[%s%s]' % (target, linktext)
@@ -242,9 +236,18 @@ class Converter(Parser):
         if len(scheme_and_rest) == 2: # scheme given
             scheme, rest = scheme_and_rest
             if scheme == "wiki":
-                return self.interwiki(word, pretty_url=1)
+                scheme, wikiname, pagename, text = self.interwiki(word, pretty_url=1)
+                if wikiname == 'Self':
+                    if text:
+                        text = ' %s' % text
+                    return '["%s"%s]' % (pagename, text)
+                else:
+                    pagename = self._intelli_quote(pagename)
+                    if text:
+                        text = ' %s' % text
+                    return "[%s:%s:%s%s]" % (scheme, wikiname, pagename, text)
             if scheme in self.attachment_schemas:
-                return self.attachment(word, pretty_url=1)
+                return '[%s]' % self.attachment(word, pretty_url=1)
 
         words = word.split(None, 1)
         if len(words) == 1:
