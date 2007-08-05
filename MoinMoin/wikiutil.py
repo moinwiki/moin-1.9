@@ -530,8 +530,10 @@ def get_max_mtime(file_list, page):
     if page.exists():
         # exists() is cached and thus cheaper than mtime_usecs()
         timestamps.append(version2timestamp(page.mtime_usecs()))
-    return max(timestamps)
-
+    if timestamps:
+        return max(timestamps)
+    else:
+        return 0 # no files / pages there
 
 def load_wikimap(request):
     """ load interwiki map (once, and only on demand) """
