@@ -30,7 +30,9 @@
     d) users: generate new name[] for lists and name{} for dicts
 
     TODO:
-        * process page content / convert markup
+        * currently it converts the last pagerev (good for diff -r)
+        * after debugging/testing is finished and it works perfect,
+        change this to create a new revision with the conversion results
 
     DONE:
         pass 1
@@ -49,6 +51,7 @@
          * renamed attachment names in local edit-log
         * migrate separate user bookmark files into user profiles
         * support new dict/list syntax in user profiles
+        * process page content / convert markup
 
     @copyright: 2007 by Thomas Waldmann
     @license: GNU GPL, see COPYING for details.
@@ -186,20 +189,20 @@ class PageRev:
         data = data.decode(config.charset)
         return data
 
-    def write(self, data, rev_dir, rev=None):
-        if rev is None:
-            rev = self.rev
-        data = markup_converter(self.request, self.pagename, data, self.renames)
+    def write(self, data, rev_dir, convert):
+        rev = self.rev
+        if convert:
+            data = markup_converter(self.request, self.pagename, data, self.renames)
         fname = opj(rev_dir, '%08d' % rev)
         data = data.encode(config.charset)
         f = file(fname, "wb")
         f.write(data)
         f.close()
 
-    def copy(self, rev_dir, renames):
+    def copy(self, rev_dir, renames, convert):
         self.renames = renames
         data = self.read()
-        self.write(data, rev_dir)
+        self.write(data, rev_dir, convert)
 
 
 class Attachment:
@@ -290,7 +293,10 @@ class Page:
             rev_dir = opj(page_dir, 'revisions')
             os.makedirs(rev_dir)
             for rev in self.revlist:
-                self.revisions[rev].copy(rev_dir, self.renames)
+                if int(rev) == self.current:
+                    self.revisions[rev].copy(rev_dir, self.renames, convert=True)
+                else:
+                    self.revisions[rev].copy(rev_dir, self.renames, convert=False)
         # copy attachments
         if self.attachments is not None:
             attach_dir = opj(page_dir, 'attachments')
