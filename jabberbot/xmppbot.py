@@ -256,29 +256,32 @@ class XMPPBot(Client, Thread):
         """
         # Handle normal notifications
         if isinstance(command, cmd.NotificationCommand):
+            cmd_data = command.notification
+
             for recipient in command.jids:
                 jid = JID(recipient)
                 jid_text = jid.bare().as_utf8()
 
-                _ = self.get_text(jid_text)
-                text = command.notification['text']
+                text = cmd_data['text']
+                subject = cmd_data.get('subject', '')
+                msg_data = command.notification
 
                 if isinstance(command, cmd.NotificationCommandI18n):
                     # Translate&interpolate the message with data
-                    gettext_func = self.get_text(recipient)
-                    text = command.translate(gettext_func)
+                    gettext_func = self.get_text(jid_text)
+                    text, subject = command.translate(gettext_func)
+                    msg_data = {'text': text, 'subject': subject,
+                                'url_list': cmd_data.get('url_list', [])}
 
                 # Check if contact is DoNotDisturb.
                 # If so, queue the message for delayed delivery.
-                try:
-                    contact = self.contacts[jid_text]
+                contact = self.contacts.get(jid_text, '')
+                if contact:
                     if command.async and contact.is_dnd() and not ignore_dnd:
                         contact.messages.append(command)
                         return
-                except KeyError:
-                    pass
 
-                self.send_message(jid, command.notification, command.msg_type)
+                self.send_message(jid, msg_data, command.msg_type)
 
             return
 
@@ -369,11 +372,7 @@ Current version: %(version)s""") % {
         @type jid: pyxmpp.jid.JID
 
         """
-        if data.has_key('subject'):
-            subject = data['subject']
-        else:
-            subject = ''
-
+        subject = data.get('subject', '')
         message = Message(to_jid=jid, body=data['text'], stanza_type=msg_type, subject=subject)
 
         if data.has_key('url_list'):

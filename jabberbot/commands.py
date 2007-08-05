@@ -42,12 +42,15 @@ class NotificationCommandI18n(NotificationCommand):
         """Translate the message using a provided gettext function
 
         @param gettext_func: a unary gettext function
-        @return: translated message
+        @return: translated message and subject
+        @rtype: tuple
         """
         if self.notification.has_key('data'):
-            return gettext_func(self.notification['text']) % self.notification['data']
+            msg =  gettext_func(self.notification['text']) % self.notification['data']
         else:
-            return gettext_func(self.notification['text'])
+            msg = gettext_func(self.notification['text'])
+
+        return (msg, gettext_func(self.notification.get('subject', '')))
 
 class AddJIDToRosterCommand:
     """Class representing a request to add a new jid to roster"""

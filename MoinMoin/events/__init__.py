@@ -115,11 +115,11 @@ class FileAttachedEvent(PageEvent):
     description = _(u"""A new attachment has been added""")
     req_superuser = False
 
-    def __init__(self, request, pagename, name, size):
+    def __init__(self, request, pagename, filename, size):
         PageEvent.__init__(self, request)
         self.request = request
         self.pagename = pagename
-        self.name = name
+        self.filename = filename
         self.size = size
 
 
