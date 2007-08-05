@@ -16,6 +16,21 @@
     * converter does not touch macro arguments, they will have to get handled
       manually
 
+Remaining problems:
+
+ [wiki:/RecommendPage]
+ [wiki:/farms farms]
+
+ [wiki:MacroMarket/EmbedObject EO]
+ [wiki:SeaPig/BrianDorsey]            ambiguity!!! can be resolved with some interwiki map lookup
+                                      and transformed to wiki:SeaPig:BrianDorsey if SeaPig is in 
+                                      interwiki map, but no page SeaPig exists.
+
+ [:MeatBall:CleanLinking meatball-wiki: clean linking]
+ [:Infrastructure:Infrastructure] optimize to ["Infrastructure"]
+ [attachment:My%20Attachment.jpg:it works]
+ [wiki:LinuxWiki: LinuxWiki.de] 
+
     @copyright: 2007 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
