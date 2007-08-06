@@ -12,7 +12,7 @@
 # First, XML RPC -> XMPP commands
 class NotificationCommand:
     """Class representing a notification request"""
-    def __init__(self, jids, text, subject="", async=True):
+    def __init__(self, jids, notification, msg_type="message", async=True):
         """A constructor
 
         @param jids: a list of jids to sent this message to
@@ -23,10 +23,34 @@ class NotificationCommand:
         if type(jids) != list:
             raise Exception("jids argument must be a list!")
 
+        self.notification = notification
         self.jids = jids
-        self.text = text
-        self.subject = subject
         self.async = async
+        self.msg_type = msg_type
+
+class NotificationCommandI18n(NotificationCommand):
+    """Notification request that should be translated by the XMPP bot"""
+    def __init__(self, jids, notification, msg_type="message", async=True):
+        """A constructor
+
+        Params as in NotificationCommand.
+
+        """
+        NotificationCommand.__init__(self, jids, notification, msg_type, async)
+
+    def translate(self, gettext_func):
+        """Translate the message using a provided gettext function
+
+        @param gettext_func: a unary gettext function
+        @return: translated message and subject
+        @rtype: tuple
+        """
+        if self.notification.has_key('data'):
+            msg =  gettext_func(self.notification['text']) % self.notification['data']
+        else:
+            msg = gettext_func(self.notification['text'])
+
+        return (msg, gettext_func(self.notification.get('subject', '')))
 
 class AddJIDToRosterCommand:
     """Class representing a request to add a new jid to roster"""
