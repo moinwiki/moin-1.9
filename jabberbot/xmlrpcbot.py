@@ -271,14 +271,14 @@ class XMLRPCServer(Thread):
             error = "You must set a (long) secret string"
             self.log.critical(error)
             raise ConfigurationError(error)
-        
+
         self.server = None
 
     def run(self):
         """Starts the server / thread"""
 
         self.server = SimpleXMLRPCServer((config.xmlrpc_host, config.xmlrpc_port))
-        
+
         # Register methods having an "export" attribute as XML RPC functions and
         # decorate them with a check for a shared (wiki-bot) secret.
         items = self.__class__.__dict__.items()
