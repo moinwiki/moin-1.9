@@ -264,6 +264,7 @@ class XMLRPCServer(Thread):
         self.commands = commands
         self.verbose = config.verbose
         self.log = logging.getLogger("log")
+        self.config = config
 
         if config.secret:
             self.secret = config.secret
@@ -277,7 +278,7 @@ class XMLRPCServer(Thread):
     def run(self):
         """Starts the server / thread"""
 
-        self.server = SimpleXMLRPCServer((config.xmlrpc_host, config.xmlrpc_port))
+        self.server = SimpleXMLRPCServer((self.config.xmlrpc_host, self.config.xmlrpc_port))
 
         # Register methods having an "export" attribute as XML RPC functions and
         # decorate them with a check for a shared (wiki-bot) secret.
