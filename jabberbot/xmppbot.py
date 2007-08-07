@@ -246,6 +246,7 @@ class XMPPBot(Client, Thread):
         except Queue.Empty:
             return False
 
+    # XXX: refactor this, if-elif sequence is already too long
     def handle_command(self, command, ignore_dnd=False):
         """Excecutes commands from other components
 
@@ -340,6 +341,32 @@ Current version: %(version)s""") % {
             if command.jid in self.contacts:
                 self.contacts[command.jid].language = command.language
 
+        elif isinstance(command, cmd.Search):
+            if command.presentation == u"text":
+                if not command.data:
+                    msg = _("There are no pages matching your search criteria!")
+                    self.send_message(command.jid, {'text': msg})
+                    return
+
+                # This hardcoded limitation relies on (mostly correct) assumption that Jabber
+                # servers have rather tight traffic limits. Sending more than 25 results is likely
+                # to take a second or two - users should not have to wait longer (+search time!).
+                elif len(command.data) > 25:
+                    msg =  _("There are too many results (%(number)s). Limiting to first 25 entries.") % {'number': str(len(command.data))}
+                    self.send_message(command.jid, {'text': msg})
+                    command.data = command.data[:25]
+
+                #intro = _("Following pages match your search:\n%(results)s")
+
+                results = [{'description': result[0], 'url': result[2]} for result in command.data]
+
+                # One-space text to work around a bug in Psi
+                data = {'text': ' ', 'url_list': results}
+                self.send_message(command.jid, data, u"chat")
+            else:
+                pass
+                # TODO: implement data forms here
+
     def ask_for_subscription(self, jid):
         """Sends a <presence/> stanza with type="subscribe"
 
@@ -394,7 +421,7 @@ Current version: %(version)s""") % {
         search_type2 = _("Full-text search")
         search_label = _("Search type")
         search_label2 = _("Search text")
-
+        forms_warn = _("If you see this, your client probably doesn't support Data Forms.")
 
         title_search = forms.Option("t", search_type1)
         full_search = forms.Option("f", search_type2)
@@ -403,7 +430,7 @@ Current version: %(version)s""") % {
         form.add_field(name="search_type", options=[title_search, full_search], field_type="list-single", label=search_label)
         form.add_field(name="search", field_type="text-single", label=search_label2)
 
-        message = Message(to_jid=jid, body=_("Please specify the search criteria."), subject=_("Wiki search"))
+        message = Message(to_jid=jid, body=forms_warn, subject=_("Wiki search"))
         message.add_content(form)
         self.get_stream().send(message)
 
@@ -492,7 +519,7 @@ Current version: %(version)s""") % {
             # For unknown command return a generic help message
             return self.reply_help(sender)
 
-    def do_search(self, jid, term, search_type):
+    def do_search(self, jid, search_type, presentation, *args):
         """Performs a Wiki search of term
 
         @param jid: Jabber ID of user performing a search
@@ -501,9 +528,11 @@ Current version: %(version)s""") % {
         @type term: unicode
         @param search_type: type of search; either "text" or "title"
         @type search_type: unicode
+        @param presentation: how to present the results; "text" or "dataforms"
+        @type presentation: unicode
 
         """
-        search = cmd.Search(jid, term, search_type)
+        search = cmd.Search(jid, search_type, presentation=presentation, *args)
         self.from_commands.put_nowait(search)
 
     def help_on(self, jid, command):
