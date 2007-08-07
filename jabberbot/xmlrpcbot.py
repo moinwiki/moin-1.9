@@ -42,9 +42,7 @@ def _xmlrpc_decorator(function):
                 if self.token:
                     self.multicall.applyAuthToken(self.token)
 
-                if function(self, command) != u"SUCCESS":
-                    self.warn_no_credentials(command.jid)
-
+                function(self, command)
                 self.commands_out.put_nowait(command)
 
             except xmlrpclib.Fault, fault:
@@ -158,19 +156,31 @@ class XMLRPCClient(Thread):
         warning = cmd.NotificationCommandI18n([jid], cmddata, async=False)
         self.commands_out.put_nowait(warning)
 
+    def _get_multicall_result(self, jid):
+        """Returns multicall results and issues a warning if there's an auth error
+        
+        @param jid: a full JID to use if there's an error
+        @type jid: str
+        
+        """
+
+        if not self.token:
+            result = self.multicall()[0]
+            token_result = u"FAILURE"
+        else:
+            token_result, result = self.multicall()
+
+        if token_result != u"SUCCESS":
+            self.warn_no_credentials(jid)
+
+        return result
+
+
     def get_page(self, command):
         """Returns a raw page"""
 
-        token_result = u"FAILURE"
         self.multicall.getPage(command.pagename)
-
-        if not self.token:
-            getpage_result = self.multicall()[0]
-        else:
-            token_result, getpage_result = self.multicall()
-
-        command.data = getpage_result
-        return token_result
+        command.data = self._get_multicall_result(command.jid)
 
     get_page = _xmlrpc_decorator(get_page)
 
@@ -178,16 +188,8 @@ class XMLRPCClient(Thread):
     def get_page_html(self, command):
         """Returns a html-formatted page"""
 
-        token_result = u"FAILURE"
         self.multicall.getPageHTML(command.pagename)
-
-        if not self.token:
-            getpagehtml_result = self.multicall()[0]
-        else:
-            token_result, getpagehtml_result = self.multicall()
-
-        command.data = getpagehtml_result
-        return token_result
+        command.data = self._get_multicall_result(command.jid)
 
     get_page_html = _xmlrpc_decorator(get_page_html)
 
@@ -198,20 +200,12 @@ class XMLRPCClient(Thread):
         # Dummy function, so that the string appears in a .po file
         _ = lambda x: x
 
-        token_result = u"FAILURE"
         cmd_data = {'text': _("This command may take a while to complete, please be patient...")}
         info = cmd.NotificationCommandI18n([command.jid], cmd_data, async=False, msg_type=u"chat")
         self.commands_out.put_nowait(info)
 
         self.multicall.getAllPages()
-
-        if not self.token:
-            getpagelist_result = self.multicall()[0]
-        else:
-            token_result, getpagelist_result = self.multicall()
-
-        command.data = getpagelist_result
-        return token_result
+        command.data = self._get_multicall_result(command.jid)
 
     get_page_list = _xmlrpc_decorator(get_page_list)
 
@@ -219,23 +213,15 @@ class XMLRPCClient(Thread):
     def get_page_info(self, command):
         """Returns detailed information about a given page"""
 
-        token_result = u"FAILURE"
         self.multicall.getPageInfo(command.pagename)
-
-        if not self.token:
-            getpageinfo_result = self.multicall()[0]
-        else:
-            token_result, getpageinfo_result = self.multicall()
-
-        command.data = getpageinfo_result
-        return token_result
+        command.data = self._get_multicall_result(command.jid)
 
     get_page_info = _xmlrpc_decorator(get_page_info)
 
     def do_search(self, command):
         """Performs a search"""
 
-        token_result = u"FAILURE"
+        # Dummy function, so that the string appears in a .po file
         _ = lambda x: x
 
         cmd_data = {'text': _("This command may take a while to complete, please be patient...")}
@@ -244,14 +230,7 @@ class XMLRPCClient(Thread):
 
         c = command
         self.multicall.searchPagesEx(c.term, c.search_type, 30, c.case, c.mtime, c.regexp)
-
-        if not self.token:
-            getpageinfo_result = self.multicall()[0]
-        else:
-            token_result, search_result = self.multicall()
-
-        command.data = search_result
-        return token_result
+        command.data = self._get_multicall_result(command.jid)
 
     do_search = _xmlrpc_decorator(do_search)
 
