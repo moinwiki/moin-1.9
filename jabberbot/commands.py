@@ -129,10 +129,14 @@ class Search(BaseDataCommand):
     description = u"perform a wiki search"
     parameter_list = u"{title|text} term"
 
-    def __init__(self, jid, term, search_type):
+    def __init__(self, jid, search_type, *args):
         BaseDataCommand.__init__(self, jid)
-        self.term = term
+        self.term = ' '.join(args)
         self.search_type = search_type
+        self.presentation = "text" # "text" or "dataforms"
+        self.case = False
+        self.mtime = None
+        self.regexp = False
 
 class GetUserLanguage:
     """Request user's language information from wiki"""
