@@ -41,15 +41,23 @@ class Converter(Parser):
         self._ = None
 
     def _replace(self, key):
-        """ replace a item_name if it is in the renames dict """
-        if key[0] == 'PAGE':
-            item_name = key[1] # pagename
-        elif key[0] == 'FILE':
-            item_name = key[2] # filename, key[1] is pagename
-        try:
-            return self.renames[key] # new pagename or new filename
-        except KeyError:
-            return item_name
+        """ replace a item_name if it is in the renames dict
+            key is either a 2-tuple ('PAGE', pagename)
+            or a 3-tuple ('FILE', pagename, filename)
+        """
+        current_page = self.pagename
+        item_type, page_name, file_name = (key + (None, ))[:3]
+        abs_page_name = wikiutil.AbsPageName(self.request, current_page, page_name)
+        if item_type == 'PAGE':
+            item_name = page_name
+            key = (item_type, abs_page_name)
+        elif item_type == 'FILE':
+            item_name = file_name
+            key = (item_type, abs_page_name, file_name)
+        new_name = self.renames.get(key, item_name)
+        if new_name != item_name and abs_page_name != page_name:
+            pass # TODO we have to fix the (absolute) new_name to be a relative name (as it was before)
+        return new_name
 
     def return_word(self, word):
         return word
@@ -211,6 +219,7 @@ class Converter(Parser):
             target, linktext = word.split(None, 1)
             target = self._replace_target(target)
             target = self._intelli_quote(target)
+        linktext = linktext.strip()
         if linktext:
             linktext = ' ' + linktext
         return '[%s%s]' % (target, linktext)
