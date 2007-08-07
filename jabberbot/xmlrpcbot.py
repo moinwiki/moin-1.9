@@ -122,13 +122,15 @@ class XMLRPCClient(Thread):
             self.get_page_info(command)
         elif isinstance(command, cmd.GetUserLanguage):
             self.get_language_by_jid(command)
+        elif isinstance(command, cmd.Search):
+            self.do_search(command)
 
     def report_error(self, jid, text, data={}):
         # Dummy function, so that the string appears in a .po file
         _ = lambda x: x
 
-        cmddata = {'text': text, 'subject': _("Error"), 'data': data}
-        report = cmd.NotificationCommandI18n(jid, cmddata, async=False)
+        cmddata = {'text': text, 'data': data}
+        report = cmd.NotificationCommandI18n(jid, cmddata, msg_type=u"chat", async=False)
         self.commands_out.put_nowait(report)
 
     def get_auth_token(self, jid):
@@ -152,7 +154,7 @@ class XMLRPCClient(Thread):
         # Dummy function, so that the string appears in a .po file
         _ = lambda x: x
 
-        cmddata = {'text': _("Credentials check failed, you may be unable to see all information.")}
+        cmddata = {'text': _("Credentials check failed, you might be unable to see all information.")}
         warning = cmd.NotificationCommandI18n([jid], cmddata, async=False)
         self.commands_out.put_nowait(warning)
 
@@ -229,6 +231,29 @@ class XMLRPCClient(Thread):
         return token_result
 
     get_page_info = _xmlrpc_decorator(get_page_info)
+
+    def do_search(self, command):
+        """Performs a search"""
+
+        token_result = u"FAILURE"
+        _ = lambda x: x
+
+        cmd_data = {'text': _("This command may take a while to complete, please be patient...")}
+        info = cmd.NotificationCommandI18n([command.jid], cmd_data, async=False, msg_type=u"chat")
+        self.commands_out.put_nowait(info)
+
+        c = command
+        self.multicall.searchPagesEx(c.term, c.search_type, 30, c.case, c.mtime, c.regexp)
+
+        if not self.token:
+            getpageinfo_result = self.multicall()[0]
+        else:
+            token_result, search_result = self.multicall()
+
+        command.data = search_result
+        return token_result
+
+    do_search = _xmlrpc_decorator(do_search)
 
     def get_language_by_jid(self, command):
         """Returns language of the a user identified by the given JID"""
