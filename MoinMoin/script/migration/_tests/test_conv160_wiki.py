@@ -45,7 +45,7 @@ def test_wiki_conversion(request):
         #('[:MeatBall:CleanLinking meatball-wiki: clean linking]', {}, '[:MeatBall:CleanLinking meatball-wiki: clean linking]'),
 
         # ambiguity!!! can be resolved with some interwiki map lookup
-        # and transformed to wiki:SeaPig:BrianDorsey if SeaPig is in 
+        # and transformed to wiki:SeaPig:BrianDorsey if SeaPig is in
         # interwiki map, but no page SeaPig exists.
         #('[wiki:MacroMarket/EmbedObject EO]', {}, '["MacroMarket/EmbedObject" EO]'),
         ('[wiki:SeaPig/BrianDorsey]', {}, '[wiki:SeaPig:BrianDorsey]'),
