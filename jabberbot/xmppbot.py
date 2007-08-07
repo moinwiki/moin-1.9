@@ -34,7 +34,7 @@ class Contact:
 
     def __init__(self, jid, resource, priority, show, language=None):
         self.jid = jid
-        self.resources = {resource: {'show': show, 'priority': priority}
+        self.resources = {resource: {'show': show, 'priority': priority}}
         self.language = language
 
         # The last time when this contact was seen online.
@@ -358,8 +358,7 @@ Current version: %(version)s""") % {
 
                 results = [{'description': result[0], 'url': result[2]} for result in command.data]
 
-                # One-space text to work around a bug in Psi
-                data = {'text': ' ', 'url_list': results}
+                data = {'text': _('Following pages match your search criteria:'), 'url_list': results}
                 self.send_message(command.jid, data, u"chat")
             else:
                 pass
@@ -388,19 +387,35 @@ Current version: %(version)s""") % {
         stanza = Presence(to_jid=jid, stanza_type="unsubscribed")
         self.get_stream().send(stanza)
 
-    def send_message(self, jid, data, msg_type=u"chat"):
+    def send_message(self, jid_text, data, msg_type=u"chat"):
         """Sends a message
 
-        @param jid: JID to send the message to
+        @param jid_text: JID to send the message to
         @param data: dictionary containing notification data
         @param msg_type: message type, as defined in RFC
-        @type jid: pyxmpp.jid.JID
+        @type jid_text: unicode
 
         """
+        use_oob = False
         subject = data.get('subject', '')
-        message = Message(to_jid=jid, body=data['text'], stanza_type=msg_type, subject=subject)
+        jid = JID(jid_text)
 
-        if data.has_key('url_list'):
+        if data.has_key('url_list') and data['url_list']:
+            jid_bare = jid.bare().as_utf8()
+            contact = self.contacts.get(jid_bare, None)
+            if contact and contact.supports(jid.resource, u'jabber:x:oob'):
+                use_oob = True
+            else:
+                url_strings = ['%s - %s' % (entry['url'], entry['description']) for entry in data['url_list']]
+                
+                # Insert a newline, so that the list of URLs doesn't start in the same
+                # line as the rest of message text
+                url_strings.insert(0, '\n')
+                data['text'] = data['text'] + '\n'.join(url_strings)
+                    
+        message = Message(to_jid=jid, body=data['text'], stanza_type=msg_type, subject=subject)
+        
+        if use_oob:
             oob.add_urls(message, data['url_list'])
 
         self.get_stream().send(message)
