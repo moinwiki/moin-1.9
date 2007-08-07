@@ -65,7 +65,7 @@ class Contact:
         @param priority: priority of the given resource
 
         """
-        self.resources[resource] = {'show': show, 'priority': priority}
+        self.resources[resource] = {'show': show, 'priority': priority, 'forms': False}
         self.last_online = None
 
     def set_supports_forms(self, resource):
@@ -480,11 +480,14 @@ Current version: %(version)s""") % {
         elif command[0] == "searchform":
             jid = sender.bare().as_utf8()
             resource = sender.resource
-            if self.contacts[jid].supports_forms(resource):
+
+            # Assume that outsiders know what they are doing. Clients that don't support
+            # data forms should display a warning passed in message <body>.
+            if jid not in self.contacts or self.contacts[jid].supports_forms(resource):
                 self.send_search_form(sender)
             else:
-                msg = _("This command requires a client supporting Data Forms")
-                self.send_message(sender, msg, u"Error")
+                msg = {'text': _("This command requires a client supporting Data Forms.")}
+                self.send_message(sender, msg, u"")
         else:
             # For unknown command return a generic help message
             return self.reply_help(sender)
