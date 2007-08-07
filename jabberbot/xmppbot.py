@@ -34,7 +34,7 @@ class Contact:
 
     def __init__(self, jid, resource, priority, show, language=None):
         self.jid = jid
-        self.resources = {resource: {'show': show, 'priority': priority, 'forms': False}}
+        self.resources = {resource: {'show': show, 'priority': priority}
         self.language = language
 
         # The last time when this contact was seen online.
@@ -68,17 +68,15 @@ class Contact:
         self.resources[resource] = {'show': show, 'priority': priority}
         self.last_online = None
 
-    def set_supports_forms(self, resource):
-        """Flag the given resource as supporting Data Forms"""
+    def set_supports(self, resource, extension):
+        """Flag a given resource as supporting a particular extension"""
         if resource in self.resources:
-            self.resources[resource]["forms"] = True
+            self.resources[resource][extension] = True
 
-    def supports_forms(self, resource):
-        """Check if the given resource supports Data Forms"""
+    def supports(self, resource, extension):
+        """Check if a given resource supports a particular extension"""
         if resource in self.resources:
-            return self.resources[resource]["forms"]
-        else:
-            return False
+            return extension in self.resources[resource]
 
     def remove_resource(self, resource):
         """Removes information about a connected resource
@@ -507,7 +505,7 @@ Current version: %(version)s""") % {
         elif command[0] == "searchform":
             jid = sender.bare().as_utf8()
             resource = sender.resource
-            if self.contacts[jid].supports_forms(resource):
+            if self.contacts[jid].supports(resource, u"jabber:x:data"):
                 self.send_search_form(sender)
             else:
                 msg = _("This command requires a client supporting Data Forms")
@@ -670,7 +668,7 @@ The call should look like:\n\n%(command)s %(params)s")
             # Unknown resource, add it to the list
             else:
                 contact.add_resource(jid.resource, show, priority)
-                self.supports_dataforms(jid)
+                self.supports(jid, u"jabber:x:data")
 
             if self.config.verbose:
                 self.log.debug(contact)
@@ -681,7 +679,7 @@ The call should look like:\n\n%(command)s %(params)s")
 
         else:
             self.contacts[bare_jid] = Contact(jid, jid.resource, priority, show)
-            self.supports_dataforms(jid)
+            self.service_discovery(jid)
             self.get_user_language(bare_jid)
             self.log.debug(self.contacts[bare_jid])
 
@@ -697,8 +695,8 @@ The call should look like:\n\n%(command)s %(params)s")
         request = cmd.GetUserLanguage(jid)
         self.from_commands.put_nowait(request)
 
-    def supports_dataforms(self, jid):
-        """Check if a clients supports data forms.
+    def service_discovery(self, jid):
+        """Ask a client about supported features
 
         This is not the recommended way of discovering support
         for data forms, but it's easy to implement, so it'll be
@@ -714,6 +712,7 @@ The call should look like:\n\n%(command)s %(params)s")
         self.get_stream().set_response_handlers(query, self.handle_disco_result, None)
         self.get_stream().send(query)
 
+
     def handle_disco_result(self, stanza):
         """Handler for <iq> service discovery results
 
@@ -722,10 +721,16 @@ The call should look like:\n\n%(command)s %(params)s")
         @param stanza: a received result stanza
         """
         payload = stanza.get_query()
+        
         supports = payload.xpathEval('//*[@var="jabber:x:data"]')
         if supports:
             jid = stanza.get_from_jid()
-            self.contacts[jid.bare().as_utf8()].set_supports_forms(jid.resource)
+            self.contacts[jid.bare().as_utf8()].set_supports(jid.resource, u"jabber:x:data")
+            
+        supports = payload.xpathEval('//*[@var="jabber:x:oob"]')
+        if supports:
+            jid = stanza.get_from_jid()
+            self.contacts[jid.bare().as_utf8()].set_supports(jid.resource, u"jabber:x:oob")
 
 
     def send_queued_messages(self, contact, ignore_dnd=False):
