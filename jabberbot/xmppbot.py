@@ -16,6 +16,7 @@ from pyxmpp.message import Message
 from pyxmpp.presence import Presence
 from pyxmpp.iq import Iq
 import pyxmpp.jabber.dataforms as forms
+import libxml2
 
 import jabberbot.commands as cmd
 import jabberbot.i18n as i18n
@@ -482,6 +483,37 @@ Current version: %(version)s""") % {
                 return True
 
         return False
+    
+    def contains_form(self, message):
+        """Checks if passed message stanza contains a submitted form and parses it
+        
+        @param message: message stanza
+        @type message: pyxmpp.message.Message
+        @return: xml node with form data if found, or None 
+        
+        """
+        if not isinstance(message, Message):
+            raise ValueError("The 'message' parameter must be of type pyxmpp.message.Message!")
+        
+        payload = message.get_node()
+        form = message.xpath_eval('/ns:message/data:x', {'data': 'jabber:x:data'})
+
+        if form:
+            return form[0]
+        else:
+            return None
+    
+    def handle_form(self, form_node):
+        """Handles a submitted data form
+        
+        @param form_node: a xml node with data form
+        @type form_node: libxml2.xmlNode
+        
+        """
+        if not isinstance(form_node, libxml2.xmlNode):
+            raise ValueError("The 'form' parameter must be of type libxml2.xmlNode!")
+        
+        form = forms.Form(form_node)
 
     def handle_message(self, message):
         """Handles incoming messages
@@ -493,6 +525,11 @@ Current version: %(version)s""") % {
         if self.config.verbose:
             msg = "Message from %s." % (message.get_from_jid().as_utf8(), )
             self.log.debug(msg)
+            
+        form = self.contains_form(message)
+        if form:
+            self.handle_form(form)
+            return
 
         text = message.get_body()
         sender = message.get_from_jid()
