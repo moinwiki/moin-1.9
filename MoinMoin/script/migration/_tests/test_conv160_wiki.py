@@ -28,21 +28,16 @@ class TestWikiConversion:
         pagename = 'TestPage'
         rename_some_page = {
                 ('PAGE', 'some_page'): 'some page',
-                # NEEDED? ('PAGE', 'RenameThis'): 'ThisRenamed',
         }
         rename_some_file = {
                 ('FILE', pagename, 'with_underscore'): 'without underscore',
                 ('FILE', pagename, 'with blank'): 'without_blank',
         }
-        tests = [
-            # NEEDED? ('CamelCase', {}, 'CamelCase'),
-            # FAILS ('RenameThis', rename_some_page, 'ThisRenamed'),
-            # NEEDED? ('!RenameThis', {}, '!RenameThis'), # not a link
 
+        tests = [
             # FAILING tests:
             #('[wiki:/OtherPage]', rename_some_page, '[wiki:/OtherPage]'),
             #('[wiki:/OtherPage other page]', rename_some_page, '[wiki:/OtherPage other page]'),
-            # ('[:Something:Something]', {}, '["Something"]'),
             #('[attachment:My%20Attachment.jpg:it works]', {}, '[attachment:"My Attachment.jpg" it works]'),
             #('[wiki:LinuxWiki: LinuxWiki.de]', {}, '[wiki:LinuxWiki: LinuxWiki.de]'),
             #('[:MeatBall:CleanLinking meatball-wiki: clean linking]', {}, '[:MeatBall:CleanLinking meatball-wiki: clean linking]'),
@@ -55,6 +50,7 @@ class TestWikiConversion:
 
             # "nothing changed" checks
             ('', {}, ''),
+            ('CamelCase', {}, 'CamelCase'),
             ('MoinMaster:CamelCase', {}, 'MoinMaster:CamelCase'),
             ('some_text', {}, 'some_text'),
             ('["some_text"]', {}, '["some_text"]'),
@@ -86,6 +82,7 @@ class TestWikiConversion:
             ('[:other page:other text]', {}, '["other page" other text]'),
             # FAILS ('Self:CamelCase', {}, 'CamelCase'),
             ('[wiki:WikiPedia:Lynx_%28web_browser%29 Lynx]', {}, '[wiki:WikiPedia:"Lynx_(web_browser)" Lynx]'),
+            ('[:Something:Something]', {}, '["Something"]'), # optimize markup
 
             # "nothing changed" checks
             ('attachment:OtherPage/with_underscore', rename_some_file, 'attachment:OtherPage/with_underscore'),

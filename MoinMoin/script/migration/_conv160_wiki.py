@@ -232,17 +232,14 @@ class Converter(Parser):
         # Local extended link? [:page name:link text]
         if word[0] == ':':
             words = word[1:].split(':', 1)
-            words[0] = self._replace_target(words[0])
-            if len(words) == 1:
-                link = words[0]
-                link = wikiutil.quoteName(link)
-                return '[%s]' % link # use freelink
-            else:
-                link, text = words
-                link = wikiutil.quoteName(link)
-                if text:
-                    text = ' ' + text
-                return '[%s%s]' % (link, text) # use freelink with text
+            link, text = (words + ['', ''])[:2]
+            if link.strip() == text.strip():
+                text = ''
+            link = self._replace_target(link)
+            link = wikiutil.quoteName(link)
+            if text:
+                text = ' ' + text
+            return '[%s%s]' % (link, text) # use freelink with text
 
         scheme_and_rest = word.split(":", 1)
         if len(scheme_and_rest) == 2: # scheme given
