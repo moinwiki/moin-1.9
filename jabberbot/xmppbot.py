@@ -451,6 +451,7 @@ Current version: %(version)s""") % {
         full_search = forms.Option("f", search_type2)
 
         form = forms.Form(xmlnode_or_type="form", title=form_title, instructions=help_form)
+        form.add_field(name="action", field_type="hidden", value="search")
         form.add_field(name="case", field_type="boolean", label=case_label)
         form.add_field(name="regexp", field_type="boolean", label=regexp_label)
         form.add_field(name="search_type", options=[title_search, full_search], field_type="list-single", label=search_label)
