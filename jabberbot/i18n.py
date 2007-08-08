@@ -6,6 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 import logging, xmlrpclib
+from jabberbot.config import BotConfig
 
 TRANSLATIONS = None
 
@@ -20,7 +21,7 @@ def get_text(original, lang="en"):
 
     global TRANSLATIONS
     if not TRANSLATIONS:
-        init_i18n()
+        init_i18n(BotConfig)
 
     try:
         return TRANSLATIONS[lang][original]

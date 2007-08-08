@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import logging, time, libxml2, Queue
+import logging, time, Queue
 from threading import Thread
 
 from pyxmpp.client import Client
@@ -19,6 +19,7 @@ import pyxmpp.jabber.dataforms as forms
 
 import jabberbot.commands as cmd
 import jabberbot.i18n as i18n
+import jabberbot.oob as oob
 
 
 class Contact:
@@ -33,7 +34,7 @@ class Contact:
 
     def __init__(self, jid, resource, priority, show, language=None):
         self.jid = jid
-        self.resources = {resource: {'show': show, 'priority': priority, 'forms': False}}
+        self.resources = {resource: {'show': show, 'priority': priority}}
         self.language = language
 
         # The last time when this contact was seen online.
@@ -64,20 +65,18 @@ class Contact:
         @param priority: priority of the given resource
 
         """
-        self.resources[resource] = {'show': show, 'priority': priority}
+        self.resources[resource] = {'show': show, 'priority': priority, 'forms': False}
         self.last_online = None
 
-    def set_supports_forms(self, resource):
-        """Flag the given resource as supporting Data Forms"""
+    def set_supports(self, resource, extension):
+        """Flag a given resource as supporting a particular extension"""
         if resource in self.resources:
-            self.resources[resource]["forms"] = True
+            self.resources[resource][extension] = True
 
-    def supports_forms(self, resource):
-        """Check if the given resource supports Data Forms"""
+    def supports(self, resource, extension):
+        """Check if a given resource supports a particular extension"""
         if resource in self.resources:
-            return self.resources[resource]["forms"]
-        else:
-            return False
+            return extension in self.resources[resource]
 
     def remove_resource(self, resource):
         """Removes information about a connected resource
@@ -163,6 +162,7 @@ class XMPPBot(Client, Thread):
 
         # How often should the contacts be checked for expiration, in seconds
         self.contact_check = 600
+        self.stopping = False
 
         self.known_xmlrpc_cmds = [cmd.GetPage, cmd.GetPageHTML, cmd.GetPageList, cmd.GetPageInfo, cmd.Search]
         self.internal_commands = ["ping", "help", "searchform"]
@@ -180,10 +180,17 @@ class XMPPBot(Client, Thread):
         self.connect()
         self.loop()
 
+    def stop(self):
+        """Stop the thread"""
+        self.stopping = True
+
     def loop(self, timeout=1):
         """Main event loop - stream and command handling"""
 
         while True:
+            if self.stopping:
+                break
+
             stream = self.get_stream()
             if not stream:
                 break
@@ -245,6 +252,7 @@ class XMPPBot(Client, Thread):
         except Queue.Empty:
             return False
 
+    # XXX: refactor this, if-elif sequence is already too long
     def handle_command(self, command, ignore_dnd=False):
         """Excecutes commands from other components
 
@@ -255,22 +263,32 @@ class XMPPBot(Client, Thread):
         """
         # Handle normal notifications
         if isinstance(command, cmd.NotificationCommand):
+            cmd_data = command.notification
+
             for recipient in command.jids:
                 jid = JID(recipient)
                 jid_text = jid.bare().as_utf8()
-                text = command.text
+
+                text = cmd_data['text']
+                subject = cmd_data.get('subject', '')
+                msg_data = command.notification
+
+                if isinstance(command, cmd.NotificationCommandI18n):
+                    # Translate&interpolate the message with data
+                    gettext_func = self.get_text(jid_text)
+                    text, subject = command.translate(gettext_func)
+                    msg_data = {'text': text, 'subject': subject,
+                                'url_list': cmd_data.get('url_list', [])}
 
                 # Check if contact is DoNotDisturb.
                 # If so, queue the message for delayed delivery.
-                try:
-                    contact = self.contacts[jid_text]
+                contact = self.contacts.get(jid_text, '')
+                if contact:
                     if command.async and contact.is_dnd() and not ignore_dnd:
                         contact.messages.append(command)
                         return
-                except KeyError:
-                    pass
 
-                self.send_message(jid, text)
+                self.send_message(jid, msg_data, command.msg_type)
 
             return
 
@@ -288,29 +306,71 @@ class XMPPBot(Client, Thread):
         elif isinstance(command, cmd.GetPage) or isinstance(command, cmd.GetPageHTML):
             msg = _(u"""Here's the page "%(pagename)s" that you've requested:\n\n%(data)s""")
 
-            self.send_message(command.jid, msg % {
-                      'pagename': command.pagename,
-                      'data': command.data,
-            })
+            cmd_data = {'text': msg % {'pagename': command.pagename, 'data': command.data}}
+            self.send_message(command.jid, cmd_data)
 
         elif isinstance(command, cmd.GetPageList):
             msg = _("That's the list of pages accesible to you:\n\n%s")
             pagelist = u"\n".join(command.data)
 
-            self.send_message(command.jid, msg % (pagelist, ))
+            self.send_message(command.jid, {'text': msg % (pagelist, )})
 
         elif isinstance(command, cmd.GetPageInfo):
-            msg = _("""Following detailed information on page "%(pagename)s" \
-is available::\n\n%(data)s""")
+            intro = _("""Following detailed information on page "%(pagename)s" \
+is available:""")
 
-            self.send_message(command.jid, msg % {
-                      'pagename': command.pagename,
-                      'data': command.data,
-            })
+            if command.data['author'].startswith("Self:"):
+                author = command.data['author'][5:]
+            else:
+                author = command.data['author']
+
+            datestr = str(command.data['lastModified'])
+            date = u"%(year)s-%(month)s-%(day)s at %(time)s" % {
+                        'year': datestr[:4],
+                        'month': datestr[4:6],
+                        'day': datestr[6:8],
+                        'time': datestr[9:17],
+            }
+
+            msg = _("""Last author: %(author)s
+Last modification: %(modification)s
+Current version: %(version)s""") % {
+             'author': author,
+             'modification': date,
+             'version': command.data['version'],
+            }
+
+            self.send_message(command.jid, {'text': intro % {'pagename': command.pagename}})
+            self.send_message(command.jid, {'text': msg})
 
         elif isinstance(command, cmd.GetUserLanguage):
             if command.jid in self.contacts:
                 self.contacts[command.jid].language = command.language
+
+        elif isinstance(command, cmd.Search):
+            if command.presentation == u"text":
+                if not command.data:
+                    msg = _("There are no pages matching your search criteria!")
+                    self.send_message(command.jid, {'text': msg})
+                    return
+
+                # This hardcoded limitation relies on (mostly correct) assumption that Jabber
+                # servers have rather tight traffic limits. Sending more than 25 results is likely
+                # to take a second or two - users should not have to wait longer (+search time!).
+                elif len(command.data) > 25:
+                    msg =  _("There are too many results (%(number)s). Limiting to first 25 entries.") % {'number': str(len(command.data))}
+                    self.send_message(command.jid, {'text': msg})
+                    command.data = command.data[:25]
+
+                #intro = _("Following pages match your search:\n%(results)s")
+
+                results = [{'description': result[0], 'url': result[2]} for result in command.data]
+
+                data = {'text': _('Following pages match your search criteria:'), 'url_list': results}
+                self.send_message(command.jid, data, u"chat")
+            else:
+                pass
+                # TODO: implement data forms here
 
     def ask_for_subscription(self, jid):
         """Sends a <presence/> stanza with type="subscribe"
@@ -335,16 +395,37 @@ is available::\n\n%(data)s""")
         stanza = Presence(to_jid=jid, stanza_type="unsubscribed")
         self.get_stream().send(stanza)
 
-    def send_message(self, jid, text, subject="", msg_type=u"chat"):
+    def send_message(self, jid_text, data, msg_type=u"chat"):
         """Sends a message
 
-        @param jid: JID to send the message to
-        @param text: message's body:
-        @param type: message type, as defined in RFC
-        @type jid: pyxmpp.jid.JID
+        @param jid_text: JID to send the message to
+        @param data: dictionary containing notification data
+        @param msg_type: message type, as defined in RFC
+        @type jid_text: unicode
 
         """
-        message = Message(to_jid=jid, body=text, stanza_type=msg_type, subject=subject)
+        use_oob = False
+        subject = data.get('subject', '')
+        jid = JID(jid_text)
+
+        if data.has_key('url_list') and data['url_list']:
+            jid_bare = jid.bare().as_utf8()
+            contact = self.contacts.get(jid_bare, None)
+            if contact and contact.supports(jid.resource, u'jabber:x:oob'):
+                use_oob = True
+            else:
+                url_strings = ['%s - %s' % (entry['url'], entry['description']) for entry in data['url_list']]
+
+                # Insert a newline, so that the list of URLs doesn't start in the same
+                # line as the rest of message text
+                url_strings.insert(0, '\n')
+                data['text'] = data['text'] + '\n'.join(url_strings)
+
+        message = Message(to_jid=jid, body=data['text'], stanza_type=msg_type, subject=subject)
+
+        if use_oob:
+            oob.add_urls(message, data['url_list'])
+
         self.get_stream().send(message)
 
     def send_form(self, jid, form):
@@ -361,7 +442,7 @@ is available::\n\n%(data)s""")
         search_type2 = _("Full-text search")
         search_label = _("Search type")
         search_label2 = _("Search text")
-
+        forms_warn = _("If you see this, your client probably doesn't support Data Forms.")
 
         title_search = forms.Option("t", search_type1)
         full_search = forms.Option("f", search_type2)
@@ -370,7 +451,7 @@ is available::\n\n%(data)s""")
         form.add_field(name="search_type", options=[title_search, full_search], field_type="list-single", label=search_label)
         form.add_field(name="search", field_type="text-single", label=search_label2)
 
-        message = Message(to_jid=jid, body=_("Please specify the search criteria."), subject=_("Wiki search"))
+        message = Message(to_jid=jid, body=forms_warn, subject=_("Wiki search"))
         message.add_content(form)
         self.get_stream().send(message)
 
@@ -425,7 +506,7 @@ is available::\n\n%(data)s""")
             response = self.reply_help(sender)
 
         if response:
-            self.send_message(sender, response)
+            self.send_message(sender, {'text': response})
 
     def handle_internal_command(self, sender, command):
         """Handles internal commands, that can be completed by the XMPP bot itself
@@ -447,16 +528,19 @@ is available::\n\n%(data)s""")
         elif command[0] == "searchform":
             jid = sender.bare().as_utf8()
             resource = sender.resource
-            if self.contacts[jid].supports_forms(resource):
+
+            # Assume that outsiders know what they are doing. Clients that don't support
+            # data forms should display a warning passed in message <body>.
+            if jid not in self.contacts or self.contacts[jid].supports_forms(resource):
                 self.send_search_form(sender)
             else:
-                msg = _("This command requires a client supporting Data Forms")
-                self.send_message(sender, msg, u"Error")
+                msg = {'text': _("This command requires a client supporting Data Forms.")}
+                self.send_message(sender, msg, u"")
         else:
             # For unknown command return a generic help message
             return self.reply_help(sender)
 
-    def do_search(self, jid, term, search_type):
+    def do_search(self, jid, search_type, presentation, *args):
         """Performs a Wiki search of term
 
         @param jid: Jabber ID of user performing a search
@@ -465,9 +549,11 @@ is available::\n\n%(data)s""")
         @type term: unicode
         @param search_type: type of search; either "text" or "title"
         @type search_type: unicode
+        @param presentation: how to present the results; "text" or "dataforms"
+        @type presentation: unicode
 
         """
-        search = cmd.Search(jid, term, search_type)
+        search = cmd.Search(jid, search_type, presentation=presentation, *args)
         self.from_commands.put_nowait(search)
 
     def help_on(self, jid, command):
@@ -608,7 +694,7 @@ The call should look like:\n\n%(command)s %(params)s")
             # Unknown resource, add it to the list
             else:
                 contact.add_resource(jid.resource, show, priority)
-                self.supports_dataforms(jid)
+                self.supports(jid, u"jabber:x:data")
 
             if self.config.verbose:
                 self.log.debug(contact)
@@ -619,7 +705,7 @@ The call should look like:\n\n%(command)s %(params)s")
 
         else:
             self.contacts[bare_jid] = Contact(jid, jid.resource, priority, show)
-            self.supports_dataforms(jid)
+            self.service_discovery(jid)
             self.get_user_language(bare_jid)
             self.log.debug(self.contacts[bare_jid])
 
@@ -635,8 +721,8 @@ The call should look like:\n\n%(command)s %(params)s")
         request = cmd.GetUserLanguage(jid)
         self.from_commands.put_nowait(request)
 
-    def supports_dataforms(self, jid):
-        """Check if a clients supports data forms.
+    def service_discovery(self, jid):
+        """Ask a client about supported features
 
         This is not the recommended way of discovering support
         for data forms, but it's easy to implement, so it'll be
@@ -652,6 +738,7 @@ The call should look like:\n\n%(command)s %(params)s")
         self.get_stream().set_response_handlers(query, self.handle_disco_result, None)
         self.get_stream().send(query)
 
+
     def handle_disco_result(self, stanza):
         """Handler for <iq> service discovery results
 
@@ -660,10 +747,16 @@ The call should look like:\n\n%(command)s %(params)s")
         @param stanza: a received result stanza
         """
         payload = stanza.get_query()
+
         supports = payload.xpathEval('//*[@var="jabber:x:data"]')
         if supports:
             jid = stanza.get_from_jid()
-            self.contacts[jid.bare().as_utf8()].set_supports_forms(jid.resource)
+            self.contacts[jid.bare().as_utf8()].set_supports(jid.resource, u"jabber:x:data")
+
+        supports = payload.xpathEval('//*[@var="jabber:x:oob"]')
+        if supports:
+            jid = stanza.get_from_jid()
+            self.contacts[jid.bare().as_utf8()].set_supports(jid.resource, u"jabber:x:oob")
 
 
     def send_queued_messages(self, contact, ignore_dnd=False):
