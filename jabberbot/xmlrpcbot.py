@@ -93,15 +93,23 @@ class XMLRPCClient(Thread):
         self.connection = self.create_connection()
         self.token = None
         self.multicall = None
+        self.stopping = False
 
     def run(self):
         """Starts the server / thread"""
         while True:
+            if self.stopping:
+                break
+
             try:
                 command = self.commands_in.get(True, 2)
                 self.execute_command(command)
             except Queue.Empty:
                 pass
+
+    def stop(self):
+        """Stop the thread"""
+        self.stopping = True
 
     def create_connection(self):
         return xmlrpclib.ServerProxy(self.url, allow_none=True, verbose=self.config.verbose)
@@ -158,10 +166,10 @@ class XMLRPCClient(Thread):
 
     def _get_multicall_result(self, jid):
         """Returns multicall results and issues a warning if there's an auth error
-        
+
         @param jid: a full JID to use if there's an error
         @type jid: str
-        
+
         """
 
         if not self.token:

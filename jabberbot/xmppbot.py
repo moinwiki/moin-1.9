@@ -162,6 +162,7 @@ class XMPPBot(Client, Thread):
 
         # How often should the contacts be checked for expiration, in seconds
         self.contact_check = 600
+        self.stopping = False
 
         self.known_xmlrpc_cmds = [cmd.GetPage, cmd.GetPageHTML, cmd.GetPageList, cmd.GetPageInfo, cmd.Search]
         self.internal_commands = ["ping", "help", "searchform"]
@@ -179,10 +180,17 @@ class XMPPBot(Client, Thread):
         self.connect()
         self.loop()
 
+    def stop(self):
+        """Stop the thread"""
+        self.stopping = True
+
     def loop(self, timeout=1):
         """Main event loop - stream and command handling"""
 
         while True:
+            if self.stopping:
+                break
+
             stream = self.get_stream()
             if not stream:
                 break
@@ -407,14 +415,14 @@ Current version: %(version)s""") % {
                 use_oob = True
             else:
                 url_strings = ['%s - %s' % (entry['url'], entry['description']) for entry in data['url_list']]
-                
+
                 # Insert a newline, so that the list of URLs doesn't start in the same
                 # line as the rest of message text
                 url_strings.insert(0, '\n')
                 data['text'] = data['text'] + '\n'.join(url_strings)
-                    
+
         message = Message(to_jid=jid, body=data['text'], stanza_type=msg_type, subject=subject)
-        
+
         if use_oob:
             oob.add_urls(message, data['url_list'])
 
@@ -739,12 +747,12 @@ The call should look like:\n\n%(command)s %(params)s")
         @param stanza: a received result stanza
         """
         payload = stanza.get_query()
-        
+
         supports = payload.xpathEval('//*[@var="jabber:x:data"]')
         if supports:
             jid = stanza.get_from_jid()
             self.contacts[jid.bare().as_utf8()].set_supports(jid.resource, u"jabber:x:data")
-            
+
         supports = payload.xpathEval('//*[@var="jabber:x:oob"]')
         if supports:
             jid = stanza.get_from_jid()
