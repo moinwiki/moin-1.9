@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import logging, os, sys
+import logging, os, sys, time
 from Queue import Queue
 
 from jabberbot.config import BotConfig
@@ -36,18 +36,43 @@ def main():
     commands_from_xmpp = Queue()
     commands_to_xmpp = Queue()
 
-    try:
-        xmpp_bot = XMPPBot(BotConfig, commands_from_xmpp, commands_to_xmpp)
-        xmlrpc_client = XMLRPCClient(BotConfig, commands_from_xmpp, commands_to_xmpp)
-        xmlrpc_server = XMLRPCServer(BotConfig, commands_to_xmpp)
+    xmpp_bot = None
+    xmlrpc_client = None
+    xmlrpc_server = None
 
-        xmpp_bot.start()
-        xmlrpc_client.start()
-        xmlrpc_server.start()
+    while True:
+        try:
+            if not xmpp_bot or not xmpp_bot.isAlive():
+                log.info("(Re)starting XMPP thread...")
+                xmpp_bot = XMPPBot(BotConfig, commands_from_xmpp, commands_to_xmpp)
+                xmpp_bot.setDaemon(True)
+                xmpp_bot.start()
 
-    except KeyboardInterrupt, i:
-        print i
-        sys.exit(0)
+            if not xmlrpc_client or not xmlrpc_client.isAlive():
+                log.info("(Re)starting XMLRPC client thread...")
+                xmlrpc_client = XMLRPCClient(BotConfig, commands_from_xmpp, commands_to_xmpp)
+                xmlrpc_client.setDaemon(True)
+                xmlrpc_client.start()
+
+            if not xmlrpc_server or not xmlrpc_server.isAlive():
+                log.info("(Re)starting XMLRPC server thread...")
+                xmlrpc_server = XMLRPCServer(BotConfig, commands_to_xmpp)
+                xmlrpc_server.setDaemon(True)
+                xmlrpc_server.start()
+
+            time.sleep(5)
+
+        except KeyboardInterrupt, i:
+            print i
+            xmpp_bot.stop()
+            xmlrpc_client.stop()
+
+            log.info("Stopping XMPP bot thread, please wait...")
+            xmpp_bot.join(5)
+            log.info("Stopping XMLRPC client thread, please wait...")
+            xmlrpc_client.join(5)
+
+            sys.exit(0)
 
 
 if __name__ == "__main__":
