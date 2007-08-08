@@ -1,47 +1,67 @@
 # -*- coding: iso-8859-1 -*-
-
 """
-Creole wiki markup parser plugin for MoinMoin 1.5
+    MoinMoin - Creole wiki markup parser
 
-See http://wikicreole.org/ for latest specs.
+    See http://wikicreole.org/ for latest specs.
 
-Changes:
-2007-08-08:
- * PEP8 cleanup
+    TODO:
+     * table headers render borderless:
+    |=a|=b|
+    |c|d|
 
-2007-03-23
- * Implemented table headings, as in Creole 0.5
- * No markup allowed in table headings
+    Changes:
+    2007-08-08:
+     * PEP8 cleanup
+     * creole 1.0 support
+     * checked interwiki links, they are already compliant to creole 1.0
+     * use three angle brackets <<<>>> instead of two chars for placeholder
+      * unclear: do we need to do anything with that? macros are still with <<...>>!
+     * whitespace allowed before all elements except nowiki blocks
+      * (./) headings
+      * (./) lists (checked, was already compliant)
+      * (./) hor. rule (plus fix for being exactly 4 ----)
+      * (./) tables (checked, was already compliant)
+     * (./) added escape character ~ to core
+     * (./) changed escape character so it only escapes following character
+     * (./) removed escaping closing nowiki triple curly brackets because this is now covered by the escape character
+     * (./) a tilde in front of a URL should prevent it from becoming a link (checked, already compliant)
 
-2007-02-10
- * Images inside link descriptions
- * Lists parsed and rendered properly
+    2007-03-23
+     * Implemented table headings, as in Creole 0.5
+     * No markup allowed in table headings
 
-2007-02-05
- * Tables rendered properly
- * Links, images and nowiki in tables handled properly
+    2007-02-10
+     * Images inside link descriptions
+     * Lists parsed and rendered properly
 
-2007-02-04
- * {{...}} can now be used both for attachments and images
- * No space required after bullets anymore
- * Implemented escaping with space in <pre>
- * Implemented greedy "}" parsing in nowiki
- * Added <h1> header available with =...=
- * Added <br> available with \\
- * Added tables (temporarily rendered as <pre>)
-TODO: "smart" resolving of bold/list ambiguity, table rendering
+    2007-02-05
+     * Tables rendered properly
+     * Links, images and nowiki in tables handled properly
+
+    2007-02-04
+     * {{...}} can now be used both for attachments and images
+     * No space required after bullets anymore
+     * Implemented escaping with space in <pre>
+     * Implemented greedy "}" parsing in nowiki
+     * Added <h1> header available with =...=
+     * Added <br> available with \\
+     * Added tables (temporarily rendered as <pre>)
+    TODO: "smart" resolving of bold/list ambiguity, table rendering
 
 
-2006-11-29
- * Fixed the bug causing newlines to be ignored inside //emphasis//
-   and **strong**.
+    2006-11-29
+     * Fixed the bug causing newlines to be ignored inside //emphasis//
+       and **strong**.
 
-2006-09-11
- * Changed the bullet character for unordered lists to '*' according to spec.
- * Requiring a space or tab after the bullet in lists (to avoid collisions).
- * Moved the regula expression initialization to class initialization, for
-   faster parser object creation.
+    2006-09-11
+     * Changed the bullet character for unordered lists to '*' according to spec.
+     * Requiring a space or tab after the bullet in lists (to avoid collisions).
+     * Moved the regula expression initialization to class initialization, for
+       faster parser object creation.
 
+    @copyright: 2007 MoinMoin:RadomirDopieralski (creole 0.5 implementation),
+                2007 MoinMoin:ThomasWaldmann (updates)
+    @license: GNU GPL, see COPYING for details.
 """
 
 import re
@@ -88,8 +108,8 @@ class DocParser:
     # whether the parser should convert \n into <br>
     bloglike_lines = False
 
-    # For pre escaping:
-    pre_escape_re = re.compile(r'^\s*\}\}\}\s*$', re.M)
+    # For pre escaping, in creole 1.0 done with ~:
+    pre_escape_re = re.compile(r'^(?P<indent>\s*)~(?P<rest>\}\}\}\s*)$', re.M)
 
     # For the inline elements:
     inline_tab = {
@@ -101,13 +121,14 @@ class DocParser:
         'emph': r'//',
         'strong': r'\*\*',
         'break': r'\\\\',
+        'escape': r'~(?P<escaped_char>[^\s])', # tilde is the escape char
         'char': r'.',
     }
 
     # For the block elements:
-    rule_rule = r'(?P<rule>^----+\s*$)'
+    rule_rule = r'(?P<rule>^\s*----\s*$)'
     line_rule = r'(?P<line>^\s*$)'
-    head_rule = r'(?P<head>^(?P<head_head>=+)\s*(?P<head_text>[^*].*?)\s*(?P<head_tail>=*)\s*$)'
+    head_rule = r'(?P<head>^\s*(?P<head_head>=+)\s*(?P<head_text>[^*].*?)\s*(?P<head_tail>=*)\s*$)'
     if bloglike_lines:
         text_rule = r'(?P<text>.+)(?P<break>(?<!\\)$\n(?!\s*$))?'
     else:
@@ -170,6 +191,7 @@ class DocParser:
             _get_rule('strong', inline_tab),
             _get_rule('emph', inline_tab),
             _get_rule('break', inline_tab),
+            _get_rule('escape', inline_tab),
             _get_rule('char', inline_tab),
     ])
     inline_re = re.compile(inline_rules, re.X|re.U)
@@ -350,7 +372,9 @@ class DocParser:
         self.cur = self._upto(self.cur, ('document', 'section', 'blockquote'))
         kind = groups.get('pre_kind', None)
         text = groups.get('pre_text', u'')
-        text = self.pre_escape_re.sub(lambda x: x.group(0)[1:], text)
+        def remove_tilde(m):
+            return m.group('indent') + m.group('rest')
+        text = self.pre_escape_re.sub(remove_tilde, text)
         node = DocNode('preformatted', self.cur, text)
         node.sect = kind or ''
         self.text = None
@@ -384,6 +408,11 @@ class DocParser:
     def _break_repl(self, groups):
         DocNode('break', self.cur, None)
         self.text = None
+
+    def _escape_repl(self, groups):
+        if self.text is None:
+            self.text = DocNode('text', self.cur, u'')
+        self.text.content += groups.get('escaped_char', u'')
 
     def _char_repl(self, groups):
         if self.text is None:
