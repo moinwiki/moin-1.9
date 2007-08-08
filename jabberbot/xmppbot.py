@@ -442,12 +442,16 @@ Current version: %(version)s""") % {
         search_type2 = _("Full-text search")
         search_label = _("Search type")
         search_label2 = _("Search text")
+        case_label = _("Case-sensitive search")
+        regexp_label = _("Treat terms as regular expressions")
         forms_warn = _("If you see this, your client probably doesn't support Data Forms.")
 
         title_search = forms.Option("t", search_type1)
         full_search = forms.Option("f", search_type2)
 
         form = forms.Form(xmlnode_or_type="form", title=form_title, instructions=help_form)
+        form.add_field(name="case", field_type="boolean", label=case_label)
+        form.add_field(name="regexp", field_type="boolean", label=regexp_label)
         form.add_field(name="search_type", options=[title_search, full_search], field_type="list-single", label=search_label)
         form.add_field(name="search", field_type="text-single", label=search_label2)
 
@@ -531,7 +535,7 @@ Current version: %(version)s""") % {
 
             # Assume that outsiders know what they are doing. Clients that don't support
             # data forms should display a warning passed in message <body>.
-            if jid not in self.contacts or self.contacts[jid].supports_forms(resource):
+            if jid not in self.contacts or self.contacts[jid].supports(resource, u"jabber:x:data"):
                 self.send_search_form(sender)
             else:
                 msg = {'text': _("This command requires a client supporting Data Forms.")}
