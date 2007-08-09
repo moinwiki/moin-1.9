@@ -113,7 +113,7 @@ class DocParser:
 
     # For the inline elements:
     inline_tab = {
-        'url': r'''(^|(?<=\s|[.,:;!?()/=]))(?P<url_target>(?P<url_proto>http|ftp|mailto|irc|https|ftps|news|gopher|file|telnet|nntp):\S+?)($|(?=\s|[,.:;!?()](\s|$)))''',
+        'url': r'''(^|(?<=\s|[.,:;!?()/=]))(?P<escaped_url>~)?(?P<url_target>(?P<url_proto>http|ftp|mailto|irc|https|ftps|news|gopher|file|telnet|nntp):\S+?)($|(?=\s|[,.:;!?()](\s|$)))''',
         'link': r'\[\[(?P<link_target>.+?)\s*(\|\s*(?P<link_text>.+?)\s*)?]]',
         'image': r'{{(?P<image_target>.+?)\s*(\|\s*(?P<image_text>.+?)\s*)?}}',
         'macro': r'<<(?P<macro_target>.+?)\s*(\|\s*(?P<macro_text>.+?)\s*)?>>',
@@ -218,12 +218,19 @@ class DocParser:
 
     def _url_repl(self, groups):
         """Handle raw urls in text."""
-        target = groups.get('url_target', '')
-        node = DocNode('external_link', self.cur)
-        node.content = target
-        node.proto = groups.get('url_proto', 'http')
-        DocNode('text', node, node.content)
-        self.text = None
+        if not groups.get('escaped_url'):
+            # this url is NOT escaped
+            target = groups.get('url_target', '')
+            node = DocNode('external_link', self.cur)
+            node.content = target
+            node.proto = groups.get('url_proto', 'http')
+            DocNode('text', node, node.content)
+            self.text = None
+        else:
+            # this url is escaped, we render it as text
+            if self.text is None:
+                self.text = DocNode('text', self.cur, u'')
+            self.text.content += groups.get('url_target')
     _url_target_repl = _url_repl
     _url_proto_repl = _url_repl
 
