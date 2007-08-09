@@ -12,11 +12,6 @@
     * No (non-bracketed) generic url recognition: this is "mission impossible"
       except if you want to risk lots of false positives.
 
-    TODO:
-    * table headers render borderless:
-      |=a|=b|
-      |c|d|
-
     @copyright: 2007 MoinMoin:RadomirDopieralski (creole 0.5 implementation),
                 2007 MoinMoin:ThomasWaldmann (updates)
     @license: GNU GPL, see COPYING for details.
@@ -63,7 +58,7 @@ class DocParser:
 
     # The parsing rules
 
-    # whether the parser should convert \n into <br>
+    # Whether the parser should convert \n into <br>.
     bloglike_lines = False
 
     # For pre escaping, in creole 1.0 done with ~:
@@ -422,9 +417,7 @@ class DocNode:
 
 
 class DocEmitter:
-    """
-    Generate the output for the document tree consisting of DocNodes.
-    """
+    """Generate the output for the document tree consisting of DocNodes."""
 
     def __init__(self, root, formatter, request):
         self.root = root
