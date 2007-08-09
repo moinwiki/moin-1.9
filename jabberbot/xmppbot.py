@@ -349,29 +349,45 @@ Current version: %(version)s""") % {
                 self.contacts[command.jid].language = command.language
 
         elif isinstance(command, cmd.Search):
+            warnings = []
+            if not command.data:
+                warnings.append(_("There are no pages matching your search criteria!"))
+
+            # This hardcoded limitation relies on (mostly correct) assumption that Jabber
+            # servers have rather tight traffic limits. Sending more than 25 results is likely
+            # to take a second or two - users should not have to wait longer (+search time!).
+            elif len(command.data) > 25:
+                warnings.append(_("There are too many results (%(number)s). Limiting to first 25 entries.") % {'number': str(len(command.data))})
+                command.data = command.data[:25]
+
+            results = [{'description': result[0], 'url': result[2]} for result in command.data]
+
             if command.presentation == u"text":
-                if not command.data:
-                    msg = _("There are no pages matching your search criteria!")
-                    self.send_message(command.jid, {'text': msg})
+                for warning in warnings:
+                    self.send_message(command.jid, {'text': warning})
+
+                if not results:
                     return
-
-                # This hardcoded limitation relies on (mostly correct) assumption that Jabber
-                # servers have rather tight traffic limits. Sending more than 25 results is likely
-                # to take a second or two - users should not have to wait longer (+search time!).
-                elif len(command.data) > 25:
-                    msg =  _("There are too many results (%(number)s). Limiting to first 25 entries.") % {'number': str(len(command.data))}
-                    self.send_message(command.jid, {'text': msg})
-                    command.data = command.data[:25]
-
-                #intro = _("Following pages match your search:\n%(results)s")
-
-                results = [{'description': result[0], 'url': result[2]} for result in command.data]
 
                 data = {'text': _('Following pages match your search criteria:'), 'url_list': results}
                 self.send_message(command.jid, data, u"chat")
             else:
-                pass
-                # TODO: implement data forms here
+                form_title = _("Search results").encode("utf-8")
+                form = forms.Form(xmlnode_or_type="result", title=form_title)
+
+                for no, warning in enumerate(warnings):
+                    name = "warning%d" % (no, )
+                    form.add_field(name=name, field_type="fixed", value=warning)
+
+                for no, result in enumerate(results):
+                    name = "result%d" % (no, )
+                    url = forms.Field(name="url", value=result["url"], field_type="text-single")
+                    description = forms.Field(name="description", value=result["description"], field_type="text-single")
+                    item = forms.Item([url, description])
+                    form.add_item(item)
+
+                self.send_form(command.jid, form, _("Search results"))
+
 
     def ask_for_subscription(self, jid):
         """Sends a <presence/> stanza with type="subscribe"
@@ -429,8 +445,26 @@ Current version: %(version)s""") % {
 
         self.get_stream().send(message)
 
-    def send_form(self, jid, form):
-        pass
+    def send_form(self, jid, form, subject):
+        """Send a data form
+
+        @param jid: jid to send the form to (full)
+        @param form: the form to send
+        @param subject: subject of the message
+        @type jid: unicode
+        @type form: pyxmpp.jabber.dataforms.Form
+        @type subject: unicode
+
+        """
+        if not isinstance(form, forms.Form):
+            raise ValueErrur("The 'form' argument must be of type pyxmpp.jabber.dataforms.Form!")
+
+        _ = self.get_text(JID(jid).bare().as_unicode())
+
+        warning = _("If you see this, your client probably doesn't support Data Forms.")
+        message = Message(to_jid=jid, body=warning, subject=subject)
+        message.add_content(form)
+        self.get_stream().send(message)
 
     def send_search_form(self, jid):
         _ = self.get_text(jid)
@@ -457,9 +491,7 @@ Current version: %(version)s""") % {
         form.add_field(name="search_type", options=[title_search, full_search], field_type="list-single", label=search_label)
         form.add_field(name="search", field_type="text-single", label=search_label2)
 
-        message = Message(to_jid=jid, body=forms_warn, subject=_("Wiki search"))
-        message.add_content(form)
-        self.get_stream().send(message)
+        self.send_form(jid, form, _("Wiki search"))
 
     def is_internal(self, command):
         """Check if a given command is internal
@@ -484,18 +516,18 @@ Current version: %(version)s""") % {
                 return True
 
         return False
-    
+
     def contains_form(self, message):
         """Checks if passed message stanza contains a submitted form and parses it
-        
+
         @param message: message stanza
         @type message: pyxmpp.message.Message
-        @return: xml node with form data if found, or None 
-        
+        @return: xml node with form data if found, or None
+
         """
         if not isinstance(message, Message):
             raise ValueError("The 'message' parameter must be of type pyxmpp.message.Message!")
-        
+
         payload = message.get_node()
         form = message.xpath_eval('/ns:message/data:x', {'data': 'jabber:x:data'})
 
@@ -503,18 +535,71 @@ Current version: %(version)s""") % {
             return form[0]
         else:
             return None
-    
-    def handle_form(self, form_node):
+
+    def handle_form(self, jid, form_node):
         """Handles a submitted data form
-        
+
+        @param jid: jid that submitted the form (full jid)
+        @type jid: pyxmpp.jid.JID
         @param form_node: a xml node with data form
         @type form_node: libxml2.xmlNode
-        
+
         """
         if not isinstance(form_node, libxml2.xmlNode):
             raise ValueError("The 'form' parameter must be of type libxml2.xmlNode!")
-        
+
+        if not isinstance(jid, JID):
+            raise ValueError("The 'jid' parameter must be of type jid!")
+
+        _ = self.get_text(jid.bare().as_unicode())
+
         form = forms.Form(form_node)
+
+        if form.type != u"submit":
+            return
+
+        try:
+            action = form["action"].value
+        except KeyError:
+            data = {'text': _('The form you submitted was invalid!'), 'subject': _('Invalid data')}
+            self.send_message(jid.as_unicode(), data, u"message")
+            return
+
+        if action == u"search":
+            self.handle_search_form(jid, form)
+        else:
+            data = {'text': _('The form you submitted was invalid!'), 'subject': _('Invalid data')}
+            self.send_message(jid.as_unicode(), data, u"message")
+
+
+    def handle_search_form(self, jid, form):
+        """Handles a search form
+
+        @param jid: jid that submitted the form
+        @type jid: pyxmpp.jid.JID
+        @param form: a form object
+        @type form_node: pyxmpp.jabber.dataforms.Form
+
+        """
+        required_fields = ["case", "regexp", "search_type", "search"]
+        jid_text = jid.bare().as_unicode()
+        _ = self.get_text(jid_text)
+
+        for field in required_fields:
+            if field not in form:
+                data = {'text': _('The form you submitted was invalid!'), 'subject': _('Invalid data')}
+                self.send_message(jid.as_unicode(), data, u"message")
+
+        case_sensitive = form['case'].value
+        regexp_terms = form['regexp'].value
+        if form['search_type'].value == 't':
+            search_type = 'title'
+        else:
+            search_type = 'text'
+
+        command = cmd.Search(jid_text, search_type, form["search"].value, case=form['case'].value,
+                             regexp=form['regexp'].value, presentation='dataforms')
+        self.from_commands.put_nowait(command)
 
     def handle_message(self, message):
         """Handles incoming messages
@@ -526,10 +611,10 @@ Current version: %(version)s""") % {
         if self.config.verbose:
             msg = "Message from %s." % (message.get_from_jid().as_utf8(), )
             self.log.debug(msg)
-            
+
         form = self.contains_form(message)
         if form:
-            self.handle_form(form)
+            self.handle_form(message.get_from_jid(), form)
             return
 
         text = message.get_body()
