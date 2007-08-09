@@ -99,7 +99,7 @@ class DocParser:
     attach_rule = r'(?P<attach_scheme>attachment|inline|drawing|figure):(?P<attach_addr>.*)'
     inter_rule = r'(?P<inter_wiki>[A-Z][a-zA-Z]+):(?P<inter_page>.*)'
     #u'|'.join(wikimacro.getNames(config))
-    macro_rule = r'(?P<macro_name>%s)\((-|(?P<macro_param>.*))\)' % '\w+'
+    macro_rule = r'(?P<macro_name>%s)\((-|(?P<macro_param>.*))\)' % r'\w+'
     page_rule = r'(?P<page_name>.*)'
 
     # For splitting table cells:
@@ -691,27 +691,21 @@ class DocEmitter:
 
     def preformatted_emit(self, node):
         content = node.content
-        self.processor_name = getattr(node, 'sect', '')
-        self.processor = None
-        if self.processor_name:
-            self._setProcessor(self.processor_name)
-        if self.processor is None:
+        self.parser = None
+        parser_name = getattr(node, 'sect', '')
+        if parser_name:
+            self.setParser(parser_name)
+        if self.parser is None:
+            self.parser_name = None
             return ''.join([
                 self.formatter.preformatted(1),
                 self.formatter.text(content),
                 self.formatter.preformatted(0),
             ])
         else:
-            buff = StringIO.StringIO()
-            self.request.redirect(buff)
-            try:
-                self.formatter.processor(
-                    self.processor_name,
-                    content.split('\n'),
-                    self.processor_is_parser)
-            finally:
-                self.request.redirect()
-            return buff.getvalue()
+            self.parser_name = parser_name
+            return self.request.redirectedOutput(
+                self.formatter.parser, self.parser_name, content.split('\n'))
 
     def default_emit(self, node):
         return ''.join([
@@ -742,24 +736,14 @@ class DocEmitter:
         self.formatter.no_magic = magic_save
         return output
 
-    def _setProcessor(self, name): # From the wiki.py parser
-        """ Set processer to either processor or parser named 'name' """
-        cfg = self.request.cfg
+
+    # Private helpers ------------------------------------------------------------
+
+    def setParser(self, name):
+        """ Set parser to parser named 'name' """
+        # XXX this is done by the formatter as well
         try:
-            self.processor = wikiutil.importPlugin(
-                cfg,
-                "processor",
-                name,
-                "process")
-            self.processor_is_parser = 0
+            self.parser = wikiutil.searchAndImportPlugin(self.request.cfg, "parser", name)
         except wikiutil.PluginMissingError:
-            try:
-                self.processor = wikiutil.importPlugin(
-                    cfg,
-                    "parser",
-                    name,
-                    "Parser")
-                self.processor_is_parser = 1
-            except wikiutil.PluginMissingError:
-                self.processor = None
+            self.parser = None
 
