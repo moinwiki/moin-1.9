@@ -11,6 +11,9 @@
       Creole 1.0 does not require us to support this.
     * No (non-bracketed) generic url recognition: this is "mission impossible"
       except if you want to risk lots of false positives.
+    * We do not allow : before // italic markup to avoid urls with unrecognized
+      schemes (like wtf://server/path) triggering italic rendering for the rest
+      of the paragraph.
 
     @copyright: 2007 MoinMoin:RadomirDopieralski (creole 0.5 implementation),
                 2007 MoinMoin:ThomasWaldmann (updates)
@@ -71,7 +74,8 @@ class DocParser:
         'image': r'{{(?P<image_target>.+?)\s*(\|\s*(?P<image_text>.+?)\s*)?}}',
         'macro': r'<<(?P<macro_target>.+?)\s*(\|\s*(?P<macro_text>.+?)\s*)?>>',
         'code': r'{{{(?P<code_text>.*?)}}}',
-        'emph': r'//',
+        'emph': r'(?<!:)//', # there must be no : in front of the // - avoids
+                             # italic rendering in urls with unknown protocols
         'strong': r'\*\*',
         'break': r'\\\\',
         'escape': r'~(?P<escaped_char>[^\s])', # tilde is the escape char
