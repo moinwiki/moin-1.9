@@ -4,60 +4,18 @@
 
     See http://wikicreole.org/ for latest specs.
 
+    Notes:
+    * No markup allowed in headings.
+      Creole 1.0 does not require us to support this.
+    * No markup allowed in table headings.
+      Creole 1.0 does not require us to support this.
+    * No (non-bracketed) generic url recognition: this is "mission impossible"
+      except if you want to risk lots of false positives.
+
     TODO:
-     * table headers render borderless:
-    |=a|=b|
-    |c|d|
-
-    Changes:
-    2007-08-08:
-     * PEP8 cleanup
-     * creole 1.0 support
-     * checked interwiki links, they are already compliant to creole 1.0
-     * use three angle brackets <<<>>> instead of two chars for placeholder
-      * unclear: do we need to do anything with that? macros are still with <<...>>!
-     * whitespace allowed before all elements except nowiki blocks
-      * (./) headings
-      * (./) lists (checked, was already compliant)
-      * (./) hor. rule (plus fix for being exactly 4 ----)
-      * (./) tables (checked, was already compliant)
-     * (./) added escape character ~ to core
-     * (./) changed escape character so it only escapes following character
-     * (./) removed escaping closing nowiki triple curly brackets because this is now covered by the escape character
-     * (./) a tilde in front of a URL should prevent it from becoming a link (checked, already compliant)
-
-    2007-03-23
-     * Implemented table headings, as in Creole 0.5
-     * No markup allowed in table headings
-
-    2007-02-10
-     * Images inside link descriptions
-     * Lists parsed and rendered properly
-
-    2007-02-05
-     * Tables rendered properly
-     * Links, images and nowiki in tables handled properly
-
-    2007-02-04
-     * {{...}} can now be used both for attachments and images
-     * No space required after bullets anymore
-     * Implemented escaping with space in <pre>
-     * Implemented greedy "}" parsing in nowiki
-     * Added <h1> header available with =...=
-     * Added <br> available with \\
-     * Added tables (temporarily rendered as <pre>)
-    TODO: "smart" resolving of bold/list ambiguity, table rendering
-
-
-    2006-11-29
-     * Fixed the bug causing newlines to be ignored inside //emphasis//
-       and **strong**.
-
-    2006-09-11
-     * Changed the bullet character for unordered lists to '*' according to spec.
-     * Requiring a space or tab after the bullet in lists (to avoid collisions).
-     * Moved the regula expression initialization to class initialization, for
-       faster parser object creation.
+    * table headers render borderless:
+      |=a|=b|
+      |c|d|
 
     @copyright: 2007 MoinMoin:RadomirDopieralski (creole 0.5 implementation),
                 2007 MoinMoin:ThomasWaldmann (updates)
