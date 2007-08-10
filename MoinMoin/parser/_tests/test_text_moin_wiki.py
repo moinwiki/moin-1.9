@@ -387,7 +387,6 @@ class TestRule(ParserTestCase):
 
     def testStandardRule(self):
         """ parser.wiki: ---- is standard rule """
-        #py.test.skip("Broken because of line numbers")
         result = self.parse('----')
         expected = re.compile(r'<hr.*?>')
         self.assert_(expected.search(result),
@@ -395,7 +394,6 @@ class TestRule(ParserTestCase):
 
     def testVariableRule(self):
         """ parser.wiki: ----- rules with size """
-        #py.test.skip("Broken because of line numbers")
 
         for size in range(5, 11):
             test = '-' * size
@@ -406,7 +404,6 @@ class TestRule(ParserTestCase):
 
     def testLongRule(self):
         """ parser.wiki: ------------ long rule shortened to hr6 """
-        #py.test.skip("Broken because of line numbers")
         test = '-' * 254
         result = self.parse(test)
         expected = re.compile(r'<hr class="hr6".*?>')
@@ -429,7 +426,6 @@ class TestBlock(ParserTestCase):
 
     def testParagraphBeforeBlock(self):
         """ parser.wiki: paragraph closed before block element """
-        #py.test.skip("Broken because of line numbers")
         text = """AAA
 %s
 """
@@ -451,7 +447,6 @@ class TestBlock(ParserTestCase):
         Currently an empty paragraph is created, which make no sense but
         no real harm.
         """
-        #py.test.skip("Broken because of line numbers")
         text = """AAA
 
 %s
@@ -530,8 +525,6 @@ You can use {{{brackets}}}
     def testTextBeforeNestingPreBrackets(self):
         """ tests text before nested {{{ }}} for the wiki parser
         """
-        #py.test.skip("Broken because of line numbers")
-
         raw = """Example
         {{{
 You can use {{{brackets}}}}}}"""
@@ -542,28 +535,23 @@ You can use {{{brackets}}}}}}"""
     def testManyNestingPreBrackets(self):
         """ tests two nestings  ({{{ }}} and {{{ }}}) in one line for the wiki parser
         """
-        py.test.skip("Broken because not implemented yet")
+        py.test.skip("Broken")
 
         raw = """{{{
 Test {{{brackets}}} and test {{{brackets}}}
 }}}"""
         output = self.parse(raw)
         output = ''.join(output)
-        result = '</span><p><pre>Test {{{brackets}}} and test {{{brackets}}}' in output
-        expected = True
-
-        assert expected == result
+        expected = '<pre>Test {{{brackets}}} and test {{{brackets}}}'
+        assert expected in output
 
     def testMultipleShortPreSections(self):
         """
         tests two single {{{ }}} in one line
         """
-        py.test.skip("Broken because not implemented yet")
-
-        raw = 'def {{{ghi}}} jkl {{{mno}}} pqr'
+        raw = 'def {{{ghi}}} jkl {{{mno}}}'
         output = ''.join(self.parse(raw))
-        # expected output copied from 1.5
-        expected = 'def <tt>ghi</tt> jkl <tt>mno</tt> pqr'
+        expected = 'def <tt>ghi</tt> jkl <tt>mno</tt>'
         assert expected in output
 
 class TestLinkingMarkup(ParserTestCase):
