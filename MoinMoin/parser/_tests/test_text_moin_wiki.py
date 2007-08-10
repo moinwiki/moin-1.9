@@ -9,7 +9,6 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import unittest # LEGACY UNITTEST, PLEASE DO NOT IMPORT unittest IN NEW TESTS, PLEASE CONSULT THE py.test DOCS
 import re
 from StringIO import StringIO
 
@@ -20,7 +19,7 @@ from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
 from MoinMoin.formatter.text_html import Formatter as HtmlFormatter
 
 
-class ParserTestCase(unittest.TestCase):
+class ParserTestCase(object):
     """ Helper class that provide a parsing method """
 
     def parse(self, body):
@@ -55,16 +54,12 @@ class TestParagraphs(ParserTestCase):
     def testFirstParagraph(self):
         """ parser.wiki: first paragraph should be in <p> """
         result = self.parse('First')
-        expected = re.compile(r'<p.*?>\s*First\s*')
-        self.assert_(expected.search(result),
-                      '"%s" not in "%s"' % (expected.pattern, result))
+        assert re.search(r'<p.*?>\s*First\s*', result)
 
     def testEmptyLineBetweenParagraphs(self):
         """ parser.wiki: empty line separates paragraphs """
         result = self.parse('First\n\nSecond')
-        expected = re.compile(r'<p.*?>\s*Second\s*')
-        self.assert_(expected.search(result),
-                     '"%s" not in "%s"' % (expected.pattern, result))
+        assert re.search(r'<p.*?>\s*Second\s*', result)
 
     def testParagraphAfterBlockMarkup(self):
         """ parser.wiki: create paragraph after block markup """
@@ -82,21 +77,19 @@ class TestParagraphs(ParserTestCase):
         for item in markup:
             text = item + 'Paragraph'
             result = self.parse(text)
-            expected = re.compile(r'<p.*?>\s*Paragraph\s*')
-            self.assert_(expected.search(result),
-                         '"%s" not in "%s"' % (expected.pattern, result))
+            assert re.search(r'<p.*?>\s*Paragraph\s*', result)
 
 
 class TestHeadings(ParserTestCase):
     """ Test various heading problems """
 
-    def setUp(self):
+    def class_setup(self):
         """ Require show_section_numbers = 0 to workaround counter
         global state saved in request.
         """
         self.config = self.TestConfig(show_section_numbers=0)
 
-    def tearDown(self):
+    def class_teardown(self):
         del self.config
 
     def testIgnoreWhiteSpaceAroundHeadingText(self):
@@ -114,19 +107,18 @@ class TestHeadings(ParserTestCase):
         expected = self.parse('= head =')
         for test in tests:
             result = self.parse(test)
-            self.assertEqual(result, expected,
-                'Expected "%(expected)s" but got "%(result)s"' % locals())
+            assert result == expected
 
 
 class TestTOC(ParserTestCase):
 
-    def setUp(self):
+    def class_setup(self):
         """ Require show_section_numbers = 0 to workaround counter
         global state saved in request.
         """
         self.config = self.TestConfig(show_section_numbers=0)
 
-    def tearDown(self):
+    def class_teardown(self):
         del self.config
 
     def testHeadingWithWhiteSpace(self):
@@ -149,8 +141,7 @@ Text
 """
         expected = self.parse(standard)
         result = self.parse(withWhitespace)
-        self.assertEqual(result, expected,
-            'Expected "%(expected)s" but got "%(result)s"' % locals())
+        assert  result == expected
 
 
 class TestDateTimeMacro(ParserTestCase):
@@ -182,11 +173,11 @@ class TestDateTimeMacro(ParserTestCase):
         (u'[[DateTime(1970-01-06T00:00:00)]]',   '1970-01-06 00:00:00'), # fails e.g. for Europe/Vilnius
         )
 
-    def setUp(self):
+    def class_setup(self):
         """ Require default date and time format config values """
         self.config = self.TestConfig(defaults=('date_fmt', 'datetime_fmt'))
 
-    def tearDown(self):
+    def class_teardown(self):
         del self.config
 
     def testDateTimeMacro(self):
@@ -202,8 +193,7 @@ class TestDateTimeMacro(ParserTestCase):
         for test, expected in self._tests:
             html = self.parse(self.text % test)
             result = self.needle.search(html).group(1)
-            self.assertEqual(result, expected,
-                'Expected "%(expected)s" but got "%(result)s"; %(note)s' % locals())
+            assert result == expected
 
 
 class TestTextFormatingTestCase(ParserTestCase):
@@ -228,8 +218,7 @@ class TestTextFormatingTestCase(ParserTestCase):
         for test, expected in self._tests:
             html = self.parse(self.text % test)
             result = self.needle.search(html).group(1)
-            self.assertEqual(result, expected,
-                             'Expected "%(expected)s" but got "%(result)s"' % locals())
+            assert result == expected
 
 
 class TestCloseInlineTestCase(ParserTestCase):
@@ -247,10 +236,8 @@ class TestCloseInlineTestCase(ParserTestCase):
              r"\s*</span></strong></em></p>"),
             )
         for test, expected in cases:
-            needle = re.compile(expected)
             result = self.parse(test)
-            self.assert_(needle.search(result),
-                         'Expected "%(expected)s" but got "%(result)s"' % locals())
+            assert re.search(expected, result)
 
 
 class TestInlineCrossing(ParserTestCase):
@@ -263,10 +250,8 @@ class TestInlineCrossing(ParserTestCase):
 
         expected = (r"<p><em>a<strong>ab</strong></em><strong>b</strong>\s*</p>")
         test = "''a'''ab''b'''\n"
-        needle = re.compile(expected)
         result = self.parse(test)
-        self.assert_(needle.search(result),
-                     'Expected "%(expected)s" but got "%(result)s"' % locals())
+        assert re.search(expected, result)
 
 
 class TestEscapeHTML(ParserTestCase):
@@ -328,8 +313,7 @@ class TestEscapeHTML(ParserTestCase):
     def _test(self, test):
         expected = r'&lt;escape-me&gt;'
         result = self.parse(test)
-        self.assert_(re.search(expected, result),
-                     'Expected "%(expected)s" but got "%(result)s"' % locals())
+        assert re.search(expected, result)
 
 
 class TestEscapeWikiTableMarkup(ParserTestCase):
@@ -371,8 +355,7 @@ class TestEscapeWikiTableMarkup(ParserTestCase):
     def do(self, test):
         expected = r'&lt;tablewidth="80"&gt;'
         result = self.parse(test)
-        self.assert_(re.search(expected, result),
-                     'Expected "%(expected)s" but got "%(result)s"' % locals())
+        assert re.search(expected, result)
 
 
 class TestRule(ParserTestCase):
@@ -382,15 +365,12 @@ class TestRule(ParserTestCase):
         """ parser.wiki: --- is no rule """
         result = self.parse('---')
         expected = '---' # inside <p>
-        self.assert_(expected in result,
-                     'Expected "%(expected)s" but got "%(result)s"' % locals())
+        assert expected in result
 
     def testStandardRule(self):
         """ parser.wiki: ---- is standard rule """
         result = self.parse('----')
-        expected = re.compile(r'<hr.*?>')
-        self.assert_(expected.search(result),
-                     'Expected "%(expected)s" but got "%(result)s"' % locals())
+        assert re.search(r'<hr.*?>', result)
 
     def testVariableRule(self):
         """ parser.wiki: ----- rules with size """
@@ -398,17 +378,13 @@ class TestRule(ParserTestCase):
         for size in range(5, 11):
             test = '-' * size
             result = self.parse(test)
-            expected = re.compile(r'<hr class="hr%d".*?>' % (size - 4))
-            self.assert_(expected.search(result),
-                     'Expected "%(expected)s" but got "%(result)s"' % locals())
+            assert re.search(r'<hr class="hr%d".*?>' % (size - 4), result)
 
     def testLongRule(self):
         """ parser.wiki: ------------ long rule shortened to hr6 """
         test = '-' * 254
         result = self.parse(test)
-        expected = re.compile(r'<hr class="hr6".*?>')
-        self.assert_(expected.search(result),
-                     'Expected "%(expected)s" but got "%(result)s"' % locals())
+        assert re.search(r'<hr class="hr6".*?>', result)
 
 
 class TestBlock(ParserTestCase):
@@ -434,9 +410,7 @@ class TestBlock(ParserTestCase):
             expected = r'<p.*?>AAA\s*\n*%s' % blockstart
             needle = re.compile(expected, re.MULTILINE)
             result = self.parse(text % test)
-            match = needle.search(result)
-            self.assert_(match is not None,
-                         'Expected "%(expected)s" but got "%(result)s"' % locals())
+            assert needle.search(result)
 
     def testEmptyLineBeforeBlock(self):
         """ parser.wiki: empty lines before block element ignored
@@ -455,9 +429,7 @@ class TestBlock(ParserTestCase):
             expected = r'<p.*?>AAA.*?(<p.*?>\s*)*%s' % blockstart # XXX ignores addtl. <p>
             needle = re.compile(expected, re.MULTILINE)
             result = self.parse(text % test)
-            match = needle.search(result)
-            self.assert_(match is not None,
-                         'Expected "%(expected)s" but got "%(result)s"' % locals())
+            assert needle.search(result)
 
     def testUrlAfterBlock(self):
         """ parser.wiki: tests url after block element """
@@ -593,3 +565,4 @@ class TestLinkingMarkup(ParserTestCase):
 
 
 coverage_modules = ['MoinMoin.parser.text_moin_wiki']
+
