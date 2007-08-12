@@ -987,9 +987,9 @@ class User:
             if wikiutil.isStrictWikiname(self.name):
                 markup = pagename
             else:
-                markup = '["%s"]' % pagename
+                markup = '[[%s]]' % pagename
         else:
-            markup = '%s:%s' % (wikiname, pagename) # TODO: support spaces in pagename
+            markup = '[[%s:%s]]' % (wikiname, pagename)
         return markup
 
     def signature(self):

@@ -851,7 +851,7 @@ def pagelinkmarkup(pagename):
     if re.match(Parser.word_rule + "$", pagename):
         return pagename
     else:
-        return u'["%s"]' % pagename # XXX use quoteName(pagename) later
+        return u'[[%s]]' % pagename # XXX use quoteName(pagename) later
 
 #############################################################################
 ### mimetype support

@@ -75,7 +75,7 @@ class TestExpandExtendedName(TestExpandUserName):
         """ PageEditor: expand @USERNAME@ extended name - enabled """
         try:
             config = self.TestConfig()
-            self.assertEqual(self.expand(), u'["%s"]' % self.name)
+            self.assertEqual(self.expand(), u'[[%s]]' % self.name)
         finally:
             del config
 
