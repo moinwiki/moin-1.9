@@ -7,7 +7,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 import os
-from MoinMoin import macro
+from MoinMoin import macro, wikiutil
 from MoinMoin.logfile import eventlog
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
@@ -58,7 +58,8 @@ class TestHits:
         """ macro ImageLink test: 'no args for ImageLink (ImageLink is executed on FrontPage) """
         #self._createTestPage('This is an example to test a macro')
         result = self._test_macro('ImageLink', '')
-        expected = '<div class="message">Not enough arguments to ImageLink macro! e.g. <<ImageLink(example.png, WikiName, width=200)>>.</div>'
+        expected = '<div class="message">%s</div>' % wikiutil.escape(
+                'Not enough arguments to ImageLink macro! e.g. <<ImageLink(example.png, WikiName, width=200)>>.')
         assert result == expected
 
     def testImageLinkTwoParamsNoKeyword(self):
