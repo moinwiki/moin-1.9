@@ -653,6 +653,14 @@ class Parser:
             if ma.group('simple_text'):
                 desc = ma.group('simple_text')
                 desc = wikiutil.escape(desc)
+                desc = self.formatter.text(desc)
+            elif ma.group('transclude'):
+                groupdict = ma.groupdict()
+                if groupdict.get('transclude_args') is None:
+                    # if transcluded obj (image) has no description, use target for it
+                    groupdict['transclude_args'] = target
+                desc = ma.group('transclude')
+                desc = self._transclude_repl(desc, groupdict)
         if m:
             if m.group('page_name'):
                 page_name = m.group('page_name')
@@ -667,18 +675,18 @@ class Parser:
                 if not page_name:
                     page_name = self.formatter.page.page_name
                 if not desc:
-                    desc = page_name
+                    desc = self.formatter.text(page_name)
                 return (self.formatter.pagelink(1, page_name, anchor=anchor) +
-                        self.formatter.text(desc) +
+                        desc +
                         self.formatter.pagelink(0, page_name))
 
             elif m.group('extern_addr'):
                 scheme = m.group('extern_scheme')
                 target = m.group('extern_addr')
                 if not desc:
-                    desc = target
+                    desc = self.formatter.text(target)
                 return (self.formatter.url(1, target, css=scheme) +
-                        self.formatter.text(desc) +
+                        desc +
                         self.formatter.url(0))
 
             elif m.group('inter_wiki'):
@@ -687,17 +695,16 @@ class Parser:
                 word = '%s:%s' % (wiki_name, page_name)
                 wikitag_bad = wikiutil.resolve_wiki(self.request, word)[3]
                 if not desc:
-                    desc = page_name
+                    desc = self.formatter.text(page_name)
                 return (self.formatter.interwikilink(1, wiki_name, page_name) +
-                        self.formatter.text(desc) +
+                        desc +
                         self.formatter.interwikilink(0, wiki_name, page_name))
 
             elif m.group('attach_scheme'):
                 scheme = m.group('attach_scheme')
                 url = wikiutil.url_unquote(m.group('attach_addr'), want_unicode=True)
                 if not desc:
-                    desc = url
-                    desc = wikiutil.escape(desc)
+                    desc = self.formatter.text(url)
                 if scheme == 'attachment':
                     return self.formatter.attachment_link(url, desc, title=desc)
                 elif scheme == 'drawing':
