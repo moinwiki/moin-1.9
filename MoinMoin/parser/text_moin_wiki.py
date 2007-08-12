@@ -9,14 +9,6 @@
 """
 
 ur'''
-    # For link descriptions:
-    link_rules = r'|'.join([
-            _get_rule('transclude', inline_tab),
-            _get_rule('break', inline_tab),
-            _get_rule('char', inline_tab),
-    ])
-    link_re = re.compile(link_rules, re.VERBOSE|re.IGNORECASE|re.UNICODE)
-
 
     def anchor_link_emit(self, node):
         return ''.join([
@@ -99,20 +91,51 @@ class Parser:
         'parent': re.escape(PARENT_PREFIX),
     }
 
-    # For the link targets:
+    # link targets:
     extern_rule = r'(?P<extern_addr>(?P<extern_scheme>%s)\:.*)' % url_scheme
     attach_rule = r'(?P<attach_scheme>attachment|drawing)\:(?P<attach_addr>.*)'
     inter_rule = r'(?P<inter_wiki>[A-Z][a-zA-Z]+):(?P<inter_page>.*)'
     page_rule = r'(?P<page_name>.*)'
 
-    addr_rules = r'|'.join([
+    link_target_rules = r'|'.join([
         extern_rule,
         attach_rule,
         inter_rule,
         page_rule,
     ])
-    addr_re = re.compile(addr_rules, re.VERBOSE|re.UNICODE)
+    link_target_re = re.compile(link_target_rules, re.VERBOSE|re.UNICODE)
 
+    transclude_rule = r"""
+        (?P<transclude>
+            \{\{
+            (?P<transclude_target>.+?)\s*  # usually image target (eat trailing space)
+            (\|\s*(?P<transclude_args>.+?)\s*)?  # usually image alt text (optional, strip space)
+            \}\}
+        )
+    """
+    text_rule = r"""
+        (?P<simple_text>
+            .*
+        )
+    """
+    # link descriptions:
+    link_desc_rules = r'|'.join([
+            transclude_rule,
+            text_rule,
+            # _get_rule('break', inline_tab),
+            # _get_rule('char', inline_tab),
+    ])
+    link_desc_re = re.compile(link_desc_rules, re.VERBOSE|re.UNICODE)
+
+    # transclude descriptions:
+    transclude_desc_rules = r'|'.join([
+            text_rule,
+            # _get_rule('break', inline_tab),
+            # _get_rule('char', inline_tab),
+    ])
+    transclude_desc_re = re.compile(transclude_desc_rules, re.VERBOSE|re.UNICODE)
+
+    # lists:
     ol_rule = ur"""
         ^\s+  # indentation
         (?:[0-9]+|[aAiI])\. # arabic, alpha, roman counting
@@ -208,14 +231,11 @@ class Parser:
 )|(?P<link>
     \[\[
     (?P<link_target>.+?)\s*  # link target (eat trailing space)
-    (\|\s*(?P<link_text>.+?)?\s*)? # link text (optional, strip space)
+    (\|\s*(?P<link_args>.+?)?\s*)? # link description (usually text, optional, strip space)
     \]\]
-)|(?P<transclude>
-    \{\{
-    (?P<transclude_target>.+?)\s*  # usually image target (eat trailing space)
-    (\|\s*(?P<transclude_arg>.+?)\s*)?  # usually image alt text (optional, strip space)
-    \}\}
-)|(?P<url>
+)|
+%(transclude_rule)s
+|(?P<url>
     %(url_rule)s
 )|(?P<email>
     [-\w._+]+  # name
@@ -281,6 +301,7 @@ class Parser:
         'ol_rule': ol_rule,
         'dl_rule': dl_rule,
         'word_rule': word_rule,
+        'transclude_rule': transclude_rule,
         'smiley': u'|'.join([re.escape(s) for s in config.smileys])}
 
     # Don't start p before these
@@ -409,8 +430,8 @@ class Parser:
             return self.formatter.text(word)
         self.is_big = not self.is_big
         return self.formatter.big(self.is_big)
-    _big_on_repl = _small_repl
-    _big_off_repl = _small_repl
+    _big_on_repl = _big_repl
+    _big_off_repl = _big_repl
 
     def _emph_repl(self, word, groups):
         """Handle emphasis, i.e. '' and '''."""
@@ -560,24 +581,34 @@ class Parser:
         target = groups.get('transclude_target', '').strip()
         args = (groups.get('transclude_args', '') or '').strip()
         target = wikiutil.url_unquote(target, want_unicode=True)
-        m = self.addr_re.match(target)
+        m = self.link_target_re.match(target)
+        ma = self.transclude_desc_re.match(args)
+        desc = None
+        if ma:
+            if ma.group('simple_text'):
+                desc = ma.group('simple_text')
+                desc = wikiutil.escape(desc)
         if m:
             if m.group('extern_addr'):
                 scheme = m.group('extern_scheme')
                 target = m.group('extern_addr')
+                if not desc:
+                    desc = wikiutil.escape(target)
                 if scheme.startswith('http'): # can also be https
-                    # XXX currently only supports ext. image inclusion
-                    return self.formatter.image(src=target, alt=args, html_class='external_image')
+                    # currently only supports ext. image inclusion
+                    return self.formatter.image(src=target, alt=desc, title=desc, css_class='external_image')
 
             elif m.group('attach_scheme'):
                 scheme = m.group('attach_scheme')
                 url = wikiutil.url_unquote(m.group('attach_addr'), want_unicode=True)
+                if not desc:
+                    desc = wikiutil.escape(url)
                 if scheme == 'attachment':
                     mt = wikiutil.MimeType(filename=url)
                     if mt.major == 'text':
-                        return self.formatter.attachment_inlined(url, args)
+                        return self.formatter.attachment_inlined(url, desc)
                     elif mt.major == 'image':
-                        return self.formatter.attachment_image(url, alt=args, html_class='image')
+                        return self.formatter.attachment_image(url, alt=desc, title=desc, css_class='image')
                     else:
                         # use EmbedObject for other mimetypes
                         from MoinMoin.macro.EmbedObject import EmbedObject
@@ -592,7 +623,7 @@ class Parser:
                             href = AttachFile.getAttachUrl(pagename, url, self.request, escaped=1)
                             return self.formatter.rawHTML(EmbedObject.embed(EmbedObject(macro, wikiutil.escape(url)), mt, href))
                 elif scheme == 'drawing':
-                    return self.formatter.attachment_drawing(url, args)
+                    return self.formatter.attachment_drawing(url, desc)
 
             elif m.group('page_name'): # TODO
                 page_name = m.group('page_name')
@@ -604,9 +635,9 @@ class Parser:
                 return u"Error: [[RemoteInclude(%s:%s,%s)]] still missing." % (wiki_name, page_name, args)
 
             else:
-                return self.formatter.text('[[%s|%s]]' % (target, text))
-
-            # XXX??? re.sub(self.link_re, self._replace, text or node.content)
+                if not desc:
+                    desc = target
+                return self.formatter.text('[[%s|%s]]' % (target, desc))
         return word +'???'
     _transclude_target_repl = _transclude_repl
     _transclude_args_repl = _transclude_repl
@@ -614,8 +645,14 @@ class Parser:
     def _link_repl(self, word, groups):
         """Handle [[target|text]] links."""
         target = groups.get('link_target', '')
-        text = (groups.get('link_text', '') or '').strip()
-        m = self.addr_re.match(target)
+        args = (groups.get('link_args', '') or '').strip()
+        m = self.link_target_re.match(target)
+        ma = self.link_desc_re.match(args)
+        desc = None
+        if ma:
+            if ma.group('simple_text'):
+                desc = ma.group('simple_text')
+                desc = wikiutil.escape(desc)
         if m:
             if m.group('page_name'):
                 page_name = m.group('page_name')
@@ -629,17 +666,19 @@ class Parser:
                     anchor = ""
                 if not page_name:
                     page_name = self.formatter.page.page_name
-                if not text:
-                    text = page_name
+                if not desc:
+                    desc = page_name
                 return (self.formatter.pagelink(1, page_name, anchor=anchor) +
-                        self.formatter.text(text) +
+                        self.formatter.text(desc) +
                         self.formatter.pagelink(0, page_name))
 
             elif m.group('extern_addr'):
                 scheme = m.group('extern_scheme')
                 target = m.group('extern_addr')
+                if not desc:
+                    desc = target
                 return (self.formatter.url(1, target, css=scheme) +
-                        self.formatter.text(text) +
+                        self.formatter.text(desc) +
                         self.formatter.url(0))
 
             elif m.group('inter_wiki'):
@@ -647,25 +686,28 @@ class Parser:
                 page_name = m.group('inter_page')
                 word = '%s:%s' % (wiki_name, page_name)
                 wikitag_bad = wikiutil.resolve_wiki(self.request, word)[3]
-                if not text:
-                    text = page_name
+                if not desc:
+                    desc = page_name
                 return (self.formatter.interwikilink(1, wiki_name, page_name) +
-                        self.formatter.text(text) +
+                        self.formatter.text(desc) +
                         self.formatter.interwikilink(0, wiki_name, page_name))
 
             elif m.group('attach_scheme'):
                 scheme = m.group('attach_scheme')
                 url = wikiutil.url_unquote(m.group('attach_addr'), want_unicode=True)
+                if not desc:
+                    desc = url
+                    desc = wikiutil.escape(desc)
                 if scheme == 'attachment':
-                    return self.formatter.attachment_link(url, text)
+                    return self.formatter.attachment_link(url, desc, title=desc)
                 elif scheme == 'drawing':
-                    return self.formatter.attachment_drawing(url, text)
+                    return self.formatter.attachment_drawing(url, desc, title=desc, alt=desc)
             else:
-                return self.formatter.text('[[%s|%s]]' % (target, text))
-
-            # XXX??? re.sub(self.link_re, self._replace, text or node.content)
+                if not desc:
+                    desc = target
+                return self.formatter.text('[[%s|%s]]' % (target, desc))
     _link_target_repl = _link_repl
-    _link_text_repl = _link_repl
+    _link_args_repl = _link_repl
 
     def _email_repl(self, word, groups):
         """Handle email addresses (without a leading mailto:)."""
@@ -1076,6 +1118,15 @@ class Parser:
             result.append(self.formatter.text(line[lastpos:]))
         return u''.join(result)
 
+    def _replace(self, match):
+        """ Same as replace() but with no magic """
+        for name, text in match.groupdict().iteritems():
+            if text is not None:
+                # Get replace method and replace text
+                replace_func = getattr(self, '_%s_repl' % name)
+                result = replace_func(text, match.groupdict())
+                return result
+
     def replace(self, match, inhibit_p=False):
         """ Replace match using type name """
         result = []
@@ -1090,7 +1141,7 @@ class Parser:
 
                 # Get replace method and replace hit
                 replace_func = getattr(self, '_%s_repl' % type)
-                result.append(replace_func(hit, match.groupdict())) # new api: give groups
+                result.append(replace_func(hit, match.groupdict()))
                 return ''.join(result)
         else:
             # We should never get here
