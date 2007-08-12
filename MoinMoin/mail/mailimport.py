@@ -264,7 +264,7 @@ def import_mail_from_message(request, message):
 
     #if not (generate_summary and "/" in pagename):
     #generate header in any case:
-    new_content += u"'''Mail: %s (%s, [[DateTime(%s)]])'''\n\n" % (msg['subject'], email_to_markup(request, msg['from_addr']), msg['date'])
+    new_content += u"'''Mail: %s (%s, <<DateTime(%s)>>)'''\n\n" % (msg['subject'], email_to_markup(request, msg['from_addr']), msg['date'])
 
     new_content += d['content']
     new_content += "\n" + u"\n * ".join(attachment_links)
@@ -288,12 +288,12 @@ def import_mail_from_message(request, message):
             elif table_ends is not None and not line.startswith("||"):
                 break
 
-        # in order to let the gettext system recognise the [[GetText]] calls used below,
+        # in order to let the gettext system recognise the <<GetText>> calls used below,
         # we must repeat them here:
         [_("Date"), _("From"), _("To"), _("Content"), _("Attachments")]
 
         table_header = (u"\n\n## mail_overview (don't delete this line)\n" +
-                        u"|| '''[[GetText(Date)]] ''' || '''[[GetText(From)]] ''' || '''[[GetText(To)]] ''' || '''[[GetText(Content)]] ''' || '''[[GetText(Attachments)]] ''' ||\n"
+                        u"|| '''<<GetText(Date)>> ''' || '''<<GetText(From)>> ''' || '''<<GetText(To)>> ''' || '''<<GetText(Content)>> ''' || '''<<GetText(Attachments)>> ''' ||\n"
                        )
 
         from_col = email_to_markup(request, msg['from_addr'])
@@ -302,7 +302,7 @@ def import_mail_from_message(request, message):
         subj_col = '[%s %s]' % (wikiutil.quoteName(pagename), msg['subject'])
         date_col = msg['date']
         attach_col = " ".join(attachment_links)
-        new_line = u'|| [[DateTime(%s)]] || %s || %s || %s || %s ||' % (date_col, from_col, to_col, subj_col, attach_col)
+        new_line = u'|| <<DateTime(%s)>> || %s || %s || %s || %s ||' % (date_col, from_col, to_col, subj_col, attach_col)
         if found_table is not None:
             content = "\n".join(old_content[:table_ends] + [new_line] + old_content[table_ends:])
         else:

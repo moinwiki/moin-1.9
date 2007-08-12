@@ -300,7 +300,7 @@ Please review the page and save then. Do not save this page as it is!""")
                     loadable_draft = True
                     page_rev = rev
                     draft_timestamp_str = request.user.getFormattedDateTime(draft_timestamp)
-                    draft_message = _(u"'''[[BR]]Your draft based on revision %(draft_rev)d (saved %(draft_timestamp_str)s) can be loaded instead of the current revision %(page_rev)d by using the load draft button - in case you lost your last edit somehow without saving it.''' A draft gets saved for you when you do a preview, cancel an edit or unsuccessfully save.") % locals()
+                    draft_message = _(u"'''<<BR>>Your draft based on revision %(draft_rev)d (saved %(draft_timestamp_str)s) can be loaded instead of the current revision %(page_rev)d by using the load draft button - in case you lost your last edit somehow without saving it.''' A draft gets saved for you when you do a preview, cancel an edit or unsuccessfully save.") % locals()
 
         # Setup status message
         status = [kw.get('msg', ''), conflict_msg, edit_lock_message, draft_message]
@@ -713,17 +713,17 @@ Try a different name.""") % (newpagename, )
         signature = u.signature()
         variables = {
             'PAGE': self.page_name,
-            'TIME': "[[DateTime(%s)]]" % now,
-            'DATE': "[[Date(%s)]]" % now,
+            'TIME': "<<DateTime(%s)>>" % now,
+            'DATE': "<<Date(%s)>>" % now,
             'ME': u.name,
             'USERNAME': signature,
             'USER': "-- %s" % signature,
-            'SIG': "-- %s [[DateTime(%s)]]" % (signature, now),
+            'SIG': "-- %s <<DateTime(%s)>>" % (signature, now),
         }
 
         if u.valid and u.name:
             if u.email:
-                variables['MAILTO'] = "[[MailTo(%s)]]" % u.email
+                variables['MAILTO'] = "<<MailTo(%s)>>" % u.email
             # Users can define their own variables via
             # UserHomepage/MyDict, which override the default variables.
             userDictPage = u.name + "/MyDict"
@@ -1170,9 +1170,9 @@ class PageLock:
                 # warn user about existing lock
 
                 result = 1, _(
-"""This page was opened for editing or last previewed at %(timestamp)s by %(owner)s.[[BR]]
+"""This page was opened for editing or last previewed at %(timestamp)s by %(owner)s.<<BR>>
 '''You should ''refrain from editing'' this page for at least another %(mins_valid)d minute(s),
-to avoid editing conflicts.'''[[BR]]
+to avoid editing conflicts.'''<<BR>>
 To leave the editor, press the Cancel button.""") % {
                     'timestamp': timestamp, 'owner': owner, 'mins_valid': mins_valid}
 

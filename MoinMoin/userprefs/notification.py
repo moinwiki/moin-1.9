@@ -156,7 +156,7 @@ class Settings(UserPrefBase):
         notifylist = self.request.user.getSubscriptionList()
 
         self.make_row(
-            html.Raw(_('Subscribed wiki pages[[BR]](one regex per line)')),
+            html.Raw(_('Subscribed wiki pages<<BR>>(one regex per line)')),
             [html.TEXTAREA(name="subscribed_pages", rows="6", cols="50").append(
                 '\n'.join(notifylist)), ],
             valign="top"

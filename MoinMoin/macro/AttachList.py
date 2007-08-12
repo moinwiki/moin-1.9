@@ -3,7 +3,7 @@
 
     A macro to produce a list of attached files
 
-    Usage: [[AttachList([pagename,mime_type])]]
+    Usage: <<AttachList([pagename,mime_type])>>
 
     If pagename isn't set, the current pagename is used.
     If mime_type isn't given, all files are listed.
