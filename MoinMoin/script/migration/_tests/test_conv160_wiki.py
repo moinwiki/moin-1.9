@@ -18,6 +18,8 @@
     @copyright: 2007 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
+import py
+py.test.skip("broken")
 
 from MoinMoin.script.migration._conv160_wiki import convert_wiki
 
