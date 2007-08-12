@@ -101,7 +101,7 @@ class Parser:
 
     # For the link targets:
     extern_rule = r'(?P<extern_addr>(?P<extern_scheme>%s)\:.*)' % url_scheme
-    attach_rule = r'(?P<attach_scheme>attachment|inline|drawing)\:(?P<attach_addr>.*)'
+    attach_rule = r'(?P<attach_scheme>attachment|drawing)\:(?P<attach_addr>.*)'
     inter_rule = r'(?P<inter_wiki>[A-Z][a-zA-Z]+):(?P<inter_page>.*)'
     page_rule = r'(?P<page_name>.*)'
 
@@ -554,27 +554,60 @@ class Parser:
     _url_target_repl = _url_repl
     _url_scheme_repl = _url_repl
 
-    def get_image(self, addr, text=''):
-        """Return markup for image depending on the address."""
-        if addr is None:
-            addr = ''
-        url = wikiutil.url_unquote(addr, want_unicode=True)
-        if addr.startswith('http'): # can also be https
-            return self.formatter.image(src=url, alt=text, html_class='external_image')
-        else:
-            return self.formatter.attachment_image(url, alt=text, html_class='image')
 
     def _transclude_repl(self, word, groups):
         """Handles transcluding content, usually embedding images."""
         target = groups.get('transclude_target', '').strip()
         args = (groups.get('transclude_args', '') or '').strip()
-        if (target.endswith('.png') or  # XXX we have a fn for this???
-            target.endswith('.gif') or
-            target.endswith('.jpg')):
-            return self.get_image(target, args)
-        else:
-            url = wikiutil.url_unquote(target, want_unicode=True)
-            return self.formatter.attachment_link(url, args)
+        target = wikiutil.url_unquote(target, want_unicode=True)
+        m = self.addr_re.match(target)
+        if m:
+            if m.group('extern_addr'):
+                scheme = m.group('extern_scheme')
+                target = m.group('extern_addr')
+                if scheme.startswith('http'): # can also be https
+                    # XXX currently only supports ext. image inclusion
+                    return self.formatter.image(src=target, alt=args, html_class='external_image')
+
+            elif m.group('attach_scheme'):
+                scheme = m.group('attach_scheme')
+                url = wikiutil.url_unquote(m.group('attach_addr'), want_unicode=True)
+                if scheme == 'attachment':
+                    mt = wikiutil.MimeType(filename=url)
+                    if mt.major == 'text':
+                        return self.formatter.attachment_inlined(url, args)
+                    elif mt.major == 'image':
+                        return self.formatter.attachment_image(url, alt=args, html_class='image')
+                    else:
+                        # use EmbedObject for other mimetypes
+                        from MoinMoin.macro.EmbedObject import EmbedObject
+                        from MoinMoin.action import AttachFile
+                        if mt is not None:
+                            # reuse class tmp from Despam to define macro
+                            from MoinMoin.action.Despam import tmp
+                            macro = tmp()
+                            macro.request = self.request
+                            macro.formatter = self.request.html_formatter
+                            pagename = self.formatter.page.page_name
+                            href = AttachFile.getAttachUrl(pagename, url, self.request, escaped=1)
+                            return self.formatter.rawHTML(EmbedObject.embed(EmbedObject(macro, wikiutil.escape(url)), mt, href))
+                elif scheme == 'drawing':
+                    return self.formatter.attachment_drawing(url, args)
+
+            elif m.group('page_name'): # TODO
+                page_name = m.group('page_name')
+                return u"Error: [[Include(%s,%s)]] emulation missing..." % (page_name, args)
+
+            elif m.group('inter_wiki'): # TODO
+                wiki_name = m.group('inter_wiki')
+                page_name = m.group('inter_page')
+                return u"Error: [[RemoteInclude(%s:%s,%s)]] still missing." % (wiki_name, page_name, args)
+
+            else:
+                return self.formatter.text('[[%s|%s]]' % (target, text))
+
+            # XXX??? re.sub(self.link_re, self._replace, text or node.content)
+        return word +'???'
     _transclude_target_repl = _transclude_repl
     _transclude_args_repl = _transclude_repl
 
@@ -623,28 +656,10 @@ class Parser:
             elif m.group('attach_scheme'):
                 scheme = m.group('attach_scheme')
                 url = wikiutil.url_unquote(m.group('attach_addr'), want_unicode=True)
-                if scheme == 'inline':
-                    # inline the attachment if it's major mimetype is text
-                    mt = wikiutil.MimeType(filename=url)
-                    if mt.major == 'text':
-                        return self.formatter.attachment_inlined(url, text)
-                    else:
-                        # use EmbedObject for other mimetypes
-                        from MoinMoin.macro.EmbedObject import EmbedObject
-                        from MoinMoin.action import AttachFile
-                        if not mt is None:
-                            # reuse class tmp from Despam to define macro
-                            from MoinMoin.action.Despam import tmp
-                            macro = tmp()
-                            macro.request = self.request
-                            macro.formatter = self.request.html_formatter
-                            pagename = self.formatter.page.page_name
-                            href = AttachFile.getAttachUrl(pagename, url, self.request, escaped=1)
-                            return self.formatter.rawHTML(EmbedObject.embed(EmbedObject(macro, wikiutil.escape(url)), mt, href))
+                if scheme == 'attachment':
+                    return self.formatter.attachment_link(url, text)
                 elif scheme == 'drawing':
                     return self.formatter.attachment_drawing(url, text)
-                elif scheme == 'attachment':
-                    return self.formatter.attachment_link(url, text)
             else:
                 return self.formatter.text('[[%s|%s]]' % (target, text))
 
