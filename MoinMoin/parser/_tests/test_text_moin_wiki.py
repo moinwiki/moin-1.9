@@ -302,7 +302,7 @@ class TestEscapeHTML(ParserTestCase):
 
     def testEscapeInGetTextFormatedLink(self):
         """ parser.wiki: escape html markup in getText formatted call with link """
-        test = self.request.getText('["<escape-me>"]', formatted=1)
+        test = self.request.getText('[[<escape-me>]]', formatted=1)
         self._test(test)
 
     def testEscapeInGetTextUnFormatted(self):
@@ -533,14 +533,14 @@ class TestLinkingMarkup(ParserTestCase):
     needle = re.compile(text % r'(.+)')
     _tests = (
         # test,                       expected
-        ('["something"]',             '<a class="nonexistent" href="./something">something</a>'),
+        ('[[something]]',             '<a class="nonexistent" href="./something">something</a>'),
         ("['something']",             "['something']"),
-        ('MoinMoin:"something"',      '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/something" title="MoinMoin">something</a>'),
-        ('MoinMoin:"with space"',     '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/with%20space" title="MoinMoin">with space</a>'),
-        ('RFC:"1 2 3"',               '<a class="interwiki" href="http://www.ietf.org/rfc/rfc1%202%203" title="RFC">1 2 3</a>'),
-        ("RFC:'something else'",      "RFC:'something else'"),
-        ('["with "" quote"]',         '<a class="nonexistent" href="./with%20%22%20quote">with " quote</a>'),
-        ('MoinMoin:"with "" quote"',  '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/with%20%22%20quote" title="MoinMoin">with " quote</a>'),
+        ('MoinMoin:something',      '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/something" title="MoinMoin">something</a>'),
+        ('[[MoinMoin:with space]]',     '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/with%20space" title="MoinMoin">with space</a>'),
+        ('[[RFC:1 2 3]]',               '<a class="interwiki" href="http://www.ietf.org/rfc/rfc1%202%203" title="RFC">1 2 3</a>'),
+        ("[[RFC:something else]]",      "RFC:'something else'"),
+        ('[[with " quote]]',         '<a class="nonexistent" href="./with%20%22%20quote">with " quote</a>'),
+        ('[[MoinMoin:with " quote]]',  '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/with%20%22%20quote" title="MoinMoin">with " quote</a>'),
         )
 
     def testTextFormating(self):
