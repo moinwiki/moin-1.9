@@ -63,7 +63,6 @@ def main():
             time.sleep(5)
 
         except KeyboardInterrupt, i:
-            print i
             xmpp_bot.stop()
             xmlrpc_client.stop()
 
