@@ -11,7 +11,7 @@
 ur'''
     # For link descriptions:
     link_rules = r'|'.join([
-            _get_rule('image', inline_tab),
+            _get_rule('transclude', inline_tab),
             _get_rule('break', inline_tab),
             _get_rule('char', inline_tab),
     ])
@@ -205,17 +205,17 @@ class Parser:
     )  # interwiki page name
 )|(?P<word>  # must come AFTER interwiki rule!
     %(word_rule)s  # CamelCase wiki words
-)|(?P<new_link>
+)|(?P<link>
     \[\[
     (?P<link_target>.+?)\s*  # link target (eat trailing space)
     (\|\s*(?P<link_text>.+?)?\s*)? # link text (optional, strip space)
     \]\]
-)|(?P<new_image>
+)|(?P<transclude>
     \{\{
-    (?P<image_target>.+?)\s*  # image target (eat trailing space)
-    (\|\s*(?P<image_text>.+?)\s*)?  # image text (optional, strip space)
+    (?P<transclude_target>.+?)\s*  # usually image target (eat trailing space)
+    (\|\s*(?P<transclude_arg>.+?)\s*)?  # usually image alt text (optional, strip space)
     \}\}
-)|(?P<new_url>
+)|(?P<url>
     %(url_rule)s
 )|(?P<email>
     [-\w._+]+  # name
@@ -544,41 +544,41 @@ class Parser:
     _word_parent_prefix_repl = _word_repl
     _word_name_repl = _word_repl
 
-    def _new_url_repl(self, word, groups):
+    def _url_repl(self, word, groups):
         """Handle literal URLs."""
         scheme = groups.get('url_scheme', 'http')
         target = groups.get('url_target', '')
         return (self.formatter.url(1, target, css=scheme) +
                 self.formatter.text(target) +
                 self.formatter.url(0))
-    _url_target_repl = _new_url_repl
-    _url_scheme_repl = _new_url_repl
+    _url_target_repl = _url_repl
+    _url_scheme_repl = _url_repl
 
     def get_image(self, addr, text=''):
         """Return markup for image depending on the address."""
         if addr is None:
             addr = ''
         url = wikiutil.url_unquote(addr, want_unicode=True)
-        if addr.startswith('http:'):
+        if addr.startswith('http'): # can also be https
             return self.formatter.image(src=url, alt=text, html_class='external_image')
         else:
             return self.formatter.attachment_image(url, alt=text, html_class='image')
 
-    def _new_image_repl(self, word, groups):
-        """Handles embedded images."""
-        target = groups.get('image_target', '').strip()
-        text = (groups.get('image_text', '') or '').strip()
+    def _transclude_repl(self, word, groups):
+        """Handles transcluding content, usually embedding images."""
+        target = groups.get('transclude_target', '').strip()
+        args = (groups.get('transclude_args', '') or '').strip()
         if (target.endswith('.png') or  # XXX we have a fn for this???
             target.endswith('.gif') or
             target.endswith('.jpg')):
-            return self.get_image(target, text)
+            return self.get_image(target, args)
         else:
             url = wikiutil.url_unquote(target, want_unicode=True)
-            return self.formatter.attachment_link(url, text)
-    _image_target_repl = _new_image_repl
-    _image_text_repl = _new_image_repl
+            return self.formatter.attachment_link(url, args)
+    _transclude_target_repl = _transclude_repl
+    _transclude_args_repl = _transclude_repl
 
-    def _new_link_repl(self, word, groups):
+    def _link_repl(self, word, groups):
         """Handle [[target|text]] links."""
         target = groups.get('link_target', '')
         text = (groups.get('link_text', '') or '').strip()
@@ -649,8 +649,8 @@ class Parser:
                 return self.formatter.text('[[%s|%s]]' % (target, text))
 
             # XXX??? re.sub(self.link_re, self._replace, text or node.content)
-    _link_target_repl = _new_link_repl
-    _link_text_repl = _new_link_repl
+    _link_target_repl = _link_repl
+    _link_text_repl = _link_repl
 
     def _email_repl(self, word, groups):
         """Handle email addresses (without a leading mailto:)."""
