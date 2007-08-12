@@ -127,9 +127,9 @@ class Formatter(text_html.Formatter):
             return self.image(**kw)
 
         elif args is not None:
-            result = "[[%s(%s)]]" % (name, args)
+            result = "<<%s(%s)>>" % (name, args)
         else:
-            result = "[[%s]]" % name
+            result = "<<%s>>" % name
         return '<span style="background-color:#ffff11">%s</span>' % result
 
     def parser(self, parser_name, lines):

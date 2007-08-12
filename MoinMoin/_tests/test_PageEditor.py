@@ -100,7 +100,7 @@ class TestExpandMailto(TestExpandUserName):
 
     def testMailto(self):
         """ PageEditor: expand @MAILTO@ """
-        self.assertEqual(self.expand(), u'[[MailTo(%s)]]' % self.email)
+        self.assertEqual(self.expand(), u'<<MailTo(%s)>>' % self.email)
 
 
 class TestExpandPrivateVariables(TestExpandUserName):

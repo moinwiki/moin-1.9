@@ -81,9 +81,9 @@ Contact the owner of the wiki, who can enable email."""))
 
             request.write(_("""
 == Recovering a lost password ==
-[[BR]]
+<<BR>>
 If you have forgotten your password, provide your email address and click on '''Mail me my account data'''.
-[[BR]]
+<<BR>>
 The email you get contains the encrypted password (so even if someone intercepts the mail, he won't know your REAL password). Just copy and paste it into the login mask into the password field and log in.
 After logging in you should change your password."""))
 

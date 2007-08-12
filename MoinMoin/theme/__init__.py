@@ -478,7 +478,7 @@ class ThemeBase:
     def get_icon(self, icon):
         """ Return icon data from self.icons
 
-        If called from [[Icon(file)]] we have a filename, not a
+        If called from <<Icon(file)>> we have a filename, not a
         key. Using filenames is deprecated, but for now, we simulate old
         behavior.
 

@@ -1217,7 +1217,7 @@ class convert_tree(visitor):
                     il_parms += ",height=%s" % height
                 if alt:
                     il_parms += ",alt=%s" % alt
-                self.text.extend([self.white_space, "[[ImageLink(%s)]]" % il_parms, self.white_space])
+                self.text.extend([self.white_space, "<<ImageLink(%s)>>" % il_parms, self.white_space])
 
         # Drawing image
         elif title and title.startswith("drawing:"):

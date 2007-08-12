@@ -627,12 +627,12 @@ class Parser:
 
             elif m.group('page_name'): # TODO
                 page_name = m.group('page_name')
-                return u"Error: [[Include(%s,%s)]] emulation missing..." % (page_name, args)
+                return u"Error: <<Include(%s,%s)>> emulation missing..." % (page_name, args)
 
             elif m.group('inter_wiki'): # TODO
                 wiki_name = m.group('inter_wiki')
                 page_name = m.group('inter_page')
-                return u"Error: [[RemoteInclude(%s:%s,%s)]] still missing." % (wiki_name, page_name, args)
+                return u"Error: <<RemoteInclude(%s:%s,%s)>> still missing." % (wiki_name, page_name, args)
 
             else:
                 if not desc:
@@ -1076,7 +1076,7 @@ class Parser:
         return ''
 
     def _macro_repl(self, word, groups):
-        """Handle macros ([[macroname]])."""
+        """Handle macros (<<macroname>>)."""
         macro_name = groups.get('macro_name')
         macro_args = groups.get('macro_args')
         self.inhibit_p = 0 # 1 fixes UserPreferences, 0 fixes paragraph formatting for macros
@@ -1197,7 +1197,7 @@ class Parser:
 
         # Main loop
         for line in self.lines:
-            if ']][[' in line.replace(' ', ''):
+            if '>><<' in line.replace(' ', ''):
                 self.no_862 = True
 
             self.line_anchor_printed = 0

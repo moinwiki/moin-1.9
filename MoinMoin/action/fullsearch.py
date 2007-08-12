@@ -242,7 +242,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
 
         hints.append(''.join([
             _("(!) You're performing a title search that might not include"
-                ' all related results of your search query in this wiki. [[BR]]'),
+                ' all related results of your search query in this wiki. <<BR>>'),
             ' ',
             f.url(1, href=request.page.url(request, querydict, escape=0,
                 relative=False)),

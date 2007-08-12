@@ -8,7 +8,7 @@
     If no target is given the link will point to the image itself.
 
     Syntax:
-        [[ImageLink(image, [target,] [width=width, [height=height]])]]
+        <<ImageLink(image, [target,] [width=width, [height=height>>)>>
 
     Parameters:
         image: image attachment file name or the URL of an image
@@ -20,17 +20,17 @@
         alt: text for img tag "alt" attribute
 
     Examples:
-        [[ImageLink(München.png,München,height=100)]]
-        [[ImageLink(Images/München.png,München,height=100)]]
-        [[ImageLink(http://webcam.portalmuc.de/images/webcam/webcam_marienplatz.jpg,München Marienplatz)]]
-        [[ImageLink(plot.png,width=200)]]
-        [[ImageLink(plot.png,height=200)]]
-        [[ImageLink(plot.png)]]
-        [[ImageLink(http://webcam.portalmuc.de/images/webcam/webcam_marienplatz.jpg,http://www.muenchen.de,width=150)]]
-        [[ImageLink(münchen.png,http://www.muenchen.de,width=50)]]
-        [[ImageLink(http://webcam.portalmuc.de/images/webcam/webcam_marienplatz.jpg)]]
-        [[ImageLink(example.png,alt=whateveryouwant(üöä))]]
-        [[ImageLink(http://moinmoin.wikiwikiweb.de/OliverSiemoneit?action=AttachFile&do=get&target=screenshot.png,width=647,height=517,alt=OliverSiemoneit?action=AttachFile&do=get&target=screenshot,FrontPage)]]
+        <<ImageLink(München.png,München,height=100)>>
+        <<ImageLink(Images/München.png,München,height=100)>>
+        <<ImageLink(http://webcam.portalmuc.de/images/webcam/webcam_marienplatz.jpg,München Marienplatz)>>
+        <<ImageLink(plot.png,width=200)>>
+        <<ImageLink(plot.png,height=200)>>
+        <<ImageLink(plot.png)>>
+        <<ImageLink(http://webcam.portalmuc.de/images/webcam/webcam_marienplatz.jpg,http://www.muenchen.de,width=150)>>
+        <<ImageLink(münchen.png,http://www.muenchen.de,width=50)>>
+        <<ImageLink(http://webcam.portalmuc.de/images/webcam/webcam_marienplatz.jpg)>>
+        <<ImageLink(example.png,alt=whateveryouwant(üöä))>>
+        <<ImageLink(http://moinmoin.wikiwikiweb.de/OliverSiemoneit?action=AttachFile&do=get&target=screenshot.png,width=647,height=517,alt=OliverSiemoneit?action=AttachFile&do=get&target=screenshot,FrontPage)>>
 
     History:
         Jeff Kunce:
@@ -57,7 +57,7 @@
                    width and height and probably other keywords must be given as keywords (e.g. height=20)
             2004-12-31 Version 1.3.1-3 code clean up
             2005-01-16 Bug fixed in the errorhandler - found and patched by Malte Helmert
-            2005-03-05 Version 1.3.3-5 Bug fixed found by cypress ("If I put [[ImageLink(moinmoin.png)]] it bombs")
+            2005-03-05 Version 1.3.3-5 Bug fixed found by cypress ("If I put <<ImageLink(moinmoin.png)>> it bombs")
             2005-03-28 Version 1.3.3-6 feature request added by CDPark:
                        "Can we use an external image? And an external target?"
             2005-04-16 Version 1.3.3-7 no default alt tag definition as requested by CDPark and AlexanderSchremmer
@@ -145,7 +145,7 @@ def execute(macro, args):
     pp, pp_count, kw, kw_count = explore_args(args, kwAllowed)
 
     if not pp_count or pp_count and not pp[0]:
-        msg = 'Not enough arguments to ImageLink macro! e.g. [[ImageLink(example.png, WikiName, width=200)]].'
+        msg = 'Not enough arguments to ImageLink macro! e.g. <<ImageLink(example.png, WikiName, width=200)>>.'
         return "%s%s%s" % (formatter.sysmsg(1), formatter.text(msg), formatter.sysmsg(0))
 
     image = pp[0]
