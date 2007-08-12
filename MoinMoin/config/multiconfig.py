@@ -775,10 +775,6 @@ reStructuredText Quick Reference
         if self.url_prefix_local is None:
             self.url_prefix_local = self.url_prefix_static
 
-        # Register a list of available event handlers - this has to stay at the
-        # end, because loading plugins depends on having a config object
-        self.event_handlers = events.get_handlers(self)
-
 
     def load_meta_dict(self):
         """ The meta_dict contains meta data about the wiki instance. """
@@ -803,8 +799,21 @@ reStructuredText Quick Reference
             if getattr(self, "_subscribable_events", None) is None:
                 self._subscribable_events = events.get_subscribable_events()
             return getattr(self, "_subscribable_events")
-        return property(getter)
+
+        def setter(self, new_handlers):
+            self._event_handlers = new_handlers
+
+        return property(getter, setter)
     subscribable_events = make_subscribable_events_prop()
+
+    # lazily create a list of event handlers
+    def make_event_handlers_prop():
+        def getter(self):
+            if getattr(self, "_event_handlers", None) is None:
+                self._event_handlers = events.get_handlers(self)
+            return getattr(self, "_event_handlers")
+        return property(getter)
+    event_handlers = make_event_handlers_prop()
 
     def load_IWID(self):
         """ Loads the InterWikiID of this instance. It is used to identify the instance
