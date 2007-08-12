@@ -1,0 +1,7 @@
+.*\.py[co]
+tests/wiki
+wiki/underlay
+wiki/data/edit-log
+wiki/data/event-log
+wiki/data/cache
+
