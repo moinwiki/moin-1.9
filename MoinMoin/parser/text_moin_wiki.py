@@ -613,14 +613,12 @@ class Parser:
                 wiki_name = m.group('inter_wiki')
                 page_name = m.group('inter_page')
                 word = '%s:%s' % (wiki_name, page_name)
-                wikitag, wikiurl, wikitail, wikitag_bad = \
-                    wikiutil.resolve_wiki(self.request, word)
-                href = wikiutil.join_wiki(wikiurl, wikitail)
+                wikitag_bad = wikiutil.resolve_wiki(self.request, word)[3]
                 if not text:
                     text = page_name
-                return (self.formatter.interwikilink(1, wikitag, wikitail) +
+                return (self.formatter.interwikilink(1, wiki_name, page_name) +
                         self.formatter.text(text) +
-                        self.formatter.interwikilink(0))
+                        self.formatter.interwikilink(0, wiki_name, page_name))
 
             elif m.group('attach_scheme'):
                 scheme = m.group('attach_scheme')
