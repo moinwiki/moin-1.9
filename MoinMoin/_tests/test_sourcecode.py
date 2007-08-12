@@ -23,6 +23,7 @@ EXCLUDE = [
     '/wiki/htdocs/applets/FCKeditor', # 3rd party GUI editor
     '/tests/wiki', # this is our test wiki
     '/wiki/htdocs', # this is our dist static stuff
+    '/wiki/data/pages', # wiki pages, there may be .py attachments
 ]
 
 TRAILING_SPACES = 'nochange' # 'nochange' or 'fix'
@@ -49,9 +50,15 @@ def check_py_file(reldir, path):
         f = file(path, 'rb')
         data = f.read()
         f.close()
-        data = FIX_TS_RE.sub('', data)
+        fixed = FIX_TS_RE.sub('', data)
+
+        # Don't write files if there's no need for that,
+        # as altering timestamps can be annoying with some tools.
+        if fixed == data:
+            return
+
         f = file(path, 'wb')
-        f.write(data)
+        f.write(fixed)
         f.close()
     # Please read and follow PEP8 - rerun this test until it does not fail any more,
     # any type of error is only reported ONCE (even if there are multiple).
