@@ -4,60 +4,16 @@
 
     See http://wikicreole.org/ for latest specs.
 
-    TODO:
-     * table headers render borderless:
-    |=a|=b|
-    |c|d|
-
-    Changes:
-    2007-08-08:
-     * PEP8 cleanup
-     * creole 1.0 support
-     * checked interwiki links, they are already compliant to creole 1.0
-     * use three angle brackets <<<>>> instead of two chars for placeholder
-      * unclear: do we need to do anything with that? macros are still with <<...>>!
-     * whitespace allowed before all elements except nowiki blocks
-      * (./) headings
-      * (./) lists (checked, was already compliant)
-      * (./) hor. rule (plus fix for being exactly 4 ----)
-      * (./) tables (checked, was already compliant)
-     * (./) added escape character ~ to core
-     * (./) changed escape character so it only escapes following character
-     * (./) removed escaping closing nowiki triple curly brackets because this is now covered by the escape character
-     * (./) a tilde in front of a URL should prevent it from becoming a link (checked, already compliant)
-
-    2007-03-23
-     * Implemented table headings, as in Creole 0.5
-     * No markup allowed in table headings
-
-    2007-02-10
-     * Images inside link descriptions
-     * Lists parsed and rendered properly
-
-    2007-02-05
-     * Tables rendered properly
-     * Links, images and nowiki in tables handled properly
-
-    2007-02-04
-     * {{...}} can now be used both for attachments and images
-     * No space required after bullets anymore
-     * Implemented escaping with space in <pre>
-     * Implemented greedy "}" parsing in nowiki
-     * Added <h1> header available with =...=
-     * Added <br> available with \\
-     * Added tables (temporarily rendered as <pre>)
-    TODO: "smart" resolving of bold/list ambiguity, table rendering
-
-
-    2006-11-29
-     * Fixed the bug causing newlines to be ignored inside //emphasis//
-       and **strong**.
-
-    2006-09-11
-     * Changed the bullet character for unordered lists to '*' according to spec.
-     * Requiring a space or tab after the bullet in lists (to avoid collisions).
-     * Moved the regula expression initialization to class initialization, for
-       faster parser object creation.
+    Notes:
+    * No markup allowed in headings.
+      Creole 1.0 does not require us to support this.
+    * No markup allowed in table headings.
+      Creole 1.0 does not require us to support this.
+    * No (non-bracketed) generic url recognition: this is "mission impossible"
+      except if you want to risk lots of false positives.
+    * We do not allow : before // italic markup to avoid urls with unrecognized
+      schemes (like wtf://server/path) triggering italic rendering for the rest
+      of the paragraph.
 
     @copyright: 2007 MoinMoin:RadomirDopieralski (creole 0.5 implementation),
                 2007 MoinMoin:ThomasWaldmann (updates)
@@ -105,7 +61,7 @@ class DocParser:
 
     # The parsing rules
 
-    # whether the parser should convert \n into <br>
+    # Whether the parser should convert \n into <br>.
     bloglike_lines = False
 
     # For pre escaping, in creole 1.0 done with ~:
@@ -113,12 +69,13 @@ class DocParser:
 
     # For the inline elements:
     inline_tab = {
-        'url': r'''(^|(?<=\s|[.,:;!?()/=]))(?P<url_target>(?P<url_proto>http|ftp|mailto|irc|https|ftps|news|gopher|file|telnet|nntp):\S+?)($|(?=\s|[,.:;!?()](\s|$)))''',
+        'url': r'''(^|(?<=\s|[.,:;!?()/=]))(?P<escaped_url>~)?(?P<url_target>(?P<url_proto>http|ftp|mailto|irc|https|ftps|news|gopher|file|telnet|nntp):\S+?)($|(?=\s|[,.:;!?()](\s|$)))''',
         'link': r'\[\[(?P<link_target>.+?)\s*(\|\s*(?P<link_text>.+?)\s*)?]]',
         'image': r'{{(?P<image_target>.+?)\s*(\|\s*(?P<image_text>.+?)\s*)?}}',
         'macro': r'<<(?P<macro_target>.+?)\s*(\|\s*(?P<macro_text>.+?)\s*)?>>',
         'code': r'{{{(?P<code_text>.*?)}}}',
-        'emph': r'//',
+        'emph': r'(?<!:)//', # there must be no : in front of the // - avoids
+                             # italic rendering in urls with unknown protocols
         'strong': r'\*\*',
         'break': r'\\\\',
         'escape': r'~(?P<escaped_char>[^\s])', # tilde is the escape char
@@ -142,12 +99,12 @@ class DocParser:
     attach_rule = r'(?P<attach_scheme>attachment|inline|drawing|figure):(?P<attach_addr>.*)'
     inter_rule = r'(?P<inter_wiki>[A-Z][a-zA-Z]+):(?P<inter_page>.*)'
     #u'|'.join(wikimacro.getNames(config))
-    macro_rule = r'(?P<macro_name>%s)\((-|(?P<macro_param>.*))\)' % '\w+'
+    macro_rule = r'(?P<macro_name>%s)\((-|(?P<macro_param>.*))\)' % r'\w+'
     page_rule = r'(?P<page_name>.*)'
 
     # For splitting table cells:
     cell_rule = r'\|\s* ( (?P<head> [=][^|]+) | (?P<cell> ((%(link)s) |(%(macro)s) |(%(image)s) |(%(code)s) | [^|] )+)  )\s*' % inline_tab
-    cell_re = re.compile(cell_rule, re.X|re.I|re.U)
+    cell_re = re.compile(cell_rule, re.X|re.U)
 
     # For link descriptions:
     link_rules = r'|'.join([
@@ -155,11 +112,11 @@ class DocParser:
             _get_rule('break', inline_tab),
             _get_rule('char', inline_tab),
     ])
-    link_re = re.compile(link_rules, re.X|re.I|re.U)
+    link_re = re.compile(link_rules, re.X|re.U)
 
     # For lists:
     item_rule = r'(?P<item> ^\s* (?P<item_head> [\#*]+ ) \s* (?P<item_text>.*?) $)'
-    item_re = re.compile(item_rule, re.X|re.I|re.U|re.M)
+    item_re = re.compile(item_rule, re.X|re.U|re.M)
 
     # For block elements:
     block_rules = '|'.join([
@@ -218,12 +175,19 @@ class DocParser:
 
     def _url_repl(self, groups):
         """Handle raw urls in text."""
-        target = groups.get('url_target', '')
-        node = DocNode('external_link', self.cur)
-        node.content = target
-        node.proto = groups.get('url_proto', 'http')
-        DocNode('text', node, node.content)
-        self.text = None
+        if not groups.get('escaped_url'):
+            # this url is NOT escaped
+            target = groups.get('url_target', '')
+            node = DocNode('external_link', self.cur)
+            node.content = target
+            node.proto = groups.get('url_proto', 'http')
+            DocNode('text', node, node.content)
+            self.text = None
+        else:
+            # this url is escaped, we render it as text
+            if self.text is None:
+                self.text = DocNode('text', self.cur, u'')
+            self.text.content += groups.get('url_target')
     _url_target_repl = _url_repl
     _url_proto_repl = _url_repl
 
@@ -457,9 +421,7 @@ class DocNode:
 
 
 class DocEmitter:
-    """
-    Generate the output for the document tree consisting of DocNodes.
-    """
+    """Generate the output for the document tree consisting of DocNodes."""
 
     def __init__(self, root, formatter, request):
         self.root = root
@@ -729,27 +691,21 @@ class DocEmitter:
 
     def preformatted_emit(self, node):
         content = node.content
-        self.processor_name = getattr(node, 'sect', '')
-        self.processor = None
-        if self.processor_name:
-            self._setProcessor(self.processor_name)
-        if self.processor is None:
+        self.parser = None
+        parser_name = getattr(node, 'sect', '')
+        if parser_name:
+            self.setParser(parser_name)
+        if self.parser is None:
+            self.parser_name = None
             return ''.join([
                 self.formatter.preformatted(1),
                 self.formatter.text(content),
                 self.formatter.preformatted(0),
             ])
         else:
-            buff = StringIO.StringIO()
-            self.request.redirect(buff)
-            try:
-                self.formatter.processor(
-                    self.processor_name,
-                    content.split('\n'),
-                    self.processor_is_parser)
-            finally:
-                self.request.redirect()
-            return buff.getvalue()
+            self.parser_name = parser_name
+            return self.request.redirectedOutput(
+                self.formatter.parser, self.parser_name, content.split('\n'))
 
     def default_emit(self, node):
         return ''.join([
@@ -780,24 +736,14 @@ class DocEmitter:
         self.formatter.no_magic = magic_save
         return output
 
-    def _setProcessor(self, name): # From the wiki.py parser
-        """ Set processer to either processor or parser named 'name' """
-        cfg = self.request.cfg
+
+    # Private helpers ------------------------------------------------------------
+
+    def setParser(self, name):
+        """ Set parser to parser named 'name' """
+        # XXX this is done by the formatter as well
         try:
-            self.processor = wikiutil.importPlugin(
-                cfg,
-                "processor",
-                name,
-                "process")
-            self.processor_is_parser = 0
+            self.parser = wikiutil.searchAndImportPlugin(self.request.cfg, "parser", name)
         except wikiutil.PluginMissingError:
-            try:
-                self.processor = wikiutil.importPlugin(
-                    cfg,
-                    "parser",
-                    name,
-                    "Parser")
-                self.processor_is_parser = 1
-            except wikiutil.PluginMissingError:
-                self.processor = None
+            self.parser = None
 
