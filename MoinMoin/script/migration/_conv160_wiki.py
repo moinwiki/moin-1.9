@@ -10,8 +10,8 @@
     Markup transformations needed:
     -------------------------------------------------------
     ["some_page"]           -> [[some page]] # renamed
-    [:some_page:some text]  -> [[some page|some text]] # NEW: free link with link text
-    [:page:text]            -> [[page|text]] # NEW: free link with link text
+    [:some_page:some text]  -> [[some page|some text]]
+    [:page:text]            -> [[page|text]]
                                (with a page not being renamed)
 
     attachment:with%20blank.txt -> [[attachment:with blank.txt]]
@@ -28,7 +28,7 @@ import re, codecs
 from MoinMoin import i18n
 i18n.wikiLanguages = lambda: []
 from MoinMoin import config, wikiutil
-from MoinMoin.parser.text_moin_wiki import Parser
+from early16_text_moin_wiki import Parser
 from MoinMoin.action import AttachFile
 
 class Converter(Parser):
@@ -116,8 +116,10 @@ class Converter(Parser):
         return origw
 
     def _macro_repl(self, word):
+        stripped_old = word[2:-2]
+        decorated_new = "<<%s>>" % stripped_old
         # XXX later check whether some to be renamed pagename is used as macro param
-        return word
+        return decorated_new
 
     # LINKS ------------------------------------------------------------------
     def _replace_target(self, target):
@@ -155,7 +157,7 @@ class Converter(Parser):
         else:
             name = "%s/%s" % (pagename, fname)
         if text:
-            text = ' ' + text
+            text = '|' + text
         return "%s:%s%s" % (scheme, name, text)
 
     def _interwiki_repl(self, word):
@@ -165,10 +167,17 @@ class Converter(Parser):
             return word
         else:
             scheme, wikiname, pagename, text = self.interwiki("wiki:" + word)
+            iswiki = wikiutil.isStrictWikiname(pagename)
             if wikiname == 'Self':
-                return '["%s"]' % pagename # optimize special case
+                if iswiki:
+                    return '%s' % pagename # optimize special case
+                else:
+                    return '[[%s]]' % pagename # optimize special case
             else:
-                return "%s:%s" % (wikiname, pagename)
+                if ' ' not in pagename: # XXX we could get a ' '  by urlunquoting
+                    return "%s:%s" % (wikiname, pagename)
+                else:
+                    return "[[%s:%s]]" % (wikiname, pagename)
 
     def _url_repl(self, word):
         """Handle literal URLs including inline images."""
@@ -176,19 +185,21 @@ class Converter(Parser):
 
         if scheme == "wiki":
             scheme, wikiname, pagename, text = self.interwiki(word)
+            # XXX remap pagename
+            # XXX check pagename if it contains a blank
             if wikiname == 'Self':
-                return '["%s"]' % pagename # optimize special case
+                return '[[%s]]' % pagename # optimize special case
             else:
-                return "%s:%s:%s" % (scheme, wikiname, pagename)
+                return "[[%s:%s]]" % (wikiname, pagename)
 
         if scheme in self.attachment_schemas:
-            return self.attachment(word)
+            return "[[%s]]" % self.attachment(word)
 
         if wikiutil.isPicture(word):
             # Get image name http://here.com/dir/image.gif -> image
             name = word.split('/')[-1]
             name = ''.join(name.split('.')[:-1])
-            return word # self.formatter.image(src=word, alt=name)
+            return "{{%s}}" % word # we need transclusion syntax now!
         else:
             return word # word, scheme
 
@@ -208,8 +219,8 @@ class Converter(Parser):
             target = self._replace_target(target)
         linktext = linktext.strip()
         if linktext:
-            linktext = ' ' + linktext
-        return '[%s%s]' % (target, linktext)
+            linktext = '|' + linktext
+        return '[[%s%s]]' % (target, linktext)
 
 
     def _url_bracket_repl(self, word):
@@ -224,8 +235,8 @@ class Converter(Parser):
                 text = ''
             link = self._replace_target(link)
             if text:
-                text = ' ' + text
-            return '[%s%s]' % (link, text) # use freelink with text
+                text = '|' + text
+            return '[[%s%s]]' % (link, text)
 
         scheme_and_rest = word.split(":", 1)
         if len(scheme_and_rest) == 2: # scheme given
@@ -234,14 +245,14 @@ class Converter(Parser):
                 scheme, wikiname, pagename, text = self.interwiki(word, pretty_url=1)
                 if wikiname == 'Self':
                     if text:
-                        text = ' %s' % text
-                    return '["%s"%s]' % (pagename, text)
+                        text = '|' + text
+                    return '[[%s%s]]' % (pagename, text)
                 else:
                     if text:
-                        text = ' %s' % text
-                    return "[%s:%s:%s%s]" % (scheme, wikiname, pagename, text)
+                        text = '|' + text
+                    return "[[%s:%s%s]]" % (wikiname, pagename, text)
             if scheme in self.attachment_schemas:
-                return '[%s]' % self.attachment(word, pretty_url=1)
+                return '[[%s]]' % self.attachment(word, pretty_url=1)
 
         words = word.split(None, 1)
         if len(words) == 1:
@@ -249,8 +260,8 @@ class Converter(Parser):
         else:
             link, text = words
         if text:
-            text = ' ' + text
-        return '[%s%s]' % (link, text)
+            text = '|' + text
+        return '[[%s%s]]' % (link, text)
 
     # SCANNING ---------------------------------------------------------------
     def scan(self, scan_re, line):
