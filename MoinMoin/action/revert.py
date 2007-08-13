@@ -46,4 +46,6 @@ def execute(pagename, request):
         e = PageRevertedEvent(request, pagename, request.rev, revstr)
         send_event(e)
 
-    pg.send_page(msg=msg)
+    if request.action != "xmlrpc":
+        pg.send_page(msg=msg)
+
