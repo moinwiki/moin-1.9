@@ -165,7 +165,7 @@ class XMPPBot(Client, Thread):
         self.contact_check = 600
         self.stopping = False
 
-        self.known_xmlrpc_cmds = [cmd.GetPage, cmd.GetPageHTML, cmd.GetPageList, cmd.GetPageInfo, cmd.Search]
+        self.known_xmlrpc_cmds = [cmd.GetPage, cmd.GetPageHTML, cmd.GetPageList, cmd.GetPageInfo, cmd.Search, cmd.RevertPage]
         self.internal_commands = ["ping", "help", "searchform"]
 
         self.xmlrpc_commands = {}
@@ -373,14 +373,19 @@ Current version: %(version)s""") % {
                 self.send_message(command.jid, data, u"chat")
             else:
                 form_title = _("Search results").encode("utf-8")
-                form = forms.Form(xmlnode_or_type="result", title=form_title)
 
+		warnings = []
                 for no, warning in enumerate(warnings):
-                    name = "warning%d" % (no, )
-                    form.add_field(name=name, field_type="fixed", value=warning)
+                    field = forms.Field(name="warning", field_type="fixed", value=warning)
+		    warnings.append(forms.Item([field]))
+
+		reported = [forms.Field(name="url", field_type="text-single"), forms.Field(name="description", field_type="text-single")]
+		if warnings:
+			reported.append(forms.Field(name="warning", field_type="fixed"))
+
+		form = forms.Form(xmlnode_or_type="result", title=form_title, reported_fields=reported)
 
                 for no, result in enumerate(results):
-                    name = "result%d" % (no, )
                     url = forms.Field(name="url", value=result["url"], field_type="text-single")
                     description = forms.Field(name="description", value=result["description"], field_type="text-single")
                     item = forms.Item([url, description])
@@ -491,7 +496,7 @@ Current version: %(version)s""") % {
         form.add_field(name="search_type", options=[title_search, full_search], field_type="list-single", label=search_label)
         form.add_field(name="search", field_type="text-single", label=search_label2)
 
-        self.send_form(jid, form, _("Wiki search"))
+	self.send_form(jid, form, _("Wiki search"))
 
     def is_internal(self, command):
         """Check if a given command is internal
