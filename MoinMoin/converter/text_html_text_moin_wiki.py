@@ -1101,8 +1101,8 @@ class convert_tree(visitor):
 
             # interwiki link
             if class_ == "interwiki":
-                wikitag, wikiurl, wikitail, err = wikiutil.resolve_wiki(
-                    self.request, title + ":")
+                wikitag, wikiurl, wikitail, err = wikiutil.resolve_interwiki(
+                    self.request, title, "")
                 if not err and href.startswith(wikiurl):
                     pagename, qpagename = pagename_from_url(href[len(wikiurl):].lstrip('/'))
                     interwikiname = "%s:%s" % (wikitag, qpagename)

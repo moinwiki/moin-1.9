@@ -481,8 +481,7 @@ class Formatter(FormatterBase):
         """
         @keyword title: override using the interwiki wikiname as title
         """
-        quoted = '%s:%s' % (interwiki, wikiutil.quoteName(pagename))
-        wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, quoted)
+        wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_interwiki(self.request, interwiki, pagename)
         wikiurl = wikiutil.mapURL(self.request, wikiurl)
         if wikitag == 'Self': # for own wiki, do simple links
             if '#' in wikitail:

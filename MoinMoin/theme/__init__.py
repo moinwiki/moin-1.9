@@ -298,7 +298,7 @@ class ThemeBase:
         """ Split navibar links into pagename, link to page
 
         Admin or user might want to use shorter navibar items by using
-        the [page title] or [url title] syntax. In this case, we don't
+        the [[page|title]] or [[url|title]] syntax. In this case, we don't
         use localization, and the links goes to page or to the url, not
         the localized version of page.
 
@@ -307,7 +307,7 @@ class ThemeBase:
             * WikiName:PageName
             * wiki:WikiName:PageName
             * url
-            * all targets as seen above with title: [target title]
+            * all targets as seen above with title: [[target|title]]
 
         @param text: the text used in config or user preferences
         @rtype: tuple
@@ -317,16 +317,17 @@ class ThemeBase:
         fmt = request.formatter
         title = None
 
-        # Handle [pagename title] or [url title] formats
-        if text.startswith('[') and text.endswith(']'):
-            text = text[1:-1].strip()
+        # Handle [[pagename|title]] or [[url|title]] formats
+        if text.startswith('[[') and text.endswith(']]'):
+            text = text[2:-2]
             try:
-                pagename, title = text.split(' ', 1)
-                title = title.lstrip()
+                pagename, title = text.split('|', 1)
+                pagename = pagename.strip()
+                title = title.strip()
                 localize = 0
             except (ValueError, TypeError):
                 # Just use the text as is.
-                pagename = text
+                pagename = text.strip()
         else:
             pagename = text
 
@@ -344,9 +345,9 @@ class ThemeBase:
 
         # try handling interwiki links
         try:
-            interwiki, page = pagename.split(':', 1)
+            interwiki, page = wikiutil.split_interwiki(pagename)
             thiswiki = request.cfg.interwikiname
-            if interwiki == thiswiki:
+            if interwiki == thiswiki or interwiki == 'Self':
                 pagename = page
             else:
                 if not title:
@@ -587,8 +588,8 @@ class ThemeBase:
                 items = []
                 for pagename in trail:
                     try:
-                        interwiki, page = pagename.split(":", 1)
-                        if request.cfg.interwikiname != interwiki:
+                        interwiki, page = wikiutil.split_interwiki(pagename)
+                        if interwiki != request.cfg.interwikiname and interwiki != 'Self':
                             link = (self.request.formatter.interwikilink(True, interwiki, page) +
                                     self.shortenPagename(page) +
                                     self.request.formatter.interwikilink(False, interwiki, page))

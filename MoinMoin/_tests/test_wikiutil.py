@@ -66,21 +66,6 @@ class TestCleanInput:
             assert wikiutil.clean_input(instr) == outstr
 
 
-class TestNameQuoting:
-    tests = [(u"", u'""'), # empty
-             (u"test", u'"test"'), # nothing special
-             (u"Sarah O'Connor", u"\"Sarah O'Connor\""),
-             (u'Just "something" quoted', u'"Just ""something"" quoted"'),
-            ]
-    def testQuoteName(self):
-        for name, qname in self.tests:
-            assert wikiutil.quoteName(name) == qname
-
-    def testUnquoteName(self):
-        for name, qname in self.tests:
-            assert wikiutil.unquoteName(qname) == name
-
-
 class TestInterWiki:
     def testSplitWiki(self):
         tests = [('SomePage', ('Self', 'SomePage', '')),

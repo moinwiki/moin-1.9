@@ -120,14 +120,6 @@ class Converter(Parser):
         return word
 
     # LINKS ------------------------------------------------------------------
-    def _intelli_quote(self, name):
-        quote_triggers = u''' "'()[]''' # u''' "\'}]|:,.()?!''' # see also wiki parser
-        quote_it = [True for c in quote_triggers if c in name]
-        if quote_it:
-            return wikiutil.quoteName(name)
-        else:
-            return name
-
     def _replace_target(self, target):
         target_and_anchor = target.split('#', 1)
         if len(target_and_anchor) > 1:
@@ -162,7 +154,6 @@ class Converter(Parser):
             name = fname
         else:
             name = "%s/%s" % (pagename, fname)
-        name = self._intelli_quote(name)
         if text:
             text = ' ' + text
         return "%s:%s%s" % (scheme, name, text)
@@ -177,7 +168,6 @@ class Converter(Parser):
             if wikiname == 'Self':
                 return '["%s"]' % pagename # optimize special case
             else:
-                pagename = self._intelli_quote(pagename)
                 return "%s:%s" % (wikiname, pagename)
 
     def _url_repl(self, word):
@@ -189,7 +179,6 @@ class Converter(Parser):
             if wikiname == 'Self':
                 return '["%s"]' % pagename # optimize special case
             else:
-                pagename = self._intelli_quote(pagename)
                 return "%s:%s:%s" % (scheme, wikiname, pagename)
 
         if scheme in self.attachment_schemas:
@@ -213,12 +202,10 @@ class Converter(Parser):
             # split on closing quote
             target, linktext = word[1:].split(first_char, 1)
             target = self._replace_target(target)
-            target = wikiutil.quoteName(target)
         else: # not quoted
             # split on whitespace
             target, linktext = word.split(None, 1)
             target = self._replace_target(target)
-            target = self._intelli_quote(target)
         linktext = linktext.strip()
         if linktext:
             linktext = ' ' + linktext
@@ -236,7 +223,6 @@ class Converter(Parser):
             if link.strip() == text.strip():
                 text = ''
             link = self._replace_target(link)
-            link = wikiutil.quoteName(link)
             if text:
                 text = ' ' + text
             return '[%s%s]' % (link, text) # use freelink with text
@@ -251,7 +237,6 @@ class Converter(Parser):
                         text = ' %s' % text
                     return '["%s"%s]' % (pagename, text)
                 else:
-                    pagename = self._intelli_quote(pagename)
                     if text:
                         text = ' %s' % text
                     return "[%s:%s:%s%s]" % (scheme, wikiname, pagename, text)

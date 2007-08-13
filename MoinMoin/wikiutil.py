@@ -486,21 +486,9 @@ class MetaDict(dict):
 
 # Quoting of wiki names, file names, etc. (in the wiki markup) -----------------------------------
 
-# don't ever change this
+# don't ever change this - DEPRECATED, only needed for 1.5 > 1.6 migration conversion
 QUOTE_CHARS = u'"'
 
-def quoteName(name):
-    """ put quotes around a given name """
-    return '"%s"' % name.replace('"', '""')
-
-def unquoteName(name):
-    """ if there are quotes around the name, strip them """
-    if not name:
-        return name
-    if '"' == name[0] == name[-1]:
-        return name[1:-1].replace('""', '"')
-    else:
-        return name
 
 #############################################################################
 ### InterWiki
@@ -600,6 +588,9 @@ def split_wiki(wikiurl):
 
     'attachment:"filename with blanks.txt" other title' -> "attachment", "filename with blanks.txt", "other title"
 
+    *** DEPRECATED FUNCTION FOR OLD 1.5 SYNTAX - ONLY STILL HERE FOR THE 1.5 -> 1.6 MIGRATION ***
+    Use split_interwiki(), see below.
+
     @param wikiurl: the url to split
     @rtype: tuple
     @return: (wikiname, pagename, linktext)
@@ -638,8 +629,33 @@ def split_wiki(wikiurl):
     linktext = linktext.strip()
     return wikiname, pagename, linktext
 
+def split_interwiki(wikiurl):
+    """ Split a interwiki name, into wikiname and pagename, e.g:
+
+    'MoinMoin:FrontPage' -> "MoinMoin", "FrontPage"
+    'FrontPage' -> "Self", "FrontPage"
+    'MoinMoin:Page with blanks' -> "MoinMoin", "Page with blanks"
+    'MoinMoin:' -> "MoinMoin", ""
+
+    can also be used for:
+
+    'attachment:filename with blanks.txt' -> "attachment", "filename with blanks.txt"
+
+    @param wikiurl: the url to split
+    @rtype: tuple
+    @return: (wikiname, pagename)
+    """
+    try:
+        wikiname, pagename = wikiurl.split(":", 1)
+    except ValueError:
+        wikiname, pagename = 'Self', wikiurl
+    return wikiname, pagename
+
 def resolve_wiki(request, wikiurl):
     """ Resolve an interwiki link.
+
+    *** DEPRECATED FUNCTION FOR OLD 1.5 SYNTAX - ONLY STILL HERE FOR THE 1.5 -> 1.6 MIGRATION ***
+    Use resolve_interwiki(), see below.
 
     @param request: the request object
     @param wikiurl: the InterWiki:PageName link
@@ -648,6 +664,21 @@ def resolve_wiki(request, wikiurl):
     """
     _interwiki_list = load_wikimap(request)
     wikiname, pagename, linktext = split_wiki(wikiurl)
+    if wikiname in _interwiki_list:
+        return (wikiname, _interwiki_list[wikiname], pagename, False)
+    else:
+        return (wikiname, request.getScriptname(), "/InterWiki", True)
+
+def resolve_interwiki(request, wikiname, pagename):
+    """ Resolve an interwiki reference (wikiname:pagename).
+
+    @param request: the request object
+    @param wikiname: interwiki wiki name
+    @param pagename: interwiki page name
+    @rtype: tuple
+    @return: (wikitag, wikiurl, wikitail, err)
+    """
+    _interwiki_list = load_wikimap(request)
     if wikiname in _interwiki_list:
         return (wikiname, _interwiki_list[wikiname], pagename, False)
     else:
@@ -851,7 +882,7 @@ def pagelinkmarkup(pagename):
     if re.match(Parser.word_rule + "$", pagename):
         return pagename
     else:
-        return u'[[%s]]' % pagename # XXX use quoteName(pagename) later
+        return u'[[%s]]' % pagename
 
 #############################################################################
 ### mimetype support

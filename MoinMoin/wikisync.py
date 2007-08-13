@@ -166,7 +166,7 @@ class MoinRemoteWiki(RemoteWiki):
         self.verbose = verbose
         _ = self.request.getText
 
-        wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, '%s:""' % (interwikiname, ))
+        wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_interwiki(self.request, interwikiname, '')
         self.wiki_url = wikiutil.mapURL(self.request, wikiurl)
         self.valid = not wikitag_bad
         self.xmlrpc_url = self.wiki_url + "?action=xmlrpc2"

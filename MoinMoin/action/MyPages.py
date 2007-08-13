@@ -24,7 +24,7 @@ def execute(pagename, request):
     userhomewiki = request.cfg.user_homewiki
     if userhomewiki != 'Self' and userhomewiki != request.cfg.interwikiname:
         interwiki = wikiutil.getInterwikiHomePage(request, username=username)
-        wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(request, '%s:"%s"' % interwiki)
+        wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_interwiki(request, *interwiki)
         wikiurl = wikiutil.mapURL(request, wikiurl)
         homepageurl = wikiutil.join_wiki(wikiurl, wikitail)
         request.http_redirect('%s?action=MyPages' % homepageurl)
