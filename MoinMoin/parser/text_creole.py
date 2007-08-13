@@ -614,9 +614,9 @@ class DocEmitter:
         ])
 
     def interwiki_link_emit(self, node):
-        word = node.content
+        wiki, page = wikiutil.split_interwiki(node.content)
         wikitag, wikiurl, wikitail, wikitag_bad = \
-            wikiutil.resolve_wiki(self.request, word)
+            wikiutil.resolve_interwiki(self.request, wiki, page)
         href = wikiutil.join_wiki(wikiurl, wikitail)
         return ''.join([
             self.formatter.interwikilink(1, wikitag, wikitail),

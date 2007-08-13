@@ -216,7 +216,8 @@ def execute(macro, args):
         if ":" in target:
             if target.startswith('wiki:'):
                 target = target[5:]
-            wikitag, wikiurl, wikitail, error = wikiutil.resolve_wiki(request, target)
+            wikiname, pagename = wikiutil.split_interwiki(target)
+            wikitag, wikiurl, wikitail, error = wikiutil.resolve_interwiki(request, wikiname, pagename)
             url = wikiurl + wikiutil.quoteWikinameURL(wikitail)
             return "%s%s%s" % (formatter.url(1, url),
                                formatter.image(**kw),

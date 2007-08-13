@@ -520,7 +520,7 @@ class Parser:
         wiki = groups.get('interwiki_wiki')
         page = groups.get('interwiki_page')
 
-        wikitag_bad = wikiutil.resolve_wiki(self.request, word)[3]
+        wikitag_bad = wikiutil.resolve_interwiki(self.request, wiki, page)[3]
         if wikitag_bad:
             return self.formatter.text(word)
         else:
@@ -692,8 +692,7 @@ class Parser:
             elif m.group('inter_wiki'):
                 wiki_name = m.group('inter_wiki')
                 page_name = m.group('inter_page')
-                word = '%s:%s' % (wiki_name, page_name)
-                wikitag_bad = wikiutil.resolve_wiki(self.request, word)[3]
+                wikitag_bad = wikiutil.resolve_interwiki(self.request, wiki_name, page_name)[3]
                 if not desc:
                     desc = self.formatter.text(page_name)
                 return (self.formatter.interwikilink(1, wiki_name, page_name) +

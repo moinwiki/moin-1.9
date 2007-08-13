@@ -315,9 +315,7 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
 
             base, ext = os.path.splitext(file)
             get_url = getAttachUrl(pagename, file, request, escaped=1)
-            qfname = wikiutil.escape(file)
-            if ' ' in qfname:
-                qfname = wikiutil.quoteName(qfname)
+            escaped_fname = wikiutil.escape(file)
             parmdict = {'baseurl': baseurl, 'urlpagename': urlpagename, 'action': action,
                         'urlfile': urlfile, 'label_del': label_del,
                         'label_move': label_move,
@@ -326,7 +324,7 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
                         'label_unzip': label_unzip,
                         'label_install': label_install,
                         'get_url': get_url, 'label_get': label_get,
-                        'file': qfname,
+                        'file': escaped_fname,
                         'fsize': fsize,
                         'fmtime': fmtime,
                         'pagename': pagename}
@@ -359,7 +357,7 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
             parmdict['move_link'] = move_link
             html += ('<li>[%(del_link)s%(move_link)s'
                 '<a href="%(get_url)s">%(label_get)s</a>&nbsp;| %(viewlink)s]'
-                ' (%(fmtime)s, %(fsize)s KB) attachment:%(file)s</li>') % parmdict
+                ' (%(fmtime)s, %(fsize)s KB) [[attachment:%(file)s]]</li>') % parmdict
         html += "</ul>"
     else:
         if showheader:

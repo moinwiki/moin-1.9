@@ -99,7 +99,7 @@ class FormatterBase:
             IMPORTANT: on and off must be called with same parameters, see
                        also the text_html formatter.
         """
-        wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, '%s:"%s"' % (interwiki, pagename))
+        wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_interwiki(self.request, interwiki, pagename)
         if wikitag == 'Self' or wikitag == self.request.cfg.interwikiname:
             if '#' in wikitail:
                 wikitail, kw['anchor'] = wikitail.split('#', 1)
