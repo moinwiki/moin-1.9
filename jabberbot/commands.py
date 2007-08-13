@@ -138,6 +138,18 @@ class Search(BaseDataCommand):
         self.mtime = None
         self.regexp = kwargs.get('regexp', False)
 
+
+class RevertPage(BaseDataCommand):
+
+    description = u"revert a page to previous revision"
+    parameter_list = u"page_name revision"
+
+    def __init__(self, jid, pagename, revision):
+        BaseDataCommand.__init__(self, jid)
+        self.pagename = pagename
+        self.revision = revision
+
+
 class GetUserLanguage:
     """Request user's language information from wiki"""
 
@@ -147,3 +159,4 @@ class GetUserLanguage:
         """
         self.jid = jid
         self.language = None
+

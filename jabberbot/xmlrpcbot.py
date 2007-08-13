@@ -130,6 +130,8 @@ class XMLRPCClient(Thread):
             self.get_language_by_jid(command)
         elif isinstance(command, cmd.Search):
             self.do_search(command)
+        elif isinstance(command, cmd.RevertPage):
+            self.do_revert(command)
 
     def report_error(self, jid, text, data={}):
         # Dummy function, so that the string appears in a .po file
@@ -241,6 +243,27 @@ class XMLRPCClient(Thread):
         command.data = self._get_multicall_result(command.jid)
 
     do_search = _xmlrpc_decorator(do_search)
+
+    def do_revert(self, command):
+        """Performs a page revert"""
+
+        # Dummy function, so that the string appears in a .po file
+        _ = lambda x: x
+
+        self.multicall.revertPage(command.pagename, command.revision)
+        data = self._get_multicall_result(command.jid)
+
+        if type(data) == bool and data:
+            cmd_data = {'text': _("Page has been reverted.")}
+        elif isinstance(str, data) or isinstance(unicode, data):
+            cmd_data = {'text': _("Revert failed: %(reason)s" % {'reason': data})}
+        else:
+            cmd_data = {'text': _("Revert failed.")}
+
+        info = cmd.NotificationCommand([command.jid], cmd_data, async=False, msg_type=u"chat")
+        self.commands_out.put_nowait(info)
+
+    do_revert = _xmlrpc_decorator(do_revert)
 
     def get_language_by_jid(self, command):
         """Returns language of the a user identified by the given JID"""
