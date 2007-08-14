@@ -1189,7 +1189,7 @@ var gui_editor_link_text = "%(text)s";
         @rtype: unicode
         @return: subscribe or unsubscribe link
         """
-        if not (self.cfg.mail_enabled and self.request.user.valid):
+        if not (self.cfg.mail_enabled or self.cfg.jabber_enabled and self.request.user.valid):
             return ''
 
         _ = self.request.getText

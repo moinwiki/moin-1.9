@@ -18,16 +18,16 @@ def execute(pagename, request):
         msg = _("You are not allowed to subscribe to a page you can't read.")
 
     # Check if mail is enabled
-    elif not cfg.mail_enabled:
-        msg = _("This wiki is not enabled for mail processing.")
+    elif not cfg.mail_enabled and not cfg.jabber_enabled
+        msg = _("This wiki is not enabled for mail/Jabber processing.")
 
     # Suggest visitors to login
     elif not request.user.valid:
         msg = _("You must log in to use subscriptions.")
 
     # Suggest users without email to add their email address
-    elif not request.user.email:
-        msg = _("Add your email address in your UserPreferences to use subscriptions.")
+    elif not request.user.email and not request.user.jid:
+        msg = _("Add your email address or Jabber ID in your UserPreferences to use subscriptions.")
 
     elif request.user.isSubscribedTo([pagename]):
         # Try to unsubscribe
@@ -46,3 +46,4 @@ def execute(pagename, request):
             msg = _('You could not get subscribed to this page.')
 
     Page(request, pagename).send_page(msg=msg)
+

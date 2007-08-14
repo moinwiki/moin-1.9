@@ -62,7 +62,7 @@ def subscribe_users(request, usernamelist, pagename, formatter):
             realusers.append(userobj.name)
             if userobj.isSubscribedTo([pagename]):
                 success = True
-            elif not userobj.email:
+            elif not userobj.email and not userobj.jid:
                 success = False
             elif userobj.subscribe(pagename):
                 success = True
