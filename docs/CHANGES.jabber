@@ -1,0 +1,37 @@
+MoinMoin Version History - Jabber Functionality
+===============================================
+
+Please completely read CHANGES text until you reach the version you were
+using until now. Otherwise you might miss some important upgrading and
+configuration hints.
+
+Known main issues:
+
+  * You need a development version of pyxmpp, 1.0 won't work. You can
+    get it directly from svn repository with:
+
+    svn checkout http://pyxmpp.jajcus.net/svn/pyxmpp/trunk pyxmpp
+
+    Add the resulting `pyxmpp` directory to your PYTHONPATH or perform
+    a "full installation" as described on http://pyxmpp.jajcus.net/:
+
+    To build the package just invoke:
+    python setup.py build
+
+    To install it:
+    python setup.py install
+
+    If you had some older version of PyXMPP it is better to uninstall it 
+    (delete pyxmpp subdirectory os your site-packages directory) before 
+    installing this one or things may not work correctly.
+
+    You may also try:
+    make
+
+    and:
+    make install
+
+    instead.
+
+Version 1.7.current:
+    The first version that supports jabber notifications.
