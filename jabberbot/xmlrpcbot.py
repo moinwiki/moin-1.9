@@ -260,7 +260,7 @@ class XMLRPCClient(Thread):
         else:
             cmd_data = {'text': _("Revert failed.")}
 
-        info = cmd.NotificationCommand([command.jid], cmd_data, async=False, msg_type=u"chat")
+        info = cmd.NotificationCommandI18n([command.jid], cmd_data, async=False, msg_type=u"chat")
         self.commands_out.put_nowait(info)
 
     do_revert = _xmlrpc_decorator(do_revert)
