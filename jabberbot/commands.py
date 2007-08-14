@@ -12,12 +12,13 @@
 # First, XML RPC -> XMPP commands
 class NotificationCommand:
     """Class representing a notification request"""
-    def __init__(self, jids, notification, msg_type="message", async=True):
+    def __init__(self, jids, notification, msg_type=u"message", async=True):
         """A constructor
 
         @param jids: a list of jids to sent this message to
-        @type jids: list
+        @param notification: dictionary with notification data
         @param async: async notifications get queued if contact is DnD
+        @type jids: list
 
         """
         if type(jids) != list:
@@ -131,6 +132,10 @@ class Search(BaseDataCommand):
 
     def __init__(self, jid, search_type, *args, **kwargs):
         BaseDataCommand.__init__(self, jid)
+
+        if not JID(jid).resource:
+            raise ValueError("The jid argument must be a full jabber id!")
+
         self.term = ' '.join(args)
         self.search_type = search_type
         self.presentation = kwargs.get('presentation', 'text') # "text" or "dataforms"
