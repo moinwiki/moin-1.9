@@ -574,7 +574,7 @@ class XmlRpcBase:
         self.request.rev = int(self._instr(revision))
         msg = revert.execute(pagename, self.request)
         if msg:
-            return xmlrpclib.Fault(1, "Revert failed: %s" % (msg ,))
+            return xmlrpclib.Fault(1, "Revert failed: %s" % (msg, ))
         else:
             return xmlrpclib.Boolean(1)
 
