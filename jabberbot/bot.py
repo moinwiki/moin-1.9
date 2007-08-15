@@ -16,9 +16,32 @@ from jabberbot.xmppbot import XMPPBot
 from jabberbot.xmlrpcbot import XMLRPCServer, XMLRPCClient
 
 
-def main():
-    args = sys.argv
+def _check_xmpp_version():
+    """Checks if available version of pyxmpp is recent enough
 
+    Since __revision__ is broken in current trunk, we can't relay on it.
+    Therefore a simple check for known problems is used to determine if
+    we can start the bot with it.
+
+    """
+    import pyxmpp
+
+    msg = pyxmpp.message.Message()
+    form = pyxmpp.jabber.dataforms.Form()
+
+    try:
+        msg.add_content(form)
+    except TypeError:
+        print 'Your version of pyxmpp is too old!'
+        print 'You need a least revision 665 to run this bot. Exiting...'
+        sys.exit(1)
+
+def main():
+    """Starts the jabber bot"""
+
+    _check_xmpp_version()
+
+    args = sys.argv
     if "--help" in args:
         print """MoinMoin notification bot
 
