@@ -6,10 +6,16 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+import py.test
 from Queue import Queue
 
-import jabberbot.commands as commands
+try:
+    import pyxmpp
+except ImportError:
+    py.test.skip("Skipping jabber bot tests - pyxmpp is not installed")
+
 from jabberbot.xmppbot import XMPPBot
+import jabberbot.commands as commands
 from jabberbot.config import BotConfig
 
 class TestXMPPBotCommands:
