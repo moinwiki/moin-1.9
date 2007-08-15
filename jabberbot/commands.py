@@ -9,6 +9,8 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+from pyxmpp.jid import JID
+
 # First, XML RPC -> XMPP commands
 class NotificationCommand:
     """Class representing a notification request"""

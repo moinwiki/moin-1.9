@@ -35,7 +35,7 @@ class Contact:
 
     def __init__(self, jid, resource, priority, show, language=None):
         self.jid = jid
-        self.resources = {resource: {'show': show, 'priority': priority}}
+        self.resources = {resource: {'show': show, 'priority': priority, 'supports': []}}
         self.language = language
 
         # The last time when this contact was seen online.
@@ -66,18 +66,50 @@ class Contact:
         @param priority: priority of the given resource
 
         """
-        self.resources[resource] = {'show': show, 'priority': priority, 'forms': False}
+        self.resources[resource] = {'show': show, 'priority': priority, supports: []}
         self.last_online = None
 
     def set_supports(self, resource, extension):
         """Flag a given resource as supporting a particular extension"""
-        if resource in self.resources:
-            self.resources[resource][extension] = True
+        self.resources[resource]['supports'].append(extension)
 
     def supports(self, resource, extension):
-        """Check if a given resource supports a particular extension"""
-        if resource in self.resources:
-            return extension in self.resources[resource]
+        """Check if a given resource supports a particular extension
+
+        If no resource is specified, check the resource with the highest
+        priority among currently connected.
+
+        """
+        if resource:
+            return extension in self.resources[resource]['supports']
+        else:
+            resource = self.max_prio_resource()
+            if resource:
+                return extension in resource['supports']
+            else:
+                return False
+
+    def max_prio_resource(self):
+        """Returns the resource (dict) with the highest priority
+
+        @return: highest priority resource or None if contacts is offline
+        @rtype: dict or None
+
+        """
+        if not self.resources:
+            return None
+
+        # Priority can't be lower than -128
+        max_prio = -129
+        selected = None
+
+        for resource in self.resources.itervalues():
+            # TODO: check RFC for behaviour of 2 resources with the same priority
+            if resource['priority'] > max_prio:
+                max_prio = resource['priority']
+                selected = resource
+
+        return selected
 
     def remove_resource(self, resource):
         """Removes information about a connected resource
@@ -99,18 +131,13 @@ class Contact:
         The contact is DND if its resource with the highest priority is DND
 
         """
-        # Priority can't be lower than -128
-        max_prio = -129
-        max_prio_show = u"dnd"
-
-        for resource in self.resources.itervalues():
-            # TODO: check RFC for behaviour of 2 resources with the same priority
-            if resource['priority'] > max_prio:
-                max_prio = resource['priority']
-                max_prio_show = resource['show']
+        max_prio_res = self.max_prio_resource()
 
         # If there are no resources the contact is offline, not dnd
-        return self.resources and max_prio_show == u'dnd'
+        if max_prio_res:
+            return max_prio_res['show'] == u"dnd"
+        else:
+            return False
 
     def set_show(self, resource, show):
         """Sets show property for a given resource
@@ -279,7 +306,8 @@ class XMPPBot(Client, Thread):
                     gettext_func = self.get_text(jid_text)
                     text, subject = command.translate(gettext_func)
                     msg_data = {'text': text, 'subject': subject,
-                                'url_list': cmd_data.get('url_list', [])}
+                                'url_list': cmd_data.get('url_list', []),
+                                'action': cmd_data.get('action', '')}
 
                 # Check if contact is DoNotDisturb.
                 # If so, queue the message for delayed delivery.
@@ -289,7 +317,14 @@ class XMPPBot(Client, Thread):
                         contact.messages.append(command)
                         return
 
-                self.send_message(jid, msg_data, command.msg_type)
+                    if contact.supports(jid.resource, u"jabber:x:data"):
+                        action = msg_data.get('action', '')
+                        if action == "page_changed":
+                            self.send_change_form(jid, msg_data)
+                        else:
+                            self.send_message(jid, msg_data, command.msg_type)
+                else:
+                    self.send_message(jid, msg_data, command.msg_type)
 
             return
 
@@ -374,16 +409,16 @@ Current version: %(version)s""") % {
             else:
                 form_title = _("Search results").encode("utf-8")
 
-		warnings = []
+                warnings = []
                 for no, warning in enumerate(warnings):
                     field = forms.Field(name="warning", field_type="fixed", value=warning)
-		    warnings.append(forms.Item([field]))
+                    warnings.append(forms.Item([field]))
 
-		reported = [forms.Field(name="url", field_type="text-single"), forms.Field(name="description", field_type="text-single")]
-		if warnings:
-			reported.append(forms.Field(name="warning", field_type="fixed"))
+                reported = [forms.Field(name="url", field_type="text-single"), forms.Field(name="description", field_type="text-single")]
+                if warnings:
+                    reported.append(forms.Field(name="warning", field_type="fixed"))
 
-		form = forms.Form(xmlnode_or_type="result", title=form_title, reported_fields=reported)
+                form = forms.Form(xmlnode_or_type="result", title=form_title, reported_fields=reported)
 
                 for no, result in enumerate(results):
                     url = forms.Field(name="url", value=result["url"], field_type="text-single")
@@ -496,7 +531,32 @@ Current version: %(version)s""") % {
         form.add_field(name="search_type", options=[title_search, full_search], field_type="list-single", label=search_label)
         form.add_field(name="search", field_type="text-single", label=search_label2)
 
-	self.send_form(jid, form, _("Wiki search"))
+        self.send_form(jid, form, _("Wiki search"))
+
+    def send_change_form(self, jid, msg_data):
+        """Sends a page change notification using Data Forms"""
+        _ = self.get_text(jid)
+
+        form_title = _("Page changed notification").encode("utf-8")
+        instructions = _("Submit this form with a specified action to continue.").encode("utf-8")
+        url_label = _("URL")
+        pagename_label = _("Page name")
+        action_label = _("What to do next")
+
+        action1 = _("Do nothing")
+        action2 = _("Revert change")
+        action3 = _("View page info")
+
+        do_nothing = forms.Option("n", action1)
+        revert = forms.Option("r", action2)
+        view_info = forms.Option("v", action3)
+
+        form = forms.Form(xmlnode_or_type="form", title=form_title, instructions=instructions)
+        form.add_field(name="action", field_type="hidden", value="change_notify_action")
+        form.add_field(name="notification", field_type="fixed", value=msg_data['text'])
+        form.add_field(name="options", field_type="list-single", options=[do_nothing, revert, view_info], label=action_label)
+
+        self.send_form(jid, form, _("Page change notification"))
 
     def is_internal(self, command):
         """Check if a given command is internal
@@ -602,7 +662,7 @@ Current version: %(version)s""") % {
         else:
             search_type = 'text'
 
-        command = cmd.Search(jid_text, search_type, form["search"].value, case=form['case'].value,
+        command = cmd.Search(jid.as_unicode(), search_type, form["search"].value, case=form['case'].value,
                              regexp=form['regexp'].value, presentation='dataforms')
         self.from_commands.put_nowait(command)
 
