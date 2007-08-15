@@ -89,7 +89,7 @@ def handle_file_attached(event):
 
         jids = [usr.jid for usr in subscribers[lang]]
 
-        if send_notification(request, jids, data['body'], data['subject'], links):
+        if send_notification(request, jids, data['body'], data['subject'], links, "file_attached"):
             names.update(recipients)
 
     return notification.Success(names)
@@ -148,7 +148,7 @@ def handle_user_created(event):
         if usr.isSuperUser() and usr.jid and event_name in usr.jabber_subscribed_events:
             jids.append(usr.jid)
 
-    send_notification(event.request, jids, data['body'], data['subject'])
+    send_notification(event.request, jids, data['body'], data['subject'], "user_created")
 
 
 def page_change(change_type, request, page, subscribers, **kwargs):
@@ -165,7 +165,7 @@ def page_change(change_type, request, page, subscribers, **kwargs):
             msg = notification.page_change_message(change_type, request, page, lang, **kwargs)
             page_url = request.getQualifiedURL(page.url(request, relative=False))
             url = {'url': page_url, 'description': _("Changed page")}
-            result = send_notification(request, jids, msg, _("Page changed"), [url])
+            result = send_notification(request, jids, msg, _("Page changed"), [url], "page_changed")
 
             if result:
                 recipients.update(names)
@@ -173,7 +173,7 @@ def page_change(change_type, request, page, subscribers, **kwargs):
         if recipients:
             return notification.Success(recipients)
 
-def send_notification(request, jids, message, subject="", url_list=[]):
+def send_notification(request, jids, message, subject="", url_list=[], action=""):
     """ Send notifications for a single language.
 
     @param jids: an iterable of Jabber IDs to send the message to
@@ -190,7 +190,7 @@ def send_notification(request, jids, message, subject="", url_list=[]):
         raise ValueError("url_list must be of type list!")
 
     try:
-        cmd_data = {'text': message, 'subject': subject, 'url_list': url_list}
+        cmd_data = {'text': message, 'subject': subject, 'url_list': url_list, 'action': action}
         server.send_notification(request.cfg.secret, jids, cmd_data)
         return True
     except xmlrpclib.Error, err:
