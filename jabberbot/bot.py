@@ -19,7 +19,7 @@ from jabberbot.xmlrpcbot import XMLRPCServer, XMLRPCClient
 def _check_xmpp_version():
     """Checks if available version of pyxmpp is recent enough
 
-    Since __revision__ is broken in current trunk, we can't relay on it.
+    Since __revision__ is broken in current trunk, we can't rely on it.
     Therefore a simple check for known problems is used to determine if
     we can start the bot with it.
 
