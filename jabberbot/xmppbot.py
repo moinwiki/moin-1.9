@@ -886,7 +886,7 @@ The call should look like:\n\n%(command)s %(params)s")
             # Unknown resource, add it to the list
             else:
                 contact.add_resource(jid.resource, show, priority)
-		# Discover capabilities of the newly connected client
+                # Discover capabilities of the newly connected client
                 contact.service_discovery(jid)
 
             if self.config.verbose:
