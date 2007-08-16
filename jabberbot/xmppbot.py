@@ -84,10 +84,7 @@ class Contact:
             return extension in self.resources[resource]['supports']
         else:
             resource = self.max_prio_resource()
-            if resource:
-                return extension in resource['supports']
-            else:
-                return False
+            return resource and extension in resource['supports']
 
     def max_prio_resource(self):
         """Returns the resource (dict) with the highest priority
