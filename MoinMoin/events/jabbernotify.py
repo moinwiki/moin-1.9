@@ -88,8 +88,10 @@ def handle_file_attached(event):
                   {'url': pagelink, 'description': _("Page link")}]
 
         jids = [usr.jid for usr in subscribers[lang]]
+        data['url_list'] = links
+        data['action'] = "file_attached"
 
-        if send_notification(request, jids, data['body'], data['subject'], links, "file_attached"):
+        if send_notification(request, jids, data):
             names.update(recipients)
 
     return notification.Success(names)
@@ -124,8 +126,12 @@ def handle_page_renamed(event):
     old_name = event.old_page.page_name
 
     subscribers = page.getSubscribers(request, return_users=1)
+
+    # Change request's page so that we filter subscribers of the OLD page
+    request.page = event.old_page
     notification.filter_subscriber_list(event, subscribers, True)
-    return page_change("page_renamed", request, page, subscribers, oldname=old_name)
+    request.page = page
+    return page_change("page_renamed", request, page, subscribers, old_name=old_name)
 
 
 def handle_user_created(event):
@@ -165,7 +171,12 @@ def page_change(change_type, request, page, subscribers, **kwargs):
             msg = notification.page_change_message(change_type, request, page, lang, **kwargs)
             page_url = request.getQualifiedURL(page.url(request, relative=False))
             url = {'url': page_url, 'description': _("Changed page")}
-            result = send_notification(request, jids, msg, _("Page changed"), [url], "page_changed")
+            data = {'action': change_type, 'subject': _('Page changed'),
+                            'url_list': [url], 'text': msg['text'], 'diff': msg.get('diff', ''),
+                            'comment': msg.get('comment', ''), 'editor': msg['editor'],
+                            'old_name': msg.get('old_name', ''), 'page_name': msg.get('page_name', '')}
+
+            result = send_notification(request, jids, data)
 
             if result:
                 recipients.update(names)
@@ -173,7 +184,7 @@ def page_change(change_type, request, page, subscribers, **kwargs):
         if recipients:
             return notification.Success(recipients)
 
-def send_notification(request, jids, message, subject="", url_list=[], action=""):
+def send_notification(request, jids, notification):
     """ Send notifications for a single language.
 
     @param jids: an iterable of Jabber IDs to send the message to
@@ -186,12 +197,14 @@ def send_notification(request, jids, message, subject="", url_list=[], action=""
     _ = request.getText
     server = request.cfg.notification_server
 
-    if type(url_list) != list:
+    if type(notification['url_list']) != list:
         raise ValueError("url_list must be of type list!")
 
+    if type(notification) != dict:
+        raise ValueError("notification must be of type dict!")
+
     try:
-        cmd_data = {'text': message, 'subject': subject, 'url_list': url_list, 'action': action}
-        server.send_notification(request.cfg.secret, jids, cmd_data)
+        server.send_notification(request.cfg.secret, jids, notification)
         return True
     except xmlrpclib.Error, err:
         ev.logger.error(_("XML RPC error: %s"), str(err))
