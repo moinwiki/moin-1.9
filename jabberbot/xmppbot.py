@@ -322,11 +322,7 @@ class XMPPBot(Client, Thread):
                 elif action == u'file_attached':
                     self.handle_attached_action(cmd_data, jid, contact)
                 elif action == u'page_renamed':
-                    try:
-                        self.handle_renamed_action(cmd_data, jid, contact)
-                    except Exception, e:
-                        import traceback
-                        traceback.print_exc(e)
+                    self.handle_renamed_action(cmd_data, jid, contact)
                 elif action == u'user_created':
                     self.handle_user_created_action(cmd_data, jid, contact)
                 else:
@@ -358,32 +354,7 @@ class XMPPBot(Client, Thread):
             self.send_message(command.jid, {'text': msg % (pagelist, )})
 
         elif isinstance(command, cmd.GetPageInfo):
-            intro = _("""Following detailed information on page "%(pagename)s" \
-is available:""")
-
-            if command.data['author'].startswith("Self:"):
-                author = command.data['author'][5:]
-            else:
-                author = command.data['author']
-
-            datestr = str(command.data['lastModified'])
-            date = u"%(year)s-%(month)s-%(day)s at %(time)s" % {
-                        'year': datestr[:4],
-                        'month': datestr[4:6],
-                        'day': datestr[6:8],
-                        'time': datestr[9:17],
-            }
-
-            msg = _("""Last author: %(author)s
-Last modification: %(modification)s
-Current version: %(version)s""") % {
-             'author': author,
-             'modification': date,
-             'version': command.data['version'],
-            }
-
-            self.send_message(command.jid, {'text': intro % {'pagename': command.pagename}})
-            self.send_message(command.jid, {'text': msg})
+            self.handle_page_info(command)
 
         elif isinstance(command, cmd.GetUserLanguage):
             if command.jid in self.contacts:
@@ -650,7 +621,7 @@ Current version: %(version)s""") % {
         view_info = forms.Option("v", action3)
 
         form = forms.Form(xmlnode_or_type="form", title=form_title, instructions=instructions)
-        form.add_field(name="action", field_type="hidden", value="change_notify_action")
+        form.add_field(name='page_name', field_type='hidden', value=msg_data['page_name'])
         form.add_field(name='editor', field_type='text-single', value=msg_data['editor'], label=_("Editor"))
         form.add_field(name='comment', field_type='text-single', value=msg_data.get('comment', ''), label=_("Comment"))
 
@@ -724,7 +695,6 @@ Current version: %(version)s""") % {
         view_info = forms.Option("v", action3)
 
         form = forms.Form(xmlnode_or_type="form", title=form_title, instructions=instructions)
-        form.add_field(name="action", field_type="hidden", value="delete_notify_action")
         form.add_field(name='editor', field_type='text-single', value=msg_data['editor'], label=_("Editor"))
         form.add_field(name='comment', field_type='text-single', value=msg_data.get('comment', ''), label=_("Comment"))
 
@@ -793,7 +763,6 @@ Current version: %(version)s""") % {
         view_info = forms.Option("v", action3)
 
         form = forms.Form(xmlnode_or_type="form", title=form_title, instructions=instructions)
-        form.add_field(name="action", field_type="hidden", value="change_notify_action")
         form.add_field(name='editor', field_type='text-single', value=msg_data['editor'], label=_("Editor"))
         form.add_field(name='page', field_type='text-single', value=msg_data['page_name'], label=_("Page name"))
         form.add_field(name='name', field_type='text-single', value=msg_data['attach_name'], label=_("File name"))
@@ -863,7 +832,6 @@ Current version: %(version)s""") % {
         view_info = forms.Option("v", action3)
 
         form = forms.Form(xmlnode_or_type="form", title=form_title, instructions=instructions)
-        form.add_field(name="action", field_type="hidden", value="change_notify_action")
         form.add_field(name='editor', field_type='text-single', value=msg_data['editor'], label=_("Editor"))
         form.add_field(name='comment', field_type='text-single', value=msg_data.get('comment', ''), label=_("Comment"))
         form.add_field(name='old', field_type='text-single', value=msg_data['old_name'], label=_("Old name"))
@@ -910,6 +878,100 @@ Current version: %(version)s""") % {
         data = {'text': message, 'subject': msg_data['subject']}
         self.send_message(jid, data, u"message")
 
+    def handle_page_info(self, command):
+        """Handles GetPageInfo commands
+
+        @param command: a command instance
+        @type command: jabberbot.commands.GetPageInfo
+
+        """
+        # Process command data first so it can be directly usable
+        if command.data['author'].startswith("Self:"):
+            command.data['author'] = command.data['author'][5:]
+
+        datestr = str(command.data['lastModified'])
+        command.data['lastModified'] = u"%(year)s-%(month)s-%(day)s at %(time)s" % {
+                    'year': datestr[:4],
+                    'month': datestr[4:6],
+                    'day': datestr[6:8],
+                    'time': datestr[9:17],
+        }
+
+        if command.presentation == u"text":
+            self.send_pageinfo_text(command)
+        elif command.presentation == u"dataforms":
+            self.send_pageinfo_form(command)
+
+        else:
+            raise ValueError("presentation value '%s' is not supported!" % (command.presentation, ))
+
+    def send_pageinfo_text(self, command):
+        """Sends detailed page info with plain text
+
+        @param command: command with detailed data
+        @type command: jabberbot.command.GetPageInfo
+
+        """
+        _ = self.get_text(command.jid)
+
+        intro = _("""Following detailed information on page "%(pagename)s" \
+is available:""")
+
+        msg = _("""Last author: %(author)s
+Last modification: %(modification)s
+Current version: %(version)s""") % {
+         'author': command.data['author'],
+         'modification': command.data['lastModified'],
+         'version': command.data['version'],
+        }
+
+        self.send_message(command.jid, {'text': intro % {'pagename': command.pagename}})
+        self.send_message(command.jid, {'text': msg})
+
+    def send_pageinfo_form(self, command):
+        """Sends page info using Data Forms
+
+
+        """
+        _ = self.get_text(command.jid)
+        data = command.data
+
+        form_title = _("Detailed page information").encode("utf-8")
+        instructions = _("Submit this form with a specified action to continue.").encode("utf-8")
+        action_label = _("What to do next")
+
+        action1 = _("Do nothing")
+        action2 = _("Get page contents")
+        action3 = _("Get page contents (HTML)")
+
+        do_nothing = forms.Option("n", action1)
+        get_content = forms.Option("c", action2)
+        get_content_html = forms.Option("h", action3)
+
+        form = forms.Form(xmlnode_or_type="form", title=form_title, instructions=instructions)
+        form.add_field(name='pagename', field_type='text-single', value=command.pagename, label=_("Page name"))
+        form.add_field(name="changed", field_type='text-single', value=data['lastModified'], label=_("Last changed"))
+        form.add_field(name='editor', field_type='text-single', value=data['author'], label=_("Last editor"))
+        form.add_field(name='version', field_type='text-single', value=data['version'], label=_("Current version"))
+
+#        full_jid = JID(jid)
+#        bare_jid = full_jid.bare().as_unicode()
+#        resource = full_jid.resource
+
+        # Add URLs as OOB data if it's supported and as separate fields otherwise
+#        if bare_jid in self.contacts and self.contacts[bare_jid].supports(resource, u'jabber:x:oob'):
+#            url_list = msg_data['url_list']
+#        else:
+#            url_list = []
+#
+#            for number, url in enumerate(msg_data['url_list']):
+#                field_name = "url%d" % (number, )
+#                form.add_field(name=field_name, field_type="text-single", value=url["url"], label=url["description"])
+
+        # Selection of a following action
+        form.add_field(name="options", field_type="list-single", options=[do_nothing, get_content, get_content_html], label=action_label)
+
+        self.send_form(command.jid, form, _("Detailed page information"))
 
     def is_internal(self, command):
         """Check if a given command is internal
@@ -976,18 +1038,20 @@ Current version: %(version)s""") % {
         if form.type != u"submit":
             return
 
-        try:
+        if "action" in form:
             action = form["action"].value
-        except KeyError:
-            data = {'text': _('The form you submitted was invalid!'), 'subject': _('Invalid data')}
-            self.send_message(jid.as_unicode(), data, u"message")
-            return
+            if action == u"search":
+                self.handle_search_form(jid, form)
+            else:
+                data = {'text': _('The form you submitted was invalid!'), 'subject': _('Invalid data')}
+                self.send_message(jid.as_unicode(), data, u"message")
+        elif "options" in form:
+            option = form["options"].value
 
-        if action == u"search":
-            self.handle_search_form(jid, form)
-        else:
-            data = {'text': _('The form you submitted was invalid!'), 'subject': _('Invalid data')}
-            self.send_message(jid.as_unicode(), data, u"message")
+            # View page info
+            if option == "v":
+                command = cmd.GetPageInfo(jid.as_unicode(), form["page_name"].value, presentation="dataforms")
+                self.from_commands.put_nowait(command)
 
 
     def handle_search_form(self, jid, form):
