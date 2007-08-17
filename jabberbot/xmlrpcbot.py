@@ -134,6 +134,14 @@ class XMLRPCClient(Thread):
             self.do_revert(command)
 
     def report_error(self, jid, text, data={}):
+        """Reports an internal error
+
+        @param jid: Jabber ID that should be informed about the error condition
+        @param text: description of the error
+        @param data: dictionary used to substitute strings in translated message
+        @type data: dict
+
+        """
         # Dummy function, so that the string appears in a .po file
         _ = lambda x: x
 
