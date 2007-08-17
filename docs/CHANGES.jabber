@@ -1,0 +1,81 @@
+MoinMoin Version History - Jabber Functionality
+===============================================
+
+Please completely read CHANGES text until you reach the version you were
+using until now. Otherwise you might miss some important upgrading and
+configuration hints.
+
+Version 1.7.current:
+  New Features:
+    * The first version that supports jabber notifications.
+      * Overview:
+	MoinMoin 1.7 includes a brand new notification system based on
+	a separate process running a Jabber/XMPP notification bot. See
+	http://www.jabber.org and http://www.xmpp.org for more information
+	on this protocol.
+
+	The bot can be used to send notifications about various events
+	occuring in your Wiki, or to work with the Wiki interactively.
+
+	As it's a separate process, it doesn't block waiting for all
+	notifications to be sent, to this solution should be suitable for
+	large sites that have many users subscribed to particular changes.
+
+      * Features:
+	* Notification sent when pages are changed in various ways (content
+	  change, page rename, deletion, page copy), users being created
+	  (visible to super user only!), attachments being added and users
+	  subscribing to pages...
+
+	* Users can choose which events they're interested in being notified
+	  about. This applied both to (old) email and jabber notifications.
+
+	* Interactive Jabber bot allows to perform various simple operations
+	  on a Wiki from within your IM client (possibly in response to
+	  received notification). This includes getting raw and html-formatted
+	  page contents, querying detailed page information (last author, 
+	  revision, date of the last change...), getting a list of pages,
+	  performing searches and reverts.
+
+	  The bot uses Data Forms (XEP-004) and Out of Band Data (XEP-066)
+	  extensions if they're supported by the client to further extend
+	  available communication options
+    
+       * Getting help:
+	 * There's a sample wikiconfig in MOINDIR/wiki/config/more_examples
+
+	 * You can read more about the notification bot on following pages:
+	     * http://moinmo.in/JabberSupport
+	     * http://moinmo.in/MoinMoinTodo/Release_1.7/HelpOnNotification
+
+       * Known main issues with jabber bot:
+	 * You need a development version of pyxmpp, 1.0 won't work. You can
+	   get it directly from svn repository with:
+
+	   svn checkout http://pyxmpp.jajcus.net/svn/pyxmpp/trunk pyxmpp
+
+	   Add the resulting `pyxmpp` directory to your PYTHONPATH or perform
+	   a "full installation" as described on http://pyxmpp.jajcus.net/:
+
+	   To build the package just invoke:
+	   python setup.py build
+
+	   To install it:
+	   python setup.py install
+
+	   If you had some older version of PyXMPP it is better to uninstall it 
+	   (delete pyxmpp subdirectory os your site-packages directory) before 
+	   installing this one or things may not work correctly.
+
+	   You may also try:
+	   make
+
+	   and:
+	   make install
+
+	   instead.
+
+	 * Jabber servers usually have rather tight data rate limits, so if
+	   your site generates a lot of traffic, the notification bot may become
+	   unstable and/or unusable. If such condition occurs, you should
+	   consider running your own Jabber/XMPP server with relaxed limits.
