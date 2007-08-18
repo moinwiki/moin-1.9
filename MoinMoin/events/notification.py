@@ -73,7 +73,7 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
     _ = request.getText
     page._ = lambda s, formatted=True, r=request, l=lang: r.getText(s, formatted=formatted, lang=l)
     querystr = {}
-    changes = {'page_name': page.page_name}
+    changes = {'page_name': page.page_name, 'revision': str(page.getRevList()[0])}
 
     if msgtype == "page_changed":
         revisions = kwargs['revisions']

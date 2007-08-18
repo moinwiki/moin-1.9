@@ -621,6 +621,7 @@ class XMPPBot(Client, Thread):
         search = forms.Option("s", action4)
 
         form = forms.Form(xmlnode_or_type="form", title=form_title, instructions=instructions)
+        form.add_field(name='revision', field_type='hidden', value=msg_data['revision'])
         form.add_field(name='page_name', field_type='hidden', value=msg_data['page_name'])
         form.add_field(name='editor', field_type='text-single', value=msg_data['editor'], label=_("Editor"))
         form.add_field(name='comment', field_type='text-single', value=msg_data.get('comment', ''), label=_("Comment"))
@@ -687,14 +688,10 @@ class XMPPBot(Client, Thread):
         action_label = _("What to do next")
 
         action1 = _("Do nothing")
-        action2 = _("Revert change")
-        action3 = _("View page info")
-        action4 = _("Perform a search")
+        action2 = _("Perform a search")
 
         do_nothing = forms.Option("n", action1)
-        revert = forms.Option("r", action2)
-        view_info = forms.Option("v", action3)
-        search = forms.Option("s", action4)
+        search = forms.Option("s", action2)
 
         form = forms.Form(xmlnode_or_type="form", title=form_title, instructions=instructions)
         form.add_field(name='editor', field_type='text-single', value=msg_data['editor'], label=_("Editor"))
@@ -715,7 +712,7 @@ class XMPPBot(Client, Thread):
                 form.add_field(name=field_name, field_type="text-single", value=url["url"], label=url["description"])
 
         # Selection of a following action
-        form.add_field(name="options", field_type="list-single", options=[do_nothing, revert, view_info, search], label=action_label)
+        form.add_field(name="options", field_type="list-single", options=[do_nothing, search], label=action_label)
 
         self.send_form(jid, form, _("Page deletion notification"), url_list)
 
@@ -757,16 +754,15 @@ class XMPPBot(Client, Thread):
         action_label = _("What to do next")
 
         action1 = _("Do nothing")
-        action2 = _("Revert change")
-        action3 = _("View page info")
-        action4 = _("Perform a search")
+        action2 = _("View page info")
+        action3 = _("Perform a search")
 
         do_nothing = forms.Option("n", action1)
-        revert = forms.Option("r", action2)
-        view_info = forms.Option("v", action3)
-        search = forms.Option("s", action4)
+        view_info = forms.Option("v", action2)
+        search = forms.Option("s", action3)
 
         form = forms.Form(xmlnode_or_type="form", title=form_title, instructions=instructions)
+        form.add_field(name='page_name', field_type='hidden', value=msg_data['page_name'])
         form.add_field(name='editor', field_type='text-single', value=msg_data['editor'], label=_("Editor"))
         form.add_field(name='page', field_type='text-single', value=msg_data['page_name'], label=_("Page name"))
         form.add_field(name='name', field_type='text-single', value=msg_data['attach_name'], label=_("File name"))
@@ -787,7 +783,7 @@ class XMPPBot(Client, Thread):
                 form.add_field(name=field_name, field_type="text-single", value=url["url"], label=url["description"])
 
         # Selection of a following action
-        form.add_field(name="options", field_type="list-single", options=[do_nothing, revert, view_info, search], label=action_label)
+        form.add_field(name="options", field_type="list-single", options=[do_nothing, view_info, search], label=action_label)
 
         self.send_form(jid, form, _("File attached notification"), url_list)
 
@@ -838,6 +834,8 @@ class XMPPBot(Client, Thread):
         search = forms.Option("s", action4)
 
         form = forms.Form(xmlnode_or_type="form", title=form_title, instructions=instructions)
+        form.add_field(name='revision', field_type='hidden', value=msg_data['revision'])
+        form.add_field(name='page_name', field_type='hidden', value=msg_data['page_name'])
         form.add_field(name='editor', field_type='text-single', value=msg_data['editor'], label=_("Editor"))
         form.add_field(name='comment', field_type='text-single', value=msg_data.get('comment', ''), label=_("Comment"))
         form.add_field(name='old', field_type='text-single', value=msg_data['old_name'], label=_("Old name"))
@@ -1064,6 +1062,16 @@ Current version: %(version)s""") % {
             # Perform an another search
             elif option == "s":
                 self.handle_internal_command(jid, ["searchform"])
+
+            # Revert a change
+            elif option == "r":
+                revision = int(form["revision"].value)
+
+                # We can't really revert creation of a page, right?
+                if revision == 1:
+                    return
+
+                self.handle_xmlrpc_command(jid, ["revertpage", form["page_name"].value, "%d" % (revision - 1, )])
 
 
     def handle_search_form(self, jid, form):
