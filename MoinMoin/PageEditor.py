@@ -63,6 +63,8 @@ class PageEditor(Page):
     # exceptions for .saveText()
     class SaveError(error.Error):
         pass
+    class RevertError(SaveError):
+        pass
     class AccessDenied(SaveError):
         pass
     class Immutable(AccessDenied):
@@ -626,6 +628,41 @@ Try a different name.""") % (newpagename, )
                 return False, pageexists_error
             else:
                 return False, _('Could not rename page because of file system error: %s.') % unicode(err)
+
+
+    def revertPage(self, revision):
+        """ Reverts page to the given revision
+
+        @param revision: revision to revert to
+        @type revision: int
+
+        """
+        _ = self.request.getText
+
+        if not self.request.user.may.revert(self.page_name):
+            raise self.RevertError(_('You are not allowed to revert this page!'))
+        elif revision is None:
+            raise self.RevertError(_('You were viewing the current revision of this page when you called the revert action. '
+                    'If you want to revert to an older revision, first view that older revision and '
+                    'then call revert to this (older) revision again.'))
+        else:
+            revstr = '%08d' % revision
+            pg = Page(self.request, self.page_name, rev=revision)
+            msg = self.saveText(pg.get_raw_body(), 0, extra=revstr, action="SAVE/REVERT", notify=False)
+
+            # Remove cache entry (if exists)
+            from MoinMoin import caching
+            pg = Page(self.request, self.page_name)
+            key = self.request.form.get('key', ['text_html'])[0]
+            caching.CacheEntry(self.request, pg, key, scope='item').remove()
+            caching.CacheEntry(self.request, pg, "pagelinks", scope='item').remove()
+
+            # Notify observers
+            from MoinMoin.events import PageRevertedEvent, send_event
+            e = PageRevertedEvent(self.request, self.page_name, revision, revstr)
+            send_event(e)
+
+            return msg
 
     def deletePage(self, comment=None):
         """ Delete the current version of the page (making a backup before deletion
