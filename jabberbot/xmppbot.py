@@ -560,8 +560,7 @@ class XMPPBot(Client, Thread):
 
         _ = self.get_text(JID(jid).bare().as_unicode())
 
-        warning = _("If you see this, your client probably doesn't support Data Forms.")
-        message = Message(to_jid=jid, body=warning, subject=subject)
+        message = Message(to_jid=jid, subject=subject)
         message.add_content(form)
 
         if url_list:
