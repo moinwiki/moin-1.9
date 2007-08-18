@@ -174,7 +174,8 @@ def page_change(change_type, request, page, subscribers, **kwargs):
             data = {'action': change_type, 'subject': _('Page changed'),
                             'url_list': [url], 'text': msg['text'], 'diff': msg.get('diff', ''),
                             'comment': msg.get('comment', ''), 'editor': msg['editor'],
-                            'old_name': msg.get('old_name', ''), 'page_name': msg.get('page_name', '')}
+                            'old_name': msg.get('old_name', ''), 'page_name': msg.get('page_name', ''),
+                            'revision': msg.get('revision', '')}
 
             result = send_notification(request, jids, data)
 
