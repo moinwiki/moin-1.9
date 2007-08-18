@@ -385,23 +385,22 @@ class XMPPBot(Client, Thread):
                 self.send_message(command.jid, data, u"chat")
             else:
                 form_title = _("Search results").encode("utf-8")
+                help_form = _("Submit this form to perform a wiki search").encode("utf-8")
+                form = forms.Form(xmlnode_or_type="result", title=form_title, instructions=help_form)
 
-                warnings = []
+                action_label = _("What to do next")
+                do_nothing = forms.Option("n", _("Do nothing"))
+                search_again = forms.Option("s", _("Search again"))
+
                 for no, warning in enumerate(warnings):
-                    field = forms.Field(name="warning", field_type="fixed", value=warning)
-                    warnings.append(forms.Item([field]))
-
-                reported = [forms.Field(name="url", field_type="text-single"), forms.Field(name="description", field_type="text-single")]
-                if warnings:
-                    reported.append(forms.Field(name="warning", field_type="fixed"))
-
-                form = forms.Form(xmlnode_or_type="result", title=form_title, reported_fields=reported)
+                    form.add_field(name="warning", field_type="fixed", value=warning)
 
                 for no, result in enumerate(results):
-                    url = forms.Field(name="url", value=result["url"], field_type="text-single")
-                    description = forms.Field(name="description", value=result["description"], field_type="text-single")
-                    item = forms.Item([url, description])
-                    form.add_item(item)
+                    field_name = "url%d" % (no, )
+                    form.add_field(name=field_name, value=unicode(result["url"]), label=result["description"].encode("utf-8"), field_type="text-single")
+
+                # Selection of a following action
+                form.add_field(name="options", field_type="list-single", options=[do_nothing, search_again], label=action_label)
 
                 self.send_form(command.jid, form, _("Search results"))
 
@@ -615,10 +614,12 @@ class XMPPBot(Client, Thread):
         action1 = _("Do nothing")
         action2 = _("Revert change")
         action3 = _("View page info")
+        action4 = _("Perform a search")
 
         do_nothing = forms.Option("n", action1)
         revert = forms.Option("r", action2)
         view_info = forms.Option("v", action3)
+        search = forms.Option("s", action4)
 
         form = forms.Form(xmlnode_or_type="form", title=form_title, instructions=instructions)
         form.add_field(name='page_name', field_type='hidden', value=msg_data['page_name'])
@@ -644,7 +645,7 @@ class XMPPBot(Client, Thread):
                 form.add_field(name=field_name, field_type="text-single", value=url["url"], label=url["description"])
 
         # Selection of a following action
-        form.add_field(name="options", field_type="list-single", options=[do_nothing, revert, view_info], label=action_label)
+        form.add_field(name="options", field_type="list-single", options=[do_nothing, revert, view_info, search], label=action_label)
 
         self.send_form(jid, form, _("Page change notification"), url_list)
 
@@ -689,10 +690,12 @@ class XMPPBot(Client, Thread):
         action1 = _("Do nothing")
         action2 = _("Revert change")
         action3 = _("View page info")
+        action4 = _("Perform a search")
 
         do_nothing = forms.Option("n", action1)
         revert = forms.Option("r", action2)
         view_info = forms.Option("v", action3)
+        search = forms.Option("s", action4)
 
         form = forms.Form(xmlnode_or_type="form", title=form_title, instructions=instructions)
         form.add_field(name='editor', field_type='text-single', value=msg_data['editor'], label=_("Editor"))
@@ -713,7 +716,7 @@ class XMPPBot(Client, Thread):
                 form.add_field(name=field_name, field_type="text-single", value=url["url"], label=url["description"])
 
         # Selection of a following action
-        form.add_field(name="options", field_type="list-single", options=[do_nothing, revert, view_info], label=action_label)
+        form.add_field(name="options", field_type="list-single", options=[do_nothing, revert, view_info, search], label=action_label)
 
         self.send_form(jid, form, _("Page deletion notification"), url_list)
 
@@ -757,10 +760,12 @@ class XMPPBot(Client, Thread):
         action1 = _("Do nothing")
         action2 = _("Revert change")
         action3 = _("View page info")
+        action4 = _("Perform a search")
 
         do_nothing = forms.Option("n", action1)
         revert = forms.Option("r", action2)
         view_info = forms.Option("v", action3)
+        search = forms.Option("s", action4)
 
         form = forms.Form(xmlnode_or_type="form", title=form_title, instructions=instructions)
         form.add_field(name='editor', field_type='text-single', value=msg_data['editor'], label=_("Editor"))
@@ -783,7 +788,7 @@ class XMPPBot(Client, Thread):
                 form.add_field(name=field_name, field_type="text-single", value=url["url"], label=url["description"])
 
         # Selection of a following action
-        form.add_field(name="options", field_type="list-single", options=[do_nothing, revert, view_info], label=action_label)
+        form.add_field(name="options", field_type="list-single", options=[do_nothing, revert, view_info, search], label=action_label)
 
         self.send_form(jid, form, _("File attached notification"), url_list)
 
@@ -826,10 +831,12 @@ class XMPPBot(Client, Thread):
         action1 = _("Do nothing")
         action2 = _("Revert change")
         action3 = _("View page info")
+        action4 = _("Perform a search")
 
         do_nothing = forms.Option("n", action1)
         revert = forms.Option("r", action2)
         view_info = forms.Option("v", action3)
+        search = forms.Option("s", action4)
 
         form = forms.Form(xmlnode_or_type="form", title=form_title, instructions=instructions)
         form.add_field(name='editor', field_type='text-single', value=msg_data['editor'], label=_("Editor"))
@@ -852,7 +859,7 @@ class XMPPBot(Client, Thread):
                 form.add_field(name=field_name, field_type="text-single", value=url["url"], label=url["description"])
 
         # Selection of a following action
-        form.add_field(name="options", field_type="list-single", options=[do_nothing, revert, view_info], label=action_label)
+        form.add_field(name="options", field_type="list-single", options=[do_nothing, revert, view_info, search], label=action_label)
 
         self.send_form(jid, form, _("Page rename notification"), url_list)
 
@@ -943,10 +950,12 @@ Current version: %(version)s""") % {
         action1 = _("Do nothing")
         action2 = _("Get page contents")
         action3 = _("Get page contents (HTML)")
+        action4 = _("Perform a search")
 
         do_nothing = forms.Option("n", action1)
         get_content = forms.Option("c", action2)
         get_content_html = forms.Option("h", action3)
+        search = forms.Option("s", action4)
 
         form = forms.Form(xmlnode_or_type="form", title=form_title, instructions=instructions)
         form.add_field(name='pagename', field_type='text-single', value=command.pagename, label=_("Page name"))
@@ -969,7 +978,7 @@ Current version: %(version)s""") % {
 #                form.add_field(name=field_name, field_type="text-single", value=url["url"], label=url["description"])
 
         # Selection of a following action
-        form.add_field(name="options", field_type="list-single", options=[do_nothing, get_content, get_content_html], label=action_label)
+        form.add_field(name="options", field_type="list-single", options=[do_nothing, get_content, get_content_html, search], label=action_label)
 
         self.send_form(command.jid, form, _("Detailed page information"))
 
@@ -1052,6 +1061,10 @@ Current version: %(version)s""") % {
             if option == "v":
                 command = cmd.GetPageInfo(jid.as_unicode(), form["page_name"].value, presentation="dataforms")
                 self.from_commands.put_nowait(command)
+
+            # Perform an another search
+            elif option == "s":
+                self.handle_internal_command(jid, ["searchform"])
 
 
     def handle_search_form(self, jid, form):
