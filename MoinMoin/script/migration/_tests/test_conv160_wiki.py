@@ -38,17 +38,17 @@ class TestWikiConversion:
 
         tests = [
             # FAILING tests:
-            #('[wiki:/OtherPage]', rename_some_page, '[wiki:/OtherPage]'),
+            #('[wiki:/OtherPage]', rename_some_page, '[[/OtherPage]]'),
             #('[wiki:/OtherPage other page]', rename_some_page, '[wiki:/OtherPage other page]'),
-            #('[attachment:My%20Attachment.jpg:it works]', {}, '[attachment:"My Attachment.jpg" it works]'),
+            #('[attachment:My%20Attachment.jpg:it works]', {}, '[[attachment:My Attachment.jpg|it works]]'),
             #('[wiki:LinuxWiki: LinuxWiki.de]', {}, '[wiki:LinuxWiki: LinuxWiki.de]'),
             #('[:MeatBall:CleanLinking meatball-wiki: clean linking]', {}, '[:MeatBall:CleanLinking meatball-wiki: clean linking]'),
 
             # ambiguity!!! can be resolved with some interwiki map lookup
-            # and transformed to wiki:SeaPig:BrianDorsey if SeaPig is in
-            # interwiki map, but no page SeaPig exists.
+            # and transformed to wiki:MoinMoin:FrontPage if MoinMoin is in
+            # interwiki map, but no page MoinMoin exists.
             #('[wiki:MacroMarket/EmbedObject EO]', {}, '["MacroMarket/EmbedObject" EO]'),
-            ('[wiki:SeaPig/BrianDorsey]', {}, '[[SeaPig:BrianDorsey]]'),
+            ('[wiki:MoinMoin/FrontPage]', {}, '[[MoinMoin:FrontPage]]'),
 
             # "nothing changed" checks (except markup)
             ('', {}, ''),
@@ -64,9 +64,9 @@ class TestWikiConversion:
             ('http://some_server/some_page', rename_some_page, 'http://some_server/some_page'), # external link
             ('[http://some_server/some_page]', rename_some_page, '[[http://some_server/some_page]]'), # external link
             ('[#some_page]', rename_some_page, '[[#some_page]]'), # link to anchor that has same name
-            ('[attachment:some_page.png]', rename_some_page, '[[attachment:some_page.png]]'), # att, not page
-            ('[attachment:some_page.png test picture]', rename_some_page, '[[attachment:some_page.png|test picture]]'), # att, not page
-            ('[attachment:some_page.txt attachment:some_page.png]', rename_some_page, '[[attachment:some_page.txt|attachment:some_page.png]]'),
+            ('[attachment:some_page.png]', rename_some_page, '{{attachment:some_page.png|some_page}}'), # att, not page
+            ('[attachment:some_page.png test picture]', rename_some_page, '{{attachment:some_page.png|test picture}}'), # att, not page
+            #('[attachment:some_page.txt attachment:some_page.png]', rename_some_page, '[[attachment:some_page.txt|{{attachment:some_page.png}}]]'),
 
             # page rename changes result
             ('["some_page"]', rename_some_page, '[[some page]]'),
@@ -76,7 +76,7 @@ class TestWikiConversion:
             ('Self:some_page', rename_some_page, '[[some page]]'),
             ('wiki:Self:some_page', rename_some_page, '[[some page]]'),
             ('[wiki:Self:some_page some text]', rename_some_page, '[[some page|some text]]'),
-            # FFF ('wiki:Self:some_page#some_anchor', rename_some_page, '[[some page#some_anchor]]'),
+            ('wiki:Self:some_page#some_anchor', rename_some_page, '[[some page#some_anchor]]'),
 
             # other markup changes we do
             ('[:other page]', {}, '[[other page]]'),
@@ -98,6 +98,16 @@ class TestWikiConversion:
             ('attachment:keep%20blank', rename_some_file, '[[attachment:keep blank]]'), # no rename
             ('attachment:TestPage/keep%20blank', rename_some_file, '[[attachment:keep blank]]'), # remove superfluous pagename
             ('attachment:OtherPage/keep%20blank', rename_some_file, '[[attachment:OtherPage/keep blank]]'),
+
+            # embed images
+            ('http://server/image.png', {}, '{{http://server/image.png|image}}'),
+            ('attachment:image.gif', {}, '{{attachment:image.gif|image}}'),
+            ('inline:image.jpg', {}, '{{attachment:image.jpg|image}}'), # inline is now implied by {{...}}
+            ('drawing:image', {}, '{{drawing:image}}'),
+
+            # macros
+            ('[[BR]]', {}, '<<BR>>'),
+
         ]
         for data, renames, expected in tests:
             assert convert_wiki(request, pagename, data, renames) == expected

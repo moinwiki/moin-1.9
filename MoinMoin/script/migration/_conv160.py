@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - migration from base rev 105xxyy
+    MoinMoin - migration from 1.5.8 to 1.6.0 (creole link style)
 
     What it should do when it is ready:
 

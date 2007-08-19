@@ -602,6 +602,15 @@ class Formatter(FormatterBase):
     # Attachments ######################################################
 
     def attachment_link(self, url, text, **kw):
+        """ Link to an attachment.
+
+            @param url: PageName/attachedfile.txt or attachedfile.txt
+            @param text: usually the text to show for the link,
+                         but can also be an <img> tag (see text_format kw arg)
+            @keyword text_format: default True (run text through text formatter),
+                                  use False if you give an <img> tag to text param.
+            @return: markup for the attachment link
+        """
         _ = self.request.getText
         pagename, filename = AttachFile.absoluteName(url, self.page.page_name)
         #self.request.log("attachment_link: url %s pagename %s filename %s" % (url, pagename, filename))
@@ -618,8 +627,11 @@ class Formatter(FormatterBase):
         # no 'alt' - alt is only for images
         if not 'title' in kw:
             kw['title'] = _('Attached file: %(url)s') % {'url': self.text(url)}
+        text_format = kw.get('text_format', True) # can be False for e.g. <img ...>
+        if text_format:
+            text = self.text(text) # run through text formatter
         return (self.url(1, target, css='attachment', title=kw['title']) +
-                self.text(text) +
+                text +
                 self.url(0))
 
     def attachment_image(self, url, **kw):
