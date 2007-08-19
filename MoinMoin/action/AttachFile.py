@@ -995,7 +995,7 @@ def send_viewfile(pagename, request):
     label = _('Download')
     url = getAttachUrl(pagename, filename, request, escaped=1, do='get')
     timestamp = htdocs_access(request) and "?%s" % time.time() or ''
-    request.write('<a href="%s%s">%s<a><br><br>' % (url, timestamp, label))
+    request.write('<a href="%s%s">%s</a><br><br>' % (url, timestamp, label))
 
     mt = wikiutil.MimeType(filename=filename)
     if mt.major == 'image':
