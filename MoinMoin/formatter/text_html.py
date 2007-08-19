@@ -602,23 +602,29 @@ class Formatter(FormatterBase):
 
     # Attachments ######################################################
 
-    def attachment_link(self, url, text, **kw):
+    def attachment_link(self, on, url=None, **kw):
+        """ Link to an attachment.
+
+            @param on: 1/True=start link, 0/False=end link
+            @param url: filename.ext or PageName/filename.ext
+        """
+        assert on in (0, 1, False, True) # make sure we get called the new way, not like the 1.5 api was
         _ = self.request.getText
-        pagename, filename = AttachFile.absoluteName(url, self.page.page_name)
-        #self.request.log("attachment_link: url %s pagename %s filename %s" % (url, pagename, filename))
-        fname = wikiutil.taintfilename(filename)
-        if not AttachFile.exists(self.request, pagename, fname):
-            linktext = _('Upload new attachment "%(filename)s"')
-            return wikiutil.link_tag(
-                self.request,
-                ('%s?action=AttachFile&rename=%s' %
-                 (wikiutil.quoteWikinameURL(pagename),
-                  wikiutil.url_quote_plus(fname))),
-                linktext % {'filename': self.text(fname)})
-        target = AttachFile.getAttachUrl(pagename, filename, self.request)
-        return (self.url(1, target, css='attachment', title="attachment:%s" % url) +
-                self.text(text) +
-                self.url(0))
+        if on:
+            pagename, filename = AttachFile.absoluteName(url, self.page.page_name)
+            #self.request.log("attachment_link: url %s pagename %s filename %s" % (url, pagename, filename))
+            fname = wikiutil.taintfilename(filename)
+            if AttachFile.exists(self.request, pagename, fname):
+                target = AttachFile.getAttachUrl(pagename, fname, self.request)
+                title = "attachment:%s" % url
+                css = 'attachment'
+            else:
+                target = AttachFile.getAttachUploadUrl(pagename, fname, self.request)
+                title = _('Upload new attachment "%(filename)s"') % {'filename': wikiutil.escape(fname)}
+                css = 'attachment nonexistent'
+            return self.url(on, target, css=css, title=title)
+        else:
+            return self.url(on)
 
     def attachment_image(self, url, **kw):
         _ = self.request.getText
