@@ -364,7 +364,6 @@ class Macro:
         return self.formatter.anchordef(anchor)
 
     def macro_MailTo(self, email=unicode, text=u''):
-        result = ''
         if not email:
             raise ValueError("You need to give an (obfuscated) email address")
 
@@ -381,11 +380,13 @@ class Macro:
             # just return text as given in macro args
 
             if text:
-                result = self.formatter.text(text+" ")
+                result = self.formatter.text(text + " ")
+            else:
+                result = ''
 
-            result += self.formatter.code(1) + \
-                self.formatter.text("<%s>" % email) + \
-                self.formatter.code(0)
+            result += (self.formatter.code(1) +
+                       self.formatter.text("<%s>" % email) +
+                       self.formatter.code(0))
 
         return result
 
