@@ -115,7 +115,7 @@ class Parser:
     """
     text_rule = r"""
         (?P<simple_text>
-            .*
+            .+  # some text (not empty)
         )
     """
     # link descriptions:
@@ -643,27 +643,40 @@ class Parser:
     _transclude_target_repl = _transclude_repl
     _transclude_args_repl = _transclude_repl
 
-    def _link_repl(self, word, groups):
-        """Handle [[target|text]] links."""
-        target = groups.get('link_target', '')
-        args = (groups.get('link_args', '') or '').strip()
-        mt = self.link_target_re.match(target)
-        ma = self.link_desc_re.match(args)
-        desc = None
-        desc_format = True # run desc through text formatter?
-        if ma:
-            if ma.group('simple_text'):
-                desc = ma.group('simple_text')
+    def _link_description(self, desc, target='', default_text=''):
+        """ parse a string <desc> valid as link description (text, transclusion, ...)
+            and return formatted content.
+
+            @param desc: the link description to parse
+            @param default_text: use this text (formatted as text) if parsing
+                                 desc returns nothing.
+            @param target: target of the link (as readable markup) - used for
+                           transcluded image's description
+        """
+        m = self.link_desc_re.match(desc)
+        if m:
+            if m.group('simple_text'):
+                desc = m.group('simple_text')
                 desc = wikiutil.escape(desc)
                 desc = self.formatter.text(desc)
-            elif ma.group('transclude'):
-                groupdict = ma.groupdict()
+            elif m.group('transclude'):
+                groupdict = m.groupdict()
                 if groupdict.get('transclude_args') is None:
                     # if transcluded obj (image) has no description, use target for it
                     groupdict['transclude_args'] = target
-                desc = ma.group('transclude')
+                desc = m.group('transclude')
                 desc = self._transclude_repl(desc, groupdict)
-                desc_format = False
+        else:
+            desc = default_text
+            if desc:
+                desc = self.formatter.text(desc)
+        return desc
+
+    def _link_repl(self, word, groups):
+        """Handle [[target|text]] links."""
+        target = groups.get('link_target', '')
+        desc = (groups.get('link_args', '') or '').strip()
+        mt = self.link_target_re.match(target)
         if mt:
             if mt.group('page_name'):
                 page_name = mt.group('page_name')
@@ -677,47 +690,38 @@ class Parser:
                     anchor = ""
                 if not page_name:
                     page_name = self.formatter.page.page_name
-                if not desc:
-                    desc = self.formatter.text(page_name)
                 return (self.formatter.pagelink(1, page_name, anchor=anchor) +
-                        desc +
+                        self._link_description(desc, target, page_name) +
                         self.formatter.pagelink(0, page_name))
 
             elif mt.group('extern_addr'):
                 scheme = mt.group('extern_scheme')
                 target = mt.group('extern_addr')
-                if not desc:
-                    desc = self.formatter.text(target)
                 return (self.formatter.url(1, target, css=scheme) +
-                        desc +
+                        self._link_description(desc, target, target) +
                         self.formatter.url(0))
 
             elif mt.group('inter_wiki'):
                 wiki_name = mt.group('inter_wiki')
                 page_name = mt.group('inter_page')
                 wikitag_bad = wikiutil.resolve_interwiki(self.request, wiki_name, page_name)[3]
-                if not desc:
-                    desc = self.formatter.text(page_name)
                 return (self.formatter.interwikilink(1, wiki_name, page_name) +
-                        desc +
+                        self._link_description(desc, target, page_name) +
                         self.formatter.interwikilink(0, wiki_name, page_name))
 
             elif mt.group('attach_scheme'):
                 scheme = mt.group('attach_scheme')
                 url = wikiutil.url_unquote(mt.group('attach_addr'), want_unicode=True)
-                if not desc:
-                    desc = self.formatter.text(url)
                 if scheme == 'attachment':
-                    if desc_format:
-                        return self.formatter.attachment_link(url, text=desc, title=desc, text_format=desc_format)
-                    else:
-                        return self.formatter.attachment_link(url, text=desc, text_format=desc_format)
+                    return (self.formatter.attachment_link(1, url, title=desc) +
+                            self._link_description(desc, target, url) +
+                            self.formatter.attachment_link(0))
                 elif scheme == 'drawing':
                     return self.formatter.attachment_drawing(url, desc, title=desc, alt=desc)
             else:
-                if not desc:
-                    desc = target
-                return self.formatter.text('[[%s|%s]]' % (target, desc))
+                if desc:
+                    desc = '|' + desc
+                return self.formatter.text('[[%s%s]]' % (target, desc))
     _link_target_repl = _link_repl
     _link_args_repl = _link_repl
 
