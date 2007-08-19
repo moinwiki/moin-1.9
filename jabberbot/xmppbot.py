@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import logging, time, libxml2, Queue
+import logging, time, Queue
 from threading import Thread
 
 from pyxmpp.client import Client
@@ -16,9 +16,11 @@ from pyxmpp.message import Message
 from pyxmpp.presence import Presence
 from pyxmpp.iq import Iq
 import pyxmpp.jabber.dataforms as forms
+import libxml2
 
 import jabberbot.commands as cmd
 import jabberbot.i18n as i18n
+import jabberbot.oob as oob
 
 
 class Contact:
@@ -33,7 +35,7 @@ class Contact:
 
     def __init__(self, jid, resource, priority, show, language=None):
         self.jid = jid
-        self.resources = {resource: {'show': show, 'priority': priority, 'forms': False}}
+        self.resources = {resource: {'show': show, 'priority': priority, 'supports': []}}
         self.language = language
 
         # The last time when this contact was seen online.
@@ -64,20 +66,47 @@ class Contact:
         @param priority: priority of the given resource
 
         """
-        self.resources[resource] = {'show': show, 'priority': priority}
+        self.resources[resource] = {'show': show, 'priority': priority, supports: []}
         self.last_online = None
 
-    def set_supports_forms(self, resource):
-        """Flag the given resource as supporting Data Forms"""
-        if resource in self.resources:
-            self.resources[resource]["forms"] = True
+    def set_supports(self, resource, extension):
+        """Flag a given resource as supporting a particular extension"""
+        self.resources[resource]['supports'].append(extension)
 
-    def supports_forms(self, resource):
-        """Check if the given resource supports Data Forms"""
-        if resource in self.resources:
-            return self.resources[resource]["forms"]
+    def supports(self, resource, extension):
+        """Check if a given resource supports a particular extension
+
+        If no resource is specified, check the resource with the highest
+        priority among currently connected.
+
+        """
+        if resource:
+            return extension in self.resources[resource]['supports']
         else:
-            return False
+            resource = self.max_prio_resource()
+            return resource and extension in resource['supports']
+
+    def max_prio_resource(self):
+        """Returns the resource (dict) with the highest priority
+
+        @return: highest priority resource or None if contacts is offline
+        @rtype: dict or None
+
+        """
+        if not self.resources:
+            return None
+
+        # Priority can't be lower than -128
+        max_prio = -129
+        selected = None
+
+        for resource in self.resources.itervalues():
+            # TODO: check RFC for behaviour of 2 resources with the same priority
+            if resource['priority'] > max_prio:
+                max_prio = resource['priority']
+                selected = resource
+
+        return selected
 
     def remove_resource(self, resource):
         """Removes information about a connected resource
@@ -99,18 +128,13 @@ class Contact:
         The contact is DND if its resource with the highest priority is DND
 
         """
-        # Priority can't be lower than -128
-        max_prio = -129
-        max_prio_show = u"dnd"
-
-        for resource in self.resources.itervalues():
-            # TODO: check RFC for behaviour of 2 resources with the same priority
-            if resource['priority'] > max_prio:
-                max_prio = resource['priority']
-                max_prio_show = resource['show']
+        max_prio_res = self.max_prio_resource()
 
         # If there are no resources the contact is offline, not dnd
-        return self.resources and max_prio_show == u'dnd'
+        if max_prio_res:
+            return max_prio_res['show'] == u"dnd"
+        else:
+            return False
 
     def set_show(self, resource, show):
         """Sets show property for a given resource
@@ -163,8 +187,9 @@ class XMPPBot(Client, Thread):
 
         # How often should the contacts be checked for expiration, in seconds
         self.contact_check = 600
+        self.stopping = False
 
-        self.known_xmlrpc_cmds = [cmd.GetPage, cmd.GetPageHTML, cmd.GetPageList, cmd.GetPageInfo, cmd.Search]
+        self.known_xmlrpc_cmds = [cmd.GetPage, cmd.GetPageHTML, cmd.GetPageList, cmd.GetPageInfo, cmd.Search, cmd.RevertPage]
         self.internal_commands = ["ping", "help", "searchform"]
 
         self.xmlrpc_commands = {}
@@ -180,10 +205,17 @@ class XMPPBot(Client, Thread):
         self.connect()
         self.loop()
 
+    def stop(self):
+        """Stop the thread"""
+        self.stopping = True
+
     def loop(self, timeout=1):
         """Main event loop - stream and command handling"""
 
         while True:
+            if self.stopping:
+                break
+
             stream = self.get_stream()
             if not stream:
                 break
@@ -245,6 +277,7 @@ class XMPPBot(Client, Thread):
         except Queue.Empty:
             return False
 
+    # XXX: refactor this, if-elif sequence is already too long
     def handle_command(self, command, ignore_dnd=False):
         """Excecutes commands from other components
 
@@ -255,22 +288,40 @@ class XMPPBot(Client, Thread):
         """
         # Handle normal notifications
         if isinstance(command, cmd.NotificationCommand):
+            cmd_data = command.notification
+
             for recipient in command.jids:
                 jid = JID(recipient)
                 jid_text = jid.bare().as_utf8()
-                text = command.text
+
+                text = cmd_data['text']
+                subject = cmd_data.get('subject', '')
+                msg_data = command.notification
+
+                if isinstance(command, cmd.NotificationCommandI18n):
+                    # Translate&interpolate the message with data
+                    gettext_func = self.get_text(jid_text)
+                    text, subject = command.translate(gettext_func)
+                    msg_data = {'text': text, 'subject': subject,
+                                'url_list': cmd_data.get('url_list', []),
+                                'action': cmd_data.get('action', '')}
 
                 # Check if contact is DoNotDisturb.
                 # If so, queue the message for delayed delivery.
-                try:
-                    contact = self.contacts[jid_text]
+                contact = self.contacts.get(jid_text, '')
+                if contact:
                     if command.async and contact.is_dnd() and not ignore_dnd:
                         contact.messages.append(command)
                         return
-                except KeyError:
-                    pass
 
-                self.send_message(jid, text)
+                    if contact.supports(jid.resource, u"jabber:x:data"):
+                        action = msg_data.get('action', '')
+                        if action == "page_changed":
+                            self.send_change_form(jid, msg_data)
+                        else:
+                            self.send_message(jid, msg_data, command.msg_type)
+                else:
+                    self.send_message(jid, msg_data, command.msg_type)
 
             return
 
@@ -288,29 +339,92 @@ class XMPPBot(Client, Thread):
         elif isinstance(command, cmd.GetPage) or isinstance(command, cmd.GetPageHTML):
             msg = _(u"""Here's the page "%(pagename)s" that you've requested:\n\n%(data)s""")
 
-            self.send_message(command.jid, msg % {
-                      'pagename': command.pagename,
-                      'data': command.data,
-            })
+            cmd_data = {'text': msg % {'pagename': command.pagename, 'data': command.data}}
+            self.send_message(command.jid, cmd_data)
 
         elif isinstance(command, cmd.GetPageList):
             msg = _("That's the list of pages accesible to you:\n\n%s")
             pagelist = u"\n".join(command.data)
 
-            self.send_message(command.jid, msg % (pagelist, ))
+            self.send_message(command.jid, {'text': msg % (pagelist, )})
 
         elif isinstance(command, cmd.GetPageInfo):
-            msg = _("""Following detailed information on page "%(pagename)s" \
-is available::\n\n%(data)s""")
+            intro = _("""Following detailed information on page "%(pagename)s" \
+is available:""")
 
-            self.send_message(command.jid, msg % {
-                      'pagename': command.pagename,
-                      'data': command.data,
-            })
+            if command.data['author'].startswith("Self:"):
+                author = command.data['author'][5:]
+            else:
+                author = command.data['author']
+
+            datestr = str(command.data['lastModified'])
+            date = u"%(year)s-%(month)s-%(day)s at %(time)s" % {
+                        'year': datestr[:4],
+                        'month': datestr[4:6],
+                        'day': datestr[6:8],
+                        'time': datestr[9:17],
+            }
+
+            msg = _("""Last author: %(author)s
+Last modification: %(modification)s
+Current version: %(version)s""") % {
+             'author': author,
+             'modification': date,
+             'version': command.data['version'],
+            }
+
+            self.send_message(command.jid, {'text': intro % {'pagename': command.pagename}})
+            self.send_message(command.jid, {'text': msg})
 
         elif isinstance(command, cmd.GetUserLanguage):
             if command.jid in self.contacts:
                 self.contacts[command.jid].language = command.language
+
+        elif isinstance(command, cmd.Search):
+            warnings = []
+            if not command.data:
+                warnings.append(_("There are no pages matching your search criteria!"))
+
+            # This hardcoded limitation relies on (mostly correct) assumption that Jabber
+            # servers have rather tight traffic limits. Sending more than 25 results is likely
+            # to take a second or two - users should not have to wait longer (+search time!).
+            elif len(command.data) > 25:
+                warnings.append(_("There are too many results (%(number)s). Limiting to first 25 entries.") % {'number': str(len(command.data))})
+                command.data = command.data[:25]
+
+            results = [{'description': result[0], 'url': result[2]} for result in command.data]
+
+            if command.presentation == u"text":
+                for warning in warnings:
+                    self.send_message(command.jid, {'text': warning})
+
+                if not results:
+                    return
+
+                data = {'text': _('Following pages match your search criteria:'), 'url_list': results}
+                self.send_message(command.jid, data, u"chat")
+            else:
+                form_title = _("Search results").encode("utf-8")
+
+                warnings = []
+                for no, warning in enumerate(warnings):
+                    field = forms.Field(name="warning", field_type="fixed", value=warning)
+                    warnings.append(forms.Item([field]))
+
+                reported = [forms.Field(name="url", field_type="text-single"), forms.Field(name="description", field_type="text-single")]
+                if warnings:
+                    reported.append(forms.Field(name="warning", field_type="fixed"))
+
+                form = forms.Form(xmlnode_or_type="result", title=form_title, reported_fields=reported)
+
+                for no, result in enumerate(results):
+                    url = forms.Field(name="url", value=result["url"], field_type="text-single")
+                    description = forms.Field(name="description", value=result["description"], field_type="text-single")
+                    item = forms.Item([url, description])
+                    form.add_item(item)
+
+                self.send_form(command.jid, form, _("Search results"))
+
 
     def ask_for_subscription(self, jid):
         """Sends a <presence/> stanza with type="subscribe"
@@ -335,20 +449,59 @@ is available::\n\n%(data)s""")
         stanza = Presence(to_jid=jid, stanza_type="unsubscribed")
         self.get_stream().send(stanza)
 
-    def send_message(self, jid, text, subject="", msg_type=u"chat"):
+    def send_message(self, jid_text, data, msg_type=u"chat"):
         """Sends a message
 
-        @param jid: JID to send the message to
-        @param text: message's body:
-        @param type: message type, as defined in RFC
-        @type jid: pyxmpp.jid.JID
+        @param jid_text: JID to send the message to
+        @param data: dictionary containing notification data
+        @param msg_type: message type, as defined in RFC
+        @type jid_text: unicode
 
         """
-        message = Message(to_jid=jid, body=text, stanza_type=msg_type, subject=subject)
+        use_oob = False
+        subject = data.get('subject', '')
+        jid = JID(jid_text)
+
+        if data.has_key('url_list') and data['url_list']:
+            jid_bare = jid.bare().as_utf8()
+            contact = self.contacts.get(jid_bare, None)
+            if contact and contact.supports(jid.resource, u'jabber:x:oob'):
+                use_oob = True
+            else:
+                url_strings = ['%s - %s' % (entry['url'], entry['description']) for entry in data['url_list']]
+
+                # Insert a newline, so that the list of URLs doesn't start in the same
+                # line as the rest of message text
+                url_strings.insert(0, '\n')
+                data['text'] = data['text'] + '\n'.join(url_strings)
+
+        message = Message(to_jid=jid, body=data['text'], stanza_type=msg_type, subject=subject)
+
+        if use_oob:
+            oob.add_urls(message, data['url_list'])
+
         self.get_stream().send(message)
 
-    def send_form(self, jid, form):
-        pass
+    def send_form(self, jid, form, subject):
+        """Send a data form
+
+        @param jid: jid to send the form to (full)
+        @param form: the form to send
+        @param subject: subject of the message
+        @type jid: unicode
+        @type form: pyxmpp.jabber.dataforms.Form
+        @type subject: unicode
+
+        """
+        if not isinstance(form, forms.Form):
+            raise ValueError("The 'form' argument must be of type pyxmpp.jabber.dataforms.Form!")
+
+        _ = self.get_text(JID(jid).bare().as_unicode())
+
+        warning = _("If you see this, your client probably doesn't support Data Forms.")
+        message = Message(to_jid=jid, body=warning, subject=subject)
+        message.add_content(form)
+        self.get_stream().send(message)
 
     def send_search_form(self, jid):
         _ = self.get_text(jid)
@@ -361,18 +514,46 @@ is available::\n\n%(data)s""")
         search_type2 = _("Full-text search")
         search_label = _("Search type")
         search_label2 = _("Search text")
-
+        case_label = _("Case-sensitive search")
+        regexp_label = _("Treat terms as regular expressions")
+        forms_warn = _("If you see this, your client probably doesn't support Data Forms.")
 
         title_search = forms.Option("t", search_type1)
         full_search = forms.Option("f", search_type2)
 
         form = forms.Form(xmlnode_or_type="form", title=form_title, instructions=help_form)
+        form.add_field(name="action", field_type="hidden", value="search")
+        form.add_field(name="case", field_type="boolean", label=case_label)
+        form.add_field(name="regexp", field_type="boolean", label=regexp_label)
         form.add_field(name="search_type", options=[title_search, full_search], field_type="list-single", label=search_label)
         form.add_field(name="search", field_type="text-single", label=search_label2)
 
-        message = Message(to_jid=jid, body=_("Please specify the search criteria."), subject=_("Wiki search"))
-        message.add_content(form)
-        self.get_stream().send(message)
+        self.send_form(jid, form, _("Wiki search"))
+
+    def send_change_form(self, jid, msg_data):
+        """Sends a page change notification using Data Forms"""
+        _ = self.get_text(jid)
+
+        form_title = _("Page changed notification").encode("utf-8")
+        instructions = _("Submit this form with a specified action to continue.").encode("utf-8")
+        url_label = _("URL")
+        pagename_label = _("Page name")
+        action_label = _("What to do next")
+
+        action1 = _("Do nothing")
+        action2 = _("Revert change")
+        action3 = _("View page info")
+
+        do_nothing = forms.Option("n", action1)
+        revert = forms.Option("r", action2)
+        view_info = forms.Option("v", action3)
+
+        form = forms.Form(xmlnode_or_type="form", title=form_title, instructions=instructions)
+        form.add_field(name="action", field_type="hidden", value="change_notify_action")
+        form.add_field(name="notification", field_type="fixed", value=msg_data['text'])
+        form.add_field(name="options", field_type="list-single", options=[do_nothing, revert, view_info], label=action_label)
+
+        self.send_form(jid, form, _("Page change notification"))
 
     def is_internal(self, command):
         """Check if a given command is internal
@@ -398,6 +579,90 @@ is available::\n\n%(data)s""")
 
         return False
 
+    def contains_form(self, message):
+        """Checks if passed message stanza contains a submitted form and parses it
+
+        @param message: message stanza
+        @type message: pyxmpp.message.Message
+        @return: xml node with form data if found, or None
+
+        """
+        if not isinstance(message, Message):
+            raise ValueError("The 'message' parameter must be of type pyxmpp.message.Message!")
+
+        payload = message.get_node()
+        form = message.xpath_eval('/ns:message/data:x', {'data': 'jabber:x:data'})
+
+        if form:
+            return form[0]
+        else:
+            return None
+
+    def handle_form(self, jid, form_node):
+        """Handles a submitted data form
+
+        @param jid: jid that submitted the form (full jid)
+        @type jid: pyxmpp.jid.JID
+        @param form_node: a xml node with data form
+        @type form_node: libxml2.xmlNode
+
+        """
+        if not isinstance(form_node, libxml2.xmlNode):
+            raise ValueError("The 'form' parameter must be of type libxml2.xmlNode!")
+
+        if not isinstance(jid, JID):
+            raise ValueError("The 'jid' parameter must be of type jid!")
+
+        _ = self.get_text(jid.bare().as_unicode())
+
+        form = forms.Form(form_node)
+
+        if form.type != u"submit":
+            return
+
+        try:
+            action = form["action"].value
+        except KeyError:
+            data = {'text': _('The form you submitted was invalid!'), 'subject': _('Invalid data')}
+            self.send_message(jid.as_unicode(), data, u"message")
+            return
+
+        if action == u"search":
+            self.handle_search_form(jid, form)
+        else:
+            data = {'text': _('The form you submitted was invalid!'), 'subject': _('Invalid data')}
+            self.send_message(jid.as_unicode(), data, u"message")
+
+
+    def handle_search_form(self, jid, form):
+        """Handles a search form
+
+        @param jid: jid that submitted the form
+        @type jid: pyxmpp.jid.JID
+        @param form: a form object
+        @type form_node: pyxmpp.jabber.dataforms.Form
+
+        """
+        required_fields = ["case", "regexp", "search_type", "search"]
+        jid_text = jid.bare().as_unicode()
+        _ = self.get_text(jid_text)
+
+        for field in required_fields:
+            if field not in form:
+                data = {'text': _('The form you submitted was invalid!'), 'subject': _('Invalid data')}
+                self.send_message(jid.as_unicode(), data, u"message")
+
+        case_sensitive = form['case'].value
+        regexp_terms = form['regexp'].value
+        if form['search_type'].value == 't':
+            search_type = 'title'
+        else:
+            search_type = 'text'
+
+        command = cmd.Search(jid.as_unicode(), search_type, form["search"].value, case=form['case'].value,
+                             regexp=form['regexp'].value, presentation='dataforms')
+        self.from_commands.put_nowait(command)
+
     def handle_message(self, message):
         """Handles incoming messages
 
@@ -408,6 +673,11 @@ is available::\n\n%(data)s""")
         if self.config.verbose:
             msg = "Message from %s." % (message.get_from_jid().as_utf8(), )
             self.log.debug(msg)
+
+        form = self.contains_form(message)
+        if form:
+            self.handle_form(message.get_from_jid(), form)
+            return
 
         text = message.get_body()
         sender = message.get_from_jid()
@@ -425,7 +695,7 @@ is available::\n\n%(data)s""")
             response = self.reply_help(sender)
 
         if response:
-            self.send_message(sender, response)
+            self.send_message(sender, {'text': response})
 
     def handle_internal_command(self, sender, command):
         """Handles internal commands, that can be completed by the XMPP bot itself
@@ -447,16 +717,19 @@ is available::\n\n%(data)s""")
         elif command[0] == "searchform":
             jid = sender.bare().as_utf8()
             resource = sender.resource
-            if self.contacts[jid].supports_forms(resource):
+
+            # Assume that outsiders know what they are doing. Clients that don't support
+            # data forms should display a warning passed in message <body>.
+            if jid not in self.contacts or self.contacts[jid].supports(resource, u"jabber:x:data"):
                 self.send_search_form(sender)
             else:
-                msg = _("This command requires a client supporting Data Forms")
-                self.send_message(sender, msg, u"Error")
+                msg = {'text': _("This command requires a client supporting Data Forms.")}
+                self.send_message(sender, msg, u"")
         else:
             # For unknown command return a generic help message
             return self.reply_help(sender)
 
-    def do_search(self, jid, term, search_type):
+    def do_search(self, jid, search_type, presentation, *args):
         """Performs a Wiki search of term
 
         @param jid: Jabber ID of user performing a search
@@ -465,9 +738,11 @@ is available::\n\n%(data)s""")
         @type term: unicode
         @param search_type: type of search; either "text" or "title"
         @type search_type: unicode
+        @param presentation: how to present the results; "text" or "dataforms"
+        @type presentation: unicode
 
         """
-        search = cmd.Search(jid, term, search_type)
+        search = cmd.Search(jid, search_type, presentation=presentation, *args)
         self.from_commands.put_nowait(search)
 
     def help_on(self, jid, command):
@@ -608,7 +883,8 @@ The call should look like:\n\n%(command)s %(params)s")
             # Unknown resource, add it to the list
             else:
                 contact.add_resource(jid.resource, show, priority)
-                self.supports_dataforms(jid)
+                # Discover capabilities of the newly connected client
+                contact.service_discovery(jid)
 
             if self.config.verbose:
                 self.log.debug(contact)
@@ -619,7 +895,7 @@ The call should look like:\n\n%(command)s %(params)s")
 
         else:
             self.contacts[bare_jid] = Contact(jid, jid.resource, priority, show)
-            self.supports_dataforms(jid)
+            self.service_discovery(jid)
             self.get_user_language(bare_jid)
             self.log.debug(self.contacts[bare_jid])
 
@@ -635,8 +911,8 @@ The call should look like:\n\n%(command)s %(params)s")
         request = cmd.GetUserLanguage(jid)
         self.from_commands.put_nowait(request)
 
-    def supports_dataforms(self, jid):
-        """Check if a clients supports data forms.
+    def service_discovery(self, jid):
+        """Ask a client about supported features
 
         This is not the recommended way of discovering support
         for data forms, but it's easy to implement, so it'll be
@@ -652,6 +928,7 @@ The call should look like:\n\n%(command)s %(params)s")
         self.get_stream().set_response_handlers(query, self.handle_disco_result, None)
         self.get_stream().send(query)
 
+
     def handle_disco_result(self, stanza):
         """Handler for <iq> service discovery results
 
@@ -660,10 +937,16 @@ The call should look like:\n\n%(command)s %(params)s")
         @param stanza: a received result stanza
         """
         payload = stanza.get_query()
+
         supports = payload.xpathEval('//*[@var="jabber:x:data"]')
         if supports:
             jid = stanza.get_from_jid()
-            self.contacts[jid.bare().as_utf8()].set_supports_forms(jid.resource)
+            self.contacts[jid.bare().as_utf8()].set_supports(jid.resource, u"jabber:x:data")
+
+        supports = payload.xpathEval('//*[@var="jabber:x:oob"]')
+        if supports:
+            jid = stanza.get_from_jid()
+            self.contacts[jid.bare().as_utf8()].set_supports(jid.resource, u"jabber:x:oob")
 
 
     def send_queued_messages(self, contact, ignore_dnd=False):

@@ -14,6 +14,8 @@ from MoinMoin import error
 from MoinMoin.Page import Page
 from MoinMoin.user import User, getUserList
 from MoinMoin.support.python_compatibility import set
+from MoinMoin.action.AttachFile import getAttachUrl
+
 import MoinMoin.events.notification as notification
 import MoinMoin.events as ev
 
@@ -68,23 +70,27 @@ def handle_file_attached(event):
     names = set()
     request = event.request
     page = Page(request, event.pagename)
-    event_name = event.__class__.__name__
-
+    event_name = event.name
     subscribers = page.getSubscribers(request, return_users=1)
     notification.filter_subscriber_list(event, subscribers, True)
+    recipients = []
+
+    for lang in subscribers:
+        recipients.extend(subscribers[lang])
+
+    attachlink = request.getBaseURL() + getAttachUrl(event.pagename, event.filename, request)
+    pagelink = request.getQualifiedURL(page.url(request, {}, relative=False))
 
     for lang in subscribers.keys():
-        jids = []
-        data = notification.attachment_added(request, event.pagename, event.name, event.size)
+        _ = lambda text: request.getText(text, lang=lang, formatted=False)
+        data = notification.attachment_added(request, _, event.pagename, event.filename, event.size)
+        links = [{'url': attachlink, 'description': _("Attachment link")},
+                  {'url': pagelink, 'description': _("Page link")}]
 
-        for usr in subscribers[lang]:
-            if usr.jid and event_name in usr.jabber_subscribed_events:
-                jids.append(usr.jid)
-            else:
-                continue
+        jids = [usr.jid for usr in subscribers[lang]]
 
-            if send_notification(request, jids, data['body'], data['subject']):
-                names.update(usr.name)
+        if send_notification(request, jids, data['body'], data['subject'], links, "file_attached"):
+            names.update(recipients)
 
     return notification.Success(names)
 
@@ -127,7 +133,7 @@ def handle_user_created(event):
 
     jids = []
     user_ids = getUserList(event.request)
-    event_name = event.__class__.__name__
+    event_name = event.name
 
     email = event.user.email or u"NOT SET"
     sitename = event.request.cfg.sitename
@@ -142,7 +148,7 @@ def handle_user_created(event):
         if usr.isSuperUser() and usr.jid and event_name in usr.jabber_subscribed_events:
             jids.append(usr.jid)
 
-    send_notification(event.request, jids, data['body'], data['subject'])
+    send_notification(event.request, jids, data['body'], data['subject'], "user_created")
 
 
 def page_change(change_type, request, page, subscribers, **kwargs):
@@ -157,7 +163,9 @@ def page_change(change_type, request, page, subscribers, **kwargs):
             jids = [u.jid for u in subscribers[lang] if u.jid]
             names = [u.name for u in subscribers[lang] if u.jid]
             msg = notification.page_change_message(change_type, request, page, lang, **kwargs)
-            result = send_notification(request, jids, msg)
+            page_url = request.getQualifiedURL(page.url(request, relative=False))
+            url = {'url': page_url, 'description': _("Changed page")}
+            result = send_notification(request, jids, msg, _("Page changed"), [url], "page_changed")
 
             if result:
                 recipients.update(names)
@@ -165,17 +173,25 @@ def page_change(change_type, request, page, subscribers, **kwargs):
         if recipients:
             return notification.Success(recipients)
 
-def send_notification(request, jids, message, subject=""):
+def send_notification(request, jids, message, subject="", url_list=[], action=""):
     """ Send notifications for a single language.
 
-    @param comment: editor's comment given when saving the page
     @param jids: an iterable of Jabber IDs to send the message to
+    @param message: message text
+    @param subject: subject of the message, makes little sense for chats
+    @param url_list: a list of dicts containing URLs and their descriptions
+    @type url_list: list
+
     """
     _ = request.getText
     server = request.cfg.notification_server
 
+    if type(url_list) != list:
+        raise ValueError("url_list must be of type list!")
+
     try:
-        server.send_notification(request.cfg.secret, jids, message, subject)
+        cmd_data = {'text': message, 'subject': subject, 'url_list': url_list, 'action': action}
+        server.send_notification(request.cfg.secret, jids, cmd_data)
         return True
     except xmlrpclib.Error, err:
         ev.logger.error(_("XML RPC error: %s"), str(err))
