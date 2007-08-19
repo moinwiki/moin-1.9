@@ -11,41 +11,13 @@ from MoinMoin.Page import Page
 def execute(pagename, request):
     """ restore another revision of a page as a new current revision """
     from MoinMoin.PageEditor import PageEditor
-    _ = request.getText
-    msg = None
     rev = request.rev
-    pg = Page(request, pagename, rev=rev)
+    pg = PageEditor(request, pagename)
 
-    if not request.user.may.revert(pagename):
-        msg = _('You are not allowed to revert this page!')
-    elif rev is None:
-        msg = _('You were viewing the current revision of this page when you called the revert action. '
-                'If you want to revert to an older revision, first view that older revision and '
-                'then call revert to this (older) revision again.')
-    else:
-        newpg = PageEditor(request, pagename)
+    try:
+        msg = pg.revertPage(rev)
+    except PageEditor.RevertError, error:
+        msg = unicode(error)
 
-        revstr = '%08d' % rev
-        try:
-            msg = newpg.saveText(pg.get_raw_body(), 0, extra=revstr, action="SAVE/REVERT", notify=False)
-            pg = newpg
-        except newpg.SaveError, msg:
-            msg = unicode(msg)
-        request.reset()
-
-        key = request.form.get('key', ['text_html'])[0]
-
-        # Remove cache entry (if exists)
-        pg = Page(request, pagename)
-        from MoinMoin import caching
-        caching.CacheEntry(request, pg, key, scope='item').remove()
-        caching.CacheEntry(request, pg, "pagelinks", scope='item').remove()
-
-        # Notify observers
-        from MoinMoin.events import PageRevertedEvent, send_event
-        e = PageRevertedEvent(request, pagename, request.rev, revstr)
-        send_event(e)
-
-    if request.action != "xmlrpc":
-        pg.send_page(msg=msg)
-
+    request.reset()
+    pg.send_page(msg=msg)

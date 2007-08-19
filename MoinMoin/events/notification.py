@@ -60,12 +60,12 @@ def page_link(request, page, querystr):
 def page_change_message(msgtype, request, page, lang, **kwargs):
     """Prepare a notification text for a page change of given type
 
-    @param msgtype: a type of message to send (page_changed, attachment_added, ...)
+    @param msgtype: a type of message to send (page_changed, page_renamed, ...)
     @type msgtype: str or unicode
     @param **kwargs: a dictionary of additional parameters, which depend on msgtype
 
-    @return: a formatted, ready to send message
-    @rtype: unicode
+    @return: dictionary containing data about the changed page
+    @rtype: dict
 
     """
     from MoinMoin.action.AttachFile import getAttachUrl
@@ -73,6 +73,7 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
     _ = request.getText
     page._ = lambda s, formatted=True, r=request, l=lang: r.getText(s, formatted=formatted, lang=l)
     querystr = {}
+    changes = {'page_name': page.page_name, 'revision': str(page.getRevList()[0])}
 
     if msgtype == "page_changed":
         revisions = kwargs['revisions']
@@ -84,7 +85,7 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
     pagelink = page_link(request, page, querystr)
 
     if msgtype == "page_changed":
-        msg_body = _("Dear Wiki user,\n\n"
+        changes['text'] = _("Dear Wiki user,\n\n"
         'You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.\n\n'
         'The "%(pagename)s" page has been changed by %(editor)s:\n\n', formatted=False) % {
             'pagename': page.page_name,
@@ -94,45 +95,45 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
 
         # append a diff (or append full page text if there is no diff)
         if len(revisions) < 2:
-            messageBody = msg_body + \
-                _("New page:\n", formatted=False) + \
-                page.get_raw_body()
+            changes['diff'] = _("New page:\n", formatted=False) + page.get_raw_body()
         else:
             lines = wikiutil.pagediff(request, page.page_name, revisions[1],
                                       page.page_name, revisions[0])
             if lines:
-                msg_body = msg_body + "%s\n%s\n" % (("-" * 78), '\n'.join(lines))
+                changes['diff'] = '\n'.join(lines)
             else:
-                msg_body = msg_body + _("No differences found!\n", formatted=False)
+                changes['diff'] = _("No differences found!\n", formatted=False)
 
     elif msgtype == "page_deleted":
-        msg_body = _("Dear wiki user,\n\n"
+        changes['text'] = _("Dear wiki user,\n\n"
             'You have subscribed to a wiki page "%(sitename)s" for change notification.\n\n'
-            'The page "%(pagename)" has been deleted by %(editor)s:\n\n', formatted=False) % {
+            'The page "%(pagename)s" has been deleted by %(editor)s:\n\n', formatted=False) % {
                 'pagename': page.page_name,
                 'editor': page.uid_override or user.getUserIdentification(request),
                 'sitename': page.cfg.sitename or request.getBaseURL(),
         }
 
     elif msgtype == "page_renamed":
-        msg_body = _("Dear wiki user,\n\n"
+        changes['text'] = _("Dear wiki user,\n\n"
             'You have subscribed to a wiki page "%(sitename)s" for change notification.\n\n'
-            'The page "%(pagename)" has been renamed from %(oldname)s by %(editor)s:\n',
+            'The page "%(pagename)s" has been renamed from "%(oldname)s" by %(editor)s:\n',
             formatted=False) % {
                 'editor': page.uid_override or user.getUserIdentification(request),
                 'pagename': page.page_name,
                 'sitename': page.cfg.sitename or request.getBaseURL(),
                 'oldname': kwargs['old_name']
         }
+
+        changes['old_name'] = kwargs['old_name']
+
     else:
         raise UnknownChangeType()
 
+    changes['editor'] = page.uid_override or user.getUserIdentification(request)
     if 'comment' in kwargs and kwargs['comment']:
-        msg_body = msg_body + \
-            _("The comment on the change is:\n%(comment)s",
-              formatted=False) % {'comment': kwargs['comment']}
+        changes['comment'] = kwargs['comment']
 
-    return msg_body
+    return changes
 
 def user_created_message(request, sitename, username, email):
     """Formats a message used to notify about accounts being created
@@ -155,17 +156,18 @@ def attachment_added(request, _, page_name, attach_name, attach_size):
     """Formats a message used to notify about new attachments
 
     @param _: a gettext function
-    @return: a dict containing message body and subject
+    @return: a dict with notification data
 
     """
     page = Page(request, page_name)
+    data = {}
 
-    subject = _("New attachment added to page %(pagename)s on %(sitename)s") % {
+    data['subject'] = _("New attachment added to page %(pagename)s on %(sitename)s") % {
                 'pagename': page_name,
                 'sitename': request.cfg.sitename or request.getBaseURL(),
                 }
 
-    body = _("Dear Wiki user,\n\n"
+    data['text'] = _("Dear Wiki user,\n\n"
     'You have subscribed to a wiki page "%(page_name)s" for change notification. '
     "An attachment has been added to that page by %(editor)s. "
     "Following detailed information is available:\n\n"
@@ -177,7 +179,12 @@ def attachment_added(request, _, page_name, attach_name, attach_size):
         'attach_size': attach_size,
     }
 
-    return {'body': body, 'subject': subject}
+    data['editor'] = user.getUserIdentification(request)
+    data['page_name'] = page_name
+    data['attach_size'] = attach_size
+    data['attach_name'] = attach_name
+
+    return data
 
 
 # XXX: clean up this method to take a notification type instead of bool for_jabber

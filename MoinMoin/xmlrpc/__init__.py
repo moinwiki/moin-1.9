@@ -570,13 +570,16 @@ class XmlRpcBase:
         if not self.request.user.may.write(pagename):
             return xmlrpclib.Fault(1, "You are not allowed to edit this page")
 
-        from MoinMoin.action import revert
-        self.request.rev = int(self._instr(revision))
-        msg = revert.execute(pagename, self.request)
-        if msg:
-            return xmlrpclib.Fault(1, "Revert failed: %s" % (msg, ))
-        else:
-            return xmlrpclib.Boolean(1)
+        from MoinMoin.PageEditor import PageEditor
+        rev = int(self._instr(revision))
+        editor = PageEditor(self.request, pagename)
+
+        try:
+            editor.revertPage(rev)
+        except PageEditor.SaveError, error:
+            return xmlrpclib.Fault(1, "Revert failed: %s" % (str(error), ))
+
+        return xmlrpclib.Boolean(1)
 
     def xmlrpc_searchPages(self, query_string):
         """ Searches pages for query_string.
