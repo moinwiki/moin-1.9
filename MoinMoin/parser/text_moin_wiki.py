@@ -522,7 +522,8 @@ class Parser:
 
         wikitag_bad = wikiutil.resolve_interwiki(self.request, wiki, page)[3]
         if wikitag_bad:
-            return self.formatter.text(word)
+            text = groups.get('interwiki')
+            return self.formatter.text(text)
         else:
             return (self.formatter.interwikilink(1, wiki, page) +
                     self.formatter.text(page) +
@@ -646,9 +647,10 @@ class Parser:
         """Handle [[target|text]] links."""
         target = groups.get('link_target', '')
         args = (groups.get('link_args', '') or '').strip()
-        m = self.link_target_re.match(target)
+        mt = self.link_target_re.match(target)
         ma = self.link_desc_re.match(args)
         desc = None
+        desc_format = True # run desc through text formatter?
         if ma:
             if ma.group('simple_text'):
                 desc = ma.group('simple_text')
@@ -661,9 +663,10 @@ class Parser:
                     groupdict['transclude_args'] = target
                 desc = ma.group('transclude')
                 desc = self._transclude_repl(desc, groupdict)
-        if m:
-            if m.group('page_name'):
-                page_name = m.group('page_name')
+                desc_format = False
+        if mt:
+            if mt.group('page_name'):
+                page_name = mt.group('page_name')
                 # handle relative links
                 if page_name.startswith(self.CHILD_PREFIX):
                     page_name = self.formatter.page.page_name + '/' + page_name[self.CHILD_PREFIX_LEN:] # XXX use func
@@ -680,18 +683,18 @@ class Parser:
                         desc +
                         self.formatter.pagelink(0, page_name))
 
-            elif m.group('extern_addr'):
-                scheme = m.group('extern_scheme')
-                target = m.group('extern_addr')
+            elif mt.group('extern_addr'):
+                scheme = mt.group('extern_scheme')
+                target = mt.group('extern_addr')
                 if not desc:
                     desc = self.formatter.text(target)
                 return (self.formatter.url(1, target, css=scheme) +
                         desc +
                         self.formatter.url(0))
 
-            elif m.group('inter_wiki'):
-                wiki_name = m.group('inter_wiki')
-                page_name = m.group('inter_page')
+            elif mt.group('inter_wiki'):
+                wiki_name = mt.group('inter_wiki')
+                page_name = mt.group('inter_page')
                 wikitag_bad = wikiutil.resolve_interwiki(self.request, wiki_name, page_name)[3]
                 if not desc:
                     desc = self.formatter.text(page_name)
@@ -699,13 +702,16 @@ class Parser:
                         desc +
                         self.formatter.interwikilink(0, wiki_name, page_name))
 
-            elif m.group('attach_scheme'):
-                scheme = m.group('attach_scheme')
-                url = wikiutil.url_unquote(m.group('attach_addr'), want_unicode=True)
+            elif mt.group('attach_scheme'):
+                scheme = mt.group('attach_scheme')
+                url = wikiutil.url_unquote(mt.group('attach_addr'), want_unicode=True)
                 if not desc:
                     desc = self.formatter.text(url)
                 if scheme == 'attachment':
-                    return self.formatter.attachment_link(url, desc, title=desc)
+                    if desc_format:
+                        return self.formatter.attachment_link(url, text=desc, title=desc, text_format=desc_format)
+                    else:
+                        return self.formatter.attachment_link(url, text=desc, text_format=desc_format)
                 elif scheme == 'drawing':
                     return self.formatter.attachment_drawing(url, desc, title=desc, alt=desc)
             else:
