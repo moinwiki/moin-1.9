@@ -104,7 +104,7 @@ class DocParser:
 
     # For splitting table cells:
     cell_rule = r'\|\s* ( (?P<head> [=][^|]+) | (?P<cell> ((%(link)s) |(%(macro)s) |(%(image)s) |(%(code)s) | [^|] )+)  )\s*' % inline_tab
-    cell_re = re.compile(cell_rule, re.X|re.I|re.U)
+    cell_re = re.compile(cell_rule, re.X|re.U)
 
     # For link descriptions:
     link_rules = r'|'.join([
@@ -112,11 +112,11 @@ class DocParser:
             _get_rule('break', inline_tab),
             _get_rule('char', inline_tab),
     ])
-    link_re = re.compile(link_rules, re.X|re.I|re.U)
+    link_re = re.compile(link_rules, re.X|re.U)
 
     # For lists:
     item_rule = r'(?P<item> ^\s* (?P<item_head> [\#*]+ ) \s* (?P<item_text>.*?) $)'
-    item_re = re.compile(item_rule, re.X|re.I|re.U|re.M)
+    item_re = re.compile(item_rule, re.X|re.U|re.M)
 
     # For block elements:
     block_rules = '|'.join([

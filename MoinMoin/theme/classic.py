@@ -73,7 +73,7 @@ class Theme(ThemeBase):
                 if icon == "up":
                     if d['page_parent_page']:
                         iconbar.append('<li>%s</li>\n' % self.make_iconlink(icon, d))
-                elif icon == "subscribe" and self.cfg.mail_enabled:
+                elif icon == "subscribe" and (self.cfg.mail_enabled or self.cfg.jabber_enabled):
                     iconbar.append('<li>%s</li>\n' % self.make_iconlink(
                         ["subscribe", "unsubscribe"][self.request.user.isSubscribedTo([d['page_name']])], d))
                 else:

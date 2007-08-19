@@ -14,6 +14,8 @@ from MoinMoin.Page import Page
 from MoinMoin.mail import sendmail
 from MoinMoin.support.python_compatibility import set
 from MoinMoin.user import User, getUserList
+from MoinMoin.action.AttachFile import getAttachUrl
+
 import MoinMoin.events as ev
 import MoinMoin.events.notification as notification
 
@@ -63,7 +65,6 @@ def notify_subscribers(request, page, comment, trivial):
     @return: message, indicating success or errors.
 
     """
-    _ = request.getText
     subscribers = page.getSubscribers(request, return_users=1, trivial=trivial)
     mail_from = page.cfg.mail_from
 
@@ -76,7 +77,7 @@ def notify_subscribers(request, page, comment, trivial):
         # send email to all subscribers
         for lang in subscribers:
             users = [u for u in subscribers[lang]
-                     if ev.PageChangedEvent.__name__ in u.email_subscribed_events]
+                     if ev.PageChangedEvent.name in u.email_subscribed_events]
             emails = [u.email for u in users]
             names = [u.name for u in users]
             data = prep_page_changed_mail(request, page, comment, lang, revisions, trivial)
@@ -94,7 +95,7 @@ def handle_user_created(event):
     emails = []
     _ = event.request.getText
     user_ids = getUserList(event.request)
-    event_name = event.__class__.__name__
+    event_name = event.name
 
     from_address = event.request.cfg.mail_from
     email = event.user.email or u"NOT SET"
@@ -117,27 +118,35 @@ def handle_file_attached(event):
     """Sends an email to super users that have subscribed to this event type"""
 
     names = set()
-    _ = event.request.getText
-    event_name = event.__class__.__name__
+    event_name = event.name
     from_address = event.request.cfg.mail_from
     request = event.request
     page = Page(request, event.pagename)
 
     subscribers = page.getSubscribers(request, return_users=1)
     notification.filter_subscriber_list(event, subscribers, False)
-    data = notification.attachment_added(request, event.pagename, event.name, event.size)
+    recipients = []
+
+    for lang in subscribers:
+        recipients.extend(subscribers[lang])
+
+    attachlink = request.getBaseURL() + getAttachUrl(event.pagename, event.filename, request)
+    pagelink = request.getQualifiedURL(page.url(request, {}, relative=False))
 
     for lang in subscribers:
         emails = []
+        _ = lambda text: request.getText(text, lang=lang, formatted=False)
 
-        for usr in subscribers[lang]:
-            if usr.email and event_name in usr.email_subscribed_events:
-                emails.append(usr.email)
-            else:
-                continue
+        links = _("Attachment link: %(attach)s\n" \
+                  "Page link: %(page)s\n") % {'attach': attachlink, 'page': pagelink}
 
-            if send_notification(request, from_address, emails, data):
-                names.update(usr.name)
+        data = notification.attachment_added(request, _, event.pagename, event.filename, event.size)
+        data['body'] = data['body'] + links
+
+        emails = [usr.email for usr in subscribers[lang]]
+
+        if send_notification(request, from_address, emails, data):
+            names.update(recipients)
 
     return notification.Success(names)
 

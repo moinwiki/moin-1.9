@@ -46,6 +46,17 @@ class UnknownChangeType(Exception):
     """ Used to signal an invalid page change event """
     pass
 
+def page_link(request, page, querystr):
+    """Create an absolute url to a given page with optional action
+
+    @param page: a page to link to
+    @type page: MoinMoin.Page.Page
+    @param querystr: a dict passed to wikiutil.makeQueryString
+
+    """
+    query = wikiutil.makeQueryString(querystr, True)
+    return request.getQualifiedURL(page.url(request, query, relative=False))
+
 def page_change_message(msgtype, request, page, lang, **kwargs):
     """Prepare a notification text for a page change of given type
 
@@ -70,15 +81,14 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
                     'rev2': str(revisions[0]),
                     'rev1': str(revisions[1])}
 
-    pagelink = request.getQualifiedURL(page.url(request, querystr, relative=False))
+    pagelink = page_link(request, page, querystr)
 
     if msgtype == "page_changed":
         msg_body = _("Dear Wiki user,\n\n"
         'You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.\n\n'
-        "The following page has been changed by %(editor)s:\n"
-        "%(pagelink)s\n\n", formatted=False) % {
+        'The "%(pagename)s" page has been changed by %(editor)s:\n\n', formatted=False) % {
+            'pagename': page.page_name,
             'editor': page.uid_override or user.getUserIdentification(request),
-            'pagelink': pagelink,
             'sitename': page.cfg.sitename or request.getBaseURL(),
         }
 
@@ -98,20 +108,19 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
     elif msgtype == "page_deleted":
         msg_body = _("Dear wiki user,\n\n"
             'You have subscribed to a wiki page "%(sitename)s" for change notification.\n\n'
-            "The following page has been deleted by %(editor)s:\n"
-            "%(pagelink)s\n\n", formatted=False) % {
+            'The page "%(pagename)" has been deleted by %(editor)s:\n\n', formatted=False) % {
+                'pagename': page.page_name,
                 'editor': page.uid_override or user.getUserIdentification(request),
-                'pagelink': pagelink,
                 'sitename': page.cfg.sitename or request.getBaseURL(),
         }
 
     elif msgtype == "page_renamed":
         msg_body = _("Dear wiki user,\n\n"
             'You have subscribed to a wiki page "%(sitename)s" for change notification.\n\n'
-            "The following page has been renamed from %(oldname)s by %(editor)s:\n"
-            "%(pagelink)s\n\n", formatted=False) % {
+            'The page "%(pagename)" has been renamed from %(oldname)s by %(editor)s:\n',
+            formatted=False) % {
                 'editor': page.uid_override or user.getUserIdentification(request),
-                'pagelink': pagelink,
+                'pagename': page.page_name,
                 'sitename': page.cfg.sitename or request.getBaseURL(),
                 'oldname': kwargs['old_name']
         }
@@ -120,7 +129,8 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
 
     if 'comment' in kwargs and kwargs['comment']:
         msg_body = msg_body + \
-            _("The comment on the change is:\n%(comment)s", formatted=False) % {'comment': kwargs['comment']}
+            _("The comment on the change is:\n%(comment)s",
+              formatted=False) % {'comment': kwargs['comment']}
 
     return msg_body
 
@@ -141,17 +151,14 @@ def user_created_message(request, sitename, username, email):
 
     return {'subject': subject, 'body': body}
 
-def attachment_added(request, page_name, attach_name, attach_size):
+def attachment_added(request, _, page_name, attach_name, attach_size):
     """Formats a message used to notify about new attachments
 
+    @param _: a gettext function
     @return: a dict containing message body and subject
-    """
-    from MoinMoin.action.AttachFile import getAttachUrl
 
-    _ = request.getText
+    """
     page = Page(request, page_name)
-    attachlink = request.getBaseURL() + getAttachUrl(page_name, attach_name, request)
-    pagelink = request.getQualifiedURL(page.url(request, {}, relative=False))
 
     subject = _("New attachment added to page %(pagename)s on %(sitename)s") % {
                 'pagename': page_name,
@@ -163,14 +170,11 @@ def attachment_added(request, page_name, attach_name, attach_size):
     "An attachment has been added to that page by %(editor)s. "
     "Following detailed information is available:\n\n"
     "Attachment name: %(attach_name)s\n"
-    "Attachment size: %(attach_size)s\n"
-    "Download link: %(attach_get)s", formatted=False) % {
+    "Attachment size: %(attach_size)s\n") % {
         'editor': user.getUserIdentification(request),
-        'pagelink': pagelink,
         'page_name': page_name,
         'attach_name': attach_name,
         'attach_size': attach_size,
-        'attach_get': attachlink,
     }
 
     return {'body': body, 'subject': subject}
@@ -185,7 +189,7 @@ def filter_subscriber_list(event, subscribers, for_jabber):
     @type subscribers: dict
 
     """
-    event_name = event.__class__.__name__
+    event_name = event.name
 
     # Filter the list by removing users who don't want to receive
     # notifications about this type of event

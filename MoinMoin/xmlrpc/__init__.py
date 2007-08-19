@@ -556,6 +556,28 @@ class XmlRpcBase:
 
         return xmlrpclib.Boolean(1)
 
+    def xmlrpc_revertPage(self, pagename, revision):
+        """Revert a page to previous revision
+
+        This is mainly intended to be used by the jabber bot.
+
+        @param pagename: the page name (unicode or utf-8)
+        @param revision: revision to revert to
+        @rtype bool
+        @return true on success
+
+        """
+        if not self.request.user.may.write(pagename):
+            return xmlrpclib.Fault(1, "You are not allowed to edit this page")
+
+        from MoinMoin.action import revert
+        self.request.rev = int(self._instr(revision))
+        msg = revert.execute(pagename, self.request)
+        if msg:
+            return xmlrpclib.Fault(1, "Revert failed: %s" % (msg, ))
+        else:
+            return xmlrpclib.Boolean(1)
+
     def xmlrpc_searchPages(self, query_string):
         """ Searches pages for query_string.
             Returns a list of tuples (foundpagename, context)
@@ -566,6 +588,36 @@ class XmlRpcBase:
         results.request = self.request
         return [(self._outstr(hit.page_name),
                  self._outstr(results.formatContext(hit, 180, 1)))
+                for hit in results.hits]
+
+    def xmlrpc_searchPagesEx(self, query_string, search_type, length, case, mtime, regexp):
+        """ Searches pages for query_string - extended version for compatibility
+
+        This function, in contrary to searchPages(), doesn't return HTML-formatted data.
+
+        @param query_string: term to search for
+        @param search_type: "text" or "title" search
+        @param length: length of context preview (in characters)
+        @param case: should the search be case sensitive?
+        @param mtime: only output pages modified after mtime
+        @param regexp: should the query_string be treates as a regular expression?
+        @return: (page name, context preview, page url)
+
+        """
+        from MoinMoin import search
+        from MoinMoin.formatter.text_plain import Formatter
+
+        kwargs = {"sort": "page_name", "case": case, "regex": regexp}
+        if search_type == "title":
+            kwargs["titlesearch"] = True
+
+        results = search.searchPages(self.request, query_string, **kwargs)
+        results.formatter = Formatter(self.request)
+        results.request = self.request
+
+        return [(self._outstr(hit.page_name),
+                 self._outstr(results.formatContext(hit, length, 1)),
+                 self.request.getQualifiedURL(hit.page.url(self.request, {}, relative=False)))
                 for hit in results.hits]
 
     def xmlrpc_getMoinVersion(self):

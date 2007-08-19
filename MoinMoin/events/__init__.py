@@ -30,18 +30,26 @@ _ = lambda x: x
 
 class Event(object):
     """A class handling information common to all events."""
+
+    # NOTE: each Event subclass must have a unique name attribute
+    name = u"Event"
+
     def __init__(self, request):
         self.request = request
 
 
 class PageEvent(Event):
     """An event related to a page change"""
+
+    name = u"PageEvent"
+
     def __init__(self, request):
         Event.__init__(self, request)
 
 
 class PageChangedEvent(PageEvent):
 
+    name = u"PageChangedEvent"
     description = _(u"""Page has been modified""")
     req_superuser = False
 
@@ -53,6 +61,7 @@ class PageChangedEvent(PageEvent):
 
 class TrivialPageChangedEvent(PageEvent):
 
+    name = u"TrivialPageChangedEvent"
     description = _(u"Page has been modified in a trivial fashion")
     req_superuser = False
 
@@ -64,6 +73,7 @@ class TrivialPageChangedEvent(PageEvent):
 
 class PageRenamedEvent(PageEvent):
 
+    name = u"PageRenamedEvent"
     description = _(u"""Page has been renamed""")
     req_superuser = False
 
@@ -76,6 +86,7 @@ class PageRenamedEvent(PageEvent):
 
 class PageDeletedEvent(PageEvent):
 
+    name = u"PageDeletedEvent"
     description = _(u"""Page has been deleted""")
     req_superuser = False
 
@@ -87,6 +98,7 @@ class PageDeletedEvent(PageEvent):
 
 class PageCopiedEvent(PageEvent):
 
+    name = u"PageCopiedEvent"
     description = _(u"""Page has been copied""")
     req_superuser = False
 
@@ -99,19 +111,21 @@ class PageCopiedEvent(PageEvent):
 
 class FileAttachedEvent(PageEvent):
 
+    name = u"FileAttachedEvent"
     description = _(u"""A new attachment has been added""")
     req_superuser = False
 
-    def __init__(self, request, pagename, name, size):
+    def __init__(self, request, pagename, filename, size):
         PageEvent.__init__(self, request)
         self.request = request
         self.pagename = pagename
-        self.name = name
+        self.filename = filename
         self.size = size
 
 
 class PageRevertedEvent(PageEvent):
 
+    name = u"PageRevertedEvent"
     description = _(u"""A page has been reverted to a previous state""")
     req_superuser = False
 
@@ -124,6 +138,7 @@ class PageRevertedEvent(PageEvent):
 
 class SubscribedToPageEvent(PageEvent):
 
+    name = u"SubscribedToPageEvent"
     description = _(u"""A user has subscribed to a page""")
     req_superuser = True
 
@@ -154,6 +169,7 @@ class JabberIDUnsetEvent(Event):
 class UserCreatedEvent(Event):
     """ Sent when a new user has been created """
 
+    name = u"UserCreatedEvent"
     description = _(u"""A new account has been created""")
     req_superuser = True
 
@@ -168,6 +184,9 @@ class PagePreSaveEvent(Event):
     if handler returns
 
     """
+
+    name = u"PagePreSaveEvent"
+
     def __init__(self, request, page_editor, new_text):
         Event.__init__(self, request)
         self.page_editor = page_editor
@@ -243,9 +262,9 @@ def get_subscribable_events():
     subscribable_events = {}
 
     for ev in defs.values():
-        if type(ev) is type and issubclass(ev, Event) and ev.__dict__.has_key("description"):
-            subscribable_events[ev.__name__] = {'desc': ev.description,
-                                                 'superuser': ev.req_superuser}
+        if type(ev) is type and issubclass(ev, Event) and ev.__dict__.has_key("description") and ev.__dict__.has_key("name"):
+            subscribable_events[ev.name] = {'desc': ev.description, 'superuser': ev.req_superuser}
+
     return subscribable_events
 
 # Get rid of the dummy getText so that it doesn't get imported with *
