@@ -83,14 +83,18 @@ class BaseDataCommand(object):
     # Parameter list in a human-readable format
     parameter_list = u""
 
-    def __init__(self, jid):
+    def __init__(self, jid, presentation=u"text"):
         """A constructor
 
         @param jid: Jabber ID to send the reply to
+        @param presentation: how to display results; "text" or "dataforms"
         @type jid: unicode
+        @type presentation: unicode
+
         """
         self.jid = jid
         self.data = None
+        self.presentation = presentation
 
 class GetPage(BaseDataCommand):
 
@@ -123,8 +127,8 @@ class GetPageInfo(BaseDataCommand):
     description = u"show detailed information about a page"
     parameter_list = u"pagename"
 
-    def __init__(self, jid, pagename):
-        BaseDataCommand.__init__(self, jid)
+    def __init__(self, jid, pagename, presentation=u"text"):
+        BaseDataCommand.__init__(self, jid, presentation)
         self.pagename = pagename
 
 class Search(BaseDataCommand):

@@ -67,8 +67,11 @@ class Formatter(FormatterBase):
             str = ''
         return ('<jump href="%s"%s>' % (self._escape(url), str), '</jump>') [not on]
 
-    def attachment_link(self, url, text, **kw):
-        return '<attachment href="%s">%s</attachment>' % (url, text)
+    def attachment_link(self, on, url=None, **kw):
+        if on:
+            return '<attachment href="%s">' % (url, )
+        else:
+            return '</attachment>'
 
     def attachment_image(self, url, **kw):
         return '<attachmentimage href="%s"></attachmentimage>' % (url, )

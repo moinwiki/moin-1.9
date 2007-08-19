@@ -224,10 +224,13 @@ class Formatter(FormatterBase):
             kw['class'] = str(css)
         return self._set_tag('a', on, **kw)
 
-    def attachment_link(self, url, text, **kw):
+    def attachment_link(self, on, url=None, **kw):
         kw['href'] = url
         kw['type'] = 'link'
-        return self._set_tag('attachment', 1, **kw) + self.text(text) + self._set_tag('attachment', 0, **kw)
+        if on:
+            return self._set_tag('attachment', 1, **kw)
+        else:
+            return self._set_tag('attachment', 0, **kw)
 
     def attachment_image(self, url, **kw):
         kw['href'] = url
