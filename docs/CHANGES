@@ -28,19 +28,14 @@ Known main issues:
     and improving it and after having made a backup with some other, proven
     method. USE BOTH ON YOUR OWN RISK!
 
-Version 1.5.current:
-  Bugfixes:
-    * AttachFile overwrite mode (introduced in 1.5.7) did not check delete
-      rights, but only write rights. Now it checks that the user has write AND
-      delete rights before overwriting a file.
-
 Version 1.7.current:
     This is the active development branch. All changes get done here and
     critical stuff gets committed with -m "... (backport needed)" and then
     backported to older releases that we still maintain. :)
 
   Developer notes (these should be moved to the end in the release):
-    * ...
+    * changed formatter.attachment_link call (it is now more flexible,
+      because you can render the stuff between link start and link end yourself)
 
   New Features:
     * cfg.trusted_auth_methods
@@ -56,6 +51,9 @@ Version 1.7.current:
     * ...
 
   Other changes:
+    * attachment links for non-existing attachments look different now:
+      the note about the non-existing attachment moved to the link title,
+      the link is shown with nonexistent class (grey).
     * cfg.show_login is gone, see code in theme/__init__.py, this affects
       many themes!
     * needs a new userprefs/ plugin directory
@@ -522,6 +520,12 @@ Version 1.6.current:
                other and better browsers anyway.
     * Removed Lupy based indexed search code. If you were brave enough to
       use cfg.lupy_search, you maybe want to try cfg.xapian_search instead.
+
+Version 1.5.current:
+  Bugfixes:
+    * AttachFile overwrite mode (introduced in 1.5.7) did not check delete
+      rights, but only write rights. Now it checks that the user has write AND
+      delete rights before overwriting a file.
 
 Version 1.5.8:
   New features:

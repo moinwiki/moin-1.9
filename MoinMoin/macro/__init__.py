@@ -380,11 +380,13 @@ class Macro:
             # just return text as given in macro args
 
             if text:
-                result = self.formatter.text(text+" ")
+                result = self.formatter.text(text + " ")
+            else:
+                result = ''
 
-            result += self.formatter.code(1) + \
-                self.formatter.text("<%s>" % email) + \
-                self.formatter.code(0)
+            result += (self.formatter.code(1) +
+                       self.formatter.text("<%s>" % email) +
+                       self.formatter.code(0))
 
         return result
 

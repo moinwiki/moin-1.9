@@ -119,6 +119,21 @@ def getAttachUrl(pagename, filename, request, addts=0, escaped=0, do='get'):
         url = wikiutil.escape(url)
     return url
 
+def getAttachUploadUrl(pagename, filename, request, addts=0, escaped=0):
+    """ Get URL that points to attachment `filename` of page `pagename` upload url.
+    """
+    if htdocs_access(request):
+        # direct file access via webserver - we don't support uploading files,
+        # so just fake some return value:
+        return getAttachUrl(pagename, filename, request, addts=addts, escaped=escaped)
+    else:
+        url = "%s/%s?action=%s&rename=%s" % (
+            request.getScriptname(), wikiutil.quoteWikinameURL(pagename),
+            action_name, wikiutil.url_quote_plus(filename))
+    if escaped:
+        url = wikiutil.escape(url)
+    return url
+
 def getIndicator(request, pagename):
     """ Get an attachment indicator for a page (linked clip image) or
         an empty string if not attachments exist.

@@ -66,7 +66,7 @@ class Contact:
         @param priority: priority of the given resource
 
         """
-        self.resources[resource] = {'show': show, 'priority': priority, supports: []}
+        self.resources[resource] = {'show': show, 'priority': priority, 'supports': []}
         self.last_online = None
 
     def set_supports(self, resource, extension):
@@ -80,7 +80,7 @@ class Contact:
         priority among currently connected.
 
         """
-        if resource:
+        if resource and resource in self.resources:
             return extension in self.resources[resource]['supports']
         else:
             resource = self.max_prio_resource()
@@ -156,7 +156,7 @@ class Contact:
     def __str__(self):
         retval = "%s (%s) has %d queued messages"
         res = ", ".join([name + " is " + res['show'] for name, res in self.resources.items()])
-        return retval % (self.jid.as_utf8(), res, len(self.messages))
+        return retval % (self.jid.as_unicode(), res, len(self.messages))
 
 class XMPPBot(Client, Thread):
     """A simple XMPP bot"""
@@ -255,9 +255,9 @@ class XMPPBot(Client, Thread):
         """
         language = "en"
         if isinstance(jid, str) or isinstance(jid, unicode):
-            jid = JID(jid).bare().as_utf8()
+            jid = JID(jid).bare().as_unicode()
         else:
-            jid = jid.bare().as_utf8()
+            jid = jid.bare().as_unicode()
 
         if jid in self.contacts:
             language = self.contacts[jid].language
@@ -289,22 +289,22 @@ class XMPPBot(Client, Thread):
         # Handle normal notifications
         if isinstance(command, cmd.NotificationCommand):
             cmd_data = command.notification
+            original_text = cmd_data.get('text', '')
+            original_subject = cmd_data.get('subject', '')
 
             for recipient in command.jids:
                 jid = JID(recipient)
-                jid_text = jid.bare().as_utf8()
-
-                text = cmd_data['text']
-                subject = cmd_data.get('subject', '')
-                msg_data = command.notification
+                jid_text = jid.bare().as_unicode()
 
                 if isinstance(command, cmd.NotificationCommandI18n):
                     # Translate&interpolate the message with data
                     gettext_func = self.get_text(jid_text)
                     text, subject = command.translate(gettext_func)
-                    msg_data = {'text': text, 'subject': subject,
-                                'url_list': cmd_data.get('url_list', []),
-                                'action': cmd_data.get('action', '')}
+                    cmd_data['text'] = text
+                    cmd_data['subject'] = subject
+                else:
+                    cmd_data['text'] = original_text
+                    cmd_data['subject'] = original_subject
 
                 # Check if contact is DoNotDisturb.
                 # If so, queue the message for delayed delivery.
@@ -314,14 +314,19 @@ class XMPPBot(Client, Thread):
                         contact.messages.append(command)
                         return
 
-                    if contact.supports(jid.resource, u"jabber:x:data"):
-                        action = msg_data.get('action', '')
-                        if action == "page_changed":
-                            self.send_change_form(jid, msg_data)
-                        else:
-                            self.send_message(jid, msg_data, command.msg_type)
+                action = cmd_data.get('action', '')
+                if action == u'page_changed':
+                    self.handle_changed_action(cmd_data, jid, contact)
+                elif action == u'page_deleted':
+                    self.handle_deleted_action(cmd_data, jid, contact)
+                elif action == u'file_attached':
+                    self.handle_attached_action(cmd_data, jid, contact)
+                elif action == u'page_renamed':
+                    self.handle_renamed_action(cmd_data, jid, contact)
+                elif action == u'user_created':
+                    self.handle_user_created_action(cmd_data, jid, contact)
                 else:
-                    self.send_message(jid, msg_data, command.msg_type)
+                    self.send_message(jid, cmd_data, command.msg_type)
 
             return
 
@@ -349,32 +354,7 @@ class XMPPBot(Client, Thread):
             self.send_message(command.jid, {'text': msg % (pagelist, )})
 
         elif isinstance(command, cmd.GetPageInfo):
-            intro = _("""Following detailed information on page "%(pagename)s" \
-is available:""")
-
-            if command.data['author'].startswith("Self:"):
-                author = command.data['author'][5:]
-            else:
-                author = command.data['author']
-
-            datestr = str(command.data['lastModified'])
-            date = u"%(year)s-%(month)s-%(day)s at %(time)s" % {
-                        'year': datestr[:4],
-                        'month': datestr[4:6],
-                        'day': datestr[6:8],
-                        'time': datestr[9:17],
-            }
-
-            msg = _("""Last author: %(author)s
-Last modification: %(modification)s
-Current version: %(version)s""") % {
-             'author': author,
-             'modification': date,
-             'version': command.data['version'],
-            }
-
-            self.send_message(command.jid, {'text': intro % {'pagename': command.pagename}})
-            self.send_message(command.jid, {'text': msg})
+            self.handle_page_info(command)
 
         elif isinstance(command, cmd.GetUserLanguage):
             if command.jid in self.contacts:
@@ -405,26 +385,106 @@ Current version: %(version)s""") % {
                 self.send_message(command.jid, data, u"chat")
             else:
                 form_title = _("Search results").encode("utf-8")
+                help_form = _("Submit this form to perform a wiki search").encode("utf-8")
+                form = forms.Form(xmlnode_or_type="result", title=form_title, instructions=help_form)
 
-                warnings = []
+                action_label = _("What to do next")
+                do_nothing = forms.Option("n", _("Do nothing"))
+                search_again = forms.Option("s", _("Search again"))
+
                 for no, warning in enumerate(warnings):
-                    field = forms.Field(name="warning", field_type="fixed", value=warning)
-                    warnings.append(forms.Item([field]))
-
-                reported = [forms.Field(name="url", field_type="text-single"), forms.Field(name="description", field_type="text-single")]
-                if warnings:
-                    reported.append(forms.Field(name="warning", field_type="fixed"))
-
-                form = forms.Form(xmlnode_or_type="result", title=form_title, reported_fields=reported)
+                    form.add_field(name="warning", field_type="fixed", value=warning)
 
                 for no, result in enumerate(results):
-                    url = forms.Field(name="url", value=result["url"], field_type="text-single")
-                    description = forms.Field(name="description", value=result["description"], field_type="text-single")
-                    item = forms.Item([url, description])
-                    form.add_item(item)
+                    field_name = "url%d" % (no, )
+                    form.add_field(name=field_name, value=unicode(result["url"]), label=result["description"].encode("utf-8"), field_type="text-single")
+
+                # Selection of a following action
+                form.add_field(name="options", field_type="list-single", options=[do_nothing, search_again], label=action_label)
 
                 self.send_form(command.jid, form, _("Search results"))
 
+    def handle_changed_action(self, cmd_data, jid, contact):
+        """Handles a notification command with 'page_changed' action
+
+        @param cmd_data: notification command data
+        @param jid: jid to send the notification to
+        @param contact: a roster contact
+        @type cmd_data: dict
+        @type jid: pyxmpp.jid.JID
+        @type contact: Contact
+
+        """
+        if contact and contact.supports(jid.resource, u"jabber:x:data"):
+            self.send_change_form(jid.as_unicode(), cmd_data)
+            return
+        else:
+            self.send_change_text(jid.as_unicode(), cmd_data)
+
+    def handle_deleted_action(self, cmd_data, jid, contact):
+        """Handles a notification cmd_data with 'page_deleted' action
+
+        @param cmd_data: notification cmd_data
+        @param jid: jid to send the notification to
+        @param contact: a roster contact
+        @type cmd_data: dict
+        @type jid: pyxmpp.jid.JID
+        @type contact: Contact
+
+        """
+        if contact and contact.supports(jid.resource, u"jabber:x:data"):
+            self.send_deleted_form(jid.as_unicode(), cmd_data)
+            return
+        else:
+            self.send_deleted_text(jid.as_unicode(), cmd_data)
+
+
+    def handle_attached_action(self, cmd_data, jid, contact):
+        """Handles a notification cmd_data with 'file_attached' action
+
+        @param cmd_data: notification cmd_data
+        @param jid: jid to send the notification to
+        @param contact: a roster contact
+        @type cmd_data: dict
+        @type jid: pyxmpp.jid.JID
+        @type contact: Contact
+
+        """
+        if contact and contact.supports(jid.resource, u"jabber:x:data"):
+            self.send_attached_form(jid.as_unicode(), cmd_data)
+            return
+        else:
+            self.send_attached_text(jid.as_unicode(), cmd_data)
+
+    def handle_renamed_action(self, cmd_data, jid, contact):
+        """Handles a notification cmd_data with 'page_renamed' action
+
+        @param cmd_data: notification cmd_data
+        @param jid: jid to send the notification to
+        @param contact: a roster contact
+        @type cmd_data: dict
+        @type jid: pyxmpp.jid.JID
+        @type contact: Contact
+
+        """
+        if contact and contact.supports(jid.resource, u"jabber:x:data"):
+            self.send_renamed_form(jid.as_unicode(), cmd_data)
+            return
+        else:
+            self.send_renamed_text(jid.as_unicode(), cmd_data)
+
+    def handle_user_created_action(self, cmd_data, jid, contact):
+        """Handles a notification cmd_data with 'user_created' action
+
+        @param cmd_data: notification cmd_data
+        @param jid: jid to send the notification to
+        @param contact: a roster contact
+        @type cmd_data: dict
+        @type jid: pyxmpp.jid.JID
+        @type contact: Contact
+
+        """
+        raise NotImplemented()
 
     def ask_for_subscription(self, jid):
         """Sends a <presence/> stanza with type="subscribe"
@@ -463,7 +523,7 @@ Current version: %(version)s""") % {
         jid = JID(jid_text)
 
         if data.has_key('url_list') and data['url_list']:
-            jid_bare = jid.bare().as_utf8()
+            jid_bare = jid.bare().as_unicode()
             contact = self.contacts.get(jid_bare, None)
             if contact and contact.supports(jid.resource, u'jabber:x:oob'):
                 use_oob = True
@@ -482,15 +542,17 @@ Current version: %(version)s""") % {
 
         self.get_stream().send(message)
 
-    def send_form(self, jid, form, subject):
+    def send_form(self, jid, form, subject, url_list=[]):
         """Send a data form
 
         @param jid: jid to send the form to (full)
         @param form: the form to send
         @param subject: subject of the message
+        @param url_list: list of urls to use with OOB
         @type jid: unicode
         @type form: pyxmpp.jabber.dataforms.Form
         @type subject: unicode
+        @type url_list: list
 
         """
         if not isinstance(form, forms.Form):
@@ -498,9 +560,12 @@ Current version: %(version)s""") % {
 
         _ = self.get_text(JID(jid).bare().as_unicode())
 
-        warning = _("If you see this, your client probably doesn't support Data Forms.")
-        message = Message(to_jid=jid, body=warning, subject=subject)
+        message = Message(to_jid=jid, subject=subject)
         message.add_content(form)
+
+        if url_list:
+            oob.add_urls(message, url_list)
+
         self.get_stream().send(message)
 
     def send_search_form(self, jid):
@@ -531,29 +596,388 @@ Current version: %(version)s""") % {
         self.send_form(jid, form, _("Wiki search"))
 
     def send_change_form(self, jid, msg_data):
-        """Sends a page change notification using Data Forms"""
+        """Sends a page change notification using Data Forms
+
+        @param jid: a Jabber ID to send the notification to
+        @type jid: unicode
+        @param msg_data: dictionary with notification data
+        @type msg_data: dict
+
+        """
         _ = self.get_text(jid)
 
         form_title = _("Page changed notification").encode("utf-8")
         instructions = _("Submit this form with a specified action to continue.").encode("utf-8")
-        url_label = _("URL")
-        pagename_label = _("Page name")
         action_label = _("What to do next")
 
         action1 = _("Do nothing")
         action2 = _("Revert change")
         action3 = _("View page info")
+        action4 = _("Perform a search")
 
         do_nothing = forms.Option("n", action1)
         revert = forms.Option("r", action2)
         view_info = forms.Option("v", action3)
+        search = forms.Option("s", action4)
 
         form = forms.Form(xmlnode_or_type="form", title=form_title, instructions=instructions)
-        form.add_field(name="action", field_type="hidden", value="change_notify_action")
-        form.add_field(name="notification", field_type="fixed", value=msg_data['text'])
-        form.add_field(name="options", field_type="list-single", options=[do_nothing, revert, view_info], label=action_label)
+        form.add_field(name='revision', field_type='hidden', value=msg_data['revision'])
+        form.add_field(name='page_name', field_type='hidden', value=msg_data['page_name'])
+        form.add_field(name='editor', field_type='text-single', value=msg_data['editor'], label=_("Editor"))
+        form.add_field(name='comment', field_type='text-single', value=msg_data.get('comment', ''), label=_("Comment"))
 
-        self.send_form(jid, form, _("Page change notification"))
+        # Add lines of text as separate values, as recommended in XEP
+        diff_lines = msg_data['diff'].split('\n')
+        form.add_field(name="diff", field_type="text-multi", values=diff_lines, label=("Diff"))
+
+        full_jid = JID(jid)
+        bare_jid = full_jid.bare().as_unicode()
+        resource = full_jid.resource
+
+        # Add URLs as OOB data if it's supported and as separate fields otherwise
+        if bare_jid in self.contacts and self.contacts[bare_jid].supports(resource, u'jabber:x:oob'):
+            url_list = msg_data['url_list']
+        else:
+            url_list = []
+
+            for number, url in enumerate(msg_data['url_list']):
+                field_name = "url%d" % (number, )
+                form.add_field(name=field_name, field_type="text-single", value=url["url"], label=url["description"])
+
+        # Selection of a following action
+        form.add_field(name="options", field_type="list-single", options=[do_nothing, revert, view_info, search], label=action_label)
+
+        self.send_form(jid, form, _("Page change notification"), url_list)
+
+    def send_change_text(self, jid, msg_data):
+        """Sends a simple, text page change notification
+
+        @param jid: a Jabber ID to send the notification to
+        @type jid: unicode
+        @param msg_data: dictionary with notification data
+        @type msg_data: dict
+
+        """
+        _ = self.get_text(jid)
+        separator = '-' * 78
+        urls_text = '\n'.join(["%s - %s" % (url["description"], url["url"]) for url in msg_data['url_list']])
+        message = _("%(preamble)s\nComment: %(comment)s\n%(separator)s\n%(diff)s\n%(separator)s\n%(links)s") % {
+                    'preamble': msg_data['text'],
+                    'separator': separator,
+                    'diff': msg_data['diff'],
+                    'comment': msg_data.get('comment', _('no comment')),
+                    'links': urls_text,
+                  }
+
+        data = {'text': message, 'subject': msg_data.get('subject', '')}
+        self.send_message(jid, data, u"message")
+
+    def send_deleted_form(self, jid, msg_data):
+        """Sends a page deleted notification using Data Forms
+
+        @param jid: a Jabber ID to send the notification to
+        @type jid: unicode
+        @param msg_data: dictionary with notification data
+        @type msg_data: dict
+
+        """
+        _ = self.get_text(jid)
+
+        form_title = _("Page deletion notification").encode("utf-8")
+        instructions = _("Submit this form with a specified action to continue.").encode("utf-8")
+        action_label = _("What to do next")
+
+        action1 = _("Do nothing")
+        action2 = _("Perform a search")
+
+        do_nothing = forms.Option("n", action1)
+        search = forms.Option("s", action2)
+
+        form = forms.Form(xmlnode_or_type="form", title=form_title, instructions=instructions)
+        form.add_field(name='editor', field_type='text-single', value=msg_data['editor'], label=_("Editor"))
+        form.add_field(name='comment', field_type='text-single', value=msg_data.get('comment', ''), label=_("Comment"))
+
+        full_jid = JID(jid)
+        bare_jid = full_jid.bare().as_unicode()
+        resource = full_jid.resource
+
+        # Add URLs as OOB data if it's supported and as separate fields otherwise
+        if bare_jid in self.contacts and self.contacts[bare_jid].supports(resource, u'jabber:x:oob'):
+            url_list = msg_data['url_list']
+        else:
+            url_list = []
+
+            for number, url in enumerate(msg_data['url_list']):
+                field_name = "url%d" % (number, )
+                form.add_field(name=field_name, field_type="text-single", value=url["url"], label=url["description"])
+
+        # Selection of a following action
+        form.add_field(name="options", field_type="list-single", options=[do_nothing, search], label=action_label)
+
+        self.send_form(jid, form, _("Page deletion notification"), url_list)
+
+    def send_deleted_text(self, jid, msg_data):
+        """Sends a simple, text page deletion notification
+
+        @param jid: a Jabber ID to send the notification to
+        @type jid: unicode
+        @param msg_data: dictionary with notification data
+        @type msg_data: dict
+
+        """
+        _ = self.get_text(jid)
+        separator = '-' * 78
+        urls_text = '\n'.join(["%s - %s" % (url["description"], url["url"]) for url in msg_data['url_list']])
+        message = _("%(preamble)s\nComment: %(comment)s\n%(separator)s\n%(links)s") % {
+                    'preamble': msg_data['text'],
+                    'separator': separator,
+                    'comment': msg_data.get('comment', _('no comment')),
+                    'links': urls_text,
+                  }
+
+        data = {'text': message, 'subject': msg_data.get('subject', '')}
+        self.send_message(jid, data, u"message")
+
+    def send_attached_form(self, jid, msg_data):
+        """Sends a new attachment notification using Data Forms
+
+        @param jid: a Jabber ID to send the notification to
+        @type jid: unicode
+        @param msg_data: dictionary with notification data
+        @type msg_data: dict
+
+        """
+        _ = self.get_text(jid)
+
+        form_title = _("File attached notification").encode("utf-8")
+        instructions = _("Submit this form with a specified action to continue.").encode("utf-8")
+        action_label = _("What to do next")
+
+        action1 = _("Do nothing")
+        action2 = _("View page info")
+        action3 = _("Perform a search")
+
+        do_nothing = forms.Option("n", action1)
+        view_info = forms.Option("v", action2)
+        search = forms.Option("s", action3)
+
+        form = forms.Form(xmlnode_or_type="form", title=form_title, instructions=instructions)
+        form.add_field(name='page_name', field_type='hidden', value=msg_data['page_name'])
+        form.add_field(name='editor', field_type='text-single', value=msg_data['editor'], label=_("Editor"))
+        form.add_field(name='page', field_type='text-single', value=msg_data['page_name'], label=_("Page name"))
+        form.add_field(name='name', field_type='text-single', value=msg_data['attach_name'], label=_("File name"))
+        form.add_field(name='size', field_type='text-single', value=msg_data['attach_size'], label=_("File size"))
+
+        full_jid = JID(jid)
+        bare_jid = full_jid.bare().as_unicode()
+        resource = full_jid.resource
+
+        # Add URLs as OOB data if it's supported and as separate fields otherwise
+        if bare_jid in self.contacts and self.contacts[bare_jid].supports(resource, u'jabber:x:oob'):
+            url_list = msg_data['url_list']
+        else:
+            url_list = []
+
+            for number, url in enumerate(msg_data['url_list']):
+                field_name = "url%d" % (number, )
+                form.add_field(name=field_name, field_type="text-single", value=url["url"], label=url["description"])
+
+        # Selection of a following action
+        form.add_field(name="options", field_type="list-single", options=[do_nothing, view_info, search], label=action_label)
+
+        self.send_form(jid, form, _("File attached notification"), url_list)
+
+    def send_attached_text(self, jid, msg_data):
+        """Sends a simple, text page deletion notification
+
+        @param jid: a Jabber ID to send the notification to
+        @type jid: unicode
+        @param msg_data: dictionary with notification data
+        @type msg_data: dict
+
+        """
+        _ = self.get_text(jid)
+        separator = '-' * 78
+        urls_text = '\n'.join(["%s - %s" % (url["description"], url["url"]) for url in msg_data['url_list']])
+        message = _("%(preamble)s\n%(separator)s\n%(links)s") % {
+                    'preamble': msg_data['text'],
+                    'separator': separator,
+                    'links': urls_text,
+                  }
+
+        data = {'text': message, 'subject': msg_data['subject']}
+        self.send_message(jid, data, u"message")
+
+    def send_renamed_form(self, jid, msg_data):
+        """Sends a page rename notification using Data Forms
+
+        @param jid: a Jabber ID to send the notification to
+        @type jid: unicode
+        @param msg_data: dictionary with notification data
+        @type msg_data: dict
+
+        """
+        _ = self.get_text(jid)
+
+        form_title = _("Page rename notification").encode("utf-8")
+        instructions = _("Submit this form with a specified action to continue.").encode("utf-8")
+        action_label = _("What to do next")
+
+        action1 = _("Do nothing")
+        action2 = _("Revert change")
+        action3 = _("View page info")
+        action4 = _("Perform a search")
+
+        do_nothing = forms.Option("n", action1)
+        revert = forms.Option("r", action2)
+        view_info = forms.Option("v", action3)
+        search = forms.Option("s", action4)
+
+        form = forms.Form(xmlnode_or_type="form", title=form_title, instructions=instructions)
+        form.add_field(name='revision', field_type='hidden', value=msg_data['revision'])
+        form.add_field(name='page_name', field_type='hidden', value=msg_data['page_name'])
+        form.add_field(name='editor', field_type='text-single', value=msg_data['editor'], label=_("Editor"))
+        form.add_field(name='comment', field_type='text-single', value=msg_data.get('comment', ''), label=_("Comment"))
+        form.add_field(name='old', field_type='text-single', value=msg_data['old_name'], label=_("Old name"))
+        form.add_field(name='new', field_type='text-single', value=msg_data['page_name'], label=_("New name"))
+
+        full_jid = JID(jid)
+        bare_jid = full_jid.bare().as_unicode()
+        resource = full_jid.resource
+
+        # Add URLs as OOB data if it's supported and as separate fields otherwise
+        if bare_jid in self.contacts and self.contacts[bare_jid].supports(resource, u'jabber:x:oob'):
+            url_list = msg_data['url_list']
+        else:
+            url_list = []
+
+            for number, url in enumerate(msg_data['url_list']):
+                field_name = "url%d" % (number, )
+                form.add_field(name=field_name, field_type="text-single", value=url["url"], label=url["description"])
+
+        # Selection of a following action
+        form.add_field(name="options", field_type="list-single", options=[do_nothing, revert, view_info, search], label=action_label)
+
+        self.send_form(jid, form, _("Page rename notification"), url_list)
+
+    def send_renamed_text(self, jid, msg_data):
+        """Sends a simple, text page rename notification
+
+        @param jid: a Jabber ID to send the notification to
+        @type jid: unicode
+        @param msg_data: dictionary with notification data
+        @type msg_data: dict
+
+        """
+        _ = self.get_text(jid)
+        separator = '-' * 78
+        urls_text = '\n'.join(["%s - %s" % (url["description"], url["url"]) for url in msg_data['url_list']])
+        message = _("%(preamble)s\nComment: %(comment)s\n%(separator)s\n%(links)s") % {
+                    'preamble': msg_data['text'],
+                    'separator': separator,
+                    'comment': msg_data.get('comment', _('no comment')),
+                    'links': urls_text,
+                  }
+
+        data = {'text': message, 'subject': msg_data['subject']}
+        self.send_message(jid, data, u"message")
+
+    def handle_page_info(self, command):
+        """Handles GetPageInfo commands
+
+        @param command: a command instance
+        @type command: jabberbot.commands.GetPageInfo
+
+        """
+        # Process command data first so it can be directly usable
+        if command.data['author'].startswith("Self:"):
+            command.data['author'] = command.data['author'][5:]
+
+        datestr = str(command.data['lastModified'])
+        command.data['lastModified'] = u"%(year)s-%(month)s-%(day)s at %(time)s" % {
+                    'year': datestr[:4],
+                    'month': datestr[4:6],
+                    'day': datestr[6:8],
+                    'time': datestr[9:17],
+        }
+
+        if command.presentation == u"text":
+            self.send_pageinfo_text(command)
+        elif command.presentation == u"dataforms":
+            self.send_pageinfo_form(command)
+
+        else:
+            raise ValueError("presentation value '%s' is not supported!" % (command.presentation, ))
+
+    def send_pageinfo_text(self, command):
+        """Sends detailed page info with plain text
+
+        @param command: command with detailed data
+        @type command: jabberbot.command.GetPageInfo
+
+        """
+        _ = self.get_text(command.jid)
+
+        intro = _("""Following detailed information on page "%(pagename)s" \
+is available:""")
+
+        msg = _("""Last author: %(author)s
+Last modification: %(modification)s
+Current version: %(version)s""") % {
+         'author': command.data['author'],
+         'modification': command.data['lastModified'],
+         'version': command.data['version'],
+        }
+
+        self.send_message(command.jid, {'text': intro % {'pagename': command.pagename}})
+        self.send_message(command.jid, {'text': msg})
+
+    def send_pageinfo_form(self, command):
+        """Sends page info using Data Forms
+
+
+        """
+        _ = self.get_text(command.jid)
+        data = command.data
+
+        form_title = _("Detailed page information").encode("utf-8")
+        instructions = _("Submit this form with a specified action to continue.").encode("utf-8")
+        action_label = _("What to do next")
+
+        action1 = _("Do nothing")
+        action2 = _("Get page contents")
+        action3 = _("Get page contents (HTML)")
+        action4 = _("Perform a search")
+
+        do_nothing = forms.Option("n", action1)
+        get_content = forms.Option("c", action2)
+        get_content_html = forms.Option("h", action3)
+        search = forms.Option("s", action4)
+
+        form = forms.Form(xmlnode_or_type="form", title=form_title, instructions=instructions)
+        form.add_field(name='pagename', field_type='text-single', value=command.pagename, label=_("Page name"))
+        form.add_field(name="changed", field_type='text-single', value=data['lastModified'], label=_("Last changed"))
+        form.add_field(name='editor', field_type='text-single', value=data['author'], label=_("Last editor"))
+        form.add_field(name='version', field_type='text-single', value=data['version'], label=_("Current version"))
+
+#        full_jid = JID(jid)
+#        bare_jid = full_jid.bare().as_unicode()
+#        resource = full_jid.resource
+
+        # Add URLs as OOB data if it's supported and as separate fields otherwise
+#        if bare_jid in self.contacts and self.contacts[bare_jid].supports(resource, u'jabber:x:oob'):
+#            url_list = msg_data['url_list']
+#        else:
+#            url_list = []
+#
+#            for number, url in enumerate(msg_data['url_list']):
+#                field_name = "url%d" % (number, )
+#                form.add_field(name=field_name, field_type="text-single", value=url["url"], label=url["description"])
+
+        # Selection of a following action
+        form.add_field(name="options", field_type="list-single", options=[do_nothing, get_content, get_content_html, search], label=action_label)
+
+        self.send_form(command.jid, form, _("Detailed page information"))
 
     def is_internal(self, command):
         """Check if a given command is internal
@@ -620,18 +1044,34 @@ Current version: %(version)s""") % {
         if form.type != u"submit":
             return
 
-        try:
+        if "action" in form:
             action = form["action"].value
-        except KeyError:
-            data = {'text': _('The form you submitted was invalid!'), 'subject': _('Invalid data')}
-            self.send_message(jid.as_unicode(), data, u"message")
-            return
+            if action == u"search":
+                self.handle_search_form(jid, form)
+            else:
+                data = {'text': _('The form you submitted was invalid!'), 'subject': _('Invalid data')}
+                self.send_message(jid.as_unicode(), data, u"message")
+        elif "options" in form:
+            option = form["options"].value
 
-        if action == u"search":
-            self.handle_search_form(jid, form)
-        else:
-            data = {'text': _('The form you submitted was invalid!'), 'subject': _('Invalid data')}
-            self.send_message(jid.as_unicode(), data, u"message")
+            # View page info
+            if option == "v":
+                command = cmd.GetPageInfo(jid.as_unicode(), form["page_name"].value, presentation="dataforms")
+                self.from_commands.put_nowait(command)
+
+            # Perform an another search
+            elif option == "s":
+                self.handle_internal_command(jid, ["searchform"])
+
+            # Revert a change
+            elif option == "r":
+                revision = int(form["revision"].value)
+
+                # We can't really revert creation of a page, right?
+                if revision == 1:
+                    return
+
+                self.handle_xmlrpc_command(jid, ["revertpage", form["page_name"].value, "%d" % (revision - 1, )])
 
 
     def handle_search_form(self, jid, form):
@@ -671,7 +1111,7 @@ Current version: %(version)s""") % {
 
         """
         if self.config.verbose:
-            msg = "Message from %s." % (message.get_from_jid().as_utf8(), )
+            msg = "Message from %s." % (message.get_from_jid().as_unicode(), )
             self.log.debug(msg)
 
         form = self.contains_form(message)
@@ -715,7 +1155,7 @@ Current version: %(version)s""") % {
             else:
                 return self.help_on(sender, command[1])
         elif command[0] == "searchform":
-            jid = sender.bare().as_utf8()
+            jid = sender.bare().as_unicode()
             resource = sender.resource
 
             # Assume that outsiders know what they are doing. Clients that don't support
@@ -789,7 +1229,7 @@ as it's received.""")
         command_class = self.xmlrpc_commands[command[0]]
 
         # Add sender's JID to the argument list
-        command.insert(1, sender.as_utf8())
+        command.insert(1, sender.as_unicode())
 
         try:
             instance = command_class.__new__(command_class)
@@ -825,7 +1265,7 @@ The call should look like:\n\n%(command)s %(params)s")
         self.log.debug("Handling unavailable presence.")
 
         jid = stanza.get_from_jid()
-        bare_jid = jid.bare().as_utf8()
+        bare_jid = jid.bare().as_unicode()
 
         # If we get presence, this contact should already be known
         if bare_jid in self.contacts:
@@ -871,7 +1311,7 @@ The call should look like:\n\n%(command)s %(params)s")
 
         priority = presence.get_priority()
         jid = presence.get_from_jid()
-        bare_jid = jid.bare().as_utf8()
+        bare_jid = jid.bare().as_unicode()
 
         if bare_jid in self.contacts:
             contact = self.contacts[bare_jid]
@@ -883,8 +1323,9 @@ The call should look like:\n\n%(command)s %(params)s")
             # Unknown resource, add it to the list
             else:
                 contact.add_resource(jid.resource, show, priority)
+
                 # Discover capabilities of the newly connected client
-                contact.service_discovery(jid)
+                self.service_discovery(jid)
 
             if self.config.verbose:
                 self.log.debug(contact)
@@ -941,12 +1382,12 @@ The call should look like:\n\n%(command)s %(params)s")
         supports = payload.xpathEval('//*[@var="jabber:x:data"]')
         if supports:
             jid = stanza.get_from_jid()
-            self.contacts[jid.bare().as_utf8()].set_supports(jid.resource, u"jabber:x:data")
+            self.contacts[jid.bare().as_unicode()].set_supports(jid.resource, u"jabber:x:data")
 
         supports = payload.xpathEval('//*[@var="jabber:x:oob"]')
         if supports:
             jid = stanza.get_from_jid()
-            self.contacts[jid.bare().as_utf8()].set_supports(jid.resource, u"jabber:x:oob")
+            self.contacts[jid.bare().as_unicode()].set_supports(jid.resource, u"jabber:x:oob")
 
 
     def send_queued_messages(self, contact, ignore_dnd=False):

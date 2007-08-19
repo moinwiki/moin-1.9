@@ -627,7 +627,9 @@ class DocEmitter:
     def attachment_emit(self, node):
         url = wikiutil.url_unquote(node.content, want_unicode=True)
         text = self.get_text(node)
-        return self.formatter.attachment_link(url, text)
+        return (self.formatter.attachment_link(1, url) +
+                self.formatter.text(text) +
+                self.formatter.attachment_link(0))
 
     def inlined_attachment_emit(self, node):
         url = wikiutil.url_unquote(node.content, want_unicode=True)
