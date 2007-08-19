@@ -614,7 +614,7 @@ class Formatter(FormatterBase):
             #self.request.log("attachment_link: url %s pagename %s filename %s" % (url, pagename, filename))
             fname = wikiutil.taintfilename(filename)
             if AttachFile.exists(self.request, pagename, fname):
-                target = AttachFile.getAttachUrl(pagename, fname, self.request)
+                target = AttachFile.getAttachUrl(pagename, fname, self.request, do='view')
                 title = "attachment:%s" % url
                 css = 'attachment'
             else:
