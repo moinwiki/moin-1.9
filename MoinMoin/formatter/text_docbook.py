@@ -395,18 +395,16 @@ class Formatter(FormatterBase):
 
 ### Attachments ######################################################
 
-    def attachment_link(self, url, text, **kw):
+    def attachment_link(self, on, url=None, **kw):
         _ = self.request.getText
         pagename, filename = AttachFile.absoluteName(url, self.page.page_name)
         fname = wikiutil.taintfilename(filename)
-        fpath = AttachFile.getFilename(self.request, pagename, fname)
         target = AttachFile.getAttachUrl(pagename, filename, self.request)
-        if not os.path.exists(fpath):
-            return self.text("[attachment:%s]" % url)
+        # we do not output a "upload link" when outputting docbook
+        if on:
+            return self.url(1, target, title="attachment:%s" % url)
         else:
-            return (self.url(1, target, title="attachment:%s" % url) +
-                    self.text(text) +
-                    self.url(0))
+            return self.url(0)
 
     def attachment_image(self, url, **kw):
         _ = self.request.getText

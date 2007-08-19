@@ -62,13 +62,14 @@ class Formatter(text_html.Formatter):
         else:
             return '<span style="background-color:#ffff11">[inline:%s %s]</span>' % (url, text)
 
-    def attachment_link(self, url, text, **kw):
+    def attachment_link(self, on, url=None, **kw):
         _ = self.request.getText
-        pagename = self.page.page_name
-        target = AttachFile.getAttachUrl(pagename, url, self.request)
-        return (self.url(1, target, title="attachment:%s" % wikiutil.quoteWikinameURL(url)) +
-                self.text(text) +
-                self.url(0))
+        if on:
+            pagename = self.page.page_name
+            target = AttachFile.getAttachUrl(pagename, url, self.request)
+            return self.url(on, target, title="attachment:%s" % wikiutil.quoteWikinameURL(url))
+        else:
+            return self.url(on)
 
     def attachment_image(self, url, **kw):
         _ = self.request.getText

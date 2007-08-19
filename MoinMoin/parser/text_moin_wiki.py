@@ -238,7 +238,9 @@ class Parser:
                     url = AttachFile.getAttachUrl(pagename, fname, self.request, escaped=1)
                     return self.formatter.rawHTML(EmbedObject.embed(EmbedObject(macro, wikiutil.escape(fname)), mt, url))
 
-        return self.formatter.attachment_link(fname, text)
+        return (self.formatter.attachment_link(1, fname) +
+                self.formatter.text(text) +
+                self.formatter.attachment_link(0))
 
     def _u_repl(self, word):
         """Handle underline."""
