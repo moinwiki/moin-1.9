@@ -488,7 +488,7 @@ class Formatter(FormatterBase):
                 wikitail, kw['anchor'] = wikitail.split('#', 1)
             wikitail = wikiutil.url_unquote(wikitail)
             try: # XXX this is the only place where we access self.page - do we need it? Crashes silently on actions!
-                pagename = wikiutil.AbsPageName(self.request, self.page.page_name, wikitail)
+                pagename = wikiutil.AbsPageName(self.page.page_name, wikitail)
             except:
                 pagename = wikitail
             return self.pagelink(on, pagename, **kw)
