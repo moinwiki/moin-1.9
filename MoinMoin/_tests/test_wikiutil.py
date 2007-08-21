@@ -752,14 +752,14 @@ class TestRelativeTools:
             yield self._check_abs_pagename, current_page, relative_page, absolute_page
 
     def _check_abs_pagename(self, current_page, relative_page, absolute_page):
-        assert absolute_page == wikiutil.AbsPageName(None, current_page, relative_page)
+        assert absolute_page == wikiutil.AbsPageName(current_page, relative_page)
 
     def test_rel_pagename(self):
         for (current_page, relative_page), absolute_page in self.tests:
             yield self._check_rel_pagename, current_page, absolute_page, relative_page
 
     def _check_rel_pagename(self, current_page, absolute_page, relative_page):
-        assert relative_page == wikiutil.RelPageName(None, current_page, absolute_page)
+        assert relative_page == wikiutil.RelPageName(current_page, absolute_page)
 
 
 coverage_modules = ['MoinMoin.wikiutil']

@@ -73,7 +73,7 @@ def execute(macro, text, args_re=re.compile(_args_re_pattern), title_re=re.compi
         this_page._macroInclude_pagelist = {}
 
     # get list of pages to include
-    inc_name = wikiutil.AbsPageName(request, this_page.page_name, args.group('name'))
+    inc_name = wikiutil.AbsPageName(this_page.page_name, args.group('name'))
     pagelist = [inc_name]
     if inc_name.startswith("^"):
         try:
