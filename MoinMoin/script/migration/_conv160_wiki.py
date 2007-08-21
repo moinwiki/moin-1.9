@@ -111,8 +111,9 @@ class Converter(Parser):
             item_name = file_name
             key = (item_type, abs_page_name, file_name)
         new_name = self.renames.get(key, item_name)
-        if new_name != item_name and abs_page_name != page_name:
-            pass # TODO we have to fix the (absolute) new_name to be a relative name (as it was before)
+        if item_type == 'PAGE' and new_name != item_name and abs_page_name != page_name:
+            # we have to fix the (absolute) new_name to be a relative name (as it was before)
+            new_name = wikiutil.RelPageName(current_page, new_name)
         return new_name
 
     def _replace_target(self, target):
