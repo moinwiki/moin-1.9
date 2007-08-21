@@ -235,11 +235,6 @@ class Converter(Parser):
         # check for image URL, and possibly return IMG tag
         # (images are always inlined, just like for other URLs)
         if wikiutil.isPicture(name):
-            if not text:
-                text = name.split('/')[-1]
-                text = ''.join(text.split('.')[:-1])
-                text = wikiutil.url_unquote(text) # maybe someone has used %20 for blanks
-                text = '|' + text
             return "{{attachment:%s%s}}" % (name, text)
 
         # inline the attachment
@@ -258,10 +253,7 @@ class Converter(Parser):
             return '%s' % self.attachment([word])
 
         if wikiutil.isPicture(word): # magic will go away in 1.6!
-            name = word.split('/')[-1]
-            name = ''.join(name.split('.')[:-1])
-            name = wikiutil.url_unquote(name) # maybe someone has used %20 for blanks
-            return '{{%s|%s}}' % (word, name) # new markup for inline images
+            return '{{%s}}' % word # new markup for inline images
         else:
             return word
 
@@ -306,7 +298,11 @@ class Converter(Parser):
             #        text = '|' + text
             #    return "[[%s:%s%s]]" % (wikiname, pagename, text)
         if scheme in self.attachment_schemas:
-            return '%s' % self.attachment(words)
+            m = self.attachment(words)
+            if m.startswith('{{') and m.endswith('}}'):
+                # with url_bracket markup, 1.5.8 parser does not embed, but link!
+                m = '[[%s]]' % m[2:-2]
+            return m
 
         target, desc = (words + ['', ''])[:2]
         if wikiutil.isPicture(desc) and re.match(self.url_rule, desc):

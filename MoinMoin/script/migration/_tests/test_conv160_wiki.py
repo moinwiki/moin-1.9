@@ -40,9 +40,13 @@ class TestWikiConversion:
             # FAILING tests:
             #('[wiki:/OtherPage]', rename_some_page, '[[/OtherPage]]'),
             #('[wiki:/OtherPage other page]', rename_some_page, '[wiki:/OtherPage other page]'),
-            #('[attachment:My%20Attachment.jpg:it works]', {}, '[[attachment:My Attachment.jpg|it works]]'),
             #('[wiki:LinuxWiki: LinuxWiki.de]', {}, '[wiki:LinuxWiki: LinuxWiki.de]'),
+
+            # does not work in 1.5.8, no need to convert:
             #('[:MeatBall:CleanLinking meatball-wiki: clean linking]', {}, '[:MeatBall:CleanLinking meatball-wiki: clean linking]'),
+
+            # does not work in 1.5.8, no need to convert:
+            #('[attachment:some_page.txt attachment:some_page.png]', rename_some_page, '[[attachment:some_page.txt|{{attachment:some_page.png}}]]'),
 
             # ambiguity!!! can be resolved with some interwiki map lookup
             # and transformed to wiki:MoinMoin:FrontPage if MoinMoin is in
@@ -64,9 +68,12 @@ class TestWikiConversion:
             ('http://some_server/some_page', rename_some_page, 'http://some_server/some_page'), # external link
             ('[http://some_server/some_page]', rename_some_page, '[[http://some_server/some_page]]'), # external link
             ('[#some_page]', rename_some_page, '[[#some_page]]'), # link to anchor that has same name
-            ('[attachment:some_page.png]', rename_some_page, '{{attachment:some_page.png|some_page}}'), # att, not page
-            ('[attachment:some_page.png test picture]', rename_some_page, '{{attachment:some_page.png|test picture}}'), # att, not page
-            #('[attachment:some_page.txt attachment:some_page.png]', rename_some_page, '[[attachment:some_page.txt|{{attachment:some_page.png}}]]'),
+            ('[attachment:some_page.png]', rename_some_page, '[[attachment:some_page.png]]'), # att, not page
+            ('[attachment:some_page.png test picture]', rename_some_page, '[[attachment:some_page.png|test picture]]'), # att, not page
+            # url unquote stuff (%20 was popular for space)
+            ('attachment:My%20Attachment.jpg', {}, '{{attachment:My Attachment.jpg}}'), # embed!
+            ('[attachment:My%20Attachment.jpg]', {}, '[[attachment:My Attachment.jpg]]'), # link!
+            ('[attachment:My%20Attachment.jpg it works]', {}, '[[attachment:My Attachment.jpg|it works]]'),
 
             # page rename changes result
             ('["some_page"]', rename_some_page, '[[some page]]'),
@@ -100,9 +107,9 @@ class TestWikiConversion:
             ('attachment:OtherPage/keep%20blank', rename_some_file, '[[attachment:OtherPage/keep blank]]'),
 
             # embed images
-            ('http://server/image.png', {}, '{{http://server/image.png|image}}'),
-            ('attachment:image.gif', {}, '{{attachment:image.gif|image}}'),
-            ('inline:image.jpg', {}, '{{attachment:image.jpg|image}}'), # inline is now implied by {{...}}
+            ('http://server/image.png', {}, '{{http://server/image.png}}'),
+            ('attachment:image.gif', {}, '{{attachment:image.gif}}'),
+            ('inline:image.jpg', {}, '{{attachment:image.jpg}}'), # inline is now implied by {{...}}
             ('drawing:image', {}, '{{drawing:image}}'),
 
             # macros
