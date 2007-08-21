@@ -61,7 +61,6 @@ class Converter(Parser):
         self.formatting_rules = self.formatting_rules % {'macronames': u'|'.join(macro.getNames(self.request.cfg))}
 
     # no change
-
     def return_word(self, word):
         return word
     _emph_repl = return_word
@@ -104,7 +103,7 @@ class Converter(Parser):
         """
         current_page = self.pagename
         item_type, page_name, file_name = (key + (None, ))[:3]
-        abs_page_name = wikiutil.AbsPageName(self.request, current_page, page_name)
+        abs_page_name = wikiutil.AbsPageName(current_page, page_name)
         if item_type == 'PAGE':
             item_name = page_name
             key = (item_type, abs_page_name)

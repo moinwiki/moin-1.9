@@ -380,7 +380,7 @@ class MoinTranslator(html4css1.HTMLTranslator):
                 anchor = ''
                 if '#' in refuri:
                     pagename, anchor = refuri.split('#', 1)
-                page = Page(self.request, wikiutil.AbsPageName(self.request, self.formatter.page.page_name, pagename))
+                page = Page(self.request, wikiutil.AbsPageName(self.formatter.page.page_name, pagename))
                 node['refuri'] = page.url(self.request, anchor=anchor)
                 if not page.exists():
                     node['classes'].append('nonexistent')
