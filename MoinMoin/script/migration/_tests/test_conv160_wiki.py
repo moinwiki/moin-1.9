@@ -24,7 +24,7 @@ import py
 from MoinMoin.script.migration._conv160_wiki import convert_wiki
 
 class TestWikiConversion:
-    """ test the wiki markup conversion for 1.6.0 """
+    """ test the wiki markup conversion 1.5.8 -> 1.6.0 """
     def test_absolute(self):
         request = self.request
         pagename = 'TestPage'
@@ -40,7 +40,6 @@ class TestWikiConversion:
             # FAILING tests:
             #('[wiki:/OtherPage]', rename_some_page, '[[/OtherPage]]'),
             #('[wiki:/OtherPage other page]', rename_some_page, '[wiki:/OtherPage other page]'),
-            #('[wiki:LinuxWiki: LinuxWiki.de]', {}, '[wiki:LinuxWiki: LinuxWiki.de]'),
 
             # does not work in 1.5.8, no need to convert:
             #('[:MeatBall:CleanLinking meatball-wiki: clean linking]', {}, '[:MeatBall:CleanLinking meatball-wiki: clean linking]'),
@@ -48,16 +47,14 @@ class TestWikiConversion:
             # does not work in 1.5.8, no need to convert:
             #('[attachment:some_page.txt attachment:some_page.png]', rename_some_page, '[[attachment:some_page.txt|{{attachment:some_page.png}}]]'),
 
-            # ambiguity!!! can be resolved with some interwiki map lookup
-            # and transformed to wiki:MoinMoin:FrontPage if MoinMoin is in
-            # interwiki map, but no page MoinMoin exists.
-            #('[wiki:MacroMarket/EmbedObject EO]', {}, '["MacroMarket/EmbedObject" EO]'),
-            ('[wiki:MoinMoin/FrontPage]', {}, '[[MoinMoin:FrontPage]]'),
-
             # "nothing changed" checks (except markup)
             ('', {}, ''),
             ('CamelCase', {}, 'CamelCase'),
             ('MoinMaster:CamelCase', {}, 'MoinMaster:CamelCase'),
+            ('[wiki:LinuxWiki: LinuxWiki.de]', {}, '[[LinuxWiki:|LinuxWiki.de]]'),
+            # does not work in 1.5.8, no need to convert:
+            #('[wiki:MacroMarket/EmbedObject EO]', {}, '["MacroMarket/EmbedObject" EO]'),
+            ('[wiki:MoinMoin/FrontPage]', {}, '[[MoinMoin:FrontPage]]'),
             ('some_text', {}, 'some_text'),
             ('["some_text"]', {}, '[[some_text]]'),
             ('some_page', rename_some_page, 'some_page'), # not a link
