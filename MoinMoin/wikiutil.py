@@ -851,6 +851,39 @@ def AbsPageName(request, context, pagename):
             pagename = pagename[CHILD_PREFIX_LEN:]
     return pagename
 
+def RelPageName(request, context, pagename):
+    """
+    Return the relative pagename for some context.
+
+    @param context: name of the page where "pagename" appears on
+    @param pagename: the absolute page name
+    @rtype: string
+    @return: the relative page name
+    """
+    if context == '':
+        # special case, context is some "virtual root" page with name == ''
+        # every page is a subpage of this virtual root
+        return CHILD_PREFIX + pagename
+    elif pagename.startswith(context + CHILD_PREFIX):
+        # simple child
+        return pagename[len(context):]
+    else:
+        # some kind of sister/aunt
+        context_frags = context.split('/')   # A, B, C, D, E
+        pagename_frags = pagename.split('/') # A, B, C, F
+        # first throw away common parents:
+        common = 0
+        for cf, pf in zip(context_frags, pagename_frags):
+            if cf == pf:
+                common += 1
+            else:
+                break
+        context_frags = context_frags[common:] # D, E
+        pagename_frags = pagename_frags[common:] # F
+        go_up = len(context_frags)
+        return PARENT_PREFIX * go_up + '/'.join(pagename_frags)
+
+
 def pagelinkmarkup(pagename):
     """ return markup that can be used as link to page <pagename> """
     from MoinMoin.parser.text_moin_wiki import Parser
