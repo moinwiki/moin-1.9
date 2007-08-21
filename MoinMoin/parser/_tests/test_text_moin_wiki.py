@@ -532,11 +532,14 @@ class TestLinkingMarkup(ParserTestCase):
     text = 'AAA %s AAA'
     needle = re.compile(text % r'(.+)')
     _tests = (
-        # test,                       expected
-        ('[[something]]',             '<a class="nonexistent" href="./something">something</a>'),
-        ('MoinMoin:something',        '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/something" title="MoinMoin">something</a>'),
-        ('[[MoinMoin:with space]]',   '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/with%20space" title="MoinMoin">with space</a>'),
-        ('[[RFC:1 2 3]]',             '<a class="interwiki" href="http://www.ietf.org/rfc/rfc1%202%203" title="RFC">1 2 3</a>'),
+        # test,           expected
+        ('[[something]]', '<a class="nonexistent" href="./something">something</a>'),
+        ('[[something|some text]]', '<a class="nonexistent" href="./something">some text</a>'),
+        ('MoinMoin:something', '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/something" title="MoinMoin">something</a>'),
+        ('[[MoinMoin:something|some text]]', '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/something" title="MoinMoin">some text</a>'),
+        ('[[MoinMoin:with space]]', '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/with%20space" title="MoinMoin">with space</a>'),
+        ('[[MoinMoin:with space|some text]]', '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/with%20space" title="MoinMoin">some text</a>'),
+        ('[[http://google.com/|google]]', '<a class="http" href="http://google.com/">google</a>'),
         )
 
     def testTextFormating(self):
