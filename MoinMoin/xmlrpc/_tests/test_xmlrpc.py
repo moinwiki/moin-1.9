@@ -6,9 +6,10 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+from xmlrpclib import Fault
+
 from MoinMoin.user import User
 from MoinMoin.xmlrpc import XmlRpcBase
-from xmlrpclib import Fault
 
 
 def test_fault_serialization(request):
@@ -26,7 +27,7 @@ def test_fault_serialization(request):
     8b7d6d70fc95 for details"""
 
     result = xmlrpc.xmlrpc_system_multicall(args)
-    assert type(result[0]) == dict
+    assert type(result[0]) is dict
     assert result[0].has_key("faultCode") and result[0].has_key("faultString")
 
 def test_generate_auth_token(request):
@@ -37,7 +38,7 @@ def test_generate_auth_token(request):
     token = xmlrpc._generate_auth_token(usr)
 
     print "Token should be a string or unicode object and have langth of 32 chars!"
-    assert type(token) == str or type(token) == unicode
+    assert type(token) is str or type(token) is unicode
     assert len(token) == 32
 
 def test_getAuthToken(request):
