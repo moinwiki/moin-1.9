@@ -155,8 +155,6 @@ class PageEditor(Page):
         request = self.request
         form = request.form
         _ = self._
-        request.disableHttpCaching(level=2)
-        request.emit_http_headers()
 
         raw_body = ''
         msg = None
@@ -198,6 +196,10 @@ class PageEditor(Page):
         if msg:
             self.send_page(msg=msg)
             return
+
+        # Emmit http_headers after checks (send_page)
+        request.disableHttpCaching(level=2)
+        request.emit_http_headers()
 
         # check if we want to load a draft
         use_draft = None
