@@ -71,19 +71,23 @@ class Parser:
 
     word_rule = ur'''
         (?:
-         (?<![%(u)s%(l)s])  # require anything not upper/lower before
+         (?<![%(u)s%(l)s/])  # require anything not upper/lower/slash before
          |
          ^  # ... or beginning of line
         )
         (?P<word_bang>\!)?  # configurable: avoid getting CamelCase rendered as link
-        (?P<word_parent_prefix>%(parent)s)?  # there might be ../ parent prefix    XXX TODO: there might be even multiple!!
         (?P<word_name>
+         (?:
+          (?P<word_parent_prefix>%(parent)s)*  # there might be either ../ parent prefix(es)
+          |
+          ((?<!%(child)s)%(child)s)?  # or maybe a single / child prefix (but not if we already had it before)
+         )
          (
-          (%(child)s)?  # there might be / child prefix
+          ((?<!%(child)s)%(child)s)?  # there might be / child prefix (but not if we already had it before)
           (?:[%(u)s][%(l)s]+){2,}  # at least 2 upper>lower transitions make CamelCase
          )+  # we can have MainPage/SubPage/SubSubPage ...
         )
-        (?![%(u)s%(l)s]+)  # require anything NOT upper/lower following
+        (?![%(u)s%(l)s/])  # require anything not upper/lower/slash following
     ''' % {
         'u': config.chars_upper,
         'l': config.chars_lower,
@@ -542,13 +546,6 @@ class Parser:
         name = groups.get('word_name')
         parent_prefix = groups.get('word_parent_prefix')
         current_page = self.formatter.page.page_name
-        # check for parent links
-        # !!! should use wikiutil.AbsPageName here, but setting `text`
-        # correctly prevents us from doing this for now
-        #if parent_prefix:
-        #    name = '/'.join([x for x in current_page.split('/')[:-1] + [name] if x])
-        #elif name.startswith(self.CHILD_PREFIX):
-        #    name = current_page + '/' + name[self.CHILD_PREFIX_LEN:]
         name = wikiutil.AbsPageName(self.request, current_page, name)
         # if a simple, self-referencing link, emit it as plain text
         if name == current_page:
