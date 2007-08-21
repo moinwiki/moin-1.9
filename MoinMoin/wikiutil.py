@@ -830,7 +830,7 @@ def getInterwikiHomePage(request, username=None):
     return homewiki, username
 
 
-def AbsPageName(request, context, pagename):
+def AbsPageName(context, pagename):
     """
     Return the absolute pagename for a (possibly) relative pagename.
 
@@ -851,7 +851,7 @@ def AbsPageName(request, context, pagename):
             pagename = pagename[CHILD_PREFIX_LEN:]
     return pagename
 
-def RelPageName(request, context, pagename):
+def RelPageName(context, pagename):
     """
     Return the relative pagename for some context.
 

@@ -47,7 +47,7 @@ class Converter(Parser):
         """
         current_page = self.pagename
         item_type, page_name, file_name = (key + (None, ))[:3]
-        abs_page_name = wikiutil.AbsPageName(self.request, current_page, page_name)
+        abs_page_name = wikiutil.AbsPageName(current_page, page_name)
         if item_type == 'PAGE':
             item_name = page_name
             key = (item_type, abs_page_name)
