@@ -38,7 +38,6 @@ class TestWikiConversion:
 
         tests = [
             # FAILING tests:
-
             # does not work in 1.5.8, no need to convert:
             #('[:MeatBall:CleanLinking meatball-wiki: clean linking]', {}, '[:MeatBall:CleanLinking meatball-wiki: clean linking]'),
 
@@ -128,8 +127,7 @@ class TestWikiConversion:
             ('["../sister_norename"]', rename_some_page, '[[../sister_norename]]'),
 
             # renames
-            # FAILS, see TODO in _replace:
-            #('["../sister"]', rename_some_page, '["../renamed_sister"]'),
+            ('["../sister"]', rename_some_page, '[[../renamed_sister]]'),
         ]
         for data, renames, expected in tests:
             assert convert_wiki(request, pagename, data, renames) == expected
@@ -145,8 +143,7 @@ class TestWikiConversion:
             ('["/subpage_norename"]', rename_some_page, '[[/subpage_norename]]'),
 
             # renames
-            # FAILS, see TODO in _replace:
-            #('["/subpage"]', rename_some_page, '["/renamed_subpage"]'),
+            ('["/subpage"]', rename_some_page, '[[/renamed_subpage]]'),
         ]
         for data, renames, expected in tests:
             assert convert_wiki(request, pagename, data, renames) == expected
