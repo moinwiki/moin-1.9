@@ -733,4 +733,25 @@ class TestAnchorNames:
         encoded = wikiutil.anchor_name_from_text(text)
         assert expected == encoded
 
+class TestRelativeTools:
+    def test_abs_pagename(self):
+        tests = [
+            # test                      expected output
+            # CHILD_PREFIX
+            (('MainPage', '/SubPage1'), 'MainPage/SubPage1'),
+            (('MainPage', '/SubPage1/SubPage2'), 'MainPage/SubPage1/SubPage2'),
+            (('MainPage/SubPage1', '/SubPage2/SubPage3'), 'MainPage/SubPage1/SubPage2/SubPage3'),
+            (('', '/OtherMainPage'), 'OtherMainPage'), # strange
+            # PARENT_PREFIX
+            (('MainPage/SubPage', '../SisterPage'), 'MainPage/SisterPage'),
+            (('MainPage/SubPage1/SubPage2', '../SisterPage'), 'MainPage/SubPage1/SisterPage'),
+            (('MainPage/SubPage1/SubPage2', '../../SisterPage'), 'MainPage/SisterPage'),
+            (('MainPage', '../SisterPage'), 'SisterPage'), # strange
+        ]
+        for test, expected in tests:
+            yield self._check_abs_pagename, test, expected
+
+    def _check_abs_pagename(self, test, expected):
+        assert expected == wikiutil.AbsPageName(None, *test)
+
 coverage_modules = ['MoinMoin.wikiutil']
