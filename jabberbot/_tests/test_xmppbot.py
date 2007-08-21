@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import py.test
+import py
 from Queue import Queue
 
 try:
