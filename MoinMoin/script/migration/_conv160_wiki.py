@@ -185,8 +185,11 @@ class Converter(Parser):
         scheme, url = url.split(':', 1)
         wikiname, pagename = wikiutil.split_wiki(url)
         if (url.startswith(wikiutil.CHILD_PREFIX) or # fancy link to subpage [wiki:/SubPage text]
-            wikiname in ('Self', self.request.cfg.interwikiname, '') or # [wiki:Self:LocalPage text] or [:LocalPage:text]
             Page(self.request, url).exists()): # fancy link to local page [wiki:LocalPage text]
+            pagename = wikiutil.url_unquote(url)
+            pagename = self._replace_target(pagename)
+            return '[[%s%s]]' % (pagename, text)
+        if wikiname in ('Self', self.request.cfg.interwikiname, ''): # [wiki:Self:LocalPage text] or [:LocalPage:text]
             pagename = wikiutil.url_unquote(pagename)
             pagename = self._replace_target(pagename)
             return '[[%s%s]]' % (pagename, text)

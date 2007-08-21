@@ -38,8 +38,6 @@ class TestWikiConversion:
 
         tests = [
             # FAILING tests:
-            #('[wiki:/OtherPage]', rename_some_page, '[[/OtherPage]]'),
-            #('[wiki:/OtherPage other page]', rename_some_page, '[wiki:/OtherPage other page]'),
 
             # does not work in 1.5.8, no need to convert:
             #('[:MeatBall:CleanLinking meatball-wiki: clean linking]', {}, '[:MeatBall:CleanLinking meatball-wiki: clean linking]'),
@@ -55,6 +53,8 @@ class TestWikiConversion:
             # does not work in 1.5.8, no need to convert:
             #('[wiki:MacroMarket/EmbedObject EO]', {}, '["MacroMarket/EmbedObject" EO]'),
             ('[wiki:MoinMoin/FrontPage]', {}, '[[MoinMoin:FrontPage]]'),
+            ('[wiki:/OtherPage]', rename_some_page, '[[/OtherPage]]'),
+            ('[wiki:/OtherPage other page]', rename_some_page, '[[/OtherPage|other page]]'),
             ('some_text', {}, 'some_text'),
             ('["some_text"]', {}, '[[some_text]]'),
             ('some_page', rename_some_page, 'some_page'), # not a link
