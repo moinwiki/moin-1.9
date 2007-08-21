@@ -847,7 +847,7 @@ def AbsPageName(request, context, pagename):
         while context and pagename.startswith(PARENT_PREFIX):
             context = '/'.join(context.split('/')[:-1])
             pagename = pagename[PARENT_PREFIX_LEN:]
-        pagename = '/'.join(filter(None, [ context, pagename, ]))
+        pagename = '/'.join(filter(None, [context, pagename, ]))
     elif pagename.startswith(CHILD_PREFIX):
         if context:
             pagename = context + '/' + pagename[CHILD_PREFIX_LEN:]
