@@ -5,6 +5,8 @@
     @copyright: 2007 by Karol Nowak <grywacz@gmail.com>
     @license: GNU GPL, see COPYING for details.
 """
+
+import py
 from Queue import Queue
 
 try:
