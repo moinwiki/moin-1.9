@@ -844,9 +844,15 @@ def AbsPageName(request, context, pagename):
     @return: the absolute page name
     """
     if pagename.startswith(PARENT_PREFIX):
-        pagename = '/'.join([x for x in context.split('/')[:-1] + [pagename[PARENT_PREFIX_LEN:]] if x])
+        while context and pagename.startswith(PARENT_PREFIX):
+            context = '/'.join(context.split('/')[:-1])
+            pagename = pagename[PARENT_PREFIX_LEN:]
+        pagename = '/'.join(filter(None, [ context, pagename, ]))
     elif pagename.startswith(CHILD_PREFIX):
-        pagename = context + '/' + pagename[CHILD_PREFIX_LEN:]
+        if context:
+            pagename = context + '/' + pagename[CHILD_PREFIX_LEN:]
+        else:
+            pagename = pagename[CHILD_PREFIX_LEN:]
     return pagename
 
 def pagelinkmarkup(pagename):
