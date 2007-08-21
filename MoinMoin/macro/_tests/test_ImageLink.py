@@ -7,7 +7,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 import os
-from MoinMoin import macro
+from MoinMoin import macro, wikiutil
 from MoinMoin.logfile import eventlog
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
@@ -58,11 +58,12 @@ class TestHits:
         """ macro ImageLink test: 'no args for ImageLink (ImageLink is executed on FrontPage) """
         #self._createTestPage('This is an example to test a macro')
         result = self._test_macro('ImageLink', '')
-        expected = '<div class="message">Not enough arguments to ImageLink macro! e.g. [[ImageLink(example.png, WikiName, width=200)]].</div>'
+        expected = '<div class="message">%s</div>' % wikiutil.escape(
+                'Not enough arguments to ImageLink macro! e.g. <<ImageLink(example.png, WikiName, width=200)>>.')
         assert result == expected
 
     def testImageLinkTwoParamsNoKeyword(self):
-        """ macro ImageLink test: [[ImageLink(http://static.wikiwikiweb.de/logos/moindude.png, FrontPage)]] """
+        """ macro ImageLink test: <<ImageLink(http://static.wikiwikiweb.de/logos/moindude.png, FrontPage)>> """
         self.shouldDeleteTestPage = False
 
         result = self._test_macro('ImageLink', 'http://static.wikiwikiweb.de/logos/moindude.png, FrontPage')
@@ -70,7 +71,7 @@ class TestHits:
         assert result == expected
 
     def testImageLinkTwoParamsOneKeyword(self):
-        """ macro ImageLink test: [[ImageLink(http://static.wikiwikiweb.de/logos/moindude.png, alt=The old dude, FrontPage)]]
+        """ macro ImageLink test: <<ImageLink(http://static.wikiwikiweb.de/logos/moindude.png, alt=The old dude, FrontPage)>>
         order of keywords to parameter list is independent
         """
         self.shouldDeleteTestPage = True

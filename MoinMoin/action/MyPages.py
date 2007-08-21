@@ -24,7 +24,7 @@ def execute(pagename, request):
     userhomewiki = request.cfg.user_homewiki
     if userhomewiki != 'Self' and userhomewiki != request.cfg.interwikiname:
         interwiki = wikiutil.getInterwikiHomePage(request, username=username)
-        wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(request, '%s:"%s"' % interwiki)
+        wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_interwiki(request, *interwiki)
         wikiurl = wikiutil.mapURL(request, wikiurl)
         homepageurl = wikiutil.join_wiki(wikiurl, wikitail)
         request.http_redirect('%s?action=MyPages' % homepageurl)
@@ -47,9 +47,9 @@ exists and has the appropriate members in it. Use HomepageGroupsTemplate for cre
 the group pages.
 
 ||'''Add a new personal page:'''||'''Related access control list group:'''||
-||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||["%(username)s/ReadWriteGroup"]||
-||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||["%(username)s/ReadGroup"]||
-||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%(username)s only||
+||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||["%(username)s/ReadWriteGroup"]||
+||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||["%(username)s/ReadGroup"]||
+||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%(username)s only||
 
 """, formatted=False)
     pagecontent = pagecontent % locals()

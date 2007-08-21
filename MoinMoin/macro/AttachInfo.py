@@ -3,7 +3,7 @@
 
     A macro to produce information about attached pages
 
-    Usage: [[AttachInfo]]
+    Usage: <<AttachInfo>>
 
     @copyright: 2004 Jacob Cohen, Nigel Metheringham
     @license: GNU GPL, see COPYING for details
