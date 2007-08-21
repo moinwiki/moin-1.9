@@ -546,7 +546,7 @@ class Parser:
         name = groups.get('word_name')
         parent_prefix = groups.get('word_parent_prefix')
         current_page = self.formatter.page.page_name
-        name = wikiutil.AbsPageName(self.request, current_page, name)
+        name = wikiutil.AbsPageName(current_page, name)
         # if a simple, self-referencing link, emit it as plain text
         if name == current_page:
             return self.formatter.text(orig_word)
