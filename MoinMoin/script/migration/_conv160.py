@@ -404,7 +404,9 @@ class DataConverter(object):
         self.ddata = dest_data_dir
         self.pages = {}
         self.users = {}
+        self.complete = {}
         self.renames = {}
+        self.complete_fname = opj(self.sdata, 'complete.txt')
         self.rename_fname1 = opj(self.sdata, 'rename1.txt')
         self.rename_fname2 = opj(self.sdata, 'rename2.txt')
 
@@ -418,6 +420,7 @@ class DataConverter(object):
             p.read()
             if not p.revisions:
                 continue # we don't care for pages with no revisions (trash)
+            self.complete[('PAGE', pn)] = None
             if "_" in pn:
                 # log all pagenames with underscores
                 self.renames[('PAGE', pn)] = None
@@ -431,44 +434,47 @@ class DataConverter(object):
                     else:
                         if ' ' in fn_str or '%' in fn_str: # files with blanks need quoting
                             log = True
+                    self.complete[('FILE', pn, fn)] = None
                     if log:
                         # log all strange attachment filenames
                         fn_str = fn.encode('utf-8')
                         self.renames[('FILE', pn, fn)] = None
-        self.save_renames()
+        self.save_list(self.complete_fname, self.complete)
+        self.save_list(self.rename_fname1, self.renames)
 
-    RENAMES_FIELDSEP = u'|' # in case | makes trouble, one can use \t tab char
+    LIST_FIELDSEP = u'|' # in case | makes trouble, one can use \t tab char
 
-    def save_renames(self):
-        f = codecs.open(self.rename_fname1, 'w', 'utf-8')
-        for k in self.renames:
+    def save_list(self, fname, what):
+        f = codecs.open(fname, 'w', 'utf-8')
+        for k in what:
             rtype, pn, fn = (k + (None, ))[:3]
             if rtype == 'PAGE':
                 line = (rtype, pn, pn)
             elif rtype == 'FILE':
                 line = (rtype, pn, fn, fn)
-            line = self.RENAMES_FIELDSEP.join(line)
+            line = self.LIST_FIELDSEP.join(line)
             f.write(line + u'\n')
         f.close()
 
-    def load_renames(self):
-        f = codecs.open(self.rename_fname2, 'r', 'utf-8')
+    def load_list(self, fname, what):
+        f = codecs.open(fname, 'r', 'utf-8')
         for line in f:
             line = line.rstrip()
             if not line:
                 continue
-            t = line.split(self.RENAMES_FIELDSEP)
+            t = line.split(self.LIST_FIELDSEP)
             rtype, p1, p2, p3 = (t + [None]*3)[:4]
             if rtype == u'PAGE':
-                self.renames[(str(rtype), p1)] = p2
+                what[(str(rtype), p1)] = p2
             elif rtype == u'FILE':
-                self.renames[(str(rtype), p1, p2)] = p3
+                what[(str(rtype), p1, p2)] = p3
         f.close()
 
     def pass2(self):
         """ Second, read the (user edited) rename list and do the renamings everywhere. """
         self.read_src()
-        self.load_renames()
+        #self.load_list(self.complete_fname, self.complete)
+        self.load_list(self.rename_fname2, self.renames)
         self.write_dest()
 
     def read_src(self):

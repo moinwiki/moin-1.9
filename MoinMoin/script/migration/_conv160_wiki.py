@@ -105,15 +105,34 @@ class Converter(Parser):
         item_type, page_name, file_name = (key + (None, ))[:3]
         abs_page_name = wikiutil.AbsPageName(current_page, page_name)
         if item_type == 'PAGE':
-            item_name = page_name
             key = (item_type, abs_page_name)
+            new_name = self.renames.get(key)
+            if new_name is None:
+                # we don't have an entry in rename map - apply the same magic
+                # to the page name as 1.5 did (" " -> "_") and try again:
+                abs_magic_name = abs_page_name.replace(u' ', u'_')
+                key = (item_type, abs_magic_name)
+                new_name = self.renames.get(key)
+                if new_name is None:
+                    # we didn't find it under the magic name either -
+                    # that means we do not rename it!
+                    new_name = page_name
+            if new_name != page_name and abs_page_name != page_name:
+                # we have to fix the (absolute) new_name to be a relative name (as it was before)
+                new_name = wikiutil.RelPageName(current_page, new_name)
         elif item_type == 'FILE':
-            item_name = file_name
             key = (item_type, abs_page_name, file_name)
-        new_name = self.renames.get(key, item_name)
-        if item_type == 'PAGE' and new_name != item_name and abs_page_name != page_name:
-            # we have to fix the (absolute) new_name to be a relative name (as it was before)
-            new_name = wikiutil.RelPageName(current_page, new_name)
+            new_name = self.renames.get(key)
+            if new_name is None:
+                # we don't have an entry in rename map - apply the same magic
+                # to the page name as 1.5 did (" " -> "_") and try again:
+                abs_magic_name = abs_page_name.replace(u' ', u'_')
+                key = (item_type, abs_magic_name, file_name)
+                new_name = self.renames.get(key)
+                if new_name is None:
+                    # we didn't find it under the magic name either -
+                    # that means we do not rename it!
+                    new_name = file_name
         return new_name
 
     def _replace_target(self, target):
