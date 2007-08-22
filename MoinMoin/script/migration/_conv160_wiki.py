@@ -379,8 +379,8 @@ class Converter(Parser):
                 'word_rule': self.word_rule,
                 'rules': rules,
             }
-        #pre_rules = self.pre_formatting_rules.replace('\n', '|')
-        #pre_scan_re = re.compile(pre_rules, re.UNICODE)
+        pre_rules = r'''(?P<pre>\}\}\})'''
+        pre_scan_re = re.compile(pre_rules, re.UNICODE)
         scan_re = re.compile(rules, re.UNICODE)
         eol_re = re.compile(r'\r?\n', re.UNICODE)
 
