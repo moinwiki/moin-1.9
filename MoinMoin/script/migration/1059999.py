@@ -14,12 +14,17 @@ from _conv160 import DataConverter
 def execute(script, data_dir, rev):
     rename1_map = os.path.join(data_dir, 'rename1.txt')
     rename2_map = os.path.join(data_dir, 'rename2.txt')
+    fieldsep = DataConverter.LIST_FIELDSEP
+    if fieldsep == u'\t':
+        fieldsep = u'TAB'
     if not os.path.exists(rename2_map):
         print "You must first edit %s." % rename1_map
         print "For editing it, please use an editor that is able to edit UTF-8 encoded files."
-        print "Carefully edit - the fields are separated by a %r char, do not change this!" % DataConverter.RENAMES_FIELDSEP
-        print "Fields in this file are: TYPE OLDNAME NEWNAME"
-        print "You may ONLY edit the rightmost field (NEWNAME - in case you want to rename the page or file)."
+        print "Carefully edit - the fields are separated by a %s char, do not change this!" % fieldsep
+        print "Entries in this file look like:"
+        print "PAGE OLDPAGENAME NEWPAGENAME"
+        print "FILE OLDPAGENAME OLDFILENAME NEWFILENAME"
+        print "You may ONLY edit the rightmost field (the new name - in case you want to rename the page or file)."
         print
         print "After you have finished editing, rename the file to %s and re-issue the moin migrate command." % rename2_map
         return None # terminate here
