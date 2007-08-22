@@ -115,13 +115,13 @@ class RenamePage(ActionBase):
     <tr>
         <td class="label"><label>%(newname_label)s</label></td>
         <td class="content">
-            <input type="text" name="newpagename" value="%(pagename)s">
+            <input type="text" name="newpagename" value="%(pagename)s" size="80">
         </td>
     </tr>
     <tr>
         <td class="label"><label>%(comment_label)s</label></td>
         <td class="content">
-            <input type="text" name="comment" maxlength="200">
+            <input type="text" name="comment" size="80" maxlength="200">
         </td>
     </tr>
     <tr>
@@ -145,13 +145,13 @@ class RenamePage(ActionBase):
     <tr>
         <td class="label"><label>%(newname_label)s</label></td>
         <td class="content">
-            <input type="text" name="newpagename" value="%(pagename)s">
+            <input type="text" name="newpagename" value="%(pagename)s" size="80">
         </td>
     </tr>
     <tr>
         <td class="label"><label>%(comment_label)s</label></td>
         <td class="content">
-            <input type="text" name="comment" maxlength="200">
+            <input type="text" name="comment" size="80" maxlength="200">
         </td>
     </tr>
     <tr>
