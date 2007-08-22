@@ -58,6 +58,7 @@
 """
 
 import os.path
+import re
 import codecs, urllib, glob
 
 from MoinMoin import config, wikiutil
@@ -88,30 +89,36 @@ class EventLog:
     def read(self):
         """ read complete event-log from disk """
         data = []
-        f = file(self.fname, 'r')
-        for line in f:
-            line = line.replace('\r', '').replace('\n', '')
-            if not line.strip(): # skip empty lines
-                continue
-            fields = line.split('\t')
-            timestamp, action, kvpairs = fields
-            timestamp = int(timestamp)
-            kvdict = wikiutil.parseQueryString(kvpairs)
-            data.append((timestamp, action, kvdict))
+        try:
+            f = file(self.fname, 'r')
+            for line in f:
+                line = line.replace('\r', '').replace('\n', '')
+                if not line.strip(): # skip empty lines
+                    continue
+                fields = line.split('\t')
+                timestamp, action, kvpairs = fields
+                timestamp = int(timestamp)
+                kvdict = wikiutil.parseQueryString(kvpairs)
+                data.append((timestamp, action, kvdict))
+            f.close()
+        except IOError, err:
+            # no event-log
+            pass
         self.data = data
 
     def write(self, fname):
         """ write complete event-log to disk """
-        f = file(fname, 'w')
-        for timestamp, action, kvdict in self.data:
-            pagename = kvdict.get('pagename')
-            if pagename and ('PAGE', pagename) in self.renames:
-                kvdict['pagename'] = self.renames[('PAGE', pagename)]
-            kvpairs = wikiutil.makeQueryString(kvdict, want_unicode=False)
-            fields = str(timestamp), action, kvpairs
-            line = '\t'.join(fields) + '\n'
-            f.write(line)
-        f.close()
+        if self.data:
+            f = file(fname, 'w')
+            for timestamp, action, kvdict in self.data:
+                pagename = kvdict.get('pagename')
+                if pagename and ('PAGE', pagename) in self.renames:
+                    kvdict['pagename'] = self.renames[('PAGE', pagename)]
+                kvpairs = wikiutil.makeQueryString(kvdict, want_unicode=False)
+                fields = str(timestamp), action, kvpairs
+                line = '\t'.join(fields) + '\n'
+                f.write(line)
+            f.close()
 
     def copy(self, destfname, renames):
         self.renames = renames
@@ -129,43 +136,49 @@ class EditLog:
     def read(self):
         """ read complete edit-log from disk """
         data = {}
-        f = file(self.fname, 'r')
-        for line in f:
-            line = line.replace('\r', '').replace('\n', '')
-            if not line.strip(): # skip empty lines
-                continue
-            fields = line.split('\t') + [''] * 9
-            timestamp, rev, action, pagename, ip, hostname, userid, extra, comment = fields[:9]
-            timestamp = int(timestamp)
-            rev = int(rev)
-            pagename = wikiutil.unquoteWikiname(pagename)
-            data[(timestamp, rev, pagename)] = (timestamp, rev, action, pagename, ip, hostname, userid, extra, comment)
+        try:
+            f = file(self.fname, 'r')
+            for line in f:
+                line = line.replace('\r', '').replace('\n', '')
+                if not line.strip(): # skip empty lines
+                    continue
+                fields = line.split('\t') + [''] * 9
+                timestamp, rev, action, pagename, ip, hostname, userid, extra, comment = fields[:9]
+                timestamp = int(timestamp)
+                rev = int(rev)
+                pagename = wikiutil.unquoteWikiname(pagename)
+                data[(timestamp, rev, pagename)] = (timestamp, rev, action, pagename, ip, hostname, userid, extra, comment)
+            f.close()
+        except IOError, err:
+            # no edit-log
+            pass
         self.data = data
 
     def write(self, fname):
         """ write complete edit-log to disk """
-        editlog = self.data.items()
-        editlog.sort()
-        f = file(fname, "w")
-        for key, fields in editlog:
-            timestamp, rev, action, pagename, ip, hostname, userid, extra, comment = fields
-            if action.startswith('ATT'):
-                try:
-                    fname = urllib.unquote(extra).decode('utf-8')
-                except UnicodeDecodeError:
-                    fname = urllib.unquote(extra).decode('iso-8859-1')
-                if ('FILE', pagename, fname) in self.renames:
-                    fname = self.renames[('FILE', pagename, fname)]
-                extra = urllib.quote(fname.encode('utf-8'))
-            if ('PAGE', pagename) in self.renames:
-                pagename = self.renames[('PAGE', pagename)]
-            timestamp = str(timestamp)
-            rev = '%08d' % rev
-            pagename = wikiutil.quoteWikinameFS(pagename)
-            fields = timestamp, rev, action, pagename, ip, hostname, userid, extra, comment
-            log_str = '\t'.join(fields) + '\n'
-            f.write(log_str)
-        f.close()
+        if self.data:
+            editlog = self.data.items()
+            editlog.sort()
+            f = file(fname, "w")
+            for key, fields in editlog:
+                timestamp, rev, action, pagename, ip, hostname, userid, extra, comment = fields
+                if action.startswith('ATT'):
+                    try:
+                        fname = urllib.unquote(extra).decode('utf-8')
+                    except UnicodeDecodeError:
+                        fname = urllib.unquote(extra).decode('iso-8859-1')
+                    if ('FILE', pagename, fname) in self.renames:
+                        fname = self.renames[('FILE', pagename, fname)]
+                    extra = urllib.quote(fname.encode('utf-8'))
+                if ('PAGE', pagename) in self.renames:
+                    pagename = self.renames[('PAGE', pagename)]
+                timestamp = str(timestamp)
+                rev = '%08d' % rev
+                pagename = wikiutil.quoteWikinameFS(pagename)
+                fields = timestamp, rev, action, pagename, ip, hostname, userid, extra, comment
+                log_str = '\t'.join(fields) + '\n'
+                f.write(log_str)
+            f.close()
 
     def copy(self, destfname, renames):
         self.renames = renames
@@ -468,8 +481,9 @@ class DataConverter(object):
 
         # create User objects in memory
         users_dir = opj(self.sdata, 'user')
+        user_re = re.compile(r'^\d+\.\d+(\.\d+)?$')
         userlist = listdir(users_dir)
-        userlist = [fn for fn in userlist if not fn.endswith(".trail") and not fn.endswith(".bookmark")]
+        userlist = [f for f in userlist if user_re.match(f)]
         for userid in userlist:
             u = User(self.request, users_dir, userid)
             self.users[u.uid] = u
