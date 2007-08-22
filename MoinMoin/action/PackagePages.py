@@ -153,13 +153,13 @@ class PackagePages:
     <tr>
         <td class="label"><label>%(newname_label)s</label></td>
         <td class="content">
-            <input type="text" name="packagename" value="package.zip">
+            <input type="text" name="packagename" value="package.zip" size="80">
         </td>
     </tr>
     <tr>
         <td class="label"><label>%(list_label)s</label></td>
         <td class="content">
-            <input type="text" name="pagelist" maxlength="200" value=%(pagename)s>
+            <input type="text" name="pagelist" size="80" maxlength="200" value=%(pagename)s>
         </td>
     </tr>
     <tr>

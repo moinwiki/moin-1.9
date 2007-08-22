@@ -155,8 +155,6 @@ class PageEditor(Page):
         request = self.request
         form = request.form
         _ = self._
-        request.disableHttpCaching(level=2)
-        request.emit_http_headers()
 
         raw_body = ''
         msg = None
@@ -198,6 +196,10 @@ class PageEditor(Page):
         if msg:
             self.send_page(msg=msg)
             return
+
+        # Emmit http_headers after checks (send_page)
+        request.disableHttpCaching(level=2)
+        request.emit_http_headers()
 
         # check if we want to load a draft
         use_draft = None
@@ -403,7 +405,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 
         request.write(
             u'''\
-<textarea id="editor-textarea" name="savetext" lang="%(lang)s" dir="%(dir)s" rows="%(rows)d"
+<textarea id="editor-textarea" name="savetext" lang="%(lang)s" dir="%(dir)s" rows="%(rows)d" cols="80"
           onChange="flgChange = true;" onKeyPress="flgChange = true;">\
 %(text)s\
 </textarea>''' % {
@@ -415,7 +417,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 
         request.write("<p>")
         request.write(_("Comment:"),
-            ' <input id="editor-comment" type="text" name="comment" value="%s" maxlength="200"'
+            ' <input id="editor-comment" type="text" name="comment" value="%s" size="80" maxlength="200"'
             ' onChange="flgChange = true;" onKeyPress="flgChange = true;">' % (
                 wikiutil.escape(kw.get('comment', ''), 1), ))
         request.write("</p>")
