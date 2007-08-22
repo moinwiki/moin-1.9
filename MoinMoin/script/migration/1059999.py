@@ -16,9 +16,10 @@ def execute(script, data_dir, rev):
     rename2_map = os.path.join(data_dir, 'rename2.txt')
     if not os.path.exists(rename2_map):
         print "You must first edit %s." % rename1_map
-        print "For editing it, please use an editor that honours TAB chars and is able to edit UTF-8 encoded files."
-        print "Carefully edit - the fields are separated by a single TAB char, do not change this!"
-        print "You may ONLY edit the rightmost field (this is the NEW name - in case you want to rename the page or file)."
+        print "For editing it, please use an editor that is able to edit UTF-8 encoded files."
+        print "Carefully edit - the fields are separated by a %r char, do not change this!" % DataConverter.RENAMES_FIELDSEP
+        print "Fields in this file are: TYPE OLDNAME NEWNAME"
+        print "You may ONLY edit the rightmost field (NEWNAME - in case you want to rename the page or file)."
         print
         print "After you have finished editing, rename the file to %s and re-issue the moin migrate command." % rename2_map
         return None # terminate here

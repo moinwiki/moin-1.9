@@ -424,15 +424,18 @@ class DataConverter(object):
                         self.renames[('FILE', pn, fn)] = None
         self.save_renames()
 
+    RENAMES_FIELDSEP = u'|' # in case | makes trouble, one can use \t tab char
+
     def save_renames(self):
         f = codecs.open(self.rename_fname1, 'w', 'utf-8')
         for k in self.renames:
             rtype, pn, fn = (k + (None, ))[:3]
             if rtype == 'PAGE':
-                line = u"%s\t%s\t%s\r\n" % (rtype, pn, pn)
+                line = (rtype, pn, pn)
             elif rtype == 'FILE':
-                line = u"%s\t%s\t%s\t%s\r\n" % (rtype, pn, fn, fn)
-            f.write(line)
+                line = (rtype, pn, fn, fn)
+            line = self.RENAMES_FIELDSEP.join(line)
+            f.write(line + u'\n')
         f.close()
 
     def load_renames(self):
@@ -441,7 +444,7 @@ class DataConverter(object):
             line = line.rstrip()
             if not line:
                 continue
-            t = line.split(u'\t')
+            t = line.split(self.RENAMES_FIELDSEP)
             rtype, p1, p2, p3 = (t + [None]*3)[:4]
             if rtype == u'PAGE':
                 self.renames[(str(rtype), p1)] = p2
