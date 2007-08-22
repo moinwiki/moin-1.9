@@ -1,5 +1,5 @@
 """
-    MoinMoin - AttachList Macro
+    MoinMoin - AttachInfo Macro
 
     A macro to produce information about attached pages
 
