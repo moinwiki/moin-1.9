@@ -824,13 +824,13 @@ def send_moveform(pagename, request):
     <tr>
         <td class="label"><label>%(newname_label)s</label></td>
         <td class="content">
-            <input type="text" name="newpagename" value="%(pagename)s">
+            <input type="text" name="newpagename" value="%(pagename)s" size="80">
         </td>
     </tr>
     <tr>
         <td class="label"><label>%(attachment_label)s</label></td>
         <td class="content">
-            <input type="text" name="newattachmentname" value="%(attachment_name)s">
+            <input type="text" name="newattachmentname" value="%(attachment_name)s" size="80">
         </td>
     </tr>
     <tr>
