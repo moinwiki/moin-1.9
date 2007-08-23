@@ -42,7 +42,7 @@ class TestComplexStuff:
     """
     _tests = (
         # description,  test,            expected
-        ('Line break',  '[[BR]]',        '<br>'),
+        ('Line break',  '<<BR>>',        '<br>'),
     )
 
     def setup_class(cls):

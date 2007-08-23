@@ -8,9 +8,25 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+ur'''
+
+    def anchor_link_emit(self, node):
+        return ''.join([
+            self.formatter.url(1, node.content, css='anchor'),
+            self.emit_children(node),
+            self.formatter.url(0),
+        ])
+
+TODO: use this for links to anchors
+    res.append(self.formatter.anchorlink(1, words[0][1:]))
+    res.append(self.formatter.text(words[1]))
+    res.append(self.formatter.anchorlink(0))
+
+'''
+
 import re
 from MoinMoin import config, wikiutil, macro
-
+from MoinMoin.Page import Page
 
 Dependencies = ['user'] # {{{#!wiki comment ... }}} has different output depending on the user's profile settings
 
@@ -30,85 +46,265 @@ class Parser:
     Dependencies = Dependencies
 
     # some common strings
+    CHILD_PREFIX = wikiutil.CHILD_PREFIX
+    CHILD_PREFIX_LEN = wikiutil.CHILD_PREFIX_LEN
     PARENT_PREFIX = wikiutil.PARENT_PREFIX
-    # quoted strings (we require that there is at least one char (that is not the quoting char)
-    # inside to not confuse stuff like '''Contact:''' (just a bold Contact:) with interwiki markup
-    # OtherWiki:'Page with blanks'
-    dq_string = ur'("([^"]|"")+?"(?!"))' # double quoted string
-    attachment_schemas = ["attachment", "inline", "drawing"]
+    PARENT_PREFIX_LEN = wikiutil.PARENT_PREFIX_LEN
+
     punct_pattern = re.escape(u'''"\'}]|:,.)?!''')
-    punct_no_quote_pattern = re.escape(u'''}]|:,.)?!''')
-    url_pattern = (u'http|https|ftp|nntp|news|mailto|telnet|wiki|file|irc|' +
-            u'|'.join(attachment_schemas) +
-            (config.url_schemas and u'|' + u'|'.join(config.url_schemas) or ''))
+    url_scheme = (u'http|https|ftp|nntp|news|mailto|telnet|wiki|file|irc' +
+                 (config.url_schemas and (u'|' + u'|'.join(config.url_schemas)) or ''))
 
     # some common rules
-    word_rule = ur'(?:(?<![%(u)s%(l)s])|^)%(parent)s(?:%(subpages)s(?:[%(u)s][%(l)s]+){2,})+(?![%(u)s%(l)s]+)' % {
+    url_rule = ur'''
+        (^|(?<!\w))  # require either beginning of line or some whitespace to the left
+        (?P<url_target>  # capture whole url there
+         (?P<url_scheme>%(url_scheme)s)  # some scheme
+         \:
+         \S+?  # anything non-whitespace
+        )
+        ($|(?=\s|[%(punct)s](\s|$)))  # require either end of line or some whitespace or some punctuation+blank/eol afterwards
+    ''' % {
+        'url_scheme': url_scheme,
+        'punct': punct_pattern,
+    }
+
+    word_rule = ur'''
+        (?:
+         (?<![%(u)s%(l)s/])  # require anything not upper/lower/slash before
+         |
+         ^  # ... or beginning of line
+        )
+        (?P<word_bang>\!)?  # configurable: avoid getting CamelCase rendered as link
+        (?P<word_name>
+         (?:
+          (?P<word_parent_prefix>%(parent)s)*  # there might be either ../ parent prefix(es)
+          |
+          ((?<!%(child)s)%(child)s)?  # or maybe a single / child prefix (but not if we already had it before)
+         )
+         (
+          ((?<!%(child)s)%(child)s)?  # there might be / child prefix (but not if we already had it before)
+          (?:[%(u)s][%(l)s]+){2,}  # at least 2 upper>lower transitions make CamelCase
+         )+  # we can have MainPage/SubPage/SubSubPage ...
+        )
+        (?![%(u)s%(l)s/])  # require anything not upper/lower/slash following
+    ''' % {
         'u': config.chars_upper,
         'l': config.chars_lower,
-        'subpages': wikiutil.CHILD_PREFIX + '?',
-        'parent': ur'(?:%s)?' % re.escape(PARENT_PREFIX),
-    }
-    url_rule = ur'%(url_guard)s(%(url)s)\:(([^\s\<%(punct)s]|([%(punctnq)s][^\s\<%(punct)s]))+|%(dq_string)s)' % {
-        'url_guard': ur'(^|(?<!\w))',
-        'url': url_pattern,
-        'punct': punct_pattern,
-        'punctnq': punct_no_quote_pattern,
-        'dq_string': dq_string,
+        'child': re.escape(CHILD_PREFIX),
+        'parent': re.escape(PARENT_PREFIX),
     }
 
-    ol_rule = ur"^\s+(?:[0-9]+|[aAiI])\.(?:#\d+)?\s"
-    dl_rule = ur"^\s+.*?::\s"
+    # link targets:
+    extern_rule = r'(?P<extern_addr>(?P<extern_scheme>%s)\:.*)' % url_scheme
+    attach_rule = r'(?P<attach_scheme>attachment|drawing)\:(?P<attach_addr>.*)'
+    inter_rule = r'(?P<inter_wiki>[A-Z][a-zA-Z]+):(?P<inter_page>.*)'
+    page_rule = r'(?P<page_name>.*)'
+
+    link_target_rules = r'|'.join([
+        extern_rule,
+        attach_rule,
+        inter_rule,
+        page_rule,
+    ])
+    link_target_re = re.compile(link_target_rules, re.VERBOSE|re.UNICODE)
+
+    transclude_rule = r"""
+        (?P<transclude>
+            \{\{
+            (?P<transclude_target>.+?)\s*  # usually image target (eat trailing space)
+            (\|\s*(?P<transclude_args>.+?)\s*)?  # usually image alt text (optional, strip space)
+            \}\}
+        )
+    """
+    text_rule = r"""
+        (?P<simple_text>
+            .+  # some text (not empty)
+        )
+    """
+    # link descriptions:
+    link_desc_rules = r'|'.join([
+            transclude_rule,
+            text_rule,
+            # _get_rule('break', inline_tab),
+            # _get_rule('char', inline_tab),
+    ])
+    link_desc_re = re.compile(link_desc_rules, re.VERBOSE|re.UNICODE)
+
+    # transclude descriptions:
+    transclude_desc_rules = r'|'.join([
+            text_rule,
+            # _get_rule('break', inline_tab),
+            # _get_rule('char', inline_tab),
+    ])
+    transclude_desc_re = re.compile(transclude_desc_rules, re.VERBOSE|re.UNICODE)
+
+    # lists:
+    ol_rule = ur"""
+        ^\s+  # indentation
+        (?:[0-9]+|[aAiI])\. # arabic, alpha, roman counting
+        (?:\#\d+)?  # optional start number
+        \s  # require one blank afterwards
+    """
+    ol_re = re.compile(ol_rule, re.VERBOSE|re.UNICODE)
+
+    dl_rule = ur"""
+        ^\s+  # indentation
+        .*?::  # definition term::
+        \s  # require on blank afterwards
+    """
+    dl_re = re.compile(dl_rule, re.VERBOSE|re.UNICODE)
 
     # this is used inside <pre> / parser sections (we just want to know when it's over):
-    pre_formatting_rules = ur"""(?P<pre>(\}\}\}))"""
+    pre_scan_rule = ur"""
+(?P<pre>
+    \}\}\}  # in pre, we only look for the end of the pre
+)
+"""
+    pre_scan_re = re.compile(pre_scan_rule, re.VERBOSE|re.UNICODE)
 
-    # the big, fat, ugly one ;)
-    formatting_rules = ur"""(?P<ent_numeric>&#(\d{1,5}|x[0-9a-fA-F]+);)
-(?P<emph_ibb>'''''(?=[^']+'''))
-(?P<emph_ibi>'''''(?=[^']+''))
-(?P<emph_ib_or_bi>'{5}(?=[^']))
-(?P<emph>'{2,3})
-(?P<u>__)
-(?P<sup>\^.*?\^)
-(?P<sub>,,[^,]{1,40},,)
-(?P<tt>\{\{\{.*?\}\}\})
-(?P<parser>(\{\{\{(#!.*|\s*$)))
-(?P<pre>(\{\{\{ ?|\}\}\}))
-(?P<small>(\~- ?|-\~))
-(?P<big>(\~\+ ?|\+\~))
-(?P<strike>(--\(|\)--))
-(?P<remark>(/\* ?| ?\*/))
-(?P<rule>-{4,})
-(?P<comment>^\#\#.*$)
-(?P<macro>\[\[(%%(macronames)s)(?:\(.*?\))?\]\])
-(?P<ol>%(ol_rule)s)
-(?P<dl>%(dl_rule)s)
-(?P<li>^\s+\*\s*)
-(?P<li_none>^\s+\.\s*)
-(?P<indent>^\s+)
-(?P<tableZ>\|\| $)
-(?P<table>(?:\|\|)+(?:<[^>]*?>)?(?!\|? $))
-(?P<heading>^\s*(?P<hmarker>=+)\s.*\s(?P=hmarker) $)
-(?P<interwiki>[A-Z][a-zA-Z]+\:(%(dq_string)s|([^\s'\"\:\<\|]([^\s%(punct)s]|([%(punct)s][^\s%(punct)s]))+)))
-(?P<word>%(word_rule)s)
-(?P<url_bracket>\[((%(url)s)\:|#|\:)[^\s\]]+(\s[^\]]+)?\])
-(?P<url>%(url_rule)s)
-(?P<email>[-\w._+]+\@[\w-]+(\.[\w-]+)+)
-(?P<smiley>(?<=\s)(%(smiley)s)(?=\s))
-(?P<smileyA>^(%(smiley)s)(?=\s))
-(?P<ent_symbolic>&[a-zA-Z]+;)
-(?P<ent>[<>&])
-(?P<wikiname_bracket>\[%(dq_string)s.*?\])
-(?P<tt_bt>`.*?`)"""  % {
-
-        'url': url_pattern,
+    # the big, fat, less ugly one ;)
+    # please be very careful: blanks and # must be escaped with \ !
+    scan_rules = ur"""
+(?P<emph_ibb>
+    '''''(?=[^']+''')  # italic on, bold on, ..., bold off
+)|(?P<emph_ibi>
+    '''''(?=[^']+'')  # italic on, bold on, ..., italic off
+)|(?P<emph_ib_or_bi>
+    '{5}(?=[^'])  # italic and bold or bold and italic
+)|(?P<emph>
+    '{2,3}  # italic or bold
+)|(?P<u>
+    __ # underline
+)|(?P<small>
+    (
+     (?P<small_on>\~-\ ?)  # small on (we eat a trailing blank if it is there)
+    |
+     (?P<small_off>-\~)  # small off
+    )
+)|(?P<big>
+    (
+     (?P<big_on>\~\+\ ?)  # big on (eat trailing blank)
+    |
+     (?P<big_off>\+\~)  # big off
+    )
+)|(?P<strike>
+    (
+     (?P<strike_on>--\()  # strike-through on
+    |
+     (?P<strike_off>\)--)  # strike-through off
+    )
+)|(?P<remark>
+    (
+     (?P<remark_on>/\*\ ?)  # inline remark on (eat trailing blank)
+    |
+     (?P<remark_off>\ ?\*/)  # off
+    )
+)|(?P<sup>
+    \^  # superscript on
+    (?P<sup_text>.*?)  # capture the text
+    \^  # off
+)|(?P<sub>
+    ,,  # subscript on
+    (?P<sub_text>[^,]{1,40})  # capture 1..40 chars of text
+    ,,  # off
+)|(?P<tt>
+    \{\{\{  # teletype on
+    (?P<tt_text>.*?)  # capture the text
+    \}\}\}  # off
+)|(?P<tt_bt>
+    `  # teletype (using a backtick) on
+    (?P<tt_bt_text>.*?)  # capture the text
+    `  # off
+)|(?P<interwiki>
+    (?P<interwiki_wiki>[A-Z][a-zA-Z]+)  # interwiki wiki name
+    \:
+    (?P<interwiki_page>
+     [^\s'\"\:\<\|]
+     (
+      [^\s%(punct)s]
+     |
+      (
+       [%(punct)s]
+       [^\s%(punct)s]
+      )
+     )+
+    )  # interwiki page name
+)|(?P<word>  # must come AFTER interwiki rule!
+    %(word_rule)s  # CamelCase wiki words
+)|(?P<link>
+    \[\[
+    (?P<link_target>.+?)\s*  # link target (eat trailing space)
+    (\|\s*(?P<link_args>.+?)?\s*)? # link description (usually text, optional, strip space)
+    \]\]
+)|
+%(transclude_rule)s
+|(?P<url>
+    %(url_rule)s
+)|(?P<email>
+    [-\w._+]+  # name
+    \@  # at
+    [\w-]+(\.[\w-]+)+  # server/domain
+)|(?P<smiley>
+    (^|(?<=\s))  # we require either beginning of line or some space before a smiley
+    (%(smiley)s)  # one of the smileys
+    (?=\s)  # we require some space after the smiley
+)|(?P<macro>
+    <<
+    (?P<macro_name>(%%(macronames)s))  # name of the macro (only existing ones will match)
+    (?:\((?P<macro_args>.*?)\))?  # optionally macro arguments
+    >>
+)|(?P<heading>
+    ^(?P<hmarker>=+)\s+  # some === at beginning of line, eat trailing blanks
+    (?P<heading_text>.*)  # capture heading text
+    \s+(?P=hmarker)\s$  # some === at end of line (matching amount as we have seen), eat blanks
+)|(?P<parser>
+    \{\{\{
+    (
+     \#!.*  # we have a parser name directly following
+    |
+     \s*$  # no parser name, eat whitespace
+    )
+)|(?P<pre>
+    (
+     \{\{\{\ ?  # pre on
+    |
+     \}\}\}  # off
+    )
+)|(?P<comment>
+    ^\#\#.*$  # src code comment, rest of line
+)|(?P<ol>
+    %(ol_rule)s  # ordered list
+)|(?P<dl>
+    %(dl_rule)s  # definition list
+)|(?P<li>
+    ^\s+\*\s*  # unordered list
+)|(?P<li_none>
+    ^\s+\.\s*  # unordered list, no bullets
+)|(?P<indent>
+    ^\s+  # indented by some spaces
+)|(?P<tableZ>
+    \|\|\ $  # the right end of a table row
+)|(?P<table>
+    (?:\|\|)+(?:<[^>]*?>)?(?!\|?\s$) # a table
+)|(?P<rule>
+    -{4,}  # hor. rule, min. 4 -
+)|(?P<entity>
+    &(
+      ([a-zA-Z]+)  # symbolic entity, like &uuml;
+      |
+      (\#(\d{1,5}|x[0-9a-fA-F]+))  # numeric entities, like &#42; or &#x42;
+     );
+)|(?P<sgml_entity>  # must come AFTER entity rule!
+    [<>&]  # needs special treatment for html/xml
+)"""  % {
+        'url_scheme': url_scheme,
+        'url_rule': url_rule,
         'punct': punct_pattern,
-        'dq_string': dq_string,
         'ol_rule': ol_rule,
         'dl_rule': dl_rule,
-        'url_rule': url_rule,
         'word_rule': word_rule,
+        'transclude_rule': transclude_rule,
         'smiley': u'|'.join([re.escape(s) for s in config.smileys])}
 
     # Don't start p before these
@@ -125,8 +321,8 @@ class Parser:
         self._ = request.getText
         self.cfg = request.cfg
         self.line_anchors = kw.get('line_anchors', True)
-        self.macro = None
         self.start_line = kw.get('start_line', 0)
+        self.macro = None
 
         # currently, there is only a single, optional argument to this parser and
         # (when given), it is used as class(es) for a div wrapping the formatter output
@@ -163,7 +359,8 @@ class Parser:
         self.list_indents = []
         self.list_types = []
 
-        self.formatting_rules = self.formatting_rules % {'macronames': u'|'.join(macro.getNames(self.cfg))}
+        # XXX TODO if we remove the runtime dependency, we can compile the scan_rules at module load time:
+        self.scan_rules = self.scan_rules % {'macronames': u'|'.join(macro.getNames(self.cfg))}
 
     def _close_item(self, result):
         #result.append("<!-- close item begin -->\n")
@@ -182,104 +379,65 @@ class Parser:
             result.append(self.formatter.definition_desc(0))
         #result.append("<!-- close item end -->\n")
 
-    def interwiki(self, target_and_text, **kw):
-        # TODO: maybe support [wiki:Page http://wherever/image.png] ?
-        scheme, rest = target_and_text.split(':', 1)
-        wikiname, pagename, text = wikiutil.split_wiki(rest)
-        if not text:
-            text = pagename
-        #self.request.log("interwiki: split_wiki -> %s.%s.%s" % (wikiname,pagename,text))
-
-        if wikiname.lower() == 'self': # [wiki:Self:LocalPage text] or [:LocalPage:text]
-            return self._word_repl(pagename, text)
-
-        # check for image URL, and possibly return IMG tag
-        if not kw.get('pretty_url', 0) and wikiutil.isPicture(pagename):
-            dummy, wikiurl, dummy, wikitag_bad = wikiutil.resolve_wiki(self.request, rest)
-            href = wikiutil.join_wiki(wikiurl, pagename)
-            #self.request.log("interwiki: join_wiki -> %s.%s.%s" % (wikiurl,pagename,href))
-            return self.formatter.image(src=href)
-
-        return (self.formatter.interwikilink(1, wikiname, pagename) +
-                self.formatter.text(text) +
-                self.formatter.interwikilink(0, wikiname, pagename))
-
-    def attachment(self, target_and_text, **kw):
-        """ This gets called on attachment URLs """
-        _ = self._
-        #self.request.log("attachment: target_and_text %s" % target_and_text)
-        scheme, fname, text = wikiutil.split_wiki(target_and_text)
-        if not text:
-            text = fname
-
-        if scheme == 'drawing':
-            return self.formatter.attachment_drawing(fname, text)
-
-        # check for image, and possibly return IMG tag (images are always inlined)
-        if not kw.get('pretty_url', 0) and wikiutil.isPicture(fname):
-            return self.formatter.attachment_image(fname)
-
-        # inline the attachment if it's major mimetype is text
-        mt = wikiutil.MimeType(filename=fname)
-        if scheme == 'inline':
-            if mt.major == 'text':
-                return self.formatter.attachment_inlined(fname, text)
-            else:
-                # use EmbedObject for other mimetypes
-                from MoinMoin.macro.EmbedObject import EmbedObject
-                from MoinMoin.action import AttachFile
-                if not mt is None:
-                    # reuse class tmp from Despam to define macro
-                    from MoinMoin.action.Despam import tmp
-                    macro = tmp()
-                    macro.request = self.request
-                    macro.formatter = self.request.html_formatter
-                    pagename = self.formatter.page.page_name
-                    url = AttachFile.getAttachUrl(pagename, fname, self.request, escaped=1)
-                    return self.formatter.rawHTML(EmbedObject.embed(EmbedObject(macro, wikiutil.escape(fname)), mt, url))
-
-        return (self.formatter.attachment_link(1, fname) +
-                self.formatter.text(text) +
-                self.formatter.attachment_link(0))
-
-    def _u_repl(self, word):
+    def _u_repl(self, word, groups):
         """Handle underline."""
         self.is_u = not self.is_u
         return self.formatter.underline(self.is_u)
 
-    def _strike_repl(self, word):
-        """Handle strikethrough."""
-        # XXX we don't really enforce the correct sequence --( ... )-- here
-        self.is_strike = not self.is_strike
-        return self.formatter.strike(self.is_strike)
-
-    def _remark_repl(self, word):
+    def _remark_repl(self, word, groups):
         """Handle remarks."""
-        # XXX we don't really enforce the correct sequence /* ... */ here
+        on = groups.get('remark_on')
+        if on and self.is_remark:
+            return self.formatter.text(word)
+        off = groups.get('remark_off')
+        if off and not self.is_remark:
+            return self.formatter.text(word)
         self.is_remark = not self.is_remark
         return self.formatter.span(self.is_remark, css_class='comment')
+    _remark_on_repl = _remark_repl
+    _remark_off_repl = _remark_repl
 
-    def _small_repl(self, word):
-        """Handle small."""
-        if word.strip() == '~-' and self.is_small:
+    def _strike_repl(self, word, groups):
+        """Handle strikethrough."""
+        on = groups.get('strike_on')
+        if on and self.is_strike:
             return self.formatter.text(word)
-        if word.strip() == '-~' and not self.is_small:
+        off = groups.get('strike_off')
+        if off and not self.is_strike:
+            return self.formatter.text(word)
+        self.is_strike = not self.is_strike
+        return self.formatter.strike(self.is_strike)
+    _strike_on_repl = _strike_repl
+    _strike_off_repl = _strike_repl
+
+    def _small_repl(self, word, groups):
+        """Handle small."""
+        on = groups.get('small_on')
+        if on and self.is_small:
+            return self.formatter.text(word)
+        off = groups.get('small_off')
+        if off and not self.is_small:
             return self.formatter.text(word)
         self.is_small = not self.is_small
         return self.formatter.small(self.is_small)
+    _small_on_repl = _small_repl
+    _small_off_repl = _small_repl
 
-    def _big_repl(self, word):
+    def _big_repl(self, word, groups):
         """Handle big."""
-        if word.strip() == '~+' and self.is_big:
+        on = groups.get('big_on')
+        if on and self.is_big:
             return self.formatter.text(word)
-        if word.strip() == '+~' and not self.is_big:
+        off = groups.get('big_off')
+        if off and not self.is_big:
             return self.formatter.text(word)
         self.is_big = not self.is_big
         return self.formatter.big(self.is_big)
+    _big_on_repl = _big_repl
+    _big_off_repl = _big_repl
 
-    def _emph_repl(self, word):
+    def _emph_repl(self, word, groups):
         """Handle emphasis, i.e. '' and '''."""
-        ## print "#", self.is_b, self.is_em, "#"
         if len(word) == 3:
             self.is_b = not self.is_b
             if self.is_em and self.is_b:
@@ -291,7 +449,7 @@ class Parser:
                 self.is_em = 2
             return self.formatter.emphasis(self.is_em)
 
-    def _emph_ibb_repl(self, word):
+    def _emph_ibb_repl(self, word, groups):
         """Handle mixed emphasis, i.e. ''''' followed by '''."""
         self.is_b = not self.is_b
         self.is_em = not self.is_em
@@ -299,7 +457,7 @@ class Parser:
             self.is_b = 2
         return self.formatter.emphasis(self.is_em) + self.formatter.strong(self.is_b)
 
-    def _emph_ibi_repl(self, word):
+    def _emph_ibi_repl(self, word, groups):
         """Handle mixed emphasis, i.e. ''''' followed by ''."""
         self.is_b = not self.is_b
         self.is_em = not self.is_em
@@ -307,9 +465,8 @@ class Parser:
             self.is_em = 2
         return self.formatter.strong(self.is_b) + self.formatter.emphasis(self.is_em)
 
-    def _emph_ib_or_bi_repl(self, word):
+    def _emph_ib_or_bi_repl(self, word, groups):
         """Handle mixed emphasis, exactly five '''''."""
-        ## print "*", self.is_b, self.is_em, "*"
         b_before_em = self.is_b > self.is_em > 0
         self.is_b = not self.is_b
         self.is_em = not self.is_em
@@ -318,170 +475,298 @@ class Parser:
         else:
             return self.formatter.emphasis(self.is_em) + self.formatter.strong(self.is_b)
 
-    def _sup_repl(self, word):
+    def _sup_repl(self, word, groups):
         """Handle superscript."""
-        return self.formatter.sup(1) + \
-            self.formatter.text(word[1:-1]) + \
-            self.formatter.sup(0)
+        text = groups.get('sup_text', '')
+        return (self.formatter.sup(1) +
+                self.formatter.text(text) +
+                self.formatter.sup(0))
+    _sup_text_repl = _sup_repl
 
-    def _sub_repl(self, word):
+    def _sub_repl(self, word, groups):
         """Handle subscript."""
-        return self.formatter.sub(1) + \
-            self.formatter.text(word[2:-2]) + \
-            self.formatter.sub(0)
+        text = groups.get('sub_text', '')
+        return (self.formatter.sub(1) +
+               self.formatter.text(text) +
+               self.formatter.sub(0))
+    _sub_text_repl = _sub_repl
 
+    def _tt_repl(self, word, groups):
+        """Handle inline code."""
+        tt_text = groups.get('tt_text', '')
+        return (self.formatter.code(1) +
+                self.formatter.text(tt_text) +
+                self.formatter.code(0))
+    _tt_text_repl = _tt_repl
 
-    def _rule_repl(self, word):
+    def _tt_bt_repl(self, word, groups):
+        """Handle backticked inline code."""
+        tt_bt_text = groups.get('tt_bt_text', '')
+        return (self.formatter.code(1, css="backtick") +
+                self.formatter.text(tt_bt_text) +
+                self.formatter.code(0))
+    _tt_bt_text_repl = _tt_bt_repl
+
+    def _rule_repl(self, word, groups):
         """Handle sequences of dashes."""
         result = self._undent() + self._closeP()
         if len(word) <= 4:
-            result = result + self.formatter.rule()
+            result += self.formatter.rule()
         else:
             # Create variable rule size 1 - 6. Actual size defined in css.
             size = min(len(word), 10) - 4
-            result = result + self.formatter.rule(size)
+            result += self.formatter.rule(size)
         return result
 
-    def _word_repl(self, word, text=None):
-        """Handle WikiNames."""
-
-        # check for parent links
-        # !!! should use wikiutil.AbsPageName here, but setting `text`
-        # correctly prevents us from doing this for now
-        if word.startswith(wikiutil.PARENT_PREFIX):
-            if not text:
-                text = word
-            word = '/'.join([x for x in self.formatter.page.page_name.split('/')[:-1] + [word[wikiutil.PARENT_PREFIX_LEN:]] if x])
-        if not text:
-            # if a simple, self-referencing link, emit it as plain text
-            if word == self.formatter.page.page_name:
-                return self.formatter.text(word)
-            text = word
-        if word.startswith(wikiutil.CHILD_PREFIX):
-            word = self.formatter.page.page_name + '/' + word[wikiutil.CHILD_PREFIX_LEN:]
-
-        # handle anchors
-        parts = word.split("#", 1)
-        anchor = ""
-        if len(parts) == 2:
-            word, anchor = parts
-
-        return (self.formatter.pagelink(1, word, anchor=anchor) +
-                self.formatter.text(text) +
-                self.formatter.pagelink(0, word))
-
-    def _notword_repl(self, word):
-        """Handle !NotWikiNames."""
-        return self.formatter.nowikiword(word[1:])
-
-    def _interwiki_repl(self, word):
+    def _interwiki_repl(self, word, groups):
         """Handle InterWiki links."""
-        wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, word)
+        wiki = groups.get('interwiki_wiki')
+        page = groups.get('interwiki_page')
+
+        wikitag_bad = wikiutil.resolve_interwiki(self.request, wiki, page)[3]
         if wikitag_bad:
-            return self.formatter.text(word)
-        else:
-            return self.interwiki("wiki:" + word)
-
-    def _url_repl(self, word):
-        """Handle literal URLs including inline images."""
-        scheme = word.split(":", 1)[0]
-
-        if scheme == "wiki":
-            return self.interwiki(word)
-
-        if scheme in self.attachment_schemas:
-            return self.attachment(word)
-
-        if wikiutil.isPicture(word):
-            word = wikiutil.mapURL(self.request, word)
-            # Get image name http://here.com/dir/image.gif -> image
-            name = word.split('/')[-1]
-            name = ''.join(name.split('.')[:-1])
-            return self.formatter.image(src=word, alt=name)
-        else:
-            return (self.formatter.url(1, word, css=scheme) +
-                    self.formatter.text(word) +
-                    self.formatter.url(0))
-
-    def _wikiname_bracket_repl(self, text):
-        """Handle special-char wikinames with link text, like:
-           ["Jim O'Brian" Jim's home page] or ["Hello ""world""!" a page with doublequotes]
-        """
-        word = text[1:-1] # strip brackets
-        empty, target, linktext = wikiutil.split_wiki(':%s' % word)
-        if target:
-            linktext = linktext.strip()
-            return self._word_repl(target, linktext)
-        else:
+            text = groups.get('interwiki')
             return self.formatter.text(text)
-
-    def _url_bracket_repl(self, word):
-        """Handle bracketed URLs."""
-        word = word[1:-1] # strip brackets
-
-        # Local extended link? [:page name:link text] XXX DEPRECATED
-        if word[0] == ':':
-            words = word[1:].split(':', 1)
-            if len(words) == 1:
-                words = words * 2
-            target_and_text = 'wiki:Self:%s %s' % (wikiutil.quoteName(words[0]), words[1])
-            return self.interwiki(target_and_text, pretty_url=1)
-
-        scheme_and_rest = word.split(":", 1)
-        if len(scheme_and_rest) == 1: # no scheme
-            # Traditional split on space
-            words = word.split(None, 1)
-            if len(words) == 1:
-                words = words * 2
-
-            if words[0].startswith('#'): # anchor link
-                res = []
-                res.append(self.formatter.anchorlink(1, words[0][1:]))
-                res.append(self.formatter.text(words[1]))
-                res.append(self.formatter.anchorlink(0))
-                return ''.join(res)
         else:
-            scheme, rest = scheme_and_rest
-            if scheme == "wiki":
-                return self.interwiki(word, pretty_url=1)
-            if scheme in self.attachment_schemas:
-                return self.attachment(word, pretty_url=1)
+            return (self.formatter.interwikilink(1, wiki, page) +
+                    self.formatter.text(page) +
+                    self.formatter.interwikilink(0, wiki, page))
+    _interwiki_wiki_repl = _interwiki_repl
+    _interwiki_page_repl = _interwiki_repl
 
-            words = word.split(None, 1)
-            if len(words) == 1:
-                words = words * 2
-
-        if wikiutil.isPicture(words[1]) and re.match(self.url_rule, words[1]):
-            return (self.formatter.url(1, words[0], css='external', do_escape=0) +
-                    self.formatter.image(title=words[0], alt=words[0], src=words[1]) +
-                    self.formatter.url(0))
+    def _word_repl(self, word, groups):
+        """Handle WikiNames."""
+        bang = groups.get('word_bang')
+        if bang:
+            # self.cfg.bang_meta:
+            # handle !NotWikiNames
+            return self.formatter.nowikiword(word)
+        orig_word = word
+        name = groups.get('word_name')
+        parent_prefix = groups.get('word_parent_prefix')
+        current_page = self.formatter.page.page_name
+        name = wikiutil.AbsPageName(current_page, name)
+        # if a simple, self-referencing link, emit it as plain text
+        if name == current_page:
+            return self.formatter.text(orig_word)
         else:
-            return (self.formatter.url(1, words[0], css=scheme, do_escape=0) +
-                    self.formatter.text(words[1]) +
-                    self.formatter.url(0))
+            # handle anchors
+            parts = name.split("#", 1)
+            anchor = ""
+            if len(parts) == 2:
+                name, anchor = parts
+            return (self.formatter.pagelink(1, name, anchor=anchor) +
+                    self.formatter.text(orig_word) +
+                    self.formatter.pagelink(0, name))
+    _word_bang_repl = _word_repl
+    _word_parent_prefix_repl = _word_repl
+    _word_name_repl = _word_repl
 
-    def _email_repl(self, word):
+    def _url_repl(self, word, groups):
+        """Handle literal URLs."""
+        scheme = groups.get('url_scheme', 'http')
+        target = groups.get('url_target', '')
+        return (self.formatter.url(1, target, css=scheme) +
+                self.formatter.text(target) +
+                self.formatter.url(0))
+    _url_target_repl = _url_repl
+    _url_scheme_repl = _url_repl
+
+
+    def _transclude_repl(self, word, groups):
+        """Handles transcluding content, usually embedding images."""
+        target = groups.get('transclude_target', '').strip()
+        args = (groups.get('transclude_args', '') or '').strip()
+        target = wikiutil.url_unquote(target, want_unicode=True)
+        m = self.link_target_re.match(target)
+        ma = self.transclude_desc_re.match(args)
+        desc = None
+        if ma:
+            if ma.group('simple_text'):
+                desc = ma.group('simple_text')
+                desc = wikiutil.escape(desc)
+        if m:
+            if m.group('extern_addr'):
+                scheme = m.group('extern_scheme')
+                target = m.group('extern_addr')
+                if not desc:
+                    desc = wikiutil.escape(target)
+                if scheme.startswith('http'): # can also be https
+                    # currently only supports ext. image inclusion
+                    return self.formatter.image(src=target, alt=desc, title=desc, css_class='external_image')
+                    # FF2 has a bug with target mimetype detection, it looks at the url path
+                    # and expects to find some "filename extension" there (like .png) and this
+                    # (not the response http headers) will set the default content-type of
+                    # the object. This will often work for staticly served files, but
+                    # fails for MoinMoin attachments (they don't have the filename.ext in the
+                    # path, but in the query string). FF3 seems to have this bug fixed, opera 9.2
+                    # also works.
+                    #return (self.formatter.transclusion(1, data=target) +
+                    #        desc +
+                    #        self.formatter.transclusion(0))
+
+            elif m.group('attach_scheme'):
+                scheme = m.group('attach_scheme')
+                url = wikiutil.url_unquote(m.group('attach_addr'), want_unicode=True)
+                if not desc:
+                    desc = wikiutil.escape(url)
+                if scheme == 'attachment':
+                    mt = wikiutil.MimeType(filename=url)
+                    if mt.major == 'text':
+                        return self.formatter.attachment_inlined(url, desc)
+                    elif mt.major == 'image':
+                        return self.formatter.attachment_image(url, alt=desc, title=desc, css_class='image')
+                    else:
+                        from MoinMoin.action import AttachFile
+                        pagename = self.formatter.page.page_name
+                        href = AttachFile.getAttachUrl(pagename, url, self.request, escaped=0)
+                        return (self.formatter.transclusion(1, data=href, type=mt.spoil()) +
+                                desc +
+                                self.formatter.transclusion(0))
+
+                        #NOT USED CURRENTLY:
+
+                        # use EmbedObject for other mimetypes
+                        from MoinMoin.macro.EmbedObject import EmbedObject
+                        from MoinMoin.action import AttachFile
+                        if mt is not None:
+                            # reuse class tmp from Despam to define macro
+                            from MoinMoin.action.Despam import tmp
+                            macro = tmp()
+                            macro.request = self.request
+                            macro.formatter = self.request.html_formatter
+                            pagename = self.formatter.page.page_name
+                            href = AttachFile.getAttachUrl(pagename, url, self.request, escaped=1)
+                            return self.formatter.rawHTML(EmbedObject.embed(EmbedObject(macro, wikiutil.escape(url)), mt, href))
+                elif scheme == 'drawing':
+                    return self.formatter.attachment_drawing(url, desc)
+
+            elif m.group('page_name'):
+                # experimental client side transclusion
+                page_name = m.group('page_name')
+                url = Page(self.request, page_name).url(self.request, querystr={'action': 'content', }, relative=False)
+                return (self.formatter.transclusion(1, data=url, type='text/html', width="100%") +
+                        desc +
+                        self.formatter.transclusion(0))
+                #return u"Error: <<Include(%s,%s)>> emulation missing..." % (page_name, args)
+
+            elif m.group('inter_wiki'):
+                # experimental client side transclusion
+                wiki_name = m.group('inter_wiki')
+                page_name = m.group('inter_page')
+                wikitag, wikiurl, wikitail, err = wikiutil.resolve_interwiki(self.request, wiki_name, page_name)
+                url = wikiutil.join_wiki(wikiurl, wikitail)
+                url += '?action=content' # XXX moin specific
+                return (self.formatter.transclusion(1, data=url, type='text/html', width="100%") +
+                        desc +
+                        self.formatter.transclusion(0))
+                #return u"Error: <<RemoteInclude(%s:%s,%s)>> still missing." % (wiki_name, page_name, args)
+
+            else:
+                if not desc:
+                    desc = target
+                return self.formatter.text('[[%s|%s]]' % (target, desc))
+        return word +'???'
+    _transclude_target_repl = _transclude_repl
+    _transclude_args_repl = _transclude_repl
+
+    def _link_description(self, desc, target='', default_text=''):
+        """ parse a string <desc> valid as link description (text, transclusion, ...)
+            and return formatted content.
+
+            @param desc: the link description to parse
+            @param default_text: use this text (formatted as text) if parsing
+                                 desc returns nothing.
+            @param target: target of the link (as readable markup) - used for
+                           transcluded image's description
+        """
+        m = self.link_desc_re.match(desc)
+        if m:
+            if m.group('simple_text'):
+                desc = m.group('simple_text')
+                desc = wikiutil.escape(desc)
+                desc = self.formatter.text(desc)
+            elif m.group('transclude'):
+                groupdict = m.groupdict()
+                if groupdict.get('transclude_args') is None:
+                    # if transcluded obj (image) has no description, use target for it
+                    groupdict['transclude_args'] = target
+                desc = m.group('transclude')
+                desc = self._transclude_repl(desc, groupdict)
+        else:
+            desc = default_text
+            if desc:
+                desc = self.formatter.text(desc)
+        return desc
+
+    def _link_repl(self, word, groups):
+        """Handle [[target|text]] links."""
+        target = groups.get('link_target', '')
+        desc = (groups.get('link_args', '') or '').strip()
+        mt = self.link_target_re.match(target)
+        if mt:
+            if mt.group('page_name'):
+                page_name = mt.group('page_name')
+                # handle relative links
+                if page_name.startswith(self.CHILD_PREFIX):
+                    page_name = self.formatter.page.page_name + '/' + page_name[self.CHILD_PREFIX_LEN:] # XXX use func
+                # handle anchors
+                try:
+                    page_name, anchor = page_name.split("#", 1)
+                except ValueError:
+                    anchor = ""
+                if not page_name:
+                    page_name = self.formatter.page.page_name
+                return (self.formatter.pagelink(1, page_name, anchor=anchor) +
+                        self._link_description(desc, target, page_name) +
+                        self.formatter.pagelink(0, page_name))
+
+            elif mt.group('extern_addr'):
+                scheme = mt.group('extern_scheme')
+                target = mt.group('extern_addr')
+                return (self.formatter.url(1, target, css=scheme) +
+                        self._link_description(desc, target, target) +
+                        self.formatter.url(0))
+
+            elif mt.group('inter_wiki'):
+                wiki_name = mt.group('inter_wiki')
+                page_name = mt.group('inter_page')
+                wikitag_bad = wikiutil.resolve_interwiki(self.request, wiki_name, page_name)[3]
+                return (self.formatter.interwikilink(1, wiki_name, page_name) +
+                        self._link_description(desc, target, page_name) +
+                        self.formatter.interwikilink(0, wiki_name, page_name))
+
+            elif mt.group('attach_scheme'):
+                scheme = mt.group('attach_scheme')
+                url = wikiutil.url_unquote(mt.group('attach_addr'), want_unicode=True)
+                if scheme == 'attachment':
+                    return (self.formatter.attachment_link(1, url, title=desc) +
+                            self._link_description(desc, target, url) +
+                            self.formatter.attachment_link(0))
+                elif scheme == 'drawing':
+                    return self.formatter.attachment_drawing(url, desc, title=desc, alt=desc)
+            else:
+                if desc:
+                    desc = '|' + desc
+                return self.formatter.text('[[%s%s]]' % (target, desc))
+    _link_target_repl = _link_repl
+    _link_args_repl = _link_repl
+
+    def _email_repl(self, word, groups):
         """Handle email addresses (without a leading mailto:)."""
-        return (self.formatter.url(1, "mailto:" + word, css='mailto') +
+        return (self.formatter.url(1, "mailto:%s" % word, css='mailto') +
                 self.formatter.text(word) +
                 self.formatter.url(0))
 
-    def _ent_repl(self, word):
+    def _sgml_entity_repl(self, word, groups):
         """Handle SGML entities."""
         return self.formatter.text(word)
-        #return {'&': '&amp;',
-        #        '<': '&lt;',
-        #        '>': '&gt;'}[word]
 
-    def _ent_numeric_repl(self, word):
-        """Handle numeric (decimal and hexadecimal) SGML entities."""
+    def _entity_repl(self, word, groups):
+        """Handle numeric (decimal and hexadecimal) and symbolic SGML entities."""
         return self.formatter.rawHTML(word)
 
-    def _ent_symbolic_repl(self, word):
-        """Handle symbolic SGML entities."""
-        return self.formatter.rawHTML(word)
-
-    def _indent_repl(self, match):
+    def _indent_repl(self, match, groups):
         """Handle pure indentation (no - * 1. markup)."""
         result = []
         if not (self.in_li or self.in_dd):
@@ -493,7 +778,7 @@ class Parser:
             result.append(self.formatter.listitem(1, css_class=css_class, style="list-style-type:none"))
         return ''.join(result)
 
-    def _li_none_repl(self, match):
+    def _li_none_repl(self, match, groups):
         """Handle type=none (" .") lists."""
         result = []
         self._close_item(result)
@@ -504,7 +789,7 @@ class Parser:
         result.append(self.formatter.listitem(1, css_class=css_class, style="list-style-type:none"))
         return ''.join(result)
 
-    def _li_repl(self, match):
+    def _li_repl(self, match, groups):
         """Handle bullet (" *") lists."""
         result = []
         self._close_item(result)
@@ -515,11 +800,11 @@ class Parser:
         result.append(self.formatter.listitem(1, css_class=css_class))
         return ''.join(result)
 
-    def _ol_repl(self, match):
+    def _ol_repl(self, match, groups):
         """Handle numbered lists."""
-        return self._li_repl(match)
+        return self._li_repl(match, groups)
 
-    def _dl_repl(self, match):
+    def _dl_repl(self, match, groups):
         """Handle definition lists."""
         result = []
         self._close_item(result)
@@ -608,19 +893,6 @@ class Parser:
         self.list_indents = []
         self.list_types = []
         return ''.join(result)
-
-    def _tt_repl(self, word):
-        """Handle inline code."""
-        return self.formatter.code(1) + \
-            self.formatter.text(word[3:-3]) + \
-            self.formatter.code(0)
-
-    def _tt_bt_repl(self, word):
-        """Handle backticked inline code."""
-        # if len(word) == 2: return "" // removed for FCK editor
-        return self.formatter.code(1, css="backtick") + \
-            self.formatter.text(word[1:-1]) + \
-            self.formatter.code(0)
 
     def _getTableAttrs(self, attrdef):
         # skip "|" and initial "<"
@@ -711,7 +983,7 @@ class Parser:
         #self.request.log("parseAttributes returned %r" % attr)
         return attr, msg
 
-    def _tableZ_repl(self, word):
+    def _tableZ_repl(self, word, groups):
         """Handle table row end."""
         if self.in_table:
             result = ''
@@ -723,7 +995,7 @@ class Parser:
         else:
             return self.formatter.text(word)
 
-    def _table_repl(self, word):
+    def _table_repl(self, word, groups):
         """Handle table cell separator."""
         if self.in_table:
             result = []
@@ -757,24 +1029,20 @@ class Parser:
         else:
             return self.formatter.text(word)
 
-    def _heading_repl(self, word):
+    def _heading_repl(self, word, groups):
         """Handle section headings."""
-        h = word.strip()
-        level = 1
-        while h[level:level+1] == '=':
-            level += 1
-        depth = min(5, level)
-
-        title_text = h[level:-level].strip()
-
+        heading_text = groups.get('heading_text', '').strip()
+        depth = min(len(groups.get('hmarker')), 5)
         return ''.join([
             self._closeP(),
-            self.formatter.heading(1, depth, id=title_text),
-            self.formatter.text(title_text),
+            self.formatter.heading(1, depth, id=heading_text),
+            self.formatter.text(heading_text),
             self.formatter.heading(0, depth),
         ])
+    _heading_text_repl = _heading_repl
+    _hmarker_repl = _heading_repl
 
-    def _parser_repl(self, word):
+    def _parser_repl(self, word, groups):
         """Handle parsed code displays."""
         if word.startswith('{{{'):
             self.in_nested_pre = 1
@@ -807,7 +1075,7 @@ class Parser:
             self.in_pre = 'search_parser'
             return ''
 
-    def _pre_repl(self, word):
+    def _pre_repl(self, word, groups):
         """Handle code displays."""
         word = word.strip()
         if word == '{{{' and not self.in_pre:
@@ -826,13 +1094,11 @@ class Parser:
             return self.formatter.text(word)
         return self.formatter.text(word)
 
-    def _smiley_repl(self, word):
+    def _smiley_repl(self, word, groups):
         """Handle smileys."""
         return self.formatter.smiley(word)
 
-    _smileyA_repl = _smiley_repl
-
-    def _comment_repl(self, word):
+    def _comment_repl(self, word, groups):
         # if we are in a paragraph, we must close it so that normal text following
         # in the line below the comment will reopen a new paragraph.
         if self.formatter.in_p:
@@ -845,21 +1111,18 @@ class Parser:
             return self.formatter.paragraph(0)
         return ''
 
-    def _macro_repl(self, word):
-        """Handle macros ([[macroname]])."""
-        macro_name = word[2:-2]
+    def _macro_repl(self, word, groups):
+        """Handle macros (<<macroname>>)."""
+        macro_name = groups.get('macro_name')
+        macro_args = groups.get('macro_args')
         self.inhibit_p = 0 # 1 fixes UserPreferences, 0 fixes paragraph formatting for macros
-
-        # check for arguments
-        args = None
-        if macro_name.count("("):
-            macro_name, args = macro_name.split('(', 1)
-            args = args[:-1]
 
         # create macro instance
         if self.macro is None:
             self.macro = macro.Macro(self)
-        return self.formatter.macro(self.macro, macro_name, args)
+        return self.formatter.macro(self.macro, macro_name, macro_args)
+    _macro_name_repl = _macro_repl
+    _macro_args_repl = _macro_repl
 
     def scan(self, scan_re, line, inhibit_p=False):
         """ Scans one line
@@ -898,6 +1161,15 @@ class Parser:
             result.append(self.formatter.text(line[lastpos:]))
         return u''.join(result)
 
+    def _replace(self, match):
+        """ Same as replace() but with no magic """
+        for name, text in match.groupdict().iteritems():
+            if text is not None:
+                # Get replace method and replace text
+                replace_func = getattr(self, '_%s_repl' % name)
+                result = replace_func(text, match.groupdict())
+                return result
+
     def replace(self, match, inhibit_p=False):
         """ Replace match using type name """
         result = []
@@ -911,8 +1183,8 @@ class Parser:
                     result.append(self.formatter.paragraph(1, css_class="line891"))
 
                 # Get replace method and replace hit
-                replace = getattr(self, '_' + type + '_repl')
-                result.append(replace(hit))
+                replace_func = getattr(self, '_%s_repl' % type)
+                result.append(replace_func(hit, match.groupdict()))
                 return ''.join(result)
         else:
             # We should never get here
@@ -940,21 +1212,11 @@ class Parser:
         self.hilite_re = self.formatter.page.hilite_re
 
         # prepare regex patterns
-        rules = self.formatting_rules.replace('\n', '|')
-        if self.cfg.bang_meta:
-            rules = ur'(?P<notword>!%(word_rule)s)|%(rules)s' % {
-                'word_rule': self.word_rule,
-                'rules': rules,
-            }
-        pre_rules = self.pre_formatting_rules.replace('\n', '|')
-        self.request.clock.start('compile_huge_and_ugly')
-        scan_re = re.compile(rules, re.UNICODE)
-        pre_scan_re = re.compile(pre_rules, re.UNICODE)
-        number_re = re.compile(self.ol_rule, re.UNICODE)
-        term_re = re.compile(self.dl_rule, re.UNICODE)
+        self.request.clock.start('compile_huge_and_pretty')
+        scan_re = re.compile(self.scan_rules, re.UNICODE|re.VERBOSE)
         indent_re = re.compile(ur"^\s*", re.UNICODE)
         eol_re = re.compile(r'\r?\n', re.UNICODE)
-        self.request.clock.stop('compile_huge_and_ugly')
+        self.request.clock.stop('compile_huge_and_pretty')
 
         # get text and replace TABs
         rawtext = self.raw.expandtabs()
@@ -971,7 +1233,7 @@ class Parser:
 
         # Main loop
         for line in self.lines:
-            if ']][[' in line.replace(' ', ''):
+            if '>><<' in line.replace(' ', ''):
                 self.no_862 = True
 
             self.line_anchor_printed = 0
@@ -1083,7 +1345,7 @@ class Parser:
                 numtype = None
                 numstart = None
                 if indlen:
-                    match = number_re.match(line)
+                    match = self.ol_re.match(line)
                     if match:
                         numtype, numstart = match.group(0).strip().split('.')
                         numtype = numtype[0]
@@ -1095,7 +1357,7 @@ class Parser:
 
                         indtype = "ol"
                     else:
-                        match = term_re.match(line)
+                        match = self.dl_re.match(line)
                         if match:
                             indtype = "dl"
 
@@ -1133,7 +1395,7 @@ class Parser:
                     self.in_table = 0
 
             # Scan line, format and write
-            scanning_re = self.in_pre and pre_scan_re or scan_re
+            scanning_re = self.in_pre and self.pre_scan_re or scan_re
             if '{{{' in line:
                 self.in_nested_pre += 1
             formatted_line = self.scan(scanning_re, line, inhibit_p=inhibit_p)
@@ -1161,3 +1423,5 @@ class Parser:
             self.parser = wikiutil.searchAndImportPlugin(self.request.cfg, "parser", name)
         except wikiutil.PluginMissingError:
             self.parser = None
+
+

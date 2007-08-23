@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - migration from base rev 105xxyy
+    MoinMoin - migration from 1.5.8 to 1.6.0 (creole link style)
 
     What it should do when it is ready:
 
@@ -15,8 +15,8 @@
 
                    markup
        ----------------------------------------------------
-       old         MoinMoin:MainPage/Sub_Page    ../Sub_Page2
-       new         MoinMoin:"MainPage/Sub Page"  "../Sub Page2"???? (TODO check if this works)
+       old         MoinMoin:MainPage/Sub_Page      ../Sub_Page2
+       new         [[MoinMoin:MainPage/Sub Page]]  [[../Sub Page2]]
 
 
     b) decode url encoded chars in attachment names (and quote the whole fname):
@@ -24,7 +24,7 @@
                    markup
        ----------------------------------------------------
        old         attachment:file%20with%20blanks.txt
-       new         attachment:"file with blanks.txt"
+       new         [[attachment:file with blanks.txt]]
 
     c) users: move bookmarks from separate files into user profile
     d) users: generate new name[] for lists and name{} for dicts
@@ -58,6 +58,7 @@
 """
 
 import os.path
+import re
 import codecs, urllib, glob
 
 from MoinMoin import config, wikiutil
@@ -88,30 +89,36 @@ class EventLog:
     def read(self):
         """ read complete event-log from disk """
         data = []
-        f = file(self.fname, 'r')
-        for line in f:
-            line = line.replace('\r', '').replace('\n', '')
-            if not line.strip(): # skip empty lines
-                continue
-            fields = line.split('\t')
-            timestamp, action, kvpairs = fields
-            timestamp = int(timestamp)
-            kvdict = wikiutil.parseQueryString(kvpairs)
-            data.append((timestamp, action, kvdict))
+        try:
+            f = file(self.fname, 'r')
+            for line in f:
+                line = line.replace('\r', '').replace('\n', '')
+                if not line.strip(): # skip empty lines
+                    continue
+                fields = line.split('\t')
+                timestamp, action, kvpairs = fields[:3]
+                timestamp = int(timestamp)
+                kvdict = wikiutil.parseQueryString(kvpairs)
+                data.append((timestamp, action, kvdict))
+            f.close()
+        except IOError, err:
+            # no event-log
+            pass
         self.data = data
 
     def write(self, fname):
         """ write complete event-log to disk """
-        f = file(fname, 'w')
-        for timestamp, action, kvdict in self.data:
-            pagename = kvdict.get('pagename')
-            if pagename and ('PAGE', pagename) in self.renames:
-                kvdict['pagename'] = self.renames[('PAGE', pagename)]
-            kvpairs = wikiutil.makeQueryString(kvdict, want_unicode=False)
-            fields = str(timestamp), action, kvpairs
-            line = '\t'.join(fields) + '\n'
-            f.write(line)
-        f.close()
+        if self.data:
+            f = file(fname, 'w')
+            for timestamp, action, kvdict in self.data:
+                pagename = kvdict.get('pagename')
+                if pagename and ('PAGE', pagename) in self.renames:
+                    kvdict['pagename'] = self.renames[('PAGE', pagename)]
+                kvpairs = wikiutil.makeQueryString(kvdict, want_unicode=False)
+                fields = str(timestamp), action, kvpairs
+                line = '\t'.join(fields) + '\n'
+                f.write(line)
+            f.close()
 
     def copy(self, destfname, renames):
         self.renames = renames
@@ -129,43 +136,49 @@ class EditLog:
     def read(self):
         """ read complete edit-log from disk """
         data = {}
-        f = file(self.fname, 'r')
-        for line in f:
-            line = line.replace('\r', '').replace('\n', '')
-            if not line.strip(): # skip empty lines
-                continue
-            fields = line.split('\t') + [''] * 9
-            timestamp, rev, action, pagename, ip, hostname, userid, extra, comment = fields[:9]
-            timestamp = int(timestamp)
-            rev = int(rev)
-            pagename = wikiutil.unquoteWikiname(pagename)
-            data[(timestamp, rev, pagename)] = (timestamp, rev, action, pagename, ip, hostname, userid, extra, comment)
+        try:
+            f = file(self.fname, 'r')
+            for line in f:
+                line = line.replace('\r', '').replace('\n', '')
+                if not line.strip(): # skip empty lines
+                    continue
+                fields = line.split('\t') + [''] * 9
+                timestamp, rev, action, pagename, ip, hostname, userid, extra, comment = fields[:9]
+                timestamp = int(timestamp)
+                rev = int(rev)
+                pagename = wikiutil.unquoteWikiname(pagename)
+                data[(timestamp, rev, pagename)] = (timestamp, rev, action, pagename, ip, hostname, userid, extra, comment)
+            f.close()
+        except IOError, err:
+            # no edit-log
+            pass
         self.data = data
 
     def write(self, fname):
         """ write complete edit-log to disk """
-        editlog = self.data.items()
-        editlog.sort()
-        f = file(fname, "w")
-        for key, fields in editlog:
-            timestamp, rev, action, pagename, ip, hostname, userid, extra, comment = fields
-            if action.startswith('ATT'):
-                try:
-                    fname = urllib.unquote(extra).decode('utf-8')
-                except UnicodeDecodeError:
-                    fname = urllib.unquote(extra).decode('iso-8859-1')
-                if ('FILE', pagename, fname) in self.renames:
-                    fname = self.renames[('FILE', pagename, fname)]
-                extra = urllib.quote(fname.encode('utf-8'))
-            if ('PAGE', pagename) in self.renames:
-                pagename = self.renames[('PAGE', pagename)]
-            timestamp = str(timestamp)
-            rev = '%08d' % rev
-            pagename = wikiutil.quoteWikinameFS(pagename)
-            fields = timestamp, rev, action, pagename, ip, hostname, userid, extra, comment
-            log_str = '\t'.join(fields) + '\n'
-            f.write(log_str)
-        f.close()
+        if self.data:
+            editlog = self.data.items()
+            editlog.sort()
+            f = file(fname, "w")
+            for key, fields in editlog:
+                timestamp, rev, action, pagename, ip, hostname, userid, extra, comment = fields
+                if action.startswith('ATT'):
+                    try:
+                        fname = urllib.unquote(extra).decode('utf-8')
+                    except UnicodeDecodeError:
+                        fname = urllib.unquote(extra).decode('iso-8859-1')
+                    if ('FILE', pagename, fname) in self.renames:
+                        fname = self.renames[('FILE', pagename, fname)]
+                    extra = urllib.quote(fname.encode('utf-8'))
+                if ('PAGE', pagename) in self.renames:
+                    pagename = self.renames[('PAGE', pagename)]
+                timestamp = str(timestamp)
+                rev = '%08d' % rev
+                pagename = wikiutil.quoteWikinameFS(pagename)
+                fields = timestamp, rev, action, pagename, ip, hostname, userid, extra, comment
+                log_str = '\t'.join(fields) + '\n'
+                f.write(log_str)
+            f.close()
 
     def copy(self, destfname, renames):
         self.renames = renames
@@ -391,7 +404,9 @@ class DataConverter(object):
         self.ddata = dest_data_dir
         self.pages = {}
         self.users = {}
+        self.complete = {}
         self.renames = {}
+        self.complete_fname = opj(self.sdata, 'complete.txt')
         self.rename_fname1 = opj(self.sdata, 'rename1.txt')
         self.rename_fname2 = opj(self.sdata, 'rename2.txt')
 
@@ -405,6 +420,7 @@ class DataConverter(object):
             p.read()
             if not p.revisions:
                 continue # we don't care for pages with no revisions (trash)
+            self.complete[('PAGE', pn)] = None
             if "_" in pn:
                 # log all pagenames with underscores
                 self.renames[('PAGE', pn)] = None
@@ -418,41 +434,47 @@ class DataConverter(object):
                     else:
                         if ' ' in fn_str or '%' in fn_str: # files with blanks need quoting
                             log = True
+                    self.complete[('FILE', pn, fn)] = None
                     if log:
                         # log all strange attachment filenames
                         fn_str = fn.encode('utf-8')
                         self.renames[('FILE', pn, fn)] = None
-        self.save_renames()
+        self.save_list(self.complete_fname, self.complete)
+        self.save_list(self.rename_fname1, self.renames)
 
-    def save_renames(self):
-        f = codecs.open(self.rename_fname1, 'w', 'utf-8')
-        for k in self.renames:
+    LIST_FIELDSEP = u'|' # in case | makes trouble, one can use \t tab char
+
+    def save_list(self, fname, what):
+        f = codecs.open(fname, 'w', 'utf-8')
+        for k in what:
             rtype, pn, fn = (k + (None, ))[:3]
             if rtype == 'PAGE':
-                line = u"%s\t%s\t%s\r\n" % (rtype, pn, pn)
+                line = (rtype, pn, pn)
             elif rtype == 'FILE':
-                line = u"%s\t%s\t%s\t%s\r\n" % (rtype, pn, fn, fn)
-            f.write(line)
+                line = (rtype, pn, fn, fn)
+            line = self.LIST_FIELDSEP.join(line)
+            f.write(line + u'\n')
         f.close()
 
-    def load_renames(self):
-        f = codecs.open(self.rename_fname2, 'r', 'utf-8')
+    def load_list(self, fname, what):
+        f = codecs.open(fname, 'r', 'utf-8')
         for line in f:
             line = line.rstrip()
             if not line:
                 continue
-            t = line.split(u'\t')
+            t = line.split(self.LIST_FIELDSEP)
             rtype, p1, p2, p3 = (t + [None]*3)[:4]
             if rtype == u'PAGE':
-                self.renames[(str(rtype), p1)] = p2
+                what[(str(rtype), p1)] = p2
             elif rtype == u'FILE':
-                self.renames[(str(rtype), p1, p2)] = p3
+                what[(str(rtype), p1, p2)] = p3
         f.close()
 
     def pass2(self):
         """ Second, read the (user edited) rename list and do the renamings everywhere. """
         self.read_src()
-        self.load_renames()
+        #self.load_list(self.complete_fname, self.complete)
+        self.load_list(self.rename_fname2, self.renames)
         self.write_dest()
 
     def read_src(self):
@@ -465,8 +487,9 @@ class DataConverter(object):
 
         # create User objects in memory
         users_dir = opj(self.sdata, 'user')
+        user_re = re.compile(r'^\d+\.\d+(\.\d+)?$')
         userlist = listdir(users_dir)
-        userlist = [fn for fn in userlist if not fn.endswith(".trail") and not fn.endswith(".bookmark")]
+        userlist = [f for f in userlist if user_re.match(f)]
         for userid in userlist:
             u = User(self.request, users_dir, userid)
             self.users[u.uid] = u

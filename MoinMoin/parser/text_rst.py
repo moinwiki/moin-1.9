@@ -358,7 +358,8 @@ class MoinTranslator(html4css1.HTMLTranslator):
                 if not [i for i in node.children if i.__class__ == docutils.nodes.image]:
                     node['classes'].append(prefix)
             elif prefix == 'wiki':
-                wikitag, wikiurl, wikitail, err = wikiutil.resolve_wiki(self.request, link)
+                wiki_name, page_name = wikiutil.split_interwiki(link)
+                wikitag, wikiurl, wikitail, err = wikiutil.resolve_interwiki(self.request, wiki_name, page_name)
                 wikiurl = wikiutil.mapURL(self.request, wikiurl)
                 node['refuri'] = wikiutil.join_wiki(wikiurl, wikitail)
                 # Only add additional class information if the reference does

@@ -77,14 +77,14 @@ class ActionClass(object):
             if line[1]:
                 if line[2]:
                     macro_args = [line[1]] + list(line[2])
-                    message = u"[[GetText2(|%s)]]" % (packLine(macro_args), )
+                    message = u"<<GetText2(|%s)>>" % (packLine(macro_args), )
                 else:
-                    message = u"[[GetText(%s)]]" % (line[1], )
+                    message = u"<<GetText(%s)>>" % (line[1], )
             else:
                 message = u""
             table.append(table_line % {"smiley": line[0][1],
                                        "message": message,
-                                       "raw_suffix": line[3].replace("\n", "[[BR]]")})
+                                       "raw_suffix": line[3].replace("\n", "<<BR>>")})
 
         return "\n".join(table)
 
@@ -137,7 +137,7 @@ class ActionClass(object):
 
     def show_password_form(self):
         _ = self.request.getText
-        d = {"message": _(r"Please enter your password of your account at the remote wiki below. [[BR]] /!\ You should trust both wikis because the password could be read by the particular administrators."),
+        d = {"message": _(r"Please enter your password of your account at the remote wiki below. <<BR>> /!\ You should trust both wikis because the password could be read by the particular administrators."),
              "passwordlabel": _("Password"),
              "submit": _("Login"),
              "cancel": _("Cancel"),
@@ -256,7 +256,7 @@ class ActionClass(object):
         local_full_iwid = packLine([local.get_iwid(), local.get_interwiki_name()])
         remote_full_iwid = packLine([remote.get_iwid(), remote.get_interwiki_name()])
 
-        self.log_status(self.INFO, _("Synchronisation started -"), raw_suffix=" [[DateTime(%s)]]" % self.page._get_local_timestamp())
+        self.log_status(self.INFO, _("Synchronisation started -"), raw_suffix=" <<DateTime(%s)>>" % self.page._get_local_timestamp())
 
         l_pages = local.get_pages()
         r_pages = remote.get_pages(exclude_non_writable=direction != DOWN)
@@ -294,7 +294,7 @@ class ActionClass(object):
                 matching_tags = tags.fetch(iwid_full=remote.iwid_full, direction=match_direction)
                 matching_tags.sort()
                 if debug:
-                    self.log_status(ActionClass.INFO, raw_suffix="Tags: %r [[BR]] All: %r" % (matching_tags, tags.tags))
+                    self.log_status(ActionClass.INFO, raw_suffix="Tags: %r <<BR>> All: %r" % (matching_tags, tags.tags))
 
                 # some default values for non matching tags
                 normalised_name = None

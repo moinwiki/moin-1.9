@@ -82,9 +82,9 @@ def sendBackupForm(request, pagename):
   * Restoring a backup will overwrite existing data, so be careful.
   * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC stuff).
   * Put the backup file into the backup_storage_dir (use scp, ftp, ...).
-  * Hit the [[GetText(Restore)]] button below.
+  * Hit the <<GetText(Restore)>> button below.
 
- * To make a backup, just hit the [[GetText(Backup)]] button and save the file
+ * To make a backup, just hit the <<GetText(Backup)>> button and save the file
    you get to a secure place.
 
 Please make sure your wiki configuration backup_* values are correct and complete.

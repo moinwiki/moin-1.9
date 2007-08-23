@@ -1206,11 +1206,13 @@ class RequestBase(object):
                 pagetrail = self.user.getTrail()
                 if pagetrail:
                     # Redirect to last page visited
-                    if ":" in pagetrail[-1]:
-                        wikitag, wikiurl, wikitail, error = wikiutil.resolve_wiki(self, pagetrail[-1])
+                    last_visited = pagetrail[-1]
+                    wikiname, pagename = wikiutik.split_interwiki(last_visited)
+                    if wikiname != 'Self':
+                        wikitag, wikiurl, wikitail, error = wikiutil.resolve_interwiki(self, wikiname, pagename)
                         url = wikiurl + wikiutil.quoteWikinameURL(wikitail)
                     else:
-                        url = Page(self, pagetrail[-1]).url(self, relative=False)
+                        url = Page(self, pagename).url(self, relative=False)
                 else:
                     # Or to localized FrontPage
                     url = wikiutil.getFrontPage(self).url(self, relative=False)

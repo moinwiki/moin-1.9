@@ -293,7 +293,7 @@ if __name__ == '__main__':
     print
     print '----'
     print
-    print '[[TableOfContents(2)]]'
+    print '<<TableOfContents(2)>>'
     print
     print
     print "= Translation Report ="
@@ -341,7 +341,7 @@ if __name__ == '__main__':
         print
         print "== %(name)s ==" % dict
         print
-        print "Maintainer: [[MailTo(%(maintainer)s)]]" % dict
+        print "Maintainer: <<MailTo(%(maintainer)s)>>" % dict
 
         # Print missing texts, if any
         if report[lang].missing():
