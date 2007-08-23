@@ -213,6 +213,14 @@ class Formatter(FormatterBase):
                 attrs[key] = value
         return FormatterBase.image(self, **attrs) + '</img>'
 
+    def transclusion(self, on, **kw):
+        # TODO, see text_html formatter
+        return ''
+
+    def transclusion_param(self, **kw):
+        # TODO, see text_html formatter
+        return ''
+
     def code_area(self, on, code_id, code_type='code', show=0, start=-1, step=-1):
         return ('<codearea id="%s">' % code_id, '</codearea')[not on]
 

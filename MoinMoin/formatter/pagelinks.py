@@ -27,4 +27,5 @@ class Formatter(FormatterBase):
     number_list = bullet_list = listitem = definition_list = null
     definition_term = definition_desc = heading = table = null
     table_row = table_cell = attachment_link = attachment_image = attachment_drawing = null
+    transclusion = transclusion_param = null
 

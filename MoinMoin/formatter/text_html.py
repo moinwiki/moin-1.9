@@ -1044,6 +1044,8 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
             return self._open('hr', newline=1, attr={'class': 'hr%d' % size}, **kw)
         return self._open('hr', newline=1, **kw)
 
+    # Images / Transclusion ##############################################
+
     def icon(self, type):
         return self.request.theme.make_icon(type)
 
@@ -1057,6 +1059,24 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
         if src:
             kw['src'] = src
         return self._open('img', **kw)
+
+    def transclusion(self, on, **kw):
+        """Transcludes (includes/embeds) another object."""
+        if on:
+            return self._open('object',
+                              allowed_attrs=['archive', 'classid', 'codebase',
+                                             'codetype', 'data', 'declare',
+                                             'height', 'name', 'standby',
+                                             'type', 'width', ],
+                              **kw)
+        else:
+            return self._close('object')
+
+    def transclusion_param(self, **kw):
+        """Give a parameter to a transcluded object."""
+        return self._open('param',
+                          allowed_attrs=['name', 'type', 'value', 'valuetype', ],
+                          **kw)
 
     # Lists ##############################################################
 

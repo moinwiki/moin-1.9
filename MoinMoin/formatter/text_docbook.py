@@ -470,6 +470,14 @@ class Formatter(FormatterBase):
         self.cur.appendChild(media)
         return ""
 
+    def transclusion(self, on, **kw):
+        # TODO, see text_html formatter
+        return ""
+
+    def transclusion_param(self, **kw):
+        # TODO, see text_html formatter
+        return ""
+
     def smiley(self, text):
         return self.request.theme.make_icon(text)
 

@@ -28,6 +28,30 @@ Known main issues:
     and improving it and after having made a backup with some other, proven
     method. USE BOTH ON YOUR OWN RISK!
 
+  * For the jabber notification bot, you need a development version 
+    of pyxmpp, 1.0 won't work. You can get it directly from svn repository:
+
+    svn checkout http://pyxmpp.jajcus.net/svn/pyxmpp/trunk pyxmpp
+
+    Add the resulting `pyxmpp` directory to your PYTHONPATH or perform
+    a "full installation" as described on http://pyxmpp.jajcus.net/:
+
+    To build the package just invoke:
+    python setup.py build
+
+    To install it:
+    python setup.py install
+
+    If you had some older version of PyXMPP it is better to uninstall it 
+    (delete pyxmpp subdirectory of your site-packages directory) before 
+    installing this one or things may not work correctly.
+
+    You may also try:
+    make
+
+    and:
+    make install
+
 Version 1.7.current:
     This is the active development branch. All changes get done here and
     critical stuff gets committed with -m "... (backport needed)" and then
@@ -46,6 +70,8 @@ Version 1.7.current:
     * cfg.password_checker (default: use some simple builtin checks for too
       easy passwords and, if available, python-crack).
       Use password_checker = None to disable password checking.
+    * jabber notification support; for more information see:
+      http://moinmo.in/MoinMoinTodo/Release_1.7/HelpOnNotification
 
   Bugfixes:
     * ...
