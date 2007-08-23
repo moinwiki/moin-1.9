@@ -25,16 +25,16 @@ class NewPage:
 
     Usage:
 
-        [[NewPage(template, buttonLabel, parentPage)]]
+        <<NewPage(template, buttonLabel, parentPage)>>
 
     Examples:
 
-        [[NewPage]]
+        <<NewPage>>
 
             Create an input field with 'Create New Page' button. The new
             page will not use a template.
 
-        [[NewPage(BugTemplate, Create New Bug, MoinMoinBugs)]]
+        <<NewPage(BugTemplate, Create New Bug, MoinMoinBugs)>>
 
             Create an input field with button labeled 'Create New
             Bug'.  The new page will use the BugTemplate template,
@@ -52,7 +52,7 @@ class NewPage:
     def getArgs(self, argstr):
         """ Temporary function until Oliver Graf args parser is finished
 
-        @param argstr: string from the wiki markup [[NewPage(string)]]
+        @param argstr: string from the wiki markup <<NewPage(string)>>
         @rtype: dict
         @return: dictionary with macro options
         """

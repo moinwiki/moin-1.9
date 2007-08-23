@@ -30,8 +30,8 @@ class InterwikiAuth(BaseAuth):
             return ContinueLogin(user_obj)
 
         if verbose: request.log("interwiki auth: trying to auth %r" % username)
-        username = username.replace(' ', ':', 1) # XXX Hack because ':' is not allowed in name field
-        wikitag, wikiurl, name, err = wikiutil.resolve_wiki(request, username)
+        wikiname, username = username.split(' ', 1) # XXX Hack because ':' is not allowed in name field
+        wikitag, wikiurl, name, err = wikiutil.resolve_interwiki(request, wikiname, username)
 
         if verbose: request.log("interwiki auth: resolve wiki returned: %r %r %r %r" % (wikitag, wikiurl, name, err))
         if err or wikitag not in self.trusted_wikis:

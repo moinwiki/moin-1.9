@@ -5,7 +5,7 @@
     This macro is used to show the cumulative hits of the wikipage where the Macro is called from.
     Optionally you could count how much this page or all pages were changed or viewed.
 
-    [[Hits([all=(0,1)],[filter=(VIEWPAGE,SAVEPAGE)]]
+    <<Hits([all=(0,1)],[filter=(VIEWPAGE,SAVEPAGE)>>
 
         all: if set to 1/True/yes then cumulative hits over all wiki pages is returned.
              Default is 0/False/no.
