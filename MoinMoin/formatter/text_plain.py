@@ -250,6 +250,12 @@ class Formatter(FormatterBase):
                 return kw[a]
         return u''
 
+    def transclusion(self, on, **kw):
+        return u''
+
+    def transclusion_param(self, **kw):
+        return u''
+
     def lang(self, on, lang_name):
         return ''
 
