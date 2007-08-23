@@ -171,6 +171,12 @@ class FormatterBase:
             return '[Image:%s]' % title
         return '[Image]'
 
+    # generic transclude/include:
+    def transclusion(self, on, **kw):
+        raise NotImplementedError
+    def transclusion_param(self, **kw):
+        raise NotImplementedError
+
     def smiley(self, text):
         return text
 

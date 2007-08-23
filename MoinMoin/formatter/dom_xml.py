@@ -357,6 +357,12 @@ class Formatter(FormatterBase):
             kw['src'] = src
         return self._add_tag('img', **kw)
 
+    def transclusion(self, on, **kw):
+        return self._set_tag('object', on, **kw)
+
+    def transclusion_param(self, **kw):
+        return self._add_tag('param', **kw)
+
     def escapedText(self, text, **kw):
         return wikiutil.escape(text)
 
