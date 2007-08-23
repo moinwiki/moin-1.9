@@ -15,8 +15,8 @@
 
                    markup
        ----------------------------------------------------
-       old         MoinMoin:MainPage/Sub_Page    ../Sub_Page2
-       new         MoinMoin:"MainPage/Sub Page"  "../Sub Page2"???? (TODO check if this works)
+       old         MoinMoin:MainPage/Sub_Page      ../Sub_Page2
+       new         [[MoinMoin:MainPage/Sub Page]]  [[../Sub Page2]]
 
 
     b) decode url encoded chars in attachment names (and quote the whole fname):
@@ -24,7 +24,7 @@
                    markup
        ----------------------------------------------------
        old         attachment:file%20with%20blanks.txt
-       new         attachment:"file with blanks.txt"
+       new         [[attachment:file with blanks.txt]]
 
     c) users: move bookmarks from separate files into user profile
     d) users: generate new name[] for lists and name{} for dicts
@@ -96,7 +96,7 @@ class EventLog:
                 if not line.strip(): # skip empty lines
                     continue
                 fields = line.split('\t')
-                timestamp, action, kvpairs = fields
+                timestamp, action, kvpairs = fields[:3]
                 timestamp = int(timestamp)
                 kvdict = wikiutil.parseQueryString(kvpairs)
                 data.append((timestamp, action, kvdict))
