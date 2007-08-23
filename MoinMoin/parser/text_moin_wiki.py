@@ -26,7 +26,7 @@ TODO: use this for links to anchors
 
 import re
 from MoinMoin import config, wikiutil, macro
-
+from MoinMoin.Page import Page
 
 Dependencies = ['user'] # {{{#!wiki comment ... }}} has different output depending on the user's profile settings
 
@@ -298,7 +298,6 @@ class Parser:
 )|(?P<sgml_entity>  # must come AFTER entity rule!
     [<>&]  # needs special treatment for html/xml
 )"""  % {
-
         'url_scheme': url_scheme,
         'url_rule': url_rule,
         'punct': punct_pattern,
@@ -595,6 +594,16 @@ class Parser:
                 if scheme.startswith('http'): # can also be https
                     # currently only supports ext. image inclusion
                     return self.formatter.image(src=target, alt=desc, title=desc, css_class='external_image')
+                    # FF2 has a bug with target mimetype detection, it looks at the url path
+                    # and expects to find some "filename extension" there (like .png) and this
+                    # (not the response http headers) will set the default content-type of
+                    # the object. This will often work for staticly served files, but
+                    # fails for MoinMoin attachments (they don't have the filename.ext in the
+                    # path, but in the query string). FF3 seems to have this bug fixed, opera 9.2
+                    # also works.
+                    #return (self.formatter.transclusion(1, data=target) +
+                    #        desc +
+                    #        self.formatter.transclusion(0))
 
             elif m.group('attach_scheme'):
                 scheme = m.group('attach_scheme')
@@ -608,6 +617,15 @@ class Parser:
                     elif mt.major == 'image':
                         return self.formatter.attachment_image(url, alt=desc, title=desc, css_class='image')
                     else:
+                        from MoinMoin.action import AttachFile
+                        pagename = self.formatter.page.page_name
+                        href = AttachFile.getAttachUrl(pagename, url, self.request, escaped=0)
+                        return (self.formatter.transclusion(1, data=href, type=mt.spoil()) +
+                                desc +
+                                self.formatter.transclusion(0))
+
+                        #NOT USED CURRENTLY:
+
                         # use EmbedObject for other mimetypes
                         from MoinMoin.macro.EmbedObject import EmbedObject
                         from MoinMoin.action import AttachFile
@@ -623,14 +641,26 @@ class Parser:
                 elif scheme == 'drawing':
                     return self.formatter.attachment_drawing(url, desc)
 
-            elif m.group('page_name'): # TODO
+            elif m.group('page_name'):
+                # experimental client side transclusion
                 page_name = m.group('page_name')
-                return u"Error: <<Include(%s,%s)>> emulation missing..." % (page_name, args)
+                url = Page(self.request, page_name).url(self.request, querystr={'action': 'content', }, relative=False)
+                return (self.formatter.transclusion(1, data=url, type='text/html', width="100%") +
+                        desc +
+                        self.formatter.transclusion(0))
+                #return u"Error: <<Include(%s,%s)>> emulation missing..." % (page_name, args)
 
-            elif m.group('inter_wiki'): # TODO
+            elif m.group('inter_wiki'):
+                # experimental client side transclusion
                 wiki_name = m.group('inter_wiki')
                 page_name = m.group('inter_page')
-                return u"Error: <<RemoteInclude(%s:%s,%s)>> still missing." % (wiki_name, page_name, args)
+                wikitag, wikiurl, wikitail, err = wikiutil.resolve_interwiki(self.request, wiki_name, page_name)
+                url = wikiutil.join_wiki(wikiurl, wikitail)
+                url += '?action=content' # XXX moin specific
+                return (self.formatter.transclusion(1, data=url, type='text/html', width="100%") +
+                        desc +
+                        self.formatter.transclusion(0))
+                #return u"Error: <<RemoteInclude(%s:%s,%s)>> still missing." % (wiki_name, page_name, args)
 
             else:
                 if not desc:
