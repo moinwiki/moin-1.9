@@ -51,7 +51,7 @@ class TestWikiConversion:
             ('[wiki:LinuxWiki: LinuxWiki.de]', {}, '[[LinuxWiki:|LinuxWiki.de]]'),
             # does not work in 1.5.8, no need to convert:
             #('[wiki:MacroMarket/EmbedObject EO]', {}, '["MacroMarket/EmbedObject" EO]'),
-            ('[wiki:MoinMoin/FrontPage]', {}, '[[MoinMoin:FrontPage]]'),
+            ('[wiki:MoinMoin/FrontPage]', {}, 'MoinMoin:FrontPage'),
             ('[wiki:/OtherPage]', rename_some_page, '[[/OtherPage]]'),
             ('[wiki:/OtherPage other page]', rename_some_page, '[[/OtherPage|other page]]'),
             ('some_text', {}, 'some_text'),

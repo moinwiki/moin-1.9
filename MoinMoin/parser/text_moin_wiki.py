@@ -1160,13 +1160,8 @@ class Parser:
                 self.formatter.in_p) and lastpos < len(line):
             result.append(self.formatter.paragraph(1, css_class="line874"))
         if '}}}' in line and len(line[lastpos:].strip()) > 0:
-            rules = self.formatting_rules.replace('\n', '|')
-            rules = ur'(?P<notword>!%(word_rule)s)|%(rules)s' % {
-                'word_rule': self.word_rule,
-                'rules': rules,
-            }
-            scanning_re = re.compile(rules, re.UNICODE)
-            result.append(self.scan(scanning_re, line[lastpos:].strip(), inhibit_p=inhibit_p))
+            scan_re = re.compile(self.scan_rules, re.UNICODE|re.VERBOSE)
+            result.append(self.scan(scan_re, line[lastpos:].strip(), inhibit_p=inhibit_p))
         else:
             result.append(self.formatter.text(line[lastpos:]))
         return u''.join(result)
