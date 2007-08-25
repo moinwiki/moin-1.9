@@ -59,6 +59,7 @@
 
 import os.path
 import re
+import time
 import codecs, urllib, glob
 
 from MoinMoin import config, wikiutil
@@ -67,6 +68,8 @@ from MoinMoin.script.migration.migutil import opj, listdir, copy_file, move_file
 import mimetypes # this MUST be after wikiutil import!
 
 from _conv160_wiki import convert_wiki
+
+create_rev = True # create a <new> rev with the converted content of <new-1> rev?
 
 def markup_converter(request, pagename, text, renames):
     """ Convert the <text> content of page <pagename>, using <renames> dict
@@ -154,7 +157,7 @@ class EditLog:
             pass
         self.data = data
 
-    def write(self, fname):
+    def write(self, fname, deleted=False):
         """ write complete edit-log to disk """
         if self.data:
             editlog = self.data.items()
@@ -173,17 +176,29 @@ class EditLog:
                 if ('PAGE', pagename) in self.renames:
                     pagename = self.renames[('PAGE', pagename)]
                 timestamp = str(timestamp)
-                rev = '%08d' % rev
+                revstr = '%08d' % rev
                 pagename = wikiutil.quoteWikinameFS(pagename)
-                fields = timestamp, rev, action, pagename, ip, hostname, userid, extra, comment
+                fields = timestamp, revstr, action, pagename, ip, hostname, userid, extra, comment
+                log_str = '\t'.join(fields) + '\n'
+                f.write(log_str)
+            if create_rev and not deleted:
+                timestamp = str(wikiutil.timestamp2version(time.time()))
+                revstr = '%08d' % (rev + 1)
+                action = 'SAVE'
+                ip = '127.0.0.1'
+                hostname = 'localhost'
+                userid = ''
+                extra = ''
+                comment = "converted to 1.6 markup"
+                fields = timestamp, revstr, action, pagename, ip, hostname, userid, extra, comment
                 log_str = '\t'.join(fields) + '\n'
                 f.write(log_str)
             f.close()
 
-    def copy(self, destfname, renames):
+    def copy(self, destfname, renames, deleted=False):
         self.renames = renames
         self.read()
-        self.write(destfname)
+        self.write(destfname, deleted)
 
 
 class PageRev:
@@ -202,8 +217,9 @@ class PageRev:
         data = data.decode(config.charset)
         return data
 
-    def write(self, data, rev_dir, convert):
-        rev = self.rev
+    def write(self, data, rev_dir, convert, rev=None):
+        if rev is None:
+            rev = self.rev
         if convert:
             data = markup_converter(self.request, self.pagename, data, self.renames)
         fname = opj(rev_dir, '%08d' % rev)
@@ -212,10 +228,10 @@ class PageRev:
         f.write(data)
         f.close()
 
-    def copy(self, rev_dir, renames, convert):
+    def copy(self, rev_dir, renames, convert=False, new_rev=None):
         self.renames = renames
         data = self.read()
-        self.write(data, rev_dir, convert)
+        self.write(data, rev_dir, convert, new_rev)
 
 
 class Attachment:
@@ -270,6 +286,8 @@ class Page:
             self.revisions = {}
             for rev in revlist:
                 self.revisions[rev] = PageRev(self.request, self.name_old, rev_dir, rev)
+        # set deleted status
+        self.is_deleted = not self.revisions or self.current not in self.revisions
         # read attachment filenames
         attach_dir = opj(page_dir, 'attachments')
         if os.path.exists(attach_dir):
@@ -291,25 +309,34 @@ class Page:
         page_dir = opj(pages_dir, qpagename)
         os.makedirs(page_dir)
         # write current file
-        if self.current is not None:
+        current = self.current
+        if current is not None:
+            if create_rev and not self.is_deleted:
+                current += 1
             current_fname = opj(page_dir, 'current')
             current_file = file(current_fname, "w")
-            current_str = '%08d\n' % self.current
+            current_str = '%08d\n' % current
             current_file.write(current_str)
             current_file.close()
         # copy edit-log
         if self.editlog is not None:
             editlog_fname = opj(page_dir, 'edit-log')
-            self.editlog.copy(editlog_fname, self.renames)
+            self.editlog.copy(editlog_fname, self.renames, deleted=self.is_deleted)
         # copy page revisions
         if self.revisions is not None:
             rev_dir = opj(page_dir, 'revisions')
             os.makedirs(rev_dir)
             for rev in self.revlist:
-                if int(rev) == self.current:
-                    self.revisions[rev].copy(rev_dir, self.renames, convert=True)
+                if create_rev:
+                    self.revisions[rev].copy(rev_dir, self.renames)
                 else:
-                    self.revisions[rev].copy(rev_dir, self.renames, convert=False)
+                    if int(rev) == self.current:
+                        self.revisions[rev].copy(rev_dir, self.renames, convert=True)
+                    else:
+                        self.revisions[rev].copy(rev_dir, self.renames)
+            if create_rev and not self.is_deleted:
+                self.revisions[rev].copy(rev_dir, self.renames, convert=True, new_rev=rev+1)
+
         # copy attachments
         if self.attachments is not None:
             attach_dir = opj(page_dir, 'attachments')
