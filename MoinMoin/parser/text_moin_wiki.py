@@ -220,16 +220,17 @@ class Parser:
     (?P<interwiki_wiki>[A-Z][a-zA-Z]+)  # interwiki wiki name
     \:
     (?P<interwiki_page>
+     (?=[^ ]*[%(u)s%(l)s0..9][^ ]*\ )  # make sure there is something non-blank with at least one alphanum letter following
      [^\s'\"\:\<\|]
      (
-      [^\s%(punct)s]
+      [^\s%(punct)s]  # we take all until we hit some blank or punctuation char ...
      |
       (
-       [%(punct)s]
-       [^\s%(punct)s]
+       [%(punct)s]     # ... but if some punctuation char is followed by something
+       [^\s%(punct)s]  # non-blank (or more punctuation stuff), we also take it!
       )
      )+
-    )  # interwiki page name
+    )
 )|(?P<word>  # must come AFTER interwiki rule!
     %(word_rule)s  # CamelCase wiki words
 )|(?P<link>
@@ -305,6 +306,8 @@ class Parser:
         'dl_rule': dl_rule,
         'word_rule': word_rule,
         'transclude_rule': transclude_rule,
+        'u': config.chars_upper,
+        'l': config.chars_lower,
         'smiley': u'|'.join([re.escape(s) for s in config.smileys])}
 
     # Don't start p before these
