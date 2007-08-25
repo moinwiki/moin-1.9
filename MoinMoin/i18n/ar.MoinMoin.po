@@ -5,10 +5,9 @@
 #acl MoinPagesEditorGroup:read,write,delete,revert All:read
 #format gettext
 #language ar
+
 #
 # MoinMoin ar system text translation
-#Alexander Stein <ajs67@georgetown.edu>, 2007
-#Mohamed Yahya <yahya.mohamed@gmail.com>, 2007
 #
 msgid ""
 msgstr ""
@@ -60,8 +59,12 @@ msgstr "كلمات السر غير متطابقة!"
 msgid "Please specify a password!"
 msgstr "الرجاء إدخال كلمة سر!"
 
-msgid "Please provide your email address. If you lose your login information, you can get it by email."
-msgstr "الرجاء إدخال عنوان البريد الإلكتروني. إذا فقدت معلومات الولوج، بإمكانك الحصول عليها بريديا."
+msgid ""
+"Please provide your email address. If you lose your login information, you "
+"can get it by email."
+msgstr ""
+"الرجاء إدخال عنوان البريد الإلكتروني. إذا فقدت معلومات الولوج، بإمكانك "
+"الحصول عليها بريديا."
 
 msgid "This email already belongs to somebody else."
 msgstr "عنوان البريد الإلكتروني هذا يخص شخصا آخر."
@@ -148,7 +151,9 @@ msgid "Email"
 msgstr "بريد الكتروني"
 
 #, python-format
-msgid "To create an account, see the %(userprefslink)s page. To recover a lost password, go to %(sendmypasswordlink)s."
+msgid ""
+"To create an account, see the %(userprefslink)s page. To recover a lost "
+"password, go to %(sendmypasswordlink)s."
 msgstr ""
 
 msgid "Name"
@@ -235,7 +240,12 @@ msgid "[You may not read %s]"
 msgstr "[لا يمكن أن تقرأ %s]"
 
 #, python-format
-msgid "'''[[BR]]Your draft based on revision %(draft_rev)d (saved %(draft_timestamp_str)s) can be loaded instead of the current revision %(page_rev)d by using the load draft button - in case you lost your last edit somehow without saving it.''' A draft gets saved for you when you do a preview, cancel an edit or unsuccessfully save."
+msgid ""
+"'''[[BR]]Your draft based on revision %(draft_rev)d (saved %"
+"(draft_timestamp_str)s) can be loaded instead of the current revision %"
+"(page_rev)d by using the load draft button - in case you lost your last edit "
+"somehow without saving it.''' A draft gets saved for you when you do a "
+"preview, cancel an edit or unsuccessfully save."
 msgstr ""
 
 #, python-format
@@ -250,8 +260,10 @@ msgstr "إحفظ التغييرات"
 
 #, python-format
 msgid ""
-"By hitting '''%(save_button_text)s''' you put your changes under the %(license_link)s.\n"
-"If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes."
+"By hitting '''%(save_button_text)s''' you put your changes under the %"
+"(license_link)s.\n"
+"If you don't want that, hit '''%(cancel_button_text)s''' to cancel your "
+"changes."
 msgstr ""
 
 msgid "Preview"
@@ -284,14 +296,17 @@ msgstr ""
 msgid "The wiki is currently not reachable."
 msgstr "لا يمكن الوصول إلى هذه الويكي حاليا."
 
-msgid "The remote version of MoinMoin is too old, version 1.6 is required at least."
+msgid ""
+"The remote version of MoinMoin is too old, version 1.6 is required at least."
 msgstr ""
 
 msgid "Invalid username or password."
 msgstr "إسم مستخدم أو كلمة سر غير صالحة."
 
 #, python-format
-msgid "The remote wiki uses a different InterWiki name (%(remotename)s) internally than you specified (%(localname)s)."
+msgid ""
+"The remote wiki uses a different InterWiki name (%(remotename)s) internally "
+"than you specified (%(localname)s)."
 msgstr ""
 
 #, python-format
@@ -392,7 +407,8 @@ msgstr ""
 msgid ""
 "Dear Wiki user,\n"
 "\n"
-"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for change notification.\n"
+"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
+"change notification.\n"
 "\n"
 "The following page has been changed by %(editor)s:\n"
 "%(pagelink)s\n"
@@ -450,32 +466,42 @@ msgstr ""
 msgid "You did not change the page content, not saved!"
 msgstr ""
 
-msgid "You can't change ACLs on this page since you have no admin rights on it!"
+msgid ""
+"You can't change ACLs on this page since you have no admin rights on it!"
 msgstr ""
 
 #, python-format
-msgid "The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page."
+msgid ""
+"The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were "
+"granted the lock for this page."
 msgstr ""
 
 #, python-format
-msgid "Other users will be ''blocked'' from editing this page until %(bumptime)s."
+msgid ""
+"Other users will be ''blocked'' from editing this page until %(bumptime)s."
 msgstr ""
 
 #, python-format
-msgid "Other users will be ''warned'' until %(bumptime)s that you are editing this page."
+msgid ""
+"Other users will be ''warned'' until %(bumptime)s that you are editing this "
+"page."
 msgstr ""
 
 msgid "Use the Preview button to extend the locking period."
 msgstr ""
 
 #, python-format
-msgid "This page is currently ''locked'' for editing by %(owner)s until %(timestamp)s, i.e. for %(mins_valid)d minute(s)."
+msgid ""
+"This page is currently ''locked'' for editing by %(owner)s until %(timestamp)"
+"s, i.e. for %(mins_valid)d minute(s)."
 msgstr ""
 
 #, python-format
 msgid ""
-"This page was opened for editing or last previewed at %(timestamp)s by %(owner)s.[[BR]]\n"
-"'''You should ''refrain from editing'' this page for at least another %(mins_valid)d minute(s),\n"
+"This page was opened for editing or last previewed at %(timestamp)s by %"
+"(owner)s.[[BR]]\n"
+"'''You should ''refrain from editing'' this page for at least another %"
+"(mins_valid)d minute(s),\n"
 "to avoid editing conflicts.'''[[BR]]\n"
 "To leave the editor, press the Cancel button."
 msgstr ""
@@ -499,14 +525,17 @@ msgid ""
 "password AS SHOWN into the wiki's password form field (use copy and paste\n"
 "for that).\n"
 "\n"
-"After successfully logging in, it is of course a good idea to set a new and known password.\n"
+"After successfully logging in, it is of course a good idea to set a new and "
+"known password.\n"
 msgstr ""
 
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
 msgstr ""
 
-msgid "The backed up content of this page is deprecated and will not be included in search results!"
+msgid ""
+"The backed up content of this page is deprecated and will not be included in "
+"search results!"
 msgstr ""
 
 #, python-format
@@ -528,7 +557,9 @@ msgid "You are not allowed to view this page."
 msgstr "لا يسمح لك بنظر هذه الصفحة."
 
 #, python-format
-msgid "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d%(be)s results out of about %(pages)d pages."
+msgid ""
+"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
+"%(be)s results out of about %(pages)d pages."
 msgstr ""
 
 #, fuzzy
@@ -916,7 +947,8 @@ msgstr ""
 msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
 msgstr ""
 
-msgid "Rendering of reStructured text is not possible, please install Docutils."
+msgid ""
+"Rendering of reStructured text is not possible, please install Docutils."
 msgstr ""
 
 msgid "**Maximum number of allowed includes exceeded**"
@@ -970,7 +1002,8 @@ msgid "Additions are marked like this."
 msgstr ""
 
 #, python-format
-msgid "Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
+msgid ""
+"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
 msgstr ""
 
 msgid "Page"
@@ -1295,11 +1328,21 @@ msgid "# of hits"
 msgstr ""
 
 msgid ""
-" Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim(''')]]'''bold'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''bold italics'''''[[Verbatim(''''')]]; [[Verbatim('')]]''mixed ''[[Verbatim(''')]]'''''bold'''[[Verbatim(''')]] and italics''[[Verbatim('')]]; [[Verbatim(----)]] horizontal rule.\n"
-" Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].\n"
-" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.\n"
-" Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim([\"brackets and double quotes\"])]]; url; [url]; [url label].\n"
-" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.\n"
+" Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
+"(''')]]'''bold'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''bold "
+"italics'''''[[Verbatim(''''')]]; [[Verbatim('')]]''mixed ''[[Verbatim"
+"(''')]]'''''bold'''[[Verbatim(''')]] and italics''[[Verbatim('')]]; "
+"[[Verbatim(----)]] horizontal rule.\n"
+" Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title "
+"2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim"
+"(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim"
+"(=====)]].\n"
+" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
+"#n start numbering at n; space alone indents.\n"
+" Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim([\"brackets and "
+"double quotes\"])]]; url; [url]; [url label].\n"
+" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
+"white space allowed after tables or titles.\n"
 "\n"
 "(!) For more help, see HelpOnEditing or SyntaxReference.\n"
 msgstr ""
@@ -1328,7 +1371,8 @@ msgid "UnSubscribe"
 msgstr ""
 
 msgid "Publish my email (not my wiki homepage) in author info"
-msgstr "انشر رسائلي الإلكترونية (ليس صفحتي الشخصية في الويكي ) في معلومات المؤلف"
+msgstr ""
+"انشر رسائلي الإلكترونية (ليس صفحتي الشخصية في الويكي ) في معلومات المؤلف"
 
 msgid "Open editor on double click"
 msgstr "افتح المحرر عند النقر المزدوج"
@@ -1432,7 +1476,9 @@ msgid "[%d attachments]"
 msgstr ""
 
 #, python-format
-msgid "There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this page."
+msgid ""
+"There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this "
+"page."
 msgstr ""
 
 #, python-format
@@ -1484,7 +1530,8 @@ msgstr ""
 msgid ""
 "An upload will never overwrite an existing file. If there is a name\n"
 "conflict, you have to rename the file that you want to upload.\n"
-"Otherwise, if \"Rename to\" is left blank, the original filename will be used."
+"Otherwise, if \"Rename to\" is left blank, the original filename will be "
+"used."
 msgstr ""
 
 msgid "File to upload"
@@ -1511,7 +1558,9 @@ msgstr ""
 msgid "You are not allowed to save a drawing on this page."
 msgstr ""
 
-msgid "No file content. Delete non ASCII characters from the file name and try again."
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
 msgstr ""
 
 msgid "You are not allowed to delete attachments on this page."
@@ -1548,7 +1597,9 @@ msgid "Attachments for \"%(pagename)s\""
 msgstr ""
 
 #, python-format
-msgid "Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes saved."
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
 msgstr ""
 
 #, python-format
@@ -1596,11 +1647,15 @@ msgid "Attachment '%(filename)s' installed."
 msgstr ""
 
 #, python-format
-msgid "Attachment '%(filename)s' could not be unzipped because the resulting files would be too large (%(space)d kB missing)."
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
 msgstr ""
 
 #, python-format
-msgid "Attachment '%(filename)s' could not be unzipped because the resulting files would be too many (%(count)d missing)."
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too many (%(count)d missing)."
 msgstr ""
 
 #, python-format
@@ -1608,7 +1663,9 @@ msgid "Attachment '%(filename)s' unzipped."
 msgstr ""
 
 #, python-format
-msgid "Attachment '%(filename)s' not unzipped because the files are too big, .zip files only, exist already or reside in folders."
+msgid ""
+"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
+"files only, exist already or reside in folders."
 msgstr ""
 
 #, python-format
@@ -1680,7 +1737,10 @@ msgstr ""
 msgid "Exception while calling rollback function:"
 msgstr ""
 
-msgid "Please enter your password of your account at the remote wiki below. [[BR]] /!\\ You should trust both wikis because the password could be read by the particular administrators."
+msgid ""
+"Please enter your password of your account at the remote wiki below. "
+"[[BR]] /!\\ You should trust both wikis because the password could be read "
+"by the particular administrators."
 msgstr ""
 
 msgid "Operation was canceled."
@@ -1689,10 +1749,14 @@ msgstr ""
 msgid "The only supported directions are BOTH and DOWN."
 msgstr ""
 
-msgid "Please set an interwikiname in your wikiconfig (see HelpOnConfiguration) to be able to use this action."
+msgid ""
+"Please set an interwikiname in your wikiconfig (see HelpOnConfiguration) to "
+"be able to use this action."
 msgstr ""
 
-msgid "Incorrect parameters. Please supply at least the ''remoteWiki'' parameter. Refer to HelpOnSynchronisation for help."
+msgid ""
+"Incorrect parameters. Please supply at least the ''remoteWiki'' parameter. "
+"Refer to HelpOnSynchronisation for help."
 msgstr ""
 
 msgid "The ''remoteWiki'' is unknown."
@@ -1708,7 +1772,9 @@ msgid "Synchronisation started -"
 msgstr ""
 
 #, python-format
-msgid "Got a list of %s local and %s remote pages. This results in %s different pages over-all."
+msgid ""
+"Got a list of %s local and %s remote pages. This results in %s different "
+"pages over-all."
 msgstr ""
 
 #, python-format
@@ -1736,15 +1802,21 @@ msgid "Error while deleting page %s remotely:"
 msgstr ""
 
 #, python-format
-msgid "The item %s cannot be merged automatically but was changed in both wikis. Please delete it in one of both wikis and try again."
+msgid ""
+"The item %s cannot be merged automatically but was changed in both wikis. "
+"Please delete it in one of both wikis and try again."
 msgstr ""
 
 #, python-format
-msgid "The item %s has different mime types in both wikis and cannot be merged. Please delete it in one of both wikis or unify the mime type, and try again."
+msgid ""
+"The item %s has different mime types in both wikis and cannot be merged. "
+"Please delete it in one of both wikis or unify the mime type, and try again."
 msgstr ""
 
 #, python-format
-msgid "The item %s was renamed locally. This is not implemented yet. Therefore the full synchronisation history is lost for this page."
+msgid ""
+"The item %s was renamed locally. This is not implemented yet. Therefore the "
+"full synchronisation history is lost for this page."
 msgstr ""
 
 #, python-format
@@ -1756,7 +1828,9 @@ msgid "The page %s was deleted remotely but changed locally."
 msgstr ""
 
 #, python-format
-msgid "The page %s could not be synced. The remote page was renamed. This is not supported yet. You may want to delete one of the pages to get it synced."
+msgid ""
+"The page %s could not be synced. The remote page was renamed. This is not "
+"supported yet. You may want to delete one of the pages to get it synced."
 msgstr ""
 
 #, python-format
@@ -1764,11 +1838,15 @@ msgid "Skipped page %s because of a locally or remotely unresolved conflict."
 msgstr ""
 
 #, python-format
-msgid "This is the first synchronisation between the local and the remote wiki for the page %s."
+msgid ""
+"This is the first synchronisation between the local and the remote wiki for "
+"the page %s."
 msgstr ""
 
 #, python-format
-msgid "The page %s could not be merged because you are not allowed to modify the page in the remote wiki."
+msgid ""
+"The page %s could not be merged because you are not allowed to modify the "
+"page in the remote wiki."
 msgstr ""
 
 #, python-format
@@ -1790,7 +1868,9 @@ msgstr ""
 msgid "New Page or New Attachment"
 msgstr "المرفقات"
 
-msgid "You can upload a file to a new page or choose to upload a file as attachment for the current page"
+msgid ""
+"You can upload a file to a new page or choose to upload a file as attachment "
+"for the current page"
 msgstr ""
 
 #, fuzzy
@@ -1809,7 +1889,9 @@ msgid "(including %(localwords)d %(pagelink)s)"
 msgstr ""
 
 #, python-format
-msgid "The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:"
+msgid ""
+"The following %(badwords)d words could not be found in the dictionary of %"
+"(totalwords)d words%(localwords)s and are highlighted below:"
 msgstr ""
 
 msgid "Add checked words to dictionary"
@@ -1905,21 +1987,29 @@ msgstr ""
 
 #, python-format
 msgid ""
-"You can add some additional sub pages to your already existing homepage here.\n"
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
 "\n"
 "You can choose how open to other readers or writers those pages shall be,\n"
 "access is controlled by group membership of the corresponding group page.\n"
 "\n"
-"Just enter the sub page's name and click on the button to create a new page.\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
 "\n"
-"Before creating access protected pages, make sure the corresponding group page\n"
-"exists and has the appropriate members in it. Use HomepageGroupsTemplate for creating\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
 "the group pages.\n"
 "\n"
-"||'''Add a new personal page:'''||'''Related access control list group:'''||\n"
-"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||[\"%(username)s/ReadWriteGroup\"]||\n"
-"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%(username)s/ReadGroup\"]||\n"
-"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%(username)s only||\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
+"[\"%(username)s/ReadWriteGroup\"]||\n"
+"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
+"(username)s/ReadGroup\"]||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
+"(username)s only||\n"
 "\n"
 msgstr ""
 
@@ -1944,7 +2034,9 @@ msgstr "لا يسمح لك القيام بهذا الإجراء."
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr ""
 
-msgid "/!\\ The modification date you entered was not recognized and is therefore not considered for the search results!"
+msgid ""
+"/!\\ The modification date you entered was not recognized and is therefore "
+"not considered for the search results!"
 msgstr ""
 
 #, python-format
@@ -1960,11 +2052,15 @@ msgid "Full Text Search: \"%s\""
 msgstr ""
 
 #, python-format
-msgid "Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching for more information."
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
 msgstr ""
 
 #, python-format
-msgid "Your search query {{{\"%s\"}}} didn't return any results. Please change some terms and refer to HelpOnSearching for more information.%s"
+msgid ""
+"Your search query {{{\"%s\"}}} didn't return any results. Please change some "
+"terms and refer to HelpOnSearching for more information.%s"
 msgstr ""
 
 msgid "(!) Consider performing a"
@@ -1973,7 +2069,9 @@ msgstr ""
 msgid "full-text search with your search terms"
 msgstr ""
 
-msgid "(!) You're performing a title search that might not include all related results of your search query in this wiki. [[BR]]"
+msgid ""
+"(!) You're performing a title search that might not include all related "
+"results of your search query in this wiki. [[BR]]"
 msgstr ""
 
 msgid "Click here to perform a full-text search with your search terms!"
@@ -1996,14 +2094,17 @@ msgid ""
 "Some hints:\n"
 " * To restore a backup:\n"
 "  * Restoring a backup will overwrite existing data, so be careful.\n"
-"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC stuff).\n"
+"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
+"stuff).\n"
 "  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
 "  * Hit the [[GetText(Restore)]] button below.\n"
 "\n"
-" * To make a backup, just hit the [[GetText(Backup)]] button and save the file\n"
+" * To make a backup, just hit the [[GetText(Backup)]] button and save the "
+"file\n"
 "   you get to a secure place.\n"
 "\n"
-"Please make sure your wiki configuration backup_* values are correct and complete.\n"
+"Please make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
 "\n"
 msgstr ""
 
@@ -2024,7 +2125,10 @@ msgstr ""
 msgid "You are not allowed to revert this page!"
 msgstr "!لا يسمح لك بالعودة إلى هذه الصفحة"
 
-msgid "You were viewing the current revision of this page when you called the revert action. If you want to revert to an older revision, first view that older revision and then call revert to this (older) revision again."
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
 msgstr ""
 
 #, python-format
@@ -2099,7 +2203,8 @@ msgstr ""
 msgid "Really copy this page?"
 msgstr "!لا يسمح لك بالعودة إلى هذه الصفحة"
 
-msgid "Cannot create a new page without a page name.  Please specify a page name."
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
 msgstr ""
 
 msgid "Delete"
