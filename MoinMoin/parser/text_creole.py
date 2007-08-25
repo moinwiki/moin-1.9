@@ -23,6 +23,7 @@
 import re
 import StringIO
 from MoinMoin import config, macro, wikiutil
+from MoinMoin.support.python_compatibility import rsplit
 
 Dependencies = []
 
@@ -589,7 +590,7 @@ class DocEmitter:
         if word.startswith(wikiutil.CHILD_PREFIX):
             word = self.formatter.page.page_name + '/' + word[wikiutil.CHILD_PREFIX_LEN:]
         # handle anchors
-        parts = word.split("#", 1)
+        parts = rsplit(word, "#", 1)
         anchor = ""
         if len(parts) == 2:
             word, anchor = parts

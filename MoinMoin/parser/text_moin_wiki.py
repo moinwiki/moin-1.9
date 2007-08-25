@@ -27,6 +27,7 @@ TODO: use this for links to anchors
 import re
 from MoinMoin import config, wikiutil, macro
 from MoinMoin.Page import Page
+from MoinMoin.support.python_compatibility import rsplit
 
 Dependencies = ['user'] # {{{#!wiki comment ... }}} has different output depending on the user's profile settings
 
@@ -554,7 +555,7 @@ class Parser:
             return self.formatter.text(orig_word)
         else:
             # handle anchors
-            parts = name.split("#", 1)
+            parts = rsplit(name, "#", 1)
             anchor = ""
             if len(parts) == 2:
                 name, anchor = parts
@@ -715,7 +716,7 @@ class Parser:
                     page_name = self.formatter.page.page_name + '/' + page_name[self.CHILD_PREFIX_LEN:] # XXX use func
                 # handle anchors
                 try:
-                    page_name, anchor = page_name.split("#", 1)
+                    page_name, anchor = rsplit(page_name, "#", 1)
                 except ValueError:
                     anchor = ""
                 if not page_name:
