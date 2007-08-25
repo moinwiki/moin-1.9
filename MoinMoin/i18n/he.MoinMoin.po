@@ -11,9 +11,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.5.0\n"
+"Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-29 23:46+0100\n"
+"POT-Creation-Date: 2007-07-30 19:24+0200\n"
 "PO-Revision-Date: 2005-07-31 00:00+0200\n"
 "Last-Translator: ***vacant***\n"
 "Language-Team: Hebrew <moin-devel@lists.sourceforge.net>\n"
@@ -370,6 +370,28 @@ msgid "Edit was cancelled."
 msgstr "עריכה בוטלה."
 
 #, fuzzy
+msgid "You can't copy to an empty pagename."
+msgstr "אי אפשר לשמור דף ריק, הוסיפו תוכן ושימרו שוב."
+
+#, fuzzy
+msgid "You are not allowed to copy this page!"
+msgstr "אין לכם הרשאות לערוך את הדף."
+
+#, fuzzy, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"Try a different name."
+msgstr "דף בשם {{{'%s'}}} כבר קיים. נסה שם אחר."
+
+#, fuzzy, python-format
+msgid "Could not copy page because of file system error: %s."
+msgstr "שינוי שם הדף נכשל בגלל טעות במערכת הקבצים: %s."
+
+#, fuzzy
+msgid "You are not allowed to rename this page!"
+msgstr "אין לכם הרשאות לשחזר את הדף."
+
+#, fuzzy
 msgid "You can't rename to an empty pagename."
 msgstr "אי אפשר לשמור דף ריק, הוסיפו תוכן ושימרו שוב."
 
@@ -563,17 +585,6 @@ msgstr "הפנייה מדף \"%(page)s\""
 msgid "This page redirects to page \"%(page)s\""
 msgstr "דף זה מפנה לדף \"%(page)s\""
 
-#, python-format
-msgid ""
-"~-If you submit this form, the submitted values will be displayed.\n"
-"To use this form on other pages, insert a\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-"macro call.-~\n"
-msgstr ""
-"אם תשלחו את הטופס, הערכים ששלחתם יוצגו.\n"
-"כדי להשתמש בטופס הזה בדפים אחרים, \n"
-"הכניסו פקודת מקרו {{{[[Form(\"%(pagename)s\")]]}}}\n"
-
 msgid "Create New Page"
 msgstr "צור דף חדש"
 
@@ -666,6 +677,13 @@ msgstr "הבדל בין אותיות גדולות וקטנות"
 
 msgid "Search Text"
 msgstr "חפש מלל"
+
+#, python-format
+msgid "Not supported mimetype of file: %s"
+msgstr ""
+
+msgid "Embedded"
+msgstr ""
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -764,9 +782,19 @@ msgstr "חיפוש מהיר"
 msgid "Xapian Version"
 msgstr "חיפוש מהיר"
 
+msgid "PyStemmer not installed"
+msgstr ""
+
+msgid "Stemming for Xapian"
+msgstr ""
+
 #, fuzzy
-msgid "Xapian stemming"
-msgstr "חיפוש מהיר"
+msgid "PyStemmer Version"
+msgstr "גרסת פייתון"
+
+#, fuzzy
+msgid "PyStemmer stems"
+msgstr "גרסת פייתון"
 
 msgid "Active threads"
 msgstr ""
@@ -861,6 +889,9 @@ msgstr ""
 #, fuzzy
 msgid "any language"
 msgstr "שפה מועדפת"
+
+msgid "any mimetype"
+msgstr ""
 
 msgid "Language"
 msgstr ""
@@ -969,14 +1000,34 @@ msgid "**Could not find the referenced page: %s**"
 msgstr "**אין אפשרות למצוא את הדף המוכלל: %s**"
 
 #, python-format
-msgid "Create new drawing \"%(filename)s\""
+msgid "Inlined image: %(url)s"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
 msgstr "צור איור חדש \"%(filename)s\""
 
-#, python-format
-msgid "Edit drawing %(filename)s"
+#, fuzzy, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "ערוך איור \"%(filename)s\""
+
+#, fuzzy, python-format
+msgid "Clickable drawing: %(filename)s"
 msgstr "ערוך איור \"%(filename)s\""
 
 msgid "Toggle line numbers"
+msgstr ""
+
+msgid "[all]"
+msgstr ""
+
+msgid "[not empty]"
+msgstr ""
+
+msgid "[empty]"
+msgstr ""
+
+msgid "filter"
 msgstr ""
 
 msgid "Line"
@@ -1096,7 +1147,7 @@ msgstr "חפש:"
 msgid "More Actions:"
 msgstr "פעולות נוספות:"
 
-msgid "------------"
+msgid "------------------------"
 msgstr ""
 
 #, fuzzy
@@ -1111,6 +1162,10 @@ msgstr "נקה מטמון"
 
 msgid "Rename Page"
 msgstr "שנה שם דף"
+
+#, fuzzy
+msgid "Copy Page"
+msgstr "דף"
 
 msgid "Delete Page"
 msgstr "מחק דף"
@@ -1145,6 +1200,10 @@ msgstr "דפים דומים"
 
 msgid "Render as Docbook"
 msgstr ""
+
+#, fuzzy
+msgid "Sync Pages"
+msgstr "דף"
 
 msgid "Do"
 msgstr "בצע"
@@ -1468,12 +1527,16 @@ msgid "Your quicklink to this page has been removed."
 msgstr "המנוי שלך לדף זה בוטל."
 
 #, fuzzy
+msgid "Your quicklink to this page could not be removed."
+msgstr "המנוי שלך לדף זה בוטל."
+
+#, fuzzy
 msgid "A quicklink to this page has been added for you."
 msgstr "המנוי שלך לדף זה בוטל."
 
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr "משתמש לא קיים: {{{\"%s\"}}}. אנא הכנס שם משתמש וסיסמא."
+#, fuzzy
+msgid "A quicklink to this page could not be added for you."
+msgstr "המנוי שלך לדף זה בוטל."
 
 msgid "Missing password. Please enter user name and password."
 msgstr "סיסמא חסרה. אנא הכנס שם משתמש וסיסמא."
@@ -1491,6 +1554,10 @@ msgid ""
 "There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this "
 "page."
 msgstr "<a href=\"%(link)s\">%(count)s קבצים מצורפים</a> לדף"
+
+#, fuzzy, python-format
+msgid "Attachment '%(target)s' already exists."
+msgstr "קובץ מצורף \"%(filename)s\" נמחק."
 
 msgid "Filename of attachment not specified!"
 msgstr "לא בחרתם שם לקובץ מצורף."
@@ -1553,6 +1620,9 @@ msgstr "קובץ לשליחה"
 
 msgid "Rename to"
 msgstr "שנה שם"
+
+msgid "Overwrite existing attachment of same name"
+msgstr ""
 
 msgid "Upload"
 msgstr "שלח"
@@ -1686,7 +1756,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "The file %(target)s is not a .zip file."
+msgid "The file %(filename)s is not a .zip file."
 msgstr ""
 
 #, python-format
@@ -1716,11 +1786,18 @@ msgstr "קובץ מצורף: %(filename)s של %(pagename)s"
 msgid "This page is already deleted or was never created!"
 msgstr "דף זה כבר נמחק או שמעולם לא נוצר."
 
+msgid "Rename all /subpages too?"
+msgstr ""
+
 msgid "New name"
 msgstr "שם חדש"
 
 msgid "Optional reason for the renaming"
 msgstr "סיבה לשינוי שם"
+
+#, fuzzy
+msgid "Really rename this page?"
+msgstr "באמת למחוק את הדף?"
 
 #, python-format
 msgid "Full Link List for \"%s\""
@@ -1793,6 +1870,10 @@ msgstr ""
 
 #, python-format
 msgid "After filtering: %s pages"
+msgstr ""
+
+#, python-format
+msgid "Skipped page %s because of no write access to local page."
 msgstr ""
 
 #, python-format
@@ -1871,6 +1952,30 @@ msgstr ""
 msgid "Page %s merged with conflicts."
 msgstr ""
 
+#, fuzzy
+msgid "Load"
+msgstr "שלח"
+
+#, fuzzy
+msgid "New Page or New Attachment"
+msgstr "קובץ מצורף חדש"
+
+msgid ""
+"You can upload a file to a new page or choose to upload a file as attachment "
+"for the current page"
+msgstr ""
+
+#, fuzzy
+msgid "attachment"
+msgstr "קובץ מצורף חדש"
+
+msgid "overwrite"
+msgstr ""
+
+#, fuzzy
+msgid "New Name"
+msgstr "שם חדש"
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr " (כולל %(localwords)d %(pagelink)s)"
@@ -1888,6 +1993,10 @@ msgstr "הוסף למילון"
 
 msgid "No spelling errors found!"
 msgstr "לא נמצאו טעויות איות."
+
+#, fuzzy
+msgid "You can't save spelling words."
+msgstr "אתה לא יכול לבדוק איות בדף שאין לך הרשאות קריאה."
 
 msgid "You can't check spelling on a page you can't read."
 msgstr "אתה לא יכול לבדוק איות בדף שאין לך הרשאות קריאה."
@@ -1923,6 +2032,10 @@ msgid "Edit the subscription regular expressions in your UserPreferences."
 msgstr ""
 
 msgid "You have been subscribed to this page."
+msgstr "יש לכם עכשיו מנוי לדף."
+
+#, fuzzy
+msgid "You could not get subscribed to this page."
 msgstr "יש לכם עכשיו מנוי לדף."
 
 msgid "General Information"
@@ -2113,6 +2226,12 @@ msgstr ""
 msgid "You are not allowed to revert this page!"
 msgstr "אין לכם הרשאות לשחזר את הדף."
 
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
+msgstr ""
+
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "מפת אתר מקומית של \"%s\""
@@ -2177,6 +2296,17 @@ msgstr "דפים דומים ל–\"%s\""
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s ל-\"%(title)s\""
 
+msgid "Copy all /subpages too?"
+msgstr ""
+
+#, fuzzy
+msgid "Optional reason for the copying"
+msgstr "סיבה לשינוי שם"
+
+#, fuzzy
+msgid "Really copy this page?"
+msgstr "באמת למחוק את הדף?"
+
 msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "אין אפשרות ליצור דף חדש ללא שם דף. אנא הכנס שם דף."
@@ -2184,11 +2314,36 @@ msgstr "אין אפשרות ליצור דף חדש ללא שם דף. אנא הכ
 msgid "Delete"
 msgstr "מחק"
 
+msgid "Delete all /subpages too?"
+msgstr ""
+
 msgid "Optional reason for the deletion"
 msgstr "סיבה למחיקה"
 
 msgid "Really delete this page?"
 msgstr "באמת למחוק את הדף?"
+
+#, fuzzy
+#~ msgid "Xapian stemming"
+#~ msgstr "חיפוש מהיר"
+
+#, fuzzy
+#~ msgid "filename"
+#~ msgstr "שם קובץ"
+
+#~ msgid ""
+#~ "~-If you submit this form, the submitted values will be displayed.\n"
+#~ "To use this form on other pages, insert a\n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "macro call.-~\n"
+#~ msgstr ""
+#~ "אם תשלחו את הטופס, הערכים ששלחתם יוצגו.\n"
+#~ "כדי להשתמש בטופס הזה בדפים אחרים, \n"
+#~ "הכניסו פקודת מקרו {{{[[Form(\"%(pagename)s\")]]}}}\n"
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr "משתמש לא קיים: {{{\"%s\"}}}. אנא הכנס שם משתמש וסיסמא."
 
 #~ msgid "raw"
 #~ msgstr "מלל"
@@ -2254,6 +2409,3 @@ msgstr "באמת למחוק את הדף?"
 
 #~ msgid "(Only when changing passwords)"
 #~ msgstr "(רק כאשר מחליפים סיסמא)"
-
-#~ msgid "Filename"
-#~ msgstr "שם קובץ"

@@ -11,9 +11,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.5\n"
+"Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-29 23:46+0100\n"
+"POT-Creation-Date: 2007-07-30 19:24+0200\n"
 "PO-Revision-Date: 2006-06-15 15:55+0200\n"
 "Last-Translator: jmarton@omikk.bme.hu, arostas@omikk.bme.hu\n"
 "Language-Team: Hungarian <HU@li.org>\n"
@@ -376,6 +376,31 @@ msgstr "GUI mód"
 msgid "Edit was cancelled."
 msgstr "A szerkesztés visszavonva."
 
+#, fuzzy
+msgid "You can't copy to an empty pagename."
+msgstr "Nem nevezheti át egy üres lap nevére."
+
+#, fuzzy
+msgid "You are not allowed to copy this page!"
+msgstr "Nem szerkesztheti ezt a lapot!"
+
+#, fuzzy, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"Try a different name."
+msgstr ""
+"A(z) {{{'%s'}}} nevű lap már létezik!\n"
+"\n"
+"Próbáljon más nevet adni a lapnak."
+
+#, fuzzy, python-format
+msgid "Could not copy page because of file system error: %s."
+msgstr "Állományrendszer-hiba (%s) miatt nem sikerült az átnevezés."
+
+#, fuzzy
+msgid "You are not allowed to rename this page!"
+msgstr "Nem állíthatja vissza ezt a lapot!"
+
 msgid "You can't rename to an empty pagename."
 msgstr "Nem nevezheti át egy üres lap nevére."
 
@@ -584,18 +609,6 @@ msgstr "A(z) \"%(page)s\" lapról ideirányítva"
 msgid "This page redirects to page \"%(page)s\""
 msgstr "Ez a lap átirányítódik a(z) \"%(page)s\" lapra"
 
-#, python-format
-msgid ""
-"~-If you submit this form, the submitted values will be displayed.\n"
-"To use this form on other pages, insert a\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-"macro call.-~\n"
-msgstr ""
-"~-Az űrlap elküldésével a benne szereplő értékek megjelennek.\n"
-"Ha más lapon is kívánja használni az űrlapot illessze be ezt a makrót:\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-"-~\n"
-
 msgid "Create New Page"
 msgstr "Új lap létrehozása"
 
@@ -688,6 +701,13 @@ msgstr "Keresésnél a kis/nagybetű számít"
 
 msgid "Search Text"
 msgstr "Szövegkeresés"
+
+#, python-format
+msgid "Not supported mimetype of file: %s"
+msgstr ""
+
+msgid "Embedded"
+msgstr ""
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -784,9 +804,19 @@ msgstr "Lupy keresés"
 msgid "Xapian Version"
 msgstr "Lupy keresés"
 
+msgid "PyStemmer not installed"
+msgstr ""
+
+msgid "Stemming for Xapian"
+msgstr ""
+
 #, fuzzy
-msgid "Xapian stemming"
-msgstr "Lupy keresés"
+msgid "PyStemmer Version"
+msgstr "Python változat"
+
+#, fuzzy
+msgid "PyStemmer stems"
+msgstr "Python változat"
 
 msgid "Active threads"
 msgstr "Aktív szálak"
@@ -880,6 +910,9 @@ msgstr ""
 #, fuzzy
 msgid "any language"
 msgstr "Kedvenc nyelv"
+
+msgid "any mimetype"
+msgstr ""
 
 msgid "Language"
 msgstr ""
@@ -991,15 +1024,35 @@ msgid "**Could not find the referenced page: %s**"
 msgstr "**A hivatkozott lap (%s) nem található**"
 
 #, python-format
-msgid "Create new drawing \"%(filename)s\""
+msgid "Inlined image: %(url)s"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
 msgstr "\"%(filename)s\" nevű új rajz készítése"
 
-#, python-format
-msgid "Edit drawing %(filename)s"
+#, fuzzy, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "A(z) %(filename)s nevű rajz szerkesztése"
+
+#, fuzzy, python-format
+msgid "Clickable drawing: %(filename)s"
 msgstr "A(z) %(filename)s nevű rajz szerkesztése"
 
 msgid "Toggle line numbers"
 msgstr "Sorszámozás megjelenítése/elrejtése"
+
+msgid "[all]"
+msgstr ""
+
+msgid "[not empty]"
+msgstr ""
+
+msgid "[empty]"
+msgstr ""
+
+msgid "filter"
+msgstr ""
 
 msgid "Line"
 msgstr "Sor"
@@ -1118,7 +1171,7 @@ msgstr "Keresés"
 msgid "More Actions:"
 msgstr "További műveletek:"
 
-msgid "------------"
+msgid "------------------------"
 msgstr ""
 
 msgid "Raw Text"
@@ -1132,6 +1185,10 @@ msgstr "Gyorstár törlése"
 
 msgid "Rename Page"
 msgstr "Lap átnevezése"
+
+#, fuzzy
+msgid "Copy Page"
+msgstr "Saját (személyes) lapok"
 
 msgid "Delete Page"
 msgstr "Lap törlése"
@@ -1160,6 +1217,10 @@ msgstr "Oldalak csomagolása"
 
 msgid "Render as Docbook"
 msgstr "Docbook nézet (XML)"
+
+#, fuzzy
+msgid "Sync Pages"
+msgstr "Saját (személyes) lapok"
 
 msgid "Do"
 msgstr "Végrehajtás"
@@ -1484,14 +1545,16 @@ msgstr "Be kell lépnie a gyorslinkek hozzáadásához."
 msgid "Your quicklink to this page has been removed."
 msgstr "Az Ön gyorslinkje erre az oldalra el lett távolítva."
 
+#, fuzzy
+msgid "Your quicklink to this page could not be removed."
+msgstr "Az Ön gyorslinkje erre az oldalra el lett távolítva."
+
 msgid "A quicklink to this page has been added for you."
 msgstr "Egy erre az oldalra mutató gyorslink került hozzáadásra."
 
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr ""
-"Ismeretlen felhasználónév: {{{\"%s\"}}}. Kérjük adja meg a felhasználónevet "
-"és a jelszót."
+#, fuzzy
+msgid "A quicklink to this page could not be added for you."
+msgstr "Egy erre az oldalra mutató gyorslink került hozzáadásra."
 
 msgid "Missing password. Please enter user name and password."
 msgstr "Hiányzik a jelszó. Kérjük adja meg a felhasználónevet és a jelszót."
@@ -1509,6 +1572,10 @@ msgid ""
 "There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this "
 "page."
 msgstr "Ehhez a laphoz <a href=\"%(link)s\">%(count)s melléklet</a> tartozik."
+
+#, fuzzy, python-format
+msgid "Attachment '%(target)s' already exists."
+msgstr "A(z) '%(filename)s' melléklet telepítve."
 
 msgid "Filename of attachment not specified!"
 msgstr "A melléklet nevét nem adta meg!"
@@ -1573,6 +1640,9 @@ msgstr "A föltöltendő állomány"
 
 msgid "Rename to"
 msgstr "Átnevezés"
+
+msgid "Overwrite existing attachment of same name"
+msgstr ""
 
 msgid "Upload"
 msgstr "Feltöltés"
@@ -1715,8 +1785,8 @@ msgstr ""
 "nagyok, csak .zip fájlokat fogad a wiki, a fájlok már léteznek vagy mappába "
 "rendezettek."
 
-#, python-format
-msgid "The file %(target)s is not a .zip file."
+#, fuzzy, python-format
+msgid "The file %(filename)s is not a .zip file."
 msgstr "A %(target)s fájl nem egy .zip állomány."
 
 #, python-format
@@ -1746,11 +1816,18 @@ msgstr ""
 msgid "This page is already deleted or was never created!"
 msgstr "Ezt a lapot már törölték, vagy soha nem is hozták létre!"
 
+msgid "Rename all /subpages too?"
+msgstr ""
+
 msgid "New name"
 msgstr "Új név"
 
 msgid "Optional reason for the renaming"
 msgstr "Az átnevezés indoka (nem kötelező kitölteni)"
+
+#, fuzzy
+msgid "Really rename this page?"
+msgstr "Biztosan törölni kívánja ezt a lapot?"
 
 #, python-format
 msgid "Full Link List for \"%s\""
@@ -1822,6 +1899,10 @@ msgstr ""
 
 #, python-format
 msgid "After filtering: %s pages"
+msgstr ""
+
+#, python-format
+msgid "Skipped page %s because of no write access to local page."
 msgstr ""
 
 #, python-format
@@ -1900,6 +1981,30 @@ msgstr ""
 msgid "Page %s merged with conflicts."
 msgstr ""
 
+#, fuzzy
+msgid "Load"
+msgstr "Feltöltés"
+
+#, fuzzy
+msgid "New Page or New Attachment"
+msgstr "Új melléklet"
+
+msgid ""
+"You can upload a file to a new page or choose to upload a file as attachment "
+"for the current page"
+msgstr ""
+
+#, fuzzy
+msgid "attachment"
+msgstr "Mellékletek (fájlok)"
+
+msgid "overwrite"
+msgstr ""
+
+#, fuzzy
+msgid "New Name"
+msgstr "Új név"
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(beleértve %(localwords)d szót a(z) %(pagelink)s lapról)"
@@ -1918,6 +2023,10 @@ msgstr "A bejelölt szavak hozzáadása a szótárhoz"
 
 msgid "No spelling errors found!"
 msgstr "Nem találtunk helyesírási hibát."
+
+#, fuzzy
+msgid "You can't save spelling words."
+msgstr "Nem ellenőrizheti a helyesírást olyan lapon, amelyet nem olvashat."
 
 msgid "You can't check spelling on a page you can't read."
 msgstr "Nem ellenőrizheti a helyesírást olyan lapon, amelyet nem olvashat."
@@ -1955,6 +2064,10 @@ msgstr ""
 "FelhasználóiBeállítások''''''ban."
 
 msgid "You have been subscribed to this page."
+msgstr "Ön előfizetett erre a lapra."
+
+#, fuzzy
+msgid "You could not get subscribed to this page."
 msgstr "Ön előfizetett erre a lapra."
 
 msgid "General Information"
@@ -2181,6 +2294,12 @@ msgstr "Érvénytelen biztonsági mentési mód: %s."
 msgid "You are not allowed to revert this page!"
 msgstr "Nem állíthatja vissza ezt a lapot!"
 
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
+msgstr ""
+
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Helyi térkép a(z) \"%s\" laphoz"
@@ -2243,6 +2362,17 @@ msgstr "A(z) \"%s\" laphoz hasonlóak"
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s a(z) \"%(title)s\" mintához"
 
+msgid "Copy all /subpages too?"
+msgstr ""
+
+#, fuzzy
+msgid "Optional reason for the copying"
+msgstr "Az átnevezés indoka (nem kötelező kitölteni)"
+
+#, fuzzy
+msgid "Really copy this page?"
+msgstr "Biztosan törölni kívánja ezt a lapot?"
+
 msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "Név nélküli lapot nem lehet létrehozni. Kérjük adja meg a lap nevét!"
@@ -2250,11 +2380,39 @@ msgstr "Név nélküli lapot nem lehet létrehozni. Kérjük adja meg a lap nev�
 msgid "Delete"
 msgstr "Törlés"
 
+msgid "Delete all /subpages too?"
+msgstr ""
+
 msgid "Optional reason for the deletion"
 msgstr "A törlés indoka (nem kötelező kitölteni)"
 
 msgid "Really delete this page?"
 msgstr "Biztosan törölni kívánja ezt a lapot?"
+
+#, fuzzy
+#~ msgid "Xapian stemming"
+#~ msgstr "Lupy keresés"
+
+#, fuzzy
+#~ msgid "filename"
+#~ msgstr "Állománynév"
+
+#~ msgid ""
+#~ "~-If you submit this form, the submitted values will be displayed.\n"
+#~ "To use this form on other pages, insert a\n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "macro call.-~\n"
+#~ msgstr ""
+#~ "~-Az űrlap elküldésével a benne szereplő értékek megjelennek.\n"
+#~ "Ha más lapon is kívánja használni az űrlapot illessze be ezt a makrót:\n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "-~\n"
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr ""
+#~ "Ismeretlen felhasználónév: {{{\"%s\"}}}. Kérjük adja meg a "
+#~ "felhasználónevet és a jelszót."
 
 #~ msgid "raw"
 #~ msgstr "nyers"
@@ -2328,6 +2486,3 @@ msgstr "Biztosan törölni kívánja ezt a lapot?"
 
 #~ msgid "(Only when changing passwords)"
 #~ msgstr "(Csak jelszóváltoztatásnál)"
-
-#~ msgid "Filename"
-#~ msgstr "Állománynév"

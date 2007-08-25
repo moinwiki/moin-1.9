@@ -13,15 +13,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-01 23:44+0100\n"
+"POT-Creation-Date: 2007-07-30 19:24+0200\n"
 "PO-Revision-Date: 2005-09-21 00:00+0100\n"
-"Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
-"Language-Team: German <moin-devel@lists.sourceforge.net>\n"
+"Last-Translator: Athanasios Lefteris <alefteris@gmail.com>\n"
+"Language-Team: Greek <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Language: Deutsch\n"
-"X-Language-in-English: German\n"
+"X-Language: Ελληνικά\n"
+"X-Language-in-English: Greek\n"
 "X-HasWikiMarkup: True\n"
 "X-Direction: ltr\n"
 
@@ -350,6 +350,25 @@ msgstr ""
 msgid "Edit was cancelled."
 msgstr ""
 
+msgid "You can't copy to an empty pagename."
+msgstr ""
+
+msgid "You are not allowed to copy this page!"
+msgstr ""
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"Try a different name."
+msgstr ""
+
+#, python-format
+msgid "Could not copy page because of file system error: %s."
+msgstr ""
+
+msgid "You are not allowed to rename this page!"
+msgstr ""
+
 msgid "You can't rename to an empty pagename."
 msgstr ""
 
@@ -519,14 +538,6 @@ msgstr ""
 msgid "This page redirects to page \"%(page)s\""
 msgstr ""
 
-#, python-format
-msgid ""
-"~-If you submit this form, the submitted values will be displayed.\n"
-"To use this form on other pages, insert a\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-"macro call.-~\n"
-msgstr ""
-
 msgid "Create New Page"
 msgstr ""
 
@@ -615,6 +626,13 @@ msgid "Case-sensitive searching"
 msgstr ""
 
 msgid "Search Text"
+msgstr ""
+
+#, python-format
+msgid "Not supported mimetype of file: %s"
+msgstr ""
+
+msgid "Embedded"
 msgstr ""
 
 #, python-format
@@ -710,7 +728,16 @@ msgstr ""
 msgid "Xapian Version"
 msgstr ""
 
-msgid "Xapian stemming"
+msgid "PyStemmer not installed"
+msgstr ""
+
+msgid "Stemming for Xapian"
+msgstr ""
+
+msgid "PyStemmer Version"
+msgstr ""
+
+msgid "PyStemmer stems"
 msgstr ""
 
 msgid "Active threads"
@@ -800,6 +827,9 @@ msgid "last modified since (e.g. last 2 weeks)"
 msgstr ""
 
 msgid "any language"
+msgstr ""
+
+msgid "any mimetype"
 msgstr ""
 
 msgid "Language"
@@ -902,14 +932,34 @@ msgid "**Could not find the referenced page: %s**"
 msgstr ""
 
 #, python-format
-msgid "Create new drawing \"%(filename)s\""
+msgid "Inlined image: %(url)s"
 msgstr ""
 
 #, python-format
-msgid "Edit drawing %(filename)s"
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr ""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr ""
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
 msgstr ""
 
 msgid "Toggle line numbers"
+msgstr ""
+
+msgid "[all]"
+msgstr ""
+
+msgid "[not empty]"
+msgstr ""
+
+msgid "[empty]"
+msgstr ""
+
+msgid "filter"
 msgstr ""
 
 msgid "Line"
@@ -1027,7 +1077,7 @@ msgstr ""
 msgid "More Actions:"
 msgstr ""
 
-msgid "------------"
+msgid "------------------------"
 msgstr ""
 
 msgid "Raw Text"
@@ -1040,6 +1090,9 @@ msgid "Delete Cache"
 msgstr ""
 
 msgid "Rename Page"
+msgstr ""
+
+msgid "Copy Page"
 msgstr ""
 
 msgid "Delete Page"
@@ -1067,6 +1120,9 @@ msgid "Package Pages"
 msgstr ""
 
 msgid "Render as Docbook"
+msgstr ""
+
+msgid "Sync Pages"
 msgstr ""
 
 msgid "Do"
@@ -1366,11 +1422,13 @@ msgstr ""
 msgid "Your quicklink to this page has been removed."
 msgstr ""
 
+msgid "Your quicklink to this page could not be removed."
+msgstr ""
+
 msgid "A quicklink to this page has been added for you."
 msgstr ""
 
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+msgid "A quicklink to this page could not be added for you."
 msgstr ""
 
 msgid "Missing password. Please enter user name and password."
@@ -1387,6 +1445,10 @@ msgstr ""
 msgid ""
 "There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this "
 "page."
+msgstr ""
+
+#, python-format
+msgid "Attachment '%(target)s' already exists."
 msgstr ""
 
 msgid "Filename of attachment not specified!"
@@ -1442,6 +1504,9 @@ msgid "File to upload"
 msgstr ""
 
 msgid "Rename to"
+msgstr ""
+
+msgid "Overwrite existing attachment of same name"
 msgstr ""
 
 msgid "Upload"
@@ -1567,7 +1632,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "The file %(target)s is not a .zip file."
+msgid "The file %(filename)s is not a .zip file."
 msgstr ""
 
 #, python-format
@@ -1596,10 +1661,16 @@ msgstr ""
 msgid "This page is already deleted or was never created!"
 msgstr ""
 
+msgid "Rename all /subpages too?"
+msgstr ""
+
 msgid "New name"
 msgstr ""
 
 msgid "Optional reason for the renaming"
+msgstr ""
+
+msgid "Really rename this page?"
 msgstr ""
 
 #, python-format
@@ -1670,6 +1741,10 @@ msgstr ""
 
 #, python-format
 msgid "After filtering: %s pages"
+msgstr ""
+
+#, python-format
+msgid "Skipped page %s because of no write access to local page."
 msgstr ""
 
 #, python-format
@@ -1748,6 +1823,26 @@ msgstr ""
 msgid "Page %s merged with conflicts."
 msgstr ""
 
+msgid "Load"
+msgstr ""
+
+msgid "New Page or New Attachment"
+msgstr ""
+
+msgid ""
+"You can upload a file to a new page or choose to upload a file as attachment "
+"for the current page"
+msgstr ""
+
+msgid "attachment"
+msgstr ""
+
+msgid "overwrite"
+msgstr ""
+
+msgid "New Name"
+msgstr ""
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr ""
@@ -1762,6 +1857,9 @@ msgid "Add checked words to dictionary"
 msgstr ""
 
 msgid "No spelling errors found!"
+msgstr ""
+
+msgid "You can't save spelling words."
 msgstr ""
 
 msgid "You can't check spelling on a page you can't read."
@@ -1792,6 +1890,9 @@ msgid "Edit the subscription regular expressions in your UserPreferences."
 msgstr ""
 
 msgid "You have been subscribed to this page."
+msgstr ""
+
+msgid "You could not get subscribed to this page."
 msgstr ""
 
 msgid "General Information"
@@ -1978,6 +2079,12 @@ msgstr ""
 msgid "You are not allowed to revert this page!"
 msgstr ""
 
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
+msgstr ""
+
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr ""
@@ -2040,11 +2147,23 @@ msgstr ""
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr ""
 
+msgid "Copy all /subpages too?"
+msgstr ""
+
+msgid "Optional reason for the copying"
+msgstr ""
+
+msgid "Really copy this page?"
+msgstr ""
+
 msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr ""
 
 msgid "Delete"
+msgstr ""
+
+msgid "Delete all /subpages too?"
 msgstr ""
 
 msgid "Optional reason for the deletion"

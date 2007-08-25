@@ -11,9 +11,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.5\n"
+"Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-29 23:46+0100\n"
+"POT-Creation-Date: 2007-07-30 19:24+0200\n"
 "PO-Revision-Date: 2005-03-13 17:43+0200\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -380,6 +380,31 @@ msgid "Edit was cancelled."
 msgstr "Bewerking werd geannuleerd."
 
 #, fuzzy
+msgid "You can't copy to an empty pagename."
+msgstr "U kunt een lege pagina niet opslaan."
+
+#, fuzzy
+msgid "You are not allowed to copy this page!"
+msgstr "U hebt geen toestemming voor het bewerken van deze pagina!"
+
+#, fuzzy, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"Try a different name."
+msgstr ""
+"'''Een pagina met de naam {{{'%s'}}} bestaat al.'''\n"
+"\n"
+"Probeer een andere naam."
+
+#, fuzzy, python-format
+msgid "Could not copy page because of file system error: %s."
+msgstr "Kon paginanaam niet wijzigen vanwege systeemfout: %s."
+
+#, fuzzy
+msgid "You are not allowed to rename this page!"
+msgstr "U hebt geen toestemming om deze pagina terug te zetten!"
+
+#, fuzzy
 msgid "You can't rename to an empty pagename."
 msgstr "U kunt een lege pagina niet opslaan."
 
@@ -582,18 +607,6 @@ msgstr "Omgeleid vanaf pagina \"%(page)s\""
 msgid "This page redirects to page \"%(page)s\""
 msgstr "Deze pagina leidt om naar pagina \"%(page)s\""
 
-#, python-format
-msgid ""
-"~-If you submit this form, the submitted values will be displayed.\n"
-"To use this form on other pages, insert a\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-"macro call.-~\n"
-msgstr ""
-"~-Als u dit formulier indient dan worden de ingevulde waarden getoond.\n"
-"Om dit formulier op andere pagina's te gebruiken, voeg een macro-aanroep\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-"toe.-~\n"
-
 msgid "Create New Page"
 msgstr "Nieuwe pagina aanmaken"
 
@@ -686,6 +699,13 @@ msgstr "Hoodletter-gevoelig zoeken"
 
 msgid "Search Text"
 msgstr "Tekst doorzoeken"
+
+#, python-format
+msgid "Not supported mimetype of file: %s"
+msgstr ""
+
+msgid "Embedded"
+msgstr ""
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -782,8 +802,19 @@ msgstr ""
 msgid "Xapian Version"
 msgstr "MoinMoin versie"
 
-msgid "Xapian stemming"
+msgid "PyStemmer not installed"
 msgstr ""
+
+msgid "Stemming for Xapian"
+msgstr ""
+
+#, fuzzy
+msgid "PyStemmer Version"
+msgstr "Python versie"
+
+#, fuzzy
+msgid "PyStemmer stems"
+msgstr "Python versie"
 
 msgid "Active threads"
 msgstr ""
@@ -878,6 +909,9 @@ msgstr ""
 #, fuzzy
 msgid "any language"
 msgstr "Voorkeurstaal"
+
+msgid "any mimetype"
+msgstr ""
 
 msgid "Language"
 msgstr ""
@@ -985,14 +1019,34 @@ msgid "**Could not find the referenced page: %s**"
 msgstr "**Kan pagina waarnaar gerefereerd wordt niet vinden: %s**"
 
 #, python-format
-msgid "Create new drawing \"%(filename)s\""
+msgid "Inlined image: %(url)s"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
 msgstr "Nieuwe tekening maken \"%(filename)s\""
 
-#, python-format
-msgid "Edit drawing %(filename)s"
+#, fuzzy, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Tekening bewerken \"%(filename)s\""
+
+#, fuzzy, python-format
+msgid "Clickable drawing: %(filename)s"
 msgstr "Tekening bewerken \"%(filename)s\""
 
 msgid "Toggle line numbers"
+msgstr ""
+
+msgid "[all]"
+msgstr ""
+
+msgid "[not empty]"
+msgstr ""
+
+msgid "[empty]"
+msgstr ""
+
+msgid "filter"
 msgstr ""
 
 msgid "Line"
@@ -1113,7 +1167,7 @@ msgstr "Zoeken"
 msgid "More Actions:"
 msgstr "Meer acties:"
 
-msgid "------------"
+msgid "------------------------"
 msgstr ""
 
 #, fuzzy
@@ -1128,6 +1182,10 @@ msgstr "Buffer legen"
 
 msgid "Rename Page"
 msgstr "Pagina hernoemen"
+
+#, fuzzy
+msgid "Copy Page"
+msgstr "Pagina"
 
 msgid "Delete Page"
 msgstr "Pagina verwijderen"
@@ -1161,6 +1219,10 @@ msgstr ""
 
 msgid "Render as Docbook"
 msgstr ""
+
+#, fuzzy
+msgid "Sync Pages"
+msgstr "Pagina"
 
 msgid "Do"
 msgstr "Uitvoeren"
@@ -1480,14 +1542,15 @@ msgstr ""
 msgid "Your quicklink to this page has been removed."
 msgstr ""
 
+#, fuzzy
+msgid "Your quicklink to this page could not be removed."
+msgstr "Uw abonnement op deze pagina is ongedaan gemaakt."
+
 msgid "A quicklink to this page has been added for you."
 msgstr ""
 
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+msgid "A quicklink to this page could not be added for you."
 msgstr ""
-"Onbekende gebruikersnaam: {{{\"%s\"}}}. Geef een gebruikersnaam en "
-"wachtwoord op."
 
 msgid "Missing password. Please enter user name and password."
 msgstr "Geen wachtwoord. Geef een gebruikersnaam en wachtwoord op."
@@ -1507,6 +1570,10 @@ msgid ""
 msgstr ""
 "Er zijn <a href=\"%(link)s\">%(count)s bijlagen</a> opgeslagen voor deze "
 "pagina."
+
+#, fuzzy, python-format
+msgid "Attachment '%(target)s' already exists."
+msgstr "Bijlage '%(filename)s' bestaat niet!"
 
 msgid "Filename of attachment not specified!"
 msgstr "Bestandsnaam van bijlage ontbreekt!"
@@ -1573,6 +1640,9 @@ msgstr "Bestand om op te sturen"
 #, fuzzy
 msgid "Rename to"
 msgstr "Pagina hernoemen"
+
+msgid "Overwrite existing attachment of same name"
+msgstr ""
 
 msgid "Upload"
 msgstr "Opsturen"
@@ -1706,7 +1776,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "The file %(target)s is not a .zip file."
+msgid "The file %(filename)s is not a .zip file."
 msgstr ""
 
 #, python-format
@@ -1735,11 +1805,18 @@ msgstr "bijlage:%(filename)s bij %(pagename)s"
 msgid "This page is already deleted or was never created!"
 msgstr "Deze pagina is al gewist of heeft nooit bestaan!"
 
+msgid "Rename all /subpages too?"
+msgstr ""
+
 msgid "New name"
 msgstr "Nieuwe naam"
 
 msgid "Optional reason for the renaming"
 msgstr "Eventueel de reden voor deze hernoeming"
+
+#, fuzzy
+msgid "Really rename this page?"
+msgstr "Deze pagina werkelijk verwijderen?"
 
 #, python-format
 msgid "Full Link List for \"%s\""
@@ -1811,6 +1888,10 @@ msgstr ""
 
 #, python-format
 msgid "After filtering: %s pages"
+msgstr ""
+
+#, python-format
+msgid "Skipped page %s because of no write access to local page."
 msgstr ""
 
 #, python-format
@@ -1889,6 +1970,30 @@ msgstr ""
 msgid "Page %s merged with conflicts."
 msgstr ""
 
+#, fuzzy
+msgid "Load"
+msgstr "Opsturen"
+
+#, fuzzy
+msgid "New Page or New Attachment"
+msgstr "Nieuwe bijlage"
+
+msgid ""
+"You can upload a file to a new page or choose to upload a file as attachment "
+"for the current page"
+msgstr ""
+
+#, fuzzy
+msgid "attachment"
+msgstr "Bijlage"
+
+msgid "overwrite"
+msgstr ""
+
+#, fuzzy
+msgid "New Name"
+msgstr "Nieuwe naam"
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(inclusief %(localwords)d %(pagelink)s)"
@@ -1907,6 +2012,10 @@ msgstr "Voeg geselecteerde woorden toe aan het woordenboek"
 
 msgid "No spelling errors found!"
 msgstr "Geen spelfouten gevonden!"
+
+#, fuzzy
+msgid "You can't save spelling words."
+msgstr "U kunt geen spelling controleren op een pagina die u niet kunt lezen."
 
 msgid "You can't check spelling on a page you can't read."
 msgstr "U kunt geen spelling controleren op een pagina die u niet kunt lezen."
@@ -1939,6 +2048,10 @@ msgid "Edit the subscription regular expressions in your UserPreferences."
 msgstr ""
 
 msgid "You have been subscribed to this page."
+msgstr "U bent geabonneerd op deze pagina."
+
+#, fuzzy
+msgid "You could not get subscribed to this page."
 msgstr "U bent geabonneerd op deze pagina."
 
 msgid "General Information"
@@ -2126,6 +2239,12 @@ msgstr ""
 msgid "You are not allowed to revert this page!"
 msgstr "U hebt geen toestemming om deze pagina terug te zetten!"
 
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
+msgstr ""
+
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Lokale wegwijzer voor \"%s\""
@@ -2188,6 +2307,17 @@ msgstr "Pagina's zoals \"%s\""
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s op \"%(title)s\""
 
+msgid "Copy all /subpages too?"
+msgstr ""
+
+#, fuzzy
+msgid "Optional reason for the copying"
+msgstr "Eventueel de reden voor deze hernoeming"
+
+#, fuzzy
+msgid "Really copy this page?"
+msgstr "Deze pagina werkelijk verwijderen?"
+
 msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr ""
@@ -2196,11 +2326,35 @@ msgstr ""
 msgid "Delete"
 msgstr "Verwijderen"
 
+msgid "Delete all /subpages too?"
+msgstr ""
+
 msgid "Optional reason for the deletion"
 msgstr "Eventueel de reden voor deze verwijdering"
 
 msgid "Really delete this page?"
 msgstr "Deze pagina werkelijk verwijderen?"
+
+#, fuzzy
+#~ msgid "filename"
+#~ msgstr "Bestandsnaam"
+
+#~ msgid ""
+#~ "~-If you submit this form, the submitted values will be displayed.\n"
+#~ "To use this form on other pages, insert a\n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "macro call.-~\n"
+#~ msgstr ""
+#~ "~-Als u dit formulier indient dan worden de ingevulde waarden getoond.\n"
+#~ "Om dit formulier op andere pagina's te gebruiken, voeg een macro-aanroep\n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "toe.-~\n"
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr ""
+#~ "Onbekende gebruikersnaam: {{{\"%s\"}}}. Geef een gebruikersnaam en "
+#~ "wachtwoord op."
 
 #~ msgid "raw"
 #~ msgstr "brontekst"
@@ -2271,6 +2425,3 @@ msgstr "Deze pagina werkelijk verwijderen?"
 
 #~ msgid "(Only when changing passwords)"
 #~ msgstr "(Alleen bij veranderen van wachtwoord)"
-
-#~ msgid "Filename"
-#~ msgstr "Bestandsnaam"

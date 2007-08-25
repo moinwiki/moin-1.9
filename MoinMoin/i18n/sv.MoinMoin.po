@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-29 23:46+0100\n"
+"POT-Creation-Date: 2007-07-30 19:24+0200\n"
 "PO-Revision-Date: 2006-07-07 14:54+0200\n"
 "Last-Translator: Per Olofsson <pelle@debian.org>\n"
 "Language-Team: Swedish <moin-devel@lists.sourceforge.net>\n"
@@ -372,6 +372,33 @@ msgstr "Grafiskt läge"
 msgid "Edit was cancelled."
 msgstr "Redigeringen avbröts."
 
+#, fuzzy
+msgid "You can't copy to an empty pagename."
+msgstr "Du kan inte byta ett tomt sidnamn."
+
+#, fuzzy
+msgid "You are not allowed to copy this page!"
+msgstr "Du har inte tillåtelse att redigera den här sidan!"
+
+#, fuzzy, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"Try a different name."
+msgstr ""
+"'''En sida med namnet {{{'%s'}}} existerar redan.'''\n"
+"\n"
+"Pröva ett annat namn."
+
+#, fuzzy, python-format
+msgid "Could not copy page because of file system error: %s."
+msgstr "Kunde inte byta namn på sidan på grund av ett filsystemsfel: %s."
+
+#, fuzzy
+msgid "You are not allowed to rename this page!"
+msgstr ""
+"Du har inte tillåtelse att göra så att den här sidan återgår till en äldre "
+"version!"
+
 msgid "You can't rename to an empty pagename."
 msgstr "Du kan inte byta ett tomt sidnamn."
 
@@ -592,19 +619,6 @@ msgstr "Omdirigerad från sida \"%(page)s\""
 msgid "This page redirects to page \"%(page)s\""
 msgstr "Den här sidan är omdirigerad till \"%(page)s\""
 
-#, python-format
-msgid ""
-"~-If you submit this form, the submitted values will be displayed.\n"
-"To use this form on other pages, insert a\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-"macro call.-~\n"
-msgstr ""
-"~-Om du skickar in det här formuläret så kommer de angivna värdena att "
-"visas.\n"
-"För att använda det här formuläret på andra sidor, skriv in ett\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-"-makroanrop.-~\n"
-
 msgid "Create New Page"
 msgstr "Skapa ny sida"
 
@@ -697,6 +711,13 @@ msgstr "Sökning känslig för gemener/VERSALER"
 
 msgid "Search Text"
 msgstr "Sök i text"
+
+#, python-format
+msgid "Not supported mimetype of file: %s"
+msgstr ""
+
+msgid "Embedded"
+msgstr ""
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -792,9 +813,19 @@ msgstr "Xapian-sökning"
 msgid "Xapian Version"
 msgstr "Xapian-sökning"
 
+msgid "PyStemmer not installed"
+msgstr ""
+
+msgid "Stemming for Xapian"
+msgstr ""
+
 #, fuzzy
-msgid "Xapian stemming"
-msgstr "Xapian-sökning"
+msgid "PyStemmer Version"
+msgstr "Python-version"
+
+#, fuzzy
+msgid "PyStemmer stems"
+msgstr "Python-version"
 
 msgid "Active threads"
 msgstr "Aktiva trådar"
@@ -888,6 +919,9 @@ msgstr ""
 #, fuzzy
 msgid "any language"
 msgstr "Önskat språk"
+
+msgid "any mimetype"
+msgstr ""
 
 msgid "Language"
 msgstr ""
@@ -995,15 +1029,35 @@ msgid "**Could not find the referenced page: %s**"
 msgstr "**Kunde inte hitta den refererade sidan: %s**"
 
 #, python-format
-msgid "Create new drawing \"%(filename)s\""
+msgid "Inlined image: %(url)s"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
 msgstr "Skapa ny teckning \"%(filename)s\""
 
-#, python-format
-msgid "Edit drawing %(filename)s"
+#, fuzzy, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Skapa ny teckning \"%(filename)s\""
+
+#, fuzzy, python-format
+msgid "Clickable drawing: %(filename)s"
 msgstr "Skapa ny teckning \"%(filename)s\""
 
 msgid "Toggle line numbers"
 msgstr "Slå av/på radnumrering"
+
+msgid "[all]"
+msgstr ""
+
+msgid "[not empty]"
+msgstr ""
+
+msgid "[empty]"
+msgstr ""
+
+msgid "filter"
+msgstr ""
 
 msgid "Line"
 msgstr "Linje"
@@ -1122,7 +1176,8 @@ msgstr "Sök"
 msgid "More Actions:"
 msgstr "Fler åtgärder:"
 
-msgid "------------"
+#, fuzzy
+msgid "------------------------"
 msgstr "------------"
 
 msgid "Raw Text"
@@ -1136,6 +1191,10 @@ msgstr "Radera cache"
 
 msgid "Rename Page"
 msgstr "Byt namn på sida"
+
+#, fuzzy
+msgid "Copy Page"
+msgstr "Mina sidor"
 
 msgid "Delete Page"
 msgstr "Radera sida"
@@ -1164,6 +1223,10 @@ msgstr "Paketsidor"
 
 msgid "Render as Docbook"
 msgstr "Rendera som Docbook"
+
+#, fuzzy
+msgid "Sync Pages"
+msgstr "Mina sidor"
 
 msgid "Do"
 msgstr "Gör"
@@ -1504,13 +1567,16 @@ msgstr "Du måste logga in för att kunna lägga till en snabblänk."
 msgid "Your quicklink to this page has been removed."
 msgstr "Din snabblänk till den här sidan har tagits bort."
 
+#, fuzzy
+msgid "Your quicklink to this page could not be removed."
+msgstr "Din snabblänk till den här sidan har tagits bort."
+
 msgid "A quicklink to this page has been added for you."
 msgstr "En snabblänk till den här sidan har lagts till åt dig."
 
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr ""
-"Okänt användarnamn: {{{\"%s\"}}}. Var god ange användarnamn och lösenord."
+#, fuzzy
+msgid "A quicklink to this page could not be added for you."
+msgstr "En snabblänk till den här sidan har lagts till åt dig."
 
 msgid "Missing password. Please enter user name and password."
 msgstr "Lösenord saknas. Var god ange användarnamn och lösenord."
@@ -1529,6 +1595,10 @@ msgid ""
 msgstr ""
 "Det finns <a href=\"%(link)s\">%(count)s bifogade filer(s)</a> lagrade på "
 "den här sidan."
+
+#, fuzzy, python-format
+msgid "Attachment '%(target)s' already exists."
+msgstr "Bilagan '%(filename)s' installerad."
 
 msgid "Filename of attachment not specified!"
 msgstr "Filnamnet för bilagan ej angivet!"
@@ -1593,6 +1663,9 @@ msgstr "Fil att ladda upp"
 
 msgid "Rename to"
 msgstr "Byt namn till"
+
+msgid "Overwrite existing attachment of same name"
+msgstr ""
 
 msgid "Upload"
 msgstr "Ladda upp"
@@ -1731,8 +1804,8 @@ msgstr ""
 "Bilagan \"%(filename)s\" kunde inte packas upp eftersom filerna är för "
 "stora, endast är .zip-filer, redan existerar eller ligger i kataloger."
 
-#, python-format
-msgid "The file %(target)s is not a .zip file."
+#, fuzzy, python-format
+msgid "The file %(filename)s is not a .zip file."
 msgstr "Filen %(target)s är inte en .zip-fil."
 
 #, python-format
@@ -1761,11 +1834,18 @@ msgstr "bilaga:%(filename)s för %(pagename)s"
 msgid "This page is already deleted or was never created!"
 msgstr "Den här sidan är redan raderad eller existerade aldrig!"
 
+msgid "Rename all /subpages too?"
+msgstr ""
+
 msgid "New name"
 msgstr "Nytt namn"
 
 msgid "Optional reason for the renaming"
 msgstr "Skäl till namnbyte (ej obligatoriskt)"
+
+#, fuzzy
+msgid "Really rename this page?"
+msgstr "Radera den här sidan, är du säker?"
 
 #, python-format
 msgid "Full Link List for \"%s\""
@@ -1836,6 +1916,10 @@ msgstr ""
 
 #, python-format
 msgid "After filtering: %s pages"
+msgstr ""
+
+#, python-format
+msgid "Skipped page %s because of no write access to local page."
 msgstr ""
 
 #, python-format
@@ -1914,6 +1998,30 @@ msgstr ""
 msgid "Page %s merged with conflicts."
 msgstr ""
 
+#, fuzzy
+msgid "Load"
+msgstr "Ladda upp"
+
+#, fuzzy
+msgid "New Page or New Attachment"
+msgstr "Ny bilaga"
+
+msgid ""
+"You can upload a file to a new page or choose to upload a file as attachment "
+"for the current page"
+msgstr ""
+
+#, fuzzy
+msgid "attachment"
+msgstr "Bilagor"
+
+msgid "overwrite"
+msgstr ""
+
+#, fuzzy
+msgid "New Name"
+msgstr "Nytt namn"
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(inklusive %(localwords)d %(pagelink)s)"
@@ -1931,6 +2039,10 @@ msgstr "Addera förkryssade ord till ordlistan"
 
 msgid "No spelling errors found!"
 msgstr "Inga felstavningar funna!"
+
+#, fuzzy
+msgid "You can't save spelling words."
+msgstr "Du kan inte stavningskontrollera en sida som du inte kan läsa."
 
 msgid "You can't check spelling on a page you can't read."
 msgstr "Du kan inte stavningskontrollera en sida som du inte kan läsa."
@@ -1966,6 +2078,10 @@ msgstr ""
 "AnvändarInställningar."
 
 msgid "You have been subscribed to this page."
+msgstr "Du prenumerar nu på den här sidan."
+
+#, fuzzy
+msgid "You could not get subscribed to this page."
 msgstr "Du prenumerar nu på den här sidan."
 
 msgid "General Information"
@@ -2194,6 +2310,12 @@ msgstr ""
 "Du har inte tillåtelse att göra så att den här sidan återgår till en äldre "
 "version!"
 
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
+msgstr ""
+
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Lokal Sajtkarta för \"%s\""
@@ -2256,6 +2378,17 @@ msgstr "Sidor som liknar \"%s\""
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s för \"%(title)s\""
 
+msgid "Copy all /subpages too?"
+msgstr ""
+
+#, fuzzy
+msgid "Optional reason for the copying"
+msgstr "Skäl till namnbyte (ej obligatoriskt)"
+
+#, fuzzy
+msgid "Really copy this page?"
+msgstr "Radera den här sidan, är du säker?"
+
 msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "Kan inte skapa en ny sida utan ett sidnamn. Var god ange ett sidnamn."
@@ -2263,11 +2396,39 @@ msgstr "Kan inte skapa en ny sida utan ett sidnamn. Var god ange ett sidnamn."
 msgid "Delete"
 msgstr "Radera"
 
+msgid "Delete all /subpages too?"
+msgstr ""
+
 msgid "Optional reason for the deletion"
 msgstr "Anledning för borttagande (valfri)"
 
 msgid "Really delete this page?"
 msgstr "Radera den här sidan, är du säker?"
+
+#, fuzzy
+#~ msgid "Xapian stemming"
+#~ msgstr "Xapian-sökning"
+
+#, fuzzy
+#~ msgid "filename"
+#~ msgstr "Filnamn"
+
+#~ msgid ""
+#~ "~-If you submit this form, the submitted values will be displayed.\n"
+#~ "To use this form on other pages, insert a\n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "macro call.-~\n"
+#~ msgstr ""
+#~ "~-Om du skickar in det här formuläret så kommer de angivna värdena att "
+#~ "visas.\n"
+#~ "För att använda det här formuläret på andra sidor, skriv in ett\n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "-makroanrop.-~\n"
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr ""
+#~ "Okänt användarnamn: {{{\"%s\"}}}. Var god ange användarnamn och lösenord."
 
 #~ msgid "raw"
 #~ msgstr "råtext"

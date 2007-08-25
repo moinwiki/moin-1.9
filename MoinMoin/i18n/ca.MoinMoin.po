@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-29 23:46+0100\n"
+"POT-Creation-Date: 2007-07-30 19:24+0200\n"
 "PO-Revision-Date: 2006-09-11 17:32+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -378,6 +378,33 @@ msgstr "Mode amb interfície gràfica"
 msgid "Edit was cancelled."
 msgstr "S'ha cancel·lat l'edició."
 
+#, fuzzy
+msgid "You can't copy to an empty pagename."
+msgstr "No podeu canviar el nom a pàgines buides."
+
+#, fuzzy
+msgid "You are not allowed to copy this page!"
+msgstr "No teniu permís per a editar aquesta pàgina."
+
+#, fuzzy, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"Try a different name."
+msgstr ""
+"'''Ja existeix una pàgina amb el nom {{{%s}}}.'''\n"
+"\n"
+"Proveu amb un nom diferent."
+
+#, fuzzy, python-format
+msgid "Could not copy page because of file system error: %s."
+msgstr ""
+"No s'ha pogut canviar el nom de la pàgina degut a un error del sistema de "
+"fitxers: %s."
+
+#, fuzzy
+msgid "You are not allowed to rename this page!"
+msgstr "No teniu permís per a recuperar aquesta pàgina."
+
 msgid "You can't rename to an empty pagename."
 msgstr "No podeu canviar el nom a pàgines buides."
 
@@ -598,18 +625,6 @@ msgstr "S'ha redirigit des de la pàgina «%(page)s»"
 msgid "This page redirects to page \"%(page)s\""
 msgstr "Aquesta pàgina redirigeix a la pàgina «%(page)s»"
 
-#, python-format
-msgid ""
-"~-If you submit this form, the submitted values will be displayed.\n"
-"To use this form on other pages, insert a\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-"macro call.-~\n"
-msgstr ""
-"~-Si envieu aquest formulari, es mostraran els valors enviats.\n"
-"Per a utilitzar aquest formulari en altres pàgines, inseriu una crida de "
-"macro\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]].-~\n"
-
 msgid "Create New Page"
 msgstr "Crea una pàgina nova"
 
@@ -702,6 +717,13 @@ msgstr "Recerques amb diferència entre majúscules i minúscules"
 
 msgid "Search Text"
 msgstr "Text a cercar"
+
+#, python-format
+msgid "Not supported mimetype of file: %s"
+msgstr ""
+
+msgid "Embedded"
+msgstr ""
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -797,9 +819,19 @@ msgstr "Cerca Xapian"
 msgid "Xapian Version"
 msgstr "Cerca Xapian"
 
+msgid "PyStemmer not installed"
+msgstr ""
+
+msgid "Stemming for Xapian"
+msgstr ""
+
 #, fuzzy
-msgid "Xapian stemming"
-msgstr "Cerca Xapian"
+msgid "PyStemmer Version"
+msgstr "Versió de Python"
+
+#, fuzzy
+msgid "PyStemmer stems"
+msgstr "Versió de Python"
 
 msgid "Active threads"
 msgstr "Fils actius"
@@ -893,6 +925,9 @@ msgstr ""
 #, fuzzy
 msgid "any language"
 msgstr "Llengua preferida"
+
+msgid "any mimetype"
+msgstr ""
 
 msgid "Language"
 msgstr ""
@@ -1000,14 +1035,34 @@ msgid "**Could not find the referenced page: %s**"
 msgstr "**No s'ha trobat la pàgina referenciada: %s**"
 
 #, python-format
-msgid "Create new drawing \"%(filename)s\""
+msgid "Inlined image: %(url)s"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
 msgstr "Crea un dibuix nou «%(filename)s»"
 
-#, python-format
-msgid "Edit drawing %(filename)s"
+#, fuzzy, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Edita el dibuix %(filename)s"
+
+#, fuzzy, python-format
+msgid "Clickable drawing: %(filename)s"
 msgstr "Edita el dibuix %(filename)s"
 
 msgid "Toggle line numbers"
+msgstr ""
+
+msgid "[all]"
+msgstr ""
+
+msgid "[not empty]"
+msgstr ""
+
+msgid "[empty]"
+msgstr ""
+
+msgid "filter"
 msgstr ""
 
 msgid "Line"
@@ -1126,7 +1181,8 @@ msgstr "Cerca"
 msgid "More Actions:"
 msgstr "Més accions:"
 
-msgid "------------"
+#, fuzzy
+msgid "------------------------"
 msgstr "------------"
 
 msgid "Raw Text"
@@ -1140,6 +1196,10 @@ msgstr "Suprimeix la memòria cau"
 
 msgid "Rename Page"
 msgstr "Canvia el nom de la pàgina"
+
+#, fuzzy
+msgid "Copy Page"
+msgstr "Les meues pàgines"
 
 msgid "Delete Page"
 msgstr "Suprimeix la pàgina"
@@ -1168,6 +1228,10 @@ msgstr "Pàgines de paquets"
 
 msgid "Render as Docbook"
 msgstr "Renderitza com a Docbook"
+
+#, fuzzy
+msgid "Sync Pages"
+msgstr "Les meues pàgines"
 
 msgid "Do"
 msgstr "Fes"
@@ -1506,14 +1570,16 @@ msgstr "Heu d'entrar per a afegir un enllaç ràpid"
 msgid "Your quicklink to this page has been removed."
 msgstr "S'ha suprimit el vostre enllaç ràpid a aquesta pàgina."
 
+#, fuzzy
+msgid "Your quicklink to this page could not be removed."
+msgstr "S'ha suprimit el vostre enllaç ràpid a aquesta pàgina."
+
 msgid "A quicklink to this page has been added for you."
 msgstr "S'ha afegit un enllaç ràpid a aquesta pàgina."
 
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr ""
-"El nom d'usuari és desconegut: {{{«%s»}}}. Introduïu un nom d'usuari i "
-"contrasenya."
+#, fuzzy
+msgid "A quicklink to this page could not be added for you."
+msgstr "S'ha afegit un enllaç ràpid a aquesta pàgina."
 
 msgid "Missing password. Please enter user name and password."
 msgstr "Manca la contrasenya. Introduïu el nom d'usuari i contrasenya."
@@ -1532,6 +1598,10 @@ msgid ""
 msgstr ""
 "Hi ha <a href=\"%(link)s\">%(count)s adjuncions</a> emmagatzemats per a "
 "aquesta pàgina."
+
+#, fuzzy, python-format
+msgid "Attachment '%(target)s' already exists."
+msgstr "S'ha instal·lat l'adjunció «%(filename)s»."
 
 msgid "Filename of attachment not specified!"
 msgstr "El nom del fitxer per a l'adjunció no s'ha especificat."
@@ -1597,6 +1667,9 @@ msgstr "Fitxer per a apujar"
 
 msgid "Rename to"
 msgstr "Reanomena a"
+
+msgid "Overwrite existing attachment of same name"
+msgstr ""
 
 msgid "Upload"
 msgstr "Apuja"
@@ -1734,8 +1807,8 @@ msgstr ""
 "No s'ha desempaquetat l'adjunció «%(filename)s» perquè els fitxers són massa "
 "grans, només fitxers .zip, ja existeixen o estan dins de carpetes."
 
-#, python-format
-msgid "The file %(target)s is not a .zip file."
+#, fuzzy, python-format
+msgid "The file %(filename)s is not a .zip file."
 msgstr "El fitxer %(target)s no és un fitxer .zip."
 
 #, python-format
@@ -1766,11 +1839,18 @@ msgstr "[[Verbatim(attachment:)]]%(filename)s de %(pagename)s"
 msgid "This page is already deleted or was never created!"
 msgstr "Aquesta pàgina ja està suprimida o mai s'ha creat."
 
+msgid "Rename all /subpages too?"
+msgstr ""
+
 msgid "New name"
 msgstr "Nom nou"
 
 msgid "Optional reason for the renaming"
 msgstr "Raó opcional per al canvi de nom"
+
+#, fuzzy
+msgid "Really rename this page?"
+msgstr "Esteu segur de voler suprimir aquesta pàgina?"
 
 #, python-format
 msgid "Full Link List for \"%s\""
@@ -1841,6 +1921,10 @@ msgstr ""
 
 #, python-format
 msgid "After filtering: %s pages"
+msgstr ""
+
+#, python-format
+msgid "Skipped page %s because of no write access to local page."
 msgstr ""
 
 #, python-format
@@ -1919,6 +2003,30 @@ msgstr ""
 msgid "Page %s merged with conflicts."
 msgstr ""
 
+#, fuzzy
+msgid "Load"
+msgstr "Apuja"
+
+#, fuzzy
+msgid "New Page or New Attachment"
+msgstr "Adjunció nova"
+
+msgid ""
+"You can upload a file to a new page or choose to upload a file as attachment "
+"for the current page"
+msgstr ""
+
+#, fuzzy
+msgid "attachment"
+msgstr "Adjuncions"
+
+msgid "overwrite"
+msgstr ""
+
+#, fuzzy
+msgid "New Name"
+msgstr "Nom nou"
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(incloent %(localwords)d %(pagelink)s)"
@@ -1936,6 +2044,10 @@ msgstr "S'han afegit les paraules comprovades al diccionari"
 
 msgid "No spelling errors found!"
 msgstr "No s'han trobat errors d'ortografia."
+
+#, fuzzy
+msgid "You can't save spelling words."
+msgstr "No podeu comprovar l'ortografia d'una pàgina que no podeu llegir."
 
 msgid "You can't check spelling on a page you can't read."
 msgstr "No podeu comprovar l'ortografia d'una pàgina que no podeu llegir."
@@ -1971,6 +2083,10 @@ msgstr ""
 "PreferènciesUsuari."
 
 msgid "You have been subscribed to this page."
+msgstr "Vos heu subscrit a aquesta pàgina."
+
+#, fuzzy
+msgid "You could not get subscribed to this page."
 msgstr "Vos heu subscrit a aquesta pàgina."
 
 msgid "General Information"
@@ -2158,6 +2274,12 @@ msgstr ""
 msgid "You are not allowed to revert this page!"
 msgstr "No teniu permís per a recuperar aquesta pàgina."
 
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
+msgstr ""
+
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Mapa del lloc local per a «%s»"
@@ -2221,6 +2343,17 @@ msgstr "Pàgines semblants a «%s»"
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s per a «%(title)s»"
 
+msgid "Copy all /subpages too?"
+msgstr ""
+
+#, fuzzy
+msgid "Optional reason for the copying"
+msgstr "Raó opcional per al canvi de nom"
+
+#, fuzzy
+msgid "Really copy this page?"
+msgstr "Esteu segur de voler suprimir aquesta pàgina?"
+
 msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr ""
@@ -2229,11 +2362,39 @@ msgstr ""
 msgid "Delete"
 msgstr "Suprimeix"
 
+msgid "Delete all /subpages too?"
+msgstr ""
+
 msgid "Optional reason for the deletion"
 msgstr "Raó opcional per a la supressió"
 
 msgid "Really delete this page?"
 msgstr "Esteu segur de voler suprimir aquesta pàgina?"
+
+#, fuzzy
+#~ msgid "Xapian stemming"
+#~ msgstr "Cerca Xapian"
+
+#, fuzzy
+#~ msgid "filename"
+#~ msgstr "Nom del fitxer"
+
+#~ msgid ""
+#~ "~-If you submit this form, the submitted values will be displayed.\n"
+#~ "To use this form on other pages, insert a\n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "macro call.-~\n"
+#~ msgstr ""
+#~ "~-Si envieu aquest formulari, es mostraran els valors enviats.\n"
+#~ "Per a utilitzar aquest formulari en altres pàgines, inseriu una crida de "
+#~ "macro\n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]].-~\n"
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr ""
+#~ "El nom d'usuari és desconegut: {{{«%s»}}}. Introduïu un nom d'usuari i "
+#~ "contrasenya."
 
 #~ msgid "raw"
 #~ msgstr "cru"
@@ -2312,6 +2473,3 @@ msgstr "Esteu segur de voler suprimir aquesta pàgina?"
 
 #~ msgid "(Only when changing passwords)"
 #~ msgstr "(Només quan es canvia la contrasenya)"
-
-#~ msgid "Filename"
-#~ msgstr "Nom del fitxer"

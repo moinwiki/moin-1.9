@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-29 23:46+0100\n"
+"POT-Creation-Date: 2007-07-30 19:24+0200\n"
 "PO-Revision-Date: 2006-09-13 09:30+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000 AT gmail DOT NO SPAM com>\n"
 "Language-Team: Latvian <nad2000 AT gmail DOT NO SPAM com>\n"
@@ -159,13 +159,13 @@ msgstr "Atsūtīt mana sistēmas konta datus"
 msgid "Email"
 msgstr "E-pasts"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "To create an account, see the %(userprefslink)s page. To recover a lost "
 "password, go to %(sendmypasswordlink)s."
 msgstr ""
-"Lai izveidotu sev lietotāja kontu vai atjaunotu nozaudēto paroli, atveriet %"
-"(userprefslink)s"
+"Lai izveidotu lietotāja kontu, atveriet %(userprefslink)s page. Lai "
+"atjaunotu nozaudētu paroli, atveriet %(sendmypasswordlink)s."
 
 msgid "Name"
 msgstr "Vārds"
@@ -381,6 +381,27 @@ msgstr "Grafiskais režīms"
 msgid "Edit was cancelled."
 msgstr "Labošana tika atsaukta."
 
+msgid "You can't copy to an empty pagename."
+msgstr "Nevar kopēt lapā bez nosaukuma."
+
+msgid "You are not allowed to copy this page!"
+msgstr "Jums nav tiesību kopēt šo lapu!"
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"Try a different name."
+msgstr ""
+"'''Lapa ar nosaukumu {{{'%s'}}} jau eksistē.'''\n"
+"Pamēģiniet citu nosaukumu."
+
+#, python-format
+msgid "Could not copy page because of file system error: %s."
+msgstr "Nevarēja nokopēt lapu failu sistēmas kļūdas dēļ: %s."
+
+msgid "You are not allowed to rename this page!"
+msgstr "Jums nav tiesību pārdēvēt šo lapu!"
+
 msgid "You can't rename to an empty pagename."
 msgstr "Lapas nosaukums nedrīkst būt tukšs."
 
@@ -592,18 +613,6 @@ msgstr "Pāradresēts no lapas \"%(page)s\""
 msgid "This page redirects to page \"%(page)s\""
 msgstr "Šī lapa pāradresē uz lapu \"%(page)s\""
 
-#, python-format
-msgid ""
-"~-If you submit this form, the submitted values will be displayed.\n"
-"To use this form on other pages, insert a\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-"macro call.-~\n"
-msgstr ""
-"~-Nosūtot (''submit'') šo formu, tiks attēlotas sūtītās vērtības.\n"
-"Lai izmantotu šo formu citās lapās, pievienojiet makro izsaukumu \n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-"-~\n"
-
 msgid "Create New Page"
 msgstr "Izveidot jaunu lapu"
 
@@ -693,6 +702,13 @@ msgstr "Rakstzīmju jūtīga meklēšana"
 
 msgid "Search Text"
 msgstr "Meklēt tekstā"
+
+#, python-format
+msgid "Not supported mimetype of file: %s"
+msgstr "Neatbalstīta MIME tipa fails: %s"
+
+msgid "Embedded"
+msgstr "Iekļauts"
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -787,8 +803,19 @@ msgstr "''Xapian'' meklēšana"
 msgid "Xapian Version"
 msgstr "''Xapian'' versija"
 
-msgid "Xapian stemming"
-msgstr "''Xapian'' celms"
+msgid "PyStemmer not installed"
+msgstr ""
+
+msgid "Stemming for Xapian"
+msgstr ""
+
+#, fuzzy
+msgid "PyStemmer Version"
+msgstr "Python versija"
+
+#, fuzzy
+msgid "PyStemmer stems"
+msgstr "Python versija"
 
 msgid "Active threads"
 msgstr "Aktīvie pavedieni"
@@ -813,9 +840,9 @@ msgstr "Attēls '%(filename)s' saglabāts."
 msgid "Revert to revision %(rev)d."
 msgstr "Versijas %(rev)d atgriešana."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Renamed from '%(oldpagename)s'."
-msgstr "Lapas \"%(pagename)s\" piesaistes"
+msgstr "Pārdēvēta no '%(oldpagename)s'."
 
 #, python-format
 msgid "%(mins)dm ago"
@@ -879,6 +906,9 @@ msgstr "pēdējo reizi modificēta kopš (piemēram, pēdējās 2 nedēļās)"
 msgid "any language"
 msgstr "jebjura valoda"
 
+msgid "any mimetype"
+msgstr "jebkurš MIME tips"
+
 msgid "Language"
 msgstr "Valoda"
 
@@ -905,7 +935,7 @@ msgstr ""
 
 #, python-format
 msgid "Check your argument %s"
-msgstr ""
+msgstr "Pārbaudiet argumentu %s"
 
 msgid "Markup"
 msgstr "Iezīmēt"
@@ -981,15 +1011,35 @@ msgid "**Could not find the referenced page: %s**"
 msgstr "**Nevaru atrast lapu pēc atsauces: %s**"
 
 #, python-format
-msgid "Create new drawing \"%(filename)s\""
-msgstr "Izveidot jaunu attēlu \"%(filename)s\""
+msgid "Inlined image: %(url)s"
+msgstr ""
 
 #, python-format
-msgid "Edit drawing %(filename)s"
-msgstr "Labot attēlu %(filename)s"
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Izveidot jaunu attēlu \"%(filename)s (atvērs jaunā logā)\""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Labot attēlu %(filename)s (atvērs jaunā logā)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Klikšķināms attēls %(filename)s"
 
 msgid "Toggle line numbers"
 msgstr "Pārslēgt rindu numerāciju"
+
+msgid "[all]"
+msgstr "[visi]"
+
+msgid "[not empty]"
+msgstr "[netukši]"
+
+msgid "[empty]"
+msgstr "[tukši]"
+
+msgid "filter"
+msgstr "fitrēt"
 
 msgid "Line"
 msgstr "Rinda"
@@ -1056,10 +1106,10 @@ msgid "[UPDATED]"
 msgstr "[ATJAUNINĀTS]"
 
 msgid "[RENAMED]"
-msgstr ""
+msgstr "[PĀRDĒVĒTS]"
 
 msgid "[CONFLICT]"
-msgstr ""
+msgstr "[KONFLIKTS]"
 
 msgid "[NEW]"
 msgstr "[JAUNS]"
@@ -1108,8 +1158,8 @@ msgstr "Meklēt"
 msgid "More Actions:"
 msgstr "Citas darbības:"
 
-msgid "------------"
-msgstr "------------"
+msgid "------------------------"
+msgstr "------------------------"
 
 msgid "Raw Text"
 msgstr "Rādīt jēltekstu"
@@ -1122,6 +1172,9 @@ msgstr "Dzēst kešatmiņu"
 
 msgid "Rename Page"
 msgstr "Pārdēvēt lapu"
+
+msgid "Copy Page"
+msgstr "Kopēt lapu"
 
 msgid "Delete Page"
 msgstr "Dzēst lapu"
@@ -1141,9 +1194,8 @@ msgstr "Parakstīt Lietotāju"
 msgid "Remove Spam"
 msgstr "Atsārņot"
 
-#, fuzzy
 msgid "Revert to this revision"
-msgstr "Versijas %(rev)d atgriešana."
+msgstr "Atgriezties pie šīs versijas."
 
 msgid "Package Pages"
 msgstr "Iesaiņot Lapas"
@@ -1151,10 +1203,12 @@ msgstr "Iesaiņot Lapas"
 msgid "Render as Docbook"
 msgstr "Sniegt Docbook formātā"
 
+msgid "Sync Pages"
+msgstr "Sinhronizēt lapas"
+
 msgid "Do"
 msgstr "Veikt"
 
-#, fuzzy
 msgid "Comments"
 msgstr "Komentārs"
 
@@ -1419,7 +1473,7 @@ msgid "After login, jump to last visited page"
 msgstr "Pēc pieslēgšanās pāriet uz pēdējo apmeklēto lapu"
 
 msgid "Show comment sections"
-msgstr ""
+msgstr "Parādīt komentāru sadaļas"
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "Rādīt jautājuma zīmi neeksistējošu lapu saitēm"
@@ -1494,13 +1548,14 @@ msgstr "Lai izveidotu ātrsaiti, Jums jāpieslēdzas."
 msgid "Your quicklink to this page has been removed."
 msgstr "Jūsu ātrsaite uz šo lapu ir dzēsta."
 
+msgid "Your quicklink to this page could not be removed."
+msgstr "Nevar izdzēst Jūsu ātrsaiti uz šo lapu."
+
 msgid "A quicklink to this page has been added for you."
 msgstr "Jums izveidota ātrsaite uz šo lapu."
 
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr ""
-"Nezināms lietotāja vārds: {{{\"%s\"}}}. Lūdzu, ievadiet vārdu un paroli."
+msgid "A quicklink to this page could not be added for you."
+msgstr "Nevar izveidot ātrsaiti uz šo lapu."
 
 msgid "Missing password. Please enter user name and password."
 msgstr "Trūkst paroles. Lūdzu, ievadiet vārdu un paroli."
@@ -1517,6 +1572,10 @@ msgid ""
 "There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this "
 "page."
 msgstr "Šai lapai ir <a href=\"%(link)s\">%(count)s piesaistes</a>. "
+
+#, python-format
+msgid "Attachment '%(target)s' already exists."
+msgstr "Piesaiste '%(target)s' jau eksistē."
 
 msgid "Filename of attachment not specified!"
 msgstr "Nav norādīts piesaistes faila vārds!"
@@ -1579,6 +1638,9 @@ msgstr "Augšupielādējamais fails"
 
 msgid "Rename to"
 msgstr "Pārdēvēt par"
+
+msgid "Overwrite existing attachment of same name"
+msgstr "Pārrakstīt piesaisti ar šādu nosaukumu"
 
 msgid "Upload"
 msgstr "Ielādēt"
@@ -1714,8 +1776,8 @@ msgstr ""
 "faili, jau ekstistē vai atrodas mapēs."
 
 #, python-format
-msgid "The file %(target)s is not a .zip file."
-msgstr "Fails %(target)s nav .zip fails."
+msgid "The file %(filename)s is not a .zip file."
+msgstr "Fails %(filename)s nav .zip fails."
 
 #, python-format
 msgid "Attachment '%(filename)s'"
@@ -1743,11 +1805,17 @@ msgstr "piesaiste:%(filename)s lapai %(pagename)s"
 msgid "This page is already deleted or was never created!"
 msgstr "Šāda lapa jau ir izdzēsta vai nekad nav eksistējusi!"
 
+msgid "Rename all /subpages too?"
+msgstr "Vai pārdēvēt arī visas apakšlapas?"
+
 msgid "New name"
 msgstr "Jauns nosaukums"
 
 msgid "Optional reason for the renaming"
 msgstr "Pārdēvēšanas iemesls (neobligāts)"
+
+msgid "Really rename this page?"
+msgstr "Jūs tiešām vēlaties pārdēvēt šo lapu?"
 
 #, python-format
 msgid "Full Link List for \"%s\""
@@ -1818,6 +1886,10 @@ msgstr ""
 #, python-format
 msgid "After filtering: %s pages"
 msgstr "Pēc filtrēšanas: %s lapas"
+
+#, python-format
+msgid "Skipped page %s because of no write access to local page."
+msgstr ""
 
 #, python-format
 msgid "Deleted page %s locally."
@@ -1893,7 +1965,27 @@ msgstr ""
 
 #, python-format
 msgid "Page %s merged with conflicts."
+msgstr "Lapas %s sapludināšanā bija konflikti."
+
+msgid "Load"
+msgstr "Ielādēt"
+
+msgid "New Page or New Attachment"
+msgstr "Jauna lapa vai jauna piesaiste"
+
+msgid ""
+"You can upload a file to a new page or choose to upload a file as attachment "
+"for the current page"
 msgstr ""
+
+msgid "attachment"
+msgstr "piesaiste"
+
+msgid "overwrite"
+msgstr "pārrakstīt"
+
+msgid "New Name"
+msgstr "Jauns nosaukums"
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
@@ -1912,6 +2004,9 @@ msgstr "Pievienot atzīmētos vārdus vārdnīcai"
 
 msgid "No spelling errors found!"
 msgstr "Pareizrakstības kļūdas nav atrastas!"
+
+msgid "You can't save spelling words."
+msgstr "Jūs nevarat saglabāt pareizrakstības vārdus."
 
 msgid "You can't check spelling on a page you can't read."
 msgstr "Jūs nevarat pārbaudīt pareizrakstību lapā, kuru nedrīkstat lasīt."
@@ -1944,6 +2039,9 @@ msgstr "Labojiet parasktīšanās regulāras izteiksmes savā LietotājaIstatīj
 
 msgid "You have been subscribed to this page."
 msgstr "Tagad Jūs esat parakstījies(-usies) uz šo lapu."
+
+msgid "You could not get subscribed to this page."
+msgstr "Jūs nevarat parakstīties izmaiņām šajā lapā."
 
 msgid "General Information"
 msgstr "Vispārēja informācija"
@@ -2168,6 +2266,12 @@ msgstr "Nezināma dublēšanas apakšdarbība: %s."
 msgid "You are not allowed to revert this page!"
 msgstr "Jūs nedrīkstat atjaunot no arhīva šo lapu!"
 
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
+msgstr ""
+
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "\"%s\" vietnes karte"
@@ -2230,6 +2334,15 @@ msgstr "\"%s\" līdzīgas lapas"
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s for \"%(title)s\""
 
+msgid "Copy all /subpages too?"
+msgstr "Kopēt ar apakšlapām?"
+
+msgid "Optional reason for the copying"
+msgstr "Kopēšanas iemesls (neobligāts)"
+
+msgid "Really copy this page?"
+msgstr "Jūs tiešām vēlaties kopēt šo lapu?"
+
 msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "Nevaru izveidot lapu bez nosaukuma. Lūdzu, norādiet lapas nosaukumu."
@@ -2237,11 +2350,36 @@ msgstr "Nevaru izveidot lapu bez nosaukuma. Lūdzu, norādiet lapas nosaukumu."
 msgid "Delete"
 msgstr "Dzēst"
 
+msgid "Delete all /subpages too?"
+msgstr ""
+
 msgid "Optional reason for the deletion"
 msgstr "Ja vēlaties, norādiet lapas dzēšanas iemeslu"
 
 msgid "Really delete this page?"
 msgstr "Jūs tiešām vēlaties dzēst šo lapu?"
+
+#~ msgid "Xapian stemming"
+#~ msgstr "''Xapian'' celms"
+
+#~ msgid "filename"
+#~ msgstr "failanosaukums"
+
+#~ msgid ""
+#~ "~-If you submit this form, the submitted values will be displayed.\n"
+#~ "To use this form on other pages, insert a\n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "macro call.-~\n"
+#~ msgstr ""
+#~ "~-Nosūtot (''submit'') šo formu, tiks attēlotas sūtītās vērtības.\n"
+#~ "Lai izmantotu šo formu citās lapās, pievienojiet makro izsaukumu \n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "-~\n"
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr ""
+#~ "Nezināms lietotāja vārds: {{{\"%s\"}}}. Lūdzu, ievadiet vārdu un paroli."
 
 #~ msgid "raw"
 #~ msgstr "jēlteksts"
@@ -2314,6 +2452,3 @@ msgstr "Jūs tiešām vēlaties dzēst šo lapu?"
 
 #~ msgid "(Only when changing passwords)"
 #~ msgstr "(Tikai mainot paroli)"
-
-#~ msgid "Filename"
-#~ msgstr "Faila nosaukums"

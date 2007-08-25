@@ -55,5 +55,6 @@ def run():
     print "Page: %s rc=%s" % (pagename, rc)
 
 if __name__ == "__main__":
-    run()
+    pass
+    #run()
 
