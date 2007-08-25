@@ -217,14 +217,11 @@ class Converter(Parser):
         wikitail = wikiutil.url_unquote(wikitail)
 
         # link to self?
-        if wikitag is None:
-            if wikiutil.isPicture(wikitail):
-                return '{{%s%s}}' % (wikitail, text)
-            else:
-                return '[[%s%s]]' % (wikitail, text)
+        if wikiutil.isPicture(wikitail):
+            return '{{%s:%s%s}}' % (wikitag, wikitail, text)
         else:
-            if wikiutil.isPicture(wikitail):
-                return '{{%s:%s%s}}' % (wikitag, wikitail, text)
+            if ' ' not in wikitail and not text:
+                return '%s:%s' % (wikitag, wikitail)
             else:
                 return '[[%s:%s%s]]' % (wikitag, wikitail, text)
 
