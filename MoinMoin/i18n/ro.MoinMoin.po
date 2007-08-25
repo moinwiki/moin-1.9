@@ -11,9 +11,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.3\n"
+"Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-29 23:46+0100\n"
+"POT-Creation-Date: 2007-07-30 19:24+0200\n"
 "PO-Revision-Date: 2005-08-18 14:19+EET\n"
 "Last-Translator: Ovidiu Sabou <ovidiu.sabou@gmail.com>\n"
 "Language-Team: Romanian <ovidiu.sabou@gmail.com>\n"
@@ -382,6 +382,32 @@ msgid "Edit was cancelled."
 msgstr "Editarea a fost anulată"
 
 #, fuzzy
+msgid "You can't copy to an empty pagename."
+msgstr "Nu puteţi salva pagini goale."
+
+#, fuzzy
+msgid "You are not allowed to copy this page!"
+msgstr "Nu aveţi permisiunea de a edita această pagină!"
+
+#, fuzzy, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"Try a different name."
+msgstr ""
+"'''O pagină cu numele {{{'%s'}}} există deja.'''\n"
+"\n"
+"Încercaţi un nume diferit."
+
+#, fuzzy, python-format
+msgid "Could not copy page because of file system error: %s."
+msgstr "Nu s-a putut redenumi pagina datorită erorii de sistem de fişiere: %s."
+
+#, fuzzy
+msgid "You are not allowed to rename this page!"
+msgstr ""
+"Nu aveţi permisiunea de a modifica această pagină la o stare anterioară"
+
+#, fuzzy
 msgid "You can't rename to an empty pagename."
 msgstr "Nu puteţi salva pagini goale."
 
@@ -601,18 +627,6 @@ msgstr "Redirecţionat de la pagina \"%(page)s\""
 msgid "This page redirects to page \"%(page)s\""
 msgstr "Această pagină redirecţionează spre pagina \"%(page)s\""
 
-#, python-format
-msgid ""
-"~-If you submit this form, the submitted values will be displayed.\n"
-"To use this form on other pages, insert a\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-"macro call.-~\n"
-msgstr ""
-"~-Dacă trimiteţi acest formular, valorile propuse vor fi afişate.\n"
-"Pentru a folosi acest formular pe alte pagini, inseraţi apelul macro:\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-"-~\n"
-
 msgid "Create New Page"
 msgstr "Creează Pagină Nouă"
 
@@ -705,6 +719,13 @@ msgstr "Căutare case-sensitive"
 
 msgid "Search Text"
 msgstr "Căutare Text"
+
+#, python-format
+msgid "Not supported mimetype of file: %s"
+msgstr ""
+
+msgid "Embedded"
+msgstr ""
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -801,9 +822,19 @@ msgstr "Căutare Lupy"
 msgid "Xapian Version"
 msgstr "Căutare Lupy"
 
+msgid "PyStemmer not installed"
+msgstr ""
+
+msgid "Stemming for Xapian"
+msgstr ""
+
 #, fuzzy
-msgid "Xapian stemming"
-msgstr "Căutare Lupy"
+msgid "PyStemmer Version"
+msgstr "Versiunea Python"
+
+#, fuzzy
+msgid "PyStemmer stems"
+msgstr "Versiunea Python"
 
 msgid "Active threads"
 msgstr "Fire(threads) active"
@@ -898,6 +929,9 @@ msgstr ""
 #, fuzzy
 msgid "any language"
 msgstr "Limba dorită"
+
+msgid "any mimetype"
+msgstr ""
 
 msgid "Language"
 msgstr ""
@@ -1006,14 +1040,34 @@ msgid "**Could not find the referenced page: %s**"
 msgstr "**Pagina de referinţă %s nu a putut fi găsită**"
 
 #, python-format
-msgid "Create new drawing \"%(filename)s\""
+msgid "Inlined image: %(url)s"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
 msgstr "Creare desen nou \"%(filename)s\""
 
-#, python-format
-msgid "Edit drawing %(filename)s"
+#, fuzzy, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Editare desen %(filename)s"
+
+#, fuzzy, python-format
+msgid "Clickable drawing: %(filename)s"
 msgstr "Editare desen %(filename)s"
 
 msgid "Toggle line numbers"
+msgstr ""
+
+msgid "[all]"
+msgstr ""
+
+msgid "[not empty]"
+msgstr ""
+
+msgid "[empty]"
+msgstr ""
+
+msgid "filter"
 msgstr ""
 
 msgid "Line"
@@ -1133,7 +1187,8 @@ msgstr "Căutare"
 msgid "More Actions:"
 msgstr "Mai Multe Acţiuni:"
 
-msgid "------------"
+#, fuzzy
+msgid "------------------------"
 msgstr "------------"
 
 msgid "Raw Text"
@@ -1147,6 +1202,10 @@ msgstr "Ştergere Cache"
 
 msgid "Rename Page"
 msgstr "Redenumire Pagină"
+
+#, fuzzy
+msgid "Copy Page"
+msgstr "Pagină"
 
 msgid "Delete Page"
 msgstr "Ştergere Pagină"
@@ -1179,6 +1238,10 @@ msgstr "Pagini Asemănătoare"
 
 msgid "Render as Docbook"
 msgstr ""
+
+#, fuzzy
+msgid "Sync Pages"
+msgstr "Pagină"
 
 msgid "Do"
 msgstr "Executare"
@@ -1500,14 +1563,18 @@ msgstr "Trebuie să vă logaţi pentru a putea adăuga o legătură rapidă"
 msgid "Your quicklink to this page has been removed."
 msgstr "Legătura rapidă către această pagină a fost ştearsă."
 
+#, fuzzy
+msgid "Your quicklink to this page could not be removed."
+msgstr "Legătura rapidă către această pagină a fost ştearsă."
+
 msgid "A quicklink to this page has been added for you."
 msgstr ""
 "A fost adăugată o legătură rapidă către această pagină pentru dumnveavoastră."
 
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#, fuzzy
+msgid "A quicklink to this page could not be added for you."
 msgstr ""
-"Nume de utilizator necunoscut: {{{\"%s\"}}}. Introduceţi nume şi parolă"
+"A fost adăugată o legătură rapidă către această pagină pentru dumnveavoastră."
 
 msgid "Missing password. Please enter user name and password."
 msgstr "Parola lipseşte. Introduceti nume şi parolă"
@@ -1527,6 +1594,10 @@ msgid ""
 msgstr ""
 "Există <a href=\"%(link)s\">%(count)s ataşament(e)</a> stocat(e) pentru "
 "această pagină."
+
+#, fuzzy, python-format
+msgid "Attachment '%(target)s' already exists."
+msgstr "Ataşamentul '%(filename)s' a fost instalat."
 
 msgid "Filename of attachment not specified!"
 msgstr "Numele fişierului ataşat nu a fost specificat!"
@@ -1592,6 +1663,9 @@ msgstr "Fişier de trimis"
 
 msgid "Rename to"
 msgstr "Redenumeşte în"
+
+msgid "Overwrite existing attachment of same name"
+msgstr ""
 
 msgid "Upload"
 msgstr "Trimitere date"
@@ -1732,8 +1806,8 @@ msgstr ""
 "prea mari, sunt doar fişiere .zip, există deja sau sunt poziţionate în "
 "directoare."
 
-#, python-format
-msgid "The file %(target)s is not a .zip file."
+#, fuzzy, python-format
+msgid "The file %(filename)s is not a .zip file."
 msgstr "Fişierul %(target)s nu este un fişier .zip."
 
 #, python-format
@@ -1764,11 +1838,18 @@ msgstr "ataşament:%(filename)s al %(pagename)s"
 msgid "This page is already deleted or was never created!"
 msgstr "Această pagină este deja ştearsă sau nu a fost creată niciodată!"
 
+msgid "Rename all /subpages too?"
+msgstr ""
+
 msgid "New name"
 msgstr "Nume nou"
 
 msgid "Optional reason for the renaming"
 msgstr "Motiv opţional referitor la redenumire."
+
+#, fuzzy
+msgid "Really rename this page?"
+msgstr "Sigur doriţi ştergerea acestei pagini ?"
 
 #, python-format
 msgid "Full Link List for \"%s\""
@@ -1841,6 +1922,10 @@ msgstr ""
 
 #, python-format
 msgid "After filtering: %s pages"
+msgstr ""
+
+#, python-format
+msgid "Skipped page %s because of no write access to local page."
 msgstr ""
 
 #, python-format
@@ -1919,6 +2004,30 @@ msgstr ""
 msgid "Page %s merged with conflicts."
 msgstr ""
 
+#, fuzzy
+msgid "Load"
+msgstr "Trimitere date"
+
+#, fuzzy
+msgid "New Page or New Attachment"
+msgstr "Ataşament Nou"
+
+msgid ""
+"You can upload a file to a new page or choose to upload a file as attachment "
+"for the current page"
+msgstr ""
+
+#, fuzzy
+msgid "attachment"
+msgstr "Ataşamente"
+
+msgid "overwrite"
+msgstr ""
+
+#, fuzzy
+msgid "New Name"
+msgstr "Nume nou"
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(inclusiv %(localwords)d %(pagelink)s)"
@@ -1936,6 +2045,12 @@ msgstr "Adăugare cuvinte verificate în dicţionar"
 
 msgid "No spelling errors found!"
 msgstr "Nu a fost găsită nici o greşeală de ortografie!"
+
+#, fuzzy
+msgid "You can't save spelling words."
+msgstr ""
+"Nu aveţi permisiunea de a verifica ortografia pe o pagină pe care nu o "
+"puteţi citi."
 
 msgid "You can't check spelling on a page you can't read."
 msgstr ""
@@ -1976,6 +2091,10 @@ msgstr ""
 "PreferinţeUtilizator."
 
 msgid "You have been subscribed to this page."
+msgstr "Aţi fost înregistrat(ă) pe această pagină."
+
+#, fuzzy
+msgid "You could not get subscribed to this page."
 msgstr "Aţi fost înregistrat(ă) pe această pagină."
 
 msgid "General Information"
@@ -2167,6 +2286,12 @@ msgid "You are not allowed to revert this page!"
 msgstr ""
 "Nu aveţi permisiunea de a modifica această pagină la o stare anterioară"
 
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
+msgstr ""
+
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Harta Locală a Sitului \"%s\""
@@ -2233,6 +2358,17 @@ msgstr "Pagini de genul \"%s\""
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s pentru \"%(title)s\""
 
+msgid "Copy all /subpages too?"
+msgstr ""
+
+#, fuzzy
+msgid "Optional reason for the copying"
+msgstr "Motiv opţional referitor la redenumire."
+
+#, fuzzy
+msgid "Really copy this page?"
+msgstr "Sigur doriţi ştergerea acestei pagini ?"
+
 msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr ""
@@ -2242,11 +2378,38 @@ msgstr ""
 msgid "Delete"
 msgstr "Ştergere"
 
+msgid "Delete all /subpages too?"
+msgstr ""
+
 msgid "Optional reason for the deletion"
 msgstr "Motiv opţional referitor la ştergere"
 
 msgid "Really delete this page?"
 msgstr "Sigur doriţi ştergerea acestei pagini ?"
+
+#, fuzzy
+#~ msgid "Xapian stemming"
+#~ msgstr "Căutare Lupy"
+
+#, fuzzy
+#~ msgid "filename"
+#~ msgstr "Nume fişier"
+
+#~ msgid ""
+#~ "~-If you submit this form, the submitted values will be displayed.\n"
+#~ "To use this form on other pages, insert a\n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "macro call.-~\n"
+#~ msgstr ""
+#~ "~-Dacă trimiteţi acest formular, valorile propuse vor fi afişate.\n"
+#~ "Pentru a folosi acest formular pe alte pagini, inseraţi apelul macro:\n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "-~\n"
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr ""
+#~ "Nume de utilizator necunoscut: {{{\"%s\"}}}. Introduceţi nume şi parolă"
 
 #~ msgid "raw"
 #~ msgstr "brut"
@@ -2319,6 +2482,3 @@ msgstr "Sigur doriţi ştergerea acestei pagini ?"
 
 #~ msgid "(Only when changing passwords)"
 #~ msgstr "(Doar la schimbarea parolelor)"
-
-#~ msgid "Filename"
-#~ msgstr "Nume fişier"

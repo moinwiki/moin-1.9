@@ -11,9 +11,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.5\n"
+"Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-29 23:46+0100\n"
+"POT-Creation-Date: 2007-07-30 19:24+0200\n"
 "PO-Revision-Date: 2006-06-26 21:43-0800\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -368,6 +368,31 @@ msgstr "Графический редактор"
 msgid "Edit was cancelled."
 msgstr "Исправления отменены."
 
+#, fuzzy
+msgid "You can't copy to an empty pagename."
+msgstr "Нельзя записать пустую страницу."
+
+#, fuzzy
+msgid "You are not allowed to copy this page!"
+msgstr "Вам нельзя исправлять эту страницу!"
+
+#, fuzzy, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"Try a different name."
+msgstr ""
+"'''Страница с именем {{{'%s'}}} уже есть.'''\n"
+"\n"
+"Попробуйте другое имя."
+
+#, fuzzy, python-format
+msgid "Could not copy page because of file system error: %s."
+msgstr "Страница не была переименована из-за системной ошибки: %s."
+
+#, fuzzy
+msgid "You are not allowed to rename this page!"
+msgstr "Вы не можете восстанавливать из архива эту страницу!"
+
 msgid "You can't rename to an empty pagename."
 msgstr "Нельзя записать пустую страницу."
 
@@ -581,17 +606,6 @@ msgstr "Отправлен сюда со страницы \"%(page)s\""
 msgid "This page redirects to page \"%(page)s\""
 msgstr "Эта страница отправляет на \"%(page)s\""
 
-#, python-format
-msgid ""
-"~-If you submit this form, the submitted values will be displayed.\n"
-"To use this form on other pages, insert a\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-"macro call.-~\n"
-msgstr ""
-"~-При отправке этой формы вам будут показаны отправляемые значения.\n"
-"Для использования этой формы на других страницах вставьте вызов макро:\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]-~\n"
-
 msgid "Create New Page"
 msgstr "Создать страницу"
 
@@ -684,6 +698,13 @@ msgstr "Поиск с учетом регистра"
 
 msgid "Search Text"
 msgstr "Искать по тексту"
+
+#, python-format
+msgid "Not supported mimetype of file: %s"
+msgstr ""
+
+msgid "Embedded"
+msgstr ""
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -780,9 +801,19 @@ msgstr "Общий поиск"
 msgid "Xapian Version"
 msgstr "Общий поиск"
 
+msgid "PyStemmer not installed"
+msgstr ""
+
+msgid "Stemming for Xapian"
+msgstr ""
+
 #, fuzzy
-msgid "Xapian stemming"
-msgstr "Общий поиск"
+msgid "PyStemmer Version"
+msgstr "Версия Python"
+
+#, fuzzy
+msgid "PyStemmer stems"
+msgstr "Версия Python"
 
 msgid "Active threads"
 msgstr "Активных потоков"
@@ -876,6 +907,9 @@ msgstr ""
 #, fuzzy
 msgid "any language"
 msgstr "Предпочитаемый язык"
+
+msgid "any mimetype"
+msgstr ""
 
 msgid "Language"
 msgstr ""
@@ -985,15 +1019,35 @@ msgid "**Could not find the referenced page: %s**"
 msgstr "**Страница не найдена: %s**"
 
 #, python-format
-msgid "Create new drawing \"%(filename)s\""
+msgid "Inlined image: %(url)s"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
 msgstr "Нарисовать \"%(filename)s\""
 
-#, python-format
-msgid "Edit drawing %(filename)s"
+#, fuzzy, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Изменить рисунок %(filename)s"
+
+#, fuzzy, python-format
+msgid "Clickable drawing: %(filename)s"
 msgstr "Изменить рисунок %(filename)s"
 
 msgid "Toggle line numbers"
 msgstr "Номера строк"
+
+msgid "[all]"
+msgstr ""
+
+msgid "[not empty]"
+msgstr ""
+
+msgid "[empty]"
+msgstr ""
+
+msgid "filter"
+msgstr ""
 
 msgid "Line"
 msgstr "Строка"
@@ -1112,7 +1166,8 @@ msgstr "Искать"
 msgid "More Actions:"
 msgstr "Другие действия:"
 
-msgid "------------"
+#, fuzzy
+msgid "------------------------"
 msgstr "------------"
 
 msgid "Raw Text"
@@ -1126,6 +1181,10 @@ msgstr "Убрать из кэша"
 
 msgid "Rename Page"
 msgstr "Переименовать"
+
+#, fuzzy
+msgid "Copy Page"
+msgstr "Мои Страницы"
 
 msgid "Delete Page"
 msgstr "Вырвать страницу"
@@ -1154,6 +1213,10 @@ msgstr "Страницы пакета"
 
 msgid "Render as Docbook"
 msgstr "Сформатировать как Docbook"
+
+#, fuzzy
+msgid "Sync Pages"
+msgstr "Мои Страницы"
 
 msgid "Do"
 msgstr "Выполняй!"
@@ -1492,13 +1555,16 @@ msgstr "Зарегистрируйтесь чтобы добавить закл�
 msgid "Your quicklink to this page has been removed."
 msgstr "Ваша ссылка на эту страницу удалена."
 
+#, fuzzy
+msgid "Your quicklink to this page could not be removed."
+msgstr "Ваша ссылка на эту страницу удалена."
+
 msgid "A quicklink to this page has been added for you."
 msgstr "Вам добавлена ссылка на эту страницу."
 
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr ""
-"Незнакомое имя пользователя: {{{\"%s\"}}}. Пожалуйста введите имя и пароль."
+#, fuzzy
+msgid "A quicklink to this page could not be added for you."
+msgstr "Вам добавлена ссылка на эту страницу."
 
 msgid "Missing password. Please enter user name and password."
 msgstr "Пропущен пароль."
@@ -1517,6 +1583,10 @@ msgid ""
 "page."
 msgstr ""
 "К этой странице есть <a href=\"%(link)s\">приложения</a> (всего %(count)s)."
+
+#, fuzzy, python-format
+msgid "Attachment '%(target)s' already exists."
+msgstr "Приложение '%(filename)s' установлено."
 
 msgid "Filename of attachment not specified!"
 msgstr "Не указано имя файла приложения!"
@@ -1583,6 +1653,9 @@ msgstr "Приложить файл"
 
 msgid "Rename to"
 msgstr "Переименовать в"
+
+msgid "Overwrite existing attachment of same name"
+msgstr ""
 
 msgid "Upload"
 msgstr "Загрузить"
@@ -1718,8 +1791,8 @@ msgid ""
 "files only, exist already or reside in folders."
 msgstr "Приложение '%(filename)s' не распаковано, т.к. файлы слишком велики"
 
-#, python-format
-msgid "The file %(target)s is not a .zip file."
+#, fuzzy, python-format
+msgid "The file %(filename)s is not a .zip file."
 msgstr "Файл %(target)s не zip-архив."
 
 #, python-format
@@ -1748,11 +1821,18 @@ msgstr "приложение:%(filename)s к %(pagename)s"
 msgid "This page is already deleted or was never created!"
 msgstr "Такая страница уже стерта или никогда не существовала!"
 
+msgid "Rename all /subpages too?"
+msgstr ""
+
 msgid "New name"
 msgstr "Новое имя"
 
 msgid "Optional reason for the renaming"
 msgstr "Можете указать причину для переименования"
+
+#, fuzzy
+msgid "Really rename this page?"
+msgstr "Точно стереть эту страницу?"
 
 #, python-format
 msgid "Full Link List for \"%s\""
@@ -1823,6 +1903,10 @@ msgstr ""
 
 #, python-format
 msgid "After filtering: %s pages"
+msgstr ""
+
+#, python-format
+msgid "Skipped page %s because of no write access to local page."
 msgstr ""
 
 #, python-format
@@ -1901,6 +1985,30 @@ msgstr ""
 msgid "Page %s merged with conflicts."
 msgstr ""
 
+#, fuzzy
+msgid "Load"
+msgstr "Загрузить"
+
+#, fuzzy
+msgid "New Page or New Attachment"
+msgstr "Новое приложение"
+
+msgid ""
+"You can upload a file to a new page or choose to upload a file as attachment "
+"for the current page"
+msgstr ""
+
+#, fuzzy
+msgid "attachment"
+msgstr "Приложения"
+
+msgid "overwrite"
+msgstr ""
+
+#, fuzzy
+msgid "New Name"
+msgstr "Новое имя"
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(включая %(localwords)d %(pagelink)s)"
@@ -1918,6 +2026,10 @@ msgstr "Добавить отмеченные слова в словарь"
 
 msgid "No spelling errors found!"
 msgstr "Ошибок правописания не найдено!"
+
+#, fuzzy
+msgid "You can't save spelling words."
+msgstr "Нельзя проверять страницу которую запрещено читать."
 
 msgid "You can't check spelling on a page you can't read."
 msgstr "Нельзя проверять страницу которую запрещено читать."
@@ -1950,6 +2062,10 @@ msgid "Edit the subscription regular expressions in your UserPreferences."
 msgstr "Исправьте ВашиНастройки содержащие образцы подписки."
 
 msgid "You have been subscribed to this page."
+msgstr "Теперь вы подписаны на эту страницу."
+
+#, fuzzy
+msgid "You could not get subscribed to this page."
 msgstr "Теперь вы подписаны на эту страницу."
 
 msgid "General Information"
@@ -2175,6 +2291,12 @@ msgstr "Неизвестная команда копирования: %s."
 msgid "You are not allowed to revert this page!"
 msgstr "Вы не можете восстанавливать из архива эту страницу!"
 
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
+msgstr ""
+
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Карта сайта около \"%s\""
@@ -2237,6 +2359,17 @@ msgstr "Страницы похожие на \"%s\""
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s для \"%(title)s\""
 
+msgid "Copy all /subpages too?"
+msgstr ""
+
+#, fuzzy
+msgid "Optional reason for the copying"
+msgstr "Можете указать причину для переименования"
+
+#, fuzzy
+msgid "Really copy this page?"
+msgstr "Точно стереть эту страницу?"
+
 msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "Не могу создать страницу без имени. Укажите имя страницы."
@@ -2244,11 +2377,38 @@ msgstr "Не могу создать страницу без имени. Ука�
 msgid "Delete"
 msgstr "Стереть"
 
+msgid "Delete all /subpages too?"
+msgstr ""
+
 msgid "Optional reason for the deletion"
 msgstr "Можете указать причину для удаления"
 
 msgid "Really delete this page?"
 msgstr "Точно стереть эту страницу?"
+
+#, fuzzy
+#~ msgid "Xapian stemming"
+#~ msgstr "Общий поиск"
+
+#, fuzzy
+#~ msgid "filename"
+#~ msgstr "Файл"
+
+#~ msgid ""
+#~ "~-If you submit this form, the submitted values will be displayed.\n"
+#~ "To use this form on other pages, insert a\n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "macro call.-~\n"
+#~ msgstr ""
+#~ "~-При отправке этой формы вам будут показаны отправляемые значения.\n"
+#~ "Для использования этой формы на других страницах вставьте вызов макро:\n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]-~\n"
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr ""
+#~ "Незнакомое имя пользователя: {{{\"%s\"}}}. Пожалуйста введите имя и "
+#~ "пароль."
 
 #~ msgid "raw"
 #~ msgstr "разметка"
@@ -2319,6 +2479,3 @@ msgstr "Точно стереть эту страницу?"
 
 #~ msgid "(Only when changing passwords)"
 #~ msgstr "(Только при изменении пароля)"
-
-#~ msgid "Filename"
-#~ msgstr "Файл"

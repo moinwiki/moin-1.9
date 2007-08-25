@@ -11,9 +11,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.3\n"
+"Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-29 23:46+0100\n"
+"POT-Creation-Date: 2007-07-30 19:24+0200\n"
 "PO-Revision-Date: 2004-11-19 21:03+0800\n"
 "Last-Translator: Nam T. Nguyen <nnt@nntsoft.com>\n"
 "Language-Team: Vietnamese <moin-devel@lists.sourceforge.net>\n"
@@ -377,6 +377,31 @@ msgid "Edit was cancelled."
 msgstr "Các chỉnh sửa đã bị huỷ."
 
 #, fuzzy
+msgid "You can't copy to an empty pagename."
+msgstr "Bạn không thể lưu trang trắng."
+
+#, fuzzy
+msgid "You are not allowed to copy this page!"
+msgstr "Bạn không thể sửa trang này!"
+
+#, fuzzy, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"Try a different name."
+msgstr ""
+"'''Đã có trang {{{'%s'}}}.'''\n"
+"\n"
+"Vui lòng dùng tên khác."
+
+#, python-format
+msgid "Could not copy page because of file system error: %s."
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to rename this page!"
+msgstr "Bạn không thể hoàn nguyên phiên bản cũ của trang này!"
+
+#, fuzzy
 msgid "You can't rename to an empty pagename."
 msgstr "Bạn không thể lưu trang trắng."
 
@@ -575,17 +600,6 @@ msgstr "Được chuyển từ trang \"%(page)s\""
 msgid "This page redirects to page \"%(page)s\""
 msgstr "Trang này sẽ chuyển tới trang \"%(page)s\""
 
-#, python-format
-msgid ""
-"~-If you submit this form, the submitted values will be displayed.\n"
-"To use this form on other pages, insert a\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-"macro call.-~\n"
-msgstr ""
-"~-Nếu bạn gửi đơn này, những gì bạn gửi sẽ được hiển thị.\n"
-"Để dùng đơn này ở trang khác, chèn vào một câu lênh gọi\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-
 #, fuzzy
 msgid "Create New Page"
 msgstr "Tạo trang này"
@@ -679,6 +693,13 @@ msgstr "Tìm kiếm phân biệt chữ hoa và chữ thường"
 
 msgid "Search Text"
 msgstr "Tìm nội dung"
+
+#, python-format
+msgid "Not supported mimetype of file: %s"
+msgstr ""
+
+msgid "Embedded"
+msgstr ""
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -776,8 +797,19 @@ msgstr ""
 msgid "Xapian Version"
 msgstr "Phiên bản MoinMoin"
 
-msgid "Xapian stemming"
+msgid "PyStemmer not installed"
 msgstr ""
+
+msgid "Stemming for Xapian"
+msgstr ""
+
+#, fuzzy
+msgid "PyStemmer Version"
+msgstr "Phiên bản Python"
+
+#, fuzzy
+msgid "PyStemmer stems"
+msgstr "Phiên bản Python"
 
 msgid "Active threads"
 msgstr ""
@@ -872,6 +904,9 @@ msgstr ""
 #, fuzzy
 msgid "any language"
 msgstr "Ngôn ngữ mặc định"
+
+msgid "any mimetype"
+msgstr ""
 
 msgid "Language"
 msgstr ""
@@ -981,14 +1016,34 @@ msgid "**Could not find the referenced page: %s**"
 msgstr ""
 
 #, python-format
-msgid "Create new drawing \"%(filename)s\""
+msgid "Inlined image: %(url)s"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
 msgstr "Tạo bản vẽ \"%(filename)s\" mới"
 
-#, python-format
-msgid "Edit drawing %(filename)s"
+#, fuzzy, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Sửa bản vẽ \"%(filename)s\""
+
+#, fuzzy, python-format
+msgid "Clickable drawing: %(filename)s"
 msgstr "Sửa bản vẽ \"%(filename)s\""
 
 msgid "Toggle line numbers"
+msgstr ""
+
+msgid "[all]"
+msgstr ""
+
+msgid "[not empty]"
+msgstr ""
+
+msgid "[empty]"
+msgstr ""
+
+msgid "filter"
 msgstr ""
 
 msgid "Line"
@@ -1108,7 +1163,7 @@ msgstr "Tìm:"
 msgid "More Actions:"
 msgstr "Các hành động khác:"
 
-msgid "------------"
+msgid "------------------------"
 msgstr ""
 
 #, fuzzy
@@ -1124,6 +1179,10 @@ msgstr "Xóa trang"
 
 msgid "Rename Page"
 msgstr "Đổi tên trang"
+
+#, fuzzy
+msgid "Copy Page"
+msgstr "Tới trang"
 
 msgid "Delete Page"
 msgstr "Xóa trang"
@@ -1154,6 +1213,10 @@ msgstr ""
 
 msgid "Render as Docbook"
 msgstr ""
+
+#, fuzzy
+msgid "Sync Pages"
+msgstr "Trang"
 
 msgid "Do"
 msgstr "Làm"
@@ -1480,14 +1543,16 @@ msgid "Your quicklink to this page has been removed."
 msgstr "Sự đăng ký của bạn đã được huỷ bỏ."
 
 #, fuzzy
+msgid "Your quicklink to this page could not be removed."
+msgstr "Sự đăng ký của bạn đã được huỷ bỏ."
+
+#, fuzzy
 msgid "A quicklink to this page has been added for you."
 msgstr "Sự đăng ký của bạn đã được huỷ bỏ."
 
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr ""
-"Không biết người dùng: {{{\"%s\"}}}. Vui lòng nhập tên người dùng và mật "
-"khẩu."
+#, fuzzy
+msgid "A quicklink to this page could not be added for you."
+msgstr "Sự đăng ký của bạn đã được huỷ bỏ."
 
 msgid "Missing password. Please enter user name and password."
 msgstr "Thiếu mật khẩu. Vui lòng nhập tên người dùng và mật khẩu."
@@ -1506,6 +1571,10 @@ msgid ""
 "page."
 msgstr ""
 "Có tổng cộng <a href=\"%(link)s\">%(count)s file gửi kèm</a> trong trang này."
+
+#, fuzzy, python-format
+msgid "Attachment '%(target)s' already exists."
+msgstr "File gửi kèm '%(filename)s' đã được xoá."
 
 msgid "Filename of attachment not specified!"
 msgstr "Tên file gửi kèm không được định rõ!"
@@ -1569,6 +1638,9 @@ msgstr "File để tải lên"
 #, fuzzy
 msgid "Rename to"
 msgstr "Đổi tên"
+
+msgid "Overwrite existing attachment of same name"
+msgstr ""
 
 msgid "Upload"
 msgstr "Tải lên"
@@ -1701,7 +1773,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "The file %(target)s is not a .zip file."
+msgid "The file %(filename)s is not a .zip file."
 msgstr ""
 
 #, python-format
@@ -1731,11 +1803,18 @@ msgstr "[[Verbatim(attachment:)]]%(filename)s trong trang %(pagename)s"
 msgid "This page is already deleted or was never created!"
 msgstr "Trang này đã bị xoá hoặc chưa bao giờ tồn tại!"
 
+msgid "Rename all /subpages too?"
+msgstr ""
+
 msgid "New name"
 msgstr "Tên mới"
 
 msgid "Optional reason for the renaming"
 msgstr "Lý do đổi tên (nếu có)"
+
+#, fuzzy
+msgid "Really rename this page?"
+msgstr "Thật sự xoá trang này?"
 
 #, python-format
 msgid "Full Link List for \"%s\""
@@ -1808,6 +1887,10 @@ msgstr ""
 
 #, python-format
 msgid "After filtering: %s pages"
+msgstr ""
+
+#, python-format
+msgid "Skipped page %s because of no write access to local page."
 msgstr ""
 
 #, python-format
@@ -1886,6 +1969,30 @@ msgstr ""
 msgid "Page %s merged with conflicts."
 msgstr ""
 
+#, fuzzy
+msgid "Load"
+msgstr "Tải lên"
+
+#, fuzzy
+msgid "New Page or New Attachment"
+msgstr "Gửi kèm file mới"
+
+msgid ""
+"You can upload a file to a new page or choose to upload a file as attachment "
+"for the current page"
+msgstr ""
+
+#, fuzzy
+msgid "attachment"
+msgstr "Gửi kèm file mới"
+
+msgid "overwrite"
+msgstr ""
+
+#, fuzzy
+msgid "New Name"
+msgstr "Tên mới"
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(bao gồm cả %(localwords)d %(pagelink)s)"
@@ -1903,6 +2010,11 @@ msgstr "Thêm các từ đã kiểm tra vào từ điển"
 
 msgid "No spelling errors found!"
 msgstr "Không có lỗi chính tả!"
+
+#, fuzzy
+msgid "You can't save spelling words."
+msgstr ""
+"Bạn không thể kiểm tra lỗi chính tả trong một trang mà bạn không thể xem."
 
 msgid "You can't check spelling on a page you can't read."
 msgstr ""
@@ -1938,6 +2050,10 @@ msgid "Edit the subscription regular expressions in your UserPreferences."
 msgstr ""
 
 msgid "You have been subscribed to this page."
+msgstr "Bạn vừa đăng ký vào trang này."
+
+#, fuzzy
+msgid "You could not get subscribed to this page."
 msgstr "Bạn vừa đăng ký vào trang này."
 
 msgid "General Information"
@@ -2127,6 +2243,12 @@ msgstr "Việc không rõ"
 msgid "You are not allowed to revert this page!"
 msgstr "Bạn không thể hoàn nguyên phiên bản cũ của trang này!"
 
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
+msgstr ""
+
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Bản đồ liên kết nội bộ cho \"%s\""
@@ -2189,6 +2311,17 @@ msgstr "Trang giống \"%s\""
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s ở trang \"%(title)s\""
 
+msgid "Copy all /subpages too?"
+msgstr ""
+
+#, fuzzy
+msgid "Optional reason for the copying"
+msgstr "Lý do đổi tên (nếu có)"
+
+#, fuzzy
+msgid "Really copy this page?"
+msgstr "Thật sự xoá trang này?"
+
 msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr ""
@@ -2196,11 +2329,34 @@ msgstr ""
 msgid "Delete"
 msgstr "Xóa"
 
+msgid "Delete all /subpages too?"
+msgstr ""
+
 msgid "Optional reason for the deletion"
 msgstr "Lý do xoá trang (nếu có)"
 
 msgid "Really delete this page?"
 msgstr "Thật sự xoá trang này?"
+
+#, fuzzy
+#~ msgid "filename"
+#~ msgstr "Tên file"
+
+#~ msgid ""
+#~ "~-If you submit this form, the submitted values will be displayed.\n"
+#~ "To use this form on other pages, insert a\n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "macro call.-~\n"
+#~ msgstr ""
+#~ "~-Nếu bạn gửi đơn này, những gì bạn gửi sẽ được hiển thị.\n"
+#~ "Để dùng đơn này ở trang khác, chèn vào một câu lênh gọi\n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr ""
+#~ "Không biết người dùng: {{{\"%s\"}}}. Vui lòng nhập tên người dùng và mật "
+#~ "khẩu."
 
 #~ msgid "raw"
 #~ msgstr "thô"
@@ -2272,6 +2428,3 @@ msgstr "Thật sự xoá trang này?"
 
 #~ msgid "(Only when changing passwords)"
 #~ msgstr "(Chỉ khi nào đổi mật khẩu)"
-
-#~ msgid "Filename"
-#~ msgstr "Tên file"

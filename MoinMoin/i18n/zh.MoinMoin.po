@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-29 23:46+0100\n"
+"POT-Creation-Date: 2007-07-30 19:24+0200\n"
 "PO-Revision-Date: 2004-12-05 22:41+0100\n"
 "Last-Translator: Jun Hu <j.hu@tue.nl>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -151,11 +151,13 @@ msgstr "把帐号资料寄给我"
 msgid "Email"
 msgstr "电子邮件"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "To create an account, see the %(userprefslink)s page. To recover a lost "
 "password, go to %(sendmypasswordlink)s."
-msgstr "如要创建帐号或者找回丢失的密码, 请看%(userprefslink)s页面."
+msgstr ""
+"如要创建帐号, 参阅%(userprefslink)s.如要找回丢失的密码, 参阅%"
+"(sendmypasswordlink)s."
 
 msgid "Name"
 msgstr "用户名"
@@ -249,6 +251,10 @@ msgid ""
 "somehow without saving it.''' A draft gets saved for you when you do a "
 "preview, cancel an edit or unsuccessfully save."
 msgstr ""
+"'''[[BR]]你可以按 [载入草稿] 来载入修订版本号为 %(draft_rev)d (存于 %"
+"(draft_timestamp_str)s) 的草稿来取代目前的修订版本 %(page_rev)d ―― 万一您忘了"
+"保存您编辑的内容。''' 当预览、取消编辑、保存失败 r，系统会自动为你保留一分草"
+"稿。"
 
 #, python-format
 msgid "Describe %s here."
@@ -361,6 +367,27 @@ msgstr "图形界面模式"
 msgid "Edit was cancelled."
 msgstr "编辑取消了."
 
+msgid "You can't copy to an empty pagename."
+msgstr "不能复制到空白网页."
+
+msgid "You are not allowed to copy this page!"
+msgstr "您无权复制此页!"
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"Try a different name."
+msgstr ""
+"'''已经有一页叫做{{{'%s'}}} 了.'''\n"
+"试用一个不同的网页名."
+
+#, python-format
+msgid "Could not copy page because of file system error: %s."
+msgstr "网页复制失败, 文件系统异常: %s."
+
+msgid "You are not allowed to rename this page!"
+msgstr "您无权重命名此页!"
+
 msgid "You can't rename to an empty pagename."
 msgstr "不能保存空白网页."
 
@@ -379,7 +406,7 @@ msgid "Could not rename page because of file system error: %s."
 msgstr "网页改名失败, 文件系统异常: %s."
 
 msgid "You are not allowed to delete this page!"
-msgstr "您不能删除此页!"
+msgstr "您无权删除此页!"
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr "谢谢您的细心修改."
@@ -562,18 +589,6 @@ msgstr "从 \"%(page)s\" 页重定向过来"
 msgid "This page redirects to page \"%(page)s\""
 msgstr "此页重定向到网页 \"%(page)s\""
 
-#, python-format
-msgid ""
-"~-If you submit this form, the submitted values will be displayed.\n"
-"To use this form on other pages, insert a\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-"macro call.-~\n"
-msgstr ""
-"~-如果您提交本表单，提交的内容将被显示出来.\n"
-"要在其它网页使用此表, 请插入一个\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-"宏调用.-~\n"
-
 msgid "Create New Page"
 msgstr "创建网页"
 
@@ -585,6 +600,8 @@ msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
 "%(be)s results out of about %(pages)d pages."
 msgstr ""
+"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
+"%(be)s results out of about %(pages)d pages."
 
 msgid "seconds"
 msgstr "秒"
@@ -663,6 +680,13 @@ msgstr "大小写敏感搜索"
 
 msgid "Search Text"
 msgstr "正文检索"
+
+#, python-format
+msgid "Not supported mimetype of file: %s"
+msgstr "不支持此类型文件: %s"
+
+msgid "Embedded"
+msgstr "内嵌"
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -757,9 +781,17 @@ msgstr "Xapian搜索"
 msgid "Xapian Version"
 msgstr "Xapian版本"
 
-#, fuzzy
-msgid "Xapian stemming"
-msgstr "Xapian stemming"
+msgid "PyStemmer not installed"
+msgstr "PyStemmer未安装"
+
+msgid "Stemming for Xapian"
+msgstr ""
+
+msgid "PyStemmer Version"
+msgstr "PyStemmer版本"
+
+msgid "PyStemmer stems"
+msgstr "PyStemmer词干"
 
 msgid "Active threads"
 msgstr "活跃线程"
@@ -784,9 +816,9 @@ msgstr "图片'%(filename)s'已保存"
 msgid "Revert to revision %(rev)d."
 msgstr "恢复成版本%(rev)d."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Renamed from '%(oldpagename)s'."
-msgstr "网页\"%(pagename)s\"的附件"
+msgstr "由'%(oldpagename)s'更名而成"
 
 #, python-format
 msgid "%(mins)dm ago"
@@ -841,15 +873,17 @@ msgstr "包含以下一个或多个条目"
 msgid "not containing the following terms"
 msgstr "未包含以下条目"
 
-#, fuzzy
 msgid "belonging to one of the following categories"
-msgstr "属于以下某一类别"
+msgstr "属于以下类别之一"
 
 msgid "last modified since (e.g. last 2 weeks)"
-msgstr ""
+msgstr "最后一次修改在(如: 两周前)"
 
 msgid "any language"
-msgstr ""
+msgstr "任何语言"
+
+msgid "any mimetype"
+msgstr "任何MIME类型"
 
 msgid "Language"
 msgstr "语言"
@@ -873,11 +907,11 @@ msgid "Search in all page revisions"
 msgstr "在所有修订版中搜索"
 
 msgid "Go get it!"
-msgstr ""
+msgstr "开始搜索!"
 
 #, python-format
 msgid "Check your argument %s"
-msgstr ""
+msgstr "清检查您的参数 %s"
 
 msgid "Markup"
 msgstr "标记"
@@ -897,6 +931,7 @@ msgstr "邮件发送失败"
 
 msgid "Mail sent OK"
 msgstr "邮件成功发送"
+
 
 msgid "Date"
 msgstr "日期"
@@ -951,15 +986,35 @@ msgid "**Could not find the referenced page: %s**"
 msgstr "**未能找到引用的网页: %s**"
 
 #, python-format
-msgid "Create new drawing \"%(filename)s\""
-msgstr "创建新图片\"%(filename)s\""
+msgid "Inlined image: %(url)s"
+msgstr "内嵌图片: %(url)s"
 
 #, python-format
-msgid "Edit drawing %(filename)s"
-msgstr "编辑图片\"%(filename)s\""
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "创建新图片\"%(filename)s (在新窗口打开)\""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "编辑图片 %(filename)s (在新窗口打开)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "可点击图片 %(filename)s\""
 
 msgid "Toggle line numbers"
 msgstr "切换行号显示"
+
+msgid "[all]"
+msgstr "[全部]"
+
+msgid "[not empty]"
+msgstr "[非空白]"
+
+msgid "[empty]"
+msgstr "[空白]"
+
+msgid "filter"
+msgstr "过滤器"
 
 msgid "Line"
 msgstr "行号"
@@ -1024,10 +1079,10 @@ msgid "[UPDATED]"
 msgstr "[已更新]"
 
 msgid "[RENAMED]"
-msgstr ""
+msgstr "已更名"
 
 msgid "[CONFLICT]"
-msgstr ""
+msgstr "冲突"
 
 msgid "[NEW]"
 msgstr "[新建]"
@@ -1076,8 +1131,8 @@ msgstr "搜索"
 msgid "More Actions:"
 msgstr "更多操作"
 
-msgid "------------"
-msgstr "------------"
+msgid "------------------------"
+msgstr "------------------------"
 
 msgid "Raw Text"
 msgstr "源码"
@@ -1090,6 +1145,9 @@ msgstr "删除缓存"
 
 msgid "Rename Page"
 msgstr "改名"
+
+msgid "Copy Page"
+msgstr "复制网页"
 
 msgid "Delete Page"
 msgstr "删除"
@@ -1109,9 +1167,8 @@ msgstr "订阅"
 msgid "Remove Spam"
 msgstr "删除垃圾广告"
 
-#, fuzzy
 msgid "Revert to this revision"
-msgstr "恢复成版本%(rev)d."
+msgstr "恢复成此版本"
 
 msgid "Package Pages"
 msgstr "网页打包"
@@ -1119,10 +1176,12 @@ msgstr "网页打包"
 msgid "Render as Docbook"
 msgstr "输出Docbook格式"
 
+msgid "Sync Pages"
+msgstr "同步网页"
+
 msgid "Do"
 msgstr "执行"
 
-#, fuzzy
 msgid "Comments"
 msgstr "备注"
 
@@ -1378,7 +1437,7 @@ msgid "After login, jump to last visited page"
 msgstr "登陆后，跳转之前访问页。"
 
 msgid "Show comment sections"
-msgstr ""
+msgstr "显示备注栏"
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "不存在的网页链接显示问号"
@@ -1453,12 +1512,14 @@ msgstr "您必须首先登录才能添加快捷链接."
 msgid "Your quicklink to this page has been removed."
 msgstr "删除了您对本页的快捷链接."
 
+msgid "Your quicklink to this page could not be removed."
+msgstr "无法删除您对本页的快捷链接."
+
 msgid "A quicklink to this page has been added for you."
 msgstr "本页已加入到您的快捷链接."
 
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr "无效用户名: {{{\"%s\"}}}. 请输入用户名和密码."
+msgid "A quicklink to this page could not be added for you."
+msgstr "无法将本页加入到您的快捷链接."
 
 msgid "Missing password. Please enter user name and password."
 msgstr "需要密码, 请输入用户名和密码."
@@ -1475,6 +1536,10 @@ msgid ""
 "There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this "
 "page."
 msgstr "此页包含 <a href=\"%(link)s\">%(count)s 个附件</a>."
+
+#, python-format
+msgid "Attachment '%(target)s' already exists."
+msgstr "附件'%(target)s'已存在."
 
 msgid "Filename of attachment not specified!"
 msgstr "未指定附件的文件名!"
@@ -1536,6 +1601,9 @@ msgstr "待上载文件"
 
 msgid "Rename to"
 msgstr "改名为"
+
+msgid "Overwrite existing attachment of same name"
+msgstr "覆盖同名的现有附件"
 
 msgid "Upload"
 msgstr "上载"
@@ -1664,8 +1732,8 @@ msgstr ""
 "在, 或包含在文件夹中."
 
 #, python-format
-msgid "The file %(target)s is not a .zip file."
-msgstr "此文件%(target)s不是一个.zip文件"
+msgid "The file %(filename)s is not a .zip file."
+msgstr "此文件%(filename)s不是一个.zip文件"
 
 #, python-format
 msgid "Attachment '%(filename)s'"
@@ -1693,11 +1761,17 @@ msgstr "附件:%(pagename)s的%(filename)s"
 msgid "This page is already deleted or was never created!"
 msgstr "此页已被删除或根本就不存在!"
 
+msgid "Rename all /subpages too?"
+msgstr "重命名所有的子网页?"
+
 msgid "New name"
 msgstr "新名称"
 
 msgid "Optional reason for the renaming"
 msgstr "改名的原因(可选)"
+
+msgid "Really rename this page?"
+msgstr "真的要重命名此页?"
 
 #, python-format
 msgid "Full Link List for \"%s\""
@@ -1730,6 +1804,8 @@ msgid ""
 "[[BR]] /!\\ You should trust both wikis because the password could be read "
 "by the particular administrators."
 msgstr ""
+"请输入远程维基上您的账号口令。[[BR]] /!\\ 您必须信任双方维基，因为特定的管理"
+"员权限可以读取您的口令。"
 
 msgid "Operation was canceled."
 msgstr "操作取消了."
@@ -1770,6 +1846,10 @@ msgstr "已获取%s个当地网页和%s个远程网页. 共有%s个网页不同.
 #, python-format
 msgid "After filtering: %s pages"
 msgstr "过滤后: %s个网页"
+
+#, python-format
+msgid "Skipped page %s because of no write access to local page."
+msgstr "由于对本地网页无写入权限, 跳过网页%s."
 
 #, python-format
 msgid "Deleted page %s locally."
@@ -1852,6 +1932,27 @@ msgstr "远程网页%s中含有冲突内容."
 msgid "Page %s merged with conflicts."
 msgstr "冲突网页%s已合并."
 
+msgid "Load"
+msgstr "加载"
+
+msgid "New Page or New Attachment"
+msgstr "新网页或新附件"
+
+msgid ""
+"You can upload a file to a new page or choose to upload a file as attachment "
+"for the current page"
+msgstr ""
+"您可以将文件上载到新网页或上载为当前页面的附件"
+
+msgid "attachment"
+msgstr "附件"
+
+msgid "overwrite"
+msgstr "覆盖"
+
+msgid "New Name"
+msgstr "新名称"
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(其中包括%(localwords)d个%(pagelink)s)"
@@ -1869,6 +1970,9 @@ msgstr "将选中的词加入词典"
 
 msgid "No spelling errors found!"
 msgstr "没有拼写错误!"
+
+msgid "You can't save spelling words."
+msgstr "不能保存单词."
 
 msgid "You can't check spelling on a page you can't read."
 msgstr "不能对无权阅读的网页进行拼写检查."
@@ -1899,6 +2003,9 @@ msgstr "在用户设置中编辑订阅正则表达式."
 
 msgid "You have been subscribed to this page."
 msgstr "您已经订阅了此页."
+
+msgid "You could not get subscribed to this page."
+msgstr "您无法订阅此页."
 
 msgid "General Information"
 msgstr "一般信息"
@@ -2034,24 +2141,26 @@ msgstr "全文检索: \"%s\""
 msgid ""
 "Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
 "for more information."
-msgstr ""
+msgstr "您的查询 {{{\"%s\"}}}无效。详情参阅HelpOnSearching。"
 
 #, python-format
 msgid ""
 "Your search query {{{\"%s\"}}} didn't return any results. Please change some "
 "terms and refer to HelpOnSearching for more information.%s"
 msgstr ""
+"您的查   {{{\"%s\"}}}  ]有找到任何劫果，  修改查询条件。详情参阅"
+"HelpOnSearching。%s"
 
 msgid "(!) Consider performing a"
-msgstr ""
+msgstr "(!) 考虑执行"
 
 msgid "full-text search with your search terms"
-msgstr ""
+msgstr "用您的搜索条件进行全文检索"
 
 msgid ""
 "(!) You're performing a title search that might not include all related "
 "results of your search query in this wiki. [[BR]]"
-msgstr ""
+msgstr "(!) 您所作的标题检索可能不会包含本维基中所有符合条件的结果。[[BR]]"
 
 msgid "Click here to perform a full-text search with your search terms!"
 msgstr "点击对这个标题进行全文检索!"
@@ -2117,6 +2226,14 @@ msgstr "未知的备份子操作: %s."
 msgid "You are not allowed to revert this page!"
 msgstr "您不可以把此页恢复成旧版!"
 
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
+msgstr ""
+"当使用恢复功能时，您所察看的是网页的当前版本。"
+"如要恢复到较旧版本，首先请察看较旧的版本，然后再使用恢复功能。"
+
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "\"%s\"的本地站点图"
@@ -2179,6 +2296,15 @@ msgstr "\"%s\"的相似网页"
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "共发现%(matchcount)d%(matches)s与\"%(title)s\"相似的页"
 
+msgid "Copy all /subpages too?"
+msgstr "复制所有子网页?"
+
+msgid "Optional reason for the copying"
+msgstr "复制的原因(可选)"
+
+msgid "Really copy this page?"
+msgstr "真的要复制此页?"
+
 msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "没有网页名就无法创建新网页. 请指定一个网页名."
@@ -2186,11 +2312,36 @@ msgstr "没有网页名就无法创建新网页. 请指定一个网页名."
 msgid "Delete"
 msgstr "删除"
 
+msgid "Delete all /subpages too?"
+msgstr "删除所有的子网页?"
+
 msgid "Optional reason for the deletion"
 msgstr "删除此页的理由(可选)"
 
 msgid "Really delete this page?"
 msgstr "真的要删除此页?"
+
+#~ msgid "Xapian stemming"
+#~ msgstr "Xapian词干"
+
+#, fuzzy
+#~ msgid "filename"
+#~ msgstr "文件名"
+
+#~ msgid ""
+#~ "~-If you submit this form, the submitted values will be displayed.\n"
+#~ "To use this form on other pages, insert a\n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "macro call.-~\n"
+#~ msgstr ""
+#~ "~-如果您提交本表单，提交的内容将被显示出来.\n"
+#~ "要在其它网页使用此表, 请插入一个\n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "宏调用.-~\n"
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr "无效用户名: {{{\"%s\"}}}. 请输入用户名和密码."
 
 #~ msgid "raw"
 #~ msgstr "源码"
@@ -2262,9 +2413,6 @@ msgstr "真的要删除此页?"
 
 #~ msgid "(Only when changing passwords)"
 #~ msgstr "(只在改变密码时)"
-
-#~ msgid "Filename"
-#~ msgstr "文件名"
 
 #~ msgid "You are not allowed to rename pages in this wiki!"
 #~ msgstr "本维基不开放网页改名!"

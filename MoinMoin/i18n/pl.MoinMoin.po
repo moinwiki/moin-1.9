@@ -11,9 +11,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.5.0\n"
+"Project-Id-Version: 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-29 23:46+0100\n"
+"POT-Creation-Date: 2007-07-30 19:24+0200\n"
 "PO-Revision-Date: 2006-02-09 11:25+0100\n"
 "Last-Translator: Wojciech Palacz <wojtek@virgo.ii.uj.edu.pl>\n"
 "Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
@@ -378,6 +378,31 @@ msgid "Edit was cancelled."
 msgstr "Zmiany zostały anulowane."
 
 #, fuzzy
+msgid "You can't copy to an empty pagename."
+msgstr "Nie możesz zapisywać pustych stron."
+
+#, fuzzy
+msgid "You are not allowed to copy this page!"
+msgstr "Nie możesz zmieniać zawartości tej strony!"
+
+#, fuzzy, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"Try a different name."
+msgstr ""
+"'''Strona o nazwie {{{'%s'}}} już istnieje.'''\n"
+"\n"
+"Spróbuj innej nazwy."
+
+#, fuzzy, python-format
+msgid "Could not copy page because of file system error: %s."
+msgstr "Nie mogę zmienić nazwy strony ze względu na błąd systemu plików: %s."
+
+#, fuzzy
+msgid "You are not allowed to rename this page!"
+msgstr "Nie możesz przywracać tej strony!"
+
+#, fuzzy
 msgid "You can't rename to an empty pagename."
 msgstr "Nie możesz zapisywać pustych stron."
 
@@ -590,19 +615,6 @@ msgstr "Przekazano ze strony \"%(page)s\""
 msgid "This page redirects to page \"%(page)s\""
 msgstr "Ta strona przekazuje na stronę \"%(page)s\""
 
-#, python-format
-msgid ""
-"~-If you submit this form, the submitted values will be displayed.\n"
-"To use this form on other pages, insert a\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-"macro call.-~\n"
-msgstr ""
-"~-Jeżeli zaakceptujesz dane z formularza, wpisane wartości zostaną "
-"wyświetlone.\n"
-"Aby użyć tego formularza na innych stronach, wprowadź\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-"makropolecenie.-~\n"
-
 msgid "Create New Page"
 msgstr "Utwórz nową stronę"
 
@@ -695,6 +707,13 @@ msgstr "Przeszukiwanie z uwzględnieniem wielkości liter"
 
 msgid "Search Text"
 msgstr "Szukaj frazy"
+
+#, python-format
+msgid "Not supported mimetype of file: %s"
+msgstr ""
+
+msgid "Embedded"
+msgstr ""
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -791,9 +810,19 @@ msgstr "Wyszukiwanie przez Lupy"
 msgid "Xapian Version"
 msgstr "Wyszukiwanie przez Lupy"
 
+msgid "PyStemmer not installed"
+msgstr ""
+
+msgid "Stemming for Xapian"
+msgstr ""
+
 #, fuzzy
-msgid "Xapian stemming"
-msgstr "Wyszukiwanie przez Lupy"
+msgid "PyStemmer Version"
+msgstr "Wersja języka Python"
+
+#, fuzzy
+msgid "PyStemmer stems"
+msgstr "Wersja języka Python"
 
 msgid "Active threads"
 msgstr "Aktywne wątki"
@@ -888,6 +917,9 @@ msgstr ""
 #, fuzzy
 msgid "any language"
 msgstr "Ulubiony język"
+
+msgid "any mimetype"
+msgstr ""
 
 msgid "Language"
 msgstr ""
@@ -1001,14 +1033,34 @@ msgid "**Could not find the referenced page: %s**"
 msgstr "**Nie można znaleźć strony, do której się odwołano: %s**"
 
 #, python-format
-msgid "Create new drawing \"%(filename)s\""
+msgid "Inlined image: %(url)s"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
 msgstr "Utwórz nowy rysunek \"%(filename)s\""
 
-#, python-format
-msgid "Edit drawing %(filename)s"
+#, fuzzy, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Edytuj rysunek %(filename)s"
+
+#, fuzzy, python-format
+msgid "Clickable drawing: %(filename)s"
 msgstr "Edytuj rysunek %(filename)s"
 
 msgid "Toggle line numbers"
+msgstr ""
+
+msgid "[all]"
+msgstr ""
+
+msgid "[not empty]"
+msgstr ""
+
+msgid "[empty]"
+msgstr ""
+
+msgid "filter"
 msgstr ""
 
 msgid "Line"
@@ -1129,7 +1181,8 @@ msgstr "Szukaj"
 msgid "More Actions:"
 msgstr "Więcej operacji:"
 
-msgid "------------"
+#, fuzzy
+msgid "------------------------"
 msgstr "------------"
 
 msgid "Raw Text"
@@ -1143,6 +1196,10 @@ msgstr "Usuń pamięć podręczną"
 
 msgid "Rename Page"
 msgstr "Zmień nazwę strony"
+
+#, fuzzy
+msgid "Copy Page"
+msgstr "Strona"
 
 msgid "Delete Page"
 msgstr "Usuń stronę"
@@ -1175,6 +1232,10 @@ msgstr "Podobne strony"
 
 msgid "Render as Docbook"
 msgstr ""
+
+#, fuzzy
+msgid "Sync Pages"
+msgstr "Strona"
 
 msgid "Do"
 msgstr "Wykonaj"
@@ -1512,12 +1573,16 @@ msgstr "Musisz się zalogować by dodać szybki odnośnik."
 msgid "Your quicklink to this page has been removed."
 msgstr "Szybki odnośnik do tej strony został usunięty."
 
+#, fuzzy
+msgid "Your quicklink to this page could not be removed."
+msgstr "Szybki odnośnik do tej strony został usunięty."
+
 msgid "A quicklink to this page has been added for you."
 msgstr "Szybki odnośnik do tej strony został dodany."
 
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr "Nieznana nazwa konta: {{{\"%s\"}}}. Podaj identyfikator i hasło."
+#, fuzzy
+msgid "A quicklink to this page could not be added for you."
+msgstr "Szybki odnośnik do tej strony został dodany."
 
 msgid "Missing password. Please enter user name and password."
 msgstr "Zapomniano o haśle. Podaj identyfikator i hasło."
@@ -1536,6 +1601,10 @@ msgid ""
 "page."
 msgstr ""
 "Istnieje <a href=\"%(link)s\">%(count)s załącznik(ów)</a> do tej strony."
+
+#, fuzzy, python-format
+msgid "Attachment '%(target)s' already exists."
+msgstr "Załącznik '%(filename)s' zachowano."
 
 msgid "Filename of attachment not specified!"
 msgstr "Nie została podana nazwa pliku załącznika!"
@@ -1602,6 +1671,9 @@ msgstr "Plik do przekazania"
 
 msgid "Rename to"
 msgstr "Zmień nazwę"
+
+msgid "Overwrite existing attachment of same name"
+msgstr ""
 
 msgid "Upload"
 msgstr "Przekaż"
@@ -1739,8 +1811,8 @@ msgstr ""
 "Nie rozpakowano załącznika '%(filename)s', ponieważ pliki są zbyt duże, "
 "tylko typu .zip, już istnieją, albo znajdują się w podkatalogach."
 
-#, python-format
-msgid "The file %(target)s is not a .zip file."
+#, fuzzy, python-format
+msgid "The file %(filename)s is not a .zip file."
 msgstr "Plik %(target)s nie jest typu .zip."
 
 #, python-format
@@ -1769,11 +1841,18 @@ msgstr "[[Verbatim(załącznik:)]]%(filename)s z %(pagename)s"
 msgid "This page is already deleted or was never created!"
 msgstr "Niniejsza strona została już skasowana albo nigdy jej nie było!"
 
+msgid "Rename all /subpages too?"
+msgstr ""
+
 msgid "New name"
 msgstr "Nowa nazwa"
 
 msgid "Optional reason for the renaming"
 msgstr "Opcjonalna przyczyna zmiany nazwy"
+
+#, fuzzy
+msgid "Really rename this page?"
+msgstr "Czy na pewno usunąć niniejszą stronę?"
 
 #, python-format
 msgid "Full Link List for \"%s\""
@@ -1848,6 +1927,10 @@ msgstr ""
 
 #, python-format
 msgid "After filtering: %s pages"
+msgstr ""
+
+#, python-format
+msgid "Skipped page %s because of no write access to local page."
 msgstr ""
 
 #, python-format
@@ -1926,6 +2009,30 @@ msgstr ""
 msgid "Page %s merged with conflicts."
 msgstr ""
 
+#, fuzzy
+msgid "Load"
+msgstr "Przekaż"
+
+#, fuzzy
+msgid "New Page or New Attachment"
+msgstr "Nowy załącznik"
+
+msgid ""
+"You can upload a file to a new page or choose to upload a file as attachment "
+"for the current page"
+msgstr ""
+
+#, fuzzy
+msgid "attachment"
+msgstr "Załączniki"
+
+msgid "overwrite"
+msgstr ""
+
+#, fuzzy
+msgid "New Name"
+msgstr "Nowa nazwa"
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(zawarto  %(localwords)d %(pagelink)s)"
@@ -1943,6 +2050,10 @@ msgstr "Dodaj sprawdzone słowa do słownika"
 
 msgid "No spelling errors found!"
 msgstr "Nie znaleziono błędów!"
+
+#, fuzzy
+msgid "You can't save spelling words."
+msgstr "Nie możesz sprawdzać stron, których nie możesz czytać."
 
 msgid "You can't check spelling on a page you can't read."
 msgstr "Nie możesz sprawdzać stron, których nie możesz czytać."
@@ -1981,6 +2092,10 @@ msgstr ""
 "PreferencjeCzytelnika."
 
 msgid "You have been subscribed to this page."
+msgstr "Zasubskrybowałeś tę stronę."
+
+#, fuzzy
+msgid "You could not get subscribed to this page."
 msgstr "Zasubskrybowałeś tę stronę."
 
 msgid "General Information"
@@ -2200,6 +2315,12 @@ msgstr ""
 msgid "You are not allowed to revert this page!"
 msgstr "Nie możesz przywracać tej strony!"
 
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
+msgstr ""
+
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Mapa \"%s\""
@@ -2266,6 +2387,17 @@ msgstr "Stron w rodzaju \"%s\""
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s dla \"%(title)s\""
 
+msgid "Copy all /subpages too?"
+msgstr ""
+
+#, fuzzy
+msgid "Optional reason for the copying"
+msgstr "Opcjonalna przyczyna zmiany nazwy"
+
+#, fuzzy
+msgid "Really copy this page?"
+msgstr "Czy na pewno usunąć niniejszą stronę?"
+
 msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "Nie można utworzyć strony bez nazwy. Proszę podać nazwę strony."
@@ -2273,11 +2405,38 @@ msgstr "Nie można utworzyć strony bez nazwy. Proszę podać nazwę strony."
 msgid "Delete"
 msgstr "Usunąć"
 
+msgid "Delete all /subpages too?"
+msgstr ""
+
 msgid "Optional reason for the deletion"
 msgstr "Opcjonalna przyczyna usunięcia"
 
 msgid "Really delete this page?"
 msgstr "Czy na pewno usunąć niniejszą stronę?"
+
+#, fuzzy
+#~ msgid "Xapian stemming"
+#~ msgstr "Wyszukiwanie przez Lupy"
+
+#, fuzzy
+#~ msgid "filename"
+#~ msgstr "Nazwa pliku"
+
+#~ msgid ""
+#~ "~-If you submit this form, the submitted values will be displayed.\n"
+#~ "To use this form on other pages, insert a\n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "macro call.-~\n"
+#~ msgstr ""
+#~ "~-Jeżeli zaakceptujesz dane z formularza, wpisane wartości zostaną "
+#~ "wyświetlone.\n"
+#~ "Aby użyć tego formularza na innych stronach, wprowadź\n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "makropolecenie.-~\n"
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr "Nieznana nazwa konta: {{{\"%s\"}}}. Podaj identyfikator i hasło."
 
 #~ msgid "raw"
 #~ msgstr "surowy"
@@ -2351,9 +2510,6 @@ msgstr "Czy na pewno usunąć niniejszą stronę?"
 
 #~ msgid "(Only when changing passwords)"
 #~ msgstr "(Tylko podczas zmiany hasła)"
-
-#~ msgid "Filename"
-#~ msgstr "Nazwa pliku"
 
 #~ msgid "You are not allowed to rename pages in this wiki!"
 #~ msgstr "Nie możesz zmieniać nazw stron na tym wiki!"

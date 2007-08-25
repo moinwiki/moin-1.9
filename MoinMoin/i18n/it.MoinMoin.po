@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-29 23:46+0100\n"
-"PO-Revision-Date: 2007-01-01 17:31:38 CET\n"
+"POT-Creation-Date: 2007-07-30 19:24+0200\n"
+"PO-Revision-Date: 2007-04-22 23:49:21+02:00\n"
 "Last-Translator: ***vacant***\n"
 "Language-Team: Italian <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -160,13 +160,13 @@ msgstr "Spediscimi via email i miei dati"
 msgid "Email"
 msgstr "Email"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "To create an account, see the %(userprefslink)s page. To recover a lost "
 "password, go to %(sendmypasswordlink)s."
 msgstr ""
-"Vedi la pagina %(userprefslink)s per creare un conto utente o per riottenere "
-"una password dimenticata."
+"Vedi la pagina %(userprefslink)s per creare un conto utente. Per riottenere "
+"una password dimenticata, vedi la pagina %(sendmypasswordlink)s."
 
 msgid "Name"
 msgstr "Nome"
@@ -389,6 +389,28 @@ msgstr "Modo grafico"
 msgid "Edit was cancelled."
 msgstr "Le modifiche sono state annullate."
 
+msgid "You can't copy to an empty pagename."
+msgstr "Non puoi copiare la pagina in una senza nome."
+
+msgid "You are not allowed to copy this page!"
+msgstr "Non sei autorizzato a copiare questa pagina!"
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"Try a different name."
+msgstr ""
+"'''Una pagina con il nome {{{'%s'}}} esiste già.'''\n"
+"\n"
+"Prova un nome differente."
+
+#, python-format
+msgid "Could not copy page because of file system error: %s."
+msgstr "Impossibile copiare la pagina per un errore del file system: %s."
+
+msgid "You are not allowed to rename this page!"
+msgstr "Non sei autorizzato a rinominare questa pagina!"
+
 msgid "You can't rename to an empty pagename."
 msgstr "Non puoi rinominare la pagina in una senza nome."
 
@@ -607,19 +629,6 @@ msgstr "Redirezione dalla pagina \"%(page)s\""
 msgid "This page redirects to page \"%(page)s\""
 msgstr "Questa pagina è rediretta alla pagina \"%(page)s\""
 
-#, python-format
-msgid ""
-"~-If you submit this form, the submitted values will be displayed.\n"
-"To use this form on other pages, insert a\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-"macro call.-~\n"
-msgstr ""
-"~-Se confermi questa scheda, i dati inseriti verranno visualizzati.\n"
-"Per usare questa maschera su altre pagine, inserisci una chiamata alla "
-"macro\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''.[[BR]][[BR]]\n"
-"~-\n"
-
 msgid "Create New Page"
 msgstr "Crea una nuova pagina"
 
@@ -711,6 +720,13 @@ msgstr "Ricerca differenziando Maiuscolo-minuscolo"
 
 msgid "Search Text"
 msgstr "Cerca nel testo"
+
+#, python-format
+msgid "Not supported mimetype of file: %s"
+msgstr "Mimetype del file non supportato: %s"
+
+msgid "Embedded"
+msgstr "Collocato"
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -807,8 +823,19 @@ msgstr "Ricerca Xapian"
 msgid "Xapian Version"
 msgstr "Versione Xapian"
 
-msgid "Xapian stemming"
-msgstr "Indice Xapian delle radici"
+msgid "PyStemmer not installed"
+msgstr ""
+
+msgid "Stemming for Xapian"
+msgstr ""
+
+#, fuzzy
+msgid "PyStemmer Version"
+msgstr "Versione Python"
+
+#, fuzzy
+msgid "PyStemmer stems"
+msgstr "Versione Python"
 
 msgid "Active threads"
 msgstr "Thread attivi"
@@ -833,9 +860,9 @@ msgstr "Il disegno '%(filename)s' è stato memorizzato."
 msgid "Revert to revision %(rev)d."
 msgstr "Ripristinata la revisione %(rev)d."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Renamed from '%(oldpagename)s'."
-msgstr "Allegati per \"%(pagename)s\""
+msgstr "Rinominata da '%(oldpagename)s'."
 
 #, python-format
 msgid "%(mins)dm ago"
@@ -899,6 +926,9 @@ msgstr "modificato per l'ultima volta durante (es. le ultime 2 settimane)"
 msgid "any language"
 msgstr "qualsiasi lingua"
 
+msgid "any mimetype"
+msgstr ""
+
 msgid "Language"
 msgstr "Lingua"
 
@@ -925,7 +955,7 @@ msgstr "Vai a prenderlo!"
 
 #, python-format
 msgid "Check your argument %s"
-msgstr ""
+msgstr "Controlla l'argomento %s"
 
 msgid "Markup"
 msgstr "Formattazione Wiki"
@@ -1000,15 +1030,35 @@ msgid "**Could not find the referenced page: %s**"
 msgstr "**Impossibile trovare la pagina referenziata: %s**"
 
 #, python-format
-msgid "Create new drawing \"%(filename)s\""
-msgstr "Crea un nuovo disegno \"%(filename)s\""
+msgid "Inlined image: %(url)s"
+msgstr "Immagine in linea: %(url)s"
 
 #, python-format
-msgid "Edit drawing %(filename)s"
-msgstr "Modifica disegno \"%(filename)s\""
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Crea un nuovo disegno \"%(filename)s (apre in una nuova finestra)\""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Modifica disegno \"%(filename)s (apre in una nuova finestra)\""
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Disegno cliccabile \"%(filename)s\""
 
 msgid "Toggle line numbers"
 msgstr "Dis/Attivare numerazione delle righe"
+
+msgid "[all]"
+msgstr "[tutti]"
+
+msgid "[not empty]"
+msgstr "[non vuoto]"
+
+msgid "[empty]"
+msgstr "[vuoto]"
+
+msgid "filter"
+msgstr "filto"
 
 msgid "Line"
 msgstr "Linea"
@@ -1074,10 +1124,10 @@ msgid "[UPDATED]"
 msgstr "[AGGIORNATO]"
 
 msgid "[RENAMED]"
-msgstr ""
+msgstr "[RINOMINATO]"
 
 msgid "[CONFLICT]"
-msgstr ""
+msgstr "[CONFLITTO]"
 
 msgid "[NEW]"
 msgstr "[NUOVO]"
@@ -1126,8 +1176,8 @@ msgstr "Cerca"
 msgid "More Actions:"
 msgstr "Altre azioni:"
 
-msgid "------------"
-msgstr "------------"
+msgid "------------------------"
+msgstr "------------------------"
 
 msgid "Raw Text"
 msgstr "Mostra il testo grezzo"
@@ -1140,6 +1190,9 @@ msgstr "Cancella file temporanei"
 
 msgid "Rename Page"
 msgstr "Rinomina pagina"
+
+msgid "Copy Page"
+msgstr "Copia pagina"
 
 msgid "Delete Page"
 msgstr "Cancella pagina"
@@ -1159,9 +1212,8 @@ msgstr "Abbona utente"
 msgid "Remove Spam"
 msgstr "Rimuovi spam"
 
-#, fuzzy
 msgid "Revert to this revision"
-msgstr "Ripristinata la revisione %(rev)d."
+msgstr "Ripristina questa revisione"
 
 msgid "Package Pages"
 msgstr "Crea un package"
@@ -1169,12 +1221,14 @@ msgstr "Crea un package"
 msgid "Render as Docbook"
 msgstr "Visualizza come Docbook"
 
+msgid "Sync Pages"
+msgstr "Sincronizza pagine"
+
 msgid "Do"
 msgstr "Esegui"
 
-#, fuzzy
 msgid "Comments"
-msgstr "Commento"
+msgstr "Commenti"
 
 msgid "Edit (Text)"
 msgstr "Modifica (modo testuale)"
@@ -1432,7 +1486,7 @@ msgid "After login, jump to last visited page"
 msgstr "Vai all'ultima pagina visitata al login eseguito"
 
 msgid "Show comment sections"
-msgstr ""
+msgstr "Mostra i passaggi con commenti"
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "Mostra un punto di domanda per i collegamenti a pagine non esistenti"
@@ -1509,13 +1563,16 @@ msgstr "Devi eseguire il login per aggiungere un collegamento rapido."
 msgid "Your quicklink to this page has been removed."
 msgstr "Il tuo collegamento rapido a questa pagina è stato rimosso."
 
+msgid "Your quicklink to this page could not be removed."
+msgstr ""
+"Non è stato possibile rimuovere il tuo collegamento rapido a questa pagina."
+
 msgid "A quicklink to this page has been added for you."
 msgstr "Un collegamento rapido a questa pagina è stato creato."
 
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+msgid "A quicklink to this page could not be added for you."
 msgstr ""
-"Nome utente sconosciuto: {{{\"%s\"}}}. Inserisci nome utente e password."
+"Non è stato possibile creare per te un collegamento rapido a questa pagina."
 
 msgid "Missing password. Please enter user name and password."
 msgstr "Password mancante. Inserisci nome utente e password."
@@ -1532,6 +1589,10 @@ msgid ""
 "There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this "
 "page."
 msgstr "Ci sono <a href=\"%(link)s\">%(count)s allegati</a> per questa pagina."
+
+#, python-format
+msgid "Attachment '%(target)s' already exists."
+msgstr "L'allegato '%(target)s' esiste già."
 
 msgid "Filename of attachment not specified!"
 msgstr "Non è stato specificato il nome del file dell'allegato!"
@@ -1596,6 +1657,9 @@ msgstr "File da caricare"
 
 msgid "Rename to"
 msgstr "Rinomina come"
+
+msgid "Overwrite existing attachment of same name"
+msgstr "Sostituire un allegato di medesimo nome"
 
 msgid "Upload"
 msgstr "Carica"
@@ -1732,8 +1796,8 @@ msgstr ""
 "non di tipo .zip o esiste già o ubicato in una cartella."
 
 #, python-format
-msgid "The file %(target)s is not a .zip file."
-msgstr "Il file %(target)s non è di tipo .zip."
+msgid "The file %(filename)s is not a .zip file."
+msgstr "Il file %(filename)s non è di tipo .zip."
 
 #, python-format
 msgid "Attachment '%(filename)s'"
@@ -1762,11 +1826,17 @@ msgstr "[[Verbatim(attachment:)]]%(filename)s di %(pagename)s"
 msgid "This page is already deleted or was never created!"
 msgstr "Questa pagina è gia stata cancellata, o non è mai stata creata!"
 
+msgid "Rename all /subpages too?"
+msgstr "Rinominare anche tutte le /sottopagine?"
+
 msgid "New name"
 msgstr "Nuovo nome"
 
 msgid "Optional reason for the renaming"
 msgstr "Ragione facoltativa per la rinominazione"
+
+msgid "Really rename this page?"
+msgstr "Vuoi veramente rinominare questa pagina?"
 
 #, python-format
 msgid "Full Link List for \"%s\""
@@ -1846,6 +1916,12 @@ msgstr ""
 #, python-format
 msgid "After filtering: %s pages"
 msgstr "Dopo aver filtrato %s pagine"
+
+#, python-format
+msgid "Skipped page %s because of no write access to local page."
+msgstr ""
+"Saltata la pagina %s, perché manca il diritto di scrivere per la pagina "
+"locale."
 
 #, python-format
 msgid "Deleted page %s locally."
@@ -1942,6 +2018,30 @@ msgstr ""
 msgid "Page %s merged with conflicts."
 msgstr "La pagina %s è stata combinata con dei conflitti di modifiche."
 
+#, fuzzy
+msgid "Load"
+msgstr "Carica"
+
+#, fuzzy
+msgid "New Page or New Attachment"
+msgstr "Nuovo allegato"
+
+msgid ""
+"You can upload a file to a new page or choose to upload a file as attachment "
+"for the current page"
+msgstr ""
+
+#, fuzzy
+msgid "attachment"
+msgstr "Allegati"
+
+msgid "overwrite"
+msgstr ""
+
+#, fuzzy
+msgid "New Name"
+msgstr "Nuovo nome"
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(includendo %(localwords)d %(pagelink)s)"
@@ -1959,6 +2059,9 @@ msgstr "Aggiungi le parole verificate al dizionario"
 
 msgid "No spelling errors found!"
 msgstr "Non sono stati trovati errori di ortografia!"
+
+msgid "You can't save spelling words."
+msgstr "Non puoi salvare parole del controllo ortografico."
 
 msgid "You can't check spelling on a page you can't read."
 msgstr ""
@@ -1994,6 +2097,9 @@ msgstr ""
 
 msgid "You have been subscribed to this page."
 msgstr "Da questo momento sei abbonato a questa pagina."
+
+msgid "You could not get subscribed to this page."
+msgstr "Non è stato possibile abbonarti a questa pagina."
 
 msgid "General Information"
 msgstr "Informazioni generali"
@@ -2233,6 +2339,15 @@ msgstr "Sottoazione di backup %s sconosciuta."
 msgid "You are not allowed to revert this page!"
 msgstr "Non sei autorizzato a ripristinare questa pagina!"
 
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
+msgstr ""
+"Stavi guardando la versione attuale di questa pagina quando hai azionato la "
+"funzione di ripristino. Se vuoi ripristinare una versione antecedente, per "
+"favore, visualizza prima tale versione e poi aziona ancora il ripristino."
+
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Mappa del sito per \"%s\""
@@ -2295,6 +2410,18 @@ msgstr "Pagine simili a \"%s\""
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s per \"%(title)s\""
 
+#, fuzzy
+msgid "Copy all /subpages too?"
+msgstr "Cancellare anche tutte le /sottopagine?"
+
+#, fuzzy
+msgid "Optional reason for the copying"
+msgstr "Ragione facoltativa per la rinominazione"
+
+#, fuzzy
+msgid "Really copy this page?"
+msgstr "Vuoi veramente rinominare questa pagina?"
+
 msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr ""
@@ -2304,11 +2431,37 @@ msgstr ""
 msgid "Delete"
 msgstr "Cancella"
 
+msgid "Delete all /subpages too?"
+msgstr "Cancellare anche tutte le /sottopagine?"
+
 msgid "Optional reason for the deletion"
 msgstr "Ragione facoltativa per la cancellazione"
 
 msgid "Really delete this page?"
 msgstr "Vuoi veramente cancellare questa pagina?"
+
+#~ msgid "Xapian stemming"
+#~ msgstr "Indice Xapian delle radici"
+
+#~ msgid "filename"
+#~ msgstr "Nome del file"
+
+#~ msgid ""
+#~ "~-If you submit this form, the submitted values will be displayed.\n"
+#~ "To use this form on other pages, insert a\n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "macro call.-~\n"
+#~ msgstr ""
+#~ "~-Se confermi questa scheda, i dati inseriti verranno visualizzati.\n"
+#~ "Per usare questa maschera su altre pagine, inserisci una chiamata alla "
+#~ "macro\n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''.[[BR]][[BR]]\n"
+#~ "~-\n"
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr ""
+#~ "Nome utente sconosciuto: {{{\"%s\"}}}. Inserisci nome utente e password."
 
 #~ msgid "raw"
 #~ msgstr "non formattato"
