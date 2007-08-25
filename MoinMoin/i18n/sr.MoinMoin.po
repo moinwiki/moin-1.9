@@ -811,7 +811,6 @@ msgstr "Xapian претрага"
 msgid "Xapian Version"
 msgstr "MoinMoin верзија"
 
-
 msgid "PyStemmer not installed"
 msgstr "PyStemmer није инсталиран"
 

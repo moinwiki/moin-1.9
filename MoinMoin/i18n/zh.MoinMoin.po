@@ -932,7 +932,6 @@ msgstr "邮件发送失败"
 msgid "Mail sent OK"
 msgstr "邮件成功发送"
 
-
 msgid "Date"
 msgstr "日期"
 
@@ -1941,8 +1940,7 @@ msgstr "新网页或新附件"
 msgid ""
 "You can upload a file to a new page or choose to upload a file as attachment "
 "for the current page"
-msgstr ""
-"您可以将文件上载到新网页或上载为当前页面的附件"
+msgstr "您可以将文件上载到新网页或上载为当前页面的附件"
 
 msgid "attachment"
 msgstr "附件"
@@ -2231,8 +2229,8 @@ msgid ""
 "revert action. If you want to revert to an older revision, first view that "
 "older revision and then call revert to this (older) revision again."
 msgstr ""
-"当使用恢复功能时，您所察看的是网页的当前版本。"
-"如要恢复到较旧版本，首先请察看较旧的版本，然后再使用恢复功能。"
+"当使用恢复功能时，您所察看的是网页的当前版本。如要恢复到较旧版本，首先请察看"
+"较旧的版本，然后再使用恢复功能。"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
