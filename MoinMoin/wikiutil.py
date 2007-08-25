@@ -255,8 +255,8 @@ def clean_input(text, max_len=201):
         @return: cleaned text
     """
     # we only have input fields with max 200 chars, but spammers send us more
-    l = len(text)
-    if l == 0 or l > max_len:
+    length = len(text)
+    if length == 0 or length > max_len:
         return u''
     else:
         return text.translate(config.clean_input_translation_map)
@@ -2254,3 +2254,4 @@ def get_processing_instructions(body):
         pi.append((verb.lower(), args.strip()))
 
     return pi, body
+
