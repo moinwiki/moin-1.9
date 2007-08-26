@@ -888,13 +888,18 @@ def RelPageName(context, pagename):
         return PARENT_PREFIX * go_up + '/'.join(pagename_frags)
 
 
-def pagelinkmarkup(pagename):
+def pagelinkmarkup(pagename, text=None):
     """ return markup that can be used as link to page <pagename> """
     from MoinMoin.parser.text_moin_wiki import Parser
-    if re.match(Parser.word_rule + "$", pagename, re.U|re.X):
+    if re.match(Parser.word_rule + "$", pagename, re.U|re.X) and \
+            (text is None or text == pagename):
         return pagename
     else:
-        return u'[[%s]]' % pagename
+        if text is None or text == pagename:
+            text = ''
+        else:
+            text = '|%s' % text
+        return u'[[%s%s]]' % (pagename, text)
 
 #############################################################################
 ### mimetype support

@@ -1145,13 +1145,13 @@ class convert_tree(visitor):
                     self.text.append(wikiutil.pagelinkmarkup(text))
                 # labeled link
                 else:
-                    self.text.append('[[%s|%s]]' % (pagename, text))
+                    self.text.append(wikiutil.pagelinkmarkup(pagename, text))
             # mailto link
             elif href.startswith("mailto:"):
                 if href[len("mailto:"):] == text:
                     self.text.extend([self.white_space, text, self.white_space])
                 else:
-                    self.text.append("[[%s|%s]]" % (href, text))
+                    self.text.append("[[%s|%s]]" % (href, text)) # XXX use a (renamed) pagelinkmarkup
             # simple link
             elif href.replace(" ", "%20") == text:
                 self.text.append("%s" % text)
