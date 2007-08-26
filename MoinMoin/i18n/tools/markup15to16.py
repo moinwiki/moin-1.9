@@ -21,7 +21,7 @@ def run():
     # replace [[Macro(...)]] by <<Macro(...)>>
     macro_rule = r"\[\[(?P<macro>.*?)\]\]"
     macro_repl = r"<<\g<macro>>>"
-    macro_re = re.compile(macro_rule, re.U)
+    macro_re = re.compile(macro_rule, re.U|re.M|re.S)
     text = macro_re.sub(macro_repl, text)
 
     #print repr(text)
