@@ -5,8 +5,8 @@
     Selects a random quote from FortuneCookies or a given page.
 
     Usage:
-        [[RandomQuote()]]
-        [[RandomQuote(WikiTips)]]
+        <<RandomQuote()>>
+        <<RandomQuote(WikiTips)>>
 
     Comments:
         It will look for list delimiters on the page in question.

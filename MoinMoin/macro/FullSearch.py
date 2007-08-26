@@ -2,15 +2,15 @@
 """
     MoinMoin - FullSearch Macro
 
-    [[FullSearch]]
+    <<FullSearch>>
         displays a search dialog, as it always did.
 
-    [[FullSearch()]]
+    <<FullSearch()>>
         does the same as clicking on the page title, only that
         the result is embedded into the page. note the '()' after
         the macro name, which is an empty argument list.
 
-    [[FullSearch(Help)]]
+    <<FullSearch(Help)>>
         embeds a search result into a page, as if you entered
         'Help' into the search box.
 

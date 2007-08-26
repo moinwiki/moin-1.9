@@ -119,7 +119,7 @@ function OnChange( sMacro )
             helptext = ""
         helptexts.append(
             '''<div id="%s" style="DISPLAY: none">
-               <b>[[%s]]</b>
+               <b><<%s>></b>
                <br/>
                <textarea style="color:#000000" cols="37" rows="10" disabled="disabled">%s</textarea>
                </div>'''

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-29 23:46+0100\n"
+"POT-Creation-Date: 2007-07-30 19:24+0200\n"
 "PO-Revision-Date: 2005-11-06 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -379,6 +379,31 @@ msgstr "ویرایش گرافیکی"
 msgid "Edit was cancelled."
 msgstr "ویرایش لغو شد."
 
+#, fuzzy
+msgid "You can't copy to an empty pagename."
+msgstr "تغییر نام به یک صفحه بدون نام مجاز نیست."
+
+#, fuzzy
+msgid "You are not allowed to copy this page!"
+msgstr "شما مجاز به ویرایش این صفحه نمی باشید!"
+
+#, fuzzy, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"Try a different name."
+msgstr ""
+"'''صفحه ای با نام {{{'%s'}}} وجود دارد.'''\n"
+"\n"
+"لطفا نام دیگری انتخاب نمایید."
+
+#, fuzzy, python-format
+msgid "Could not copy page because of file system error: %s."
+msgstr "بدلیل ایراد سیستمی %s نام صفحه تغییر نکرد."
+
+#, fuzzy
+msgid "You are not allowed to rename this page!"
+msgstr "شما مجاز نیستید این صفحه را ارجاع دهید!"
+
 msgid "You can't rename to an empty pagename."
 msgstr "تغییر نام به یک صفحه بدون نام مجاز نیست."
 
@@ -589,18 +614,6 @@ msgstr "ارجاع از صفحه \"%(page)s\""
 msgid "This page redirects to page \"%(page)s\""
 msgstr "این صفحه به صفحه \"%(page)s\" ارجاع دارد"
 
-#, python-format
-msgid ""
-"~-If you submit this form, the submitted values will be displayed.\n"
-"To use this form on other pages, insert a\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-"macro call.-~\n"
-msgstr ""
-"~-در صورتی که این فرم را ثبت نمايید٬ مقادیر ثبت شده قابل رویت خواهند بود.\n"
-"برای استفاده از این فرم در صفحات دیگر از نمونه کد زیر استفاده نمايید.·a\n"
-"[[BR]][[BR]]'''{{{····[[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-"-~\n"
-
 msgid "Create New Page"
 msgstr "ایجاد صفحه جدید"
 
@@ -693,6 +706,13 @@ msgstr "جستجوی حساس به حروف بزرگ و کوچک"
 
 msgid "Search Text"
 msgstr "جستجو در متون"
+
+#, python-format
+msgid "Not supported mimetype of file: %s"
+msgstr ""
+
+msgid "Embedded"
+msgstr ""
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -788,9 +808,19 @@ msgstr "Xapian search"
 msgid "Xapian Version"
 msgstr "Xapian search"
 
+msgid "PyStemmer not installed"
+msgstr ""
+
+msgid "Stemming for Xapian"
+msgstr ""
+
 #, fuzzy
-msgid "Xapian stemming"
-msgstr "Xapian search"
+msgid "PyStemmer Version"
+msgstr "نسخه python"
+
+#, fuzzy
+msgid "PyStemmer stems"
+msgstr "نسخه python"
 
 msgid "Active threads"
 msgstr "مباحث فعال"
@@ -884,6 +914,9 @@ msgstr ""
 #, fuzzy
 msgid "any language"
 msgstr "زبان نمایش ویکی"
+
+msgid "any mimetype"
+msgstr ""
 
 msgid "Language"
 msgstr ""
@@ -995,15 +1028,35 @@ msgid "**Could not find the referenced page: %s**"
 msgstr "**صفحه ارجاع داده شده: %s یافت نشد**"
 
 #, python-format
-msgid "Create new drawing \"%(filename)s\""
+msgid "Inlined image: %(url)s"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
 msgstr "ترسیم جدید \"%(filename)s\" را بساز"
 
-#, python-format
-msgid "Edit drawing %(filename)s"
+#, fuzzy, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "ویرایش ترسیم %(filename)s"
+
+#, fuzzy, python-format
+msgid "Clickable drawing: %(filename)s"
 msgstr "ویرایش ترسیم %(filename)s"
 
 msgid "Toggle line numbers"
 msgstr "شماره خطوط حذف شود"
+
+msgid "[all]"
+msgstr ""
+
+msgid "[not empty]"
+msgstr ""
+
+msgid "[empty]"
+msgstr ""
+
+msgid "filter"
+msgstr ""
 
 msgid "Line"
 msgstr "خط"
@@ -1122,7 +1175,8 @@ msgstr "جستجو در"
 msgid "More Actions:"
 msgstr "امکانات بیشتر:"
 
-msgid "------------"
+#, fuzzy
+msgid "------------------------"
 msgstr "------------"
 
 msgid "Raw Text"
@@ -1136,6 +1190,10 @@ msgstr "حذف حافظه جانبی"
 
 msgid "Rename Page"
 msgstr "تغیر نام صفحه"
+
+#, fuzzy
+msgid "Copy Page"
+msgstr "صفحات من"
 
 msgid "Delete Page"
 msgstr "حذف صفحه"
@@ -1164,6 +1222,10 @@ msgstr "تهیه بسته صفحات"
 
 msgid "Render as Docbook"
 msgstr "نمایش با ساختار XML"
+
+#, fuzzy
+msgid "Sync Pages"
+msgstr "صفحات من"
 
 msgid "Do"
 msgstr "انجام بده"
@@ -1503,14 +1565,16 @@ msgstr "برای اضافه نمودن یک لینک دسترسی سریع با�
 msgid "Your quicklink to this page has been removed."
 msgstr "لینک دسترسی سریع شما به این صفحه حذف شد."
 
+#, fuzzy
+msgid "Your quicklink to this page could not be removed."
+msgstr "لینک دسترسی سریع شما به این صفحه حذف شد."
+
 msgid "A quicklink to this page has been added for you."
 msgstr "یک لینک دسترسی سریع به این صفحه برای شما اضافه شد."
 
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr ""
-"نام کاربری {{{\"%s\"}}} یافت نشد. لطفا نام کاربری و کلمه عبور را وارد "
-"نمایید. "
+#, fuzzy
+msgid "A quicklink to this page could not be added for you."
+msgstr "یک لینک دسترسی سریع به این صفحه برای شما اضافه شد."
 
 msgid "Missing password. Please enter user name and password."
 msgstr ""
@@ -1529,6 +1593,10 @@ msgid ""
 "There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this "
 "page."
 msgstr "این صفحه  دارای <a·href=\"%(link)s\">%(count)s·ضمیمه</a> می باشد."
+
+#, fuzzy, python-format
+msgid "Attachment '%(target)s' already exists."
+msgstr "ضمیمه '%(filename)s' نصب شد."
 
 msgid "Filename of attachment not specified!"
 msgstr "نام فایل ضمیمه مشخص نشده است!"
@@ -1592,6 +1660,9 @@ msgstr "فایل ارسالی"
 
 msgid "Rename to"
 msgstr "تغییر نام به"
+
+msgid "Overwrite existing attachment of same name"
+msgstr ""
 
 msgid "Upload"
 msgstr "ارسال"
@@ -1727,8 +1798,8 @@ msgid ""
 "files only, exist already or reside in folders."
 msgstr "ضمیمه '%(filename)s' باز نشد."
 
-#, python-format
-msgid "The file %(target)s is not a .zip file."
+#, fuzzy, python-format
+msgid "The file %(filename)s is not a .zip file."
 msgstr "فایل %(target)s یک فایل zip نیست."
 
 #, python-format
@@ -1757,11 +1828,18 @@ msgstr "فایل ضمیمه: فایل %(filename)s از صفحه %(pagename)s"
 msgid "This page is already deleted or was never created!"
 msgstr "این صفحه یا اخیرا حذف شده و یا هرگز وجود نداشته است!"
 
+msgid "Rename all /subpages too?"
+msgstr ""
+
 msgid "New name"
 msgstr "نام جدید"
 
 msgid "Optional reason for the renaming"
 msgstr "توضیحات اختیاری برای تغببر نام صفحه"
+
+#, fuzzy
+msgid "Really rename this page?"
+msgstr "اطمینان دارید که این صفحه می بایست حذف شود؟"
 
 #, python-format
 msgid "Full Link List for \"%s\""
@@ -1832,6 +1910,10 @@ msgstr ""
 
 #, python-format
 msgid "After filtering: %s pages"
+msgstr ""
+
+#, python-format
+msgid "Skipped page %s because of no write access to local page."
 msgstr ""
 
 #, python-format
@@ -1910,6 +1992,30 @@ msgstr ""
 msgid "Page %s merged with conflicts."
 msgstr ""
 
+#, fuzzy
+msgid "Load"
+msgstr "ارسال"
+
+#, fuzzy
+msgid "New Page or New Attachment"
+msgstr "ضمیمه جدید"
+
+msgid ""
+"You can upload a file to a new page or choose to upload a file as attachment "
+"for the current page"
+msgstr ""
+
+#, fuzzy
+msgid "attachment"
+msgstr "ضمیمه ها"
+
+msgid "overwrite"
+msgstr ""
+
+#, fuzzy
+msgid "New Name"
+msgstr "نام جدید"
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "( مرجع لغت %(pagelink)s دارای %(localwords)d لغت )"
@@ -1927,6 +2033,11 @@ msgstr "لغات تیک دار را به مرجع لغات اضافه نما"
 
 msgid "No spelling errors found!"
 msgstr "اشتباه املایی یافت نشد!"
+
+#, fuzzy
+msgid "You can't save spelling words."
+msgstr ""
+"شما نمی توانید صفحه ای که مجاز به خواندن آن نیستید را تصحیح املایی نمایید."
 
 msgid "You can't check spelling on a page you can't read."
 msgstr ""
@@ -1961,6 +2072,10 @@ msgid "Edit the subscription regular expressions in your UserPreferences."
 msgstr "اصطلاحات عمومی عضویت را در مرجع اطلاعات کاربری ویرایش نمایید."
 
 msgid "You have been subscribed to this page."
+msgstr "شما در این صفحه عضو شدید."
+
+#, fuzzy
+msgid "You could not get subscribed to this page."
 msgstr "شما در این صفحه عضو شدید."
 
 msgid "General Information"
@@ -2189,6 +2304,12 @@ msgstr "عملیات ناشناخته %s در پشتیبان گیری."
 msgid "You are not allowed to revert this page!"
 msgstr "شما مجاز نیستید این صفحه را ارجاع دهید!"
 
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
+msgstr ""
+
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "نقشه سایت محلی برای \"%s\""
@@ -2251,6 +2372,17 @@ msgstr "صفحات شبیه \"%s\""
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d·%(matches)s·برای·\"%(title)s\""
 
+msgid "Copy all /subpages too?"
+msgstr ""
+
+#, fuzzy
+msgid "Optional reason for the copying"
+msgstr "توضیحات اختیاری برای تغببر نام صفحه"
+
+#, fuzzy
+msgid "Really copy this page?"
+msgstr "اطمینان دارید که این صفحه می بایست حذف شود؟"
+
 msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr ""
@@ -2259,11 +2391,40 @@ msgstr ""
 msgid "Delete"
 msgstr "حذف"
 
+msgid "Delete all /subpages too?"
+msgstr ""
+
 msgid "Optional reason for the deletion"
 msgstr "توضیحات دلخواه برای این حذف"
 
 msgid "Really delete this page?"
 msgstr "اطمینان دارید که این صفحه می بایست حذف شود؟"
+
+#, fuzzy
+#~ msgid "Xapian stemming"
+#~ msgstr "Xapian search"
+
+#, fuzzy
+#~ msgid "filename"
+#~ msgstr "نام فایل"
+
+#~ msgid ""
+#~ "~-If you submit this form, the submitted values will be displayed.\n"
+#~ "To use this form on other pages, insert a\n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "macro call.-~\n"
+#~ msgstr ""
+#~ "~-در صورتی که این فرم را ثبت نمايید٬ مقادیر ثبت شده قابل رویت خواهند "
+#~ "بود.\n"
+#~ "برای استفاده از این فرم در صفحات دیگر از نمونه کد زیر استفاده نمايید.·a\n"
+#~ "[[BR]][[BR]]'''{{{····[[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "-~\n"
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr ""
+#~ "نام کاربری {{{\"%s\"}}} یافت نشد. لطفا نام کاربری و کلمه عبور را وارد "
+#~ "نمایید. "
 
 #~ msgid "raw"
 #~ msgstr "نسخه خام"
@@ -2336,9 +2497,6 @@ msgstr "اطمینان دارید که این صفحه می بایست حذف ش
 
 #~ msgid "(Only when changing passwords)"
 #~ msgstr "(فقط برای تغییر کلمه عبور)"
-
-#~ msgid "Filename"
-#~ msgstr "نام فایل"
 
 #~ msgid "You are not allowed to rename pages in this wiki!"
 #~ msgstr "شما مجاز به تغییر نام صفحات این ویکی نمی باشید!"

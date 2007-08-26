@@ -91,52 +91,52 @@
         * adapted to moin 1.7 new macro parameter parsing
 
     Usage:
-        [[MonthCalendar(BasePage,year,month,monthoffset,monthoffset2,height6)]]
+        <<MonthCalendar(BasePage,year,month,monthoffset,monthoffset2,height6)>>
 
         each parameter can be empty and then defaults to currentpage or currentdate or monthoffset=0
 
     Samples (paste that to one of your pages for a first try):
 
 Calendar of current month for current page:
-[[MonthCalendar]]
+<<MonthCalendar>>
 
 Calendar of last month:
-[[MonthCalendar(,,,-1)]]
+<<MonthCalendar(,,,-1)>>
 
 Calendar of next month:
-[[MonthCalendar(,,,+1)]]
+<<MonthCalendar(,,,+1)>>
 
 Calendar of Page SampleUser, this years december:
-[[MonthCalendar(SampleUser,,12)]]
+<<MonthCalendar(SampleUser,,12)>>
 
 Calendar of current Page, this years december:
-[[MonthCalendar(,,12)]]
+<<MonthCalendar(,,12)>>
 
 Calendar of December, 2001:
-[[MonthCalendar(,2001,12)]]
+<<MonthCalendar(,2001,12)>>
 
 Calendar of the month two months after December, 2001
 (maybe doesn't make much sense, but is possible)
-[[MonthCalendar(,2001,12,+2)]]
+<<MonthCalendar(,2001,12,+2)>>
 
 Calendar of year 2002 (every month padded to height of 6):
 ||||||Year 2002||
-||[[MonthCalendar(,2002,1,,,1)]]||[[MonthCalendar(,2002,2,,,1)]]||[[MonthCalendar(,2002,3,,,1)]]||
-||[[MonthCalendar(,2002,4,,,1)]]||[[MonthCalendar(,2002,5,,,1)]]||[[MonthCalendar(,2002,6,,,1)]]||
-||[[MonthCalendar(,2002,7,,,1)]]||[[MonthCalendar(,2002,8,,,1)]]||[[MonthCalendar(,2002,9,,,1)]]||
-||[[MonthCalendar(,2002,10,,,1)]]||[[MonthCalendar(,2002,11,,,1)]]||[[MonthCalendar(,2002,12,,,1)]]||
+||<<MonthCalendar(,2002,1,,,1)>>||<<MonthCalendar(,2002,2,,,1)>>||<<MonthCalendar(,2002,3,,,1)>>||
+||<<MonthCalendar(,2002,4,,,1)>>||<<MonthCalendar(,2002,5,,,1)>>||<<MonthCalendar(,2002,6,,,1)>>||
+||<<MonthCalendar(,2002,7,,,1)>>||<<MonthCalendar(,2002,8,,,1)>>||<<MonthCalendar(,2002,9,,,1)>>||
+||<<MonthCalendar(,2002,10,,,1)>>||<<MonthCalendar(,2002,11,,,1)>>||<<MonthCalendar(,2002,12,,,1)>>||
 
 Current calendar of me, also showing entries of A and B:
-[[MonthCalendar(MyPage*TestUserA*TestUserB)]]
+<<MonthCalendar(MyPage*TestUserA*TestUserB)>>
 
 SubPage calendars:
-[[MonthCalendar(MyName/CalPrivate)]]
-[[MonthCalendar(MyName/CalBusiness)]]
-[[MonthCalendar(MyName/CalBusiness*MyName/CalPrivate)]]
+<<MonthCalendar(MyName/CalPrivate)>>
+<<MonthCalendar(MyName/CalBusiness)>>
+<<MonthCalendar(MyName/CalBusiness*MyName/CalPrivate)>>
 
 
 Anniversary Calendars: (no year data)
-[[MonthCalendar(Yearly,,,+1,,6,1)]]
+<<MonthCalendar(Yearly,,,+1,,6,1)>>
 
 This creates calendars of the format Yearly/MM-DD
 By leaving out the year, you can set birthdays, and anniversaries in this
@@ -144,7 +144,7 @@ calendar and not have to re-enter each year.
 
 This creates a calendar which uses MonthCalendarTemplate for directly editing
 nonexisting day pages:
-[[MonthCalendar(,,,,,,MonthCalendarTemplate)]]
+<<MonthCalendar(,,,,,,MonthCalendarTemplate)>>
 """
 
 Dependencies = ['namespace', 'time', ]

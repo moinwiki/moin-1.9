@@ -14,6 +14,7 @@ POTFILES.in POTFILES:
 	@lang=`echo $@ | sed -e 's/\.MoinMoin\.po-update$$//'`; \
 	echo "$$lang:"; \
 	tools/wiki2po.py $${lang}; \
+	tools/markup15to16.py $${lang}; \
 	echo "msgmerge $$lang.$(DOMAIN).po $(DOMAIN).pot -o $$lang.$(DOMAIN).new.po"; \
 	if msgmerge $$lang.$(DOMAIN).po $(DOMAIN).pot -o $$lang.$(DOMAIN).new.po; then \
 	  if cmp $$lang.$(DOMAIN).po $$lang.$(DOMAIN).new.po >/dev/null 2>&1; then \

@@ -367,7 +367,7 @@ class Formatter(FormatterBase):
         if not on:
             return self.url(on, kw)
 
-        wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, '%s:"%s"' % (interwiki, pagename))
+        wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_interwiki(self.request, interwiki, pagename)
         wikiurl = wikiutil.mapURL(self.request, wikiurl)
         href = wikiutil.join_wiki(wikiurl, wikitail)
 
@@ -468,6 +468,14 @@ class Formatter(FormatterBase):
             txtcontainer.appendChild(txtphrase)
 
         self.cur.appendChild(media)
+        return ""
+
+    def transclusion(self, on, **kw):
+        # TODO, see text_html formatter
+        return ""
+
+    def transclusion_param(self, **kw):
+        # TODO, see text_html formatter
         return ""
 
     def smiley(self, text):

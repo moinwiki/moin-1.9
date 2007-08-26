@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-29 23:46+0100\n"
-"PO-Revision-Date: 2006-11-07 00:00+0800\n"
+"POT-Creation-Date: 2007-07-30 19:24+0200\n"
+"PO-Revision-Date: 2007-08-03 20:40+0800\n"
 "Last-Translator: Rux Li <rux.li3@gmail.com>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -153,11 +153,12 @@ msgstr "把帳號資料寄給我"
 msgid "Email"
 msgstr "Email"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "To create an account, see the %(userprefslink)s page. To recover a lost "
 "password, go to %(sendmypasswordlink)s."
-msgstr "要註冊新帳號或忘了密碼，請到 %(userprefslink)s。"
+msgstr ""
+"註冊新帳號請到 %(userprefslink)s，忘了密碼請到 %(sendmypasswordlink)s。"
 
 msgid "Name"
 msgstr "名稱"
@@ -367,6 +368,27 @@ msgstr "GUI 模式"
 msgid "Edit was cancelled."
 msgstr "編輯已取消。"
 
+msgid "You can't copy to an empty pagename."
+msgstr "不能複製到空的頁面名稱！"
+
+msgid "You are not allowed to copy this page!"
+msgstr "你無權複製本頁！"
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"Try a different name."
+msgstr ""
+"'''已經有一個頁面叫做 \"{{{'%s'}}}\" 了！'''\n"
+"請用別的名字。"
+
+#, python-format
+msgid "Could not copy page because of file system error: %s."
+msgstr "無法複製頁面。原因為檔案系統錯誤：%s。"
+
+msgid "You are not allowed to rename this page!"
+msgstr "你無權更改本頁名稱！"
+
 msgid "You can't rename to an empty pagename."
 msgstr "新的名稱不能是空的！"
 
@@ -566,18 +588,6 @@ msgstr "從頁面 \"%(page)s\" 轉向過來"
 msgid "This page redirects to page \"%(page)s\""
 msgstr "本頁轉向到 \"%(page)s\""
 
-#, python-format
-msgid ""
-"~-If you submit this form, the submitted values will be displayed.\n"
-"To use this form on other pages, insert a\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-"macro call.-~\n"
-msgstr ""
-"~-如果你提交本表單，提交的值將會顯示出來。\n"
-"如果要在其他頁面使用本表單，請插入\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-"巨集呼叫。-~\n"
-
 msgid "Create New Page"
 msgstr "建立新頁面"
 
@@ -669,6 +679,13 @@ msgstr "區分大小寫"
 
 msgid "Search Text"
 msgstr "全文檢索"
+
+#, python-format
+msgid "Not supported mimetype of file: %s"
+msgstr "不支援此種 MIME 型態：%s"
+
+msgid "Embedded"
+msgstr "嵌入"
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -763,8 +780,17 @@ msgstr "Xapian 搜尋"
 msgid "Xapian Version"
 msgstr "Xapian 版本"
 
-msgid "Xapian stemming"
-msgstr "Xapian 詞幹"
+msgid "PyStemmer not installed"
+msgstr "PyStemmer 未安裝"
+
+msgid "Stemming for Xapian"
+msgstr "為 Xapian 解析詞幹中"
+
+msgid "PyStemmer Version"
+msgstr "PyStemmer 版本"
+
+msgid "PyStemmer stems"
+msgstr "PyStemmer 詞幹"
 
 msgid "Active threads"
 msgstr "緒程數目"
@@ -789,9 +815,9 @@ msgstr "圖片 '%(filename)s' 已儲存。"
 msgid "Revert to revision %(rev)d."
 msgstr "回復成第 %(rev)d 版。"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Renamed from '%(oldpagename)s'."
-msgstr "\"%(pagename)s\" 的附件"
+msgstr "從 \"%(oldpagename)s\" 改名過來。"
 
 #, python-format
 msgid "%(mins)dm ago"
@@ -855,6 +881,9 @@ msgstr "最後一次修改在 (如：兩週前)"
 msgid "any language"
 msgstr "任何語言"
 
+msgid "any mimetype"
+msgstr "任何 MIME 型態"
+
 msgid "Language"
 msgstr "語言"
 
@@ -881,7 +910,7 @@ msgstr "下載去"
 
 #, python-format
 msgid "Check your argument %s"
-msgstr ""
+msgstr "檢查你的參數 %s"
 
 msgid "Markup"
 msgstr "標記"
@@ -955,15 +984,35 @@ msgid "**Could not find the referenced page: %s**"
 msgstr "**找不到引用的頁面：%s**"
 
 #, python-format
-msgid "Create new drawing \"%(filename)s\""
-msgstr "建立新圖 \"%(filename)s\""
+msgid "Inlined image: %(url)s"
+msgstr "Inlined 圖像：%(url)s"
 
 #, python-format
-msgid "Edit drawing %(filename)s"
-msgstr "編輯圖片 \"%(filename)s\""
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "建立新圖 \"%(filename)s (在新視窗開啟)\""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "編輯圖片 \"%(filename)s (在新視窗開啟)\""
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "可點擊的圖片 \"%(filename)s\""
 
 msgid "Toggle line numbers"
 msgstr "切換行號"
+
+msgid "[all]"
+msgstr "[全]"
+
+msgid "[not empty]"
+msgstr "[非空]"
+
+msgid "[empty]"
+msgstr "[空]"
+
+msgid "filter"
+msgstr "過濾"
 
 msgid "Line"
 msgstr "行號"
@@ -1028,10 +1077,10 @@ msgid "[UPDATED]"
 msgstr "[更新]"
 
 msgid "[RENAMED]"
-msgstr ""
+msgstr "[改名]"
 
 msgid "[CONFLICT]"
-msgstr ""
+msgstr "[衝突]"
 
 msgid "[NEW]"
 msgstr "[新增]"
@@ -1080,8 +1129,8 @@ msgstr "搜尋"
 msgid "More Actions:"
 msgstr "更多功能"
 
-msgid "------------"
-msgstr "------------"
+msgid "------------------------"
+msgstr "------------------------"
 
 msgid "Raw Text"
 msgstr "檢視原始形"
@@ -1094,6 +1143,9 @@ msgstr "刪除快取"
 
 msgid "Rename Page"
 msgstr "重新命名"
+
+msgid "Copy Page"
+msgstr "複製頁面"
 
 msgid "Delete Page"
 msgstr "刪除本頁"
@@ -1113,9 +1165,8 @@ msgstr "新增訂戶"
 msgid "Remove Spam"
 msgstr "移除垃圾"
 
-#, fuzzy
 msgid "Revert to this revision"
-msgstr "回復成第 %(rev)d 版。"
+msgstr "回復成此版。"
 
 msgid "Package Pages"
 msgstr "打包頁面"
@@ -1123,10 +1174,12 @@ msgstr "打包頁面"
 msgid "Render as Docbook"
 msgstr "DocBook 形"
 
+msgid "Sync Pages"
+msgstr "同步頁面"
+
 msgid "Do"
 msgstr "執行"
 
-#, fuzzy
 msgid "Comments"
 msgstr "說明"
 
@@ -1380,9 +1433,8 @@ msgstr "點兩下就進入編輯模式"
 msgid "After login, jump to last visited page"
 msgstr "登入之後，跳到上次瀏覽的頁面"
 
-#, fuzzy
 msgid "Show comment sections"
-msgstr "顯示表情符號"
+msgstr "顯示說明欄"
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "在不存在的頁面連結前打上問號"
@@ -1457,12 +1509,14 @@ msgstr "登入之後才能設定頁面捷徑。"
 msgid "Your quicklink to this page has been removed."
 msgstr "已取消本頁之捷徑。"
 
+msgid "Your quicklink to this page could not be removed."
+msgstr "無法取消本頁之捷徑。"
+
 msgid "A quicklink to this page has been added for you."
 msgstr "已設定本頁之捷徑。"
 
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr "無此帳號：{{{\"%s\"}}}！請輸入正確的名稱及密碼。"
+msgid "A quicklink to this page could not be added for you."
+msgstr "無法設定本頁之捷徑。"
 
 msgid "Missing password. Please enter user name and password."
 msgstr "沒輸入密碼！請輸入名稱及密碼。"
@@ -1479,6 +1533,10 @@ msgid ""
 "There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this "
 "page."
 msgstr "本頁包含 <a href=\"%(link)s\">%(count)s 個附件</a>."
+
+#, python-format
+msgid "Attachment '%(target)s' already exists."
+msgstr "附件 '%(target)s' 已存在。"
 
 msgid "Filename of attachment not specified!"
 msgstr "附件沒指定檔名！"
@@ -1541,6 +1599,9 @@ msgstr "要上傳的檔案"
 
 msgid "Rename to"
 msgstr "重新命名為"
+
+msgid "Overwrite existing attachment of same name"
+msgstr "以相同的名字覆蓋既有附件"
 
 msgid "Upload"
 msgstr "上傳"
@@ -1668,8 +1729,8 @@ msgstr ""
 "在、或在子目錄內。"
 
 #, python-format
-msgid "The file %(target)s is not a .zip file."
-msgstr "檔案 %(target)s 不是 .zip 檔。"
+msgid "The file %(filename)s is not a .zip file."
+msgstr "檔案 %(filename)s 不是 .zip 檔。"
 
 #, python-format
 msgid "Attachment '%(filename)s'"
@@ -1697,11 +1758,17 @@ msgstr "%(pagename)s 的附件 [[Verbatim(attachment:)]]%(filename)s"
 msgid "This page is already deleted or was never created!"
 msgstr "本頁已經刪除或還沒建立！"
 
+msgid "Rename all /subpages too?"
+msgstr "也一併重新命名所有 /子頁面？"
+
 msgid "New name"
 msgstr "新的名稱"
 
 msgid "Optional reason for the renaming"
 msgstr "重新命名的理由："
+
+msgid "Really rename this page?"
+msgstr "確定要重新命名本頁嗎？"
 
 #, python-format
 msgid "Full Link List for \"%s\""
@@ -1778,6 +1845,10 @@ msgstr "收到 %s 個本地及 %s 個遠端頁面。總共有 %s 個不同的頁
 #, python-format
 msgid "After filtering: %s pages"
 msgstr "過濾之後，還有 %s 頁"
+
+#, python-format
+msgid "Skipped page %s because of no write access to local page."
+msgstr "跳過頁面 %s，因為無法在本地寫入。"
 
 #, python-format
 msgid "Deleted page %s locally."
@@ -1863,6 +1934,26 @@ msgstr "頁面 %s 包含來自遠端的編輯衝突。"
 msgid "Page %s merged with conflicts."
 msgstr "頁面 %s 已合併，但仍有編輯衝突。"
 
+msgid "Load"
+msgstr "載入"
+
+msgid "New Page or New Attachment"
+msgstr "新增頁面或附件"
+
+msgid ""
+"You can upload a file to a new page or choose to upload a file as attachment "
+"for the current page"
+msgstr "你不能在此頁面上載檔案成為新頁面或附件。"
+
+msgid "attachment"
+msgstr "附件"
+
+msgid "overwrite"
+msgstr "覆寫"
+
+msgid "New Name"
+msgstr "新的名稱"
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(其中包含 %(localwords)d 個 %(pagelink)s)"
@@ -1880,6 +1971,9 @@ msgstr "把勾選的詞加進詞典"
 
 msgid "No spelling errors found!"
 msgstr "沒有拼字錯誤！"
+
+msgid "You can't save spelling words."
+msgstr "你無權保留拼字。"
 
 msgid "You can't check spelling on a page you can't read."
 msgstr "不能檢查無權瀏覽的頁面。"
@@ -1910,6 +2004,9 @@ msgstr "請在 UserPreferences 設定正規表示式訂閱。"
 
 msgid "You have been subscribed to this page."
 msgstr "訂閱好了。"
+
+msgid "You could not get subscribed to this page."
+msgstr "你無法訂閱本頁。"
 
 msgid "General Information"
 msgstr "一般資訊"
@@ -2130,6 +2227,14 @@ msgstr "不明的備份子操作：%s。"
 msgid "You are not allowed to revert this page!"
 msgstr "你無權回復本頁！"
 
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
+msgstr ""
+"你目前正在瀏覽準備回復到的版本。如果你想回復到更舊的版本，請先瀏覽該版本再執"
+"行回復動作。"
+
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "頁面 \"%s\" 的連結地圖"
@@ -2192,6 +2297,15 @@ msgstr "類似 \"%s\" 的頁面："
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "共有 %(matchcount)d %(matches)s 連向 \"%(title)s\""
 
+msgid "Copy all /subpages too?"
+msgstr "也一併複製所有 /子頁面？"
+
+msgid "Optional reason for the copying"
+msgstr "複製頁面的理由："
+
+msgid "Really copy this page?"
+msgstr "確定要複製本頁嗎？"
+
 msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "必須有頁面名稱才能建立頁面。"
@@ -2199,11 +2313,35 @@ msgstr "必須有頁面名稱才能建立頁面。"
 msgid "Delete"
 msgstr "刪除"
 
+msgid "Delete all /subpages too?"
+msgstr "也一併刪除所有 /子頁面？"
+
 msgid "Optional reason for the deletion"
 msgstr "刪除本頁的理由："
 
 msgid "Really delete this page?"
 msgstr "真的要刪除本頁？"
+
+#~ msgid "Xapian stemming"
+#~ msgstr "Xapian 詞幹"
+
+#~ msgid "filename"
+#~ msgstr "檔名"
+
+#~ msgid ""
+#~ "~-If you submit this form, the submitted values will be displayed.\n"
+#~ "To use this form on other pages, insert a\n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "macro call.-~\n"
+#~ msgstr ""
+#~ "~-如果你提交本表單，提交的值將會顯示出來。\n"
+#~ "如果要在其他頁面使用本表單，請插入\n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "巨集呼叫。-~\n"
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr "無此帳號：{{{\"%s\"}}}！請輸入正確的名稱及密碼。"
 
 #~ msgid "raw"
 #~ msgstr "原始形"
@@ -2274,9 +2412,6 @@ msgstr "真的要刪除本頁？"
 
 #~ msgid "(Only when changing passwords)"
 #~ msgstr "(變更密碼才要重覆輸入)"
-
-#~ msgid "Filename"
-#~ msgstr "檔名"
 
 #~ msgid "You are not allowed to rename pages in this wiki!"
 #~ msgstr "你無權重新命名頁面！"
@@ -2449,9 +2584,6 @@ msgstr "真的要刪除本頁？"
 
 #~ msgid "Show all changes in the last %s days."
 #~ msgstr "顯示 %s 天以內的所有更動。"
-
-#~ msgid "Site"
-#~ msgstr "本站"
 
 #~ msgid "Title: %(titlesearch)s[[BR]]Text: %(textsearch)s"
 #~ msgstr "標題: %(titlesearch)s[[BR]]內文: %(textsearch)s"

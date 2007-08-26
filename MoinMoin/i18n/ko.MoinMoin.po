@@ -11,9 +11,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.5\n"
+"Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-29 23:46+0100\n"
+"POT-Creation-Date: 2007-07-30 19:24+0200\n"
 "PO-Revision-Date: 2007-01-14 17:53+0900\n"
 "Last-Translator: Seungik Lee <seungiklee@gmail.com>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
@@ -156,13 +156,13 @@ msgstr "계정 정보를 메일로 발송"
 msgid "Email"
 msgstr "Email"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "To create an account, see the %(userprefslink)s page. To recover a lost "
 "password, go to %(sendmypasswordlink)s."
 msgstr ""
-"계정을 새로 만들거나 잊어버린 암호를 전송받으려면 %(userprefslink)s 문서를 보"
-"세요."
+"계정을 새로 만들려면 %(userprefslink)s 문서를, 암호를 잊어버렸으면%"
+"(sendmypasswordlink)s 문서를 보세요."
 
 msgid "Name"
 msgstr "이름"
@@ -369,6 +369,31 @@ msgstr "GUI 모드"
 
 msgid "Edit was cancelled."
 msgstr "문서 수정을 취소했습니다."
+
+#, fuzzy
+msgid "You can't copy to an empty pagename."
+msgstr "문서 이름을 지정하셔야 합니다."
+
+#, fuzzy
+msgid "You are not allowed to copy this page!"
+msgstr "이 문서를 고칠 수 있는 권한이 없습니다!"
+
+#, fuzzy, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"Try a different name."
+msgstr ""
+"'''문서 {{{\"%s\"}}}가(이) 이미 있습니다.'''\n"
+"\n"
+"다른 이름으로 다시 만들어 보세요."
+
+#, fuzzy, python-format
+msgid "Could not copy page because of file system error: %s."
+msgstr "다음 파일 시스템 에러로 인해 문서 이름을 바꿀 수 없었습니다: %s."
+
+#, fuzzy
+msgid "You are not allowed to rename this page!"
+msgstr "이 문서를 되돌릴 수 있는 권한이 없습니다!"
 
 msgid "You can't rename to an empty pagename."
 msgstr "문서 이름을 지정하셔야 합니다."
@@ -580,18 +605,6 @@ msgstr "\"%(page)s\"(으)로부터 옮겨 옴"
 msgid "This page redirects to page \"%(page)s\""
 msgstr "\"%(page)s\"(으)로 이동합니다."
 
-#, python-format
-msgid ""
-"~-If you submit this form, the submitted values will be displayed.\n"
-"To use this form on other pages, insert a\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-"macro call.-~\n"
-msgstr ""
-"~-이 양식을 전송하면, 결과값들이 화면에 표시됩니다.\n"
-"이 양식을 다른 문서에서 사용하려면 다음 매크로 호출을 추가하세요.\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-"-~\n"
-
 msgid "Create New Page"
 msgstr "새 문서 작성"
 
@@ -681,6 +694,13 @@ msgstr "대소문자 구별"
 
 msgid "Search Text"
 msgstr "내용에서 찾기"
+
+#, python-format
+msgid "Not supported mimetype of file: %s"
+msgstr ""
+
+msgid "Embedded"
+msgstr ""
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -775,8 +795,19 @@ msgstr "Xapian 검색"
 msgid "Xapian Version"
 msgstr "Xapian 버젼"
 
-msgid "Xapian stemming"
-msgstr "Xapian stemming"
+msgid "PyStemmer not installed"
+msgstr ""
+
+msgid "Stemming for Xapian"
+msgstr ""
+
+#, fuzzy
+msgid "PyStemmer Version"
+msgstr "파이썬 버전"
+
+#, fuzzy
+msgid "PyStemmer stems"
+msgstr "파이썬 버전"
 
 msgid "Active threads"
 msgstr "사용 중인 쓰레드 개수"
@@ -801,9 +832,9 @@ msgstr "그림 '%(filename)s'가(이) 저장되었습니다."
 msgid "Revert to revision %(rev)d."
 msgstr "%(rev)d번째 판으로 돌아감."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Renamed from '%(oldpagename)s'."
-msgstr "\"%(pagename)s\"의 첨부파일들"
+msgstr "'%(oldpagename)s'의 이름이 변경되었습니다."
 
 #, python-format
 msgid "%(mins)dm ago"
@@ -866,6 +897,9 @@ msgstr ""
 
 msgid "any language"
 msgstr "아무 언어"
+
+msgid "any mimetype"
+msgstr ""
 
 msgid "Language"
 msgstr "언어"
@@ -970,15 +1004,35 @@ msgid "**Could not find the referenced page: %s**"
 msgstr "**다음 참조문서를 찾을 수 없었습니다: %s**"
 
 #, python-format
-msgid "Create new drawing \"%(filename)s\""
+msgid "Inlined image: %(url)s"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
 msgstr "새 그림 \"%(filename)s\" 그리기"
 
-#, python-format
-msgid "Edit drawing %(filename)s"
+#, fuzzy, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "그림 \"%(filename)s\" 수정하기"
+
+#, fuzzy, python-format
+msgid "Clickable drawing: %(filename)s"
 msgstr "그림 \"%(filename)s\" 수정하기"
 
 msgid "Toggle line numbers"
 msgstr "줄 번호 보이기/숨기기"
+
+msgid "[all]"
+msgstr ""
+
+msgid "[not empty]"
+msgstr ""
+
+msgid "[empty]"
+msgstr ""
+
+msgid "filter"
+msgstr ""
 
 msgid "Line"
 msgstr "줄"
@@ -1097,7 +1151,8 @@ msgstr "찾기"
 msgid "More Actions:"
 msgstr "다른 작업:"
 
-msgid "------------"
+#, fuzzy
+msgid "------------------------"
 msgstr "------------"
 
 msgid "Raw Text"
@@ -1111,6 +1166,10 @@ msgstr "캐시 삭제"
 
 msgid "Rename Page"
 msgstr "문서 이름 바꾸기"
+
+#, fuzzy
+msgid "Copy Page"
+msgstr "내문서"
 
 msgid "Delete Page"
 msgstr "문서 삭제"
@@ -1130,9 +1189,8 @@ msgstr "구독 중인 사용자"
 msgid "Remove Spam"
 msgstr "스팸 제거"
 
-#, fuzzy
 msgid "Revert to this revision"
-msgstr "%(rev)d번째 판으로 돌아감."
+msgstr "이 버젼으로 되돌리기."
 
 msgid "Package Pages"
 msgstr "문서 묶기"
@@ -1140,10 +1198,13 @@ msgstr "문서 묶기"
 msgid "Render as Docbook"
 msgstr "Dockbook 보기"
 
+#, fuzzy
+msgid "Sync Pages"
+msgstr "내문서"
+
 msgid "Do"
 msgstr "확인"
 
-#, fuzzy
 msgid "Comments"
 msgstr "설명"
 
@@ -1478,14 +1539,16 @@ msgstr "즐겨찾기를 추가하시려면 로그인을 하셔야 합니다."
 msgid "Your quicklink to this page has been removed."
 msgstr "이 문서를 즐겨찾기에서 삭제했습니다."
 
+#, fuzzy
+msgid "Your quicklink to this page could not be removed."
+msgstr "이 문서를 즐겨찾기에서 삭제했습니다."
+
 msgid "A quicklink to this page has been added for you."
 msgstr "이 문서를 즐겨찾기에 추가했습니다."
 
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr ""
-"{{{\"%s\"}}}는 등록되지 않은 사용자 이름입니다. 사용자 이름과 비밀번호를 다"
-"시 입력하세요."
+#, fuzzy
+msgid "A quicklink to this page could not be added for you."
+msgstr "이 문서를 즐겨찾기에 추가했습니다."
 
 msgid "Missing password. Please enter user name and password."
 msgstr "비밀번호가 없습니다. 사용자 이름과 비밀번호를 다시 입력하세요."
@@ -1502,6 +1565,10 @@ msgid ""
 "There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this "
 "page."
 msgstr "이 문서에 <a href=\"%(link)s\">%(count)s개의 첨부 파일</a>이 있습니다."
+
+#, fuzzy, python-format
+msgid "Attachment '%(target)s' already exists."
+msgstr "첨부 파일 '%(filename)s'이(가) 이미 존재함."
 
 msgid "Filename of attachment not specified!"
 msgstr "첨부 파일 이름이 지정되지 않았습니다!"
@@ -1563,6 +1630,9 @@ msgstr "업로드할 파일"
 
 msgid "Rename to"
 msgstr "새 이름:"
+
+msgid "Overwrite existing attachment of same name"
+msgstr ""
 
 msgid "Upload"
 msgstr "업로드"
@@ -1698,8 +1768,8 @@ msgstr ""
 "첨부 파일 '%(filename)s'의 압축을 해제할 수 없었습니다. 파일이 너무 크거나 ."
 "zip 파일들만 있거나 이미 존재하는 폴더인 것 같습니다."
 
-#, python-format
-msgid "The file %(target)s is not a .zip file."
+#, fuzzy, python-format
+msgid "The file %(filename)s is not a .zip file."
 msgstr "파일 %(target)s 는(은) .zip 파일이 아닙니다."
 
 #, python-format
@@ -1729,11 +1799,18 @@ msgstr "%(pagename)s의 [[Verbatim(attachment:)]]%(filename)s"
 msgid "This page is already deleted or was never created!"
 msgstr "이 문서는 이미 지워졌거나 아직 만들어지지 않았습니다!"
 
+msgid "Rename all /subpages too?"
+msgstr ""
+
 msgid "New name"
 msgstr "새 이름"
 
 msgid "Optional reason for the renaming"
 msgstr "이름을 바꾸는 이유"
+
+#, fuzzy
+msgid "Really rename this page?"
+msgstr "정말로 이 문서를 지우시겠습니까?"
 
 #, python-format
 msgid "Full Link List for \"%s\""
@@ -1807,6 +1884,10 @@ msgstr ""
 
 #, python-format
 msgid "After filtering: %s pages"
+msgstr ""
+
+#, python-format
+msgid "Skipped page %s because of no write access to local page."
 msgstr ""
 
 #, python-format
@@ -1885,6 +1966,30 @@ msgstr ""
 msgid "Page %s merged with conflicts."
 msgstr ""
 
+#, fuzzy
+msgid "Load"
+msgstr "업로드"
+
+#, fuzzy
+msgid "New Page or New Attachment"
+msgstr "새 첨부"
+
+msgid ""
+"You can upload a file to a new page or choose to upload a file as attachment "
+"for the current page"
+msgstr ""
+
+#, fuzzy
+msgid "attachment"
+msgstr "첨부"
+
+msgid "overwrite"
+msgstr ""
+
+#, fuzzy
+msgid "New Name"
+msgstr "새 이름"
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr " (%(pagelink)s를 %(localwords)d개 포함)"
@@ -1902,6 +2007,10 @@ msgstr "사전에 체크된 단어들을 추가"
 
 msgid "No spelling errors found!"
 msgstr "철자 오류가 발견되지 않았습니다!"
+
+#, fuzzy
+msgid "You can't save spelling words."
+msgstr "읽을 수 없는 문서의 철자를 검사할 수 없습니다."
 
 msgid "You can't check spelling on a page you can't read."
 msgstr "읽을 수 없는 문서의 철자를 검사할 수 없습니다."
@@ -1933,6 +2042,10 @@ msgid "Edit the subscription regular expressions in your UserPreferences."
 msgstr "UserPreferences에서 정규표현식으로 된 구독 목록을 수정하세요."
 
 msgid "You have been subscribed to this page."
+msgstr "이제 이 문서가 변경되면 메일로 알려드리겠습니다."
+
+#, fuzzy
+msgid "You could not get subscribed to this page."
 msgstr "이제 이 문서가 변경되면 메일로 알려드리겠습니다."
 
 msgid "General Information"
@@ -2137,6 +2250,12 @@ msgstr "알 수 없는 백업 하위 작업: %s"
 msgid "You are not allowed to revert this page!"
 msgstr "이 문서를 되돌릴 수 있는 권한이 없습니다!"
 
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
+msgstr ""
+
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "\"%s\"의 사이트 맵"
@@ -2202,6 +2321,17 @@ msgstr ""
 "문서 제목에 \"%(title)s\"를(을) 포함하는 것이 %(matchcount)d %(matches)s개 발"
 "견되었습니다."
 
+msgid "Copy all /subpages too?"
+msgstr ""
+
+#, fuzzy
+msgid "Optional reason for the copying"
+msgstr "이름을 바꾸는 이유"
+
+#, fuzzy
+msgid "Really copy this page?"
+msgstr "정말로 이 문서를 지우시겠습니까?"
+
 msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "문서 이름 없이 새 문서를 만들 수 없습니다. 문서 이름을 지정해주세요."
@@ -2209,11 +2339,38 @@ msgstr "문서 이름 없이 새 문서를 만들 수 없습니다. 문서 이�
 msgid "Delete"
 msgstr "삭제"
 
+msgid "Delete all /subpages too?"
+msgstr ""
+
 msgid "Optional reason for the deletion"
 msgstr "삭제하는 이유"
 
 msgid "Really delete this page?"
 msgstr "정말로 이 문서를 지우시겠습니까?"
+
+#~ msgid "Xapian stemming"
+#~ msgstr "Xapian stemming"
+
+#, fuzzy
+#~ msgid "filename"
+#~ msgstr "파일이름"
+
+#~ msgid ""
+#~ "~-If you submit this form, the submitted values will be displayed.\n"
+#~ "To use this form on other pages, insert a\n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "macro call.-~\n"
+#~ msgstr ""
+#~ "~-이 양식을 전송하면, 결과값들이 화면에 표시됩니다.\n"
+#~ "이 양식을 다른 문서에서 사용하려면 다음 매크로 호출을 추가하세요.\n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "-~\n"
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr ""
+#~ "{{{\"%s\"}}}는 등록되지 않은 사용자 이름입니다. 사용자 이름과 비밀번호를 "
+#~ "다시 입력하세요."
 
 #~ msgid "raw"
 #~ msgstr "원문"
@@ -2288,6 +2445,3 @@ msgstr "정말로 이 문서를 지우시겠습니까?"
 
 #~ msgid "(Only when changing passwords)"
 #~ msgstr "(암호 변경 시)"
-
-#~ msgid "Filename"
-#~ msgstr "파일이름"

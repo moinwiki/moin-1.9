@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-29 23:46+0100\n"
-"PO-Revision-Date: 2006-11-05 01:24+0900\n"
+"POT-Creation-Date: 2007-07-30 19:24+0200\n"
+"PO-Revision-Date: 2007-05-29 12:24+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -159,13 +159,13 @@ msgstr "アカウント情報をメールする"
 msgid "Email"
 msgstr "メールアドレス"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "To create an account, see the %(userprefslink)s page. To recover a lost "
 "password, go to %(sendmypasswordlink)s."
 msgstr ""
-"アカウントを作成したり、忘れてしまったパスワードを復活する際には %"
-"(userprefslink)s を参照してください。"
+"アカウントを作成する際には %(userprefslink)s を、忘れてしまったパスワードを復"
+"活する際には %(sendmypasswordlink)s を参照してください。"
 
 msgid "Name"
 msgstr "名前"
@@ -381,6 +381,27 @@ msgstr "GUIモード"
 msgid "Edit was cancelled."
 msgstr "編集はキャンセルされました。"
 
+msgid "You can't copy to an empty pagename."
+msgstr "コピー先のページ名が指定されていません。"
+
+msgid "You are not allowed to copy this page!"
+msgstr "このページをコピーする権限がありません。"
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"Try a different name."
+msgstr ""
+"'''{{{'%s'}}}という名前のページがすでに存在します。'''\n"
+"違う名前を指定してください。"
+
+#, python-format
+msgid "Could not copy page because of file system error: %s."
+msgstr "ファイルシステムエラー(%s)により、ページをコピーできませんでした。"
+
+msgid "You are not allowed to rename this page!"
+msgstr "このページの名前を変更する権限がありません。"
+
 msgid "You can't rename to an empty pagename."
 msgstr "変更後のページ名が指定されていません。"
 
@@ -595,18 +616,6 @@ msgstr "\"%(page)s\"からリダイレクトされました。"
 msgid "This page redirects to page \"%(page)s\""
 msgstr "このページは\"%(page)s\"にリダイレクトします。"
 
-#, python-format
-msgid ""
-"~-If you submit this form, the submitted values will be displayed.\n"
-"To use this form on other pages, insert a\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-"macro call.-~\n"
-msgstr ""
-"~-このフォームをサブミットすると、サブミットされた値が表示されます。\n"
-"このフォームを別のページで利用するには、マクロ:\n"
-"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-"を埋め込んでください。-~\n"
-
 msgid "Create New Page"
 msgstr "新しいページを作成"
 
@@ -702,6 +711,13 @@ msgid "Search Text"
 msgstr "テキスト検索"
 
 #, python-format
+msgid "Not supported mimetype of file: %s"
+msgstr "ファイル:%s のMIMEタイプはサポートされていません。"
+
+msgid "Embedded"
+msgstr "埋め込み"
+
+#, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "添付ファイル\"%(filename)s\"のアップロード"
 
@@ -794,8 +810,19 @@ msgstr "Xapianによる検索"
 msgid "Xapian Version"
 msgstr "Xapianバージョン"
 
-msgid "Xapian stemming"
-msgstr "Xapian stemming"
+msgid "PyStemmer not installed"
+msgstr ""
+
+msgid "Stemming for Xapian"
+msgstr ""
+
+#, fuzzy
+msgid "PyStemmer Version"
+msgstr "Pythonのバージョン"
+
+#, fuzzy
+msgid "PyStemmer stems"
+msgstr "Pythonのバージョン"
 
 msgid "Active threads"
 msgstr "アクティブなスレッド"
@@ -820,9 +847,9 @@ msgstr "drawing '%(filename)s'を保存しました。"
 msgid "Revert to revision %(rev)d."
 msgstr "%(rev)dのリビジョンに戻す"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Renamed from '%(oldpagename)s'."
-msgstr "\"%(pagename)s の添付ファイル\""
+msgstr "名前を'%(oldpagename)s'から変更。"
 
 #, python-format
 msgid "%(mins)dm ago"
@@ -886,6 +913,10 @@ msgstr "最終更新日 (例: last 2 weeks)"
 msgid "any language"
 msgstr "すべての言語"
 
+#, fuzzy
+msgid "any mimetype"
+msgstr "すべてのMIMEタイプ"
+
 msgid "Language"
 msgstr "言語"
 
@@ -912,7 +943,7 @@ msgstr "開始！"
 
 #, python-format
 msgid "Check your argument %s"
-msgstr ""
+msgstr "引数 %s を確認"
 
 msgid "Markup"
 msgstr "マークアップ"
@@ -990,15 +1021,35 @@ msgid "**Could not find the referenced page: %s**"
 msgstr "**参照されたページ(%s)が見つかりませんでした**"
 
 #, python-format
-msgid "Create new drawing \"%(filename)s\""
-msgstr "drawing\"%(filename)s\"の新規作成"
+msgid "Inlined image: %(url)s"
+msgstr "インライン画像: %(url)s"
 
 #, python-format
-msgid "Edit drawing %(filename)s"
-msgstr "drawing\"%(filename)s\"を編集"
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "drawing\"%(filename)s\"の新規作成 (別ウィンドウにて)"
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "drawing\"%(filename)s\"を編集 (別ウィンドウにて)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "クリック可能なdrawing: %(filename)s"
 
 msgid "Toggle line numbers"
 msgstr "行番号表示/非表示切替"
+
+msgid "[all]"
+msgstr "[すべて]"
+
+msgid "[not empty]"
+msgstr "[空以外]"
+
+msgid "[empty]"
+msgstr "[空]"
+
+msgid "filter"
+msgstr "フィルタ"
 
 msgid "Line"
 msgstr "行"
@@ -1059,28 +1110,28 @@ msgid "[RSS]"
 msgstr "[RSS]"
 
 msgid "[DELETED]"
-msgstr "[DELETED]"
+msgstr "[削除]"
 
 msgid "[UPDATED]"
-msgstr "[UPDATED]"
+msgstr "[更新]"
 
 msgid "[RENAMED]"
-msgstr ""
+msgstr "[名前変更]"
 
 msgid "[CONFLICT]"
-msgstr ""
+msgstr "[衝突]"
 
 msgid "[NEW]"
-msgstr "[NEW]"
+msgstr "[新規]"
 
 msgid "[DIFF]"
-msgstr "[DIFF]"
+msgstr "[差分]"
 
 msgid "[BOTTOM]"
-msgstr "画面下へ"
+msgstr "[画面下]"
 
 msgid "[TOP]"
-msgstr "画面上へ"
+msgstr "[画面上]"
 
 msgid "Click to do a full-text search for this title"
 msgstr "このタイトルでテキスト検索するには、ここをクリックしてください"
@@ -1117,8 +1168,8 @@ msgstr "検索"
 msgid "More Actions:"
 msgstr "その他のアクション:"
 
-msgid "------------"
-msgstr "------------"
+msgid "------------------------"
+msgstr "------------------------"
 
 msgid "Raw Text"
 msgstr "Wikiテキスト"
@@ -1127,13 +1178,16 @@ msgid "Print View"
 msgstr "印刷ビュー"
 
 msgid "Delete Cache"
-msgstr "キャッシュの削除"
+msgstr "キャッシュ削除"
 
 msgid "Rename Page"
-msgstr "ページ名の変更"
+msgstr "ページ名変更"
+
+msgid "Copy Page"
+msgstr "ページコピー"
 
 msgid "Delete Page"
-msgstr "ページの削除"
+msgstr "ページ削除"
 
 msgid "Like Pages"
 msgstr "似たページ"
@@ -1145,25 +1199,26 @@ msgid "My Pages"
 msgstr "マイページ"
 
 msgid "Subscribe User"
-msgstr "購読ユーザの追加"
+msgstr "購読ユーザ追加"
 
 msgid "Remove Spam"
-msgstr "スパムの削除"
+msgstr "スパム削除"
 
-#, fuzzy
 msgid "Revert to this revision"
-msgstr "%(rev)dのリビジョンに戻す"
+msgstr "このリビジョンに戻す"
 
 msgid "Package Pages"
-msgstr "ページのパッケージ化"
+msgstr "ページパッケージ化"
 
 msgid "Render as Docbook"
 msgstr "Docbookとして描画"
 
+msgid "Sync Pages"
+msgstr "ページ同期"
+
 msgid "Do"
 msgstr "実行"
 
-#, fuzzy
 msgid "Comments"
 msgstr "コメント"
 
@@ -1177,10 +1232,10 @@ msgid "Immutable Page"
 msgstr "編集不可のページ"
 
 msgid "Remove Link"
-msgstr "リンクを削除"
+msgstr "リンク削除"
 
 msgid "Add Link"
-msgstr "リンクを追加"
+msgstr "リンク追加"
 
 #, python-format
 msgid "Show %s days."
@@ -1190,7 +1245,7 @@ msgid "Wiki Markup"
 msgstr "Wikiマークアップ"
 
 msgid "DeleteCache"
-msgstr "キャッシュの削除"
+msgstr "キャッシュ削除"
 
 #, python-format
 msgid "(cached %s)"
@@ -1419,9 +1474,8 @@ msgstr "ダブルクリックでエディタを開く"
 msgid "After login, jump to last visited page"
 msgstr "ログイン後、最後に訪れたページに行く"
 
-#, fuzzy
 msgid "Show comment sections"
-msgstr "emoticonを表示する"
+msgstr "コメントセクションを表示する"
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "存在しないページへのリンクには\"?\"を表示する"
@@ -1498,12 +1552,14 @@ msgstr "クイックリンクを追加するには、ログインしてくださ
 msgid "Your quicklink to this page has been removed."
 msgstr "このページへのクイックリンクを削除しました。"
 
+msgid "Your quicklink to this page could not be removed."
+msgstr "このページへのクイックリンクを削除できませんでした。"
+
 msgid "A quicklink to this page has been added for you."
 msgstr "このページへのクイックリンクを追加しました。"
 
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr "{{{\"%s\"}}}は不正なユーザ名です。正しいユーザ名を入力してください。"
+msgid "A quicklink to this page could not be added for you."
+msgstr "このページへのクイックリンクを追加できませんでした。"
 
 msgid "Missing password. Please enter user name and password."
 msgstr ""
@@ -1522,6 +1578,10 @@ msgid ""
 "page."
 msgstr ""
 "このページには<a href=\"%(link)s\">%(count)s個の添付ファイル</a>があります。"
+
+#, python-format
+msgid "Attachment '%(target)s' already exists."
+msgstr "添付ファイル'%(target)s'はすでに存在します。"
 
 msgid "Filename of attachment not specified!"
 msgstr " 添付ファイル名が指定されていません。"
@@ -1583,6 +1643,9 @@ msgstr "アップロードするファイル"
 
 msgid "Rename to"
 msgstr "名前の変更"
+
+msgid "Overwrite existing attachment of same name"
+msgstr "同じ名前の添付ファイルを上書き"
 
 msgid "Upload"
 msgstr "アップロード"
@@ -1719,8 +1782,8 @@ msgstr ""
 "る、すでにファイルが存在するなどが考えられます。"
 
 #, python-format
-msgid "The file %(target)s is not a .zip file."
-msgstr "%(target)sはzipファイルではありません。"
+msgid "The file %(filename)s is not a .zip file."
+msgstr "%(filename)sはzipファイルではありません。"
 
 #, python-format
 msgid "Attachment '%(filename)s'"
@@ -1748,11 +1811,17 @@ msgstr "%(pagename)sの添付ファイル:%(filename)s"
 msgid "This page is already deleted or was never created!"
 msgstr "このページは既に削除された、またはまだ作られていません。"
 
+msgid "Rename all /subpages too?"
+msgstr "すべの /サブページ の名前も変更しますか？"
+
 msgid "New name"
 msgstr "新しい名前"
 
 msgid "Optional reason for the renaming"
 msgstr "名前の変更についてのコメント(省略可)"
+
+msgid "Really rename this page?"
+msgstr "このページの名前を本当に変更しますか？"
 
 #, python-format
 msgid "Full Link List for \"%s\""
@@ -1768,7 +1837,7 @@ msgid "Select Author"
 msgstr "作成者選択"
 
 msgid "Revert all!"
-msgstr "すべて前のバージョンに戻す"
+msgstr "すべて前のリビジョンに戻す"
 
 msgid "You are not allowed to use this action."
 msgstr "このアクションを行う権限がありません。"
@@ -1832,6 +1901,10 @@ msgid "After filtering: %s pages"
 msgstr "フィルター後: %sページ"
 
 #, python-format
+msgid "Skipped page %s because of no write access to local page."
+msgstr "ローカルページに書く権限がないため、ページ:%s をスキップしました。"
+
+#, python-format
 msgid "Deleted page %s locally."
 msgstr "ローカルの%sページを削除しました。"
 
@@ -1861,9 +1934,9 @@ msgid ""
 "The item %s has different mime types in both wikis and cannot be merged. "
 "Please delete it in one of both wikis or unify the mime type, and try again."
 msgstr ""
-"アイテム %s は双方のwikiにおいて異なるmime typeが指定されているため、マージす"
-"ることはできませんでした。どちらかのwikiにおいてアイテムを削除するか、mime "
-"typeを統一し、再実行してください。"
+"アイテム %s は双方のwikiにおいて異なるMIMEタイプが指定されているため、マージ"
+"することはできませんでした。どちらかのwikiにおいてアイテムを削除するか、MIME"
+"タイプを統一し、再実行してください。"
 
 #, python-format
 msgid ""
@@ -1923,6 +1996,26 @@ msgstr "ページ %s はリモートにおいてコンフリクト(衝突)を含
 msgid "Page %s merged with conflicts."
 msgstr "ページ %s はコンフリクト(衝突)を含んだままマージされました。"
 
+msgid "Load"
+msgstr "ロード"
+
+msgid "New Page or New Attachment"
+msgstr "新しいページまたは添付ファイル"
+
+msgid ""
+"You can upload a file to a new page or choose to upload a file as attachment "
+"for the current page"
+msgstr "ファイルの添付は、新しいページにも現在のページにも行えます。"
+
+msgid "attachment"
+msgstr "添付ファイル"
+
+msgid "overwrite"
+msgstr "上書き"
+
+msgid "New Name"
+msgstr "新しい名前"
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "%(localwords)d語の%(pagelink)sを含む)"
@@ -1940,6 +2033,9 @@ msgstr "チェックした単語を辞書に追加"
 
 msgid "No spelling errors found!"
 msgstr "スペルの誤りは見つかりませんでした。"
+
+msgid "You can't save spelling words."
+msgstr "スペリングワードは保存できません。"
 
 msgid "You can't check spelling on a page you can't read."
 msgstr "読む権限がないページのスペルチェックはできません。"
@@ -1972,6 +2068,9 @@ msgstr "[\"ユーザプレファレンス\"]にて、購読の正規表現を編
 
 msgid "You have been subscribed to this page."
 msgstr "このページの購読を開始しました。"
+
+msgid "You could not get subscribed to this page."
+msgstr "このページを購読することができませんでした。"
 
 msgid "General Information"
 msgstr "一般的な情報"
@@ -2202,7 +2301,16 @@ msgid "Unknown backup subaction: %s."
 msgstr "未定義のバックアップサブアクション: %s 。"
 
 msgid "You are not allowed to revert this page!"
-msgstr "このページを前のバージョンに戻す権限がありません。"
+msgstr "このページを前のリビジョンに戻す権限がありません。"
+
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
+msgstr ""
+"前のリビジョンに戻す操作をした際に表示されていたのは、最新のリビジョンです。"
+"古いリビジョンに戻したい場合は、まずそのリビジョンのページを表示させてから、"
+"前のリビジョンに戻す操作を行ってください。"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -2221,7 +2329,7 @@ msgid "Created the package %s containing the pages %s."
 msgstr "パッケージ %s を作成しました。(ページ %s を含む)"
 
 msgid "Package pages"
-msgstr "ページのパッケージ化"
+msgstr "ページをパッケージ化"
 
 msgid "Package name"
 msgstr "パッケージ名"
@@ -2266,6 +2374,15 @@ msgstr "\"%s\"のようなページ"
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "\"%(title)s\"において%(matchcount)d %(matches)s"
 
+msgid "Copy all /subpages too?"
+msgstr "すべの /サブページ をコピーしますか？"
+
+msgid "Optional reason for the copying"
+msgstr "コピーについてのコメント(省略可)"
+
+msgid "Really copy this page?"
+msgstr "このページを本当にコピーしますか？"
+
 msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr ""
@@ -2274,11 +2391,36 @@ msgstr ""
 msgid "Delete"
 msgstr "削除"
 
+msgid "Delete all /subpages too?"
+msgstr "すべの /サブページ を削除しますか？"
+
 msgid "Optional reason for the deletion"
 msgstr "削除についてのコメント(省略可)"
 
 msgid "Really delete this page?"
 msgstr "このページを本当に削除しますか？"
+
+#~ msgid "Xapian stemming"
+#~ msgstr "Xapian stemming"
+
+#~ msgid "filename"
+#~ msgstr "ファイル名"
+
+#~ msgid ""
+#~ "~-If you submit this form, the submitted values will be displayed.\n"
+#~ "To use this form on other pages, insert a\n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "macro call.-~\n"
+#~ msgstr ""
+#~ "~-このフォームをサブミットすると、サブミットされた値が表示されます。\n"
+#~ "このフォームを別のページで利用するには、マクロ:\n"
+#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "を埋め込んでください。-~\n"
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr ""
+#~ "{{{\"%s\"}}}は不正なユーザ名です。正しいユーザ名を入力してください。"
 
 #~ msgid "raw"
 #~ msgstr "Wikiテキスト"
@@ -2352,9 +2494,6 @@ msgstr "このページを本当に削除しますか？"
 #~ msgid "(Only when changing passwords)"
 #~ msgstr "(パスワード変更時のみ)"
 
-#~ msgid "Filename"
-#~ msgstr "ファイル名"
-
 #~ msgid "You are not allowed to rename pages in this wiki!"
 #~ msgstr "ページ名を変更する権限がありません。"
 
@@ -2424,13 +2563,13 @@ msgstr "このページを本当に削除しますか？"
 #~ msgstr "クイックリンク"
 
 #~ msgid "Show Print View"
-#~ msgstr "印刷ビューの表示"
+#~ msgstr "印刷ビューを表示"
 
 #~ msgid "Attach File"
-#~ msgstr "ファイルの添付"
+#~ msgstr "ファイルを添付"
 
 #~ msgid "Show Like Pages"
-#~ msgstr "似たページの表示"
+#~ msgstr "似たページを表示"
 
 #~ msgid "Show Local Site Map"
 #~ msgstr "ローカルサイトマップの表示"
@@ -2445,13 +2584,13 @@ msgstr "このページを本当に削除しますか？"
 #~ msgstr "クイックリンクに追加"
 
 #~ msgid "Show Parent"
-#~ msgstr "親ページの表示"
+#~ msgstr "親ページを表示"
 
 #~ msgid "Show Changes"
-#~ msgstr "変更内容の表示"
+#~ msgstr "変更内容を表示"
 
 #~ msgid "Get Info"
-#~ msgstr "情報の取得"
+#~ msgstr "情報を取得"
 
 #~ msgid "Skip to preview"
 #~ msgstr "プレビューへ移動"
@@ -2475,7 +2614,7 @@ msgstr "このページを本当に削除しますか？"
 #~ msgstr "XSLTオプションは無効になっています。"
 
 #~ msgid "RefreshCache"
-#~ msgstr "キャッシュの更新"
+#~ msgstr "キャッシュを更新"
 
 #~ msgid "for this page (cached %(date)s)"
 #~ msgstr "(キャッシュ作成日時 %(date)s)"
@@ -2484,7 +2623,7 @@ msgstr "このページを本当に削除しますか？"
 #~ msgstr "MIMEタイプ (省略可)"
 
 #~ msgid "Refresh"
-#~ msgstr "キャッシュの更新"
+#~ msgstr "キャッシュを更新"
 
 #~ msgid "<escape>"
 #~ msgstr "<エスケープ>"
@@ -2544,9 +2683,6 @@ msgstr "このページを本当に削除しますか？"
 
 #~ msgid "Show all changes in the last %s days."
 #~ msgstr "%s日以内の変更をすべて表示"
-
-#~ msgid "Site"
-#~ msgstr "サイト"
 
 #~ msgid "Title: %(titlesearch)s[[BR]]Text: %(textsearch)s"
 #~ msgstr "タイトル: %(titlesearch)s<br/>テキスト: %(textsearch)s"

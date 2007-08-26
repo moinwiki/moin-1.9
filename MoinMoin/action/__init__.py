@@ -26,7 +26,7 @@
 """
 
 from MoinMoin.util import pysupport
-from MoinMoin import wikiutil
+from MoinMoin import config, wikiutil
 from MoinMoin.Page import Page
 
 # create a list of extension actions from the package directory
@@ -250,6 +250,10 @@ def do_format(pagename, request):
 
 def do_content(pagename, request):
     """ same as do_show, but we only show the content """
+    # XXX temporary fix to make it work until Page.send_page gets refactored
+    request.setHttpHeader("Content-Type: text/html; charset=%s" % config.charset)
+    request.setHttpHeader('Status: 200 OK')
+    request.emit_http_headers()
     do_show(pagename, request, count_hit=0, content_only=1)
 
 def do_print(pagename, request):

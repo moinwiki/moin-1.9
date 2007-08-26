@@ -3,9 +3,31 @@
 
     Stuff for compatibility with older pytohn versions
 
-    @copyright: 2007 Heinrich Wendel <heinrich.wendel@gmail.com>
+    @copyright: 2007 Heinrich Wendel <heinrich.wendel@gmail.com>,
+                2007 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
+
+"""
+This is a feature from python 2.4, needed for compatibility with python 2.3,
+although it may not be 100% compatible.
+"""
+try:
+    import string
+    rsplit = string.rsplit
+except AttributeError:
+    # CAUTION: you can't use s.rsplit(...), only rsplit(s, ...) with this!
+    def rsplit(s, sep=None, maxsplit=-1):
+        """rsplit(s [,sep [,maxsplit]]) -> list of strings
+
+        Return a list of the words in the string s, using sep as the
+        delimiter string, starting at the end of the string and working
+        to the front.  If maxsplit is given, at most maxsplit splits are
+        done. If sep is not specified or is None, any whitespace string
+        is a separator.
+        """
+        fragments = s[::-1].split(sep, maxsplit)
+        return [fragment[::-1] for fragment in fragments[::-1]]
 
 """
 This is a feature from python 2.4, needed for compatibility with python 2.3,

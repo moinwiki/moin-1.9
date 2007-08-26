@@ -11,6 +11,7 @@ import re
 
 from MoinMoin.util import pysupport
 from MoinMoin import wikiutil
+from MoinMoin.support.python_compatibility import rsplit
 
 modules = pysupport.getPackageModules(__file__)
 
@@ -99,10 +100,10 @@ class FormatterBase:
             IMPORTANT: on and off must be called with same parameters, see
                        also the text_html formatter.
         """
-        wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, '%s:"%s"' % (interwiki, pagename))
+        wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_interwiki(self.request, interwiki, pagename)
         if wikitag == 'Self' or wikitag == self.request.cfg.interwikiname:
             if '#' in wikitail:
-                wikitail, kw['anchor'] = wikitail.split('#', 1)
+                wikitail, kw['anchor'] = rsplit(wikitail, '#', 1)
                 wikitail = wikiutil.url_unquote(wikitail)
             return self.pagelink(on, wikitail, **kw)
         return ''
@@ -170,6 +171,12 @@ class FormatterBase:
         if title:
             return '[Image:%s]' % title
         return '[Image]'
+
+    # generic transclude/include:
+    def transclusion(self, on, **kw):
+        raise NotImplementedError
+    def transclusion_param(self, **kw):
+        raise NotImplementedError
 
     def smiley(self, text):
         return text

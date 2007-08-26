@@ -20,6 +20,7 @@ from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
 from MoinMoin.Page import Page
 from MoinMoin.action import AttachFile
 from MoinMoin import wikiutil
+from MoinMoin.support.python_compatibility import rsplit
 
 Dependencies = [] # this parser just depends on the raw text
 
@@ -358,7 +359,8 @@ class MoinTranslator(html4css1.HTMLTranslator):
                 if not [i for i in node.children if i.__class__ == docutils.nodes.image]:
                     node['classes'].append(prefix)
             elif prefix == 'wiki':
-                wikitag, wikiurl, wikitail, err = wikiutil.resolve_wiki(self.request, link)
+                wiki_name, page_name = wikiutil.split_interwiki(link)
+                wikitag, wikiurl, wikitail, err = wikiutil.resolve_interwiki(self.request, wiki_name, page_name)
                 wikiurl = wikiutil.mapURL(self.request, wikiurl)
                 node['refuri'] = wikiutil.join_wiki(wikiurl, wikitail)
                 # Only add additional class information if the reference does
@@ -378,7 +380,7 @@ class MoinTranslator(html4css1.HTMLTranslator):
                 pagename = refuri
                 anchor = ''
                 if '#' in refuri:
-                    pagename, anchor = refuri.split('#', 1)
+                    pagename, anchor = rsplit(refuri, '#', 1)
                 page = Page(self.request, wikiutil.AbsPageName(self.formatter.page.page_name, pagename))
                 node['refuri'] = page.url(self.request, anchor=anchor)
                 if not page.exists():

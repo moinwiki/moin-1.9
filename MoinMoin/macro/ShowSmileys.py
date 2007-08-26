@@ -2,7 +2,7 @@
 """
     MoinMoin - List all defined smileys
 
-    [[ShowSmileys]] will display a table of all the available smileys.
+    <<ShowSmileys>> will display a table of all the available smileys.
 
     Based on code by Nick Trout <trout@users.sf.net>
 

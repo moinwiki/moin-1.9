@@ -23,6 +23,7 @@
 import re
 import StringIO
 from MoinMoin import config, macro, wikiutil
+from MoinMoin.support.python_compatibility import rsplit
 
 Dependencies = []
 
@@ -589,7 +590,7 @@ class DocEmitter:
         if word.startswith(wikiutil.CHILD_PREFIX):
             word = self.formatter.page.page_name + '/' + word[wikiutil.CHILD_PREFIX_LEN:]
         # handle anchors
-        parts = word.split("#", 1)
+        parts = rsplit(word, "#", 1)
         anchor = ""
         if len(parts) == 2:
             word, anchor = parts
@@ -614,9 +615,9 @@ class DocEmitter:
         ])
 
     def interwiki_link_emit(self, node):
-        word = node.content
+        wiki, page = wikiutil.split_interwiki(node.content)
         wikitag, wikiurl, wikitail, wikitag_bad = \
-            wikiutil.resolve_wiki(self.request, word)
+            wikiutil.resolve_interwiki(self.request, wiki, page)
         href = wikiutil.join_wiki(wikiurl, wikitail)
         return ''.join([
             self.formatter.interwikilink(1, wikitag, wikitail),

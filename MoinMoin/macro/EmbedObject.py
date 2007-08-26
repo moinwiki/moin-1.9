@@ -8,7 +8,7 @@
         the kind of application.
 
     CALLING SEQUENCE:
-        [[EmbedObject(attachment[,width=width][,height=height][,alt=Embedded mimetpye/xy])]]
+        <<EmbedObject(attachment[,width=width][,height=height][,alt=Embedded mimetpye/xy])>>
 
     SUPPORTED MIMETYPES:
          application/x-shockwave-flash
@@ -74,19 +74,19 @@
         as PDF file"
 
     EXAMPLE:
-        [[EmbedObject]]
-        [[EmbedObject(example.swf,alt=A flash movie showing the rotating moin logo)]]
-        [[EmbedObject(example.mid,alt=Background sound of wikipage: oceanwaves)]]
-        [[EmbedObject(example.pdf)]]
-        [[EmbedObject(example.svg)]]
-        [[EmbedObject(example.mp3)]]
-        [[EmbedObject(example.vss)]]
+        <<EmbedObject>>
+        <<EmbedObject(example.swf,alt=A flash movie showing the rotating moin logo)>>
+        <<EmbedObject(example.mid,alt=Background sound of wikipage: oceanwaves)>>
+        <<EmbedObject(example.pdf)>>
+        <<EmbedObject(example.svg)>>
+        <<EmbedObject(example.mp3)>>
+        <<EmbedObject(example.vss)>>
 
-        [[EmbedObject(example.swf,width=637,height=392)]]
-        [[EmbedObject(SlideShow/example.swf,width=637,height=392)]]
-        [[EmbedObject(SlideShow/example.swf,width=637,height=392)]]
-        [[EmbedObject(SlideShow/example.swf,width=637,height=392,play=true,loop=false)]]
-        [[EmbedObject(SlideShow/example.swf,width=637,height=392,quality=low)]]
+        <<EmbedObject(example.swf,width=637,height=392)>>
+        <<EmbedObject(SlideShow/example.swf,width=637,height=392)>>
+        <<EmbedObject(SlideShow/example.swf,width=637,height=392)>>
+        <<EmbedObject(SlideShow/example.swf,width=637,height=392,play=true,loop=false)>>
+        <<EmbedObject(SlideShow/example.swf,width=637,height=392,quality=low)>>
 
 
     PROCEDURE:
@@ -266,7 +266,7 @@ class EmbedObject:
         _ = self._
 
         if not self.target:
-            msg = _('Not enough arguments to EmbedObject macro! Try [[EmbedObject(attachment [,width=width] [,height=height] [,alt=Embedded mimetpye/xy])]]', formatted=False)
+            msg = _('Not enough arguments to EmbedObject macro! Try <<EmbedObject(attachment [,width=width] [,height=height] [,alt=Embedded mimetpye/xy])>>', formatted=False)
             return "%s%s%s" % (self.formatter.sysmsg(1), self.formatter.text(msg), self.formatter.sysmsg(0))
 
         pagename, fname = AttachFile.absoluteName(self.target, self.formatter.page.page_name)

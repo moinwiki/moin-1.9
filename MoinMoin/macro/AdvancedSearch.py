@@ -2,7 +2,7 @@
 """
     MoinMoin - AdvancedSearch Macro
 
-    [[AdvancedSearch]]
+    <<AdvancedSearch>>
         displays advanced search dialog.
 
     @license: GNU GPL, see COPYING for details.
