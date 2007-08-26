@@ -32,7 +32,7 @@ class TestGroupPage:
     def testExtendedLink(self):
         """ wikidicts: initFromText: extended link """
         text = """
- * ["extended link"]
+ * [[extended link]]
 """
         assert self.getMembers(text) == ['extended link']
 
