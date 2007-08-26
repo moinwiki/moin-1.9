@@ -527,31 +527,64 @@ Test {{{brackets}}} and test {{{brackets}}}
         assert expected in output
 
 class TestLinkingMarkup(ParserTestCase):
-    """ Test wiki markup """
+    """ Test wiki link markup """
 
     text = 'AAA %s AAA'
     needle = re.compile(text % r'(.+)')
-    _tests = (
+    _tests = [
         # test,           expected
+        ('SomeNonExistantPage', '<a class="nonexistent" href="./SomeNonExistantPage">SomeNonExistantPage</a>'),
         ('[[something]]', '<a class="nonexistent" href="./something">something</a>'),
+        ('[[some thing]]', '<a class="nonexistent" href="./some%20thing">some thing</a>'),
         ('[[something|some text]]', '<a class="nonexistent" href="./something">some text</a>'),
         ('MoinMoin:something', '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/something" title="MoinMoin">something</a>'),
         ('[[MoinMoin:something|some text]]', '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/something" title="MoinMoin">some text</a>'),
         ('[[MoinMoin:with space]]', '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/with%20space" title="MoinMoin">with space</a>'),
         ('[[MoinMoin:with space|some text]]', '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/with%20space" title="MoinMoin">some text</a>'),
         ('[[http://google.com/|google]]', '<a class="http" href="http://google.com/">google</a>'),
-        )
+        ]
 
-    def testTextFormating(self):
-        """ parser.wiki: text formating """
-        together_test = []
-        together_expected = []
+    def testLinkFormating(self):
+        """ parser.wiki: link formating """
         for test, expected in self._tests:
             html = self.parse(self.text % test)
             result = self.needle.search(html).group(1)
             assert result == expected
-            together_test.append(test)
-            together_expected.append(expected)
+
+    def testLinkAttachment(self):
+        html = self.parse("[[attachment:some file.txt]]")
+        assert '<a ' in html
+        assert 'href="' in html
+        assert 'class="attachment nonexistent"' in html
+        assert 'action=AttachFile' in html
+        assert 'some+file.txt' in html
+
+    def testLinkAttachmentImage(self):
+        html = self.parse("[[attachment:some file.png]]")
+        assert '<a ' in html # must create a link
+        assert 'href="' in html
+        assert 'class="attachment nonexistent"' in html
+        assert 'action=AttachFile' in html
+        assert 'some+file.png' in html
+
+
+class TestTransclusionMarkup(ParserTestCase):
+    """ Test wiki markup """
+
+    text = 'AAA %s AAA'
+    needle = re.compile(text % r'(.+)')
+    _tests = [
+        # test,           expected
+        ('{{http://moinmo.in/wiki/common/moinmoin.png}}', '<img alt="http://moinmo.in/wiki/common/moinmoin.png" class="external_image" src="http://moinmo.in/wiki/common/moinmoin.png" title="http://moinmo.in/wiki/common/moinmoin.png" />'),
+        ('{{http://moinmo.in/wiki/common/moinmoin.png|moin logo}}', '<img alt="moin logo" class="external_image" src="http://moinmo.in/wiki/common/moinmoin.png" title="moin logo" />'),
+        ]
+
+    def testTransclusionFormating(self):
+        """ parser.wiki: transclusion formating """
+        for test, expected in self._tests:
+            html = self.parse(self.text % test)
+            result = self.needle.search(html).group(1)
+            assert result == expected
 
 
 coverage_modules = ['MoinMoin.parser.text_moin_wiki']
