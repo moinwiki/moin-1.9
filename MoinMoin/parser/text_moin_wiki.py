@@ -88,7 +88,11 @@ class Parser:
           (?:[%(u)s][%(l)s]+){2,}  # at least 2 upper>lower transitions make CamelCase
          )+  # we can have MainPage/SubPage/SubSubPage ...
         )
-        (?![%(u)s%(l)s/])  # require anything not upper/lower/slash following
+        (?:
+         (?![%(u)s%(l)s/])  # require anything not upper/lower/slash following
+         |
+         $  # ... or end of line
+        )
     ''' % {
         'u': config.chars_upper,
         'l': config.chars_lower,

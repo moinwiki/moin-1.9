@@ -712,6 +712,21 @@ class TestAnchorNames:
         encoded = wikiutil.anchor_name_from_text(text)
         assert expected == encoded
 
+class TestPageLinkMarkup:
+    def test_pagelinkmarkup(self):
+        tests = [
+            # pagename, expected markup
+            ('SomePage', 'SomePage'),
+            ('Somepage', '[[Somepage]]'),
+            ('somepage', '[[somepage]]'),
+            ('Some Page', '[[Some Page]]'),
+        ]
+        for pagename, expected in tests:
+            yield self._check, pagename, expected
+
+    def _check(self, pagename, expected):
+        assert expected == wikiutil.pagelinkmarkup(pagename)
+
 class TestRelativeTools:
     tests = [
         # test                      expected output
