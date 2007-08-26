@@ -62,6 +62,9 @@ Version 1.7.current:
       because you can render the stuff between link start and link end yourself)
 
   New Features:
+    * changed markup for links, images and macros, see:
+      MoinMoin:MoinMoinTodo/Release 1.7/HelpOnLinking and
+      MoinMoin:LinkMarkupCollection
     * cfg.trusted_auth_methods
     * new session handling system
     * new authentication plugin system
@@ -74,7 +77,7 @@ Version 1.7.current:
       http://moinmo.in/MoinMoinTodo/Release_1.7/HelpOnNotification
 
   Bugfixes:
-    * ...
+    * lots of bugfixes related to link parsing
 
   Other changes:
     * attachment links for non-existing attachments look different now:
