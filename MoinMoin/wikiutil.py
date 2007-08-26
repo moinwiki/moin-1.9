@@ -891,7 +891,7 @@ def RelPageName(context, pagename):
 def pagelinkmarkup(pagename):
     """ return markup that can be used as link to page <pagename> """
     from MoinMoin.parser.text_moin_wiki import Parser
-    if re.match(Parser.word_rule + "$", pagename):
+    if re.match(Parser.word_rule + "$", pagename, re.U|re.X):
         return pagename
     else:
         return u'[[%s]]' % pagename
