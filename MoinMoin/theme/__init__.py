@@ -975,7 +975,7 @@ var search_hint = "%(search_hint)s";
                 data = {'action': action, 'disabled': ''}
                 # Always add spaces: AttachFile -> Attach File
                 # XXX do not create page just for using split_title -
-                # creating pages for non-existant does 2 storage lookups
+                # creating pages for non-existent does 2 storage lookups
                 #title = Page(request, action).split_title(force=1)
                 title = action
                 # Use translated version if available
