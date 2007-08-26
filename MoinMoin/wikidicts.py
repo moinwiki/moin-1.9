@@ -85,12 +85,12 @@ class Group(DictBase):
      * memberN
     any text ignored
 
-    If there are any free links using ["free link"] notation, the markup
+    If there are any free links using [[free link]] notation, the markup
     is stripped from the member.
     """
     # * Member - ignore all but first level list items, strip whitespace,
     # strip free links markup if exists.
-    regex = r'^ \* +(?:\[\")?(?P<member>.+?)(?:\"\])? *$'
+    regex = r'^ \* +(?:\[\[)?(?P<member>.+?)(?:\]\])? *$'
 
     def initFromText(self, text):
         for match in self.regex.finditer(text):
