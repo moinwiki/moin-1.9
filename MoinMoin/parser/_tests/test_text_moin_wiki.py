@@ -533,7 +533,7 @@ class TestLinkingMarkup(ParserTestCase):
     needle = re.compile(text % r'(.+)')
     _tests = [
         # test,           expected
-        ('SomeNonExistantPage', '<a class="nonexistent" href="./SomeNonExistantPage">SomeNonExistantPage</a>'),
+        ('SomeNonExistentPage', '<a class="nonexistent" href="./SomeNonExistentPage">SomeNonExistentPage</a>'),
         ('[[something]]', '<a class="nonexistent" href="./something">something</a>'),
         ('[[some thing]]', '<a class="nonexistent" href="./some%20thing">some thing</a>'),
         ('[[something|some text]]', '<a class="nonexistent" href="./something">some text</a>'),
