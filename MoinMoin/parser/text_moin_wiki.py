@@ -8,22 +8,6 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-ur'''
-
-    def anchor_link_emit(self, node):
-        return ''.join([
-            self.formatter.url(1, node.content, css='anchor'),
-            self.emit_children(node),
-            self.formatter.url(0),
-        ])
-
-TODO: use this for links to anchors
-    res.append(self.formatter.anchorlink(1, words[0][1:]))
-    res.append(self.formatter.text(words[1]))
-    res.append(self.formatter.anchorlink(0))
-
-'''
-
 import re
 from MoinMoin import config, wikiutil, macro
 from MoinMoin.Page import Page
@@ -33,13 +17,12 @@ Dependencies = ['user'] # {{{#!wiki comment ... }}} has different output dependi
 
 class Parser:
     """
-        Object that turns Wiki markup into HTML.
+        Parse wiki format markup (and call the formatter to generate output).
 
         All formatting commands can be parsed one line at a time, though
         some state is carried over between lines.
 
-        Methods named like _*_repl() are responsible to handle the named regex
-        patterns defined in print_html().
+        Methods named like _*_repl() are responsible to handle the named regex patterns.
     """
 
     # allow caching
@@ -131,16 +114,12 @@ class Parser:
     link_desc_rules = r'|'.join([
             transclude_rule,
             text_rule,
-            # _get_rule('break', inline_tab),
-            # _get_rule('char', inline_tab),
     ])
     link_desc_re = re.compile(link_desc_rules, re.VERBOSE|re.UNICODE)
 
     # transclude descriptions:
     transclude_desc_rules = r'|'.join([
             text_rule,
-            # _get_rule('break', inline_tab),
-            # _get_rule('char', inline_tab),
     ])
     transclude_desc_re = re.compile(transclude_desc_rules, re.VERBOSE|re.UNICODE)
 
@@ -1120,7 +1099,7 @@ class Parser:
         return ''
 
     def _macro_repl(self, word, groups):
-        """Handle macros (<<macroname>>)."""
+        """Handle macros."""
         macro_name = groups.get('macro_name')
         macro_args = groups.get('macro_args')
         self.inhibit_p = 0 # 1 fixes UserPreferences, 0 fixes paragraph formatting for macros
