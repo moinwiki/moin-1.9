@@ -57,6 +57,8 @@ class Formatter(text_html.Formatter):
         return self.url(1, href, title=title, css=html_class) # interwiki links with pages with umlauts
 
     def attachment_inlined(self, url, text, **kw):
+        url = wikiutil.escape(url)
+        text = wikiutil.escape(text)
         if url == text:
             return '<span style="background-color:#ffff11">inline:%s</span>' % url
         else:
@@ -133,7 +135,7 @@ class Formatter(text_html.Formatter):
             result = "<<%s(%s)>>" % (name, args)
         else:
             result = "<<%s>>" % name
-        return '<span style="background-color:#ffff11">%s</span>' % result # XXX XSS needs escaping!
+        return '<span style="background-color:#ffff11">%s</span>' % wikiutil.escape(result)
 
     def parser(self, parser_name, lines):
         """ parser_name MUST be valid!
