@@ -18,6 +18,7 @@ from MoinMoin.Page import Page
 from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
 from MoinMoin.formatter.text_html import Formatter as HtmlFormatter
 
+PAGENAME = u'ThisPageDoesNotExistsAndWillNeverBeReally'
 
 class ParserTestCase(object):
     """ Helper class that provide a parsing method """
@@ -30,7 +31,7 @@ class ParserTestCase(object):
         request = self.request
         assert body is not None
         request.reset()
-        page = Page(request, 'ThisPageDoesNotExistsAndWillNeverBeReally')
+        page = Page(request, PAGENAME)
         page.hilite_re = None
         page.set_raw_body(body)
         formatter = HtmlFormatter(request)
@@ -534,9 +535,13 @@ class TestLinkingMarkup(ParserTestCase):
     _tests = [
         # test,           expected
         ('SomeNonExistentPage', '<a class="nonexistent" href="./SomeNonExistentPage">SomeNonExistentPage</a>'),
+        ('SomeNonExistentPage#anchor', '<a class="nonexistent" href="./SomeNonExistentPage#anchor">SomeNonExistentPage#anchor</a>'),
         ('[[something]]', '<a class="nonexistent" href="./something">something</a>'),
         ('[[some thing]]', '<a class="nonexistent" href="./some%20thing">some thing</a>'),
         ('[[something|some text]]', '<a class="nonexistent" href="./something">some text</a>'),
+        ('[[../something]]', '<a class="nonexistent" href="./something">../something</a>'),
+        ('[[/something]]', '<a class="nonexistent" href="./%s/something">/something</a>' % PAGENAME),
+        ('[[something#anchor]]', '<a class="nonexistent" href="./something#anchor">something#anchor</a>'),
         ('MoinMoin:something', '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/something" title="MoinMoin">something</a>'),
         ('[[MoinMoin:something|some text]]', '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/something" title="MoinMoin">some text</a>'),
         ('[[MoinMoin:with space]]', '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/with%20space" title="MoinMoin">with space</a>'),
