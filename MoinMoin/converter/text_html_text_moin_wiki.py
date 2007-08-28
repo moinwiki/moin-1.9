@@ -1232,6 +1232,22 @@ class convert_tree(visitor):
         else:
             raise ConvertError("Strange image src: '%s' alt == '%r'" % (src, alt))
 
+    def process_object(self, node):
+        data = None
+        if node.attributes.has_key("data"):
+            data = wikiutil.url_unquote(node.attributes.get("data").nodeValue)
+
+        text = self.node_list_text_only(node.childNodes)
+        text = text.replace("\n", " ").lstrip()
+
+        if data:
+            if text:
+                text = '|' + text
+            self.text.append("{{%s%s}}" % (data, text))
+        # TODO: for target PAGES, use some code from process_a to get the pagename from URL
+        # TODO: roundtrip attachment: correctly
+        # TODO: handle object's content better?
+
 
 def parse(request, text):
     text = u'<?xml version="1.0"?>%s%s' % (dtd, text)
