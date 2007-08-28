@@ -60,9 +60,9 @@ class Formatter(text_html.Formatter):
         url = wikiutil.escape(url)
         text = wikiutil.escape(text)
         if url == text:
-            return '<span style="background-color:#ffff11">inline:%s</span>' % url
+            return '<span style="background-color:#ffff11">{{attachment:%s}}</span>' % url
         else:
-            return '<span style="background-color:#ffff11">[inline:%s %s]</span>' % (url, text)
+            return '<span style="background-color:#ffff11">{{attachment:%s|%s}}</span>' % (url, text)
 
     def attachment_link(self, on, url=None, **kw):
         _ = self.request.getText
