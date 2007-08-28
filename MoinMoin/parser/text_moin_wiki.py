@@ -62,7 +62,7 @@ class Parser:
         (?P<word_bang>\!)?  # configurable: avoid getting CamelCase rendered as link
         (?P<word_name>
          (?:
-          (?P<word_parent_prefix>%(parent)s)*  # there might be either ../ parent prefix(es)
+          (%(parent)s)*  # there might be either ../ parent prefix(es)
           |
           ((?<!%(child)s)%(child)s)?  # or maybe a single / child prefix (but not if we already had it before)
          )
@@ -70,6 +70,10 @@ class Parser:
           ((?<!%(child)s)%(child)s)?  # there might be / child prefix (but not if we already had it before)
           (?:[%(u)s][%(l)s]+){2,}  # at least 2 upper>lower transitions make CamelCase
          )+  # we can have MainPage/SubPage/SubSubPage ...
+         (?:
+          \#  # anchor separator          TODO check if this does not make trouble at places where word_rule is used
+          (?P<word_anchor>\S+)  # some anchor name
+         )?
         )
         (?:
          (?![%(u)s%(l)s/])  # require anything not upper/lower/slash following
@@ -523,31 +527,33 @@ class Parser:
 
     def _word_repl(self, word, groups):
         """Handle WikiNames."""
-        bang = groups.get('word_bang')
-        if bang:
-            # self.cfg.bang_meta:
-            # handle !NotWikiNames
-            return self.formatter.nowikiword(word)
-        orig_word = word
+        bang = ''
+        bang_present = groups.get('word_bang')
+        if bang_present:
+            if self.cfg.bang_meta:
+                # handle !NotWikiNames
+                return self.formatter.nowikiword(word)
+            else:
+                bang = self.formatter.text('!')
         name = groups.get('word_name')
-        parent_prefix = groups.get('word_parent_prefix')
         current_page = self.formatter.page.page_name
-        name = wikiutil.AbsPageName(current_page, name)
+        abs_name = wikiutil.AbsPageName(current_page, name)
         # if a simple, self-referencing link, emit it as plain text
-        if name == current_page:
-            return self.formatter.text(orig_word)
+        if abs_name == current_page:
+            return self.formatter.text(word)
         else:
             # handle anchors
-            parts = rsplit(name, "#", 1)
-            anchor = ""
-            if len(parts) == 2:
-                name, anchor = parts
-            return (self.formatter.pagelink(1, name, anchor=anchor) +
-                    self.formatter.text(orig_word) +
-                    self.formatter.pagelink(0, name))
+            try:
+                abs_name, anchor = rsplit(abs_name, "#", 1)
+            except ValueError:
+                anchor = ""
+            return (bang +
+                    self.formatter.pagelink(1, abs_name, anchor=anchor) +
+                    self.formatter.text(word) +
+                    self.formatter.pagelink(0, abs_name))
     _word_bang_repl = _word_repl
-    _word_parent_prefix_repl = _word_repl
     _word_name_repl = _word_repl
+    _word_anchor_repl = _word_repl
 
     def _url_repl(self, word, groups):
         """Handle literal URLs."""
@@ -693,20 +699,20 @@ class Parser:
         mt = self.link_target_re.match(target)
         if mt:
             if mt.group('page_name'):
-                page_name = mt.group('page_name')
-                # handle relative links
-                if page_name.startswith(self.CHILD_PREFIX):
-                    page_name = self.formatter.page.page_name + '/' + page_name[self.CHILD_PREFIX_LEN:] # XXX use func
+                page_name_and_anchor = mt.group('page_name')
                 # handle anchors
                 try:
-                    page_name, anchor = rsplit(page_name, "#", 1)
+                    page_name, anchor = rsplit(page_name_and_anchor, "#", 1)
                 except ValueError:
-                    anchor = ""
+                    page_name, anchor = page_name_and_anchor, ""
+                current_page = self.formatter.page.page_name
                 if not page_name:
-                    page_name = self.formatter.page.page_name
-                return (self.formatter.pagelink(1, page_name, anchor=anchor) +
-                        self._link_description(desc, target, page_name) +
-                        self.formatter.pagelink(0, page_name))
+                    page_name = current_page
+                # handle relative links
+                abs_page_name = wikiutil.AbsPageName(current_page, page_name)
+                return (self.formatter.pagelink(1, abs_page_name, anchor=anchor) +
+                        self._link_description(desc, target, page_name_and_anchor) +
+                        self.formatter.pagelink(0, abs_page_name))
 
             elif mt.group('extern_addr'):
                 scheme = mt.group('extern_scheme')
