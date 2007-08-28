@@ -95,7 +95,7 @@ class Formatter(text_html.Formatter):
 
     # Dynamic stuff / Plugins ############################################
 
-    def macro(self, macro_obj, name, args):
+    def macro(self, macro_obj, name, args, markup=None):
         #use ImageLink for resized images
         if name == "ImageLink" and args is not None:
 
@@ -127,11 +127,13 @@ class Formatter(text_html.Formatter):
                 kw['src'] = AttachFile.getAttachUrl(pagename, url, self.request, addts=1)
             return self.image(**kw)
 
+        elif markup is not None:
+            result = markup
         elif args is not None:
             result = "<<%s(%s)>>" % (name, args)
         else:
             result = "<<%s>>" % name
-        return '<span style="background-color:#ffff11">%s</span>' % result
+        return '<span style="background-color:#ffff11">%s</span>' % result # XXX XSS needs escaping!
 
     def parser(self, parser_name, lines):
         """ parser_name MUST be valid!

@@ -185,16 +185,16 @@ if moincode_timestamp > %d or cfg_mtime is None or cfg_mtime > %d:
         else:
             return self.formatter.div(on, **kw)
 
-    def macro(self, macro_obj, name, args):
+    def macro(self, macro_obj, name, args, markup=None):
         if self.__is_static(macro_obj.get_dependencies(name)):
             # XXX: why is this necessary??
             macro_obj.formatter = self
             return macro_obj.execute(name, args)
         else:
             return self.__insert_code(
-                '%srequest.write(%s.macro(macro_obj, %r, %r))' %
+                '%srequest.write(%s.macro(macro_obj, %r, %r, %r))' %
                 (self.__adjust_formatter_state(),
-                 self.__formatter, name, args))
+                 self.__formatter, name, args, markup))
 
     def parser(self, parser_name, lines):
         """ parser_name MUST be valid!

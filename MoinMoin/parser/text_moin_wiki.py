@@ -143,6 +143,10 @@ class Parser:
     """
     dl_re = re.compile(dl_rule, re.VERBOSE|re.UNICODE)
 
+    # others
+    indent_re = re.compile(ur"^\s*", re.UNICODE)
+    eol_re = re.compile(r'\r?\n', re.UNICODE)
+
     # this is used inside <pre> / parser sections (we just want to know when it's over):
     pre_scan_rule = ur"""
 (?P<pre>
@@ -240,7 +244,7 @@ class Parser:
     (?=\s)  # we require some space after the smiley
 )|(?P<macro>
     <<
-    (?P<macro_name>(%%(macronames)s))  # name of the macro (only existing ones will match)
+    (?P<macro_name>\w+)  # name of the macro
     (?:\((?P<macro_args>.*?)\))?  # optionally macro arguments
     >>
 )|(?P<heading>
@@ -297,6 +301,7 @@ class Parser:
         'u': config.chars_upper,
         'l': config.chars_lower,
         'smiley': u'|'.join([re.escape(s) for s in config.smileys])}
+    scan_re = re.compile(scan_rules, re.UNICODE|re.VERBOSE)
 
     # Don't start p before these
     no_new_p_before = ("heading rule table tableZ tr td "
@@ -350,8 +355,6 @@ class Parser:
         self.list_indents = []
         self.list_types = []
 
-        # XXX TODO if we remove the runtime dependency, we can compile the scan_rules at module load time:
-        self.scan_rules = self.scan_rules % {'macronames': u'|'.join(macro.getNames(self.cfg))}
 
     def _close_item(self, result):
         #result.append("<!-- close item begin -->\n")
@@ -1113,7 +1116,7 @@ class Parser:
         # create macro instance
         if self.macro is None:
             self.macro = macro.Macro(self)
-        return self.formatter.macro(self.macro, macro_name, macro_args)
+        return self.formatter.macro(self.macro, macro_name, macro_args, markup=groups.get('macro'))
     _macro_name_repl = _macro_repl
     _macro_args_repl = _macro_repl
 
@@ -1149,8 +1152,7 @@ class Parser:
                 self.formatter.in_p) and lastpos < len(line):
             result.append(self.formatter.paragraph(1, css_class="line874"))
         if '}}}' in line and len(line[lastpos:].strip()) > 0:
-            scan_re = re.compile(self.scan_rules, re.UNICODE|re.VERBOSE)
-            result.append(self.scan(scan_re, line[lastpos:].strip(), inhibit_p=inhibit_p))
+            result.append(self.scan(self.scan_re, line[lastpos:].strip(), inhibit_p=inhibit_p))
         else:
             result.append(self.formatter.text(line[lastpos:]))
         return u''.join(result)
@@ -1205,19 +1207,12 @@ class Parser:
         self.formatter = formatter
         self.hilite_re = self.formatter.page.hilite_re
 
-        # prepare regex patterns
-        self.request.clock.start('compile_huge_and_pretty')
-        scan_re = re.compile(self.scan_rules, re.UNICODE|re.VERBOSE)
-        indent_re = re.compile(ur"^\s*", re.UNICODE)
-        eol_re = re.compile(r'\r?\n', re.UNICODE)
-        self.request.clock.stop('compile_huge_and_pretty')
-
         # get text and replace TABs
         rawtext = self.raw.expandtabs()
 
         # go through the lines
         self.lineno = self.start_line
-        self.lines = eol_re.split(rawtext)
+        self.lines = self.eol_re.split(rawtext)
         self.line_is_empty = 0
 
         self.in_processing_instructions = 1
@@ -1333,7 +1328,7 @@ class Parser:
                     continue
 
                 # Check indent level
-                indent = indent_re.match(line)
+                indent = self.indent_re.match(line)
                 indlen = len(indent.group(0))
                 indtype = "ul"
                 numtype = None
@@ -1389,7 +1384,7 @@ class Parser:
                     self.in_table = 0
 
             # Scan line, format and write
-            scanning_re = self.in_pre and self.pre_scan_re or scan_re
+            scanning_re = self.in_pre and self.pre_scan_re or self.scan_re
             if '{{{' in line:
                 self.in_nested_pre += 1
             formatted_line = self.scan(scanning_re, line, inhibit_p=inhibit_p)
