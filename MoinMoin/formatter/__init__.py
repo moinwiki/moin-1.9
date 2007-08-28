@@ -304,10 +304,19 @@ class FormatterBase:
 
     # Dynamic stuff / Plugins ############################################
 
-    def macro(self, macro_obj, name, args):
+    def macro(self, macro_obj, name, args, markup=None):
         # call the macro
-        return macro_obj.execute(name, args)
-
+        try:
+            return macro_obj.execute(name, args)
+        except ImportError, err:
+            errmsg = unicode(err)
+            if markup:
+                errmsg = wikiutil.escape(errmsg)
+                return (self.span(1, title=errmsg) +
+                        self.text(markup) +
+                        self.span(0))
+            else:
+                return self.text(errmsg)
     def _get_bang_args(self, line):
         if line.startswith('#!'):
             try:

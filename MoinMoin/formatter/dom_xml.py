@@ -203,7 +203,7 @@ class Formatter(FormatterBase):
         kw['pagename'] = pagename
         return self._set_tag('interwiki', on, **kw)
 
-    def macro(self, macro_obj, name, args):
+    def macro(self, macro_obj, name, args, markup=None):
         # call the macro
         return self._add_tag('macro', name=name, args=(args or ''))
 
