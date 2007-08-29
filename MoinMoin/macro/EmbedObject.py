@@ -1,5 +1,5 @@
 # -*- coding: iso-8859-1 -*-
-""" 
+"""
     MoinMoin - EmbedObject Macro
 
     This macro is used to embed an object into a wiki page. Optionally, the
@@ -11,7 +11,7 @@
     @copyright: 2006-2007 MoinMoin:ReimarBauer,
                 2006 TomSi,
                 2007 OliverSiemoneit
-                
+
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -165,7 +165,7 @@ class EmbedObject:
 <param name="autostart" value="%(autostart)s">
 <param name="play" value="%(play)s">
 <param name="loop" value="%(loop)s">
-<param name="menu" value="%(menu)s"> 
+<param name="menu" value="%(menu)s">
 <p>%(alt)s</p>
 </object>''' % {
     "width": self.width,
@@ -203,8 +203,8 @@ class EmbedObject:
             mt = wikiutil.MimeType(filename=fname)
             mimestr = "%s/%s" % (mt.major, mt.minor, )
         else:
-             mt = wikiutil.MimeType(filename=self.guess_filename)
-             url = self.target
+            mt = wikiutil.MimeType(filename=self.guess_filename)
+            url = self.target
 
         # XXX Should better use formatter.embed if available?
         return self.macro.formatter.rawHTML(self.embed(mt, url))
