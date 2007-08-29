@@ -64,14 +64,14 @@ class TOCFormatter(FormatterBase):
             self.collected_headings.append([depth, id, u''])
         return ''
 
-    def macro(self, macro_obj, name, args):
+    def macro(self, macro_obj, name, args, markup=None):
         try:
             # plugins that are defined in the macro class itself
             # can't generate headings this way, but that's fine
             gen_headings = wikiutil.importPlugin(self.request.cfg, 'macro',
                                                  name, 'generates_headings')
             if gen_headings:
-                return FormatterBase.macro(self, macro_obj, name, args)
+                return FormatterBase.macro(self, macro_obj, name, args, markup)
         except (wikiutil.PluginMissingError, wikiutil.PluginAttributeError):
             pass
         return ''
