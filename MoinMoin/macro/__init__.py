@@ -392,6 +392,8 @@ class Macro:
 
     def macro_GetVal(self, page=None, key=None):
         page = wikiutil.get_unicode(self.request, page, 'page')
+        if not self.request.user.may.read(page):
+            raise ValueError("You don't have enough rights on this page")
         key = wikiutil.get_unicode(self.request, key, 'key')
         if page is None or key is None:
             raise ValueError("You need to give: pagename, key")
