@@ -1,124 +1,17 @@
 # -*- coding: iso-8859-1 -*-
-"""
+""" 
     MoinMoin - EmbedObject Macro
 
-    PURPOSE:
-        This macro is used to embed an object into a wiki page. Optionally, the
-        size of the object can get adjusted. Further keywords are dependent on
-        the kind of application.
+    This macro is used to embed an object into a wiki page. Optionally, the
+    size of the object can get adjusted. Further keywords are dependent on
+    the kind of application.
 
-    CALLING SEQUENCE:
-        <<EmbedObject(attachment[,width=width][,height=height][,alt=Embedded mimetpye/xy])>>
+    <<EmbedObject(attachment[,width=width][,height=height][,alt=Embedded mimetpye/xy])>>
 
-    SUPPORTED MIMETYPES:
-         application/x-shockwave-flash
-         application/x-dvi
-         application/postscript
-         application/pdf
-         application/ogg
-         application/vnd.visio
-
-         image/x-ms-bmp
-         image/svg+xml
-         image/tiff
-         image/x-photoshop
-
-         audio/mpeg
-         audio/midi
-         audio/x-wav
-
-         video/fli
-         video/mpeg
-         video/quicktime
-         video/x-msvideo
-
-         chemical/x-pdb
-
-         x-world/x-vrml
-
-    INPUTS:
-        attachment: name of attachment
-
-    KEYWORD PARAMETERS:
-
-        Dependent on the mimetype class a different set of keywords is used from the defaults
-
-           width = ""
-           height = ""
-           alt = "Embedded mimetpye/xy"
-           type = mime_type
-           play = false
-           loop = false
-           quality = high
-           op = true
-           repeat = false
-           autostart = false
-           menu = true
-
-
-        All do use width, height, mime_type, alt
-
-        in addition:
-           'video' do use  repeat, autostart, menu, op
-           'audio' do use   play, repeat, autostart, op, hidden
-                   the default width is 60 and default height is 20
-           'application' do use play, menu, autostart
-
-        Note: Please do provide always a sensible alt text for the embedded object which
-        gives a short description of the visually or acoustically presented content so
-        that visually and acoustically impaired people can at least get a clue of what's
-        going on in this "black box". By default alt is set to "Embedded mimetpye/xy" for
-        people that forget to set an alt. However this default alt text is not a sensible
-        one since it does not describe the content really but only the type of content.
-        Compare these alt texts: "Embedded application/pdf" vs. "MoinMoin Tutorial embedded
-        as PDF file"
-
-    EXAMPLE:
-        <<EmbedObject>>
-        <<EmbedObject(example.swf,alt=A flash movie showing the rotating moin logo)>>
-        <<EmbedObject(example.mid,alt=Background sound of wikipage: oceanwaves)>>
-        <<EmbedObject(example.pdf)>>
-        <<EmbedObject(example.svg)>>
-        <<EmbedObject(example.mp3)>>
-        <<EmbedObject(example.vss)>>
-
-        <<EmbedObject(example.swf,width=637,height=392)>>
-        <<EmbedObject(SlideShow/example.swf,width=637,height=392)>>
-        <<EmbedObject(SlideShow/example.swf,width=637,height=392)>>
-        <<EmbedObject(SlideShow/example.swf,width=637,height=392,play=true,loop=false)>>
-        <<EmbedObject(SlideShow/example.swf,width=637,height=392,quality=low)>>
-
-
-    PROCEDURE:
-        If the attachment file isn't uploaded yet the attachment line will be shown.
-        If you give only one size argument, e.g. width only, the other one will be calculated.
-
-        By the swftools it is possible to get the swf size returned. I don't know if it is
-        possible to get sizes for svg, pdf and others detected too, that's the reason why
-        I haven't added it by now.
-
-        Please add needed mimetypes as objects.
-
-
-    RESTRICTIONS:
-        Some mimetypes do ignore all used keywords. May be they do use different names.
-
-
-    MODIFICATION HISTORY:
-        initial version: 1.5.0-1
-        svg was added by AndrewArmstrong
-        2006-05-04 TomSi: added mp3 support
-        2006-05-09 RB code refactored, fixed a taintfilename bug
-        2006-06-29 visio from OwenJones added but not tested,
-                   RB code reviewed, taintfile removed
-        2006-10-01 RB code refactored
-        2006-10-05 RB bug fixed closing " at height added
-        2006-10-08 RB type is needed on some platforms, some more keywords added
-        2007-02-10 OliverSiemoneit: alt and noembed tags added for AccessibleMoin; fixed
-                   output abstraction violation.
-        2007-04-08: RB refactored / optimisation
-
-    @copyright: 2006-2007 MoinMoin:ReimarBauer
+    @copyright: 2006-2007 MoinMoin:ReimarBauer,
+                2006 TomSi,
+                2007 OliverSiemoneit
+                
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -133,11 +26,11 @@ class EmbedObject:
         self.request = macro.request
         self.formatter = macro.formatter
         self.args = args
-
         self.width = ""
         self.height = ""
         self.alt = ""
         self.play = "false"
+        self.stop = "true"
         self.loop = "false"
         self.quality = "high"
         self.op = "true"
@@ -146,7 +39,10 @@ class EmbedObject:
         self.align = "center"
         self.hidden = "false"
         self.menu = "true"
+        self.wmode = "transparent"
         self.target = None
+        self.align = "middle"
+        self.guess_filename = 'Probably.swf'
 
         if args:
             args = args.split(',')
@@ -165,6 +61,11 @@ class EmbedObject:
                     argc -= kw_count
             self.target = args[0]
 
+    def _is_URL(self, text):
+        """ Answer true if text is an URL.
+            The method used here is pretty dumb. Improvements are welcome.
+        """
+        return '://' in text
 
     def embed(self, mt, url):
         _ = self._
@@ -190,50 +91,65 @@ class EmbedObject:
 
         if mt.major == 'video':
             return '''
-<OBJECT>
-<EMBED SRC="%(url)s" WIDTH="%(width)s" HEIGHT="%(height)s" REPEAT="%(repeat)s" AUTOSTART="%(autostart)s" OP="%(op)s" MENU="%(menu)s" TYPE="%(type)s"></EMBED>
-<NOEMBED>
-<p>%(alt)s</p>
-</NOEMBED>
-</OBJECT>''' % {
+<object data="%(url)s" type="%(type)s" width="%(width)s" height="%(height)s" align="%(align)s" standby="%(alt)s" stop="%(stop)s">
+<param name="wmode" value="%(wmode)s" valuetype="data">
+<param name="movie" value="%(url)s" valuetype="data">
+<param name="play" value="%(play)s" valuetype="data">
+<param name="stop" value="%(stop)s" valuetype="data">
+<param name="repeat" value="%(repeat)s" valuetype="data">
+<param name="autostart" value="%(autostart)s" valuetype="data">
+<param name="op" value="%(op)s" valuetype="data">
+<param name="menu" value="%(menu)s" valuetype="data">
+%(alt)s
+</object>''' % {
     "width": self.width,
     "height": self.height,
     "url": url,
+    "play": self.play,
+    "stop": self.stop,
+    "align": self.align,
     "repeat": self.repeat,
     "autostart": self.autostart,
     "op": self.op,
     "type": mime_type,
     "menu": self.menu,
+    "wmode": self.wmode,
     "alt": self.alt,
 }
 
         if mt.major in ['image', 'chemical', 'x-world']:
             return '''
-<OBJECT>
-<EMBED SRC="%(url)s" WIDTH="%(width)s" HEIGHT="%(height)s" TYPE="%(type)s"></EMBED>
-<NOEMBED>
+<object data="%(url)s" width="%(width)s" height="%(height)s" type="%(type)s"  align="%(align)s">
+<param name="%(major)s" value="%(url)s">
 <p>%(alt)s</p>
-</NOEMBED>
-</OBJECT>''' % {
+</object>''' % {
     "width": self.width,
     "height": self.height,
     "url": url,
+    "align": self.align,
     "type": mime_type,
+    "major": mt.major,
     "alt": self.alt,
 }
 
         if mt.major == 'audio':
             return '''
-<OBJECT>
-<EMBED SRC="%(url)s" WIDTH="%(width)s" HEIGHT="%(height)s" REPEAT="%(repeat)s" AUTOSTART="%(autostart)s" OP="%(op)s" PLAY="%(play)s" HIDDEN="%(hidden)s" TYPE="%(type)s"></EMBED>
-<NOEMBED>
+<object data="%(url)s" width="%(width)s" height="%(height)s" type="%(type)s"  align="%(align)s">
+<param name="audio" value="%(url)s">
+<param name="repeat" value="%(repeat)s">
+<param name="autostart" value="%(autostart)s">
+<param name="op" value="%(op)s">
+<param name="play" value="%(play)s">
+<param name="stop" value="%(stop)s" valuetype="data">
+<param name="hidden" value="%(hidden)s">
 <p>%(alt)s</p>
-</NOEMBED>
 </OBJECT>''' % {
     "width": self.width or "60",
     "height": self.height or "20",
     "url": url,
+    "align": self.align,
     "play": self.play,
+    "stop": self.stop,
     "repeat": self.repeat,
     "autostart": self.autostart,
     "op": self.op,
@@ -244,48 +160,55 @@ class EmbedObject:
 
         if mt.major == 'application':
             return '''
-<OBJECT>
-<EMBED SRC="%(url)s" WIDTH="%(width)s" HEIGHT="%(height)s" AUTOSTART="%(autostart)s" PLAY="%(play)s" LOOP="%(loop)s" MENU="%(menu)s" TYPE="%(type)s"> </EMBED>
-<NOEMBED>
+<object data="%(url)s" width="%(width)s" height="%(height)s" type="%(type)s"  align="%(align)s">
+<param name="wmode" value="%(wmode)s" valuetype="data">
+<param name="autostart" value="%(autostart)s">
+<param name="play" value="%(play)s">
+<param name="loop" value="%(loop)s">
+<param name="menu" value="%(menu)s"> 
 <p>%(alt)s</p>
-</NOEMBED>
-</OBJECT>''' % {
+</object>''' % {
     "width": self.width,
     "height": self.height,
     "url": url,
+    "align": self.align,
     "autostart": self.autostart,
     "play": self.play,
     "loop": self.loop,
     "type": mime_type,
     "menu": self.menu,
+    "wmode": self.wmode,
     "alt": self.alt,
 }
-
 
     def render(self):
         _ = self._
 
         if not self.target:
-            msg = _('Not enough arguments to EmbedObject macro! Try <<EmbedObject(attachment [,width=width] [,height=height] [,alt=Embedded mimetpye/xy])>>', formatted=False)
+            msg = _('Not enough arguments to EmbedObject macro! Try [[EmbedObject(attachment [,width=width] [,height=height] [,alt=Embedded mimetpye/xy])]]', formatted=False)
             return "%s%s%s" % (self.formatter.sysmsg(1), self.formatter.text(msg), self.formatter.sysmsg(0))
 
-        pagename, fname = AttachFile.absoluteName(self.target, self.formatter.page.page_name)
+        if not self._is_URL(self.target):
+            pagename, fname = AttachFile.absoluteName(self.target, self.formatter.page.page_name)
 
-        if not AttachFile.exists(self.request, pagename, fname):
-            linktext = _('Upload new attachment "%(filename)s"')
-            return wikiutil.link_tag(self.request,
-                ('%s?action=AttachFile&rename=%s' % (
-                wikiutil.quoteWikinameURL(pagename),
-                wikiutil.url_quote_plus(fname))),
-                linktext % {'filename': fname})
+            if not AttachFile.exists(self.request, pagename, fname):
+                linktext = _('Upload new attachment "%(filename)s"')
+                return wikiutil.link_tag(self.request, ('%s?action=AttachFile&rename=%s' % (
+                                                         wikiutil.quoteWikinameURL(pagename),
+                                                         wikiutil.url_quote_plus(fname))),
+                                                         linktext % {'filename': fname})
 
-        url = AttachFile.getAttachUrl(pagename, fname, self.request)
+            url = AttachFile.getAttachUrl(pagename, fname, self.request)
 
-        mt = wikiutil.MimeType(filename=fname)
-        mimestr = "%s/%s" % (mt.major, mt.minor, )
+            mt = wikiutil.MimeType(filename=fname)
+            mimestr = "%s/%s" % (mt.major, mt.minor, )
+        else:
+             mt = wikiutil.MimeType(filename=self.guess_filename)
+             url = self.target
+
         # XXX Should better use formatter.embed if available?
         return self.macro.formatter.rawHTML(self.embed(mt, url))
 
-
 def execute(macro, args):
     return EmbedObject(macro, args).render()
+
