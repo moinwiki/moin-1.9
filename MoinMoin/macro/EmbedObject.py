@@ -204,7 +204,7 @@ class EmbedObject:
             mimestr = "%s/%s" % (mt.major, mt.minor, )
         else:
             mt = wikiutil.MimeType(filename=self.guess_filename)
-            url = self.target
+            url = wikiutil.escape(self.target)
 
         # XXX Should better use formatter.embed if available?
         return self.macro.formatter.rawHTML(self.embed(mt, url))
