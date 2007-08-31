@@ -188,7 +188,7 @@ class Daemon:
         os.setsid()
         if os.fork():   # launch child and...
             os._exit(0) # kill off parent again.
-        os.umask(077)
+        os.umask(0077)
         null = os.open('/dev/null', os.O_RDWR)
         for i in range(3):
             try:

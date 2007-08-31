@@ -132,7 +132,7 @@ class MoinWriter(html4css1.Writer):
         self.nodes.append(node)
         return True
 
-    wiki_resolver.priority = 001
+    wiki_resolver.priority = 1
 
     def __init__(self, formatter, request):
         html4css1.Writer.__init__(self)
