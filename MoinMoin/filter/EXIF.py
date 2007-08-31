@@ -994,12 +994,12 @@ class EXIF_header:
         # not at the start of the makernote, it's probably type 2, since some
         # cameras work that way.
         if make in ('NIKON', 'NIKON CORPORATION'):
-            if note.values[0:7] == [78, 105, 107, 111, 110, 00, 01]:
+            if note.values[0:7] == [78, 105, 107, 111, 110, 0, 1]:
                 if self.debug:
                     print "Looks like a type 1 Nikon MakerNote."
                 self.dump_IFD(note.field_offset+8, 'MakerNote',
                               dict=MAKERNOTE_NIKON_OLDER_TAGS)
-            elif note.values[0:7] == [78, 105, 107, 111, 110, 00, 02]:
+            elif note.values[0:7] == [78, 105, 107, 111, 110, 0, 2]:
                 if self.debug:
                     print "Looks like a labeled type 2 Nikon MakerNote"
                 if note.values[12:14] != [0, 42] and note.values[12:14] != [42L, 0L]:
