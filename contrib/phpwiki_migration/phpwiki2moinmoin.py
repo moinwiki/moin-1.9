@@ -184,7 +184,7 @@ def lineparser(text, markup):
 
         # pictures
         p = re.compile('^\s*\[(http:.*(png|jpg|gif))\]', re.MULTILINE)
-        text = p.sub(r'\n\1', text)
+        text = p.sub(r'\n{{\1}}', text)
 
         # links
         # the links like [http://]
@@ -193,32 +193,32 @@ def lineparser(text, markup):
 
         # the [links like this]
         p = re.compile('(?<!~|#)\[([^]\|]*)\]', re.MULTILINE)
-        text = p.sub(r'["\1"]', text)
+        text = p.sub(r'[[\1]]', text)
 
         # links like [foo | http://...]
         q = re.compile('(?<!~|#)\[([^]#]*?)\s*\|\s*([^]#\s]+?://[^]\s]+?)\]', re.MULTILINE)
-        text = q.sub(r'[\2 \1]', text)
+        text = q.sub(r'[[\2|\1]]', text)
 
         # [fooo | bar]
         p = re.compile('(?<!~|#)\[([^]]*?)\s*\|\s*([^]\s]+?)\]', re.MULTILINE)
-        text = p.sub(r'[:\2:\1]', text)
+        text = p.sub(r'[[\2|\1]]', text)
 
         # XXX: the following constructs are broken. I don't know how
         # to express that in Moin
         # [OtherPage#foo] [named|OtherPage#foo]
 
         # anchors
-        # #[foo] => [[Anchor(foo)]]foo
-        # #[|foo] => [[Anchor(foo)]]
-        # #[howdy|foo] => [[Anchor(foo)]]howdy
+        # #[foo] => <<Anchor(foo)>>foo
+        # #[|foo] => <<Anchor(foo)>>
+        # #[howdy|foo] => <<Anchor(foo)>>howdy
         #
         # rest should just go along
         p = re.compile('#\[([^]|]*)\]', re.MULTILINE)
-        text = p.sub(r'[[Anchor(\1)]]\1', text)
+        text = p.sub(r'<<Anchor(\1)>>\1', text)
         p = re.compile('#\[\|+([^]\|]*)\]', re.MULTILINE)
-        text = p.sub(r'[[Anchor(\1)]]', text)
+        text = p.sub(r'<<Anchor(\1)>>', text)
         p = re.compile('#\[([^]\|]*)\|+([^]\|]*)\]', re.MULTILINE)
-        text = p.sub(r'[[Anchor(\2)]]\1', text)
+        text = p.sub(r'<<Anchor(\2)>>\1', text)
 
         # indented text
         # this might work for old style
@@ -279,21 +279,21 @@ def lineparser(text, markup):
 
         # calendar plugin
         p = re.compile('<\?plugin Calendar month=(\d*) year=(\d*)\?>', re.MULTILINE)
-        text = p.sub(r'[[MonthCalendar(,\2,\1)]]', text)
+        text = p.sub(r'<<MonthCalendar(,\2,\1)>>', text)
         p = re.compile('<\?plugin Calendar\?>', re.MULTILINE)
-        text = p.sub(r'[[MonthCalendar]]', text)
+        text = p.sub(r'<<MonthCalendar>>', text)
 
         # BackLinks
         p = re.compile('<\?plugin\s+BackLinks.*?\?>', re.MULTILINE)
-        text = p.sub(r"[[FullSearch()]]", text)
+        text = p.sub(r"<<FullSearch()>>", text)
 
         # FullSearch
         p = re.compile('<\?plugin\s+FullTextSearch.*?(s=.*?)?\?>', re.MULTILINE)
-        text = p.sub(r'[[FullSearch()]]', text)
+        text = p.sub(r'<<FullSearch()>>', text)
 
         # RecentChanges
         p = re.compile('<\?plugin\s+RecentChanges.*?\?>', re.MULTILINE)
-        text = p.sub(r'[[RecentChanges]]', text)
+        text = p.sub(r'<<RecentChanges>>', text)
 
         # tables (old style)
         p = re.compile('^(\|.*)$', re.MULTILINE)
@@ -316,7 +316,7 @@ def lineparser(text, markup):
 
         # line breaks
         p = re.compile('(?<!~)%%%', re.MULTILINE)
-        text = p.sub(r'[[BR]]', text)
+        text = p.sub(r'<<BR>>', text)
 
         # unescape
         # This must stay the last filter or things will break real bad
