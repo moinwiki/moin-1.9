@@ -4,7 +4,7 @@
 
     This macro is used to embed an object into a wiki page. Optionally, the
     size of the object can get adjusted. Further keywords are dependent on
-    the kind of application.
+    the kind of application, see HelpOnMacros/EmbedObject
 
     <<EmbedObject(attachment[,width=width][,height=height][,alt=Embedded mimetpye/xy])>>
 
@@ -42,7 +42,7 @@ class EmbedObject:
         self.wmode = "transparent"
         self.target = None
         self.align = "middle"
-        self.guess_filename = 'Probably.swf'
+        self.url_mimetype = None
 
         if args:
             args = args.split(',')
@@ -185,7 +185,7 @@ class EmbedObject:
         _ = self._
 
         if not self.target:
-            msg = _('Not enough arguments to EmbedObject macro! Try [[EmbedObject(attachment [,width=width] [,height=height] [,alt=Embedded mimetpye/xy])]]', formatted=False)
+            msg = _('Not enough arguments to EmbedObject macro! Try <<EmbedObject(attachment [,width=width] [,height=height] [,alt=Embedded mimetpye/xy])>>', formatted=False)
             return "%s%s%s" % (self.formatter.sysmsg(1), self.formatter.text(msg), self.formatter.sysmsg(0))
 
         if not self._is_URL(self.target):
@@ -201,10 +201,13 @@ class EmbedObject:
             url = AttachFile.getAttachUrl(pagename, fname, self.request)
 
             mt = wikiutil.MimeType(filename=fname)
-            mimestr = "%s/%s" % (mt.major, mt.minor, )
         else:
-            mt = wikiutil.MimeType(filename=self.guess_filename)
-            url = wikiutil.escape(self.target)
+            if not self.url_mimetype:
+                return _('Not enough arguments to EmbedObject macro! Try <<EmbedObject(url, url_mimetype [,width=width] [,height=height] [,alt=Embedded mimetpye/xy])>>', formatted=False)
+            else:
+                mt = wikiutil.MimeType() # initialize dict
+                mt.major, mt.minor = self.url_mimetype.split('/')
+                url = wikiutil.escape(self.target)
 
         # XXX Should better use formatter.embed if available?
         return self.macro.formatter.rawHTML(self.embed(mt, url))
