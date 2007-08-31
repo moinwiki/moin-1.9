@@ -326,7 +326,7 @@ class MoinTranslator(html4css1.HTMLTranslator):
             link scheme is used for, so for now it is handled here.
 
             Also included here is a hack to allow MoinMoin macros. This routine
-            checks for a link which starts with "[[". This link is passed to the
+            checks for a link which starts with "<<". This link is passed to the
             MoinMoin formatter and the resulting markup is inserted into the
             document in the place of the original link reference.
         """
@@ -338,9 +338,8 @@ class MoinTranslator(html4css1.HTMLTranslator):
                 prefix, link = refuri.lstrip().split(':', 1)
 
             # First see if MoinMoin should handle completely. Exits through add_wiki_markup.
-            if ((refuri.startswith('[[') and refuri.endswith(']]')) or
-                    (prefix == 'drawing') or
-                    (prefix == 'inline')):
+            if ((refuri.startswith('<<') and refuri.endswith('>>')) or
+                    (prefix == 'drawing')):
                 self.process_wiki_text(refuri)
                 self.wiki_text = self.fixup_wiki_formatting(self.wiki_text)
                 self.add_wiki_markup()
@@ -584,7 +583,7 @@ class MoinDirectives:
     # Add additional macro directive.
     # This allows MoinMoin macros to be used either by using the directive
     # directly or by using the substitution syntax. Much cleaner than using the
-    # reference hack (`[[SomeMacro]]`_). This however simply adds a node to the
+    # reference hack (`<<SomeMacro>>`_). This however simply adds a node to the
     # document tree which is a reference, but through a much better user
     # interface.
     def macro(self, name, arguments, options, content, lineno,
@@ -592,10 +591,10 @@ class MoinDirectives:
         # content contains macro to be called
         if len(content):
             # Allow either with or without brackets
-            if content[0].startswith('[['):
+            if content[0].startswith('<<'):
                 macro = content[0]
             else:
-                macro = '[[%s]]' % content[0]
+                macro = '<<%s>>' % content[0]
             ref = reference(macro, refuri=macro)
             ref['name'] = macro
             return [ref]
