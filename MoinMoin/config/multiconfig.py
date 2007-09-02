@@ -658,9 +658,6 @@ reStructuredText Quick Reference
     unzip_attachments_space = 200.0 * 1000 ** 2
     unzip_attachments_count = 101 # 1 zip file + 100 files contained in it
 
-    xmlrpc_putpage_enabled = False # if False, putpage will write to a test page only
-    xmlrpc_putpage_trusted_only = True # if True, you will need to be http auth authenticated
-
     SecurityPolicy = None
 
     def __init__(self, siteid):

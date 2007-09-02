@@ -2,9 +2,6 @@
 """
     MoinMoin - Wiki XMLRPC v1 and v2 Interface + plugin extensions
 
-    If you want to use wikirpc function "putPage", read the comments in
-    xmlrpc_putPage or it won't work!
-
     Parts of this code are based on Juergen Hermann's wikirpc.py,
     Les Orchard's "xmlrpc.cgi" and further work by Gustavo Niemeyer.
 
@@ -512,32 +509,15 @@ class XmlRpcBase:
         @rtype: bool
         @return: true on success
         """
-        # READ THIS OR IT WILL NOT WORK ===================================
 
-        # we use a test page instead of using the requested pagename, if
-        # xmlrpc_putpage_enabled was not set in wikiconfig.
+        pagename = self._instr(pagename)
 
-        if self.request.cfg.xmlrpc_putpage_enabled:
-            pagename = self._instr(pagename)
-        else:
-            pagename = u"PutPageTestPage"
+        # Only authenticated (trusted) users may use putPage!
+        # Trusted currently means being authenticated by http auth or wiki auth.
+        # You could control access to pages by using ACLs
 
-        # By default, only authenticated (trusted) users may use putPage!
-        # Trusted currently means being authenticated by http auth.
-        # if you also want untrusted users to be able to write pages, then
-        # change your wikiconfig to have xmlrpc_putpage_trusted_only = 0
-        # and make very very sure that nobody untrusted can access your wiki
-        # via network or somebody will raid your wiki some day!
-
-        if (self.request.cfg.xmlrpc_putpage_trusted_only and
-            not self.request.user.auth_method in self.request.cfg.trusted_auth_methods):
-            return xmlrpclib.Fault(1, "You are not allowed to edit this page")
-
-        # also check ACLs
         if not self.request.user.may.write(pagename):
             return xmlrpclib.Fault(1, "You are not allowed to edit this page")
-
-        # =================================================================
 
         page = PageEditor(self.request, pagename)
         try:
@@ -1001,11 +981,6 @@ class XmlRpcBase:
         if not self.request.user.may.read(pagename):
             return self.notAllowedFault()
 
-        if not self.request.cfg.xmlrpc_putpage_enabled:
-            return xmlrpclib.Boolean(0)
-        if (self.request.cfg.xmlrpc_putpage_trusted_only and
-            not self.request.user.auth_method in self.request.cfg.trusted_auth_methods):
-            return xmlrpclib.Fault(1, "You are not allowed to edit this page")
         # also check ACLs
         if not self.request.user.may.write(pagename):
             return xmlrpclib.Fault(1, "You are not allowed to edit this page")

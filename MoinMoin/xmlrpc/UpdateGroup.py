@@ -22,21 +22,8 @@ def execute(self, groupname, groupcomment, memberlist, pageacls=u"All:read"):
     @rtype: bool
     @return: true on success
     """
-    if self.request.cfg.xmlrpc_putpage_enabled:
-        pagename = self._instr(groupname)
-    else:
-        pagename = u"TestUpdateGroup"
 
-    # By default, only authenticated (trusted) users may use putPage!
-    # Trusted currently means being authenticated by http auth.
-    # if you also want untrusted users to be able to write pages, then
-    # change your wikiconfig to have xmlrpc_putpage_trusted_only = 0
-    # and make very very sure that nobody untrusted can access your wiki
-    # via network or somebody will raid your wiki some day!
-
-    if (self.request.cfg.xmlrpc_putpage_trusted_only and
-        not self.request.user.auth_method in self.request.cfg.trusted_auth_methods):
-        return xmlrpclib.Fault(1, "You are not allowed to edit this page")
+    pagename = self._instr(groupname)
 
     # also check ACLs
     if not self.request.user.may.write(pagename):
