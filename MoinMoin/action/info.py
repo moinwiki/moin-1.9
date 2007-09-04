@@ -17,10 +17,11 @@ from MoinMoin.widget import html
 def execute(pagename, request):
     """ show misc. infos about a page """
     _ = request.getText
+
     if not request.user.may.read(pagename):
         Page(request, pagename).send_page()
         return
-    
+
     if not Page(request, pagename).exists():
         Page(request, pagename).send_page(msg= _('The page %s does not exist.' % pagename ))
         return
