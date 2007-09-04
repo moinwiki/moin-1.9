@@ -85,7 +85,7 @@ def get_data(pagename, request, filterpage=None):
                 break
             # XXX Bug: event[2].get('pagename') -> u'Aktuelle%C4nderungen' 8(
             eventpage = event[2].get('pagename', '')
-            if filterpage and eventpage != filterpage:
+            if filterpage and wikiutil.url_quote_plus(eventpage) != filterpage:
                 continue
             time_tuple = request.user.getTime(wikiutil.version2timestamp(event[0]))
             day = tuple(time_tuple[0:3])
