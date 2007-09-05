@@ -113,15 +113,18 @@ class XmlRpcBase:
     def process(self):
         """ xmlrpc v1 and v2 dispatcher """
         try:
-            data = self.request.read()
-            params, method = xmlrpclib.loads(data)
+            if 'xmlrpc' in self.request.cfg.actions_excluded:
+                # we do not handle xmlrpc v1 and v2 differently
+                response = xmlrpclib.Fault(1, "This moin wiki does not allow xmlrpc method calls.")
+            else:
+                data = self.request.read()
+                params, method = xmlrpclib.loads(data)
 
-            if _debug:
-                sys.stderr.write('- XMLRPC ' + '-' * 70 + '\n')
-                sys.stderr.write('%s(%s)\n\n' % (method, repr(params)))
+                if _debug:
+                    sys.stderr.write('- XMLRPC ' + '-' * 70 + '\n')
+                    sys.stderr.write('%s(%s)\n\n' % (method, repr(params)))
 
-            response = self.dispatch(method, params)
-
+                response = self.dispatch(method, params)
         except:
             # report exception back to server
             response = xmlrpclib.dumps(xmlrpclib.Fault(1, self._dump_exc()))
