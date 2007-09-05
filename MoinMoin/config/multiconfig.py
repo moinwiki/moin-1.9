@@ -219,7 +219,7 @@ class DefaultConfig:
     acl_rights_valid = ['read', 'write', 'delete', 'revert', 'admin']
     acl_hierarchic = False
 
-    actions_excluded = [] # ['DeletePage', 'AttachFile', 'RenamePage', 'test', ]
+    actions_excluded = ['xmlrpc'] # ['DeletePage', 'AttachFile', 'RenamePage', 'test', ]
     allow_xslt = False
     antispam_master_url = "http://moinmaster.wikiwikiweb.de:8000/?action=xmlrpc2"
     attachments = None # {'dir': path, 'url': url-prefix}
