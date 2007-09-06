@@ -83,7 +83,6 @@ def get_data(pagename, request, filterpage=None):
 
             if event[0] <= cache_date:
                 break
-            # XXX Bug: event[2].get('pagename') -> u'Aktuelle%C4nderungen' 8(
             eventpage = event[2].get('pagename', '')
             if filterpage and eventpage != filterpage:
                 continue
@@ -139,6 +138,7 @@ def text(pagename, request, params=''):
     filterpage = None
     if params.startswith('page='):
         params = params[len('page='):]
+        params = wikiutil.url_unquote(params, want_unicode=False)
         filterpage = wikiutil.decodeUserInput(params)
 
     if request and request.form and 'page' in request.form:
