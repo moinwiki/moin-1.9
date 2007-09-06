@@ -517,7 +517,7 @@ class Page(object):
         if log is None:
             from MoinMoin.logfile import editlog
             try:
-                logfile = editlog.EditLog(request, rootpage=self.page_name)
+                logfile = editlog.EditLog(request, rootpagename=self.page_name)
                 logfile.to_end()
                 log = logfile.previous()
             except StopIteration:
