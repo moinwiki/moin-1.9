@@ -121,15 +121,16 @@ class DataBrowserWidget(base.Widget):
         # add data
         self.data.reset()
         row = self.data.next()
-        filters = [None] * len(row)
+        if row is not None:
+            filters = [None] * len(row)
 
-        if havefilters:
-            for idx in range(len(row)):
-                name = '%sfilter%d' % (self.data_id, idx)
-                if name in self.request.form:
-                    filters[idx] = self.request.form[name][0]
-                    if filters[idx] == self._all:
-                        filters[idx] = None
+            if havefilters:
+                for idx in range(len(row)):
+                    name = '%sfilter%d' % (self.data_id, idx)
+                    if name in self.request.form:
+                        filters[idx] = self.request.form[name][0]
+                        if filters[idx] == self._all:
+                            filters[idx] = None
 
         while row:
             hidden = False
