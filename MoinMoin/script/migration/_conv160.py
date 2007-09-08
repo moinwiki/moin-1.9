@@ -2,7 +2,7 @@
 """
     MoinMoin - migration from 1.5.8 to 1.6.0 (creole link style)
 
-    What it should do when it is ready:
+    What it does:
 
     a) reverse underscore == blank stuff in pagenames (introducing this was a fault)
 
@@ -29,29 +29,7 @@
     c) users: move bookmarks from separate files into user profile
     d) users: generate new name[] for lists and name{} for dicts
 
-    TODO:
-        * currently it converts the last pagerev (good for diff -r)
-        * after debugging/testing is finished and it works perfect,
-        change this to create a new revision with the conversion results
-
-    DONE:
-        pass 1
-        * creating the rename.txt works
-        pass 2
-        * renaming of pages works
-         * renamed pagedirs
-         * renamed page names in global edit-log
-         * renamed page names in local edit-log
-         * renamed page names in event-log
-         * renamed pages in user subscribed pages
-         * renamed pages in user quicklinks
-        * renaming of attachments works
-         * renamed attachment files
-         * renamed attachment names in global edit-log
-         * renamed attachment names in local edit-log
-        * migrate separate user bookmark files into user profiles
-        * support new dict/list syntax in user profiles
-        * process page content / convert markup
+    e) kill all */MoinEditorBackup pages (replaced by drafts functionality)
 
     @copyright: 2007 by Thomas Waldmann
     @license: GNU GPL, see COPYING for details.
@@ -447,6 +425,8 @@ class DataConverter(object):
             p.read()
             if not p.revisions:
                 continue # we don't care for pages with no revisions (trash)
+            if pn.endswith('/MoinEditorBackup'):
+                continue # we don't care for old editor backups
             self.complete[('PAGE', pn)] = None
             if "_" in pn:
                 # log all pagenames with underscores
@@ -529,7 +509,9 @@ class DataConverter(object):
         self.init_dest()
         # copy pages
         pages_dir = opj(self.ddata, 'pages')
-        for page in self.pages.values():
+        for pn, page in self.pages.items():
+            if pn.endswith('/MoinEditorBackup'):
+                continue # we don't care for old editor backups
             page.copy(pages_dir, self.renames)
 
         # copy users
