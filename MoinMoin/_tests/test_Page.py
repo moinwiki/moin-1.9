@@ -45,7 +45,7 @@ class TestPage:
 
     def testGetRevList(self):
         page = Page(self.request, u"FrontPage")
-        assert page.getRevList() == [1]
+        assert 1 in page.getRevList()
 
     def testGetPageLinks(self):
         page = Page(self.request, u"FrontPage")
