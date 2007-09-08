@@ -452,8 +452,10 @@ class DataConverter(object):
     LIST_FIELDSEP = u'|' # in case | makes trouble, one can use \t tab char
 
     def save_list(self, fname, what):
+        what_sorted = what.keys()
+        what_sorted.sort()
         f = codecs.open(fname, 'w', 'utf-8')
-        for k in what:
+        for k in what_sorted:
             rtype, pn, fn = (k + (None, ))[:3]
             if rtype == 'PAGE':
                 line = (rtype, pn, pn)
