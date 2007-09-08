@@ -13,7 +13,7 @@ class Parser:
         Send plain text in a HTML <pre> element.
     """
 
-    ## specify extensions willing to handle (for inline:)
+    ## specify extensions willing to handle
     ## should be a list of extensions including the leading dot
     ## TODO: remove the leading dot from the extension. This is stupid.
     #extensions = ['.txt']
