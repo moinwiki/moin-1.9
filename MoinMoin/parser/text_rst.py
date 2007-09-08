@@ -407,7 +407,7 @@ class MoinTranslator(html4css1.HTMLTranslator):
             if not AttachFile.exists(self.request, self.request.page.page_name, attach_name):
                 # Attachment doesn't exist, MoinMoin should process it
                 if prefix == '':
-                    prefix = 'inline:'
+                    prefix = 'attachment:'
                 self.process_wiki_text(prefix + attach_name)
                 self.wiki_text = self.fixup_wiki_formatting(self.wiki_text)
                 self.add_wiki_markup()
