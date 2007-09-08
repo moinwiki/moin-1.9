@@ -101,11 +101,20 @@ class Parser:
     ])
     link_target_re = re.compile(link_target_rules, re.VERBOSE|re.UNICODE)
 
+    link_rule = r"""
+        (?P<link>
+            \[\[
+            (?P<link_target>.+?)\s*  # link target (eat trailing space)
+            (\|\s*(?P<link_desc>.+?)?\s*)? # link description (usually text, optional, strip space)
+            \]\]
+        )
+    """
+
     transclude_rule = r"""
         (?P<transclude>
             \{\{
             (?P<transclude_target>.+?)\s*  # usually image target (eat trailing space)
-            (\|\s*(?P<transclude_args>.+?)\s*)?  # usually image alt text (optional, strip space)
+            (\|\s*(?P<transclude_desc>.+?)?\s*)?  # usually image alt text (optional, strip space)
             \}\}
         )
     """
@@ -225,12 +234,9 @@ class Parser:
     )
 )|(?P<word>  # must come AFTER interwiki rule!
     %(word_rule)s  # CamelCase wiki words
-)|(?P<link>
-    \[\[
-    (?P<link_target>.+?)\s*  # link target (eat trailing space)
-    (\|\s*(?P<link_args>.+?)?\s*)? # link description (usually text, optional, strip space)
-    \]\]
 )|
+%(link_rule)s
+|
 %(transclude_rule)s
 |(?P<url>
     %(url_rule)s
@@ -297,6 +303,7 @@ class Parser:
         'ol_rule': ol_rule,
         'dl_rule': dl_rule,
         'word_rule': word_rule,
+        'link_rule': link_rule,
         'transclude_rule': transclude_rule,
         'u': config.chars_upper,
         'l': config.chars_lower,
@@ -569,24 +576,35 @@ class Parser:
     _url_scheme_repl = _url_repl
 
 
+    def _transclude_description(self, desc, default_text=''):
+        """ parse a string <desc> valid as transclude description (text, ...)
+            and return "formatted" content (we do not pass it through the text
+            formatter, but only through wikiutil.escape as we only use it as
+            alt/title text).
+
+            @param desc: the transclude description to parse
+            @param default_text: use this text if parsing desc returns nothing.
+        """
+        m = self.transclude_desc_re.match(desc)
+        if m:
+            if m.group('simple_text'):
+                desc = m.group('simple_text')
+        else:
+            desc = default_text
+        desc = wikiutil.escape(desc)
+        return desc
+
     def _transclude_repl(self, word, groups):
         """Handles transcluding content, usually embedding images."""
         target = groups.get('transclude_target', '').strip()
-        args = (groups.get('transclude_args', '') or '').strip()
+        desc = (groups.get('transclude_desc', '') or '').strip()
         target = wikiutil.url_unquote(target, want_unicode=True)
         m = self.link_target_re.match(target)
-        ma = self.transclude_desc_re.match(args)
-        desc = None
-        if ma:
-            if ma.group('simple_text'):
-                desc = ma.group('simple_text')
-                desc = wikiutil.escape(desc)
         if m:
             if m.group('extern_addr'):
                 scheme = m.group('extern_scheme')
                 target = m.group('extern_addr')
-                if not desc:
-                    desc = wikiutil.escape(target)
+                desc = self._transclude_description(desc, target)
                 if scheme.startswith('http'): # can also be https
                     # currently only supports ext. image inclusion
                     return self.formatter.image(src=target, alt=desc, title=desc, css_class='external_image')
@@ -604,20 +622,20 @@ class Parser:
             elif m.group('attach_scheme'):
                 scheme = m.group('attach_scheme')
                 url = wikiutil.url_unquote(m.group('attach_addr'), want_unicode=True)
-                if not desc:
-                    desc = wikiutil.escape(url)
                 if scheme == 'attachment':
                     mt = wikiutil.MimeType(filename=url)
                     if mt.major == 'text':
+                        desc = self._transclude_description(desc, url)
                         return self.formatter.attachment_inlined(url, desc)
                     elif mt.major == 'image':
+                        desc = self._transclude_description(desc, url)
                         return self.formatter.attachment_image(url, alt=desc, title=desc, css_class='image')
                     else:
                         from MoinMoin.action import AttachFile
                         pagename = self.formatter.page.page_name
                         href = AttachFile.getAttachUrl(pagename, url, self.request, escaped=0)
                         return (self.formatter.transclusion(1, data=href, type=mt.spoil()) +
-                                desc +
+                                self._transclude_description(desc, url) +
                                 self.formatter.transclusion(0))
 
                         #NOT USED CURRENTLY:
@@ -635,6 +653,7 @@ class Parser:
                             href = AttachFile.getAttachUrl(pagename, url, self.request, escaped=1)
                             return self.formatter.rawHTML(EmbedObject.embed(EmbedObject(macro, wikiutil.escape(url)), mt, href))
                 elif scheme == 'drawing':
+                    desc = self._transclude_description(desc, url)
                     return self.formatter.attachment_drawing(url, desc)
 
             elif m.group('page_name'):
@@ -642,7 +661,7 @@ class Parser:
                 page_name = m.group('page_name')
                 url = Page(self.request, page_name).url(self.request, querystr={'action': 'content', }, relative=False)
                 return (self.formatter.transclusion(1, data=url, type='text/html', width="100%") +
-                        desc +
+                        self._transclude_description(desc, page_name) +
                         self.formatter.transclusion(0))
                 #return u"Error: <<Include(%s,%s)>> emulation missing..." % (page_name, args)
 
@@ -654,17 +673,16 @@ class Parser:
                 url = wikiutil.join_wiki(wikiurl, wikitail)
                 url += '?action=content' # XXX moin specific
                 return (self.formatter.transclusion(1, data=url, type='text/html', width="100%") +
-                        desc +
+                        self._transclude_description(desc, page_name) +
                         self.formatter.transclusion(0))
                 #return u"Error: <<RemoteInclude(%s:%s,%s)>> still missing." % (wiki_name, page_name, args)
 
             else:
-                if not desc:
-                    desc = target
+                desc = self._transclude_description(desc, target)
                 return self.formatter.text('[[%s|%s]]' % (target, desc))
         return word +'???'
     _transclude_target_repl = _transclude_repl
-    _transclude_args_repl = _transclude_repl
+    _transclude_desc_repl = _transclude_repl
 
     def _link_description(self, desc, target='', default_text=''):
         """ parse a string <desc> valid as link description (text, transclusion, ...)
@@ -684,9 +702,9 @@ class Parser:
                 desc = self.formatter.text(desc)
             elif m.group('transclude'):
                 groupdict = m.groupdict()
-                if groupdict.get('transclude_args') is None:
+                if groupdict.get('transclude_desc') is None:
                     # if transcluded obj (image) has no description, use target for it
-                    groupdict['transclude_args'] = target
+                    groupdict['transclude_desc'] = target
                 desc = m.group('transclude')
                 desc = self._transclude_repl(desc, groupdict)
         else:
@@ -698,7 +716,7 @@ class Parser:
     def _link_repl(self, word, groups):
         """Handle [[target|text]] links."""
         target = groups.get('link_target', '')
-        desc = (groups.get('link_args', '') or '').strip()
+        desc = (groups.get('link_desc', '') or '').strip()
         mt = self.link_target_re.match(target)
         if mt:
             if mt.group('page_name'):
@@ -746,7 +764,7 @@ class Parser:
                     desc = '|' + desc
                 return self.formatter.text('[[%s%s]]' % (target, desc))
     _link_target_repl = _link_repl
-    _link_args_repl = _link_repl
+    _link_desc_repl = _link_repl
 
     def _email_repl(self, word, groups):
         """Handle email addresses (without a leading mailto:)."""
