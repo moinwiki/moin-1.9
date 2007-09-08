@@ -104,8 +104,11 @@ class Parser:
     link_rule = r"""
         (?P<link>
             \[\[
-            (?P<link_target>.+?)\s*  # link target (eat trailing space)
-            (\|\s*(?P<link_desc>.+?)?\s*)? # link description (usually text, optional, strip space)
+            \s*(?P<link_target>.+?)\s*  # link target (strip space)
+            (\|\s*(?P<link_desc>.+?)?\s*  # link description (usually text, optional, strip space)
+                (\|\s*(?P<link_params>.+?)?\s*  # link parameters (usually key="value" format, optional, strip space)
+                )?
+            )?
             \]\]
         )
     """
@@ -113,8 +116,11 @@ class Parser:
     transclude_rule = r"""
         (?P<transclude>
             \{\{
-            (?P<transclude_target>.+?)\s*  # usually image target (eat trailing space)
-            (\|\s*(?P<transclude_desc>.+?)?\s*)?  # usually image alt text (optional, strip space)
+            \s*(?P<transclude_target>.+?)\s*  # usually image target (strip space)
+            (\|\s*(?P<transclude_desc>.+?)?\s*  # usually image alt text (optional, strip space)
+                (\|\s*(?P<transclude_params>.+?)?\s*  # transclusion parameters (usually key="value" format, optional, strip space)
+                )?
+            )?
             \}\}
         )
     """
@@ -255,7 +261,7 @@ class Parser:
     >>
 )|(?P<heading>
     ^(?P<hmarker>=+)\s+  # some === at beginning of line, eat trailing blanks
-    (?P<heading_text>.*)  # capture heading text
+    (?P<heading_text>.*?)  # capture heading text
     \s+(?P=hmarker)\s$  # some === at end of line (matching amount as we have seen), eat blanks
 )|(?P<parser>
     \{\{\{
@@ -596,8 +602,9 @@ class Parser:
 
     def _transclude_repl(self, word, groups):
         """Handles transcluding content, usually embedding images."""
-        target = groups.get('transclude_target', '').strip()
-        desc = (groups.get('transclude_desc', '') or '').strip()
+        target = groups.get('transclude_target', '')
+        desc = groups.get('transclude_desc', '') or ''
+        params = groups.get('transclude_params', '') or ''
         target = wikiutil.url_unquote(target, want_unicode=True)
         m = self.link_target_re.match(target)
         if m:
@@ -683,6 +690,7 @@ class Parser:
         return word +'???'
     _transclude_target_repl = _transclude_repl
     _transclude_desc_repl = _transclude_repl
+    _transclude_params_repl = _transclude_repl
 
     def _link_description(self, desc, target='', default_text=''):
         """ parse a string <desc> valid as link description (text, transclusion, ...)
@@ -716,7 +724,8 @@ class Parser:
     def _link_repl(self, word, groups):
         """Handle [[target|text]] links."""
         target = groups.get('link_target', '')
-        desc = (groups.get('link_desc', '') or '').strip()
+        desc = groups.get('link_desc', '') or ''
+        params = groups.get('link_params', '') or ''
         mt = self.link_target_re.match(target)
         if mt:
             if mt.group('page_name'):
@@ -765,6 +774,7 @@ class Parser:
                 return self.formatter.text('[[%s%s]]' % (target, desc))
     _link_target_repl = _link_repl
     _link_desc_repl = _link_repl
+    _link_params_repl = _link_repl
 
     def _email_repl(self, word, groups):
         """Handle email addresses (without a leading mailto:)."""
@@ -1045,7 +1055,7 @@ class Parser:
 
     def _heading_repl(self, word, groups):
         """Handle section headings."""
-        heading_text = groups.get('heading_text', '').strip()
+        heading_text = groups.get('heading_text', '')
         depth = min(len(groups.get('hmarker')), 5)
         return ''.join([
             self._closeP(),
