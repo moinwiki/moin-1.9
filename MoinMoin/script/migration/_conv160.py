@@ -453,7 +453,7 @@ class DataConverter(object):
 
     def save_list(self, fname, what):
         what_sorted = what.keys()
-        what_sorted.sort()
+        what_sorted.sort(cmp=lambda x, y: cmp(x[1:], y[1:]))
         f = codecs.open(fname, 'w', 'utf-8')
         for k in what_sorted:
             rtype, pn, fn = (k + (None, ))[:3]
