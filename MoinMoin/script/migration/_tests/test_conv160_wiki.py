@@ -110,6 +110,14 @@ class TestWikiConversion:
 
             # macros
             ('[[BR]]', {}, '<<BR>>'),
+            ('[[FullSearch(wtf)]]', {}, '<<FullSearch(wtf)>>'),
+            ('[[ImageLink(test.png)]]', {}, '[[attachment:test.png|{{attachment:test.png}}]]'),
+            ('[[ImageLink(test.png,OtherPage)]]', {}, '[[OtherPage|{{attachment:test.png}}]]'),
+            ('[[ImageLink(test.png,OtherPage,width=123,height=456)]]', {}, '[[OtherPage|{{attachment:test.png||width=123, height=456}}]]'),
+            ('[[ImageLink(test.png,OtherPage,width=123,height=456,alt=alttext)]]', {}, '[[OtherPage|{{attachment:test.png|alttext|width=123, height=456}}]]'),
+            ('[[ImageLink(test.png,OtherPage,width=123,height=456,alt=alt text with blanks)]]', {}, '[[OtherPage|{{attachment:test.png|alt text with blanks|width=123, height=456}}]]'),
+            ('[[ImageLink(http://server/test.png,OtherPage,width=123,height=456)]]', {}, '[[OtherPage|{{http://server/test.png||width=123, height=456}}]]'),
+            ('[[ImageLink(http://server/test.png,http://server/,width=123)]]', {}, '[[http://server/|{{http://server/test.png||width=123}}]]'),
 
         ]
         for data, renames, expected in tests:
