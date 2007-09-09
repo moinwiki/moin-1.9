@@ -630,7 +630,9 @@ class Parser:
         target = wikiutil.url_unquote(target, want_unicode=True)
         desc = groups.get('transclude_desc', '') or ''
         params = groups.get('transclude_params', u'') or u''
-        acceptable_keys = ['width', 'height', 'title', 'alt', 'class', 'type', ]
+        acceptable_keys_img = ['class', 'title', 'longdesc', 'width', 'height', ] # no style because of JS
+        acceptable_keys_object = ['class', 'title', 'width', 'height', # no style because of JS
+                                  'type', 'standby', ] # we maybe need a hack for <PARAM> here
         m = self.link_target_re.match(target)
         if m:
             if m.group('extern_addr'):
@@ -641,7 +643,7 @@ class Parser:
                     # currently only supports ext. image inclusion
                     params = self._get_params(params,
                                               defaults={'class': 'external_image', 'alt': desc, 'title': desc, },
-                                              acceptable_keys=acceptable_keys)
+                                              acceptable_keys=acceptable_keys_img)
                     return self.formatter.image(src=target, **params)
                     # FF2 has a bug with target mimetype detection, it looks at the url path
                     # and expects to find some "filename extension" there (like .png) and this
@@ -666,7 +668,7 @@ class Parser:
                         desc = self._transclude_description(desc, url)
                         params = self._get_params(params,
                                                   defaults={'alt': desc, 'title': desc, },
-                                                  acceptable_keys=acceptable_keys)
+                                                  acceptable_keys=acceptable_keys_img)
                         return self.formatter.attachment_image(url, **params)
                     else:
                         from MoinMoin.action import AttachFile
@@ -674,7 +676,7 @@ class Parser:
                         href = AttachFile.getAttachUrl(pagename, url, self.request, escaped=0)
                         params = self._get_params(params,
                                                   defaults={'alt': desc, 'title': desc, },
-                                                  acceptable_keys=acceptable_keys)
+                                                  acceptable_keys=acceptable_keys_object)
                         return (self.formatter.transclusion(1, data=href, type=mt.spoil(), **params) +
                                 self._transclude_description(desc, url) +
                                 self.formatter.transclusion(0))
@@ -703,7 +705,7 @@ class Parser:
                 url = Page(self.request, page_name).url(self.request, querystr={'action': 'content', }, relative=False)
                 params = self._get_params(params,
                                           defaults={'type': 'text/html', 'width': '100%', },
-                                          acceptable_keys=acceptable_keys)
+                                          acceptable_keys=acceptable_keys_object)
                 return (self.formatter.transclusion(1, data=url, **params) +
                         self._transclude_description(desc, page_name) +
                         self.formatter.transclusion(0))
@@ -718,7 +720,7 @@ class Parser:
                 url += '?action=content' # XXX moin specific
                 params = self._get_params(params,
                                           defaults={'type': 'text/html', 'width': '100%', },
-                                          acceptable_keys=acceptable_keys)
+                                          acceptable_keys=acceptable_keys_object)
                 return (self.formatter.transclusion(1, data=url, **params) +
                         self._transclude_description(desc, page_name) +
                         self.formatter.transclusion(0))
@@ -766,6 +768,7 @@ class Parser:
         target = groups.get('link_target', '')
         desc = groups.get('link_desc', '') or ''
         params = groups.get('link_params', u'') or u''
+        acceptable_keys = ['class', 'title', 'target', ] # no style because of JS
         mt = self.link_target_re.match(target)
         if mt:
             if mt.group('page_name'):
@@ -782,7 +785,7 @@ class Parser:
                 abs_page_name = wikiutil.AbsPageName(current_page, page_name)
                 params = self._get_params(params,
                                           defaults={},
-                                          acceptable_keys=['class', 'title', ])
+                                          acceptable_keys=acceptable_keys)
                 return (self.formatter.pagelink(1, abs_page_name, anchor=anchor, **params) +
                         self._link_description(desc, target, page_name_and_anchor) +
                         self.formatter.pagelink(0, abs_page_name))
@@ -792,7 +795,7 @@ class Parser:
                 target = mt.group('extern_addr')
                 params = self._get_params(params,
                                           defaults={'class': scheme, },
-                                          acceptable_keys=['class', 'title', ])
+                                          acceptable_keys=acceptable_keys)
                 return (self.formatter.url(1, target, **params) +
                         self._link_description(desc, target, target) +
                         self.formatter.url(0))
@@ -803,7 +806,7 @@ class Parser:
                 wikitag_bad = wikiutil.resolve_interwiki(self.request, wiki_name, page_name)[3]
                 params = self._get_params(params,
                                           defaults={},
-                                          acceptable_keys=['class', 'title', ])
+                                          acceptable_keys=acceptable_keys)
                 return (self.formatter.interwikilink(1, wiki_name, page_name, **params) +
                         self._link_description(desc, target, page_name) +
                         self.formatter.interwikilink(0, wiki_name, page_name))
@@ -813,7 +816,7 @@ class Parser:
                 url = wikiutil.url_unquote(mt.group('attach_addr'), want_unicode=True)
                 params = self._get_params(params,
                                           defaults={'title': desc, },
-                                          acceptable_keys=['title', ])
+                                          acceptable_keys=acceptable_keys)
                 if scheme == 'attachment':
                     return (self.formatter.attachment_link(1, url, **params) +
                             self._link_description(desc, target, url) +
