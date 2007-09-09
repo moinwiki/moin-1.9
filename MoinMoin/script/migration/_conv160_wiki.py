@@ -150,10 +150,46 @@ class Converter(Parser):
 
     def _macro_repl(self, word):
         # we use [[...]] for links now, macros will be <<...>>
-        stripped_old = word[2:-2]
-        decorated_new = "<<%s>>" % stripped_old
+        macro_rule = ur"""
+            \[\[
+            (?P<macro_name>\w+)
+            (\((?P<macro_args>.*?)\))?
+            \]\]
+        """
+        word = unicode(word) # XXX why is word not unicode before???
+        m = re.match(macro_rule, word, re.X|re.U)
+        macro_name = m.group('macro_name')
+        macro_args = m.group('macro_args')
+        if macro_name == 'ImageLink':
+            fixed, kw, trailing = wikiutil.parse_quoted_separated(macro_args)
+            image, target = (fixed + ['', ''])[:2]
+            if '://' not in image:
+                # if it is not a URL, it is meant as attachment
+                image = u'attachment:%s' % image
+            if not target:
+                target = image
+            image_attrs = []
+            alt = kw.get('alt') or ''
+            width = kw.get('width')
+            if width is not None:
+                image_attrs.append(u"width=%s" % width)
+            height = kw.get('height')
+            if height is not None:
+                image_attrs.append(u"height=%s" % height)
+            image_attrs = u", ".join(image_attrs)
+            if image_attrs:
+                image_attrs = u'|' + image_attrs
+            if alt or image_attrs:
+                alt = u'|' + alt
+            result = u'[[%s|{{%s%s%s}}]]' % (target, image, alt, image_attrs)
+        else:
+            if macro_args:
+                macro_args = u"(%s)" % macro_args
+            else:
+                macro_args = u''
+            result = u"<<%s%s>>" % (macro_name, macro_args)
         # XXX later check whether some to be renamed pagename is used as macro param
-        return decorated_new
+        return result
 
     def _word_repl(self, word, text=None):
         """Handle WikiNames."""
