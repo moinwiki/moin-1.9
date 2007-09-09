@@ -600,12 +600,37 @@ class Parser:
         desc = wikiutil.escape(desc)
         return desc
 
+    def _get_params(self, params, defaults=None, acceptable_keys=None):
+        """ parse the parameters of link/transclusion markup,
+            defaults can be a dict with some default key/values
+            that will be in the result as given, unless overriden
+            by the params.
+        """
+        if defaults:
+            result = defaults
+        else:
+            result = {}
+        if params:
+            fixed, kw, trailing = wikiutil.parse_quoted_separated(params)
+            # we ignore fixed and trailing args and only use kw args:
+            if acceptable_keys is None:
+                acceptable_keys = []
+            for key, val in kw.items():
+                key = str(key) # we can't use unicode as key
+                if key in acceptable_keys:
+                    key = wikiutil.escape(key)
+                    val = unicode(val) # but for the value
+                    val = wikiutil.escape(val)
+                    result[key] = val
+        return result
+
     def _transclude_repl(self, word, groups):
         """Handles transcluding content, usually embedding images."""
         target = groups.get('transclude_target', '')
-        desc = groups.get('transclude_desc', '') or ''
-        params = groups.get('transclude_params', '') or ''
         target = wikiutil.url_unquote(target, want_unicode=True)
+        desc = groups.get('transclude_desc', '') or ''
+        params = groups.get('transclude_params', u'') or u''
+        acceptable_keys = ['width', 'height', 'title', 'alt', 'class', 'type', ]
         m = self.link_target_re.match(target)
         if m:
             if m.group('extern_addr'):
@@ -614,7 +639,10 @@ class Parser:
                 desc = self._transclude_description(desc, target)
                 if scheme.startswith('http'): # can also be https
                     # currently only supports ext. image inclusion
-                    return self.formatter.image(src=target, alt=desc, title=desc, css_class='external_image')
+                    params = self._get_params(params,
+                                              defaults={'class': 'external_image', 'alt': desc, 'title': desc, },
+                                              acceptable_keys=acceptable_keys)
+                    return self.formatter.image(src=target, **params)
                     # FF2 has a bug with target mimetype detection, it looks at the url path
                     # and expects to find some "filename extension" there (like .png) and this
                     # (not the response http headers) will set the default content-type of
@@ -636,12 +664,18 @@ class Parser:
                         return self.formatter.attachment_inlined(url, desc)
                     elif mt.major == 'image':
                         desc = self._transclude_description(desc, url)
-                        return self.formatter.attachment_image(url, alt=desc, title=desc, css_class='image')
+                        params = self._get_params(params,
+                                                  defaults={'alt': desc, 'title': desc, },
+                                                  acceptable_keys=acceptable_keys)
+                        return self.formatter.attachment_image(url, **params)
                     else:
                         from MoinMoin.action import AttachFile
                         pagename = self.formatter.page.page_name
                         href = AttachFile.getAttachUrl(pagename, url, self.request, escaped=0)
-                        return (self.formatter.transclusion(1, data=href, type=mt.spoil()) +
+                        params = self._get_params(params,
+                                                  defaults={'alt': desc, 'title': desc, },
+                                                  acceptable_keys=acceptable_keys)
+                        return (self.formatter.transclusion(1, data=href, type=mt.spoil(), **params) +
                                 self._transclude_description(desc, url) +
                                 self.formatter.transclusion(0))
 
@@ -667,7 +701,10 @@ class Parser:
                 # experimental client side transclusion
                 page_name = m.group('page_name')
                 url = Page(self.request, page_name).url(self.request, querystr={'action': 'content', }, relative=False)
-                return (self.formatter.transclusion(1, data=url, type='text/html', width="100%") +
+                params = self._get_params(params,
+                                          defaults={'type': 'text/html', 'width': '100%', },
+                                          acceptable_keys=acceptable_keys)
+                return (self.formatter.transclusion(1, data=url, **params) +
                         self._transclude_description(desc, page_name) +
                         self.formatter.transclusion(0))
                 #return u"Error: <<Include(%s,%s)>> emulation missing..." % (page_name, args)
@@ -679,14 +716,17 @@ class Parser:
                 wikitag, wikiurl, wikitail, err = wikiutil.resolve_interwiki(self.request, wiki_name, page_name)
                 url = wikiutil.join_wiki(wikiurl, wikitail)
                 url += '?action=content' # XXX moin specific
-                return (self.formatter.transclusion(1, data=url, type='text/html', width="100%") +
+                params = self._get_params(params,
+                                          defaults={'type': 'text/html', 'width': '100%', },
+                                          acceptable_keys=acceptable_keys)
+                return (self.formatter.transclusion(1, data=url, **params) +
                         self._transclude_description(desc, page_name) +
                         self.formatter.transclusion(0))
                 #return u"Error: <<RemoteInclude(%s:%s,%s)>> still missing." % (wiki_name, page_name, args)
 
             else:
                 desc = self._transclude_description(desc, target)
-                return self.formatter.text('[[%s|%s]]' % (target, desc))
+                return self.formatter.text('[[%s|%s|%s]]' % (target, desc, params))
         return word +'???'
     _transclude_target_repl = _transclude_repl
     _transclude_desc_repl = _transclude_repl
@@ -725,7 +765,7 @@ class Parser:
         """Handle [[target|text]] links."""
         target = groups.get('link_target', '')
         desc = groups.get('link_desc', '') or ''
-        params = groups.get('link_params', '') or ''
+        params = groups.get('link_params', u'') or u''
         mt = self.link_target_re.match(target)
         if mt:
             if mt.group('page_name'):
@@ -740,14 +780,20 @@ class Parser:
                     page_name = current_page
                 # handle relative links
                 abs_page_name = wikiutil.AbsPageName(current_page, page_name)
-                return (self.formatter.pagelink(1, abs_page_name, anchor=anchor) +
+                params = self._get_params(params,
+                                          defaults={},
+                                          acceptable_keys=['class', 'title', ])
+                return (self.formatter.pagelink(1, abs_page_name, anchor=anchor, **params) +
                         self._link_description(desc, target, page_name_and_anchor) +
                         self.formatter.pagelink(0, abs_page_name))
 
             elif mt.group('extern_addr'):
                 scheme = mt.group('extern_scheme')
                 target = mt.group('extern_addr')
-                return (self.formatter.url(1, target, css=scheme) +
+                params = self._get_params(params,
+                                          defaults={'class': scheme, },
+                                          acceptable_keys=['class', 'title', ])
+                return (self.formatter.url(1, target, **params) +
                         self._link_description(desc, target, target) +
                         self.formatter.url(0))
 
@@ -755,19 +801,25 @@ class Parser:
                 wiki_name = mt.group('inter_wiki')
                 page_name = mt.group('inter_page')
                 wikitag_bad = wikiutil.resolve_interwiki(self.request, wiki_name, page_name)[3]
-                return (self.formatter.interwikilink(1, wiki_name, page_name) +
+                params = self._get_params(params,
+                                          defaults={},
+                                          acceptable_keys=['class', 'title', ])
+                return (self.formatter.interwikilink(1, wiki_name, page_name, **params) +
                         self._link_description(desc, target, page_name) +
                         self.formatter.interwikilink(0, wiki_name, page_name))
 
             elif mt.group('attach_scheme'):
                 scheme = mt.group('attach_scheme')
                 url = wikiutil.url_unquote(mt.group('attach_addr'), want_unicode=True)
+                params = self._get_params(params,
+                                          defaults={'title': desc, },
+                                          acceptable_keys=['title', ])
                 if scheme == 'attachment':
-                    return (self.formatter.attachment_link(1, url, title=desc) +
+                    return (self.formatter.attachment_link(1, url, **params) +
                             self._link_description(desc, target, url) +
                             self.formatter.attachment_link(0))
                 elif scheme == 'drawing':
-                    return self.formatter.attachment_drawing(url, desc, title=desc, alt=desc)
+                    return self.formatter.attachment_drawing(url, desc, alt=desc, **params)
             else:
                 if desc:
                     desc = '|' + desc
