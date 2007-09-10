@@ -1,0 +1,139 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-07-17 03:14+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#, python-format
+msgid ""
+"Here's the page \"%(pagename)s\" that you've requested:\n"
+"\n"
+"%(data)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"That's the list of pages accesible to you:\n"
+"\n"
+"%s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Following detailed information on page \"%(pagename)s\" is available::\n"
+"\n"
+"%(data)s"
+msgstr ""
+
+msgid "Submit this form to perform a wiki search"
+msgstr ""
+
+msgid "Title search"
+msgstr ""
+
+msgid "Full-text search"
+msgstr ""
+
+msgid "Wiki search"
+msgstr ""
+
+msgid "Search text"
+msgstr ""
+
+msgid "Please specify the search criteria."
+msgstr ""
+
+msgid "This command requires a client supporting Data Forms"
+msgstr ""
+
+msgid ""
+"The \"help\" command prints a short, helpful message about a given topic or "
+"function.\n"
+"\n"
+"Usage: help [topic_or_function]"
+msgstr ""
+
+msgid ""
+"The \"ping\" command returns a \"pong\" message as soon as it's received."
+msgstr ""
+
+msgid "searchform - perform a wiki search using a form"
+msgstr ""
+
+#, python-format
+msgid ""
+"%(command)s - %(description)s\n"
+"\n"
+"Usage: %(command)s %(params)s"
+msgstr ""
+
+#, python-format
+msgid "Unknown command \"%s\" "
+msgstr ""
+
+#, python-format
+msgid ""
+"You've specified a wrong parameter list. The call should look like:\n"
+"\n"
+"%(command)s %(params)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Hello there! I'm a MoinMoin Notification Bot. Available commands:\n"
+"\n"
+"%(internal)s\n"
+"%(xmlrpc)s"
+msgstr ""
+
+msgid "You must set a (long) secret string!"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+#, python-format
+msgid ""
+"Your request has failed. The reason is:\n"
+"%s"
+msgstr ""
+
+#, python-format
+msgid ""
+"A serious error occured while processing your request:\n"
+"%s"
+msgstr ""
+
+msgid "An internal error has occured, please contact the administrator."
+msgstr ""
+
+msgid "Credentials check failed, you may be unable to see all information."
+msgstr ""
+
+msgid "This command may take a while to complete, please be patient..."
+msgstr ""
+
+#, python-format
+msgid ""
+"Last author: %(author)s\n"
+"Last modification: %(modification)s\n"
+"Current version: %(version)s"
+msgstr ""
+
+msgid "You must set a (long) secret string"
+msgstr ""
+
+msgid "You are not allowed to use this bot!"
+msgstr ""
