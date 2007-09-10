@@ -2,15 +2,15 @@
 """
     MoinMoin - MoinMoin.wikixml.marshal Tests
 
-    @copyright: 2002-2004 by Juergen Hermann <jh@web.de>
+    @copyright: 2002-2004 by Juergen Hermann <jh@web.de>,
+                2007 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
-import unittest # LEGACY UNITTEST, PLEASE DO NOT IMPORT unittest IN NEW TESTS, PLEASE CONSULT THE py.test DOCS
 import array
 from MoinMoin.wikixml import marshal
 
-class TestMarshal(unittest.TestCase):
+class TestMarshal(object):
     """Testing Marshal used for ...XXX"""
 
     class Data:
@@ -31,7 +31,7 @@ class TestMarshal(unittest.TestCase):
         (buffer("0123456789", 2, 3), "<data><prop>234</prop></data>"),
         )
 
-    def setUp(self):
+    def setup_method(self, method):
         self.obj = marshal.Marshal()
 
     def testCreateMarshal(self):
@@ -51,8 +51,7 @@ class TestMarshal(unittest.TestCase):
     def _checkData(self, obj, xml):
         objXML = self._canonize(obj.toXML())
         expected = self._canonize(xml)
-        self.assertEqual(objXML, expected,
-            'Expected "%(expected)s" but got "%(objXML)s"' % locals())
+        assert objXML == expected
 
 
 coverage_modules = ['MoinMoin.wikixml.marshal']
