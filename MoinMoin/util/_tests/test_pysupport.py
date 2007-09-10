@@ -2,18 +2,19 @@
 """
     MoinMoin - MoinMoin.util.pysupport Tests
 
-    @copyright: 2004 Oliver Graf <ograf@bitart.de>
+    @copyright: 2004 Oliver Graf <ograf@bitart.de>,
+                2007 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
-import unittest, os, errno # LEGACY UNITTEST, PLEASE DO NOT IMPORT unittest IN NEW TESTS, PLEASE CONSULT THE py.test DOCS
+import os, errno
 
 import py
 
 from MoinMoin.util import pysupport
 
 
-class TestImportNameFromMoin(unittest.TestCase):
+class TestImportNameFromMoin(object):
     """ Test importName of MoinMoin modules
 
     We don't make any testing for files, assuming that moin package is
@@ -22,27 +23,27 @@ class TestImportNameFromMoin(unittest.TestCase):
 
     def testNonExistingModule(self):
         """ pysupport: import nonexistent module raises ImportError """
-        self.assertRaises(ImportError, pysupport.importName,
-                          'MoinMoin.parser.abcdefghijkl', 'Parser')
+        py.test.raises(ImportError, pysupport.importName,
+                       'MoinMoin.parser.abcdefghijkl', 'Parser')
 
     def testNonExistingAttribute(self):
         """ pysupport: import nonexistent attritbue raises AttributeError """
-        self.assertRaises(AttributeError, pysupport.importName,
-                          'MoinMoin.parser.text_moin_wiki', 'NoSuchParser')
+        py.test.raises(AttributeError, pysupport.importName,
+                       'MoinMoin.parser.text_moin_wiki', 'NoSuchParser')
 
     def testExisting(self):
         """ pysupport: import name from existing module """
         from MoinMoin.parser import text_moin_wiki
         Parser = pysupport.importName('MoinMoin.parser.text_moin_wiki', 'Parser')
-        self.failUnless(Parser is text_moin_wiki.Parser)
+        assert Parser is text_moin_wiki.Parser
 
 
-class TestImportNameFromPlugin(unittest.TestCase):
+class TestImportNameFromPlugin(object):
     """ Base class for import plugin tests """
 
     name = 'Parser'
 
-    def setUp(self):
+    def setup_method(self, method):
         """ Check for valid plugin package """
         self.pluginDirectory = os.path.join(self.request.cfg.data_dir, 'plugin', 'parser')
         self.checkPackage(self.pluginDirectory)
@@ -69,8 +70,8 @@ class TestImportNonExisiting(TestImportNameFromPlugin):
         """ pysupport: import nonexistent wiki plugin fail """
         if self.pluginExists():
             py.test.skip('plugin exists: %s' % self.plugin)
-        self.assertRaises(ImportError, pysupport.importName,
-                          self.pluginModule, self.name)
+        py.test.raises(ImportError, pysupport.importName,
+                       self.pluginModule, self.name)
 
 
 class TestImportExisting(TestImportNameFromPlugin):
@@ -90,8 +91,7 @@ class TestImportExisting(TestImportNameFromPlugin):
         try:
             self.createTestPlugin()
             plugin = pysupport.importName(self.pluginModule, self.name)
-            self.assertEqual(getattr(plugin, '__name__', None), self.name,
-                            'Failed to import the test plugin')
+            assert getattr(plugin, '__name__', None) == self.name
         finally:
             self.deleteTestPlugin()
 
