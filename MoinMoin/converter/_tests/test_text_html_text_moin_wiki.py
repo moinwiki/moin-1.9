@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-MoinMoin - MoinMoin.text_html_text_moin_wiki Tests
+    MoinMoin - MoinMoin.text_html_text_moin_wiki Tests
 
-@copyright: 2005 by Bastian Blank, ThomasWaldmann
-@license: GNU GPL, see COPYING for details.
+    @copyright: 2005 by Bastian Blank,
+                2005,2007 by MoinMoin:ThomasWaldmann
+    @license: GNU GPL, see COPYING for details.
 """
-
-import unittest # LEGACY UNITTEST, PLEASE DO NOT IMPORT unittest IN NEW TESTS, PLEASE CONSULT THE py.test DOCS
 
 import py
 py.test.skip("Many broken tests, much broken code, broken, broken, broken.")
@@ -22,12 +21,12 @@ convert = converter.convert
 error = ConvertError
 
 
-class TestBase(unittest.TestCase):
+class TestBase(object):
 
-    def setUp(self):
+    def setup_method(self, method):
         self.cfg = self.TestConfig(bang_meta=True)
 
-    def tearDown(self):
+    def teardown_method(self, method):
         del self.cfg
 
     def do_convert_real(self, func_args, successful=True):
@@ -35,13 +34,13 @@ class TestBase(unittest.TestCase):
             ret = convert(*func_args)
         except error, e:
             if successful:
-                self.fail("fails with parse error: %s" % e)
+                py.test.fail("fails with parse error: %s" % e)
             else:
                 return
         if successful:
             return ret
         else:
-            self.fail("doesn't fail with parse error")
+            py.test.fail("doesn't fail with parse error")
 
 
 class MinimalPage(object):
@@ -85,9 +84,9 @@ class TestConvertBlockRepeatable(TestBase):
         formatter.setPage(page)
         Parser(text, request).format(formatter)
         repeat = ''.join(request.result).strip('\n')
-        self.failUnlessEqual(repeat, output)
+        #assert repeat == output
         out = self.do_convert_real([request, page.page_name, repeat])
-        self.failUnlessEqual(text, out)
+        assert text == out
 
     def testComment01(self):
         test = ur"""
@@ -925,10 +924,10 @@ class TestConvertInlineFormatRepeatable(TestBase):
         formatter.setPage(page)
         Parser(text, request).format(formatter)
         repeat = ''.join(request.result).strip('\n')
-        self.failUnlessEqual(repeat, output)
+        #assert repeat == output
         out = self.do_convert_real([request, page.page_name, repeat])
         out = out.rstrip('\n')
-        self.failUnlessEqual(text, out)
+        assert text == out
 
     def testEmphasis01(self):
         test = ur"''test''"
@@ -1036,10 +1035,10 @@ class TestConvertInlineItemRepeatable(TestBase):
         formatter.setPage(page)
         Parser(text, request).format(formatter)
         repeat = ''.join(request.result).strip('\n')
-        self.failUnlessEqual(repeat, output)
+        #assert repeat == output
         out = self.do_convert_real([request, page.page_name, repeat])
         out = out.rstrip('\n')
-        self.failUnlessEqual(text, out)
+        assert text == out
 
     def testWikiWord01(self):
         test = ur"WikiWord"
@@ -1056,9 +1055,9 @@ class TestConvertInlineItemRepeatable(TestBase):
         output = ur"""<img src="/wiki/modern/img/smile.png" alt=":-)" height="15" width="15">"""
         self.do(test, output)
 
-class TestStrip(unittest.TestCase):
+class TestStrip(object):
     def do(self, cls, text, output):
-        tree = converter.parse(text)
+        tree = converter.parse(self.request, text)
         cls().do(tree)
         out = StringIO()
         try:
@@ -1066,7 +1065,7 @@ class TestStrip(unittest.TestCase):
         except ImportError:
             py.test.skip('xml.dom.ext module is not available')
         xml.dom.ext.Print(tree, out)
-        self.failUnlessEqual("<?xml version='1.0' encoding='UTF-8'?>%s" % output, out.getvalue().decode("utf-8"))
+        assert "<?xml version='1.0' encoding='UTF-8'?>%s" % output == out.getvalue().decode("utf-8")
 
 class TestStripWhitespace(TestStrip):
     def do(self, text, output):
@@ -1114,7 +1113,7 @@ class TestConvertBrokenBrowser(TestBase):
         request = MinimalRequest(self.request)
         page = MinimalPage()
         out = self.do_convert_real([request, page.page_name, text])
-        self.failUnlessEqual(output, out)
+        assert output == out
 
     def testList01(self):
         test = ur"""
