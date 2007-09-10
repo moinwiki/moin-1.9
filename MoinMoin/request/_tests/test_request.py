@@ -2,16 +2,16 @@
 """
     MoinMoin - MoinMoin.module_tested Tests
 
-    Module names must start with 'test_' to be included in the tests.
-
-    @copyright: 2003-2004 by Juergen Hermann <jh@web.de>
+    @copyright: 2003-2004 by Juergen Hermann <jh@web.de>,
+                2007 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
-import unittest # LEGACY UNITTEST, PLEASE DO NOT IMPORT unittest IN NEW TESTS, PLEASE CONSULT THE py.test DOCS
+import py
+
 from MoinMoin import config, wikiutil
 
-class TestNormalizePagename(unittest.TestCase):
+class TestNormalizePagename(object):
 
     def testPageInvalidChars(self):
         """ request: normalize pagename: remove invalid unicode chars
@@ -21,8 +21,7 @@ class TestNormalizePagename(unittest.TestCase):
         test = u'\u0000\u202a\u202b\u202c\u202d\u202e'
         expected = u''
         result = self.request.normalizePagename(test)
-        self.assertEqual(result, expected,
-                         ('Expected "%(expected)s" but got "%(result)s"') % locals())
+        assert result == expected
 
     def testNormalizeSlashes(self):
         """ request: normalize pagename: normalize slashes """
@@ -35,9 +34,7 @@ class TestNormalizePagename(unittest.TestCase):
             )
         for test, expected in cases:
             result = self.request.normalizePagename(test)
-            self.assertEqual(result, expected,
-                             ('Expected "%(expected)s" but got "%(result)s"') %
-                             locals())
+            assert result == expected
 
     def testNormalizeWhitespace(self):
         """ request: normalize pagename: normalize whitespace """
@@ -52,9 +49,7 @@ class TestNormalizePagename(unittest.TestCase):
             )
         for test, expected in cases:
             result = self.request.normalizePagename(test)
-            self.assertEqual(result, expected,
-                             ('Expected "%(expected)s" but got "%(result)s"') %
-                             locals())
+            assert result == expected
 
     def testUnderscoreTestCase(self):
         """ request: normalize pagename: underscore convert to spaces and normalized
@@ -71,17 +66,15 @@ class TestNormalizePagename(unittest.TestCase):
             )
         for test, expected in cases:
             result = self.request.normalizePagename(test)
-            self.assertEqual(result, expected,
-                             ('Expected "%(expected)s" but got "%(result)s"') %
-                             locals())
+            assert result == expected
 
 
-class TestGroupPages(unittest.TestCase):
+class TestGroupPages(object):
 
-    def setUp(self):
+    def setup_method(self, method):
         self.config = self.TestConfig(page_group_regex=r'.+Group')
 
-    def tearDown(self):
+    def teardown_method(self, method):
         del self.config
 
     def testNormalizeGroupName(self):
@@ -100,24 +93,18 @@ class TestGroupPages(unittest.TestCase):
             # validate we are testing valid group names
             if wikiutil.isGroupPage(self.request, test):
                 result = self.request.normalizePagename(test)
-                self.assertEqual(result, expected,
-                                 ('Expected "%(expected)s" but got "%(result)s"') %
-                                 locals())
+                assert result == expected
 
 
-class TestHTTPDate(unittest.TestCase):
+class TestHTTPDate(object):
 
     def testRFC1123Date(self):
         """ request: httpDate default rfc1123 """
-        self.failUnlessEqual(self.request.httpDate(0),
-                             'Thu, 01 Jan 1970 00:00:00 GMT',
-                             'wrong date string')
+        assert self.request.httpDate(0) == 'Thu, 01 Jan 1970 00:00:00 GMT'
 
     def testRFC850Date(self):
         """ request: httpDate rfc850 """
-        self.failUnlessEqual(self.request.httpDate(0, rfc='850'),
-                             'Thursday, 01-Jan-70 00:00:00 GMT',
-                             'wrong date string')
+        assert self.request.httpDate(0, rfc='850') == 'Thursday, 01-Jan-70 00:00:00 GMT'
 
 
 coverage_modules = ['MoinMoin.request']
