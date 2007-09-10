@@ -6,15 +6,14 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import unittest, os # LEGACY UNITTEST, PLEASE DO NOT IMPORT unittest IN NEW TESTS, PLEASE CONSULT THE py.test DOCS
-
+import os
 import py
 
 from MoinMoin import user, caching
 from MoinMoin.util import filesys
 
 
-class TestEncodePassword(unittest.TestCase):
+class TestEncodePassword(object):
     """user: encode passwords tests"""
 
     def testAscii(self):
@@ -23,24 +22,21 @@ class TestEncodePassword(unittest.TestCase):
         expected = "{SHA}X+lk6KR7JuJEH43YnmettCwICdU="
 
         result = user.encodePassword("MoinMoin")
-        self.assertEqual(result, expected,
-                         'Expected "%(expected)s" but got "%(result)s"' % locals())
+        assert result == expected
         result = user.encodePassword(u"MoinMoin")
-        self.assertEqual(result, expected,
-                         'Expected "%(expected)s" but got "%(result)s"' % locals())
+        assert result == expected
 
     def testUnicode(self):
         """ user: encode unicode password """
         result = user.encodePassword(u'סיסמה סודית בהחלט') # Hebrew
         expected = "{SHA}GvvkgYzv5MoF9Ljivv2oc81FmkE="
-        self.assertEqual(result, expected,
-                         'Expected "%(expected)s" but got "%(result)s"' % locals())
+        assert result == expected
 
 
-class TestLoginWithPassword(unittest.TestCase):
+class TestLoginWithPassword(object):
     """user: login tests"""
 
-    def setUp(self):
+    def setup_method(self, method):
         # Save original user and cookie
         self.saved_cookie = self.request.saved_cookie
         self.saved_user = self.request.user
@@ -53,7 +49,7 @@ class TestLoginWithPassword(unittest.TestCase):
         filesys.dcdisable()
         self.user = None
 
-    def tearDown(self):
+    def teardown_method(self, method):
         """ Run after each test
 
         Remove user and reset user listing cache.
@@ -90,7 +86,7 @@ class TestLoginWithPassword(unittest.TestCase):
 
         # Try to "login"
         theUser = user.User(self.request, name=name, password=password)
-        self.failUnless(theUser.valid, "Can't login with ascii password")
+        assert theUser.valid
 
     def testUnicodePassword(self):
         """ user: login with non-ascii password """
@@ -101,7 +97,7 @@ class TestLoginWithPassword(unittest.TestCase):
 
         # Try to "login"
         theUser = user.User(self.request, name=name, password=password)
-        self.failUnless(theUser.valid, "Can't login with unicode password")
+        assert theUser.valid
 
     def testOldNonAsciiPassword(self):
         """ user: login with non-ascii password in pre 1.3 user file
@@ -119,7 +115,7 @@ class TestLoginWithPassword(unittest.TestCase):
 
         # Try to "login"
         theUser = user.User(self.request, name=name, password=password)
-        self.failUnless(theUser.valid, "Can't login with old unicode password")
+        assert theUser.valid
 
     def testReplaceOldNonAsciiPassword(self):
         """ user: login replace old non-ascii password in pre 1.3 user file
@@ -138,8 +134,7 @@ class TestLoginWithPassword(unittest.TestCase):
         # Login again - the password should be new unicode password
         expected = user.encodePassword(password)
         theUser = user.User(self.request, name=name, password=password)
-        self.assertEqual(theUser.enc_password, expected,
-                         "User password was not replaced with new")
+        assert theUser.enc_password == expected
 
     def testSubscriptionSubscribedPage(self):
         """ user: tests isSubscribedTo  """
@@ -150,10 +145,7 @@ class TestLoginWithPassword(unittest.TestCase):
         # Login - this should replace the old password in the user file
         theUser = user.User(self.request, name=name, password=password)
         theUser.subscribe(pagename)
-        expected = True
-        result = theUser.isSubscribedTo([pagename]) # list(!) of pages to check
-        self.assertEqual(result, expected,
-                 'Expected "%(expected)s" but got "%(result)s"' % locals())
+       assert theUser.isSubscribedTo([pagename]) # list(!) of pages to check
 
     def testSubscriptionSubPage(self):
         """ user: tests isSubscribedTo on a subpage """
@@ -165,10 +157,7 @@ class TestLoginWithPassword(unittest.TestCase):
         # Login - this should replace the old password in the user file
         theUser = user.User(self.request, name=name, password=password)
         theUser.subscribe(pagename)
-        expected = False
-        result = theUser.isSubscribedTo([testPagename]) # list(!) of pages to check
-        self.assertEqual(result, expected,
-                 'Expected "%(expected)s" but got "%(result)s"' % locals())
+       assert not theUser.isSubscribedTo([testPagename]) # list(!) of pages to check
 
     # Helpers ---------------------------------------------------------
 
@@ -199,7 +188,7 @@ class TestLoginWithPassword(unittest.TestCase):
             py.test.skip("Can't create test user")
 
 
-class TestGroupName(unittest.TestCase):
+class TestGroupName(object):
 
     def setUp(self):
         self.config = self.TestConfig(page_group_regex=r'.+Group')
@@ -214,27 +203,21 @@ class TestGroupName(unittest.TestCase):
         """ user: isValidName: reject group names """
         test = u'AdminGroup'
         assert self.group.search(test)
-        result = user.isValidName(self.request, test)
-        expected = False
-        self.assertEqual(result, expected,
-                        'Expected "%(expected)s" but got "%(result)s"' % locals())
+        assert not user.isValidName(self.request, test)
 
 
-class TestIsValidName(unittest.TestCase):
+class TestIsValidName(object):
 
     def testNonAlnumCharacters(self):
         """ user: isValidName: reject unicode non alpha numeric characters
 
         : and , used in acl rules, we might add more characters to the syntax.
         """
-        invalid = u'! @ # $ % ^ & * ( ) - = + , : ; " | ~ / \\ \u0000 \u202a'.split()
+        invalid = u'! # $ % ^ & * ( ) = + , : ; " | ~ / \\ \u0000 \u202a'.split()
         base = u'User%sName'
-        expected = False
         for c in invalid:
             name = base % c
-            result = user.isValidName(self.request, name)
-        self.assertEqual(result, expected,
-                         'Expected "%(expected)s" but got "%(result)s"' % locals())
+            assert not user.isValidName(self.request, name)
 
     def testWhitespace(self):
         """ user: isValidName: reject leading, trailing or multiple whitespace """
@@ -243,11 +226,8 @@ class TestIsValidName(unittest.TestCase):
             u'User Name ',
             u'User   Name',
             )
-        expected = False
         for test in cases:
-            result = user.isValidName(self.request, test)
-            self.assertEqual(result, expected,
-                         'Expected "%(expected)s" but got "%(result)s"' % locals())
+            assert not user.isValidName(self.request, test)
 
     def testValid(self):
         """ user: isValidName: accept names in any language, with spaces """
@@ -257,11 +237,8 @@ class TestIsValidName(unittest.TestCase):
             u'CamelCase', # Good old camel case
             u'가각간갇갈 갉갊감 갬갯걀갼' # Hangul (gibberish)
             )
-        expected = True
         for test in cases:
-            result = user.isValidName(self.request, test)
-            self.assertEqual(result, expected,
-                             'Expected "%(expected)s" but got "%(result)s"' % locals())
+            assert user.isValidName(self.request, test)
 
 
 coverage_modules = ['MoinMoin.user']
