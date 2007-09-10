@@ -111,7 +111,7 @@ class TestWikiConversion:
             # macros
             ('[[BR]]', {}, '<<BR>>'),
             ('[[FullSearch(wtf)]]', {}, '<<FullSearch(wtf)>>'),
-            (u'[[ImageLink(töst.png)]]', {}, u'[[attachment:töst.png|{{attachment:test.png}}]]'),
+            (u'[[ImageLink(töst.png)]]', {}, u'[[attachment:töst.png|{{attachment:töst.png}}]]'),
             ('[[ImageLink(test.png,OtherPage)]]', {}, '[[OtherPage|{{attachment:test.png}}]]'),
             ('[[ImageLink(test.png,OtherPage,width=123,height=456)]]', {}, '[[OtherPage|{{attachment:test.png||width=123, height=456}}]]'),
             ('[[ImageLink(test.png,OtherPage,width=123,height=456,alt=alttext)]]', {}, '[[OtherPage|{{attachment:test.png|alttext|width=123, height=456}}]]'),
@@ -119,7 +119,7 @@ class TestWikiConversion:
             ('[[ImageLink(http://server/test.png,OtherPage,width=123,height=456)]]', {}, '[[OtherPage|{{http://server/test.png||width=123, height=456}}]]'),
             ('[[ImageLink(http://server/test.png,http://server/,width=123)]]', {}, '[[http://server/|{{http://server/test.png||width=123}}]]'),
             ('[[ImageLink(test.png,attachment:test.png)]]', {}, '[[attachment:test.png|{{attachment:test.png}}]]'),
-            ('[[ImageLink(test.png,inline:example.py)]]', {}, '[[inline:example.py|{{attachment:test.png}}]]'),
+            ('[[ImageLink(test.png,inline:test.py)]]', {}, '[[attachment:test.py|{{attachment:test.png}}]]'),
 
         ]
         for data, renames, expected in tests:
