@@ -556,6 +556,8 @@ Version 1.5.current:
     * AttachFile overwrite mode (introduced in 1.5.7) did not check delete
       rights, but only write rights. Now it checks that the user has write AND
       delete rights before overwriting a file.
+    * GetVal respects now ACLs on the Dict page
+    * Respect ACLs when sending <link rel="Appendix" ...> for attachments.
     * Fixed potential XSS issues related to feeding of gui editor.
     * Fixed XSS issue in RenamePage/DeletePage action.
 
