@@ -1557,7 +1557,9 @@ var gui_editor_link_text = "%(text)s";
         request.write(''.join(output))
         output = []
 
-        if pagename:
+        # XXX maybe this should be removed completely. moin emits all attachments as <link rel="Appendix" ...>
+        # and it is at least questionable if this fits into the original intent of rel="Appendix".
+        if pagename and request.user.may.read(pagename):
             from MoinMoin.action import AttachFile
             AttachFile.send_link_rel(request, pagename)
 
