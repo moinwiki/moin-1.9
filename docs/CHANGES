@@ -550,11 +550,14 @@ Version 1.6.current:
     * Removed Lupy based indexed search code. If you were brave enough to
       use cfg.lupy_search, you maybe want to try cfg.xapian_search instead.
 
+
 Version 1.5.current:
   Bugfixes:
     * AttachFile overwrite mode (introduced in 1.5.7) did not check delete
       rights, but only write rights. Now it checks that the user has write AND
       delete rights before overwriting a file.
+    * Fixed potential XSS issues related to feeding of gui editor.
+    * Fixed XSS issue in RenamePage/DeletePage action.
 
 Version 1.5.8:
   New features:

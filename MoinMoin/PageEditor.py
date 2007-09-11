@@ -516,7 +516,8 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         newpage = PageEditor(request, newpagename)
 
         pageexists_error = _("""'''A page with the name {{{'%s'}}} already exists.'''
-Try a different name.""") % (newpagename, )
+
+Try a different name.""") % (wikiutil.escape(newpagename), )
 
         # Check whether a page with the new name already exists
         if newpage.exists(includeDeleted=1):
@@ -581,7 +582,7 @@ Try a different name.""") % (newpagename, )
 
         pageexists_error = _("""'''A page with the name {{{'%s'}}} already exists.'''
 
-Try a different name.""") % (newpagename, )
+Try a different name.""") % (wikiutil.escape(newpagename), )
 
         # Check whether a page with the new name already exists
         if newpage.exists(includeDeleted=1):
@@ -686,7 +687,7 @@ Try a different name.""") % (newpagename, )
             msg = self.saveText(u"deleted\n", 0, comment=comment or u'', deleted=True, notify=False)
             msg = msg.replace(
                 _("Thank you for your changes. Your attention to detail is appreciated."),
-                _('Page "%s" was successfully deleted!') % (self.page_name, ))
+                _('Page "%s" was successfully deleted!') % (wikiutil.escape(self.page_name), ))
 
             event = PageDeletedEvent(request, self, comment)
             send_event(event)
