@@ -168,6 +168,8 @@ class Converter(Parser):
                 image = u'attachment:%s' % image
             if not target:
                 target = image
+            elif target.startswith('inline:'):
+                target = 'attachment:' + target[7:] # we don't support inline:
             image_attrs = []
             alt = kw.get('alt') or ''
             width = kw.get('width')
