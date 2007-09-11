@@ -9,13 +9,13 @@
 
 import py
 
+from MoinMoin import wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin._tests.common import gain_superuser_rights
 
 class TestExpandVars(object):
     """PageEditor: testing page editor"""
-
     pagename = u'AutoCreatedMoinMoinTemporaryTestPage'
 
     _tests = (
@@ -201,6 +201,23 @@ class TestSave(object):
         page = Page(self.request, pagename)
         assert page.body != testtext
 
+
+class TestPageDeletion:
+
+    def testCreateAndDeletePage(self):
+        """
+        simple test if it is possible to delete a page after creation
+        """
+        pagename = u'SomeDict'
+        page = PageEditor(self.request, pagename, do_editor_backup=0)
+        body = u"This is an example text"
+        page.saveText(body, 0)
+
+        success_i, result = page.deletePage()
+
+        expected = u'Page "SomeDict" was successfully deleted!'
+
+        assert result == expected
 
 coverage_modules = ['MoinMoin.PageEditor']
 
