@@ -145,7 +145,7 @@ class TestLoginWithPassword(object):
         # Login - this should replace the old password in the user file
         theUser = user.User(self.request, name=name, password=password)
         theUser.subscribe(pagename)
-       assert theUser.isSubscribedTo([pagename]) # list(!) of pages to check
+        assert theUser.isSubscribedTo([pagename]) # list(!) of pages to check
 
     def testSubscriptionSubPage(self):
         """ user: tests isSubscribedTo on a subpage """
@@ -157,7 +157,7 @@ class TestLoginWithPassword(object):
         # Login - this should replace the old password in the user file
         theUser = user.User(self.request, name=name, password=password)
         theUser.subscribe(pagename)
-       assert not theUser.isSubscribedTo([testPagename]) # list(!) of pages to check
+        assert not theUser.isSubscribedTo([testPagename]) # list(!) of pages to check
 
     # Helpers ---------------------------------------------------------
 
