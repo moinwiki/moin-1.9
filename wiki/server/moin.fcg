@@ -1,0 +1,63 @@
+#!/usr/bin/env python
+# -*- coding: iso-8859-1 -*-
+"""
+    MoinMoin - FastCGI Driver Script
+    
+    TODO: this should be refactored so it uses MoinMoin.server package
+          (see how Twisted, WSGI and Standalone use it)
+
+    @copyright: 2004-2005 by Oliver Graf <ograf@bitart.de>
+    @license: GNU GPL, see COPYING for details.
+"""
+
+# System path configuration
+
+import sys
+
+# Path of the directory where wikiconfig.py is located.
+# YOU NEED TO CHANGE THIS TO MATCH YOUR SETUP.
+sys.path.insert(0, '/path/to/wikiconfig')
+
+# Path to MoinMoin package, needed if you installed with --prefix=PREFIX
+# or if you did not use setup.py.
+## sys.path.insert(0, 'PREFIX/lib/python2.3/site-packages')
+
+# Path of the directory where farmconfig is located (if different).
+## sys.path.insert(0, '/path/to/farmconfig')
+
+# Debug mode - show detailed error reports
+## import os
+## os.environ['MOIN_DEBUG'] = '1'
+
+# how many requests shall be handled by a moin fcgi process before it dies,
+# -1 mean "unlimited lifetime":
+max_requests = -1
+
+# how many threads to use (1 means use only main program, non-threaded)
+max_threads = 5
+
+# backlog, use in socket.listen(backlog) call
+backlog = 5
+
+
+# Code ------------------------------------------------------------------
+
+# Do not touch unless you know what you are doing!
+# TODO: move to server package?
+
+# Set threads flag, so other code can use proper locking
+from MoinMoin import config
+config.use_threads = max_threads > 1
+del config
+
+from MoinMoin.request import request_fcgi
+from MoinMoin.support import thfcgi
+
+def handle_request(req, env, form):
+    request = request_fcgi.Request(req, env, form)
+    request.run()
+
+if __name__ == '__main__':
+    fcg = thfcgi.FCGI(handle_request, max_requests=max_requests, backlog=backlog, max_threads=max_threads)
+    fcg.run()
+
