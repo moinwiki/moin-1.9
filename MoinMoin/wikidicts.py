@@ -159,7 +159,6 @@ class DictDict:
 
     def dict(self, dictname):
         """ get dict <dictname> """
-        self.load_dicts() # reload dicts (needs to be done to have current dicts)
         try:
             d = self.dictdict[dictname]
         except KeyError:
