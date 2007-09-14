@@ -66,19 +66,7 @@ class TestGetVal:
 
     def testGetValNoACLs(self):
         """ macro GetVal test: 'reads VAR' """
-        # py.test.skip("broken test")
-        # seems not to go well after test_PageEditor and test_events
-        # are both excluded it works e.g.
-        '''
-         py.test MoinMoin/_tests/test_Page.py MoinMoin/_tests/test_error.py
-         MoinMoin/_tests/test_packages.py MoinMoin/_tests/test_user.py
-         MoinMoin/_tests/test_wikidicts.py MoinMoin/_tests/test_wikisync.py
-         MoinMoin/_tests/test_wikiutil.py MoinMoin/action/_tests/test_attachfile.py
-         MoinMoin/config/_tests/test_multiconfig.py
-         MoinMoin/converter/_tests/test_text_html_text_moin_wiki.py
-         MoinMoin/filter/_tests/test_filter.py MoinMoin/macro/_tests/test_Action.py
-         MoinMoin/formatter/_tests/test_formatter.py MoinMoin/macro/_tests/test_GetVal.py
-        '''
+
         self.shouldDeleteTestPage = True
         self._createTestPage(u' VAR:: This is an example')
 
@@ -87,6 +75,25 @@ class TestGetVal:
         result = self._test_macro(u'GetVal', args)
 
         expected = "This is an example"
+        assert result == expected
+
+    def testGetValAfterADictPageIsDeleted(self):
+        """ macro GetVal test: 'reads Dict var after another Dict is removed' """
+
+        self.shouldDeleteTestPage = True
+
+        pagename = u'SomeDict'
+        page = PageEditor(self.request, pagename, do_editor_backup=0)
+        body = u" EXAMPLE:: This is an example text"
+        page.saveText(body, 0)
+        success_i, result = page.deletePage()
+
+        self._createTestPage(u' VAR:: This is a brand new example')
+        page = Page(self.request, self.pagename)
+        args = "%s,%s" % (self.pagename, u'VAR')
+        result = self._test_macro(u'GetVal', args)
+
+        expected = "This is a brand new example"
         assert result == expected
 
     def testGetValACLs(self):
