@@ -1305,6 +1305,7 @@ class Parser:
 
         # Main loop
         for line in self.lines:
+            self.lineno += 1
             if '>><<' in line.replace(' ', ''):
                 self.no_862 = True
 
