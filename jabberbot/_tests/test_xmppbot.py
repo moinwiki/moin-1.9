@@ -11,10 +11,10 @@ from Queue import Queue
 
 try:
     import pyxmpp
+    from jabberbot.xmppbot import XMPPBot
 except ImportError:
     py.test.skip("Skipping jabber bot tests - pyxmpp is not installed")
 
-from jabberbot.xmppbot import XMPPBot
 import jabberbot.commands as commands
 from jabberbot.config import BotConfig
 
