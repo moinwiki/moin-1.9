@@ -26,6 +26,7 @@
 debug = 0
 
 import os, gettext, glob
+import logging
 
 from MoinMoin import caching
 
@@ -139,11 +140,17 @@ class Translation(object):
         # binary files have to be opened in the binary file mode!
         self.translation = gettext.GNUTranslations(f)
         self.info = info = self.translation.info()
-        self.name = info['x-language']
-        self.ename = info['x-language-in-english']
-        self.direction = info['x-direction']
-        assert self.direction in ('ltr', 'rtl', )
-        self.maintainer = info['last-translator']
+        try:
+            self.name = info['x-language']
+            self.ename = info['x-language-in-english']
+            self.direction = info['x-direction']
+            self.maintainer = info['last-translator']
+        except KeyError, err:
+            logging.debug("%r %s" % (self.language, str(err)))
+        try:
+            assert self.direction in ('ltr', 'rtl', )
+        except (AttributeError, AssertionError), err:
+            logging.debug("%r %s" % (self.language, str(err)))
 
     def formatMarkup(self, request, text, currentStack=[]):
         """
