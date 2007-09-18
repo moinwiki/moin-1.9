@@ -8,7 +8,7 @@
 """
 
 import py
-py.test.skip("Many broken tests, much broken code, broken, broken, broken.")
+#py.test.skip("Many broken tests, much broken code, broken, broken, broken.")
 
 from cStringIO import StringIO
 from MoinMoin.converter import text_html_text_moin_wiki as converter
@@ -86,6 +86,7 @@ class TestConvertBlockRepeatable(TestBase):
         repeat = ''.join(request.result).strip('\n')
         #assert repeat == output
         out = self.do_convert_real([request, page.page_name, repeat])
+
         assert text == out
 
     def testComment01(self):
@@ -107,6 +108,7 @@ class TestConvertBlockRepeatable(TestBase):
         self.do(test, output)
 
     def testHeading01(self):
+        py.test.skip('broken test')
         test = ur"""
 = test1 =
 
@@ -117,6 +119,7 @@ class TestConvertBlockRepeatable(TestBase):
         self.do(test, output)
 
     def testHeading02(self):
+        py.test.skip('broken test')
         test = ur"""
 = test1 =
 
@@ -258,6 +261,7 @@ class TestConvertBlockRepeatable(TestBase):
         self.do(test, output)
 
     def testListSuccess09(self):
+        py.test.skip('broken test')
         test = ur"""
  test:: test
 
@@ -279,6 +283,7 @@ class TestConvertBlockRepeatable(TestBase):
         self.do(test, output)
 
     def testListSuccess10(self):
+        py.test.skip('broken test')
         test = ur"""
  * test
   * test
@@ -297,6 +302,7 @@ class TestConvertBlockRepeatable(TestBase):
         self.do(test, output)
 
     def testListSuccess11(self):
+        py.test.skip('broken test')
         test = ur"""
  1. test
   1. test
@@ -315,6 +321,7 @@ class TestConvertBlockRepeatable(TestBase):
         self.do(test, output)
 
     def testListSuccess12(self):
+        py.test.skip('broken test')
         test = ur"""
  test:: test
   test:: test
@@ -401,6 +408,7 @@ class TestConvertBlockRepeatable(TestBase):
         self.do(test, output)
 
     def testListSuccess16(self):
+        py.test.skip('broken test')
         test = ur"""
  * test
 
@@ -420,6 +428,7 @@ class TestConvertBlockRepeatable(TestBase):
         self.do(test, output)
 
     def testListSuccess17(self):
+        py.test.skip('broken test')
         test = ur"""
  * test
 
@@ -440,6 +449,7 @@ class TestConvertBlockRepeatable(TestBase):
         self.do(test, output)
 
     def testListSuccess18(self):
+        py.test.skip('broken test')
         test = ur"""
  1. test
 
@@ -459,6 +469,7 @@ class TestConvertBlockRepeatable(TestBase):
         self.do(test, output)
 
     def testListSuccess19(self):
+        py.test.skip('broken test')
         test = ur"""
  1. test
 
@@ -479,6 +490,7 @@ class TestConvertBlockRepeatable(TestBase):
         self.do(test, output)
 
     def testListSuccess20(self):
+        py.test.skip('broken test')
         test = ur"""
  test:: test
 
@@ -499,6 +511,7 @@ class TestConvertBlockRepeatable(TestBase):
         self.do(test, output)
 
     def testListSuccess21(self):
+        py.test.skip('broken test')
         test = ur"""
  test:: test
 
@@ -519,6 +532,7 @@ class TestConvertBlockRepeatable(TestBase):
         self.do(test, output)
 
     def testListSuccess23(self):
+        py.test.skip('broken test')
         test = ur"""
  1. test
   * test
@@ -537,6 +551,7 @@ class TestConvertBlockRepeatable(TestBase):
         self.do(test, output)
 
     def testListSuccess26(self):
+        py.test.skip('broken test')
         test = ur"""
  * test
 
@@ -553,6 +568,7 @@ test
         self.do(test, output)
 
     def testListSuccess28(self):
+        py.test.skip('broken test')
         test = ur"""
  * test
 
@@ -569,6 +585,7 @@ test
         self.do(test, output)
 
     def testListSuccess29(self):
+        py.test.skip('broken test')
         test = ur"""
  * test
   * test
@@ -579,6 +596,7 @@ test
         self.do(test, output)
 
     def testListSuccess30(self):
+        py.test.skip('broken test')
         test = ur"""
  * test
   * test
@@ -589,6 +607,7 @@ test
         self.do(test, output)
 
     def testParagraph1(self):
+        py.test.skip('broken test')
         test = ur"""
 test
 
@@ -599,6 +618,7 @@ test
         self.do(test, output)
 
     def testParagraph2(self):
+        py.test.skip('broken test')
         test = ur"""
 test
 
@@ -612,6 +632,7 @@ test
         self.do(test, output)
 
     def testPreSuccess1(self):
+        py.test.skip('broken test')
         test = ur"""
 {{{
 test
@@ -626,6 +647,7 @@ test
         self.do(test, output)
 
     def testPreSuccess2(self):
+        py.test.skip('broken test')
         test = ur"""
 {{{
 test
@@ -642,6 +664,7 @@ test
         self.do(test, output)
 
     def testPreSuccess3(self):
+        py.test.skip('broken test')
         test = ur"""
 {{{
 test
@@ -660,6 +683,7 @@ test
         self.do(test, output)
 
     def testPreSuccess4(self):
+        py.test.skip('broken test')
         test = ur"""
 {{{
  * test
@@ -674,6 +698,7 @@ test
         self.do(test, output)
 
     def testPreSuccess5(self):
+        py.test.skip('broken test')
         test = ur"""
 {{{
   }}}
@@ -742,6 +767,7 @@ test
         self.do(test, output)
 
     def testPreSuccess9(self):
+        py.test.skip('broken test')
         test = ur"""
  * test
 
@@ -763,6 +789,7 @@ test
         self.do(test, output)
 
     def testRule1(self):
+        py.test.skip('broken test')
         test = ur"""
 ----
 
@@ -773,6 +800,7 @@ test
         self.do(test, output)
 
     def testTable01(self):
+        py.test.skip('broken test')
         test = ur"""
 || ||
 
@@ -791,6 +819,7 @@ test
         self.do(test, output)
 
     def testTable02(self):
+        py.test.skip('broken test')
         test = ur"""
 ||test||
 
@@ -809,27 +838,28 @@ test
         self.do(test, output)
 
     def testTable03(self):
+        py.test.skip('broken test')
         test = ur"""
 ||test||test||
 
 """
         output = ur"""
-<div>
 <table>
 <tr>
 <td>
-<p>test</p>
+<p class="line862">
+test
 </td>
 <td>
-<p>test</p>
+<p class="line862">test
 </td>
 </tr>
 </table>
-</div>
 """
         self.do(test, output)
 
     def testTable04(self):
+        py.test.skip('broken test')
         test = ur"""
 ||test||
 ||test||test||
@@ -857,6 +887,7 @@ test
         self.do(test, output)
 
     def testTable05(self):
+        py.test.skip('broken test')
         test = ur"""
 ||||test||
 ||test||test||
@@ -884,33 +915,17 @@ test
         self.do(test, output)
 
     def testTable06(self):
+        py.test.skip('broken test')
         test = ur"""
 ||||test||test||
 ||test||||test||
 
 """
         output = ur"""
-<div>
-<table>
-<tr>
-<td colspan="2" style="text-align: center;">
-<p>test</p>
-</td>
-<td>
-<p>test</p>
-</td>
-</tr>
-<tr>
-<td>
-<p>test</p>
-</td>
-<td colspan="2" style="text-align: center;">
-<p>test</p>
-</td>
-</tr>
-</table>
-</div>
-"""
+<table><tbody><tr>  <td style="text-align: center;"
+colspan="2"><p class="line862">test</p></td>   <td><p class="line862">test</p></td>
+</tr> <tr>  <td><p class="line862">test</p></td>   <td style="text-align: center;"
+colspan="2"><p class="line862">test</p></td> </tr> </tbody></table>"""
         self.do(test, output)
 
 class TestConvertInlineFormatRepeatable(TestBase):
@@ -930,96 +945,115 @@ class TestConvertInlineFormatRepeatable(TestBase):
         assert text == out
 
     def testEmphasis01(self):
+        py.test.skip('broken test')
         test = ur"''test''"
         output = ur"<em>test</em>"
         self.do(test, output)
 
     def testEmphasis02(self):
+        py.test.skip('broken test')
         test = ur"'''test'''"
         output = ur"<strong>test</strong>"
         self.do(test, output)
 
     def testEmphasis03(self):
+        py.test.skip('broken test')
         test = ur"'''''test'''''"
         output = ur"<em><strong>test</strong></em>"
         self.do(test, output)
 
     def testEmphasis04(self):
+        py.test.skip('broken test')
         test = ur"''test'''test'''''"
         output = ur"<em>test<strong>test</strong></em>"
         self.do(test, output)
 
     def testEmphasis05(self):
+        py.test.skip('broken test')
         test = ur"'''test''test'''''"
         output = ur"<strong>test<em>test</em></strong>"
         self.do(test, output)
 
     def testEmphasis06(self):
+        py.test.skip('broken test')
         test = ur"''test'''test'''test''"
         output = ur"<em>test<strong>test</strong>test</em>"
         self.do(test, output)
 
     def testEmphasis07(self):
+        py.test.skip('broken test')
         test = ur"'''test''test''test'''"
         output = ur"<strong>test<em>test</em>test</strong>"
         self.do(test, output)
 
     def testEmphasis08(self):
+        py.test.skip('broken test')
         test = ur"''test'''''test'''"
         output = ur"<em>test</em><strong>test</strong>"
         self.do(test, output)
 
     def testEmphasis09(self):
+        py.test.skip('broken test')
         test = ur"'''test'''''test''"
         output = ur"<strong>test</strong><em>test</em>"
         self.do(test, output)
 
     def testEmphasis10(self):
+        py.test.skip('broken test')
         test = ur"'''''test''test'''"
         output = ur"<strong><em>test</em>test</strong>"
         self.do(test, output)
 
     def testEmphasis11(self):
+        py.test.skip('broken test')
         test = ur"'''''test'''test''"
         output = ur"<em><strong>test</strong>test</em>"
         self.do(test, output)
 
     def testFormatBig01(self):
+        py.test.skip('broken test')
         test = ur"~+test+~"
         output = ur"<big>test</big>"
         self.do(test, output)
 
     def testFormatSmall01(self):
+        py.test.skip('broken test')
         test = ur"~-test-~"
         output = ur"<small>test</small>"
         self.do(test, output)
 
     def testFormatStrike01(self):
+        py.test.skip('broken test')
         test = ur"--(test)--"
         output = ur"<strike>test</strike>"
         self.do(test, output)
 
     def testFormatSub01(self):
+        py.test.skip('broken test')
         test = ur",,test,,"
         output = ur"<sub>test</sub>"
         self.do(test, output)
 
     def testFormatSup01(self):
+        py.test.skip('broken test')
         test = ur"^test^"
         output = ur"<sup>test</sup>"
         self.do(test, output)
 
     def testFormatUnderline01(self):
+        py.test.skip('broken test')
         test = ur"__test__"
         output = ur"<u>test</u>"
         self.do(test, output)
 
     def testPre01(self):
+        py.test.skip('broken test')
         test = ur"{{{test}}}"
         output = ur"<tt>test</tt>"
         self.do(test, output)
 
     def testWhitespace01(self):
+        py.test.skip('broken test')
         test = ur"''test '''test'''''"
         output = ur"<em>test <strong>test</strong></em>"
         self.do(test, output)
@@ -1041,16 +1075,19 @@ class TestConvertInlineItemRepeatable(TestBase):
         assert text == out
 
     def testWikiWord01(self):
+        py.test.skip('broken test')
         test = ur"WikiWord"
         output = ur"""<a class="nonexistent" href="./WikiWord">WikiWord</a>"""
         self.do(test, output)
 
     def testNoWikiWord01(self):
+        py.test.skip('broken test')
         test = ur"!WikiWord"
         output = ur"WikiWord"
         self.do(test, output)
 
     def testSmiley01(self):
+        py.test.skip('broken test')
         test = ur":-)"
         output = ur"""<img src="/wiki/modern/img/smile.png" alt=":-)" height="15" width="15">"""
         self.do(test, output)
@@ -1079,6 +1116,7 @@ class TestStripWhitespace(TestStrip):
         self.do(test, output)
 
     def test2(self):
+        py.test.skip('broken test')
         test = ur"""
 <t>
   <z/>
@@ -1088,6 +1126,7 @@ class TestStripWhitespace(TestStrip):
         self.do(test, output)
 
     def test3(self):
+        py.test.skip('broken test')
         test = ur"""
 <t>
   <z>test</z>
@@ -1109,10 +1148,12 @@ class TestStripWhitespace(TestStrip):
 class TestConvertBrokenBrowser(TestBase):
     def do(self, text, output):
         text = text.strip('\n')
-        output = output.lstrip('\n')
+        output = output.strip()
         request = MinimalRequest(self.request)
         page = MinimalPage()
         out = self.do_convert_real([request, page.page_name, text])
+        out = out.strip()
+
         assert output == out
 
     def testList01(self):
@@ -1133,6 +1174,33 @@ class TestConvertBrokenBrowser(TestBase):
 """
         self.do(test, output)
 
+class TestConvertImportFromOOo(TestBase):
+    def do(self, text, output):
+        text = text.strip('\n')
+        output = output.strip()
+        request = MinimalRequest(self.request)
+        page = MinimalPage()
+        out = self.do_convert_real([request, page.page_name, text])
+        out = out.strip()
+        assert output == out
+
+    def testTable01(self):
+        test = u"""<meta content="text/html; charset=utf-8" http-equiv="CONTENT-TYPE" /><title></title><meta content="OpenOffice.org 2.0  (Linux)" name="GENERATOR" />               <style type="text/css">
+        <!--
+        BODY,DIV,TABLE,THEAD,TBODY,TFOOT,TR,TH,TD,P { font-family:"Albany AMT"; font-size:x-small }
+         -->
+    </style>       <table rules="none" frame="void" cols="7" cellspacing="0" border="0">     <colgroup><col width="86"></col><col width="86"></col><col width="86"></col><col width="86"></col><col width="86"></col><col width="86"></col><col width="86"></col></colgroup>     <tbody>         <tr>             <td width="86" height="19" align="left"><strong><font size="3">a</font></strong></td>             <td width="86" valign="middle" align="left" sdnum="1031;0;@"><strong><font size="3" face="Times New Roman">b</font></strong></td>             <td width="86" valign="middle" align="left" sdnum="1031;0;@"><strong><font size="3" face="Times New Roman">c</font></strong></td>             <td width="86" valign="middle" align="left" sdnum="1031;0;@"><strong><font size="3" face="Times New Roman">d</font></strong></td>             <td width="86" valign="middle" align="left" sdnum="1031;0;@"><strong><font size="3" face="Times New Roman">e</font></strong></td>             <td width="86" valign="top" align="left" sdnum="1031;0;@"><strong><font size="3" face="Times New Roman">f</font></strong></td>             <td width="86" valign="top" align="left" sdnum="1031;0;@"><strong><font size="3" face="Times New Roman">g</font></strong></td>         </tr>         <tr>             <td valign="middle" height="19" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">a</font></td>             <td valign="middle" align="center" sdnum="1031;0;@" rowspan="2" colspan="4"><font size="3" face="Times New Roman">b</font></td>             <td valign="top" align="center" sdnum="1031;0;0,00"><font size="3" face="Times New Roman"><br /></font></td>             <td valign="top" align="center" sdnum="1031;0;0,00"><font size="3" face="Times New Roman"><br /></font></td>         </tr>         <tr>             <td valign="middle" height="19" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">a</font></td>             <td valign="middle" align="center" sdnum="1031;0;0,00"><font size="3" face="Times New Roman"><br /></font></td>             <td valign="top" align="center" sdnum="1031;0;0,00"><font size="3" face="Times New Roman"><br /></font></td>         </tr>         <tr>             <td valign="middle" height="19" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">a</font></td>             <td valign="middle" align="center" sdnum="1031;0;@" rowspan="2"><font size="3" face="Times New Roman">b</font></td>             <td valign="middle" align="center" sdnum="1031;0;@" rowspan="2"><font size="3" face="Times New Roman">c </font></td>             <td valign="middle" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">d</font></td>             <td valign="middle" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">e</font></td>             <td valign="middle" align="center" sdnum="1031;0;0,00"><font size="3" face="Times New Roman"><br /></font></td>             <td valign="top" align="center" sdnum="1031;0;0,00"><font size="3" face="Times New Roman"><br /></font></td>         </tr>         <tr>             <td valign="middle" height="19" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">a</font></td>             <td valign="middle" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">d</font></td>             <td valign="middle" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">e</font></td>             <td valign="middle" align="center" sdnum="1031;0;0,00"><font size="3" face="Times New Roman"><br /></font></td>             <td valign="top" align="center" sdnum="1031;0;0,00"><font size="3" face="Arial"><br /></font></td>         </tr>         <tr>             <td valign="middle" height="19" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">a</font></td>             <td valign="middle" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">b</font></td>             <td valign="middle" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">c</font></td>             <td valign="middle" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">d</font></td>             <td valign="middle" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">e</font></td>             <td valign="middle" align="center" sdnum="1031;0;0,00"><font size="3" face="Times New Roman">f</font></td>             <td valign="top" align="center" sdnum="1031;0;0,00"><font size="3" face="Times New Roman">g</font></td>         </tr>     </tbody> </table> """
+
+        output = u"""
+||<( width="86px" height="19px">'''a'''||<( width="86px">'''b'''||<( width="86px">'''c'''||<( width="86px">'''d'''||<( width="86px">'''e'''||<(^ width="86px">'''f'''||<(^ width="86px">'''g'''||
+||<( height="19px">a||||||||<|2>b||<:^>||<:^>||
+||<( height="19px">a||<:>||<:^>||
+||<( height="19px">a||<|2>b||<|2>c ||<(>d||<(>e||<:>||<:^>||
+||<( height="19px">a||<(>d||<(>e||<:>||<:^>||
+||<( height="19px">a||<(>b||<(>c||<(>d||<(>e||<:>f||<:^>g||"""
+
+
+        self.do(test, output)
 
 coverage_modules = ['MoinMoin.converter.text_html_text_moin_wiki']
 
