@@ -1,0 +1,108 @@
+MoinMoin - a wiki engine in Python
+==================================
+
+Copyright (c) 2000-2006 by Juergen Hermann <jh@web.de>
+Copyright (c) 2006-2007 The MoinMoin development team, see
+                        http://moinmo.in/MoinCoreTeamGroup
+
+All rights reserved, see docs/licenses/COPYING for details.
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+
+Documentation
+=============
+
+On the Web:
+
+http://purl.net/wiki/moin/       MoinMoin homepage, last seen at:
+                                 http://moinmo.in/
+
+This page also points to support resources and informations about MoinMoin
+development status and plans.
+
+For support, please try the documentation, the homepage, the irc channel
+and the mailing list before contacting the MoinMoin authors directly.
+
+Local:
+
+See docs/CHANGES                 for a version history. READ THIS!
+See docs/INSTALL.html            for installation instructions.
+See docs/README.migration        for data conversion instructions.
+
+Note that the code base contains some experimental or unfinished features.
+Use them at your own risk. Official features are described on the set of
+help pages contained in the distribution wiki.
+
+
+ACKNOWLEDGEMENTS
+================
+
+We like to thank especially these people, groups and companies for their
+valuable ideas and contributions:
+
+    Ward Cunningham <ward@c2.com> for inventing WikiWiki in the first place.
+
+    Martin Pool <mbp@humbug.org.au> for providing the base of what now is
+    MoinMoin, see also docs/licenses/pikipiki.txt.
+
+    Marko Schulz <Marko.Schulz@gmx.de> for providing input on the first
+    versions of MoinMoin as it evolved.
+
+    Tom Holroyd <tomh@po.crl.go.jp> provided the set of emoticons that come
+    with the standard distribution, and came up with the idea to add that
+    feature.
+
+    Richard Jones <richard@bizarsoftware.com.au> who provided so much code
+    in so little time that I could not keep up with him. He works on company
+    time, though (unless I'm mistaken). Also found the nasty security hole
+    in release 0.6.
+
+    Christian Bird <chris.bird@lineo.com> provided some nice ideas and some
+    code.
+
+    Peter Thoeny and all other people involved in creating TWikiDrawPlugin;
+    for copyright information see docs/licenses/twikidraw.txt; for more
+    information and a download link to get the source refer to
+    http://twiki.org/cgi-bin/view/TWiki/TWikiDrawPlugin
+
+    Thomas Waldmann for the major effort of translating all the help and
+    system pages to German, and increasing volumes of code.
+
+    Bernhard Rosenkraenzer and Andrew Bennetts for password login patches.
+
+    Florian Festi, Bastian Blank, Oliver Graf and Nir Soffer for many code
+    contributions.
+
+    Alexander Schremmer for much testing work, code contributions and
+    finally fixing the win32 stuff.
+
+    Arcelor S.A. for sponsoring MoinMoin v1.5 GPL development.
+
+    All language maintainers for translating MoinMoin to many languages and
+    keeping those translations up-to-date.
+
+    And all the people we forgot or that are mentioned in the code.
+
+
+-----------------------------------------------------------------------------
+
+The slides in wiki\data\text\WikiSchulung* were written at WEB.DE AG and
+licensed to MoinMoin users under the terms of "IFL-Text v1.0".
+
+Copyright (c) 2003 by WEB.DE AG, Karlsruhe, Germany.
+
+IFL-Text v1.0: see http://www.ifross.de/ifross_html/ifl.html
+
