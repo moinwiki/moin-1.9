@@ -896,6 +896,7 @@ Try a different name.""") % (wikiutil.escape(newpagename), )
         revdir = os.path.join(pagedir, 'revisions')
         cfn = os.path.join(pagedir, 'current')
         clfn = os.path.join(pagedir, 'current-locked')
+        cltfn = os.path.join(pagedir, 'current-locked.tmp')
 
         # !!! these log objects MUST be created outside the locked area !!!
 
@@ -938,14 +939,33 @@ Try a different name.""") % (wikiutil.escape(newpagename), )
             f = file(clfn)
             revstr = f.read()
             f.close()
-            rev = int(revstr)
+            try:
+                rev = int(revstr)
+            except ValueError, err:
+                raise self.SaveError, _("Unable to determine current page revision from the 'current' file. The page %s is damaged and cannot be edited right now.") % self.page_name
+
             if not was_deprecated:
                 if self.do_revision_backup or rev == 0:
                     rev += 1
             revstr = '%08d' % rev
-            f = file(clfn, 'w')
-            f.write(revstr+'\n')
-            f.close()
+            # write the current page rev to a temporary file
+            try:
+                f = file(cltfn, 'w')
+                f.write(revstr+'\n')
+                f.close()
+            except IOError, err:
+                try:
+                    os.remove(cltfn)
+                except:
+                    pass # we don't care for errors in the os.remove
+                # throw a nicer exception
+                if err.errno == errno.ENOSPC:
+                    raise self.SaveError, _("Cannot save page %s, no storage space left.") % self.page_name
+                else:
+                    raise self.SaveError, _("An I/O error occurred while saving page %s (errno=%d)") % (self.page_name, err.errno)
+            # atomically put it in place (except on windows)
+            else:
+                filesys.rename(cltfn, clfn)
 
             if not deleted:
                 # save to page file

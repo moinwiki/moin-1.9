@@ -145,7 +145,7 @@ class CacheEntry:
                         self.wlock.release()
             else:
                 self.request.log("Can't acquire write lock in %s" % self.lock_dir)
-        except (pickle.PicklingError, IOError, ValueError), err:
+        except (pickle.PicklingError, OSError, IOError, ValueError), err:
             raise CacheError(str(err))
 
     def remove(self):
