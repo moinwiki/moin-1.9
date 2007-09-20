@@ -745,6 +745,7 @@ class convert_tree(visitor):
             self.text.append(text)                          # so we just drop the header markup and keep the text
             return
 
+        # if we get br from e.g. cut and paste from OOo to the gui it should be appended as <<BR>>
         if name == 'br':
             self.text.append(' <<BR>> ')
             return
