@@ -745,6 +745,10 @@ class convert_tree(visitor):
             self.text.append(text)                          # so we just drop the header markup and keep the text
             return
 
+        if name == 'br':
+            self.text.append(' <<BR>> ')
+            return
+
         func = getattr(self, "process_%s" % name, None)
         if func:
             func(node)
