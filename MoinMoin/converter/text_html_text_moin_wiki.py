@@ -543,9 +543,8 @@ class convert_tree(visitor):
             #    self.text.append("\n")
 
     def process_br(self, node):
-        if node.nodeType == Node.TEXT_NODE:
-            self.text.append(self.new_line) # without this, std multi-line text below some heading misses a whitespace
-                                            # when it gets merged to float text, like word word wordword word word
+        self.text.append(self.new_line) # without this, std multi-line text below some heading misses a whitespace
+                                        # when it gets merged to float text, like word word wordword word word
 
     def process_heading(self, node):
         text = self.node_list_text_only(node.childNodes).strip()
@@ -744,6 +743,11 @@ class convert_tree(visitor):
         if name in ('h1', 'h2', 'h3', 'h4', 'h5', 'h6', ): # headers are not allowed here (e.g. inside a ul li),
             text = self.node_list_text_only(node.childNodes).strip() # but can be inserted via the editor
             self.text.append(text)                          # so we just drop the header markup and keep the text
+            return
+
+        # if we get br from e.g. cut and paste from OOo to the gui it should be appended as <<BR>>
+        if name == 'br':
+            self.text.append(' <<BR>> ')
             return
 
         func = getattr(self, "process_%s" % name, None)
@@ -980,7 +984,6 @@ class convert_tree(visitor):
             if i.nodeType == Node.ELEMENT_NODE:
                 name = i.localName
                 if name == 'tr':
-                    self.text.append(self.new_line_dont_remove)
                     self.process_table_record(i, style)
                     style = ""
                 elif name in ('thead', 'tbody', 'tfoot'):
@@ -988,12 +991,13 @@ class convert_tree(visitor):
                 elif name == 'caption':
                     self.process_caption(node, i, style)
                     style = ''
-                elif name in ('col', 'colgroup', ):
+                elif name in ('col', 'colgroup', 'strong', ):
                     pass # we don't support these, but we just ignore them
                 else:
                     raise ConvertError("process_table: Don't support %s element" % name)
             #else:
             #    raise ConvertError("Unexpected node: %r" % i)
+        self.text.append(self.new_line_dont_remove)
 
     def process_caption(self, table, node, style=""):
         # get first row
@@ -1068,7 +1072,7 @@ class convert_tree(visitor):
                     style = ""
                 else:
                     raise ConvertError("process_table_record: Don't support %s element" % name)
-        self.text += '||'
+        self.text.extend(["||", self.new_line_dont_remove])
 
     def process_a(self, node):
         scriptname = self.request.getScriptname()
