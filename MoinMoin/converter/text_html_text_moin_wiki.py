@@ -982,7 +982,7 @@ class convert_tree(visitor):
                 elif name == 'caption':
                     self.process_caption(node, i, style)
                     style = ''
-                elif name in ('col', 'colgroup', ):
+                elif name in ('col', 'colgroup', 'strong', ):
                     pass # we don't support these, but we just ignore them
                 else:
                     raise ConvertError("process_table: Don't support %s element" % name)
