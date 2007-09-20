@@ -26,7 +26,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, time, zipfile, mimetypes
+import os, time, zipfile, mimetypes, errno
 
 from MoinMoin import config, wikiutil, packages
 from MoinMoin.Page import Page
@@ -717,7 +717,11 @@ def save_drawing(pagename, request):
     savepath = os.path.join(attach_dir, basename + ext)
     if ext == '.map' and not filecontent.strip():
         # delete map file if it is empty
-        os.unlink(savepath)
+        try:
+            os.unlink(savepath)
+        except OSError, err:
+            if err.errno != errno.ENOENT: # no such file
+                raise
     else:
         stream = open(savepath, 'wb')
         try:
