@@ -543,9 +543,8 @@ class convert_tree(visitor):
             #    self.text.append("\n")
 
     def process_br(self, node):
-        if node.nodeType == Node.TEXT_NODE:
-            self.text.append(self.new_line) # without this, std multi-line text below some heading misses a whitespace
-                                            # when it gets merged to float text, like word word wordword word word
+        self.text.append(self.new_line) # without this, std multi-line text below some heading misses a whitespace
+                                        # when it gets merged to float text, like word word wordword word word
 
     def process_heading(self, node):
         text = self.node_list_text_only(node.childNodes).strip()
@@ -735,10 +734,6 @@ class convert_tree(visitor):
         # do we need to check for Node.ELEMENT_NODE and return (do nothing)?
         name = node.localName # can be None for DOM Comment nodes
         if name is None:
-            return
-
-        # unsupported tags
-        if name in (u'title', u'meta', u'style'):
             return
 
         if name in ('h1', 'h2', 'h3', 'h4', 'h5', 'h6', ): # headers are not allowed here (e.g. inside a ul li),
@@ -980,7 +975,6 @@ class convert_tree(visitor):
             if i.nodeType == Node.ELEMENT_NODE:
                 name = i.localName
                 if name == 'tr':
-                    self.text.append(self.new_line_dont_remove)
                     self.process_table_record(i, style)
                     style = ""
                 elif name in ('thead', 'tbody', 'tfoot'):
@@ -994,6 +988,7 @@ class convert_tree(visitor):
                     raise ConvertError("process_table: Don't support %s element" % name)
             #else:
             #    raise ConvertError("Unexpected node: %r" % i)
+        self.text.append(self.new_line_dont_remove)
 
     def process_caption(self, table, node, style=""):
         # get first row
@@ -1068,7 +1063,7 @@ class convert_tree(visitor):
                     style = ""
                 else:
                     raise ConvertError("process_table_record: Don't support %s element" % name)
-        self.text += '||'
+        self.text.extend(["||", self.new_line_dont_remove])
 
     def process_a(self, node):
         scriptname = self.request.getScriptname()
