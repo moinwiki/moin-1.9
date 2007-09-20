@@ -1307,36 +1307,40 @@ class RequestBase(object):
         #else:
         #    self.log("Notice: emit_http_headers called first time. Headers: %r" % all_headers)
 
-        content_type = None
-        status = None
-        headers = []
-        # assemble complete list of http headers
+        # assemble dict of http headers
+        headers = {}
         for header in all_headers:
             if isinstance(header, unicode):
                 header = header.encode('ascii')
             key, value = header.split(':', 1)
             lkey = key.lower()
             value = value.lstrip()
-            if content_type is None and lkey == "content-type":
-                content_type = value
-            elif status is None and lkey == "status":
-                status = value
+            if lkey in headers:
+                self.log("Duplicate http header: %r (ignored)" % header)
             else:
-                headers.append(header)
+                headers[lkey] = (key, value)
 
-        if content_type is None:
-            content_type = "text/html; charset=%s" % config.charset
-        ct_header = "Content-type: %s" % content_type
+        if 'content-type' not in headers:
+            headers['content-type'] = ('Content-type', 'text/html; charset=%s' % config.charset)
 
-        if status is None:
-            status = "200 OK"
-        try:
-            int(status.split(" ", 1)[0])
-        except:
-            self.log("emit_http_headers called with invalid header Status: %s" % status)
-            status = "500 Server Error - invalid status header"
-        st_header = "Status: %s" % status
+        if 'status' not in headers:
+            headers['status'] = ('Status', '200 OK')
+        else:
+            # check if we got a valid status
+            try:
+                status = headers['status'][1]
+                int(status.split(' ', 1)[0])
+            except:
+                self.log("emit_http_headers called with invalid header Status: %r" % status)
+                headers['status'] = ('Status', '500 Server Error - invalid status header')
 
+        header_format = '%s: %s'
+        st_header = header_format % headers['status']
+        del headers['status']
+        ct_header = header_format % headers['content-type']
+        del headers['content-type']
+
+        headers = [header_format % kv_tuple for kv_tuple in headers.values()] # make a list of strings
         headers = [st_header, ct_header] + headers # do NOT change order!
         self._emit_http_headers(headers)
 
