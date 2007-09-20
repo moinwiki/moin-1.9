@@ -1185,32 +1185,29 @@ class TestConvertImportFromOOo(TestBase):
         assert output == out
 
     def testOOoTable01(self):
-        py.test.skip('broken test')
-        test = u"""<meta content="text/html; charset=utf-8" http-equiv="CONTENT-TYPE" /><title></title><meta content="OpenOffice.org 2.0  (Linux)" name="GENERATOR" />               <style type="text/css">
-<!--
-BODY,DIV,TABLE,THEAD,TBODY,TFOOT,TR,TH,TD,P { font-family:"Albany AMT"; font-size:x-small }
--->
-</style>
-<table rules="none" frame="void" cols="7" cellspacing="0" border="0">        <colgroup><col width="86"></col><col width="86"></col><col width="86"></col><col width="86"></col><col width="86"></col><col width="86"></col><col width="86"></col></colgroup>     <tbody>
-<tr>             <td width="86" height="19" align="left"><strong><font size="3">a</font></strong></td>             <td width="86" valign="middle" align="left" sdnum="1031;0;@"><strong><font size="3" face="Times New Roman">b</font></strong></td>             <td width="86" valign="middle" align="left" sdnum="1031;0;@"><strong><font size="3" face="Times New Roman">c</font></strong></td>             <td width="86" valign="middle" align="left" sdnum="1031;0;@"><strong><font size="3" face="Times New Roman">d</font></strong></td>             <td width="86" valign="middle" align="left" sdnum="1031;0;@"><strong><font size="3" face="Times New Roman">e</font></strong></td>             <td width="86" valign="top" align="left" sdnum="1031;0;@"><strong><font size="3" face="Times New Roman">f</font></strong></td>             <td width="86" valign="top" align="left" sdnum="1031;0;@"><strong><font size="3" face="Times New Roman">g</font></strong></td>         </tr>
-<tr>             <td valign="middle" height="19" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">a</font></td>             <td valign="middle" align="center" sdnum="1031;0;@" rowspan="2" colspan="4"><font size="3" face="Times New Roman">b</font></td>             <td valign="top" align="center" sdnum="1031;0;0,00"><font size="3" face="Times New Roman"><br /></font></td>             <td valign="top" align="center" sdnum="1031;0;0,00"><font size="3" face="Times New Roman"><br /></font></td>         </tr>
-<tr>             <td valign="middle" height="19" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">a</font></td>             <td valign="middle" align="center" sdnum="1031;0;0,00"><font size="3" face="Times New Roman"><br /></font></td>             <td valign="top" align="center" sdnum="1031;0;0,00"><font size="3" face="Times New Roman"><br /></font></td>         </tr>
-<tr>             <td valign="middle" height="19" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">a</font></td>             <td valign="middle" align="center" sdnum="1031;0;@" rowspan="2"><font size="3" face="Times New Roman">b</font></td>             <td valign="middle" align="center" sdnum="1031;0;@" rowspan="2"><font size="3" face="Times New Roman">c </font></td>             <td valign="middle" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">d</font></td>             <td valign="middle" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">e</font></td>             <td valign="middle" align="center" sdnum="1031;0;0,00"><font size="3" face="Times New Roman"><br /></font></td>             <td valign="top" align="center" sdnum="1031;0;0,00"><font size="3" face="Times New Roman"><br /></font></td>         </tr>
-<tr>             <td valign="middle" height="19" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">a</font></td>             <td valign="middle" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">d</font></td>             <td valign="middle" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">e</font></td>             <td valign="middle" align="center" sdnum="1031;0;0,00"><font size="3" face="Times New Roman"><br /></font></td>             <td valign="top" align="center" sdnum="1031;0;0,00"><font size="3" face="Arial"><br /></font></td>         </tr>
-<tr>             <td valign="middle" height="19" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">a</font></td>             <td valign="middle" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">b</font></td>             <td valign="middle" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">c</font></td>             <td valign="middle" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">d</font></td>             <td valign="middle" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">e</font></td>             <td valign="middle" align="center" sdnum="1031;0;0,00"><font size="3" face="Times New Roman">f</font></td>             <td valign="top" align="center" sdnum="1031;0;0,00"><font size="3" face="Times New Roman">g</font></td>         </tr>     </tbody> </table> """
+        # tests cut and paste from OOo to gui (empty cells do have a <br \>
+        test = u"""<p class="line874">
+        <meta content="text/html; charset=utf-8" http-equiv="CONTENT-TYPE" />
+        <title></title><meta content="OpenOffice.org 2.0  (Linux)" name="GENERATOR" />
+        <style type="text/css">
+        <!--
+        BODY,DIV,TABLE,THEAD,TBODY,TFOOT,TR,TH,TD,P { font-family:"Albany AMT"; font-size:x-small }
+         -->
+        </style>
+        <table rules="none" frame="void" cols="4" cellspacing="0" border="0">     <colgroup><col width="86"></col><col width="86"></col><col width="86"></col><col width="86"></col></colgroup>
+        <tbody>
+        <tr>             <td width="86" height="19" align="left"><font size="3">a</font></td>             <td width="86" valign="middle" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">b</font></td>             <td width="86" valign="middle" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">c</font></td>             <td width="86" valign="middle" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman"><br /></font></td>         </tr>
+        <tr>             <td valign="middle" height="19" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">a</font></td>             <td valign="middle" align="center" sdnum="1031;0;@" colspan="2"><font size="3" face="Times New Roman">b</font></td>             <td valign="middle" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">d</font></td>         </tr>
+        </tbody>
+        </table>  </p>"""
 
-        output = u"""
-||<( width="86px" height="19px">'''a'''||<( width="86px">'''b'''||<( width="86px">'''c'''||<( width="86px">'''d'''||<( width="86px">'''e'''||<(^ width="86px">'''f'''||<(^ width="86px">'''g'''||
-||<( height="19px">a||||||||<|2>b||<:^>||<:^>||
-||<( height="19px">a||<:>||<:^>||
-||<( height="19px">a||<|2>b||<|2>c ||<(>d||<(>e||<:>||<:^>||
-||<( height="19px">a||<(>d||<(>e||<:>||<:^>||
-||<( height="19px">a||<(>b||<(>c||<(>d||<(>e||<:>f||<:^>g||"""
-
+        output = u"""||<( width="86px" height="19px">a||<( width="86px">b||<( width="86px">c||<( width="86px"> <<BR>> ||
+||<( height="19px">a||||b||<(>d||"""
 
         self.do(test, output)
 
     def testTable02(self):
+        # tests empty cells
         test = u"""<table><tbody>
                    <tr>  <td width="86" height="19" style="text-align: left;"><p class="line891"><strong>a</strong></p></td>   <td width="86" style="text-align: left;"><p class="line891"><strong>b</strong></p></td>   <td width="86" style="text-align: left;"><p class="line891"><strong>c</strong></p></td>   <td width="86" style="text-align: left;"><p class="line891"><strong>d</strong></p></td>   <td width="86" style="text-align: left;"><p class="line891"><strong>e</strong></p></td>   <td width="86" style="text-align: left; vertical-align: top;"><p class="line891"><strong>f</strong></p></td>   <td width="86" style="text-align: left; vertical-align: top;"><p class="line891"><strong>g</strong></p></td> </tr>
                    <tr>  <td height="19" style="text-align: left;"><p class="line862">a</p></td>   <td style="text-align: center;" rowspan="2" colspan="4"><p class="line862">b</p></td>   <td style="text-align: center; vertical-align: top;"></td>   <td style="text-align: center; vertical-align: top;"></td> </tr>
