@@ -1,4 +1,5 @@
 .*\.py[co]
+.coverage
 tests/wiki
 wiki/underlay
 wiki/data/edit-log
