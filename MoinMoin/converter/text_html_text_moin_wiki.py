@@ -736,6 +736,10 @@ class convert_tree(visitor):
         if name is None:
             return
 
+        # unsupported tags
+        if name in (u'title', u'meta', u'style'):
+            return
+
         if name in ('h1', 'h2', 'h3', 'h4', 'h5', 'h6', ): # headers are not allowed here (e.g. inside a ul li),
             text = self.node_list_text_only(node.childNodes).strip() # but can be inserted via the editor
             self.text.append(text)                          # so we just drop the header markup and keep the text
