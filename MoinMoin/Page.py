@@ -977,9 +977,11 @@ class Page(object):
             text = self.encodeTextMimeType(self.body)
             request.setHttpHeader("Content-Length: %d" % len(text))
             if content_disposition:
-                file_name = "%s.txt" % self.page_name
+                # TODO: fix the encoding here, plain 8 bit is not allowed according to the RFCs
+                # There is no solution that is compatible to IE except stripping non-ascii chars
+                filename_enc = "%s.txt" % self.page_name.encode(config.charset)
                 request.setHttpHeader('Content-Disposition: %s; filename="%s"' % (
-                                      content_disposition, file_name))
+                                      content_disposition, filename_enc))
         else:
             request.setHttpHeader('Status: 404 NOTFOUND')
             text = u"Page %s not found." % self.page_name
