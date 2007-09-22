@@ -98,38 +98,7 @@ class Formatter(text_html.Formatter):
     # Dynamic stuff / Plugins ############################################
 
     def macro(self, macro_obj, name, args, markup=None):
-        #use ImageLink for resized images
-        if name == "ImageLink" and args is not None:
-
-            from MoinMoin.macro import ImageLink
-            pagename = self.page.page_name
-
-            kwAllowed = ['width', 'height', 'alt']
-            pp, pp_count, kw, kw_count = ImageLink.explore_args(args, kwAllowed)
-
-            kw['src'] = None
-            url = None
-
-            if pp_count >= 1:
-                url = pp[0]
-
-            if pp_count == 2:
-                kw['target'] = pp[1]
-
-            if ImageLink._is_URL(url):
-                kw['src'] = url
-                kw['title'] = url
-            else:
-                kw['title'] = "attachment:%s" % wikiutil.quoteWikinameURL(url)
-
-            if kw['src'] is None:
-                if '/' in url:
-                    pagename, target = AttachFile.absoluteName(url, pagename)
-                    url = url.split('/')[-1]
-                kw['src'] = AttachFile.getAttachUrl(pagename, url, self.request, addts=1)
-            return self.image(**kw)
-
-        elif markup is not None:
+        if markup is not None:
             result = markup
         elif args is not None:
             result = "<<%s(%s)>>" % (name, args)
