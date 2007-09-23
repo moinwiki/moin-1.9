@@ -75,9 +75,9 @@ class Formatter(text_html.Formatter):
 
     def attachment_image(self, url, **kw):
         _ = self.request.getText
-        pagename = self.page.page_name
-        kw = {}
+        # we force the title here, needed later for html>wiki converter
         kw['title'] = "attachment:%s" % wikiutil.quoteWikinameURL(url)
+        pagename = self.page.page_name
         if '/' in url:
             pagename, target = AttachFile.absoluteName(url, pagename)
             url = url.split('/')[-1]
@@ -86,11 +86,23 @@ class Formatter(text_html.Formatter):
 
     def attachment_drawing(self, url, text, **kw):
         _ = self.request.getText
+        # TODO: this 'text' argument is kind of superfluous, replace by using alt=... kw arg
+        if 'alt' not in kw or not kw['alt']:
+            kw['alt'] = text
+        # we force the title here, needed later for html>wiki converter
+        kw['title'] = "drawing:%s" % wikiutil.quoteWikinameURL(url)
         pagename = self.page.page_name
-        image = url + u'.png'
-        return self.image(
-            title="drawing:%s" % wikiutil.quoteWikinameURL(url),
-            src=AttachFile.getAttachUrl(pagename, image, self.request, addts=1))
+        if '/' in url:
+            pagename, target = AttachFile.absoluteName(url, pagename)
+            url = url.split('/')[-1]
+        url += '.png'
+        kw['src'] = AttachFile.getAttachUrl(pagename, url, self.request, addts=1)
+        return self.image(**kw)
+
+    def icon(self, type):
+        return self.request.theme.make_icon(type, title='smiley:%s' % type)
+
+    smiley = icon
 
     def nowikiword(self, text):
         return '<span style="background-color:#ffff11">!</span>' + self.text(text)

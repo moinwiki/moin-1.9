@@ -529,6 +529,28 @@ class convert_tree(visitor):
                 result.extend(self.node_list_text_only(node.childNodes))
         return "".join(result)
 
+    def get_desc(self, nodelist):
+        """ links can have either text or an image as description - we extract
+            this from the child nodelist and return wiki markup.
+        """
+        markup = ''
+        text = self.node_list_text_only(nodelist).replace("\n", " ").strip()
+        if text:
+            # found some text
+            markup = text
+        else:
+            # search for an img / object
+            for node in nodelist:
+                if node.nodeType == Node.ELEMENT_NODE:
+                    name = node.localName
+                    if name == 'img':
+                        markup = self._process_img(node) # XXX problem: markup containts auto-generated alt text with link target
+                        break
+                    elif name == 'object':
+                        markup = self._process_object(node)
+                        break
+        return markup
+
     def process_page(self, node):
         for i in node.childNodes:
             if i.nodeType == Node.ELEMENT_NODE:
@@ -877,6 +899,7 @@ class convert_tree(visitor):
             return value
 
     def _table_style(self, node):
+        # TODO: attrs = get_attrs(node)
         result = []
         if node.hasAttribute("bgcolor"):
             value = node.getAttribute("bgcolor")
@@ -904,6 +927,7 @@ class convert_tree(visitor):
         return " ".join(result).strip()
 
     def _row_style(self, node):
+        # TODO: attrs = get_attrs(node)
         result = []
         if node.hasAttribute("bgcolor"):
             value = node.getAttribute("bgcolor")
@@ -922,6 +946,7 @@ class convert_tree(visitor):
         return " ".join(result).strip()
 
     def _cell_style(self, node):
+        # TODO: attrs = get_attrs(node)
         if node.hasAttribute("rowspan"):
             rowspan = ("|%s" % node.getAttribute("rowspan"))
         else:
@@ -1075,53 +1100,49 @@ class convert_tree(visitor):
         self.text.extend(["||", self.new_line_dont_remove])
 
     def process_a(self, node):
+        attrs = get_attrs(node)
+
+        title = attrs.pop('title', '')
+        href = attrs.pop('href', None)
+        css_class = attrs.get('class')
+
         scriptname = self.request.getScriptname()
         if scriptname == "":
             scriptname = "/"
+
         # can either be a link (with href) or an anchor (with e.g. id)
-        href = node.attributes.get("href", None)
+        # we don't need to support anchors here as we currently handle them as <<Anchor(id)>> macro
         if href:
-            href = wikiutil.url_unquote(href.nodeValue)
-        id = node.attributes.get("id", None)
-        if id:
-            id = id.nodeValue
+            href = wikiutil.url_unquote(href)
 
-        if href:
-            title = class_ = interwikiname = None
-
-            if node.attributes.has_key("title"):
-                title = node.attributes.get("title").nodeValue
-            if node.attributes.has_key("class"):
-                class_ = node.attributes.get("class").nodeValue
-
-            text = self.node_list_text_only(node.childNodes)
-            text = text.replace("\n", " ").lstrip()
+            interwikiname = None
+            desc = self.get_desc(node.childNodes)
 
             # interwiki link
-            if class_ == "interwiki":
+            if css_class == "interwiki":
                 wikitag, wikiurl, wikitail, err = wikiutil.resolve_interwiki(
-                    self.request, title, "")
+                    self.request, title, "") # the title has the wiki name, page = ""
                 if not err and href.startswith(wikiurl):
                     pagename = wikiutil.url_unquote(href[len(wikiurl):].lstrip('/'))
                     interwikiname = "%s:%s" % (wikitag, pagename)
                 else:
                     raise ConvertError("Invalid InterWiki link: '%s'" % href)
-            elif class_ == "badinterwiki" and title:
+            elif css_class == "badinterwiki" and title:
                 if href == "/": # we used this as replacement for empty href
                     href = ""
                 pagename = wikiutil.url_unquote(href)
                 interwikiname = "%s:%s" % (title, pagename)
-            if interwikiname and pagename == text:
+            if interwikiname and pagename == desc:
                 if ' ' in interwikiname:
                     self.text.append("[[%s]]" % interwikiname)
                 else:
                     self.text.append("%s" % interwikiname)
                 return
             elif title == 'Self':
-                self.text.append('[[%s|%s]]' % (href, text))
+                self.text.append('[[%s|%s]]' % (href, desc))
                 return
             elif interwikiname:
-                self.text.append("[[%s|%s]]" % (interwikiname, text))
+                self.text.append("[[%s|%s]]" % (interwikiname, desc))
                 return
 
             # fix links generated by a broken copy & paste of gecko based browsers
@@ -1131,131 +1152,129 @@ class convert_tree(visitor):
             # TODO: IE pastes complete http://server/Page/SubPage as href and as text, too
 
             # Attachments
-            if title and title.startswith("attachment:"):
+            if title.startswith("attachment:"):
                 attname = wikiutil.url_unquote(title[len("attachment:"):])
-                if attname != text or ' ' in attname:
-                    self.text.append('[[attachment:%s|%s]]' % (attname, text))
+                if attname != desc or ' ' in attname:
+                    self.text.append('[[attachment:%s|%s]]' % (attname, desc))
                 else:
                     self.text.extend([self.white_space, 'attachment:%s' % attname, self.white_space])
             # wiki link
             elif href.startswith(scriptname):
                 pagename = href[len(scriptname):]
                 pagename = pagename.lstrip('/')    # XXX temp fix for generated pagenames starting with /
-                if text == pagename:
+                if desc == pagename:
                     self.text.append(wikiutil.pagelinkmarkup(pagename))
                 # relative link /SubPage
-                elif text.startswith('/') and href.endswith(text):
+                elif desc.startswith('/') and href.endswith(desc):
                     if pagename.startswith(self.pagename): # is this a subpage of us?
                         self.text.append(wikiutil.pagelinkmarkup(pagename[len(self.pagename):]))
                     else:
                         self.text.append(wikiutil.pagelinkmarkup(pagename))
                 # relative link ../
-                elif text.startswith('../') and href.endswith(text[3:]):
-                    self.text.append(wikiutil.pagelinkmarkup(text))
+                elif desc.startswith('../') and href.endswith(desc[3:]):
+                    self.text.append(wikiutil.pagelinkmarkup(desc))
                 # labeled link
                 else:
-                    self.text.append(wikiutil.pagelinkmarkup(pagename, text))
+                    self.text.append(wikiutil.pagelinkmarkup(pagename, desc))
             # mailto link
             elif href.startswith("mailto:"):
-                if href[len("mailto:"):] == text:
-                    self.text.extend([self.white_space, text, self.white_space])
+                if href == desc or href[len("mailto:"):] == desc:
+                    self.text.extend([self.white_space, desc, self.white_space])
                 else:
-                    self.text.append("[[%s|%s]]" % (href, text)) # XXX use a (renamed) pagelinkmarkup
-            # simple link
-            elif href.replace(" ", "%20") == text:
-                self.text.append("%s" % text)
-            # imagelink
-            elif text == "" and wikiutil.isPicture(href):
-                self.text.append("[[%s]]" % href)
-            # labeled link
+                    self.text.append("[[%s|%s]]" % (href, desc)) # XXX use a (renamed) pagelinkmarkup
+            # link
             else:
-                href = href.replace(" ", "%20")
-                self.text.append("[[%s|%s]]" % (href, text))
-        elif id:
-            pass # we dont support anchors yet
+                if href == desc:
+                    href = href.replace(" ", "%20")
+                    self.text.append(href)
+                else:
+                    href = href.replace(" ", "%20")
+                    if desc:
+                        desc = '|' + desc
+                    self.text.append("[[%s%s]]" % (href, desc))
 
     def process_img(self, node):
-        src = None
-        if node.attributes.has_key("src"):
-            src = wikiutil.url_unquote(node.attributes.get("src").nodeValue)
-        title = None
-        if node.attributes.has_key("title"):
-            title = node.attributes.get("title").nodeValue
-        alt = None
-        if node.attributes.has_key("alt"):
-            alt = node.attributes.get("alt").nodeValue
-        width = None
-        if node.attributes.has_key("width"):
-            width = node.attributes.get("width").nodeValue
-        height = None
-        if node.attributes.has_key("height"):
-            height = node.attributes.get("height").nodeValue
-        target = None
-        if node.attributes.has_key("target"):
-            target = node.attributes.get("target").nodeValue
+        markup = self._process_img(node)
+        self.text.extend([self.white_space, markup, self.white_space])
 
-        # Attachment image
-        if (title and title.startswith("attachment:") and wikiutil.isPicture(wikiutil.url_unquote(title[len("attachment:"):]))
-           ) or title is None or src.startswith('http:'):
-            if height is None and width is None and target is None and not alt:
-                self.text.extend([self.white_space,
-                                  "{{%s}}" % wikiutil.url_unquote(title),
-                                  self.white_space])
-            else:
-                # use ImageLink for resized images
-                if title is None:
-                    il_parms = "%s" % wikiutil.url_unquote(src)
-                else:
-                    if src.startswith('http:'):
-                        il_parms = "%s" % wikiutil.url_unquote(src)
-                    else:
-                        il_parms = "%s" % wikiutil.url_unquote(title[len("attachment:"):])
-                if target is not None:
-                    il_parms += ",%s" % target
-                if width is not None:
-                    il_parms += ",width=%s" % width
-                if height is not None:
-                    il_parms += ",height=%s" % height
-                if alt:
-                    il_parms += ",alt=%s" % alt
-                self.text.extend([self.white_space, "<<ImageLink(%s)>>" % il_parms, self.white_space])
+    def _process_img(self, node):
+        attrs = get_attrs(node)
 
-        # Drawing image
-        elif title and title.startswith("drawing:"):
-            self.text.extend([self.white_space,
-                              wikiutil.url_unquote(title),
-                              self.white_space])
-        # Smiley
-        elif src and (self.request.cfg.url_prefix_static in src or '../' in src) and "img/" in src: # XXX this is dirty!
-            filename = src.split("/")[-1]
-            for markup, data in self.request.theme.icons.iteritems():
-                if data[1] == filename:
-                    self.text.extend([self.white_space, markup, self.white_space])
-                    return
-                else:
-                    pass #print name, data, filename, alt
-            raise ConvertError("Unknown smiley icon '%s'" % filename)
-        # Image URL
-        elif src and src.startswith("http") and wikiutil.isPicture(src): # matches http: and https: !
-            self.text.extend([self.white_space, "{{%s}}" % src, self.white_space])
+        title = attrs.pop('title', '')
+        if title.startswith("smiley:"):
+            markup = title[len("smiley:"):]
+            return markup
+
+        alt = attrs.pop('alt', None)
+        src = attrs.pop('src', None)
+        css_class = attrs.get('class')
+
+        target = src
+        if title.startswith("attachment:"):
+            target = wikiutil.url_unquote(title)
+            if alt == title[len("attachment:"):]:
+                # kill auto-generated alt
+                alt = None
+        elif title.startswith("drawing:"):
+            target = wikiutil.url_unquote(title)
+            if alt == title[len("drawing:"):]:
+                # kill auto-generated alt
+                alt = None
         else:
-            raise ConvertError("Strange image src: '%s' alt == '%r'" % (src, alt))
+            if css_class == 'external_image':
+                # kill auto-generated alt and class
+                if src == alt:
+                    alt = None
+                del attrs['class']
+
+        if alt:
+            desc = '|' + alt
+        else:
+            desc = ''
+
+        params = ','.join(['%s="%s"' % (k, v) for k, v in attrs.items()])
+                           # if k in ('width', 'height', )])
+        if params:
+            params = '|' + params
+            if not desc:
+                desc = '|'
+
+        markup = "{{%s%s%s}}" % (target, desc, params)
+        return markup
 
     def process_object(self, node):
-        data = None
-        if node.attributes.has_key("data"):
-            data = wikiutil.url_unquote(node.attributes.get("data").nodeValue)
+        markup = self._process_object(node)
+        self.text.append(markup)
 
-        text = self.node_list_text_only(node.childNodes)
-        text = text.replace("\n", " ").lstrip()
-
+    def _process_object(self, node):
+        attrs = get_attrs(node)
+        markup = ''
+        data = attrs.pop('data', None)
         if data:
-            if text:
-                text = '|' + text
-            self.text.append("{{%s%s}}" % (data, text))
+            data = wikiutil.url_unquote(data)
+
+            desc = self.get_desc(node.childNodes)
+            if desc:
+                desc = '|' + text
+
+            params = ','.join(['%s="%s"' % (k, v) for k, v in attrs.items()])
+                               # if k in ('width', 'height', )])
+            if params:
+                params = '|' + params
+                if not desc:
+                    desc = '|'
+            markup = "{{%s%s%s}}" % (data, desc, params)
+        return markup
         # TODO: for target PAGES, use some code from process_a to get the pagename from URL
         # TODO: roundtrip attachment: correctly
         # TODO: handle object's content better?
+
+def get_attrs(node):
+    """ get the attributes of <node> into an easy-to-use dict """
+    attrs = {}
+    for attr_name in node.attributes.keys():
+        attrs[attr_name] = node.attributes.get(attr_name).nodeValue
+    return attrs
 
 
 def parse(request, text):
