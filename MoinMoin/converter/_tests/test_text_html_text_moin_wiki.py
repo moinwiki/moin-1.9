@@ -1177,7 +1177,7 @@ class TestConvertBrokenBrowser(TestBase):
 class TestConvertImportFromOOo(TestBase):
     def do(self, text, output):
         text = text.strip('\n')
-        output = output.strip()
+        output = output.strip('\n')
         request = MinimalRequest(self.request)
         page = MinimalPage()
         out = self.do_convert_real([request, page.page_name, text])
@@ -1186,23 +1186,37 @@ class TestConvertImportFromOOo(TestBase):
 
     def testOOoTable01(self):
         # tests cut and paste from OOo to gui (empty cells do have a <br \>
-        test = u"""<p class="line874">
-        <meta content="text/html; charset=utf-8" http-equiv="CONTENT-TYPE" />
-        <title></title><meta content="OpenOffice.org 2.0  (Linux)" name="GENERATOR" />
-        <style type="text/css">
-        <!--
-        BODY,DIV,TABLE,THEAD,TBODY,TFOOT,TR,TH,TD,P { font-family:"Albany AMT"; font-size:x-small }
-         -->
-        </style>
-        <table rules="none" frame="void" cols="4" cellspacing="0" border="0">     <colgroup><col width="86"></col><col width="86"></col><col width="86"></col><col width="86"></col></colgroup>
-        <tbody>
-        <tr>             <td width="86" height="19" align="left"><font size="3">a</font></td>             <td width="86" valign="middle" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">b</font></td>             <td width="86" valign="middle" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">c</font></td>             <td width="86" valign="middle" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman"><br /></font></td>         </tr>
-        <tr>             <td valign="middle" height="19" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">a</font></td>             <td valign="middle" align="center" sdnum="1031;0;@" colspan="2"><font size="3" face="Times New Roman">b</font></td>             <td valign="middle" align="left" sdnum="1031;0;@"><font size="3" face="Times New Roman">d</font></td>         </tr>
-        </tbody>
-        </table>  </p>"""
+        # readed from guis source box, blanks removed, changed to readable lines
+        # this tests could get broken on any parser change
+        test = u"""
+<p class="line874">
+<meta content="text/html; charset=utf-8" http-equiv="CONTENT-TYPE" />
+<title></title><meta content="OpenOffice.org 2.2  (Linux)" name="GENERATOR" />
+<style type="text/css">
+<!--
+    BODY,DIV,TABLE,THEAD,TBODY,TFOOT,TR,TH,TD,P { font-family:"DejaVu Sans"; font-size:x-small }
+-->
+</style>
+<table rules="none" frame="void" cols="2" cellspacing="0" border="0">
+<colgroup><col width="86"></col><col width="86"></col></colgroup>
+<tbody>
+<tr> <td width="86" height="16" align="left">a</td>
+     <td width="86" align="left"><br /></td>
+</tr>
+<tr>
+     <td height="16" align="left"><br /></td>
+     <td valign="middle" align="center">b</td>
+</tr>
+</tbody>
+</table>
+</p>
+"""
 
-        output = u"""||<( width="86px" height="19px">a||<( width="86px">b||<( width="86px">c||<( width="86px"> <<BR>> ||
-||<( height="19px">a||||b||<(>d||"""
+        output = u"""
+||<( width="86px" height="16px">a||<( width="86px"> ||
+||<( height="16px"> ||<:>b||
+"""
+
 
         self.do(test, output)
 
