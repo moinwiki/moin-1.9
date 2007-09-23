@@ -439,6 +439,8 @@ class DocParser:
         re.sub(self.block_re, self._replace, raw)
 
     def parse(self):
+        """Parse the text given as self.raw and return DOM tree."""
+
         self.parse_block(self.raw)
         return self.root
 
@@ -456,7 +458,7 @@ class DocNode:
         self.parent = parent
         self.kind = kind
         self.content = content
-        if not self.parent is None:
+        if self.parent is not None:
             self.parent.children.append(self)
 
 
@@ -747,9 +749,7 @@ class DocEmitter:
 #        ])
 
     def break_emit(self, node):
-        return ''.join([
-            self.formatter.rawHTML('<br>'),
-        ])
+        return self.formatter.linebreak(preformatted=0)
 
 # Not used
 #    def blockquote_emit(self, node):
@@ -774,6 +774,8 @@ class DocEmitter:
         ])
 
     def default_emit(self, node):
+        """Fallback function for emitting unknown nodes."""
+
         return ''.join([
             self.formatter.preformatted(1),
             self.formatter.text('<%s>\n' % node.kind),
@@ -783,13 +785,18 @@ class DocEmitter:
 
     def emit_children(self, node):
         """Emit all the children of a node."""
+
         return ''.join([self.emit_node(child) for child in node.children])
 
     def emit_node(self, node):
+        """Emit a single node."""
+
         emit = getattr(self, '%s_emit' % node.kind, self.default_emit)
         return emit(node)
 
     def emit(self):
+        """Emit the document represented by self.root DOM tree."""
+
         # Try to disable 'smart' formatting if possible
         magic_save = getattr(self.formatter, 'no_magic', False)
         self.formatter.no_magic = True
@@ -799,17 +806,3 @@ class DocEmitter:
         # restore 'smart' formatting if it was set
         self.formatter.no_magic = magic_save
         return output
-
-
-# Private helpers ------------------------------------------------------------
-
-    def setParser(self, name):
-        """ Set parser to parser named 'name' """
-        # XXX this is done by the formatter as well
-
-        try:
-            self.parser = wikiutil.searchAndImportPlugin(self.request.cfg,
-                "parser", name)
-        except wikiutil.PluginMissingError:
-            self.parser = None
-
