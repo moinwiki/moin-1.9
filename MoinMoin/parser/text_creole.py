@@ -760,22 +760,18 @@ class DocEmitter:
 #        ])
 
     def preformatted_emit(self, node):
-        content = node.content
-        self.parser = None
         parser_name = getattr(node, 'sect', '')
         if parser_name:
-            self.setParser(parser_name)
-        if self.parser is None:
-            self.parser_name = None
-            return ''.join([
-                self.formatter.preformatted(1),
-                self.formatter.text(content),
-                self.formatter.preformatted(0),
-            ])
-        else:
-            self.parser_name = parser_name
-            return self.request.redirectedOutput(
-                self.formatter.parser, self.parser_name, content.split('\n'))
+            try:
+                return self.request.redirectedOutput(
+                    self.formatter.parser, parser_name, node.content.split('\n'))
+            except wikiutil.PluginMissingError:
+                pass
+        return ''.join([
+            self.formatter.preformatted(1),
+            self.formatter.text(node.content),
+            self.formatter.preformatted(0),
+        ])
 
     def default_emit(self, node):
         return ''.join([
