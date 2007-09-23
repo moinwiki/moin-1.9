@@ -745,11 +745,6 @@ class convert_tree(visitor):
             self.text.append(text)                          # so we just drop the header markup and keep the text
             return
 
-        # if we get br from e.g. cut and paste from OOo to the gui it should be appended as <<BR>>
-        if name == 'br':
-            self.text.append(' <<BR>> ')
-            return
-
         func = getattr(self, "process_%s" % name, None)
         if func:
             func(node)
@@ -1048,8 +1043,14 @@ class convert_tree(visitor):
         if not found:
             for i in node.childNodes:
                 if i.nodeType == Node.ELEMENT_NODE:
-                    self.process_inline(i)
-                    found = True
+                    if name == 'br':
+                        # if we get a br for an empty cell from e.g. cut and paste from OOo
+                        # to the gui it should be appended as white_space.
+                        self.text.append(self.white_space)
+                        found = True
+                    else:
+                        self.process_inline(i)
+                        found = True
                 elif i.nodeType == Node.TEXT_NODE:
                     data = i.data.strip('\n').replace('\n', ' ')
                     if data:
