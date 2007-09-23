@@ -638,8 +638,8 @@ class DocEmitter:
     def page_link_emit(self, node):
         word = node.content
         # handle relative links
-        if word.startswith('..%s' % wikiutil.CHILD_PREFIX):
-            word = word[3:] # remove the dots
+        if word.startswith(wikiutil.PARENT_PREFIX):
+            word = word[wikiutil.PARENT_PREFIX_LEN:]
         elif word.startswith(wikiutil.CHILD_PREFIX):
             word = "%s/%s" % (self.formatter.page.page_name,
                 word[wikiutil.CHILD_PREFIX_LEN:])
