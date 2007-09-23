@@ -10,10 +10,11 @@
     * No markup allowed in table headings.
       Creole 1.0 does not require us to support this.
     * No (non-bracketed) generic url recognition: this is "mission impossible"
-      except if you want to risk lots of false positives.
-    * We do not allow : before // italic markup to avoid urls with unrecognized
-      schemes (like wtf://server/path) triggering italic rendering for the rest
-      of the paragraph.
+      except if you want to risk lots of false positives. Only known protocols
+      are recognized.
+    * We do not allow ":" before "//" italic markup to avoid urls with
+      unrecognized schemes (like wtf://server/path) triggering italic rendering
+      for the rest of the paragraph.
 
     @copyright: 2007 MoinMoin:RadomirDopieralski (creole 0.5 implementation),
                 2007 MoinMoin:ThomasWaldmann (updates)
@@ -23,32 +24,35 @@
 import re
 import StringIO
 from MoinMoin import config, macro, wikiutil
-from MoinMoin.support.python_compatibility import rsplit
 
 Dependencies = []
 
+# Whether the parser should convert \n into <br>.
+bloglike_lines = False
 
 class Parser:
     """
     Glue the DocParser and DocEmitter with the
     MoinMoin current API.
     """
+
     # Enable caching
     caching = 1
-    Dependencies = []
+    Dependencies = Dependencies
 
     def __init__(self, raw, request, **kw):
         """Create a minimal Parser object with required attributes."""
+
         self.request = request
         self.form = request.form
         self.raw = raw
 
     def format(self, formatter):
         """Create and call the true parser and emitter."""
+
         document = DocParser(self.raw, self.request).parse()
         result = DocEmitter(document, formatter, self.request).emit()
         self.request.write(result)
-
 
 class DocParser:
     """
@@ -56,90 +60,124 @@ class DocParser:
     that can be converted into output using Emitter.
     """
 
-    # The parsing rules
+    class Rules:
+        """Hold all the rules and generate regular expressions."""
 
-    # Whether the parser should convert \n into <br>.
-    bloglike_lines = False
+        # For the inline elements:
+        proto = r'http|https|ftp|nntp|news|mailto|telnet|file|irc'
+        url =  r'''(?P<url>
+                (^ | (?<=\s | [.,:;!?()/=]))
+                (?P<escaped_url>~)?
+                (?P<url_target> (?P<url_proto> %s ):\S+? )
+                ($ | (?=\s | [,.:;!?()] (\s | $)))
+            )''' % proto
+        link = r'''(?P<link>
+                \[\[
+                (?P<link_target>.+?) \s*
+                ([|] \s* (?P<link_text>.+?) \s*)?
+                ]]
+            )'''
+        image = r'''(?P<image>
+                {{
+                (?P<image_target>.+?) \s*
+                ([|] \s* (?P<image_text>.+?) \s*)?
+                }}
+            )'''
+        macro = r'''(?P<macro>
+                <<
+                (?P<macro_name> \w+)
+                (\( (?P<macro_args> .*?) \))? \s*
+                ([|] \s* (?P<macro_text> .+?) \s* )?
+                >>
+            )'''
+        code = r'(?P<code> {{{ (?P<code_text>.*?) }}} )'
+        emph = r'(?P<emph> (?<!:)// )' # there must be no : in front of the //
+                                       # avoids italic rendering in urls with
+                                       # unknown protocols
+        strong = r'(?P<strong> \*\* )'
+        linebreak = r'(?P<break> \\\\ )'
+        escape = r'(?P<escape> ~ (?P<escaped_char>\S) )'
+        char =  r'(?P<char> . )'
+
+        # For the block elements:
+        separator = r'(?P<rule> ^ \s* ---- \s* $ )' # horizontal line
+        line = r'(?P<line> ^ \s* $ )' # empty line that separates paragraphs
+        head = r'''(?P<head>
+                ^ \s*
+                (?P<head_head>=+) \s*
+                (?P<head_text> .*? ) \s*
+                (?P<head_tail>=*) \s*
+                $
+            )'''
+        if bloglike_lines:
+            text = r'(?P<text> .+ ) (?P<break> (?<!\\)$\n(?!\s*$) )?'
+        else:
+            text = r'(?P<text> .+ )'
+        list = r'''(?P<list>
+                ^ [ \t]* ([*][^*\#]|[\#][^\#*]).* $
+                ( \n[ \t]* [*\#]+.* $ )*
+            )''' # Matches the whole list, separate items are parsed later. The
+                 # list *must* start with a single bullet.
+        item = r'''(?P<item>
+                ^ \s*
+                (?P<item_head> [\#*]+) \s*
+                (?P<item_text> .*?)
+                $
+            )''' # Matches single list items
+        pre = r'''(?P<pre>
+                ^{{{ \s* $
+                (\n)?
+                (?P<pre_text>
+                    ([\#]!(?P<pre_kind>\w*?)(\s+.*)?$)?
+                    (.|\n)+?
+                )
+                (\n)?
+                ^}}} \s*$
+            )'''
+        pre_escape = r' ^(?P<indent>\s*) ~ (?P<rest> \}\}\} \s*) $'
+        table = r'''(?P<table>
+                ^ \s*
+                [|].*? \s*
+                [|]? \s*
+                $
+            )'''
+
+        # For the link targets:
+        extern = r'(?P<extern_addr>(?P<extern_proto>%s):.*)' % proto
+        attach = r'''
+                (?P<attach_scheme> attachment | inline | drawing | figure):
+                (?P<attach_addr> .* )
+            '''
+        interwiki = r'''
+                (?P<inter_wiki> [A-Z][a-zA-Z]+ ) :
+                (?P<inter_page> .* )
+            '''
+        page = r'(?P<page_name> .* )'
+
+        # For splitting table cells:
+        cell = r'''
+                \| \s*
+                (
+                    (?P<head> [=][^|]+ ) |
+                    (?P<cell> (  %s | [^|])+ )
+                ) \s*
+            ''' % '|'.join([link, macro, image, code])
 
     # For pre escaping, in creole 1.0 done with ~:
-    pre_escape_re = re.compile(r'^(?P<indent>\s*)~(?P<rest>\}\}\}\s*)$', re.M)
-
-    # For the inline elements:
-    proto_rule = r'http|https|ftp|nntp|news|mailto|telnet|file|irc'
-    url_rule =  r'''(?P<url>(^|(?<=\s|[.,:;!?()/=]))(?P<escaped_url>~)?
-        (?P<url_target>(?P<url_proto>%s):\S+?)
-        ($|(?=\s|[,.:;!?()](\s|$))))''' % proto_rule
-    link_rule = r'''(?P<link>\[\[(?P<link_target>.+?)\s*
-        (\|\s*(?P<link_text>.+?)\s*)?]])'''
-    image_rule = r'''(?P<image>{{(?P<image_target>.+?)\s*
-        (\|\s*(?P<image_text>.+?)\s*)?}})'''
-    macro_rule = r'''(?P<macro><<(?P<macro_target>.+?)\s*
-        (\|\s*(?P<macro_text>.+?)\s*)?>>)'''
-    code_rule = r'(?P<code>{{{(?P<code_text>.*?)}}})'
-    # there must be no : in front of the // - avoids
-    # italic rendering in urls with unknown protocols
-    emph_rule = r'(?P<emph>(?<!:)//)'
-    strong_rule = r'(?P<strong>\*\*)'
-    break_rule = r'(?P<break>\\\\)'
-    escape_rule = r'(?P<escape>~(?P<escaped_char>[^\s]))'
-    char_rule =  r'(?P<char>.)'
-
-    # For the block elements:
-    rule_rule = r'(?P<rule>^\s*----\s*$)'
-    line_rule = r'(?P<line>^\s*$)'
-    head_rule = r'''(?P<head>^\s*(?P<head_head>=+)
-        \s*(?P<head_text>[^*].*?)\s*(?P<head_tail>=*)\s*$)'''
-    if bloglike_lines:
-        text_rule = r'(?P<text>.+)(?P<break>(?<!\\)$\n(?!\s*$))?'
-    else:
-        text_rule = r'(?P<text>.+)'
-    list_rule = r'(?P<list>^[ \t]*([*][^*]|[\#][^\#]).*$(\n[ \t]*[*\#]+.*$)*)'
-    pre_rule = r'''(?P<pre>^{{{\s*$(\n)?(?P<pre_text>
-        (^[\#]!(?P<pre_kind>.*?)(\s+.*)?$)?(.|\n)+?)(\n)?^}}}\s*$)'''
-    table_rule = r'(?P<table>^\s*\|.*?\s*\|?\s*$)'
-
-    # For the link targets:
-    extern_rule = r'(?P<extern_addr>(?P<extern_proto>%s):.*)' % proto_rule
-    attach_rule = r'''(?P<attach_scheme>attachment|inline|drawing|figure):
-        (?P<attach_addr>.*)'''
-    inter_rule = r'(?P<inter_wiki>[A-Z][a-zA-Z]+):(?P<inter_page>.*)'
-    #u'|'.join(wikimacro.getNames(config))
-    macro_rule = r'(?P<macro_name>%s)\((-|(?P<macro_param>.*))\)' % r'\w+'
-    page_rule = r'(?P<page_name>.*)'
-
-    # For splitting table cells:
-    cell_rule = r'''\|\s*((?P<head>[=][^|]+)|(?P<cell>(
-        (%(link)s)|(%(macro)s)|(%(image)s)|(%(code)s)|[^|]
-        )+))\s*''' % inline_tab
-    cell_re = re.compile(cell_rule, re.X | re.U)
-
-    # For link descriptions:
-    link_rules = '|'.join([
-        image_rule, break_rule, char_rule,
-    ])
-    link_re = re.compile(link_rules, re.X | re.U)
-
-    # For lists:
-    item_rule = r'(?P<item>^\s*(?P<item_head> [\#*]+)\s*(?P<item_text>.*?)$)'
-    item_re = re.compile(item_rule, re.X | re.U | re.M)
-
+    pre_escape_re = re.compile(Rules.pre_escape, re.M | re.X)
+    link_re = re.compile('|'.join([Rules.image, Rules.linebreak, Rules.char]), re.X | re.U) # for link descriptions
+    item_re = re.compile(Rules.item, re.X | re.U | re.M) # for list items
+    cell_re = re.compile(Rules.cell, re.X | re.U) # for table cells
+    addr_re = re.compile('|'.join([Rules.extern, Rules.attach,
+        Rules.interwiki, Rules.page]), re.X | re.U) # for addresses
     # For block elements:
-    block_rules = '|'.join([
-        line_rule, head_rule, rule_rule, pre_rule, list_rule, table_rule,
-        text_rule,
-    ])
-    block_re = re.compile(block_rules, re.X | re.U | re.M)
-
-    addr_rules = '|'.join([
-        macro_rule, extern_rule, attach_rule, inter_rule, page_rule,
-    ])
-    addr_re = re.compile(addr_rules, re.X | re.U)
-
-    inline_rules = r'|'.join([
-        link_rule, url_rule, macro_rule, code_rule, image_rule, strong_rule,
-        emph_rule, break_rule, escape_rule, char_rule,
-    ])
-    inline_re = re.compile(inline_rules, re.X | re.U)
+    block_re = re.compile('|'.join([Rules.line, Rules.head, Rules.separator,
+        Rules.pre, Rules.list, Rules.table, Rules.text]), re.X | re.U | re.M)
+    # For inline elements:
+    inline_re = re.compile('|'.join([Rules.link, Rules.url, Rules.macro,
+        Rules.code, Rules.image, Rules.strong, Rules.emph, Rules.linebreak,
+        Rules.escape, Rules.char]), re.X | re.U)
+    del Rules # We have the regexps compiled, rules not needed anymore
 
     def __init__(self, raw, request):
         self.request = request
@@ -196,6 +234,8 @@ class DocParser:
                 node = DocNode('interwiki_link', self.cur)
                 node.content = '%s:%s' % (
                     m.group('inter_wiki'), m.group('inter_page'))
+                if not text:
+                    text = m.group('inter_page')
             elif m.group('attach_scheme'):
                 scheme = m.group('attach_scheme')
                 if scheme == 'inline':
@@ -214,18 +254,14 @@ class DocParser:
 
     def _macro_repl(self, groups):
         """Handles macros using the placeholder syntax."""
-        target = groups.get('macro_target', '')
+        name = groups.get('macro_name', '')
         text = (groups.get('macro_text', '') or '').strip()
-        m = self.addr_re.match(target)
-        if m and m.group('macro_name'):
-            node = DocNode('macro', self.cur, m.group('macro_name'))
-            node.args = m.group('macro_param')
-        else:
-            node = DocNode('bad_link', self.cur)
-            node.content = target
-            DocNode('text', node, text or target)
+        node = DocNode('macro', self.cur, name)
+        node.args = groups.get('macro_args', '') or ''
+        DocNode('text', node, text or name)
         self.text = None
-    _macro_target_repl = _macro_repl
+    _macro_name_repl = _macro_repl
+    _macro_args_repl = _macro_repl
     _macro_text_repl = _macro_repl
 
     def _image_repl(self, groups):
@@ -578,10 +614,17 @@ class DocEmitter:
         ])
 
     def code_emit(self, node):
+# XXX The current formatter will replace all spaces with &nbsp;, so we need
+# to use rawHTML instead, until that is fixed.
+#        return ''.join([
+#            self.formatter.code(1),
+#            self.formatter.text(node.content or ''),
+#            self.formatter.code(0),
+#        ])
         return ''.join([
-            self.formatter.code(1),
+            self.formatter.rawHTML('<tt>'),
             self.formatter.text(node.content or ''),
-            self.formatter.code(0),
+            self.formatter.rawHTML('</tt>'),
         ])
 
     def abbr_emit(self, node):
@@ -594,11 +637,13 @@ class DocEmitter:
     def page_link_emit(self, node):
         word = node.content
         # handle relative links
-        if word.startswith(wikiutil.CHILD_PREFIX):
+        if word.startswith('..%s' % wikiutil.CHILD_PREFIX):
+            word = word[3:] # remove the dots
+        elif word.startswith(wikiutil.CHILD_PREFIX):
             word = "%s/%s" % (self.formatter.page.page_name,
                 word[wikiutil.CHILD_PREFIX_LEN:])
         # handle anchors
-        parts = rsplit(word, "#", 1)
+        parts = word.rsplit("#", 1)
         anchor = ""
         if len(parts) == 2:
             word, anchor = parts
@@ -610,7 +655,7 @@ class DocEmitter:
 
     def external_link_emit(self, node):
         return ''.join([
-            self.formatter.url(1, node.content, css='www %s' % node.proto),
+            self.formatter.url(1, node.content, css=node.proto),
             self.emit_children(node),
             self.formatter.url(0),
         ])
@@ -628,7 +673,7 @@ class DocEmitter:
             wikiutil.resolve_interwiki(self.request, wiki, page)
         href = wikiutil.join_wiki(wikiurl, wikitail)
         return ''.join([
-            self.formatter.interwikilink(1, wikitag, wikitail),
+            self.formatter.interwikilink(1, wikitag, wikitail, title=wikitag),
             self.emit_children(node),
             self.formatter.interwikilink(0),
         ])
