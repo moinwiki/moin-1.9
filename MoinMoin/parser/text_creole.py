@@ -30,7 +30,7 @@ Dependencies = []
 
 class Parser:
     """
-    The class to glue the DocParser and DocEmitter with the
+    Glue the DocParser and DocEmitter with the
     MoinMoin current API.
     """
     # Enable caching
@@ -50,10 +50,6 @@ class Parser:
         self.request.write(result)
 
 
-def _get_rule(rule, tab):
-    return r'(?P<%s>%s)' % (rule, tab.get(rule, ''))
-
-
 class DocParser:
     """
     Parse the raw text and create a document object
@@ -69,91 +65,81 @@ class DocParser:
     pre_escape_re = re.compile(r'^(?P<indent>\s*)~(?P<rest>\}\}\}\s*)$', re.M)
 
     # For the inline elements:
-    inline_tab = {
-        'url': r'''(^|(?<=\s|[.,:;!?()/=]))(?P<escaped_url>~)?(?P<url_target>(?P<url_proto>http|ftp|mailto|irc|https|ftps|news|gopher|file|telnet|nntp):\S+?)($|(?=\s|[,.:;!?()](\s|$)))''',
-        'link': r'\[\[(?P<link_target>.+?)\s*(\|\s*(?P<link_text>.+?)\s*)?]]',
-        'image': r'{{(?P<image_target>.+?)\s*(\|\s*(?P<image_text>.+?)\s*)?}}',
-        'macro': r'<<(?P<macro_target>.+?)\s*(\|\s*(?P<macro_text>.+?)\s*)?>>',
-        'code': r'{{{(?P<code_text>.*?)}}}',
-        'emph': r'(?<!:)//', # there must be no : in front of the // - avoids
-                             # italic rendering in urls with unknown protocols
-        'strong': r'\*\*',
-        'break': r'\\\\',
-        'escape': r'~(?P<escaped_char>[^\s])', # tilde is the escape char
-        'char': r'.',
-    }
+    proto_rule = r'http|https|ftp|nntp|news|mailto|telnet|file|irc'
+    url_rule =  r'''(?P<url>(^|(?<=\s|[.,:;!?()/=]))(?P<escaped_url>~)?
+        (?P<url_target>(?P<url_proto>%s):\S+?)
+        ($|(?=\s|[,.:;!?()](\s|$))))''' % proto_rule
+    link_rule = r'''(?P<link>\[\[(?P<link_target>.+?)\s*
+        (\|\s*(?P<link_text>.+?)\s*)?]])'''
+    image_rule = r'''(?P<image>{{(?P<image_target>.+?)\s*
+        (\|\s*(?P<image_text>.+?)\s*)?}})'''
+    macro_rule = r'''(?P<macro><<(?P<macro_target>.+?)\s*
+        (\|\s*(?P<macro_text>.+?)\s*)?>>)'''
+    code_rule = r'(?P<code>{{{(?P<code_text>.*?)}}})'
+    # there must be no : in front of the // - avoids
+    # italic rendering in urls with unknown protocols
+    emph_rule = r'(?P<emph>(?<!:)//)'
+    strong_rule = r'(?P<strong>\*\*)'
+    break_rule = r'(?P<break>\\\\)'
+    escape_rule = r'(?P<escape>~(?P<escaped_char>[^\s]))'
+    char_rule =  r'(?P<char>.)'
 
     # For the block elements:
     rule_rule = r'(?P<rule>^\s*----\s*$)'
     line_rule = r'(?P<line>^\s*$)'
-    head_rule = r'(?P<head>^\s*(?P<head_head>=+)\s*(?P<head_text>[^*].*?)\s*(?P<head_tail>=*)\s*$)'
+    head_rule = r'''(?P<head>^\s*(?P<head_head>=+)
+        \s*(?P<head_text>[^*].*?)\s*(?P<head_tail>=*)\s*$)'''
     if bloglike_lines:
         text_rule = r'(?P<text>.+)(?P<break>(?<!\\)$\n(?!\s*$))?'
     else:
         text_rule = r'(?P<text>.+)'
-    list_rule = r'(?P<list> ^[ \t]* ([*][^*]|[\#][^\#]) .*$  (\n[ \t]*[*\#]+.*$)*  )'
-    pre_rule = r'(?P<pre>^{{{\s*$(\n)?(?P<pre_text>(^[\#]!(?P<pre_kind>.*?)(\s+.*)?$)?(.|\n)+?)(\n)?^}}}\s*$)'
+    list_rule = r'(?P<list>^[ \t]*([*][^*]|[\#][^\#]).*$(\n[ \t]*[*\#]+.*$)*)'
+    pre_rule = r'''(?P<pre>^{{{\s*$(\n)?(?P<pre_text>
+        (^[\#]!(?P<pre_kind>.*?)(\s+.*)?$)?(.|\n)+?)(\n)?^}}}\s*$)'''
     table_rule = r'(?P<table>^\s*\|.*?\s*\|?\s*$)'
 
     # For the link targets:
-    extern_rule = r'(?P<extern_addr>(?P<extern_proto>http|https|ftp|nntp|news|mailto|telnet|file|irc):.*)'
-    attach_rule = r'(?P<attach_scheme>attachment|inline|drawing|figure):(?P<attach_addr>.*)'
+    extern_rule = r'(?P<extern_addr>(?P<extern_proto>%s):.*)' % proto_rule
+    attach_rule = r'''(?P<attach_scheme>attachment|inline|drawing|figure):
+        (?P<attach_addr>.*)'''
     inter_rule = r'(?P<inter_wiki>[A-Z][a-zA-Z]+):(?P<inter_page>.*)'
     #u'|'.join(wikimacro.getNames(config))
     macro_rule = r'(?P<macro_name>%s)\((-|(?P<macro_param>.*))\)' % r'\w+'
     page_rule = r'(?P<page_name>.*)'
 
     # For splitting table cells:
-    cell_rule = r'\|\s* ( (?P<head> [=][^|]+) | (?P<cell> ((%(link)s) |(%(macro)s) |(%(image)s) |(%(code)s) | [^|] )+)  )\s*' % inline_tab
-    cell_re = re.compile(cell_rule, re.X|re.U)
+    cell_rule = r'''\|\s*((?P<head>[=][^|]+)|(?P<cell>(
+        (%(link)s)|(%(macro)s)|(%(image)s)|(%(code)s)|[^|]
+        )+))\s*''' % inline_tab
+    cell_re = re.compile(cell_rule, re.X | re.U)
 
     # For link descriptions:
-    link_rules = r'|'.join([
-            _get_rule('image', inline_tab),
-            _get_rule('break', inline_tab),
-            _get_rule('char', inline_tab),
+    link_rules = '|'.join([
+        image_rule, break_rule, char_rule,
     ])
-    link_re = re.compile(link_rules, re.X|re.U)
+    link_re = re.compile(link_rules, re.X | re.U)
 
     # For lists:
-    item_rule = r'(?P<item> ^\s* (?P<item_head> [\#*]+ ) \s* (?P<item_text>.*?) $)'
-    item_re = re.compile(item_rule, re.X|re.U|re.M)
+    item_rule = r'(?P<item>^\s*(?P<item_head> [\#*]+)\s*(?P<item_text>.*?)$)'
+    item_re = re.compile(item_rule, re.X | re.U | re.M)
 
     # For block elements:
     block_rules = '|'.join([
-            line_rule,
-            head_rule,
-            rule_rule,
-            pre_rule,
-            list_rule,
-            table_rule,
-            text_rule,
+        line_rule, head_rule, rule_rule, pre_rule, list_rule, table_rule,
+        text_rule,
     ])
-    block_re = re.compile(block_rules, re.X|re.U|re.M)
+    block_re = re.compile(block_rules, re.X | re.U | re.M)
 
-    addr_rules = r'|'.join([
-        macro_rule,
-        extern_rule,
-        attach_rule,
-        inter_rule,
-        page_rule,
+    addr_rules = '|'.join([
+        macro_rule, extern_rule, attach_rule, inter_rule, page_rule,
     ])
-    addr_re = re.compile(addr_rules, re.X|re.U)
+    addr_re = re.compile(addr_rules, re.X | re.U)
 
     inline_rules = r'|'.join([
-            _get_rule('link', inline_tab),
-            _get_rule('url', inline_tab),
-            _get_rule('macro', inline_tab),
-            _get_rule('code', inline_tab),
-            _get_rule('image', inline_tab),
-            _get_rule('strong', inline_tab),
-            _get_rule('emph', inline_tab),
-            _get_rule('break', inline_tab),
-            _get_rule('escape', inline_tab),
-            _get_rule('char', inline_tab),
+        link_rule, url_rule, macro_rule, code_rule, image_rule, strong_rule,
+        emph_rule, break_rule, escape_rule, char_rule,
     ])
-    inline_re = re.compile(inline_rules, re.X|re.U)
-    del inline_tab
+    inline_re = re.compile(inline_rules, re.X | re.U)
 
     def __init__(self, raw, request):
         self.request = request
@@ -208,7 +194,8 @@ class DocParser:
                 node.proto = m.group('extern_proto')
             elif m.group('inter_wiki'):
                 node = DocNode('interwiki_link', self.cur)
-                node.content = '%s:%s' % (m.group('inter_wiki'), m.group('inter_page'))
+                node.content = '%s:%s' % (
+                    m.group('inter_wiki'), m.group('inter_page'))
             elif m.group('attach_scheme'):
                 scheme = m.group('attach_scheme')
                 if scheme == 'inline':
@@ -279,7 +266,8 @@ class DocParser:
             self.cur = lst
         else:
             # Create a new level of list
-            self.cur = self._upto(self.cur, ('list_item', 'document', 'section', 'blockquote'))
+            self.cur = self._upto(self.cur,
+                ('list_item', 'document', 'section', 'blockquote'))
             self.cur = DocNode(kind, self.cur)
             self.cur.level = level
         self.cur = DocNode('list_item', self.cur)
@@ -300,19 +288,23 @@ class DocParser:
     _head_text_repl = _head_repl
 
     def _text_repl(self, groups):
-        if self.cur.kind in ('table', 'table_row', 'bullet_list', 'number_list'):
-            self.cur = self._upto(self.cur, ('document', 'section', 'blockquote'))
+        if self.cur.kind in ('table', 'table_row', 'bullet_list',
+            'number_list'):
+            self.cur = self._upto(self.cur,
+                ('document', 'section', 'blockquote'))
         if self.cur.kind in ('document', 'section', 'blockquote'):
             self.cur = DocNode('paragraph', self.cur)
         self.parse_inline(groups.get('text', '')+' ')
-        if groups.get('break') and self.cur.kind in ('paragraph', 'emphasis', 'strong', 'code'):
+        if groups.get('break') and self.cur.kind in ('paragraph',
+            'emphasis', 'strong', 'code'):
             DocNode('break', self.cur, '')
         self.text = None
     _break_repl = _text_repl
 
     def _table_repl(self, groups):
         row = groups.get('table', '|').strip()
-        self.cur = self._upto(self.cur, ('table', 'document', 'section', 'blockquote'))
+        self.cur = self._upto(self.cur, (
+            'table', 'document', 'section', 'blockquote'))
         if self.cur.kind != 'table':
             self.cur = DocNode('table', self.cur)
         tb = self.cur
@@ -386,6 +378,7 @@ class DocParser:
 
     def _replace(self, match):
         """Invoke appropriate _*_repl method. Called for every matched group."""
+
         groups = match.groupdict()
         for name, text in groups.iteritems():
             if text is not None:
@@ -395,10 +388,12 @@ class DocParser:
 
     def parse_inline(self, raw):
         """Recognize inline elements inside blocks."""
+
         re.sub(self.inline_re, self._replace, raw)
 
     def parse_block(self, raw):
         """Recognize block elements."""
+
         re.sub(self.block_re, self._replace, raw)
 
     def parse(self):
@@ -407,10 +402,12 @@ class DocParser:
 
 #################### Helper classes
 
-### The document model, and true parser and emitter follow
+### The document model and emitter follow
 
 class DocNode:
-    """A node in the Document."""
+    """
+    A node in the document.
+    """
 
     def __init__(self, kind='', parent=None, content=None):
         self.children = []
@@ -422,7 +419,10 @@ class DocNode:
 
 
 class DocEmitter:
-    """Generate the output for the document tree consisting of DocNodes."""
+    """
+    Generate the output for the document
+    tree consisting of DocNodes.
+    """
 
     def __init__(self, root, formatter, request):
         self.root = root
@@ -433,16 +433,22 @@ class DocEmitter:
 
     def get_image(self, addr, text=''):
         """Return markup for image depending on the address."""
+
         if addr is None:
             addr = ''
         url = wikiutil.url_unquote(addr, want_unicode=True)
         if addr.startswith('http:'):
-            return self.formatter.image(src=url, alt=text, html_class='external_image')
+            return self.formatter.image(
+                src=url, alt=text, html_class='external_image'
+            )
         else:
-            return self.formatter.attachment_image(url, alt=text, html_class='image')
+            return self.formatter.attachment_image(
+                url, alt=text, html_class='image'
+            )
 
     def get_text(self, node):
         """Try to emit whatever text is in the node."""
+
         try:
             return node.children[0].content or ''
         except:
@@ -562,8 +568,9 @@ class DocEmitter:
 
     def header_emit(self, node):
         import sha
-        pntt = self.formatter.page.page_name + self.get_text(node)+'%d' % node.level
-        ident = "head-" + sha.new(pntt.encode(config.charset)).hexdigest()
+        pntt = '%s%s%d' % (self.formatter.page.page_name,
+            self.get_text(node), node.level)
+        ident = "head-%s" % sha.new(pntt.encode(config.charset)).hexdigest()
         return ''.join([
             self.formatter.heading(1, node.level, id=ident),
             self.formatter.text(node.content or ''),
@@ -588,7 +595,8 @@ class DocEmitter:
         word = node.content
         # handle relative links
         if word.startswith(wikiutil.CHILD_PREFIX):
-            word = self.formatter.page.page_name + '/' + word[wikiutil.CHILD_PREFIX_LEN:]
+            word = "%s/%s" % (self.formatter.page.page_name,
+                word[wikiutil.CHILD_PREFIX_LEN:])
         # handle anchors
         parts = rsplit(word, "#", 1)
         anchor = ""
@@ -740,13 +748,14 @@ class DocEmitter:
         return output
 
 
-    # Private helpers ------------------------------------------------------------
+# Private helpers ------------------------------------------------------------
 
     def setParser(self, name):
         """ Set parser to parser named 'name' """
         # XXX this is done by the formatter as well
         try:
-            self.parser = wikiutil.searchAndImportPlugin(self.request.cfg, "parser", name)
+            self.parser = wikiutil.searchAndImportPlugin(self.request.cfg,
+                "parser", name)
         except wikiutil.PluginMissingError:
             self.parser = None
 
