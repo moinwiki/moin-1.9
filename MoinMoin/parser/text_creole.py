@@ -101,7 +101,7 @@ class DocParser:
         char =  r'(?P<char> . )'
 
         # For the block elements:
-        separator = r'(?P<rule> ^ \s* ---- \s* $ )' # horizontal line
+        separator = r'(?P<separator> ^ \s* ---- \s* $ )' # horizontal line
         line = r'(?P<line> ^ \s* $ )' # empty line that separates paragraphs
         head = r'''(?P<head>
                 ^ \s*
@@ -285,9 +285,9 @@ class DocParser:
     _image_target_repl = _image_repl
     _image_text_repl = _image_repl
 
-    def _rule_repl(self, groups):
+    def _separator_repl(self, groups):
         self.cur = self._upto(self.cur, ('document', 'section', 'blockquote'))
-        DocNode('rule', self.cur)
+        DocNode('separator', self.cur)
 
     def _item_repl(self, groups):
         bullet = groups.get('item_head', u'')
@@ -504,7 +504,7 @@ class DocEmitter:
     def text_emit(self, node):
         return self.formatter.text(node.content or '')
 
-    def rule_emit(self, node):
+    def separator_emit(self, node):
         return self.formatter.rule()
 
     def paragraph_emit(self, node):
