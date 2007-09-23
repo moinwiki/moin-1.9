@@ -506,7 +506,7 @@ class ThemeBase:
 
         return alt, self.img_url(icon), w, h
 
-    def make_icon(self, icon, vars=None):
+    def make_icon(self, icon, vars=None, **kw):
         """
         This is the central routine for making <img> tags for icons!
         All icons stuff except the top left logo and search field icons are
@@ -525,7 +525,7 @@ class ThemeBase:
         except KeyError, err:
             alt = 'KeyError: %s' % str(err)
         alt = self.request.getText(alt, formatted=False)
-        tag = self.request.formatter.image(src=img, alt=alt, width=w, height=h)
+        tag = self.request.formatter.image(src=img, alt=alt, width=w, height=h, **kw)
         return tag
 
     def make_iconlink(self, which, d):
