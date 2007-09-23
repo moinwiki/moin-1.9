@@ -62,7 +62,7 @@ class DocParser:
     """
 
     class Rules:
-        """Hold all the rules and generate regular expressions."""
+        """Hold all the rules for generating regular expressions."""
 
         # For the inline elements:
         proto = r'http|https|ftp|nntp|news|mailto|telnet|file|irc'
@@ -197,10 +197,12 @@ class DocParser:
             node = node.parent
         return node
 
-    # The _*_repl methods called for matches in regexps:
+    # The _*_repl methods called for matches in regexps. Sometimes the
+    # same method needs several names, because of group names in regexps.
 
     def _url_repl(self, groups):
         """Handle raw urls in text."""
+
         if not groups.get('escaped_url'):
             # this url is NOT escaped
             target = groups.get('url_target', '')
@@ -216,6 +218,7 @@ class DocParser:
             self.text.content += groups.get('url_target')
     _url_target_repl = _url_repl
     _url_proto_repl = _url_repl
+    _escaped_url = _url_repl
 
     def _link_repl(self, groups):
         """Handle all other kinds of links."""
@@ -255,6 +258,7 @@ class DocParser:
 
     def _macro_repl(self, groups):
         """Handles macros using the placeholder syntax."""
+
         name = groups.get('macro_name', '')
         text = (groups.get('macro_text', '') or '').strip()
         node = DocNode('macro', self.cur, name)
@@ -267,6 +271,7 @@ class DocParser:
 
     def _image_repl(self, groups):
         """Handles embedded images."""
+
         target = groups.get('image_target', '').strip()
         text = (groups.get('image_text', '') or '').strip()
         kind = 'attachment'
@@ -530,26 +535,29 @@ class DocEmitter:
             self.formatter.listitem(0),
         ])
 
-    def definition_list_emit(self, node):
-        return ''.join([
-            self.formatter.definition_list(1),
-            self.emit_children(node),
-            self.formatter.definition_list(0),
-        ])
+# Not used
+#    def definition_list_emit(self, node):
+#        return ''.join([
+#            self.formatter.definition_list(1),
+#            self.emit_children(node),
+#            self.formatter.definition_list(0),
+#        ])
 
-    def term_emit(self, node):
-        return ''.join([
-            self.formatter.definition_term(1),
-            self.emit_children(node),
-            self.formatter.definition_term(0),
-        ])
+# Not used
+#    def term_emit(self, node):
+#        return ''.join([
+#            self.formatter.definition_term(1),
+#            self.emit_children(node),
+#            self.formatter.definition_term(0),
+#        ])
 
-    def definition_emit(self, node):
-        return ''.join([
-            self.formatter.definition_desc(1),
-            self.emit_children(node),
-            self.formatter.definition_desc(0),
-        ])
+# Not used
+#    def definition_emit(self, node):
+#        return ''.join([
+#            self.formatter.definition_desc(1),
+#            self.emit_children(node),
+#            self.formatter.definition_desc(0),
+#        ])
 
     def table_emit(self, node):
         return ''.join([
@@ -586,12 +594,13 @@ class DocEmitter:
             self.formatter.emphasis(0),
         ])
 
-    def quote_emit(self, node):
-        return ''.join([
-            self.formatter.rawHTML('<q>'),
-            self.emit_children(node),
-            self.formatter.rawHTML('</q>'),
-        ])
+# Not used
+#    def quote_emit(self, node):
+#        return ''.join([
+#            self.formatter.rawHTML('<q>'),
+#            self.emit_children(node),
+#            self.formatter.rawHTML('</q>'),
+#        ])
 
     def strong_emit(self, node):
         return ''.join([
@@ -600,8 +609,9 @@ class DocEmitter:
             self.formatter.strong(0),
         ])
 
-    def smiley_emit(self, node):
-        return self.formatter.smiley(node.content)
+# Not used
+#    def smiley_emit(self, node):
+#        return self.formatter.smiley(node.content)
 
     def header_emit(self, node):
         import sha
@@ -628,12 +638,13 @@ class DocEmitter:
             self.formatter.rawHTML('</tt>'),
         ])
 
-    def abbr_emit(self, node):
-        return ''.join([
-            self.formatter.rawHTML('<abbr title="%s">' % node.title),
-            self.formatter.text(node.content or ''),
-            self.formatter.rawHTML('</abbr>'),
-        ])
+# Not used
+#    def abbr_emit(self, node):
+#        return ''.join([
+#            self.formatter.rawHTML('<abbr title="%s">' % node.title),
+#            self.formatter.text(node.content or ''),
+#            self.formatter.rawHTML('</abbr>'),
+#        ])
 
     def page_link_emit(self, node):
         word = node.content
@@ -726,25 +737,27 @@ class DocEmitter:
         except:
             return self.formatter.text(self.request.getText('macro error'))
 
-    def section_emit(self, node):
-        return ''.join([
-            self.formatter.rawHTML(
-                '<div class="%s" style="%s">' % (node.sect, node.style)),
-            self.emit_children(node),
-            self.formatter.rawHTML('</div>'),
-        ])
+# Not used
+#    def section_emit(self, node):
+#        return ''.join([
+#            self.formatter.rawHTML(
+#                '<div class="%s" style="%s">' % (node.sect, node.style)),
+#            self.emit_children(node),
+#            self.formatter.rawHTML('</div>'),
+#        ])
 
     def break_emit(self, node):
         return ''.join([
             self.formatter.rawHTML('<br>'),
         ])
 
-    def blockquote_emit(self, node):
-        return ''.join([
-            self.formatter.rawHTML('<blockquote>'),
-            self.emit_children(node),
-            self.formatter.rawHTML('</blockquote>'),
-        ])
+# Not used
+#    def blockquote_emit(self, node):
+#        return ''.join([
+#            self.formatter.rawHTML('<blockquote>'),
+#            self.emit_children(node),
+#            self.formatter.rawHTML('</blockquote>'),
+#        ])
 
     def preformatted_emit(self, node):
         content = node.content
@@ -777,10 +790,7 @@ class DocEmitter:
         return ''.join([self.emit_node(child) for child in node.children])
 
     def emit_node(self, node):
-        try:
-            emit = getattr(self, '%s_emit' % node.kind)
-        except:
-            emit = self.default_emit
+        emit = getattr(self, '%s_emit' % node.kind, self.default_emit)
         return emit(node)
 
     def emit(self):
@@ -790,6 +800,7 @@ class DocEmitter:
         output = '\n'.join([
             self.emit_node(self.root),
         ])
+        # restore 'smart' formatting if it was set
         self.formatter.no_magic = magic_save
         return output
 
@@ -799,6 +810,7 @@ class DocEmitter:
     def setParser(self, name):
         """ Set parser to parser named 'name' """
         # XXX this is done by the formatter as well
+
         try:
             self.parser = wikiutil.searchAndImportPlugin(self.request.cfg,
                 "parser", name)
