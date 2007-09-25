@@ -274,11 +274,10 @@ class DocParser:
 
         target = groups.get('image_target', '').strip()
         text = (groups.get('image_text', '') or '').strip()
-        kind = 'attachment'
-        if (target.endswith('.png') or
-            target.endswith('.gif') or
-            target.endswith('.jpg')):
-                kind = 'image'
+        if wikiutil.isPicture(target):
+            kind = 'image'
+        else:
+            kind = 'attachment'
         node = DocNode(kind, self.cur, target)
         DocNode('text', node, text or node.content)
         self.text = None
