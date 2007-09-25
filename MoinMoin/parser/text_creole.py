@@ -137,7 +137,6 @@ class Rules:
             $
         )'''
 
-
     # For splitting table cells:
     cell = r'''
             \| \s*
@@ -164,7 +163,6 @@ class DocParser:
     Parse the raw text and create a document object
     that can be converted into output using Emitter.
     """
-
 
     # For pre escaping, in creole 1.0 done with ~:
     pre_escape_re = re.compile(Rules.pre_escape, re.M | re.X)
@@ -685,8 +683,11 @@ class DocEmitter:
         m = self.addr_re.match(target)
         if m:
             if m.group('page_name'):
-                # default to images
+                # inserted anchors
                 url = wikiutil.url_unquote(target, want_unicode=True)
+                if target.startswith('#'):
+                    return self.formatter.rawHtml(u'<a name="%s"></a>' % url)
+                # default to images
                 return self.formatter.attachment_image(
                     url, alt=text, html_class='image')
             elif m.group('extern_addr'):
