@@ -55,122 +55,123 @@ class Parser:
         result = DocEmitter(document, formatter, self.request).emit()
         self.request.write(result)
 
+class Rules:
+    """Hold all the rules for generating regular expressions."""
+
+    # For the inline elements:
+    proto = r'http|https|ftp|nntp|news|mailto|telnet|file|irc'
+    url =  r'''(?P<url>
+            (^ | (?<=\s | [.,:;!?()/=]))
+            (?P<escaped_url>~)?
+            (?P<url_target> (?P<url_proto> %s ):\S+? )
+            ($ | (?=\s | [,.:;!?()] (\s | $)))
+        )''' % proto
+    link = r'''(?P<link>
+            \[\[
+            (?P<link_target>.+?) \s*
+            ([|] \s* (?P<link_text>.+?) \s*)?
+            ]]
+        )'''
+    image = r'''(?P<image>
+            {{
+            (?P<image_target>.+?) \s*
+            ([|] \s* (?P<image_text>.+?) \s*)?
+            }}
+        )'''
+    macro = r'''(?P<macro>
+            <<
+            (?P<macro_name> \w+)
+            (\( (?P<macro_args> .*?) \))? \s*
+            ([|] \s* (?P<macro_text> .+?) \s* )?
+            >>
+        )'''
+    code = r'(?P<code> {{{ (?P<code_text>.*?) }}} )'
+    emph = r'(?P<emph> (?<!:)// )' # there must be no : in front of the //
+                                   # avoids italic rendering in urls with
+                                   # unknown protocols
+    strong = r'(?P<strong> \*\* )'
+    linebreak = r'(?P<break> \\\\ )'
+    escape = r'(?P<escape> ~ (?P<escaped_char>\S) )'
+    char =  r'(?P<char> . )'
+
+    # For the block elements:
+    separator = r'(?P<separator> ^ \s* ---- \s* $ )' # horizontal line
+    line = r'(?P<line> ^ \s* $ )' # empty line that separates paragraphs
+    head = r'''(?P<head>
+            ^ \s*
+            (?P<head_head>=+) \s*
+            (?P<head_text> .*? ) \s*
+            (?P<head_tail>=*) \s*
+            $
+        )'''
+    if bloglike_lines:
+        text = r'(?P<text> .+ ) (?P<break> (?<!\\)$\n(?!\s*$) )?'
+    else:
+        text = r'(?P<text> .+ )'
+    list = r'''(?P<list>
+            ^ [ \t]* ([*][^*\#]|[\#][^\#*]).* $
+            ( \n[ \t]* [*\#]+.* $ )*
+        )''' # Matches the whole list, separate items are parsed later. The
+             # list *must* start with a single bullet.
+    item = r'''(?P<item>
+            ^ \s*
+            (?P<item_head> [\#*]+) \s*
+            (?P<item_text> .*?)
+            $
+        )''' # Matches single list items
+    pre = r'''(?P<pre>
+            ^{{{ \s* $
+            (\n)?
+            (?P<pre_text>
+                ([\#]!(?P<pre_kind>\w*?)(\s+.*)?$)?
+                (.|\n)+?
+            )
+            (\n)?
+            ^}}} \s*$
+        )'''
+    pre_escape = r' ^(?P<indent>\s*) ~ (?P<rest> \}\}\} \s*) $'
+    table = r'''(?P<table>
+            ^ \s*
+            [|].*? \s*
+            [|]? \s*
+            $
+        )'''
+
+
+    # For splitting table cells:
+    cell = r'''
+            \| \s*
+            (
+                (?P<head> [=][^|]+ ) |
+                (?P<cell> (  %s | [^|])+ )
+            ) \s*
+        ''' % '|'.join([link, macro, image, code])
+    # For the link targets:
+    extern = r'(?P<extern_addr>(?P<extern_proto>%s):.*)' % proto
+    attach = r'''
+            (?P<attach_scheme> attachment | inline |
+                drawing | figure | image ):
+            (?P<attach_addr> .* )
+        '''
+    interwiki = r'''
+            (?P<inter_wiki> [A-Z][a-zA-Z]+ ) :
+            (?P<inter_page> .* )
+        '''
+    page = r'(?P<page_name> .* )'
+
+
 class DocParser:
     """
     Parse the raw text and create a document object
     that can be converted into output using Emitter.
     """
 
-    class Rules:
-        """Hold all the rules for generating regular expressions."""
-
-        # For the inline elements:
-        proto = r'http|https|ftp|nntp|news|mailto|telnet|file|irc'
-        url =  r'''(?P<url>
-                (^ | (?<=\s | [.,:;!?()/=]))
-                (?P<escaped_url>~)?
-                (?P<url_target> (?P<url_proto> %s ):\S+? )
-                ($ | (?=\s | [,.:;!?()] (\s | $)))
-            )''' % proto
-        link = r'''(?P<link>
-                \[\[
-                (?P<link_target>.+?) \s*
-                ([|] \s* (?P<link_text>.+?) \s*)?
-                ]]
-            )'''
-        image = r'''(?P<image>
-                {{
-                (?P<image_target>.+?) \s*
-                ([|] \s* (?P<image_text>.+?) \s*)?
-                }}
-            )'''
-        macro = r'''(?P<macro>
-                <<
-                (?P<macro_name> \w+)
-                (\( (?P<macro_args> .*?) \))? \s*
-                ([|] \s* (?P<macro_text> .+?) \s* )?
-                >>
-            )'''
-        code = r'(?P<code> {{{ (?P<code_text>.*?) }}} )'
-        emph = r'(?P<emph> (?<!:)// )' # there must be no : in front of the //
-                                       # avoids italic rendering in urls with
-                                       # unknown protocols
-        strong = r'(?P<strong> \*\* )'
-        linebreak = r'(?P<break> \\\\ )'
-        escape = r'(?P<escape> ~ (?P<escaped_char>\S) )'
-        char =  r'(?P<char> . )'
-
-        # For the block elements:
-        separator = r'(?P<separator> ^ \s* ---- \s* $ )' # horizontal line
-        line = r'(?P<line> ^ \s* $ )' # empty line that separates paragraphs
-        head = r'''(?P<head>
-                ^ \s*
-                (?P<head_head>=+) \s*
-                (?P<head_text> .*? ) \s*
-                (?P<head_tail>=*) \s*
-                $
-            )'''
-        if bloglike_lines:
-            text = r'(?P<text> .+ ) (?P<break> (?<!\\)$\n(?!\s*$) )?'
-        else:
-            text = r'(?P<text> .+ )'
-        list = r'''(?P<list>
-                ^ [ \t]* ([*][^*\#]|[\#][^\#*]).* $
-                ( \n[ \t]* [*\#]+.* $ )*
-            )''' # Matches the whole list, separate items are parsed later. The
-                 # list *must* start with a single bullet.
-        item = r'''(?P<item>
-                ^ \s*
-                (?P<item_head> [\#*]+) \s*
-                (?P<item_text> .*?)
-                $
-            )''' # Matches single list items
-        pre = r'''(?P<pre>
-                ^{{{ \s* $
-                (\n)?
-                (?P<pre_text>
-                    ([\#]!(?P<pre_kind>\w*?)(\s+.*)?$)?
-                    (.|\n)+?
-                )
-                (\n)?
-                ^}}} \s*$
-            )'''
-        pre_escape = r' ^(?P<indent>\s*) ~ (?P<rest> \}\}\} \s*) $'
-        table = r'''(?P<table>
-                ^ \s*
-                [|].*? \s*
-                [|]? \s*
-                $
-            )'''
-
-        # For the link targets:
-        extern = r'(?P<extern_addr>(?P<extern_proto>%s):.*)' % proto
-        attach = r'''
-                (?P<attach_scheme> attachment | inline | drawing | figure):
-                (?P<attach_addr> .* )
-            '''
-        interwiki = r'''
-                (?P<inter_wiki> [A-Z][a-zA-Z]+ ) :
-                (?P<inter_page> .* )
-            '''
-        page = r'(?P<page_name> .* )'
-
-        # For splitting table cells:
-        cell = r'''
-                \| \s*
-                (
-                    (?P<head> [=][^|]+ ) |
-                    (?P<cell> (  %s | [^|])+ )
-                ) \s*
-            ''' % '|'.join([link, macro, image, code])
 
     # For pre escaping, in creole 1.0 done with ~:
     pre_escape_re = re.compile(Rules.pre_escape, re.M | re.X)
     link_re = re.compile('|'.join([Rules.image, Rules.linebreak, Rules.char]), re.X | re.U) # for link descriptions
     item_re = re.compile(Rules.item, re.X | re.U | re.M) # for list items
     cell_re = re.compile(Rules.cell, re.X | re.U) # for table cells
-    addr_re = re.compile('|'.join([Rules.extern, Rules.attach,
-        Rules.interwiki, Rules.page]), re.X | re.U) # for addresses
     # For block elements:
     block_re = re.compile('|'.join([Rules.line, Rules.head, Rules.separator,
         Rules.pre, Rules.list, Rules.table, Rules.text]), re.X | re.U | re.M)
@@ -178,7 +179,6 @@ class DocParser:
     inline_re = re.compile('|'.join([Rules.link, Rules.url, Rules.macro,
         Rules.code, Rules.image, Rules.strong, Rules.emph, Rules.linebreak,
         Rules.escape, Rules.char]), re.X | re.U)
-    del Rules # We have the regexps compiled, rules not needed anymore
 
     def __init__(self, raw, request):
         self.request = request
@@ -206,9 +206,8 @@ class DocParser:
         if not groups.get('escaped_url'):
             # this url is NOT escaped
             target = groups.get('url_target', '')
-            node = DocNode('external_link', self.cur)
+            node = DocNode('link', self.cur)
             node.content = target
-            node.proto = groups.get('url_proto', 'http')
             DocNode('text', node, node.content)
             self.text = None
         else:
@@ -222,36 +221,15 @@ class DocParser:
 
     def _link_repl(self, groups):
         """Handle all other kinds of links."""
+
         target = groups.get('link_target', '')
         text = (groups.get('link_text', '') or '').strip()
         parent = self.cur
-        m = self.addr_re.match(target)
-        if m:
-            if m.group('page_name'):
-                node = DocNode('page_link', self.cur)
-                node.content = m.group('page_name')
-            elif m.group('extern_addr'):
-                node = DocNode('external_link', self.cur)
-                node.content = m.group('extern_addr')
-                node.proto = m.group('extern_proto')
-            elif m.group('inter_wiki'):
-                node = DocNode('interwiki_link', self.cur)
-                node.content = '%s:%s' % (
-                    m.group('inter_wiki'), m.group('inter_page'))
-                if not text:
-                    text = m.group('inter_page')
-            elif m.group('attach_scheme'):
-                scheme = m.group('attach_scheme')
-                if scheme == 'inline':
-                    scheme = 'inlined_attachment'
-                node = DocNode(scheme, self.cur, m.group('attach_addr'))
-            else:
-                node = DocNode('bad_link', self.cur)
-                node.content = target
-            self.cur = node
-            self.text = None
-            re.sub(self.link_re, self._replace, text or node.content)
-            self.cur = parent
+        self.cur = DocNode('link', self.cur)
+        self.cur.content = target
+        self.text = None
+        re.sub(self.link_re, self._replace, text)
+        self.cur = parent
         self.text = None
     _link_target_repl = _link_repl
     _link_text_repl = _link_repl
@@ -467,6 +445,13 @@ class DocEmitter:
     tree consisting of DocNodes.
     """
 
+    addr_re = re.compile('|'.join([
+            Rules.extern,
+            Rules.attach,
+            Rules.interwiki,
+            Rules.page
+        ]), re.X | re.U) # for addresses
+
     def __init__(self, root, formatter, request):
         self.root = root
         self.formatter = formatter
@@ -647,31 +632,64 @@ class DocEmitter:
 #            self.formatter.rawHTML('</abbr>'),
 #        ])
 
-    def page_link_emit(self, node):
-        word = node.content
-        # handle relative links
-        if word.startswith(wikiutil.PARENT_PREFIX):
-            word = word[wikiutil.PARENT_PREFIX_LEN:]
-        elif word.startswith(wikiutil.CHILD_PREFIX):
-            word = "%s/%s" % (self.formatter.page.page_name,
-                word[wikiutil.CHILD_PREFIX_LEN:])
-        # handle anchors
-        parts = rsplit(word, "#", 1)
-        anchor = ""
-        if len(parts) == 2:
-            word, anchor = parts
-        return ''.join([
-            self.formatter.pagelink(1, word, anchor=anchor),
-            self.emit_children(node),
-            self.formatter.pagelink(0, word),
-        ])
-
-    def external_link_emit(self, node):
-        return ''.join([
-            self.formatter.url(1, node.content, css=node.proto),
-            self.emit_children(node),
-            self.formatter.url(0),
-        ])
+    def link_emit(self, node):
+        target = node.content
+        if node.children:
+            inside = self.emit_children(node)
+        else:
+            inside = self.formatter.text(target)
+        m = self.addr_re.match(target)
+        if m:
+            if m.group('page_name'):
+                # link to a page
+                word = m.group('page_name')
+                if word.startswith(wikiutil.PARENT_PREFIX):
+                    word = word[wikiutil.PARENT_PREFIX_LEN:]
+                elif word.startswith(wikiutil.CHILD_PREFIX):
+                    word = "%s/%s" % (self.formatter.page.page_name,
+                        word[wikiutil.CHILD_PREFIX_LEN:])
+                # handle anchors
+                parts = rsplit(word, "#", 1)
+                anchor = ""
+                if len(parts) == 2:
+                    word, anchor = parts
+                return ''.join([
+                    self.formatter.pagelink(1, word, anchor=anchor),
+                    inside,
+                    self.formatter.pagelink(0, word),
+                ])
+            elif m.group('extern_addr'):
+                # external link
+                address = m.group('extern_addr')
+                proto = m.group('extern_proto')
+                return ''.join([
+                    self.formatter.url(1, address, css=proto),
+                    inside,
+                    self.formatter.url(0),
+                ])
+            elif m.group('inter_wiki'):
+                # interwiki link
+                wiki = m.group('inter_wiki')
+                page = m.group('inter_page')
+                if not node.children: # interwiki links don't show the moniker
+                    inside = self.formatter.text(page)
+                return ''.join([
+                    self.formatter.interwikilink(1, wiki, page),
+                    inside,
+                    self.formatter.interwikilink(0),
+                ])
+            elif m.group('attach_scheme'):
+                # link to an attachment
+                scheme = m.group('attach_scheme')
+                attachment = m.group('attach_addr')
+                url = wikiutil.url_unquote(attachment, want_unicode=True)
+                text = self.get_text(node)
+                return ''.join([
+                        self.formatter.attachment_link(1, url),
+                        self.formatter.text(text),
+                        self.formatter.attachment_link(0)
+                    ])
+        return self.formatter.text(target)
 
     def anchor_link_emit(self, node):
         return ''.join([
@@ -679,24 +697,6 @@ class DocEmitter:
             self.emit_children(node),
             self.formatter.url(0),
         ])
-
-    def interwiki_link_emit(self, node):
-        wiki, page = wikiutil.split_interwiki(node.content)
-        wikitag, wikiurl, wikitail, wikitag_bad = \
-            wikiutil.resolve_interwiki(self.request, wiki, page)
-        href = wikiutil.join_wiki(wikiurl, wikitail)
-        return ''.join([
-            self.formatter.interwikilink(1, wikitag, wikitail, title=wikitag),
-            self.emit_children(node),
-            self.formatter.interwikilink(0),
-        ])
-
-    def attachment_emit(self, node):
-        url = wikiutil.url_unquote(node.content, want_unicode=True)
-        text = self.get_text(node)
-        return (self.formatter.attachment_link(1, url) +
-                self.formatter.text(text) +
-                self.formatter.attachment_link(0))
 
     def inlined_attachment_emit(self, node):
         url = wikiutil.url_unquote(node.content, want_unicode=True)
@@ -805,3 +805,5 @@ class DocEmitter:
         # restore 'smart' formatting if it was set
         self.formatter.no_magic = magic_save
         return output
+
+del Rules # We have the regexps compiled, rules not needed anymore
