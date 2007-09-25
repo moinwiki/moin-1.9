@@ -149,8 +149,7 @@ class Rules:
     # For the link targets:
     extern = r'(?P<extern_addr>(?P<extern_proto>%s):.*)' % proto
     attach = r'''
-            (?P<attach_scheme> attachment | inline |
-                drawing | figure | image ):
+            (?P<attach_scheme> attachment | drawing | image ):
             (?P<attach_addr> .* )
         '''
     interwiki = r'''
@@ -220,7 +219,7 @@ class DocParser:
     _escaped_url = _url_repl
 
     def _link_repl(self, groups):
-        """Handle all other kinds of links."""
+        """Handle all kinds of links."""
 
         target = groups.get('link_target', '')
         text = (groups.get('link_text', '') or '').strip()
@@ -248,15 +247,11 @@ class DocParser:
     _macro_text_repl = _macro_repl
 
     def _image_repl(self, groups):
-        """Handles embedded images."""
+        """Handles images and attachemnts included in the page."""
 
         target = groups.get('image_target', '').strip()
         text = (groups.get('image_text', '') or '').strip()
-        if wikiutil.isPicture(target):
-            kind = 'image'
-        else:
-            kind = 'attachment'
-        node = DocNode(kind, self.cur, target)
+        node = DocNode("image", self.cur, target)
         DocNode('text', node, text or node.content)
         self.text = None
     _image_target_repl = _image_repl
@@ -458,21 +453,6 @@ class DocEmitter:
         self.request = request
         self.form = request.form
         self.macro = None
-
-    def get_image(self, addr, text=''):
-        """Return markup for image depending on the address."""
-
-        if addr is None:
-            addr = ''
-        url = wikiutil.url_unquote(addr, want_unicode=True)
-        if addr.startswith('http:'):
-            return self.formatter.image(
-                src=url, alt=text, html_class='external_image'
-            )
-        else:
-            return self.formatter.attachment_image(
-                url, alt=text, html_class='image'
-            )
 
     def get_text(self, node):
         """Try to emit whatever text is in the node."""
@@ -689,44 +669,75 @@ class DocEmitter:
                         self.formatter.text(text),
                         self.formatter.attachment_link(0)
                     ])
-        return self.formatter.text(target)
+        return "".join(["[[", self.formatter.text(target), "]]"])
 
-    def anchor_link_emit(self, node):
-        return ''.join([
-            self.formatter.url(1, node.content, css='anchor'),
-            self.emit_children(node),
-            self.formatter.url(0),
-        ])
-
-    def inlined_attachment_emit(self, node):
-        url = wikiutil.url_unquote(node.content, want_unicode=True)
-        text = self.get_text(node)
-        return self.formatter.attachment_inlined(url, text)
+# Not used
+#    def anchor_link_emit(self, node):
+#        return ''.join([
+#            self.formatter.url(1, node.content, css='anchor'),
+#            self.emit_children(node),
+#            self.formatter.url(0),
+#        ])
 
     def image_emit(self, node):
+        target = node.content
         text = self.get_text(node)
-        return self.get_image(node.content, text)
-
-    def drawing_emit(self, node):
+        m = self.addr_re.match(target)
+        if m:
+            if m.group('page_name'):
+                # default to images
+                url = wikiutil.url_unquote(target, want_unicode=True)
+                return self.formatter.attachment_image(
+                    url, alt=text, html_class='image')
+            elif m.group('extern_addr'):
+                # external link
+                address = m.group('extern_addr')
+                proto = m.group('extern_proto')
+                url = wikiutil.url_unquote(address, want_unicode=True)
+                return self.formatter.image(
+                    src=url, alt=text, html_class='external_image')
+            elif m.group('attach_scheme'):
+                # link to an attachment
+                scheme = m.group('attach_scheme')
+                attachment = m.group('attach_addr')
+                url = wikiutil.url_unquote(attachment, want_unicode=True)
+                if scheme == 'image':
+                    return self.formatter.attachment_image(
+                        url, alt=text, html_class='image')
+                elif scheme == 'drawing':
+                    return self.formatter.attachment_drawing(url, text)
+                else:
+                    pass
+            elif m.group('inter_wiki'):
+                # interwiki link
+                pass
+#        return "".join(["{{", self.formatter.text(target), "}}"])
         url = wikiutil.url_unquote(node.content, want_unicode=True)
-        text = self.get_text(node)
-        return self.formatter.attachment_drawing(url, text)
+        return self.formatter.attachment_inlined(url, text)
 
-    def figure_emit(self, node):
-        text = self.get_text(node)
-        url = wikiutil.url_unquote(node.content, want_unicode=True)
-        return ''.join([
-            self.formatter.rawHTML('<div class="figure">'),
-            self.get_image(url, text), self.emit_children(node),
-            self.formatter.rawHTML('</div>'),
-        ])
+# Not used
+#    def drawing_emit(self, node):
+#        url = wikiutil.url_unquote(node.content, want_unicode=True)
+#        text = self.get_text(node)
+#        return self.formatter.attachment_drawing(url, text)
 
-    def bad_link_emit(self, node):
-        return self.formatter.text(''.join([
-            '[[',
-            node.content or '',
-            ']]',
-        ]))
+# Not used
+#    def figure_emit(self, node):
+#        text = self.get_text(node)
+#        url = wikiutil.url_unquote(node.content, want_unicode=True)
+#        return ''.join([
+#            self.formatter.rawHTML('<div class="figure">'),
+#            self.get_image(url, text), self.emit_children(node),
+#            self.formatter.rawHTML('</div>'),
+#        ])
+
+# Not used
+#    def bad_link_emit(self, node):
+#        return self.formatter.text(''.join([
+#            '[[',
+#            node.content or '',
+#            ']]',
+#        ]))
 
     def macro_emit(self, node):
         macro_name = node.content
