@@ -560,6 +560,9 @@ Version 1.5.current:
     * Respect ACLs when sending <link rel="Appendix" ...> for attachments.
     * Fixed potential XSS issues related to feeding of gui editor.
     * Fixed XSS issue in RenamePage/DeletePage action.
+    * Avoid 'current' file corruption in out-of-space conditions.
+    * Fix "Toggle line numbers" link in code areas, so it gets translated
+      for the current user's language.
 
 Version 1.5.8:
   New features:

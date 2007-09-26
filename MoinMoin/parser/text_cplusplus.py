@@ -25,13 +25,13 @@ pre.cpparea span.Preprc   { color: #804000; }
 
 from MoinMoin.parser._ParserBase import ParserBase
 
-Dependencies = []
+Dependencies = ['user'] # the "Toggle line numbers link" depends on user's language
 
 class Parser(ParserBase):
 
     parsername = "ColorizedCPlusPlus"
     extensions = ['.c', '.h', '.cpp', '.c++']
-    Dependencies = []
+    Dependencies = Dependencies
 
     def setupRules(self):
         ParserBase.setupRules(self)
