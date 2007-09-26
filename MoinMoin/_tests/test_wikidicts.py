@@ -12,6 +12,8 @@ import re
 
 from MoinMoin import wikidicts
 from MoinMoin import Page
+from MoinMoin.PageEditor import PageEditor
+from MoinMoin._tests.common import gain_superuser_rights
 
 class TestGroupPage:
 
@@ -113,6 +115,32 @@ class TestGroupDicts:
         assert 'SystemPagesInEnglishGroup' in groups
         assert 'RecentChanges' in members
         assert 'HelpContents' in members
+
+    def testRenameGroupPage(self):
+        """
+         tests if the dict cache for groups is refreshed after renaming a Group page
+        """
+        gain_superuser_rights(self.request)
+        pagename = u'SomeGroup'
+        page = PageEditor(self.request, pagename, do_editor_backup=False)
+        body = " * ExampleUser"
+        page.saveText(body, 0)
+
+        page.renamePage('AnotherGroup')
+
+        group = wikidicts.Group(self.request, '')
+        isgroup = self.request.cfg.cache.page_group_regex.search
+        grouppages = self.request.rootpage.getPageList(user='', filter=isgroup)
+
+        members, groups = self.request.dicts.expand_group(u'AnotherGroup')
+        page = PageEditor(self.request, u'AnotherGroup', do_editor_backup=0)
+
+        # real delete AnotherGroup page from filesystem
+        import shutil
+        fpath = page.getPagePath(check_create=0)
+        shutil.rmtree(fpath, True)
+
+        assert u'ExampleUser' in members
 
 coverage_modules = ['MoinMoin.wikidicts']
 
