@@ -13,7 +13,7 @@ from MoinMoin import events as ev
 from MoinMoin import wikidicts
 
 def handle(event):
-    if isinstance(event, ev.PageChangedEvent): # "changed" includes creation and deletion
+    if isinstance(event, ev.PageChangedEvent) or isinstance(event, ev.PageRenamedEvent): # "changed" includes creation, deletion and renamed
         cfg = event.request.cfg
         pagename = event.page.page_name
         if cfg.cache.page_dict_regex.search(pagename) or \
