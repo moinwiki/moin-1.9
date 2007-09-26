@@ -19,10 +19,10 @@ def do_user_browser(request):
     data = TupleDataset()
     data.columns = [
         #Column('id', label=('ID'), align='right'),
-        Column('name', label=('Username')),
-        Column('acl groups', label=('ACL Groups')),
-        Column('email', label=('Email')),
-        Column('jabber', label=('Jabber')),
+        Column('name', label=_('Username')),
+        Column('acl groups', label=_('ACL Groups')),
+        Column('email', label=_('Email')),
+        Column('jabber', label=_('Jabber')),
         Column('action', label=_('Action')),
     ]
 
