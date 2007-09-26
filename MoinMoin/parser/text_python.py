@@ -25,14 +25,14 @@ _tokens = {
     _TEXT:              'Text',
 }
 
-Dependencies = []
+Dependencies = ['user'] # the "Toggle line numbers link" depends on user's language
 
 class Parser:
     """ Send colored python source.
     """
 
     extensions = ['.py']
-    Dependencies = []
+    Dependencies = Dependencies
 
     def __init__(self, raw, request, **kw):
         """ Store the source text.

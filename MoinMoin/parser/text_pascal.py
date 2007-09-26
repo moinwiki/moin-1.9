@@ -8,13 +8,13 @@
 
 from MoinMoin.parser._ParserBase import ParserBase
 
-Dependencies = []
+Dependencies = ['user'] # the "Toggle line numbers link" depends on user's language
 
 class Parser(ParserBase):
 
     parsername = 'ColorizedPascal'
     extensions = ['.pas']
-    Dependencies = []
+    Dependencies = Dependencies
 
     def __init__(self, raw, request, **kw):
         ParserBase.__init__(self, raw, request, **kw)

@@ -9,13 +9,13 @@
 
 from MoinMoin.parser._ParserBase import ParserBase
 
-Dependencies = []
+Dependencies = ['user'] # the "Toggle line numbers link" depends on user's language
 
 class Parser(ParserBase):
 
     parsername = "ColorizedJava"
     extensions = ['.java']
-    Dependencies = []
+    Dependencies = Dependencies
 
     def setupRules(self):
         ParserBase.setupRules(self)
