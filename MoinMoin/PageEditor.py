@@ -604,6 +604,8 @@ Try a different name.""") % (wikiutil.escape(newpagename), )
         try:
             os.rename(oldpath, newpath)
             self.error = None
+            if not comment:
+                comment = u"## page was renamed from %s" % self.page_name
             # Save page text with a comment about the old name
             savetext = u"## page was renamed from %s\n%s" % (self.page_name, savetext)
             newpage.saveText(savetext, 0, comment=comment, extra=self.page_name, action='SAVE/RENAME', notify=False)
