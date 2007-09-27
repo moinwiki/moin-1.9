@@ -13,6 +13,7 @@
     by the wiki text to html formatter,
 
     @copyright: 2005-2006 MoinMoin:ThomasWaldmann
+                2007 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -38,4 +39,12 @@ class PluginScript(MoinScript):
                     print "Removed %s" % cachefile
                 except:
                     pass
+
+        # cleans the wikidicts
+        cache_file = os.path.join(base, 'cache', 'wikiconfig', 'wikidicts', 'dicts_groups')
+        try:
+            os.remove(cache_file)
+            print "Removed %s" % cache_file
+        except:
+            pass
 
