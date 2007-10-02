@@ -2,25 +2,25 @@
 """
     MoinMoin - cleancache script
 
-    globally delete cache files in data/pages/PageName/cache/ directories
+    globally delete cache files in data/pages/PageName/cache/ and /data/cache directories
 
     You will usually do this after changing MoinMoin code, by either upgrading
-    version, installing or removing macros. This often makes the text_html
-    files invalid, so you have to remove them (the wiki will recreate them
-    automatically).
+    version, installing or removing macros or changing the regex expression for dicts.
+    This often makes the text_html and dict files invalid, so you have to remove them
+    (the wiki will recreate them automatically).
 
     text_html is the name of the cache file used for compiled pages formatted
-    by the wiki text to html formatter,
+    by the wiki text to html formatter, A dict file does cache the pages which
+    do fit to the page_group_regex variable.
 
     @copyright: 2005-2006 MoinMoin:ThomasWaldmann
                 2007 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 
-cachefiles_to_delete = ['text_html', 'pagelinks', ]
-
 import os
-
+from MoinMoin import caching
+from MoinMoin.Page import Page
 from MoinMoin.script import MoinScript
 
 class PluginScript(MoinScript):
@@ -29,22 +29,20 @@ class PluginScript(MoinScript):
 
     def mainloop(self):
         self.init_request()
-        base = self.request.cfg.data_dir
-        pagesdir = os.path.join(base, 'pages')
-        for f in os.listdir(pagesdir):
-            for fname in cachefiles_to_delete:
-                cachefile = os.path.join(pagesdir, f, 'cache', fname)
-                try:
-                    os.remove(cachefile)
-                    print "Removed %s" % cachefile
-                except:
-                    pass
+        request = self.request
 
+        key = 'text_html'
+        pages = request.rootpage.getPageList(user='')
+
+        for pagename in pages:
+            arena = Page(request, pagename)
+            caching.CacheEntry(request, arena, key, scope='item').remove()
+            caching.CacheEntry(request, arena, "pagelinks", scope='item').remove()
+
+        # cleans the name2id
+        caching.CacheEntry(request, 'user', 'name2id', scope='wiki').remove()
         # cleans the wikidicts
-        cache_file = os.path.join(base, 'cache', 'wikiconfig', 'wikidicts', 'dicts_groups')
-        try:
-            os.remove(cache_file)
-            print "Removed %s" % cache_file
-        except:
-            pass
+        caching.CacheEntry(request, 'wikidicts', 'dicts_groups', scope='wiki').remove()
+        # cleans i18n meta
+        caching.CacheEntry(request, 'i18n', 'meta', scope='wiki').remove()
 
