@@ -167,7 +167,7 @@ def getFilename(request, pagename, filename):
     """
     if isinstance(filename, unicode):
         filename = filename.encode(config.charset)
-    return os.path.join(getAttachDir(request, pagename), filename)
+    return os.path.join(getAttachDir(request, pagename, create=1), filename)
 
 def exists(request, pagename, filename):
     """ check if page <pagename> has a file <filename> attached """
