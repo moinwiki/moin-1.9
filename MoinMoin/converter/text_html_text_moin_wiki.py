@@ -1155,10 +1155,10 @@ class convert_tree(visitor):
             # Attachments
             if title.startswith("attachment:"):
                 attname = wikiutil.url_unquote(title[len("attachment:"):])
-                if attname != desc or ' ' in attname:
+                if attname != desc:
                     self.text.append('[[attachment:%s|%s]]' % (attname, desc))
                 else:
-                    self.text.extend([self.white_space, 'attachment:%s' % attname, self.white_space])
+                    self.text.append('[[attachment:%s]]' % (attname, ))
             # wiki link
             elif href.startswith(scriptname):
                 pagename = href[len(scriptname):]
