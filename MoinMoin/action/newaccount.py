@@ -72,13 +72,8 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
 
     # Email should be unique - see also MoinMoin/script/accounts/moin_usercheck.py
     if theuser.email and request.cfg.user_email_unique:
-        users = user.getUserList(request)
-        for uid in users:
-            if uid == theuser.id:
-                continue
-            thisuser = user.User(request, uid)
-            if thisuser.email == theuser.email and not thisuser.disabled:
-                return _("This email already belongs to somebody else.")
+        if user.get_by_email_address(request, theuser.email):
+            return _("This email already belongs to somebody else.")
 
     # save data
     theuser.save()
