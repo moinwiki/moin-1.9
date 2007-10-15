@@ -25,7 +25,7 @@ import re
 import StringIO
 from MoinMoin import config, macro, wikiutil
 from MoinMoin.support.python_compatibility import rsplit # Needed for python 2.3
-import _creole
+from _creole import Parser as CreoleParser
 
 Dependencies = []
 
@@ -49,9 +49,24 @@ class Parser:
     def format(self, formatter):
         """Create and call the true parser and emitter."""
 
-        document = _creole.Parser(self.raw, self.request).parse()
+        document = CreoleParser(self.raw, self.request).parse()
         result = Emitter(document, formatter, self.request).emit()
         self.request.write(result)
+
+class Rules:
+    # For the link targets:
+    proto = r'http|https|ftp|nntp|news|mailto|telnet|file|irc'
+    extern = r'(?P<extern_addr>(?P<extern_proto>%s):.*)' % proto
+    attach = r'''
+            (?P<attach_scheme> attachment | drawing | image ):
+            (?P<attach_addr> .* )
+        '''
+    interwiki = r'''
+            (?P<inter_wiki> [A-Z][a-zA-Z]+ ) :
+            (?P<inter_page> .* )
+        '''
+    page = r'(?P<page_name> .* )'
+
 
 class Emitter:
     """
@@ -60,10 +75,10 @@ class Emitter:
     """
 
     addr_re = re.compile('|'.join([
-            _creole.Rules.extern,
-            _creole.Rules.attach,
-            _creole.Rules.interwiki,
-            _creole.Rules.page
+            Rules.extern,
+            Rules.attach,
+            Rules.interwiki,
+            Rules.page
         ]), re.X | re.U) # for addresses
 
     def __init__(self, root, formatter, request):

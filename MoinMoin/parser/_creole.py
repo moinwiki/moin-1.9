@@ -116,18 +116,6 @@ class Rules:
                 (?P<cell> (  %s | [^|])+ )
             ) \s*
         ''' % '|'.join([link, macro, image, code])
-    # For the link targets:
-    extern = r'(?P<extern_addr>(?P<extern_proto>%s):.*)' % proto
-    attach = r'''
-            (?P<attach_scheme> attachment | drawing | image ):
-            (?P<attach_addr> .* )
-        '''
-    interwiki = r'''
-            (?P<inter_wiki> [A-Z][a-zA-Z]+ ) :
-            (?P<inter_page> .* )
-        '''
-    page = r'(?P<page_name> .* )'
-
 
 class Parser:
     """
