@@ -92,14 +92,21 @@ class Group(DictBase):
     # strip free links markup if exists.
     regex = r'^ \* +(?:\[\[)?(?P<member>.+?)(?:\]\])? *$'
 
+    def __init__(self, request=None, pagename=None):
+        self._list = []
+        DictBase.__init__(self, request, pagename)
+
     def initFromText(self, text):
         for match in self.regex.finditer(text):
             member = match.group('member')
             self.addmember(member)
 
+    def __iter__(self):
+        return iter(self._list)
+
     def members(self):
         """ return the group's members """
-        return self.keys()
+        return self._list[:]
 
     def addmembers(self, members):
         """ add a list of members to the group """
@@ -109,6 +116,7 @@ class Group(DictBase):
     def addmember(self, member):
         """ add a member to the group """
         self[member] = 1
+        self._list.append(member)
 
     def has_member(self, member):
         """ check if the group has member <member> """
