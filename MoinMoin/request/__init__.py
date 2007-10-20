@@ -1318,8 +1318,7 @@ class RequestBase(object):
                 if lkey in ['vary', 'cache-control', 'content-language', ]:
                     # these headers (list might be incomplete) allow multiple values
                     # that can be merged into a comma separated list
-                    value = '%s, %s' % (headers[lkey][1], value)
-                    headers[lkey] = (key, value)
+                    headers[lkey] = headers[lkey][0], '%s, %s' % (headers[lkey][1], value)
                 else:
                     self.log("Duplicate http header: %r (ignored)" % header)
             else:
