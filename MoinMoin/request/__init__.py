@@ -148,6 +148,7 @@ class RequestBase(object):
         # Pages meta data that we collect in one request
         self.pages = {}
 
+        self.sent_headers = False
         self.user_headers = []
         self.cacheable = 0 # may this output get cached by http proxies/caches?
         self.http_caching_disabled = 0 # see disableHttpCaching()
@@ -1281,7 +1282,7 @@ class RequestBase(object):
         url = self.getQualifiedURL(url)
         self.emit_http_headers(["Status: 302 Found", "Location: %s" % url])
 
-    def emit_http_headers(self, more_headers=[]):
+    def emit_http_headers(self, more_headers=[], testing=False):
         """ emit http headers after some preprocessing / checking
 
             Makes sure we only emit headers once.
@@ -1289,23 +1290,21 @@ class RequestBase(object):
             Make sure we have exactly one Content-Type and one Status header.
             Make sure Status header string begins with a integer number.
 
-            For emitting, it calls the server specific _emit_http_headers
-            method.
+            For emitting (testing == False), it calls the server specific
+            _emit_http_headers method. For testing, it returns the result.
 
             @param more_headers: list of additional header strings
+            @param testing: set to True by test code 
         """
-        user_headers = getattr(self, 'user_headers', [])
+        user_headers = self.user_headers
         self.user_headers = []
         all_headers = more_headers + user_headers
 
-        # Send headers only once
-        sent_headers = getattr(self, 'sent_headers', 0)
-        sent_headers += 1
-        self.sent_headers = sent_headers
-        if sent_headers > 1:
-            raise HeadersAlreadySentException("emit_http_headers called multiple (%d) times! Headers: %r" % (sent_headers, all_headers))
-        #else:
-        #    self.log("Notice: emit_http_headers called first time. Headers: %r" % all_headers)
+        if self.sent_headers:
+            # Send headers only once
+            raise HeadersAlreadySentException("emit_http_headers has already been called before! Headers: %r" % all_headers)
+        else:
+            self.sent_headers = True
 
         # assemble dict of http headers
         headers = {}
@@ -1316,7 +1315,13 @@ class RequestBase(object):
             lkey = key.lower()
             value = value.lstrip()
             if lkey in headers:
-                self.log("Duplicate http header: %r (ignored)" % header)
+                if lkey in ['vary', 'cache-control', 'content-language', ]:
+                    # these headers (list might be incomplete) allow multiple values
+                    # that can be merged into a comma separated list
+                    value = '%s, %s' % (headers[lkey][1], value)
+                    headers[lkey] = (key, value)
+                else:
+                    self.log("Duplicate http header: %r (ignored)" % header)
             else:
                 headers[lkey] = (key, value)
 
@@ -1342,10 +1347,10 @@ class RequestBase(object):
 
         headers = [header_format % kv_tuple for kv_tuple in headers.values()] # make a list of strings
         headers = [st_header, ct_header] + headers # do NOT change order!
-        self._emit_http_headers(headers)
-
-        #from pprint import pformat
-        #sys.stderr.write(pformat(headers))
+        if not testing:
+            self._emit_http_headers(headers)
+        else:
+            return headers
 
     def _emit_http_headers(self, headers):
         """ server specific method to emit http headers.
@@ -1377,7 +1382,7 @@ class RequestBase(object):
         """
         self.failed = 1 # save state for self.run()
         # we should not generate the headers two times
-        if not getattr(self, 'sent_headers', 0):
+        if not self.sent_headers:
             self.emit_http_headers(['Status: 500 MoinMoin Internal Error'])
         from MoinMoin import failure
         failure.handle(self, err)
