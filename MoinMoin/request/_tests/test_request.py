@@ -111,10 +111,10 @@ class TestHTTPDate(object):
 
 class TestHTTPHeaders(object):
     std_headers = ['Status: 200 OK', 'Content-type: text/html; charset=%s' % config.charset]
-    
+
     def setup_method(self, method):
         self.request.sent_headers = False
-        
+
     def testAutoAddStdHeaders(self):
         """ test if the usual headers get auto-added if not specified """
         headers_out = self.request.emit_http_headers(testing=True)
