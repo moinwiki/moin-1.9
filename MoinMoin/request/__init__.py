@@ -1294,7 +1294,7 @@ class RequestBase(object):
             _emit_http_headers method. For testing, it returns the result.
 
             @param more_headers: list of additional header strings
-            @param testing: set to True by test code 
+            @param testing: set to True by test code
         """
         user_headers = self.user_headers
         self.user_headers = []
