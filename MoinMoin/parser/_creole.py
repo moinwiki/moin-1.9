@@ -136,8 +136,7 @@ class Parser:
         Rules.code, Rules.image, Rules.strong, Rules.emph, Rules.linebreak,
         Rules.escape, Rules.char]), re.X | re.U)
 
-    def __init__(self, raw, request):
-        self.request = request
+    def __init__(self, raw):
         self.raw = raw
         self.root = DocNode('document', None)
         self.cur = self.root        # The most recent document node
