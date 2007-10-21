@@ -23,7 +23,6 @@
                 2005-2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
-debug = 0
 
 import os, gettext, glob
 import logging
@@ -67,11 +66,11 @@ def i18n_init(request):
                 f = file(lang_file)
                 t.load_po(f)
                 f.close()
-                #request.log("load translation %r" % language)
+                logging.debug("i18n_init: loading translation %r" % language)
                 encoding = 'utf-8'
                 _languages[language] = {}
                 for key, value in t.info.items():
-                    #request.log("meta key %s value %r" % (key, value))
+                    #logging.debug("i18n_init: meta key %s value %r" % (key, value))
                     _languages[language][key] = value.decode(encoding)
             try:
                 meta_cache.update(_languages)
@@ -196,14 +195,13 @@ class Translation(object):
         cache = caching.CacheEntry(request, arena='i18n', key=self.language, scope='farm', use_pickle=True)
         langfilename = po_filename(request, self.language, self.domain, i18n_dir=trans_dir)
         needsupdate = cache.needsUpdate(langfilename)
-        if debug:
-            request.log("i18n: langfilename %s needsupdate %d" % (langfilename, needsupdate))
+        logging.debug("loadLanguage: langfilename %s needsupdate %d" % (langfilename, needsupdate))
         if not needsupdate:
             try:
                 uc_texts, uc_unformatted = cache.content()
+                logging.debug("loadLanguage: pickle %s load success" % self.language)
             except caching.CacheError:
-                if debug:
-                    request.log("i18n: pickle %s load failed" % self.language)
+                logging.debug("loadLanguage: pickle %s load failed" % self.language)
                 needsupdate = 1
 
         if needsupdate:
@@ -214,22 +212,23 @@ class Translation(object):
             texts = trans._catalog
             has_wikimarkup = self.info.get('x-haswikimarkup', 'False') == 'True'
             # convert to unicode
-            if debug:
-                request.log("i18n: processing unformatted texts of lang %s" % self.language)
+            logging.debug("loadLanguage: processing unformatted texts of lang %s" % self.language)
             uc_unformatted = {}
             uc_texts = {}
+            counter = 0
             for ukey, utext in texts.items():
+                if counter % 25 == 0:
+                    logging.debug("Processed %d messages for %s..." % (counter, self.language))
                 uc_unformatted[ukey] = utext
                 if has_wikimarkup:
                     # use the wiki parser now to replace some wiki markup with html
                     try:
                         uc_texts[ukey] = self.formatMarkup(request, utext) # XXX RECURSION!!! Calls gettext via markup
-                    except: # infinite recursion or crash
-                        if debug:
-                            request.log("i18n: crashes in language %s on string: %s" % (self.language, utext))
+                    except Exception, err: # infinite recursion or crash
+                        logging.debug("loadLanguage: crashes in language %s on string: %s [%s]" % (self.language, utext, str(err)))
                         uc_texts[ukey] = u"%s*" % utext
-            if debug:
-                request.log("i18n: dumping lang %s" % self.language)
+                counter += 1
+            logging.debug("loadLanguage: dumping lang %s" % self.language)
             try:
                 cache.update((uc_texts, uc_unformatted))
             except caching.CacheError:
