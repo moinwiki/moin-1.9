@@ -49,7 +49,7 @@ class Parser:
     def format(self, formatter):
         """Create and call the true parser and emitter."""
 
-        document = CreoleParser(self.raw, self.request).parse()
+        document = CreoleParser(self.raw).parse()
         result = Emitter(document, formatter, self.request).emit()
         self.request.write(result)
 
