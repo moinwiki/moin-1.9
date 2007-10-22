@@ -137,6 +137,7 @@ class TestGroupDicts:
 
         # real delete AnotherGroup page from filesystem
         import shutil
+        page.deletePage()
         fpath = page.getPagePath(check_create=0)
         shutil.rmtree(fpath, True)
 
@@ -164,12 +165,14 @@ class TestGroupDicts:
         # real delete AnotherGroup page from filesystem
         import shutil
         page = PageEditor(self.request, u'OtherGroup', do_editor_backup=0)
+        page.deletePage()
         fpath = page.getPagePath(check_create=0)
         shutil.rmtree(fpath, True)
 
         # real delete AnotherGroup page from filesystem
         import shutil
         page = PageEditor(self.request, u'SomeGroup', do_editor_backup=0)
+        page.deletePage()
         fpath = page.getPagePath(check_create=0)
         shutil.rmtree(fpath, True)
 

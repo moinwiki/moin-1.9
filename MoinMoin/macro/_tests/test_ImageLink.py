@@ -25,7 +25,8 @@ class TestImageLink:
     def teardown_class(self):
         if self.shouldDeleteTestPage:
             import shutil
-            page = Page(self.request, self.pagename)
+            page = PageEditor(self.request, self.pagename)
+            page.deletePage()
             fpath = page.getPagePath(use_underlay=0, check_create=0)
             shutil.rmtree(fpath, True)
 
