@@ -251,7 +251,7 @@ class TestAcl(object):
         pagename = u'AutoCreatedMoinMoinTemporaryTestPage'
 
         result = self.request.user.may.write(pagename)
-        page = Page(self.request, pagename)
+        page = PageEditor(self.request, pagename)
         path = page.getPagePath(use_underlay=0, check_create=0)
         if os.path.exists(path):
             py.test.skip("%s exists. Won't overwrite exiting page" % self.dictPage)
@@ -272,6 +272,7 @@ class TestAcl(object):
         finally:
             if os.path.exists(path):
                 import shutil
+                page.deletePage()
                 shutil.rmtree(path, True)
 
 coverage_modules = ['MoinMoin.security']

@@ -40,6 +40,7 @@ def test_get_attachment_path_created_on_getFilename(request):
     # real delete pagename from filesystem
     import shutil
     page = PageEditor(request, pagename, do_editor_backup=0)
+    page.deletePage()
     fpath = page.getPagePath(check_create=0)
     shutil.rmtree(fpath, True)
 
