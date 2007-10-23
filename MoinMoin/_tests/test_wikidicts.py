@@ -124,7 +124,10 @@ class TestGroupDicts:
         pagename = u'SomeGroup'
         page = PageEditor(self.request, pagename, do_editor_backup=False)
         body = " * ExampleUser"
-        page.saveText(body, 0)
+        try:
+            page.saveText(body, 0)
+        except:
+            pass
 
         page.renamePage('AnotherGroup')
 
@@ -151,7 +154,10 @@ class TestGroupDicts:
         pagename = u'SomeGroup'
         page = PageEditor(self.request, pagename, do_editor_backup=False)
         body = " * ExampleUser"
-        page.saveText(body, 0)
+        try:
+            page.saveText(body, 0)
+        except:
+            pass
 
         page.copyPage(u'OtherGroup')
 
@@ -162,14 +168,14 @@ class TestGroupDicts:
         members, groups = self.request.dicts.expand_group(u'OtherGroup')
         page = PageEditor(self.request, u'OtherGroup', do_editor_backup=0)
 
-        # real delete AnotherGroup page from filesystem
+        # real delete Group page from filesystem
         import shutil
         page = PageEditor(self.request, u'OtherGroup', do_editor_backup=0)
         page.deletePage()
         fpath = page.getPagePath(check_create=0)
         shutil.rmtree(fpath, True)
 
-        # real delete AnotherGroup page from filesystem
+        # real delete Group page from filesystem
         import shutil
         page = PageEditor(self.request, u'SomeGroup', do_editor_backup=0)
         page.deletePage()
