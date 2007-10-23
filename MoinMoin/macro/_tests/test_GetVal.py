@@ -62,7 +62,10 @@ class TestGetVal:
         assert body is not None
 
         self.request.reset()
-        self.page.saveText(body, 0)
+        try:
+            self.page.saveText(body, 0)
+        except:
+            pass
 
     def testGetValNoACLs(self):
         """ macro GetVal test: 'reads VAR' """
@@ -85,7 +88,10 @@ class TestGetVal:
         pagename = u'SomeDict'
         page = PageEditor(self.request, pagename, do_editor_backup=0)
         body = u" EXAMPLE:: This is an example text"
-        page.saveText(body, 0)
+        try:
+            page.saveText(body, 0)
+        except:
+            pass
         success_i, result = page.deletePage()
 
         self._createTestPage(u' VAR:: This is a brand new example')
