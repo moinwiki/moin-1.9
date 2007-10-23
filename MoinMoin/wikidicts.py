@@ -101,6 +101,9 @@ class Group(DictBase):
             member = match.group('member')
             self.addmember(member)
 
+    def update(self, members):
+        self.addmembers(members.keys())
+
     def __iter__(self):
         return iter(self._list)
 
@@ -123,7 +126,7 @@ class Group(DictBase):
         return self.has_key(member)
 
     def __repr__(self):
-        return "<Group name=%r items=%r>" % (self.name, self.keys())
+        return "<Group name=%r items=%r>" % (self.name, self._list)
 
 
 class DictDict:
