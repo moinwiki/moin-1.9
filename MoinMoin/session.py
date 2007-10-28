@@ -284,26 +284,6 @@ def _set_cookie(request, cookie_string, maxage, expires):
     # IMPORTANT: Prevent caching of current page and cookie
     request.disableHttpCaching()
 
-def _delete_cookie(request):
-    """ Delete the user cookie by sending expired cookie with null value
-
-    According to http://www.cse.ohio-state.edu/cgi-bin/rfc/rfc2109.html#sec-4.2.2
-    Deleted cookie should have Max-Age=0. We also have expires attribute,
-    which is probably needed for older browsers.
-
-    Finally, delete the saved cookie and create a new user based on the new settings.
-    """
-    cookie_string = ''
-    maxage = 0
-    # Set expires to one year ago for older clients
-    expires = time.time() - 3600 * 24 * 365 # 1 year ago
-    cookie = _make_cookie(request, _MOIN_SESSION, cookie_string,
-                          maxage, expires)
-    # Set cookie
-    request.setHttpHeader(cookie)
-    # IMPORTANT: Prevent caching of current page and cookie
-    request.disableHttpCaching()
-
 
 def _set_session_cookie(request, session_name, lifetime):
     """ Set moin_session cookie """
