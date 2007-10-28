@@ -77,6 +77,11 @@ class DefaultSessionData(SessionData):
         """clear session data and remove from it storage"""
         raise NotImplementedError
 
+    def cleanup(cls, request):
+        """clean up expired sessions"""
+        raise NotImplementedError
+    cleanup = classmethod(cleanup)
+
 class CacheSessionData(DefaultSessionData):
     """ SessionData -- store data for a session
 
@@ -138,19 +143,19 @@ class CacheSessionData(DefaultSessionData):
             pass
         self._data = {'expires': 0}
 
-
-def cleanup_session_data_cache(request):
-    cachelist = caching.get_cache_list(request, 'session', 'farm')
-    tnow = time.time()
-    for name in cachelist:
-        entry = caching.CacheEntry(request, 'session', name, 'farm',
-                                   use_pickle=True)
-        try:
-            data = entry.content()
-            if 'expires' in data and data['expires'] < tnow:
-                entry.remove()
-        except caching.CacheError:
-            pass
+    def cleanup(cls, request):
+        cachelist = caching.get_cache_list(request, 'session', 'farm')
+        tnow = time.time()
+        for name in cachelist:
+            entry = caching.CacheEntry(request, 'session', name, 'farm',
+                                       use_pickle=True)
+            try:
+                data = entry.content()
+                if 'expires' in data and data['expires'] < tnow:
+                    entry.remove()
+            except caching.CacheError:
+                pass
+    cleanup = classmethod(cleanup)
 
 
 class SessionHandler(object):
@@ -391,4 +396,4 @@ class DefaultSessionHandler(SessionHandler):
     def finish(self, request, cookie, user_obj):
         # every once a while, clean up deleted sessions:
         if random.randint(0, 999) == 0:
-            cleanup_session_data_cache(request)
+            self.dataclass.cleanup(request)
