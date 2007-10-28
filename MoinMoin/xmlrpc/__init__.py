@@ -542,9 +542,9 @@ class XmlRpcBase:
                 newtext = self._inlob(pagetext)
             msg = page.saveText(newtext, 0)
         except page.SaveError, msg:
-            pass
-        if _debug and msg:
-            sys.stderr.write("Msg: %s\n" % msg)
+            if _debug:
+                sys.stderr.write("Msg: %s\n" % msg)
+            return xmlrpclib.Fault(1, "%s" % msg)
 
         # Update pagelinks cache
         page.getPageLinks(self.request)
