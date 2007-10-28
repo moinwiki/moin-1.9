@@ -799,9 +799,17 @@ class convert_tree(visitor):
 
         self.text.append(command)
         for i in node.childNodes:
-            # formatted br is not wanted
-            if command and i.localName != 'br':
-                self.process_inline(i)
+            # lonly childnodes checked if they are only 'br'
+            if command and len(node.childNodes) == 1:
+                # formatted br alone is not wanted (who wants a bold br?)
+                if i.localName != 'br':
+                    self.process_inline(i)
+            else:
+                if i.localName == 'br':
+                    # dont make a real \n because that breaks tables
+                    self.text.append('<<BR>>')
+                else:
+                    self.process_inline(i)
         if command_close:
             command = command_close
         self.text.append(command)
