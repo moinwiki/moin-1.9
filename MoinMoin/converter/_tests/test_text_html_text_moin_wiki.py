@@ -86,7 +86,6 @@ class TestConvertBlockRepeatable(TestBase):
         repeat = ''.join(request.result).strip('\n')
         #assert repeat == output
         out = self.do_convert_real([request, page.page_name, repeat])
-
         assert text == out
 
     def testComment01(self):
@@ -1174,7 +1173,7 @@ class TestConvertBrokenBrowser(TestBase):
 """
         self.do(test, output)
 
-class TestConvertImportFromOOo(TestBase):
+class TestBlanksInTables(TestBase):
     def do(self, text, output):
         text = text.strip('\n')
         output = output.strip('\n')
@@ -1184,64 +1183,68 @@ class TestConvertImportFromOOo(TestBase):
         out = out.strip()
         assert output == out
 
-    def testOOoTable01(self):
-        # tests cut and paste from OOo to gui (empty cells do have a <br \>
-        # readed from guis source box, blanks removed, changed to readable lines
-        # this tests could get broken on any parser change
-        test = u"""
-<p class="line874">
-<meta content="text/html; charset=utf-8" http-equiv="CONTENT-TYPE" />
-<title></title><meta content="OpenOffice.org 2.2  (Linux)" name="GENERATOR" />
-<style type="text/css">
-<!--
-    BODY,DIV,TABLE,THEAD,TBODY,TFOOT,TR,TH,TD,P { font-family:"DejaVu Sans"; font-size:x-small }
--->
-</style>
-<table rules="none" frame="void" cols="2" cellspacing="0" border="0">
-<colgroup><col width="86"></col><col width="86"></col></colgroup>
-<tbody>
-<tr> <td width="86" height="16" align="left">a</td>
-     <td width="86" align="left"><br /></td>
-</tr>
-<tr>
-     <td height="16" align="left"><br /></td>
-     <td valign="middle" align="center">b</td>
-</tr>
-</tbody>
-</table>
-</p>
-"""
-
-        output = u"""
-||<( width="86px" height="16px">a||<( width="86px"> ||
-||<( height="16px"> ||<:>b||
-"""
-
+    def testTable01(self):
+        # tests empty cells
+        test = u"<table><tbody><tr><td>a</td><td></td></tr></tbody></table>"
+        output = u"||a|| ||"
 
         self.do(test, output)
 
     def testTable02(self):
-        # tests empty cells
-        test = u"""<table><tbody>
-                   <tr>  <td width="86" height="19" style="text-align: left;"><p class="line891"><strong>a</strong></p></td>   <td width="86" style="text-align: left;"><p class="line891"><strong>b</strong></p></td>   <td width="86" style="text-align: left;"><p class="line891"><strong>c</strong></p></td>   <td width="86" style="text-align: left;"><p class="line891"><strong>d</strong></p></td>   <td width="86" style="text-align: left;"><p class="line891"><strong>e</strong></p></td>   <td width="86" style="text-align: left; vertical-align: top;"><p class="line891"><strong>f</strong></p></td>   <td width="86" style="text-align: left; vertical-align: top;"><p class="line891"><strong>g</strong></p></td> </tr>
-                   <tr>  <td height="19" style="text-align: left;"><p class="line862">a</p></td>   <td style="text-align: center;" rowspan="2" colspan="4"><p class="line862">b</p></td>   <td style="text-align: center; vertical-align: top;"></td>   <td style="text-align: center; vertical-align: top;"></td> </tr>
-                   <tr>  <td height="19" style="text-align: left;"><p class="line862">a</p></td>   <td style="text-align: center;"></td>   <td style="text-align: center; vertical-align: top;"></td> </tr>
-                   <tr>  <td height="19" style="text-align: left;"><p class="line862">a</p></td>   <td style="text-align: center;" rowspan="2" colspan="1"><p class="line862">b</p></td>   <td style="text-align: center;" rowspan="2" colspan="1"><p class="line862">c </p></td>   <td style="text-align: left;"><p class="line862">d</p></td>   <td style="text-align: left;"><p class="line862">e</p></td>   <td style="text-align: center;"></td>   <td style="text-align: center; vertical-align: top;"></td> </tr>
-                   <tr>  <td height="19" style="text-align: left;"><p class="line862">a</p></td>   <td style="text-align: left;"><p class="line862">d</p></td>   <td style="text-align: left;"><p class="line862">e</p></td>   <td style="text-align: center;"></td>   <td style="text-align: center; vertical-align: top;"></td> </tr>
-                   <tr>  <td height="19" style="text-align: left;"><p class="line862">a</p></td>   <td style="text-align: left;"><p class="line862">b</p></td>   <td style="text-align: left;"><p class="line862">c</p></td>   <td style="text-align: left;"><p class="line862">d</p></td>   <td style="text-align: left;"><p class="line862">e</p></td>   <td style="text-align: center;"><p class="line862">f</p></td>   <td style="text-align: center; vertical-align: top;"><p class="line862">g</p></td> </tr>
-                   </tbody></table>"""
-
-
-        output = u"""
-||<width="86px" height="19px" style="text-align: left;">'''a''' ||<width="86px" style="text-align: left;">'''b''' ||<width="86px" style="text-align: left;">'''c''' ||<width="86px" style="text-align: left;">'''d''' ||<width="86px" style="text-align: left;">'''e''' ||<width="86px" style="text-align: left; vertical-align: top;">'''f''' ||<width="86px" style="text-align: left; vertical-align: top;">'''g''' ||
-||<height="19px" style="text-align: left;">a ||||||||<style="text-align: center;" |2>b ||<style="text-align: center; vertical-align: top;"> ||<style="text-align: center; vertical-align: top;"> ||
-||<height="19px" style="text-align: left;">a ||<style="text-align: center;"> ||<style="text-align: center; vertical-align: top;"> ||
-||<height="19px" style="text-align: left;">a ||<style="text-align: center;" |2>b ||<style="text-align: center;" |2>c ||<style="text-align: left;">d ||<style="text-align: left;">e ||<style="text-align: center;"> ||<style="text-align: center; vertical-align: top;"> ||
-||<height="19px" style="text-align: left;">a ||<style="text-align: left;">d ||<style="text-align: left;">e ||<style="text-align: center;"> ||<style="text-align: center; vertical-align: top;"> ||
-||<height="19px" style="text-align: left;">a ||<style="text-align: left;">b ||<style="text-align: left;">c ||<style="text-align: left;">d ||<style="text-align: left;">e ||<style="text-align: center;">f ||<style="text-align: center; vertical-align: top;">g ||"""
-
+        # tests empty cells by br (OOo cut and paste)
+        test = u"<table><tbody><tr><td>a</td><td><br /></td></tr></tbody></table>"
+        output = u"||a||<<BR>>||"
 
         self.do(test, output)
 
-coverage_modules = ['MoinMoin.converter.text_html_text_moin_wiki']
+    def testTable03(self):
+        # tests linebreak in cells by br
+        test = u"<table><tbody><tr><td>a<br />b</td></tr></tbody></table>"
+        output = u"||a<<BR>>b||"
 
+        self.do(test, output)
+
+    def testTable04(self):
+        # tests linebreak in cells by br and formatting styles
+        test = u"<table><tbody><tr><td><em>a</em><br /><u>b</u><br /><strike>c</strike></td></tr></tbody></table>"
+        output = u"||''a''<<BR>>__b__<<BR>>--(c)--||"
+
+        self.do(test, output)
+
+    def testTable05(self):
+        # tests empty cells and formatting style strong
+        test = u"""
+<table><tbody>
+<tr><td><strong>a</strong></td><td></td></tr>
+<tr><td></td><td><strong>b</strong></td></tr>
+</tbody></table>
+"""
+        output = u"""
+||'''a'''|| ||
+|| ||'''b'''||
+"""
+        self.do(test, output)
+
+    def testTable06(self):
+        # tests linebreak in cells by br
+        test = u"<table><tbody><tr><td>a<br /></td></tr></tbody></table>"
+        output = u"||a<<BR>>||"
+
+        self.do(test, output)
+
+    def testTable07(self):
+        # tests empty cells from OOo and formatting style strong
+        test = u"""
+<table><tbody>
+<tr><td><strong>a</strong></td><td><strong><br /></strong></td></tr>
+<tr><td><strong><br /></strong></td><td><strong>b</strong></td></tr>
+</tbody></table>
+"""
+
+        output = u"""
+||'''a'''||''''''||
+||''''''||'''b'''||
+"""
+
+        self.do(test, output)
+coverage_modules = ['MoinMoin.converter.text_html_text_moin_wiki']
