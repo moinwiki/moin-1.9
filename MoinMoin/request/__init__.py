@@ -217,14 +217,15 @@ class RequestBase(object):
 
             # session handler start, auth
             self.parse_cookie()
-            user_obj = self.cfg.session_handler.start(self, self._cookie)
-            shfinisher = lambda request: self.cfg.session_handler.finish(request, self._cookie, request.user)
+            user_obj = self.cfg.session_handler.start(self, self.cfg.session_id_handler)
+            shfinisher = lambda request: self.cfg.session_handler.finish(request, request.user,
+                                                                         self.cfg.session_id_handler)
             self.add_finisher(shfinisher)
             # set self.user even if _handle_auth_form raises an Exception
             self.user = None
             self.user = self._handle_auth_form(user_obj)
             del user_obj
-            self.cfg.session_handler.after_auth(self, self._cookie, self.user)
+            self.cfg.session_handler.after_auth(self, self.cfg.session_id_handler, self.user)
             if not self.user:
                 self.user = user.User(self, auth_method='request:invalid')
 
@@ -615,7 +616,7 @@ class RequestBase(object):
         logout = kw.get('logout')
         stage = kw.get('stage')
         extra = {
-            'cookie': self._cookie,
+            'cookie': self.cookie,
         }
         if login:
             extra['attended'] = attended
@@ -671,9 +672,9 @@ class RequestBase(object):
 
     def parse_cookie(self):
         try:
-            self._cookie = Cookie.SimpleCookie(self.saved_cookie)
+            self.cookie = Cookie.SimpleCookie(self.saved_cookie)
         except Cookie.CookieError:
-            self._cookie = None
+            self.cookie = None
 
     def reset(self):
         """ Reset request state.

@@ -234,34 +234,111 @@ class SessionHandler(object):
         """
         raise NotImplementedError
 
-_MOIN_SESSION = 'MOIN_SESSION'
-
-_SESSION_NAME_CHARS = 'abcdefghijklmnopqrstuvwxyz0123456789_-'
-_SESSION_NAME_LEN = 32
 
 
-def _make_cookie(request, cookie_name, cookie_string, maxage, expires):
-    """ create an appropriate cookie """
-    cookie = Cookie.SimpleCookie()
-    cfg = request.cfg
-    cookie[cookie_name] = cookie_string
-    cookie[cookie_name]['max-age'] = maxage
-    if cfg.cookie_domain:
-        cookie[cookie_name]['domain'] = cfg.cookie_domain
-    if cfg.cookie_path:
-        cookie[cookie_name]['path'] = cfg.cookie_path
-    else:
-        path = request.getScriptname()
-        if not path:
-            path = '/'
-        cookie[cookie_name]['path'] = path
-    # Set expires for older clients
-    cookie[cookie_name]['expires'] = request.httpDate(when=expires, rfc='850')
-    return cookie.output()
+
+class SessionIDHandler:
+    """
+        MoinMoin session ID handling
+
+        Instances of this class are used by the session handling code
+        to set/get the persistent ID that is used to identify the session
+        which is usually stored in a cookie.
+    """
+    _SESSION_NAME_CHARS = 'abcdefghijklmnopqrstuvwxyz0123456789_-'
+    _SESSION_NAME_LEN = 32
+
+    def __init__(self):
+        """
+            Initialise the session ID handler.
+        """
+        pass
+
+    def get(self, request):
+        """
+            Return the persistent ID for this request.
+
+            @param request: the request instance
+        """
+        raise NotImplementedError
+
+    def set(self, request, session_id, expires):
+        """
+            Set a persistent ID for the request to be returned by the
+            user agent.
+
+            @param request: the request instance
+            @param session_id: the ID for this session
+            @param expires: expiry date/time in unix seconds (cf. time.time())
+        """
+        raise NotImplementedError
+
+    def generate_new_id(self, request):
+        """
+            Generate a new unique ID.
+
+            @param request: the request instance
+        """
+        return random_string(self._SESSION_NAME_LEN, self._SESSION_NAME_CHARS)
 
 
-def _get_cookie_lifetime(request, user_obj):
-    """ Get cookie lifetime for the user object user_obj """
+
+class MoinCookieSessionIDHandler(SessionIDHandler):
+    def __init__(self, cookie_name='MOIN_SESSION'):
+        SessionIDHandler.__init__(self)
+        self.cookie_name = cookie_name
+    
+    def _make_cookie(self, request, cookie_name, cookie_string, maxage, expires):
+        """ create an appropriate cookie """
+        cookie = Cookie.SimpleCookie()
+        cfg = request.cfg
+        cookie[cookie_name] = cookie_string
+        cookie[cookie_name]['max-age'] = maxage
+        if cfg.cookie_domain:
+            cookie[cookie_name]['domain'] = cfg.cookie_domain
+        if cfg.cookie_path:
+            cookie[cookie_name]['path'] = cfg.cookie_path
+        else:
+            path = request.getScriptname()
+            if not path:
+                path = '/'
+            cookie[cookie_name]['path'] = path
+        # Set expires for older clients
+        cookie[cookie_name]['expires'] = request.httpDate(when=expires, rfc='850')
+        return cookie.output()
+
+    def _set_cookie(self, request, cookie_string, expires):
+        """ Set cookie, raw helper. """
+        lifetime = expires - time.time()
+        cookie = self._make_cookie(request, self.cookie_name, cookie_string,
+                                   lifetime, expires)
+        # Set cookie
+        request.setHttpHeader(cookie)
+        # IMPORTANT: Prevent caching of current page and cookie
+        request.disableHttpCaching()
+
+    def set(self, request, session_name, expires):
+        """ Set moin_session cookie """
+        request.session.set_expiry(expires)
+        self._set_cookie(request, session_name, expires)
+
+    def get(self, request):
+        session_name = None
+        if request.cookie and self.cookie_name in request.cookie:
+            session_name = request.cookie[self.cookie_name].value
+            session_name = ''.join([c for c in session_name
+                                    if c in self._SESSION_NAME_CHARS])
+            session_name = session_name[:self._SESSION_NAME_LEN]
+        return session_name
+
+
+def _get_anon_session_lifetime(request):
+    if hasattr(request.cfg, 'anonymous_session_lifetime'):
+        return request.cfg.anonymous_session_lifetime * 3600
+    return 0
+
+def _get_session_lifetime(request, user_obj):
+    """ Get session lifetime for the user object user_obj """
     lifetime = int(request.cfg.cookie_lifetime) * 3600
     forever = 10 * 365 * 24 * 3600 # 10 years
     if not lifetime:
@@ -273,39 +350,6 @@ def _get_cookie_lifetime(request, user_obj):
     elif lifetime < 0:
         return -lifetime
     return lifetime
-
-
-def _set_cookie(request, cookie_string, maxage, expires):
-    """ Set cookie, raw helper. """
-    cookie = _make_cookie(request, _MOIN_SESSION, cookie_string,
-                          maxage, expires)
-    # Set cookie
-    request.setHttpHeader(cookie)
-    # IMPORTANT: Prevent caching of current page and cookie
-    request.disableHttpCaching()
-
-
-def _set_session_cookie(request, session_name, lifetime):
-    """ Set moin_session cookie """
-    expires = time.time() + lifetime
-    request.session.set_expiry(expires)
-    _set_cookie(request, session_name, lifetime, expires)
-
-
-def _get_session_name(cookie):
-    session_name = None
-    if _MOIN_SESSION in cookie:
-        session_name = cookie[_MOIN_SESSION].value
-        session_name = ''.join([c for c in session_name
-                                if c in _SESSION_NAME_CHARS])
-        session_name = session_name[:_SESSION_NAME_LEN]
-    return session_name
-
-
-def _set_anon_cookie(request, session_name):
-    if hasattr(request.cfg, 'anonymous_cookie_lifetime'):
-        lifetime = request.cfg.anonymous_cookie_lifetime * 3600
-        _set_session_cookie(request, session_name, lifetime)
 
 
 class DefaultSessionHandler(SessionHandler):
@@ -324,9 +368,9 @@ class DefaultSessionHandler(SessionHandler):
         SessionHandler.__init__(self)
         self.dataclass = dataclass
 
-    def start(self, request, cookie):
+    def start(self, request, session_id_handler):
         user_obj = None
-        session_name = _get_session_name(cookie)
+        session_name = session_id_handler.get(request)
         if session_name:
             sessiondata = self.dataclass(request, session_name)
             sessiondata.is_new = False
@@ -348,32 +392,37 @@ class DefaultSessionHandler(SessionHandler):
                             if user_obj:
                                 sessiondata.is_stored = True
             else:
-                store = hasattr(request.cfg, 'anonymous_cookie_lifetime')
+                store = hasattr(request.cfg, 'anonymous_session_lifetime')
                 sessiondata.is_stored = store
         else:
-            session_name = random_string(_SESSION_NAME_LEN,
-                                         _SESSION_NAME_CHARS)
-            store = hasattr(request.cfg, 'anonymous_cookie_lifetime')
+            session_name = session_id_handler.generate_new_id(request)
+            store = hasattr(request.cfg, 'anonymous_session_lifetime')
             sessiondata = self.dataclass(request, session_name)
             sessiondata.is_new = True
             sessiondata.is_stored = store
             request.session = sessiondata
         return user_obj
 
-    def after_auth(self, request, cookie, user_obj):
+    def after_auth(self, request, session_id_handler, user_obj):
         session = request.session
         if user_obj and user_obj.valid:
             session['user.id'] = user_obj.id
             session['user.auth_method'] = user_obj.auth_method
             session['user.auth_attribs'] = user_obj.auth_attribs
-            lifetime = _get_cookie_lifetime(request, user_obj)
-            _set_session_cookie(request, session.name, lifetime)
+            lifetime = _get_session_lifetime(request, user_obj)
+            expires = time.time() + lifetime
+            session_id_handler.set(request, session.name, expires)
         else:
             if 'user.id' in session:
                 session.delete()
-            _set_anon_cookie(request, session.name)
+            lifetime = _get_anon_session_lifetime(request)
+            if lifetime:
+                expires = time.time() + lifetime
+                session_id_handler.set(request, session.name, expires)
+            else:
+                session.delete()
 
-    def finish(self, request, cookie, user_obj):
+    def finish(self, request, session_id_handler, user_obj):
         # every once a while, clean up deleted sessions:
         if random.randint(0, 999) == 0:
             self.dataclass.cleanup(request)
