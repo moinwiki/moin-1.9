@@ -229,6 +229,7 @@ class DefaultConfig:
     # to have proper session handling and use request.handle_auth()
     trusted_auth_methods = ['http', 'xmlrpc_applytoken']
     session_handler = session.DefaultSessionHandler()
+    session_id_handler = session.MoinCookieSessionIDHandler()
 
     backup_compression = 'gz'
     backup_users = []
