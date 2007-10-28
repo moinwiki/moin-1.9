@@ -42,7 +42,7 @@ def prep_page_changed_mail(request, page, comment, email_lang, revisions, trivia
             'username': page.uid_override or user.getUserIdentification(request),
         }
 
-    return {'subject': subject, 'body': change['text']}
+    return {'subject': subject, 'body': change['text'] + change['diff']}
 
 
 def send_notification(request, from_address, emails, data):
