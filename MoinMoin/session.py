@@ -353,8 +353,7 @@ class DefaultSessionHandler(SessionHandler):
                 attribs = sessiondata['user.auth_attribs']
                 # Only allow valid methods that are still in the auth list.
                 # This is necessary to kick out clients who authenticated in
-                # the past # with a method that was removed from the auth
-                # list!
+                # the past with a method that was removed from the auth list!
                 if method:
                     for auth in request.cfg.auth:
                         if auth.name == method:
