@@ -33,7 +33,7 @@ def prep_page_changed_mail(request, page, comment, email_lang, revisions, trivia
 
     """
     _ = request.getText
-    body = notification.page_change_message("page_changed", request, page, email_lang, comment=comment, revisions=revisions)
+    change = notification.page_change_message("page_changed", request, page, email_lang, comment=comment, revisions=revisions)
 
     subject = _('[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s', formatted=False) % {
             'trivial': (trivial and _("Trivial ", formatted=False)) or "",
@@ -42,7 +42,7 @@ def prep_page_changed_mail(request, page, comment, email_lang, revisions, trivia
             'username': page.uid_override or user.getUserIdentification(request),
         }
 
-    return {'subject': subject, 'body': body}
+    return {'subject': subject, 'body': change['text']}
 
 
 def send_notification(request, from_address, emails, data):
