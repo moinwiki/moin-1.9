@@ -319,7 +319,6 @@ class MoinCookieSessionIDHandler(SessionIDHandler):
 
     def set(self, request, session_name, expires):
         """ Set moin_session cookie """
-        request.session.set_expiry(expires)
         self._set_cookie(request, session_name, expires)
 
     def get(self, request):
@@ -412,6 +411,7 @@ class DefaultSessionHandler(SessionHandler):
             lifetime = _get_session_lifetime(request, user_obj)
             expires = time.time() + lifetime
             session_id_handler.set(request, session.name, expires)
+            request.session.set_expiry(expires)
         else:
             if 'user.id' in session:
                 session.delete()
@@ -419,6 +419,7 @@ class DefaultSessionHandler(SessionHandler):
             if lifetime:
                 expires = time.time() + lifetime
                 session_id_handler.set(request, session.name, expires)
+                request.session.set_expiry(expires)
             else:
                 session.delete()
 
