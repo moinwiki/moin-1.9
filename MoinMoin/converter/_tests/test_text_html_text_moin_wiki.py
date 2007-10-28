@@ -1247,4 +1247,50 @@ class TestBlanksInTables(TestBase):
 """
 
         self.do(test, output)
+
+    def testTable08(self):
+        # tests line break between two lines in formatted text
+        test = u"<table><tbody><tr><td><strong>first line<br />second line</strong></td></tr></tbody></table>"
+        output = u"||'''first line<<BR>>second line'''||"
+
+        self.do(test, output)
+
+    def testTable09(self):
+        # tests line break at beginning of line and formatted text
+        test = u"<table><tbody><tr><td><strong><br />line</strong></td></tr></tbody></table>"
+        output = u"||'''<<BR>>line'''||"
+
+    def testTable10(self):
+        # tests line break at end of line and formatted text
+        test = u"<table><tbody><tr><td><strong>line<br /></strong></td></tr></tbody></table>"
+        output = u"||'''line<<BR>>'''||"
+
+    def testTable11(self):
+        # tests line break at beginning before formatted text
+        test = u"<table><tbody><tr><td><br /><strong>line</strong></td></tr></tbody></table>"
+        output = u"||'<<BR>'''line'''||"
+
+    def testTable12(self):
+        # tests line break after formatted text
+        test = u"<table><tbody><tr><td><strong>line</strong><br /></td></tr></tbody></table>"
+        output = u"||'''line'''<<BR>>||"
+
+    def testTable13(self):
+        # tests formatted br
+        test = u"<table><tbody><tr><td><strong><br /></strong></td></tr></tbody></table>"
+        output = u"||''''''||"
+
+    def testTable14(self):
+        # tests br
+        test = u"<table><tbody><tr><td><br /></td></tr></tbody></table>"
+        output = u"||<<BR>>||"
+
+    def testTable15(self):
+        # tests many br
+        test = u"<table><tbody><tr><td><br /><br /><br /></td></tr></tbody></table>"
+        output = u"||<<BR>><<BR>><<BR>>||"
+
+        self.do(test, output)
+
 coverage_modules = ['MoinMoin.converter.text_html_text_moin_wiki']
+
