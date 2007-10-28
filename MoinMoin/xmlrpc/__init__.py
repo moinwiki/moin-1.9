@@ -527,10 +527,7 @@ class XmlRpcBase:
 
         pagename = self._instr(pagename)
 
-        # Only authenticated (trusted) users may use putPage!
-        # Trusted currently means being authenticated by http auth or wiki auth.
-        # You could control access to pages by using ACLs
-
+        # check ACLs
         if not self.request.user.may.write(pagename):
             return xmlrpclib.Fault(1, "You are not allowed to edit this page")
 
