@@ -799,7 +799,9 @@ class convert_tree(visitor):
 
         self.text.append(command)
         for i in node.childNodes:
-            self.process_inline(i)
+            # formatted br is not wanted
+            if command and i.localName != 'br':
+                self.process_inline(i)
         if command_close:
             command = command_close
         self.text.append(command)
