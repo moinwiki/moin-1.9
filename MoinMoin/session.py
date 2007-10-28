@@ -77,6 +77,11 @@ class DefaultSessionData(SessionData):
         """clear session data and remove from it storage"""
         raise NotImplementedError
 
+    def cleanup(cls, request):
+        """clean up expired sessions"""
+        raise NotImplementedError
+    cleanup = classmethod(cleanup)
+
 class CacheSessionData(DefaultSessionData):
     """ SessionData -- store data for a session
 
@@ -138,19 +143,19 @@ class CacheSessionData(DefaultSessionData):
             pass
         self._data = {'expires': 0}
 
-
-def cleanup_session_data_cache(request):
-    cachelist = caching.get_cache_list(request, 'session', 'farm')
-    tnow = time.time()
-    for name in cachelist:
-        entry = caching.CacheEntry(request, 'session', name, 'farm',
-                                   use_pickle=True)
-        try:
-            data = entry.content()
-            if 'expires' in data and data['expires'] < tnow:
-                entry.remove()
-        except caching.CacheError:
-            pass
+    def cleanup(cls, request):
+        cachelist = caching.get_cache_list(request, 'session', 'farm')
+        tnow = time.time()
+        for name in cachelist:
+            entry = caching.CacheEntry(request, 'session', name, 'farm',
+                                       use_pickle=True)
+            try:
+                data = entry.content()
+                if 'expires' in data and data['expires'] < tnow:
+                    entry.remove()
+            except caching.CacheError:
+                pass
+    cleanup = classmethod(cleanup)
 
 
 class SessionHandler(object):
@@ -279,26 +284,6 @@ def _set_cookie(request, cookie_string, maxage, expires):
     # IMPORTANT: Prevent caching of current page and cookie
     request.disableHttpCaching()
 
-def _delete_cookie(request):
-    """ Delete the user cookie by sending expired cookie with null value
-
-    According to http://www.cse.ohio-state.edu/cgi-bin/rfc/rfc2109.html#sec-4.2.2
-    Deleted cookie should have Max-Age=0. We also have expires attribute,
-    which is probably needed for older browsers.
-
-    Finally, delete the saved cookie and create a new user based on the new settings.
-    """
-    cookie_string = ''
-    maxage = 0
-    # Set expires to one year ago for older clients
-    expires = time.time() - 3600 * 24 * 365 # 1 year ago
-    cookie = _make_cookie(request, _MOIN_SESSION, cookie_string,
-                          maxage, expires)
-    # Set cookie
-    request.setHttpHeader(cookie)
-    # IMPORTANT: Prevent caching of current page and cookie
-    request.disableHttpCaching()
-
 
 def _set_session_cookie(request, session_name, lifetime):
     """ Set moin_session cookie """
@@ -353,8 +338,7 @@ class DefaultSessionHandler(SessionHandler):
                 attribs = sessiondata['user.auth_attribs']
                 # Only allow valid methods that are still in the auth list.
                 # This is necessary to kick out clients who authenticated in
-                # the past # with a method that was removed from the auth
-                # list!
+                # the past with a method that was removed from the auth list!
                 if method:
                     for auth in request.cfg.auth:
                         if auth.name == method:
@@ -392,4 +376,4 @@ class DefaultSessionHandler(SessionHandler):
     def finish(self, request, cookie, user_obj):
         # every once a while, clean up deleted sessions:
         if random.randint(0, 999) == 0:
-            cleanup_session_data_cache(request)
+            self.dataclass.cleanup(request)
