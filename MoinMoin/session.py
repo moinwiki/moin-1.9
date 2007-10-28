@@ -25,7 +25,7 @@ class SessionData(object):
         method.
 
         Instances conform to the dict protocol (__setitem__, __getitem__,
-        __contains__, __delitem__, get) and have the additional methods
+        __contains__, __delitem__, get) and have the additional properties
         is_stored and is_new.
     """
     def __init__(self, request):
