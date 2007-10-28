@@ -33,10 +33,22 @@ from MoinMoin.PageEditor import PageEditor
 from MoinMoin.logfile import editlog
 from MoinMoin.action import AttachFile
 from MoinMoin import caching
-from MoinMoin.util import random_string
-from random import randint
+from MoinMoin import session
 
 _debug = 0
+
+
+class XmlRpcAuthTokenIDHandler(session.SessionIDHandler):
+    def __init__(self, token=None):
+        session.SessionIDHandler.__init__(self)
+        self.token = token
+
+    def get(self, request):
+        return self.token
+
+    def set(self, request, session_id, expires):
+        self.token = session_id
+
 
 class XmlRpcBase:
     """ XMLRPC base class with common functionality of wiki xmlrpc v1 and v2 """
@@ -647,44 +659,21 @@ class XmlRpcBase:
 
     # authorization methods
 
-    def _cleanup_stale_tokens(self, request):
-        items = caching.get_cache_list(request, 'xmlrpc-session', 'farm')
-        tnow = time.time()
-        for item in items:
-            centry = caching.CacheEntry(self.request, 'xmlrpc-session', item,
-                                        scope='farm', use_pickle=True)
-            try:
-                expiry, uid = centry.content()
-                if expiry < tnow:
-                    centry.remove()
-            except caching.CacheError:
-                pass
-
-    def _generate_auth_token(self, usr):
-        """Generate a token that can be used to authorize next requests
-
-        @type usr: MoinMoin.user
-
-        """
-        token = random_string(32, 'abcdefghijklmnopqrstuvwxyz0123456789')
-        centry = caching.CacheEntry(self.request, 'xmlrpc-session', token,
-                                    scope='farm', use_pickle=True)
-        centry.update((time.time() + 15*3600, usr.id))
-        return token
-
     def xmlrpc_getAuthToken(self, username, password, *args):
         """ Returns a token which can be used for authentication
             in other XMLRPC calls. If the token is empty, the username
-            or the password were wrong. """
+            or the password were wrong.
+        """
+        id_handler = XmlRpcAuthTokenIDHandler()
 
-        if randint(0, 99) == 0:
-            self._cleanup_stale_tokens(self.request)
-
-        u = self.request.handle_auth(None, username=username,
+        u = self.request.cfg.session_handler.start(self.request, id_handler)
+        u = self.request.handle_auth(u, username=username,
                                      password=password, login=True)
 
+        self.request.cfg.session_handler.after_auth(self.request, id_handler, u)
+
         if u and u.valid:
-            return self._generate_auth_token(u)
+            return id_handler.token
         else:
             return ""
 
@@ -700,9 +689,6 @@ class XmlRpcBase:
         if self.cfg.secret != secret:
             return ""
 
-        if randint(0, 99) == 0:
-            self._cleanup_stale_tokens(self.request)
-
         u = self.request.handle_jid_auth(jid)
 
         if u and u.valid:
@@ -712,21 +698,12 @@ class XmlRpcBase:
 
     def xmlrpc_applyAuthToken(self, auth_token):
         """ Applies the auth token and thereby authenticates the user. """
-        centry = caching.CacheEntry(self.request, 'xmlrpc-session', auth_token,
-                                    scope='farm', use_pickle=True)
-        try:
-            expiry, uid = centry.content()
-        except caching.CacheError:
-            return xmlrpclib.Fault("INVALID", "Invalid token.")
+        id_handler = XmlRpcAuthTokenIDHandler(auth_token)
 
-        if expiry < time.time():
-            centry.remove()
-            return xmlrpclib.Fault("EXPIRED", "Expired token.")
-
-        u = user.User(self.request, id=uid, auth_method='xmlrpc_applytoken')
-        if u.valid:
-            self.request.user = u
-            centry.update((time.time() + 15*3600, uid))
+        u = self.request.cfg.session_handler.start(self.request, id_handler)
+        u = self.request.handle_auth(u)
+        self.request.cfg.session_handler.after_auth(self.request, id_handler, u)
+        if u and u.valid:
             return "SUCCESS"
         else:
             return xmlrpclib.Fault("INVALID", "Invalid token.")
@@ -734,14 +711,15 @@ class XmlRpcBase:
 
     def xmlrpc_deleteAuthToken(self, auth_token):
         """ Delete the given auth token. """
-        centry = caching.CacheEntry(self.request, 'xmlrpc-session', auth_token,
-                                    scope='farm', use_pickle=True)
-        try:
-            centry.remove()
-        except caching.CacheError:
-            return xmlrpclib.Fault("INVALID", "Invalid token.")
-        else:
-            return "SUCCESS"
+        id_handler = XmlRpcAuthTokenIDHandler(auth_token)
+
+        u = self.request.cfg.session_handler.start(self.request, id_handler)
+        u = self.request.handle_auth(u)
+        self.request.cfg.session_handler.after_auth(self.request, id_handler, u)
+
+        self.request.session.delete()
+
+        return "SUCCESS"
 
 
     # methods for wiki synchronization
