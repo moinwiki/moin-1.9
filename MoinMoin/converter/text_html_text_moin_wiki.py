@@ -799,7 +799,9 @@ class convert_tree(visitor):
 
         self.text.append(command)
         for i in node.childNodes:
-            self.process_inline(i)
+            # formatted br is not wanted
+            if command and i.localName != 'br':
+                self.process_inline(i)
         if command_close:
             command = command_close
         self.text.append(command)
@@ -1067,12 +1069,15 @@ class convert_tree(visitor):
                 found = True
         if not found:
             for i in node.childNodes:
+                name = i.localName
                 if i.nodeType == Node.ELEMENT_NODE:
                     if name == 'br':
-                        # if we get a br for an empty cell from e.g. cut and paste from OOo
-                        # to the gui it should be appended as white_space.
-                        self.text.append(self.white_space)
+                        # if we get a br for a cell from e.g. cut and paste from OOo
+                        # or if someone simulates a list by enter in a cell
+                        # it should be appended as macro BR.
+                        self.text.append('<<BR>>')
                         found = True
+                        continue
                     else:
                         self.process_inline(i)
                         found = True
