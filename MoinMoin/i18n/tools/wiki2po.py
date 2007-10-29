@@ -10,8 +10,7 @@ def run():
 
     excluded = ["en", ] # languages managed in repository, not in wiki
 
-    langfname = sys.argv[1]
-    lang = langfname.replace('_', '-') # module names use _ instead of -
+    lang = sys.argv[1]
 
     if not lang in excluded:
         wiki = xmlrpclib.ServerProxy("http://moinmaster.wikiwikiweb.de/?action=xmlrpc2")

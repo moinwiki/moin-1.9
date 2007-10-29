@@ -11,8 +11,7 @@ import codecs
 def run():
     sys.path.insert(0, '../..')
 
-    langfname = sys.argv[1]
-    lang = langfname.replace('_', '-') # module names use _ instead of -
+    lang = sys.argv[1]
 
     f = codecs.open("%s.%s.po" % (langfname, DOMAIN), "r", "utf-8")
     text = f.read()

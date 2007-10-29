@@ -10,7 +10,6 @@ def run():
     fname = sys.argv[1]
 
     lang = fname.replace('.po_', '').replace('.po', '')
-    lang = lang.replace('_', '-') # module names use _ instead of -
 
     f = codecs.open(fname, 'r', 'utf-8')
     data = f.read()

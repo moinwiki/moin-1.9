@@ -95,9 +95,6 @@ def repairText(text):
         if line.startswith(needle):
             # Get language from rest of line
             lang = line[len(needle):].strip()
-            # Normalize language names. Language files are named xx_yy,
-            # but iso names use xx-yy. This can confuse people.
-            lang = lang.replace(u"_", u"-")
 
             # Validate lang, make new style language processing
             # instruction.
