@@ -130,6 +130,7 @@ class TOCFormatter(FormatterBase):
     span = _anything_return_empty
     escapedText = _anything_return_empty
     comment = _anything_return_empty
+    transclusion = _anything_return_empty
 
 def macro_TableOfContents(macro, maxdepth=int):
     """
