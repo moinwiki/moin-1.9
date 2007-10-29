@@ -287,7 +287,7 @@ class MoinCookieSessionIDHandler(SessionIDHandler):
     def __init__(self, cookie_name='MOIN_SESSION'):
         SessionIDHandler.__init__(self)
         self.cookie_name = cookie_name
-    
+
     def _make_cookie(self, request, cookie_name, cookie_string, maxage, expires):
         """ create an appropriate cookie """
         cookie = Cookie.SimpleCookie()
