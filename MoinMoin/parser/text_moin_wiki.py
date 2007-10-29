@@ -103,10 +103,34 @@ class Parser:
 
     link_rule = r"""
         (?P<link>
-            \[\[
-            \s*(?P<link_target>.+?)\s*  # link target (strip space)
-            (\|\s*(?P<link_desc>.+?)?\s*  # link description (usually text, optional, strip space)
-                (\|\s*(?P<link_params>.+?)?\s*  # link parameters (usually key="value" format, optional, strip space)
+            \[\[  # link target
+            \s*  # strip space
+            (?P<link_target>.+?)
+            \s*  # strip space
+            (
+                \|  # link description
+                \s*  # strip space
+                (?P<link_desc>
+                    (?:  # 1. we have either a transclusion here (usually a image)
+                        \{\{
+                        \s*.+?\s*  # usually image target (strip space)
+                        (\|\s*.*?\s*  # usually image alt text (optional, strip space)
+                            (\|\s*.*?\s*  # transclusion parameters (usually key="value" format, optional, strip space)
+                            )?
+                        )?
+                        \}\}
+                    )
+                    |
+                    (?:  # 2. or we have simple text here.
+                        .+?
+                    )
+                )?
+                \s*  # strip space
+                (
+                    \|  # link parameters
+                    \s*  # strip space
+                    (?P<link_params>.+?)?
+                    \s*  # strip space
                 )?
             )?
             \]\]
@@ -291,7 +315,7 @@ class Parser:
 )|(?P<tableZ>
     \|\|\ $  # the right end of a table row
 )|(?P<table>
-    (?:\|\|)+(?:<[^>]*?>)?(?!\|?\s$) # a table
+    (?:\|\|)+(?:<(?!<)[^>]*?>)?(?!\|?\s$) # a table
 )|(?P<rule>
     -{4,}  # hor. rule, min. 4 -
 )|(?P<entity>
@@ -675,7 +699,7 @@ class Parser:
                         pagename = self.formatter.page.page_name
                         href = AttachFile.getAttachUrl(pagename, url, self.request, escaped=0)
                         params = self._get_params(params,
-                                                  defaults={'alt': desc, 'title': desc, },
+                                                  defaults={'title': desc, },
                                                   acceptable_keys=acceptable_keys_object)
                         return (self.formatter.transclusion(1, data=href, type=mt.spoil(), **params) +
                                 self._transclude_description(desc, url) +
@@ -973,12 +997,11 @@ class Parser:
         return ''.join(result)
 
     def _getTableAttrs(self, attrdef):
-        # skip "|" and initial "<"
-        while attrdef and attrdef[0] == "|":
-            attrdef = attrdef[1:]
-        if not attrdef or attrdef[0] != "<":
+        attr_rule = r'^(\|\|)*<(?!<)(?P<attrs>[^>]*?)>'
+        m = re.match(attr_rule, attrdef, re.U)
+        if not m:
             return {}, ''
-        attrdef = attrdef[1:]
+        attrdef = m.group('attrs')
 
         # extension for special table markup
         def table_extension(key, parser, attrs, wiki_parser=self):
@@ -995,13 +1018,13 @@ class Parser:
                 token = parser.get_token()
                 if token != '%':
                     wanted = '%'
-                    msg = _('Expected "%(wanted)s" after "%(key)s", got "%(token)s"') % {
+                    msg = _('Expected "%(wanted)s" after "%(key)s", got "%(token)s"', formatted=False) % {
                         'wanted': wanted, 'key': key, 'token': token}
                 else:
                     try:
                         dummy = int(key)
                     except ValueError:
-                        msg = _('Expected an integer "%(key)s" before "%(token)s"') % {
+                        msg = _('Expected an integer "%(key)s" before "%(token)s"', formatted=False) % {
                             'key': key, 'token': token}
                     else:
                         found = True
@@ -1011,7 +1034,7 @@ class Parser:
                 try:
                     dummy = int(arg)
                 except ValueError:
-                    msg = _('Expected an integer "%(arg)s" after "%(key)s"') % {
+                    msg = _('Expected an integer "%(arg)s" after "%(key)s"', formatted=False) % {
                         'arg': arg, 'key': key}
                 else:
                     found = True
@@ -1021,7 +1044,7 @@ class Parser:
                 try:
                     dummy = int(arg)
                 except ValueError:
-                    msg = _('Expected an integer "%(arg)s" after "%(key)s"') % {
+                    msg = _('Expected an integer "%(arg)s" after "%(key)s"', formatted=False) % {
                         'arg': arg, 'key': key}
                 else:
                     found = True
@@ -1047,7 +1070,7 @@ class Parser:
                     if len(arg) != 6: raise ValueError
                     dummy = int(arg, 16)
                 except ValueError:
-                    msg = _('Expected a color value "%(arg)s" after "%(key)s"') % {
+                    msg = _('Expected a color value "%(arg)s" after "%(key)s"', formatted=False) % {
                         'arg': arg, 'key': key}
                 else:
                     found = True
@@ -1118,7 +1141,6 @@ class Parser:
             self.formatter.heading(0, depth),
         ])
     _heading_text_repl = _heading_repl
-    _hmarker_repl = _heading_repl
 
     def _parser_repl(self, word, groups):
         """Handle parsed code displays."""
@@ -1305,6 +1327,7 @@ class Parser:
         # Main loop
         for line in self.lines:
             self.lineno += 1
+
             if '>><<' in line.replace(' ', ''):
                 self.no_862 = True
 
