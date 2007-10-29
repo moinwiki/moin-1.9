@@ -30,17 +30,6 @@ def test_fault_serialization(request):
     assert type(result[0]) is dict
     assert result[0].has_key("faultCode") and result[0].has_key("faultString")
 
-def test_generate_auth_token(request):
-    """Check if auth token generation works"""
-
-    usr = User(request)
-    xmlrpc = XmlRpcBase(request)
-    token = xmlrpc._generate_auth_token(usr)
-
-    print "Token should be a string or unicode object and have langth of 32 chars!"
-    assert type(token) is str or type(token) is unicode
-    assert len(token) == 32
-
 def test_getAuthToken(request):
     """ Tests if getAuthToken passes without crashing """
     xmlrpc = XmlRpcBase(request)
