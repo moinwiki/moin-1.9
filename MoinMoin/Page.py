@@ -482,8 +482,11 @@ class Page(object):
                 dirname, filename = os.path.split(fullpath)
             else:
                 dirname = fullpath
-            if not os.path.exists(dirname):
+            try:
                 os.makedirs(dirname)
+            except OSError, err:
+                if not os.path.exists(dirname):
+                    raise err
         return underlay, fullpath
 
     def getPagePath(self, *args, **kw):
