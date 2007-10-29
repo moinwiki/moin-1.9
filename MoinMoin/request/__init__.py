@@ -1209,7 +1209,7 @@ class RequestBase(object):
                 if pagetrail:
                     # Redirect to last page visited
                     last_visited = pagetrail[-1]
-                    wikiname, pagename = wikiutik.split_interwiki(last_visited)
+                    wikiname, pagename = wikiutil.split_interwiki(last_visited)
                     if wikiname != 'Self':
                         wikitag, wikiurl, wikitail, error = wikiutil.resolve_interwiki(self, wikiname, pagename)
                         url = wikiurl + wikiutil.quoteWikinameURL(wikitail)
