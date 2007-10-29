@@ -28,7 +28,7 @@ class TestCaching(object):
 
     def test_persistence_pickle(self):
         """ test if cache persists (on disk), use pickle """
-        test_data = {1:2, 2:3, 3: [4, 5, ], }
+        test_data = {1: 2, 2: 3, 3: [4, 5, ], }
         cache = caching.CacheEntry(self.request, 'test_arena', 'test_key', 'wiki', use_pickle=True)
         cache.update(test_data)
         del cache
