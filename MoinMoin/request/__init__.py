@@ -11,6 +11,7 @@ import os, re, time, sys, cgi, StringIO
 import logging
 import Cookie
 
+from MoinMoin.Page import Page
 from MoinMoin import config, wikiutil, user, caching, error
 from MoinMoin.config import multiconfig
 from MoinMoin.support.python_compatibility import set
@@ -1147,6 +1148,16 @@ class RequestBase(object):
             theme_name = self.user.theme_name
         self.loadTheme(theme_name)
 
+    def _try_redirect_spaces_page(self, pagename):
+        if '_' in pagename and not self.page.exists():
+            pname = pagename.replace('_', ' ')
+            pg = Page(self, pname)
+            if pg.exists():
+                url = pg.url(self, relative=False)
+                self.http_redirect(url)
+                return True
+        return False
+
     def run(self):
         # Exit now if __init__ failed or request is forbidden
         if self.failed or self.forbidden or self._auth_redirected:
@@ -1155,8 +1166,6 @@ class RequestBase(object):
 
         _ = self.getText
         self.clock.start('run')
-
-        from MoinMoin.Page import Page
 
         self.initTheme()
 
@@ -1229,6 +1238,8 @@ class RequestBase(object):
                     self.page = wikiutil.getFrontPage(self)
                 else:
                     self.page = Page(self, pagename)
+                    if self._try_redirect_spaces_page(pagename):
+                        return self.finish()
 
                 msg = None
                 # Complain about unknown actions
