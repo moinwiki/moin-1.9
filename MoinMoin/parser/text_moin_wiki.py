@@ -748,7 +748,6 @@ class Parser:
         if m:
             if m.group('simple_text'):
                 desc = m.group('simple_text')
-                desc = wikiutil.escape(desc)
                 desc = self.formatter.text(desc)
             elif m.group('transclude'):
                 groupdict = m.groupdict()
