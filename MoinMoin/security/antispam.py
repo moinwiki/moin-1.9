@@ -7,7 +7,7 @@
 """
 
 # give some log entries to stderr
-debug = 1
+debug = 0
 
 import re, sys, time, datetime
 import sets
