@@ -17,6 +17,7 @@ from MoinMoin import config, wikiutil, user, caching, error
 from MoinMoin.config import multiconfig
 from MoinMoin.support.python_compatibility import set
 from MoinMoin.util import IsWin9x
+from MoinMoin.util.clock import Clock
 from MoinMoin import auth
 from urllib import quote, quote_plus
 
@@ -45,63 +46,6 @@ class MoinMoinFinish(Exception):
 
 class HeadersAlreadySentException(Exception):
     """ Is raised if the headers were already sent when emit_http_headers is called."""
-
-
-# Timing ---------------------------------------------------------------
-
-class Clock:
-    """ Helper class for code profiling
-        we do not use time.clock() as this does not work across threads
-        This is not thread-safe when it comes to multiple starts for one timer.
-        It is possible to recursively call the start and stop methods, you
-        should just ensure that you call them often enough :)
-    """
-
-    def __init__(self):
-        self.timings = {}
-        self.states = {}
-
-    def _get_name(timer, generation):
-        if generation == 0:
-            return timer
-        else:
-            return "%s|%i" % (timer, generation)
-    _get_name = staticmethod(_get_name)
-
-    def start(self, timer):
-        state = self.states.setdefault(timer, -1)
-        new_level = state + 1
-        name = Clock._get_name(timer, new_level)
-        self.timings[name] = time.time() - self.timings.get(name, 0)
-        self.states[timer] = new_level
-
-    def stop(self, timer):
-        state = self.states.setdefault(timer, -1)
-        if state >= 0: # timer is active
-            name = Clock._get_name(timer, state)
-            self.timings[name] = time.time() - self.timings[name]
-            self.states[timer] = state - 1
-
-    def value(self, timer):
-        base_timer = timer.split("|")[0]
-        state = self.states.get(base_timer, None)
-        if state == -1:
-            result = "%.3fs" % self.timings[timer]
-        elif state is None:
-            result = "- (%s)" % state
-        else:
-            #print "Got state %r" % state
-            result = "%.3fs (still running)" % (time.time() - self.timings[timer])
-        return result
-
-    def dump(self):
-        outlist = []
-        for timer in self.timings:
-            value = self.value(timer)
-            outlist.append("%s = %s" % (timer, value))
-        outlist.sort()
-        return outlist
-
 
 # Utilities
 
