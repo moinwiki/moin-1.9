@@ -10,6 +10,7 @@
 import os, re, time, sys, cgi, StringIO
 import logging
 import Cookie
+import traceback
 
 from MoinMoin.Page import Page
 from MoinMoin import config, wikiutil, user, caching, error
@@ -1310,7 +1311,8 @@ class RequestBase(object):
         """
         user_headers = self.user_headers
         self.user_headers = []
-        all_headers = more_headers + user_headers
+        tracehere = ''.join(traceback.format_stack()[:-1])
+        all_headers = [(hdr, tracehere) for hdr in more_headers] + user_headers
 
         if self.sent_headers:
             # Send headers only once
@@ -1320,7 +1322,8 @@ class RequestBase(object):
 
         # assemble dict of http headers
         headers = {}
-        for header in all_headers:
+        traces = {}
+        for header, trace in all_headers:
             if isinstance(header, unicode):
                 header = header.encode('ascii')
             key, value = header.split(':', 1)
@@ -1331,10 +1334,14 @@ class RequestBase(object):
                     # these headers (list might be incomplete) allow multiple values
                     # that can be merged into a comma separated list
                     headers[lkey] = headers[lkey][0], '%s, %s' % (headers[lkey][1], value)
+                    traces[lkey] = trace
                 else:
                     self.log("Duplicate http header: %r (ignored)" % header)
+                    self.log("Header added first at:\n%s" % traces[lkey])
+                    self.log("Header added again at:\n%s" % trace)
             else:
                 headers[lkey] = (key, value)
+                traces[lkey] = trace
 
         if 'content-type' not in headers:
             headers['content-type'] = ('Content-type', 'text/html; charset=%s' % config.charset)
@@ -1379,7 +1386,8 @@ class RequestBase(object):
             Attention: although we use a list here, some implementations use a dict,
             thus multiple calls with the same header type do NOT work in the end!
         """
-        self.user_headers.append(header)
+        # save a traceback with the header for duplicate bug reporting
+        self.user_headers.append((header, ''.join(traceback.format_stack()[:-1])))
 
     def fail(self, err):
         """ Fail when we can't continue
