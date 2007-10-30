@@ -1548,9 +1548,12 @@ class RequestBase(object):
         elif level == 2:
             self.setHttpHeader('Cache-Control: no-cache')
 
-        # Set Expires for http 1.0 caches (does not support Cache-Control)
-        when = time.time() - (3600 * 24 * 365)
-        self.setHttpHeader('Expires: %s' % self.httpDate(when=when))
+        # only do this once to avoid 'duplicate header' warnings
+        # (in case the caching disabling is being made stricter)
+        if not self.http_caching_disabled:
+            # Set Expires for http 1.0 caches (does not support Cache-Control)
+            when = time.time() - (3600 * 24 * 365)
+            self.setHttpHeader('Expires: %s' % self.httpDate(when=when))
 
         # Set Pragma for http 1.0 caches
         # See http://www.cse.ohio-state.edu/cgi-bin/rfc/rfc2068.html#sec-14.32
