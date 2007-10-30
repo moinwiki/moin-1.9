@@ -150,7 +150,7 @@ class RequestBase(object):
         # Pages meta data that we collect in one request
         self.pages = {}
 
-        self.sent_headers_trace = None
+        self.sent_headers = None
         self.user_headers = []
         self.cacheable = 0 # may this output get cached by http proxies/caches?
         self.http_caching_disabled = 0 # see disableHttpCaching()
@@ -1314,14 +1314,14 @@ class RequestBase(object):
         tracehere = ''.join(traceback.format_stack()[:-1])
         all_headers = [(hdr, tracehere) for hdr in more_headers] + user_headers
 
-        if self.sent_headers_trace:
+        if self.sent_headers:
             # Send headers only once
             self.log("Attempt to send headers twice!\n")
-            self.log("First attempt:\n%s" % self.sent_headers_trace)
+            self.log("First attempt:\n%s" % self.sent_headers)
             self.log("Second attempt:\n%s" % tracehere)
             raise HeadersAlreadySentException("emit_http_headers has already been called before!")
         else:
-            self.sent_headers_trace = tracehere
+            self.sent_headers = tracehere
 
         # assemble dict of http headers
         headers = {}
