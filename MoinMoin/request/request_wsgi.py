@@ -45,9 +45,6 @@ class Request(RequestBase):
     def write(self, *data):
         self.stdout.write(self.encode(data))
 
-    def reset_output(self):
-        self.stdout = StringIO.StringIO()
-
     def _emit_http_headers(self, headers):
         """ private method to send out preprocessed list of HTTP headers """
         st_header, other_headers = headers[0], headers[1:]
