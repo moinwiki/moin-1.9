@@ -778,15 +778,6 @@ class RequestBase(object):
         else:
             self.write = self.writestack.pop()
 
-    def reset_output(self):
-        """ restore default output method
-            destroy output stack
-            (useful for error messages)
-        """
-        if self.writestack:
-            self.write = self.writestack[0]
-            self.writestack = []
-
     def log(self, msg):
         """ Log msg to logging framework """
         msg = msg.strip()
