@@ -13,12 +13,11 @@
     by the wiki text to html formatter, A dict file does cache the pages which
     do fit to the page_group_regex variable.
 
-    @copyright: 2005-2006 MoinMoin:ThomasWaldmann
+    @copyright: 2005-2007 MoinMoin:ThomasWaldmann,
                 2007 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 
-import os
 from MoinMoin import caching
 from MoinMoin.Page import Page
 from MoinMoin.script import MoinScript
@@ -31,18 +30,19 @@ class PluginScript(MoinScript):
         self.init_request()
         request = self.request
 
-        key = 'text_html'
+        # clean page scope cache entries
+        keys = ['text_html', 'pagelinks', ]
         pages = request.rootpage.getPageList(user='')
-
         for pagename in pages:
             arena = Page(request, pagename)
-            caching.CacheEntry(request, arena, key, scope='item').remove()
-            caching.CacheEntry(request, arena, "pagelinks", scope='item').remove()
+            for key in keys:
+                caching.CacheEntry(request, arena, key, scope='item').remove()
 
-        # cleans the name2id
-        caching.CacheEntry(request, 'user', 'name2id', scope='wiki').remove()
-        # cleans the wikidicts
-        caching.CacheEntry(request, 'wikidicts', 'dicts_groups', scope='wiki').remove()
-        # cleans i18n meta
-        caching.CacheEntry(request, 'i18n', 'meta', scope='wiki').remove()
+        # clean wiki scope cache entries
+        arena_key_list = [
+            ('user', 'name2id'),
+            ('wikidicts', 'dicts_groups'),
+        ]
+        for arena, key in arena_key_list:
+            caching.CacheEntry(request, arena, key, scope='wiki').remove()
 
