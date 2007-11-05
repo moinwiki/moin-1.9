@@ -1,7 +1,7 @@
 """
     MoinMoin - Support Package
 
-    Stuff for compatibility with older pytohn versions
+    Stuff for compatibility with older Python versions
 
     @copyright: 2007 Heinrich Wendel <heinrich.wendel@gmail.com>,
                 2007 MoinMoin:ThomasWaldmann
