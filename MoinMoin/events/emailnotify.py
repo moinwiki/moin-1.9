@@ -32,8 +32,8 @@ def prep_page_changed_mail(request, page, comment, email_lang, revisions, trivia
     @rtype: dict
 
     """
-    _ = request.getText
     change = notification.page_change_message("page_changed", request, page, email_lang, comment=comment, revisions=revisions)
+    _ = lambda s, formatted=True, r=request, l=email_lang: r.getText(s, formatted=formatted, lang=l)
 
     subject = _('[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s', formatted=False) % {
             'trivial': (trivial and _("Trivial ", formatted=False)) or "",
