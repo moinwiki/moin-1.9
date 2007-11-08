@@ -425,5 +425,11 @@ class TestLinkingMarkup(ParserTestCase):
         assert 'action=AttachFile' in html
         assert 'some+file.png' in html
 
+    def testAnchor(self):
+        html = self.parse("{{#anchor}}")
+        assert '<a ' in html # must create a link
+        assert 'name="anchor"' in html
+        assert '></a>' in html
+
 coverage_modules = ['MoinMoin.parser.text_creole']
 
