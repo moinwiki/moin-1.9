@@ -304,6 +304,7 @@ class SearchResults:
         @param numbered: use numbered list for display
         @param paging: toggle paging
         @param hitsFrom: current position in the hits
+        @param hitsInfo: toggle hits info line
         @rtype: unicode
         @return formatted page list
         """
