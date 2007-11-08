@@ -322,7 +322,7 @@ class Emitter:
                 # inserted anchors
                 url = wikiutil.url_unquote(target, want_unicode=True)
                 if target.startswith('#'):
-                    return self.formatter.rawHtml(u'<a name="%s"></a>' % url)
+                    return self.formatter.rawHTML(u'<a name="%s"></a>' % url[1:])
                 # default to images
                 return self.formatter.attachment_image(
                     url, alt=text, html_class='image')
