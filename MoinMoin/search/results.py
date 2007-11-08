@@ -295,7 +295,7 @@ class SearchResults:
         return ''.join(output)
 
     def pageList(self, request, formatter, info=0, numbered=1,
-            paging=True, hitsFrom=0):
+            paging=True, hitsFrom=0, hitsInfo=0):
         """ Format a list of found pages
 
         @param request: current request
@@ -346,13 +346,18 @@ class SearchResults:
                 matchInfo = ''
                 if info:
                     matchInfo = self.formatInfo(f, page)
+
+                info_for_hits = u''
+                if hitsInfo:
+                    info_for_hits = self.formatHitInfoBar(page)
+
                 item = [
                     f.listitem(1),
                     f.pagelink(1, page.page_name, querystr=querystr),
                     self.formatTitle(page),
                     f.pagelink(0, page.page_name),
                     matchInfo,
-                    self.formatHitInfoBar(page),
+                    info_for_hits,
                     f.listitem(0),
                     ]
                 write(''.join(item))
