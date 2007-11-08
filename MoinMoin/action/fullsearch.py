@@ -56,7 +56,7 @@ def searchHints(f, hints):
     ])
 
 
-def execute(pagename, request, fieldname='value', titlesearch=0):
+def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
     _ = request.getText
     titlesearch = checkTitleSearch(request)
     if titlesearch < 0:
@@ -263,10 +263,10 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
     info = not titlesearch
     if context:
         output = results.pageListWithContext(request, request.formatter,
-                info=info, context=context, hitsFrom=hitsFrom)
+                info=info, context=context, hitsFrom=hitsFrom, hitsInfo=1)
     else:
         output = results.pageList(request, request.formatter, info=info,
-                hitsFrom=hitsFrom)
+                hitsFrom=hitsFrom, hitsInfo=1)
 
     request.write(output)
 
