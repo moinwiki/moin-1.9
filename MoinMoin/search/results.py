@@ -371,7 +371,7 @@ class SearchResults:
         return self.getvalue()
 
     def pageListWithContext(self, request, formatter, info=1, context=180,
-                            maxlines=1, paging=True, hitsFrom=0):
+                            maxlines=1, paging=True, hitsFrom=0, hitsInfo=0):
         """ Format a list of found pages with context
 
         The default parameter values will create Google-like search
@@ -386,6 +386,7 @@ class SearchResults:
         @param maxlines: how many contexts lines to show.
         @param paging: toggle paging
         @param hitsFrom: current position in the hits
+        @param hitsInfo: toggle hits info line
         @rtype: unicode
         @return formatted page list with context
         """
