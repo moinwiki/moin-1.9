@@ -145,7 +145,7 @@ def handle_user_created(event):
     sitename = event.request.cfg.sitename
     username = event.user.name
 
-    data = notification.user_created_message(event.request, sitename, username, email)
+    msg = notification.user_created_message(event.request, sitename, username, email)
 
     for id in user_ids:
         usr = User(event.request, id=id)
@@ -154,7 +154,10 @@ def handle_user_created(event):
         if usr.isSuperUser() and usr.jid and event_name in usr.jabber_subscribed_events:
             jids.append(usr.jid)
 
-    send_notification(event.request, jids, data['body'], data['subject'], "user_created")
+    data = {'action': "user_created", 'subject': msg['subject'], 'text': msg['body'],
+            'url_list': []}
+
+    send_notification(event.request, jids, data)
 
 
 def page_change(change_type, request, page, subscribers, **kwargs):
@@ -198,11 +201,11 @@ def send_notification(request, jids, notification):
     _ = request.getText
     server = request.cfg.notification_server
 
-    if type(notification['url_list']) != list:
-        raise ValueError("url_list must be of type list!")
-
     if type(notification) != dict:
         raise ValueError("notification must be of type dict!")
+
+    if type(notification['url_list']) != list:
+        raise ValueError("url_list must be of type list!")
 
     try:
         server.send_notification(request.cfg.secret, jids, notification)
