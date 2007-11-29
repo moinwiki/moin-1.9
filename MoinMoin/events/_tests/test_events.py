@@ -48,6 +48,21 @@ def test_page_change_message(request):
     py.test.raises(notification.UnknownChangeType, notification.page_change_message,
                    "StupidType", request, page, "en", revisions=page.getRevList())
 
+def test_user_created_event(request):
+    class server_dummy:
+        def __init__(self):
+            self.sent = False
+
+        def send_notification(self, *args):
+            self.sent = True
+
+    event = events.UserCreatedEvent(request, User(request))
+    request.cfg.notification_server = server_dummy()
+    request.cfg.secret = "dummy"
+
+    jabbernotify.handle_user_created(event)
+    assert request.cfg.notification_server.sent is True
+
 def test_filter_subscriber_list(request):
     user = User(request)
     event = events.Event(request)
