@@ -484,7 +484,7 @@ class XMPPBot(Client, Thread):
         @type contact: Contact
 
         """
-        raise NotImplemented()
+        pass
 
     def ask_for_subscription(self, jid):
         """Sends a <presence/> stanza with type="subscribe"
