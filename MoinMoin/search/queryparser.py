@@ -5,12 +5,14 @@
     @copyright: 2005 MoinMoin:FlorianFesti,
                 2005 MoinMoin:NirSoffer,
                 2005 MoinMoin:AlexanderSchremmer,
-                2006 MoinMoin:ThomasWaldmann,
+                2006-2007 MoinMoin:ThomasWaldmann,
                 2006 MoinMoin:FranzPletz
     @license: GNU GPL, see COPYING for details
 """
 
 import re
+import logging
+
 from MoinMoin import config, wikiutil
 from MoinMoin.search.results import Match, TitleMatch, TextMatch
 
@@ -139,12 +141,18 @@ class AndExpression(BaseExpression):
         if terms:
             # Create and return a filter function
             def filter(name):
-                """ A function that return True if all terms filter name """
+                """ A function that returns True if all terms filter name """
+                result = None
                 for term in terms:
-                    filter = term.pageFilter()
-                    if not filter(name):
-                        return False
-                return True
+                    _filter = term.pageFilter()
+                    t = _filter(name)
+                    if t is False:
+                        result = False
+                        break
+                    elif t is True:
+                        result = True
+                logging.debug("search: pageFilter AND returns %r" % result)
+                return result
             return filter
 
         return None
@@ -221,6 +229,34 @@ class OrExpression(AndExpression):
 
     operator = ' or '
 
+    def pageFilter(self):
+        """ Return a page filtering function
+
+        This function is used to filter page list before we search it.
+
+        Return a function that gets a page name, and return bool, or None.
+        """
+        # Sort terms by cost, then get all title searches
+        self.sortByCost()
+        terms = [term for term in self._subterms if isinstance(term, TitleSearch)]
+        if terms:
+            # Create and return a filter function
+            def filter(name):
+                """ A function that returns True if any term filters name """
+                result = None
+                for term in terms:
+                    _filter = term.pageFilter()
+                    t = _filter(name)
+                    if t is True:
+                        return True
+                    elif t is False:
+                        result = False
+                logging.debug("search: pageFilter OR returns %r" % result)
+                return result
+            return filter
+
+        return None
+
     def search(self, page):
         """ Search page with terms
 
@@ -274,6 +310,7 @@ class TextSearch(BaseExpression):
         return u"(%s)" % self._pattern
 
     def search(self, page):
+        logging.debug("search: TextSearch searching page %r for (negated = %r) %r" % (page.page_name, self.negated, self._pattern))
         matches = []
 
         # Search in page name
@@ -305,13 +342,18 @@ class TextSearch(BaseExpression):
                 matches.append(TextMatch(re_match=match))
 
         # Decide what to do with the results.
-        if ((self.negated and matches) or
-            (not self.negated and not matches)):
-            return None
-        elif matches:
-            return matches
-        else:
-            return []
+        if self.negated:
+            if matches:
+                result = None
+            else:
+                result = [Match()] # represents "matched" (but as it was a negative match, we have nothing to show)
+        else: # not negated
+            if matches:
+                result = matches
+            else:
+                result = None
+        logging.debug("search: TextSearch returning %r" % result)
+        return result
 
     def xapian_wanted(self):
         # XXX: Add option for term-based matching
@@ -357,6 +399,7 @@ class TextSearch(BaseExpression):
                 (self.titlesearch.xapian_term(request, allterms),
                     Query(Query.OP_AND, queries)))
 
+
 class TitleSearch(BaseExpression):
     """ Term searches in pattern in page title only """
 
@@ -387,11 +430,14 @@ class TitleSearch(BaseExpression):
         """ Page filter function for single title search """
         def filter(name):
             match = self.search_re.search(name)
-            return bool(self.negated) ^ bool(match)
+            result = bool(self.negated) ^ bool(match)
+            logging.debug("search: pageFilter title returns %r (%r)" % (result, self.pattern))
+            return result
         return filter
 
     def search(self, page):
-        # Get matches in page name
+        """ Get matches in page name """
+        logging.debug("search: TitleSearch searching page %r for (negated = %r) %r" % (page.page_name, self.negated, self._pattern))
         matches = []
         for match in self.search_re.finditer(page.page_name):
             if page.request.cfg.xapian_stemming:
@@ -414,13 +460,18 @@ class TitleSearch(BaseExpression):
             else:
                 matches.append(TitleMatch(re_match=match))
 
-        if ((self.negated and matches) or
-            (not self.negated and not matches)):
-            return None
-        elif matches:
-            return matches
-        else:
-            return []
+        if self.negated:
+            if matches:
+                result = None
+            else:
+                result = [Match()] # represents "matched" (but as it was a negative match, we have nothing to show)
+        else: # not negated
+            if matches:
+                result = matches
+            else:
+                result = None
+        logging.debug("search: TitleSearch returning %r" % result)
+        return result
 
     def xapian_wanted(self):
         return True # only easy regexps possible
@@ -522,7 +573,8 @@ class LinkSearch(BaseExpression):
         return u"(%s)" % self._textpattern
 
     def search(self, page):
-        # Get matches in page name
+        # Get matches in page links
+        logging.debug("search: LinkSearch searching page %r for (negated = %r) %r" % (page.page_name, self.negated, self._pattern))
         matches = []
         Found = True
 
@@ -542,13 +594,18 @@ class LinkSearch(BaseExpression):
                 matches.append(TextMatch(0, 0))
 
         # Decide what to do with the results.
-        if ((self.negated and matches) or
-            (not self.negated and not matches)):
-            return None
-        elif matches:
-            return matches
-        else:
-            return []
+        if self.negated:
+            if matches:
+                result = None
+            else:
+                result = [Match()] # represents "matched" (but as it was a negative match, we have nothing to show)
+        else: # not negated
+            if matches:
+                result = matches
+            else:
+                result = None
+        logging.debug("search: LinkSearch returning %r" % result)
+        return result
 
     def xapian_wanted(self):
         return True # only easy regexps possible
@@ -607,6 +664,7 @@ class LanguageSearch(BaseExpression):
         return ""
 
     def search(self, page):
+        logging.debug("search: LanguageSearch searching page %r for (negated = %r) %r" % (page.page_name, self.negated, self._pattern))
         match = False
         body = page.getPageHeader()
 
@@ -614,12 +672,18 @@ class LanguageSearch(BaseExpression):
             match = True
 
         # Decide what to do with the results.
-        if self.negated and match:
-            return None
-        elif match or (self.negated and not match):
-            return [Match()]
-        else:
-            return []
+        if self.negated:
+            if match:
+                result = None
+            else:
+                result = [Match()] # represents "matched" (but as it was a negative match, we have nothing to show)
+        else: # not negated
+            if match:
+                result = [Match()] # represents "matched" (but we have nothing to show)
+            else:
+                result = None
+        logging.debug("search: LanguageSearch returning %r" % result)
+        return result
 
     def xapian_wanted(self):
         return True # only easy regexps possible
@@ -791,6 +855,7 @@ class DomainSearch(BaseExpression):
         return ""
 
     def search(self, page):
+        logging.debug("search: DomainSearch searching page %r for (negated = %r) %r" % (page.page_name, self.negated, self._pattern))
         checks = {'underlay': page.isUnderlayPage,
                   'standard': page.isStandardPage,
                   'system': lambda page: wikiutil.isSystemPage(page.request, page.page_name),
@@ -802,12 +867,18 @@ class DomainSearch(BaseExpression):
             match = False
 
         # Decide what to do with the results.
-        if self.negated and match:
-            return None
-        elif match or (self.negated and not match):
-            return [Match()]
-        else:
-            return []
+        if self.negated:
+            if match:
+                result = None
+            else:
+                result = [Match()] # represents "matched" (but as it was a negative match, we have nothing to show)
+        else: # not negated
+            if match:
+                result = [Match()] # represents "matched" (but we have nothing to show)
+            else:
+                result = None
+        logging.debug("search: DomainSearch returning %r" % result)
+        return result
 
     def xapian_wanted(self):
         return True # only easy regexps possible

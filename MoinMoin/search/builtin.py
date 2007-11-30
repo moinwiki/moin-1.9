@@ -5,7 +5,7 @@
     @copyright: 2005 MoinMoin:FlorianFesti,
                 2005 MoinMoin:NirSoffer,
                 2005 MoinMoin:AlexanderSchremmer,
-                2006 MoinMoin:ThomasWaldmann,
+                2006-2007 MoinMoin:ThomasWaldmann,
                 2006 MoinMoin:FranzPletz
     @license: GNU GPL, see COPYING for details
 """
@@ -454,12 +454,15 @@ class Search:
         start = time.time()
         if self.request.cfg.xapian_search:
             hits = self._xapianSearch()
+            logging.debug("search: _xapianSearch found %d hits" % len(hits))
         else:
             hits = self._moinSearch()
+            logging.debug("search: moinSearch found %d hits" % len(hits))
 
         # important - filter deleted pages or pages the user may not read!
         if not self.filtered:
             hits = self._filter(hits)
+            logging.debug("search: after filtering: %d hits" % len(hits))
 
         # when xapian was used, we can estimate the numer of matches
         # Note: hits can't be estimated by xapian with historysearch enabled
@@ -619,6 +622,7 @@ class Search:
 
     def _getHits(self, pages, matchSearchFunction):
         """ Get the hit tuples in pages through matchSearchFunction """
+        logging.debug("search: _getHits searching in %d pages ..." % len(pages))
         hits = []
         revisionCache = {}
         fs_rootpage = self.fs_rootpage
@@ -633,6 +637,7 @@ class Search:
             wikiname = valuedict['wikiname']
             pagename = valuedict['pagename']
             attachment = valuedict['attachment']
+            logging.debug("search: _getHits processing %r %r %r" % (wikiname, pagename, attachment))
 
             if 'revision' in valuedict and valuedict['revision']:
                 revision = int(valuedict['revision'])
@@ -653,6 +658,7 @@ class Search:
                         hits.append((wikiname, page, attachment, matches))
                 else:
                     matches = matchSearchFunction(page=page, uid=uid)
+                    logging.debug("search: matchSearchFunction %r returned %r" % (matchSearchFunction, matches))
                     if matches:
                         if not self.historysearch and \
                                 pagename in revisionCache and \
