@@ -6,6 +6,8 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+import pprint
+
 from MoinMoin import search
 
 
@@ -27,6 +29,23 @@ class TestQuotingBug:
         parser = search.QueryParser()
         for case in tests:
             assert not parser.isQuoted(case)
+
+
+class TestQueryParsing:
+    """ search: query parser tests """
+
+    def testQueryParser(self):
+        """ search: ... """
+        parser = search.QueryParser()
+        for query, wanted in [
+            ("a", '"a"'),
+            ("a b", '["a" "b"]'),
+            ("a -b c", '["a" -"b" "c"]'),
+            ("aaa bbb -ccc", '["aaa" "bbb" -"ccc"]'),
+            ("aaa OR bbb", '["aaa" "OR" "bbb"]'),
+            ]:
+            result = parser.parse_query(query)
+            assert str(result) == wanted
 
 
 coverage_modules = ['MoinMoin.search']
