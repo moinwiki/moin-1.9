@@ -23,6 +23,7 @@ import atexit
 from inspect import isclass
 from sys import modules
 import sys
+import logging
 
 import py
 
@@ -85,6 +86,23 @@ def init_test_request(static_state=[False]):
     request.formatter = request.html_formatter
     return request
 
+
+def init_test_logging(loglevel_stderr=logging.DEBUG):
+    """ initialize python stdlib logging framework to output stuff to stderr """
+    logger = logging.getLogger('') # root logger
+    logger.setLevel(logging.NOTSET) # otherwise it has WARNING by default!
+
+    # define a Handler which writes to sys.stderr
+    logstderr = logging.StreamHandler()
+    logstderr.setLevel(loglevel_stderr)
+    # set a format which is simpler for console use
+    formatter = logging.Formatter('%(asctime)s %(levelname)-8s %(message)s', '%H%M%S')
+    # tell the handler to use this format
+    logstderr.setFormatter(formatter)
+    # add the handler to the root logger
+    logger.addHandler(logstderr)
+
+    logging.info("logging initialized")
 
 class TestConfig:
     """ Custom configuration for unit tests
@@ -191,6 +209,7 @@ class Module(py.test.collect.Module):
     Function = MoinTestFunction
 
     def __init__(self, *args, **kwargs):
+        init_test_logging()
         self.request = init_test_request()
         super(Module, self).__init__(*args, **kwargs)
 
