@@ -13,9 +13,6 @@ class TestQuotingBug:
     """search: quoting bug tests
 
     http://moinmoin.wikiwikiweb.de/MoinMoinBugs/SearchOneCharString
-
-    This is only a little stupid test for the isQuoted method, because
-    testing parsed queries is much more work.
     """
 
     def testIsQuoted(self):
@@ -24,7 +21,7 @@ class TestQuotingBug:
         for case in ('"yes"', "'yes'"):
             assert parser.isQuoted(case)
 
-    def testIsNot(self):
+    def testIsNotQuoted(self):
         """ search: quoting bug - unquoted terms """
         tests = ('', "'", '"', '""', "''", "'\"", '"no', 'no"', "'no", "no'", '"no\'')
         parser = search.QueryParser()
