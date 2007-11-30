@@ -2,9 +2,12 @@
 """
     MoinMoin - MoinMoin.search Tests
 
-    @copyright: 2005 by Nir Soffer <nirs@freeshell.org>
+    @copyright: 2005 by Nir Soffer <nirs@freeshell.org>,
+                2007 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
+
+import py
 
 from MoinMoin import search
 
@@ -41,7 +44,7 @@ class TestQueryParsing:
             ("a -b c", '["a" -"b" "c"]'),
             ("aaa bbb -ccc", '["aaa" "bbb" -"ccc"]'),
             ("title:aaa title:bbb -title:ccc", '[!"aaa" !"bbb" -!"ccc"]'),
-            ("aaa OR bbb", '["aaa" "OR" "bbb"]'),
+            ("aaa or bbb", '["aaa" or "bbb"]'),
             ]:
             result = parser.parse_query(query)
             assert str(result) == wanted
@@ -49,18 +52,44 @@ class TestQueryParsing:
 
 class TestSearch:
     """ search: test search """
+    doesnotexist = u'jfhsdaASDLASKDJ'
 
     def testTitleSearchFrontPage(self):
         """ search: title search for FrontPage """
-        query, wanted  = "title:FrontPage", 1
-        result = search.searchPages(self.request, query)
-        assert len(result.hits) == wanted
+        result = search.searchPages(self.request, u"title:FrontPage")
+        assert len(result.hits) == 1
+
+    def testTitleSearchAND(self):
+        """ search: title search with AND expression """
+        result = search.searchPages(self.request, u"title:Help title:Index")
+        assert len(result.hits) == 1
+
+    def testTitleSearchOR(self):
+        """ search: title search with OR expression """
+        result = search.searchPages(self.request, u"title:FrontPage or title:RecentChanges")
+        assert len(result.hits) == 2
+
+    def testTitleSearchNegatedFindAll(self):
+        """ search: negated title search for some pagename that does not exist results in all pagenames """
+        result = search.searchPages(self.request, u"-title:%s" % self.doesnotexist)
+        assert len(result.hits) > 100 # XXX should be "all"
 
     def testTitleSearchNegativeTerm(self):
-        """ search: title search for FrontPage """
-        helpon_count = len(search.searchPages(self.request, "title:HelpOn").hits)
-        result = search.searchPages(self.request, "title:HelpOn -title:Acl")
-        assert len(result.hits) == helpon_count - 1
+        """ search: title search for a AND expression with a negative term """
+        helpon_count = len(search.searchPages(self.request, u"title:HelpOn").hits)
+        result = search.searchPages(self.request, u"title:HelpOn -title:Acl")
+        assert len(result.hits) == helpon_count - 1 # finds all HelpOn* except one
+
+    def testFullSearchNegatedFindAll(self):
+        """ search: negated full search for some string that does not exist results in all pages """
+        result = search.searchPages(self.request, u"-%s" % self.doesnotexist)
+        assert len(result.hits) > 100 # XXX should be "all"
+
+    def testFullSearchNegativeTerm(self):
+        """ search: full search for a AND expression with a negative term """
+        helpon_count = len(search.searchPages(self.request, u"HelpOn").hits)
+        result = search.searchPages(self.request, u"HelpOn -ACL")
+        assert 0 < len(result.hits) < helpon_count
 
 
 coverage_modules = ['MoinMoin.search']
