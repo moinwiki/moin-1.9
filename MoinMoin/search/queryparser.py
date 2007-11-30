@@ -123,7 +123,7 @@ class AndExpression(BaseExpression):
     def __unicode__(self):
         result = ''
         for t in self._subterms:
-            result += self.operator + t
+            result += self.operator + unicode(t)
         return u'[' + result[len(self.operator):] + u']'
 
     def pageFilter(self):
