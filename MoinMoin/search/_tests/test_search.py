@@ -45,6 +45,8 @@ class TestQueryParsing:
             ("aaa bbb -ccc", '["aaa" "bbb" -"ccc"]'),
             ("title:aaa title:bbb -title:ccc", '[!"aaa" !"bbb" -!"ccc"]'),
             ("aaa or bbb", '["aaa" or "bbb"]'),
+            ("(HelpOn) (Administration)", '["HelpOn" "Administration"]'),
+            ("(HelpOn) (-Administration)", '["HelpOn" -"Administration"]'),
             ]:
             result = parser.parse_query(query)
             assert str(result) == wanted
