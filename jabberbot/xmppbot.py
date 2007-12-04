@@ -158,6 +158,7 @@ class Contact:
         res = ", ".join([name + " is " + res['show'] for name, res in self.resources.items()])
         return retval % (self.jid.as_unicode(), res, len(self.messages))
 
+
 class XMPPBot(Client, Thread):
     """A simple XMPP bot"""
 
@@ -197,6 +198,19 @@ class XMPPBot(Client, Thread):
             self.xmlrpc_commands[name.lower()] = command
 
         Client.__init__(self, self.jid, config.xmpp_password, config.xmpp_server, tls_settings=self.tlsconfig)
+
+        # Setup message handlers
+
+        self._msg_handlers = {cmd.NotificationCommand: self._handle_notification,
+                              cmd.NotificationCommandI18n: self._handle_notification,
+                              cmd.AddJIDToRosterCommand: self._handle_add_contact,
+                              cmd.RemoveJIDFromRosterCommand: self._handle_remove_contact,
+                              cmd.GetPage: self._handle_get_page,
+                              cmd.GetPageHTML: self._handle_get_page,
+                              cmd.GetPageList: self._handle_get_page_list,
+                              cmd.GetPageInfo: self._handle_get_page_info,
+                              cmd.GetUserLanguage: self._handle_get_language,
+                              cmd.Search: self._handle_search}
 
     def run(self):
         """Start the bot - enter the event loop"""
@@ -277,7 +291,6 @@ class XMPPBot(Client, Thread):
         except Queue.Empty:
             return False
 
-    # XXX: refactor this, if-elif sequence is already too long
     def handle_command(self, command, ignore_dnd=False):
         """Excecutes commands from other components
 
@@ -286,123 +299,17 @@ class XMPPBot(Client, Thread):
         @param ignore_dnd: if command results in user interaction, should DnD be ignored?
 
         """
-        # Handle normal notifications
-        if isinstance(command, cmd.NotificationCommand):
-            cmd_data = command.notification
-            original_text = cmd_data.get('text', '')
-            original_subject = cmd_data.get('subject', '')
 
-            for recipient in command.jids:
-                jid = JID(recipient)
-                jid_text = jid.bare().as_unicode()
+        cmd_cls = command.__class__
 
-                if isinstance(command, cmd.NotificationCommandI18n):
-                    # Translate&interpolate the message with data
-                    gettext_func = self.get_text(jid_text)
-                    text, subject = command.translate(gettext_func)
-                    cmd_data['text'] = text
-                    cmd_data['subject'] = subject
-                else:
-                    cmd_data['text'] = original_text
-                    cmd_data['subject'] = original_subject
-
-                # Check if contact is DoNotDisturb.
-                # If so, queue the message for delayed delivery.
-                contact = self.contacts.get(jid_text, '')
-                if contact:
-                    if command.async and contact.is_dnd() and not ignore_dnd:
-                        contact.messages.append(command)
-                        return
-
-                action = cmd_data.get('action', '')
-                if action == u'page_changed':
-                    self.handle_changed_action(cmd_data, jid, contact)
-                elif action == u'page_deleted':
-                    self.handle_deleted_action(cmd_data, jid, contact)
-                elif action == u'file_attached':
-                    self.handle_attached_action(cmd_data, jid, contact)
-                elif action == u'page_renamed':
-                    self.handle_renamed_action(cmd_data, jid, contact)
-                elif action == u'user_created':
-                    self.handle_user_created_action(cmd_data, jid, contact)
-                else:
-                    self.send_message(jid, cmd_data, command.msg_type)
-
+        try:
+            handler = self._msg_handlers[cmd_cls]
+        except KeyError:
+            self.log.debug("No such command: " + cmd_cls.__name__)
             return
 
-        _ = self.get_text(command.jid)
-
-        # Handle subscribtion management commands
-        if isinstance(command, cmd.AddJIDToRosterCommand):
-            jid = JID(node_or_jid=command.jid)
-            self.ask_for_subscription(jid)
-
-        elif isinstance(command, cmd.RemoveJIDFromRosterCommand):
-            jid = JID(node_or_jid=command.jid)
-            self.remove_subscription(jid)
-
-        elif isinstance(command, cmd.GetPage) or isinstance(command, cmd.GetPageHTML):
-            msg = _(u"""Here's the page "%(pagename)s" that you've requested:\n\n%(data)s""")
-
-            cmd_data = {'text': msg % {'pagename': command.pagename, 'data': command.data}}
-            self.send_message(command.jid, cmd_data)
-
-        elif isinstance(command, cmd.GetPageList):
-            msg = _("That's the list of pages accesible to you:\n\n%s")
-            pagelist = u"\n".join(command.data)
-
-            self.send_message(command.jid, {'text': msg % (pagelist, )})
-
-        elif isinstance(command, cmd.GetPageInfo):
-            self.handle_page_info(command)
-
-        elif isinstance(command, cmd.GetUserLanguage):
-            if command.jid in self.contacts:
-                self.contacts[command.jid].language = command.language
-
-        elif isinstance(command, cmd.Search):
-            warnings = []
-            if not command.data:
-                warnings.append(_("There are no pages matching your search criteria!"))
-
-            # This hardcoded limitation relies on (mostly correct) assumption that Jabber
-            # servers have rather tight traffic limits. Sending more than 25 results is likely
-            # to take a second or two - users should not have to wait longer (+search time!).
-            elif len(command.data) > 25:
-                warnings.append(_("There are too many results (%(number)s). Limiting to first 25 entries.") % {'number': str(len(command.data))})
-                command.data = command.data[:25]
-
-            results = [{'description': result[0], 'url': result[2]} for result in command.data]
-
-            if command.presentation == u"text":
-                for warning in warnings:
-                    self.send_message(command.jid, {'text': warning})
-
-                if not results:
-                    return
-
-                data = {'text': _('Following pages match your search criteria:'), 'url_list': results}
-                self.send_message(command.jid, data, u"chat")
-            else:
-                form_title = _("Search results").encode("utf-8")
-                help_form = _("Submit this form to perform a wiki search").encode("utf-8")
-                form = forms.Form(xmlnode_or_type="result", title=form_title, instructions=help_form)
-
-                action_label = _("What to do next")
-                do_nothing = forms.Option("n", _("Do nothing"))
-                search_again = forms.Option("s", _("Search again"))
-
-                for no, warning in enumerate(warnings):
-                    form.add_field(name="warning", field_type="fixed", value=warning)
-
-                for no, result in enumerate(results):
-                    field_name = "url%d" % (no, )
-                    form.add_field(name=field_name, value=unicode(result["url"]), label=result["description"].encode("utf-8"), field_type="text-single")
-
-                # Selection of a following action
-                form.add_field(name="options", field_type="list-single", options=[do_nothing, search_again], label=action_label)
-
-                self.send_form(command.jid, form, _("Search results"))
+        # NOTE: handler is a method, so it takes self as a hidden arg
+        handler(command, ignore_dnd)
 
     def handle_changed_action(self, cmd_data, jid, contact):
         """Handles a notification command with 'page_changed' action
@@ -437,7 +344,6 @@ class XMPPBot(Client, Thread):
             return
         else:
             self.send_deleted_text(jid.as_unicode(), cmd_data)
-
 
     def handle_attached_action(self, cmd_data, jid, contact):
         """Handles a notification cmd_data with 'file_attached' action
@@ -1073,7 +979,6 @@ Current version: %(version)s""") % {
 
                 self.handle_xmlrpc_command(jid, ["revertpage", form["page_name"].value, "%d" % (revision - 1, )])
 
-
     def handle_search_form(self, jid, form):
         """Handles a search form
 
@@ -1369,7 +1274,6 @@ The call should look like:\n\n%(command)s %(params)s")
         self.get_stream().set_response_handlers(query, self.handle_disco_result, None)
         self.get_stream().send(query)
 
-
     def handle_disco_result(self, stanza):
         """Handler for <iq> service discovery results
 
@@ -1388,7 +1292,6 @@ The call should look like:\n\n%(command)s %(params)s")
         if supports:
             jid = stanza.get_from_jid()
             self.contacts[jid.bare().as_unicode()].set_supports(jid.resource, u"jabber:x:oob")
-
 
     def send_queued_messages(self, contact, ignore_dnd=False):
         """Sends messages queued for the contact
@@ -1457,3 +1360,121 @@ The call should look like:\n\n%(command)s %(params)s")
     def stream_error(self, error):
         """Called when stream error gets received"""
         self.log.error("Received a stream error.")
+
+    # Message handlers
+
+    def _handle_notification(self, command, ignore_dnd):
+        cmd_data = command.notification
+        original_text = cmd_data.get('text', '')
+        original_subject = cmd_data.get('subject', '')
+
+        for recipient in command.jids:
+            jid = JID(recipient)
+            jid_text = jid.bare().as_unicode()
+
+            if isinstance(command, cmd.NotificationCommandI18n):
+                # Translate&interpolate the message with data
+                gettext_func = self.get_text(jid_text)
+                text, subject = command.translate(gettext_func)
+                cmd_data['text'] = text
+                cmd_data['subject'] = subject
+            else:
+                cmd_data['text'] = original_text
+                cmd_data['subject'] = original_subject
+
+            # Check if contact is DoNotDisturb.
+            # If so, queue the message for delayed delivery.
+            contact = self.contacts.get(jid_text, '')
+            if contact:
+                if command.async and contact.is_dnd() and not ignore_dnd:
+                    contact.messages.append(command)
+                    return
+
+            action = cmd_data.get('action', '')
+            if action == u'page_changed':
+                self.handle_changed_action(cmd_data, jid, contact)
+            elif action == u'page_deleted':
+                self.handle_deleted_action(cmd_data, jid, contact)
+            elif action == u'file_attached':
+                self.handle_attached_action(cmd_data, jid, contact)
+            elif action == u'page_renamed':
+                self.handle_renamed_action(cmd_data, jid, contact)
+            elif action == u'user_created':
+                self.handle_user_created_action(cmd_data, jid, contact)
+            else:
+                self.send_message(jid, cmd_data, command.msg_type)
+
+    def _handle_search(self, command, ignore_dnd):
+        warnings = []
+        _ = self.get_text(command.jid)
+
+        if not command.data:
+            warnings.append(_("There are no pages matching your search criteria!"))
+
+        # This hardcoded limitation relies on (mostly correct) assumption that Jabber
+        # servers have rather tight traffic limits. Sending more than 25 results is likely
+        # to take a second or two - users should not have to wait longer (+search time!).
+        elif len(command.data) > 25:
+            warnings.append(_("There are too many results (%(number)s). Limiting to first 25 entries.") % {'number': str(len(command.data))})
+            command.data = command.data[:25]
+
+        results = [{'description': result[0], 'url': result[2]} for result in command.data]
+
+        if command.presentation == u"text":
+            for warning in warnings:
+                self.send_message(command.jid, {'text': warning})
+
+            if not results:
+                return
+
+            data = {'text': _('Following pages match your search criteria:'), 'url_list': results}
+            self.send_message(command.jid, data, u"chat")
+        else:
+            form_title = _("Search results").encode("utf-8")
+            help_form = _("Submit this form to perform a wiki search").encode("utf-8")
+            form = forms.Form(xmlnode_or_type="result", title=form_title, instructions=help_form)
+
+            action_label = _("What to do next")
+            do_nothing = forms.Option("n", _("Do nothing"))
+            search_again = forms.Option("s", _("Search again"))
+
+            for no, warning in enumerate(warnings):
+                form.add_field(name="warning", field_type="fixed", value=warning)
+
+            for no, result in enumerate(results):
+                field_name = "url%d" % (no, )
+                form.add_field(name=field_name, value=unicode(result["url"]), label=result["description"].encode("utf-8"), field_type="text-single")
+
+            # Selection of a following action
+            form.add_field(name="options", field_type="list-single", options=[do_nothing, search_again], label=action_label)
+
+            self.send_form(command.jid, form, _("Search results"))
+
+    def _handle_add_contact(self, command, ignore_dnd):
+        jid = JID(node_or_jid = command.jid)
+        self.ask_for_subscription(jid)
+
+    def _handle_remove_contact(self, command, ignore_dnd):
+        jid = JID(node_or_jid = command.jid)
+        self.remove_subscription(jid)
+
+    def _handle_get_page(self, command, ignore_dnd):
+        _ = self.get_text(command.jid)
+        msg = _(u"""Here's the page "%(pagename)s" that you've requested:\n\n%(data)s""")
+
+        cmd_data = {'text': msg % {'pagename': command.pagename, 'data': command.data}}
+        self.send_message(command.jid, cmd_data)
+
+    def _handle_get_page_list(self, command, ignore_dnd):
+        _ = self.get_text(command.jid)
+        msg = _("That's the list of pages accesible to you:\n\n%s")
+        pagelist = u"\n".join(command.data)
+
+        self.send_message(command.jid, {'text': msg % (pagelist, )})
+
+    def _handle_get_page_info(self, command, ignore_dnd):
+        self.handle_page_info(command)
+
+    def _handle_get_language(self, command, ignore_dnd):
+        if command.jid in self.contacts:
+            self.contacts[command.jid].language = command.language

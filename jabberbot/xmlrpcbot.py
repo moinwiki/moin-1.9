@@ -15,9 +15,11 @@ from jabberbot.multicall import MultiCall
 
 
 class ConfigurationError(Exception):
+
     def __init__(self, message):
         Exception.__init__(self)
         self.message = message
+
 
 def _xmlrpc_decorator(function):
     """A decorator function, which adds some maintenance code
@@ -95,6 +97,14 @@ class XMLRPCClient(Thread):
         self.multicall = None
         self.stopping = False
 
+        self._cmd_handlers = {cmd.GetPage: self.get_page,
+                              cmd.GetPageHTML: self.get_page_html,
+                              cmd.GetPageList: self.get_page_list,
+                              cmd.GetPageInfo: self.get_page_info,
+                              cmd.GetUserLanguage: self.get_language_by_jid,
+                              cmd.Search: self.do_search,
+                              cmd.RevertPage: self.do_revert}
+
     def run(self):
         """Starts the server / thread"""
         while True:
@@ -117,21 +127,15 @@ class XMLRPCClient(Thread):
     def execute_command(self, command):
         """Execute commands coming from the XMPP component"""
 
-        # FIXME: make this kind of automatic
-        if isinstance(command, cmd.GetPage):
-            self.get_page(command)
-        elif isinstance(command, cmd.GetPageHTML):
-            self.get_page_html(command)
-        elif isinstance(command, cmd.GetPageList):
-            self.get_page_list(command)
-        elif isinstance(command, cmd.GetPageInfo):
-            self.get_page_info(command)
-        elif isinstance(command, cmd.GetUserLanguage):
-            self.get_language_by_jid(command)
-        elif isinstance(command, cmd.Search):
-            self.do_search(command)
-        elif isinstance(command, cmd.RevertPage):
-            self.do_revert(command)
+        cmd_name = command.__class__
+
+        try:
+            handler = self._cmd_handlers[cmd_name]
+        except KeyError:
+            self.log.debug("No such command: " + cmd_name.__name__)
+            return
+
+        handler(command)
 
     def report_error(self, jid, text, data={}):
         """Reports an internal error
