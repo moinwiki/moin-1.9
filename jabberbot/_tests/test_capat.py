@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import py.test
-import capat
+from jabberbot import capat
 
 def test_ver_simple():
     # example values supplied by the XEP 
