@@ -23,7 +23,8 @@
 
 import re
 import StringIO
-from MoinMoin import config, macro, wikiutil
+from MoinMoin import config, wikiutil
+from MoinMoin.macro import Macro
 from MoinMoin.support.python_compatibility import rsplit # Needed for python 2.3
 from _creole import Parser as CreoleParser
 
@@ -50,7 +51,7 @@ class Parser:
         """Create and call the true parser and emitter."""
 
         document = CreoleParser(self.raw).parse()
-        result = Emitter(document, formatter, self.request).emit()
+        result = Emitter(document, formatter, self.request, Macro(self)).emit()
         self.request.write(result)
 
 class Rules:
@@ -81,12 +82,12 @@ class Emitter:
             Rules.page
         ]), re.X | re.U) # for addresses
 
-    def __init__(self, root, formatter, request):
+    def __init__(self, root, formatter, request, macro):
         self.root = root
         self.formatter = formatter
         self.request = request
         self.form = request.form
-        self.macro = None
+        self.macro = macro
 
     def get_text(self, node):
         """Try to emit whatever text is in the node."""
@@ -379,8 +380,6 @@ class Emitter:
     def macro_emit(self, node):
         macro_name = node.content
         args = node.args
-        if self.macro is None:
-            self.macro = macro.Macro(self)
         try:
             return self.formatter.macro(self.macro, macro_name, args)
         except:
