@@ -382,8 +382,9 @@ class Emitter:
         args = node.args
         try:
             return self.formatter.macro(self.macro, macro_name, args)
-        except:
-            return self.formatter.text(self.request.getText('macro error'))
+        except Exception, err:
+            raise
+            return self.formatter.text(self.request.getText('macro error') + ' ' + str(err))
 
 # Not used
 #    def section_emit(self, node):
@@ -409,8 +410,7 @@ class Emitter:
         parser_name = getattr(node, 'sect', '')
         if parser_name:
             try:
-                return self.request.redirectedOutput(
-                    self.formatter.parser, parser_name, node.content.split('\n'))
+                return self.formatter.parser(parser_name, node.content.split('\n'))
             except wikiutil.PluginMissingError:
                 pass
         return ''.join([
