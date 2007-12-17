@@ -127,7 +127,7 @@ class Navigation:
 
         # iterate over children, adding links to all of them
         result = []
-        children = _getPages(request, '^%s/' % parent)
+        children = _getPages(request, '^%s/' % re.escape(parent))
         for child in children:
             # display short page name, leaving out the parent path
             # (and make sure the name doesn't get wrapped)
@@ -175,7 +175,7 @@ class Navigation:
 
         # leave out the following on slide pages
         if focus is None:
-            children = _getPages(request, '^%s/' % self.pagename)
+            children = _getPages(request, '^%s/' % re.escape(self.pagename))
             if children:
                 # add link to first child if one exists
                 result.append(' &nbsp; ')
