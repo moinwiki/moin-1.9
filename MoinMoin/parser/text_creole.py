@@ -380,11 +380,7 @@ class Emitter:
     def macro_emit(self, node):
         macro_name = node.content
         args = node.args
-        try:
-            return self.formatter.macro(self.macro, macro_name, args)
-        except Exception, err:
-            raise
-            return self.formatter.text(self.request.getText('macro error') + ' ' + str(err))
+        return self.formatter.macro(self.macro, macro_name, args)
 
 # Not used
 #    def section_emit(self, node):
@@ -409,8 +405,21 @@ class Emitter:
     def preformatted_emit(self, node):
         parser_name = getattr(node, 'sect', '')
         if parser_name:
+            # The formatter.parser will *sometimes* just return the result
+            # and *sometimes* try to write it directly. We need to take both
+            # cases into account!
+            lines = node.content.split(u'\n')
+            buf = StringIO.StringIO()
             try:
-                return self.formatter.parser(parser_name, node.content.split('\n'))
+                try:
+                    self.request.redirect(buf)
+                    ret = self.formatter.parser(parser_name, lines)
+                finally:
+                    self.request.redirect()
+                buf.flush()
+                writ = buf.getvalue()
+                buf.close()
+                return ret+writ
             except wikiutil.PluginMissingError:
                 pass
         return ''.join([

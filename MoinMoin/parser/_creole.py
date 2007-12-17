@@ -311,6 +311,7 @@ class Parser:
 
     def _line_repl(self, groups):
         self.cur = self._upto(self.cur, ('document', 'section', 'blockquote'))
+        self.text = None
 
     def _code_repl(self, groups):
         DocNode('code', self.cur, groups.get('code_text', u'').strip())
