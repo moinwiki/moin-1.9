@@ -149,8 +149,8 @@ def execute(pagename, request):
     submitted = form.has_key('create_only') or form.has_key('create_and_mail')
 
     if submitted: # user pressed create button
-        error = _create_user(request)
-        return page.send_page(msg=error)
+        request.theme.add_msg(_create_user(request), "dialog")
+        return page.send_page()
     else: # show create form
         request.emit_http_headers()
         request.theme.send_title(_("Create Account"), pagename=pagename)

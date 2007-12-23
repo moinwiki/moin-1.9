@@ -1192,8 +1192,8 @@ class RequestBase(object):
                         msg += " " + _("Login and try again.", formatted=0)
 
                 if msg:
-                    self.page.send_page(msg=msg)
-
+                    self.request.theme.add_msg(msg, "error")
+                    self.page.send_page()
                 # Try action
                 else:
                     from MoinMoin import action
@@ -1204,7 +1204,8 @@ class RequestBase(object):
                         if not self.user.valid:
                             # Suggest non valid user to login
                             msg += " " + _("Login and try again.", formatted=0)
-                        self.page.send_page(msg=msg)
+                        self.request.theme.add_msg(msg, "error")
+                        self.page.send_page()
                     else:
                         handler(self.page.page_name, self)
 

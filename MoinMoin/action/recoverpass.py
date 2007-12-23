@@ -66,7 +66,8 @@ def execute(pagename, request):
 
     if submitted: # user pressed create button
         msg = _do_recover(request)
-        page.send_page(msg=msg)
+        request.theme.add_msg(msg, "dialog")
+        page.send_page()
     else: # show create form
         request.emit_http_headers()
         request.theme.send_title(_("Lost password"), pagename=pagename)
