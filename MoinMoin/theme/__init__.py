@@ -155,6 +155,8 @@ class ThemeBase:
         self.request = request
         self.cfg = request.cfg
         self._cache = {} # Used to cache elements that may be used several times
+        self._status = []
+        self._send_title_called = False
 
     def img_url(self, img):
         """ Generate an image href
@@ -558,17 +560,24 @@ class ThemeBase:
         @return: msg display html
         """
         _ = self.request.getText
-        msg = d['msg']
-        if not msg:
-            return u''
+        msgs = d['msg']
 
-        if isinstance(msg, (str, unicode)):
-            # Render simple strings with a close link
-            close = d['page'].link_to(self.request, text=_('Clear message'))
-            html = u'<p>%s</p>\n<div class="buttons">%s</div>\n' % (msg, close)
+        result = u""
+        close = d['page'].link_to(self.request, text=_('Clear message'))
+        for msg, msg_class in msgs:
+            try:
+                result += u'<p>%s</p>' % msg.render()
+                close = ''
+            except AttributeError:
+                if msg and msg_class:
+                    result += u'<p><div class="%s">%s</div></p>' % (msg_class, msg)
+                elif msg:
+                    result += u'<p>%s</p>\n' % msg
+        if result:
+            html = result + close
+            return u'<div id="message">\n%s\n</div>\n' % html
         else:
-            # msg is a widget
-            html = msg.render()
+            return u''
 
         return u'<div id="message">\n%s\n</div>\n' % html
 
@@ -1420,13 +1429,23 @@ var gui_editor_link_text = "%(text)s";
         lang = self.request.content_lang
         return ' lang="%s" dir="%s"' % (lang, i18n.getDirection(lang))
 
+    def add_msg(self, msg, msg_class="dialog"):
+        """ Adds a message to a list which will be used to generate status
+        information.
+        
+        @param msg: additional message
+        @param msg_class: html class for the div of the additional message.
+        """
+        if self._send_title_called:
+            raise Exception("You cannot call add_msg() after send_title()") 
+        self._status.append((msg, msg_class))
+
     # stuff from wikiutil.py
     def send_title(self, text, **keywords):
         """
         Output the page header (and title).
 
         @param text: the title text
-        @keyword msg: additional message (after saving)
         @keyword page: the page instance that called us - using this is more efficient than using pagename..
         @keyword pagename: 'PageName'
         @keyword print_mode: 1 (or 0)
@@ -1447,7 +1466,8 @@ var gui_editor_link_text = "%(text)s";
         else:
             pagename = keywords.get('pagename', '')
             page = Page(request, pagename)
-
+        if keywords.get('msg', ''):
+            raise DeprecationWarning ("Using send_page(msg=) is deprecated! Use theme.add_status() instead!")
         scriptname = request.getScriptname()
         pagename_quoted = wikiutil.quoteWikinameURL(pagename)
 
@@ -1639,7 +1659,7 @@ var gui_editor_link_text = "%(text)s";
                 'user_name': request.user.name,
                 'user_valid': request.user.valid,
                 'user_prefs': (page_user_prefs, request.user.name)[request.user.valid],
-                'msg': keywords.get('msg', ''),
+                'msg': self._status,
                 'trail': keywords.get('trail', None),
                 # Discontinued keys, keep for a while for 3rd party theme developers
                 'titlesearch': 'use self.searchform(d)',
@@ -1669,6 +1689,7 @@ var gui_editor_link_text = "%(text)s";
         request.write(''.join(output))
         output = []
         request.flush()
+        self._send_title_called = True
 
     def send_footer(self, pagename, **keywords):
         """
