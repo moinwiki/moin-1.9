@@ -276,3 +276,12 @@ div.codearea pre span.DiffRemoved {color: #FF0000;}
 div.codearea pre span.DiffChanged {color: #FF7F50;}
 div.codearea pre span.DiffSeparator {color: #228B22; font-weight: bold}
 
+#message .hint {font-style: italic;}
+#message .info {
+    float: none;
+    font-size: 1em;
+    color: black;
+}
+#message .info:before {content: url('../img/icon-info.png'); margin: 0 0.2em;}
+#message .warning:before {content: url('../img/alert.png'); margin: 0 0.2em;}
+#message .error:before {content: url('../img/icon-error.png'); margin: 0 0.2em;)
