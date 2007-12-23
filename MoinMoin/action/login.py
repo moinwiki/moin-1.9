@@ -70,7 +70,8 @@ class LoginHandler:
                     error.append('<p>')
                     error.append(msg)
                 error = ''.join(error)
-            return self.page.send_page(msg=error)
+            request.theme.add_msg(error, "error")
+            return self.page.send_page()
 
         else: # show login form
             request.emit_http_headers()

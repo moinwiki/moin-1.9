@@ -65,9 +65,9 @@ def restoreBackup(request, pagename):
         dircount = len(dirs)
         return sendMsg(request, pagename,
             msg=_('Restored Backup: %(filename)s to target dir: %(targetdir)s.\nFiles: %(filecount)d, Directories: %(dircount)d') %
-                locals())
+                locals(), msgtype="info")
     except:
-        return sendMsg(request, pagename, msg=_("Restoring backup: %(filename)s to target dir: %(targetdir)s failed.") % locals())
+        return sendMsg(request, pagename, msg=_("Restoring backup: %(filename)s to target dir: %(targetdir)s failed.") % locals(), msgtype="info")
 
 def sendBackupForm(request, pagename):
     _ = request.getText
@@ -114,9 +114,10 @@ Please make sure your wiki configuration backup_* values are correct and complet
     request.theme.send_footer(pagename)
     request.theme.send_closing_html()
 
-def sendMsg(request, pagename, msg):
+def sendMsg(request, pagename, msg, msgtype):
     from MoinMoin import Page
-    return Page.Page(request, pagename).send_page(msg=msg)
+    request.theme.add_msg(msg, msgtype)
+    return Page.Page(request, pagename).send_page()
 
 def backupAllowed(request):
     """ Return True if backup is allowed """
@@ -129,7 +130,7 @@ def execute(pagename, request):
     _ = request.getText
     if not backupAllowed(request):
         return sendMsg(request, pagename,
-                       msg=_('You are not allowed to do remote backup.'))
+                       msg=_('You are not allowed to do remote backup.'), msgtype="error")
 
     dowhat = request.form.get('do', [None])[0]
     if dowhat == 'backup':
@@ -140,4 +141,4 @@ def execute(pagename, request):
         sendBackupForm(request, pagename)
     else:
         return sendMsg(request, pagename,
-                       msg=_('Unknown backup subaction: %s.') % dowhat)
+                       msg=_('Unknown backup subaction: %s.') % dowhat, msgtype="error")

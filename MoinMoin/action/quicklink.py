@@ -11,20 +11,19 @@ from MoinMoin.Page import Page
 def execute(pagename, request):
     """ Add the current wiki page to the user quicklinks """
     _ = request.getText
-    msg = None
 
     if not request.user.valid:
-        msg = _("You must login to add a quicklink.")
+        request.theme.add_msg(_("You must login to add a quicklink."), "error")
     elif request.user.isQuickLinkedTo([pagename]):
         if request.user.removeQuicklink(pagename):
-            msg = _('Your quicklink to this page has been removed.')
+            request.theme.add_msg(_('Your quicklink to this page has been removed.'), "info")
         else: # should not happen
-            msg = _('Your quicklink to this page could not be removed.')
+            request.theme.add_msg(_('Your quicklink to this page could not be removed.'), "error")
     else:
         if request.user.addQuicklink(pagename):
-            msg = _('A quicklink to this page has been added for you.')
+            request.theme.add_msg(_('A quicklink to this page has been added for you.'), "info")
         else: # should not happen
-            msg = _('A quicklink to this page could not be added for you.')
+            request.theme.add_msg(_('A quicklink to this page could not be added for you.'), "error")
 
-    Page(request, pagename).send_page(msg=msg)
+    Page(request, pagename).send_page()
 

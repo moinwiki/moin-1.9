@@ -20,4 +20,5 @@ def execute(pagename, request):
         msg = unicode(error)
 
     request.reset()
-    pg.send_page(msg=msg)
+    request.theme.add_msg(msg, "dialog")
+    pg.send_page()

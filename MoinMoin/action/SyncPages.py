@@ -160,7 +160,8 @@ class ActionClass(object):
 </div>
 </form>
 """ % d
-        self.page.send_page(msg=html_form)
+        self.request.theme.add_msg(html_form, "dialog")
+        self.page.send_page()
 
     def render(self):
         """ Render action
@@ -173,16 +174,16 @@ class ActionClass(object):
 
         try:
             if "cancel" in self.request.form:
-                raise ActionStatus(_("Operation was canceled."))
+                raise ActionStatus(_("Operation was canceled."), "error")
 
             if params["direction"] == UP:
-                raise ActionStatus(_("The only supported directions are BOTH and DOWN."))
+                raise ActionStatus(_("The only supported directions are BOTH and DOWN."), "error")
 
             if not self.request.cfg.interwikiname:
-                raise ActionStatus(_("Please set an interwikiname in your wikiconfig (see HelpOnConfiguration) to be able to use this action."))
+                raise ActionStatus(_("Please set an interwikiname in your wikiconfig (see HelpOnConfiguration) to be able to use this action."), "error")
 
             if not params["remoteWiki"]:
-                raise ActionStatus(_("Incorrect parameters. Please supply at least the ''remoteWiki'' parameter. Refer to HelpOnSynchronisation for help."))
+                raise ActionStatus(_("Incorrect parameters. Please supply at least the ''remoteWiki'' parameter. Refer to HelpOnSynchronisation for help."), "error")
 
             local = MoinLocalWiki(self.request, params["localPrefix"], params["pageList"])
             try:
@@ -191,12 +192,12 @@ class ActionClass(object):
                 raise ActionStatus(msg)
 
             if not remote.valid:
-                raise ActionStatus(_("The ''remoteWiki'' is unknown."))
+                raise ActionStatus(_("The ''remoteWiki'' is unknown."), "error")
             # if only the username is supplied, we ask for the password
             if params["user"] and not params["password"]:
                 return self.show_password_form()
         except ActionStatus, e:
-            msg = u'<p class="error">%s</p>\n' % (e.args[0], )
+            self.request.theme.add_msg(u'<p class="error">%s</p>\n' % (e.args[0], ), e.args[1])
         else:
             try:
                 try:
@@ -207,7 +208,7 @@ class ActionClass(object):
                     self.log_status(self.ERROR, _("A severe error occured:"), raw_suffix=temp_file.getvalue())
                     raise
                 else:
-                    msg = u"%s" % (_("Synchronisation finished. Look below for the status messages."), )
+                    self.request.theme.add_msg(u"%s" % (_("Synchronisation finished. Look below for the status messages."), ), "info")
             finally:
                 self.call_rollback_funcs()
                 # XXX aquire readlock on self.page
@@ -216,7 +217,7 @@ class ActionClass(object):
 
                 remote.delete_auth_token()
 
-        return self.page.send_page(msg=msg)
+        return self.page.send_page()
 
     def sync(self, params, local, remote):
         """ This method does the synchronisation work.

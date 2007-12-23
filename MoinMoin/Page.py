@@ -992,12 +992,11 @@ class Page(object):
         request.emit_http_headers()
         request.write(text)
 
-    def send_page(self, msg=None, **keywords):
+    def send_page(self, **keywords):
         """ Output the formatted page.
 
         TODO: "kill send_page(), quick" (since 2002 :)
 
-        @param msg: if given, display message in header area
         @keyword content_only: if 1, omit http headers, page header and footer
         @keyword content_id: set the id of the enclosing div
         @keyword count_hit: if 1, add an event to the log
@@ -1020,8 +1019,6 @@ class Page(object):
             media = 'screen'
         self.hilite_re = (keywords.get('hilite_re') or
                           request.form.get('highlight', [None])[0])
-        if msg is None:
-            msg = ""
 
         # count hit?
         if keywords.get('count_hit', 0):
@@ -1062,10 +1059,7 @@ class Page(object):
         if 'deprecated' in pi:
             # deprecated page, append last backup version to current contents
             # (which should be a short reason why the page is deprecated)
-            msg = '%s<strong>%s</strong><br>%s' % (
-                self.formatter.smiley('/!\\'),
-                _('The backed up content of this page is deprecated and will not be included in search results!'),
-                msg)
+            request.theme.add_msg(_('The backed up content of this page is deprecated and will not be included in search results!'), "warning")
 
             revisions = self.getRevList()
             if len(revisions) >= 2: # XXX shouldn't that be ever the case!? Looks like not.
@@ -1105,24 +1099,22 @@ class Page(object):
             # send the page header
             if self.default_formatter:
                 if self.rev:
-                    msg = "<strong>%s</strong><br>%s" % (
+                    request.theme.add_msg("<strong>%s</strong><br>%s" % (
                         _('Revision %(rev)d as of %(date)s') % {
                             'rev': self.rev,
                             'date': self.mtime_printable(request)
-                        }, msg)
+                        }, "info"))
 
                 # This redirect message is very annoying.
                 # Less annoying now without the warning sign.
                 if 'redirect' in request.form:
                     redir = request.form['redirect'][0]
-                    msg = '<strong>%s</strong><br>%s' % (
+                    request.theme.add_msg('<strong>%s</strong><br>%s' % (
                         _('Redirected from page "%(page)s"') % {'page':
-                            wikiutil.link_tag(request, wikiutil.quoteWikinameURL(redir) + "?action=show", self.formatter.text(redir))},
-                        msg)
+                            wikiutil.link_tag(request, wikiutil.quoteWikinameURL(redir) + "?action=show", self.formatter.text(redir))}), "info")
                 if 'redirect' in pi:
-                    msg = '<strong>%s</strong><br>%s' % (
-                        _('This page redirects to page "%(page)s"') % {'page': wikiutil.escape(pi['redirect'])},
-                        msg)
+                    request.theme.add_msg('<strong>%s</strong><br>%s' % (
+                        _('This page redirects to page "%(page)s"') % {'page': wikiutil.escape(pi['redirect'])}), "info")
 
                 # Page trail
                 trail = None
@@ -1132,7 +1124,7 @@ class Page(object):
 
                 title = self.split_title()
 
-                request.theme.send_title(title, page=self, msg=msg,
+                request.theme.send_title(title, page=self,
                                     print_mode=print_mode,
                                     media=media, pi_refresh=pi.get('refresh'),
                                     allow_doubleclick=1, trail=trail,

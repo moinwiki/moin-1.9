@@ -162,9 +162,9 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
     # check for sensible search term
     stripped = needle.strip()
     if len(stripped) == 0:
-        err = _('Please use a more selective search term instead '
-                'of {{{"%s"}}}') % wikiutil.escape(needle)
-        Page(request, pagename).send_page(msg=err)
++        request.theme.add_msg(_('Please use a more selective search term instead '
++                'of {{{"%s"}}}') % wikiutil.escape(needle), "error")
++        Page(request, pagename).send_page()
         return
     needle = stripped
 
@@ -186,9 +186,9 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
                 titlesearch=titlesearch).parse_query(needle)
         results = searchPages(request, query, sort, mtime, historysearch)
     except ValueError: # catch errors in the search query
-        err = _('Your search query {{{"%s"}}} is invalid. Please refer to '
-                'HelpOnSearching for more information.') % wikiutil.escape(needle)
-        Page(request, pagename).send_page(msg=err)
+        request.theme.add_msg(_('Your search query {{{"%s"}}} is invalid. Please refer to '
+                'HelpOnSearching for more information.') % wikiutil.escape(needle), "error")
+        Page(request, pagename).send_page()
         return
 
     # directly show a single hit
@@ -206,7 +206,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
         querydict = wikiutil.parseQueryString(request.query_string)
         querydict.update({'titlesearch': 0})
 
-        err = _('Your search query {{{"%s"}}} didn\'t return any results. '
+        request.theme.add_msg(_('Your search query {{{"%s"}}} didn\'t return any results. '
                 'Please change some terms and refer to HelpOnSearching for '
                 'more information.%s') % (wikiutil.escape(needle),
                     titlesearch and ''.join([
@@ -216,8 +216,8 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
                             escape=0, relative=False)),
                         _('full-text search with your search terms'),
                         f.url(0), '.',
-                    ]) or '')
-        Page(request, pagename).send_page(msg=err)
+                    ]) or ''), "error")
+        Page(request, pagename).send_page()
         return
 
     request.emit_http_headers()

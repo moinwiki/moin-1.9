@@ -26,8 +26,6 @@ class LogoutHandler:
         # but if the user manually added ?action=logout
         # and that isn't really supported, then don't
         if not self.request.user.valid:
-            message = _("You are now logged out.")
-        else:
-            message = None
-        return self.page.send_page(msg=message)
+            self.request.theme.add_msg(_("You are now logged out."), "info")
+        return self.page.send_page()
 

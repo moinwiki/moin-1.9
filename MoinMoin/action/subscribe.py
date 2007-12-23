@@ -12,38 +12,37 @@ def execute(pagename, request):
     """ Subscribe or unsubscribe the user to pagename """
     _ = request.getText
     cfg = request.cfg
-    msg = None
 
     if not request.user.may.read(pagename):
-        msg = _("You are not allowed to subscribe to a page you can't read.")
+        request.theme.add_msg(_("You are not allowed to subscribe to a page you can't read."), "error")
 
     # Check if mail is enabled
     elif not cfg.mail_enabled and not cfg.jabber_enabled:
-        msg = _("This wiki is not enabled for mail/Jabber processing.")
+        request.theme.add_msg(_("This wiki is not enabled for mail/Jabber processing."), "error")
 
     # Suggest visitors to login
     elif not request.user.valid:
-        msg = _("You must log in to use subscriptions.")
+        request.theme.add_msg(_("You must log in to use subscriptions."), "error")
 
     # Suggest users without email to add their email address
     elif not request.user.email and not request.user.jid:
-        msg = _("Add your email address or Jabber ID in your UserPreferences to use subscriptions.")
+        request.theme.add_msg(_("Add your email address or Jabber ID in your UserPreferences to use subscriptions."), "error")
 
     elif request.user.isSubscribedTo([pagename]):
         # Try to unsubscribe
         if request.user.unsubscribe(pagename):
-            msg = _('Your subscription to this page has been removed.')
+            request.theme.add_msg(_('Your subscription to this page has been removed.'), "info")
         else:
-            msg = _("Can't remove regular expression subscription!") + u' ' + \
+            request.theme.add_msg(_("Can't remove regular expression subscription!") + u' ' + \
                   _("Edit the subscription regular expressions in your "
-                    "UserPreferences.")
+                    "UserPreferences."), "error")
 
     else:
         # Try to subscribe
         if request.user.subscribe(pagename):
-            msg = _('You have been subscribed to this page.')
+            request.theme.add_msg(_('You have been subscribed to this page.'), "info")
         else: # should not happen
-            msg = _('You could not get subscribed to this page.')
+            request.theme.add_msg(_('You could not get subscribed to this page.'), "error")
 
-    Page(request, pagename).send_page(msg=msg)
+    Page(request, pagename).send_page()
 

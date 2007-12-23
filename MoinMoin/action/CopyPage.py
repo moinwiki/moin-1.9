@@ -80,7 +80,7 @@ class CopyPage(ActionBase):
             self.request.http_redirect(url)
             self.request.finish()
         else:
-            self.render_msg(self.make_form())
+            self.render_msg(self.make_form(), "dialog")
 
     def get_form_html(self, buttons_html):
         _ = self._
