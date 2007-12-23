@@ -94,7 +94,8 @@ def execute(pagename, request):
         lnk = unicode(lnk)
         title = _("Settings") + "/" + title
     request.emit_http_headers()
-    request.theme.send_title(title, page=request.page, pagename=pagename, msg=msg)
+    request.theme.add_msg(msg, "dialog")
+    request.theme.send_title(title, page=request.page, pagename=pagename)
     # Start content (important for RTL support)
     request.write(request.formatter.startContent("content"))
     request.write(text)

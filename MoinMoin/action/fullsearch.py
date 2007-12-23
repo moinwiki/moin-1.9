@@ -162,9 +162,9 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
     # check for sensible search term
     stripped = needle.strip()
     if len(stripped) == 0:
-+        request.theme.add_msg(_('Please use a more selective search term instead '
-+                'of {{{"%s"}}}') % wikiutil.escape(needle), "error")
-+        Page(request, pagename).send_page()
+        request.theme.add_msg(_('Please use a more selective search term instead '
+                'of {{{"%s"}}}') % wikiutil.escape(needle), "error")
+        Page(request, pagename).send_page()
         return
     needle = stripped
 
@@ -226,7 +226,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
     request.setContentLanguage(request.lang)
 
     request.theme.send_title(title % wikiutil.escape(needle), form=request.form,
-            pagename=pagename, msg=msg)
+            pagename=pagename)
 
     # Start content (important for RTL support)
     request.write(request.formatter.startContent("content"))

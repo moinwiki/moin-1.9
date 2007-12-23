@@ -194,7 +194,8 @@ class PageEditor(Page):
 
         # Did one of the prechecks fail?
         if msg:
-            self.send_page(msg=msg)
+            request.theme.add_msg(msg, "error")
+            self.send_page()
             return
 
         # Emmit http_headers after checks (send_page)
