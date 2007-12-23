@@ -22,8 +22,8 @@ def execute(pagename, request):
         return
 
     if not request.user.may.write(pagename):
-        Page(request, pagename).send_page(
-            msg=_('You are not allowed to edit this page.'))
+        request.theme.add_msg(_('You are not allowed to edit this page.'), "error")
+        Page(request, pagename).send_page()
         return
 
     valideditors = ['text', 'gui', ]
@@ -80,8 +80,8 @@ def execute(pagename, request):
     if request.cfg.edit_ticketing:
         ticket = request.form.get('ticket', [''])[0]
         if not wikiutil.checkTicket(request, ticket):
-            msg = _('Please use the interactive user interface to use action %(actionname)s!') % {'actionname': 'edit' }
-            pg.send_page(msg=msg)
+            request.theme.add_msg(_('Please use the interactive user interface to use action %(actionname)s!') % {'actionname': 'edit' }, "error")
+            pg.send_page()
             return
 
     from MoinMoin.error import ConvertError
@@ -182,5 +182,5 @@ def execute(pagename, request):
 
         # sets revision number to default for further actions
         request.rev = 0
-        pg.send_page(msg=savemsg)
-
+        request.theme.add_msg(savemsg, "info")
+        pg.send_page()

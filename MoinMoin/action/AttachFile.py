@@ -415,7 +415,8 @@ def _subdir_exception(zf):
     return names #Returns dict of {origname: safename}
 
 def error_msg(pagename, request, msg):
-    Page(request, pagename).send_page(msg=msg)
+    request.theme.add_msg(msg, "error")
+    Page(request, pagename).send_page()
 
 
 #############################################################################
@@ -641,7 +642,8 @@ def upload_form(pagename, request, msg=''):
     request.emit_http_headers()
     # Use user interface language for this generated page
     request.setContentLanguage(request.lang)
-    request.theme.send_title(_('Attachments for "%(pagename)s"') % {'pagename': pagename}, pagename=pagename, msg=msg)
+    request.theme.add_msg(msg, "dialog")
+    request.theme.send_title(_('Attachments for "%(pagename)s"') % {'pagename': pagename}, pagename=pagename)
     request.write('<div id="content">\n') # start content div
     send_uploadform(pagename, request)
     request.write('</div>\n') # end content div
@@ -846,7 +848,8 @@ def send_moveform(pagename, request):
 </table>
 </form>''' % d
     thispage = Page(request, pagename)
-    return thispage.send_page(msg=formhtml)
+    request.theme.add_msg(formhtml, "dialog")
+    return thispage.send_page()
 
 def get_file(pagename, request):
     import shutil

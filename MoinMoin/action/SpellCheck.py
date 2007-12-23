@@ -212,18 +212,19 @@ def execute(pagename, request):
 
     page = Page(request, pagename)
     if not request.user.may.write(request.cfg.page_local_spelling_words):
-        msg = _("You can't save spelling words.")
-        page.send_page(msg=msg)
+        request.theme.add_msg(_("You can't save spelling words."), "error")
+        page.send_page()
         return
 
     if request.user.may.read(pagename):
         badwords, badwords_re, msg = checkSpelling(page, request)
     else:
         badwords = []
-        msg = _("You can't check spelling on a page you can't read.")
-
+        request.theme.add_msg(_("You can't check spelling on a page you can't read."), "error")
+    
+    request.theme.add_msg(msg, "dialog")
     if badwords:
-        page.send_page(msg=msg, hilite_re=badwords_re)
+        page.send_page(hilite_re=badwords_re)
     else:
-        page.send_page(msg=msg)
+        page.send_page()
 

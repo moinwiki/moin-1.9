@@ -273,7 +273,7 @@ Please review the page and save then. Do not save this page as it is!""")
         if preview is not None:
             raw_body = self.get_raw_body()
             if use_draft:
-                request.write(_("[Content loaded from draft]"), '<br>')
+                request.theme.add_msg(_("[Content loaded from draft]"), 'info')
         elif self.exists():
             # If the page exists, we get the text from the page.
             # TODO: maybe warn if template argument was ignored because the page exists?
@@ -284,11 +284,11 @@ Please review the page and save then. Do not save this page as it is!""")
             if request.user.may.read(template_page):
                 raw_body = Page(request, template_page).get_raw_body()
                 if raw_body:
-                    request.write(_("[Content of new page loaded from %s]") % (template_page, ), '<br>')
+                    request.theme.add_msg(_("[Content of new page loaded from %s]") % (template_page, ), 'info')
                 else:
-                    request.write(_("[Template %s not found]") % (template_page, ), '<br>')
+                    request.theme.add_msg(_("[Template %s not found]") % (template_page, ), 'warning')
             else:
-                request.write(_("[You may not read %s]") % (template_page, ), '<br>')
+                request.theme.add_msg(_("[You may not read %s]") % (template_page, ), 'error')
 
         # Make backup on previews - but not for new empty pages
         if not use_draft and preview and raw_body:
@@ -311,11 +311,11 @@ Please review the page and save then. Do not save this page as it is!""")
         status = [msg for msg in status if msg]
         status = ' '.join(status)
         status = Status(request, content=status)
-
+        request.theme.add_msg(status, "dialog")
+        
         request.theme.send_title(
             title % {'pagename': self.split_title(), },
             page=self,
-            msg=status,
             html_head=self.lock.locktype and (
                 _countdown_js % {
                      'countdown_script': request.theme.externalScript('countdown'),
@@ -495,7 +495,8 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 
         backto = request.form.get('backto', [None])[0]
         page = backto and Page(request, backto) or self
-        page.send_page(msg=_('Edit was cancelled.'))
+        request.theme.add_msg(_('Edit was cancelled.', formatted=False), "error")
+        page.send_page()
 
     def copyPage(self, newpagename, comment=None):
         """ Copy the current version of the page (keeping the backups, logs and attachments).

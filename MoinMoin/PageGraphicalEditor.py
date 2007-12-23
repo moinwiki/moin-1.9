@@ -24,7 +24,8 @@ from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
 def execute(pagename, request):
     if not request.user.may.write(pagename):
         _ = request.getText
-        Page(request, pagename).send_page(msg=_('You are not allowed to edit this page.'))
+        request.theme.add_msg_('You are not allowed to edit this page.', "error")
+        Page(request, pagename).send_page()
         return
 
     PageGraphicalEditor(request, pagename).sendEditor()
@@ -85,7 +86,8 @@ class PageGraphicalEditor(PageEditor.PageEditor):
 
         # Did one of the prechecks fail?
         if msg:
-            self.send_page(msg=msg)
+            request.theme.add_msg(msg, "error")
+            self.send_page()
             return
 
         # check if we want to load a draft

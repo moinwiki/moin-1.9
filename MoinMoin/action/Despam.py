@@ -165,8 +165,8 @@ def execute(pagename, request):
     actname = __name__.split('.')[-1]
     if actname in request.cfg.actions_excluded or \
        not request.user.isSuperUser():
-        return Page.Page(request, pagename).send_page(
-            msg=_('You are not allowed to use this action.'))
+        request.theme.add_msg(_('You are not allowed to use this action.'), "error")
+        return Page.Page(request, pagename).send_page()
 
     editor = request.form.get('editor', [None])[0]
     timestamp = time.time() - 24 * 3600

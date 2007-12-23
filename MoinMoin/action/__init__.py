@@ -150,13 +150,15 @@ class ActionBase:
 
         return Dialog(self.request, content=form_html)
 
-    def render_msg(self, msg):
+    def render_msg(self, msg, msgtype):
         """ Called to display some message (can also be the action form) """
-        self.page.send_page(msg=msg)
+        self.request.theme.add_msg(msg, msgtype)
+        self.page.send_page()
 
-    def render_success(self, msg):
+    def render_success(self, msg, msgtype):
         """ Called to display some message when the action succeeded """
-        self.page.send_page(msg=msg)
+        self.request.theme.add_msg(msg, msgtype)
+        self.page.send_page()
 
     def render_cancel(self):
         """ Called when user has hit the cancel button """
@@ -184,7 +186,7 @@ class ActionBase:
         if error is None:
             error = self.check_condition()
         if error:
-            self.render_msg(error)
+            self.render_msg(error, "error")
         elif self.form_trigger in form: # user hit the trigger button
             if self.ticket_ok():
                 success, self.error = self.do_action()
@@ -194,7 +196,7 @@ class ActionBase:
             self.do_action_finish(success)
         else:
             # Return a new form
-            self.render_msg(self.make_form())
+            self.render_msg(self.make_form(), "dialog")
 
     # Executing the action ---------------------------------------------------
     def do_action(self):
@@ -206,9 +208,9 @@ class ActionBase:
         """ Override this to handle success or failure (with error in self.error) of your action.
         """
         if success:
-            self.render_success(self.error)
+            self.render_success(self.error, "info")
         else:
-            self.render_msg(self.make_form()) # display the form again
+            self.render_msg(self.make_form(), "dialog") # display the form again
 
 
 # Builtin Actions ------------------------------------------------------------

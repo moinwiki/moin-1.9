@@ -19,7 +19,8 @@ def execute(pagename, request):
         username = ''
 
     if not username:
-        return thispage.send_page(msg=_('Please log in first.'))
+        request.theme.add_msg(_('Please log in first.'), "error")
+        return thispage.send_page()
 
     userhomewiki = request.cfg.user_homewiki
     if userhomewiki != 'Self' and userhomewiki != request.cfg.interwikiname:
@@ -31,8 +32,8 @@ def execute(pagename, request):
 
     homepage = Page(request, username)
     if not homepage.exists():
-        return homepage.send_page(
-            msg=_('Please first create a homepage before creating additional pages.'))
+        request.theme.add_msg(_('Please first create a homepage before creating additional pages.'), "error")
+        return homepage.send_page()
 
     pagecontent = _("""\
 You can add some additional sub pages to your already existing homepage here.

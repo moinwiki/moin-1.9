@@ -24,20 +24,20 @@ def execute(pagename, request):
 
     # Error?
     if isinstance(matches, (str, unicode)):
-        Page(request, pagename).send_page(msg=matches)
+        request.theme.add_msg(matches, "info")
+        Page(request, pagename).send_page()
         return
 
     # No matches
     if not matches:
-        Page(request, pagename).send_page(
-             msg=_('No pages like "%s"!') % (pagename, ))
+        request.theme.add_msg(_('No pages like "%s"!') % (pagename,), "error")
+        Page(request, pagename).send_page()
         return
 
     # One match - display it
     if len(matches) == 1:
-        Page(request, matches.keys()[0]).send_page(
-             msg=_('Exactly one page like "%s" found, redirecting to page.') % (
-            pagename, ))
+        request.theme.add_msg(_('Exactly one page like "%s" found, redirecting to page.', formatted=False) % (pagename,), "info")
+        Page(request, matches.keys()[0]).send_page()
         return
 
     # more than one match, list 'em

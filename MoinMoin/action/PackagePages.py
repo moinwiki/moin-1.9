@@ -51,13 +51,15 @@ class PackagePages:
 
         try:
             if not self.allowed():
-                raise ActionError(_('You are not allowed to edit this page.'))
+                self.request.theme.add_msg(_('You are not allowed to edit this page.'), "error")
+                raise ActionError
             elif not self.page.exists():
-                raise ActionError(_('This page is already deleted or was never created!'))
+                self.request.theme.add_msg(_('This page is already deleted or was never created!', formatted=False))
+                raise ActionError
 
             self.package()
         except ActionError, e:
-            return self.page.send_page(msg=e.args[0])
+            return self.page.send_page()
 
     def package(self):
         """ Packages pages. """
@@ -70,7 +72,8 @@ class PackagePages:
         packagename = form.get('packagename', [u''])[0]
 
         if not form.get('submit', [None])[0]:
-            raise ActionError(self.makeform())
+            self.request.theme.add_msg(self.makeform(), "dialog")
+            raise ActionError
 
         pages = []
         for pagename in unpackLine(pagelist, ","):
@@ -80,20 +83,23 @@ class PackagePages:
                 if page.exists() and self.request.user.may.read(pagename):
                     pages.append(page)
         if not pages:
-            raise ActionError(self.makeform(_('No pages like "%s"!') % wikiutil.escape(pagelist)))
+            self.request.theme.add_msg(self.makeform(_('No pages like "%s"!') % wikiutil.escape(pagelist)), "error")
+            raise ActionError
 
         pagelist = ', '.join([getattr(page, "page_name") for page in pages])
         target = wikiutil.taintfilename(packagename)
 
         if not target:
-            raise ActionError(self.makeform(_('Invalid filename "%s"!') % wikiutil.escape(packagename)))
+            self.request.theme.add_msg(self.makeform(_('Invalid filename "%s"!') % wikiutil.escape(packagename)), "error")
+            raise ActionError
 
         # get directory, and possibly create it
         attach_dir = Page(self.request, self.page.page_name).getPagePath("attachments", check_create=1)
         fpath = os.path.join(attach_dir, target).encode(config.charset)
         if os.path.exists(fpath):
-            raise ActionError(_("Attachment '%(target)s' (remote name '%(filename)s') already exists.") % {
-                'target': wikiutil.escape(target), 'filename': wikiutil.escape(target)})
+            self.request.theme.add_msg(_("Attachment '%(target)s' (remote name '%(filename)s') already exists.") % {
+                'target': wikiutil.escape(target), 'filename': wikiutil.escape(target)}, "error")
+            raise ActionError
 
         zf = zipfile.ZipFile(fpath, "w", COMPRESSION_LEVEL)
 
@@ -124,7 +130,8 @@ class PackagePages:
 
         _addLogEntry(self.request, 'ATTNEW', self.pagename, target)
 
-        raise ActionError(_("Created the package %s containing the pages %s.") % (wikiutil.escape(target), wikiutil.escape(pagelist)))
+        self.request.theme.add_msg(_("Created the package %s containing the pages %s.") % (wikiutil.escape(target), wikiutil.escape(pagelist)))
+        raise ActionError
 
     def makeform(self, error=""):
         """ Display a rename page form
