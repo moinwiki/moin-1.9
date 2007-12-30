@@ -14,6 +14,7 @@
 import base64
 import itertools
 from MoinMoin.support.python_compatibility import hash_new
+from pyxmpp.presence import Presence
 
 HASHALIASES = { # IANA Hash Function Textual Names Registry
                 # to `hashlib.new` mapping
@@ -81,3 +82,43 @@ def hash_iq(stanza, algo='sha-1'):
             feat.append(item.prop('var'))
 
     return generate_ver(ident, feat, algo)
+
+# <identity /> and <feature /> attributes
+IDENT = (('category', 'client'),
+         ('type', 'bot'))
+FEAT = ('http://jabber.org/protocol/disco#info',
+        'jabber:x:data') # data forms
+NODE = "http://moinmo.in/#1.7"
+
+def create_presence(jid):
+    """ Creates a presence stanza (as described in XEP-0115)
+
+    @param jid: bot's jabber ID
+    """
+    pres = Presence(from_jid=jid)
+
+    c = pres.add_new_content('http://jabber.org/protocol/caps', 'c')
+    c.setProp('node', NODE)
+
+    ver = generate_ver(IDENT, FEAT)
+    c.setProp('ver', ver)
+
+    return pres
+
+def get_response(disco_query):
+    """ Creates an <Iq /> tag as a response to a service discovery query
+
+    @param disco_query: received query
+    """
+    response = disco_query.make_result_response()
+    query = response.new_query(ns_uri='http://jabber.org/protocol/disco#info')
+
+    ident = query.newChild(None, 'identity', None)
+    for item in IDENT:
+        ident.setProp(item[0], item[1])
+
+    for item in FEAT:
+        query.newChild(None, 'feature', None).setProp('var', item)
+
+    return response
+
