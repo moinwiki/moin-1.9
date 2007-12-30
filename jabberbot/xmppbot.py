@@ -21,6 +21,7 @@ import libxml2
 import jabberbot.commands as cmd
 import jabberbot.i18n as i18n
 import jabberbot.oob as oob
+import jabberbot.capat as capat
 
 
 class Contact:
@@ -249,6 +250,17 @@ class XMPPBot(Client, Thread):
         if self.last_expiration + self.contact_check < current_time:
             self.expire_contacts(current_time)
             self.last_expiration = current_time
+
+    def session_started(self):
+        """Handle session started event.
+	Requests the user's roster and sends the initial presence with
+        a <c> child as described in XEP-0115 (Entity Capabilities)
+
+	"""
+        self.request_roster()
+        pres = capat.create_presence(self.jid)
+        self.stream.set_iq_get_handler("query", "http://jabber.org/protocol/disco#info", self.handle_disco_query)
+        self.stream.send(pres)
 
     def expire_contacts(self, current_time):
         """Check which contats have been offline for too long and should be removed
@@ -1256,6 +1268,14 @@ The call should look like:\n\n%(command)s %(params)s")
         """
         request = cmd.GetUserLanguage(jid)
         self.from_commands.put_nowait(request)
+
+    def handle_disco_query(self, stanza):
+        """Handler for <Iq /> service discovery query
+
+	@param stanza: received query stanza
+	"""
+        response = capat.get_response(stanza)
+        self.get_stream().send(response)
 
     def service_discovery(self, jid):
         """Ask a client about supported features
