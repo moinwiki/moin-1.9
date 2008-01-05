@@ -157,7 +157,8 @@ class SecurityPolicy(Permissions):
             blacklist = []
             latest_mtime = 0
             for pn in BLACKLISTPAGES:
-                do_update = (pn != "LocalBadContent")
+                do_update = (pn != "LocalBadContent" and
+                             request.cfg.interwikiname != 'MoinMaster') # MoinMaster wiki shall not fetch updates from itself
                 blacklist_mtime, blacklist_entries = getblacklist(request, pn, do_update)
                 blacklist += blacklist_entries
                 latest_mtime = max(latest_mtime, blacklist_mtime)
