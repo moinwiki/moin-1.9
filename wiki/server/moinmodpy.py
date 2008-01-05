@@ -48,17 +48,23 @@ sys.path.insert(0, '/path/to/wikiconfig')
 ## import os
 ## os.environ['MOIN_DEBUG'] = '1'
 
-# Set threads flag, so other code can use proper locking.
-# TODO: It seems that modpy does not use threads, so we don't need to
-# set it here. Do we have another method to check this?
-from MoinMoin import config
-config.use_threads = 1
-del config
+# Simple way
+#from MoinMoin.server.server_modpython import modpythonHandler as handler
 
+# Complex way
+from MoinMoin.server.server_modpython import ModpythonConfig, modpythonHandler
 
-from MoinMoin.request import request_modpython
+class MyConfig(ModpythonConfig):
+    """ Set up local server-specific stuff here """
+
+    # Make sure moin will have permission to write to this file!
+    # Otherwise it will cause a server error.
+    logPath = "/var/log/apache2/moinlog"
+    
+    # Properties
+    # Allow overriding any request property by the value defined in
+    # this dict e.g properties = {'script_name': '/mywiki'}.
+    ## properties = {}
 
 def handler(request):
-    moinreq = request_modpython.Request(request)
-    return moinreq.run(request)
-
+    return modpythonHandler(request, MyConfig)
