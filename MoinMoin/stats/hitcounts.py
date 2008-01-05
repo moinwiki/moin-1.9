@@ -8,16 +8,22 @@
           A lot of code here is duplicated in stats.useragents.
           Maybe both can use same base class, maybe some parts are useful to other code.
 
-    @copyright: 2002-2004 Juergen Hermann <jh@web.de>
+    @copyright: 2002-2004 Juergen Hermann <jh@web.de>,
+                2007 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
 _debug = 0
 
+import time
+
 from MoinMoin import caching, wikiutil, logfile
 from MoinMoin.Page import Page
 from MoinMoin.logfile import eventlog
 
+# this is a CONSTANT used for on-disk caching, it must NOT be configurable and
+# not depend on request.user!
+DATE_FMT = '%04d-%02d-%02d' # % (y, m, d)
 
 def linkto(pagename, request, params=''):
     _ = request.getText
@@ -52,14 +58,14 @@ def get_data(pagename, request, filterpage=None):
     # Get results from cache
     if filterpage:
         arena = Page(request, pagename)
-        cache = caching.CacheEntry(request, arena, 'hitcounts', scope='item')
+        cache = caching.CacheEntry(request, arena, 'hitcounts', scope='item', use_pickle=True)
     else:
         arena = 'charts'
-        cache = caching.CacheEntry(request, arena, 'hitcounts', scope='wiki')
+        cache = caching.CacheEntry(request, arena, 'hitcounts', scope='wiki', use_pickle=True)
 
     if cache.exists():
         try:
-            cache_date, cache_days, cache_views, cache_edits = eval(cache.content())
+            cache_date, cache_days, cache_views, cache_edits = cache.content()
         except:
             cache.remove() # cache gone bad
 
@@ -79,34 +85,34 @@ def get_data(pagename, request, filterpage=None):
     if new_date is not None:
         log.set_filter(['VIEWPAGE', 'SAVEPAGE'])
         for event in log.reverse():
-            #print ">>>", wikiutil.escape(repr(event)), "<br>"
-
-            if event[0] <= cache_date:
+            event_usecs = event[0]
+            if event_usecs <= cache_date:
                 break
             eventpage = event[2].get('pagename', '')
             if filterpage and eventpage != filterpage:
                 continue
-            time_tuple = request.user.getTime(wikiutil.version2timestamp(event[0]))
+            event_secs = wikiutil.version2timestamp(event_usecs)
+            time_tuple = time.gmtime(event_secs) # must be UTC
             day = tuple(time_tuple[0:3])
             if day != ratchet_day:
                 # new day
                 while ratchet_time:
-                    ratchet_time -= 86400
-                    rday = tuple(request.user.getTime(ratchet_time)[0:3])
+                    ratchet_time -= 86400 # seconds per day
+                    rday = tuple(time.gmtime(ratchet_time)[0:3]) # must be UTC
                     if rday <= day:
                         break
-                    days.append(request.user.getFormattedDate(ratchet_time))
+                    days.append(DATE_FMT % rday)
                     views.append(0)
                     edits.append(0)
-                days.append(request.user.getFormattedDate(wikiutil.version2timestamp(event[0])))
+                days.append(DATE_FMT % day)
                 views.append(0)
                 edits.append(0)
                 ratchet_day = day
-                ratchet_time = wikiutil.version2timestamp(event[0])
+                ratchet_time = event_secs
             if event[1] == 'VIEWPAGE':
-                views[-1] = views[-1] + 1
+                views[-1] += 1
             elif event[1] == 'SAVEPAGE':
-                edits[-1] = edits[-1] + 1
+                edits[-1] += 1
 
         days.reverse()
         views.reverse()
@@ -123,8 +129,7 @@ def get_data(pagename, request, filterpage=None):
     cache_views.extend(views)
     cache_edits.extend(edits)
     if new_date is not None:
-        cache.update("(%r, %r, %r, %r)" %
-                     (new_date, cache_days, cache_views, cache_edits))
+        cache.update((new_date, cache_days, cache_views, cache_edits))
 
     return cache_days, cache_views, cache_edits
 
