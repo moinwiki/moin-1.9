@@ -74,12 +74,14 @@ class LDAPAuth(BaseAuth):
                 # you can use %(username)s here to get the stuff entered in the form:
                 filterstr = cfg.ldap_filter % locals()
                 if verbose: request.log("LDAP: Searching %r" % filterstr)
+                attrs = [getattr(cfg, attr) for attr in [
+                                         'ldap_email_attribute',
+                                         'ldap_aliasname_attribute',
+                                         'ldap_surname_attribute',
+                                         'ldap_givenname_attribute',
+                                         ] if (hasattr(cfg, attr) and getattr(cfg, attr) is not None)]
                 lusers = l.search_st(cfg.ldap_base, cfg.ldap_scope, filterstr.encode(coding),
-                                     attrlist=[cfg.ldap_email_attribute,
-                                               cfg.ldap_aliasname_attribute,
-                                               cfg.ldap_surname_attribute,
-                                               cfg.ldap_givenname_attribute,
-                                     ], timeout=cfg.ldap_timeout)
+                                     attrlist=attrs, timeout=cfg.ldap_timeout)
                 # we remove entries with dn == None to get the real result list:
                 lusers = [(dn, ldap_dict) for dn, ldap_dict in lusers if dn is not None]
                 if verbose:
