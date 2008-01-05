@@ -55,6 +55,9 @@ from MoinMoin.support import thfcgi
 
 def handle_request(req, env, form):
     request = request_fcgi.Request(req, env, form)
+    # use this instead of the line above if your wiki runs under "/" url:
+    #request = request_fcgi.Request(req, env, form, properties={'script_name': '/'})
+
     request.run()
 
 if __name__ == '__main__':
