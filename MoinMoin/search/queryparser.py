@@ -864,7 +864,7 @@ class DomainSearch(BaseExpression):
         logging.debug("search: DomainSearch searching page %r for (negated = %r) %r" % (page.page_name, self.negated, self._pattern))
         checks = {'underlay': page.isUnderlayPage,
                   'standard': page.isStandardPage,
-                  'system': lambda page: wikiutil.isSystemPage(page.request, page.page_name),
+                  'system': lambda page=page: wikiutil.isSystemPage(page.request, page.page_name),
                  }
 
         try:
