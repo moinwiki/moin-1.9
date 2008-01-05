@@ -674,10 +674,11 @@ class SearchResults:
             return self.request.page.url(self.request, querydict,
                     escape=0, relative=False)
 
-        pages = float(hitsNum) / hitsPerPage
-        if pages - int(pages) > 0.0:
-            pages = int(pages) + 1
-        cur_page = hitsFrom / hitsPerPage
+        pages = hitsNum // hitsPerPage
+        remainder = hitsNum % hitsPerPage
+        if remainder:
+            pages += 1
+        cur_page = hitsFrom // hitsPerPage
 
         textlinks = []
 
