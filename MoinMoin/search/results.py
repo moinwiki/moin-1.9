@@ -742,9 +742,9 @@ class SearchResults:
         size_str = '%.1fk' % (p.size()/1024.0)
         revisions = p.getRevList()
         if len(revisions) and rev == revisions[0]:
-            rev_str = 'rev: %d (%s)' % (rev, _('current'))
+            rev_str = '%s: %d (%s)' % (_('rev'), rev, _('current'))
         else:
-            rev_str = 'rev: %d' % (rev, )
+            rev_str = '%s: %d' % (_('rev'), rev, )
         lastmod_str = _('last modified: %s') % p.mtime_printable(request)
 
         result = f.paragraph(1, attr={'class': 'searchhitinfobar'}) + \
