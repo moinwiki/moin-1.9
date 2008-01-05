@@ -477,7 +477,7 @@ reStructuredText Quick Reference
         'diff':        ({'action': 'diff'}, _("Diffs"), "diff"),
         'info':        ({'action': 'info'}, _("Info"), "info"),
         'edit':        ({'action': 'edit'}, _("Edit"), "edit"),
-        'unsubscribe': ({'action': 'subscribe'}, _("UnSubscribe"), "unsubscribe"),
+        'unsubscribe': ({'action': 'unsubscribe'}, _("UnSubscribe"), "unsubscribe"),
         'subscribe':   ({'action': 'subscribe'}, _("Subscribe"), "subscribe"),
         'raw':         ({'action': 'raw'}, _("Raw"), "raw"),
         'xml':         ({'action': 'show', 'mimetype': 'text/xml'}, _("XML"), "xml"),
