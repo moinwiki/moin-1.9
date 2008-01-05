@@ -79,7 +79,7 @@ class LDAPAuth(BaseAuth):
                                          'ldap_aliasname_attribute',
                                          'ldap_surname_attribute',
                                          'ldap_givenname_attribute',
-                                         ] if (hasattr(cfg, attr) and getattr(cfg, attr) is not None)]
+                                         ] if getattr(cfg, attr) is not None]
                 lusers = l.search_st(cfg.ldap_base, cfg.ldap_scope, filterstr.encode(coding),
                                      attrlist=attrs, timeout=cfg.ldap_timeout)
                 # we remove entries with dn == None to get the real result list:

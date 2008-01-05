@@ -358,10 +358,11 @@ reStructuredText Quick Reference
     # "(&(cn=%(username)s)(memberOf=CN=WikiUsers,OU=Groups,DC=example,DC=org))"
 
     # some attribute names we use to extract information from LDAP:
-    ldap_givenname_attribute = 'givenName' # ldap attribute we get the first name from
-    ldap_surname_attribute = 'sn' # ldap attribute we get the family name from
-    ldap_aliasname_attribute = 'displayName' # ldap attribute we get the aliasname from
-    ldap_email_attribute = 'mail' # ldap attribute we get the email address from
+    ldap_givenname_attribute = None # ('givenName') ldap attribute we get the first name from
+    ldap_surname_attribute = None # ('sn') ldap attribute we get the family name from
+    ldap_aliasname_attribute = None # ('displayName') ldap attribute we get the aliasname from
+    ldap_email_attribute = None # ('mail') ldap attribute we get the email address from
+
     ldap_coding = 'utf-8' # coding used for ldap queries and result values
     ldap_timeout = 10 # how long we wait for the ldap server [s]
     ldap_verbose = True # if True, put lots of LDAP debug info into the log
