@@ -329,6 +329,43 @@ reStructuredText Quick Reference
     language_ignore_browser = False # ignore browser settings, use language_default
                                     # or user prefs
 
+    # ldap / active directory server URI:
+    ldap_uri = 'ldap://localhost'
+
+    # We can either use some fixed user and password for binding to LDAP.
+    # Be careful if you need a % char in those strings - as they are used as
+    # a format string, you have to write %% to get a single % in the end.
+    #ldap_binddn = 'binduser@example.org' # (AD)
+    #ldap_binddn = 'cn=admin,dc=example,dc=org' # (OpenLDAP)
+    #ldap_bindpw = 'secret'
+    # or we can use the username and password we got from the user:
+    #ldap_binddn = '%(username)s@example.org' # DN we use for first bind (AD)
+    #ldap_bindpw = '%(password)s' # password we use for first bind
+    ldap_binddn = ''
+    ldap_bindpw = ''
+
+    # base DN we use for searching
+    #ldap_base = 'ou=SOMEUNIT,dc=example,dc=org'
+    ldap_base = ''
+
+    # scope of the search we do (2 == ldap.SCOPE_SUBTREE)
+    ldap_scope = 2 # we do not want to import ldap for everybody just for that
+
+    # ldap filter used for searching:
+    #ldap_filter = '(sAMAccountName=%(username)s)' # (AD)
+    ldap_filter = '(uid=%(username)s)' # (OpenLDAP)
+    # you can also do more complex filtering like:
+    # "(&(cn=%(username)s)(memberOf=CN=WikiUsers,OU=Groups,DC=example,DC=org))"
+
+    # some attribute names we use to extract information from LDAP:
+    ldap_givenname_attribute = 'givenName' # ldap attribute we get the first name from
+    ldap_surname_attribute = 'sn' # ldap attribute we get the family name from
+    ldap_aliasname_attribute = 'displayName' # ldap attribute we get the aliasname from
+    ldap_email_attribute = 'mail' # ldap attribute we get the email address from
+    ldap_coding = 'utf-8' # coding used for ldap queries and result values
+    ldap_timeout = 10 # how long we wait for the ldap server [s]
+    ldap_verbose = True # if True, put lots of LDAP debug info into the log
+
     log_reverse_dns_lookups = True  # if we do reverse dns lookups for logging hostnames
                                     # instead of just IPs
     log_timing = False              # update <data_dir>/timing.log?
