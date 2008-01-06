@@ -11,6 +11,7 @@ debug = 0
 
 import re, sys, time, datetime
 import sets
+import logging
 
 from MoinMoin.security import Permissions
 from MoinMoin import caching, wikiutil
@@ -42,7 +43,7 @@ def dprint(s):
     if debug:
         if isinstance(s, unicode):
             s = s.encode('utf-8')
-        sys.stderr.write('%s\n' % s)
+        logging.debug('%s\n' % s)
 
 
 def makelist(text):
