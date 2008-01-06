@@ -13,9 +13,9 @@ all:
 
 install-docs:
 	-mkdir build
-	wget -U MoinMoin/Makefile -O build/INSTALL.html "http://moinmaster.wikiwikiweb.de/MoinMoin/InstallDocs?action=print"
+	wget -U MoinMoin/Makefile -O build/INSTALL.html "http://master.moinmo.in/MoinMoin/InstallDocs?action=print"
 	sed \
-		-e 's#href="/#href="http://moinmaster.wikiwikiweb.de/#g' \
+		-e 's#href="/#href="http://master.moinmo.in/#g' \
 		-e 's#http://[a-z\.]*/wiki/classic/#/wiki/classic/#g' \
 		-e 's#http://[a-z\.]*/wiki/modern/#/wiki/modern/#g' \
 		-e 's#http://[a-z\.]*/wiki/rightsidebar/#/wiki/rightsidebar/#g' \
@@ -28,7 +28,7 @@ install-docs:
 	-rmdir build
 
 interwiki:
-	wget -U MoinMoin/Makefile -O $(share)/data/intermap.txt "http://moinmaster.wikiwikiweb.de/InterWikiMap?action=raw"
+	wget -U MoinMoin/Makefile -O $(share)/data/intermap.txt "http://master.moinmo.in/InterWikiMap?action=raw"
 	chmod 664 $(share)/data/intermap.txt
 
 check-tabs:
@@ -42,8 +42,8 @@ epydoc: patchlevel
 # Should be used only on TW machine
 underlay:
 	rm -rf $(share)/underlay
-	MoinMoin/script/moin.py --config-dir=/srv/de.wikiwikiweb.moinmaster/bin15 --wiki-url=moinmaster.wikiwikiweb.de/ maint globaledit
-	MoinMoin/script/moin.py --config-dir=/srv/de.wikiwikiweb.moinmaster/bin15 --wiki-url=moinmaster.wikiwikiweb.de/ maint reducewiki --target-dir=$(share)/underlay
+	MoinMoin/script/moin.py --config-dir=/srv/de.wikiwikiweb.moinmaster/bin16 --wiki-url=master.moinmo.in/ maint globaledit
+	MoinMoin/script/moin.py --config-dir=/srv/de.wikiwikiweb.moinmaster/bin16 --wiki-url=master.moinmo.in/ maint reducewiki --target-dir=$(share)/underlay
 	rm -rf $(share)/underlay/pages/InterWikiMap/
 	echo -ne "#acl All:read\r\nSee MoinMoin:EditingOnMoinMaster.\r\n" > \
 	    $(share)/underlay/pages/MoinPagesEditorGroup/revisions/00000001

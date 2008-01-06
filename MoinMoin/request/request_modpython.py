@@ -12,7 +12,7 @@ from MoinMoin.request import RequestBase
 class Request(RequestBase):
     """ specialized on mod_python requests """
 
-    def __init__(self, req):
+    def __init__(self, req, properties={}):
         """ Saves mod_pythons request and sets basic variables using
             the req.subprocess_env, cause this provides a standard
             way to access the values we need here.
@@ -33,7 +33,7 @@ class Request(RequestBase):
             else:
                 env = req.subprocess_env
             self._setup_vars_from_std_env(env)
-            RequestBase.__init__(self)
+            RequestBase.__init__(self, properties)
 
         except Exception, err:
             self.fail(err)
@@ -84,7 +84,9 @@ class Request(RequestBase):
         form = util.FieldStorage(self.mpyreq)
 
         args = {}
-        for key in form:
+
+        # You cannot get rid of .keys() here
+        for key in form.keys():
             if key is None:
                 continue
             values = form[key]

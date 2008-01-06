@@ -978,7 +978,7 @@ class Page(object):
             request.setHttpHeader("Status: 200 OK")
             request.setHttpHeader("Last-Modified: %s" % util.timefuncs.formathttpdate(os.path.getmtime(self._text_filename())))
             text = self.encodeTextMimeType(self.body)
-            request.setHttpHeader("Content-Length: %d" % len(text))
+            #request.setHttpHeader("Content-Length: %d" % len(text))  # XXX WRONG! text is unicode obj, but we send utf-8!
             if content_disposition:
                 # TODO: fix the encoding here, plain 8 bit is not allowed according to the RFCs
                 # There is no solution that is compatible to IE except stripping non-ascii chars
@@ -1093,6 +1093,10 @@ class Page(object):
                 else:
                     request.setHttpHeader('Status: 404 NOTFOUND')
                 request.emit_http_headers()
+
+            if not page_exists and self.request.isSpiderAgent:
+                # don't send any 404 content to bots
+                return
 
             request.write(self.formatter.startDocument(self.page_name))
 

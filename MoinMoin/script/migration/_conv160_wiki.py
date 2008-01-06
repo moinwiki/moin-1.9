@@ -162,7 +162,13 @@ class Converter(Parser):
         macro_args = m.group('macro_args')
         if macro_name == 'ImageLink':
             fixed, kw, trailing = wikiutil.parse_quoted_separated(macro_args)
+            #print "macro_args=%r" % macro_args
+            #print "fixed=%r, kw=%r, trailing=%r" % (fixed, kw, trailing)
             image, target = (fixed + ['', ''])[:2]
+            if image is None:
+                image = ''
+            if target is None:
+                target = ''
             if '://' not in image:
                 # if it is not a URL, it is meant as attachment
                 image = u'attachment:%s' % image

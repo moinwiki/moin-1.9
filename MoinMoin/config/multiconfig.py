@@ -11,6 +11,7 @@ import re
 import os
 import sys
 import time
+import logging
 
 from MoinMoin import config, error, util, wikiutil
 import MoinMoin.auth as authmodule
@@ -329,15 +330,64 @@ reStructuredText Quick Reference
     language_ignore_browser = False # ignore browser settings, use language_default
                                     # or user prefs
 
+    # ldap / active directory server URI
+    # use ldaps://server:636 url for ldaps,
+    # use  ldap://server for ldap without tls (and set ldap_start_tls to 0),
+    # use  ldap://server for ldap with tls (and set ldap_start_tls to 1 or 2).
+    ldap_uri = 'ldap://localhost'
+
+    # We can either use some fixed user and password for binding to LDAP.
+    # Be careful if you need a % char in those strings - as they are used as
+    # a format string, you have to write %% to get a single % in the end.
+    #ldap_binddn = 'binduser@example.org' # (AD)
+    #ldap_binddn = 'cn=admin,dc=example,dc=org' # (OpenLDAP)
+    #ldap_bindpw = 'secret'
+    # or we can use the username and password we got from the user:
+    #ldap_binddn = '%(username)s@example.org' # DN we use for first bind (AD)
+    #ldap_bindpw = '%(password)s' # password we use for first bind
+    # or we can bind anonymously (if that is supported by your directory).
+    # In any case, ldap_binddn and ldap_bindpw must be defined.
+    ldap_binddn = ''
+    ldap_bindpw = ''
+
+    # base DN we use for searching
+    #ldap_base = 'ou=SOMEUNIT,dc=example,dc=org'
+    ldap_base = ''
+
+    # scope of the search we do (2 == ldap.SCOPE_SUBTREE)
+    ldap_scope = 2 # we do not want to import ldap for everybody just for that
+
+    # LDAP REFERRALS
+    ldap_referrals = 0 # (0 needed for AD)
+
+    # ldap filter used for searching:
+    #ldap_filter = '(sAMAccountName=%(username)s)' # (AD)
+    ldap_filter = '(uid=%(username)s)' # (OpenLDAP)
+    # you can also do more complex filtering like:
+    # "(&(cn=%(username)s)(memberOf=CN=WikiUsers,OU=Groups,DC=example,DC=org))"
+
+    # some attribute names we use to extract information from LDAP:
+    ldap_givenname_attribute = None # ('givenName') ldap attribute we get the first name from
+    ldap_surname_attribute = None # ('sn') ldap attribute we get the family name from
+    ldap_aliasname_attribute = None # ('displayName') ldap attribute we get the aliasname from
+    ldap_email_attribute = None # ('mail') ldap attribute we get the email address from
+    ldap_email_callback = None # called to make up email address
+
+    ldap_coding = 'utf-8' # coding used for ldap queries and result values
+    ldap_timeout = 10 # how long we wait for the ldap server [s]
+    ldap_verbose = True # if True, put lots of LDAP debug info into the log
+
+    # TLS / SSL related defaults
+    ldap_start_tls = 0 # 0 = No, 1 = Try, 2 = Required
+    ldap_tls_cacertdir = ''
+    ldap_tls_cacertfile = ''
+    ldap_tls_certfile = ''
+    ldap_tls_keyfile = ''
+    ldap_tls_require_cert = 0 # 0 == ldap.OPT_X_TLS_NEVER (needed for self-signed certs)
+
     log_reverse_dns_lookups = True  # if we do reverse dns lookups for logging hostnames
                                     # instead of just IPs
     log_timing = False              # update <data_dir>/timing.log?
-
-    xapian_search = False
-    xapian_index_dir = None
-    xapian_stemming = True
-    xapian_index_history = False
-    search_results_per_page = 10
 
     mail_login = None # or "user pwd" if you need to use SMTP AUTH
     mail_sendmail = None # "/usr/sbin/sendmail -t -i" to not use SMTP, but sendmail
@@ -531,6 +581,9 @@ reStructuredText Quick Reference
     }
     surge_lockout_time = 3600 # secs you get locked out when you ignore warnings
 
+    textchas = None
+    textchas_disabled_group = None # e.g. u'NoTextChasGroup' if you are a member of this group, you don't get textchas
+
     theme_default = 'modern'
     theme_force = False
 
@@ -546,9 +599,10 @@ reStructuredText Quick Reference
 
     # a regex of HTTP_USER_AGENTS that should be excluded from logging
     # and receive a FORBIDDEN for anything except viewing a page
-    ua_spiders = ('archiver|cfetch|crawler|curl|gigabot|googlebot|holmes|htdig|httrack|httpunit|jeeves|larbin|leech|'
-                  'linkbot|linkmap|linkwalk|mercator|mirror|msnbot|msrbot|neomo|nutbot|omniexplorer|puf|robot|scooter|seekbot|'
-                  'sherlock|slurp|sitecheck|spider|teleport|voyager|webreaper|wget')
+    ua_spiders = ('archiver|cfetch|charlotte|crawler|curl|gigabot|googlebot|heritrix|holmes|htdig|httrack|httpunit|'
+                  'intelix|java|jeeves|larbin|leech|libwww-perl|linkbot|linkmap|linkwalk|litefinder|mercator|'
+                  'microsoft.url.control|mirror| mj12bot|msnbot|msrbot|neomo|nutbot|omniexplorer|puf|robot|scooter|seekbot|'
+                  'sherlock|slurp|sitecheck|snoopy|spider|teleport|twiceler|voilabot|voyager|webreaper|wget|yeti')
 
     # Wiki identity
     sitename = u'Untitled Wiki'
@@ -659,6 +713,12 @@ reStructuredText Quick Reference
     unzip_attachments_space = 200.0 * 1000 ** 2
     unzip_attachments_count = 101 # 1 zip file + 100 files contained in it
 
+    xapian_search = False
+    xapian_index_dir = None
+    xapian_stemming = True
+    xapian_index_history = False
+    search_results_per_page = 10
+
     SecurityPolicy = None
 
     def __init__(self, siteid):
@@ -733,6 +793,14 @@ reStructuredText Quick Reference
         # e.g u'%(page_front_page)s' % self
         self.navi_bar = [elem % self for elem in self.navi_bar]
         self.backup_exclude = [elem % self for elem in self.backup_exclude]
+
+        # check if python-xapian is installed
+        if self.xapian_search:
+            try:
+                import xapian
+            except ImportError, err:
+                self.xapian_search = False
+                logging.error("xapian_search was auto-disabled because python-xapian is not installed [%s]." % str(err))
 
         # list to cache xapian searcher objects
         self.xapian_searchers = []

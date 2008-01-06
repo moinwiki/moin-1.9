@@ -396,12 +396,12 @@ class Formatter(FormatterBase):
 ### Attachments ######################################################
 
     def attachment_link(self, on, url=None, **kw):
-        _ = self.request.getText
-        pagename, filename = AttachFile.absoluteName(url, self.page.page_name)
-        fname = wikiutil.taintfilename(filename)
-        target = AttachFile.getAttachUrl(pagename, filename, self.request)
+        assert on in (0, 1, False, True) # make sure we get called the new way, not like the 1.5 api was
         # we do not output a "upload link" when outputting docbook
         if on:
+            pagename, filename = AttachFile.absoluteName(url, self.page.page_name)
+            fname = wikiutil.taintfilename(filename)
+            target = AttachFile.getAttachUrl(pagename, filename, self.request)
             return self.url(1, target, title="attachment:%s" % url)
         else:
             return self.url(0)

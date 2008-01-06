@@ -158,6 +158,9 @@ def execute(pagename, request):
     # Save new text
     else:
         try:
+            from MoinMoin.security.textcha import TextCha
+            if not TextCha(request).check_answer_from_form():
+                raise pg.SaveError(_('TextCha: Wrong answer! Go back and try again...', formatted=False))
             savemsg = pg.saveText(savetext, rev, trivial=trivial, comment=comment)
         except pg.EditConflict, e:
             msg = e.message

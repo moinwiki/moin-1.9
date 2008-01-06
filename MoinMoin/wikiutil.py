@@ -161,7 +161,10 @@ def url_unquote(s, want_unicode=True):
         s = s.encode(config.charset) # ascii would also work
     s = urllib.unquote(s)
     if want_unicode:
-        s = s.decode(config.charset)
+        try:
+            s = decodeUserInput(s, [config.charset, 'iso-8859-1', ]) # try hard
+        except UnicodeError:
+            s = s.decode('ascii', 'replace') # better than crashing
     return s
 
 def parseQueryString(qstr, want_unicode=True):

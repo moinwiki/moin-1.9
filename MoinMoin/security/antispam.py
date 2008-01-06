@@ -9,8 +9,15 @@
 # give some log entries to stderr
 debug = 0
 
-import re, sys, time, datetime
-import sets
+import re, time, datetime
+
+# needed for py 2.3 compat:
+try:
+    frozenset
+except NameError:
+    from sets import ImmutableSet as frozenset
+
+import logging
 
 from MoinMoin.security import Permissions
 from MoinMoin import caching, wikiutil
@@ -42,7 +49,7 @@ def dprint(s):
     if debug:
         if isinstance(s, unicode):
             s = s.encode('utf-8')
-        sys.stderr.write('%s\n' % s)
+        logging.debug('antispam: %s' % s)
 
 
 def makelist(text):
@@ -157,7 +164,8 @@ class SecurityPolicy(Permissions):
             blacklist = []
             latest_mtime = 0
             for pn in BLACKLISTPAGES:
-                do_update = (pn != "LocalBadContent")
+                do_update = (pn != "LocalBadContent" and
+                             request.cfg.interwikiname != 'MoinMaster') # MoinMaster wiki shall not fetch updates from itself
                 blacklist_mtime, blacklist_entries = getblacklist(request, pn, do_update)
                 blacklist += blacklist_entries
                 latest_mtime = max(latest_mtime, blacklist_mtime)
@@ -180,10 +188,10 @@ class SecurityPolicy(Permissions):
                     page = Page(request, editor.page_name, rev=rev)
                     oldtext = page.get_raw_body()
 
-                newset = sets.ImmutableSet(newtext.splitlines(1))
-                oldset = sets.ImmutableSet(oldtext.splitlines(1))
-                difference = newset.difference(oldset)
-                addedtext = ''.join(difference)
+                newset = frozenset(newtext.splitlines(1))
+                oldset = frozenset(oldtext.splitlines(1))
+                difference = newset - oldset
+                addedtext = kw.get('comment', u'') + u''.join(difference)
 
                 for blacklist_re in request.cfg.cache.antispam_blacklist[1]:
                     match = blacklist_re.search(addedtext)
