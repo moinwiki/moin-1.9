@@ -49,7 +49,7 @@ def dprint(s):
     if debug:
         if isinstance(s, unicode):
             s = s.encode('utf-8')
-        logging.debug('%s\n' % s)
+        logging.debug('antispam: %s' % s)
 
 
 def makelist(text):
