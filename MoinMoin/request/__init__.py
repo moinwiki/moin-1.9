@@ -3,12 +3,45 @@
     MoinMoin - RequestBase Implementation
 
     @copyright: 2001-2003 Juergen Hermann <jh@web.de>,
-                2003-2006 MoinMoin:ThomasWaldmann
+                2003-2008 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, re, time, sys, cgi, StringIO
+# Support for remote IP address detection when using (reverse) proxy (or even proxies).
+# If you exactly KNOW which (reverse) proxies you can trust, put them into the list
+# below, so we can determine the "outside" IP as your trusted proxies see it.
+
+proxies_trusted = [] # trust noone!
+#proxies_trusted = ['127.0.0.1', ] # can be a list of multiple IPs
+
 import logging
+proxy_loglevel = logging.DEBUG # logging.NOTSET (never), logging.INFO (when not debugging)
+
+def find_remote_addr(addrs):
+    """ Find the last remote IP address before it hits our reverse proxies.
+        The LAST address in the <addrs> list is the remote IP as detected by the server
+        (not taken from some x-forwarded-for header).
+        The FIRST address in the <addrs> list might be the client's IP - if noone cheats
+        and everyone supports x-f-f header.
+
+        See http://bob.pythonmac.org/archives/2005/09/23/apache-x-forwarded-for-caveat/                                                          
+
+        For debug loglevel, we log all <addrs>.
+
+        TODO: refactor request code to first do some basic IP init, then load configuration,
+        TODO: then do proxy processing.
+        TODO: add wikiconfig configurability for proxies_trusted
+        TODO: later, make it possible to put multipe remote IP addrs into edit-log
+    """
+    logging.log(proxy_loglevel, "request.find_remote_addr: addrs == %r" % addrs)
+    if proxies_trusted:
+        result = [addr for addr in addrs if addr not in proxies_trusted]
+        if result:
+            return result[-1] # last IP before it hit our trusted (reverse) proxies
+    return addrs[-1] # this is a safe remote_addr, not taken from x-f-f header
+
+
+import os, re, time, sys, cgi, StringIO
 import Cookie
 import traceback
 
@@ -72,7 +105,8 @@ class RequestBase(object):
     # Extra headers we support. Both standalone and twisted store
     # headers as lowercase.
     moin_location = 'x-moin-location'
-    proxy_host = 'x-forwarded-host'
+    proxy_host = 'x-forwarded-host' # original host: header as seen by the proxy (e.g. wiki.example.org)
+    proxy_xff = 'x-forwarded-for' # list of original remote_addrs as seen by the proxies (e.g. <clientip>,<proxy1>,<proxy2>,...)
 
     def __init__(self, properties={}):
 
@@ -375,6 +409,7 @@ class RequestBase(object):
         self.setIsSSL(env)
         self.setHost(env.get('HTTP_HOST'))
         self.fixURI(env)
+
         self.setURL(env)
         #self.debugEnvironment(env)
 
@@ -460,10 +495,10 @@ class RequestBase(object):
 
         @param env: dict like object containing cgi meta variables or http headers.
         """
-        # If we serve on localhost:8000 and use a proxy on
-        # example.com/wiki, our urls will be example.com/wiki/pagename
-        # Same for the wiki config - they must use the proxy url.
+        # proxy support
+        self.rewriteRemoteAddr(env)
         self.rewriteHost(env)
+
         self.rewriteURI(env)
 
         if not self.request_uri:
@@ -488,6 +523,27 @@ class RequestBase(object):
                       env.get(cgiMetaVariable(self.proxy_host)))
         if proxy_host:
             self.http_host = proxy_host
+
+    def rewriteRemoteAddr(self, env):
+        """ Rewrite remote_addr transparently
+        
+        Get the proxy remote addr using 'X-Forwarded-For' header, added by
+        Apache 2 and other proxy software.
+        
+        TODO: Will not work for Apache 1 or others that don't add this header.
+        
+        TODO: If we want to add an option to disable this feature it
+        should be in the server script, because the config is not
+        loaded at this point, and must be loaded after url is set.
+        
+        @param env: dict like object containing cgi meta variables or http headers.
+        """
+        xff = (env.get(self.proxy_xff) or
+               env.get(cgiMetaVariable(self.proxy_xff)))
+        if xff:
+            xff = [addr.strip() for addr in xff.split(',')]
+            xff.append(self.remote_addr)
+            self.remote_addr = find_remote_addr(xff)
 
     def rewriteURI(self, env):
         """ Rewrite request_uri, script_name and path_info transparently
