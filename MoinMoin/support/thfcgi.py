@@ -11,7 +11,9 @@
 
     Cleanup, fixed typos, PEP-8, support for limiting creation of threads,
     limited number of requests lifetime, configurable backlog for socket
-    .listen() by Thomas Waldmann <tw AT waldmann-edv DOT de>
+    .listen() by MoinMoin:ThomasWaldmann.
+
+    2007 Support for Python's logging module by MoinMoin:ThomasWaldmann.
 
     For code base see:
     http://cvs.lysator.liu.se/viewcvs/viewcvs.cgi/webkom/thfcgi.py?cvsroot=webkom
@@ -33,7 +35,8 @@
 # TODO: Compare compare the number of bytes received on FCGI_STDIN with
 #       CONTENT_LENGTH and abort the update if the two numbers are not equal.
 
-debug = False
+import logging
+LOGLEVEL = logging.DEBUG # logging.NOTSET to completely switch it off
 
 import os
 import sys
@@ -96,12 +99,9 @@ FCGI_Record_header = "!BBHHBx"
 FCGI_UnknownTypeBody = "!B7x"
 FCGI_EndRequestBody = "!IB3x"
 
-LOGFILE = sys.stderr
 
 def log(s):
-    if debug:
-        LOGFILE.write(s)
-        LOGFILE.write('\n')
+    logging.log(LOGLEVEL, 'thfcgi: %s' % s)
 
 class SocketErrorOnWrite:
     """Is raised if a write fails in the socket code."""
