@@ -330,7 +330,10 @@ reStructuredText Quick Reference
     language_ignore_browser = False # ignore browser settings, use language_default
                                     # or user prefs
 
-    # ldap / active directory server URI:
+    # ldap / active directory server URI
+    # use ldaps://server:636 url for ldaps,
+    # use  ldap://server for ldap without tls (and set ldap_start_tls to 0),
+    # use  ldap://server for ldap with tls (and set ldap_start_tls to 1 or 2).
     ldap_uri = 'ldap://localhost'
 
     # We can either use some fixed user and password for binding to LDAP.
@@ -342,6 +345,8 @@ reStructuredText Quick Reference
     # or we can use the username and password we got from the user:
     #ldap_binddn = '%(username)s@example.org' # DN we use for first bind (AD)
     #ldap_bindpw = '%(password)s' # password we use for first bind
+    # or we can bind anonymously (if that is supported by your directory).
+    # In any case, ldap_binddn and ldap_bindpw must be defined.
     ldap_binddn = ''
     ldap_bindpw = ''
 
@@ -351,6 +356,9 @@ reStructuredText Quick Reference
 
     # scope of the search we do (2 == ldap.SCOPE_SUBTREE)
     ldap_scope = 2 # we do not want to import ldap for everybody just for that
+
+    # LDAP REFERRALS
+    ldap_referrals = 0 # (0 needed for AD)
 
     # ldap filter used for searching:
     #ldap_filter = '(sAMAccountName=%(username)s)' # (AD)
@@ -368,6 +376,14 @@ reStructuredText Quick Reference
     ldap_coding = 'utf-8' # coding used for ldap queries and result values
     ldap_timeout = 10 # how long we wait for the ldap server [s]
     ldap_verbose = True # if True, put lots of LDAP debug info into the log
+
+    # TLS / SSL related defaults
+    ldap_start_tls = 0 # 0 = No, 1 = Try, 2 = Required
+    ldap_tls_cacertdir = ''
+    ldap_tls_cacertfile = ''
+    ldap_tls_certfile = ''
+    ldap_tls_keyfile = ''
+    ldap_tls_require_cert = 0 # 0 == ldap.OPT_X_TLS_NEVER (needed for self-signed certs)
 
     log_reverse_dns_lookups = True  # if we do reverse dns lookups for logging hostnames
                                     # instead of just IPs
