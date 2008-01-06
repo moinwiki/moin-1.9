@@ -50,6 +50,8 @@ class Settings(UserPrefBase):
         # Check if password is given and matches with password repeat
         if password != password2:
             return _("Passwords don't match!")
+        if not password:
+            return _("Please specify a password!")
 
         pw_checker = request.cfg.password_checker
         if pw_checker:
