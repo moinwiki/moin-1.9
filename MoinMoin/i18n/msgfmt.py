@@ -23,13 +23,13 @@ Options:
         Display version information and exit.
 
 Written by Martin v. Löwis <loewis@informatik.hu-berlin.de>,
-refactored by Thomas Waldmann <tw AT waldmann-edv DOT de>.
+refactored / fixed by Thomas Waldmann <tw AT waldmann-edv DOT de>.
 """
 
 import sys, os
 import getopt, struct, array
 
-__version__ = "1.2"
+__version__ = "1.3"
 
 class SyntaxErrorException(Exception):
     """raised when having trouble parsing the po file content"""
@@ -80,6 +80,7 @@ class MsgFmt(object):
             if line.startswith('msgid'):
                 if section == STR:
                     self.add(msgid, msgstr, fuzzy)
+                    fuzzy = False
                 section = ID
                 line = line[5:]
                 msgid = msgstr = ''
