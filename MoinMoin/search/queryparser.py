@@ -424,7 +424,8 @@ class TitleSearch(BaseExpression):
         return u'%s!"%s"' % (neg, unicode(self._pattern))
 
     def highlight_re(self):
-        return u"(%s)" % self._pattern
+        return u'' # do not highlight text with stuff from titlesearch,
+                   # was: return u"(%s)" % self._pattern
 
     def pageFilter(self):
         """ Page filter function for single title search """
