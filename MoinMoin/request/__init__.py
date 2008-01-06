@@ -1186,7 +1186,7 @@ class RequestBase(object):
                 if path.startswith(prefix):
                     # remove prefix and action name
                     path = path[len(prefix):]
-                    action, path = path.split('/', 1)
+                    action, path = (path.split('/', 1) + ['', ''])[:2]
                     path = '/' + path
 
             if path.startswith('/'):
