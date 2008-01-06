@@ -9,8 +9,14 @@
 # give some log entries to stderr
 debug = 0
 
-import re, sys, time, datetime
-import sets
+import re, time, datetime
+
+# needed for py 2.3 compat:
+try:
+    frozenset
+except NameError:
+    from sets import ImmutableSet as frozenset
+
 import logging
 
 from MoinMoin.security import Permissions
@@ -182,10 +188,10 @@ class SecurityPolicy(Permissions):
                     page = Page(request, editor.page_name, rev=rev)
                     oldtext = page.get_raw_body()
 
-                newset = sets.ImmutableSet(newtext.splitlines(1))
-                oldset = sets.ImmutableSet(oldtext.splitlines(1))
-                difference = newset.difference(oldset)
-                addedtext = ''.join(difference)
+                newset = frozenset(newtext.splitlines(1))
+                oldset = frozenset(oldtext.splitlines(1))
+                difference = newset - oldset
+                addedtext = kw.get('comment', u'') + u''.join(difference)
 
                 for blacklist_re in request.cfg.cache.antispam_blacklist[1]:
                     match = blacklist_re.search(addedtext)
