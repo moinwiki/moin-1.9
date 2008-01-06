@@ -1117,7 +1117,7 @@ class RequestBase(object):
         # parse request data
         try:
             if self.cfg.log_timing:
-                self.timing_log(True, action)
+                self.timing_log(True, action_name)
 
             # The last component in path_info is the page name, if any
             path = self.getPathinfo()
@@ -1219,7 +1219,7 @@ class RequestBase(object):
             self.finish()
 
         if self.cfg.log_timing:
-            self.timing_log(False, action)
+            self.timing_log(False, action_name)
 
         return self.finish()
 
