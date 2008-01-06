@@ -369,6 +369,8 @@ class ThemeBase:
         else:
             page = Page(request, pagename)
 
+        pagename = page.page_name # can be different, due to i18n
+
         if not title:
             title = page.split_title()
             title = self.shortenPagename(title)
