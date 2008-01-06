@@ -569,6 +569,9 @@ reStructuredText Quick Reference
     }
     surge_lockout_time = 3600 # secs you get locked out when you ignore warnings
 
+    textchas = None
+    textchas_disabled_group = None # e.g. u'NoTextChasGroup' if you are a member of this group, you don't get textchas
+
     theme_default = 'modern'
     theme_force = False
 

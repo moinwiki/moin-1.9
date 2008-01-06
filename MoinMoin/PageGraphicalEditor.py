@@ -288,6 +288,9 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 <input type="hidden" name="editor" value="gui">
 ''' % (button_spellcheck, cancel_button_text, ))
 
+        from MoinMoin.security.textcha import TextCha
+        request.write(TextCha(request).render())
+
         self.sendconfirmleaving() # TODO update state of flgChange to make this work, see PageEditor
 
         # Add textarea with page text

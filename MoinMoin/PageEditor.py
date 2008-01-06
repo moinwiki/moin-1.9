@@ -399,6 +399,9 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 <input type="hidden" name="editor" value="text">
 ''' % (button_spellcheck, cancel_button_text, ))
 
+        from MoinMoin.security.textcha import TextCha
+        request.write(TextCha(request).render())
+
         # Add textarea with page text
         self.sendconfirmleaving()
 
