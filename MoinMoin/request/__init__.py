@@ -805,15 +805,13 @@ class RequestBase(object):
                 indicator += '!1!'
             total = self.clock.value('total')
             # use + for existing pages, - for non-existing pages
-            indicator += self.page.exists() and '+' or '-'
+            if self.page is not None:
+                indicator += self.page.exists() and '+' or '-'
             if self.isSpiderAgent:
                 indicator += "B"
 
-        # Add time stamp and process ID
         pid = os.getpid()
-        t = time.time()
-        timestr = time.strftime("%Y%m%d %H%M%S", time.gmtime(t))
-        msg = '%s %5d %-6s %4s %-10s %s\n' % (timestr, pid, total, indicator, action, self.url)
+        msg = 'Timing %5d %-6s %4s %-10s %s\n' % (pid, total, indicator, action, self.url)
         self.log(msg)
 
     def write(self, *data):
@@ -1106,19 +1104,21 @@ class RequestBase(object):
         self.initTheme()
 
         action_name = self.action
+        if self.cfg.log_timing:
+            self.timing_log(True, action_name)
+
         if action_name == 'xmlrpc':
             from MoinMoin import xmlrpc
             if self.query_string == 'action=xmlrpc':
                 xmlrpc.xmlrpc(self)
             elif self.query_string == 'action=xmlrpc2':
                 xmlrpc.xmlrpc2(self)
+            if self.cfg.log_timing:
+                self.timing_log(False, action_name)
             return self.finish()
 
         # parse request data
         try:
-            if self.cfg.log_timing:
-                self.timing_log(True, action_name)
-
             # The last component in path_info is the page name, if any
             path = self.getPathinfo()
 
