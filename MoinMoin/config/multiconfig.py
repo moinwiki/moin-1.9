@@ -11,6 +11,7 @@ import re
 import os
 import sys
 import time
+import logging
 
 from MoinMoin import config, error, util, wikiutil
 import MoinMoin.auth as authmodule
@@ -372,12 +373,6 @@ reStructuredText Quick Reference
                                     # instead of just IPs
     log_timing = False              # update <data_dir>/timing.log?
 
-    xapian_search = False
-    xapian_index_dir = None
-    xapian_stemming = True
-    xapian_index_history = False
-    search_results_per_page = 10
-
     mail_login = None # or "user pwd" if you need to use SMTP AUTH
     mail_sendmail = None # "/usr/sbin/sendmail -t -i" to not use SMTP, but sendmail
     mail_smarthost = None
@@ -701,6 +696,12 @@ reStructuredText Quick Reference
     unzip_attachments_space = 200.0 * 1000 ** 2
     unzip_attachments_count = 101 # 1 zip file + 100 files contained in it
 
+    xapian_search = False
+    xapian_index_dir = None
+    xapian_stemming = True
+    xapian_index_history = False
+    search_results_per_page = 10
+
     SecurityPolicy = None
 
     def __init__(self, siteid):
@@ -775,6 +776,14 @@ reStructuredText Quick Reference
         # e.g u'%(page_front_page)s' % self
         self.navi_bar = [elem % self for elem in self.navi_bar]
         self.backup_exclude = [elem % self for elem in self.backup_exclude]
+
+        # check if python-xapian is installed
+        if self.xapian_search:
+            try:
+                import xapian
+            except ImportError, err:
+                self.xapian_search = False
+                logging.error("xapian_search was auto-disabled because python-xapian is not installed [%s]." % str(err))
 
         # list to cache xapian searcher objects
         self.xapian_searchers = []
