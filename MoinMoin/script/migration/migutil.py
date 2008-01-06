@@ -2,7 +2,7 @@
 """
     MoinMoin - utility functions used by the migration scripts
 
-    @copyright: 2005 MoinMoin:ThomasWaldmann
+    @copyright: 2005,2007 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 import os, sys, shutil
@@ -35,9 +35,9 @@ def backup(src, dst):
         fatalError("can't find '%s'. You must run this script from the directory where '%s' is located." % src)
 
     try:
-        os.rename(src, dst)
-    except OSError:
-        fatalError("can't rename '%s' to '%s'" % (src, dst))
+        shutil.move(src, dst)
+    except:
+        fatalError("can't move '%s' to '%s'" % (src, dst))
 
     try:
         os.mkdir(src)
@@ -66,18 +66,15 @@ def copy_dir(dir_from, dir_to):
     print "%s/ -> %s/" % (dir_from, dir_to)
     try:
         shutil.copytree(dir_from, dir_to)
-    except:
-        error("can't copy '%s' to '%s'" % (dir_from, dir_to))
+    except Exception, err:
+        error("can't copy '%s' to '%s' (%s)" % (dir_from, dir_to, str(err)))
 
 
 def copy_file(fname_from, fname_to):
     """ Copy a single file """
     print "%s -> %s" % (fname_from, fname_to)
     try:
-        data = open(fname_from).read()
-        open(fname_to, "w").write(data)
-        st = os.stat(fname_from)
-        os.utime(fname_to, (st.st_atime, st.st_mtime))
+        shutil.copy2(fname_from, fname_to) # copies file data, mode, atime, mtime
     except:
         error("can't copy '%s' to '%s'" % (fname_from, fname_to))
 
@@ -86,7 +83,7 @@ def move_file(fname_from, fname_to):
     """ Move a single file """
     print "%s -> %s" % (fname_from, fname_to)
     try:
-        os.rename(fname_from, fname_to)
+        shutil.move(fname_from, fname_to) # moves file (even to different filesystem, including mode and atime/mtime)
     except:
         error("can't move '%s' to '%s'" % (fname_from, fname_to))
 

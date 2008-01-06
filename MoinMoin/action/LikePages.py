@@ -232,9 +232,9 @@ def _showMatchGroup(request, matches, keys, match, title, show_count=True):
         for key in keys:
             if matches[key] == match:
                 request.write(request.formatter.listitem(1))
-                request.write(request.formatter.pagelink(1, key))
+                request.write(request.formatter.pagelink(1, key, generated=True))
                 request.write(request.formatter.text(key))
-                request.write(request.formatter.pagelink(0, key))
+                request.write(request.formatter.pagelink(0, key, generated=True))
                 request.write(request.formatter.listitem(0))
         request.write(request.formatter.bullet_list(0))
 

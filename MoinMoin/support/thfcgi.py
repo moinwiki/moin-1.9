@@ -11,7 +11,9 @@
 
     Cleanup, fixed typos, PEP-8, support for limiting creation of threads,
     limited number of requests lifetime, configurable backlog for socket
-    .listen() by Thomas Waldmann <tw AT waldmann-edv DOT de>
+    .listen() by MoinMoin:ThomasWaldmann.
+
+    2007 Support for Python's logging module by MoinMoin:ThomasWaldmann.
 
     For code base see:
     http://cvs.lysator.liu.se/viewcvs/viewcvs.cgi/webkom/thfcgi.py?cvsroot=webkom
@@ -33,7 +35,8 @@
 # TODO: Compare compare the number of bytes received on FCGI_STDIN with
 #       CONTENT_LENGTH and abort the update if the two numbers are not equal.
 
-debug = False
+import logging
+LOGLEVEL = logging.DEBUG # logging.NOTSET to completely switch it off
 
 import os
 import sys
@@ -96,12 +99,9 @@ FCGI_Record_header = "!BBHHBx"
 FCGI_UnknownTypeBody = "!B7x"
 FCGI_EndRequestBody = "!IB3x"
 
-LOGFILE = sys.stderr
 
 def log(s):
-    if debug:
-        LOGFILE.write(s)
-        LOGFILE.write('\n')
+    logging.log(LOGLEVEL, 'thfcgi: %s' % s)
 
 class SocketErrorOnWrite:
     """Is raised if a write fails in the socket code."""
@@ -584,11 +584,13 @@ class FCGI:
     def run(self):
         """Wait & serve. Calls request_handler on every request."""
         self.sock.listen(self.backlog)
-        log("Starting Process")
+        pid = os.getpid()
+        log("Starting Process (PID=%d)" % pid)
         running = True
         while running:
             if not self.requests_left:
                 # self.sock.shutdown(RDWR) here does NOT help with backlog
+                log("Maximum number of processed requests reached, terminating this worker process (PID=%d)..." % pid)
                 running = False
             elif self.requests_left > 0:
                 self.requests_left -= 1
@@ -596,13 +598,12 @@ class FCGI:
                 conn, addr = self.sock.accept()
                 threadcount = _threading.activeCount()
                 if threadcount < self.max_threads:
-                    log("Accepted connection, starting thread...")
+                    log("Accepted connection, %d active threads, starting worker thread..." % threadcount)
                     t = _threading.Thread(target=self.accept_handler, args=(conn, addr, True))
                     t.start()
                 else:
-                    log("Accepted connection, running in main-thread...")
+                    log("Accepted connection, %d active threads, running in main thread..." % threadcount)
                     self.accept_handler(conn, addr, False)
-                log("Active Threads: %d" % _threading.activeCount())
         self.sock.close()
-        log("Ending Process")
+        log("Ending Process (PID=%d)" % pid)
 

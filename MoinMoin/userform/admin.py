@@ -7,7 +7,7 @@
                 2007 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
-from MoinMoin import user, wikidicts
+from MoinMoin import user, wikidicts, wikiutil
 from MoinMoin.util.dataset import TupleDataset, Column
 from MoinMoin.Page import Page
 
@@ -18,7 +18,6 @@ def do_user_browser(request):
 
     data = TupleDataset()
     data.columns = [
-        #Column('id', label=('ID'), align='right'),
         Column('name', label=_('Username')),
         Column('acl groups', label=_('ACL Groups')),
         Column('email', label=_('Email')),
@@ -44,29 +43,46 @@ def do_user_browser(request):
         if userhomepage.exists():
             namelink = userhomepage.link_to(request)
         else:
-            namelink = account.name
+            namelink = wikiutil.escape(account.name)
+
+        if account.disabled:
+            enable_disable_link = request.page.link_to(
+                                    request, text=_('Enable user'),
+                                    querystr={"action":"userprofile",
+                                              "name": account.name,
+                                              "key": "disabled",
+                                              "val": "0",
+                                             },
+                                    rel='nofollow')
+            namelink += " (%s)" % _("disabled")
+        else:
+            enable_disable_link = request.page.link_to(
+                                    request, text=_('Disable user'),
+                                    querystr={"action":"userprofile",
+                                              "name": account.name,
+                                              "key": "disabled",
+                                              "val": "1",
+                                             },
+                                    rel='nofollow')
+
+        mail_link = request.page.link_to(
+                        request, text=_('Mail account data'),
+                        querystr={"action": "recoverpass",
+                                  "email": account.email,
+                                  "account_sendmail": "1",
+                                  "sysadm": "users", },
+                        rel='nofollow')
 
         data.addRow((
-            #request.formatter.code(1) + uid + request.formatter.code(0),
-            # 0
             request.formatter.rawHTML(namelink),
-            # 1
             request.formatter.rawHTML(list_groups),
-            # 2
             (request.formatter.url(1, 'mailto:' + account.email, css='mailto', do_escape=0) +
              request.formatter.text(account.email) +
              request.formatter.url(0)),
-            # 3
             (request.formatter.url(1, 'xmpp:' + account.jid, css='mailto', do_escape=0) +
              request.formatter.text(account.jid) +
              request.formatter.url(0)),
-            # 4
-            (request.page.link_to(request, text=_('Mail account data'),
-                                 querystr={"action": "recoverpass",
-                                           "email": account.email,
-                                           "account_sendmail": "1",
-                                           "sysadm": "users", },
-                                 rel='nofollow'))
+            mail_link + " - " + enable_disable_link
         ))
 
     if data:

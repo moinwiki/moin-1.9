@@ -7,7 +7,8 @@
 
     TODO: should be refactored after hitcounts.
 
-    @copyright: 2002-2004 Juergen Hermann <jh@web.de>
+    @copyright: 2002-2004 Juergen Hermann <jh@web.de>,
+                2007 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -45,11 +46,11 @@ def linkto(pagename, request, params=''):
 
 def get_data(request):
     # get results from cache
-    cache = caching.CacheEntry(request, 'charts', 'useragents', scope='wiki')
+    cache = caching.CacheEntry(request, 'charts', 'useragents', scope='wiki', use_pickle=True)
     cache_date, data = 0, {}
     if cache.exists():
         try:
-            cache_date, data = eval(cache.content())
+            cache_date, data = cache.content()
         except:
             cache.remove() # cache gone bad
 
@@ -75,7 +76,7 @@ def get_data(request):
                 data[ua] = data.get(ua, 0) + 1
 
         # write results to cache
-        cache.update("(%r, %r)" % (new_date, data))
+        cache.update((new_date, data))
 
     data = [(cnt, ua) for ua, cnt in data.items()]
     data.sort()

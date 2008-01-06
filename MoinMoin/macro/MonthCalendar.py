@@ -248,6 +248,13 @@ def execute(macro, text):
     else:
         year, month = yearmonthplusoffset(parmyear, parmmonth, parmoffset)
 
+    if request.isSpiderAgent and abs(currentyear - year) > 1:
+        return '' # this is a bot and it didn't follow the rules (see below)
+    if currentyear == year:
+        attrs = {}
+    else:
+        attrs = {'rel': 'nofollow' } # otherwise even well-behaved bots will index forever
+
     # get the calendar
     monthcal = calendar.monthcalendar(year, month)
 
@@ -270,10 +277,11 @@ def execute(macro, text):
     nextlink = p.url(request, querystr % (qpagenames, parmoffset2 + 1, qtemplate), relative=False)
     prevylink = p.url(request, querystr % (qpagenames, parmoffset2 - 12, qtemplate), relative=False)
     nextylink = p.url(request, querystr % (qpagenames, parmoffset2 + 12, qtemplate), relative=False)
-    prevmonth = formatter.url(1, prevlink, 'cal-link') + '&lt;' + formatter.url(0)
-    nextmonth = formatter.url(1, nextlink, 'cal-link') + '&gt;' + formatter.url(0)
-    prevyear = formatter.url(1, prevylink, 'cal-link') + '&lt;&lt;' + formatter.url(0)
-    nextyear = formatter.url(1, nextylink, 'cal-link') + '&gt;&gt;' + formatter.url(0)
+
+    prevmonth = formatter.url(1, prevlink, 'cal-link', **attrs) + '&lt;' + formatter.url(0)
+    nextmonth = formatter.url(1, nextlink, 'cal-link', **attrs) + '&gt;' + formatter.url(0)
+    prevyear = formatter.url(1, prevylink, 'cal-link', **attrs) + '&lt;&lt;' + formatter.url(0)
+    nextyear = formatter.url(1, nextylink, 'cal-link', **attrs) + '&gt;&gt;' + formatter.url(0)
 
     if parmpagename != [thispage]:
         pagelinks = ''
@@ -289,6 +297,7 @@ def execute(macro, text):
             ch = parmpagename[0][st:st+chstep]
             r, g, b = cliprgb(r, g, b)
             link = Page(request, parmpagename[0]).link_to(request, ch,
+                        rel='nofollow',
                         style='background-color:#%02x%02x%02x;color:#000000;text-decoration:none' % (r, g, b))
             pagelinks = pagelinks + link
             r, g, b = (r, g+colorstep, b)
@@ -296,6 +305,7 @@ def execute(macro, text):
         r, g, b = (255-colorstep, 255, 255-colorstep)
         for page in parmpagename[1:]:
             link = Page(request, page).link_to(request, page,
+                        rel='nofollow',
                         style='background-color:#%02x%02x%02x;color:#000000;text-decoration:none' % (r, g, b))
             pagelinks = pagelinks + '*' + link
         showpagename = '   %s<BR>\n' % pagelinks
@@ -359,8 +369,8 @@ def execute(macro, text):
                     tiptitle = link
                     tiptext = '<br>'.join(titletext)
                     maketip_js.append("maketip('%s','%s','%s');" % (tipname, tiptitle, tiptext))
-                    onmouse = {'onMouseOver': "tip('%s')" % tipname,
-                               'onMouseOut': "untip()"}
+                    attrs = {'onMouseOver': "tip('%s')" % tipname,
+                             'onMouseOut': "untip()"}
                 else:
                     csslink = "cal-emptyday"
                     if parmtemplate:
@@ -370,7 +380,7 @@ def execute(macro, text):
                     r, g, b, u = (255, 255, 255, 0)
                     if wkday in wkend:
                         csslink = "cal-weekend"
-                    onmouse = {}
+                    attrs = {'rel': 'nofollow'}
                 for otherpage in parmpagename[1:]:
                     otherlink = "%s/%4d-%02d-%02d" % (otherpage, year, month, day)
                     otherdaypage = Page(request, otherlink)
@@ -382,7 +392,7 @@ def execute(macro, text):
                             r, g, b = (r, g+colorstep, b)
                 r, g, b = cliprgb(r, g, b)
                 style = 'background-color:#%02x%02x%02x' % (r, g, b)
-                fmtlink = formatter.url(1, daypage.url(request, query, relative=False), csslink, **onmouse) + str(day) + formatter.url(0)
+                fmtlink = formatter.url(1, daypage.url(request, query, relative=False), csslink, **attrs) + str(day) + formatter.url(0)
                 if day == currentday and month == currentmonth and year == currentyear:
                     cssday = "cal-today"
                     fmtlink = "<b>%s</b>" % fmtlink # for browser with CSS probs

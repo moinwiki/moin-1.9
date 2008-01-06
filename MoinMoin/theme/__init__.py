@@ -223,7 +223,7 @@ class ThemeBase:
         """
         _ = self.request.getText
         content = []
-        if d['title_text'] == d['page_name']: # just showing a page, no action
+        if d['title_text'] == d['page'].split_title(): # just showing a page, no action
             curpage = ''
             segments = d['page_name'].split('/') # was: title_text
             for s in segments[:-1]:
@@ -368,6 +368,8 @@ class ThemeBase:
             page = wikiutil.getLocalizedPage(request, pagename)
         else:
             page = Page(request, pagename)
+
+        pagename = page.page_name # can be different, due to i18n
 
         if not title:
             title = page.split_title()
@@ -539,16 +541,18 @@ class ThemeBase:
         @rtype: string
         @return: html link tag
         """
+        qs = {}
         querystr, title, icon = self.cfg.page_icons_table[which]
+        qs.update(querystr) # do not modify the querystr dict in the cfg!
         d['title'] = title % d
         d['i18ntitle'] = self.request.getText(d['title'], formatted=False)
         img_src = self.make_icon(icon, d)
         rev = d['rev']
         if rev and which in ['raw', 'print', ]:
-            querystr['rev'] = str(rev)
+            qs['rev'] = str(rev)
         attrs = {'rel': 'nofollow', 'title': d['i18ntitle'], }
         page = d['page']
-        return page.link_to_raw(self.request, text=img_src, querystr=querystr, **attrs)
+        return page.link_to_raw(self.request, text=img_src, querystr=qs, **attrs)
 
     def msg(self, d):
         """ Assemble the msg display
@@ -1113,8 +1117,12 @@ actionsMenuInit('%(label)s');
         """ Return whether the gui editor / converter can work for that page.
 
             The GUI editor currently only works for wiki format.
+            For simplicity, we also tell it does not work if the admin forces the text editor.
         """
-        return page.pi['format'] == 'wiki'
+        is_wiki = page.pi['format'] == 'wiki'
+        gui_disallowed = self.cfg.editor_force and self.cfg.editor_default == 'text'
+        return is_wiki and not gui_disallowed
+
 
     def editorLink(self, page):
         """ Return a link to the editor
