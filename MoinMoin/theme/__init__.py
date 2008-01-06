@@ -1117,8 +1117,12 @@ actionsMenuInit('%(label)s');
         """ Return whether the gui editor / converter can work for that page.
 
             The GUI editor currently only works for wiki format.
+            For simplicity, we also tell it does not work if the admin forces the text editor.
         """
-        return page.pi['format'] == 'wiki'
+        is_wiki = page.pi['format'] == 'wiki'
+        gui_disallowed = self.cfg.editor_force and self.cfg.editor_default == 'text'
+        return is_wiki and not gui_disallowed
+
 
     def editorLink(self, page):
         """ Return a link to the editor
