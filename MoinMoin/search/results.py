@@ -760,7 +760,9 @@ class SearchResults:
         if querydict is None:
             querydict = {}
         if 'action' not in querydict or querydict['action'] == 'AttachFile':
-            querydict.update({'highlight': self.query.highlight_re()})
+            highlight = self.query.highlight_re()
+            if highlight:
+                querydict.update({'highlight': highlight})
         querystr = wikiutil.makeQueryString(querydict)
         return querystr
 

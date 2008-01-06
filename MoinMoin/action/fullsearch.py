@@ -198,7 +198,12 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
         page = results.hits[0]
         if not page.attachment: # we did not find an attachment
             page = Page(request, page.page_name)
-            url = page.url(request, querystr={'highlight': query.highlight_re()}, relative=False)
+            highlight = query.highlight_re()
+            if highlight:
+                querydict = {'highlight': highlight}
+            else:
+                querydict = {}
+            url = page.url(request, querystr=querydict, relative=False)
             request.http_redirect(url)
             return
     elif not results.hits: # no hits?
