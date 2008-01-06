@@ -1270,6 +1270,8 @@ class RequestBase(object):
 
         except MoinMoinFinish:
             pass
+        except SystemExit:
+            raise # fcgi uses this to terminate a thread
         except Exception, err:
             self.fail(err)
             self.finish()
