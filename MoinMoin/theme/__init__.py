@@ -223,7 +223,7 @@ class ThemeBase:
         """
         _ = self.request.getText
         content = []
-        if d['title_text'] == d['page_name']: # just showing a page, no action
+        if d['title_text'] == d['page'].split_title(): # just showing a page, no action
             curpage = ''
             segments = d['page_name'].split('/') # was: title_text
             for s in segments[:-1]:
