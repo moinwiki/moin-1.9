@@ -53,8 +53,15 @@ def markup_converter(request, pagename, text, renames):
     """ Convert the <text> content of page <pagename>, using <renames> dict
         to rename links correctly. Additionally, convert some changed markup.
     """
-    if "#format wiki" not in text and "#format" in text:
-        return text # this is not a wiki page, leave it as is
+    if text.startswith('<?xml'):
+        # would be done with xslt processor
+        return text
+
+    pis, body = wikiutil.get_processing_instructions(text)
+    for pi, val in pis:
+        if pi == 'format' and val != 'wiki':
+            # not wiki page
+            return text
 
     text = convert_wiki(request, pagename, text, renames)
     return text
@@ -141,6 +148,7 @@ class EditLog:
             editlog = self.data.items()
             editlog.sort()
             f = file(fname, "w")
+            max_rev = 0
             for key, fields in editlog:
                 timestamp, rev, action, pagename, ip, hostname, userid, extra, comment = fields
                 if action.startswith('ATT'):
@@ -154,6 +162,8 @@ class EditLog:
                 if ('PAGE', pagename) in self.renames:
                     pagename = self.renames[('PAGE', pagename)]
                 timestamp = str(timestamp)
+                if rev != 99999999:
+                    max_rev = max(rev, max_rev)
                 revstr = '%08d' % rev
                 pagename = wikiutil.quoteWikinameFS(pagename)
                 fields = timestamp, revstr, action, pagename, ip, hostname, userid, extra, comment
@@ -161,7 +171,7 @@ class EditLog:
                 f.write(log_str)
             if create_rev and not deleted:
                 timestamp = str(wikiutil.timestamp2version(time.time()))
-                revstr = '%08d' % (rev + 1)
+                revstr = '%08d' % (max_rev + 1)
                 action = 'SAVE'
                 ip = '127.0.0.1'
                 hostname = 'localhost'
@@ -249,7 +259,11 @@ class Page:
             current_file = file(current_fname, "r")
             current_rev = current_file.read()
             current_file.close()
-            self.current = int(current_rev)
+            try:
+                self.current = int(current_rev)
+            except ValueError:
+                print "Error: invalid current file %s, SKIPPING THIS PAGE!" % current_fname
+                return
         # read edit-log
         editlog_fname = opj(page_dir, 'edit-log')
         if os.path.exists(editlog_fname):
@@ -353,7 +367,11 @@ class User:
             line = line.replace(u'\r', '').replace(u'\n', '')
             if not line.strip() or line.startswith(u'#'): # skip empty or comment lines
                 continue
-            key, value = line.split(u'=', 1)
+            try:
+                key, value = line.split(u'=', 1)
+            except Exception, err:
+                print "Error: User reader can not parse line %r from profile %r (%s)" % (line, fname, str(err))
+                continue
             self.profile[key] = value
         f.close()
         # read bookmarks
