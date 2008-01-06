@@ -8,7 +8,10 @@
 
 import logging, time, Queue
 from threading import Thread
+from datetime import timedelta
 
+from pyxmpp.cache import Cache
+from pyxmpp.cache import CacheItem
 from pyxmpp.client import Client
 from pyxmpp.jid import JID
 from pyxmpp.streamtls import TLSSettings
@@ -213,6 +216,16 @@ class XMPPBot(Client, Thread):
                               cmd.GetUserLanguage: self._handle_get_language,
                               cmd.Search: self._handle_search}
 
+        # cache for service discovery results ( (ver, algo) : Capabilities = libxml2.xmlNode)
+        self.disco_cache = Cache(max_items=config.disco_cache_size, default_purge_period=0)
+
+        # dictionary of jids waiting for service discovery results
+        # ( (ver, algo) : (timeout=datetime.timedelta, [list_of_jids=pyxmpp.jid]) )
+        self.disco_wait = {}
+
+        # temporary dictionary ( pyxmpp.jid:  (ver, algo) )
+        self.disco_temp = {}
+
     def run(self):
         """Start the bot - enter the event loop"""
 
@@ -251,12 +264,15 @@ class XMPPBot(Client, Thread):
             self.expire_contacts(current_time)
             self.last_expiration = current_time
 
+        self.disco_cache.tick()
+        self.check_disco_delays()
+
     def session_started(self):
         """Handle session started event.
-	Requests the user's roster and sends the initial presence with
+        Requests the user's roster and sends the initial presence with
         a <c> child as described in XEP-0115 (Entity Capabilities)
 
-	"""
+        """
         self.request_roster()
         pres = capat.create_presence(self.jid)
         self.stream.set_iq_get_handler("query", "http://jabber.org/protocol/disco#info", self.handle_disco_query)
@@ -1191,6 +1207,10 @@ The call should look like:\n\n%(command)s %(params)s")
             if self.config.verbose:
                 self.log.debug("%s, going OFFLINE." % contact)
 
+            # check if we are waiting for disco#info from this jid
+            self.check_if_waiting(jid)
+            del self.disco_temp[jid]
+
             try:
                 # Send queued messages now, as we can't guarantee to be
                 # alive the next time this contact becomes available.
@@ -1242,7 +1262,7 @@ The call should look like:\n\n%(command)s %(params)s")
                 contact.add_resource(jid.resource, show, priority)
 
                 # Discover capabilities of the newly connected client
-                self.service_discovery(jid)
+                self.service_discovery(jid, presence)
 
             if self.config.verbose:
                 self.log.debug(contact)
@@ -1253,7 +1273,7 @@ The call should look like:\n\n%(command)s %(params)s")
 
         else:
             self.contacts[bare_jid] = Contact(jid, jid.resource, priority, show)
-            self.service_discovery(jid)
+            self.service_discovery(jid, presence)
             self.get_user_language(bare_jid)
             self.log.debug(self.contacts[bare_jid])
 
@@ -1272,46 +1292,197 @@ The call should look like:\n\n%(command)s %(params)s")
     def handle_disco_query(self, stanza):
         """Handler for <Iq /> service discovery query
 
-	@param stanza: received query stanza
-	"""
-        response = capat.get_response(stanza)
+        @param stanza: received query stanza (pyxmpp.iq.Iq)
+        """
+        response = capat.create_response(stanza)
         self.get_stream().send(response)
 
-    def service_discovery(self, jid):
-        """Ask a client about supported features
+    def service_discovery(self, jid, presence):
+        """General handler for XEP-0115 (Entity Capabilities)
 
-        This is not the recommended way of discovering support
-        for data forms, but it's easy to implement, so it'll be
-        like that for now. The proper way to do this is described
-        in XEP-0115 (Entity Capabilities)
+        @param jid: whose capabilities to discover (pyxmpp.jid.JID)
+        @param presence: received presence stanza (pyxmpp.presence.Presence)
+        """
+        ver_algo = self.check_presence(presence)
+        self.disco_temp[jid] = ver_algo
 
-        @param jid: FULL (user@host/resource) jabber id to query
-        @type jid: unicode
+        if ver_algo is None:
+            # legacy client - send disco#info query
+            send_disco_query(jid)
+        else:
+            # check if we have this (ver,algo) already cached
+            cache_item = self.disco_cache.get_item(ver_algo, state='stale')
 
+            if cache_item is None:
+                # add to disco_wait
+                self.add_to_disco_wait(ver_algo, jid)
+            else:
+                # use cached capabilities
+                self.log.debug(u"%s: using cached capabilities." % jid.as_unicode())
+                payload = cache_item.value
+                self.set_support(jid, payload)
+
+    def check_presence(self, presence):
+        """Search received presence for a <c> child with 'ver' and 'algo' attributes
+        return (ver, algo) or None if no 'ver' found.
+        (no 'algo' attribute defaults to 'sha-1', as described in XEP-0115)
+
+        @param presence: received presence stanza (pyxmpp.presence.Presence)
+        @return type: tuple of (str, str) or None
+        """
+        # TODO: <c> could be found directly using more appropriate xpath
+        tags = presence.xpath_eval('child::*')
+        for tag in tags:
+            if tag.name == 'c':
+                ver = tag.xpathEval('@ver')
+                algo = tag.xpathEval('@algo')
+                if ver:
+                    if algo:
+                        ver_algo = (ver[0].children.content, algo[0].children.content)
+                    else:
+                        # no algo attribute defaults to 'sha-1'
+                        ver_algo = (ver[0].children.content, 'sha-1')
+
+                    return ver_algo
+                else:
+                    self.log.debug(u"%s: presence with <c> but without 'ver' attribute." % jid.as_unicode())
+                    return None
+                break
+        else:
+            self.log.debug(u"%s: presence without a <c> tag." % jid.as_unicode())
+            return None
+
+    def send_disco_query(self, jid):
+        """Sends disco#info query to a given jid
+
+        @type jid: pyxmpp.jid.JID
         """
         query = Iq(to_jid=jid, stanza_type="get")
         query.new_query("http://jabber.org/protocol/disco#info")
         self.get_stream().set_response_handlers(query, self.handle_disco_result, None)
         self.get_stream().send(query)
 
+    def add_to_disco_wait(self, ver_algo, jid):
+        """Adds given jid to the list of contacts waiting for service
+        discovery results.
+
+        @param ver_algo: 'ver' and 'algo' attributes of the given jid
+        @type ver_algo: tuple of (str, str)
+        @type jid: pyxmpp.jid.JID
+        """
+        if ver_algo in self.disco_wait:
+            # query already sent, add to the end of waiting list
+            self.disco_wait[ver_algo][1].append(jid)
+        else:
+            # send a query and create a new entry
+            self.send_disco_query(jid)
+            timeout = time.time() + self.config.disco_answering_timeout
+            self.disco_wait[ver_algo] = (timeout, [jid])
+
     def handle_disco_result(self, stanza):
         """Handler for <iq> service discovery results
+        check if contact is still available and if 'ver' matches the capabilities' hash
 
-        Works with elements qualified by http://jabber.org/protocol/disco#info ns
-
-        @param stanza: a received result stanza
+        @param stanza: a received result stanza (pyxmpp.iq.Iq)
         """
+        jid = stanza.get_from_jid()
+        bare_jid = jid.bare().as_unicode()
         payload = stanza.get_query()
+
+        if bare_jid in self.contacts:
+            ver_algo = self.disco_temp[jid]
+
+            if ver_algo is not None:
+                ver, algo = ver_algo
+                payload_hash = capat.hash_iq(stanza, algo)
+
+                if payload_hash == ver:
+                    # we can trust this 'ver' string
+                    self.disco_result_right(ver_algo, payload)
+                else:
+                    self.log.debug(u"%s: 'ver' and hash do not match! (legacy client?)" % jid.as_unicode())
+                    self.disco_result_wrong(ver_algo)
+
+            self.set_support(jid, payload)
+
+        else:
+            self.log.debug(u"%s is unavailable but sends service discovery response." % jid.as_unicode())
+            # such situation is handled by check_if_waiting
+
+    def disco_result_right(self, ver_algo, payload):
+        """We received a correct service discovery response so we can safely cache it
+        for future use and apply to every waiting contact from the list (first one is already done)
+
+        @param ver_algo: 'ver' and 'algo' attributes matching received capabilities
+        @param payload: received capabilities
+        @type ver_algo: tuple of (str, str)
+        @type payload: libxml2.xmlNode
+        """
+        delta = timedelta(0)
+        cache_item = CacheItem(ver_algo, payload, delta, delta, delta)
+        self.disco_cache.add_item(cache_item)
+
+        timeout, jid_list = self.disco_wait[ver_algo]
+        for jid in jid_list[1:]:
+            if jid.bare().as_unicode() in self.contacts:
+                self.set_support(jid, payload)
+        del self.disco_wait[ver_algo]
+
+    def disco_result_wrong(self, ver_algo):
+        """First jid from the list returned wrong response
+        if it is possible try to ask the second one
+
+        @param ver_algo: 'ver' and 'algo' attributes for which we received an inappropriate response
+        @type ver_algo: tuple of (str, str)
+        """
+        timeout, jid_list = self.disco_wait[ver_algo]
+        jid_list = jid_list[1:]
+        if jid_list:
+            self.send_disco_query(jid_list[0])
+            timeout = time.time() + self.config.disco_answering_timeout
+            self.disco_wait[ver_algo] = (timeout, jid_list)
+        else:
+            del self.disco_wait[ver_algo]
+
+    def check_disco_delays(self):
+        """Called when idle to check if some contacts haven't answered in allowed time"""
+        for item in self.disco_wait:
+            timeout, jid_list = self.disco_wait[item]
+            if timeout < time.time():
+                self.disco_result_wrong(item)
+
+    def check_if_waiting(self, jid):
+        """Check if we were waiting for disco#info reply from client that
+        has just become unavailable. If so, ask next candidate.
+
+        @param jid: jid that has just gone unavailable
+        @type jid: pyxmpp.jid.JID
+        """
+        ver_algo = self.disco_temp[jid]
+        if ver_algo in self.disco_wait:
+            timeout, jid_list = self.disco_wait[ver_algo]
+            if jid_list:
+                if jid == jid_list[0]:
+                    self.disco_result_wrong(ver_algo)
+            else:
+                # this should never happen
+                self.log.debug(u"disco_wait: keeping empty entry at (%s, %s) !" % ver_algo)
+
+    def set_support(self, jid, payload):
+        """Searches service discovery results for support for
+        Out Of Band Data (XEP-066) and Data Forms (XEP-004)
+        and applies it to newly created Contact.
+
+        @param jid: client's jabber ID (pyxmpp.jid.JID)
+        @param payload: client's capabilities (libxml2.xmlNode)
+        """
+        supports = payload.xpathEval('//*[@var="jabber:x:oob"]')
+        if supports:
+            self.contacts[jid.bare().as_unicode()].set_supports(jid.resource, u"jabber:x:oob")
 
         supports = payload.xpathEval('//*[@var="jabber:x:data"]')
         if supports:
-            jid = stanza.get_from_jid()
             self.contacts[jid.bare().as_unicode()].set_supports(jid.resource, u"jabber:x:data")
-
-        supports = payload.xpathEval('//*[@var="jabber:x:oob"]')
-        if supports:
-            jid = stanza.get_from_jid()
-            self.contacts[jid.bare().as_unicode()].set_supports(jid.resource, u"jabber:x:oob")
 
     def send_queued_messages(self, contact, ignore_dnd=False):
         """Sends messages queued for the contact

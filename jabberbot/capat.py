@@ -3,11 +3,12 @@
 """
     MoinMoin - Entity Capabilities (XEP-0115) implementation
 
-    Enables Jabber/XMPP clients to save bandwidth by caching 
-    information about extensions supported by various client 
+    Enables Jabber/XMPP clients to save bandwidth by caching
+    information about extensions supported by various client
     implementations.
 
     @copyright: 2007 by Robert Lehmann <lehmannro@gmail.com>
+                2008 by Bolesław Kulbabiński <bolekk@gmail.com>
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -32,7 +33,7 @@ def generate_ver(identities, features, algo='sha-1'):
     """Generate the 'ver' attribute according to XEP-0115.
 
     See http://www.xmpp.org/extensions/xep-0115.html#ver
-    
+
     @param identities: a number of (category, type) identity pairs
     @param algo: optional algo attribute with IANA aliasing
 
@@ -50,12 +51,12 @@ def generate_ver(identities, features, algo='sha-1'):
     # default sorting already considers both, category and type
     ident.sort()
     ident = ('%s/%s' % (idcat, idtype) for idcat, idtype in ident)
-    
+
     feat = list(features)
     # strings (byte arrays) are ordered by i;octet by default
     feat.sort()
 
-    s = '<'.join(itertools.chain(ident, feat, ('',)))
+    s = '<'.join(itertools.chain(ident, feat, ('', )))
     # the trailing empty string adds a trailing '<' to the result
     algo.update(s)
     s = base64.b64encode(algo.digest())
@@ -70,10 +71,10 @@ def hash_iq(stanza, algo='sha-1'):
     """
     stanza = iter(stanza.get_query())
     stanza.next() # drop first item: whole query
-    
+
     feat = []
     ident = []
-    
+
     # traverse all child nodes
     for item in stanza:
         if item.name == 'identity':
@@ -105,7 +106,7 @@ def create_presence(jid):
 
     return pres
 
-def get_response(disco_query):
+def create_response(disco_query):
     """ Creates an <Iq /> tag as a response to a service discovery query
 
     @param disco_query: received query

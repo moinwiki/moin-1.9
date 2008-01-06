@@ -4,13 +4,13 @@ import py.test
 from jabberbot import capat
 
 def test_ver_simple():
-    # example values supplied by the XEP 
-    ident = (("client", "pc"),)
+    # example values supplied by the XEP
+    ident = (("client", "pc"), )
     feat = ("http://jabber.org/protocol/disco#info",
             "http://jabber.org/protocol/disco#items",
             "http://jabber.org/protocol/muc",
            )
-    
+
     assert capat.generate_ver(ident, feat) == "8RovUdtOmiAjzj+xI7SK5BCw3A8="
 
 def test_ver_complex():
@@ -22,7 +22,7 @@ def test_ver_complex():
                                # thus it's greater
             )
     feat = ()
-    
+
     expected = capat.hash_new('sha1')
     expected.update("apple/foo<apples/bar<client/animal<client/bear<")
     expected = capat.base64.b64encode(expected.digest())
@@ -41,11 +41,11 @@ def test_xml():
     z.setProp('category', 'client')
     z.setProp('type', 'pc')
     y.newChild(None, 'feature', None).setProp(
-        'var','http://jabber.org/protocol/disco#info')
+        'var', 'http://jabber.org/protocol/disco#info')
     y.newChild(None, 'feature', None).setProp(
         'var', 'http://jabber.org/protocol/disco#items')
     y.newChild(None, 'feature', None).setProp(
         'var', 'http://jabber.org/protocol/muc')
-    
+
     assert capat.hash_iq(x) == "8RovUdtOmiAjzj+xI7SK5BCw3A8="
     # hash value taken from `test_ver_simple`
