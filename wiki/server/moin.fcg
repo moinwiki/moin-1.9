@@ -33,5 +33,8 @@ class Config(FastCgiConfig):
     properties = {}
     # properties = {'script_name': '/'} # use this instead of the line above if your wiki runs under "/" url
 
+    # for backlog, we use a default of 5. if the listen(backlog) call crashes for you, try a smaller value!
+    # backlog = 1
+
 run(Config)
 
