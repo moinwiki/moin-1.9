@@ -1,0 +1,33 @@
+# MoinMoin - Distutils distribution files
+#
+# Copyright (c) 2001, 2002 by Jürgen Hermann <jh@web.de>
+# All rights reserved, see COPYING for details.
+
+# additional files not known by setup.py
+include README MANIFEST.in setup.cfg moin.spec
+include moin.py wikiconfig.py
+
+# documentation and licenses
+recursive-include docs *
+
+# include stuff for translators
+recursive-include   MoinMoin/i18n *
+
+# contrib stuff
+recursive-include   contrib *
+
+# tests stuff
+recursive-include   tests *
+
+# "wiki" directory
+recursive-include   wiki *
+
+# omit CVS / arch directories
+global-exclude */CVS/*
+global-exclude */.cvsignore
+global-exclude */.arch-ids/*
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude underlay.tar.bz2
+global-exclude README.underlay
+
