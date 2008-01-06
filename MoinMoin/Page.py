@@ -1094,6 +1094,10 @@ class Page(object):
                     request.setHttpHeader('Status: 404 NOTFOUND')
                 request.emit_http_headers()
 
+            if not page_exists and self.request.isSpiderAgent:
+                # don't send any 404 content to bots
+                return
+
             request.write(self.formatter.startDocument(self.page_name))
 
             # send the page header
