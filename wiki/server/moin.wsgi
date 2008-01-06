@@ -21,7 +21,6 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-# System path configuration
 import sys
 
 # Path to MoinMoin package, needed if you installed with --prefix=PREFIX
@@ -35,5 +34,15 @@ import sys
 # YOU NEED TO CHANGE THIS TO MATCH YOUR SETUP.
 sys.path.insert(0, '/path/to/wikiconfig')
 
-from MoinMoin.server.server_wsgi import moinmoinApp as application
+import logging
+
+from MoinMoin.server.server_wsgi import WsgiConfig, moinmoinApp
+
+class Config(WsgiConfig):
+    logPath = 'moin.log' # adapt this to your needs!
+    #loglevel_file = logging.INFO # adapt this to your needs!
+
+config = Config() # MUST create an instance to init logging!
+
+application = moinmoinApp
 
