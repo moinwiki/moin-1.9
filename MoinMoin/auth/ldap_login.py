@@ -103,8 +103,11 @@ class LDAPAuth(BaseAuth):
                 l.simple_bind_s(dn, password.encode(coding))
                 if verbose: request.log("LDAP: Bound with dn %r (username: %r)" % (dn, username))
 
-                if getattr(cfg, "ldap_email_callback", None) is None:
-                    email = ldap_dict.get(cfg.ldap_email_attribute, [''])[0].decode(coding)
+                if cfg.ldap_email_callback is None:
+                    if cfg.ldap_email_attribute:
+                        email = ldap_dict.get(cfg.ldap_email_attribute, [''])[0].decode(coding)
+                    else:
+                        email = None
                 else:
                     email = cfg.ldap_email_callback(ldap_dict)
 
@@ -120,10 +123,13 @@ class LDAPAuth(BaseAuth):
                         aliasname = sn
                 aliasname = aliasname.decode(coding)
 
-                u = user.User(request, auth_username=username, password="{SHA}NotStored", auth_method=self.name, auth_attribs=('name', 'password', 'email', 'mailto_author', ))
+                if email:
+                    u = user.User(request, auth_username=username, password="{SHA}NotStored", auth_method=self.name, auth_attribs=('name', 'password', 'email', 'mailto_author',))
+                    u.email = email
+                else:
+                    u = user.User(request, auth_username=username, password="{SHA}NotStored", auth_method=self.name, auth_attribs=('name', 'password', 'mailto_author',))
                 u.name = username
                 u.aliasname = aliasname
-                u.email = email
                 u.remember_me = 0 # 0 enforces cookie_lifetime config param
                 if verbose: request.log("LDAP: creating userprefs with name %r email %r alias %r" % (username, email, aliasname))
 

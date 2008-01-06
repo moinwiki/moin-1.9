@@ -362,6 +362,7 @@ reStructuredText Quick Reference
     ldap_surname_attribute = None # ('sn') ldap attribute we get the family name from
     ldap_aliasname_attribute = None # ('displayName') ldap attribute we get the aliasname from
     ldap_email_attribute = None # ('mail') ldap attribute we get the email address from
+    ldap_email_callback = None # called to make up email address
 
     ldap_coding = 'utf-8' # coding used for ldap queries and result values
     ldap_timeout = 10 # how long we wait for the ldap server [s]
