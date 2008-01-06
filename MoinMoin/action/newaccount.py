@@ -10,6 +10,7 @@ from MoinMoin import user, wikiutil, util
 from MoinMoin.Page import Page
 from MoinMoin.widget import html
 import MoinMoin.events as events
+from MoinMoin.security.textcha import TextCha
 
 
 _debug = False
@@ -20,6 +21,10 @@ def _create_user(request):
 
     if request.request_method != 'POST':
         return _("Use UserPreferences to change your settings or create an account.")
+           
+    if not TextCha(request).check_answer_from_form():
+        return _('TextCha: Wrong answer! Go back and try again...', formatted=False)
+
     # Create user profile
     theuser = user.User(request, auth_method="new-user")
 
@@ -124,6 +129,16 @@ def _create_form(request):
     row.append(html.TD().append(html.STRONG().append(html.Text(_("Email")))))
     row.append(html.TD().append(html.INPUT(type="text", size="36",
                                            name="email")))
+
+    row = html.TR()
+    tbl.append(row)
+    row.append(html.TD().append(html.STRONG().append(
+                                  html.Text(_('TextCha (required)', formatted=False))))) 
+    td = html.TD()
+    textcha = TextCha(request).render()
+    if textcha:
+        td.append(textcha)
+    row.append(td)
 
     row = html.TR()
     tbl.append(row)

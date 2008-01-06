@@ -383,6 +383,20 @@ textarea {
     margin-top: 0.5em;
 }
 
+#textcha {
+    font-size: 100%;
+    margin-top: 0.5em;
+    border: 2px solid #FF8888;
+    color: black;
+    vertical-align: middle;
+    padding: 3px 2px;
+}
+
+#textcha-answer {
+    border: 2px solid #000000;
+    padding: 3px 2px;
+}
+
 input.button {
     /*
     border: 1px solid #8cacbb;  
