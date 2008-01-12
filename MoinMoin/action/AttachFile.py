@@ -84,6 +84,7 @@ def absoluteName(url, pagename):
         @rtype: tuple of unicode
         @return: PageName, filename.ext
     """
+    url = wikiutil.AbsPageName(pagename, url)
     pieces = url.split(u'/')
     if len(pieces) == 1:
         return pagename, pieces[0]
