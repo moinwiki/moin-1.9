@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 
-import py.test
-from jabberbot import capat
+import py
+
+try:
+    from jabberbot import capat
+except ImportError:
+    py.test.skip("Skipping jabber bot tests - pyxmpp is not installed")
 
 def test_ver_simple():
     # example values supplied by the XEP
@@ -33,6 +37,7 @@ def test_xml():
         import pyxmpp.iq
     except ImportError:
         py.test.skip("pyxmpp needs to be installed for this test")
+
     x = pyxmpp.iq.Iq(stanza_type='result', stanza_id='disco1',
                      from_jid='romeo@montague.lit/orchard',
                      to_jid='juliet@capulet.lit/chamber')
@@ -49,3 +54,4 @@ def test_xml():
 
     assert capat.hash_iq(x) == "8RovUdtOmiAjzj+xI7SK5BCw3A8="
     # hash value taken from `test_ver_simple`
+
