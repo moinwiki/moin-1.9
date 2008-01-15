@@ -6,7 +6,7 @@
     size of the object can get adjusted. Further keywords are dependent on
     the kind of application, see HelpOnMacros/EmbedObject
 
-    <<EmbedObject(attachment[,width=width][,height=height][,alt=Embedded mimetpye/xy])>>
+    <<EmbedObject(attachment[,width=width][,height=height][,alt=alternate Text])>>
 
     @copyright: 2006-2007 MoinMoin:ReimarBauer,
                 2006 TomSi,
@@ -61,6 +61,23 @@ class EmbedObject:
                     argc -= kw_count
             self.target = args[0]
 
+    def _check_object_value(self, param, value):
+        if value != '':
+            return '%(param)s="%(value)s"' % {
+                                              "param": param,
+                                              "value": value}
+        else:
+            return ""
+
+    def _check_param_value(self, param, value, valuetype):
+        if value != '':
+            return '<param name="%(param)s" value="%(value)s" valuetype="%(valuetype)s">' % {
+                                                                                             "param": param,
+                                                                                             "value": value,
+                                                                                             "valuetype": valuetype}
+        else:
+            return ""
+
     def _is_URL(self, text):
         """ Answer true if text is an URL.
             The method used here is pretty dumb. Improvements are welcome.
@@ -71,113 +88,122 @@ class EmbedObject:
         _ = self._
 
         if not mt:
-            return _("Not supported mimetype of file: %s") % self.target
+            return _("Not supported mimetype of file: %s", formatted=False) % self.target
 
         mime_type = "%s/%s" % (mt.major, mt.minor, )
         dangerous = mime_type in self.request.cfg.mimetypes_xss_protect
 
         if not mime_type in self.request.cfg.mimetypes_embed or dangerous:
             kw = {'src': url}
-            return "%s: %s%s%s" % (self.macro.formatter.text(_('Embedding of object by choosen formatter not possible')),
+            return "%s: %s%s%s" % (self.macro.formatter.text(_('Embedding of object by chosen formatter not possible', formatted=False)),
                                self.macro.formatter.url(1, kw['src']),
                                self.macro.formatter.text(self.target),
                                self.macro.formatter.url(0))
 
-        if self.alt is "":
+        if self.alt == "":
             self.alt = "%(text)s %(mime_type)s" % {
-                           'text': _("Embedded"),
+                           'text': _("Embedded", formatted=False),
                            'mime_type': mime_type,
                         }
 
         if mt.major == 'video':
             return '''
-<object data="%(url)s" type="%(type)s" width="%(width)s" height="%(height)s" align="%(align)s" standby="%(alt)s" stop="%(stop)s">
-<param name="wmode" value="%(wmode)s" valuetype="data">
-<param name="movie" value="%(url)s" valuetype="data">
-<param name="play" value="%(play)s" valuetype="data">
-<param name="stop" value="%(stop)s" valuetype="data">
-<param name="repeat" value="%(repeat)s" valuetype="data">
-<param name="autostart" value="%(autostart)s" valuetype="data">
-<param name="op" value="%(op)s" valuetype="data">
-<param name="menu" value="%(menu)s" valuetype="data">
-%(alt)s
+<object %(ob_data)s %(ob_type)s %(ob_width)s %(ob_height)s %(ob_align)s %(ob_standby)s %(ob_stop)s>
+%(wmode)s
+%(movie)s
+%(play)s
+%(stop)s
+%(repeat)s
+%(autostart)s
+%(op)s
+%(menu)s
+<p>%(alt)s</p>
 </object>''' % {
-    "width": self.width,
-    "height": self.height,
-    "url": url,
-    "play": self.play,
-    "stop": self.stop,
-    "align": self.align,
-    "repeat": self.repeat,
-    "autostart": self.autostart,
-    "op": self.op,
-    "type": mime_type,
-    "menu": self.menu,
-    "wmode": self.wmode,
+    "ob_data": self._check_object_value("data", url),
+    "ob_type": self._check_object_value("type", mime_type),
+    "ob_width": self._check_object_value("width", self.width),
+    "ob_height": self._check_object_value("height", self.height),
+    "ob_align": self._check_object_value("align", self.align),
+    "ob_standby": self._check_object_value("standby", self.alt),
+    "ob_stop": self._check_object_value("stop", self.stop),
+    "wmode": self._check_param_value("wmode", self.wmode, "data"),
+    "movie": self._check_param_value("movie", url, "data"),
+    "play": self._check_param_value("play", self.play, "data"),
+    "stop": self._check_param_value("stop", self.stop, "data"),
+    "repeat": self._check_param_value("repeat", self.repeat, "data"),
+    "autostart": self._check_param_value("autostart", self.autostart, "data"),
+    "op": self._check_param_value("op", self.op, "data"),
+    "menu": self._check_param_value("menu", self.menu, "data"),
     "alt": self.alt,
 }
 
         if mt.major in ['image', 'chemical', 'x-world']:
             return '''
-<object data="%(url)s" width="%(width)s" height="%(height)s" type="%(type)s"  align="%(align)s">
+<object %(ob_data)s %(ob_type)s  %(ob_width)s %(ob_height)s %(ob_align)s>
 <param name="%(major)s" value="%(url)s">
 <p>%(alt)s</p>
 </object>''' % {
-    "width": self.width,
-    "height": self.height,
-    "url": url,
-    "align": self.align,
-    "type": mime_type,
-    "major": mt.major,
+    "ob_data": self._check_object_value("data", url),
+    "ob_width": self._check_object_value("width", self.width),
+    "ob_height": self._check_object_value("height", self.height),
+    "ob_type": self._check_object_value("type", mime_type),
+    "ob_align": self._check_object_value("align", self.align),
+    "name": self._check_param_value("name", url, "data"),
     "alt": self.alt,
 }
 
         if mt.major == 'audio':
             return '''
-<object data="%(url)s" width="%(width)s" height="%(height)s" type="%(type)s"  align="%(align)s">
-<param name="audio" value="%(url)s">
-<param name="repeat" value="%(repeat)s">
-<param name="autostart" value="%(autostart)s">
-<param name="op" value="%(op)s">
-<param name="play" value="%(play)s">
-<param name="stop" value="%(stop)s" valuetype="data">
-<param name="hidden" value="%(hidden)s">
+<object %(ob_data)s %(ob_type)s  %(ob_width)s %(ob_height)s %(ob_align)s>
+%(audio)s
+%(repeat)s
+%(autostart)s
+%(op)s
+%(play)s
+%(stop)s
+%(hidden)s
 <p>%(alt)s</p>
-</OBJECT>''' % {
-    "width": self.width or "60",
-    "height": self.height or "20",
-    "url": url,
-    "align": self.align,
-    "play": self.play,
-    "stop": self.stop,
-    "repeat": self.repeat,
-    "autostart": self.autostart,
-    "op": self.op,
-    "hidden": self.hidden,
-    "type": mime_type,
+</object>''' % {
+    "ob_data": self._check_object_value("data", url),
+    "ob_width": self._check_object_value("width", self.width or "60"),
+    "ob_height": self._check_object_value("height", self.height or "20"),
+    "ob_type": self._check_object_value("type", mime_type),
+    "ob_align": self._check_object_value("align", self.align),
+    "audio": self._check_param_value("audio", url, "data"),
+    "repeat": self._check_param_value("repeat", self.repeat, "data"),
+    "autostart": self._check_param_value("autostart", self.autostart, "data"),
+    "op": self._check_param_value("op", self.op, "data"),
+    "play": self._check_param_value("play", self.play, "data"),
+    "stop": self._check_param_value("stop", self.stop, "data"),
+    "hidden": self._check_param_value("hidden", self.hidden, "data"),
     "alt": self.alt,
 }
 
         if mt.major == 'application':
+            # workaround for the acroread not knowing the size to embed
+            if mt.minor == 'pdf':
+                self.width = self.width or '800'
+                self.height = self.height or '800'
+
             return '''
-<object data="%(url)s" width="%(width)s" height="%(height)s" type="%(type)s"  align="%(align)s">
-<param name="wmode" value="%(wmode)s" valuetype="data">
-<param name="autostart" value="%(autostart)s">
-<param name="play" value="%(play)s">
-<param name="loop" value="%(loop)s">
-<param name="menu" value="%(menu)s">
+<object %(ob_data)s %(ob_type)s  %(ob_width)s %(ob_height)s %(ob_align)s>
+%(wmode)s
+%(autostart)s
+%(play)s
+%(loop)s
+%(menu)s
 <p>%(alt)s</p>
 </object>''' % {
-    "width": self.width,
-    "height": self.height,
-    "url": url,
-    "align": self.align,
-    "autostart": self.autostart,
-    "play": self.play,
-    "loop": self.loop,
-    "type": mime_type,
-    "menu": self.menu,
-    "wmode": self.wmode,
+    "ob_data": self._check_object_value("data", url),
+    "ob_width": self._check_object_value("width", self.width),
+    "ob_height": self._check_object_value("height", self.height),
+    "ob_type": self._check_object_value("type", mime_type),
+    "ob_align": self._check_object_value("align", self.align),
+    "wmode": self._check_param_value("wmode", self.wmode, "data"),
+    "autostart": self._check_param_value("autostart", self.autostart, "data"),
+    "play": self._check_param_value("play", self.play, "data"),
+    "loop": self._check_param_value("loop", self.loop, "data"),
+    "menu": self._check_param_value("menu", self.menu, "data"),
     "alt": self.alt,
 }
 
@@ -185,14 +211,14 @@ class EmbedObject:
         _ = self._
 
         if not self.target:
-            msg = _('Not enough arguments to EmbedObject macro! Try <<EmbedObject(attachment [,width=width] [,height=height] [,alt=Embedded mimetpye/xy])>>', formatted=False)
+            msg = _('Not enough arguments given to EmbedObject macro! Try <<EmbedObject(attachment [,width=width] [,height=height] [,alt=alternate Text])>>', formatted=False)
             return "%s%s%s" % (self.formatter.sysmsg(1), self.formatter.text(msg), self.formatter.sysmsg(0))
 
         if not self._is_URL(self.target):
             pagename, fname = AttachFile.absoluteName(self.target, self.formatter.page.page_name)
 
             if not AttachFile.exists(self.request, pagename, fname):
-                linktext = _('Upload new attachment "%(filename)s"')
+                linktext = _('Upload new attachment "%(filename)s"', formatted=False)
                 return wikiutil.link_tag(self.request, ('%s?action=AttachFile&rename=%s' % (
                                                          wikiutil.quoteWikinameURL(pagename),
                                                          wikiutil.url_quote_plus(fname))),
@@ -203,7 +229,7 @@ class EmbedObject:
             mt = wikiutil.MimeType(filename=fname)
         else:
             if not self.url_mimetype:
-                return _('Not enough arguments to EmbedObject macro! Try <<EmbedObject(url, url_mimetype [,width=width] [,height=height] [,alt=Embedded mimetpye/xy])>>', formatted=False)
+                return _('Not enough arguments given to EmbedObject macro! Try <<EmbedObject(url, url_mimetype [,width=width] [,height=height] [,alt=alternate Text])>>', formatted=False)
             else:
                 mt = wikiutil.MimeType() # initialize dict
                 mt.major, mt.minor = self.url_mimetype.split('/')
