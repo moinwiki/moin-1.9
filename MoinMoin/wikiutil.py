@@ -925,6 +925,10 @@ MIMETYPES_MORE = {
  '.ots': 'application/vnd.oasis.opendocument.spreadsheet-template',
  '.otp': 'application/vnd.oasis.opendocument.presentation-template',
  '.otg': 'application/vnd.oasis.opendocument.graphics-template',
+ # some systems (like Mac OS X) don't have some of these:
+ '.patch': 'text/x-diff',
+ '.diff': 'text/x-diff',
+ '.py': 'text/x-python',
 }
 [mimetypes.add_type(mimetype, ext, True) for ext, mimetype in MIMETYPES_MORE.items()]
 
