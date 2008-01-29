@@ -1306,7 +1306,25 @@ def parse(request, text):
         raise ConvertError('ExpatError: %s (see dump in %s)' % (msg, logname))
 
 def convert(request, pagename, text):
-    text = u"<page>%s</page>" % text
+    # Due to expat needing explicitly set namespaces, we set these here to allow pasting 
+    # from Word / Excel without issues.
+    # If you encounter 'ExpatError: unbound prefix', try adding the namespace to the list.
+    namespace = [u'xmlns:o="urn:schemas-microsoft-com:office:office"', 
+                 u'xmlns:x="urn:schemas-microsoft-com:office:excel"',
+                 u'xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"',
+                 u'xmlns:c="urn:schemas-microsoft-com:office:component:spreadsheet"',
+                 u'xmlns:s="uuid:BDC6E3F0-6DA3-11d1-A2A3-00AA00C14882"',
+                 u'xmlns:dt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882"',
+                 u'xmlns:rs="urn:schemas-microsoft-com:rowset"',
+                 u'xmlns:z="#RowsetSchema"',
+                 u'xmlns:x2="http://schemas.microsoft.com/office/excel/2003/xml"',
+                 u'xmlns:sl="http://schemas.microsoft.com/schemaLibrary/2003/core"',
+                 u'xmlns:aml="http://schemas.microsoft.com/aml/2001/core"',
+                 u'xmlns:w="http://schemas.microsoft.com/office/word/2003/wordml"',
+                 u'xmlns:wx="http://schemas.microsoft.com/office/word/2003/auxHint"',
+                 u'xmlns:w10="urn:schemas-microsoft-com:office:word"',
+                 u'xmlns:v="urn:schemas-microsoft-com:office:vml"']
+    text = u'<page %s>%s</page>' % (' '.join(namespace), text)
     tree = parse(request, text)
     strip_whitespace().do(tree)
     text = convert_tree(request, pagename).do(tree)
