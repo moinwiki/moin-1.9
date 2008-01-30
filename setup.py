@@ -241,6 +241,7 @@ only requiring a Python installation.
         'MoinMoin.script.old',
         'MoinMoin.script.old.migration',
         'MoinMoin.script.old.xmlrpc-tools',
+        'MoinMoin.script.server',
         'MoinMoin.script.xmlrpc',
         'MoinMoin.search',
         'MoinMoin.security',
