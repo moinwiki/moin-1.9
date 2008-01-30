@@ -75,6 +75,8 @@ Version 1.7.current:
       Use password_checker = None to disable password checking.
     * jabber notification support; for more information see:
       http://moinmo.in/MoinMoinTodo/Release_1.7/HelpOnNotification
+    * standalone server can now be started via the "moin" script command,
+      optionally backgrounding itself. See: moin server standalone --help
 
   Bugfixes:
     * lots of bugfixes related to link parsing
