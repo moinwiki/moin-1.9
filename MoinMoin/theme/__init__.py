@@ -1475,7 +1475,7 @@ var gui_editor_link_text = "%(text)s";
             pagename = keywords.get('pagename', '')
             page = Page(request, pagename)
         if keywords.get('msg', ''):
-            raise DeprecationWarning ("Using send_page(msg=) is deprecated! Use theme.add_status() instead!")
+            raise DeprecationWarning ("Using send_page(msg=) is deprecated! Use theme.add_msg() instead!")
         scriptname = request.getScriptname()
         pagename_quoted = wikiutil.quoteWikinameURL(pagename)
 
