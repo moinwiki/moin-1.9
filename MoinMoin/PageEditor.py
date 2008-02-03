@@ -313,7 +313,7 @@ Please review the page and save then. Do not save this page as it is!""")
         status = ' '.join(status)
         status = Status(request, content=status)
         request.theme.add_msg(status, "dialog")
-        
+
         request.theme.send_title(
             title % {'pagename': self.split_title(), },
             page=self,
