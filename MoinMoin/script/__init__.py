@@ -134,6 +134,7 @@ class Script:
             try:
                 self.options, self.args = self.parser.parse_args(self.argv)
                 flag_quiet = self.options.quiet
+                # ToDo check if we need to initialize request (self.init_request())
                 self.mainloop()
             except KeyboardInterrupt:
                 log("*** Interrupted by user!")
