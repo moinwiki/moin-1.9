@@ -256,8 +256,8 @@ only requiring a Python installation.
         'MoinMoin.wikixml',
         'MoinMoin.xmlrpc',
 
-        # if we get *massive* amounts of test, this should probably be left out
-        'MoinMoin._tests',
+        # all other _tests are missing here, either we have all or nothing:
+        #'MoinMoin._tests',
     ],
 
     # We can use package_* instead of the smart_install_data hack when we
