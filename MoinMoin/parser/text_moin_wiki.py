@@ -654,7 +654,7 @@ class Parser:
         target = wikiutil.url_unquote(target, want_unicode=True)
         desc = groups.get('transclude_desc', '') or ''
         params = groups.get('transclude_params', u'') or u''
-        acceptable_keys_img = ['class', 'title', 'longdesc', 'width', 'height', ] # no style because of JS
+        acceptable_keys_img = ['class', 'title', 'longdesc', 'width', 'height', 'align', ] # no style because of JS
         acceptable_keys_object = ['class', 'title', 'width', 'height', # no style because of JS
                                   'type', 'standby', ] # we maybe need a hack for <PARAM> here
         m = self.link_target_re.match(target)
