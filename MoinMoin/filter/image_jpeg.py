@@ -23,8 +23,9 @@ def execute(indexobj, filename):
         except:
             pass
         data = str(tags).decode('utf-8')
-    except (ValueError, TypeError): # EXIF throws ValueError on unknown tags
-                                    #             TypeError on other occassions
+    except (ValueError, TypeError, KeyError): # EXIF throws ValueError on unknown tags
+                                              # TypeError on other occassions
+                                              # KeyError too
         data = u''
     return data
 
