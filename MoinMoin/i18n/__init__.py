@@ -1,4 +1,3 @@
-#!/usr/bin/env python2.4
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - internationalization (aka i18n)
