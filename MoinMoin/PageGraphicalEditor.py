@@ -287,6 +287,23 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 <input class="button" type="submit" name="button_cancel" value="%s">
 <input type="hidden" name="editor" value="gui">
 ''' % (button_spellcheck, cancel_button_text, ))
+        if self.cfg.mail_enabled:
+            request.write('''
+<script type="text/javascript">
+    function toggle_trivial(CheckedBox)
+    {
+        TrivialBoxes = document.getElementsByName("trivial");
+        for (var i = 0; i < TrivialBoxes.length; i++)
+            TrivialBoxes[i].checked = CheckedBox.checked;
+    }
+</script>
+&nbsp;
+<input type="checkbox" name="trivial" id="chktrivial" value="1" %(checked)s onclick="toggle_trivial(this)">
+<label for="chktrivial">%(label)s</label>
+''' % {
+          'checked': ('', 'checked')[form.get('trivial', ['0'])[0] == '1'],
+          'label': _("Trivial change", formatted=False),
+       })
 
         from MoinMoin.security.textcha import TextCha
         request.write(TextCha(request).render())
@@ -361,7 +378,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         if self.cfg.mail_enabled:
             request.write('''
 &nbsp;
-<input type="checkbox" name="trivial" id="chktrivial" value="1" %(checked)s>
+<input type="checkbox" name="trivial" id="chktrivial" value="1" %(checked)s onclick="toggle_trivial(this)">
 <label for="chktrivial">%(label)s</label> ''' % {
                 'checked': ('', 'checked')[form.get('trivial', ['0'])[0] == '1'],
                 'label': _("Trivial change"),
