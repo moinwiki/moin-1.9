@@ -325,6 +325,7 @@ class User:
         #self.edit_cols = 80
         self.tz_offset = int(float(self._cfg.tz_offset) * 3600)
         self.language = ""
+        self.real_language = "" # In case user uses "Browser setting". For language-statistics
         self.loaded = False
         self.date_fmt = ""
         self.datetime_fmt = ""

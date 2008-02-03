@@ -158,6 +158,11 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
 
         # try to get the (optional) preferred language
         theuser.language = form.get('language', [''])[0]
+        if theuser.language == u'': # For language-statistics
+            from MoinMoin import i18n
+            theuser.real_language = i18n.get_browser_language(self.request)
+        else:
+            theuser.real_language = ''
 
         # I want to handle all inputs from user_form_fields, but
         # don't want to handle the cases that have already been coded
@@ -170,7 +175,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
         already_handled = ['name', 'email',
                            'aliasname', 'edit_rows', 'editor_default',
                            'editor_ui', 'tz_offset', 'datetime_fmt',
-                           'theme_name', 'language', 'jid']
+                           'theme_name', 'language', 'real_language', 'jid']
         for field in self.cfg.user_form_fields:
             key = field[0]
             if ((key in self.cfg.user_form_disable)

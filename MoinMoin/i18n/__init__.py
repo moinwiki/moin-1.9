@@ -305,11 +305,7 @@ def requestLanguage(request, try_user=True):
 
     # Or try to return one of the user browser accepted languages, if it
     # is available on this wiki...
-    available = wikiLanguages()
-    if not request.cfg.language_ignore_browser:
-        for lang in browserLanguages(request):
-            if lang in available:
-                return lang
+    return get_browser_language(request)
 
     # Or return the wiki default language...
     if request.cfg.language_default in available:
@@ -319,12 +315,14 @@ def requestLanguage(request, try_user=True):
         lang = 'en'
     return lang
 
+
 def wikiLanguages():
     """
     Return the available user languages in this wiki.
     As we do everything in unicode (or utf-8) now, everything is available.
     """
     return languages
+
 
 def browserLanguages(request):
     """
@@ -353,3 +351,17 @@ def browserLanguages(request):
                 fallback.append(baselang)
     return fallback
 
+def get_browser_language(request):
+    """
+    Return the language that is supported by wiki and what user browser
+    would prefer to get. Return nothing if there is no such language.
+
+    @param request: the request object
+    @rtype: string
+    @return: ISO language code, e.g. 'en'
+    """
+    available = wikiLanguages()
+    if not request.cfg.language_ignore_browser:
+        for lang in browserLanguages(request):
+            if lang in available:
+                return lang
