@@ -18,16 +18,19 @@ recursive-include   contrib *
 
 # tests stuff
 recursive-include   tests *
+global-include */_tests/*
 
 # "wiki" directory
 recursive-include   wiki *
 
-# omit CVS / arch directories
+# omit revision control, python bytecode
 global-exclude */CVS/*
 global-exclude */.cvsignore
 global-exclude */.arch-ids/*
 global-exclude *.pyc
 global-exclude *.pyo
+
+# we distribute a uncompressed version, no need for that:
 global-exclude underlay.tar.bz2
 global-exclude README.underlay
 
