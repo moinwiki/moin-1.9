@@ -221,7 +221,7 @@ def execute(pagename, request):
     else:
         badwords = []
         request.theme.add_msg(_("You can't check spelling on a page you can't read."), "error")
-    
+
     request.theme.add_msg(msg, "dialog")
     if badwords:
         page.send_page(hilite_re=badwords_re)

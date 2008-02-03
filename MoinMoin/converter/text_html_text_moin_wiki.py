@@ -1306,10 +1306,10 @@ def parse(request, text):
         raise ConvertError('ExpatError: %s (see dump in %s)' % (msg, logname))
 
 def convert(request, pagename, text):
-    # Due to expat needing explicitly set namespaces, we set these here to allow pasting 
+    # Due to expat needing explicitly set namespaces, we set these here to allow pasting
     # from Word / Excel without issues.
     # If you encounter 'ExpatError: unbound prefix', try adding the namespace to the list.
-    namespace = [u'xmlns:o="urn:schemas-microsoft-com:office:office"', 
+    namespace = [u'xmlns:o="urn:schemas-microsoft-com:office:office"',
                  u'xmlns:x="urn:schemas-microsoft-com:office:excel"',
                  u'xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"',
                  u'xmlns:c="urn:schemas-microsoft-com:office:component:spreadsheet"',
