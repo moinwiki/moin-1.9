@@ -1107,11 +1107,21 @@ actionsMenuInit('%(label)s');
         return editbar_actions
 
     def supplementation_page_nameLink(self, page):
-        """  discussion for page """
+        """Return a link to the discussion page
+
+           If the discussion page doesn't exist and the user
+           has no right to create it, show a disabled link.
+	"""
         _ = self.request.getText
-        return page.link_to(self.request,
-                            text=_(self.request.cfg.supplementation_page_name, formatted=False),
-                            querystr={'action': 'supplementation'}, css_class='nbsupplementation', rel='nofollow')
+        suppl_name = self.request.cfg.supplementation_page_name
+        suppl_name_full = "%s/%s" % (page.page_name, suppl_name)
+
+        test = Page(self.request, suppl_name_full)
+        if not test.exists() and not self.request.user.may.write(suppl_name_full):
+            return ('<span class="disabled">%s</span>' % _(suppl_name, formatted=False))
+        else:
+            return page.link_to(self.request, text=_(suppl_name, formatted=False),
+                                querystr={'action': 'supplementation'}, css_class='nbsupplementation', rel='nofollow')
 
     def guiworks(self, page):
         """ Return whether the gui editor / converter can work for that page.

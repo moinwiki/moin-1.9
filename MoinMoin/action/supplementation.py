@@ -16,18 +16,24 @@ def execute(pagename, request):
     sub_page_name = request.cfg.supplementation_page_name
     sub_page_template = request.cfg.supplementation_page_template
     newpagename = "%s/%s" % (pagename, sub_page_name)
+    errormsg = _("You are not allowed to create the supplementation page.", formatted=False)
 
     if pagename.endswith(sub_page_name): # sub_sub_page redirects to sub_page
         query = {}
         url = Page(request, pagename).url(request, query, relative=False)
         request.http_redirect(url)
-    elif request.user.may.read(newpagename) and request.user.may.write(newpagename):
+    elif request.user.may.read(newpagename):
         query = {}
         url = Page(request, newpagename).url(request, query, relative=False)
         test = Page(request, newpagename)
         if test.exists(): # page is defined -> redirect
             request.http_redirect(url)
-        else:  # page will be created from template
+        elif request.user.may.write(newpagename):  # page will be created from template
             query = {'action': 'edit', 'backto': newpagename, 'template': quoteWikinameURL(sub_page_template)}
             url = Page(request, newpagename).url(request, query, relative=False)
             request.http_redirect(url)
+        else:
+            request.theme.add_msg(errormsg, "error")
+    else:
+        request.theme.add_msg(errormsg, "error")
+        
