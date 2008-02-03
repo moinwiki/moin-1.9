@@ -67,12 +67,12 @@ def used_languages(request):
         for cnt, lang in data:
             try:
                 if lang == u'browser':
-                    languages.addRow((browserlang, "%(percent).2f (%(count)s)" % {
+                    languages.addRow((browserlang, "%(percent).2f%% (%(count)d)" % {
                         'percent': 100.0 * cnt / sum,
                         'count': cnt}))
                 else:
                     lang = i18n.wikiLanguages()[lang]['x-language-in-english']
-                    languages.addRow((lang, "%(percent).2f (%(count)s)" % {
+                    languages.addRow((lang, "%(percent).2f%% (%(count)d)" % {
                         'percent': 100.0 * cnt / sum,
                         'count': cnt}))
                 cnt_printed += cnt
@@ -82,7 +82,9 @@ def used_languages(request):
         languages.addRow((browserlang, "100% (1)"))
 
     if sum > cnt_printed:
-        languages.addRow((_('Others', formatted=False), "%.2f" % (100 * (sum - cnt_printed) / sum)))
+        languages.addRow((_('Others', formatted=False), "%(percent).2f%% (%(count)d)" % {
+            'percent': 100.0 * (sum - cnt_printed) / sum,
+            'count': sum - cnt_printed}))
 
     table = DataBrowserWidget(request)
     table.setData(languages)
