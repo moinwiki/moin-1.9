@@ -133,7 +133,7 @@ def execute(pagename, request):
             for line in lines:
                 if line[0] == "@":
                     request.write(f.rule(1))
-                request.write(f.text(wikiutil.escape(line)+'\n'))
+                request.write(f.text(line + '\n'))
             request.write(f.preformatted(0))
 
     request.write(f.div(0)) # end content div
