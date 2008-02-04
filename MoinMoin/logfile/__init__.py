@@ -144,17 +144,17 @@ class LogFile:
                 # Use binary mode in order to retain \r - otherwise the offset calculation would fail.
                 self._input = file(self.__filename, "rb", )
             except IOError, err:
-                if err.errno == 2: # POSIX errno.ENOENT "file not found"
-                    try:
-                        # XXX workaround if edit-log does not exist: just create it empty
-                        f = file(self.__filename, "ab")
-                        f.write('')
-                        f.close()
-                        self._input = file(self.__filename, "rb", )
-                        return self._input
-                    except:
-                        pass
-                    raise StopIteration
+                if err.errno == errno.ENOENT: # "file not found"
+                    # XXX workaround if edit-log does not exist: just create it empty
+                    # if this workaround raises another error, we don't catch
+                    # it, so the admin will see it.
+                    f = file(self.__filename, "ab")
+                    f.write('')
+                    f.close()
+                    self._input = file(self.__filename, "rb", )
+                else:
+                    logging.error("logfile: %r IOERROR errno %d (%s)" % (self.__filename, err.errno, os.strerror(err.errno)))
+                    raise
             return self._input
         elif name == "_output":
             self._output = codecs.open(self.__filename, 'a', config.charset)
