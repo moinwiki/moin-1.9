@@ -12,6 +12,7 @@ import sys, os
 
 from MoinMoin.Page import Page
 from MoinMoin import user
+from MoinMoin import wikiutil
 
 def show_form(pagename, request):
     _ = request.getText
@@ -19,12 +20,13 @@ def show_form(pagename, request):
     request.theme.send_title(_("Subscribe users to the page %s") % pagename, pagename=pagename)
 
     request.write("""
-<form action="" method="POST" enctype="multipart/form-data">
+<form action="%s/%s" method="POST" enctype="multipart/form-data">
 <input type="hidden" name="action" value="SubscribeUser">
-Enter user names (comma separated): <input type="text" name="users" size="50">
+%s <input type="text" name="users" size="50">
 <input type="submit" value="Subscribe">
 </form>
-""")
+""" % (request.getScriptname(), wikiutil.quoteWikinameURL(pagename),
+      _("Enter user names (comma separated):", formatted=False)))
     request.theme.send_footer(pagename)
     request.theme.send_closing_html()
 

@@ -8,11 +8,11 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+from MoinMoin import wikiutil
 from MoinMoin.i18n import languages
 from MoinMoin.widget import html
 from MoinMoin.util.web import makeSelection
 from MoinMoin.support.python_compatibility import sorted
-
 import mimetypes
 
 Dependencies = ['pages']
@@ -135,7 +135,7 @@ def advanced_ui(macro):
 
     # the dialogue
     return f.rawHTML('\n'.join([
-        u'<form method="get" action="">',
+        u'<form method="get" action="%s/%s">' % (macro.request.getScriptname(), wikiutil.quoteWikinameURL(macro.request.formatter.page.page_name)),
         u'<div>',
         u'<input type="hidden" name="action" value="fullsearch">',
         u'<input type="hidden" name="advancedsearch" value="1">',

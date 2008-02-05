@@ -144,9 +144,11 @@ class PackagePages:
         error = u'<p class="error">%s</p>\n' % error
 
         d = {
+            'baseurl': self.request.getScriptname(),
             'error': error,
             'action': self.__class__.__name__,
             'pagename': wikiutil.escape(self.pagename),
+            'pagename_quoted': wikiutil.quoteWikinameURL(self.pagename),
             'package': _('Package pages'),
             'cancel': _('Cancel'),
             'newname_label': _("Package name"),
@@ -154,7 +156,7 @@ class PackagePages:
         }
         form = '''
 %(error)s
-<form method="post" action="">
+<form method="post" action="%(baseurl)s/%(pagename_quoted)s">
 <input type="hidden" name="action" value="%(action)s">
 <table>
     <tr>

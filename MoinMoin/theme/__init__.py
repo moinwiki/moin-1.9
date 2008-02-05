@@ -736,11 +736,13 @@ class ThemeBase:
             'search_value': wikiutil.escape(form.get('value', [''])[0], 1),
             'search_full_label': _('Text', formatted=False),
             'search_title_label': _('Titles', formatted=False),
+            'baseurl': self.request.getScriptname(),
+            'pagename_quoted': wikiutil.quoteWikinameURL(self.request.page.page_name),
             }
         d.update(updates)
 
         html = u'''
-<form id="searchform" method="get" action="">
+<form id="searchform" method="get" action="%(baseurl)s/%(pagename_quoted)s">
 <div>
 <input type="hidden" name="action" value="fullsearch">
 <input type="hidden" name="context" value="180">
@@ -999,7 +1001,9 @@ var search_hint = "%(search_hint)s";
             'label': titles['__title__'],
             'options': '\n'.join(options),
             'rev_field': rev and '<input type="hidden" name="rev" value="%d">' % rev or '',
-            'do_button': _("Do")
+            'do_button': _("Do", formatted=False),
+            'baseurl': self.request.getScriptname(),
+            'pagename_quoted': wikiutil.quoteWikinameURL(self.request.page.page_name)
             }
         html = '''
 <form class="actionsmenu" method="get" action="">
