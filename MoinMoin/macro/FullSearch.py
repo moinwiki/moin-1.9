@@ -67,7 +67,7 @@ def search_box(type, macro):
     # Format
     type = (type == "titlesearch")
     html = [
-        u'<form method="get" action="">',
+        u'<form method="get" action="%s/%s">' % (macro.request.getScriptname(), wikiutil.quoteWikinameURL(macro.request.formatter.page.page_name)),
         u'<div>',
         u'<input type="hidden" name="action" value="fullsearch">',
         u'<input type="hidden" name="titlesearch" value="%i">' % type,

@@ -85,7 +85,7 @@ class DataBrowserWidget(base.Widget):
         fmt = self.request.formatter
 
         result = []
-        result.append(fmt.rawHTML('<form action="" method="GET">'))
+        result.append(fmt.rawHTML('<form action="%s/%s" method="GET">' % (self.request.getScriptname(), wikiutil.quoteWikinameURL(self.request.page.page_name))))
         result.append(fmt.div(1))
 
         havefilters = False
