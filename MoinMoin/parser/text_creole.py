@@ -249,10 +249,6 @@ class Emitter:
 
     def link_emit(self, node):
         target = node.content
-        if node.children:
-            inside = self.emit_children(node)
-        else:
-            inside = self.formatter.text(target)
         m = self.addr_re.match(target)
         if m:
             if m.group('page_name'):
@@ -270,7 +266,7 @@ class Emitter:
                     word, anchor = parts
                 return ''.join([
                     self.formatter.pagelink(1, word, anchor=anchor),
-                    inside,
+                    self.emit_children(node) or self.formatter.text(target),
                     self.formatter.pagelink(0, word),
                 ])
             elif m.group('extern_addr'):
@@ -279,18 +275,16 @@ class Emitter:
                 proto = m.group('extern_proto')
                 return ''.join([
                     self.formatter.url(1, address, css=proto),
-                    inside,
+                    self.emit_children(node) or self.formatter.text(target),
                     self.formatter.url(0),
                 ])
             elif m.group('inter_wiki'):
                 # interwiki link
                 wiki = m.group('inter_wiki')
                 page = m.group('inter_page')
-                if not node.children: # interwiki links don't show the moniker
-                    inside = self.formatter.text(page)
                 return ''.join([
                     self.formatter.interwikilink(1, wiki, page),
-                    inside,
+                    self.emit_children(node) or self.formatter.text(page),
                     self.formatter.interwikilink(0),
                 ])
             elif m.group('attach_scheme'):
