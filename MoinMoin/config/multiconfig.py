@@ -677,7 +677,7 @@ reStructuredText Quick Reference
     user_checkbox_remove = []
 
     user_form_fields = [
-        ('name', _('Name'), "text", "36", _("(Use Firstname''''''Lastname)")),
+        ('name', _('Name'), "text", "36", _("(Use FirstnameLastname)")),
         ('aliasname', _('Alias-Name'), "text", "36", ''),
         ('email', _('Email'), "text", "36", ''),
         ('jid', _('Jabber ID'), "text", "36", ''),
