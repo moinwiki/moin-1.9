@@ -134,7 +134,7 @@ function Ok()
   {
     // Check for valid image Url
     var sEnd = sSrc.substring(sSrc.length-4, sSrc.length).toLowerCase();
-    if (!(sEnd==".gif" || sEnd=='.png' || sEnd=='.jpg' || sEnd=='.jpeg'))
+    if (!(sEnd==".gif" || sEnd=='.png' || sEnd=='.jpg' || sSrc.substring(sSrc.length-5, sSrc.length).toLowerCase()=='.jpeg'))
     {
       alert("Image Url must end with .gif, .png, .jpg or .jpeg"); //XXX i18n!
       return false;
