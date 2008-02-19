@@ -525,9 +525,12 @@ class ThemeBase:
             vars = {}
         alt, img, w, h = self.get_icon(icon)
         try:
-            alt = alt % vars
+            alt = vars['icon-alt-text'] # if it is possible we take the alt-text from 'page_icons_table'
         except KeyError, err:
-            alt = 'KeyError: %s' % str(err)
+            try:
+                alt = alt % vars # if not we just leave the  alt-text from 'icons'
+            except KeyError, err:
+                alt = 'KeyError: %s' % str(err)
         alt = self.request.getText(alt, formatted=False)
         tag = self.request.formatter.image(src=img, alt=alt, width=w, height=h, **kw)
         return tag
@@ -544,7 +547,7 @@ class ThemeBase:
         qs = {}
         querystr, title, icon = self.cfg.page_icons_table[which]
         qs.update(querystr) # do not modify the querystr dict in the cfg!
-        d['title'] = title % d
+        d['icon-alt-text'] = d['title'] = title % d
         d['i18ntitle'] = self.request.getText(d['title'], formatted=False)
         img_src = self.make_icon(icon, d)
         rev = d['rev']
