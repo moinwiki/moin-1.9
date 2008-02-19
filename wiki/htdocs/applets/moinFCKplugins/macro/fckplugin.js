@@ -26,6 +26,5 @@ var FCKMacros = new Object();
 // Add a new macro at the actual selection.
 FCKMacros.Add = function(name)
 {
-  var oSpan = FCK.InsertHtml('<span style="background-color:#ffff11">[['
-                             + name + ']]</span>');
+  var oSpan = FCK.InsertHtml('<span style="background-color:#ffff11">&lt;&lt;' + name + '&gt;&gt;</span>');
 }
