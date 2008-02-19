@@ -1269,7 +1269,7 @@ class convert_tree(visitor):
 
             desc = self.get_desc(node.childNodes)
             if desc:
-                desc = '|' + text
+                desc = '|' + desc
 
             params = ','.join(['%s="%s"' % (k, v) for k, v in attrs.items()])
                                # if k in ('width', 'height', )])
