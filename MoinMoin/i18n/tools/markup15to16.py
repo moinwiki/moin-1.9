@@ -13,7 +13,7 @@ def run():
 
     lang = sys.argv[1]
 
-    f = codecs.open("%s.%s.po" % (langfname, DOMAIN), "r", "utf-8")
+    f = codecs.open("%s.%s.po" % (lang, DOMAIN), "r", "utf-8")
     text = f.read()
     f.close()
 
@@ -25,7 +25,7 @@ def run():
 
     #print repr(text)
 
-    f = codecs.open("%s.%s.po" % (langfname, DOMAIN), "w", "utf-8")
+    f = codecs.open("%s.%s.po" % (lang, DOMAIN), "w", "utf-8")
     f.write(text)
     f.close()
 

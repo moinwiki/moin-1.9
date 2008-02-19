@@ -19,7 +19,7 @@ def run():
         print pagename
         pagedata = wiki.getPage(pagename).encode('utf-8').replace("\n", "\r\n")
 
-        f = open("%s.%s.po" % (langfname, DOMAIN), "w")
+        f = open("%s.%s.po" % (lang, DOMAIN), "w")
         f.write(pagedata)
         f.close()
 
