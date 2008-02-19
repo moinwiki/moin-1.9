@@ -564,16 +564,9 @@ Try a different name.""") % (wikiutil.escape(newpagename), )
             self.error = None
             if not comment:
                 comment = u"## page was copied from %s" % self.page_name
-            if request.user.may.write(newpagename):
-                # Save page text with a comment about the old name and log entry
-                savetext = u"## page was copied from %s\n%s" % (self.page_name, savetext)
-                newpage.saveText(savetext, 0, comment=comment, extra=self.page_name, action='SAVE', notify=False)
-            else:
-                # if user is  not able to write to the page itselfs we set a log entry only
-                from MoinMoin import packages
-                rev = newpage.current_rev()
-                packages.edit_logfile_append(self, newpagename, newpath, rev, 'SAVENEW', logname='edit-log',
-                                       comment=comment, author=u"CopyPage action")
+            savetext = u"## page was copied from %s\n%s" % (self.page_name, savetext)
+            Page.__init__(self, request, newpagename)
+            self._write_file(savetext, "SAVENEW", comment)
 
             event = PageCopiedEvent(request, newpage, self, comment)
             send_event(event)
@@ -824,7 +817,6 @@ Try a different name.""") % (wikiutil.escape(newpagename), )
             # Strip trailing spaces if needed
             if kw.get('stripspaces', 0):
                 lines = [line.rstrip() for line in lines]
-
             # Add final newline if not present, better for diffs (does
             # not include former last line when just adding text to
             # bottom; idea by CliffordAdams)

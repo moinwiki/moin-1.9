@@ -219,5 +219,81 @@ class TestDictPageDeletion(object):
 
         assert result == expected
 
+class TestCopyPage(object):
+
+    pagename = u'AutoCreatedMoinMoinTemporaryTestPage'
+    copy_pagename = u'AutoCreatedMoinMoinTemporaryCopyTestPage'
+    shouldDeleteTestPage = True
+    text = u'Example'
+
+    def setup_method(self, method):
+        self.savedValid = self.request.user.valid
+        self.request.user.valid = 1
+
+    def teardown_method(self, method):
+        self.request.user.valid = self.savedValid
+        self.deleteTestPage()
+
+    def createTestPage(self):
+        """ Create temporary page, bypass logs, notification and backups
+
+        TODO: this code is very fragile, any change in the
+        implementation will break this test. Need to factor PageEditor
+        to make it possible to create page without loging and notifying.
+        """
+        import os
+        path = Page(self.request, self.pagename).getPagePath(check_create=0)
+        copy_path = Page(self.request, self.copy_pagename).getPagePath(check_create=0)
+
+        if os.path.exists(path) or os.path.exists(copy_path):
+            self.shouldDeleteTestPage = False
+            py.test.skip("%s or %s exists. Won't overwrite exiting page" % (self.pagename, self.copy_pagename))
+        try:
+            os.mkdir(path)
+            revisionsDir = os.path.join(path, 'revisions')
+            os.mkdir(revisionsDir)
+            current = '00000001'
+            file(os.path.join(path, 'current'), 'w').write('%s\n' % current)
+
+            file(os.path.join(revisionsDir, current), 'w').write(self.text)
+        except Exception, err:
+            py.test.skip("Can not be create test page: %s" % err)
+
+    def deleteTestPage(self):
+        """ Delete temporary page, bypass logs and notifications """
+        if self.shouldDeleteTestPage:
+            import shutil
+            shutil.rmtree(Page(self.request, self.pagename).getPagePath(), True)
+            shutil.rmtree(Page(self.request, self.copy_pagename).getPagePath(), True)
+
+    def test_copy_page(self):
+        """
+        Tests copying a page without restricted acls
+        """
+        self.createTestPage()
+        result, msg = PageEditor(self.request, self.pagename).copyPage(self.copy_pagename)
+        revision = Page(self.request, self.copy_pagename).current_rev()
+        assert result and revision is 2
+
+    def test_copy_page_acl_read(self):
+        """
+        Tests copying a page without write rights
+        """
+        self.text = u'#acl SomeUser:read,write,delete All:read\n'
+        self.createTestPage()
+        result, msg = PageEditor(self.request, self.pagename).copyPage(self.copy_pagename)
+        revision = Page(self.request, self.copy_pagename).current_rev()
+        assert result and revision is 2
+
+    def test_copy_page_acl_no_read(self):
+        """
+        Tests copying a page without read rights
+        """
+        self.text = u'#acl SomeUser:read,write,delete All:\n'
+        self.createTestPage()
+        result, msg = PageEditor(self.request, self.pagename).copyPage(self.copy_pagename)
+        revision = Page(self.request, self.copy_pagename).current_rev()
+        assert result and revision is 2
+
 coverage_modules = ['MoinMoin.PageEditor']
 
