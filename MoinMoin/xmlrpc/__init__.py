@@ -527,6 +527,9 @@ class XmlRpcBase:
 
         pagename = self._instr(pagename)
 
+        if not pagename:
+            return xmlrpclib.Fault("INVALID", "pagename can't be empty")
+
         # check ACLs
         if not self.request.user.may.write(pagename):
             return xmlrpclib.Fault(1, "You are not allowed to edit this page")
