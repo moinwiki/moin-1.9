@@ -119,7 +119,7 @@ function OnChange( sMacro )
             helptext = ""
         helptexts.append(
             '''<div id="%s" style="DISPLAY: none">
-               <b><<%s>></b>
+               <b>&lt;&lt;%s&gt;&gt;</b>
                <br/>
                <textarea style="color:#000000" cols="37" rows="10" disabled="disabled">%s</textarea>
                </div>'''
@@ -148,10 +148,11 @@ def get_macro_help(request):
     helppage = wikiutil.getLocalizedPage(request, "HelpOnMacros")
     content = helppage.get_raw_body()
     macro_re = re.compile(
-        r"\|\|(<.*?>)?\{\{\{\[\[" +
-        r"(?P<prototype>(?P<macro>\w*).*)" +
-        r"\]\]\}\}\}\s*\|\|" +
-        r"\s*(?P<help>.*?)\s*\|\|\s*(?P<example>.*?)\s*\|\|$", re.U + re.M)
+        r"\|\|(<.*?>)?\{\{\{" +
+        r"<<(?P<prototype>(?P<macro>\w*).*)>>" +
+        r"\}\}\}\s*\|\|" +
+        r"[^|]*\|\|[^|]*\|\|<[^>]*>" +
+        r"\s*(?P<help>.*?)\s*\|\|\s*(?P<example>.*?)\s*(<<[^>]*>>)*\s*\|\|$", re.U|re.M)
     help = {}
     for match in macro_re.finditer(content):
         help[match.group('macro')] = match
