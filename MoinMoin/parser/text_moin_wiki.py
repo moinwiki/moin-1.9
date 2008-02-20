@@ -9,11 +9,14 @@
 """
 
 import re
+import logging
+
 from MoinMoin import config, wikiutil, macro
 from MoinMoin.Page import Page
-from MoinMoin.support.python_compatibility import rsplit
+from MoinMoin.support.python_compatibility import rsplit, set
 
 Dependencies = ['user'] # {{{#!wiki comment ... }}} has different output depending on the user's profile settings
+
 
 class Parser:
     """
@@ -36,20 +39,38 @@ class Parser:
     PARENT_PREFIX_LEN = wikiutil.PARENT_PREFIX_LEN
 
     punct_pattern = re.escape(u'''"\'}]|:,.)?!''')
-    url_scheme = (u'http|https|ftp|nntp|news|mailto|telnet|wiki|file|irc' +
-                 (config.url_schemas and (u'|' + u'|'.join(config.url_schemas)) or ''))
+    url_scheme = u'|'.join(config.url_schemas)
 
     # some common rules
     url_rule = ur'''
-        (^|(?<!\w))  # require either beginning of line or some whitespace to the left
+        (?:^|(?<=\W))  # require either beginning of line or some non-alphanum char (whitespace, punctuation) to the left
         (?P<url_target>  # capture whole url there
          (?P<url_scheme>%(url_scheme)s)  # some scheme
          \:
          \S+?  # anything non-whitespace
         )
-        ($|(?=\s|[%(punct)s](\s|$)))  # require either end of line or some whitespace or some punctuation+blank/eol afterwards
+        (?:$|(?=\s|[%(punct)s]+(\s|$)))  # require either end of line or some whitespace or some punctuation+blank/eol afterwards
     ''' % {
         'url_scheme': url_scheme,
+        'punct': punct_pattern,
+    }
+
+    # this is for a free (non-bracketed) interwiki link - to avoid false positives,
+    # we are rather restrictive here (same as in moin 1.5: require that the
+    # interwiki_wiki name starts with an uppercase letter A-Z. Later, the code
+    # also checks whether the wiki name is in the interwiki map (if not, it renders
+    # normal text, no link):
+    interwiki_rule = ur'''
+        (?:^|(?<=\W))  # require either beginning of line or some non-alphanum char (whitespace, punctuation) to the left
+        (?P<interwiki_wiki>[A-Z][a-zA-Z]+)  # interwiki wiki name
+        \:
+        (?P<interwiki_page>  # interwiki page name
+         (?=[^ ]*[%(u)s%(l)s0..9][^ ]*\ )  # make sure there is something non-blank with at least one alphanum letter following
+         [^\s%(punct)s]+  # we take all until we hit some blank or punctuation char ...
+        )
+    ''' % {
+        'u': config.chars_upper,
+        'l': config.chars_lower,
         'punct': punct_pattern,
     }
 
@@ -90,13 +111,11 @@ class Parser:
     # link targets:
     extern_rule = r'(?P<extern_addr>(?P<extern_scheme>%s)\:.*)' % url_scheme
     attach_rule = r'(?P<attach_scheme>attachment|drawing)\:(?P<attach_addr>.*)'
-    inter_rule = r'(?P<inter_wiki>[A-Z][a-zA-Z]+):(?P<inter_page>.*)'
     page_rule = r'(?P<page_name>.*)'
 
     link_target_rules = r'|'.join([
         extern_rule,
         attach_rule,
-        inter_rule,
         page_rule,
     ])
     link_target_re = re.compile(link_target_rules, re.VERBOSE|re.UNICODE)
@@ -105,7 +124,7 @@ class Parser:
         (?P<link>
             \[\[  # link target
             \s*  # strip space
-            (?P<link_target>.+?)
+            (?P<link_target>[^|]+?)
             \s*  # strip space
             (
                 \|  # link description
@@ -113,23 +132,23 @@ class Parser:
                 (?P<link_desc>
                     (?:  # 1. we have either a transclusion here (usually a image)
                         \{\{
-                        \s*.+?\s*  # usually image target (strip space)
-                        (\|\s*.*?\s*  # usually image alt text (optional, strip space)
-                            (\|\s*.*?\s*  # transclusion parameters (usually key="value" format, optional, strip space)
+                        \s*[^|]+?\s*  # usually image target (strip space)
+                        (\|\s*[^|]*?\s*  # usually image alt text (optional, strip space)
+                            (\|\s*[^|]*?\s*  # transclusion parameters (usually key="value" format, optional, strip space)
                             )?
                         )?
                         \}\}
                     )
                     |
                     (?:  # 2. or we have simple text here.
-                        .+?
+                        [^|]+?
                     )
                 )?
                 \s*  # strip space
                 (
                     \|  # link parameters
                     \s*  # strip space
-                    (?P<link_params>.+?)?
+                    (?P<link_params>[^|]+?)?
                     \s*  # strip space
                 )?
             )?
@@ -140,9 +159,9 @@ class Parser:
     transclude_rule = r"""
         (?P<transclude>
             \{\{
-            \s*(?P<transclude_target>.+?)\s*  # usually image target (strip space)
-            (\|\s*(?P<transclude_desc>.+?)?\s*  # usually image alt text (optional, strip space)
-                (\|\s*(?P<transclude_params>.+?)?\s*  # transclusion parameters (usually key="value" format, optional, strip space)
+            \s*(?P<transclude_target>[^|]+?)\s*  # usually image target (strip space)
+            (\|\s*(?P<transclude_desc>[^|]+?)?\s*  # usually image alt text (optional, strip space)
+                (\|\s*(?P<transclude_params>[^|]+?)?\s*  # transclusion parameters (usually key="value" format, optional, strip space)
                 )?
             )?
             \}\}
@@ -150,7 +169,7 @@ class Parser:
     """
     text_rule = r"""
         (?P<simple_text>
-            .+  # some text (not empty)
+            [^|]+  # some text (not empty, does not contain separator)
         )
     """
     # link descriptions:
@@ -186,13 +205,14 @@ class Parser:
     indent_re = re.compile(ur"^\s*", re.UNICODE)
     eol_re = re.compile(r'\r?\n', re.UNICODE)
 
-    # this is used inside <pre> / parser sections (we just want to know when it's over):
-    pre_scan_rule = ur"""
-(?P<pre>
-    \}\}\}  # in pre, we only look for the end of the pre
+    # this is used inside parser/pre sections (we just want to know when it's over):
+    parser_unique = u''
+    parser_scan_rule = ur"""
+(?P<parser_end>
+    %s\}\}\}  # in parser/pre, we only look for the end of the parser/pre
 )
 """
-    pre_scan_re = re.compile(pre_scan_rule, re.VERBOSE|re.UNICODE)
+
 
     # the big, fat, less ugly one ;)
     # please be very careful: blanks and # must be escaped with \ !
@@ -227,9 +247,13 @@ class Parser:
     )
 )|(?P<remark>
     (
-     (?P<remark_on>/\*\ ?)  # inline remark on (eat trailing blank)
+     (^|(?<=\s))  # we require either beginning of line or some whitespace before a remark begin
+     (?P<remark_on>/\*\s)  # inline remark on (require and eat whitespace after it)
+    )
     |
-     (?P<remark_off>\ ?\*/)  # off
+    (
+     (?P<remark_off>\s\*/)  # off (require and eat whitespace before it)
+     (?=\s)  # we require some whitespace after a remark end
     )
 )|(?P<sup>
     \^  # superscript on
@@ -248,20 +272,7 @@ class Parser:
     (?P<tt_bt_text>.*?)  # capture the text
     `  # off
 )|(?P<interwiki>
-    (?P<interwiki_wiki>[A-Z][a-zA-Z]+)  # interwiki wiki name
-    \:
-    (?P<interwiki_page>
-     (?=[^ ]*[%(u)s%(l)s0..9][^ ]*\ )  # make sure there is something non-blank with at least one alphanum letter following
-     [^\s'\"\:\<\|]
-     (
-      [^\s%(punct)s]  # we take all until we hit some blank or punctuation char ...
-     |
-      (
-       [%(punct)s]     # ... but if some punctuation char is followed by something
-       [^\s%(punct)s]  # non-blank (or more punctuation stuff), we also take it!
-      )
-     )+
-    )
+    %(interwiki_rule)s  # OtherWiki:PageName
 )|(?P<word>  # must come AFTER interwiki rule!
     %(word_rule)s  # CamelCase wiki words
 )|
@@ -288,18 +299,22 @@ class Parser:
     (?P<heading_text>.*?)  # capture heading text
     \s+(?P=hmarker)\s$  # some === at end of line (matching amount as we have seen), eat blanks
 )|(?P<parser>
-    \{\{\{
-    (
-     \#!.*  # we have a parser name directly following
+    \{\{\{  # parser on
+    (?P<parser_unique>(\{*|\w*))  # either some more {{{{ or some chars to solve the nesting problem
+    (?P<parser_line>
+     (
+      \#!  # hash bang
+      (?P<parser_name>\w*)  # we have a parser name (can be empty) directly following the {{{
+      (
+       \s+  # some space ...
+       (?P<parser_args>.+?)  # followed by parser args
+      )?  # parser args are optional
+      \s*  # followed by whitespace (eat it) until EOL
+     )
     |
-     \s*$  # no parser name, eat whitespace
-    )
-)|(?P<pre>
-    (
-     \{\{\{\ ?  # pre on
-    |
-     \}\}\}  # off
-    )
+     (?P<parser_nothing>\s*)  # no parser name, only whitespace up to EOL (eat it)
+    )$
+    # "parser off" detection is done with parser_scan_rule!
 )|(?P<comment>
     ^\#\#.*$  # src code comment, rest of line
 )|(?P<ol>
@@ -332,6 +347,7 @@ class Parser:
         'punct': punct_pattern,
         'ol_rule': ol_rule,
         'dl_rule': dl_rule,
+        'interwiki_rule': interwiki_rule,
         'word_rule': word_rule,
         'link_rule': link_rule,
         'transclude_rule': transclude_rule,
@@ -343,7 +359,7 @@ class Parser:
     # Don't start p before these
     no_new_p_before = ("heading rule table tableZ tr td "
                        "ul ol dl dt dd li li_none indent "
-                       "macro parser pre")
+                       "macro parser")
     no_new_p_before = no_new_p_before.split()
     no_new_p_before = dict(zip(no_new_p_before, [1] * len(no_new_p_before)))
 
@@ -379,10 +395,7 @@ class Parser:
         # None == we are not in any kind of pre section (was: 0)
         # 'search_parser' == we didn't get a parser yet, still searching for it (was: 1)
         # 'found_parser' == we found a valid parser (was: 2)
-        # 'no_parser' == we have no (valid) parser, use a normal <pre>...</pre> (was: 3)
         self.in_pre = None
-        # needed for nested {{{
-        self.in_nested_pre = 0
 
         self.no_862 = False
         self.in_table = 0
@@ -391,7 +404,6 @@ class Parser:
         # holds the nesting level (in chars) of open lists
         self.list_indents = []
         self.list_types = []
-
 
     def _close_item(self, result):
         #result.append("<!-- close item begin -->\n")
@@ -605,7 +617,6 @@ class Parser:
     _url_target_repl = _url_repl
     _url_scheme_repl = _url_repl
 
-
     def _transclude_description(self, desc, default_text=''):
         """ parse a string <desc> valid as transclude description (text, ...)
             and return "formatted" content (we do not pass it through the text
@@ -624,29 +635,33 @@ class Parser:
         desc = wikiutil.escape(desc)
         return desc
 
-    def _get_params(self, params, defaults=None, acceptable_keys=None):
+    def _get_params(self, params, tag_attrs=None, acceptable_attrs=None, query_args=None):
         """ parse the parameters of link/transclusion markup,
             defaults can be a dict with some default key/values
             that will be in the result as given, unless overriden
             by the params.
         """
-        if defaults:
-            result = defaults
-        else:
-            result = {}
+        if tag_attrs is None:
+            tag_attrs = {}
+        if query_args is None:
+            query_args = {}
         if params:
             fixed, kw, trailing = wikiutil.parse_quoted_separated(params)
             # we ignore fixed and trailing args and only use kw args:
-            if acceptable_keys is None:
-                acceptable_keys = []
+            if acceptable_attrs is None:
+                acceptable_attrs = []
             for key, val in kw.items():
                 key = str(key) # we can't use unicode as key
-                if key in acceptable_keys:
+                if key in acceptable_attrs:
                     key = wikiutil.escape(key)
                     val = unicode(val) # but for the value
                     val = wikiutil.escape(val)
-                    result[key] = val
-        return result
+                    tag_attrs[key] = val
+                elif key.startswith('&'):
+                    key = key[1:]
+                    val = unicode(val)
+                    query_args[key] = val
+        return tag_attrs, query_args
 
     def _transclude_repl(self, word, groups):
         """Handles transcluding content, usually embedding images."""
@@ -654,8 +669,8 @@ class Parser:
         target = wikiutil.url_unquote(target, want_unicode=True)
         desc = groups.get('transclude_desc', '') or ''
         params = groups.get('transclude_params', u'') or u''
-        acceptable_keys_img = ['class', 'title', 'longdesc', 'width', 'height', 'align', ] # no style because of JS
-        acceptable_keys_object = ['class', 'title', 'width', 'height', # no style because of JS
+        acceptable_attrs_img = ['class', 'title', 'longdesc', 'width', 'height', 'align', ] # no style because of JS
+        acceptable_attrs_object = ['class', 'title', 'width', 'height', # no style because of JS
                                   'type', 'standby', ] # we maybe need a hack for <PARAM> here
         m = self.link_target_re.match(target)
         if m:
@@ -665,10 +680,12 @@ class Parser:
                 desc = self._transclude_description(desc, target)
                 if scheme.startswith('http'): # can also be https
                     # currently only supports ext. image inclusion
-                    params = self._get_params(params,
-                                              defaults={'class': 'external_image', 'alt': desc, 'title': desc, },
-                                              acceptable_keys=acceptable_keys_img)
-                    return self.formatter.image(src=target, **params)
+                    tag_attrs, query_args = self._get_params(params,
+                                                             tag_attrs={'class': 'external_image',
+                                                                        'alt': desc,
+                                                                        'title': desc, },
+                                                             acceptable_attrs=acceptable_attrs_img)
+                    return self.formatter.image(src=target, **tag_attrs)
                     # FF2 has a bug with target mimetype detection, it looks at the url path
                     # and expects to find some "filename extension" there (like .png) and this
                     # (not the response http headers) will set the default content-type of
@@ -690,20 +707,26 @@ class Parser:
                         return self.formatter.attachment_inlined(url, desc)
                     elif mt.major == 'image':
                         desc = self._transclude_description(desc, url)
-                        params = self._get_params(params,
-                                                  defaults={'alt': desc, 'title': desc, },
-                                                  acceptable_keys=acceptable_keys_img)
-                        return self.formatter.attachment_image(url, **params)
+                        tag_attrs, query_args = self._get_params(params,
+                                                                 tag_attrs={'alt': desc,
+                                                                            'title': desc, },
+                                                                 acceptable_attrs=acceptable_attrs_img)
+                        return self.formatter.attachment_image(url, **tag_attrs)
                     else:
                         from MoinMoin.action import AttachFile
                         pagename = self.formatter.page.page_name
-                        href = AttachFile.getAttachUrl(pagename, url, self.request, escaped=0)
-                        params = self._get_params(params,
-                                                  defaults={'title': desc, },
-                                                  acceptable_keys=acceptable_keys_object)
-                        return (self.formatter.transclusion(1, data=href, type=mt.spoil(), **params) +
-                                self._transclude_description(desc, url) +
-                                self.formatter.transclusion(0))
+                        if AttachFile.exists(self.request, pagename, url):
+                            href = AttachFile.getAttachUrl(pagename, url, self.request, escaped=0)
+                            tag_attrs, query_args = self._get_params(params,
+                                                                     tag_attrs={'title': desc, },
+                                                                     acceptable_attrs=acceptable_attrs_object)
+                            return (self.formatter.transclusion(1, data=href, type=mt.spoil(), **tag_attrs) +
+                                    self._transclude_description(desc, url) +
+                                    self.formatter.transclusion(0))
+                        else:
+                            return (self.formatter.attachment_link(1, url) +
+                                    self._transclude_description(desc, url) +
+                                    self.formatter.attachment_link(0))
 
                         #NOT USED CURRENTLY:
 
@@ -725,34 +748,41 @@ class Parser:
 
             elif m.group('page_name'):
                 # experimental client side transclusion
-                page_name = m.group('page_name')
-                url = Page(self.request, page_name).url(self.request, querystr={'action': 'content', }, relative=False)
-                params = self._get_params(params,
-                                          defaults={'type': 'text/html', 'width': '100%', },
-                                          acceptable_keys=acceptable_keys_object)
-                return (self.formatter.transclusion(1, data=url, **params) +
-                        self._transclude_description(desc, page_name) +
-                        self.formatter.transclusion(0))
-                #return u"Error: <<Include(%s,%s)>> emulation missing..." % (page_name, args)
-
-            elif m.group('inter_wiki'):
-                # experimental client side transclusion
-                wiki_name = m.group('inter_wiki')
-                page_name = m.group('inter_page')
-                wikitag, wikiurl, wikitail, err = wikiutil.resolve_interwiki(self.request, wiki_name, page_name)
-                url = wikiutil.join_wiki(wikiurl, wikitail)
-                url += '?action=content' # XXX moin specific
-                params = self._get_params(params,
-                                          defaults={'type': 'text/html', 'width': '100%', },
-                                          acceptable_keys=acceptable_keys_object)
-                return (self.formatter.transclusion(1, data=url, **params) +
-                        self._transclude_description(desc, page_name) +
-                        self.formatter.transclusion(0))
-                #return u"Error: <<RemoteInclude(%s:%s,%s)>> still missing." % (wiki_name, page_name, args)
+                page_name_all = m.group('page_name')
+                if ':' in page_name_all:
+                    wiki_name, page_name = page_name_all.split(':', 1)
+                    wikitag, wikiurl, wikitail, err = wikiutil.resolve_interwiki(self.request, wiki_name, page_name)
+                else:
+                    err = True
+                if err: # not a interwiki link / not in interwiki map
+                    tag_attrs, query_args = self._get_params(params,
+                                                             tag_attrs={'type': 'text/html',
+                                                                        'width': '100%', },
+                                                             acceptable_attrs=acceptable_attrs_object)
+                    if 'action' not in query_args:
+                        query_args['action'] = 'content'
+                    url = Page(self.request, page_name_all).url(self.request, querystr=query_args, relative=False)
+                    return (self.formatter.transclusion(1, data=url, **tag_attrs) +
+                            self._transclude_description(desc, page_name_all) +
+                            self.formatter.transclusion(0))
+                    #return u"Error: <<Include(%s,%s)>> emulation missing..." % (page_name, args)
+                else: # looks like a valid interwiki link
+                    url = wikiutil.join_wiki(wikiurl, wikitail)
+                    tag_attrs, query_args = self._get_params(params,
+                                                             tag_attrs={'type': 'text/html',
+                                                                        'width': '100%', },
+                                                             acceptable_attrs=acceptable_attrs_object)
+                    if 'action' not in query_args:
+                        query_args['action'] = 'content' # XXX moin specific
+                    url += '?%s' % wikiutil.makeQueryString(query_args)
+                    return (self.formatter.transclusion(1, data=url, **tag_attrs) +
+                            self._transclude_description(desc, page_name) +
+                            self.formatter.transclusion(0))
+                    #return u"Error: <<RemoteInclude(%s:%s,%s)>> still missing." % (wiki_name, page_name, args)
 
             else:
                 desc = self._transclude_description(desc, target)
-                return self.formatter.text('[[%s|%s|%s]]' % (target, desc, params))
+                return self.formatter.text('{{%s|%s|%s}}' % (target, desc, params))
         return word +'???'
     _transclude_target_repl = _transclude_repl
     _transclude_desc_repl = _transclude_repl
@@ -791,61 +821,63 @@ class Parser:
         target = groups.get('link_target', '')
         desc = groups.get('link_desc', '') or ''
         params = groups.get('link_params', u'') or u''
-        acceptable_keys = ['class', 'title', 'target', ] # no style because of JS
+        acceptable_attrs = ['class', 'title', 'target', 'accesskey', ] # no style because of JS
         mt = self.link_target_re.match(target)
         if mt:
             if mt.group('page_name'):
                 page_name_and_anchor = mt.group('page_name')
-                # handle anchors
-                try:
-                    page_name, anchor = rsplit(page_name_and_anchor, "#", 1)
-                except ValueError:
-                    page_name, anchor = page_name_and_anchor, ""
-                current_page = self.formatter.page.page_name
-                if not page_name:
-                    page_name = current_page
-                # handle relative links
-                abs_page_name = wikiutil.AbsPageName(current_page, page_name)
-                params = self._get_params(params,
-                                          defaults={},
-                                          acceptable_keys=acceptable_keys)
-                return (self.formatter.pagelink(1, abs_page_name, anchor=anchor, **params) +
-                        self._link_description(desc, target, page_name_and_anchor) +
-                        self.formatter.pagelink(0, abs_page_name))
+                if ':' in page_name_and_anchor:
+                    wiki_name, page_name = page_name_and_anchor.split(':', 1)
+                    wikitag, wikiurl, wikitail, err = wikiutil.resolve_interwiki(self.request, wiki_name, page_name)
+                else:
+                    err = True
+                if err: # not a interwiki link / not in interwiki map
+                    # handle anchors
+                    try:
+                        page_name, anchor = rsplit(page_name_and_anchor, "#", 1)
+                    except ValueError:
+                        page_name, anchor = page_name_and_anchor, ""
+                    current_page = self.formatter.page.page_name
+                    if not page_name:
+                        page_name = current_page
+                    # handle relative links
+                    abs_page_name = wikiutil.AbsPageName(current_page, page_name)
+                    tag_attrs, query_args = self._get_params(params,
+                                                             tag_attrs={},
+                                                             acceptable_attrs=acceptable_attrs)
+                    return (self.formatter.pagelink(1, abs_page_name, anchor=anchor, querystr=query_args, **tag_attrs) +
+                            self._link_description(desc, target, page_name_and_anchor) +
+                            self.formatter.pagelink(0, abs_page_name))
+                else: # interwiki link
+                    tag_attrs, query_args = self._get_params(params,
+                                                             tag_attrs={},
+                                                             acceptable_attrs=acceptable_attrs)
+                    return (self.formatter.interwikilink(1, wiki_name, page_name, querystr=query_args, **tag_attrs) +
+                            self._link_description(desc, target, page_name) +
+                            self.formatter.interwikilink(0, wiki_name, page_name))
 
             elif mt.group('extern_addr'):
                 scheme = mt.group('extern_scheme')
                 target = mt.group('extern_addr')
-                params = self._get_params(params,
-                                          defaults={'class': scheme, },
-                                          acceptable_keys=acceptable_keys)
-                return (self.formatter.url(1, target, **params) +
+                tag_attrs, query_args = self._get_params(params,
+                                                         tag_attrs={'class': scheme, },
+                                                         acceptable_attrs=acceptable_attrs)
+                return (self.formatter.url(1, target, **tag_attrs) +
                         self._link_description(desc, target, target) +
                         self.formatter.url(0))
-
-            elif mt.group('inter_wiki'):
-                wiki_name = mt.group('inter_wiki')
-                page_name = mt.group('inter_page')
-                wikitag_bad = wikiutil.resolve_interwiki(self.request, wiki_name, page_name)[3]
-                params = self._get_params(params,
-                                          defaults={},
-                                          acceptable_keys=acceptable_keys)
-                return (self.formatter.interwikilink(1, wiki_name, page_name, **params) +
-                        self._link_description(desc, target, page_name) +
-                        self.formatter.interwikilink(0, wiki_name, page_name))
 
             elif mt.group('attach_scheme'):
                 scheme = mt.group('attach_scheme')
                 url = wikiutil.url_unquote(mt.group('attach_addr'), want_unicode=True)
-                params = self._get_params(params,
-                                          defaults={'title': desc, },
-                                          acceptable_keys=acceptable_keys)
+                tag_attrs, query_args = self._get_params(params,
+                                                         tag_attrs={'title': desc, },
+                                                         acceptable_attrs=acceptable_attrs)
                 if scheme == 'attachment':
-                    return (self.formatter.attachment_link(1, url, **params) +
+                    return (self.formatter.attachment_link(1, url, querystr=query_args, **tag_attrs) +
                             self._link_description(desc, target, url) +
                             self.formatter.attachment_link(0))
                 elif scheme == 'drawing':
-                    return self.formatter.attachment_drawing(url, desc, alt=desc, **params)
+                    return self.formatter.attachment_drawing(url, desc, alt=desc, **tag_attrs)
             else:
                 if desc:
                     desc = '|' + desc
@@ -1067,7 +1099,8 @@ class Parser:
             elif key == '#':
                 arg = parser.get_token()
                 try:
-                    if len(arg) != 6: raise ValueError
+                    if len(arg) != 6:
+                        raise ValueError
                     dummy = int(arg, 16)
                 except ValueError:
                     msg = _('Expected a color value "%(arg)s" after "%(key)s"', formatted=False) % {
@@ -1144,55 +1177,97 @@ class Parser:
 
     def _parser_repl(self, word, groups):
         """Handle parsed code displays."""
-        if word.startswith('{{{'):
-            self.in_nested_pre = 1
-            word = word[3:]
-
         self.parser = None
         self.parser_name = None
-        s_word = word.strip()
-        if s_word == '#!':
-            # empty bang paths lead to a normal code display
-            # can be used to escape real, non-empty bang paths
-            word = ''
-            self.in_pre = 'no_parser'
-            return self._closeP() + self.formatter.preformatted(1)
-        elif s_word.startswith('#!'):
+        self.parser_lines = []
+        parser_line = word = groups.get('parser_line', u'')
+        parser_name = groups.get('parser_name', None)
+        parser_args = groups.get('parser_args', None)
+        parser_nothing = groups.get('parser_nothing', None)
+        parser_unique = groups.get('parser_unique', u'') or u''
+        #logging.debug("_parser_repl: parser_name %r parser_args %r parser_unique %r" % (parser_name, parser_args, parser_unique))
+        if set(parser_unique) == set('{'): # just some more {{{{{{
+            parser_unique = u'}' * len(parser_unique) # for symmetry cosmetic reasons
+        self.parser_unique = parser_unique
+        if parser_name is not None:
             # First try to find a parser for this
-            parser_name = s_word[2:].split()[0]
+            if parser_name == u'':
+                # empty bang paths lead to a normal code display
+                # can be used to escape real, non-empty bang paths
+                #logging.debug("_parser_repl: empty bangpath")
+                parser_name = 'text'
+                word = ''
+        elif parser_nothing is None:
+            # there was something non-whitespace following the {{{
+            parser_name = 'text'
+
+        self.setParser(parser_name)
+        if not self.parser and parser_name:
+            # loading the desired parser didn't work, retry a safe option:
+            wanted_parser = parser_name
+            parser_name = 'text'
             self.setParser(parser_name)
+            word = '%s %s (-)' % (wanted_parser, parser_args)  # indication that it did not work
 
         if self.parser:
             self.parser_name = parser_name
             self.in_pre = 'found_parser'
-            self.parser_lines = [word]
-            return ''
-        elif s_word:
-            self.in_pre = 'no_parser'
-            return self._closeP() + self.formatter.preformatted(1) + \
-                   self.formatter.text(s_word + ' (-)')
+            if word:
+                self.parser_lines.append(word)
         else:
             self.in_pre = 'search_parser'
-            return ''
+        
+        #logging.debug("_parser_repl: in_pre %r line %d" % (self.in_pre, self.lineno))
+        return ''
+    _parser_unique_repl = _parser_repl
+    _parser_line_repl = _parser_repl
+    _parser_name_repl = _parser_repl
+    _parser_args_repl = _parser_repl
+    _parser_nothing_repl = _parser_repl
 
-    def _pre_repl(self, word, groups):
-        """Handle code displays."""
-        word = word.strip()
-        if word == '{{{' and not self.in_pre:
-            self.in_nested_pre = 1
-            self.in_pre = 'no_parser'
-            return self._closeP() + self.formatter.preformatted(1)
-        elif word == '}}}' and self.in_pre and self.in_nested_pre == 1:
-            self.in_pre = None
-            self.inhibit_p = 0
-            self.in_nested_pre = 0
-            return self.formatter.preformatted(0)
-        elif word == '}}}' and self.in_pre and self.in_nested_pre > 1:
-            self.in_nested_pre -= 1
-            if self.in_nested_pre < 0:
-                self.in_nested_pre = 0
-            return self.formatter.text(word)
-        return self.formatter.text(word)
+    def _parser_content(self, line):
+        """ handle state and collecting lines for parser in pre/parser sections """
+        #logging.debug("parser_content: %r" % line)
+        if self.in_pre == 'search_parser' and line.strip():
+            # try to find a parser specification
+            if line.strip().startswith("#!"):
+                parser_name = line.strip()[2:].split()[0]
+            else:
+                parser_name = 'text'
+            self.setParser(parser_name)
+
+            if not self.parser:
+                parser_name = 'text'
+                self.setParser(parser_name)
+
+            if self.parser:
+                self.in_pre = 'found_parser'
+                self.parser_lines.append(line)
+                self.parser_name = parser_name
+
+        elif self.in_pre == 'found_parser':
+            # collect the content lines
+            self.parser_lines.append(line)
+
+        return ''  # we emit the content after reaching the end of the parser/pre section
+
+    def _parser_end_repl(self, word, groups):
+        """ when we reach the end of a parser/pre section,
+            we call the parser with the lines we collected
+        """
+        #if self.in_pre:
+        self.in_pre = None
+        self.inhibit_p = 0
+        #logging.debug("_parser_end_repl: in_pre %r line %d" % (self.in_pre, self.lineno))
+        self.request.write(self._closeP())
+        if self.parser_name is None:
+            # we obviously did not find a parser specification
+            self.parser_name = 'text'
+        result = self.formatter.parser(self.parser_name, self.parser_lines)
+        del self.parser_lines
+        self.in_pre = None
+        self.parser = None
+        return result
 
     def _smiley_repl(self, word, groups):
         """Handle smileys."""
@@ -1224,41 +1299,53 @@ class Parser:
     _macro_name_repl = _macro_repl
     _macro_args_repl = _macro_repl
 
-    def scan(self, scan_re, line, inhibit_p=False):
+    def scan(self, line, inhibit_p=False):
         """ Scans one line
         Append text before match, invoke replace() with match, and add text after match.
         """
         result = []
-        lastpos = 0
+        lastpos = 0 # absolute position within line
+        line_length = len(line)
 
         ###result.append(u'<span class="info">[scan: <tt>"%s"</tt>]</span>' % line)
-        for match in scan_re.finditer(line):
-            # Add text before the match
-            if lastpos < match.start():
+        while lastpos <= line_length: # it is <=, not <, because we need to process the empty line also
+            parser_scan_re = re.compile(self.parser_scan_rule % re.escape(self.parser_unique), re.VERBOSE|re.UNICODE)
+            scan_re = self.in_pre and parser_scan_re or self.scan_re
+            match = scan_re.search(line, lastpos)
+            if match:
+                start = match.start()
+                if lastpos < start:
+                    if self.in_pre:
+                        self._parser_content(line[lastpos:start])
+                    else:
+                        ###result.append(u'<span class="info">[add text before match: <tt>"%s"</tt>]</span>' % line[lastpos:match.start()])
+                        # self.no_862 is added to solve the issue of macros called inline
+                        if not (inhibit_p or self.inhibit_p or self.in_pre or self.formatter.in_p or self.no_862):
+                            result.append(self.formatter.paragraph(1, css_class="line862"))
+                        # add the simple text in between lastpos and beginning of current match
+                        result.append(self.formatter.text(line[lastpos:start]))
 
-                ###result.append(u'<span class="info">[add text before match: <tt>"%s"</tt>]</span>' % line[lastpos:match.start()])
-                # self.no_862 is added to solve the issue of macros called inline
-                if not (inhibit_p or self.inhibit_p or self.in_pre or self.formatter.in_p or self.no_862):
-                    result.append(self.formatter.paragraph(1, css_class="line862"))
-                result.append(self.formatter.text(line[lastpos:match.start()]))
-
-            # Replace match with markup
-            if not (inhibit_p or self.inhibit_p or self.in_pre or self.formatter.in_p or
-                    self.in_table or self.in_list):
-                result.append(self.formatter.paragraph(1, css_class="line867"))
-            result.append(self.replace(match, inhibit_p))
-            lastpos = match.end()
-
-        ###result.append('<span class="info">[no match, add rest: <tt>"%s"<tt>]</span>' % line[lastpos:])
-
-        # Add paragraph with the remainder of the line
-        if not (inhibit_p or self.in_pre or self.in_li or self.in_dd or self.inhibit_p or
-                self.formatter.in_p) and lastpos < len(line):
-            result.append(self.formatter.paragraph(1, css_class="line874"))
-        if '}}}' in line and len(line[lastpos:].strip()) > 0:
-            result.append(self.scan(self.scan_re, line[lastpos:].strip(), inhibit_p=inhibit_p))
-        else:
-            result.append(self.formatter.text(line[lastpos:]))
+                # Replace match with markup
+                if not (inhibit_p or self.inhibit_p or self.in_pre or self.formatter.in_p or
+                        self.in_table or self.in_list):
+                    result.append(self.formatter.paragraph(1, css_class="line867"))
+                result.append(self.replace(match, inhibit_p))
+                end = match.end()
+                lastpos = end
+                if start == end:
+                    # we matched an empty string
+                    lastpos += 1 # proceed, we don't want to match this again
+            else:
+                if self.in_pre:
+                    self._parser_content(line[lastpos:])
+                elif line[lastpos:]:
+                    ###result.append('<span class="info">[no match, add rest: <tt>"%s"<tt>]</span>' % line[lastpos:])
+                    if not (inhibit_p or self.inhibit_p or self.in_pre or self.formatter.in_p or
+                            self.in_li or self.in_dd):
+                        result.append(self.formatter.paragraph(1, css_class="line874"))
+                    # add the simple text (no markup) after last match
+                    result.append(self.formatter.text(line[lastpos:]))
+                break # nothing left to do!
         return u''.join(result)
 
     def _replace(self, match):
@@ -1353,69 +1440,8 @@ class Parser:
                     self.in_processing_instructions = 0
                 else:
                     continue # do not parse this line
-            if self.in_pre:
-                # TODO: move this into function
-                # still looking for processing instructions
-                if self.in_pre == 'search_parser':
-                    self.parser = None
-                    parser_name = ''
-                    if line.strip().startswith("#!"):
-                        parser_name = line.strip()[2:].split()[0]
-                        self.setParser(parser_name)
 
-                    if self.parser:
-                        self.in_pre = 'found_parser'
-                        self.parser_lines = [line]
-                        self.parser_name = parser_name
-                        continue
-                    else:
-                        if not line.count('{{{') > 1:
-                            self.request.write(self._closeP() +
-                                self.formatter.preformatted(1))
-                        self.in_pre = 'no_parser'
-
-                if self.in_pre == 'found_parser':
-                    self.in_nested_pre += line.count('{{{')
-                    if self.in_nested_pre - line.count('}}}') == 0:
-                        self.in_nested_pre = 1
-                    # processing mode
-                    try:
-                        if line.endswith("}}}"):
-                            if self.in_nested_pre == 1:
-                                endpos = len(line) - 3
-                            else:
-                                self.parser_lines.append(line)
-                                self.in_nested_pre -= 1
-                                continue
-                        else:
-                            if self.in_nested_pre == 1:
-                                endpos = line.index("}}}")
-                            else:
-                                self.parser_lines.append(line)
-                                if "}}}" in line:
-                                    self.in_nested_pre -= 1
-                                continue
-
-                    except ValueError:
-                        self.parser_lines.append(line)
-                        continue
-                    if line[:endpos]:
-                        self.parser_lines.append(line[:endpos])
-
-                    # Close p before calling parser
-                    # TODO: do we really need this?
-                    self.request.write(self._closeP())
-                    res = self.formatter.parser(self.parser_name, self.parser_lines)
-                    self.request.write(res)
-                    del self.parser_lines
-                    self.in_pre = None
-                    self.parser = None
-
-                    # send rest of line through regex machinery
-                    line = line[endpos+3:]
-                    if not line.strip(): # just in the case "}}} " when we only have blanks left...
-                        continue
-            else:
+            if not self.in_pre:
                 # we don't have \n as whitespace any more
                 # This is the space between lines we join to one paragraph
                 line += ' '
@@ -1490,13 +1516,8 @@ class Parser:
                     self.in_table = 0
 
             # Scan line, format and write
-            scanning_re = self.in_pre and self.pre_scan_re or self.scan_re
-            if '{{{' in line:
-                self.in_nested_pre += 1
-            formatted_line = self.scan(scanning_re, line, inhibit_p=inhibit_p)
+            formatted_line = self.scan(line, inhibit_p=inhibit_p)
             self.request.write(formatted_line)
-            if self.in_pre == 'no_parser':
-                self.request.write(self.formatter.linebreak())
 
 
         # Close code displays, paragraphs, tables and open lists
@@ -1518,5 +1539,4 @@ class Parser:
             self.parser = wikiutil.searchAndImportPlugin(self.request.cfg, "parser", name)
         except wikiutil.PluginMissingError:
             self.parser = None
-
 
