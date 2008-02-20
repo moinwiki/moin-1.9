@@ -206,16 +206,7 @@ if moincode_timestamp > %d or cfg_mtime is None or cfg_mtime > %d:
             Dependencies = self.defaultDependencies
 
         if self.__is_static(Dependencies):
-            # XXX: copied from FormatterBase because we can't inherit from it
-            parser = wikiutil.searchAndImportPlugin(self.request.cfg, "parser", parser_name)
-
-            args = self._get_bang_args(lines[0])
-            if args is not None:
-                lines = lines[1:]
-            p = parser('\n'.join(lines), self.request, format_args=args)
-            p.format(self)
-            del p
-            return ''
+            return self.formatter.parser(parser_name, lines)
         else:
             return self.__insert_code('%s%s.parser(%r, %r)' %
                                       (self.__adjust_formatter_state(),
