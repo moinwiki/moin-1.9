@@ -411,6 +411,7 @@ class TestBlock(ParserTestCase):
             expected = r'<p.*?>AAA\s*\n*%s' % blockstart
             needle = re.compile(expected, re.MULTILINE)
             result = self.parse(text % test)
+            print expected, result
             assert needle.search(result)
 
     def testEmptyLineBeforeBlock(self):
@@ -430,6 +431,7 @@ class TestBlock(ParserTestCase):
             expected = r'<p.*?>AAA.*?(<p.*?>\s*)*%s' % blockstart # XXX ignores addtl. <p>
             needle = re.compile(expected, re.MULTILINE)
             result = self.parse(text % test)
+            print expected, result
             assert needle.search(result)
 
     def testUrlAfterBlock(self):
@@ -449,24 +451,11 @@ class TestBlock(ParserTestCase):
     def testColorizedPythonParserAndNestingPreBrackets(self):
         """ tests nested {{{ }}} for the python colorized parser
         """
-
-        raw = """{{{
-#!python
-import re
-pattern = re.compile(r'{{{This is some nested text}}}')}}}"""
-        output = self.parse(raw)
-        output = ''.join(output)
-        assert "r'{{{This is some nested text}}}'" in output
-
-    def testColorizedPythonParserAndNestingPreBracketsWithLinebreak(self):
-        """ tests nested {{{ }}} for the python colorized parser
-        """
-
-        raw = """{{{
+        raw = """{{{{
 #!python
 import re
 pattern = re.compile(r'{{{This is some nested text}}}')
-}}}"""
+}}}}"""
         output = self.parse(raw)
         output = ''.join(output)
         assert "r'{{{This is some nested text}}}'" in output
@@ -474,22 +463,10 @@ pattern = re.compile(r'{{{This is some nested text}}}')
     def testNestingPreBrackets(self):
         """ tests nested {{{ }}} for the wiki parser
         """
-
-        raw = """{{{
-Example
-You can use {{{brackets}}}}}}"""
-        output = self.parse(raw)
-        output = ''.join(output)
-        assert 'You can use {{{brackets}}}' in output
-
-    def testNestingPreBracketsWithLinebreak(self):
-        """ tests nested {{{ }}} for the wiki parser
-        """
-
-        raw = """{{{
+        raw = """{{{{
 Example
 You can use {{{brackets}}}
-}}}"""
+}}}}"""
         output = self.parse(raw)
         output = ''.join(output)
         print output
@@ -499,8 +476,9 @@ You can use {{{brackets}}}
         """ tests text before nested {{{ }}} for the wiki parser
         """
         raw = """Example
-        {{{
-You can use {{{brackets}}}}}}"""
+        {{{{
+You can use {{{brackets}}}
+}}}}"""
         output = self.parse(raw)
         output = ''.join(output)
         assert 'Example <ul><li style="list-style-type:none"><pre>You can use {{{brackets}}}</pre>' in output
@@ -510,9 +488,9 @@ You can use {{{brackets}}}}}}"""
         """
         py.test.skip("Broken")
 
-        raw = """{{{
+        raw = """{{{{
 Test {{{brackets}}} and test {{{brackets}}}
-}}}"""
+}}}}"""
         output = self.parse(raw)
         output = ''.join(output)
         expected = '<pre>Test {{{brackets}}} and test {{{brackets}}}'
@@ -542,10 +520,14 @@ class TestLinkingMarkup(ParserTestCase):
         ('[[../something]]', '<a class="nonexistent" href="./something">../something</a>'),
         ('[[/something]]', '<a class="nonexistent" href="./%s/something">/something</a>' % PAGENAME),
         ('[[something#anchor]]', '<a class="nonexistent" href="./something#anchor">something#anchor</a>'),
-        ('MoinMoin:something', '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/something" title="MoinMoin">something</a>'),
-        ('[[MoinMoin:something|some text]]', '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/something" title="MoinMoin">some text</a>'),
-        ('[[MoinMoin:with space]]', '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/with%20space" title="MoinMoin">with space</a>'),
-        ('[[MoinMoin:with space|some text]]', '<a class="interwiki" href="http://moinmoin.wikiwikiweb.de/with%20space" title="MoinMoin">some text</a>'),
+        ('MoinMoin:something', '<a class="interwiki" href="http://moinmo.in/something" title="MoinMoin">something</a>'),
+        ('[[MoinMoin:something|some text]]', '<a class="interwiki" href="http://moinmo.in/something" title="MoinMoin">some text</a>'),
+        ('[[MoinMoin:with space]]', '<a class="interwiki" href="http://moinmo.in/with%20space" title="MoinMoin">with space</a>'),
+        ('[[MoinMoin:with space|some text]]', '<a class="interwiki" href="http://moinmo.in/with%20space" title="MoinMoin">some text</a>'),
+        # no interwiki:
+        ('[[ABC:n]]', '<a class="nonexistent" href="./ABC%3An">ABC:n</a>'), # finnish/swedish abbreviations / possessive
+        ('ABC:n', 'ABC:n'), # finnish/swedish abbreviations / possessive
+        ('lowercase:nointerwiki', 'lowercase:nointerwiki'),
         ('[[http://google.com/|google]]', '<a class="http" href="http://google.com/">google</a>'),
         ]
 
