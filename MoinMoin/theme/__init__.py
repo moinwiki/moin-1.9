@@ -51,6 +51,7 @@ class ThemeBase:
         'up':          (_("Up"),                  "moin-parent.png", 15, 13),
         # FileAttach
         'attach':     ("%(attach_count)s",       "moin-attach.png",  7, 15),
+        'attachimg':  ("",                       "attach.png",      32, 32),
         # RecentChanges
         'rss':        (_("[RSS]"),               "moin-rss.png",    24, 24),
         'deleted':    (_("[DELETED]"),           "moin-deleted.png", 60, 12),
