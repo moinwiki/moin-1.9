@@ -5,11 +5,17 @@
 #acl MoinPagesEditorGroup:read,write,delete,revert All:read
 #format plain
 #language en
+
 # MoinMoin master InterWiki list
+# This list is deployed to all MoinMoin users in the file "intermap.txt". Nevertheless
+# you can add your own InterWiki entries to your wiki by editing your local InterWikiMap
+# if you do not want to modify the file directly.
 
 # MoinMoin additions
-MoinMaster http://moinmaster.wikiwikiweb.de/
-MoinTest http://test.wikiwikiweb.de/
+MoinMaster http://master.moinmo.in/
+MoinCVS http://hg.moinmo.in/moin/1.6?f=-1;file=
+MoinSrc http://hg.moinmo.in/moin/1.6?f=-1;file=
+MoinDoc http://hg.moinmo.in/moin/1.6/
 
 # for Germany: bookzilla.de instead of amazon == supporting GNU/Linux and 5% for FSF Europe
 # ISBN http://bookzilla.de/shop/action/advancedSearch?action=search&isbn=
@@ -17,22 +23,21 @@ ISBN http://www.amazon.com/exec/obidos/ISBN=
 RFC http://www.ietf.org/rfc/rfc
 FreshMeat http://freshmeat.net/
 Thinki http://www.thinkware.se/cgi-bin/thinki.cgi/
+py2exe http://www.py2exe.org/index.cgi/
 PythonFaq http://www.python.org/cgi-bin/faqw.py?req=show&file=faq$PAGE.htp
 DocBook http://docbook.org/wiki/moin.cgi/
 SpackOrg http://www.spack.org/index.cgi/
 ESW http://esw.w3.org/topic/
 OSPedia http://ospedia.osdir.com/
 MsgID http://groups.google.com/groups?as_umsgid=
-MoinCVS http://hg.thinkmo.de/moin/1.5?f=-1;file=
-MoinSrc http://hg.thinkmo.de/moin/1.5?f=-1;file=
-PyWebMail http://pywebmail.sourceforge.net/cgi-bin/moin.cgi/
+PyWebMail http://pywebmail.sourceforge.net/docs/
 BcWireless http://www.bcwireless.net/moin.cgi/
 DebianBug http://bugs.debian.org/
 DebianPackage http://packages.debian.org/
 CAKE http://www.cakem.net/mywiki/
 TrustixWiki http://doc.trustix.org/cgi-bin/trustixdoc.cgi?
 WLUG http://www.wlug.org.nz/
-OpenOfficeWiki http://ooowiki.de/
+OpenOfficeWiki http://www.ooowiki.de/
 Parawiki http://parawiki.plm.eecs.uni-kassel.de/
 CPAN http://search.cpan.org/perldoc?
 NemWiki http://nematologists.org.au/nemwiki
@@ -44,6 +49,9 @@ LinuxMM http://linux-mm.org/
 LinuxNet http://linux-net.osdl.org/index.php/
 KernelNewbies http://wiki.kernelnewbies.org/
 Spamikaze http://spamikaze.org/
+Ulteo http://www.ulteo.com/main/wiki/index.cgi/
+CsWikiPedia http://cs.wikipedia.org/wiki/
+MBWiki http://wiki.musicbrainz.org/
 
 ## Updated 2004-11-19 from http://www.usemod.com/cgi-bin/mb.pl?InterMapTxt
 ## Please modify the upper part of this page only
@@ -59,7 +67,7 @@ BuildingControlsWiki http://wiki.buildingcontrols.de/CoMa.php?CoMa=
 C2find http://c2.com/cgi/wiki?FindPage&value=
 Cache http://www.google.com/search?q=cache:
 CarpeWiki http://carpe.com/wiki/wiki.pl?
-CommunityWiki http://www.emacswiki.org/cgi-bin/community?
+CommunityWiki http://www.communitywiki.org/
 CraoWiki http://wiki.crao.net/index.php/
 CreationMatters http://www.ourpla.net/cgi-bin/wiki.pl?
 DebianforumDeWiki http://wiki.debianforum.de/
@@ -87,7 +95,7 @@ MbTest http://www.usemod.com/cgi-bin/mbtest.pl?
 MeatBall http://www.usemod.com/cgi-bin/mb.pl?
 MetaWiki http://sunir.org/apps/meta.pl?
 MetaWikiPedia http://meta.wikipedia.org/wiki/
-MoinMoin http://moinmoin.wikiwikiweb.de/
+MoinMoin http://moinmo.in/
 OddMuse http://www.oddmuse.org/
 OPAG http://opag.ca/wiki?
 OpenMind http://www2.iro.umontreal.ca/~paquetse/cgi-bin/om.cgi?
@@ -98,7 +106,7 @@ PersonalTelco http://www.personaltelco.net/index.cgi/
 PhpWiki http://phpwiki.sourceforge.net/phpwiki/index.php?
 Pikie http://pikie.darktech.org/cgi/pikie?
 PythonInfo http://wiki.python.org/moin/
-PythonWiki http://www.pythonwiki.de/
+PythonWiki http://wiki.python.de/
 PyWiki http://www.voght.com/cgi-bin/pywiki?
 ReformSociety http://www.reformsociety.com/
 SeattleWireless http://seattlewireless.net/?
@@ -118,6 +126,7 @@ Why http://clublet.com/c/c/why?
 Wiki http://c2.com/cgi/wiki?
 WikiPedia http://en.wikipedia.org/wiki/
 DeWikiPedia http://de.wikipedia.org/wiki/
+FrWikiPedia http://fr.wikipedia.org/wiki/
 WikiTravel http://www.wikitravel.org/article/
 WikiWorld http://WikiWorld.com/wiki/index.php/
 WikiZnanie http://www.wikiznanie.ru/wiki/wiki.phtml?title=
