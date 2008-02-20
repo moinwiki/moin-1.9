@@ -67,7 +67,11 @@ for c in u'\x00\x01\x02\x03\x04\x05\x06\x07\x08\x0b\x0c\x0e\x0f' \
 del c
 
 # Other stuff
-url_schemas = []
+url_schemas = ['http', 'https', 'ftp', 'file',
+               'mailto', 'nntp', 'news',
+               'telnet', 'irc', 'ircs', 'xmpp',
+               'webcal', 'ed2k', 'rootz',
+              ]
 
 smileys = (r"X-( :D <:( :o :( :) B) :)) ;) /!\ <!> (!) :-? :\ >:> |) " +
            r":-( :-) B-) :-)) ;-) |-) (./) {OK} {X} {i} {1} {2} {3} {*} {o}").split()
