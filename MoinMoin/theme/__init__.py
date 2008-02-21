@@ -1230,10 +1230,10 @@ var gui_editor_link_text = "%(text)s";
 
         _ = self.request.getText
         if self.request.user.isSubscribedTo([page.page_name]):
-            text = _("Unsubscribe", formatted=False)
+            action, text = 'unsubscribe', _("Unsubscribe", formatted=False)
         else:
-            text = _("Subscribe", formatted=False)
-        return page.link_to(self.request, text=text, querystr={'action': 'subscribe'}, css_class='nbsubscribe', rel='nofollow')
+            action, text = 'subscribe', _("Subscribe", formatted=False)
+        return page.link_to(self.request, text=text, querystr={'action': action}, css_class='nbsubscribe', rel='nofollow')
 
     def quicklinkLink(self, page):
         """ Return add/remove quicklink link
