@@ -119,7 +119,7 @@ class PluginScript(script.MoinScript):
         request.cfg.url_prefix_static = url_prefix_static
 
         # use this user for permissions checks
-        request.user = user.User(request, auth_username = self.options.dump_user)
+        request.user = user.User(request, name=self.options.dump_user)
 
         pages = request.rootpage.getPageList(user='') # get list of all pages in wiki
         pages.sort()
