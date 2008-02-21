@@ -13,7 +13,7 @@
 
 import sys, os, time, codecs, shutil, re, errno
 
-from MoinMoin import config, wikiutil, Page
+from MoinMoin import config, wikiutil, Page, user
 from MoinMoin import script
 from MoinMoin.action import AttachFile
 
@@ -52,6 +52,7 @@ page_template = u'''<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://ww
 </html>
 '''
 
+
 def _attachment(request, pagename, filename, outputdir):
     filename = filename.encode(config.charset)
     source_dir = AttachFile.getAttachDir(request, pagename)
@@ -81,8 +82,12 @@ class PluginScript(script.MoinScript):
     def __init__(self, argv=None, def_values=None):
         script.MoinScript.__init__(self, argv, def_values)
         self.parser.add_option(
-            "-t", "--target-dir", dest="target_dir",
-            help="Write html dump to DIRECTORY"
+            "-t", "--target-dir", dest = "target_dir",
+            help = "Write html dump to DIRECTORY"
+        )
+        self.parser.add_option(
+            "-u", "--username", dest = "dump_user",
+            help = "User the dump will be performed as (for ACL checks, etc)"
         )
 
     def mainloop(self):
@@ -112,6 +117,9 @@ class PluginScript(script.MoinScript):
 
         # fix url_prefix_static so we get relative paths in output html
         request.cfg.url_prefix_static = url_prefix_static
+
+        # use this user for permissions checks
+        request.user = user.User(request, auth_username = self.options.dump_user)
 
         pages = request.rootpage.getPageList(user='') # get list of all pages in wiki
         pages.sort()
