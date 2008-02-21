@@ -14,16 +14,13 @@ def execute(pagename, request):
 
     if not request.user.valid:
         request.theme.add_msg(_("You must login to add a quicklink."), "error")
-    elif request.user.isQuickLinkedTo([pagename]):
-        if request.user.removeQuicklink(pagename):
-            request.theme.add_msg(_('Your quicklink to this page has been removed.'), "info")
-        else: # should not happen
-            request.theme.add_msg(_('Your quicklink to this page could not be removed.'), "error")
-    else:
+    elif not request.user.isQuickLinkedTo([pagename]):
         if request.user.addQuicklink(pagename):
             request.theme.add_msg(_('A quicklink to this page has been added for you.'), "info")
         else: # should not happen
             request.theme.add_msg(_('A quicklink to this page could not be added for you.'), "error")
+    else:
+        request.theme.add_msg(_('You already have a quicklink to this page.', formatted=False))
 
     Page(request, pagename).send_page()
 

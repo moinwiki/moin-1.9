@@ -1246,10 +1246,10 @@ var gui_editor_link_text = "%(text)s";
 
         _ = self.request.getText
         if self.request.user.isQuickLinkedTo([page.page_name]):
-            text = _("Remove Link", formatted=False)
+            action, text = 'quickunlink', _("Remove Link", formatted=False)
         else:
-            text = _("Add Link", formatted=False)
-        return page.link_to(self.request, text=text, querystr={'action': 'quicklink'}, css_class='nbquicklink', rel='nofollow')
+            action, text = 'quicklink', _("Add Link", formatted=False)
+        return page.link_to(self.request, text=text, querystr={'action': action}, css_class='nbquicklink', rel='nofollow')
 
     def attachmentsLink(self, page):
         """ Return link to page attachments """
