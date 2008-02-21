@@ -4,7 +4,8 @@
 
     This action allows you to copy a page.
 
-    @copyright: 2007 MoinMoin:ReimarBauer
+    @copyright: 2007 MoinMoin:ReimarBauer,
+                2007 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 import re
@@ -24,16 +25,11 @@ class CopyPage(ActionBase):
         _ = self._
         self.form_trigger = 'copy'
         self.form_trigger_label = _('Copy Page')
-        filterfn = re.compile(pagename).match
+        filterfn = re.compile(ur"^%s/.*$" % re.escape(pagename), re.U).match
         pages = request.rootpage.getPageList(user='', exists=1, filter=filterfn)
-        self.subpages = []
-        self.users_subpages = []
-        subpage = pagename + '/'
-        for name in pages:
-            if name.startswith(subpage):
-                self.subpages.append(name)
-                if self.request.user.may.read(name):
-                    self.users_subpages.append(name)
+        subpagenames = request.rootpage.getPageList(user='', exists=1, filter=filterfn)
+        self.subpages = subpagenames
+        self.users_subpages = [pagename for pagename in subpagenames if self.request.user.may.read(pagename)]
 
     def is_allowed(self):
         may = self.request.user.may
@@ -56,7 +52,7 @@ class CopyPage(ActionBase):
         comment = wikiutil.clean_input(comment)
 
         self.page = PageEditor(self.request, self.pagename)
-        success, msg = self.page.copyPage(newpagename, comment)
+        success, msgs = self.page.copyPage(newpagename, comment)
 
         copy_subpages = 0
         if form.has_key('copy_subpages'):
@@ -70,9 +66,10 @@ class CopyPage(ActionBase):
                 self.page = PageEditor(self.request, name)
                 new_subpagename = name.replace(self.pagename, newpagename, 1)
                 success_i, msg = self.page.copyPage(new_subpagename, comment)
+                msgs = "%s %s" % (msgs, msg)
 
         self.newpagename = newpagename # keep there for finish
-        return success, msg
+        return success, msgs
 
     def do_action_finish(self, success):
         if success:

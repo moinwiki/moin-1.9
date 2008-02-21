@@ -4,7 +4,7 @@
 
     This action allows you to delete a page.
 
-    @copyright: 2006 MoinMoin:ThomasWaldmann,
+    @copyright: 2006-2007 MoinMoin:ThomasWaldmann,
                 2007 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
@@ -24,13 +24,8 @@ class DeletePage(ActionBase):
         _ = self._
         self.form_trigger = 'delete'
         self.form_trigger_label = _('Delete')
-        filterfn = re.compile(pagename).match
-        pages = request.rootpage.getPageList(user='', exists=1, filter=filterfn)
-        self.subpages = []
-        subpage = pagename + '/'
-        for name in pages:
-            if name.startswith(subpage) and self.request.user.may.delete(name):
-                self.subpages.append(name)
+        filterfn = re.compile(ur"^%s/.*$" % re.escape(pagename), re.U).match
+        self.subpages = [pagename for pagename in subpagenames if self.request.user.may.delete(pagename)]
 
     def is_allowed(self):
         # this is not strictly necessary because the underlying storage code checks
@@ -54,8 +49,8 @@ class DeletePage(ActionBase):
         # Create a page editor that does not do editor backups, because
         # delete generates a "deleted" version of the page.
         self.page = PageEditor(self.request, self.pagename, do_editor_backup=0)
-        success, msg = self.page.deletePage(comment)
-        msgs = msg
+        success, msgs = self.page.deletePage(comment)
+
         delete_subpages = 0
         if 'delete_subpages' in form:
             try:
@@ -67,7 +62,7 @@ class DeletePage(ActionBase):
             for name in self.subpages:
                 self.page = PageEditor(self.request, name, do_editor_backup=0)
                 success_i, msg = self.page.deletePage(comment)
-                msgs += "%s " % msg
+                msgs = "%s %s" % (msgs, msg)
 
         return success, msgs
 
