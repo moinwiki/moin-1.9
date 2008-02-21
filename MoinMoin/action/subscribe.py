@@ -9,7 +9,7 @@
 from MoinMoin.Page import Page
 
 def execute(pagename, request):
-    """ Subscribe or unsubscribe the user to pagename """
+    """ Subscribe the user to pagename """
     _ = request.getText
     cfg = request.cfg
 
@@ -29,14 +29,7 @@ def execute(pagename, request):
         request.theme.add_msg(_("Add your email address or Jabber ID in your UserPreferences to use subscriptions."), "error")
 
     elif request.user.isSubscribedTo([pagename]):
-        # Try to unsubscribe
-        if request.user.unsubscribe(pagename):
-            request.theme.add_msg(_('Your subscription to this page has been removed.'), "info")
-        else:
-            request.theme.add_msg(_("Can't remove regular expression subscription!") + u' ' + \
-                  _("Edit the subscription regular expressions in your "
-                    "UserPreferences."), "error")
-
+        request.theme.add_msg(_('You are already subscribed to this page.', formatted=False))
     else:
         # Try to subscribe
         if request.user.subscribe(pagename):
@@ -45,4 +38,3 @@ def execute(pagename, request):
             request.theme.add_msg(_('You could not get subscribed to this page.'), "error")
 
     Page(request, pagename).send_page()
-
