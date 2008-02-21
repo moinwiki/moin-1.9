@@ -48,9 +48,9 @@ def used_languages(request):
 
     data = get_data(request)
 
-    sum = 0.0
+    total = 0.0
     for cnt, lang in data:
-        sum += cnt
+        total += cnt
 
 
     languages = TupleDataset()
@@ -63,29 +63,30 @@ def used_languages(request):
     # Preparing "<Browser setting>"
     browserlang = _('<Browser setting>', formatted=False)
     browserlang = browserlang[1:len(browserlang) - 1].capitalize()
-    if sum <> 0:
+    if total:
         for cnt, lang in data:
             try:
                 if lang == u'browser':
                     languages.addRow((browserlang, "%(percent).2f%% (%(count)d)" % {
-                        'percent': 100.0 * cnt / sum,
+                        'percent': 100.0 * cnt / total,
                         'count': cnt}))
                 else:
                     lang = i18n.wikiLanguages()[lang]['x-language-in-english']
                     languages.addRow((lang, "%(percent).2f%% (%(count)d)" % {
-                        'percent': 100.0 * cnt / sum,
+                        'percent': 100.0 * cnt / total,
                         'count': cnt}))
                 cnt_printed += cnt
             except UnicodeError:
                 pass
+        if total > cnt_printed:
+            languages.addRow((_('Others', formatted=False), "%(percent).2f%% (%(count)d)" % {
+                'percent': 100.0 * (total - cnt_printed) / total,
+                'count': total - cnt_printed}))
+
     else: # If we don't have any users, we can safely assume that the only real user is the visitor (who is normally ignored, though) who is using "Browser setting"
         languages.addRow((browserlang, "100% (1)"))
-
-    if sum > cnt_printed:
-        languages.addRow((_('Others', formatted=False), "%(percent).2f%% (%(count)d)" % {
-            'percent': 100.0 * (sum - cnt_printed) / sum,
-            'count': sum - cnt_printed}))
 
     table = DataBrowserWidget(request)
     table.setData(languages)
     return table.toHTML()
+

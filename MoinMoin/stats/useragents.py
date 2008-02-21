@@ -92,9 +92,9 @@ def text(pagename, request):
 
     data = get_data(request)
 
-    sum = 0.0
+    total = 0.0
     for cnt, ua in data:
-        sum += cnt
+        total += cnt
 
 
     agents = TupleDataset()
@@ -103,19 +103,21 @@ def text(pagename, request):
 
     cnt_printed = 0
     data = data[:10]
-    for cnt, ua in data:
-        try:
-            ua = unicode(ua)
-            agents.addRow((ua, "%.2f" % (100.0*cnt/sum)))
-            cnt_printed += cnt
-        except UnicodeError:
-            pass
-    agents.addRow((_('Others'), "%.2f" % (100*(sum-cnt_printed)/sum)))
+
+    if total:
+        for cnt, ua in data:
+            try:
+                ua = unicode(ua)
+                agents.addRow((ua, "%.2f" % (100.0 * cnt / total)))
+                cnt_printed += cnt
+            except UnicodeError:
+                pass
+        if total > cnt_printed:
+            agents.addRow((_('Others', formatted=False), "%.2f" % (100 * (total - cnt_printed) / total)))
 
     table = DataBrowserWidget(request)
     table.setData(agents)
     return table.toHTML()
-
 
 def draw(pagename, request):
     import shutil, cStringIO
