@@ -5,7 +5,7 @@
     This action allows you to rename a page.
 
     @copyright: 2002-2004 Michael Reinsch <mr@uue.org>,
-                2006 MoinMoin:ThomasWaldmann,
+                2006-2007 MoinMoin:ThomasWaldmann,
                 2007 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
@@ -26,13 +26,9 @@ class RenamePage(ActionBase):
         _ = self._
         self.form_trigger = 'rename'
         self.form_trigger_label = _('Rename Page')
-        filterfn = re.compile(pagename).match
-        pages = request.rootpage.getPageList(user='', exists=1, filter=filterfn)
-        self.subpages = []
-        subpage = pagename + '/'
-        for name in pages:
-            if name.startswith(subpage) and self.request.user.may.delete(name):
-                self.subpages.append(name)
+        filterfn = re.compile(ur"^%s/.*$" % re.escape(pagename), re.U).match
+        subpagenames = request.rootpage.getPageList(user='', exists=1, filter=filterfn)
+        self.subpages = [pagename for pagename in subpagenames if self.request.user.may.delete(pagename)]
 
     def is_allowed(self):
         may = self.request.user.may
@@ -55,7 +51,7 @@ class RenamePage(ActionBase):
         comment = wikiutil.clean_input(comment)
 
         self.page = PageEditor(self.request, self.pagename)
-        success, msg = self.page.renamePage(newpagename, comment)
+        success, msgs = self.page.renamePage(newpagename, comment)
 
         rename_subpages = 0
         if 'rename_subpages' in form:
@@ -69,9 +65,10 @@ class RenamePage(ActionBase):
                 self.page = PageEditor(self.request, name)
                 new_subpagename = name.replace(self.pagename, newpagename, 1)
                 success_i, msg = self.page.renamePage(new_subpagename, comment)
+                msgs = "%s %s" % (msgs, msg)
 
         self.newpagename = newpagename # keep there for finish
-        return success, msg
+        return success, msgs
 
     def do_action_finish(self, success):
         if success:
