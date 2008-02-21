@@ -70,7 +70,7 @@ def emit_footnotes(request, formatter):
 
         # Add footnotes list
         result.append(formatter.number_list(1))
-
+        subidx = 0
         for ctr in range(request.footnote_ctr):
             fn_txt = request.footnotes[ctr]
             if not fn_txt in request.footnotes:
@@ -86,7 +86,7 @@ def emit_footnotes(request, formatter):
             result.append(wikiutil.renderText(request, WikiParser, fn_txt))
 
             items = []
-            subidx = 0
+            # ToDo check why that loop is needed?
             for backlink_id, idx in this_txt_footnotes:
                 # Add item
                 item = formatter.anchorlink(1, backlink_id)
