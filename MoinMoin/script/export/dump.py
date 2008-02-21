@@ -53,7 +53,7 @@ page_template = u'''<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://ww
 '''
 
 
-def _attachment(request, pagename, filename, outputdir):
+def _attachment(request, pagename, filename, outputdir, **kw):
     filename = filename.encode(config.charset)
     source_dir = AttachFile.getAttachDir(request, pagename)
     source_file = os.path.join(source_dir, filename)
@@ -134,7 +134,7 @@ class PluginScript(script.MoinScript):
 
         wikiutil.quoteWikinameURL = lambda pagename, qfn=wikiutil.quoteWikinameFS: (qfn(pagename) + HTML_SUFFIX)
 
-        AttachFile.getAttachUrl = lambda pagename, filename, request: (_attachment(request, pagename, filename, outputdir))
+        AttachFile.getAttachUrl = lambda pagename, filename, request, **kw: _attachment(request, pagename, filename, outputdir, **kw)
 
         errfile = os.path.join(outputdir, 'error.log')
         errlog = open(errfile, 'w')
