@@ -29,21 +29,39 @@ page_template = u'''<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://ww
 <link rel="stylesheet" type="text/css" media="all" charset="utf-8" href="%(theme)s/css/common.css">
 <link rel="stylesheet" type="text/css" media="screen" charset="utf-8" href="%(theme)s/css/screen.css">
 <link rel="stylesheet" type="text/css" media="print" charset="utf-8" href="%(theme)s/css/print.css">
+<style type="text/css">
+ul.pagetitle{
+  display: inline;
+  margin: 0;
+  padding: 0;
+  font-size: 1.5em;
+}
+li.pagetitle{
+  display: inline;
+  margin: 0;
+}
+td.noborder {
+  border: 0;
+}
+</style>
 </head>
 <body>
 <table>
 <tr>
-<td>
+<td class="noborder">
 %(logo_html)s
 </td>
-<td>
+<td class="noborder">
+<ul class="pagetitle">
+<li class="pagetitle"><a class="backlink">%(pagename)s</a>
+</ul>
+<br><br>
 %(navibar_html)s
 </td>
 </tr>
 </table>
 <hr>
 <div id="page">
-<h1 id="title">%(pagename)s</h1>
 %(pagehtml)s
 </div>
 <hr>
@@ -146,7 +164,7 @@ class PluginScript(script.MoinScript):
 
         navibar_html = ''
         for p in [page_front_page, page_title_index, page_word_index]:
-            navibar_html += '&nbsp;[<a href="%s">%s</a>]' % (wikiutil.quoteWikinameURL(p), wikiutil.escape(p))
+            navibar_html += '[<a href="%s">%s</a>]&nbsp;' % (wikiutil.quoteWikinameURL(p), wikiutil.escape(p))
 
         urlbase = request.url # save wiki base url
         for pagename in pages:
