@@ -338,7 +338,7 @@ class Page(object):
 
         Correct the case of the page name. Elements created from the
         page name in reset() are not updated because it's too messy, and
-        this fix seems to be enough for 1.3.
+        this fix seems to be enough for now.
 
         Problems to fix later:
 
@@ -347,10 +347,13 @@ class Page(object):
 
         @param pagedir: the storage path to the page directory
         """
-        realPath = util.filesys.realPathCase(pagedir)
-        if not realPath is None:
-            realPath = wikiutil.unquoteWikiname(realPath)
-            self.page_name = realPath[-len(self.page_name):]
+        if self._text_filename_force is None:
+            # we only do this for normal pages, but not for the MissingPage,
+            # because the code below is wrong in that case
+            realPath = util.filesys.realPathCase(pagedir)
+            if realPath is not None:
+                realPath = wikiutil.unquoteWikiname(realPath)
+                self.page_name = realPath[-len(self.page_name):]
 
     def get_rev(self, use_underlay=-1, rev=0):
         """ Get information about a revision.
