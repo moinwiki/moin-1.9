@@ -11,7 +11,7 @@ import cgi
 from MoinMoin.request import RequestBase
 
 class Request(RequestBase):
-    """ specialized on StandAlone Server (MoinMoin.server.standalone) requests """
+    """ specialized on StandAlone Server (MoinMoin.server.server_standalone) requests """
     script_name = ''
 
     def __init__(self, sa, properties={}):

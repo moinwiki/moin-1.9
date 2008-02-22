@@ -39,7 +39,7 @@ class ModpythonConfig(Config):
 
     logPath = None
     properties = {}
-    
+
     # Set up log handler to log to apache log!
 
 def modpythonHandler(request, ConfigClass=ModpythonConfig):

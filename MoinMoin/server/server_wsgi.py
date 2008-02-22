@@ -24,7 +24,7 @@ from MoinMoin.request import request_wsgi
 class WsgiConfig(Config):
     """ WSGI default config """
     loglevel_stderr = None # we do not want to write to stderr!
-         
+
 
 def moinmoinApp(environ, start_response):
     request = request_wsgi.Request(environ)

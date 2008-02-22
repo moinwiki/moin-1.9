@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin.server.twistedmoin
+    MoinMoin.server.server_twisted
 
     Create standalone twisted based server.
 
