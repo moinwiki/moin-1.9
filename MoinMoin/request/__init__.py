@@ -135,6 +135,10 @@ class RequestBase(object):
         self.page = None
         self._dicts = None
 
+        # session handling. users cannot rely on a session being
+        # created, but we should always set request.session
+        self.session = {}
+
         # setuid handling requires an attribute in the request
         # that stores the real user
         self._setuid_real_user = None
@@ -1236,16 +1240,16 @@ class RequestBase(object):
                 msg = None
                 # Complain about unknown actions
                 if not action_name in self.getKnownActions():
-                    msg = _("Unknown action %(action_name)s.") % {
+                    msg = _("Unknown action %(action_name)s.", formatted=False) % {
                             'action_name': wikiutil.escape(action_name), }
 
                 # Disallow non available actions
                 elif action_name[0].isupper() and not action_name in self.getAvailableActions(self.page):
-                    msg = _("You are not allowed to do %(action_name)s on this page.") % {
+                    msg = _("You are not allowed to do %(action_name)s on this page.", formatted=False) % {
                             'action_name': wikiutil.escape(action_name), }
                     if not self.user.valid:
                         # Suggest non valid user to login
-                        msg += " " + _("Login and try again.", formatted=0)
+                        msg += " " + _("Login and try again.", formatted=False)
 
                 if msg:
                     self.request.theme.add_msg(msg, "error")
@@ -1255,11 +1259,11 @@ class RequestBase(object):
                     from MoinMoin import action
                     handler = action.getHandler(self, action_name)
                     if handler is None:
-                        msg = _("You are not allowed to do %(action_name)s on this page.") % {
+                        msg = _("You are not allowed to do %(action_name)s on this page.", formatted=False) % {
                                 'action_name': wikiutil.escape(action_name), }
                         if not self.user.valid:
                             # Suggest non valid user to login
-                            msg += " " + _("Login and try again.", formatted=0)
+                            msg += " " + _("Login and try again.", formatted=False)
                         self.request.theme.add_msg(msg, "error")
                         self.page.send_page()
                     else:

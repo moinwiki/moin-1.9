@@ -23,7 +23,7 @@
     (a simple one line change).
 
     TODO: this should be refactored so it uses MoinMoin.server package
-          (see how Twisted, WSGI and Standalone use it)
+          (see how server_twisted, server_wsgi and server_standalone use it)
 
     @copyright: 2004-2005 by Oliver Graf <ograf@bitart.de>
     @license: GNU GPL, see COPYING for details.
