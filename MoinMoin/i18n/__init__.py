@@ -14,7 +14,7 @@
         wikiLanguages() -- return the available wiki user languages
         browserLanguages() -- return the browser accepted languages
         getDirection(lang) -- return the lang direction either 'ltr' or 'rtl'
-        getText(str, request, lang, formatted) -- return str translation into lang
+        getText(str, request, lang,  **kw) -- return str translation into lang
 
     TODO: as soon as we have some "farm / server plugin dir", extend this to
           load translations from there, too.
@@ -155,7 +155,7 @@ class Translation(object):
         except (AttributeError, AssertionError), err:
             logging.debug("load_mo: %r %s" % (self.language, str(err)))
 
-    def formatMarkup(self, request, text, percent, currentStack=[]):
+    def formatMarkup(self, request, text, percent):
         """ Formats the text using the wiki parser/formatter.
         
         This raises an exception if a text needs itself to be translated,
@@ -166,13 +166,6 @@ class Translation(object):
         @param percent: True if result is used as left-side of a % operator and
                         thus any GENERATED % needs to be escaped as %%.
         """
-        try:
-            currentStack.index(text)
-            raise Exception("Formatting a text that is being formatted?!")
-        except ValueError:
-            pass
-        currentStack.append(text)
-
         logging.debug("formatMarkup: %r" % text)
 
         from MoinMoin.Page import Page
@@ -199,7 +192,6 @@ class Translation(object):
         else:
             request.formatter = reqformatter
         request.redirect()
-        del currentStack[-1]
         text = text.strip()
         return text
 
@@ -272,11 +264,16 @@ def getText(original, request, lang, **kw):
     if original in translation.raw:
         translated = translation.raw[original]
         if formatted:
-            if (original, percent) in translation.formatted:
-                translated = translation.formatted[(original, percent)]
+            key = (original, percent)
+            if key in translation.formatted:
+                translated = translation.formatted[key]
+                if translated is None:
+                    logging.error("i18n: formatting a %r text that is already being formatted: %r" % (lang, original))
+                    translated = original + u'*' # get some error indication to the UI
             else:
+                translation.formatted[key] = None # we use this as "formatting in progress" indicator
                 translated = translation.formatMarkup(request, translated, percent)
-                translation.formatted[(original, percent)] = translated # remember it
+                translation.formatted[key] = translated # remember it
     else:
         try:
             language = languages[lang]['x-language-in-english']
@@ -292,10 +289,12 @@ def getText(original, request, lang, **kw):
             # to get english translation, maybe formatted.
             # if we don't find an english "translation", we just format it
             # on the fly (this is needed for cfg.editor_quickhelp).
+            logging.debug("i18n: requested string not in %r translation: %r" % (lang, original))
             if lang != 'en':
-                logging.debug("i18n: fallback to english, requested string not in %r translation: %r" % (lang, original))
+                logging.debug("i18n: falling back from %r to english" % lang)
                 translated = getText(original, request, 'en', formatted=formatted, percent=percent)
-            elif formatted:
+            elif formatted: # and lang == 'en'
+                logging.debug("i18n: formatting for %r on the fly: %r" % (lang, original))
                 translated = translations[lang].formatMarkup(request, original, percent)
     return translated
 
