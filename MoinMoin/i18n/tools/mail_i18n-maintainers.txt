@@ -19,12 +19,12 @@ most important stuff is on top of the list):
 [X] "%(lang)s" help pages on the MoinMaster wiki (optional - would be
     nice, if you had the time)
 
-We need that until 1.12.2005 - because MoinMoin 1.5 RC1 will be released
-then, so we can include that stuff into the distribution archive to make
-people speaking your language happy. ;)
+We need that until 2007-12-01 - because MoinMoin 1.6 RC1 will be released
+then (followed by a release later in december), so we can include that stuff
+into the distribution archive to make people speaking your language happy. ;)
 
 Please, after translating the current stuff, keep an eye on MoinMaster
-wiki - we are still in the beta phase of 1.5 development and thus, some
+wiki - we are still in the beta phase of 1.6 development and thus, some
 strings in the PO file may still change or get added/deleted.
 
 See http://moinmoin.wikiwikiweb.de/MoinMoinTodo/Release_1.5 for our
@@ -56,7 +56,8 @@ If you want to do it (or update status page), please read on here:
 http://moinmoin.wikiwikiweb.de/MoinDev/Translation
 
 You will find all you need there. If you have questions, also put them
-there (in English, please).
+there (in English, please) - you can also contact us on IRC channel
+#moin on server chat.freenode.net.
 
 Thanks,
 
