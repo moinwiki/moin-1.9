@@ -15,7 +15,7 @@ proxies_trusted = [] # trust noone!
 #proxies_trusted = ['127.0.0.1', ] # can be a list of multiple IPs
 
 import logging
-proxy_loglevel = logging.DEBUG # logging.NOTSET (never), logging.INFO (when not debugging)
+proxy_loglevel = logging.INFO # logging.NOTSET (never), .DEBUG, .INFO
 
 def find_remote_addr(addrs):
     """ Find the last remote IP address before it hits our reverse proxies.

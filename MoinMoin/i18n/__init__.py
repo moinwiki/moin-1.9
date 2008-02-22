@@ -272,6 +272,7 @@ def getText(original, request, lang, formatted=True):
             # if we don't find an english "translation", we just format it
             # on the fly (this is needed for cfg.editor_quickhelp).
             if lang != 'en':
+                logging.debug("i18n: fallback to english, requested string not in %r translation: %r" % (lang, original))
                 translated = getText(original, request, 'en', formatted)
             elif formatted:
                 translated = translations[lang].formatMarkup(request, original)
