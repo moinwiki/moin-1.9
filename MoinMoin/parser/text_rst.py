@@ -338,9 +338,13 @@ class MoinTranslator(html4css1.HTMLTranslator):
                 prefix, link = refuri.lstrip().split(':', 1)
 
             # First see if MoinMoin should handle completely. Exits through add_wiki_markup.
-            if ((refuri.startswith('<<') and refuri.endswith('>>')) or
-                    (prefix == 'drawing')):
+            if refuri.startswith('<<') and refuri.endswith('>>'): # moin macro
                 self.process_wiki_text(refuri)
+                self.wiki_text = self.fixup_wiki_formatting(self.wiki_text)
+                self.add_wiki_markup()
+
+            if prefix == 'drawing': # twikidraw drawing
+                self.process_wiki_text("[[%s]]" % refuri)
                 self.wiki_text = self.fixup_wiki_formatting(self.wiki_text)
                 self.add_wiki_markup()
 
@@ -349,7 +353,7 @@ class MoinTranslator(html4css1.HTMLTranslator):
             if prefix == 'attachment':
                 if not AttachFile.exists(self.request, self.request.page.page_name, link):
                     # Attachment doesn't exist, give to MoinMoin to insert upload text.
-                    self.process_wiki_text(refuri)
+                    self.process_wiki_text("[[%s]]" % refuri)
                     self.wiki_text = self.fixup_wiki_formatting(self.wiki_text)
                     self.add_wiki_markup()
                 # Attachment exists, just get a link to it.
@@ -408,7 +412,7 @@ class MoinTranslator(html4css1.HTMLTranslator):
                 # Attachment doesn't exist, MoinMoin should process it
                 if prefix == '':
                     prefix = 'attachment:'
-                self.process_wiki_text(prefix + attach_name)
+                self.process_wiki_text("{{%s%s}}" % (prefix, attach_name))
                 self.wiki_text = self.fixup_wiki_formatting(self.wiki_text)
                 self.add_wiki_markup()
             # Attachment exists, get a link to it.
