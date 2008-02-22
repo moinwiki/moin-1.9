@@ -2,7 +2,7 @@
 """
     MoinMoin - internationalization (aka i18n)
 
-    We use Python's gettext module now for loading <language>.<domain>.mo files.
+    We use Python's gettext module for loading <language>.<domain>.mo files.
     Domain is "MoinMoin" for MoinMoin distribution code and something else for
     extension translations.
 
@@ -14,18 +14,19 @@
         wikiLanguages() -- return the available wiki user languages
         browserLanguages() -- return the browser accepted languages
         getDirection(lang) -- return the lang direction either 'ltr' or 'rtl'
-        getText(str, request) -- return str translation
+        getText(str, request, lang, formatted) -- return str translation into lang
 
     TODO: as soon as we have some "farm / server plugin dir", extend this to
           load translations from there, too.
 
     @copyright: 2001-2004 Juergen Hermann <jh@web.de>,
-                2005-2006 MoinMoin:ThomasWaldmann
+                2005-2008 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
 import os, gettext, glob
 import logging
+from StringIO import StringIO
 
 from MoinMoin import caching
 
@@ -56,9 +57,11 @@ def i18n_init(request):
     global languages
     request.clock.start('i18n_init')
     if languages is None:
+        logging.debug("i18n_init: trying to load translations from cache")
         meta_cache = caching.CacheEntry(request, 'i18n', 'meta', scope='farm', use_pickle=True)
         i18n_dir = os.path.join(request.cfg.moinmoin_dir, 'i18n')
         if meta_cache.needsUpdate(i18n_dir):
+            logging.debug("i18n_init: cache needs update")
             _languages = {}
             for lang_file in glob.glob(po_filename(request, language='*', domain='MoinMoin')): # XXX only MoinMoin domain for now
                 language, domain, ext = os.path.basename(lang_file).split('.')
@@ -72,6 +75,7 @@ def i18n_init(request):
                 for key, value in t.info.items():
                     #logging.debug("i18n_init: meta key %s value %r" % (key, value))
                     _languages[language][key] = value.decode(encoding)
+            logging.debug("i18n_init: dumping language metadata to disk cache")
             try:
                 meta_cache.update(_languages)
             except caching.CacheError:
@@ -79,6 +83,7 @@ def i18n_init(request):
 
         if languages is None: # another thread maybe has done it before us
             try:
+                logging.debug("i18n_init: loading language metadata from disk cache")
                 _languages = meta_cache.content()
                 if languages is None:
                     languages = _languages
@@ -125,7 +130,6 @@ class Translation(object):
 
     def load_po(self, f):
         """ load the po file """
-        from StringIO import StringIO
         from MoinMoin.i18n.msgfmt import MsgFmt
         mf = MsgFmt()
         mf.read_po(f.readlines())
@@ -145,11 +149,11 @@ class Translation(object):
             self.direction = info['x-direction']
             self.maintainer = info['last-translator']
         except KeyError, err:
-            logging.debug("%r %s" % (self.language, str(err)))
+            logging.debug("load_mo: %r %s" % (self.language, str(err)))
         try:
             assert self.direction in ('ltr', 'rtl', )
         except (AttributeError, AssertionError), err:
-            logging.debug("%r %s" % (self.language, str(err)))
+            logging.debug("load_mo: %r %s" % (self.language, str(err)))
 
     def formatMarkup(self, request, text, currentStack=[]):
         """
@@ -164,12 +168,13 @@ class Translation(object):
             pass
         currentStack.append(text)
 
+        logging.debug("formatMarkup: %r" % text)
+
         from MoinMoin.Page import Page
         from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
         from MoinMoin.formatter.text_html import Formatter
-        import StringIO
 
-        out = StringIO.StringIO()
+        out = StringIO()
         request.redirect(out)
         parser = WikiParser(text, request, line_anchors=False)
         formatter = Formatter(request, terse=True)
@@ -195,47 +200,30 @@ class Translation(object):
         cache = caching.CacheEntry(request, arena='i18n', key=self.language, scope='farm', use_pickle=True)
         langfilename = po_filename(request, self.language, self.domain, i18n_dir=trans_dir)
         needsupdate = cache.needsUpdate(langfilename)
-        logging.debug("loadLanguage: langfilename %s needsupdate %d" % (langfilename, needsupdate))
         if not needsupdate:
             try:
-                uc_texts, uc_unformatted = cache.content()
+                unformatted = cache.content()
                 logging.debug("loadLanguage: pickle %s load success" % self.language)
             except caching.CacheError:
                 logging.debug("loadLanguage: pickle %s load failed" % self.language)
                 needsupdate = 1
 
         if needsupdate:
+            logging.debug("loadLanguage: langfilename %s needs update" % langfilename)
             f = file(langfilename)
             self.load_po(f)
             f.close()
             trans = self.translation
-            texts = trans._catalog
-            has_wikimarkup = self.info.get('x-haswikimarkup', 'False') == 'True'
-            # convert to unicode
-            logging.debug("loadLanguage: processing unformatted texts of lang %s" % self.language)
-            uc_unformatted = {}
-            uc_texts = {}
-            counter = 0
-            for ukey, utext in texts.items():
-                if counter % 25 == 0:
-                    logging.debug("Processed %d messages for %s..." % (counter, self.language))
-                uc_unformatted[ukey] = utext
-                if has_wikimarkup:
-                    # use the wiki parser now to replace some wiki markup with html
-                    try:
-                        uc_texts[ukey] = self.formatMarkup(request, utext) # XXX RECURSION!!! Calls gettext via markup
-                    except Exception, err: # infinite recursion or crash
-                        logging.debug("loadLanguage: crashes in language %s on string: %s [%s]" % (self.language, utext, str(err)))
-                        uc_texts[ukey] = u"%s*" % utext
-                counter += 1
+            unformatted = trans._catalog
+            self.has_wikimarkup = self.info.get('x-haswikimarkup', 'False') == 'True'
             logging.debug("loadLanguage: dumping lang %s" % self.language)
             try:
-                cache.update((uc_texts, uc_unformatted))
+                cache.update(unformatted)
             except caching.CacheError:
                 pass
 
-        self.formatted = uc_texts
-        self.raw = uc_unformatted
+        self.formatted = {}
+        self.raw = unformatted
         request.clock.stop('loadLanguage')
 
 
@@ -256,13 +244,17 @@ def getText(original, request, lang, formatted=True):
 
     # get the matching entry in the mapping table
     translated = original
-    if formatted:
-        trans_table = translations[lang].formatted
+    translation = translations[lang]
+    if original in translation.raw:
+        if not formatted:
+            translated = translation.raw[original]
+        else:
+            if original in translation.formatted:
+                translated = translation.formatted[original]
+            else:
+                translated = translation.formatMarkup(request, original)
+                translation.formatted[original] = translated # remember it
     else:
-        trans_table = translations[lang].raw
-    try:
-        translated = trans_table[original]
-    except KeyError:
         try:
             language = languages[lang]['x-language-in-english']
             dictpagename = "%sDict" % language
