@@ -237,7 +237,7 @@ class RequestBase(object):
             # Language for content. Page content should use the wiki default lang,
             # but generated content like search results should use the user language.
             self.content_lang = self.cfg.language_default
-            self.getText = lambda text, i18n=self.i18n, request=self, lang=self.lang, **kv: i18n.getText(text, request, lang, kv.get('formatted', True))
+            self.getText = lambda text, i18n=self.i18n, request=self, lang=self.lang, **kv: i18n.getText(text, request, lang, **kv)
 
             self.reset()
 
