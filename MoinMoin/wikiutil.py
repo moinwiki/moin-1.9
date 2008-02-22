@@ -16,6 +16,7 @@ import os
 import re
 import time
 import urllib
+import logging
 
 from MoinMoin import config
 from MoinMoin.util import pysupport, lock
@@ -2168,8 +2169,16 @@ def anchor_name_from_text(text):
 ### Tickets - used by RenamePage and DeletePage
 ########################################################################
 
-def createTicket(request, tm=None):
-    """Create a ticket using a site-specific secret (the config)"""
+def createTicket(request, tm=None, action=None):
+    """ Create a ticket using a site-specific secret (the config)
+
+        @param tm: unix timestamp (optional, uses current time if not given)
+        @param action: action name (optional, uses current action if not given)
+                       Note: if you create a ticket for a form that calls another
+                             action than the current one, you MUST specify the
+                             action you call when posting the form.
+    """
+
     import sha
     if tm is None:
         tm = "%010x" % time.time()
@@ -2180,10 +2189,11 @@ def createTicket(request, tm=None):
     except:
         pagename = 'None'
 
-    try:
-        action = request.action
-    except:
-        action = 'None'
+    if action is None:
+        try:
+            action = request.action
+        except:
+            action = 'None'
 
 
     ticket = "%s.%s.%s" % (tm, pagename, action)
@@ -2209,12 +2219,15 @@ def checkTicket(request, ticket):
         timestamp = int(timestamp_str, 16)
     except ValueError:
         # invalid or empty ticket
+        logging.debug("checkTicket: invalid or empty ticket %r" % ticket)
         return False
     now = time.time()
     if timestamp < now - 10 * 3600:
         # we don't accept tickets older than 10h
+        logging.debug("checkTicket: too old ticket, timestamp %r" % timestamp)
         return False
     ourticket = createTicket(request, timestamp_str)
+    logging.debug("checkTicket: returning %r, got %r, expected %r" % (ticket == ourticket, ticket, ourticket))
     return ticket == ourticket
 
 
