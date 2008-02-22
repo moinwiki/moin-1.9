@@ -21,7 +21,7 @@ def _create_user(request):
 
     if request.request_method != 'POST':
         return _("Use UserPreferences to change your settings or create an account.")
-           
+
     if not TextCha(request).check_answer_from_form():
         return _('TextCha: Wrong answer! Go back and try again...', formatted=False)
 
@@ -133,7 +133,7 @@ def _create_form(request):
     row = html.TR()
     tbl.append(row)
     row.append(html.TD().append(html.STRONG().append(
-                                  html.Text(_('TextCha (required)', formatted=False))))) 
+                                  html.Text(_('TextCha (required)', formatted=False)))))
     td = html.TD()
     textcha = TextCha(request).render()
     if textcha:
@@ -179,3 +179,4 @@ def execute(pagename, request):
 
         request.theme.send_footer(pagename)
         request.theme.send_closing_html()
+

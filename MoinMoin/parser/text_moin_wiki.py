@@ -1216,7 +1216,7 @@ class Parser:
                 self.parser_lines.append(word)
         else:
             self.in_pre = 'search_parser'
-        
+
         #logging.debug("_parser_repl: in_pre %r line %d" % (self.in_pre, self.lineno))
         return ''
     _parser_unique_repl = _parser_repl

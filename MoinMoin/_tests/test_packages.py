@@ -101,8 +101,8 @@ class TestRealCreation:
         package = PackagePages(self.request.rootpage.page_name, self.request)
         temp = tempfile.NamedTemporaryFile(suffix='.zip')
         package.collectpackage(self.request.rootpage.getPageList(
-                                include_underlay=False, 
-                                filter=lambda name: not wikiutil.isSystemPage(self.request, name)), 
+                                include_underlay=False,
+                                filter=lambda name: not wikiutil.isSystemPage(self.request, name)),
                                 temp)
         if package:
             py.test.skip("No user created pages in wiki!")
@@ -114,3 +114,4 @@ class TestRealCreation:
         package.collectpackage(['___//THIS PAGE SHOULD NOT EXIST\\___'], temp)
         assert not zipfile.is_zipfile(temp.name)
 coverage_modules = ['MoinMoin.packages']
+

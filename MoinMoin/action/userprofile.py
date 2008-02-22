@@ -7,7 +7,7 @@
 """
 from MoinMoin.Page import Page
 from MoinMoin import user
- 
+
 def execute(pagename, request):
     """ set values in user profile """
     _ = request.getText
@@ -17,17 +17,17 @@ def execute(pagename, request):
     if not request.user.isSuperUser():
         request.theme.add_msg(_("Only superuser is allowed to use this action."), "error")
     else:
-       user_name = form.get('name', [''])[0]
-       key = form.get('key', [''])[0]
-       val = form.get('val', [''])[0]
-       if key in cfg.user_checkbox_fields:
-           val = int(val)
-       uid = user.getUserId(request, user_name)
-       theuser = user.User(request, uid)
-       oldval = getattr(theuser, key)
-       setattr(theuser, key, val)
-       theuser.save()
-       request.theme.add_msg('%s.%s: %s -> %s' % (user_name, key, oldval, val), "info")
+        user_name = form.get('name', [''])[0]
+        key = form.get('key', [''])[0]
+        val = form.get('val', [''])[0]
+        if key in cfg.user_checkbox_fields:
+            val = int(val)
+        uid = user.getUserId(request, user_name)
+        theuser = user.User(request, uid)
+        oldval = getattr(theuser, key)
+        setattr(theuser, key, val)
+        theuser.save()
+        request.theme.add_msg('%s.%s: %s -> %s' % (user_name, key, oldval, val), "info")
 
     Page(request, pagename).send_page()
 

@@ -9,12 +9,12 @@
     Minimal usage:
 
         from MoinMoin.server.server_modpython import CgiConfig, run
-        
+
         class Config(CgiConfig):
             pass
 
         run(Config)
-        
+
     See more options in CgiConfig class.
 
     @copyright: 2006 MoinMoin:ThomasWaldmann
@@ -39,7 +39,7 @@ class ModpythonConfig(Config):
 
     logPath = None
     properties = {}
-    
+
     # Set up log handler to log to apache log!
 
 def modpythonHandler(request, ConfigClass=ModpythonConfig):
