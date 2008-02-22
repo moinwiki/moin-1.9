@@ -59,9 +59,10 @@ class PluginScript(MoinScript):
             # but you should definitely access all the results
             # once so that faults are checked and raised
             assert results[0] == 'SUCCESS'
-            assert results[1] == True
+            assert results[1] is True
 
         finally:
             # be nice to the server and clean up the token
             # regardless of what happened
             assert s.deleteAuthToken(token) == 'SUCCESS'
+

@@ -24,7 +24,7 @@ def find_remote_addr(addrs):
         The FIRST address in the <addrs> list might be the client's IP - if noone cheats
         and everyone supports x-f-f header.
 
-        See http://bob.pythonmac.org/archives/2005/09/23/apache-x-forwarded-for-caveat/                                                          
+        See http://bob.pythonmac.org/archives/2005/09/23/apache-x-forwarded-for-caveat/
 
         For debug loglevel, we log all <addrs>.
 
@@ -526,16 +526,16 @@ class RequestBase(object):
 
     def rewriteRemoteAddr(self, env):
         """ Rewrite remote_addr transparently
-        
+
         Get the proxy remote addr using 'X-Forwarded-For' header, added by
         Apache 2 and other proxy software.
-        
+
         TODO: Will not work for Apache 1 or others that don't add this header.
-        
+
         TODO: If we want to add an option to disable this feature it
         should be in the server script, because the config is not
         loaded at this point, and must be loaded after url is set.
-        
+
         @param env: dict like object containing cgi meta variables or http headers.
         """
         xff = (env.get(self.proxy_xff) or

@@ -413,7 +413,7 @@ class Emitter:
                 buf.flush()
                 writ = buf.getvalue()
                 buf.close()
-                return ret+writ
+                return ret + writ
             except wikiutil.PluginMissingError:
                 pass
         return ''.join([

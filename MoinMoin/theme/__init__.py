@@ -1119,7 +1119,7 @@ actionsMenuInit('%(label)s');
 
            If the discussion page doesn't exist and the user
            has no right to create it, show a disabled link.
-	"""
+        """
         _ = self.request.getText
         suppl_name = self.request.cfg.supplementation_page_name
         suppl_name_full = "%s/%s" % (page.page_name, suppl_name)
@@ -1458,12 +1458,12 @@ var gui_editor_link_text = "%(text)s";
     def add_msg(self, msg, msg_class="dialog"):
         """ Adds a message to a list which will be used to generate status
         information.
-        
+
         @param msg: additional message
         @param msg_class: html class for the div of the additional message.
         """
         if self._send_title_called:
-            raise Exception("You cannot call add_msg() after send_title()") 
+            raise Exception("You cannot call add_msg() after send_title()")
         self._status.append((msg, msg_class))
 
     # stuff from wikiutil.py
@@ -1493,7 +1493,7 @@ var gui_editor_link_text = "%(text)s";
             pagename = keywords.get('pagename', '')
             page = Page(request, pagename)
         if keywords.get('msg', ''):
-            raise DeprecationWarning ("Using send_page(msg=) is deprecated! Use theme.add_msg() instead!")
+            raise DeprecationWarning("Using send_page(msg=) is deprecated! Use theme.add_msg() instead!")
         scriptname = request.getScriptname()
         pagename_quoted = wikiutil.quoteWikinameURL(pagename)
 

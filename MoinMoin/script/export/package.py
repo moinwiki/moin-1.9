@@ -35,7 +35,7 @@ class PluginScript(script.MoinScript):
             "-s", "--search", dest="search",
             help="Search string to match."
         )
-        
+
         self.parser.add_option(
             "-u", "--user", dest="package_user",
             help="User as whom the package operation will be performed as. "
@@ -43,12 +43,12 @@ class PluginScript(script.MoinScript):
 
     def mainloop(self):
         """ moin-package's main code. """
-        
+
         # Initalize request
         self.init_request()
         request = self.request
         _ = self.request.getText
-        
+
         # Check our command line args
         if self.options.pages and self.options.search:
             script.fatal(_("Options --pages and --search are mutually exclusive!"))
@@ -60,14 +60,14 @@ class PluginScript(script.MoinScript):
         # Sanity checks
         if os.path.exists(self.options.output):
             script.fatal(_("Output file already exists! Cowardly refusing to continue!"))
-        
+
         # Check for user
         if self.options.package_user:
             request.user = user.User(request, name=self.options.package_user)
-        
+
         # Import PackagePages here, as we now have an initalized request.
         from MoinMoin.action.PackagePages import PackagePages
-        
+
         # Perform actual packaging.
         package = PackagePages(request.rootpage.page_name, request)
         packageoutput = open(self.options.output, "wb")
@@ -78,8 +78,9 @@ class PluginScript(script.MoinScript):
                 packagedata = package.collectpackage(self.options.pages.split(","), packageoutput)
         else:
                 packagedata = package.collectpackage(request.rootpage.getPageList(
-                                include_underlay=False, 
-                                filter=lambda name: not wikiutil.isSystemPage(request, name)), 
+                                include_underlay=False,
+                                filter=lambda name: not wikiutil.isSystemPage(request, name)),
                                 packageoutput)
         if packagedata:
             script.fatal(packagedata)
+

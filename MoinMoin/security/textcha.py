@@ -1,7 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - Text CAPTCHAs
-    
+
     This is just asking some (admin configured) questions and
     checking if the answer is as expected. It is up to the wiki
     admin to setup questions that a bot can not easily answer, but
@@ -73,7 +73,7 @@ class TextCha(object):
 
     def _init_qa(self, question=None):
         """ Initialize the question / answer.
-        
+
          @param question: If given, the given question will be used.
                           If None, a new question will be generated.
         """
@@ -107,7 +107,7 @@ class TextCha(object):
                 },
                 'de': {}, # having no questions for 'de' means disabling textchas for 'de'
                 # ...
-            }             
+            }
         """
         return not not self.textchas # we don't want to return the dict
 
@@ -142,8 +142,8 @@ class TextCha(object):
     def render(self, form=None):
         """ Checks if textchas are enabled and returns HTML for one,
             or an empty string if they are not enabled.
-            
-            @return: unicode result html         
+
+            @return: unicode result html
         """
         if self.is_enabled():
             question, given_answer = self._extract_form_values(form)
@@ -168,3 +168,4 @@ class TextCha(object):
             return self.check_answer(given_answer)
         else:
             return True
+

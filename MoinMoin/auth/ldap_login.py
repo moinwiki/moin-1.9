@@ -86,7 +86,7 @@ class LDAPAuth(BaseAuth):
                     except (ldap.SERVER_DOWN, ldap.CONNECT_ERROR), err:
                         if verbose: request.log("LDAP: Couldn't establish TLS to %r (err: %s)." % (server, str(err)))
                         raise
-  
+
                 # you can use %(username)s and %(password)s here to get the stuff entered in the form:
                 ldap_binddn = cfg.ldap_binddn % locals()
                 ldap_bindpw = cfg.ldap_bindpw % locals()

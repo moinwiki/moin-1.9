@@ -156,7 +156,7 @@ class PackagePages:
         """ Search MoinMoin for the string specified and return a list of
         matching pages, provided they are not system pages and not
         present in the underlay.
-        
+
         @param request: current request
         @param searchkey: string to search for
         @rtype: list
@@ -164,7 +164,7 @@ class PackagePages:
         """
 
         pagelist = searchPages(request, searchkey)
-        
+
         titles = []
         for title in pagelist.hits:
             if not wikiutil.isSystemPage(request, title.page_name) or not title.page.getPageStatus()[0]:
@@ -174,7 +174,7 @@ class PackagePages:
     def collectpackage(self, pagelist, fileobject, pkgname=""):
         """ Expects a list of pages as an argument, and fileobject to be an open
         file object, which a zipfile will get written to.
-        
+
         @param pagelist: pages to package
         @param fileobject: open file object to write to
         @param pkgname: optional file name, to prevent self packaging

@@ -48,7 +48,7 @@ def do_user_browser(request):
         if account.disabled:
             enable_disable_link = request.page.link_to(
                                     request, text=_('Enable user'),
-                                    querystr={"action":"userprofile",
+                                    querystr={"action": "userprofile",
                                               "name": account.name,
                                               "key": "disabled",
                                               "val": "0",
@@ -58,7 +58,7 @@ def do_user_browser(request):
         else:
             enable_disable_link = request.page.link_to(
                                     request, text=_('Disable user'),
-                                    querystr={"action":"userprofile",
+                                    querystr={"action": "userprofile",
                                               "name": account.name,
                                               "key": "disabled",
                                               "val": "1",
