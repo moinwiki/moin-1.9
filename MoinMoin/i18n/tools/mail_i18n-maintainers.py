@@ -4,6 +4,11 @@
     send an email to all i18n maintainers
     %(lang)s will be replaced by language
 
+    TODO:
+    * needs update to 1.6, doesn't work anymore "as is"
+    * use MoinMoin.script framework
+    * check that sendmail stuff, we also have it in MoinMoin.mail
+
     @copyright: 2004 Thomas Waldmann
     @license: GNU GPL, see COPYING for details
 """
