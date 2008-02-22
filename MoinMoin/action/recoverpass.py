@@ -18,12 +18,26 @@ def _do_recover(request):
 Contact the owner of the wiki, who can enable email.""")
     try:
         email = wikiutil.clean_input(form['email'][0].lower())
+        if not email:
+            raise KeyError # we raise KeyError if the string is empty
     except KeyError:
-        return _("Please provide a valid email address!")
+        try:
+            username = wikiutil.clean_input(form['name'][0])
+            if not username:
+                raise KeyError
+        except KeyError:
+            return _("Please provide a valid email address!", formatted=False)
+
+        u = user.User(self.request, user.getUserId(self.request, username))
+        if u.valid:
+            is_ok, msg = u.mailAccountData()
+            if not is_ok:
+                return wikiutil.escape(msg)
+        return _("If an account with this username exists, an email was sent.", formatted=False)
 
     u = user.get_by_email_address(request, email)
     if u:
-        msg = u.mailAccountData()
+        is_ok, msg = u.mailAccountData()
         return wikiutil.escape(msg)
 
     return _("Found no account matching the given email address '%(email)s'!") % {'email': email}

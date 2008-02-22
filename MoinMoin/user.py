@@ -1054,5 +1054,5 @@ After successfully logging in, it is of course a good idea to set a new and know
                     formatted=False) % {'sitename': self._cfg.sitename or "Wiki"}
         mailok, msg = sendmail.sendmail(self._request, [self.email], subject,
                                     text, mail_from=self._cfg.mail_from)
-        return msg
+        return mailok, msg
 
