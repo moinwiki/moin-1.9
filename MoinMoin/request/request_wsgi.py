@@ -20,7 +20,7 @@ class Request(RequestBase):
             self.stdin = env['wsgi.input']
             self.stdout = StringIO.StringIO()
 
-            # used by MoinMoin.server.wsgi:
+            # used by MoinMoin.server.server_wsgi:
             self.status = '200 OK'
             self.headers = []
 
@@ -58,7 +58,7 @@ class Request(RequestBase):
         pass
 
     def output(self):
-        # called by MoinMoin.server.wsgi
+        # called by MoinMoin.server.server_wsgi
         return self.stdout.getvalue()
 
 
