@@ -15,7 +15,8 @@
     4. /pathname/fname, do=view[&mimetype=type]:create a page
        to view the content of the file
 
-    To insert an attachment into the page, use the "attachment:" pseudo schema.
+    To link to an attachment, use [[attachment:file.txt]],
+    to embed an attachment, use {{attachment:file.png}}.
 
     @copyright: 2001 by Ken Sugino (sugino@mediaone.net),
                 2001-2004 by Juergen Hermann <jh@web.de>,
@@ -304,7 +305,7 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
     if files:
         if showheader:
             html += _(
-                "To refer to attachments on a page, use '''{{{attachment:filename}}}''', \n"
+                "To refer to attachments on a page, use '''{{{[[attachment:filename]]}}}''', \n"
                 "as shown below in the list of files. \n"
                 "Do '''NOT''' use the URL of the {{{[get]}}} link, \n"
                 "since this is subject to change and can break easily."
