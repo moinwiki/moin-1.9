@@ -155,11 +155,16 @@ class Translation(object):
         except (AttributeError, AssertionError), err:
             logging.debug("load_mo: %r %s" % (self.language, str(err)))
 
-    def formatMarkup(self, request, text, currentStack=[]):
-        """
-        Formats the text passed according to wiki markup.
+    def formatMarkup(self, request, text, percent, currentStack=[]):
+        """ Formats the text using the wiki parser/formatter.
+        
         This raises an exception if a text needs itself to be translated,
         this could possibly happen with macros.
+        
+        @param request: the request object
+        @param text: the text to format
+        @param percent: True if result is used as left-side of a % operator and
+                        thus any GENERATED % needs to be escaped as %%.
         """
         try:
             currentStack.index(text)
@@ -172,7 +177,10 @@ class Translation(object):
 
         from MoinMoin.Page import Page
         from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
-        from MoinMoin.formatter.text_html import Formatter
+        if percent:
+            from MoinMoin.formatter.text_html_percent import Formatter
+        else:
+            from MoinMoin.formatter.text_html import Formatter
 
         out = StringIO()
         request.redirect(out)
@@ -231,8 +239,24 @@ def getDirection(lang):
     """ Return the text direction for a language, either 'ltr' or 'rtl'. """
     return languages[lang]['x-direction']
 
-def getText(original, request, lang, formatted=True):
-    """ Return a translation of text in the user's language. """
+def getText(original, request, lang, **kw):
+    """ Return a translation of some original text.
+    
+    @param original: the original (english) text
+    @param request: the request object
+    @lang: the target language for the translation
+    @keyword formatted: True to use the wiki parser/formatter on the translation result,
+                        False to return the translation result "as is"
+    @keyword percent: True if we need special escaping because we use the translation
+                      result as the left side of a % operator: e.g. % chars need to
+                      become %% for that usage. This will only escape generated % chars,
+                      e.g. in wiki links to non-ascii pagenames (%XX%XX%XX).
+                      False, if we don't use it as a left-side of % operator.
+                      Only specify this option for formatted==True, it doesn't do
+                      anything for formatted==False. 
+    """
+    formatted = kw.get('formatted', True) # TODO: change to False, review all _() calls
+    percent = kw.get('percent', False) # TODO: review all _() calls
     if original == u"":
         return u"" # we don't want to get *.po files metadata!
 
@@ -246,14 +270,13 @@ def getText(original, request, lang, formatted=True):
     translated = original
     translation = translations[lang]
     if original in translation.raw:
-        if not formatted:
-            translated = translation.raw[original]
-        else:
-            if original in translation.formatted:
-                translated = translation.formatted[original]
+        translated = translation.raw[original]
+        if formatted:
+            if (original, percent) in translation.formatted:
+                translated = translation.formatted[(original, percent)]
             else:
-                translated = translation.formatMarkup(request, original)
-                translation.formatted[original] = translated # remember it
+                translated = translation.formatMarkup(request, translated, percent)
+                translation.formatted[(original, percent)] = translated # remember it
     else:
         try:
             language = languages[lang]['x-language-in-english']
@@ -271,9 +294,9 @@ def getText(original, request, lang, formatted=True):
             # on the fly (this is needed for cfg.editor_quickhelp).
             if lang != 'en':
                 logging.debug("i18n: fallback to english, requested string not in %r translation: %r" % (lang, original))
-                translated = getText(original, request, 'en', formatted)
+                translated = getText(original, request, 'en', formatted=formatted, percent=percent)
             elif formatted:
-                translated = translations[lang].formatMarkup(request, original)
+                translated = translations[lang].formatMarkup(request, original, percent)
     return translated
 
 

@@ -213,7 +213,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
 
         request.theme.add_msg(_('Your search query {{{"%s"}}} didn\'t return any results. '
                 'Please change some terms and refer to HelpOnSearching for '
-                'more information.%s') % (wikiutil.escape(needle),
+                'more information.%s', formatted=True, percent=True) % (wikiutil.escape(needle),
                     titlesearch and ''.join([
                         '<br>',
                         _('(!) Consider performing a'), ' ',
