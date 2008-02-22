@@ -326,14 +326,15 @@ def requestLanguage(request, try_user=True):
 
     # Or try to return one of the user browser accepted languages, if it
     # is available on this wiki...
-    return get_browser_language(request)
-
-    # Or return the wiki default language...
-    if request.cfg.language_default in available:
-        lang = request.cfg.language_default
-    # If everything else fails, read the manual... or return 'en'
-    else:
-        lang = 'en'
+    lang = get_browser_language(request)
+    if not lang:
+        available = wikiLanguages()
+        # Or return the wiki default language...
+        if request.cfg.language_default in available:
+            lang = request.cfg.language_default
+        # If everything else fails, read the manual... or return 'en'
+        else:
+            lang = 'en'
     return lang
 
 
@@ -374,8 +375,9 @@ def browserLanguages(request):
 
 def get_browser_language(request):
     """
-    Return the language that is supported by wiki and what user browser
-    would prefer to get. Return nothing if there is no such language.
+    Return the language that is supported by wiki and what user browser 
+    would prefer to get. Return empty string if there is no such language
+    or language_ignore_browser is true.
 
     @param request: the request object
     @rtype: string
@@ -386,3 +388,4 @@ def get_browser_language(request):
         for lang in browserLanguages(request):
             if lang in available:
                 return lang
+    return ''
