@@ -293,10 +293,6 @@ class ThemeBase:
         html = u'<ul id="username">%s</ul>' % ''.join(userlinks)
         return html
 
-    # Schemas supported in toolbar links, using [url label] format
-    linkSchemas = [r'http://', r'https://', r'ftp://', 'mailto:', r'irc://', r'ircs://', ] + \
-                  [x + ':' for x in config.url_schemas]
-
     def splitNavilink(self, text, localize=1):
         """ Split navibar links into pagename, link to page
 
@@ -334,8 +330,8 @@ class ThemeBase:
         else:
             pagename = text
 
-        for scheme in self.linkSchemas:
-            if pagename.startswith(scheme):
+        for scheme in config.url_schemas:
+            if pagename.startswith(scheme + ':'):
                 if not title:
                     title = pagename
                 title = wikiutil.escape(title)
