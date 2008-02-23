@@ -91,8 +91,6 @@ class Config:
             # add the handler to the root logger
             logger.addHandler(logstderr)
 
-        logging.info("logging initialized")
-
         # Check that docs path is accessible
         if self.docs:
             self.docs = os.path.normpath(os.path.abspath(self.docs))
