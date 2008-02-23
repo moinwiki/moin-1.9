@@ -386,6 +386,9 @@ Lists: * bullets; 1., a. numbered items.
     ldap_tls_keyfile = ''
     ldap_tls_require_cert = 0 # 0 == ldap.OPT_X_TLS_NEVER (needed for self-signed certs)
 
+    ldap_bindonce = False # set to True to only do one bind.  Useful if
+                          # configured to bind as the user on the first attempt
+
     log_reverse_dns_lookups = True  # if we do reverse dns lookups for logging hostnames
                                     # instead of just IPs
     log_timing = False              # update <data_dir>/timing.log?

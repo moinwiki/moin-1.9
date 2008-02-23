@@ -105,6 +105,8 @@ class FarmConfig(DefaultConfig):
     ldap_coding = 'utf-8' # coding used for ldap queries and result values
     ldap_timeout = 10 # how long we wait for the ldap server [s]
     ldap_verbose = True # if True, put lots of LDAP debug info into the log
+    ldap_bindonce = False # set to True to only do one bind.  Useful if
+                          # configured to bind as the user on the first attempt
     cookie_lifetime = 1 # 1 hour after last access ldap login is required again
     user_autocreate = True
 
