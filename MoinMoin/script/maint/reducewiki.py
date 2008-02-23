@@ -1,27 +1,9 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - reducewiki script
+MoinMoin - reducewiki script
 
-    Use this script to reduce a data/ directory to the latest page revision of
-    each non-deleted page (plus all attachments).
-
-    This is used to make the distributed underlay directory, but can also be
-    used for other purposes.
-
-    Usage: moin ... maint reducewiki --target-dir=myunderlay
-
-    So we change like this:
-        * data/pages/PageName/revisions/{1,2,3,4}
-          -> data/pages/revisions/1  (with content of 4)
-        * data/pages/PageName/current (pointing to e.g. 4)
-          -> same (pointing to 1)
-        * data/pages/PageName/edit-log and data/edit-log
-          -> do not copy
-        * data/pages/PageName/attachments/*
-          -> just copy
-
-    @copyright: 2005-2006 MoinMoin:ThomasWaldmann
-    @license: GPL, see COPYING for details
+@copyright: 2005-2006 MoinMoin:ThomasWaldmann
+@license: GPL, see COPYING for details
 """
 
 import os, shutil, codecs
@@ -33,6 +15,38 @@ from MoinMoin.action import AttachFile
 from MoinMoin.script import MoinScript
 
 class PluginScript(MoinScript):
+    """\
+Purpose:
+========
+This tool allows you to reduce a data/ directory to just the latest page
+revision of each non-deleted page (plus all attachments).
+
+This is used to make the distributed underlay directory, but can also be
+used for other purposes.
+
+So we change like this:
+    * data/pages/PageName/revisions/{1,2,3,4}
+        -> data/pages/revisions/1  (with content of 4)
+    * data/pages/PageName/current (pointing to e.g. 4)
+        -> same (pointing to 1)
+    * data/pages/PageName/edit-log and data/edit-log
+        -> do not copy
+    * data/pages/PageName/attachments/*
+        -> just copy
+
+Detailed Instructions:
+======================
+General syntax: moin [options] maint reducewiki [reducewiki-options]
+
+[options] usually should be:
+    --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+
+[reducewiki-options] see below:
+    0. To create a wiki data/ directory with just the latest revisions in the
+       directory '/mywiki'
+       moin ... maint reducewiki --target-dir=/mywiki
+"""
+
     def __init__(self, argv, def_values):
         MoinScript.__init__(self, argv, def_values)
         self.parser.add_option(
@@ -75,5 +89,4 @@ class PluginScript(MoinScript):
         pagelist = list(request.rootpage.getPageList(user=''))
         for pagename in pagelist:
             self.copypage(request, destdir, pagename)
-
 

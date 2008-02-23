@@ -112,7 +112,7 @@ class Script:
 
         self.parser = optparse.OptionParser(
             usage="%(cmd)s [command] %(usage)s" % {'cmd': os.path.basename(sys.argv[0]), 'usage': usage, },
-            version=rev)
+            version=rev, add_help_option=False)
         self.parser.allow_interspersed_args = False
         if def_values:
             self.parser.set_defaults(**def_values.__dict__)
@@ -231,11 +231,7 @@ General options:
 Specific options:
     Most commands need additional parameters after command subcommand.
 
-    Sorry, but there is not much docs about that stuff yet, you can check
-    docs/CHANGES and the MoinMoin wiki site for more infos (or just try to
-    invoke some command/subcommand to see if it emits more help).
-    The code you invoke is contained in MoinMoin/script/command/subcommand.py,
-    so just reading the comments / source there might help you, too.
+    To obtain additonal help on a command use 'moin module subcommand --help'
 """)
 
         cmd_module, cmd_name = args[:2]
@@ -244,5 +240,15 @@ Specific options:
             plugin_class = wikiutil.importBuiltinPlugin('script.%s' % cmd_module, cmd_name, 'PluginScript')
         except wikiutil.PluginMissingError:
             fatal("Command plugin %r, command %r was not found." % (cmd_module, cmd_name))
-        plugin_class(args[2:], self.options).run() # all starts again there
+
+        # We have to use the args list here instead of optparse, as optparse only
+        # deals with things coming before command subcommand.
+        if "--help" in args or "-h" in args:
+            print "MoinMoin Help - %s/ %s\n" % (cmd_module, cmd_name)
+            print plugin_class.__doc__
+            print "Command line reference:"
+            print "======================="
+            plugin_class(args[2:], self.options).parser.print_help()
+        else:
+            plugin_class(args[2:], self.options).run() # all starts again there
 

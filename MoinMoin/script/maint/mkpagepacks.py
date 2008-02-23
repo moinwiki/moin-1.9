@@ -1,10 +1,10 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - Package Generator
+MoinMoin - Package Generator
 
-    @copyright: 2005 Alexander Schremmer,
-                2006 MoinMoin:ThomasWaldmann
-    @license: GNU GPL, see COPYING for details.
+@copyright: 2005 Alexander Schremmer,
+            2006 MoinMoin:ThomasWaldmann
+@license: GNU GPL, see COPYING for details.
 """
 
 import os
@@ -23,6 +23,24 @@ ALL = u'all_languages'
 COMPRESSION_LEVEL = zipfile.ZIP_STORED
 
 class PluginScript(MoinScript):
+    """\
+Purpose:
+========
+This tool generates a set of packages from all the pages in a wiki.
+
+Detailed Instructions:
+======================
+General syntax: moin [options] maint mkpagepacks [mkpagepacks-options]
+
+[options] usually should be:
+    --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+
+[mkpagepacks-options] see below:
+    0. THIS SCRIPT SHOULD NEVER BE RUN ON ANYTHING OTHER THAN A TEST WIKI!
+
+    1. This script takes no command line arguments.
+"""
+
     def __init__(self, argv, def_values):
         MoinScript.__init__(self, argv, def_values)
 

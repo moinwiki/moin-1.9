@@ -1,14 +1,40 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - disable a user account
+MoinMoin - disable a user account
 
-    @copyright: 2006 MoinMoin:ThomasWaldmann
-    @license: GNU GPL, see COPYING for details.
+@copyright: 2006 MoinMoin:ThomasWaldmann
+@license: GNU GPL, see COPYING for details.
 """
 
 from MoinMoin.script import MoinScript
 
 class PluginScript(MoinScript):
+    """\
+Purpose:
+========
+This tool allows you to disable user accounts via a command line interface.
+
+Detailed Instructions:
+======================
+General syntax: moin [options] account disable [disable-options]
+
+[options] usually should be:
+    --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+
+[disable-options] see below:
+    0. Verify that you really want to disable the account.
+       While there is a disable script, no such enable script exists.
+
+    1. If using usernames, verify that multiple usernames with the same
+       user ID do not exist.
+
+    2. To disable the user 'JohnSmith':
+       moin ... account disable --name JohnSmith
+
+    3. To disable the user 'JohnSmith', based on his UID '1198872910.78.56322':
+       moin ... account disable --uid 1198872910.78.56322
+"""
+
     def __init__(self, argv, def_values):
         MoinScript.__init__(self, argv, def_values)
         self.parser.add_option(
@@ -50,4 +76,3 @@ class PluginScript(MoinScript):
             print "- disabled."
         else:
             print "- is already disabled."
-

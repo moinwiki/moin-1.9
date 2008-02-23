@@ -1,18 +1,39 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - build xapian search engine's index
+MoinMoin - build xapian search engine's index
 
-    You must run this script as owner of the wiki files, usually this is the
-    web server user.
-
-    @copyright: 2006 MoinMoin:ThomasWaldmann
-    @license: GNU GPL, see COPYING for details.
+@copyright: 2006 MoinMoin:ThomasWaldmann
+@license: GNU GPL, see COPYING for details.
 """
 
 from MoinMoin.script import MoinScript
 
 class IndexScript(MoinScript):
-    """ Xapian general index script class """
+    """\
+Purpose:
+========
+This tool allows you to control xapian's index of Moin.
+
+Detailed Instructions:
+======================
+General syntax: moin [options] index build [build-options]
+
+[options] usually should be:
+    --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+
+[build-options] see below:
+    0. You must run this script as owner of the wiki files, usually this is the
+       web server user.
+
+    1. To add the files from '/files.lst' to the index
+       moin ... index build --files /files.lst --mode add
+
+    2. To update the index with the files from '/files.lst'
+       moin ... index build --files /files.lst --mode update
+
+    3. To rebuild the index with the files from '/files.lst'
+       moin ... index build --files /files.lst --mode rebuild
+"""
 
     def __init__(self, argv, def_values):
         MoinScript.__init__(self, argv, def_values)

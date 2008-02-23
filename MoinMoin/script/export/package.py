@@ -1,15 +1,11 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - Create a MoinMoin package from wiki pages specified.
+MoinMoin - Create a MoinMoin package from wiki pages specified.
 
-    You must run this script as owner of the wiki files, usually this is the
-    web server user.
-
-    @copyright: 2002-2004 Juergen Hermann <jh@web.de>,
-                2005-2006 MoinMoin:ThomasWaldmann,
-                2007 Federico Lorenzi
-    @license: GNU GPL, see COPYING for details.
-
+@copyright: 2002-2004 Juergen Hermann <jh@web.de>
+            2005-2006 MoinMoin:ThomasWaldmann,
+            2007 Federico Lorenzi
+@license: GNU GPL, see COPYING for details.
 """
 
 import codecs, errno, os, re, shutil, sys, time
@@ -19,7 +15,34 @@ from MoinMoin import script
 
 
 class PluginScript(script.MoinScript):
-    """ Create package class """
+    """\
+Purpose:
+========
+This tool allows you to create a package of certain wiki pages.
+
+Detailed Instructions:
+======================
+General syntax: moin [options] export package [package-options]
+
+[options] usually should be:
+    --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+
+[package-options] see below:
+    0. You must run this script as owner of the wiki files, usually this is the
+       web server user.
+
+    1. To package all non-system and non-underlay pages on a wiki to the file '~/mywiki.zip'
+       moin ... export package --output ~/mywiki.zip
+
+    2. To package the pages 'FooBar' and 'TestPage' on a wiki to the file '~/mywiki.zip'
+       moin ... export package --pages FooBar,TestPage --output ~/mywiki.zip
+
+    3. To package all pages matching the search term 'MoinMoin' on a wiki to the file '~/mywiki.zip'
+       moin ... export package --search MoinMoin --output ~/mywiki.zip
+
+    4. Optionally, the --user argument could be added to any of the above examples,
+       causing the script to respect ACLs.
+"""
 
     def __init__(self, argv=None, def_values=None):
         script.MoinScript.__init__(self, argv, def_values)

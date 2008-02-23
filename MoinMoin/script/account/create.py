@@ -1,14 +1,38 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - create a user account
+MoinMoin - create a user account
 
-    @copyright: 2006 MoinMoin:ThomasWaldmann
-    @license: GNU GPL, see COPYING for details.
+@copyright: 2006 MoinMoin:ThomasWaldmann
+@license: GNU GPL, see COPYING for details.
 """
 
 from MoinMoin.script import MoinScript
 
 class PluginScript(MoinScript):
+    """\
+Purpose:
+========
+This tool allows you to create user accounts via a command line interface.
+
+Detailed Instructions:
+======================
+General syntax: moin [options] account create [create-options]
+
+[options] usually should be:
+    --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+
+[create-options] see below:
+    0. Verify that the account does not exist.
+       Currently this script does not check if the user exists.
+
+    1. Verify that you have specified the right options.
+       This script does no verification of email addresses or the like.
+
+    2. To create a normal user 'JohnSmith' with an alias of 'JSmith' and an
+       email of 'john@smith.com'
+       moin ... account create --name JohnSmith --alias JSmith --email john@smith.com
+"""
+
     def __init__(self, argv, def_values):
         MoinScript.__init__(self, argv, def_values)
         self.parser.add_option(
@@ -49,4 +73,3 @@ class PluginScript(MoinScript):
         print " %-20s %-25s %-35s" % (u.id, u.name, u.email),
         u.save()
         print "- created."
-
