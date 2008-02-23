@@ -616,6 +616,14 @@ class User:
             data.write(line)
         data.close()
 
+        arena = 'user'
+        key = 'name2id'
+        cache = caching.CacheEntry(self._request, arena, key, scope='wiki').remove()
+        try:
+            del self._request.cfg.cache.name2id
+        except:
+            pass
+        
         if not self.disabled:
             self.valid = 1
 

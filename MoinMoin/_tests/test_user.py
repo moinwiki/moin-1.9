@@ -158,6 +158,25 @@ class TestLoginWithPassword(object):
         theUser = user.User(self.request, name=name, password=password)
         theUser.subscribe(pagename)
         assert not theUser.isSubscribedTo([testPagename]) # list(!) of pages to check
+        
+    def testRenameUser(self):
+        """ create user and then rename user and check
+        if the old username is removed from the cache name2id
+        """
+        # Create test user
+        # Use iso charset to create user with old enc_password, as if
+        # the user file was migrated from pre 1.3 wiki.
+        name = u'__Some Name__'
+        password = name
+        self.createUser(name, password)
+        # Login - this should replace the old password in the user file
+        theUser = user.User(self.request, name=name)
+        # Rename user
+        theUser.name = u'__SomeName__'
+        theUser.save()
+        theUser = user.User(self.request, name=name, password=password)
+        
+        assert not theUser.exists()
 
     # Helpers ---------------------------------------------------------
 
