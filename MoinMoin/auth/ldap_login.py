@@ -60,7 +60,7 @@ class LDAPAuth(BaseAuth):
                 ldap.set_option(ldap.OPT_NETWORK_TIMEOUT, cfg.ldap_timeout)
 
                 starttls = cfg.ldap_start_tls
-                if ldap.TLS_AVAIL:
+                if hasattr(ldap, 'TLS_AVAIL') and ldap.TLS_AVAIL:
                     for option, value in (
                         (ldap.OPT_X_TLS_CACERTDIR, cfg.ldap_tls_cacertdir),
                         (ldap.OPT_X_TLS_CACERTFILE, cfg.ldap_tls_cacertfile),
@@ -121,9 +121,10 @@ class LDAPAuth(BaseAuth):
                     return CancelLogin(_("Invalid username or password."))
 
                 dn, ldap_dict = lusers[0]
-                if verbose: request.log("LDAP: DN found is %r, trying to bind with pw" % dn)
-                l.simple_bind_s(dn, password.encode(coding))
-                if verbose: request.log("LDAP: Bound with dn %r (username: %r)" % (dn, username))
+                if not cfg.ldap_bindonce:
+                    if verbose: request.log("LDAP: DN found is %r, trying to bind with pw" % dn)
+                    l.simple_bind_s(dn, password.encode(coding))
+                    if verbose: request.log("LDAP: Bound with dn %r (username: %r)" % (dn, username))
 
                 if cfg.ldap_email_callback is None:
                     if cfg.ldap_email_attribute:
