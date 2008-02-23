@@ -542,7 +542,6 @@ def makeServer(config):
 
 class StandaloneConfig(Config):
     """ Standalone server default config """
-
     name = 'moin'
     properties = {}
     docs = '/usr/share/moin/htdocs'
@@ -550,7 +549,6 @@ class StandaloneConfig(Config):
     group = 'www-data'
     port = 8000
     interface = 'localhost'
-    logPath = None
 
     # Advanced options
     serverClass = 'ThreadPoolServer'

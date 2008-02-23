@@ -35,10 +35,6 @@ del config
 
 class FastCgiConfig(Config):
     """ Set up default server """
-
-    logPath = None # 'moin.log'
-    loglevel_stderr = None # do not write to stderr when using fcgi
-
     properties = {}
     # properties = {'script_name': '/'}
 

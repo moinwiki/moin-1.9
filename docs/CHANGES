@@ -62,6 +62,7 @@ Version 1.7.current:
       because you can render the stuff between link start and link end yourself)
 
   New Features:
+    * new powerful and flexible logging, please see wiki/config/logging/.
     * changed markup for links, images and macros, see:
       MoinMoin:MoinMoinTodo/Release 1.7/HelpOnLinking and
       MoinMoin:LinkMarkupCollection
