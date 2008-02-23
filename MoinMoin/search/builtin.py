@@ -555,8 +555,10 @@ class Search:
                         clock.stop('_xapianProcess')
             finally:
                 clock.stop('_xapianSearch')
-        else:
-            # we didn't use xapian in this request
+        elif not index:
+            # we didn't use xapian in this request because we have no index,
+            # so we can just disable it until admin builds an index and
+            # restarts moin processes
             self.request.cfg.xapian_search = 0
 
         # some postprocessing by _moinSearch is required
