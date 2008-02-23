@@ -906,21 +906,23 @@ class User:
     # -----------------------------------------------------------------
     # Trail
 
+    def _wantTrail(self):
+        return (not self.valid and self._request.session != {}  # anon session
+                or self.valid and (self.show_page_trail or self.remember_last_visit))  # logged-in session
+
     def addTrail(self, page):
         """ Add page to trail.
 
         @param page: the page (object) to add to the trail
         """
-        if not self.valid or self.show_page_trail or self.remember_last_visit:
+        if self._wantTrail():
             # load trail if not known
             self.getTrail()
 
             pagename = page.page_name
             # Add only existing pages that the user may read
-            if self._request:
-                if not (page.exists() and
-                        self._request.user.may.read(pagename)):
-                    return
+            if not (page.exists() and self._request.user.may.read(pagename)):
+                return
 
             # Save interwiki links internally
             if self._cfg.interwikiname:
@@ -947,8 +949,7 @@ class User:
         @rtype: list
         @return: pages in trail
         """
-        if not self._trail and (
-           not self.valid or self.show_page_trail or self.remember_last_visit):
+        if not self._trail and self._wantTrail():
             trail = self._request.session.get('trail', [])
             trail = [t.strip() for t in trail]
             trail = [t for t in trail if t]
