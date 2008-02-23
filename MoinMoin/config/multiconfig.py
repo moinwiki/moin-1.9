@@ -273,7 +273,9 @@ class DefaultConfig:
     editor_default = 'text' # which editor is called when nothing is specified
     editor_ui = 'freechoice' # which editor links are shown on user interface
     editor_force = False
-    editor_quickhelp = {# editor markup hints quickhelp
+    editor_quickhelp = {
+        # editor markup hints quickhelp
+        # MUST be in wiki markup, even if the help is not for the wiki parser!
         'wiki': _("""\
  Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')>>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed ''<<Verbatim(''')>>'''''bold'''<<Verbatim(''')>> and italics''<<Verbatim('')>>; <<Verbatim(----)>> horizontal rule.
  Headings:: <<Verbatim(=)>> Title 1 <<Verbatim(=)>>; <<Verbatim(==)>> Title 2 <<Verbatim(==)>>; <<Verbatim(===)>> Title 3 <<Verbatim(===)>>;   <<Verbatim(====)>> Title 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Title 5 <<Verbatim(=====)>>.
@@ -284,23 +286,22 @@ class DefaultConfig:
 (!) For more help, see HelpOnEditing or SyntaxReference.
 """),
         'rst': _("""\
-Emphasis: <i>*italic*</i> <b>**bold**</b> ``monospace``<br/>
-<br/><pre>
+{{{
+Emphasis: *italic* **bold** ``monospace``
+
 Headings: Heading 1  Heading 2  Heading 3
           =========  ---------  ~~~~~~~~~
 
-Horizontal rule: ----
-Links: TrailingUnderscore_ `multi word with backticks`_ external_
+Horizontal rule: ---- 
 
-.. _external: http://external-site.net/foo/
+Links: TrailingUnderscore_ `multi word with backticks`_ external_ 
+
+.. _external: http://external-site.example.org/foo/
 
 Lists: * bullets; 1., a. numbered items.
-</pre>
-<br/>
-(!) For more help, see the
-<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
-reStructuredText Quick Reference
-</a>.
+}}}
+(!) For more help, see the 
+[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|reStructuredText Quick Reference]].
 """),
     }
     edit_locking = 'warn 10' # None, 'warn <timeout mins>', 'lock <timeout mins>'
