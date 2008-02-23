@@ -180,8 +180,8 @@ class MoinRemoteWiki(RemoteWiki):
             iw_list = self.connection.interwikiName()
         except socket.error:
             raise UnsupportedWikiException(_("The wiki is currently not reachable."))
-        except xmlrpclib.Fault:
-            raise UnsupportedWikiException(_("The remote version of MoinMoin is too old, version 1.6 is required at least."))
+        except xmlrpclib.Fault, err:
+            raise UnsupportedWikiException("xmlrpclib.Fault: %s" % str(err))
 
         if user and password:
             token = self.connection.getAuthToken(user, password)
