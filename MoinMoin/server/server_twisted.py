@@ -207,7 +207,6 @@ class TwistedConfig(Config):
     interfaces = ['']
     threads = 10
     timeout = 15 * 60 # 15 minutes
-    logPath = None # moin log file
     logPath_twisted = None # Twisted log file
     virtualHosts = None
     memoryProfile = None

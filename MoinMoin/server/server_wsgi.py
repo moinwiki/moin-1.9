@@ -7,8 +7,7 @@
     from MoinMoin.server.server_wsgi import WsgiConfig, moinmoinApp
 
     class Config(WsgiConfig):
-        logPath = 'moin.log' # define your log file here
-        #loglevel_file = logging.INFO # if you do not like the default
+        pass
 
     config = Config() # you MUST create an instance to initialize logging!
     # use moinmoinApp here with your WSGI server / gateway
@@ -23,7 +22,7 @@ from MoinMoin.request import request_wsgi
 
 class WsgiConfig(Config):
     """ WSGI default config """
-    loglevel_stderr = None # we do not want to write to stderr!
+    pass
 
 
 def moinmoinApp(environ, start_response):

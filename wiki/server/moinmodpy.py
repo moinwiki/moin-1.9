@@ -56,11 +56,6 @@ from MoinMoin.server.server_modpython import ModpythonConfig, modpythonHandler
 
 class MyConfig(ModpythonConfig):
     """ Set up local server-specific stuff here """
-
-    # Make sure moin will have permission to write to this file!
-    # Otherwise it will cause a server error.
-    logPath = "/var/log/apache2/moinlog"
-    
     # Properties
     # Allow overriding any request property by the value defined in
     # this dict e.g properties = {'script_name': '/mywiki'}.
