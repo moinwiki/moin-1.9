@@ -3,7 +3,6 @@
 
     Minimal code for using this:
 
-    import logging
     from MoinMoin.server.server_wsgi import WsgiConfig, moinmoinApp
 
     class Config(WsgiConfig):

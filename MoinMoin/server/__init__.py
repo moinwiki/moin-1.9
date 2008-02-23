@@ -20,13 +20,19 @@ def configureLogging(conf, defaults):
    fileConfig(StringIO(conf), defaults)
 
 def getLogger(name):
+    # do we want to strip MoinMoin. from the name?
+    #if name.startswith('MoinMoin.'):
+    #    name = name[9:]
     logger = _logging.getLogger(name)
     for levelnumber, levelname in _logging._levelNames.items():
         if isinstance(levelnumber, int): # that list has also the reverse mapping...
             setattr(logger, levelname, levelnumber)
     return logger
 
-logging = getLogger('')
+logging = getLogger(__name__)
+
+# use this to temporarily and selectively enable debug logging for this module
+#logging.setLevel(logging.DEBUG)
 
 def switchUID(uid, gid):
     """ Switch identity to safe user and group

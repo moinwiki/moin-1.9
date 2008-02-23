@@ -10,7 +10,6 @@ use_threads = True
 unixSocketPath = '/tmp/moin.sock'
 
 import os
-import logging
 
 # Set threads flag, so other code can use proper locking
 from MoinMoin import config
