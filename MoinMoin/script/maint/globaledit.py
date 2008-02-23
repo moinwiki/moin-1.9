@@ -1,20 +1,36 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - do global changes to all pages in a wiki.
-
-    The changes being done are hardcoded in function do_edit.
-    As it is, this script is mostly useful for the MoinMoin release maintainer
-    using: moin ... --wiki-url=moinmaster.wikiwikiweb.de/ maint globaledit
-
-    @copyright: 2004-2006 MoinMoin:ThomasWaldmann
-    @license: GNU GPL, see COPYING for details.
+MoinMoin - do global changes to all pages in a wiki.
+  
+@copyright: 2004-2006 MoinMoin:ThomasWaldmann
+@license: GNU GPL, see COPYING for details.
 """
+
 debug = False
 
 from MoinMoin import PageEditor
 from MoinMoin.script import MoinScript
 
 class PluginScript(MoinScript):
+    """\
+Purpose:
+========
+This tool allows you to edit all the pages in a wiki.
+
+Detailed Instructions:
+======================
+General syntax: moin [options] maint globaledit [globaledit-options]
+
+[options] usually should be:
+    --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+
+[globaledit-options] see below:
+    0. The changes that will be performed are hardcoded in the function
+       do_edit.
+
+    1. This script takes no command line arguments.
+"""
+
     def __init__(self, argv, def_values):
         MoinScript.__init__(self, argv, def_values)
 

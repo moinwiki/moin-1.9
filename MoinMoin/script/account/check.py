@@ -1,31 +1,49 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - check / process user accounts
+MoinMoin - check / process user accounts
 
-    @copyright: 2003-2006 MoinMoin:ThomasWaldmann
-    @license: GNU GPL, see COPYING for details.
+@copyright: 2003-2006 MoinMoin:ThomasWaldmann
+@license: GNU GPL, see COPYING for details.
+"""
 
-    Why is this needed?
-    ===================
-    When using ACLs, a wiki user name has to be unique, there must not be
-    multiple accounts having the same username. The problem is, that this
-    was possible before the introduction of ACLs and many users, who forgot
-    their ID, simply created a new ID using the same user name.
+# ----------------------------------------------------------------------------
+# if a user subscribes to magicpages, it means that he wants to keep
+# exactly THIS account - this will avoid deleting it.
+magicpages = [
+    "ThisAccountIsCorrect",
+    "DieserAccountIstRichtig",
+]
 
-    Because access rights (when using ACLs) depend on the NAME (not the ID),
-    this must be cleaned up before using ACLs or users will have difficulties
-    changing settings and saving their account data (system won't accept the
-    save, if the user name and email is not unique).
+# ----------------------------------------------------------------------------
 
-    How to use this tool?
-    =====================
+import os, sys
 
-    General syntax: moin [options] account check [check-options]
+from MoinMoin.script import MoinScript
+from MoinMoin import user, wikiutil
 
-    [options] usually should be:
-        --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+class PluginScript(MoinScript):
+    """\
+Purpose:
+========
+When using ACLs, a wiki user name has to be unique, there must not be
+multiple accounts having the same username. The problem is, that this
+was possible before the introduction of ACLs and many users, who forgot
+their ID, simply created a new ID using the same user name.
 
-    [check-options] see below:
+Because access rights (when using ACLs) depend on the NAME (not the ID),
+this must be cleaned up before using ACLs or users will have difficulties
+changing settings and saving their account data (system won't accept the
+save, if the user name and email is not unique).
+
+Detailed Instructions:
+======================
+
+General syntax: moin [options] account check [check-options]
+
+[options] usually should be:
+    --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+
+[check-options] see below:
 
     0. Check the settings at top of the code!
        Making a backup of your wiki might be also a great idea.
@@ -51,25 +69,8 @@
     5. Optionally you may want to make wikinames out of the user names
        moin ... account check --wikinames
        moin ... account check --wikinames --save
-
 """
 
-# ----------------------------------------------------------------------------
-# if a user subsribes to magicpages, it means that he wants to keep
-# exactly THIS account - this will avoid deleting it.
-magicpages = [
-    "ThisAccountIsCorrect",
-    "DieserAccountIstRichtig",
-]
-
-# ----------------------------------------------------------------------------
-
-import os, sys
-
-from MoinMoin.script import MoinScript
-from MoinMoin import user, wikiutil
-
-class PluginScript(MoinScript):
     def __init__(self, argv, def_values):
         MoinScript.__init__(self, argv, def_values)
         self._addFlag("usersunique",

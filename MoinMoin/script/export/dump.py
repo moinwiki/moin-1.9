@@ -1,14 +1,10 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - Dump a MoinMoin wiki to static pages
+MoinMoin - Dump a MoinMoin wiki to static pages
 
-    You must run this script as owner of the wiki files, usually this is the
-    web server user.
-
-    @copyright: 2002-2004 Juergen Hermann <jh@web.de>,
-                2005-2006 MoinMoin:ThomasWaldmann
-    @license: GNU GPL, see COPYING for details.
-
+@copyright: 2002-2004 Juergen Hermann <jh@web.de>,
+            2005-2006 MoinMoin:ThomasWaldmann
+@license: GNU GPL, see COPYING for details.
 """
 
 import sys, os, time, codecs, shutil, re, errno
@@ -95,7 +91,29 @@ def _attachment(request, pagename, filename, outputdir, **kw):
 
 
 class PluginScript(script.MoinScript):
-    """ Dump script class """
+    """\
+Purpose:
+========
+This tool allows you to dump MoinMoin wiki pages to static HTML files.
+
+Detailed Instructions:
+======================
+General syntax: moin [options] export dump [dump-options]
+
+[options] usually should be:
+    --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+
+[dump-options] see below:
+    0. You must run this script as owner of the wiki files, usually this is the
+       web server user.
+
+    1. To dump all the pages on the wiki to the directory '/mywiki'
+       moin ... export dump --target-dir=/mywiki
+
+    2. To dump all the pages readable by 'JohnSmith' on the wiki to the directory
+       '/mywiki'
+       moin ... export dump --target-dir=/mywiki --username JohnSmith
+"""
 
     def __init__(self, argv=None, def_values=None):
         script.MoinScript.__init__(self, argv, def_values)

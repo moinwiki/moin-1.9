@@ -1,14 +1,9 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - mailtranslators script
-    
-    read mail text from standard input and send an email to all translators -
-    %(lang)s will be replaced by language.
+MoinMoin - mailtranslators script
 
-    Usage: moin ... maint mailtranslators
-    
-    @copyright: 2004-2007 MoinMoin:ThomasWaldmann
-    @license: GPL, see COPYING for details
+@copyright: 2004-2007 MoinMoin:ThomasWaldmann
+@license: GPL, see COPYING for details
 """
 
 import sys, os
@@ -18,6 +13,29 @@ from MoinMoin.mail.sendmail import sendmail
 from MoinMoin.script import MoinScript
 
 class PluginScript(MoinScript):
+    """\
+Purpose:
+========
+This tool allows you to have a message read in from standard input, and
+then sent to all translators via email. If you use %(lang)s in the mssage
+it will be replaced with the appropriate language code for the translater.
+
+Detailed Instructions:
+======================
+General syntax: moin [options] maint mailtranslators [mailtranslators-options]
+
+[options] usually should be:
+    --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+
+[mailtranslators-options] see below:
+    0. To send an email to all translaters, from john@smith.com, and with a subject
+       of 'Please update your translations!' and a body of 'Please update your language,
+       %(lang)s'
+       moin ... maint mailtranslators --from-address john@smith.com --subject 'Please update your translations!'
+       Please update your language, %(lang)s
+       ^D
+"""
+
     def __init__(self, argv, def_values):
         MoinScript.__init__(self, argv, def_values)
         self.parser.add_option(

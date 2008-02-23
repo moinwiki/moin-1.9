@@ -1,11 +1,9 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - display unused or trash page directories in data/pages
+MoinMoin - display unused or trash page directories in data/pages
 
-    Then please review the output before running it!
-
-    @copyright: 2005-2006 MoinMoin:ThomasWaldmann
-    @license: GNU GPL, see COPYING for details.
+@copyright: 2005-2006 MoinMoin:ThomasWaldmann
+@license: GNU GPL, see COPYING for details.
 """
 
 import os
@@ -13,6 +11,25 @@ import os
 from MoinMoin.script import MoinScript
 
 class PluginScript(MoinScript):
+    """\
+Purpose:
+========
+This tool outputs a shell script which upon execution will remove unused or
+trashed pages from the wiki.
+
+Detailed Instructions:
+======================
+General syntax: moin [options] maint cleanpage [cleanpage-options]
+
+[options] usually should be:
+    --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+
+[cleanpage-options] see below:
+    0. Verify the outputted shell script before running it.
+
+    1. This script takes no command line arguments.
+"""
+
     def __init__(self, argv, def_values):
         MoinScript.__init__(self, argv, def_values)
 

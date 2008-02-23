@@ -1,18 +1,10 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - Push files into the wiki.
+MoinMoin - Push files into the wiki.
 
-    This script pushes files from a directory into the wiki (to be exact: it
-    pushes all except the last file, as this is maybe still written to in
-    case of irc logs).
-    One application is to use it to store IRC logs into the wiki.
-
-    Usage:
-    moin --config-dir=... --wiki-url=... import irclog --author=IrcLogImporter --file-dir=.
-
-    @copyright: 2005-2007 MoinMoin:AlexanderSchremmer
-                2006 MoinMoin:ThomasWaldmann
-    @license: GNU GPL, see COPYING for details.
+@copyright: 2005-2007 MoinMoin:AlexanderSchremmer
+            2006 MoinMoin:ThomasWaldmann
+@license: GNU GPL, see COPYING for details.
 """
 
 # this function generates a pagename from the file name
@@ -43,7 +35,25 @@ def decodeLinewise(text):
 
 
 class PluginScript(MoinScript):
-    """ irclog importer script class """
+    """\
+Purpose:
+========
+This script pushes files from a directory into the wiki (to be exact: it
+pushes all except the last file, as this is maybe still written to in
+case of irc logs).
+One application is to use it to store IRC logs into the wiki.
+
+Detailed Instructions:
+======================
+General syntax: moin [options] import irclog [irclog-options]
+
+[options] usually should be:
+    --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+
+[irclog-options] see below:
+    0. To add all the files in the current directory to the wiki as the user 'JohnSmith'
+       moin ... import irclog --author=JohnSmirh --file-dir=.
+"""
 
     def __init__(self, argv, def_values):
         MoinScript.__init__(self, argv, def_values)
