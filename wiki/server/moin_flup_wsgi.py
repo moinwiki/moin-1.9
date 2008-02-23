@@ -21,8 +21,7 @@ from flup.server.fcgi import WSGIServer
 from MoinMoin.server.server_wsgi import moinmoinApp, WsgiConfig
 
 class Config(WsgiConfig):
-    logPath = 'moin.log' # adapt to your needs!
-    #loglevel_file = logging.INFO # adapt if you don't like the default
+    pass
 
 config = Config() # MUST create an instance to init logging
 

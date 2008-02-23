@@ -32,9 +32,8 @@ from MoinMoin.server.server_twisted import TwistedConfig, makeApp
 
 class Config(TwistedConfig):
 
-    # Server name
-    # Used to create .log, .pid and .prof files
-    name = 'mointwisted'
+    # Server name - used to create .pid and .prof files
+    name = 'moin'
 
     # Path to moin shared files (default '/usr/share/moin/wiki/htdocs')
     docs = '/usr/share/moin/htdocs'
@@ -71,9 +70,6 @@ class Config(TwistedConfig):
     # compatible logfiles are useful because there are quite a few programs
     # which analyze them and display statistics.
     ## logPath_twisted = 'mointwisted.log'
-
-    # moin log file
-    ## logPath = 'moin.log'
 
     # Memory profile (default commented)
     # Useful only if you are a developer or interested in moin memory usage

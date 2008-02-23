@@ -9,9 +9,24 @@
 """
 
 import os
-import logging
+from StringIO import StringIO
 
 from MoinMoin import config
+
+import logging as _logging
+
+def configureLogging(conf, defaults):
+   from logging.config import fileConfig
+   fileConfig(StringIO(conf), defaults)
+
+def getLogger(name):
+    logger = _logging.getLogger(name)
+    for levelnumber, levelname in _logging._levelNames.items():
+        if isinstance(levelnumber, int): # that list has also the reverse mapping...
+            setattr(logger, levelname, levelnumber)
+    return logger
+
+logging = getLogger('')
 
 def switchUID(uid, gid):
     """ Switch identity to safe user and group
@@ -53,12 +68,39 @@ class Config:
     group = None # group ...
     port = None # tcp port number (if supported)
 
-    # log levels for different log handlers
-    # None means "don't use this handler", otherwise specify the minimum loglevel, e.g. logging.DEBUG
-    # TODO: change later to an appropriate level, for now, we want everything
-    loglevel_file = logging.DEBUG # None
-    loglevel_stderr = logging.DEBUG # None
-    logPath = None
+    # Here you can configure the default logging used when running moin,
+    # see http://www.python.org/doc/lib/logging-config-fileformat.html
+    # We just use moin.log in current directory by default, if you want
+    # anything else, override logging_conf in your server script's Config class.
+    logging_defaults = {
+        'logdir': '.',
+        'loglevel': 'DEBUG',
+}
+    logging_config = """\
+[loggers]
+keys=root
+
+[handlers]
+keys=logfile
+
+[formatters]
+keys=logfile
+
+[logger_root]
+level=%(loglevel)s
+handlers=logfile
+
+[handler_logfile]
+class=StreamHandler
+level=NOTSET
+formatter=logfile
+args=('%(logdir)s/moin.log', 'at')
+
+[formatter_logfile]
+format=%(asctime)s %(name)s %(levelname)s %(message)s
+datefmt=
+class=logging.Formatter
+"""
 
     def __init__(self):
         """ Validate and post process configuration values
@@ -66,30 +108,7 @@ class Config:
         Will raise RuntimeError for any wrong config value.
         """
         # First, initialize the logging
-        logger = logging.getLogger('') # root logger
-        logger.setLevel(logging.NOTSET) # otherwise it has WARNING by default!
-
-        if self.loglevel_file is not None and self.logPath is not None:
-            # define a Handler which writes to a log file
-            logfile = logging.FileHandler(self.logPath, 'at') # XXX we can't say ", 0" for sync here :(
-            logfile.setLevel(self.loglevel_file)
-            # set a format which is better for logfile use
-            formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
-            # tell the handler to use this format
-            logfile.setFormatter(formatter)
-            # add the handler to the root logger
-            logger.addHandler(logfile)
-
-        if self.loglevel_stderr is not None:
-            # define a Handler which writes INFO to sys.stderr
-            logstderr = logging.StreamHandler()
-            logstderr.setLevel(self.loglevel_stderr)
-            # set a format which is simpler for console use
-            formatter = logging.Formatter('%(asctime)s %(levelname)-8s %(message)s', '%H%M%S')
-            # tell the handler to use this format
-            logstderr.setFormatter(formatter)
-            # add the handler to the root logger
-            logger.addHandler(logstderr)
+        configureLogging(self.logging_config, self.logging_defaults)
 
         # Check that docs path is accessible
         if self.docs:

@@ -19,11 +19,41 @@ Deleting the TestConfig instance will restore the previous configuration.
 @license: GNU GPL, see COPYING for details.
 """
 
+# here you can configure logging used while running the tests,
+# see http://www.python.org/doc/lib/logging-config-fileformat.html
+logging_defaults = {
+    'loglevel': 'DEBUG',
+}
+logging_config = """\
+[loggers]
+keys=root
+
+[handlers]
+keys=stderr
+
+[formatters]
+keys=screen
+
+[logger_root]
+level=%(loglevel)s
+handlers=stderr
+
+[handler_stderr]
+class=StreamHandler
+level=NOTSET
+formatter=screen
+args=(sys.stderr, )
+
+[formatter_screen]
+format=%(asctime)s %(name)s %(levelname)s %(message)s
+datefmt=%H%M%S
+class=logging.Formatter
+"""
+
 import atexit
 from inspect import isclass
 from sys import modules
 import sys
-import logging
 
 import py
 
@@ -86,23 +116,6 @@ def init_test_request(static_state=[False]):
     request.formatter = request.html_formatter
     return request
 
-
-def init_test_logging(loglevel_stderr=logging.DEBUG):
-    """ initialize python stdlib logging framework to output stuff to stderr """
-    logger = logging.getLogger('') # root logger
-    logger.setLevel(logging.NOTSET) # otherwise it has WARNING by default!
-
-    # define a Handler which writes to sys.stderr
-    logstderr = logging.StreamHandler()
-    logstderr.setLevel(loglevel_stderr)
-    # set a format which is simpler for console use
-    formatter = logging.Formatter('%(asctime)s %(levelname)-8s %(message)s', '%H%M%S')
-    # tell the handler to use this format
-    logstderr.setFormatter(formatter)
-    # add the handler to the root logger
-    logger.addHandler(logstderr)
-
-    logging.info("logging initialized")
 
 class TestConfig:
     """ Custom configuration for unit tests
@@ -209,7 +222,8 @@ class Module(py.test.collect.Module):
     Function = MoinTestFunction
 
     def __init__(self, *args, **kwargs):
-        init_test_logging()
+        from MoinMoin.server import configureLogging
+        configureLogging(logging_config, logging_defaults)
         self.request = init_test_request()
         super(Module, self).__init__(*args, **kwargs)
 

@@ -29,11 +29,8 @@ sys.path.insert(0, '/path/to/wikiconfig')
 from MoinMoin.server.server_cgi import CgiConfig, run
 
 class Config(CgiConfig):
-    # Server name
-    # Used to create .log and .prof files
+    # Server name - used to create .prof files
     name = 'moin'
-
-    ## logPath = name + '.log'
 
     # Properties
     # Allow overriding any request property by the value defined in

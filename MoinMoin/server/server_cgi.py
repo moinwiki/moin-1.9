@@ -32,10 +32,8 @@ config = None
 
 class CgiConfig(Config):
     """ CGI default config """
-
     name = 'moin'
     properties = {}
-    logPath = None
 
     # Development options
     hotshotProfile = None # e.g. "moin.prof"
