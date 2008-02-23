@@ -22,7 +22,7 @@ Deleting the TestConfig instance will restore the previous configuration.
 # here you can configure logging used while running the tests,
 # see http://www.python.org/doc/lib/logging-config-fileformat.html
 logging_defaults = {
-    'loglevel': 'DEBUG',
+    'loglevel': 'INFO',
 }
 logging_config = """\
 [loggers]

@@ -14,8 +14,11 @@
 proxies_trusted = [] # trust noone!
 #proxies_trusted = ['127.0.0.1', ] # can be a list of multiple IPs
 
-import logging
-proxy_loglevel = logging.INFO # logging.NOTSET (never), .DEBUG, .INFO
+from MoinMoin.server import getLogger
+logging = getLogger(__name__)
+
+# use this to temporarily and selectively enable debug logging for this module
+#logging.setLevel(logging.DEBUG)
 
 def find_remote_addr(addrs):
     """ Find the last remote IP address before it hits our reverse proxies.
@@ -33,7 +36,7 @@ def find_remote_addr(addrs):
         TODO: add wikiconfig configurability for proxies_trusted
         TODO: later, make it possible to put multipe remote IP addrs into edit-log
     """
-    logging.log(proxy_loglevel, "request.find_remote_addr: addrs == %r" % addrs)
+    logging.debug("request.find_remote_addr: addrs == %r" % addrs)
     if proxies_trusted:
         result = [addr for addr in addrs if addr not in proxies_trusted]
         if result:

@@ -7,7 +7,12 @@
     @copyright: 2005-2007 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
-import logging
+
+from MoinMoin.server import getLogger
+logging = getLogger(__name__)
+
+# use this to temporarily and selectively enable debug logging for this module
+#logging.setLevel(logging.DEBUG)
 
 import os, codecs, errno
 from MoinMoin import config, wikiutil

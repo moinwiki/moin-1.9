@@ -5,15 +5,22 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import caching
+from sha import sha
+from random import randint
+import time
+
 from openid import oidutil
 from openid.store.interface import OpenIDStore
 from openid.association import Association
 from openid.store import nonce
-import logging
-from sha import sha
-from random import randint
-import time
+
+from MoinMoin import caching
+
+from MoinMoin.server import getLogger
+logging = getLogger(__name__)
+
+# use this to temporarily and selectively enable debug logging for this module
+#logging.setLevel(logging.DEBUG)
 
 # redirect openid logging to moin log
 def log(msg, level=0):

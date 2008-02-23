@@ -9,7 +9,11 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import logging
+from MoinMoin.server import getLogger
+logging = getLogger(__name__)
+
+# use this to temporarily and selectively enable debug logging for this module
+#logging.setLevel(logging.DEBUG)
 
 from MoinMoin import wikiutil
 from MoinMoin.util import pysupport
@@ -17,11 +21,6 @@ from MoinMoin.wikiutil import PluginAttributeError
 
 # Create a list of extension actions from the package directory
 modules = pysupport.getPackageModules(__file__)
-
-# A module-wide Logger, don't use it from outside
-logger = logging.getLogger("events")
-logger.setLevel(logging.DEBUG)
-logger.addHandler(logging.StreamHandler())
 
 # Dummy pseudo-getText function used in event descriptions,
 # so that they get into .po files

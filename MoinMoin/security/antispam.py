@@ -17,7 +17,11 @@ try:
 except NameError:
     from sets import ImmutableSet as frozenset
 
-import logging
+from MoinMoin.server import getLogger
+logging = getLogger(__name__)
+
+# use this to temporarily and selectively enable debug logging for this module
+#logging.setLevel(logging.DEBUG)
 
 from MoinMoin.security import Permissions
 from MoinMoin import caching, wikiutil

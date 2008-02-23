@@ -8,7 +8,12 @@
     @license: GNU GPL, see COPYING for details.
 """
 import re
-import logging
+
+from MoinMoin.server import getLogger
+logging = getLogger(__name__)
+
+# use this to temporarily and selectively enable debug logging for this module
+#logging.setLevel(logging.DEBUG)
 
 from MoinMoin.util import pysupport
 from MoinMoin import wikiutil
@@ -337,7 +342,7 @@ class FormatterBase:
         args = None
         if lines:
             args = self._get_bang_args(lines[0])
-            #logging.debug("formatter.parser: parser args %r" % args)
+            logging.debug("formatter.parser: parser args %r" % args)
             if args is not None:
                 lines = lines[1:]
         if lines and not lines[0]:

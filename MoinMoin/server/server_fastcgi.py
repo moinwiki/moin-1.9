@@ -22,8 +22,6 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import logging
-
 from MoinMoin.server import Config
 from MoinMoin.request import request_fcgi
 from MoinMoin.support import thfcgi

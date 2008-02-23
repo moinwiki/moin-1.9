@@ -7,7 +7,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import sys, logging
+import sys
 
 # Path to MoinMoin package, needed if you installed with --prefix=PREFIX
 # or if you did not use setup.py.

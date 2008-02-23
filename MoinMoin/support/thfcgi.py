@@ -35,8 +35,11 @@
 # TODO: Compare compare the number of bytes received on FCGI_STDIN with
 #       CONTENT_LENGTH and abort the update if the two numbers are not equal.
 
-import logging
-LOGLEVEL = logging.DEBUG # logging.NOTSET to completely switch it off
+from MoinMoin.server import getLogger
+logging = getLogger(__name__)
+
+# use this to temporarily and selectively enable debug logging for this module
+#logging.setLevel(logging.DEBUG)
 
 import os
 import sys
@@ -101,7 +104,7 @@ FCGI_EndRequestBody = "!IB3x"
 
 
 def log(s):
-    logging.log(LOGLEVEL, 'thfcgi: %s' % s)
+    logging.debug(s)
 
 class SocketErrorOnWrite:
     """Is raised if a write fails in the socket code."""
