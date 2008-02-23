@@ -58,6 +58,10 @@ class TestAuth:
         """ run a simple request, no auth, just check if it succeeds """
         environ = self.setup_env()
         request = self.process_request(environ)
+
+        # anon user?
+        assert not request.user.valid
+
         # check if the request resulted in normal status, result headers and content
         assert request.status == '200 OK'
         has_ct = has_v = has_cc = False
@@ -83,9 +87,7 @@ class TestAuth:
 
     def testAnonSession(self):
         """ run some requests, no auth, check if anon sessions work """
-        from MoinMoin.auth import moin_session, moin_anon_session
-        self.config = self.TestConfig(auth=[moin_session, moin_anon_session],
-                                      anonymous_cookie_lifetime=1)
+        self.config = self.TestConfig(anonymous_cookie_lifetime=1)
         cookie = ''
         trail_expected = []
         for pagename in self.PAGES:
@@ -130,13 +132,9 @@ class TestAuth:
 
     def testHttpAuthSession(self):
         """ run some requests with http auth, check whether session works """
-        from MoinMoin.auth import moin_session, moin_anon_session
-        from MoinMoin.auth.http import http
+        from MoinMoin.auth.http import HTTPAuth
         username = u'HttpAuthTestUser'
-        # XXX BROKEN: should work without moin_anon_session, without anonymous_cookie_lifetime:
-        self.config = self.TestConfig(auth=[http, moin_session, moin_anon_session],
-                                      user_autocreate=True,
-                                      anonymous_cookie_lifetime=1)
+        self.config = self.TestConfig(auth=[HTTPAuth()], user_autocreate=True)
         cookie = ''
         trail_expected = []
         for pagename in self.PAGES:
@@ -183,9 +181,9 @@ class TestAuth:
 
     def testMoinLoginAuthSession(self):
         """ run some requests with moin_login auth, check whether session works """
-        from MoinMoin.auth import moin_login, moin_session
+        from MoinMoin.auth import MoinLogin
         from MoinMoin.user import User
-        self.config = self.TestConfig(auth=[moin_login, moin_session])
+        self.config = self.TestConfig(auth=[MoinLogin()])
         username = u'MoinLoginAuthTestUser'
         password = u'secret'
         User(self.request, name=username, password=password).save() # create user

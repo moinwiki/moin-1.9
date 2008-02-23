@@ -1576,7 +1576,7 @@ class RequestBase(object):
         self._finishers = []
 
         try:
-            del self.user
+            #del self.user    # keeping this is useful for testing
             del self.theme
             del self.dicts
         except:
