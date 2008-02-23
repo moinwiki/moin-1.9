@@ -27,9 +27,6 @@ sys.path.insert(0, '/path/to/wikiconfig')
 from MoinMoin.server.server_fastcgi import FastCgiConfig, run
 
 class Config(FastCgiConfig):
-    #loglevel_file = logging.DEBUG  # adapt if you don't like the default
-    logPath = 'moin.log'
-
     properties = {}
     # properties = {'script_name': '/'} # use this instead of the line above if your wiki runs under "/" url
 

@@ -1,0 +1,9 @@
+In this directory is a collection of pre-made snippets you can put into your
+wiki config to configure logging. You may have to edit them at some places,
+please read the comments in the snippet.
+
+You can make very flexible and powerful logging configurations using this
+mechanism, for more details see:
+
+http://www.python.org/doc/lib/logging-config-fileformat.html
+

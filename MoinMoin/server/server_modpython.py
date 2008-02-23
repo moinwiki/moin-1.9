@@ -36,8 +36,6 @@ config = None
 
 class ModpythonConfig(Config):
     """ Set up default server """
-
-    logPath = None
     properties = {}
 
     # Set up log handler to log to apache log!
