@@ -8,6 +8,8 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+DAYS = 30 # we look for spam edits in the last x days
+
 import time
 
 from MoinMoin.logfile import editlog
@@ -15,6 +17,20 @@ from MoinMoin.util.dataset import TupleDataset, Column
 from MoinMoin.widget.browser import DataBrowserWidget
 from MoinMoin import wikiutil, Page, PageEditor
 from MoinMoin.macro import RecentChanges
+
+def render(editor_tuple):
+    etype, evalue = editor_tuple
+    if etype in ('ip', 'email', ):
+        ret = evalue
+    elif etype == 'interwiki':
+        ewiki, euser = evalue
+        if ewiki == 'Self':
+            ret = euser
+        else:
+            ret = '%s:%s' % evalue
+    else:
+        ret = repr(editor_tuple)
+    return ret
 
 def show_editors(request, pagename, timestamp):
     _ = request.getText
@@ -30,13 +46,14 @@ def show_editors(request, pagename, timestamp):
         if not request.user.may.read(line.pagename):
             continue
 
-        editor = line.getEditor(request)
+        editor = line.getInterwikiEditorData(request)
         if not line.pagename in pages:
             pages[line.pagename] = 1
             editors[editor] = editors.get(editor, 0) + 1
 
     editors = [(nr, editor) for editor, nr in editors.iteritems()]
     editors.sort()
+    editors.reverse()
 
     pg = Page.Page(request, pagename)
 
@@ -45,7 +62,7 @@ def show_editors(request, pagename, timestamp):
                        Column('pages', label=_("Pages"), align='right'),
                        Column('link', label='', align='left')]
     for nr, editor in editors:
-        dataset.addRow((editor, unicode(nr),
+        dataset.addRow((render(editor), unicode(nr),
             pg.link_to(request, text=_("Select Author"),
                 querystr={
                     'action': 'Despam',
@@ -80,7 +97,7 @@ def show_pages(request, pagename, editor, timestamp):
 
         if not line.pagename in pages:
             pages[line.pagename] = 1
-            if line.getEditor(request) == editor:
+            if repr(line.getInterwikiEditorData(request)) == editor:
                 line.time_tuple = request.user.getTime(wikiutil.version2timestamp(line.ed_time_usecs))
                 request.write(RecentChanges.format_page_edits(macro, [line], timestamp))
 
@@ -107,10 +124,10 @@ def revert_page(request, pagename, editor):
     for line in log.reverse():
         if first:
             first = False
-            if line.getEditor(request) != editor:
+            if repr(line.getInterwikiEditorData(request)) != editor:
                 return
         else:
-            if line.getEditor(request) != editor:
+            if repr(line.getInterwikiEditorData(request)) != editor:
                 rev = line.rev
                 break
 
@@ -147,17 +164,17 @@ def revert_pages(request, editor, timestamp):
 
         if not line.pagename in pages:
             pages[line.pagename] = 1
-            if line.getEditor(request) == editor:
+            if repr(line.getInterwikiEditorData(request)) == editor:
                 revertpages.append(line.pagename)
 
-    request.write("Debug: Pages to revert:<br>%s" % "<br>".join(revertpages))
+    request.write("Pages to revert:<br>%s" % "<br>".join(revertpages))
     for pagename in revertpages:
-        request.write("Debug: Begin reverting %s ...<br>" % pagename)
+        request.write("Begin reverting %s ...<br>" % pagename)
         msg = revert_page(request, pagename, editor)
         if msg:
             request.write("<p>%s: %s</p>" % (
                 Page.Page(request, pagename).link_to(request), msg))
-        request.write("Debug: Finished reverting %s.<br>" % pagename)
+        request.write("Finished reverting %s.<br>" % pagename)
 
 def execute(pagename, request):
     _ = request.getText
@@ -169,7 +186,7 @@ def execute(pagename, request):
         return Page.Page(request, pagename).send_page()
 
     editor = request.form.get('editor', [None])[0]
-    timestamp = time.time() - 24 * 3600
+    timestamp = time.time() - DAYS * 24 * 3600
        # request.form.get('timestamp', [None])[0]
     ok = request.form.get('ok', [0])[0]
 
