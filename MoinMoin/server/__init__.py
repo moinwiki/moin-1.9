@@ -14,10 +14,10 @@ from StringIO import StringIO
 from MoinMoin import config
 
 import logging as _logging
+from logging.config import fileConfig as _fileConfig
 
 def configureLogging(conf, defaults):
-   from logging.config import fileConfig
-   fileConfig(StringIO(conf), defaults)
+   _fileConfig(StringIO(conf), defaults)
 
 def getLogger(name):
     # do we want to strip MoinMoin. from the name?
@@ -80,7 +80,7 @@ class Config:
     # anything else, override logging_conf in your server script's Config class.
     logging_defaults = {
         'logdir': '.',
-        'loglevel': 'DEBUG',
+        'loglevel': 'INFO',
 }
     logging_config = """\
 [loggers]
@@ -97,7 +97,7 @@ level=%(loglevel)s
 handlers=logfile
 
 [handler_logfile]
-class=StreamHandler
+class=FileHandler
 level=NOTSET
 formatter=logfile
 args=('%(logdir)s/moin.log', 'at')
