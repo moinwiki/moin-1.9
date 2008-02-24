@@ -1,7 +1,4 @@
     logging_defaults = {
-        # Directory where logfiles will be created.
-        # Make sure the running moin process has create/write rights there.
-        'logdir': '/path/to/logdir',
         # Default loglevel, to adjust verbosity: DEBUG, INFO, WARNING, ERROR, CRITICAL
         'loglevel': 'INFO',
     }
@@ -10,22 +7,22 @@
 keys=root
 
 [handlers]
-keys=logfile
+keys=stderr
 
 [formatters]
-keys=logfile
+keys=screen
 
 [logger_root]
 level=NOTSET
-handlers=logfile
+handlers=stderr
 
-[handler_logfile]
-class=FileHandler
-formatter=logfile
+[handler_stderr]
+class=StreamHandler
+formatter=screen
 level=%(loglevel)s
-args=('%(logdir)s/moin.log', 'at')
+args=(sys.stderr, )
 
-[formatter_logfile]
+[formatter_screen]
 format=%(asctime)s %(name)s %(levelname)s %(message)s
 datefmt=
 class=logging.Formatter
