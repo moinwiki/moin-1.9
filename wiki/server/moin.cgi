@@ -26,6 +26,9 @@ sys.path.insert(0, '/path/to/wikiconfig')
 ## import os
 ## os.environ['MOIN_DEBUG'] = '1'
 
+from MoinMoin import log
+log.load_config('.../wiki/config/logging/conffile') # XXX fix path
+
 from MoinMoin.server.server_cgi import CgiConfig, run
 
 class Config(CgiConfig):

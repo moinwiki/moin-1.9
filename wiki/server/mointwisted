@@ -12,6 +12,9 @@
 
 import os
 
+from MoinMoin import log
+log.load_config('.../wiki/config/logging/logfile') # XXX fix path
+
 from MoinMoin.server import daemon
 from mointwisted import Config
 

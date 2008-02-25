@@ -11,6 +11,9 @@ unixSocketPath = '/tmp/moin.sock'
 
 import os
 
+from MoinMoin import log
+log.load_config('.../wiki/config/logging/logfile') # XXX fix path
+
 # Set threads flag, so other code can use proper locking
 from MoinMoin import config
 config.use_threads = use_threads
