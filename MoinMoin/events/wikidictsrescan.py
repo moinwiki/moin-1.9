@@ -8,11 +8,8 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin.server import getLogger
-logging = getLogger(__name__)
-
-# use this to temporarily and selectively enable debug logging for this module
-#logging.setLevel(logging.DEBUG)
+from MoinMoin import log
+logging = log.getLogger(__name__)
 
 from MoinMoin import events as ev
 from MoinMoin import wikidicts

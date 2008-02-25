@@ -37,11 +37,8 @@
 import os, sys, time, socket, errno, shutil
 import BaseHTTPServer, SimpleHTTPServer, SocketServer
 
-from MoinMoin.server import getLogger
-logging = getLogger(__name__)
-
-# use this to temporarily and selectively enable debug logging for this module
-#logging.setLevel(logging.DEBUG)
+from MoinMoin import log
+logging = log.getLogger(__name__)
 
 from MoinMoin import version, wikiutil
 from MoinMoin.server import Config, switchUID

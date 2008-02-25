@@ -14,11 +14,8 @@
 proxies_trusted = [] # trust noone!
 #proxies_trusted = ['127.0.0.1', ] # can be a list of multiple IPs
 
-from MoinMoin.server import getLogger
-logging = getLogger(__name__)
-
-# use this to temporarily and selectively enable debug logging for this module
-#logging.setLevel(logging.DEBUG)
+from MoinMoin import log
+logging = log.getLogger(__name__)
 
 def find_remote_addr(addrs):
     """ Find the last remote IP address before it hits our reverse proxies.

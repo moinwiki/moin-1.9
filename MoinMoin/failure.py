@@ -6,7 +6,10 @@
     @copyright: 2004-2005 Nir Soffer <nirs@freeshell.org>
     @license: GNU GPL, see COPYING for details.
 """
-import sys, os, logging
+import sys, os
+
+from MoinMoin import log
+logging = log.getLogger(__name__)
 
 from MoinMoin.support import cgitb
 from MoinMoin.error import ConfigurationError

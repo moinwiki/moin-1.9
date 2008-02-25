@@ -11,28 +11,11 @@
 import os
 from StringIO import StringIO
 
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin import config
 
-import logging as _logging
-from logging.config import fileConfig as _fileConfig
-
-def configureLogging(conf, defaults):
-   _fileConfig(StringIO(conf), defaults)
-
-def getLogger(name):
-    # do we want to strip MoinMoin. from the name?
-    #if name.startswith('MoinMoin.'):
-    #    name = name[9:]
-    logger = _logging.getLogger(name)
-    for levelnumber, levelname in _logging._levelNames.items():
-        if isinstance(levelnumber, int): # that list has also the reverse mapping...
-            setattr(logger, levelname, levelnumber)
-    return logger
-
-logging = getLogger(__name__)
-
-# use this to temporarily and selectively enable debug logging for this module
-#logging.setLevel(logging.DEBUG)
 
 def switchUID(uid, gid):
     """ Switch identity to safe user and group
@@ -74,48 +57,11 @@ class Config:
     group = None # group ...
     port = None # tcp port number (if supported)
 
-    # Here you can configure the default logging used when running moin,
-    # see http://www.python.org/doc/lib/logging-config-fileformat.html
-    # We just use moin.log in current directory by default, if you want
-    # anything else, override logging_conf in your server script's Config class.
-    logging_defaults = {
-        'logdir': '.',
-        'loglevel': 'INFO',
-}
-    logging_config = """\
-[loggers]
-keys=root
-
-[handlers]
-keys=logfile
-
-[formatters]
-keys=logfile
-
-[logger_root]
-level=%(loglevel)s
-handlers=logfile
-
-[handler_logfile]
-class=FileHandler
-level=NOTSET
-formatter=logfile
-args=('%(logdir)s/moin.log', 'at')
-
-[formatter_logfile]
-format=%(asctime)s %(name)s %(levelname)s %(message)s
-datefmt=
-class=logging.Formatter
-"""
-
     def __init__(self):
         """ Validate and post process configuration values
 
         Will raise RuntimeError for any wrong config value.
         """
-        # First, initialize the logging
-        configureLogging(self.logging_config, self.logging_defaults)
-
         # Check that docs path is accessible
         if self.docs:
             self.docs = os.path.normpath(os.path.abspath(self.docs))
