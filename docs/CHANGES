@@ -90,110 +90,130 @@ Version 1.7.current:
       many themes!
     * needs a new userprefs/ plugin directory
 
-Version 1.6.current:
 
-  Developer notes (these should be moved to the end in the release):
-    * Page.url() does not escape any more. You have to use wikiutil.escape()
-      yourself if you want to write the URL to HTML and it contains e.g. &.
-    * the testing wikiconfig moved to tests/wikiconfig.py, the testing wiki
-      is now created in tests/wiki/...
-    * killed "processors" (finally), formatter method changed to:
-      formatter.parser(parsername, lines)
-    * refactored some actions to use ActionBase base class
-    * moved "test" action from wikiaction to MoinMoin/action/
-      (and use ActionBase)
-    * moved MoinMoin/config.py to MoinMoin/config/__init__.py
-    * moved MoinMoin/multiconfig.py to MoinMoin/config/multiconfig.py
-    * moved "SystemInfo" macro from wikimacro to MoinMoin/macro/
-    * moved wikiaction.py stuff to MoinMoin/action/__init__.py
-    * moved wikimacro.py stuff to MoinMoin/macro/__init__.py
-    * moved wikirpc.py stuff to MoinMoin/xmlrpc/__init__.py
-    * moved wikitest.py stuff to action/test.py (only used from there)
-    * moved formatter/base.py to formatter/__init__.py (FormatterBase)
-    * moved util/ParserBase.py to parser/ParserBase.py
-    * moved / splitted request.py into MoinMoin/request/*
-      Most stuff will be broken, please help fixing it (usually some imports
-      will be missing and the adaptor script will need a change maybe):
-      Tested successfully: CGI, CLI, STANDALONE, FCGI, TWISTED
-      TODO: MODPY, WSGI
-    * moved util/antispam.py to security/antispam.py,
-      moved util/autoadmin.py to security/autoadmin.py,
-      moved security.py to security/__init__.py,
-      moved wikiacl.py to security/__init__.py.
-    * moved logfile/logfile.py to logfile/__init__.py
-    * moved mailimport.py to mail/mailimport.py,
-      moved util/mail.py to mail/sendmail.py
-    * moved auth.py to auth/__init__.py,
-      moved util/sessionParser.py to auth/_PHPsessionParser.py,
-      teared auth code into single modules under auth/* - moin_session handling
-      and the builting moin_login method are in auth/__init__.py.
-    * added wikiutil.MimeType class (works internally with sanitized mime
-      types because the official ones suck)
-    * renamed parsers to module names representing sane mimetypes, e.g.:
-      parser.wiki -> parser.text_moin_wiki
-    * Added thread_monitor debugging aid. It can be activated using:
-      from MoinMoin.util import thread_monitor; thread_monitor.activate_hook()
-      and then triggered by requesting URL ...?action=thread_monitor - please
-      be aware that monitoring threads has a big performance impact on its own,
-      so you only want to temporarily enable this for debugging.
-      By default, it dumps its output to the data_dir as tm_<timestamp>.log,
-      you can change this at bottom of action/thread_monitor.py if you want to
-      see output in your browser.
-    * Introduced scope parameter to CacheEntry() - if you specify 'farm', it
-      will cache into a common directory for all wikis in the same farm, if you
-      specify 'wiki', it will use a cache directory per wiki and if you specify
-      'item', it will use a cache directory per item (== per page).
-      Creating a CacheEntry without explicit scope is DEPRECATED.
-    * smileys moved from MoinMoin.config to MoinMoin.theme
-    * removed all _ magic in URLs and filenames
-      TODO: write mig script for data_dir
-    * request.action now has the action requested, default: 'show'.
-    * Cleaned up duplicated http_headers code and DEPRECATED this function
-      call (it was sometimes confused with setHttpHeaders call) - it will
-      vanish with moin 1.7, so please fix your custom plugins!
-      The replacement is:
-          request.emit_http_headers(more_headers=[])
-      This call pre-processes the headers list (encoding from unicode, making
-      sure that there is exactly ONE content-type header, etc.) and then
-      calls a server specific helper _emit_http_headers to emit it.
-      Tested successfully: CGI, STANDALONE, FCGI, TWISTED
-      TODO: CLI, MODPY, WSGI
-    * setResponseCode request method DEPRECATED (it only worked for Twisted
-      anyway), just use emit_http_headers and include a Status: XXX header.
-      Method will vanish with moin 1.7.
-    * cfg.url_prefix is DEPRECATED, please use cfg.url_prefix_static.
-    * d['title_link'] is not supported any more. You can easily make that link
-      on your own in your theme, see example in MoinMoin/theme/__init__.py,
-      function "title".
-    * There is a new Page method called Page.get_raw_body_str that returns
-      the encoded page body. This is useful if you just deal with byte data
-      (e.g. while generating binary diffs).
-    * The TagStore/PickleTagStore system is used to store the syncronisation tags.
-    * XMLRPC functions may return Fault instances from now on
-    * Moin got multicall support, including a module that makes it usable on the
-      client-side without requiring Python 2.4
-    * Added no_magic to text_html formatter to disable tag autoclosing.
-    * Added logging framework, using stdlib's "logging" module. Just do
-      import logging ; logging.debug("your text"). Depending on configuration
-      in the server Config class, your stuff will be written to screen (stderr),
-      to a moin logfile, to apache's error.log, etc.:
-      logPath = None # 'moin.log'
-      loglevel_file = None # logging.DEBUG/INFO/WARNING/ERROR/CRITICAL
-      loglevel_stderr = None # logging.DEBUG/INFO/WARNING/ERROR/CRITICAL
-      NOTE: this is NOT in wikiconfig, but e.g. in moin.cgi or moin.py or ...
-    * MOIN_DEBUG can be set in the environment to let MoinMoin ignore exceptions
-      that would lead to a traceback in the browser. Thanks to Raphael Bossek.
-    * There is a new MoinMoin.Page.ItemCache class now with automatic cache
-      invalidation based on global edit-log. We currently use it to cache page
-      acls, speedup Page.get_rev and reading the page local edit-log.
-    * Added wikiutil.renderText parse and format raw wiki markup with all page elements
-    * The user file format has changed, old files will be read correctly but
-      will silently be upgraded to the new format so old versions will not
-      read the new files correctly (this only affects 'subscribed_pages' and
-      'quicklinks' which will be lost when downgrading.)
+Version 1.6.1:
+  New features:
+    * Improved params for [[target|label|params]]:
+      Added accesskey link tag attribute, e.g.: [[target|label|accesskey=1]].
+      Additionally to specifying link tag attributes (like class=foo), you can
+      now also specify &key=value for getting that into the query string of
+      the link URL.
+      The "&" character is important, don't forget it or it won't get into the
+      query string!
+      E.g. for an attachment, you can use:
+      [[attachment:foo.pdf|Direct download of foo.pdf|&do=get]]
+      E.g. for linking to some specific diff, you can use:
+      [[SomePage|see that diff|&action=diff,&rev1=23,&rev2=42]]
+      See also the updated HelpOnLinking page!
+    * AdvancedSearch: make multipe categories/languages/mimetype selections possible
+    * Added a configuration directive to only do one bind to the LDAP server.
+      This is useful if you bind as the user the first time.
+      ldap_bindonce = False # default
 
-  New Features:
-    * Added Xapian (see http://xapian.org/) based indexed search code.
+  Fixes:
+    * Fix XSS issue in login action.
+    * Fix wrong pagename when creating new pages on Mac OS X - that was a big
+      showstopper for moin 1.6.0 on Mac OS X.
+    * Fixed 1.6 migration script:
+      Make sorting python 2.3 compatible.
+      Just skip corrupted event log lines.
+      Fix link conversion by using data.pre160 as data_dir.
+      Fix bad /InterWiki pagenames when encountering interwiki links with bad
+      wiki names.
+      Improve ImageLink conversion by using its argument parser code.
+      Added STONEAGE_IMAGELINK (default: False) switch to wiki markup converter,
+      toggle it if you had a very old ImageLink macro in production and the
+      converter output has target and image interchanged.
+      Fixed UnicodeDecodeError for wrongly encoded attachment filenames.
+    * Wiki parser:
+      Fix parsing of link/transclusion description and params.
+      Fix relative attachment targets.
+      Fix supported URL schemes (some got lost since 1.5.8).
+      Showing an upload link for non-existing non-text/non-image transclusions
+      now (like e.g. *.pdf).
+    * RST parser: fix attachment: and drawing: processing
+    * Fix quickhelp when editing RST markup pages.
+    * Fix Despam action: editor grouping was broken, increase time interval
+      to 30 days.
+    * Fix AdvancedSearch domain:system search crashing.
+    * Only switch off xapian search if we didn't use it because of missing index.
+    * Fix saving twikidraw drawings by removing 'java' from spider regex.
+    * Fix classic theme's unsubscribe icon's action link.
+    * Fix AttachFile action: don't show unzip for packages, only show install
+      for superuser.
+    * Fix "su user" troubles on UserPreferences.
+    * Removed unit tests from ?action=test (due to changes in our test
+      environment, using py.test now, this was broken).
+    * Duplicated the top directories' moin.py to wiki/server/moin.py so it gets
+      installed by setup.py.
+    * Fix MoinMoinBugs/1.6.0LanguageIgnoreBrowserConfigurationError
+    * Fix MoinMoinBugs/MoveAttachmentNotWorkingWithModPython
+    * Fix MoinMoinBugs/1.6.0SupplementationAndAccessRights
+    * Fix MoinMoinBugs/RenamingUserAllowsOldUsernameToLogin
+    * Fix MoinMoinBugs/GuiEditorExcelPasteExpatErrorUnboundPrefix
+
+  Other changes:
+    * I18n texts, system and help pages updated, please update your underlay
+      directory (see wiki/underlay/...).
+    * Improved "moin" script help, invoke it with "moin ... package command --help".
+    * Added some .ext -> mimetype mappings missing on some systems (like Mac OS X).
+    * Removed ImageLink macro, as this can be easily done with moin wiki link
+      syntax now - see HelpOnMacros/ImageLink (the 1.6 migration scripts convert
+      all ImageLink calls to moin wiki link syntax).
+    * Updated EmbedObject macro.
+
+
+Version 1.6.0:
+ * This is a reduced CHANGES, ommitting details from rc/beta test and also
+   less interesting minor changes and fixes. If you want to see full detail,
+   read it there: http://hg.moinmo.in/moin/1.6/file/640f21787334/docs/CHANGES
+
+   It took MoinMoin development a lot of work and time to implement all the new
+   and fixed stuff, so please, before asking for support:
+   * take the time to read all the stuff below
+   * read the new help pages (copy them from wiki/underlay/ directory)
+
+ * HINT: If you are upgrading from a older moin version and want to keep your
+   existing data directory, it is essential that you read and follow
+   README.migration because the wiki markup and user profiles changed significantly.
+   See also more HINTs below...
+
+  New features: ==============================================================
+
+  User interface: ------------------------------------------------------------
+    * Removed "underscore in URL" == "blank in pagename magic" - it made more
+      trouble than it was worth. If you still want to have a _ in URL, just
+      put a _ into pagename.
+    * Discussion pages, see FeatureRequests/DiscussionAndOrCommentPages.
+    * cfg.password_checker (default: use some simple builtin checks for too
+      easy passwords and, if available, python-crack).
+      Use password_checker = None to disable password checking.
+    * We now have a drafts functionality (no */MoinEditorBackup pages any
+      more):
+      * If you edit a page and cancel the edit, use preview or save, a draft
+        copy gets saved for you to a internal cache area (data/cache/drafts/).
+      * If it is a save what you did and it succeeds, the draft copy gets
+        killed right afterwards.
+      * If you accidentally used cancel or your browser or machine crashes
+        after you used preview, then just visit that page again and edit it.
+        the editor will notify you that there is a draft of this page and you
+        will see a "Load draft" button. Click on it to load the draft into the
+        editor and save the page.
+      * The draft storage is per user and per page, but only one draft per page.
+    * cfg.quicklinks_default and cfg.subscribed_pages_default can be used to
+      preload new user profiles with configurable values.
+    * attachment links for non-existing attachments look different now:
+      the note about the non-existing attachment moved to the link title,
+      the link is shown with nonexistent class (grey).
+    * attachment embeddings for non-existing attachments show a grey clip
+    * The list of InterWiki sites is editable in the wiki (page InterWikiMap),
+      it is getting reloaded every minute.
+    * We support some new languages and also have new underlay pages, thanks
+      to all translators and people helping with the docs!
+
+  Actions: -------------------------------------------------------------------
+    * Synchronisation of wikis using the SyncPages action.
+    * Xapian (see http://xapian.org/) based indexed search code.
       To use this:
       * Install xapian-core and xapian-bindings on your machine.
         We used 0.9.4, but newer code should hopefully work, too.
@@ -211,17 +231,19 @@ Version 1.6.current:
         - MimetypeSearch: mimetype:image/png (for attachments/files)
         - DomainSearch: domain:underlay or domain:standard
         - History Search: available in advanced ui
-      Note: Some currently only available when Xapian is used
-    * New config options:
-        xapian_search        0      enables xapian-powered search
+      Note: Some currently only available when Xapian is used.
+    * New config options and their defaults:
+        xapian_search        False  enables xapian-powered search
         xapian_index_dir     None   directory for xapian indices
                                     (can be shared for wiki farms)
-        xapian_stemming      1      toggles usage of stemmer, fallback
+        xapian_stemming      True   toggles usage of stemmer, fallback
                                     to False if no stemmer installed
         search_results_per_page 10  determines how many hits should be
                                     shown on a fullsearch action
         xapian_index_history False  indexes all revisions of pages to
                                     allow searching in their history
+    * Speeded up linkto search by avoiding read locks on the pagelinks file.
+
     * The action menu now calls the actions for the revision of the page you
       are currently viewing. If you are viewing the current page revision, you
       get the same behaviour as in moin 1.5, but if you are viewing an old
@@ -234,37 +256,7 @@ Version 1.6.current:
     * Info action lost the links for "raw", "print" and "revert" actions,
       because you can now just view an old revision and select those actions
       from the menu there.
-    * The standalone server script moved to the toplevel directory. This makes
-      it possible to directly start moin.py without additional configuration
-      to run a MoinMoin DesktopEdition like wiki setup.
-      Be careful: DesktopEdition uses relaxed security settings only suitable
-      for personal and local use.
-    * Added the MMDE scripts to contrib/DesktopEdition.
-    * Removed "underscore in URL" == "blank in pagename magic" - it made more
-      trouble than it was worth. If you still want to have a _ in URL, just
-      put a _ into pagename.
-    * Introduced quoting for pagenames and new, easier link markup:
-      * ["Page with blanks" but different link text],
-        NOTE: using [:Page with blanks:but different link text] is DEPRECATED.
-      * ["/Sub Page" with different link text]
-      * MoinMoin:"Page with blanks"
-      * [wiki:MoinMoin:"Page with blanks" different link text]
-      * attachment:"blanks are evil.txt"
-
-    * FeatureRequests/WikiEmailIntegration, HelpOnConfiguration/EmailSupport
-    * HTML parser (called "html") that allows you to use HTML on the page.
-      Thanks to the trac team for the nice code.
-    * You can have a common cache_dir for your farm (will save a bit space
-      and cpu time as it shares some stuff).
-      You need to set "cache_dir = '/some/farm/cachedir' in your farmconfig.
-    * Added XMLRPC methods for attachment handling. Thanks to Matthew Gilbert.
-    * Added TLS/SSL support to the standalone server. Thanks to Matthew Gilbert.
-      To use TLS/SSL support you must also install the TLSLite library
-      (http://trevp.net/tlslite/). Version 0.3.8 was used for development and
-      testing.
-    * cfg.log_reverse_dns_lookups [default: True] - you can set this to False
-      if rev. dns lookups are broken in your network (leading to long delays
-      on page saves). With False, edit-log will only contain IP, not hostname.
+    
     * ?action=sitemap emits a google sitemap (XML), listing all your wiki pages
       and the wiki root URL.
       Page                      Priority / Frequency / Last modification
@@ -274,25 +266,113 @@ Version 1.6.current:
       TitleIndex,RecentChanges  0.9 / hourly / <now>
       content pages             0.5 / daily / page last edit
       system/help pages         0.1 / yearly / page last edit
-    * We use rel="nofollow" for some action links in the hope that some search
-      engines don't fetch the targets (if they do, they will just get 403 and
-      cause unnecessary traffic).
+
+    * Action DeletePage and RenamePage can now be used for subpages of a page, too.
+    * Added Action CopyPage so you can use now an existing page or page hierarchy
+      as template for a new page, see FeatureRequests/CloneOrCopyPages.
+    * "Package Pages" action supports attachments now.
+    * Added SisterPages support:
+      * action=sisterpages will generate a list of url pagename lines for all
+        pages in your moin wiki.
+      * action=pollsistersites will poll all sister sites listed in
+        cfg.sistersites = [(wikiname, fetchURL), ...]
+        The fetch URL for the sistersites depends on the wiki engine, e.g.:
+        # moin based wiki:
+        ('MoinExample', 'http://moin.example.org/?action=sisterpages')
+        # oddmuse based wiki:
+        ('EmacsWiki', 'http://www.emacswiki.org/cgi-bin/test?action=sisterpages')
+        # JspWiki based wiki:
+        ('JspWiki', 'http://www.jspwiki.org/SisterSites.jsp')
+      * If the current page exists on some sister wiki, a link to it will be
+        added to the navibar.
+      You can use sister wikis for adding another dimension to your wiki UI: use
+      it for simple multi language support, or for comments, or anything else
+      "related" you need.
+      TODO: add sistersites_force with sister sites we link to even if they do not
+            have the page yet (will work only for moin as we don't know
+            pagename>url transformation of other wikis)
+    * showtags action that lists all tags related to a page.
+    * action=view does use mimetypes of EmbedObject too and text files will be shown
+      by using their colorized parsers
+
+  Macros: --------------------------------------------------------------------
+    * RecentChanges:
+      * If a change has happened after your bookmark, the updated/new/renamed
+        icon links to the bookmark diff.
+      * If a page does not exist any more (because it was deleted or renamed),
+        we link the deleted icon to the diff showing what was deleted (for the
+        delete action). For the rename action, we just show the deleted icon.
+    * Conflict icon in RecentChanges is shown if a edit conflict is detected.
+    * Enhanced SystemAdmin's user browser, so a SuperUser can enable/disable
+      users from there.
     * Included EmbedObject macro for embedding different major mimetypes:
       application, audio, image, video, chemical, x-world. 
-      You are able to change the defaults of allowed mimetypes in the config var mimetypes_embed.
-      The config var mimetypes_xss_protect is used to deny mimetypes. The order of both variables  
-      is Allow, Deny  (mimetypes_embed, mimetypes_xss_protect)
-    * @SIG@ etc. generate local time stamps now, no difference visible on page
-      view.
-    * Speeded up linkto search by avoiding read locks on the pagelinks file.
-    * The i18n system no loads *.po files directly (no *.py or *.mo any more)
-      and caches the results (farm wide cache/i18n/*).
-    * added the diff parser from ParserMarket, thanks to Emilio Lopes, Fabien
-      Ninoles and Jürgen Hermann.
-    * Added support for "304 not modified" response header for AttachFile get
-      and rss_rc actions - faster, less traffic, less load.
+      You are able to change the defaults of allowed mimetypes in the config
+      var mimetypes_embed. The config var mimetypes_xss_protect is used to deny
+      mimetypes. The order of both variables is Allow, Deny (mimetypes_embed,
+      mimetypes_xss_protect).
     * Added support for @SELF to the NewPage macro.
-    * Conflict icon in RecentChanges
+    * GetText2 macro that allows to translate messages that contain data.
+    * Make the FootNote macro filter duplicates and display a list of numbers
+      instead of a list of identical footnotes. Thanks to Johannes Berg for the
+      patch.
+
+  Parsers: -------------------------------------------------------------------
+    * Moin Wiki parser: Changed markup for links, images and macros, see these
+      wiki pages: HelpOnLinking, HelpOnMacros
+    * New wiki markup for /* inline comments */ - they get rendered as a span
+      with class="comment", see next item:
+    * There is a new item in the edit bar: "Comments". If you click it, the
+      visibility of all class "comment" tags will be toggled. There is a user
+      preferences item "show_comments" to set if the default view shows them or not.
+    * The wiki parser can be used with css classes now:
+      {{{#!wiki comment
+      This will render output within a div with class "comment".
+      You can use any wiki markup as usual.
+      }}}
+      You can also combine multiple css classes like this:
+      {{{#!wiki red/dotted/comment
+      This will render a red background, dotted border comment section.
+      }}}
+      The same thing will work for any other css classes you have.
+      If the css classes contain the word "comment", they will trigger some
+      special feature, see next item:
+    * Wiki nested parser/pre sections work now, using this syntax:
+      a) just use more curly braces if you have 3 closing in your content:
+         {{{{
+         }}} <- does not terminate the section!
+         }}}}
+      b) use {{{ + some magic string:
+         {{{somemagicstring
+         }}} <- does not terminate the section!
+         somemagicstring}}}
+      c) {{{whatever#!python
+         # py code
+         whatever}}}
+      Pitfall: stuff like below does not work as it did in 1.5:
+         {{{aaa
+         bbb}}}
+      Solution:
+         {{{
+         aaa
+         bbb
+         }}}
+    * Added support for ircs: URLs (secure IRC).
+    * New text/creole parser that allows you to use WikiCreole 1.0 markup,
+      use #format creole.
+    * HTML parser (called "html") that allows you to use HTML on the page.
+      Thanks to the trac team for the nice code.
+    * Added the diff parser from ParserMarket, thanks to Emilio Lopes, Fabien
+      Ninoles and Juergen Hermann.
+
+  XMLRPC: --------------------------------------------------------------------
+    * actions_excluded now defaults to ['xmlrpc'] - this kind of disables the
+      built-in wiki xmlrpc server code (not completely: it will just answer
+      with a Fault instance for any request). If you want to use xmlrpc v1 or
+      v2, you have to remove 'xmlrpc' from the actions_excluded list (for
+      example if you want to use wikisync, mailimport or any other feature
+      using xmlrpc). If you enable xmlrpc, it will be possible that someone
+      changes your wiki content by using xmlrpc (it will of course honour ACLs).
     * New XMLRPC methods (see doc strings for details):
       * getMoinVersion
       * system.multicall -- multicall support
@@ -306,92 +386,77 @@ Version 1.6.current:
       * applyAuthToken -- set request.user for following xmlrpc calls (within the
                           same multicall)
       * getUserProfile -- method to get user profile data for request.user
-    * IWID support - i.e. every wiki instance has a unique ID
-    * The list of InterWiki sites is editable in the wiki (page InterWikiMap),
-      it is getting reloaded every minute
-    * Syncronisation of wikis using the SyncPages action
-    * GetText2 macro that allows to translate messages that contain data
-    * showtags action that lists all tags related to a page
-    * if you have "#acl" (without the quotes) on a page, this means now:
+    * Added XMLRPC methods for attachment handling. Thanks to Matthew Gilbert.
+    * XMLRPC putPage method adjusted to new AuthToken, config vars 
+      xmlrpc_putpage_enabled and xmlrpc_putpage_trusted_only removed.
+
+  Scripts / Commandline interface: -------------------------------------------
+    * moin export dump now better conforms to the theme guidelines.
+    * Added a --dump-user option to the moin export dump command.
+      Thanks to Oliver O'Halloran.
+
+  Security / Auth / AntiSpam / etc.: -----------------------------------------
+    * Hierarchical ACLs are now supported, i.e. pages inheriting permissions
+      from higher-level pages. See HelpOnAccessControlLists.
+    * If you have "#acl" (without the quotes) on a page, this means now:
       "this page has own (empty) ACLs, so do not use acl_rights_default here"
       Please note that this is COMPLETELY DIFFERENT from having no ACL line at
       all on the page (acl_rights_default is used in that case).
-    * Added support for actions in the irssi parser. Thanks to Georg Brandl.
-    * */MoinEditorBackup pages are not created any more (TODO: write mig script
-      that removes existing ones from data/pages). We now have a drafts
-      functionality as follows:
-      * if you edit a page and cancel the edit, use preview or save, a draft
-        copy gets saved for you to a internal cache area (data/cache/drafts/).
-      * if it is a save what you did and it succeeds, the draft copy gets
-        killed right afterwards.
-      * if you accidentally used cancel or your browser or machine crashes
-        after you used preview, then just visit that page again and edit it.
-        the editor will notify you that there is a draft of this page and you
-        will see a "Load draft" button. Click on it to load the draft into the
-        editor and save the page.
-      * The draft storage is per user and per page, but only one draft per page.
-    * cfg.quicklinks_default and cfg.subscribed_pages_default can be used to
-      preload new user profiles with configurable values.
-    * added support for ircs: URLs (secure IRC)
-    * it is now supported to resize an image from within the gui editor 
-    * we now log a rename action as SAVE/RENAME in edit-log and display
-      appropriate comments if the user did not supply an own comment.
-      We also use a different icon to display the rename action on RecentChanges.
-      TODO: add a different icon for "renamed", we currently just use the same
-            as for "updated" with different alt text, see theme/__init__.py.
-    * RecentChanges:
-      * if a change has happened after your bookmark, the updated/new/renamed
-        icon links to the bookmark diff.
-      * if a page does not exist any more (because it was deleted or renamed),
-        we link the deleted icon to the diff showing what was deleted (for the
-        delete action). For the rename action, we just show the deleted icon.
-    * the login page gives now the possibility to recover a lost password, thanks to 
+    * Antispam master url is now configurable via cfg.antispam_master_url.
+      The default is to fetch the antispam patterns from MoinMaster wiki.
+    * Antispam now checks the edit comments against BadContent also.
+    * TextCHAs (text-form CAPTCHAs).
+      Due to increasingly annoying wiki spammers, we added the option to use
+      TextCHAs (for page save (not for preview!), for attachment upload, for
+      user creation (not for profile save)).
+      This function is disabled by default. If you run a wiki that is editable
+      by anonymous or non-approved users from the internet (i.e. All: or Known:
+      in ACL terms), you should enable it in your wiki config by:
+      textchas = { # DO NOT USE EXACTLY THESE QUESTIONS!!!
+          'en': {
+              u'H2O is ...': u'water', # bad: too common
+              u'2 apples and three bananas makes how many fruits?': ur'(five|5)', # good
+              u'2 apples and three pigs makes how many fruits?': ur'(two|2)', # good
+              u'2+3': ur'5', # bad: computable
+              u'
+          },
+          'de': { # for german users
+              u'H2O ist ...': u'wasser',
+          },
+      }
+      This means that english users will get some random question from the 'en'
+      set, german users will get some from the 'de' set. If there is no 'de'
+      set configured, moin will fallback to language_default and then to 'en',
+      so make sure that you at least have a 'en' set configured (or whatever
+      you have set as language_default).
+      You need to use unicode for the questions and answers (see that u"...").
+      For the answer, you need to give a regular expression:
+      * In the easiest case, this is just some word or sentence (first en
+        example). It will be matched in a case-insensitive way.
+      * For more complex stuff, you can use the power of regular expressions,
+        e.g. if multiple answers are correct (second en example). Any answer
+        matching the regular expression will be considered as correct, any
+        non-matching answer will be considered as incorrect.
+
+      Tipps for making it hard to break for the spammers and easy for the users:
+      * Use site-specific (not too common) questions.
+      * Don't use too hard questions (annoys legitimate users).
+      * Don't use computable questions.
+      * Don't reuse textchas from other sites.
+
+      textchas_disabled_group = None # (default)
+      Set this to some group name and noone in this group will get textchas.
+      E.g.: textchas_disabled_group = u'NoTextChasGroup'
+
+    * The login page gives now the possibility to recover a lost password, thanks to 
       Oliver Siemoneit. This is especially useful for wikis where access to user 
       preferences is restricted by acl.
-    * we now have the possibility to add a Discussion page 
-      (FeatureRequests/DiscussionAndOrCommentPages) 
-    * Package Pages does now support attachments
-    * The wiki parser can be used with css classes now:
-      {{{#!wiki comment
-      This will render output within a div with class "comment".
-      You can use any wiki markup as usual.
-      }}}
-      You can also combine multiple css classes like this:
-      {{{#!wiki red/dotted/comment
-      This will render a red background, dotted border comment section.
-      }}}
-      The same thing will work for any other css classes you have.
-      If the css classes contain the word "comment", they will trigger some
-      special feature, see next item:
-    * New wiki markup for /* inline comments */ - they get rendered as a span
-      with class="comment", see next item:
-    * There is a new item in the edit bar: "Comments". If you click it, the
-      visibility of all class "comment" tags will be toggled. There is a user
-      preferences item "show_comments" to set if the default view shows them or not.
-    * Added SisterPages support:
-      * action=sisterpages will generate a list of url pagename lines for all
-        pages in your moin wiki.
-      * action=pollsistersites will poll all sister sites listed in
-        cfg.sistersites = [('OtherWiki', 'http://otherwiki.org/?action=sisterpages'), ...]
-      * if the current page exists on some sister wiki, a link to it will be
-        added to the navibar.
-      You can use sister wikis for adding another dimension to your wiki UI: use
-      it for simple multi language support, or for comments, or anything else
-      "related" you need.
-      TODO: remove sample sistersites from multiconfig
-            add sistersites_force with sister sites we link to even if they do not
-            have the page yet (will work only for moin as we don't know
-            pagename>url transformation of other wikis)
-    * Make the FootNote macro filter duplicates and display a list of numbers
-      instead of a list of identical footnotes. Thanks to Johannes Berg for the
-      patch.
-    * autofilters for databrowser widget. Thanks to Johannes Berg for the patch.
-    * action DeletePage and RenamePage could now be used for subpages of a page too
-    * Added Action CopyPage so you can use now an existing page or page hierarchy
-      as template for a new page, see FeatureRequests/CloneOrCopyPages.
-      TODO: we need a copy icon in RC
     * Session handling for logged-in users and (not by default due to expiry
       problems) anonymous users.
+    * Updated the ldap_login code from 1.5 branch, supports TLS now.
+      See MoinMoin/config/multiconfig.py for supported configuration options
+      and their defaults (and please just change what you need to change,
+      in your wikiconfig).
     * Interwiki auth: You need to define cfg.trusted_wikis and
        cfg.user_autocreate to use it. Logging in works by entering:
       Name: RemoteWikiName RemoteUserName
@@ -400,84 +465,52 @@ Version 1.6.current:
       map and tries to authenticate there using RemoteUserName and remotepass.
       If it succeeds, the remote wiki will return the remote user profile items
       and your local moin will autocreate an account with these values.
-    * Antispam master url is now configurable via cfg.antispam_master_url.
-      The default is to fetch the antispam patterns from MoinMaster wiki.
-    * inline is changed to use mimetypes of EmbedObject too. e.g.
-      inline:song.mp3 embeds the audio controls into your page
-    * action=view does use mimetypes of EmbedObject too and text files will be shown
-      by using their colorized parsers
-    * Hierarchical ACLs are now supported, i.e. pages inheriting permissions
-      from higher-level pages. See HelpOnAccessControlLists.
 
+  Server / Network / Logging: ------------------------------------------------
+    * The standalone server script moved to the toplevel directory. This makes
+      it possible to directly start moin.py without additional configuration
+      to run a MoinMoin DesktopEdition like wiki setup.
+      Be careful: DesktopEdition uses relaxed security settings only suitable
+      for personal and local use.
+    * Added TLS/SSL support to the standalone server. Thanks to Matthew Gilbert.
+      To use TLS/SSL support you must also install the TLSLite library
+      (http://trevp.net/tlslite/). Version 0.3.8 was used for development and
+      testing.
 
-  Bugfixes:
-    * on action "info" page, "revert" link will not be displayed for empty page
-      revisions (but you just can delete the current page to get an empty rev.)
-    * fix vanishing strike markup after gui editor usage
-    * fix deletion of empty Interwiki links ([wiki:MoinMaster: mm entry page])
-    * fix mod_python attachment upload bug (thanks to Nick Phillips)
-    * fix show_version to show it in the same way as SystemInfo
-    * allow "-" in usernames (fixes "Invalid user name" msg)
-    * fixed smiley caching bug (smileys didn't change theme)
-    * fixed backtrace when user removed css_url entry from user_form_fields
-    * Fixed the output of macro and "attachment:" usages of the rst parser.
-    * Removed Twisted request object reverse DNS lookup
-    * cfg.editor_quickhelp was not parsed with the wiki parser when customized
-    * fixed MoinMoin:MoinMoinBugs/GuiEditorDeletesNewBulletText
-    * fixed MoinMoin:MoinMoinBugs/HtmlTextConvertTables
-    * updated ImageLink macro
-    * Added a (less broken) MoinMoin.support.difflib, details see there.
-    * BadContent and LocalBadContent now get noindex,nofollow robots header,
-      same as POSTs.
-    * Fixed handling of anchors in wiki links for the Restructured text parser.
-    * Fixed http header output.
-    * Fixed request.cfg corruption in the fckdialog code that could lead
-      to e.g. stalled servers (thanks to David Linke)
-    * Fixed typo in NewPage that lead to a NameError.
-    * Fixed standalone server failing to shutdown if interface == "".
-    * Conflict resolution fixes.
-    * Python 2.5 compatibility fixes in the Page caching logic
-    * sre pickle issues in the wikidicts code
-    * cgitb can hide particular names, this avoids information leaks
-      if the user files cannot be parsed for example
-    * Fixed User.__repr__ - it is insane to put the ID in there
-    * Worked around the FastCGI problem on Lighttpd: empty lines in the error
-      log, thanks to Jay Soffian
-    * Fixed the MetaDict code to use locks.
-    * Fixed bug in request.py that avoided showing a traceback if there was a fault
-      after the first headers were sent.
-    * Fixed severe race conditions in the meta dict and the sync tags code.
-    * Mute the tempnam warning in the caching module.
-    * diff3 algorithm extended, a new mode should reduce the conflicts,
-      fixed a bug that silently truncated pages if there was content added
-      on one side at the end
-    * Standalone opens it logfile unbuffered from now on, thanks to
-      Carsten Grohmann
-    * Now MoinMoin does not anymore think that every page links to various user
-      homepages anymore.
-    * Now multiple formatters can be used per request, the send_page code was
-      not reentrant to this regard. Fixes "empty" search results.
-    * Not a moin bug, but it severely annoyed IE users and also was less
-      comfortable for users of other browser: since about 1.5.4, we served
-      attachments with Content-Disposition: attachment - so that the user has
-      to save them to disk. This was to fix a possible XSS attack using attached
-      HTML files with Javascript inside for stealing your moin cookie or doing
-      other nasty things. We improved this by using different behaviour depending
-      on the potential danger the attached file has when served inline:
-      The config option contains a few mimetypes that are known to be inherently
-      unsafe to this regard. If you know more dangerous stuff, please just
-      add the mimetypes there to protect your users and file a bug report
-      telling us what we missed.
-    * Avoid infinite recursion in Page.parsePageLinks.
-    * Now ImageLink could be used with InterwikiLinks for pages
-    * Cookies were made more secure by signing each cookie with its own
-      secret and checking expiry, that way a cookie can no longer be stolen
-      and used again after logging out.
+    * cfg.log_reverse_dns_lookups [default: True] - you can set this to False
+      if rev. dns lookups are broken in your network (leading to long delays
+      on page saves). With False, edit-log will only contain IP, not hostname.
+    * Added support for "304 not modified" response header for AttachFile get
+      and rss_rc actions - faster, less traffic, less load.
 
-  Other changes:
-    * HINT: if you run standard CGI, copy and edit the new moin.cgi from
-      wiki/server/moin.cgi (we made it more similar to how standalone or
-      Twisted start script works)
+    * Added logging framework, using stdlib's "logging" module. Just do
+      import logging ; logging.debug("your text"). Depending on configuration
+      in the server Config class, your stuff will be written to screen (stderr),
+      to a moin logfile, to apache's error.log, etc.:
+      logPath = None # 'moin.log'
+      loglevel_file = None # logging.DEBUG/INFO/WARNING/ERROR/CRITICAL
+      loglevel_stderr = None # logging.DEBUG/INFO/WARNING/ERROR/CRITICAL
+      NOTE: this is NOT in wikiconfig, but e.g. in moin.cgi or moin.py or ...
+
+    * Added some experimental and disabled code, that uses x-forwarded-for
+      header (if present) to get the right "outside" IP before a request
+      enters our chain of trusted (reverse) proxies.
+      This code has the problem that we can't configure it in wikiconfig, so
+      if you want to use it / test it, you have to edit the moin code:
+      MoinMoin/request/__init__.py - edit proxies_trusted (near the top).
+      We will try to make this easier to configure, but there was no time left
+      before 1.6.0 release for doing bigger code refactorings needed for that.
+
+  Mail: ----------------------------------------------------------------------
+    * You can send email to the wiki now (requires xmlrpc), see:
+      FeatureRequests/WikiEmailIntegration, HelpOnConfiguration/EmailSupport
+
+    * Mail notifications contain a link to the diff action so the user
+      can see the coloured difference more easily. Thanks to Tobias Polzin.
+
+  Other changes: =============================================================
+    * HINT: please copy a new version of your server script from the wiki/server/
+      directory and edit it to match your setup.
     * HINT: instead of "from MoinMoin.multiconfig import DefaultConfig" you
       need to use "from MoinMoin.config.multiconfig import DefaultConfig" now.
       You need to change this in your wikiconfig.py or farmconfig.py file.
@@ -521,51 +554,111 @@ Version 1.6.current:
       files and pictures indexed by search engine, don't disallow
       /action/AttachFile/ in your robots.txt. In order to use this feature,
       set url_prefix_action in your wikiconfig to e.g. "action".
-    * We don't use ...?action=show any more for the "Clear message" links shown
-      in the message boxes, but directly link to the page.
-    * we use (again) the same browser compatibility check as FCKeditor uses
+    * We use (again) the same browser compatibility check as FCKeditor uses
       internally, too. So if GUI editor invocation is broken due to browser
       compatibility issues or a wrong browser version check, please file a bug
       at FCKeditor development or browser development.
-    * Mail notifications contain a link to the diff action so the user
-      can see the coloured difference more easily. Thanks to Tobias Polzin.
-    * Refactored conflict resolution and XMLRPC code.
-    * Added a module for binary diffs
-    * The thread monitor supports the Python 2.5 feature of directly grabbing
-      the current stack frames of all threads now so it has become much faster.
-    * Made the irssi parser more tolerant (Thanks to "TheAnarcat").
-    * Changed the rst parser to be compatible to the new docutils interface
-      for directives.
+    * HINT: We removed Lupy based indexed search code. If you were brave enough
+      to use cfg.lupy_search, you maybe want to try cfg.xapian_search instead.
+
+  Developer notes: ===========================================================
     * We moved the IE hacks to theme/css/msie.css that gets included after all
       other css files (but before the user css file) using a conditional
       comment with "if IE", so it gets only loaded for MSIE (no matter which
       version). The file has some standard css inside (evaluated on all MSIE
       versions) and some * html hacks that only IE < 7 will read.
       HINT: if you use custom themes, you want to update them in the same way.
-    * AttachFile displays the upload dialogue now at top, this avoids lots of
-      scrolling if you attach some new files to a page that already has lots of
-      files attached.
-    * Removed "IE7 Hack" of Dean Edwards (has nothing to do with MS IE7).
-      It was not enabled by default, just by a cfg.hacks mechanism.
-      Reasons: it had trouble with FCKEditor and was not updated since a longer
-               time. OTOH, Microsoft released IE7. And there are lots of
-               other and better browsers anyway.
-    * Removed Lupy based indexed search code. If you were brave enough to
-      use cfg.lupy_search, you maybe want to try cfg.xapian_search instead.
+    * autofilters for databrowser widget. Thanks to Johannes Berg for the patch.
+    * changed formatter.attachment_link call (it is now more flexible,
+      because you can render the stuff between link start and link end yourself)
+    * Page.url() does not escape any more. You have to use wikiutil.escape()
+      yourself if you want to write the URL to HTML and it contains e.g. &.
+    * The testing wikiconfig moved to tests/wikiconfig.py, the testing wiki
+      is now created in tests/wiki/...
+    * HINT: Killed "processors" (finally), formatter method changed to:
+      formatter.parser(parsername, lines)
+    * Refactored some actions to use ActionBase base class.
+    * Moved "test" action from wikiaction to MoinMoin/action/
+      (and use ActionBase).
+    * Moved MoinMoin/config.py to MoinMoin/config/__init__.py.
+    * Moved MoinMoin/multiconfig.py to MoinMoin/config/multiconfig.py.
+    * Moved "SystemInfo" macro from wikimacro to MoinMoin/macro/.
+    * Moved wikiaction.py stuff to MoinMoin/action/__init__.py.
+    * Moved wikimacro.py stuff to MoinMoin/macro/__init__.py.
+    * Moved wikirpc.py stuff to MoinMoin/xmlrpc/__init__.py.
+    * Moved wikitest.py stuff to action/test.py (only used from there).
+    * Moved formatter/base.py to formatter/__init__.py (FormatterBase).
+    * Moved util/ParserBase.py to parser/ParserBase.py.
+    * Moved / splitted request.py into MoinMoin/request/*.
+      Most stuff will be broken, please help fixing it (usually some imports
+      will be missing and the adaptor script will need a change maybe):
+      Tested successfully: CGI, CLI, STANDALONE, FCGI, TWISTED
+    * Moved util/antispam.py to security/antispam.py.
+    * Moved util/autoadmin.py to security/autoadmin.py.
+    * Moved security.py to security/__init__.py.
+    * Moved wikiacl.py to security/__init__.py.
+    * Moved logfile/logfile.py to logfile/__init__.py.
+    * Moved mailimport.py to mail/mailimport.py.
+    * Moved util/mail.py to mail/sendmail.py.
+    * Moved auth.py to auth/__init__.py.
+      Moved util/sessionParser.py to auth/_PHPsessionParser.py.
+      teared auth code into single modules under auth/* - moin_session handling
+      and the builting moin_login method are in auth/__init__.py.
+    * Added wikiutil.MimeType class (works internally with sanitized mime
+      types because the official ones suck).
+    * Renamed parsers to module names representing sane mimetypes, e.g.:
+      parser.wiki -> parser.text_moin_wiki
+    * Added thread_monitor debugging aid. It can be activated using:
+      from MoinMoin.util import thread_monitor; thread_monitor.activate_hook()
+      and then triggered by requesting URL ...?action=thread_monitor - please
+      be aware that monitoring threads has a big performance impact on its own,
+      so you only want to temporarily enable this for debugging.
+      By default, it dumps its output to the data_dir as tm_<timestamp>.log,
+      you can change this at bottom of action/thread_monitor.py if you want to
+      see output in your browser.
+    * Introduced scope parameter to CacheEntry() - if you specify 'farm', it
+      will cache into a common directory for all wikis in the same farm, if you
+      specify 'wiki', it will use a cache directory per wiki and if you specify
+      'item', it will use a cache directory per item (== per page).
+      Creating a CacheEntry without explicit scope is DEPRECATED.
+    * Smileys moved from MoinMoin.config to MoinMoin.theme.
+    * Removed all _ magic in URLs and filenames.
+    * request.action now has the action requested, default: 'show'.
+    * Cleaned up duplicated http_headers code and DEPRECATED this function
+      call (it was sometimes confused with setHttpHeaders call) - it will
+      vanish with moin 1.7, so please fix your custom plugins!
+      The replacement is:
+          request.emit_http_headers(more_headers=[])
+      This call pre-processes the headers list (encoding from unicode, making
+      sure that there is exactly ONE content-type header, etc.) and then
+      calls a server specific helper _emit_http_headers to emit it.
+      Tested successfully: CGI, STANDALONE, FCGI, TWISTED
+    * setResponseCode request method DEPRECATED (it only worked for Twisted
+      anyway), just use emit_http_headers and include a Status: XXX header.
+      Method will vanish with moin 1.7.
+    * cfg.url_prefix is DEPRECATED, please use cfg.url_prefix_static.
+    * d['title_link'] is not supported any more. You can easily make that link
+      on your own in your theme, see example in MoinMoin/theme/__init__.py,
+      function "title".
+    * There is a new Page method called Page.get_raw_body_str that returns
+      the encoded page body. This is useful if you just deal with byte data
+      (e.g. while generating binary diffs).
+    * The TagStore/PickleTagStore system is used to store the syncronisation tags.
+    * XMLRPC functions may return Fault instances from now on
+    * Moin got multicall support, including a module that makes it usable on the
+      client-side without requiring Python 2.4
+    * Added no_magic to text_html formatter to disable tag autoclosing.
+    * MOIN_DEBUG can be set in the environment to let MoinMoin ignore exceptions
+      that would lead to a traceback in the browser. Thanks to Raphael Bossek.
+    * There is a new MoinMoin.Page.ItemCache class now with automatic cache
+      invalidation based on global edit-log. We currently use it to cache page
+      acls, speedup Page.get_rev and reading the page local edit-log.
+    * Added wikiutil.renderText parse and format raw wiki markup with all page elements.
+    * The user file format has changed, old files will be read correctly but
+      will silently be upgraded to the new format so old versions will not
+      read the new files correctly (this only affects 'subscribed_pages' and
+      'quicklinks' which will be lost when downgrading.)
 
-
-Version 1.5.current:
-  Bugfixes:
-    * AttachFile overwrite mode (introduced in 1.5.7) did not check delete
-      rights, but only write rights. Now it checks that the user has write AND
-      delete rights before overwriting a file.
-    * GetVal respects now ACLs on the Dict page
-    * Respect ACLs when sending <link rel="Appendix" ...> for attachments.
-    * Fixed potential XSS issues related to feeding of gui editor.
-    * Fixed XSS issue in RenamePage/DeletePage action.
-    * Avoid 'current' file corruption in out-of-space conditions.
-    * Fix "Toggle line numbers" link in code areas, so it gets translated
-      for the current user's language.
 
 Version 1.5.8:
   New features:
