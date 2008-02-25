@@ -32,9 +32,14 @@ def execute(script, data_dir, rev):
     src_data_dir = os.path.abspath(os.path.join(data_dir, '..', 'data.pre160')) # keep the orig data_dir here
     dst_data_dir = data_dir
     shutil.move(data_dir, src_data_dir)
+    # the 1.5 parser checks page existance, so we must use the orig, fully populated dir:
+    saved_data_dir = script.request.cfg.data_dir
+    script.request.cfg.data_dir = src_data_dir
     os.mkdir(dst_data_dir)
     shutil.move(os.path.join(src_data_dir, 'cache'), os.path.join(dst_data_dir, 'cache')) # mig script has locks there
     dc = DataConverter(script.request, src_data_dir, dst_data_dir)
     dc.pass2()
+    # restore correct data dir:
+    script.request.cfg.data_dir = saved_data_dir
     return 1060000
 

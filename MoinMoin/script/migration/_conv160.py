@@ -78,16 +78,22 @@ class EventLog:
         """ read complete event-log from disk """
         data = []
         try:
+            lineno = 0
             f = file(self.fname, 'r')
             for line in f:
+                lineno += 1
                 line = line.replace('\r', '').replace('\n', '')
                 if not line.strip(): # skip empty lines
                     continue
                 fields = line.split('\t')
-                timestamp, action, kvpairs = fields[:3]
-                timestamp = int(timestamp)
-                kvdict = wikiutil.parseQueryString(kvpairs)
-                data.append((timestamp, action, kvdict))
+                try:
+                    timestamp, action, kvpairs = fields[:3]
+                    timestamp = int(timestamp)
+                    kvdict = wikiutil.parseQueryString(kvpairs)
+                    data.append((timestamp, action, kvdict))
+                except ValueError, err:
+                    # corrupt event log line, log error and skip it
+                    print "Error: invalid event log (%s) line %d, err: %s, SKIPPING THIS LINE!" % (self.fname, lineno, str(err))
             f.close()
         except IOError, err:
             # no event-log
@@ -227,7 +233,7 @@ class Attachment:
     def __init__(self, request, attach_dir, attfile):
         self.request = request
         self.path = opj(attach_dir, attfile)
-        self.name = attfile.decode('utf-8')
+        self.name = attfile.decode('utf-8', 'replace')
 
     def copy(self, attach_dir):
         """ copy attachment file from orig path to new destination """
@@ -471,10 +477,15 @@ class DataConverter(object):
 
     def save_list(self, fname, what):
         what_sorted = what.keys()
-        what_sorted.sort(cmp=lambda x, y: cmp(x[1:], y[1:]))
+        # make sure we have 3-tuples:
+        what_sorted = [(k + (None, ))[:3] for k in what_sorted]
+        # we only have python 2.3, thus no cmp keyword for the sort() call,
+        # thus we need to do it the more complicated way:
+        what_sorted = [(pn, fn, rtype) for rtype, pn, fn in what_sorted] # shuffle
+        what_sorted.sort() # sort
+        what_sorted = [(rtype, pn, fn) for pn, fn, rtype in what_sorted] # shuffle
         f = codecs.open(fname, 'w', 'utf-8')
-        for k in what_sorted:
-            rtype, pn, fn = (k + (None, ))[:3]
+        for rtype, pn, fn in what_sorted:
             if rtype == 'PAGE':
                 line = (rtype, pn, pn)
             elif rtype == 'FILE':

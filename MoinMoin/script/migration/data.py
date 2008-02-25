@@ -12,7 +12,7 @@
     Important: you must have run all 12_to_13* and the final 152_to_1050300
                mig scripts ONCE and in correct order manually before attempting
                to use the new style migration stuff.
-
+               
     @copyright: 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
