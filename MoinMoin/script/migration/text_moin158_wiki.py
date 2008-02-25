@@ -175,7 +175,7 @@ class Parser:
             url = url[10:] # remove "wiki:self:"
             is_self_reference = 1
         elif url2.startswith('wiki:'):
-            url = url[5:] # remove "wiki:
+            url = url[5:] # remove "wiki:"
 
         tag, tail = wikiutil.split_wiki(url)
         if text is None:

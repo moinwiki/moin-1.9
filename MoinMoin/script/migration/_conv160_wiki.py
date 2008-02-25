@@ -50,6 +50,46 @@ def convert_wiki(request, pagename, intext, renames):
     return result
 
 
+STONEAGE_IMAGELINK = False # True for ImageLink(target,image), False for ImageLink(image,target)
+
+# copied from moin 1.6.0 macro/ImageLink.py (to be safe in case we remove ImageLink some day)
+# ... and slightly modified/refactored for our needs here.
+# hint: using parse_quoted_separated from wikiutil does NOT work here, because we do not have
+#       quoted urls when they contain a '=' char in the 1.5 data input.
+def explore_args(args):
+    """ explore args for positional and keyword parameters """
+    if args:
+        args = args.split(',')
+        args = [arg.strip() for arg in args]
+    else:
+        args = []
+
+    kw_count = 0
+    kw = {} # keyword args
+    pp = [] # positional parameters
+
+    kwAllowed = ('width', 'height', 'alt')
+
+    for arg in args:
+        if '=' in arg:
+            key, value = arg.split('=', 1)
+            key_lowerstr = str(key.lower())
+            # avoid that urls with "=" are interpreted as keyword
+            if key_lowerstr in kwAllowed:
+                kw_count += 1
+                kw[key_lowerstr] = value
+            elif not kw_count and '://' in arg:
+                # assuming that this is the image
+                pp.append(arg)
+        else:
+            pp.append(arg)
+
+    if STONEAGE_IMAGELINK and len(pp) >= 2:
+        pp[0], pp[1] = pp[1], pp[0]
+
+    return pp, kw
+
+
 class Converter(Parser):
     def __init__(self, request, pagename, raw, renames):
         self.pagename = pagename
@@ -59,7 +99,7 @@ class Converter(Parser):
         self._ = None
         self.in_pre = 0
 
-        self.formatting_rules = self.formatting_rules % {'macronames': u'|'.join(macro.getNames(self.request.cfg))}
+        self.formatting_rules = self.formatting_rules % {'macronames': u'|'.join(['ImageLink', ] + macro.getNames(self.request.cfg))}
 
     # no change
     def return_word(self, word):
@@ -161,9 +201,9 @@ class Converter(Parser):
         macro_name = m.group('macro_name')
         macro_args = m.group('macro_args')
         if macro_name == 'ImageLink':
-            fixed, kw, trailing = wikiutil.parse_quoted_separated(macro_args)
+            fixed, kw = explore_args(macro_args)
             #print "macro_args=%r" % macro_args
-            #print "fixed=%r, kw=%r, trailing=%r" % (fixed, kw, trailing)
+            #print "fixed=%r, kw=%r" % (fixed, kw)
             image, target = (fixed + ['', ''])[:2]
             if image is None:
                 image = ''
@@ -176,6 +216,8 @@ class Converter(Parser):
                 target = image
             elif target.startswith('inline:'):
                 target = 'attachment:' + target[7:] # we don't support inline:
+            elif target.startswith('wiki:'):
+                target = target[5:] # drop wiki:
             image_attrs = []
             alt = kw.get('alt') or ''
             width = kw.get('width')
@@ -259,7 +301,12 @@ class Converter(Parser):
             return '[[%s%s]]' % (pagename, text)
 
         wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, url)
-        wikitail = wikiutil.url_unquote(wikitail)
+        if wikitag_bad: # likely we got some /InterWiki as wikitail, we don't want that!
+            pagename = wikiutil.url_unquote(pagename)
+            pagename = self._replace_target(pagename)
+            wikitail = pagename
+        else: # good
+            wikitail = wikiutil.url_unquote(wikitail)
 
         # link to self?
         if wikiutil.isPicture(wikitail):
