@@ -25,7 +25,7 @@ def getIntegerInput(request, fieldname, default=None, minval=None, maxval=None):
         return result
 
 
-def makeSelection(name, values, selectedval=None, size=1):
+def makeSelection(name, values, selectedval=None, size=1, multiple=False):
     """ Make a HTML <select> element named `name` from a value list.
         The list can either be a list of strings, or a list of
         (value, label) tuples.
@@ -33,7 +33,7 @@ def makeSelection(name, values, selectedval=None, size=1):
         `selectedval` is the value that should be pre-selected.
     """
     from MoinMoin.widget import html
-    result = html.SELECT(name=name, size="%d" % int(size))
+    result = html.SELECT(name=name, size="%d" % int(size), multiple=multiple)
     for val in values:
         if not isinstance(val, type(())):
             val = (val, val)

@@ -89,10 +89,10 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
         or_terms = request.form.get('or_terms', [''])[0].strip()
         not_terms = request.form.get('not_terms', [''])[0].strip()
         #xor_terms = request.form.get('xor_terms', [''])[0].strip()
-        categories = request.form.get('categories', [''])[0].strip()
+        categories = request.form.get('categories', [''])
         timeframe = request.form.get('time', [''])[0].strip()
-        language = request.form.get('language', [''])[0]
-        mimetype = request.form.get('mimetype', [0])[0]
+        language = request.form.get('language', [''])
+        mimetype = request.form.get('mimetype', [0])
         excludeunderlay = request.form.get('excludeunderlay', [0])[0]
         nosystemitems = request.form.get('nosystemitems', [0])[0]
         historysearch = request.form.get('historysearch', [0])[0]
@@ -141,17 +141,16 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
 
         word_re = re.compile(r'(\"[\w\s]+"|\w+)')
         needle = ''
-        if language:
-            needle += 'language:%s ' % language
-        if mimetype:
-            needle += 'mimetype:%s ' % mimetype
+        if categories[0]:
+            needle += 'category:%s ' % ','.join(categories)
+        if language[0]:
+            needle += 'language:%s ' % ','.join(language)
+        if mimetype[0]:
+            needle += 'mimetype:%s ' % ','.join(mimetype)
         if excludeunderlay:
             needle += '-domain:underlay '
         if nosystemitems:
             needle += '-domain:system '
-        if categories:
-            needle += '(%s) ' % ' or '.join(['category:%s' % cat
-                for cat in word_re.findall(categories)])
         if and_terms:
             needle += '(%s) ' % and_terms
         if not_terms:
