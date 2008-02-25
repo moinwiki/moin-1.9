@@ -34,6 +34,9 @@ import sys
 # YOU NEED TO CHANGE THIS TO MATCH YOUR SETUP.
 sys.path.insert(0, '/path/to/wikiconfig')
 
+from MoinMoin import log
+log.load_config('.../wiki/config/logging/logfile') # XXX fix path
+
 from MoinMoin.server.server_wsgi import WsgiConfig, moinmoinApp
 
 class Config(WsgiConfig):

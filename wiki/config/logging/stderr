@@ -1,8 +1,7 @@
-    logging_defaults = {
-        # Default loglevel, to adjust verbosity: DEBUG, INFO, WARNING, ERROR, CRITICAL
-        'loglevel': 'INFO',
-    }
-    logging_config = """\
+[DEFAULT]
+# Default loglevel, to adjust verbosity: DEBUG, INFO, WARNING, ERROR, CRITICAL
+loglevel=INFO
+
 [loggers]
 keys=root
 
@@ -13,7 +12,7 @@ keys=stderr
 keys=screen
 
 [logger_root]
-level=NOTSET
+level=%(loglevel)s
 handlers=stderr
 
 [handler_stderr]
@@ -26,6 +25,4 @@ args=(sys.stderr, )
 format=%(asctime)s %(name)s %(levelname)s %(message)s
 datefmt=
 class=logging.Formatter
-"""
-
 
