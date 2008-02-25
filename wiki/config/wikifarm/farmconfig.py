@@ -17,7 +17,7 @@
     the module MoinMoin.config.multiconfig for a full list of names and their
     default values.
 
-    Also, the URL http://moinmoin.wikiwikiweb.de/HelpOnConfiguration has
+    Also, the URL http://moinmo.in/HelpOnConfiguration has
     a list of config options.
 """
 
@@ -48,8 +48,8 @@ wikis = [
     ("mywiki", r".*"),   # this is ok for a single wiki
 
     # for multiple wikis, do something like this:
-    #("moinmoin",    r"^moinmoin.wikiwikiweb.de/.*$"),
-    #("moinmaster",  r"^moinmaster.wikiwikiweb.de/.*$"),
+    #("moinmoin",    r"^moinmo.in/.*$"),
+    #("moinmaster",  r"^master.moinmo.in/.*$"),
 ]
 
 
@@ -154,7 +154,7 @@ class FarmConfig(DefaultConfig):
 
     # Language options --------------------------------------------------
 
-    # See http://moinmoin.wikiwikiweb.de/ConfigMarket for configuration in
+    # See http://moinmo.in/ConfigMarket for configuration in
     # YOUR language that other people contributed.
 
     # The main wiki language, set the direction of the wiki pages

@@ -48,7 +48,7 @@ def run():
     pagedata = data.encode('utf-8')
 
     authtrans = BasicAuthTransport(user, password)
-    wiki = xmlrpclib.ServerProxy("http://moinmaster.wikiwikiweb.de/?action=xmlrpc2", transport=authtrans)
+    wiki = xmlrpclib.ServerProxy("http://master.moinmo.in/?action=xmlrpc2", transport=authtrans)
 
     rc = wiki.putPage(pagename, pagedata)
     print "Page: %s rc=%s" % (pagename, rc)

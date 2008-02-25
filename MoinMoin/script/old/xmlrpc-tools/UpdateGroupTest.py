@@ -15,7 +15,7 @@ def run():
     user = "XmlRpc"
     password = "wrong"
     dsttrans = BasicAuthTransport(user, password)
-    mywiki = xmlrpclib.ServerProxy("http://enterprise.wikiwikiweb.de:8888/?action=xmlrpc2", transport=dsttrans)
+    mywiki = xmlrpclib.ServerProxy("http://master.moinmo.in/?action=xmlrpc2", transport=dsttrans)
 
     groupname = "TestGroup"
     groupdesc = "This is just a test."
@@ -33,7 +33,7 @@ def run():
     user = "XmlRpc"
     password = "completelywrong"
     dsttrans = BasicAuthTransport(user, password)
-    mywiki = xmlrpclib.ServerProxy("http://enterprise.wikiwikiweb.de:8888/?action=xmlrpc2", transport=dsttrans)
+    mywiki = xmlrpclib.ServerProxy("http://master.moinmo.in/?action=xmlrpc2", transport=dsttrans)
 
     groupname = "TestGroup"
     groupdesc = "This is just a test."

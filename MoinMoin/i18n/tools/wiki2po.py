@@ -13,7 +13,7 @@ def run():
     lang = sys.argv[1]
 
     if not lang in excluded:
-        wiki = xmlrpclib.ServerProxy("http://moinmaster.wikiwikiweb.de/?action=xmlrpc2")
+        wiki = xmlrpclib.ServerProxy("http://master.moinmo.in/?action=xmlrpc2")
 
         pagename = "MoinI18n/%s" % lang
         print pagename

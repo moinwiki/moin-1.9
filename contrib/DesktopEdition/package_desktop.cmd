@@ -62,7 +62,7 @@ if exist %build% (
 	echo licensed under GNU GPL, see COPYING>> moin-desktop\readme_desktop.txt
 	echo %version%, see the page SystemInfo for exact revision>> moin-desktop\readme_desktop.txt
 	echo.>> moin-desktop\readme_desktop.txt
-	echo See http://moinmoin.wikiwikiweb.de/DesktopEdition for current information.>> moin-desktop\readme_desktop.txt
+	echo See http://moinmo.in/DesktopEdition for current information.>> moin-desktop\readme_desktop.txt
 	echo.>> moin-desktop\readme_desktop.txt
 	echo MoinMoin needs Python in order to run. You can download it here: http://www.python.org/download/>> moin-desktop\readme_desktop.txt
 	echo Python 2.4.3 is recommended, Python 2.3 is required. Nothing else is needed.>> moin-desktop\readme_desktop.txt

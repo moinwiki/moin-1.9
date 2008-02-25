@@ -18,7 +18,7 @@
     the module MoinMoin.config.multiconfig for a full list of names and their
     default values.
 
-    Also, the URL http://moinmoin.wikiwikiweb.de/HelpOnConfiguration has
+    Also, the URL http://moinmo.in/HelpOnConfiguration has
     a list of config options.
 
     ** Please do not use this file for a wiki farm. Use the sample file
@@ -142,7 +142,7 @@ class Config(DefaultConfig):
 
     # Language options --------------------------------------------------
 
-    # See http://moinmoin.wikiwikiweb.de/ConfigMarket for configuration in
+    # See http://moinmo.in/ConfigMarket for configuration in
     # YOUR language that other people contributed.
 
     # The main wiki language, set the direction of the wiki pages

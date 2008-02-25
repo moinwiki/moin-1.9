@@ -10,8 +10,8 @@ GPL software, 2003-08-10 Thomas Waldmann
 
 from xmlrpclib import *
 
-srcwiki = ServerProxy("http://moinmaster.wikiwikiweb.de/?action=xmlrpc")
-#srcwiki = ServerProxy("http://moinmaster.wikiwikiweb.de/?action=xmlrpc")
+srcwiki = ServerProxy("http://master.moinmo.in/?action=xmlrpc")
+#srcwiki = ServerProxy("http://master.moinmo.in/?action=xmlrpc")
 dstwiki = ServerProxy("http://devel.linuxwiki.org/moin--cvs?action=xmlrpc")
 
 def transferpage(srcwiki, dstwiki, pagename):

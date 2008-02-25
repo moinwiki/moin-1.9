@@ -21,10 +21,6 @@ class Config(DefaultConfig):
     sitename = u'MoinMoin DesktopEdition'
     logo_string = u'<img src="/moin_static170/common/moinmoin.png" alt="MoinMoin Logo">'
     page_front_page = u'FrontPage' # change to some better value
-    page_credits = [
-        '<a href="http://moinmoin.wikiwikiweb.de/">MoinMoin DesktopEdition Powered</a>',
-        '<a href="http://www.python.org/">Python Powered</a>',
-    ]
     # ^^^ DON'T TOUCH THIS EXCEPT IF YOU KNOW WHAT YOU DO ^^^
 
     # developers, add your testing config values in this file

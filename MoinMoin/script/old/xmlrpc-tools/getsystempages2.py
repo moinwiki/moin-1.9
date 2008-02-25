@@ -9,7 +9,7 @@ GPL software, 2003-08-10 Thomas Waldmann
 import xmlrpclib
 from MoinMoin.support.BasicAuthTransport import BasicAuthTransport
 
-#srcwiki = xmlrpclib.ServerProxy("http://moinmaster.wikiwikiweb.de/FrontPage?action=xmlrpc")
+#srcwiki = xmlrpclib.ServerProxy("http://master.moinmo.in/?action=xmlrpc")
 user = "YourWikiName"
 password = "yourbasicauthpassword"
 srctrans = BasicAuthTransport(user, password)
