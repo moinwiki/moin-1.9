@@ -86,10 +86,10 @@ function toggleDebugInfo() {
                           'Show debugging information')]
         if self.info[0] != ConfigurationError:
             buttons.append(
-                   f.link('http://moinmoin.wikiwikiweb.de/MoinMoinBugs',
+                   f.link('http://moinmo.in/MoinMoinBugs',
                           'Report bug'))
             buttons.append(
-                   f.link('http://moinmoin.wikiwikiweb.de/FrontPage',
+                   f.link('http://moinmo.in/FrontPage',
                           'Visit MoinMoin wiki'))
         return f.list(buttons, {'class': 'buttons'})
 

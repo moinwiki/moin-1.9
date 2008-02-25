@@ -224,7 +224,7 @@ class DefaultConfig:
 
     actions_excluded = ['xmlrpc'] # ['DeletePage', 'AttachFile', 'RenamePage', 'test', ]
     allow_xslt = False
-    antispam_master_url = "http://moinmaster.wikiwikiweb.de:8000/?action=xmlrpc2"
+    antispam_master_url = "http://master.moinmo.in/?action=xmlrpc2"
     attachments = None # {'dir': path, 'url': url-prefix}
     auth = [authmodule.MoinLogin()]
     # default to http and xmlrpc_applytoken to get old semantics
@@ -445,7 +445,7 @@ Lists: * bullets; 1., a. numbered items.
     page_credits = [
         # Feel free to add other credits, but PLEASE do NOT change or remove
         # the following links - you help us by keeping them "as is":
-        '<a href="http://moinmoin.wikiwikiweb.de/" title="This site uses the MoinMoin Wiki software.">MoinMoin Powered</a>',
+        '<a href="http://moinmo.in/" title="This site uses the MoinMoin Wiki software.">MoinMoin Powered</a>',
         '<a href="http://moinmo.in/Python" title="MoinMoin is written in Python.">Python Powered</a>',
 
         # Optional credits:

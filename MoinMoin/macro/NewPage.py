@@ -3,8 +3,7 @@
     MoinMoin - New Page macro
 
     Thanks to Jos Yule's "blogpost" action and his modified Form for
-    giving me the pieces I needed to figure all this stuff out:
-    http://moinmoin.wikiwikiweb.de/JosYule
+    giving me the pieces I needed to figure all this stuff out: MoinMoin:JosYule
 
     @copyright: 2004 Vito Miliano (vito_moinnewpagewithtemplate@perilith.com),
                 2004 by Nir Soffer <nirs@freeshell.org>,

@@ -17,7 +17,7 @@ def run():
     from MoinMoin.support.BasicAuthTransport import BasicAuthTransport
 
     srctrans = BasicAuthTransport(user, password)
-    srcwiki = xmlrpclib.ServerProxy("http://moinmaster.wikiwikiweb.de/?action=xmlrpc2", transport=srctrans)
+    srcwiki = xmlrpclib.ServerProxy("http://master.moinmo.in/?action=xmlrpc2", transport=srctrans)
 
     print srcwiki.WhoAmI()
 

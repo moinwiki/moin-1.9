@@ -1,7 +1,7 @@
 Translators and Developers,
 
 Translators need to deal with the *.po files ONLY - they should do this on
-http://moinmaster.wikiwikiweb.de/MoinI18n/<language-code>, please do not
+http://master.moinmo.in/MoinI18n/<language-code>, please do not
 send po updates via email, the stuff from the moinmaster wiki gets processed
 automatically.
 

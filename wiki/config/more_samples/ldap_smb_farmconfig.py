@@ -231,7 +231,7 @@ class FarmConfig(DefaultConfig):
 
     # Language options --------------------------------------------------
 
-    # See http://moinmoin.wikiwikiweb.de/ConfigMarket for configuration in
+    # See http://moinmo.in/ConfigMarket for configuration in
     # YOUR language that other people contributed.
 
     # The main wiki language, set the direction of the wiki pages

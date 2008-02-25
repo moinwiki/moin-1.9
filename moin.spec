@@ -28,7 +28,7 @@ Summary:        MoinMoin Wiki engine
 
 Group:          Applications/Internet
 License:        GPL
-URL:            http://moinmoin.wikiwikiweb.de
+URL:            http://moinmo.in/
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildArchitectures: noarch

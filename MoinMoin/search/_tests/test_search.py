@@ -15,7 +15,7 @@ from MoinMoin import search
 class TestQuotingBug:
     """search: quoting bug tests
 
-    http://moinmoin.wikiwikiweb.de/MoinMoinBugs/SearchOneCharString
+       MoinMoin:MoinMoinBugs/SearchOneCharString
     """
 
     def testIsQuoted(self):

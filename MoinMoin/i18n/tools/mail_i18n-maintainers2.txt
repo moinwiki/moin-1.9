@@ -13,7 +13,7 @@ If not, we will include it in development of next version, so it will
 be there when we release next version.
 
 Please also don't forget to update status here:
-http://moinmoin.wikiwikiweb.de/MoinDev/Translation
+http://moinmo.in/MoinDev/Translation
 
 Thanks,
 
