@@ -19,37 +19,6 @@ Deleting the TestConfig instance will restore the previous configuration.
 @license: GNU GPL, see COPYING for details.
 """
 
-# here you can configure logging used while running the tests,
-# see http://www.python.org/doc/lib/logging-config-fileformat.html
-logging_defaults = {
-    'loglevel': 'INFO',
-}
-logging_config = """\
-[loggers]
-keys=root
-
-[handlers]
-keys=stderr
-
-[formatters]
-keys=screen
-
-[logger_root]
-level=%(loglevel)s
-handlers=stderr
-
-[handler_stderr]
-class=StreamHandler
-level=NOTSET
-formatter=screen
-args=(sys.stderr, )
-
-[formatter_screen]
-format=%(asctime)s %(name)s %(levelname)s %(message)s
-datefmt=%H%M%S
-class=logging.Formatter
-"""
-
 import atexit
 from inspect import isclass
 from sys import modules
@@ -222,8 +191,6 @@ class Module(py.test.collect.Module):
     Function = MoinTestFunction
 
     def __init__(self, *args, **kwargs):
-        from MoinMoin.server import configureLogging
-        configureLogging(logging_config, logging_defaults)
         self.request = init_test_request()
         super(Module, self).__init__(*args, **kwargs)
 

@@ -34,7 +34,10 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, re, codecs, logging
+import os, re, codecs
+
+from MoinMoin import log
+logging = log.getLogger(__name__)
 
 from MoinMoin import config, caching, user, util, wikiutil
 from MoinMoin.logfile import eventlog

@@ -35,11 +35,8 @@
 # TODO: Compare compare the number of bytes received on FCGI_STDIN with
 #       CONTENT_LENGTH and abort the update if the two numbers are not equal.
 
-from MoinMoin.server import getLogger
-logging = getLogger(__name__)
-
-# use this to temporarily and selectively enable debug logging for this module
-#logging.setLevel(logging.DEBUG)
+import logging
+log = logging.getLogger(__name__)
 
 import os
 import sys

@@ -16,11 +16,8 @@ from openid.store import nonce
 
 from MoinMoin import caching
 
-from MoinMoin.server import getLogger
-logging = getLogger(__name__)
-
-# use this to temporarily and selectively enable debug logging for this module
-#logging.setLevel(logging.DEBUG)
+from MoinMoin import log
+logging = log.getLogger(__name__)
 
 # redirect openid logging to moin log
 def log(msg, level=0):
