@@ -669,8 +669,13 @@ class LanguageSearch(BaseExpression):
         match = False
         body = page.getPageHeader()
 
-        if re.findall('#language %s' % self.pattern, body):
-            match = True
+        comma = re.compile(',')
+        iterator = comma.finditer(self.pattern)
+        temp = 0
+        for m_obj in iterator:
+            if re.findall('#language %s' % self.pattern[temp:m_obj.end()-2], body):
+                match = True
+            temp = m_obj.end()
 
         # Decide what to do with the results.
         if self.negated:
