@@ -9,12 +9,12 @@
     Minimal usage:
 
         from MoinMoin.server.server_fastcgi import FastCgiConfig, run
-        
+
         class Config(FastCgiConfig):
             pass
 
         run(Config)
-        
+
     See more options in FastCgiConfig class.
 
     @copyright: 2007 MoinMoin:ThomasWaldmann

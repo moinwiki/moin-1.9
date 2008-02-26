@@ -158,7 +158,7 @@ class TestLoginWithPassword(object):
         theUser = user.User(self.request, name=name, password=password)
         theUser.subscribe(pagename)
         assert not theUser.isSubscribedTo([testPagename]) # list(!) of pages to check
-        
+
     def testRenameUser(self):
         """ create user and then rename user and check
         if the old username is removed from the cache name2id
@@ -175,7 +175,7 @@ class TestLoginWithPassword(object):
         theUser.name = u'__SomeName__'
         theUser.save()
         theUser = user.User(self.request, name=name, password=password)
-        
+
         assert not theUser.exists()
 
     # Helpers ---------------------------------------------------------

@@ -36,7 +36,7 @@ class Task(object):
 def find_dict_entry(name, text):
     m = re.search(r"^ %s:: (.*)$" % (name, ), text, re.M | re.U)
     if not m:
-        raise DataNotFoundException("%s not found" % (name,))
+        raise DataNotFoundException("%s not found" % (name, ))
     return m.groups()[0]
 
 desc_pattern = r"""== Short Description ==

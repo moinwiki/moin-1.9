@@ -1,7 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - a special text/html formatter used by the i18n system
-    
+
     If texts translated by the i18n system are used on the left side of a
     % operator, any markup-generated % char (e.g. in links to non-ASCII page
     names (%XX%XX%XX)) needs to get escaped (%%XX%%XX%%XX).

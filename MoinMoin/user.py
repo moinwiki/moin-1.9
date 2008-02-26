@@ -623,7 +623,7 @@ class User:
             del self._request.cfg.cache.name2id
         except:
             pass
-        
+
         if not self.disabled:
             self.valid = 1
 

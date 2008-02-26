@@ -159,10 +159,10 @@ class Translation(object):
 
     def formatMarkup(self, request, text, percent):
         """ Formats the text using the wiki parser/formatter.
-        
+
         This raises an exception if a text needs itself to be translated,
         this could possibly happen with macros.
-        
+
         @param request: the request object
         @param text: the text to format
         @param percent: True if result is used as left-side of a % operator and
@@ -235,7 +235,7 @@ def getDirection(lang):
 
 def getText(original, request, lang, **kw):
     """ Return a translation of some original text.
-    
+
     @param original: the original (english) text
     @param request: the request object
     @lang: the target language for the translation
@@ -247,7 +247,7 @@ def getText(original, request, lang, **kw):
                       e.g. in wiki links to non-ascii pagenames (%XX%XX%XX).
                       False, if we don't use it as a left-side of % operator.
                       Only specify this option for formatted==True, it doesn't do
-                      anything for formatted==False. 
+                      anything for formatted==False.
     """
     formatted = kw.get('formatted', True) # TODO: change to False, review all _() calls
     percent = kw.get('percent', False) # TODO: review all _() calls
@@ -377,7 +377,7 @@ def browserLanguages(request):
 
 def get_browser_language(request):
     """
-    Return the language that is supported by wiki and what user browser 
+    Return the language that is supported by wiki and what user browser
     would prefer to get. Return empty string if there is no such language
     or language_ignore_browser is true.
 
@@ -391,3 +391,4 @@ def get_browser_language(request):
             if lang in available:
                 return lang
     return ''
+
