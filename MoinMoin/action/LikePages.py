@@ -36,7 +36,7 @@ def execute(pagename, request):
 
     # One match - display it
     if len(matches) == 1:
-        request.theme.add_msg(_('Exactly one page like "%s" found, redirecting to page.', formatted=False) % (pagename, ), "info")
+        request.theme.add_msg(_('Exactly one page like "%s" found, redirecting to page.') % (pagename, ), "info")
         Page(request, matches.keys()[0]).send_page()
         return
 

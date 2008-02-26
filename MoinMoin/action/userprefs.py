@@ -88,9 +88,9 @@ def execute(pagename, request):
     _ = request.getText
     text, title, msg = _create_page(request)
     if not title:
-        title = _("Settings", formatted=False)
+        title = _("Settings")
     else:
-        lnk = html.A(href='xx').append(html.Text(_("Settings", formatted=False)))
+        lnk = html.A(href='xx').append(html.Text(_("Settings")))
         lnk = unicode(lnk)
         title = _("Settings") + "/" + title
     request.emit_http_headers()

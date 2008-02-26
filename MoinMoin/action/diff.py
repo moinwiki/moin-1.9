@@ -111,7 +111,7 @@ def execute(pagename, request):
         from MoinMoin.util import diff_text
         lines = diff_text.diff(oldpage.getlines(), newpage.getlines())
         if not lines:
-            msg = f.text(" - " + _("No differences found!", formatted=False))
+            msg = f.text(" - " + _("No differences found!"))
             if edit_count > 1:
                 msg = msg + f.paragraph(1) + f.text(_('The page was saved %(count)d times, though!') % {
                     'count': edit_count}) + f.paragraph(0)

@@ -137,7 +137,7 @@ class ActionClass(object):
 
     def show_password_form(self):
         _ = self.request.getText
-        d = {"message": _(r"Please enter your password of your account at the remote wiki below. <<BR>> /!\ You should trust both wikis because the password could be read by the particular administrators."),
+        d = {"message": _(r"Please enter your password of your account at the remote wiki below. <<BR>> /!\ You should trust both wikis because the password could be read by the particular administrators.", wiki=True),
              "passwordlabel": _("Password"),
              "submit": _("Login"),
              "cancel": _("Cancel"),
@@ -180,10 +180,10 @@ class ActionClass(object):
                 raise ActionStatus(_("The only supported directions are BOTH and DOWN."), "error")
 
             if not self.request.cfg.interwikiname:
-                raise ActionStatus(_("Please set an interwikiname in your wikiconfig (see HelpOnConfiguration) to be able to use this action."), "error")
+                raise ActionStatus(_("Please set an interwikiname in your wikiconfig (see HelpOnConfiguration) to be able to use this action.", wiki=True), "error")
 
             if not params["remoteWiki"]:
-                raise ActionStatus(_("Incorrect parameters. Please supply at least the ''remoteWiki'' parameter. Refer to HelpOnSynchronisation for help."), "error")
+                raise ActionStatus(_("Incorrect parameters. Please supply at least the ''remoteWiki'' parameter. Refer to HelpOnSynchronisation for help.", wiki=True), "error")
 
             local = MoinLocalWiki(self.request, params["localPrefix"], params["pageList"])
             try:
@@ -192,7 +192,7 @@ class ActionClass(object):
                 raise ActionStatus(msg)
 
             if not remote.valid:
-                raise ActionStatus(_("The ''remoteWiki'' is unknown."), "error")
+                raise ActionStatus(_("The ''remoteWiki'' is unknown.", wiki=True), "error")
             # if only the username is supplied, we ask for the password
             if params["user"] and not params["password"]:
                 return self.show_password_form()
@@ -205,7 +205,7 @@ class ActionClass(object):
                 except Exception, e:
                     temp_file = StringIO.StringIO()
                     traceback.print_exc(file=temp_file)
-                    self.log_status(self.ERROR, _("A severe error occured:"), raw_suffix=temp_file.getvalue())
+                    self.log_status(self.ERROR, _("A severe error occurred:"), raw_suffix=temp_file.getvalue())
                     raise
                 else:
                     self.request.theme.add_msg(u"%s" % (_("Synchronisation finished. Look below for the status messages."), ), "info")

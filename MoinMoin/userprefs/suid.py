@@ -22,7 +22,7 @@ class Settings(UserPrefBase):
         self._ = request.getText
         self.cfg = request.cfg
         _ = self._
-        self.title = _("Switch user", formatted=False)
+        self.title = _("Switch user")
         self.name = 'suid'
 
     def allowed(self):

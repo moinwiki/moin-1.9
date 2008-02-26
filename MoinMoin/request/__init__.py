@@ -1240,16 +1240,16 @@ class RequestBase(object):
                 msg = None
                 # Complain about unknown actions
                 if not action_name in self.getKnownActions():
-                    msg = _("Unknown action %(action_name)s.", formatted=False) % {
+                    msg = _("Unknown action %(action_name)s.") % {
                             'action_name': wikiutil.escape(action_name), }
 
                 # Disallow non available actions
                 elif action_name[0].isupper() and not action_name in self.getAvailableActions(self.page):
-                    msg = _("You are not allowed to do %(action_name)s on this page.", formatted=False) % {
+                    msg = _("You are not allowed to do %(action_name)s on this page.") % {
                             'action_name': wikiutil.escape(action_name), }
                     if not self.user.valid:
                         # Suggest non valid user to login
-                        msg += " " + _("Login and try again.", formatted=False)
+                        msg += " " + _("Login and try again.")
 
                 if msg:
                     self.request.theme.add_msg(msg, "error")
@@ -1259,11 +1259,11 @@ class RequestBase(object):
                     from MoinMoin import action
                     handler = action.getHandler(self, action_name)
                     if handler is None:
-                        msg = _("You are not allowed to do %(action_name)s on this page.", formatted=False) % {
+                        msg = _("You are not allowed to do %(action_name)s on this page.") % {
                                 'action_name': wikiutil.escape(action_name), }
                         if not self.user.valid:
                             # Suggest non valid user to login
-                            msg += " " + _("Login and try again.", formatted=False)
+                            msg += " " + _("Login and try again.")
                         self.request.theme.add_msg(msg, "error")
                         self.page.send_page()
                     else:

@@ -89,7 +89,7 @@ def sendBackupForm(request, pagename):
 
 Please make sure your wiki configuration backup_* values are correct and complete.
 
-"""))
+""", wiki=True))
 
     request.write("""
 <form action="%(baseurl)s/%(pagename)s" method="POST" enctype="multipart/form-data">

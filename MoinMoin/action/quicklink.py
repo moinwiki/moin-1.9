@@ -20,7 +20,7 @@ def execute(pagename, request):
         else: # should not happen
             request.theme.add_msg(_('A quicklink to this page could not be added for you.'), "error")
     else:
-        request.theme.add_msg(_('You already have a quicklink to this page.', formatted=False))
+        request.theme.add_msg(_('You already have a quicklink to this page.'))
 
     Page(request, pagename).send_page()
 

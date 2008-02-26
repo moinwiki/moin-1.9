@@ -20,10 +20,10 @@ def _create_user(request):
     form = request.form
 
     if request.request_method != 'POST':
-        return _("Use UserPreferences to change your settings or create an account.")
+        return _("Use UserPreferences to change your settings or create an account.", wiki=True)
 
     if not TextCha(request).check_answer_from_form():
-        return _('TextCha: Wrong answer! Go back and try again...', formatted=False)
+        return _('TextCha: Wrong answer! Go back and try again...')
 
     # Create user profile
     theuser = user.User(request, auth_method="new-user")
@@ -38,7 +38,7 @@ def _create_user(request):
     if not user.isValidName(request, theuser.name):
         return _("""Invalid user name {{{'%s'}}}.
 Name may contain any Unicode alpha numeric character, with optional one
-space between words. Group page name is not allowed.""") % wikiutil.escape(theuser.name)
+space between words. Group page name is not allowed.""", wiki=True) % wikiutil.escape(theuser.name)
 
     # Name required to be unique. Check if name belong to another user.
     if user.getUserId(request, theuser.name):
@@ -133,7 +133,7 @@ def _create_form(request):
     row = html.TR()
     tbl.append(row)
     row.append(html.TD().append(html.STRONG().append(
-                                  html.Text(_('TextCha (required)', formatted=False)))))
+                                  html.Text(_('TextCha (required)')))))
     td = html.TD()
     textcha = TextCha(request).render()
     if textcha:

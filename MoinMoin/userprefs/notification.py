@@ -93,16 +93,16 @@ class Settings(UserPrefBase):
 
         types = []
         if self.cfg.mail_enabled and self.request.user.email:
-            types.append(('email', _("'''Email'''")))
+            types.append(('email', _("'''Email'''", wiki=True)))
         if self.cfg.jabber_enabled and self.request.user.jid:
-            types.append(('jabber', _("'''Jabber'''")))
+            types.append(('jabber', _("'''Jabber'''", wiki=True)))
 
         table = html.TABLE()
         header = html.TR()
         table.append(header)
         for name, descr in types:
             header.append(html.TH().append(html.Raw(descr)))
-        header.append(html.TH(align='left').append(html.Raw(_("'''Event type'''"))))
+        header.append(html.TH(align='left').append(html.Raw(_("'''Event type'''", wiki=True))))
 
         event_list = events.get_subscribable_events()
         super = self.request.user.isSuperUser()
@@ -156,7 +156,7 @@ class Settings(UserPrefBase):
         notifylist = self.request.user.getSubscriptionList()
 
         self.make_row(
-            html.Raw(_('Subscribed wiki pages<<BR>>(one regex per line)')),
+            html.Raw(_('Subscribed wiki pages<<BR>>(one regex per line)', wiki=True)),
             [html.TEXTAREA(name="subscribed_pages", rows="6", cols="50").append(
                 '\n'.join(notifylist)), ],
             valign="top"

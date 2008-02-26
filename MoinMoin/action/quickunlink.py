@@ -14,13 +14,13 @@ def execute(pagename, request):
     msg = None
 
     if not request.user.valid:
-        msg = _("You must login to remove a quicklink.", formatted=False)
+        msg = _("You must login to remove a quicklink.")
     elif request.user.isQuickLinkedTo([pagename]):
         if request.user.removeQuicklink(pagename):
-            msg = _('Your quicklink to this page has been removed.', formatted=False)
+            msg = _('Your quicklink to this page has been removed.')
         else: # should not happen
-            msg = _('Your quicklink to this page could not be removed.', formatted=False)
+            msg = _('Your quicklink to this page could not be removed.')
     else:
-        msg = _('You need to have a quicklink to this page to remove it.', formatted=False)
+        msg = _('You need to have a quicklink to this page to remove it.')
 
     Page(request, pagename).send_page(msg=msg)

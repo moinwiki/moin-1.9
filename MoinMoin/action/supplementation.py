@@ -16,7 +16,7 @@ def execute(pagename, request):
     sub_page_name = request.cfg.supplementation_page_name
     sub_page_template = request.cfg.supplementation_page_template
     newpagename = "%s/%s" % (pagename, sub_page_name)
-    errormsg = _("You are not allowed to create the supplementation page.", formatted=False)
+    errormsg = _("You are not allowed to create the supplementation page.")
 
     if pagename.endswith(sub_page_name): # sub_sub_page redirects to sub_page
         query = {}

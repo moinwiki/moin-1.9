@@ -1052,13 +1052,13 @@ class Parser:
                 token = parser.get_token()
                 if token != '%':
                     wanted = '%'
-                    msg = _('Expected "%(wanted)s" after "%(key)s", got "%(token)s"', formatted=False) % {
+                    msg = _('Expected "%(wanted)s" after "%(key)s", got "%(token)s"') % {
                         'wanted': wanted, 'key': key, 'token': token}
                 else:
                     try:
                         dummy = int(key)
                     except ValueError:
-                        msg = _('Expected an integer "%(key)s" before "%(token)s"', formatted=False) % {
+                        msg = _('Expected an integer "%(key)s" before "%(token)s"') % {
                             'key': key, 'token': token}
                     else:
                         found = True
@@ -1068,7 +1068,7 @@ class Parser:
                 try:
                     dummy = int(arg)
                 except ValueError:
-                    msg = _('Expected an integer "%(arg)s" after "%(key)s"', formatted=False) % {
+                    msg = _('Expected an integer "%(arg)s" after "%(key)s"') % {
                         'arg': arg, 'key': key}
                 else:
                     found = True
@@ -1078,7 +1078,7 @@ class Parser:
                 try:
                     dummy = int(arg)
                 except ValueError:
-                    msg = _('Expected an integer "%(arg)s" after "%(key)s"', formatted=False) % {
+                    msg = _('Expected an integer "%(arg)s" after "%(key)s"') % {
                         'arg': arg, 'key': key}
                 else:
                     found = True
@@ -1105,7 +1105,7 @@ class Parser:
                         raise ValueError
                     dummy = int(arg, 16)
                 except ValueError:
-                    msg = _('Expected a color value "%(arg)s" after "%(key)s"', formatted=False) % {
+                    msg = _('Expected a color value "%(arg)s" after "%(key)s"') % {
                         'arg': arg, 'key': key}
                 else:
                     found = True

@@ -26,14 +26,14 @@ Contact the owner of the wiki, who can enable email.""")
             if not username:
                 raise KeyError
         except KeyError:
-            return _("Please provide a valid email address!", formatted=False)
+            return _("Please provide a valid email address!")
 
         u = user.User(self.request, user.getUserId(self.request, username))
         if u.valid:
             is_ok, msg = u.mailAccountData()
             if not is_ok:
                 return wikiutil.escape(msg)
-        return _("If an account with this username exists, an email was sent.", formatted=False)
+        return _("If an account with this username exists, an email was sent.")
 
     u = user.get_by_email_address(request, email)
     if u:
@@ -100,7 +100,7 @@ Contact the owner of the wiki, who can enable email."""))
 If you have forgotten your password, provide your email address and click on '''Mail me my account data'''.
 <<BR>>
 The email you get contains the encrypted password (so even if someone intercepts the mail, he won't know your REAL password). Just copy and paste it into the login mask into the password field and log in.
-After logging in you should change your password."""))
+After logging in you should change your password.""", wiki=True))
 
         request.write(request.formatter.endContent())
 
