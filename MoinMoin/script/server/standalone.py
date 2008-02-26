@@ -61,12 +61,12 @@ class PluginScript(MoinScript):
             "--pidfile", dest="pidfile",
             help="Set file to store pid of moin daemon in. Default: moin.pid"
         )
-    
+
     def mainloop(self):
         # we don't expect non-option arguments
         if self.args:
             self.parser.error("incorrect number of arguments")
-        
+
         thread_choices = ["ThreadPool", "Threading", "Forking", "Simple"]
         serverClass = "ThreadPool"
         if self.options.serverClass:
@@ -77,11 +77,11 @@ class PluginScript(MoinScript):
             except ValueError:
                 self.parser.error("invalid serverClass type")
             serverClass = thread_choices[serverClass_index]
-       
+
         pidfile = "moin.pid"
         if self.options.pidfile:
             pidfile = self.options.pidfile
-        
+
         if self.options.stop:
             try:
                 pids = open(pidfile, "r").read()
@@ -100,7 +100,7 @@ class PluginScript(MoinScript):
                 from wikiserverconfig import Config
             except ImportError:
                 Config = DefaultConfig
-            
+
             if self.options.docs:
                 Config.docs = self.options.docs
             if self.options.user:
@@ -114,7 +114,7 @@ class PluginScript(MoinScript):
                 Config.threadLimit = self.options.threadLimit
             if self.options.requestQueueSize:
                 Config.requestQueueSize = self.options.requestQueueSize
-            
+
             if self.options.start:
                 daemon = Daemon('moin', run, Config)
                 daemon.pidfile = pidfile

@@ -1,7 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 """
 MoinMoin - do global changes to all pages in a wiki.
-  
+
 @copyright: 2004-2006 MoinMoin:ThomasWaldmann
 @license: GNU GPL, see COPYING for details.
 """
