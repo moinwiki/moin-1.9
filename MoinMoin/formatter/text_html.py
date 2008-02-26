@@ -626,7 +626,7 @@ class Formatter(FormatterBase):
                 css = 'attachment'
             else:
                 target = AttachFile.getAttachUploadUrl(pagename, fname, self.request)
-                title = _('Upload new attachment "%(filename)s"', formatted=False) % {'filename': wikiutil.escape(fname)}
+                title = _('Upload new attachment "%(filename)s"') % {'filename': wikiutil.escape(fname)}
                 css = 'attachment nonexistent'
             return self.url(on, target, css=css, title=title)
         else:
@@ -640,7 +640,7 @@ class Formatter(FormatterBase):
         if exists:
             kw['css'] = 'attachment'
             kw['src'] = AttachFile.getAttachUrl(pagename, filename, self.request, addts=1)
-            title = _('Inlined image: %(url)s', formatted=False) % {'url': self.text(url)}
+            title = _('Inlined image: %(url)s') % {'url': self.text(url)}
             if not 'title' in kw:
                 kw['title'] = title
             # alt is required for images:
@@ -648,7 +648,7 @@ class Formatter(FormatterBase):
                 kw['alt'] = kw['title']
             return self.image(**kw)
         else:
-            title = _('Upload new attachment "%(filename)s"', formatted=False) % {
+            title = _('Upload new attachment "%(filename)s"') % {
                       'filename': wikiutil.escape(fname)}
             img = self.icon('attachimg')
             css = 'nonexistent'
@@ -679,7 +679,7 @@ class Formatter(FormatterBase):
 
         # check whether attachment exists, possibly point to upload form
         if not exists:
-            linktext = _('Create new drawing "%(filename)s (opens in new window)"', formatted=False)
+            linktext = _('Create new drawing "%(filename)s (opens in new window)"')
             return wikiutil.link_tag(
                 self.request,
                 ('%s?action=AttachFile&rename=%s%s' %
@@ -710,18 +710,18 @@ class Formatter(FormatterBase):
                 # add alt and title tags to areas
                 map = re.sub('href\s*=\s*"((?!%TWIKIDRAW%).+?)"', r'href="\1" alt="\1" title="\1"', map)
                 # add in edit links plus alt and title attributes
-                alt = title = _('Edit drawing %(filename)s (opens in new window)', formatted=False) % {'filename': self.text(fname)}
+                alt = title = _('Edit drawing %(filename)s (opens in new window)') % {'filename': self.text(fname)}
                 map = map.replace('%TWIKIDRAW%"', '%s" alt="%s" title="%s"' % (edit_link, alt, title))
                 # unxml, because 4.01 concrete will not validate />
                 map = map.replace('/>', '>')
-                alt = title = _('Clickable drawing: %(filename)s', formatted=False) % {'filename': self.text(fname)}
+                alt = title = _('Clickable drawing: %(filename)s') % {'filename': self.text(fname)}
                 return (map + self.image(
                     alt=alt,
                     title=title,
                     src=AttachFile.getAttachUrl(pagename, filename, self.request, addts=1),
                     usemap='#'+mapid, css="drawing"))
         else:
-            alt = title = _('Edit drawing %(filename)s (opens in new window)', formatted=False) % {'filename': self.text(fname)}
+            alt = title = _('Edit drawing %(filename)s (opens in new window)') % {'filename': self.text(fname)}
             return wikiutil.link_tag(self.request,
                                      edit_link,
                                      self.image(alt=alt,

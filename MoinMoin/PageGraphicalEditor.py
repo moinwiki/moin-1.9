@@ -195,7 +195,7 @@ Please review the page and save then. Do not save this page as it is!""")
                     loadable_draft = True
                     page_rev = rev
                     draft_timestamp_str = request.user.getFormattedDateTime(draft_timestamp)
-                    draft_message = _(u"'''<<BR>>Your draft based on revision %(draft_rev)d (saved %(draft_timestamp_str)s) can be loaded instead of the current revision %(page_rev)d by using the load draft button - in case you lost your last edit somehow without saving it.''' A draft gets saved for you when you do a preview, cancel an edit or unsuccessfully save.") % locals()
+                    draft_message = _(u"'''<<BR>>Your draft based on revision %(draft_rev)d (saved %(draft_timestamp_str)s) can be loaded instead of the current revision %(page_rev)d by using the load draft button - in case you lost your last edit somehow without saving it.''' A draft gets saved for you when you do a preview, cancel an edit or unsuccessfully save.", wiki=True, percent=True) % locals()
 
         # Setup status message
         status = [kw.get('msg', ''), conflict_msg, edit_lock_message, draft_message]
@@ -263,7 +263,7 @@ Please review the page and save then. Do not save this page as it is!""")
         if self.cfg.page_license_enabled:
             request.write('<p><em>', _(
 """By hitting '''%(save_button_text)s''' you put your changes under the %(license_link)s.
-If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.""") % {
+If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.""", wiki=True, percent=True) % {
                 'save_button_text': save_button_text,
                 'cancel_button_text': cancel_button_text,
                 'license_link': wikiutil.getLocalizedPage(request, self.cfg.page_license_page).link_to(request),
@@ -302,7 +302,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 <label for="chktrivial">%(label)s</label>
 ''' % {
           'checked': ('', 'checked')[form.get('trivial', ['0'])[0] == '1'],
-          'label': _("Trivial change", formatted=False),
+          'label': _("Trivial change"),
        })
 
         from MoinMoin.security.textcha import TextCha

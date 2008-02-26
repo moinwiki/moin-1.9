@@ -1045,7 +1045,7 @@ Login Name: %s
 Login Password: %s
 
 Login URL: %s/%s?action=login
-""", formatted=False) % (
+""") % (
                         self.name, self.enc_password, self._request.getBaseURL(), getLocalizedPage(self._request, 'UserPreferences').page_name)
 
         text = _("""\
@@ -1056,11 +1056,11 @@ password AS SHOWN into the wiki's password form field (use copy and paste
 for that).
 
 After successfully logging in, it is of course a good idea to set a new and known password.
-""", formatted=False) + text
+""") + text
 
 
         subject = _('[%(sitename)s] Your wiki account data',
-                    formatted=False) % {'sitename': self._cfg.sitename or "Wiki"}
+                ) % {'sitename': self._cfg.sitename or "Wiki"}
         mailok, msg = sendmail.sendmail(self._request, [self.email], subject,
                                     text, mail_from=self._cfg.mail_from)
         return mailok, msg

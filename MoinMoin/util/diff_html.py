@@ -38,7 +38,7 @@ def diff(request, old, new):
 
     if len(seq1) == len(seq2) and linematch[0] == (0, 0, len(seq1)):
         # No differences.
-        return " - " + _("No differences found!", formatted=False)
+        return " - " + _("No differences found!")
 
     lastmatch = (0, 0)
 

@@ -193,14 +193,14 @@ class Theme(ThemeBase):
                 #title = Page(request, action).split_title(force=1)
                 title = action
                 # Use translated version if available
-                title = _(title, formatted=False)
+                title = _(title)
                 querystr = {'action': action}
                 if rev:
                     querystr['rev'] = str(rev)
                 link = page.link_to(request, text=title, querystr=querystr, rel='nofollow')
                 html.append(link)
 
-        title = _("DeleteCache", formatted=False)
+        title = _("DeleteCache")
         link = page.link_to(request, text=title, querystr={'action': 'refresh'}, rel='nofollow')
 
         cache = caching.CacheEntry(request, page, page.getFormatterName(), scope='item')

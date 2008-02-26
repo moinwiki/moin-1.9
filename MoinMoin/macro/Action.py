@@ -33,7 +33,7 @@ def macro_Action(macro, action=u'show', text=None, _kwargs=None):
     if not _kwargs:
         _kwargs = {}
 
-    text = _(text, formatted=False)
+    text = _(text)
     if action in _get_valid_actions(macro):
         page = macro.formatter.page
         _kwargs['action'] = action

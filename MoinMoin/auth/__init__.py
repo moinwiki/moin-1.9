@@ -238,6 +238,6 @@ class MoinLogin(BaseAuth):
         userprefslink = request.page.url(request, querystr={'action': 'newaccount'})
         sendmypasswordlink = request.page.url(request, querystr={'action': 'recoverpass'})
         return _('If you do not have an account, <a href="%(userprefslink)s">you can create one now</a>. '
-                 '<a href="%(sendmypasswordlink)s">Forgot your password?</a>', formatted=False) % {
+                 '<a href="%(sendmypasswordlink)s">Forgot your password?</a>') % {
                'userprefslink': userprefslink,
                'sendmypasswordlink': sendmypasswordlink}
