@@ -60,6 +60,12 @@ Version 1.7.current:
   Developer notes (these should be moved to the end in the release):
     * changed formatter.attachment_link call (it is now more flexible,
       because you can render the stuff between link start and link end yourself)
+    * getText's (aka _()) 'formatted' keyword param (default: True in 1.6 and
+      early 1.7) was renamed/changed: it is now called 'wiki' and defaults to
+      False. Example calls:
+      _('This will NOT get parsed/formatted by MoinMoin!')
+      _('This will be parsed/formatted by MoinMoin!', wiki=True)
+      _('This will be used as a left side of percent operator. %s', percent=True)
 
   New Features:
     * new powerful and flexible logging, please see wiki/config/logging/.
