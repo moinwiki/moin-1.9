@@ -88,21 +88,21 @@ class EmbedObject:
         _ = self._
 
         if not mt:
-            return _("Not supported mimetype of file: %s", formatted=False) % self.target
+            return _("Not supported mimetype of file: %s") % self.target
 
         mime_type = "%s/%s" % (mt.major, mt.minor, )
         dangerous = mime_type in self.request.cfg.mimetypes_xss_protect
 
         if not mime_type in self.request.cfg.mimetypes_embed or dangerous:
             kw = {'src': url}
-            return "%s: %s%s%s" % (self.macro.formatter.text(_('Embedding of object by chosen formatter not possible', formatted=False)),
+            return "%s: %s%s%s" % (self.macro.formatter.text(_('Embedding of object by chosen formatter not possible')),
                                self.macro.formatter.url(1, kw['src']),
                                self.macro.formatter.text(self.target),
                                self.macro.formatter.url(0))
 
         if self.alt == "":
             self.alt = "%(text)s %(mime_type)s" % {
-                           'text': _("Embedded", formatted=False),
+                           'text': _("Embedded"),
                            'mime_type': mime_type,
                         }
 
@@ -211,14 +211,14 @@ class EmbedObject:
         _ = self._
 
         if not self.target:
-            msg = _('Not enough arguments given to EmbedObject macro! Try <<EmbedObject(attachment [,width=width] [,height=height] [,alt=alternate Text])>>', formatted=False)
+            msg = _('Not enough arguments given to EmbedObject macro! Try <<EmbedObject(attachment [,width=width] [,height=height] [,alt=alternate Text])>>')
             return "%s%s%s" % (self.formatter.sysmsg(1), self.formatter.text(msg), self.formatter.sysmsg(0))
 
         if not self._is_URL(self.target):
             pagename, fname = AttachFile.absoluteName(self.target, self.formatter.page.page_name)
 
             if not AttachFile.exists(self.request, pagename, fname):
-                linktext = _('Upload new attachment "%(filename)s"', formatted=False)
+                linktext = _('Upload new attachment "%(filename)s"')
                 return wikiutil.link_tag(self.request, ('%s?action=AttachFile&rename=%s' % (
                                                          wikiutil.quoteWikinameURL(pagename),
                                                          wikiutil.url_quote_plus(fname))),
@@ -229,7 +229,7 @@ class EmbedObject:
             mt = wikiutil.MimeType(filename=fname)
         else:
             if not self.url_mimetype:
-                return _('Not enough arguments given to EmbedObject macro! Try <<EmbedObject(url, url_mimetype [,width=width] [,height=height] [,alt=alternate Text])>>', formatted=False)
+                return _('Not enough arguments given to EmbedObject macro! Try <<EmbedObject(url, url_mimetype [,width=width] [,height=height] [,alt=alternate Text])>>')
             else:
                 mt = wikiutil.MimeType() # initialize dict
                 mt.major, mt.minor = self.url_mimetype.split('/')

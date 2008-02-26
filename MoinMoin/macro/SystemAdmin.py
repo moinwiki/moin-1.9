@@ -22,8 +22,8 @@ def execute(macro, args):
         return ''
 
     _MENU = {
-        'attachments': (("File attachment browser"), do_admin_browser),
-        'users': (("User account browser"), do_user_browser),
+        'attachments': (_("File attachment browser"), do_admin_browser),
+        'users': (_("User account browser"), do_user_browser),
     }
     choice = request.form.get('sysadm', [None])[0]
 

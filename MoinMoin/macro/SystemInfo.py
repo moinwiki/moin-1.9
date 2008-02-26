@@ -161,13 +161,13 @@ class SystemInfo:
                 stems = Stemmer.algorithms()
                 stemVersion = Stemmer.version()
             except:
-                stemVersion = _('!PyStemmer not installed')
+                stemVersion = _('PyStemmer not installed')
         except ImportError:
-            stemVersion = _('!PyStemmer not installed')
+            stemVersion = _('PyStemmer not installed')
 
         row(_('Stemming for Xapian'), xapState[request.cfg.xapian_stemming])
-        row(_('!PyStemmer Version'), stemVersion)
-        row(_('!PyStemmer stems'), ', '.join(stems) or nonestr)
+        row(_('PyStemmer Version'), stemVersion)
+        row(_('PyStemmer stems'), ', '.join(stems) or nonestr)
 
         try:
             from threading import activeCount

@@ -166,7 +166,7 @@ class Macro:
 
         # With whitespace argument, return same error message as FullSearch
         if not needle.strip():
-            err = _('Please use a more selective search term instead of {{{"%s"}}}') % needle
+            err = _('Please use a more selective search term instead of {{{"%s"}}}', wiki=True) % needle
             return '<span class="error">%s</span>' % err
 
         # Return a title search for needle, sorted by name.

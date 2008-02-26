@@ -87,7 +87,7 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
     if msgtype == "page_changed":
         changes['text'] = _("Dear Wiki user,\n\n"
         'You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.\n\n'
-        'The "%(pagename)s" page has been changed by %(editor)s:\n\n', formatted=False) % {
+        'The "%(pagename)s" page has been changed by %(editor)s:\n\n') % {
             'pagename': page.page_name,
             'editor': page.uid_override or user.getUserIdentification(request),
             'sitename': page.cfg.sitename or request.getBaseURL(),
@@ -95,19 +95,19 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
 
         # append a diff (or append full page text if there is no diff)
         if len(revisions) < 2:
-            changes['diff'] = _("New page:\n", formatted=False) + page.get_raw_body()
+            changes['diff'] = _("New page:\n") + page.get_raw_body()
         else:
             lines = wikiutil.pagediff(request, page.page_name, revisions[1],
                                       page.page_name, revisions[0])
             if lines:
                 changes['diff'] = '\n'.join(lines)
             else:
-                changes['diff'] = _("No differences found!\n", formatted=False)
+                changes['diff'] = _("No differences found!\n")
 
     elif msgtype == "page_deleted":
         changes['text'] = _("Dear wiki user,\n\n"
             'You have subscribed to a wiki page "%(sitename)s" for change notification.\n\n'
-            'The page "%(pagename)s" has been deleted by %(editor)s:\n\n', formatted=False) % {
+            'The page "%(pagename)s" has been deleted by %(editor)s:\n\n') % {
                 'pagename': page.page_name,
                 'editor': page.uid_override or user.getUserIdentification(request),
                 'sitename': page.cfg.sitename or request.getBaseURL(),
@@ -116,8 +116,7 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
     elif msgtype == "page_renamed":
         changes['text'] = _("Dear wiki user,\n\n"
             'You have subscribed to a wiki page "%(sitename)s" for change notification.\n\n'
-            'The page "%(pagename)s" has been renamed from "%(oldname)s" by %(editor)s:\n',
-            formatted=False) % {
+            'The page "%(pagename)s" has been renamed from "%(oldname)s" by %(editor)s:\n') % {
                 'editor': page.uid_override or user.getUserIdentification(request),
                 'pagename': page.page_name,
                 'sitename': page.cfg.sitename or request.getBaseURL(),
@@ -145,7 +144,7 @@ def user_created_message(request, sitename, username, email):
     body = _("""Dear Superuser, a new user has just been created. Details follow:
 
     User name: %(username)s
-    Email address: %(useremail)s""", formatted=False) % {
+    Email address: %(useremail)s""") % {
          'username': username,
          'useremail': email,
          }

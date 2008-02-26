@@ -92,7 +92,7 @@ username and leave the password field blank.""")))
                                                     {'oidstage': '1'})
         info = oidconsumer.complete(query, return_to=return_to)
         if info.status == consumer.FAILURE:
-            return CancelLogin(_('OpenID error: %s.') % info.message)
+            return CancelLogin(_('OpenID error: %s.') % info.message, percent=True)
         elif info.status == consumer.CANCEL:
             return CancelLogin(_('Verification canceled.'))
         elif info.status == consumer.SUCCESS:

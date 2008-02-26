@@ -97,7 +97,7 @@ def advanced_ui(macro):
     # category selection
     categories = form_get(request, 'categories')
     c_select = makeSelection('categories',
-            [('', _('any category', formatted=False))] +
+            [('', _('any category'))] +
             [(cat, '%s' % cat) for cat in getCategories(request)],
             categories, 3, True)
 
@@ -107,14 +107,14 @@ def advanced_ui(macro):
         for lang, lmeta in languages.items()])
     userlang = macro.request.lang
     lang_select = makeSelection('language',
-            [('', _('any language', formatted=False)),
+            [('', _('any language')),
             (userlang, langs[userlang])] + sorted(langs.items(), key=lambda i: i[1]),
             searchedlang, 3, True)
 
     # mimetype selection
     mimetype = form_get(request, 'mimetype')
     mt_select = makeSelection('mimetype',
-            [('', _('any mimetype', formatted=False))] +
+            [('', _('any mimetype'))] +
             [(type, 'all %s files' % type) for type in getMimetypes()] +
             [(m[1], '*%s - %s' % m) for m in sorted(mimetypes.types_map.items())],
             mimetype, 3, True)

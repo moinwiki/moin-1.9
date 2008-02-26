@@ -97,7 +97,7 @@ def execute(macro, needle):
     # TODO: search should implement those errors message for clients
     elif needle.isspace():
         err = _('Please use a more selective search term instead of '
-                '{{{"%s"}}}') % needle
+                '{{{"%s"}}}', wiki=True) % needle
         return '<span class="error">%s</span>' % err
 
     needle = needle.strip()
