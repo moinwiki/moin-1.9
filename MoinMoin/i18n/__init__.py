@@ -239,8 +239,8 @@ def getText(original, request, lang, **kw):
     @param original: the original (english) text
     @param request: the request object
     @lang: the target language for the translation
-    @keyword formatted: True to use the wiki parser/formatter on the translation result,
-                        False to return the translation result "as is"
+    @keyword wiki: True to use the wiki parser/formatter on the translation result,
+                   False to return the translation result "as is"
     @keyword percent: True if we need special escaping because we use the translation
                       result as the left side of a % operator: e.g. % chars need to
                       become %% for that usage. This will only escape generated % chars,
@@ -249,8 +249,8 @@ def getText(original, request, lang, **kw):
                       Only specify this option for formatted==True, it doesn't do
                       anything for formatted==False.
     """
-    formatted = kw.get('formatted', True) # TODO: change to False, review all _() calls
-    percent = kw.get('percent', False) # TODO: review all _() calls
+    formatted = kw.get('wiki', False) # 1.6 and early 1.7 (until 2/2008) used 'formatted' with True as default!
+    percent = kw.get('percent', False)
     if original == u"":
         return u"" # we don't want to get *.po files metadata!
 
