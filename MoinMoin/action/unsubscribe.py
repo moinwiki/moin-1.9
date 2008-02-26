@@ -17,14 +17,14 @@ def execute(pagename, request):
     if request.user.isSubscribedTo([pagename]):
         # Try to unsubscribe
         if request.user.unsubscribe(pagename):
-            msg = _('Your subscription to this page has been removed.', formatted=False)
+            msg = _('Your subscription to this page has been removed.')
         else:
-            msg = _("Can't remove regular expression subscription!", formatted=False) + u' ' + \
+            msg = _("Can't remove regular expression subscription!") + u' ' + \
                   _("Edit the subscription regular expressions in your "
-                    "UserPreferences.", formatted=True)
+                    "UserPreferences.", wiki=True)
     else:
         # The user is not subscribed
-        msg = _('You need to be subscribed to unsubscribe.', formatted=False)
+        msg = _('You need to be subscribed to unsubscribe.')
 
     Page(request, pagename).send_page(msg=msg)
 

@@ -130,12 +130,12 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
             # show info
             if mtime_parsed:
                 # XXX mtime_msg is not shown in some cases
-                mtime_msg = _("(!) Only pages changed since '''%s''' are being "
-                        "displayed!") % request.user.getFormattedDateTime(mtime)
+                mtime_msg = _("(!) Only pages changed since '''%s''' are being displayed!",
+                              wiki=True) % request.user.getFormattedDateTime(mtime)
             else:
                 mtime_msg = _('/!\\ The modification date you entered was not '
                         'recognized and is therefore not considered for the '
-                        'search results!')
+                        'search results!', wiki=True)
         else:
             mtime_msg = None
 
@@ -162,7 +162,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
     stripped = needle.strip()
     if len(stripped) == 0:
         request.theme.add_msg(_('Please use a more selective search term instead '
-                'of {{{"%s"}}}') % wikiutil.escape(needle), "error")
+                'of {{{"%s"}}}', wiki=True) % wikiutil.escape(needle), "error")
         Page(request, pagename).send_page()
         return
     needle = stripped
@@ -186,7 +186,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
         results = searchPages(request, query, sort, mtime, historysearch)
     except ValueError: # catch errors in the search query
         request.theme.add_msg(_('Your search query {{{"%s"}}} is invalid. Please refer to '
-                'HelpOnSearching for more information.') % wikiutil.escape(needle), "error")
+                'HelpOnSearching for more information.', wiki=True) % wikiutil.escape(needle), "error")
         Page(request, pagename).send_page()
         return
 
@@ -212,10 +212,10 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
 
         request.theme.add_msg(_('Your search query {{{"%s"}}} didn\'t return any results. '
                 'Please change some terms and refer to HelpOnSearching for '
-                'more information.%s', formatted=True, percent=True) % (wikiutil.escape(needle),
+                'more information.%s', wiki=True, percent=True) % (wikiutil.escape(needle),
                     titlesearch and ''.join([
                         '<br>',
-                        _('(!) Consider performing a'), ' ',
+                        _('(!) Consider performing a', wiki=True), ' ',
                         f.url(1, href=request.page.url(request, querydict,
                             escape=0, relative=False)),
                         _('full-text search with your search terms'),
@@ -245,7 +245,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
 
         hints.append(''.join([
             _("(!) You're performing a title search that might not include"
-                ' all related results of your search query in this wiki. <<BR>>'),
+                ' all related results of your search query in this wiki. <<BR>>', wiki=True),
             ' ',
             f.url(1, href=request.page.url(request, querydict, escape=0,
                 relative=False)),

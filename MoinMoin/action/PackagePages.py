@@ -55,7 +55,7 @@ class PackagePages:
                 self.request.theme.add_msg(_('You are not allowed to edit this page.'), "error")
                 raise ActionError
             elif not self.page.exists():
-                self.request.theme.add_msg(_('This page is already deleted or was never created!', formatted=False))
+                self.request.theme.add_msg(_('This page is already deleted or was never created!'))
                 raise ActionError
 
             self.package()
@@ -193,7 +193,7 @@ class PackagePages:
                 if page.exists() and self.request.user.may.read(pagename):
                     pages.append(page)
         if not pages:
-            return (_('No pages like "%s"!', formatted=False) % wikiutil.escape(pagelist))
+            return (_('No pages like "%s"!') % wikiutil.escape(pagelist))
 
         # Set zipfile output
         zf = zipfile.ZipFile(fileobject, "w", COMPRESSION_LEVEL)

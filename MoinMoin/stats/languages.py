@@ -54,14 +54,14 @@ def used_languages(request):
 
 
     languages = TupleDataset()
-    languages.columns = [Column('language', label=_("Language", formatted=False), align='left'),
+    languages.columns = [Column('language', label=_("Language"), align='left'),
                          Column('value', label='%', align='right')]
 
     cnt_printed = 0
     data = data[:10]
 
     # Preparing "<Browser setting>"
-    browserlang = _('<Browser setting>', formatted=False)
+    browserlang = _('<Browser setting>')
     browserlang = browserlang[1:len(browserlang) - 1].capitalize()
     if total:
         for cnt, lang in data:
@@ -79,7 +79,7 @@ def used_languages(request):
             except UnicodeError:
                 pass
         if total > cnt_printed:
-            languages.addRow((_('Others', formatted=False), "%(percent).2f%% (%(count)d)" % {
+            languages.addRow((_('Others'), "%(percent).2f%% (%(count)d)" % {
                 'percent': 100.0 * (total - cnt_printed) / total,
                 'count': total - cnt_printed}))
 

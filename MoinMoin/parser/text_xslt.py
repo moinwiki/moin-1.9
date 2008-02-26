@@ -45,7 +45,7 @@ class Parser:
             # can be activated in wikiconfig.py
             from MoinMoin.parser.text import Parser as TextParser
             self.request.write(formatter.sysmsg(1) +
-                               formatter.rawHTML(_('XSLT option disabled, please look at HelpOnConfiguration.')) +
+                               formatter.rawHTML(_('XSLT option disabled, please look at HelpOnConfiguration.', wiki=True)) +
                                formatter.sysmsg(0))
             TextParser(self.raw, self.request).format(formatter)
             return

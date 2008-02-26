@@ -113,7 +113,7 @@ def text(pagename, request):
             except UnicodeError:
                 pass
         if total > cnt_printed:
-            agents.addRow((_('Others', formatted=False), "%.2f" % (100 * (total - cnt_printed) / total)))
+            agents.addRow((_('Others'), "%.2f" % (100 * (total - cnt_printed) / total)))
 
     table = DataBrowserWidget(request)
     table.setData(agents)

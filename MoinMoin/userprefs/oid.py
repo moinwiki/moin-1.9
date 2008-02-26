@@ -29,7 +29,7 @@ class Settings(UserPrefBase):
         self._ = request.getText
         self.cfg = request.cfg
         _ = self._
-        self.title = _("OpenID settings", formatted=False)
+        self.title = _("OpenID settings")
         openid_auth = False
         if not _openid_disabled:
             for authm in self.request.cfg.auth:

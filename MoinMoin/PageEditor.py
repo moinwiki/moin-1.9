@@ -305,7 +305,7 @@ Please review the page and save then. Do not save this page as it is!""")
                     loadable_draft = True
                     page_rev = rev
                     draft_timestamp_str = request.user.getFormattedDateTime(draft_timestamp)
-                    draft_message = _(u"'''<<BR>>Your draft based on revision %(draft_rev)d (saved %(draft_timestamp_str)s) can be loaded instead of the current revision %(page_rev)d by using the load draft button - in case you lost your last edit somehow without saving it.''' A draft gets saved for you when you do a preview, cancel an edit or unsuccessfully save.") % locals()
+                    draft_message = _(u"'''<<BR>>Your draft based on revision %(draft_rev)d (saved %(draft_timestamp_str)s) can be loaded instead of the current revision %(page_rev)d by using the load draft button - in case you lost your last edit somehow without saving it.''' A draft gets saved for you when you do a preview, cancel an edit or unsuccessfully save.", wiki=True) % locals()
 
         # Setup status message
         status = [kw.get('msg', ''), conflict_msg, edit_lock_message, draft_message]
@@ -369,7 +369,7 @@ Please review the page and save then. Do not save this page as it is!""")
         if self.cfg.page_license_enabled:
             request.write('<p><em>', _(
 """By hitting '''%(save_button_text)s''' you put your changes under the %(license_link)s.
-If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.""") % {
+If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.""", wiki=True) % {
                 'save_button_text': save_button_text,
                 'cancel_button_text': cancel_button_text,
                      'license_link': wikiutil.getLocalizedPage(request, self.cfg.page_license_page).link_to(request),
@@ -416,7 +416,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
     //-->
 </script> ''' % {
                 'checked': ('', 'checked')[form.get('trivial', ['0'])[0] == '1'],
-                'label': _("Trivial change", formatted=False),
+                'label': _("Trivial change"),
             })
 
         from MoinMoin.security.textcha import TextCha
@@ -451,7 +451,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         cat_pages = request.rootpage.getPageList(filter=filterfn)
         cat_pages.sort()
         cat_pages = [wikiutil.pagelinkmarkup(p) for p in cat_pages]
-        cat_pages.insert(0, ('', _('<No addition>', formatted=False)))
+        cat_pages.insert(0, ('', _('<No addition>')))
         request.write("<p>")
         request.write(_('Add to: %(category)s') % {
             'category': unicode(web.makeSelection('category', cat_pages)),
@@ -494,7 +494,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         quickhelp = request.cfg.editor_quickhelp.get(markup, "")
         if quickhelp:
             request.write(request.formatter.div(1, id="editor-help"))
-            request.write(_(quickhelp))
+            request.write(_(quickhelp, wiki=True))
             request.write(request.formatter.div(0))
 
         if preview is not None:
@@ -522,7 +522,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 
         backto = request.form.get('backto', [None])[0]
         page = backto and Page(request, backto) or self
-        request.theme.add_msg(_('Edit was cancelled.', formatted=False), "error")
+        request.theme.add_msg(_('Edit was cancelled.'), "error")
         page.send_page()
 
     def copyPage(self, newpagename, comment=None):
@@ -545,7 +545,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 
         pageexists_error = _("""'''A page with the name {{{'%s'}}} already exists.'''
 
-Try a different name.""") % (wikiutil.escape(newpagename), )
+Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
 
         # Check whether a page with the new name already exists
         if newpage.exists(includeDeleted=1):
@@ -603,7 +603,7 @@ Try a different name.""") % (wikiutil.escape(newpagename), )
 
         pageexists_error = _("""'''A page with the name {{{'%s'}}} already exists.'''
 
-Try a different name.""") % (wikiutil.escape(newpagename), )
+Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
 
         # Check whether a page with the new name already exists
         if newpage.exists(includeDeleted=1):
@@ -1230,12 +1230,12 @@ class PageLock:
 
             if self.locktype == 'lock':
                 msg.append(_(
-                    "Other users will be ''blocked'' from editing this page until %(bumptime)s."
-                    ) % {'bumptime': bumptime})
+                    "Other users will be ''blocked'' from editing this page until %(bumptime)s.",
+                    wiki=True) % {'bumptime': bumptime})
             else:
                 msg.append(_(
-                    "Other users will be ''warned'' until %(bumptime)s that you are editing this page."
-                    ) % {'bumptime': bumptime})
+                    "Other users will be ''warned'' until %(bumptime)s that you are editing this page.",
+                    wiki=True) % {'bumptime': bumptime})
             msg.append(_(
                 "Use the Preview button to extend the locking period."
                 ))
@@ -1246,8 +1246,8 @@ class PageLock:
                 # lout out user
                 result = 0, _(
                     "This page is currently ''locked'' for editing by %(owner)s until %(timestamp)s,"
-                    " i.e. for %(mins_valid)d minute(s)."
-                    ) % {'owner': owner, 'timestamp': timestamp, 'mins_valid': mins_valid}
+                    " i.e. for %(mins_valid)d minute(s).",
+                    wiki=True) % {'owner': owner, 'timestamp': timestamp, 'mins_valid': mins_valid}
             else:
                 # warn user about existing lock
 
@@ -1255,7 +1255,7 @@ class PageLock:
 """This page was opened for editing or last previewed at %(timestamp)s by %(owner)s.<<BR>>
 '''You should ''refrain from editing'' this page for at least another %(mins_valid)d minute(s),
 to avoid editing conflicts.'''<<BR>>
-To leave the editor, press the Cancel button.""") % {
+To leave the editor, press the Cancel button.""", wiki=True) % {
                     'timestamp': timestamp, 'owner': owner, 'mins_valid': mins_valid}
 
         return result

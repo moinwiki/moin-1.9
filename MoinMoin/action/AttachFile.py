@@ -193,7 +193,7 @@ def info(pagename, request):
         files = os.listdir(attach_dir)
     page = Page(request, pagename)
     link = page.url(request, {'action': 'AttachFile'})
-    attach_info = _('There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.', formatted=False) % {
+    attach_info = _('There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.') % {
         'count': len(files),
         'link': wikiutil.escape(link)
         }
@@ -309,7 +309,8 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
                 "To refer to attachments on a page, use '''{{{[[attachment:filename]]}}}''', \n"
                 "as shown below in the list of files. \n"
                 "Do '''NOT''' use the URL of the {{{[get]}}} link, \n"
-                "since this is subject to change and can break easily."
+                "since this is subject to change and can break easily.",
+                wiki=True
             )
         html += "<ul>"
 
@@ -595,7 +596,7 @@ def execute(pagename, request):
         # Currently we only check TextCha for upload (this is what spammers ususally do),
         # but it could be extended to more/all attachment write access
         if not TextCha(request).check_answer_from_form():
-            msg = _('TextCha: Wrong answer! Go back and try again...', formatted=False)
+            msg = _('TextCha: Wrong answer! Go back and try again...')
         else:
             overwrite = 0
             if 'overwrite' in request.form:
@@ -1097,7 +1098,7 @@ def view_file(pagename, request):
     request.emit_http_headers()
     # Use user interface language for this generated page
     request.setContentLanguage(request.lang)
-    title = _('attachment:%(filename)s of %(pagename)s', formatted=True) % {
+    title = _('attachment:%(filename)s of %(pagename)s') % {
         'filename': filename, 'pagename': pagename}
     request.theme.send_title(title, pagename=pagename)
 
