@@ -2,16 +2,18 @@
 """
     MoinMoin - xapian search engine
 
-    @copyright: 2006 MoinMoin:ThomasWaldmann,
+    @copyright: 2006-2008 MoinMoin:ThomasWaldmann,
                 2006 MoinMoin:FranzPletz
     @license: GNU GPL, see COPYING for details.
 """
-debug = True
 
 import os, re
 
 import xapian
 from xapian import Query
+
+from MoinMoin import log
+logging = log.getLogger(__name__)
 
 from MoinMoin.support.xapwrap import document as xapdoc
 from MoinMoin.support.xapwrap import index as xapidx
@@ -346,13 +348,13 @@ class Index(BaseIndex):
                     uid = doc['uid']
                     docmtime = long(doc['values']['mtime'])
                     updated = mtime > docmtime
-                    if debug: request.log("uid %r: mtime %r > docmtime %r == updated %r" % (uid, mtime, docmtime, updated))
+                    logging.debug("uid %r: mtime %r > docmtime %r == updated %r" % (uid, mtime, docmtime, updated))
                 else:
                     uid = None
                     updated = True
             elif mode == 'add':
                 updated = True
-            if debug: request.log("%s %r" % (filename, updated))
+            logging.debug("%s %r" % (filename, updated))
             if updated:
                 xitemid = xapdoc.Keyword('itemid', itemid)
                 mimetype, file_content = self.contentfilter(filename)
@@ -372,11 +374,11 @@ class Index(BaseIndex):
                                      )
                 doc.analyzerFactory = getWikiAnalyzerFactory()
                 if mode == 'update':
-                    if debug: request.log("%s (replace %r)" % (filename, uid))
+                    logging.debug("%s (replace %r)" % (filename, uid))
                     doc.uid = uid
                     id = writer.index(doc)
                 elif mode == 'add':
-                    if debug: request.log("%s (add)" % (filename, ))
+                    logging.debug("%s (add)" % (filename, ))
                     id = writer.index(doc)
         except (OSError, IOError):
             pass
@@ -479,13 +481,13 @@ class Index(BaseIndex):
                 uid = doc['uid']
                 docmtime = long(doc['values']['mtime'])
                 updated = mtime > docmtime
-                if debug: request.log("uid %r: mtime %r > docmtime %r == updated %r" % (uid, mtime, docmtime, updated))
+                logging.debug("uid %r: mtime %r > docmtime %r == updated %r" % (uid, mtime, docmtime, updated))
             else:
                 uid = None
                 updated = True
         elif mode == 'add':
             updated = True
-        if debug: request.log("%s %r" % (pagename, updated))
+        logging.debug("%s %r" % (pagename, updated))
         if updated:
             xwname = xapdoc.SortKey('wikiname', wikiname)
             xpname = xapdoc.SortKey('pagename', pagename)
@@ -516,11 +518,11 @@ class Index(BaseIndex):
                     stem_language)
 
             if mode == 'update':
-                if debug: request.log("%s (replace %r)" % (pagename, uid))
+                logging.debug("%s (replace %r)" % (pagename, uid))
                 doc.uid = uid
                 id = writer.index(doc)
             elif mode == 'add':
-                if debug: request.log("%s (add)" % (pagename, ))
+                logging.debug("%s (add)" % (pagename, ))
                 id = writer.index(doc)
 
         from MoinMoin.action import AttachFile
@@ -533,19 +535,19 @@ class Index(BaseIndex):
             if mode == 'update':
                 query = xapidx.RawQuery(xapdoc.makePairForWrite('itemid', att_itemid))
                 enq, mset, docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', ])
-                if debug: request.log("##%r %r" % (filename, docs))
+                logging.debug("##%r %r" % (filename, docs))
                 if docs:
                     doc = docs[0] # there should be only one
                     uid = doc['uid']
                     docmtime = long(doc['values']['mtime'])
                     updated = mtime > docmtime
-                    if debug: request.log("uid %r: mtime %r > docmtime %r == updated %r" % (uid, mtime, docmtime, updated))
+                    logging.debug("uid %r: mtime %r > docmtime %r == updated %r" % (uid, mtime, docmtime, updated))
                 else:
                     uid = None
                     updated = True
             elif mode == 'add':
                 updated = True
-            if debug: request.log("%s %s %r" % (pagename, att, updated))
+            logging.debug("%s %s %r" % (pagename, att, updated))
             if updated:
                 xatt_itemid = xapdoc.Keyword('itemid', att_itemid)
                 xpname = xapdoc.SortKey('pagename', pagename)
@@ -574,11 +576,11 @@ class Index(BaseIndex):
                 doc.analyzerFactory = getWikiAnalyzerFactory(request,
                         stem_language)
                 if mode == 'update':
-                    if debug: request.log("%s (replace %r)" % (pagename, uid))
+                    logging.debug("%s (replace %r)" % (pagename, uid))
                     doc.uid = uid
                     id = writer.index(doc)
                 elif mode == 'add':
-                    if debug: request.log("%s (add)" % (pagename, ))
+                    logging.debug("%s (add)" % (pagename, ))
                     id = writer.index(doc)
         #writer.flush()
 
@@ -595,7 +597,7 @@ class Index(BaseIndex):
                 'attachment', ])
             for doc in docs:
                 writer.delete_document(doc['uid'])
-                request.log('%s removed from xapian index' %
+                logging.debug('%s removed from xapian index' %
                         doc['values']['pagename'])
         else:
             # Only remove a single attachment
@@ -606,7 +608,7 @@ class Index(BaseIndex):
             if docs:
                 doc = docs[0] # there should be only one
                 writer.delete_document(doc['uid'])
-                request.log('attachment %s from %s removed from index' %
+                logging.debug('attachment %s from %s removed from index' %
                     (doc['values']['attachment'], doc['values']['pagename']))
 
     def _index_pages(self, request, files=None, mode='update'):
@@ -637,7 +639,7 @@ class Index(BaseIndex):
             writer = xapidx.Index(self.dir, True)
             writer.configure(self.prefixMap, self.indexValueMap)
             pages = request.rootpage.getPageList(user='', exists=1)
-            request.log("indexing all (%d) pages..." % len(pages))
+            logging.debug("indexing all (%d) pages..." % len(pages))
             for pagename in pages:
                 p = Page(request, pagename)
                 if request.cfg.xapian_index_history:
@@ -648,7 +650,7 @@ class Index(BaseIndex):
                 else:
                     self._index_page(writer, p, mode)
             if files:
-                request.log("indexing all files...")
+                logging.debug("indexing all files...")
                 for fname in files:
                     fname = fname.strip()
                     self._index_file(request, writer, fname, mode)
