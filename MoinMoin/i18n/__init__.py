@@ -59,11 +59,11 @@ def i18n_init(request):
     global languages
     request.clock.start('i18n_init')
     if languages is None:
-        logging.debug("i18n_init: trying to load translations from cache")
+        logging.debug("trying to load translations from cache")
         meta_cache = caching.CacheEntry(request, 'i18n', 'meta', scope='farm', use_pickle=True)
         i18n_dir = os.path.join(request.cfg.moinmoin_dir, 'i18n')
         if meta_cache.needsUpdate(i18n_dir):
-            logging.debug("i18n_init: cache needs update")
+            logging.debug("cache needs update")
             _languages = {}
             for lang_file in glob.glob(po_filename(request, language='*', domain='MoinMoin')): # XXX only MoinMoin domain for now
                 language, domain, ext = os.path.basename(lang_file).split('.')
@@ -71,13 +71,13 @@ def i18n_init(request):
                 f = file(lang_file)
                 t.load_po(f)
                 f.close()
-                logging.debug("i18n_init: loading translation %r" % language)
+                logging.debug("loading translation %r" % language)
                 encoding = 'utf-8'
                 _languages[language] = {}
                 for key, value in t.info.items():
-                    #logging.debug("i18n_init: meta key %s value %r" % (key, value))
+                    #logging.debug("meta key %s value %r" % (key, value))
                     _languages[language][key] = value.decode(encoding)
-            logging.debug("i18n_init: dumping language metadata to disk cache")
+            logging.debug("dumping language metadata to disk cache")
             try:
                 meta_cache.update(_languages)
             except caching.CacheError:
@@ -85,7 +85,7 @@ def i18n_init(request):
 
         if languages is None: # another thread maybe has done it before us
             try:
-                logging.debug("i18n_init: loading language metadata from disk cache")
+                logging.debug("loading language metadata from disk cache")
                 _languages = meta_cache.content()
                 if languages is None:
                     languages = _languages
@@ -151,11 +151,11 @@ class Translation(object):
             self.direction = info['x-direction']
             self.maintainer = info['last-translator']
         except KeyError, err:
-            logging.debug("load_mo: %r %s" % (self.language, str(err)))
+            logging.debug("metadata problem in %r: %s" % (self.language, str(err)))
         try:
             assert self.direction in ('ltr', 'rtl', )
         except (AttributeError, AssertionError), err:
-            logging.debug("load_mo: %r %s" % (self.language, str(err)))
+            logging.debug("direction problem in %r: %s" % (self.language, str(err)))
 
     def formatMarkup(self, request, text, percent):
         """ Formats the text using the wiki parser/formatter.
@@ -168,7 +168,7 @@ class Translation(object):
         @param percent: True if result is used as left-side of a % operator and
                         thus any GENERATED % needs to be escaped as %%.
         """
-        logging.debug("formatMarkup: %r" % text)
+        logging.debug("formatting: %r" % text)
 
         from MoinMoin.Page import Page
         from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
@@ -205,20 +205,20 @@ class Translation(object):
         if not needsupdate:
             try:
                 unformatted = cache.content()
-                logging.debug("loadLanguage: pickle %s load success" % self.language)
+                logging.debug("pickle %s load success" % self.language)
             except caching.CacheError:
-                logging.debug("loadLanguage: pickle %s load failed" % self.language)
+                logging.debug("pickle %s load failed" % self.language)
                 needsupdate = 1
 
         if needsupdate:
-            logging.debug("loadLanguage: langfilename %s needs update" % langfilename)
+            logging.debug("langfilename %s needs update" % langfilename)
             f = file(langfilename)
             self.load_po(f)
             f.close()
             trans = self.translation
             unformatted = trans._catalog
             self.has_wikimarkup = self.info.get('x-haswikimarkup', 'False') == 'True'
-            logging.debug("loadLanguage: dumping lang %s" % self.language)
+            logging.debug("dumping lang %s" % self.language)
             try:
                 cache.update(unformatted)
             except caching.CacheError:
@@ -270,7 +270,7 @@ def getText(original, request, lang, **kw):
             if key in translation.formatted:
                 translated = translation.formatted[key]
                 if translated is None:
-                    logging.error("i18n: formatting a %r text that is already being formatted: %r" % (lang, original))
+                    logging.error("formatting a %r text that is already being formatted: %r" % (lang, original))
                     translated = original + u'*' # get some error indication to the UI
             else:
                 translation.formatted[key] = None # we use this as "formatting in progress" indicator
@@ -291,12 +291,12 @@ def getText(original, request, lang, **kw):
             # to get english translation, maybe formatted.
             # if we don't find an english "translation", we just format it
             # on the fly (this is needed for cfg.editor_quickhelp).
-            logging.debug("i18n: requested string not in %r translation: %r" % (lang, original))
+            logging.debug("requested string not in %r translation: %r" % (lang, original))
             if lang != 'en':
-                logging.debug("i18n: falling back from %r to english" % lang)
+                logging.debug("falling back from %r to english" % lang)
                 translated = getText(original, request, 'en', formatted=formatted, percent=percent)
             elif formatted: # and lang == 'en'
-                logging.debug("i18n: formatting for %r on the fly: %r" % (lang, original))
+                logging.debug("formatting for %r on the fly: %r" % (lang, original))
                 translated = translations[lang].formatMarkup(request, original, percent)
     return translated
 
