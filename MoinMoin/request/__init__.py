@@ -197,7 +197,7 @@ class RequestBase(object):
             # authentication might require translated forms, so
             # have a try at guessing the language from the browser
             lang = i18n.requestLanguage(self, try_user=False)
-            self.getText = lambda text, i18n=self.i18n, request=self, lang=lang, **kv: i18n.getText(text, request, lang, kv.get('formatted', True))
+            self.getText = lambda text, i18n=self.i18n, request=self, lang=lang, **kw: i18n.getText(text, request, lang, **kw)
 
             # session handler start, auth
             self.parse_cookie()
