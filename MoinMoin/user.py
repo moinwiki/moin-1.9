@@ -975,7 +975,7 @@ class User:
     def isSuperUser(self):
         """ Check if this user is superuser """
         request = self._request
-        if request.cfg.DesktopEdition and request.remote_addr == '127.0.0.1' and request.user.valid:
+        if request.cfg.DesktopEdition and request.remote_addr == '127.0.0.1' and request.user and request.user.valid:
             # the DesktopEdition gives any local user superuser powers
             return True
         superusers = request.cfg.superuser
