@@ -1241,7 +1241,7 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
     _allowed_table_attrs = {
         'table': ['class', 'id', 'style'],
         'row': ['class', 'id', 'style'],
-        '': ['colspan', 'rowspan', 'class', 'id', 'style'],
+        '': ['colspan', 'rowspan', 'class', 'id', 'style', 'abbr'],
     }
 
     def _checkTableAttr(self, attrs, prefix):
