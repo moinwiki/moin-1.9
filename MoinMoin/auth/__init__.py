@@ -117,11 +117,14 @@
     @copyright: 2005-2006 Bastian Blank, Florian Festi,
                           MoinMoin:AlexanderSchremmer, Nick Phillips,
                           MoinMoin:FrankieChow, MoinMoin:NirSoffer,
-                2005-2007 MoinMoin:ThomasWaldmann,
+                2005-2008 MoinMoin:ThomasWaldmann,
                 2007      MoinMoin:JohannesBerg
 
     @license: GNU GPL, see COPYING for details.
 """
+
+from MoinMoin import log
+logging = log.getLogger(__name__)
 
 from MoinMoin import user, wikiutil
 
@@ -220,17 +223,17 @@ class MoinLogin(BaseAuth):
 
         verbose = self.verbose
 
-        if verbose: request.log("moin_login performing login action")
+        if verbose: logging.info("performing login action")
 
         if username and not password:
             return ContinueLogin(user_obj, _('Missing password. Please enter user name and password.'))
 
         u = user.User(request, name=username, password=password, auth_method=self.name)
         if u.valid:
-            if verbose: request.log("moin_login got valid user...")
+            if verbose: logging.info("got valid user %r" % u.name)
             return ContinueLogin(u)
         else:
-            if verbose: request.log("moin_login not valid, previous valid=%d." % user_obj.valid)
+            if verbose: logging.info("login not valid, previous valid=%d." % user_obj.valid)
             return ContinueLogin(user_obj, _("Invalid username or password."))
 
     def login_hint(self, request):
@@ -241,3 +244,4 @@ class MoinLogin(BaseAuth):
                  '<a href="%(sendmypasswordlink)s">Forgot your password?</a>') % {
                'userprefslink': userprefslink,
                'sendmypasswordlink': sendmypasswordlink}
+

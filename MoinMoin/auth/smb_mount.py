@@ -6,10 +6,13 @@
     authentication at the SMB server). This can be used if you need access
     to files on some share via the wiki, but needs more code to be useful.
 
-    @copyright: 2006 MoinMoin:ThomasWaldmann
+    @copyright: 2006-2008 MoinMoin:ThomasWaldmann
                 2007 MoinMoin:JohannesBerg
     @license: GNU GPL, see COPYING for details.
 """
+
+from MoinMoin import log
+logging = log.getLogger(__name__)
 
 from MoinMoin.auth import BaseAuth, CancelLogin, ContinueLogin
 
@@ -33,7 +36,7 @@ class SMBMount(BaseAuth):
 
     def do_smb(self, request, username, password, login):
         verbose = self.verbose
-        if verbose: request.log("SMBMount login=%s logout=%s: got name=%s" % (login, not login, username))
+        if verbose: logging.info("login=%s logout=%s: got name=%s" % (login, not login, username))
 
         import os, pwd, subprocess
         web_username = self.smb_dir_user
