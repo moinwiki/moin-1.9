@@ -251,6 +251,8 @@ only requiring a Python installation.
         'MoinMoin.support.xapwrap',
         'MoinMoin.support.parsedatetime',
         'MoinMoin.theme',
+        'MoinMoin.userform',
+        'MoinMoin.userprefs',
         'MoinMoin.util',
         'MoinMoin.widget',
         'MoinMoin.wikixml',
