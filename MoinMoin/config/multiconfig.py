@@ -82,6 +82,7 @@ def _url_re_list():
             _farmconfig_mtime = 0
             _url_re_cache = [('wikiconfig', re.compile(r'.')), ] # matches everything
         else:
+            logging.info("using farm config: %s" % os.path.abspath(farmconfig.__file__))
             try:
                 cache = []
                 for name, regex in farmconfig.wikis:
@@ -115,7 +116,7 @@ def _makeConfig(name):
         configClass = getattr(module, 'Config')
         cfg = configClass(name)
         cfg.cfg_mtime = max(mtime, _farmconfig_mtime)
-        logging.info("using config: %s" % os.path.abspath(module.__file__))
+        logging.info("using wiki config: %s" % os.path.abspath(module.__file__))
     except ImportError, err:
         logging.error(str(err))
         msg = '''ImportError: %(err)s
