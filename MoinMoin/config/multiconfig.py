@@ -449,6 +449,11 @@ Lists: * bullets; 1., a. numbered items.
     nonexist_qm = False
     notification_bot_uri = None
 
+    # OpenID server support
+    openid_server_enabled = False
+    openid_server_restricted_users_group = None
+    openid_server_enable_user = False
+
     page_credits = [
         # Feel free to add other credits, but PLEASE do NOT change or remove
         # the following links - you help us by keeping them "as is":
