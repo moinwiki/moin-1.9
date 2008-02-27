@@ -93,6 +93,11 @@
                       - 'username': username entry field
                       - 'password': password entry field
                       - 'openid_identifier': OpenID entry field
+                      - 'special_no_input': manual login is required
+                            but no form fields need to be filled in
+                            (for example openid with forced provider)
+                            in this case the theme may provide a short-
+                            cut omitting the login form
      * logout_possible: boolean indicating whether this auth methods
                         supports logging out
      * name: name of the auth method, must be the same as given as the
