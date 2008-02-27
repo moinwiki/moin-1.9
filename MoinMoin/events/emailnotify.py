@@ -33,7 +33,7 @@ def prep_page_changed_mail(request, page, comment, email_lang, revisions, trivia
 
     """
     change = notification.page_change_message("page_changed", request, page, email_lang, comment=comment, revisions=revisions)
-    _ = lambda s, formatted=True, r=request, l=email_lang: r.getText(s, formatted=formatted, lang=l)
+    _ = lambda s, wiki=False, r=request, l=email_lang: r.getText(s, wiki=wiki, lang=l)
 
     subject = _('[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s') % {
             'trivial': (trivial and _("Trivial ")) or "",
@@ -135,7 +135,7 @@ def handle_file_attached(event):
 
     for lang in subscribers:
         emails = []
-        _ = lambda text: request.getText(text, lang=lang, formatted=False)
+        _ = lambda text: request.getText(text, lang=lang)
 
         links = _("Attachment link: %(attach)s\n" \
                   "Page link: %(page)s\n") % {'attach': attachlink, 'page': pagelink}

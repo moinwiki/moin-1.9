@@ -64,7 +64,7 @@ class MinimalRequest(object):
         self._page_headings = {}
         self.result = []
 
-    def getText(self, text, formatted=True):
+    def getText(self, text, wiki=False, percent=False):
         return text
 
     def write(self, text):

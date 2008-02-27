@@ -71,7 +71,7 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
     from MoinMoin.action.AttachFile import getAttachUrl
 
     _ = request.getText
-    page._ = lambda s, formatted=True, r=request, l=lang: r.getText(s, formatted=formatted, lang=l)
+    page._ = lambda s, wiki=False, r=request, l=lang: r.getText(s, wiki=wiki, lang=l)
     querystr = {}
     changes = {'page_name': page.page_name, 'revision': str(page.getRevList()[0])}
 
