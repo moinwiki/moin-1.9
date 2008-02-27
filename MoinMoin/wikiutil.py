@@ -1578,6 +1578,60 @@ def get_choice(request, arg, name=None, choices=[None]):
     return arg
 
 
+class IEFArgument:
+    """
+    Base class for new argument parsers for
+    invoke_extension_function.
+    """
+    def __init__(self):
+        pass
+
+    def parse_argument(self, s):
+        """
+        Parse the argument given in s (a string) and return
+        the argument for the extension function.
+        """
+        raise NotImplementedError
+
+    def get_default(self):
+        """
+        Return the default for this argument.
+        """
+        raise NotImplementedError
+
+
+class UnitArgument(IEFArgument):
+    """
+    Argument class for invoke_extension_function that forces
+    having any of the specified units given for a value.
+
+    Note that the default unit is "mm".
+
+    Use, for example, "UnitArgument('7mm', float, ['%', 'mm'])".
+    """
+    def __init__(self, default, argtype, units=['mm']):
+        """
+        Initialise a UnitArgument giving the default,
+        argument type and the permitted units.
+        """
+        IEFArgument.__init__(self)
+        self._units = list(units)
+        self._units.sort(cmp=lambda x, y: len(y) - len(x))
+        self._type = argtype
+        self._default = self.parse_argument(default)
+
+    def parse_argument(self, s):
+        for unit in self._units:
+            if s.endswith(unit):
+                ret = (self._type(s[:len(s) - len(unit)]), unit)
+                return ret
+        ## XXX: how can we translate this?
+        raise ValueError("Invalid unit in value %s" % s)
+
+    def get_default(self):
+        return self._default
+
+
 class required_arg:
     """
     Wrap a type in this class and give it as default argument
@@ -1589,7 +1643,8 @@ class required_arg:
         Initialise a required_arg
         @param argtype: the type the argument should have
         """
-        if not argtype in (bool, int, long, float, complex, unicode):
+        if not (argtype in (bool, int, long, float, complex, unicode) or
+                isinstance(argtype, IEFArgument)):
             raise TypeError("argtype must be a valid type")
         self.argtype = argtype
 
@@ -1642,6 +1697,11 @@ def invoke_extension_function(request, function, args, fixed_args=[]):
             return get_float(request, value, name)
         elif default is complex:
             return get_complex(request, value, name)
+        elif isinstance(default, IEFArgument):
+            # defaults handled later
+            if value is None:
+                return None
+            return default.parse_argument(value)
         elif isinstance(default, required_arg):
             return _convert_arg(request, value, default.argtype, name)
         return value
@@ -1736,9 +1796,11 @@ def invoke_extension_function(request, function, args, fixed_args=[]):
             # went wrong (if it does)
             kwargs[argname] = _convert_arg(request, kwargs[argname],
                                            defaults[argname], argname)
-            if (kwargs[argname] is None
-                and isinstance(defaults[argname], required_arg)):
-                raise ValueError(_('Argument "%s" is required') % argname)
+            if kwargs[argname] is None:
+                if isinstance(defaults[argname], required_arg):
+                    raise ValueError(_('Argument "%s" is required') % argname)
+                if isinstance(defaults[argname], IEFArgument):
+                    kwargs[argname] = defaults[argname].get_default()
 
         if not argname in argnames:
             # move argname into _kwargs parameter
