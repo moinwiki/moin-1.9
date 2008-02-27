@@ -17,10 +17,49 @@ from MoinMoin.auth import CancelLogin, ContinueLogin
 from MoinMoin.auth import MultistageFormLogin, MultistageRedirectLogin
 from MoinMoin.auth import get_multistage_continuation_url
 
+
 class OpenIDAuth(BaseAuth):
     login_inputs = ['openid_identifier']
     name = 'openid'
     logout_possible = True
+
+    def __init__(self, modify_request=None,
+                       update_user=None,
+                       create_user=None):
+        BaseAuth.__init__(self)
+        self._modify_request = modify_request or (lambda x: None)
+        self._update_user = update_user or (lambda i, u: None)
+        self._create_user = create_user or (lambda i, u: None)
+
+    def _handle_user_data(self, request, u):
+        create = not u
+        if create:
+            # pass in a created but unsaved user object
+            u = user.User(request, auth_method=self.name,
+                          auth_username=request.session['openid.id'])
+            # invalid name
+            u.name = ''
+            u = self._create_user(request.session['openid.info'], u)
+
+        if u:
+            self._update_user(request.session['openid.info'], u)
+
+            # just in case the wiki admin screwed up
+            if (not user.isValidName(request, u.name) or
+                (create and user.getUserId(request, u.name))):
+                return None
+
+            if not hasattr(u, 'openids'):
+                u.openids = []
+            if not request.session['openid.id'] in u.openids:
+                u.openids.append(request.session['openid.id'])
+
+            u.save()
+
+            del request.session['openid.id']
+            del request.session['openid.info']
+
+        return u
 
     def _get_account_name(self, request, form, msg=None):
         # now we need to ask the user for a new username
@@ -96,12 +135,22 @@ username and leave the password field blank.""")))
         elif info.status == consumer.CANCEL:
             return CancelLogin(_('Verification canceled.'))
         elif info.status == consumer.SUCCESS:
+            request.session['openid.id'] = info.identity_url
+            request.session['openid.info'] = info
+
             # try to find user object
             uid = user.getUserIdByOpenId(request, info.identity_url)
             if uid:
                 u = user.User(request, id=uid, auth_method=self.name,
                               auth_username=info.identity_url)
+            else:
+                u = None
+
+            # create or update the user according to the registration data
+            u = self._handle_user_data(request, u)
+            if u:
                 return ContinueLogin(u)
+
             # if no user found, then we need to ask for a username,
             # possibly associating an existing account.
             request.session['openid.id'] = info.identity_url
@@ -125,13 +174,10 @@ username and leave the password field blank.""")))
             uid = user.getUserId(request, newname)
         if not uid:
             # we can create a new user with this name :)
-            u = user.User(request, id=uid, auth_method=self.name,
+            u = user.User(request, auth_method=self.name,
                           auth_username=request.session['openid.id'])
             u.name = newname
-            u.openids = [request.session['openid.id']]
-            u.aliasname = request.session['openid.id']
-            del request.session['openid.id']
-            u.save()
+            u = self._handle_user_data(request, u)
             return ContinueLogin(u)
         # requested username already exists. if they know the password,
         # they can associate that account with the openid.
@@ -151,13 +197,7 @@ username and leave the password field blank.""")))
                       auth_method=self.name,
                       auth_username=request.session['openid.id'])
         if u.valid:
-            if not hasattr(u, 'openids'):
-                u.openids = []
-            u.openids.append(request.session['openid.id'])
-            if not u.aliasname:
-                u.aliasname = request.session['openid.id']
-            u.save()
-            del request.session['openid.id']
+            self._handle_user_data(request, u)
             return ContinueLogin(u, _('Your account is now associated to your OpenID.'))
         else:
             msg = _('The password you entered is not valid.')
@@ -220,6 +260,8 @@ document.getElementById("openid_message").submit();
         else:
             if oidreq is None:
                 return ContinueLogin(None, _('No OpenID.'))
+
+            self._modify_request(oidreq)
 
             return_to = get_multistage_continuation_url(request, self.name,
                                                         {'oidstage': '1'})
