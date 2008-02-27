@@ -15,12 +15,15 @@
           allow more configuration (alias name, ...) by using
           callables as parameters
 
-    @copyright: 2006-2007 MoinMoin:ThomasWaldmann,
+    @copyright: 2006-2008 MoinMoin:ThomasWaldmann,
                 2006 Nick Phillips
     @license: GNU GPL, see COPYING for details.
 """
 import sys
 import ldap
+
+from MoinMoin import log
+logging = log.getLogger(__name__)
 
 from MoinMoin import user
 from MoinMoin.auth import BaseAuth, CancelLogin, ContinueLogin
@@ -54,7 +57,7 @@ class LDAPAuth(BaseAuth):
                 u = None
                 dn = None
                 coding = cfg.ldap_coding
-                if verbose: request.log("LDAP: Setting misc. options...")
+                if verbose: logging.info("Setting misc. ldap options...")
                 ldap.set_option(ldap.OPT_PROTOCOL_VERSION, ldap.VERSION3) # ldap v2 is outdated
                 ldap.set_option(ldap.OPT_REFERRALS, cfg.ldap_referrals)
                 ldap.set_option(ldap.OPT_NETWORK_TIMEOUT, cfg.ldap_timeout)
@@ -74,28 +77,28 @@ class LDAPAuth(BaseAuth):
                             ldap.set_option(option, value)
 
                 server = cfg.ldap_uri
-                if verbose: request.log("LDAP: Trying to initialize %r." % server)
+                if verbose: logging.info("Trying to initialize %r." % server)
                 l = ldap.initialize(server)
-                if verbose: request.log("LDAP: Connected to LDAP server %r." % server)
+                if verbose: logging.info("Connected to LDAP server %r." % server)
 
                 if starttls and server.startswith('ldap:'):
-                    if verbose: request.log("LDAP: Trying to start TLS to %r." % server)
+                    if verbose: logging.info("Trying to start TLS to %r." % server)
                     try:
                         l.start_tls_s()
-                        if verbose: request.log("LDAP: Using TLS to %r." % server)
+                        if verbose: logging.info("Using TLS to %r." % server)
                     except (ldap.SERVER_DOWN, ldap.CONNECT_ERROR), err:
-                        if verbose: request.log("LDAP: Couldn't establish TLS to %r (err: %s)." % (server, str(err)))
+                        if verbose: logging.info("Couldn't establish TLS to %r (err: %s)." % (server, str(err)))
                         raise
 
                 # you can use %(username)s and %(password)s here to get the stuff entered in the form:
                 ldap_binddn = cfg.ldap_binddn % locals()
                 ldap_bindpw = cfg.ldap_bindpw % locals()
                 l.simple_bind_s(ldap_binddn.encode(coding), ldap_bindpw.encode(coding))
-                if verbose: request.log("LDAP: Bound with binddn %r" % ldap_binddn)
+                if verbose: logging.info("Bound with binddn %r" % ldap_binddn)
 
                 # you can use %(username)s here to get the stuff entered in the form:
                 filterstr = cfg.ldap_filter % locals()
-                if verbose: request.log("LDAP: Searching %r" % filterstr)
+                if verbose: logging.info("Searching %r" % filterstr)
                 attrs = [getattr(cfg, attr) for attr in [
                                          'ldap_email_attribute',
                                          'ldap_aliasname_attribute',
@@ -108,23 +111,23 @@ class LDAPAuth(BaseAuth):
                 lusers = [(dn, ldap_dict) for dn, ldap_dict in lusers if dn is not None]
                 if verbose:
                     for dn, ldap_dict in lusers:
-                        request.log("LDAP: dn:%r" % dn)
+                        logging.info("dn:%r" % dn)
                         for key, val in ldap_dict.items():
-                            request.log("    %r: %r" % (key, val))
+                            logging.info("    %r: %r" % (key, val))
 
                 result_length = len(lusers)
                 if result_length != 1:
                     if result_length > 1:
-                        request.log("LDAP: Search found more than one (%d) matches for %r." % (result_length, filterstr))
+                        logging.info("Search found more than one (%d) matches for %r." % (result_length, filterstr))
                     if result_length == 0:
-                        if verbose: request.log("LDAP: Search found no matches for %r." % (filterstr, ))
+                        if verbose: logging.info("Search found no matches for %r." % (filterstr, ))
                     return CancelLogin(_("Invalid username or password."))
 
                 dn, ldap_dict = lusers[0]
                 if not cfg.ldap_bindonce:
-                    if verbose: request.log("LDAP: DN found is %r, trying to bind with pw" % dn)
+                    if verbose: logging.info("DN found is %r, trying to bind with pw" % dn)
                     l.simple_bind_s(dn, password.encode(coding))
-                    if verbose: request.log("LDAP: Bound with dn %r (username: %r)" % (dn, username))
+                    if verbose: logging.info("Bound with dn %r (username: %r)" % (dn, username))
 
                 if cfg.ldap_email_callback is None:
                     if cfg.ldap_email_attribute:
@@ -156,10 +159,10 @@ class LDAPAuth(BaseAuth):
                 u.name = username
                 u.aliasname = aliasname
                 u.remember_me = 0 # 0 enforces cookie_lifetime config param
-                if verbose: request.log("LDAP: creating userprefs with name %r email %r alias %r" % (username, email, aliasname))
+                if verbose: logging.info("creating userprefs with name %r email %r alias %r" % (username, email, aliasname))
 
             except ldap.INVALID_CREDENTIALS, err:
-                request.log("LDAP: invalid credentials (wrong password?) for dn %r (username: %r)" % (dn, username))
+                logging.info("invalid credentials (wrong password?) for dn %r (username: %r)" % (dn, username))
                 return CancelLogin(_("Invalid username or password."))
 
             if u:
@@ -169,7 +172,7 @@ class LDAPAuth(BaseAuth):
         except:
             import traceback
             info = sys.exc_info()
-            request.log("LDAP: caught an exception, traceback follows...")
-            request.log(''.join(traceback.format_exception(*info)))
+            logging.error("caught an exception, traceback follows...")
+            logging.error(''.join(traceback.format_exception(*info)))
             return CancelLogin(None)
 

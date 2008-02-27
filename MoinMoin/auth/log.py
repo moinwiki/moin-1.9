@@ -5,9 +5,12 @@
     This does nothing except logging the auth parameters (the password is NOT
     logged, of course).
 
-    @copyright: 2006 MoinMoin:ThomasWaldmann
+    @copyright: 2006-2008 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
+
+from MoinMoin import log
+logging = log.getLogger(__name__)
 
 from MoinMoin.auth import BaseAuth, ContinueLogin
 
@@ -16,7 +19,7 @@ class AuthLog(BaseAuth):
     name = "log"
 
     def log(self, request, action, user_obj, kw):
-        request.log('auth.log: %s: user_obj=%r kw=%r' % (action, user_obj, kw))
+        logging.info('%s: user_obj=%r kw=%r' % (action, user_obj, kw))
 
     def login(self, request, user_obj, **kw):
         self.log(request, 'login', user_obj, kw)
