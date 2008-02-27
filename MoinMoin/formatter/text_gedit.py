@@ -6,6 +6,9 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin.formatter import FormatterBase, text_html
 from MoinMoin import wikiutil
 from MoinMoin.Page import Page
@@ -164,11 +167,11 @@ class Formatter(text_html.Formatter):
         return attrs
 
     def _checkTableAttr(self, attrs, prefix):
-        #self.request.log(repr(attrs))
+        #logging.debug(repr(attrs))
         attrs = text_html.Formatter._checkTableAttr(self, attrs, prefix)
-        #self.request.log(repr(attrs))
+        #logging.debug(repr(attrs))
         attrs = self._style_to_attributes(attrs)
-        #self.request.log(repr(attrs))
+        #logging.debug(repr(attrs))
         return attrs
 
     _allowed_table_attrs = {

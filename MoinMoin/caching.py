@@ -3,12 +3,15 @@
     MoinMoin caching module
 
     @copyright: 2001-2004 by Juergen Hermann <jh@web.de>,
-                2006-2007 MoinMoin:ThomasWaldmann
+                2006-2008 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
 import os
 import tempfile
+
+from MoinMoin import log
+logging = log.getLogger(__name__)
 
 from MoinMoin import config
 from MoinMoin.util import filesys, lock, pickle, PICKLE_PROTOCOL
@@ -120,7 +123,7 @@ class CacheEntry:
 #                if self.locking:
 #                    self.wlock.release()
 #        else:
-#            self.request.log("Can't acquire write lock in %s" % self.lock_dir)
+#            logging.error("Can't acquire write lock in %s" % self.lock_dir)
 
     def update(self, content):
         try:
@@ -144,7 +147,7 @@ class CacheEntry:
                     if self.locking:
                         self.wlock.release()
             else:
-                self.request.log("Can't acquire write lock in %s" % self.lock_dir)
+                logging.error("Can't acquire write lock in %s" % self.lock_dir)
         except (pickle.PicklingError, OSError, IOError, ValueError), err:
             raise CacheError(str(err))
 
@@ -159,7 +162,7 @@ class CacheEntry:
                 if self.locking:
                     self.wlock.release()
         else:
-            self.request.log("Can't acquire write lock in %s" % self.lock_dir)
+            logging.error("Can't acquire write lock in %s" % self.lock_dir)
 
     def content(self):
         try:
@@ -172,7 +175,7 @@ class CacheEntry:
                     if self.locking:
                         self.rlock.release()
             else:
-                self.request.log("Can't acquire read lock in %s" % self.lock_dir)
+                logging.error("Can't acquire read lock in %s" % self.lock_dir)
             if self.use_pickle:
                 data = pickle.loads(data)
             elif self.use_encode:

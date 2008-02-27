@@ -6,6 +6,9 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin.script import MoinScript
 
 def execute(xmlrpcobj, their_secret, argv):
@@ -20,11 +23,11 @@ def execute(xmlrpcobj, their_secret, argv):
         return u"Invalid password"
 
     try:
-        request.log("RemoteScript argv: %r" % argv)
+        logging.info("RemoteScript argv: %r" % argv)
         MoinScript(argv).run(showtime=0)
     except Exception, err:
         e = str(err)
-        request.log(e)
+        logging.error(e)
         return xmlrpcobj._outstr(e)
     return xmlrpcobj._outstr(u"OK")
 

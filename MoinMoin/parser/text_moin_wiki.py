@@ -3,7 +3,7 @@
     MoinMoin - MoinMoin Wiki Markup Parser
 
     @copyright: 2000-2002 Juergen Hermann <jh@web.de>,
-                2006-2007 MoinMoin:ThomasWaldmann,
+                2006-2008 MoinMoin:ThomasWaldmann,
                 2007 by MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
@@ -1116,7 +1116,7 @@ class Parser:
         attr, msg = wikiutil.parseAttributes(self.request, attrdef, '>', table_extension)
         if msg:
             msg = '<strong class="highlight">%s</strong>' % msg
-        #self.request.log("parseAttributes returned %r" % attr)
+        #logging.debug("parseAttributes returned %r" % attr)
         return attr, msg
 
     def _tableZ_repl(self, word, groups):
