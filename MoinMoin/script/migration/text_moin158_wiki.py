@@ -697,7 +697,6 @@ class Parser:
         attr, msg = wikiutil.parseAttributes(self.request, attrdef, '>', table_extension)
         if msg:
             msg = '<strong class="highlight">%s</strong>' % msg
-        #self.request.log("parseAttributes returned %r" % attr)
         return attr, msg
 
     def _tableZ_repl(self, word):

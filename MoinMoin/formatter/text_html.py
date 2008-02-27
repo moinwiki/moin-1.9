@@ -7,6 +7,9 @@
 """
 import os.path, re
 
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin.formatter import FormatterBase
 from MoinMoin import wikiutil, i18n
 from MoinMoin.Page import Page
@@ -618,7 +621,7 @@ class Formatter(FormatterBase):
             querystr['do'] = 'view'
         if on:
             pagename, filename = AttachFile.absoluteName(url, self.page.page_name)
-            #self.request.log("attachment_link: url %s pagename %s filename %s" % (url, pagename, filename))
+            #logging.debug("attachment_link: url %s pagename %s filename %s" % (url, pagename, filename))
             fname = wikiutil.taintfilename(filename)
             if AttachFile.exists(self.request, pagename, fname):
                 target = AttachFile.getAttachUrl(pagename, fname, self.request, do=querystr['do'])
@@ -1288,7 +1291,7 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
                 pass
         else:
             result['style'] = st
-        #self.request.log("_checkTableAttr returns %r" % result)
+        #logging.debug("_checkTableAttr returns %r" % result)
         return result
 
 

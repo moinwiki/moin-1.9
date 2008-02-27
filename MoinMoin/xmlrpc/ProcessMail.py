@@ -6,6 +6,9 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin.mail import mailimport
 
 def execute(xmlrpcobj, secret, mail):
@@ -23,6 +26,6 @@ def execute(xmlrpcobj, secret, mail):
         mailimport.import_mail_from_string(request, mail)
     except mailimport.ProcessingError, e:
         err = u"An error occured while processing the message: " + str(e.args)
-        request.log(err)
+        logging.error(err)
         return xmlrpcobj._outstr(err)
     return xmlrpcobj._outstr(u"OK")

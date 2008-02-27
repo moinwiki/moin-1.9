@@ -5,7 +5,7 @@
     @copyright: 2000-2004 Juergen Hermann <jh@web.de>,
                 2004 by Florian Festi,
                 2006 by Mikko Virkkil,
-                2005-2007 MoinMoin:ThomasWaldmann,
+                2005-2008 MoinMoin:ThomasWaldmann,
                 2007 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
@@ -1794,7 +1794,7 @@ def parseAttributes(request, attrstring, endtoken=None, extension=None):
         # call extension function with the current token, the parser, and the dict
         if extension:
             found_flag, msg = extension(key, parser, attrs)
-            #request.log("%r = extension(%r, parser, %r)" % (msg, key, attrs))
+            #logging.debug("%r = extension(%r, parser, %r)" % (msg, key, attrs))
             if found_flag:
                 continue
             elif msg:
@@ -2132,7 +2132,7 @@ def link_tag(request, params, text=None, formatter=None, on=None, **kw):
             tag = '<a%s href="%s/%s">' % (attrs, request.getScriptname(), params)
             if not on:
                 tag = "%s%s</a>" % (tag, text)
-        request.log("Warning: wikiutil.link_tag called without formatter and without request.html_formatter. tag=%r" % (tag, ))
+        logging.warning("wikiutil.link_tag called without formatter and without request.html_formatter. tag=%r" % (tag, ))
     return tag
 
 def containsConflictMarker(text):

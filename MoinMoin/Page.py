@@ -28,7 +28,7 @@
       The mimetype hierarchy should be modelled by a MimeTypeItem class hierarchy.
 
     @copyright: 2000-2004 by Juergen Hermann <jh@web.de>,
-                2005-2007 by MoinMoin:ThomasWaldmann,
+                2005-2008 by MoinMoin:ThomasWaldmann,
                 2006 by MoinMoin:FlorianFesti,
                 2007 by MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
@@ -1262,7 +1262,7 @@ class Page(object):
                 except Exception, e:
                     if not is_cache_exception(e):
                         raise
-                    request.log('page cache failed after creation')
+                    logging.error('page cache failed after creation')
                     self.format(parser)
 
         request.clock.stop('send_page_content')
@@ -1304,7 +1304,7 @@ class Page(object):
             # See http://docs.python.org/lib/module-marshal.html
             raise Exception('CacheNeedsUpdate')
         except Exception, err:
-            request.log('fail to load "%s" cache: %s' %
+            logging.info('failed to load "%s" cache: %s' %
                         (self.page_name, str(err)))
             raise Exception('CacheNeedsUpdate')
 
