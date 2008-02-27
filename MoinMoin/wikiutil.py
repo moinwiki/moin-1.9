@@ -751,7 +751,7 @@ def getLocalizedPage(request, pagename): # was: getSysPage
              if it exists
     """
     from MoinMoin.Page import Page
-    i18n_name = request.getText(pagename, formatted=False)
+    i18n_name = request.getText(pagename)
     pageobj = None
     if i18n_name != pagename:
         if request.page and i18n_name == request.page.page_name:

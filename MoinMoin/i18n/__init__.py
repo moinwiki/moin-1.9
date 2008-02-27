@@ -246,8 +246,8 @@ def getText(original, request, lang, **kw):
                       become %% for that usage. This will only escape generated % chars,
                       e.g. in wiki links to non-ascii pagenames (%XX%XX%XX).
                       False, if we don't use it as a left-side of % operator.
-                      Only specify this option for formatted==True, it doesn't do
-                      anything for formatted==False.
+                      Only specify this option for wiki==True, it doesn't do
+                      anything for wiki==False.
     """
     formatted = kw.get('wiki', False) # 1.6 and early 1.7 (until 2/2008) used 'formatted' with True as default!
     percent = kw.get('percent', False)
@@ -294,7 +294,7 @@ def getText(original, request, lang, **kw):
             logging.debug("requested string not in %r translation: %r" % (lang, original))
             if lang != 'en':
                 logging.debug("falling back from %r to english" % lang)
-                translated = getText(original, request, 'en', formatted=formatted, percent=percent)
+                translated = getText(original, request, 'en', wiki=formatted, percent=percent)
             elif formatted: # and lang == 'en'
                 logging.debug("formatting for %r on the fly: %r" % (lang, original))
                 translated = translations[lang].formatMarkup(request, original, percent)

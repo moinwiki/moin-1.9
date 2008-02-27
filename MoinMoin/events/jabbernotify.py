@@ -82,7 +82,7 @@ def handle_file_attached(event):
     pagelink = request.getQualifiedURL(page.url(request, {}, relative=False))
 
     for lang in subscribers.keys():
-        _ = lambda text: request.getText(text, lang=lang, formatted=False)
+        _ = lambda text: request.getText(text, lang=lang)
         data = notification.attachment_added(request, _, event.pagename, event.filename, event.size)
         links = [{'url': attachlink, 'description': _("Attachment link")},
                   {'url': pagelink, 'description': _("Page link")}]

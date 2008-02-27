@@ -237,17 +237,17 @@ class TestEscapeHTML(ParserTestCase):
 #
 #    def testEscapeInGetTextFormatted(self):
 #        """ parser.wiki: escape html markup in getText formatted call """
-#        test = self.request.getText('<escape-me>', formatted=1)
+#        test = self.request.getText('<escape-me>', wiki=True)
 #        self._test(test)
 #
 #    def testEscapeInGetTextFormatedLink(self):
 #        """ parser.wiki: escape html markup in getText formatted call with link """
-#        test = self.request.getText('[[<escape-me>]]', formatted=1)
+#        test = self.request.getText('[[<escape-me>]]', wiki=True)
 #        self._test(test)
 
     def testEscapeInGetTextUnFormatted(self):
         """ parser.wiki: escape html markup in getText non formatted call """
-        test = self.request.getText('<escape-me>', formatted=0)
+        test = self.request.getText('<escape-me>', wiki=False)
         self._test(test)
 
     def _test(self, test):
