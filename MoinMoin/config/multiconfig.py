@@ -3,7 +3,7 @@
     MoinMoin - Multiple configuration handler and Configuration defaults class
 
     @copyright: 2000-2004 Juergen Hermann <jh@web.de>,
-                2005-2006 MoinMoin:ThomasWaldmann.
+                2005-2008 MoinMoin:ThomasWaldmann.
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -47,6 +47,7 @@ def _importConfigModule(name):
     except ImportError:
         raise
     except IndentationError, err:
+        logging.error(str(err))
         msg = '''IndentationError: %(err)s
 
 The configuration files are python modules. Therefore, whitespace is
@@ -57,6 +58,7 @@ You have to use four spaces at the beginning of the line mostly.
 }
         raise error.ConfigurationError(msg)
     except Exception, err:
+        logging.error(str(err))
         msg = '%s: %s' % (err.__class__.__name__, str(err))
         raise error.ConfigurationError(msg)
     return module, mtime
@@ -76,7 +78,7 @@ def _url_re_list():
         try:
             farmconfig, _farmconfig_mtime = _importConfigModule('farmconfig')
         except ImportError:
-            # Default to wikiconfig for all urls.
+            logging.debug("could not import farmconfig, mapping all URLs to wikiconfig")
             _farmconfig_mtime = 0
             _url_re_cache = [('wikiconfig', re.compile(r'.')), ] # matches everything
         else:
@@ -86,6 +88,7 @@ def _url_re_list():
                     cache.append((name, re.compile(regex)))
                 _url_re_cache = cache
             except AttributeError:
+                logging.error("required 'wikis' list missing in farmconfig")
                 msg = """
 Missing required 'wikis' list in 'farmconfig.py'.
 
@@ -112,7 +115,9 @@ def _makeConfig(name):
         configClass = getattr(module, 'Config')
         cfg = configClass(name)
         cfg.cfg_mtime = max(mtime, _farmconfig_mtime)
+        logging.info("using config: %s" % os.path.abspath(module.__file__))
     except ImportError, err:
+        logging.error(str(err))
         msg = '''ImportError: %(err)s
 
 Check that the file is in the same directory as the server script. If
@@ -128,6 +133,7 @@ module name does not include the ".py" suffix.
 }
         raise error.ConfigurationError(msg)
     except AttributeError, err:
+        logging.error(str(err))
         msg = '''AttributeError: %(err)s
 
 Could not find required "Config" class in "%(name)s.py".
