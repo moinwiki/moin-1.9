@@ -16,10 +16,15 @@ class DataBrowserWidget(base.Widget):
         base.Widget.__init__(self, request, **kw)
         self.data = None
         self.data_id = 'dbw.'
+        # prefixed with __ are untranslated and to be used in the JS
         self._all = _('[all]')
+        self.__all = '[all]'
         self._notempty = _('[not empty]')
+        self.__notempty = '[notempty]'
         self._empty = _('[empty]')
+        self.__empty = '[empty]'
         self._filter = _('filter')
+        self.__filter = 'filter'
 
     def setData(self, dataset):
         """ Sets the data for the browser (see MoinMoin.util.dataset).
@@ -39,7 +44,7 @@ class DataBrowserWidget(base.Widget):
         """
         return 'name="%s%s"' % (self.data_id, elem)
 
-    def _makeoption(self, item, selected):
+    def _makeoption(self, item, selected, ntitem = None):
         """ create an option for a <select> form element
         @param item: string containing the item name to show
         @param selected: indicates whether the item should be default or not
@@ -50,7 +55,9 @@ class DataBrowserWidget(base.Widget):
             selected = ''
         assert(isinstance(item, basestring))
         item = wikiutil.escape(item)
-        return '<option value="%s"%s>%s</option>' % (item, selected, item)
+        if ntitem is None:
+            ntitem = item
+        return '<option value="%s"%s>%s</option>' % (ntitem, selected, item)
 
     def _filteroptions(self, idx):
         """ create options for all elements in the column
@@ -58,9 +65,8 @@ class DataBrowserWidget(base.Widget):
         """
         self.data.reset()
         row = self.data.next()
-        # leave the 'empty' slot blank so we avoid adding
-        # blank items when getting all possibilities
-        unique = [self._all, '', self._notempty]
+        # [empty] is a special already
+        unique = ['']
 
         value = None
         name = '%sfilter%d' % (self.data_id, idx)
@@ -75,17 +81,20 @@ class DataBrowserWidget(base.Widget):
             row = self.data.next()
 
         # fill in the empty field we left blank
-        unique[1] = self._empty
-        sortedlist = unique[3:]
-        sortedlist.sort()
-        unique = unique[:3] + sortedlist
-        return '\n'.join([self._makeoption(item, item == value) for item in unique])
+        del unique[0]
+        unique.sort()
+        result = [self._makeoption(item, item == value) for item in unique]
+        common = [None, None, None]
+        common[0] = self._makeoption(self._all, value == self.__all, self.__all)
+        common[1] = self._makeoption(self._empty, value == self.__empty, self.__empty)
+        common[2] = self._makeoption(self._notempty, value == self.__notempty, self.__notempty)
+        return '\n'.join(common + result)
 
     def format(self):
         fmt = self.request.formatter
 
         result = []
-        result.append(fmt.rawHTML('<form action="%s/%s" method="GET">' % (self.request.getScriptname(), wikiutil.quoteWikinameURL(self.request.page.page_name))))
+        result.append(fmt.rawHTML('<form action="%s/%s" method="GET" name="%s">' % (self.request.getScriptname(), wikiutil.quoteWikinameURL(self.request.page.page_name), self.data_id)))
         result.append(fmt.div(1))
 
         havefilters = False
@@ -96,7 +105,7 @@ class DataBrowserWidget(base.Widget):
         if havefilters:
             result.append(fmt.rawHTML('<input type="submit" value="%s" %s>' % (self._filter, self._name('submit'))))
 
-        result.append(fmt.table(1))
+        result.append(fmt.table(1, id='%stable' % self.data_id))
 
         # add header line
         result.append(fmt.table_row(1))
@@ -111,8 +120,10 @@ class DataBrowserWidget(base.Widget):
 
             if col.autofilter:
                 result.append(fmt.linebreak(False))
-                select = '<select %s>%s</select>' % (self._name('filter%d' % idx),
-                                                     self._filteroptions(idx))
+                select = '<select %s onchange="dbw_update_search(\'%s\');">%s</select>' % (
+                                  self._name('filter%d' % idx),
+                                  self.data_id,
+                                  self._filteroptions(idx))
                 result.append(fmt.rawHTML(select))
 
             result.append(fmt.table_cell(0))
@@ -156,10 +167,11 @@ class DataBrowserWidget(base.Widget):
                 for idx in range(len(row)):
                     if self.data.columns[idx].hidden:
                         continue
-                    result.append(fmt.table_cell(1))
                     if isinstance(row[idx], tuple):
+                        result.append(fmt.table_cell(1, abbr=unicode(row[idx][1])))
                         result.append(unicode(row[idx][0]))
                     else:
+                        result.append(fmt.table_cell(1))
                         result.append(unicode(row[idx]))
                     result.append(fmt.table_cell(0))
                 result.append(fmt.table_row(0))

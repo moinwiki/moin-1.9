@@ -200,6 +200,9 @@ function load() {
     
     // Editor stuff
     show_switch2gui();
+
+    // data browser widget
+    dbw_hide_buttons();
 }
 
 
@@ -217,3 +220,65 @@ addLoadEvent(load)
 // Catch before unloading the page
 window.onbeforeunload = before_unload
 
+function dbw_update_search(dbw_id)
+{
+    var table = document.getElementById(dbw_id+'table');
+    var cell;
+    var shown;
+    var i
+    var cols = table.rows[0].cells.length;
+    var filter = new Array();
+    var dofilter = new Array();
+    var form = document.forms[dbw_id+'form'];
+
+    for (i = 0; i < cols; i++) {
+        dofilter[i] = false;
+        if (form[dbw_id+'filter'+i]) {
+            dofilter[i] = true;
+            filter[i] = form[dbw_id+'filter'+i].value;
+            if (filter[i] == '[all]')
+                dofilter[i] = false;
+            if (filter[i] == '[empty]')
+                filter[i] = '';
+        }
+    }
+
+    for (i = 1; i < table.rows.length; i++) {
+        var show = true;
+        for (col = 0; col < cols; col++) {
+            if (!dofilter[col])
+                continue;
+
+            cell = table.rows[i].cells[col];
+
+            if (filter[col] == '[notempty]') {
+                if (cell.abbr == '') {
+                    show = false;
+                    break;
+                }
+            } else if (filter[col] != cell.abbr) {
+                show = false;
+                break;
+            }
+        }
+        if (show)
+            table.rows[i].style.display = '';
+        else
+            table.rows[i].style.display = 'none';
+    }
+}
+
+function dbw_hide_buttons() {
+    var form;
+    var elem;
+
+    for (var fidx = 0; fidx < document.forms.length; fidx++) {
+        form = document.forms[fidx];
+        for (var eidx = 0; eidx < form.elements.length; eidx++) {
+            elem = form.elements[eidx];
+            name = elem.name;
+            if (name.substr(0,4) == 'dbw.' && name.substr(-7) == '.submit')
+                elem.style.display = 'none';
+        }
+    }
+}
