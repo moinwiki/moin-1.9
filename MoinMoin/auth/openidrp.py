@@ -25,11 +25,15 @@ class OpenIDAuth(BaseAuth):
 
     def __init__(self, modify_request=None,
                        update_user=None,
-                       create_user=None):
+                       create_user=None,
+                       forced_service=None):
         BaseAuth.__init__(self)
         self._modify_request = modify_request or (lambda x: None)
         self._update_user = update_user or (lambda i, u: None)
         self._create_user = create_user or (lambda i, u: None)
+        self._forced_service = forced_service
+        if forced_service:
+            self.login_inputs = ['special_no_input']
 
     def _handle_user_data(self, request, u):
         create = not u
@@ -237,8 +241,9 @@ document.getElementById("openid_message").submit();
             return ContinueLogin(user_obj)
 
         openid_id = kw.get('openid_identifier')
+
         # nothing entered? continue...
-        if not openid_id:
+        if not self._forced_service and not openid_id:
             return ContinueLogin(user_obj)
 
         _ = request.getText
@@ -252,7 +257,14 @@ document.getElementById("openid_message").submit();
                                         MoinOpenIDStore(request))
 
         try:
-            oidreq = oidconsumer.begin(openid_id)
+            fserv = self._forced_service
+            if fserv:
+                if isinstance(fserv, str) or isinstance(fserv, unicode):
+                    oidreq = oidconsumer.begin(fserv)
+                else:
+                    oidreq = oidconsumer.beginWithoutDiscovery(fserv)
+            else:
+                oidreq = oidconsumer.begin(openid_id)
         except HTTPFetchingError:
             return ContinueLogin(None, _('Failed to resolve OpenID.'))
         except DiscoveryFailure:
