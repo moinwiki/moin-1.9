@@ -958,6 +958,10 @@ class Page(object):
             elif verb == "deprecated":
                 pi['deprecated'] = True
 
+            elif verb == "openiduser":
+                if request.cfg.openid_server_enable_user:
+                    pi['openid.user'] = args
+
             elif verb == "pragma":
                 try:
                     key, val = args.split(' ', 1)
@@ -1134,10 +1138,42 @@ class Page(object):
 
                 title = self.split_title()
 
+                html_head = ''
+                openid_username = self.page_name
+                userid = user.getUserId(request, openid_username)
+                if userid is None and 'openid.user' in self.pi:
+                    openid_username = self.pi['openid.user']
+                    userid = user.getUserId(request, openid_username)
+
+                if request.cfg.openid_server_restricted_users_group:
+                    request.dicts.addgroup(request,
+                                           request.cfg.openid_server_restricted_users_group)
+                if request.cfg.openid_server_enabled:
+                    if userid is not None and not request.cfg.openid_server_restricted_users_group or \
+                      request.dicts.has_member(request.cfg.openid_server_restricted_users_group, openid_username):
+                        html_head = '<link rel="openid2.provider" href="%s">' % \
+                                        wikiutil.escape(request.getQualifiedURL(self.url(request,
+                                                                                querystr={'action': 'serveopenid'},
+                                                                                relative=False)))
+                        html_head += '<link rel="openid.server" href="%s">' % \
+                                        wikiutil.escape(request.getQualifiedURL(self.url(request,
+                                                                                querystr={'action': 'serveopenid'},
+                                                                                relative=False)))
+                        html_head += '<meta http-equiv="x-xrds-location" content="%s">' % \
+                                        wikiutil.escape(request.getQualifiedURL(self.url(request,
+                                                                                querystr={'action': 'serveopenid', 'yadis': 'ep'},
+                                                                                relative=False)))
+                    elif self.page_name == request.cfg.page_front_page:
+                        html_head = '<meta http-equiv="x-xrds-location" content="%s">' % \
+                                        wikiutil.escape(request.getQualifiedURL(self.url(request,
+                                                                                querystr={'action': 'serveopenid', 'yadis': 'idp'},
+                                                                                relative=False)))
+
                 request.theme.send_title(title, page=self,
                                     print_mode=print_mode,
                                     media=media, pi_refresh=pi.get('refresh'),
                                     allow_doubleclick=1, trail=trail,
+                                    html_head=html_head,
                                     )
 
         # new page?
