@@ -414,10 +414,8 @@ class Formatter(FormatterBase):
         if not os.path.exists(fpath):
             return self.text("[attachment:%s]" % url)
         else:
-            return self.image(
-                title="attachment:%s" % url,
-                src=AttachFile.getAttachUrl(pagename, filename,
-                                            self.request, addts=1))
+            src = AttachFile.getAttachUrl(pagename, filename, self.request, addts=1)
+            return self.image(src=src, title="attachment:%s" % url)
 
     def attachment_drawing(self, url, text, **kw):
         _ = self.request.getText
@@ -430,11 +428,8 @@ class Formatter(FormatterBase):
         if not os.path.exists(fpath):
             return self.text("[drawing:%s]" % url)
         else:
-            return self.image(
-                alt=drawing,
-                src=AttachFile.getAttachUrl(pagename, filename, self.request,
-                                            addts=1),
-                html_class="drawing")
+            src = AttachFile.getAttachUrl(pagename, filename, self.request, addts=1)      
+            return self.image(alt=drawing, src=src, html_class="drawing")
 
 ### Images and Smileys ##############################################
 
