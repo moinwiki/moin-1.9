@@ -272,17 +272,16 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
     if mime_type != '*':
         files = [fname for fname in files if mime_type == mimetypes.guess_type(fname)[0]]
 
-    html = ""
+    html = []
     if files:
         if showheader:
-            html += _(
-                "To refer to attachments on a page, use '''{{{[[attachment:filename]]}}}''', \n"
+            html.append(fmt.rawHTML(_(
+                "To refer to attachments on a page, use '''{{{attachment:filename}}}''', \n"
                 "as shown below in the list of files. \n"
                 "Do '''NOT''' use the URL of the {{{[get]}}} link, \n"
                 "since this is subject to change and can break easily.",
                 wiki=True
-            )
-        html += "<ul>"
+            )))
 
         label_del = _("del")
         label_move = _("move")
@@ -292,79 +291,71 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
         label_unzip = _("unzip")
         label_install = _("install")
 
+        html.append(fmt.bullet_list(1))
         for file in files:
             mt = wikiutil.MimeType(filename=file)
-            st = os.stat(os.path.join(attach_dir, file).encode(config.charset))
-            fsize = "%.1f" % (float(st.st_size) / 1024)
-            fmtime = request.user.getFormattedDateTime(st.st_mtime)
-            baseurl = request.getScriptname()
+            fullpath = os.path.join(attach_dir, file).encode(config.charset)
+            st = os.stat(fullpath)
             base, ext = os.path.splitext(file)
-            escaped_fname = wikiutil.escape(file)
-            parmdict = {'baseurl': baseurl,
-                        'base': base,
-                        'file': escaped_fname,
-                        'fsize': fsize,
-                        'fmtime': fmtime,
-                        'pagename': pagename}
+            parmdict = {'file': wikiutil.escape(file),
+                        'fsize': "%.1f" % (float(st.st_size) / 1024),
+                        'fmtime': request.user.getFormattedDateTime(st.st_mtime),
+                       }
 
-            if request.user.may.delete(pagename) and not readonly:
-                del_link = (fmt.url(1, getAttachUrl(pagename, file, request, do='del')) +
-                            fmt.text(label_del) +
-                            fmt.url(0) +
-                            fmt.rawHTML('&nbsp;| '))
-            else:
-                del_link = ''
+            links = []
+            may_delete = request.user.may.delete(pagename)
+            if may_delete and not readonly:
+                links.append(fmt.url(1, getAttachUrl(pagename, file, request, do='del')) +
+                             fmt.text(label_del) +
+                             fmt.url(0))
 
-            if request.user.may.delete(pagename) and not readonly:
-                move_link = (fmt.url(1, getAttachUrl(pagename, file, request, do='move')) +
+            if may_delete and not readonly:
+                links.append(fmt.url(1, getAttachUrl(pagename, file, request, do='move')) +
                              fmt.text(label_move) +
-                             fmt.url(0) +
-                             fmt.rawHTML('&nbsp;| '))
-            else:
-                move_link = ''
+                             fmt.url(0))
+
+            links.append(fmt.url(1, getAttachUrl(pagename, file, request)) +
+                         fmt.text(label_get) +
+                         fmt.url(0))
 
             if ext == '.draw':
-                view_link = (fmt.url(1, getAttachUrl(pagename, file, request, drawing=parmdict['base'])) +
+                links.append(fmt.url(1, getAttachUrl(pagename, file, request, drawing=base)) +
                              fmt.text(label_edit) +
                              fmt.url(0))
             else:
-                view_link = (fmt.url(1, getAttachUrl(pagename, file, request, do='view')) +
+                links.append(fmt.url(1, getAttachUrl(pagename, file, request, do='view')) +
                              fmt.text(label_view) +
                              fmt.url(0))
 
-            is_zipfile = zipfile.is_zipfile(os.path.join(attach_dir, file).encode(config.charset))
+            is_zipfile = zipfile.is_zipfile(fullpath)
             if is_zipfile:
-                is_package = packages.ZipPackage(request, os.path.join(attach_dir, file).encode(config.charset)).isPackage()
+                is_package = packages.ZipPackage(request, fullpath).isPackage()
                 if is_package and request.user.isSuperUser():
-                    view_link += (' | ' + 
-                                  fmt.url(1, getAttachUrl(pagename, file, request, do='install')) +
-                                  fmt.text(label_install) +
-                                  fmt.url(0))
-                elif (not is_package and mt.minor == 'zip' and request.user.may.read(pagename) and request.user.may.delete(pagename)
-                      and request.user.may.write(pagename)):
-                    view_link += (' | ' + 
-                                  fmt.url(1, getAttachUrl(pagename, file, request, do='unzip')) +
-                                  fmt.text(label_unzip) +
-                                  fmt.url(0))
+                    links.append(fmt.url(1, getAttachUrl(pagename, file, request, do='install')) +
+                                 fmt.text(label_install) +
+                                 fmt.url(0))
+                elif (not is_package and mt.minor == 'zip' and
+                      may_delete and
+                      request.user.may.read(pagename) and
+                      request.user.may.write(pagename)):
+                    links.append(fmt.url(1, getAttachUrl(pagename, file, request, do='unzip')) +
+                                 fmt.text(label_unzip) +
+                                 fmt.url(0))
 
-            get_link = (fmt.url(1, getAttachUrl(pagename, file, request)) +
-                        fmt.text(label_get) +
-                        fmt.url(0) +
-                        fmt.rawHTML('&nbsp;| '))
+            html.append(fmt.listitem(1))
+            html.append("[%s]" % "&nbsp;| ".join(links))
+            html.append(" (%(fmtime)s, %(fsize)s KB) [[attachment:%(file)s]]" % parmdict)
+            html.append(fmt.listitem(0))
+        html.append(fmt.bullet_list(0))
 
-            parmdict['viewlink'] = view_link
-            parmdict['del_link'] = del_link
-            parmdict['move_link'] = move_link
-            parmdict['get_link'] = get_link
-
-            html += ('<li>[%(del_link)s%(move_link)s%(get_link)s%(viewlink)s]'
-                ' (%(fmtime)s, %(fsize)s KB) [[attachment:%(file)s]]</li>') % parmdict
-        html += "</ul>"
     else:
         if showheader:
-            html += '<p>%s</p>' % (_("No attachments stored for %(pagename)s") % {'pagename': wikiutil.escape(pagename)})
+            html.append(fmt.paragraph(1))
+            html.append(fmt.text(_("No attachments stored for %(pagename)s") % {
+                                   'pagename': wikiutil.escape(pagename)}))
+            html.append(fmt.paragraph(0))
 
-    return html
+    return ''.join(html)
 
 
 def _get_files(request, pagename):
@@ -1088,6 +1079,7 @@ def view_file(pagename, request):
 
     request.theme.send_footer(pagename)
     request.theme.send_closing_html()
+
 
 #############################################################################
 ### File attachment administration
