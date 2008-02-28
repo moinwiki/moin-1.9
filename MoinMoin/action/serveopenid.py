@@ -192,7 +192,7 @@ class MoinOpenIDServer:
 
         server_url = request.getQualifiedURL(
                          request.page.url(request,
-                                          querystr={'action':'serveopenid'},
+                                          querystr={'action': 'serveopenid'},
                                           relative=False))
 
         yadis_type = form.get('yadis', [None])[0]
@@ -302,7 +302,7 @@ class MoinOpenIDServer:
         reply = openidreq.answer(True, identity=identity, server_url=server_url)
         if data:
             # TODO
-            sreg_data = { }
+            sreg_data = {}
             sreq_req = sreg.SRegRequest.fromOpenIDRequest(openidreq.message)
             sreg_resp = sreg.SRegResponse.extractResponse(openidreq, sreg_data)
             sreg_resp.addToOpenIDResponse(reply.fields)
