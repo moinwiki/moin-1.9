@@ -209,20 +209,21 @@ class EmbedObject:
 
     def render(self):
         _ = self._
+        fmt = self.formatter
 
         if not self.target:
             msg = _('Not enough arguments given to EmbedObject macro! Try <<EmbedObject(attachment [,width=width] [,height=height] [,alt=alternate Text])>>')
-            return "%s%s%s" % (self.formatter.sysmsg(1), self.formatter.text(msg), self.formatter.sysmsg(0))
+            return "%s%s%s" % (fmt.sysmsg(1), fmt.text(msg), fmt.sysmsg(0))
 
         if not self._is_URL(self.target):
-            pagename, fname = AttachFile.absoluteName(self.target, self.formatter.page.page_name)
+            pagename, fname = AttachFile.absoluteName(self.target, fmt.page.page_name)
 
             if not AttachFile.exists(self.request, pagename, fname):
-                linktext = _('Upload new attachment "%(filename)s"')
-                return wikiutil.link_tag(self.request, ('%s?action=AttachFile&rename=%s' % (
-                                                         wikiutil.quoteWikinameURL(pagename),
-                                                         wikiutil.url_quote_plus(fname))),
-                                                         linktext % {'filename': fname})
+                linktext = _('Upload new attachment "%(filename)s"') % {'filename': fname}
+                target = AttachFile.getAttachUrl(pagename, fname, self.request, upload=True)
+                return (fmt.url(1, target) +
+                        fmt.text(linktext) +
+                        fmt.url(0))
 
             url = AttachFile.getAttachUrl(pagename, fname, self.request)
 
@@ -236,7 +237,7 @@ class EmbedObject:
                 url = wikiutil.escape(self.target)
 
         # XXX Should better use formatter.embed if available?
-        return self.macro.formatter.rawHTML(self.embed(mt, url))
+        return fmt.rawHTML(self.embed(mt, url))
 
 def execute(macro, args):
     return EmbedObject(macro, args).render()
