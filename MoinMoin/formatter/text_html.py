@@ -628,7 +628,7 @@ class Formatter(FormatterBase):
                 title = "attachment:%s" % url
                 css = 'attachment'
             else:
-                target = AttachFile.getAttachUploadUrl(pagename, fname, self.request)
+                target = AttachFile.getAttachUrl(pagename, fname, self.request, upload=True)
                 title = _('Upload new attachment "%(filename)s"') % {'filename': wikiutil.escape(fname)}
                 css = 'attachment nonexistent'
             return self.url(on, target, css=css, title=title)
@@ -655,14 +655,8 @@ class Formatter(FormatterBase):
                       'filename': wikiutil.escape(fname)}
             img = self.icon('attachimg')
             css = 'nonexistent'
-            return wikiutil.link_tag(
-                self.request,
-                ('%s?action=AttachFile&rename=%s' %
-                 (wikiutil.quoteWikinameURL(pagename),
-                  wikiutil.url_quote_plus(fname))),
-                img,
-                title=title,
-                css_class=css)
+            target = AttachFile.getAttachUrl(pagename, fname, self.request, upload=True)
+            return self.url(1, target, css=css, title=title) + img + self.url(0)
 
     def attachment_drawing(self, url, text, **kw):
         _ = self.request.getText
@@ -681,21 +675,14 @@ class Formatter(FormatterBase):
                 fname, filename = gfname, gfilename
 
         # check whether attachment exists, possibly point to upload form
+        drawing_url = AttachFile.getAttachUrl(pagename, fname, self.request, drawing=drawing, upload=True)
         if not exists:
             linktext = _('Create new drawing "%(filename)s (opens in new window)"')
-            return wikiutil.link_tag(
-                self.request,
-                ('%s?action=AttachFile&rename=%s%s' %
-                 (wikiutil.quoteWikinameURL(pagename),
-                  wikiutil.url_quote_plus(fname),
-                  drawing and ('&drawing=%s' % wikiutil.url_quote(drawing)) or '')),
-                linktext % {'filename': self.text(fname)})
+            return (self.url(1, drawing_url) +
+                    self.text(linktext % {'filename': fname}) +
+                    self.url(0))
 
         mappath = AttachFile.getFilename(self.request, pagename, drawing + u'.map')
-        edit_link = ('%s?action=AttachFile&rename=%s&drawing=%s' % (
-            wikiutil.quoteWikinameURL(pagename),
-            wikiutil.url_quote_plus(fname),
-            wikiutil.url_quote(drawing)))
 
         # check for map file
         if os.path.exists(mappath):
@@ -714,23 +701,18 @@ class Formatter(FormatterBase):
                 map = re.sub('href\s*=\s*"((?!%TWIKIDRAW%).+?)"', r'href="\1" alt="\1" title="\1"', map)
                 # add in edit links plus alt and title attributes
                 alt = title = _('Edit drawing %(filename)s (opens in new window)') % {'filename': self.text(fname)}
-                map = map.replace('%TWIKIDRAW%"', '%s" alt="%s" title="%s"' % (edit_link, alt, title))
+                map = map.replace('%TWIKIDRAW%"', '%s" alt="%s" title="%s"' % (drawing_url, alt, title))
                 # unxml, because 4.01 concrete will not validate />
                 map = map.replace('/>', '>')
                 alt = title = _('Clickable drawing: %(filename)s') % {'filename': self.text(fname)}
-                return (map + self.image(
-                    alt=alt,
-                    title=title,
-                    src=AttachFile.getAttachUrl(pagename, filename, self.request, addts=1),
-                    usemap='#'+mapid, css="drawing"))
+                src = AttachFile.getAttachUrl(pagename, filename, self.request, addts=1)
+                return (map + self.image(alt=alt, title=title, src=src, usemap='#'+mapid, css="drawing"))
         else:
             alt = title = _('Edit drawing %(filename)s (opens in new window)') % {'filename': self.text(fname)}
-            return wikiutil.link_tag(self.request,
-                                     edit_link,
-                                     self.image(alt=alt,
-                                                title=title,
-                                                src=AttachFile.getAttachUrl(pagename, filename, self.request, addts=1), css="drawing"),
-                                     title=title)
+            src = AttachFile.getAttachUrl(pagename, filename, self.request, addts=1)
+            return (self.url(1, drawing_url) +
+                    self.image(alt=alt, title=title, src=src, css="drawing") +
+                    self.url(0))
 
 
     # Text ##############################################################
@@ -1405,3 +1387,4 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
 
     def sanitize_to_id(self, text):
         return wikiutil.anchor_name_from_text(text)
+

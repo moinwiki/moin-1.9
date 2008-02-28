@@ -232,7 +232,6 @@ class DefaultConfig:
     actions_excluded = ['xmlrpc'] # ['DeletePage', 'AttachFile', 'RenamePage', 'test', ]
     allow_xslt = False
     antispam_master_url = "http://master.moinmo.in/?action=xmlrpc2"
-    attachments = None # {'dir': path, 'url': url-prefix}
     auth = [authmodule.MoinLogin()]
     # default to http and xmlrpc_applytoken to get old semantics
     # xmlrpc_applytoken shall be removed once that code is changed
