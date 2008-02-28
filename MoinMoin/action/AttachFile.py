@@ -45,20 +45,20 @@ action_name = __name__.split('.')[-1]
 class AttachmentAlreadyExists(Exception):
     pass
 
+
 def getBasePath(request):
-    """ Get base path where page dirs for attachments are stored.
-    """
+    """ Get base path where page dirs for attachments are stored. """
     return request.rootpage.getPagePath('pages')
 
 
 def getAttachDir(request, pagename, create=0):
-    """ Get directory where attachments for page `pagename` are stored.
-    """
+    """ Get directory where attachments for page `pagename` are stored. """
     if request.page and pagename == request.page.page_name:
         page = request.page # reusing existing page obj is faster
     else:
         page = Page(request, pagename)
     return page.getPagePath("attachments", check_create=create)
+
 
 def absoluteName(url, pagename):
     """ Get (pagename, filename) of an attachment: link
@@ -74,6 +74,7 @@ def absoluteName(url, pagename):
     else:
         return u"/".join(pieces[:-1]), pieces[-1]
 
+
 def attachUrl(request, pagename, filename=None, **kw):
     # filename is not used yet, but should be used later to make a sub-item url
     if kw:
@@ -81,6 +82,7 @@ def attachUrl(request, pagename, filename=None, **kw):
     else:
         qs = ''
     return "%s/%s%s" % (request.getScriptname(), wikiutil.quoteWikinameURL(pagename), qs)
+
     
 def getAttachUrl(pagename, filename, request, addts=0, escaped=0, do='get', drawing='', upload=False):
     """ Get URL that points to attachment `filename` of page `pagename`. """
@@ -137,19 +139,21 @@ def getFilename(request, pagename, filename):
         filename = filename.encode(config.charset)
     return os.path.join(getAttachDir(request, pagename, create=1), filename)
 
+
 def exists(request, pagename, filename):
     """ check if page <pagename> has a file <filename> attached """
     fpath = getFilename(request, pagename, filename)
     return os.path.exists(fpath)
+
 
 def size(request, pagename, filename):
     """ return file size of file attachment """
     fpath = getFilename(request, pagename, filename)
     return os.path.getsize(fpath)
 
+
 def info(pagename, request):
-    """ Generate snippet with info on the attachment for page `pagename`.
-    """
+    """ Generate snippet with info on the attachment for page `pagename`. """
     _ = request.getText
 
     attach_dir = getAttachDir(request, pagename)
@@ -164,11 +168,11 @@ def info(pagename, request):
         }
     return "\n<p>\n%s\n</p>\n" % attach_info
 
-def add_attachment(request, pagename, target, filecontent, overwrite=0):
-    # replace illegal chars
 
+def add_attachment(request, pagename, target, filecontent, overwrite=0):
     _ = request.getText
 
+    # replace illegal chars
     target = wikiutil.taintfilename(target)
 
     # set mimetype from extension, or from given mimetype
@@ -368,12 +372,14 @@ def _get_files(request, pagename):
     if os.path.isdir(attach_dir):
         files = [fn.decode(config.charset) for fn in os.listdir(attach_dir)]
         files.sort()
-        return files
-    return []
+    else:
+        files = []
+    return files
 
 
 def _get_filelist(request, pagename):
     return _build_filelist(request, pagename, 1, 0)
+
 
 def _subdir_exception(zf):
     """
@@ -385,16 +391,17 @@ def _subdir_exception(zf):
 
     b = zf.namelist()
     if not '/' in b[0]:
-        return False #No directory
+        return False # no directory
     slashoffset = b[0].index('/')
     directory = b[0][:slashoffset]
     for origname in b:
         if origname.rfind('/') != slashoffset or origname[:slashoffset] != directory:
-            return False #Multiple directories or different directory
+            return False # multiple directories or different directory
     names = {}
     for origname in b:
         names[origname] = origname[slashoffset+1:]
-    return names #Returns dict of {origname: safename}
+    return names # returns dict of {origname: safename}
+
 
 def error_msg(pagename, request, msg):
     request.theme.add_msg(msg, "error")
@@ -502,10 +509,6 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.""")
     'textcha': TextCha(request).render(),
 })
 
-#<dt>%(upload_label_mime)s</dt>
-#<dd><input type="text" name="mime" size="50"></dd>
-#    'upload_label_mime': _('MIME Type (optional)'),
-
     request.write('<h2>' + _("Attached Files") + '</h2>')
     request.write(_get_filelist(request, pagename))
 
@@ -521,8 +524,7 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.""")
 #############################################################################
 
 def execute(pagename, request):
-    """ Main dispatcher for the 'AttachFile' action.
-    """
+    """ Main dispatcher for the 'AttachFile' action. """
     _ = request.getText
 
     if action_name in request.cfg.actions_excluded:
@@ -619,6 +621,7 @@ def execute(pagename, request):
     if msg:
         error_msg(pagename, request, msg)
 
+
 def upload_form(pagename, request, msg=''):
     _ = request.getText
 
@@ -632,6 +635,7 @@ def upload_form(pagename, request, msg=''):
     request.write('</div>\n') # end content div
     request.theme.send_footer(pagename)
     request.theme.send_closing_html()
+
 
 def do_upload(pagename, request, overwrite):
     _ = request.getText
@@ -716,6 +720,7 @@ def save_drawing(pagename, request):
     if ext == '.map':
         os.utime(getAttachDir(request, pagename), None)
 
+
 def del_file(pagename, request):
     _ = request.getText
 
@@ -734,6 +739,7 @@ def del_file(pagename, request):
             index.remove_item(pagename, filename)
 
     upload_form(pagename, request, msg=_("Attachment '%(filename)s' deleted.") % {'filename': filename})
+
 
 def move_file(request, pagename, new_pagename, attachment, new_attachment):
     _ = request.getText
@@ -764,6 +770,7 @@ def move_file(request, pagename, new_pagename, attachment, new_attachment):
         upload_form(pagename, request, msg=_("Page %(newpagename)s does not exists or you don't have enough rights.") % {
             'newpagename': new_pagename})
 
+
 def attachment_move(pagename, request):
     _ = request.getText
     if 'newpagename' in request.form:
@@ -781,6 +788,7 @@ def attachment_move(pagename, request):
 
     attachment = request.form.get('oldattachmentname')[0]
     move_file(request, pagename, new_pagename, attachment, new_attachment)
+
 
 def send_moveform(pagename, request):
     _ = request.getText
@@ -834,6 +842,7 @@ def send_moveform(pagename, request):
     request.theme.add_msg(formhtml, "dialog")
     return thispage.send_page()
 
+
 def get_file(pagename, request):
     import shutil
 
@@ -869,6 +878,7 @@ def get_file(pagename, request):
         # send data
         shutil.copyfileobj(open(fpath, 'rb'), request, 8192)
 
+
 def install_package(pagename, request):
     _ = request.getText
 
@@ -889,6 +899,7 @@ def install_package(pagename, request):
         msg = _('The file %s is not a MoinMoin package file.') % wikiutil.escape(target)
 
     upload_form(pagename, request, msg=msg)
+
 
 def unzip_file(pagename, request):
     _ = request.getText
@@ -920,8 +931,8 @@ def unzip_file(pagename, request):
             sum_size_over_all_valid_files = 0.0
             count_valid_files = 0
             namelist = _subdir_exception(zf)
-            if not namelist: #if it's not handled by _subdir_exception()
-                #Convert normal zf.namelist() to {origname:finalname} dict
+            if not namelist: # if it's not handled by _subdir_exception()
+                # convert normal zf.namelist() to {origname:finalname} dict
                 namelist = {}
                 for name in zf.namelist():
                     namelist[name] = name
@@ -973,6 +984,7 @@ def unzip_file(pagename, request):
 
     upload_form(pagename, request, msg=wikiutil.escape(msg))
 
+
 def send_viewfile(pagename, request):
     _ = request.getText
     fmt = request.html_formatter
@@ -1007,7 +1019,6 @@ def send_viewfile(pagename, request):
                 return
             except IOError:
                 pass
-
 
         request.write(request.formatter.preformatted(1))
         # If we have text but no colorizing parser we try to decode file contents.
@@ -1083,8 +1094,7 @@ def view_file(pagename, request):
 #############################################################################
 
 def do_admin_browser(request):
-    """ Browser for SystemAdmin macro.
-    """
+    """ Browser for SystemAdmin macro. """
     from MoinMoin.util.dataset import TupleDataset, Column
     _ = request.getText
 
@@ -1093,7 +1103,6 @@ def do_admin_browser(request):
         Column('page', label=('Page')),
         Column('file', label=('Filename')),
         Column('size', label=_('Size'), align='right'),
-        #Column('action', label=_('Action')),
     ]
 
     # iterate over pages that might have attachments
@@ -1110,7 +1119,6 @@ def do_admin_browser(request):
                     Page(request, pagename).link_to(request, querystr="action=AttachFile"),
                     wikiutil.escape(filename.decode(config.charset)),
                     os.path.getsize(filepath),
-                    # '',
                 ))
 
     if data:

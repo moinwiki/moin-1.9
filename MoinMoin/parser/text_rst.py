@@ -357,8 +357,7 @@ class MoinTranslator(html4css1.HTMLTranslator):
                     self.wiki_text = self.fixup_wiki_formatting(self.wiki_text)
                     self.add_wiki_markup()
                 # Attachment exists, just get a link to it.
-                node['refuri'] = AttachFile.getAttachUrl(self.request.page.page_name,
-                        link, self.request)
+                node['refuri'] = AttachFile.getAttachUrl(self.request.page.page_name, link, self.request)
                 if not [i for i in node.children if i.__class__ == docutils.nodes.image]:
                     node['classes'].append(prefix)
             elif prefix == 'wiki':
@@ -417,8 +416,7 @@ class MoinTranslator(html4css1.HTMLTranslator):
                 self.add_wiki_markup()
             # Attachment exists, get a link to it.
             # create the url
-            node['uri'] = AttachFile.getAttachUrl(self.request.page.page_name,
-                    attach_name, self.request, addts=1)
+            node['uri'] = AttachFile.getAttachUrl(self.request.page.page_name, attach_name, self.request, addts=1)
             if not node.hasattr('alt'):
                 node['alt'] = node.get('name', uri)
         html4css1.HTMLTranslator.visit_image(self, node)
