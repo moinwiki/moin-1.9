@@ -83,7 +83,7 @@ def attachUrl(request, pagename, filename=None, **kw):
         qs = ''
     return "%s/%s%s" % (request.getScriptname(), wikiutil.quoteWikinameURL(pagename), qs)
 
-    
+
 def getAttachUrl(pagename, filename, request, addts=0, escaped=0, do='get', drawing='', upload=False):
     """ Get URL that points to attachment `filename` of page `pagename`. """
     if upload:
@@ -523,94 +523,18 @@ def execute(pagename, request):
         error_msg(pagename, request, msg)
         return
 
-    do = request.form.get('do')
-    if do is None:
-        upload_form(pagename, request)
-        return
-
-    msg = None
-    do = do[0]
-
-    # First handle read-only access to attachments:
-    if do == 'get':
-        if request.user.may.read(pagename):
-            get_file(pagename, request)
-        else:
-            msg = _('You are not allowed to get attachments from this page.')
-    elif do == 'view':
-        if request.user.may.read(pagename):
-            view_file(pagename, request)
-        else:
-            msg = _('You are not allowed to view attachments of this page.')
-    elif do == 'move':
-        if request.user.may.delete(pagename):
-            send_moveform(pagename, request)
-        else:
-            msg = _('You are not allowed to move attachments from this page.')
-
-    # Second handle write access:
-    elif do == 'upload':
-        # Currently we only check TextCha for upload (this is what spammers ususally do),
-        # but it could be extended to more/all attachment write access
-        if not TextCha(request).check_answer_from_form():
-            msg = _('TextCha: Wrong answer! Go back and try again...')
-        else:
-            overwrite = 0
-            if 'overwrite' in request.form:
-                try:
-                    overwrite = int(request.form['overwrite'][0])
-                except:
-                    pass
-            if (not overwrite and request.user.may.write(pagename)) or \
-               (overwrite and request.user.may.write(pagename) and request.user.may.delete(pagename)):
-                if 'file' in request.form:
-                    do_upload(pagename, request, overwrite)
-                else:
-                    # This might happen when trying to upload file names
-                    # with non-ascii characters on Safari.
-                    msg = _("No file content. Delete non ASCII characters from the file name and try again.")
-            else:
-                msg = _('You are not allowed to attach a file to this page.')
-    elif do == 'savedrawing':
-        if request.user.may.write(pagename):
-            save_drawing(pagename, request)
-            request.emit_http_headers()
-            request.write("OK")
-        else:
-            msg = _('You are not allowed to save a drawing on this page.')
-    elif do == 'del':
-        if request.user.may.delete(pagename):
-            del_file(pagename, request)
-        else:
-            msg = _('You are not allowed to delete attachments on this page.')
-    elif do == 'attachment_move':
-        if 'cancel' in request.form:
-            msg = _('Move aborted!')
-            error_msg(pagename, request, msg)
-            return
-        if not wikiutil.checkTicket(request, request.form['ticket'][0]):
-            msg = _('Please use the interactive user interface to move attachments!')
-            error_msg(pagename, request, msg)
-            return
-        if request.user.may.delete(pagename):
-            attachment_move(pagename, request)
-        else:
-            msg = _('You are not allowed to move attachments from this page.')
-    elif do == 'unzip':
-        if request.user.may.delete(pagename) and request.user.may.read(pagename) and request.user.may.write(pagename):
-            unzip_file(pagename, request)
-        else:
-            msg = _('You are not allowed to unzip attachments of this page.')
-    elif do == 'install':
-        if request.user.isSuperUser():
-            install_package(pagename, request)
-        else:
-            msg = _('You are not allowed to install files.')
+    do = request.form.get('do', ['upload_form'])
+    handler = globals().get('_do_%s' % do[0])
+    if handler:
+        msg = handler(pagename, request)
     else:
-        msg = _('Unsupported AttachFile sub-action: %s') % (wikiutil.escape(do), )
-
+        msg = _('Unsupported AttachFile sub-action: %s', formatted=False) % (wikiutil.escape(do[0]), )
     if msg:
         error_msg(pagename, request, msg)
+
+
+def _do_upload_form(pagename, request):
+    upload_form(pagename, request)
 
 
 def upload_form(pagename, request, msg=''):
@@ -628,16 +552,33 @@ def upload_form(pagename, request, msg=''):
     request.theme.send_closing_html()
 
 
-def do_upload(pagename, request, overwrite):
+def _do_upload(pagename, request):
     _ = request.getText
+    # Currently we only check TextCha for upload (this is what spammers ususally do),
+    # but it could be extended to more/all attachment write access
+    if not TextCha(request).check_answer_from_form():
+        return _('TextCha: Wrong answer! Go back and try again...')
+
+    overwrite = request.form.get('overwrite', ['0'])[0]
+    try:
+        overwrite = int(overwrite)
+    except:
+        overwrite = 0
+
+    if (overwrite or not request.user.may.write(pagename)) and \
+       (not overwrite or not request.user.may.write(pagename) or not request.user.may.delete(pagename)):
+        return _('You are not allowed to attach a file to this page.')
+
+    if 'file' not in request.form:
+        # This might happen when trying to upload file names
+        # with non-ascii characters on Safari.
+        return _("No file content. Delete non ASCII characters from the file name and try again.")
 
     # make filename
-    filename = None
-    if 'file__filename__' in request.form:
-        filename = request.form['file__filename__']
-    rename = None
-    if 'rename' in request.form:
-        rename = request.form['rename'][0].strip()
+    filename = request.form.get('file__filename__')
+    rename = request.form.get('rename', [None])[0]
+    if rename:
+        rename = rename.strip()
 
     # if we use twisted, "rename" field is NOT optional, because we
     # can't access the client filename
@@ -648,8 +589,7 @@ def do_upload(pagename, request, overwrite):
     elif filename:
         target = filename
     else:
-        error_msg(pagename, request, _("Filename of attachment not specified!"))
-        return
+        return _("Filename of attachment not specified!")
 
     # get file content
     filecontent = request.form['file'][0]
@@ -677,7 +617,9 @@ def do_upload(pagename, request, overwrite):
     upload_form(pagename, request, msg)
 
 
-def save_drawing(pagename, request):
+def _do_savedrawing(pagename, request):
+    if not request.user.may.write(pagename):
+        return _('You are not allowed to save a drawing on this page.')
 
     filename = request.form['filename'][0]
     filecontent = request.form['filepath'][0]
@@ -711,11 +653,16 @@ def save_drawing(pagename, request):
     if ext == '.map':
         os.utime(getAttachDir(request, pagename), None)
 
+    request.emit_http_headers()
+    request.write("OK")
 
-def del_file(pagename, request):
+
+def _do_del(pagename, request):
     _ = request.getText
 
-    filename, fpath = _access_file(pagename, request)
+    pagename, filename, fpath = _access_file(pagename, request)
+    if not request.user.may.delete(pagename):
+        return _('You are not allowed to delete attachments on this page.')
     if not filename:
         return # error msg already sent in _access_file
 
@@ -762,8 +709,16 @@ def move_file(request, pagename, new_pagename, attachment, new_attachment):
             'newpagename': new_pagename})
 
 
-def attachment_move(pagename, request):
+def _do_attachment_move(pagename, request):
     _ = request.getText
+
+    if 'cancel' in request.form:
+        return _('Move aborted!')
+    if not wikiutil.checkTicket(request, request.form['ticket'][0]):
+        return _('Please use the interactive user interface to move attachments!')
+    if not request.user.may.delete(pagename):
+        return _('You are not allowed to move attachments from this page.')
+
     if 'newpagename' in request.form:
         new_pagename = request.form.get('newpagename')[0]
     else:
@@ -781,10 +736,12 @@ def attachment_move(pagename, request):
     move_file(request, pagename, new_pagename, attachment, new_attachment)
 
 
-def send_moveform(pagename, request):
+def _do_move(pagename, request):
     _ = request.getText
 
-    filename, fpath = _access_file(pagename, request)
+    pagename, filename, fpath = _access_file(pagename, request)
+    if not request.user.may.delete(pagename):
+        return _('You are not allowed to move attachments from this page.')
     if not filename:
         return # error msg already sent in _access_file
 
@@ -834,10 +791,12 @@ def send_moveform(pagename, request):
     return thispage.send_page()
 
 
-def get_file(pagename, request):
+def _do_get(pagename, request):
     import shutil
 
-    filename, fpath = _access_file(pagename, request)
+    pagename, filename, fpath = _access_file(pagename, request)
+    if not request.user.may.read(pagename):
+        return _('You are not allowed to get attachments from this page.')
     if not filename:
         return # error msg already sent in _access_file
 
@@ -870,10 +829,12 @@ def get_file(pagename, request):
         shutil.copyfileobj(open(fpath, 'rb'), request, 8192)
 
 
-def install_package(pagename, request):
+def _do_install(pagename, request):
     _ = request.getText
 
-    target, targetpath = _access_file(pagename, request)
+    pagename, target, targetpath = _access_file(pagename, request)
+    if not request.user.isSuperUser():
+        return _('You are not allowed to install files.')
     if not target:
         return
 
@@ -892,11 +853,13 @@ def install_package(pagename, request):
     upload_form(pagename, request, msg=msg)
 
 
-def unzip_file(pagename, request):
+def _do_unzip(pagename, request):
     _ = request.getText
     valid_pathname = lambda name: ('/' not in name) and ('\\' not in name)
 
-    filename, fpath = _access_file(pagename, request)
+    pagename, filename, fpath = _access_file(pagename, request)
+    if not (request.user.may.delete(pagename) and request.user.may.read(pagename) and request.user.may.write(pagename)):
+        return _('You are not allowed to unzip attachments of this page.')
     if not filename:
         return # error msg already sent in _access_file
 
@@ -1056,10 +1019,13 @@ def send_viewfile(pagename, request):
     return
 
 
-def view_file(pagename, request):
+def _do_view(pagename, request):
     _ = request.getText
 
-    filename, fpath = _access_file(pagename, request)
+    orig_pagename = pagename
+    pagename, filename, fpath = _access_file(pagename, request)
+    if not request.user.may.read(pagename):
+        return _('You are not allowed to view attachments of this page.')
     if not filename:
         return
 
