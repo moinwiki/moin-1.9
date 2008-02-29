@@ -1252,7 +1252,7 @@ class RequestBase(object):
                         msg += " " + _("Login and try again.")
 
                 if msg:
-                    self.request.theme.add_msg(msg, "error")
+                    self.theme.add_msg(msg, "error")
                     self.page.send_page()
                 # Try action
                 else:
@@ -1264,7 +1264,7 @@ class RequestBase(object):
                         if not self.user.valid:
                             # Suggest non valid user to login
                             msg += " " + _("Login and try again.")
-                        self.request.theme.add_msg(msg, "error")
+                        self.theme.add_msg(msg, "error")
                         self.page.send_page()
                     else:
                         handler(self.page.page_name, self)
