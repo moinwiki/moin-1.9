@@ -1113,21 +1113,21 @@ class Page(object):
             # send the page header
             if self.default_formatter:
                 if self.rev:
-                    request.theme.add_msg("<strong>%s</strong><br>%s" % (
+                    request.theme.add_msg("<strong>%s</strong><br>" % (
                         _('Revision %(rev)d as of %(date)s') % {
                             'rev': self.rev,
                             'date': self.mtime_printable(request)
-                        }, "info"))
+                        }), "info")
 
                 # This redirect message is very annoying.
                 # Less annoying now without the warning sign.
                 if 'redirect' in request.form:
                     redir = request.form['redirect'][0]
-                    request.theme.add_msg('<strong>%s</strong><br>%s' % (
+                    request.theme.add_msg('<strong>%s</strong><br>' % (
                         _('Redirected from page "%(page)s"') % {'page':
                             wikiutil.link_tag(request, wikiutil.quoteWikinameURL(redir) + "?action=show", self.formatter.text(redir))}), "info")
                 if 'redirect' in pi:
-                    request.theme.add_msg('<strong>%s</strong><br>%s' % (
+                    request.theme.add_msg('<strong>%s</strong><br>' % (
                         _('This page redirects to page "%(page)s"') % {'page': wikiutil.escape(pi['redirect'])}), "info")
 
                 # Page trail
