@@ -156,7 +156,7 @@ def handle(request, err):
         raise err
 
     savedError = sys.exc_info()
-    logging.error('%s: %s' % (err.__class__.__name__, str(err)), exc_info=savedError)
+    logging.exception('An exception occured.')
     try:
         debug = 'debug' in getattr(request, 'form', {})
         # default to True here to allow an admin setting up the wiki

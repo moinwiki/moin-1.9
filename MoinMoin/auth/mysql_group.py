@@ -55,11 +55,7 @@ class MysqlGroupAuth(BaseAuth):
             m = MySQLdb.connect(host=self.host, user=self.user,
                                 passwd=self.passwd, db=self.dbname)
         except:
-            import sys
-            import traceback
-            info = sys.exc_info()
-            logging.error("authorization failed due to exception connecting to DB, traceback follows...")
-            logging.error(''.join(traceback.format_exception(*info)))
+            logging.exception("authorization failed due to exception connecting to DB, traceback follows...")
             return CancelLogin(_('Failed to connect to database.'))
 
         c = m.cursor()
