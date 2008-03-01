@@ -170,9 +170,6 @@ class LDAPAuth(BaseAuth):
             return ContinueLogin(u)
 
         except:
-            import traceback
-            info = sys.exc_info()
-            logging.error("caught an exception, traceback follows...")
-            logging.error(''.join(traceback.format_exception(*info)))
+            logging.exception("caught an exception, traceback follows...")
             return CancelLogin(None)
 
