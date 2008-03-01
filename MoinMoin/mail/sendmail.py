@@ -2,12 +2,17 @@
 """
     MoinMoin - email helper functions
 
-    @copyright: 2003 Juergen Hermann <jh@web.de>
+    @copyright: 2003 Juergen Hermann <jh@web.de>,
+                2008 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
 import os, re
 from email.Header import Header
+
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin import config
 
 _transdict = {"AT": "@", "DOT": ".", "DASH": "-"}
@@ -19,10 +24,10 @@ def encodeAddress(address, charset):
     e.g. '"Jürgen Hermann" <jh@web.de>'. According to the RFC, the name
     part should be encoded, the address should not.
 
-    @param address: email address, posibly using '"name" <address>' format
+    @param address: email address, possibly using '"name" <address>' format
     @type address: unicode
-    @param charset: sepcifying both the charset and the encoding, e.g
-        quoted printble or base64.
+    @param charset: specifying both the charset and the encoding, e.g
+                    quoted printable or base64.
     @type charset: email.Charset.Charset instance
     @rtype: string
     @return: encoded address
@@ -101,6 +106,7 @@ def sendmail(request, to, subject, text, **kw):
     # Send the message
     if not cfg.mail_sendmail:
         try:
+            logging.debug("trying to send mail (smtp) via smtp server '%s'" % cfg.mail_smarthost)
             host, port = (cfg.mail_smarthost + ':25').split(':')[:2]
             server = smtplib.SMTP(host, int(port))
             try:
@@ -112,8 +118,10 @@ def sendmail(request, to, subject, text, **kw):
                         if server.has_extn('starttls'):
                             server.starttls()
                             server.ehlo()
+                            logging.debug("tls connection to smtp server established")
                     except:
-                        pass
+                        logging.debug("could not establish a tls connection to smtp server, continuing without tls")
+                    logging.debug("trying to log in to smtp server using account '%s'" % user)
                     server.login(user, pwd)
                 server.sendmail(mail_from, to, msg.as_string())
             finally:
@@ -123,23 +131,29 @@ def sendmail(request, to, subject, text, **kw):
                     # in case the connection failed, SMTP has no "sock" attribute
                     pass
         except smtplib.SMTPException, e:
+            logging.exception("smtp mail failed with an exception.")
             return (0, str(e))
         except (os.error, socket.error), e:
+            logging.exception("smtp mail failed with an exception.")
             return (0, _("Connection to mailserver '%(server)s' failed: %(reason)s") % {
                 'server': cfg.mail_smarthost,
                 'reason': str(e)
             })
     else:
         try:
+            logging.debug("trying to send mail (sendmail)")
             sendmailp = os.popen(cfg.mail_sendmail, "w")
             # msg contains everything we need, so this is a simple write
             sendmailp.write(msg.as_string())
             sendmail_status = sendmailp.close()
             if sendmail_status:
+                logging.error("sendmail failed with status: %s" % str(sendmail_status))
                 return (0, str(sendmail_status))
         except:
+            logging.exception("sendmail failed with an exception.")
             return (0, _("Mail not sent"))
 
+    logging.debug("Mail sent OK")
     return (1, _("Mail sent OK"))
 
 
