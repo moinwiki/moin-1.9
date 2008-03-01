@@ -151,11 +151,11 @@ class Translation(object):
             self.direction = info['x-direction']
             self.maintainer = info['last-translator']
         except KeyError, err:
-            logging.debug("metadata problem in %r: %s" % (self.language, str(err)))
+            logging.warning("metadata problem in %r: %s" % (self.language, str(err)))
         try:
             assert self.direction in ('ltr', 'rtl', )
         except (AttributeError, AssertionError), err:
-            logging.debug("direction problem in %r: %s" % (self.language, str(err)))
+            logging.warning("direction problem in %r: %s" % (self.language, str(err)))
 
     def formatMarkup(self, request, text, percent):
         """ Formats the text using the wiki parser/formatter.
@@ -291,9 +291,8 @@ def getText(original, request, lang, **kw):
             # to get english translation, maybe formatted.
             # if we don't find an english "translation", we just format it
             # on the fly (this is needed for cfg.editor_quickhelp).
-            logging.debug("requested string not in %r translation: %r" % (lang, original))
             if lang != 'en':
-                logging.debug("falling back from %r to english" % lang)
+                logging.debug("falling back to english, requested string not in %r translation: %r" % (lang, original))
                 translated = getText(original, request, 'en', wiki=formatted, percent=percent)
             elif formatted: # and lang == 'en'
                 logging.debug("formatting for %r on the fly: %r" % (lang, original))
