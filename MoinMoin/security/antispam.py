@@ -2,24 +2,16 @@
 """
     This implements a global (and a local) blacklist against wiki spammers.
 
-    @copyright: 2005-2007 MoinMoin:ThomasWaldmann
+    @copyright: 2005-2008 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details
 """
 
-# give some log entries to stderr
-debug = 0
-
 import re, time, datetime
-
-# needed for py 2.3 compat:
-try:
-    frozenset
-except NameError:
-    from sets import ImmutableSet as frozenset
 
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
+from MoinMoin.support.python_compatibility import frozenset
 from MoinMoin.security import Permissions
 from MoinMoin import caching, wikiutil
 
@@ -45,13 +37,6 @@ class WikirpcError(Error):
 
 
 # Functions ------------------------------------------------------------
-
-def dprint(s):
-    if debug:
-        if isinstance(s, unicode):
-            s = s.encode('utf-8')
-        logging.debug('antispam: %s' % s)
-
 
 def makelist(text):
     """ Split text into lines, strip them, skip # comments """
@@ -81,7 +66,7 @@ def getblacklist(request, pagename, do_update):
         failure = caching.CacheEntry(request, "antispam", "failure", scope='wiki')
         fail_time = failure.mtime() # only update if no failure in last hour
         if (mymtime < tooold) and (fail_time < tooold):
-            dprint("%d *BadContent too old, have to check for an update..." % tooold)
+            logging.info("%d *BadContent too old, have to check for an update..." % tooold)
             import xmlrpclib
             import socket
 
@@ -89,8 +74,8 @@ def getblacklist(request, pagename, do_update):
             old_timeout = socket.getdefaulttimeout()
             socket.setdefaulttimeout(timeout)
 
-            master = xmlrpclib.ServerProxy(request.cfg.antispam_master_url)
-
+            master_url = request.cfg.antispam_master_url
+            master = xmlrpclib.ServerProxy(master_url)
             try:
                 # Get BadContent info
                 master.putClientInfo('ANTISPAM-CHECK',
@@ -112,10 +97,10 @@ def getblacklist(request, pagename, do_update):
                     # for python <= 2.4.x
                     mydate = xmlrpclib.DateTime(tuple(time.gmtime(mymtime)))
 
-                dprint("master: %s mine: %s" % (masterdate, mydate))
+                logging.debug("master: %s mine: %s" % (masterdate, mydate))
                 if mydate < masterdate:
                     # Get new copy and save
-                    dprint("Fetching page from master...")
+                    logging.info("Fetching page from %s..." % master_url)
                     master.putClientInfo('ANTISPAM-FETCH', request.http_host + request.script_name)
                     response = master.getPage(pagename)
                     if isinstance(response, dict) and 'faultCode' in response:
@@ -128,21 +113,18 @@ def getblacklist(request, pagename, do_update):
                                        # is no updated master page
 
             except (socket.error, xmlrpclib.ProtocolError), err:
-                # Log the error
-                dprint('Timeout / socket / protocol error when accessing'
-                       ' moinmaster: %s' % str(err))
+                logging.error('Timeout / socket / protocol error when accessing %s: %s' % (master_url, str(err)))
                 # update cache to wait before the next try
                 failure.update("")
 
             except (xmlrpclib.Fault, ), err:
-                # Log the error
-                dprint('Fault on moinmaster: %s' % str(err))
+                logging.error('Fault on %s: %s' % (master_url, str(err)))
                 # update cache to wait before the next try
                 failure.update("")
 
             except Error, err:
                 # In case of Error, we log the error and use the local BadContent copy.
-                dprint(str(err))
+                logging.error(str(err))
 
             # set back socket timeout
             socket.setdefaulttimeout(old_timeout)
@@ -179,7 +161,10 @@ class SecurityPolicy(Permissions):
                         try:
                             mmblcache.append(re.compile(blacklist_re, re.I))
                         except re.error, err:
-                            dprint("Error in regex '%s': %s. Please check the pages %s." % (blacklist_re, str(err), ', '.join(BLACKLISTPAGES)))
+                            logging.error("Error in regex '%s': %s. Please check the pages %s." % (
+                                          blacklist_re,
+                                          str(err),
+                                          ', '.join(BLACKLISTPAGES)))
                     request.cfg.cache.antispam_blacklist = (latest_mtime, mmblcache)
 
                 from MoinMoin.Page import Page
@@ -197,16 +182,15 @@ class SecurityPolicy(Permissions):
                 for blacklist_re in request.cfg.cache.antispam_blacklist[1]:
                     match = blacklist_re.search(addedtext)
                     if match:
-                        # Log error and raise SaveError, PageEditor
-                        # should handle this.
+                        # Log error and raise SaveError, PageEditor should handle this.
                         _ = editor.request.getText
-                        msg = _('Sorry, can not save page because "%(content)s"'
-                                ' is not allowed in this wiki.') % {
-                            'content': match.group()
-                            }
-                        dprint(msg)
+                        msg = _('Sorry, can not save page because "%(content)s" is not allowed in this wiki.') % {
+                                'content': match.group()
+                              }
+                        logging.info(msg)
                         raise editor.SaveError(msg)
             request.clock.stop('antispam')
 
         # No problem to save if my base class agree
         return Permissions.save(self, editor, newtext, rev, **kw)
+

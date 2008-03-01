@@ -54,10 +54,10 @@ class TextCha(object):
         textchas = cfg.textchas
         if textchas:
             lang = user.language or request.lang
-            #logging.debug(u"TextCha: user.language == '%s'." % lang)
+            logging.debug(u"TextCha: user.language == '%s'." % lang)
             if lang not in textchas:
                 lang = cfg.language_default
-                #logging.debug(u"TextCha: fallback to language_default == '%s'." % lang)
+                logging.debug(u"TextCha: fallback to language_default == '%s'." % lang)
                 if lang not in textchas:
                     logging.error(u"TextCha: The textchas do not have content for language_default == '%s'! Falling back to English." % lang)
                     lang = 'en'
@@ -70,7 +70,7 @@ class TextCha(object):
         if lang is None:
             return None
         else:
-            #logging.debug(u"TextCha: using lang = '%s'" % lang)
+            logging.debug(u"TextCha: using lang = '%s'" % lang)
             return textchas[lang]
 
     def _init_qa(self, question=None):
