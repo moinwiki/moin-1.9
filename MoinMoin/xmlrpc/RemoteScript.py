@@ -26,8 +26,7 @@ def execute(xmlrpcobj, their_secret, argv):
         logging.info("RemoteScript argv: %r" % argv)
         MoinScript(argv).run(showtime=0)
     except Exception, err:
-        e = str(err)
-        logging.error(e)
-        return xmlrpcobj._outstr(e)
+        logging.exception('An exception occurred.')
+        return xmlrpcobj._outstr(str(err))
     return xmlrpcobj._outstr(u"OK")
 

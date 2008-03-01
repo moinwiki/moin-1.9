@@ -47,7 +47,7 @@ def _importConfigModule(name):
     except ImportError:
         raise
     except IndentationError, err:
-        logging.error(str(err))
+        logging.exception('Your source code / config file is not correctly indented!')
         msg = '''IndentationError: %(err)s
 
 The configuration files are python modules. Therefore, whitespace is
@@ -58,7 +58,7 @@ You have to use four spaces at the beginning of the line mostly.
 }
         raise error.ConfigurationError(msg)
     except Exception, err:
-        logging.error(str(err))
+        logging.exception('An exception happened.')
         msg = '%s: %s' % (err.__class__.__name__, str(err))
         raise error.ConfigurationError(msg)
     return module, mtime
@@ -118,7 +118,7 @@ def _makeConfig(name):
         cfg.cfg_mtime = max(mtime, _farmconfig_mtime)
         logging.info("using wiki config: %s" % os.path.abspath(module.__file__))
     except ImportError, err:
-        logging.error(str(err))
+        logging.exception('Could not import.')
         msg = '''ImportError: %(err)s
 
 Check that the file is in the same directory as the server script. If
@@ -134,7 +134,7 @@ module name does not include the ".py" suffix.
 }
         raise error.ConfigurationError(msg)
     except AttributeError, err:
-        logging.error(str(err))
+        logging.exception('An exception occured.')
         msg = '''AttributeError: %(err)s
 
 Could not find required "Config" class in "%(name)s.py".
