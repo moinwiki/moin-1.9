@@ -53,8 +53,10 @@ although it may not be 100% compatible.
 """
 try:
     set = set
+    frozenset = frozenset
 except NameError:
     from sets import Set as set
+    from sets import ImmutableSet as frozenset
 
 """
 This is a feature from python 2.5, needed for compatibility with python 2.3 and 2.4.
