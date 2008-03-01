@@ -428,7 +428,7 @@ class Formatter(FormatterBase):
         if not os.path.exists(fpath):
             return self.text("[drawing:%s]" % url)
         else:
-            src = AttachFile.getAttachUrl(pagename, filename, self.request, addts=1)      
+            src = AttachFile.getAttachUrl(pagename, filename, self.request, addts=1)
             return self.image(alt=drawing, src=src, html_class="drawing")
 
 ### Images and Smileys ##############################################
