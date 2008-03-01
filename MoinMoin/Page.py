@@ -1498,8 +1498,7 @@ class Page(object):
                 page = Page(request, pagename, formatter=formatter)
                 page.send_page(content_only=1)
             except:
-                import traceback
-                traceback.print_exc(200)
+                logging.exception("pagelinks formatter failed, traceback follows")
         finally:
             request.mode_getpagelinks -= 1
             #logging.debug("mode_getpagelinks == %r" % request.mode_getpagelinks)
