@@ -240,9 +240,9 @@ def _addLogEntry(request, action, pagename, filename):
 
 def _access_file(pagename, request):
     """ Check form parameter `target` and return a tuple of
-        `(filename, filepath)` for an existing attachment.
+        `(pagename, filename, filepath)` for an existing attachment.
 
-        Return `(None, None)` if an error occurs.
+        Return `(pagename, None, None)` if an error occurs.
     """
     _ = request.getText
 
@@ -254,11 +254,11 @@ def _access_file(pagename, request):
         fpath = getFilename(request, pagename, filename)
 
         if os.path.isfile(fpath):
-            return (filename, fpath)
+            return (pagename, filename, fpath)
         error = _("Attachment '%(filename)s' does not exist!") % {'filename': filename}
 
     error_msg(pagename, request, error)
-    return (None, None)
+    return (pagename, None, None)
 
 
 def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
@@ -943,7 +943,7 @@ def send_viewfile(pagename, request):
     _ = request.getText
     fmt = request.html_formatter
 
-    filename, fpath = _access_file(pagename, request)
+    pagename, filename, fpath = _access_file(pagename, request)
     if not filename:
         return
 
@@ -1039,7 +1039,7 @@ def _do_view(pagename, request):
 
     # send body
     request.write(request.formatter.startContent())
-    send_viewfile(pagename, request)
+    send_viewfile(orig_pagename, request)
     send_uploadform(pagename, request)
     request.write(request.formatter.endContent())
 
