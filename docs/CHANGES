@@ -58,43 +58,33 @@ Version 1.7.current:
     backported to older releases that we still maintain. :)
 
   Developer notes (these should be moved to the end in the release):
-    * changed formatter.attachment_link call (it is now more flexible,
-      because you can render the stuff between link start and link end yourself)
     * getText's (aka _()) 'formatted' keyword param (default: True in 1.6 and
       early 1.7) was renamed/changed: it is now called 'wiki' and defaults to
       False. Example calls:
       _('This will NOT get parsed/formatted by MoinMoin!')
       _('This will be parsed/formatted by MoinMoin!', wiki=True)
-      _('This will be used as a left side of percent operator. %s', percent=True)
+      _('This will be used as a left side of percent operator. %s',
+        wiki=True, percent=True)
 
   New Features:
     * new powerful and flexible logging, please see wiki/config/logging/.
-    * changed markup for links, images and macros, see:
-      MoinMoin:MoinMoinTodo/Release 1.7/HelpOnLinking and
-      MoinMoin:LinkMarkupCollection
-    * cfg.trusted_auth_methods
-    * new session handling system
+    * moin now logs the path from where it loaded its configuration(s)
+    * cfg.trusted_auth_methods is a list of auth methods that put an
+      authenticated user into the "Trusted" ACL group.
     * new authentication plugin system
+    * new session handling system
     * new preferences plugin system, see MoinMoin/userprefs/__init__.py
     * new notification system with an optional jabber notification bot
-    * cfg.password_checker (default: use some simple builtin checks for too
-      easy passwords and, if available, python-crack).
-      Use password_checker = None to disable password checking.
     * jabber notification support; for more information see:
       http://moinmo.in/MoinMoinTodo/Release_1.7/HelpOnNotification
     * standalone server can now be started via the "moin" script command,
       optionally backgrounding itself. See: moin server standalone --help
 
-  Bugfixes:
-    * lots of bugfixes related to link parsing
-
   Other changes:
-    * attachment links for non-existing attachments look different now:
-      the note about the non-existing attachment moved to the link title,
-      the link is shown with nonexistent class (grey).
     * cfg.show_login is gone, see code in theme/__init__.py, this affects
       many themes!
     * needs a new userprefs/ plugin directory
+    * removed attachments direct serving (cfg.attachments)
 
 
 Version 1.6.1:
