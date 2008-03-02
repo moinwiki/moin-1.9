@@ -323,7 +323,7 @@ class MoinOpenIDServer:
 and log in before you can use your OpenID. MoinMoin will
 never allow you to enter your password here.
 
-Once you have logged in, simply reload this page.''', formatted=False))
+Once you have logged in, simply reload this page.'''))
             return
 
         request.emit_http_headers()
