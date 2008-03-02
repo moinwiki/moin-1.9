@@ -175,20 +175,6 @@ def add_attachment(request, pagename, target, filecontent, overwrite=0):
     # replace illegal chars
     target = wikiutil.taintfilename(target)
 
-    # set mimetype from extension, or from given mimetype
-    #type, encoding = wikiutil.guess_type(target)
-    #if not type:
-    #    ext = None
-    #    if 'mime' in request.form:
-    #        ext = wikiutil.guess_extension(request.form['mime'][0])
-    #    if not ext:
-    #        type, encoding = wikiutil.guess_type(filename)
-    #        if type:
-    #            ext = wikiutil.guess_extension(type)
-    #        else:
-    #            ext = ''
-    #    target = target + ext
-
     # get directory, and possibly create it
     attach_dir = getAttachDir(request, pagename, create=1)
     # save file
@@ -690,23 +676,28 @@ def move_file(request, pagename, new_pagename, attachment, new_attachment):
                           attachment).encode(config.charset)
 
         if os.path.exists(new_attachment_path):
-            upload_form(pagename, request, msg=_("Attachment '%(filename)s' already exists.") % {
-                                   'filename': new_attachment})
+            upload_form(pagename, request,
+                msg=_("Attachment '%(new_pagename)s/%(new_filename)s' already exists.") % {
+                    'new_pagename': new_pagename,
+                    'new_filename': new_attachment})
             return
 
         if new_attachment_path != attachment_path:
-        # move file
+            # move file
             filesys.rename(attachment_path, new_attachment_path)
             _addLogEntry(request, 'ATTDEL', pagename, attachment)
             _addLogEntry(request, 'ATTNEW', new_pagename, new_attachment)
-            upload_form(pagename, request, msg=_("Attachment '%(filename)s' moved to %(page)s.") % {
-                                                 'filename': new_attachment,
-                                                 'page': new_pagename})
+            upload_form(pagename, request,
+                        msg=_("Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/%(new_filename)s'.") % {
+                            'pagename': pagename,
+                            'filename': attachment,
+                            'new_pagename': new_pagename,
+                            'new_filename': new_attachment})
         else:
             upload_form(pagename, request, msg=_("Nothing changed"))
     else:
-        upload_form(pagename, request, msg=_("Page %(newpagename)s does not exists or you don't have enough rights.") % {
-            'newpagename': new_pagename})
+        upload_form(pagename, request, msg=_("Page '%(new_pagename)s' does not exist or you don't have enough rights.") % {
+            'new_pagename': new_pagename})
 
 
 def _do_attachment_move(pagename, request):
@@ -722,7 +713,7 @@ def _do_attachment_move(pagename, request):
     if 'newpagename' in request.form:
         new_pagename = request.form.get('newpagename')[0]
     else:
-        upload_form(pagename, request, msg=_("Move aborted because empty page name"))
+        upload_form(pagename, request, msg=_("Move aborted because new page name is empty."))
     if 'newattachmentname' in request.form:
         new_attachment = request.form.get('newattachmentname')[0]
         if new_attachment != wikiutil.taintfilename(new_attachment):
@@ -730,7 +721,7 @@ def _do_attachment_move(pagename, request):
                                   'filename': new_attachment})
             return
     else:
-        upload_form(pagename, request, msg=_("Move aborted because empty attachment name"))
+        upload_form(pagename, request, msg=_("Move aborted because new attachment name is empty."))
 
     attachment = request.form.get('oldattachmentname')[0]
     move_file(request, pagename, new_pagename, attachment, new_attachment)
