@@ -528,7 +528,7 @@ def execute(pagename, request):
     if handler:
         msg = handler(pagename, request)
     else:
-        msg = _('Unsupported AttachFile sub-action: %s', formatted=False) % (wikiutil.escape(do[0]), )
+        msg = _('Unsupported AttachFile sub-action: %s') % (wikiutil.escape(do[0]), )
     if msg:
         error_msg(pagename, request, msg)
 

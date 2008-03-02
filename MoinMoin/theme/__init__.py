@@ -282,7 +282,7 @@ class ThemeBase:
 
         if request.user.valid:
             if request.user.auth_method in request.cfg.auth_can_logout:
-                userlinks.append(d['page'].link_to(request, text=_('Logout', formatted=False),
+                userlinks.append(d['page'].link_to(request, text=_('Logout'),
                                                    querystr={'action': 'logout', 'logout': 'logout'}, id='logout', rel='nofollow'))
         else:
             query = {'action': 'login'}
@@ -290,7 +290,7 @@ class ThemeBase:
             if request.cfg.auth_login_inputs == ['special_no_input']:
                 query['login'] = '1'
             if request.cfg.auth_have_login:
-                userlinks.append(d['page'].link_to(request, text=_("Login", formatted=False),
+                userlinks.append(d['page'].link_to(request, text=_("Login"),
                                                    querystr=query, id='login', rel='nofollow'))
 
         userlinks = [u'<li>%s</li>' % link for link in userlinks]
@@ -532,7 +532,7 @@ class ThemeBase:
                 alt = alt % vars # if not we just leave the  alt-text from 'icons'
             except KeyError, err:
                 alt = 'KeyError: %s' % str(err)
-        alt = self.request.getText(alt, formatted=False)
+        alt = self.request.getText(alt)
         tag = self.request.formatter.image(src=img, alt=alt, width=w, height=h, **kw)
         return tag
 
@@ -549,7 +549,7 @@ class ThemeBase:
         querystr, title, icon = self.cfg.page_icons_table[which]
         qs.update(querystr) # do not modify the querystr dict in the cfg!
         d['icon-alt-text'] = d['title'] = title % d
-        d['i18ntitle'] = self.request.getText(d['title'], formatted=False)
+        d['i18ntitle'] = self.request.getText(d['title'])
         img_src = self.make_icon(icon, d)
         rev = d['rev']
         if rev and which in ['raw', 'print', ]:
@@ -738,8 +738,8 @@ class ThemeBase:
         updates = {
             'search_label': _('Search:'),
             'search_value': wikiutil.escape(form.get('value', [''])[0], 1),
-            'search_full_label': _('Text', formatted=False),
-            'search_title_label': _('Titles', formatted=False),
+            'search_full_label': _('Text'),
+            'search_title_label': _('Titles'),
             'baseurl': self.request.getScriptname(),
             'pagename_quoted': wikiutil.quoteWikinameURL(self.request.page.page_name),
             }
@@ -805,7 +805,7 @@ var search_hint = "%(search_hint)s";
 //-->
 </script>
 """ % {
-    'search_hint': _('Search', formatted=False),
+    'search_hint': _('Search'),
     }
         return script
 
@@ -819,7 +819,7 @@ var search_hint = "%(search_hint)s";
         if not rss_supported:
             return False
         return page.page_name == u'RecentChanges' or \
-           page.page_name == self.request.getText(u'RecentChanges', formatted=False)
+           page.page_name == self.request.getText(u'RecentChanges')
 
     def rsshref(self, page):
         """ Create rss href, used for rss button and head link
@@ -929,25 +929,25 @@ var search_hint = "%(search_hint)s";
 
         titles = {
             # action: menu title
-            '__title__': _("More Actions:", formatted=False),
+            '__title__': _("More Actions:"),
             # Translation may need longer or shorter separator
-            '__separator__': _('------------------------', formatted=False),
-            'raw': _('Raw Text', formatted=False),
-            'print': _('Print View', formatted=False),
-            'refresh': _('Delete Cache', formatted=False),
-            'SpellCheck': _('Check Spelling', formatted=False), # rename action!
-            'RenamePage': _('Rename Page', formatted=False),
-            'CopyPage': _('Copy Page', formatted=False),
-            'DeletePage': _('Delete Page', formatted=False),
-            'LikePages': _('Like Pages', formatted=False),
-            'LocalSiteMap': _('Local Site Map', formatted=False),
-            'MyPages': _('My Pages', formatted=False),
-            'SubscribeUser': _('Subscribe User', formatted=False),
-            'Despam': _('Remove Spam', formatted=False),
-            'revert': _('Revert to this revision', formatted=False),
-            'PackagePages': _('Package Pages', formatted=False),
-            'RenderAsDocbook': _('Render as Docbook', formatted=False),
-            'SyncPages': _('Sync Pages', formatted=False),
+            '__separator__': _('------------------------'),
+            'raw': _('Raw Text'),
+            'print': _('Print View'),
+            'refresh': _('Delete Cache'),
+            'SpellCheck': _('Check Spelling'), # rename action!
+            'RenamePage': _('Rename Page'),
+            'CopyPage': _('Copy Page'),
+            'DeletePage': _('Delete Page'),
+            'LikePages': _('Like Pages'),
+            'LocalSiteMap': _('Local Site Map'),
+            'MyPages': _('My Pages'),
+            'SubscribeUser': _('Subscribe User'),
+            'Despam': _('Remove Spam'),
+            'revert': _('Revert to this revision'),
+            'PackagePages': _('Package Pages'),
+            'RenderAsDocbook': _('Render as Docbook'),
+            'SyncPages': _('Sync Pages'),
             }
 
         options = []
@@ -998,14 +998,14 @@ var search_hint = "%(search_hint)s";
                 #title = Page(request, action).split_title(force=1)
                 title = action
                 # Use translated version if available
-                data['title'] = _(title, formatted=False)
+                data['title'] = _(title)
                 options.append(option % data)
 
         data = {
             'label': titles['__title__'],
             'options': '\n'.join(options),
             'rev_field': rev and '<input type="hidden" name="rev" value="%d">' % rev or '',
-            'do_button': _("Do", formatted=False),
+            'do_button': _("Do"),
             'baseurl': self.request.getScriptname(),
             'pagename_quoted': wikiutil.quoteWikinameURL(self.request.page.page_name)
             }
@@ -1126,9 +1126,9 @@ actionsMenuInit('%(label)s');
 
         test = Page(self.request, suppl_name_full)
         if not test.exists() and not self.request.user.may.write(suppl_name_full):
-            return ('<span class="disabled">%s</span>' % _(suppl_name, formatted=False))
+            return ('<span class="disabled">%s</span>' % _(suppl_name))
         else:
-            return page.link_to(self.request, text=_(suppl_name, formatted=False),
+            return page.link_to(self.request, text=_(suppl_name),
                                 querystr={'action': 'supplementation'}, css_class='nbsupplementation', rel='nofollow')
 
     def guiworks(self, page):
@@ -1159,11 +1159,11 @@ actionsMenuInit('%(label)s');
 
         guiworks = self.guiworks(page)
         if self.showBothEditLinks() and guiworks:
-            text = _('Edit (Text)', formatted=False)
+            text = _('Edit (Text)')
             querystr['editor'] = 'text'
             attrs = {'name': 'texteditlink', 'rel': 'nofollow', }
         else:
-            text = _('Edit', formatted=False)
+            text = _('Edit')
             if guiworks:
                 # 'textonly' will be upgraded dynamically to 'guipossible' by JS
                 querystr['editor'] = 'textonly'
@@ -1203,20 +1203,20 @@ var gui_editor_link_text = "%(text)s";
 //-->
 </script>
 """ % {'url': page.url(self.request, querystr={'action': 'edit', 'editor': 'gui', }, relative=False),
-       'text': _('Edit (GUI)', formatted=False),
+       'text': _('Edit (GUI)'),
       }
 
     def disabledEdit(self):
         """ Return a disabled edit link """
         _ = self.request.getText
         return ('<span class="disabled">%s</span>'
-                % _('Immutable Page', formatted=False))
+                % _('Immutable Page'))
 
     def infoLink(self, page):
         """ Return link to page information """
         _ = self.request.getText
         return page.link_to(self.request,
-                            text=_('Info', formatted=False),
+                            text=_('Info'),
                             querystr={'action': 'info'}, css_class='nbinfo', rel='nofollow')
 
     def subscribeLink(self, page):
@@ -1230,9 +1230,9 @@ var gui_editor_link_text = "%(text)s";
 
         _ = self.request.getText
         if self.request.user.isSubscribedTo([page.page_name]):
-            action, text = 'unsubscribe', _("Unsubscribe", formatted=False)
+            action, text = 'unsubscribe', _("Unsubscribe")
         else:
-            action, text = 'subscribe', _("Subscribe", formatted=False)
+            action, text = 'subscribe', _("Subscribe")
         return page.link_to(self.request, text=text, querystr={'action': action}, css_class='nbsubscribe', rel='nofollow')
 
     def quicklinkLink(self, page):
@@ -1246,16 +1246,16 @@ var gui_editor_link_text = "%(text)s";
 
         _ = self.request.getText
         if self.request.user.isQuickLinkedTo([page.page_name]):
-            action, text = 'quickunlink', _("Remove Link", formatted=False)
+            action, text = 'quickunlink', _("Remove Link")
         else:
-            action, text = 'quicklink', _("Add Link", formatted=False)
+            action, text = 'quicklink', _("Add Link")
         return page.link_to(self.request, text=text, querystr={'action': action}, css_class='nbquicklink', rel='nofollow')
 
     def attachmentsLink(self, page):
         """ Return link to page attachments """
         _ = self.request.getText
         return page.link_to(self.request,
-                            text=_('Attachments', formatted=False),
+                            text=_('Attachments'),
                             querystr={'action': 'AttachFile'}, css_class='nbattachments', rel='nofollow')
 
     def startPage(self):
