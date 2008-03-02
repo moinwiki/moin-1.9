@@ -915,7 +915,7 @@ class User:
     # Trail
 
     def _wantTrail(self):
-        return (not self.valid and self._request.session != {}  # anon session
+        return (not self.valid and self._request.session.is_stored  # anon session
                 or self.valid and (self.show_page_trail or self.remember_last_visit))  # logged-in session
 
     def addTrail(self, page):
