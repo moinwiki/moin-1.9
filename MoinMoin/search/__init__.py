@@ -10,6 +10,9 @@
     @license: GNU GPL, see COPYING for details
 """
 
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin.search.queryparser import QueryParser
 from MoinMoin.search.builtin import Search
 

@@ -5,13 +5,15 @@
     @copyright: 2005 MoinMoin:FlorianFesti,
                 2005 MoinMoin:NirSoffer,
                 2005 MoinMoin:AlexanderSchremmer,
-                2006-2007 MoinMoin:ThomasWaldmann,
+                2006-2008 MoinMoin:ThomasWaldmann,
                 2006 MoinMoin:FranzPletz
     @license: GNU GPL, see COPYING for details
 """
 
 import re
-import logging
+
+from MoinMoin import log
+logging = log.getLogger(__name__)
 
 from MoinMoin import config, wikiutil
 from MoinMoin.search.results import Match, TitleMatch, TextMatch
@@ -151,7 +153,7 @@ class AndExpression(BaseExpression):
                         break
                     elif t is True:
                         result = True
-                logging.debug("search: pageFilter AND returns %r" % result)
+                logging.debug("pageFilter AND returns %r" % result)
                 return result
             return filter
 
@@ -251,7 +253,7 @@ class OrExpression(AndExpression):
                         return True
                     elif t is False:
                         result = False
-                logging.debug("search: pageFilter OR returns %r" % result)
+                logging.debug("pageFilter OR returns %r" % result)
                 return result
             return filter
 
@@ -310,7 +312,7 @@ class TextSearch(BaseExpression):
         return u"(%s)" % self._pattern
 
     def search(self, page):
-        logging.debug("search: TextSearch searching page %r for (negated = %r) %r" % (page.page_name, self.negated, self._pattern))
+        logging.debug("TextSearch searching page %r for (negated = %r) %r" % (page.page_name, self.negated, self._pattern))
         matches = []
 
         # Search in page name
@@ -352,7 +354,7 @@ class TextSearch(BaseExpression):
                 result = matches
             else:
                 result = None
-        logging.debug("search: TextSearch returning %r" % result)
+        logging.debug("TextSearch returning %r" % result)
         return result
 
     def xapian_wanted(self):
@@ -432,13 +434,13 @@ class TitleSearch(BaseExpression):
         def filter(name):
             match = self.search_re.search(name)
             result = bool(self.negated) ^ bool(match)
-            logging.debug("search: pageFilter title returns %r (%r)" % (result, self.pattern))
+            logging.debug("pageFilter title returns %r (%r)" % (result, self.pattern))
             return result
         return filter
 
     def search(self, page):
         """ Get matches in page name """
-        logging.debug("search: TitleSearch searching page %r for (negated = %r) %r" % (page.page_name, self.negated, self._pattern))
+        logging.debug("TitleSearch searching page %r for (negated = %r) %r" % (page.page_name, self.negated, self._pattern))
         matches = []
         for match in self.search_re.finditer(page.page_name):
             if page.request.cfg.xapian_stemming:
@@ -471,7 +473,7 @@ class TitleSearch(BaseExpression):
                 result = matches
             else:
                 result = None
-        logging.debug("search: TitleSearch returning %r" % result)
+        logging.debug("TitleSearch returning %r" % result)
         return result
 
     def xapian_wanted(self):
@@ -575,7 +577,7 @@ class LinkSearch(BaseExpression):
 
     def search(self, page):
         # Get matches in page links
-        logging.debug("search: LinkSearch searching page %r for (negated = %r) %r" % (page.page_name, self.negated, self._pattern))
+        logging.debug("LinkSearch searching page %r for (negated = %r) %r" % (page.page_name, self.negated, self._pattern))
         matches = []
         Found = True
 
@@ -605,7 +607,7 @@ class LinkSearch(BaseExpression):
                 result = matches
             else:
                 result = None
-        logging.debug("search: LinkSearch returning %r" % result)
+        logging.debug("LinkSearch returning %r" % result)
         return result
 
     def xapian_wanted(self):
@@ -665,7 +667,7 @@ class LanguageSearch(BaseExpression):
         return ""
 
     def search(self, page):
-        logging.debug("search: LanguageSearch searching page %r for (negated = %r) %r" % (page.page_name, self.negated, self._pattern))
+        logging.debug("LanguageSearch searching page %r for (negated = %r) %r" % (page.page_name, self.negated, self._pattern))
         match = False
         body = page.getPageHeader()
 
@@ -688,7 +690,7 @@ class LanguageSearch(BaseExpression):
                 result = [Match()] # represents "matched" (but we have nothing to show)
             else:
                 result = None
-        logging.debug("search: LanguageSearch returning %r" % result)
+        logging.debug("LanguageSearch returning %r" % result)
         return result
 
     def xapian_wanted(self):
@@ -861,7 +863,7 @@ class DomainSearch(BaseExpression):
         return ""
 
     def search(self, page):
-        logging.debug("search: DomainSearch searching page %r for (negated = %r) %r" % (page.page_name, self.negated, self._pattern))
+        logging.debug("DomainSearch searching page %r for (negated = %r) %r" % (page.page_name, self.negated, self._pattern))
         checks = {'underlay': page.isUnderlayPage,
                   'standard': page.isStandardPage,
                   'system': lambda page=page: wikiutil.isSystemPage(page.request, page.page_name),
@@ -883,7 +885,7 @@ class DomainSearch(BaseExpression):
                 result = [Match()] # represents "matched" (but we have nothing to show)
             else:
                 result = None
-        logging.debug("search: DomainSearch returning %r" % result)
+        logging.debug("DomainSearch returning %r" % result)
         return result
 
     def xapian_wanted(self):

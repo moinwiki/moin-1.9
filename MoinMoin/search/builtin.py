@@ -5,12 +5,15 @@
     @copyright: 2005 MoinMoin:FlorianFesti,
                 2005 MoinMoin:NirSoffer,
                 2005 MoinMoin:AlexanderSchremmer,
-                2006-2007 MoinMoin:ThomasWaldmann,
+                2006-2008 MoinMoin:ThomasWaldmann,
                 2006 MoinMoin:FranzPletz
     @license: GNU GPL, see COPYING for details
 """
 
-import time, os, errno, codecs, logging
+import time, os, errno, codecs
+
+from MoinMoin import log
+logging = log.getLogger(__name__)
 
 from MoinMoin import wikiutil, config
 from MoinMoin.Page import Page
@@ -380,11 +383,10 @@ class BaseIndex:
             except wikiutil.PluginMissingError:
                 pass
             else:
-                logging.info("Cannot load filter for mimetype." + modulename)
+                logging.info("Cannot load filter for mimetype %s" % modulename)
         try:
             data = execute(self, filename)
-            #if debug:
-            #    logging.info("Filter %s returned %d characters for file %s" % (modulename, len(data), filename))
+            logging.debug("Filter %s returned %d characters for file %s" % (modulename, len(data), filename))
         except (OSError, IOError), err:
             data = ''
             logging.warning("Filter %s threw error '%s' for file %s" % (modulename, str(err), filename))
@@ -454,15 +456,15 @@ class Search:
         start = time.time()
         if self.request.cfg.xapian_search:
             hits = self._xapianSearch()
-            logging.debug("search: _xapianSearch found %d hits" % len(hits))
+            logging.debug("_xapianSearch found %d hits" % len(hits))
         else:
             hits = self._moinSearch()
-            logging.debug("search: moinSearch found %d hits" % len(hits))
+            logging.debug("_moinSearch found %d hits" % len(hits))
 
         # important - filter deleted pages or pages the user may not read!
         if not self.filtered:
             hits = self._filter(hits)
-            logging.debug("search: after filtering: %d hits" % len(hits))
+            logging.debug("after filtering: %d hits" % len(hits))
 
         # when xapian was used, we can estimate the numer of matches
         # Note: hits can't be estimated by xapian with historysearch enabled
@@ -522,20 +524,20 @@ class Search:
                     description = query.get_description() # deprecated since xapian 1.0, removal in 1.1
                 except AttributeError:
                     description = str(query)
-                logging.info("xapianSearch: query = %r" % description)
+                logging.debug("_xapianSearch: query = %r" % description)
                 query = xapwrap.index.QObjQuery(query)
                 enq, mset, hits = index.search(query, sort=self.sort,
                         historysearch=self.historysearch)
                 clock.stop('_xapianQuery')
 
-                #logging.info("xapianSearch: finds: %r" % hits)
+                logging.debug("_xapianSearch: finds: %r" % hits)
                 def dict_decode(d):
                     """ decode dict values to unicode """
                     for key in d:
                         d[key] = d[key].decode(config.charset)
                     return d
                 pages = [dict_decode(hit['values']) for hit in hits]
-                logging.info("xapianSearch: finds pages: %r" % pages)
+                logging.debug("_xapianSearch: finds pages: %r" % pages)
 
                 self._xapianEnquire = enq
                 self._xapianMset = mset
@@ -624,7 +626,7 @@ class Search:
 
     def _getHits(self, pages, matchSearchFunction):
         """ Get the hit tuples in pages through matchSearchFunction """
-        logging.debug("search: _getHits searching in %d pages ..." % len(pages))
+        logging.debug("_getHits searching in %d pages ..." % len(pages))
         hits = []
         revisionCache = {}
         fs_rootpage = self.fs_rootpage
@@ -639,7 +641,7 @@ class Search:
             wikiname = valuedict['wikiname']
             pagename = valuedict['pagename']
             attachment = valuedict['attachment']
-            logging.debug("search: _getHits processing %r %r %r" % (wikiname, pagename, attachment))
+            logging.debug("_getHits processing %r %r %r" % (wikiname, pagename, attachment))
 
             if 'revision' in valuedict and valuedict['revision']:
                 revision = int(valuedict['revision'])
@@ -660,7 +662,7 @@ class Search:
                         hits.append((wikiname, page, attachment, matches))
                 else:
                     matches = matchSearchFunction(page=page, uid=uid)
-                    logging.debug("search: matchSearchFunction %r returned %r" % (matchSearchFunction, matches))
+                    logging.debug("matchSearchFunction %r returned %r" % (matchSearchFunction, matches))
                     if matches:
                         if not self.historysearch and \
                                 pagename in revisionCache and \
