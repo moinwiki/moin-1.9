@@ -8,6 +8,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+from MoinMoin.support.python_compatibility import rsplit
 from MoinMoin.util.moinoid import MoinOpenIDStore, strbase64
 from MoinMoin import wikiutil
 from openid.consumer.discover import (OPENID_1_0_TYPE,
@@ -120,7 +121,7 @@ class MoinOpenIDServer:
 
         # we can very well split on the last slash since usernames
         # must not contain slashes
-        base, received_name = identity.rsplit('/', 1)
+        base, received_name = rsplit(identity, '/', 1)
         check_name = received_name
 
         if received_name == '':
