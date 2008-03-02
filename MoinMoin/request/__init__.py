@@ -791,9 +791,10 @@ class RequestBase(object):
         @return: dict of avaiable actions
         """
         if self._available_actions is None:
-            # Add actions for existing pages only, including deleted pages.
-            # Fix *OnNonExistingPage bugs.
-            if not (page.exists(includeDeleted=1) and self.user.may.read(page.page_name)):
+            # some actions might make sense for non-existing pages, so we just
+            # require read access here. Can be later refined to some action
+            # specific check:
+            if not self.user.may.read(page.page_name):
                 return []
 
             # Filter non ui actions (starts with lower case letter)
