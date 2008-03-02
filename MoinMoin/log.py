@@ -22,7 +22,8 @@
     If you don't configure it, some upperlevel logger (e.g. the root logger)
     will do the logging.
 
-    @copyright: 2008 MoinMoin:ThomasWaldmann
+    @copyright: 2008 MoinMoin:ThomasWaldmann,
+                2007 MoinMoin:JohannesBerg 
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -68,7 +69,6 @@ datefmt=
 class=logging.Formatter
 """
 
-from MoinMoin.support import logging_fix
 import logging, logging.config
 
 configured = False
@@ -113,4 +113,16 @@ def getLogger(name):
         if isinstance(levelnumber, int): # that list has also the reverse mapping...
             setattr(logger, levelname, levelnumber)
     return logger
+
+
+# Python 2.3's logging module has no .log, this provides it:
+if not hasattr(logging, 'log'):
+    def log(level, msg, *args, **kwargs):
+        if len(logging.root.handlers) == 0:
+            logging.basicConfig()
+        if logging.root.manager.disable >= level:
+            return
+        if level >= logging.root.getEffectiveLevel():
+            logging.root._log(level, msg, args, **kwargs)
+    logging.log = log
 
