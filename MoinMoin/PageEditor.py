@@ -411,8 +411,8 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
             TrivialBoxes[i].checked = CheckedBox.checked;
     }
 
-    document.write('<input type="checkbox" name="trivial" id="chktrivial" value="1" %(checked)s onclick="toggle_trivial(this)">');
-    document.write('<label for="chktrivial">%(label)s</label>');
+    document.write('<input type="checkbox" name="trivial" id="chktrivialtop" value="1" %(checked)s onclick="toggle_trivial(this)">');
+    document.write('<label for="chktrivialtop">%(label)s</label>');
     //-->
 </script> ''' % {
                 'checked': ('', 'checked')[form.get('trivial', ['0'])[0] == '1'],

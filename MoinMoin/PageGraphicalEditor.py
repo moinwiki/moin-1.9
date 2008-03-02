@@ -298,8 +298,8 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
     }
 </script>
 &nbsp;
-<input type="checkbox" name="trivial" id="chktrivial" value="1" %(checked)s onclick="toggle_trivial(this)">
-<label for="chktrivial">%(label)s</label>
+<input type="checkbox" name="trivial" id="chktrivialtop" value="1" %(checked)s onclick="toggle_trivial(this)">
+<label for="chktrivialtop">%(label)s</label>
 ''' % {
           'checked': ('', 'checked')[form.get('trivial', ['0'])[0] == '1'],
           'label': _("Trivial change"),
