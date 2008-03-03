@@ -28,7 +28,7 @@ Contact the owner of the wiki, who can enable email.""")
         except KeyError:
             return _("Please provide a valid email address!")
 
-        u = user.User(self.request, user.getUserId(self.request, username))
+        u = user.User(request, user.getUserId(request, username))
         if u.valid:
             is_ok, msg = u.mailAccountData()
             if not is_ok:
