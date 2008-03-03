@@ -8,8 +8,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import time
-from MoinMoin import user, wikiutil
+from MoinMoin import user
 from MoinMoin.widget import html
 from MoinMoin.userprefs import UserPrefBase
 

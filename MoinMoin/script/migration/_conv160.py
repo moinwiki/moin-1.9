@@ -349,9 +349,9 @@ class Page:
                 att.copy(attach_dir)
 
     def copy(self, pages_dir, renames):
-            self.renames = renames
-            self.read()
-            self.write(pages_dir)
+        self.renames = renames
+        self.read()
+        self.write(pages_dir)
 
 
 class User:

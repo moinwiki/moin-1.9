@@ -19,7 +19,6 @@ from openid.cryptutil import randomString
 from openid.server import server
 from openid.message import IDENTIFIER_SELECT
 from MoinMoin.widget import html
-from MoinMoin.Page import Page
 from MoinMoin.request import MoinMoinFinish
 
 def execute(pagename, request):

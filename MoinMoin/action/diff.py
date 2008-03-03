@@ -7,7 +7,6 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import wikiutil
 from MoinMoin.logfile import editlog
 from MoinMoin.Page import Page
 

@@ -21,7 +21,7 @@
 
 import random
 
-from MoinMoin.Page import Page, wikiutil
+from MoinMoin.Page import Page
 
 Dependencies = ["time"]
 

@@ -11,7 +11,6 @@ from MoinMoin.auth import BaseAuth
 from openid.consumer import consumer
 from openid.yadis.discover import DiscoveryFailure
 from openid.fetchers import HTTPFetchingError
-from MoinMoin import wikiutil
 from MoinMoin.widget import html
 from MoinMoin.auth import CancelLogin, ContinueLogin
 from MoinMoin.auth import MultistageFormLogin, MultistageRedirectLogin

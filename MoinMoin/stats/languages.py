@@ -9,7 +9,7 @@
 """
 
 
-from MoinMoin import user, wikiutil, i18n
+from MoinMoin import user, i18n
 
 
 def linkto(pagename, request, params=''):

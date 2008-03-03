@@ -13,7 +13,7 @@ import sys, re, time
 import email
 from email.Utils import getaddresses, parsedate_tz, mktime_tz
 
-from MoinMoin import user, wikiutil
+from MoinMoin import user
 from MoinMoin.action.AttachFile import add_attachment, AttachmentAlreadyExists
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor

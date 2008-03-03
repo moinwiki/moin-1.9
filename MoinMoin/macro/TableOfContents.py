@@ -25,7 +25,6 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import re
 from MoinMoin.formatter import FormatterBase
 from MoinMoin.Page import Page
 from MoinMoin import wikiutil

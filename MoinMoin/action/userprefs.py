@@ -10,7 +10,6 @@
 """
 
 from MoinMoin import wikiutil
-from MoinMoin.Page import Page
 from MoinMoin.widget import html
 
 def _handle_submission(request):

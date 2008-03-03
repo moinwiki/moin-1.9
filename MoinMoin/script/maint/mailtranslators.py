@@ -6,9 +6,9 @@ MoinMoin - mailtranslators script
 @license: GPL, see COPYING for details
 """
 
-import sys, os
+import sys
 
-from MoinMoin import config, i18n
+from MoinMoin import i18n
 from MoinMoin.mail.sendmail import sendmail
 from MoinMoin.script import MoinScript
 

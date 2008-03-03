@@ -19,7 +19,7 @@ Dependencies = ["time"] # works around MoinMoinBugs/TableOfContentsLacksLinks
 generates_headings = True
 
 import re, StringIO
-from MoinMoin import wikiutil, config
+from MoinMoin import wikiutil
 from MoinMoin.Page import Page
 
 

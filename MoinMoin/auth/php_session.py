@@ -12,7 +12,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import Cookie, urllib
+import urllib
 from MoinMoin import user
 from MoinMoin.auth import _PHPsessionParser, BaseAuth
 
@@ -61,20 +61,20 @@ class PHPSessionAuth(BaseAuth):
             else:
                 return user_obj, True
 
-            user = user.User(request, name=username, auth_username=username,
-                             auth_method=self.name)
+            u = user.User(request, name=username, auth_username=username,
+                          auth_method=self.name)
 
             changed = False
-            if name != user.aliasname:
-                user.aliasname = name
+            if name != u.aliasname:
+                u.aliasname = name
                 changed = True
-            if email != user.email:
-                user.email = email
+            if email != u.email:
+                u.email = email
                 changed = True
 
-            if user:
-                user.create_or_update(changed)
-            if user and user.valid:
-                return user, True # True to get other methods called, too
+            if u:
+                u.create_or_update(changed)
+            if u and u.valid:
+                return u, True # True to get other methods called, too
         return user_obj, True # continue with next method in auth list
 

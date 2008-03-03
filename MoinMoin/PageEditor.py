@@ -19,15 +19,14 @@
 import os, time, codecs, errno
 
 
-from MoinMoin import caching, config, user, wikiutil, error
+from MoinMoin import caching, config, wikiutil, error
 from MoinMoin.Page import Page
 from MoinMoin.widget import html
 from MoinMoin.widget.dialog import Status
 from MoinMoin.logfile import editlog, eventlog
 from MoinMoin.support.python_compatibility import set
 from MoinMoin.util import filesys, timefuncs, web
-from MoinMoin.mail import sendmail
-from MoinMoin.events import PageDeletedEvent, PageRenamedEvent, PageCopiedEvent
+from MoinMoin.events import PageDeletedEvent, PageRenamedEvent, PageCopiedEvent, PageRevertedEvent
 from MoinMoin.events import PagePreSaveEvent, Abort, send_event
 import MoinMoin.events.notification as notification
 
@@ -677,14 +676,12 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
             msg = self.saveText(pg.get_raw_body(), 0, extra=revstr, action="SAVE/REVERT", notify=False)
 
             # Remove cache entry (if exists)
-            from MoinMoin import caching
             pg = Page(self.request, self.page_name)
             key = self.request.form.get('key', ['text_html'])[0]
             caching.CacheEntry(self.request, pg, key, scope='item').remove()
             caching.CacheEntry(self.request, pg, "pagelinks", scope='item').remove()
 
             # Notify observers
-            from MoinMoin.events import PageRevertedEvent, send_event
             e = PageRevertedEvent(self.request, self.page_name, revision, revstr)
             send_event(e)
 
