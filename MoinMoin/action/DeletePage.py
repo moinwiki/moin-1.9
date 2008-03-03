@@ -25,6 +25,7 @@ class DeletePage(ActionBase):
         self.form_trigger = 'delete'
         self.form_trigger_label = _('Delete')
         filterfn = re.compile(ur"^%s/.*$" % re.escape(pagename), re.U).match
+        subpagenames = request.rootpage.getPageList(user='', exists=1, filter=filterfn)
         self.subpages = [pagename for pagename in subpagenames if self.request.user.may.delete(pagename)]
 
     def is_allowed(self):
