@@ -18,7 +18,6 @@
 
 Dependencies = ['time'] # do not cache
 
-from MoinMoin import wikiutil
 from MoinMoin.logfile import eventlog
 
 

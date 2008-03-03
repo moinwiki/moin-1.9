@@ -837,7 +837,7 @@ Lists: * bullets; 1., a. numbered items.
                 if not self.secret:
                     raise error.ConfigurationError(errmsg)
             except AttributeError, err:
-                    raise error.ConfigurationError(errmsg)
+                raise error.ConfigurationError(errmsg)
 
             from xmlrpclib import Server
             self.notification_server = Server(self.notification_bot_uri, )

@@ -19,7 +19,6 @@
                 2006 Nick Phillips
     @license: GNU GPL, see COPYING for details.
 """
-import sys
 import ldap
 
 from MoinMoin import log

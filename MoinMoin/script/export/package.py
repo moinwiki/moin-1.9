@@ -8,9 +8,9 @@ MoinMoin - Create a MoinMoin package from wiki pages specified.
 @license: GNU GPL, see COPYING for details.
 """
 
-import codecs, errno, os, re, shutil, sys, time
+import os
 
-from MoinMoin import config, wikiutil, Page, user
+from MoinMoin import wikiutil, user
 from MoinMoin import script
 
 
@@ -98,9 +98,9 @@ General syntax: moin [options] export package [package-options]
             packagedata = package.collectpackage(package.searchpackage(request,
                                                                        self.options.search), packageoutput)
         elif self.options.pages:
-                packagedata = package.collectpackage(self.options.pages.split(","), packageoutput)
+            packagedata = package.collectpackage(self.options.pages.split(","), packageoutput)
         else:
-                packagedata = package.collectpackage(request.rootpage.getPageList(
+            packagedata = package.collectpackage(request.rootpage.getPageList(
                                 include_underlay=False,
                                 filter=lambda name: not wikiutil.isSystemPage(request, name)),
                                 packageoutput)

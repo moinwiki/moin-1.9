@@ -9,7 +9,6 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import MoinMoin.user
 from MoinMoin import user, wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.events import EventResult

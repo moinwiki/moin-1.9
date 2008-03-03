@@ -9,7 +9,6 @@
 from MoinMoin import user, wikiutil, util
 from MoinMoin.Page import Page
 from MoinMoin.widget import html
-import MoinMoin.events as events
 from MoinMoin.security.textcha import TextCha
 
 

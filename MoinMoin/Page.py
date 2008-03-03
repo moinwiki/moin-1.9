@@ -34,7 +34,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, re, codecs
+import os, codecs
 
 from MoinMoin import log
 logging = log.getLogger(__name__)

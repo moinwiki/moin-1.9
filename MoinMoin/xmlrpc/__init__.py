@@ -565,7 +565,6 @@ class XmlRpcBase:
         if not self.request.user.may.write(pagename):
             return xmlrpclib.Fault(1, "You are not allowed to edit this page")
 
-        from MoinMoin.PageEditor import PageEditor
         rev = int(self._instr(revision))
         editor = PageEditor(self.request, pagename)
 

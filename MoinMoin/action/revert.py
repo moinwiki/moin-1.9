@@ -6,7 +6,6 @@
                 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
-from MoinMoin.Page import Page
 
 def execute(pagename, request):
     """ restore another revision of a page as a new current revision """

@@ -10,7 +10,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import user, userform
+from MoinMoin import userform
 from MoinMoin.Page import Page
 from MoinMoin.widget import html
 

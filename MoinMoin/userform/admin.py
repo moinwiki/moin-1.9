@@ -7,7 +7,7 @@
                 2007 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
-from MoinMoin import user, wikidicts, wikiutil
+from MoinMoin import user, wikiutil
 from MoinMoin.util.dataset import TupleDataset, Column
 from MoinMoin.Page import Page
 

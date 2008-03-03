@@ -734,7 +734,6 @@ class Parser:
 
                         # use EmbedObject for other mimetypes
                         from MoinMoin.macro.EmbedObject import EmbedObject
-                        from MoinMoin.action import AttachFile
                         if mt is not None:
                             # reuse class tmp from Despam to define macro
                             from MoinMoin.action.Despam import tmp

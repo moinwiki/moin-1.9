@@ -618,7 +618,7 @@ class User:
 
         arena = 'user'
         key = 'name2id'
-        cache = caching.CacheEntry(self._request, arena, key, scope='wiki').remove()
+        caching.CacheEntry(self._request, arena, key, scope='wiki').remove()
         try:
             del self._request.cfg.cache.name2id
         except:
