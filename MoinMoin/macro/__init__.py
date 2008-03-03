@@ -123,7 +123,7 @@ class Macro:
                 execute = lambda _self, _args: _self._wrap(call, _args)
             except AttributeError:
                 if macro_name in i18n.wikiLanguages():
-                    execute = builtins._m_lang
+                    execute = self.__class__._m_lang
                 else:
                     raise ImportError("Cannot load macro %s" % macro_name)
         return execute(self, args)
