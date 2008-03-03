@@ -73,7 +73,7 @@ class NewPage:
         if error:
             # Send back to the page you came from, with an error msg
             page = Page(self.request, self.referrer)
-            request.theme.add_msg(error, "error")
+            self.request.theme.add_msg(error, "error")
             page.send_page()
         else:
             # Redirect to new page using edit action. No error checking
