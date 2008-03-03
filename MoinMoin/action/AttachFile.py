@@ -603,6 +603,8 @@ def _do_upload(pagename, request):
 
 
 def _do_savedrawing(pagename, request):
+    _ = request.getText
+
     if not request.user.may.write(pagename):
         return _('You are not allowed to save a drawing on this page.')
 
@@ -783,6 +785,8 @@ def _do_move(pagename, request):
 
 def _do_get(pagename, request):
     import shutil
+
+    _ = request.getText
 
     pagename, filename, fpath = _access_file(pagename, request)
     if not request.user.may.read(pagename):
