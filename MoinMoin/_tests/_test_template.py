@@ -45,7 +45,7 @@ class TestComplexStuff:
         ('Line break',  '<<BR>>',        '<br>'),
     )
 
-    def setup_class(cls):
+    def setup_class(self):
         """ Stuff that should be run to init the state of this test class
 
         Some test needs specific config values, or they will fail.
@@ -53,7 +53,7 @@ class TestComplexStuff:
         self.config = self.TestConfig(defaults=['this option', 'that option'],
                                       another_option='non default value')
 
-    def teardown_class(cls):
+    def teardown_class(self):
         """ Stuff that should run to clean up the state of this test class
 
         """
