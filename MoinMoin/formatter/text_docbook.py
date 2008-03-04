@@ -31,6 +31,8 @@ class Formatter(FormatterBase):
 
     #this list is extended as the page is parsed. Could be optimized by adding them here?
     section_should_break = ['abstract', 'para', 'emphasis']
+ 
+    blacklisted_macros = ('TableOfContents', 'ShowSmileys')
 
     def __init__(self, request, doctype="article", **kw):
         FormatterBase.__init__(self, request, **kw)
@@ -526,13 +528,21 @@ class Formatter(FormatterBase):
             return ""
 
     def macro(self, macro_obj, name, args, markup=None):
-        if name == "Include":
+        if name in self.blacklisted_macros:
+            self._emitComment("The macro %s doesn't work with the DocBook formatter." % name)
+        elif name == "Include":
             text = FormatterBase.macro(self, macro_obj, name, args)
             if text.strip():
                 self._copyExternalNodes(Sax.FromXml(text).documentElement.childNodes, exclude=("title",))
         else:
-            self._emitComment("%s-macro is not supported by the docbook formatter"%name)
-            
+            text = FormatterBase.macro(self, macro_obj, name, args)
+            if text:
+                from xml.parsers.expat import ExpatError
+                try:
+                    self._copyExternalNodes(Sax.FromXml(text).documentElement.childNodes, exclude=excludes)
+                except ExpatError:
+                    self._emitComment("The macro %s caused an error and should be blacklisted. It returned the data '%s' which caused the docbook-formatter to choke. Please file a bug." % (name, text))
+
         return u""
 
     def _copyExternalNodes(self, nodes, deep=1, target=None, exclude=()):
