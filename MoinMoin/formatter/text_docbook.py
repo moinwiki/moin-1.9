@@ -530,6 +530,14 @@ class Formatter(FormatterBase):
     def macro(self, macro_obj, name, args, markup=None):
         if name in self.blacklisted_macros:
             self._emitComment("The macro %s doesn't work with the DocBook formatter." % name)
+
+        elif name == "FootNote":
+            footnote = self.doc.createElement('footnote')
+            para = self.doc.createElement('para')
+            para.appendChild(self.doc.createTextNode(str(args)))
+            footnote.appendChild(para)
+            self.cur.appendChild(footnote)
+
         elif name == "Include":
             text = FormatterBase.macro(self, macro_obj, name, args)
             if text.strip():
