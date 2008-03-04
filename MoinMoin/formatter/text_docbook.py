@@ -35,6 +35,19 @@ class Formatter(FormatterBase):
     def __init__(self, request, doctype="article", **kw):
         FormatterBase.__init__(self, request, **kw)
         self.request = request
+        
+        '''
+        If the formatter is used by the Include macro, it will set 
+        is_included=True in which case we know we need to call startDocument 
+        and endDocument from startContent and endContent respectively, since
+        the Include macro will not be calling them, and the formatter doesn't
+        work properly unless they are called.
+        '''
+        if kw.has_key("is_included") and kw["is_included"]:
+            self.include_kludge = True
+        else:
+            self.include_kludge = False
+
         self.doctype = doctype
         self.curdepth = 0
         self.cur = None
@@ -54,9 +67,13 @@ class Formatter(FormatterBase):
         return ""
 
     def startContent(self, content_id="content", **kw):
+        if self.include_kludge and not self.cur:
+            return self.startDocument("OnlyAnIdiotWouldCreateSuchaPage")
         return ""
 
     def endContent(self):
+        if self.include_kludge:
+            return self.endDocument()
         return ""
 
     def endDocument(self):
@@ -125,13 +142,11 @@ class Formatter(FormatterBase):
 
     def paragraph(self, on, **kw):
         FormatterBase.paragraph(self, on)
-        if on:
-            para = self.doc.createElement("para")
-            self.cur.appendChild(para)
-            self.cur = para
-        else:
-            self.cur = self.cur.parentNode
-        return ""
+
+        # Let's prevent para inside para
+        if on and self.cur.nodeName == "para":
+            return ""
+        return self._handleNode("para", on)
 
     def linebreak(self, preformatted=1):
         if preformatted:
@@ -151,6 +166,15 @@ class Formatter(FormatterBase):
                     node.setAttribute(name, value)
             self.cur = node
         else:
+            """
+                Because we prevent para inside para, we might get extra "please exit para"
+                when we are no longer inside one.
+
+                TODO: Maybe rethink the para in para case
+            """
+            if name == "para" and self.cur.nodeName != "para":
+                return ""
+
             self.cur = self.cur.parentNode
         return ""
 
@@ -199,6 +223,7 @@ class Formatter(FormatterBase):
         # Set new number of columns for tgroup
         self.cur.parentNode.parentNode.parentNode.setAttribute('cols', str(numberExistingColumns))
         return ""
+
 
 ### Inline ##########################################################
 
@@ -501,7 +526,31 @@ class Formatter(FormatterBase):
             return ""
 
     def macro(self, macro_obj, name, args, markup=None):
+        if name == "Include":
+            text = FormatterBase.macro(self, macro_obj, name, args)
+            if text.strip():
+                self._copyExternalNodes(Sax.FromXml(text).documentElement.childNodes, exclude=("title",))
+        else:
+            self._emitComment("%s-macro is not supported by the docbook formatter"%name)
+            
         return u""
+
+    def _copyExternalNodes(self, nodes, deep=1, target=None, exclude=()):
+        if not target:
+            target = self.cur
+
+        for node in nodes:
+            if node.nodeName in exclude:
+                pass
+            elif target.nodeName == "para" and node.nodeName == "para":
+                self._copyExternalNodes(node.childNodes, target=target)
+                self.cur = target.parentNode
+            else:
+                target.appendChild(self.doc.importNode(node, deep))
+
+    def _emitComment(self, text):
+        text = text.replace("--", "- -") # There cannot be "--" in XML comment
+        self.cur.appendChild(self.doc.createComment(text))
 
     def _addTitleElement(self, titleTxt, targetNode=None):
         if not targetNode:
