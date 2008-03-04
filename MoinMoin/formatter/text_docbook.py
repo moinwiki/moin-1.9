@@ -34,6 +34,10 @@ class Formatter(FormatterBase):
  
     blacklisted_macros = ('TableOfContents', 'ShowSmileys')
 
+    # If the current node is one of the following and we are about the emit
+    # text, the text should be wrapped in a paragraph
+    wrap_text_in_para = ('listitem', 'glossdef', 'article', 'chapter', 'tip', 'warning', 'note', 'caution', 'important')
+
     def __init__(self, request, doctype="article", **kw):
         FormatterBase.__init__(self, request, **kw)
         self.request = request
@@ -103,6 +107,17 @@ class Formatter(FormatterBase):
                     self.cur.lastChild.nodeValue = self.cur.lastChild.nodeValue + srcText
             else:
                 self.cur.appendChild(self.doc.createCDATASection(srcText))
+        elif self.cur.nodeName in self.wrap_text_in_para:
+            """
+            If we already wrapped one text item in a para, we should add to that para
+            and not create a new one. Another question is if we should add a space?
+            """
+            if self.cur.lastChild is not None and self.cur.lastChild.nodeName == 'para':
+                self.cur.lastChild.appendChild(self.doc.createTextNode(srcText))
+            else:
+                self.paragraph(1)
+                self.text(text)
+                self.paragraph(0)
         else:
             self.cur.appendChild(self.doc.createTextNode(srcText))
         return ""
