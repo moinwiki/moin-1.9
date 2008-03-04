@@ -2,7 +2,7 @@
 """
     MoinMoin - DocBook Formatter
 
-    @copyright: 2005 by Mikko Virkkil <mvirkkil@cc.hut.fi>
+    @copyright: 2005,2008 by Mikko Virkkilä <mvirkkil@cc.hut.fi>
     @copyright: 2005 by MoinMoin:AlexanderSchremmer (small modifications)
     @copyright: 2005 by MoinMoin:Petr Pytelka <pyta@lightcomp.com> (small modifications)
 
@@ -10,14 +10,14 @@
 """
 
 import os
+from xml.dom import getDOMImplementation
+from xml.dom.ext.reader import Sax
+from xml.dom.ext import Node
 
 from MoinMoin.formatter import FormatterBase
 from MoinMoin import wikiutil
 from MoinMoin.error import CompositeError
 from MoinMoin.action import AttachFile
-
-from xml.sax import saxutils
-from xml.dom import getDOMImplementation
 
 class InternalError(CompositeError): pass
 
@@ -26,111 +26,51 @@ try:
 except ImportError:
     raise InternalError("You need to install 4suite to use the DocBook formatter.")
 
-class DocBookOutputFormatter:
-    """
-       Format docbook output
-    """
-
-    def __init__(self, dommDoc):
-        self.doc = dommDoc
-        self.curNode = dommDoc.documentElement
-
-    def setHeading(self, headNode):
-        self.domHeadNode = headNode
-        return u""
-
-    def _printNode(self, node):
-        """
-            Function print a node
-        """
-        from xml.dom.ext import Print
-        import StringIO
-        from xml.dom.ext import Printer
-
-        stream = StringIO.StringIO()
-
-        visitor = Printer.PrintVisitor(stream, 'UTF-8')
-        Printer.PrintWalker(visitor, node).run()
-        # get value from stream
-        ret = stream.getvalue()
-        stream.close()
-
-        return unicode(ret, 'utf-8')
-
-    def getHeading(self):
-        # return heading from model
-        rootNode = self.doc.documentElement
-        # print article info
-        return '<?xml version="1.0"?><%s>%s' % (rootNode.nodeName,
-                                                self._printNode(self.domHeadNode))
-
-    def getBody(self):
-        body = []
-        # print all nodes inside dom behind heading
-        firstNode = self.doc.documentElement.firstChild
-        while firstNode:
-            if firstNode != self.domHeadNode:
-                body.append(self._printNode(firstNode))
-            firstNode = firstNode.nextSibling
-        return ''.join(body)
-
-    def getEndContent(self):
-        # close all opened tags
-        ret = []
-        while self.curNode != self.doc.documentElement:
-            ret.append("</%s>" % (self.curNode.nodeName, ))
-            self.curNode = self.curNode.parentNode
-        return ''.join(ret)
-
-    def getFooter(self):
-        return "</%s>" % self.doc.documentElement.nodeName
 
 class Formatter(FormatterBase):
-    """
-        Send plain text data.
-    """
 
+    #this list is extended as the page is parsed. Could be optimized by adding them here?
     section_should_break = ['abstract', 'para', 'emphasis']
 
-    def __init__(self, request, **kw):
-        """We should use this for creating the doc"""
+    def __init__(self, request, doctype="article", **kw):
         FormatterBase.__init__(self, request, **kw)
-
-        self.doc = dom.createDocument(None, "article", dom.createDocumentType(
-            "article", "-//OASIS//DTD DocBook V4.4//EN",
-            "http://www.docbook.org/xml/4.4/docbookx.dtd"))
-        self.root = self.doc.documentElement
+        self.request = request
+        self.doctype = doctype
         self.curdepth = 0
-        self.outputFormatter = DocBookOutputFormatter(self.doc)
-        self.exchangeKeys = []
-        self.exchangeValues = []
+        self.cur = None
 
     def startDocument(self, pagename):
-        info = self.doc.createElement("articleinfo")
-        title = self.doc.createElement("title")
-        title.appendChild(self.doc.createTextNode(pagename))
-        info.appendChild(title)
-        self.root.appendChild(info)
-        # set heading node
-        self.outputFormatter.setHeading(info)
+        self.doc = dom.createDocument(None, self.doctype, dom.createDocumentType(
+            self.doctype, "-//OASIS//DTD DocBook XML V4.4//EN",
+            "http://www.docbook.org/xml/4.4/docbookx.dtd"))
 
-        return self.outputFormatter.getHeading()
+        self.title = pagename
+        self.root = self.doc.documentElement
+        self.curdepth = 0
 
-    def startContent(self, content_id="content", **kw):
+        #info = self.doc.createElement("articleinfo")
+        self._addTitleElement(self.title, targetNode=self.root)
         self.cur = self.root
         return ""
 
+    def startContent(self, content_id="content", **kw):
+        return ""
+
     def endContent(self):
-        bodyStr = self.outputFormatter.getBody()
-        # exchange all strings in body
-        i = 0
-        while i < len(self.exchangeKeys):
-            bodyStr = bodyStr.replace(self.exchangeKeys[i], self.exchangeValues[i])
-            i += 1
-        return bodyStr + self.outputFormatter.getEndContent()
+        return ""
 
     def endDocument(self):
-        return self.outputFormatter.getFooter()
+        from xml.dom.ext import PrettyPrint, Print
+        import StringIO
+
+        f = StringIO.StringIO()
+        Print(self.doc, f)
+        #PrettyPrint(self.doc, f)
+        txt = f.getvalue()
+        f.close()
+
+        self.cur = None
+        return txt
 
     def text(self, text, **kw):
         if text == "\\n":
@@ -561,22 +501,15 @@ class Formatter(FormatterBase):
             return ""
 
     def macro(self, macro_obj, name, args, markup=None):
-        if name == "TableOfContents":
-            # Table of content can be inserted in docbook transformation
-            return u""
-        # output of all macros is added as the text node
-        # At the begining text mode contain some string which is later
-        # exchange for real value. There is problem that data inserted
-        # as text mode are encoded to xml, e.g. < is encoded in the output as &lt;
-        text = FormatterBase.macro(self, macro_obj, name, args, markup)
-        if len(text) > 0:
-            # prepare identificator
-            sKey = "EXCHANGESTRINGMACRO-" + str(len(self.exchangeKeys)) + "-EXCHANGESTRINGMACRO"
-            self.exchangeKeys.append(sKey)
-            self.exchangeValues.append(text)
-            # append data to lists
-            self.text(sKey)
         return u""
+
+    def _addTitleElement(self, titleTxt, targetNode=None):
+        if not targetNode:
+            targetNode = self.cur
+        title = self.doc.createElement("title")
+        title.appendChild(self.doc.createTextNode(titleTxt))
+        targetNode.appendChild(title)
+
 
 ### Not supported ###################################################
 
