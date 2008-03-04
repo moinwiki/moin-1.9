@@ -128,7 +128,7 @@ hr {
 .table-of-contents { font-size: small;
                      text-align:left;
                      margin: 0.5em; padding-left: 2em;
-                     width:50%; }
+                     min-width:50%; }
 .table-of-contents ol { margin:0; margin-left:1em;
                         list-style-type:decimal; }
 .table-of-contents ul { margin:0;
