@@ -166,12 +166,18 @@ class Formatter(FormatterBase):
         return self._handleNode("para", on)
 
     def linebreak(self, preformatted=1):
+        """
+        If preformatted, it will simply output a linebreak.
+        If we are in a paragraph, we will close it, and open another one.
+        """
         if preformatted:
             self.text('\\n')
+        elif self.cur.nodeName == "para":
+            self.paragraph(0)
+            self.paragraph(1)
         else:
-            #this should not happen
-            #self.text('CRAP')
-            pass
+            self._emitComment("Warning: Probably not emitting right sort of linebreak")
+            self.text('\n')
         return ""
 
     def _handleNode(self, name, on, attributes=()):
