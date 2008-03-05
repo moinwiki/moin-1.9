@@ -10,6 +10,7 @@
 """
 
 import os
+
 from xml.dom import getDOMImplementation
 from xml.dom.ext.reader import Sax
 from xml.dom.ext import Node
@@ -18,6 +19,7 @@ from MoinMoin.formatter import FormatterBase
 from MoinMoin import wikiutil
 from MoinMoin.error import CompositeError
 from MoinMoin.action import AttachFile
+
 
 class InternalError(CompositeError): pass
 
@@ -160,6 +162,14 @@ class Formatter(FormatterBase):
     def paragraph(self, on, **kw):
         FormatterBase.paragraph(self, on)
 
+        # Let's prevent empty paras
+        if not on:
+            if not self._hasContent(self.cur):
+                oldnode = self.cur
+                self.cur = oldnode.parentNode
+                self.cur.removeChild(oldnode)
+                return ""
+
         # Let's prevent para inside para
         if on and self.cur.nodeName == "para":
             return ""
@@ -207,6 +217,13 @@ class Formatter(FormatterBase):
                                       (('role', 'strikethrough'), ))
 
     def code(self, on, **kw):
+        # Let's prevent empty code
+        if not on:
+            if not self._hasContent(self.cur):
+                oldnode = self.cur
+                self.cur = oldnode.parentNode
+                self.cur.removeChild(oldnode)
+                return ""
         return self._handleFormatting("code", on)
 
     def preformatted(self, on, **kw):
@@ -410,10 +427,12 @@ class Formatter(FormatterBase):
 
     def transclusion(self, on, **kw):
         # TODO, see text_html formatter
+        self._emitComment('transclusion is not implemented in DocBook formatter')
         return ""
 
     def transclusion_param(self, **kw):
         # TODO, see text_html formatter
+        self._emitComment('transclusion parameters are not implemented in DocBook formatter')
         return ""
 
     def smiley(self, text):
@@ -619,12 +638,17 @@ class Formatter(FormatterBase):
 ### Not supported ###################################################
 
     def rule(self, size=0, **kw):
+        self._emitComment('rule (<hr>) is not applicable to DocBook')
         return ""
 
     def small(self, on, **kw):
+        if on:
+            self._emitComment('"~-smaller-~" is not applicable to DocBook')
         return ""
 
     def big(self, on, **kw):
+        if on:
+            self._emitComment('"~+bigger+~" is not applicable to DocBook')
         return ""
 
 ### Tables ##########################################################
