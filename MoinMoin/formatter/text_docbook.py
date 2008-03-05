@@ -37,6 +37,9 @@ class Formatter(FormatterBase):
     # If the current node is one of the following and we are about the emit
     # text, the text should be wrapped in a paragraph
     wrap_text_in_para = ('listitem', 'glossdef', 'article', 'chapter', 'tip', 'warning', 'note', 'caution', 'important')
+    
+	# from dtd
+    _can_contain_section = ("section", "appendix", "article", "chapter", "patintro", "preface")
 
     def __init__(self, request, doctype="article", **kw):
         FormatterBase.__init__(self, request, **kw)
@@ -65,7 +68,6 @@ class Formatter(FormatterBase):
 
         self.title = pagename
         self.root = self.doc.documentElement
-        self.curdepth = 0
 
         #info = self.doc.createElement("articleinfo")
         self._addTitleElement(self.title, targetNode=self.root)
@@ -133,15 +135,10 @@ class Formatter(FormatterBase):
                 numberOfLevels = self.curdepth - depth + 1
                 for dummy in range(numberOfLevels):
                     #find first non section node
-                    while (self.cur.nodeName != "section" and self.cur.nodeName != "article"):
+                    while not self.cur.nodeName in self._can_contain_section:
                         self.cur = self.cur.parentNode
 
-# I don't understand this code - looks like unnecessary -- maybe it is used to gain some vertical space for large headings?
-#                    if len(self.cur.childNodes) < 3:
-#                       self._addEmptyNode("para")
-
-                    # check if not top-level
-                    if self.cur.nodeName != "article":
+                    if self.cur.nodeName == "section":
                         self.cur = self.cur.parentNode
 
             section = self.doc.createElement("section")
