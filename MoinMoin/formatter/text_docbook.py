@@ -31,14 +31,14 @@ class Formatter(FormatterBase):
 
     #this list is extended as the page is parsed. Could be optimized by adding them here?
     section_should_break = ['abstract', 'para', 'emphasis']
- 
+
     blacklisted_macros = ('TableOfContents', 'ShowSmileys')
 
     # If the current node is one of the following and we are about the emit
     # text, the text should be wrapped in a paragraph
     wrap_text_in_para = ('listitem', 'glossdef', 'article', 'chapter', 'tip', 'warning', 'note', 'caution', 'important')
-    
-	# from dtd
+
+    # from dtd
     _can_contain_section = ("section", "appendix", "article", "chapter", "patintro", "preface")
 
     def __init__(self, request, doctype="article", **kw):
@@ -102,13 +102,16 @@ class Formatter(FormatterBase):
             srcText = "\n"
         else:
             srcText = text
-        if self.cur.nodeName == "screen":
-            if self.cur.lastChild is not None:
-                from xml.dom.ext import Node
-                if self.cur.lastChild.nodeType == Node.CDATA_SECTION_NODE:
-                    self.cur.lastChild.nodeValue = self.cur.lastChild.nodeValue + srcText
+
+        if srcText and self._isInsidePreformatted():
+
+            if self.cur.lastChild is not None and self.cur.lastChild.nodeType == Node.CDATA_SECTION_NODE:
+                # We can add it to a previous CDATA section
+                self.cur.lastChild.nodeValue = self.cur.lastChild.nodeValue + srcText
             else:
+                # We create a new cdata section
                 self.cur.appendChild(self.doc.createCDATASection(srcText))
+
         elif self.cur.nodeName in self.wrap_text_in_para:
             """
             If we already wrapped one text item in a para, we should add to that para
@@ -500,6 +503,17 @@ class Formatter(FormatterBase):
         if name not in self.section_should_break:
             self.section_should_break.append(name)
         return self._handleNode(name, on, attributes)
+
+    def _isInsidePreformatted(self):
+        """Walks all parents and checks if one is of a preformatted type, which
+           means the child would need to be preformatted == embedded in a cdata
+           section"""
+        n = self.cur
+        while n:
+            if n.nodeName in ("screen", "programlisting"):
+                return True
+            n = n.parentNode
+        return False
 
     def _addTitleElement(self, titleTxt, targetNode=None):
         if not targetNode:
