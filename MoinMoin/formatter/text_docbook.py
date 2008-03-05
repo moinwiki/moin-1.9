@@ -232,40 +232,70 @@ class Formatter(FormatterBase):
     def bullet_list(self, on, **kw):
         return self._handleNode("itemizedlist", on)
 
+    def listitem(self, on, style=None, **kw):
+        if self.cur.nodeName == "glosslist" or self.cur.nodeName == "glossentry":
+            return self.definition_desc(on)
+        if on and self.cur.nodeName == "listitem":
+            """If we are inside a listitem, and someone wants to create a new one, it
+            means they forgot to close the old one, and we need to do it for them."""
+            self.listitem(0)
+
+        args = []
+        if on and style:
+            styles = self._convertStylesToDict(style)
+            if styles.has_key('list-style-type'):
+                args.append(('override', styles['list-style-type']))
+
+        return self._handleNode("listitem", on, attributes=args)
+
     def definition_list(self, on, **kw):
         return self._handleNode("glosslist", on)
 
     def definition_term(self, on, compact=0, **kw):
-       # When on is false, we back out just on level. This is
-       # ok because we know definition_desc gets called, and we
-       # back out two levels there.
         if on:
-            entry = self.doc.createElement('glossentry')
-            term = self.doc.createElement('glossterm')
-            entry.appendChild(term)
-            self.cur.appendChild(entry)
-            self.cur = term
+            self._handleNode("glossentry", on)
+            self._handleNode("glossterm", on)
         else:
-            self.cur = self.cur.parentNode
+            if self._hasContent(self.cur):
+                self._handleNode("glossterm", on)
+                self._handleNode("glossentry", on)
+            else:
+                # No term info :(
+                term = self.cur
+                entry = term.parentNode
+                self.cur = entry.parentNode
+                self.cur.removeChild(entry)
         return ""
 
     def definition_desc(self, on, **kw):
-        # We backout two levels when 'on' is false, to leave the glossentry stuff
         if on:
-            return self._handleNode("glossdef", on)
-        else:
-            self.cur = self.cur.parentNode.parentNode
-            return ""
+            if self.cur.nodeName == "glossentry":
+                # Good, we can add it here.
+                self._handleNode("glossdef", on)
+                return ""
 
-    def listitem(self, on, **kw):
-        if on:
-            node = self.doc.createElement("listitem")
-            self.cur.appendChild(node)
-            self.cur = node
+            # We are somewhere else, let's see...
+            if self.cur.nodeName != "glosslist":
+                self._emitComment("Trying to add a definition, but we arent in a glosslist")
+                return ""
+            if not self.cur.lastChild or self.cur.lastChild.nodeName != "glossentry":
+                self._emitComment("Trying to add a definition, but there is no entry")
+                return ""
+
+            # Found it, calling again
+            self.cur = self.cur.lastChild
+            return self.definition_desc(on)
         else:
-            self.cur = self.cur.parentNode
+            if not self._hasContent(self.cur):
+                # Seems no valuable info was added
+                assert(self.cur.nodeName == "glossdef")
+                toRemove = self.cur
+                self.cur = toRemove.parentNode
+                self.cur.removeChild(toRemove)
+
+            while self.cur.nodeName != "glosslist":
+                self.cur = self.cur.parentNode
         return ""
-
 
 ### Links ###########################################################
 
@@ -513,6 +543,19 @@ class Formatter(FormatterBase):
             if n.nodeName in ("screen", "programlisting"):
                 return True
             n = n.parentNode
+        return False
+
+    def _hasContent(self, node):
+        if node.attributes and len(node.attributes):
+            return True
+        for child in node.childNodes:
+            if child.nodeType == Node.TEXT_NODE and child.nodeValue.strip():
+                return True
+            elif child.nodeType == Node.CDATA_SECTION_NODE and child.nodeValue.strip():
+                return True
+
+            if self._hasContent(child):
+                return True
         return False
 
     def _addTitleElement(self, titleTxt, targetNode=None):
