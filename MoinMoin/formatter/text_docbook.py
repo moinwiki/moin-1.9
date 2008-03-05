@@ -425,21 +425,50 @@ class Formatter(FormatterBase):
 
 ### Code area #######################################################
 
-    def code_area(self, on, code_id, code_type='code', show=0, start=-1, step=-1):
+    def code_area(self, on, code_id, code_type=None, show=0, start=-1, step=-1):
+        # We can discard the code_id, since it's just used for some javascript
+        # magic on the html side of things. We can't use it directly as an ID
+        # anyway since it can start with a number. It's good that we don't need
+        # to. :)
+        if not on:
+            return self._handleNode(None, on)
+
         show = show and 'numbered' or 'unnumbered'
         if start < 1:
             start = 1
 
-        attrs = (('id', code_id),
-                ('linenumbering', show),
-                ('startinglinenumber', str(start)),
-                ('language', code_type),
-                ('format', 'linespecific'),
-                )
-        return self._handleFormatting("screen", on, attrs)
+        programming_languages = {"ColorizedJava": "java",
+                                 "ColorizedPython": "python",
+                                 "ColorizedCPlusPlus": "c++",
+                                 "ColorizedPascal": "pascal",
+                                }
+
+        if programming_languages.has_key(code_type):
+            attrs = (('linenumbering', show),
+                     ('startinglinenumber', str(start)),
+                     ('language', programming_languages[code_type]),
+                     ('format', 'linespecific'),
+                     )
+            return self._handleNode("programlisting", on, attributes=attrs)
+
+        elif code_type is None:
+            attrs = (('linenumbering', show),
+                     ('startinglinenumber', str(start)),
+                     ('format', 'linespecific'),
+                     )
+            return self._handleNode("screen", on, attributes=attrs)
+        else:
+            attrs = (('linenumbering', show),
+                     ('startinglinenumber', str(start)),
+                     ('language', code_type),
+                     ('format', 'linespecific'),
+                     )
+            return self._handleNode("programlisting", on, attributes=attrs)
 
     def code_line(self, on):
-        return '' # No clue why something should be done here
+        if on:
+            self.cur.appendChild(self.doc.createTextNode('\n'))
+        return ''
 
     def code_token(self, on, tok_type):
         toks_map = {'ID': 'methodname',
@@ -452,11 +481,12 @@ class Formatter(FormatterBase):
                     'ResWord': 'token',
                     'ConsWord': 'symbol',
                     'Error': 'errortext',
-                    'ResWord2': '',
+                    'ResWord2': 'type',
                     'Special': '',
                     'Preprc': '',
-                    'Text': ''}
-        if toks_map.has_key(tok_type) and toks_map[tok_type] != '':
+                    'Text': '',
+                   }
+        if toks_map.has_key(tok_type) and toks_map[tok_type]:
             return self._handleFormatting(toks_map[tok_type], on)
         else:
             return ""
