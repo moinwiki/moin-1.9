@@ -21,7 +21,8 @@ from MoinMoin.error import CompositeError
 from MoinMoin.action import AttachFile
 
 
-class InternalError(CompositeError): pass
+class InternalError(CompositeError):
+    pass
 
 try:
     dom = getDOMImplementation("4DOM")
@@ -334,20 +335,27 @@ class Formatter(FormatterBase):
         return self.url(on, href)
 
     def url(self, on, url=None, css=None, **kw):
-        return self._handleNode("ulink", on, (('url', url), ))
+        if url and url.startswith("/"):
+            # convert to absolute path:
+            url = "%s%s"%(self.request.getBaseURL(),url)
+
+        if not on:
+            self._cleanupUlinkNode()
+
+        return self._handleNode("ulink", on, attributes=(('url', url), ))
 
     def anchordef(self, name):
-        self._handleNode("anchor", True, (('id', name), ))
-        self._handleNode("ulink", False)
+        self._handleNode("anchor", True, attributes=(('id', name), ))
+        self._handleNode("anchor", False)
         return ""
 
     def anchorlink(self, on, name='', **kw):
-        id = kw.get('id', None)
+        linkid = kw.get('id', None)
         attrs = []
         if name != '':
             attrs.append(('endterm', name))
         if id is not None:
-            attrs.append(('linkend', id))
+            attrs.append(('linkend', linkid))
         elif name != '':
             attrs.append(('linkend', name))
 
@@ -445,10 +453,19 @@ class Formatter(FormatterBase):
 ### Code area #######################################################
 
     def code_area(self, on, code_id, code_type=None, show=0, start=-1, step=-1):
-        # We can discard the code_id, since it's just used for some javascript
-        # magic on the html side of things. We can't use it directly as an ID
-        # anyway since it can start with a number. It's good that we don't need
-        # to. :)
+        """Creates a formatted code region using screen or programlisting,
+        depending on if a programming language was defined (code_type).
+
+        The code_id is not used for anything in this formatter, but is just
+        there to remain compatible with the HTML formatter's function.
+        
+        Line numbering is supported natively by DocBook so if linenumbering 
+        is requested the relevant attribute will be set.
+
+        Call once with on=1 to start the region, and a second time
+        with on=0 to end it.
+        """
+
         if not on:
             return self._handleNode(None, on)
 
@@ -462,21 +479,16 @@ class Formatter(FormatterBase):
                                  "ColorizedPascal": "pascal",
                                 }
 
-        if programming_languages.has_key(code_type):
-            attrs = (('linenumbering', show),
-                     ('startinglinenumber', str(start)),
-                     ('language', programming_languages[code_type]),
-                     ('format', 'linespecific'),
-                     )
-            return self._handleNode("programlisting", on, attributes=attrs)
-
-        elif code_type is None:
+        if code_type is None:
             attrs = (('linenumbering', show),
                      ('startinglinenumber', str(start)),
                      ('format', 'linespecific'),
                      )
             return self._handleNode("screen", on, attributes=attrs)
         else:
+            if programming_languages.has_key(code_type):
+                code_type = programming_languages[code_type]
+                
             attrs = (('linenumbering', show),
                      ('startinglinenumber', str(start)),
                      ('language', code_type),
@@ -490,6 +502,10 @@ class Formatter(FormatterBase):
         return ''
 
     def code_token(self, on, tok_type):
+        """
+        DocBook has some support for semantic annotation of code so the
+        known tokens will be mapped to DocBook entities.
+        """
         toks_map = {'ID': 'methodname',
                     'Operator': '',
                     'Char': '',
@@ -512,6 +528,30 @@ class Formatter(FormatterBase):
 ### Macro ###########################################################
 
     def macro(self, macro_obj, name, args, markup=None):
+        """As far as the DocBook formatter is conserned there are three
+        kinds of macros: Bad, Handled and Unknown. 
+        
+        The Bad ones are the ones that are known not to work, and are on its
+        blacklist. They will be ignored and an XML comment will be written
+        noting that the macro is not supported.
+        
+        Handled macros are such macros that code is written to handle them.
+        For example for the FootNote macro it means that instead of executing
+        the macro, a DocBook footnote entity is created, with the relevant
+        pieces of information filles in.
+        
+        The Unknown are handled by executing the macro and capturing any
+        textual output. There shouldn't be any textual output since macros 
+        should call formatter methods. This is unfortunately not always true,
+        so the output it is then fed in to an xml parser and the 
+        resulting nodes copied to the DocBook-dom tree. If the output is not 
+        valid xml then a comment is written in the DocBook that the macro 
+        should be fixed.
+        
+        """
+        #Another alternative would be to feed the output to rawHTML or even
+        #combining these two approaches. The _best_ alternative would be to
+        #fix the macros.
         if name in self.blacklisted_macros:
             self._emitComment("The macro %s doesn't work with the DocBook formatter." % name)
 
@@ -526,12 +566,15 @@ class Formatter(FormatterBase):
             text = FormatterBase.macro(self, macro_obj, name, args)
             if text.strip():
                 self._copyExternalNodes(Sax.FromXml(text).documentElement.childNodes, exclude=("title",))
+
+
         else:
             text = FormatterBase.macro(self, macro_obj, name, args)
             if text:
                 from xml.parsers.expat import ExpatError
                 try:
-                    self._copyExternalNodes(Sax.FromXml(text).documentElement.childNodes, exclude=excludes)
+                    xml_dom = Sax.FromXml(text).documentElement.childNodes
+                    self._copyExternalNodes(xml_dom, exclude=("title",))
                 except ExpatError:
                     self._emitComment("The macro %s caused an error and should be blacklisted. It returned the data '%s' which caused the docbook-formatter to choke. Please file a bug." % (name, text))
 
@@ -566,8 +609,8 @@ class Formatter(FormatterBase):
             self.cur = node
         else:
             """
-                Because we prevent para inside para, we might get extra "please exit para"
-                when we are no longer inside one.
+                Because we prevent para inside para, we might get extra "please
+                exit para" when we are no longer inside one.
 
                 TODO: Maybe rethink the para in para case
             """
@@ -634,6 +677,17 @@ class Formatter(FormatterBase):
             attrs[key] = value
         return attrs
 
+    def _cleanupUlinkNode(self):
+        """
+        Moin adds the url as the text to a link, if no text is specified. 
+        Docbook does it when a docbook is rendered, so we don't want moin to
+        do it and so if the url is exactly the same as the text node inside
+        the ulink, we remove the text node.
+        """
+        if self.cur.nodeName == "ulink" and len(self.cur.childNodes) == 1 \
+                and self.cur.firstChild.nodeType == Node.TEXT_NODE \
+                and self.cur.firstChild.nodeValue.strip() == self.cur.getAttribute('url').strip():
+            self.cur.removeChild(self.cur.firstChild)
 
 ### Not supported ###################################################
 
