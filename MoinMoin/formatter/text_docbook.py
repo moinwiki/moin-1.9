@@ -201,53 +201,6 @@ class Formatter(FormatterBase):
             self.cur = self.cur.parentNode
         return ""
 
-    def _addEmptyNode(self, name, attributes=()):
-        node = self.doc.createElement(name)
-        self.cur.appendChild(node)
-        if len(attributes) > 0:
-            for name, value in attributes:
-                node.setAttribute(name, value)
-
-    def _getTableCellCount(self, attrs=()):
-        cols = 1
-        if attrs and attrs.has_key('colspan'):
-            s1 = attrs['colspan']
-            s1 = str(s1).replace('"', '')
-            cols = int(s1)
-        return cols
-
-    def _addTableCellDefinition(self, attrs=()):
-        # Check number of columns
-        cols = self._getTableCellCount(attrs)
-        # Find node tgroup
-        actNode = self.cur
-        numberExistingColumns = 0
-        while actNode and actNode.nodeName != 'tgroup':
-            actNode = actNode.parentNode
-        # Number of existing columns
-        nodeBefore = self.cur
-        if actNode:
-            nodeBefore = actNode.firstChild
-        while nodeBefore and nodeBefore.nodeName != 'tbody':
-            nodeBefore = nodeBefore.nextSibling
-            numberExistingColumns += 1
-
-        while cols >= 1:
-            # Create new node
-            numberExistingColumns += 1
-            nnode = self.doc.createElement("colspec")
-            nnode.setAttribute('colname', 'xxx' + str(numberExistingColumns))
-            # Add node
-            if actNode:
-                actNode.insertBefore(nnode, nodeBefore)
-            else:
-                self.cur.insertBefore(nnode, nodeBefore)
-            cols -= 1
-        # Set new number of columns for tgroup
-        self.cur.parentNode.parentNode.parentNode.setAttribute('cols', str(numberExistingColumns))
-        return ""
-
-
 ### Inline ##########################################################
 
     def _handleFormatting(self, name, on, attributes=()):
@@ -467,48 +420,6 @@ class Formatter(FormatterBase):
     def icon(self, type):
         return '' # self.request.theme.make_icon(type)
 
-### Tables ##########################################################
-
-    #FIXME: We should copy code from text_html.py for attr handling
-
-    def table(self, on, attrs=None, **kw):
-        sanitized_attrs = []
-        if attrs and attrs.has_key('id'):
-            sanitized_attrs[id] = attrs['id']
-
-        self._handleNode("table", on, sanitized_attrs)
-        if on:
-            self._addEmptyNode("caption") #dtd for table requires caption
-        self._handleNode("tgroup", on)
-        self._handleNode("tbody", on)
-        return ""
-
-    def table_row(self, on, attrs=None, **kw):
-        self.table_current_row_cells = 0
-        sanitized_attrs = []
-        if attrs and attrs.has_key('id'):
-            sanitized_attrs[id] = attrs['id']
-        return self._handleNode("row", on, sanitized_attrs)
-
-    def table_cell(self, on, attrs=None, **kw):
-        # Finish row definition
-        sanitized_attrs = []
-        if attrs and attrs.has_key('id'):
-            sanitized_attrs[id] = attrs['id']
-        # Get number of newly added columns
-        startCount = self.table_current_row_cells
-        addedCellsCount = self._getTableCellCount(attrs)
-        self.table_current_row_cells += addedCellsCount
-        ret = self._handleNode("entry", on, sanitized_attrs)
-        if self.cur.parentNode == self.cur.parentNode.parentNode.firstChild:
-            self._addTableCellDefinition(attrs)
-        # Set cell join if any
-        if addedCellsCount > 1:
-            startString = "xxx" + str(startCount)
-            stopString = "xxx" + str(startCount + addedCellsCount - 1)
-            self.cur.setAttribute("namest", startString)
-            self.cur.setAttribute("nameend", stopString)
-        return ret
 
 ### Code ############################################################
 
@@ -598,6 +509,26 @@ class Formatter(FormatterBase):
         title.appendChild(self.doc.createTextNode(titleTxt))
         targetNode.appendChild(title)
 
+    def _convertStylesToDict(self, styles):
+        '''Takes the CSS styling information and converts it to a dict'''
+        attrs = {}
+        for s in styles.split(";"):
+            if s.strip(' "') == "":
+                continue
+            (key, value) = s.split(":", 1)
+            key = key.strip(' "')
+            value = value.strip(' "')
+
+            if key == 'vertical-align':
+                key = 'valign'
+            elif key == 'text-align':
+                key = 'align'
+            elif key == 'background-color':
+                key = 'bgcolor'
+
+            attrs[key] = value
+        return attrs
+
 
 ### Not supported ###################################################
 
@@ -610,3 +541,146 @@ class Formatter(FormatterBase):
     def big(self, on, **kw):
         return ""
 
+### Tables ##########################################################
+
+    def table(self, on, attrs=(), **kw):
+        if(on):
+            self.curtable = Table(self, self.doc, self.cur, attrs)
+            self.cur = self.curtable.tableNode
+        else:
+            self.cur = self.curtable.finalizeTable()
+            self.curtable = None
+        return ""
+
+    def table_row(self, on, attrs=(), **kw):
+        if(on):
+            self.cur = self.curtable.addRow(attrs)
+        return ""
+
+    def table_cell(self, on, attrs=(), **kw):
+        if(on):
+            self.cur = self.curtable.addCell(attrs)
+        return ""
+
+class Table:
+    '''The Table class is used as a helper for collecting information about
+    what kind of table we are building. When all relelvant data is gathered
+    it calculates the different spans of the cells and columns.
+    '''
+
+    def __init__(self, formatter, doc, parent, args):
+        self.formatter = formatter
+        self.doc = doc
+
+        self.tableNode = self.doc.createElement('informaltable')
+        parent.appendChild(self.tableNode)
+        self.colWidths = {}
+        self.tgroup = self.doc.createElement('tgroup')
+        # Bug in yelp, the two lines below don't affect rendering
+        #self.tgroup.setAttribute('rowsep', '1')
+        #self.tgroup.setAttribute('colsep', '1')
+        self.curColumn = 0
+        self.maxColumn = 0
+        self.row = None
+        self.tableNode.appendChild(self.tgroup)
+
+        self.tbody = self.doc.createElement('tbody') # Note: This gets appended in finalizeTable
+
+    def finalizeTable(self):
+        """Calculates the final width of the whole table and the width of each
+        column. Adds the colspec-elements and applies the colwidth attributes.
+        Inserts the tbody element to the tgroup and returns the tables container
+        element.
+		
+        A lot of the information is gathered from the style attributes passed
+        to the functions
+        """
+        self.tgroup.setAttribute('cols', str(self.maxColumn))
+        for colnr in range(0, self.maxColumn):
+            colspecElem = self.doc.createElement('colspec')
+            colspecElem.setAttribute('colname', 'col_%s' % str(colnr))
+            if self.colWidths.has_key(str(colnr)) and self.colWidths[str(colnr)] != "1*":
+                colspecElem.setAttribute('colwidth', self.colWidths[str(colnr)])
+            self.tgroup.appendChild(colspecElem)
+        self.tgroup.appendChild(self.tbody)
+        return self.tableNode.parentNode
+
+    def addRow(self, args):
+        self.curColumn = 0
+        self.row = self.doc.createElement('row')
+        # Bug in yelp, doesn't affect the outcome.
+        #self.row.setAttribute("rowsep", "1") #Rows should have lines between them
+        self.tbody.appendChild(self.row)
+        return self.row
+
+    def addCell(self, args):
+        cell = self.doc.createElement('entry')
+        cell.setAttribute('rowsep', '1')
+        cell.setAttribute('colsep', '1')
+
+        self.row.appendChild(cell)
+
+        args = self._convertStyleAttributes(args)
+        self._handleSimpleCellAttributes(cell, args)
+        self._handleColWidth(args)
+        self.curColumn += self._handleColSpan(cell, args)
+
+        self.maxColumn = max(self.curColumn, self.maxColumn)
+
+        return cell
+
+    def _handleColWidth(self, args):
+        if not args.has_key("width"):
+            return
+        args["width"] = args["width"].strip('"')
+        if not args["width"].endswith("%"):
+            self.formatter._emitComment("Width %s not supported" % args["width"])
+            return
+
+        self.colWidths[str(self.curColumn)] = args["width"][:-1] + "*"
+
+    def _handleColSpan(self, element, args):
+        """Returns the number of colums this entry spans"""
+        if not args or not args.has_key('colspan'):
+            return 1
+        assert(element.nodeName == "entry")
+        extracols = int(args['colspan'].strip('"')) - 1
+        element.setAttribute('namest', "col_" + str(self.curColumn))
+        element.setAttribute('nameend', "col_" + str(self.curColumn + extracols))
+        return 1 + extracols
+
+    def _handleSimpleCellAttributes(self, element, args):
+        safe_values_for = {'valign': ('top', 'middle', 'bottom'),
+                           'align': ('left', 'center', 'right'),
+                          }
+        if not args:
+            return
+        assert(element.nodeName == "entry")
+
+        if args.has_key('rowspan'):
+            extrarows = int(args['rowspan'].strip('"')) - 1
+            element.setAttribute('morerows', str(extrarows))
+
+        if args.has_key('align'):
+            value = args['align'].strip('"')
+            if value in safe_values_for['align']:
+                element.setAttribute('align', value)
+            else:
+                self.formatter._emitComment("Alignment %s not supported" % value)
+                pass
+
+        if args.has_key('valign'):
+            value = args['valign'].strip('"')
+            if value in safe_values_for['valign']:
+                element.setAttribute('valign', value)
+            else:
+                self.formatter._emitComment("Vertical alignment %s not supported" % value)
+                pass
+
+    def _convertStyleAttributes(self, argslist):
+        if not argslist.has_key('style'):
+            return argslist
+        styles = self.formatter._convertStylesToDict(argslist['style'].strip('"'))
+        argslist.update(styles)
+
+        return argslist
