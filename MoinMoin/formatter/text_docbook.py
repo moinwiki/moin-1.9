@@ -180,35 +180,7 @@ class Formatter(FormatterBase):
             self.text('\n')
         return ""
 
-    def _handleNode(self, name, on, attributes=()):
-        if on:
-            node = self.doc.createElement(name)
-            self.cur.appendChild(node)
-            if len(attributes) > 0:
-                for name, value in attributes:
-                    node.setAttribute(name, value)
-            self.cur = node
-        else:
-            """
-                Because we prevent para inside para, we might get extra "please exit para"
-                when we are no longer inside one.
-
-                TODO: Maybe rethink the para in para case
-            """
-            if name == "para" and self.cur.nodeName != "para":
-                return ""
-
-            self.cur = self.cur.parentNode
-        return ""
-
 ### Inline ##########################################################
-
-    def _handleFormatting(self, name, on, attributes=()):
-        # We add all the elements we create to the list of elements that should not contain a section
-        if name not in self.section_should_break:
-            self.section_should_break.append(name)
-
-        return self._handleNode(name, on, attributes)
 
     def strong(self, on, **kw):
         return self._handleFormatting("emphasis", on, (('role', 'strong'), ))
@@ -421,7 +393,7 @@ class Formatter(FormatterBase):
         return '' # self.request.theme.make_icon(type)
 
 
-### Code ############################################################
+### Code area #######################################################
 
     def code_area(self, on, code_id, code_type='code', show=0, start=-1, step=-1):
         show = show and 'numbered' or 'unnumbered'
@@ -458,6 +430,7 @@ class Formatter(FormatterBase):
             return self._handleFormatting(toks_map[tok_type], on)
         else:
             return ""
+### Macro ###########################################################
 
     def macro(self, macro_obj, name, args, markup=None):
         if name in self.blacklisted_macros:
@@ -485,6 +458,8 @@ class Formatter(FormatterBase):
 
         return u""
 
+### Util functions ##################################################
+
     def _copyExternalNodes(self, nodes, deep=1, target=None, exclude=()):
         if not target:
             target = self.cur
@@ -501,6 +476,33 @@ class Formatter(FormatterBase):
     def _emitComment(self, text):
         text = text.replace("--", "- -") # There cannot be "--" in XML comment
         self.cur.appendChild(self.doc.createComment(text))
+
+    def _handleNode(self, name, on, attributes=()):
+        if on:
+            node = self.doc.createElement(name)
+            self.cur.appendChild(node)
+            if len(attributes) > 0:
+                for name, value in attributes:
+                    node.setAttribute(name, value)
+            self.cur = node
+        else:
+            """
+                Because we prevent para inside para, we might get extra "please exit para"
+                when we are no longer inside one.
+
+                TODO: Maybe rethink the para in para case
+            """
+            if name == "para" and self.cur.nodeName != "para":
+                return ""
+
+            self.cur = self.cur.parentNode
+        return ""
+
+    def _handleFormatting(self, name, on, attributes=()):
+        # We add all the elements we create to the list of elements that should not contain a section
+        if name not in self.section_should_break:
+            self.section_should_break.append(name)
+        return self._handleNode(name, on, attributes)
 
     def _addTitleElement(self, titleTxt, targetNode=None):
         if not targetNode:
@@ -684,3 +686,4 @@ class Table:
         argslist.update(styles)
 
         return argslist
+
