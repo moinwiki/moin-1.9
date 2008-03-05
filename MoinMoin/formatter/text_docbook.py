@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
+# -*- coding: iso-8859-1 -*-
 """
     MoinMoin - DocBook Formatter
 
-    @copyright: 2005,2008 by Mikko Virkkil√§ <mvirkkil@cc.hut.fi>
+    @copyright: 2005,2008 by Mikko Virkkil‰ <mvirkkil@cc.hut.fi>
     @copyright: 2005 by MoinMoin:AlexanderSchremmer (small modifications)
     @copyright: 2005 by MoinMoin:Petr Pytelka <pyta@lightcomp.com> (small modifications)
 
