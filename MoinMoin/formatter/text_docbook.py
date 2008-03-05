@@ -2,7 +2,7 @@
 """
     MoinMoin - DocBook Formatter
 
-    @copyright: 2005 by Mikko Virkkil <mvirkkil@cc.hut.fi>
+    @copyright: 2005,2008 by Mikko Virkkilä <mvirkkil@cc.hut.fi>
     @copyright: 2005 by MoinMoin:AlexanderSchremmer (small modifications)
     @copyright: 2005 by MoinMoin:Petr Pytelka <pyta@lightcomp.com> (small modifications)
 
@@ -11,13 +11,15 @@
 
 import os
 
+from xml.dom import getDOMImplementation
+from xml.dom.ext.reader import Sax
+from xml.dom.ext import Node
+
 from MoinMoin.formatter import FormatterBase
 from MoinMoin import wikiutil
 from MoinMoin.error import CompositeError
 from MoinMoin.action import AttachFile
 
-from xml.sax import saxutils
-from xml.dom import getDOMImplementation
 
 class InternalError(CompositeError): pass
 
@@ -26,124 +28,103 @@ try:
 except ImportError:
     raise InternalError("You need to install 4suite to use the DocBook formatter.")
 
-class DocBookOutputFormatter:
-    """
-       Format docbook output
-    """
-
-    def __init__(self, dommDoc):
-        self.doc = dommDoc
-        self.curNode = dommDoc.documentElement
-
-    def setHeading(self, headNode):
-        self.domHeadNode = headNode
-        return u""
-
-    def _printNode(self, node):
-        """
-            Function print a node
-        """
-        from xml.dom.ext import Print
-        import StringIO
-        from xml.dom.ext import Printer
-
-        stream = StringIO.StringIO()
-
-        visitor = Printer.PrintVisitor(stream, 'UTF-8')
-        Printer.PrintWalker(visitor, node).run()
-        # get value from stream
-        ret = stream.getvalue()
-        stream.close()
-
-        return unicode(ret, 'utf-8')
-
-    def getHeading(self):
-        # return heading from model
-        rootNode = self.doc.documentElement
-        # print article info
-        return '<?xml version="1.0"?><%s>%s' % (rootNode.nodeName,
-                                                self._printNode(self.domHeadNode))
-
-    def getBody(self):
-        body = []
-        # print all nodes inside dom behind heading
-        firstNode = self.doc.documentElement.firstChild
-        while firstNode:
-            if firstNode != self.domHeadNode:
-                body.append(self._printNode(firstNode))
-            firstNode = firstNode.nextSibling
-        return ''.join(body)
-
-    def getEndContent(self):
-        # close all opened tags
-        ret = []
-        while self.curNode != self.doc.documentElement:
-            ret.append("</%s>" % (self.curNode.nodeName, ))
-            self.curNode = self.curNode.parentNode
-        return ''.join(ret)
-
-    def getFooter(self):
-        return "</%s>" % self.doc.documentElement.nodeName
 
 class Formatter(FormatterBase):
-    """
-        Send plain text data.
-    """
 
+    #this list is extended as the page is parsed. Could be optimized by adding them here?
     section_should_break = ['abstract', 'para', 'emphasis']
 
-    def __init__(self, request, **kw):
-        """We should use this for creating the doc"""
-        FormatterBase.__init__(self, request, **kw)
+    blacklisted_macros = ('TableOfContents', 'ShowSmileys')
 
-        self.doc = dom.createDocument(None, "article", dom.createDocumentType(
-            "article", "-//OASIS//DTD DocBook V4.4//EN",
-            "http://www.docbook.org/xml/4.4/docbookx.dtd"))
-        self.root = self.doc.documentElement
+    # If the current node is one of the following and we are about the emit
+    # text, the text should be wrapped in a paragraph
+    wrap_text_in_para = ('listitem', 'glossdef', 'article', 'chapter', 'tip', 'warning', 'note', 'caution', 'important')
+
+    # from dtd
+    _can_contain_section = ("section", "appendix", "article", "chapter", "patintro", "preface")
+
+    def __init__(self, request, doctype="article", **kw):
+        FormatterBase.__init__(self, request, **kw)
+        self.request = request
+        
+        '''
+        If the formatter is used by the Include macro, it will set 
+        is_included=True in which case we know we need to call startDocument 
+        and endDocument from startContent and endContent respectively, since
+        the Include macro will not be calling them, and the formatter doesn't
+        work properly unless they are called.
+        '''
+        if kw.has_key("is_included") and kw["is_included"]:
+            self.include_kludge = True
+        else:
+            self.include_kludge = False
+
+        self.doctype = doctype
         self.curdepth = 0
-        self.outputFormatter = DocBookOutputFormatter(self.doc)
-        self.exchangeKeys = []
-        self.exchangeValues = []
+        self.cur = None
 
     def startDocument(self, pagename):
-        info = self.doc.createElement("articleinfo")
-        title = self.doc.createElement("title")
-        title.appendChild(self.doc.createTextNode(pagename))
-        info.appendChild(title)
-        self.root.appendChild(info)
-        # set heading node
-        self.outputFormatter.setHeading(info)
+        self.doc = dom.createDocument(None, self.doctype, dom.createDocumentType(
+            self.doctype, "-//OASIS//DTD DocBook XML V4.4//EN",
+            "http://www.docbook.org/xml/4.4/docbookx.dtd"))
 
-        return self.outputFormatter.getHeading()
+        self.title = pagename
+        self.root = self.doc.documentElement
 
-    def startContent(self, content_id="content", **kw):
+        #info = self.doc.createElement("articleinfo")
+        self._addTitleElement(self.title, targetNode=self.root)
         self.cur = self.root
         return ""
 
+    def startContent(self, content_id="content", **kw):
+        if self.include_kludge and not self.cur:
+            return self.startDocument("OnlyAnIdiotWouldCreateSuchaPage")
+        return ""
+
     def endContent(self):
-        bodyStr = self.outputFormatter.getBody()
-        # exchange all strings in body
-        i = 0
-        while i < len(self.exchangeKeys):
-            bodyStr = bodyStr.replace(self.exchangeKeys[i], self.exchangeValues[i])
-            i += 1
-        return bodyStr + self.outputFormatter.getEndContent()
+        if self.include_kludge:
+            return self.endDocument()
+        return ""
 
     def endDocument(self):
-        return self.outputFormatter.getFooter()
+        from xml.dom.ext import PrettyPrint, Print
+        import StringIO
+
+        f = StringIO.StringIO()
+        Print(self.doc, f)
+        #PrettyPrint(self.doc, f)
+        txt = f.getvalue()
+        f.close()
+
+        self.cur = None
+        return txt
 
     def text(self, text, **kw):
         if text == "\\n":
             srcText = "\n"
         else:
             srcText = text
-        if self.cur.nodeName == "screen":
-            if self.cur.lastChild is not None:
-                from xml.dom.ext import Node
-                if self.cur.lastChild.nodeType == Node.CDATA_SECTION_NODE:
-                    self.cur.lastChild.nodeValue = self.cur.lastChild.nodeValue + srcText
+
+        if srcText and self._isInsidePreformatted():
+
+            if self.cur.lastChild is not None and self.cur.lastChild.nodeType == Node.CDATA_SECTION_NODE:
+                # We can add it to a previous CDATA section
+                self.cur.lastChild.nodeValue = self.cur.lastChild.nodeValue + srcText
             else:
+                # We create a new cdata section
                 self.cur.appendChild(self.doc.createCDATASection(srcText))
+
+        elif self.cur.nodeName in self.wrap_text_in_para:
+            """
+            If we already wrapped one text item in a para, we should add to that para
+            and not create a new one. Another question is if we should add a space?
+            """
+            if self.cur.lastChild is not None and self.cur.lastChild.nodeName == 'para':
+                self.cur.lastChild.appendChild(self.doc.createTextNode(srcText))
+            else:
+                self.paragraph(1)
+                self.text(text)
+                self.paragraph(0)
         else:
             self.cur.appendChild(self.doc.createTextNode(srcText))
         return ""
@@ -159,15 +140,10 @@ class Formatter(FormatterBase):
                 numberOfLevels = self.curdepth - depth + 1
                 for dummy in range(numberOfLevels):
                     #find first non section node
-                    while (self.cur.nodeName != "section" and self.cur.nodeName != "article"):
+                    while not self.cur.nodeName in self._can_contain_section:
                         self.cur = self.cur.parentNode
 
-# I don't understand this code - looks like unnecessary -- maybe it is used to gain some vertical space for large headings?
-#                    if len(self.cur.childNodes) < 3:
-#                       self._addEmptyNode("para")
-
-                    # check if not top-level
-                    if self.cur.nodeName != "article":
+                    if self.cur.nodeName == "section":
                         self.cur = self.cur.parentNode
 
             section = self.doc.createElement("section")
@@ -185,89 +161,36 @@ class Formatter(FormatterBase):
 
     def paragraph(self, on, **kw):
         FormatterBase.paragraph(self, on)
-        if on:
-            para = self.doc.createElement("para")
-            self.cur.appendChild(para)
-            self.cur = para
-        else:
-            self.cur = self.cur.parentNode
-        return ""
+
+        # Let's prevent empty paras
+        if not on:
+            if not self._hasContent(self.cur):
+                oldnode = self.cur
+                self.cur = oldnode.parentNode
+                self.cur.removeChild(oldnode)
+                return ""
+
+        # Let's prevent para inside para
+        if on and self.cur.nodeName == "para":
+            return ""
+        return self._handleNode("para", on)
 
     def linebreak(self, preformatted=1):
+        """
+        If preformatted, it will simply output a linebreak.
+        If we are in a paragraph, we will close it, and open another one.
+        """
         if preformatted:
             self.text('\\n')
+        elif self.cur.nodeName == "para":
+            self.paragraph(0)
+            self.paragraph(1)
         else:
-            #this should not happen
-            #self.text('CRAP')
-            pass
-        return ""
-
-    def _handleNode(self, name, on, attributes=()):
-        if on:
-            node = self.doc.createElement(name)
-            self.cur.appendChild(node)
-            if len(attributes) > 0:
-                for name, value in attributes:
-                    node.setAttribute(name, value)
-            self.cur = node
-        else:
-            self.cur = self.cur.parentNode
-        return ""
-
-    def _addEmptyNode(self, name, attributes=()):
-        node = self.doc.createElement(name)
-        self.cur.appendChild(node)
-        if len(attributes) > 0:
-            for name, value in attributes:
-                node.setAttribute(name, value)
-
-    def _getTableCellCount(self, attrs=()):
-        cols = 1
-        if attrs and attrs.has_key('colspan'):
-            s1 = attrs['colspan']
-            s1 = str(s1).replace('"', '')
-            cols = int(s1)
-        return cols
-
-    def _addTableCellDefinition(self, attrs=()):
-        # Check number of columns
-        cols = self._getTableCellCount(attrs)
-        # Find node tgroup
-        actNode = self.cur
-        numberExistingColumns = 0
-        while actNode and actNode.nodeName != 'tgroup':
-            actNode = actNode.parentNode
-        # Number of existing columns
-        nodeBefore = self.cur
-        if actNode:
-            nodeBefore = actNode.firstChild
-        while nodeBefore and nodeBefore.nodeName != 'tbody':
-            nodeBefore = nodeBefore.nextSibling
-            numberExistingColumns += 1
-
-        while cols >= 1:
-            # Create new node
-            numberExistingColumns += 1
-            nnode = self.doc.createElement("colspec")
-            nnode.setAttribute('colname', 'xxx' + str(numberExistingColumns))
-            # Add node
-            if actNode:
-                actNode.insertBefore(nnode, nodeBefore)
-            else:
-                self.cur.insertBefore(nnode, nodeBefore)
-            cols -= 1
-        # Set new number of columns for tgroup
-        self.cur.parentNode.parentNode.parentNode.setAttribute('cols', str(numberExistingColumns))
+            self._emitComment("Warning: Probably not emitting right sort of linebreak")
+            self.text('\n')
         return ""
 
 ### Inline ##########################################################
-
-    def _handleFormatting(self, name, on, attributes=()):
-        # We add all the elements we create to the list of elements that should not contain a section
-        if name not in self.section_should_break:
-            self.section_should_break.append(name)
-
-        return self._handleNode(name, on, attributes)
 
     def strong(self, on, **kw):
         return self._handleFormatting("emphasis", on, (('role', 'strong'), ))
@@ -294,6 +217,13 @@ class Formatter(FormatterBase):
                                       (('role', 'strikethrough'), ))
 
     def code(self, on, **kw):
+        # Let's prevent empty code
+        if not on:
+            if not self._hasContent(self.cur):
+                oldnode = self.cur
+                self.cur = oldnode.parentNode
+                self.cur.removeChild(oldnode)
+                return ""
         return self._handleFormatting("code", on)
 
     def preformatted(self, on, **kw):
@@ -319,40 +249,70 @@ class Formatter(FormatterBase):
     def bullet_list(self, on, **kw):
         return self._handleNode("itemizedlist", on)
 
+    def listitem(self, on, style=None, **kw):
+        if self.cur.nodeName == "glosslist" or self.cur.nodeName == "glossentry":
+            return self.definition_desc(on)
+        if on and self.cur.nodeName == "listitem":
+            """If we are inside a listitem, and someone wants to create a new one, it
+            means they forgot to close the old one, and we need to do it for them."""
+            self.listitem(0)
+
+        args = []
+        if on and style:
+            styles = self._convertStylesToDict(style)
+            if styles.has_key('list-style-type'):
+                args.append(('override', styles['list-style-type']))
+
+        return self._handleNode("listitem", on, attributes=args)
+
     def definition_list(self, on, **kw):
         return self._handleNode("glosslist", on)
 
     def definition_term(self, on, compact=0, **kw):
-       # When on is false, we back out just on level. This is
-       # ok because we know definition_desc gets called, and we
-       # back out two levels there.
         if on:
-            entry = self.doc.createElement('glossentry')
-            term = self.doc.createElement('glossterm')
-            entry.appendChild(term)
-            self.cur.appendChild(entry)
-            self.cur = term
+            self._handleNode("glossentry", on)
+            self._handleNode("glossterm", on)
         else:
-            self.cur = self.cur.parentNode
+            if self._hasContent(self.cur):
+                self._handleNode("glossterm", on)
+                self._handleNode("glossentry", on)
+            else:
+                # No term info :(
+                term = self.cur
+                entry = term.parentNode
+                self.cur = entry.parentNode
+                self.cur.removeChild(entry)
         return ""
 
     def definition_desc(self, on, **kw):
-        # We backout two levels when 'on' is false, to leave the glossentry stuff
         if on:
-            return self._handleNode("glossdef", on)
-        else:
-            self.cur = self.cur.parentNode.parentNode
-            return ""
+            if self.cur.nodeName == "glossentry":
+                # Good, we can add it here.
+                self._handleNode("glossdef", on)
+                return ""
 
-    def listitem(self, on, **kw):
-        if on:
-            node = self.doc.createElement("listitem")
-            self.cur.appendChild(node)
-            self.cur = node
+            # We are somewhere else, let's see...
+            if self.cur.nodeName != "glosslist":
+                self._emitComment("Trying to add a definition, but we arent in a glosslist")
+                return ""
+            if not self.cur.lastChild or self.cur.lastChild.nodeName != "glossentry":
+                self._emitComment("Trying to add a definition, but there is no entry")
+                return ""
+
+            # Found it, calling again
+            self.cur = self.cur.lastChild
+            return self.definition_desc(on)
         else:
-            self.cur = self.cur.parentNode
+            if not self._hasContent(self.cur):
+                # Seems no valuable info was added
+                assert(self.cur.nodeName == "glossdef")
+                toRemove = self.cur
+                self.cur = toRemove.parentNode
+                self.cur.removeChild(toRemove)
+
+            while self.cur.nodeName != "glosslist":
+                self.cur = self.cur.parentNode
         return ""
-
 
 ### Links ###########################################################
 
@@ -467,10 +427,12 @@ class Formatter(FormatterBase):
 
     def transclusion(self, on, **kw):
         # TODO, see text_html formatter
+        self._emitComment('transclusion is not implemented in DocBook formatter')
         return ""
 
     def transclusion_param(self, **kw):
         # TODO, see text_html formatter
+        self._emitComment('transclusion parameters are not implemented in DocBook formatter')
         return ""
 
     def smiley(self, text):
@@ -479,66 +441,53 @@ class Formatter(FormatterBase):
     def icon(self, type):
         return '' # self.request.theme.make_icon(type)
 
-### Tables ##########################################################
 
-    #FIXME: We should copy code from text_html.py for attr handling
+### Code area #######################################################
 
-    def table(self, on, attrs=None, **kw):
-        sanitized_attrs = []
-        if attrs and attrs.has_key('id'):
-            sanitized_attrs[id] = attrs['id']
+    def code_area(self, on, code_id, code_type=None, show=0, start=-1, step=-1):
+        # We can discard the code_id, since it's just used for some javascript
+        # magic on the html side of things. We can't use it directly as an ID
+        # anyway since it can start with a number. It's good that we don't need
+        # to. :)
+        if not on:
+            return self._handleNode(None, on)
 
-        self._handleNode("table", on, sanitized_attrs)
-        if on:
-            self._addEmptyNode("caption") #dtd for table requires caption
-        self._handleNode("tgroup", on)
-        self._handleNode("tbody", on)
-        return ""
-
-    def table_row(self, on, attrs=None, **kw):
-        self.table_current_row_cells = 0
-        sanitized_attrs = []
-        if attrs and attrs.has_key('id'):
-            sanitized_attrs[id] = attrs['id']
-        return self._handleNode("row", on, sanitized_attrs)
-
-    def table_cell(self, on, attrs=None, **kw):
-        # Finish row definition
-        sanitized_attrs = []
-        if attrs and attrs.has_key('id'):
-            sanitized_attrs[id] = attrs['id']
-        # Get number of newly added columns
-        startCount = self.table_current_row_cells
-        addedCellsCount = self._getTableCellCount(attrs)
-        self.table_current_row_cells += addedCellsCount
-        ret = self._handleNode("entry", on, sanitized_attrs)
-        if self.cur.parentNode == self.cur.parentNode.parentNode.firstChild:
-            self._addTableCellDefinition(attrs)
-        # Set cell join if any
-        if addedCellsCount > 1:
-            startString = "xxx" + str(startCount)
-            stopString = "xxx" + str(startCount + addedCellsCount - 1)
-            self.cur.setAttribute("namest", startString)
-            self.cur.setAttribute("nameend", stopString)
-        return ret
-
-### Code ############################################################
-
-    def code_area(self, on, code_id, code_type='code', show=0, start=-1, step=-1):
         show = show and 'numbered' or 'unnumbered'
         if start < 1:
             start = 1
 
-        attrs = (('id', code_id),
-                ('linenumbering', show),
-                ('startinglinenumber', str(start)),
-                ('language', code_type),
-                ('format', 'linespecific'),
-                )
-        return self._handleFormatting("screen", on, attrs)
+        programming_languages = {"ColorizedJava": "java",
+                                 "ColorizedPython": "python",
+                                 "ColorizedCPlusPlus": "c++",
+                                 "ColorizedPascal": "pascal",
+                                }
+
+        if programming_languages.has_key(code_type):
+            attrs = (('linenumbering', show),
+                     ('startinglinenumber', str(start)),
+                     ('language', programming_languages[code_type]),
+                     ('format', 'linespecific'),
+                     )
+            return self._handleNode("programlisting", on, attributes=attrs)
+
+        elif code_type is None:
+            attrs = (('linenumbering', show),
+                     ('startinglinenumber', str(start)),
+                     ('format', 'linespecific'),
+                     )
+            return self._handleNode("screen", on, attributes=attrs)
+        else:
+            attrs = (('linenumbering', show),
+                     ('startinglinenumber', str(start)),
+                     ('language', code_type),
+                     ('format', 'linespecific'),
+                     )
+            return self._handleNode("programlisting", on, attributes=attrs)
 
     def code_line(self, on):
-        return '' # No clue why something should be done here
+        if on:
+            self.cur.appendChild(self.doc.createTextNode('\n'))
+        return ''
 
     def code_token(self, on, tok_type):
         toks_map = {'ID': 'methodname',
@@ -551,41 +500,323 @@ class Formatter(FormatterBase):
                     'ResWord': 'token',
                     'ConsWord': 'symbol',
                     'Error': 'errortext',
-                    'ResWord2': '',
+                    'ResWord2': 'type',
                     'Special': '',
                     'Preprc': '',
-                    'Text': ''}
-        if toks_map.has_key(tok_type) and toks_map[tok_type] != '':
+                    'Text': '',
+                   }
+        if toks_map.has_key(tok_type) and toks_map[tok_type]:
             return self._handleFormatting(toks_map[tok_type], on)
         else:
             return ""
+### Macro ###########################################################
 
     def macro(self, macro_obj, name, args, markup=None):
-        if name == "TableOfContents":
-            # Table of content can be inserted in docbook transformation
-            return u""
-        # output of all macros is added as the text node
-        # At the begining text mode contain some string which is later
-        # exchange for real value. There is problem that data inserted
-        # as text mode are encoded to xml, e.g. < is encoded in the output as &lt;
-        text = FormatterBase.macro(self, macro_obj, name, args, markup)
-        if len(text) > 0:
-            # prepare identificator
-            sKey = "EXCHANGESTRINGMACRO-" + str(len(self.exchangeKeys)) + "-EXCHANGESTRINGMACRO"
-            self.exchangeKeys.append(sKey)
-            self.exchangeValues.append(text)
-            # append data to lists
-            self.text(sKey)
+        if name in self.blacklisted_macros:
+            self._emitComment("The macro %s doesn't work with the DocBook formatter." % name)
+
+        elif name == "FootNote":
+            footnote = self.doc.createElement('footnote')
+            para = self.doc.createElement('para')
+            para.appendChild(self.doc.createTextNode(str(args)))
+            footnote.appendChild(para)
+            self.cur.appendChild(footnote)
+
+        elif name == "Include":
+            text = FormatterBase.macro(self, macro_obj, name, args)
+            if text.strip():
+                self._copyExternalNodes(Sax.FromXml(text).documentElement.childNodes, exclude=("title",))
+        else:
+            text = FormatterBase.macro(self, macro_obj, name, args)
+            if text:
+                from xml.parsers.expat import ExpatError
+                try:
+                    self._copyExternalNodes(Sax.FromXml(text).documentElement.childNodes, exclude=excludes)
+                except ExpatError:
+                    self._emitComment("The macro %s caused an error and should be blacklisted. It returned the data '%s' which caused the docbook-formatter to choke. Please file a bug." % (name, text))
+
         return u""
+
+### Util functions ##################################################
+
+    def _copyExternalNodes(self, nodes, deep=1, target=None, exclude=()):
+        if not target:
+            target = self.cur
+
+        for node in nodes:
+            if node.nodeName in exclude:
+                pass
+            elif target.nodeName == "para" and node.nodeName == "para":
+                self._copyExternalNodes(node.childNodes, target=target)
+                self.cur = target.parentNode
+            else:
+                target.appendChild(self.doc.importNode(node, deep))
+
+    def _emitComment(self, text):
+        text = text.replace("--", "- -") # There cannot be "--" in XML comment
+        self.cur.appendChild(self.doc.createComment(text))
+
+    def _handleNode(self, name, on, attributes=()):
+        if on:
+            node = self.doc.createElement(name)
+            self.cur.appendChild(node)
+            if len(attributes) > 0:
+                for name, value in attributes:
+                    node.setAttribute(name, value)
+            self.cur = node
+        else:
+            """
+                Because we prevent para inside para, we might get extra "please exit para"
+                when we are no longer inside one.
+
+                TODO: Maybe rethink the para in para case
+            """
+            if name == "para" and self.cur.nodeName != "para":
+                return ""
+
+            self.cur = self.cur.parentNode
+        return ""
+
+    def _handleFormatting(self, name, on, attributes=()):
+        # We add all the elements we create to the list of elements that should not contain a section
+        if name not in self.section_should_break:
+            self.section_should_break.append(name)
+        return self._handleNode(name, on, attributes)
+
+    def _isInsidePreformatted(self):
+        """Walks all parents and checks if one is of a preformatted type, which
+           means the child would need to be preformatted == embedded in a cdata
+           section"""
+        n = self.cur
+        while n:
+            if n.nodeName in ("screen", "programlisting"):
+                return True
+            n = n.parentNode
+        return False
+
+    def _hasContent(self, node):
+        if node.attributes and len(node.attributes):
+            return True
+        for child in node.childNodes:
+            if child.nodeType == Node.TEXT_NODE and child.nodeValue.strip():
+                return True
+            elif child.nodeType == Node.CDATA_SECTION_NODE and child.nodeValue.strip():
+                return True
+
+            if self._hasContent(child):
+                return True
+        return False
+
+    def _addTitleElement(self, titleTxt, targetNode=None):
+        if not targetNode:
+            targetNode = self.cur
+        title = self.doc.createElement("title")
+        title.appendChild(self.doc.createTextNode(titleTxt))
+        targetNode.appendChild(title)
+
+    def _convertStylesToDict(self, styles):
+        '''Takes the CSS styling information and converts it to a dict'''
+        attrs = {}
+        for s in styles.split(";"):
+            if s.strip(' "') == "":
+                continue
+            (key, value) = s.split(":", 1)
+            key = key.strip(' "')
+            value = value.strip(' "')
+
+            if key == 'vertical-align':
+                key = 'valign'
+            elif key == 'text-align':
+                key = 'align'
+            elif key == 'background-color':
+                key = 'bgcolor'
+
+            attrs[key] = value
+        return attrs
+
 
 ### Not supported ###################################################
 
     def rule(self, size=0, **kw):
+        self._emitComment('rule (<hr>) is not applicable to DocBook')
         return ""
 
     def small(self, on, **kw):
+        if on:
+            self._emitComment('"~-smaller-~" is not applicable to DocBook')
         return ""
 
     def big(self, on, **kw):
+        if on:
+            self._emitComment('"~+bigger+~" is not applicable to DocBook')
         return ""
+
+    def rawHTML(self, markup):
+        if markup.strip() == "":
+            return ""
+
+        if "<" not in markup and ">" not in markup:
+            # Seems there are no tags.
+            # Let's get all the "entity references".
+            cleaned = markup
+            import re
+            entities = re.compile("&(?P<e>[a-zA-Z]+);").findall(cleaned)
+            from htmlentitydefs import name2codepoint
+            for ent in entities:
+                if name2codepoint.has_key(ent):
+                    cleaned = cleaned.replace("&%s;" % ent, unichr(name2codepoint[ent]))
+
+            # Then we replace all escaped unicodes.
+            escapedunicodes = re.compile("&#(?P<h>[0-9]+);").findall(markup)
+            for uni in escapedunicodes:
+                cleaned = cleaned.replace("&#%s;" % uni, unichr(int(uni)))
+
+            self.text(cleaned)
+
+        self._emitComment("RAW HTML: "+markup)
+        return ""
+
+### Tables ##########################################################
+
+    def table(self, on, attrs=(), **kw):
+        if(on):
+            self.curtable = Table(self, self.doc, self.cur, attrs)
+            self.cur = self.curtable.tableNode
+        else:
+            self.cur = self.curtable.finalizeTable()
+            self.curtable = None
+        return ""
+
+    def table_row(self, on, attrs=(), **kw):
+        if(on):
+            self.cur = self.curtable.addRow(attrs)
+        return ""
+
+    def table_cell(self, on, attrs=(), **kw):
+        if(on):
+            self.cur = self.curtable.addCell(attrs)
+        return ""
+
+class Table:
+    '''The Table class is used as a helper for collecting information about
+    what kind of table we are building. When all relelvant data is gathered
+    it calculates the different spans of the cells and columns.
+    '''
+
+    def __init__(self, formatter, doc, parent, args):
+        self.formatter = formatter
+        self.doc = doc
+
+        self.tableNode = self.doc.createElement('informaltable')
+        parent.appendChild(self.tableNode)
+        self.colWidths = {}
+        self.tgroup = self.doc.createElement('tgroup')
+        # Bug in yelp, the two lines below don't affect rendering
+        #self.tgroup.setAttribute('rowsep', '1')
+        #self.tgroup.setAttribute('colsep', '1')
+        self.curColumn = 0
+        self.maxColumn = 0
+        self.row = None
+        self.tableNode.appendChild(self.tgroup)
+
+        self.tbody = self.doc.createElement('tbody') # Note: This gets appended in finalizeTable
+
+    def finalizeTable(self):
+        """Calculates the final width of the whole table and the width of each
+        column. Adds the colspec-elements and applies the colwidth attributes.
+        Inserts the tbody element to the tgroup and returns the tables container
+        element.
+		
+        A lot of the information is gathered from the style attributes passed
+        to the functions
+        """
+        self.tgroup.setAttribute('cols', str(self.maxColumn))
+        for colnr in range(0, self.maxColumn):
+            colspecElem = self.doc.createElement('colspec')
+            colspecElem.setAttribute('colname', 'col_%s' % str(colnr))
+            if self.colWidths.has_key(str(colnr)) and self.colWidths[str(colnr)] != "1*":
+                colspecElem.setAttribute('colwidth', self.colWidths[str(colnr)])
+            self.tgroup.appendChild(colspecElem)
+        self.tgroup.appendChild(self.tbody)
+        return self.tableNode.parentNode
+
+    def addRow(self, args):
+        self.curColumn = 0
+        self.row = self.doc.createElement('row')
+        # Bug in yelp, doesn't affect the outcome.
+        #self.row.setAttribute("rowsep", "1") #Rows should have lines between them
+        self.tbody.appendChild(self.row)
+        return self.row
+
+    def addCell(self, args):
+        cell = self.doc.createElement('entry')
+        cell.setAttribute('rowsep', '1')
+        cell.setAttribute('colsep', '1')
+
+        self.row.appendChild(cell)
+
+        args = self._convertStyleAttributes(args)
+        self._handleSimpleCellAttributes(cell, args)
+        self._handleColWidth(args)
+        self.curColumn += self._handleColSpan(cell, args)
+
+        self.maxColumn = max(self.curColumn, self.maxColumn)
+
+        return cell
+
+    def _handleColWidth(self, args):
+        if not args.has_key("width"):
+            return
+        args["width"] = args["width"].strip('"')
+        if not args["width"].endswith("%"):
+            self.formatter._emitComment("Width %s not supported" % args["width"])
+            return
+
+        self.colWidths[str(self.curColumn)] = args["width"][:-1] + "*"
+
+    def _handleColSpan(self, element, args):
+        """Returns the number of colums this entry spans"""
+        if not args or not args.has_key('colspan'):
+            return 1
+        assert(element.nodeName == "entry")
+        extracols = int(args['colspan'].strip('"')) - 1
+        element.setAttribute('namest', "col_" + str(self.curColumn))
+        element.setAttribute('nameend', "col_" + str(self.curColumn + extracols))
+        return 1 + extracols
+
+    def _handleSimpleCellAttributes(self, element, args):
+        safe_values_for = {'valign': ('top', 'middle', 'bottom'),
+                           'align': ('left', 'center', 'right'),
+                          }
+        if not args:
+            return
+        assert(element.nodeName == "entry")
+
+        if args.has_key('rowspan'):
+            extrarows = int(args['rowspan'].strip('"')) - 1
+            element.setAttribute('morerows', str(extrarows))
+
+        if args.has_key('align'):
+            value = args['align'].strip('"')
+            if value in safe_values_for['align']:
+                element.setAttribute('align', value)
+            else:
+                self.formatter._emitComment("Alignment %s not supported" % value)
+                pass
+
+        if args.has_key('valign'):
+            value = args['valign'].strip('"')
+            if value in safe_values_for['valign']:
+                element.setAttribute('valign', value)
+            else:
+                self.formatter._emitComment("Vertical alignment %s not supported" % value)
+                pass
+
+    def _convertStyleAttributes(self, argslist):
+        if not argslist.has_key('style'):
+            return argslist
+        styles = self.formatter._convertStylesToDict(argslist['style'].strip('"'))
+        argslist.update(styles)
+
+        return argslist
 
