@@ -651,6 +651,31 @@ class Formatter(FormatterBase):
             self._emitComment('"~+bigger+~" is not applicable to DocBook')
         return ""
 
+    def rawHTML(self, markup):
+        if markup.strip() == "":
+            return ""
+
+        if "<" not in markup and ">" not in markup:
+            # Seems there are no tags.
+            # Let's get all the "entity references".
+            cleaned = markup
+            import re
+            entities = re.compile("&(?P<e>[a-zA-Z]+);").findall(cleaned)
+            from htmlentitydefs import name2codepoint
+            for ent in entities:
+                if name2codepoint.has_key(ent):
+                    cleaned = cleaned.replace("&%s;" % ent, unichr(name2codepoint[ent]))
+
+            # Then we replace all escaped unicodes.
+            escapedunicodes = re.compile("&#(?P<h>[0-9]+);").findall(markup)
+            for uni in escapedunicodes:
+                cleaned = cleaned.replace("&#%s;" % uni, unichr(int(uni)))
+
+            self.text(cleaned)
+
+        self._emitComment("RAW HTML: "+markup)
+        return ""
+
 ### Tables ##########################################################
 
     def table(self, on, attrs=(), **kw):
