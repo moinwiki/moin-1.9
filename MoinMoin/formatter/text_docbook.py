@@ -749,21 +749,43 @@ class Formatter(FormatterBase):
 
     def div(self, on, **kw):
         """A div cannot really be supported in DocBook as it carries no
-        semantic meaning, but the special case of a comment can be handled.
+        semantic meaning, but the special cases can be handled when the class
+        of the div carries the information.
 
-        A comment is represented in DocBook by the remark element.
+        A dictionary is used for mapping between class names and the
+        corresponding DocBook element.
 
-        A comment div is recognized by the fact that it has the class
-        "comment". Other cases of div use are ignored.
+        A MoinMoin comment is represented in DocBook by the remark element.
+
+        The rest of the known classes are the admonitions in DocBook:
+        warning, caution, important, note and hint
 
         Note: The remark entity can only contain inline elements, so it is
-              likely that the use of this will produce invalid DocBook.
+              very likely that the use of a comment div will produce invalid
+              DocBook.
         """
-        css_class = kw.get('css_class')
-        if on and css_class and 'comment' in css_class.split():
-            self._handleFormatting("remark", on)
-        if not on and self.cur.nodeName == "remark":
-            self._handleFormatting("remark", on)
+        #Map your styles to docbook elements.
+        #Even though comment is right now the only one that needs to be
+        #mapped, having two different ways is more complicated than having
+        #a single common way. Code clarity and generality first, especially
+        #since we might want to do more div to docbook mappings in the future.
+        class_to_docbook = {"warning":   "warning",
+                            "caution":   "caution",
+                            "important": "important",
+                            "note":      "note",
+                            "tip":       "tip",
+                            "comment":   "remark"}
+
+        if on and kw.get('css_class'):
+            css_classes = kw.get('css_class').split()
+            for style in class_to_docbook.keys():
+                if style in css_classes:
+                    return self._handleNode(class_to_docbook[style], on)
+
+        elif not on:
+            if self.cur.nodeName in class_to_docbook.values():
+                return self._handleNode(self.cur.nodeName, on)
+
         return ""
 
     def span(self, on, **kw):
