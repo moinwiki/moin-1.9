@@ -23,7 +23,7 @@
     will do the logging.
 
     @copyright: 2008 MoinMoin:ThomasWaldmann,
-                2007 MoinMoin:JohannesBerg 
+                2007 MoinMoin:JohannesBerg
     @license: GNU GPL, see COPYING for details.
 """
 

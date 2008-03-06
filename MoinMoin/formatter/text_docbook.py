@@ -47,10 +47,10 @@ class Formatter(FormatterBase):
     def __init__(self, request, doctype="article", **kw):
         FormatterBase.__init__(self, request, **kw)
         self.request = request
-        
+
         '''
-        If the formatter is used by the Include macro, it will set 
-        is_included=True in which case we know we need to call startDocument 
+        If the formatter is used by the Include macro, it will set
+        is_included=True in which case we know we need to call startDocument
         and endDocument from startContent and endContent respectively, since
         the Include macro will not be calling them, and the formatter doesn't
         work properly unless they are called.
@@ -337,7 +337,7 @@ class Formatter(FormatterBase):
     def url(self, on, url=None, css=None, **kw):
         if url and url.startswith("/"):
             # convert to absolute path:
-            url = "%s%s"%(self.request.getBaseURL(),url)
+            url = "%s%s"%(self.request.getBaseURL(), url)
 
         if not on:
             self._cleanupUlinkNode()
@@ -380,7 +380,7 @@ class Formatter(FormatterBase):
         the image function. Any title is also handed over, and an additional
         title suggestion is made based on filename. The image function will
         use the suggestion if no other text alternative is found.
-        
+
         If the file is not found, then a simple text will replace it.
         """
         _ = self.request.getText
@@ -395,7 +395,7 @@ class Formatter(FormatterBase):
                                             self.request, addts=1),
                 attachment_title=url,
                 **kw)
-                
+
 
     def attachment_drawing(self, url, text, **kw):
         _ = self.request.getText
@@ -475,8 +475,8 @@ class Formatter(FormatterBase):
 
         The code_id is not used for anything in this formatter, but is just
         there to remain compatible with the HTML formatter's function.
-        
-        Line numbering is supported natively by DocBook so if linenumbering 
+
+        Line numbering is supported natively by DocBook so if linenumbering
         is requested the relevant attribute will be set.
 
         Call once with on=1 to start the region, and a second time
@@ -505,7 +505,7 @@ class Formatter(FormatterBase):
         else:
             if programming_languages.has_key(code_type):
                 code_type = programming_languages[code_type]
-                
+
             attrs = (('linenumbering', show),
                      ('startinglinenumber', str(start)),
                      ('language', code_type),
@@ -546,25 +546,25 @@ class Formatter(FormatterBase):
 
     def macro(self, macro_obj, name, args, markup=None):
         """As far as the DocBook formatter is conserned there are three
-        kinds of macros: Bad, Handled and Unknown. 
-        
+        kinds of macros: Bad, Handled and Unknown.
+
         The Bad ones are the ones that are known not to work, and are on its
         blacklist. They will be ignored and an XML comment will be written
         noting that the macro is not supported.
-        
+
         Handled macros are such macros that code is written to handle them.
         For example for the FootNote macro it means that instead of executing
         the macro, a DocBook footnote entity is created, with the relevant
         pieces of information filles in.
-        
+
         The Unknown are handled by executing the macro and capturing any
-        textual output. There shouldn't be any textual output since macros 
+        textual output. There shouldn't be any textual output since macros
         should call formatter methods. This is unfortunately not always true,
-        so the output it is then fed in to an xml parser and the 
-        resulting nodes copied to the DocBook-dom tree. If the output is not 
-        valid xml then a comment is written in the DocBook that the macro 
+        so the output it is then fed in to an xml parser and the
+        resulting nodes copied to the DocBook-dom tree. If the output is not
+        valid xml then a comment is written in the DocBook that the macro
         should be fixed.
-        
+
         """
         #Another alternative would be to feed the output to rawHTML or even
         #combining these two approaches. The _best_ alternative would be to
@@ -582,7 +582,7 @@ class Formatter(FormatterBase):
         elif name == "Include":
             text = FormatterBase.macro(self, macro_obj, name, args)
             if text.strip():
-                self._copyExternalNodes(Sax.FromXml(text).documentElement.childNodes, exclude=("title",))
+                self._copyExternalNodes(Sax.FromXml(text).documentElement.childNodes, exclude=("title", ))
 
 
         else:
@@ -591,7 +591,7 @@ class Formatter(FormatterBase):
                 from xml.parsers.expat import ExpatError
                 try:
                     xml_dom = Sax.FromXml(text).documentElement.childNodes
-                    self._copyExternalNodes(xml_dom, exclude=("title",))
+                    self._copyExternalNodes(xml_dom, exclude=("title", ))
                 except ExpatError:
                     self._emitComment("The macro %s caused an error and should be blacklisted. It returned the data '%s' which caused the docbook-formatter to choke. Please file a bug." % (name, text))
 
@@ -696,7 +696,7 @@ class Formatter(FormatterBase):
 
     def _cleanupUlinkNode(self):
         """
-        Moin adds the url as the text to a link, if no text is specified. 
+        Moin adds the url as the text to a link, if no text is specified.
         Docbook does it when a docbook is rendered, so we don't want moin to
         do it and so if the url is exactly the same as the text node inside
         the ulink, we remove the text node.
@@ -750,12 +750,12 @@ class Formatter(FormatterBase):
     def div(self, on, **kw):
         """A div cannot really be supported in DocBook as it carries no
         semantic meaning, but the special case of a comment can be handled.
-        
+
         A comment is represented in DocBook by the remark element.
-                
-        A comment div is recognized by the fact that it has the class 
+
+        A comment div is recognized by the fact that it has the class
         "comment". Other cases of div use are ignored.
-        
+
         Note: The remark entity can only contain inline elements, so it is
               likely that the use of this will produce invalid DocBook.
         """
@@ -765,14 +765,14 @@ class Formatter(FormatterBase):
         if not on and self.cur.nodeName == "remark":
             self._handleFormatting("remark", on)
         return ""
-        
+
     def span(self, on, **kw):
         """A span cannot really be supported in DocBook as it carries no
         semantic meaning, but the special case of a comment can be handled.
-        
+
         A comment is represented in DocBook by the remark element.
-        
-        A comment span is recognized by the fact that it has the class 
+
+        A comment span is recognized by the fact that it has the class
         "comment". Other cases of div use are ignored.
         """
         css_class = kw.get('css_class')
@@ -781,9 +781,9 @@ class Formatter(FormatterBase):
         if not on and self.cur.nodeName == "remark":
             self._handleFormatting("remark", on)
         return ""
-                        
-    
-    
+
+
+
 ### Tables ##########################################################
 
     def table(self, on, attrs=(), **kw):
@@ -834,7 +834,7 @@ class Table:
         column. Adds the colspec-elements and applies the colwidth attributes.
         Inserts the tbody element to the tgroup and returns the tables container
         element.
-		
+
         A lot of the information is gathered from the style attributes passed
         to the functions
         """
