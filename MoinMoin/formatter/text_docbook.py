@@ -375,6 +375,14 @@ class Formatter(FormatterBase):
             return self.url(0)
 
     def attachment_image(self, url, **kw):
+        """
+        Figures out the absolute path to the image and then hands over to
+        the image function. Any title is also handed over, and an additional
+        title suggestion is made based on filename. The image function will
+        use the suggestion if no other text alternative is found.
+        
+        If the file is not found, then a simple text will replace it.
+        """
         _ = self.request.getText
         pagename, filename = AttachFile.absoluteName(url, self.page.page_name)
         fname = wikiutil.taintfilename(filename)
@@ -382,8 +390,12 @@ class Formatter(FormatterBase):
         if not os.path.exists(fpath):
             return self.text("[attachment:%s]" % url)
         else:
-            src = AttachFile.getAttachUrl(pagename, filename, self.request, addts=1)
-            return self.image(src=src, title="attachment:%s" % url)
+            return self.image(
+                src=AttachFile.getAttachUrl(pagename, filename,
+                                            self.request, addts=1),
+                attachment_title=url,
+                **kw)
+                
 
     def attachment_drawing(self, url, text, **kw):
         _ = self.request.getText
@@ -411,15 +423,20 @@ class Formatter(FormatterBase):
 
         image = self.doc.createElement('imagedata')
         if kw.has_key('src'):
-            image.setAttribute('fileref', kw['src'])
+            src = kw['src']
+            if src.startswith("/"):
+                # convert to absolute path:
+                src = self.request.getBaseURL()+src
+            image.setAttribute('fileref', src)
         if kw.has_key('width'):
             image.setAttribute('width', str(kw['width']))
         if kw.has_key('height'):
             image.setAttribute('depth', str(kw['height']))
         imagewrap.appendChild(image)
 
+        #Look for any suitable title, order is important.
         title = ''
-        for a in ('title', 'html_title', 'alt', 'html_alt'):
+        for a in ('title', 'html_title', 'alt', 'html_alt', 'attachment_title'):
             if kw.has_key(a):
                 title = kw[a]
                 break
