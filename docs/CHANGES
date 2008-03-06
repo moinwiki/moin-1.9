@@ -79,6 +79,7 @@ Version 1.7.current:
       http://moinmo.in/MoinMoinTodo/Release_1.7/HelpOnNotification
     * standalone server can now be started via the "moin" script command,
       optionally backgrounding itself. See: moin server standalone --help
+    * the diff action now has navigation buttons for prev/next change
 
   Other changes:
     * cfg.show_login is gone, see code in theme/__init__.py, this affects
