@@ -53,6 +53,7 @@ def execute(pagename, request):
     if currentrev < 2:
         request.theme.add_msg(_("No older revisions available!"), "error")
         currentpage.send_page()
+        return
 
     if date: # this is how we get called from RecentChanges
         rev1 = 0
