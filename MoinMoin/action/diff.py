@@ -3,10 +3,11 @@
     MoinMoin - show diff between 2 page revisions
 
     @copyright: 2000-2004 Juergen Hermann <jh@web.de>,
-                2006 MoinMoin:ThomasWaldmann
+                2006-2008 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
+from MoinMoin import wikiutil
 from MoinMoin.logfile import editlog
 from MoinMoin.Page import Page
 
@@ -53,6 +54,7 @@ def execute(pagename, request):
     if currentrev < 2:
         request.theme.add_msg(_("No older revisions available!"), "error")
         currentpage.send_page()
+        return
 
     if date: # this is how we get called from RecentChanges
         rev1 = 0
@@ -96,11 +98,63 @@ def execute(pagename, request):
 
     f = request.formatter
     request.write(f.div(1, id="content"))
-    request.write(f.paragraph(1, css_class="diff-header"))
-    request.write(f.text(_('Differences between revisions %d and %d') % (oldpage.get_real_rev(), newpage.get_real_rev())))
+
+    oldrev = oldpage.get_real_rev()
+    newrev = newpage.get_real_rev()
+
+    title = _('Differences between revisions %d and %d') % (oldrev, newrev)
     if edit_count > 1:
-        request.write(f.text(' ' + _('(spanning %d versions)') % (edit_count, )))
-    request.write(f.paragraph(0))
+        title += ' ' + _('(spanning %d versions)') % (edit_count, )
+    title = f.text(title)
+
+    revlist = currentpage.getRevList()
+
+    # Revision list starts from 2...
+    if oldrev == min(revlist) + 1:
+        disable_prev = u' disabled="true"'
+    else:
+        disable_prev = u''
+
+    if newrev == max(revlist):
+        disable_next = u' disabled="true"'
+    else:
+        disable_next = u''
+
+    page_url = wikiutil.escape(currentpage.url(request, relative=False))
+
+    navigation_html = """
+<table class="diff">
+<tr>
+ <td style="border:0">
+  <span style="text-align:left">
+   <form action=%s method="get">
+    <input name="action" value="diff" type="hidden">
+    <input name="rev1" value="%d" type="hidden">
+    <input name="rev2" value="%d" type="hidden">
+    <input value="%s" type="submit"%s>
+   </form>
+  </span>
+ </td>
+ <td style="border:0">
+  <span class="diff-header">%s</span>
+ </td>
+ <td style="border:0">
+  <span style="text-align:right">
+   <form action=%s method="get">
+    <input name="action" value="diff" type="hidden">
+    <input name="rev1" value="%d" type="hidden">
+    <input name="rev2" value="%d" type="hidden">
+    <input value="%s" type="submit"%s>
+   </form>
+  </span>
+ </td>
+</tr>
+</table>
+""" % (page_url, oldrev - 1, oldrev, _("Previous change"), disable_prev,
+       title,
+       page_url, newrev, newrev + 1, _("Next change"), disable_next, )
+
+    request.write(f.rawHTML(navigation_html))
 
     if request.user.show_fancy_diff:
         from MoinMoin.util import diff_html
