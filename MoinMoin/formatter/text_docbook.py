@@ -730,6 +730,43 @@ class Formatter(FormatterBase):
         self._emitComment("RAW HTML: "+markup)
         return ""
 
+    def div(self, on, **kw):
+        """A div cannot really be supported in DocBook as it carries no
+        semantic meaning, but the special case of a comment can be handled.
+        
+        A comment is represented in DocBook by the remark element.
+                
+        A comment div is recognized by the fact that it has the class 
+        "comment". Other cases of div use are ignored.
+        
+        Note: The remark entity can only contain inline elements, so it is
+              likely that the use of this will produce invalid DocBook.
+        """
+        css_class = kw.get('css_class')
+        if on and css_class and 'comment' in css_class.split():
+            self._handleFormatting("remark", on)
+        if not on and self.cur.nodeName == "remark":
+            self._handleFormatting("remark", on)
+        return ""
+        
+    def span(self, on, **kw):
+        """A span cannot really be supported in DocBook as it carries no
+        semantic meaning, but the special case of a comment can be handled.
+        
+        A comment is represented in DocBook by the remark element.
+        
+        A comment span is recognized by the fact that it has the class 
+        "comment". Other cases of div use are ignored.
+        """
+        css_class = kw.get('css_class')
+        if on and css_class and 'comment' in css_class.split():
+            self._handleFormatting("remark", on)
+        if not on and self.cur.nodeName == "remark":
+            self._handleFormatting("remark", on)
+        return ""
+                        
+    
+    
 ### Tables ##########################################################
 
     def table(self, on, attrs=(), **kw):
