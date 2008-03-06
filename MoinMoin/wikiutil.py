@@ -249,6 +249,7 @@ def escape(s, quote=0):
     s = s.replace(">", "&gt;")
     if quote:
         s = s.replace('"', "&quot;")
+        s = s.replace("'", "&#x27;")
     return s
 
 def clean_input(text, max_len=201):
