@@ -11,7 +11,6 @@ from MoinMoin.Page import Page
 def execute(pagename, request):
     """ Unsubscribe the user from pagename """
     _ = request.getText
-    cfg = request.cfg
     msg = None
 
     if request.user.isSubscribedTo([pagename]):

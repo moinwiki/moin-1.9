@@ -14,7 +14,7 @@ import xmlrpclib
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
-from MoinMoin import auth, wikiutil, user
+from MoinMoin import wikiutil, user
 from MoinMoin.auth import BaseAuth, ContinueLogin, CancelLogin
 
 class InterwikiAuth(BaseAuth):

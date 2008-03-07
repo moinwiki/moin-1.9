@@ -280,7 +280,6 @@ class Parser:
         tb = self.cur
         tr = DocNode('table_row', tb)
 
-        text = ''
         for m in self.cell_re.finditer(row):
             cell = m.group('cell')
             if cell:

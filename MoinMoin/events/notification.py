@@ -10,7 +10,6 @@
 """
 
 from MoinMoin import user, wikiutil
-from MoinMoin.Page import Page
 from MoinMoin.events import EventResult
 
 class Result(EventResult):
@@ -67,21 +66,12 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
     @rtype: dict
 
     """
-    from MoinMoin.action.AttachFile import getAttachUrl
-
     _ = request.getText
     page._ = lambda s, wiki=False, r=request, l=lang: r.getText(s, wiki=wiki, lang=l)
-    querystr = {}
     changes = {'page_name': page.page_name, 'revision': str(page.getRevList()[0])}
 
     if msgtype == "page_changed":
         revisions = kwargs['revisions']
-        if len(kwargs['revisions']) >= 2:
-            querystr = {'action': 'diff',
-                    'rev2': str(revisions[0]),
-                    'rev1': str(revisions[1])}
-
-    pagelink = page_link(request, page, querystr)
 
     if msgtype == "page_changed":
         changes['text'] = _("Dear Wiki user,\n\n"
@@ -157,7 +147,6 @@ def attachment_added(request, _, page_name, attach_name, attach_size):
     @return: a dict with notification data
 
     """
-    page = Page(request, page_name)
     data = {}
 
     data['subject'] = _("New attachment added to page %(pagename)s on %(sitename)s") % {

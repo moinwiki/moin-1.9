@@ -13,7 +13,6 @@ import zipfile
 
 from MoinMoin import wikiutil
 from MoinMoin.Page import Page
-from MoinMoin.PageEditor import PageEditor
 from MoinMoin.action.PackagePages import PackagePages
 from MoinMoin.packages import Package, ScriptEngine, MOIN_PACKAGE_FILE, packLine, unpackLine
 from MoinMoin._tests.common import gain_superuser_rights

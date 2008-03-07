@@ -69,7 +69,6 @@ def handle_file_attached(event):
     names = set()
     request = event.request
     page = Page(request, event.pagename)
-    event_name = event.name
     subscribers = page.getSubscribers(request, return_users=1)
     notification.filter_subscriber_list(event, subscribers, True)
     recipients = []

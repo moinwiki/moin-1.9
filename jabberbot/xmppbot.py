@@ -1308,7 +1308,7 @@ The call should look like:\n\n%(command)s %(params)s")
 
         if ver_algo is None:
             # legacy client - send disco#info query
-            send_disco_query(jid)
+            self.send_disco_query(jid)
         else:
             # check if we have this (ver,algo) already cached
             cache_item = self.disco_cache.get_item(ver_algo, state='stale')
@@ -1345,11 +1345,11 @@ The call should look like:\n\n%(command)s %(params)s")
 
                     return ver_algo
                 else:
-                    self.log.debug(u"%s: presence with <c> but without 'ver' attribute." % jid.as_unicode())
+                    #self.log.debug(u"%s: presence with <c> but without 'ver' attribute." % jid.as_unicode())
                     return None
                 break
         else:
-            self.log.debug(u"%s: presence without a <c> tag." % jid.as_unicode())
+            #self.log.debug(u"%s: presence without a <c> tag." % jid.as_unicode())
             return None
 
     def send_disco_query(self, jid):

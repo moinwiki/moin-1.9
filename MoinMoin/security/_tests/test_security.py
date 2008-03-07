@@ -247,7 +247,7 @@ class TestAcl(object):
         """
         py.test.skip("test tricks out the caching system, page modifications without making an edit-log entry are not supported")
         import os
-        from MoinMoin.Page import Page
+        from MoinMoin.PageEditor import PageEditor
         pagename = u'AutoCreatedMoinMoinTemporaryTestPage'
 
         result = self.request.user.may.write(pagename)

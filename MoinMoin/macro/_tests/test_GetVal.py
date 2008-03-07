@@ -7,11 +7,10 @@
     @license: GNU GPL, see COPYING for details.
 """
 import os, py
-from MoinMoin import macro, wikidicts, wikiutil
-from MoinMoin.logfile import eventlog
+
+from MoinMoin import macro
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
-from MoinMoin.parser.text_moin_wiki import Parser
 from MoinMoin._tests.common import gain_superuser_rights
 
 class TestGetVal:

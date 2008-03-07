@@ -182,7 +182,6 @@ class PackagePages:
         @return: error message, if one happened
         """
         _ = self.request.getText
-        form = self.request.form
         COMPRESSION_LEVEL = zipfile.ZIP_DEFLATED
 
         pages = []
