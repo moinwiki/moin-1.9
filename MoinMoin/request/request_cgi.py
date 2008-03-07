@@ -30,7 +30,7 @@ class Request(RequestBase):
 
     def _setup_args_from_cgi_form(self):
         """ Override to create cgi form """
-        form = cgi.FieldStorage()
+        form = cgi.FieldStorage(keep_blank_values=1)
         return RequestBase._setup_args_from_cgi_form(self, form)
 
     def read(self, n=None):
