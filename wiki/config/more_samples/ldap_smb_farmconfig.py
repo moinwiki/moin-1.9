@@ -11,6 +11,8 @@
 
     This is a sample configuration for a farm using ldap and smb auth plugins.
 
+    !!! NEEDS UPDATE FOR MOIN 1.7 !!!
+
     It works like this:
     * user logs in via moin's form on UserPreferences
     * ldap_login plugin checks username/password against LDAP
