@@ -1,0 +1,31 @@
+#!/usr/bin/env python
+"""
+    mointwisted - control MoinMoin Twisted server
+
+    @copyright: 2004-2005 Thomas Waldmann, Nir Soffer
+    @license: GNU GPL, see COPYING for details.
+"""
+
+# Add the path to mointwisted.py directory 
+## import sys
+## sys.path.insert(0, '/path/to/mointwisted')
+
+import os
+
+from MoinMoin import log
+log.load_config('.../wiki/config/logging/logfile') # XXX fix path
+
+from MoinMoin.server import daemon
+from mointwisted import Config
+
+
+class TwistedScript(daemon.DaemonScript):
+
+    def do_start(self):
+        """ Override to use twistd daemonizer """
+        os.system('twistd --python mointwisted.py --pidfile %s' % self.pidFile)       
+
+
+script = TwistedScript(Config.name, None)
+script.run()
+
