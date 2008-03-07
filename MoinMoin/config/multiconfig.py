@@ -216,7 +216,7 @@ class CacheClass:
     pass
 
 
-class DefaultConfig:
+class DefaultConfig(object):
     """ default config values """
 
     # setting DesktopEdition = True gives all local users special powers - ONLY use for MMDE style usage!
