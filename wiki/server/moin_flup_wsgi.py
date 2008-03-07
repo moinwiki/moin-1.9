@@ -25,7 +25,7 @@ from MoinMoin.server.server_wsgi import moinmoinApp, WsgiConfig
 class Config(WsgiConfig):
     pass
 
-config = Config() # MUST create an instance to init logging
+config = Config() # MUST create an instance
 
 if __name__ == '__main__':
     server = WSGIServer(moinmoinApp, bindAddress=unixSocketPath)

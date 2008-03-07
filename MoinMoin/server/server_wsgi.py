@@ -8,7 +8,7 @@
     class Config(WsgiConfig):
         pass
 
-    config = Config() # you MUST create an instance to initialize logging!
+    config = Config() # you MUST create an instance
     # use moinmoinApp here with your WSGI server / gateway
 
     @copyright: 2005 Anakim Border <akborder@gmail.com>,
