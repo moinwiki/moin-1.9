@@ -8,8 +8,6 @@
 
 import py
 
-import re
-
 from MoinMoin.Page import Page
 from MoinMoin import wikiutil
 

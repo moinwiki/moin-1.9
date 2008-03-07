@@ -89,7 +89,7 @@ class PackagePages:
                 'target': wikiutil.escape(target), 'filename': wikiutil.escape(target)}, "error")
             raise ActionError
 
-         # Generate a package
+        # Generate a package
         output = open(fpath, "wb")
         package = self.collectpackage(unpackLine(pagelist, ","), output, target)
 

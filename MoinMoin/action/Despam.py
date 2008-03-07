@@ -187,7 +187,6 @@ def execute(pagename, request):
 
     editor = request.form.get('editor', [None])[0]
     timestamp = time.time() - DAYS * 24 * 3600
-       # request.form.get('timestamp', [None])[0]
     ok = request.form.get('ok', [0])[0]
 
     request.emit_http_headers()

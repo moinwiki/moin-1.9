@@ -56,8 +56,6 @@ class TestCaching(object):
 
     def test_remove(self):
         """ test if cache file removal works """
-        test_data = '12345abcde'
-        now = time.time()
         cache = caching.CacheEntry(self.request, 'test_arena', 'test_key', 'wiki')
         assert cache.exists()
         cache.remove()

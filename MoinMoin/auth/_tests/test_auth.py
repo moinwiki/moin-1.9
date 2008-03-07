@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import logging, StringIO, urllib
+import StringIO, urllib
 
 from MoinMoin.server.server_wsgi import WsgiConfig
 from MoinMoin.request import request_wsgi

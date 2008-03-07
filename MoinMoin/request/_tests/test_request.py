@@ -84,7 +84,6 @@ class TestGroupPages(object):
 
         Spaces should normalize after invalid chars removed!
         """
-        import re
         cases = (
             # current acl chars
             (u'Name,:Group', u'NameGroup'),

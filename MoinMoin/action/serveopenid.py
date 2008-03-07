@@ -14,7 +14,6 @@ from MoinMoin import wikiutil
 from openid.consumer.discover import (OPENID_1_0_TYPE,
     OPENID_1_1_TYPE, OPENID_2_0_TYPE, OPENID_IDP_2_0_TYPE)
 from openid import sreg
-from openid import server
 from openid.cryptutil import randomString
 from openid.server import server
 from openid.message import IDENTIFIER_SELECT
