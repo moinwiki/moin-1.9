@@ -43,7 +43,6 @@ def used_languages(request):
     from MoinMoin.util.dataset import TupleDataset, Column
     from MoinMoin.widget.browser import DataBrowserWidget
 
-    fmt = request.formatter
     _ = request.getText
 
     data = get_data(request)

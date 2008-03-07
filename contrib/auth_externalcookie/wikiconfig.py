@@ -11,7 +11,7 @@ from MoinMoin.auth import BaseAuth
 class ExternalCookie(BaseAuth):
     name = 'external_cookie'
 
-    def request(request, user_obj, **kw):
+    def request(self, request, user_obj, **kw):
         """ authenticate via external cookie """
         import Cookie
         user = None

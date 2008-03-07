@@ -118,7 +118,6 @@ def handle_file_attached(event):
     """Sends an email to super users that have subscribed to this event type"""
 
     names = set()
-    event_name = event.name
     from_address = event.request.cfg.mail_from
     request = event.request
     page = Page(request, event.pagename)

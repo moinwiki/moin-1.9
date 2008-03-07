@@ -534,7 +534,7 @@ Example:
 
     # Setup MoinMoin environment
     from MoinMoin.request import request_cli
-    request = request_cli.Request(url='localhost/')
+    request = request_cli.Request(url=request_url)
     request.form = request.args = request.setup_args()
 
     package = ZipPackage(request, packagefile)

@@ -31,7 +31,6 @@ class MysqlGroupAuth(BaseAuth):
         self.verbose = verbose
 
     def login(self, request, user_obj, **kw):
-        verbose = False
         _ = request.getText
 
         verbose = self.verbose

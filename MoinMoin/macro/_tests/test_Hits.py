@@ -7,11 +7,10 @@
     @license: GNU GPL, see COPYING for details.
 """
 import os
+
 from MoinMoin import macro
 from MoinMoin.logfile import eventlog
-from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
-from MoinMoin.parser.text_moin_wiki import Parser
 
 class TestHits:
     """Hits: testing Hits macro """

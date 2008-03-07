@@ -20,7 +20,6 @@ Deleting the TestConfig instance will restore the previous configuration.
 """
 
 import atexit
-from inspect import isclass
 from sys import modules
 import sys
 
