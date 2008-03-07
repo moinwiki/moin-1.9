@@ -32,6 +32,7 @@ class Request(RequestBase):
 
     def _setup_args_from_cgi_form(self):
         """ Override to use FastCGI form """
+        # thfcgi used keep_blank_values=1 internally for fcgform
         return RequestBase._setup_args_from_cgi_form(self, self.fcgform)
 
     def read(self, n=None):

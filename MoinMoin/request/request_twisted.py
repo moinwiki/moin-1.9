@@ -70,8 +70,7 @@ class Request(RequestBase):
         Twisted already parsed args, including __filename__ hacking,
         but did not decode the values.
         """
-        # TODO: check if for a POST this included query_string args (needed for
-        # TwikiDraw's action=AttachFile&do=savedrawing)
+        # All of the arguments, including URL and POST arguments (using keep_blank_values=1 internally).
         return self.decodeArgs(self.twistd.args)
 
     def read(self, n=None):

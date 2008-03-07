@@ -81,7 +81,7 @@ class Request(RequestBase):
         duplicate the conversion code.
         """
         from mod_python import util
-        form = util.FieldStorage(self.mpyreq)
+        form = util.FieldStorage(self.mpyreq, keep_blank_values=1) # by default this evaluates query string AND body POST data!
 
         args = {}
 
