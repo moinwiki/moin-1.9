@@ -297,14 +297,17 @@ class MoinOpenIDServer:
         dummyidentity, server_url = self._make_identity()
         return self.approved(identity, openidreq, server_url=server_url)
 
-    def approved(self, identity, openidreq, data=False, server_url=None):
+    def approved(self, identity, openidreq, server_url=None):
+        # TODO: If simple registration is implemented, this needs
+        #       to do something like the following:
+        #
+        #       sreg_data = { fill this dict with real values }
+        #       sreq_req = sreg.SRegRequest.fromOpenIDRequest(openidreq.message)
+        #       # do something with the request to see what values are required?
+        #       sreg_resp = sreg.SRegResponse.extractResponse(openidreq, sreg_data)
+        #       sreg_resp.addToOpenIDResponse(reply.fields)
+
         reply = openidreq.answer(True, identity=identity, server_url=server_url)
-        if data:
-            # TODO
-            sreg_data = {}
-            sreq_req = sreg.SRegRequest.fromOpenIDRequest(openidreq.message)
-            sreg_resp = sreg.SRegResponse.extractResponse(openidreq, sreg_data)
-            sreg_resp.addToOpenIDResponse(reply.fields)
         return reply
 
     def user_trusts_url(self, trustroot):
