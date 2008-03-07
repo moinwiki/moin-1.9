@@ -21,7 +21,7 @@ class TestAuth:
 
         Some test needs specific config values, or they will fail.
         """
-        config = WsgiConfig() # you MUST create an instance to initialize logging!
+        config = WsgiConfig() # you MUST create an instance
 
     def teardown_class(cls):
         """ Stuff that should run to clean up the state of this test class
