@@ -80,6 +80,14 @@ class TestParagraphs(ParserTestCase):
             result = self.parse(text)
             assert re.search(r'<p.*?>\s*Paragraph\s*', result)
 
+    def testStrangeP(self):
+        """ parser.wiki: empty line separates paragraphs """
+        result = self.parse("""<<BR>> <<BR>>
+
+foo ''bar'' baz.
+""")
+        assert re.search(r'foo <em>bar</em> baz', result)
+
 
 class TestHeadings(ParserTestCase):
     """ Test various heading problems """
@@ -229,12 +237,12 @@ class TestCloseInlineTestCase(ParserTestCase):
         py.test.skip("Broken")
         cases = (
             # test, expected
-            ("text'''text\n", r"<p>text<strong>text\s*</strong></p>"),
-            ("text''text\n", r"<p>text<em>text\s*</em></p>"),
-            ("text__text\n", r"<p>text<span class=\"u\">text\s*</span></p>"),
+            ("text__text\n", r'<p[^>]*>text<span class="u">text\s*</span></p>'),
+            ("text''text\n", r'<p[^>]*>text<em>text\s*</em></p>'),
+            ("text'''text\n", r'<p[^>]*>text<strong>text\s*</strong></p>'),
             ("text ''em '''em strong __em strong underline",
-             r"text <em>em <strong>em strong <span class=\"u\">em strong underline"
-             r"\s*</span></strong></em></p>"),
+             r'text <em>em <strong>em strong <span class="u">em strong underline'
+             r'\s*</span></strong></em></p>'),
             )
         for test, expected in cases:
             result = self.parse(test)
@@ -486,8 +494,6 @@ You can use {{{brackets}}}
     def testManyNestingPreBrackets(self):
         """ tests two nestings  ({{{ }}} and {{{ }}}) in one line for the wiki parser
         """
-        py.test.skip("Broken")
-
         raw = """{{{{
 Test {{{brackets}}} and test {{{brackets}}}
 }}}}"""
