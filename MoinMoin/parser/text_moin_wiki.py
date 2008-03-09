@@ -761,7 +761,7 @@ class Parser:
                                                              acceptable_attrs=acceptable_attrs_object)
                     if 'action' not in query_args:
                         query_args['action'] = 'content'
-                    url = Page(self.request, page_name_all).url(self.request, querystr=query_args, relative=False)
+                    url = Page(self.request, page_name_all).url(self.request, querystr=query_args)
                     return (self.formatter.transclusion(1, data=url, **tag_attrs) +
                             self._transclude_description(desc, page_name_all) +
                             self.formatter.transclusion(0))

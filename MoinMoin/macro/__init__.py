@@ -275,7 +275,7 @@ class Macro:
 
         page = fmt.page
         allpages_txt = (_('Include system pages'), _('Exclude system pages'))[allpages]
-        allpages_url = page.url(request, querystr={'allpages': allpages and '0' or '1'}, relative=False)
+        allpages_url = page.url(request, querystr={'allpages': allpages and '0' or '1'})
 
         output = [fmt.paragraph(1), _make_index_key(index_letters), fmt.linebreak(0),
                   fmt.url(1, allpages_url), fmt.text(allpages_txt), fmt.url(0), fmt.paragraph(0)] + output

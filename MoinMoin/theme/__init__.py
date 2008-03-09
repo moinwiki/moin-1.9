@@ -829,7 +829,7 @@ var search_hint = "%(search_hint)s";
         """
         request = self.request
         url = page.url(request, querystr={
-                'action': 'rss_rc', 'ddiffs': '1', 'unique': '1', }, escape=0, relative=False)
+                'action': 'rss_rc', 'ddiffs': '1', 'unique': '1', }, escape=0)
         return url
 
     def rsslink(self, d):
@@ -1202,7 +1202,7 @@ var gui_editor_link_href = "%(url)s";
 var gui_editor_link_text = "%(text)s";
 //-->
 </script>
-""" % {'url': page.url(self.request, querystr={'action': 'edit', 'editor': 'gui', }, relative=False),
+""" % {'url': page.url(self.request, querystr={'action': 'edit', 'editor': 'gui', }),
        'text': _('Edit (GUI)'),
       }
 
@@ -1633,7 +1633,7 @@ var gui_editor_link_text = "%(text)s";
             request.user.edit_on_doubleclick):
             if request.user.may.write(pagename): # separating this gains speed
                 querystr = wikiutil.escape(wikiutil.makeQueryString({'action': 'edit'}))
-                url = page.url(request, querystr, relative=False)
+                url = page.url(request, querystr)
                 bodyattr.append(''' ondblclick="location.href='%s'" ''' % url)
 
         # Set body to the user interface language and direction

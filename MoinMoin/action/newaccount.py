@@ -93,7 +93,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
 
 def _create_form(request):
     _ = request.getText
-    url = request.page.url(request, relative=False)
+    url = request.page.url(request)
     ret = html.FORM(action=url)
     ret.append(html.INPUT(type='hidden', name='action', value='newaccount'))
     lang_attr = request.theme.ui_lang_attr()

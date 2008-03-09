@@ -614,7 +614,7 @@ class XmlRpcBase:
 
         return [(self._outstr(hit.page_name),
                  self._outstr(results.formatContext(hit, length, 1)),
-                 self.request.getQualifiedURL(hit.page.url(self.request, {}, relative=False)))
+                 self.request.getQualifiedURL(hit.page.url(self.request, {})))
                 for hit in results.hits]
 
     def xmlrpc_getMoinVersion(self):

@@ -34,7 +34,7 @@ class MoinOpenIDServer:
         hdrs = ['Content-type: application/xrds+xml']
 
         request.emit_http_headers(hdrs)
-        user_url = request.getQualifiedURL(request.page.url(request, relative=False))
+        user_url = request.getQualifiedURL(request.page.url(request))
         self.request.write("""\
 <?xml version="1.0" encoding="UTF-8"?>
 <xrds:XRDS
@@ -82,7 +82,7 @@ class MoinOpenIDServer:
         hdrs = ['Content-type: application/xrds+xml']
 
         request.emit_http_headers(hdrs)
-        user_url = request.getQualifiedURL(request.page.url(request, relative=False))
+        user_url = request.getQualifiedURL(request.page.url(request))
         self.request.write("""\
 <?xml version="1.0" encoding="UTF-8"?>
 <xrds:XRDS
@@ -137,7 +137,7 @@ class MoinOpenIDServer:
         # For the #OpenIDUser PI, we need to allow the page that includes the PI,
         # hence use check_name here (see above for how it is assigned)
         fullidentity = '/'.join([base, check_name])
-        thisurl = request.getQualifiedURL(request.page.url(request, relative=False))
+        thisurl = request.getQualifiedURL(request.page.url(request))
         if not thisurl == fullidentity:
             return False
 
@@ -165,10 +165,8 @@ class MoinOpenIDServer:
         page = wikiutil.getHomePage(self.request)
         if page:
             server_url = self.request.getQualifiedURL(
-                             page.url(self.request,
-                                      querystr={'action': 'serveopenid'},
-                                      relative=False))
-            identity = self.request.getQualifiedURL(page.url(self.request, relative=False))
+                             page.url(self.request, querystr={'action': 'serveopenid'}))
+            identity = self.request.getQualifiedURL(page.url(self.request))
             return identity, server_url
         return None, None
 
@@ -190,9 +188,7 @@ class MoinOpenIDServer:
             return
 
         server_url = request.getQualifiedURL(
-                         request.page.url(request,
-                                          querystr={'action': 'serveopenid'},
-                                          relative=False))
+                         request.page.url(request, querystr={'action': 'serveopenid'}))
 
         yadis_type = form.get('yadis', [None])[0]
         if yadis_type == 'ep':

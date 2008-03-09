@@ -65,6 +65,8 @@ Version 1.7.current:
       _('This will be parsed/formatted by MoinMoin!', wiki=True)
       _('This will be used as a left side of percent operator. %s',
         wiki=True, percent=True)
+    * Page.url 'relative' keyword param (default: True in 1.6 and early 1.7)
+      was changed to default False).
 
   New Features:
     * new powerful and flexible logging, please see wiki/config/logging/.
