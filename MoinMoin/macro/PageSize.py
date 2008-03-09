@@ -8,7 +8,7 @@
 
 Dependencies = ["pages"]
 
-def execute(macro, args):
+def macro_PageSize(macro):
     if macro.request.isSpiderAgent: # reduce bot cpu usage
         return ''
 

@@ -13,7 +13,7 @@ from MoinMoin.action.AttachFile import do_admin_browser
 
 Dependencies = ["time"]
 
-def execute(macro, args):
+def macro_SystemAdmin(macro):
     _ = macro.request.getText
     request = macro.request
 

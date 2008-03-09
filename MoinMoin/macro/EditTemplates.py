@@ -7,25 +7,24 @@
 """
 
 Dependencies = ["language"]
-
-def execute(self, args):
+def macro_EditTemplates(macro):
     result = ''
     # we don't want to spend much CPU for spiders requesting nonexisting pages
-    if not self.request.isSpiderAgent:
+    if not macro.request.isSpiderAgent:
         # Get list of template pages readable by current user
-        filterfn = self.request.cfg.cache.page_template_regex.search
-        templates = self.request.rootpage.getPageList(filter=filterfn)
+        filterfn = macro.request.cfg.cache.page_template_regex.search
+        templates = macro.request.rootpage.getPageList(filter=filterfn)
         result = []
         if templates:
             templates.sort()
-            page = self.formatter.page
+            page = macro.formatter.page
             # send list of template pages
-            result.append(self.formatter.bullet_list(1))
+            result.append(macro.formatter.bullet_list(1))
             for template in templates:
-                result.append(self.formatter.listitem(1))
-                result.append(page.link_to(self.request, template, querystr={'action': 'edit', 'template': template}))
-                result.append(self.formatter.listitem(0))
-            result.append(self.formatter.bullet_list(0))
+                result.append(macro.formatter.listitem(1))
+                result.append(page.link_to(macro.request, template, querystr={'action': 'edit', 'template': template}))
+                result.append(macro.formatter.listitem(0))
+            result.append(macro.formatter.bullet_list(0))
         result = ''.join(result)
     return result
 
