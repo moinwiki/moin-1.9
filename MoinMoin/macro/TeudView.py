@@ -26,7 +26,7 @@ from MoinMoin import config, wikiutil
 
 Dependencies = ["time"]
 
-def execute(macro, args):
+def macro_TeudView(macro):
     if _imperr: return "Error in TeudView macro: " + str(_imperr)
 
     #dtdfile = xmldoc.getDTDPath()

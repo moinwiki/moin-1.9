@@ -10,7 +10,7 @@ from MoinMoin import wikiutil
 
 Dependencies = ["pages"]
 
-def execute(macro, args):
+def macro_WantedPages(macro):
     request = macro.request
     _ = request.getText
 

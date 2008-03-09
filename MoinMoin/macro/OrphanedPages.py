@@ -8,7 +8,7 @@
 
 Dependencies = ["pages"]
 
-def execute(macro, args):
+def macro_OrphanedPages(macro):
     _ = macro.request.getText
 
     if macro.request.mode_getpagelinks: # prevent recursion
