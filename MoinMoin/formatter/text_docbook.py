@@ -317,13 +317,10 @@ class Formatter(FormatterBase):
 
 ### Links ###########################################################
 
-    # FIXME: This is quite crappy
     def pagelink(self, on, pagename='', page=None, **kw):
         FormatterBase.pagelink(self, on, pagename, page, **kw)
-
         return self.interwikilink(on, 'Self', pagename)
 
-    # FIXME: This is even more crappy
     def interwikilink(self, on, interwiki='', pagename='', **kw):
         if not on:
             return self.url(on, kw)
