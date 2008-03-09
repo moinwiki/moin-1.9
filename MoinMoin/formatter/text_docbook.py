@@ -710,9 +710,14 @@ class Formatter(FormatterBase):
             self.cur.removeChild(self.cur.firstChild)
     
     def _addTextElem(self, target, elemName, text):
-            newElement = self.doc.createElement(elemName)
-            newElement.appendChild(self.doc.createTextNode(text))
-            target.appendChild(newElement)
+        """
+        Creates an element of the name elemName and adds a text node to it
+        with the nodeValue of text. The new element is then added as a child
+        to the element target.
+        """
+        newElement = self.doc.createElement(elemName)
+        newElement.appendChild(self.doc.createTextNode(text))
+        target.appendChild(newElement)
         
     
     def _addRevisionHistory(self, targetNode):
