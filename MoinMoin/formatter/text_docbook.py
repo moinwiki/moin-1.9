@@ -31,8 +31,9 @@ except ImportError:
 
 
 class Formatter(FormatterBase):
+    #TODO: How to handle revision history and other meta-info from included files?
 
-    #this list is extended as the page is parsed. Could be optimized by adding them here?
+    # this list is extended as the page is parsed. Could be optimized by adding them here?
     section_should_break = ['abstract', 'para', 'emphasis']
 
     blacklisted_macros = ('TableOfContents', 'ShowSmileys')
@@ -71,9 +72,15 @@ class Formatter(FormatterBase):
 
         self.title = pagename
         self.root = self.doc.documentElement
+        
+        if not self.include_kludge and self.doctype == "article":
+            info = self.doc.createElement("articleinfo")
+            self.root.appendChild(info)
+            self._addTitleElement(self.title, targetNode=info)
+            self._addRevisionHistory(targetNode=info)       
+        else:
+            self._addTitleElement(self.title, targetNode=self.root)
 
-        #info = self.doc.createElement("articleinfo")
-        self._addTitleElement(self.title, targetNode=self.root)
         self.cur = self.root
         return ""
 
@@ -93,7 +100,6 @@ class Formatter(FormatterBase):
 
         f = StringIO.StringIO()
         Print(self.doc, f)
-        #PrettyPrint(self.doc, f)
         txt = f.getvalue()
         f.close()
 
@@ -140,7 +146,7 @@ class Formatter(FormatterBase):
                 # number of levels we want to go higher
                 numberOfLevels = self.curdepth - depth + 1
                 for dummy in range(numberOfLevels):
-                    #find first non section node
+                    # find first non section node
                     while not self.cur.nodeName in self._can_contain_section:
                         self.cur = self.cur.parentNode
 
@@ -431,7 +437,7 @@ class Formatter(FormatterBase):
             image.setAttribute('depth', str(kw['height']))
         imagewrap.appendChild(image)
 
-        #Look for any suitable title, order is important.
+        # Look for any suitable title, order is important.
         title = ''
         for a in ('title', 'html_title', 'alt', 'html_alt', 'attachment_title'):
             if kw.has_key(a):
@@ -439,10 +445,8 @@ class Formatter(FormatterBase):
                 break
         if title:
             txtcontainer = self.doc.createElement('textobject')
+            self._addTextElem(txtcontainer, "phrase", title)
             media.appendChild(txtcontainer)
-            txtphrase = self.doc.createElement('phrase')
-            txtphrase.appendChild(self.doc.createTextNode(title))
-            txtcontainer.appendChild(txtphrase)
 
         self.cur.appendChild(media)
         return ""
@@ -563,24 +567,28 @@ class Formatter(FormatterBase):
         should be fixed.
 
         """
-        #Another alternative would be to feed the output to rawHTML or even
-        #combining these two approaches. The _best_ alternative would be to
-        #fix the macros.
+        # Another alternative would be to feed the output to rawHTML or even
+        # combining these two approaches. The _best_ alternative would be to
+        # fix the macros.
+        excludes=("articleinfo", "title")
+        
         if name in self.blacklisted_macros:
             self._emitComment("The macro %s doesn't work with the DocBook formatter." % name)
 
         elif name == "FootNote":
             footnote = self.doc.createElement('footnote')
-            para = self.doc.createElement('para')
-            para.appendChild(self.doc.createTextNode(str(args)))
-            footnote.appendChild(para)
+            self._addTextElem(footnote, "para", str(args))
             self.cur.appendChild(footnote)
 
         elif name == "Include":
+            was_in_para = self.cur.nodeName=="para"
+            if was_in_para:
+                self.paragraph(0)
             text = FormatterBase.macro(self, macro_obj, name, args)
             if text.strip():
-                self._copyExternalNodes(Sax.FromXml(text).documentElement.childNodes, exclude=("title", ))
-
+                self._copyExternalNodes(Sax.FromXml(text).documentElement.childNodes, exclude=excludes)
+            if was_in_para:
+                self.paragraph(1)
 
         else:
             text = FormatterBase.macro(self, macro_obj, name, args)
@@ -588,7 +596,7 @@ class Formatter(FormatterBase):
                 from xml.parsers.expat import ExpatError
                 try:
                     xml_dom = Sax.FromXml(text).documentElement.childNodes
-                    self._copyExternalNodes(xml_dom, exclude=("title", ))
+                    self._copyExternalNodes(xml_dom, exclude=excludes)
                 except ExpatError:
                     self._emitComment("The macro %s caused an error and should be blacklisted. It returned the data '%s' which caused the docbook-formatter to choke. Please file a bug." % (name, text))
 
@@ -667,9 +675,7 @@ class Formatter(FormatterBase):
     def _addTitleElement(self, titleTxt, targetNode=None):
         if not targetNode:
             targetNode = self.cur
-        title = self.doc.createElement("title")
-        title.appendChild(self.doc.createTextNode(titleTxt))
-        targetNode.appendChild(title)
+        self._addTextElem(targetNode, "title", titleTxt)
 
     def _convertStylesToDict(self, styles):
         '''Takes the CSS styling information and converts it to a dict'''
@@ -702,6 +708,73 @@ class Formatter(FormatterBase):
                 and self.cur.firstChild.nodeType == Node.TEXT_NODE \
                 and self.cur.firstChild.nodeValue.strip() == self.cur.getAttribute('url').strip():
             self.cur.removeChild(self.cur.firstChild)
+    
+    def _addTextElem(self, target, elemName, text):
+            newElement = self.doc.createElement(elemName)
+            newElement.appendChild(self.doc.createTextNode(text))
+            target.appendChild(newElement)
+        
+    
+    def _addRevisionHistory(self, targetNode):
+        """
+        This will generate a revhistory element which it will populate with
+        revision nodes. Each revision has the revnumber, date and author-
+        initial elements, and if a comment was supplied, the comment element.
+        
+        The date elements format depends on the users settings, so it will
+        be in the same format as the revision history as viewed in the
+        page info on the wiki.
+        
+        The authorinitials will be the UserName or if it was an anonymous
+        edit, then it will be the hostname/ip-address.
+        
+        The revision history of included documents is NOT included at the
+        moment due to technical difficulties.
+        """
+        from MoinMoin.logfile import editlog
+        from MoinMoin import user
+        log = editlog.EditLog(self.request, rootpagename=self.title)
+        user_cache={}
+        
+        history = self.doc.createElement("revhistory")
+
+        # read in the complete log of this page
+        for line in log.reverse():
+            if not line.action in ('SAVE', 'SAVENEW', 'SAVE/REVERT', 'SAVE/RENAME', ):
+                #Let's ignore adding of attachments
+                continue
+            revision = self.doc.createElement("revision")
+            
+            # Revision number (without preceeding zeros)
+            self._addTextElem(revision, "revnumber", line.rev.lstrip('0'))
+            
+            # Date of revision
+            date_text = self.request.user.getFormattedDateTime(
+                wikiutil.version2timestamp(line.ed_time_usecs))
+            self._addTextElem(revision, "date", date_text)
+
+            # Author or revision
+            if not (line.userid in user_cache):
+                user_cache[line.userid] = user.User(self.request, line.userid, auth_method="text_docbook:740")
+            author = user_cache[line.userid]
+            if author and author.name:
+                self._addTextElem(revision, "authorinitials", author.name)
+            else:
+                self._addTextElem(revision, "authorinitials", line.hostname)
+
+            # Comment from author of revision
+            comment = line.comment
+            if not comment:
+                if '/REVERT' in line.action:
+                    comment = _("Revert to revision %(rev)d.") % {'rev': int(line.extra)}
+                elif '/RENAME' in line.action:
+                    comment = _("Renamed from '%(oldpagename)s'.") % {'oldpagename': line.extra}
+            if comment:
+                self._addTextElem(revision, "revremark", comment)
+
+            history.appendChild(revision)
+
+        targetNode.appendChild(history)
 
 ### Not supported ###################################################
 
@@ -761,11 +834,11 @@ class Formatter(FormatterBase):
               very likely that the use of a comment div will produce invalid
               DocBook.
         """
-        #Map your styles to docbook elements.
-        #Even though comment is right now the only one that needs to be
-        #mapped, having two different ways is more complicated than having
-        #a single common way. Code clarity and generality first, especially
-        #since we might want to do more div to docbook mappings in the future.
+        # Map your styles to docbook elements.
+        # Even though comment is right now the only one that needs to be
+        # mapped, having two different ways is more complicated than having
+        # a single common way. Code clarity and generality first, especially
+        # since we might want to do more div to docbook mappings in the future.
         class_to_docbook = {"warning":   "warning",
                             "caution":   "caution",
                             "important": "important",
