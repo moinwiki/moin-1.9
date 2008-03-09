@@ -884,8 +884,8 @@ Lists: * bullets; 1., a. numbered items.
                 self._subscribable_events = events.get_subscribable_events()
             return getattr(self, "_subscribable_events")
 
-        def setter(self, new_handlers):
-            self._event_handlers = new_handlers
+        def setter(self, new_events):
+            self._subscribable_events = new_events
 
         return property(getter, setter)
     subscribable_events = make_subscribable_events_prop()
@@ -896,7 +896,11 @@ Lists: * bullets; 1., a. numbered items.
             if getattr(self, "_event_handlers", None) is None:
                 self._event_handlers = events.get_handlers(self)
             return getattr(self, "_event_handlers")
-        return property(getter)
+        
+        def setter(self, new_handlers):
+            self._event_handlers = new_handlers
+            
+        return property(getter, setter)
     event_handlers = make_event_handlers_prop()
 
     def load_IWID(self):
