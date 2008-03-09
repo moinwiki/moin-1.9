@@ -579,6 +579,23 @@ class TestTransclusionMarkup(ParserTestCase):
             result = self.needle.search(html).group(1)
             assert result == expected
 
+class TestMacrosInOneLine(ParserTestCase):
+    """ Test macro formatting """
+    text = 'AAA %s AAA'
+    needle = re.compile(text % r'(.+)')
+    _tests = (
+        # test                              expected
+        (u'<<Verbatim(A)>><<Verbatim(a)>>', 'Aa'),
+        (u'<<Verbatim(A)>> <<Verbatim(a)>>', 'A a'),
+        )
+
+    def testMultipleMacrosInOneLine(self):
+        """ parser.wiki: multiple macros in one line and no linebreak """
+        for test, expected in self._tests:
+            html = self.parse(self.text % test)
+            result = self.needle.search(html).group(1)
+            assert result == expected
+
 
 coverage_modules = ['MoinMoin.parser.text_moin_wiki']
 
