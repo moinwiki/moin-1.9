@@ -120,7 +120,7 @@ def execute(pagename, request):
     else:
         disable_next = u''
 
-    page_url = wikiutil.escape(currentpage.url(request, relative=False))
+    page_url = wikiutil.escape(currentpage.url(request))
 
     navigation_html = """
 <table class="diff">

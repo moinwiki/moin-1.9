@@ -287,7 +287,7 @@ def do_refresh(pagename, request):
 def do_goto(pagename, request):
     """ redirect to another page """
     target = request.form.get('target', [''])[0]
-    request.http_redirect(Page(request, target).url(request, relative=False))
+    request.http_redirect(Page(request, target).url(request))
 
 # Dispatching ----------------------------------------------------------------
 def getNames(cfg):

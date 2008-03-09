@@ -16,7 +16,7 @@ from MoinMoin.Page import Page
 from MoinMoin.wikixml.util import RssGenerator
 
 def full_url(request, page, querystr=None, anchor=None):
-    url = page.url(request, relative=False, anchor=anchor, querystr=querystr)
+    url = page.url(request, anchor=anchor, querystr=querystr)
     url = wikiutil.escape(url)
     return request.getQualifiedURL(url)
 
