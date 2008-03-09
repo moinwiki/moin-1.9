@@ -72,12 +72,12 @@ class Formatter(FormatterBase):
 
         self.title = pagename
         self.root = self.doc.documentElement
-        
+
         if not self.include_kludge and self.doctype == "article":
             info = self.doc.createElement("articleinfo")
             self.root.appendChild(info)
             self._addTitleElement(self.title, targetNode=info)
-            self._addRevisionHistory(targetNode=info)       
+            self._addRevisionHistory(targetNode=info)
         else:
             self._addTitleElement(self.title, targetNode=self.root)
 
@@ -571,7 +571,7 @@ class Formatter(FormatterBase):
         # combining these two approaches. The _best_ alternative would be to
         # fix the macros.
         excludes=("articleinfo", "title")
-        
+
         if name in self.blacklisted_macros:
             self._emitComment("The macro %s doesn't work with the DocBook formatter." % name)
 
@@ -581,7 +581,7 @@ class Formatter(FormatterBase):
             self.cur.appendChild(footnote)
 
         elif name == "Include":
-            was_in_para = self.cur.nodeName=="para"
+            was_in_para = self.cur.nodeName == "para"
             if was_in_para:
                 self.paragraph(0)
             text = FormatterBase.macro(self, macro_obj, name, args)
@@ -708,7 +708,7 @@ class Formatter(FormatterBase):
                 and self.cur.firstChild.nodeType == Node.TEXT_NODE \
                 and self.cur.firstChild.nodeValue.strip() == self.cur.getAttribute('url').strip():
             self.cur.removeChild(self.cur.firstChild)
-    
+
     def _addTextElem(self, target, elemName, text):
         """
         Creates an element of the name elemName and adds a text node to it
@@ -718,29 +718,29 @@ class Formatter(FormatterBase):
         newElement = self.doc.createElement(elemName)
         newElement.appendChild(self.doc.createTextNode(text))
         target.appendChild(newElement)
-        
-    
+
+
     def _addRevisionHistory(self, targetNode):
         """
         This will generate a revhistory element which it will populate with
         revision nodes. Each revision has the revnumber, date and author-
         initial elements, and if a comment was supplied, the comment element.
-        
+
         The date elements format depends on the users settings, so it will
         be in the same format as the revision history as viewed in the
         page info on the wiki.
-        
+
         The authorinitials will be the UserName or if it was an anonymous
         edit, then it will be the hostname/ip-address.
-        
+
         The revision history of included documents is NOT included at the
         moment due to technical difficulties.
         """
         from MoinMoin.logfile import editlog
         from MoinMoin import user
         log = editlog.EditLog(self.request, rootpagename=self.title)
-        user_cache={}
-        
+        user_cache = {}
+
         history = self.doc.createElement("revhistory")
 
         # read in the complete log of this page
@@ -749,10 +749,10 @@ class Formatter(FormatterBase):
                 #Let's ignore adding of attachments
                 continue
             revision = self.doc.createElement("revision")
-            
+
             # Revision number (without preceeding zeros)
             self._addTextElem(revision, "revnumber", line.rev.lstrip('0'))
-            
+
             # Date of revision
             date_text = self.request.user.getFormattedDateTime(
                 wikiutil.version2timestamp(line.ed_time_usecs))
