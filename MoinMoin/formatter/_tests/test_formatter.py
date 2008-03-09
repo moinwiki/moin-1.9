@@ -26,7 +26,6 @@ class TestFormatter:
             print "Done."
 
     def testSyntaxReferenceDocBook(self):
-        py.test.skip("breaks with an attribute error, it should be checked whether the formatter on the DB branch is broken as well")
         try:
             from xml.dom import getDOMImplementation
             dom = getDOMImplementation("4DOM")
@@ -126,7 +125,7 @@ coverage_modules = ['MoinMoin.formatter',
                     'MoinMoin.formatter.text_html',
                     'MoinMoin.formatter.text_gedit',
                     'MoinMoin.formatter.text_xml',
-                    #'MoinMoin.formatter.text_docbook',
+                    'MoinMoin.formatter.text_docbook',
                     'MoinMoin.formatter.text_plain',
                     #'MoinMoin.formatter.dom_xml',
                     'MoinMoin.formatter.text_python',
