@@ -399,7 +399,6 @@ class Parser:
         # 'found_parser' == we found a valid parser (was: 2)
         self.in_pre = None
 
-        self.no_862 = False
         self.in_table = 0
         self.inhibit_p = 0 # if set, do not auto-create a <p>aragraph
 
@@ -1320,8 +1319,7 @@ class Parser:
                         self._parser_content(line[lastpos:start])
                     else:
                         ###result.append(u'<span class="info">[add text before match: <tt>"%s"</tt>]</span>' % line[lastpos:match.start()])
-                        # self.no_862 is added to solve the issue of macros called inline
-                        if not (inhibit_p or self.inhibit_p or self.in_pre or self.formatter.in_p or self.no_862):
+                        if not (inhibit_p or self.inhibit_p or self.in_pre or self.formatter.in_p):
                             result.append(self.formatter.paragraph(1, css_class="line862"))
                         # add the simple text in between lastpos and beginning of current match
                         result.append(self.formatter.text(line[lastpos:start]))
@@ -1415,9 +1413,6 @@ class Parser:
         # Main loop
         for line in self.lines:
             self.lineno += 1
-
-            if '>><<' in line.replace(' ', ''):
-                self.no_862 = True
 
             self.line_anchor_printed = 0
             if not self.in_table:
