@@ -479,11 +479,10 @@ class MoinTranslator(html4css1.HTMLTranslator):
 
     # Admonitions are handled here -=- tmacam
     def create_admonition_functor(self, admotion_class):
-        tag_class = 'admonition_' + admotion_class
         def visit_func(self, node):
             self.wiki_text = ''
             self.request.write(self.formatter.div(1,
-                                                  attr={'class': tag_class},
+                                                  attr={'class': admotion_class},
                                                   allowed_attrs=[]))
             self.body.append(self.wiki_text)
         def depart_func(self, node):
