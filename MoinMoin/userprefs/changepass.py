@@ -43,7 +43,7 @@ class Settings(UserPrefBase):
         if request.request_method != 'POST':
             return
 
-        password = form.get('password', [''])[0]
+        password = form.get('password1', [''])[0]
         password2 = form.get('password2', [''])[0]
 
         # Check if password is given and matches with password repeat
@@ -74,7 +74,7 @@ class Settings(UserPrefBase):
                                           "enter a new password twice.")))
 
         self.make_row(_('Password'),
-                      [html.INPUT(type="password", size=36, name="password")])
+                      [html.INPUT(type="password", size=36, name="password1")])
         self.make_row(_('Password repeat'),
                       [html.INPUT(type="password", size=36, name="password2")])
 

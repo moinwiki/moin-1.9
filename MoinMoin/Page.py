@@ -746,7 +746,7 @@ class Page(object):
         splitted = config.split_regex.sub(r'\1 \2', self.page_name)
         return splitted
 
-    def url(self, request, querystr=None, anchor=None, relative=True, **kw):
+    def url(self, request, querystr=None, anchor=None, relative=False, **kw):
         """ Return complete URL for this page, including scriptname.
             The URL is NOT escaped, if you write it to HTML, use wikiutil.escape
             (at least if you have a querystr, to escape the & chars).
@@ -755,6 +755,8 @@ class Page(object):
         @param querystr: the query string to add after a "?" after the url
             (str or dict, see wikiutil.makeQueryString)
         @param anchor: if specified, make a link to this anchor
+        @param relative: create a relative link (default: False), note that this
+                         changed in 1.7, in 1.6, the default was True.
         @rtype: str
         @return: complete url of this page, including scriptname
         """
@@ -784,7 +786,7 @@ class Page(object):
 
     def link_to_raw(self, request, text, querystr=None, anchor=None, **kw):
         """ core functionality of link_to, without the magic """
-        url = self.url(request, querystr, anchor=anchor)
+        url = self.url(request, querystr, anchor=anchor, relative=True) # scriptName is added by link_tag
         # escaping is done by link_tag -> formatter.url -> ._open()
         link = wikiutil.link_tag(request, url, text,
                                  formatter=getattr(self, 'formatter', None), **kw)
@@ -1153,21 +1155,17 @@ class Page(object):
                       request.dicts.has_member(request.cfg.openid_server_restricted_users_group, openid_username):
                         html_head = '<link rel="openid2.provider" href="%s">' % \
                                         wikiutil.escape(request.getQualifiedURL(self.url(request,
-                                                                                querystr={'action': 'serveopenid'},
-                                                                                relative=False)))
+                                                                                querystr={'action': 'serveopenid'})))
                         html_head += '<link rel="openid.server" href="%s">' % \
                                         wikiutil.escape(request.getQualifiedURL(self.url(request,
-                                                                                querystr={'action': 'serveopenid'},
-                                                                                relative=False)))
+                                                                                querystr={'action': 'serveopenid'})))
                         html_head += '<meta http-equiv="x-xrds-location" content="%s">' % \
                                         wikiutil.escape(request.getQualifiedURL(self.url(request,
-                                                                                querystr={'action': 'serveopenid', 'yadis': 'ep'},
-                                                                                relative=False)))
+                                                                                querystr={'action': 'serveopenid', 'yadis': 'ep'})))
                     elif self.page_name == request.cfg.page_front_page:
                         html_head = '<meta http-equiv="x-xrds-location" content="%s">' % \
                                         wikiutil.escape(request.getQualifiedURL(self.url(request,
-                                                                                querystr={'action': 'serveopenid', 'yadis': 'idp'},
-                                                                                relative=False)))
+                                                                                querystr={'action': 'serveopenid', 'yadis': 'idp'})))
 
                 request.theme.send_title(title, page=self,
                                     print_mode=print_mode,

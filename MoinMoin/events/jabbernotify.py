@@ -77,7 +77,7 @@ def handle_file_attached(event):
         recipients.extend(subscribers[lang])
 
     attachlink = request.getBaseURL() + getAttachUrl(event.pagename, event.filename, request)
-    pagelink = request.getQualifiedURL(page.url(request, {}, relative=False))
+    pagelink = request.getQualifiedURL(page.url(request, {}))
 
     for lang in subscribers.keys():
         _ = lambda text: request.getText(text, lang=lang)
@@ -170,7 +170,7 @@ def page_change(change_type, request, page, subscribers, **kwargs):
             jids = [u.jid for u in subscribers[lang] if u.jid]
             names = [u.name for u in subscribers[lang] if u.jid]
             msg = notification.page_change_message(change_type, request, page, lang, **kwargs)
-            page_url = request.getQualifiedURL(page.url(request, relative=False))
+            page_url = request.getQualifiedURL(page.url(request))
             url = {'url': page_url, 'description': _("Changed page")}
             data = {'action': change_type, 'subject': _('Page changed'),
                             'url_list': [url], 'text': msg['text'], 'diff': msg.get('diff', ''),

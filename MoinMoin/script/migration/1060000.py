@@ -9,5 +9,5 @@
 """
 
 def execute(script, data_dir, rev):
-    return 1060100
+    return 1069999
 
