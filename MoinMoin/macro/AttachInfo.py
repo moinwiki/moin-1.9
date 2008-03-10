@@ -11,10 +11,11 @@
 
 from MoinMoin.action.AttachFile import info
 
-def execute(macro, args):
-    pagename = macro.formatter.page.page_name
-    if args:
-        pagename = args
-    result = info(pagename, macro.request)
-    return result
+def macro_AttachInfo(macro, pagename=None):
+    """ generates info how much attachments stored on a page """
+    if not pagename:
+        pagename = macro.formatter.page.page_name
+    
+    return info(pagename, macro.request)
+
 

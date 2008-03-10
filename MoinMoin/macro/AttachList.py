@@ -15,15 +15,10 @@
 
 from MoinMoin.action.AttachFile import _build_filelist
 
-def execute(macro, args):
+def macro_AttachList(macro, pagename=None, mime_type=u'*'):
     # defaults if we don't get anything better
-    pagename = macro.formatter.page.page_name
-    mime_type = '*'
-    if args:
-        args = args.split(',')
-        if args[0].strip():
-            pagename = args[0].strip()
-        if len(args) > 1 and args[1].strip():
-            mime_type = args[1].strip()
+    if not pagename:
+        pagename = macro.formatter.page.page_name
+
     return _build_filelist(macro.request, pagename, 0, 1, mime_type=mime_type)
 
