@@ -8,7 +8,7 @@
 
 class EditedSystemPages:
 
-    def __init__(self, macro, args):
+    def __init__(self, macro):
         self.macro = macro
         self.request = macro.request
         self.formatter = macro.formatter
@@ -48,7 +48,7 @@ class EditedSystemPages:
         return ''.join(result)
 
 
-def execute(macro, args):
+def macro_EditedSystemPages(macro):
     """ Temporary glue code to use with moin current macro system """
-    return EditedSystemPages(macro, args).renderInPage()
+    return EditedSystemPages(macro).renderInPage()
 

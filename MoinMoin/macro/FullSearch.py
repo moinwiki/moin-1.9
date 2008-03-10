@@ -81,7 +81,8 @@ def search_box(type, macro):
     return macro.formatter.rawHTML(html)
 
 
-def execute(macro, needle):
+def macro_FullSearch(macro, needle=None):
+    
     request = macro.request
     _ = request.getText
 
