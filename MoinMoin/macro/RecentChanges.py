@@ -143,7 +143,7 @@ def format_page_edits(macro, lines, bookmark_usecs):
 def cmp_lines(first, second):
     return cmp(first[0], second[0])
 
-def print_abandoned(macro, args, **kw):
+def print_abandoned(macro):
     request = macro.request
     _ = request.getText
     d = {}
@@ -228,10 +228,10 @@ def print_abandoned(macro, args, **kw):
     d['rc_msg'] = msg
     request.write(request.theme.recentchanges_footer(d))
 
-def execute(macro, args, **kw):
+def macro_RecentChanges(macro, abandoned=False):
     # handle abandoned keyword
-    if kw.get('abandoned', 0):
-        print_abandoned(macro, args, **kw)
+    if abandoned:
+        print_abandoned(macro)
         return ''
 
     request = macro.request

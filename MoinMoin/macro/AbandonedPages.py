@@ -12,6 +12,6 @@
 
 from MoinMoin.macro import RecentChanges
 
-def execute(macro, args):
-    return RecentChanges.execute(macro, args, abandoned=1)
+def macro_AbandonedPages(macro):
+    return RecentChanges.macro_RecentChanges(macro, abandoned=True)
 
