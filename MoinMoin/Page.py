@@ -786,7 +786,7 @@ class Page(object):
 
     def link_to_raw(self, request, text, querystr=None, anchor=None, **kw):
         """ core functionality of link_to, without the magic """
-        url = self.url(request, querystr, anchor=anchor)
+        url = self.url(request, querystr, anchor=anchor, relative=True) # scriptName is added by link_tag
         # escaping is done by link_tag -> formatter.url -> ._open()
         link = wikiutil.link_tag(request, url, text,
                                  formatter=getattr(self, 'formatter', None), **kw)
