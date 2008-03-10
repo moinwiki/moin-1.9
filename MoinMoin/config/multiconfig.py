@@ -896,10 +896,10 @@ Lists: * bullets; 1., a. numbered items.
             if getattr(self, "_event_handlers", None) is None:
                 self._event_handlers = events.get_handlers(self)
             return getattr(self, "_event_handlers")
-        
+
         def setter(self, new_handlers):
             self._event_handlers = new_handlers
-            
+
         return property(getter, setter)
     event_handlers = make_event_handlers_prop()
 
