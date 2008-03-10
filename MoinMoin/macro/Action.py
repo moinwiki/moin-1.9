@@ -37,7 +37,7 @@ def macro_Action(macro, action=u'show', text=None, _kwargs=None):
     if action in _get_valid_actions(macro):
         page = macro.formatter.page
         _kwargs['action'] = action
-        url = page.url(macro.request, querystr=_kwargs, relative=False)
+        url = page.url(macro.request, querystr=_kwargs)
         return ''.join([
             macro.formatter.url(1, url),
             macro.formatter.text(text),

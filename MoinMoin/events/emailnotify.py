@@ -130,7 +130,7 @@ def handle_file_attached(event):
         recipients.extend(subscribers[lang])
 
     attachlink = request.getBaseURL() + getAttachUrl(event.pagename, event.filename, request)
-    pagelink = request.getQualifiedURL(page.url(request, {}, relative=False))
+    pagelink = request.getQualifiedURL(page.url(request, {}))
 
     for lang in subscribers:
         emails = []

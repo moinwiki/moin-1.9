@@ -202,7 +202,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
                 querydict = {'highlight': highlight}
             else:
                 querydict = {}
-            url = page.url(request, querystr=querydict, relative=False)
+            url = page.url(request, querystr=querydict)
             request.http_redirect(url)
             return
     elif not results.hits: # no hits?
@@ -216,8 +216,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
                     titlesearch and ''.join([
                         '<br>',
                         _('(!) Consider performing a', wiki=True), ' ',
-                        f.url(1, href=request.page.url(request, querydict,
-                            escape=0, relative=False)),
+                        f.url(1, href=request.page.url(request, querydict, escape=0)),
                         _('full-text search with your search terms'),
                         f.url(0), '.',
                     ]) or ''), "error")
@@ -247,8 +246,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
             _("(!) You're performing a title search that might not include"
                 ' all related results of your search query in this wiki. <<BR>>', wiki=True),
             ' ',
-            f.url(1, href=request.page.url(request, querydict, escape=0,
-                relative=False)),
+            f.url(1, href=request.page.url(request, querydict, escape=0)),
             f.text(_('Click here to perform a full-text search with your '
                 'search terms!')),
             f.url(0),

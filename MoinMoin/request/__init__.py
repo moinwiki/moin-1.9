@@ -1148,7 +1148,7 @@ class RequestBase(object):
             pname = pagename.replace('_', ' ')
             pg = Page(self, pname)
             if pg.exists():
-                url = pg.url(self, relative=False)
+                url = pg.url(self)
                 self.http_redirect(url)
                 return True
         return False
@@ -1220,10 +1220,10 @@ class RequestBase(object):
                         wikitag, wikiurl, wikitail, error = wikiutil.resolve_interwiki(self, wikiname, pagename)
                         url = wikiurl + wikiutil.quoteWikinameURL(wikitail)
                     else:
-                        url = Page(self, pagename).url(self, relative=False)
+                        url = Page(self, pagename).url(self)
                 else:
                     # Or to localized FrontPage
-                    url = wikiutil.getFrontPage(self).url(self, relative=False)
+                    url = wikiutil.getFrontPage(self).url(self)
                 self.http_redirect(url)
                 return self.finish()
 

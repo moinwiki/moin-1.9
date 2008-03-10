@@ -18,7 +18,7 @@ COLUMNS = 4
 
 Dependencies = ['user'] # different users have different themes and different user prefs (text/gfx)
 
-def execute(macro, args):
+def macro_ShowSmileys(macro):
     _ = macro.request.getText
     fmt = macro.formatter
 

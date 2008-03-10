@@ -187,7 +187,7 @@ def execute(macro, text, args_re=re.compile(_args_re_pattern), title_re=re.compi
                               macro.formatter.text(heading) +
                               macro.formatter.heading(0, level))
             else:
-                url = inc_page.url(request, relative=False)
+                url = inc_page.url(request)
                 result.extend([
                     macro.formatter.heading(1, level, id=heading),
                     macro.formatter.url(1, url, css="include-heading-link"),

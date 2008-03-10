@@ -53,7 +53,7 @@ def page_link(request, page, querystr):
 
     """
     query = wikiutil.makeQueryString(querystr, True)
-    return request.getQualifiedURL(page.url(request, query, relative=False))
+    return request.getQualifiedURL(page.url(request, query))
 
 def page_change_message(msgtype, request, page, lang, **kwargs):
     """Prepare a notification text for a page change of given type
