@@ -12,21 +12,21 @@ from MoinMoin.util import pysupport
 
 Dependencies = ["time24:00"]
 
-def execute(macro, args, **kw):
+def macro_StatsChart(macro, chart_type=''):
     _ = macro.request.getText
     formatter = macro.request.formatter
 
-    if not args:
+    if not chart_type:
         return (formatter.sysmsg(1) +
                 formatter.text(_('You need to provide a chart type!')) +
                 formatter.sysmsg(0))
 
     try:
         # stats module without 'linkto' will raise AttributeError
-        func = pysupport.importName("MoinMoin.stats." + args, "linkto")
+        func = pysupport.importName("MoinMoin.stats.%s" % chart_type, "linkto")
     except ImportError:
         return (formatter.sysmsg(1) +
-                formatter.text(_('Bad chart type "%s"!') % args) +
+                formatter.text(_('Bad chart type "%s"!') % chart_type) +
                 formatter.sysmsg(0))
 
     return func(macro.formatter.page.page_name, macro.request)
