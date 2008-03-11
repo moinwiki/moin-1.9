@@ -13,14 +13,9 @@ from MoinMoin.Page import Page
 
 Dependencies = ["time"]
 
-def execute(macro, args):
+def macro_RandomPage(macro, links=1):
     request = macro.request
-
-    # get number of wanted links
-    try:
-        links = max(int(args), 1)
-    except StandardError:
-        links = 1
+    links = max(links, 1) # at least 1 link
 
     # Get full page unfiltered page list - very fast!
     all_pages = request.rootpage.getPageList(user='', exists=0)
@@ -68,5 +63,4 @@ def execute(macro, args):
 
     result = ''.join(result)
     return result
-
 
