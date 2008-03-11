@@ -13,9 +13,9 @@
 
 Dependencies = ["language"]
 
-def execute(macro, args):
+def macro_GetText(macro, text=u''):
     """ Return a translation of args, or args as is """
-    translation = macro.request.getText(args)
+    translation = macro.request.getText(text)
 
     return macro.formatter.text(translation)
 

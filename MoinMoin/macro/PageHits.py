@@ -14,7 +14,7 @@ from MoinMoin.logfile import eventlog
 
 class PageHits:
 
-    def __init__(self, macro, args):
+    def __init__(self, macro):
         self.macro = macro
         self.request = macro.request
         self.cache = caching.CacheEntry(self.request, 'charts', 'pagehits', scope='wiki', use_pickle=True)
@@ -97,6 +97,6 @@ class PageHits:
         return ''.join(result)
 
 
-def execute(macro, args):
-    return PageHits(macro, args).execute()
+def macro_PageHits(macro):
+    return PageHits(macro).execute()
 

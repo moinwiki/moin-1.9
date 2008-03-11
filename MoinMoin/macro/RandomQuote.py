@@ -25,10 +25,9 @@ from MoinMoin.Page import Page
 
 Dependencies = ["time"]
 
-def execute(macro, args):
+def macro_RandomQuote(macro, pagename=u'FortuneCookies'):
     _ = macro.request.getText
 
-    pagename = args or 'FortuneCookies'
     if macro.request.user.may.read(pagename):
         page = Page(macro.request, pagename)
         raw = page.get_raw_body()
