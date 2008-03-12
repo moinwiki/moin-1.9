@@ -301,7 +301,7 @@ class TestEscapeHTML(ParserTestCase):
 
     def testEscapeInGetTextMacro(self):
         """ parser.wiki: escape html markup in GetText macro """
-        test = "text <<GetText(<escape-me>)>> text"
+        test = u"text <<GetText(<escape-me>)>> text"
         self._test(test)
 
     def testEscapeInGetTextFormatted(self):
