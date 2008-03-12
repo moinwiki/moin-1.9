@@ -82,7 +82,7 @@ def search_box(type, macro):
 
 
 def macro_FullSearch(macro, needle=None):
-    
+
     request = macro.request
     _ = request.getText
 
