@@ -32,6 +32,8 @@ except ImportError:
 
 class Formatter(FormatterBase):
     #TODO: How to handle revision history and other meta-info from included files?
+    #      The problem is that we don't know what the original page is, since
+    #      the Inlcude-macro doesn't pass us the information.
 
     # this list is extended as the page is parsed. Could be optimized by adding them here?
     section_should_break = ['abstract', 'para', 'emphasis']
@@ -322,20 +324,38 @@ class Formatter(FormatterBase):
         return ""
 
 ### Links ###########################################################
+    # TODO: Fix anchors to documents which are included. Needs probably to be
+    #       a postprocessing rule. Could be done by having the anchors have
+    #       the "linkend" value of PageName#anchor. Then at post process the
+    #       following would be done for all urls:
+    #        - get all ulinks with an anchor part in their url
+    #        - get the ulink's PageName#anchor -part by removing baseurl part
+    #        - if any of our <anchor> elements have the same PageName#anchor
+    #          value as our <ulink>, then replace the ulink with a link
+    #          element.
+    #       Note: This would the case when someone wants to link to a
+    #             section on the original webpage impossible. The link would
+    #             instead point within the docbook page and not to the webpage.
+
 
     def pagelink(self, on, pagename='', page=None, **kw):
         FormatterBase.pagelink(self, on, pagename, page, **kw)
-        return self.interwikilink(on, 'Self', pagename)
+        return self.interwikilink(on, 'Self', pagename, **kw)
 
     def interwikilink(self, on, interwiki='', pagename='', **kw):
         if not on:
-            return self.url(on, kw)
+            return self.url(on, **kw)
 
         wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_interwiki(self.request, interwiki, pagename)
         wikiurl = wikiutil.mapURL(self.request, wikiurl)
         href = wikiutil.join_wiki(wikiurl, wikitail)
+        if kw.has_key("anchor"):
+            href="%s#%s"%(href, kw['anchor'])
 
-        return self.url(on, href)
+        if pagename == self.page.page_name:
+            kw['is_self']=True
+
+        return self.url(on, href, **kw)
 
     def url(self, on, url=None, css=None, **kw):
         if url and url.startswith("/"):
@@ -345,7 +365,11 @@ class Formatter(FormatterBase):
         if not on:
             self._cleanupUlinkNode()
 
-        return self._handleNode("ulink", on, attributes=(('url', url), ))
+        if kw.has_key("anchor") and kw.has_key("is_self") and kw["is_self"]:
+            #handle the case where we are pointing to somewhere insidee our own document
+            return self._handleNode("link", on, attributes=(('linkend', kw["anchor"]), ))
+        else:
+            return self._handleNode("ulink", on, attributes=(('url', url), ))
 
     def anchordef(self, name):
         self._handleNode("anchor", True, attributes=(('id', name), ))
