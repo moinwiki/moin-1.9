@@ -779,7 +779,9 @@ class Formatter(FormatterBase):
 
             history.appendChild(revision)
 
-        targetNode.appendChild(history)
+        if history.firstChild:
+            #only add revision history is there is history to add
+            targetNode.appendChild(history)
 
 ### Not supported ###################################################
 
