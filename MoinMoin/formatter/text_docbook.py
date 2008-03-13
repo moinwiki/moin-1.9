@@ -38,7 +38,7 @@ class Formatter(FormatterBase):
     # this list is extended as the page is parsed. Could be optimized by adding them here?
     section_should_break = ['abstract', 'para', 'emphasis']
 
-    blacklisted_macros = ('TableOfContents', 'ShowSmileys')
+    blacklisted_macros = ('TableOfContents', 'ShowSmileys', 'Navigation')
 
     # If the current node is one of the following and we are about the emit
     # text, the text should be wrapped in a paragraph
