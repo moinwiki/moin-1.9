@@ -620,9 +620,13 @@ class Parser:
 
     def _transclude_description(self, desc, default_text=''):
         """ parse a string <desc> valid as transclude description (text, ...)
-            and return "formatted" content (we do not pass it through the text
-            formatter, but only through wikiutil.escape as we only use it as
-            alt/title text).
+            and return the description.
+
+            We do NOT use wikiutil.escape here because it is html specific (the
+            html formatter, if used, does this for all html attributes).
+
+            We do NOT call formatter.text here because it sometimes is just used
+            for some alt and/or title attribute, but not emitted as text.
 
             @param desc: the transclude description to parse
             @param default_text: use this text if parsing desc returns nothing.
@@ -633,7 +637,6 @@ class Parser:
                 desc = m.group('simple_text')
         else:
             desc = default_text
-        desc = wikiutil.escape(desc)
         return desc
 
     def _get_params(self, params, tag_attrs=None, acceptable_attrs=None, query_args=None):
@@ -722,11 +725,11 @@ class Parser:
                                                                      tag_attrs={'title': desc, },
                                                                      acceptable_attrs=acceptable_attrs_object)
                             return (self.formatter.transclusion(1, data=href, type=mt.spoil(), **tag_attrs) +
-                                    self._transclude_description(desc, url) +
+                                    self.formatter.text(self._transclude_description(desc, url)) +
                                     self.formatter.transclusion(0))
                         else:
                             return (self.formatter.attachment_link(1, url) +
-                                    self._transclude_description(desc, url) +
+                                    self.formatter.text(self._transclude_description(desc, url)) +
                                     self.formatter.attachment_link(0))
 
                         #NOT USED CURRENTLY:
@@ -763,7 +766,7 @@ class Parser:
                         query_args['action'] = 'content'
                     url = Page(self.request, page_name_all).url(self.request, querystr=query_args)
                     return (self.formatter.transclusion(1, data=url, **tag_attrs) +
-                            self._transclude_description(desc, page_name_all) +
+                            self.formatter.text(self._transclude_description(desc, page_name_all)) +
                             self.formatter.transclusion(0))
                     #return u"Error: <<Include(%s,%s)>> emulation missing..." % (page_name, args)
                 else: # looks like a valid interwiki link
@@ -776,7 +779,7 @@ class Parser:
                         query_args['action'] = 'content' # XXX moin specific
                     url += '?%s' % wikiutil.makeQueryString(query_args)
                     return (self.formatter.transclusion(1, data=url, **tag_attrs) +
-                            self._transclude_description(desc, page_name) +
+                            self.formatter.text(self._transclude_description(desc, page_name)) +
                             self.formatter.transclusion(0))
                     #return u"Error: <<RemoteInclude(%s:%s,%s)>> still missing." % (wiki_name, page_name, args)
 
