@@ -998,7 +998,7 @@ def send_viewfile(pagename, request):
     macro.formatter = request.html_formatter
 
     # use EmbedObject to view valid mime types
-    from MoinMoin.macro.EmbedObject import EmbedObject
+    from MoinMoin.macro import EmbedObject
     if mt is None:
         request.write('<p>' + _("Unknown file type, cannot display this attachment inline.") + '</p>')
         link = (fmt.url(1, getAttachUrl(pagename, filename, request)) +
@@ -1007,9 +1007,7 @@ def send_viewfile(pagename, request):
         request.write('For using an external program follow this link %s' % link)
         return
 
-    url = getAttachUrl(pagename, filename, request, escaped=1)
-
-    request.write(request.formatter.rawHTML(EmbedObject.embed(EmbedObject(macro, wikiutil.escape(filename)), mt, url)))
+    request.write(EmbedObject.macro_EmbedObject(macro,  wikiutil.escape(filename), pagename=pagename))
     return
 
 

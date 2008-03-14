@@ -2133,6 +2133,11 @@ def isStrictWikiname(name, word_re=re.compile(ur"^(?:[%(u)s][%(l)s]+){2,}$" % {'
     """
     return word_re.match(name)
 
+def is_URL(text):
+    """ Answer true if text is an URL.
+        The method used here is pretty dumb. Improvements are welcome.
+     """
+    return '://' in text
 
 def isPicture(url):
     """
