@@ -1007,7 +1007,7 @@ def send_viewfile(pagename, request):
         request.write('For using an external program follow this link %s' % link)
         return
 
-    request.write(EmbedObject.macro_EmbedObject(macro,  wikiutil.escape(filename), pagename=pagename))
+    request.write(EmbedObject.macro_EmbedObject(macro, filename, pagename=pagename))
     return
 
 
