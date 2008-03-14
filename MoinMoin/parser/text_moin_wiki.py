@@ -655,12 +655,10 @@ class Parser:
             if acceptable_attrs is None:
                 acceptable_attrs = []
             for key, val in kw.items():
-                key = str(key) # we can't use unicode as key
+                # wikiutil.escape for key/val must be done by (html) formatter!
+                key = str(key) # we can't use unicode as key ...
                 if key in acceptable_attrs:
-                    key = wikiutil.escape(key)
-                    val = unicode(val) # but for the value
-                    val = wikiutil.escape(val)
-                    tag_attrs[key] = val
+                    tag_attrs[key] = unicode(val) # ... but for the value
                 elif key.startswith('&'):
                     key = key[1:]
                     val = unicode(val)
@@ -744,7 +742,7 @@ class Parser:
                             macro.formatter = self.request.html_formatter
                             pagename = self.formatter.page.page_name
                             href = AttachFile.getAttachUrl(pagename, url, self.request, escaped=1)
-                            return EmbedObject.macro_EmbedObject(macro, wikiutil.escape(url))
+                            return EmbedObject.macro_EmbedObject(macro, url)
                 elif scheme == 'drawing':
                     desc = self._transclude_description(desc, url)
                     return self.formatter.attachment_drawing(url, desc)
