@@ -2133,11 +2133,22 @@ def isStrictWikiname(name, word_re=re.compile(ur"^(?:[%(u)s][%(l)s]+){2,}$" % {'
     """
     return word_re.match(name)
 
-def is_URL(text):
-    """ Answer true if text is an URL.
-        The method used here is pretty dumb. Improvements are welcome.
-     """
-    return '://' in text
+
+def is_URL(arg, schemas=config.url_schemas):
+    """ Return True if arg is a URL (with a schema given in the schemas list).
+
+        Note: there are not that many requirements for generic URLs, basically
+        the only mandatory requirement is the ':' between schema and rest.
+        Schema itself could be anything, also the rest (but we only support some
+        schemas, as given in config.url_schemas, so it is a bit less ambiguous).
+    """
+    if ':' not in arg:
+        return False
+    for schema in schemas:
+        if arg.startswith(schema + ':'):
+            return True
+    return False
+
 
 def isPicture(url):
     """

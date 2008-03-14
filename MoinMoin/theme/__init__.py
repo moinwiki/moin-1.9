@@ -334,13 +334,12 @@ class ThemeBase:
         else:
             pagename = text
 
-        for scheme in config.url_schemas:
-            if pagename.startswith(scheme + ':'):
-                if not title:
-                    title = pagename
-                title = wikiutil.escape(title)
-                link = fmt.url(1, pagename) + fmt.text(title) + fmt.url(0)
-                return pagename, link
+        if wikiutil.is_URL(pagename):
+            if not title:
+                title = pagename
+            title = wikiutil.escape(title)
+            link = fmt.url(1, pagename) + fmt.text(title) + fmt.url(0)
+            return pagename, link
 
         # remove wiki: url prefix
         if pagename.startswith("wiki:"):
