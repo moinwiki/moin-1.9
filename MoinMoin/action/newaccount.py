@@ -44,7 +44,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
         return _("This user name already belongs to somebody else.")
 
     # try to get the password and pw repeat
-    password = form.get('password', [''])[0]
+    password = form.get('password1', [''])[0]
     password2 = form.get('password2', [''])[0]
 
     # Check if password is given and matches with password repeat
@@ -114,7 +114,7 @@ def _create_form(request):
     row.append(html.TD().append(html.STRONG().append(
                                   html.Text(_("Password")))))
     row.append(html.TD().append(html.INPUT(type="password", size="36",
-                                           name="password")))
+                                           name="password1")))
 
     row = html.TR()
     tbl.append(row)
