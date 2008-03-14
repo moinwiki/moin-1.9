@@ -75,7 +75,7 @@ def macro_EmbedObject(macro, target=None, pagename=None, width=wikiutil.UnitArgu
                     fmt.url(0))
 
         url = AttachFile.getAttachUrl(pagename, fname, request)
-        mt_dict = wikiutil.MimeType(filename=fname)
+        mt = wikiutil.MimeType(filename=fname)
     else:
         if not url_mimetype:
             return _('Not enough arguments given to %(extension_name)s %(extension_type)s! Try <<EmbedObject(url, url_mimetype [,width=width] [,height=height] [,alt=alternate Text])>>') % {
@@ -83,22 +83,22 @@ def macro_EmbedObject(macro, target=None, pagename=None, width=wikiutil.UnitArgu
                "extension_type": extension_type,
                }
         else:
-            mt_dict = wikiutil.MimeType() # initialize dict
-            mt_dict.major, mt_dict.minor = url_mimetype.split('/')
+            mt = wikiutil.MimeType() # initialize dict
+            mt.major, mt.minor = url_mimetype.split('/')
             url = wikiutil.escape(target)
 
-    # XXX Should better use formatter.embed if available?
-        if not mt_dict:
+        # XXX Should better use formatter.embed if available?
+        if not mt:
             return _("Unknown mimetype %(mimetype)s of the file %(file)s.") % {"mimetype": url_mimetype,
                                                                                "file": target}
 
-    mime_type = "%s/%s" % (mt_dict.major, mt_dict.minor, )
+    mime_type = "%s/%s" % (mt.major, mt.minor, )
     dangerous = mime_type in request.cfg.mimetypes_xss_protect
 
     if not mime_type in request.cfg.mimetypes_embed or dangerous:
         kw = {'src': url}
         return "%s: %s%s%s" % (fmt.text(
-                _("Current configuration doesn't allow mimetype %(mimetype)s of the file %(file)s.") % {"mimetype": url_mimetype,
+                _("Current configuration doesn't allow mimetype %(mimetype)s of the file %(file)s.") % {"mimetype": mime_type,
                                                                                                         "file": target}),
                                fmt.url(1, kw['src']),
                                fmt.text(target),
@@ -110,7 +110,7 @@ def macro_EmbedObject(macro, target=None, pagename=None, width=wikiutil.UnitArgu
                       'mime_type': mime_type,
                       }
     embed_src = ''
-    if mt_dict.major == 'video':
+    if mt.major == 'video':
         # default for video otherweise it may be shown in an external viewer
         # xxx check the argument parser
         width = width or '400px'
@@ -144,7 +144,7 @@ def macro_EmbedObject(macro, target=None, pagename=None, width=wikiutil.UnitArgu
     "alt": alt,
 }
 
-    if mt_dict.major in ['image', 'chemical', 'x-world']:
+    if mt.major in ['image', 'chemical', 'x-world']:
         embed_src = '''
 <object %(ob_data)s %(ob_type)s  %(ob_width)s %(ob_height)s %(ob_align)s>
 <param name="%(major)s" value="%(url)s">
@@ -159,7 +159,7 @@ def macro_EmbedObject(macro, target=None, pagename=None, width=wikiutil.UnitArgu
     "alt": alt,
 }
 
-    if mt_dict.major == 'audio':
+    if mt.major == 'audio':
         embed_src = '''
 <object %(ob_data)s %(ob_type)s  %(ob_width)s %(ob_height)s %(ob_align)s>
 %(audio)s
@@ -186,9 +186,9 @@ def macro_EmbedObject(macro, target=None, pagename=None, width=wikiutil.UnitArgu
     "alt": alt,
 }
 
-    if mt_dict.major == 'application':
+    if mt.major == 'application':
         # workaround for the acroread not knowing the size to embed
-        if mt_dict.minor == 'pdf':
+        if mt.minor == 'pdf':
             width = width or '800px'
             height = height or '800px'
 
