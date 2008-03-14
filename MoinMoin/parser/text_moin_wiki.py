@@ -732,7 +732,7 @@ class Parser:
                         #NOT USED CURRENTLY:
 
                         # use EmbedObject for other mimetypes
-                        from MoinMoin.macro.EmbedObject import EmbedObject
+                        from MoinMoin.macro import EmbedObject
                         if mt is not None:
                             # reuse class tmp from Despam to define macro
                             from MoinMoin.action.Despam import tmp
@@ -741,7 +741,7 @@ class Parser:
                             macro.formatter = self.request.html_formatter
                             pagename = self.formatter.page.page_name
                             href = AttachFile.getAttachUrl(pagename, url, self.request, escaped=1)
-                            return self.formatter.rawHTML(EmbedObject.embed(EmbedObject(macro, wikiutil.escape(url)), mt, href))
+                            return EmbedObject.macro_EmbedObject(macro, wikiutil.escape(url))
                 elif scheme == 'drawing':
                     desc = self._transclude_description(desc, url)
                     return self.formatter.attachment_drawing(url, desc)
