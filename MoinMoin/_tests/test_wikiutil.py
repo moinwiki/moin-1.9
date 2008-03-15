@@ -319,6 +319,13 @@ class TestParamParsing:
             for val in result:
                 assert val is None or isinstance(val, unicode)
 
+    def testUnitArgument(self):
+        result = wikiutil.UnitArgument('7mm', float, ['%', 'mm'])
+        assert result.get_default() ==  (7.0, 'mm')
+        assert result.parse_argument('8%') == (8.0, '%')
+        py.test.raises(ValueError, result.parse_argument,  u'7m')
+        py.test.raises(ValueError, result.parse_argument,  u'7')
+        py.test.raises(ValueError, result.parse_argument,  u'mm')
 
 class TestArgGetters:
     def testGetBoolean(self):
