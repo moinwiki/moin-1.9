@@ -46,8 +46,8 @@ def _check_param_value(param, value, valuetype):
 
 def macro_EmbedObject(macro, target=None, pagename=None, width=wikiutil.UnitArgument('0px', float, ['px', 'em', 'mm', '%%']),
                       height=wikiutil.UnitArgument('0px', float, ['px', 'em', 'mm', '%%']), alt=u'',
-                      play=False, stop=True, loop=False, quality=('high', 'low', 'medium'),
-                      op=True, repeat=False, autostart=False, align=('middle', 'top', 'bottom'), hidden=False,
+                      play=False, stop=True, loop=False, quality=(u'high', u'low', u'medium'),
+                      op=True, repeat=False, autostart=False, align=(u'middle', u'top', u'bottom'), hidden=False,
                       menu=True, wmode='transparent', url_mimetype=None):
 
     """ This macro is used to embed an object into a wiki page """
@@ -116,14 +116,7 @@ def macro_EmbedObject(macro, target=None, pagename=None, width=wikiutil.UnitArgu
         width = width or '400px'
         embed_src = '''
 <object %(ob_data)s %(ob_type)s %(ob_width)s %(ob_height)s %(ob_align)s %(ob_standby)s %(ob_stop)s>
-%(wmode)s
-%(movie)s
-%(play)s
-%(stop)s
-%(repeat)s
-%(autostart)s
-%(op)s
-%(menu)s
+%(wmode)s%(movie)s%(play)s%(stop)s%(repeat)s%(autostart)s%(op)s%(menu)s
 <p>%(alt)s</p>
 </object>''' % {
     "ob_data": _check_object_value("data", url),
@@ -162,14 +155,7 @@ def macro_EmbedObject(macro, target=None, pagename=None, width=wikiutil.UnitArgu
     if mt.major == 'audio':
         embed_src = '''
 <object %(ob_data)s %(ob_type)s  %(ob_width)s %(ob_height)s %(ob_align)s>
-%(audio)s
-%(repeat)s
-%(autostart)s
-%(op)s
-%(play)s
-%(stop)s
-%(hidden)s
-<p>%(alt)s</p>
+%(audio)s%(repeat)s%(autostart)s%(op)s%(play)s%(stop)s%(hidden)s<p>%(alt)s</p>
 </object>''' % {
     "ob_data": _check_object_value("data", url),
     "ob_width": _check_object_value("width", width or "60"),
@@ -194,20 +180,14 @@ def macro_EmbedObject(macro, target=None, pagename=None, width=wikiutil.UnitArgu
 
         embed_src = '''
 <object %(ob_data)s %(ob_type)s  %(ob_width)s %(ob_height)s %(ob_align)s>
-%(quality)s
-%(wmode)s
-%(autostart)s
-%(play)s
-%(loop)s
-%(menu)s
-<p>%(alt)s</p>
+%(quality)s%(wmode)s%(autostart)s%(play)s%(loop)s%(menu)s<p>%(alt)s</p>
 </object>''' % {
     "ob_data": _check_object_value("data", url),
     "ob_width": _check_object_value("width", width),
     "ob_height": _check_object_value("height", height),
     "ob_type": _check_object_value("type", mime_type),
     "ob_align": _check_object_value("align", align),
-    "quality": _check_param_value("quality", quality),
+    "quality": _check_param_value("quality", quality, "data"),
     "wmode": _check_param_value("wmode", wmode, "data"),
     "autostart": _check_param_value("autostart", autostart, "data"),
     "play": _check_param_value("play", play, "data"),
