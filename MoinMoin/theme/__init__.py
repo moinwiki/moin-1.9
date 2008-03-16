@@ -337,7 +337,6 @@ class ThemeBase:
         if wikiutil.is_URL(pagename):
             if not title:
                 title = pagename
-            title = wikiutil.escape(title)
             link = fmt.url(1, pagename) + fmt.text(title) + fmt.url(0)
             return pagename, link
 
@@ -354,7 +353,6 @@ class ThemeBase:
             else:
                 if not title:
                     title = page
-                title = wikiutil.escape(title)
                 link = fmt.interwikilink(True, interwiki, page) + fmt.text(title) + fmt.interwikilink(False, interwiki, page)
                 return pagename, link
         except ValueError:
@@ -1631,9 +1629,8 @@ var gui_editor_link_text = "%(text)s";
             not keywords.get('print_mode', 0) and
             request.user.edit_on_doubleclick):
             if request.user.may.write(pagename): # separating this gains speed
-                querystr = wikiutil.escape(wikiutil.makeQueryString({'action': 'edit'}))
-                url = page.url(request, querystr)
-                bodyattr.append(''' ondblclick="location.href='%s'" ''' % url)
+                url = page.url(request, {'action': 'edit'})
+                bodyattr.append(''' ondblclick="location.href='%s'" ''' % wikiutil.escape(url))
 
         # Set body to the user interface language and direction
         bodyattr.append(' %s' % self.ui_lang_attr())

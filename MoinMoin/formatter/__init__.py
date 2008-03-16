@@ -314,7 +314,6 @@ class FormatterBase:
         except ImportError, err:
             errmsg = unicode(err)
             if markup:
-                errmsg = wikiutil.escape(errmsg)
                 return (self.span(1, title=errmsg) +
                         self.text(markup) +
                         self.span(0))

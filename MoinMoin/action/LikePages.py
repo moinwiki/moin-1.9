@@ -220,10 +220,11 @@ def _showMatchGroup(request, matches, keys, match, title, show_count=True):
             # Render title line
             request.write(request.formatter.paragraph(1))
             request.write(request.formatter.strong(1))
-            request.write(_('%(matchcount)d %(matches)s for "%(title)s"') % {
-                'matchcount': matchcount,
-                'matches': ' ' + (_('match'), _('matches'))[matchcount != 1],
-                'title': wikiutil.escape(title)})
+            request.write(request.formatter.text(
+                _('%(matchcount)d %(matches)s for "%(title)s"') % {
+                    'matchcount': matchcount,
+                    'matches': ' ' + (_('match'), _('matches'))[matchcount != 1],
+                    'title': title}))
             request.write(request.formatter.strong(0))
             request.write(request.formatter.paragraph(0))
 
