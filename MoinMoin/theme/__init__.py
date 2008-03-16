@@ -843,8 +843,8 @@ var search_hint = "%(search_hint)s";
         if self.shouldUseRSS(page):
             link = (u'<link rel="alternate" title="%s Recent Changes" '
                     u'href="%s" type="application/rss+xml">') % (
-                        self.cfg.sitename,
-                        wikiutil.escape(self.rsshref(page)) )
+                        wikiutil.escape(self.cfg.sitename, True),
+                        wikiutil.escape(self.rsshref(page), True) )
         return link
 
     def html_head(self, d):
@@ -855,7 +855,10 @@ var search_hint = "%(search_hint)s";
         @return: html head
         """
         html = [
-            u'<title>%(title)s - %(sitename)s</title>' % d,
+            u'<title>%(title)s - %(sitename)s</title>' % {
+                'title': wikiutil.escape(d['title']),
+                'sitename': wikiutil.escape(d['sitename']),
+            },
             self.externalScript('common'),
             self.headscript(d), # Should move to separate .js file
             self.guiEditorScript(d),
@@ -1560,8 +1563,8 @@ var gui_editor_link_text = "%(text)s";
             ''.join(user_head),
             self.html_head({
                 'page': page,
-                'title': wikiutil.escape(text),
-                'sitename': wikiutil.escape(request.cfg.html_pagetitle or request.cfg.sitename),
+                'title': text,
+                'sitename': request.cfg.html_pagetitle or request.cfg.sitename,
                 'print_mode': keywords.get('print_mode', False),
                 'media': keywords.get('media', 'screen'),
             }),
@@ -1630,7 +1633,7 @@ var gui_editor_link_text = "%(text)s";
             request.user.edit_on_doubleclick):
             if request.user.may.write(pagename): # separating this gains speed
                 url = page.url(request, {'action': 'edit'})
-                bodyattr.append(''' ondblclick="location.href='%s'" ''' % wikiutil.escape(url))
+                bodyattr.append(''' ondblclick="location.href='%s'" ''' % wikiutil.escape(url, True))
 
         # Set body to the user interface language and direction
         bodyattr.append(' %s' % self.ui_lang_attr())

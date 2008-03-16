@@ -120,14 +120,14 @@ def execute(pagename, request):
     else:
         disable_next = u''
 
-    page_url = wikiutil.escape(currentpage.url(request))
+    page_url = wikiutil.escape(currentpage.url(request), True)
 
     navigation_html = """
 <table class="diff">
 <tr>
  <td style="border:0">
   <span style="text-align:left">
-   <form action=%s method="get">
+   <form action="%s" method="get">
     <input name="action" value="diff" type="hidden">
     <input name="rev1" value="%d" type="hidden">
     <input name="rev2" value="%d" type="hidden">
@@ -140,7 +140,7 @@ def execute(pagename, request):
  </td>
  <td style="border:0">
   <span style="text-align:right">
-   <form action=%s method="get">
+   <form action="%s" method="get">
     <input name="action" value="diff" type="hidden">
     <input name="rev1" value="%d" type="hidden">
     <input name="rev2" value="%d" type="hidden">

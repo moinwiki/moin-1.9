@@ -44,7 +44,7 @@ class DataBrowserWidget(base.Widget):
         """
         return 'name="%s%s"' % (self.data_id, elem)
 
-    def _makeoption(self, item, selected, ntitem = None):
+    def _makeoption(self, item, selected, ntitem=None):
         """ create an option for a <select> form element
         @param item: string containing the item name to show
         @param selected: indicates whether the item should be default or not
@@ -54,10 +54,12 @@ class DataBrowserWidget(base.Widget):
         else:
             selected = ''
         assert(isinstance(item, basestring))
-        item = wikiutil.escape(item)
         if ntitem is None:
             ntitem = item
-        return '<option value="%s"%s>%s</option>' % (ntitem, selected, item)
+        return '<option value="%s"%s>%s</option>' % (
+            wikiutil.escape(ntitem, True),
+            selected,
+            wikiutil.escape(item))
 
     def _filteroptions(self, idx):
         """ create options for all elements in the column
