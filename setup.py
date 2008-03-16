@@ -201,19 +201,74 @@ moin_scripts = [scriptname(fn) for fn in glob.glob('MoinMoin/script/[!_]*.py')]
 #############################################################################
 
 setup_args = {
-    'name': "moin",
+    'name': "MoinMoin",
     'version': release,
-    'description': "MoinMoin %s.%s is a Python clone of WikiWiki" % (release, revision),
-    'author': "Thomas Waldmann",
-    'author_email': "tw-public@gmx.de",
+    'description': "MoinMoin %s is an easy to use, full-featured and extensible wiki software package" % (release, ),
+    'author': "Juergen Hermann et al.",
+    'author_email': "moin-user@lists.sourceforge.net",
+    # not active because distutils/register cant handle author and maintainer at once
+    #'maintainer': 'Thomas Waldmann',
+    #'maintainer_email': 'tw-public@gmx.de',
+    'download_url': 'http://prdownloads.sourceforge.net/moin/moin-%s.tar.gz?download' % (release, ),
     'url': "http://moinmo.in/",
     'license': "GNU GPL",
     'long_description': """
-A WikiWikiWeb is a collaborative hypertext environment, with an
-emphasis on easy access to and modification of information. MoinMoin
-is a Python WikiClone that allows you to easily set up your own wiki,
-only requiring a Python installation.
-""",
+    MoinMoin is an easy to use, full-featured and extensible wiki software
+    package written in Python. It can fulfill a wide range of roles, such as
+    a personal notes organizer deployed on a laptop or home web server,
+    a company knowledge base deployed on an intranet, or an Internet server
+    open to individuals sharing the same interests, goals or projects.""",
+    'classifiers': """Development Status :: 5 - Production/Stable
+Environment :: No Input/Output (Daemon)
+Environment :: Web Environment
+Environment :: Win32 (MS Windows)
+Intended Audience :: Customer Service
+Intended Audience :: Developers
+Intended Audience :: Education
+Intended Audience :: End Users/Desktop
+Intended Audience :: Financial and Insurance Industry
+Intended Audience :: Healthcare Industry
+Intended Audience :: Information Technology
+Intended Audience :: Legal Industry
+Intended Audience :: Manufacturing
+Intended Audience :: Other Audience
+Intended Audience :: Religion
+Intended Audience :: Science/Research
+Intended Audience :: System Administrators
+Intended Audience :: Telecommunications Industry
+License :: OSI Approved :: GNU General Public License (GPL)
+Natural Language :: Chinese (Simplified)
+Natural Language :: Chinese (Traditional)
+Natural Language :: Danish
+Natural Language :: Dutch
+Natural Language :: English
+Natural Language :: French
+Natural Language :: German
+Natural Language :: Hebrew
+Natural Language :: Hungarian
+Natural Language :: Italian
+Natural Language :: Javanese
+Natural Language :: Korean
+Natural Language :: Norwegian
+Natural Language :: Russian
+Natural Language :: Serbian
+Natural Language :: Spanish
+Natural Language :: Vietnamese
+Operating System :: MacOS :: MacOS X
+Operating System :: Microsoft :: Windows
+Operating System :: Microsoft :: Windows :: Windows 95/98/2000
+Operating System :: Microsoft :: Windows :: Windows NT/2000
+Operating System :: OS Independent
+Operating System :: POSIX
+Operating System :: POSIX :: BSD :: FreeBSD
+Operating System :: POSIX :: Linux
+Operating System :: Unix
+Programming Language :: Python
+Topic :: Communications :: Conferencing
+Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Topic :: Office/Business :: Groupware
+Topic :: Text Processing :: Markup""".splitlines(),
+
     'packages': [
         'MoinMoin',
         'MoinMoin.action',
@@ -287,7 +342,7 @@ if hasattr(distutils.dist.DistributionMetadata, 'get_keywords'):
     setup_args['keywords'] = "wiki web"
 
 if hasattr(distutils.dist.DistributionMetadata, 'get_platforms'):
-    setup_args['platforms'] = "win32 posix"
+    setup_args['platforms'] = "any"
 
 
 try:
