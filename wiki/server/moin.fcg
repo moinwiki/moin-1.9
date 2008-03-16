@@ -1,0 +1,40 @@
+#!/usr/bin/env python
+# -*- coding: iso-8859-1 -*-
+"""
+    MoinMoin - FastCGI Driver Script
+    
+    @copyright: 2007 MoinMoin:ThomasWaldmann
+    @license: GNU GPL, see COPYING for details.
+"""
+
+import sys
+
+# Path to MoinMoin package, needed if you installed with --prefix=PREFIX
+# or if you did not use setup.py.
+#sys.path.insert(0, 'PREFIX/lib/python2.3/site-packages')
+
+# Path of the directory where wikiconfig.py is located.
+# YOU NEED TO CHANGE THIS TO MATCH YOUR SETUP.
+sys.path.insert(0, '/path/to/wikiconfig')
+
+# Path of the directory where farmconfig is located (if different).
+#sys.path.insert(0, '/path/to/farmconfig')
+
+# Debug mode - show detailed error reports
+#import os
+#os.environ['MOIN_DEBUG'] = '1'
+
+from MoinMoin import log
+log.load_config('.../wiki/config/logging/logfile') # XXX fix path
+
+from MoinMoin.server.server_fastcgi import FastCgiConfig, run
+
+class Config(FastCgiConfig):
+    properties = {}
+    # properties = {'script_name': '/'} # use this instead of the line above if your wiki runs under "/" url
+
+    # for backlog, we use a default of 5. if the listen(backlog) call crashes for you, try a smaller value!
+    # backlog = 1
+
+run(Config)
+
