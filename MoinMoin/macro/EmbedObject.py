@@ -21,7 +21,9 @@ from MoinMoin.action import AttachFile
 extension_type, extension_name = __name__.split('.')[-2:]
 
 def _check_object_value(param, value):
-    """ helps to ommit useless lines of object values
+    """
+    helps omit useless lines of object values
+
     @param param: definition of object param
     @param value: value of param
     """
@@ -44,13 +46,24 @@ def _check_param_value(param, value, valuetype):
     else:
         return ""
 
-def macro_EmbedObject(macro, target=None, pagename=None, width=wikiutil.UnitArgument('0px', float, ['px', 'em', 'mm', '%%']),
-                      height=wikiutil.UnitArgument('0px', float, ['px', 'em', 'mm', '%%']), alt=u'',
+def macro_EmbedObject(macro, target=None, pagename=None, width=wikiutil.UnitArgument('0px', float, ['px', 'em', 'mm', '%']),
+                      height=wikiutil.UnitArgument('0px', float, ['px', 'em', 'mm', '%']), alt=u'',
                       play=False, stop=True, loop=False, quality=(u'high', u'low', u'medium'),
                       op=True, repeat=False, autostart=False, align=(u'middle', u'top', u'bottom'), hidden=False,
                       menu=True, wmode='transparent', url_mimetype=None):
 
     """ This macro is used to embed an object into a wiki page """
+
+    # Join unit arguments with their units
+    if width[1] == 'px':
+        width = '%dpx' % int(width[0])
+    else:
+        width = '%f%s' % width
+
+    if height[1] == 'px':
+        height = '%dpx' % int(height[0])
+    else:
+        height = '%f%s' % height
 
     request = macro.request
     _ = macro.request.getText
