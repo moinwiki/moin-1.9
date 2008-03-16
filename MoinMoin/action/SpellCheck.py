@@ -192,7 +192,7 @@ def checkSpelling(page, request, own_form=1):
 
         checkbox = '<input type="checkbox" name="newwords" value="%(word)s">%(word)s&nbsp;&nbsp;'
         msg = msg + (
-            " ".join([checkbox % {'word': wikiutil.escape(w), } for w in badwords]) +
+            " ".join([checkbox % {'word': wikiutil.escape(w, True), } for w in badwords]) +
             '<p><input type="submit" name="button_newwords" value="%s"></p>' %
                 _('Add checked words to dictionary')
         )
