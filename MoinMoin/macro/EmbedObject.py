@@ -21,19 +21,19 @@ from MoinMoin.action import AttachFile
 extension_type, extension_name = __name__.split('.')[-2:]
 
 def _check_object_value(param, value):
-    """
-    helps omit useless lines of object values
+    """ helps to omit useless lines of object values
 
     @param param: definition of object param
     @param value: value of param
     """
     if value:
-        return '%(param)s="%(value)s"' % {"param": param, "value": wikiutil.escape(value)}
+        return '%(param)s="%(value)s"' % {"param": param, "value": wikiutil.escape(value, True)}
     else:
         return ""
 
 def _check_param_value(param, value, valuetype):
     """ helps to ommit useless lines of param values
+
     @param param: param name defintion
     @param value: the value
     @param valuetype: the type of the value
@@ -41,17 +41,18 @@ def _check_param_value(param, value, valuetype):
     if value:
         return '''
 <param name="%(param)s" value="%(value)s" valuetype="%(valuetype)s">''' % {"param": param,
-                                                                           "value": wikiutil.escape(value),
+                                                                           "value": wikiutil.escape(value, True),
                                                                            "valuetype": valuetype}
     else:
         return ""
 
-def macro_EmbedObject(macro, target=None, pagename=None, width=wikiutil.UnitArgument(None, float, ['px', 'em', 'mm', '%']),
-                      height=wikiutil.UnitArgument(None, float, ['px', 'em', 'mm', '%']), alt=u'',
+def macro_EmbedObject(macro, target=None, pagename=None,
+                      width=wikiutil.UnitArgument(None, float, ['px', 'em', 'mm', '%']),
+                      height=wikiutil.UnitArgument(None, float, ['px', 'em', 'mm', '%']),
+                      alt=u'',
                       play=False, stop=True, loop=False, quality=(u'high', u'low', u'medium'),
                       op=True, repeat=False, autostart=False, align=(u'middle', u'top', u'bottom'), hidden=False,
                       menu=True, wmode=u'transparent', url_mimetype=None):
-
     """ This macro is used to embed an object into a wiki page """
     # Join unit arguments with their units
     if width:
@@ -75,8 +76,11 @@ def macro_EmbedObject(macro, target=None, pagename=None, width=wikiutil.UnitArgu
         pagename = fmt.page.page_name
 
     if not target:
-        msg = _('Not enough arguments given to EmbedObject macro! Try <<EmbedObject(attachment [,width=width] [,height=height] [,alt=alternate Text])>>')
-        return "%s%s%s" % (fmt.sysmsg(1), fmt.text(msg), fmt.sysmsg(0))
+        return fmt.text(_('%(extension_name)s %(extension_type)s: Required argument %(argument_name)s missing.') % {
+            "extension_name": extension_name,
+            "extension_type": extension_type,
+            "argument_name": "target",
+        })
 
     if not wikiutil.is_URL(target):
         pagename, fname = AttachFile.absoluteName(target, pagename)
@@ -92,37 +96,39 @@ def macro_EmbedObject(macro, target=None, pagename=None, width=wikiutil.UnitArgu
         mt = wikiutil.MimeType(filename=fname)
     else:
         if not url_mimetype:
-            return _('Not enough arguments given to %(extension_name)s %(extension_type)s! Try <<EmbedObject(url, url_mimetype [,width=width] [,height=height] [,alt=alternate Text])>>') % {
-               "extension_name": extension_name,
-               "extension_type": extension_type,
-               }
+            return fmt.text(_('%(extension_name)s %(extension_type)s: Required argument %(argument_name)s missing.') % {
+                "extension_name": extension_name,
+                "extension_type": extension_type,
+                "argument_name": "url_mimetype",
+            })
         else:
-            mt = wikiutil.MimeType() # initialize dict
-            mt.major, mt.minor = url_mimetype.split('/')
             url = target
-
-        # XXX Should better use formatter.embed if available?
-        if not mt:
-            return _("Unknown mimetype %(mimetype)s of the file %(file)s.") % {"mimetype": url_mimetype,
-                                                                               "file": target}
-
+            mt = wikiutil.MimeType() # initialize dict
+            try:
+                mt.major, mt.minor = url_mimetype.split('/')
+            except ValueError:
+                return fmt.text(_('%(extension_name)s %(extension_type)s: Invalid %(argument_name)s=%(argument_value)s!') % {
+                   "extension_name": extension_name,
+                   "extension_type": extension_type,
+                   "argument_name": "url_mimetype",
+                   "argument_value": str(url_mimetype),
+                })
+                
     mime_type = "%s/%s" % (mt.major, mt.minor, )
     dangerous = mime_type in request.cfg.mimetypes_xss_protect
 
     if not mime_type in request.cfg.mimetypes_embed or dangerous:
-        kw = {'src': url}
         return "%s: %s%s%s" % (fmt.text(
-                _("Current configuration doesn't allow mimetype %(mimetype)s of the file %(file)s.") % {"mimetype": mime_type,
-                                                                                                        "file": target}),
-                               fmt.url(1, kw['src']),
-                               fmt.text(target),
-                               fmt.url(0))
+                _("Current configuration does not allow embedding of the file %(file)s because of its mimetype %(mimetype)s.") % {
+                    "mimetype": mime_type,
+                    "file": target}),
+                fmt.url(1, url),
+                fmt.text(target),
+                fmt.url(0))
 
     if not alt:
-        alt = "%(text)s %(mime_type)s" % {
-                      'text': _("Embedded"),
-                      'mime_type': mime_type,
-                      }
+        alt = "%(text)s %(mime_type)s" % {'text': _("Embedded"), 'mime_type': mime_type}
+
     embed_src = ''
     if mt.major == 'video':
         if not width and not height:
@@ -214,5 +220,4 @@ def macro_EmbedObject(macro, target=None, pagename=None, width=wikiutil.UnitArgu
     "alt": wikiutil.escape(alt),
 }
 
-    return embed_src
-
+    return fmt.rawHTML(embed_src)
