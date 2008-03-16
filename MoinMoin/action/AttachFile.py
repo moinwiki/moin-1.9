@@ -88,10 +88,10 @@ def getAttachUrl(pagename, filename, request, addts=0, escaped=0, do='get', draw
     if upload:
         if not drawing:
             url = attachUrl(request, pagename, filename,
-                            rename=filename, action=action_name)
+                            rename=wikiutil.taintfilename(filename), action=action_name)
         else:
             url = attachUrl(request, pagename, filename,
-                            rename=filename, drawing=drawing, action=action_name)
+                            rename=wikiutil.taintfilename(filename), drawing=drawing, action=action_name)
     else:
         if not drawing:
             url = attachUrl(request, pagename, filename,

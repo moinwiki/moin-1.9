@@ -45,3 +45,14 @@ def test_get_attachment_path_created_on_getFilename(request):
     shutil.rmtree(fpath, True)
 
     assert expect == result
+    
+def test_getAttachUrl(request):
+    """
+    Tests if AttachFile.getAttachUrl taints a filename
+    """
+    pagename = "ThisPageDoesOnlyExistForThisTest"
+    filename = "<test2.txt>"
+    expect = "rename=_test2.txt_&"
+    result = AttachFile.getAttachUrl(pagename, filename, request, upload=True)
+
+    assert expect in result 
