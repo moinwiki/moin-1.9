@@ -2,7 +2,7 @@
 """
     MoinMoin - Action macro for page creation from file or attach file to current page
 
-    @copyright: 2007 MoinMoin:ReimarBauer
+    @copyright: 2007-2008 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 import os
@@ -84,7 +84,7 @@ class Load(ActionBase):
 
         else:
             filecontent = unicode(filecontent, config.charset)
-            self.pagename = wikiutil.escape(target)
+            self.pagename = target
             page = Page(self.request, self.pagename)
             pagedir = page.getPagePath("", check_create=0)
             rev = Page.get_current_from_pagedir(page, pagedir)
