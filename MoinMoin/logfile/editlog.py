@@ -110,7 +110,7 @@ class EditLogLine:
             aliasname = self._usercache[self.userid].aliasname
             if not aliasname:
                 aliasname = name
-            title = wikiutil.escape(aliasname + title)
+            title = aliasname + title
             text = (request.formatter.interwikilink(1, title=title, generated=True, *info) +
                     request.formatter.text(name) +
                     request.formatter.interwikilink(0, title=title, *info))
@@ -119,7 +119,7 @@ class EditLogLine:
             aliasname = self._usercache[self.userid].aliasname
             if not aliasname:
                 aliasname = name
-            title = wikiutil.escape(aliasname + title)
+            title = aliasname + title
             url = 'mailto:%s' % info
             text = (request.formatter.url(1, url, css='mailto', title=title) +
                     request.formatter.text(name) +
@@ -129,11 +129,13 @@ class EditLogLine:
                 idx = info.index('.')
             except ValueError:
                 idx = len(info)
-            title = wikiutil.escape('???' + title)
-            text = wikiutil.escape(info[:idx])
+            title = '???' + title
+            text = request.formatter.text(info[:idx])
         else:
             raise Exception("unknown EditorData type")
-        return '<span title="%s">%s</span>' % (title, text)
+        return (request.formatter.span(1, title=title) +
+                text +
+                request.formatter.span(0))
 
 
 class EditLog(LogFile):

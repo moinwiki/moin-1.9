@@ -337,7 +337,7 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
         if showheader:
             html.append(fmt.paragraph(1))
             html.append(fmt.text(_("No attachments stored for %(pagename)s") % {
-                                   'pagename': wikiutil.escape(pagename)}))
+                                   'pagename': pagename}))
             html.append(fmt.paragraph(0))
 
     return ''.join(html)

@@ -76,10 +76,10 @@ def do_user_browser(request):
         data.addRow((
             request.formatter.rawHTML(namelink),
             request.formatter.rawHTML(list_groups),
-            (request.formatter.url(1, 'mailto:' + account.email, css='mailto', do_escape=0) +
+            (request.formatter.url(1, 'mailto:' + account.email, css='mailto') +
              request.formatter.text(account.email) +
              request.formatter.url(0)),
-            (request.formatter.url(1, 'xmpp:' + account.jid, css='mailto', do_escape=0) +
+            (request.formatter.url(1, 'xmpp:' + account.jid, css='mailto') +
              request.formatter.text(account.jid) +
              request.formatter.url(0)),
             mail_link + " - " + enable_disable_link

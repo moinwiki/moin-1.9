@@ -510,28 +510,23 @@ class Formatter(FormatterBase):
             else:
                 return self.url(0)
 
-    def url(self, on, url=None, css=None, do_escape=0, **kw):
+    def url(self, on, url=None, css=None, do_escape=None, **kw):
         """
-        Inserts an <a> element.
+        Inserts an <a> element (you can give any A tag attributes as kw args).
 
-        Call once with on=1 to start the link, and again with on=0
-        to end it (no other arguments are needed when on==0).
-
-        do_escape: filters url through wikiutil.escape
-
-        Keyword params:
-            url - the URL to link to; will go through Wiki URL mapping.
-            css - a space-separated list of CSS classes
-            attrs -  just include this string verbatim inside
-                     the <a> element; can be used for arbitrary attrs;
-                     all escaping and quoting is the caller's responsibility.
-
-        Note that the 'attrs' keyword argument is for backwards compatibility
-        only.  It should not be used for new code -- instead just pass
-        any attributes in as separate keyword arguments.
-
-        1.5.3: removed ugly "attrs" keyword argument handling code
+        @param on: 1 to start the link, 0 to end the link (no other arguments are needed when on==0).
+        @param url: the URL to link to; will go through Wiki URL mapping.
+        @param css: a space-separated list of CSS classes
+        @param do_escape: DEPRECATED and not used any more, please remove it from your code!
+                          We will remove this parameter in moin 1.8 (it used to filter url
+                          param through wikiutil.escape, but text_html formatter's _open
+                          will do it again, so this just leads to double escaping now).
         """
+        if do_escape is not None:
+            if do_escape:
+                logging.warning("Deprecation warning: MoinMoin.formatter.text_html.url being called with do_escape=1/True parameter, please review caller.")
+            else:
+                logging.warning("Deprecation warning: MoinMoin.formatter.text_html.url being called with do_escape=0/False parameter, please remove it from the caller.")
         if on:
             attrs = self._langAttr()
 
@@ -541,8 +536,6 @@ class Formatter(FormatterBase):
                 del kw['href']
             if url is not None:
                 url = wikiutil.mapURL(self.request, url)
-                if do_escape:
-                    url = wikiutil.escape(url)
                 attrs['href'] = url
 
             if css:
@@ -629,7 +622,7 @@ class Formatter(FormatterBase):
                 css = 'attachment'
             else:
                 target = AttachFile.getAttachUrl(pagename, fname, self.request, upload=True)
-                title = _('Upload new attachment "%(filename)s"') % {'filename': wikiutil.escape(fname)}
+                title = _('Upload new attachment "%(filename)s"') % {'filename': fname}
                 css = 'attachment nonexistent'
             return self.url(on, target, css=css, title=title)
         else:
@@ -651,8 +644,7 @@ class Formatter(FormatterBase):
                 kw['alt'] = kw['title']
             return self.image(**kw)
         else:
-            title = _('Upload new attachment "%(filename)s"') % {
-                      'filename': wikiutil.escape(fname)}
+            title = _('Upload new attachment "%(filename)s"') % {'filename': fname}
             img = self.icon('attachimg')
             css = 'nonexistent'
             target = AttachFile.getAttachUrl(pagename, fname, self.request, upload=True)

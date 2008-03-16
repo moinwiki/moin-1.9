@@ -140,7 +140,6 @@ def execute(pagename, request):
 
                     actions.append(render_action(_('get'), {'action': 'AttachFile', 'do': 'get', 'target': '%s' % filename}))
                     actions.append(render_action(_('del'), {'action': 'AttachFile', 'do': 'del', 'target': '%s' % filename}))
-                    # XXX use?: wikiutil.escape(filename)
 
             history.addRow((
                 rev,

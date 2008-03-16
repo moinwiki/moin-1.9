@@ -72,7 +72,7 @@ class LocalSiteMap:
         pg = Page(request, name)
         action = __name__.split('.')[-1]
         self.append('&nbsp;' * (5*depth+1))
-        self.append(pg.link_to(request, wikiutil.escape(name), querystr={'action': action}))
+        self.append(pg.link_to(request, querystr={'action': action}))
         self.append("&nbsp;<small>[")
         self.append(pg.link_to(request, 'view'))
         self.append("</small>]<br>")
