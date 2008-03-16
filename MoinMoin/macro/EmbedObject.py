@@ -99,7 +99,7 @@ def macro_EmbedObject(macro, target=None, pagename=None, width=wikiutil.UnitArgu
         else:
             mt = wikiutil.MimeType() # initialize dict
             mt.major, mt.minor = url_mimetype.split('/')
-            url = wikiutil.escape(target)
+            url = target
 
         # XXX Should better use formatter.embed if available?
         if not mt:
