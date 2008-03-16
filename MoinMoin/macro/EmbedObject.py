@@ -28,7 +28,7 @@ def _check_object_value(param, value):
     @param value: value of param
     """
     if value:
-        return '%(param)s="%(value)s"' % {"param": param, "value": value}
+        return '%(param)s="%(value)s"' % {"param": param, "value": wikiutil.escape(value)}
     else:
         return ""
 
@@ -41,29 +41,30 @@ def _check_param_value(param, value, valuetype):
     if value:
         return '''
 <param name="%(param)s" value="%(value)s" valuetype="%(valuetype)s">''' % {"param": param,
-                                                                           "value": value,
+                                                                           "value": wikiutil.escape(value),
                                                                            "valuetype": valuetype}
     else:
         return ""
 
-def macro_EmbedObject(macro, target=None, pagename=None, width=wikiutil.UnitArgument('0px', float, ['px', 'em', 'mm', '%']),
-                      height=wikiutil.UnitArgument('0px', float, ['px', 'em', 'mm', '%']), alt=u'',
+def macro_EmbedObject(macro, target=None, pagename=None, width=wikiutil.UnitArgument(None, float, ['px', 'em', 'mm', '%']),
+                      height=wikiutil.UnitArgument(None, float, ['px', 'em', 'mm', '%']), alt=u'',
                       play=False, stop=True, loop=False, quality=(u'high', u'low', u'medium'),
                       op=True, repeat=False, autostart=False, align=(u'middle', u'top', u'bottom'), hidden=False,
-                      menu=True, wmode='transparent', url_mimetype=None):
+                      menu=True, wmode=u'transparent', url_mimetype=None):
 
     """ This macro is used to embed an object into a wiki page """
-
     # Join unit arguments with their units
-    if width[1] == 'px':
-        width = '%dpx' % int(width[0])
-    else:
-        width = '%f%s' % width
+    if width:
+        if width[1] == 'px':
+            width = '%dpx' % int(width[0])
+        else:
+            width = '%g%s' % width
 
-    if height[1] == 'px':
-        height = '%dpx' % int(height[0])
-    else:
-        height = '%f%s' % height
+    if height:
+        if height[1] == 'px':
+            height = '%dpx' % int(height[0])
+        else:
+            height = '%g%s' % height
 
     request = macro.request
     _ = macro.request.getText
@@ -98,7 +99,7 @@ def macro_EmbedObject(macro, target=None, pagename=None, width=wikiutil.UnitArgu
         else:
             mt = wikiutil.MimeType() # initialize dict
             mt.major, mt.minor = url_mimetype.split('/')
-            url = wikiutil.escape(target)
+            url = target
 
         # XXX Should better use formatter.embed if available?
         if not mt:
@@ -124,9 +125,10 @@ def macro_EmbedObject(macro, target=None, pagename=None, width=wikiutil.UnitArgu
                       }
     embed_src = ''
     if mt.major == 'video':
-        # default for video otherweise it may be shown in an external viewer
-        # xxx check the argument parser
-        width = width or '400px'
+        if not width and not height:
+            width = '400px'
+            height = '400px'
+
         embed_src = '''
 <object %(ob_data)s %(ob_type)s %(ob_width)s %(ob_height)s %(ob_align)s %(ob_standby)s %(ob_stop)s>
 %(wmode)s%(movie)s%(play)s%(stop)s%(repeat)s%(autostart)s%(op)s%(menu)s
@@ -147,7 +149,7 @@ def macro_EmbedObject(macro, target=None, pagename=None, width=wikiutil.UnitArgu
     "autostart": _check_param_value("autostart", autostart, "data"),
     "op": _check_param_value("op", op, "data"),
     "menu": _check_param_value("menu", menu, "data"),
-    "alt": alt,
+    "alt": wikiutil.escape(alt),
 }
 
     if mt.major in ['image', 'chemical', 'x-world']:
@@ -162,10 +164,13 @@ def macro_EmbedObject(macro, target=None, pagename=None, width=wikiutil.UnitArgu
     "ob_type": _check_object_value("type", mime_type),
     "ob_align": _check_object_value("align", align),
     "name": _check_param_value("name", url, "data"),
-    "alt": alt,
+    "alt": wikiutil.escape(alt),
 }
 
     if mt.major == 'audio':
+        if not width and not height:
+            width = '400px'
+            height = '100px'
         embed_src = '''
 <object %(ob_data)s %(ob_type)s  %(ob_width)s %(ob_height)s %(ob_align)s>
 %(audio)s%(repeat)s%(autostart)s%(op)s%(play)s%(stop)s%(hidden)s<p>%(alt)s</p>
@@ -182,7 +187,7 @@ def macro_EmbedObject(macro, target=None, pagename=None, width=wikiutil.UnitArgu
     "play": _check_param_value("play", play, "data"),
     "stop": _check_param_value("stop", stop, "data"),
     "hidden": _check_param_value("hidden", hidden, "data"),
-    "alt": alt,
+    "alt": wikiutil.escape(alt),
 }
 
     if mt.major == 'application':
@@ -206,8 +211,8 @@ def macro_EmbedObject(macro, target=None, pagename=None, width=wikiutil.UnitArgu
     "play": _check_param_value("play", play, "data"),
     "loop": _check_param_value("loop", loop, "data"),
     "menu": _check_param_value("menu", menu, "data"),
-    "alt": alt,
+    "alt": wikiutil.escape(alt),
 }
 
-    return fmt.rawHTML(embed_src)
+    return embed_src
 
