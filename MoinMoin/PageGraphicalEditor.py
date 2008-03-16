@@ -263,7 +263,7 @@ Please review the page and save then. Do not save this page as it is!""")
         if self.cfg.page_license_enabled:
             request.write('<p><em>', _(
 """By hitting '''%(save_button_text)s''' you put your changes under the %(license_link)s.
-If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.""", wiki=True, percent=True) % {
+If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.""", wiki=True) % {
                 'save_button_text': save_button_text,
                 'cancel_button_text': cancel_button_text,
                 'license_link': wikiutil.getLocalizedPage(request, self.cfg.page_license_page).link_to(request),

@@ -186,7 +186,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
         results = searchPages(request, query, sort, mtime, historysearch)
     except ValueError: # catch errors in the search query
         request.theme.add_msg(_('Your search query {{{"%s"}}} is invalid. Please refer to '
-                'HelpOnSearching for more information.', wiki=True) % wikiutil.escape(needle), "error")
+                'HelpOnSearching for more information.', wiki=True, percent=True) % wikiutil.escape(needle), "error")
         Page(request, pagename).send_page()
         return
 
