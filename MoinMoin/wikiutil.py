@@ -1619,7 +1619,10 @@ class UnitArgument(IEFArgument):
         self._units = list(units)
         self._units.sort(cmp=lambda x, y: len(y) - len(x))
         self._type = argtype
-        self._default = self.parse_argument(default)
+        if default is not None:
+            self._default = self.parse_argument(default)
+        else:
+            self._default = None
 
     def parse_argument(self, s):
         for unit in self._units:
