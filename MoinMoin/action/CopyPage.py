@@ -88,7 +88,7 @@ class CopyPage(ActionBase):
                 'subpage': subpages,
                 'subpages_checked': ('', 'checked')[self.request.form.get('subpages_checked', ['0'])[0] == '1'],
                 'subpage_label': _('Copy all /subpages too?'),
-                'pagename': wikiutil.escape(self.pagename),
+                'pagename': wikiutil.escape(self.pagename, True),
                 'newname_label': _("New name"),
                 'comment_label': _("Optional reason for the copying"),
                 'buttons_html': buttons_html,
@@ -133,7 +133,7 @@ class CopyPage(ActionBase):
 
         else:
             d = {
-                'pagename': wikiutil.escape(self.pagename),
+                'pagename': wikiutil.escape(self.pagename, True),
                 'newname_label': _("New name"),
                 'comment_label': _("Optional reason for the copying"),
                 'buttons_html': buttons_html,

@@ -1155,17 +1155,17 @@ class Page(object):
                       request.dicts.has_member(request.cfg.openid_server_restricted_users_group, openid_username):
                         html_head = '<link rel="openid2.provider" href="%s">' % \
                                         wikiutil.escape(request.getQualifiedURL(self.url(request,
-                                                                                querystr={'action': 'serveopenid'})))
+                                                                                querystr={'action': 'serveopenid'})), True)
                         html_head += '<link rel="openid.server" href="%s">' % \
                                         wikiutil.escape(request.getQualifiedURL(self.url(request,
-                                                                                querystr={'action': 'serveopenid'})))
+                                                                                querystr={'action': 'serveopenid'})), True)
                         html_head += '<meta http-equiv="x-xrds-location" content="%s">' % \
                                         wikiutil.escape(request.getQualifiedURL(self.url(request,
-                                                                                querystr={'action': 'serveopenid', 'yadis': 'ep'})))
+                                                                                querystr={'action': 'serveopenid', 'yadis': 'ep'})), True)
                     elif self.page_name == request.cfg.page_front_page:
                         html_head = '<meta http-equiv="x-xrds-location" content="%s">' % \
                                         wikiutil.escape(request.getQualifiedURL(self.url(request,
-                                                                                querystr={'action': 'serveopenid', 'yadis': 'idp'})))
+                                                                                querystr={'action': 'serveopenid', 'yadis': 'idp'})), True)
 
                 request.theme.send_title(title, page=self,
                                     print_mode=print_mode,
