@@ -116,7 +116,7 @@ class PackagePages:
             'baseurl': self.request.getScriptname(),
             'error': error,
             'action': self.__class__.__name__,
-            'pagename': wikiutil.escape(self.pagename),
+            'pagename': wikiutil.escape(self.pagename, True),
             'pagename_quoted': wikiutil.quoteWikinameURL(self.pagename),
             'package': _('Package pages'),
             'cancel': _('Cancel'),
@@ -137,7 +137,7 @@ class PackagePages:
     <tr>
         <td class="label"><label>%(list_label)s</label></td>
         <td class="content">
-            <input type="text" name="pagelist" size="80" maxlength="200" value=%(pagename)s>
+            <input type="text" name="pagelist" size="80" maxlength="200" value="%(pagename)s">
         </td>
     </tr>
     <tr>

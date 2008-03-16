@@ -228,8 +228,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
     # This action generates data using the user language
     request.setContentLanguage(request.lang)
 
-    request.theme.send_title(title % wikiutil.escape(needle), form=request.form,
-            pagename=pagename)
+    request.theme.send_title(title % needle, form=request.form, pagename=pagename)
 
     # Start content (important for RTL support)
     request.write(request.formatter.startContent("content"))
