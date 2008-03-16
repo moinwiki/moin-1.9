@@ -63,10 +63,9 @@ class TestEmbedObject:
         m = self._make_macro()
         filename = 'test.ogg'
         result = m.execute('EmbedObject', u'%s' % filename)
-        assert '<object data="./AutoCreatedMoinMoinTemporaryTestPageForEmbedObject?action=AttachFile&do=get&target=test.ogg"' in result
-        assert 'height="0px"' in result
-        assert 'width="0px"' in result
+        assert '<object data="./AutoCreatedMoinMoinTemporaryTestPageForEmbedObject?action=AttachFile&amp;do=get&amp;target=test.ogg"' in result
         assert 'align="middle"' in result
+        assert 'value="transparent"' in result
 
     def testEmbedObjectPercentHeight(self):
         """ tests default values of macro EmbedObject"""
@@ -76,9 +75,8 @@ class TestEmbedObject:
         filename = 'test.ogg'
         height = '50 %' # also tests that space is allowed in there
         result = m.execute('EmbedObject', u'target=%s, height=%s' % (filename, height))
-        assert '<object data="./AutoCreatedMoinMoinTemporaryTestPageForEmbedObject?action=AttachFile&do=get&target=test.ogg"' in result
-        assert 'height="50.000000%"' in result
-        assert 'width="0px"' in result
+        assert '<object data="./AutoCreatedMoinMoinTemporaryTestPageForEmbedObject?action=AttachFile&amp;do=get&amp;target=test.ogg"' in result
+        assert 'height="50%"' in result
         assert 'align="middle"' in result
 
 coverage_modules = ['MoinMoin.macro.EmbedObject']

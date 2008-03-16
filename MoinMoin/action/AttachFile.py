@@ -991,14 +991,15 @@ def send_viewfile(pagename, request):
         request.write("</pre>")
         return
 
-    # reuse class tmp from Despam to define macro
-    from MoinMoin.action.Despam import tmp
-    macro = tmp()
+    from MoinMoin import macro
+    from MoinMoin.parser.text import Parser
+
     macro.request = request
     macro.formatter = request.html_formatter
+    p = Parser("##\n", request)
+    m = macro.Macro(p)
 
     # use EmbedObject to view valid mime types
-    from MoinMoin.macro import EmbedObject
     if mt is None:
         request.write('<p>' + _("Unknown file type, cannot display this attachment inline.") + '</p>')
         link = (fmt.url(1, getAttachUrl(pagename, filename, request)) +
@@ -1006,8 +1007,7 @@ def send_viewfile(pagename, request):
                 fmt.url(0))
         request.write('For using an external program follow this link %s' % link)
         return
-
-    request.write(EmbedObject.macro_EmbedObject(macro, filename, pagename=pagename))
+    request.write(m.execute('EmbedObject', u'target=%s, pagename=%s' % (filename, pagename)))
     return
 
 
