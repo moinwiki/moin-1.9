@@ -82,6 +82,15 @@ Version 1.7.current:
     * standalone server can now be started via the "moin" script command,
       optionally backgrounding itself. See: moin server standalone --help
     * the diff action now has navigation buttons for prev/next change
+    * DocBook-formatter supports HTML entities like &rarr; and &#9731;
+    * DocBook-formatter supports the FootNote macro
+    * DocBook-formatter supports bulletless lists
+    * DocBook-formatter has support for admonitions
+    * DocBook-formatter will export the edithistory inside as the generated 
+      article's revision history. Doesn't add history of included pages.
+    * DocBook-formatter has support for the MoinMoin comment element, though
+      only inline comments are likely to be valid since the DocBook remark is
+      and inline element.
 
   Other changes:
     * cfg.show_login is gone, see code in theme/__init__.py, this affects
@@ -93,6 +102,12 @@ Version 1.7.current:
     * the rst-parser's admonition's class names are no longer prepended with
       "admonition_". Instead the class names are now for example "note"
       and not "admonition_note".
+    * DocBook-formatter generates a valid DOCTYPE
+    * DocBook-formatter's table support has been improved
+    * DocBook-formatter's handling of definitions and glossaries is more robust
+    * DocBook-formatter supports program language and line numbering in 
+      code areas
+    * A few other fixes to the DocBook-formatter.
 
 
 Version 1.6.1:
