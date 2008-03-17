@@ -78,7 +78,7 @@ class BaseExpression:
 
         Used to display the needle in the page.
         """
-        return ''
+        return u''
 
     def _build_re(self, pattern, use_re=False, case=False, stemmed=False):
         """ Make a regular expression out of a text pattern """
@@ -182,7 +182,7 @@ class AndExpression(BaseExpression):
             if highlight_re:
                 result.append(highlight_re)
 
-        return '|'.join(result)
+        return u'|'.join(result)
 
     def xapian_wanted(self):
         wanted = True
@@ -309,7 +309,7 @@ class TextSearch(BaseExpression):
         return u'%s"%s"' % (neg, unicode(self._pattern))
 
     def highlight_re(self):
-        return u"(%s)" % self._pattern
+        return u"(%s)" % self.pattern
 
     def search(self, page):
         logging.debug("TextSearch searching page %r for (negated = %r) %r" % (page.page_name, self.negated, self._pattern))
@@ -560,6 +560,7 @@ class LinkSearch(BaseExpression):
         flags = case and re.U or (re.I | re.U)
         if use_re:
             self.search_re = re.compile(pattern, flags)
+            self.pattern = pattern
             self.static = False
         else:
             self.pattern = pattern
@@ -664,7 +665,7 @@ class LanguageSearch(BaseExpression):
         return u'%s!"%s"' % (neg, unicode(self._pattern))
 
     def highlight_re(self):
-        return ""
+        return u""
 
     def search(self, page):
         logging.debug("LanguageSearch searching page %r for (negated = %r) %r" % (page.page_name, self.negated, self._pattern))
@@ -800,7 +801,7 @@ class MimetypeSearch(BaseExpression):
         return u'%s!"%s"' % (neg, unicode(self._pattern))
 
     def highlight_re(self):
-        return ""
+        return u""
 
     def search(self, page):
         return None
@@ -860,7 +861,7 @@ class DomainSearch(BaseExpression):
         return u'%s!"%s"' % (neg, unicode(self._pattern))
 
     def highlight_re(self):
-        return ""
+        return u""
 
     def search(self, page):
         logging.debug("DomainSearch searching page %r for (negated = %r) %r" % (page.page_name, self.negated, self._pattern))
