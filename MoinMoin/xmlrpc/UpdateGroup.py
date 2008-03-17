@@ -8,9 +8,10 @@
 
 import sys, xmlrpclib
 
-from MoinMoin.PageEditor import PageEditor
+from MoinMoin import log
+logging = log.getLogger(__name__)
 
-_debug = 0
+from MoinMoin.PageEditor import PageEditor
 
 def execute(self, groupname, groupcomment, memberlist, pageacls=u"All:read"):
     """
@@ -48,9 +49,10 @@ def execute(self, groupname, groupcomment, memberlist, pageacls=u"All:read"):
     try:
         msg = page.saveText(newtext, 0)
     except page.SaveError, msg:
+        logging.error("SaveError msg: %s" % str(msg))
         return xmlrpclib.Fault(3, msg)
-    if _debug and msg:
-        sys.stderr.write("Msg: %s\n" % msg)
+    if msg:
+        logging.debug("saveText msg: %s" % msg)
 
     #we need this to update pagelinks cache:
     self.request.args = self.request.form = self.request.setup_args({})

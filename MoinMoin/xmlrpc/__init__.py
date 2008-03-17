@@ -17,7 +17,7 @@
     when really necessary (like for transferring binary files like
     attachments maybe).
 
-    @copyright: 2003-2007 MoinMoin:ThomasWaldmann,
+    @copyright: 2003-2008 MoinMoin:ThomasWaldmann,
                 2004-2006 MoinMoin:AlexanderSchremmer
     @license: GNU GPL, see COPYING for details
 """
@@ -27,6 +27,9 @@ modules = pysupport.getPackageModules(__file__)
 
 import os, sys, time, xmlrpclib
 
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin import config, user, wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
@@ -34,8 +37,6 @@ from MoinMoin.logfile import editlog
 from MoinMoin.action import AttachFile
 from MoinMoin import caching
 from MoinMoin import session
-
-_debug = 0
 
 
 class XmlRpcAuthTokenIDHandler(session.SessionIDHandler):
@@ -49,6 +50,8 @@ class XmlRpcAuthTokenIDHandler(session.SessionIDHandler):
     def set(self, request, session_id, expires):
         self.token = session_id
 
+
+logging_tearline = '- XMLRPC %s ' + '-' * 40
 
 class XmlRpcBase:
     """ XMLRPC base class with common functionality of wiki xmlrpc v1 and v2 """
@@ -132,21 +135,25 @@ class XmlRpcBase:
                 data = self.request.read()
                 params, method = xmlrpclib.loads(data)
 
-                if _debug:
-                    sys.stderr.write('- XMLRPC ' + '-' * 70 + '\n')
-                    sys.stderr.write('%s(%s)\n\n' % (method, repr(params)))
+                logging.debug(logging_tearline % 'request begin')
+                logging.debug('%s(%s)' % (method, repr(params)))
+                logging.debug(logging_tearline % 'request end')
 
                 response = self.dispatch(method, params)
         except:
-            # report exception back to server
+            logging.exception("An exception occurred (this is also sent as fault response to the client):")
+            # report exception back to client
             response = xmlrpclib.dumps(xmlrpclib.Fault(1, self._dump_exc()))
         else:
+            logging.debug(logging_tearline % 'response begin')
+            logging.debug(response)
+            logging.debug(logging_tearline % 'response end')
+
             if isinstance(response, xmlrpclib.Fault):
                 response = xmlrpclib.dumps(response)
             else:
                 # wrap response in a singleton tuple
                 response = (response, )
-
                 # serialize it
                 response = xmlrpclib.dumps(response, methodresponse=1)
 
@@ -155,10 +162,6 @@ class XmlRpcBase:
             "Content-Length: %d" % len(response),
         ])
         self.request.write(response)
-
-        if _debug:
-            sys.stderr.write('- XMLRPC ' + '-' * 70 + '\n')
-            sys.stderr.write(response + '\n\n')
 
     def dispatch(self, method, params):
         """ call dispatcher - for method==xxx it either locates a method called
@@ -542,8 +545,7 @@ class XmlRpcBase:
                 newtext = self._inlob(pagetext)
             msg = page.saveText(newtext, 0)
         except page.SaveError, msg:
-            if _debug:
-                sys.stderr.write("Msg: %s\n" % msg)
+            logging.error("SaveError: %s" % msg)
             return xmlrpclib.Fault(1, "%s" % msg)
 
         # Update pagelinks cache
