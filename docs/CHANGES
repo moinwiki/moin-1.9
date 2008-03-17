@@ -82,6 +82,10 @@ Version 1.7.current:
     * standalone server can now be started via the "moin" script command,
       optionally backgrounding itself. See: moin server standalone --help
     * the diff action now has navigation buttons for prev/next change
+    * admonition support. Added styling for tip, note, important, warning 
+      and caution in the modern theme. For more info see:
+      http://moinmo.in/MoinMoinTodo/Release%201.7/HelpOnAdmonitions
+    * admonitions .
     * DocBook-formatter supports HTML entities like &rarr; and &#9731;
     * DocBook-formatter supports the FootNote macro
     * DocBook-formatter supports bulletless lists
@@ -97,8 +101,6 @@ Version 1.7.current:
       many themes!
     * needs a new userprefs/ plugin directory
     * removed attachments direct serving (cfg.attachments)
-    * admonitions tip, note, important, warning and caution have css
-      styles in the modern theme.
     * the rst-parser's admonition's class names are no longer prepended with
       "admonition_". Instead the class names are now for example "note"
       and not "admonition_note".
