@@ -333,6 +333,8 @@ Lists: * bullets; 1., a. numbered items.
     html_head_normal  = '''<meta name="robots" content="index,nofollow">\n'''
     html_pagetitle = None
 
+    history_count = (100, 200) # (default_revisions_shown, max_revisions_shown)
+
     interwiki_preferred = [] # list of wiki names to show at top of interwiki list
 
     language_default = 'en'
