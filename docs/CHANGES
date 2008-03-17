@@ -95,6 +95,10 @@ Version 1.7.current:
     * DocBook-formatter has support for the MoinMoin comment element, though
       only inline comments are likely to be valid since the DocBook remark is
       and inline element.
+    * ?action=info&max_count=42 - show the last 42 history entries of the page.
+      max_count has a default of default_count and a upper limit of
+      limit_max_count - you can configure both in your wiki config:
+      cfg.history_count = (100, 200) # (default_count, limit_max_count) default
 
   Other changes:
     * cfg.show_login is gone, see code in theme/__init__.py, this affects

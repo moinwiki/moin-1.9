@@ -5,7 +5,7 @@
     Displays page history, some general page infos and statistics.
 
     @copyright: 2000-2004 Juergen Hermann <jh@web.de>,
-                2006-2007 MoinMoin:ThomasWaldmann
+                2006-2008 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -74,6 +74,12 @@ def execute(pagename, request):
     def history(page, pagename, request):
         # show history as default
         _ = request.getText
+        default_count, limit_max_count = request.cfg.history_count
+        try:
+            max_count = int(request.form.get('max_count', [default_count])[0])
+        except:
+            max_count = default_count
+        max_count = min(max_count, limit_max_count)
 
         # open log for this page
         from MoinMoin.util.dataset import TupleDataset, Column
@@ -151,7 +157,7 @@ def execute(pagename, request):
                 "&nbsp;".join(actions),
             ))
             count += 1
-            if count >= 100:
+            if count >= max_count:
                 break
 
         # print version history
