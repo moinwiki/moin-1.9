@@ -20,6 +20,10 @@ from MoinMoin import wikiutil
 from MoinMoin.error import CompositeError
 from MoinMoin.action import AttachFile
 
+#For revision history
+from MoinMoin.logfile import editlog
+from MoinMoin import user
+
 
 class InternalError(CompositeError):
     pass
@@ -762,8 +766,7 @@ class Formatter(FormatterBase):
         The revision history of included documents is NOT included at the
         moment due to technical difficulties.
         """
-        from MoinMoin.logfile import editlog
-        from MoinMoin import user
+        _ = self.request.getText
         log = editlog.EditLog(self.request, rootpagename=self.title)
         user_cache = {}
 
@@ -913,7 +916,10 @@ class Formatter(FormatterBase):
 
     def table(self, on, attrs=(), **kw):
         if(on):
-            self.curtable = Table(self, self.doc, self.cur, attrs)
+            if attrs:
+                self.curtable = Table(self, self.doc, self.cur, dict(attrs))
+            else:
+                self.curtable = Table(self, self.doc, self.cur)
             self.cur = self.curtable.tableNode
         else:
             self.cur = self.curtable.finalizeTable()
@@ -922,21 +928,29 @@ class Formatter(FormatterBase):
 
     def table_row(self, on, attrs=(), **kw):
         if(on):
-            self.cur = self.curtable.addRow(attrs)
+            if attrs:
+                self.curtable.addRow(dict(attrs))
+            else:
+                self.cur = self.curtable.addRow()
         return ""
 
     def table_cell(self, on, attrs=(), **kw):
         if(on):
-            self.cur = self.curtable.addCell(attrs)
+            if attrs:
+                self.cur = self.curtable.addCell(dict(attrs))
+            else:
+                self.cur = self.curtable.addCell()
         return ""
 
 class Table:
     '''The Table class is used as a helper for collecting information about
     what kind of table we are building. When all relelvant data is gathered
     it calculates the different spans of the cells and columns.
+
+    Note that it expects all arguments to be passed in a dict.
     '''
 
-    def __init__(self, formatter, doc, parent, args):
+    def __init__(self, formatter, doc, parent, argsdict={}):
         self.formatter = formatter
         self.doc = doc
 
@@ -973,83 +987,78 @@ class Table:
         self.tgroup.appendChild(self.tbody)
         return self.tableNode.parentNode
 
-    def addRow(self, args):
+    def addRow(self, argsdict={}):
         self.curColumn = 0
         self.row = self.doc.createElement('row')
         # Bug in yelp, doesn't affect the outcome.
-        #self.row.setAttribute("rowsep", "1") #Rows should have lines between them
+        self.row.setAttribute("rowsep", "1") #Rows should have lines between them
         self.tbody.appendChild(self.row)
         return self.row
 
-    def addCell(self, args):
+    def addCell(self, argsdict={}):
+        if 'style' in argsdict:
+            argsdict.update(self.formatter._convertStylesToDict(argsdict['style'].strip('"')))
+
         cell = self.doc.createElement('entry')
         cell.setAttribute('rowsep', '1')
         cell.setAttribute('colsep', '1')
 
         self.row.appendChild(cell)
-
-        args = self._convertStyleAttributes(args)
-        self._handleSimpleCellAttributes(cell, args)
-        self._handleColWidth(args)
-        self.curColumn += self._handleColSpan(cell, args)
+        self._handleSimpleCellAttributes(cell, argsdict)
+        self._handleColWidth(argsdict)
+        self.curColumn += self._handleColSpan(cell, argsdict)
 
         self.maxColumn = max(self.curColumn, self.maxColumn)
 
         return cell
 
-    def _handleColWidth(self, args):
-        if not args.has_key("width"):
+    def _handleColWidth(self, argsdict={}):
+        if not argsdict.has_key("width"):
             return
-        args["width"] = args["width"].strip('"')
-        if not args["width"].endswith("%"):
-            self.formatter._emitComment("Width %s not supported" % args["width"])
+        argsdict["width"] = argsdict["width"].strip('"')
+        if not argsdict["width"].endswith("%"):
+            self.formatter._emitComment("Width %s not supported" % argsdict["width"])
             return
 
-        self.colWidths[str(self.curColumn)] = args["width"][:-1] + "*"
+        self.colWidths[str(self.curColumn)] = argsdict["width"][:-1] + "*"
 
-    def _handleColSpan(self, element, args):
+    def _handleColSpan(self, element, argsdict={}):
         """Returns the number of colums this entry spans"""
-        if not args or not args.has_key('colspan'):
+        if not argsdict or not argsdict.has_key('colspan'):
             return 1
         assert(element.nodeName == "entry")
-        extracols = int(args['colspan'].strip('"')) - 1
+        extracols = int(argsdict['colspan'].strip('"')) - 1
         element.setAttribute('namest', "col_" + str(self.curColumn))
         element.setAttribute('nameend', "col_" + str(self.curColumn + extracols))
         return 1 + extracols
 
-    def _handleSimpleCellAttributes(self, element, args):
-        safe_values_for = {'valign': ('top', 'middle', 'bottom'),
-                           'align': ('left', 'center', 'right'),
-                          }
-        if not args:
+    def _handleSimpleCellAttributes(self, element, argsdict={}):
+        if not argsdict:
             return
         assert(element.nodeName == "entry")
 
-        if args.has_key('rowspan'):
-            extrarows = int(args['rowspan'].strip('"')) - 1
+        safe_values_for = {'valign': ('top', 'middle', 'bottom'),
+                           'align': ('left', 'center', 'right'),
+                          }
+
+        if argsdict.has_key('rowspan'):
+            extrarows = int(argsdict['rowspan'].strip('"')) - 1
             element.setAttribute('morerows', str(extrarows))
 
-        if args.has_key('align'):
-            value = args['align'].strip('"')
+        if argsdict.has_key('align'):
+            value = argsdict['align'].strip('"')
             if value in safe_values_for['align']:
                 element.setAttribute('align', value)
             else:
                 self.formatter._emitComment("Alignment %s not supported" % value)
                 pass
 
-        if args.has_key('valign'):
-            value = args['valign'].strip('"')
+        if argsdict.has_key('valign'):
+            value = argsdict['valign'].strip('"')
             if value in safe_values_for['valign']:
                 element.setAttribute('valign', value)
             else:
                 self.formatter._emitComment("Vertical alignment %s not supported" % value)
                 pass
 
-    def _convertStyleAttributes(self, argslist):
-        if not argslist.has_key('style'):
-            return argslist
-        styles = self.formatter._convertStylesToDict(argslist['style'].strip('"'))
-        argslist.update(styles)
-
-        return argslist
 
