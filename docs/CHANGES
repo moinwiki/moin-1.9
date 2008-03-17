@@ -88,6 +88,11 @@ Version 1.7.current:
       many themes!
     * needs a new userprefs/ plugin directory
     * removed attachments direct serving (cfg.attachments)
+    * admonitions tip, note, important, warning and caution have css
+      styles in the modern theme.
+    * the rst-parser's admonition's class names are no longer prepended with
+      "admonition_". Instead the class names are now for example "note"
+      and not "admonition_note".
 
 
 Version 1.6.1:
