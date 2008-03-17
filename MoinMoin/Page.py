@@ -1368,7 +1368,8 @@ class Page(object):
 
         @param request: the request object
         """
-        if request.user.valid and request.user.name == self.page_name:
+        if request.user.valid and request.user.name == self.page_name and \
+           request.cfg.user_homewiki in ('Self', request.cfg.interwikiname):
             missingpage = wikiutil.getLocalizedPage(request, 'MissingHomePage')
         else:
             missingpage = wikiutil.getLocalizedPage(request, 'MissingPage')
