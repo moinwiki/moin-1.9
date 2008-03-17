@@ -42,15 +42,16 @@ class FormatterBase:
         self._base_depth = 0
 
     def set_highlight_re(self, hi_re=None):
+        """ set the highlighting regular expression (e.g. for search terms)
+        
+        @param hi_re: either a valid re as str/unicode (you may want to use
+                      re.escape before passing generic strings!) or a compiled
+                      re object. raises re.error for invalid re.
+        """
         if isinstance(hi_re, (str, unicode)):
-            try:
-                self._highlight_re = re.compile(hi_re, re.U + re.IGNORECASE)
-            except re.error:
-                hi_re = re.escape(hi_re)
-                self._highlight_re = re.compile(hi_re, re.U + re.IGNORECASE)
-        else:
-            self._highlight_re = hi_re
-
+            hi_re = re.compile(hi_re, re.U + re.IGNORECASE)
+        self._highlight_re = hi_re
+    
     def lang(self, on, lang_name):
         return ""
 

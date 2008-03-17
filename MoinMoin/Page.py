@@ -34,7 +34,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, codecs
+import os, re, codecs
 
 from MoinMoin import log
 logging = log.getLogger(__name__)
@@ -1066,7 +1066,13 @@ class Page(object):
 
         self.formatter.setPage(self)
         if self.hilite_re:
-            self.formatter.set_highlight_re(self.hilite_re)
+            try:
+                self.formatter.set_highlight_re(self.hilite_re)
+            except re.error, err:
+                request.theme.add_msg(_('Invalid highlighting regular expression "%(regex)s": %(error)s') % {
+                                          'regex': self.hilite_re,
+                                          'error': str(err),
+                                      }, "warning")
 
         if 'deprecated' in pi:
             # deprecated page, append last backup version to current contents
