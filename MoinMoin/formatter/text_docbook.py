@@ -707,7 +707,7 @@ class Formatter(FormatterBase):
         for s in styles.split(";"):
             if s.strip(' "') == "":
                 continue
-            if s.find(":")<0:
+            if ":" not in s:
                 continue
             (key, value) = s.split(":", 1)
             key = key.strip(' "')
