@@ -51,7 +51,7 @@ class FormatterBase:
         if isinstance(hi_re, (str, unicode)):
             hi_re = re.compile(hi_re, re.U + re.IGNORECASE)
         self._highlight_re = hi_re
-    
+
     def lang(self, on, lang_name):
         return ""
 
