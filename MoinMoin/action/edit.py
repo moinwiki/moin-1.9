@@ -179,11 +179,7 @@ def execute(pagename, request):
 
         # Send new page after save or after unsuccessful conflict merge.
         request.reset()
-        backto = request.form.get('backto', [None])[0]
-        if backto:
-            pg = Page(request, backto)
-        else:
-            pg = Page(request, pagename)
+        pg = Page(request, pagename)
 
         # sets revision number to default for further actions
         request.rev = 0
