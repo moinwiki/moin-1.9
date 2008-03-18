@@ -507,9 +507,11 @@ Lists: * bullets; 1., a. numbered items.
 
     def password_checker(username, password):
         """ Check if a password is secure enough.
-            First (and in any case), we use a built-in check to get rid of the
-            worst passwords. If there is cracklib installed, we use it for
-            additional checks.
+            We use a built-in check to get rid of the worst passwords.
+            
+            We do NOT use cracklib / python-crack here any more because it is
+            not thread-safe (we experienced segmentation faults when using it).
+
             If you don't want to check passwords, use password_checker = None.
 
             @return: None if there is no problem with the password,
@@ -537,16 +539,6 @@ Lists: * bullets; 1., a. numbered items.
                 if password in kbd or password in rev_kbd or \
                    password_lower in kbd or password_lower in rev_kbd:
                     raise ValueError("Password too easy (kbd sequence)")
-            try:
-                # to use advanced checking, you need to install python-crack,
-                # cracklib-runtime (dict processing) and do not forget to
-                # initialize the crack dicts!
-                import crack
-                # instead of some "old password" we give the username to check
-                # whether the password is too similar to the username
-                crack.VeryFascistCheck(password, username) # raises ValueError on bad passwords
-            except ImportError:
-                pass
             return None
         except ValueError, err:
             return str(err)
