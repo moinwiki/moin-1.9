@@ -28,7 +28,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from csv import reader
+from csv import reader, QUOTE_NONE, QUOTE_MINIMAL
 
 from MoinMoin.util.dataset import TupleDataset, Column
 from MoinMoin.widget.browser import DataBrowserWidget
@@ -64,6 +64,7 @@ class Parser:
         linkcols = []
         delimiter = ';'
         quotechar = '\x00' # can't be entered
+        quoting = QUOTE_NONE
         name = None
         hdr = reader([kw.get('format_args', '').strip().encode('utf-8')], delimiter=" ")
         args = hdr.next()
@@ -87,6 +88,7 @@ class Parser:
             if key == 'quotechar':
                 if val == val.encode('utf-8'):
                     quotechar = val.encode('utf-8')
+                    quoting = QUOTE_MINIMAL
             elif key == 'show':
                 visible = val.split(',')
             elif key == 'hide':
@@ -107,7 +109,7 @@ class Parser:
         elif len(staticcols) < len(staticvals):
             staticvals = staticvals[:len(staticcols)]
 
-        r = reader(data, delimiter=delimiter, quotechar=quotechar)
+        r = reader(data, delimiter=delimiter, quotechar=quotechar, quoting=quoting)
         cols = map(lambda x: x.decode('utf-8'), r.next()) + staticcols
 
         self._show_header = True
