@@ -158,12 +158,13 @@ def macro_EmbedObject(macro, target=None, pagename=None,
     "alt": wikiutil.escape(alt),
 }
 
-    if mt.major in ['image', 'chemical', 'x-world']:
+    elif mt.major in ['image', 'chemical', 'x-world']:
         embed_src = '''
 <object %(ob_data)s %(ob_type)s  %(ob_width)s %(ob_height)s %(ob_align)s>
-<param name="%(major)s" value="%(url)s">
+%(name)s"
 <p>%(alt)s</p>
 </object>''' % {
+    "mime_type": mime_type,
     "ob_data": _check_object_value("data", url),
     "ob_width": _check_object_value("width", width),
     "ob_height": _check_object_value("height", height),
@@ -173,7 +174,7 @@ def macro_EmbedObject(macro, target=None, pagename=None,
     "alt": wikiutil.escape(alt),
 }
 
-    if mt.major == 'audio':
+    elif mt.major == 'audio':
         if not width and not height:
             width = '400px'
             height = '100px'
@@ -196,7 +197,7 @@ def macro_EmbedObject(macro, target=None, pagename=None,
     "alt": wikiutil.escape(alt),
 }
 
-    if mt.major == 'application':
+    elif mt.major == 'application':
         # workaround for the acroread not knowing the size to embed
         if mt.minor == 'pdf':
             width = width or '800px'
