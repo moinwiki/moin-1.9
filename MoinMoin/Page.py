@@ -1094,7 +1094,10 @@ class Page(object):
             if emit_headers:
                 request.setHttpHeader("Content-Type: %s; charset=%s" % (self.output_mimetype, self.output_charset))
                 if page_exists:
-                    request.setHttpHeader('Status: 200 OK')
+                    if not request.user.may.read(self.page_name):
+                        request.setHttpHeader('Status: 403 Permission Denied')
+                    else:
+                        request.setHttpHeader('Status: 200 OK')
                     if not request.cacheable:
                         # use "nocache" headers if we're using a method that is not simply "display"
                         request.disableHttpCaching(level=2)
