@@ -69,6 +69,12 @@ class Parser:
         text = StringIO.StringIO(self.raw)
         try:
             tokenize.tokenize(text.readline, self)
+        except IndentationError, ex:
+            msg = ex[0]
+            errmsg = (self.formatter.linebreak() +
+                      self.formatter.strong(1) + "ERROR: %s" % msg + self.formatter.strong(0) +
+                      self.formatter.linebreak())
+            self.request.write(errmsg)
         except tokenize.TokenError, ex:
             msg = ex[0]
             line = ex[1][0]
