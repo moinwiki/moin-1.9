@@ -113,7 +113,7 @@ def macro_EmbedObject(macro, target=None, pagename=None,
                    "argument_name": "url_mimetype",
                    "argument_value": str(url_mimetype),
                 })
-                
+
     mime_type = "%s/%s" % (mt.major, mt.minor, )
     dangerous = mime_type in request.cfg.mimetypes_xss_protect
 
