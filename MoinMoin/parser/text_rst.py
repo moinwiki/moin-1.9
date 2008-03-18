@@ -562,17 +562,20 @@ class MoinDirectives:
             return
 
         if len(content):
-            page = Page(page_name=content[0], request=self.request)
-            if page.exists():
-                text = page.get_raw_body()
-                lines = text.split('\n')
-                # Remove the "#format rst" line
-                if lines[0].startswith("#format"):
-                    del lines[0]
+            pagename = content[0]
+            page = Page(page_name=pagename, request=self.request)
+            if not self.request.user.may.read(pagename):
+                lines = [_("**You are not allowed to read the page: %s**") % (pagename, )]
             else:
-                lines = [_("**Could not find the referenced page: %s**") % (content[0], )]
-            # Insert the text from the included document and then continue
-            # parsing
+                if page.exists():
+                    text = page.get_raw_body()
+                    lines = text.split('\n')
+                    # Remove the "#format rst" line
+                    if lines[0].startswith("#format"):
+                        del lines[0]
+                else:
+                    lines = [_("**Could not find the referenced page: %s**") % (pagename, )]
+            # Insert the text from the included document and then continue parsing
             state_machine.insert_input(lines, 'MoinDirectives')
         return
 
