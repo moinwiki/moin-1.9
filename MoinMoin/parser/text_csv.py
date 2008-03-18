@@ -38,7 +38,7 @@ from MoinMoin.wikiutil import escape
 Dependencies = ['time']
 
 class Parser:
-    extensions = ['.csvdata']
+    extensions = ['.csv']
     Dependencies = []
 
     def _read_rows(self, r):
