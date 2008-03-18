@@ -867,6 +867,11 @@ class Page(object):
                 continue # no self notification
             subscriber = user.User(request, uid)
 
+            # The following tests should be ordered in order of
+            # decreasing computation complexity, in particular
+            # the permissions check may be expensive; see the bug
+            # MoinMoinBugs/GetSubscribersPerformanceProblem
+
             # This is a bit wrong if return_users=1 (which implies that the caller will process
             # user attributes and may, for example choose to send an SMS)
             # So it _should_ be "not (subscriber.email and return_users)" but that breaks at the moment.
@@ -875,17 +880,22 @@ class Page(object):
             if trivial and not subscriber.want_trivial:
                 continue # skip uninterested subscribers
 
+            # skip people not subscribed
+            if not subscriber.isSubscribedTo(pageList):
+                continue
+
+            # skip people who can't read the page
             if not UserPerms(subscriber).read(self.page_name):
                 continue
 
-            if subscriber.isSubscribedTo(pageList):
-                lang = subscriber.language or request.cfg.language_default
-                if not lang in subscriber_list:
-                    subscriber_list[lang] = []
-                if return_users:
-                    subscriber_list[lang].append(subscriber)
-                else:
-                    subscriber_list[lang].append(subscriber.email)
+            # add the user to the list
+            lang = subscriber.language or request.cfg.language_default
+            if not lang in subscriber_list:
+                subscriber_list[lang] = []
+            if return_users:
+                subscriber_list[lang].append(subscriber)
+            else:
+                subscriber_list[lang].append(subscriber.email)
 
         return subscriber_list
 
