@@ -11,7 +11,7 @@ from MoinMoin import wikiutil
 
 class DataBrowserWidget(base.Widget):
 
-    def __init__(self, request, **kw):
+    def __init__(self, request, show_header=True, **kw):
         _ = request.getText
         base.Widget.__init__(self, request, **kw)
         self.data = None
@@ -25,6 +25,7 @@ class DataBrowserWidget(base.Widget):
         self.__empty = '[empty]'
         self._filter = _('filter')
         self.__filter = 'filter'
+        self._show_header = show_header
 
     def setData(self, dataset):
         """ Sets the data for the browser (see MoinMoin.util.dataset).
@@ -110,26 +111,28 @@ class DataBrowserWidget(base.Widget):
         result.append(fmt.table(1, id='%stable' % self.data_id))
 
         # add header line
-        result.append(fmt.table_row(1))
-        for idx in range(len(self.data.columns)):
-            col = self.data.columns[idx]
-            if col.hidden:
-                continue
-            result.append(fmt.table_cell(1))
-            result.append(fmt.strong(1))
-            result.append(col.label or col.name)
-            result.append(fmt.strong(0))
+        if self._show_header:
+            result.append(fmt.table_row(1))
+            for idx in range(len(self.data.columns)):
+                col = self.data.columns[idx]
+                if col.hidden:
+                    continue
+                result.append(fmt.table_cell(1))
+                result.append(fmt.strong(1))
+                print col.label, col.name
+                result.append(col.label or col.name)
+                result.append(fmt.strong(0))
 
-            if col.autofilter:
-                result.append(fmt.linebreak(False))
-                select = '<select %s onchange="dbw_update_search(\'%s\');">%s</select>' % (
-                                  self._name('filter%d' % idx),
-                                  self.data_id,
-                                  self._filteroptions(idx))
-                result.append(fmt.rawHTML(select))
+                if col.autofilter:
+                    result.append(fmt.linebreak(False))
+                    select = '<select %s onchange="dbw_update_search(\'%s\');">%s</select>' % (
+                                      self._name('filter%d' % idx),
+                                      self.data_id,
+                                      self._filteroptions(idx))
+                    result.append(fmt.rawHTML(select))
 
-            result.append(fmt.table_cell(0))
-        result.append(fmt.table_row(0))
+                result.append(fmt.table_cell(0))
+            result.append(fmt.table_row(0))
 
         # add data
         self.data.reset()
