@@ -1012,7 +1012,7 @@ class Page(object):
         @keyword content_only: if 1, omit http headers, page header and footer
         @keyword content_id: set the id of the enclosing div
         @keyword count_hit: if 1, add an event to the log
-        @keyword send_missing_page: if 1, assume that page to be sent is MissingPage
+        @keyword send_special: if True, this is a special page send
         @keyword omit_footnotes: if True, do not send footnotes (used by include macro)
         """
         request = self.request
@@ -1023,7 +1023,7 @@ class Page(object):
         omit_footnotes = keywords.get('omit_footnotes', 0)
         content_id = keywords.get('content_id', 'content')
         do_cache = keywords.get('do_cache', 1)
-        send_missing_page = keywords.get('send_missing_page', 0)
+        send_special = keywords.get('send_special', False)
         print_mode = keywords.get('print_mode', 0)
         if print_mode:
             media = 'media' in request.form and request.form['media'][0] or 'print'
@@ -1180,22 +1180,23 @@ class Page(object):
                                     html_head=html_head,
                                     )
 
-        # new page?
-        if not page_exists and (not content_only or (content_only
-                                                     and send_missing_page)):
-            if self.default_formatter and not content_only:
-                self._emptyPageText(request) # this recursively calls send_page
-            elif content_only and send_missing_page:
-                # We should send MissingPage but it is not there
-                import warnings
-                warnings.warn("Error - The page MissingPage or MissingHomePage could not be found."
-                              " Check your underlay directory setting.")
-                url = '%s?action=edit' % wikiutil.quoteWikinameURL(self.page_name)
-                request.write(wikiutil.link_tag(request, url, text=_("Create New Page"),
-                                                formatter=self.formatter, rel='nofollow'))
-        elif not request.user.may.read(self.page_name):
-            request.write("<strong>%s</strong><br>" % _("You are not allowed to view this page."))
-        else:
+        # special pages handling, including denying access
+        special = None
+
+        if not send_special:
+            if not page_exists:
+                special = 'missing'
+            elif not request.user.may.read(self.page_name):
+                special = 'denied'
+
+            # if we have a special page, output it, unless
+            #  - we should only output content (this is for say the pagelinks formatter)
+            #  - we have a non-default formatter
+            if special and not content_only and self.default_formatter:
+                self._specialPageText(request, special) # this recursively calls send_page
+
+        # if we didn't short-cut to a special page, output this page
+        if not special:
             # start wiki content div
             request.write(self.formatter.startContent(content_id))
 
@@ -1369,20 +1370,38 @@ class Page(object):
         self.cache_mtime = cache.mtime()
         return code
 
-    def _emptyPageText(self, request):
+    def _specialPageText(self, request, special_type):
         """ Output the default page content for new pages.
 
         @param request: the request object
         """
-        if request.user.valid and request.user.name == self.page_name and \
-           request.cfg.user_homewiki in ('Self', request.cfg.interwikiname):
-            missingpage = wikiutil.getLocalizedPage(request, 'MissingHomePage')
+        _ = request.getText
+
+        if special_type == 'missing':
+            if request.user.valid and request.user.name == self.page_name and \
+               request.cfg.user_homewiki in ('Self', request.cfg.interwikiname):
+                page = wikiutil.getLocalizedPage(request, 'MissingHomePage')
+            else:
+                page = wikiutil.getLocalizedPage(request, 'MissingPage')
+
+            alternative_text = u"'''<<Action(action=edit, text=\"%s\")>>'''" % _('Create New Page')
+        elif special_type == 'denied':
+            page = wikiutil.getLocalizedPage(request, 'PermissionDeniedPage')
+            alternative_text = u"'''%s'''" % _('You are not allowed to view this page.')
         else:
-            missingpage = wikiutil.getLocalizedPage(request, 'MissingPage')
-        missingpagefn = missingpage._text_filename()
-        missingpage.page_name = self.page_name
-        missingpage._text_filename_force = missingpagefn
-        missingpage.send_page(content_only=1, send_missing_page=1)
+            assert False
+
+        special_exists = page.exists()
+
+        if special_exists:
+            page._text_filename_force = page._text_filename()
+        else:
+            page.body = alternative_text
+            logging.warn('The page "%s" count not be found. Check your'
+                         ' underlay directory setting.' % page.page_name)
+        page.page_name = self.page_name
+
+        page.send_page(content_only=True, do_cache=not special_exists, send_special=True)
 
 
     def getRevList(self):
