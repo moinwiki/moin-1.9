@@ -119,7 +119,6 @@ class DataBrowserWidget(base.Widget):
                     continue
                 result.append(fmt.table_cell(1))
                 result.append(fmt.strong(1))
-                print col.label, col.name
                 result.append(col.label or col.name)
                 result.append(fmt.strong(0))
 
