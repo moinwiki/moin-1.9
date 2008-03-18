@@ -43,7 +43,7 @@ class FormatterBase:
 
     def set_highlight_re(self, hi_re=None):
         """ set the highlighting regular expression (e.g. for search terms)
-        
+
         @param hi_re: either a valid re as str/unicode (you may want to use
                       re.escape before passing generic strings!) or a compiled
                       re object. raises re.error for invalid re.
