@@ -552,7 +552,7 @@ def load_wikimap(request):
         lines = []
 
         for filename in request.cfg.shared_intermap_files:
-            f = open(filename, "r")
+            f = codecs.open(filename, "r", config.charset)
             lines.extend(f.readlines())
             f.close()
 
