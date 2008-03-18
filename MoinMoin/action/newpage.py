@@ -83,8 +83,7 @@ class NewPage:
 
             template = self.request.form.get('template', [''])[0]
             if template:
-                from MoinMoin.wikiutil import quoteWikinameURL
-                query['template'] = quoteWikinameURL(template)
+                query['template'] = template
 
             parent = self.request.form.get('parent', [''])[0]
             if parent:
