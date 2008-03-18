@@ -129,15 +129,16 @@ def _create_form(request):
     row.append(html.TD().append(html.INPUT(type="text", size="36",
                                            name="email")))
 
-    row = html.TR()
-    tbl.append(row)
-    row.append(html.TD().append(html.STRONG().append(
-                                  html.Text(_('TextCha (required)')))))
-    td = html.TD()
-    textcha = TextCha(request).render()
-    if textcha:
-        td.append(textcha)
-    row.append(td)
+    textcha = TextCha(request)
+    if textcha.is_enabled():
+        row = html.TR()
+        tbl.append(row)
+        row.append(html.TD().append(html.STRONG().append(
+                                      html.Text(_('TextCha (required)')))))
+        td = html.TD()
+        if textcha:
+            td.append(textcha.render())
+        row.append(td)
 
     row = html.TR()
     tbl.append(row)
