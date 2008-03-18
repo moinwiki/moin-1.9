@@ -19,6 +19,18 @@ a:link:hover, a:link:active { text-decoration: underline; color: green; }
 a:visited { text-decoration: none; color: blue; }
 a:visited:hover { text-decoration: none; color: red; }
 
+a.download {
+    display: block;
+    font-size: 120%; 
+    letter-spacing: 0.05em;
+    font-weight: bold;
+    background: #E7E7E7;
+    border: 1px solid #9C9C9C;
+    padding: 0.5em;
+    width: 7em;
+    text-align: center;
+}
+
 input {
     /* does strange effect to button (text size becomes bigger when clicking)
     font-size: 1em;

@@ -944,7 +944,7 @@ def send_viewfile(pagename, request):
     request.write('<h2>' + _("Attachment '%(filename)s'") % {'filename': filename} + '</h2>')
     # show a download link above the content
     label = _('Download')
-    link = (fmt.url(1, getAttachUrl(pagename, filename, request, do='get')) +
+    link = (fmt.url(1, getAttachUrl(pagename, filename, request, do='get'), css_class="download") +
             fmt.text(label) +
             fmt.url(0))
     request.write('%s<br><br>' % link)
