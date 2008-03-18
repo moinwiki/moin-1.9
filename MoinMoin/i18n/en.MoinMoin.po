@@ -1506,13 +1506,13 @@ msgstr ""
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr ""
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' already exists."
-msgstr "[[Verbatim(attachment:)]]%(filename)s of %(pagename)s"
+msgstr ""
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' moved to %(page)s."
-msgstr "[[Verbatim(attachment:)]]%(filename)s of %(pagename)s"
+msgstr ""
 
 msgid "Nothing changed"
 msgstr ""
@@ -1537,13 +1537,12 @@ msgstr ""
 msgid "New page name"
 msgstr ""
 
-#, fuzzy
 msgid "New attachment name"
-msgstr "Attachments"
+msgstr ""
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' installed."
-msgstr "[[Verbatim(attachment:)]]%(filename)s of %(pagename)s"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1557,9 +1556,9 @@ msgid ""
 "would be too many (%(count)d missing)."
 msgstr ""
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' unzipped."
-msgstr "[[Verbatim(attachment:)]]%(filename)s of %(pagename)s"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1592,7 +1591,7 @@ msgstr ""
 
 #, python-format
 msgid "attachment:%(filename)s of %(pagename)s"
-msgstr "[[Verbatim(attachment:)]]%(filename)s of %(pagename)s"
+msgstr ""
 
 msgid "This page is already deleted or was never created!"
 msgstr ""

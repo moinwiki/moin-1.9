@@ -1832,7 +1832,7 @@ msgstr ""
 
 #, python-format
 msgid "attachment:%(filename)s of %(pagename)s"
-msgstr "[[Verbatim(attachment:)]]%(filename)s für %(pagename)s"
+msgstr "attachment:%(filename)s für %(pagename)s"
 
 msgid "This page is already deleted or was never created!"
 msgstr "Diese Seite wurde bereits gelöscht oder wurde bisher nicht angelegt!"
