@@ -41,8 +41,15 @@ class Parser:
     extensions = ['.csvdata']
     Dependencies = []
 
+    def _read_rows(self, r):
+        if self._first_row is not None:
+            yield self._first_row
+        for row in r:
+            yield row
+
     def __init__(self, raw, request, **kw):
         self.request = request
+        self._first_row = None
         formatter = request.formatter
 
         # workaround csv.reader deficiency by encoding to utf-8
@@ -103,6 +110,16 @@ class Parser:
         r = reader(data, delimiter=delimiter, quotechar=quotechar)
         cols = map(lambda x: x.decode('utf-8'), r.next()) + staticcols
 
+        self._show_header = True
+
+        if cols == staticcols:
+            try:
+                self._first_row = map(lambda x: x.decode('utf-8'), r.next())
+                cols = [None] * len(self._first_row) + staticcols
+                self._show_header = False
+            except StopIteration:
+                pass
+
         num_entry_cols = len(cols) - len(staticcols)
 
         if not visible is None:
@@ -121,7 +138,7 @@ class Parser:
 
             linkparse[colidx] = col in linkcols
 
-        for row in r:
+        for row in self._read_rows(r):
             row = map(lambda x: x.decode('utf-8'), row)
             if len(row) > num_entry_cols:
                 row = row[:num_entry_cols]
@@ -149,6 +166,6 @@ class Parser:
         self.data = data
 
     def format(self, formatter):
-        browser = DataBrowserWidget(self.request)
+        browser = DataBrowserWidget(self.request, show_header=self._show_header)
         browser.setData(self.data)
         self.request.write(browser.format())
