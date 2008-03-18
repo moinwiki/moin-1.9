@@ -1400,7 +1400,7 @@ class Page(object):
             page._text_filename_force = page._text_filename()
         else:
             page.body = alternative_text
-            logging.warn('The page "%s" count not be found. Check your'
+            logging.warn('The page "%s" could not be found. Check your'
                          ' underlay directory setting.' % page.page_name)
         page.page_name = self.page_name
 
