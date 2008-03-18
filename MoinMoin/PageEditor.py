@@ -520,9 +520,12 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         self.lock.release()
 
         backto = request.form.get('backto', [None])[0]
-        page = backto and Page(request, backto) or self
-        request.theme.add_msg(_('Edit was cancelled.'), "error")
-        page.send_page()
+        if backto:
+            pg = Page(request, backto)
+            request.http_redirect(pg.url(request, relative=False))
+        else:
+            request.theme.add_msg(_('Edit was cancelled.'), "error")
+            page.send_page()
 
     def copyPage(self, newpagename, comment=None):
         """ Copy the current version of the page (keeping the backups, logs and attachments).
