@@ -1,0 +1,57 @@
+/*  msie.css - MoinMoin MS Internet explorer bug workarounds */
+
+/* IE6 and IE7 both suck with :before */
+a.www { padding-left: 14px; background: url(../img/moin-www.png) left center no-repeat; }
+a.http { padding-left: 14px; background: url(../img/moin-www.png) left center no-repeat; }
+a.https { padding-left: 14px; background: url(../img/moin-www.png) left center no-repeat; }
+a.file { padding-left: 14px; background: url(../img/moin-ftp.png) left center no-repeat; }
+a.ftp { padding-left: 14px; background: url(../img/moin-ftp.png) left center no-repeat; }
+a.nntp { padding-left: 14px; background: url(../img/moin-news.png) left center no-repeat; }
+a.news { padding-left: 14px; background: url(../img/moin-news.png) left center no-repeat; }
+a.telnet { padding-left: 14px; background: url(../img/moin-telnet.png) left center no-repeat; }
+a.irc,a.ircs  { padding-left: 14px; background: url(../img/moin-telnet.png) left center no-repeat; }
+a.mailto { padding-left: 14px; background: url(../img/moin-email.png) left center no-repeat; }
+a.attachment { padding-left: 14px; background: url(../img/moin-attach.png) left center no-repeat; }
+a.badinterwiki { padding-left: 14px; background: url(../img/moin-inter.png) left center no-repeat; }
+a.interwiki { padding-left: 14px; background: url(../img/moin-inter.png) left center no-repeat; }
+#message .warning { padding-left: 20px; background: url(../img/alert.png) left center no-repeat; }
+#message .error { padding-left: 20px; background: url(../img/icon-error.png) left center no-repeat; }
+
+#pagetrail li, #pagelocation li {
+    border-left: 1px solid #AAA;
+    padding: 0 0.3em;
+}
+
+/* Spans for line-anchors - needed for IE6 and IE7 where omitting the "display: none" triggers rendering bugs. */
+span.anchor { display: none; }
+
+/*
+This could maybe avoid screen jumping in IE with IE7 hack.
+
+It works (or rather: should work) like this:
+First, IE sees the a.interwiki definition only as it doesn't understand neither
+* > a.interwiki, nor a.interwiki:before. We use a.interwiki to reserve some
+space for the icon inserted later.
+Later, the IE7 hack kicks in and then IE also understands those 2 other css lines.
+The * > a.interwiki line now removes the space we previously reserved and the
+:before inserts the icon.
+
+a.interwiki {margin-left: 25px; padding-top: 25px; padding-bottom: 25px;}
+* > a.interwiki {margin-left: 0px; padding-top: 25px; padding-bottom: 25px;}
+a.interwiki:before {content: url(../img/moin-inter.png);}
+
+Problem:
+While margin-left seems to work, margin-/padding-top/bottom doesnt.
+After getting it to work, this has to be fine-tuned to avoid screen jumping.
+*/
+
+/* Some * html hacks for IE6 and below only (IE7 ignores * html) */
+
+/* IE6 has a bug with rendering of float elements. We workaround this bug by
+ * assigning those elements a height attribute because we currently don't know
+ * a better solution. This results in IE calculating the correct height of the
+ * characters and displaying them correctly. We don't know any negative side
+ * effects of this workaround:
+ */
+* html div#page, * html div#header { height: 0.001%; }
+
