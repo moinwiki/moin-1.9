@@ -277,7 +277,7 @@ class ThemeBase:
                         request.formatter.interwikilink(0, title=title, id="userhome", *interwiki))
             userlinks.append(homelink)
             # link to userprefs action
-            userlinks.append(d['page'].link_to(request, text=_('Preferences'),
+            userlinks.append(d['page'].link_to(request, text=_('Settings'),
                                                querystr={'action': 'userprefs'}, id='userprefs', rel='nofollow'))
 
         if request.user.valid:
@@ -1503,7 +1503,6 @@ var gui_editor_link_text = "%(text)s";
         page_title_index = wikiutil.getLocalizedPage(request, 'TitleIndex').page_name
         page_site_navigation = wikiutil.getLocalizedPage(request, 'SiteNavigation').page_name
         page_word_index = wikiutil.getLocalizedPage(request, 'WordIndex').page_name
-        page_user_prefs = wikiutil.getLocalizedPage(request, 'UserPreferences').page_name
         page_help_formatting = wikiutil.getLocalizedPage(request, 'HelpOnFormatting').page_name
         page_find_page = wikiutil.getLocalizedPage(request, 'FindPage').page_name
         home_page = wikiutil.getInterwikiHomePage(request) # sorry theme API change!!! Either None or tuple (wikiname,pagename) now.
@@ -1680,10 +1679,8 @@ var gui_editor_link_text = "%(text)s";
                 'page_parent_page': page_parent_page,
                 'page_title_index': page_title_index,
                 'page_word_index': page_word_index,
-                'page_user_prefs': page_user_prefs,
                 'user_name': request.user.name,
                 'user_valid': request.user.valid,
-                'user_prefs': (page_user_prefs, request.user.name)[request.user.valid],
                 'msg': self._status,
                 'trail': keywords.get('trail', None),
                 # Discontinued keys, keep for a while for 3rd party theme developers
