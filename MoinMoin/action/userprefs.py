@@ -90,7 +90,7 @@ def execute(pagename, request):
         #      to the generic userprefs page but that is impossible
         #      due to the way the title is emitted and the theme is
         #      responsible for doing the linking....
-        title = _("Settings") + "/" + title
+        title = _("Settings") + ":" + title
     else:
         title = _("Settings")
     request.emit_http_headers()
