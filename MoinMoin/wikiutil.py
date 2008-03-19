@@ -2161,8 +2161,8 @@ def isPicture(url):
     @rtype: bool
     @return: true if url points to a picture
     """
-    extpos = url.rfind(".")
-    return extpos > 0 and url[extpos:].lower() in ['.gif', '.jpg', '.jpeg', '.png', '.bmp', '.ico', ]
+    extpos = url.rfind(".") + 1
+    return extpos > 1 and url[extpos:].lower() in config.browser_supported_images
 
 
 def link_tag(request, params, text=None, formatter=None, on=None, **kw):

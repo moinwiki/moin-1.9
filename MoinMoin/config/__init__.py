@@ -11,6 +11,9 @@ from MoinMoin import version
 # unicode: set the char types (upper, lower, digits, spaces)
 from MoinMoin.util.chartypes import *
 
+# List of image types browser do support regulary
+browser_supported_images = ('gif', 'jpg', 'jpeg', 'png', 'bmp', 'ico', )
+
 # When creating files, we use e.g. 0666 & config.umask for the mode:
 umask = 0770
 

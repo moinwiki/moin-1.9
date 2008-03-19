@@ -706,8 +706,8 @@ class Parser:
                     if mt.major == 'text':
                         desc = self._transclude_description(desc, url)
                         return self.formatter.attachment_inlined(url, desc)
-                    # later on we can add svg too. (destinguishs if browser need a plugin in place)
-                    elif mt.major == 'image' and mt.minor in ('jpg', 'jpeg', 'png', 'gif'):
+                    # destinguishs if browser need a plugin in place
+                    elif mt.major == 'image' and mt.minor in config.browser_supported_images:
                         desc = self._transclude_description(desc, url)
                         tag_attrs, query_args = self._get_params(params,
                                                                  tag_attrs={'alt': desc,

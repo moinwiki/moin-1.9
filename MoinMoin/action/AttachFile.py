@@ -951,8 +951,8 @@ def send_viewfile(pagename, request):
 
     mt = wikiutil.MimeType(filename=filename)
 
-    # later on we can add svg too. (destinguishs if browser need a plugin in place)
-    if mt.major == 'image' and mt.minor in ('jpg', 'jpeg', 'png', 'gif'):
+    # destinguishs if browser need a plugin in place
+    if mt.major == 'image' and mt.minor in config.browser_supported_images:
         request.write('<img src="%s" alt="%s">' % (
             getAttachUrl(pagename, filename, request, escaped=1),
             wikiutil.escape(filename, 1)))
