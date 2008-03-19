@@ -1210,7 +1210,7 @@ class RequestBase(object):
 
             # Handle request. We have these options:
             # 1. jump to page where user left off
-            if not pagename and self.user.remember_last_visit:
+            if not pagename and self.user.remember_last_visit and action_name == 'show':
                 pagetrail = self.user.getTrail()
                 if pagetrail:
                     # Redirect to last page visited
