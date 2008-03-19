@@ -161,7 +161,7 @@ def macro_EmbedObject(macro, target=None, pagename=None,
     elif mt.major in ['image', 'chemical', 'x-world']:
         embed_src = '''
 <object %(ob_data)s %(ob_type)s  %(ob_width)s %(ob_height)s %(ob_align)s>
-%(name)s"
+%(name)s
 <p>%(alt)s</p>
 </object>''' % {
     "mime_type": mime_type,
