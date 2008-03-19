@@ -581,12 +581,12 @@ Lists: * bullets; 1., a. numbered items.
         # action: (count, dt)
         'all': (30, 30),
         'show': (30, 60),
-        'recall': (5, 60),
+        'recall': (10, 120),
         'raw': (20, 40),  # some people use this for css
         'AttachFile': (90, 60),
         'diff': (30, 60),
-        'fullsearch': (5, 60),
-        'edit': (10, 120),
+        'fullsearch': (10, 120),
+        'edit': (30, 300), # can be lowered after making preview different from edit
         'rss_rc': (1, 60),
         'default': (30, 60),
     }
