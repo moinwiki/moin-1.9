@@ -19,7 +19,7 @@ def _create_user(request):
     form = request.form
 
     if request.request_method != 'POST':
-        return _("Use UserPreferences to change your settings or create an account.", wiki=True)
+        return
 
     if not TextCha(request).check_answer_from_form():
         return _('TextCha: Wrong answer! Go back and try again...')
