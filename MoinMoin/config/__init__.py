@@ -14,6 +14,11 @@ from MoinMoin.util.chartypes import *
 # List of image types browser do support regulary
 browser_supported_images = ('gif', 'jpg', 'jpeg', 'png', 'bmp', 'ico', )
 
+# Parser to use mimetype text
+parser_text_mimetype = ('plain', 'csv', 'rst', 'docbook', 'latex', 'tex', 'html', 'css',
+                       'xml', 'python', 'perl', 'php', 'ruby', 'javascript',
+                       'cplusplus', 'java', 'pascal', 'diff', 'gettext', 'xslt', 'creole', )
+
 # When creating files, we use e.g. 0666 & config.umask for the mode:
 umask = 0770
 
