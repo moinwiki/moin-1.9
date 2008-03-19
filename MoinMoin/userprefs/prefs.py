@@ -61,7 +61,8 @@ class Settings(UserPrefBase):
         form = self.request.form
 
         if self.request.request_method != 'POST':
-            return _("Use UserPreferences to change your settings or create an account.", wiki=True)
+            return
+
         theuser = self.request.user
         if not theuser:
             return
