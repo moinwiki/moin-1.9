@@ -656,12 +656,11 @@ class Parser:
                 acceptable_attrs = []
             for key, val in kw.items():
                 # wikiutil.escape for key/val must be done by (html) formatter!
-                key = str(key) # we can't use unicode as key ...
                 if key in acceptable_attrs:
-                    tag_attrs[key] = unicode(val) # ... but for the value
+                    # tag attributes must be string type
+                    tag_attrs[str(key)] = val
                 elif key.startswith('&'):
                     key = key[1:]
-                    val = unicode(val)
                     query_args[key] = val
         return tag_attrs, query_args
 
