@@ -115,7 +115,7 @@
     When creating a new MoinMoin.user.User object, you can give a keyword
     argument "auth_attribs" to User.__init__ containing a list of user
     attributes that are determined and fixed by this auth method and may
-    not be changed by the user in UserPreferences.
+    not be changed by the user in their preferences.
     You also have to give the keyword argument "auth_method" containing the
     name of the authentication method.
 

@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - UserPreferences Form and User Browser
+    MoinMoin - Login form and user browser
 
     @copyright: 2001-2004 Juergen Hermann <jh@web.de>,
                 2003-2007 MoinMoin:ThomasWaldmann

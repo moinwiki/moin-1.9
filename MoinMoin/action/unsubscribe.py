@@ -19,8 +19,7 @@ def execute(pagename, request):
             msg = _('Your subscription to this page has been removed.')
         else:
             msg = _("Can't remove regular expression subscription!") + u' ' + \
-                  _("Edit the subscription regular expressions in your "
-                    "UserPreferences.", wiki=True)
+                  _("Edit the subscription regular expressions in your settings.")
     else:
         # The user is not subscribed
         msg = _('You need to be subscribed to unsubscribe.')

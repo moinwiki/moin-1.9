@@ -1,11 +1,9 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - UserPreferences action
-
-    This is a simple plugin, that adds a "UserPreferences" action.
+    MoinMoin - user settings action
 
     @copyright: 2006 Radomir Dopieralski
-                2007 MoinMoin:JohannesBerg
+                2007, 2008 MoinMoin:JohannesBerg
     @license: GNU GPL, see COPYING for details.
 """
 
