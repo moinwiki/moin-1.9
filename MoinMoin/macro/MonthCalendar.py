@@ -331,7 +331,7 @@ def execute(macro, text):
             cssday = "cal-weekend"
         else:
             cssday = "cal-workday"
-        restd2.append('  <td class="%s" width="14%%">%s</td>\n' % (cssday, wday))
+        restd2.append('  <td class="%s">%s</td>\n' % (cssday, wday))
     restr2 = ' <tr>\n%s </tr>\n' % "".join(restd2)
 
     if parmheight6:
@@ -401,19 +401,24 @@ def execute(macro, text):
                 restdn.append('  <td style="%s" class="%s">%s</td>\n' % (style, cssday, fmtlink))
         restrn.append(' <tr>\n%s </tr>\n' % "".join(restdn))
 
-    restable = '<table border="2" cellspacing="2" cellpadding="2">\n%s%s%s</table>\n'
+    restable = '<table border="2" cellspacing="2" cellpadding="2">\n<col width="14%%" span="7">%s%s%s</table>\n'
     restable = restable % (restr1, restr2, "".join(restrn))
 
-    result = """\
-<script language="JavaScript" type="text/javascript" src="%s/common/js/infobox.js"></script>
-<div id="infodiv" style="position:absolute; visibility:hidden; z-index:20; top:-999em; left:0px;"></div>
-<script language="JavaScript" type="text/javascript">
+    if maketip_js:
+        tip_js = '''<script language="JavaScript" type="text/javascript">
 <!--
 %s
 // -->
 </script>
-%s
-""" % (request.cfg.url_prefix_static, "\n".join(maketip_js), restable)
+''' % '\n'.join(maketip_js)
+    else:
+        tip_js = ''
+
+    result = """\
+<script type="text/javascript" src="%s/common/js/infobox.js"></script>
+<div id="%s" style="position:absolute; visibility:hidden; z-index:20; top:-999em; left:0px;"></div>
+%s%s
+""" % (request.cfg.url_prefix_static, formatter.make_id_unique('infodiv'), tip_js, restable)
     return formatter.rawHTML(result)
 
 # EOF
