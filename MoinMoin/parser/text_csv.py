@@ -28,7 +28,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from csv import reader, QUOTE_NONE, QUOTE_MINIMAL
+from csv import reader, QUOTE_NONE, QUOTE_MINIMAL, Sniffer
 
 from MoinMoin.util.dataset import TupleDataset, Column
 from MoinMoin.widget.browser import DataBrowserWidget
@@ -54,6 +54,7 @@ class Parser:
 
         # workaround csv.reader deficiency by encoding to utf-8
         data = raw.encode('utf-8').split('\n')
+        delimiter = Sniffer().sniff(data[0]).delimiter
 
         visible = None
         hiddenindexes = []
@@ -62,7 +63,6 @@ class Parser:
         staticcols = []
         staticvals = []
         linkcols = []
-        delimiter = ';'
         quotechar = '\x00' # can't be entered
         quoting = QUOTE_NONE
         name = None
