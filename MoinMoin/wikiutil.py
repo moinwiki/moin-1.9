@@ -998,9 +998,7 @@ class MimeType(object):
             type "wiki" instead of "text/moin-wiki".
         """
         format = format.lower()
-        if format in ('plain', 'csv', 'rst', 'docbook', 'latex', 'tex', 'html', 'css',
-                      'xml', 'python', 'perl', 'php', 'ruby', 'javascript',
-                      'cplusplus', 'java', 'pascal', 'diff', 'gettext', 'xslt', 'creole', ):
+        if format in config.parser_text_mimetype:
             mimetype = 'text', format
         else:
             mapping = {
