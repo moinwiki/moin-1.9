@@ -103,6 +103,8 @@ Version 1.7.current:
   Other changes:
     * cfg.show_login is gone, see code in theme/__init__.py, this affects
       many themes!
+    * The themedict no longer contains 'page_user_prefs' and 'user_prefs',
+      this may affect custom themes.
     * needs a new userprefs/ plugin directory
     * removed attachments direct serving (cfg.attachments)
     * the rst-parser's admonition's class names are no longer prepended with

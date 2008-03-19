@@ -6,7 +6,7 @@
     some specific user). User instances are used to access the user profile of
     some specific user (name, password, email, bookmark, trail, settings, ...).
 
-    The UserPreferences form support stuff is in module userform.
+    Some related code is in the userform and userprefs modules.
 
     TODO:
     * code is a mixture of highlevel user stuff and lowlevel storage functions,
@@ -289,7 +289,7 @@ class User:
                               default: 'internal'
         @keyword auth_attribs: tuple of user object attribute names that are
                                determined by auth method and should not be
-                               changed by UserPreferences form, default: ().
+                               changeable by preferences, default: ().
                                First tuple element was used for authentication.
         """
         self._cfg = request.cfg
@@ -1044,9 +1044,9 @@ Login Name: %s
 
 Login Password: %s
 
-Login URL: %s/%s?action=login
+Login URL: %s/?action=login
 """) % (
-                        self.name, self.enc_password, self._request.getBaseURL(), getLocalizedPage(self._request, 'UserPreferences').page_name)
+                        self.name, self.enc_password, self._request.getBaseURL(), )
 
         text = _("""\
 Somebody has requested to submit your account data to this email address.

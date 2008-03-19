@@ -26,8 +26,8 @@ def execute(pagename, request):
 
     # Suggest users without email to add their email address
     elif not request.user.email and not request.user.jid:
-        request.theme.add_msg(_("Add your email address or Jabber ID in your UserPreferences to use subscriptions.",
-                                wiki=True), "error")
+        request.theme.add_msg(_("Add your email address or Jabber ID in your user settings to use subscriptions."),
+                              "error")
 
     elif request.user.isSubscribedTo([pagename]):
         request.theme.add_msg(_('You are already subscribed to this page.'))
