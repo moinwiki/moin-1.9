@@ -26,10 +26,6 @@ class TestPasswordChecker:
         (u"XXX%sXXX" % username, False), # username in password
         (u'Moin-2007', True), # this should be OK
     ]
-    tests_crack = tests_builtin + [
-        (u'secret', False), # word from dictionary
-        (u'password', False), # word from dictionary
-    ]
     def testBuiltinPasswordChecker(self):
         pw_checker = self.request.cfg.password_checker
         if not pw_checker:
