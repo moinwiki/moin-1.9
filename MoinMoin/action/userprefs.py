@@ -85,12 +85,14 @@ def _create_page(request, cancel=False):
 def execute(pagename, request):
     _ = request.getText
     text, title, msg = _create_page(request)
-    if not title:
-        title = _("Settings")
-    else:
-        lnk = html.A(href='xx').append(html.Text(_("Settings")))
-        lnk = unicode(lnk)
+    if title:
+        # XXX: we would like to make "Settings" here a link back
+        #      to the generic userprefs page but that is impossible
+        #      due to the way the title is emitted and the theme is
+        #      responsible for doing the linking....
         title = _("Settings") + "/" + title
+    else:
+        title = _("Settings")
     request.emit_http_headers()
     request.theme.add_msg(msg, "dialog")
     request.theme.send_title(title, page=request.page, pagename=pagename)
