@@ -10,6 +10,10 @@
 def execute(pagename, request):
     """ restore another revision of a page as a new current revision """
     from MoinMoin.PageEditor import PageEditor
+
+    if request.request_method != 'POST':
+        return
+
     rev = request.rev
     pg = PageEditor(request, pagename)
 
