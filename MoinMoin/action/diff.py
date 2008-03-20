@@ -123,6 +123,7 @@ def execute(pagename, request):
     page_url = wikiutil.escape(currentpage.url(request), True)
 
     navigation_html = """
+<span class="diff-header">%s</span>
 <table class="diff">
 <tr>
  <td style="border:0">
@@ -136,7 +137,6 @@ def execute(pagename, request):
   </span>
  </td>
  <td style="border:0">
-  <span class="diff-header">%s</span>
   <span style="text-align:center">
    <form action="%s" method="get">
     <input name="action" value="revert" type="hidden">
@@ -157,8 +157,8 @@ def execute(pagename, request):
  </td>
 </tr>
 </table>
-""" % (page_url, oldrev - 1, oldrev, _("Previous change"), disable_prev,
-       title,
+""" % (title,
+       page_url, oldrev - 1, oldrev, _("Previous change"), disable_prev,
        page_url, rev2, _("Revert to this revision"), u'',
        page_url, newrev, newrev + 1, _("Next change"), disable_next, )
 
