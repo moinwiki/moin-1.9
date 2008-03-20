@@ -110,7 +110,7 @@ def execute(pagename, request):
     revlist = currentpage.getRevList()
 
     # Revision list starts from 2...
-    if oldrev == min(revlist) + 1:
+    if oldrev == min(revlist):
         disable_prev = u' disabled="true"'
     else:
         disable_prev = u''
@@ -123,6 +123,7 @@ def execute(pagename, request):
     page_url = wikiutil.escape(currentpage.url(request), True)
 
     navigation_html = """
+<span class="diff-header">%s</span>
 <table class="diff">
 <tr>
  <td style="border:0">
@@ -136,7 +137,13 @@ def execute(pagename, request):
   </span>
  </td>
  <td style="border:0">
-  <span class="diff-header">%s</span>
+  <span style="text-align:center">
+   <form action="%s" method="get">
+    <input name="action" value="revert" type="hidden">
+    <input name="rev" value="%d" type="hidden">
+    <input value="%s" type="submit"%s>
+   </form>
+  </span>
  </td>
  <td style="border:0">
   <span style="text-align:right">
@@ -150,8 +157,9 @@ def execute(pagename, request):
  </td>
 </tr>
 </table>
-""" % (page_url, oldrev - 1, oldrev, _("Previous change"), disable_prev,
-       title,
+""" % (title,
+       page_url, oldrev - 1, oldrev, _("Previous change"), disable_prev,
+       page_url, rev2, _("Revert to this revision"), u'',
        page_url, newrev, newrev + 1, _("Next change"), disable_next, )
 
     request.write(f.rawHTML(navigation_html))

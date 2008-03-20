@@ -658,7 +658,7 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
                 return False, _('Could not rename page because of file system error: %s.') % unicode(err)
 
 
-    def revertPage(self, revision):
+    def revertPage(self, revision, comment=u''):
         """ Reverts page to the given revision
 
         @param revision: revision to revert to
@@ -668,15 +668,16 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
         _ = self.request.getText
 
         if not self.request.user.may.revert(self.page_name):
-            raise self.RevertError(_('You are not allowed to revert this page!'))
+            # no real message necessary, cannot happen if
+            # user doesn't try to exploit us
+            raise self.RevertError('not allowed')
         elif revision is None:
-            raise self.RevertError(_('You were viewing the current revision of this page when you called the revert action. '
-                    'If you want to revert to an older revision, first view that older revision and '
-                    'then call revert to this (older) revision again.'))
+            # see above
+            raise self.RevertError('cannot revert to current rev')
         else:
             revstr = '%08d' % revision
             pg = Page(self.request, self.page_name, rev=revision)
-            msg = self.saveText(pg.get_raw_body(), 0, extra=revstr, action="SAVE/REVERT", notify=False)
+            msg = self.saveText(pg.get_raw_body(), 0, extra=revstr, action="SAVE/REVERT", notify=False, comment=comment)
 
             # Remove cache entry (if exists)
             pg = Page(self.request, self.page_name)

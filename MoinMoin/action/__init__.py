@@ -55,7 +55,7 @@ class ActionBase:
         self.form_trigger_label = _("Do it.") # label for the trigger button
         self.page = Page(request, pagename)
         self.error = ''
-        self.method = 'GET'
+        self.method = 'POST'
         self.enctype = 'multipart/form-data'
 
     # CHECKS -----------------------------------------------------------------
@@ -64,7 +64,11 @@ class ActionBase:
         return self.actionname in self.cfg.actions_excluded
 
     def is_allowed(self):
-        """ Return True if action is allowed (by ACL) """
+        """
+        Return True if action is allowed (by ACL), or
+        return a tuple (allowed, message) to show a
+        message other than the default.
+        """
         return True
 
     def check_condition(self):
@@ -155,16 +159,16 @@ class ActionBase:
     def render_msg(self, msg, msgtype):
         """ Called to display some message (can also be the action form) """
         self.request.theme.add_msg(msg, msgtype)
-        self.page.send_page()
+        do_show(self.pagename, self.request)
 
     def render_success(self, msg, msgtype):
         """ Called to display some message when the action succeeded """
         self.request.theme.add_msg(msg, msgtype)
-        self.page.send_page()
+        do_show(self.pagename, self.request)
 
     def render_cancel(self):
         """ Called when user has hit the cancel button """
-        self.page.send_page() # we don't tell user he has hit cancel :)
+        do_show(self.pagename, self.request)
 
     def render(self):
         """ Render action - this is the main function called by action's
@@ -183,8 +187,14 @@ class ActionBase:
         error = None
         if self.is_excluded():
             error = _('Action %(actionname)s is excluded in this wiki!') % {'actionname': self.actionname }
-        elif not self.is_allowed():
-            error = _('You are not allowed to use action %(actionname)s on this page!') % {'actionname': self.actionname }
+        else:
+            allowed = self.is_allowed()
+            if isinstance(allowed, tuple):
+                allowed, msg = allowed
+            else:
+                msg = _('You are not allowed to use action %(actionname)s on this page!') % {'actionname': self.actionname }
+            if not allowed:
+                error = msg
         if error is None:
             error = self.check_condition()
         if error:
