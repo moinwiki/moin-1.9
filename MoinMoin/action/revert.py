@@ -34,6 +34,7 @@ class revert(ActionBase):
         return allowed, _('You are not allowed to revert this page!')
 
     def check_condition(self):
+        """ checks page and revision """
         _ = self._
         if not self.request.rev:
             # same string as in PageEditor...
@@ -48,7 +49,7 @@ class revert(ActionBase):
             return None
 
     def do_action(self):
-        """ Delete pagename """
+        """ Revert pagename """
         _ = self._
 
         if self.request.request_method != 'POST':
@@ -79,6 +80,7 @@ class revert(ActionBase):
         return True, msg
 
     def get_form_html(self, buttons_html):
+        """ creates the form """
         _ = self._
 
         d = {
