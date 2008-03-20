@@ -155,16 +155,16 @@ class ActionBase:
     def render_msg(self, msg, msgtype):
         """ Called to display some message (can also be the action form) """
         self.request.theme.add_msg(msg, msgtype)
-        self.page.send_page()
+        do_show(self.pagename, self.request)
 
     def render_success(self, msg, msgtype):
         """ Called to display some message when the action succeeded """
         self.request.theme.add_msg(msg, msgtype)
-        self.page.send_page()
+        do_show(self.pagename, self.request)
 
     def render_cancel(self):
         """ Called when user has hit the cancel button """
-        self.page.send_page() # we don't tell user he has hit cancel :)
+        do_show(self.pagename, self.request)
 
     def render(self):
         """ Render action - this is the main function called by action's
