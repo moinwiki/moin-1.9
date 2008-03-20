@@ -37,7 +37,20 @@ class Request(RequestBase):
 
     def read(self, n=None):
         if n is None:
-            return self.stdin.read()
+            # We can't do that, because wsgi 1.0 requires n:
+            #return self.stdin.read()
+            # Thus, if we have no n, we have to simulate the usual behaviour (or
+            # it won't work e.g. with mod_wsgi 1.3 and maybe other wsgi 1.0 servers).
+            # Note: just requesting a extremely large amount (expecting it to never
+            # be reached, but still all data returned) also does not work (mod_wsgi
+            # 1.3 gives a MemoryError when doing that):
+            data = []
+            while True:
+                read_data = self.stdin.read(4000)
+                if not read_data:
+                    break
+                data.append(read_data)
+            return ''.join(data)
         else:
             return self.stdin.read(n)
 
