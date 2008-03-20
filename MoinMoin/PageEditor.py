@@ -658,7 +658,7 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
                 return False, _('Could not rename page because of file system error: %s.') % unicode(err)
 
 
-    def revertPage(self, revision):
+    def revertPage(self, revision, comment=u''):
         """ Reverts page to the given revision
 
         @param revision: revision to revert to
@@ -676,7 +676,7 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
         else:
             revstr = '%08d' % revision
             pg = Page(self.request, self.page_name, rev=revision)
-            msg = self.saveText(pg.get_raw_body(), 0, extra=revstr, action="SAVE/REVERT", notify=False)
+            msg = self.saveText(pg.get_raw_body(), 0, extra=revstr, action="SAVE/REVERT", notify=False, comment=comment)
 
             # Remove cache entry (if exists)
             pg = Page(self.request, self.page_name)
