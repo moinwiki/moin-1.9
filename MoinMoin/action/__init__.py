@@ -64,7 +64,11 @@ class ActionBase:
         return self.actionname in self.cfg.actions_excluded
 
     def is_allowed(self):
-        """ Return True if action is allowed (by ACL) """
+        """
+        Return True if action is allowed (by ACL), or
+        return a tuple (allowed, message) to show a
+        message other than the default.
+        """
         return True
 
     def check_condition(self):
@@ -183,8 +187,14 @@ class ActionBase:
         error = None
         if self.is_excluded():
             error = _('Action %(actionname)s is excluded in this wiki!') % {'actionname': self.actionname }
-        elif not self.is_allowed():
-            error = _('You are not allowed to use action %(actionname)s on this page!') % {'actionname': self.actionname }
+        else:
+            allowed = self.is_allowed()
+            if isinstance(allowed, tuple):
+                allowed, msg = allowed
+            else:
+                msg = _('You are not allowed to use action %(actionname)s on this page!') % {'actionname': self.actionname }
+            if not allowed:
+                error = msg
         if error is None:
             error = self.check_condition()
         if error:
