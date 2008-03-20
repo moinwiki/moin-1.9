@@ -34,7 +34,7 @@ class revert(ActionBase):
         return allowed, _('You are not allowed to revert this page!')
 
     def check_condition(self):
-        """ checks page and revision """
+        """ checks valid page and rev """
         _ = self._
         if not self.request.rev:
             # same string as in PageEditor...
@@ -49,23 +49,15 @@ class revert(ActionBase):
             return None
 
     def do_action(self):
-        """ Revert pagename """
-        _ = self._
+        """ revert pagename """
+        form = self.form
+        comment = form.get('comment', [u''])[0]
+        comment = wikiutil.clean_input(comment)
 
         if self.request.request_method != 'POST':
             return False, u''
 
-        form = self.form
         rev = self.request.rev
-        comment = form.get('comment', [u''])[0]
-        system_comment = _(u"Revert to revision %(rev)d.") % {'rev': int(rev)}
-        if not comment:
-            comment = system_comment
-        else:
-            comment = "%(comment)s (%(system_comment)s)" % {"comment": comment,
-                                                            "system_comment": system_comment}
-
-        comment = wikiutil.clean_input(comment)
         pg = PageEditor(self.request, self.pagename)
 
         try:
