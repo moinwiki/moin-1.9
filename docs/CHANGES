@@ -1677,7 +1677,7 @@ Version 1.5.0beta1:
 
   International support:    
     * mail_from can be now a unicode name-address 
-      e.g u'Jürgen wiki <noreply@jhwiki.org>'
+      e.g u'JÃ¼rgen wiki <noreply@jhwiki.org>'
 
   Theme changes:
     * logo_string is now should be really only the logo (img).
@@ -3543,7 +3543,7 @@ New features:
       there before a new version is written to disk
     * Removed the "Reset" button from EditPage
     * Added "Reduce editor size" link
-    * Added Latin-1 WikiNames (JürgenHermann ;)
+    * Added Latin-1 WikiNames (JÃ¼rgenHermann ;)
     * Speeded up RecentChanges by looking up hostnames ONCE while saving
     * Show at most 14 (distinct) days in RecentChanges
     * Added icons for common functions, at the top of the page
