@@ -137,6 +137,13 @@ def execute(pagename, request):
  </td>
  <td style="border:0">
   <span class="diff-header">%s</span>
+  <span style="text-align:center">
+   <form action="%s" method="get">
+    <input name="action" value="revert" type="hidden">
+    <input name="rev" value="%d" type="hidden">
+    <input value="%s" type="submit"%s>
+   </form>
+  </span>
  </td>
  <td style="border:0">
   <span style="text-align:right">
@@ -152,6 +159,7 @@ def execute(pagename, request):
 </table>
 """ % (page_url, oldrev - 1, oldrev, _("Previous change"), disable_prev,
        title,
+       page_url, oldrev, _("Revert to this revision"), u'',
        page_url, newrev, newrev + 1, _("Next change"), disable_next, )
 
     request.write(f.rawHTML(navigation_html))
