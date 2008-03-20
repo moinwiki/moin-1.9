@@ -39,12 +39,11 @@ def format_comment(request, line):
         elif action == 'ATTDRW':
             comment = _("Drawing '%(filename)s' saved.") % {
                 'filename': filename}
-    elif not comment:
-        if '/REVERT' in action:
-            rev = int(line.extra)
-            comment = _("Revert to revision %(rev)d.") % {'rev': rev}
-        elif '/RENAME' in action:
-            comment = _("Renamed from '%(oldpagename)s'.") % {'oldpagename': line.extra}
+    elif '/REVERT' in action:
+        rev = int(line.extra)
+        comment = (_("Revert to revision %(rev)d.") % {'rev': rev}) + " " + comment
+    elif '/RENAME' in action:
+        comment = (_("Renamed from '%(oldpagename)s'.") % {'oldpagename': line.extra}) + " " + comment
 
     return wikiutil.make_breakable(comment, _MAX_COMMENT_LENGTH)
 
