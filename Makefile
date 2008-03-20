@@ -42,12 +42,12 @@ epydoc: patchlevel
 # Should be used only on TW machine
 underlay:
 	rm -rf $(share)/underlay
-	MoinMoin/script/moin.py --config-dir=/srv/de.wikiwikiweb.moinmaster/bin16 --wiki-url=master.moinmo.in/ maint globaledit
-	MoinMoin/script/moin.py --config-dir=/srv/de.wikiwikiweb.moinmaster/bin16 --wiki-url=master.moinmo.in/ maint reducewiki --target-dir=$(share)/underlay
+	MoinMoin/script/moin.py --config-dir=/srv/moin/cfg/1.7 --wiki-url=master17.moinmo.in/ maint globaledit
+	MoinMoin/script/moin.py --config-dir=/srv/moin/cfg/1.7 --wiki-url=master17.moinmo.in/ maint reducewiki --target-dir=$(share)/underlay
 	rm -rf $(share)/underlay/pages/InterWikiMap/
 	echo -ne "#acl All:read\r\nSee MoinMoin:EditingOnMoinMaster.\r\n" > \
 	    $(share)/underlay/pages/MoinPagesEditorGroup/revisions/00000001
-	cd $(share); rm -rf underlay.tar.bz2; tar cjf underlay.tar.bz2 underlay
+	cd $(share); rm -f underlay.tar; tar cf underlay.tar underlay
 
 pagepacks:
 	@python MoinMoin/_tests/maketestwiki.py
@@ -75,7 +75,7 @@ update:
 
 # Update underlay directory from the tarball
 update-underlay:
-	cd $(share); rm -rf underlay; tar xjf underlay.tar.bz2
+	cd $(share); rm -rf underlay; tar xf underlay.tar
 
 test:
 	@echo Testing is now done using \`py.test\`. py.test can be installed by downloading from http://codespeak.net/py/dist/download.html

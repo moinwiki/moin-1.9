@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-30 19:24+0200\n"
-"PO-Revision-Date: 2007-05-29 12:24+0900\n"
+"POT-Creation-Date: 2008-02-02 14:58+0100\n"
+"PO-Revision-Date: 2008-02-04 22:47+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -35,6 +35,9 @@ msgstr ""
 msgid "Please provide a valid email address!"
 msgstr "正しいメールアドレスを入力してください。"
 
+msgid "If an account with this username exists, an email was sent."
+msgstr "このユーザ名のアカウントが存在した場合には、メール送信されました。"
+
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "メールアドレス'%(email)s'に該当するアカウントが見つかりません。"
@@ -43,6 +46,9 @@ msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
 "設定変更やアカウント作成をおこなうには、[\"ユーザプレファレンス\"]を利用して"
 "ください。"
+
+msgid "TextCha: Wrong answer! Go back and try again..."
+msgstr "TextCha: 不正解です。戻ってもう一度やり直してください。"
 
 msgid "Empty user name. Please enter a user name."
 msgstr "ユーザ名が入力されていません。ユーザ名を入力してください。"
@@ -65,6 +71,10 @@ msgstr "パスワードが一致していません。"
 
 msgid "Please specify a password!"
 msgstr "パスワードを入力してください。"
+
+#, python-format
+msgid "Password not acceptable: %s"
+msgstr "パスワードを受け入れることはできません: %s"
 
 msgid ""
 "Please provide your email address. If you lose your login information, you "
@@ -148,10 +158,13 @@ msgid "This list does not work, unless you have entered a valid email address!"
 msgstr "このリストは、有効なメールアドレスを入力しなければ利用できません。"
 
 msgid "Subscribed wiki pages (one regex per line)"
-msgstr "購読中のwikiページ[[BR]](1行あたりひとつの正規表現)"
+msgstr "購読中のwikiページ<<BR>>(1行あたりひとつの正規表現)"
 
 msgid "Create Profile"
 msgstr "プロファイル作成"
+
+msgid "TextCha (required)"
+msgstr "TextCha (必須)"
 
 msgid "Mail me my account data"
 msgstr "アカウント情報をメールする"
@@ -178,6 +191,72 @@ msgstr "ログイン"
 
 msgid "Action"
 msgstr "アクション"
+
+msgid "Enable user"
+msgstr "ユーザの有効化"
+
+msgid "disabled"
+msgstr "無効"
+
+msgid "Disable user"
+msgstr "ユーザの無効化"
+
+msgid "Mail account data"
+msgstr "アカウント情報をメール"
+
+#, python-format
+msgid "Argument \"%s\" must be a boolean value, not \"%s\""
+msgstr "引数\"%s\"はbooleanです。\"%s\"ではありません。"
+
+#, python-format
+msgid "Argument must be a boolean value, not \"%s\""
+msgstr "引数はbooleanです。\"%s\"ではありません。"
+
+#, python-format
+msgid "Argument \"%s\" must be an integer value, not \"%s\""
+msgstr "引数\"%s\"はintです。\"%s\"ではありません。"
+
+#, python-format
+msgid "Argument must be an integer value, not \"%s\""
+msgstr "引数はintです。\"%s\"ではありません。"
+
+#, python-format
+msgid "Argument \"%s\" must be a floating point value, not \"%s\""
+msgstr "引数\"%s\"はfloatです。\"%s\"ではありません。"
+
+#, python-format
+msgid "Argument must be a floating point value, not \"%s\""
+msgstr "引数はfloatです。\"%s\"ではありません。"
+
+#, python-format
+msgid "Argument \"%s\" must be a complex value, not \"%s\""
+msgstr "引数\"%s\"はcomplexです。\"%s\"ではありません。"
+
+#, python-format
+msgid "Argument must be a complex value, not \"%s\""
+msgstr "引数はcomplexです。\"%s\"ではありません。"
+
+#, python-format
+msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
+msgstr "引数\"%s\"は\"%s\"のうちのいずれかです。\"%s\"ではありません。"
+
+#, python-format
+msgid "Argument must be one of \"%s\", not \"%s\""
+msgstr "引数は\"%s\"のうちのいずれかです。\"%s\"ではありません。"
+
+msgid "Too many arguments"
+msgstr "引数が多すぎます。"
+
+msgid "Cannot have arguments without name following named arguments"
+msgstr "名前つき引数のうしろに名前なし引数を指定することはできません。"
+
+#, python-format
+msgid "Argument \"%s\" is required"
+msgstr "引数\"%s\"は必須です。"
+
+#, python-format
+msgid "No argument named \"%s\""
+msgstr "\"%s\"という引数はありません。"
 
 #, python-format
 msgid "Expected \"=\" to follow \"%(token)s\""
@@ -256,13 +335,13 @@ msgstr "[%sを読む権限がありません]"
 
 #, python-format
 msgid ""
-"'''[[BR]]Your draft based on revision %(draft_rev)d (saved %"
+"'''<<BR>>Your draft based on revision %(draft_rev)d (saved %"
 "(draft_timestamp_str)s) can be loaded instead of the current revision %"
 "(page_rev)d by using the load draft button - in case you lost your last edit "
 "somehow without saving it.''' A draft gets saved for you when you do a "
 "preview, cancel an edit or unsuccessfully save."
 msgstr ""
-"'''[[BR]]\"ドラフトをロード\"ボタンによって、現在のリビジョン %(page_rev)dで"
+"'''<<BR>>\"ドラフトをロード\"ボタンによって、現在のリビジョン %(page_rev)dで"
 "はなく、リビジョン %(draft_rev)d (%(draft_timestamp_str)sに保存)を基にしたド"
 "ラフトをロードすることができます。'''ドラフトはプレビューや編集のキャンセル、"
 "保存失敗時に作成されます。"
@@ -298,6 +377,9 @@ msgstr "テキストモード"
 msgid "Load Draft"
 msgstr "ドラフトをロード"
 
+msgid "Trivial change"
+msgstr "ささいな変更"
+
 msgid "Comment:"
 msgstr "コメント:"
 
@@ -307,9 +389,6 @@ msgstr "<追加無し>"
 #, python-format
 msgid "Add to: %(category)s"
 msgstr "%(category)sに追加"
-
-msgid "Trivial change"
-msgstr "ささいな変更"
 
 msgid "Remove trailing whitespace from each line"
 msgstr "行末の空白を削除"
@@ -489,6 +568,22 @@ msgstr ""
 "ページをロックすることができませんでした。'最新'のファイルが存在しないのかも"
 "しれません。"
 
+#, python-format
+msgid ""
+"Unable to determine current page revision from the 'current' file. The page %"
+"s is damaged and cannot be edited right now."
+msgstr ""
+"現在のファイルから最新のリビジョンを判断することができません。ページ %s は破"
+"損しているため、編集することはできません。"
+
+#, python-format
+msgid "Cannot save page %s, no storage space left."
+msgstr "ページ %s を保存することができません。ディスクがいっぱいです。"
+
+#, python-format
+msgid "An I/O error occurred while saving page %s (errno=%d)"
+msgstr "ページ %s を保存中にI/Oエラーが発生しました。(errno=%d)"
+
 msgid "You are not allowed to edit this page!"
 msgstr "このページを削除する権限がありません。"
 
@@ -545,16 +640,16 @@ msgstr ""
 #, python-format
 msgid ""
 "This page was opened for editing or last previewed at %(timestamp)s by %"
-"(owner)s.[[BR]]\n"
+"(owner)s.<<BR>>\n"
 "'''You should ''refrain from editing'' this page for at least another %"
 "(mins_valid)d minute(s),\n"
-"to avoid editing conflicts.'''[[BR]]\n"
+"to avoid editing conflicts.'''<<BR>>\n"
 "To leave the editor, press the Cancel button."
 msgstr ""
 "このページは%(timestamp)sに%(owner)sによって編集が開始された、またはプレ"
-"ビューされました。[[BR]]\n"
+"ビューされました。<<BR>>\n"
 "'''編集の衝突を避けるため、あと%(mins_valid)d分は''編集を行わないでくださ"
-"い。'''''[[BR]]\n"
+"い。'''''<<BR>>\n"
 "キャンセルボタンで編集を中断できます。"
 
 msgid "<unknown>"
@@ -639,6 +734,9 @@ msgstr "前"
 msgid "Next"
 msgstr "次"
 
+msgid "rev"
+msgstr "リビジョン"
+
 msgid "current"
 msgstr "現在"
 
@@ -714,12 +812,30 @@ msgstr "テキスト検索"
 msgid "Not supported mimetype of file: %s"
 msgstr "ファイル:%s のMIMEタイプはサポートされていません。"
 
+msgid "Embedding of object by chosen formatter not possible"
+msgstr "選択したフォーマッタでオブジェクトを埋め込むことはできません。"
+
 msgid "Embedded"
 msgstr "埋め込み"
+
+msgid ""
+"Not enough arguments given to EmbedObject macro! Try <<EmbedObject"
+"(attachment [,width=width] [,height=height] [,alt=alternate Text])>>"
+msgstr ""
+"EmbedObjectマクロに必要な引数が不足しています。<<EmbedObject(attachment [,"
+"width=width] [,height=height] [,alt=alternate Text])>>を試してみてください。"
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "添付ファイル\"%(filename)s\"のアップロード"
+
+msgid ""
+"Not enough arguments given to EmbedObject macro! Try <<EmbedObject(url, "
+"url_mimetype [,width=width] [,height=height] [,alt=alternate Text])>>"
+msgstr ""
+"EmbedObjectマクロに必要な引数が不足しています。<<EmbedObject(url, "
+"url_mimetype [,width=width] [,height=height] [,alt=alternate Text])>>を試して"
+"みてください。"
 
 #, python-format
 msgid "Invalid MonthCalendar calparms \"%s\"!"
@@ -811,16 +927,14 @@ msgid "Xapian Version"
 msgstr "Xapianバージョン"
 
 msgid "PyStemmer not installed"
-msgstr ""
+msgstr "PyStemmerがインストールされていません"
 
 msgid "Stemming for Xapian"
-msgstr ""
+msgstr "Xapian向けStemming"
 
-#, fuzzy
 msgid "PyStemmer Version"
-msgstr "Pythonのバージョン"
+msgstr "PyStemmerのバージョン"
 
-#, fuzzy
 msgid "PyStemmer stems"
 msgstr "Pythonのバージョン"
 
@@ -904,18 +1018,20 @@ msgstr "以下のひとつ以上の言葉を含む"
 msgid "not containing the following terms"
 msgstr "以下の言葉を含まない"
 
-msgid "belonging to one of the following categories"
-msgstr "以下のカテゴリーのいずれかに属す"
-
 msgid "last modified since (e.g. last 2 weeks)"
 msgstr "最終更新日 (例: last 2 weeks)"
+
+msgid "any category"
+msgstr "すべてのカテゴリー"
 
 msgid "any language"
 msgstr "すべての言語"
 
-#, fuzzy
 msgid "any mimetype"
 msgstr "すべてのMIMEタイプ"
+
+msgid "Categories"
+msgstr "カテゴリー"
 
 msgid "Language"
 msgstr "言語"
@@ -1281,6 +1397,9 @@ msgstr "書式のヘルプ"
 msgid "UserPreferences"
 msgstr "ユーザプレファレンス"
 
+msgid "SendMyPassword"
+msgstr "パスワード送信"
+
 msgid "WikiLicense"
 msgstr "Wikiライセンス"
 
@@ -1312,7 +1431,7 @@ msgid "Sun"
 msgstr "日"
 
 msgid "AttachFile"
-msgstr "添付ファイル"
+msgstr "ファイル添付"
 
 msgid "DeletePage"
 msgstr "ページ削除"
@@ -1388,37 +1507,37 @@ msgid "# of hits"
 msgstr "ヒットカウント"
 
 msgid ""
-" Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
-"(''')]]'''bold'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''bold "
-"italics'''''[[Verbatim(''''')]]; [[Verbatim('')]]''mixed ''[[Verbatim"
-"(''')]]'''''bold'''[[Verbatim(''')]] and italics''[[Verbatim('')]]; "
-"[[Verbatim(----)]] horizontal rule.\n"
-" Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title "
-"2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim"
-"(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim"
-"(=====)]].\n"
+" Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
+"italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed ''<<Verbatim(''')"
+">>'''''bold'''<<Verbatim(''')>> and italics''<<Verbatim('')>>; <<Verbatim"
+"(----)>> horizontal rule.\n"
+" Headings:: <<Verbatim(=)>> Title 1 <<Verbatim(=)>>; <<Verbatim(==)>> Title "
+"2 <<Verbatim(==)>>; <<Verbatim(===)>> Title 3 <<Verbatim(===)>>;   <<Verbatim"
+"(====)>> Title 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Title 5 <<Verbatim"
+"(=====)>>.\n"
 " Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
 "#n start numbering at n; space alone indents.\n"
-" Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim([\"brackets and "
-"double quotes\"])]]; url; [url]; [url label].\n"
+" Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])"
+">>.\n"
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
 "(!) For more help, see HelpOnEditing or SyntaxReference.\n"
 msgstr ""
-" 強調:: [[Verbatim('')]]''イタリック''[[Verbatim('')]]、[[Verbatim"
-"(''')]]'''ボールド'''[[Verbatim(''')]]、[[Verbatim(''''')]]'''''ボールドイタ"
-"リック'''''[[Verbatim(''''')]]、[[Verbatim('')]]''混合 ''[[Verbatim"
-"(''')]]'''''ボールド'''[[Verbatim(''')]]とイタリック''[[Verbatim('')]]、"
-"[[Verbatim(----)]] 水平線。\n"
-" 見出し:: [[Verbatim(=)]] タイトル1 [[Verbatim(=)]]、[[Verbatim(==)]] タイト"
-"ル2 [[Verbatim(==)]]、[[Verbatim(===)]] タイトル3 [[Verbatim(===)]]、"
-"[[Verbatim(====)]] タイトル4 [[Verbatim(====)]]、[[Verbatim(=====)]] タイトル"
-"5 [[Verbatim(=====)]]。\n"
+" 強調:: <<Verbatim('')>>''イタリック''<<Verbatim('')>>、<<Verbatim(''')"
+">>'''ボールド'''<<Verbatim(''')>>、<<Verbatim(''''')>>'''''ボールドイタリッ"
+"ク'''''<<Verbatim(''''')>>、<<Verbatim('')>>''混合 ''<<Verbatim(''')"
+">>'''''ボールド'''<<Verbatim(''')>>とイタリック''<<Verbatim('')>>、<<Verbatim"
+"(----)>> 水平線。\n"
+" 見出し:: <<Verbatim(=)>> タイトル1 <<Verbatim(=)>>、<<Verbatim(==)>> タイト"
+"ル2 <<Verbatim(==)>>、<<Verbatim(===)>> タイトル3 <<Verbatim(===)>>、"
+"<<Verbatim(====)>> タイトル4 <<Verbatim(====)>>、<<Verbatim(=====)>> タイトル"
+"5 <<Verbatim(=====)>>。\n"
 " リスト:: 半角スペースに続けて: * 小丸、1., a., A., i., I. 番号付アイテム、1."
 "#n nから番号開始、半角スペースのみでインデント。\n"
-" リンク:: [[Verbatim(JoinCapitalizedWords)]]、[[Verbatim([\"大括弧と二重引用"
-"符\"])]]; url; [url]; [url ラベル]。\n"
+" リンク:: <<Verbatim(JoinCapitalizedWords)>>、<<Verbatim([[ターゲット|リンク"
+"テキスト]])>>。\n"
 " 表:: || セルテキスト |||| 2列にわたるセルテキスト ||、表やタイトルのあとには"
 "空白を入力しないでください。\n"
 "\n"
@@ -1426,41 +1545,42 @@ msgstr ""
 "い。\n"
 
 msgid ""
-"Emphasis: <i>*italic*</i> <b>**bold**</b> ``monospace``<br/>\n"
-"<br/><pre>\n"
+"{{{\n"
+"Emphasis: *italic* **bold** ``monospace``\n"
+"\n"
 "Headings: Heading 1  Heading 2  Heading 3\n"
 "          =========  ---------  ~~~~~~~~~\n"
 "\n"
 "Horizontal rule: ---- \n"
+"\n"
 "Links: TrailingUnderscore_ `multi word with backticks`_ external_ \n"
 "\n"
-".. _external: http://external-site.net/foo/\n"
+".. _external: http://external-site.example.org/foo/\n"
 "\n"
 "Lists: * bullets; 1., a. numbered items.\n"
-"</pre>\n"
-"<br/>\n"
+"}}}\n"
 "(!) For more help, see the \n"
-"<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
-"reStructuredText Quick Reference\n"
-"</a>.\n"
+"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
+"reStructuredText Quick Reference]].\n"
 msgstr ""
-"強調: <i>*イタリック*</i> <b>**ボールド**</b> ``等幅``<br/>\n"
-"<br/><pre>\n"
+"{{{\n"
+"強調: *イタリック* **ボールド** ``等幅``\n"
+"\n"
 "見出し: 見出し1  見出し2  見出し3\n"
 "        =======  -------  ~~~~~~~\n"
 "\n"
 "水平線: ---- \n"
+"\n"
 "リンク: TrailingUnderscore_ `multi word with backticks`_ external_ \n"
 "\n"
-".. _external: http://external-site.net/foo/\n"
+".. _external: http://external-site.example.org/foo/\n"
 "\n"
 "リスト: * 小丸; 1., a. 番号付アイテム\n"
-"</pre>\n"
-"<br/>\n"
+"}}}\n"
 "(!) 詳細は\n"
-"<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
-"reStructuredText Quick Reference\n"
-"</a>を参照してください。\n"
+"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
+"reStructuredText Quick Reference]].\n"
+"を参照してください。\n"
 
 msgid "UnSubscribe"
 msgstr "購読中止"
@@ -1504,8 +1624,8 @@ msgstr "ささいな変更の通知も受ける"
 msgid "Disable this account forever"
 msgstr "このアカウントを無効にする"
 
-msgid "(Use Firstname''''''Lastname)"
-msgstr "(Firstname''''''Lastname 形式)"
+msgid "(Use FirstnameLastname)"
+msgstr "(FirstnameLastname 形式)"
 
 msgid "Alias-Name"
 msgstr "別名"
@@ -1549,17 +1669,14 @@ msgstr ""
 msgid "You must login to add a quicklink."
 msgstr "クイックリンクを追加するには、ログインしてください。"
 
-msgid "Your quicklink to this page has been removed."
-msgstr "このページへのクイックリンクを削除しました。"
-
-msgid "Your quicklink to this page could not be removed."
-msgstr "このページへのクイックリンクを削除できませんでした。"
-
 msgid "A quicklink to this page has been added for you."
 msgstr "このページへのクイックリンクを追加しました。"
 
 msgid "A quicklink to this page could not be added for you."
 msgstr "このページへのクイックリンクを追加できませんでした。"
+
+msgid "You already have a quicklink to this page."
+msgstr "既にこのページへのクイックリンクは追加済みです。"
 
 msgid "Missing password. Please enter user name and password."
 msgstr ""
@@ -1567,6 +1684,18 @@ msgstr ""
 
 msgid "Sorry, login failed."
 msgstr "ログインに失敗しました。"
+
+msgid "Your subscription to this page has been removed."
+msgstr "このページの購読を停止しました。"
+
+msgid "Can't remove regular expression subscription!"
+msgstr "正規表現で記述した購読を停止することはできません。"
+
+msgid "Edit the subscription regular expressions in your UserPreferences."
+msgstr "[\"ユーザプレファレンス\"]にて、購読の正規表現を編集してください。"
+
+msgid "You need to be subscribed to unsubscribe."
+msgstr "購読していないページの購読を止めることはできません。"
 
 #, python-format
 msgid "[%d attachments]"
@@ -1659,8 +1788,14 @@ msgstr "ファイルを添付する権限がありません。"
 msgid "File attachments are not allowed in this wiki!"
 msgstr "このwikiではファイルの添付はできません。"
 
-msgid "You are not allowed to save a drawing on this page."
-msgstr "このページにdrawingを保存する権限がありません。"
+msgid "You are not allowed to get attachments from this page."
+msgstr "このページの添付ファイルをダウンロードする権限がありません。"
+
+msgid "You are not allowed to view attachments of this page."
+msgstr "このページの添付ファイルを見る権限がありません。"
+
+msgid "You are not allowed to move attachments from this page."
+msgstr "このページから添付ファイルを移動する権限がありません。"
 
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
@@ -1669,11 +1804,11 @@ msgstr ""
 "ファイルの中身がありません。ファイル名からASCII以外の文字を削除して、もう一度"
 "試してください。"
 
+msgid "You are not allowed to save a drawing on this page."
+msgstr "このページにdrawingを保存する権限がありません。"
+
 msgid "You are not allowed to delete attachments on this page."
 msgstr "このページの添付ファイルを削除する権限がありません。"
-
-msgid "You are not allowed to move attachments from this page."
-msgstr "このページから添付ファイルを移動する権限がありません。"
 
 msgid "Move aborted!"
 msgstr "移動は中断されました。"
@@ -1681,21 +1816,15 @@ msgstr "移動は中断されました。"
 msgid "Please use the interactive user interface to move attachments!"
 msgstr "対話的なユーザインターフェースから添付ファイルを移動してください。"
 
-msgid "You are not allowed to get attachments from this page."
-msgstr "このページの添付ファイルをダウンロードする権限がありません。"
-
 msgid "You are not allowed to unzip attachments of this page."
 msgstr "このページの添付ファイルをunzipする権限がありません。"
 
 msgid "You are not allowed to install files."
 msgstr "ファイルをインストールする権限がありません。"
 
-msgid "You are not allowed to view attachments of this page."
-msgstr "このページの添付ファイルを見る権限がありません。"
-
 #, python-format
-msgid "Unsupported upload action: %s"
-msgstr "サポートされていないアップロードアクション: %s"
+msgid "Unsupported AttachFile sub-action: %s"
+msgstr "サポートされていないファイル添付アクション: %s"
 
 #, python-format
 msgid "Attachments for \"%(pagename)s\""
@@ -1789,6 +1918,9 @@ msgstr "%(filename)sはzipファイルではありません。"
 msgid "Attachment '%(filename)s'"
 msgstr "添付ファイル '%(filename)s'"
 
+msgid "Download"
+msgstr "ダウンロード"
+
 msgid "Package script:"
 msgstr "パッケージスクリプト:"
 
@@ -1808,6 +1940,9 @@ msgstr "ファイルタイプが不明なため、添付ファイルをインラ
 msgid "attachment:%(filename)s of %(pagename)s"
 msgstr "%(pagename)sの添付ファイル:%(filename)s"
 
+msgid "Filename"
+msgstr "ファイル名"
+
 msgid "This page is already deleted or was never created!"
 msgstr "このページは既に削除された、またはまだ作られていません。"
 
@@ -1822,6 +1957,18 @@ msgstr "名前の変更についてのコメント(省略可)"
 
 msgid "Really rename this page?"
 msgstr "このページの名前を本当に変更しますか？"
+
+msgid "You must login to remove a quicklink."
+msgstr "クイックリンクを削除するには、ログインしてください。"
+
+msgid "Your quicklink to this page has been removed."
+msgstr "このページへのクイックリンクを削除しました。"
+
+msgid "Your quicklink to this page could not be removed."
+msgstr "このページへのクイックリンクを削除できませんでした。"
+
+msgid "You need to have a quicklink to this page to remove it."
+msgstr "追加していないページへのクイックリンクは削除できません。"
 
 #, python-format
 msgid "Full Link List for \"%s\""
@@ -1851,10 +1998,10 @@ msgstr "変更を戻す際に、例外が発生しました。"
 
 msgid ""
 "Please enter your password of your account at the remote wiki below. "
-"[[BR]] /!\\ You should trust both wikis because the password could be read "
+"<<BR>> /!\\ You should trust both wikis because the password could be read "
 "by the particular administrators."
 msgstr ""
-"リモートwikiのアカウントに対するパスワードを入力してください。[[BR]] /!\\ た"
+"リモートwikiのアカウントに対するパスワードを入力してください。<<BR>> /!\\ た"
 "だし、双方のwiki管理者にパスワードを見られる可能性があります。"
 
 msgid "Operation was canceled."
@@ -2057,14 +2204,8 @@ msgstr ""
 "購読を利用するには、[\"ユーザプレファレンス\"]にてメールアドレスを登録してく"
 "ださい。"
 
-msgid "Your subscription to this page has been removed."
-msgstr "このページの購読を停止しました。"
-
-msgid "Can't remove regular expression subscription!"
-msgstr "正規表現で記述した購読を停止することはできません。"
-
-msgid "Edit the subscription regular expressions in your UserPreferences."
-msgstr "[\"ユーザプレファレンス\"]にて、購読の正規表現を編集してください。"
+msgid "You are already subscribed to this page."
+msgstr "このページは既に購読済みです。"
 
 msgid "You have been subscribed to this page."
 msgstr "このページの購読を開始しました。"
@@ -2136,11 +2277,11 @@ msgid ""
 "\n"
 "||'''Add a new personal page:'''||'''Related access control list "
 "group:'''||\n"
-"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
+"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
 "[\"%(username)s/ReadWriteGroup\"]||\n"
-"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[\"%"
 "(username)s/ReadGroup\"]||\n"
-"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
+"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
 "(username)s only||\n"
 "\n"
 msgstr ""
@@ -2157,11 +2298,11 @@ msgstr ""
 "\n"
 "||'''新しいパーソナルページの追加:'''||'''関連するアクセスコントロールリスト"
 "グループ:'''||\n"
-"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
+"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
 "[\"%(username)s/ReadWriteGroup\"]||\n"
-"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[\"%"
 "(username)s/ReadGroup\"]||\n"
-"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
+"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
 "(username)s only||\n"
 "\n"
 
@@ -2171,6 +2312,9 @@ msgstr "マイページの管理"
 #, python-format
 msgid "Subscribe users to the page %s"
 msgstr "ユーザをページ\"%s\"の購読者に追加"
+
+msgid "Enter user names (comma separated):"
+msgstr "ユーザ名を入力してください(カンマ区切り)):"
 
 #, python-format
 msgid "Subscribed for %s:"
@@ -2229,10 +2373,10 @@ msgstr "full-text search with your search terms"
 
 msgid ""
 "(!) You're performing a title search that might not include all related "
-"results of your search query in this wiki. [[BR]]"
+"results of your search query in this wiki. <<BR>>"
 msgstr ""
 "(!) You're performing a title search that might not include all related "
-"results of your search query in this wiki. [[BR]]"
+"results of your search query in this wiki. <<BR>>"
 
 msgid "Click here to perform a full-text search with your search terms!"
 msgstr "この言葉でテキスト検索するには、ここをクリックしてください"
@@ -2261,9 +2405,9 @@ msgid ""
 "  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
 "stuff).\n"
 "  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
-"  * Hit the [[GetText(Restore)]] button below.\n"
+"  * Hit the <<GetText(Restore)>> button below.\n"
 "\n"
-" * To make a backup, just hit the [[GetText(Backup)]] button and save the "
+" * To make a backup, just hit the <<GetText(Backup)>> button and save the "
 "file\n"
 "   you get to a secure place.\n"
 "\n"
@@ -2279,9 +2423,9 @@ msgstr ""
 "除してください)。\n"
 "  * バックアップファイルを backup_storage_dir に置いてください(scpやftpなどを"
 "利用)。\n"
-"  * 下の [[GetText(Restore)]] ボタンをクリックしてください。\n"
+"  * 下の <<GetText(Restore)>> ボタンをクリックしてください。\n"
 "\n"
-" * バックアップを作成するには、[[GetText(Backup)]] をクリックし、取得したファ"
+" * バックアップを作成するには、<<GetText(Backup)>> をクリックし、取得したファ"
 "イルを安全な場所に保存してください。\n"
 "\n"
 "Wiki設定中の backup_* が正しいことを確認してください。\n"
@@ -2316,9 +2460,8 @@ msgstr ""
 msgid "Local Site Map for \"%s\""
 msgstr "\"%s\"のローカルサイトマップ"
 
-#, python-format
-msgid "No pages like \"%s\"!"
-msgstr "\"%s\"のようなページはありません。"
+msgid "You are not allowed to create the supplementation page."
+msgstr "補足ページを作成する権限がありません。"
 
 #, python-format
 msgid "Invalid filename \"%s\"!"
@@ -2336,6 +2479,10 @@ msgstr "パッケージ名"
 
 msgid "List of page names - separated by a comma"
 msgstr "ページ名のリスト (カンマ区切り)"
+
+#, python-format
+msgid "No pages like \"%s\"!"
+msgstr "\"%s\"のようなページはありません。"
 
 msgid "No older revisions available!"
 msgstr "古いリビジョンはありません。"
@@ -2400,21 +2547,35 @@ msgstr "削除についてのコメント(省略可)"
 msgid "Really delete this page?"
 msgstr "このページを本当に削除しますか？"
 
+msgid "Options --pages and --search are mutually exclusive!"
+msgstr "--pages オプションと --search オプションは、同時には利用できません。"
+
+msgid "You must specify an output file!"
+msgstr "出力ファイルを指定してください。"
+
+msgid "No pages specified using --pages or --search, assuming full package."
+msgstr ""
+"--pages や --search でページが指定されませんでした。すべてのパッケージを対象"
+"とします。"
+
+msgid "Output file already exists! Cowardly refusing to continue!"
+msgstr "出力ファイルがすでに存在します。安全のため処理を停止します。"
+
+#~ msgid "belonging to one of the following categories"
+#~ msgstr "以下のカテゴリーのいずれかに属す"
+
 #~ msgid "Xapian stemming"
 #~ msgstr "Xapian stemming"
-
-#~ msgid "filename"
-#~ msgstr "ファイル名"
 
 #~ msgid ""
 #~ "~-If you submit this form, the submitted values will be displayed.\n"
 #~ "To use this form on other pages, insert a\n"
-#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "<<BR>><<BR>>'''{{{    <<Form(\"%(pagename)s\")>>}}}'''<<BR>><<BR>>\n"
 #~ "macro call.-~\n"
 #~ msgstr ""
 #~ "~-このフォームをサブミットすると、サブミットされた値が表示されます。\n"
 #~ "このフォームを別のページで利用するには、マクロ:\n"
-#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "<<BR>><<BR>>'''{{{    <<Form(\"%(pagename)s\")>>}}}'''<<BR>><<BR>>\n"
 #~ "を埋め込んでください。-~\n"
 
 #~ msgid ""
@@ -2427,9 +2588,6 @@ msgstr "このページを本当に削除しますか？"
 
 #~ msgid "print"
 #~ msgstr "印刷"
-
-#~ msgid "revert"
-#~ msgstr "前のバージョンに戻す"
 
 #~ msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
 #~ msgstr "\"%(pagename)s\"のバックアップが%(date)sに作成されました。"
@@ -2684,7 +2842,7 @@ msgstr "このページを本当に削除しますか？"
 #~ msgid "Show all changes in the last %s days."
 #~ msgstr "%s日以内の変更をすべて表示"
 
-#~ msgid "Title: %(titlesearch)s[[BR]]Text: %(textsearch)s"
+#~ msgid "Title: %(titlesearch)s<<BR>>Text: %(textsearch)s"
 #~ msgstr "タイトル: %(titlesearch)s<br/>テキスト: %(textsearch)s"
 
 #~ msgid "You must not use a group name as your user name."
@@ -2704,9 +2862,6 @@ msgstr "このページを本当に削除しますか？"
 
 #~ msgid "Reduce editor size"
 #~ msgstr "エディタを縮小"
-
-#~ msgid "An error occurred while reverting the page."
-#~ msgstr "前のバージョンに戻せませんでした。"
 
 #~ msgid "Alternatively, use one of these templates:"
 #~ msgstr "次のテンプレートを利用することもできます。"
