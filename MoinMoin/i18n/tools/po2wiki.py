@@ -40,18 +40,20 @@ def run():
 %s""" % (lang, lang, data)
 
 
-    from MoinMoin.support.BasicAuthTransport import BasicAuthTransport
-
     user = "ThomasWaldmann" # must be a known Wiki account
     password = os.environ.get("PASS", "")
     pagename = "MoinI18n/%s" % lang
     pagedata = data.encode('utf-8')
 
-    authtrans = BasicAuthTransport(user, password)
-    wiki = xmlrpclib.ServerProxy("http://master.moinmo.in/?action=xmlrpc2", transport=authtrans)
-
-    rc = wiki.putPage(pagename, pagedata)
-    print "Page: %s rc=%s" % (pagename, rc)
+    wiki = xmlrpclib.ServerProxy("http://test17.moinmo.in/?action=xmlrpc2")
+    token = wiki.getAuthToken(user, password)
+    mc = xmlrpclib.MultiCall(wiki)
+    mc.applyAuthToken(token)
+    mc.WhoAmI() # then we see in the result if auth worked correctly!
+    mc.putPage(pagename, pagedata)
+    mc.deleteAuthToken(token)
+    result = mc()
+    print "Page: %s rc=%r" % (pagename, list(result))
 
 if __name__ == "__main__":
     pass
