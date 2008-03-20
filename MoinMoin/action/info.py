@@ -109,10 +109,7 @@ def execute(pagename, request):
             actions = []
             if line.action in ('SAVE', 'SAVENEW', 'SAVE/REVERT', 'SAVE/RENAME', ):
                 size = page.size(rev=rev)
-                if count == 0: # latest page
-                    actions.append(render_action(_('view'), {'action': 'show'}))
-                else:
-                    actions.append(render_action(_('view'), {'action': 'recall', 'rev': '%d' % rev}))
+                actions.append(render_action(_('view'), {'action': 'recall', 'rev': '%d' % rev}))
                 if count == 0:
                     rchecked = ' checked="checked"'
                     lchecked = ''
