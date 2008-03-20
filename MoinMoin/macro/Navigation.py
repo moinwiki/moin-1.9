@@ -8,6 +8,7 @@
 
 import re
 from MoinMoin.Page import Page
+from MoinMoin import wikiutil
 
 Dependencies = ["namespace"]
 
@@ -65,11 +66,12 @@ class Navigation:
     # querystring for slideshow links
     PROJECTION = {'action': 'print', 'media': 'projection', }
 
-    def __init__(self, macro, args):
+    def __init__(self, macro, scheme, depth):
         """ Prepare common values used during processing.
         """
         self.macro = macro
-        self.args = args.split(',')
+        self.scheme = scheme
+        self.depth = depth
         self._ = self.macro.request.getText
 
         self.pagename = self.macro.formatter.page.page_name
@@ -85,19 +87,17 @@ class Navigation:
         if self.print_mode and self.media != 'projection':
             return None
 
-        scheme = self.args[0] or '<default>'
-        return getattr(self, 'do_'+scheme, self.badscheme)()
+        return getattr(self, 'do_%s' % self.scheme, self.badscheme)()
 
 
     def badscheme(self):
         """ Bad scheme argument.
         """
         _ = self._
-        scheme = self.args[0]
         return (self.macro.formatter.sysmsg(1) +
                 self.macro.formatter.text(
             _("Unsupported navigation scheme '%(scheme)s'!") %
-            {'scheme': scheme}) +
+            {'scheme': self.scheme}) +
                 self.macro.formatter.sysmsg(0))
 
 
@@ -120,11 +120,6 @@ class Navigation:
                     self.macro.formatter.text(_('No parent page found!'))+
                     self.macro.formatter.sysmsg(0))
 
-        try:
-            depth = int(self.args[1])
-        except (IndexError, TypeError, ValueError):
-            depth = 0
-
         # iterate over children, adding links to all of them
         result = []
         children = _getPages(request, '^%s/' % re.escape(parent))
@@ -134,7 +129,7 @@ class Navigation:
             shortname = child[len(parent):]
 
             # possibly limit depth
-            if depth and shortname.count('/') > depth:
+            if self.depth and shortname.count('/') > self.depth:
                 continue
 
             if child == self.pagename:
@@ -221,14 +216,17 @@ class Navigation:
         return self.do_slideshow(focus=self.pagename) + ''.join(result)
 
 
-def execute(macro, args):
+def macro_Navigation(macro,
+                    scheme=wikiutil.required_arg((u'children', u'siblings',
+                                                  u'slideshow', u'slides')),
+                    depth=0):
     # get HTML code with the links
-    navi = Navigation(macro, args or '').dispatch()
+    navi = Navigation(macro, scheme, depth).dispatch()
 
     if navi:
         # return links packed into a table
-        return '<table class="navigation"><tr><td>%s</td></tr></table>' % navi
+        return u'<table class="navigation"><tr><td>%s</td></tr></table>' % navi
 
     # navigation disabled in plain print mode
-    return ''
+    return u''
 
