@@ -1,0 +1,26 @@
+In this directory is a collection of pre-made logging configuration files.
+
+You can use them like this:
+
+from MoinMoin import log
+log.load_config('.../wiki/config/logging/conffile')
+
+This is usually located somewhere at the begging of the server script you use,
+e.g. in moin.cgi, if you use cgi.
+
+If you don't configure logging using those lines, moin will use some built-in
+logging configuration (which might be correct for some cases, but incorrect
+for some other cases, so be careful!).
+
+CGI
+---
+You need to edit the moin.cgi that your webserver runs.
+
+CGI / Apache: use the stderr configuration, stuff will go to apache error.log
+CGI / IIS: use the logfile configuration and edit the logfile path
+
+You can make very flexible and powerful logging configurations using this
+mechanism, for more details see:
+
+http://www.python.org/doc/lib/logging-config-fileformat.html
+
