@@ -1008,10 +1008,9 @@ var search_hint = "%(search_hint)s";
             'do_button': _("Do"),
             'baseurl': self.request.getScriptname(),
             'pagename_quoted': wikiutil.quoteWikinameURL(self.request.page.page_name),
-            'pageurl': self.request.page.url(self.request),
             }
         html = '''
-<form class="actionsmenu" method="POST" action="%(pageurl)s">
+<form class="actionsmenu" method="GET" action="">
 <div>
     <label>%(label)s</label>
     <select name="action"
