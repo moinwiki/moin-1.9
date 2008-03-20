@@ -7,7 +7,7 @@
 
     @license: GNU GPL, see COPYING for details.
 """
-import os
+import os, py
 from MoinMoin import macro
 from MoinMoin.action import AttachFile
 from MoinMoin.macro import EmbedObject
@@ -24,6 +24,18 @@ class TestEmbedObject:
         AttachFile.getAttachDir(self.request, self.pagename)
         filename = 'test.ogg'
         filecontent = u'vorbis'
+        AttachFile.add_attachment(self.request, self.pagename, filename, filecontent, overwrite=0)
+        filename = 'test.svg'
+        filecontent = u'SVG'
+        AttachFile.add_attachment(self.request, self.pagename, filename, filecontent, overwrite=0)
+        filename = 'test.mpg'
+        filecontent = u'MPG'
+        AttachFile.add_attachment(self.request, self.pagename, filename, filecontent, overwrite=0)
+        filename = 'test.pdf'
+        filecontent = u'PDF'
+        AttachFile.add_attachment(self.request, self.pagename, filename, filecontent, overwrite=0)
+        filename = 'test.mp3'
+        filecontent = u'MP3'
         AttachFile.add_attachment(self.request, self.pagename, filename, filecontent, overwrite=0)
         self.shouldDeleteTestPage = True
 
@@ -55,6 +67,19 @@ class TestEmbedObject:
         assert body is not None
         self.request.reset()
         self.page.saveText(body, 0)
+        
+    def testEmbedObjectMimetype(self):
+        """ tests defined mimetyes """
+        files = ('test.ogg', 'test.svg', 'test.mpg', 'test.mp3')
+        mimetype = ('application/ogg', 'image/svg+xml', 'video/mpeg', 'audio/mpeg')
+        index = 0
+        for filename in files:
+            text = '= %s =' % filename
+            self._createTestPage(text)
+            m = self._make_macro()
+            result = m.execute('EmbedObject', u'%s' % filename)
+            assert mimetype[index] in result
+            index += 1
 
     def testEmbedObjectDefaultValues(self):
         """ tests default values of macro EmbedObject """
