@@ -540,6 +540,9 @@ class TestExtensionInvoking:
         assert a == 7
         assert choice == u'a'
 
+    def _test_invoke_choice_required(self, i=wikiutil.required_arg((u'b', u'a'))):
+        assert i == u'a'
+
     def _test_trailing(self, a, _trailing_args=[]):
         assert _trailing_args == [u'a']
 
@@ -615,6 +618,10 @@ class TestExtensionInvoking:
                        self._test_invoke_float_required, u'')
         ief(self.request, self._test_invoke_float_required, u'1.4')
         ief(self.request, self._test_invoke_float_required, u'i=1.4')
+        py.test.raises(ValueError, ief, self.request,
+                       self._test_invoke_choice_required, u'')
+        ief(self.request, self._test_invoke_choice_required, u'a')
+        ief(self.request, self._test_invoke_choice_required, u'i=a')
         py.test.raises(ValueError, ief, self.request,
                        self._test_invoke_float_required, u',')
 
