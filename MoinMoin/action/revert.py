@@ -23,6 +23,7 @@ class revert(ActionBase):
         _ = self._
         self.form_trigger = 'revert'
         self.form_trigger_label = _('Revert')
+        self.method = 'POST'
 
     def is_allowed(self):
         # this is not strictly necessary because the underlying storage code checks
@@ -52,7 +53,7 @@ class revert(ActionBase):
         comment = form.get('comment', [u''])[0]
         comment = wikiutil.clean_input(comment)
 
-        if self.request.method != 'POST':
+        if self.request.request_method != 'POST':
             return False, u''
 
         rev = self.request.rev
