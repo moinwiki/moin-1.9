@@ -46,7 +46,7 @@ def _check_param_value(param, value, valuetype):
     else:
         return ""
 
-def macro_EmbedObject(macro, target=None, pagename=None,
+def macro_EmbedObject(macro, target=wikiutil.required_arg(unicode), pagename=None,
                       width=wikiutil.UnitArgument(None, float, ['px', 'em', 'mm', '%']),
                       height=wikiutil.UnitArgument(None, float, ['px', 'em', 'mm', '%']),
                       alt=u'',
@@ -74,13 +74,6 @@ def macro_EmbedObject(macro, target=None, pagename=None,
     # AttachFile calls always with pagename. Users can call the macro from a different page as the attachment is saved.
     if not pagename:
         pagename = fmt.page.page_name
-
-    if not target:
-        return fmt.text(_('%(extension_name)s %(extension_type)s: Required argument %(argument_name)s missing.') % {
-            "extension_name": extension_name,
-            "extension_type": extension_type,
-            "argument_name": "target",
-        })
 
     if not wikiutil.is_URL(target):
         pagename, fname = AttachFile.absoluteName(target, pagename)
