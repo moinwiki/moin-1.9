@@ -1645,8 +1645,8 @@ class required_arg:
         Initialise a required_arg
         @param argtype: the type the argument should have
         """
-        if not (argtype in (bool, int, long, float, complex, unicode, tuple, list) or
-                isinstance(argtype, IEFArgument)):
+        if not (argtype in (bool, int, long, float, complex, unicode) or
+                isinstance(argtype, (IEFArgument, tuple, list))):
             raise TypeError("argtype must be a valid type")
         self.argtype = argtype
 
@@ -1705,7 +1705,13 @@ def invoke_extension_function(request, function, args, fixed_args=[]):
                 return None
             return default.parse_argument(value)
         elif isinstance(default, required_arg):
-            return _convert_arg(request, value, default.argtype, name)
+            if isinstance(default.argtype, (tuple, list)):
+                # treat choice specially and return None if no choice
+                # is given in the value
+                choices = [None] + list(default.argtype)
+                return get_choice(request, value, name, choices)
+            else:
+                return _convert_arg(request, value, default.argtype, name)
         return value
 
     assert isinstance(fixed_args, (list, tuple))
