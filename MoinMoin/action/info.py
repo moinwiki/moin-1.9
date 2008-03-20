@@ -119,6 +119,8 @@ def execute(pagename, request):
                 else:
                     lchecked = rchecked = ''
                 diff = '<input type="radio" name="rev1" value="%d"%s><input type="radio" name="rev2" value="%d"%s>' % (rev, lchecked, rev, rchecked)
+                if rev > 1:
+                    diff += render_action(' ' + _('to previous'), {'action': 'diff', 'rev1': rev-1, 'rev2': rev})
                 comment = line.comment
                 if not comment:
                     if '/REVERT' in line.action:
