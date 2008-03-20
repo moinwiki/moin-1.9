@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-30 19:24+0200\n"
+"POT-Creation-Date: 2008-02-02 14:58+0100\n"
 "PO-Revision-Date: 2006-06-15 15:55+0200\n"
 "Last-Translator: jmarton@omikk.bme.hu, arostas@omikk.bme.hu\n"
 "Language-Team: Hungarian <HU@li.org>\n"
@@ -35,6 +35,9 @@ msgstr ""
 msgid "Please provide a valid email address!"
 msgstr "Kérjük, hogy érvényes levélcímet adjon meg!"
 
+msgid "If an account with this username exists, an email was sent."
+msgstr ""
+
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "Nem találtunk a megadott '%(email)s' címhez felhasználói azonosítót!"
@@ -43,6 +46,9 @@ msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
 "Használja a FelhasználóiBeállítások''''''at a beállításainak "
 "megváltoztatásához, vagy új felhasználói fiók létrehozásához."
+
+msgid "TextCha: Wrong answer! Go back and try again..."
+msgstr ""
 
 msgid "Empty user name. Please enter a user name."
 msgstr "Üres felhasználónév. Kérjük adja meg a felhasználónevet."
@@ -66,6 +72,10 @@ msgstr "A jelszavak nem egyeznek!"
 
 msgid "Please specify a password!"
 msgstr "Kérjük adja meg a jelszót!"
+
+#, python-format
+msgid "Password not acceptable: %s"
+msgstr ""
 
 msgid ""
 "Please provide your email address. If you lose your login information, you "
@@ -154,6 +164,9 @@ msgstr "Az előfizetett wiki-lapok (soronként egy reguláris kifejezés)"
 msgid "Create Profile"
 msgstr "Profil létrehozása"
 
+msgid "TextCha (required)"
+msgstr ""
+
 msgid "Mail me my account data"
 msgstr "Kérem a felhasználói adataim elküldését levélben"
 
@@ -179,6 +192,76 @@ msgstr "Belépés"
 
 msgid "Action"
 msgstr "Művelet"
+
+#, fuzzy
+msgid "Enable user"
+msgstr "Bekapcsolt"
+
+#, fuzzy
+msgid "disabled"
+msgstr "Kikapcsolt"
+
+#, fuzzy
+msgid "Disable user"
+msgstr "Kikapcsolt"
+
+#, fuzzy
+msgid "Mail account data"
+msgstr "Kérem a felhasználói adataim elküldését levélben"
+
+#, python-format
+msgid "Argument \"%s\" must be a boolean value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument must be a boolean value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" must be an integer value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument must be an integer value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" must be a floating point value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument must be a floating point value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" must be a complex value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument must be a complex value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument must be one of \"%s\", not \"%s\""
+msgstr ""
+
+msgid "Too many arguments"
+msgstr ""
+
+msgid "Cannot have arguments without name following named arguments"
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" is required"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "No argument named \"%s\""
+msgstr "A(z) \"%s\" laphoz nincs hasonló!"
 
 #, python-format
 msgid "Expected \"=\" to follow \"%(token)s\""
@@ -258,7 +341,7 @@ msgstr "[A(z) %s minta nem olvasható]"
 
 #, python-format
 msgid ""
-"'''[[BR]]Your draft based on revision %(draft_rev)d (saved %"
+"'''<<BR>>Your draft based on revision %(draft_rev)d (saved %"
 "(draft_timestamp_str)s) can be loaded instead of the current revision %"
 "(page_rev)d by using the load draft button - in case you lost your last edit "
 "somehow without saving it.''' A draft gets saved for you when you do a "
@@ -295,6 +378,9 @@ msgstr "Szöveg"
 msgid "Load Draft"
 msgstr ""
 
+msgid "Trivial change"
+msgstr "Lényegtelen változtatás"
+
 msgid "Comment:"
 msgstr "Megjegyzés:"
 
@@ -304,9 +390,6 @@ msgstr "<Nincs kiegészítés>"
 #, python-format
 msgid "Add to: %(category)s"
 msgstr "Hozzáadás a %(category)s-hoz"
-
-msgid "Trivial change"
-msgstr "Lényegtelen változtatás"
 
 msgid "Remove trailing whitespace from each line"
 msgstr "A sorvégi szóközök eltávolítása"
@@ -485,6 +568,20 @@ msgstr "A lapot nem lehetett zárolni. Váratlan hiba (errno=%d)."
 msgid "Page could not get locked. Missing 'current' file?"
 msgstr "A lapot nem lehetett zárolni. Hiányzik a 'current' nevű állomány?"
 
+#, python-format
+msgid ""
+"Unable to determine current page revision from the 'current' file. The page %"
+"s is damaged and cannot be edited right now."
+msgstr ""
+
+#, python-format
+msgid "Cannot save page %s, no storage space left."
+msgstr ""
+
+#, python-format
+msgid "An I/O error occurred while saving page %s (errno=%d)"
+msgstr ""
+
 msgid "You are not allowed to edit this page!"
 msgstr "Nem szerkesztheti ezt a lapot!"
 
@@ -541,14 +638,14 @@ msgstr ""
 #, python-format
 msgid ""
 "This page was opened for editing or last previewed at %(timestamp)s by %"
-"(owner)s.[[BR]]\n"
+"(owner)s.<<BR>>\n"
 "'''You should ''refrain from editing'' this page for at least another %"
 "(mins_valid)d minute(s),\n"
-"to avoid editing conflicts.'''[[BR]]\n"
+"to avoid editing conflicts.'''<<BR>>\n"
 "To leave the editor, press the Cancel button."
 msgstr ""
 "Ezt a lapot %(owner)s %(timestamp)s-kor nyitotta meg vagy ekkor választotta "
-"ki a Nézetet utoljára.[[BR]]\n"
+"ki a Nézetet utoljára.<<BR>>\n"
 "'''Ha el szeretné kerülni a szerkesztői ütközéseket ''ne szerkessze'' ezt az "
 "oldalt legalább még %(mins_valid)d percig!'''A szerkesztő elhagyásához "
 "nyomja meg a Visszavonás gombot."
@@ -633,6 +730,10 @@ msgstr "Nézet"
 msgid "Next"
 msgstr "Szöveg"
 
+#, fuzzy
+msgid "rev"
+msgstr "visszaállás"
+
 msgid "current"
 msgstr ""
 
@@ -706,12 +807,25 @@ msgstr "Szövegkeresés"
 msgid "Not supported mimetype of file: %s"
 msgstr ""
 
+msgid "Embedding of object by chosen formatter not possible"
+msgstr ""
+
 msgid "Embedded"
+msgstr ""
+
+msgid ""
+"Not enough arguments given to EmbedObject macro! Try <<EmbedObject"
+"(attachment [,width=width] [,height=height] [,alt=alternate Text])>>"
 msgstr ""
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "A(z) \"%(filename)s\" melléklet feltöltése"
+
+msgid ""
+"Not enough arguments given to EmbedObject macro! Try <<EmbedObject(url, "
+"url_mimetype [,width=width] [,height=height] [,alt=alternate Text])>>"
+msgstr ""
 
 #, python-format
 msgid "Invalid MonthCalendar calparms \"%s\"!"
@@ -900,11 +1014,10 @@ msgstr ""
 msgid "not containing the following terms"
 msgstr ""
 
-#, fuzzy
-msgid "belonging to one of the following categories"
-msgstr "Ez a lap a következő lapokhoz kacsolódik:"
-
 msgid "last modified since (e.g. last 2 weeks)"
+msgstr ""
+
+msgid "any category"
 msgstr ""
 
 #, fuzzy
@@ -912,6 +1025,9 @@ msgid "any language"
 msgstr "Kedvenc nyelv"
 
 msgid "any mimetype"
+msgstr ""
+
+msgid "Categories"
 msgstr ""
 
 msgid "Language"
@@ -1288,6 +1404,10 @@ msgstr "FormázásiSegédlet"
 msgid "UserPreferences"
 msgstr "FelhasználóiBeállítások"
 
+#, fuzzy
+msgid "SendMyPassword"
+msgstr "Jelszó"
+
 msgid "WikiLicense"
 msgstr "WikiEngedélyek"
 
@@ -1394,39 +1514,40 @@ msgstr "dátum"
 msgid "# of hits"
 msgstr "találatok száma"
 
+#, fuzzy
 msgid ""
-" Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
-"(''')]]'''bold'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''bold "
-"italics'''''[[Verbatim(''''')]]; [[Verbatim('')]]''mixed ''[[Verbatim"
-"(''')]]'''''bold'''[[Verbatim(''')]] and italics''[[Verbatim('')]]; "
-"[[Verbatim(----)]] horizontal rule.\n"
-" Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title "
-"2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim"
-"(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim"
-"(=====)]].\n"
+" Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
+"italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed ''<<Verbatim(''')"
+">>'''''bold'''<<Verbatim(''')>> and italics''<<Verbatim('')>>; <<Verbatim"
+"(----)>> horizontal rule.\n"
+" Headings:: <<Verbatim(=)>> Title 1 <<Verbatim(=)>>; <<Verbatim(==)>> Title "
+"2 <<Verbatim(==)>>; <<Verbatim(===)>> Title 3 <<Verbatim(===)>>;   <<Verbatim"
+"(====)>> Title 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Title 5 <<Verbatim"
+"(=====)>>.\n"
 " Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
 "#n start numbering at n; space alone indents.\n"
-" Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim([\"brackets and "
-"double quotes\"])]]; url; [url]; [url label].\n"
+" Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])"
+">>.\n"
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
 "(!) For more help, see HelpOnEditing or SyntaxReference.\n"
 msgstr ""
-" Kiemelés:: [[Verbatim('')]]''kurzív''[[Verbatim('')]]; [[Verbatim"
-"(''')]]'''félkövér'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''félkövér "
-"kurzív'''''[[Verbatim(''''')]]; [[Verbatim('')]]''vegyes ''[[Verbatim"
-"(''')]]'''''félkövér'''[[Verbatim(''')]] és kurzív''[[Verbatim('')]]; "
-"[[Verbatim(----)]] vízszintes vonal.\n"
-" Címek:: [[Verbatim(=)]] 1. szintű cím [[Verbatim(=)]]; [[Verbatim(==)]] 2. "
-"szintű cím [[Verbatim(==)]]; [[Verbatim(===)]] 3. szintű cím [[Verbatim"
-"(===)]];   [[Verbatim(====)]] 4. szintű cím [[Verbatim(====)]]; [[Verbatim"
-"(=====)]] 5. szintű cím [[Verbatim(=====)]].\n"
+" Kiemelés:: <<Verbatim('')>>''kurzív''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''félkövér'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''félkövér "
+"kurzív'''''<<Verbatim(''''')>>; <<Verbatim('')>>''vegyes ''<<Verbatim(''')"
+">>'''''félkövér'''<<Verbatim(''')>> és kurzív''<<Verbatim('')>>; <<Verbatim"
+"(----)>> vízszintes vonal.\n"
+" Címek:: <<Verbatim(=)>> 1. szintű cím <<Verbatim(=)>>; <<Verbatim(==)>> 2. "
+"szintű cím <<Verbatim(==)>>; <<Verbatim(===)>> 3. szintű cím <<Verbatim(===)"
+">>;   <<Verbatim(====)>> 4. szintű cím <<Verbatim(====)>>; <<Verbatim(=====)"
+">> 5. szintű cím <<Verbatim(=====)>>.\n"
 " Listák:: szóköz és egy: * bütykök (körök és négyzetek); 1., a., A., i., I. "
 "sorszámozott elemek; 1.#n a sorszámozás n-nél kezdődik; a szóköz magában "
 "beljebb tolja a szöveget.\n"
-" Kapcsok (linkek):: [[Verbatim(NagyKezdőbetűsSzavakEgybeírva)]]; [[Verbatim"
-"([\"szögletes zárójelek és macskakörmök\"])]]; URL; [URL]; [URL címke].\n"
+" Kapcsok (linkek):: <<Verbatim(NagyKezdőbetűsSzavakEgybeírva)>>; <<Verbatim"
+"([\"szögletes zárójelek és macskakörmök\"])>>; URL; [URL]; [URL címke].\n"
 " Táblázatok:: || cella |||| két oszlopot átfogó cella ||;    cím és táblázat "
 "esetén nem szabad szóközt tenni a sor végére.\n"
 "\n"
@@ -1434,23 +1555,23 @@ msgstr ""
 "SzerkesztésiSegédlet oldalt.\n"
 
 msgid ""
-"Emphasis: <i>*italic*</i> <b>**bold**</b> ``monospace``<br/>\n"
-"<br/><pre>\n"
+"{{{\n"
+"Emphasis: *italic* **bold** ``monospace``\n"
+"\n"
 "Headings: Heading 1  Heading 2  Heading 3\n"
 "          =========  ---------  ~~~~~~~~~\n"
 "\n"
 "Horizontal rule: ---- \n"
+"\n"
 "Links: TrailingUnderscore_ `multi word with backticks`_ external_ \n"
 "\n"
-".. _external: http://external-site.net/foo/\n"
+".. _external: http://external-site.example.org/foo/\n"
 "\n"
 "Lists: * bullets; 1., a. numbered items.\n"
-"</pre>\n"
-"<br/>\n"
+"}}}\n"
 "(!) For more help, see the \n"
-"<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
-"reStructuredText Quick Reference\n"
-"</a>.\n"
+"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
+"reStructuredText Quick Reference]].\n"
 msgstr ""
 
 msgid "UnSubscribe"
@@ -1497,7 +1618,8 @@ msgstr "Előfizetés a lényegtelen változásokra"
 msgid "Disable this account forever"
 msgstr "Tiltsuk le ezt a felhasználói azonosítót örökre"
 
-msgid "(Use Firstname''''''Lastname)"
+#, fuzzy
+msgid "(Use FirstnameLastname)"
 msgstr "(Használja a Vezetéknév''''''Keresztnév formát)"
 
 msgid "Alias-Name"
@@ -1542,13 +1664,6 @@ msgstr ""
 msgid "You must login to add a quicklink."
 msgstr "Be kell lépnie a gyorslinkek hozzáadásához."
 
-msgid "Your quicklink to this page has been removed."
-msgstr "Az Ön gyorslinkje erre az oldalra el lett távolítva."
-
-#, fuzzy
-msgid "Your quicklink to this page could not be removed."
-msgstr "Az Ön gyorslinkje erre az oldalra el lett távolítva."
-
 msgid "A quicklink to this page has been added for you."
 msgstr "Egy erre az oldalra mutató gyorslink került hozzáadásra."
 
@@ -1556,12 +1671,32 @@ msgstr "Egy erre az oldalra mutató gyorslink került hozzáadásra."
 msgid "A quicklink to this page could not be added for you."
 msgstr "Egy erre az oldalra mutató gyorslink került hozzáadásra."
 
+#, fuzzy
+msgid "You already have a quicklink to this page."
+msgstr "Már mentette ezt az oldalt!"
+
 msgid "Missing password. Please enter user name and password."
 msgstr "Hiányzik a jelszó. Kérjük adja meg a felhasználónevet és a jelszót."
 
 #, fuzzy
 msgid "Sorry, login failed."
 msgstr "Sajnos rossz a jelszó."
+
+#, fuzzy
+msgid "Your subscription to this page has been removed."
+msgstr "Erre a lapra megszűnt az előfizetése."
+
+msgid "Can't remove regular expression subscription!"
+msgstr "A reguláris kifejezéses előfizetést nem lehet lemondani!"
+
+msgid "Edit the subscription regular expressions in your UserPreferences."
+msgstr ""
+"Szerkessze a feliratkozásokhoz a reguláris kifejezéseket a "
+"FelhasználóiBeállítások''''''ban."
+
+#, fuzzy
+msgid "You need to be subscribed to unsubscribe."
+msgstr "Ön előfizetett erre a lapra."
 
 #, python-format
 msgid "[%d attachments]"
@@ -1656,8 +1791,15 @@ msgstr "Ehhez a laphoz nem csatolhat mellékletet."
 msgid "File attachments are not allowed in this wiki!"
 msgstr "Mellékletek nem engedélyezettek ebben a wikiben!"
 
-msgid "You are not allowed to save a drawing on this page."
-msgstr "A rajz elmentése nem engedélyezett ezen a lapon."
+msgid "You are not allowed to get attachments from this page."
+msgstr "A mellékletek letöltése nem engedélyezett erről a lapról."
+
+msgid "You are not allowed to view attachments of this page."
+msgstr "A mellékletek megtekintése nem engedélyezett ennél a lapnál."
+
+#, fuzzy
+msgid "You are not allowed to move attachments from this page."
+msgstr "A mellékletek letöltése nem engedélyezett erről a lapról."
 
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
@@ -1666,12 +1808,11 @@ msgstr ""
 "Hibás az állománynév. Kérjük törölje a nem-ASCII karaktereket az "
 "állománynévből, és próbálja újra."
 
+msgid "You are not allowed to save a drawing on this page."
+msgstr "A rajz elmentése nem engedélyezett ezen a lapon."
+
 msgid "You are not allowed to delete attachments on this page."
 msgstr "A mellékletek törlése nem engedélyezett ezen a lapon."
-
-#, fuzzy
-msgid "You are not allowed to move attachments from this page."
-msgstr "A mellékletek letöltése nem engedélyezett erről a lapról."
 
 msgid "Move aborted!"
 msgstr ""
@@ -1682,20 +1823,14 @@ msgstr ""
 "Kérjük, a(z) %(actionname)s művelet végrehajtásához az interaktív "
 "felhasználói felületet használja!"
 
-msgid "You are not allowed to get attachments from this page."
-msgstr "A mellékletek letöltése nem engedélyezett erről a lapról."
-
 msgid "You are not allowed to unzip attachments of this page."
 msgstr "Az oldal mellékleteinek kicsomagolása nem engedélyezett."
 
 msgid "You are not allowed to install files."
 msgstr "Fájlok telepítése nem engedélyezett."
 
-msgid "You are not allowed to view attachments of this page."
-msgstr "A mellékletek megtekintése nem engedélyezett ennél a lapnál."
-
-#, python-format
-msgid "Unsupported upload action: %s"
+#, fuzzy, python-format
+msgid "Unsupported AttachFile sub-action: %s"
 msgstr "Nem támogatott föltöltési művelet: %s"
 
 #, python-format
@@ -1793,6 +1928,9 @@ msgstr "A %(target)s fájl nem egy .zip állomány."
 msgid "Attachment '%(filename)s'"
 msgstr "A(z) '%(filename)s' melléklet"
 
+msgid "Download"
+msgstr ""
+
 msgid "Package script:"
 msgstr "Csomagszkript:"
 
@@ -1811,7 +1949,11 @@ msgstr "Ismeretlen állománytípus: nem lehet beágyazva megjeleníteni."
 #, python-format
 msgid "attachment:%(filename)s of %(pagename)s"
 msgstr ""
-"A(z) %(pagename)s lap melléklete: [[Verbatim(attachment:)]]%(filename)s"
+"A(z) %(pagename)s lap melléklete: <<Verbatim(attachment:)>>%(filename)s"
+
+#, fuzzy
+msgid "Filename"
+msgstr "Állománynév"
 
 msgid "This page is already deleted or was never created!"
 msgstr "Ezt a lapot már törölték, vagy soha nem is hozták létre!"
@@ -1828,6 +1970,21 @@ msgstr "Az átnevezés indoka (nem kötelező kitölteni)"
 #, fuzzy
 msgid "Really rename this page?"
 msgstr "Biztosan törölni kívánja ezt a lapot?"
+
+#, fuzzy
+msgid "You must login to remove a quicklink."
+msgstr "Be kell lépnie a gyorslinkek hozzáadásához."
+
+msgid "Your quicklink to this page has been removed."
+msgstr "Az Ön gyorslinkje erre az oldalra el lett távolítva."
+
+#, fuzzy
+msgid "Your quicklink to this page could not be removed."
+msgstr "Az Ön gyorslinkje erre az oldalra el lett távolítva."
+
+#, fuzzy
+msgid "You need to have a quicklink to this page to remove it."
+msgstr "Az Ön gyorslinkje erre az oldalra el lett távolítva."
 
 #, python-format
 msgid "Full Link List for \"%s\""
@@ -1858,7 +2015,7 @@ msgstr ""
 
 msgid ""
 "Please enter your password of your account at the remote wiki below. "
-"[[BR]] /!\\ You should trust both wikis because the password could be read "
+"<<BR>> /!\\ You should trust both wikis because the password could be read "
 "by the particular administrators."
 msgstr ""
 
@@ -2052,16 +2209,8 @@ msgstr ""
 "feliratkozások használatához."
 
 #, fuzzy
-msgid "Your subscription to this page has been removed."
-msgstr "Erre a lapra megszűnt az előfizetése."
-
-msgid "Can't remove regular expression subscription!"
-msgstr "A reguláris kifejezéses előfizetést nem lehet lemondani!"
-
-msgid "Edit the subscription regular expressions in your UserPreferences."
-msgstr ""
-"Szerkessze a feliratkozásokhoz a reguláris kifejezéseket a "
-"FelhasználóiBeállítások''''''ban."
+msgid "You are already subscribed to this page."
+msgstr "Ön előfizetett erre a lapra."
 
 msgid "You have been subscribed to this page."
 msgstr "Ön előfizetett erre a lapra."
@@ -2134,11 +2283,11 @@ msgid ""
 "\n"
 "||'''Add a new personal page:'''||'''Related access control list "
 "group:'''||\n"
-"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
+"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
 "[\"%(username)s/ReadWriteGroup\"]||\n"
-"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[\"%"
 "(username)s/ReadGroup\"]||\n"
-"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
+"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
 "(username)s only||\n"
 "\n"
 msgstr ""
@@ -2155,11 +2304,11 @@ msgstr ""
 "\n"
 "||'''Személyes oldal hozzáadása:'''||'''Kapcsolódó hozzáférés-szabályozási "
 "csoport:'''||\n"
-"||[[NewPage(HomepageReadWritePageTemplate,írható/olvasható oldal,%(username)"
-"s)]]||[\"%(username)s/ReadWriteGroup\"]||\n"
-"||[[NewPage(HomepageReadPageTemplate,csak olvasható oldal,%(username)s)]]||"
+"||<<NewPage(HomepageReadWritePageTemplate,írható/olvasható oldal,%(username)"
+"s)>>||[\"%(username)s/ReadWriteGroup\"]||\n"
+"||<<NewPage(HomepageReadPageTemplate,csak olvasható oldal,%(username)s)>>||"
 "[\"%(username)s/ReadGroup\"]||\n"
-"||[[NewPage(HomepagePrivatePageTemplate,privát oldal,%(username)s)]]||"
+"||<<NewPage(HomepagePrivatePageTemplate,privát oldal,%(username)s)>>||"
 "kizárólag %(username)s||\n"
 "\n"
 
@@ -2169,6 +2318,9 @@ msgstr "Saját (személyes) lapok kezelése"
 #, python-format
 msgid "Subscribe users to the page %s"
 msgstr "Felhasználók feliratkoztatása a(z) %s oldalra"
+
+msgid "Enter user names (comma separated):"
+msgstr ""
 
 #, python-format
 msgid "Subscribed for %s:"
@@ -2221,7 +2373,7 @@ msgstr ""
 
 msgid ""
 "(!) You're performing a title search that might not include all related "
-"results of your search query in this wiki. [[BR]]"
+"results of your search query in this wiki. <<BR>>"
 msgstr ""
 
 #, fuzzy
@@ -2251,9 +2403,9 @@ msgid ""
 "  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
 "stuff).\n"
 "  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
-"  * Hit the [[GetText(Restore)]] button below.\n"
+"  * Hit the <<GetText(Restore)>> button below.\n"
 "\n"
-" * To make a backup, just hit the [[GetText(Backup)]] button and save the "
+" * To make a backup, just hit the <<GetText(Backup)>> button and save the "
 "file\n"
 "   you get to a secure place.\n"
 "\n"
@@ -2269,9 +2421,9 @@ msgstr ""
 "UTC részt).\n"
 "  * Helyezd a biztonsági másolat fájlt a backup_storage_dir könyvtárba "
 "(használj scp, ftp vagy hasonló programot).\n"
-"  * Kattints a lentebb levő [[GetText(Restore)]] gombra.\n"
+"  * Kattints a lentebb levő <<GetText(Restore)>> gombra.\n"
 "\n"
-" * Biztonsági másolat készítéséhez kattints a [[GetText(Backup)]] gombra és "
+" * Biztonsági másolat készítéséhez kattints a <<GetText(Backup)>> gombra és "
 "mentsd a fájlt biztonságos helyre.\n"
 "\n"
 "Győződj meg arról, hogy a wiki beállításaiban a backup_* beállítások "
@@ -2304,9 +2456,9 @@ msgstr ""
 msgid "Local Site Map for \"%s\""
 msgstr "Helyi térkép a(z) \"%s\" laphoz"
 
-#, python-format
-msgid "No pages like \"%s\"!"
-msgstr "A(z) \"%s\" laphoz nincs hasonló!"
+#, fuzzy
+msgid "You are not allowed to create the supplementation page."
+msgstr "Nem állíthatja vissza ezt a lapot!"
 
 #, python-format
 msgid "Invalid filename \"%s\"!"
@@ -2324,6 +2476,10 @@ msgstr "Csomag neve"
 
 msgid "List of page names - separated by a comma"
 msgstr "Az oldalnevek listája - vesszőkkel elválasztva. (csv)"
+
+#, python-format
+msgid "No pages like \"%s\"!"
+msgstr "A(z) \"%s\" laphoz nincs hasonló!"
 
 msgid "No older revisions available!"
 msgstr "Nincsenek régebbi módosítások!"
@@ -2389,23 +2545,35 @@ msgstr "A törlés indoka (nem kötelező kitölteni)"
 msgid "Really delete this page?"
 msgstr "Biztosan törölni kívánja ezt a lapot?"
 
+msgid "Options --pages and --search are mutually exclusive!"
+msgstr ""
+
+msgid "You must specify an output file!"
+msgstr ""
+
+msgid "No pages specified using --pages or --search, assuming full package."
+msgstr ""
+
+msgid "Output file already exists! Cowardly refusing to continue!"
+msgstr ""
+
+#, fuzzy
+#~ msgid "belonging to one of the following categories"
+#~ msgstr "Ez a lap a következő lapokhoz kacsolódik:"
+
 #, fuzzy
 #~ msgid "Xapian stemming"
 #~ msgstr "Lupy keresés"
 
-#, fuzzy
-#~ msgid "filename"
-#~ msgstr "Állománynév"
-
 #~ msgid ""
 #~ "~-If you submit this form, the submitted values will be displayed.\n"
 #~ "To use this form on other pages, insert a\n"
-#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "<<BR>><<BR>>'''{{{    <<Form(\"%(pagename)s\")>>}}}'''<<BR>><<BR>>\n"
 #~ "macro call.-~\n"
 #~ msgstr ""
 #~ "~-Az űrlap elküldésével a benne szereplő értékek megjelennek.\n"
 #~ "Ha más lapon is kívánja használni az űrlapot illessze be ezt a makrót:\n"
-#~ "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+#~ "<<BR>><<BR>>'''{{{    <<Form(\"%(pagename)s\")>>}}}'''<<BR>><<BR>>\n"
 #~ "-~\n"
 
 #~ msgid ""
@@ -2419,9 +2587,6 @@ msgstr "Biztosan törölni kívánja ezt a lapot?"
 
 #~ msgid "print"
 #~ msgstr "nyomtatás"
-
-#~ msgid "revert"
-#~ msgstr "visszaállás"
 
 #~ msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
 #~ msgstr "## a(z) \"%(pagename)s\" lap mentése elküldve, dátum: %(date)s"

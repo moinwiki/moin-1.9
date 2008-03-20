@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-30 19:24+0200\n"
-"PO-Revision-Date: 2007-08-25 18:01+0200\n"
+"POT-Creation-Date: 2008-02-02 14:58+0100\n"
+"PO-Revision-Date: 2007-10-08 12:27+0200\n"
 "Last-Translator: Mohamed Yahya <yahya.mohamed@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -33,11 +33,17 @@ msgstr ""
 msgid "Please provide a valid email address!"
 msgstr "الرجاء تزويد عنوان بريد إلكتروني صحيح!"
 
+msgid "If an account with this username exists, an email was sent."
+msgstr ""
+
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "لا يوجد حساب مطابق لعنوان البريد الإلكتروني المدخل '%(email)s'!"
 
 msgid "Use UserPreferences to change your settings or create an account."
+msgstr ""
+
+msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 
 msgid "Empty user name. Please enter a user name."
@@ -58,6 +64,10 @@ msgstr "كلمات السر غير متطابقة!"
 
 msgid "Please specify a password!"
 msgstr "الرجاء إدخال كلمة سر!"
+
+#, python-format
+msgid "Password not acceptable: %s"
+msgstr ""
 
 msgid ""
 "Please provide your email address. If you lose your login information, you "
@@ -86,10 +96,10 @@ msgid "Default"
 msgstr "إفتراضي"
 
 msgid "<Browser setting>"
-msgstr ""
+msgstr "<إعدادات المتصفح>"
 
 msgid "the one preferred"
-msgstr ""
+msgstr "المفضل"
 
 msgid "free choice"
 msgstr "خيار حر"
@@ -104,8 +114,9 @@ msgstr "حفظ"
 msgid "Cancel"
 msgstr "إلغاء"
 
+#, fuzzy
 msgid "Preferred theme"
-msgstr ""
+msgstr "السمة المفضلة"
 
 msgid "Editor Preference"
 msgstr "تفضيلات المحرر"
@@ -116,8 +127,9 @@ msgstr ""
 msgid "Time zone"
 msgstr "المنطقة الزمنية"
 
+#, fuzzy
 msgid "Your time is"
-msgstr ""
+msgstr "الوقت عندك هو"
 
 #, fuzzy
 msgid "Server time is"
@@ -136,7 +148,7 @@ msgid "Quick links"
 msgstr "روابط سريعة"
 
 msgid "This list does not work, unless you have entered a valid email address!"
-msgstr ""
+msgstr "هذه القائمة لا تعمل إلا إذا قمت بإدخال عنوان بريد إلكتروني صالح!"
 
 msgid "Subscribed wiki pages (one regex per line)"
 msgstr ""
@@ -144,8 +156,11 @@ msgstr ""
 msgid "Create Profile"
 msgstr ""
 
-msgid "Mail me my account data"
+msgid "TextCha (required)"
 msgstr ""
+
+msgid "Mail me my account data"
+msgstr "إبعث لي بيانات حسابي بالبريد الإلكتروني."
 
 msgid "Email"
 msgstr "بريد الكتروني"
@@ -166,7 +181,78 @@ msgstr "كلمةالسرّ"
 msgid "Login"
 msgstr "ولوج"
 
+#, fuzzy
 msgid "Action"
+msgstr "إجراء"
+
+#, fuzzy
+msgid "Enable user"
+msgstr "مفعل"
+
+#, fuzzy
+msgid "disabled"
+msgstr "معطل"
+
+#, fuzzy
+msgid "Disable user"
+msgstr "معطل"
+
+#, fuzzy
+msgid "Mail account data"
+msgstr "إبعث لي بيانات حسابي بالبريد الإلكتروني."
+
+#, python-format
+msgid "Argument \"%s\" must be a boolean value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument must be a boolean value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" must be an integer value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument must be an integer value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" must be a floating point value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument must be a floating point value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" must be a complex value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument must be a complex value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument must be one of \"%s\", not \"%s\""
+msgstr ""
+
+msgid "Too many arguments"
+msgstr ""
+
+msgid "Cannot have arguments without name following named arguments"
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" is required"
+msgstr ""
+
+#, python-format
+msgid "No argument named \"%s\""
 msgstr ""
 
 #, python-format
@@ -214,10 +300,10 @@ msgid "Your edit lock on %(lock_page)s will expire in # seconds."
 msgstr ""
 
 msgid "Someone else deleted this page while you were editing!"
-msgstr ""
+msgstr "شخص آخر قام بحذف هذه الصفحة بينما كنت تقوم بتحريها!"
 
 msgid "Someone else changed this page while you were editing!"
-msgstr ""
+msgstr "شخص آخر قام بتغيير هذه الصفحة بينما كنت تقوم بتحريها!"
 
 msgid ""
 "Someone else saved this page while you were editing!\n"
@@ -241,7 +327,7 @@ msgstr "[لا يمكن أن تقرأ %s]"
 
 #, python-format
 msgid ""
-"'''[[BR]]Your draft based on revision %(draft_rev)d (saved %"
+"'''<<BR>>Your draft based on revision %(draft_rev)d (saved %"
 "(draft_timestamp_str)s) can be loaded instead of the current revision %"
 "(page_rev)d by using the load draft button - in case you lost your last edit "
 "somehow without saving it.''' A draft gets saved for you when you do a "
@@ -277,6 +363,9 @@ msgstr "نص عادي"
 msgid "Load Draft"
 msgstr "حمّل المسودة"
 
+msgid "Trivial change"
+msgstr "تغيير بسيط"
+
 msgid "Comment:"
 msgstr "تصريح"
 
@@ -285,13 +374,10 @@ msgstr "<لا إضافة>"
 
 #, python-format
 msgid "Add to: %(category)s"
-msgstr ""
-
-msgid "Trivial change"
-msgstr "تغيير بسيط"
+msgstr "أضف إلى: %(category)s"
 
 msgid "Remove trailing whitespace from each line"
-msgstr ""
+msgstr "أزل الفراغ الأبيض في نهاية كل سطر."
 
 msgid "The wiki is currently not reachable."
 msgstr "لا يمكن الوصول إلى هذه الويكي حاليا."
@@ -299,6 +385,7 @@ msgstr "لا يمكن الوصول إلى هذه الويكي حاليا."
 msgid ""
 "The remote version of MoinMoin is too old, version 1.6 is required at least."
 msgstr ""
+"الإصدار البعيدة من موين موين قديمة جدا، يجب إستخدام الإصدار 1.6 على الأقل."
 
 msgid "Invalid username or password."
 msgstr "إسم مستخدم أو كلمة سر غير صالحة."
@@ -349,16 +436,17 @@ msgid "Your changes are not saved!"
 msgstr "لم يتم حفظ تغييراتك!"
 
 msgid "Page name is too long, try shorter name."
-msgstr ""
+msgstr "إسم الصفحة طويل، جرب إسما أقصر."
 
 msgid "GUI Mode"
 msgstr ""
 
+#, fuzzy
 msgid "Edit was cancelled."
-msgstr ""
+msgstr "تم إلغاء التحرير."
 
 msgid "You can't copy to an empty pagename."
-msgstr ""
+msgstr "لا يمكنك النسخ إلى اسم صفحة فارغ."
 
 #, fuzzy
 msgid "You are not allowed to copy this page!"
@@ -372,14 +460,14 @@ msgstr ""
 
 #, python-format
 msgid "Could not copy page because of file system error: %s."
-msgstr ""
+msgstr "تعذر نسخ الصفة بسبب خطأ في نظام الملفات: %s."
 
 #, fuzzy
 msgid "You are not allowed to rename this page!"
 msgstr "!لا يسمح لك بالعودة إلى هذه الصفحة"
 
 msgid "You can't rename to an empty pagename."
-msgstr ""
+msgstr "لا يمكنك إعادة التسمية بإسم صفحة فارغ."
 
 #, python-format
 msgid ""
@@ -397,7 +485,7 @@ msgid "You are not allowed to delete this page!"
 msgstr "!لا يسمح لك بالعودة إلى هذه الصفحة"
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr ""
+msgstr "شكرا على التغييرات التي قمت بها. نقدر اهتمامك بالتفاصيل."
 
 #, python-format
 msgid "Page \"%s\" was successfully deleted!"
@@ -433,7 +521,7 @@ msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
 msgstr ""
 
 msgid "Trivial "
-msgstr ""
+msgstr "بديهي"
 
 msgid "Status of sending notification mails:"
 msgstr ""
@@ -444,9 +532,23 @@ msgstr ""
 
 #, python-format
 msgid "Page could not get locked. Unexpected error (errno=%d)."
-msgstr ""
+msgstr "لا يمكن قفل الصفحة. خطأ غير متوقع (errno=%d)."
 
 msgid "Page could not get locked. Missing 'current' file?"
+msgstr ""
+
+#, python-format
+msgid ""
+"Unable to determine current page revision from the 'current' file. The page %"
+"s is damaged and cannot be edited right now."
+msgstr ""
+
+#, python-format
+msgid "Cannot save page %s, no storage space left."
+msgstr "لا يمكن حفظ صفحة %sK لم يتبقى للتخزين."
+
+#, python-format
+msgid "An I/O error occurred while saving page %s (errno=%d)"
 msgstr ""
 
 #, fuzzy
@@ -460,11 +562,13 @@ msgstr "لا تستطيع حفظ صفحات فارغة"
 msgid "You already saved this page!"
 msgstr "لقد قمت بحفظ هذه الصفحة مسبقا!"
 
+#, fuzzy
 msgid "You already edited this page! Please do not use the back button."
-msgstr ""
+msgstr "لقد قمت بتحرير هذه الصفحة! رجاء لا تستعمل زر الرجوع."
 
+#, fuzzy
 msgid "You did not change the page content, not saved!"
-msgstr ""
+msgstr "أنت لم تقم بتغيير محتوى الصفحة، لم تم الحفظ!"
 
 msgid ""
 "You can't change ACLs on this page since you have no admin rights on it!"
@@ -488,7 +592,7 @@ msgid ""
 msgstr ""
 
 msgid "Use the Preview button to extend the locking period."
-msgstr ""
+msgstr "إستعمل زر المعاينة لتمديد فترة القفل."
 
 #, python-format
 msgid ""
@@ -499,10 +603,10 @@ msgstr ""
 #, python-format
 msgid ""
 "This page was opened for editing or last previewed at %(timestamp)s by %"
-"(owner)s.[[BR]]\n"
+"(owner)s.<<BR>>\n"
 "'''You should ''refrain from editing'' this page for at least another %"
 "(mins_valid)d minute(s),\n"
-"to avoid editing conflicts.'''[[BR]]\n"
+"to avoid editing conflicts.'''<<BR>>\n"
 "To leave the editor, press the Cancel button."
 msgstr ""
 
@@ -573,6 +677,10 @@ msgstr "السابق"
 #, fuzzy
 msgid "Next"
 msgstr "النص"
+
+#, fuzzy
+msgid "rev"
+msgstr "معاينة"
 
 #, fuzzy
 msgid "current"
@@ -651,12 +759,25 @@ msgstr ""
 msgid "Not supported mimetype of file: %s"
 msgstr ""
 
+msgid "Embedding of object by chosen formatter not possible"
+msgstr ""
+
 #, fuzzy
 msgid "Embedded"
 msgstr "مدمج"
 
+msgid ""
+"Not enough arguments given to EmbedObject macro! Try <<EmbedObject"
+"(attachment [,width=width] [,height=height] [,alt=alternate Text])>>"
+msgstr ""
+
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
+msgstr ""
+
+msgid ""
+"Not enough arguments given to EmbedObject macro! Try <<EmbedObject(url, "
+"url_mimetype [,width=width] [,height=height] [,alt=alternate Text])>>"
 msgstr ""
 
 #, python-format
@@ -692,7 +813,7 @@ msgid "Number of system pages"
 msgstr "عدد صفحات النظام"
 
 msgid "Accumulated page sizes"
-msgstr ""
+msgstr "حجم الصفحات التراكمي"
 
 #, python-format
 msgid "Disk usage of %(data_dir)s/pages/"
@@ -821,7 +942,7 @@ msgid "Nothing found for \"%s\"!"
 msgstr ""
 
 msgid "edit"
-msgstr ""
+msgstr "تحرير"
 
 #, fuzzy
 msgid "Contents"
@@ -838,24 +959,27 @@ msgid "Search for items"
 msgstr ""
 
 msgid "containing all the following terms"
-msgstr ""
+msgstr "يحوتي على جميع العبارات التالية"
 
 msgid "containing one or more of the following terms"
-msgstr ""
+msgstr "يحتوي على واحدا أو أكثر من العبارات التالية"
 
 msgid "not containing the following terms"
-msgstr ""
-
-msgid "belonging to one of the following categories"
-msgstr ""
+msgstr "لا يحتوي على العبارات التالية"
 
 msgid "last modified since (e.g. last 2 weeks)"
+msgstr ""
+
+msgid "any category"
 msgstr ""
 
 msgid "any language"
 msgstr "أي لغة"
 
 msgid "any mimetype"
+msgstr "أي نوع MIME"
+
+msgid "Categories"
 msgstr ""
 
 msgid "Language"
@@ -1087,7 +1211,7 @@ msgstr ""
 
 #, python-format
 msgid "last modified %(time)s"
-msgstr ""
+msgstr "آخدر تعديل %(time)s"
 
 msgid "Search:"
 msgstr "البحث:"
@@ -1112,10 +1236,11 @@ msgid "Raw Text"
 msgstr "نص مجرد"
 
 msgid "Print View"
-msgstr ""
+msgstr "معاينة الطباعة"
 
+#, fuzzy
 msgid "Delete Cache"
-msgstr ""
+msgstr "محو المخبأ"
 
 msgid "Rename Page"
 msgstr "أعد تسمية الصفحة"
@@ -1223,6 +1348,10 @@ msgstr ""
 msgid "UserPreferences"
 msgstr ""
 
+#, fuzzy
+msgid "SendMyPassword"
+msgstr "كلمةالسرّ"
+
 msgid "WikiLicense"
 msgstr ""
 
@@ -1328,19 +1457,19 @@ msgid "# of hits"
 msgstr ""
 
 msgid ""
-" Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
-"(''')]]'''bold'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''bold "
-"italics'''''[[Verbatim(''''')]]; [[Verbatim('')]]''mixed ''[[Verbatim"
-"(''')]]'''''bold'''[[Verbatim(''')]] and italics''[[Verbatim('')]]; "
-"[[Verbatim(----)]] horizontal rule.\n"
-" Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title "
-"2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim"
-"(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim"
-"(=====)]].\n"
+" Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
+"italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed ''<<Verbatim(''')"
+">>'''''bold'''<<Verbatim(''')>> and italics''<<Verbatim('')>>; <<Verbatim"
+"(----)>> horizontal rule.\n"
+" Headings:: <<Verbatim(=)>> Title 1 <<Verbatim(=)>>; <<Verbatim(==)>> Title "
+"2 <<Verbatim(==)>>; <<Verbatim(===)>> Title 3 <<Verbatim(===)>>;   <<Verbatim"
+"(====)>> Title 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Title 5 <<Verbatim"
+"(=====)>>.\n"
 " Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
 "#n start numbering at n; space alone indents.\n"
-" Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim([\"brackets and "
-"double quotes\"])]]; url; [url]; [url label].\n"
+" Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])"
+">>.\n"
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
@@ -1348,23 +1477,23 @@ msgid ""
 msgstr ""
 
 msgid ""
-"Emphasis: <i>*italic*</i> <b>**bold**</b> ``monospace``<br/>\n"
-"<br/><pre>\n"
+"{{{\n"
+"Emphasis: *italic* **bold** ``monospace``\n"
+"\n"
 "Headings: Heading 1  Heading 2  Heading 3\n"
 "          =========  ---------  ~~~~~~~~~\n"
 "\n"
 "Horizontal rule: ---- \n"
+"\n"
 "Links: TrailingUnderscore_ `multi word with backticks`_ external_ \n"
 "\n"
-".. _external: http://external-site.net/foo/\n"
+".. _external: http://external-site.example.org/foo/\n"
 "\n"
 "Lists: * bullets; 1., a. numbered items.\n"
-"</pre>\n"
-"<br/>\n"
+"}}}\n"
 "(!) For more help, see the \n"
-"<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
-"reStructuredText Quick Reference\n"
-"</a>.\n"
+"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
+"reStructuredText Quick Reference]].\n"
 msgstr ""
 
 msgid "UnSubscribe"
@@ -1377,14 +1506,15 @@ msgstr ""
 msgid "Open editor on double click"
 msgstr "افتح المحرر عند النقر المزدوج"
 
+#, fuzzy
 msgid "After login, jump to last visited page"
-msgstr ""
+msgstr "بعد الولوج، إذهب إلى آخر صفحة تمت زيارتها"
 
 msgid "Show comment sections"
-msgstr ""
+msgstr "أظهر أقسام التعليقات"
 
 msgid "Show question mark for non-existing pagelinks"
-msgstr ""
+msgstr "أظهر علامة سؤال للروابط التي تؤدي إلى صفحات غير موجودة"
 
 msgid "Show page trail"
 msgstr ""
@@ -1410,7 +1540,8 @@ msgstr ""
 msgid "Disable this account forever"
 msgstr "عطل هذا الحساب للأبد"
 
-msgid "(Use Firstname''''''Lastname)"
+#, fuzzy
+msgid "(Use FirstnameLastname)"
 msgstr "(استخدم الاسم الأول الاسم الأخير)"
 
 msgid "Alias-Name"
@@ -1451,25 +1582,36 @@ msgid "Please use the interactive user interface to use action %(actionname)s!"
 msgstr ""
 
 msgid "You must login to add a quicklink."
-msgstr ""
-
-msgid "Your quicklink to this page has been removed."
-msgstr ""
-
-msgid "Your quicklink to this page could not be removed."
-msgstr ""
+msgstr "يجب عليك تسجيل دخولك لإضافة رابط سريع"
 
 msgid "A quicklink to this page has been added for you."
-msgstr ""
+msgstr "تم إضافة رابط سريع إلى هذه الصفحة من أجلك."
 
 msgid "A quicklink to this page could not be added for you."
 msgstr ""
 
+#, fuzzy
+msgid "You already have a quicklink to this page."
+msgstr "لقد قمت بحفظ هذه الصفحة مسبقا!"
+
 msgid "Missing password. Please enter user name and password."
-msgstr ""
+msgstr "لا يوجد كلمة سر. الرجاء إدخال إسم مستخدم و كلمة سر"
 
 msgid "Sorry, login failed."
 msgstr ""
+
+msgid "Your subscription to this page has been removed."
+msgstr "تم إزالة اشتراكك بهذه الصفحة."
+
+msgid "Can't remove regular expression subscription!"
+msgstr ""
+
+msgid "Edit the subscription regular expressions in your UserPreferences."
+msgstr ""
+
+#, fuzzy
+msgid "You need to be subscribed to unsubscribe."
+msgstr "لا يسمح لك بتحرير هذه الصفحة"
 
 #, python-format
 msgid "[%d attachments]"
@@ -1515,7 +1657,7 @@ msgid "unzip"
 msgstr ""
 
 msgid "install"
-msgstr ""
+msgstr "تثبيت"
 
 #, python-format
 msgid "No attachments stored for %(pagename)s"
@@ -1525,7 +1667,7 @@ msgid "Edit drawing"
 msgstr ""
 
 msgid "New Attachment"
-msgstr ""
+msgstr "ملف مرفق جديد"
 
 msgid ""
 "An upload will never overwrite an existing file. If there is a name\n"
@@ -1547,28 +1689,34 @@ msgid "Upload"
 msgstr ""
 
 msgid "Attached Files"
-msgstr ""
+msgstr "الملفات المرفقة"
 
 msgid "You are not allowed to attach a file to this page."
-msgstr ""
+msgstr "لا يسمح لك إرفاق ملف بهذه الصفحة."
 
 msgid "File attachments are not allowed in this wiki!"
+msgstr "لا يسمح بإرفاق الملفات في هذه الويكي."
+
+msgid "You are not allowed to get attachments from this page."
 msgstr ""
 
-msgid "You are not allowed to save a drawing on this page."
+msgid "You are not allowed to view attachments of this page."
 msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to move attachments from this page."
+msgstr "لا يسمح لك بتحرير هذه الصفحة"
 
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
 msgstr ""
 
-msgid "You are not allowed to delete attachments on this page."
+msgid "You are not allowed to save a drawing on this page."
 msgstr ""
 
-#, fuzzy
-msgid "You are not allowed to move attachments from this page."
-msgstr "لا يسمح لك بتحرير هذه الصفحة"
+msgid "You are not allowed to delete attachments on this page."
+msgstr ""
 
 msgid "Move aborted!"
 msgstr ""
@@ -1576,21 +1724,15 @@ msgstr ""
 msgid "Please use the interactive user interface to move attachments!"
 msgstr ""
 
-msgid "You are not allowed to get attachments from this page."
-msgstr ""
-
 msgid "You are not allowed to unzip attachments of this page."
 msgstr ""
 
 msgid "You are not allowed to install files."
-msgstr ""
+msgstr "لا يسمح لك بتثبيت الملفات."
 
-msgid "You are not allowed to view attachments of this page."
-msgstr ""
-
-#, python-format
-msgid "Unsupported upload action: %s"
-msgstr ""
+#, fuzzy, python-format
+msgid "Unsupported AttachFile sub-action: %s"
+msgstr "نفذ عملية %(actionname)s?"
 
 #, python-format
 msgid "Attachments for \"%(pagename)s\""
@@ -1615,7 +1757,7 @@ msgid "Attachment '%(filename)s' moved to %(page)s."
 msgstr ""
 
 msgid "Nothing changed"
-msgstr ""
+msgstr "لم يتغير أي شيء"
 
 #, python-format
 msgid "Page %(newpagename)s does not exists or you don't have enough rights."
@@ -1676,24 +1818,31 @@ msgstr ""
 msgid "Attachment '%(filename)s'"
 msgstr ""
 
+msgid "Download"
+msgstr "تنزيل"
+
 msgid "Package script:"
 msgstr ""
 
 msgid "File Name"
-msgstr ""
+msgstr "إسم الملف"
 
 msgid "Modified"
-msgstr ""
+msgstr "عُدّل"
 
 msgid "Size"
 msgstr "الحجم"
 
 msgid "Unknown file type, cannot display this attachment inline."
-msgstr ""
+msgstr "نوع ملف مجهول، لا يمكن إظهار هذا الملف المرفق داخل النص."
 
 #, python-format
 msgid "attachment:%(filename)s of %(pagename)s"
 msgstr ""
+
+#, fuzzy
+msgid "Filename"
+msgstr "إسم الملف"
 
 msgid "This page is already deleted or was never created!"
 msgstr ""
@@ -1705,10 +1854,24 @@ msgid "New name"
 msgstr "الإسم الجديد"
 
 msgid "Optional reason for the renaming"
-msgstr ""
+msgstr "سبب إختياري لإعادة التسمية"
 
 msgid "Really rename this page?"
 msgstr ""
+
+#, fuzzy
+msgid "You must login to remove a quicklink."
+msgstr "يجب عليك تسجيل دخولك لإضافة رابط سريع"
+
+msgid "Your quicklink to this page has been removed."
+msgstr "تم إزالة رابطك السريع لهذه الصفحة."
+
+msgid "Your quicklink to this page could not be removed."
+msgstr ""
+
+#, fuzzy
+msgid "You need to have a quicklink to this page to remove it."
+msgstr "تم إزالة رابطك السريع لهذه الصفحة."
 
 #, python-format
 msgid "Full Link List for \"%s\""
@@ -1722,13 +1885,13 @@ msgid "Pages"
 msgstr "صفحات"
 
 msgid "Select Author"
-msgstr ""
+msgstr "إختر المؤلف"
 
 msgid "Revert all!"
 msgstr ""
 
 msgid "You are not allowed to use this action."
-msgstr ""
+msgstr "لا يسمح لك استعمال هذا الإجراء"
 
 #, python-format
 msgid "Rolled back changes to the page %s."
@@ -1739,12 +1902,12 @@ msgstr ""
 
 msgid ""
 "Please enter your password of your account at the remote wiki below. "
-"[[BR]] /!\\ You should trust both wikis because the password could be read "
+"<<BR>> /!\\ You should trust both wikis because the password could be read "
 "by the particular administrators."
 msgstr ""
 
 msgid "Operation was canceled."
-msgstr ""
+msgstr "تم إلغاء العملية."
 
 msgid "The only supported directions are BOTH and DOWN."
 msgstr ""
@@ -1763,13 +1926,14 @@ msgid "The ''remoteWiki'' is unknown."
 msgstr ""
 
 msgid "A severe error occured:"
-msgstr ""
+msgstr "حدث خطاء في الخادم:"
 
+#, fuzzy
 msgid "Synchronisation finished. Look below for the status messages."
-msgstr ""
+msgstr "تم إنهاء الزامنة. أنظر إلى الأسفل من أجل التقرير."
 
 msgid "Synchronisation started -"
-msgstr ""
+msgstr "تم الشروع بالمزامنة -"
 
 #, python-format
 msgid ""
@@ -1779,7 +1943,7 @@ msgstr ""
 
 #, python-format
 msgid "After filtering: %s pages"
-msgstr ""
+msgstr "بعد الترشيح: %s صفحة"
 
 #, python-format
 msgid "Skipped page %s because of no write access to local page."
@@ -1862,7 +2026,7 @@ msgid "Page %s merged with conflicts."
 msgstr ""
 
 msgid "Load"
-msgstr ""
+msgstr "حمّل"
 
 #, fuzzy
 msgid "New Page or New Attachment"
@@ -1872,13 +2036,15 @@ msgid ""
 "You can upload a file to a new page or choose to upload a file as attachment "
 "for the current page"
 msgstr ""
+"بإمكانك تحميل ملف مع صفحة جديدة أو اختيار تحميل الملف كملحق للصفحة الحالية"
 
 #, fuzzy
 msgid "attachment"
 msgstr "المرفقات"
 
+#, fuzzy
 msgid "overwrite"
-msgstr ""
+msgstr "أكتب فوقه"
 
 #, fuzzy
 msgid "New Name"
@@ -1894,8 +2060,9 @@ msgid ""
 "(totalwords)d words%(localwords)s and are highlighted below:"
 msgstr ""
 
+#, fuzzy
 msgid "Add checked words to dictionary"
-msgstr ""
+msgstr "أضف الكلمات المشار إليها إلى القاموس"
 
 #, fuzzy
 msgid "No spelling errors found!"
@@ -1905,31 +2072,26 @@ msgid "You can't save spelling words."
 msgstr ""
 
 msgid "You can't check spelling on a page you can't read."
-msgstr ""
+msgstr "لا يمكنك تدقيق الإملاء في صفحة لا تستطيع قرائتها."
 
 msgid "You are now logged out."
-msgstr ""
+msgstr "لقد قمت بتسجيل الخروج."
 
 msgid "You are not allowed to subscribe to a page you can't read."
-msgstr ""
+msgstr "لا يسمح لك الإشتراك بصفحة لا تستطيع قرائتها."
 
 msgid "This wiki is not enabled for mail processing."
 msgstr ""
 
 msgid "You must log in to use subscriptions."
-msgstr ""
+msgstr "يجب عليك تسجيل دخولك لاستعمال الأشتراكات."
 
 msgid "Add your email address in your UserPreferences to use subscriptions."
 msgstr ""
 
-msgid "Your subscription to this page has been removed."
-msgstr ""
-
-msgid "Can't remove regular expression subscription!"
-msgstr ""
-
-msgid "Edit the subscription regular expressions in your UserPreferences."
-msgstr ""
+#, fuzzy
+msgid "You are already subscribed to this page."
+msgstr "لا يسمح لك بتحرير هذه الصفحة"
 
 msgid "You have been subscribed to this page."
 msgstr ""
@@ -1977,10 +2139,10 @@ msgid "Show \"%(title)s\""
 msgstr ""
 
 msgid "General Page Infos"
-msgstr ""
+msgstr "معلومات عامة عن الصفحة"
 
 msgid "Please log in first."
-msgstr ""
+msgstr "رجاء سجل دخولك أولا."
 
 msgid "Please first create a homepage before creating additional pages."
 msgstr ""
@@ -2004,11 +2166,11 @@ msgid ""
 "\n"
 "||'''Add a new personal page:'''||'''Related access control list "
 "group:'''||\n"
-"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
+"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
 "[\"%(username)s/ReadWriteGroup\"]||\n"
-"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[\"%"
 "(username)s/ReadGroup\"]||\n"
-"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
+"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
 "(username)s only||\n"
 "\n"
 msgstr ""
@@ -2020,12 +2182,15 @@ msgstr ""
 msgid "Subscribe users to the page %s"
 msgstr ""
 
+msgid "Enter user names (comma separated):"
+msgstr ""
+
 #, python-format
 msgid "Subscribed for %s:"
 msgstr ""
 
 msgid "Not a user:"
-msgstr ""
+msgstr "ليس مستدخما:"
 
 msgid "You are not allowed to perform this action."
 msgstr "لا يسمح لك القيام بهذا الإجراء."
@@ -2071,7 +2236,7 @@ msgstr ""
 
 msgid ""
 "(!) You're performing a title search that might not include all related "
-"results of your search query in this wiki. [[BR]]"
+"results of your search query in this wiki. <<BR>>"
 msgstr ""
 
 msgid "Click here to perform a full-text search with your search terms!"
@@ -2097,9 +2262,9 @@ msgid ""
 "  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
 "stuff).\n"
 "  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
-"  * Hit the [[GetText(Restore)]] button below.\n"
+"  * Hit the <<GetText(Restore)>> button below.\n"
 "\n"
-" * To make a backup, just hit the [[GetText(Backup)]] button and save the "
+" * To make a backup, just hit the <<GetText(Backup)>> button and save the "
 "file\n"
 "   you get to a secure place.\n"
 "\n"
@@ -2109,19 +2274,20 @@ msgid ""
 msgstr ""
 
 msgid "Backup"
-msgstr "نسخ إحتياطي"
+msgstr ""
+
+msgid "Restore"
+msgstr ""
 
 #, fuzzy
-msgid "Restore"
-msgstr "إستعد"
-
 msgid "You are not allowed to do remote backup."
-msgstr ""
+msgstr "لا يسمح لك القيام بهذا الإجراء."
 
-#, python-format
+#, fuzzy, python-format
 msgid "Unknown backup subaction: %s."
-msgstr ""
+msgstr "نفذ عملية %(actionname)s?"
 
+#, fuzzy
 msgid "You are not allowed to revert this page!"
 msgstr "!لا يسمح لك بالعودة إلى هذه الصفحة"
 
@@ -2135,9 +2301,9 @@ msgstr ""
 msgid "Local Site Map for \"%s\""
 msgstr ""
 
-#, python-format
-msgid "No pages like \"%s\"!"
-msgstr ""
+#, fuzzy
+msgid "You are not allowed to create the supplementation page."
+msgstr "!لا يسمح لك بالعودة إلى هذه الصفحة"
 
 #, python-format
 msgid "Invalid filename \"%s\"!"
@@ -2147,13 +2313,19 @@ msgstr ""
 msgid "Created the package %s containing the pages %s."
 msgstr ""
 
+#, fuzzy
 msgid "Package pages"
-msgstr ""
+msgstr "صفحات مشابه"
 
+#, fuzzy
 msgid "Package name"
-msgstr ""
+msgstr "صفحة جديدة\n"
 
 msgid "List of page names - separated by a comma"
+msgstr ""
+
+#, python-format
+msgid "No pages like \"%s\"!"
 msgstr ""
 
 msgid "No older revisions available!"
@@ -2165,11 +2337,11 @@ msgstr ""
 
 #, python-format
 msgid "Differences between revisions %d and %d"
-msgstr "الاختلافات بين نسخة %d و نسخة %d"
+msgstr ""
 
 #, python-format
 msgid "(spanning %d versions)"
-msgstr "التمديد ل %d نسخ"
+msgstr ""
 
 #, python-format
 msgid "The page was saved %(count)d times, though!"
@@ -2185,9 +2357,9 @@ msgstr ""
 msgid "Exactly one page like \"%s\" found, redirecting to page."
 msgstr ""
 
-#, python-format
+#, fuzzy, python-format
 msgid "Pages like \"%s\""
-msgstr ""
+msgstr "حجم الصفحة: %d"
 
 #, python-format
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
@@ -2196,8 +2368,9 @@ msgstr ""
 msgid "Copy all /subpages too?"
 msgstr ""
 
+#, fuzzy
 msgid "Optional reason for the copying"
-msgstr ""
+msgstr "سبب إختياري لإعادة التسمية"
 
 #, fuzzy
 msgid "Really copy this page?"
@@ -2207,18 +2380,29 @@ msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr ""
 
+#, fuzzy
 msgid "Delete"
-msgstr "إحذف"
+msgstr "احذف الصفحة"
 
 msgid "Delete all /subpages too?"
 msgstr ""
 
+#, fuzzy
 msgid "Optional reason for the deletion"
-msgstr "سبب إختياري للحذف"
-
-msgid "Really delete this page?"
-msgstr ""
+msgstr "سبب إختياري لإعادة التسمية"
 
 #, fuzzy
-#~ msgid "filename"
-#~ msgstr "اسم الملف"
+msgid "Really delete this page?"
+msgstr "!لا يسمح لك بالعودة إلى هذه الصفحة"
+
+msgid "Options --pages and --search are mutually exclusive!"
+msgstr ""
+
+msgid "You must specify an output file!"
+msgstr ""
+
+msgid "No pages specified using --pages or --search, assuming full package."
+msgstr ""
+
+msgid "Output file already exists! Cowardly refusing to continue!"
+msgstr ""

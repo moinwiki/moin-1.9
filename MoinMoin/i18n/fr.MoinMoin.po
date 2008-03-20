@@ -13,10 +13,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-30 19:24+0200\n"
-"PO-Revision-Date: 2007-08-10 23:15+0200\n"
+"POT-Creation-Date: 2008-02-02 14:58+0100\n"
+"PO-Revision-Date: 2008-02-04 21:22+0100\n"
 "Last-Translator: Jean-Philippe Guérard <fevrier@tigreraye.org>\n"
-"Language-Team: French <traduc@traduc.org>\n"
+"Language-Team: Français\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -36,6 +36,9 @@ msgstr ""
 msgid "Please provide a valid email address!"
 msgstr "Veuillez fournir une adresse électronique valide !"
 
+msgid "If an account with this username exists, an email was sent."
+msgstr "Si le compte existe, un courrier va être envoyé."
+
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "Aucun compte correspondant à l'adresse « %(email)s » n'a été trouvé !"
@@ -44,6 +47,9 @@ msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
 "Utilisez les PréférencesUtilisateur pour modifier vos paramètres ou pour "
 "créer un compte."
+
+msgid "TextCha: Wrong answer! Go back and try again..."
+msgstr "TextCha : mauvaise réponse ! Revenez en arrière et réessayez..."
 
 msgid "Empty user name. Please enter a user name."
 msgstr ""
@@ -69,6 +75,10 @@ msgstr "Les mots de passe ne correspondent pas !"
 
 msgid "Please specify a password!"
 msgstr "Veuillez indiquer un mot de passe !"
+
+#, python-format
+msgid "Password not acceptable: %s"
+msgstr "Mot de passe non acceptable : %s"
 
 msgid ""
 "Please provide your email address. If you lose your login information, you "
@@ -158,10 +168,13 @@ msgid "Subscribed wiki pages (one regex per line)"
 msgstr "Abonnements (une expression rationnelle par ligne)"
 
 msgid "Create Profile"
-msgstr "Créer un profil"
+msgstr "Créer le compte"
+
+msgid "TextCha (required)"
+msgstr "TextCha (nécessaire)"
 
 msgid "Mail me my account data"
-msgstr "Envoi par courrier électronique de mes identifiants de connexion"
+msgstr "Envoyez-moi mes identifiants de connexion"
 
 msgid "Email"
 msgstr "Adresse électronique"
@@ -185,6 +198,75 @@ msgstr "Connexion"
 
 msgid "Action"
 msgstr "Action"
+
+msgid "Enable user"
+msgstr "Activer l'utilisateur"
+
+msgid "disabled"
+msgstr "désactivé"
+
+msgid "Disable user"
+msgstr "Désactiver l'utilisateur"
+
+msgid "Mail account data"
+msgstr "Envoi de identifiants de connexion"
+
+#, python-format
+msgid "Argument \"%s\" must be a boolean value, not \"%s\""
+msgstr "L'argument « %s » doit être un booléen, et non « %s »"
+
+#, python-format
+msgid "Argument must be a boolean value, not \"%s\""
+msgstr "L'argument doit être un booléen, et non « %s »"
+
+#, python-format
+msgid "Argument \"%s\" must be an integer value, not \"%s\""
+msgstr "L'argument « %s » doit être un entier, et non « %s »"
+
+#, python-format
+msgid "Argument must be an integer value, not \"%s\""
+msgstr "L'argument doit être un entier, et non « %s »"
+
+#, python-format
+msgid "Argument \"%s\" must be a floating point value, not \"%s\""
+msgstr ""
+"L'argument « %s » doit être un nombre à virgule flotante, et non « %s »"
+
+#, python-format
+msgid "Argument must be a floating point value, not \"%s\""
+msgstr "L'argument doit être un nombre à virgule flotante, et non « %s »"
+
+#, python-format
+msgid "Argument \"%s\" must be a complex value, not \"%s\""
+msgstr "L'argument « %s » doit être un nombre complexe, et non « %s »"
+
+#, python-format
+msgid "Argument must be a complex value, not \"%s\""
+msgstr "L'argument doit être un nombre complexe, et non « %s »"
+
+#, python-format
+msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
+msgstr "L'argument « %s » doit être l'une des valeurs « %s », et non « %s »"
+
+#, python-format
+msgid "Argument must be one of \"%s\", not \"%s\""
+msgstr "L'argument doit être l'une des valeurs « %s », et non « %s »"
+
+msgid "Too many arguments"
+msgstr "Trop d'arguments"
+
+msgid "Cannot have arguments without name following named arguments"
+msgstr ""
+"Il n'est pas possible d'utiliser des arguments anonymes après des arguments "
+"nommés"
+
+#, python-format
+msgid "Argument \"%s\" is required"
+msgstr "L'argument « %s » est obligatoire"
+
+#, python-format
+msgid "No argument named \"%s\""
+msgstr "Aucun argument n'est nommé « %s »"
 
 #, python-format
 msgid "Expected \"=\" to follow \"%(token)s\""
@@ -263,18 +345,18 @@ msgstr "[Vous n'avez pas le droit de lire %s]"
 
 #, python-format
 msgid ""
-"'''[[BR]]Your draft based on revision %(draft_rev)d (saved %"
+"'''<<BR>>Your draft based on revision %(draft_rev)d (saved %"
 "(draft_timestamp_str)s) can be loaded instead of the current revision %"
 "(page_rev)d by using the load draft button - in case you lost your last edit "
 "somehow without saving it.''' A draft gets saved for you when you do a "
 "preview, cancel an edit or unsuccessfully save."
 msgstr ""
-"'''[[BR]]Au cas où vous auriez perdu vos dernières modifications, vous "
-"pouvez utiliser le bouton « Recharger le brouillon » pour reprendre, à la "
-"place de la version actuelle (%(page_rev)d), le brouillon créé à partir de "
-"la version %(draft_rev)d (enregistré %(draft_timestamp_str)s).''' Un "
-"brouillon est conservé, à votre intention, chaque fois que vous utilisez "
-"l'aperçu, que vous annulez une modification ou en cas d'échec de sauvegarde."
+"'''<<BR>>Si vous avez perdu vos dernières modifications, vous pouvez "
+"utiliser le bouton « Recharger le brouillon » pour reprendre, à la place de "
+"la version actuelle (%(page_rev)d), le brouillon créé à partir de la version "
+"%(draft_rev)d (enregistré %(draft_timestamp_str)s).''' Un brouillon est "
+"conservé, à votre intention, chaque fois que vous utilisez l'aperçu, que "
+"vous annulez une modification ou en cas d'échec de sauvegarde."
 
 #, python-format
 msgid "Describe %s here."
@@ -307,6 +389,9 @@ msgstr "Mode texte"
 msgid "Load Draft"
 msgstr "Recharger le brouillon"
 
+msgid "Trivial change"
+msgstr "Modification mineure"
+
 msgid "Comment:"
 msgstr "Commentaire :"
 
@@ -316,9 +401,6 @@ msgstr "<Pas d'ajout>"
 #, python-format
 msgid "Add to: %(category)s"
 msgstr "Ajouter à : %(category)s"
-
-msgid "Trivial change"
-msgstr "Modification mineure"
 
 msgid "Remove trailing whitespace from each line"
 msgstr "Supprimer les espaces en fin de ligne"
@@ -505,6 +587,25 @@ msgstr "Impossible de verrouiller la page. Erreur inattendue (errno=%d)."
 msgid "Page could not get locked. Missing 'current' file?"
 msgstr "Impossible de verrouiller la page. Fichier « current » manquant ?"
 
+#, python-format
+msgid ""
+"Unable to determine current page revision from the 'current' file. The page %"
+"s is damaged and cannot be edited right now."
+msgstr ""
+"Le fichier « current » ne permet pas de déterminer la version de la page en "
+"cours. La page %s est endommagée et ne peut être modifiée pour l'instant."
+
+#, python-format
+msgid "Cannot save page %s, no storage space left."
+msgstr ""
+"Impossible d'enregistrer la page %s, il ne reste plus d'espace de stockage"
+
+#, python-format
+msgid "An I/O error occurred while saving page %s (errno=%d)"
+msgstr ""
+"Une erreur d'entrée-sortie s'est produite au cours de la sauvegarde de la "
+"page %s (errno=%d)"
+
 msgid "You are not allowed to edit this page!"
 msgstr "Vous n'êtes pas autorisé à modifier cette page !"
 
@@ -568,16 +669,16 @@ msgstr ""
 #, python-format
 msgid ""
 "This page was opened for editing or last previewed at %(timestamp)s by %"
-"(owner)s.[[BR]]\n"
+"(owner)s.<<BR>>\n"
 "'''You should ''refrain from editing'' this page for at least another %"
 "(mins_valid)d minute(s),\n"
-"to avoid editing conflicts.'''[[BR]]\n"
+"to avoid editing conflicts.'''<<BR>>\n"
 "To leave the editor, press the Cancel button."
 msgstr ""
 "%(owner)s a commencé d'éditer ou de prévisualiser cette page pour la "
-"dernière fois le %(timestamp)s.[[BR]] '''Afin d'éviter des conflits "
+"dernière fois le %(timestamp)s.<<BR>> '''Afin d'éviter des conflits "
 "d'édition,  vous ''ne'' devriez ''pas'' éditer cette page avant au moins %"
-"(mins_valid)d nouvelles minutes.'''[[BR]]\n"
+"(mins_valid)d nouvelles minutes.'''<<BR>>\n"
 "Pour quitter l'éditeur, utilisez le bouton « Annuler »."
 
 msgid "<unknown>"
@@ -665,6 +766,9 @@ msgstr "Précédent"
 msgid "Next"
 msgstr "Suivant"
 
+msgid "rev"
+msgstr "rév."
+
 msgid "current"
 msgstr "actuel"
 
@@ -738,12 +842,33 @@ msgstr "Recherche de texte"
 msgid "Not supported mimetype of file: %s"
 msgstr "Le type MIME de  ce fichier n'est pas compatible : %s"
 
+msgid "Embedding of object by chosen formatter not possible"
+msgstr ""
+"L'intégration de l'objet à la page n'est pas possible avec le moteur de "
+"formatage sélectionné"
+
 msgid "Embedded"
 msgstr "intégré"
+
+msgid ""
+"Not enough arguments given to EmbedObject macro! Try <<EmbedObject"
+"(attachment [,width=width] [,height=height] [,alt=alternate Text])>>"
+msgstr ""
+"Trop peu d'arguments ont été donnés à la macro EmbedObject. Essayez "
+"<<EmbedObject(pièce-jointe [,width=largeur] [,height=hauteur] [,alt=texte de "
+"remplacement])>>"
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "Ajout de la nouvelle pièce jointe « %(filename)s »"
+
+msgid ""
+"Not enough arguments given to EmbedObject macro! Try <<EmbedObject(url, "
+"url_mimetype [,width=width] [,height=height] [,alt=alternate Text])>>"
+msgstr ""
+"Trop peu d'arguments ont été donnés à la macro EmbedObject. Essayez "
+"<<EmbedObject(url, type_mime_de_l_url [,width=largeur] [,height=hauteur] [,"
+"alt=texte de remplacement])>>"
 
 #, python-format
 msgid "Invalid MonthCalendar calparms \"%s\"!"
@@ -823,7 +948,7 @@ msgid "index unavailable"
 msgstr "index non disponible"
 
 msgid "N/A"
-msgstr "n/a"
+msgstr "Non disponible"
 
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "Xapian ou l'interface Python de Xapian ne sont pas installés"
@@ -926,18 +1051,20 @@ msgstr "contenant au moins l'un des termes suivants"
 msgid "not containing the following terms"
 msgstr "ne contenant aucun des termes suivants"
 
-msgid "belonging to one of the following categories"
-msgstr "appartenant à l'une des catégories suivantes"
-
 msgid "last modified since (e.g. last 2 weeks)"
-msgstr ""
-"modifié pour la dernière fois depuis (p. ex. dans les dernières 2 semaines)"
+msgstr "modifié depuis (p. ex. « last 2 weeks »)"
+
+msgid "any category"
+msgstr "n'importe quelle catégorie"
 
 msgid "any language"
 msgstr "n'importe quelle langue"
 
 msgid "any mimetype"
 msgstr "tout type MIME"
+
+msgid "Categories"
+msgstr "Catégories"
 
 msgid "Language"
 msgstr "Langue"
@@ -1052,8 +1179,7 @@ msgstr "Image incluse : %(url)s"
 
 #, python-format
 msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr ""
-"Création d'un nouveau dessin « %(filename)s » (dans une nouvelle fenêtre)"
+msgstr "Créer un nouveau dessin « %(filename)s » (dans une nouvelle fenêtre)"
 
 #, python-format
 msgid "Edit drawing %(filename)s (opens in new window)"
@@ -1311,6 +1437,9 @@ msgstr "AideDeMiseEnForme"
 msgid "UserPreferences"
 msgstr "PréférencesUtilisateur"
 
+msgid "SendMyPassword"
+msgstr "EnvoiDeMonMotDePasse"
+
 msgid "WikiLicense"
 msgstr "LicenceDuWiki"
 
@@ -1384,7 +1513,7 @@ msgid "# of pages of this size"
 msgstr "Nombre de pages de cette taille"
 
 msgid "User agent"
-msgstr "Agent utilisateur"
+msgstr "Navigateur"
 
 msgid "Others"
 msgstr "Autres"
@@ -1393,13 +1522,13 @@ msgid "Distribution of User-Agent Types"
 msgstr "Répartition des types d'agents utilisateurs"
 
 msgid "Views/day"
-msgstr "Consultations/jour"
+msgstr "Consultations / jour"
 
 msgid "Edits/day"
-msgstr "Éditions/jour"
+msgstr "Modifications / jour"
 
 msgid "Page hits and edits"
-msgstr "Nombre de consultations et d'éditions"
+msgstr "Nombre de consultations et de modifications"
 
 #, python-format
 msgid "%(chart_title)s for %(filterpage)s"
@@ -1419,80 +1548,80 @@ msgid "# of hits"
 msgstr "Nombre de consultations"
 
 msgid ""
-" Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
-"(''')]]'''bold'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''bold "
-"italics'''''[[Verbatim(''''')]]; [[Verbatim('')]]''mixed ''[[Verbatim"
-"(''')]]'''''bold'''[[Verbatim(''')]] and italics''[[Verbatim('')]]; "
-"[[Verbatim(----)]] horizontal rule.\n"
-" Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title "
-"2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim"
-"(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim"
-"(=====)]].\n"
+" Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
+"italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed ''<<Verbatim(''')"
+">>'''''bold'''<<Verbatim(''')>> and italics''<<Verbatim('')>>; <<Verbatim"
+"(----)>> horizontal rule.\n"
+" Headings:: <<Verbatim(=)>> Title 1 <<Verbatim(=)>>; <<Verbatim(==)>> Title "
+"2 <<Verbatim(==)>>; <<Verbatim(===)>> Title 3 <<Verbatim(===)>>;   <<Verbatim"
+"(====)>> Title 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Title 5 <<Verbatim"
+"(=====)>>.\n"
 " Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
 "#n start numbering at n; space alone indents.\n"
-" Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim([\"brackets and "
-"double quotes\"])]]; url; [url]; [url label].\n"
+" Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])"
+">>.\n"
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
 "(!) For more help, see HelpOnEditing or SyntaxReference.\n"
 msgstr ""
-" Mise en relief:: [[Verbatim('')]]''italique''[[Verbatim('')]] ; [[Verbatim"
-"(''')]]'''gras'''[[Verbatim(''')]] ; [[Verbatim(''''')]]'''''gras "
-"italique'''''[[Verbatim(''''')]] ; [[Verbatim('')]]''mélange de ''[[Verbatim"
-"(''')]]'''''gras'''[[Verbatim(''')]] et d'italique''[[Verbatim('')]] ; "
-"[[Verbatim(----)]] filet horizontal.\n"
-" Titres:: [[Verbatim(=)]] Titre 1 [[Verbatim(=)]] ; [[Verbatim(==)]] Titre 2 "
-"[[Verbatim(==)]] ; [[Verbatim(===)]] Titre 3 [[Verbatim(===)]] ;   [[Verbatim"
-"(====)]] Titre 4 [[Verbatim(====)]] ; [[Verbatim(=====)]] Titre 5 [[Verbatim"
-"(=====)]].\n"
+" Mise en relief:: <<Verbatim('')>>''italique''<<Verbatim('')>> ; <<Verbatim"
+"(''')>>'''gras'''<<Verbatim(''')>> ; <<Verbatim(''''')>>'''''gras "
+"italique'''''<<Verbatim(''''')>> ; <<Verbatim('')>>''mélange de ''<<Verbatim"
+"(''')>>'''''gras'''<<Verbatim(''')>> et d'italique''<<Verbatim('')>> ; "
+"<<Verbatim(----)>> filet horizontal.\n"
+" Titres:: <<Verbatim(=)>> Titre 1 <<Verbatim(=)>> ; <<Verbatim(==)>> Titre 2 "
+"<<Verbatim(==)>> ; <<Verbatim(===)>> Titre 3 <<Verbatim(===)>> ;   <<Verbatim"
+"(====)>> Titre 4 <<Verbatim(====)>> ; <<Verbatim(=====)>> Titre 5 <<Verbatim"
+"(=====)>>.\n"
 " Listes:: une espace suivi de : « * » puces ; « 1. », « a. », « A. », « i. "
 " », « I. » énumérations ; « 1.#n » énumération commençant à n ; une espace "
 "seule ajoute une indentation.\n"
-" Liens:: [[Verbatim(MotsAccolésAvecMajusculesInitiales)]] ; [[Verbatim"
-"([\"crochets et petits guillemets\"])]] ; url ; [url] ; [url intitulé].\n"
+" Liens:: <<Verbatim(MotsAccolésDébutantParDesMajuscules)>> ; <<Verbatim"
+"([[cible|intitulé]])>>.\n"
 " Tables:: || texte de la cellule |||| texte s'étendant sur 2 colonnes || ; "
 "aucune espace ne doit suivre la fin d'un tableau ou d'un titre.\n"
 "\n"
-"(!) Pour plus d'informations, reportez-vous à l'[\"AideDeL'Édition\"] ou au "
-"RésuméDeLaSyntaxe.\n"
+"(!) Pour plus d'informations, reportez-vous à l'[AideDeL'Édition|"
+"AideDeL'Édition] ou au RésuméDeLaSyntaxe.\n"
 
 msgid ""
-"Emphasis: <i>*italic*</i> <b>**bold**</b> ``monospace``<br/>\n"
-"<br/><pre>\n"
+"{{{\n"
+"Emphasis: *italic* **bold** ``monospace``\n"
+"\n"
 "Headings: Heading 1  Heading 2  Heading 3\n"
 "          =========  ---------  ~~~~~~~~~\n"
 "\n"
 "Horizontal rule: ---- \n"
+"\n"
 "Links: TrailingUnderscore_ `multi word with backticks`_ external_ \n"
 "\n"
-".. _external: http://external-site.net/foo/\n"
+".. _external: http://external-site.example.org/foo/\n"
 "\n"
 "Lists: * bullets; 1., a. numbered items.\n"
-"</pre>\n"
-"<br/>\n"
+"}}}\n"
 "(!) For more help, see the \n"
-"<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
-"reStructuredText Quick Reference\n"
-"</a>.\n"
+"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
+"reStructuredText Quick Reference]].\n"
 msgstr ""
-"Mise en relief : <i>*italique*</i> <b>**gras**</b> ``à chasse fixe``<br/>\n"
-"<br/><pre>\n"
+"{{{\n"
+"Mise en relief : *italique* **gras** ``à chasse fixe``<br/>\n"
+"\n"
 "Titres : Titre 1  Titre 2  Titre 3\n"
 "         =======  -------  ~~~~~~~\n"
 "\n"
 "Filet horizontal : ---- \n"
-"Liens : SoulignéFinal_ `multi-mot encadré d'accents graves`_ externes_ \n"
+"\n"
+"Liens : SoulignéFinal_ `plusieurs mots encadrés d'accents graves`_ externe_ \n"
 "\n"
 ".. _externe : http://exemple.fr.invalid/blabla/\n"
 "\n"
 "Listes : * puces ; 1., a. numérotées.\n"
-"</pre>\n"
-"<br/>\n"
+"}}}\n"
 "(!) Pour en savoir plus, consultez le \n"
-"l'<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
-"Guide de référence rapide de reStructuredText\n"
-"</a> (en anglais).\n"
+"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
+"Guide de référence rapide de reStructuredText]] (en anglais).\n"
 
 msgid "UnSubscribe"
 msgstr "SeDésabonner"
@@ -1539,8 +1668,8 @@ msgstr "S'abonner aux modifications mineures"
 msgid "Disable this account forever"
 msgstr "Désactiver ce compte pour toujours"
 
-msgid "(Use Firstname''''''Lastname)"
-msgstr "(utilisez Prénom''''''Nom)"
+msgid "(Use FirstnameLastname)"
+msgstr "(utilisez PrénomNom)"
 
 msgid "Alias-Name"
 msgstr "Pseudonyme"
@@ -1584,17 +1713,14 @@ msgstr ""
 msgid "You must login to add a quicklink."
 msgstr "Vous devez être identifié pour ajouter un lien rapide."
 
-msgid "Your quicklink to this page has been removed."
-msgstr "Votre lien personnel vers cette page a été supprimé."
-
-msgid "Your quicklink to this page could not be removed."
-msgstr "Votre lien personnel vers cette page n'a pu être supprimé."
-
 msgid "A quicklink to this page has been added for you."
-msgstr "Un lien personnel vers cette page a été ajouté pour vous."
+msgstr "Un lien rapide vers cette page a été ajouté pour vous."
 
 msgid "A quicklink to this page could not be added for you."
 msgstr "Il n'a pas été possible d'ajouter pour vous un lien vers cette page."
+
+msgid "You already have a quicklink to this page."
+msgstr "Vous avez déjà créé un lien rapide vers cette page !"
 
 msgid "Missing password. Please enter user name and password."
 msgstr ""
@@ -1603,6 +1729,21 @@ msgstr ""
 
 msgid "Sorry, login failed."
 msgstr "Désolé, la connexion a échoué."
+
+msgid "Your subscription to this page has been removed."
+msgstr "Votre abonnement à cette page a été supprimé."
+
+msgid "Can't remove regular expression subscription!"
+msgstr ""
+"Impossible de retirer un abonnement défini par une expression rationnelle !"
+
+msgid "Edit the subscription regular expressions in your UserPreferences."
+msgstr ""
+"Modifiez les expressions rationnelles contenues dans vos "
+"PréférencesUtilisateur."
+
+msgid "You need to be subscribed to unsubscribe."
+msgstr "Il est nécessaire d'être abonné pour se désabonner."
 
 #, python-format
 msgid "[%d attachments]"
@@ -1697,8 +1838,15 @@ msgstr "Vous n'êtes pas autorisé à joindre un fichier à cette page."
 msgid "File attachments are not allowed in this wiki!"
 msgstr "Les pièces jointes ne sont pas autorisées sur ce wiki !"
 
-msgid "You are not allowed to save a drawing on this page."
-msgstr "Vous n'êtes pas autorisé à enregistrer un dessin dans cette page."
+msgid "You are not allowed to get attachments from this page."
+msgstr "Vous n'êtes pas autorisé à récupérer les pièces jointes de cette page."
+
+msgid "You are not allowed to view attachments of this page."
+msgstr "Vous n'êtes pas autorisé à voir les pièces jointes de cette page."
+
+msgid "You are not allowed to move attachments from this page."
+msgstr ""
+"Vous n'êtes pas autorisé à déplacer des pièces jointes depuis cette page."
 
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
@@ -1707,21 +1855,17 @@ msgstr ""
 "Aucun contenu trouvé. Supprimez les caractères non ASCII du nom du fichier "
 "et réessayez."
 
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Vous n'êtes pas autorisé à enregistrer un dessin dans cette page."
+
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Vous n'êtes pas autorisé à supprimer les pièces jointes de cette page."
-
-msgid "You are not allowed to move attachments from this page."
-msgstr ""
-"Vous n'êtes pas autorisé à déplacer des pièces jointes depuis cette page."
 
 msgid "Move aborted!"
 msgstr "Déplacement annulé !"
 
 msgid "Please use the interactive user interface to move attachments!"
 msgstr "Utilisez l'interface interactive pour déplacer des pièces jointes !"
-
-msgid "You are not allowed to get attachments from this page."
-msgstr "Vous n'êtes pas autorisé à récupérer les pièces jointes de cette page."
 
 msgid "You are not allowed to unzip attachments of this page."
 msgstr ""
@@ -1730,12 +1874,9 @@ msgstr ""
 msgid "You are not allowed to install files."
 msgstr "Vous n'êtes pas autorisé à installer des fichiers."
 
-msgid "You are not allowed to view attachments of this page."
-msgstr "Vous n'êtes pas autorisé à voir les pièces jointes de cette page."
-
 #, python-format
-msgid "Unsupported upload action: %s"
-msgstr "Action d'ajout non disponible : %s"
+msgid "Unsupported AttachFile sub-action: %s"
+msgstr "Sous-action d'ajout non disponible : %s"
 
 #, python-format
 msgid "Attachments for \"%(pagename)s\""
@@ -1833,6 +1974,9 @@ msgstr "Le fichier %(filename)s n'est pas un fichier .zip."
 msgid "Attachment '%(filename)s'"
 msgstr "Pièce jointe « %(filename)s »"
 
+msgid "Download"
+msgstr "Téléchargement"
+
 msgid "Package script:"
 msgstr "Script d'installation :"
 
@@ -1851,7 +1995,10 @@ msgstr ""
 
 #, python-format
 msgid "attachment:%(filename)s of %(pagename)s"
-msgstr "[[Verbatim(attachment:)]] %(filename)s de %(pagename)s"
+msgstr "<<Verbatim(attachment:)>> %(filename)s de %(pagename)s"
+
+msgid "Filename"
+msgstr "Nom du fichier"
 
 msgid "This page is already deleted or was never created!"
 msgstr "Cette page a déjà été supprimée ou n'a jamais existé !"
@@ -1868,6 +2015,19 @@ msgstr "Raison de ce changement de nom (optionnelle)"
 msgid "Really rename this page?"
 msgstr "Voulez-vous vraiment renommer cette page ?"
 
+msgid "You must login to remove a quicklink."
+msgstr "Vous devez être identifié pour supprimer un lien rapide."
+
+msgid "Your quicklink to this page has been removed."
+msgstr "Votre lien rapide vers cette page a été supprimé."
+
+msgid "Your quicklink to this page could not be removed."
+msgstr "Votre lien rapide vers cette page n'a pu être supprimé."
+
+msgid "You need to have a quicklink to this page to remove it."
+msgstr ""
+"Il doit y avoir un lien rapide sur cette page pour pouvoir le supprimer."
+
 #, python-format
 msgid "Full Link List for \"%s\""
 msgstr "Liste de tout les liens pour « %s »"
@@ -1879,7 +2039,7 @@ msgid "Pages"
 msgstr "Pages"
 
 msgid "Select Author"
-msgstr "Choix de l'auteur"
+msgstr "Sélection de l'auteur"
 
 msgid "Revert all!"
 msgstr "Tout restaurer !"
@@ -1894,15 +2054,15 @@ msgstr "Annulation des modifications apportées à la page %s"
 msgid "Exception while calling rollback function:"
 msgstr ""
 "Une exception est survenue lors de l'appel à la fonction d'annulation des "
-"modifications"
+"modifications :"
 
 msgid ""
 "Please enter your password of your account at the remote wiki below. "
-"[[BR]] /!\\ You should trust both wikis because the password could be read "
+"<<BR>> /!\\ You should trust both wikis because the password could be read "
 "by the particular administrators."
 msgstr ""
 "Veuillez indiquer le mot de passe de votre compte sur le wiki distant ci-"
-"dessous. [[BR]] /!\\ Vous devez faire confiance aux deux wikis, car votre "
+"dessous. <<BR>> /!\\ Vous devez faire confiance aux deux wikis, car votre "
 "mot de passe pourrait être lu par leurs administrateurs."
 
 msgid "Operation was canceled."
@@ -2121,17 +2281,8 @@ msgstr ""
 "Ajoutez votre adresse électronique dans les PréférencesUtilisateur pour "
 "utiliser l'abonnement."
 
-msgid "Your subscription to this page has been removed."
-msgstr "Votre abonnement à cette page a été supprimé."
-
-msgid "Can't remove regular expression subscription!"
-msgstr ""
-"Impossible de retirer un abonnement défini par une expression rationnelle !"
-
-msgid "Edit the subscription regular expressions in your UserPreferences."
-msgstr ""
-"Modifiez les expressions rationnelles contenues dans vos "
-"PréférencesUtilisateur."
+msgid "You are already subscribed to this page."
+msgstr "Vous êtes déjà abonné à cette page."
 
 msgid "You have been subscribed to this page."
 msgstr "Vous avez été abonné à cette page."
@@ -2203,11 +2354,11 @@ msgid ""
 "\n"
 "||'''Add a new personal page:'''||'''Related access control list "
 "group:'''||\n"
-"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
+"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
 "[\"%(username)s/ReadWriteGroup\"]||\n"
-"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[\"%"
 "(username)s/ReadGroup\"]||\n"
-"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
+"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
 "(username)s only||\n"
 "\n"
 msgstr ""
@@ -2229,11 +2380,11 @@ msgstr ""
 "\n"
 "||'''Ajout d'une nouvelle page personnelle :'''||'''Groupes utilisés pour "
 "les listes de contrôle d'accès :'''||\n"
-"||[[NewPage(HomepageReadWritePageTemplate,page ouverte en écriture,%"
-"(username)s)]]||[\"%(username)s/GroupeDesRédacteurs\"]||\n"
-"||[[NewPage(HomepageReadPageTemplate,page en lecture seule,%(username)s)]]||"
+"||<<NewPage(HomepageReadWritePageTemplate,page ouverte en écriture,%"
+"(username)s)>>||[\"%(username)s/GroupeDesRédacteurs\"]||\n"
+"||<<NewPage(HomepageReadPageTemplate,page en lecture seule,%(username)s)>>||"
 "[\"%(username)s/GroupeDesLecteurs\"]||\n"
-"||[[NewPage(HomepagePrivatePageTemplate,page privée,%(username)s)]]||"
+"||<<NewPage(HomepagePrivatePageTemplate,page privée,%(username)s)>>||"
 "Uniquement (username)s||\n"
 "\n"
 
@@ -2243,6 +2394,9 @@ msgstr "Gestion de MesPages"
 #, python-format
 msgid "Subscribe users to the page %s"
 msgstr "Abonner les utilisateurs à la page %s"
+
+msgid "Enter user names (comma separated):"
+msgstr "Entrez les noms d'utilisateurs (séparés par des virgules) :"
 
 #, python-format
 msgid "Subscribed for %s:"
@@ -2302,10 +2456,10 @@ msgstr "recherche portant sur le texte des pages"
 
 msgid ""
 "(!) You're performing a title search that might not include all related "
-"results of your search query in this wiki. [[BR]]"
+"results of your search query in this wiki. <<BR>>"
 msgstr ""
 "(!) Vous êtes en train de réaliser une recherche sur les titres qui risque "
-"de ne pas contenir toutes les pages du wiki relatives à ce sujet. [[BR]]"
+"de ne pas contenir toutes les pages du wiki relatives à ce sujet. <<BR>>"
 
 msgid "Click here to perform a full-text search with your search terms!"
 msgstr ""
@@ -2335,9 +2489,9 @@ msgid ""
 "  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
 "stuff).\n"
 "  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
-"  * Hit the [[GetText(Restore)]] button below.\n"
+"  * Hit the <<GetText(Restore)>> button below.\n"
 "\n"
-" * To make a backup, just hit the [[GetText(Backup)]] button and save the "
+" * To make a backup, just hit the <<GetText(Backup)>> button and save the "
 "file\n"
 "   you get to a secure place.\n"
 "\n"
@@ -2353,10 +2507,10 @@ msgstr ""
 "heure--UTC).\n"
 "  * Placez le fichier de sauvegarde dans le répertoire backup_storage_dir "
 "(via scp, ftp, ...).\n"
-"  * Cliquez sur le bouton [[GetText(Restore)]] ci-dessous.\n"
+"  * Cliquez sur le bouton <<GetText(Restore)>> ci-dessous.\n"
 "\n"
-" * Pour réaliser une sauvegarde, cliquez simplement sur le bouton [[GetText"
-"(Backup)]]\n"
+" * Pour réaliser une sauvegarde, cliquez simplement sur le bouton <<GetText"
+"(Backup)>>\n"
 "et sauvegardez le fichier obtenu dans un endroit sûr.\n"
 "\n"
 "Assurez-vous que les paramètres backup_* du wiki sont définis et corrects.\n"
@@ -2393,9 +2547,8 @@ msgstr ""
 msgid "Local Site Map for \"%s\""
 msgstr "Carte locale du site pour « %s »"
 
-#, python-format
-msgid "No pages like \"%s\"!"
-msgstr "Aucune page n'est similaire à « %s » !"
+msgid "You are not allowed to create the supplementation page."
+msgstr "Vous n'êtes pas autorisé à créer une page complémentaire"
 
 #, python-format
 msgid "Invalid filename \"%s\"!"
@@ -2413,6 +2566,10 @@ msgstr "Nom du paquet"
 
 msgid "List of page names - separated by a comma"
 msgstr "Liste des noms de pages - séparées par des virgules"
+
+#, python-format
+msgid "No pages like \"%s\"!"
+msgstr "Aucune page n'est similaire à « %s » !"
 
 msgid "No older revisions available!"
 msgstr "Il n'y a pas de version antérieure."
@@ -2477,3 +2634,16 @@ msgstr "Raison de cette suppression (optionnelle)"
 
 msgid "Really delete this page?"
 msgstr "Voulez-vous vraiment supprimer cette page ?"
+
+msgid "Options --pages and --search are mutually exclusive!"
+msgstr "Les options --pages et --search sont mutuellement exclusives !"
+
+msgid "You must specify an output file!"
+msgstr "Vous devez indiquer un fichier de sortie !"
+
+msgid "No pages specified using --pages or --search, assuming full package."
+msgstr ""
+"Aucune page indiquée via --pages ou --search, on prend le paquet complet."
+
+msgid "Output file already exists! Cowardly refusing to continue!"
+msgstr "Le fichier de sortie existe déjà ! Abandon lâche de l'opération."
