@@ -133,11 +133,19 @@ class XmlRpcBase:
                 response = xmlrpclib.Fault(1, "This moin wiki does not allow xmlrpc method calls.")
             else:
                 data = self.request.read()
-                params, method = xmlrpclib.loads(data)
 
-                logging.debug(logging_tearline % 'request begin')
-                logging.debug('%s(%s)' % (method, repr(params)))
-                logging.debug(logging_tearline % 'request end')
+                try:
+                    params, method = xmlrpclib.loads(data)
+                except:
+                    # if anything goes wrong here, we want to see the raw data:
+                    logging.debug(logging_tearline % 'request raw data begin')
+                    logging.debug('%r' % data)
+                    logging.debug(logging_tearline % 'request raw data end')
+                    raise
+
+                logging.debug(logging_tearline % 'request parsed data begin')
+                logging.debug('%s(%r)' % (method, params))
+                logging.debug(logging_tearline % 'request parsed data end')
 
                 response = self.dispatch(method, params)
         except:
