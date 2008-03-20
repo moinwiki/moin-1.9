@@ -55,7 +55,7 @@ class ActionBase:
         self.form_trigger_label = _("Do it.") # label for the trigger button
         self.page = Page(request, pagename)
         self.error = ''
-        self.method = 'GET'
+        self.method = 'POST'
         self.enctype = 'multipart/form-data'
 
     # CHECKS -----------------------------------------------------------------
