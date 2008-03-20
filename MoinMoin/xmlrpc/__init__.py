@@ -138,6 +138,7 @@ class XmlRpcBase:
                     params, method = xmlrpclib.loads(data)
                 except:
                     # if anything goes wrong here, we want to see the raw data:
+                    logging.debug("Length of raw data: %d bytes" % len(data))
                     logging.debug(logging_tearline % 'request raw data begin')
                     logging.debug('%r' % data)
                     logging.debug(logging_tearline % 'request raw data end')
