@@ -49,14 +49,22 @@ class revert(ActionBase):
 
     def do_action(self):
         """ Delete pagename """
-        form = self.form
-        comment = form.get('comment', [u''])[0]
-        comment = wikiutil.clean_input(comment)
+        _ = self._
 
         if self.request.request_method != 'POST':
             return False, u''
 
+        form = self.form
         rev = self.request.rev
+        comment = form.get('comment', [u''])[0]
+        system_comment = _(u"Revert to revision %(rev)d.") % {'rev': int(rev)}
+        if not comment:
+            comment = system_comment
+        else:
+            comment = "%(comment)s (%(system_comment)s)" % {"comment": comment,
+                                                            "system_comment": system_comment}
+
+        comment = wikiutil.clean_input(comment)
         pg = PageEditor(self.request, self.pagename)
 
         try:
