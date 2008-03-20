@@ -26,7 +26,7 @@ def macro_Hits(macro, all=False, filter=(u'VIEWPAGE', u'SAVEPAGE')):
     event_log = eventlog.EventLog(macro.request)
     event_log.set_filter([str(filter)])
     count = 0
-    for event in event_log.reverse():
+    for event in event_log:
         pagename = event[2].get('pagename')
         if all or pagename == this_page:
             count += 1
