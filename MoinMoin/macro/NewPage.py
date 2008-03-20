@@ -40,26 +40,26 @@ class NewPage:
             and create the page as a subpage of MoinMoinBugs.
     """
 
-    arguments = ['template', 'buttonLabel', 'parentPage', 'nameTemplate']
-
-    def __init__(self, macro, args):
+    def __init__(self, macro, template=u'', button_label=u'',
+                 parent_page=u'', name_template=u'%s'):
         self.macro = macro
         self.request = macro.request
         self.formatter = macro.formatter
-        self.args = self.getArgs(args)
-
-    def getArgs(self, argstr):
-        """ Temporary function until Oliver Graf args parser is finished
-
-        @param argstr: string from the wiki markup <<NewPage(string)>>
-        @rtype: dict
-        @return: dictionary with macro options
-        """
-        if not argstr:
-            return {}
-        args = [s.strip() for s in argstr.split(',')]
-        args = dict(zip(self.arguments, args))
-        return args
+        self.template = template
+        _ = self.request.getText
+        if button_label:
+            # Try to get a translation, this will probably not work in
+            # most cases, but better than nothing.
+            self.label = self.request.getText(button_label)
+        else:
+            self.label = _("Create New Page")
+        if parent_page == '@ME' and self.request.user.valid:
+            self.parent = self.request.user.name
+        elif parent_page == '@SELF':
+            self.parent = self.formatter.page.page_name
+        else:
+            self.parent = parent_page
+        self.nametemplate = name_template
 
     def renderInPage(self):
         """ Render macro in page context
@@ -70,32 +70,16 @@ class NewPage:
         f = self.formatter
         _ = self.request.getText
 
-        parent = self.args.get('parentPage') or ''
-        template = self.args.get('template') or ''
-        label = self.args.get('buttonLabel')
-        nametemplate = self.args.get('nameTemplate') or u'%s'
+        requires_input = '%s' in self.nametemplate
 
-        if parent == '@ME' and self.request.user.valid:
-            parent = self.request.user.name
-        if parent == '@SELF':
-            parent = f.page.page_name
-
-        requires_input = '%s' in nametemplate
-
-        if label:
-            # Try to get a translation, this will probably not work in
-            # most cases, but better than nothing.
-            label = self.request.getText(label)
-        else:
-            label = _("Create New Page")
 
         # TODO: better abstract this using the formatter
         html = [
             u'<form class="macro" method="get" action="%s/%s"><div>' % (self.request.getScriptname(), wikiutil.quoteWikinameURL(self.formatter.page.page_name)),
             u'<input type="hidden" name="action" value="newpage">',
-            u'<input type="hidden" name="parent" value="%s">' % wikiutil.escape(parent, 1),
-            u'<input type="hidden" name="template" value="%s">' % wikiutil.escape(template, 1),
-            u'<input type="hidden" name="nametemplate" value="%s">' % wikiutil.escape(nametemplate, 1),
+            u'<input type="hidden" name="parent" value="%s">' % wikiutil.escape(self.parent, 1),
+            u'<input type="hidden" name="template" value="%s">' % wikiutil.escape(self.template, 1),
+            u'<input type="hidden" name="nametemplate" value="%s">' % wikiutil.escape(self.nametemplate, 1),
         ]
 
         if requires_input:
@@ -103,12 +87,13 @@ class NewPage:
                 u'<input type="text" name="pagename" size="30">',
             ]
         html += [
-            u'<input type="submit" value="%s">' % wikiutil.escape(label, 1),
+            u'<input type="submit" value="%s">' % wikiutil.escape(self.label, 1),
             u'</div></form>',
             ]
         return self.formatter.rawHTML('\n'.join(html))
 
-def execute(macro, args):
+def macro_NewPage(macro, template=u'', button_label=u'',
+                  parent_page=u'', name_template=u'%s'):
     """ Temporary glue code to use with moin current macro system """
-    return NewPage(macro, args).renderInPage()
+    return NewPage(macro, template, button_label, parent_page, name_template).renderInPage()
 
