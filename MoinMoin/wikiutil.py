@@ -1645,7 +1645,7 @@ class required_arg:
         Initialise a required_arg
         @param argtype: the type the argument should have
         """
-        if not (argtype in (bool, int, long, float, complex, unicode) or
+        if not (argtype in (bool, int, long, float, complex, unicode, tuple, list) or
                 isinstance(argtype, IEFArgument)):
             raise TypeError("argtype must be a valid type")
         self.argtype = argtype
