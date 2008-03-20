@@ -104,16 +104,17 @@ def execute(pagename, request):
         # read in the complete log of this page
         log = editlog.EditLog(request, rootpagename=pagename)
         count = 0
+        pgactioncount = 0
         for line in log.reverse():
             rev = int(line.rev)
             actions = []
             if line.action in ('SAVE', 'SAVENEW', 'SAVE/REVERT', 'SAVE/RENAME', ):
                 size = page.size(rev=rev)
                 actions.append(render_action(_('view'), {'action': 'recall', 'rev': '%d' % rev}))
-                if count == 0:
+                if pgactioncount == 0:
                     rchecked = ' checked="checked"'
                     lchecked = ''
-                elif count == 1:
+                elif pgactioncount == 1:
                     lchecked = ' checked="checked"'
                     rchecked = ''
                 else:
@@ -127,6 +128,7 @@ def execute(pagename, request):
                         comment = _("Revert to revision %(rev)d.") % {'rev': int(line.extra)}
                     elif '/RENAME' in line.action:
                         comment = _("Renamed from '%(oldpagename)s'.") % {'oldpagename': line.extra}
+                pgactioncount += 1
             else: # ATT*
                 rev = '-'
                 diff = '-'
