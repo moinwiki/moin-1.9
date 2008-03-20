@@ -1007,10 +1007,11 @@ var search_hint = "%(search_hint)s";
             'rev_field': rev and '<input type="hidden" name="rev" value="%d">' % rev or '',
             'do_button': _("Do"),
             'baseurl': self.request.getScriptname(),
-            'pagename_quoted': wikiutil.quoteWikinameURL(self.request.page.page_name)
+            'pagename_quoted': wikiutil.quoteWikinameURL(self.request.page.page_name),
+            'pageurl': self.request.page.url(self.request),
             }
         html = '''
-<form class="actionsmenu" method="POST" action="">
+<form class="actionsmenu" method="POST" action="%(pageurl)s">
 <div>
     <label>%(label)s</label>
     <select name="action"
