@@ -159,7 +159,7 @@ def execute(pagename, request):
 </table>
 """ % (page_url, oldrev - 1, oldrev, _("Previous change"), disable_prev,
        title,
-       page_url, oldrev, _("Revert to this revision"), u'',
+       page_url, rev2, _("Revert to this revision"), u'',
        page_url, newrev, newrev + 1, _("Next change"), disable_next, )
 
     request.write(f.rawHTML(navigation_html))
