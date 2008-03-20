@@ -34,6 +34,7 @@ class revert(ActionBase):
         return allowed, _('You are not allowed to revert this page!')
 
     def check_condition(self):
+        """ checks valid page and rev """
         _ = self._
         if not self.request.rev:
             # same string as in PageEditor...
@@ -48,7 +49,7 @@ class revert(ActionBase):
             return None
 
     def do_action(self):
-        """ Delete pagename """
+        """ revert pagename """
         form = self.form
         comment = form.get('comment', [u''])[0]
         comment = wikiutil.clean_input(comment)
@@ -71,6 +72,7 @@ class revert(ActionBase):
         return True, msg
 
     def get_form_html(self, buttons_html):
+        """ creates the form """
         _ = self._
 
         d = {
