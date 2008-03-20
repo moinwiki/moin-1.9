@@ -206,10 +206,8 @@ setup_args = {
     'description': "MoinMoin %s is an easy to use, full-featured and extensible wiki software package" % (release, ),
     'author': "Juergen Hermann et al.",
     'author_email': "moin-user@lists.sourceforge.net",
-    # not active because distutils/register cant handle author and maintainer at once
-    #'maintainer': 'Thomas Waldmann',
-    #'maintainer_email': 'tw-public@gmx.de',
-    'download_url': 'http://prdownloads.sourceforge.net/moin/moin-%s.tar.gz?download' % (release, ),
+    # maintainer(_email) not active because distutils/register can't handle author and maintainer at once
+    'download_url': 'http://static.moinmo.in/files/moin-%s.tar.gz' % (release, ),
     'url': "http://moinmo.in/",
     'license': "GNU GPL",
     'long_description': """
