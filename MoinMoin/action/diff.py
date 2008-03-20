@@ -110,7 +110,7 @@ def execute(pagename, request):
     revlist = currentpage.getRevList()
 
     # Revision list starts from 2...
-    if oldrev == min(revlist) + 1:
+    if oldrev == min(revlist):
         disable_prev = u' disabled="true"'
     else:
         disable_prev = u''
