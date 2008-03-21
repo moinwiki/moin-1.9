@@ -1160,16 +1160,18 @@ class Page(object):
                 title = self.split_title()
 
                 html_head = ''
-                openid_username = self.page_name
-                userid = user.getUserId(request, openid_username)
-                if userid is None and 'openid.user' in self.pi:
-                    openid_username = self.pi['openid.user']
+                if request.cfg.openid_server_enabled:
+                    openid_username = self.page_name
                     userid = user.getUserId(request, openid_username)
 
-                if request.cfg.openid_server_restricted_users_group:
-                    request.dicts.addgroup(request,
-                                           request.cfg.openid_server_restricted_users_group)
-                if request.cfg.openid_server_enabled:
+                    if userid is None and 'openid.user' in self.pi:
+                        openid_username = self.pi['openid.user']
+                        userid = user.getUserId(request, openid_username)
+
+                    if request.cfg.openid_server_restricted_users_group:
+                        request.dicts.addgroup(request,
+                                               request.cfg.openid_server_restricted_users_group)
+
                     if userid is not None and not request.cfg.openid_server_restricted_users_group or \
                       request.dicts.has_member(request.cfg.openid_server_restricted_users_group, openid_username):
                         html_head = '<link rel="openid2.provider" href="%s">' % \
