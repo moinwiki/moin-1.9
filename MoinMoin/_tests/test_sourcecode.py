@@ -30,8 +30,35 @@ TRAILING_SPACES = 'nochange' # 'nochange' or 'fix'
                              # use 'fix' with extreme caution and in a separate changeset!
 FIX_TS_RE = re.compile(r' +$', re.M) # 'fix' mode: everything matching the trailing space re will be removed
 
+try:
+    import xattr
+    def mark_file_ok(path, mtime):
+        x = xattr.xattr(path)
+        try:
+            x.set('user.moin-pep8-tested-mtime', '%d' % mtime)
+        except IOError:
+            # probably not supported
+            mark_file_ok = lambda path, mtime: None
+
+    def should_check_file(path, mtime):
+        x = xattr.xattr(path)
+        try:
+            mt = x.get('user.moin-pep8-tested-mtime')
+            mt = long(mt)
+            return mtime > mt
+        except IOError:
+            # probably not supported
+            should_check_file = lambda path, mtime: True
+        return True
+except ImportError:
+    def mark_file_ok(path, mtime):
+        pass
+    def should_check_file(path, mtime):
+        return True
+
 RECENTLY = time.time() - 7 * 24*60*60 # we only check stuff touched recently.
 #RECENTLY = 0 # check everything!
+
 # After doing a fresh clone, this procedure is recommended:
 # 1. Run the tests once to see if everything is OK (as cloning updates the mtime,
 #    it will test every file).
@@ -45,7 +72,7 @@ def pep8_error_count(path):
     error_count = pep8.Checker(path).check_all()
     return error_count
 
-def check_py_file(reldir, path):
+def check_py_file(reldir, path, mtime):
     if TRAILING_SPACES == 'fix':
         f = file(path, 'rb')
         data = f.read()
@@ -64,6 +91,7 @@ def check_py_file(reldir, path):
     # any type of error is only reported ONCE (even if there are multiple).
     error_count = pep8_error_count(path)
     assert error_count == 0
+    mark_file_ok(path, mtime)
 
 def test_sourcecode():
     def walk(reldir):
@@ -77,8 +105,9 @@ def test_sourcecode():
         st = os.stat(path)
         mode = st.st_mode
         if stat.S_ISREG(mode): # is a regular file
-            if path.lower().endswith('.py') and st.st_mtime >= RECENTLY:
-                yield check_py_file, reldir, path
+            if (path.lower().endswith('.py') and st.st_mtime >= RECENTLY and
+                should_check_file(path, st.st_mtime)):
+                yield check_py_file, reldir, path, st.st_mtime
         elif stat.S_ISDIR(mode): # is a directory
             for entry in os.listdir(path):
                 if not entry.startswith('.'):
