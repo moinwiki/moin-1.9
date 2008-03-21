@@ -76,6 +76,7 @@ class Parser:
         'punct': punct_pattern,
     }
 
+    # BE CAREFUL: if you do changes to word_rule, consider doing them also to word_rule_js (see below)
     word_rule = ur'''
         (?:
          (?<![%(u)s%(l)s/])  # require anything not upper/lower/slash before
@@ -104,6 +105,22 @@ class Parser:
          $  # ... or end of line
         )
     ''' % {
+        'u': config.chars_upper,
+        'l': config.chars_lower,
+        'child': re.escape(CHILD_PREFIX),
+        'parent': re.escape(PARENT_PREFIX),
+    }
+    # simplified word_rule for FCKeditor's "unlink" plugin (puts a ! in front of a WikiName if WikiName matches word_rule_js),
+    # because JavaScript can not use group names and verbose regular expressions!
+    word_rule_js = (
+        ur'''(?:(?<![%(u)s%(l)s/])|^)'''
+        ur'''(?:'''
+         ur'''(?:(%(parent)s)*|((?<!%(child)s)%(child)s)?)'''
+         ur'''(((?<!%(child)s)%(child)s)?(?:[%(u)s][%(l)s]+){2,})+'''
+         ur'''(?:\#(?:\S+))?'''
+        ur''')'''
+        ur'''(?:(?![%(u)s%(l)s/])|$)'''
+    ) % {
         'u': config.chars_upper,
         'l': config.chars_lower,
         'child': re.escape(CHILD_PREFIX),

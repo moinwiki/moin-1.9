@@ -35,7 +35,7 @@ class PageGraphicalEditor(PageEditor.PageEditor):
     """ Same as PageEditor, but use the GUI editor (FCKeditor) """
     def word_rule(self):
         regex = re.compile(r"\(\?<![^)]*?\)")
-        word_rule = regex.sub("", WikiParser.word_rule)
+        word_rule = regex.sub("", WikiParser.word_rule_js)
         return repr(word_rule)[1:]
 
     def sendEditor(self, **kw):
