@@ -67,7 +67,7 @@ class TestEmbedObject:
         assert body is not None
         self.request.reset()
         self.page.saveText(body, 0)
-        
+
     def testEmbedObjectMimetype(self):
         """ tests defined mimetyes """
         files = ('test.ogg', 'test.svg', 'test.mpg', 'test.mp3')
