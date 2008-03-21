@@ -714,6 +714,7 @@ class XmlRpcBase:
         u = self.request.handle_auth(u)
         self.request.cfg.session_handler.after_auth(self.request, id_handler, u)
         if u and u.valid:
+            self.request.user = u
             return "SUCCESS"
         else:
             return xmlrpclib.Fault("INVALID", "Invalid token.")
