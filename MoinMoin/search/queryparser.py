@@ -744,7 +744,7 @@ class CategorySearch(TextSearch):
         return u'%s!"%s"' % (neg, unicode(self._pattern))
 
     def highlight_re(self):
-        return u'(\b%s\b)' % self._pattern
+        return u'(\\b%s\\b)' % self._pattern
 
     def xapian_wanted(self):
         return True # only easy regexps possible
