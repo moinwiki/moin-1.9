@@ -42,7 +42,7 @@ def copyData():
 
 def untarUnderlay():
     print 'untaring underlay ...'
-    tar = tarfile.open(os.path.join(SHARE, 'underlay.tar.bz2'), mode='r:bz2')
+    tar = tarfile.open(os.path.join(SHARE, 'underlay.tar'))
     for member in tar:
         tar.extract(member, WIKI)
     tar.close()
