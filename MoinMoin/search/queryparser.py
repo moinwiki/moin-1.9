@@ -1027,15 +1027,6 @@ class QueryParser:
             elif "domain".startswith(m):
                 domain = True
 
-        # oh, let's better call xapian if we encounter this nasty regexp ;)
-        if not category:
-            cat_re = re.compile(r'----\(-\*\)\(\\r\)\?\\n\)\(\.\*\)Category(.*)\\b', re.U)
-            cat_match = cat_re.search(text)
-            if cat_match:
-                text = cat_match.groups()[0]
-                category = True
-                regex = False
-
         if category:
             obj = CategorySearch(text, use_re=regex, case=case)
         elif mimetype:
