@@ -734,7 +734,7 @@ class CategorySearch(TextSearch):
     def _build_re(self, pattern, **kwargs):
         kwargs['use_re'] = True
         TextSearch._build_re(self,
-                r'(----(-*)(\r)?\n)(.*)Category%s\b' % pattern, **kwargs)
+                r'(----(-*)(\r)?\n)(.*)%s\b' % pattern, **kwargs)
 
     def costs(self):
         return 5000 # cheaper than a TextSearch
@@ -744,7 +744,7 @@ class CategorySearch(TextSearch):
         return u'%s!"%s"' % (neg, unicode(self._pattern))
 
     def highlight_re(self):
-        return u'(Category%s)' % self._pattern
+        return u'(%s)' % self._pattern
 
     def xapian_wanted(self):
         return True # only easy regexps possible
