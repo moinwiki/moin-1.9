@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-MoinMoin - page contents writer
+    MoinMoin - page contents writer
 
     @copyright: 2007 MoinMoin:JohannesBerg
     @license: GNU GPL, see COPYING for details.
@@ -21,18 +21,18 @@ example than an actual script.
 
 Detailed Instructions:
 ======================
-General syntax: moin [options] xmlrpc write [write-options]
+General syntax: moin xmlrpc write <targeturl> <username> <password> <pagename>
 
-[options] usually should be:
-    --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
+Example:
+    To edit the page 'FrontPage' on 'http://wiki.example.org/' using the username
+    'JohnSmith' and the password 'MyPass', changing the page contents
+    to 'This will be the new contents of the page!' use:
+    moin xmlrpc write http://wiki.example.org/ JohnSmith MyPass FrontPage
+    This will be the new contents of the page!
+    ^D
 
-[write-options] see below:
-    0. To edit the page 'FrontPage' on '192.168.0.1' using the username
-       'JohnSmith' and the password 'MyPass', changing the page contents
-       to 'This will be the new contents of the page!'
-       moin ... xmlrpc write 192.168.0.1 JohnSmith MyPass FrontPage
-       This will be the new contents of the page!
-       ^D
+Note: we automatically append ?action=xmlrpc2 to the target url given.
+
 """
 
     def __init__(self, argv, def_values):
@@ -42,7 +42,7 @@ General syntax: moin [options] xmlrpc write [write-options]
     # script entrypoint
     def mainloop(self):
         # grab parameters
-        url = self.argv[0]
+        url = self.argv[0] + '?action=xmlrpc2'
         user = self.argv[1]
         passwd = self.argv[2]
         pagename = self.argv[3]
@@ -51,7 +51,7 @@ General syntax: moin [options] xmlrpc write [write-options]
         s = xmlrpclib.ServerProxy(url)
         token = s.getAuthToken(user, passwd)
 
-        if token == '':
+        if not token:
             print 'Invalid username/password'
             return
 
