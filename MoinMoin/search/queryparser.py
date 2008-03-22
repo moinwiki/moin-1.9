@@ -31,6 +31,8 @@ except ImportError:
 class BaseExpression:
     """ Base class for all search terms """
 
+    _tag = ""
+
     def __init__(self):
         self.negated = 0
 
@@ -99,6 +101,10 @@ class BaseExpression:
 
     def xapian_wanted(self):
         return False
+
+    def __unicode__(self):
+        neg = self.negated and '-' or ''
+        return u'%s%s"%s"' % (neg, self._tag, unicode(self._pattern))
 
 
 class AndExpression(BaseExpression):
@@ -300,13 +306,14 @@ class TextSearch(BaseExpression):
         self.case = case
         self._build_re(self._pattern, use_re=use_re, case=case)
         self.titlesearch = TitleSearch(self._pattern, use_re=use_re, case=case)
+        self._tag = ''
+        if use_re:
+            self._tag += 're:'
+        if case:
+            self._tag += 'case:'
 
     def costs(self):
         return 10000
-
-    def __unicode__(self):
-        neg = self.negated and '-' or ''
-        return u'%s"%s"' % (neg, unicode(self._pattern))
 
     def highlight_re(self):
         return u"(%s)" % self.pattern
@@ -418,12 +425,14 @@ class TitleSearch(BaseExpression):
         self.case = case
         self._build_re(self._pattern, use_re=use_re, case=case)
 
+        self._tag = 'title:'
+        if use_re:
+            self._tag += 're:'
+        if case:
+            self._tag += 'case:'
+
     def costs(self):
         return 100
-
-    def __unicode__(self):
-        neg = self.negated and '-' or ''
-        return u'%s!"%s"' % (neg, unicode(self._pattern))
 
     def highlight_re(self):
         return u'' # do not highlight text with stuff from titlesearch,
@@ -555,6 +564,12 @@ class LinkSearch(BaseExpression):
         self.textsearch = TextSearch(self._textpattern, use_re=1, case=case)
         self._build_re(unicode(pattern), use_re=use_re, case=case)
 
+        self._tag = 'linkto:'
+        if use_re:
+            self._tag += 're:'
+        if case:
+            self._tag += 'case:'
+
     def _build_re(self, pattern, use_re=False, case=False):
         """ Make a regular expression out of a text pattern """
         flags = case and re.U or (re.I | re.U)
@@ -568,10 +583,6 @@ class LinkSearch(BaseExpression):
 
     def costs(self):
         return 5000 # cheaper than a TextSearch
-
-    def __unicode__(self):
-        neg = self.negated and '-' or ''
-        return u'%s!"%s"' % (neg, unicode(self._pattern))
 
     def highlight_re(self):
         return u"(%s)" % self._textpattern
@@ -657,12 +668,14 @@ class LanguageSearch(BaseExpression):
         self.xapian_called = False
         self._build_re(self._pattern, use_re=use_re, case=case)
 
+        self._tag = 'language:'
+        if use_re:
+            self._tag += 're:'
+        if case:
+            self._tag += 'case:'
+
     def costs(self):
         return 5000 # cheaper than a TextSearch
-
-    def __unicode__(self):
-        neg = self.negated and '-' or ''
-        return u'%s!"%s"' % (neg, unicode(self._pattern))
 
     def highlight_re(self):
         return u""
@@ -731,6 +744,8 @@ class CategorySearch(TextSearch):
         TextSearch.__init__(self, *args, **kwargs)
         self.titlesearch = None
 
+        self._tag = 'category:'
+
     def _build_re(self, pattern, **kwargs):
         kwargs['use_re'] = True
         TextSearch._build_re(self,
@@ -738,10 +753,6 @@ class CategorySearch(TextSearch):
 
     def costs(self):
         return 5000 # cheaper than a TextSearch
-
-    def __unicode__(self):
-        neg = self.negated and '-' or ''
-        return u'%s!"%s"' % (neg, unicode(self._pattern))
 
     def highlight_re(self):
         return u'(\\b%s\\b)' % self._pattern
@@ -793,12 +804,14 @@ class MimetypeSearch(BaseExpression):
         self.xapian_called = False
         self._build_re(self._pattern, use_re=use_re, case=case)
 
+        self._tag = 'mimetype:'
+        if use_re:
+            self._tag += 're:'
+        if case:
+            self._tag += 'case:'
+
     def costs(self):
         return 5000 # cheaper than a TextSearch
-
-    def __unicode__(self):
-        neg = self.negated and '-' or ''
-        return u'%s!"%s"' % (neg, unicode(self._pattern))
 
     def highlight_re(self):
         return u""
@@ -853,12 +866,14 @@ class DomainSearch(BaseExpression):
         self.xapian_called = False
         self._build_re(self._pattern, use_re=use_re, case=case)
 
+        self._tag = 'domain:'
+        if use_re:
+            self._tag += 're:'
+        if case:
+            self._tag += 'case:'
+
     def costs(self):
         return 5000 # cheaper than a TextSearch
-
-    def __unicode__(self):
-        neg = self.negated and '-' or ''
-        return u'%s!"%s"' % (neg, unicode(self._pattern))
 
     def highlight_re(self):
         return u""
@@ -925,8 +940,7 @@ class DomainSearch(BaseExpression):
 
 class QueryParser:
     """
-    Converts a String into a tree of Query objects
-    using recursive top/down parsing
+    Converts a String into a tree of Query objects.
     """
 
     def __init__(self, **kw):
@@ -938,119 +952,113 @@ class QueryParser:
         self.titlesearch = kw.get('titlesearch', 0)
         self.case = kw.get('case', 0)
         self.regex = kw.get('regex', 0)
+        self._M = wikiutil.ParserPrefix('-')
+
+    def _analyse_items(self, items):
+        terms = AndExpression()
+        M = self._M
+        while items:
+            item = items[0]
+            items = items[1:]
+
+            if isinstance(item, unicode):
+                if item.lower() == 'or':
+                    sub = terms.subterms()
+                    if len(sub) >= 1:
+                        last = sub[-1]
+                        if last.__class__ == OrExpression:
+                            orexpr = last
+                        else:
+                            if len(sub) == 1:
+                                terms = sub[0]
+                            orexpr = OrExpression(terms)
+                        terms = AndExpression(orexpr)
+                    else:
+                        # XXX raise InvalidQueryException
+                        pass
+                    remaining = self._analyse_items(items)
+                    if remaining.__class__ == OrExpression:
+                        for sub in remaining.subterms():
+                            orexpr.append(sub)
+                    else:
+                        orexpr.append(remaining)
+                    break
+                elif item.lower() == 'and':
+                    pass
+                else:
+                    # odd workaround; we should instead ignore this term
+                    # and reject expressions that contain nothing after
+                    # being parsed rather than rejecting an empty string
+                    # before parsing...
+                    if not item:
+                        item = '""'
+                    terms.append(TextSearch(item))
+            elif isinstance(item, tuple):
+                negate = item[0] == M
+                title_search = self.titlesearch
+                regex = self.regex
+                case = self.case
+                linkto = False
+                lang = False
+                category = False
+                mimetype = False
+                domain = False
+                while len(item) > 1:
+                    m = item[0]
+                    if m == M:
+                        negate = True
+                    elif "title".startswith(m):
+                        title_search = True
+                    elif "regex".startswith(m):
+                        regex = True
+                    elif "case".startswith(m):
+                        case = True
+                    elif "linkto".startswith(m):
+                        linkto = True
+                    elif "language".startswith(m):
+                        lang = True
+                    elif "category".startswith(m):
+                        category = True
+                    elif "mimetype".startswith(m):
+                        mimetype = True
+                    elif "domain".startswith(m):
+                        domain = True
+                    item = item[1:]
+
+                text = item[0]
+                if category:
+                    obj = CategorySearch(text, use_re=regex, case=case)
+                elif mimetype:
+                    obj = MimetypeSearch(text, use_re=regex, case=False)
+                elif lang:
+                    obj = LanguageSearch(text, use_re=regex, case=False)
+                elif linkto:
+                    obj = LinkSearch(text, use_re=regex, case=case)
+                elif domain:
+                    obj = DomainSearch(text, use_re=regex, case=False)
+                elif title_search:
+                    obj = TitleSearch(text, use_re=regex, case=case)
+                else:
+                    obj = TextSearch(text, use_re=regex, case=case)
+                obj.negated = negate
+                terms.append(obj)
+            elif isinstance(item, list):
+                # strip off the opening parenthesis
+                terms.append(self._analyse_items(item[1:]))
+        sub = terms.subterms()
+        if len(sub) == 1:
+            return sub[0]
+        return terms
 
     def parse_query(self, query):
         """ transform an string into a tree of Query objects """
         if isinstance(query, str):
             query = query.decode(config.charset)
-        self._query = query
-        result = self._or_expression()
-        if result is None:
-            result = BaseExpression()
-        return result
-
-    def _or_expression(self):
-        result = self._and_expression()
-        if self._query:
-            result = OrExpression(result)
-        while self._query:
-            q = self._and_expression()
-            if q:
-                result.append(q)
-        return result
-
-    def _and_expression(self):
-        result = None
-        while not result and self._query:
-            result = self._single_term()
-        term = self._single_term()
-        if term:
-            result = AndExpression(result, term)
-        else:
-            return result
-        term = self._single_term()
-        while term:
-            result.append(term)
-            term = self._single_term()
-        return result
-
-    def _single_term(self):
-        regex = (r'(?P<NEG>-?)\s*(' +              # leading '-'
-                 r'(?P<OPS>\(|\)|(or\b(?!$)))|' +  # or, (, )
-                 r'(?P<MOD>(\w+:)*)' +
-                 r'(?P<TERM>("[^"]+")|' +
-                 r"('[^']+')|([^\s\)]+)))")        # search word itself
-        self._query = self._query.strip()
-        match = re.match(regex, self._query, re.U)
-        if not match:
-            return None
-        self._query = self._query[match.end():]
-        ops = match.group("OPS")
-        if ops == '(':
-            result = self._or_expression()
-            if match.group("NEG"):
-                result.negate()
-            return result
-        elif ops == ')':
-            return None
-        elif ops == 'or':
-            return None
-        modifiers = match.group('MOD').split(":")[:-1]
-        text = match.group('TERM')
-        if self.isQuoted(text):
-            text = text[1:-1]
-
-        title_search = self.titlesearch
-        regex = self.regex
-        case = self.case
-        linkto = False
-        lang = False
-        category = False
-        mimetype = False
-        domain = False
-
-        for m in modifiers:
-            if "title".startswith(m):
-                title_search = True
-            elif "regex".startswith(m):
-                regex = True
-            elif "case".startswith(m):
-                case = True
-            elif "linkto".startswith(m):
-                linkto = True
-            elif "language".startswith(m):
-                lang = True
-            elif "category".startswith(m):
-                category = True
-            elif "mimetype".startswith(m):
-                mimetype = True
-            elif "domain".startswith(m):
-                domain = True
-
-        if category:
-            obj = CategorySearch(text, use_re=regex, case=case)
-        elif mimetype:
-            obj = MimetypeSearch(text, use_re=regex, case=False)
-        elif lang:
-            obj = LanguageSearch(text, use_re=regex, case=False)
-        elif linkto:
-            obj = LinkSearch(text, use_re=regex, case=case)
-        elif domain:
-            obj = DomainSearch(text, use_re=regex, case=False)
-        elif title_search:
-            obj = TitleSearch(text, use_re=regex, case=case)
-        else:
-            obj = TextSearch(text, use_re=regex, case=case)
-
-        if match.group("NEG"):
-            obj.negate()
-        return obj
-
-    def isQuoted(self, text):
-        # Empty string '' is not considered quoted
-        if len(text) < 3:
-            return False
-        return (text.startswith('"') and text.endswith('"') or
-                text.startswith("'") and text.endswith("'"))
-
-
+        items = wikiutil.parse_quoted_separated_ext(query,
+                                                    name_value_separator=':',
+                                                    prefixes='-',
+                                                    multikey=True,
+                                                    brackets=('()', ),
+                                                    quotes='\'"')
+        query = self._analyse_items(items)
+        return query
