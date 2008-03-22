@@ -738,7 +738,7 @@ class ThemeBase:
             'search_full_label': _('Text'),
             'search_title_label': _('Titles'),
             'baseurl': self.request.getScriptname(),
-            'pagename_quoted': wikiutil.quoteWikinameURL(self.request.page.page_name),
+            'pagename_quoted': wikiutil.quoteWikinameURL(d['page'].page_name),
             }
         d.update(updates)
 
@@ -1007,7 +1007,7 @@ var search_hint = "%(search_hint)s";
             'rev_field': rev and '<input type="hidden" name="rev" value="%d">' % rev or '',
             'do_button': _("Do"),
             'baseurl': self.request.getScriptname(),
-            'pagename_quoted': wikiutil.quoteWikinameURL(self.request.page.page_name),
+            'pagename_quoted': wikiutil.quoteWikinameURL(page.page_name),
             }
         html = '''
 <form class="actionsmenu" method="GET" action="%(baseurl)s/%(pagename_quoted)s">
