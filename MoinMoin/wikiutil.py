@@ -1418,7 +1418,7 @@ def parse_quoted_separated_ext(args, separator=None, name_value_separator=None,
                 cur_quoted = False
                 cur_present = YES
             else:
-                cur += '='
+                cur += name_value_separator
             noquote = False
         elif not quoted and not seplimit_reached and char in separators:
             if cur_present != NO:
