@@ -183,6 +183,27 @@ function toggleComments() {
     }
 }
 
+function show_toggleComments() {
+    // Show edit bar item "ToggleComments" if inline comments exist on this page
+    var all = document.getElementsByTagName('*');
+    var count = 0;
+    for (i = 0; i < all.length; i++){
+        el = all[i];
+        if ( el.className.indexOf('comment') >= 0 ){
+            count++;
+        }
+    }
+    if (count > 0) {
+        for (i = 0; i < all.length; i++){
+            el = all[i];
+            if ( el.className == 'toggleCommentsButton' ){
+                el.style.display = 'inline';
+            }
+        }
+    }
+}
+
+
 function load() {
     // Do not name this "onload", it does not work with IE :-)
     // TODO: create separate onload for each type of view and set the
@@ -201,6 +222,9 @@ function load() {
     // Editor stuff
     show_switch2gui();
 
+    // Enable menu item "ToggleComments" if inline comments exist
+    show_toggleComments();
+ 
     // data browser widget
     dbw_hide_buttons();
 }
