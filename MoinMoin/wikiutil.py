@@ -1265,8 +1265,24 @@ class BracketMissingCloseError(BracketError):
         self.bracket = bracket
         BracketError.__init__(self, "Missing closing bracket %s" % bracket)
 
+class ParserPrefix:
+    """
+    Trivial container-class holding a single character for
+    the possible prefixes for parse_quoted_separated_ext
+    and implementing rich equal comparison.
+    """
+    def __init__(self, prefix):
+        self.prefix = prefix
+
+    def __eq__(self, other):
+        return isinstance(other, ParserPrefix) and other.prefix == self.prefix
+
+    def __repr__(self):
+        return '<ParserPrefix(%s)>' % self.prefix.encode('utf-8')
+
 def parse_quoted_separated_ext(args, separator=None, name_value_separator=None,
-                               brackets=None, seplimit=0, multikey=False):
+                               brackets=None, seplimit=0, multikey=False,
+                               prefixes=None):
     """
     Parses the given string according to the other parameters.
 
@@ -1279,7 +1295,11 @@ def parse_quoted_separated_ext(args, separator=None, name_value_separator=None,
     empty string as a value can be achieved by quoting it.
 
     If a name or value does not start with a quote, then the quote
-    looses its special meaning for that name or value.
+    looses its special meaning for that name or value, unless it
+    starts with one of the given prefixes (the parameter is unicode
+    containing all allowed prefixes.) The prefixes will be returned
+    as ParserPrefix() instances in the first element of the tuple
+    for that particular argument.
 
     If multiple separators follow each other, this is treated as
     having None arguments inbetween, that is also true for when
@@ -1440,6 +1460,9 @@ def parse_quoted_separated_ext(args, separator=None, name_value_separator=None,
             del bracketstack[-1]
             oldresult.append(result)
             result = oldresult
+        elif not quoted and prefixes and char in prefixes and cur == [None]:
+            cur = [ParserPrefix(char)]
+            cur.append(None)
         else:
             if len(cur):
                 if cur[-1] is None:
