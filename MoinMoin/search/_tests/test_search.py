@@ -9,6 +9,7 @@
 
 import py
 
+from MoinMoin.search.queryparser import QueryParser
 from MoinMoin import search
 
 
@@ -17,7 +18,7 @@ class TestQueryParsing:
 
     def testQueryParser(self):
         """ search: test the query parser """
-        parser = search.QueryParser()
+        parser = QueryParser()
         for query, wanted in [
             ("a", '"a"'),
             ("a b", '["a" "b"]'),
@@ -56,7 +57,7 @@ class TestQueryParsing:
 
     def testQueryParserExceptions(self):
         """ search: test the query parser """
-        parser = search.QueryParser()
+        parser = QueryParser()
         def _test(q):
             py.test.raises(ValueError, parser.parse_query, q)
         for query in ['""', '(', ')', '(a or b']:
