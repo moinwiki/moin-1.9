@@ -1287,11 +1287,14 @@ def parse_quoted_separated_ext(args, separator=None, name_value_separator=None,
     them out afterwards.
 
     The function can also do bracketing, i.e. parse expressions
-    that contain things like "(a (a b))" to ['a', ['a', 'b']],
+    that contain things like
+        "(a (a b))" to ['(', 'a', ['(', 'a', 'b']],
     in this case, as in this example, the returned list will
     contain sub-lists and the brackets parameter must be a list
     of opening and closing brackets, e.g.
         brackets = ['()', '<>']
+    Each sub-list's first item is the opening bracket used for
+    grouping.
     Nesting will be observed between the different types of
     brackets given. If bracketing doesn't match, a BracketError
     instance is raised with a 'bracket' property indicating the
@@ -1315,7 +1318,8 @@ def parse_quoted_separated_ext(args, separator=None, name_value_separator=None,
     @param multikey: multiple keys allowed for a single value
     @rtype: list
     @returns: list of unicode strings and tuples containing
-        unicode strings
+        unicode strings, or lists containing the same for
+        bracketing support
     """
     idx = 0
     assert name_value_separator is None or name_value_separator != separator
@@ -1421,7 +1425,7 @@ def parse_quoted_separated_ext(args, separator=None, name_value_separator=None,
             (cur, noquote, separator_count, seplimit_reached,
              nextitemsep) = additem(result, cur, separator_count, nextitemsep)
             bracketstack.append((matchingbracket[char], result))
-            result = []
+            result = [char]
         elif not quoted and char in closing:
             while len(cur) and cur[-1] is None:
                 del cur[-1]

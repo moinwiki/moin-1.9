@@ -365,13 +365,13 @@ class TestParamParsing:
     def testExtendedParserBracketing(self):
         tests = [
             (u'"a", "b", "c"', u',', None, [u'a', u'b', u'c']),
-            (u'("a", "b", "c")', u',', None, [[u'a', u'b', u'c']]),
-            (u'("a"("b", "c"))', u',', None, [[u'a', [u'b', u'c']]]),
-            (u'("a"("b)))", "c"))', u',', None, [[u'a', [u'b)))', u'c']]]),
-            (u'("a"("b>>> ( ab )>", "c"))', u',', None, [[u'a', [u'b>>> ( ab )>', u'c']]]),
-            (u'("a" ("b" "c"))', None, None, [[u'a', [u'b', u'c']]]),
-            (u'("a"("b", "c") ) ', u',', None, [[u'a', [u'b', u'c']]]),
-            (u'("a", <"b", ("c")>)', u',', None, [[u'a', [u'b', [u'c']]]]),
+            (u'("a", "b", "c")', u',', None, [[u'(', u'a', u'b', u'c']]),
+            (u'("a"("b", "c"))', u',', None, [[u'(', u'a', [u'(', u'b', u'c']]]),
+            (u'("a"("b)))", "c"))', u',', None, [[u'(', u'a', [u'(', u'b)))', u'c']]]),
+            (u'("a"("b>>> ( ab )>", "c"))', u',', None, [[u'(', u'a', [u'(', u'b>>> ( ab )>', u'c']]]),
+            (u'("a" ("b" "c"))', None, None, [[u'(', u'a', [u'(', u'b', u'c']]]),
+            (u'("a"("b", "c") ) ', u',', None, [[u'(', u'a', [u'(', u'b', u'c']]]),
+            (u'("a", <"b", ("c")>)', u',', None, [[u'(', u'a', [u'<', u'b', [u'(', u'c']]]]),
         ]
 
         def _check(args, sep, kwsep, expected):
