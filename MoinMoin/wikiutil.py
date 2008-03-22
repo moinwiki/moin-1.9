@@ -1266,29 +1266,20 @@ class BracketMissingCloseError(BracketError):
         BracketError.__init__(self, "Missing closing bracket %s" % bracket)
 
 def parse_quoted_separated_ext(args, separator=None, name_value_separator=None,
-                               brackets=None, seplimit=0):
+                               brackets=None, seplimit=0, multikey=False):
     """
     Parses the given string according to the other parameters.
 
-    If name_value_separator evaluates to True, the function parses
-    keyword arguments (name=value) and returns the keyword arguments
-    in the second return value (a dict) and positional arguments that
-    occurred after any keyword argument in the third return value (a
-    list).
-    The first return value always contains the positional arguments,
-    if name_value_separator evalutes to False only it is present.
-
-    Arguments can be quoted with a double-quote ('"') and the quote
-    can be escaped by doubling it, the separator and equal sign (for
-    keyword args) can both be quoted, when keyword args are enabled
-    then the name of a keyword argument can also be quoted.
+    Items can be quoted with a double-quote ('"') and the quote can
+    be escaped by doubling it, the separator and name_value_separator
+    can both be quoted, when name_value_separator is set then the
+    name can also be quoted.
 
     Values that are not given are returned as None, while the
-    empty string as a value can be achieved by quoting it; keys
-    are never returned as None.
+    empty string as a value can be achieved by quoting it.
 
     If a name or value does not start with a quote, then the quote
-    character looses its special meaning for that name or value.
+    looses its special meaning for that name or value.
 
     If multiple separators follow each other, this is treated as
     having None arguments inbetween, that is also true for when
@@ -1308,6 +1299,11 @@ def parse_quoted_separated_ext(args, separator=None, name_value_separator=None,
     either of the class BracketMissingCloseError or of the class
     BracketUnexpectedCloseError.
 
+    If multikey is True (along with setting name_value_separator),
+    then the returned tuples for (key, value) pairs can also have
+    multiple keys, e.g.
+        "a=b=c" -> ('a', 'b', 'c')
+
     @param args: arguments to parse
     @param separator: the argument separator, defaults to None, meaning any
         space separates arguments
@@ -1316,9 +1312,10 @@ def parse_quoted_separated_ext(args, separator=None, name_value_separator=None,
     @param brackets: a list of two-character strings giving
         opening and closing brackets
     @param seplimit: limits the number of parsed arguments
+    @param multikey: multiple keys allowed for a single value
     @rtype: list
-    @returns: list of unicode strings and, if name_value_separator is set,
-        tuples containing (key, value) pairs
+    @returns: list of unicode strings and tuples containing
+        unicode strings
     """
     idx = 0
     assert name_value_separator is None or name_value_separator != separator
@@ -1327,13 +1324,7 @@ def parse_quoted_separated_ext(args, separator=None, name_value_separator=None,
         raise TypeError('args must be unicode')
     max = len(args)
     result = []         # result list
-    curname = u''       # current name, initially value as well (name=value)
-    cur = None          # current value
-    cur_quoted = False  # indicates whether value was quoted,
-                        # needed None vs. u'' handling
-    # MAYBE means that if a bracket follows, it's not valid
-    NO, IFNOTBRACKET, IFNOTEND, IFNOTBRACKETOREND, YES = range(5)
-    cur_present = IFNOTBRACKET # indicates cur/curname validity
+    cur = [None]        # current item
     quoted = False      # we're inside quotes
     skipquote = 0       # next quote is a quoted quote
     noquote = False     # no quotes expected because word didn't start with one
@@ -1364,27 +1355,20 @@ def parse_quoted_separated_ext(args, separator=None, name_value_separator=None,
             closing.append(c)
             matchingbracket[o] = c
 
-    def additem(result, curname, cur, cur_quoted, separator_count, nextitemsep):
-        if cur is None:
-            cur = curname
-            curname = None
-        if not cur and not cur_quoted:
-            cur = None
-        if curname is not None:
-            result.append((curname, cur))
-        else:
-            result.append(cur)
-        curname = u''
-        cur = None
+    def additem(result, cur, separator_count, nextitemsep):
+        if len(cur) == 1:
+            result.extend(cur)
+        elif cur:
+            result.append(tuple(cur))
+        cur = [None]
         noquote = False
-        cur_quoted = False
         separator_count += 1
         seplimit_reached = False
         if seplimit and separator_count >= seplimit:
             seplimit_reached = True
             nextitemsep = [n for n in nextitemsep if n in separators]
 
-        return curname, cur, noquote, cur_quoted, separator_count, seplimit_reached, nextitemsep
+        return cur, noquote, separator_count, seplimit_reached, nextitemsep
 
     while idx < max:
         char = args[idx]
@@ -1407,49 +1391,43 @@ def parse_quoted_separated_ext(args, separator=None, name_value_separator=None,
             if char in nextitemsep:
                 continue
             idx -= 1
-            if not cur is None:
-                if cur:
-                    cur = cur + spaces
-            elif curname:
-                curname = curname + spaces
+            if len(cur) and cur[-1]:
+                cur[-1] = cur[-1] + spaces
         elif not quoted and char == name_value_separator:
-            if cur is None:
-                cur = u''
-                cur_quoted = False
-                cur_present = YES
+            if multikey or len(cur) == 1:
+                cur.append(None)
             else:
-                cur += name_value_separator
+                if not multikey:
+                    cur[-1] += name_value_separator
+                else:
+                    cur.append(None)
             noquote = False
         elif not quoted and not seplimit_reached and char in separators:
-            if cur_present != NO:
-                (curname, cur, noquote, cur_quoted,
-                 separator_count, seplimit_reached,
-                 nextitemsep) = additem(result, curname, cur, cur_quoted,
-                                        separator_count, nextitemsep)
-            cur_present = IFNOTBRACKET
+            (cur, noquote, separator_count, seplimit_reached,
+             nextitemsep) = additem(result, cur, separator_count, nextitemsep)
         elif not quoted and not noquote and char == '"':
+            if len(cur) and cur[-1] is None:
+                del cur[-1]
+            cur.append(u'')
             quoted = True
-            cur_quoted = True
         elif quoted and not skipquote and char == '"':
             if next == '"':
                 skipquote = 2 # will be decremented right away
             else:
                 quoted = False
         elif not quoted and char in opening:
-            if cur_present and not cur_present in (IFNOTBRACKET, IFNOTBRACKETOREND):
-                (curname, cur, noquote, cur_quoted,
-                 separator_count, seplimit_reached,
-                 nextitemsep) = additem(result, curname, cur, cur_quoted,
-                                        separator_count, nextitemsep)
+            while len(cur) and cur[-1] is None:
+                del cur[-1]
+            (cur, noquote, separator_count, seplimit_reached,
+             nextitemsep) = additem(result, cur, separator_count, nextitemsep)
             bracketstack.append((matchingbracket[char], result))
             result = []
-            cur_present = IFNOTBRACKETOREND
         elif not quoted and char in closing:
-            if cur_present and not cur_present in (IFNOTBRACKET, IFNOTBRACKETOREND):
-                (curname, cur, noquote, cur_quoted,
-                 separator_count, seplimit_reached,
-                 nextitemsep) = additem(result, curname, cur, cur_quoted,
-                                        separator_count, nextitemsep)
+            while len(cur) and cur[-1] is None:
+                del cur[-1]
+            (cur, noquote, separator_count, seplimit_reached,
+             nextitemsep) = additem(result, cur, separator_count, nextitemsep)
+            cur = []
             if not bracketstack:
                 raise BracketUnexpectedCloseError(char)
             expected, oldresult = bracketstack[-1]
@@ -1458,22 +1436,22 @@ def parse_quoted_separated_ext(args, separator=None, name_value_separator=None,
             del bracketstack[-1]
             oldresult.append(result)
             result = oldresult
-            cur_present = IFNOTBRACKETOREND
         else:
-            if cur is not None:
-                cur = cur + char
+            if len(cur):
+                if cur[-1] is None:
+                    cur[-1] = char
+                else:
+                    cur[-1] += char
             else:
-                curname = curname + char
+                cur.append(char)
             noquote = True
-            cur_present = YES
 
         idx += 1
 
     if bracketstack:
         raise BracketMissingCloseError(bracketstack[-1][0])
 
-    if cur_present and not cur_present in (IFNOTEND, IFNOTBRACKETOREND):
-        additem(result, curname, cur, cur_quoted, separator_count, nextitemsep)
+    additem(result, cur, separator_count, nextitemsep)
 
     return result
 
@@ -1492,7 +1470,10 @@ def parse_quoted_separated(args, separator=',', name_value=True, seplimit=0):
                                    seplimit=seplimit)
     for item in l:
         if isinstance(item, tuple):
-            keywords[item[0]] = item[1]
+            key, value = item
+            if key is None:
+                key = u''
+            keywords[key] = value
             positional = trailing
         else:
             positional.append(item)
