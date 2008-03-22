@@ -269,7 +269,7 @@ class ActionClass(object):
 
         m_pages = [elem.add_missing_pagename(local, remote) for elem in SyncPage.merge(l_pages, r_pages)]
 
-        self.log_status(self.INFO, _("Got a list of %s local and %s remote pages. This results in %s different pages over-all."),
+        self.log_status(self.INFO, _("Got a list of %s local and %s remote pages. This results in %s pages to process."),
                         (str(len(l_pages)), str(len(r_pages)), str(len(m_pages))))
 
         if params["pageMatch"]:
