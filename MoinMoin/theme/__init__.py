@@ -1010,7 +1010,7 @@ var search_hint = "%(search_hint)s";
             'pagename_quoted': wikiutil.quoteWikinameURL(self.request.page.page_name),
             }
         html = '''
-<form class="actionsmenu" method="GET" action="">
+<form class="actionsmenu" method="GET" action="%(baseurl)s/%(pagename_quoted)s">
 <div>
     <label>%(label)s</label>
     <select name="action"
