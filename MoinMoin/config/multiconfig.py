@@ -727,7 +727,7 @@ Lists: * bullets; 1., a. numbered items.
 
     xapian_search = False
     xapian_index_dir = None
-    xapian_stemming = True
+    xapian_stemming = False
     xapian_index_history = False
     search_results_per_page = 10
 
