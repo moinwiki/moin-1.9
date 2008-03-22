@@ -500,7 +500,8 @@ class Formatter(FormatterBase):
             if on:
                 href = wikiutil.join_wiki(wikiurl, wikitail)
                 if querystr:
-                    href += '?%s' % wikiutil.makeQueryString(querystr)
+                    separator = ('?', '&')['?' in href]
+                    href = '%s%s%s' % (href, separator, wikiutil.makeQueryString(querystr))
                 if wikitag_bad:
                     html_class = 'badinterwiki'
                 else:
