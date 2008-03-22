@@ -7,7 +7,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin.request import RequestBase, MoinMoinFinish
+from MoinMoin.request import RequestBase, MoinMoinFinish, RemoteClosedConnection
 
 class Request(RequestBase):
     """ specialized on Twisted requests """
@@ -91,7 +91,11 @@ class Request(RequestBase):
     def write(self, *data):
         """ Write to output stream. """
         #print "request.RequestTwisted.write: data=\n" + wd
-        self.reactor.callFromThread(self.twistd.write, self.encode(data))
+        data = self.encode(data)
+        try:
+            self.reactor.callFromThread(self.twistd.write, data)
+        except Exception:
+            raise RemoteClosedConnection()
 
     def flush(self):
         pass # XXX is there a flush in twisted?

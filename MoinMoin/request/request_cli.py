@@ -8,7 +8,7 @@
 """
 import sys
 
-from MoinMoin.request import RequestBase
+from MoinMoin.request import RequestBase, RemoteClosedConnection
 
 class Request(RequestBase):
     """ specialized on command line interface and script requests """
@@ -47,7 +47,11 @@ class Request(RequestBase):
 
     def write(self, *data):
         """ Write to output stream. """
-        sys.stdout.write(self.encode(data))
+        data = self.encode(data)
+        try:
+            sys.stdout.write(data)
+        except IOError:
+            raise RemoteClosedConnection()
 
     def flush(self):
         sys.stdout.flush()
