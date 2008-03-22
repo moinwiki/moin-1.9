@@ -360,14 +360,17 @@ class TestParamParsing:
             assert res == expected
 
         for test in tests:
-            yield tuple([_check] + list(test))
+            yield [_check] + list(test)
 
     def testExtendedParserBracketing(self):
         tests = [
             (u'"a", "b", "c"', u',', None, [u'a', u'b', u'c']),
             (u'("a", "b", "c")', u',', None, [[u'a', u'b', u'c']]),
             (u'("a"("b", "c"))', u',', None, [[u'a', [u'b', u'c']]]),
+            (u'("a"("b)))", "c"))', u',', None, [[u'a', [u'b)))', u'c']]]),
+            (u'("a"("b>>> ( ab )>", "c"))', u',', None, [[u'a', [u'b>>> ( ab )>', u'c']]]),
             (u'("a" ("b" "c"))', None, None, [[u'a', [u'b', u'c']]]),
+            (u'("a"("b", "c") ) ', u',', None, [[u'a', [u'b', u'c']]]),
             (u'("a", <"b", ("c")>)', u',', None, [[u'a', [u'b', [u'c']]]]),
         ]
 
@@ -376,7 +379,43 @@ class TestParamParsing:
             assert res == expected
 
         for test in tests:
-            yield tuple([_check] + list(test))
+            yield [_check] + list(test)
+
+    def testExtendedParserMultikey(self):
+        tests = [
+            (u'"a", "b", "c"', u',', None, [u'a', u'b', u'c']),
+            (u'a:b, b:c, c:d', u',', u':', [(u'a', u'b'), (u'b', u'c'), (u'c', u'd')]),
+            (u'a:b, b:c, c:d', u',', None, [u'a:b', u'b:c', u'c:d']),
+            (u'a=b, b=c, c=d', u',', None, [u'a=b', u'b=c', u'c=d']),
+            (u'a=b, b=c, c=d', u',', u'=', [(u'a', u'b'), (u'b', u'c'), (u'c', u'd')]),
+            (u'"a"; "b"; "c"', u';', None, [u'a', u'b', u'c']),
+            (u'a:b; b:c; c:d', u';', u':', [(u'a', u'b'), (u'b', u'c'), (u'c', u'd')]),
+            (u'a:b; b:c; c:d', u';', None, [u'a:b', u'b:c', u'c:d']),
+            (u'a=b; b=c; c=d', u';', None, [u'a=b', u'b=c', u'c=d']),
+            (u'a=b; b=c; c=d', u';', u'=', [(u'a', u'b'), (u'b', u'c'), (u'c', u'd')]),
+            (u'"a" "b" "c"', None, None, [u'a', u'b', u'c']),
+            (u'" a " "b" "c"', None, None, [u' a ', u'b', u'c']),
+            (u'"a  " "b" "c"', None, None, [u'a  ', u'b', u'c']),
+            (u'"  a" "b" "c"', None, None, [u'  a', u'b', u'c']),
+            (u'"  a" "b" "c"', None, u':', [u'  a', u'b', u'c']),
+            (u'"a:a" "b:b" "c:b"', None, u':', [u'a:a', u'b:b', u'c:b']),
+            (u'   a:a  ', None, u':', [None, None, None, (u'a', u'a'), None, None]),
+            (u'a a: a', None, u':', [u'a', (u'a', None), u'a']),
+            (u'a a:"b c d" a', None, u':', [u'a', (u'a', u'b c d'), u'a']),
+            (u'a a:"b "" d" a', None, u':', [u'a', (u'a', u'b " d'), u'a']),
+            (u'title:Help* dog cat', None, u':', [(u'title', u'Help*'), u'dog', u'cat']),
+            (u'title:Help* "dog cat"', None, u':', [(u'title', u'Help*'), u'dog cat']),
+            (u'a:b:c d:e:f', None, u':', [(u'a', u'b', u'c'), (u'd', 'e', u'f')]),
+            (u'a:b:c:d', None, u':', [(u'a', u'b', u'c', u'd')]),
+            (u'a:"b:c":d', None, u':', [(u'a', u'b:c', u'd')]),
+        ]
+
+        def _check(args, sep, kwsep, expected):
+            res = wikiutil.parse_quoted_separated_ext(args, sep, kwsep, multikey=True)
+            assert res == expected
+
+        for test in tests:
+            yield [_check] + list(test)
 
     def testExtendedParserBracketingErrors(self):
         UCE = wikiutil.BracketUnexpectedCloseError
@@ -398,7 +437,7 @@ class TestParamParsing:
                            brackets=(u'<>', u'()'))
 
         for test in tests:
-            yield tuple([_check] + list(test))
+            yield [_check] + list(test)
 
 class TestArgGetters:
     def testGetBoolean(self):
