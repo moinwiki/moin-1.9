@@ -310,6 +310,8 @@ class TestParamParsing:
                   (u'a,b,c,d, "a,b,c,d"',     abcd + [u'a,b,c,d']),
                   (u'quote " :), b',          [u'quote " :)', u'b']),
                   (u'"quote "" :)", b',       [u'quote " :)', u'b']),
+                  (u'"unended quote',         [u'"unended quote']),
+                  (u'"',                      [u'"']),
                   (u'd=d,e="a,b,c,d"',        [u'd=d', u'e="a', u'b',
                                                u'c', u'd"']),
                 ]
