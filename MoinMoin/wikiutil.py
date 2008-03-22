@@ -1282,14 +1282,14 @@ class ParserPrefix:
 
 def parse_quoted_separated_ext(args, separator=None, name_value_separator=None,
                                brackets=None, seplimit=0, multikey=False,
-                               prefixes=None):
+                               prefixes=None, quotes='"'):
     """
     Parses the given string according to the other parameters.
 
-    Items can be quoted with a double-quote ('"') and the quote can
-    be escaped by doubling it, the separator and name_value_separator
-    can both be quoted, when name_value_separator is set then the
-    name can also be quoted.
+    Items can be quoted with any character from the quotes parameter
+    and each quote can be escaped by doubling it, the separator and
+    name_value_separator can both be quoted, when name_value_separator
+    is set then the name can also be quoted.
 
     Values that are not given are returned as None, while the
     empty string as a value can be achieved by quoting it.
@@ -1349,7 +1349,7 @@ def parse_quoted_separated_ext(args, separator=None, name_value_separator=None,
     max = len(args)
     result = []         # result list
     cur = [None]        # current item
-    quoted = False      # we're inside quotes
+    quoted = None       # we're inside quotes, indicates quote character used
     skipquote = 0       # next quote is a quoted quote
     noquote = False     # no quotes expected because word didn't start with one
     seplimit_reached = False # number of separators exhausted
@@ -1429,16 +1429,16 @@ def parse_quoted_separated_ext(args, separator=None, name_value_separator=None,
         elif not quoted and not seplimit_reached and char in separators:
             (cur, noquote, separator_count, seplimit_reached,
              nextitemsep) = additem(result, cur, separator_count, nextitemsep)
-        elif not quoted and not noquote and char == '"':
+        elif not quoted and not noquote and char in quotes:
             if len(cur) and cur[-1] is None:
                 del cur[-1]
             cur.append(u'')
-            quoted = True
-        elif quoted and not skipquote and char == '"':
-            if next == '"':
+            quoted = char
+        elif char == quoted and not skipquote:
+            if next == quoted:
                 skipquote = 2 # will be decremented right away
             else:
-                quoted = False
+                quoted = None
         elif not quoted and char in opening:
             while len(cur) and cur[-1] is None:
                 del cur[-1]
@@ -1481,11 +1481,11 @@ def parse_quoted_separated_ext(args, separator=None, name_value_separator=None,
     if quoted:
         if len(cur):
             if cur[-1] is None:
-                cur[-1] = '"'
+                cur[-1] = quoted
             else:
-                cur[-1] = '"' + cur[-1]
+                cur[-1] = quoted + cur[-1]
         else:
-            cur.append('"')
+            cur.append(quoted)
 
     additem(result, cur, separator_count, nextitemsep)
 
