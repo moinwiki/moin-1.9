@@ -383,6 +383,22 @@ class TestParamParsing:
         for test in tests:
             yield [_check] + list(test)
 
+    def testExtendedParserQuoting(self):
+        tests = [
+            (u'"a b" -a b-', u'"', [u'a b', u'-a', u'b-']),
+            (u'"a b" -a b-', u"-", [u'"a', u'b"', u'a b']),
+            (u'"a b" -a b-', u'"-', [u'a b', u'a b']),
+            (u'"a- b" -a b-', u'"-', [u'a- b', u'a b']),
+            (u'"a- b" -a" b-', u'"-', [u'a- b', u'a" b']),
+        ]
+
+        def _check(args, quotes, expected):
+            res = wikiutil.parse_quoted_separated_ext(args, quotes=quotes)
+            assert res == expected
+
+        for test in tests:
+            yield [_check] + list(test)
+
     def testExtendedParserMultikey(self):
         tests = [
             (u'"a", "b", "c"', u',', None, [u'a', u'b', u'c']),
