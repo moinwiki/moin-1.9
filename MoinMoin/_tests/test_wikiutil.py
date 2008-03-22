@@ -351,6 +351,8 @@ class TestParamParsing:
             (u'a a:"b "" d" a', None, u':', [u'a', (u'a', u'b " d'), u'a']),
             (u'title:Help* dog cat', None, u':', [(u'title', u'Help*'), u'dog', u'cat']),
             (u'title:Help* "dog cat"', None, u':', [(u'title', u'Help*'), u'dog cat']),
+            (u'a:b:c d:e:f', None, u':', [(u'a', u'b:c'), (u'd', 'e:f')]),
+            (u'a:b:c:d', None, u':', [(u'a', u'b:c:d')]),
         ]
 
         def _check(args, sep, kwsep, expected):
