@@ -189,7 +189,7 @@ class ActionClass(object):
             try:
                 remote = MoinRemoteWiki(self.request, params["remoteWiki"], params["remotePrefix"], params["pageList"], params["user"], params["password"], verbose=debug)
             except (UnsupportedWikiException, NotAllowedException), (msg, ):
-                raise ActionStatus(msg)
+                raise ActionStatus(msg, "error")
 
             if not remote.valid:
                 raise ActionStatus(_("The ''remoteWiki'' is unknown.", wiki=True), "error")
@@ -197,7 +197,7 @@ class ActionClass(object):
             if params["user"] and not params["password"]:
                 return self.show_password_form()
         except ActionStatus, e:
-            self.request.theme.add_msg(u'<p class="error">%s</p>\n' % (e.args[0], ), e.args[1])
+            self.request.theme.add_msg(*e.args)
         else:
             try:
                 try:
