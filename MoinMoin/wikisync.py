@@ -321,8 +321,6 @@ class MoinLocalWiki(RemoteWiki):
         normalised_name = normalise_pagename(page_name, self.prefix)
         if normalised_name is None:
             return None
-        if not self.request.user.may.write(normalised_name):
-            return None
         page = Page(self.request, page_name)
         revno = page.get_real_rev()
         if revno == 99999999: # I love sane in-band signalling
