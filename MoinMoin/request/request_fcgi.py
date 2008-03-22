@@ -7,7 +7,7 @@
                 2003-2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
-from MoinMoin.request import RequestBase
+from MoinMoin.request import RequestBase, RemoteClosedConnection
 
 class Request(RequestBase):
     """ specialized on FastCGI requests """
@@ -44,7 +44,11 @@ class Request(RequestBase):
 
     def write(self, *data):
         """ Write to output stream. """
-        self.fcgreq.out.write(self.encode(data))
+        data = self.encode(data)
+        try:
+            self.fcgreq.out.write(data)
+        except Exception:
+            raise RemoteClosedConnection()
 
     def flush(self):
         """ Flush output stream. """

@@ -7,7 +7,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 from MoinMoin import wikiutil
-from MoinMoin.request import RequestBase
+from MoinMoin.request import RequestBase, RemoteClosedConnection
 
 class Request(RequestBase):
     """ specialized on mod_python requests """
@@ -125,7 +125,11 @@ class Request(RequestBase):
 
     def write(self, *data):
         """ Write to output stream. """
-        self.mpyreq.write(self.encode(data))
+        data = self.encode(data)
+        try:
+            self.mpyreq.write(data)
+        except Exception:
+            raise RemoteClosedConnection()
 
     def flush(self):
         """ We can't flush it, so do nothing. """

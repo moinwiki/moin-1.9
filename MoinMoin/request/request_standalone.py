@@ -8,7 +8,7 @@
 """
 import cgi
 
-from MoinMoin.request import RequestBase
+from MoinMoin.request import RequestBase, RemoteClosedConnection
 
 class Request(RequestBase):
     """ specialized on StandAlone Server (MoinMoin.server.server_standalone) requests """
@@ -81,7 +81,11 @@ class Request(RequestBase):
 
     def write(self, *data):
         """ Write to output stream. """
-        self.wfile.write(self.encode(data))
+        data = self.encode(data)
+        try:
+            self.wfile.write(data)
+        except Exception:
+            raise RemoteClosedConnection()
 
     def flush(self):
         self.wfile.flush()

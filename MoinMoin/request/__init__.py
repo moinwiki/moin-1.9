@@ -80,6 +80,10 @@ class MoinMoinFinish(Exception):
 class HeadersAlreadySentException(Exception):
     """ Is raised if the headers were already sent when emit_http_headers is called."""
 
+
+class RemoteClosedConnection(Exception):
+    """ Remote end closed connection during request """
+
 # Utilities
 
 def cgiMetaVariable(header, scheme='http'):
@@ -1275,11 +1279,17 @@ class RequestBase(object):
 
         except MoinMoinFinish:
             pass
+        except RemoteClosedConnection:
+            # at least clean up
+            pass
         except SystemExit:
             raise # fcgi uses this to terminate a thread
         except Exception, err:
-            self.fail(err)
-            self.finish()
+            try:
+                # nothing we can do about further failures!
+                self.fail(err)
+            except:
+                pass
 
         if self.cfg.log_timing:
             self.timing_log(False, action_name)

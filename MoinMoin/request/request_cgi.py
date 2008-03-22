@@ -9,7 +9,7 @@
 """
 import sys, os, cgi
 
-from MoinMoin.request import RequestBase
+from MoinMoin.request import RequestBase, RemoteClosedConnection
 
 class Request(RequestBase):
     """ specialized on CGI requests """
@@ -42,7 +42,11 @@ class Request(RequestBase):
 
     def write(self, *data):
         """ Write to output stream. """
-        sys.stdout.write(self.encode(data))
+        data = self.encode(data)
+        try:
+            sys.stdout.write(data)
+        except Exception:
+            raise RemoteClosedConnection()
 
     def flush(self):
         sys.stdout.flush()

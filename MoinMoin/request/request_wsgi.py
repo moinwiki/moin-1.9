@@ -8,7 +8,7 @@
 """
 import cgi, StringIO
 
-from MoinMoin.request import RequestBase
+from MoinMoin.request import RequestBase, RemoteClosedConnection
 
 class Request(RequestBase):
     """ specialized on WSGI requests """
@@ -55,7 +55,11 @@ class Request(RequestBase):
             return self.stdin.read(n)
 
     def write(self, *data):
-        self.stdout.write(self.encode(data))
+        data = self.encode(data)
+        try:
+            self.stdout.write(data)
+        except Exception:
+            raise RemoteClosedConnection()
 
     def _emit_http_headers(self, headers):
         """ private method to send out preprocessed list of HTTP headers """
