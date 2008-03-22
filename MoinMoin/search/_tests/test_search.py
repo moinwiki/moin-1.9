@@ -45,7 +45,6 @@ class TestQueryParsing:
             ("(HelpOn) and (Administration) or (Configuration)", '[["HelpOn" "Administration"] or "Configuration"]'),
             ("(a) and (b) or (c) or -d", '[["a" "b"] or "c" or -"d"]'),
             ("a b c d e or f g h", '[["a" "b" "c" "d" "e"] or ["f" "g" "h"]]'),
-            ('""', '""""'),
             ('"no', '""no"'),
             ('no"', '"no""'),
             ("'no", "\"'no\""),
@@ -55,6 +54,13 @@ class TestQueryParsing:
             result = parser.parse_query(query)
             assert str(result) == wanted
 
+    def testQueryParserExceptions(self):
+        """ search: test the query parser """
+        parser = search.QueryParser()
+        def _test(q):
+            py.test.raises(ValueError, parser.parse_query, q)
+        for query in ['""', '(', ')', '(a or b']:
+            yield _test, query
 
 class TestSearch:
     """ search: test search """

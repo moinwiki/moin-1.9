@@ -973,9 +973,6 @@ class QueryParser:
                                 terms = sub[0]
                             orexpr = OrExpression(terms)
                         terms = AndExpression(orexpr)
-                    else:
-                        # XXX raise InvalidQueryException
-                        pass
                     remaining = self._analyse_items(items)
                     if remaining.__class__ == OrExpression:
                         for sub in remaining.subterms():
@@ -991,7 +988,7 @@ class QueryParser:
                     # being parsed rather than rejecting an empty string
                     # before parsing...
                     if not item:
-                        item = '""'
+                        raise ValueError("Term too short")
                     terms.append(TextSearch(item))
             elif isinstance(item, tuple):
                 negate = item[0] == M
@@ -1054,11 +1051,14 @@ class QueryParser:
         """ transform an string into a tree of Query objects """
         if isinstance(query, str):
             query = query.decode(config.charset)
-        items = wikiutil.parse_quoted_separated_ext(query,
-                                                    name_value_separator=':',
-                                                    prefixes='-',
-                                                    multikey=True,
-                                                    brackets=('()', ),
-                                                    quotes='\'"')
+        try:
+            items = wikiutil.parse_quoted_separated_ext(query,
+                                                        name_value_separator=':',
+                                                        prefixes='-',
+                                                        multikey=True,
+                                                        brackets=('()', ),
+                                                        quotes='\'"')
+        except wikiutil.BracketError:
+            raise ValueError()
         query = self._analyse_items(items)
         return query
