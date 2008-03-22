@@ -51,6 +51,17 @@ class TestPage:
         page = Page(self.request, u"FrontPage")
         assert u'WikiSandBox' in page.getPageLinks(self.request)
 
+    def testSendPage(self):
+        page = Page(self.request, u"FrontPage")
+        import StringIO
+        out = StringIO.StringIO()
+        self.request.redirect(out)
+        page.send_page(msg=u'Done', emit_headers=False)
+        result = out.getvalue()
+        self.request.redirect()
+        del out
+        assert result.strip().endswith('</html>')
+        assert result.strip().startswith('<!DOCTYPE HTML PUBLIC')
 
 class TestRootPage:
     def testPageList(self):
