@@ -1079,10 +1079,13 @@ class Page(object):
             try:
                 self.formatter.set_highlight_re(self.hilite_re)
             except re.error, err:
+                if 'highlight' in request.form:
+                    del request.form['highlight']
                 request.theme.add_msg(_('Invalid highlighting regular expression "%(regex)s": %(error)s') % {
                                           'regex': self.hilite_re,
                                           'error': str(err),
                                       }, "warning")
+                self.hilite_re = None
 
         if 'deprecated' in pi:
             # deprecated page, append last backup version to current contents
