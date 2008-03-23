@@ -74,7 +74,7 @@ class TestHits:
         assert result == expected
 
     def testHitsForAll(self):
-        """ macro Hits test: 'all=1' for Hits (all pages are counted for VIEWPAGE) """
+        """ macro Hits test: 'all=True' for Hits (all pages are counted for VIEWPAGE) """
         self.shouldDeleteTestPage = False
         self._createTestPage('This is an example to test a macro with parameters')
 
@@ -82,25 +82,25 @@ class TestHits:
         eventlog.EventLog(self.request).add(self.request, 'VIEWPAGE', {'pagename': self.pagename})
         eventlog.EventLog(self.request).add(self.request, 'VIEWPAGE', {'pagename': self.pagename})
 
-        result = self._test_macro(u'Hits', u'all=1')
+        result = self._test_macro(u'Hits', u'all=True')
         expected = "6"
         assert result == expected
 
     def testHitsForFilter(self):
-        """ macro Hits test: 'all=1, filter=SAVEPAGE' for Hits (SAVEPAGE counted for current page)"""
+        """ macro Hits test: 'all=True, event_type=SAVEPAGE' for Hits (SAVEPAGE counted for current page)"""
         self.shouldDeleteTestPage = False
 
         # simulate a log entry SAVEPAGE for WikiSandBox to destinguish current page
         eventlog.EventLog(self.request).add(self.request, 'SAVEPAGE', {'pagename': 'WikiSandBox'})
-        result = self._test_macro(u'Hits', u'filter=SAVEPAGE')
+        result = self._test_macro(u'Hits', u'event_type=SAVEPAGE')
         expected = "2"
         assert result == expected
 
     def testHitsForAllAndFilter(self):
-        """ macro test: 'all=1, filter=SAVEPAGE' for Hits (all pages are counted for SAVEPAGE)"""
+        """ macro test: 'all=True, event_type=SAVEPAGE' for Hits (all pages are counted for SAVEPAGE)"""
         self.shouldDeleteTestPage = True
 
-        result = self._test_macro(u'Hits', u'all=1, filter=SAVEPAGE')
+        result = self._test_macro(u'Hits', u'all=True, event_type=SAVEPAGE')
         expected = "3"
         assert result == expected
 

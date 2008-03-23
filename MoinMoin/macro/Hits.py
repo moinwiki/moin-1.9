@@ -11,7 +11,7 @@
              Default is 0/False/no.
         filter: if set to SAVEPAGE then the saved pages are counted. Default is VIEWPAGE.
 
-   @copyright: 2004-2007 MoinMoin:ReimarBauer,
+   @copyright: 2004-2008 MoinMoin:ReimarBauer,
                2005 BenjaminVrolijk
    @license: GNU GPL, see COPYING for details.
 """
@@ -20,15 +20,12 @@ Dependencies = ['time'] # do not cache
 
 from MoinMoin.logfile import eventlog
 
-
-def macro_Hits(macro, all=False, filter=(u'VIEWPAGE', u'SAVEPAGE')):
-    this_page = macro.formatter.page.page_name
+def macro_Hits(macro, all=False, event_type=(u'VIEWPAGE', u'SAVEPAGE')):
+    pagename = macro.formatter.page.page_name
     event_log = eventlog.EventLog(macro.request)
-    event_log.set_filter([str(filter)])
-    count = 0
-    for event in event_log:
-        pagename = event[2].get('pagename')
-        if all or pagename == this_page:
-            count += 1
+    if not all:
+        test = filter(lambda line: line[1] in event_type and line[2]['pagename'] == pagename, event_log)
+    else:
+        test = filter(lambda line: line[1] in event_type, event_log)
 
-    return u'%d' % count
+    return u'%d' % len(test)
