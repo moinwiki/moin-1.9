@@ -693,27 +693,25 @@ class Parser:
         m = self.link_target_re.match(target)
         if m:
             if m.group('extern_addr'):
-                scheme = m.group('extern_scheme')
+                # currently only supports ext. image inclusion
                 target = m.group('extern_addr')
                 desc = self._transclude_description(desc, target)
-                if scheme.startswith('http'): # can also be https
-                    # currently only supports ext. image inclusion
-                    tag_attrs, query_args = self._get_params(params,
-                                                             tag_attrs={'class': 'external_image',
-                                                                        'alt': desc,
-                                                                        'title': desc, },
-                                                             acceptable_attrs=acceptable_attrs_img)
-                    return self.formatter.image(src=target, **tag_attrs)
-                    # FF2 has a bug with target mimetype detection, it looks at the url path
-                    # and expects to find some "filename extension" there (like .png) and this
-                    # (not the response http headers) will set the default content-type of
-                    # the object. This will often work for staticly served files, but
-                    # fails for MoinMoin attachments (they don't have the filename.ext in the
-                    # path, but in the query string). FF3 seems to have this bug fixed, opera 9.2
-                    # also works.
-                    #return (self.formatter.transclusion(1, data=target) +
-                    #        desc +
-                    #        self.formatter.transclusion(0))
+                tag_attrs, query_args = self._get_params(params,
+                                                         tag_attrs={'class': 'external_image',
+                                                                    'alt': desc,
+                                                                    'title': desc, },
+                                                         acceptable_attrs=acceptable_attrs_img)
+                return self.formatter.image(src=target, **tag_attrs)
+                # FF2 has a bug with target mimetype detection, it looks at the url path
+                # and expects to find some "filename extension" there (like .png) and this
+                # (not the response http headers) will set the default content-type of
+                # the object. This will often work for staticly served files, but
+                # fails for MoinMoin attachments (they don't have the filename.ext in the
+                # path, but in the query string). FF3 seems to have this bug fixed, opera 9.2
+                # also works.
+                #return (self.formatter.transclusion(1, data=target) +
+                #        desc +
+                #        self.formatter.transclusion(0))
 
             elif m.group('attach_scheme'):
                 scheme = m.group('attach_scheme')
