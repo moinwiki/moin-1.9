@@ -15,17 +15,21 @@
                2005 BenjaminVrolijk
    @license: GNU GPL, see COPYING for details.
 """
-
 Dependencies = ['time'] # do not cache
 
-from MoinMoin.logfile import eventlog
+from MoinMoin.stats import hitcounts
 
 def macro_Hits(macro, all=False, event_type=(u'VIEWPAGE', u'SAVEPAGE')):
+    request = macro.request
     pagename = macro.formatter.page.page_name
-    event_log = eventlog.EventLog(macro.request)
-    if not all:
-        test = filter(lambda line: line[1] in event_type and line[2]['pagename'] == pagename, event_log)
-    else:
-        test = filter(lambda line: line[1] in event_type, event_log)
 
-    return u'%d' % len(test)
+    if all:
+        cache_days, cache_views, cache_edits = hitcounts.get_data(pagename, request, filterpage=None)
+    else:
+        cache_days, cache_views, cache_edits = hitcounts.get_data(pagename, request, filterpage=pagename)
+
+    if event_type == u'VIEWPAGE':
+        return u'%d' % sum(cache_views)
+    else:
+        return u'%d' % sum(cache_edits)
+
