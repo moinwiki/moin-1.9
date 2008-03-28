@@ -9,7 +9,7 @@ import sys, os
 from MoinMoin.config.multiconfig import DefaultConfig
 
 
-class Config(DefaultConfig):
+class LocalConfig(DefaultConfig):
     # vvv DON'T TOUCH THIS EXCEPT IF YOU KNOW WHAT YOU DO vvv
     moinmoin_dir = os.path.abspath(os.path.normpath(os.path.dirname(sys.argv[0])))
     data_dir = os.path.join(moinmoin_dir, 'wiki', 'data')
@@ -23,3 +23,24 @@ class Config(DefaultConfig):
     page_front_page = u'FrontPage' # change to some better value
     # ^^^ DON'T TOUCH THIS EXCEPT IF YOU KNOW WHAT YOU DO ^^^
 
+
+    # Add your configuration items here.
+
+
+
+# DEVELOPERS! Do not add your configuration items there,
+# you could accidentally commit them! Instead, create a
+# wikiconfig_local.py file containing this:
+#
+# from wikiconfig import LocalConfig
+#
+# class Config(LocalConfig):
+#     configuration_item_1 = 'value1'
+#
+
+try:
+    from wikiconfig_local import Config
+except ImportError, err:
+    if not str(err).endswith('wikiconfig_local'):
+        raise
+    Config = LocalConfig
