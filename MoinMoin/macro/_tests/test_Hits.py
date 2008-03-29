@@ -8,9 +8,10 @@
 """
 import os
 
-from MoinMoin import macro
+from MoinMoin import caching, macro
 from MoinMoin.logfile import eventlog
 from MoinMoin.PageEditor import PageEditor
+from MoinMoin.Page import Page
 
 class TestHits:
     """Hits: testing Hits macro """
@@ -23,6 +24,10 @@ class TestHits:
         fpath = self.request.rootpage.getPagePath('event-log', isfile=1)
         if os.path.exists(fpath):
             os.remove(fpath)
+        # hits is based on hitcounts which reads the cache
+        caching.CacheEntry(self.request, 'charts', 'hitcounts', scope='wiki').remove()
+        arena = Page(self.request, self.pagename)
+        caching.CacheEntry(self.request, arena, 'hitcounts', scope='item').remove()
 
     def teardown_class(self):
         if self.shouldDeleteTestPage:
@@ -32,9 +37,13 @@ class TestHits:
             fpath = page.getPagePath(use_underlay=0, check_create=0)
             shutil.rmtree(fpath, True)
 
-            fpath = self.request.rootpage.getPagePath('event-log', isfile=1)
-            if os.path.exists(fpath):
-                os.remove(fpath)
+        fpath = self.request.rootpage.getPagePath('event-log', isfile=1)
+        if os.path.exists(fpath):
+            os.remove(fpath)
+        # hits is based on hitcounts which reads the cache
+        caching.CacheEntry(self.request, 'charts', 'hitcounts', scope='wiki').remove()
+        arena = Page(self.request, self.pagename)
+        caching.CacheEntry(self.request, arena, 'hitcounts', scope='item').remove()
 
     def _make_macro(self):
         """Test helper"""
