@@ -45,7 +45,7 @@ def run():
     pagename = "MoinI18n/%s" % lang
     pagedata = data.encode('utf-8')
 
-    wiki = xmlrpclib.ServerProxy("http://test17.moinmo.in/?action=xmlrpc2")
+    wiki = xmlrpclib.ServerProxy("http://master17.moinmo.in/?action=xmlrpc2")
     token = wiki.getAuthToken(user, password)
     mc = xmlrpclib.MultiCall(wiki)
     mc.applyAuthToken(token)
