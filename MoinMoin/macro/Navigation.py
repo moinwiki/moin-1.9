@@ -3,6 +3,7 @@
     MoinMoin - Navigation Macro
 
     @copyright: 2003 Juergen Hermann <jh@web.de>
+                2008 MoinMoin:RadomirDopieralski
     @license: GNU GPL, see COPYING for details.
 """
 
