@@ -8,7 +8,8 @@
     @copyright: 2004 Vito Miliano (vito_moinnewpagewithtemplate@perilith.com),
                 2004 by Nir Soffer <nirs@freeshell.org>,
                 2004 Alexander Schremmer <alex AT alexanderweb DOT de>,
-                2006 MoinMoin:ReimarBauer
+                2006-2008 MoinMoin:ReimarBauer
+                2008 MoinMoin:RadomirDopieralski
     @license: GNU GPL, see COPYING for details.
 """
 
