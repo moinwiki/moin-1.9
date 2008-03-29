@@ -52,6 +52,9 @@ General syntax: moin [options] maint cleancache
 
         # clean wiki scope cache entries
         arena_key_list = [
+            ('charts', 'hitcounts'),
+            ('charts', 'pagehits'),
+            ('charts', 'useragents'),
             ('user', 'name2id'),
             ('wikidicts', 'dicts_groups'),
         ]
