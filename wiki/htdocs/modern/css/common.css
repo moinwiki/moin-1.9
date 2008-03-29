@@ -97,6 +97,8 @@ pre.comment:before {
 .red { background-color: #FFCCCC; }
 .green { background-color: #CCFFCC; }
 .blue { background-color: #CCCCFF; }
+.yellow { background-color: #FFF29F; }
+.orange { background-color: #FFD59B; }
 
 .solid { border: 2px solid #000000; padding: 2px; }
 .dashed { border: 2px dashed #000000; padding: 2px; }
