@@ -2,7 +2,7 @@
 """
     MoinMoin - MoinMoin.macro Hits tested
 
-    @copyright: 2007 MoinMoin:ReimarBauer
+    @copyright: 2007-2008 MoinMoin:ReimarBauer
 
     @license: GNU GPL, see COPYING for details.
 """

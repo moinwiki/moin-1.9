@@ -3,7 +3,7 @@
 MoinMoin - cleancache script
 
 @copyright: 2005-2007 MoinMoin:ThomasWaldmann,
-            2007 MoinMoin:ReimarBauer
+            2007-2008 MoinMoin:ReimarBauer
 @license: GNU GPL, see COPYING for details.
 """
 
