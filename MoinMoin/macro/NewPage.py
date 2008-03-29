@@ -75,7 +75,7 @@ class NewPage:
 
         # TODO: better abstract this using the formatter
         html = [
-            u'<form class="macro" method="get" action="%s/%s"><div>' % (self.request.getScriptname(), wikiutil.quoteWikinameURL(self.formatter.page.page_name)),
+            u'<form class="macro" method="POST" action="%s/%s"><div>' % (self.request.getScriptname(), wikiutil.quoteWikinameURL(self.formatter.page.page_name)),
             u'<input type="hidden" name="action" value="newpage">',
             u'<input type="hidden" name="parent" value="%s">' % wikiutil.escape(self.parent, 1),
             u'<input type="hidden" name="template" value="%s">' % wikiutil.escape(self.template, 1),
