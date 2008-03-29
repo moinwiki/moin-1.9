@@ -708,6 +708,9 @@ class XmlRpcBase:
 
     def xmlrpc_applyAuthToken(self, auth_token):
         """ Applies the auth token and thereby authenticates the user. """
+        if not auth_token:
+            return xmlrpclib.Fault("INVALID", "Empty token.")
+
         id_handler = XmlRpcAuthTokenIDHandler(auth_token)
 
         u = self.request.cfg.session_handler.start(self.request, id_handler)
