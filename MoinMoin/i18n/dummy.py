@@ -16,7 +16,6 @@ _('FindPage')
 _('SiteNavigation')
 _('HelpContents')
 _('HelpOnFormatting')
-_('SendMyPassword')
 _('WikiLicense')
 _('MissingPage')
 _('MissingHomePage')
@@ -29,4 +28,7 @@ _('LikePages')
 _('LocalSiteMap')
 _('RenamePage')
 _('SpellCheck')
+
+# the editbar link text of the default supplementation page link:
+_('Discussion')
 
