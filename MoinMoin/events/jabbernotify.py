@@ -60,7 +60,7 @@ def handle_jid_changed(event):
     except xmlrpclib.Error, err:
         ev.logger.error(_("XML RPC error: %s"), str(err))
     except Exception, err:
-        ev.logger.error(_("Low-level communication error: $s"), str(err))
+        ev.logger.error(_("Low-level communication error: %s"), str(err))
 
 
 def handle_file_attached(event):
@@ -211,5 +211,5 @@ def send_notification(request, jids, notification):
     except xmlrpclib.Error, err:
         ev.logger.error(_("XML RPC error: %s"), str(err))
     except Exception, err:
-        ev.logger.error(_("Low-level communication error: %s"), str(err), )
+        ev.logger.error(_("Low-level communication error: %s"), str(err))
 
