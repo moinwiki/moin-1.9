@@ -46,12 +46,14 @@ class FastCgiConfig(Config):
     # backlog, use in socket.listen(backlog) call
     backlog = 5
 
+    # default port
+    port = None
 
 def run(ConfigClass=FastCgiConfig):
     config = ConfigClass()
 
     handle_request = lambda req, env, form, properties=config.properties: \
                          request_fcgi.Request(req, env, form, properties=properties).run()
-    fcg = thfcgi.FCGI(handle_request, max_requests=config.max_requests, backlog=config.backlog, max_threads=config.max_threads)
+    fcg = thfcgi.FCGI(handle_request, port=config.port, max_requests=config.max_requests, backlog=config.backlog, max_threads=config.max_threads)
     fcg.run()
 
