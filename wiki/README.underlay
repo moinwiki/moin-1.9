@@ -1,6 +1,6 @@
 Please unpack the underlay directory like this
 
-  tar xjf underlay.tar.bz2
+  tar xf underlay.tar
 
 or use the directory from the current release distribution
 

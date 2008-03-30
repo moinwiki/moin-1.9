@@ -201,7 +201,7 @@ moin_scripts = [scriptname(fn) for fn in glob.glob('MoinMoin/script/[!_]*.py')]
 #############################################################################
 
 setup_args = {
-    'name': "MoinMoin",
+    'name': "moin",
     'version': release,
     'description': "MoinMoin %s is an easy to use, full-featured and extensible wiki software package" % (release, ),
     'author': "Juergen Hermann et al.",
