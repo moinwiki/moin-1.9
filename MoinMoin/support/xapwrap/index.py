@@ -126,74 +126,108 @@ from document import UNICODE_ENCODING, UNICODE_ERROR_POLICY
 try:
     from atop.tpython import FilesystemLock
 except ImportError:
-    from os import symlink, readlink, remove as rmlink
-    import errno
+    try:
+        from os import symlink, readlink, remove as rmlink
+    except ImportError:
+        import win32event
 
-    class FilesystemLock:
-        """A mutex.
+        class FilesystemLock:
+            """A mutex
 
-        This relies on the filesystem property that creating
-        a symlink is an atomic operation and that it will
-        fail if the symlink already exists.  Deleting the
-        symlink will release the lock.
-
-        @ivar name: The name of the file associated with this lock.
-        @ivar clean: Indicates whether this lock was released cleanly by its
-        last owner.  Only meaningful after C{lock} has been called and returns
-        True.
-        """
-
-        clean = None
-        locked = False
-
-        def __init__(self, name):
-            self.name = name
-
-        def lock(self):
-            """Acquire this lock.
-
-            @rtype: C{bool}
-            @return: True if the lock is acquired, false otherwise.
-
-            @raise: Any exception os.symlink() may raise, other than
-            EEXIST.
+            A real mutex this time. See the non-win32 version for details.
             """
-            try:
-                pid = readlink(self.name)
-            except (OSError, IOError), e:
-                if e.errno != errno.ENOENT:
-                    raise
-                self.clean = True
-            else:
-                if not hasattr(os, 'kill'):
-                    return False
+
+            locked = False
+            clean = True
+
+            def __init__(self, name):
+                #Mutex name cannot contain backslash
+                name = name.replace('\\', '/')
+                self.name = name
+                self._mutex = win32event.CreateMutex(None, False, name)
+                if not self._mutex:
+                    raise RuntimeError("Failed to create a named mutex")
+
+            def lock(self):
+                res = win32event.WaitForSingleObject(self._mutex, 0)
+                self.locked = (res != win32event.WAIT_TIMEOUT)
+                return self.locked
+
+            def unlock(self):
+                #C API ReleaseMutex version is supposed to return something to
+                #tell whether the lock was correctly released or not. The binding
+                #does not.
+                win32event.ReleaseMutex(self._mutex)
+                self.locked = False
+
+    else:
+        import errno
+
+        class FilesystemLock:
+            """A mutex.
+
+            This relies on the filesystem property that creating
+            a symlink is an atomic operation and that it will
+            fail if the symlink already exists.  Deleting the
+            symlink will release the lock.
+
+            @ivar name: The name of the file associated with this lock.
+            @ivar clean: Indicates whether this lock was released cleanly by its
+            last owner.  Only meaningful after C{lock} has been called and returns
+            True.
+            """
+
+            clean = None
+            locked = False
+
+            def __init__(self, name):
+                self.name = name
+
+            def lock(self):
+                """Acquire this lock.
+
+                @rtype: C{bool}
+                @return: True if the lock is acquired, false otherwise.
+
+                @raise: Any exception os.symlink() may raise, other than
+                EEXIST.
+                """
                 try:
-                    os.kill(int(pid), 0)
+                    pid = readlink(self.name)
                 except (OSError, IOError), e:
-                    if e.errno != errno.ESRCH:
+                    if e.errno != errno.ENOENT:
                         raise
-                    rmlink(self.name)
-                    self.clean = False
+                    self.clean = True
                 else:
-                    return False
+                    if not hasattr(os, 'kill'):
+                        return False
+                    try:
+                        os.kill(int(pid), 0)
+                    except (OSError, IOError), e:
+                        if e.errno != errno.ESRCH:
+                            raise
+                        rmlink(self.name)
+                        self.clean = False
+                    else:
+                        return False
 
-            symlink(str(os.getpid()), self.name)
-            self.locked = True
-            return True
+                symlink(str(os.getpid()), self.name)
+                self.locked = True
+                return True
 
-        def unlock(self):
-            """Release this lock.
+            def unlock(self):
+                """Release this lock.
 
-            This deletes the directory with the given name.
+                This deletes the directory with the given name.
 
-            @raise: Any exception os.readlink() may raise, or
-            ValueError if the lock is not owned by this process.
-            """
-            pid = readlink(self.name)
-            if int(pid) != os.getpid():
-                raise ValueError("Lock %r not owned by this process" % (self.name,))
-            rmlink(self.name)
-            self.locked = False
+                @raise: Any exception os.readlink() may raise, or
+                ValueError if the lock is not owned by this process.
+                """
+                pid = readlink(self.name)
+                if int(pid) != os.getpid():
+                    raise ValueError("Lock %r not owned by this process" % (self.name,))
+                rmlink(self.name)
+                self.locked = False
 
 try:
     from twisted.python.log import msg as log
