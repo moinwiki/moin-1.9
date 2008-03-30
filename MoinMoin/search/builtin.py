@@ -11,6 +11,9 @@
 """
 
 import time, os, errno, codecs
+import sys
+if sys.platform == 'win32':
+    import win32file, win32con, pywintypes
 
 from MoinMoin import log
 logging = log.getLogger(__name__)
@@ -204,7 +207,34 @@ class BaseIndex:
 
     def touch(self):
         """ Touch the index """
-        os.utime(self.dir, None)
+        if sys.platform == 'win32':
+            access=win32file.GENERIC_WRITE
+            share=win32file.FILE_SHARE_DELETE | \
+                  win32file.FILE_SHARE_READ | \
+                  win32file.FILE_SHARE_WRITE
+            create=win32file.OPEN_EXISTING
+            mtime = time.gmtime()
+            try:
+                handle=win32file.CreateFile(self.dir,
+                                            access,
+                                            share,
+                                            None,
+                                            create,
+                                            win32file.FILE_ATTRIBUTE_NORMAL |
+                                            win32con.FILE_FLAG_BACKUP_SEMANTICS,
+                                            None)
+            except pywintypes.error:
+                raise error, 'open("%s") for touch failed' % self.dir
+            try:
+                newTime = pywintypes.Time(mtime)
+                win32file.SetFileTime(handle,
+                                      newTime,
+                                      newTime,
+                                      newTime)
+            finally:
+                 win32file.CloseHandle(handle)
+        else:
+            os.utime(self.dir, None)
 
     def _search(self, query):
         """ Actually perfom the search (read-lock acquired)
