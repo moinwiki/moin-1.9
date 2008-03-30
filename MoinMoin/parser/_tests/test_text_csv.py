@@ -34,6 +34,7 @@ class ParserTestCase(object):
         formatter = HtmlFormatter(request)
         formatter.setPage(page)
         page.formatter = formatter
+        request.page = page
         request.formatter = formatter
         parser = CSV_Parser(body, request, line_anchors=False)
         formatter.startContent('') # needed for _include_stack init
