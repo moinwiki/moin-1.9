@@ -54,7 +54,9 @@ class Parser:
 
         # workaround csv.reader deficiency by encoding to utf-8
         data = raw.encode('utf-8').split('\n')
-        delimiter = Sniffer().sniff(data[0]).delimiter
+        delimiter = ';'
+        if data[0]:
+            delimiter = Sniffer().sniff(data[0]).delimiter
 
         visible = None
         hiddenindexes = []
