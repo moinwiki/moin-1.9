@@ -366,7 +366,7 @@ Be ''very careful'' and double-check before removing any of these
 potentially unused items.
 
 This program can't detect references done from wiki pages, from
-UserPreferences options, from Icon titles etc.!
+userprefs options, from Icon titles etc.!
 """
             for text in report[lang].unused():
                 print " 1. `%r`" % text

@@ -1304,7 +1304,7 @@ class Parser:
         """Handle macros."""
         macro_name = groups.get('macro_name')
         macro_args = groups.get('macro_args')
-        self.inhibit_p = 0 # 1 fixes UserPreferences, 0 fixes paragraph formatting for macros
+        self.inhibit_p = 0 # 1 fixed macros like UserPreferences (in the past, gone now), 0 fixes paragraph formatting for macros
 
         # create macro instance
         if self.macro is None:
