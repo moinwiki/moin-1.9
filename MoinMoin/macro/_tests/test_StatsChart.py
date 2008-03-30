@@ -43,6 +43,7 @@ class TestStatsCharts:
         p = Parser("##\n", self.request)
         p.formatter = Formatter(self.request)
         p.formatter.page = self.page
+        self.request.page = self.page
         self.request.formatter = p.formatter
         p.form = self.request.form
         m = macro.Macro(p)
