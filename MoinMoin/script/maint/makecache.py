@@ -43,5 +43,7 @@ General syntax: moin [options] maint makecache
         # make cache related to pagelinks entries of a page
         pages = request.rootpage.getPageList(user='', exists=1)
         for pagename in pages:
-            p = Page(request, pagename).getPageLinks(request)
+            page = Page(request, pagename)
+            request.page = page
+            p = page.getPageLinks(request)
 
