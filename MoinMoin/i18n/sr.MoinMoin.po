@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-02 14:58+0100\n"
+"POT-Creation-Date: 2008-03-30 00:25+0100\n"
 "PO-Revision-Date: 2007-11-26 23:04-0500\n"
 "Last-Translator: Igor Miletic <grejigl-gnomeprevod@yahoo.ca>\n"
 "Language-Team: Serbian <fedora-trans-sr@redhat.com>\n"
@@ -28,247 +28,44 @@ msgstr ""
 "X-HasWikiMarkup: True\n"
 "X-Generator: KBabel 1.11.4\n"
 
+msgid "<unknown>"
+msgstr "<непознато>"
+
+#, fuzzy, python-format
 msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
+"Login Name: %s\n"
+"\n"
+"Login Password: %s\n"
+"\n"
+"Login URL: %s/?action=login\n"
 msgstr ""
-"Обрада ел. поште није укључена у овом викију.\n"
-"Ако желите можете контактирати власника викија да укључи ел. пошту."
-
-msgid "Please provide a valid email address!"
-msgstr "Упишите исправну ел. адресу!"
-
-msgid "If an account with this username exists, an email was sent."
-msgstr ""
-"Ел. порука ће бити послата ако налог са овим корисничким именом постоји."
-
-#, python-format
-msgid "Found no account matching the given email address '%(email)s'!"
-msgstr "Налог који одговара датој ел. адреси, '%(email)s' , не постоји!"
-
-msgid "Use UserPreferences to change your settings or create an account."
-msgstr ""
-"Користите КорисничкеПоставке да промените ваша подешавања или да направите "
-"налог."
-
-msgid "TextCha: Wrong answer! Go back and try again..."
-msgstr "TextCha: Погрешан одговор! Вратите се назад и покушајте поново..."
-
-msgid "Empty user name. Please enter a user name."
-msgstr "Празно корисничко име. Унесите корисничко име."
-
-#, python-format
-msgid ""
-"Invalid user name {{{'%s'}}}.\n"
-"Name may contain any Unicode alpha numeric character, with optional one\n"
-"space between words. Group page name is not allowed."
-msgstr ""
-"Неисправно корисничко име {{{'%s'}}}.\n"
-"Име може да садржи било који Уникод словни или бројни знак, са необавезним "
-"једним\n"
-"размаком између речи. Име групне странице није дозвољено."
-
-msgid "This user name already belongs to somebody else."
-msgstr "Неко други већ поседује ово корисничко име."
-
-msgid "Passwords don't match!"
-msgstr "Лозинке се не подударају!"
-
-msgid "Please specify a password!"
-msgstr "Укуцајте лозинку!"
-
-#, python-format
-msgid "Password not acceptable: %s"
-msgstr "Лозинка није прихватљива: %s"
+"Корисничко име: %s\n"
+"\n"
+"Лозинка: %s\n"
+"\n"
+"УРЛ за пријаву: %s/%s?action=login\n"
 
 msgid ""
-"Please provide your email address. If you lose your login information, you "
-"can get it by email."
+"Somebody has requested to submit your account data to this email address.\n"
+"\n"
+"If you lost your password, please use the data below and just enter the\n"
+"password AS SHOWN into the wiki's password form field (use copy and paste\n"
+"for that).\n"
+"\n"
+"After successfully logging in, it is of course a good idea to set a new and "
+"known password.\n"
 msgstr ""
-"Упишете вашу ел. адресу. Ако изгубите ваше корисничке податке, можете их "
-"добити на вашој ел. адреси."
-
-msgid "This email already belongs to somebody else."
-msgstr "Неко други већ поседује ову ел. адресу."
-
-msgid "User account created! You can use this account to login now..."
-msgstr ""
-"Кориснички налог је направљен! Сада можете користити овај налог за пријаву..."
-
-msgid "Use UserPreferences to change settings of the selected user account"
-msgstr ""
-"Користите КорисничкеПоставке да промените поставке изабраног корисничког "
-"налога"
+"Неко је тражио да се пошаљу ваши подаци на ову ел. адресу.\n"
+"\n"
+"Ако сте изгубили лозинку, користите податке испод и само упишите\n"
+"лозинку КАО ШТО ЈЕ НАПИСАНО у пољу за вики лозинке (користи умножи и налепи\n"
+"за то).\n"
+"После успешног пријављивања, била би наравно добра идеја да поставите нову "
+"лозинку коју ћете запамтити.\n"
 
 #, python-format
-msgid "The theme '%(theme_name)s' could not be loaded!"
-msgstr "Тема '%(theme_name)s' се није могла учитати!"
-
-msgid "User preferences saved!"
-msgstr "Корисничке поставке су сачуване!"
-
-msgid "Default"
-msgstr "Подразумевано"
-
-msgid "<Browser setting>"
-msgstr "<Поставке читача>"
-
-msgid "the one preferred"
-msgstr "пожељнији"
-
-msgid "free choice"
-msgstr "слободни избор"
-
-msgid "Select User"
-msgstr "Изаберите корисника"
-
-msgid "Save"
-msgstr "Сачувај"
-
-msgid "Cancel"
-msgstr "Откажи"
-
-msgid "Preferred theme"
-msgstr "Омиљена тема"
-
-msgid "Editor Preference"
-msgstr "Поставке уређивача"
-
-msgid "Editor shown on UI"
-msgstr "Уређивач приказан на сучељу"
-
-msgid "Time zone"
-msgstr "Временска зона"
-
-msgid "Your time is"
-msgstr "Ваше време је"
-
-msgid "Server time is"
-msgstr "Време сервера је"
-
-msgid "Date format"
-msgstr "Формат датума"
-
-msgid "Preferred language"
-msgstr "Жељени језик"
-
-msgid "General options"
-msgstr "Опште опције"
-
-msgid "Quick links"
-msgstr "Брзе везе"
-
-msgid "This list does not work, unless you have entered a valid email address!"
-msgstr "Ово дописно друштво неће радити ако не унесете важећу ел. адресу!"
-
-msgid "Subscribed wiki pages (one regex per line)"
-msgstr "Вики странице у које сте учлањени (један регуларни израз по реду)"
-
-msgid "Create Profile"
-msgstr "Направите профил"
-
-msgid "TextCha (required)"
-msgstr "TextCha (обавезно)"
-
-msgid "Mail me my account data"
-msgstr "Пошаљите ми моје податке путем ел. поште"
-
-msgid "Email"
-msgstr "Ел. адреса"
-
-#, python-format
-msgid ""
-"To create an account, see the %(userprefslink)s page. To recover a lost "
-"password, go to %(sendmypasswordlink)s."
-msgstr ""
-"Да направите налог, погледајте %(userprefslink)s страницу. Да повратите "
-"изгубљену лозинку, погледајте %(sendmypasswordlink)s страницу."
-
-msgid "Name"
-msgstr "Име"
-
-msgid "Password"
-msgstr "Лозинка"
-
-msgid "Login"
-msgstr "Пријавите се"
-
-msgid "Action"
-msgstr "Радња"
-
-msgid "Enable user"
-msgstr "Укључи корисника"
-
-msgid "disabled"
-msgstr "искључен"
-
-msgid "Disable user"
-msgstr "Искључи корисника"
-
-msgid "Mail account data"
-msgstr "Подаци поштанског налога"
-
-#, python-format
-msgid "Argument \"%s\" must be a boolean value, not \"%s\""
-msgstr "Аргумент „%s“ мора бити логичка вредност, а не „%s“"
-
-#, python-format
-msgid "Argument must be a boolean value, not \"%s\""
-msgstr "Аргумент мора бити логичка вредност, а не „%s“"
-
-#, python-format
-msgid "Argument \"%s\" must be an integer value, not \"%s\""
-msgstr "Аргумент „%s“ мора бити цели број, а не „%s“"
-
-#, python-format
-msgid "Argument must be an integer value, not \"%s\""
-msgstr "Аргумент мора бити цели број, а не „%s“"
-
-#, python-format
-msgid "Argument \"%s\" must be a floating point value, not \"%s\""
-msgstr "Аргумент „%s“ мора бити број са покретним зарезом, а не „%s“"
-
-#, python-format
-msgid "Argument must be a floating point value, not \"%s\""
-msgstr "Аргумент мора бити број са покретним зарезом, а не „%s“"
-
-#, python-format
-msgid "Argument \"%s\" must be a complex value, not \"%s\""
-msgstr "Аргумент „%s“ мора бити комплексни број, а не „%s“"
-
-#, python-format
-msgid "Argument must be a complex value, not \"%s\""
-msgstr "Аргумент мора бити комплексни број, а не „%s“"
-
-#, python-format
-msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
-msgstr "Аргумент „%s“ мора бити једно од „%s“, а не „%s“"
-
-#, python-format
-msgid "Argument must be one of \"%s\", not \"%s\""
-msgstr "Аргумент мора бити једно од „%s“, а не „%s“"
-
-msgid "Too many arguments"
-msgstr "Превише аргумената"
-
-msgid "Cannot have arguments without name following named arguments"
-msgstr "Неможете имати аргументе без назива који прате назване аргументе"
-
-#, python-format
-msgid "Argument \"%s\" is required"
-msgstr "Аргумент „%s“ је обавезан"
-
-#, python-format
-msgid "No argument named \"%s\""
-msgstr "Нема аргумента названог „%s“!"
-
-#, python-format
-msgid "Expected \"=\" to follow \"%(token)s\""
-msgstr "Очекивано „=“ после „%(token)s“"
-
-#, python-format
-msgid "Expected a value for key \"%(token)s\""
-msgstr "Очекивана вредност за кључ „%(token)s“"
+msgid "[%(sitename)s] Your wiki account data"
+msgstr "[%(sitename)s] Подаци вашег вики налога"
 
 msgid "You are not allowed to edit this page."
 msgstr "Није вам дозвољено да уређујете ову страницу."
@@ -362,6 +159,9 @@ msgstr "Провера правописа"
 msgid "Save Changes"
 msgstr "Сачувај измене"
 
+msgid "Cancel"
+msgstr "Откажи"
+
 #, python-format
 msgid ""
 "By hitting '''%(save_button_text)s''' you put your changes under the %"
@@ -399,13 +199,218 @@ msgstr "Додај у: %(category)s"
 msgid "Remove trailing whitespace from each line"
 msgstr "Уклони пратеће размаке са краја сваког реда"
 
-msgid "The wiki is currently not reachable."
-msgstr "Вики тренутно није доступан."
+#, python-format
+msgid "Argument \"%s\" must be a boolean value, not \"%s\""
+msgstr "Аргумент „%s“ мора бити логичка вредност, а не „%s“"
+
+#, python-format
+msgid "Argument must be a boolean value, not \"%s\""
+msgstr "Аргумент мора бити логичка вредност, а не „%s“"
+
+#, python-format
+msgid "Argument \"%s\" must be an integer value, not \"%s\""
+msgstr "Аргумент „%s“ мора бити цели број, а не „%s“"
+
+#, python-format
+msgid "Argument must be an integer value, not \"%s\""
+msgstr "Аргумент мора бити цели број, а не „%s“"
+
+#, python-format
+msgid "Argument \"%s\" must be a floating point value, not \"%s\""
+msgstr "Аргумент „%s“ мора бити број са покретним зарезом, а не „%s“"
+
+#, python-format
+msgid "Argument must be a floating point value, not \"%s\""
+msgstr "Аргумент мора бити број са покретним зарезом, а не „%s“"
+
+#, python-format
+msgid "Argument \"%s\" must be a complex value, not \"%s\""
+msgstr "Аргумент „%s“ мора бити комплексни број, а не „%s“"
+
+#, python-format
+msgid "Argument must be a complex value, not \"%s\""
+msgstr "Аргумент мора бити комплексни број, а не „%s“"
+
+#, python-format
+msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
+msgstr "Аргумент „%s“ мора бити једно од „%s“, а не „%s“"
+
+#, python-format
+msgid "Argument must be one of \"%s\", not \"%s\""
+msgstr "Аргумент мора бити једно од „%s“, а не „%s“"
+
+msgid "Too many arguments"
+msgstr "Превише аргумената"
+
+msgid "Cannot have arguments without name following named arguments"
+msgstr "Неможете имати аргументе без назива који прате назване аргументе"
+
+#, python-format
+msgid "Argument \"%s\" is required"
+msgstr "Аргумент „%s“ је обавезан"
+
+#, python-format
+msgid "No argument named \"%s\""
+msgstr "Нема аргумента названог „%s“!"
+
+#, python-format
+msgid "Expected \"=\" to follow \"%(token)s\""
+msgstr "Очекивано „=“ после „%(token)s“"
+
+#, python-format
+msgid "Expected a value for key \"%(token)s\""
+msgstr "Очекивана вредност за кључ „%(token)s“"
+
+msgid "Your changes are not saved!"
+msgstr "Ваше промене нису сачуване!"
+
+msgid "Page name is too long, try shorter name."
+msgstr "Предугачко име странице, покушајте са краћим именом."
+
+msgid "GUI Mode"
+msgstr "Графички режим"
+
+msgid "Edit was cancelled."
+msgstr "Уређивање је отказано."
+
+msgid "You can't copy to an empty pagename."
+msgstr "Не можете умножити празну страницу."
+
+msgid "You are not allowed to copy this page!"
+msgstr "Није вам дозвољено да умножите ову страницу!"
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''Страна са именом {{{'%s'}}} већ постоји.'''\n"
+"\n"
+"Пробајте друго име."
+
+#, python-format
+msgid "Could not copy page because of file system error: %s."
+msgstr "Страна се није могла умножити због грешке у систему датотека: %s."
+
+msgid "You are not allowed to rename this page!"
+msgstr "Није вам дозвољено да преименујете ову страницу!"
+
+msgid "You can't rename to an empty pagename."
+msgstr "Не можете променити име празној страници."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr "Страна се није могла преименовати због грешке у систему датотека: %s."
+
+msgid "You are not allowed to delete this page!"
+msgstr "Није вам дозвољено да избришете ову страницу!"
+
+msgid "Thank you for your changes. Your attention to detail is appreciated."
+msgstr "Хвала за ваше измене. Ценимо вашу пажњу."
+
+#, python-format
+msgid "Page \"%s\" was successfully deleted!"
+msgstr "Страница „%s“ је успешно избрисана!"
+
+#, python-format
+msgid "Page could not get locked. Unexpected error (errno=%d)."
+msgstr "Страница се није могла блокирати. Неочекивана грешка (errno=%d)."
+
+msgid "Page could not get locked. Missing 'current' file?"
+msgstr "Страница се није могла блокирати. Можда недостаје текућа датотека?"
+
+#, python-format
+msgid ""
+"Unable to determine current page revision from the 'current' file. The page %"
+"s is damaged and cannot be edited right now."
+msgstr ""
+"Није могуће утврдити тренутно издање странице из текуће датотеке. Страница % "
+"s је оштећена и тренутно се не може уређивати."
+
+#, python-format
+msgid "Cannot save page %s, no storage space left."
+msgstr "Не могу сачувати страницу %s, нема слободног простора."
+
+#, python-format
+msgid "An I/O error occurred while saving page %s (errno=%d)"
+msgstr ""
+"Дошло је до улазно-излазне грешке приликом чувања странице %s (број грешке "
+"је %d)"
+
+msgid "You are not allowed to edit this page!"
+msgstr "Није вам дозвољено да уређујете ову страницу!"
+
+msgid "You cannot save empty pages."
+msgstr "Празне странице се не могу сачувати."
+
+msgid "You already saved this page!"
+msgstr "Ову страну сте већ сачували!"
+
+msgid "You already edited this page! Please do not use the back button."
+msgstr "Већ сте уредили ову страницу! Немојте користити дугме за назад."
+
+msgid "You did not change the page content, not saved!"
+msgstr "Нисте променили садржај странице, страница није сачувана!"
 
 msgid ""
-"The remote version of MoinMoin is too old, version 1.6 is required at least."
+"You can't change ACLs on this page since you have no admin rights on it!"
 msgstr ""
-"Удаљено издање MoinMoin-а је престаро, најстарије неопходно издање је 1.6."
+"Не можете мењати корисничка права (ACL) на овој страници, пошто\n"
+"немате администраторска права за њу!"
+
+msgid "Notifications sent to:"
+msgstr ""
+
+#, python-format
+msgid ""
+"The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were "
+"granted the lock for this page."
+msgstr ""
+"Блокада од %(owner)s је истекла пре %(mins_ago)d минута, добили сте блокаду "
+"за ову страницу."
+
+#, python-format
+msgid ""
+"Other users will be ''blocked'' from editing this page until %(bumptime)s."
+msgstr "Други корисници ''неће моћи'' да уређују ову страну до %(bumptime)s."
+
+#, python-format
+msgid ""
+"Other users will be ''warned'' until %(bumptime)s that you are editing this "
+"page."
+msgstr ""
+"Други корисници ће бити ''упозорени'' до %(bumptime)s да ви уређујете ову "
+"страну."
+
+msgid "Use the Preview button to extend the locking period."
+msgstr "Користите дугме Преглед да продужите блокаду."
+
+#, python-format
+msgid ""
+"This page is currently ''locked'' for editing by %(owner)s until %(timestamp)"
+"s, i.e. for %(mins_valid)d minute(s)."
+msgstr ""
+"Ова страница је тренутно ''блокирана'' за уређивање од стране %(owner)s до %"
+"(timestamp)s, тачније још %(mins_valid)d минута."
+
+#, python-format
+msgid ""
+"This page was opened for editing or last previewed at %(timestamp)s by %"
+"(owner)s.<<BR>>\n"
+"'''You should ''refrain from editing'' this page for at least another %"
+"(mins_valid)d minute(s),\n"
+"to avoid editing conflicts.'''<<BR>>\n"
+"To leave the editor, press the Cancel button."
+msgstr ""
+"Ова страница је задњи пут отворена за уређивање или прегледана у %(timestamp)"
+"s од стране %(owner)s.<<BR>>\n"
+"'''''Сусдржите се да уређујете'' ову страницу најмање још %(mins_valid)d "
+"следећих минута да бисте избегли противречности.'''<<BR>>\n"
+"Користите ''Откажи'' дугме да напустите уређивач."
+
+msgid "The wiki is currently not reachable."
+msgstr "Вики тренутно није доступан."
 
 msgid "Invalid username or password."
 msgstr "Неважеће корисничко име или лозинка."
@@ -455,249 +460,9 @@ msgstr "Непозната функција %(func)s у реду %(lineno)i."
 msgid "The file %s was not found in the package."
 msgstr "Датотека %s није нађена у пакету."
 
-msgid "Your changes are not saved!"
-msgstr "Ваше промене нису сачуване!"
-
-msgid "Page name is too long, try shorter name."
-msgstr "Предугачко име странице, покушајте са краћим именом."
-
-msgid "GUI Mode"
-msgstr "Графички режим"
-
-msgid "Edit was cancelled."
-msgstr "Уређивање је отказано."
-
-msgid "You can't copy to an empty pagename."
-msgstr "Не можете умножити празну страницу."
-
-msgid "You are not allowed to copy this page!"
-msgstr "Није вам дозвољено да умножите ову страницу!"
-
 #, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"Try a different name."
+msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr ""
-"'''Страна са именом {{{'%s'}}} већ постоји.'''\n"
-"Пробајте друго име."
-
-#, python-format
-msgid "Could not copy page because of file system error: %s."
-msgstr "Страна се није могла умножити због грешке у систему датотека: %s."
-
-msgid "You are not allowed to rename this page!"
-msgstr "Није вам дозвољено да преименујете ову страницу!"
-
-msgid "You can't rename to an empty pagename."
-msgstr "Не можете променити име празној страници."
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr ""
-"'''Страна са именом {{{'%s'}}} већ постоји.'''\n"
-"\n"
-"Пробајте друго име."
-
-#, python-format
-msgid "Could not rename page because of file system error: %s."
-msgstr "Страна се није могла преименовати због грешке у систему датотека: %s."
-
-msgid "You are not allowed to delete this page!"
-msgstr "Није вам дозвољено да избришете ову страницу!"
-
-msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr "Хвала за ваше измене. Ценимо вашу пажњу."
-
-#, python-format
-msgid "Page \"%s\" was successfully deleted!"
-msgstr "Страница „%s“ је успешно избрисана!"
-
-#, python-format
-msgid ""
-"Dear Wiki user,\n"
-"\n"
-"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
-"change notification.\n"
-"\n"
-"The following page has been changed by %(editor)s:\n"
-"%(pagelink)s\n"
-"\n"
-msgstr ""
-"Поштовани вики корисниче,\n"
-"\n"
-"Ви сте претплаћени на вики страницу или категорију на  „%(sitename)s“ за "
-"обавештење о измени.\n"
-"\" .\n"
-"\n"
-"Ова страница је промењена од стране %(editor)s :\n"
-"%(pagelink)s\n"
-"\n"
-
-#, python-format
-msgid ""
-"The comment on the change is:\n"
-"%(comment)s\n"
-"\n"
-msgstr ""
-"Белешка о измени је:\n"
-"%(comment)s\n"
-"\n"
-
-msgid "New page:\n"
-msgstr "Нова страница:\n"
-
-msgid "No differences found!\n"
-msgstr "Нема разлике!\n"
-
-#, python-format
-msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
-msgstr ""
-"[%(sitename)s] %(trivial)sАжурирано „%(pagename)s“ од стране %(username)s"
-
-msgid "Trivial "
-msgstr "Ситна "
-
-msgid "Status of sending notification mails:"
-msgstr "Стање слања ел. поште о обавештавању:"
-
-#, python-format
-msgid "[%(lang)s] %(recipients)s: %(status)s"
-msgstr "[%(lang)s] %(recipients)s: %(status)s"
-
-#, python-format
-msgid "Page could not get locked. Unexpected error (errno=%d)."
-msgstr "Страница се није могла блокирати. Неочекивана грешка (errno=%d)."
-
-msgid "Page could not get locked. Missing 'current' file?"
-msgstr "Страница се није могла блокирати. Можда недостаје текућа датотека?"
-
-#, python-format
-msgid ""
-"Unable to determine current page revision from the 'current' file. The page %"
-"s is damaged and cannot be edited right now."
-msgstr ""
-"Није могуће утврдити тренутно издање странице из текуће датотеке. Страница % "
-"s је оштећена и тренутно се не може уређивати."
-
-#, python-format
-msgid "Cannot save page %s, no storage space left."
-msgstr "Не могу сачувати страницу %s, нема слободног простора."
-
-#, python-format
-msgid "An I/O error occurred while saving page %s (errno=%d)"
-msgstr ""
-"Дошло је до улазно-излазне грешке приликом чувања странице %s (број грешке "
-"је %d)"
-
-msgid "You are not allowed to edit this page!"
-msgstr "Није вам дозвољено да уређујете ову страницу!"
-
-msgid "You cannot save empty pages."
-msgstr "Празне странице се не могу сачувати."
-
-msgid "You already saved this page!"
-msgstr "Ову страну сте већ сачували!"
-
-msgid "You already edited this page! Please do not use the back button."
-msgstr "Већ сте уредили ову страницу! Немојте користити дугме за назад."
-
-msgid "You did not change the page content, not saved!"
-msgstr "Нисте променили садржај странице, страница није сачувана!"
-
-msgid ""
-"You can't change ACLs on this page since you have no admin rights on it!"
-msgstr ""
-"Не можете мењати корисничка права (ACL) на овој страници, пошто\n"
-"немате администраторска права за њу!"
-
-#, python-format
-msgid ""
-"The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were "
-"granted the lock for this page."
-msgstr ""
-"Блокада од %(owner)s је истекла пре %(mins_ago)d минута, добили сте блокаду "
-"за ову страницу."
-
-#, python-format
-msgid ""
-"Other users will be ''blocked'' from editing this page until %(bumptime)s."
-msgstr "Други корисници ''неће моћи'' да уређују ову страну до %(bumptime)s."
-
-#, python-format
-msgid ""
-"Other users will be ''warned'' until %(bumptime)s that you are editing this "
-"page."
-msgstr ""
-"Други корисници ће бити ''упозорени'' до %(bumptime)s да ви уређујете ову "
-"страну."
-
-msgid "Use the Preview button to extend the locking period."
-msgstr "Користите дугме Преглед да продужите блокаду."
-
-#, python-format
-msgid ""
-"This page is currently ''locked'' for editing by %(owner)s until %(timestamp)"
-"s, i.e. for %(mins_valid)d minute(s)."
-msgstr ""
-"Ова страница је тренутно ''блокирана'' за уређивање од стране %(owner)s до %"
-"(timestamp)s, тачније још %(mins_valid)d минута."
-
-#, python-format
-msgid ""
-"This page was opened for editing or last previewed at %(timestamp)s by %"
-"(owner)s.<<BR>>\n"
-"'''You should ''refrain from editing'' this page for at least another %"
-"(mins_valid)d minute(s),\n"
-"to avoid editing conflicts.'''<<BR>>\n"
-"To leave the editor, press the Cancel button."
-msgstr ""
-"Ова страница је задњи пут отворена за уређивање или прегледана у %(timestamp)"
-"s од стране %(owner)s.<<BR>>\n"
-"'''''Сусдржите се да уређујете'' ову страницу најмање још %(mins_valid)d "
-"следећих минута да бисте избегли противречности.'''<<BR>>\n"
-"Користите ''Откажи'' дугме да напустите уређивач."
-
-msgid "<unknown>"
-msgstr "<непознато>"
-
-#, python-format
-msgid ""
-"Login Name: %s\n"
-"\n"
-"Login Password: %s\n"
-"\n"
-"Login URL: %s/%s?action=login\n"
-msgstr ""
-"Корисничко име: %s\n"
-"\n"
-"Лозинка: %s\n"
-"\n"
-"УРЛ за пријаву: %s/%s?action=login\n"
-
-msgid ""
-"Somebody has requested to submit your account data to this email address.\n"
-"\n"
-"If you lost your password, please use the data below and just enter the\n"
-"password AS SHOWN into the wiki's password form field (use copy and paste\n"
-"for that).\n"
-"\n"
-"After successfully logging in, it is of course a good idea to set a new and "
-"known password.\n"
-msgstr ""
-"Неко је тражио да се пошаљу ваши подаци на ову ел. адресу.\n"
-"\n"
-"Ако сте изгубили лозинку, користите податке испод и само упишите\n"
-"лозинку КАО ШТО ЈЕ НАПИСАНО у пољу за вики лозинке (користи умножи и налепи\n"
-"за то).\n"
-"После успешног пријављивања, била би наравно добра идеја да поставите нову "
-"лозинку коју ћете запамтити.\n"
-
-#, python-format
-msgid "[%(sitename)s] Your wiki account data"
-msgstr "[%(sitename)s] Подаци вашег вики налога"
 
 msgid ""
 "The backed up content of this page is deprecated and will not be included in "
@@ -723,6 +488,18 @@ msgstr "Направи нову страну"
 
 msgid "You are not allowed to view this page."
 msgstr "Није вам дозвољено да видите ову страну."
+
+msgid "[all]"
+msgstr "[све]"
+
+msgid "[not empty]"
+msgstr "[није празно]"
+
+msgid "[empty]"
+msgstr "[празно]"
+
+msgid "filter"
+msgstr "филтер"
 
 #, python-format
 msgid ""
@@ -757,416 +534,6 @@ msgstr "поклапај"
 msgid "matches"
 msgstr "поклапа"
 
-msgid "Go To Page"
-msgstr "Иди на страницу"
-
-msgid "Include system pages"
-msgstr "Укључи системске странице"
-
-msgid "Exclude system pages"
-msgstr "Искључи системске странице"
-
-#, python-format
-msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
-msgstr "Користите пробрљивији израз за претрагу уместо {{{„%s“}}}"
-
-#, python-format
-msgid "ERROR in regex '%s'"
-msgstr "ГРЕШКА у регуларном изразу '%s'"
-
-#, python-format
-msgid "Bad timestamp '%s'"
-msgstr "Погрешни временски печат '%s'"
-
-#, python-format
-msgid "Unsupported navigation scheme '%(scheme)s'!"
-msgstr "Навигациона шема '%(scheme)s' није подржана!"
-
-msgid "No parent page found!"
-msgstr "Ово није подстраница!"
-
-msgid "Wiki"
-msgstr "Вики"
-
-msgid "Edit"
-msgstr "Уреди"
-
-msgid "Slideshow"
-msgstr "Приказ слајдова"
-
-msgid "Start"
-msgstr "Почетак"
-
-#, python-format
-msgid "Slide %(pos)d of %(size)d"
-msgstr "Слајд %(pos)d од %(size)d"
-
-msgid "Search Titles"
-msgstr "Тражи наслове"
-
-msgid "Display context of search results"
-msgstr "Прикажи садржај резултата претраге"
-
-msgid "Case-sensitive searching"
-msgstr "Претрага са разликовањем великих и малих слова"
-
-msgid "Search Text"
-msgstr "Тражи текст"
-
-#, python-format
-msgid "Not supported mimetype of file: %s"
-msgstr "Неподржана „mime“ врста датотеке: %s"
-
-msgid "Embedding of object by chosen formatter not possible"
-msgstr "Угњеждавање објеката од изабраног обликовача није могуће"
-
-msgid "Embedded"
-msgstr "Угњеждено"
-
-msgid ""
-"Not enough arguments given to EmbedObject macro! Try <<EmbedObject"
-"(attachment [,width=width] [,height=height] [,alt=alternate Text])>>"
-msgstr ""
-"Нема довољно аргумената за дати макро EmbedObject! Покушајте <<EmbedObject"
-"(прилог [,width=ширина] [,height=висина] [,alt=алтернативни текст])>>"
-
-#, python-format
-msgid "Upload new attachment \"%(filename)s\""
-msgstr "Додај нови прилог „%(filename)s“"
-
-msgid ""
-"Not enough arguments given to EmbedObject macro! Try <<EmbedObject(url, "
-"url_mimetype [,width=width] [,height=height] [,alt=alternate Text])>>"
-msgstr ""
-"Нема довољно аргумената за дати макро EmbedObject! Покушајте <<EmbedObject(, "
-"url_mimetype [,width=ширина] [,height=висина] [,alt=алтернативни текст])>>"
-
-#, python-format
-msgid "Invalid MonthCalendar calparms \"%s\"!"
-msgstr "Неисправни MonthCalendar (месечни календар) параметри „%s“!"
-
-#, python-format
-msgid "Invalid MonthCalendar arguments \"%s\"!"
-msgstr "Неисправни MonthCalendar аргументи „%s“!"
-
-msgid "No orphaned pages in this wiki."
-msgstr "Нема остављених страница у овом викију."
-
-msgid "Python Version"
-msgstr "Python верзија"
-
-msgid "MoinMoin Version"
-msgstr "MoinMoin верзија"
-
-#, python-format
-msgid "Release %s [Revision %s]"
-msgstr "Издање %s [Revizija %s]"
-
-msgid "4Suite Version"
-msgstr "4Suite верзија"
-
-msgid "Number of pages"
-msgstr "Број страница"
-
-msgid "Number of system pages"
-msgstr "Број системских страница"
-
-msgid "Accumulated page sizes"
-msgstr "Укупна величина страница"
-
-#, python-format
-msgid "Disk usage of %(data_dir)s/pages/"
-msgstr "Коришћење диска у %(data_dir)s/pages/"
-
-#, python-format
-msgid "Disk usage of %(data_dir)s/"
-msgstr "Коришћење диска у %(data_dir)s"
-
-msgid "Entries in edit log"
-msgstr "Уноси у уређивачком дневнику"
-
-msgid "NONE"
-msgstr "НИЈЕДАН"
-
-msgid "Global extension macros"
-msgstr "Општи макрои екстензија"
-
-msgid "Local extension macros"
-msgstr "Локални макрои екстензија"
-
-msgid "Global extension actions"
-msgstr "Опште радње екстензија"
-
-msgid "Local extension actions"
-msgstr "Локалне радње екстензија"
-
-msgid "Global parsers"
-msgstr "Инсталирани рашчлањивачи"
-
-msgid "Local extension parsers"
-msgstr "Локалне екстензије рашчлањивача"
-
-msgid "Disabled"
-msgstr "Искључено"
-
-msgid "Enabled"
-msgstr "Укључено"
-
-msgid "index available"
-msgstr "индекс доступан"
-
-msgid "index unavailable"
-msgstr "индекс недоступан"
-
-msgid "N/A"
-msgstr "Нема података"
-
-msgid "Xapian and/or Python Xapian bindings not installed"
-msgstr "Xapian и/или Python Xapian везе нису инсталиране"
-
-msgid "Xapian search"
-msgstr "Xapian претрага"
-
-msgid "Xapian Version"
-msgstr "MoinMoin верзија"
-
-msgid "PyStemmer not installed"
-msgstr "PyStemmer није инсталиран"
-
-msgid "Stemming for Xapian"
-msgstr "Разкорењавање за Xapian"
-
-msgid "PyStemmer Version"
-msgstr "PyStemmer верзија"
-
-msgid "PyStemmer stems"
-msgstr "PyStemmer коренови"
-
-msgid "Active threads"
-msgstr "Активни низови"
-
-#, python-format
-msgid "No quotes on %(pagename)s."
-msgstr "Нема цитата на %(pagename)s."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Учитавање прилога '%(filename)s'."
-
-#, python-format
-msgid "Attachment '%(filename)s' deleted."
-msgstr "Прилог '%(filename)s' је избрисан."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Цртеж '%(filename)s' је сачуван."
-
-#, python-format
-msgid "Revert to revision %(rev)d."
-msgstr "Повратити на верзију %(rev)d."
-
-#, python-format
-msgid "Renamed from '%(oldpagename)s'."
-msgstr "Преименовано из '%(oldpagename)s'."
-
-#, python-format
-msgid "%(mins)dm ago"
-msgstr "пре %(mins)dm"
-
-msgid "(no bookmark set)"
-msgstr "(обележивач није постављен)"
-
-#, python-format
-msgid "(currently set to %s)"
-msgstr "(тренутно постављен на %s)"
-
-msgid "Delete bookmark"
-msgstr "Избриши обележивач"
-
-msgid "Set bookmark"
-msgstr "Постави обележивач"
-
-msgid "[Bookmark reached]"
-msgstr "[Обележивач досегнут]"
-
-#, python-format
-msgid "Invalid include arguments \"%s\"!"
-msgstr "Неважећи include аргументи „%s“!"
-
-#, python-format
-msgid "Nothing found for \"%s\"!"
-msgstr "Ништа није нађено за „%s“!"
-
-msgid "edit"
-msgstr "уреди"
-
-msgid "Contents"
-msgstr "Садржај"
-
-msgid "You need to provide a chart type!"
-msgstr "Морате одредити врсту графикона!"
-
-#, python-format
-msgid "Bad chart type \"%s\"!"
-msgstr "Лош графикон врсте „%s“!"
-
-msgid "Search for items"
-msgstr "Тражи предмете"
-
-msgid "containing all the following terms"
-msgstr "који садрже све следеће ставке"
-
-msgid "containing one or more of the following terms"
-msgstr "који садрже једну или више од следећих ставки"
-
-msgid "not containing the following terms"
-msgstr "који не садрже следеће ставке"
-
-msgid "last modified since (e.g. last 2 weeks)"
-msgstr "који су задњи пут промењене током (нпр. задње 2 седмице)"
-
-msgid "any category"
-msgstr "било које категорије"
-
-msgid "any language"
-msgstr "на било којем језику"
-
-msgid "any mimetype"
-msgstr "сваке „mime“ врсте"
-
-msgid "Categories"
-msgstr "Категорије"
-
-msgid "Language"
-msgstr "Језик"
-
-msgid "File Type"
-msgstr "Име датотеке"
-
-msgid "Search only in titles"
-msgstr "Тражи само у насловима"
-
-msgid "Case-sensitive search"
-msgstr "Потрага са разликовањем великих и малих слова"
-
-msgid "Exclude underlay"
-msgstr "Искључи подметач"
-
-msgid "No system items"
-msgstr "Без системских предмета"
-
-msgid "Search in all page revisions"
-msgstr "Тражи у свим издањима странице"
-
-msgid "Go get it!"
-msgstr "Иди нађи!"
-
-#, python-format
-msgid "Check your argument %s"
-msgstr "Проверите аргумент %s"
-
-msgid "Markup"
-msgstr "Изворни текст"
-
-msgid "Display"
-msgstr "Приказ"
-
-msgid "No wanted pages in this wiki."
-msgstr "Нема жељених страница у овом викију."
-
-#, python-format
-msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
-msgstr "Приступ серверу ел. поште '%(server)s' није успео: %(reason)s"
-
-msgid "Mail not sent"
-msgstr "Пошта није послата"
-
-msgid "Mail sent OK"
-msgstr "Пошта успешно послата"
-
-msgid "Date"
-msgstr "Датум"
-
-msgid "From"
-msgstr "Од"
-
-msgid "To"
-msgstr "Прима"
-
-msgid "Content"
-msgstr "Садржај"
-
-msgid "Attachments"
-msgstr "Прилози"
-
-msgid "XSLT option disabled, please look at HelpOnConfiguration."
-msgstr "XSLT опција искључена, погледајте у HelpOnConfiguration."
-
-msgid "XSLT processing is not available, please install 4suite 1.x."
-msgstr "XSLT обрада тренутно није доступна, инсталирајте 4suite 1.x.!"
-
-#, python-format
-msgid "%(errortype)s processing error"
-msgstr "%(errortype)s грешка у обради"
-
-#, python-format
-msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
-msgstr "Очекиван „%(wanted)s“ после „%(key)s“, добијено „%(token)s“"
-
-#, python-format
-msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
-msgstr "Очекиван цели број „%(key)s“ пре „%(token)s“"
-
-#, python-format
-msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
-msgstr "Очекиван цели број „%(arg)s“  после „%(key)s“"
-
-#, python-format
-msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
-msgstr "Очекивана вредност боје „%(arg)s“ после „%(key)s“"
-
-msgid ""
-"Rendering of reStructured text is not possible, please install Docutils."
-msgstr "Тумачење преструктуираног текста није могуће, инсталирајте Docutils."
-
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr "**Највећи број дозвољених include-ова је превазиђен**"
-
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr "**Нисам могао наћи страницу у питању: %s**"
-
-#, python-format
-msgid "Inlined image: %(url)s"
-msgstr "Слика у линији: %(url)s"
-
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Направи нови цртеж „%(filename)s (отвара се у новом прозору)“"
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Уреди цртеж %(filename)s (отвара се у новом прозору)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Цртеж на који се може притиснути: %(filename)s"
-
-msgid "Toggle line numbers"
-msgstr "Укључи/искучи бројеве редова"
-
-msgid "[all]"
-msgstr "[све]"
-
-msgid "[not empty]"
-msgstr "[није празно]"
-
-msgid "[empty]"
-msgstr "[празно]"
-
-msgid "filter"
-msgstr "филтер"
-
 msgid "Line"
 msgstr "Ред"
 
@@ -1179,12 +546,126 @@ msgstr "Избрисани делови су означени овако."
 msgid "Additions are marked like this."
 msgstr "Додаци су означени овако."
 
+msgid "Name"
+msgstr "Име"
+
+msgid "Password"
+msgstr "Лозинка"
+
+msgid "OpenID"
+msgstr ""
+
+msgid "Login"
+msgstr "Пријавите се"
+
+#, fuzzy
+msgid "Username"
+msgstr "Корисник"
+
+msgid "ACL Groups"
+msgstr ""
+
+msgid "Email"
+msgstr "Ел. адреса"
+
+msgid "Jabber"
+msgstr ""
+
+msgid "Action"
+msgstr "Радња"
+
+msgid "Enable user"
+msgstr "Укључи корисника"
+
+msgid "disabled"
+msgstr "искључен"
+
+msgid "Disable user"
+msgstr "Искључи корисника"
+
+msgid "Mail account data"
+msgstr "Подаци поштанског налога"
+
+msgid "Missing password. Please enter user name and password."
+msgstr "Недостаје лозинка. Упишите корисничко име и лозинку."
+
+#, fuzzy
+msgid "You need to log in."
+msgstr "Ви сте сада одјављени."
+
 #, python-format
 msgid ""
-"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
+"If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
+"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
-"Извините, не може се сачувати страница зато што „%(content)s“ није дозвољен "
-"у овом викију."
+
+msgid ""
+"Please choose an account name now.\n"
+"If you choose an existing account name you will be asked for the\n"
+"password and be able to associate the account with your OpenID."
+msgstr ""
+
+msgid "Choose this name"
+msgstr ""
+
+msgid ""
+"The username you have chosen is already\n"
+"taken. If it is your username, enter your password below to associate\n"
+"the username with your OpenID. Otherwise, please choose a different\n"
+"username and leave the password field blank."
+msgstr ""
+
+msgid "Associate this name"
+msgstr ""
+
+#, python-format
+msgid "OpenID error: %s."
+msgstr ""
+
+#, fuzzy
+msgid "Verification canceled."
+msgstr "Радња је отказана."
+
+msgid "OpenID failure."
+msgstr ""
+
+msgid "This is not a valid username, choose a different one."
+msgstr ""
+
+msgid "Your account is now associated to your OpenID."
+msgstr ""
+
+msgid "The password you entered is not valid."
+msgstr ""
+
+msgid "OpenID verification requires that you click this button:"
+msgstr ""
+
+msgid "Anonymous sessions need to be enabled for OpenID login."
+msgstr ""
+
+msgid "Failed to resolve OpenID."
+msgstr ""
+
+msgid "OpenID discovery failure, not a valid OpenID."
+msgstr ""
+
+msgid "No OpenID."
+msgstr ""
+
+msgid ""
+"If you do not have an account yet, you can still log in with your OpenID and "
+"create one during login."
+msgstr ""
+
+msgid "Failed to connect to database."
+msgstr ""
+
+msgid "Could not contact botbouncer.com."
+msgstr ""
+
+msgid "Wiki"
+msgstr "Вики"
 
 msgid "Page"
 msgstr "Страница"
@@ -1197,6 +678,9 @@ msgstr "Разлике"
 
 msgid "Info"
 msgstr "Информације"
+
+msgid "Edit"
+msgstr "Уреди"
 
 msgid "Unsubscribe"
 msgstr "Укини претплату"
@@ -1252,8 +736,8 @@ msgstr "[ВРХ]"
 msgid "Click to do a full-text search for this title"
 msgstr "Притисни за комплетну претрагу за овај наслов"
 
-msgid "Preferences"
-msgstr "Поставке"
+msgid "Settings"
+msgstr ""
 
 msgid "Logout"
 msgstr "Одјави се"
@@ -1353,6 +837,9 @@ msgstr "Избаци везу"
 msgid "Add Link"
 msgstr "Додај везу"
 
+msgid "Attachments"
+msgstr "Прилози"
+
 #, python-format
 msgid "Show %s days."
 msgstr "Покажи %s дана."
@@ -1369,6 +856,69 @@ msgstr "(остављено %s)"
 
 msgid "Or try one of these actions:"
 msgstr "Или изаберите неку од ових радњи:"
+
+msgid "Date"
+msgstr "Датум"
+
+msgid "From"
+msgstr "Од"
+
+msgid "To"
+msgstr "Прима"
+
+msgid "Content"
+msgstr "Садржај"
+
+#, python-format
+msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
+msgstr "Приступ серверу ел. поште '%(server)s' није успео: %(reason)s"
+
+msgid "Mail not sent"
+msgstr "Пошта није послата"
+
+msgid "Mail sent OK"
+msgstr "Пошта успешно послата"
+
+msgid ""
+"Rendering of reStructured text is not possible, please install Docutils."
+msgstr "Тумачење преструктуираног текста није могуће, инсталирајте Docutils."
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr "**Највећи број дозвољених include-ова је превазиђен**"
+
+#, fuzzy, python-format
+msgid "**You are not allowed to read the page: %s**"
+msgstr "Није вам дозвољено да преименујете ову страницу!"
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr "**Нисам могао наћи страницу у питању: %s**"
+
+msgid "XSLT option disabled, please look at HelpOnConfiguration."
+msgstr "XSLT опција искључена, погледајте у HelpOnConfiguration."
+
+msgid "XSLT processing is not available, please install 4suite 1.x."
+msgstr "XSLT обрада тренутно није доступна, инсталирајте 4suite 1.x.!"
+
+#, python-format
+msgid "%(errortype)s processing error"
+msgstr "%(errortype)s грешка у обради"
+
+#, python-format
+msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
+msgstr "Очекиван „%(wanted)s“ после „%(key)s“, добијено „%(token)s“"
+
+#, python-format
+msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
+msgstr "Очекиван цели број „%(key)s“ пре „%(token)s“"
+
+#, python-format
+msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
+msgstr "Очекиван цели број „%(arg)s“  после „%(key)s“"
+
+#, python-format
+msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
+msgstr "Очекивана вредност боје „%(arg)s“ после „%(key)s“"
 
 msgid "FrontPage"
 msgstr "НасловнаСтрана"
@@ -1393,9 +943,6 @@ msgstr "HelpContents"
 
 msgid "HelpOnFormatting"
 msgstr "HelpOnFormatting"
-
-msgid "UserPreferences"
-msgstr "КорисничкеПоставке"
 
 msgid "SendMyPassword"
 msgstr "ПошаљиМојуЛозинку"
@@ -1449,15 +996,388 @@ msgid "SpellCheck"
 msgstr "ПровераПравописа"
 
 #, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Непозната радња %(action_name)s."
+msgid ""
+"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
+msgstr ""
+"Извините, не може се сачувати страница зато што „%(content)s“ није дозвољен "
+"у овом викију."
+
+msgid "Notification"
+msgstr ""
+
+msgid "Notification settings saved!"
+msgstr ""
+
+#, fuzzy
+msgid "'''Email'''"
+msgstr "Ел. адреса"
+
+msgid "'''Jabber'''"
+msgstr ""
+
+msgid "'''Event type'''"
+msgstr ""
+
+msgid "Select the events you want to be notified about."
+msgstr ""
+
+msgid ""
+"Before you can be notified, you need to provide a way to contact you in the "
+"general preferences."
+msgstr ""
+
+#, fuzzy
+msgid "Subscribed events"
+msgstr "Претплати корисника"
+
+#, fuzzy
+msgid "Subscribed wiki pages<<BR>>(one regex per line)"
+msgstr "Вики странице у које сте учлањени (један регуларни израз по реду)"
+
+msgid "Save"
+msgstr "Сачувај"
+
+#, fuzzy
+msgid "Change password"
+msgstr "Лозинка"
+
+msgid "Passwords don't match!"
+msgstr "Лозинке се не подударају!"
+
+msgid "Please specify a password!"
+msgstr "Укуцајте лозинку!"
 
 #, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Није вам дозвољено да %(action_name)s на овој страници."
+msgid "Password not acceptable: %s"
+msgstr "Лозинка није прихватљива: %s"
 
-msgid "Login and try again."
-msgstr "Пријавите се и покушајте поново"
+msgid "Your password has been changed."
+msgstr ""
+
+msgid "To change your password, enter a new password twice."
+msgstr ""
+
+msgid "Password repeat"
+msgstr "Понови лозинку"
+
+msgid "Switch user"
+msgstr ""
+
+msgid "No user selected"
+msgstr ""
+
+msgid ""
+"You can now change the settings of the selected user account; log out to get "
+"back to your account."
+msgstr ""
+
+msgid "You are the only user."
+msgstr ""
+
+msgid ""
+"As a superuser, you can temporarily assume the identity of another user."
+msgstr ""
+
+msgid "Select User"
+msgstr "Изаберите корисника"
+
+msgid "OpenID settings"
+msgstr ""
+
+msgid "Cannot remove all OpenIDs."
+msgstr ""
+
+msgid "The selected OpenIDs have been removed."
+msgstr ""
+
+msgid "OpenID is already present."
+msgstr ""
+
+#, fuzzy
+msgid "This OpenID is already used for another account."
+msgstr "Ова страница је већ избрисана или није ни постојала!"
+
+msgid "OpenID added successfully."
+msgstr ""
+
+msgid "Current OpenIDs"
+msgstr ""
+
+msgid "Remove selected"
+msgstr ""
+
+msgid "Add OpenID"
+msgstr ""
+
+msgid "Preferences"
+msgstr "Поставке"
+
+#, python-format
+msgid ""
+"Invalid user name {{{'%s'}}}.\n"
+"Name may contain any Unicode alpha numeric character, with optional one\n"
+"space between words. Group page name is not allowed."
+msgstr ""
+"Неисправно корисничко име {{{'%s'}}}.\n"
+"Име може да садржи било који Уникод словни или бројни знак, са необавезним "
+"једним\n"
+"размаком између речи. Име групне странице није дозвољено."
+
+msgid "This user name already belongs to somebody else."
+msgstr "Неко други већ поседује ово корисничко име."
+
+msgid "Empty user name. Please enter a user name."
+msgstr "Празно корисничко име. Унесите корисничко име."
+
+msgid ""
+"Please provide your email address. If you lose your login information, you "
+"can get it by email."
+msgstr ""
+"Упишете вашу ел. адресу. Ако изгубите ваше корисничке податке, можете их "
+"добити на вашој ел. адреси."
+
+msgid "This email already belongs to somebody else."
+msgstr "Неко други већ поседује ову ел. адресу."
+
+#, fuzzy
+msgid "This jabber id already belongs to somebody else."
+msgstr "Неко други већ поседује ову ел. адресу."
+
+#, python-format
+msgid "The theme '%(theme_name)s' could not be loaded!"
+msgstr "Тема '%(theme_name)s' се није могла учитати!"
+
+msgid "User preferences saved!"
+msgstr "Корисничке поставке су сачуване!"
+
+msgid "Default"
+msgstr "Подразумевано"
+
+msgid "<Browser setting>"
+msgstr "<Поставке читача>"
+
+msgid "the one preferred"
+msgstr "пожељнији"
+
+msgid "free choice"
+msgstr "слободни избор"
+
+msgid "Preferred theme"
+msgstr "Омиљена тема"
+
+msgid "Editor Preference"
+msgstr "Поставке уређивача"
+
+msgid "Editor shown on UI"
+msgstr "Уређивач приказан на сучељу"
+
+msgid "Time zone"
+msgstr "Временска зона"
+
+msgid "Your time is"
+msgstr "Ваше време је"
+
+msgid "Server time is"
+msgstr "Време сервера је"
+
+msgid "Date format"
+msgstr "Формат датума"
+
+msgid "Preferred language"
+msgstr "Жељени језик"
+
+msgid "General options"
+msgstr "Опште опције"
+
+msgid "Quick links"
+msgstr "Брзе везе"
+
+#, fuzzy, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
+"change notification.\n"
+"\n"
+"The \"%(pagename)s\" page has been changed by %(editor)s:\n"
+"\n"
+msgstr ""
+"Поштовани вики корисниче,\n"
+"\n"
+"Ви сте претплаћени на вики страницу или категорију на  „%(sitename)s“ за "
+"обавештење о измени.\n"
+"\" .\n"
+"\n"
+"Ова страница је промењена од стране %(editor)s :\n"
+"%(pagelink)s\n"
+"\n"
+
+msgid "New page:\n"
+msgstr "Нова страница:\n"
+
+msgid "No differences found!\n"
+msgstr "Нема разлике!\n"
+
+#, fuzzy, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been deleted by %(editor)s:\n"
+"\n"
+msgstr ""
+"Поштовани вики корисниче,\n"
+"\n"
+"Ви сте претплаћени на вики страницу или категорију на  „%(sitename)s“ за "
+"обавештење о измени.\n"
+"\" .\n"
+"\n"
+"Ова страница је промењена од стране %(editor)s :\n"
+"%(pagelink)s\n"
+"\n"
+
+#, fuzzy, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by %(editor)"
+"s:\n"
+msgstr ""
+"Поштовани вики корисниче,\n"
+"\n"
+"Ви сте претплаћени на вики страницу или категорију на  „%(sitename)s“ за "
+"обавештење о измени.\n"
+"\" .\n"
+"\n"
+"Ова страница је промењена од стране %(editor)s :\n"
+"%(pagelink)s\n"
+"\n"
+
+#, python-format
+msgid "New user account created on %(sitename)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Dear Superuser, a new user has just been created. Details follow:\n"
+"\n"
+"    User name: %(username)s\n"
+"    Email address: %(useremail)s"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "New attachment added to page %(pagename)s on %(sitename)s"
+msgstr "прилог:%(filename)s за %(pagename)s"
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(page_name)s\" for change "
+"notification. An attachment has been added to that page by %(editor)s. "
+"Following detailed information is available:\n"
+"\n"
+"Attachment name: %(attach_name)s\n"
+"Attachment size: %(attach_size)s\n"
+msgstr ""
+
+msgid "Page has been modified"
+msgstr ""
+
+msgid "Page has been modified in a trivial fashion"
+msgstr ""
+
+#, fuzzy
+msgid "Page has been renamed"
+msgstr "Број позива и измена странице"
+
+#, fuzzy
+msgid "Page has been deleted"
+msgstr "Страница „%s“ је успешно избрисана!"
+
+#, fuzzy
+msgid "Page has been copied"
+msgstr "Број позива и измена странице"
+
+#, fuzzy
+msgid "A new attachment has been added"
+msgstr "Ново име прилога"
+
+msgid "A page has been reverted to a previous state"
+msgstr ""
+
+#, fuzzy
+msgid "A user has subscribed to a page"
+msgstr "Претплаћени сте на ову страницу."
+
+msgid "A new account has been created"
+msgstr ""
+
+#, python-format
+msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
+msgstr ""
+"[%(sitename)s] %(trivial)sАжурирано „%(pagename)s“ од стране %(username)s"
+
+msgid "Trivial "
+msgstr "Ситна "
+
+#, python-format
+msgid ""
+"Attachment link: %(attach)s\n"
+"Page link: %(page)s\n"
+msgstr ""
+
+#, python-format
+msgid "XML RPC error: %s"
+msgstr ""
+
+msgid "Low-level communication error: $s"
+msgstr ""
+
+#, fuzzy
+msgid "Attachment link"
+msgstr "Прилози"
+
+#, fuzzy
+msgid "Page link"
+msgstr "Странице попут „%s“"
+
+#, fuzzy
+msgid "Changed page"
+msgstr "Странице пакета"
+
+#, fuzzy
+msgid "Page changed"
+msgstr "Сачувај измене"
+
+#, python-format
+msgid "Low-level communication error: %s"
+msgstr ""
+
+msgid "Options --pages and --search are mutually exclusive!"
+msgstr "Опције --pages и --search су узајамно искључиве"
+
+msgid "You must specify an output file!"
+msgstr "Морате навести излазну датотеку"
+
+msgid "No pages specified using --pages or --search, assuming full package."
+msgstr ""
+"Ни једна страница није наведена користећи опције --pages и --search, "
+"претпоставља се потпуни пакет."
+
+msgid "Output file already exists! Cowardly refusing to continue!"
+msgstr "Излазна датотека већ постоји! Кукавички одбија да настави!"
+
+msgid "Language"
+msgstr "Језик"
+
+msgid "Others"
+msgstr "Остали"
 
 msgid "Charts are not available!"
 msgstr "Графикони су недоступни!"
@@ -1470,15 +1390,6 @@ msgstr "горња граница величине страница [у бајт
 
 msgid "# of pages of this size"
 msgstr "# страница ове величине"
-
-msgid "User agent"
-msgstr "Веб читач"
-
-msgid "Others"
-msgstr "Остали"
-
-msgid "Distribution of User-Agent Types"
-msgstr "Статистика врсте веб читача"
 
 msgid "Views/day"
 msgstr "Прегледа на дан"
@@ -1506,16 +1417,21 @@ msgstr "датум"
 msgid "# of hits"
 msgstr "# захтева"
 
+msgid "User agent"
+msgstr "Веб читач"
+
+msgid "Distribution of User-Agent Types"
+msgstr "Статистика врсте веб читача"
+
+#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
 "italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed ''<<Verbatim(''')"
 ">>'''''bold'''<<Verbatim(''')>> and italics''<<Verbatim('')>>; <<Verbatim"
 "(----)>> horizontal rule.\n"
-" Headings:: <<Verbatim(=)>> Title 1 <<Verbatim(=)>>; <<Verbatim(==)>> Title "
-"2 <<Verbatim(==)>>; <<Verbatim(===)>> Title 3 <<Verbatim(===)>>;   <<Verbatim"
-"(====)>> Title 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Title 5 <<Verbatim"
-"(=====)>>.\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
 " Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
 "#n start numbering at n; space alone indents.\n"
 " Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])"
@@ -1543,6 +1459,7 @@ msgstr ""
 "\n"
 "(!) За више помоћи, обратите се на HelpOnEditing или SyntaxReference.\n"
 
+#, fuzzy
 msgid ""
 "{{{\n"
 "Emphasis: *italic* **bold** ``monospace``\n"
@@ -1550,15 +1467,15 @@ msgid ""
 "Headings: Heading 1  Heading 2  Heading 3\n"
 "          =========  ---------  ~~~~~~~~~\n"
 "\n"
-"Horizontal rule: ---- \n"
+"Horizontal rule: ----\n"
 "\n"
-"Links: TrailingUnderscore_ `multi word with backticks`_ external_ \n"
+"Links: TrailingUnderscore_ `multi word with backticks`_ external_\n"
 "\n"
 ".. _external: http://external-site.example.org/foo/\n"
 "\n"
 "Lists: * bullets; 1., a. numbered items.\n"
 "}}}\n"
-"(!) For more help, see the \n"
+"(!) For more help, see the\n"
 "[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
 "reStructuredText Quick Reference]].\n"
 msgstr ""
@@ -1618,9 +1535,6 @@ msgstr "Додај размаке у вики именима"
 msgid "Remember login information"
 msgstr "Запамти podatke пријављивања"
 
-msgid "Subscribe to trivial changes"
-msgstr "Претплати се на ситне измене"
-
 msgid "Disable this account forever"
 msgstr "Искључи овај налог заувек"
 
@@ -1630,11 +1544,8 @@ msgstr "(Користите ИмеПрезиме)"
 msgid "Alias-Name"
 msgstr "Псудоним-Име"
 
-msgid "Password repeat"
-msgstr "Понови лозинку"
-
-msgid "(Only for password change or new account)"
-msgstr "(Само за измену лозинке или нови налог)"
+msgid "Jabber ID"
+msgstr ""
 
 msgid "User CSS URL"
 msgstr "CSS УРЛ корисника"
@@ -1645,352 +1556,324 @@ msgstr "(Оставите празно ако желите искључити к
 msgid "Editor size"
 msgstr "Величина уређивача"
 
-msgid "Do it."
-msgstr "Уради то."
-
-#, python-format
-msgid "Execute action %(actionname)s?"
-msgstr "Желите ли извришити радњу %(actionname)s?"
-
-#, python-format
-msgid "Action %(actionname)s is excluded in this wiki!"
-msgstr "Радња %(actionname)s је изузета са овог викија!"
-
-#, python-format
-msgid "You are not allowed to use action %(actionname)s on this page!"
-msgstr ""
-"Вама није дозвољено да користите радњу %(actionname)s на овој страници!."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Користите интерактивно корисничко сучеље да бисте користили радњу %"
-"(actionname)s!"
-
-msgid "You must login to add a quicklink."
-msgstr "Морате се пријавити да бисте додали брзу везу"
-
-msgid "A quicklink to this page has been added for you."
-msgstr "Брза веза за ову страницу је додата за вас."
-
-msgid "A quicklink to this page could not be added for you."
-msgstr "Брза веза за ову страницу је се није могла додати за Вас."
-
-msgid "You already have a quicklink to this page."
-msgstr "Већ имате брзу везу за ову страницу."
-
-msgid "Missing password. Please enter user name and password."
-msgstr "Недостаје лозинка. Упишите корисничко име и лозинку."
-
-msgid "Sorry, login failed."
-msgstr "Извињење, пријављивање је неуспешно."
-
-msgid "Your subscription to this page has been removed."
-msgstr "Ваша претплата на ову страницу је склоњена."
-
-msgid "Can't remove regular expression subscription!"
-msgstr "Претплата на регуларне изразе се не може склонити!"
-
-msgid "Edit the subscription regular expressions in your UserPreferences."
-msgstr ""
-"Уредите регуларне изразе за учлањивање/претплату на страници "
-"КорисничкеПоставке."
-
-msgid "You need to be subscribed to unsubscribe."
-msgstr "Морате се прво претплатити да би могли укинути претплату."
-
-#, python-format
-msgid "[%d attachments]"
-msgstr "[%d прилога]"
-
-#, python-format
-msgid ""
-"There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this "
-"page."
-msgstr ""
-"<a href=\"%(link)s\">%(count)s прилог/а </a> је ускладиштено на ову страницу."
-
-#, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "Прилог „%(target)s“ већ постоји."
-
-msgid "Filename of attachment not specified!"
-msgstr "Име датотеке прилога није одређено!"
-
-#, python-format
-msgid "Attachment '%(filename)s' does not exist!"
-msgstr "Прилог '%(filename)s' не постоји!"
-
-msgid ""
-"To refer to attachments on a page, use '''{{{attachment:filename}}}''', \n"
-"as shown below in the list of files. \n"
-"Do '''NOT''' use the URL of the {{{[get]}}} link, \n"
-"since this is subject to change and can break easily."
-msgstr ""
-"Да бисте закачили прилог на ову страну, користите следећи текст\n"
-"'''{{{attachment:filename}}}''' , као што видите на списку датотека. \n"
-"Немојте '''НИКАДА''' користити УРЛ од {{{[get]}}} везе, пошто \n"
-"ће се вероватно мењати и изгубити везу до прилога.</p>"
-
-msgid "del"
-msgstr "избриши"
-
-msgid "move"
-msgstr "помери"
-
-msgid "get"
-msgstr "узми"
-
-msgid "view"
-msgstr "преглед"
-
-msgid "unzip"
-msgstr "отпакуј"
-
-msgid "install"
-msgstr "инсталирај"
-
-#, python-format
-msgid "No attachments stored for %(pagename)s"
-msgstr "Нема прилога закачених за %(pagename)s"
-
-msgid "Edit drawing"
-msgstr "Уреди цртеж"
-
-msgid "New Attachment"
-msgstr "Нови прилог"
-
-msgid ""
-"An upload will never overwrite an existing file. If there is a name\n"
-"conflict, you have to rename the file that you want to upload.\n"
-"Otherwise, if \"Rename to\" is left blank, the original filename will be "
-"used."
-msgstr ""
-"Учитавање никада неће пребрисати постјећу датотеку. Ако постоји \n"
-"противречност у имену, мораћете преименовати датотеку коју желите учитати.\n"
-"Иначе, ако је поље „Преименуј на“ остављено празно, оригинално име датотеке "
-"ће бити коришћено."
-
-msgid "File to upload"
-msgstr "Датотека за постављање"
-
-msgid "Rename to"
-msgstr "Преименуј на"
-
-msgid "Overwrite existing attachment of same name"
-msgstr "Препиши постојећи прилог истог имена"
-
-msgid "Upload"
-msgstr "Постави"
-
-msgid "Attached Files"
-msgstr "Приложене датотеке"
-
-msgid "You are not allowed to attach a file to this page."
-msgstr "Није вам дозвољено да приложите датотеке на ову страницу."
-
-msgid "File attachments are not allowed in this wiki!"
-msgstr "Прилози датотека нису дозвољени на овом викију!"
-
-msgid "You are not allowed to get attachments from this page."
-msgstr "Није вам дозвољено да узмете прилоге са ове странице."
-
-msgid "You are not allowed to view attachments of this page."
-msgstr "Није вам дозвољено да видите прилоге на овој страници."
-
-msgid "You are not allowed to move attachments from this page."
-msgstr "Није вам дозвољено да померите прилоге са ове странице."
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"Нема садржаја у датотеци. Избришите ASCII занкове из имена датотеке и "
-"покушајте поново."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "Није вам дозвољено да сачувате цртеж на овој страници."
-
-msgid "You are not allowed to delete attachments on this page."
-msgstr "Није вам дозвољено да бришете прилоге на овој страници."
-
-msgid "Move aborted!"
-msgstr "Померање отказано!"
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "Користите интерактивно корисничко сучеље за померање прилога!"
-
-msgid "You are not allowed to unzip attachments of this page."
-msgstr "Није вам дозвољено да отпакујете прилоге са ове странице."
-
-msgid "You are not allowed to install files."
-msgstr "Није вам дозвољено да инсталирате датотеке."
-
-#, python-format
-msgid "Unsupported AttachFile sub-action: %s"
-msgstr "Неподржана ДодајДатотеку радња: %s"
-
-#, python-format
-msgid "Attachments for \"%(pagename)s\""
-msgstr "Прилози за „%(pagename)s“"
-
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
-msgstr ""
-"Прилог  '%(target)s' (даљинско име '%(filename)s') од %(bytes)d бајтова је "
-"сачуван."
-
-#, python-format
-msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
-msgstr "Прилог  '%(target)s' (даљинско име '%(filename)s') већ постоји."
-
-#, python-format
-msgid "Attachment '%(filename)s' already exists."
-msgstr "Прилог '%(filename)s' већ постоји."
-
-#, python-format
-msgid "Attachment '%(filename)s' moved to %(page)s."
-msgstr "Прилог '%(filename)s' је померен на %(page)s."
-
-msgid "Nothing changed"
-msgstr "Ништа се није променило"
-
-#, python-format
-msgid "Page %(newpagename)s does not exists or you don't have enough rights."
-msgstr "Страница %(newpagename)s не постоји или немате права да је видите."
-
-msgid "Move aborted because empty page name"
-msgstr "Померање отказано јер страница нема име"
-
-#, python-format
-msgid "Please use a valid filename for attachment '%(filename)s'."
-msgstr "Користите исправно име за датотеке прилога '%(filename)s'."
-
-msgid "Move aborted because empty attachment name"
-msgstr "Померање отказано јер прилог нема име"
-
-msgid "Move"
-msgstr "Помери"
-
-msgid "New page name"
-msgstr "Ново име странице"
-
-msgid "New attachment name"
+#, fuzzy
+msgid "File attachment browser"
 msgstr "Ново име прилога"
 
-#, python-format
-msgid "Attachment '%(filename)s' installed."
-msgstr "Прилог '%(filename)s' је инсталиран."
-
-#, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
+msgid "User account browser"
 msgstr ""
-"Прилог '%(filename)s' се није могао отпаковати зато што би датотеке биле "
-"превелике (%(space)d kB недостаје)"
 
 #, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too many (%(count)d missing)."
-msgstr ""
-"Прилог '%(filename)s' се није могао отпаковати зато што би број датотека био "
-"превелик (%(count)d недостаје)"
+msgid "Invalid include arguments \"%s\"!"
+msgstr "Неважећи include аргументи „%s“!"
 
 #, python-format
-msgid "Attachment '%(filename)s' unzipped."
-msgstr "Прилог '%(filename)s' је отпакован."
+msgid "Nothing found for \"%s\"!"
+msgstr "Ништа није нађено за „%s“!"
+
+msgid "edit"
+msgstr "уреди"
 
 #, python-format
-msgid ""
-"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
-"files only, exist already or reside in folders."
-msgstr ""
-"Прилог '%(filename)s' није отпакован зато што су датотеке превелике, само ."
-"zip датотеке, већ постоје или се налазе у фасцикли."
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Учитавање прилога '%(filename)s'."
 
 #, python-format
-msgid "The file %(filename)s is not a .zip file."
-msgstr "Датотека %(filename)s није .zip датотека."
+msgid "Attachment '%(filename)s' deleted."
+msgstr "Прилог '%(filename)s' је избрисан."
 
 #, python-format
-msgid "Attachment '%(filename)s'"
-msgstr "Прилог '%(filename)s'"
+msgid "Drawing '%(filename)s' saved."
+msgstr "Цртеж '%(filename)s' је сачуван."
 
-msgid "Download"
-msgstr "Преузми"
+#, python-format
+msgid "Revert to revision %(rev)d."
+msgstr "Повратити на верзију %(rev)d."
 
-msgid "Package script:"
-msgstr "Скрипта пакета:"
+#, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "Преименовано из '%(oldpagename)s'."
 
-msgid "File Name"
+#, python-format
+msgid "%(mins)dm ago"
+msgstr "пре %(mins)dm"
+
+msgid "(no bookmark set)"
+msgstr "(обележивач није постављен)"
+
+#, python-format
+msgid "(currently set to %s)"
+msgstr "(тренутно постављен на %s)"
+
+msgid "Delete bookmark"
+msgstr "Избриши обележивач"
+
+msgid "Set bookmark"
+msgstr "Постави обележивач"
+
+msgid "[Bookmark reached]"
+msgstr "[Обележивач досегнут]"
+
+msgid "Contents"
+msgstr "Садржај"
+
+#, python-format
+msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
+msgstr "Користите пробрљивији израз за претрагу уместо {{{„%s“}}}"
+
+msgid "Include system pages"
+msgstr "Укључи системске странице"
+
+msgid "Exclude system pages"
+msgstr "Искључи системске странице"
+
+msgid "Go To Page"
+msgstr "Иди на страницу"
+
+msgid "No orphaned pages in this wiki."
+msgstr "Нема остављених страница у овом викију."
+
+msgid "Python Version"
+msgstr "Python верзија"
+
+msgid "MoinMoin Version"
+msgstr "MoinMoin верзија"
+
+#, python-format
+msgid "Release %s [Revision %s]"
+msgstr "Издање %s [Revizija %s]"
+
+msgid "4Suite Version"
+msgstr "4Suite верзија"
+
+msgid "Number of pages"
+msgstr "Број страница"
+
+msgid "Number of system pages"
+msgstr "Број системских страница"
+
+msgid "Accumulated page sizes"
+msgstr "Укупна величина страница"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr "Коришћење диска у %(data_dir)s/pages/"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/"
+msgstr "Коришћење диска у %(data_dir)s"
+
+msgid "Entries in edit log"
+msgstr "Уноси у уређивачком дневнику"
+
+msgid "NONE"
+msgstr "НИЈЕДАН"
+
+msgid "Global extension macros"
+msgstr "Општи макрои екстензија"
+
+msgid "Local extension macros"
+msgstr "Локални макрои екстензија"
+
+msgid "Global extension actions"
+msgstr "Опште радње екстензија"
+
+msgid "Local extension actions"
+msgstr "Локалне радње екстензија"
+
+msgid "Global parsers"
+msgstr "Инсталирани рашчлањивачи"
+
+msgid "Local extension parsers"
+msgstr "Локалне екстензије рашчлањивача"
+
+msgid "Disabled"
+msgstr "Искључено"
+
+msgid "Enabled"
+msgstr "Укључено"
+
+msgid "index available"
+msgstr "индекс доступан"
+
+msgid "index unavailable"
+msgstr "индекс недоступан"
+
+msgid "N/A"
+msgstr "Нема података"
+
+msgid "Xapian and/or Python Xapian bindings not installed"
+msgstr "Xapian и/или Python Xapian везе нису инсталиране"
+
+msgid "Xapian search"
+msgstr "Xapian претрага"
+
+msgid "Xapian Version"
+msgstr "MoinMoin верзија"
+
+msgid "PyStemmer not installed"
+msgstr "PyStemmer није инсталиран"
+
+msgid "Stemming for Xapian"
+msgstr "Разкорењавање за Xapian"
+
+msgid "PyStemmer Version"
+msgstr "PyStemmer верзија"
+
+msgid "PyStemmer stems"
+msgstr "PyStemmer коренови"
+
+msgid "Active threads"
+msgstr "Активни низови"
+
+msgid "Search for items"
+msgstr "Тражи предмете"
+
+msgid "containing all the following terms"
+msgstr "који садрже све следеће ставке"
+
+msgid "containing one or more of the following terms"
+msgstr "који садрже једну или више од следећих ставки"
+
+msgid "not containing the following terms"
+msgstr "који не садрже следеће ставке"
+
+msgid "last modified since (e.g. last 2 weeks)"
+msgstr "који су задњи пут промењене током (нпр. задње 2 седмице)"
+
+msgid "any category"
+msgstr "било које категорије"
+
+msgid "any language"
+msgstr "на било којем језику"
+
+msgid "any mimetype"
+msgstr "сваке „mime“ врсте"
+
+msgid "Categories"
+msgstr "Категорије"
+
+msgid "File Type"
 msgstr "Име датотеке"
 
-msgid "Modified"
-msgstr "Измењено"
+msgid "Search only in titles"
+msgstr "Тражи само у насловима"
 
-msgid "Size"
-msgstr "Величина"
+msgid "Case-sensitive search"
+msgstr "Потрага са разликовањем великих и малих слова"
 
-msgid "Unknown file type, cannot display this attachment inline."
-msgstr "Непозната врста датотеке, приказ у линији немогућ."
+msgid "Exclude underlay"
+msgstr "Искључи подметач"
+
+msgid "No system items"
+msgstr "Без системских предмета"
+
+msgid "Search in all page revisions"
+msgstr "Тражи у свим издањима странице"
+
+msgid "Go get it!"
+msgstr "Иди нађи!"
 
 #, python-format
-msgid "attachment:%(filename)s of %(pagename)s"
-msgstr "прилог:%(filename)s за %(pagename)s"
+msgid "No quotes on %(pagename)s."
+msgstr "Нема цитата на %(pagename)s."
 
-msgid "Filename"
-msgstr "Име датотеке"
+msgid "Search Titles"
+msgstr "Тражи наслове"
+
+msgid "Display context of search results"
+msgstr "Прикажи садржај резултата претраге"
+
+msgid "Case-sensitive searching"
+msgstr "Претрага са разликовањем великих и малих слова"
+
+msgid "Search Text"
+msgstr "Тражи текст"
+
+#, python-format
+msgid "Upload new attachment \"%(filename)s\""
+msgstr "Додај нови прилог „%(filename)s“"
+
+#, python-format
+msgid ""
+"%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
+"missing."
+msgstr ""
+
+#, python-format
+msgid ""
+"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s=%"
+"(argument_value)s!"
+msgstr ""
+
+#, python-format
+msgid ""
+"Current configuration does not allow embedding of the file %(file)s because "
+"of its mimetype %(mimetype)s."
+msgstr ""
+
+msgid "Embedded"
+msgstr "Угњеждено"
+
+#, python-format
+msgid "Unsupported navigation scheme '%(scheme)s'!"
+msgstr "Навигациона шема '%(scheme)s' није подржана!"
+
+msgid "No parent page found!"
+msgstr "Ово није подстраница!"
+
+msgid "Slideshow"
+msgstr "Приказ слајдова"
+
+msgid "Start"
+msgstr "Почетак"
+
+#, python-format
+msgid "Slide %(pos)d of %(size)d"
+msgstr "Слајд %(pos)d од %(size)d"
+
+msgid "Markup"
+msgstr "Изворни текст"
+
+msgid "Display"
+msgstr "Приказ"
+
+msgid "No wanted pages in this wiki."
+msgstr "Нема жељених страница у овом викију."
+
+msgid "You need to provide a chart type!"
+msgstr "Морате одредити врсту графикона!"
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "Лош графикон врсте „%s“!"
+
+#, fuzzy
+msgid "Revert"
+msgstr "Повратите све"
+
+msgid "You are not allowed to revert this page!"
+msgstr "Није вам дозвољено да повратите ову страницу!"
+
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
+msgstr ""
+"Гледали сте тренутно издање ове странице када сте урадили повраћај странице. "
+"Ако желите да повратите на старије издање, прво отворите то издање и онда "
+"урадите повраћај тог (старијег) издања поново."
 
 msgid "This page is already deleted or was never created!"
 msgstr "Ова страница је већ избрисана или није ни постојала!"
 
-msgid "Rename all /subpages too?"
-msgstr "Преименуј све /подстранице такође?"
+#, fuzzy
+msgid "Optional reason for reverting this page"
+msgstr "Необавезан разлог за умножавање"
 
-msgid "New name"
-msgstr "Ново име"
-
-msgid "Optional reason for the renaming"
-msgstr "Необавезан разлог за преименовање"
-
-msgid "Really rename this page?"
+#, fuzzy
+msgid "Really revert this page?"
 msgstr "Желите ли стварно да се преименујете ову страницу?"
-
-msgid "You must login to remove a quicklink."
-msgstr "Морате се пријавити да бисте избацили брзу везу"
-
-msgid "Your quicklink to this page has been removed."
-msgstr "Ваша брза веза за ову страницу је избрисана."
-
-msgid "Your quicklink to this page could not be removed."
-msgstr "Ваша брза веза за ову страницу се није могла избрисати."
-
-msgid "You need to have a quicklink to this page to remove it."
-msgstr ""
-"Морате прво направити брзу везу на ову страницу да би је могли избацити."
-
-#, python-format
-msgid "Full Link List for \"%s\""
-msgstr "Списак свих веза за „%s“"
-
-msgid "Editor"
-msgstr "Уређивач"
-
-msgid "Pages"
-msgstr "Странице"
-
-msgid "Select Author"
-msgstr "Изаберите аутора"
-
-msgid "Revert all!"
-msgstr "Повратите све"
-
-msgid "You are not allowed to use this action."
-msgstr "Није вам дозвољено да користите ову радњу."
 
 #, python-format
 msgid "Rolled back changes to the page %s."
@@ -2031,7 +1914,8 @@ msgstr ""
 msgid "The ''remoteWiki'' is unknown."
 msgstr "''удаљениВики'' није познат."
 
-msgid "A severe error occured:"
+#, fuzzy
+msgid "A severe error occurred:"
 msgstr "Дошло је до грешке на серверу:"
 
 msgid "Synchronisation finished. Look below for the status messages."
@@ -2040,10 +1924,10 @@ msgstr "Усаглашавање завршено. Погледајте испо
 msgid "Synchronisation started -"
 msgstr "Усаглашавање је почело -"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"Got a list of %s local and %s remote pages. This results in %s different "
-"pages over-all."
+"Got a list of %s local and %s remote pages. This results in %s pages to "
+"process."
 msgstr ""
 "Добијен је списак %s локалних и %s удаљених страница. Ово резултира са %s "
 "различитих страница укупно."
@@ -2148,116 +2032,188 @@ msgstr "Страница %s садржи противречности које �
 msgid "Page %s merged with conflicts."
 msgstr "Страница %s је стопљена са противречностима."
 
-msgid "Load"
-msgstr "Учитај"
-
-msgid "New Page or New Attachment"
-msgstr "Нова страница или нови прилог"
-
 msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
+"You need to manually go to your OpenID provider wiki\n"
+"and log in before you can use your OpenID. MoinMoin will\n"
+"never allow you to enter your password here.\n"
+"\n"
+"Once you have logged in, simply reload this page."
 msgstr ""
-"Можете поставити датотеку на нову страницу или изабрати да поставите "
-"датотеку као додатак на тренутној страници"
 
-msgid "attachment"
-msgstr "прилог"
-
-msgid "overwrite"
-msgstr "препиши"
-
-msgid "New Name"
-msgstr "Ново име"
+msgid "OpenID Trust verification"
+msgstr ""
 
 #, python-format
-msgid "(including %(localwords)d %(pagelink)s)"
-msgstr "(укључујући %(localwords)d %(pagelink)s)"
+msgid "The site %s has asked for your identity."
+msgstr ""
 
 #, python-format
 msgid ""
-"The following %(badwords)d words could not be found in the dictionary of %"
-"(totalwords)d words%(localwords)s and are highlighted below:"
+"\n"
+"If you approve, the site represented by the trust root below will be\n"
+"told that you control the identity URL %s. (If you are using a delegated\n"
+"identity, the site will take care of reversing the\n"
+"delegation on its own.)"
 msgstr ""
-"Следеће %(badwords)d речи нису нађене у речнику са %(totalwords)d речи%"
-"(localwords)s и означене су испод:"
 
-msgid "Add checked words to dictionary"
-msgstr "Додајте означене речи у речник"
-
-msgid "No spelling errors found!"
-msgstr "Нема правописних грешака!"
-
-msgid "You can't save spelling words."
-msgstr "Не можете сачувати речи за правопис."
-
-msgid "You can't check spelling on a page you can't read."
-msgstr "Не можете проверити правопис на страницама које не можете читати."
-
-msgid "You are now logged out."
-msgstr "Ви сте сада одјављени."
-
-msgid "You are not allowed to subscribe to a page you can't read."
-msgstr "Не можете се претплатити на страницу коју не можете читати."
-
-msgid "This wiki is not enabled for mail processing."
-msgstr "Обрада ел. поште није укључена у овом викију."
-
-msgid "You must log in to use subscriptions."
-msgstr "Морате се пријавити да бисте користили претплате."
-
-msgid "Add your email address in your UserPreferences to use subscriptions."
+msgid "Trust root"
 msgstr ""
-"Додајте вашу ел. адресу на страници КорисничкеПоставке да бисте користили "
-"опцију за претплате."
 
-msgid "You are already subscribed to this page."
-msgstr "Већ сте претплаћени на ову страницу."
+msgid "Identity URL"
+msgstr ""
 
-msgid "You have been subscribed to this page."
-msgstr "Претплаћени сте на ову страницу."
+#, fuzzy
+msgid "Remember decision"
+msgstr "PyStemmer верзија"
 
-msgid "You could not get subscribed to this page."
-msgstr "Нисте се могли преплатити у ову страницу."
+msgid "Remember this trust decision and don't ask again"
+msgstr ""
 
-msgid "General Information"
-msgstr "Општи подаци"
+msgid "Approve"
+msgstr ""
 
-#, python-format
-msgid "Page size: %d"
-msgstr "Величина странице: %d"
+msgid "Don't approve"
+msgstr ""
 
-msgid "SHA digest of this page's content is:"
-msgstr "SHA извод садржаја ове странице је:"
+msgid "OpenID not served"
+msgstr ""
 
-msgid "The following users subscribed to this page:"
-msgstr "Следећи корисници су претплаћени на ову страницу:"
-
-msgid "This page links to the following pages:"
-msgstr "Ова страница се повезује са следећим страницама:"
-
-msgid "Diff"
-msgstr "Разлика"
-
-msgid "Comment"
-msgstr "Коментар"
-
-msgid "Revision History"
-msgstr "Историја преправки"
-
-msgid "No log entries found."
-msgstr "Ниједан запис дневника није нађен."
+msgid ""
+"\n"
+"Unfortunately you have not created your homepage yet. Therefore,\n"
+"we cannot serve an OpenID for you. Please create your homepage first\n"
+"and then reload this page or click the button below to cancel this\n"
+"verification."
+msgstr ""
 
 #, python-format
-msgid "Info for \"%s\""
-msgstr "Информације за „%s“"
+msgid "Invalid filename \"%s\"!"
+msgstr "Неважеће име датотеке: „%s“!"
 
 #, python-format
-msgid "Show \"%(title)s\""
-msgstr "Покажи „%(title)s“"
+msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
+msgstr "Прилог  '%(target)s' (даљинско име '%(filename)s') већ постоји."
 
-msgid "General Page Infos"
-msgstr "Општи подаци о страници"
+#, python-format
+msgid "Created the package %s containing the pages %s."
+msgstr "Направите пакет %s који садржи странице %s."
+
+msgid "Package pages"
+msgstr "Странице пакета"
+
+msgid "Package name"
+msgstr "Име пакета"
+
+msgid "List of page names - separated by a comma"
+msgstr "Списак назива страница - одвојених зарезом"
+
+#, python-format
+msgid "No pages like \"%s\"!"
+msgstr "Нема страница сличних страници „%s“!"
+
+msgid "Please choose:"
+msgstr ""
+
+msgid "You must login to remove a quicklink."
+msgstr "Морате се пријавити да бисте избацили брзу везу"
+
+msgid "Your quicklink to this page has been removed."
+msgstr "Ваша брза веза за ову страницу је избрисана."
+
+msgid "Your quicklink to this page could not be removed."
+msgstr "Ваша брза веза за ову страницу се није могла избрисати."
+
+msgid "You need to have a quicklink to this page to remove it."
+msgstr ""
+"Морате прво направити брзу везу на ову страницу да би је могли избацити."
+
+#, python-format
+msgid ""
+"Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
+"Files: %(filecount)d, Directories: %(dircount)d"
+msgstr ""
+"Повраћена резервна копија: %(filename)s на циљни директоријум: %(targetdir)"
+"s.\n"
+"Датотека: %(filecount)d, Директоријума: %(dircount)d"
+
+#, python-format
+msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
+msgstr ""
+"Враћање резервне копије: %(filename)s на циљни директоријум: %(targetdir)s "
+"је неуспешно."
+
+msgid "Wiki Backup / Restore"
+msgstr "Направи резерву / Поврати резерву викија"
+
+msgid ""
+"Some hints:\n"
+" * To restore a backup:\n"
+"  * Restoring a backup will overwrite existing data, so be careful.\n"
+"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
+"stuff).\n"
+"  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
+"  * Hit the <<GetText(Restore)>> button below.\n"
+"\n"
+" * To make a backup, just hit the <<GetText(Backup)>> button and save the "
+"file\n"
+"   you get to a secure place.\n"
+"\n"
+"Please make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+"\n"
+msgstr ""
+"Неки савети:\n"
+" * Да бисте повратили резерву:\n"
+"  * Повраћање резерве ће уписати нове податке преко постојећих података, "
+"зато будите пажљиви.\n"
+"  * Преименујте датотеку у <ИБстранице>.tar.<врстаПаковања> (избаци те --"
+"date--time--UTC ствари).\n"
+"  * Ставите резервну копију у директоријум_за_резерве (користите scp, "
+"ftp, ...).\n"
+"  * Притисните <<GetText(Restore)>> дугме испод.\n"
+"\n"
+" * Да направите резерву, само притисните <<GetText(Backup)>> дугме и "
+"сачувајте датотеку\n"
+"   коју добијете на сигурно место.\n"
+"\n"
+"Будите сигурни да су ваша вики подешавања backup_* вредности постављена "
+"правилно и потпуна.\n"
+"\n"
+
+msgid "Backup"
+msgstr "Направи резерву"
+
+msgid "Restore"
+msgstr "Поврати резерву"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Није вам дозвољено да направите удаљену резерву."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Непозната подрадња прављења резерве: %s."
+
+msgid "Do it."
+msgstr "Уради то."
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr "Желите ли извришити радњу %(actionname)s?"
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr "Радња %(actionname)s је изузета са овог викија!"
+
+#, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr ""
+"Вама није дозвољено да користите радњу %(actionname)s на овој страници!."
+
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Користите интерактивно корисничко сучеље да бисте користили радњу %"
+"(actionname)s!"
 
 msgid "Please log in first."
 msgstr "Прво се пријавите."
@@ -2319,6 +2275,236 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "Руковођење [[МојеСтранице|МојимСтраницама]]"
+
+msgid "Rename all /subpages too?"
+msgstr "Преименуј све /подстранице такође?"
+
+msgid "New name"
+msgstr "Ново име"
+
+msgid "Optional reason for the renaming"
+msgstr "Необавезан разлог за преименовање"
+
+msgid "Really rename this page?"
+msgstr "Желите ли стварно да се преименујете ову страницу?"
+
+msgid "Your subscription to this page has been removed."
+msgstr "Ваша претплата на ову страницу је склоњена."
+
+msgid "Can't remove regular expression subscription!"
+msgstr "Претплата на регуларне изразе се не може склонити!"
+
+#, fuzzy
+msgid "Edit the subscription regular expressions in your settings."
+msgstr ""
+"Уредите регуларне изразе за учлањивање/претплату на страници "
+"КорисничкеПоставке."
+
+msgid "You need to be subscribed to unsubscribe."
+msgstr "Морате се прво претплатити да би могли укинути претплату."
+
+msgid "TextCha: Wrong answer! Go back and try again..."
+msgstr "TextCha: Погрешан одговор! Вратите се назад и покушајте поново..."
+
+msgid "Copy all /subpages too?"
+msgstr "Умножи све /подстранице такође?"
+
+msgid "Optional reason for the copying"
+msgstr "Необавезан разлог за умножавање"
+
+msgid "Really copy this page?"
+msgstr "Стварно умножити ову страницу?"
+
+msgid "No older revisions available!"
+msgstr "Старија издања не постоје!"
+
+#, python-format
+msgid "Diff for \"%s\""
+msgstr "Разлика за „%s“"
+
+#, python-format
+msgid "Differences between revisions %d and %d"
+msgstr "Разлике између %d и %d издања"
+
+#, python-format
+msgid "(spanning %d versions)"
+msgstr "(у %d последњих верзија)"
+
+#, fuzzy
+msgid "Previous change"
+msgstr "Предходни"
+
+#, fuzzy
+msgid "Next change"
+msgstr "Ништа се није променило"
+
+#, python-format
+msgid "The page was saved %(count)d times, though!"
+msgstr "Страница је већ %(count)d пута сачувана!"
+
+msgid "(ignoring whitespace)"
+msgstr "(занемаривање размака)"
+
+msgid "Ignore changes in the amount of whitespace"
+msgstr "Занемари измене у броју размака"
+
+msgid "Load"
+msgstr "Учитај"
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "Није вам дозвољено да бришете прилоге на овој страници."
+
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"Прилог  '%(target)s' (даљинско име '%(filename)s') од %(bytes)d бајтова је "
+"сачуван."
+
+msgid "New Page or New Attachment"
+msgstr "Нова страница или нови прилог"
+
+msgid ""
+"You can upload a file to a new page or choose to upload a file as attachment "
+"for the current page"
+msgstr ""
+"Можете поставити датотеку на нову страницу или изабрати да поставите "
+"датотеку као додатак на тренутној страници"
+
+msgid "New Attachment"
+msgstr "Нови прилог"
+
+msgid ""
+"An upload will never overwrite an existing file. If there is a name\n"
+"conflict, you have to rename the file that you want to upload.\n"
+"Otherwise, if \"Rename to\" is left blank, the original filename will be "
+"used."
+msgstr ""
+"Учитавање никада неће пребрисати постјећу датотеку. Ако постоји \n"
+"противречност у имену, мораћете преименовати датотеку коју желите учитати.\n"
+"Иначе, ако је поље „Преименуј на“ остављено празно, оригинално име датотеке "
+"ће бити коришћено."
+
+msgid "attachment"
+msgstr "прилог"
+
+msgid "overwrite"
+msgstr "препиши"
+
+msgid "Upload"
+msgstr "Постави"
+
+msgid "New Name"
+msgstr "Ново име"
+
+msgid "You are not allowed to subscribe to a page you can't read."
+msgstr "Не можете се претплатити на страницу коју не можете читати."
+
+#, fuzzy
+msgid "This wiki is not enabled for mail/Jabber processing."
+msgstr "Обрада ел. поште није укључена у овом викију."
+
+msgid "You must log in to use subscriptions."
+msgstr "Морате се пријавити да бисте користили претплате."
+
+#, fuzzy
+msgid ""
+"Add your email address or Jabber ID in your user settings to use "
+"subscriptions."
+msgstr ""
+"Додајте вашу ел. адресу на страници КорисничкеПоставке да бисте користили "
+"опцију за претплате."
+
+msgid "You are already subscribed to this page."
+msgstr "Већ сте претплаћени на ову страницу."
+
+msgid "You have been subscribed to this page."
+msgstr "Претплаћени сте на ову страницу."
+
+msgid "You could not get subscribed to this page."
+msgstr "Нисте се могли преплатити у ову страницу."
+
+msgid "General Information"
+msgstr "Општи подаци"
+
+#, python-format
+msgid "Page size: %d"
+msgstr "Величина странице: %d"
+
+msgid "SHA digest of this page's content is:"
+msgstr "SHA извод садржаја ове странице је:"
+
+msgid "The following users subscribed to this page:"
+msgstr "Следећи корисници су претплаћени на ову страницу:"
+
+msgid "This page links to the following pages:"
+msgstr "Ова страница се повезује са следећим страницама:"
+
+msgid "Size"
+msgstr "Величина"
+
+msgid "Diff"
+msgstr "Разлика"
+
+msgid "Editor"
+msgstr "Уређивач"
+
+msgid "Comment"
+msgstr "Коментар"
+
+msgid "view"
+msgstr "преглед"
+
+#, fuzzy
+msgid "to previous"
+msgstr "Предходни"
+
+msgid "get"
+msgstr "узми"
+
+msgid "del"
+msgstr "избриши"
+
+msgid "Revision History"
+msgstr "Историја преправки"
+
+msgid "No log entries found."
+msgstr "Ниједан запис дневника није нађен."
+
+#, python-format
+msgid "Info for \"%s\""
+msgstr "Информације за „%s“"
+
+#, python-format
+msgid "Show \"%(title)s\""
+msgstr "Покажи „%(title)s“"
+
+msgid "General Page Infos"
+msgstr "Општи подаци о страници"
+
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr "Не може се направити нова страница без назива. Наведите име странице."
+
+msgid "Delete"
+msgstr "Избриши"
+
+msgid "Delete all /subpages too?"
+msgstr "Избрисати све /подстранице такође?"
+
+msgid "Optional reason for the deletion"
+msgstr "Необавезни разлог брисања"
+
+msgid "Really delete this page?"
+msgstr "Стварно да се избрише страница?"
+
+msgid "You are not allowed to create the supplementation page."
+msgstr "Није вам дозвољено да направите допунску страницу!"
+
+#, fuzzy
+msgid "Only superuser is allowed to use this action."
+msgstr "Није вам дозвољено да користите ову радњу."
 
 #, python-format
 msgid "Subscribe users to the page %s"
@@ -2392,136 +2578,318 @@ msgstr ""
 msgid "Click here to perform a full-text search with your search terms!"
 msgstr "Притисните овде да изведете претрагу свог тескта за ваше изразе!"
 
-#, python-format
-msgid ""
-"Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
-"Files: %(filecount)d, Directories: %(dircount)d"
+msgid "User account created! You can use this account to login now..."
 msgstr ""
-"Повраћена резервна копија: %(filename)s на циљни директоријум: %(targetdir)"
-"s.\n"
-"Датотека: %(filecount)d, Директоријума: %(dircount)d"
+"Кориснички налог је направљен! Сада можете користити овај налог за пријаву..."
 
-#, python-format
-msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
+msgid "TextCha (required)"
+msgstr "TextCha (обавезно)"
+
+msgid "Create Profile"
+msgstr "Направите профил"
+
+msgid "Create Account"
 msgstr ""
-"Враћање резервне копије: %(filename)s на циљни директоријум: %(targetdir)s "
-"је неуспешно."
 
-msgid "Wiki Backup / Restore"
-msgstr "Направи резерву / Поврати резерву викија"
+msgid "You must login to add a quicklink."
+msgstr "Морате се пријавити да бисте додали брзу везу"
 
-msgid ""
-"Some hints:\n"
-" * To restore a backup:\n"
-"  * Restoring a backup will overwrite existing data, so be careful.\n"
-"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
-"stuff).\n"
-"  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
-"  * Hit the <<GetText(Restore)>> button below.\n"
-"\n"
-" * To make a backup, just hit the <<GetText(Backup)>> button and save the "
-"file\n"
-"   you get to a secure place.\n"
-"\n"
-"Please make sure your wiki configuration backup_* values are correct and "
-"complete.\n"
-"\n"
-msgstr ""
-"Неки савети:\n"
-" * Да бисте повратили резерву:\n"
-"  * Повраћање резерве ће уписати нове податке преко постојећих података, "
-"зато будите пажљиви.\n"
-"  * Преименујте датотеку у <ИБстранице>.tar.<врстаПаковања> (избаци те --"
-"date--time--UTC ствари).\n"
-"  * Ставите резервну копију у директоријум_за_резерве (користите scp, "
-"ftp, ...).\n"
-"  * Притисните <<GetText(Restore)>> дугме испод.\n"
-"\n"
-" * Да направите резерву, само притисните <<GetText(Backup)>> дугме и "
-"сачувајте датотеку\n"
-"   коју добијете на сигурно место.\n"
-"\n"
-"Будите сигурни да су ваша вики подешавања backup_* вредности постављена "
-"правилно и потпуна.\n"
-"\n"
+msgid "A quicklink to this page has been added for you."
+msgstr "Брза веза за ову страницу је додата за вас."
 
-msgid "Backup"
-msgstr "Направи резерву"
+msgid "A quicklink to this page could not be added for you."
+msgstr "Брза веза за ову страницу је се није могла додати за Вас."
 
-msgid "Restore"
-msgstr "Поврати резерву"
-
-msgid "You are not allowed to do remote backup."
-msgstr "Није вам дозвољено да направите удаљену резерву."
+msgid "You already have a quicklink to this page."
+msgstr "Већ имате брзу везу за ову страницу."
 
 #, python-format
-msgid "Unknown backup subaction: %s."
-msgstr "Непозната подрадња прављења резерве: %s."
+msgid "(including %(localwords)d %(pagelink)s)"
+msgstr "(укључујући %(localwords)d %(pagelink)s)"
 
-msgid "You are not allowed to revert this page!"
-msgstr "Није вам дозвољено да повратите ову страницу!"
+#, python-format
+msgid ""
+"The following %(badwords)d words could not be found in the dictionary of %"
+"(totalwords)d words%(localwords)s and are highlighted below:"
+msgstr ""
+"Следеће %(badwords)d речи нису нађене у речнику са %(totalwords)d речи%"
+"(localwords)s и означене су испод:"
+
+msgid "Add checked words to dictionary"
+msgstr "Додајте означене речи у речник"
+
+msgid "No spelling errors found!"
+msgstr "Нема правописних грешака!"
+
+msgid "You can't save spelling words."
+msgstr "Не можете сачувати речи за правопис."
+
+msgid "You can't check spelling on a page you can't read."
+msgstr "Не можете проверити правопис на страницама које не можете читати."
+
+msgid "You are now logged out."
+msgstr "Ви сте сада одјављени."
 
 msgid ""
-"You were viewing the current revision of this page when you called the "
-"revert action. If you want to revert to an older revision, first view that "
-"older revision and then call revert to this (older) revision again."
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
 msgstr ""
-"Гледали сте тренутно издање ове странице када сте урадили повраћај странице. "
-"Ако желите да повратите на старије издање, прво отворите то издање и онда "
-"урадите повраћај тог (старијег) издања поново."
+"Обрада ел. поште није укључена у овом викију.\n"
+"Ако желите можете контактирати власника викија да укључи ел. пошту."
+
+msgid "Please provide a valid email address!"
+msgstr "Упишите исправну ел. адресу!"
+
+msgid "If an account with this username exists, an email was sent."
+msgstr ""
+"Ел. порука ће бити послата ако налог са овим корисничким именом постоји."
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
+msgstr "Налог који одговара датој ел. адреси, '%(email)s' , не постоји!"
+
+msgid "Mail me my account data"
+msgstr "Пошаљите ми моје податке путем ел. поште"
+
+#, fuzzy
+msgid "Lost password"
+msgstr "Лозинка"
+
+msgid ""
+"\n"
+"== Recovering a lost password ==\n"
+"<<BR>>\n"
+"If you have forgotten your password, provide your email address and click on "
+"'''Mail me my account data'''.\n"
+"<<BR>>\n"
+"The email you get contains the encrypted password (so even if someone "
+"intercepts the mail, he won't know your REAL password). Just copy and paste "
+"it into the login mask into the password field and log in.\n"
+"After logging in you should change your password."
+msgstr ""
 
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Локална карта страница за „%s“"
 
-msgid "You are not allowed to create the supplementation page."
-msgstr "Није вам дозвољено да направите допунску страницу!"
+msgid "Pages"
+msgstr "Странице"
+
+msgid "Select Author"
+msgstr "Изаберите аутора"
+
+msgid "Revert all!"
+msgstr "Повратите све"
+
+msgid "You are not allowed to use this action."
+msgstr "Није вам дозвољено да користите ову радњу."
 
 #, python-format
-msgid "Invalid filename \"%s\"!"
-msgstr "Неважеће име датотеке: „%s“!"
+msgid "[%d attachments]"
+msgstr "[%d прилога]"
 
 #, python-format
-msgid "Created the package %s containing the pages %s."
-msgstr "Направите пакет %s који садржи странице %s."
-
-msgid "Package pages"
-msgstr "Странице пакета"
-
-msgid "Package name"
-msgstr "Име пакета"
-
-msgid "List of page names - separated by a comma"
-msgstr "Списак назива страница - одвојених зарезом"
+msgid ""
+"There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this "
+"page."
+msgstr ""
+"<a href=\"%(link)s\">%(count)s прилог/а </a> је ускладиштено на ову страницу."
 
 #, python-format
-msgid "No pages like \"%s\"!"
-msgstr "Нема страница сличних страници „%s“!"
+msgid "Attachment '%(target)s' already exists."
+msgstr "Прилог „%(target)s“ већ постоји."
 
-msgid "No older revisions available!"
-msgstr "Старија издања не постоје!"
-
-#, python-format
-msgid "Diff for \"%s\""
-msgstr "Разлика за „%s“"
+msgid "Filename of attachment not specified!"
+msgstr "Име датотеке прилога није одређено!"
 
 #, python-format
-msgid "Differences between revisions %d and %d"
-msgstr "Разлике између %d и %d издања"
+msgid "Attachment '%(filename)s' does not exist!"
+msgstr "Прилог '%(filename)s' не постоји!"
+
+msgid ""
+"To refer to attachments on a page, use '''{{{attachment:filename}}}''', \n"
+"as shown below in the list of files. \n"
+"Do '''NOT''' use the URL of the {{{[get]}}} link, \n"
+"since this is subject to change and can break easily."
+msgstr ""
+"Да бисте закачили прилог на ову страну, користите следећи текст\n"
+"'''{{{attachment:filename}}}''' , као што видите на списку датотека. \n"
+"Немојте '''НИКАДА''' користити УРЛ од {{{[get]}}} везе, пошто \n"
+"ће се вероватно мењати и изгубити везу до прилога.</p>"
+
+msgid "move"
+msgstr "помери"
+
+msgid "unzip"
+msgstr "отпакуј"
+
+msgid "install"
+msgstr "инсталирај"
 
 #, python-format
-msgid "(spanning %d versions)"
-msgstr "(у %d последњих верзија)"
+msgid "No attachments stored for %(pagename)s"
+msgstr "Нема прилога закачених за %(pagename)s"
+
+msgid "Edit drawing"
+msgstr "Уреди цртеж"
+
+msgid "File to upload"
+msgstr "Датотека за постављање"
+
+msgid "Rename to"
+msgstr "Преименуј на"
+
+msgid "Overwrite existing attachment of same name"
+msgstr "Препиши постојећи прилог истог имена"
+
+msgid "Attached Files"
+msgstr "Приложене датотеке"
+
+msgid "You are not allowed to attach a file to this page."
+msgstr "Није вам дозвољено да приложите датотеке на ову страницу."
+
+msgid "File attachments are not allowed in this wiki!"
+msgstr "Прилози датотека нису дозвољени на овом викију!"
 
 #, python-format
-msgid "The page was saved %(count)d times, though!"
-msgstr "Страница је већ %(count)d пута сачувана!"
+msgid "Unsupported AttachFile sub-action: %s"
+msgstr "Неподржана ДодајДатотеку радња: %s"
 
-msgid "(ignoring whitespace)"
-msgstr "(занемаривање размака)"
+#, python-format
+msgid "Attachments for \"%(pagename)s\""
+msgstr "Прилози за „%(pagename)s“"
 
-msgid "Ignore changes in the amount of whitespace"
-msgstr "Занемари измене у броју размака"
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Нема садржаја у датотеци. Избришите ASCII занкове из имена датотеке и "
+"покушајте поново."
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Није вам дозвољено да сачувате цртеж на овој страници."
+
+#, fuzzy, python-format
+msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
+msgstr "Прилог '%(filename)s' већ постоји."
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/%"
+"(new_filename)s'."
+msgstr "Прилог '%(filename)s' је померен на %(page)s."
+
+msgid "Nothing changed"
+msgstr "Ништа се није променило"
+
+#, fuzzy, python-format
+msgid "Page '%(new_pagename)s' does not exist or you don't have enough rights."
+msgstr "Страница %(newpagename)s не постоји или немате права да је видите."
+
+msgid "Move aborted!"
+msgstr "Померање отказано!"
+
+msgid "Please use the interactive user interface to move attachments!"
+msgstr "Користите интерактивно корисничко сучеље за померање прилога!"
+
+msgid "You are not allowed to move attachments from this page."
+msgstr "Није вам дозвољено да померите прилоге са ове странице."
+
+#, fuzzy
+msgid "Move aborted because new page name is empty."
+msgstr "Померање отказано јер страница нема име"
+
+#, python-format
+msgid "Please use a valid filename for attachment '%(filename)s'."
+msgstr "Користите исправно име за датотеке прилога '%(filename)s'."
+
+#, fuzzy
+msgid "Move aborted because new attachment name is empty."
+msgstr "Померање отказано јер прилог нема име"
+
+msgid "Move"
+msgstr "Помери"
+
+msgid "New page name"
+msgstr "Ново име странице"
+
+msgid "New attachment name"
+msgstr "Ново име прилога"
+
+msgid "You are not allowed to get attachments from this page."
+msgstr "Није вам дозвољено да узмете прилоге са ове странице."
+
+msgid "You are not allowed to install files."
+msgstr "Није вам дозвољено да инсталирате датотеке."
+
+#, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "Прилог '%(filename)s' је инсталиран."
+
+msgid "You are not allowed to unzip attachments of this page."
+msgstr "Није вам дозвољено да отпакујете прилоге са ове странице."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+"Прилог '%(filename)s' се није могао отпаковати зато што би датотеке биле "
+"превелике (%(space)d kB недостаје)"
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too many (%(count)d missing)."
+msgstr ""
+"Прилог '%(filename)s' се није могао отпаковати зато што би број датотека био "
+"превелик (%(count)d недостаје)"
+
+#, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "Прилог '%(filename)s' је отпакован."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
+"files only, exist already or reside in folders."
+msgstr ""
+"Прилог '%(filename)s' није отпакован зато што су датотеке превелике, само ."
+"zip датотеке, већ постоје или се налазе у фасцикли."
+
+#, python-format
+msgid "The file %(filename)s is not a .zip file."
+msgstr "Датотека %(filename)s није .zip датотека."
+
+#, python-format
+msgid "Attachment '%(filename)s'"
+msgstr "Прилог '%(filename)s'"
+
+msgid "Download"
+msgstr "Преузми"
+
+msgid "Package script:"
+msgstr "Скрипта пакета:"
+
+msgid "File Name"
+msgstr "Име датотеке"
+
+msgid "Modified"
+msgstr "Измењено"
+
+msgid "Unknown file type, cannot display this attachment inline."
+msgstr "Непозната врста датотеке, приказ у линији немогућ."
+
+msgid "You are not allowed to view attachments of this page."
+msgstr "Није вам дозвољено да видите прилоге на овој страници."
+
+#, python-format
+msgid "attachment:%(filename)s of %(pagename)s"
+msgstr "прилог:%(filename)s за %(pagename)s"
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr "Списак свих веза за „%s“"
 
 #, python-format
 msgid "Exactly one page like \"%s\" found, redirecting to page."
@@ -2535,44 +2903,135 @@ msgstr "Странице попут „%s“"
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s за \"%(title)s\""
 
-msgid "Copy all /subpages too?"
-msgstr "Умножи све /подстранице такође?"
+#, python-format
+msgid "Inlined image: %(url)s"
+msgstr "Слика у линији: %(url)s"
 
-msgid "Optional reason for the copying"
-msgstr "Необавезан разлог за умножавање"
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Направи нови цртеж „%(filename)s (отвара се у новом прозору)“"
 
-msgid "Really copy this page?"
-msgstr "Стварно умножити ову страницу?"
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Уреди цртеж %(filename)s (отвара се у новом прозору)"
 
-msgid ""
-"Cannot create a new page without a page name.  Please specify a page name."
-msgstr "Не може се направити нова страница без назива. Наведите име странице."
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Цртеж на који се може притиснути: %(filename)s"
 
-msgid "Delete"
-msgstr "Избриши"
+msgid "Toggle line numbers"
+msgstr "Укључи/искучи бројеве редова"
 
-msgid "Delete all /subpages too?"
-msgstr "Избрисати све /подстранице такође?"
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Непозната радња %(action_name)s."
 
-msgid "Optional reason for the deletion"
-msgstr "Необавезни разлог брисања"
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Није вам дозвољено да %(action_name)s на овој страници."
 
-msgid "Really delete this page?"
-msgstr "Стварно да се избрише страница?"
+msgid "Login and try again."
+msgstr "Пријавите се и покушајте поново"
 
-msgid "Options --pages and --search are mutually exclusive!"
-msgstr "Опције --pages и --search су узајамно искључиве"
+#~ msgid "Use UserPreferences to change your settings or create an account."
+#~ msgstr ""
+#~ "Користите КорисничкеПоставке да промените ваша подешавања или да "
+#~ "направите налог."
 
-msgid "You must specify an output file!"
-msgstr "Морате навести излазну датотеку"
+#~ msgid "Use UserPreferences to change settings of the selected user account"
+#~ msgstr ""
+#~ "Користите КорисничкеПоставке да промените поставке изабраног корисничког "
+#~ "налога"
 
-msgid "No pages specified using --pages or --search, assuming full package."
-msgstr ""
-"Ни једна страница није наведена користећи опције --pages и --search, "
-"претпоставља се потпуни пакет."
+#~ msgid ""
+#~ "This list does not work, unless you have entered a valid email address!"
+#~ msgstr "Ово дописно друштво неће радити ако не унесете важећу ел. адресу!"
 
-msgid "Output file already exists! Cowardly refusing to continue!"
-msgstr "Излазна датотека већ постоји! Кукавички одбија да настави!"
+#~ msgid ""
+#~ "To create an account, see the %(userprefslink)s page. To recover a lost "
+#~ "password, go to %(sendmypasswordlink)s."
+#~ msgstr ""
+#~ "Да направите налог, погледајте %(userprefslink)s страницу. Да повратите "
+#~ "изгубљену лозинку, погледајте %(sendmypasswordlink)s страницу."
+
+#~ msgid ""
+#~ "'''A page with the name {{{'%s'}}} already exists.'''\n"
+#~ "Try a different name."
+#~ msgstr ""
+#~ "'''Страна са именом {{{'%s'}}} већ постоји.'''\n"
+#~ "Пробајте друго име."
+
+#~ msgid ""
+#~ "The comment on the change is:\n"
+#~ "%(comment)s\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Белешка о измени је:\n"
+#~ "%(comment)s\n"
+#~ "\n"
+
+#~ msgid "Status of sending notification mails:"
+#~ msgstr "Стање слања ел. поште о обавештавању:"
+
+#~ msgid "[%(lang)s] %(recipients)s: %(status)s"
+#~ msgstr "[%(lang)s] %(recipients)s: %(status)s"
+
+#~ msgid "UserPreferences"
+#~ msgstr "КорисничкеПоставке"
+
+#~ msgid "Subscribe to trivial changes"
+#~ msgstr "Претплати се на ситне измене"
+
+#~ msgid "(Only for password change or new account)"
+#~ msgstr "(Само за измену лозинке или нови налог)"
+
+#~ msgid "Check your argument %s"
+#~ msgstr "Проверите аргумент %s"
+
+#~ msgid "ERROR in regex '%s'"
+#~ msgstr "ГРЕШКА у регуларном изразу '%s'"
+
+#~ msgid "Bad timestamp '%s'"
+#~ msgstr "Погрешни временски печат '%s'"
+
+#~ msgid "Not supported mimetype of file: %s"
+#~ msgstr "Неподржана „mime“ врста датотеке: %s"
+
+#~ msgid "Embedding of object by chosen formatter not possible"
+#~ msgstr "Угњеждавање објеката од изабраног обликовача није могуће"
+
+#~ msgid ""
+#~ "Not enough arguments given to EmbedObject macro! Try <<EmbedObject"
+#~ "(attachment [,width=width] [,height=height] [,alt=alternate Text])>>"
+#~ msgstr ""
+#~ "Нема довољно аргумената за дати макро EmbedObject! Покушајте <<EmbedObject"
+#~ "(прилог [,width=ширина] [,height=висина] [,alt=алтернативни текст])>>"
+
+#~ msgid ""
+#~ "Not enough arguments given to EmbedObject macro! Try <<EmbedObject(url, "
+#~ "url_mimetype [,width=width] [,height=height] [,alt=alternate Text])>>"
+#~ msgstr ""
+#~ "Нема довољно аргумената за дати макро EmbedObject! Покушајте <<EmbedObject"
+#~ "(, url_mimetype [,width=ширина] [,height=висина] [,alt=алтернативни "
+#~ "текст])>>"
+
+#~ msgid "Invalid MonthCalendar calparms \"%s\"!"
+#~ msgstr "Неисправни MonthCalendar (месечни календар) параметри „%s“!"
+
+#~ msgid "Invalid MonthCalendar arguments \"%s\"!"
+#~ msgstr "Неисправни MonthCalendar аргументи „%s“!"
+
+#~ msgid "Sorry, login failed."
+#~ msgstr "Извињење, пријављивање је неуспешно."
+
+#~ msgid "Filename"
+#~ msgstr "Име датотеке"
+
+#~ msgid ""
+#~ "The remote version of MoinMoin is too old, version 1.6 is required at "
+#~ "least."
+#~ msgstr ""
+#~ "Удаљено издање MoinMoin-а је престаро, најстарије неопходно издање је 1.6."
 
 #~ msgid "belonging to one of the following categories"
 #~ msgstr "који припадају једној од следећих категорија"
