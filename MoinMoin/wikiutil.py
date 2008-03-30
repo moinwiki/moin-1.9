@@ -2451,7 +2451,7 @@ def checkTicket(request, ticket):
     return ticket == ourticket
 
 
-def renderText(request, Parser, text, line_anchors=False):
+def renderText(request, Parser, text):
     """executes raw wiki markup with all page elements"""
     import StringIO
     out = StringIO.StringIO()
