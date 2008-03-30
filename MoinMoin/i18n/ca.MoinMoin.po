@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-02 14:58+0100\n"
+"POT-Creation-Date: 2008-03-30 00:25+0100\n"
 "PO-Revision-Date: 2007-10-10 13:40+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -25,252 +25,46 @@ msgstr ""
 "X-HasWikiMarkup: True\n"
 "X-Direction: ltr\n"
 
+msgid "<unknown>"
+msgstr "<desconegut>"
+
+#, fuzzy, python-format
 msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
+"Login Name: %s\n"
+"\n"
+"Login Password: %s\n"
+"\n"
+"Login URL: %s/?action=login\n"
 msgstr ""
-"Aquest wiki no té habilitat el processament de correu.\n"
-"Contacteu amb el responsable del wiki, que pot habilitar el correu."
-
-msgid "Please provide a valid email address!"
-msgstr "Proveïu una adreça de correu vàlida."
-
-msgid "If an account with this username exists, an email was sent."
-msgstr ""
-
-#, python-format
-msgid "Found no account matching the given email address '%(email)s'!"
-msgstr ""
-"No s'ha trobat cap compte que concorde amb l'adreça de correu «%(email)s»."
-
-msgid "Use UserPreferences to change your settings or create an account."
-msgstr ""
-"Utilitzeu PreferènciesUsuari per a canviar els vostres paràmetres o crear un "
-"compte."
-
-msgid "TextCha: Wrong answer! Go back and try again..."
-msgstr ""
-
-msgid "Empty user name. Please enter a user name."
-msgstr "El nom d'usuari és buit. Introduïu un nom d'usuari."
-
-#, python-format
-msgid ""
-"Invalid user name {{{'%s'}}}.\n"
-"Name may contain any Unicode alpha numeric character, with optional one\n"
-"space between words. Group page name is not allowed."
-msgstr ""
-"El nom d'usuari {{{«%s»}}} és invàlid.\n"
-"El nom pot contenir qualsevol caràcter alfanumèric Unicode, amb un espai "
-"opcional entre paraules. Noms de grups de pàgines no estan permesos."
-
-msgid "This user name already belongs to somebody else."
-msgstr "Aquest nom d'usuari ja pertany a algú."
-
-msgid "Passwords don't match!"
-msgstr "Les contrasenyes no concorden!"
-
-msgid "Please specify a password!"
-msgstr "Especifiqueu una contrasenya."
-
-#, python-format
-msgid "Password not acceptable: %s"
-msgstr ""
+"Nom d'entrada: %s\n"
+"\n"
+"Contrasenya d'entrada: %s\n"
+"\n"
+"URL d'entrada: %s/%s?action=login\n"
 
 msgid ""
-"Please provide your email address. If you lose your login information, you "
-"can get it by email."
+"Somebody has requested to submit your account data to this email address.\n"
+"\n"
+"If you lost your password, please use the data below and just enter the\n"
+"password AS SHOWN into the wiki's password form field (use copy and paste\n"
+"for that).\n"
+"\n"
+"After successfully logging in, it is of course a good idea to set a new and "
+"known password.\n"
 msgstr ""
-"Doneu la vostra adreça de correu electrònic. Si perdeu la vostra informació "
-"d'entrada, podeu recuperar-la per correu."
-
-msgid "This email already belongs to somebody else."
-msgstr "Aquest correu electrònic ja pertany a algú."
-
-msgid "User account created! You can use this account to login now..."
-msgstr ""
-"S'ha creat el compte d'usuari! Podeu utilitzar aquest compte per a entrar."
-
-msgid "Use UserPreferences to change settings of the selected user account"
-msgstr ""
-"Utilitzeu PreferènciesUsuari per a canviar els paràmetres del compte "
-"d'usuari seleccionat"
+"Algú ha demanat que s'envien les dades del vostre compte a aquesta adreça de "
+"correu.\n"
+"\n"
+"Si heu perdut la vostra contrasenya, utilitzeu les següents dades i "
+"simplement introduïu la contrasenya TAL I COM ES MOSTRA al camp de "
+"contrasenya del wiki (utilitzeu copia i enganxa per a fer-ho).\n"
+"\n"
+"Quan hagueu entrat, és una bona idea establir una contrasenya nova que "
+"pogueu recordar.\n"
 
 #, python-format
-msgid "The theme '%(theme_name)s' could not be loaded!"
-msgstr "No s'ha pogut carregar el tema «%(theme_name)s."
-
-msgid "User preferences saved!"
-msgstr "S'han desat les preferències de l'usuari!"
-
-msgid "Default"
-msgstr "Per defecte"
-
-msgid "<Browser setting>"
-msgstr "<Configuració del navegador>"
-
-msgid "the one preferred"
-msgstr "el preferit"
-
-msgid "free choice"
-msgstr "selecció lliure"
-
-msgid "Select User"
-msgstr "Seleccioneu un usuari"
-
-msgid "Save"
-msgstr "Desa"
-
-msgid "Cancel"
-msgstr "Cancel·la"
-
-msgid "Preferred theme"
-msgstr "Tema preferit"
-
-msgid "Editor Preference"
-msgstr "Preferències de l'editor"
-
-msgid "Editor shown on UI"
-msgstr "Mostra l'editor a la interfície"
-
-msgid "Time zone"
-msgstr "Fus horari"
-
-msgid "Your time is"
-msgstr "L'hora actual és"
-
-msgid "Server time is"
-msgstr "L'hora al servidor és"
-
-msgid "Date format"
-msgstr "Format de la data"
-
-msgid "Preferred language"
-msgstr "Llengua preferida"
-
-msgid "General options"
-msgstr "Opcions generals"
-
-msgid "Quick links"
-msgstr "Enllaços ràpids"
-
-msgid "This list does not work, unless you have entered a valid email address!"
-msgstr ""
-"Aquesta llista no funciona, a no ser que hagueu introduït una adreça de "
-"correu electrònic vàlida."
-
-msgid "Subscribed wiki pages (one regex per line)"
-msgstr "Pàgines de wiki subscrites (una expressió regular per línia)"
-
-msgid "Create Profile"
-msgstr "Crea un perfil"
-
-msgid "TextCha (required)"
-msgstr ""
-
-msgid "Mail me my account data"
-msgstr "Envia'm les dades del meu compte"
-
-msgid "Email"
-msgstr "Correu electrònic"
-
-#, python-format
-msgid ""
-"To create an account, see the %(userprefslink)s page. To recover a lost "
-"password, go to %(sendmypasswordlink)s."
-msgstr ""
-"Per a crear un compte, vegeu la pàgina %(userprefslink)s. Per a recuperar "
-"una contrasenya perduda, vegeu la pàgina %(sendmypasswordlink)s."
-
-msgid "Name"
-msgstr "Nom"
-
-msgid "Password"
-msgstr "Contrasenya"
-
-msgid "Login"
-msgstr "Entrada"
-
-msgid "Action"
-msgstr "Acció"
-
-#, fuzzy
-msgid "Enable user"
-msgstr "Habilitat"
-
-#, fuzzy
-msgid "disabled"
-msgstr "Inhabilitat"
-
-#, fuzzy
-msgid "Disable user"
-msgstr "Inhabilitat"
-
-#, fuzzy
-msgid "Mail account data"
-msgstr "Envia'm les dades del meu compte"
-
-#, python-format
-msgid "Argument \"%s\" must be a boolean value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument must be a boolean value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument \"%s\" must be an integer value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument must be an integer value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument \"%s\" must be a floating point value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument must be a floating point value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument \"%s\" must be a complex value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument must be a complex value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument must be one of \"%s\", not \"%s\""
-msgstr ""
-
-msgid "Too many arguments"
-msgstr "Hi ha massa arguments"
-
-msgid "Cannot have arguments without name following named arguments"
-msgstr ""
-
-#, python-format
-msgid "Argument \"%s\" is required"
-msgstr ""
-
-#, python-format
-msgid "No argument named \"%s\""
-msgstr "No hi ha cap argument anomenat «%s»."
-
-#, python-format
-msgid "Expected \"=\" to follow \"%(token)s\""
-msgstr "S'esperava que «=» seguira a «%(token)s»"
-
-#, python-format
-msgid "Expected a value for key \"%(token)s\""
-msgstr "S'esperava un valor per a la clau «%(token)s»"
+msgid "[%(sitename)s] Your wiki account data"
+msgstr "[%(sitename)s] Les dades del vostre compte wiki"
 
 msgid "You are not allowed to edit this page."
 msgstr "No teniu permís per a editar aquesta pàgina."
@@ -357,6 +151,9 @@ msgstr "Comprova l'ortografia"
 msgid "Save Changes"
 msgstr "Desa els canvis"
 
+msgid "Cancel"
+msgstr "Cancel·la"
+
 #, python-format
 msgid ""
 "By hitting '''%(save_button_text)s''' you put your changes under the %"
@@ -394,59 +191,67 @@ msgstr "Afegeix a: %(category)s"
 msgid "Remove trailing whitespace from each line"
 msgstr "Suprimeix els espais del final de les línies"
 
-msgid "The wiki is currently not reachable."
-msgstr ""
-
-msgid ""
-"The remote version of MoinMoin is too old, version 1.6 is required at least."
-msgstr ""
-
-msgid "Invalid username or password."
+#, python-format
+msgid "Argument \"%s\" must be a boolean value, not \"%s\""
 msgstr ""
 
 #, python-format
-msgid ""
-"The remote wiki uses a different InterWiki name (%(remotename)s) internally "
-"than you specified (%(localname)s)."
+msgid "Argument must be a boolean value, not \"%s\""
 msgstr ""
 
 #, python-format
-msgid "The package needs a newer version of MoinMoin (at least %s)."
-msgstr "El paquet necessita una versió més nova del MoinMoin (almenys %s)."
-
-msgid "The theme name is not set."
-msgstr "No s'ha establert el nom del tema."
-
-msgid "Installing theme files is only supported for standalone type servers."
-msgstr ""
-"La instal·lació de fitxers de tema només està implementada per a servidors "
-"de tipus individual."
-
-#, python-format
-msgid "Installation of '%(filename)s' failed."
-msgstr "La instal·lació de «%(filename)s» ha fallat."
-
-#, python-format
-msgid "The file %s is not a MoinMoin package file."
-msgstr "El fitxer %s no és un fitxer de paquet MoinMoin."
-
-#, python-format
-msgid "The page %s does not exist."
-msgstr "La pàgina %s no existeix."
-
-msgid "Invalid package file header."
-msgstr ""
-
-msgid "Package file format unsupported."
+msgid "Argument \"%s\" must be an integer value, not \"%s\""
 msgstr ""
 
 #, python-format
-msgid "Unknown function %(func)s in line %(lineno)i."
+msgid "Argument must be an integer value, not \"%s\""
 msgstr ""
 
 #, python-format
-msgid "The file %s was not found in the package."
-msgstr "No s'ha trobat el fitxer %s al paquet."
+msgid "Argument \"%s\" must be a floating point value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument must be a floating point value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" must be a complex value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument must be a complex value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument must be one of \"%s\", not \"%s\""
+msgstr ""
+
+msgid "Too many arguments"
+msgstr "Hi ha massa arguments"
+
+msgid "Cannot have arguments without name following named arguments"
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" is required"
+msgstr ""
+
+#, python-format
+msgid "No argument named \"%s\""
+msgstr "No hi ha cap argument anomenat «%s»."
+
+#, python-format
+msgid "Expected \"=\" to follow \"%(token)s\""
+msgstr "S'esperava que «=» seguira a «%(token)s»"
+
+#, python-format
+msgid "Expected a value for key \"%(token)s\""
+msgstr "S'esperava un valor per a la clau «%(token)s»"
 
 msgid "Your changes are not saved!"
 msgstr "No s'han desat els vostres canvis!"
@@ -469,9 +274,11 @@ msgstr "No teniu permís per a copiar aquesta pàgina."
 #, python-format
 msgid ""
 "'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
 "Try a different name."
 msgstr ""
 "'''Ja existeix una pàgina amb el nom {{{%s}}}.'''\n"
+"\n"
 "Proveu amb un nom diferent."
 
 #, python-format
@@ -484,16 +291,6 @@ msgstr "No teniu permís per a canviar el nom d'aquesta pàgina."
 
 msgid "You can't rename to an empty pagename."
 msgstr "No podeu canviar el nom a un nom de pàgina buit."
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr ""
-"'''Ja existeix una pàgina amb el nom {{{%s}}}.'''\n"
-"\n"
-"Proveu amb un nom diferent."
 
 #, python-format
 msgid "Could not rename page because of file system error: %s."
@@ -510,57 +307,6 @@ msgstr "Gràcies pels vostres canvis. S'aprecia la vostra atenció als detalls."
 #, python-format
 msgid "Page \"%s\" was successfully deleted!"
 msgstr "S'ha suprimit la pàgina «%s» amb èxit."
-
-#, python-format
-msgid ""
-"Dear Wiki user,\n"
-"\n"
-"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
-"change notification.\n"
-"\n"
-"The following page has been changed by %(editor)s:\n"
-"%(pagelink)s\n"
-"\n"
-msgstr ""
-"Benvolgut usuari del Wiki,\n"
-"\n"
-"Esteu subscrit a una pàgina o categoria del wiki en «%(sitename)s» per a les "
-"notificacions de canvis.\n"
-"\n"
-"%(editor)s ha canviat la pàgina següent:\n"
-"%(pagelink)s\n"
-"\n"
-
-#, python-format
-msgid ""
-"The comment on the change is:\n"
-"%(comment)s\n"
-"\n"
-msgstr ""
-"El comentari sobre el canvi és:\n"
-"%(comment)s\n"
-"\n"
-
-msgid "New page:\n"
-msgstr "Pàgina nova:\n"
-
-msgid "No differences found!\n"
-msgstr "No s'han trobat diferències!\n"
-
-#, python-format
-msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
-msgstr ""
-"[%(sitename)s Actualització%(trivial)s de «%(pagename)s per %(username)s"
-
-msgid "Trivial "
-msgstr " trivial "
-
-msgid "Status of sending notification mails:"
-msgstr "Estat de l'enviament dels correus de notificació:"
-
-#, python-format
-msgid "[%(lang)s] %(recipients)s: %(status)s"
-msgstr "[%(lang)s] %(recipients)s: %(status)s"
 
 #, python-format
 msgid "Page could not get locked. Unexpected error (errno=%d)."
@@ -604,6 +350,9 @@ msgid ""
 msgstr ""
 "No podeu canviar els ACL en aquesta pàgina ja que no teniu permisos "
 "d'administració sobre ella."
+
+msgid "Notifications sent to:"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -655,46 +404,59 @@ msgstr ""
 "per a evitar conflictes d'edició.'''<<BR>>\n"
 "Per a abandonar l'editor, premeu el botó Cancel·la."
 
-msgid "<unknown>"
-msgstr "<desconegut>"
+msgid "The wiki is currently not reachable."
+msgstr ""
+
+msgid "Invalid username or password."
+msgstr ""
 
 #, python-format
 msgid ""
-"Login Name: %s\n"
-"\n"
-"Login Password: %s\n"
-"\n"
-"Login URL: %s/%s?action=login\n"
+"The remote wiki uses a different InterWiki name (%(remotename)s) internally "
+"than you specified (%(localname)s)."
 msgstr ""
-"Nom d'entrada: %s\n"
-"\n"
-"Contrasenya d'entrada: %s\n"
-"\n"
-"URL d'entrada: %s/%s?action=login\n"
-
-msgid ""
-"Somebody has requested to submit your account data to this email address.\n"
-"\n"
-"If you lost your password, please use the data below and just enter the\n"
-"password AS SHOWN into the wiki's password form field (use copy and paste\n"
-"for that).\n"
-"\n"
-"After successfully logging in, it is of course a good idea to set a new and "
-"known password.\n"
-msgstr ""
-"Algú ha demanat que s'envien les dades del vostre compte a aquesta adreça de "
-"correu.\n"
-"\n"
-"Si heu perdut la vostra contrasenya, utilitzeu les següents dades i "
-"simplement introduïu la contrasenya TAL I COM ES MOSTRA al camp de "
-"contrasenya del wiki (utilitzeu copia i enganxa per a fer-ho).\n"
-"\n"
-"Quan hagueu entrat, és una bona idea establir una contrasenya nova que "
-"pogueu recordar.\n"
 
 #, python-format
-msgid "[%(sitename)s] Your wiki account data"
-msgstr "[%(sitename)s] Les dades del vostre compte wiki"
+msgid "The package needs a newer version of MoinMoin (at least %s)."
+msgstr "El paquet necessita una versió més nova del MoinMoin (almenys %s)."
+
+msgid "The theme name is not set."
+msgstr "No s'ha establert el nom del tema."
+
+msgid "Installing theme files is only supported for standalone type servers."
+msgstr ""
+"La instal·lació de fitxers de tema només està implementada per a servidors "
+"de tipus individual."
+
+#, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "La instal·lació de «%(filename)s» ha fallat."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr "El fitxer %s no és un fitxer de paquet MoinMoin."
+
+#, python-format
+msgid "The page %s does not exist."
+msgstr "La pàgina %s no existeix."
+
+msgid "Invalid package file header."
+msgstr ""
+
+msgid "Package file format unsupported."
+msgstr ""
+
+#, python-format
+msgid "Unknown function %(func)s in line %(lineno)i."
+msgstr ""
+
+#, python-format
+msgid "The file %s was not found in the package."
+msgstr "No s'ha trobat el fitxer %s al paquet."
+
+#, python-format
+msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
+msgstr ""
 
 msgid ""
 "The backed up content of this page is deprecated and will not be included in "
@@ -720,6 +482,18 @@ msgstr "Crea una pàgina nova"
 
 msgid "You are not allowed to view this page."
 msgstr "No teniu permís per a visualitzar aquesta pàgina."
+
+msgid "[all]"
+msgstr "[totes]"
+
+msgid "[not empty]"
+msgstr "[no buides]"
+
+msgid "[empty]"
+msgstr "[buides]"
+
+msgid "filter"
+msgstr "filtre"
 
 #, python-format
 msgid ""
@@ -753,413 +527,6 @@ msgstr "coincidència"
 msgid "matches"
 msgstr "coincidències"
 
-msgid "Go To Page"
-msgstr "Vés a la pàgina"
-
-msgid "Include system pages"
-msgstr "Inclou les pàgines del sistema"
-
-msgid "Exclude system pages"
-msgstr "Exclou les pàgines del sistema"
-
-#, python-format
-msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
-msgstr "Utilitzeu un terme més selectiu en comptes de {{{«%s»}}}"
-
-#, python-format
-msgid "ERROR in regex '%s'"
-msgstr "ERROR en l'expressió regular «%s»"
-
-#, python-format
-msgid "Bad timestamp '%s'"
-msgstr "Marca de temps «%s» invàlida"
-
-#, python-format
-msgid "Unsupported navigation scheme '%(scheme)s'!"
-msgstr "L'esquema de navegació «%(scheme)s» no està implementat."
-
-msgid "No parent page found!"
-msgstr "No s'ha trobat la pàgina pare."
-
-msgid "Wiki"
-msgstr "Wiki"
-
-msgid "Edit"
-msgstr "Edita"
-
-msgid "Slideshow"
-msgstr "Presentació"
-
-msgid "Start"
-msgstr "Inici"
-
-#, python-format
-msgid "Slide %(pos)d of %(size)d"
-msgstr "Diapositiva %(pos)d de %(size)d"
-
-msgid "Search Titles"
-msgstr "Cerca els títols"
-
-msgid "Display context of search results"
-msgstr "Mostra el context dels resultats de la recerca"
-
-msgid "Case-sensitive searching"
-msgstr "Recerques amb diferència entre majúscules i minúscules"
-
-msgid "Search Text"
-msgstr "Text a cercar"
-
-#, python-format
-msgid "Not supported mimetype of file: %s"
-msgstr ""
-
-msgid "Embedding of object by chosen formatter not possible"
-msgstr ""
-
-msgid "Embedded"
-msgstr ""
-
-msgid ""
-"Not enough arguments given to EmbedObject macro! Try <<EmbedObject"
-"(attachment [,width=width] [,height=height] [,alt=alternate Text])>>"
-msgstr ""
-
-#, python-format
-msgid "Upload new attachment \"%(filename)s\""
-msgstr "Apuja una nova adjunció «%(filename)s»"
-
-msgid ""
-"Not enough arguments given to EmbedObject macro! Try <<EmbedObject(url, "
-"url_mimetype [,width=width] [,height=height] [,alt=alternate Text])>>"
-msgstr ""
-
-#, python-format
-msgid "Invalid MonthCalendar calparms \"%s\"!"
-msgstr ""
-
-#, python-format
-msgid "Invalid MonthCalendar arguments \"%s\"!"
-msgstr ""
-
-msgid "No orphaned pages in this wiki."
-msgstr "No hi ha pàgines orfes en aquest wiki."
-
-msgid "Python Version"
-msgstr "Versió de Python"
-
-msgid "MoinMoin Version"
-msgstr "Versió de MoinMoin"
-
-#, python-format
-msgid "Release %s [Revision %s]"
-msgstr "Llançament %s [Revisió %s]"
-
-msgid "4Suite Version"
-msgstr "Versió de 4Suite"
-
-msgid "Number of pages"
-msgstr "Nombre de pàgines"
-
-msgid "Number of system pages"
-msgstr "Nombre de pàgines del sistema"
-
-msgid "Accumulated page sizes"
-msgstr "Mida acumulada de les pàgines"
-
-#, python-format
-msgid "Disk usage of %(data_dir)s/pages/"
-msgstr ""
-
-#, python-format
-msgid "Disk usage of %(data_dir)s/"
-msgstr ""
-
-msgid "Entries in edit log"
-msgstr "Entrades al registre d'edició"
-
-msgid "NONE"
-msgstr "CAP"
-
-msgid "Global extension macros"
-msgstr "Macros d'extensions globals"
-
-msgid "Local extension macros"
-msgstr "Macros d'extensions locals"
-
-msgid "Global extension actions"
-msgstr "Accions d'extensions globals"
-
-msgid "Local extension actions"
-msgstr "Accions d'extensions locals"
-
-msgid "Global parsers"
-msgstr "Analitzadors globals"
-
-msgid "Local extension parsers"
-msgstr "Analitzadors d'extensions locals"
-
-msgid "Disabled"
-msgstr "Inhabilitat"
-
-msgid "Enabled"
-msgstr "Habilitat"
-
-msgid "index available"
-msgstr ""
-
-msgid "index unavailable"
-msgstr ""
-
-msgid "N/A"
-msgstr "N/D"
-
-msgid "Xapian and/or Python Xapian bindings not installed"
-msgstr "El Xapian i les vinculacions Xapian de Python no estan instal·lades"
-
-msgid "Xapian search"
-msgstr "Cerca Xapian"
-
-msgid "Xapian Version"
-msgstr "Versió del Xapian"
-
-msgid "PyStemmer not installed"
-msgstr "El PyStemmer no està instal·lat"
-
-msgid "Stemming for Xapian"
-msgstr "Lexemització per a Xapian"
-
-msgid "PyStemmer Version"
-msgstr "Versió de PyStemmer"
-
-msgid "PyStemmer stems"
-msgstr "Lexemes de PyStemmer"
-
-msgid "Active threads"
-msgstr "Fils actius"
-
-#, python-format
-msgid "No quotes on %(pagename)s."
-msgstr "No hi ha cites en %(pagename)s."
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Pujada de l'adjuntació «%(filename)s»."
-
-#, python-format
-msgid "Attachment '%(filename)s' deleted."
-msgstr "S'ha suprimit l'adjunció «%(filename)s»."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "S'ha desat el dibuix «%(filename)s»."
-
-#, python-format
-msgid "Revert to revision %(rev)d."
-msgstr "Torna a la revisió %(rev)d."
-
-#, python-format
-msgid "Renamed from '%(oldpagename)s'."
-msgstr "Reanomenada des de «%(oldpagename)s»."
-
-#, python-format
-msgid "%(mins)dm ago"
-msgstr "fa %(mins)dm"
-
-msgid "(no bookmark set)"
-msgstr "(cap adreça d'interès establida)"
-
-#, python-format
-msgid "(currently set to %s)"
-msgstr "(actualment establit a %s)"
-
-msgid "Delete bookmark"
-msgstr "Suprimeix l'adreça d'interès"
-
-msgid "Set bookmark"
-msgstr "Estableix l'adreça d'interès"
-
-msgid "[Bookmark reached]"
-msgstr "[S'ha arribat a una adreça d'interès]"
-
-#, python-format
-msgid "Invalid include arguments \"%s\"!"
-msgstr "Els arguments «%s» no són vàlids per a include."
-
-#, python-format
-msgid "Nothing found for \"%s\"!"
-msgstr "No s'ha trobat res per a «%s»."
-
-msgid "edit"
-msgstr "edita"
-
-msgid "Contents"
-msgstr "Continguts"
-
-msgid "You need to provide a chart type!"
-msgstr "Heu de proveir un tipus de gràfica."
-
-#, python-format
-msgid "Bad chart type \"%s\"!"
-msgstr "El tipus de gràfica «%s» és invàlid."
-
-msgid "Search for items"
-msgstr "Cerca elements"
-
-msgid "containing all the following terms"
-msgstr "que continguen tots els termes següents"
-
-msgid "containing one or more of the following terms"
-msgstr "que continguen un o més dels termes següents"
-
-msgid "not containing the following terms"
-msgstr "que no continguen els termes següents"
-
-msgid "last modified since (e.g. last 2 weeks)"
-msgstr "modificats per darrera vegada (per exemple últimes 2 setmanes)"
-
-msgid "any category"
-msgstr ""
-
-msgid "any language"
-msgstr "qualsevol llengua"
-
-msgid "any mimetype"
-msgstr "qualsevol tipus mime"
-
-msgid "Categories"
-msgstr ""
-
-msgid "Language"
-msgstr "Llengua"
-
-msgid "File Type"
-msgstr "Tipus de fitxer"
-
-msgid "Search only in titles"
-msgstr "Cerca només els títols"
-
-msgid "Case-sensitive search"
-msgstr "Recerques amb diferència entre majúscules i minúscules"
-
-msgid "Exclude underlay"
-msgstr ""
-
-msgid "No system items"
-msgstr "No hi ha elements del sistema"
-
-msgid "Search in all page revisions"
-msgstr "Cerca en totes les revisions de les pàgines"
-
-msgid "Go get it!"
-msgstr "Cerca-ho!"
-
-#, python-format
-msgid "Check your argument %s"
-msgstr ""
-
-msgid "Markup"
-msgstr "Marcat"
-
-msgid "Display"
-msgstr "Visualització"
-
-msgid "No wanted pages in this wiki."
-msgstr "No hi ha cap pàgina dessitjada en aquest wiki."
-
-#, python-format
-msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
-msgstr "Ha fallat la connexió al servidor de correu «%(server)s»: %(reason)s"
-
-msgid "Mail not sent"
-msgstr "No s'ha enviat el correu"
-
-msgid "Mail sent OK"
-msgstr "S'ha enviat el correu amb èxit"
-
-msgid "Date"
-msgstr "Date"
-
-msgid "From"
-msgstr ""
-
-msgid "To"
-msgstr ""
-
-msgid "Content"
-msgstr "Contingut"
-
-msgid "Attachments"
-msgstr "Adjuncions"
-
-msgid "XSLT option disabled, please look at HelpOnConfiguration."
-msgstr "L'opció XSLT està inhabilitada, mireu en HelpOnConfiguration."
-
-msgid "XSLT processing is not available, please install 4suite 1.x."
-msgstr "El processament d'XSLT no està disponible. Instal·leu 4suite 1.x."
-
-#, python-format
-msgid "%(errortype)s processing error"
-msgstr "S'ha produït un error de processament %(errortype)s "
-
-#, python-format
-msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
-msgstr ""
-"S'esperava «%(wanted)s» després de «%(key)s», s'ha obtingut «%(token)s»"
-
-#, python-format
-msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
-msgstr "S'esperava un enter «%(key)s» abans de «%(token)s»"
-
-#, python-format
-msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
-msgstr "S'esperava un enter «%(arg)s» després de «%(key)s»"
-
-#, python-format
-msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
-msgstr "S'esperava un valor de color «%(arg)s» després de «%(key)s»"
-
-msgid ""
-"Rendering of reStructured text is not possible, please install Docutils."
-msgstr "No és possible renderitzar text reStructurat. Instal·leu Docutils."
-
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr "**S'ha superat el nombre màxim de includes permès**"
-
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr "**No s'ha trobat la pàgina referenciada: %s**"
-
-#, python-format
-msgid "Inlined image: %(url)s"
-msgstr ""
-
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Crea un dibuix nou «%(filename)s» (s'obre en una finestra nova)"
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Edita el dibuix %(filename)s (s'obre en una finestra nova)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Dibuix clicable: %(filename)s"
-
-msgid "Toggle line numbers"
-msgstr "Commuta els números de línia"
-
-msgid "[all]"
-msgstr "[totes]"
-
-msgid "[not empty]"
-msgstr "[no buides]"
-
-msgid "[empty]"
-msgstr "[buides]"
-
-msgid "filter"
-msgstr "filtre"
-
 msgid "Line"
 msgstr "Línia"
 
@@ -1172,11 +539,130 @@ msgstr "Les supressions es marquen així."
 msgid "Additions are marked like this."
 msgstr "Els afegiments es marquen així."
 
+msgid "Name"
+msgstr "Nom"
+
+msgid "Password"
+msgstr "Contrasenya"
+
+msgid "OpenID"
+msgstr ""
+
+msgid "Login"
+msgstr "Entrada"
+
+#, fuzzy
+msgid "Username"
+msgstr "Usuari"
+
+msgid "ACL Groups"
+msgstr ""
+
+msgid "Email"
+msgstr "Correu electrònic"
+
+msgid "Jabber"
+msgstr ""
+
+msgid "Action"
+msgstr "Acció"
+
+#, fuzzy
+msgid "Enable user"
+msgstr "Habilitat"
+
+#, fuzzy
+msgid "disabled"
+msgstr "Inhabilitat"
+
+#, fuzzy
+msgid "Disable user"
+msgstr "Inhabilitat"
+
+#, fuzzy
+msgid "Mail account data"
+msgstr "Envia'm les dades del meu compte"
+
+msgid "Missing password. Please enter user name and password."
+msgstr "Manca la contrasenya. Introduïu el nom d'usuari i contrasenya."
+
+#, fuzzy
+msgid "You need to log in."
+msgstr "Heu sortit del vostre compte."
+
 #, python-format
 msgid ""
-"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
+"If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
+"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
-"No es pot desar la pàgina perquè no s'admet «%(content)s» en aquest wiki."
+
+msgid ""
+"Please choose an account name now.\n"
+"If you choose an existing account name you will be asked for the\n"
+"password and be able to associate the account with your OpenID."
+msgstr ""
+
+msgid "Choose this name"
+msgstr ""
+
+msgid ""
+"The username you have chosen is already\n"
+"taken. If it is your username, enter your password below to associate\n"
+"the username with your OpenID. Otherwise, please choose a different\n"
+"username and leave the password field blank."
+msgstr ""
+
+msgid "Associate this name"
+msgstr ""
+
+#, python-format
+msgid "OpenID error: %s."
+msgstr ""
+
+#, fuzzy
+msgid "Verification canceled."
+msgstr "S'ha cancel·lat l'operació."
+
+msgid "OpenID failure."
+msgstr ""
+
+msgid "This is not a valid username, choose a different one."
+msgstr ""
+
+msgid "Your account is now associated to your OpenID."
+msgstr ""
+
+msgid "The password you entered is not valid."
+msgstr ""
+
+msgid "OpenID verification requires that you click this button:"
+msgstr ""
+
+msgid "Anonymous sessions need to be enabled for OpenID login."
+msgstr ""
+
+msgid "Failed to resolve OpenID."
+msgstr ""
+
+msgid "OpenID discovery failure, not a valid OpenID."
+msgstr ""
+
+msgid "No OpenID."
+msgstr ""
+
+msgid ""
+"If you do not have an account yet, you can still log in with your OpenID and "
+"create one during login."
+msgstr ""
+
+msgid "Failed to connect to database."
+msgstr ""
+
+msgid "Could not contact botbouncer.com."
+msgstr ""
+
+msgid "Wiki"
+msgstr "Wiki"
 
 msgid "Page"
 msgstr "Pàgina"
@@ -1189,6 +675,9 @@ msgstr "Diferències"
 
 msgid "Info"
 msgstr "Informació"
+
+msgid "Edit"
+msgstr "Edita"
 
 msgid "Unsubscribe"
 msgstr "Desubscriu"
@@ -1244,8 +733,8 @@ msgstr "[SUPERIOR]"
 msgid "Click to do a full-text search for this title"
 msgstr "Feu clic per a fer una cerca del text complet per a aquest títol"
 
-msgid "Preferences"
-msgstr "Preferències"
+msgid "Settings"
+msgstr ""
 
 msgid "Logout"
 msgstr "Surt"
@@ -1345,6 +834,9 @@ msgstr "Suprimeix un enllaç"
 msgid "Add Link"
 msgstr "Afegeix un enllaç"
 
+msgid "Attachments"
+msgstr "Adjuncions"
+
 #, python-format
 msgid "Show %s days."
 msgstr "Mostra %s dies."
@@ -1361,6 +853,70 @@ msgstr "(%s a la memòria cau)"
 
 msgid "Or try one of these actions:"
 msgstr "O proveu amb una d'aquestes accions:"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "From"
+msgstr ""
+
+msgid "To"
+msgstr ""
+
+msgid "Content"
+msgstr "Contingut"
+
+#, python-format
+msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
+msgstr "Ha fallat la connexió al servidor de correu «%(server)s»: %(reason)s"
+
+msgid "Mail not sent"
+msgstr "No s'ha enviat el correu"
+
+msgid "Mail sent OK"
+msgstr "S'ha enviat el correu amb èxit"
+
+msgid ""
+"Rendering of reStructured text is not possible, please install Docutils."
+msgstr "No és possible renderitzar text reStructurat. Instal·leu Docutils."
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr "**S'ha superat el nombre màxim de includes permès**"
+
+#, fuzzy, python-format
+msgid "**You are not allowed to read the page: %s**"
+msgstr "No teniu permís per a canviar el nom d'aquesta pàgina."
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr "**No s'ha trobat la pàgina referenciada: %s**"
+
+msgid "XSLT option disabled, please look at HelpOnConfiguration."
+msgstr "L'opció XSLT està inhabilitada, mireu en HelpOnConfiguration."
+
+msgid "XSLT processing is not available, please install 4suite 1.x."
+msgstr "El processament d'XSLT no està disponible. Instal·leu 4suite 1.x."
+
+#, python-format
+msgid "%(errortype)s processing error"
+msgstr "S'ha produït un error de processament %(errortype)s "
+
+#, python-format
+msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
+msgstr ""
+"S'esperava «%(wanted)s» després de «%(key)s», s'ha obtingut «%(token)s»"
+
+#, python-format
+msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
+msgstr "S'esperava un enter «%(key)s» abans de «%(token)s»"
+
+#, python-format
+msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
+msgstr "S'esperava un enter «%(arg)s» després de «%(key)s»"
+
+#, python-format
+msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
+msgstr "S'esperava un valor de color «%(arg)s» després de «%(key)s»"
 
 msgid "FrontPage"
 msgstr "PàginaPrincipal"
@@ -1385,9 +941,6 @@ msgstr "ContingutsAjuda"
 
 msgid "HelpOnFormatting"
 msgstr "QuantAlFormat"
-
-msgid "UserPreferences"
-msgstr "PreferènciesUsuari"
 
 #, fuzzy
 msgid "SendMyPassword"
@@ -1442,15 +995,381 @@ msgid "SpellCheck"
 msgstr "ComprovacióOrtogràfica"
 
 #, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "L'acció %(action_name)s és desconeguda."
+msgid ""
+"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
+msgstr ""
+"No es pot desar la pàgina perquè no s'admet «%(content)s» en aquest wiki."
+
+msgid "Notification"
+msgstr ""
+
+msgid "Notification settings saved!"
+msgstr ""
+
+#, fuzzy
+msgid "'''Email'''"
+msgstr "Correu electrònic"
+
+msgid "'''Jabber'''"
+msgstr ""
+
+msgid "'''Event type'''"
+msgstr ""
+
+msgid "Select the events you want to be notified about."
+msgstr ""
+
+msgid ""
+"Before you can be notified, you need to provide a way to contact you in the "
+"general preferences."
+msgstr ""
+
+#, fuzzy
+msgid "Subscribed events"
+msgstr "Subscriu l'usuari"
+
+#, fuzzy
+msgid "Subscribed wiki pages<<BR>>(one regex per line)"
+msgstr "Pàgines de wiki subscrites (una expressió regular per línia)"
+
+msgid "Save"
+msgstr "Desa"
+
+#, fuzzy
+msgid "Change password"
+msgstr "Contrasenya"
+
+msgid "Passwords don't match!"
+msgstr "Les contrasenyes no concorden!"
+
+msgid "Please specify a password!"
+msgstr "Especifiqueu una contrasenya."
 
 #, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "No teniu permís per a fer %(action_name)s en aquesta pàgina."
+msgid "Password not acceptable: %s"
+msgstr ""
 
-msgid "Login and try again."
-msgstr "Entreu i torneu a provar."
+msgid "Your password has been changed."
+msgstr ""
+
+msgid "To change your password, enter a new password twice."
+msgstr ""
+
+msgid "Password repeat"
+msgstr "Contrasenya (comprovació)"
+
+msgid "Switch user"
+msgstr ""
+
+msgid "No user selected"
+msgstr ""
+
+msgid ""
+"You can now change the settings of the selected user account; log out to get "
+"back to your account."
+msgstr ""
+
+msgid "You are the only user."
+msgstr ""
+
+msgid ""
+"As a superuser, you can temporarily assume the identity of another user."
+msgstr ""
+
+msgid "Select User"
+msgstr "Seleccioneu un usuari"
+
+msgid "OpenID settings"
+msgstr ""
+
+msgid "Cannot remove all OpenIDs."
+msgstr ""
+
+msgid "The selected OpenIDs have been removed."
+msgstr ""
+
+msgid "OpenID is already present."
+msgstr ""
+
+#, fuzzy
+msgid "This OpenID is already used for another account."
+msgstr "Aquesta pàgina ja està suprimida o mai s'ha creat."
+
+msgid "OpenID added successfully."
+msgstr ""
+
+msgid "Current OpenIDs"
+msgstr ""
+
+msgid "Remove selected"
+msgstr ""
+
+msgid "Add OpenID"
+msgstr ""
+
+msgid "Preferences"
+msgstr "Preferències"
+
+#, python-format
+msgid ""
+"Invalid user name {{{'%s'}}}.\n"
+"Name may contain any Unicode alpha numeric character, with optional one\n"
+"space between words. Group page name is not allowed."
+msgstr ""
+"El nom d'usuari {{{«%s»}}} és invàlid.\n"
+"El nom pot contenir qualsevol caràcter alfanumèric Unicode, amb un espai "
+"opcional entre paraules. Noms de grups de pàgines no estan permesos."
+
+msgid "This user name already belongs to somebody else."
+msgstr "Aquest nom d'usuari ja pertany a algú."
+
+msgid "Empty user name. Please enter a user name."
+msgstr "El nom d'usuari és buit. Introduïu un nom d'usuari."
+
+msgid ""
+"Please provide your email address. If you lose your login information, you "
+"can get it by email."
+msgstr ""
+"Doneu la vostra adreça de correu electrònic. Si perdeu la vostra informació "
+"d'entrada, podeu recuperar-la per correu."
+
+msgid "This email already belongs to somebody else."
+msgstr "Aquest correu electrònic ja pertany a algú."
+
+#, fuzzy
+msgid "This jabber id already belongs to somebody else."
+msgstr "Aquest correu electrònic ja pertany a algú."
+
+#, python-format
+msgid "The theme '%(theme_name)s' could not be loaded!"
+msgstr "No s'ha pogut carregar el tema «%(theme_name)s."
+
+msgid "User preferences saved!"
+msgstr "S'han desat les preferències de l'usuari!"
+
+msgid "Default"
+msgstr "Per defecte"
+
+msgid "<Browser setting>"
+msgstr "<Configuració del navegador>"
+
+msgid "the one preferred"
+msgstr "el preferit"
+
+msgid "free choice"
+msgstr "selecció lliure"
+
+msgid "Preferred theme"
+msgstr "Tema preferit"
+
+msgid "Editor Preference"
+msgstr "Preferències de l'editor"
+
+msgid "Editor shown on UI"
+msgstr "Mostra l'editor a la interfície"
+
+msgid "Time zone"
+msgstr "Fus horari"
+
+msgid "Your time is"
+msgstr "L'hora actual és"
+
+msgid "Server time is"
+msgstr "L'hora al servidor és"
+
+msgid "Date format"
+msgstr "Format de la data"
+
+msgid "Preferred language"
+msgstr "Llengua preferida"
+
+msgid "General options"
+msgstr "Opcions generals"
+
+msgid "Quick links"
+msgstr "Enllaços ràpids"
+
+#, fuzzy, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
+"change notification.\n"
+"\n"
+"The \"%(pagename)s\" page has been changed by %(editor)s:\n"
+"\n"
+msgstr ""
+"Benvolgut usuari del Wiki,\n"
+"\n"
+"Esteu subscrit a una pàgina o categoria del wiki en «%(sitename)s» per a les "
+"notificacions de canvis.\n"
+"\n"
+"%(editor)s ha canviat la pàgina següent:\n"
+"%(pagelink)s\n"
+"\n"
+
+msgid "New page:\n"
+msgstr "Pàgina nova:\n"
+
+msgid "No differences found!\n"
+msgstr "No s'han trobat diferències!\n"
+
+#, fuzzy, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been deleted by %(editor)s:\n"
+"\n"
+msgstr ""
+"Benvolgut usuari del Wiki,\n"
+"\n"
+"Esteu subscrit a una pàgina o categoria del wiki en «%(sitename)s» per a les "
+"notificacions de canvis.\n"
+"\n"
+"%(editor)s ha canviat la pàgina següent:\n"
+"%(pagelink)s\n"
+"\n"
+
+#, fuzzy, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by %(editor)"
+"s:\n"
+msgstr ""
+"Benvolgut usuari del Wiki,\n"
+"\n"
+"Esteu subscrit a una pàgina o categoria del wiki en «%(sitename)s» per a les "
+"notificacions de canvis.\n"
+"\n"
+"%(editor)s ha canviat la pàgina següent:\n"
+"%(pagelink)s\n"
+"\n"
+
+#, python-format
+msgid "New user account created on %(sitename)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Dear Superuser, a new user has just been created. Details follow:\n"
+"\n"
+"    User name: %(username)s\n"
+"    Email address: %(useremail)s"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "New attachment added to page %(pagename)s on %(sitename)s"
+msgstr "<<Verbatim(attachment:)>>%(filename)s de %(pagename)s"
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(page_name)s\" for change "
+"notification. An attachment has been added to that page by %(editor)s. "
+"Following detailed information is available:\n"
+"\n"
+"Attachment name: %(attach_name)s\n"
+"Attachment size: %(attach_size)s\n"
+msgstr ""
+
+msgid "Page has been modified"
+msgstr ""
+
+msgid "Page has been modified in a trivial fashion"
+msgstr ""
+
+#, fuzzy
+msgid "Page has been renamed"
+msgstr "Peticions i edicions de la pàgina"
+
+#, fuzzy
+msgid "Page has been deleted"
+msgstr "S'ha suprimit la pàgina «%s» amb èxit."
+
+#, fuzzy
+msgid "Page has been copied"
+msgstr "Peticions i edicions de la pàgina"
+
+#, fuzzy
+msgid "A new attachment has been added"
+msgstr "Nou nom per a l'adjunció"
+
+msgid "A page has been reverted to a previous state"
+msgstr ""
+
+#, fuzzy
+msgid "A user has subscribed to a page"
+msgstr "Vos heu subscrit a aquesta pàgina."
+
+msgid "A new account has been created"
+msgstr ""
+
+#, python-format
+msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
+msgstr ""
+"[%(sitename)s Actualització%(trivial)s de «%(pagename)s per %(username)s"
+
+msgid "Trivial "
+msgstr " trivial "
+
+#, python-format
+msgid ""
+"Attachment link: %(attach)s\n"
+"Page link: %(page)s\n"
+msgstr ""
+
+#, python-format
+msgid "XML RPC error: %s"
+msgstr ""
+
+msgid "Low-level communication error: $s"
+msgstr ""
+
+#, fuzzy
+msgid "Attachment link"
+msgstr "Adjuncions"
+
+#, fuzzy
+msgid "Page link"
+msgstr "Pàgines semblants a «%s»"
+
+#, fuzzy
+msgid "Changed page"
+msgstr "Llengua"
+
+#, fuzzy
+msgid "Page changed"
+msgstr "Desa els canvis"
+
+#, python-format
+msgid "Low-level communication error: %s"
+msgstr ""
+
+msgid "Options --pages and --search are mutually exclusive!"
+msgstr ""
+
+msgid "You must specify an output file!"
+msgstr ""
+
+msgid "No pages specified using --pages or --search, assuming full package."
+msgstr ""
+
+msgid "Output file already exists! Cowardly refusing to continue!"
+msgstr ""
+
+msgid "Language"
+msgstr "Llengua"
+
+msgid "Others"
+msgstr "Altres"
 
 msgid "Charts are not available!"
 msgstr "Les gràfiques no estan disponibles."
@@ -1463,15 +1382,6 @@ msgstr "marge superior de mides de pàgina [octets]"
 
 msgid "# of pages of this size"
 msgstr "# de pàgines amb aquesta mida"
-
-msgid "User agent"
-msgstr "Agent d'usuari"
-
-msgid "Others"
-msgstr "Altres"
-
-msgid "Distribution of User-Agent Types"
-msgstr "Distribució de tipus d'«User-Agent»"
 
 msgid "Views/day"
 msgstr "Visualitzacions/dia"
@@ -1499,16 +1409,21 @@ msgstr "data"
 msgid "# of hits"
 msgstr "# de peticions"
 
+msgid "User agent"
+msgstr "Agent d'usuari"
+
+msgid "Distribution of User-Agent Types"
+msgstr "Distribució de tipus d'«User-Agent»"
+
+#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
 "italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed ''<<Verbatim(''')"
 ">>'''''bold'''<<Verbatim(''')>> and italics''<<Verbatim('')>>; <<Verbatim"
 "(----)>> horizontal rule.\n"
-" Headings:: <<Verbatim(=)>> Title 1 <<Verbatim(=)>>; <<Verbatim(==)>> Title "
-"2 <<Verbatim(==)>>; <<Verbatim(===)>> Title 3 <<Verbatim(===)>>;   <<Verbatim"
-"(====)>> Title 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Title 5 <<Verbatim"
-"(=====)>>.\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
 " Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
 "#n start numbering at n; space alone indents.\n"
 " Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])"
@@ -1544,15 +1459,15 @@ msgid ""
 "Headings: Heading 1  Heading 2  Heading 3\n"
 "          =========  ---------  ~~~~~~~~~\n"
 "\n"
-"Horizontal rule: ---- \n"
+"Horizontal rule: ----\n"
 "\n"
-"Links: TrailingUnderscore_ `multi word with backticks`_ external_ \n"
+"Links: TrailingUnderscore_ `multi word with backticks`_ external_\n"
 "\n"
 ".. _external: http://external-site.example.org/foo/\n"
 "\n"
 "Lists: * bullets; 1., a. numbered items.\n"
 "}}}\n"
-"(!) For more help, see the \n"
+"(!) For more help, see the\n"
 "[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
 "reStructuredText Quick Reference]].\n"
 msgstr ""
@@ -1613,9 +1528,6 @@ msgstr "Afegeix espais als noms de wiki mostrats"
 msgid "Remember login information"
 msgstr "Recorda la informació d'entrada"
 
-msgid "Subscribe to trivial changes"
-msgstr "Subscriu-me a canvis trivials"
-
 msgid "Disable this account forever"
 msgstr "Inhabilita aquest compte permanentment"
 
@@ -1626,11 +1538,8 @@ msgstr "(Useu Nom''''''Cognom)"
 msgid "Alias-Name"
 msgstr "Sobrenom"
 
-msgid "Password repeat"
-msgstr "Contrasenya (comprovació)"
-
-msgid "(Only for password change or new account)"
-msgstr "(Només per a canvis de contrasenya o comptes nous)"
+msgid "Jabber ID"
+msgstr ""
 
 msgid "User CSS URL"
 msgstr "URL del CSS de l'usuari"
@@ -1641,358 +1550,321 @@ msgstr "(Deixeu-ho en blanc per a inhabilitar el CSS de l'usuari)"
 msgid "Editor size"
 msgstr "Mida de l'editor"
 
-msgid "Do it."
-msgstr "Fes-ho."
-
-#, python-format
-msgid "Execute action %(actionname)s?"
-msgstr "Voleu executar l'acció %(actionname)s?"
-
-#, python-format
-msgid "Action %(actionname)s is excluded in this wiki!"
-msgstr ""
-
-#, python-format
-msgid "You are not allowed to use action %(actionname)s on this page!"
-msgstr ""
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-
-msgid "You must login to add a quicklink."
-msgstr "Heu d'entrar per a afegir un enllaç ràpid"
-
-msgid "A quicklink to this page has been added for you."
-msgstr "S'ha afegit un enllaç ràpid a aquesta pàgina."
-
-msgid "A quicklink to this page could not be added for you."
-msgstr "No s'ha pogut afegir un enllaç ràpid a aquesta pàgina."
-
 #, fuzzy
-msgid "You already have a quicklink to this page."
-msgstr "Ja heu desat aquesta pàgina."
-
-msgid "Missing password. Please enter user name and password."
-msgstr "Manca la contrasenya. Introduïu el nom d'usuari i contrasenya."
-
-msgid "Sorry, login failed."
-msgstr "Ha fallat l'entrada."
-
-msgid "Your subscription to this page has been removed."
-msgstr "S'ha suprimit la vostra subscripció a aquesta pàgina."
-
-msgid "Can't remove regular expression subscription!"
-msgstr "No es pot cancel·lar una subscripció mitjançant expressió regular!"
-
-msgid "Edit the subscription regular expressions in your UserPreferences."
-msgstr ""
-"Editeu les expressions regulars de subscripcions a les vostres "
-"PreferènciesUsuari."
-
-#, fuzzy
-msgid "You need to be subscribed to unsubscribe."
-msgstr "Vos heu subscrit a aquesta pàgina."
-
-#, python-format
-msgid "[%d attachments]"
-msgstr "[%d adjuncions]"
-
-#, python-format
-msgid ""
-"There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this "
-"page."
-msgstr ""
-"Hi ha <a href=\"%(link)s\">%(count)s adjuncions</a> emmagatzemats per a "
-"aquesta pàgina."
-
-#, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "L'adjunció «%(target)s» ja existeix."
-
-msgid "Filename of attachment not specified!"
-msgstr "El nom del fitxer per a l'adjunció no s'ha especificat."
-
-#, python-format
-msgid "Attachment '%(filename)s' does not exist!"
-msgstr "L'adjunció «%(filename)s» no existeix."
-
-msgid ""
-"To refer to attachments on a page, use '''{{{attachment:filename}}}''', \n"
-"as shown below in the list of files. \n"
-"Do '''NOT''' use the URL of the {{{[get]}}} link, \n"
-"since this is subject to change and can break easily."
-msgstr ""
-"Per a referir-vos a les adjuncions d'una pàgina, utilitzeu '''{{{attachment:"
-"nom_del_fitxer}}}''', \n"
-"com es mostra a continuació en la llista de fitxers. \n"
-"'''No''' utilitzeu l'URL de l'enllaç {{{[get]}}}, \n"
-"ja que aquest pot canviar i es pot trencar fàcilment."
-
-msgid "del"
-msgstr "suprimeix"
-
-msgid "move"
-msgstr ""
-
-msgid "get"
-msgstr "obté"
-
-msgid "view"
-msgstr "visualitza"
-
-msgid "unzip"
-msgstr "desempaqueta"
-
-msgid "install"
-msgstr "instal·la"
-
-#, python-format
-msgid "No attachments stored for %(pagename)s"
-msgstr "No hi ha cap adjunció emmagatzemada per a %(pagename)s"
-
-msgid "Edit drawing"
-msgstr "Edita el dibuix"
-
-msgid "New Attachment"
-msgstr "Adjunció nova"
-
-msgid ""
-"An upload will never overwrite an existing file. If there is a name\n"
-"conflict, you have to rename the file that you want to upload.\n"
-"Otherwise, if \"Rename to\" is left blank, the original filename will be "
-"used."
-msgstr ""
-"Una pujada mai sobreescriurà un fitxer existent. Si hi ha un conflicte de "
-"noms,\n"
-"haureu de canviar en nom del fitxer que voleu pujar.\n"
-"Si no, si «Canvia el nom a» es deixa en blanc, s'utilitzarà el nom original\n"
-"del fitxer."
-
-msgid "File to upload"
-msgstr "Fitxer per a apujar"
-
-msgid "Rename to"
-msgstr "Reanomena a"
-
-msgid "Overwrite existing attachment of same name"
-msgstr ""
-
-msgid "Upload"
-msgstr "Apuja"
-
-msgid "Attached Files"
-msgstr "Fitxers adjunts"
-
-msgid "You are not allowed to attach a file to this page."
-msgstr "No teniu permís per a adjuntar un fitxer a aquesta pàgina."
-
-msgid "File attachments are not allowed in this wiki!"
-msgstr "No es permeten adjuncions de fitxers en aquest wiki,"
-
-msgid "You are not allowed to get attachments from this page."
-msgstr "No teniu permís per a obtindre adjuncions des d'aquesta pàgina."
-
-msgid "You are not allowed to view attachments of this page."
-msgstr "No teniu permís per a visualitzar adjuncions d'aquesta pàgina."
-
-msgid "You are not allowed to move attachments from this page."
-msgstr "No teniu permís per a moure adjuncions des d'aquesta pàgina."
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"No hi ha contingut del fitxer. Suprimiu els caracters no ASCII del nom del "
-"fitxer i torneu-ho a provar."
-
-msgid "You are not allowed to save a drawing on this page."
-msgstr "No teniu permís per a desar un dibuix en aquesta pàgina."
-
-msgid "You are not allowed to delete attachments on this page."
-msgstr "No teniu permís per a suprimir adjuncions en aquesta pàgina."
-
-msgid "Move aborted!"
-msgstr "S'ha avortat el moviment."
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr "Empreu la interfície d'usuari interactiva per a moure les adjuncions."
-
-msgid "You are not allowed to unzip attachments of this page."
-msgstr "No teniu permís per a decomprimir les adjuncions d'aquesta pàgina."
-
-msgid "You are not allowed to install files."
-msgstr "No teniu permís per a instal·lar fitxers."
-
-#, fuzzy, python-format
-msgid "Unsupported AttachFile sub-action: %s"
-msgstr "Acció de pujada no implementada: %s"
-
-#, python-format
-msgid "Attachments for \"%(pagename)s\""
-msgstr "Adjuncions per a «%(pagename)s»"
-
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
-msgstr ""
-"S'ha desat l'adjunció «%(target)s» (nom remot «%(filename)s») amb %(bytes)d "
-"octets."
-
-#, python-format
-msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
-msgstr "L'adjunció «%(target)s» (remote name «%(filename)s») ja existeix."
-
-#, python-format
-msgid "Attachment '%(filename)s' already exists."
-msgstr "L'adjunció «%(filename)s» ja existeix."
-
-#, python-format
-msgid "Attachment '%(filename)s' moved to %(page)s."
-msgstr "S'ha mogut l'adjunció «%(filename)s» a %(page)s."
-
-msgid "Nothing changed"
-msgstr "No ha canviat res"
-
-#, python-format
-msgid "Page %(newpagename)s does not exists or you don't have enough rights."
-msgstr ""
-
-msgid "Move aborted because empty page name"
-msgstr "S'ha avortat el moviment perquè el nom de la pàgina és buit"
-
-#, python-format
-msgid "Please use a valid filename for attachment '%(filename)s'."
-msgstr "Empreu un nom de fitxer vàlid per a l'adjunció «%(filename)s»."
-
-msgid "Move aborted because empty attachment name"
-msgstr "S'ha avortat el moviment perquè el nom de l'adjunció és buit"
-
-msgid "Move"
-msgstr "Mou"
-
-msgid "New page name"
-msgstr "Nou nom per a la pàgina"
-
-msgid "New attachment name"
+msgid "File attachment browser"
 msgstr "Nou nom per a l'adjunció"
 
+msgid "User account browser"
+msgstr ""
+
 #, python-format
-msgid "Attachment '%(filename)s' installed."
-msgstr "S'ha instal·lat l'adjunció «%(filename)s»."
+msgid "Invalid include arguments \"%s\"!"
+msgstr "Els arguments «%s» no són vàlids per a include."
+
+#, python-format
+msgid "Nothing found for \"%s\"!"
+msgstr "No s'ha trobat res per a «%s»."
+
+msgid "edit"
+msgstr "edita"
+
+#, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Pujada de l'adjuntació «%(filename)s»."
+
+#, python-format
+msgid "Attachment '%(filename)s' deleted."
+msgstr "S'ha suprimit l'adjunció «%(filename)s»."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "S'ha desat el dibuix «%(filename)s»."
+
+#, python-format
+msgid "Revert to revision %(rev)d."
+msgstr "Torna a la revisió %(rev)d."
+
+#, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "Reanomenada des de «%(oldpagename)s»."
+
+#, python-format
+msgid "%(mins)dm ago"
+msgstr "fa %(mins)dm"
+
+msgid "(no bookmark set)"
+msgstr "(cap adreça d'interès establida)"
+
+#, python-format
+msgid "(currently set to %s)"
+msgstr "(actualment establit a %s)"
+
+msgid "Delete bookmark"
+msgstr "Suprimeix l'adreça d'interès"
+
+msgid "Set bookmark"
+msgstr "Estableix l'adreça d'interès"
+
+msgid "[Bookmark reached]"
+msgstr "[S'ha arribat a una adreça d'interès]"
+
+msgid "Contents"
+msgstr "Continguts"
+
+#, python-format
+msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
+msgstr "Utilitzeu un terme més selectiu en comptes de {{{«%s»}}}"
+
+msgid "Include system pages"
+msgstr "Inclou les pàgines del sistema"
+
+msgid "Exclude system pages"
+msgstr "Exclou les pàgines del sistema"
+
+msgid "Go To Page"
+msgstr "Vés a la pàgina"
+
+msgid "No orphaned pages in this wiki."
+msgstr "No hi ha pàgines orfes en aquest wiki."
+
+msgid "Python Version"
+msgstr "Versió de Python"
+
+msgid "MoinMoin Version"
+msgstr "Versió de MoinMoin"
+
+#, python-format
+msgid "Release %s [Revision %s]"
+msgstr "Llançament %s [Revisió %s]"
+
+msgid "4Suite Version"
+msgstr "Versió de 4Suite"
+
+msgid "Number of pages"
+msgstr "Nombre de pàgines"
+
+msgid "Number of system pages"
+msgstr "Nombre de pàgines del sistema"
+
+msgid "Accumulated page sizes"
+msgstr "Mida acumulada de les pàgines"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr ""
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
+msgstr "Entrades al registre d'edició"
+
+msgid "NONE"
+msgstr "CAP"
+
+msgid "Global extension macros"
+msgstr "Macros d'extensions globals"
+
+msgid "Local extension macros"
+msgstr "Macros d'extensions locals"
+
+msgid "Global extension actions"
+msgstr "Accions d'extensions globals"
+
+msgid "Local extension actions"
+msgstr "Accions d'extensions locals"
+
+msgid "Global parsers"
+msgstr "Analitzadors globals"
+
+msgid "Local extension parsers"
+msgstr "Analitzadors d'extensions locals"
+
+msgid "Disabled"
+msgstr "Inhabilitat"
+
+msgid "Enabled"
+msgstr "Habilitat"
+
+msgid "index available"
+msgstr ""
+
+msgid "index unavailable"
+msgstr ""
+
+msgid "N/A"
+msgstr "N/D"
+
+msgid "Xapian and/or Python Xapian bindings not installed"
+msgstr "El Xapian i les vinculacions Xapian de Python no estan instal·lades"
+
+msgid "Xapian search"
+msgstr "Cerca Xapian"
+
+msgid "Xapian Version"
+msgstr "Versió del Xapian"
+
+msgid "PyStemmer not installed"
+msgstr "El PyStemmer no està instal·lat"
+
+msgid "Stemming for Xapian"
+msgstr "Lexemització per a Xapian"
+
+msgid "PyStemmer Version"
+msgstr "Versió de PyStemmer"
+
+msgid "PyStemmer stems"
+msgstr "Lexemes de PyStemmer"
+
+msgid "Active threads"
+msgstr "Fils actius"
+
+msgid "Search for items"
+msgstr "Cerca elements"
+
+msgid "containing all the following terms"
+msgstr "que continguen tots els termes següents"
+
+msgid "containing one or more of the following terms"
+msgstr "que continguen un o més dels termes següents"
+
+msgid "not containing the following terms"
+msgstr "que no continguen els termes següents"
+
+msgid "last modified since (e.g. last 2 weeks)"
+msgstr "modificats per darrera vegada (per exemple últimes 2 setmanes)"
+
+msgid "any category"
+msgstr ""
+
+msgid "any language"
+msgstr "qualsevol llengua"
+
+msgid "any mimetype"
+msgstr "qualsevol tipus mime"
+
+msgid "Categories"
+msgstr ""
+
+msgid "File Type"
+msgstr "Tipus de fitxer"
+
+msgid "Search only in titles"
+msgstr "Cerca només els títols"
+
+msgid "Case-sensitive search"
+msgstr "Recerques amb diferència entre majúscules i minúscules"
+
+msgid "Exclude underlay"
+msgstr ""
+
+msgid "No system items"
+msgstr "No hi ha elements del sistema"
+
+msgid "Search in all page revisions"
+msgstr "Cerca en totes les revisions de les pàgines"
+
+msgid "Go get it!"
+msgstr "Cerca-ho!"
+
+#, python-format
+msgid "No quotes on %(pagename)s."
+msgstr "No hi ha cites en %(pagename)s."
+
+msgid "Search Titles"
+msgstr "Cerca els títols"
+
+msgid "Display context of search results"
+msgstr "Mostra el context dels resultats de la recerca"
+
+msgid "Case-sensitive searching"
+msgstr "Recerques amb diferència entre majúscules i minúscules"
+
+msgid "Search Text"
+msgstr "Text a cercar"
+
+#, python-format
+msgid "Upload new attachment \"%(filename)s\""
+msgstr "Apuja una nova adjunció «%(filename)s»"
 
 #, python-format
 msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
+"%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
+"missing."
 msgstr ""
-"L'adjunció «%(filename)s» no s'ha pogut desempaquetar perquè els fitxers "
-"resultants serien massa grans (falten %(space)d kB)."
 
 #, python-format
 msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too many (%(count)d missing)."
+"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s=%"
+"(argument_value)s!"
 msgstr ""
-"L'adjunció «%(filename)s» no s'ha pogut desempaquetar perquè hi hauria massa "
-"fitxers resultants (falten %(count)d)."
-
-#, python-format
-msgid "Attachment '%(filename)s' unzipped."
-msgstr "S'ha desempaquetat l'adjunció «%(filename)s»."
 
 #, python-format
 msgid ""
-"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
-"files only, exist already or reside in folders."
-msgstr ""
-"No s'ha desempaquetat l'adjunció «%(filename)s» perquè els fitxers són massa "
-"grans, només fitxers .zip, ja existeixen o estan dins de carpetes."
-
-#, python-format
-msgid "The file %(filename)s is not a .zip file."
-msgstr "El fitxer %(filename)s no és un fitxer .zip."
-
-#, python-format
-msgid "Attachment '%(filename)s'"
-msgstr "Adjunció «%(filename)s»"
-
-msgid "Download"
+"Current configuration does not allow embedding of the file %(file)s because "
+"of its mimetype %(mimetype)s."
 msgstr ""
 
-msgid "Package script:"
-msgstr "Seqüència de paquet:"
-
-msgid "File Name"
-msgstr "Nom del fitxer"
-
-msgid "Modified"
-msgstr "Modificat"
-
-msgid "Size"
-msgstr "Mida"
-
-msgid "Unknown file type, cannot display this attachment inline."
+msgid "Embedded"
 msgstr ""
-"El tipus del fitxer és desconegut, no es pot mostrar aquesta adjunció en "
-"línia."
 
 #, python-format
-msgid "attachment:%(filename)s of %(pagename)s"
-msgstr "<<Verbatim(attachment:)>>%(filename)s de %(pagename)s"
+msgid "Unsupported navigation scheme '%(scheme)s'!"
+msgstr "L'esquema de navegació «%(scheme)s» no està implementat."
+
+msgid "No parent page found!"
+msgstr "No s'ha trobat la pàgina pare."
+
+msgid "Slideshow"
+msgstr "Presentació"
+
+msgid "Start"
+msgstr "Inici"
+
+#, python-format
+msgid "Slide %(pos)d of %(size)d"
+msgstr "Diapositiva %(pos)d de %(size)d"
+
+msgid "Markup"
+msgstr "Marcat"
+
+msgid "Display"
+msgstr "Visualització"
+
+msgid "No wanted pages in this wiki."
+msgstr "No hi ha cap pàgina dessitjada en aquest wiki."
+
+msgid "You need to provide a chart type!"
+msgstr "Heu de proveir un tipus de gràfica."
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "El tipus de gràfica «%s» és invàlid."
 
 #, fuzzy
-msgid "Filename"
-msgstr "Nom del fitxer"
+msgid "Revert"
+msgstr "Torna-ho tot enrere!"
+
+msgid "You are not allowed to revert this page!"
+msgstr "No teniu permís per a recuperar aquesta pàgina."
+
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
+msgstr ""
 
 msgid "This page is already deleted or was never created!"
 msgstr "Aquesta pàgina ja està suprimida o mai s'ha creat."
 
-msgid "Rename all /subpages too?"
-msgstr "Voleu canviar el nom també totes les /subpàgines?"
+#, fuzzy
+msgid "Optional reason for reverting this page"
+msgstr "Raó opcional per a la còpia"
 
-msgid "New name"
-msgstr "Nom nou"
-
-msgid "Optional reason for the renaming"
-msgstr "Raó opcional per al canvi de nom"
-
-msgid "Really rename this page?"
+#, fuzzy
+msgid "Really revert this page?"
 msgstr "Esteu segur de voler canviar el nom a aquesta pàgina?"
-
-#, fuzzy
-msgid "You must login to remove a quicklink."
-msgstr "Heu d'entrar per a afegir un enllaç ràpid"
-
-msgid "Your quicklink to this page has been removed."
-msgstr "S'ha suprimit el vostre enllaç ràpid a aquesta pàgina."
-
-msgid "Your quicklink to this page could not be removed."
-msgstr "No s'ha pogut suprimir el vostre enllaç ràpid a aquesta pàgina."
-
-#, fuzzy
-msgid "You need to have a quicklink to this page to remove it."
-msgstr "S'ha suprimit el vostre enllaç ràpid a aquesta pàgina."
-
-#, python-format
-msgid "Full Link List for \"%s\""
-msgstr "Llista completa d'enllaços per a «%s»"
-
-msgid "Editor"
-msgstr "Editor"
-
-msgid "Pages"
-msgstr "Pàgines"
-
-msgid "Select Author"
-msgstr "Seleccioneu un autor"
-
-msgid "Revert all!"
-msgstr "Torna-ho tot enrere!"
-
-msgid "You are not allowed to use this action."
-msgstr "No teniu permís per a utilitzar aquesta acció."
 
 #, python-format
 msgid "Rolled back changes to the page %s."
@@ -2026,7 +1898,7 @@ msgstr ""
 msgid "The ''remoteWiki'' is unknown."
 msgstr ""
 
-msgid "A severe error occured:"
+msgid "A severe error occurred:"
 msgstr ""
 
 msgid "Synchronisation finished. Look below for the status messages."
@@ -2037,8 +1909,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Got a list of %s local and %s remote pages. This results in %s different "
-"pages over-all."
+"Got a list of %s local and %s remote pages. This results in %s pages to "
+"process."
 msgstr ""
 
 #, python-format
@@ -2125,115 +1997,164 @@ msgstr ""
 msgid "Page %s merged with conflicts."
 msgstr ""
 
-msgid "Load"
-msgstr "Carrega"
-
-msgid "New Page or New Attachment"
-msgstr "Pàgina o adjunció nova"
-
 msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
+"You need to manually go to your OpenID provider wiki\n"
+"and log in before you can use your OpenID. MoinMoin will\n"
+"never allow you to enter your password here.\n"
+"\n"
+"Once you have logged in, simply reload this page."
 msgstr ""
 
-msgid "attachment"
-msgstr "adjunció"
-
-msgid "overwrite"
-msgstr "sobreescriu"
-
-msgid "New Name"
-msgstr "Nom nou"
+msgid "OpenID Trust verification"
+msgstr ""
 
 #, python-format
-msgid "(including %(localwords)d %(pagelink)s)"
-msgstr "(incloent %(localwords)d %(pagelink)s)"
+msgid "The site %s has asked for your identity."
+msgstr ""
 
 #, python-format
 msgid ""
-"The following %(badwords)d words could not be found in the dictionary of %"
-"(totalwords)d words%(localwords)s and are highlighted below:"
+"\n"
+"If you approve, the site represented by the trust root below will be\n"
+"told that you control the identity URL %s. (If you are using a delegated\n"
+"identity, the site will take care of reversing the\n"
+"delegation on its own.)"
 msgstr ""
-"No s'han trobat les següents %(badwords)d paraules al diccionari de %"
-"(totalwords)d paraules%(localwords)s i es ressalten a continuació:"
 
-msgid "Add checked words to dictionary"
-msgstr "S'han afegit les paraules comprovades al diccionari"
-
-msgid "No spelling errors found!"
-msgstr "No s'han trobat errors d'ortografia."
-
-msgid "You can't save spelling words."
-msgstr "No podeu desar paraules al diccionari."
-
-msgid "You can't check spelling on a page you can't read."
-msgstr "No podeu comprovar l'ortografia d'una pàgina que no podeu llegir."
-
-msgid "You are now logged out."
-msgstr "Heu sortit del vostre compte."
-
-msgid "You are not allowed to subscribe to a page you can't read."
-msgstr "No teniu permís per a subscriure a una pàgina la qual no podeu llegir."
-
-msgid "This wiki is not enabled for mail processing."
-msgstr "Aquest wiki no té habilitat el processament de correu."
-
-msgid "You must log in to use subscriptions."
-msgstr "Heu d'identificar-vos per a utilitzar les subscripcions."
-
-msgid "Add your email address in your UserPreferences to use subscriptions."
+msgid "Trust root"
 msgstr ""
-"Afegiu la vostra adreça electrònica a les vostres PreferènciesUsuari per a "
-"utilitzar les subscripcions."
+
+msgid "Identity URL"
+msgstr ""
 
 #, fuzzy
-msgid "You are already subscribed to this page."
-msgstr "Vos heu subscrit a aquesta pàgina."
+msgid "Remember decision"
+msgstr "Versió de PyStemmer"
 
-msgid "You have been subscribed to this page."
-msgstr "Vos heu subscrit a aquesta pàgina."
+msgid "Remember this trust decision and don't ask again"
+msgstr ""
 
-msgid "You could not get subscribed to this page."
-msgstr "No us heu pogut subscriure a aquesta pàgina."
+msgid "Approve"
+msgstr ""
 
-msgid "General Information"
-msgstr "Informació general"
+msgid "Don't approve"
+msgstr ""
 
-#, python-format
-msgid "Page size: %d"
-msgstr "Mida de la pàgina: %d"
+msgid "OpenID not served"
+msgstr ""
 
-msgid "SHA digest of this page's content is:"
-msgstr "El resum SHA del contingut d'aquesta pàgina és:"
-
-msgid "The following users subscribed to this page:"
-msgstr "Els següents usuaris estan subscrits a esta pàgina:"
-
-msgid "This page links to the following pages:"
-msgstr "Aquesta pàgina enllaça a la pàgina següent:"
-
-msgid "Diff"
-msgstr "Diferències"
-
-msgid "Comment"
-msgstr "Comentari"
-
-msgid "Revision History"
-msgstr "Historial de revisions"
-
-msgid "No log entries found."
-msgstr "No s'ha trobat cap entrada del registre."
+msgid ""
+"\n"
+"Unfortunately you have not created your homepage yet. Therefore,\n"
+"we cannot serve an OpenID for you. Please create your homepage first\n"
+"and then reload this page or click the button below to cancel this\n"
+"verification."
+msgstr ""
 
 #, python-format
-msgid "Info for \"%s\""
-msgstr "Informació per a «%s»"
+msgid "Invalid filename \"%s\"!"
+msgstr ""
 
 #, python-format
-msgid "Show \"%(title)s\""
-msgstr "Mostra «%(title)s»"
+msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
+msgstr "L'adjunció «%(target)s» (remote name «%(filename)s») ja existeix."
 
-msgid "General Page Infos"
-msgstr "Informació general de la pàgina"
+#, python-format
+msgid "Created the package %s containing the pages %s."
+msgstr ""
+
+msgid "Package pages"
+msgstr ""
+
+msgid "Package name"
+msgstr ""
+
+msgid "List of page names - separated by a comma"
+msgstr ""
+
+#, python-format
+msgid "No pages like \"%s\"!"
+msgstr "No hi ha cap pàgina semblant a «%s»."
+
+msgid "Please choose:"
+msgstr ""
+
+#, fuzzy
+msgid "You must login to remove a quicklink."
+msgstr "Heu d'entrar per a afegir un enllaç ràpid"
+
+msgid "Your quicklink to this page has been removed."
+msgstr "S'ha suprimit el vostre enllaç ràpid a aquesta pàgina."
+
+msgid "Your quicklink to this page could not be removed."
+msgstr "No s'ha pogut suprimir el vostre enllaç ràpid a aquesta pàgina."
+
+#, fuzzy
+msgid "You need to have a quicklink to this page to remove it."
+msgstr "S'ha suprimit el vostre enllaç ràpid a aquesta pàgina."
+
+#, python-format
+msgid ""
+"Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
+"Files: %(filecount)d, Directories: %(dircount)d"
+msgstr ""
+
+#, python-format
+msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
+msgstr ""
+
+msgid "Wiki Backup / Restore"
+msgstr "Còpia de seguretat / Restauració del wiki"
+
+msgid ""
+"Some hints:\n"
+" * To restore a backup:\n"
+"  * Restoring a backup will overwrite existing data, so be careful.\n"
+"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
+"stuff).\n"
+"  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
+"  * Hit the <<GetText(Restore)>> button below.\n"
+"\n"
+" * To make a backup, just hit the <<GetText(Backup)>> button and save the "
+"file\n"
+"   you get to a secure place.\n"
+"\n"
+"Please make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+"\n"
+msgstr ""
+
+msgid "Backup"
+msgstr "Copia"
+
+msgid "Restore"
+msgstr "Restaura"
+
+msgid "You are not allowed to do remote backup."
+msgstr "No esteu autoritzat a fer una còpia de seguretat remota."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr ""
+
+msgid "Do it."
+msgstr "Fes-ho."
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr "Voleu executar l'acció %(actionname)s?"
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr ""
+
+#, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr ""
+
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
 
 msgid "Please log in first."
 msgstr "Entreu amb el vostre compte abans."
@@ -2271,6 +2192,239 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "Gestió de Les meues pàgines"
+
+msgid "Rename all /subpages too?"
+msgstr "Voleu canviar el nom també totes les /subpàgines?"
+
+msgid "New name"
+msgstr "Nom nou"
+
+msgid "Optional reason for the renaming"
+msgstr "Raó opcional per al canvi de nom"
+
+msgid "Really rename this page?"
+msgstr "Esteu segur de voler canviar el nom a aquesta pàgina?"
+
+msgid "Your subscription to this page has been removed."
+msgstr "S'ha suprimit la vostra subscripció a aquesta pàgina."
+
+msgid "Can't remove regular expression subscription!"
+msgstr "No es pot cancel·lar una subscripció mitjançant expressió regular!"
+
+#, fuzzy
+msgid "Edit the subscription regular expressions in your settings."
+msgstr ""
+"Editeu les expressions regulars de subscripcions a les vostres "
+"PreferènciesUsuari."
+
+#, fuzzy
+msgid "You need to be subscribed to unsubscribe."
+msgstr "Vos heu subscrit a aquesta pàgina."
+
+msgid "TextCha: Wrong answer! Go back and try again..."
+msgstr ""
+
+msgid "Copy all /subpages too?"
+msgstr "Voleu copiar també totes les /subpàgines?"
+
+msgid "Optional reason for the copying"
+msgstr "Raó opcional per a la còpia"
+
+msgid "Really copy this page?"
+msgstr "Esteu segur de voler copiar aquesta pàgina?"
+
+msgid "No older revisions available!"
+msgstr "No hi ha revisions més velles disponibles."
+
+#, python-format
+msgid "Diff for \"%s\""
+msgstr "Diferències per a «%s»"
+
+#, python-format
+msgid "Differences between revisions %d and %d"
+msgstr "Diferències entre les revisions %d i %d"
+
+#, python-format
+msgid "(spanning %d versions)"
+msgstr "(incloent %d versions)"
+
+#, fuzzy
+msgid "Previous change"
+msgstr "Anterior"
+
+#, fuzzy
+msgid "Next change"
+msgstr "No ha canviat res"
+
+#, python-format
+msgid "The page was saved %(count)d times, though!"
+msgstr "Tot i així, s'ha desat la pàgina %(count)d vegades."
+
+msgid "(ignoring whitespace)"
+msgstr "(s'està descartant l'espai en blanc)"
+
+msgid "Ignore changes in the amount of whitespace"
+msgstr "Descarta els canvis en la quantitat d'espai en blanc"
+
+msgid "Load"
+msgstr "Carrega"
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "No teniu permís per a suprimir adjuncions en aquesta pàgina."
+
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"S'ha desat l'adjunció «%(target)s» (nom remot «%(filename)s») amb %(bytes)d "
+"octets."
+
+msgid "New Page or New Attachment"
+msgstr "Pàgina o adjunció nova"
+
+msgid ""
+"You can upload a file to a new page or choose to upload a file as attachment "
+"for the current page"
+msgstr ""
+
+msgid "New Attachment"
+msgstr "Adjunció nova"
+
+msgid ""
+"An upload will never overwrite an existing file. If there is a name\n"
+"conflict, you have to rename the file that you want to upload.\n"
+"Otherwise, if \"Rename to\" is left blank, the original filename will be "
+"used."
+msgstr ""
+"Una pujada mai sobreescriurà un fitxer existent. Si hi ha un conflicte de "
+"noms,\n"
+"haureu de canviar en nom del fitxer que voleu pujar.\n"
+"Si no, si «Canvia el nom a» es deixa en blanc, s'utilitzarà el nom original\n"
+"del fitxer."
+
+msgid "attachment"
+msgstr "adjunció"
+
+msgid "overwrite"
+msgstr "sobreescriu"
+
+msgid "Upload"
+msgstr "Apuja"
+
+msgid "New Name"
+msgstr "Nom nou"
+
+msgid "You are not allowed to subscribe to a page you can't read."
+msgstr "No teniu permís per a subscriure a una pàgina la qual no podeu llegir."
+
+#, fuzzy
+msgid "This wiki is not enabled for mail/Jabber processing."
+msgstr "Aquest wiki no té habilitat el processament de correu."
+
+msgid "You must log in to use subscriptions."
+msgstr "Heu d'identificar-vos per a utilitzar les subscripcions."
+
+#, fuzzy
+msgid ""
+"Add your email address or Jabber ID in your user settings to use "
+"subscriptions."
+msgstr ""
+"Afegiu la vostra adreça electrònica a les vostres PreferènciesUsuari per a "
+"utilitzar les subscripcions."
+
+#, fuzzy
+msgid "You are already subscribed to this page."
+msgstr "Vos heu subscrit a aquesta pàgina."
+
+msgid "You have been subscribed to this page."
+msgstr "Vos heu subscrit a aquesta pàgina."
+
+msgid "You could not get subscribed to this page."
+msgstr "No us heu pogut subscriure a aquesta pàgina."
+
+msgid "General Information"
+msgstr "Informació general"
+
+#, python-format
+msgid "Page size: %d"
+msgstr "Mida de la pàgina: %d"
+
+msgid "SHA digest of this page's content is:"
+msgstr "El resum SHA del contingut d'aquesta pàgina és:"
+
+msgid "The following users subscribed to this page:"
+msgstr "Els següents usuaris estan subscrits a esta pàgina:"
+
+msgid "This page links to the following pages:"
+msgstr "Aquesta pàgina enllaça a la pàgina següent:"
+
+msgid "Size"
+msgstr "Mida"
+
+msgid "Diff"
+msgstr "Diferències"
+
+msgid "Editor"
+msgstr "Editor"
+
+msgid "Comment"
+msgstr "Comentari"
+
+msgid "view"
+msgstr "visualitza"
+
+#, fuzzy
+msgid "to previous"
+msgstr "Anterior"
+
+msgid "get"
+msgstr "obté"
+
+msgid "del"
+msgstr "suprimeix"
+
+msgid "Revision History"
+msgstr "Historial de revisions"
+
+msgid "No log entries found."
+msgstr "No s'ha trobat cap entrada del registre."
+
+#, python-format
+msgid "Info for \"%s\""
+msgstr "Informació per a «%s»"
+
+#, python-format
+msgid "Show \"%(title)s\""
+msgstr "Mostra «%(title)s»"
+
+msgid "General Page Infos"
+msgstr "Informació general de la pàgina"
+
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr ""
+"No es pot crear una pàgina nova sense un nom de pàgina. Especifiqueu un nom."
+
+msgid "Delete"
+msgstr "Suprimeix"
+
+msgid "Delete all /subpages too?"
+msgstr ""
+
+msgid "Optional reason for the deletion"
+msgstr "Raó opcional per a la supressió"
+
+msgid "Really delete this page?"
+msgstr "Esteu segur de voler suprimir aquesta pàgina?"
+
+#, fuzzy
+msgid "You are not allowed to create the supplementation page."
+msgstr "No teniu permís per a canviar el nom d'aquesta pàgina."
+
+#, fuzzy
+msgid "Only superuser is allowed to use this action."
+msgstr "No teniu permís per a utilitzar aquesta acció."
 
 #, python-format
 msgid "Subscribe users to the page %s"
@@ -2338,112 +2492,323 @@ msgstr ""
 "Feu clic per a fer una cerca del text complet amb els vostres termes de "
 "cerca."
 
-#, python-format
-msgid ""
-"Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
-"Files: %(filecount)d, Directories: %(dircount)d"
+msgid "User account created! You can use this account to login now..."
+msgstr ""
+"S'ha creat el compte d'usuari! Podeu utilitzar aquest compte per a entrar."
+
+msgid "TextCha (required)"
 msgstr ""
 
-#, python-format
-msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
+msgid "Create Profile"
+msgstr "Crea un perfil"
+
+msgid "Create Account"
 msgstr ""
 
-msgid "Wiki Backup / Restore"
-msgstr "Còpia de seguretat / Restauració del wiki"
+msgid "You must login to add a quicklink."
+msgstr "Heu d'entrar per a afegir un enllaç ràpid"
 
-msgid ""
-"Some hints:\n"
-" * To restore a backup:\n"
-"  * Restoring a backup will overwrite existing data, so be careful.\n"
-"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
-"stuff).\n"
-"  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
-"  * Hit the <<GetText(Restore)>> button below.\n"
-"\n"
-" * To make a backup, just hit the <<GetText(Backup)>> button and save the "
-"file\n"
-"   you get to a secure place.\n"
-"\n"
-"Please make sure your wiki configuration backup_* values are correct and "
-"complete.\n"
-"\n"
-msgstr ""
+msgid "A quicklink to this page has been added for you."
+msgstr "S'ha afegit un enllaç ràpid a aquesta pàgina."
 
-msgid "Backup"
-msgstr "Copia"
+msgid "A quicklink to this page could not be added for you."
+msgstr "No s'ha pogut afegir un enllaç ràpid a aquesta pàgina."
 
-msgid "Restore"
-msgstr "Restaura"
-
-msgid "You are not allowed to do remote backup."
-msgstr "No esteu autoritzat a fer una còpia de seguretat remota."
+#, fuzzy
+msgid "You already have a quicklink to this page."
+msgstr "Ja heu desat aquesta pàgina."
 
 #, python-format
-msgid "Unknown backup subaction: %s."
-msgstr ""
+msgid "(including %(localwords)d %(pagelink)s)"
+msgstr "(incloent %(localwords)d %(pagelink)s)"
 
-msgid "You are not allowed to revert this page!"
-msgstr "No teniu permís per a recuperar aquesta pàgina."
+#, python-format
+msgid ""
+"The following %(badwords)d words could not be found in the dictionary of %"
+"(totalwords)d words%(localwords)s and are highlighted below:"
+msgstr ""
+"No s'han trobat les següents %(badwords)d paraules al diccionari de %"
+"(totalwords)d paraules%(localwords)s i es ressalten a continuació:"
+
+msgid "Add checked words to dictionary"
+msgstr "S'han afegit les paraules comprovades al diccionari"
+
+msgid "No spelling errors found!"
+msgstr "No s'han trobat errors d'ortografia."
+
+msgid "You can't save spelling words."
+msgstr "No podeu desar paraules al diccionari."
+
+msgid "You can't check spelling on a page you can't read."
+msgstr "No podeu comprovar l'ortografia d'una pàgina que no podeu llegir."
+
+msgid "You are now logged out."
+msgstr "Heu sortit del vostre compte."
 
 msgid ""
-"You were viewing the current revision of this page when you called the "
-"revert action. If you want to revert to an older revision, first view that "
-"older revision and then call revert to this (older) revision again."
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"Aquest wiki no té habilitat el processament de correu.\n"
+"Contacteu amb el responsable del wiki, que pot habilitar el correu."
+
+msgid "Please provide a valid email address!"
+msgstr "Proveïu una adreça de correu vàlida."
+
+msgid "If an account with this username exists, an email was sent."
+msgstr ""
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
+msgstr ""
+"No s'ha trobat cap compte que concorde amb l'adreça de correu «%(email)s»."
+
+msgid "Mail me my account data"
+msgstr "Envia'm les dades del meu compte"
+
+#, fuzzy
+msgid "Lost password"
+msgstr "Contrasenya"
+
+msgid ""
+"\n"
+"== Recovering a lost password ==\n"
+"<<BR>>\n"
+"If you have forgotten your password, provide your email address and click on "
+"'''Mail me my account data'''.\n"
+"<<BR>>\n"
+"The email you get contains the encrypted password (so even if someone "
+"intercepts the mail, he won't know your REAL password). Just copy and paste "
+"it into the login mask into the password field and log in.\n"
+"After logging in you should change your password."
 msgstr ""
 
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Mapa del lloc local per a «%s»"
 
+msgid "Pages"
+msgstr "Pàgines"
+
+msgid "Select Author"
+msgstr "Seleccioneu un autor"
+
+msgid "Revert all!"
+msgstr "Torna-ho tot enrere!"
+
+msgid "You are not allowed to use this action."
+msgstr "No teniu permís per a utilitzar aquesta acció."
+
+#, python-format
+msgid "[%d attachments]"
+msgstr "[%d adjuncions]"
+
+#, python-format
+msgid ""
+"There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this "
+"page."
+msgstr ""
+"Hi ha <a href=\"%(link)s\">%(count)s adjuncions</a> emmagatzemats per a "
+"aquesta pàgina."
+
+#, python-format
+msgid "Attachment '%(target)s' already exists."
+msgstr "L'adjunció «%(target)s» ja existeix."
+
+msgid "Filename of attachment not specified!"
+msgstr "El nom del fitxer per a l'adjunció no s'ha especificat."
+
+#, python-format
+msgid "Attachment '%(filename)s' does not exist!"
+msgstr "L'adjunció «%(filename)s» no existeix."
+
+msgid ""
+"To refer to attachments on a page, use '''{{{attachment:filename}}}''', \n"
+"as shown below in the list of files. \n"
+"Do '''NOT''' use the URL of the {{{[get]}}} link, \n"
+"since this is subject to change and can break easily."
+msgstr ""
+"Per a referir-vos a les adjuncions d'una pàgina, utilitzeu '''{{{attachment:"
+"nom_del_fitxer}}}''', \n"
+"com es mostra a continuació en la llista de fitxers. \n"
+"'''No''' utilitzeu l'URL de l'enllaç {{{[get]}}}, \n"
+"ja que aquest pot canviar i es pot trencar fàcilment."
+
+msgid "move"
+msgstr ""
+
+msgid "unzip"
+msgstr "desempaqueta"
+
+msgid "install"
+msgstr "instal·la"
+
+#, python-format
+msgid "No attachments stored for %(pagename)s"
+msgstr "No hi ha cap adjunció emmagatzemada per a %(pagename)s"
+
+msgid "Edit drawing"
+msgstr "Edita el dibuix"
+
+msgid "File to upload"
+msgstr "Fitxer per a apujar"
+
+msgid "Rename to"
+msgstr "Reanomena a"
+
+msgid "Overwrite existing attachment of same name"
+msgstr ""
+
+msgid "Attached Files"
+msgstr "Fitxers adjunts"
+
+msgid "You are not allowed to attach a file to this page."
+msgstr "No teniu permís per a adjuntar un fitxer a aquesta pàgina."
+
+msgid "File attachments are not allowed in this wiki!"
+msgstr "No es permeten adjuncions de fitxers en aquest wiki,"
+
+#, fuzzy, python-format
+msgid "Unsupported AttachFile sub-action: %s"
+msgstr "Acció de pujada no implementada: %s"
+
+#, python-format
+msgid "Attachments for \"%(pagename)s\""
+msgstr "Adjuncions per a «%(pagename)s»"
+
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"No hi ha contingut del fitxer. Suprimiu els caracters no ASCII del nom del "
+"fitxer i torneu-ho a provar."
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "No teniu permís per a desar un dibuix en aquesta pàgina."
+
+#, fuzzy, python-format
+msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
+msgstr "L'adjunció «%(filename)s» ja existeix."
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/%"
+"(new_filename)s'."
+msgstr "S'ha mogut l'adjunció «%(filename)s» a %(page)s."
+
+msgid "Nothing changed"
+msgstr "No ha canviat res"
+
+#, python-format
+msgid "Page '%(new_pagename)s' does not exist or you don't have enough rights."
+msgstr ""
+
+msgid "Move aborted!"
+msgstr "S'ha avortat el moviment."
+
+msgid "Please use the interactive user interface to move attachments!"
+msgstr "Empreu la interfície d'usuari interactiva per a moure les adjuncions."
+
+msgid "You are not allowed to move attachments from this page."
+msgstr "No teniu permís per a moure adjuncions des d'aquesta pàgina."
+
 #, fuzzy
-msgid "You are not allowed to create the supplementation page."
-msgstr "No teniu permís per a canviar el nom d'aquesta pàgina."
+msgid "Move aborted because new page name is empty."
+msgstr "S'ha avortat el moviment perquè el nom de la pàgina és buit"
 
 #, python-format
-msgid "Invalid filename \"%s\"!"
+msgid "Please use a valid filename for attachment '%(filename)s'."
+msgstr "Empreu un nom de fitxer vàlid per a l'adjunció «%(filename)s»."
+
+#, fuzzy
+msgid "Move aborted because new attachment name is empty."
+msgstr "S'ha avortat el moviment perquè el nom de l'adjunció és buit"
+
+msgid "Move"
+msgstr "Mou"
+
+msgid "New page name"
+msgstr "Nou nom per a la pàgina"
+
+msgid "New attachment name"
+msgstr "Nou nom per a l'adjunció"
+
+msgid "You are not allowed to get attachments from this page."
+msgstr "No teniu permís per a obtindre adjuncions des d'aquesta pàgina."
+
+msgid "You are not allowed to install files."
+msgstr "No teniu permís per a instal·lar fitxers."
+
+#, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "S'ha instal·lat l'adjunció «%(filename)s»."
+
+msgid "You are not allowed to unzip attachments of this page."
+msgstr "No teniu permís per a decomprimir les adjuncions d'aquesta pàgina."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+"L'adjunció «%(filename)s» no s'ha pogut desempaquetar perquè els fitxers "
+"resultants serien massa grans (falten %(space)d kB)."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too many (%(count)d missing)."
+msgstr ""
+"L'adjunció «%(filename)s» no s'ha pogut desempaquetar perquè hi hauria massa "
+"fitxers resultants (falten %(count)d)."
+
+#, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "S'ha desempaquetat l'adjunció «%(filename)s»."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
+"files only, exist already or reside in folders."
+msgstr ""
+"No s'ha desempaquetat l'adjunció «%(filename)s» perquè els fitxers són massa "
+"grans, només fitxers .zip, ja existeixen o estan dins de carpetes."
+
+#, python-format
+msgid "The file %(filename)s is not a .zip file."
+msgstr "El fitxer %(filename)s no és un fitxer .zip."
+
+#, python-format
+msgid "Attachment '%(filename)s'"
+msgstr "Adjunció «%(filename)s»"
+
+msgid "Download"
 msgstr ""
 
-#, python-format
-msgid "Created the package %s containing the pages %s."
+msgid "Package script:"
+msgstr "Seqüència de paquet:"
+
+msgid "File Name"
+msgstr "Nom del fitxer"
+
+msgid "Modified"
+msgstr "Modificat"
+
+msgid "Unknown file type, cannot display this attachment inline."
 msgstr ""
+"El tipus del fitxer és desconegut, no es pot mostrar aquesta adjunció en "
+"línia."
 
-msgid "Package pages"
-msgstr ""
-
-msgid "Package name"
-msgstr ""
-
-msgid "List of page names - separated by a comma"
-msgstr ""
+msgid "You are not allowed to view attachments of this page."
+msgstr "No teniu permís per a visualitzar adjuncions d'aquesta pàgina."
 
 #, python-format
-msgid "No pages like \"%s\"!"
-msgstr "No hi ha cap pàgina semblant a «%s»."
-
-msgid "No older revisions available!"
-msgstr "No hi ha revisions més velles disponibles."
+msgid "attachment:%(filename)s of %(pagename)s"
+msgstr "<<Verbatim(attachment:)>>%(filename)s de %(pagename)s"
 
 #, python-format
-msgid "Diff for \"%s\""
-msgstr "Diferències per a «%s»"
-
-#, python-format
-msgid "Differences between revisions %d and %d"
-msgstr "Diferències entre les revisions %d i %d"
-
-#, python-format
-msgid "(spanning %d versions)"
-msgstr "(incloent %d versions)"
-
-#, python-format
-msgid "The page was saved %(count)d times, though!"
-msgstr "Tot i així, s'ha desat la pàgina %(count)d vegades."
-
-msgid "(ignoring whitespace)"
-msgstr "(s'està descartant l'espai en blanc)"
-
-msgid "Ignore changes in the amount of whitespace"
-msgstr "Descarta els canvis en la quantitat d'espai en blanc"
+msgid "Full Link List for \"%s\""
+msgstr "Llista completa d'enllaços per a «%s»"
 
 #, python-format
 msgid "Exactly one page like \"%s\" found, redirecting to page."
@@ -2458,43 +2823,102 @@ msgstr "Pàgines semblants a «%s»"
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s per a «%(title)s»"
 
-msgid "Copy all /subpages too?"
-msgstr "Voleu copiar també totes les /subpàgines?"
-
-msgid "Optional reason for the copying"
-msgstr "Raó opcional per a la còpia"
-
-msgid "Really copy this page?"
-msgstr "Esteu segur de voler copiar aquesta pàgina?"
-
-msgid ""
-"Cannot create a new page without a page name.  Please specify a page name."
-msgstr ""
-"No es pot crear una pàgina nova sense un nom de pàgina. Especifiqueu un nom."
-
-msgid "Delete"
-msgstr "Suprimeix"
-
-msgid "Delete all /subpages too?"
+#, python-format
+msgid "Inlined image: %(url)s"
 msgstr ""
 
-msgid "Optional reason for the deletion"
-msgstr "Raó opcional per a la supressió"
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Crea un dibuix nou «%(filename)s» (s'obre en una finestra nova)"
 
-msgid "Really delete this page?"
-msgstr "Esteu segur de voler suprimir aquesta pàgina?"
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Edita el dibuix %(filename)s (s'obre en una finestra nova)"
 
-msgid "Options --pages and --search are mutually exclusive!"
-msgstr ""
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Dibuix clicable: %(filename)s"
 
-msgid "You must specify an output file!"
-msgstr ""
+msgid "Toggle line numbers"
+msgstr "Commuta els números de línia"
 
-msgid "No pages specified using --pages or --search, assuming full package."
-msgstr ""
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "L'acció %(action_name)s és desconeguda."
 
-msgid "Output file already exists! Cowardly refusing to continue!"
-msgstr ""
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "No teniu permís per a fer %(action_name)s en aquesta pàgina."
+
+msgid "Login and try again."
+msgstr "Entreu i torneu a provar."
+
+#~ msgid "Use UserPreferences to change your settings or create an account."
+#~ msgstr ""
+#~ "Utilitzeu PreferènciesUsuari per a canviar els vostres paràmetres o crear "
+#~ "un compte."
+
+#~ msgid "Use UserPreferences to change settings of the selected user account"
+#~ msgstr ""
+#~ "Utilitzeu PreferènciesUsuari per a canviar els paràmetres del compte "
+#~ "d'usuari seleccionat"
+
+#~ msgid ""
+#~ "This list does not work, unless you have entered a valid email address!"
+#~ msgstr ""
+#~ "Aquesta llista no funciona, a no ser que hagueu introduït una adreça de "
+#~ "correu electrònic vàlida."
+
+#~ msgid ""
+#~ "To create an account, see the %(userprefslink)s page. To recover a lost "
+#~ "password, go to %(sendmypasswordlink)s."
+#~ msgstr ""
+#~ "Per a crear un compte, vegeu la pàgina %(userprefslink)s. Per a recuperar "
+#~ "una contrasenya perduda, vegeu la pàgina %(sendmypasswordlink)s."
+
+#~ msgid ""
+#~ "'''A page with the name {{{'%s'}}} already exists.'''\n"
+#~ "Try a different name."
+#~ msgstr ""
+#~ "'''Ja existeix una pàgina amb el nom {{{%s}}}.'''\n"
+#~ "Proveu amb un nom diferent."
+
+#~ msgid ""
+#~ "The comment on the change is:\n"
+#~ "%(comment)s\n"
+#~ "\n"
+#~ msgstr ""
+#~ "El comentari sobre el canvi és:\n"
+#~ "%(comment)s\n"
+#~ "\n"
+
+#~ msgid "Status of sending notification mails:"
+#~ msgstr "Estat de l'enviament dels correus de notificació:"
+
+#~ msgid "[%(lang)s] %(recipients)s: %(status)s"
+#~ msgstr "[%(lang)s] %(recipients)s: %(status)s"
+
+#~ msgid "UserPreferences"
+#~ msgstr "PreferènciesUsuari"
+
+#~ msgid "Subscribe to trivial changes"
+#~ msgstr "Subscriu-me a canvis trivials"
+
+#~ msgid "(Only for password change or new account)"
+#~ msgstr "(Només per a canvis de contrasenya o comptes nous)"
+
+#~ msgid "ERROR in regex '%s'"
+#~ msgstr "ERROR en l'expressió regular «%s»"
+
+#~ msgid "Bad timestamp '%s'"
+#~ msgstr "Marca de temps «%s» invàlida"
+
+#~ msgid "Sorry, login failed."
+#~ msgstr "Ha fallat l'entrada."
+
+#, fuzzy
+#~ msgid "Filename"
+#~ msgstr "Nom del fitxer"
 
 #~ msgid "belonging to one of the following categories"
 #~ msgstr "que pertanyen a una de les categories següents"

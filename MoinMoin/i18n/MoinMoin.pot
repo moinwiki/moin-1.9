@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-20 19:09+0100\n"
+"POT-Creation-Date: 2008-03-30 00:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,7 @@ msgid ""
 "\n"
 "Login Password: %s\n"
 "\n"
-"Login URL: %s/%s?action=login\n"
+"Login URL: %s/?action=login\n"
 msgstr ""
 
 msgid ""
@@ -222,167 +222,6 @@ msgstr ""
 msgid "Expected a value for key \"%(token)s\""
 msgstr ""
 
-msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
-msgstr ""
-
-msgid "Please provide a valid email address!"
-msgstr ""
-
-msgid "If an account with this username exists, an email was sent."
-msgstr ""
-
-#, python-format
-msgid "Found no account matching the given email address '%(email)s'!"
-msgstr ""
-
-msgid "Use UserPreferences to change your settings or create an account."
-msgstr ""
-
-msgid "TextCha: Wrong answer! Go back and try again..."
-msgstr ""
-
-msgid "Empty user name. Please enter a user name."
-msgstr ""
-
-#, python-format
-msgid ""
-"Invalid user name {{{'%s'}}}.\n"
-"Name may contain any Unicode alpha numeric character, with optional one\n"
-"space between words. Group page name is not allowed."
-msgstr ""
-
-msgid "This user name already belongs to somebody else."
-msgstr ""
-
-msgid "Passwords don't match!"
-msgstr ""
-
-msgid "Please specify a password!"
-msgstr ""
-
-#, python-format
-msgid "Password not acceptable: %s"
-msgstr ""
-
-msgid ""
-"Please provide your email address. If you lose your login information, you "
-"can get it by email."
-msgstr ""
-
-msgid "This email already belongs to somebody else."
-msgstr ""
-
-msgid "User account created! You can use this account to login now..."
-msgstr ""
-
-msgid "Use UserPreferences to change settings of the selected user account"
-msgstr ""
-
-#, python-format
-msgid "The theme '%(theme_name)s' could not be loaded!"
-msgstr ""
-
-msgid "User preferences saved!"
-msgstr ""
-
-msgid "Default"
-msgstr ""
-
-msgid "<Browser setting>"
-msgstr ""
-
-msgid "the one preferred"
-msgstr ""
-
-msgid "free choice"
-msgstr ""
-
-msgid "Select User"
-msgstr ""
-
-msgid "Save"
-msgstr ""
-
-msgid "Preferred theme"
-msgstr ""
-
-msgid "Editor Preference"
-msgstr ""
-
-msgid "Editor shown on UI"
-msgstr ""
-
-msgid "Time zone"
-msgstr ""
-
-msgid "Your time is"
-msgstr ""
-
-msgid "Server time is"
-msgstr ""
-
-msgid "Date format"
-msgstr ""
-
-msgid "Preferred language"
-msgstr ""
-
-msgid "General options"
-msgstr ""
-
-msgid "Quick links"
-msgstr ""
-
-msgid "This list does not work, unless you have entered a valid email address!"
-msgstr ""
-
-msgid "Subscribed wiki pages (one regex per line)"
-msgstr ""
-
-msgid "Create Profile"
-msgstr ""
-
-msgid "TextCha (required)"
-msgstr ""
-
-msgid "Mail me my account data"
-msgstr ""
-
-msgid "Email"
-msgstr ""
-
-#, python-format
-msgid ""
-"To create an account, see the %(userprefslink)s page. To recover a lost "
-"password, go to %(sendmypasswordlink)s."
-msgstr ""
-
-msgid "Name"
-msgstr ""
-
-msgid "Password"
-msgstr ""
-
-msgid "Login"
-msgstr ""
-
-msgid "Action"
-msgstr ""
-
-msgid "Enable user"
-msgstr ""
-
-msgid "disabled"
-msgstr ""
-
-msgid "Disable user"
-msgstr ""
-
-msgid "Mail account data"
-msgstr ""
-
 msgid "Your changes are not saved!"
 msgstr ""
 
@@ -404,6 +243,7 @@ msgstr ""
 #, python-format
 msgid ""
 "'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
 "Try a different name."
 msgstr ""
 
@@ -418,13 +258,6 @@ msgid "You can't rename to an empty pagename."
 msgstr ""
 
 #, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr ""
-
-#, python-format
 msgid "Could not rename page because of file system error: %s."
 msgstr ""
 
@@ -436,45 +269,6 @@ msgstr ""
 
 #, python-format
 msgid "Page \"%s\" was successfully deleted!"
-msgstr ""
-
-#, python-format
-msgid ""
-"Dear Wiki user,\n"
-"\n"
-"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
-"change notification.\n"
-"\n"
-"The following page has been changed by %(editor)s:\n"
-"%(pagelink)s\n"
-"\n"
-msgstr ""
-
-#, python-format
-msgid ""
-"The comment on the change is:\n"
-"%(comment)s\n"
-"\n"
-msgstr ""
-
-msgid "New page:\n"
-msgstr ""
-
-msgid "No differences found!\n"
-msgstr ""
-
-#, python-format
-msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
-msgstr ""
-
-msgid "Trivial "
-msgstr ""
-
-msgid "Status of sending notification mails:"
-msgstr ""
-
-#, python-format
-msgid "[%(lang)s] %(recipients)s: %(status)s"
 msgstr ""
 
 #, python-format
@@ -515,6 +309,9 @@ msgstr ""
 
 msgid ""
 "You can't change ACLs on this page since you have no admin rights on it!"
+msgstr ""
+
+msgid "Notifications sent to:"
 msgstr ""
 
 #, python-format
@@ -683,6 +480,121 @@ msgstr ""
 msgid "Additions are marked like this."
 msgstr ""
 
+msgid "Name"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "OpenID"
+msgstr ""
+
+msgid "Login"
+msgstr ""
+
+msgid "Username"
+msgstr ""
+
+msgid "ACL Groups"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Jabber"
+msgstr ""
+
+msgid "Action"
+msgstr ""
+
+msgid "Enable user"
+msgstr ""
+
+msgid "disabled"
+msgstr ""
+
+msgid "Disable user"
+msgstr ""
+
+msgid "Mail account data"
+msgstr ""
+
+msgid "Missing password. Please enter user name and password."
+msgstr ""
+
+msgid "You need to log in."
+msgstr ""
+
+#, python-format
+msgid ""
+"If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
+"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+msgstr ""
+
+msgid ""
+"Please choose an account name now.\n"
+"If you choose an existing account name you will be asked for the\n"
+"password and be able to associate the account with your OpenID."
+msgstr ""
+
+msgid "Choose this name"
+msgstr ""
+
+msgid ""
+"The username you have chosen is already\n"
+"taken. If it is your username, enter your password below to associate\n"
+"the username with your OpenID. Otherwise, please choose a different\n"
+"username and leave the password field blank."
+msgstr ""
+
+msgid "Associate this name"
+msgstr ""
+
+#, python-format
+msgid "OpenID error: %s."
+msgstr ""
+
+msgid "Verification canceled."
+msgstr ""
+
+msgid "OpenID failure."
+msgstr ""
+
+msgid "This is not a valid username, choose a different one."
+msgstr ""
+
+msgid "Your account is now associated to your OpenID."
+msgstr ""
+
+msgid "The password you entered is not valid."
+msgstr ""
+
+msgid "OpenID verification requires that you click this button:"
+msgstr ""
+
+msgid "Anonymous sessions need to be enabled for OpenID login."
+msgstr ""
+
+msgid "Failed to resolve OpenID."
+msgstr ""
+
+msgid "OpenID discovery failure, not a valid OpenID."
+msgstr ""
+
+msgid "No OpenID."
+msgstr ""
+
+msgid ""
+"If you do not have an account yet, you can still log in with your OpenID and "
+"create one during login."
+msgstr ""
+
+msgid "Failed to connect to database."
+msgstr ""
+
+msgid "Could not contact botbouncer.com."
+msgstr ""
+
 msgid "Wiki"
 msgstr ""
 
@@ -755,7 +667,7 @@ msgstr ""
 msgid "Click to do a full-text search for this title"
 msgstr ""
 
-msgid "Preferences"
+msgid "Settings"
 msgstr ""
 
 msgid "Logout"
@@ -963,9 +875,6 @@ msgstr ""
 msgid "HelpOnFormatting"
 msgstr ""
 
-msgid "UserPreferences"
-msgstr ""
-
 msgid "SendMyPassword"
 msgstr ""
 
@@ -1020,6 +929,314 @@ msgstr ""
 #, python-format
 msgid ""
 "Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
+msgstr ""
+
+msgid "Notification"
+msgstr ""
+
+msgid "Notification settings saved!"
+msgstr ""
+
+msgid "'''Email'''"
+msgstr ""
+
+msgid "'''Jabber'''"
+msgstr ""
+
+msgid "'''Event type'''"
+msgstr ""
+
+msgid "Select the events you want to be notified about."
+msgstr ""
+
+msgid ""
+"Before you can be notified, you need to provide a way to contact you in the "
+"general preferences."
+msgstr ""
+
+msgid "Subscribed events"
+msgstr ""
+
+msgid "Subscribed wiki pages<<BR>>(one regex per line)"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Change password"
+msgstr ""
+
+msgid "Passwords don't match!"
+msgstr ""
+
+msgid "Please specify a password!"
+msgstr ""
+
+#, python-format
+msgid "Password not acceptable: %s"
+msgstr ""
+
+msgid "Your password has been changed."
+msgstr ""
+
+msgid "To change your password, enter a new password twice."
+msgstr ""
+
+msgid "Password repeat"
+msgstr ""
+
+msgid "Switch user"
+msgstr ""
+
+msgid "No user selected"
+msgstr ""
+
+msgid ""
+"You can now change the settings of the selected user account; log out to get "
+"back to your account."
+msgstr ""
+
+msgid "You are the only user."
+msgstr ""
+
+msgid ""
+"As a superuser, you can temporarily assume the identity of another user."
+msgstr ""
+
+msgid "Select User"
+msgstr ""
+
+msgid "OpenID settings"
+msgstr ""
+
+msgid "Cannot remove all OpenIDs."
+msgstr ""
+
+msgid "The selected OpenIDs have been removed."
+msgstr ""
+
+msgid "OpenID is already present."
+msgstr ""
+
+msgid "This OpenID is already used for another account."
+msgstr ""
+
+msgid "OpenID added successfully."
+msgstr ""
+
+msgid "Current OpenIDs"
+msgstr ""
+
+msgid "Remove selected"
+msgstr ""
+
+msgid "Add OpenID"
+msgstr ""
+
+msgid "Preferences"
+msgstr ""
+
+#, python-format
+msgid ""
+"Invalid user name {{{'%s'}}}.\n"
+"Name may contain any Unicode alpha numeric character, with optional one\n"
+"space between words. Group page name is not allowed."
+msgstr ""
+
+msgid "This user name already belongs to somebody else."
+msgstr ""
+
+msgid "Empty user name. Please enter a user name."
+msgstr ""
+
+msgid ""
+"Please provide your email address. If you lose your login information, you "
+"can get it by email."
+msgstr ""
+
+msgid "This email already belongs to somebody else."
+msgstr ""
+
+msgid "This jabber id already belongs to somebody else."
+msgstr ""
+
+#, python-format
+msgid "The theme '%(theme_name)s' could not be loaded!"
+msgstr ""
+
+msgid "User preferences saved!"
+msgstr ""
+
+msgid "Default"
+msgstr ""
+
+msgid "<Browser setting>"
+msgstr ""
+
+msgid "the one preferred"
+msgstr ""
+
+msgid "free choice"
+msgstr ""
+
+msgid "Preferred theme"
+msgstr ""
+
+msgid "Editor Preference"
+msgstr ""
+
+msgid "Editor shown on UI"
+msgstr ""
+
+msgid "Time zone"
+msgstr ""
+
+msgid "Your time is"
+msgstr ""
+
+msgid "Server time is"
+msgstr ""
+
+msgid "Date format"
+msgstr ""
+
+msgid "Preferred language"
+msgstr ""
+
+msgid "General options"
+msgstr ""
+
+msgid "Quick links"
+msgstr ""
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
+"change notification.\n"
+"\n"
+"The \"%(pagename)s\" page has been changed by %(editor)s:\n"
+"\n"
+msgstr ""
+
+msgid "New page:\n"
+msgstr ""
+
+msgid "No differences found!\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been deleted by %(editor)s:\n"
+"\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by %(editor)"
+"s:\n"
+msgstr ""
+
+#, python-format
+msgid "New user account created on %(sitename)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Dear Superuser, a new user has just been created. Details follow:\n"
+"\n"
+"    User name: %(username)s\n"
+"    Email address: %(useremail)s"
+msgstr ""
+
+#, python-format
+msgid "New attachment added to page %(pagename)s on %(sitename)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(page_name)s\" for change "
+"notification. An attachment has been added to that page by %(editor)s. "
+"Following detailed information is available:\n"
+"\n"
+"Attachment name: %(attach_name)s\n"
+"Attachment size: %(attach_size)s\n"
+msgstr ""
+
+msgid "Page has been modified"
+msgstr ""
+
+msgid "Page has been modified in a trivial fashion"
+msgstr ""
+
+msgid "Page has been renamed"
+msgstr ""
+
+msgid "Page has been deleted"
+msgstr ""
+
+msgid "Page has been copied"
+msgstr ""
+
+msgid "A new attachment has been added"
+msgstr ""
+
+msgid "A page has been reverted to a previous state"
+msgstr ""
+
+msgid "A user has subscribed to a page"
+msgstr ""
+
+msgid "A new account has been created"
+msgstr ""
+
+#, python-format
+msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
+msgstr ""
+
+msgid "Trivial "
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment link: %(attach)s\n"
+"Page link: %(page)s\n"
+msgstr ""
+
+#, python-format
+msgid "XML RPC error: %s"
+msgstr ""
+
+msgid "Low-level communication error: $s"
+msgstr ""
+
+msgid "Attachment link"
+msgstr ""
+
+msgid "Page link"
+msgstr ""
+
+msgid "Changed page"
+msgstr ""
+
+msgid "Page changed"
+msgstr ""
+
+#, python-format
+msgid "Low-level communication error: %s"
 msgstr ""
 
 msgid "Options --pages and --search are mutually exclusive!"
@@ -1088,10 +1305,8 @@ msgid ""
 "italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed ''<<Verbatim(''')"
 ">>'''''bold'''<<Verbatim(''')>> and italics''<<Verbatim('')>>; <<Verbatim"
 "(----)>> horizontal rule.\n"
-" Headings:: <<Verbatim(=)>> Title 1 <<Verbatim(=)>>; <<Verbatim(==)>> Title "
-"2 <<Verbatim(==)>>; <<Verbatim(===)>> Title 3 <<Verbatim(===)>>;   <<Verbatim"
-"(====)>> Title 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Title 5 <<Verbatim"
-"(=====)>>.\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
 " Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
 "#n start numbering at n; space alone indents.\n"
 " Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])"
@@ -1109,15 +1324,15 @@ msgid ""
 "Headings: Heading 1  Heading 2  Heading 3\n"
 "          =========  ---------  ~~~~~~~~~\n"
 "\n"
-"Horizontal rule: ---- \n"
+"Horizontal rule: ----\n"
 "\n"
-"Links: TrailingUnderscore_ `multi word with backticks`_ external_ \n"
+"Links: TrailingUnderscore_ `multi word with backticks`_ external_\n"
 "\n"
 ".. _external: http://external-site.example.org/foo/\n"
 "\n"
 "Lists: * bullets; 1., a. numbered items.\n"
 "}}}\n"
-"(!) For more help, see the \n"
+"(!) For more help, see the\n"
 "[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
 "reStructuredText Quick Reference]].\n"
 msgstr ""
@@ -1158,9 +1373,6 @@ msgstr ""
 msgid "Remember login information"
 msgstr ""
 
-msgid "Subscribe to trivial changes"
-msgstr ""
-
 msgid "Disable this account forever"
 msgstr ""
 
@@ -1170,10 +1382,7 @@ msgstr ""
 msgid "Alias-Name"
 msgstr ""
 
-msgid "Password repeat"
-msgstr ""
-
-msgid "(Only for password change or new account)"
+msgid "Jabber ID"
 msgstr ""
 
 msgid "User CSS URL"
@@ -1185,8 +1394,10 @@ msgstr ""
 msgid "Editor size"
 msgstr ""
 
-#, python-format
-msgid "Check your argument %s"
+msgid "File attachment browser"
+msgstr ""
+
+msgid "User account browser"
 msgstr ""
 
 #, python-format
@@ -1243,7 +1454,8 @@ msgstr ""
 msgid "Contents"
 msgstr ""
 
-msgid "Go To Page"
+#, python-format
+msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr ""
 
 msgid "Include system pages"
@@ -1252,16 +1464,7 @@ msgstr ""
 msgid "Exclude system pages"
 msgstr ""
 
-#, python-format
-msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
-msgstr ""
-
-#, python-format
-msgid "ERROR in regex '%s'"
-msgstr ""
-
-#, python-format
-msgid "Bad timestamp '%s'"
+msgid "Go To Page"
 msgstr ""
 
 msgid "No orphaned pages in this wiki."
@@ -1425,35 +1628,28 @@ msgid "Search Text"
 msgstr ""
 
 #, python-format
-msgid "Not supported mimetype of file: %s"
-msgstr ""
-
-msgid "Embedding of object by chosen formatter not possible"
-msgstr ""
-
-msgid "Embedded"
-msgstr ""
-
-msgid ""
-"Not enough arguments given to EmbedObject macro! Try <<EmbedObject"
-"(attachment [,width=width] [,height=height] [,alt=alternate Text])>>"
-msgstr ""
-
-#, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr ""
 
+#, python-format
 msgid ""
-"Not enough arguments given to EmbedObject macro! Try <<EmbedObject(url, "
-"url_mimetype [,width=width] [,height=height] [,alt=alternate Text])>>"
+"%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
+"missing."
 msgstr ""
 
 #, python-format
-msgid "Invalid MonthCalendar calparms \"%s\"!"
+msgid ""
+"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s=%"
+"(argument_value)s!"
 msgstr ""
 
 #, python-format
-msgid "Invalid MonthCalendar arguments \"%s\"!"
+msgid ""
+"Current configuration does not allow embedding of the file %(file)s because "
+"of its mimetype %(mimetype)s."
+msgstr ""
+
+msgid "Embedded"
 msgstr ""
 
 #, python-format
@@ -1489,6 +1685,9 @@ msgstr ""
 msgid "Bad chart type \"%s\"!"
 msgstr ""
 
+msgid "Revert"
+msgstr ""
+
 msgid "You are not allowed to revert this page!"
 msgstr ""
 
@@ -1496,6 +1695,15 @@ msgid ""
 "You were viewing the current revision of this page when you called the "
 "revert action. If you want to revert to an older revision, first view that "
 "older revision and then call revert to this (older) revision again."
+msgstr ""
+
+msgid "This page is already deleted or was never created!"
+msgstr ""
+
+msgid "Optional reason for reverting this page"
+msgstr ""
+
+msgid "Really revert this page?"
 msgstr ""
 
 #, python-format
@@ -1530,7 +1738,7 @@ msgstr ""
 msgid "The ''remoteWiki'' is unknown."
 msgstr ""
 
-msgid "A severe error occured:"
+msgid "A severe error occurred:"
 msgstr ""
 
 msgid "Synchronisation finished. Look below for the status messages."
@@ -1541,8 +1749,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Got a list of %s local and %s remote pages. This results in %s different "
-"pages over-all."
+"Got a list of %s local and %s remote pages. This results in %s pages to "
+"process."
 msgstr ""
 
 #, python-format
@@ -1629,13 +1837,57 @@ msgstr ""
 msgid "Page %s merged with conflicts."
 msgstr ""
 
-msgid "Missing password. Please enter user name and password."
+msgid ""
+"You need to manually go to your OpenID provider wiki\n"
+"and log in before you can use your OpenID. MoinMoin will\n"
+"never allow you to enter your password here.\n"
+"\n"
+"Once you have logged in, simply reload this page."
 msgstr ""
 
-msgid "Sorry, login failed."
+msgid "OpenID Trust verification"
 msgstr ""
 
-msgid "This page is already deleted or was never created!"
+#, python-format
+msgid "The site %s has asked for your identity."
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"If you approve, the site represented by the trust root below will be\n"
+"told that you control the identity URL %s. (If you are using a delegated\n"
+"identity, the site will take care of reversing the\n"
+"delegation on its own.)"
+msgstr ""
+
+msgid "Trust root"
+msgstr ""
+
+msgid "Identity URL"
+msgstr ""
+
+msgid "Remember decision"
+msgstr ""
+
+msgid "Remember this trust decision and don't ask again"
+msgstr ""
+
+msgid "Approve"
+msgstr ""
+
+msgid "Don't approve"
+msgstr ""
+
+msgid "OpenID not served"
+msgstr ""
+
+msgid ""
+"\n"
+"Unfortunately you have not created your homepage yet. Therefore,\n"
+"we cannot serve an OpenID for you. Please create your homepage first\n"
+"and then reload this page or click the button below to cancel this\n"
+"verification."
 msgstr ""
 
 #, python-format
@@ -1661,6 +1913,9 @@ msgstr ""
 
 #, python-format
 msgid "No pages like \"%s\"!"
+msgstr ""
+
+msgid "Please choose:"
 msgstr ""
 
 msgid "You must login to remove a quicklink."
@@ -1793,10 +2048,13 @@ msgstr ""
 msgid "Can't remove regular expression subscription!"
 msgstr ""
 
-msgid "Edit the subscription regular expressions in your UserPreferences."
+msgid "Edit the subscription regular expressions in your settings."
 msgstr ""
 
 msgid "You need to be subscribed to unsubscribe."
+msgstr ""
+
+msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 
 msgid "Copy all /subpages too?"
@@ -1821,6 +2079,12 @@ msgstr ""
 
 #, python-format
 msgid "(spanning %d versions)"
+msgstr ""
+
+msgid "Previous change"
+msgstr ""
+
+msgid "Next change"
 msgstr ""
 
 #, python-format
@@ -1878,13 +2142,15 @@ msgstr ""
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr ""
 
-msgid "This wiki is not enabled for mail processing."
+msgid "This wiki is not enabled for mail/Jabber processing."
 msgstr ""
 
 msgid "You must log in to use subscriptions."
 msgstr ""
 
-msgid "Add your email address in your UserPreferences to use subscriptions."
+msgid ""
+"Add your email address or Jabber ID in your user settings to use "
+"subscriptions."
 msgstr ""
 
 msgid "You are already subscribed to this page."
@@ -1927,6 +2193,9 @@ msgstr ""
 msgid "view"
 msgstr ""
 
+msgid "to previous"
+msgstr ""
+
 msgid "get"
 msgstr ""
 
@@ -1967,6 +2236,9 @@ msgid "Really delete this page?"
 msgstr ""
 
 msgid "You are not allowed to create the supplementation page."
+msgstr ""
+
+msgid "Only superuser is allowed to use this action."
 msgstr ""
 
 #, python-format
@@ -2033,6 +2305,18 @@ msgstr ""
 msgid "Click here to perform a full-text search with your search terms!"
 msgstr ""
 
+msgid "User account created! You can use this account to login now..."
+msgstr ""
+
+msgid "TextCha (required)"
+msgstr ""
+
+msgid "Create Profile"
+msgstr ""
+
+msgid "Create Account"
+msgstr ""
+
 msgid "You must login to add a quicklink."
 msgstr ""
 
@@ -2068,6 +2352,40 @@ msgid "You can't check spelling on a page you can't read."
 msgstr ""
 
 msgid "You are now logged out."
+msgstr ""
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+
+msgid "Please provide a valid email address!"
+msgstr ""
+
+msgid "If an account with this username exists, an email was sent."
+msgstr ""
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
+msgstr ""
+
+msgid "Mail me my account data"
+msgstr ""
+
+msgid "Lost password"
+msgstr ""
+
+msgid ""
+"\n"
+"== Recovering a lost password ==\n"
+"<<BR>>\n"
+"If you have forgotten your password, provide your email address and click on "
+"'''Mail me my account data'''.\n"
+"<<BR>>\n"
+"The email you get contains the encrypted password (so even if someone "
+"intercepts the mail, he won't know your REAL password). Just copy and paste "
+"it into the login mask into the password field and log in.\n"
+"After logging in you should change your password."
 msgstr ""
 
 #, python-format
@@ -2148,13 +2466,12 @@ msgstr ""
 msgid "File attachments are not allowed in this wiki!"
 msgstr ""
 
-msgid "You are not allowed to get attachments from this page."
+#, python-format
+msgid "Unsupported AttachFile sub-action: %s"
 msgstr ""
 
-msgid "You are not allowed to view attachments of this page."
-msgstr ""
-
-msgid "You are not allowed to move attachments from this page."
+#, python-format
+msgid "Attachments for \"%(pagename)s\""
 msgstr ""
 
 msgid ""
@@ -2165,49 +2482,40 @@ msgstr ""
 msgid "You are not allowed to save a drawing on this page."
 msgstr ""
 
-msgid "Move aborted!"
-msgstr ""
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr ""
-
-msgid "You are not allowed to unzip attachments of this page."
-msgstr ""
-
-msgid "You are not allowed to install files."
+#, python-format
+msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
 msgstr ""
 
 #, python-format
-msgid "Unsupported AttachFile sub-action: %s"
-msgstr ""
-
-#, python-format
-msgid "Attachments for \"%(pagename)s\""
-msgstr ""
-
-#, python-format
-msgid "Attachment '%(filename)s' already exists."
-msgstr ""
-
-#, python-format
-msgid "Attachment '%(filename)s' moved to %(page)s."
+msgid ""
+"Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/%"
+"(new_filename)s'."
 msgstr ""
 
 msgid "Nothing changed"
 msgstr ""
 
 #, python-format
-msgid "Page %(newpagename)s does not exists or you don't have enough rights."
+msgid "Page '%(new_pagename)s' does not exist or you don't have enough rights."
 msgstr ""
 
-msgid "Move aborted because empty page name"
+msgid "Move aborted!"
+msgstr ""
+
+msgid "Please use the interactive user interface to move attachments!"
+msgstr ""
+
+msgid "You are not allowed to move attachments from this page."
+msgstr ""
+
+msgid "Move aborted because new page name is empty."
 msgstr ""
 
 #, python-format
 msgid "Please use a valid filename for attachment '%(filename)s'."
 msgstr ""
 
-msgid "Move aborted because empty attachment name"
+msgid "Move aborted because new attachment name is empty."
 msgstr ""
 
 msgid "Move"
@@ -2219,8 +2527,17 @@ msgstr ""
 msgid "New attachment name"
 msgstr ""
 
+msgid "You are not allowed to get attachments from this page."
+msgstr ""
+
+msgid "You are not allowed to install files."
+msgstr ""
+
 #, python-format
 msgid "Attachment '%(filename)s' installed."
+msgstr ""
+
+msgid "You are not allowed to unzip attachments of this page."
 msgstr ""
 
 #, python-format
@@ -2268,11 +2585,11 @@ msgstr ""
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr ""
 
-#, python-format
-msgid "attachment:%(filename)s of %(pagename)s"
+msgid "You are not allowed to view attachments of this page."
 msgstr ""
 
-msgid "Filename"
+#, python-format
+msgid "attachment:%(filename)s of %(pagename)s"
 msgstr ""
 
 #, python-format
