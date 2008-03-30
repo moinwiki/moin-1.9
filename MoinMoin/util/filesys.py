@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import sys, os, shutil
+import sys, os, shutil, time
 from stat import S_ISDIR, ST_MODE, S_IMODE
 
 #############################################################################
@@ -44,6 +44,28 @@ def rename(oldname, newname):
             except OSError:
                 pass # let os.rename give us the error (if any)
     os.rename(oldname, newname)
+
+def touch(name):
+    if sys.platform == 'win32':
+        import win32file, win32con, pywintypes
+
+        access = win32file.GENERIC_WRITE
+        share = (win32file.FILE_SHARE_DELETE |
+                 win32file.FILE_SHARE_READ |
+                 win32file.FILE_SHARE_WRITE)
+        create = win32file.OPEN_EXISTING
+        mtime = time.gmtime()
+        handle = win32file.CreateFile(name, access, share, None, create,
+                                      win32file.FILE_ATTRIBUTE_NORMAL |
+                                      win32con.FILE_FLAG_BACKUP_SEMANTICS,
+                                      None)
+        try:
+            newTime = pywintypes.Time(mtime)
+            win32file.SetFileTime(handle, newTime, newTime, newTime)
+        finally:
+            win32file.CloseHandle(handle)
+    else:
+        os.utime(name, None)
 
 
 def copystat(src, dst):

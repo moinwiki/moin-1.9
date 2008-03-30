@@ -10,17 +10,14 @@
     @license: GNU GPL, see COPYING for details
 """
 
-import time, os, errno, codecs
-import sys
-if sys.platform == 'win32':
-    import win32file, win32con, pywintypes
+import sys, os, time, errno, codecs
 
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
 from MoinMoin import wikiutil, config
 from MoinMoin.Page import Page
-from MoinMoin.util import lock
+from MoinMoin.util import lock, filesys
 from MoinMoin.search.results import getSearchResults
 from MoinMoin.search.queryparser import Match, TextMatch, TitleMatch
 
@@ -207,34 +204,7 @@ class BaseIndex:
 
     def touch(self):
         """ Touch the index """
-        if sys.platform == 'win32':
-            access=win32file.GENERIC_WRITE
-            share=win32file.FILE_SHARE_DELETE | \
-                  win32file.FILE_SHARE_READ | \
-                  win32file.FILE_SHARE_WRITE
-            create=win32file.OPEN_EXISTING
-            mtime = time.gmtime()
-            try:
-                handle=win32file.CreateFile(self.dir,
-                                            access,
-                                            share,
-                                            None,
-                                            create,
-                                            win32file.FILE_ATTRIBUTE_NORMAL |
-                                            win32con.FILE_FLAG_BACKUP_SEMANTICS,
-                                            None)
-            except pywintypes.error:
-                raise error, 'open("%s") for touch failed' % self.dir
-            try:
-                newTime = pywintypes.Time(mtime)
-                win32file.SetFileTime(handle,
-                                      newTime,
-                                      newTime,
-                                      newTime)
-            finally:
-                 win32file.CloseHandle(handle)
-        else:
-            os.utime(self.dir, None)
+        filesys.touch(self.dir)
 
     def _search(self, query):
         """ Actually perfom the search (read-lock acquired)
