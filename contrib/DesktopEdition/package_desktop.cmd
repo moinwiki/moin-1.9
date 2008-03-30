@@ -46,7 +46,7 @@ if exist %build% (
 	del moin-desktop\MoinMoin\_template.py>NUL
 	del moin-desktop\wiki\data\edit-log>NUL
 	del moin-desktop\wiki\README.underlay>NUL
-	del moin-desktop\wiki\underlay.tar.bz2>NUL
+	del moin-desktop\wiki\underlay.tar>NUL
 	del moin-desktop\wiki\htdocs\index.html>NUL
 	del moin-desktop\wiki\htdocs\applets\index.html>NUL
 	

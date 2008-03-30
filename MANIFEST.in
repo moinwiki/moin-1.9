@@ -31,6 +31,6 @@ global-exclude *.pyc
 global-exclude *.pyo
 
 # we distribute a uncompressed version, no need for that:
-global-exclude underlay.tar.bz2
+global-exclude underlay.tar
 global-exclude README.underlay
 
