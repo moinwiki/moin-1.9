@@ -989,7 +989,12 @@ class QueryParser:
                     # before parsing...
                     if not item:
                         raise ValueError("Term too short")
-                    terms.append(TextSearch(item))
+                    regex = self.regex
+                    case = self.case
+                    if self.titlesearch:
+                        terms.append(TitleSearch(item, use_re=regex, case=case))
+                    else:
+                        terms.append(TextSearch(item, use_re=regex, case=case))
             elif isinstance(item, tuple):
                 negate = item[0] == M
                 title_search = self.titlesearch
