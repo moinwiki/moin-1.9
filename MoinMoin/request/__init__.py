@@ -307,7 +307,7 @@ class RequestBase(object):
                 timestamps = events.setdefault(current_action, [])
 
                 if kick_him: # ban this guy, NOW
-                    timestamps.extend([(now + self.cfg.surge_lockout_time, "!")] * (2*maxnum))
+                    timestamps.extend([(now + self.cfg.surge_lockout_time, "!")] * (2 * maxnum))
 
                 surge_detected = surge_detected or len(timestamps) > maxnum
 
