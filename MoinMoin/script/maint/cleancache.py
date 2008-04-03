@@ -43,7 +43,7 @@ General syntax: moin [options] maint cleancache
         request = self.request
 
         # clean page scope cache entries
-        keys = ['text_html', 'pagelinks', ]
+        keys = ['text_html', 'pagelinks', 'hitcounts', ]
         pages = request.rootpage.getPageList(user='')
         for pagename in pages:
             arena = Page(request, pagename)
