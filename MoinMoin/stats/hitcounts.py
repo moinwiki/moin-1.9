@@ -84,7 +84,11 @@ def get_data(pagename, request, filterpage=None):
     ratchet_time = None
     if new_date is not None:
         log.set_filter(['VIEWPAGE', 'SAVEPAGE'])
+        latest = None
         for event in log.reverse():
+            # don't use event_log.date()
+            if latest is None:
+                latest = event[0]
             event_usecs = event[0]
             if event_usecs <= cache_date:
                 break
@@ -129,7 +133,7 @@ def get_data(pagename, request, filterpage=None):
     cache_views.extend(views)
     cache_edits.extend(edits)
     if new_date is not None:
-        cache.update((new_date, cache_days, cache_views, cache_edits))
+        cache.update((latest, cache_days, cache_views, cache_edits))
 
     return cache_days, cache_views, cache_edits
 

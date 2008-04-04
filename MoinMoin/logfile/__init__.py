@@ -204,6 +204,7 @@ class LogFile:
             raise
 
     def date(self):
+        # ToDo check if we need this method
         """ Return timestamp of log file in usecs """
         try:
             mtime = os.path.getmtime(self.__filename)
