@@ -311,6 +311,17 @@ Lists: * bullets; 1., a. numbered items.
 (!) For more help, see the
 [[http://docutils.sourceforge.net/docs/user/rst/quickref.html|reStructuredText Quick Reference]].
 """),
+        'creole': _(u"""\
+ Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)>>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)>>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;
+ Horizontal Rule:: <<Verbatim(----)>>
+ Force Linebreak:: <<Verbatim(\\\\)>>
+ Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; ===== Title 5 =====.
+ Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub items.
+ Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.
+ Tables:: |= header text | cell text | more cell text |;
+
+(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.
+"""),
     }
     edit_locking = 'warn 10' # None, 'warn <timeout mins>', 'lock <timeout mins>'
     edit_ticketing = True
