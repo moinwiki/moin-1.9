@@ -315,7 +315,7 @@ Lists: * bullets; 1., a. numbered items.
  Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)>>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)>>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;
  Horizontal Rule:: <<Verbatim(----)>>
  Force Linebreak:: <<Verbatim(\\\\)>>
- Headings:: <<Verbatim("=")>> Title 1 <<Verbatim("=")>>; <<Verbatim("==")>> Title 2 <<Verbatim("==")>>; <<Verbatim("===")>> Title 3 <<Verbatim("===")>>;   <<Verbatim("====")>> Title 4 <<Verbatim("====")>>; <<Verbatim("=====")>> Title 5 <<Verbatim("=====")>>.
+ Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; ===== Title 5 =====.
  Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub items.
  Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.
  Tables:: |= header text | cell text | more cell text |;
