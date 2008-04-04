@@ -44,14 +44,14 @@ class PageHits:
     def addHitsFromLog(self, hits, cacheDate):
         """ Parse the log, add hits after cacheDate and update the cache """
         event_log = eventlog.EventLog(self.request)
-        try:
-            logDate = event_log.date()
-        except logfile.LogMissing:
-            return
+        event_log.set_filter(['VIEWPAGE'])
 
         changed = False
-        event_log.set_filter(['VIEWPAGE'])
+        # don't use event_log.date()
+        latest = None
         for event in event_log.reverse():
+            if latest is None:
+                latest = event[0]
             if event[0] <= cacheDate:
                 break
             page = event[2].get('pagename', None)
@@ -60,7 +60,7 @@ class PageHits:
                 changed = True
 
         if changed:
-            self.updateCache(logDate, hits)
+            self.updateCache(latest, hits)
 
     def updateCache(self, date, hits):
         try:
