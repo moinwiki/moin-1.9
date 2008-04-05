@@ -122,6 +122,20 @@ def execute(pagename, request):
 
     page_url = wikiutil.escape(currentpage.url(request), True)
 
+    revert_html = ""
+    if request.user.may.revert(pagename):
+        revert_html = """
+ <td style="border:0">
+  <span style="text-align:center">
+   <form action="%s" method="get">
+    <input name="action" value="revert" type="hidden">
+    <input name="rev" value="%d" type="hidden">
+    <input value="%s" type="submit"%s>
+   </form>
+  </span>
+ </td>
+ """ % (page_url, rev2, _("Revert to this revision"), u'')
+
     navigation_html = """
 <span class="diff-header">%s</span>
 <table class="diff">
@@ -136,15 +150,7 @@ def execute(pagename, request):
    </form>
   </span>
  </td>
- <td style="border:0">
-  <span style="text-align:center">
-   <form action="%s" method="get">
-    <input name="action" value="revert" type="hidden">
-    <input name="rev" value="%d" type="hidden">
-    <input value="%s" type="submit"%s>
-   </form>
-  </span>
- </td>
+ %s
  <td style="border:0">
   <span style="text-align:right">
    <form action="%s" method="get">
@@ -159,7 +165,7 @@ def execute(pagename, request):
 </table>
 """ % (title,
        page_url, oldrev - 1, oldrev, _("Previous change"), disable_prev,
-       page_url, rev2, _("Revert to this revision"), u'',
+       revert_html,
        page_url, newrev, newrev + 1, _("Next change"), disable_next, )
 
     request.write(f.rawHTML(navigation_html))
