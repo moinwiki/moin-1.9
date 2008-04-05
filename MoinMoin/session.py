@@ -5,12 +5,17 @@
     with help from a SessionHandler instance (see below.)
 
 
-    @copyright: 2007      MoinMoin:JohannesBerg
+    @copyright: 2007 MoinMoin:JohannesBerg,
+                2008 MoinMoin:ThomasWaldmann
 
     @license: GNU GPL, see COPYING for details.
 """
 
 import Cookie
+
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin import caching
 from MoinMoin.user import User
 from MoinMoin.util import random_string
@@ -101,7 +106,9 @@ class CacheSessionData(DefaultSessionData):
                                       use_pickle=True)
         try:
             self._data = self._ce.content()
+            logging.debug("loaded session data from cache entry: %r" % self._data)
             if self['expires'] <= time.time():
+                logging.debug("session expired, removing session cache entry")
                 self._ce.remove()
                 self._data = {'expires': 0}
         except caching.CacheError:
@@ -110,6 +117,7 @@ class CacheSessionData(DefaultSessionData):
     def __setitem__(self, name, value):
         self._data[name] = value
         if len(self._data) > 1 and self['expires'] > time.time():
+            logging.debug("storing %r:%r item into session cache entry" % (name, value))
             self._ce.update(self._data)
 
     def __getitem__(self, name):
@@ -119,10 +127,12 @@ class CacheSessionData(DefaultSessionData):
         return name in self._data
 
     def __delitem__(self, name):
+        old_value = self._data[name]
         del self._data[name]
         if len(self._data) <= 1:
             self._ce.remove()
         elif self['expires'] > time.time():
+            logging.debug("removing %r:%r item from session cache entry" % (name, old_value))
             self._ce.update(self._data)
 
     def get(self, name, default=None):
@@ -146,6 +156,7 @@ class CacheSessionData(DefaultSessionData):
     def cleanup(cls, request):
         cachelist = caching.get_cache_list(request, 'session', 'farm')
         tnow = time.time()
+        removed_count = 0
         for name in cachelist:
             entry = caching.CacheEntry(request, 'session', name, 'farm',
                                        use_pickle=True)
@@ -153,8 +164,10 @@ class CacheSessionData(DefaultSessionData):
                 data = entry.content()
                 if 'expires' in data and data['expires'] < tnow:
                     entry.remove()
+                    removed_count += 1
             except caching.CacheError:
                 pass
+        logging.debug("removed %d expired sessions while performing session cache cleanup" % removed_count)
     cleanup = classmethod(cleanup)
 
 
@@ -320,6 +333,7 @@ class MoinCookieSessionIDHandler(SessionIDHandler):
     def set(self, request, session_name, expires):
         """ Set moin_session cookie """
         self._set_cookie(request, session_name, expires)
+        logging.debug("setting cookie with session_name %r, expiry %r" % (session_name, expires))
 
     def get(self, request):
         session_name = None
@@ -328,6 +342,7 @@ class MoinCookieSessionIDHandler(SessionIDHandler):
             session_name = ''.join([c for c in session_name
                                     if c in self._SESSION_NAME_CHARS])
             session_name = session_name[:self._SESSION_NAME_LEN]
+            logging.debug("got cookie with session_name %r" % session_name)
         return session_name
 
 
@@ -371,6 +386,7 @@ class DefaultSessionHandler(SessionHandler):
         user_obj = None
         session_name = session_id_handler.get(request)
         if session_name:
+            logging.debug("starting session (reusing session_name %r)" % session_name)
             sessiondata = self.dataclass(request, session_name)
             sessiondata.is_new = False
             sessiondata.is_stored = True
@@ -395,11 +411,13 @@ class DefaultSessionHandler(SessionHandler):
                 sessiondata.is_stored = store
         else:
             session_name = session_id_handler.generate_new_id(request)
+            logging.debug("starting session (new session_name %r)" % session_name)
             store = hasattr(request.cfg, 'anonymous_session_lifetime')
             sessiondata = self.dataclass(request, session_name)
             sessiondata.is_new = True
             sessiondata.is_stored = store
             request.session = sessiondata
+        logging.debug("session started for user %r" % user_obj)
         return user_obj
 
     def after_auth(self, request, session_id_handler, user_obj):
@@ -412,6 +430,7 @@ class DefaultSessionHandler(SessionHandler):
             expires = time.time() + lifetime
             session_id_handler.set(request, session.name, expires)
             request.session.set_expiry(expires)
+            logging.debug("after auth: storing valid user into session: %r" % user_obj.name)
         else:
             if 'user.id' in session:
                 session.delete()
@@ -420,8 +439,10 @@ class DefaultSessionHandler(SessionHandler):
                 expires = time.time() + lifetime
                 session_id_handler.set(request, session.name, expires)
                 request.session.set_expiry(expires)
+                logging.debug("after auth: no valid user, anon session: %r" % session.name)
             else:
                 session.delete()
+                logging.debug("after auth: no valid user, no anon session")
 
     def finish(self, request, session_id_handler, user_obj):
         # every once a while, clean up deleted sessions:

@@ -201,6 +201,7 @@ class BaseAuth:
         return user_obj, True
     def logout(self, request, user_obj, **kw):
         if self.name and user_obj and user_obj.auth_method == self.name:
+            logging.debug("%s: logout - invalidating user %r" % (self.name, user_obj.name))
             user_obj.valid = False
         return user_obj, True
     def login_hint(self, request):
@@ -208,9 +209,8 @@ class BaseAuth:
 
 class MoinLogin(BaseAuth):
     """ handle login from moin login form """
-    def __init__(self, verbose=False):
+    def __init__(self):
         BaseAuth.__init__(self)
-        self.verbose = verbose
 
     login_inputs = ['username', 'password']
     name = 'moin_login'
@@ -229,19 +229,17 @@ class MoinLogin(BaseAuth):
 
         _ = request.getText
 
-        verbose = self.verbose
-
-        if verbose: logging.info("performing login action")
+        logging.debug("%s: performing login action" % self.name)
 
         if username and not password:
             return ContinueLogin(user_obj, _('Missing password. Please enter user name and password.'))
 
         u = user.User(request, name=username, password=password, auth_method=self.name)
         if u.valid:
-            if verbose: logging.info("got valid user %r" % u.name)
+            logging.debug("%s: successfully authenticated user %r (valid)" % (self.name, u.name))
             return ContinueLogin(u)
         else:
-            if verbose: logging.info("login not valid, previous valid=%d." % user_obj.valid)
+            logging.debug("%s: could not authenticate user %r (not valid)" % (self.name, username))
             return ContinueLogin(user_obj, _("Invalid username or password."))
 
     def login_hint(self, request):
