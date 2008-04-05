@@ -70,7 +70,6 @@ class LDAPAuth(BaseAuth):
         email_callback=None, # called to make up email address
         coding='utf-8', # coding used for ldap queries and result values
         timeout=10, # how long we wait for the ldap server [s]
-        verbose=True, # if True, put lots of LDAP debug info into the log
         start_tls=0, # 0 = No, 1 = Try, 2 = Required
         tls_cacertdir='',
         tls_cacertfile='',
@@ -95,7 +94,6 @@ class LDAPAuth(BaseAuth):
 
         self.coding = coding
         self.timeout = timeout
-        self.verbose = verbose
 
         self.start_tls = start_tls
         self.tls_cacertdir = tls_cacertdir
@@ -112,7 +110,6 @@ class LDAPAuth(BaseAuth):
         password = kw.get('password')
         _ = request.getText
 
-        verbose = self.verbose
 
         # we require non-empty password as ldap bind does a anon (not password
         # protected) bind if the password is empty and SUCCEEDS!
@@ -124,7 +121,7 @@ class LDAPAuth(BaseAuth):
                 u = None
                 dn = None
                 coding = self.coding
-                if verbose: logging.info("Setting misc. ldap options...")
+                logging.debug("Setting misc. ldap options...")
                 ldap.set_option(ldap.OPT_PROTOCOL_VERSION, ldap.VERSION3) # ldap v2 is outdated
                 ldap.set_option(ldap.OPT_REFERRALS, self.referrals)
                 ldap.set_option(ldap.OPT_NETWORK_TIMEOUT, self.timeout)
@@ -143,28 +140,28 @@ class LDAPAuth(BaseAuth):
                             ldap.set_option(option, value)
 
                 server = self.server_uri
-                if verbose: logging.info("Trying to initialize %r." % server)
+                logging.debug("Trying to initialize %r." % server)
                 l = ldap.initialize(server)
-                if verbose: logging.info("Connected to LDAP server %r." % server)
+                logging.debug("Connected to LDAP server %r." % server)
 
                 if self.start_tls and server.startswith('ldap:'):
-                    if verbose: logging.info("Trying to start TLS to %r." % server)
+                    logging.debug("Trying to start TLS to %r." % server)
                     try:
                         l.start_tls_s()
-                        if verbose: logging.info("Using TLS to %r." % server)
+                        logging.debug("Using TLS to %r." % server)
                     except (ldap.SERVER_DOWN, ldap.CONNECT_ERROR), err:
-                        if verbose: logging.info("Couldn't establish TLS to %r (err: %s)." % (server, str(err)))
+                        logging.warning("Couldn't establish TLS to %r (err: %s)." % (server, str(err)))
                         raise
 
                 # you can use %(username)s and %(password)s here to get the stuff entered in the form:
                 binddn = self.bind_dn % locals()
                 bindpw = self.bind_pw % locals()
                 l.simple_bind_s(binddn.encode(coding), bindpw.encode(coding))
-                if verbose: logging.info("Bound with binddn %r" % binddn)
+                logging.debug("Bound with binddn %r" % binddn)
 
                 # you can use %(username)s here to get the stuff entered in the form:
                 filterstr = self.search_filter % locals()
-                if verbose: logging.info("Searching %r" % filterstr)
+                logging.debug("Searching %r" % filterstr)
                 attrs = [getattr(self, attr) for attr in [
                                          'email_attribute',
                                          'aliasname_attribute',
@@ -175,25 +172,24 @@ class LDAPAuth(BaseAuth):
                                      attrlist=attrs, timeout=self.timeout)
                 # we remove entries with dn == None to get the real result list:
                 lusers = [(dn, ldap_dict) for dn, ldap_dict in lusers if dn is not None]
-                if verbose:
-                    for dn, ldap_dict in lusers:
-                        logging.info("dn:%r" % dn)
-                        for key, val in ldap_dict.items():
-                            logging.info("    %r: %r" % (key, val))
+                for dn, ldap_dict in lusers:
+                    logging.debug("dn:%r" % dn)
+                    for key, val in ldap_dict.items():
+                        logging.debug("    %r: %r" % (key, val))
 
                 result_length = len(lusers)
                 if result_length != 1:
                     if result_length > 1:
-                        logging.info("Search found more than one (%d) matches for %r." % (result_length, filterstr))
+                        logging.debug("Search found more than one (%d) matches for %r." % (result_length, filterstr))
                     if result_length == 0:
-                        if verbose: logging.info("Search found no matches for %r." % (filterstr, ))
+                        logging.debug("Search found no matches for %r." % (filterstr, ))
                     return CancelLogin(_("Invalid username or password."))
 
                 dn, ldap_dict = lusers[0]
                 if not self.bind_once:
-                    if verbose: logging.info("DN found is %r, trying to bind with pw" % dn)
+                    logging.debug("DN found is %r, trying to bind with pw" % dn)
                     l.simple_bind_s(dn, password.encode(coding))
-                    if verbose: logging.info("Bound with dn %r (username: %r)" % (dn, username))
+                    logging.debug("Bound with dn %r (username: %r)" % (dn, username))
 
                 if self.email_callback is None:
                     if self.email_attribute:
@@ -225,10 +221,10 @@ class LDAPAuth(BaseAuth):
                 u.name = username
                 u.aliasname = aliasname
                 u.remember_me = 0 # 0 enforces cookie_lifetime config param
-                if verbose: logging.info("creating userprefs with name %r email %r alias %r" % (username, email, aliasname))
+                logging.debug("creating userprefs with name %r email %r alias %r" % (username, email, aliasname))
 
             except ldap.INVALID_CREDENTIALS, err:
-                logging.info("invalid credentials (wrong password?) for dn %r (username: %r)" % (dn, username))
+                logging.debug("invalid credentials (wrong password?) for dn %r (username: %r)" % (dn, username))
                 return CancelLogin(_("Invalid username or password."))
 
             if u:

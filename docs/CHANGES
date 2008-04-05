@@ -73,8 +73,9 @@ Version 1.7.current:
     * moin now logs the path from where it loaded its configuration(s)
     * cfg.trusted_auth_methods is a list of auth methods that put an
       authenticated user into the "Trusted" ACL group.
-    * new authentication plugin system
-    * new session handling system
+    * new authentication plugin system, see HelpOnAuthentication
+    * new session handling system (no moin_session any more, now done
+      internally and automatically), see HelpOnSessions for details.
     * new preferences plugin system, see MoinMoin/userprefs/__init__.py
     * new notification system with an optional jabber notification bot
     * jabber notification support; for more information see:
