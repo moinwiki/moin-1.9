@@ -968,6 +968,11 @@ var search_hint = "%(search_hint)s";
                     data['action'] = 'show'
                     data['disabled'] = disabled
 
+            # revert action enabled only if user can revert
+            if action == 'revert' and not request.user.may.revert(page.page_name):
+                data['action'] = 'show'
+                data['disabled'] = disabled
+
             # Special menu items. Without javascript, executing will
             # just return to the page.
             elif action.startswith('__'):
