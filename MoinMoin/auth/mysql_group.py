@@ -21,30 +21,27 @@ class MysqlGroupAuth(BaseAuth):
     We require an already-authenticated user_obj and
     check that the user is part of an authorized group.
     """
-    def __init__(self, host, user, passwd, dbname, query, verbose=False):
+    def __init__(self, host, user, passwd, dbname, query):
         BaseAuth.__init__(self)
         self.mysql_group_query = query
         self.host = host
         self.user = user
         self.passwd = passwd
         self.dbname = dbname
-        self.verbose = verbose
 
     def login(self, request, user_obj, **kw):
         _ = request.getText
 
-        verbose = self.verbose
-
-        if verbose: logging.info("got: user_obj=%r" % user_obj)
+        logging.debug("got: user_obj=%r" % user_obj)
 
         if not (user_obj and user_obj.valid):
             # No other method succeeded, so we cannot authorize
             # but maybe some following auth methods can still "fix" that.
-            if verbose: logging.info("did not get valid user from previous auth method")
+            logging.debug("did not get valid user from previous auth method")
             return ContinueLogin(user_obj)
 
         # Got a valid user object - we can do stuff!
-        if verbose: logging.info("got valid user (name=%s) from previous auth method" % user_obj.auth_username)
+        logging.debug("got valid user (name=%r) from previous auth method" % user_obj.auth_username)
 
         # XXX Check auth_username for dodgy chars (should be none as it is authenticated, but...)
         # shouldn't really be necessary since execute() quotes them all...
@@ -54,7 +51,7 @@ class MysqlGroupAuth(BaseAuth):
             m = MySQLdb.connect(host=self.host, user=self.user,
                                 passwd=self.passwd, db=self.dbname)
         except:
-            logging.exception("authorization failed due to exception connecting to DB, traceback follows...")
+            logging.exception("authorization failed due to exception when connecting to DB, traceback follows...")
             return CancelLogin(_('Failed to connect to database.'))
 
         c = m.cursor()
@@ -62,10 +59,10 @@ class MysqlGroupAuth(BaseAuth):
         results = c.fetchall()
         if results:
             # Checked out OK
-            if verbose: logging.info("got %d results -- authorized!" % len(results))
+            logging.debug("got %d results -- authorized!" % len(results))
             return ContinueLogin(user_obj)
         else:
-            if verbose: logging.info("did not get match from DB -- not authorized")
+            logging.debug("did not get match from DB -- not authorized")
             return CancelLogin(_("Invalid username or password."))
 
     # XXX do we really want this? could it be enough to check when they log in?

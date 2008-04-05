@@ -7,8 +7,6 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-verbose = False
-
 import xmlrpclib
 
 from MoinMoin import log
@@ -33,21 +31,21 @@ class InterwikiAuth(BaseAuth):
         if not username or not password:
             return ContinueLogin(user_obj)
 
-        if verbose: logging.info("trying to auth %r" % username)
+        logging.debug("trying to authenticate %r" % username)
         wikiname, username = username.split(' ', 1) # XXX Hack because ':' is not allowed in name field
         wikitag, wikiurl, name, err = wikiutil.resolve_interwiki(request, wikiname, username)
 
-        if verbose: logging.info("resolve wiki returned: %r %r %r %r" % (wikitag, wikiurl, name, err))
+        logging.debug("resolve wiki returned: %r %r %r %r" % (wikitag, wikiurl, name, err))
         if err or wikitag not in self.trusted_wikis:
             return ContinueLogin(user_obj)
 
         homewiki = xmlrpclib.ServerProxy(wikiurl + "?action=xmlrpc2")
         auth_token = homewiki.getAuthToken(name, password)
         if not auth_token:
-            if verbose: logging.info("%r wiki did not return an auth token." % wikitag)
+            logging.debug("%r wiki did not return an auth token." % wikitag)
             return ContinueLogin(user_obj)
 
-        if verbose: logging.info("successfully got an auth token for %r. trying to get user profile data..." % name)
+        logging.debug("successfully got an auth token for %r. trying to get user profile data..." % name)
 
         mc = xmlrpclib.MultiCall(homewiki)
         mc.applyAuthToken(auth_token)
@@ -55,14 +53,14 @@ class InterwikiAuth(BaseAuth):
         result, account_data = mc()
 
         if result != "SUCCESS":
-            if verbose: logging.info("%r wiki did not accept auth token." % wikitag)
+            logging.debug("%r wiki did not accept auth token." % wikitag)
             return ContinueLogin(None)
 
         if not account_data:
-            if verbose: logging.info("%r wiki did not return a user profile." % wikitag)
+            logging.debug("%r wiki did not return a user profile." % wikitag)
             return ContinueLogin(None)
 
-        if verbose: logging.info("%r wiki returned a user profile." % wikitag)
+        logging.debug("%r wiki returned a user profile." % wikitag)
 
         # TODO: check remote auth_attribs
         u = user.User(request, name=name, auth_method=self.name, auth_attribs=('name', 'aliasname', 'password', 'email', ))
@@ -71,6 +69,6 @@ class InterwikiAuth(BaseAuth):
                 setattr(u, key, value)
         u.valid = True
         u.create_or_update(True)
-        if verbose: logging.info("successful interwiki auth for %r" % name)
+        logging.debug("successful interwiki auth for %r" % name)
         return ContinueLogin(u)
 
