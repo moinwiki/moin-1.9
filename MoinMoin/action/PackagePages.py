@@ -103,14 +103,15 @@ class PackagePages:
         raise ActionError
 
     def makeform(self, error=""):
-        """ Display a rename page form
+        """ Display a package page form
 
-        The form might contain an error that happened when trying to rename.
+        The form might contain an error that happened when package file was not given.
         """
         from MoinMoin.widget.dialog import Dialog
         _ = self.request.getText
 
-        error = u'<p class="error">%s</p>\n' % error
+        if error:
+            error = u'<p class="error">%s</p>\n' % error
 
         d = {
             'baseurl': self.request.getScriptname(),
