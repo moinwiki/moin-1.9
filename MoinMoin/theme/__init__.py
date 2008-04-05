@@ -973,9 +973,24 @@ var search_hint = "%(search_hint)s";
                 data['action'] = 'show'
                 data['disabled'] = disabled
 
+            # SubscribeUser action enabled only if user has admin rights
+            if action == 'SubscribeUser' and not request.user.may.admin(page.page_name):
+                data['action'] = 'show'
+                data['disabled'] = disabled
+
+            # PackagePages action only if user has write rights
+            if action == 'PackagePages' and not request.user.may.write(page.page_name):
+                data['action'] = 'show'
+                data['disabled'] = disabled
+
+            # Despam action enabled only for superusers
+            if action == 'Despam' and not request.user.isSuperUser():
+                data['action'] = 'show'
+                data['disabled'] = disabled
+
             # Special menu items. Without javascript, executing will
             # just return to the page.
-            elif action.startswith('__'):
+            if action.startswith('__'):
                 data['action'] = 'show'
 
             # Actions which are not available for this wiki, user or page
