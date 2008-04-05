@@ -134,7 +134,7 @@ def execute(pagename, request):
    </form>
   </span>
  </td>
- """ % (page_url, rev2, _("Revert to this revision"), u'')
+ """ % (page_url, rev2, _("Revert to this revision"), disable_next)
 
     navigation_html = """
 <span class="diff-header">%s</span>
