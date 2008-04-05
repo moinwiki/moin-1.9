@@ -1,15 +1,26 @@
-    # TODO: needs to get fixed for 1.7 auth objects
+    # This is a sample configuration snippet that shows how to use the smb
+    # mount plugin. SMBMount is only useful for very special applications
+    # (and requires more code to be useful).
+    # If you don't understand it, you don't need it.
 
-    smb_server = "smb.example.org" # smb server name
-    smb_domain = 'DOMAIN' # smb domain name
-    smb_share = 'FILESHARE' # smb share we mount
-    smb_mountpoint = u'/mnt/wiki/%(username)s' # where we mount the smb filesystem
+    from MoinMoin.auth.smb_mount import SMBMount
+
+    smbmounter = SMBMount(
+        # you may remove default values if you are happy with them
+        # see man mount.cifs for details
+        server='smb.example.org', # (no default) mount.cifs //server/share
+        share='FILESHARE', # (no default) mount.cifs //server/share
+        mountpoint_fn=lambda username: u'/mnt/wiki/%s' % username, # (no default) function of username to determine the mountpoint
+        dir_user='www-data', # (no default) username to get the uid that is used for mount.cifs -o uid=...
+        domain='DOMAIN', # (no default) mount.cifs -o domain=...
+        dir_mode='0700', # (default) mount.cifs -o dir_mode=...
+        file_mode='0600', # (default) mount.cifs -o file_mode=...
+        iocharset='utf-8', # (default) mount.cifs -o iocharset=... (try 'iso8859-1' if default does not work)
+        coding='utf-8', # (default) encoding used for username/password/cmdline (try 'iso8859-1' if default does not work)
+        log='/dev/null', # (default) logfile for mount.cifs output
+    )
+
+    auth = [....., smbmounter] # you need a real auth object in the list before smbmounter
+
     smb_display_prefix = u"S:" # where //server/share is usually mounted for your windows users (display purposes only)
-    smb_dir_user = "wwwrun" # owner of the mounted directories
-    smb_dir_mode = "0700" # mode of the mounted directories
-    smb_file_mode = "0600" # mode of the mounted files
-    smb_iocharset = "iso8859-1" # "UTF-8" > cannot access needed shared library!
-    smb_coding = 'iso8859-1' # coding used for encoding the commandline for the mount command
-    smb_verbose = True # if True, put SMB debug info into log
-    smb_log = "/dev/null" # where we redirect mount command output to
 
