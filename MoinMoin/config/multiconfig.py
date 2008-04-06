@@ -285,8 +285,8 @@ class DefaultConfig(object):
 
     edit_bar = ['Edit', 'Comments', 'Discussion', 'Info', 'Subscribe', 'Quicklink', 'Attachments', 'ActionsMenu']
     editor_default = 'text' # which editor is called when nothing is specified
+    editor_force = False # force using the default editor
     editor_ui = 'freechoice' # which editor links are shown on user interface
-    editor_force = False
     editor_quickhelp = {
         # editor markup hints quickhelp
         # MUST be in wiki markup, even if the help is not for the wiki parser!
@@ -341,6 +341,8 @@ Lists: * bullets; 1., a. numbered items.
                #   if cfg.hacks.get('feature', False): <doit>
                # A non-existing hack key should ever mean False, None, "", [] or {}!
 
+    history_count = (100, 200) # (default_revisions_shown, max_revisions_shown)
+
     hosts_deny = []
 
     html_head = ''
@@ -349,8 +351,6 @@ Lists: * bullets; 1., a. numbered items.
     html_head_index   = '''<meta name="robots" content="index,follow">\n'''
     html_head_normal  = '''<meta name="robots" content="index,nofollow">\n'''
     html_pagetitle = None
-
-    history_count = (100, 200) # (default_revisions_shown, max_revisions_shown)
 
     interwikiname = None # our own interwikiname. choose wisely and never change!
     interwiki_preferred = [] # list of wiki names to show at top of interwiki list
@@ -514,11 +514,10 @@ Lists: * bullets; 1., a. numbered items.
     refresh = None # (minimum_delay, type), e.g.: (2, 'internal')
     rss_cache = 60 # suggested caching time for RecentChanges RSS, in seconds
 
-    sistersites = [
-        #('Self', 'http://localhost:8080/?action=sisterpages'),
-        #('EmacsWiki', 'http://www.emacswiki.org/cgi-bin/test?action=sisterpages'),
-        #('JspWiki', 'http://www.jspwiki.org/SisterSites.jsp'),
-    ] # list of (sistersitename, sisterpagelistfetchurl)
+    search_results_per_page = 10
+
+    session_handler = session.DefaultSessionHandler()
+    session_id_handler = session.MoinCookieSessionIDHandler()
 
     shared_intermap = None # can be string or list of strings (filenames)
 
@@ -529,7 +528,15 @@ Lists: * bullets; 1., a. numbered items.
     show_timings = False # show some timing stats (usually in the footer)
     show_version = False # show moin version info / (C) (depends on theme)
 
+    sistersites = [
+        #('Self', 'http://localhost:8080/?action=sisterpages'),
+        #('EmacsWiki', 'http://www.emacswiki.org/cgi-bin/test?action=sisterpages'),
+        #('JspWiki', 'http://www.jspwiki.org/SisterSites.jsp'),
+    ] # list of (sistersitename, sisterpagelistfetchurl)
+
     siteid = 'default'
+    sitename = u'Untitled Wiki' # Wiki identity
+
     stylesheets = [] # list of tuples (media, csshref) to insert after theme css, before user css
 
     _subscribable_events = None # A list of event types that user can subscribe to
@@ -543,13 +550,6 @@ Lists: * bullets; 1., a. numbered items.
         FileAttachedEvent.__name__,
     ]
     jabber_subscribed_events_default = []
-
-    search_results_per_page = 10
-
-    session_handler = session.DefaultSessionHandler()
-    session_id_handler = session.MoinCookieSessionIDHandler()
-
-    sitename = u'Untitled Wiki' # Wiki identity
 
     superuser = [] # list of unicode user names that have super powers :)
 
@@ -584,10 +584,6 @@ Lists: * bullets; 1., a. numbered items.
     trail_size = 5 # number of recently visited pagenames shown in the trail display
     tz_offset = 0.0 # default time zone offset in hours from UTC
 
-    user_autocreate = False # do we auto-create user profiles
-    user_email_unique = True # do we check whether a user's email is unique?
-    user_jid_unique = True # do we check whether a user's email is unique?
-
     # a regex of HTTP_USER_AGENTS that should be excluded from logging
     # and receive a FORBIDDEN for anything except viewing a page
     # list must not contain 'java' because of twikidraw wanting to save drawing uses this useragent
@@ -595,6 +591,12 @@ Lists: * bullets; 1., a. numbered items.
                   'intelix|jeeves|larbin|leech|libwww-perl|linkbot|linkmap|linkwalk|litefinder|mercator|'
                   'microsoft.url.control|mirror| mj12bot|msnbot|msrbot|neomo|nutbot|omniexplorer|puf|robot|scooter|seekbot|'
                   'sherlock|slurp|sitecheck|snoopy|spider|teleport|twiceler|voilabot|voyager|webreaper|wget|yeti')
+
+    unzip_single_file_size = 2.0 * 1000 ** 2
+    unzip_attachments_space = 200.0 * 1000 ** 2
+    unzip_attachments_count = 101 # 1 zip file + 100 files contained in it
+
+    url_mappings = {}
 
     # url_prefix is DEPRECATED and not used any more by the code.
     # it confused many people by its name and default value of '/wiki' to the
@@ -616,10 +618,14 @@ Lists: * bullets; 1., a. numbered items.
     #url_prefix_action = 'action' # no leading or trailing '/'
     url_prefix_action = None # compatiblity
 
-    url_mappings = {}
-
     # allow disabling certain userpreferences plugins
     userprefs_disabled = []
+
+    user_autocreate = False # do we auto-create user profiles
+    user_email_unique = True # do we check whether a user's email is unique?
+    user_jid_unique = True # do we check whether a user's email is unique?
+
+    user_homewiki = 'Self' # interwiki name for where user homepages are located
 
     user_checkbox_fields = [
         ('mailto_author', lambda _: _('Publish my email (not my wiki homepage) in author info')),
@@ -692,12 +698,6 @@ Lists: * bullets; 1., a. numbered items.
 
     # attributes we do NOT save to the userpref file
     user_transient_fields = ['id', 'valid', 'may', 'auth_username', 'password', 'password2', 'auth_method', 'auth_attribs', ]
-
-    user_homewiki = 'Self' # interwiki name for where user homepages are located
-
-    unzip_single_file_size = 2.0 * 1000 ** 2
-    unzip_attachments_space = 200.0 * 1000 ** 2
-    unzip_attachments_count = 101 # 1 zip file + 100 files contained in it
 
     xapian_search = False
     xapian_index_dir = None
