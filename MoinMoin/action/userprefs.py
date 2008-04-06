@@ -18,7 +18,7 @@ def _handle_submission(request):
     _ = request.getText
     sub = request.form.get('handler', [None])[0]
 
-    if sub in request.cfg.disabled_userprefs:
+    if sub in request.cfg.userprefs_disabled:
         return None
 
     try:
@@ -42,7 +42,7 @@ def _create_prefs_page(request, sel=None):
     items = html.UL()
     ret.append(items)
     for sub in plugins:
-        if sub in request.cfg.disabled_userprefs:
+        if sub in request.cfg.userprefs_disabled:
             continue
         cls = wikiutil.importPlugin(request.cfg, 'userprefs', sub, 'Settings')
         obj = cls(request)
@@ -65,7 +65,7 @@ def _create_page(request, cancel=False):
 
     sub = request.form.get('sub', [''])[0]
     cls = None
-    if sub and not sub in request.cfg.disabled_userprefs:
+    if sub and sub not in request.cfg.userprefs_disabled:
         try:
             cls = wikiutil.importPlugin(request.cfg, 'userprefs', sub, 'Settings')
         except wikiutil.PluginMissingError:

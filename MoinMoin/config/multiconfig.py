@@ -217,28 +217,34 @@ class CacheClass:
 
 
 class DefaultConfig(object):
-    """ default config values """
+    """ default config values
+    
+        When adding new config attributes, PLEASE use a name with the TOPIC as prefix,
+        so it will sort naturally. E.g. use "actions_excluded", not "excluded_actions".
 
-    # setting DesktopEdition = True gives all local users special powers - ONLY use for MMDE style usage!
-    DesktopEdition = False
+        Also, please keep it (roughly) sorted (except if you have good reasons to group otherwise).
+    """
 
+    DesktopEdition = False # True gives all local users special powers - ONLY use for MMDE style usage!
+
+    SecurityPolicy = None
+
+    acl_hierarchic = False # True to use hierarchical ACLs
     # All acl_rights_* lines must use unicode!
     acl_rights_default = u"Trusted:read,write,delete,revert Known:read,write,delete,revert All:read,write"
     acl_rights_before = u""
     acl_rights_after = u""
     acl_rights_valid = ['read', 'write', 'delete', 'revert', 'admin']
-    acl_hierarchic = False
 
     actions_excluded = ['xmlrpc'] # ['DeletePage', 'AttachFile', 'RenamePage', 'test', ]
     allow_xslt = False
     antispam_master_url = "http://master.moinmo.in/?action=xmlrpc2"
+
     auth = [authmodule.MoinLogin()]
     # default to http and xmlrpc_applytoken to get old semantics
     # xmlrpc_applytoken shall be removed once that code is changed
     # to have proper session handling and use request.handle_auth()
-    trusted_auth_methods = ['http', 'xmlrpc_applytoken']
-    session_handler = session.DefaultSessionHandler()
-    session_id_handler = session.MoinCookieSessionIDHandler()
+    auth_methods_trusted = ['http', 'xmlrpc_applytoken']
 
     backup_compression = 'gz'
     backup_users = []
@@ -346,31 +352,34 @@ Lists: * bullets; 1., a. numbered items.
 
     history_count = (100, 200) # (default_revisions_shown, max_revisions_shown)
 
+    interwikiname = None # our own interwikiname. choose wisely and never change!
     interwiki_preferred = [] # list of wiki names to show at top of interwiki list
 
     language_default = 'en'
     language_ignore_browser = False # ignore browser settings, use language_default
                                     # or user prefs
 
+    logo_string = None # can be either just some text or a piece of html shown as "logo"
+
     log_reverse_dns_lookups = True  # if we do reverse dns lookups for logging hostnames
                                     # instead of just IPs
-    log_timing = False              # update <data_dir>/timing.log?
+    log_timing = False # log infos about timing of actions, good to analyze load conditions
 
-    mail_login = None # or "user pwd" if you need to use SMTP AUTH
-    mail_sendmail = None # "/usr/sbin/sendmail -t -i" to not use SMTP, but sendmail
-    mail_smarthost = None
     mail_from = None # u'Juergen Wiki <noreply@jhwiki.org>'
+    mail_login = None # "user pwd" if you need to use SMTP AUTH when using your mail server
+    mail_smarthost = None # your SMTP mail server
+    mail_sendmail = None # "/usr/sbin/sendmail -t -i" to not use SMTP, but sendmail
 
+    mail_import_secret = "" # a shared secret also known to the mail importer xmlrpc script
     mail_import_subpage_template = u"$from-$date-$subject" # used for mail import
     mail_import_pagename_search = ['subject', 'to', ] # where to look for target pagename (and in which order)
     mail_import_pagename_envelope = u"%s" # use u"+ %s/" to add "+ " and "/" automatically
     mail_import_pagename_regex = r'\[\[([^\]]*)\]\]' # how to find/extract the pagename from the subject
     mail_import_wiki_addrs = [] # the e-mail addresses for e-mails that should go into the wiki
-    mail_import_secret = ""
 
     # some dangerous mimetypes (we don't use "content-disposition: inline" for them when a user
     # downloads such attachments, because the browser might execute e.g. Javascript contained
-    # in the HTML and steal your moin cookie or do other nasty stuff)
+    # in the HTML and steal your moin session cookie or do other nasty stuff)
     mimetypes_xss_protect = [
         'text/html',
         'application/x-shockwave-flash',
@@ -401,7 +410,8 @@ Lists: * bullets; 1., a. numbered items.
 
     navi_bar = [u'RecentChanges', u'FindPage', u'HelpContents', ]
     nonexist_qm = False
-    notification_bot_uri = None
+
+    notification_bot_uri = None # uri of the jabber bot
 
     # OpenID server support
     openid_server_enabled = False
@@ -422,9 +432,10 @@ Lists: * bullets; 1., a. numbered items.
         # if you don't need/want to check the html output, feel free to remove this one:
         '<a href="http://validator.w3.org/check?uri=referer" title="Click here to validate this page.">Valid HTML 4.01</a>',
         ]
+
+    # you can put some pieces of html at specific places into the theme output:
     page_footer1 = ''
     page_footer2 = ''
-
     page_header1 = ''
     page_header2 = ''
 
@@ -499,22 +510,28 @@ Lists: * bullets; 1., a. numbered items.
     password_checker = staticmethod(password_checker)
 
     quicklinks_default = [] # preload user quicklinks with this page list
+
     refresh = None # (minimum_delay, type), e.g.: (2, 'internal')
     rss_cache = 60 # suggested caching time for RecentChanges RSS, in seconds
+
     sistersites = [
         #('Self', 'http://localhost:8080/?action=sisterpages'),
         #('EmacsWiki', 'http://www.emacswiki.org/cgi-bin/test?action=sisterpages'),
         #('JspWiki', 'http://www.jspwiki.org/SisterSites.jsp'),
     ] # list of (sistersitename, sisterpagelistfetchurl)
+
     shared_intermap = None # can be string or list of strings (filenames)
-    show_hosts = True
-    show_interwiki = False
-    show_names = True
-    show_section_numbers = 0
-    show_timings = False
-    show_version = False
+
+    show_hosts = True # show hostnames on RecentChanges / info/history action
+    show_interwiki = False # show our interwiki name (usually in front of the page name)
+    show_names = True # show editor names on RecentChanges / info/history action
+    show_section_numbers = 0 # enumerate sections (headlines) by default?
+    show_timings = False # show some timing stats (usually in the footer)
+    show_version = False # show moin version info / (C) (depends on theme)
+
     siteid = 'default'
     stylesheets = [] # list of tuples (media, csshref) to insert after theme css, before user css
+
     _subscribable_events = None # A list of event types that user can subscribe to
     subscribed_pages_default = [] # preload user subscribed pages with this page list
     email_subscribed_events_default = [
@@ -526,10 +543,20 @@ Lists: * bullets; 1., a. numbered items.
         FileAttachedEvent.__name__,
     ]
     jabber_subscribed_events_default = []
+
+    search_results_per_page = 10
+
+    session_handler = session.DefaultSessionHandler()
+    session_id_handler = session.MoinCookieSessionIDHandler()
+
+    sitename = u'Untitled Wiki' # Wiki identity
+
     superuser = [] # list of unicode user names that have super powers :)
-    supplementation_page = False
-    supplementation_page_name = u'Discussion'
-    supplementation_page_template = u'DiscussionTemplate'
+
+    supplementation_page = False # use supplementation pages (show a link in the theme)?
+    supplementation_page_name = u'Discussion' # name of suppl. subpage
+    supplementation_page_template = u'DiscussionTemplate' # name of template used to create suppl. pages
+
     surge_action_limits = {# allow max. <count> <action> requests per <dt> secs
         # action: (count, dt)
         'all': (30, 30),
@@ -545,16 +572,16 @@ Lists: * bullets; 1., a. numbered items.
     }
     surge_lockout_time = 3600 # secs you get locked out when you ignore warnings
 
-    textchas = None
+    textchas = None # a data structure with site-specific questions/answers, see HelpOnTextChas
     textchas_disabled_group = None # e.g. u'NoTextChasGroup' if you are a member of this group, you don't get textchas
 
     theme_default = 'modern'
     theme_force = False
 
-    traceback_show = 1
-    traceback_log_dir = None
+    traceback_show = True # if True, tracebacks are displayed in the web browser
+    traceback_log_dir = None # if set to a directory path, tracebacks are written to files there
 
-    trail_size = 5
+    trail_size = 5 # number of recently visited pagenames shown in the trail display
     tz_offset = 0.0 # default time zone offset in hours from UTC
 
     user_autocreate = False # do we auto-create user profiles
@@ -568,9 +595,6 @@ Lists: * bullets; 1., a. numbered items.
                   'intelix|jeeves|larbin|leech|libwww-perl|linkbot|linkmap|linkwalk|litefinder|mercator|'
                   'microsoft.url.control|mirror| mj12bot|msnbot|msrbot|neomo|nutbot|omniexplorer|puf|robot|scooter|seekbot|'
                   'sherlock|slurp|sitecheck|snoopy|spider|teleport|twiceler|voilabot|voyager|webreaper|wget|yeti')
-
-    # Wiki identity
-    sitename = u'Untitled Wiki'
 
     # url_prefix is DEPRECATED and not used any more by the code.
     # it confused many people by its name and default value of '/wiki' to the
@@ -592,13 +616,10 @@ Lists: * bullets; 1., a. numbered items.
     #url_prefix_action = 'action' # no leading or trailing '/'
     url_prefix_action = None # compatiblity
 
-    logo_string = None
-    interwikiname = None
-
     url_mappings = {}
 
     # allow disabling certain userpreferences plugins
-    disabled_userprefs = []
+    userprefs_disabled = []
 
     user_checkbox_fields = [
         ('mailto_author', lambda _: _('Publish my email (not my wiki homepage) in author info')),
@@ -682,9 +703,6 @@ Lists: * bullets; 1., a. numbered items.
     xapian_index_dir = None
     xapian_stemming = False
     xapian_index_history = False
-    search_results_per_page = 10
-
-    SecurityPolicy = None
 
     def __init__(self, siteid):
         """ Init Config instance """

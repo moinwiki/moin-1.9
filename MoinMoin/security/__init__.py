@@ -355,7 +355,7 @@ class AccessControlList:
             as he is not logged in in that case.
         """
         if (request.user.name == name and
-            request.user.auth_method in request.cfg.trusted_auth_methods):
+            request.user.auth_method in request.cfg.auth_methods_trusted):
             return rightsdict.get(dowhat)
         return None
 
