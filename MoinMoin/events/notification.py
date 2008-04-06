@@ -76,7 +76,7 @@ def page_change_message(msgtype, request, page, lang, **kwargs):
     if msgtype == "page_changed":
         changes['text'] = _("Dear Wiki user,\n\n"
         'You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.\n\n'
-        'The "%(pagename)s" page has been changed by %(editor)s:\n\n') % {
+        'The "%(pagename)s" page has been changed by %(editor)s:\n') % {
             'pagename': page.page_name,
             'editor': page.uid_override or user.getUserIdentification(request),
             'sitename': page.cfg.sitename or request.getBaseURL(),

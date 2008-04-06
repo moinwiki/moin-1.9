@@ -35,6 +35,15 @@ def prep_page_changed_mail(request, page, comment, email_lang, revisions, trivia
     change = notification.page_change_message("page_changed", request, page, email_lang, comment=comment, revisions=revisions)
     _ = lambda s, wiki=False, r=request, l=email_lang: r.getText(s, wiki=wiki, lang=l)
 
+    if len(revisions) >= 2:
+        querystr = {'action': 'diff',
+                    'rev2': str(revisions[0]),
+                    'rev1': str(revisions[1])}
+    else:
+        querystr = {}
+
+    pagelink = "%(link)s\n\n" % {'link': notification.page_link(request, page, querystr)}
+
     subject = _('[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s') % {
             'trivial': (trivial and _("Trivial ")) or "",
             'sitename': page.cfg.sitename or "Wiki",
@@ -42,7 +51,7 @@ def prep_page_changed_mail(request, page, comment, email_lang, revisions, trivia
             'username': page.uid_override or user.getUserIdentification(request),
         }
 
-    return {'subject': subject, 'body': change['text'] + change['diff']}
+    return {'subject': subject, 'body': change['text'] + pagelink + change['diff']}
 
 
 def send_notification(request, from_address, emails, data):
