@@ -35,7 +35,7 @@
 # anything else, override logging_conf in your server script's Config class.
 logging_defaults = {
     'logdir': '.',
-    'loglevel': 'DEBUG',
+    'loglevel': 'INFO',
 }
 logging_config = """\
 [loggers]
