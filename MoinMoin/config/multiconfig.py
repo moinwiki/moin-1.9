@@ -218,7 +218,7 @@ class CacheClass:
 
 class DefaultConfig(object):
     """ default config values
-    
+
         When adding new config attributes, PLEASE use a name with the TOPIC as prefix,
         so it will sort naturally. E.g. use "actions_excluded", not "excluded_actions".
 
