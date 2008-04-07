@@ -167,7 +167,7 @@ class LogFile:
     def size(self):
         """ Return log size in bytes
 
-        Return 0 if the file does not exists. Raises other OSError.
+        Return 0 if the file does not exist. Raises other OSError.
 
         @return: size of log file in bytes
         @rtype: Int
@@ -182,7 +182,7 @@ class LogFile:
     def lines(self):
         """ Return number of lines in the log file
 
-        Return 0 if the file does not exists. Raises other OSError.
+        Return 0 if the file does not exist. Raises other OSError.
 
         Expensive for big log files - O(n)
 

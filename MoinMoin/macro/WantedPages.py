@@ -42,7 +42,7 @@ def macro_WantedPages(macro):
         if not allpages and wikiutil.isSystemPage(request, name):
             continue
 
-        # Add links to pages which does not exists in pages dict
+        # Add links to pages which do not exist in pages dict
         links = page.getPageLinks(request)
         for link in links:
             if not link in pages and request.user.may.read(link):

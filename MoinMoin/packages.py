@@ -171,7 +171,7 @@ class ScriptEngine:
                                     comment=u'%(filename)s' % {"filename": filename}, author=author)
                 self.msg += u"%(filename)s removed \n" % {"filename": filename}
             else:
-                self.msg += u"%(filename)s not exists \n" % {"filename": filename}
+                self.msg += u"%(filename)s does not exist \n" % {"filename": filename}
         else:
             self.msg += u"action delete attachment: not enough rights - nothing done \n"
 

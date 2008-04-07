@@ -979,10 +979,10 @@ file. It should match the actual charset of the configuration file.
             path_pages = os.path.join(path, "pages")
             if not (os.path.isdir(path_pages) and os.access(path_pages, mode)):
                 msg = '''
-%(attr)s "%(path)s" does not exists, or has incorrect ownership or
+%(attr)s "%(path)s" does not exist, or has incorrect ownership or
 permissions.
 
-Make sure the directory and the subdirectory pages are owned by the web
+Make sure the directory and the subdirectory "pages" are owned by the web
 server and are readable, writable and executable by the web server user
 and group.
 
