@@ -1130,7 +1130,7 @@ def importBuiltinPlugin(kind, name, function="execute"):
 def importNameFromPlugin(moduleName, name):
     """ Return name from plugin module
 
-    Raise PluginAttributeError if name does not exists.
+    Raise PluginAttributeError if name does not exist.
     """
     module = __import__(moduleName, globals(), {}, [name])
     try:
