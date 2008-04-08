@@ -385,9 +385,9 @@ def get_browser_language(request):
     @return: ISO language code, e.g. 'en'
     """
     available = wikiLanguages()
-    if not request.cfg.language_ignore_browser:
-        for lang in browserLanguages(request):
-            if lang in available:
-                return lang
+    if available and not request.cfg.language_ignore_browser:
+            for lang in browserLanguages(request):
+                if lang in available:
+                    return lang
     return ''
 
