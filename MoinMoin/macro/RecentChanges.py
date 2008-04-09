@@ -117,7 +117,6 @@ def format_page_edits(macro, lines, bookmark_usecs):
                 counters[name].append(idx+1)
             poslist = [(v, k) for k, v in counters.items()]
             poslist.sort()
-            ##request.write(repr(counters.items()))
             d['editors'] = []
             for positions, name in poslist:
                 d['editors'].append("%s&nbsp;[%s]" % (
@@ -145,6 +144,7 @@ def cmp_lines(first, second):
 def print_abandoned(macro):
     request = macro.request
     _ = request.getText
+    output = []
     d = {}
     page = macro.formatter.page
     pagename = page.page_name
@@ -185,7 +185,7 @@ def print_abandoned(macro):
         d['rc_days'] = None
 
     d['rc_update_bookmark'] = None
-    request.write(request.theme.recentchanges_header(d))
+    output.append(request.theme.recentchanges_header(d))
 
     length = len(last_edits)
 
@@ -214,27 +214,29 @@ def print_abandoned(macro):
         if (day != this_day) or (index == length):
             d['bookmark_link_html'] = None
             d['date'] = request.user.getFormattedDate(wikiutil.version2timestamp(last_edits[last_index].ed_time_usecs))
-            request.write(request.theme.recentchanges_daybreak(d))
+            output.append(request.theme.recentchanges_daybreak(d))
             this_day = day
 
             for page in last_edits[last_index:index]:
-                request.write(format_page_edits(macro, [page], None))
+                output.append(format_page_edits(macro, [page], None))
             last_index = index
             day_count += 1
             if (day_count >= max_days):
                 break
 
     d['rc_msg'] = msg
-    request.write(request.theme.recentchanges_footer(d))
+    output.append(request.theme.recentchanges_footer(d))
+    return ''.join(output)
+
 
 def macro_RecentChanges(macro, abandoned=False):
     # handle abandoned keyword
     if abandoned:
-        print_abandoned(macro)
-        return ''
+        return print_abandoned(macro)
 
     request = macro.request
     _ = request.getText
+    output = []
     user = request.user
     page = macro.formatter.page
     pagename = page.page_name
@@ -279,7 +281,7 @@ def macro_RecentChanges(macro, abandoned=False):
     else:
         d['rc_days'] = []
 
-    request.write(request.theme.recentchanges_header(d))
+    output.append(request.theme.recentchanges_header(d))
 
     pages = {}
     ignore_pages = {}
@@ -312,10 +314,10 @@ def macro_RecentChanges(macro, abandoned=False):
             else:
                 d['bookmark_link_html'] = None
             d['date'] = request.user.getFormattedDate(wikiutil.version2timestamp(pages[0][0].ed_time_usecs))
-            request.write(request.theme.recentchanges_daybreak(d))
+            output.append(request.theme.recentchanges_daybreak(d))
 
             for p in pages:
-                request.write(format_page_edits(macro, p, bookmark_usecs))
+                output.append(format_page_edits(macro, p, bookmark_usecs))
             pages = {}
             day_count += 1
             if max_days and (day_count >= max_days):
@@ -354,15 +356,15 @@ def macro_RecentChanges(macro, abandoned=False):
             else:
                 d['bookmark_link_html'] = None
             d['date'] = request.user.getFormattedDate(wikiutil.version2timestamp(pages[0][0].ed_time_usecs))
-            request.write(request.theme.recentchanges_daybreak(d))
+            output.append(request.theme.recentchanges_daybreak(d))
 
             for p in pages:
-                request.write(format_page_edits(macro, p, bookmark_usecs))
+                output.append(format_page_edits(macro, p, bookmark_usecs))
 
 
     d['rc_msg'] = msg
-    request.write(request.theme.recentchanges_footer(d))
+    output.append(request.theme.recentchanges_footer(d))
 
-    return ''
+    return ''.join(output)
 
 
