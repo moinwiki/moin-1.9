@@ -12,7 +12,7 @@
     and I mean the class, not an instance of it!
 
     @copyright: 2000-2004 Juergen Hermann <jh@web.de>,
-                2003 MoinMoin:ThomasWaldmann,
+                2003-2008 MoinMoin:ThomasWaldmann,
                 2003 Gustavo Niemeyer,
                 2005 Oliver Graf,
                 2007 Alexander Schremmer
@@ -20,6 +20,7 @@
 """
 
 import re
+
 from MoinMoin import wikiutil, user
 from MoinMoin.Page import Page
 
@@ -27,62 +28,62 @@ from MoinMoin.Page import Page
 ### Basic Permissions Interface -- most features enabled by default
 #############################################################################
 
-def _check(request, pagename, user, right):
-    if request.cfg.acl_hierarchic:
-        return _checkHierarchically(request, pagename, user, right)
+def _check(request, pagename, username, right):
+    """ Check <right> access permission for user <username> on page <pagename>
 
-    if request.page is not None and pagename == request.page.page_name:
-        p = request.page # reuse is good
-    else:
-        p = Page(request, pagename)
-    acl = p.getACL(request) # this will be fast in a reused page obj
-    return acl.may(request, user, right)
+    For cfg.acl_hierarchic=False we just check the page in question.
 
+    For cfg.acl_hierarchic=True we, we check each page in the hierarchy. We
+    start with the deepest page and recurse to the top of the tree.
+    If one of those permits, True is returned.
 
-def _checkHierarchically(request, pagename, username, attr):
-    """ Get permission by traversing page hierarchy
-
-    We check each page in the hierarchy. We start with the deepest page and
-    recurse to the top of the tree. If one of those permits, True is returned.
+    For both configurations, we check acl_rights_before before the page/default
+    acl and acl_rights_after after the page/default acl, of course.
 
     This method should not be called by users, use __getattr__ instead.
 
     @param request: the current request object
     @param pagename: pagename to get permissions from
     @param username: the user name
-    @param attr: the attribute to check
+    @param right: the right to check
 
     @rtype: bool
     @return: True if you have permission or False
     """
-    # Use page hierarchy
-    pages = pagename.split('/')
-
-    # check before
-    allowed = request.cfg.cache.acl_rights_before.may(request, username, attr)
+    cache = request.cfg.cache
+    allowed = cache.acl_rights_before.may(request, username, right)
     if allowed is not None:
         return allowed
 
-    # Get permission
-    some_acl = False
-    for i in range(len(pages), 0, -1):
-        # Create the next pagename in the hierarchy
-        # starting at the leaf, going to the root
-        name = '/'.join(pages[:i])
-        # Get page acl and ask for permission
-        acl = Page(request, name).getACL(request)
-        if acl.acl:
-            some_acl = True
-            allowed = acl.may(request, username, attr)
+    if request.cfg.acl_hierarchic:
+        pages = pagename.split('/') # create page hierarchy list
+        some_acl = False
+        for i in range(len(pages), 0, -1):
+            # Create the next pagename in the hierarchy
+            # starting at the leaf, going to the root
+            name = '/'.join(pages[:i])
+            # Get page acl and ask for permission
+            acl = Page(request, name).getACL(request)
+            if acl.acl:
+                some_acl = True
+                allowed = acl.may(request, username, right)
+                if allowed is not None:
+                    return allowed
+        if not some_acl:
+            allowed = cache.acl_rights_default.may(request, username, right)
             if allowed is not None:
                 return allowed
-    if not some_acl:
-        allowed = request.cfg.cache.acl_rights_default.may(request, username, attr)
+    else:
+        if request.page is not None and pagename == request.page.page_name:
+            p = request.page # reuse is good
+        else:
+            p = Page(request, pagename)
+        acl = p.getACL(request) # this will be fast in a reused page obj
+        allowed = acl.may(request, username, right)
         if allowed is not None:
             return allowed
 
-    # check after
-    allowed = request.cfg.cache.acl_rights_after.may(request, username, attr)
+    allowed = cache.acl_rights_after.may(request, username, right)
     if allowed is not None:
         return allowed
 
@@ -297,14 +298,15 @@ class AccessControlList:
                     self.acl.append((entry, rightsdict))
 
     def may(self, request, name, dowhat):
-        """May <name> <dowhat>?
-           Returns boolean answer.
+        """ May <name> <dowhat>? Returns boolean answer.
+
+            Note: this check does NOT include the acl_rights_before / _after ACL,
+                  but it WILL use acl_rights_default if there is no (page) ACL.
         """
         if self.acl is None: # no #acl used on Page
-            acl_page = request.cfg.cache.acl_rights_default.acl
+            acl = request.cfg.cache.acl_rights_default.acl
         else: # we have a #acl on the page (self.acl can be [] if #acl is empty!)
-            acl_page = self.acl
-        acl = request.cfg.cache.acl_rights_before.acl + acl_page + request.cfg.cache.acl_rights_after.acl
+            acl = self.acl
         is_group_member = request.dicts.has_member
         group_re = request.cfg.cache.page_group_regex
         allowed = None
@@ -318,9 +320,8 @@ class AccessControlList:
                 else:
                     for special in self.special_users:
                         if is_group_member(entry, special):
-                            handler = getattr(self, "_special_"+ special, None)
-                            allowed = handler(request, name,
-                                              dowhat, rightsdict)
+                            handler = getattr(self, "_special_" + special, None)
+                            allowed = handler(request, name, dowhat, rightsdict)
                             break # order of self.special_users is important
             elif entry == name:
                 allowed = rightsdict.get(dowhat)
