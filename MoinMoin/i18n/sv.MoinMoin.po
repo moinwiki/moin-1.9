@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-30 00:25+0100\n"
+"POT-Creation-Date: 2008-04-11 21:09+0200\n"
 "PO-Revision-Date: 2007-11-02 10:18+0100\n"
 "Last-Translator: ***vacant***\n"
 "Language-Team: Swedish <moin-user@lists.sourceforge.net>\n"
@@ -959,10 +959,6 @@ msgstr "HjälpInnehåll"
 msgid "HelpOnFormatting"
 msgstr "HjälpMedFormatering"
 
-#, fuzzy
-msgid "SendMyPassword"
-msgstr "Lösenord"
-
 msgid "WikiLicense"
 msgstr "WikiLicens"
 
@@ -1010,6 +1006,9 @@ msgstr "BytNamn"
 
 msgid "SpellCheck"
 msgstr "StavningsKontroll"
+
+msgid "Discussion"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1215,7 +1214,6 @@ msgid ""
 "change notification.\n"
 "\n"
 "The \"%(pagename)s\" page has been changed by %(editor)s:\n"
-"\n"
 msgstr ""
 "Hej wikianvändare!\n"
 "\n"
@@ -1349,7 +1347,8 @@ msgstr ""
 msgid "XML RPC error: %s"
 msgstr ""
 
-msgid "Low-level communication error: $s"
+#, python-format
+msgid "Low-level communication error: %s"
 msgstr ""
 
 #, fuzzy
@@ -1367,10 +1366,6 @@ msgstr "Paketsidor"
 #, fuzzy
 msgid "Page changed"
 msgstr "Spara ändringar"
-
-#, python-format
-msgid "Low-level communication error: %s"
-msgstr ""
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr ""
@@ -1507,6 +1502,41 @@ msgstr ""
 "<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
 "reStructuredText Quick Reference\n"
 "</a>.\n"
+
+#, fuzzy
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
+">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+msgstr ""
+" Emfas:: <<Verbatim('')>>''kursivering''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''fetstil'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''kursiv "
+"fetstil'''''<<Verbatim(''''')>>; <<Verbatim('')>>''blandad ''<<Verbatim(''')"
+">>'''''fetstil'''<<Verbatim(''')>> och kursivering''<<Verbatim('')>>; "
+"<<Verbatim(----)>> horisontell linje.\n"
+" Rubriker:: <<Verbatim(=)>> Rubrik 1 <<Verbatim(=)>>; <<Verbatim(==)>> "
+"Rubrik 2 <<Verbatim(==)>>; <<Verbatim(===)>> Rubrik 3 <<Verbatim(===)>>;   "
+"<<Verbatim(====)>> Rubrik 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Rubrik 5 "
+"<<Verbatim(=====)>>.\n"
+" Listor:: mellanslag och en av: * punkter; 1., a., A., i., I. numrerade "
+"paragrafer; 1.#n börja numrering på n; enbart mellanslag indenterar.\n"
+" Länkar:: <<Verbatim(IhopskrivnaOrd)>>; <<Verbatim([\"hakparenteser och "
+"citattecken\"])>>; url; [url]; [url etikett].\n"
+" Tabeller:: || celltext |||| celltext som sträcker sig över 2 kolumner "
+"||;    inga avslutande blanksteg tillåtna efter tabeller och titlar.\n"
+"\n"
+"(!) För mer hjälp, se HjälpOmRedigering och SyntaxReferens.\n"
 
 msgid "UnSubscribe"
 msgstr "Avbryt prenumeration"
@@ -2937,6 +2967,10 @@ msgstr ""
 
 msgid "Login and try again."
 msgstr "Logga in och försök igen."
+
+#, fuzzy
+#~ msgid "SendMyPassword"
+#~ msgstr "Lösenord"
 
 #~ msgid "Use UserPreferences to change your settings or create an account."
 #~ msgstr ""

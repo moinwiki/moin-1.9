@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-30 00:25+0100\n"
+"POT-Creation-Date: 2008-04-11 21:09+0200\n"
 "PO-Revision-Date: 2007-04-22 18:50+0100\n"
 "Last-Translator: Jonas Smedegaard <dr@jones.dk>\n"
 "Language-Team: Danish <moin-devel@lists.sourceforge.net>\n"
@@ -947,10 +947,6 @@ msgstr "HjælpIndhold"
 msgid "HelpOnFormatting"
 msgstr "HjælpTilFormatering"
 
-#, fuzzy
-msgid "SendMyPassword"
-msgstr "Adgangskode"
-
 msgid "WikiLicense"
 msgstr "WikiLicens"
 
@@ -998,6 +994,9 @@ msgstr "OmdøbSide"
 
 msgid "SpellCheck"
 msgstr "StaveKontrol"
+
+msgid "Discussion"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1203,7 +1202,6 @@ msgid ""
 "change notification.\n"
 "\n"
 "The \"%(pagename)s\" page has been changed by %(editor)s:\n"
-"\n"
 msgstr ""
 "Hej Wiki-bruger!\n"
 "\n"
@@ -1336,7 +1334,8 @@ msgstr ""
 msgid "XML RPC error: %s"
 msgstr ""
 
-msgid "Low-level communication error: $s"
+#, python-format
+msgid "Low-level communication error: %s"
 msgstr ""
 
 #, fuzzy
@@ -1354,10 +1353,6 @@ msgstr "Pakkesider"
 #, fuzzy
 msgid "Page changed"
 msgstr "Gem ændringer"
-
-#, python-format
-msgid "Low-level communication error: %s"
-msgstr ""
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr ""
@@ -1495,6 +1490,41 @@ msgstr ""
 "<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
 "reStructuredText Quick Reference\n"
 "</a>.\n"
+
+#, fuzzy
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
+">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+msgstr ""
+" Fremhævelser:: <<Verbatim('')>>''kursiv''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''fed'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''fed "
+"kursiv'''''<<Verbatim(''''')>>; <<Verbatim('')>>''blandet ''<<Verbatim(''')"
+">>'''''fed'''''<<Verbatim(''')>> og kursiv''<<Verbatim('')>>; <<Verbatim"
+"(----)>> vandret streg.\n"
+" Overskrifter:: <<Verbatim(=)>> Titel 1 <<Verbatim(=)>>; <<Verbatim(==)>> "
+"Titel 2 <<Verbatim(==)>>; <<Verbatim(===)>> Titel 3 <<Verbatim(===)>>;   "
+"<<Verbatim(====)>> Titel 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Titel 5 "
+"<<Verbatim(=====)>>.\n"
+" Lister:: mellemrum og enten * asterisker; 1., a., A., i., I. nummererede "
+"emner; 1.#n begynd nummerering ved n; mellemrum alene giver indryk.\n"
+" Links:: <<Verbatim(SammenSatteOrd)>>; <<Verbatim([\"lodrette klammer og "
+"dobbelte citationstegn\"])>>; url; [url]; [url beskrivende navn].\n"
+" Tabeller:: || celletekst |||| celletekst over to kolonner ||;    "
+"efterfølgende mellemrum er ikke tiladt efter tabeller eller titler.\n"
+"\n"
+"(!) For yderligere hjælp, se HjælpTilRedigering eller SyntaksReference.\n"
 
 msgid "UnSubscribe"
 msgstr "Afmeld abonnement"
@@ -2938,6 +2968,10 @@ msgstr "Du har ikke lov til at anvende %(action_name)s på denne side!"
 
 msgid "Login and try again."
 msgstr "Log på og prøv igen."
+
+#, fuzzy
+#~ msgid "SendMyPassword"
+#~ msgstr "Adgangskode"
 
 #~ msgid "Use UserPreferences to change your settings or create an account."
 #~ msgstr ""

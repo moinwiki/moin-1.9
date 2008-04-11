@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-30 00:25+0100\n"
+"POT-Creation-Date: 2008-04-11 21:09+0200\n"
 "PO-Revision-Date: 2007-11-10 16:50+0300\n"
 "Last-Translator: Maxim V. Dziumanenko <dziumanenko@softprom.kiev.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -946,9 +946,6 @@ msgstr "ДовідкаЗміст"
 msgid "HelpOnFormatting"
 msgstr "ДовідкаФорматування"
 
-msgid "SendMyPassword"
-msgstr "НагадуванняПаролю"
-
 msgid "WikiLicense"
 msgstr "ЛіцензіяWiki"
 
@@ -996,6 +993,9 @@ msgstr "ПерейменуватиСторінку"
 
 msgid "SpellCheck"
 msgstr "Орфографія"
+
+msgid "Discussion"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1200,7 +1200,6 @@ msgid ""
 "change notification.\n"
 "\n"
 "The \"%(pagename)s\" page has been changed by %(editor)s:\n"
-"\n"
 msgstr ""
 "Інший вики-користувач,\n"
 "\n"
@@ -1332,7 +1331,8 @@ msgstr ""
 msgid "XML RPC error: %s"
 msgstr ""
 
-msgid "Low-level communication error: $s"
+#, python-format
+msgid "Low-level communication error: %s"
 msgstr ""
 
 #, fuzzy
@@ -1350,10 +1350,6 @@ msgstr "Запакувати сторінки"
 #, fuzzy
 msgid "Page changed"
 msgstr "Зберегти зміни"
-
-#, python-format
-msgid "Low-level communication error: %s"
-msgstr ""
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr ""
@@ -1489,6 +1485,41 @@ msgstr ""
 "(!) Докладніше дивіться \n"
 "<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
 "reStructuredText Quick Reference\n"
+
+#, fuzzy
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
+">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+msgstr ""
+" Виділити:: <<Verbatim('')>>''курсивом''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''жирним'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''жирним "
+"курсивом'''''<<Verbatim(''''')>>; <<Verbatim('')>>''змішаним ''<<Verbatim"
+"(''')>>'''''жирним'''<<Verbatim(''')>> та курсивом''<<Verbatim('')>>; "
+"<<Verbatim(----)>> горизонтальною рискою.\n"
+" Заголовки:: <<Verbatim(=)>> Рівень 1 <<Verbatim(=)>>; <<Verbatim(==)>> "
+"Рівень 2 <<Verbatim(==)>>; <<Verbatim(===)>> Рівень 3 <<Verbatim(===)>>;   "
+"<<Verbatim(====)>> Рівень 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Рівень 5 "
+"<<Verbatim(=====)>>.\n"
+" Списки:: пробіл та одне з: * ненумерований список; 1., a., A., i., I. "
+"нумерований список; 1.#n почати нумерацію з n; поодинокий пробіл - відступ.\n"
+" Посилання:: <<Verbatim(СловаВеликоїЛітери)>>; <<Verbatim([[ціль|"
+"текстпосилання]])>>.\n"
+" Таблиці:: || текст комірки |||| текст комірки розтягнутий на 2 колонки "
+"||;     після таблиць та заголовків не можна залишати пробіли.\n"
+"\n"
+"(!) Докладна довідка ДовідкаРедагування чи ДовідкаСинтаксис.\n"
 
 msgid "UnSubscribe"
 msgstr "ПрипинитиСтеження"
@@ -2907,6 +2938,9 @@ msgstr "Ви не можете виконувати %(action_name)s на цій 
 
 msgid "Login and try again."
 msgstr "Увійдіть знову та спробуйте ще раз."
+
+#~ msgid "SendMyPassword"
+#~ msgstr "НагадуванняПаролю"
 
 #~ msgid "Use UserPreferences to change your settings or create an account."
 #~ msgstr ""

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-30 00:25+0100\n"
+"POT-Creation-Date: 2008-04-11 21:09+0200\n"
 "PO-Revision-Date: 2007-10-10 13:40+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -942,10 +942,6 @@ msgstr "ContingutsAjuda"
 msgid "HelpOnFormatting"
 msgstr "QuantAlFormat"
 
-#, fuzzy
-msgid "SendMyPassword"
-msgstr "Contrasenya"
-
 msgid "WikiLicense"
 msgstr "LlicènciaDelWiki"
 
@@ -993,6 +989,9 @@ msgstr "ReanomenaPàgina"
 
 msgid "SpellCheck"
 msgstr "ComprovacióOrtogràfica"
+
+msgid "Discussion"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1197,7 +1196,6 @@ msgid ""
 "change notification.\n"
 "\n"
 "The \"%(pagename)s\" page has been changed by %(editor)s:\n"
-"\n"
 msgstr ""
 "Benvolgut usuari del Wiki,\n"
 "\n"
@@ -1330,7 +1328,8 @@ msgstr ""
 msgid "XML RPC error: %s"
 msgstr ""
 
-msgid "Low-level communication error: $s"
+#, python-format
+msgid "Low-level communication error: %s"
 msgstr ""
 
 #, fuzzy
@@ -1348,10 +1347,6 @@ msgstr "Llengua"
 #, fuzzy
 msgid "Page changed"
 msgstr "Desa els canvis"
-
-#, python-format
-msgid "Low-level communication error: %s"
-msgstr ""
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr ""
@@ -1489,6 +1484,41 @@ msgstr ""
 "<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
 "referència ràpida de reStructuredText\n"
 "</a>.\n"
+
+#, fuzzy
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
+">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+msgstr ""
+" Èmfasi:: <<Verbatim('')>>''cursiva''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''negreta'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''negreta "
+"cursiva'''''<<Verbatim(''''')>>; <<Verbatim('')>>''combinació ''<<Verbatim"
+"(''')>>'''''negreta'''<<Verbatim(''')>> i cursiva''<<Verbatim('')>>; "
+"<<Verbatim(----)>> regla horitzontal.\n"
+" Encapçalaments:: <<Verbatim(=)>> Títol 1 <<Verbatim(=)>>; <<Verbatim(==)>> "
+"Títol 2 <<Verbatim(==)>>; <<Verbatim(===)>> Títol 3 <<Verbatim(===)>>;   "
+"<<Verbatim(====)>> Títol 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Títol 5 "
+"<<Verbatim(=====)>>.\n"
+" Llistes:: espai i algun dels següents: pics *; 1., a., A., i., I. elements "
+"numerats; 1.#n comença a numerar des de n; només espai sagna.\n"
+" Enllaços:: <<Verbatim(JuntaParaulesAmbMajúscules)>>; <<Verbatim"
+"([[destinació|textenllaç]])>>.\n"
+" Taules:: || text de la cel·la |||| text de ce·les que ocupen dos columnes "
+"||;    no s'admet espai en blanc després de taules o títols.\n"
+"\n"
+"(!) Per a obtindre més ajuda, vegeu HelpOnEditing o SyntaxReference.\n"
 
 msgid "UnSubscribe"
 msgstr "Desubscriu-me"
@@ -2852,6 +2882,10 @@ msgstr "No teniu permís per a fer %(action_name)s en aquesta pàgina."
 
 msgid "Login and try again."
 msgstr "Entreu i torneu a provar."
+
+#, fuzzy
+#~ msgid "SendMyPassword"
+#~ msgstr "Contrasenya"
 
 #~ msgid "Use UserPreferences to change your settings or create an account."
 #~ msgstr ""

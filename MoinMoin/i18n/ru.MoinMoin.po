@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-30 00:25+0100\n"
+"POT-Creation-Date: 2008-04-11 21:09+0200\n"
 "PO-Revision-Date: 2006-06-26 21:43-0800\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -949,9 +949,6 @@ msgstr "ПомощьПоГлавам"
 msgid "HelpOnFormatting"
 msgstr "КакФорматировать"
 
-msgid "SendMyPassword"
-msgstr "ВыслатьМойПароль"
-
 msgid "WikiLicense"
 msgstr "ВикиЛицензия"
 
@@ -999,6 +996,9 @@ msgstr "ПереименоватьСтраницу"
 
 msgid "SpellCheck"
 msgstr "Правописание"
+
+msgid "Discussion"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1204,7 +1204,6 @@ msgid ""
 "change notification.\n"
 "\n"
 "The \"%(pagename)s\" page has been changed by %(editor)s:\n"
-"\n"
 msgstr ""
 "Дорогой пользователь Wiki,\n"
 "\n"
@@ -1336,7 +1335,8 @@ msgstr ""
 msgid "XML RPC error: %s"
 msgstr ""
 
-msgid "Low-level communication error: $s"
+#, python-format
+msgid "Low-level communication error: %s"
 msgstr ""
 
 #, fuzzy
@@ -1354,10 +1354,6 @@ msgstr "Страницы пакета"
 #, fuzzy
 msgid "Page changed"
 msgstr "Сохранить изменения"
-
-#, python-format
-msgid "Low-level communication error: %s"
-msgstr ""
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr "Опции --pages и --search взаимно исключаемы!"
@@ -1496,6 +1492,43 @@ msgstr ""
 "(!) Подробнее смотри \n"
 "<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
 "reStructuredText Quick Reference\n"
+
+#, fuzzy
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
+">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+msgstr ""
+" Выделить:: <<Verbatim('')>>''курсивом''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''жирным'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''жирным "
+"курсивом'''''<<Verbatim(''''')>>; <<Verbatim('')>>''смешаным ''<<Verbatim"
+"(''')>>'''''жирным'''<<Verbatim(''')>> и курсивом''<<Verbatim('')>>; "
+"<<Verbatim(----)>> горизонтальная черта.\n"
+" Заголовки:: <<Verbatim(=)>> Уровня 1 <<Verbatim(=)>>; <<Verbatim(==)>> "
+"Уровня 2 <<Verbatim(==)>>; <<Verbatim(===)>> Уровня 3 <<Verbatim(===)>>; "
+"<<Verbatim(====)>> Уровня 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Уровня 5 "
+"<<Verbatim(=====)>>.\n"
+" Списки:: пробел и одно из: * ненумерованный список; 1., a., A., i., I. "
+"нумерованный список; 1.#n - начать нумерацию с n; пробелы увеличивают "
+"уровень отступа.\n"
+" Ссылки:: <<Verbatim(ЗаглавныеСловаСлитно)>>; <<Verbatim([[цель|описание]])"
+">>.\n"
+"\n"
+" Таблицы:: || текст ячейки |||| ячейка, растянутая на 2 колонки ||;     "
+"после таблиц и заголовков нельзя оставлять пробелы.\n"
+"\n"
+"(!) Подробная помощь КакРедактировать и СправочникПоСинтаксису.\n"
 
 msgid "UnSubscribe"
 msgstr "Отписаться"
@@ -2924,6 +2957,9 @@ msgstr "Вам нельзя делать %(action_name)s на этой стра�
 
 msgid "Login and try again."
 msgstr "Войдите и повторите еще раз."
+
+#~ msgid "SendMyPassword"
+#~ msgstr "ВыслатьМойПароль"
 
 #~ msgid "Use UserPreferences to change your settings or create an account."
 #~ msgstr ""

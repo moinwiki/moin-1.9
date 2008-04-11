@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin-1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-30 00:25+0100\n"
+"POT-Creation-Date: 2008-04-11 21:09+0200\n"
 "PO-Revision-Date: 2007-04-25 16:26+0300\n"
 "Last-Translator: Ekrem SEREN <ekrem.seren@parduslinux.org>\n"
 "Language-Team: Türkçe\n"
@@ -966,10 +966,6 @@ msgstr "YardimKonuları"
 msgid "HelpOnFormatting"
 msgstr "YardımBiçimHakkında"
 
-#, fuzzy
-msgid "SendMyPassword"
-msgstr "Parola"
-
 msgid "WikiLicense"
 msgstr "WikiLisansı"
 
@@ -1017,6 +1013,9 @@ msgstr "SayfaAdlandır"
 
 msgid "SpellCheck"
 msgstr "İmlaDenetimi"
+
+msgid "Discussion"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1223,7 +1222,6 @@ msgid ""
 "change notification.\n"
 "\n"
 "The \"%(pagename)s\" page has been changed by %(editor)s:\n"
-"\n"
 msgstr ""
 "Sayın Wiki kullanıcısı,\n"
 "\n"
@@ -1357,7 +1355,8 @@ msgstr ""
 msgid "XML RPC error: %s"
 msgstr ""
 
-msgid "Low-level communication error: $s"
+#, python-format
+msgid "Low-level communication error: %s"
 msgstr ""
 
 #, fuzzy
@@ -1375,10 +1374,6 @@ msgstr "Paket sayfaları"
 #, fuzzy
 msgid "Page changed"
 msgstr "Değişiklikleri Kaydet"
-
-#, python-format
-msgid "Low-level communication error: %s"
-msgstr ""
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr ""
@@ -1499,6 +1494,43 @@ msgid ""
 "[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
 "reStructuredText Quick Reference]].\n"
 msgstr ""
+
+#, fuzzy
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
+">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+msgstr ""
+" Vurgulama:: <<Verbatim('')>>''italik''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''kalın'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''kalın "
+"italik'''''<<Verbatim(''''')>>; <<Verbatim('')>>''karışık ''<<Verbatim(''')"
+">>'''''kalın'''<<Verbatim(''')>> ve italik''<<Verbatim('')>>; <<Verbatim"
+"(----)>> yatay çizgi.\n"
+" Başlıklar:: <<Verbatim(=)>> Başlık 1 <<Verbatim(=)>>; <<Verbatim(==)>> "
+"Başlık 2 <<Verbatim(==)>>; <<Verbatim(===)>> Başlık 3 <<Verbatim(===)>>;   "
+"<<Verbatim(====)>> Başlık 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Başlık 5 "
+"<<Verbatim(=====)>>.\n"
+" Listeler:: boşluk bıraktıktan sonra şu karakterlerden birini kullanınız: * "
+"imleçler; 1., a., A., i., I. numaralandırılmış imleçler; 1.#n "
+"numaralandırmaya n sayısından başla; sadece hizala.\n"
+" Bağlantılar:: <<Verbatim(BasHarfiBuyukKelimleriBirlestirin)>>; <<Verbatim"
+"([\"köşeli parantez ve çift tırnak\"])>>; url; [url]; [url başlık].\n"
+" Tablolar:: || hücre içeriği |||| 2 sütuna taşan hücre içeriği ||;    tablo "
+"ve başlıklardan sonra boşluk karakteri kullanılamaz.\n"
+"\n"
+"(!) Yardım için YardımBiçimHakkında veya SözdizimKılavuzu "
+"sayfalarınabakabilirsiniz.\n"
 
 msgid "UnSubscribe"
 msgstr "ÜyeliktenÇık"
@@ -2941,6 +2973,10 @@ msgstr ""
 
 msgid "Login and try again."
 msgstr "Giriş yapın ve tekrar deneyin."
+
+#, fuzzy
+#~ msgid "SendMyPassword"
+#~ msgstr "Parola"
 
 #~ msgid "Use UserPreferences to change your settings or create an account."
 #~ msgstr ""

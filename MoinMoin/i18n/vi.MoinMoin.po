@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-30 00:25+0100\n"
+"POT-Creation-Date: 2008-04-11 21:09+0200\n"
 "PO-Revision-Date: 2004-11-19 21:03+0800\n"
 "Last-Translator: Nam T. Nguyen <nnt@nntsoft.com>\n"
 "Language-Team: Vietnamese <moin-devel@lists.sourceforge.net>\n"
@@ -944,10 +944,6 @@ msgstr "Trang chỉ dẫn"
 msgid "HelpOnFormatting"
 msgstr "Chỉ dẫn cách định dạng"
 
-#, fuzzy
-msgid "SendMyPassword"
-msgstr "Mật khẩu"
-
 msgid "WikiLicense"
 msgstr "Wiki License"
 
@@ -995,6 +991,9 @@ msgstr "RenamePage"
 
 msgid "SpellCheck"
 msgstr "SpellCheck"
+
+msgid "Discussion"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1201,7 +1200,6 @@ msgid ""
 "change notification.\n"
 "\n"
 "The \"%(pagename)s\" page has been changed by %(editor)s:\n"
-"\n"
 msgstr ""
 "Chào bạn,\n"
 "\n"
@@ -1333,7 +1331,8 @@ msgstr ""
 msgid "XML RPC error: %s"
 msgstr ""
 
-msgid "Low-level communication error: $s"
+#, python-format
+msgid "Low-level communication error: %s"
 msgstr ""
 
 #, fuzzy
@@ -1350,10 +1349,6 @@ msgstr ""
 #, fuzzy
 msgid "Page changed"
 msgstr "Lưu các thay đổi"
-
-#, python-format
-msgid "Low-level communication error: %s"
-msgstr ""
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr ""
@@ -1475,6 +1470,42 @@ msgid ""
 "[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
 "reStructuredText Quick Reference]].\n"
 msgstr ""
+
+#, fuzzy
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
+">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+msgstr ""
+" Nhấn mạnh:: <<Verbatim('')>>''nghiêng''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''đậm'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''nghiêng "
+"đậm'''''<<Verbatim(''''')>>; <<Verbatim('')>>''lẫn ''<<Verbatim(''')"
+">>'''''đậm'''<<Verbatim(''')>> và nghiêng''<<Verbatim('')>>; <<Verbatim(----)"
+">> thước ngang.\n"
+" Đầu đề:: <<Verbatim(=)>> Tiêu đề 1 <<Verbatim(=)>>; <<Verbatim(==)>> Tiêu "
+"đề 2 <<Verbatim(==>>; <<Verbatim(===)>> Tiêu đề 3 <<Verbatim(===)>>; "
+"<<Verbatim(====)>> Tiêu đề 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Tiêu đề "
+"5 <<Verbatim(=====)>>.\n"
+" Danh sách:: khoảng trắng và: * cho điểm tròn; 1. hay a. hay A. hay i. hay "
+"I. cho các mục được đánh dấu; 1.#n để đánh số từ n; khoảng trắng để thụt "
+"vào.\n"
+" Liên kết:: <<Verbatim(CácChữHoaLiềnNhau)>>; <<Verbatim([\"ngoặc vuông và "
+"nháy kép\"])>>; URL; [URL]; [URL nhãn].\n"
+" Bảng:: || nội dung ô |||| nội dung ô trải qua 2 cột ||;    không được có "
+"khoảng trắng sau bảng hoặc tiêu đề.\n"
+"\n"
+"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
 
 msgid "UnSubscribe"
 msgstr "Huỷ đăng ký"
@@ -2857,6 +2888,10 @@ msgstr "Bạn không thể tạo một bản vẽ ở trang này."
 #, fuzzy
 msgid "Login and try again."
 msgstr " %s và thử lại."
+
+#, fuzzy
+#~ msgid "SendMyPassword"
+#~ msgstr "Mật khẩu"
 
 #~ msgid ""
 #~ "This list does not work, unless you have entered a valid email address!"

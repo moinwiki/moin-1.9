@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-30 00:25+0100\n"
+"POT-Creation-Date: 2008-04-11 21:09+0200\n"
 "PO-Revision-Date: 2005-01-8 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -882,9 +882,6 @@ msgstr ""
 msgid "HelpOnFormatting"
 msgstr ""
 
-msgid "SendMyPassword"
-msgstr ""
-
 msgid "WikiLicense"
 msgstr ""
 
@@ -931,6 +928,9 @@ msgid "RenamePage"
 msgstr ""
 
 msgid "SpellCheck"
+msgstr ""
+
+msgid "Discussion"
 msgstr ""
 
 #, python-format
@@ -1124,7 +1124,6 @@ msgid ""
 "change notification.\n"
 "\n"
 "The \"%(pagename)s\" page has been changed by %(editor)s:\n"
-"\n"
 msgstr ""
 
 msgid "New page:\n"
@@ -1227,7 +1226,8 @@ msgstr ""
 msgid "XML RPC error: %s"
 msgstr ""
 
-msgid "Low-level communication error: $s"
+#, python-format
+msgid "Low-level communication error: %s"
 msgstr ""
 
 msgid "Attachment link"
@@ -1240,10 +1240,6 @@ msgid "Changed page"
 msgstr ""
 
 msgid "Page changed"
-msgstr ""
-
-#, python-format
-msgid "Low-level communication error: %s"
 msgstr ""
 
 msgid "Options --pages and --search are mutually exclusive!"
@@ -1342,6 +1338,23 @@ msgid ""
 "(!) For more help, see the\n"
 "[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
 "reStructuredText Quick Reference]].\n"
+msgstr ""
+
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
+">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
 msgstr ""
 
 msgid "UnSubscribe"

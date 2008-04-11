@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-30 00:25+0100\n"
+"POT-Creation-Date: 2008-04-11 21:09+0200\n"
 "PO-Revision-Date: 2008-03-12 15:01+0900\n"
 "Last-Translator: Seungik Lee <seungiklee@gmail.com>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
@@ -927,9 +927,6 @@ msgstr "도움말"
 msgid "HelpOnFormatting"
 msgstr "문서형식 도움말"
 
-msgid "SendMyPassword"
-msgstr "암호 전송"
-
 msgid "WikiLicense"
 msgstr "위키 라이센스"
 
@@ -977,6 +974,9 @@ msgstr "이름 변경"
 
 msgid "SpellCheck"
 msgstr "철자 검사"
+
+msgid "Discussion"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1182,7 +1182,6 @@ msgid ""
 "change notification.\n"
 "\n"
 "The \"%(pagename)s\" page has been changed by %(editor)s:\n"
-"\n"
 msgstr ""
 "위키사용자님,\n"
 "\n"
@@ -1315,7 +1314,8 @@ msgstr ""
 msgid "XML RPC error: %s"
 msgstr ""
 
-msgid "Low-level communication error: $s"
+#, python-format
+msgid "Low-level communication error: %s"
 msgstr ""
 
 #, fuzzy
@@ -1333,10 +1333,6 @@ msgstr "문서 묶기"
 #, fuzzy
 msgid "Page changed"
 msgstr "변경 사항 저장"
-
-#, python-format
-msgid "Low-level communication error: %s"
-msgstr ""
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr ""
@@ -1476,6 +1472,40 @@ msgstr ""
 "<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
 "reStructuredText Quick Reference\n"
 "</a>.\n"
+
+#, fuzzy
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
+">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+msgstr ""
+" 강조:: <<Verbatim('')>>''뉘여쓰기''<<Verbatim('')>>; <<Verbatim(''')>>'''굵"
+"게'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''굵게 뉘여쓰기'''''<<Verbatim"
+"(''''')>>; <<Verbatim('')>>''혼합 ''<<Verbatim(''')>>'''''굵게'''<<Verbatim"
+"(''')>> 뉘여쓰기''<<Verbatim('')>>; <<Verbatim(----)>> 가로 줄.\n"
+" 표제:: <<Verbatim(=)>> 표제 1 <<Verbatim(=)>>; <<Verbatim(==)>> 표제 2 "
+"<<Verbatim(==)>>; <<Verbatim(===)>> 표제 3 <<Verbatim(===)>>;   <<Verbatim"
+"(====)>> 표제 4 <<Verbatim(====)>>; <<Verbatim(=====)>> 표제 5 <<Verbatim"
+"(=====)>>.\n"
+" 목록:: 공백 이후에 다음 글자 중의 하나: * 순서표시; 1., a., A., i., I. 숫자"
+"표시; 1.#n 로 쓰면 n부터 시작; 공백만 앞에 쓰면 들여 씀.\n"
+" 링크:: 대소문자 섞어 쓰기(<<Verbatim(JoinCapitalizedWords)>>); <<Verbatim"
+"([[링크|링크될 텍스트]])>>.\n"
+" 표:: || 칸 내용 |||| 2칸을 차지하는 내용 ||;    표제나 표 뒤에는 공백이 있으"
+"면 안 됩니다.\n"
+"\n"
+"(!) 보다 자세한 정보는 HelpOnEditing 또는 SyntaxReference를 참고하세요.\n"
 
 msgid "UnSubscribe"
 msgstr "구독 취소"
@@ -2848,6 +2878,9 @@ msgstr "이 문서에 %(action_name)s 작업을 수행할 수 있는 권한이 �
 
 msgid "Login and try again."
 msgstr "로그인 후 다시 시도하세요."
+
+#~ msgid "SendMyPassword"
+#~ msgstr "암호 전송"
 
 #~ msgid "Use UserPreferences to change your settings or create an account."
 #~ msgstr ""

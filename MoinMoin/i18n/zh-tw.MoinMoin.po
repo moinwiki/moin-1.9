@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-30 00:25+0100\n"
+"POT-Creation-Date: 2008-04-11 21:09+0200\n"
 "PO-Revision-Date: 2008-03-24 23:30+0800\n"
 "Last-Translator: Rux Li <rux.li3@gmail.com>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
@@ -923,9 +923,6 @@ msgstr "說明"
 msgid "HelpOnFormatting"
 msgstr "說明/排版"
 
-msgid "SendMyPassword"
-msgstr "寄密碼給我"
-
 msgid "WikiLicense"
 msgstr "Wiki版權"
 
@@ -973,6 +970,9 @@ msgstr "重新命名"
 
 msgid "SpellCheck"
 msgstr "拼字檢查"
+
+msgid "Discussion"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1175,7 +1175,6 @@ msgid ""
 "change notification.\n"
 "\n"
 "The \"%(pagename)s\" page has been changed by %(editor)s:\n"
-"\n"
 msgstr ""
 "Wiki 使用者你好，\n"
 "\n"
@@ -1304,7 +1303,8 @@ msgstr ""
 msgid "XML RPC error: %s"
 msgstr ""
 
-msgid "Low-level communication error: $s"
+#, python-format
+msgid "Low-level communication error: %s"
 msgstr ""
 
 #, fuzzy
@@ -1322,10 +1322,6 @@ msgstr "打包頁面"
 #, fuzzy
 msgid "Page changed"
 msgstr "存檔"
-
-#, python-format
-msgid "Low-level communication error: %s"
-msgstr ""
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr "--pages 和 --search 兩個參數是互斥的！"
@@ -1461,6 +1457,40 @@ msgstr ""
 "(!) 更完整的說明在 \n"
 "[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
 "reStructuredText Quick Reference]].\n"
+
+#, fuzzy
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
+">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+msgstr ""
+" 強調::  <<Verbatim('')>>''斜體 ''<<Verbatim('')>>； <<Verbatim(''')>>'''粗"
+"體'''<<Verbatim(''')>>； <<Verbatim(''''')>>'''''粗斜體 '''''<<Verbatim"
+"(''''')>>； <<Verbatim('')>>''混合 ''<<Verbatim(''')>>'''''粗體 '''<<Verbatim"
+"(''')>>斜體 ''<<Verbatim('')>>；<<Verbatim(----)>> 分隔線\n"
+" 標題::  <<Verbatim(=)>> 標題1 <<Verbatim(=)>>； <<Verbatim(==)>> 標題2 "
+"<<Verbatim(==)>>； <<Verbatim(===)>> 標題3 <<Verbatim(===)>>； <<Verbatim"
+"(====)>> 標題4 <<Verbatim(====)>>； <<Verbatim(=====)>> 標題5 <<Verbatim"
+"(=====)>>\n"
+" 條列::  空白再加下列符號之一： *、1.、a.、A.、i.、I.； 1.#n 從 n 開始編； 只"
+"有空白則代表縮排\n"
+" 連結::  <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])"
+">>\n"
+" 表格::  || 儲存格內文 |||| 跨兩欄的儲存格 ||\n"
+"\n"
+"(!) 表格或標題尾端不可有空白<<BR>>\n"
+"(!) 更詳細的說明請參看 [[說明/編輯頁面]] 或 [[語法參考]]\n"
 
 msgid "UnSubscribe"
 msgstr "取消訂閱"
@@ -2844,6 +2874,9 @@ msgstr "你無權在本頁進行「%(action_name)s」操作。"
 
 msgid "Login and try again."
 msgstr "請先登入後再試一次。"
+
+#~ msgid "SendMyPassword"
+#~ msgstr "寄密碼給我"
 
 #~ msgid "Use UserPreferences to change your settings or create an account."
 #~ msgstr "請到 UserPreferences 改變設定或新建帳號"

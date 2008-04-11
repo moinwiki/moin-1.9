@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-30 00:25+0100\n"
+"POT-Creation-Date: 2008-04-11 21:09+0200\n"
 "PO-Revision-Date: 2007-02-22 17:39-0300\n"
 "Last-Translator: Iván Méndez <imendez@udc.es>\n"
 "Language-Team: Galician <moin-devel@lists.sourceforge.net>\n"
@@ -970,10 +970,6 @@ msgstr "ContidosDeAxuda"
 msgid "HelpOnFormatting"
 msgstr "AxudaSobreFormato"
 
-#, fuzzy
-msgid "SendMyPassword"
-msgstr "Contrasinal"
-
 msgid "WikiLicense"
 msgstr "LicenciaWiki"
 
@@ -1021,6 +1017,9 @@ msgstr "RenomearPáxina"
 
 msgid "SpellCheck"
 msgstr "CorrecciónOrtográfica"
+
+msgid "Discussion"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1227,7 +1226,6 @@ msgid ""
 "change notification.\n"
 "\n"
 "The \"%(pagename)s\" page has been changed by %(editor)s:\n"
-"\n"
 msgstr ""
 "Prezado usuario do Wiki,\n"
 "\n"
@@ -1361,7 +1359,8 @@ msgstr ""
 msgid "XML RPC error: %s"
 msgstr ""
 
-msgid "Low-level communication error: $s"
+#, python-format
+msgid "Low-level communication error: %s"
 msgstr ""
 
 #, fuzzy
@@ -1379,10 +1378,6 @@ msgstr "Empaquetar páxinas"
 #, fuzzy
 msgid "Page changed"
 msgstr "Gardar os cambios"
-
-#, python-format
-msgid "Low-level communication error: %s"
-msgstr ""
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr ""
@@ -1518,6 +1513,40 @@ msgstr ""
 "<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
 "Referencia rápida de reStructuredText\n"
 "</a>.\n"
+
+#, fuzzy
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
+">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+msgstr ""
+" Énfase:: <<Verbatim('')>>''cursiva''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''negra'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''negra "
+"cursiva'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mesturada ''<<Verbatim"
+"(''')>>'''''negra'''<<Verbatim(''')>> e cursiva''<<Verbatim('')>>; <<Verbatim"
+"(----)>> liña horizontal.\n"
+" Encabezados:: <<Verbatim(=)>> Título de nivel 1 <<Verbatim(=)>>; <<Verbatim"
+"(==)>> Título de nivel 2 <<Verbatim(==)>>; <<Verbatim(===)>> Título de nivel "
+"3 <<Verbatim(===)>>;   <<Verbatim(====)>> Título de nivel 4 <<Verbatim(====)"
+">>; <<Verbatim(=====)>> Título de nivel 5 <<Verbatim(=====)>>.\n"
+" Listaxes:: espazo e un destes: * viñetas; 1., a., A., i., I. elementos "
+"numerados; 1.#n comeza a numeración en n; un 'espazo' produce sangrado ou "
+"indentado.\n"
+" Ligazóns:: <<Verbatim(XuntaPalabrasConMaiúscula)>>; <<Verbatim([\"colchetes "
+"e comiñas duplas\"])>>; url; [url]; [url etiqueta].\n"
+" Táboas:: || texto de cela |||| texto de cela que ocupa dúas columnas ||;    "
+"non se permiten espazos despois das táboas ou os títulos.\n"
 
 msgid "UnSubscribe"
 msgstr "Dessubscribirse"
@@ -2974,6 +3003,10 @@ msgstr "Non ten permiso para usar a acción %(actionname)s nesta páxina."
 
 msgid "Login and try again."
 msgstr "Comece a sesión e probe de novo."
+
+#, fuzzy
+#~ msgid "SendMyPassword"
+#~ msgstr "Contrasinal"
 
 #~ msgid "Use UserPreferences to change your settings or create an account."
 #~ msgstr ""

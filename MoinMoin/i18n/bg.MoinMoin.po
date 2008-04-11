@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-30 00:25+0100\n"
+"POT-Creation-Date: 2008-04-11 21:09+0200\n"
 "PO-Revision-Date: 2006-02-11 12:20-0800\n"
 "Last-Translator: Hristo Iliev <hristo@phys.uni-sofia.bg>\n"
 "Language-Team: Bulgarian <moin-devel@lists.sourceforge.net>\n"
@@ -956,10 +956,6 @@ msgstr "ПомощСъдържание"
 msgid "HelpOnFormatting"
 msgstr "ПомощЗаФорматиране"
 
-#, fuzzy
-msgid "SendMyPassword"
-msgstr "Парола"
-
 msgid "WikiLicense"
 msgstr "УикиЛиценз"
 
@@ -1007,6 +1003,9 @@ msgstr "ПреименувайСтраница"
 
 msgid "SpellCheck"
 msgstr "ПроверкаПравопис"
+
+msgid "Discussion"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1213,7 +1212,6 @@ msgid ""
 "change notification.\n"
 "\n"
 "The \"%(pagename)s\" page has been changed by %(editor)s:\n"
-"\n"
 msgstr ""
 "Уважаеми Уики потребителю,\n"
 "\n"
@@ -1345,7 +1343,8 @@ msgstr ""
 msgid "XML RPC error: %s"
 msgstr ""
 
-msgid "Low-level communication error: $s"
+#, python-format
+msgid "Low-level communication error: %s"
 msgstr ""
 
 #, fuzzy
@@ -1363,10 +1362,6 @@ msgstr "Страници в пакета"
 #, fuzzy
 msgid "Page changed"
 msgstr "Запис на промените"
-
-#, python-format
-msgid "Low-level communication error: %s"
-msgstr ""
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr ""
@@ -1503,6 +1498,41 @@ msgstr ""
 "<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
 "Бързо Ръководство по реСтруктуриранТекст\n"
 "</a>.\n"
+
+#, fuzzy
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
+">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+msgstr ""
+" Наблягане:: <<Verbatim('')>>''наклонен''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''удебелен'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''удебелен и "
+"наклонен'''''<<Verbatim(''''')>>; <<Verbatim('')>>''смесени ''<<Verbatim(''')"
+">>'''''удебелен'''<<Verbatim(''')>> и наклонен''<<Verbatim('')>>; <<Verbatim"
+"(----)>> хоризонтална черта.\n"
+" Заглавия:: <<Verbatim(=)>> Заглавие 1 <<Verbatim(=)>>; <<Verbatim(==)>> "
+"Заглавие 2 <<Verbatim(==)>>; <<Verbatim(===)>> Заглавие 3 <<Verbatim(===)"
+">>;   <<Verbatim(====)>> Заглавие 4 <<Verbatim(====)>>; <<Verbatim(=====)>> "
+"Заглавие 5 <<Verbatim(=====)>>.\n"
+" Списъци:: интервал и едно от: * bullets; 1., a., A., i., I. номерирани "
+"елементи; 1.#n започва номерирането от n; само интервал вмъква навътре.\n"
+" Връзки:: <<Verbatim(СвързаниДумиПървиБуквиГлавни)>>; <<Verbatim"
+"([\"квадратни скоби и кавички\"])>>; url; [url]; [url етикет].\n"
+" Таблици:: || текст на клетка |||| текст на клетка, заемаща 2 колони ||;    "
+"не е позволено оставянето на празно място след таблици или заглавия.\n"
+"\n"
+"(!) За повече помощ вижте ПомощПриРедактиране или СинтактичноУпътване.\n"
 
 msgid "UnSubscribe"
 msgstr "РазАбониране"
@@ -2956,6 +2986,10 @@ msgstr "Не Ви е позволено да извършвате %(action_name)
 
 msgid "Login and try again."
 msgstr "Влезте и опитайте отново."
+
+#, fuzzy
+#~ msgid "SendMyPassword"
+#~ msgstr "Парола"
 
 #~ msgid "Use UserPreferences to change your settings or create an account."
 #~ msgstr ""
