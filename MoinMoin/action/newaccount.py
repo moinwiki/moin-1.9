@@ -70,7 +70,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
     # try to get the email, for new users it is required
     email = wikiutil.clean_input(form.get('email', [''])[0])
     theuser.email = email.strip()
-    if not theuser.email:
+    if not theuser.email and 'email' not in request.cfg.user_form_remove:
         return _("Please provide your email address. If you lose your"
                  " login information, you can get it by email.")
 
