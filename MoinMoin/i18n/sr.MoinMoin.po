@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-30 00:25+0100\n"
+"POT-Creation-Date: 2008-04-11 21:09+0200\n"
 "PO-Revision-Date: 2007-11-26 23:04-0500\n"
 "Last-Translator: Igor Miletic <grejigl-gnomeprevod@yahoo.ca>\n"
 "Language-Team: Serbian <fedora-trans-sr@redhat.com>\n"
@@ -944,9 +944,6 @@ msgstr "HelpContents"
 msgid "HelpOnFormatting"
 msgstr "HelpOnFormatting"
 
-msgid "SendMyPassword"
-msgstr "ПошаљиМојуЛозинку"
-
 msgid "WikiLicense"
 msgstr "ВикиЛиценца"
 
@@ -994,6 +991,9 @@ msgstr "ПреименујСтраницу"
 
 msgid "SpellCheck"
 msgstr "ПровераПравописа"
+
+msgid "Discussion"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1200,7 +1200,6 @@ msgid ""
 "change notification.\n"
 "\n"
 "The \"%(pagename)s\" page has been changed by %(editor)s:\n"
-"\n"
 msgstr ""
 "Поштовани вики корисниче,\n"
 "\n"
@@ -1336,7 +1335,8 @@ msgstr ""
 msgid "XML RPC error: %s"
 msgstr ""
 
-msgid "Low-level communication error: $s"
+#, python-format
+msgid "Low-level communication error: %s"
 msgstr ""
 
 #, fuzzy
@@ -1354,10 +1354,6 @@ msgstr "Странице пакета"
 #, fuzzy
 msgid "Page changed"
 msgstr "Сачувај измене"
-
-#, python-format
-msgid "Low-level communication error: %s"
-msgstr ""
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr "Опције --pages и --search су узајамно искључиве"
@@ -1497,6 +1493,41 @@ msgstr ""
 "(!) За више помоћи погледајте \n"
 "[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|Кратка "
 "референца за преструктуиран текст]].\n"
+
+#, fuzzy
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
+">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+msgstr ""
+" Наглашавање:: <<Verbatim('')>>''укошено''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''задебљано'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''задебљано и "
+"укошено'''''<<Verbatim(''''')>>; <<Verbatim('')>>''измешано ''<<Verbatim(''')"
+">>'''''задебљано'''<<Verbatim(''')>> и укошено''<<Verbatim('')>>'; <<Verbatim"
+"(----)>> водоравно правило.\n"
+" Заглавља:: <<Verbatim(=)>> Наслов 1 <<Verbatim(=)>>; <<Verbatim(==)>> "
+"Наслов 2 <<Verbatim(==)>>; <<Verbatim(===)>> Наслов 3 <<Verbatim(===)>>;   "
+"<<Verbatim(====)>> Наслов 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Наслов 5 "
+"<<Verbatim(=====)>>.\n"
+" Спискови:: размак и једно од: * предзнакова; 1., a., A., i., I. набрајане "
+"ставке; 1.#n почни бројање од n; размак сам увлачи ред.\n"
+" Везе:: <<Verbatim(СаставиРечиСаВеликимПочетнимСловима)>>; <<Verbatim"
+"([[одредиште|текст везе]])>>.\n"
+" Табеле:: || текст ћелије |||| текст ћелије преко две колоне ||;    размаци "
+"нису дозвољени после табела или наслова.\n"
+"\n"
+"(!) За више помоћи, обратите се на HelpOnEditing или SyntaxReference.\n"
 
 msgid "UnSubscribe"
 msgstr "УкиниПретплату"
@@ -2932,6 +2963,9 @@ msgstr "Није вам дозвољено да %(action_name)s на овој с
 
 msgid "Login and try again."
 msgstr "Пријавите се и покушајте поново"
+
+#~ msgid "SendMyPassword"
+#~ msgstr "ПошаљиМојуЛозинку"
 
 #~ msgid "Use UserPreferences to change your settings or create an account."
 #~ msgstr ""

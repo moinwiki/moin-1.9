@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-30 00:25+0100\n"
+"POT-Creation-Date: 2008-04-11 21:09+0200\n"
 "PO-Revision-Date: 2005-11-06 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -951,10 +951,6 @@ msgstr "فهرست راهنما"
 msgid "HelpOnFormatting"
 msgstr "راهنمای فرمت ها"
 
-#, fuzzy
-msgid "SendMyPassword"
-msgstr "کلمه عبور"
-
 msgid "WikiLicense"
 msgstr "اجازه نامه ویکی"
 
@@ -1002,6 +998,9 @@ msgstr "تغییرنام صفحه"
 
 msgid "SpellCheck"
 msgstr "تصحیح املایی"
+
+msgid "Discussion"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1208,7 +1207,6 @@ msgid ""
 "change notification.\n"
 "\n"
 "The \"%(pagename)s\" page has been changed by %(editor)s:\n"
-"\n"
 msgstr ""
 "کاربر گرامی٬\n"
 "\n"
@@ -1340,7 +1338,8 @@ msgstr ""
 msgid "XML RPC error: %s"
 msgstr ""
 
-msgid "Low-level communication error: $s"
+#, python-format
+msgid "Low-level communication error: %s"
 msgstr ""
 
 #, fuzzy
@@ -1358,10 +1357,6 @@ msgstr "بسته صفحات"
 #, fuzzy
 msgid "Page changed"
 msgstr "تغییرات ذخیره شود"
-
-#, python-format
-msgid "Low-level communication error: %s"
-msgstr ""
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr ""
@@ -1499,6 +1494,42 @@ msgstr ""
 "<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
 "reStructuredText Quick Reference\n"
 "</a>.\n"
+
+#, fuzzy
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
+">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+msgstr ""
+" پررنگ و مورب سازی:: <<Verbatim('')>>''مورب سازی''<<Verbatim('')>>; "
+"<<Verbatim(''')>>'''پررنگ'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''پررنگ "
+"و مورب'''''<<Verbatim(''''')>>; <<Verbatim('')>>''مخلوط ''<<Verbatim(''')"
+">>'''''پررنگ'''<<Verbatim(''')>> و مورب''<<Verbatim('')>>; <<Verbatim(----)"
+">> خط افقی زیر پاراگراف.\n"
+" عنوان ها:: <<Verbatim(=)>> عنوان ۱ <<Verbatim(=)>>; <<Verbatim(==)>> عنوان "
+"۲ <<Verbatim(==)>>; <<Verbatim(===)>> عنوان ۳ <<Verbatim(===)>>;   <<Verbatim"
+"(====)>> عنوان ۴ <<Verbatim(====)>>; <<Verbatim(=====)>> عنوان ۵ <<Verbatim"
+"(=====)>>.\n"
+" لیستها:: یک فاصله در ابتدای خط و سپس یکی از کاراکترهای: * برای لیست گلوله "
+"ای و 1, a, A, i, I برای لیستهای عددی و آیتمی. \n"
+" لینکها:: <<Verbatim(آدرس های اینترنتی در این سایت با حروف بزرگ شروع میشوند٬ "
+"این کلمات را جدا از هم ننویسید.)>>; <<Verbatim([\"براکت و دو علامت quote\"])"
+">>; آدرس اینترنتی; [آدرس اینترنتی]; [برچسب آدرس اینترنتی].\n"
+" جدولها:: || متن درون یک سلول جدول |||| متن درون یک سلول با دو ستون ||;     "
+"پس از جدول ها و عنوان ها نباید فاصله خالی بگذارید.\n"
+"\n"
+"(!) برای راهنمایی بیشتر HelpOnEditing و یا SyntaxReference را ببینید.\n"
 
 msgid "UnSubscribe"
 msgstr "لغو عضویت"
@@ -2922,6 +2953,10 @@ msgstr "عملیات %(actionname)s روی این صفحه مجاز نیست!"
 
 msgid "Login and try again."
 msgstr "لطفا وارد سایت شده و مجددا سعی نمایید."
+
+#, fuzzy
+#~ msgid "SendMyPassword"
+#~ msgstr "کلمه عبور"
 
 #~ msgid "Use UserPreferences to change your settings or create an account."
 #~ msgstr ""

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-30 00:25+0100\n"
+"POT-Creation-Date: 2008-04-11 21:09+0200\n"
 "PO-Revision-Date: 2006-06-15 15:55+0200\n"
 "Last-Translator: jmarton@omikk.bme.hu, arostas@omikk.bme.hu\n"
 "Language-Team: Hungarian <HU@li.org>\n"
@@ -947,10 +947,6 @@ msgstr "SegédletTartalomjegyzék"
 msgid "HelpOnFormatting"
 msgstr "FormázásiSegédlet"
 
-#, fuzzy
-msgid "SendMyPassword"
-msgstr "Jelszó"
-
 msgid "WikiLicense"
 msgstr "WikiEngedélyek"
 
@@ -998,6 +994,9 @@ msgstr "LapÁtnevezés"
 
 msgid "SpellCheck"
 msgstr "HelyesírásEllenőrzés"
+
+msgid "Discussion"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1204,7 +1203,6 @@ msgid ""
 "change notification.\n"
 "\n"
 "The \"%(pagename)s\" page has been changed by %(editor)s:\n"
-"\n"
 msgstr ""
 "Kedves Wiki-felhasználó!\n"
 "\n"
@@ -1330,7 +1328,8 @@ msgstr ""
 msgid "XML RPC error: %s"
 msgstr ""
 
-msgid "Low-level communication error: $s"
+#, python-format
+msgid "Low-level communication error: %s"
 msgstr ""
 
 #, fuzzy
@@ -1348,10 +1347,6 @@ msgstr "Oldalak csomagolása"
 #, fuzzy
 msgid "Page changed"
 msgstr "Változások mentése"
-
-#, python-format
-msgid "Low-level communication error: %s"
-msgstr ""
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr ""
@@ -1472,6 +1467,43 @@ msgid ""
 "[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
 "reStructuredText Quick Reference]].\n"
 msgstr ""
+
+#, fuzzy
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
+">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+msgstr ""
+" Kiemelés:: <<Verbatim('')>>''kurzív''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''félkövér'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''félkövér "
+"kurzív'''''<<Verbatim(''''')>>; <<Verbatim('')>>''vegyes ''<<Verbatim(''')"
+">>'''''félkövér'''<<Verbatim(''')>> és kurzív''<<Verbatim('')>>; <<Verbatim"
+"(----)>> vízszintes vonal.\n"
+" Címek:: <<Verbatim(=)>> 1. szintű cím <<Verbatim(=)>>; <<Verbatim(==)>> 2. "
+"szintű cím <<Verbatim(==)>>; <<Verbatim(===)>> 3. szintű cím <<Verbatim(===)"
+">>;   <<Verbatim(====)>> 4. szintű cím <<Verbatim(====)>>; <<Verbatim(=====)"
+">> 5. szintű cím <<Verbatim(=====)>>.\n"
+" Listák:: szóköz és egy: * bütykök (körök és négyzetek); 1., a., A., i., I. "
+"sorszámozott elemek; 1.#n a sorszámozás n-nél kezdődik; a szóköz magában "
+"beljebb tolja a szöveget.\n"
+" Kapcsok (linkek):: <<Verbatim(NagyKezdőbetűsSzavakEgybeírva)>>; <<Verbatim"
+"([\"szögletes zárójelek és macskakörmök\"])>>; URL; [URL]; [URL címke].\n"
+" Táblázatok:: || cella |||| két oszlopot átfogó cella ||;    cím és táblázat "
+"esetén nem szabad szóközt tenni a sor végére.\n"
+"\n"
+"(!) További segítségért olvassa el a HelpOnEditing vagy a "
+"SzerkesztésiSegédlet oldalt.\n"
 
 msgid "UnSubscribe"
 msgstr "Leiratkozás"
@@ -2906,6 +2938,10 @@ msgstr "Ezen a lapon nem használhatja a %(actionname)s műveletet!"
 
 msgid "Login and try again."
 msgstr "Lépjen be, majd próbálja újra."
+
+#, fuzzy
+#~ msgid "SendMyPassword"
+#~ msgstr "Jelszó"
 
 #~ msgid "Use UserPreferences to change your settings or create an account."
 #~ msgstr ""

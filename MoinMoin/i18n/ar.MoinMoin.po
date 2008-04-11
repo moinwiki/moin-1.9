@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-30 00:25+0100\n"
+"POT-Creation-Date: 2008-04-11 21:09+0200\n"
 "PO-Revision-Date: 2007-10-08 12:27+0200\n"
 "Last-Translator: Mohamed Yahya <yahya.mohamed@gmail.com>\n"
 "Language-Team: \n"
@@ -917,10 +917,6 @@ msgstr ""
 msgid "HelpOnFormatting"
 msgstr ""
 
-#, fuzzy
-msgid "SendMyPassword"
-msgstr "كلمةالسرّ"
-
 msgid "WikiLicense"
 msgstr ""
 
@@ -967,6 +963,9 @@ msgid "RenamePage"
 msgstr ""
 
 msgid "SpellCheck"
+msgstr ""
+
+msgid "Discussion"
 msgstr ""
 
 #, python-format
@@ -1170,7 +1169,6 @@ msgid ""
 "change notification.\n"
 "\n"
 "The \"%(pagename)s\" page has been changed by %(editor)s:\n"
-"\n"
 msgstr ""
 
 msgid "New page:\n"
@@ -1275,7 +1273,8 @@ msgstr ""
 msgid "XML RPC error: %s"
 msgstr ""
 
-msgid "Low-level communication error: $s"
+#, python-format
+msgid "Low-level communication error: %s"
 msgstr ""
 
 #, fuzzy
@@ -1293,10 +1292,6 @@ msgstr "صفحات مشابه"
 #, fuzzy
 msgid "Page changed"
 msgstr "إحفظ التغييرات"
-
-#, python-format
-msgid "Low-level communication error: %s"
-msgstr ""
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr ""
@@ -1394,6 +1389,23 @@ msgid ""
 "(!) For more help, see the\n"
 "[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
 "reStructuredText Quick Reference]].\n"
+msgstr ""
+
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
+">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
 msgstr ""
 
 msgid "UnSubscribe"
@@ -2748,6 +2760,10 @@ msgstr "لا يسمح لك باستخدام عملية %(actionname)s في هذ�
 
 msgid "Login and try again."
 msgstr "سجل الدخول و حاول مرة أخرى"
+
+#, fuzzy
+#~ msgid "SendMyPassword"
+#~ msgstr "كلمةالسرّ"
 
 #~ msgid ""
 #~ "This list does not work, unless you have entered a valid email address!"

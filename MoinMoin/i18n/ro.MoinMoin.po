@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-30 00:25+0100\n"
+"POT-Creation-Date: 2008-04-11 21:09+0200\n"
 "PO-Revision-Date: 2005-08-18 14:19+EET\n"
 "Last-Translator: Ovidiu Sabou <ovidiu.sabou@gmail.com>\n"
 "Language-Team: Romanian <ovidiu.sabou@gmail.com>\n"
@@ -965,10 +965,6 @@ msgstr "Ajutor"
 msgid "HelpOnFormatting"
 msgstr "AjutorLaFormatare"
 
-#, fuzzy
-msgid "SendMyPassword"
-msgstr "Parolă"
-
 msgid "WikiLicense"
 msgstr "LicenţăWiki"
 
@@ -1016,6 +1012,9 @@ msgstr "RedenumirePagină"
 
 msgid "SpellCheck"
 msgstr "VerificareOrtografie"
+
+msgid "Discussion"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1221,7 +1220,6 @@ msgid ""
 "change notification.\n"
 "\n"
 "The \"%(pagename)s\" page has been changed by %(editor)s:\n"
-"\n"
 msgstr ""
 "Stimate utilizator Wiki,\n"
 "\n"
@@ -1354,7 +1352,8 @@ msgstr ""
 msgid "XML RPC error: %s"
 msgstr ""
 
-msgid "Low-level communication error: $s"
+#, python-format
+msgid "Low-level communication error: %s"
 msgstr ""
 
 #, fuzzy
@@ -1372,10 +1371,6 @@ msgstr "Pagini Asemănătoare"
 #, fuzzy
 msgid "Page changed"
 msgstr "Salvare modificări"
-
-#, python-format
-msgid "Low-level communication error: %s"
-msgstr ""
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr ""
@@ -1494,6 +1489,41 @@ msgid ""
 "[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
 "reStructuredText Quick Reference]].\n"
 msgstr ""
+
+#, fuzzy
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
+">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+msgstr ""
+" Accentuare:: <<Verbatim('')>>''înclinare''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''îngroşare'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''îngroşare şi "
+"înclinare'''''<<Verbatim(''''')>>; <<Verbatim('')>>''înclinare şi''<<Verbatim"
+"(''')>>'''''îngroşare'''<<Verbatim(''')>> combinate''<<Verbatim('')>>; "
+"<<Verbatim(----)>> linie orizontală.\n"
+" Antete:: <<Verbatim(=)>> Titlu 1 <<Verbatim(=)>>; <<Verbatim(==)>> Titlu 2 "
+"<<Verbatim(==)>>; <<Verbatim(===)>> Titlu 3 <<Verbatim(===)>>;   <<Verbatim"
+"(====)>> Titlu 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Titlu 5 <<Verbatim"
+"(=====)>>.\n"
+" Liste:: spaţiu şi unul dintre: * buline; 1., a., A., i., I. elemente "
+"numerotate; 1.#n începere numărare de la n; spaţiul singur indentează.\n"
+" Legături:: <<Verbatim(UnireCuvintecuIniţialăMare)>>; <<Verbatim"
+"([\"paranteze drepte şi ghilimele\"])>>; url; [url]; [url etichetă].\n"
+" Tabele:: || text în celulă |||| text în celulă pe 2 coloane ||;    nu se "
+"permit caractere spaţiu după tabele sau titluri.\n"
+"\n"
+"(!) Pentru mai multe informaţii vizitaţi HelpOnEditing sau SyntaxReference.\n"
 
 msgid "UnSubscribe"
 msgstr "Părăsire"
@@ -2910,6 +2940,10 @@ msgstr "Nu aveţi permisiunea de a salva un desen pe această pagină."
 #, fuzzy
 msgid "Login and try again."
 msgstr " %s şi încercaţi din nou."
+
+#, fuzzy
+#~ msgid "SendMyPassword"
+#~ msgstr "Parolă"
 
 #~ msgid "Use UserPreferences to change your settings or create an account."
 #~ msgstr ""

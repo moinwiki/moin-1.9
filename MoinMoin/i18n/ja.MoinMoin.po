@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-30 00:25+0100\n"
+"POT-Creation-Date: 2008-04-11 21:09+0200\n"
 "PO-Revision-Date: 2008-03-22 00:06+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
@@ -947,9 +947,6 @@ msgstr "ヘルプの目次"
 msgid "HelpOnFormatting"
 msgstr "書式のヘルプ"
 
-msgid "SendMyPassword"
-msgstr "パスワード送信"
-
 msgid "WikiLicense"
 msgstr "Wikiライセンス"
 
@@ -997,6 +994,9 @@ msgstr "ページ名変更"
 
 msgid "SpellCheck"
 msgstr "スペルチェック"
+
+msgid "Discussion"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1203,7 +1203,6 @@ msgid ""
 "change notification.\n"
 "\n"
 "The \"%(pagename)s\" page has been changed by %(editor)s:\n"
-"\n"
 msgstr ""
 "このメールは、\n"
 "\"%(sitename)s\"\n"
@@ -1336,7 +1335,8 @@ msgstr ""
 msgid "XML RPC error: %s"
 msgstr ""
 
-msgid "Low-level communication error: $s"
+#, python-format
+msgid "Low-level communication error: %s"
 msgstr ""
 
 #, fuzzy
@@ -1354,10 +1354,6 @@ msgstr "ページをパッケージ化"
 #, fuzzy
 msgid "Page changed"
 msgstr "編集内容の保存"
-
-#, python-format
-msgid "Low-level communication error: %s"
-msgstr ""
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr "--pages オプションと --search オプションは、同時には利用できません。"
@@ -1498,6 +1494,42 @@ msgstr ""
 "[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
 "reStructuredText Quick Reference]].\n"
 "を参照してください。\n"
+
+#, fuzzy
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
+">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+msgstr ""
+" 強調:: <<Verbatim('')>>''イタリック''<<Verbatim('')>>、<<Verbatim(''')"
+">>'''ボールド'''<<Verbatim(''')>>、<<Verbatim(''''')>>'''''ボールドイタリッ"
+"ク'''''<<Verbatim(''''')>>、<<Verbatim('')>>''混合 ''<<Verbatim(''')"
+">>'''''ボールド'''<<Verbatim(''')>>とイタリック''<<Verbatim('')>>、<<Verbatim"
+"(----)>> 水平線。\n"
+" 見出し:: <<Verbatim(=)>> タイトル1 <<Verbatim(=)>>、<<Verbatim(==)>> タイト"
+"ル2 <<Verbatim(==)>>、<<Verbatim(===)>> タイトル3 <<Verbatim(===)>>、"
+"<<Verbatim(====)>> タイトル4 <<Verbatim(====)>>、<<Verbatim(=====)>> タイトル"
+"5 <<Verbatim(=====)>>。\n"
+" リスト:: 半角スペースに続けて: * 小丸、1., a., A., i., I. 番号付アイテム、1."
+"#n nから番号開始、半角スペースのみでインデント。\n"
+" リンク:: <<Verbatim(JoinCapitalizedWords)>>、<<Verbatim([[ターゲット|リンク"
+"テキスト]])>>。\n"
+" 表:: || セルテキスト |||| 2列にわたるセルテキスト ||、表やタイトルのあとには"
+"空白を入力しないでください。\n"
+"\n"
+"(!) 詳細はHelpOnEditingや [\"シンタックスリファレンス\"]を参照してくださ"
+"い。\n"
 
 msgid "UnSubscribe"
 msgstr "購読中止"
@@ -2922,6 +2954,9 @@ msgstr "このページでアクション %(action_name)s を使用する権限�
 
 msgid "Login and try again."
 msgstr "ログインして、もう一度試してみてください。"
+
+#~ msgid "SendMyPassword"
+#~ msgstr "パスワード送信"
 
 #~ msgid "Use UserPreferences to change your settings or create an account."
 #~ msgstr ""
