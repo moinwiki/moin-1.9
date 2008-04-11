@@ -92,7 +92,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
             theuser.email = email.strip()
 
             # Require email
-            if not theuser.email:
+            if not theuser.email and 'email' not in self.request.cfg.user_form_remove:
                 return _("Please provide your email address. If you lose your"
                          " login information, you can get it by email.")
 
