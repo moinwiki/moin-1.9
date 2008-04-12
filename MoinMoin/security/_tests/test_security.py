@@ -13,8 +13,12 @@
 import py
 
 from MoinMoin import security
-
 acliter = security.ACLStringIterator
+AccessControlList = security.AccessControlList
+
+from MoinMoin.PageEditor import PageEditor
+from MoinMoin.user import User
+
 
 class TestACLStringIterator(object):
 
@@ -274,6 +278,105 @@ class TestAcl(object):
                 import shutil
                 page.deletePage()
                 shutil.rmtree(path, True)
+
+class TestPageAcls(object):
+    """ security: real-life access control list on pages testing
+    """
+    acls_before = u"WikiAdmin:admin,read,write,delete,revert"
+    acls_default = u"All:read,write"
+    acls_after = u"All:read"
+    mainpage_name = u'AclTestMainPage'
+    subpage_name = u'AclTestMainPage/SubPage'
+    pages = [
+        # pagename, content
+        (mainpage_name, u"#acl JoeDoe: JaneDoe:read,write\nFoo!"),
+        (subpage_name, u"FooFoo!"),
+    ]
+
+    def setup_class(self):
+        self.config = self.TestConfig(
+            acl_rights_before=self.acls_before,
+            acl_rights_default=self.acls_default,
+            acl_rights_after=self.acls_after,
+            acl_hierarchic=False,
+            defaults=['acl_rights_valid'])
+        # TestConfig is crap, it does some wild hack and does not inherit from DefaultConfig
+        # nor call DefaultConfig's __init__() to do post processing, thus we do it here for now:
+        cfg = self.request.cfg
+        cfg.cache.acl_rights_before = AccessControlList(cfg, [cfg.acl_rights_before])
+        cfg.cache.acl_rights_default = AccessControlList(cfg, [cfg.acl_rights_default])
+        cfg.cache.acl_rights_after = AccessControlList(cfg, [cfg.acl_rights_after])
+
+        # Backup user
+        self.savedUser = self.request.user.name
+        self.request.user = User(self.request, auth_username=u'WikiAdmin')
+        self.request.user.valid = True
+
+        for pagename, page_content in self.pages:
+            page = PageEditor(self.request, pagename, do_editor_backup=False)
+            if not page.exists():
+                page.saveText(page_content, 0)
+
+    def teardown_class(self):
+        del self.config
+        cfg = self.request.cfg
+        cfg.cache.acl_rights_before = AccessControlList(cfg, [cfg.acl_rights_before])
+        cfg.cache.acl_rights_default = AccessControlList(cfg, [cfg.acl_rights_default])
+        cfg.cache.acl_rights_after = AccessControlList(cfg, [cfg.acl_rights_after])
+
+        # Restore user
+        self.request.user.name = self.savedUser
+
+    def testPageACLs(self):
+        """ security: test page acls """
+        tests = [
+            # hierarchic, pagename, username, expected_rights
+            (False, self.mainpage_name, u'WikiAdmin', ['read', 'write', 'admin', 'revert', 'delete']),
+            (True,  self.mainpage_name, u'WikiAdmin', ['read', 'write', 'admin', 'revert', 'delete']),
+            (False, self.mainpage_name, u'AnyUser', ['read']), # by after acl
+            (True,  self.mainpage_name, u'AnyUser', ['read']), # by after acl
+            (False, self.mainpage_name, u'JaneDoe', ['read', 'write']), # by page acl
+            (True,  self.mainpage_name, u'JaneDoe', ['read', 'write']), # by page acl
+            (False, self.mainpage_name, u'JoeDoe', []), # by page acl
+            (True,  self.mainpage_name, u'JoeDoe', []), # by page acl
+            (False, self.subpage_name, u'WikiAdmin', ['read', 'write', 'admin', 'revert', 'delete']),
+            (True,  self.subpage_name, u'WikiAdmin', ['read', 'write', 'admin', 'revert', 'delete']),
+            (False, self.subpage_name, u'AnyUser', ['read', 'write']), # by default acl
+            (True,  self.subpage_name, u'AnyUser', ['read']), # by after acl
+            (False, self.subpage_name, u'JoeDoe', ['read', 'write']), # by default acl
+            (True,  self.subpage_name, u'JoeDoe', []), # by inherited acl from main page
+            (False, self.subpage_name, u'JaneDoe', ['read', 'write']), # by default acl
+            (True,  self.subpage_name, u'JaneDoe', ['read', 'write']), # by inherited acl from main page
+        ]
+
+        for hierarchic, pagename, username, may in tests:
+            self.request.cfg.acl_hierarchic = hierarchic
+            u = User(self.request, auth_username=username)
+            u.valid = True
+
+            # User should have these rights...
+            for right in may:
+                can_access = u.may.__getattr__(right)(pagename)
+                if can_access:
+                    print "page %s: %s test if %s may %s (success)" % (
+                        pagename, ['normal', 'hierarchic'][hierarchic], username, right)
+                else:
+                    print "page %s: %s test if %s may %s (failure)" % (
+                        pagename, ['normal', 'hierarchic'][hierarchic], username, right)
+                assert can_access
+
+            # User should NOT have these rights:
+            mayNot = [right for right in self.request.cfg.acl_rights_valid
+                      if right not in may]
+            for right in mayNot:
+                can_access = u.may.__getattr__(right)(pagename)
+                if can_access:
+                    print "page %s: %s test if %s may not %s (failure)" % (
+                        pagename, ['normal', 'hierarchic'][hierarchic], username, right)
+                else:
+                    print "page %s: %s test if %s may not %s (success)" % (
+                        pagename, ['normal', 'hierarchic'][hierarchic], username, right)
+                assert not can_access
 
 coverage_modules = ['MoinMoin.security']
 
