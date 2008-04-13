@@ -9,7 +9,7 @@
 import os
 from MoinMoin.action import AttachFile
 from MoinMoin.PageEditor import PageEditor
-from MoinMoin._tests import become_trusted
+from MoinMoin._tests import become_trusted, create_page, nuke_page
 
 def test_add_attachment(request):
     """Test if add_attachment() works"""
@@ -18,15 +18,14 @@ def test_add_attachment(request):
     pagename = "AutoCreatedSillyPageToTestAttachments"
     filename = "AutoCreatedSillyAttachment"
 
-    editor = PageEditor(request, pagename)
-    editor.deletePage()
-    editor.saveText("Test text!", 0)
+    create_page(request, pagename, u"Foo!")
 
-    print "First of all, no exceptions should be raised!"
     AttachFile.add_attachment(request, pagename, filename, "Test content", True)
+    exists = AttachFile.exists(request, pagename, filename)
 
-    print "The save attachment should actually exist!"
-    assert AttachFile.exists(request, pagename, filename)
+    nuke_page(request, pagename)
+
+    assert exists
 
 def test_get_attachment_path_created_on_getFilename(request):
     """
@@ -34,17 +33,11 @@ def test_get_attachment_path_created_on_getFilename(request):
     """
     pagename = "ThisPageDoesOnlyExistForThisTest"
     filename = ""
-    result = os.path.exists(AttachFile.getFilename(request, pagename, filename))
-    expect = True
+    file_exists = os.path.exists(AttachFile.getFilename(request, pagename, filename))
 
-    # real delete pagename from filesystem
-    import shutil
-    page = PageEditor(request, pagename, do_editor_backup=0)
-    page.deletePage()
-    fpath = page.getPagePath(check_create=0)
-    shutil.rmtree(fpath, True)
+    nuke_page(request, pagename)
 
-    assert expect == result
+    assert file_exists
 
 def test_getAttachUrl(request):
     """

@@ -12,25 +12,11 @@ from MoinMoin.macro import Action
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
 
+from MoinMoin._tests import become_trusted, create_page, nuke_page
 
 class TestAction:
     """ testing macro Action calling action raw """
-
-    def setup_class(self):
-        self.pagename = u'AutoCreatedMoinMoinTemporaryTestPageForAction'
-        self.page = PageEditor(self.request, self.pagename)
-        self.shouldDeleteTestPage = True
-
-    def teardown_class(self):
-        if self.shouldDeleteTestPage:
-            import shutil
-            page = Page(self.request, self.pagename)
-            fpath = page.getPagePath(use_underlay=0, check_create=0)
-            shutil.rmtree(fpath, True)
-
-            fpath = self.request.rootpage.getPagePath('event-log', isfile=1)
-            if os.path.exists(fpath):
-                os.remove(fpath)
+    pagename = u'AutoCreatedMoinMoinTemporaryTestPageForAction'
 
     def _make_macro(self):
         """Test helper"""
@@ -44,21 +30,17 @@ class TestAction:
         m = macro.Macro(p)
         return m
 
-    def _createTestPage(self, body):
-        """ Create temporary page """
-        assert body is not None
-        self.request.reset()
-        self.page.saveText(body, 0)
-
     def testActionCallingRaw(self):
         """ module_tested: executes raw by macro Action on existing page"""
+        request = self.request
+        become_trusted(request)
 
-        expected = '<a href="./AutoCreatedMoinMoinTemporaryTestPageForAction?action=raw">raw</a>'
-        text = '= title1 =\n||A||B||\n'
-        self._createTestPage(text)
+        self.page = create_page(request, self.pagename, u'= title1 =\n||A||B||\n')
         m = self._make_macro()
         result = Action.macro_Action(m, 'raw')
+        nuke_page(request, self.pagename)
 
+        expected = '<a href="./AutoCreatedMoinMoinTemporaryTestPageForAction?action=raw">raw</a>'
         assert result == expected
 
 

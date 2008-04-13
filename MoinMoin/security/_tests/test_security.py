@@ -19,6 +19,7 @@ AccessControlList = security.AccessControlList
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.user import User
 
+from MoinMoin._tests import become_trusted, create_page, nuke_page
 
 class TestACLStringIterator(object):
 
@@ -245,39 +246,6 @@ class TestAcl(object):
             for right in mayNot:
                 assert not acl.may(self.request, user, right)
 
-    def testACLsWithoutEditLogEntry(self):
-        """ tests what are the page rights if edit-log entry doesn't exist
-            for a page where no access is given to
-        """
-        py.test.skip("test tricks out the caching system, page modifications without making an edit-log entry are not supported")
-        import os
-        from MoinMoin.PageEditor import PageEditor
-        pagename = u'AutoCreatedMoinMoinTemporaryTestPage'
-
-        result = self.request.user.may.write(pagename)
-        page = PageEditor(self.request, pagename)
-        path = page.getPagePath(use_underlay=0, check_create=0)
-        if os.path.exists(path):
-            py.test.skip("%s exists. Won't overwrite exiting page" % self.dictPage)
-
-        try:
-            try:
-                os.mkdir(path)
-                revisionsDir = os.path.join(path, 'revisions')
-                os.mkdir(revisionsDir)
-                current = '00000001'
-                file(os.path.join(path, 'current'), 'w').write('%s\n' % current)
-                text = u'#acl All: \n'
-                file(os.path.join(revisionsDir, current), 'w').write(text)
-            except Exception, err:
-                py.test.skip("Can not be create test page: %s" % err)
-
-            assert not self.request.user.may.write(pagename)
-        finally:
-            if os.path.exists(path):
-                import shutil
-                page.deletePage()
-                shutil.rmtree(path, True)
 
 class TestPageAcls(object):
     """ security: real-life access control list on pages testing
@@ -312,10 +280,8 @@ class TestPageAcls(object):
         self.request.user = User(self.request, auth_username=u'WikiAdmin')
         self.request.user.valid = True
 
-        for pagename, page_content in self.pages:
-            page = PageEditor(self.request, pagename, do_editor_backup=False)
-            if not page.exists():
-                page.saveText(page_content, 0)
+        for page_name, page_content in self.pages:
+            create_page(self.request, page_name, page_content)
 
     def teardown_class(self):
         del self.config
@@ -326,6 +292,9 @@ class TestPageAcls(object):
 
         # Restore user
         self.request.user.name = self.savedUser
+
+        for page_name, dummy in self.pages:
+            nuke_page(self.request, page_name)
 
     def testPageACLs(self):
         """ security: test page acls """
@@ -379,4 +348,3 @@ class TestPageAcls(object):
                 assert not can_access
 
 coverage_modules = ['MoinMoin.security']
-

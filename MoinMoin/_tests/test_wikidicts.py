@@ -14,7 +14,7 @@ import shutil
 from MoinMoin import wikidicts
 from MoinMoin import Page
 from MoinMoin.PageEditor import PageEditor
-from MoinMoin._tests import become_trusted
+from MoinMoin._tests import become_trusted, create_page, nuke_page
 
 class TestGroupPage:
 
@@ -121,28 +121,18 @@ class TestGroupDicts:
         """
          tests if the dict cache for groups is refreshed after renaming a Group page
         """
-        become_trusted(self.request)
-        pagename = u'SomeGroup'
-        page = PageEditor(self.request, pagename, do_editor_backup=False)
-        body = " * ExampleUser"
-        try:
-            page.saveText(body, 0)
-        except:
-            pass
-
+        request = self.request
+        become_trusted(request)
+        page = create_page(request, u'SomeGroup', u" * ExampleUser")
         page.renamePage('AnotherGroup')
 
-        group = wikidicts.Group(self.request, '')
-        isgroup = self.request.cfg.cache.page_group_regex.search
-        grouppages = self.request.rootpage.getPageList(user='', filter=isgroup)
+        group = wikidicts.Group(request, '')
+        isgroup = request.cfg.cache.page_group_regex.search
+        grouppages = request.rootpage.getPageList(user='', filter=isgroup)
 
-        members, groups = self.request.dicts.expand_group(u'AnotherGroup')
-        page = PageEditor(self.request, u'AnotherGroup', do_editor_backup=0)
+        members, groups = request.dicts.expand_group(u'AnotherGroup')
 
-        # real delete AnotherGroup page from filesystem
-        page.deletePage()
-        fpath = page.getPagePath(check_create=0)
-        shutil.rmtree(fpath, True)
+        nuke_page(request, u'AnotherGroup')
 
         assert u'ExampleUser' in members
 
@@ -150,37 +140,20 @@ class TestGroupDicts:
         """
          tests if the dict cache for groups is refreshed after copying a Group page
         """
-        become_trusted(self.request)
-        pagename = u'SomeGroup'
-        page = PageEditor(self.request, pagename, do_editor_backup=False)
-        body = " * ExampleUser"
-        try:
-            page.saveText(body, 0)
-        except:
-            pass
-
+        request = self.request
+        become_trusted(request)
+        page = create_page(request, u'SomeGroup', u" * ExampleUser")
         page.copyPage(u'OtherGroup')
 
-        group = wikidicts.Group(self.request, '')
-        isgroup = self.request.cfg.cache.page_group_regex.search
-        grouppages = self.request.rootpage.getPageList(user='', filter=isgroup)
+        group = wikidicts.Group(request, '')
+        isgroup = request.cfg.cache.page_group_regex.search
+        grouppages = request.rootpage.getPageList(user='', filter=isgroup)
 
-        members, groups = self.request.dicts.expand_group(u'OtherGroup')
-        page = PageEditor(self.request, u'OtherGroup', do_editor_backup=0)
+        members, groups = request.dicts.expand_group(u'OtherGroup')
 
-        # real delete Group page from filesystem
-        page = PageEditor(self.request, u'OtherGroup', do_editor_backup=0)
-        page.deletePage()
-        fpath = page.getPagePath(check_create=0)
-        shutil.rmtree(fpath, True)
-
-        # real delete Group page from filesystem
-        page = PageEditor(self.request, u'SomeGroup', do_editor_backup=0)
-        page.deletePage()
-        fpath = page.getPagePath(check_create=0)
-        shutil.rmtree(fpath, True)
+        nuke_page(request, u'OtherGroup')
+        nuke_page(request, u'SomeGroup')
 
         assert u'ExampleUser' in members
 
 coverage_modules = ['MoinMoin.wikidicts']
-

@@ -12,25 +12,18 @@ from MoinMoin.macro import FootNote
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
 
+from MoinMoin._tests import become_trusted, create_page, nuke_page
 
 class TestFootNote:
     """ testing macro Action calling action raw """
+    pagename = u'AutoCreatedMoinMoinTemporaryTestPageForFootNote'
 
     def setup_class(self):
-        self.pagename = u'AutoCreatedMoinMoinTemporaryTestPageForFootNote'
-        self.page = PageEditor(self.request, self.pagename)
-        self.shouldDeleteTestPage = True
+        become_trusted(self.request)
+        self.page = create_page(self.request, self.pagename, u"Foo!")
 
     def teardown_class(self):
-        if self.shouldDeleteTestPage:
-            import shutil
-            page = Page(self.request, self.pagename)
-            fpath = page.getPagePath(use_underlay=0, check_create=0)
-            shutil.rmtree(fpath, True)
-
-            fpath = self.request.rootpage.getPagePath('event-log', isfile=1)
-            if os.path.exists(fpath):
-                os.remove(fpath)
+        nuke_page(self.request, self.pagename)
 
     def _make_macro(self):
         """Test helper"""
@@ -57,4 +50,3 @@ class TestFootNote:
 
 
 coverage_modules = ['MoinMoin.macro.FootNote']
-
