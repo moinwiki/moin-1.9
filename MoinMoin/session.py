@@ -258,7 +258,7 @@ class SessionIDHandler:
         to set/get the persistent ID that is used to identify the session
         which is usually stored in a cookie.
     """
-    _SESSION_NAME_CHARS = 'abcdefghijklmnopqrstuvwxyz0123456789_-'
+    _SESSION_NAME_CHARS = 'abcdefghijklmnopqrstuvwxyz0123456789_'
     _SESSION_NAME_LEN = 32
 
     def __init__(self):
