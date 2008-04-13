@@ -7,24 +7,27 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-def become_known(request, username=u"KnownUser"):
-    """ modify request.user to make the user valid, so it is in acl group Known """
+def become_valid(request, username=u"ValidUser"):
+    """ modify request.user to make the user valid.
+        Note that a valid user will only be in ACL special group "Known", if
+        we have a user profile for this user as the ACL system will check if
+        there is a userid for this username.
+        Thus, for testing purposes (e.g. if you need delete rights), it is
+        easier to use become_trusted().
+    """
     request.user.name = username
     request.user.may.name = username
     request.user.valid = 1
 
 def become_trusted(request, username=u"TrustedUser"):
     """ modify request.user to make the user valid and trusted, so it is in acl group Trusted """
-    become_known(request, username)
+    become_valid(request, username)
     request.user.auth_method = request.cfg.auth_methods_trusted[0]
 
 def become_superuser(request):
     """ modify request.user so it is in the superuser list,
-        also make the user valid (and thus in "Known" ACL pseudo group),
+        also make the user valid (see notes in become_valid()),
         also make the user trusted (and thus in "Trusted" ACL pseudo group).
-
-        TODO: check why many tests fail if we just use "become_known" instead
-              of "become_trusted". Then refactor to only use "become_known".
 
         Note: being superuser is completely unrelated to ACL rights,
               especially it is not related to ACL admin rights.

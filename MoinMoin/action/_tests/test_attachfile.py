@@ -9,12 +9,12 @@
 import os
 from MoinMoin.action import AttachFile
 from MoinMoin.PageEditor import PageEditor
-from MoinMoin._tests import become_superuser
+from MoinMoin._tests import become_trusted
 
 def test_add_attachment(request):
     """Test if add_attachment() works"""
 
-    become_superuser(request)
+    become_trusted(request)
     pagename = "AutoCreatedSillyPageToTestAttachments"
     filename = "AutoCreatedSillyAttachment"
 

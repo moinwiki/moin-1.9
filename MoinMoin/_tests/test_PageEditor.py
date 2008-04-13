@@ -12,7 +12,7 @@ import py
 from MoinMoin import wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
-from MoinMoin._tests import become_superuser
+from MoinMoin._tests import become_trusted
 
 class TestExpandVars(object):
     """PageEditor: testing page editor"""
@@ -172,7 +172,7 @@ class TestSave(object):
 
     def setup_method(self, method):
         self.old_handlers = self.request.cfg.event_handlers
-        become_superuser(self.request)
+        become_trusted(self.request)
 
     def teardown_method(self, method):
         self.request.cfg.event_handlers = self.old_handlers
