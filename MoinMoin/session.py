@@ -423,6 +423,8 @@ class DefaultSessionHandler(SessionHandler):
     def after_auth(self, request, session_id_handler, user_obj):
         session = request.session
         if user_obj and user_obj.valid:
+            if 'user.id' in session and session['user.id'] != user_obj.id:
+                session.delete()
             session['user.id'] = user_obj.id
             session['user.auth_method'] = user_obj.auth_method
             session['user.auth_attribs'] = user_obj.auth_attribs
