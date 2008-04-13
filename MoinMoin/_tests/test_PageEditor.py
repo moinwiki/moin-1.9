@@ -12,7 +12,9 @@ import py
 from MoinMoin import wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
-from MoinMoin._tests import become_trusted
+
+# TODO: check if and where we can use the helpers:
+from MoinMoin._tests import become_trusted, create_page, nuke_page
 
 class TestExpandVars(object):
     """PageEditor: testing page editor"""
@@ -296,4 +298,3 @@ class TestCopyPage(object):
         assert result and revision is 2
 
 coverage_modules = ['MoinMoin.PageEditor']
-

@@ -11,34 +11,19 @@ import os, py
 from MoinMoin import macro
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
-from MoinMoin._tests import become_known
+
+from MoinMoin._tests import become_trusted, create_page, nuke_page
 
 class TestGetVal:
     """GetVal: testing getVal macro """
+    pagename = u'MyDict'
 
-        # injected for you into the test class by moin test framework.
-    def setup_method(self, method):
-        become_known(self.request)
+    def setup_class(self):
+        become_trusted(self.request)
         self.cfg = self.request.cfg
-        self.pagename = u'MyDict'
-        self.page = PageEditor(self.request, self.pagename, do_editor_backup=0)
-        self.shouldDeleteTestPage = True
 
-        # for that test eventlog needs to be empty
-        fpath = self.request.rootpage.getPagePath('event-log', isfile=1)
-        if os.path.exists(fpath):
-            os.remove(fpath)
-
-
-    def teardown_method(self, method):
-        if self.shouldDeleteTestPage:
-            page = PageEditor(self.request, self.pagename, do_editor_backup=0)
-            success_i, msg = page.deletePage()
-
-            fpath = self.request.rootpage.getPagePath('event-log', isfile=1)
-            if os.path.exists(fpath):
-                os.remove(fpath)
-
+    def teardown_class(self):
+        nuke_page(self.request, self.pagename)
 
     def _make_macro(self):
         """Test helper"""
@@ -56,60 +41,36 @@ class TestGetVal:
         m = self._make_macro()
         return m.execute(name, args)
 
-    def _createTestPage(self, body):
-        """ Create temporary page """
-        assert body is not None
-
-        self.request.reset()
-        try:
-            self.page.saveText(body, 0)
-        except:
-            pass
-
     def testGetValNoACLs(self):
         """ macro GetVal test: 'reads VAR' """
 
-        self.shouldDeleteTestPage = True
-        self._createTestPage(u' VAR:: This is an example')
+        self.page = create_page(self.request, self.pagename, u' VAR:: This is an example')
 
-        page = Page(self.request, self.pagename)
-        args = "%s,%s" % (self.pagename, u'VAR')
-        result = self._test_macro(u'GetVal', args)
+        result = self._test_macro(u'GetVal', "%s,%s" % (self.pagename, u'VAR'))
 
-        expected = "This is an example"
-        assert result == expected
+        assert result == "This is an example"
 
     def testGetValAfterADictPageIsDeleted(self):
         """ macro GetVal test: 'reads Dict var after another Dict is removed' """
+        request = self.request
 
-        self.shouldDeleteTestPage = True
+        page = create_page(request, u'SomeDict', u" EXAMPLE:: This is an example text")
+        page.deletePage()
 
-        pagename = u'SomeDict'
-        page = PageEditor(self.request, pagename, do_editor_backup=0)
-        body = u" EXAMPLE:: This is an example text"
-        try:
-            page.saveText(body, 0)
-        except:
-            pass
-        success_i, result = page.deletePage()
+        page = create_page(request, self.pagename, u' VAR:: This is a brand new example')
+        result = self._test_macro(u'GetVal', "%s,%s" % (self.pagename, u'VAR'))
 
-        self._createTestPage(u' VAR:: This is a brand new example')
-        page = Page(self.request, self.pagename)
-        args = "%s,%s" % (self.pagename, u'VAR')
-        result = self._test_macro(u'GetVal', args)
+        nuke_page(request, u'SomeDict')
 
-        expected = "This is a brand new example"
-        assert result == expected
+        assert result == "This is a brand new example"
 
     def testGetValACLs(self):
         """ macro GetVal test: 'cant read VAR on an ACL protected page' """
         py.test.skip("user has no rights to create acl pages")
-        self.shouldDeleteTestPage = True
-        self._createTestPage('#acl SomeUser:read,write All:delete\n VAR:: This is an example')
-        args = "%s,%s" % (self.pagename, u'VAR')
-        result = self._test_macro(u'GetVal', args)
-        expected = "&lt;&lt;GetVal: You don't have enough rights on this page&gt;&gt;"
-        assert result == expected
+        self.page = create_page(self.request, self.pagename,
+                                '#acl SomeUser:read,write All:delete\n VAR:: This is an example')
+        result = self._test_macro(u'GetVal', "%s,%s" % (self.pagename, u'VAR'))
+        assert result == "&lt;&lt;GetVal: You don't have enough rights on this page&gt;&gt;"
 
 coverage_modules = ['MoinMoin.macro.GetVal']
 

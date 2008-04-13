@@ -12,33 +12,29 @@ from MoinMoin import caching, macro
 from MoinMoin.logfile import eventlog
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.Page import Page
-from MoinMoin._tests import become_trusted
+
+from MoinMoin._tests import become_trusted, create_page, nuke_page
 
 class TestHits:
     """Hits: testing Hits macro """
+    pagename = u'AutoCreatedMoinMoinTemporaryTestPageForPageHits'
 
     def setup_class(self):
-        become_trusted(self.request)
-        self.pagename = u'AutoCreatedMoinMoinTemporaryTestPageForPageHits'
-        self.page = PageEditor(self.request, self.pagename)
-        self.shouldDeleteTestPage = True
+        request = self.request
+        become_trusted(request)
+        self.page = create_page(request, self.pagename, u"Foo!")
+
         # for that test eventlog needs to be empty
-        fpath = self.request.rootpage.getPagePath('event-log', isfile=1)
+        fpath = request.rootpage.getPagePath('event-log', isfile=1)
         if os.path.exists(fpath):
             os.remove(fpath)
+
         # hits is based on hitcounts which reads the cache
-        caching.CacheEntry(self.request, 'charts', 'pagehits', scope='wiki').remove()
-        caching.CacheEntry(self.request, 'charts', 'hitcounts', scope='wiki').remove()
-        arena = Page(self.request, self.pagename)
-        caching.CacheEntry(self.request, arena, 'hitcounts', scope='item').remove()
+        caching.CacheEntry(request, 'charts', 'pagehits', scope='wiki').remove()
+        caching.CacheEntry(request, 'charts', 'hitcounts', scope='wiki').remove()
 
     def teardown_class(self):
-        if self.shouldDeleteTestPage:
-            import shutil
-            page = PageEditor(self.request, self.pagename)
-            page.deletePage()
-            fpath = page.getPagePath(use_underlay=0, check_create=0)
-            shutil.rmtree(fpath, True)
+        nuke_page(self.request, self.pagename)
 
     def _make_macro(self):
         """Test helper"""
@@ -56,21 +52,12 @@ class TestHits:
         m = self._make_macro()
         return m.execute(name, args)
 
-    def _createTestPage(self, body):
-        """ Create temporary page """
-        assert body is not None
-        self.request.reset()
-        self.page.saveText(body, 0)
-
     def testPageHits(self):
         """ macro PageHits test: updating of cache from event-log for multiple call of PageHits"""
-        self.shouldDeleteTestPage = True
-        self._createTestPage('This is an example to test a macro')
-
-        # Three log entries for the current page and one for WikiSandBox simulating viewing
-        for counter in range(20):
+        count = 20
+        for counter in range(count):
             eventlog.EventLog(self.request).add(self.request, 'VIEWPAGE', {'pagename': 'PageHits'})
-            result = self._test_macro(u'PageHits', u'')
+            result = self._test_macro(u'PageHits', u'') # XXX SENSE???
 
         cache = caching.CacheEntry(self.request, 'charts', 'pagehits', scope='wiki', use_pickle=True)
         date, hits = 0, {}
@@ -79,8 +66,6 @@ class TestHits:
                 date, hits = cache.content()
             except caching.CacheError:
                 cache.remove()
-        expected = 20
-        assert hits['PageHits'] == expected
+        assert hits['PageHits'] == count
 
 coverage_modules = ['MoinMoin.macro.PageHits']
-
