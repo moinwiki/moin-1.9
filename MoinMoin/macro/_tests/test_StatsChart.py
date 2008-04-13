@@ -12,7 +12,7 @@ from MoinMoin import caching, macro
 from MoinMoin.logfile import eventlog
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.Page import Page
-from MoinMoin._tests import become_superuser
+from MoinMoin._tests import become_trusted
 
 class TestStatsCharts:
     """StartsChart: testing StatsChart macro """
@@ -21,7 +21,7 @@ class TestStatsCharts:
         self.pagename = u'AutoCreatedMoinMoinTemporaryTestPageStatsChart'
         self.page = PageEditor(self.request, self.pagename)
         self.shouldDeleteTestPage = False
-        become_superuser(self.request)
+        become_trusted(self.request)
         # clean page scope cache entries
         keys = ['text_html', 'pagelinks', ]
         arena = Page(self.request, self.pagename)
