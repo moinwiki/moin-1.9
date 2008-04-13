@@ -12,13 +12,13 @@ from MoinMoin import caching, macro
 from MoinMoin.logfile import eventlog
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.Page import Page
-from MoinMoin._tests.common import gain_superuser_rights
+from MoinMoin._tests import become_superuser
 
 class TestHits:
     """Hits: testing Hits macro """
 
     def setup_class(self):
-        gain_superuser_rights(self.request)
+        become_superuser(self.request)
         self.pagename = u'AutoCreatedMoinMoinTemporaryTestPageForPageHits'
         self.page = PageEditor(self.request, self.pagename)
         self.shouldDeleteTestPage = True

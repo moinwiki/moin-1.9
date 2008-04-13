@@ -11,14 +11,14 @@ import os, py
 from MoinMoin import macro
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
-from MoinMoin._tests.common import gain_superuser_rights
+from MoinMoin._tests import become_superuser
 
 class TestGetVal:
     """GetVal: testing getVal macro """
 
         # injected for you into the test class by moin test framework.
     def setup_method(self, method):
-        gain_superuser_rights(self.request)
+        become_superuser(self.request)
         self.cfg = self.request.cfg
         self.pagename = u'MyDict'
         self.page = PageEditor(self.request, self.pagename, do_editor_backup=0)

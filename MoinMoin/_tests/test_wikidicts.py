@@ -14,7 +14,7 @@ import shutil
 from MoinMoin import wikidicts
 from MoinMoin import Page
 from MoinMoin.PageEditor import PageEditor
-from MoinMoin._tests.common import gain_superuser_rights
+from MoinMoin._tests import become_superuser
 
 class TestGroupPage:
 
@@ -121,7 +121,7 @@ class TestGroupDicts:
         """
          tests if the dict cache for groups is refreshed after renaming a Group page
         """
-        gain_superuser_rights(self.request)
+        become_superuser(self.request)
         pagename = u'SomeGroup'
         page = PageEditor(self.request, pagename, do_editor_backup=False)
         body = " * ExampleUser"
@@ -150,7 +150,7 @@ class TestGroupDicts:
         """
          tests if the dict cache for groups is refreshed after copying a Group page
         """
-        gain_superuser_rights(self.request)
+        become_superuser(self.request)
         pagename = u'SomeGroup'
         page = PageEditor(self.request, pagename, do_editor_backup=False)
         body = " * ExampleUser"

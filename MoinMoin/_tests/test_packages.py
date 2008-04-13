@@ -15,7 +15,7 @@ from MoinMoin import wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.action.PackagePages import PackagePages
 from MoinMoin.packages import Package, ScriptEngine, MOIN_PACKAGE_FILE, packLine, unpackLine
-from MoinMoin._tests.common import gain_superuser_rights
+from MoinMoin._tests import become_superuser
 
 
 class DebugPackage(Package, ScriptEngine):
@@ -66,7 +66,7 @@ DeletePage|FooPage|Test ...
 """).installPackage()
 
     def testBasicPackageThings(self):
-        gain_superuser_rights(self.request)
+        become_superuser(self.request)
         myPackage = DebugPackage(self.request, 'test')
         myPackage.installPackage()
         assert myPackage.msg == u'foo\nFooPage added \n'
