@@ -37,14 +37,6 @@ class TestHits:
             fpath = page.getPagePath(use_underlay=0, check_create=0)
             shutil.rmtree(fpath, True)
 
-        fpath = self.request.rootpage.getPagePath('event-log', isfile=1)
-        if os.path.exists(fpath):
-            os.remove(fpath)
-        # hits is based on hitcounts which reads the cache
-        caching.CacheEntry(self.request, 'charts', 'hitcounts', scope='wiki').remove()
-        arena = Page(self.request, self.pagename)
-        caching.CacheEntry(self.request, arena, 'hitcounts', scope='item').remove()
-
     def _make_macro(self):
         """Test helper"""
         from MoinMoin.parser.text import Parser
@@ -87,21 +79,23 @@ class TestHits:
         self.shouldDeleteTestPage = False
         self._createTestPage('This is an example to test a macro with parameters')
 
-        # Two log entries for simulating viewing
+        # Two log entries for simulating viewing 
         eventlog.EventLog(self.request).add(self.request, 'VIEWPAGE', {'pagename': self.pagename})
         eventlog.EventLog(self.request).add(self.request, 'VIEWPAGE', {'pagename': self.pagename})
 
         result = self._test_macro(u'Hits', u'all=True')
+        # four log entries from the previuos test + two from this test
         expected = "6"
         assert result == expected
 
     def testHitsForFilter(self):
-        """ macro Hits test: 'all=True, event_type=SAVEPAGE' for Hits (SAVEPAGE counted for current page)"""
+        """ macro Hits test: 'event_type=SAVEPAGE' for Hits (SAVEPAGE counted for current page)"""
         self.shouldDeleteTestPage = False
 
         # simulate a log entry SAVEPAGE for WikiSandBox to destinguish current page
         eventlog.EventLog(self.request).add(self.request, 'SAVEPAGE', {'pagename': 'WikiSandBox'})
         result = self._test_macro(u'Hits', u'event_type=SAVEPAGE')
+        # two previous tests do have saved the page twice times
         expected = "2"
         assert result == expected
 
@@ -110,6 +104,7 @@ class TestHits:
         self.shouldDeleteTestPage = True
 
         result = self._test_macro(u'Hits', u'all=True, event_type=SAVEPAGE')
+        # two previous tests have saved the page twice times + one log entry for WikiSandBox
         expected = "3"
         assert result == expected
 
