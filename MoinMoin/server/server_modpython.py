@@ -38,7 +38,6 @@ class ModpythonConfig(Config):
     """ Set up default server """
     properties = {}
 
-    # Set up log handler to log to apache log!
 
 def modpythonHandler(request, ConfigClass=ModpythonConfig):
     config = ConfigClass()

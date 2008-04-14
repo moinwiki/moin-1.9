@@ -69,7 +69,11 @@ Version 1.7.current:
       was changed to default False).
 
   New Features:
-    * new powerful and flexible logging, please see wiki/config/logging/.
+    * new powerful and flexible logging, please see wiki/config/logging/ -
+      HINT: you have to upgrade your server adaptor script (e.g. moin.cgi)
+      and load a logging configuration that fits your needs from there.
+      If you use some of our sample logging configs, make sure you have a
+      look INTO them to fix e.g. the path of the logfile it will use.
     * moin now logs the path from where it loaded its configuration(s)
     * cfg.trusted_auth_methods is a list of auth methods that put an
       authenticated user into the "Trusted" ACL group.

@@ -10,9 +10,23 @@
     and load_config must be called afterwards, before any other moin
     module gets imported.
 
-    Usage
-    -----
-    Typically, do this at top of your module:
+    Usage (for wiki server admins)
+    ------------------------------
+    Typically, your server adaptor script (e.g. moin.cgi) will have this:
+
+    from MoinMoin import log
+    log.load_config('wiki/config/logging/logfile') # XXX please fix this path!
+
+    You have to fix that path to use a logging configuration matching your
+    needs (we provide some examples in the path given there, it is relative to
+    the uncompressed moin distribution archive - if you use some moin package,
+    you maybe find it under /usr/share/moin/).
+    It is likely that you also have to edit the sample logging configurations
+    we provide (e.g. to fix the logfile location).
+
+    Usage (for developers)
+    ----------------------
+    If you write code for moin, do this at top of your module:
 
     from MoinMoin import log
     logging = log.getLogger(__name__)
@@ -31,10 +45,9 @@
 # that load_config() is either not called at all or with a non-working
 # logging configuration.
 # See http://www.python.org/doc/lib/logging-config-fileformat.html
-# We just use moin.log in current directory by default, if you want
-# anything else, override logging_conf in your server script's Config class.
+# We just use stderr output by default, if you want anything else,
+# you will have to configure logging.
 logging_defaults = {
-    'logdir': '.',
     'loglevel': 'INFO',
 }
 logging_config = """\
@@ -42,28 +55,22 @@ logging_config = """\
 keys=root
 
 [handlers]
-keys=logfile,stderr
+keys=stderr
 
 [formatters]
-keys=logfile
+keys=default
 
 [logger_root]
 level=%(loglevel)s
-handlers=logfile,stderr
-
-[handler_logfile]
-class=FileHandler
-level=NOTSET
-formatter=logfile
-args=('%(logdir)s/moin.log', 'at')
+handlers=stderr
 
 [handler_stderr]
 class=StreamHandler
 level=NOTSET
-formatter=logfile
+formatter=default
 args=(sys.stderr, )
 
-[formatter_logfile]
+[formatter_default]
 format=%(asctime)s %(levelname)s %(name)s:%(lineno)d %(message)s
 datefmt=
 class=logging.Formatter
@@ -74,7 +81,6 @@ import logging, logging.config
 configured = False
 fallback_config = False
 
-strip_MoinMoin = False
 
 def load_config(conf_fname):
     """ load logging config from conffile """
@@ -103,11 +109,8 @@ def getLogger(name):
         - patch loglevel constants into logger object, so it can be used
           instead of the logging module
     """
-    global configured
     if not configured: # should not happen
         load_fallback_config()
-    if strip_MoinMoin and name.startswith('MoinMoin.'):
-        name = name[9:]
     logger = logging.getLogger(name)
     for levelnumber, levelname in logging._levelNames.items():
         if isinstance(levelnumber, int): # that list has also the reverse mapping...

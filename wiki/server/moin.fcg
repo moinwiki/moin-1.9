@@ -3,7 +3,7 @@
 """
     MoinMoin - FastCGI Driver Script
     
-    @copyright: 2007 MoinMoin:ThomasWaldmann
+    @copyright: 2008 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -25,7 +25,7 @@ sys.path.insert(0, '/path/to/wikiconfig')
 #os.environ['MOIN_DEBUG'] = '1'
 
 from MoinMoin import log
-log.load_config('.../wiki/config/logging/logfile') # XXX fix path
+log.load_config('wiki/config/logging/logfile') # XXX please fix this path!
 
 from MoinMoin.server.server_fastcgi import FastCgiConfig, run
 

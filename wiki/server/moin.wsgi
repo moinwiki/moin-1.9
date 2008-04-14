@@ -17,7 +17,7 @@
     # use the daemons we defined above to process requests!
     WSGIProcessGroup daemonname
 
-    @copyright: 2007 by MoinMoin:ThomasWaldmann
+    @copyright: 2008 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -35,14 +35,14 @@ import sys
 sys.path.insert(0, '/path/to/wikiconfig')
 
 from MoinMoin import log
-log.load_config('.../wiki/config/logging/logfile') # XXX fix path
+log.load_config('wiki/config/logging/logfile') # XXX please fix this path!
 
 from MoinMoin.server.server_wsgi import WsgiConfig, moinmoinApp
 
 class Config(WsgiConfig):
     pass
 
-config = Config() # MUST create an instance to init logging!
+config = Config()
 
 application = moinmoinApp
 

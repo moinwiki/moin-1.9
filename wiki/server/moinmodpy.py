@@ -49,7 +49,7 @@ sys.path.insert(0, '/path/to/wikiconfig')
 ## os.environ['MOIN_DEBUG'] = '1'
 
 from MoinMoin import log
-log.load_config('.../wiki/config/logging/conffile') # XXX fix path
+log.load_config('wiki/config/logging/conffile') # XXX please fix this path!
 
 # Simple way
 #from MoinMoin.server.server_modpython import modpythonHandler as handler
@@ -66,3 +66,4 @@ class MyConfig(ModpythonConfig):
 
 def handler(request):
     return modpythonHandler(request, MyConfig)
+
