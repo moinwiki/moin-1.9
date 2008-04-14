@@ -13,7 +13,7 @@
 import os
 
 from MoinMoin import log
-log.load_config('.../wiki/config/logging/logfile') # XXX fix path
+log.load_config('wiki/config/logging/logfile') # XXX please fix this path!
 
 from MoinMoin.server import daemon
 from mointwisted import Config
@@ -23,7 +23,7 @@ class TwistedScript(daemon.DaemonScript):
 
     def do_start(self):
         """ Override to use twistd daemonizer """
-        os.system('twistd --python mointwisted.py --pidfile %s' % self.pidFile)       
+        os.system('twistd --python mointwisted.py --pidfile %s' % self.pidFile)
 
 
 script = TwistedScript(Config.name, None)

@@ -3,7 +3,8 @@
 """
     MoinMoin - CGI Driver Script
 
-    @copyright: 2000-2005 by Juergen Hermann <jh@web.de>
+    @copyright: 2000-2005 by Juergen Hermann <jh@web.de>,
+                2008 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -27,7 +28,7 @@ sys.path.insert(0, '/path/to/wikiconfig')
 ## os.environ['MOIN_DEBUG'] = '1'
 
 from MoinMoin import log
-log.load_config('.../wiki/config/logging/conffile') # XXX fix path
+log.load_config('wiki/config/logging/conffile') # XXX please fix this path!
 
 from MoinMoin.server.server_cgi import CgiConfig, run
 

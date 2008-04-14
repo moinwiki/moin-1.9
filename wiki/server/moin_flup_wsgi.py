@@ -2,7 +2,7 @@
     MoinMoin - Moin as WSGI application with flup as fcgi gateway
 
     @copyright: 2005 by Anakim Border <akborder@gmail.com>,
-                2007 by MoinMoin:ThomasWaldmann
+                2008 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -12,7 +12,7 @@ unixSocketPath = '/tmp/moin.sock'
 import os
 
 from MoinMoin import log
-log.load_config('.../wiki/config/logging/logfile') # XXX fix path
+log.load_config('wiki/config/logging/logfile') # XXX please fix this path!
 
 # Set threads flag, so other code can use proper locking
 from MoinMoin import config
@@ -25,7 +25,7 @@ from MoinMoin.server.server_wsgi import moinmoinApp, WsgiConfig
 class Config(WsgiConfig):
     pass
 
-config = Config() # MUST create an instance
+config = Config()
 
 if __name__ == '__main__':
     server = WSGIServer(moinmoinApp, bindAddress=unixSocketPath)

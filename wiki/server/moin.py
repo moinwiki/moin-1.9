@@ -2,7 +2,8 @@
 """
     Start script for the standalone Wiki server.
 
-    @copyright: 2007 MoinMoin:ForrestVoight
+    @copyright: 2007 MoinMoin:ForrestVoight,
+                2008 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -17,7 +18,7 @@ sys.path.insert(0, moinpath)
 os.chdir(moinpath)
 
 from MoinMoin import log
-log.load_config('wiki/config/logging/stderr') # XXX maybe fix path
+log.load_config('wiki/config/logging/stderr') # XXX please fix this path!
 
 from MoinMoin.script import MoinScript
 
