@@ -747,9 +747,20 @@ class CategorySearch(TextSearch):
         self._tag = 'category:'
 
     def _build_re(self, pattern, **kwargs):
+        """ match categories like this:
+            ... some page text ...
+            ----
+            ## optionally some comments, e.g. about possible categories:
+            ## CategoryFoo
+            CategoryTheRealAndOnly
+
+            Note: there might be multiple comment lines, but all real categories
+                  must be on a single line either directly below the ---- or
+                  directly below some comment lines.
+        """
         kwargs['use_re'] = True
         TextSearch._build_re(self,
-                r'(----(-*)(\r)?\n)(.*)\b%s\b' % pattern, **kwargs)
+                r'(?m)(^-----*\r?\n)(^##.*\r?\n)*^(?!##)(.*)\b%s\b' % pattern, **kwargs)
 
     def costs(self):
         return 5000 # cheaper than a TextSearch
