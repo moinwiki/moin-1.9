@@ -38,6 +38,10 @@ def _check_param_value(param, value, valuetype):
     @param value: the value
     @param valuetype: the type of the value
     """
+    # Because plugins do have different defaults we have to write "False" too.
+    if isinstance(value, bool):
+        value = str(value)
+
     if value:
         return '''
 <param name="%(param)s" value="%(value)s" valuetype="%(valuetype)s">''' % {"param": param,
@@ -197,14 +201,15 @@ def macro_EmbedObject(macro, target=wikiutil.required_arg(unicode), pagename=Non
             height = height or '800px'
 
         embed_src = '''
-<object %(ob_data)s %(ob_type)s  %(ob_width)s %(ob_height)s %(ob_align)s>
-%(quality)s%(wmode)s%(autostart)s%(play)s%(loop)s%(menu)s<p>%(alt)s</p>
+<object %(ob_data)s %(ob_type)s %(ob_width)s %(ob_height)s %(ob_align)s>
+%(movie)s%(quality)s%(wmode)s%(autostart)s%(play)s%(loop)s%(menu)s<p>%(alt)s</p>
 </object>''' % {
     "ob_data": _check_object_value("data", url),
     "ob_width": _check_object_value("width", width),
     "ob_height": _check_object_value("height", height),
     "ob_type": _check_object_value("type", mime_type),
     "ob_align": _check_object_value("align", align),
+    "movie": _check_param_value("movie", url, "data"),
     "quality": _check_param_value("quality", quality, "data"),
     "wmode": _check_param_value("wmode", wmode, "data"),
     "autostart": _check_param_value("autostart", autostart, "data"),
