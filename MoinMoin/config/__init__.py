@@ -76,6 +76,7 @@ url_schemas = ['http', 'https', 'ftp', 'file',
                'mailto', 'nntp', 'news',
                'telnet', 'irc', 'ircs', 'xmpp',
                'webcal', 'ed2k', 'rootz',
+               'notes',
               ]
 
 smileys = (r"X-( :D <:( :o :( :) B) :)) ;) /!\ <!> (!) :-? :\ >:> |) " +
