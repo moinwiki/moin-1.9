@@ -42,10 +42,10 @@ class Settings(UserPrefBase):
             and self.request.request_method == 'POST'):
             uid = form.get('selected_user', [''])[0]
             if not uid:
-                return _("No user selected")
+                return 'error', _("No user selected")
             theuser = user.User(self.request, uid, auth_method='setuid')
             if not theuser or not theuser.exists():
-                return _("No user selected")
+                return 'error', _("No user selected")
             # set valid to True so superusers can even switch
             # to disable accounts
             theuser.valid = True
