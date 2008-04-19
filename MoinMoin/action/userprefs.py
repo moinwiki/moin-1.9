@@ -13,25 +13,30 @@ from MoinMoin.widget import html
 def _handle_submission(request):
     """ Handle GET and POST requests of preferences forms.
 
-    Return error msg or None.
+    Return error msg_class, msg tuple or None, None.
     """
     _ = request.getText
     sub = request.form.get('handler', [None])[0]
 
     if sub in request.cfg.userprefs_disabled:
-        return None
+        return None, None
 
     try:
         cls = wikiutil.importPlugin(request.cfg, 'userprefs', sub, 'Settings')
     except wikiutil.PluginMissingError:
         # we never show this plugin to click on so no need to
         # give a message here
-        return None
+        return None, None
 
     obj = cls(request)
     if not obj.allowed():
-        return None
-    return obj.handle_form()
+        return None, None
+    res = obj.handle_form()
+    if isinstance(res, tuple):
+        return res
+    # backward compatibility for userprefs plugins,
+    # they just get 'dialog'-style messages.
+    return None, res
 
 def _create_prefs_page(request, sel=None):
     _ = request.getText
@@ -55,13 +60,13 @@ def _create_prefs_page(request, sel=None):
 
 
 def _create_page(request, cancel=False):
-    # returns text, title, msg
+    # returns text, title, msg_class, msg
     pagename = request.page.page_name
 
     if 'handler' in request.form:
-        msg = _handle_submission(request)
+        msg_class, msg = _handle_submission(request)
     else:
-        msg = None
+        msg_class, msg = None, None
 
     sub = request.form.get('sub', [''])[0]
     cls = None
@@ -75,14 +80,14 @@ def _create_page(request, cancel=False):
     obj = cls and cls(request)
 
     if not obj or not obj.allowed():
-        return _create_prefs_page(request), None, msg
+        return _create_prefs_page(request), None, msg_class, msg
 
-    return obj.create_form(), obj.title, msg
+    return obj.create_form(), obj.title, msg_class, msg
 
 
 def execute(pagename, request):
     _ = request.getText
-    text, title, msg = _create_page(request)
+    text, title, msg_class, msg = _create_page(request)
     if title:
         # XXX: we would like to make "Settings" here a link back
         #      to the generic userprefs page but that is impossible
@@ -92,7 +97,7 @@ def execute(pagename, request):
     else:
         title = _("Settings")
     request.emit_http_headers()
-    request.theme.add_msg(msg, "dialog")
+    request.theme.add_msg(msg, msg_class)
     request.theme.send_title(title, page=request.page, pagename=pagename)
     # Start content (important for RTL support)
     request.write(request.formatter.startContent("content"))
