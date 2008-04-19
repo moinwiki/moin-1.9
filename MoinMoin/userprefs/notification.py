@@ -71,7 +71,7 @@ class Settings(UserPrefBase):
         # save data
         theuser.save()
 
-        return _("Notification settings saved!")
+        return 'info', _("Notification settings saved!")
 
 
     def handle_form(self):

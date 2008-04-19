@@ -70,7 +70,7 @@ class Settings(UserPrefBase):
 
             # Don't allow changing the name to an invalid one
             if not user.isValidName(self.request, new_name):
-                return _("""Invalid user name {{{'%s'}}}.
+                return 'error', _("""Invalid user name {{{'%s'}}}.
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.""", wiki=True) % wikiutil.escape(new_name)
 
@@ -78,10 +78,10 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
             # Name required to be unique. Check if name belong to another user.
             existing_id = user.getUserId(self.request, new_name)
             if existing_id is not None and existing_id != self.request.user.id:
-                return _("This user name already belongs to somebody else.")
+                return 'error', _("This user name already belongs to somebody else.")
 
             if not new_name:
-                return _("Empty user name. Please enter a user name.")
+                return 'error', _("Empty user name. Please enter a user name.")
 
             # done sanity checking the name, set it
             request.user.name = new_name
@@ -94,14 +94,14 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
 
             # Require email
             if not new_email and 'email' not in self.request.cfg.user_form_remove:
-                return _("Please provide your email address. If you lose your"
-                         " login information, you can get it by email.")
+                return 'error', _("Please provide your email address. If you lose your"
+                                  " login information, you can get it by email.")
 
             # Email should be unique - see also MoinMoin/script/accounts/moin_usercheck.py
             if new_email and self.request.cfg.user_email_unique:
                 other = user.get_by_email_address(self.request, new_email)
                 if other is not None and other.id != self.request.user.id:
-                    return _("This email already belongs to somebody else.")
+                    return 'error', _("This email already belongs to somebody else.")
 
             # done checking the email, set it
             request.user.email = new_email
@@ -117,7 +117,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
             if new_jid and self.request.cfg.user_jid_unique:
                 other = user.get_by_jabber_id(self.request, new_jid)
                 if other is not None and other.id != request.user.id:
-                    return _("This jabber id already belongs to somebody else.")
+                    return 'error', _("This jabber id already belongs to somebody else.")
 
             if jid_changed:
                 set_event = events.JabberIDSetEvent(self.request, new_jid)
@@ -165,7 +165,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
             request.user.theme_name = theme_name
             if self.request.loadTheme(theme_name) > 0:
                 theme_name = wikiutil.escape(theme_name)
-                return _("The theme '%(theme_name)s' could not be loaded!") % locals()
+                return 'error', _("The theme '%(theme_name)s' could not be loaded!") % locals()
 
         # try to get the (optional) preferred language
         request.user.language = form.get('language', [''])[0]

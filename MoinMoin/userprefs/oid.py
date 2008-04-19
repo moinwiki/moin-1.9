@@ -49,10 +49,10 @@ class Settings(UserPrefBase):
             if name in self.request.form:
                 openids.remove(oid)
         if not openids and len(self.request.cfg.auth) == 1:
-            return _("Cannot remove all OpenIDs.")
+            return 'error', _("Cannot remove all OpenIDs.")
         self.request.user.openids = openids
         self.request.user.save()
-        return _("The selected OpenIDs have been removed.")
+        return 'info', _("The selected OpenIDs have been removed.")
 
     def _handle_add(self):
         _ = self.request.getText
@@ -60,23 +60,23 @@ class Settings(UserPrefBase):
 
         openid_id = request.form.get('openid_identifier', [''])[0]
         if not openid_id:
-            return _("No OpenID.")
+            return 'error', _("No OpenID given.")
 
         if (hasattr(self.request.user, 'openids') and
             openid_id in request.user.openids):
-            return _("OpenID is already present.")
+            return 'error', _("OpenID is already present.")
 
         oidconsumer = consumer.Consumer(request.session,
                                         MoinOpenIDStore(self.request))
         try:
             oidreq = oidconsumer.begin(openid_id)
         except HTTPFetchingError:
-            return _('Failed to resolve OpenID.')
+            return 'error', _('Failed to resolve OpenID.')
         except DiscoveryFailure:
-            return _('OpenID discovery failure, not a valid OpenID.')
+            return 'error', _('OpenID discovery failure, not a valid OpenID.')
         else:
             if oidreq is None:
-                return _("No OpenID.")
+                return 'error', _("No OpenID given.") # ??
 
             qstr = wikiutil.makeQueryString({'action': 'userprefs',
                                              'handler': 'oid',
@@ -107,25 +107,25 @@ class Settings(UserPrefBase):
         return_to = request.getQualifiedURL(request.page.url(request, qstr))
         info = oidconsumer.complete(query, return_to=return_to)
         if info.status == consumer.FAILURE:
-            return _('OpenID error: %s.') % info.message
+            return 'error', _('OpenID error: %s.') % info.message
         elif info.status == consumer.CANCEL:
-            return _('Verification canceled.')
+            return 'info', _('Verification canceled.')
         elif info.status == consumer.SUCCESS:
             if not hasattr(self.request.user, 'openids'):
                 request.user.openids = []
 
             if info.identity_url in request.user.openids:
-                return _("OpenID is already present.")
+                return 'error', _("OpenID is already present.")
 
             if user.getUserIdByOpenId(request, info.identity_url):
-                return _("This OpenID is already used for another account.")
+                return 'error', _("This OpenID is already used for another account.")
 
             # all fine
             request.user.openids.append(info.identity_url)
             request.user.save()
-            return _("OpenID added successfully.")
+            return 'info', _("OpenID added successfully.")
         else:
-            return _('OpenID failure.')
+            return 'error', _('OpenID failure.')
 
 
     def handle_form(self):

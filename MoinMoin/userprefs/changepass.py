@@ -48,20 +48,20 @@ class Settings(UserPrefBase):
 
         # Check if password is given and matches with password repeat
         if password != password2:
-            return _("Passwords don't match!")
+            return 'error', _("Passwords don't match!")
         if not password:
-            return _("Please specify a password!")
+            return 'error', _("Please specify a password!")
 
         pw_checker = request.cfg.password_checker
         if pw_checker:
             pw_error = pw_checker(request.user.name, password)
             if pw_error:
-                return _("Password not acceptable: %s") % pw_error
+                return 'error', _("Password not acceptable: %s") % pw_error
 
         try:
             self.request.user.enc_password = user.encodePassword(password)
             self.request.user.save()
-            return _("Your password has been changed.")
+            return 'info', _("Your password has been changed.")
         except UnicodeError, err:
             # Should never happen
             return "Can't encode password: %s" % str(err)
