@@ -69,15 +69,15 @@ class Settings(UserPrefBase):
             new_name = form.get('name', [request.user.name])[0]
 
             # Don't allow changing the name to an invalid one
-            if not user.isValidName(self.request, new_name):
+            if not user.isValidName(request, new_name):
                 return 'error', _("""Invalid user name {{{'%s'}}}.
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.""", wiki=True) % wikiutil.escape(new_name)
 
             # Is this an existing user trying to change information or a new user?
             # Name required to be unique. Check if name belong to another user.
-            existing_id = user.getUserId(self.request, new_name)
-            if existing_id is not None and existing_id != self.request.user.id:
+            existing_id = user.getUserId(request, new_name)
+            if existing_id is not None and existing_id != request.user.id:
                 return 'error', _("This user name already belongs to somebody else.")
 
             if not new_name:
@@ -93,14 +93,14 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
             new_email = new_email.strip()
 
             # Require email
-            if not new_email and 'email' not in self.request.cfg.user_form_remove:
+            if not new_email and 'email' not in request.cfg.user_form_remove:
                 return 'error', _("Please provide your email address. If you lose your"
                                   " login information, you can get it by email.")
 
             # Email should be unique - see also MoinMoin/script/accounts/moin_usercheck.py
-            if new_email and self.request.cfg.user_email_unique:
-                other = user.get_by_email_address(self.request, new_email)
-                if other is not None and other.id != self.request.user.id:
+            if new_email and request.cfg.user_email_unique:
+                other = user.get_by_email_address(request, new_email)
+                if other is not None and other.id != request.user.id:
                     return 'error', _("This email already belongs to somebody else.")
 
             # done checking the email, set it
@@ -114,14 +114,14 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
             jid_changed = request.user.jid != new_jid
             previous_jid = request.user.jid
 
-            if new_jid and self.request.cfg.user_jid_unique:
-                other = user.get_by_jabber_id(self.request, new_jid)
+            if new_jid and request.cfg.user_jid_unique:
+                other = user.get_by_jabber_id(request, new_jid)
                 if other is not None and other.id != request.user.id:
                     return 'error', _("This jabber id already belongs to somebody else.")
 
             if jid_changed:
-                set_event = events.JabberIDSetEvent(self.request, new_jid)
-                unset_event = events.JabberIDUnsetEvent(self.request, previous_jid)
+                set_event = events.JabberIDSetEvent(request, new_jid)
+                unset_event = events.JabberIDUnsetEvent(request, previous_jid)
                 events.send_event(unset_event)
                 events.send_event(set_event)
 
@@ -134,7 +134,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
             request.user.aliasname = wikiutil.clean_input(form.get('aliasname', [''])[0])
 
         # editor size
-        request.user.edit_rows = util.web.getIntegerInput(self.request, 'edit_rows',
+        request.user.edit_rows = util.web.getIntegerInput(request, 'edit_rows',
                                                           request.user.edit_rows, 10, 60)
 
         # try to get the editor
@@ -142,7 +142,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
         request.user.editor_ui = form.get('editor_ui', [self.cfg.editor_ui])[0]
 
         # time zone
-        request.user.tz_offset = util.web.getIntegerInput(self.request, 'tz_offset',
+        request.user.tz_offset = util.web.getIntegerInput(request, 'tz_offset',
                                                           request.user.tz_offset, -84600, 84600)
 
         # datetime format
@@ -163,7 +163,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
             # already loaded theme is just replaced (works cause
             # nothing has been emitted yet)
             request.user.theme_name = theme_name
-            if self.request.loadTheme(theme_name) > 0:
+            if request.loadTheme(theme_name) > 0:
                 theme_name = wikiutil.escape(theme_name)
                 return 'error', _("The theme '%(theme_name)s' could not be loaded!") % locals()
 
@@ -171,7 +171,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
         request.user.language = form.get('language', [''])[0]
         if request.user.language == u'': # For language-statistics
             from MoinMoin import i18n
-            request.user.real_language = i18n.get_browser_language(self.request)
+            request.user.real_language = i18n.get_browser_language(request)
         else:
             request.user.real_language = ''
 
@@ -326,13 +326,14 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
     def create_form(self):
         """ Create the complete HTML form code. """
         _ = self._
+        request = self.request
         self._form = self.make_form()
 
-        if self.request.user.valid:
+        if request.user.valid:
             buttons = [('save', _('Save')), ('cancel', _('Cancel')), ]
             uf_remove = self.cfg.user_form_remove
             uf_disable = self.cfg.user_form_disable
-            for attr in self.request.user.auth_attribs:
+            for attr in request.user.auth_attribs:
                 uf_disable.append(attr)
             for key, label, type, length, textafter in self.cfg.user_form_fields:
                 default = self.cfg.user_form_defaults[key]
@@ -340,10 +341,10 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
                     if key in uf_disable:
                         self.make_row(_(label),
                                   [html.INPUT(type=type, size=length, name=key, disabled="disabled",
-                                   value=getattr(self.request.user, key)), ' ', _(textafter), ])
+                                   value=getattr(request.user, key)), ' ', _(textafter), ])
                     else:
                         self.make_row(_(label),
-                                  [html.INPUT(type=type, size=length, name=key, value=getattr(self.request.user, key)), ' ', _(textafter), ])
+                                  [html.INPUT(type=type, size=length, name=key, value=getattr(request.user, key)), ' ', _(textafter), ])
 
             if not self.cfg.theme_force and not "theme_name" in self.cfg.user_form_remove:
                 self.make_row(_('Preferred theme'), [self._theme_select()])
@@ -373,13 +374,12 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
             # boolean user options
             bool_options = []
             checkbox_fields = self.cfg.user_checkbox_fields
-            _ = self.request.getText
             checkbox_fields.sort(lambda a, b: cmp(a[1](_), b[1](_)))
             for key, label in checkbox_fields:
                 if not key in self.cfg.user_checkbox_remove:
                     bool_options.extend([
                         html.INPUT(type="checkbox", name=key, value="1",
-                            checked=getattr(self.request.user, key, 0),
+                            checked=getattr(request.user, key, 0),
                             disabled=key in self.cfg.user_checkbox_disable and True or None),
                         ' ', label(_), html.BR(),
                     ])
@@ -387,7 +387,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
 
             self.make_row(_('Quick links'), [
                 html.TEXTAREA(name="quicklinks", rows="6", cols="50")
-                    .append('\n'.join(self.request.user.getQuickLinks())),
+                    .append('\n'.join(request.user.getQuickLinks())),
             ], valign="top")
 
             self._form.append(html.INPUT(type="hidden", name="action", value="userprefs"))
