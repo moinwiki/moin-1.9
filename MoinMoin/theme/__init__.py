@@ -1475,13 +1475,15 @@ var gui_editor_link_text = "%(text)s";
         lang = self.request.content_lang
         return ' lang="%s" dir="%s"' % (lang, i18n.getDirection(lang))
 
-    def add_msg(self, msg, msg_class="dialog"):
+    def add_msg(self, msg, msg_class=None):
         """ Adds a message to a list which will be used to generate status
         information.
 
         @param msg: additional message
         @param msg_class: html class for the div of the additional message.
         """
+        if not msg_class:
+            msg_class = 'dialog'
         if self._send_title_called:
             raise Exception("You cannot call add_msg() after send_title()")
         self._status.append((msg, msg_class))
