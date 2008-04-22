@@ -1755,8 +1755,9 @@ class UnitArgument(IEFArgument):
             if s.endswith(unit):
                 ret = (self._type(s[:len(s) - len(unit)]), unit)
                 return ret
+        units = ', '.join(self._units)
         ## XXX: how can we translate this?
-        raise ValueError("Invalid unit in value %s" % s)
+        raise ValueError("Invalid unit in value %s (allowed units: %s)" % (s, units))
 
     def get_default(self):
         return self._default
