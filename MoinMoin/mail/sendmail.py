@@ -43,7 +43,7 @@ def encodeAddress(address, charset):
         return address.encode(config.charset)
 
 
-def sendmail(request, to, subject, text, **kw):
+def sendmail(request, to, subject, text, mail_from=None):
     """ Create and send a text/plain message
 
     Return a tuple of success or error indicator and message.
@@ -52,7 +52,7 @@ def sendmail(request, to, subject, text, **kw):
     @param to: recipients (list)
     @param subject: subject of email (unicode)
     @param text: email body text (unicode)
-    @keyword mail_from: override default mail_from
+    @param mail_from: override default mail_from
     @type mail_from: unicode
     @rtype: tuple
     @return: (is_ok, Description of error or OK message)
@@ -64,7 +64,7 @@ def sendmail(request, to, subject, text, **kw):
 
     _ = request.getText
     cfg = request.cfg
-    mail_from = kw.get('mail_from', '') or cfg.mail_from
+    mail_from = mail_from or cfg.mail_from
     subject = subject.encode(config.charset)
 
     # Create a text/plain body using CRLF (see RFC2822)
