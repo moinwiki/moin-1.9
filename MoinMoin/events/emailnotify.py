@@ -65,16 +65,19 @@ def send_notification(request, from_address, emails, data):
     return sendmail.sendmail(request, emails, data['subject'], data['body'], mail_from=from_address)
 
 
-def notify_subscribers(request, page, comment, trivial):
+def handle_page_change(event):
     """ Send email to all subscribers of given page.
 
-    @param comment: editor's comment given when saving the page
-    @param trivial: editor's suggestion that the change is trivial (Subscribers may ignore this)
+    @param event: event to notify about
     @rtype: string
     @return: message, indicating success or errors.
 
     """
-    subscribers = page.getSubscribers(request, return_users=1, trivial=trivial)
+    comment = event.comment
+    page = event.page
+    request = event.request
+    trivial = isinstance(event, ev.TrivialPageChangedEvent)
+    subscribers = page.getSubscribers(request, return_users=1)
     mail_from = page.cfg.mail_from
 
     if subscribers:
@@ -86,7 +89,7 @@ def notify_subscribers(request, page, comment, trivial):
         # send email to all subscribers
         for lang in subscribers:
             users = [u for u in subscribers[lang]
-                     if ev.PageChangedEvent.name in u.email_subscribed_events]
+                     if event.name in u.email_subscribed_events]
             emails = [u.email for u in users]
             names = [u.name for u in users]
             data = prep_page_changed_mail(request, page, comment, lang, revisions, trivial)
@@ -165,10 +168,8 @@ def handle(event):
     if not event.request.cfg.mail_enabled:
         return
 
-    if isinstance(event, ev.PageChangedEvent):
-        return notify_subscribers(event.request, event.page, event.comment, False)
-    elif isinstance(event, ev.TrivialPageChangedEvent):
-        return notify_subscribers(event.request, event.page, event.comment, True)
+    if isinstance(event, (ev.PageChangedEvent, ev.TrivialPageChangedEvent)):
+        return handle_page_change(event)
     elif isinstance(event, ev.UserCreatedEvent):
         return handle_user_created(event)
     elif isinstance(event, ev.FileAttachedEvent):

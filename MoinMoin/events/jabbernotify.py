@@ -28,11 +28,9 @@ def handle(event):
     if not cfg.jabber_enabled:
         return
 
-    if isinstance(event, ev.PageChangedEvent):
-        return handle_page_changed(event, False)
-    elif isinstance(event, ev.TrivialPageChangedEvent):
-        return handle_page_changed(event, True)
-    elif isinstance(event, ev.JabberIDSetEvent) or isinstance(event, ev.JabberIDUnsetEvent):
+    if isinstance(event, (ev.PageChangedEvent, ev.TrivialPageChangedEvent)):
+        return handle_page_changed(event)
+    elif isinstance(event, (ev.JabberIDSetEvent, ev.JabberIDUnsetEvent)):
         return handle_jid_changed(event)
     elif isinstance(event, ev.FileAttachedEvent):
         return handle_file_attached(event)
@@ -95,12 +93,12 @@ def handle_file_attached(event):
     return notification.Success(names)
 
 
-def handle_page_changed(event, trivial):
+def handle_page_changed(event):
     """ Handles events related to page changes """
     request = event.request
     page = event.page
 
-    subscribers = page.getSubscribers(request, return_users=1, trivial=trivial)
+    subscribers = page.getSubscribers(request, return_users=1)
     notification.filter_subscriber_list(event, subscribers, True)
     return page_change("page_changed", request, page, subscribers, \
                        revisions=page.getRevList(), comment=event.comment)
