@@ -836,13 +836,11 @@ class Page(object):
         @param request: the request object
         @keyword include_self: if 1, include current user (default: 0)
         @keyword return_users: if 1, return user instances (default: 0)
-        @keyword trivial: if 1, only include users who want trivial changes (default: 0)
         @rtype: dict
         @return: lists of subscribed email addresses in a dict by language key
         """
         include_self = kw.get('include_self', self.include_self)
         return_users = kw.get('return_users', 0)
-        trivial = kw.get('trivial', 0)
 
         # extract categories of this page
         pageList = self.getCategories(request)
@@ -858,8 +856,6 @@ class Page(object):
         # get email addresses of the all wiki user which have a profile stored;
         # add the address only if the user has subscribed to the page and
         # the user is not the current editor
-        # Also, if the change is trivial (send email isn't ticked) only send email to users
-        # who want_trivial changes (typically Admins on public sites)
         userlist = user.getUserList(request)
         subscriber_list = {}
         for uid in userlist:
@@ -877,8 +873,6 @@ class Page(object):
             # So it _should_ be "not (subscriber.email and return_users)" but that breaks at the moment.
             if not subscriber.email:
                 continue # skip empty email addresses
-            if trivial and not subscriber.want_trivial:
-                continue # skip uninterested subscribers
 
             # skip people not subscribed
             if not subscriber.isSubscribedTo(pageList):
