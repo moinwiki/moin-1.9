@@ -1735,8 +1735,13 @@ class UnitArgument(IEFArgument):
     Note that the default unit is "mm".
 
     Use, for example, "UnitArgument('7mm', float, ['%', 'mm'])".
+
+    If the defaultunit parameter is given, any argument that
+    can be converted into the given argtype is assumed to have
+    the default unit. NOTE: This doesn't work with a choice
+    (tuple or list) argtype.
     """
-    def __init__(self, default, argtype, units=['mm']):
+    def __init__(self, default, argtype, units=['mm'], defaultunit=None):
         """
         Initialise a UnitArgument giving the default,
         argument type and the permitted units.
@@ -1745,6 +1750,8 @@ class UnitArgument(IEFArgument):
         self._units = list(units)
         self._units.sort(cmp=lambda x, y: len(y) - len(x))
         self._type = argtype
+        self._defaultunit = defaultunit
+        assert defaultunit is None or defaultunit in units
         if default is not None:
             self._default = self.parse_argument(default)
         else:
@@ -1755,6 +1762,11 @@ class UnitArgument(IEFArgument):
             if s.endswith(unit):
                 ret = (self._type(s[:len(s) - len(unit)]), unit)
                 return ret
+        if self._defaultunit is not None:
+            try:
+                return (self._type(s), self._defaultunit)
+            except ValueError:
+                pass
         units = ', '.join(self._units)
         ## XXX: how can we translate this?
         raise ValueError("Invalid unit in value %s (allowed units: %s)" % (s, units))
