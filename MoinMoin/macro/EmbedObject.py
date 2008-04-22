@@ -51,8 +51,8 @@ def _check_param_value(param, value, valuetype):
         return ""
 
 def macro_EmbedObject(macro, target=wikiutil.required_arg(unicode), pagename=None,
-                      width=wikiutil.UnitArgument(None, float, ['px', 'em', 'mm', '%']),
-                      height=wikiutil.UnitArgument(None, float, ['px', 'em', 'mm', '%']),
+                      width=wikiutil.UnitArgument(None, float, ['px', 'em', 'pt', 'in', 'mm', '%'], defaultunit='px'),
+                      height=wikiutil.UnitArgument(None, float, ['px', 'em', 'pt', 'in', 'mm', '%'], defaultunit='px'),
                       alt=u'',
                       play=False, stop=True, loop=False, quality=(u'high', u'low', u'medium'),
                       op=True, repeat=False, autostart=False, align=(u'middle', u'top', u'bottom'), hidden=False,
