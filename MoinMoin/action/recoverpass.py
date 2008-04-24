@@ -16,31 +16,42 @@ def _do_recover(request):
     if not request.cfg.mail_enabled:
         return _("""This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.""")
+
     try:
         email = wikiutil.clean_input(form['email'][0].lower())
         if not email:
-            raise KeyError # we raise KeyError if the string is empty
+            # continue if email not given
+            raise KeyError
+
+        u = user.get_by_email_address(request, email)
+        if u and u.valid:
+            is_ok, msg = u.mailAccountData()
+            if not is_ok:
+                return wikiutil.escape(msg)
+
+        return _("If an account with this email address exists, an email was sent.")
     except KeyError:
-        try:
-            username = wikiutil.clean_input(form['name'][0])
-            if not username:
-                raise KeyError
-        except KeyError:
-            return _("Please provide a valid email address!")
+        pass
+
+    try:
+        username = wikiutil.clean_input(form['name'][0])
+        if not username:
+            # continue if name not given
+            raise KeyError
 
         u = user.User(request, user.getUserId(request, username))
         if u.valid:
             is_ok, msg = u.mailAccountData()
             if not is_ok:
                 return wikiutil.escape(msg)
+
         return _("If an account with this username exists, an email was sent.")
+    except KeyError:
+        pass
 
-    u = user.get_by_email_address(request, email)
-    if u:
-        is_ok, msg = u.mailAccountData()
-        return wikiutil.escape(msg)
+    # neither succeeded, give error message
+    return _("Please provide a valid email address or a username!")
 
-    return _("Found no account matching the given email address '%(email)s'!") % {'email': email}
 
 def _create_form(request):
     _ = request.getText
@@ -52,6 +63,12 @@ def _create_form(request):
     tbl = html.TABLE(border="0")
     ret.append(tbl)
     ret.append(html.Raw('</div>'))
+
+    row = html.TR()
+    tbl.append(row)
+    row.append(html.TD().append(html.STRONG().append(html.Text(_("Username")))))
+    row.append(html.TD().append(html.INPUT(type="text", size="36",
+                                           name="name")))
 
     row = html.TR()
     tbl.append(row)
@@ -92,15 +109,13 @@ def execute(pagename, request):
             request.write(_("""This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email."""))
         else:
-            request.write(_create_form(request))
-
             request.write(_("""
 == Recovering a lost password ==
-<<BR>>
-If you have forgotten your password, provide your email address and click on '''Mail me my account data'''.
-<<BR>>
+If you have forgotten your password, provide your email address or username and click on '''Mail me my account data'''.
 The email you get contains the encrypted password (so even if someone intercepts the mail, he won't know your REAL password). Just copy and paste it into the login mask into the password field and log in.
 After logging in you should change your password.""", wiki=True))
+
+            request.write(_create_form(request))
 
         request.write(request.formatter.endContent())
 
