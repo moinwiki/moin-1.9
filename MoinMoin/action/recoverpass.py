@@ -10,6 +10,17 @@ from MoinMoin import user, wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.widget import html
 
+def _do_email(request, u):
+    _ = request.getText
+
+    if u and u.valid:
+        is_ok, msg = u.mailAccountData()
+        if not is_ok:
+            return wikiutil.escape(msg)
+
+    return _("If this account exists an email was sent.")
+
+
 def _do_recover(request):
     _ = request.getText
     form = request.form
@@ -24,12 +35,8 @@ Contact the owner of the wiki, who can enable email.""")
             raise KeyError
 
         u = user.get_by_email_address(request, email)
-        if u and u.valid:
-            is_ok, msg = u.mailAccountData()
-            if not is_ok:
-                return wikiutil.escape(msg)
 
-        return _("If an account with this email address exists, an email was sent.")
+        return _do_email(request, u)
     except KeyError:
         pass
 
@@ -40,12 +47,8 @@ Contact the owner of the wiki, who can enable email.""")
             raise KeyError
 
         u = user.User(request, user.getUserId(request, username))
-        if u.valid:
-            is_ok, msg = u.mailAccountData()
-            if not is_ok:
-                return wikiutil.escape(msg)
 
-        return _("If an account with this username exists, an email was sent.")
+        return _do_email(request, u)
     except KeyError:
         pass
 
