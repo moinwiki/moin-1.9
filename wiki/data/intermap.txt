@@ -11,6 +11,7 @@
 # you can add your own InterWiki entries to your wiki by editing your local InterWikiMap
 # if you do not want to modify the file directly.
 
+
 # MoinMoin additions
 MoinMaster http://master.moinmo.in/
 MoinCVS http://hg.moinmo.in/moin/1.6?f=-1;file=
@@ -52,6 +53,7 @@ Spamikaze http://spamikaze.org/
 Ulteo http://www.ulteo.com/main/wiki/index.cgi/
 CsWikiPedia http://cs.wikipedia.org/wiki/
 MBWiki http://wiki.musicbrainz.org/
+SquidWiki http://wiki.squid-cache.org/
 
 ## Updated 2004-11-19 from http://www.usemod.com/cgi-bin/mb.pl?InterMapTxt
 ## Please modify the upper part of this page only
@@ -91,6 +93,7 @@ KnowHow http://www2.iro.umontreal.ca/~paquetse/cgi-bin/wiki.cgi?
 LinuxWiki http://linuxwiki.org/
 LiveJournal http://livejournal.com/users/
 Login http://www.usemod.com/cgi-bin/mb.pl?action=login&p_userid=
+LyricWiki http://lyricwiki.org/
 MbTest http://www.usemod.com/cgi-bin/mbtest.pl?
 MeatBall http://www.usemod.com/cgi-bin/mb.pl?
 MetaWiki http://sunir.org/apps/meta.pl?

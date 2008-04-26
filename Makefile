@@ -13,9 +13,9 @@ all:
 
 install-docs:
 	-mkdir build
-	wget -U MoinMoin/Makefile -O build/INSTALL.html "http://master.moinmo.in/MoinMoin/InstallDocs?action=print"
+	wget -U MoinMoin/Makefile -O build/INSTALL.html "http://master17.moinmo.in/MoinMoin/InstallDocs?action=print"
 	sed \
-		-e 's#href="/#href="http://master.moinmo.in/#g' \
+		-e 's#href="/#href="http://master17.moinmo.in/#g' \
 		-e 's#http://[a-z\.]*/wiki/classic/#/wiki/classic/#g' \
 		-e 's#http://[a-z\.]*/wiki/modern/#/wiki/modern/#g' \
 		-e 's#http://[a-z\.]*/wiki/rightsidebar/#/wiki/rightsidebar/#g' \
@@ -28,7 +28,7 @@ install-docs:
 	-rmdir build
 
 interwiki:
-	wget -U MoinMoin/Makefile -O $(share)/data/intermap.txt "http://master.moinmo.in/InterWikiMap?action=raw"
+	wget -U MoinMoin/Makefile -O $(share)/data/intermap.txt "http://master17.moinmo.in/InterWikiMap?action=raw"
 	chmod 664 $(share)/data/intermap.txt
 
 check-tabs:
