@@ -60,7 +60,6 @@ General syntax: moin [options] maint mkpagepacks [mkpagepacks-options]
 
         langPages = Set()
         for name, group in self.gd.dictdict.items():
-            group.expandgroups(self.gd)
             groupPages = Set(group.members() + [name])
             name = name.replace("SystemPagesIn", "").replace("Group", "")
             pageSets[name] = groupPages
