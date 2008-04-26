@@ -268,6 +268,7 @@ Topic :: Office/Business :: Groupware
 Topic :: Text Processing :: Markup""".splitlines(),
 
     'packages': [
+        'jabberbot',
         'MoinMoin',
         'MoinMoin.action',
         'MoinMoin.auth',
