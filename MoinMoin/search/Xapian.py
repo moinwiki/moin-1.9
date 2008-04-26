@@ -642,6 +642,7 @@ class Index(BaseIndex):
             logging.debug("indexing all (%d) pages..." % len(pages))
             for pagename in pages:
                 p = Page(request, pagename)
+                request.page = p
                 if request.cfg.xapian_index_history:
                     for rev in p.getRevList():
                         self._index_page(writer,
