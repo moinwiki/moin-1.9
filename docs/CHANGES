@@ -36,10 +36,8 @@ Known main issues:
     Add the resulting `pyxmpp` directory to your PYTHONPATH or perform
     a "full installation" as described on http://pyxmpp.jajcus.net/:
 
-    To build the package just invoke:
+    To build and install the package just invoke:
     python setup.py build
-
-    To install it:
     python setup.py install
 
     If you had some older version of PyXMPP it is better to uninstall it 
@@ -48,14 +46,61 @@ Known main issues:
 
     You may also try:
     make
-
-    and:
     make install
 
-Version 1.7.current:
-    This is the active development branch. All changes get done here and
-    critical stuff gets committed with -m "... (backport needed)" and then
-    backported to older releases that we still maintain. :)
+Version 1.7.0beta1:
+
+  New Features:
+    * New powerful and flexible logging, please see wiki/config/logging/ -
+      HINT: you have to upgrade your server adaptor script (e.g. moin.cgi)
+      and load a logging configuration that fits your needs from there.
+      If you use some of our sample logging configs, make sure you have a
+      look INTO them to fix e.g. the path of the logfile it will use.
+    * Moin now logs the path from where it loaded its configuration(s)
+    * cfg.trusted_auth_methods is a list of auth methods that put an
+      authenticated user into the "Trusted" ACL group.
+    * New authentication plugin system, see HelpOnAuthentication.
+    * New session handling system (no moin_session any more, now done
+      internally and automatically), see HelpOnSessions for details.
+    * New preferences plugin system, see MoinMoin/userprefs/__init__.py
+    * New notification system with an optional jabber notification bot.
+    * Jabber notification support; for more information see HelpOnNotification.
+    * Standalone server can now be started via the "moin" script command,
+      optionally backgrounding itself. See: moin server standalone --help
+    * The diff action now has navigation buttons for prev/next change.
+    * Admonition support. Added styling for tip, note, important, warning 
+      and caution in the modern theme. For more info see HelpOnAdmonitions.
+    * DocBook-formatter:
+      * supports HTML entities like &rarr; and &#9731;
+      * supports the FootNote macro
+      * supports bulletless lists
+      * support for admonitions
+      * will export the wiki page's edit history as the generated article's
+        revision history. Doesn't add history of included pages.
+      * supports for the MoinMoin comment element, though only inline comments
+        are likely to be valid since the DocBook remark is an inline element.
+    * ?action=info&max_count=42 - show the last 42 history entries of the page.
+      max_count has a default of default_count and a upper limit of
+      limit_max_count - you can configure both in your wiki config:
+      cfg.history_count = (100, 200) # (default_count, limit_max_count) default
+    * The CSV parser can get the delimiter from the first line so other
+      delimeters than ";" can be used.
+
+  Other changes:
+    * cfg.show_login is gone, see code in theme/__init__.py, this affects
+      many themes!
+    * HINT: a new userprefs/ plugin directory will be created by the usual
+      "moin migration data" command.
+    * Removed attachments direct serving (cfg.attachments - this was deprecated
+      since long!).
+    * The rst-parser's admonition class names are no longer prepended with
+      "admonition_". Instead the class names are now for example "note"
+      and not "admonition_note".
+    * DocBook-formatter:
+      * generates a valid DOCTYPE
+      * table support has been improved
+      * handling of definitions and glossaries is more robust
+      * supports program language and line numbering in code areas
 
   Developer notes (these should be moved to the end in the release):
     * getText's (aka _()) 'formatted' keyword param (default: True in 1.6 and
@@ -67,62 +112,109 @@ Version 1.7.current:
         wiki=True, percent=True)
     * Page.url 'relative' keyword param (default: True in 1.6 and early 1.7)
       was changed to default False).
-
-  New Features:
-    * new powerful and flexible logging, please see wiki/config/logging/ -
-      HINT: you have to upgrade your server adaptor script (e.g. moin.cgi)
-      and load a logging configuration that fits your needs from there.
-      If you use some of our sample logging configs, make sure you have a
-      look INTO them to fix e.g. the path of the logfile it will use.
-    * moin now logs the path from where it loaded its configuration(s)
-    * cfg.trusted_auth_methods is a list of auth methods that put an
-      authenticated user into the "Trusted" ACL group.
-    * new authentication plugin system, see HelpOnAuthentication
-    * new session handling system (no moin_session any more, now done
-      internally and automatically), see HelpOnSessions for details.
-    * new preferences plugin system, see MoinMoin/userprefs/__init__.py
-    * new notification system with an optional jabber notification bot
-    * jabber notification support; for more information see:
-      http://moinmo.in/MoinMoinTodo/Release_1.7/HelpOnNotification
-    * standalone server can now be started via the "moin" script command,
-      optionally backgrounding itself. See: moin server standalone --help
-    * the diff action now has navigation buttons for prev/next change
-    * admonition support. Added styling for tip, note, important, warning 
-      and caution in the modern theme. For more info see:
-      http://moinmo.in/MoinMoinTodo/Release%201.7/HelpOnAdmonitions
-    * admonitions .
-    * DocBook-formatter supports HTML entities like &rarr; and &#9731;
-    * DocBook-formatter supports the FootNote macro
-    * DocBook-formatter supports bulletless lists
-    * DocBook-formatter has support for admonitions
-    * DocBook-formatter will export the edithistory inside as the generated 
-      article's revision history. Doesn't add history of included pages.
-    * DocBook-formatter has support for the MoinMoin comment element, though
-      only inline comments are likely to be valid since the DocBook remark is
-      and inline element.
-    * ?action=info&max_count=42 - show the last 42 history entries of the page.
-      max_count has a default of default_count and a upper limit of
-      limit_max_count - you can configure both in your wiki config:
-      cfg.history_count = (100, 200) # (default_count, limit_max_count) default
-    * csv parser can get the delimiter from the first line so other delimeters 
-      than ";" could be used
-
-  Other changes:
-    * cfg.show_login is gone, see code in theme/__init__.py, this affects
-      many themes!
     * The themedict no longer contains 'page_user_prefs' and 'user_prefs',
       this may affect custom themes.
-    * needs a new userprefs/ plugin directory
-    * removed attachments direct serving (cfg.attachments)
-    * the rst-parser's admonition's class names are no longer prepended with
-      "admonition_". Instead the class names are now for example "note"
-      and not "admonition_note".
-    * DocBook-formatter generates a valid DOCTYPE
-    * DocBook-formatter's table support has been improved
-    * DocBook-formatter's handling of definitions and glossaries is more robust
-    * DocBook-formatter supports program language and line numbering in 
-      code areas
-    * A few other fixes to the DocBook-formatter.
+
+
+Version 1.6.3:
+  Fixes:
+    * Security fix: a check in the user form processing was not working as
+      expected, leading to a major ACL and superuser priviledge escalation
+      problem. If you use ACL entries other than "Known:" or "All:" and/or
+      a non-empty superuser list, you need to urgently install this upgrade.
+    * Security fix: if acl_hierarchic=True was used (False is the default),
+      ACL processing was wrong for some cases, see
+      MoinMoinBugs/AclHierarchicPageAclSupercededByAclRightsAfter
+    * For {{transclusion_targets}} we checked the protocol to be http(s),
+      this check was removed (because file: and ftp: should work also) and
+      it's not moin's problem if the user uses silly protocols that can't
+      work for that purpose.
+    * Fixed TableOfContents macro for included pages.
+    * server_fastcgi: added Config.port = None. If you want to use some port
+      (not a fd), you can set it now in your Config, e.g. port = 8888.
+    * category: search matches categories even if there are comment lines
+      between the horizontal rule and the real categories, e.g.:
+      ... some page text ...
+      ----
+      ## optionally some comments, e.g. about possible categories:
+      ## CategoryJustACommentNotFound
+      CategoryTheRealAndOnly
+
+      Note: there might be multiple comment lines, but all real categories
+            must be on a single line either directly below the ---- or
+            directly below some comment lines.
+  
+  Other changes:
+    * Added 'notes' to config.url_schemas, so you can use notes://notessrv/...
+      to invoke your Lotus Notes client.
+    * After creating a new user profile via UserPreferences, you are logged
+      in with that user (no need to immediately enter the same name/password
+      again for logging in).
+
+
+Version 1.6.2:
+  Fixes:
+    * Security fix: check the ACL of the included page for the rst parser's
+      include directive.
+    * Potential security/DOS fix: we removed cracklib / python-crack support
+      in password_checker as it is not thread-safe and caused segmentation
+      faults (leading to server error 500 because the moin process died).
+    * Fix moin_session code for auth methods other than moin_login (e.g. http).
+      If you have worked around this using moin_anon_session, you can remove
+      this workaround now (except if you want anon sessions for other reasons).
+    * Fix moin_session code to delete invalid session cookies and also create
+      a new session cookie if it got a valid user_obj at the same time.
+    * Fix xmlrpc applyAuthToken: give good error msg for empty token.
+    * Fixed category search, use category:CategoryFoo as search term.
+    * xapian_stemming = False (changed default) to workaround some problems
+      in the code enabled by it. Fixes the problems when searching for
+      lowercase or numeric titles or word fragments with the builtin search.
+    * Fix trail for anon users without a session, do not show a single page.
+    * Fix MoinMoinBugs/WikiSyncComplainsAboutTooOldMoin.
+    * Wiki parser: fixed strange insertion of unwanted paragraphs.
+    * Wiki parser: fix interwiki linking:
+      Free interwiki links did not change since 1.5 (they still require to match
+      [A-Z][A-Za-z]+ for the wikiname part, i.e. a ASCII word beginning with an
+      uppercase letter).
+      Bracketed interwiki links now behave similar to how they worked in 1.5:
+      Moin just splits off the part left of the colon - no matter how it looks
+      like. It then tries to find that in the interwiki map. If it is found,
+      a interwiki link gets rendered. If it is not found, moin will render a
+      link to a local wiki page (that has a colon in the pagename). It will
+      also render a local wiki page link if there is no colon at all, of course.
+      Examples:
+      [[lowercasewikiname:somepage]] does an interwiki link (if in the map).
+      [[ABC:n]] does a local link to page ABC:n (if ABC is NOT in the map).
+    * Wiki parser: fix interwiki linking for the case that there are query args
+      in the interwiki map entry and you give additional query args via link
+      markup (uses correct query arg separator now), e.g.:
+      [[Google:searchterm|search this|&foo=bar]]
+    * Creole parser: fixed bug that prevents images inside links.
+    * Python parser: catch indentation error.
+    * PageEditor: fixed copyPage for write restricted pages.
+    * GUI editor: fixed javascript error with too complex word_rule regex,
+      see MoinMoinBugs/GuiEditorSyntaxError.
+    * Fixed FCKeditor dialog boxes for FireFox3.
+    * NewPage macro/newpage action: fixed for non-ascii template pagenames.
+    * FootNote macro: Fix MoinMoinBugs/FootNoteNumbering.
+    * EmbedObject macro: bug fix for image mimetype
+    * WSGI:
+      * fix TWikiDraw saving a drawing by also evaluating the query args.
+      * work around unpythonic WSGI 1.0 read() API, fixing broken xmlrpc
+        putPage with mod_wsgi
+    * Fix highlighting (see MoinMoinBugs/SearchForPagesWithComments).
+    * Fix logfile code for EACCESS errors.
+    * Removed the "logging initialized" log messages because it was issued once
+      per request for CGI.
+
+  Other changes:
+    * Show "Comments" toggling link in edit bar only if the page really
+      contains comments.
+    * Made default configuration of surge protection a bit more forgiving,
+      especially for edit action which is currently also used for previews.
+    * Updated i18n, system/help pages, added Macedonian system text translation.
+    * Improved moin xmlrpc write command's builtin docs and auto-append
+      ?action=xmlrpc2 to the target wiki url given.
 
 
 Version 1.6.1:
