@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
-"PO-Revision-Date: 2007-10-08 12:27+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
+"PO-Revision-Date: 2008-04-12 20:07+0200\n"
 "Last-Translator: Mohamed Yahya <yahya.mohamed@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -212,7 +212,7 @@ msgid "Argument must be one of \"%s\", not \"%s\""
 msgstr ""
 
 msgid "Too many arguments"
-msgstr ""
+msgstr "معطيات أكثر من المطلوب"
 
 msgid "Cannot have arguments without name following named arguments"
 msgstr ""
@@ -240,7 +240,7 @@ msgid "Page name is too long, try shorter name."
 msgstr "إسم الصفحة طويل، جرب إسما أقصر."
 
 msgid "GUI Mode"
-msgstr ""
+msgstr "وضعية واجهة المستخدم الرسومية"
 
 #, fuzzy
 msgid "Edit was cancelled."
@@ -454,7 +454,7 @@ msgid "[empty]"
 msgstr ""
 
 msgid "filter"
-msgstr ""
+msgstr "مرشح"
 
 #, python-format
 msgid ""
@@ -487,13 +487,14 @@ msgid "last modified: %s"
 msgstr ""
 
 msgid "match"
-msgstr ""
+msgstr "تطابق"
 
+#, fuzzy
 msgid "matches"
-msgstr ""
+msgstr "تطابق"
 
 msgid "Line"
-msgstr ""
+msgstr "سطر"
 
 msgid "No differences found!"
 msgstr "لا توجد الاختلافات!"
@@ -570,7 +571,7 @@ msgid ""
 msgstr ""
 
 msgid "Choose this name"
-msgstr ""
+msgstr "إختر هذا الإسم"
 
 msgid ""
 "The username you have chosen is already\n"
@@ -600,7 +601,7 @@ msgid "Your account is now associated to your OpenID."
 msgstr ""
 
 msgid "The password you entered is not valid."
-msgstr ""
+msgstr "كلمة السر التي أدخلتها غير صالحة."
 
 msgid "OpenID verification requires that you click this button:"
 msgstr ""
@@ -623,7 +624,7 @@ msgid ""
 msgstr ""
 
 msgid "Failed to connect to database."
-msgstr ""
+msgstr "فشلت محاولة الإتصال بقاعدة البيانات."
 
 msgid "Could not contact botbouncer.com."
 msgstr ""
@@ -702,7 +703,7 @@ msgid "Click to do a full-text search for this title"
 msgstr ""
 
 msgid "Settings"
-msgstr ""
+msgstr "إعدادات"
 
 msgid "Logout"
 msgstr "تسجيل الخروج"
@@ -761,7 +762,7 @@ msgid "Like Pages"
 msgstr "صفحات مشابه"
 
 msgid "Local Site Map"
-msgstr ""
+msgstr "خارطة الموقع المحلية"
 
 msgid "My Pages"
 msgstr "صفحاتي"
@@ -1019,13 +1020,13 @@ msgstr "الرجاء إدخال كلمة سر!"
 
 #, python-format
 msgid "Password not acceptable: %s"
-msgstr ""
+msgstr "كلمة السر غير مقبولة: %s"
 
 msgid "Your password has been changed."
-msgstr ""
+msgstr "تم تغيير كلمة السر الخاصة بك."
 
 msgid "To change your password, enter a new password twice."
-msgstr ""
+msgstr "لتغيير كلمة السر الخاصة بك، أدخل كلمة سر جديدة مرتين."
 
 msgid "Password repeat"
 msgstr "اعادة كلمة السر"
@@ -1042,7 +1043,7 @@ msgid ""
 msgstr ""
 
 msgid "You are the only user."
-msgstr ""
+msgstr "أنت المستخدم الوحيد."
 
 msgid ""
 "As a superuser, you can temporarily assume the identity of another user."
@@ -1059,6 +1060,9 @@ msgid "Cannot remove all OpenIDs."
 msgstr ""
 
 msgid "The selected OpenIDs have been removed."
+msgstr ""
+
+msgid "No OpenID given."
 msgstr ""
 
 msgid "OpenID is already present."
@@ -1090,10 +1094,10 @@ msgid ""
 msgstr ""
 
 msgid "This user name already belongs to somebody else."
-msgstr ""
+msgstr "إسم المستخدم هذا مسجل لشخص آخر."
 
 msgid "Empty user name. Please enter a user name."
-msgstr ""
+msgstr "إسم مستخدم فارغ. الرجاء إدخال إسم مستخدم."
 
 msgid ""
 "Please provide your email address. If you lose your login information, you "
@@ -1228,19 +1232,19 @@ msgid ""
 msgstr ""
 
 msgid "Page has been modified"
-msgstr ""
+msgstr "تم تعديل الصفحة"
 
 msgid "Page has been modified in a trivial fashion"
-msgstr ""
+msgstr "تم تعديل الصفحة بشكل بسيط"
 
 msgid "Page has been renamed"
-msgstr ""
+msgstr "تم إعادة تسمية الصفحة"
 
 msgid "Page has been deleted"
-msgstr ""
+msgstr "تم حذف الصفحة"
 
 msgid "Page has been copied"
-msgstr ""
+msgstr "تم نسخ الصفحة"
 
 #, fuzzy
 msgid "A new attachment has been added"
@@ -1254,7 +1258,7 @@ msgid "A user has subscribed to a page"
 msgstr "لا يسمح لك بتحرير هذه الصفحة"
 
 msgid "A new account has been created"
-msgstr ""
+msgstr "تم إنشاء حساب جديد"
 
 #, python-format
 msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
@@ -1964,10 +1968,11 @@ msgid "Remember this trust decision and don't ask again"
 msgstr ""
 
 msgid "Approve"
-msgstr ""
+msgstr "إقرار"
 
+#, fuzzy
 msgid "Don't approve"
-msgstr ""
+msgstr "لا تقرّ"
 
 msgid "OpenID not served"
 msgstr ""
@@ -2009,6 +2014,10 @@ msgstr ""
 
 msgid "Please choose:"
 msgstr ""
+
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "يجب عليك تسجيل دخولك لاستعمال الأشتراكات."
 
 #, fuzzy
 msgid "You must login to remove a quicklink."
@@ -2056,10 +2065,10 @@ msgid ""
 msgstr ""
 
 msgid "Backup"
-msgstr ""
+msgstr "نسخ احتياطي"
 
 msgid "Restore"
-msgstr ""
+msgstr "استعادة"
 
 #, fuzzy
 msgid "You are not allowed to do remote backup."
@@ -2238,7 +2247,7 @@ msgid "overwrite"
 msgstr "أكتب فوقه"
 
 msgid "Upload"
-msgstr ""
+msgstr "رفع"
 
 #, fuzzy
 msgid "New Name"
@@ -2445,6 +2454,9 @@ msgstr ""
 msgid "You already have a quicklink to this page."
 msgstr "لقد قمت بحفظ هذه الصفحة مسبقا!"
 
+msgid "You are not allowed to use this action."
+msgstr "لا يسمح لك استعمال هذا الإجراء"
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr ""
@@ -2520,9 +2532,6 @@ msgstr "إختر المؤلف"
 
 msgid "Revert all!"
 msgstr ""
-
-msgid "You are not allowed to use this action."
-msgstr "لا يسمح لك استعمال هذا الإجراء"
 
 #, python-format
 msgid "[%d attachments]"

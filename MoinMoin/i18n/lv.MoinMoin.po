@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
 "PO-Revision-Date: 2006-09-13 09:30+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000 AT gmail DOT NO SPAM com>\n"
 "Language-Team: Latvian <nad2000 AT gmail DOT NO SPAM com>\n"
@@ -1097,6 +1097,9 @@ msgstr ""
 msgid "The selected OpenIDs have been removed."
 msgstr ""
 
+msgid "No OpenID given."
+msgstr ""
+
 msgid "OpenID is already present."
 msgstr ""
 
@@ -2138,6 +2141,10 @@ msgstr "\"%s\" līdzīgu lapu nav!"
 msgid "Please choose:"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "Lai izmanototu parasktīšanos, Jums jāpieslēdzas."
+
 msgid "You must login to remove a quicklink."
 msgstr "Lai dzēstu ātrsaiti, Jums jāpieslēdzas."
 
@@ -2612,6 +2619,9 @@ msgstr "Nevar izveidot ātrsaiti uz šo lapu."
 msgid "You already have a quicklink to this page."
 msgstr "Jums jau ir ātrsaite uz šo lapu!"
 
+msgid "You are not allowed to use this action."
+msgstr "Jums nav tiesību lietot šo darbību."
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(including %(localwords)d %(pagelink)s)"
@@ -2689,9 +2699,6 @@ msgstr "Izvēlēties Autoru"
 
 msgid "Revert all!"
 msgstr "Atgriezt visu!"
-
-msgid "You are not allowed to use this action."
-msgstr "Jums nav tiesību lietot šo darbību."
 
 #, python-format
 msgid "[%d attachments]"

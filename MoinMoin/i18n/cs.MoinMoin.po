@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
 "PO-Revision-Date: 2007-11-05 22:11+0100\n"
 "Last-Translator: Václav Haisman <v.haisman@sh.cvut.cz>\n"
 "Language-Team: Czech <moin@lists.sourceforge.net>\n"
@@ -1083,6 +1083,9 @@ msgstr ""
 msgid "The selected OpenIDs have been removed."
 msgstr ""
 
+msgid "No OpenID given."
+msgstr ""
+
 msgid "OpenID is already present."
 msgstr ""
 
@@ -2128,6 +2131,10 @@ msgstr "Žádné stránky podobné \"%s\"!"
 msgid "Please choose:"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "Bez přihlášení nelze odebírat stránky."
+
 #, fuzzy
 msgid "You must login to remove a quicklink."
 msgstr "Bez přihlášení nelze přidat pohotový odkaz."
@@ -2606,6 +2613,9 @@ msgstr "Pohotový odkaz na tuto stránku nelze přidat-"
 msgid "You already have a quicklink to this page."
 msgstr "Stránka je již uložena!"
 
+msgid "You are not allowed to use this action."
+msgstr "Nemáte dovoleno provést tuto akci."
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(včetně %(localwords)d %(pagelink)s)"
@@ -2684,9 +2694,6 @@ msgstr "Zvolit autora"
 
 msgid "Revert all!"
 msgstr "Vrátit vše!"
-
-msgid "You are not allowed to use this action."
-msgstr "Nemáte dovoleno provést tuto akci."
 
 #, python-format
 msgid "[%d attachments]"

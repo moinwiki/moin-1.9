@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
 "PO-Revision-Date: 2006-08-17 20:50+0100\n"
 "Last-Translator: Translation sponsored by Tenalt Ltd. (info@tenalt.com)\n"
 "Language-Team: \n"
@@ -1088,6 +1088,9 @@ msgstr ""
 msgid "The selected OpenIDs have been removed."
 msgstr ""
 
+msgid "No OpenID given."
+msgstr ""
+
 msgid "OpenID is already present."
 msgstr ""
 
@@ -2139,6 +2142,10 @@ msgstr "Nijedna stranica ne nalikuje \"%s\"!"
 msgid "Please choose:"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "Morate se prijaviti za korištenje pretplate na stranicu."
+
 msgid "You must login to remove a quicklink."
 msgstr "Morate se prijaviti za uklanjanje prečica."
 
@@ -2618,6 +2625,9 @@ msgstr "Prečica na ovu stranicu nije dodana."
 msgid "You already have a quicklink to this page."
 msgstr "Prečica na ovu stranicu već postoji."
 
+msgid "You are not allowed to use this action."
+msgstr "Nije Vam dozvoljeno izvesti tu operaciju."
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(uključujući %(localwords)d %(pagelink)s)"
@@ -2695,9 +2705,6 @@ msgstr "Izaberi autora"
 
 msgid "Revert all!"
 msgstr "Vrati sve!"
-
-msgid "You are not allowed to use this action."
-msgstr "Nije Vam dozvoljeno izvesti tu operaciju."
 
 #, python-format
 msgid "[%d attachments]"

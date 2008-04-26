@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
-"PO-Revision-Date: 2008-03-31 20:27+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
+"PO-Revision-Date: 2008-04-11 23:21+0200\n"
 "Last-Translator: Milo Casagrande <milo_casagrande@yahoo.it>\n"
 "Language-Team: Italian\n"
 "MIME-Version: 1.0\n"
@@ -1010,7 +1010,7 @@ msgid "SpellCheck"
 msgstr "ControlloOrtografico"
 
 msgid "Discussion"
-msgstr ""
+msgstr "Discussione"
 
 #, python-format
 msgid ""
@@ -1107,6 +1107,10 @@ msgstr "Impossibile rimuovere tutti gli OpenID."
 
 msgid "The selected OpenIDs have been removed."
 msgstr "Gli OpenID selezionati sono stati rimossi."
+
+#, fuzzy
+msgid "No OpenID given."
+msgstr "Nessun OpenID."
 
 msgid "OpenID is already present."
 msgstr "OpenID è già presente."
@@ -1208,7 +1212,7 @@ msgstr "Opzioni generali"
 msgid "Quick links"
 msgstr "Collegamenti rapidi"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear Wiki user,\n"
 "\n"
@@ -1222,8 +1226,7 @@ msgstr ""
 "ti sei abbonato/a alla notifica in caso di modifiche a una pagina o a una\n"
 "categoria sul wiki \"%(sitename)s\".\n"
 "\n"
-"La pagina \"%(pagename)s\" è stata modificata da %(editor)s:\n"
-"\n"
+"La pagina \"%(pagename)s\" è stata modificata da %(editor)s\n"
 
 msgid "New page:\n"
 msgstr "Nuova pagina:\n"
@@ -1507,7 +1510,6 @@ msgstr ""
 "[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
 "reStructuredText Quick Reference]].\n"
 
-#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
 ">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
@@ -1524,22 +1526,22 @@ msgid ""
 "\n"
 "(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
 msgstr ""
-" Enfasi:: <<Verbatim('')>>''corsivo''<<Verbatim('')>>; <<Verbatim(''')"
-">>'''grassetto'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''grassetto "
-"corsivo'''''<<Verbatim(''''')>>; <<Verbatim('')>>''misto ''<<Verbatim(''')"
-">>'''''grassetto'''<<Verbatim(''')>> e corsivo''<<Verbatim('')>>; <<Verbatim"
-"(----)>> linea orizzontale.\n"
+" Enfasi:: <<Verbatim(//)>>''corsivo''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''grassetto'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''grassetto "
+"corsivo'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''misto ''<<Verbatim(**)"
+">>'''''grassetto'''<<Verbatim(**)>> e corsivo''<<Verbatim(//)>>;\n"
+" Linea orizzontale:: <<Verbatim(----)>>\n"
+" A capo forzato:: <<Verbatim(\\\\)>>\n"
 " Intestazioni:: = Titolo 1=; == Titolo 2 ==; === Titolo 3 ===; ==== Titolo 4 "
-"====; ===== Titolo 5 =====.\n"
-" Liste:: spazio e uno di: * elenco puntato; 1., a., A., i., I. elenco "
-"numerato; 1.#n inizia la numerazione da n; lo spazio da solo rientra.\n"
-" Collegamenti:: <<Verbatim(ParoleConLettereMaiuscole)>>; <<Verbatim"
-"([[collegamento|etichetta]])>>.\n"
-" Tabelle:: || cella di testo |||| cella su due colonne ||;    non sono "
-"consentiti spazi dopo la tabella o il titolo.\n"
+"====; ===== Titolo 5 =====\n"
+" Liste:: * elenco puntato; ** sotto-elenco puntato; # elemento numerato; ## "
+"sotto-elemento numerato\n"
+" Collegamenti:: <<Verbatim([[collegamento]])>>; <<Verbatim([[collegamento|"
+"etichetta]])>>.\n"
+" Tabelle:: |= intestazione | testo cella | altro testo |\n"
 "\n"
 "(!) Per ulteriore aiuto, consultare AiutoSuModificaPagina o "
-"RiassuntoDellaSintassi.\n"
+"AiutoSuSintassiCreole.\n"
 
 msgid "UnSubscribe"
 msgstr "Annulla abbonamento"
@@ -2181,6 +2183,10 @@ msgstr "Nessuna pagina simile a \"%s\"."
 msgid "Please choose:"
 msgstr "Scegliere:"
 
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "Devi eseguire l'accesso per poterti abbonare."
+
 msgid "You must login to remove a quicklink."
 msgstr "È necessario accedere per rimuovere un collegamento rapido."
 
@@ -2662,6 +2668,9 @@ msgstr ""
 msgid "You already have a quicklink to this page."
 msgstr "Hai già un collegamento rapido a questa pagina."
 
+msgid "You are not allowed to use this action."
+msgstr "Non è consentito usare quest'azione."
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(includendo %(localwords)d %(pagelink)s)"
@@ -2754,9 +2763,6 @@ msgstr "Selezionare autore"
 
 msgid "Revert all!"
 msgstr "Ripristina tutto!"
-
-msgid "You are not allowed to use this action."
-msgstr "Non è consentito usare quest'azione."
 
 #, python-format
 msgid "[%d attachments]"
@@ -3013,115 +3019,3 @@ msgstr "Non ti è consentito usare l'azione %(action_name)s su questa pagina."
 
 msgid "Login and try again."
 msgstr "Esegui l'accesso e prova ancora."
-
-#~ msgid "SendMyPassword"
-#~ msgstr "MandamiLaPassword"
-
-#~ msgid "Low-level communication error: $s"
-#~ msgstr "Errore di comunicazione a basso livello: $s"
-
-#~ msgid "Use UserPreferences to change your settings or create an account."
-#~ msgstr ""
-#~ "Usa PreferenzeUtente per cambiare le tue impostazioni o per creare un "
-#~ "nuovo account."
-
-#~ msgid "Use UserPreferences to change settings of the selected user account"
-#~ msgstr ""
-#~ "Usa PreferenzeUtente per cambiare le impostazioni dell'account scelto."
-
-#~ msgid ""
-#~ "This list does not work, unless you have entered a valid email address!"
-#~ msgstr ""
-#~ "Per un corretto funzionamento della notifica devi inserire un indirizzo "
-#~ "email valido."
-
-#~ msgid ""
-#~ "To create an account, see the %(userprefslink)s page. To recover a lost "
-#~ "password, go to %(sendmypasswordlink)s."
-#~ msgstr ""
-#~ "Per creare un account, vedi la pagina %(userprefslink)s. Per riottenere "
-#~ "una password dimenticata, vedi la pagina %(sendmypasswordlink)s."
-
-#~ msgid ""
-#~ "'''A page with the name {{{'%s'}}} already exists.'''\n"
-#~ "Try a different name."
-#~ msgstr ""
-#~ "'''Una pagina con il nome {{{\"%s\"}}} esiste già.'''\n"
-#~ "Prova un nome differente."
-
-#~ msgid ""
-#~ "The comment on the change is:\n"
-#~ "%(comment)s\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Il commento alle modifiche è:\n"
-#~ "%(comment)s\n"
-#~ "\n"
-
-#~ msgid "Status of sending notification mails:"
-#~ msgstr "Risultato della spedizione delle email di notifica:"
-
-#~ msgid "[%(lang)s] %(recipients)s: %(status)s"
-#~ msgstr "[%(lang)s] %(recipients)s: %(status)s"
-
-#~ msgid "UserPreferences"
-#~ msgstr "PreferenzeUtente"
-
-#~ msgid "Subscribe to trivial changes"
-#~ msgstr "Abbonati ai cambiamenti banali"
-
-#~ msgid "(Only for password change or new account)"
-#~ msgstr "(Solo per cambiare la password o per creare un nuovo account)"
-
-#~ msgid "Check your argument %s"
-#~ msgstr "Controllare l'argomento %s"
-
-#~ msgid "ERROR in regex '%s'"
-#~ msgstr "Errore nell'espressione regolare \"%s\""
-
-#~ msgid "Bad timestamp '%s'"
-#~ msgstr "Specifica oraria \"%s\" non valida"
-
-#~ msgid "Not supported mimetype of file: %s"
-#~ msgstr "Tipo mime del file non supportato: %s"
-
-#~ msgid "Embedding of object by chosen formatter not possible"
-#~ msgstr "Impossibile inserire l'oggetto con il formattatore scelto"
-
-#~ msgid ""
-#~ "Not enough arguments given to EmbedObject macro! Try <<EmbedObject"
-#~ "(attachment [,width=width] [,height=height] [,alt=alternate Text])>>"
-#~ msgstr ""
-#~ "Gli argomenti dati alla macro EmbedObject sono insufficienti. Prova "
-#~ "<<EmbedObject(allegato [,width=larghezza] [,height=altezza] [,alt=testo "
-#~ "sostitutivo])>>"
-
-#~ msgid ""
-#~ "Not enough arguments given to EmbedObject macro! Try <<EmbedObject(url, "
-#~ "url_mimetype [,width=width] [,height=height] [,alt=alternate Text])>>"
-#~ msgstr ""
-#~ "Gli argomenti dati alla macro EmbedObject sono insufficienti. Prova "
-#~ "<<EmbedObject(url, url_mimetype [,width=larghezza] [,height=altezza] [,"
-#~ "alt=testo sostitutivo])>>"
-
-#~ msgid "Invalid MonthCalendar calparms \"%s\"!"
-#~ msgstr "Parametri \"%s\" per il calendario non validi."
-
-#~ msgid "Invalid MonthCalendar arguments \"%s\"!"
-#~ msgstr "Argomenti \"%s\" per il calendario non validi."
-
-#~ msgid "Sorry, login failed."
-#~ msgstr "Spiacente, accesso fallito."
-
-#~ msgid "Filename"
-#~ msgstr "Nome del file"
-
-#~ msgid ""
-#~ "The remote version of MoinMoin is too old, version 1.6 is required at "
-#~ "least."
-#~ msgstr ""
-#~ "La versione remota di MoinMoin è troppo vecchia, occorre almeno la "
-#~ "versione 1.6."
-
-#~ msgid "belonging to one of the following categories"
-#~ msgstr "appartenente a una delle seguenti categorie:"

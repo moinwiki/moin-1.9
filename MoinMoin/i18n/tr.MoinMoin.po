@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin-1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
 "PO-Revision-Date: 2007-04-25 16:26+0300\n"
 "Last-Translator: Ekrem SEREN <ekrem.seren@parduslinux.org>\n"
 "Language-Team: Türkçe\n"
@@ -1112,6 +1112,9 @@ msgstr ""
 msgid "The selected OpenIDs have been removed."
 msgstr ""
 
+msgid "No OpenID given."
+msgstr ""
+
 msgid "OpenID is already present."
 msgstr ""
 
@@ -2153,6 +2156,10 @@ msgstr "\"%s\" adında bir sayfa yok!"
 msgid "Please choose:"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "Sayfa üyeliği özelliğinden yararlanabilmek için giriş yapmalısınız."
+
 #, fuzzy
 msgid "You must login to remove a quicklink."
 msgstr "Hızlı erişim bağlantısı eklemek için giriş yapmalısınız."
@@ -2640,6 +2647,9 @@ msgstr "Bu sayfa için hızlı erişim için bağlantısı eklenemedi."
 msgid "You already have a quicklink to this page."
 msgstr "Bu sayfayı zaten kaydettiniz!"
 
+msgid "You are not allowed to use this action."
+msgstr "Bu işlemi yapmak için yeterli izne sahip değilsiniz."
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(içerilen %(localwords)d %(pagelink)s)"
@@ -2718,9 +2728,6 @@ msgstr "Yazar Seç"
 
 msgid "Revert all!"
 msgstr "Hepsini geri al!"
-
-msgid "You are not allowed to use this action."
-msgstr "Bu işlemi yapmak için yeterli izne sahip değilsiniz."
 
 #, python-format
 msgid "[%d attachments]"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
 "PO-Revision-Date: 2007-11-10 16:50+0300\n"
 "Last-Translator: Maxim V. Dziumanenko <dziumanenko@softprom.kiev.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -1091,6 +1091,9 @@ msgstr ""
 msgid "The selected OpenIDs have been removed."
 msgstr ""
 
+msgid "No OpenID given."
+msgstr ""
+
 msgid "OpenID is already present."
 msgstr ""
 
@@ -2136,6 +2139,10 @@ msgstr "Немає подібних до \"%s\" сторінок!"
 msgid "Please choose:"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "Зареєструйтесь, щоб мати змогу стежити."
+
 msgid "You must login to remove a quicklink."
 msgstr "Зареєструйтесь, щоб видалити посилання на сторінку."
 
@@ -2609,6 +2616,9 @@ msgstr "Вам не може бути додане посилання на цю 
 msgid "You already have a quicklink to this page."
 msgstr "Ви вже встановили посилання на цю сторінку!"
 
+msgid "You are not allowed to use this action."
+msgstr "Немає прав для цієї дії."
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(включаючи %(localwords)d %(pagelink)s)"
@@ -2685,9 +2695,6 @@ msgstr "Виберіть автора"
 
 msgid "Revert all!"
 msgstr "Повернути все!"
-
-msgid "You are not allowed to use this action."
-msgstr "Немає прав для цієї дії."
 
 #, python-format
 msgid "[%d attachments]"
