@@ -178,10 +178,8 @@ def revert_pages(request, editor, timestamp):
 
 def execute(pagename, request):
     _ = request.getText
-    # be extra paranoid in dangerous actions
-    actname = __name__.split('.')[-1]
-    if actname in request.cfg.actions_excluded or \
-       not request.user.isSuperUser():
+    # check for superuser
+    if not request.user.isSuperUser():
         request.theme.add_msg(_('You are not allowed to use this action.'), "error")
         return Page.Page(request, pagename).send_page()
 

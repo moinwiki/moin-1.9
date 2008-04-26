@@ -15,10 +15,8 @@ from MoinMoin.util import thread_monitor
 
 def execute_fs(pagename, request):
     _ = request.getText
-    # be extra paranoid in dangerous actions
-    actname = __name__.split('.')[-1]
-    if actname in request.cfg.actions_excluded or \
-       not request.user.isSuperUser():
+    # check for superuser
+    if not request.user.isSuperUser():
         request.theme.add_msg(_('You are not allowed to use this action.'), "error")
         return Page.Page(request, pagename).send_page()
 
@@ -42,8 +40,7 @@ def execute_wiki(pagename, request):
     _ = request.getText
     # be extra paranoid in dangerous actions
     actname = __name__.split('.')[-1]
-    if actname in request.cfg.actions_excluded or \
-       not request.user.isSuperUser():
+    if not request.user.isSuperUser():
         request.theme.add_msg(_('You are not allowed to use this action.'), "error")
         return Page.Page(request, pagename).send_page()
 

@@ -503,11 +503,6 @@ def execute(pagename, request):
     """ Main dispatcher for the 'AttachFile' action. """
     _ = request.getText
 
-    if action_name in request.cfg.actions_excluded:
-        msg = _('File attachments are not allowed in this wiki!')
-        error_msg(pagename, request, msg)
-        return
-
     do = request.form.get('do', ['upload_form'])
     handler = globals().get('_do_%s' % do[0])
     if handler:

@@ -123,8 +123,7 @@ def backupAllowed(request):
     """ Return True if backup is allowed """
     action = __name__.split('.')[-1]
     user = request.user
-    return (action not in request.cfg.actions_excluded and
-            user.valid and user.name in request.cfg.backup_users)
+    return user.valid and user.name in request.cfg.backup_users
 
 def execute(pagename, request):
     _ = request.getText
