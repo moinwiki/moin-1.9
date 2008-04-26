@@ -277,7 +277,8 @@ class ThemeBase:
                         request.formatter.interwikilink(0, title=title, id="userhome", *interwiki))
             userlinks.append(homelink)
             # link to userprefs action
-            userlinks.append(d['page'].link_to(request, text=_('Settings'),
+            if 'userprefs' not in self.request.cfg.actions_excluded:
+                userlinks.append(d['page'].link_to(request, text=_('Settings'),
                                                querystr={'action': 'userprefs'}, id='userprefs', rel='nofollow'))
 
         if request.user.valid:
@@ -961,6 +962,9 @@ var search_hint = "%(search_hint)s";
         available = request.getAvailableActions(page)
         for action in menu:
             data = {'action': action, 'disabled': '', 'title': titles[action]}
+            # removes excluded actions from the more actions menu
+            if action in request.cfg.actions_excluded:
+                continue
 
             # Enable delete cache only if page can use caching
             if action == 'refresh':
@@ -1170,6 +1174,9 @@ actionsMenuInit('%(label)s');
         If the user want to show both editors, it will display "Edit
         (Text)", otherwise as "Edit".
         """
+        if 'edit' in self.request.cfg.actions_excluded:
+            return ""
+
         if not (page.isWritable() and
                 self.request.user.may.write(page.page_name)):
             return self.disabledEdit()
@@ -1234,6 +1241,9 @@ var gui_editor_link_text = "%(text)s";
 
     def infoLink(self, page):
         """ Return link to page information """
+        if 'info' in self.request.cfg.actions_excluded:
+            return ""
+
         _ = self.request.getText
         return page.link_to(self.request,
                             text=_('Info'),
@@ -1253,6 +1263,8 @@ var gui_editor_link_text = "%(text)s";
             action, text = 'unsubscribe', _("Unsubscribe")
         else:
             action, text = 'subscribe', _("Subscribe")
+        if action in self.request.cfg.actions_excluded:
+            return ""
         return page.link_to(self.request, text=text, querystr={'action': action}, css_class='nbsubscribe', rel='nofollow')
 
     def quicklinkLink(self, page):
@@ -1269,10 +1281,15 @@ var gui_editor_link_text = "%(text)s";
             action, text = 'quickunlink', _("Remove Link")
         else:
             action, text = 'quicklink', _("Add Link")
+        if action in self.request.cfg.actions_excluded:
+            return ""
         return page.link_to(self.request, text=text, querystr={'action': action}, css_class='nbquicklink', rel='nofollow')
 
     def attachmentsLink(self, page):
         """ Return link to page attachments """
+        if 'AttachFile' in self.request.cfg.actions_excluded:
+            return ""
+
         _ = self.request.getText
         return page.link_to(self.request,
                             text=_('Attachments'),
