@@ -9,7 +9,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin.macro.FullSearch import macro_FullSearch as macro_FullSearchCached
+from MoinMoin.macro.FullSearch import execute
 Dependencies = []
 
 # yes, that's all
