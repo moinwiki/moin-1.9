@@ -87,8 +87,8 @@ def _create_page(request, cancel=False):
 
 def execute(pagename, request):
     _ = request.getText
-    actname = __name__.split('.')[-1]
     if not request.user.valid:
+        actname = __name__.split('.')[-1]
         request.theme.add_msg(_("You must login to use this action: %(action)s.") % {"action": actname}, "error")
         return Page.Page(request, pagename).send_page()
 
