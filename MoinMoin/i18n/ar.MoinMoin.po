@@ -1,0 +1,2780 @@
+## Please edit system and help pages ONLY in the moinmaster wiki! For more
+## information, please see MoinMaster:MoinPagesEditorGroup.
+##master-page:None
+##master-date:None
+#acl MoinPagesEditorGroup:read,write,delete,revert All:read
+#format gettext
+#language ar
+
+#
+# MoinMoin ar system text translation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: moin 1.6\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"PO-Revision-Date: 2007-10-08 12:27+0200\n"
+"Last-Translator: Mohamed Yahya <yahya.mohamed@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Direction: rtl\n"
+"X-Language: Arabic (written in Arabic XXX)\n"
+"X-Language-in-English: Arabic\n"
+"X-HasWikiMarkup: True\n"
+
+msgid "<unknown>"
+msgstr "<مغمور>"
+
+#, python-format
+msgid ""
+"Login Name: %s\n"
+"\n"
+"Login Password: %s\n"
+"\n"
+"Login URL: %s/?action=login\n"
+msgstr ""
+
+msgid ""
+"Somebody has requested to submit your account data to this email address.\n"
+"\n"
+"If you lost your password, please use the data below and just enter the\n"
+"password AS SHOWN into the wiki's password form field (use copy and paste\n"
+"for that).\n"
+"\n"
+"After successfully logging in, it is of course a good idea to set a new and "
+"known password.\n"
+msgstr ""
+
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr ""
+
+msgid "You are not allowed to edit this page."
+msgstr "لا يسمح لك بتحرير هذه الصفحة"
+
+msgid "Page is immutable!"
+msgstr "هذه الصفحة غير متحولة"
+
+msgid "Cannot edit old revisions!"
+msgstr "لا يمكن أن تحرر نسخ قديمة!"
+
+msgid "The lock you held timed out. Be prepared for editing conflicts!"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Draft of \"%(pagename)s\""
+msgstr "تحرير \"%(pagename)s\""
+
+#, python-format
+msgid "Edit \"%(pagename)s\""
+msgstr "تحرير \"%(pagename)s\""
+
+#, python-format
+msgid "Preview of \"%(pagename)s\""
+msgstr ""
+
+#, python-format
+msgid "Your edit lock on %(lock_page)s has expired!"
+msgstr ""
+
+#, python-format
+msgid "Your edit lock on %(lock_page)s will expire in # minutes."
+msgstr ""
+
+#, python-format
+msgid "Your edit lock on %(lock_page)s will expire in # seconds."
+msgstr ""
+
+msgid "Someone else deleted this page while you were editing!"
+msgstr "شخص آخر قام بحذف هذه الصفحة بينما كنت تقوم بتحريها!"
+
+msgid "Someone else changed this page while you were editing!"
+msgstr "شخص آخر قام بتغيير هذه الصفحة بينما كنت تقوم بتحريها!"
+
+msgid ""
+"Someone else saved this page while you were editing!\n"
+"Please review the page and save then. Do not save this page as it is!"
+msgstr ""
+
+msgid "[Content loaded from draft]"
+msgstr ""
+
+#, python-format
+msgid "[Content of new page loaded from %s]"
+msgstr ""
+
+#, python-format
+msgid "[Template %s not found]"
+msgstr ""
+
+#, python-format
+msgid "[You may not read %s]"
+msgstr "[لا يمكن أن تقرأ %s]"
+
+#, python-format
+msgid ""
+"'''<<BR>>Your draft based on revision %(draft_rev)d (saved %"
+"(draft_timestamp_str)s) can be loaded instead of the current revision %"
+"(page_rev)d by using the load draft button - in case you lost your last edit "
+"somehow without saving it.''' A draft gets saved for you when you do a "
+"preview, cancel an edit or unsuccessfully save."
+msgstr ""
+
+#, python-format
+msgid "Describe %s here."
+msgstr "صوّر %s هنا."
+
+msgid "Check Spelling"
+msgstr "راجع التهجئة"
+
+msgid "Save Changes"
+msgstr "إحفظ التغييرات"
+
+msgid "Cancel"
+msgstr "إلغاء"
+
+#, python-format
+msgid ""
+"By hitting '''%(save_button_text)s''' you put your changes under the %"
+"(license_link)s.\n"
+"If you don't want that, hit '''%(cancel_button_text)s''' to cancel your "
+"changes."
+msgstr ""
+
+msgid "Preview"
+msgstr "معاينة"
+
+#, fuzzy
+msgid "Text mode"
+msgstr "نص عادي"
+
+#, fuzzy
+msgid "Load Draft"
+msgstr "حمّل المسودة"
+
+msgid "Trivial change"
+msgstr "تغيير بسيط"
+
+msgid "Comment:"
+msgstr "تصريح"
+
+msgid "<No addition>"
+msgstr "<لا إضافة>"
+
+#, python-format
+msgid "Add to: %(category)s"
+msgstr "أضف إلى: %(category)s"
+
+msgid "Remove trailing whitespace from each line"
+msgstr "أزل الفراغ الأبيض في نهاية كل سطر."
+
+#, python-format
+msgid "Argument \"%s\" must be a boolean value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument must be a boolean value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" must be an integer value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument must be an integer value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" must be a floating point value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument must be a floating point value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" must be a complex value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument must be a complex value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument must be one of \"%s\", not \"%s\""
+msgstr ""
+
+msgid "Too many arguments"
+msgstr ""
+
+msgid "Cannot have arguments without name following named arguments"
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" is required"
+msgstr ""
+
+#, python-format
+msgid "No argument named \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Expected \"=\" to follow \"%(token)s\""
+msgstr "تتوقع \"=\" أن تتبع \"%(token)s\""
+
+#, python-format
+msgid "Expected a value for key \"%(token)s\""
+msgstr "تتوقع قيمة للمفتاح \"%(token)s\""
+
+msgid "Your changes are not saved!"
+msgstr "لم يتم حفظ تغييراتك!"
+
+msgid "Page name is too long, try shorter name."
+msgstr "إسم الصفحة طويل، جرب إسما أقصر."
+
+msgid "GUI Mode"
+msgstr ""
+
+#, fuzzy
+msgid "Edit was cancelled."
+msgstr "تم إلغاء التحرير."
+
+msgid "You can't copy to an empty pagename."
+msgstr "لا يمكنك النسخ إلى اسم صفحة فارغ."
+
+#, fuzzy
+msgid "You are not allowed to copy this page!"
+msgstr "!لا يسمح لك بالعودة إلى هذه الصفحة"
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+
+#, python-format
+msgid "Could not copy page because of file system error: %s."
+msgstr "تعذر نسخ الصفة بسبب خطأ في نظام الملفات: %s."
+
+#, fuzzy
+msgid "You are not allowed to rename this page!"
+msgstr "!لا يسمح لك بالعودة إلى هذه الصفحة"
+
+msgid "You can't rename to an empty pagename."
+msgstr "لا يمكنك إعادة التسمية بإسم صفحة فارغ."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to delete this page!"
+msgstr "!لا يسمح لك بالعودة إلى هذه الصفحة"
+
+msgid "Thank you for your changes. Your attention to detail is appreciated."
+msgstr "شكرا على التغييرات التي قمت بها. نقدر اهتمامك بالتفاصيل."
+
+#, python-format
+msgid "Page \"%s\" was successfully deleted!"
+msgstr ""
+
+#, python-format
+msgid "Page could not get locked. Unexpected error (errno=%d)."
+msgstr "لا يمكن قفل الصفحة. خطأ غير متوقع (errno=%d)."
+
+msgid "Page could not get locked. Missing 'current' file?"
+msgstr ""
+
+#, python-format
+msgid ""
+"Unable to determine current page revision from the 'current' file. The page %"
+"s is damaged and cannot be edited right now."
+msgstr ""
+
+#, python-format
+msgid "Cannot save page %s, no storage space left."
+msgstr "لا يمكن حفظ صفحة %sK لم يتبقى للتخزين."
+
+#, python-format
+msgid "An I/O error occurred while saving page %s (errno=%d)"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to edit this page!"
+msgstr "لا يسمح لك تحرير هذه الصفحة"
+
+msgid "You cannot save empty pages."
+msgstr "لا تستطيع حفظ صفحات فارغة"
+
+#, fuzzy
+msgid "You already saved this page!"
+msgstr "لقد قمت بحفظ هذه الصفحة مسبقا!"
+
+#, fuzzy
+msgid "You already edited this page! Please do not use the back button."
+msgstr "لقد قمت بتحرير هذه الصفحة! رجاء لا تستعمل زر الرجوع."
+
+#, fuzzy
+msgid "You did not change the page content, not saved!"
+msgstr "أنت لم تقم بتغيير محتوى الصفحة، لم تم الحفظ!"
+
+msgid ""
+"You can't change ACLs on this page since you have no admin rights on it!"
+msgstr ""
+
+msgid "Notifications sent to:"
+msgstr ""
+
+#, python-format
+msgid ""
+"The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were "
+"granted the lock for this page."
+msgstr ""
+
+#, python-format
+msgid ""
+"Other users will be ''blocked'' from editing this page until %(bumptime)s."
+msgstr ""
+
+#, python-format
+msgid ""
+"Other users will be ''warned'' until %(bumptime)s that you are editing this "
+"page."
+msgstr ""
+
+msgid "Use the Preview button to extend the locking period."
+msgstr "إستعمل زر المعاينة لتمديد فترة القفل."
+
+#, python-format
+msgid ""
+"This page is currently ''locked'' for editing by %(owner)s until %(timestamp)"
+"s, i.e. for %(mins_valid)d minute(s)."
+msgstr ""
+
+#, python-format
+msgid ""
+"This page was opened for editing or last previewed at %(timestamp)s by %"
+"(owner)s.<<BR>>\n"
+"'''You should ''refrain from editing'' this page for at least another %"
+"(mins_valid)d minute(s),\n"
+"to avoid editing conflicts.'''<<BR>>\n"
+"To leave the editor, press the Cancel button."
+msgstr ""
+
+msgid "The wiki is currently not reachable."
+msgstr "لا يمكن الوصول إلى هذه الويكي حاليا."
+
+msgid "Invalid username or password."
+msgstr "إسم مستخدم أو كلمة سر غير صالحة."
+
+#, python-format
+msgid ""
+"The remote wiki uses a different InterWiki name (%(remotename)s) internally "
+"than you specified (%(localname)s)."
+msgstr ""
+
+#, python-format
+msgid "The package needs a newer version of MoinMoin (at least %s)."
+msgstr ""
+
+msgid "The theme name is not set."
+msgstr ""
+
+msgid "Installing theme files is only supported for standalone type servers."
+msgstr ""
+
+#, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr ""
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr ""
+
+#, python-format
+msgid "The page %s does not exist."
+msgstr "الصفحة %s غير موجودة."
+
+msgid "Invalid package file header."
+msgstr ""
+
+msgid "Package file format unsupported."
+msgstr ""
+
+#, python-format
+msgid "Unknown function %(func)s in line %(lineno)i."
+msgstr ""
+
+#, python-format
+msgid "The file %s was not found in the package."
+msgstr ""
+
+#, python-format
+msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
+msgstr ""
+
+msgid ""
+"The backed up content of this page is deprecated and will not be included in "
+"search results!"
+msgstr ""
+
+#, python-format
+msgid "Revision %(rev)d as of %(date)s"
+msgstr ""
+
+#, python-format
+msgid "Redirected from page \"%(page)s\""
+msgstr ""
+
+#, python-format
+msgid "This page redirects to page \"%(page)s\""
+msgstr ""
+
+msgid "Create New Page"
+msgstr "اخلق صفحة وجديدة"
+
+msgid "You are not allowed to view this page."
+msgstr "لا يسمح لك بنظر هذه الصفحة."
+
+msgid "[all]"
+msgstr ""
+
+msgid "[not empty]"
+msgstr ""
+
+msgid "[empty]"
+msgstr ""
+
+msgid "filter"
+msgstr ""
+
+#, python-format
+msgid ""
+"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
+"%(be)s results out of about %(pages)d pages."
+msgstr ""
+
+#, fuzzy
+msgid "seconds"
+msgstr "%.2f ثانية"
+
+#, fuzzy
+msgid "Previous"
+msgstr "السابق"
+
+#, fuzzy
+msgid "Next"
+msgstr "النص"
+
+#, fuzzy
+msgid "rev"
+msgstr "معاينة"
+
+#, fuzzy
+msgid "current"
+msgstr "الحالي"
+
+#, python-format
+msgid "last modified: %s"
+msgstr ""
+
+msgid "match"
+msgstr ""
+
+msgid "matches"
+msgstr ""
+
+msgid "Line"
+msgstr ""
+
+msgid "No differences found!"
+msgstr "لا توجد الاختلافات!"
+
+msgid "Deletions are marked like this."
+msgstr ""
+
+msgid "Additions are marked like this."
+msgstr ""
+
+msgid "Name"
+msgstr "اسم"
+
+msgid "Password"
+msgstr "كلمةالسرّ"
+
+msgid "OpenID"
+msgstr ""
+
+#, fuzzy
+msgid "Login"
+msgstr "ولوج"
+
+#, fuzzy
+msgid "Username"
+msgstr "المستخدم"
+
+msgid "ACL Groups"
+msgstr ""
+
+msgid "Email"
+msgstr "بريد الكتروني"
+
+msgid "Jabber"
+msgstr ""
+
+#, fuzzy
+msgid "Action"
+msgstr "إجراء"
+
+#, fuzzy
+msgid "Enable user"
+msgstr "مفعل"
+
+#, fuzzy
+msgid "disabled"
+msgstr "معطل"
+
+#, fuzzy
+msgid "Disable user"
+msgstr "معطل"
+
+#, fuzzy
+msgid "Mail account data"
+msgstr "إبعث لي بيانات حسابي بالبريد الإلكتروني."
+
+msgid "Missing password. Please enter user name and password."
+msgstr "لا يوجد كلمة سر. الرجاء إدخال إسم مستخدم و كلمة سر"
+
+#, fuzzy
+msgid "You need to log in."
+msgstr "لقد قمت بتسجيل الخروج."
+
+#, python-format
+msgid ""
+"If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
+"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+msgstr ""
+
+msgid ""
+"Please choose an account name now.\n"
+"If you choose an existing account name you will be asked for the\n"
+"password and be able to associate the account with your OpenID."
+msgstr ""
+
+msgid "Choose this name"
+msgstr ""
+
+msgid ""
+"The username you have chosen is already\n"
+"taken. If it is your username, enter your password below to associate\n"
+"the username with your OpenID. Otherwise, please choose a different\n"
+"username and leave the password field blank."
+msgstr ""
+
+msgid "Associate this name"
+msgstr ""
+
+#, python-format
+msgid "OpenID error: %s."
+msgstr ""
+
+#, fuzzy
+msgid "Verification canceled."
+msgstr "تم إلغاء العملية."
+
+msgid "OpenID failure."
+msgstr ""
+
+msgid "This is not a valid username, choose a different one."
+msgstr ""
+
+msgid "Your account is now associated to your OpenID."
+msgstr ""
+
+msgid "The password you entered is not valid."
+msgstr ""
+
+msgid "OpenID verification requires that you click this button:"
+msgstr ""
+
+msgid "Anonymous sessions need to be enabled for OpenID login."
+msgstr ""
+
+msgid "Failed to resolve OpenID."
+msgstr ""
+
+msgid "OpenID discovery failure, not a valid OpenID."
+msgstr ""
+
+msgid "No OpenID."
+msgstr ""
+
+msgid ""
+"If you do not have an account yet, you can still log in with your OpenID and "
+"create one during login."
+msgstr ""
+
+msgid "Failed to connect to database."
+msgstr ""
+
+msgid "Could not contact botbouncer.com."
+msgstr ""
+
+msgid "Wiki"
+msgstr "ويكي"
+
+msgid "Page"
+msgstr "الصفحة"
+
+msgid "User"
+msgstr "المستخدم"
+
+msgid "Diffs"
+msgstr ""
+
+msgid "Info"
+msgstr ""
+
+#, fuzzy
+msgid "Edit"
+msgstr "حرّر"
+
+msgid "Unsubscribe"
+msgstr "إلغاء الإشتراك"
+
+msgid "Subscribe"
+msgstr "اشتراك"
+
+msgid "Raw"
+msgstr ""
+
+msgid "XML"
+msgstr "XML"
+
+msgid "Print"
+msgstr "طباعة"
+
+msgid "View"
+msgstr "اظهر"
+
+msgid "Home"
+msgstr ""
+
+msgid "Up"
+msgstr "أعلى"
+
+msgid "[RSS]"
+msgstr ""
+
+msgid "[DELETED]"
+msgstr ""
+
+msgid "[UPDATED]"
+msgstr ""
+
+msgid "[RENAMED]"
+msgstr ""
+
+msgid "[CONFLICT]"
+msgstr ""
+
+msgid "[NEW]"
+msgstr ""
+
+msgid "[DIFF]"
+msgstr ""
+
+msgid "[BOTTOM]"
+msgstr ""
+
+msgid "[TOP]"
+msgstr ""
+
+msgid "Click to do a full-text search for this title"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Logout"
+msgstr "تسجيل الخروج"
+
+msgid "Clear message"
+msgstr ""
+
+#, python-format
+msgid "last edited %(time)s by %(editor)s"
+msgstr ""
+
+#, python-format
+msgid "last modified %(time)s"
+msgstr "آخدر تعديل %(time)s"
+
+msgid "Search:"
+msgstr "البحث:"
+
+msgid "Text"
+msgstr "النص"
+
+msgid "Titles"
+msgstr "العناوين"
+
+msgid "Search"
+msgstr "ابحث"
+
+msgid "More Actions:"
+msgstr "أفعال أكثر:"
+
+#, fuzzy
+msgid "------------------------"
+msgstr "------------"
+
+msgid "Raw Text"
+msgstr "نص مجرد"
+
+msgid "Print View"
+msgstr "معاينة الطباعة"
+
+#, fuzzy
+msgid "Delete Cache"
+msgstr "محو المخبأ"
+
+msgid "Rename Page"
+msgstr "أعد تسمية الصفحة"
+
+#, fuzzy
+msgid "Copy Page"
+msgstr "صفحاتي"
+
+msgid "Delete Page"
+msgstr "احذف الصفحة"
+
+msgid "Like Pages"
+msgstr "صفحات مشابه"
+
+msgid "Local Site Map"
+msgstr ""
+
+msgid "My Pages"
+msgstr "صفحاتي"
+
+msgid "Subscribe User"
+msgstr ""
+
+#, fuzzy
+msgid "Remove Spam"
+msgstr "أزل السخام"
+
+msgid "Revert to this revision"
+msgstr ""
+
+msgid "Package Pages"
+msgstr ""
+
+msgid "Render as Docbook"
+msgstr ""
+
+#, fuzzy
+msgid "Sync Pages"
+msgstr "صفحاتي"
+
+msgid "Do"
+msgstr ""
+
+#, fuzzy
+msgid "Comments"
+msgstr "تصريح"
+
+msgid "Edit (Text)"
+msgstr "تحرير(نصي)"
+
+msgid "Edit (GUI)"
+msgstr "تحرير (رسومي) "
+
+#, fuzzy
+msgid "Immutable Page"
+msgstr "صفحة ثابتة"
+
+msgid "Remove Link"
+msgstr "احذف رابط"
+
+msgid "Add Link"
+msgstr "ضع رابط"
+
+msgid "Attachments"
+msgstr "المرفقات"
+
+#, python-format
+msgid "Show %s days."
+msgstr ""
+
+msgid "Wiki Markup"
+msgstr ""
+
+msgid "DeleteCache"
+msgstr ""
+
+#, python-format
+msgid "(cached %s)"
+msgstr ""
+
+msgid "Or try one of these actions:"
+msgstr "أو جرب أحد هذه الأفعال:"
+
+msgid "Date"
+msgstr "التاريخ"
+
+msgid "From"
+msgstr "من"
+
+msgid "To"
+msgstr "إلى"
+
+#, fuzzy
+msgid "Content"
+msgstr "تصريح"
+
+#, python-format
+msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
+msgstr ""
+
+msgid "Mail not sent"
+msgstr "لم يتم ارسال البريد"
+
+msgid "Mail sent OK"
+msgstr "تم ارسال البريد "
+
+msgid ""
+"Rendering of reStructured text is not possible, please install Docutils."
+msgstr ""
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "**You are not allowed to read the page: %s**"
+msgstr "!لا يسمح لك بالعودة إلى هذه الصفحة"
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr ""
+
+msgid "XSLT option disabled, please look at HelpOnConfiguration."
+msgstr ""
+
+msgid "XSLT processing is not available, please install 4suite 1.x."
+msgstr ""
+
+#, python-format
+msgid "%(errortype)s processing error"
+msgstr ""
+
+#, python-format
+msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
+msgstr ""
+
+#, python-format
+msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
+msgstr ""
+
+#, python-format
+msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
+msgstr ""
+
+#, python-format
+msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
+msgstr ""
+
+msgid "FrontPage"
+msgstr ""
+
+msgid "RecentChanges"
+msgstr ""
+
+msgid "TitleIndex"
+msgstr ""
+
+msgid "WordIndex"
+msgstr ""
+
+msgid "FindPage"
+msgstr ""
+
+msgid "SiteNavigation"
+msgstr ""
+
+msgid "HelpContents"
+msgstr ""
+
+msgid "HelpOnFormatting"
+msgstr ""
+
+msgid "WikiLicense"
+msgstr ""
+
+msgid "MissingPage"
+msgstr ""
+
+msgid "MissingHomePage"
+msgstr ""
+
+msgid "Mon"
+msgstr "الإثنين"
+
+msgid "Tue"
+msgstr "الثلاثاء"
+
+msgid "Wed"
+msgstr "الأربعاء"
+
+msgid "Thu"
+msgstr "الخميس"
+
+msgid "Fri"
+msgstr "الجمعة"
+
+msgid "Sat"
+msgstr "السبت"
+
+msgid "Sun"
+msgstr "الأحد"
+
+msgid "AttachFile"
+msgstr ""
+
+msgid "DeletePage"
+msgstr ""
+
+msgid "LikePages"
+msgstr ""
+
+msgid "LocalSiteMap"
+msgstr ""
+
+msgid "RenamePage"
+msgstr ""
+
+msgid "SpellCheck"
+msgstr ""
+
+msgid "Discussion"
+msgstr ""
+
+#, python-format
+msgid ""
+"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
+msgstr ""
+
+msgid "Notification"
+msgstr ""
+
+msgid "Notification settings saved!"
+msgstr ""
+
+#, fuzzy
+msgid "'''Email'''"
+msgstr "بريد الكتروني"
+
+msgid "'''Jabber'''"
+msgstr ""
+
+msgid "'''Event type'''"
+msgstr ""
+
+msgid "Select the events you want to be notified about."
+msgstr ""
+
+msgid ""
+"Before you can be notified, you need to provide a way to contact you in the "
+"general preferences."
+msgstr ""
+
+#, fuzzy
+msgid "Subscribed events"
+msgstr "اشتراك"
+
+msgid "Subscribed wiki pages<<BR>>(one regex per line)"
+msgstr ""
+
+msgid "Save"
+msgstr "حفظ"
+
+#, fuzzy
+msgid "Change password"
+msgstr "كلمةالسرّ"
+
+msgid "Passwords don't match!"
+msgstr "كلمات السر غير متطابقة!"
+
+msgid "Please specify a password!"
+msgstr "الرجاء إدخال كلمة سر!"
+
+#, python-format
+msgid "Password not acceptable: %s"
+msgstr ""
+
+msgid "Your password has been changed."
+msgstr ""
+
+msgid "To change your password, enter a new password twice."
+msgstr ""
+
+msgid "Password repeat"
+msgstr "اعادة كلمة السر"
+
+msgid "Switch user"
+msgstr ""
+
+msgid "No user selected"
+msgstr ""
+
+msgid ""
+"You can now change the settings of the selected user account; log out to get "
+"back to your account."
+msgstr ""
+
+msgid "You are the only user."
+msgstr ""
+
+msgid ""
+"As a superuser, you can temporarily assume the identity of another user."
+msgstr ""
+
+#, fuzzy
+msgid "Select User"
+msgstr "إختر مستخدم"
+
+msgid "OpenID settings"
+msgstr ""
+
+msgid "Cannot remove all OpenIDs."
+msgstr ""
+
+msgid "The selected OpenIDs have been removed."
+msgstr ""
+
+msgid "OpenID is already present."
+msgstr ""
+
+msgid "This OpenID is already used for another account."
+msgstr ""
+
+msgid "OpenID added successfully."
+msgstr ""
+
+msgid "Current OpenIDs"
+msgstr ""
+
+msgid "Remove selected"
+msgstr ""
+
+msgid "Add OpenID"
+msgstr ""
+
+msgid "Preferences"
+msgstr "التفضيلات"
+
+#, python-format
+msgid ""
+"Invalid user name {{{'%s'}}}.\n"
+"Name may contain any Unicode alpha numeric character, with optional one\n"
+"space between words. Group page name is not allowed."
+msgstr ""
+
+msgid "This user name already belongs to somebody else."
+msgstr ""
+
+msgid "Empty user name. Please enter a user name."
+msgstr ""
+
+msgid ""
+"Please provide your email address. If you lose your login information, you "
+"can get it by email."
+msgstr ""
+"الرجاء إدخال عنوان البريد الإلكتروني. إذا فقدت معلومات الولوج، بإمكانك "
+"الحصول عليها بريديا."
+
+msgid "This email already belongs to somebody else."
+msgstr "عنوان البريد الإلكتروني هذا يخص شخصا آخر."
+
+#, fuzzy
+msgid "This jabber id already belongs to somebody else."
+msgstr "عنوان البريد الإلكتروني هذا يخص شخصا آخر."
+
+#, python-format
+msgid "The theme '%(theme_name)s' could not be loaded!"
+msgstr ""
+
+msgid "User preferences saved!"
+msgstr "تم حفظ تفضيلات المستخدم!"
+
+msgid "Default"
+msgstr "إفتراضي"
+
+msgid "<Browser setting>"
+msgstr "<إعدادات المتصفح>"
+
+msgid "the one preferred"
+msgstr "المفضل"
+
+msgid "free choice"
+msgstr "خيار حر"
+
+#, fuzzy
+msgid "Preferred theme"
+msgstr "السمة المفضلة"
+
+msgid "Editor Preference"
+msgstr "تفضيلات المحرر"
+
+msgid "Editor shown on UI"
+msgstr ""
+
+msgid "Time zone"
+msgstr "المنطقة الزمنية"
+
+#, fuzzy
+msgid "Your time is"
+msgstr "الوقت عندك هو"
+
+#, fuzzy
+msgid "Server time is"
+msgstr "وقت الخادم هو:"
+
+msgid "Date format"
+msgstr "صيغة التاريخ"
+
+msgid "Preferred language"
+msgstr "اللغة المفضلة"
+
+msgid "General options"
+msgstr "خيارات عامة"
+
+msgid "Quick links"
+msgstr "روابط سريعة"
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
+"change notification.\n"
+"\n"
+"The \"%(pagename)s\" page has been changed by %(editor)s:\n"
+msgstr ""
+
+msgid "New page:\n"
+msgstr "صفحة جديدة\n"
+
+msgid "No differences found!\n"
+msgstr "ْلا توجد اختلافات \n"
+
+#, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been deleted by %(editor)s:\n"
+"\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by %(editor)"
+"s:\n"
+msgstr ""
+
+#, python-format
+msgid "New user account created on %(sitename)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Dear Superuser, a new user has just been created. Details follow:\n"
+"\n"
+"    User name: %(username)s\n"
+"    Email address: %(useremail)s"
+msgstr ""
+
+#, python-format
+msgid "New attachment added to page %(pagename)s on %(sitename)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(page_name)s\" for change "
+"notification. An attachment has been added to that page by %(editor)s. "
+"Following detailed information is available:\n"
+"\n"
+"Attachment name: %(attach_name)s\n"
+"Attachment size: %(attach_size)s\n"
+msgstr ""
+
+msgid "Page has been modified"
+msgstr ""
+
+msgid "Page has been modified in a trivial fashion"
+msgstr ""
+
+msgid "Page has been renamed"
+msgstr ""
+
+msgid "Page has been deleted"
+msgstr ""
+
+msgid "Page has been copied"
+msgstr ""
+
+#, fuzzy
+msgid "A new attachment has been added"
+msgstr "المرفقات"
+
+msgid "A page has been reverted to a previous state"
+msgstr ""
+
+#, fuzzy
+msgid "A user has subscribed to a page"
+msgstr "لا يسمح لك بتحرير هذه الصفحة"
+
+msgid "A new account has been created"
+msgstr ""
+
+#, python-format
+msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
+msgstr ""
+
+msgid "Trivial "
+msgstr "بديهي"
+
+#, python-format
+msgid ""
+"Attachment link: %(attach)s\n"
+"Page link: %(page)s\n"
+msgstr ""
+
+#, python-format
+msgid "XML RPC error: %s"
+msgstr ""
+
+#, python-format
+msgid "Low-level communication error: %s"
+msgstr ""
+
+#, fuzzy
+msgid "Attachment link"
+msgstr "المرفقات"
+
+#, fuzzy
+msgid "Page link"
+msgstr "حجم الصفحة: %d"
+
+#, fuzzy
+msgid "Changed page"
+msgstr "صفحات مشابه"
+
+#, fuzzy
+msgid "Page changed"
+msgstr "إحفظ التغييرات"
+
+msgid "Options --pages and --search are mutually exclusive!"
+msgstr ""
+
+msgid "You must specify an output file!"
+msgstr ""
+
+msgid "No pages specified using --pages or --search, assuming full package."
+msgstr ""
+
+msgid "Output file already exists! Cowardly refusing to continue!"
+msgstr ""
+
+msgid "Language"
+msgstr "لغة"
+
+msgid "Others"
+msgstr ""
+
+msgid "Charts are not available!"
+msgstr ""
+
+msgid "Page Size Distribution"
+msgstr ""
+
+msgid "page size upper bound [bytes]"
+msgstr ""
+
+msgid "# of pages of this size"
+msgstr ""
+
+msgid "Views/day"
+msgstr ""
+
+msgid "Edits/day"
+msgstr ""
+
+msgid "Page hits and edits"
+msgstr ""
+
+#, python-format
+msgid "%(chart_title)s for %(filterpage)s"
+msgstr ""
+
+msgid ""
+"green=view\n"
+"red=edit"
+msgstr ""
+
+msgid "date"
+msgstr "التاريخ"
+
+msgid "# of hits"
+msgstr ""
+
+msgid "User agent"
+msgstr ""
+
+msgid "Distribution of User-Agent Types"
+msgstr ""
+
+msgid ""
+" Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
+"italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed ''<<Verbatim(''')"
+">>'''''bold'''<<Verbatim(''')>> and italics''<<Verbatim('')>>; <<Verbatim"
+"(----)>> horizontal rule.\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
+"#n start numbering at n; space alone indents.\n"
+" Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])"
+">>.\n"
+" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
+"white space allowed after tables or titles.\n"
+"\n"
+"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+msgstr ""
+
+msgid ""
+"{{{\n"
+"Emphasis: *italic* **bold** ``monospace``\n"
+"\n"
+"Headings: Heading 1  Heading 2  Heading 3\n"
+"          =========  ---------  ~~~~~~~~~\n"
+"\n"
+"Horizontal rule: ----\n"
+"\n"
+"Links: TrailingUnderscore_ `multi word with backticks`_ external_\n"
+"\n"
+".. _external: http://external-site.example.org/foo/\n"
+"\n"
+"Lists: * bullets; 1., a. numbered items.\n"
+"}}}\n"
+"(!) For more help, see the\n"
+"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
+"reStructuredText Quick Reference]].\n"
+msgstr ""
+
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
+">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+msgstr ""
+
+msgid "UnSubscribe"
+msgstr ""
+
+msgid "Publish my email (not my wiki homepage) in author info"
+msgstr ""
+"انشر رسائلي الإلكترونية (ليس صفحتي الشخصية في الويكي ) في معلومات المؤلف"
+
+msgid "Open editor on double click"
+msgstr "افتح المحرر عند النقر المزدوج"
+
+#, fuzzy
+msgid "After login, jump to last visited page"
+msgstr "بعد الولوج، إذهب إلى آخر صفحة تمت زيارتها"
+
+msgid "Show comment sections"
+msgstr "أظهر أقسام التعليقات"
+
+msgid "Show question mark for non-existing pagelinks"
+msgstr "أظهر علامة سؤال للروابط التي تؤدي إلى صفحات غير موجودة"
+
+msgid "Show page trail"
+msgstr ""
+
+msgid "Show icon toolbar"
+msgstr "اظهر أيقونات شريط الأدوات"
+
+msgid "Show top/bottom links in headings"
+msgstr ""
+
+msgid "Show fancy diffs"
+msgstr ""
+
+msgid "Add spaces to displayed wiki names"
+msgstr ""
+
+msgid "Remember login information"
+msgstr "تذكر معلومات الدخول"
+
+msgid "Disable this account forever"
+msgstr "عطل هذا الحساب للأبد"
+
+#, fuzzy
+msgid "(Use FirstnameLastname)"
+msgstr "(استخدم الاسم الأول الاسم الأخير)"
+
+msgid "Alias-Name"
+msgstr "الأسم المستعار"
+
+msgid "Jabber ID"
+msgstr ""
+
+msgid "User CSS URL"
+msgstr ""
+
+msgid "(Leave it empty for disabling user CSS)"
+msgstr "URL CSS المستخدم"
+
+msgid "Editor size"
+msgstr "حجم المحرر"
+
+#, fuzzy
+msgid "File attachment browser"
+msgstr "المرفقات"
+
+msgid "User account browser"
+msgstr ""
+
+#, python-format
+msgid "Invalid include arguments \"%s\"!"
+msgstr ""
+
+#, python-format
+msgid "Nothing found for \"%s\"!"
+msgstr ""
+
+msgid "edit"
+msgstr "تحرير"
+
+#, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr ""
+
+#, python-format
+msgid "Attachment '%(filename)s' deleted."
+msgstr ""
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr ""
+
+#, python-format
+msgid "Revert to revision %(rev)d."
+msgstr ""
+
+#, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr ""
+
+#, python-format
+msgid "%(mins)dm ago"
+msgstr ""
+
+msgid "(no bookmark set)"
+msgstr ""
+
+#, python-format
+msgid "(currently set to %s)"
+msgstr ""
+
+#, fuzzy
+msgid "Delete bookmark"
+msgstr "احذف الصفحة"
+
+msgid "Set bookmark"
+msgstr ""
+
+msgid "[Bookmark reached]"
+msgstr ""
+
+#, fuzzy
+msgid "Contents"
+msgstr "محتويات"
+
+#, python-format
+msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
+msgstr ""
+
+msgid "Include system pages"
+msgstr ""
+
+msgid "Exclude system pages"
+msgstr ""
+
+#, fuzzy
+msgid "Go To Page"
+msgstr "إذهب إلى الصفحة"
+
+msgid "No orphaned pages in this wiki."
+msgstr ""
+
+#, fuzzy
+msgid "Python Version"
+msgstr "إصدار بايثون"
+
+#, fuzzy
+msgid "MoinMoin Version"
+msgstr "إصدار موين موين"
+
+#, python-format
+msgid "Release %s [Revision %s]"
+msgstr ""
+
+msgid "4Suite Version"
+msgstr ""
+
+msgid "Number of pages"
+msgstr "عدد الصفحات"
+
+msgid "Number of system pages"
+msgstr "عدد صفحات النظام"
+
+msgid "Accumulated page sizes"
+msgstr "حجم الصفحات التراكمي"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr ""
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
+msgstr ""
+
+msgid "NONE"
+msgstr "لا شيء"
+
+msgid "Global extension macros"
+msgstr ""
+
+msgid "Local extension macros"
+msgstr ""
+
+msgid "Global extension actions"
+msgstr ""
+
+msgid "Local extension actions"
+msgstr ""
+
+msgid "Global parsers"
+msgstr ""
+
+msgid "Local extension parsers"
+msgstr ""
+
+msgid "Disabled"
+msgstr "معطل"
+
+#, fuzzy
+msgid "Enabled"
+msgstr "مفعل"
+
+msgid "index available"
+msgstr ""
+
+msgid "index unavailable"
+msgstr ""
+
+#, fuzzy
+msgid "N/A"
+msgstr "غير متاح"
+
+msgid "Xapian and/or Python Xapian bindings not installed"
+msgstr ""
+
+msgid "Xapian search"
+msgstr ""
+
+msgid "Xapian Version"
+msgstr ""
+
+msgid "PyStemmer not installed"
+msgstr ""
+
+msgid "Stemming for Xapian"
+msgstr ""
+
+msgid "PyStemmer Version"
+msgstr ""
+
+msgid "PyStemmer stems"
+msgstr ""
+
+msgid "Active threads"
+msgstr ""
+
+msgid "Search for items"
+msgstr ""
+
+msgid "containing all the following terms"
+msgstr "يحوتي على جميع العبارات التالية"
+
+msgid "containing one or more of the following terms"
+msgstr "يحتوي على واحدا أو أكثر من العبارات التالية"
+
+msgid "not containing the following terms"
+msgstr "لا يحتوي على العبارات التالية"
+
+msgid "last modified since (e.g. last 2 weeks)"
+msgstr ""
+
+msgid "any category"
+msgstr ""
+
+msgid "any language"
+msgstr "أي لغة"
+
+msgid "any mimetype"
+msgstr "أي نوع MIME"
+
+msgid "Categories"
+msgstr ""
+
+msgid "File Type"
+msgstr "نوع الملف"
+
+msgid "Search only in titles"
+msgstr "إبحث في العناوين فقط"
+
+msgid "Case-sensitive search"
+msgstr "بحث حساس لحالة الحرف"
+
+msgid "Exclude underlay"
+msgstr ""
+
+msgid "No system items"
+msgstr ""
+
+msgid "Search in all page revisions"
+msgstr ""
+
+msgid "Go get it!"
+msgstr ""
+
+#, python-format
+msgid "No quotes on %(pagename)s."
+msgstr ""
+
+msgid "Search Titles"
+msgstr "بحث في العناوين"
+
+msgid "Display context of search results"
+msgstr ""
+
+msgid "Case-sensitive searching"
+msgstr ""
+
+msgid "Search Text"
+msgstr ""
+
+#, python-format
+msgid "Upload new attachment \"%(filename)s\""
+msgstr ""
+
+#, python-format
+msgid ""
+"%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
+"missing."
+msgstr ""
+
+#, python-format
+msgid ""
+"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s=%"
+"(argument_value)s!"
+msgstr ""
+
+#, python-format
+msgid ""
+"Current configuration does not allow embedding of the file %(file)s because "
+"of its mimetype %(mimetype)s."
+msgstr ""
+
+#, fuzzy
+msgid "Embedded"
+msgstr "مدمج"
+
+#, python-format
+msgid "Unsupported navigation scheme '%(scheme)s'!"
+msgstr ""
+
+msgid "No parent page found!"
+msgstr ""
+
+msgid "Slideshow"
+msgstr ""
+
+#, fuzzy
+msgid "Start"
+msgstr "إبدأ"
+
+#, python-format
+msgid "Slide %(pos)d of %(size)d"
+msgstr ""
+
+msgid "Markup"
+msgstr ""
+
+msgid "Display"
+msgstr "العرض"
+
+msgid "No wanted pages in this wiki."
+msgstr ""
+
+msgid "You need to provide a chart type!"
+msgstr ""
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr ""
+
+msgid "Revert"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to revert this page!"
+msgstr "!لا يسمح لك بالعودة إلى هذه الصفحة"
+
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
+msgstr ""
+
+msgid "This page is already deleted or was never created!"
+msgstr ""
+
+#, fuzzy
+msgid "Optional reason for reverting this page"
+msgstr "سبب إختياري لإعادة التسمية"
+
+#, fuzzy
+msgid "Really revert this page?"
+msgstr "!لا يسمح لك بالعودة إلى هذه الصفحة"
+
+#, python-format
+msgid "Rolled back changes to the page %s."
+msgstr ""
+
+msgid "Exception while calling rollback function:"
+msgstr ""
+
+msgid ""
+"Please enter your password of your account at the remote wiki below. "
+"<<BR>> /!\\ You should trust both wikis because the password could be read "
+"by the particular administrators."
+msgstr ""
+
+msgid "Operation was canceled."
+msgstr "تم إلغاء العملية."
+
+msgid "The only supported directions are BOTH and DOWN."
+msgstr ""
+
+msgid ""
+"Please set an interwikiname in your wikiconfig (see HelpOnConfiguration) to "
+"be able to use this action."
+msgstr ""
+
+msgid ""
+"Incorrect parameters. Please supply at least the ''remoteWiki'' parameter. "
+"Refer to HelpOnSynchronisation for help."
+msgstr ""
+
+msgid "The ''remoteWiki'' is unknown."
+msgstr ""
+
+#, fuzzy
+msgid "A severe error occurred:"
+msgstr "حدث خطاء في الخادم:"
+
+#, fuzzy
+msgid "Synchronisation finished. Look below for the status messages."
+msgstr "تم إنهاء الزامنة. أنظر إلى الأسفل من أجل التقرير."
+
+msgid "Synchronisation started -"
+msgstr "تم الشروع بالمزامنة -"
+
+#, python-format
+msgid ""
+"Got a list of %s local and %s remote pages. This results in %s pages to "
+"process."
+msgstr ""
+
+#, python-format
+msgid "After filtering: %s pages"
+msgstr "بعد الترشيح: %s صفحة"
+
+#, python-format
+msgid "Skipped page %s because of no write access to local page."
+msgstr ""
+
+#, python-format
+msgid "Deleted page %s locally."
+msgstr ""
+
+#, python-format
+msgid "Error while deleting page %s locally:"
+msgstr ""
+
+#, python-format
+msgid "Deleted page %s remotely."
+msgstr ""
+
+#, python-format
+msgid "Error while deleting page %s remotely:"
+msgstr ""
+
+#, python-format
+msgid ""
+"The item %s cannot be merged automatically but was changed in both wikis. "
+"Please delete it in one of both wikis and try again."
+msgstr ""
+
+#, python-format
+msgid ""
+"The item %s has different mime types in both wikis and cannot be merged. "
+"Please delete it in one of both wikis or unify the mime type, and try again."
+msgstr ""
+
+#, python-format
+msgid ""
+"The item %s was renamed locally. This is not implemented yet. Therefore the "
+"full synchronisation history is lost for this page."
+msgstr ""
+
+#, python-format
+msgid "Synchronising page %s with remote page %s ..."
+msgstr ""
+
+#, python-format
+msgid "The page %s was deleted remotely but changed locally."
+msgstr ""
+
+#, python-format
+msgid ""
+"The page %s could not be synced. The remote page was renamed. This is not "
+"supported yet. You may want to delete one of the pages to get it synced."
+msgstr ""
+
+#, python-format
+msgid "Skipped page %s because of a locally or remotely unresolved conflict."
+msgstr ""
+
+#, python-format
+msgid ""
+"This is the first synchronisation between the local and the remote wiki for "
+"the page %s."
+msgstr ""
+
+#, python-format
+msgid ""
+"The page %s could not be merged because you are not allowed to modify the "
+"page in the remote wiki."
+msgstr ""
+
+#, python-format
+msgid "Page %s successfully merged."
+msgstr ""
+
+#, python-format
+msgid "Page %s contains conflicts that were introduced on the remote side."
+msgstr ""
+
+#, python-format
+msgid "Page %s merged with conflicts."
+msgstr ""
+
+msgid ""
+"You need to manually go to your OpenID provider wiki\n"
+"and log in before you can use your OpenID. MoinMoin will\n"
+"never allow you to enter your password here.\n"
+"\n"
+"Once you have logged in, simply reload this page."
+msgstr ""
+
+msgid "OpenID Trust verification"
+msgstr ""
+
+#, python-format
+msgid "The site %s has asked for your identity."
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"If you approve, the site represented by the trust root below will be\n"
+"told that you control the identity URL %s. (If you are using a delegated\n"
+"identity, the site will take care of reversing the\n"
+"delegation on its own.)"
+msgstr ""
+
+msgid "Trust root"
+msgstr ""
+
+msgid "Identity URL"
+msgstr ""
+
+#, fuzzy
+msgid "Remember decision"
+msgstr "تذكر معلومات الدخول"
+
+msgid "Remember this trust decision and don't ask again"
+msgstr ""
+
+msgid "Approve"
+msgstr ""
+
+msgid "Don't approve"
+msgstr ""
+
+msgid "OpenID not served"
+msgstr ""
+
+msgid ""
+"\n"
+"Unfortunately you have not created your homepage yet. Therefore,\n"
+"we cannot serve an OpenID for you. Please create your homepage first\n"
+"and then reload this page or click the button below to cancel this\n"
+"verification."
+msgstr ""
+
+#, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr ""
+
+#, python-format
+msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
+msgstr ""
+
+#, python-format
+msgid "Created the package %s containing the pages %s."
+msgstr ""
+
+#, fuzzy
+msgid "Package pages"
+msgstr "صفحات مشابه"
+
+#, fuzzy
+msgid "Package name"
+msgstr "صفحة جديدة\n"
+
+msgid "List of page names - separated by a comma"
+msgstr ""
+
+#, python-format
+msgid "No pages like \"%s\"!"
+msgstr ""
+
+msgid "Please choose:"
+msgstr ""
+
+#, fuzzy
+msgid "You must login to remove a quicklink."
+msgstr "يجب عليك تسجيل دخولك لإضافة رابط سريع"
+
+msgid "Your quicklink to this page has been removed."
+msgstr "تم إزالة رابطك السريع لهذه الصفحة."
+
+msgid "Your quicklink to this page could not be removed."
+msgstr ""
+
+#, fuzzy
+msgid "You need to have a quicklink to this page to remove it."
+msgstr "تم إزالة رابطك السريع لهذه الصفحة."
+
+#, python-format
+msgid ""
+"Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
+"Files: %(filecount)d, Directories: %(dircount)d"
+msgstr ""
+
+#, python-format
+msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
+msgstr ""
+
+msgid "Wiki Backup / Restore"
+msgstr "نسخ إحتياطي / إستعادة ويكي"
+
+msgid ""
+"Some hints:\n"
+" * To restore a backup:\n"
+"  * Restoring a backup will overwrite existing data, so be careful.\n"
+"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
+"stuff).\n"
+"  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
+"  * Hit the <<GetText(Restore)>> button below.\n"
+"\n"
+" * To make a backup, just hit the <<GetText(Backup)>> button and save the "
+"file\n"
+"   you get to a secure place.\n"
+"\n"
+"Please make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+"\n"
+msgstr ""
+
+msgid "Backup"
+msgstr ""
+
+msgid "Restore"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to do remote backup."
+msgstr "لا يسمح لك القيام بهذا الإجراء."
+
+#, fuzzy, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "نفذ عملية %(actionname)s?"
+
+msgid "Do it."
+msgstr "نفذ."
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr "نفذ عملية %(actionname)s?"
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr "لا يسمح للويكي بتنفيذ عملية %(actionname)s!"
+
+#, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "لا يسمح لك باستخدام عملية %(actionname)s في هذه الصفحة!"
+
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+
+msgid "Please log in first."
+msgstr "رجاء سجل دخولك أولا."
+
+msgid "Please first create a homepage before creating additional pages."
+msgstr ""
+
+#, python-format
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
+"[\"%(username)s/ReadWriteGroup\"]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[\"%"
+"(username)s/ReadGroup\"]||\n"
+"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
+"(username)s only||\n"
+"\n"
+msgstr ""
+
+msgid "MyPages management"
+msgstr ""
+
+msgid "Rename all /subpages too?"
+msgstr ""
+
+msgid "New name"
+msgstr "الإسم الجديد"
+
+msgid "Optional reason for the renaming"
+msgstr "سبب إختياري لإعادة التسمية"
+
+msgid "Really rename this page?"
+msgstr ""
+
+msgid "Your subscription to this page has been removed."
+msgstr "تم إزالة اشتراكك بهذه الصفحة."
+
+msgid "Can't remove regular expression subscription!"
+msgstr ""
+
+msgid "Edit the subscription regular expressions in your settings."
+msgstr ""
+
+#, fuzzy
+msgid "You need to be subscribed to unsubscribe."
+msgstr "لا يسمح لك بتحرير هذه الصفحة"
+
+msgid "TextCha: Wrong answer! Go back and try again..."
+msgstr ""
+
+msgid "Copy all /subpages too?"
+msgstr ""
+
+#, fuzzy
+msgid "Optional reason for the copying"
+msgstr "سبب إختياري لإعادة التسمية"
+
+#, fuzzy
+msgid "Really copy this page?"
+msgstr "!لا يسمح لك بالعودة إلى هذه الصفحة"
+
+msgid "No older revisions available!"
+msgstr ""
+
+#, python-format
+msgid "Diff for \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Differences between revisions %d and %d"
+msgstr ""
+
+#, python-format
+msgid "(spanning %d versions)"
+msgstr ""
+
+#, fuzzy
+msgid "Previous change"
+msgstr "السابق"
+
+#, fuzzy
+msgid "Next change"
+msgstr "لم يتغير أي شيء"
+
+#, python-format
+msgid "The page was saved %(count)d times, though!"
+msgstr ""
+
+msgid "(ignoring whitespace)"
+msgstr ""
+
+msgid "Ignore changes in the amount of whitespace"
+msgstr ""
+
+msgid "Load"
+msgstr "حمّل"
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+
+#, fuzzy
+msgid "New Page or New Attachment"
+msgstr "المرفقات"
+
+msgid ""
+"You can upload a file to a new page or choose to upload a file as attachment "
+"for the current page"
+msgstr ""
+"بإمكانك تحميل ملف مع صفحة جديدة أو اختيار تحميل الملف كملحق للصفحة الحالية"
+
+msgid "New Attachment"
+msgstr "ملف مرفق جديد"
+
+msgid ""
+"An upload will never overwrite an existing file. If there is a name\n"
+"conflict, you have to rename the file that you want to upload.\n"
+"Otherwise, if \"Rename to\" is left blank, the original filename will be "
+"used."
+msgstr ""
+
+#, fuzzy
+msgid "attachment"
+msgstr "المرفقات"
+
+#, fuzzy
+msgid "overwrite"
+msgstr "أكتب فوقه"
+
+msgid "Upload"
+msgstr ""
+
+#, fuzzy
+msgid "New Name"
+msgstr "صفحة جديدة\n"
+
+msgid "You are not allowed to subscribe to a page you can't read."
+msgstr "لا يسمح لك الإشتراك بصفحة لا تستطيع قرائتها."
+
+msgid "This wiki is not enabled for mail/Jabber processing."
+msgstr ""
+
+msgid "You must log in to use subscriptions."
+msgstr "يجب عليك تسجيل دخولك لاستعمال الأشتراكات."
+
+msgid ""
+"Add your email address or Jabber ID in your user settings to use "
+"subscriptions."
+msgstr ""
+
+#, fuzzy
+msgid "You are already subscribed to this page."
+msgstr "لا يسمح لك بتحرير هذه الصفحة"
+
+msgid "You have been subscribed to this page."
+msgstr ""
+
+#, fuzzy
+msgid "You could not get subscribed to this page."
+msgstr "لا يسمح لك بتحرير هذه الصفحة"
+
+msgid "General Information"
+msgstr "معلومات عامة"
+
+#, python-format
+msgid "Page size: %d"
+msgstr "حجم الصفحة: %d"
+
+msgid "SHA digest of this page's content is:"
+msgstr ""
+
+msgid "The following users subscribed to this page:"
+msgstr ""
+
+msgid "This page links to the following pages:"
+msgstr ""
+
+msgid "Size"
+msgstr "الحجم"
+
+msgid "Diff"
+msgstr "فروقات"
+
+msgid "Editor"
+msgstr "المحرر"
+
+#, fuzzy
+msgid "Comment"
+msgstr "تعليق"
+
+msgid "view"
+msgstr ""
+
+#, fuzzy
+msgid "to previous"
+msgstr "السابق"
+
+msgid "get"
+msgstr ""
+
+msgid "del"
+msgstr ""
+
+#, fuzzy
+msgid "Revision History"
+msgstr "تاريخ المراجعة"
+
+msgid "No log entries found."
+msgstr ""
+
+#, python-format
+msgid "Info for \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Show \"%(title)s\""
+msgstr ""
+
+msgid "General Page Infos"
+msgstr "معلومات عامة عن الصفحة"
+
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr ""
+
+#, fuzzy
+msgid "Delete"
+msgstr "احذف الصفحة"
+
+msgid "Delete all /subpages too?"
+msgstr ""
+
+#, fuzzy
+msgid "Optional reason for the deletion"
+msgstr "سبب إختياري لإعادة التسمية"
+
+#, fuzzy
+msgid "Really delete this page?"
+msgstr "!لا يسمح لك بالعودة إلى هذه الصفحة"
+
+#, fuzzy
+msgid "You are not allowed to create the supplementation page."
+msgstr "!لا يسمح لك بالعودة إلى هذه الصفحة"
+
+#, fuzzy
+msgid "Only superuser is allowed to use this action."
+msgstr "لا يسمح لك استعمال هذا الإجراء"
+
+#, python-format
+msgid "Subscribe users to the page %s"
+msgstr ""
+
+msgid "Enter user names (comma separated):"
+msgstr ""
+
+#, python-format
+msgid "Subscribed for %s:"
+msgstr ""
+
+msgid "Not a user:"
+msgstr "ليس مستدخما:"
+
+msgid "You are not allowed to perform this action."
+msgstr "لا يسمح لك القيام بهذا الإجراء."
+
+#, python-format
+msgid "(!) Only pages changed since '''%s''' are being displayed!"
+msgstr ""
+
+msgid ""
+"/!\\ The modification date you entered was not recognized and is therefore "
+"not considered for the search results!"
+msgstr ""
+
+#, python-format
+msgid "Title Search: \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Advanced Search: \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Full Text Search: \"%s\""
+msgstr ""
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr ""
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} didn't return any results. Please change some "
+"terms and refer to HelpOnSearching for more information.%s"
+msgstr ""
+
+msgid "(!) Consider performing a"
+msgstr ""
+
+msgid "full-text search with your search terms"
+msgstr ""
+
+msgid ""
+"(!) You're performing a title search that might not include all related "
+"results of your search query in this wiki. <<BR>>"
+msgstr ""
+
+msgid "Click here to perform a full-text search with your search terms!"
+msgstr ""
+
+msgid "User account created! You can use this account to login now..."
+msgstr "تم إنشاء حساب المستخدم! بإمكانك إستخدام هذا الحساب للولوج الآن..."
+
+msgid "TextCha (required)"
+msgstr ""
+
+msgid "Create Profile"
+msgstr ""
+
+msgid "Create Account"
+msgstr ""
+
+msgid "You must login to add a quicklink."
+msgstr "يجب عليك تسجيل دخولك لإضافة رابط سريع"
+
+msgid "A quicklink to this page has been added for you."
+msgstr "تم إضافة رابط سريع إلى هذه الصفحة من أجلك."
+
+msgid "A quicklink to this page could not be added for you."
+msgstr ""
+
+#, fuzzy
+msgid "You already have a quicklink to this page."
+msgstr "لقد قمت بحفظ هذه الصفحة مسبقا!"
+
+#, python-format
+msgid "(including %(localwords)d %(pagelink)s)"
+msgstr ""
+
+#, python-format
+msgid ""
+"The following %(badwords)d words could not be found in the dictionary of %"
+"(totalwords)d words%(localwords)s and are highlighted below:"
+msgstr ""
+
+#, fuzzy
+msgid "Add checked words to dictionary"
+msgstr "أضف الكلمات المشار إليها إلى القاموس"
+
+#, fuzzy
+msgid "No spelling errors found!"
+msgstr "لم يتم العثور على أخطاء هجائية!"
+
+msgid "You can't save spelling words."
+msgstr ""
+
+msgid "You can't check spelling on a page you can't read."
+msgstr "لا يمكنك تدقيق الإملاء في صفحة لا تستطيع قرائتها."
+
+msgid "You are now logged out."
+msgstr "لقد قمت بتسجيل الخروج."
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+
+msgid "Please provide a valid email address!"
+msgstr "الرجاء تزويد عنوان بريد إلكتروني صحيح!"
+
+msgid "If an account with this username exists, an email was sent."
+msgstr ""
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
+msgstr "لا يوجد حساب مطابق لعنوان البريد الإلكتروني المدخل '%(email)s'!"
+
+msgid "Mail me my account data"
+msgstr "إبعث لي بيانات حسابي بالبريد الإلكتروني."
+
+#, fuzzy
+msgid "Lost password"
+msgstr "كلمةالسرّ"
+
+msgid ""
+"\n"
+"== Recovering a lost password ==\n"
+"<<BR>>\n"
+"If you have forgotten your password, provide your email address and click on "
+"'''Mail me my account data'''.\n"
+"<<BR>>\n"
+"The email you get contains the encrypted password (so even if someone "
+"intercepts the mail, he won't know your REAL password). Just copy and paste "
+"it into the login mask into the password field and log in.\n"
+"After logging in you should change your password."
+msgstr ""
+
+#, python-format
+msgid "Local Site Map for \"%s\""
+msgstr ""
+
+#, fuzzy
+msgid "Pages"
+msgstr "صفحات"
+
+msgid "Select Author"
+msgstr "إختر المؤلف"
+
+msgid "Revert all!"
+msgstr ""
+
+msgid "You are not allowed to use this action."
+msgstr "لا يسمح لك استعمال هذا الإجراء"
+
+#, python-format
+msgid "[%d attachments]"
+msgstr ""
+
+#, python-format
+msgid ""
+"There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this "
+"page."
+msgstr ""
+
+#, python-format
+msgid "Attachment '%(target)s' already exists."
+msgstr ""
+
+msgid "Filename of attachment not specified!"
+msgstr ""
+
+#, python-format
+msgid "Attachment '%(filename)s' does not exist!"
+msgstr ""
+
+msgid ""
+"To refer to attachments on a page, use '''{{{attachment:filename}}}''', \n"
+"as shown below in the list of files. \n"
+"Do '''NOT''' use the URL of the {{{[get]}}} link, \n"
+"since this is subject to change and can break easily."
+msgstr ""
+
+msgid "move"
+msgstr ""
+
+msgid "unzip"
+msgstr ""
+
+msgid "install"
+msgstr "تثبيت"
+
+#, python-format
+msgid "No attachments stored for %(pagename)s"
+msgstr ""
+
+msgid "Edit drawing"
+msgstr ""
+
+msgid "File to upload"
+msgstr ""
+
+msgid "Rename to"
+msgstr ""
+
+msgid "Overwrite existing attachment of same name"
+msgstr ""
+
+msgid "Attached Files"
+msgstr "الملفات المرفقة"
+
+msgid "You are not allowed to attach a file to this page."
+msgstr "لا يسمح لك إرفاق ملف بهذه الصفحة."
+
+msgid "File attachments are not allowed in this wiki!"
+msgstr "لا يسمح بإرفاق الملفات في هذه الويكي."
+
+#, fuzzy, python-format
+msgid "Unsupported AttachFile sub-action: %s"
+msgstr "نفذ عملية %(actionname)s?"
+
+#, python-format
+msgid "Attachments for \"%(pagename)s\""
+msgstr ""
+
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr ""
+
+#, python-format
+msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/%"
+"(new_filename)s'."
+msgstr ""
+
+msgid "Nothing changed"
+msgstr "لم يتغير أي شيء"
+
+#, python-format
+msgid "Page '%(new_pagename)s' does not exist or you don't have enough rights."
+msgstr ""
+
+msgid "Move aborted!"
+msgstr ""
+
+msgid "Please use the interactive user interface to move attachments!"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to move attachments from this page."
+msgstr "لا يسمح لك بتحرير هذه الصفحة"
+
+msgid "Move aborted because new page name is empty."
+msgstr ""
+
+#, python-format
+msgid "Please use a valid filename for attachment '%(filename)s'."
+msgstr ""
+
+msgid "Move aborted because new attachment name is empty."
+msgstr ""
+
+msgid "Move"
+msgstr "أنقل"
+
+#, fuzzy
+msgid "New page name"
+msgstr "صفحة جديدة\n"
+
+#, fuzzy
+msgid "New attachment name"
+msgstr "المرفقات"
+
+msgid "You are not allowed to get attachments from this page."
+msgstr ""
+
+msgid "You are not allowed to install files."
+msgstr "لا يسمح لك بتثبيت الملفات."
+
+#, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr ""
+
+msgid "You are not allowed to unzip attachments of this page."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too many (%(count)d missing)."
+msgstr ""
+
+#, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
+"files only, exist already or reside in folders."
+msgstr ""
+
+#, python-format
+msgid "The file %(filename)s is not a .zip file."
+msgstr ""
+
+#, python-format
+msgid "Attachment '%(filename)s'"
+msgstr ""
+
+msgid "Download"
+msgstr "تنزيل"
+
+msgid "Package script:"
+msgstr ""
+
+msgid "File Name"
+msgstr "إسم الملف"
+
+msgid "Modified"
+msgstr "عُدّل"
+
+msgid "Unknown file type, cannot display this attachment inline."
+msgstr "نوع ملف مجهول، لا يمكن إظهار هذا الملف المرفق داخل النص."
+
+msgid "You are not allowed to view attachments of this page."
+msgstr ""
+
+#, python-format
+msgid "attachment:%(filename)s of %(pagename)s"
+msgstr ""
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Exactly one page like \"%s\" found, redirecting to page."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Pages like \"%s\""
+msgstr "حجم الصفحة: %d"
+
+#, python-format
+msgid "%(matchcount)d %(matches)s for \"%(title)s\""
+msgstr ""
+
+#, python-format
+msgid "Inlined image: %(url)s"
+msgstr ""
+
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr ""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr ""
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr ""
+
+msgid "Toggle line numbers"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "نفذ عملية %(actionname)s?"
+
+#, fuzzy, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "لا يسمح لك باستخدام عملية %(actionname)s في هذه الصفحة!"
+
+msgid "Login and try again."
+msgstr "سجل الدخول و حاول مرة أخرى"
+
+#, fuzzy
+#~ msgid "SendMyPassword"
+#~ msgstr "كلمةالسرّ"
+
+#~ msgid ""
+#~ "This list does not work, unless you have entered a valid email address!"
+#~ msgstr "هذه القائمة لا تعمل إلا إذا قمت بإدخال عنوان بريد إلكتروني صالح!"
+
+#, fuzzy
+#~ msgid "Filename"
+#~ msgstr "إسم الملف"
+
+#~ msgid ""
+#~ "The remote version of MoinMoin is too old, version 1.6 is required at "
+#~ "least."
+#~ msgstr ""
+#~ "الإصدار البعيدة من موين موين قديمة جدا، يجب إستخدام الإصدار 1.6 على الأقل."
