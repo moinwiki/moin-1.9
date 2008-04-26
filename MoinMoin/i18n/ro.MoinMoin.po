@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
 "PO-Revision-Date: 2005-08-18 14:19+EET\n"
 "Last-Translator: Ovidiu Sabou <ovidiu.sabou@gmail.com>\n"
 "Language-Team: Romanian <ovidiu.sabou@gmail.com>\n"
@@ -1110,6 +1110,9 @@ msgstr ""
 msgid "The selected OpenIDs have been removed."
 msgstr ""
 
+msgid "No OpenID given."
+msgstr ""
+
 msgid "OpenID is already present."
 msgstr ""
 
@@ -2130,6 +2133,11 @@ msgstr "Nici o pagină de genul \"%s\"!"
 msgid "Please choose:"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr ""
+"Trebuie să fiţi logaţi pentru a putea folosi înregistrările(subscriptions)."
+
 #, fuzzy
 msgid "You must login to remove a quicklink."
 msgstr "Trebuie să vă logaţi pentru a putea adăuga o legătură rapidă"
@@ -2590,6 +2598,10 @@ msgstr ""
 msgid "You already have a quicklink to this page."
 msgstr "Aţi salvat deja această pagină!"
 
+#, fuzzy
+msgid "You are not allowed to use this action."
+msgstr "Nu aveţi dreptul să editaţi această pagină."
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(inclusiv %(localwords)d %(pagelink)s)"
@@ -2675,10 +2687,6 @@ msgstr ""
 
 msgid "Revert all!"
 msgstr ""
-
-#, fuzzy
-msgid "You are not allowed to use this action."
-msgstr "Nu aveţi dreptul să editaţi această pagină."
 
 #, python-format
 msgid "[%d attachments]"

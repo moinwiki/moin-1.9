@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
 "PO-Revision-Date: 2007-12-01 00:00+0200\n"
 "Last-Translator: Aurelijus Sudzius <ruledbyfate@gmail.com>\n"
 "Language-Team: Lithuanian <ruledbyfate@gmail.com>\n"
@@ -1097,6 +1097,9 @@ msgstr ""
 msgid "The selected OpenIDs have been removed."
 msgstr ""
 
+msgid "No OpenID given."
+msgstr ""
+
 msgid "OpenID is already present."
 msgstr ""
 
@@ -2150,6 +2153,10 @@ msgstr "Nėra puslapių panašių į \"%s\"!"
 msgid "Please choose:"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "Jūs privalote prisijungti prieš naudojant prenumeracijas."
+
 msgid "You must login to remove a quicklink."
 msgstr "Jūs privalote prisijungti, kad pašalintumėte greitąją nuorodą."
 
@@ -2639,6 +2646,9 @@ msgstr "Greitoji nuoroda šiame puslapyje jums negalėjo būti įdėta."
 msgid "You already have a quicklink to this page."
 msgstr "Jūs jau turite greijąją nuorodą šiame puslapyje."
 
+msgid "You are not allowed to use this action."
+msgstr "Jums neleidžiama vykdyti šio veiksmo."
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(įskaitant ir %(localwords)d %(pagelink)s)"
@@ -2716,9 +2726,6 @@ msgstr "Pasirinkti autorių"
 
 msgid "Revert all!"
 msgstr "Atstatyti viską!"
-
-msgid "You are not allowed to use this action."
-msgstr "Jums neleidžiama vykdyti šio veiksmo."
 
 #, python-format
 msgid "[%d attachments]"

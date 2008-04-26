@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
 "PO-Revision-Date: 2008-03-12 15:01+0900\n"
 "Last-Translator: Seungik Lee <seungiklee@gmail.com>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
@@ -1073,6 +1073,9 @@ msgstr ""
 msgid "The selected OpenIDs have been removed."
 msgstr ""
 
+msgid "No OpenID given."
+msgstr ""
+
 msgid "OpenID is already present."
 msgstr ""
 
@@ -2101,6 +2104,10 @@ msgstr "\"%s\"가(이) 들어간 문서가 없습니다."
 msgid "Please choose:"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "문서의 변경 사항을 구독하기 위해서는 로그인을 하셔야 합니다."
+
 msgid "You must login to remove a quicklink."
 msgstr "즐겨찾기를 삭제하시려면 로그인을 하셔야 합니다."
 
@@ -2548,6 +2555,9 @@ msgstr "이 문서를 즐겨찾기에 추가할 수 없었습니다."
 msgid "You already have a quicklink to this page."
 msgstr "이 문서는 이미 즐겨찾기에 있습니다."
 
+msgid "You are not allowed to use this action."
+msgstr "이 작업을 수행할 수 있는 권한이 없습니다."
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr " (%(pagelink)s를 %(localwords)d개 포함)"
@@ -2624,9 +2634,6 @@ msgstr "저자 선택"
 
 msgid "Revert all!"
 msgstr "모두 되돌리기!"
-
-msgid "You are not allowed to use this action."
-msgstr "이 작업을 수행할 수 있는 권한이 없습니다."
 
 #, python-format
 msgid "[%d attachments]"

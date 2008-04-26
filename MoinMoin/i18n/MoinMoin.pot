@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1015,6 +1015,9 @@ msgstr ""
 msgid "The selected OpenIDs have been removed."
 msgstr ""
 
+msgid "No OpenID given."
+msgstr ""
+
 msgid "OpenID is already present."
 msgstr ""
 
@@ -1931,6 +1934,10 @@ msgstr ""
 msgid "Please choose:"
 msgstr ""
 
+#, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr ""
+
 msgid "You must login to remove a quicklink."
 msgstr ""
 
@@ -2342,6 +2349,9 @@ msgstr ""
 msgid "You already have a quicklink to this page."
 msgstr ""
 
+msgid "You are not allowed to use this action."
+msgstr ""
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr ""
@@ -2412,9 +2422,6 @@ msgid "Select Author"
 msgstr ""
 
 msgid "Revert all!"
-msgstr ""
-
-msgid "You are not allowed to use this action."
 msgstr ""
 
 #, python-format

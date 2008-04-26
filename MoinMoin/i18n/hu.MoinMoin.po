@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
 "PO-Revision-Date: 2006-06-15 15:55+0200\n"
 "Last-Translator: jmarton@omikk.bme.hu, arostas@omikk.bme.hu\n"
 "Language-Team: Hungarian <HU@li.org>\n"
@@ -1093,6 +1093,9 @@ msgstr ""
 msgid "The selected OpenIDs have been removed."
 msgstr ""
 
+msgid "No OpenID given."
+msgstr ""
+
 msgid "OpenID is already present."
 msgstr ""
 
@@ -2107,6 +2110,10 @@ msgstr "A(z) \"%s\" laphoz nincs hasonló!"
 msgid "Please choose:"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "Be kell lépnie a feliratkozások használatához."
+
 #, fuzzy
 msgid "You must login to remove a quicklink."
 msgstr "Be kell lépnie a gyorslinkek hozzáadásához."
@@ -2599,6 +2606,9 @@ msgstr "Egy erre az oldalra mutató gyorslink került hozzáadásra."
 msgid "You already have a quicklink to this page."
 msgstr "Már mentette ezt az oldalt!"
 
+msgid "You are not allowed to use this action."
+msgstr "Nem használhatja ezt a műveletet."
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(beleértve %(localwords)d szót a(z) %(pagelink)s lapról)"
@@ -2678,9 +2688,6 @@ msgstr "Szerző kiválasztása"
 
 msgid "Revert all!"
 msgstr "Minden visszaállítása"
-
-msgid "You are not allowed to use this action."
-msgstr "Nem használhatja ezt a műveletet."
 
 #, python-format
 msgid "[%d attachments]"

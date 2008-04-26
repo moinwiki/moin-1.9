@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
 "PO-Revision-Date: 2007-10-10 13:40+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -1087,6 +1087,9 @@ msgstr ""
 msgid "The selected OpenIDs have been removed."
 msgstr ""
 
+msgid "No OpenID given."
+msgstr ""
+
 msgid "OpenID is already present."
 msgstr ""
 
@@ -2109,6 +2112,10 @@ msgstr "No hi ha cap pàgina semblant a «%s»."
 msgid "Please choose:"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "Heu d'identificar-vos per a utilitzar les subscripcions."
+
 #, fuzzy
 msgid "You must login to remove a quicklink."
 msgstr "Heu d'entrar per a afegir un enllaç ràpid"
@@ -2548,6 +2555,9 @@ msgstr "No s'ha pogut afegir un enllaç ràpid a aquesta pàgina."
 msgid "You already have a quicklink to this page."
 msgstr "Ja heu desat aquesta pàgina."
 
+msgid "You are not allowed to use this action."
+msgstr "No teniu permís per a utilitzar aquesta acció."
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(incloent %(localwords)d %(pagelink)s)"
@@ -2625,9 +2635,6 @@ msgstr "Seleccioneu un autor"
 
 msgid "Revert all!"
 msgstr "Torna-ho tot enrere!"
-
-msgid "You are not allowed to use this action."
-msgstr "No teniu permís per a utilitzar aquesta acció."
 
 #, python-format
 msgid "[%d attachments]"
