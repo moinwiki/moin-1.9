@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
 "PO-Revision-Date: 2006-06-26 21:43-0800\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -1095,6 +1095,9 @@ msgstr ""
 msgid "The selected OpenIDs have been removed."
 msgstr ""
 
+msgid "No OpenID given."
+msgstr ""
+
 msgid "OpenID is already present."
 msgstr ""
 
@@ -2146,6 +2149,10 @@ msgstr "Нет страниц похожих на \"%s\"!"
 msgid "Please choose:"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "Вы должны войти, чтобы воспользоваться подпиской."
+
 msgid "You must login to remove a quicklink."
 msgstr "Вы должны войти, чтобы удалить закладку."
 
@@ -2627,6 +2634,9 @@ msgstr "Закладка на эту страницу не может быть �
 msgid "You already have a quicklink to this page."
 msgstr "У вас уже есть закладка на эту страницу."
 
+msgid "You are not allowed to use this action."
+msgstr "Вам нельзя это делать."
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(включая %(localwords)d %(pagelink)s)"
@@ -2705,9 +2715,6 @@ msgstr "Выберите автора"
 
 msgid "Revert all!"
 msgstr "Вернуть всё!"
-
-msgid "You are not allowed to use this action."
-msgstr "Вам нельзя это делать."
 
 #, python-format
 msgid "[%d attachments]"

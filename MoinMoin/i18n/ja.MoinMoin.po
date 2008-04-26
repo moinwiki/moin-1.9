@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
 "PO-Revision-Date: 2008-03-22 00:06+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
@@ -1094,6 +1094,9 @@ msgstr ""
 msgid "The selected OpenIDs have been removed."
 msgstr ""
 
+msgid "No OpenID given."
+msgstr ""
+
 msgid "OpenID is already present."
 msgstr ""
 
@@ -2149,6 +2152,10 @@ msgstr "\"%s\"のようなページはありません。"
 msgid "Please choose:"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "購読を利用するには、ログインしてください。"
+
 msgid "You must login to remove a quicklink."
 msgstr "クイックリンクを削除するには、ログインしてください。"
 
@@ -2627,6 +2634,9 @@ msgstr "このページへのクイックリンクを追加できませんでし
 msgid "You already have a quicklink to this page."
 msgstr "既にこのページへのクイックリンクは追加済みです。"
 
+msgid "You are not allowed to use this action."
+msgstr "このアクションを行う権限がありません。"
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "%(localwords)d語の%(pagelink)sを含む)"
@@ -2703,9 +2713,6 @@ msgstr "作成者選択"
 
 msgid "Revert all!"
 msgstr "すべて前のリビジョンに戻す"
-
-msgid "You are not allowed to use this action."
-msgstr "このアクションを行う権限がありません。"
 
 #, python-format
 msgid "[%d attachments]"

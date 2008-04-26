@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
 "PO-Revision-Date: 2008-03-25 05:16+0100\n"
 "Last-Translator: Jean-Philippe Guérard <fevrier@tigreraye.org>\n"
 "Language-Team: Français\n"
@@ -1126,6 +1126,9 @@ msgstr ""
 msgid "The selected OpenIDs have been removed."
 msgstr ""
 
+msgid "No OpenID given."
+msgstr ""
+
 msgid "OpenID is already present."
 msgstr ""
 
@@ -2197,6 +2200,10 @@ msgstr "Aucune page n'est similaire à « %s » !"
 msgid "Please choose:"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "Vous devez être identifié pour utiliser l'abonnement."
+
 msgid "You must login to remove a quicklink."
 msgstr "Vous devez être identifié pour supprimer un lien rapide."
 
@@ -2691,6 +2698,9 @@ msgstr "Il n'a pas été possible d'ajouter pour vous un lien vers cette page."
 msgid "You already have a quicklink to this page."
 msgstr "Vous avez déjà créé un lien rapide vers cette page !"
 
+msgid "You are not allowed to use this action."
+msgstr "Vous n'êtes pas autorisé à utiliser cette action."
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr " (inclusion de %(localwords)d %(pagelink)s)"
@@ -2769,9 +2779,6 @@ msgstr "Sélection de l'auteur"
 
 msgid "Revert all!"
 msgstr "Tout restaurer !"
-
-msgid "You are not allowed to use this action."
-msgstr "Vous n'êtes pas autorisé à utiliser cette action."
 
 #, python-format
 msgid "[%d attachments]"

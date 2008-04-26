@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
 "PO-Revision-Date: 2007-04-22 18:50+0100\n"
 "Last-Translator: Jonas Smedegaard <dr@jones.dk>\n"
 "Language-Team: Danish <moin-devel@lists.sourceforge.net>\n"
@@ -1093,6 +1093,9 @@ msgstr ""
 msgid "The selected OpenIDs have been removed."
 msgstr ""
 
+msgid "No OpenID given."
+msgstr ""
+
 msgid "OpenID is already present."
 msgstr ""
 
@@ -2144,6 +2147,10 @@ msgstr "Ingen sider ligner \"%s\"!"
 msgid "Please choose:"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "Du skal logge på for at bruge abonnement."
+
 #, fuzzy
 msgid "You must login to remove a quicklink."
 msgstr "Du skal være logget på for at tilføje en genvej."
@@ -2635,6 +2642,9 @@ msgstr "En genvej til denne side kunne ikke tilføjes til dig."
 msgid "You already have a quicklink to this page."
 msgstr "Du har allerede gemt denne side!"
 
+msgid "You are not allowed to use this action."
+msgstr "Du har ikke lov til at anvende denne rutine."
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(inklusive %(localwords)d %(pagelink)s)"
@@ -2712,9 +2722,6 @@ msgstr "Vælg forfatter"
 
 msgid "Revert all!"
 msgstr "Omgør alt!"
-
-msgid "You are not allowed to use this action."
-msgstr "Du har ikke lov til at anvende denne rutine."
 
 #, python-format
 msgid "[%d attachments]"
