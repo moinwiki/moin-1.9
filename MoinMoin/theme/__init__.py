@@ -2,7 +2,7 @@
 """
     MoinMoin - Theme Package
 
-    @copyright: 2003-2007 MoinMoin:ThomasWaldmann
+    @copyright: 2003-2008 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -12,10 +12,11 @@ from MoinMoin.util import pysupport
 
 modules = pysupport.getPackageModules(__file__)
 
-# Check whether we can emit a RSS feed (code stolen from wikitest.py).
-# Currently RSS is broken on plain Python, and works only when installing PyXML.
-import xml
-rss_supported = '_xmlplus' in xml.__file__
+# Check whether we can emit a RSS feed.
+# RSS is broken on plain Python 2.3.x/2.4.x, and works only when installing PyXML.
+# News: A user reported that the RSS is valid when using Python 2.5.1 on Windows.
+import sys, xml
+rss_supported = sys.version_info[:3] >= (2, 5, 1) or '_xmlplus' in xml.__file__
 
 
 class ThemeBase:
