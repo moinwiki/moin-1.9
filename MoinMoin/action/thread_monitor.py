@@ -10,10 +10,18 @@
 import os, time
 from StringIO import StringIO
 
-from MoinMoin import wikiutil
+from MoinMoin import Page, wikiutil
 from MoinMoin.util import thread_monitor
 
 def execute_fs(pagename, request):
+    _ = request.getText
+    # be extra paranoid in dangerous actions
+    actname = __name__.split('.')[-1]
+    if actname in request.cfg.actions_excluded or \
+       not request.user.isSuperUser():
+        request.theme.add_msg(_('You are not allowed to use this action.'), "error")
+        return Page.Page(request, pagename).send_page()
+
     if thread_monitor.hook_enabled():
         s = StringIO()
         thread_monitor.trigger_dump(s)
@@ -31,6 +39,14 @@ def execute_fs(pagename, request):
     request.write('<html><body>A dump has been saved to %s.</body></html>' % dump_fname)
 
 def execute_wiki(pagename, request):
+    _ = request.getText
+    # be extra paranoid in dangerous actions
+    actname = __name__.split('.')[-1]
+    if actname in request.cfg.actions_excluded or \
+       not request.user.isSuperUser():
+        request.theme.add_msg(_('You are not allowed to use this action.'), "error")
+        return Page.Page(request, pagename).send_page()
+
     request.emit_http_headers()
 
     request.theme.send_title("Thread monitor")
