@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
 "PO-Revision-Date: 2005-01-8 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -1022,6 +1022,9 @@ msgstr ""
 msgid "The selected OpenIDs have been removed."
 msgstr ""
 
+msgid "No OpenID given."
+msgstr ""
+
 msgid "OpenID is already present."
 msgstr ""
 
@@ -1938,6 +1941,10 @@ msgstr ""
 msgid "Please choose:"
 msgstr ""
 
+#, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr ""
+
 msgid "You must login to remove a quicklink."
 msgstr ""
 
@@ -2349,6 +2356,9 @@ msgstr ""
 msgid "You already have a quicklink to this page."
 msgstr ""
 
+msgid "You are not allowed to use this action."
+msgstr ""
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr ""
@@ -2419,9 +2429,6 @@ msgid "Select Author"
 msgstr ""
 
 msgid "Revert all!"
-msgstr ""
-
-msgid "You are not allowed to use this action."
 msgstr ""
 
 #, python-format

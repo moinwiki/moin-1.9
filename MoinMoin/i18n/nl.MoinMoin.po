@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
 "PO-Revision-Date: 2005-03-13 17:43+0200\n"
 "Last-Translator: Sander Kromwijk <s.kromwijk@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -1095,6 +1095,9 @@ msgstr ""
 msgid "The selected OpenIDs have been removed."
 msgstr ""
 
+msgid "No OpenID given."
+msgstr ""
+
 msgid "OpenID is already present."
 msgstr ""
 
@@ -2146,6 +2149,10 @@ msgstr "Geen pagina's lijken op \"%s\"!"
 msgid "Please choose:"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "U moet ingelogd zijn om abonementen te gebruiken."
+
 msgid "You must login to remove a quicklink."
 msgstr "U moet inloggen om een quicklink te verwijderen."
 
@@ -2635,6 +2642,9 @@ msgstr "Een quicklink naar deze pagina kon voor u niet toegevoegd worden."
 msgid "You already have a quicklink to this page."
 msgstr "U heeft al een quicklink naar deze pagina."
 
+msgid "You are not allowed to use this action."
+msgstr "U hebt geen toestemming om deze aktie te gebruiken."
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(inclusief %(localwords)d %(pagelink)s)"
@@ -2714,9 +2724,6 @@ msgstr "Auteur selecteren"
 
 msgid "Revert all!"
 msgstr "Alles terugzetten!"
-
-msgid "You are not allowed to use this action."
-msgstr "U hebt geen toestemming om deze aktie te gebruiken."
 
 #, python-format
 msgid "[%d attachments]"

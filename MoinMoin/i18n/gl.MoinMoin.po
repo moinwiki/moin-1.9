@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
 "PO-Revision-Date: 2007-02-22 17:39-0300\n"
 "Last-Translator: Iván Méndez <imendez@udc.es>\n"
 "Language-Team: Galician <moin-devel@lists.sourceforge.net>\n"
@@ -1116,6 +1116,9 @@ msgstr ""
 msgid "The selected OpenIDs have been removed."
 msgstr ""
 
+msgid "No OpenID given."
+msgstr ""
+
 msgid "OpenID is already present."
 msgstr ""
 
@@ -2155,6 +2158,12 @@ msgstr "Non hai ningunha páxina semellante a \"%s\"!"
 msgid "Please choose:"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr ""
+"Debe iniciar a sesión (identificarse) para poder subscribirse. Pode facelo "
+"desde PreferenciasDoUsuario."
+
 #, fuzzy
 msgid "You must login to remove a quicklink."
 msgstr ""
@@ -2662,6 +2671,9 @@ msgstr ""
 msgid "You already have a quicklink to this page."
 msgstr "Xa gardou os cambios desta páxina!"
 
+msgid "You are not allowed to use this action."
+msgstr "Non ten permiso para usar esta acción."
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(incluídas %(localwords)d %(pagelink)s)"
@@ -2742,9 +2754,6 @@ msgstr "Elixir autor"
 
 msgid "Revert all!"
 msgstr "Desfacer todos os cambios!"
-
-msgid "You are not allowed to use this action."
-msgstr "Non ten permiso para usar esta acción."
 
 #, python-format
 msgid "[%d attachments]"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
 "PO-Revision-Date: 2006-12-14 19:00+0100\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -1082,6 +1082,9 @@ msgstr ""
 msgid "The selected OpenIDs have been removed."
 msgstr ""
 
+msgid "No OpenID given."
+msgstr ""
+
 msgid "OpenID is already present."
 msgstr ""
 
@@ -2134,6 +2137,10 @@ msgstr "Nobena stran ni podobna \"%s\"!"
 msgid "Please choose:"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "Za naročilo obvestil se je treba prej prijaviti."
+
 #, fuzzy
 msgid "You must login to remove a quicklink."
 msgstr "Za dodajanje hitre povezave se je treba prej prijaviti."
@@ -2619,6 +2626,9 @@ msgstr "Hitre povezave na to stran ni bilo mogoče avtomatsko dodati."
 msgid "You already have a quicklink to this page."
 msgstr "To stran ste že prej shranili!"
 
+msgid "You are not allowed to use this action."
+msgstr "Te akcije vam ni dovoljeno izvesti."
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(vključno z %(localwords)d %(pagelink)s)"
@@ -2697,9 +2707,6 @@ msgstr "Izberi avtorja"
 
 msgid "Revert all!"
 msgstr "Vrni vse v prejšnje stanje!"
-
-msgid "You are not allowed to use this action."
-msgstr "Te akcije vam ni dovoljeno izvesti."
 
 #, python-format
 msgid "[%d attachments]"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
 "PO-Revision-Date: 2006-10-07 23:19+0700\n"
 "Last-Translator: Fajrin Azis <fajrin.azis@gmail.com>\n"
 "Language-Team: Indonesian <id@ll.com>\n"
@@ -1098,6 +1098,9 @@ msgstr ""
 msgid "The selected OpenIDs have been removed."
 msgstr ""
 
+msgid "No OpenID given."
+msgstr ""
+
 msgid "OpenID is already present."
 msgstr ""
 
@@ -2156,6 +2159,10 @@ msgstr "Tak ada halaman seperti \"%s\"!"
 msgid "Please choose:"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "Anda harus log in untuk dapat berlangganan."
+
 msgid "You must login to remove a quicklink."
 msgstr "Anda harus login untuk menghapus taut cepat."
 
@@ -2640,6 +2647,9 @@ msgstr "Taut cepat ke halaman ini tidak dapat ditambahkan untuk Anda."
 msgid "You already have a quicklink to this page."
 msgstr "Anda telah mempunyai taut cepat ke halaman ini"
 
+msgid "You are not allowed to use this action."
+msgstr "Anda tidak diizinkan menggunakan aksi ini."
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(menyertakan %(localwords)d %(pagelink)s)"
@@ -2717,9 +2727,6 @@ msgstr "Pilih Penulis"
 
 msgid "Revert all!"
 msgstr "Putar balik semua!"
-
-msgid "You are not allowed to use this action."
-msgstr "Anda tidak diizinkan menggunakan aksi ini."
 
 #, python-format
 msgid "[%d attachments]"

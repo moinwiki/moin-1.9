@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rakesh Pandit <rakesh.pandit@gmail.com>\n"
 "Language-Team: Hindi\n"
@@ -1043,6 +1043,9 @@ msgstr ""
 msgid "The selected OpenIDs have been removed."
 msgstr ""
 
+msgid "No OpenID given."
+msgstr ""
+
 msgid "OpenID is already present."
 msgstr ""
 
@@ -1975,6 +1978,10 @@ msgstr "\"%s\" पृष्ट जैसा कोई नही ! "
 msgid "Please choose:"
 msgstr ""
 
+#, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr ""
+
 msgid "You must login to remove a quicklink."
 msgstr ""
 
@@ -2412,6 +2419,9 @@ msgstr ""
 msgid "You already have a quicklink to this page."
 msgstr "आप इस पृष्ट पर अिभदािनत कर दिए गए है।"
 
+msgid "You are not allowed to use this action."
+msgstr ""
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(सम्मिलित %(localwords)d %(pagelink)s)"
@@ -2485,9 +2495,6 @@ msgid "Select Author"
 msgstr ""
 
 msgid "Revert all!"
-msgstr ""
-
-msgid "You are not allowed to use this action."
 msgstr ""
 
 #, python-format

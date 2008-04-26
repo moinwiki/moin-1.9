@@ -11,10 +11,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.6\n"
+"Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
-"PO-Revision-Date: 2007-11-25 01:10+0100\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
+"PO-Revision-Date: 2008-04-26 18:49+0200\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-user@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -1113,6 +1113,9 @@ msgstr "Kann nicht alle OpenIDs entfernen."
 msgid "The selected OpenIDs have been removed."
 msgstr "Die ausgewählten OpenIDs wurden entfernt."
 
+msgid "No OpenID given."
+msgstr "Keine OpenID angegeben."
+
 msgid "OpenID is already present."
 msgstr "OpenID ist bereits vorhanden."
 
@@ -1537,7 +1540,8 @@ msgstr ""
 " Zeilenumbruch erzwingen:: <<Verbatim(\\\\)>>\n"
 " Überschriften:: = Überschrift 1 =; == Überschrift 2 ==; === Überschrift 3 "
 "===; ==== Überschrift 4 ====; ===== Überschrift 5 =====.\n"
-" Listen:: * Punkte; ** Unterpunkte; # Nummeriertes; ## Nummerierte Unterpunkte.\n"
+" Listen:: * Punkte; ** Unterpunkte; # Nummeriertes; ## Nummerierte "
+"Unterpunkte.\n"
 " Links:: <<Verbatim([[ziel]])>>; <<Verbatim([[ziel|link-text]])>>.\n"
 " Tabellen:: |= Kopftext | Zelltext | mehr Zelltext |;\n"
 "\n"
@@ -2184,6 +2188,11 @@ msgstr "Keine Seite ähnlich wie \"%s\"!"
 msgid "Please choose:"
 msgstr "Bitte wählen:"
 
+#, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr ""
+"Sie müssen sich anmelden, um diese Aktion benutzen zu können: %(action)s."
+
 msgid "You must login to remove a quicklink."
 msgstr "Sie müssen sich anmelden, um einen Expressverweis zu entfernen."
 
@@ -2670,6 +2679,9 @@ msgstr "Ein Expressverweis für diese Seite konnte nicht hinzugefügt werden."
 msgid "You already have a quicklink to this page."
 msgstr "Sie haben bereits einen Expressverweis auf diese Seite."
 
+msgid "You are not allowed to use this action."
+msgstr "Sie dürfen diese Aktion nicht ausführen."
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(inklusive %(localwords)d %(pagelink)s)"
@@ -2763,9 +2775,6 @@ msgstr "Autor auswählen"
 
 msgid "Revert all!"
 msgstr "Alle restaurieren!"
-
-msgid "You are not allowed to use this action."
-msgstr "Sie dürfen diese Aktion nicht ausführen."
 
 #, python-format
 msgid "[%d attachments]"

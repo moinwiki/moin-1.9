@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
 "PO-Revision-Date: 2008-02-03 17:21+0200\n"
 "Last-Translator: Ville-Pekka Vainio <vpivaini@cs.helsinki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
@@ -1092,6 +1092,9 @@ msgstr ""
 msgid "The selected OpenIDs have been removed."
 msgstr ""
 
+msgid "No OpenID given."
+msgstr ""
+
 msgid "OpenID is already present."
 msgstr ""
 
@@ -2144,6 +2147,10 @@ msgstr "Sivua \"%s\" vastaavia sivuja ei löytynyt!"
 msgid "Please choose:"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "Kirjaudu sisään käyttääksesi tilauksia."
+
 msgid "You must login to remove a quicklink."
 msgstr "Sinun täytyy olla kirjautunut sisään poistaaksesi pikalinkin."
 
@@ -2625,6 +2632,9 @@ msgstr "Tälle sivulle johtavaa pikalinkkiä ei voitu lisätä."
 msgid "You already have a quicklink to this page."
 msgstr "Olet jo lisännyt tämän sivun pikalinkkeihisi!"
 
+msgid "You are not allowed to use this action."
+msgstr "Sinulla ei ole tarvittavia oikeuksia tämän toiminnon käyttämiseksi."
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(joista oikolukusanasto %(pagelink)s sisältää %(localwords)d sanaa)."
@@ -2702,9 +2712,6 @@ msgstr "Valitse kirjoittaja"
 
 msgid "Revert all!"
 msgstr "Palauta kaikki!"
-
-msgid "You are not allowed to use this action."
-msgstr "Sinulla ei ole tarvittavia oikeuksia tämän toiminnon käyttämiseksi."
 
 #, python-format
 msgid "[%d attachments]"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
 "PO-Revision-Date: 2006-02-09 11:25+0100\n"
 "Last-Translator: Radomir Dopieralski <mondev@sheep.art.pl>\n"
 "Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
@@ -1093,6 +1093,9 @@ msgstr ""
 msgid "The selected OpenIDs have been removed."
 msgstr ""
 
+msgid "No OpenID given."
+msgstr ""
+
 msgid "OpenID is already present."
 msgstr ""
 
@@ -2142,6 +2145,10 @@ msgstr "Brak stron w rodzaju \"%s\"!"
 msgid "Please choose:"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "Musisz się zalogować, aby móc korzystać z subskrybcji."
+
 msgid "You must login to remove a quicklink."
 msgstr "Musisz się zalogować by usunąć szybki odnośnik."
 
@@ -2629,6 +2636,9 @@ msgstr "Szybki odnośnik do tej strony nie może zostać dodany."
 msgid "You already have a quicklink to this page."
 msgstr "Już zapisałeś tę stronę w szybkich odnośnikach!"
 
+msgid "You are not allowed to use this action."
+msgstr "Nie możesz uzyć tej akcji."
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(zawarto  %(localwords)d %(pagelink)s)"
@@ -2705,9 +2715,6 @@ msgstr "Wybierz Autora"
 
 msgid "Revert all!"
 msgstr "Odtwórz wszystkie!"
-
-msgid "You are not allowed to use this action."
-msgstr "Nie możesz uzyć tej akcji."
 
 #, python-format
 msgid "[%d attachments]"

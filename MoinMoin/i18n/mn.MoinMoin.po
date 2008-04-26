@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
 "PO-Revision-Date: 2006-12-05 12:04+0800\n"
 "Last-Translator: Amgalanbaatar Delegdorj <d.amgalanbaatar@gmail.com>\n"
 "Language-Team: Mongolia <d.amgalanbaatar@gmail.com>\n"
@@ -1098,6 +1098,9 @@ msgstr ""
 msgid "The selected OpenIDs have been removed."
 msgstr ""
 
+msgid "No OpenID given."
+msgstr ""
+
 msgid "OpenID is already present."
 msgstr ""
 
@@ -2155,6 +2158,10 @@ msgstr "\"%s\" -тай ямар ч хуудас төстэй биш байна!"
 msgid "Please choose:"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "Та Abonnements ашиглахын тулд бүртгүүлэх шаардлагатай."
+
 #, fuzzy
 msgid "You must login to remove a quicklink."
 msgstr "quicklink үүсгэхийн тулд логин хийсэн байх шаарлагатай"
@@ -2651,6 +2658,9 @@ msgstr "Энэ хуудсанд quicklink нэмэгдсэн."
 msgid "You already have a quicklink to this page."
 msgstr "Та уг нь энэ хуудсыг сая хадгалсан л байна даа!"
 
+msgid "You are not allowed to use this action."
+msgstr "Та энэ үйлдлийг хийж болохгүй."
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "хамрагдсан:(%(localwords)d %(pagelink)s)"
@@ -2729,9 +2739,6 @@ msgstr "Нийтлэгчээ сонгох"
 
 msgid "Revert all!"
 msgstr "Бүгдийг сэргээх!"
-
-msgid "You are not allowed to use this action."
-msgstr "Та энэ үйлдлийг хийж болохгүй."
 
 #, python-format
 msgid "[%d attachments]"

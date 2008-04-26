@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
 "PO-Revision-Date: 2004-12-01 21:30+0200\n"
 "Last-Translator: Joerg Cassens <jmt@cassens.org>\n"
 "Language-Team: Norwegian <moinmoin-nb@cassens.org>\n"
@@ -1093,6 +1093,9 @@ msgstr ""
 msgid "The selected OpenIDs have been removed."
 msgstr ""
 
+msgid "No OpenID given."
+msgstr ""
+
 msgid "OpenID is already present."
 msgstr ""
 
@@ -2109,6 +2112,10 @@ msgstr "Ingen sider matcher \"%s\"!"
 msgid "Please choose:"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "Du har ikke tillatelse til å redigere denne siden."
+
 #, fuzzy
 msgid "You must login to remove a quicklink."
 msgstr "Du har ikke tillatelse til å redigere denne siden."
@@ -2551,6 +2558,10 @@ msgstr ""
 msgid "You already have a quicklink to this page."
 msgstr "Du har ikke tillatelse til å redigere denne siden!"
 
+#, fuzzy
+msgid "You are not allowed to use this action."
+msgstr "Du har ikke tillatelse til å redigere denne siden."
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(inkludert %(localwords)d %(pagelink)s)"
@@ -2630,10 +2641,6 @@ msgstr ""
 
 msgid "Revert all!"
 msgstr ""
-
-#, fuzzy
-msgid "You are not allowed to use this action."
-msgstr "Du har ikke tillatelse til å redigere denne siden."
 
 #, python-format
 msgid "[%d attachments]"

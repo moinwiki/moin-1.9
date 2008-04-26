@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
 "PO-Revision-Date: 2005-11-06 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -1097,6 +1097,9 @@ msgstr ""
 msgid "The selected OpenIDs have been removed."
 msgstr ""
 
+msgid "No OpenID given."
+msgstr ""
+
 msgid "OpenID is already present."
 msgstr ""
 
@@ -2132,6 +2135,10 @@ msgstr "هیچ صفحه ای شبیه \"%s\" یافت نشد!"
 msgid "Please choose:"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "برای استفاده از امکانات اعضا حتما باید وارد سیستم شوید."
+
 #, fuzzy
 msgid "You must login to remove a quicklink."
 msgstr "برای اضافه نمودن یک لینک دسترسی سریع باید وارد سیستم شوید."
@@ -2621,6 +2628,9 @@ msgstr "یک لینک دسترسی سریع به این صفحه برای شما
 msgid "You already have a quicklink to this page."
 msgstr "صفحه ذخیره شده است!"
 
+msgid "You are not allowed to use this action."
+msgstr "عملیات غیر مجاز"
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "( مرجع لغت %(pagelink)s دارای %(localwords)d لغت )"
@@ -2700,9 +2710,6 @@ msgstr "انتخاب نویسنده"
 
 msgid "Revert all!"
 msgstr "کلیه ویرایش ها بازگردانی شود!"
-
-msgid "You are not allowed to use this action."
-msgstr "عملیات غیر مجاز"
 
 #, python-format
 msgid "[%d attachments]"

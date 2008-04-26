@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
 "PO-Revision-Date: 2007-12-05 11:49+0200\n"
 "Last-Translator: Dor Fire <dorfire@gmail.com>\n"
 "Language-Team: Hebrew <moin-devel@lists.sourceforge.net>\n"
@@ -1065,6 +1065,9 @@ msgstr ""
 msgid "The selected OpenIDs have been removed."
 msgstr ""
 
+msgid "No OpenID given."
+msgstr ""
+
 msgid "OpenID is already present."
 msgstr ""
 
@@ -2092,6 +2095,10 @@ msgstr "אין דפים דומים ל–\"%s\"."
 msgid "Please choose:"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "חובה להתחבר בכדי להשתמש במינויים."
+
 msgid "You must login to remove a quicklink."
 msgstr "יש להתחבר בכדי להסיר קישור מהיר."
 
@@ -2555,6 +2562,9 @@ msgstr "לא ניתן להוסיף עבורך קישור מהיר לדף זה."
 msgid "You already have a quicklink to this page."
 msgstr "כבר יש לך קישור מהיר לדף זה."
 
+msgid "You are not allowed to use this action."
+msgstr "הינך לא מורשה להשתמש בפעולה זאת."
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr " (כולל %(localwords)d %(pagelink)s)"
@@ -2631,9 +2641,6 @@ msgstr "בחר יוצר"
 
 msgid "Revert all!"
 msgstr "בטל את כל השינויים!"
-
-msgid "You are not allowed to use this action."
-msgstr "הינך לא מורשה להשתמש בפעולה זאת."
 
 #, python-format
 msgid "[%d attachments]"

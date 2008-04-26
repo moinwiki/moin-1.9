@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
 "PO-Revision-Date: 2004-12-05 22:41+0100\n"
 "Last-Translator: Jun Hu <j.hu@tue.nl>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -1064,6 +1064,9 @@ msgstr ""
 msgid "The selected OpenIDs have been removed."
 msgstr ""
 
+msgid "No OpenID given."
+msgstr ""
+
 msgid "OpenID is already present."
 msgstr ""
 
@@ -2095,6 +2098,10 @@ msgstr "\"%s\"没有相似网页!"
 msgid "Please choose:"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "您必须首先登录才能订阅."
+
 #, fuzzy
 msgid "You must login to remove a quicklink."
 msgstr "您必须首先登录才能添加快捷链接."
@@ -2557,6 +2564,9 @@ msgstr "无法将本页加入到您的快捷链接."
 msgid "You already have a quicklink to this page."
 msgstr "您已经保存了此页."
 
+msgid "You are not allowed to use this action."
+msgstr "您无权进行此项操作."
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(其中包括%(localwords)d个%(pagelink)s)"
@@ -2631,9 +2641,6 @@ msgstr "选择作者"
 
 msgid "Revert all!"
 msgstr "全部恢复!"
-
-msgid "You are not allowed to use this action."
-msgstr "您无权进行此项操作."
 
 #, python-format
 msgid "[%d attachments]"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-11 21:09+0200\n"
+"POT-Creation-Date: 2008-04-26 18:49+0200\n"
 "PO-Revision-Date: 2008-03-24 23:30+0800\n"
 "Last-Translator: Rux Li <rux.li3@gmail.com>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
@@ -1068,6 +1068,9 @@ msgstr ""
 msgid "The selected OpenIDs have been removed."
 msgstr ""
 
+msgid "No OpenID given."
+msgstr ""
+
 msgid "OpenID is already present."
 msgstr ""
 
@@ -2095,6 +2098,10 @@ msgstr "沒有類似 \"%s\" 的頁面！"
 msgid "Please choose:"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "登入之後才能訂閱"
+
 msgid "You must login to remove a quicklink."
 msgstr "登入之後才能移除頁面捷徑。"
 
@@ -2553,6 +2560,9 @@ msgstr "無法設定本頁之捷徑。"
 msgid "You already have a quicklink to this page."
 msgstr "本頁已經設成捷徑了！"
 
+msgid "You are not allowed to use this action."
+msgstr "你無權使用本項操作。"
+
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(其中包含 %(localwords)d 個 %(pagelink)s)"
@@ -2629,9 +2639,6 @@ msgstr "選擇作者"
 
 msgid "Revert all!"
 msgstr "全部回復"
-
-msgid "You are not allowed to use this action."
-msgstr "你無權使用本項操作。"
 
 #, python-format
 msgid "[%d attachments]"
