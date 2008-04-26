@@ -7,7 +7,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import wikiutil
+from MoinMoin import Page, wikiutil
 from MoinMoin.widget import html
 
 def _handle_submission(request):
@@ -87,6 +87,11 @@ def _create_page(request, cancel=False):
 
 def execute(pagename, request):
     _ = request.getText
+    actname = __name__.split('.')[-1]
+    if not request.user.valid:
+        request.theme.add_msg(_("You must login to use this action: %(action)s.") % {"action": actname}, "error")
+        return Page.Page(request, pagename).send_page()
+
     text, title, msg_class, msg = _create_page(request)
     if title:
         # XXX: we would like to make "Settings" here a link back

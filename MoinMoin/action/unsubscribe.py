@@ -11,6 +11,11 @@ from MoinMoin.Page import Page
 def execute(pagename, request):
     """ Unsubscribe the user from pagename """
     _ = request.getText
+    actname = __name__.split('.')[-1]
+    if not request.user.valid:
+        request.theme.add_msg(_("You must login to use this action: %(action)s.") % {"action": actname}, "error")
+        return Page(request, pagename).send_page()
+
     msg = None
 
     if request.user.isSubscribedTo([pagename]):
