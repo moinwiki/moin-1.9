@@ -28,7 +28,7 @@ from MoinMoin.Page import Page
 
 names = ["TitleSearch", "WordIndex", "TitleIndex", "GoTo",
          # Macros with arguments
-         "Icon", "PageList", "Date", "DateTime", "Anchor", "MailTo", "GetVal", "TemplateList",
+         "Icon", "Date", "DateTime", "Anchor", "MailTo", "GetVal", "TemplateList",
 ]
 
 #############################################################################
@@ -62,7 +62,6 @@ class Macro:
 
     Dependencies = {
         "TitleSearch": ["namespace"],
-        "PageList": ["namespace"],
         "TemplateList": ["namespace"],
         "WordIndex": ["namespace"],
         "TitleIndex": ["namespace"],
@@ -155,24 +154,6 @@ class Macro:
     def macro_TitleSearch(self):
         from MoinMoin.macro.FullSearch import search_box
         return search_box("titlesearch", self)
-
-    def macro_PageList(self, needle=None):
-        from MoinMoin import search
-        _ = self._
-        case = 0
-
-        # If called with empty or no argument, default to regex search for .+, the full page list.
-        needle = wikiutil.get_unicode(self.request, needle, 'needle', u'regex:.+')
-
-        # With whitespace argument, return same error message as FullSearch
-        if not needle.strip():
-            err = _('Please use a more selective search term instead of {{{"%s"}}}', wiki=True) % needle
-            return '<span class="error">%s</span>' % err
-
-        # Return a title search for needle, sorted by name.
-        results = search.searchPages(self.request, needle,
-                titlesearch=1, case=case, sort='page_name')
-        return results.pageList(self.request, self.formatter, paging=False)
 
     def macro_TemplateList(self, needle=u'.+'):
         # TODO: this should be renamed (RegExPageNameList?), it does not list only Templates...
