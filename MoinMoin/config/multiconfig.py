@@ -452,20 +452,21 @@ Lists: * bullets; 1., a. numbered items.
     # These icons will show in this order in the iconbar, unless they
     # are not relevant, e.g email icon when the wiki is not configured
     # for email.
-    page_iconbar = ["edit", "view", "diff", "info", "subscribe", "raw", "print", ]
+    page_iconbar = ["up", "edit", "view", "diff", "info", "subscribe", "raw", "print", ]
 
     # Standard buttons in the iconbar
     page_icons_table = {
-        # key           querystr dict, title, icon-key
-        'diff':        ({'action': 'diff'}, _("Diffs"), "diff"),
-        'info':        ({'action': 'info'}, _("Info"), "info"),
-        'edit':        ({'action': 'edit'}, _("Edit"), "edit"),
-        'unsubscribe': ({'action': 'unsubscribe'}, _("UnSubscribe"), "unsubscribe"),
-        'subscribe':   ({'action': 'subscribe'}, _("Subscribe"), "subscribe"),
-        'raw':         ({'action': 'raw'}, _("Raw"), "raw"),
-        'xml':         ({'action': 'show', 'mimetype': 'text/xml'}, _("XML"), "xml"),
-        'print':       ({'action': 'print'}, _("Print"), "print"),
-        'view':        ({}, _("View"), "view"),
+        # key           pagekey, querystr dict, title, icon-key
+        'diff':        ('page', {'action': 'diff'}, _("Diffs"), "diff"),
+        'info':        ('page', {'action': 'info'}, _("Info"), "info"),
+        'edit':        ('page', {'action': 'edit'}, _("Edit"), "edit"),
+        'unsubscribe': ('page', {'action': 'unsubscribe'}, _("UnSubscribe"), "unsubscribe"),
+        'subscribe':   ('page', {'action': 'subscribe'}, _("Subscribe"), "subscribe"),
+        'raw':         ('page', {'action': 'raw'}, _("Raw"), "raw"),
+        'xml':         ('page', {'action': 'show', 'mimetype': 'text/xml'}, _("XML"), "xml"),
+        'print':       ('page', {'action': 'print'}, _("Print"), "print"),
+        'view':        ('page', {}, _("View"), "view"),
+        'up':          ('page_parent_page', {}, _("Up"), "up"),
         }
 
 
