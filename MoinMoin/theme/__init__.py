@@ -545,7 +545,7 @@ class ThemeBase:
         @return: html link tag
         """
         qs = {}
-        querystr, title, icon = self.cfg.page_icons_table[which]
+        pagekey, querystr, title, icon = self.cfg.page_icons_table[which]
         qs.update(querystr) # do not modify the querystr dict in the cfg!
         d['icon-alt-text'] = d['title'] = title % d
         d['i18ntitle'] = self.request.getText(d['title'])
@@ -554,7 +554,11 @@ class ThemeBase:
         if rev and which in ['raw', 'print', ]:
             qs['rev'] = str(rev)
         attrs = {'rel': 'nofollow', 'title': d['i18ntitle'], }
-        page = d['page']
+        page = d[pagekey]
+        if isinstance(page, unicode):
+            # e.g. d['page_parent_page'] is just the unicode pagename
+            # while d['page'] will give a page object
+            page = Page(self.request, page)
         return page.link_to_raw(self.request, text=img_src, querystr=qs, **attrs)
 
     def msg(self, d):
