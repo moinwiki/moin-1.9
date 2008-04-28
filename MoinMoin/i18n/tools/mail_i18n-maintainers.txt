@@ -12,10 +12,17 @@ new features and lots of cleanup.
 What we need
 ============
 
+Please note that we currently have 2 "MoinMaster" wikis:
+    * http://master16.moinmo.in/ (currently same as http://master.moinmo.in/)
+      This wiki is for the 1.6.x releases.
+    * http://master17.moinmo.in/
+      This wiki is for the 1.7.x releases.
+
 We need your help again for updating the following (high priority and
 most important stuff is on top of the list):
 
-[X] Check po file, system and help pages for errors due to conversion
+[X] If you didn't do this already for the 1.6 release:
+    Check po file, system and help pages for errors due to conversion
     to 1.6 markup:
     * Links have new syntax, see MoinMaster:HelpOnLinking
     * Macros have new syntax, see MoinMaster:HelpOnMacros
@@ -24,6 +31,9 @@ most important stuff is on top of the list):
       thus they need manual fixing).
     * You can check what the converter has done, see action=info.
 
+[X] There are also some notes on the http://moinmo.in/MoinDev/Translation
+    page about changes that need to be done.
+
 [X] MoinMaster:MoinI18n/%(lang)s page (source for the .po file)
 
 [X] "%(lang)s" system pages on the MoinMaster wiki
@@ -31,15 +41,14 @@ most important stuff is on top of the list):
 [X] "%(lang)s" help pages on the MoinMaster wiki (optional - would be
     nice, if you had the time)
 
-We need that until 2008-XX-XX - because MoinMoin 1.7 RC1 will be released
-then (followed by a release later in december), so we can include that stuff
-into the distribution archive to make people speaking your language happy. ;)
+We need that until 2008-05-23 - because MoinMoin 1.7.0 will be released
+then, so we can include that stuff into the distribution archive to make
+people speaking your language happy. ;)
 
 Please, after translating the current stuff, keep an eye on MoinMaster
-wiki - we are still in the beta phase of 1.7 development and thus, some
-strings in the PO file may still change or get added/deleted.
+wikis - some strings in the PO file may still change or get added/deleted.
 
-See http://moinmo.in/MoinMoinTodo/Release%201.7 for our planned release schedule.
+See http://moinmo.in/MoinMoinTodo/Release%%201.7 for our planned release schedule.
 
 Please reply immediately
 ========================
@@ -54,7 +63,9 @@ Or even better: directly edit the wiki page listed under Ressources.
     be better done by anyone else volunteering, but you can keep me
     on the list for next time.
 
-[ ] Sorry, but can't do that any more. Remove me as i18n maintainer.
+[ ] Sorry, but can't do that any more.
+    For this case, please remove yourself from the MoinI18n/%(lang)s page
+    by putting ***vacant*** into the Last-Translator: metadata field.
 
 Please, even if you can't help us this time, a fast response will help
 us finding another volunteer.
