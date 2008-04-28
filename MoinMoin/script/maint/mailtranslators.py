@@ -17,8 +17,8 @@ class PluginScript(MoinScript):
 Purpose:
 ========
 This tool allows you to have a message read in from standard input, and
-then sent to all translators via email. If you use %(lang)s in the mssage
-it will be replaced with the appropriate language code for the translater.
+then sent to all translators via email. If you use %(lang)s in the message
+it will be replaced with the appropriate language code for the translator.
 
 Detailed Instructions:
 ======================
