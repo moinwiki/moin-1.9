@@ -468,8 +468,7 @@ class Search:
 
         # when xapian was used, we can estimate the numer of matches
         # Note: hits can't be estimated by xapian with historysearch enabled
-        if not self.request.cfg.xapian_index_history and \
-                self.request.cfg.xapian_search:
+        if not self.request.cfg.xapian_index_history and hasattr(self, '_xapianMset'):
             self.sort = None
             mset = self._xapianMset
             estimated_hits = (
