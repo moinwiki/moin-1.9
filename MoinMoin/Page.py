@@ -534,40 +534,51 @@ class Page(object):
             request.cfg.cache.meta.putItem(request, cache_name, cache_key, log)
         return log
 
-    def last_edit(self, request):
-        """ Return the last edit.
+    def editlog_entry(self):
+        """ Return the edit-log entry for this Page object (can be an old revision)
+            or None if no edit-log entry has been found.
+        """
+        from MoinMoin.logfile import editlog
+        rev = self.get_real_rev()
+        for line in editlog.EditLog(self.request, rootpagename=self.page_name):
+            if int(line.rev) == rev:
+                break
+        else:
+            line = None
+        return line
+
+    def edit_info(self):
+        """ Return timestamp/editor info for this Page object (can be an old revision).
+
+            Note: if you ask about a deleted revision, it will report timestamp and editor
+                  for the delete action (in the edit-log, this is just a SAVE).
+
         This is used by MoinMoin/xmlrpc/__init__.py.
 
-        @param request: the request object
         @rtype: dict
         @return: timestamp and editor information
         """
-        if not self.exists():
-            return None
-
-        result = None
-        if not self.rev:
-            log = self._last_edited(request)
-            if log:
-                editordata = log.getInterwikiEditorData(request)
-                editor = editordata[1]
-                if editordata[0] == 'interwiki':
-                    editor = "%s:%s" % editordata[1]
-                else: # 'ip'
-                    editor = editordata[1]
-                result = {
-                    'timestamp': log.ed_time_usecs,
-                    'editor': editor,
-                }
-                del log
-        if not result:
-            version = self.mtime_usecs()
+        line = self.editlog_entry()
+        if line:
+            editordata = line.getInterwikiEditorData(self.request)
+            if editordata[0] == 'interwiki':
+                editor = "%s:%s" % editordata[1]
+            else:
+                editor = editordata[1] # ip or email
             result = {
-                'timestamp': version,
-                'editor': '?',
+                'timestamp': line.ed_time_usecs,
+                'editor': editor,
             }
-
+            del line
+        else:
+            result = None
         return result
+
+    def last_edit(self, request):
+        # XXX usage of last_edit is DEPRECATED - use edit_info()
+        if not self.exists(): # XXX doesn't make much sense, but still kept
+            return None       # XXX here until we remove last_edit()
+        return self.edit_info()
 
     def lastEditInfo(self, request=None):
         """ Return the last edit info.

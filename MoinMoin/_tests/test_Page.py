@@ -33,11 +33,12 @@ class TestPage:
         assert not Page(self.request, 'ThisPageDoesNotExist').exists()
         assert not Page(self.request, '').exists()
 
-    def testLastEdit(self):
-        page = Page(self.request, u'FrontPage')
-        last_edit = page.last_edit(self.request)
-        assert 'editor' in last_edit
-        assert 'timestamp' in last_edit
+    def testEditInfoSystemPage(self):
+        # system pages have no edit-log (and only 1 revision),
+        # thus edit_info will return None
+        page = Page(self.request, u'RecentChanges')
+        edit_info = page.edit_info()
+        assert edit_info is None
 
     def testSplitTitle(self):
         page = Page(self.request, u"FrontPage")
