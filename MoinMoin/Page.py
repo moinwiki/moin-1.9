@@ -685,32 +685,13 @@ class Page(object):
             raise
 
     def mtime_usecs(self):
-        """ Get modification timestamp of this page.
+        """ Get modification timestamp of this page (from edit-log, can be for an old revision).
 
-        @rtype: long
-        @return: mtime of page (or 0 if page does not exist)
+        @rtype: int
+        @return: mtime of page (or 0 if page / edit-log entry does not exist)
         """
-        request = self.request
-        cache_name = self.page_name
-        cache_key = 'lastpagechange'
-        mtime = request.cfg.cache.meta.getItem(request, cache_name, cache_key)
-        current_wanted = (self.rev == 0) # True if we search for the current revision
-        if mtime is None or not current_wanted:
-            from MoinMoin.logfile import editlog
-            wanted_rev = "%08d" % self.rev
-            mtime = 0L
-            try:
-                logfile = editlog.EditLog(self.request, rootpagename=self.page_name)
-                for line in logfile.reverse():
-                    if (current_wanted and line.rev != 99999999) or line.rev == wanted_rev:
-                        mtime = line.ed_time_usecs
-                        break
-            except StopIteration:
-                pass
-            if current_wanted:
-                request.cfg.cache.meta.putItem(request, cache_name, cache_key, mtime)
-
-        return mtime
+        entry = self.editlog_entry()
+        return entry and entry.ed_time_usecs or 0
 
     def mtime_printable(self, request):
         """ Get printable (as per user's preferences) modification timestamp of this page.
