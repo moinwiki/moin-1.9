@@ -97,10 +97,13 @@ class WikiAnalyzer:
         @param request: current request
         @param language: if given, the language in which to stem words
         """
-        if request and request.cfg.xapian_stemming and language:
-            self.stemmer = Stemmer(language)
-        else:
-            self.stemmer = None
+        self.stemmer = None
+        if request and request.cfg.xapian_stemming and language and Stemmer:
+            try:
+                self.stemmer = Stemmer(language)
+            except (KeyError, TypeError):
+                # lang is not stemmable or not available
+                pass
 
     def raw_tokenize(self, value):
         """ Yield a stream of lower cased raw and stemmed words from a string.
