@@ -49,6 +49,19 @@ Known main issues:
     make install
 
 
+Version 1.7.0current:
+
+  Bug Fixes:
+    * Wiki xmlrpc getPageInfoVersion() fixed:
+      * works correctly now for old page versions (was unsupported)
+      * works correctly now for current page version (reported wrong
+        data when a page had attachment uploads after the last page
+        edit)
+      * returns a Fault if it did not find a edit-log entry
+
+  Developer notes (these should be moved to the end in the release):
+    * Page.last_edit() is DEPRECATED, please use Page.edit_info().
+
 Version 1.7.0beta1:
 
   New Features:

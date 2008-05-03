@@ -202,6 +202,9 @@ class XmlRpcBase:
     def noSuchPageFault(self):
         return xmlrpclib.Fault(1, "No such page was found.")
 
+    def noLogEntryFault(self):
+        return xmlrpclib.Fault(1, "No log entry was found.")
+
     #############################################################################
     ### System methods
     #############################################################################
@@ -408,8 +411,11 @@ class XmlRpcBase:
             return self.noSuchPageFault()
 
         # Get page info
-        last_edit = page.last_edit(self.request)
-        mtime = wikiutil.version2timestamp(long(last_edit['timestamp'])) # must be long for py 2.2.x
+        edit_info = page.edit_info()
+        if not edit_info:
+            return self.noLogEntryFault()
+
+        mtime = wikiutil.version2timestamp(long(edit_info['timestamp'])) # must be long for py 2.2.x
         gmtuple = tuple(time.gmtime(mtime))
 
         version = rev # our new rev numbers: 1,2,3,4,....
@@ -428,7 +434,7 @@ class XmlRpcBase:
         return {
             'name': self._outstr(page.page_name),
             'lastModified': xmlrpclib.DateTime(gmtuple),
-            'author': self._outstr(last_edit['editor']),
+            'author': self._outstr(edit_info['editor']),
             'version': version,
             }
 
