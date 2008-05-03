@@ -514,38 +514,27 @@ class Page(object):
         fname, rev, exists = self.get_rev(-1, rev)
         return fname
 
-    # XXX TODO clean up the mess, rewrite _last_edited, last_edit, lastEditInfo for new logs,
-    # XXX TODO do not use mtime() calls any more
-    def _last_edited(self, request):
-        # as it is implemented now, this is rather a _last_changed as it just uses
-        # the last log entry, which could be not only from an edit, but also from
-        # an attachment operation. See different semantics in .mtime().
-        cache_name = self.page_name
-        cache_key = 'lastlog'
-        log = request.cfg.cache.meta.getItem(request, cache_name, cache_key)
-        if log is None:
-            from MoinMoin.logfile import editlog
-            try:
-                logfile = editlog.EditLog(request, rootpagename=self.page_name)
-                logfile.to_end()
-                log = logfile.previous()
-            except StopIteration:
-                log = () # don't use None!
-            request.cfg.cache.meta.putItem(request, cache_name, cache_key, log)
-        return log
-
     def editlog_entry(self):
-        """ Return the edit-log entry for this Page object (can be an old revision)
-            or None if no edit-log entry has been found.
+        """ Return the edit-log entry for this Page object (can be an old revision).
         """
-        from MoinMoin.logfile import editlog
-        rev = self.get_real_rev()
-        for line in editlog.EditLog(self.request, rootpagename=self.page_name):
-            if int(line.rev) == rev:
-                break
+        request = self.request
+        use_cache = self.rev == 0 # use the cache for current rev
+        if use_cache:
+            cache_name, cache_key = self.page_name, 'lastlog'
+            entry = request.cfg.cache.meta.getItem(request, cache_name, cache_key)
         else:
-            line = None
-        return line
+            entry = None
+        if entry is None:
+            from MoinMoin.logfile import editlog
+            rev = self.get_real_rev()
+            for entry in editlog.EditLog(request, rootpagename=self.page_name):
+                if int(entry.rev) == rev:
+                    break
+            else:
+                entry = () # don't use None
+            if use_cache:
+                request.cfg.cache.meta.putItem(request, cache_name, cache_key, entry)
+        return entry
 
     def edit_info(self):
         """ Return timestamp/editor info for this Page object (can be an old revision).
@@ -583,29 +572,24 @@ class Page(object):
     def lastEditInfo(self, request=None):
         """ Return the last edit info.
 
-        @param request: the request object
+            Note: if you ask about a deleted revision, it will report timestamp and editor
+                  for the delete action (in the edit-log, this is just a SAVE).
+
+        @param request: the request object (DEPRECATED, unused)
         @rtype: dict
         @return: timestamp and editor information
         """
-        if not self.exists():
-            return {}
-        if request is None:
-            request = self.request
-
-        # Try to get data from log
-        log = self._last_edited(request)
+        log = self.editlog_entry()
         if log:
+            request = self.request
             editor = log.getEditor(request)
             time = wikiutil.version2timestamp(log.ed_time_usecs)
+            time = request.user.getFormattedDateTime(time) # Use user time format
+            result = {'editor': editor, 'time': time}
             del log
-        # Or from the file system
         else:
-            editor = ''
-            time = os.path.getmtime(self._text_filename())
-
-        # Use user time format
-        time = request.user.getFormattedDateTime(time)
-        return {'editor': editor, 'time': time}
+            result = {}
+        return result
 
     def isWritable(self):
         """ Can this page be changed?

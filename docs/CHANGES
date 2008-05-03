@@ -61,6 +61,8 @@ Version 1.7.0current:
 
   Developer notes (these should be moved to the end in the release):
     * Page.last_edit() is DEPRECATED, please use Page.edit_info().
+    * Page._last_edited() is GONE (was broken anyway), please use
+      Page.editlog_entry().
 
 Version 1.7.0beta1:
 
