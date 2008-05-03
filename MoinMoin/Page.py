@@ -561,7 +561,7 @@ class Page(object):
             }
             del line
         else:
-            result = None
+            result = {}
         return result
 
     def last_edit(self, request):
