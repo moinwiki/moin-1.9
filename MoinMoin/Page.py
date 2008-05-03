@@ -526,9 +526,10 @@ class Page(object):
             entry = None
         if entry is None:
             from MoinMoin.logfile import editlog
-            rev = self.get_real_rev()
-            for entry in editlog.EditLog(request, rootpagename=self.page_name):
-                if int(entry.rev) == rev:
+            wanted_rev = "%08d" % self.get_real_rev()
+            edit_log = editlog.EditLog(request, rootpagename=self.page_name)
+            for entry in edit_log.reverse():
+                if entry.rev == wanted_rev:
                     break
             else:
                 entry = () # don't use None
