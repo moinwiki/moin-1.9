@@ -38,7 +38,7 @@ class TestPage:
         # thus edit_info will return None
         page = Page(self.request, u'RecentChanges')
         edit_info = page.edit_info()
-        assert edit_info is None
+        assert edit_info == {}
 
     def testSplitTitle(self):
         page = Page(self.request, u"FrontPage")
