@@ -28,5 +28,12 @@ def moinmoinApp(environ, start_response):
     request = request_wsgi.Request(environ)
     request.run()
     start_response(request.status, request.headers)
-    return [request.output()]
+    if request._send_file is not None:
+        # moin wants to send a file (e.g. AttachFile.do_get)
+        def simple_wrapper(fileobj, bufsize):
+            return iter(lambda: fileobj.read(bufsize), '')
+        file_wrapper = environ.get('wsgi.file_wrapper', simple_wrapper)
+        return file_wrapper(request._send_file, request._send_bufsize)
+    else:
+        return [request.output()] # don't we have a filelike there also!?
 

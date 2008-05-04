@@ -24,6 +24,10 @@ class Request(RequestBase):
             self.status = '200 OK'
             self.headers = []
 
+            # used by send_file()
+            self._send_file = None
+            self._send_bufsize = None
+
             self._setup_vars_from_std_env(env)
             RequestBase.__init__(self, {})
 
@@ -53,6 +57,11 @@ class Request(RequestBase):
             return ''.join(data)
         else:
             return self.stdin.read(n)
+
+    def send_file(self, fileobj, bufsize=8192, do_flush=None):
+        # For now, we just remember fileobj and bufsize for sending it later:
+        self._send_file = fileobj
+        self._send_bufsize = bufsize
 
     def write(self, *data):
         data = self.encode(data)
