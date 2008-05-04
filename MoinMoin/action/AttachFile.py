@@ -779,8 +779,6 @@ def _do_move(pagename, request):
 
 
 def _do_get(pagename, request):
-    import shutil
-
     _ = request.getText
 
     pagename, filename, fpath = _access_file(pagename, request)
@@ -815,7 +813,7 @@ def _do_get(pagename, request):
         ])
 
         # send data
-        shutil.copyfileobj(open(fpath, 'rb'), request, 8192)
+        request.send_file(open(fpath, 'rb'))
 
 
 def _do_install(pagename, request):
