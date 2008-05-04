@@ -879,6 +879,21 @@ class RequestBase(object):
         msg = 'Timing %5d %-6s %4s %-10s %s\n' % (pid, total, indicator, action, self.url)
         self.log(msg)
 
+    def send_file(self, fileobj, bufsize=8192, do_flush=False):
+        """ Send a file to the output stream.
+        
+        @param fileobj: a file-like object (supporting read, close)
+        @param bufsize: size of chunks to read/write
+        @param do_flush: call flush after writing?
+        """
+        while True:
+            buf = fileobj.read(bufsize)
+            if not buf:
+                break
+            self.write(buf)
+            if do_flush:
+                self.flush()
+
     def write(self, *data):
         """ Write to output stream. """
         raise NotImplementedError
@@ -986,7 +1001,7 @@ class RequestBase(object):
 
     def flush(self):
         """ Flush output stream. """
-        raise NotImplementedError
+        pass
 
     def check_spider(self):
         """ check if the user agent for current request is a spider/bot """
