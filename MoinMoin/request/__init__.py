@@ -881,7 +881,7 @@ class RequestBase(object):
 
     def send_file(self, fileobj, bufsize=8192, do_flush=False):
         """ Send a file to the output stream.
-        
+
         @param fileobj: a file-like object (supporting read, close)
         @param bufsize: size of chunks to read/write
         @param do_flush: call flush after writing?
