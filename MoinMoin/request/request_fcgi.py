@@ -50,6 +50,12 @@ class Request(RequestBase):
         except Exception:
             raise RemoteClosedConnection()
 
+    def send_file(self, fileobj, bufsize=8192, do_flush=True):
+        # as thfcgi buffers everything we write until we do a flush, we use
+        # do_flush=True as default here (otherwise the sending of big file
+        # attachments would consume lots of memory)
+        return RequestBase.send_file(self, fileobj, bufsize, do_flush)
+
     def flush(self):
         """ Flush output stream. """
         self.fcgreq.flush_out()
