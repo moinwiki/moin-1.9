@@ -7,10 +7,11 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import shutil
+import os, shutil
 
+from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
-
+from MoinMoin import caching, user
 # Promoting the test user -------------------------------------------
 # Usually the tests run as anonymous user, but for some stuff, you
 # need more privs...
@@ -59,6 +60,15 @@ def create_page(request, pagename, content, do_editor_backup=False):
     page.saveText(content, 0)
     return page
 
+def append_page(request, pagename, content, do_editor_backup=False):
+    """ appends some conetent to an existing page """
+    # reads the raw text of the existing page
+    raw = Page(request, pagename).get_raw_body()
+    # adds the new content to the old
+    content = "%s\n%s\n"% (raw, content)
+    page = PageEditor(request, pagename, do_editor_backup=do_editor_backup)
+    page.saveText(content, 0)
+    return page
 
 def nuke_page(request, pagename):
     """ completely delete a page, everything in the pagedir """
@@ -67,3 +77,15 @@ def nuke_page(request, pagename):
     # really get rid of everything there:
     fpath = page.getPagePath(check_create=0)
     shutil.rmtree(fpath, True)
+
+def nuke_user(request, username):
+    """ completely delete a user """
+    user_dir = request.cfg.user_dir
+    user_id = user.getUserId(request, username)
+    # really get rid of the user
+    fpath = os.path.join(user_dir, user_id)
+    os.remove(fpath)
+    # delete cache
+    arena = 'user'
+    key = 'name2id'
+    caching.CacheEntry(request, arena, key, scope='wiki').remove()
