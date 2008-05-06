@@ -167,10 +167,7 @@ Contact the owner of the wiki, who can enable email."""), 'warning')
                     msg = _("Password not acceptable: %s") % pw_error
             if not pw_error:
                 u = user.User(request, user.getUserId(request, name))
-                if u and u.valid and token == u.recoverpass_token:
-                    u.enc_password = user.encodePassword(newpass)
-                    u.recoverpass_token = ''
-                    u.save()
+                if u and u.valid and u.apply_recovery_token(token, newpass):
                     msg = _("Your password has been changed, you can log in now.")
                     msg_type = 'info'
                 else:

@@ -20,9 +20,10 @@
 """
 
 # add names here to hide them in the cgitb traceback
-unsafe_names = ("id", "key", "val", "user_data", "enc_password", "recoverpass_token")
+unsafe_names = ("id", "key", "val", "user_data", "enc_password", "recoverpass_key")
 
 import os, time, sha, codecs
+import hmac, sha
 
 from MoinMoin import config, caching, wikiutil, i18n, events
 from MoinMoin.util import timefuncs, filesys, random_string
@@ -313,7 +314,7 @@ class User:
         for key, label in self._cfg.user_checkbox_fields:
             setattr(self, key, self._cfg.user_checkbox_defaults.get(key, 0))
 
-        self.recoverpass_token = ""
+        self.recoverpass_key = ""
 
         self.enc_password = ""
         if password:
@@ -1017,6 +1018,35 @@ class User:
         else:
             return self.host()
 
+    def generate_recovery_token(self):
+        key = random_string(64, "abcdefghijklmnopqrstuvwxyz0123456789")
+        msg = str(int(time.time()))
+        h = hmac.new(key, msg, sha.new).hexdigest()
+        self.recoverpass_key = key
+        self.save()
+        return msg + '-' + h
+
+    def apply_recovery_token(self, tok, newpass):
+        key = self.recoverpass_key
+        parts = tok.split('-')
+        if len(parts) != 2:
+            return False
+        try:
+            stamp = int(parts[0])
+        except ValueError:
+            return False
+        # only allow it to be valid for twelve hours
+        if stamp + 12*60*60 < time.time():
+            return False
+        # check hmac
+        h = hmac.new(self.recoverpass_key, str(stamp), sha.new).hexdigest()
+        if h != parts[1]:
+            return False
+        self.recoverpass_key = ""
+        self.enc_password = encodePassword(newpass)
+        self.save()
+        return True
+
     def mailAccountData(self, cleartext_passwd=None):
         """ Mail a user who forgot his password a message enabling
             him to login again.
@@ -1025,9 +1055,7 @@ class User:
         from MoinMoin.wikiutil import getLocalizedPage
         _ = self._request.getText
 
-        if not self.recoverpass_token:
-            self.recoverpass_token = random_string(32, "abcdefghijklmnopqrstuvwxyz0123456789")
-            self.save()
+        tok = self.generate_recovery_token()
 
         text = '\n' + _("""\
 Login Name: %s
@@ -1037,10 +1065,10 @@ Password recovery token: %s
 Password reset URL: %s/?action=recoverpass&name=%s&token=%s
 """) % (
                         self.name,
-                        self.recoverpass_token,
+                        tok,
                         self._request.getBaseURL(),
                         url_quote_plus(self.name),
-                        self.recoverpass_token, )
+                        tok, )
 
         text = _("""\
 Somebody has requested to email you a password recovery token.
