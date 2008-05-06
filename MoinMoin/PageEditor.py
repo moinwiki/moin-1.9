@@ -1126,7 +1126,6 @@ Please review the page and save then. Do not save this page as it is!""")
             comment = kw.get('comment', u'')
             extra = kw.get('extra', u'')
             trivial = kw.get('trivial', 0)
-
             # write the page file
             mtime_usecs, rev = self._write_file(newtext, action, comment, extra, deleted=deleted)
             self.clean_acl_cache()

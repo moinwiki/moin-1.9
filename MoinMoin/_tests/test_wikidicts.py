@@ -223,4 +223,24 @@ class TestGroupDicts:
 
         assert not test_user in members
 
+    def testGroupPageTrivialChange(self):
+        """
+         tests appending a username to a group page by trivial change
+        """
+        request = self.request
+        become_trusted(request)
+
+        test_user = create_random_string(name_len=20, count=1)[0]
+        name =  u" * %s\n" % test_user
+        page = create_page(request, u'UserGroup', name)
+        # next member saved  as trivial change
+        test_user = create_random_string(name_len=20, count=1)[0]
+        name =  u" * %s\n" % test_user
+        page.saveText(name, 0, trivial=1)
+
+        members, groups = request.dicts.expand_group(u'UserGroup')
+        nuke_page(request, u'UserGroup')
+
+        assert test_user in members
+
 coverage_modules = ['MoinMoin.wikidicts']
