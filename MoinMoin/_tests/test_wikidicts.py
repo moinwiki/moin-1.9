@@ -15,7 +15,7 @@ from MoinMoin import wikidicts
 from MoinMoin import Page
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.user import User
-from MoinMoin._tests import append_page, become_trusted, create_page, nuke_page, nuke_user
+from MoinMoin._tests import append_page, become_trusted, create_page, create_random_string, nuke_page, nuke_user
 
 class TestGroupPage:
 
@@ -161,21 +161,14 @@ class TestGroupDicts:
         """
          tests appending a name to a large list of group members
         """
-        from MoinMoin.util import random_string
-        name_chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-        name_len = 14
         # long list of users
-        name =  [u" * %s" % random_string(name_len, name_chars) for counter in range(30000)]
-
+        name =  [u" * %s" % text for text in create_random_string(name_len=20, count=30000)]
         request = self.request
         become_trusted(request)
-        test_user = random_string(name_len, name_chars)
+
+        test_user = create_random_string(name_len=20, count=1)[0]
         page = create_page(request, u'UserGroup', "\n".join(name))
         page = append_page(request, u'UserGroup', u' * %s' % test_user)
-
-        group = wikidicts.Group(request, '')
-        isgroup = request.cfg.cache.page_group_regex.search
-        grouppages = request.rootpage.getPageList(user='', filter=isgroup)
 
         members, groups = request.dicts.expand_group(u'UserGroup')
         nuke_page(request, u'UserGroup')
@@ -186,15 +179,13 @@ class TestGroupDicts:
         """
          tests appending a username to a large list of group members and user creation
         """
-        from MoinMoin.util import random_string
-        name_chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-        name_len = 14
         # long list of users
-        name =  [u" * %s" % random_string(name_len, name_chars) for counter in range(3000)]
+        name =  [u" * %s" % text for text in create_random_string()]
 
         request = self.request
         become_trusted(request)
-        test_user = random_string(name_len, name_chars)
+
+        test_user = create_random_string(name_len=20, count=1)[0]
 
         page = create_page(request, u'UserGroup', "\n".join(name))
         page = append_page(request, u'UserGroup', u' * %s' % test_user)
@@ -204,14 +195,32 @@ class TestGroupDicts:
         if not user.exists():
             User(request, name=test_user, password=test_user).save()
 
-        group = wikidicts.Group(request, '')
-        isgroup = request.cfg.cache.page_group_regex.search
-        grouppages = request.rootpage.getPageList(user='', filter=isgroup)
-
         members, groups = request.dicts.expand_group(u'UserGroup')
         nuke_page(request, u'UserGroup')
         nuke_user(request, test_user)
 
         assert test_user in members
+
+    def testMemberRemovedFromGroupPage(self):
+        """
+         tests appending a member to a large list of group members and recreating the page without the member
+        """
+        # long list of users
+        name =  [u" * %s" % text for text in create_random_string()]
+        content = "\n".join(name)
+        request = self.request
+        become_trusted(request)
+
+        test_user = create_random_string(name_len=20, count=1)[0]
+
+        page = create_page(request, u'UserGroup', content)
+        page = append_page(request, u'UserGroup', u' * %s' % test_user)
+        # saves the text without test_user
+        page.saveText(content, 0)
+
+        members, groups = request.dicts.expand_group(u'UserGroup')
+        nuke_page(request, u'UserGroup')
+
+        assert not test_user in members
 
 coverage_modules = ['MoinMoin.wikidicts']
