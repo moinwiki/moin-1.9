@@ -75,7 +75,7 @@ class WikiAnalyzer:
                  }
 
     singleword_re = re.compile(singleword, re.U)
-    wikiword_re = re.compile(WikiParser.word_rule, re.U)
+    wikiword_re = re.compile(WikiParser.word_rule, re.UNICODE|re.VERBOSE)
 
     token_re = re.compile(
         r"(?P<company>\w+[&@]\w+)|" + # company names like AT&T and Excite@Home.

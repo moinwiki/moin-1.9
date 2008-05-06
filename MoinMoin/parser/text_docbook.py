@@ -123,12 +123,12 @@ class Parser(XsltParser):
         #    if a word is a valid wikiname & a valid wikipage,
         #    replace word with hyperlink
 
-        found = re.finditer(self.wikiParser.word_rule, result)
+        found = re.finditer(self.wikiParser.word_rule, result, re.UNICODE|re.VERBOSE)
         if found:
             splitResult = _splitResult(found, result)
 
             for index in range(len(splitResult)):
-                if (re.match(self.wikiParser.word_rule, splitResult[index])
+                if (re.match(self.wikiParser.word_rule, splitResult[index], re.UNICODE|re.VERBOSE)
                     and Page.Page(self.request, splitResult[index]).exists()):
                     splitResult[index] = self.wikiParser._word_repl(splitResult[index])
             result = ''.join(splitResult)
