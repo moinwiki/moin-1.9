@@ -11,6 +11,7 @@ import os, shutil
 
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
+from MoinMoin.util import random_string
 from MoinMoin import caching, user
 # Promoting the test user -------------------------------------------
 # Usually the tests run as anonymous user, but for some stuff, you
@@ -89,3 +90,9 @@ def nuke_user(request, username):
     arena = 'user'
     key = 'name2id'
     caching.CacheEntry(request, arena, key, scope='wiki').remove()
+
+def create_random_string(name_len=14, count=3000):
+    """ creates a list of random names """
+    name_chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    # long list of names
+    return [u"%s" % random_string(name_len, name_chars) for counter in range(count)]
