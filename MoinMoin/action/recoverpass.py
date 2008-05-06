@@ -210,11 +210,15 @@ Enter a new password below.""", wiki=True))
 
         request.write(_("""
 == Recovering a lost password ==
-If you have forgotten your password, provide your email address or username and click on '''Mail me my account data'''.
-The email you get contains the encrypted password (so even if someone intercepts the mail, he won't know your REAL password). Just copy and paste it into the login mask into the password field and log in.
-After logging in you should change your password.""", wiki=True))
+If you have forgotten your password, provide your email address or
+username and click on '''Mail me my account data'''.
+You will receive an email containing a recovery token that can be
+used to change your password. The email will also contain further
+instructions.""", wiki=True))
 
         request.write(_create_form(request))
+
+        request.write(request.formatter.rule())
 
         request.write(_("""
 === Password reset ===
