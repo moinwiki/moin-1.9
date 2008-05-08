@@ -438,7 +438,8 @@ class Index(BaseIndex):
             return []
 
         return [cat.lower()
-                for cat in re.findall(r'Category([^\s]+)', body[pos:])]
+                for cat in re.findall(r'Category[^\s]+', body[pos:])] # XXX needs i18n / configurability
+                # we have page_category_regex there, but it doesn't match the complete category tag
 
     def _get_domains(self, page):
         """ Returns a generator with all the domains the page belongs to
