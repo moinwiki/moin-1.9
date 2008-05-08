@@ -331,24 +331,7 @@ class TextSearch(BaseExpression):
         # Search in page body
         body = page.get_raw_body()
         for match in self.search_re.finditer(body):
-            if page.request.cfg.xapian_stemming: # XXX if True fails fulltext searches for "bcd" if there is content "abcd"
-                # somewhere in regular word
-                if body[match.start()] not in config.chars_upper and \
-                        body[match.start()-1] in config.chars_lower:
-                    continue
-
-                post = 0
-                # XXX only do this for stemmd words. how?
-                #for c in body[match.end():]:
-                #    if c in config.chars_lower:
-                #        post += 1
-                #    else:
-                #        break
-
-                matches.append(TextMatch(start=match.start(),
-                        end=match.end()+post))
-            else:
-                matches.append(TextMatch(re_match=match))
+            matches.append(TextMatch(re_match=match))
 
         # Decide what to do with the results.
         if self.negated:
@@ -452,25 +435,7 @@ class TitleSearch(BaseExpression):
         logging.debug("TitleSearch searching page %r for (negated = %r) %r" % (page.page_name, self.negated, self._pattern))
         matches = []
         for match in self.search_re.finditer(page.page_name):
-            if page.request.cfg.xapian_stemming: # XXX if True this fails title searches for "foo" even if there is a page "foo"
-                # somewhere in regular word
-                if not self.case and \
-                        page.page_name[match.start()] not in config.chars_upper and \
-                        page.page_name[match.start()-1] in config.chars_lower:
-                    continue
-
-                post = 0
-                # XXX only do this for stemmd words. how?
-                #for c in page.page_name[match.end():]:
-                #    if c in config.chars_lower:
-                #        post += 1
-                #    else:
-                #        break
-
-                matches.append(TitleMatch(start=match.start(),
-                        end=match.end()+post))
-            else:
-                matches.append(TitleMatch(re_match=match))
+            matches.append(TitleMatch(re_match=match))
 
         if self.negated:
             if matches:
