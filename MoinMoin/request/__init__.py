@@ -1073,10 +1073,12 @@ class RequestBase(object):
                 values = [values]
             fixedResult = []
             for item in values:
-                fixedResult.append(item.value)
                 if isinstance(item, cgi.FieldStorage) and item.filename:
+                    fixedResult.append(item.file) # open data tempfile
                     # Save upload file name in a separate key
                     args[key + '__filename__'] = item.filename
+                else:
+                    fixedResult.append(item.value)
             args[key] = fixedResult
 
         return self.decodeArgs(args)

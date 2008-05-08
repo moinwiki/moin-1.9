@@ -168,7 +168,19 @@ def info(pagename, request):
     return "\n<p>\n%s\n</p>\n" % attach_info
 
 
+def _write_stream(content, stream, bufsize=8192):
+    if isinstance(content, str):
+        stream.write(content)
+    elif isinstance(content, file):
+        import shutil
+        shutil.copyfileobj(content, stream, bufsize)
+
 def add_attachment(request, pagename, target, filecontent, overwrite=0):
+    """ save <filecontent> to an attachment <target> of page <pagename>
+
+        filecontent can be either a str (in memory file content),
+        or an open file object (file content in e.g. a tempfile).
+    """
     _ = request.getText
 
     # replace illegal chars
@@ -180,7 +192,8 @@ def add_attachment(request, pagename, target, filecontent, overwrite=0):
     fpath = os.path.join(attach_dir, target).encode(config.charset)
     exists = os.path.exists(fpath)
     if exists and not overwrite:
-        msg = _("Attachment '%(target)s' already exists.") % {'target': target, }
+        filesize = 0
+        msg = _("Attachment '%(target)s' already exists.") % {'target': target, } # XXX unused?
     else:
         if exists:
             try:
@@ -189,16 +202,17 @@ def add_attachment(request, pagename, target, filecontent, overwrite=0):
                 pass
         stream = open(fpath, 'wb')
         try:
-            stream.write(filecontent)
+            _write_stream(filecontent, stream)
         finally:
             stream.close()
 
         _addLogEntry(request, 'ATTNEW', pagename, target)
 
-        event = FileAttachedEvent(request, pagename, target, len(filecontent))
+        filesize = os.path.getsize(fpath)
+        event = FileAttachedEvent(request, pagename, target, filesize)
         send_event(event)
 
-        return target
+    return target, filesize
 
 
 #############################################################################
@@ -583,9 +597,8 @@ def _do_upload(pagename, request):
 
     # add the attachment
     try:
-        add_attachment(request, pagename, target, filecontent, overwrite=overwrite)
+        target, bytes = add_attachment(request, pagename, target, filecontent, overwrite=overwrite)
 
-        bytes = len(filecontent)
         msg = _("Attachment '%(target)s' (remote name '%(filename)s')"
                 " with %(bytes)d bytes saved.") % {
                 'target': target, 'filename': filename, 'bytes': bytes}
@@ -627,7 +640,7 @@ def _do_savedrawing(pagename, request):
     else:
         stream = open(savepath, 'wb')
         try:
-            stream.write(filecontent)
+            _write_stream(filecontent, stream)
         finally:
             stream.close()
 

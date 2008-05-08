@@ -160,13 +160,12 @@ class MoinRequest(server.Request):
                     values = [values]
                 fixedResult = []
                 for i in values:
-                    if isinstance(i, cgi.MiniFieldStorage):
-                        fixedResult.append(i.value)
-                    elif isinstance(i, cgi.FieldStorage):
-                        fixedResult.append(i.value)
+                    if isinstance(i, cgi.FieldStorage) and i.filename:
+                        fixedResult.append(i.file)
                         # multiple uploads to same form field are stupid!
-                        if i.filename:
-                            args[key + '__filename__'] = i.filename
+                        args[key + '__filename__'] = i.filename
+                    else:
+                        fixedResult.append(i.value)
                 args[key] = fixedResult
 
         self.process()
