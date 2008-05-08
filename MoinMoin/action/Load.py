@@ -40,7 +40,6 @@ class Load(ActionBase):
             filename = form['file__filename__']
 
         filecontent = form['file'][0]
-        bytes = len(filecontent)
 
         overwrite = False
         if 'overwrite' in form:
@@ -76,14 +75,16 @@ class Load(ActionBase):
                     msg = _("You are not allowed to delete attachments on this page.")
                     return status, msg
 
-            AttachFile.add_attachment(self.request, self.pagename, target, filecontent)
-            bytes = len(filecontent)
+            target, bytes = AttachFile.add_attachment(self.request, self.pagename, target, filecontent)
             msg = _("Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes saved.") % {
                    'target': target, 'filename': filename, 'bytes': bytes}
             status = True
 
         else:
-            filecontent = unicode(filecontent, config.charset)
+            if isinstance(filecontent, file):
+                filecontent = filecontent.read() # XXX reads complete file into memory!
+            if isinstance(filecontent, str):
+                filecontent = unicode(filecontent, config.charset)
             self.pagename = target
             page = Page(self.request, self.pagename)
             pagedir = page.getPagePath("", check_create=0)

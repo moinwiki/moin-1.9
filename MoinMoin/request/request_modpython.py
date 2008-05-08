@@ -93,16 +93,16 @@ class Request(RequestBase):
             if not isinstance(values, list):
                 values = [values]
             fixedResult = []
-
             for item in values:
-                # Remember filenames with a name hack
-                if hasattr(item, 'filename') and item.filename:
+                if isinstance(item, util.StringField):
+                    fixedResult.append(item.value)
+                elif isinstance(item, util.Field) and item.filename:
+                    fixedResult.append(item.file)
+                    # Remember filenames with a name hack
                     args[key + '__filename__'] = item.filename
-                # mod_python 2.7 might return strings instead of Field
-                # objects.
-                if hasattr(item, 'value'):
-                    item = item.value
-                fixedResult.append(item)
+                elif isinstance(item, str):
+                    # mod_python 2.7 might return strings instead of Field objects.
+                    fixedResult.append(item)
             args[key] = fixedResult
 
         return self.decodeArgs(args)
