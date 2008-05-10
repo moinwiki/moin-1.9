@@ -12,7 +12,7 @@ def macro_EditTemplates(macro):
     # we don't want to spend much CPU for spiders requesting nonexisting pages
     if not macro.request.isSpiderAgent:
         # Get list of template pages readable by current user
-        filterfn = macro.request.cfg.cache.page_template_regex.search
+        filterfn = macro.request.cfg.cache.page_template_regexact.search
         templates = macro.request.rootpage.getPageList(filter=filterfn)
         result = []
         if templates:

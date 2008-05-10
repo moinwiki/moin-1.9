@@ -58,6 +58,19 @@ Version 1.7.0current:
         data when a page had attachment uploads after the last page
         edit)
       * returns a Fault if it did not find a edit-log entry
+    * HINT: page_*_regex processing had to be changed to fix Xapian category
+      search. If you don't use the english defaults, you will have to change
+      your configuration:
+        old (default): page_category_regex = u'^Category[A-Z]'
+        new (default): page_category_regex = ur'(?P<all>Category(?P<key>\S+))'
+      As you see, the old regex did work for detecting whether a pagename is
+      a category, but it could not be used to search for a category tag in the
+      page text. The new regex can be used for both and identifies the complete
+      category tag (match in group 'all', e.g. "CategoryFoo") as well as the
+      category key (match in group 'key', e.g. "Foo") by using named regex
+      groups. \S+ means the category key can be anything non-blank.
+      If you like to simultaneously support multiple languages, use something
+      like this: ur'(?P<all>(Kategorie|Category)(?P<key>\S+))'
 
   Developer notes (these should be moved to the end in the release):
     * Page.last_edit() is DEPRECATED, please use Page.edit_info().

@@ -32,7 +32,7 @@ def getMimetypes():
 
 def getCategories(request):
     # This will return all pages with "Category" in the title
-    cat_filter = request.cfg.cache.page_category_regex.search
+    cat_filter = request.cfg.cache.page_category_regexact.search
     pages = request.rootpage.getPageList(filter=cat_filter)
     pages.sort()
     return pages

@@ -25,7 +25,7 @@ def do_user_browser(request):
         Column('action', label=_('Action')),
     ]
 
-    isgroup = request.cfg.cache.page_group_regex.search
+    isgroup = request.cfg.cache.page_group_regexact.search
     grouppages = request.rootpage.getPageList(user='', filter=isgroup)
 
     # Iterate over users

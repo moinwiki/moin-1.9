@@ -118,7 +118,7 @@ class TestTemplatePage:
     )
     bad = (
         'Template',
-        'ATemplate',
+        'I want a Template',
         'TemplateInFront',
         'xTemplateInFront',
         'XTemplateInFront',
