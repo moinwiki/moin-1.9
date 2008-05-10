@@ -441,10 +441,15 @@ Lists: * bullets; 1., a. numbered items.
 
     page_front_page = u'HelpOnLanguages' # this will make people choose a sane config
     page_local_spelling_words = u'LocalSpellingWords'
-    page_category_regex = u'^Category[A-Z]'
-    page_dict_regex = u'[a-z0-9]Dict$'
-    page_group_regex = u'[a-z0-9]Group$'
-    page_template_regex = u'[a-z0-9]Template$'
+
+    # the following regexes should match the complete name when used in free text
+    # the group 'all' shall match all, while the group 'key' shall match the key only
+    # e.g. CategoryFoo -> group 'all' ==  CategoryFoo, group 'key' == Foo
+    # moin's code will add ^ / $ at beginning / end when needed
+    page_category_regex = ur'(?P<all>Category(?P<key>\S+))'
+    page_dict_regex = ur'(?P<all>(?P<key>\S+)Dict)'
+    page_group_regex = ur'(?P<all>(?P<key>\S+)Group)'
+    page_template_regex = ur'(?P<all>(?P<key>\S+)Template)'
 
     page_license_enabled = False
     page_license_page = u'WikiLicense'
@@ -734,6 +739,13 @@ Lists: * bullets; 1., a. numbered items.
         self.cache.page_dict_regex = re.compile(self.page_dict_regex, re.UNICODE)
         self.cache.page_group_regex = re.compile(self.page_group_regex, re.UNICODE)
         self.cache.page_template_regex = re.compile(self.page_template_regex, re.UNICODE)
+
+        # the ..._regexact versions only match if nothing is left (exact match)
+        self.cache.page_category_regexact = re.compile(u'^%s$' % self.page_category_regex, re.UNICODE)
+        self.cache.page_dict_regexact = re.compile(u'^%s$' % self.page_dict_regex, re.UNICODE)
+        self.cache.page_group_regexact = re.compile(u'^%s$' % self.page_group_regex, re.UNICODE)
+        self.cache.page_template_regexact = re.compile(u'^%s$' % self.page_template_regex, re.UNICODE)
+
         self.cache.ua_spiders = self.ua_spiders and re.compile(self.ua_spiders, re.I)
 
         self._check_directories()

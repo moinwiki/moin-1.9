@@ -128,7 +128,7 @@ class TestGroupDicts:
         page.renamePage('AnotherGroup')
 
         group = wikidicts.Group(request, '')
-        isgroup = request.cfg.cache.page_group_regex.search
+        isgroup = request.cfg.cache.page_group_regexact.search
         grouppages = request.rootpage.getPageList(user='', filter=isgroup)
 
         members, groups = request.dicts.expand_group(u'AnotherGroup')
@@ -147,7 +147,7 @@ class TestGroupDicts:
         page.copyPage(u'OtherGroup')
 
         group = wikidicts.Group(request, '')
-        isgroup = request.cfg.cache.page_group_regex.search
+        isgroup = request.cfg.cache.page_group_regexact.search
         grouppages = request.rootpage.getPageList(user='', filter=isgroup)
 
         members, groups = request.dicts.expand_group(u'OtherGroup')

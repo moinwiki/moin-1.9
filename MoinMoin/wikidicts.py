@@ -337,12 +337,12 @@ class GroupDict(DictDict):
 
         # Get all pages in the wiki - without user filtering using filter
         # function - this makes the page list about 10 times faster.
-        isdict = self.cfg.cache.page_dict_regex.search
+        isdict = self.cfg.cache.page_dict_regexact.search
         dictpages = request.rootpage.getPageList(user='', filter=isdict)
         for pagename in dictpages:
             self.adddict(request, pagename)
 
-        isgroup = self.cfg.cache.page_group_regex.search
+        isgroup = self.cfg.cache.page_group_regexact.search
         grouppages = request.rootpage.getPageList(user='', filter=isgroup)
         for pagename in grouppages:
             self.addgroup(request, pagename)

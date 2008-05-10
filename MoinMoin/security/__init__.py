@@ -308,7 +308,7 @@ class AccessControlList:
         else: # we have a #acl on the page (self.acl can be [] if #acl is empty!)
             acl = self.acl
         is_group_member = request.dicts.has_member
-        group_re = request.cfg.cache.page_group_regex
+        group_re = request.cfg.cache.page_group_regexact
         allowed = None
         for entry, rightsdict in acl:
             if entry in self.special_users:
