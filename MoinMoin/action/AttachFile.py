@@ -624,29 +624,36 @@ def _do_savedrawing(pagename, request):
 
     # get directory, and possibly create it
     attach_dir = getAttachDir(request, pagename, create=1)
+    savepath = os.path.join(attach_dir, basename + ext)
+
+    # XXX would be better if it worked without this (at least for the png),
+    # XXX but it does not:
+    filecontent = filecontent.read() # read file completely into memory
 
     if ext == '.draw':
         _addLogEntry(request, 'ATTDRW', pagename, basename + ext)
         filecontent = filecontent.replace("\r", "")
+    elif ext == '.map':
+        filecontent = filecontent.strip()
 
-    savepath = os.path.join(attach_dir, basename + ext)
-    if ext == '.map' and not filecontent.strip():
-        # delete map file if it is empty
-        try:
-            os.unlink(savepath)
-        except OSError, err:
-            if err.errno != errno.ENOENT: # no such file
-                raise
-    else:
+    if filecontent:
+        # filecontent is either a file or a non-empty string
         stream = open(savepath, 'wb')
         try:
             _write_stream(filecontent, stream)
         finally:
             stream.close()
+    else:
+        # filecontent is empty string (e.g. empty map file), delete the target file
+        try:
+            os.unlink(savepath)
+        except OSError, err:
+            if err.errno != errno.ENOENT: # no such file
+                raise
 
     # touch attachment directory to invalidate cache if new map is saved
     if ext == '.map':
-        os.utime(getAttachDir(request, pagename), None)
+        os.utime(attach_dir, None)
 
     request.emit_http_headers()
     request.write("OK")
