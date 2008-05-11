@@ -162,7 +162,7 @@ class TestGroupDicts:
          tests appending a name to a large list of group members
         """
         # long list of users
-        name =  [u" * %s" % text for text in create_random_string(name_len=20, count=30000)]
+        name = [u" * %s" % text for text in create_random_string(name_len=20, count=30000)]
         request = self.request
         become_trusted(request)
 
@@ -180,7 +180,7 @@ class TestGroupDicts:
          tests appending a username to a large list of group members and user creation
         """
         # long list of users
-        name =  [u" * %s" % text for text in create_random_string()]
+        name = [u" * %s" % text for text in create_random_string()]
 
         request = self.request
         become_trusted(request)
@@ -206,7 +206,7 @@ class TestGroupDicts:
          tests appending a member to a large list of group members and recreating the page without the member
         """
         # long list of users
-        name =  [u" * %s" % text for text in create_random_string()]
+        name = [u" * %s" % text for text in create_random_string()]
         content = "\n".join(name)
         request = self.request
         become_trusted(request)
@@ -231,11 +231,11 @@ class TestGroupDicts:
         become_trusted(request)
 
         test_user = create_random_string(name_len=20, count=1)[0]
-        name =  u" * %s\n" % test_user
+        name = u" * %s\n" % test_user
         page = create_page(request, u'UserGroup', name)
         # next member saved  as trivial change
         test_user = create_random_string(name_len=20, count=1)[0]
-        name =  u" * %s\n" % test_user
+        name = u" * %s\n" % test_user
         page.saveText(name, 0, trivial=1)
 
         members, groups = request.dicts.expand_group(u'UserGroup')
@@ -244,3 +244,4 @@ class TestGroupDicts:
         assert test_user in members
 
 coverage_modules = ['MoinMoin.wikidicts']
+
