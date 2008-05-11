@@ -13,7 +13,7 @@
   SetHandler python-program
 
   # add the path where the moinmodpy.py wrapper can be found
-  PythonPath "['/path/to/moin/share/moin/cgi-bin']+sys.path"
+  PythonPath "['/path/to/share/moin/server']+sys.path"
 
   # use the moinmodpy wrapper to handle requests
   PythonHandler moinmodpy
@@ -35,10 +35,11 @@
 #  # Use mod_python as handler
 #  SetHandler python-program
 #
-#  # set the path to the MoinMoin package and to the wikiconfig.py
-#  PythonPath "['/path/to/moin/lib/python','/path/to/wikiconfig']+sys.path"
+#  # set code search path to find farmconfig, wikiconfig and MoinMoin code package
+#  PythonPath "['/path/to/farmconfigdir', '/path/to/wikiconfigdir', '/path/to/moin/lib/python']+sys.path"
 #
 #  # choose the ModPy Request class as handler
 #  PythonHandler MoinMoin.request.request_modpython::Request.run
 #
 #</Files>
+
