@@ -17,7 +17,7 @@ sys.path.insert(0, moinpath)
 os.chdir(moinpath)
 
 from MoinMoin import log
-log.load_config('wiki/config/logging/stderr') # XXX maybe fix path
+log.load_config('wikiserverlogging.conf')
 
 from MoinMoin.script import MoinScript
 
