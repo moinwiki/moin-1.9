@@ -49,6 +49,17 @@ def become_superuser(request):
     if su_name not in request.cfg.superuser:
         request.cfg.superuser.append(su_name)
 
+def nuke_user(request, username):
+    """ completely delete a user """
+    user_dir = request.cfg.user_dir
+    user_id = user.getUserId(request, username)
+    # really get rid of the user
+    fpath = os.path.join(user_dir, user_id)
+    os.remove(fpath)
+    # delete cache
+    arena = 'user'
+    key = 'name2id'
+    caching.CacheEntry(request, arena, key, scope='wiki').remove()
 
 # Creating and destroying test pages --------------------------------
 
@@ -79,20 +90,7 @@ def nuke_page(request, pagename):
     fpath = page.getPagePath(check_create=0)
     shutil.rmtree(fpath, True)
 
-def nuke_user(request, username):
-    """ completely delete a user """
-    user_dir = request.cfg.user_dir
-    user_id = user.getUserId(request, username)
-    # really get rid of the user
-    fpath = os.path.join(user_dir, user_id)
-    os.remove(fpath)
-    # delete cache
-    arena = 'user'
-    key = 'name2id'
-    caching.CacheEntry(request, arena, key, scope='wiki').remove()
-
-def create_random_string(name_len=14, count=3000):
-    """ creates a list of random names """
-    name_chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    # long list of names
-    return [u"%s" % random_string(name_len, name_chars) for counter in range(count)]
+def create_random_string_list(length=14, count=10):
+    """ creates a list of random strings """
+    chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    return [u"%s" % random_string(length, chars) for counter in range(count)]

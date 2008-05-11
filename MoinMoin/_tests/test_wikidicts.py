@@ -15,7 +15,7 @@ from MoinMoin import wikidicts
 from MoinMoin import Page
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.user import User
-from MoinMoin._tests import append_page, become_trusted, create_page, create_random_string, nuke_page, nuke_user
+from MoinMoin._tests import append_page, become_trusted, create_page, create_random_string_list, nuke_page, nuke_user
 
 class TestGroupPage:
 
@@ -159,15 +159,15 @@ class TestGroupDicts:
 
     def testAppendingGroupPage(self):
         """
-         tests appending a name to a large list of group members
+         tests scalability by appending a name to a large list of group members
         """
         # long list of users
-        name = [u" * %s" % text for text in create_random_string(name_len=20, count=30000)]
+        page_content = [u" * %s" % member for member in create_random_string_list(length=15, count=30000)]
         request = self.request
         become_trusted(request)
 
-        test_user = create_random_string(name_len=20, count=1)[0]
-        page = create_page(request, u'UserGroup', "\n".join(name))
+        test_user = create_random_string_list(length=15, count=1)[0]
+        page = create_page(request, u'UserGroup', "\n".join(page_content))
         page = append_page(request, u'UserGroup', u' * %s' % test_user)
 
         members, groups = request.dicts.expand_group(u'UserGroup')
@@ -180,14 +180,14 @@ class TestGroupDicts:
          tests appending a username to a large list of group members and user creation
         """
         # long list of users
-        name = [u" * %s" % text for text in create_random_string()]
+        page_content = [u" * %s" % member for member in create_random_string_list()]
 
         request = self.request
         become_trusted(request)
 
-        test_user = create_random_string(name_len=20, count=1)[0]
+        test_user = create_random_string_list(length=15, count=1)[0]
 
-        page = create_page(request, u'UserGroup', "\n".join(name))
+        page = create_page(request, u'UserGroup', "\n".join(page_content))
         page = append_page(request, u'UserGroup', u' * %s' % test_user)
 
         # now shortly later we create a user object
@@ -206,17 +206,17 @@ class TestGroupDicts:
          tests appending a member to a large list of group members and recreating the page without the member
         """
         # long list of users
-        name = [u" * %s" % text for text in create_random_string()]
-        content = "\n".join(name)
+        page_content = [u" * %s" % member for member in create_random_string_list()]
+        page_content = "\n".join(page_content)
         request = self.request
         become_trusted(request)
 
-        test_user = create_random_string(name_len=20, count=1)[0]
+        test_user = create_random_string_list(length=15, count=1)[0]
 
-        page = create_page(request, u'UserGroup', content)
+        page = create_page(request, u'UserGroup', page_content)
         page = append_page(request, u'UserGroup', u' * %s' % test_user)
         # saves the text without test_user
-        page.saveText(content, 0)
+        page.saveText(page_content, 0)
 
         members, groups = request.dicts.expand_group(u'UserGroup')
         nuke_page(request, u'UserGroup')
@@ -230,13 +230,13 @@ class TestGroupDicts:
         request = self.request
         become_trusted(request)
 
-        test_user = create_random_string(name_len=20, count=1)[0]
-        name = u" * %s\n" % test_user
-        page = create_page(request, u'UserGroup', name)
+        test_user = create_random_string_list(length=15, count=1)[0]
+        member = u" * %s\n" % test_user
+        page = create_page(request, u'UserGroup', member)
         # next member saved  as trivial change
-        test_user = create_random_string(name_len=20, count=1)[0]
-        name = u" * %s\n" % test_user
-        page.saveText(name, 0, trivial=1)
+        test_user = create_random_string_list(length=15, count=1)[0]
+        member = u" * %s\n" % test_user
+        page.saveText(member, 0, trivial=1)
 
         members, groups = request.dicts.expand_group(u'UserGroup')
         nuke_page(request, u'UserGroup')
