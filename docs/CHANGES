@@ -72,6 +72,16 @@ Version 1.7.0current:
       If you like to simultaneously support multiple languages, use something
       like this: ur'(?P<all>(Kategorie|Category)(?P<key>\S+))'
 
+  Other changes:
+    * HINT: in the toplevel dir, we have renamed moin.py to wikiserver.py (it
+      was often confused with the moin scripting command).
+      Now you have:
+      * wikiserver.py - to start the standalone server
+      * wikiserverconfig.py - to configure the standalone server
+      * wikiserverlogging.conf - to configure logging for it (default config
+        should be ok for all day use, but can easily be modified for debugging)
+      * wikiconfig.py - to configure the wiki engine
+
   Developer notes (these should be moved to the end in the release):
     * Page.last_edit() is DEPRECATED, please use Page.edit_info().
     * Page._last_edited() is GONE (was broken anyway), please use
