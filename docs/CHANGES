@@ -92,7 +92,9 @@ Version 1.7.0beta1:
   New Features:
     * New powerful and flexible logging, please see wiki/config/logging/ -
       HINT: you have to upgrade your server adaptor script (e.g. moin.cgi)
-      and load a logging configuration that fits your needs from there.
+      and load a logging configuration that fits your needs from there, or
+      alternatively you can also set MOINLOGGINGCONF environment variable
+      to point at your logging config file.
       If you use some of our sample logging configs, make sure you have a
       look INTO them to fix e.g. the path of the logfile it will use.
     * Moin now logs the path from where it loaded its configuration(s)

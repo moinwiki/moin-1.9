@@ -4,15 +4,26 @@
 
     WARNING
     -------
-    logging must be configured VERY early, before any moin module calls
-    log.getLogger(). Because most modules call getLogger on the module
-    level, this basically means that MoinMoin.log must be imported first
-    and load_config must be called afterwards, before any other moin
-    module gets imported.
+    logging must be configured VERY early, before the code in log.getLogger
+    gets executed. Thus, logging is configured either by:
+    a) an environment variable MOINLOGGINGCONF that contains the path/filename
+       of a logging configuration file - this method overrides all following
+       methods (except if it can't read or use that configuration, then it
+       will use c))
+    b) by an explicit call to MoinMoin.log.load_config('logging.conf') -
+       you need to do this very early or a) or c) will happen before
+    c) by using a builtin fallback logging conf
+    
+    If logging is not yet configured, log.getLogger will do an implicit
+    configuration call - then a) or c) is done.
 
     Usage (for wiki server admins)
     ------------------------------
-    Typically, your server adaptor script (e.g. moin.cgi) will have this:
+    Either use something like this in some shell script:
+    MOINLOGGINGCONF=/path/to/logging.conf
+    export MOINLOGGINGCONF
+
+    Or, modify your server adaptor script (e.g. moin.cgi) to do this:
 
     from MoinMoin import log
     log.load_config('wiki/config/logging/logfile') # XXX please fix this path!
@@ -76,31 +87,37 @@ datefmt=
 class=logging.Formatter
 """
 
+import os
 import logging, logging.config
 
 configured = False
 fallback_config = False
 
 
-def load_config(conf_fname):
+def load_config(conf_fname=None):
     """ load logging config from conffile """
     global configured
-    try:
-        logging.config.fileConfig(conf_fname)
+    err_msg = None
+    conf_fname = os.environ.get('MOINLOGGINGCONF', conf_fname)
+    if conf_fname:
+        try:
+            conf_fname = os.path.abspath(conf_fname)
+            logging.config.fileConfig(conf_fname)
+            configured = True
+            l = getLogger(__name__)
+            l.info('using logging configuration read from "%s"' % conf_fname)
+        except Exception, err: # XXX be more precise
+            err_msg = str(err)
+    if not configured:
+        # load builtin fallback logging config
+        from StringIO import StringIO
+        config_file = StringIO(logging_config)
+        logging.config.fileConfig(config_file, logging_defaults)
         configured = True
-    except Exception, err: # XXX be more precise
-        load_fallback_config(err)
-
-def load_fallback_config(err=None):
-    """ load builtin fallback logging config """
-    global configured
-    from StringIO import StringIO
-    logging.config.fileConfig(StringIO(logging_config), logging_defaults)
-    configured = True
-    l = getLogger(__name__)
-    l.warning('Using built-in fallback logging configuration!')
-    if err:
-        l.warning('load_config failed with "%s".' % str(err))
+        l = getLogger(__name__)
+        if err:
+            l.warning('load_config for "%s" failed with "%s".' % (conf_fname, err_msg))
+        l.warning('using logging configuration read from built-in fallback in MoinMoin.log module!')
 
 
 def getLogger(name):
@@ -109,8 +126,8 @@ def getLogger(name):
         - patch loglevel constants into logger object, so it can be used
           instead of the logging module
     """
-    if not configured: # should not happen
-        load_fallback_config()
+    if not configured:
+        load_config()
     logger = logging.getLogger(name)
     for levelnumber, levelname in logging._levelNames.items():
         if isinstance(levelnumber, int): # that list has also the reverse mapping...
