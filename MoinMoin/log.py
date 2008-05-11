@@ -13,7 +13,7 @@
     b) by an explicit call to MoinMoin.log.load_config('logging.conf') -
        you need to do this very early or a) or c) will happen before
     c) by using a builtin fallback logging conf
-    
+
     If logging is not yet configured, log.getLogger will do an implicit
     configuration call - then a) or c) is done.
 
@@ -115,7 +115,7 @@ def load_config(conf_fname=None):
         logging.config.fileConfig(config_file, logging_defaults)
         configured = True
         l = getLogger(__name__)
-        if err:
+        if err_msg:
             l.warning('load_config for "%s" failed with "%s".' % (conf_fname, err_msg))
         l.warning('using logging configuration read from built-in fallback in MoinMoin.log module!')
 
