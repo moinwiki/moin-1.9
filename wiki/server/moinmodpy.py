@@ -7,7 +7,7 @@
 
     <Files wiki>
       SetHandler python-program
-      PythonPath "['/path/to/moin/share/moin/cgi-bin'] + sys.path"
+      PythonPath "['/path/to/share/moin/server'] + sys.path"
       PythonHandler moinmodpy
     </Files>
 
@@ -22,39 +22,36 @@
     look into INSTALL.html to see how you can fix the bug on your own
     (a simple one line change).
 
-    TODO: this should be refactored so it uses MoinMoin.server package
-          (see how server_twisted, server_wsgi and server_standalone use it)
-
     @copyright: 2004-2005 by Oliver Graf <ograf@bitart.de>
     @license: GNU GPL, see COPYING for details.
 """
 
-# System path configuration
+import sys, os
 
-import sys
+# a) Configuration of Python's code search path
+#    If you already have set up the PYTHONPATH environment variable for the
+#    stuff you see below, you don't need to do a1) and a2).
 
-# Path of the directory where wikiconfig.py is located.
-# YOU NEED TO CHANGE THIS TO MATCH YOUR SETUP.
-sys.path.insert(0, '/path/to/wikiconfig')
+# a1) Path of the directory where the MoinMoin code package is located.
+#     Needed if you installed with --prefix=PREFIX or you didn't use setup.py.
+#sys.path.insert(0, 'PREFIX/lib/python2.3/site-packages')
 
-# Path to MoinMoin package, needed if you installed with --prefix=PREFIX
-# or if you did not use setup.py.
-## sys.path.insert(0, 'PREFIX/lib/python2.3/site-packages')
+# a2) Path of the directory where wikiconfig.py / farmconfig.py is located.
+#     See wiki/config/... for some sample config files.
+#sys.path.insert(0, '/path/to/wikiconfigdir')
+#sys.path.insert(0, '/path/to/farmconfigdir')
 
-# Path of the directory where farmconfig is located (if different).
-## sys.path.insert(0, '/path/to/farmconfig')
+# b) Configuration of moin's logging
+#    If you have set up MOINLOGGINGCONF environment variable, you don't need this!
+#    You also don't need this if you are happy with the builtin defaults.
+#    See wiki/config/logging/... for some sample config files.
+#from MoinMoin import log
+#log.load_config('/path/to/logging_configuration_file')
 
 # Debug mode - show detailed error reports
-## import os
-## os.environ['MOIN_DEBUG'] = '1'
+#os.environ['MOIN_DEBUG'] = '1'
 
-from MoinMoin import log
-log.load_config('wiki/config/logging/conffile') # XXX please fix this path!
 
-# Simple way
-#from MoinMoin.server.server_modpython import modpythonHandler as handler
-
-# Complex way
 from MoinMoin.server.server_modpython import ModpythonConfig, modpythonHandler
 
 class MyConfig(ModpythonConfig):
