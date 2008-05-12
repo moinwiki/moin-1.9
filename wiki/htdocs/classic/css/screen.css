@@ -13,6 +13,16 @@ a:link {color: #7F2A00;}
 a:visited {color: #7F5F47;}
 a.nonexistent, a.badinterwiki {color: #404040;}
 
+a.download {
+    font-size: 120%; 
+    letter-spacing: 0.05em;
+    font-weight: bold;
+    background: #E7E7E7;
+    border: 1px solid #9C9C9C;
+    padding: 0.5em;
+    text-align: center;
+}
+
 input {
     font-size: 1em;
     font-family: Arial, Lucida Grande, sans-serif;
