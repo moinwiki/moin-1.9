@@ -126,16 +126,13 @@ class TestGroupDicts:
         become_trusted(request)
         page = create_page(request, u'SomeGroup', u" * ExampleUser")
         page.renamePage('AnotherGroup')
-
         group = wikidicts.Group(request, '')
         isgroup = request.cfg.cache.page_group_regexact.search
         grouppages = request.rootpage.getPageList(user='', filter=isgroup)
-
-        members, groups = request.dicts.expand_group(u'AnotherGroup')
-
+        result = request.dicts.has_member(u'AnotherGroup', u'ExampleUser')
         nuke_page(request, u'AnotherGroup')
 
-        assert u'ExampleUser' in members
+        assert result is True
 
     def testCopyGroupPage(self):
         """
@@ -145,17 +142,14 @@ class TestGroupDicts:
         become_trusted(request)
         page = create_page(request, u'SomeGroup', u" * ExampleUser")
         page.copyPage(u'OtherGroup')
-
         group = wikidicts.Group(request, '')
         isgroup = request.cfg.cache.page_group_regexact.search
         grouppages = request.rootpage.getPageList(user='', filter=isgroup)
-
-        members, groups = request.dicts.expand_group(u'OtherGroup')
-
+        result = request.dicts.has_member(u'OtherGroup', u'ExampleUser')
         nuke_page(request, u'OtherGroup')
         nuke_page(request, u'SomeGroup')
 
-        assert u'ExampleUser' in members
+        assert result is True
 
     def testAppendingGroupPage(self):
         """
@@ -165,15 +159,13 @@ class TestGroupDicts:
         page_content = [u" * %s" % member for member in create_random_string_list(length=15, count=30000)]
         request = self.request
         become_trusted(request)
-
         test_user = create_random_string_list(length=15, count=1)[0]
         page = create_page(request, u'UserGroup', "\n".join(page_content))
         page = append_page(request, u'UserGroup', u' * %s' % test_user)
-
-        members, groups = request.dicts.expand_group(u'UserGroup')
+        result = request.dicts.has_member('UserGroup', test_user)
         nuke_page(request, u'UserGroup')
 
-        assert test_user in members
+        assert result is True
 
     def testUserAppendingGroupPage(self):
         """
@@ -181,12 +173,9 @@ class TestGroupDicts:
         """
         # long list of users
         page_content = [u" * %s" % member for member in create_random_string_list()]
-
         request = self.request
         become_trusted(request)
-
         test_user = create_random_string_list(length=15, count=1)[0]
-
         page = create_page(request, u'UserGroup', "\n".join(page_content))
         page = append_page(request, u'UserGroup', u' * %s' % test_user)
 
@@ -195,11 +184,11 @@ class TestGroupDicts:
         if not user.exists():
             User(request, name=test_user, password=test_user).save()
 
-        members, groups = request.dicts.expand_group(u'UserGroup')
+        result = request.dicts.has_member('UserGroup', test_user)
         nuke_page(request, u'UserGroup')
         nuke_user(request, test_user)
 
-        assert test_user in members
+        assert result is True
 
     def testMemberRemovedFromGroupPage(self):
         """
@@ -210,18 +199,15 @@ class TestGroupDicts:
         page_content = "\n".join(page_content)
         request = self.request
         become_trusted(request)
-
         test_user = create_random_string_list(length=15, count=1)[0]
-
         page = create_page(request, u'UserGroup', page_content)
         page = append_page(request, u'UserGroup', u' * %s' % test_user)
         # saves the text without test_user
         page.saveText(page_content, 0)
-
-        members, groups = request.dicts.expand_group(u'UserGroup')
+        result = request.dicts.has_member('UserGroup', test_user)
         nuke_page(request, u'UserGroup')
 
-        assert not test_user in members
+        assert result is False
 
     def testGroupPageTrivialChange(self):
         """
@@ -229,7 +215,6 @@ class TestGroupDicts:
         """
         request = self.request
         become_trusted(request)
-
         test_user = create_random_string_list(length=15, count=1)[0]
         member = u" * %s\n" % test_user
         page = create_page(request, u'UserGroup', member)
@@ -237,11 +222,10 @@ class TestGroupDicts:
         test_user = create_random_string_list(length=15, count=1)[0]
         member = u" * %s\n" % test_user
         page.saveText(member, 0, trivial=1)
-
-        members, groups = request.dicts.expand_group(u'UserGroup')
+        result = request.dicts.has_member('UserGroup', test_user)
         nuke_page(request, u'UserGroup')
 
-        assert test_user in members
+        assert result is True
 
 coverage_modules = ['MoinMoin.wikidicts']
 
