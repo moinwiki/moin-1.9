@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2004-11-19 21:03+0800\n"
 "Last-Translator: Nam T. Nguyen <nnt@nntsoft.com>\n"
 "Language-Team: Vietnamese <moin-devel@lists.sourceforge.net>\n"
@@ -2309,41 +2309,27 @@ msgstr "Bỏ qua các thay đổi về số lượng khoảng trắng"
 msgid "Load"
 msgstr "Tải lên"
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "Bạn không thể xoá file gửi kèm."
-
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
-msgstr ""
-"File gửi kèm '%(target)s' (tên ở máy chủ '%(filename)s') kích thước %(bytes)"
-"d bytes đã được lưu."
-
 #, fuzzy
-msgid "New Page or New Attachment"
-msgstr "Gửi kèm file mới"
+msgid "Pagename not specified!"
+msgstr "Tên file gửi kèm không được định rõ!"
+
+msgid "Upload page content"
+msgstr ""
 
 msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
 msgstr ""
 
-msgid "New Attachment"
-msgstr "Gửi kèm file mới"
-
-#, fuzzy
-msgid "attachment"
-msgstr "Gửi kèm file mới"
-
-msgid "Overwrite existing attachment of same name"
+msgid "File to load page content from"
 msgstr ""
 
-msgid "Upload"
-msgstr "Tải lên"
+msgid "Comment"
+msgstr "Chú thích"
 
 #, fuzzy
-msgid "New Name"
+msgid "Page Name"
 msgstr "Tên mới"
 
 msgid "You are not allowed to subscribe to a page you can't read."
@@ -2399,9 +2385,6 @@ msgstr "diff"
 
 msgid "Editor"
 msgstr "Tác giả"
-
-msgid "Comment"
-msgstr "Chú thích"
 
 msgid "view"
 msgstr "xem"
@@ -2679,10 +2662,6 @@ msgid ""
 msgstr ""
 "Có tổng cộng <a href=\"%(link)s\">%(count)s file gửi kèm</a> trong trang này."
 
-#, fuzzy, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "File gửi kèm '%(filename)s' đã được xoá."
-
 msgid "Filename of attachment not specified!"
 msgstr "Tên file gửi kèm không được định rõ!"
 
@@ -2717,12 +2696,21 @@ msgstr "Không có file gửi kèm trong trang %(pagename)s"
 msgid "Edit drawing"
 msgstr "Sửa bản vẽ"
 
+msgid "New Attachment"
+msgstr "Gửi kèm file mới"
+
 msgid "File to upload"
 msgstr "File để tải lên"
 
 #, fuzzy
 msgid "Rename to"
 msgstr "Đổi tên"
+
+msgid "Overwrite existing attachment of same name"
+msgstr ""
+
+msgid "Upload"
+msgstr "Tải lên"
 
 msgid "Attached Files"
 msgstr "File gửi kèm"
@@ -2738,14 +2726,29 @@ msgstr "Không thể thực hiện việc tải lên: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "File gửi kèm trong trang \"%(pagename)s\""
 
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Bạn không thể xem các file gửi kèm trong trang này."
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
 msgstr ""
 "Không có nội dung. Xóa các ký tự không nằm trong bảng mã ASCII và thử lại."
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"File gửi kèm '%(target)s' (tên ở máy chủ '%(filename)s') kích thước %(bytes)"
+"d bytes đã được lưu."
+
 msgid "You are not allowed to save a drawing on this page."
 msgstr "Bạn không thể tạo một bản vẽ ở trang này."
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "Bạn không thể xoá file gửi kèm."
 
 #, fuzzy, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -2910,6 +2913,18 @@ msgstr "Bạn không thể tạo một bản vẽ ở trang này."
 #, fuzzy
 msgid "Login and try again."
 msgstr " %s và thử lại."
+
+#, fuzzy
+#~ msgid "New Page or New Attachment"
+#~ msgstr "Gửi kèm file mới"
+
+#, fuzzy
+#~ msgid "attachment"
+#~ msgstr "Gửi kèm file mới"
+
+#, fuzzy
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "File gửi kèm '%(filename)s' đã được xoá."
 
 #~ msgid ""
 #~ "An upload will never overwrite an existing file. If there is a name\n"

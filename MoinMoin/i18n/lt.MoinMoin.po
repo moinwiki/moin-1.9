@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2007-12-01 00:00+0200\n"
 "Last-Translator: Aurelijus Sudzius <ruledbyfate@gmail.com>\n"
 "Language-Team: Lithuanian <ruledbyfate@gmail.com>\n"
@@ -2379,41 +2379,28 @@ msgstr "Ignoruoti tarpų pakeitimus"
 msgid "Load"
 msgstr "Įkrauti"
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "Jums neleidžiama pašalinti priedo šiame puslapyje."
+#, fuzzy
+msgid "Pagename not specified!"
+msgstr "Nenurodytas failo priedo vardas!"
 
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
+msgid "Upload page content"
 msgstr ""
-"Priedas '%(target)s' (nuotolinis pavadinimas '%(filename)s') užimantis %"
-"(bytes)d baitų išsaugotas."
-
-msgid "New Page or New Attachment"
-msgstr "Naujas puslapis arba priedas"
 
 msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
 msgstr ""
-"Jūs galite įkelti failą į naują puslapį arba pasirikti įkelti failą kaip "
-"priedą dabartiniam puslapiui"
 
-msgid "New Attachment"
-msgstr "Naujas priedas"
+msgid "File to load page content from"
+msgstr ""
 
-msgid "attachment"
-msgstr "priedas"
+msgid "Comment"
+msgstr "Komentaras"
 
-msgid "Overwrite existing attachment of same name"
-msgstr "Perrašyti egzistuojantį priedą tuo pačiu vardu"
-
-msgid "Upload"
-msgstr "Įkelti"
-
-msgid "New Name"
-msgstr "Naujas vardas"
+#, fuzzy
+msgid "Page Name"
+msgstr "Paketo pavadinimas"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Jums neleidžiama užsiprenumeruoti puslapyje, kurio negalite skaityti."
@@ -2466,9 +2453,6 @@ msgstr "Pakeitimai"
 
 msgid "Editor"
 msgstr "Redaktorius"
-
-msgid "Comment"
-msgstr "Komentaras"
 
 msgid "view"
 msgstr "peržiūrėti"
@@ -2750,10 +2734,6 @@ msgid ""
 msgstr ""
 "Yra <a href=\"%(link)s\">%(count)s priedų</a> patalpintų šiame puslapyje."
 
-#, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "Priedas '%(target)s' jau egzistuoja."
-
 msgid "Filename of attachment not specified!"
 msgstr "Nenurodytas failo priedo vardas!"
 
@@ -2789,11 +2769,20 @@ msgstr "Nėra priedų puslapiui %(pagename)s"
 msgid "Edit drawing"
 msgstr "Redaguoti priešinį"
 
+msgid "New Attachment"
+msgstr "Naujas priedas"
+
 msgid "File to upload"
 msgstr "Failas įkėlimui"
 
 msgid "Rename to"
 msgstr "Pervadinti į"
+
+msgid "Overwrite existing attachment of same name"
+msgstr "Perrašyti egzistuojantį priedą tuo pačiu vardu"
+
+msgid "Upload"
+msgstr "Įkelti"
 
 msgid "Attached Files"
 msgstr "Pridėti failai"
@@ -2809,6 +2798,10 @@ msgstr "Nepalaikomas AttachFile sub-veiksmas: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Priedai \"%(pagename)s\""
 
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Jums neleidžiama peržiūrėti priedų šiame puslapyje."
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
@@ -2816,8 +2809,19 @@ msgstr ""
 "Nėra naujo turinio. Pašaliknite ne ASCII simbolius iš failo vardo ir "
 "bandykite dar kartą."
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"Priedas '%(target)s' (nuotolinis pavadinimas '%(filename)s') užimantis %"
+"(bytes)d baitų išsaugotas."
+
 msgid "You are not allowed to save a drawing on this page."
 msgstr "Jums neleidžiama išsaugoti piešinio šiame puslapyje."
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "Jums neleidžiama pašalinti priedo šiame puslapyje."
 
 #, fuzzy, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -2983,6 +2987,25 @@ msgstr "Jums neleidžiama vykdyti %(action_name)s šiame puslapyje."
 
 msgid "Login and try again."
 msgstr "Prisijunkite ir bandykite dar kartą."
+
+#~ msgid "New Page or New Attachment"
+#~ msgstr "Naujas puslapis arba priedas"
+
+#~ msgid ""
+#~ "You can upload a file to a new page or choose to upload a file as "
+#~ "attachment for the current page"
+#~ msgstr ""
+#~ "Jūs galite įkelti failą į naują puslapį arba pasirikti įkelti failą kaip "
+#~ "priedą dabartiniam puslapiui"
+
+#~ msgid "attachment"
+#~ msgstr "priedas"
+
+#~ msgid "New Name"
+#~ msgstr "Naujas vardas"
+
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "Priedas '%(target)s' jau egzistuoja."
 
 #~ msgid ""
 #~ "An upload will never overwrite an existing file. If there is a name\n"

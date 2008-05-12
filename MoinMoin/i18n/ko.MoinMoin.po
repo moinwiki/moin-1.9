@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2008-03-12 15:01+0900\n"
 "Last-Translator: Seungik Lee <seungiklee@gmail.com>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
@@ -2302,41 +2302,28 @@ msgstr "비교할 때 공백은 무시"
 msgid "Load"
 msgstr "로드"
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "이 문서의 첨부 파일을 지울 수 있는 권한이 없습니다."
+#, fuzzy
+msgid "Pagename not specified!"
+msgstr "첨부 파일 이름이 지정되지 않았습니다!"
 
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
+msgid "Upload page content"
 msgstr ""
-"첨부 파일 '%(target)s' (하드디스크에서의 이름 '%(filename)s', 크기 %(bytes)d "
-"바이트) 가(이) 저장되었습니다."
-
-msgid "New Page or New Attachment"
-msgstr "새 문서 및 첨부 파일"
 
 msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
-msgstr ""
-"새로운 문서에 파일을 업로드하거나 현재 문서에 첨부할 파일을업로드할 수 있습니"
-"다."
-
-msgid "New Attachment"
-msgstr "새 첨부"
-
-msgid "attachment"
-msgstr "첨부"
-
-msgid "Overwrite existing attachment of same name"
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
 msgstr ""
 
-msgid "Upload"
-msgstr "업로드"
+msgid "File to load page content from"
+msgstr ""
 
-msgid "New Name"
-msgstr "새 이름"
+msgid "Comment"
+msgstr "설명"
+
+#, fuzzy
+msgid "Page Name"
+msgstr "패키지 이름"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "문서의 변경 사항을 구독하기 위해서는 읽기 권한이 필요합니다."
@@ -2389,9 +2376,6 @@ msgstr "차이점 비교"
 
 msgid "Editor"
 msgstr "수정한 사람"
-
-msgid "Comment"
-msgstr "설명"
 
 msgid "view"
 msgstr "보기"
@@ -2659,10 +2643,6 @@ msgid ""
 "page."
 msgstr "이 문서에 <a href=\"%(link)s\">%(count)s개의 첨부 파일</a>이 있습니다."
 
-#, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "첨부 파일 '%(target)s'이(가) 이미 존재함."
-
 msgid "Filename of attachment not specified!"
 msgstr "첨부 파일 이름이 지정되지 않았습니다!"
 
@@ -2696,11 +2676,20 @@ msgstr "%(pagename)s 에는 첨부 파일이 없음."
 msgid "Edit drawing"
 msgstr "그림 수정"
 
+msgid "New Attachment"
+msgstr "새 첨부"
+
 msgid "File to upload"
 msgstr "업로드할 파일"
 
 msgid "Rename to"
 msgstr "새 이름:"
+
+msgid "Overwrite existing attachment of same name"
+msgstr ""
+
+msgid "Upload"
+msgstr "업로드"
 
 msgid "Attached Files"
 msgstr "첨부 파일"
@@ -2716,6 +2705,10 @@ msgstr "지원되지 않는 업로드 액션: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "\"%(pagename)s\"의 첨부파일들"
 
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "이 문서에 첨부된 파일을 볼 수 있는 권한이 없습니다."
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
@@ -2723,8 +2716,19 @@ msgstr ""
 "파일 내용이 전송되지 않았습니다. ASCII 문자만으로 이루어진 파일 이름을 사용해"
 "보세요."
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"첨부 파일 '%(target)s' (하드디스크에서의 이름 '%(filename)s', 크기 %(bytes)d "
+"바이트) 가(이) 저장되었습니다."
+
 msgid "You are not allowed to save a drawing on this page."
 msgstr "이 문서에 그림을 저장할 수 있는 권한이 없습니다."
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "이 문서의 첨부 파일을 지울 수 있는 권한이 없습니다."
 
 #, fuzzy, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -2893,6 +2897,25 @@ msgstr "이 문서에 %(action_name)s 작업을 수행할 수 있는 권한이 �
 
 msgid "Login and try again."
 msgstr "로그인 후 다시 시도하세요."
+
+#~ msgid "New Page or New Attachment"
+#~ msgstr "새 문서 및 첨부 파일"
+
+#~ msgid ""
+#~ "You can upload a file to a new page or choose to upload a file as "
+#~ "attachment for the current page"
+#~ msgstr ""
+#~ "새로운 문서에 파일을 업로드하거나 현재 문서에 첨부할 파일을업로드할 수 있"
+#~ "습니다."
+
+#~ msgid "attachment"
+#~ msgstr "첨부"
+
+#~ msgid "New Name"
+#~ msgstr "새 이름"
+
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "첨부 파일 '%(target)s'이(가) 이미 존재함."
 
 #~ msgid ""
 #~ "An upload will never overwrite an existing file. If there is a name\n"

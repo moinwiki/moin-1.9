@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2006-06-15 15:55+0200\n"
 "Last-Translator: jmarton@omikk.bme.hu, arostas@omikk.bme.hu\n"
 "Language-Team: Hungarian <HU@li.org>\n"
@@ -2342,42 +2342,28 @@ msgstr "A szóközmennyiség változásának figyelmen kívül hagyása"
 msgid "Load"
 msgstr "Feltöltés"
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "A mellékletek törlése nem engedélyezett ezen a lapon."
-
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
-msgstr ""
-"A(z) '%(target)s' (a távoli neve '%(filename)s') melléklet elmentve, hossza %"
-"(bytes)d byte"
-
 #, fuzzy
-msgid "New Page or New Attachment"
-msgstr "Új melléklet"
+msgid "Pagename not specified!"
+msgstr "A melléklet nevét nem adta meg!"
+
+msgid "Upload page content"
+msgstr ""
 
 msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
 msgstr ""
 
-msgid "New Attachment"
-msgstr "Új melléklet"
-
-#, fuzzy
-msgid "attachment"
-msgstr "Mellékletek (fájlok)"
-
-msgid "Overwrite existing attachment of same name"
+msgid "File to load page content from"
 msgstr ""
 
-msgid "Upload"
-msgstr "Feltöltés"
+msgid "Comment"
+msgstr "Megjegyzés"
 
 #, fuzzy
-msgid "New Name"
-msgstr "Új név"
+msgid "Page Name"
+msgstr "Csomag neve"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Nem fizethet elő olyan lapra, amelyet nem olvashat."
@@ -2435,9 +2421,6 @@ msgstr "Különbségek"
 
 msgid "Editor"
 msgstr "Szerkesztő"
-
-msgid "Comment"
-msgstr "Megjegyzés"
 
 msgid "view"
 msgstr "nézet"
@@ -2713,10 +2696,6 @@ msgid ""
 "page."
 msgstr "Ehhez a laphoz <a href=\"%(link)s\">%(count)s melléklet</a> tartozik."
 
-#, fuzzy, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "A(z) '%(filename)s' melléklet telepítve."
-
 msgid "Filename of attachment not specified!"
 msgstr "A melléklet nevét nem adta meg!"
 
@@ -2752,11 +2731,20 @@ msgstr "A(z) %(pagename)s laphoz nem tartozik melléklet"
 msgid "Edit drawing"
 msgstr "Rajz szerkesztése"
 
+msgid "New Attachment"
+msgstr "Új melléklet"
+
 msgid "File to upload"
 msgstr "A föltöltendő állomány"
 
 msgid "Rename to"
 msgstr "Átnevezés"
+
+msgid "Overwrite existing attachment of same name"
+msgstr ""
+
+msgid "Upload"
+msgstr "Feltöltés"
 
 msgid "Attached Files"
 msgstr "Mellékletek"
@@ -2772,6 +2760,10 @@ msgstr "Nem támogatott föltöltési művelet: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "A(z) \"%(pagename)s\" lap mellékletei"
 
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "A mellékletek megtekintése nem engedélyezett ennél a lapnál."
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
@@ -2779,8 +2771,19 @@ msgstr ""
 "Hibás az állománynév. Kérjük törölje a nem-ASCII karaktereket az "
 "állománynévből, és próbálja újra."
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"A(z) '%(target)s' (a távoli neve '%(filename)s') melléklet elmentve, hossza %"
+"(bytes)d byte"
+
 msgid "You are not allowed to save a drawing on this page."
 msgstr "A rajz elmentése nem engedélyezett ezen a lapon."
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "A mellékletek törlése nem engedélyezett ezen a lapon."
 
 #, fuzzy, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -2952,6 +2955,22 @@ msgstr "Ezen a lapon nem használhatja a %(actionname)s műveletet!"
 
 msgid "Login and try again."
 msgstr "Lépjen be, majd próbálja újra."
+
+#, fuzzy
+#~ msgid "New Page or New Attachment"
+#~ msgstr "Új melléklet"
+
+#, fuzzy
+#~ msgid "attachment"
+#~ msgstr "Mellékletek (fájlok)"
+
+#, fuzzy
+#~ msgid "New Name"
+#~ msgstr "Új név"
+
+#, fuzzy
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "A(z) '%(filename)s' melléklet telepítve."
 
 #~ msgid ""
 #~ "An upload will never overwrite an existing file. If there is a name\n"

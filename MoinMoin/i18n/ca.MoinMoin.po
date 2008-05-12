@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2007-10-10 13:40+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -2294,38 +2294,27 @@ msgstr "Descarta els canvis en la quantitat d'espai en blanc"
 msgid "Load"
 msgstr "Carrega"
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "No teniu permís per a suprimir adjuncions en aquesta pàgina."
+#, fuzzy
+msgid "Pagename not specified!"
+msgstr "El nom del fitxer per a l'adjunció no s'ha especificat."
 
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
+msgid "Upload page content"
 msgstr ""
-"S'ha desat l'adjunció «%(target)s» (nom remot «%(filename)s») amb %(bytes)d "
-"octets."
-
-msgid "New Page or New Attachment"
-msgstr "Pàgina o adjunció nova"
 
 msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
 msgstr ""
 
-msgid "New Attachment"
-msgstr "Adjunció nova"
-
-msgid "attachment"
-msgstr "adjunció"
-
-msgid "Overwrite existing attachment of same name"
+msgid "File to load page content from"
 msgstr ""
 
-msgid "Upload"
-msgstr "Apuja"
+msgid "Comment"
+msgstr "Comentari"
 
-msgid "New Name"
+#, fuzzy
+msgid "Page Name"
 msgstr "Nom nou"
 
 msgid "You are not allowed to subscribe to a page you can't read."
@@ -2380,9 +2369,6 @@ msgstr "Diferències"
 
 msgid "Editor"
 msgstr "Editor"
-
-msgid "Comment"
-msgstr "Comentari"
 
 msgid "view"
 msgstr "visualitza"
@@ -2657,10 +2643,6 @@ msgstr ""
 "Hi ha <a href=\"%(link)s\">%(count)s adjuncions</a> emmagatzemats per a "
 "aquesta pàgina."
 
-#, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "L'adjunció «%(target)s» ja existeix."
-
 msgid "Filename of attachment not specified!"
 msgstr "El nom del fitxer per a l'adjunció no s'ha especificat."
 
@@ -2696,11 +2678,20 @@ msgstr "No hi ha cap adjunció emmagatzemada per a %(pagename)s"
 msgid "Edit drawing"
 msgstr "Edita el dibuix"
 
+msgid "New Attachment"
+msgstr "Adjunció nova"
+
 msgid "File to upload"
 msgstr "Fitxer per a apujar"
 
 msgid "Rename to"
 msgstr "Reanomena a"
+
+msgid "Overwrite existing attachment of same name"
+msgstr ""
+
+msgid "Upload"
+msgstr "Apuja"
 
 msgid "Attached Files"
 msgstr "Fitxers adjunts"
@@ -2716,6 +2707,10 @@ msgstr "Acció de pujada no implementada: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Adjuncions per a «%(pagename)s»"
 
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "No teniu permís per a visualitzar adjuncions d'aquesta pàgina."
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
@@ -2723,8 +2718,19 @@ msgstr ""
 "No hi ha contingut del fitxer. Suprimiu els caracters no ASCII del nom del "
 "fitxer i torneu-ho a provar."
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"S'ha desat l'adjunció «%(target)s» (nom remot «%(filename)s») amb %(bytes)d "
+"octets."
+
 msgid "You are not allowed to save a drawing on this page."
 msgstr "No teniu permís per a desar un dibuix en aquesta pàgina."
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "No teniu permís per a suprimir adjuncions en aquesta pàgina."
 
 #, fuzzy, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -2892,6 +2898,15 @@ msgstr "No teniu permís per a fer %(action_name)s en aquesta pàgina."
 
 msgid "Login and try again."
 msgstr "Entreu i torneu a provar."
+
+#~ msgid "New Page or New Attachment"
+#~ msgstr "Pàgina o adjunció nova"
+
+#~ msgid "attachment"
+#~ msgstr "adjunció"
+
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "L'adjunció «%(target)s» ja existeix."
 
 #~ msgid ""
 #~ "An upload will never overwrite an existing file. If there is a name\n"

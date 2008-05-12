@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2006-10-07 23:19+0700\n"
 "Last-Translator: Fajrin Azis <fajrin.azis@gmail.com>\n"
 "Language-Team: Indonesian <id@ll.com>\n"
@@ -2380,41 +2380,28 @@ msgstr "Abaikan perubahan hanya karena beda di spasi kosong"
 msgid "Load"
 msgstr "Load"
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "Anda tidak diizinkan menghapus lampiran pada halaman ini."
+#, fuzzy
+msgid "Pagename not specified!"
+msgstr "Nama berkas dari lampiran tidak ditetapkan!"
 
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
+msgid "Upload page content"
 msgstr ""
-"Lampiran '%(target)s' (nama jauh '%(filename)s') dengan %(bytes)d bita "
-"disimpan."
-
-msgid "New Page or New Attachment"
-msgstr "Halaman Baru atau Lampiran Baru"
 
 msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
 msgstr ""
-"Anda dapat meng-upload sebuah berkas ke halaman baru dengan memilih meng-"
-"upload file sebagai lampiranpada halaman yang sedang berjalan"
 
-msgid "New Attachment"
-msgstr "Lampiran Baru"
+msgid "File to load page content from"
+msgstr ""
 
-msgid "attachment"
-msgstr "lampiran"
+msgid "Comment"
+msgstr "Komentar"
 
-msgid "Overwrite existing attachment of same name"
-msgstr "Timpa lampiran yang sudah ada dengan nama yang sama"
-
-msgid "Upload"
-msgstr "Upload"
-
-msgid "New Name"
-msgstr "Nama Baru"
+#, fuzzy
+msgid "Page Name"
+msgstr "Nama paket"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Anda tidak diizinkan berlangganan ke halaman yang tak dapat Anda baca"
@@ -2466,9 +2453,6 @@ msgstr "Beda"
 
 msgid "Editor"
 msgstr "Editor"
-
-msgid "Comment"
-msgstr "Komentar"
 
 msgid "view"
 msgstr "tilik"
@@ -2752,10 +2736,6 @@ msgid ""
 msgstr ""
 "Ada <a href=\"%(link)s\">%(count)s lampiran</a> yang disimpan di halaman ini."
 
-#, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "Lampiran '%(target)s' sudah ada."
-
 msgid "Filename of attachment not specified!"
 msgstr "Nama berkas dari lampiran tidak ditetapkan!"
 
@@ -2791,11 +2771,20 @@ msgstr "Tak ada lampiran tersimpan di %(pagename)s"
 msgid "Edit drawing"
 msgstr "Sunting penggambaran"
 
+msgid "New Attachment"
+msgstr "Lampiran Baru"
+
 msgid "File to upload"
 msgstr "Berkas untuk di-upload"
 
 msgid "Rename to"
 msgstr "Ganti nama ke"
+
+msgid "Overwrite existing attachment of same name"
+msgstr "Timpa lampiran yang sudah ada dengan nama yang sama"
+
+msgid "Upload"
+msgstr "Upload"
 
 msgid "Attached Files"
 msgstr "Lampirkan Berkas"
@@ -2811,6 +2800,10 @@ msgstr "Sub-aksi TaruhBerkas yang tidak di-support: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Lampiran untuk \"%(pagename)s\""
 
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Anda tidak diizinkan menilik lampiran dari halaman ini."
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
@@ -2818,8 +2811,19 @@ msgstr ""
 "Tak ada isi berkas. Hapus karakter bukan ASCII dari nama berkas dan coba "
 "lagi."
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"Lampiran '%(target)s' (nama jauh '%(filename)s') dengan %(bytes)d bita "
+"disimpan."
+
 msgid "You are not allowed to save a drawing on this page."
 msgstr "Anda tidak diizinkan menyimpan penggambaran pada halaman ini"
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "Anda tidak diizinkan menghapus lampiran pada halaman ini."
 
 #, fuzzy, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -2987,6 +2991,25 @@ msgstr ""
 
 msgid "Login and try again."
 msgstr "Login dan coba lagi."
+
+#~ msgid "New Page or New Attachment"
+#~ msgstr "Halaman Baru atau Lampiran Baru"
+
+#~ msgid ""
+#~ "You can upload a file to a new page or choose to upload a file as "
+#~ "attachment for the current page"
+#~ msgstr ""
+#~ "Anda dapat meng-upload sebuah berkas ke halaman baru dengan memilih meng-"
+#~ "upload file sebagai lampiranpada halaman yang sedang berjalan"
+
+#~ msgid "attachment"
+#~ msgstr "lampiran"
+
+#~ msgid "New Name"
+#~ msgstr "Nama Baru"
+
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "Lampiran '%(target)s' sudah ada."
 
 #~ msgid ""
 #~ "An upload will never overwrite an existing file. If there is a name\n"

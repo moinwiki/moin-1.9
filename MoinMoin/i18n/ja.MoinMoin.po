@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2008-05-12 21:00+0900\n"
 "Last-Translator: MiyagawaHiroyuki\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
@@ -2378,39 +2378,28 @@ msgstr "空白文字数の違いを無視"
 msgid "Load"
 msgstr "ロード"
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "このページの添付ファイルを削除する権限がありません。"
+#, fuzzy
+msgid "Pagename not specified!"
+msgstr " 添付ファイル名が指定されていません。"
 
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
+msgid "Upload page content"
 msgstr ""
-"添付ファイル'%(target)s'(サーバでのファイル名'%(filename)s'、%(bytes)d)を保存"
-"しました。"
-
-msgid "New Page or New Attachment"
-msgstr "新しいページまたは添付ファイル"
 
 msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
-msgstr "ファイルの添付は、新しいページにも現在のページにも行えます。"
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
+msgstr ""
 
-msgid "New Attachment"
-msgstr "ファイルの新規添付"
+msgid "File to load page content from"
+msgstr ""
 
-msgid "attachment"
-msgstr "添付ファイル"
+msgid "Comment"
+msgstr "コメント"
 
-msgid "Overwrite existing attachment of same name"
-msgstr "同じ名前の添付ファイルを上書き"
-
-msgid "Upload"
-msgstr "アップロード"
-
-msgid "New Name"
-msgstr "新しい名前"
+#, fuzzy
+msgid "Page Name"
+msgstr "パッケージ名"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "読む権限がないページを購読することはできません。"
@@ -2463,9 +2452,6 @@ msgstr "差分"
 
 msgid "Editor"
 msgstr "編集者"
-
-msgid "Comment"
-msgstr "コメント"
 
 msgid "view"
 msgstr "表示"
@@ -2749,10 +2735,6 @@ msgid ""
 msgstr ""
 "このページには<a href=\"%(link)s\">%(count)s個の添付ファイル</a>があります。"
 
-#, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "添付ファイル'%(target)s'はすでに存在します。"
-
 msgid "Filename of attachment not specified!"
 msgstr " 添付ファイル名が指定されていません。"
 
@@ -2786,11 +2768,20 @@ msgstr "%(pagename)sに添付ファイルはありません。"
 msgid "Edit drawing"
 msgstr "drawingを編集"
 
+msgid "New Attachment"
+msgstr "ファイルの新規添付"
+
 msgid "File to upload"
 msgstr "アップロードするファイル"
 
 msgid "Rename to"
 msgstr "名前の変更"
+
+msgid "Overwrite existing attachment of same name"
+msgstr "同じ名前の添付ファイルを上書き"
+
+msgid "Upload"
+msgstr "アップロード"
 
 msgid "Attached Files"
 msgstr "添付ファイル"
@@ -2806,6 +2797,10 @@ msgstr "サポートされていないファイル添付アクション: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "\"%(pagename)s の添付ファイル\""
 
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "このページの添付ファイルを見る権限がありません。"
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
@@ -2813,8 +2808,19 @@ msgstr ""
 "ファイルの中身がありません。ファイル名からASCII以外の文字を削除して、もう一度"
 "試してください。"
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"添付ファイル'%(target)s'(サーバでのファイル名'%(filename)s'、%(bytes)d)を保存"
+"しました。"
+
 msgid "You are not allowed to save a drawing on this page."
 msgstr "このページにdrawingを保存する権限がありません。"
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "このページの添付ファイルを削除する権限がありません。"
 
 #, fuzzy, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -2980,6 +2986,23 @@ msgstr "このページでアクション %(action_name)s を使用する権限�
 
 msgid "Login and try again."
 msgstr "ログインして、もう一度試してみてください。"
+
+#~ msgid "New Page or New Attachment"
+#~ msgstr "新しいページまたは添付ファイル"
+
+#~ msgid ""
+#~ "You can upload a file to a new page or choose to upload a file as "
+#~ "attachment for the current page"
+#~ msgstr "ファイルの添付は、新しいページにも現在のページにも行えます。"
+
+#~ msgid "attachment"
+#~ msgstr "添付ファイル"
+
+#~ msgid "New Name"
+#~ msgstr "新しい名前"
+
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "添付ファイル'%(target)s'はすでに存在します。"
 
 #~ msgid ""
 #~ "An upload will never overwrite an existing file. If there is a name\n"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mk.moinmoin1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2008-03-30 16:24+0200\n"
 "Last-Translator: Novica Nakov\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
@@ -2394,40 +2394,28 @@ msgstr "Игнорирај промени во количината на пра�
 msgid "Load"
 msgstr "Вчитај"
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "Не Ви е дозволено да бришете прилози од оваа страница."
+#, fuzzy
+msgid "Pagename not specified!"
+msgstr "Името на датотеката со прилогот мора да биде наведено!"
 
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
+msgid "Upload page content"
 msgstr ""
-"Прилогот '%(target)s' е снимен под името '%(filename)s', со %(bytes)d бајти."
-
-msgid "New Page or New Attachment"
-msgstr "Нова страница или прилог"
 
 msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
 msgstr ""
-"Датотеката можете да ја додадете на нова страница или како прилог на оваа "
-"страница."
 
-msgid "New Attachment"
-msgstr "Нов прилог"
+msgid "File to load page content from"
+msgstr ""
 
-msgid "attachment"
-msgstr "прилог"
+msgid "Comment"
+msgstr "Коментар"
 
-msgid "Overwrite existing attachment of same name"
-msgstr "Пребриши го постоечкиот прилог со исто име"
-
-msgid "Upload"
-msgstr "Товари на сервер"
-
-msgid "New Name"
-msgstr "Ново име"
+#, fuzzy
+msgid "Page Name"
+msgstr "Име на пакетот"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Не можете да се претплатите на страница која не смее да ја читате."
@@ -2478,9 +2466,6 @@ msgstr "Разлики"
 
 msgid "Editor"
 msgstr "Уредник"
-
-msgid "Comment"
-msgstr "Коментар"
 
 msgid "view"
 msgstr "прикажи"
@@ -2767,10 +2752,6 @@ msgid ""
 "page."
 msgstr "Оваа страница има <a href=\"%(link)s\">%(count)s прилози</a>."
 
-#, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "Прилогот '%(target)s' веќе постои."
-
 msgid "Filename of attachment not specified!"
 msgstr "Името на датотеката со прилогот мора да биде наведено!"
 
@@ -2806,11 +2787,20 @@ msgstr "Страницата %(pagename)s нема прилози"
 msgid "Edit drawing"
 msgstr "Уреди го цртежот"
 
+msgid "New Attachment"
+msgstr "Нов прилог"
+
 msgid "File to upload"
 msgstr "Име на датотеката која ја товарате:"
 
 msgid "Rename to"
 msgstr "Преименувај во:"
+
+msgid "Overwrite existing attachment of same name"
+msgstr "Пребриши го постоечкиот прилог со исто име"
+
+msgid "Upload"
+msgstr "Товари на сервер"
 
 msgid "Attached Files"
 msgstr "Приложени датотеки"
@@ -2826,6 +2816,10 @@ msgstr "Неподдржана операција при товарањето н
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Прилози на страницата \"%(pagename)s\""
 
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Не Ви е дозволено да ги гледате прилозите на оваа страница."
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
@@ -2833,8 +2827,18 @@ msgstr ""
 "Празна содржина. Избришете ги не-ASCII знаците од името на датотеката и "
 "обидете се повторно."
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"Прилогот '%(target)s' е снимен под името '%(filename)s', со %(bytes)d бајти."
+
 msgid "You are not allowed to save a drawing on this page."
 msgstr "Не Ви е дозволено да снимате цртежи на оваа страница."
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "Не Ви е дозволено да бришете прилози од оваа страница."
 
 #, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -3005,6 +3009,25 @@ msgstr "На оваа страница не смеете да користите
 
 msgid "Login and try again."
 msgstr "Пријавете се и обидете се повторно."
+
+#~ msgid "New Page or New Attachment"
+#~ msgstr "Нова страница или прилог"
+
+#~ msgid ""
+#~ "You can upload a file to a new page or choose to upload a file as "
+#~ "attachment for the current page"
+#~ msgstr ""
+#~ "Датотеката можете да ја додадете на нова страница или како прилог на оваа "
+#~ "страница."
+
+#~ msgid "attachment"
+#~ msgstr "прилог"
+
+#~ msgid "New Name"
+#~ msgstr "Ново име"
+
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "Прилогот '%(target)s' веќе постои."
 
 #~ msgid ""
 #~ "An upload will never overwrite an existing file. If there is a name\n"

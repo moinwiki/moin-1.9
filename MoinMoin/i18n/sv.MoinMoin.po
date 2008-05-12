@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2008-04-25 13:30+0200\n"
 "Last-Translator: thomas@marquart.se\n"
 "Language-Team: Swedish <moin-user@lists.sourceforge.net>\n"
@@ -2342,38 +2342,28 @@ msgstr "Ignorera ändringar i mängden blanktecken"
 msgid "Load"
 msgstr "Ladda"
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "Du har inte tillåtelse att ta bort bilagor från den här sidan."
+#, fuzzy
+msgid "Pagename not specified!"
+msgstr "Filnamnet för bilagan ej angivet!"
 
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
-msgstr ""
-"Bilagan '%(target)s' (fjärrnamn '%(filename)s') med %(bytes)d byte sparade."
-
-msgid "New Page or New Attachment"
-msgstr "Ny sida eller ny bilaga"
-
-msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
+msgid "Upload page content"
 msgstr ""
 
-msgid "New Attachment"
-msgstr "Ny bilaga"
+msgid ""
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
+msgstr ""
 
-msgid "attachment"
-msgstr "bilaga"
+msgid "File to load page content from"
+msgstr ""
 
-msgid "Overwrite existing attachment of same name"
-msgstr "Skriv över existerande bilaga med samma namn"
+msgid "Comment"
+msgstr "Kommentar"
 
-msgid "Upload"
-msgstr "Ladda upp"
-
-msgid "New Name"
-msgstr "Nytt namn"
+#, fuzzy
+msgid "Page Name"
+msgstr "Paketnamn"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Du får inte prenumerera på en sida du inte kan läsa."
@@ -2424,9 +2414,6 @@ msgstr "Ändringar"
 
 msgid "Editor"
 msgstr "Editor"
-
-msgid "Comment"
-msgstr "Kommentar"
 
 msgid "view"
 msgstr "visa"
@@ -2694,10 +2681,6 @@ msgstr ""
 "Det finns <a href=\"%(link)s\">%(count)s bifogade filer(s)</a> lagrade på "
 "den här sidan."
 
-#, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "Bilagan '%(target)s' finns redan."
-
 msgid "Filename of attachment not specified!"
 msgstr "Filnamnet för bilagan ej angivet!"
 
@@ -2733,11 +2716,20 @@ msgstr "Inga bifogade filer på %(pagename)s"
 msgid "Edit drawing"
 msgstr "Redigera teckning"
 
+msgid "New Attachment"
+msgstr "Ny bilaga"
+
 msgid "File to upload"
 msgstr "Fil att ladda upp"
 
 msgid "Rename to"
 msgstr "Byt namn till"
+
+msgid "Overwrite existing attachment of same name"
+msgstr "Skriv över existerande bilaga med samma namn"
+
+msgid "Upload"
+msgstr "Ladda upp"
 
 msgid "Attached Files"
 msgstr "Bifogade filer"
@@ -2753,14 +2745,28 @@ msgstr "Ogiltig sub-åtgärd för AttachFile: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Bilagor till \"%(pagename)s\""
 
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Du har inte tillåtelse att visa bilagor på den här sidan."
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
 msgstr ""
 "Inget filinnehåll. Ta bort icke-ASCII-tecken från filnamnet och försök igen."
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"Bilagan '%(target)s' (fjärrnamn '%(filename)s') med %(bytes)d byte sparade."
+
 msgid "You are not allowed to save a drawing on this page."
 msgstr "Du har inte tillåtelse att spara en teckning på den här sidan."
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "Du har inte tillåtelse att ta bort bilagor från den här sidan."
 
 #, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -2928,6 +2934,18 @@ msgstr "Du får inte göra %(action_name)s på den här sidan."
 
 msgid "Login and try again."
 msgstr "Logga in och försök igen."
+
+#~ msgid "New Page or New Attachment"
+#~ msgstr "Ny sida eller ny bilaga"
+
+#~ msgid "attachment"
+#~ msgstr "bilaga"
+
+#~ msgid "New Name"
+#~ msgstr "Nytt namn"
+
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "Bilagan '%(target)s' finns redan."
 
 #~ msgid ""
 #~ "An upload will never overwrite an existing file. If there is a name\n"

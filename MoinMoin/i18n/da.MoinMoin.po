@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2007-04-22 18:50+0100\n"
 "Last-Translator: Jonas Smedegaard <dr@jones.dk>\n"
 "Language-Team: Danish <moin-devel@lists.sourceforge.net>\n"
@@ -2379,42 +2379,28 @@ msgstr "Ignorér forskelle i antal mellemrum"
 msgid "Load"
 msgstr "Overfør"
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "Du har ikke lov til at slette vedhæftninger på denne side."
-
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
-msgstr ""
-"Vedhæftning '%(target)s' (eksternt navn '%(filename)s') på %(bytes)d bytes "
-"gemt."
-
 #, fuzzy
-msgid "New Page or New Attachment"
-msgstr "Ny vedhæftning"
+msgid "Pagename not specified!"
+msgstr "Filnavn for vedhæftning ikke angivet!"
 
-msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
+msgid "Upload page content"
 msgstr ""
 
-msgid "New Attachment"
-msgstr "Ny vedhæftning"
+msgid ""
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
+msgstr ""
+
+msgid "File to load page content from"
+msgstr ""
+
+msgid "Comment"
+msgstr "Kommentar"
 
 #, fuzzy
-msgid "attachment"
-msgstr "Vedhæftninger"
-
-msgid "Overwrite existing attachment of same name"
-msgstr "Overskriv eksisterende vedhæftning af samme navn"
-
-msgid "Upload"
-msgstr "Overfør"
-
-#, fuzzy
-msgid "New Name"
-msgstr "Nyt navn"
+msgid "Page Name"
+msgstr "Pakkenavn"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Du har ikke lov til at abonnere på en side du ikke kan læse!"
@@ -2466,9 +2452,6 @@ msgstr "Find forskelle"
 
 msgid "Editor"
 msgstr "Forfatter"
-
-msgid "Comment"
-msgstr "Kommentar"
 
 msgid "view"
 msgstr "vis"
@@ -2748,10 +2731,6 @@ msgstr ""
 "Der er <a href=\"%(link)s\">%(count)s vedhæftning(er)</a> gemt for denne "
 "side."
 
-#, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "Vedhæftning '%(target)s' eksisterer allerede."
-
 msgid "Filename of attachment not specified!"
 msgstr "Filnavn for vedhæftning ikke angivet!"
 
@@ -2786,11 +2765,20 @@ msgstr "Ingen vedhæftninger tilknyttet %(pagename)s"
 msgid "Edit drawing"
 msgstr "Redigér tegning"
 
+msgid "New Attachment"
+msgstr "Ny vedhæftning"
+
 msgid "File to upload"
 msgstr "Fil at overføre"
 
 msgid "Rename to"
 msgstr "Omdøb til"
+
+msgid "Overwrite existing attachment of same name"
+msgstr "Overskriv eksisterende vedhæftning af samme navn"
+
+msgid "Upload"
+msgstr "Overfør"
 
 msgid "Attached Files"
 msgstr "Vedhæftede filer"
@@ -2806,6 +2794,10 @@ msgstr "Overførselsrutine ikke understøttet: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Vedhæftninger til \"%(pagename)s\""
 
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Du har ikke lov til at se vedhæftninger til denne side."
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
@@ -2813,8 +2805,19 @@ msgstr ""
 "Intet indhold i fil. Slet ikke-ASCII tegn (specielle bogstaver og tegn) fra "
 "filnavnet og prøv igen."
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"Vedhæftning '%(target)s' (eksternt navn '%(filename)s') på %(bytes)d bytes "
+"gemt."
+
 msgid "You are not allowed to save a drawing on this page."
 msgstr "Du har ikke lov til at gemme en tegning på denne side!"
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "Du har ikke lov til at slette vedhæftninger på denne side."
 
 #, fuzzy, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -2982,6 +2985,21 @@ msgstr "Du har ikke lov til at anvende %(action_name)s på denne side!"
 
 msgid "Login and try again."
 msgstr "Log på og prøv igen."
+
+#, fuzzy
+#~ msgid "New Page or New Attachment"
+#~ msgstr "Ny vedhæftning"
+
+#, fuzzy
+#~ msgid "attachment"
+#~ msgstr "Vedhæftninger"
+
+#, fuzzy
+#~ msgid "New Name"
+#~ msgstr "Nyt navn"
+
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "Vedhæftning '%(target)s' eksisterer allerede."
 
 #~ msgid ""
 #~ "An upload will never overwrite an existing file. If there is a name\n"
