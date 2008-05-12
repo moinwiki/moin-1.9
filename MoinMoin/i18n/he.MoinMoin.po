@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2007-12-05 11:49+0200\n"
 "Last-Translator: Dor Fire <dorfire@gmail.com>\n"
 "Language-Team: Hebrew <moin-devel@lists.sourceforge.net>\n"
@@ -2311,40 +2311,28 @@ msgstr "התעלם משינויים בכמות הרווחים"
 msgid "Load"
 msgstr "טען"
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "אין לכם הרשאות למחוק קבצים מצורפים לדף."
+#, fuzzy
+msgid "Pagename not specified!"
+msgstr "לא בחרתם שם לקובץ מצורף."
 
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
+msgid "Upload page content"
 msgstr ""
-"קובץ מצורף \"%(target)s\" (שם מרוחק \"%(filename)s\") בגודל %(bytes)d בתים "
-"נשמר."
-
-msgid "New Page or New Attachment"
-msgstr "דף חדש או קובץ מצורף חדש"
 
 msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
 msgstr ""
-"באפשרותך להעלות קובץ לדף חדש או לבחור להעלות קובץ כקובץ מצורך לדף הנוכחי"
 
-msgid "New Attachment"
-msgstr "קובץ מצורף חדש"
+msgid "File to load page content from"
+msgstr ""
 
-msgid "attachment"
-msgstr "קובץ מצורף"
+msgid "Comment"
+msgstr "הערה"
 
-msgid "Overwrite existing attachment of same name"
-msgstr "לדרוס קובץ מצורף קיים בעל אותו שם"
-
-msgid "Upload"
-msgstr "שלח"
-
-msgid "New Name"
-msgstr "שם חדש"
+#, fuzzy
+msgid "Page Name"
+msgstr "שם חבילה"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "אין לכם הרשאות לעשות מנוי לדף."
@@ -2395,9 +2383,6 @@ msgstr "הבדלים"
 
 msgid "Editor"
 msgstr "עורך"
-
-msgid "Comment"
-msgstr "הערה"
 
 msgid "view"
 msgstr "הצג"
@@ -2669,10 +2654,6 @@ msgid ""
 "page."
 msgstr "<a href=\"%(link)s\">%(count)s קבצים מצורפים</a> לדף"
 
-#, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "קובץ מצורף '%(target)s' כבר קיים."
-
 msgid "Filename of attachment not specified!"
 msgstr "לא בחרתם שם לקובץ מצורף."
 
@@ -2707,11 +2688,20 @@ msgstr "אין קבצים מצורפים ל–%(pagename)s"
 msgid "Edit drawing"
 msgstr "ערוך איור"
 
+msgid "New Attachment"
+msgstr "קובץ מצורף חדש"
+
 msgid "File to upload"
 msgstr "קובץ לשליחה"
 
 msgid "Rename to"
 msgstr "שנה שם"
+
+msgid "Overwrite existing attachment of same name"
+msgstr "לדרוס קובץ מצורף קיים בעל אותו שם"
+
+msgid "Upload"
+msgstr "שלח"
 
 msgid "Attached Files"
 msgstr "קבצים מצורפים"
@@ -2727,13 +2717,28 @@ msgstr "תת פעולה של צירוף קובץ לא נתמכת: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "קבצים מצורפים ל–\"%(pagename)s\""
 
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "אין לכם הרשאות לצפות בקבצים מצורפים בדף"
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
 msgstr "קובץ חסר. נסה למחוק תווים שהם לא תווי אסקי מתוך שם הקובץ."
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"קובץ מצורף \"%(target)s\" (שם מרוחק \"%(filename)s\") בגודל %(bytes)d בתים "
+"נשמר."
+
 msgid "You are not allowed to save a drawing on this page."
 msgstr "אין לכם הרשאות לשמור איור בדף."
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "אין לכם הרשאות למחוק קבצים מצורפים לדף."
 
 #, fuzzy, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -2898,6 +2903,24 @@ msgstr "אינך מורשה לבצע %(action_name)s בדף זה."
 
 msgid "Login and try again."
 msgstr "התחבר ונסה שוב."
+
+#~ msgid "New Page or New Attachment"
+#~ msgstr "דף חדש או קובץ מצורף חדש"
+
+#~ msgid ""
+#~ "You can upload a file to a new page or choose to upload a file as "
+#~ "attachment for the current page"
+#~ msgstr ""
+#~ "באפשרותך להעלות קובץ לדף חדש או לבחור להעלות קובץ כקובץ מצורך לדף הנוכחי"
+
+#~ msgid "attachment"
+#~ msgstr "קובץ מצורף"
+
+#~ msgid "New Name"
+#~ msgstr "שם חדש"
+
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "קובץ מצורף '%(target)s' כבר קיים."
 
 #~ msgid ""
 #~ "An upload will never overwrite an existing file. If there is a name\n"

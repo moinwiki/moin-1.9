@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2007-11-05 22:11+0100\n"
 "Last-Translator: Václav Haisman <v.haisman@sh.cvut.cz>\n"
 "Language-Team: Czech <moin@lists.sourceforge.net>\n"
@@ -2354,41 +2354,28 @@ msgstr "Ignorovat změny v počtu mezer (bílých míst)"
 msgid "Load"
 msgstr "Nahrát"
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "Nemáte dostatečná práva ke smazání přílohy u této stránky!"
+#, fuzzy
+msgid "Pagename not specified!"
+msgstr "Není zadáno jméno přílohy!"
 
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
+msgid "Upload page content"
 msgstr ""
-"Příloha '%(target)s' (vzdálené jméno '%(filename)s') s %(bytes)d byty "
-"uložena."
-
-msgid "New Page or New Attachment"
-msgstr "Nová Stránka nebo Nová Příloha"
 
 msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
 msgstr ""
-"Můžete nahrát soubor k nové stránce nebo uložit soubor jako přílohu k této "
-"stránce"
 
-msgid "New Attachment"
-msgstr "Nová příloha"
+msgid "File to load page content from"
+msgstr ""
 
-msgid "attachment"
-msgstr "příloha"
+msgid "Comment"
+msgstr "Komentář"
 
-msgid "Overwrite existing attachment of same name"
-msgstr "Přepsat existující přílohy stejného názvu"
-
-msgid "Upload"
-msgstr "Upload"
-
-msgid "New Name"
-msgstr "Nový Název"
+#, fuzzy
+msgid "Page Name"
+msgstr "Název balíčku"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Nemůžete odebírat stránky, ke kterým nemáte právo čtení."
@@ -2441,9 +2428,6 @@ msgstr "Rozdíl"
 
 msgid "Editor"
 msgstr "Autor"
-
-msgid "Comment"
-msgstr "Komentář"
 
 msgid "view"
 msgstr "náhled"
@@ -2719,10 +2703,6 @@ msgid ""
 "page."
 msgstr "K této stránce je uloženo <a href=\"%(link)s\">%(count)s příloh</a>."
 
-#, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "Příloha '%(target)s' už existuje."
-
 msgid "Filename of attachment not specified!"
 msgstr "Není zadáno jméno přílohy!"
 
@@ -2757,11 +2737,20 @@ msgstr "Nebyly uloženy žádné přílohy ke stránce %(pagename)s."
 msgid "Edit drawing"
 msgstr "Editace kresby"
 
+msgid "New Attachment"
+msgstr "Nová příloha"
+
 msgid "File to upload"
 msgstr "Soubor k uploadu"
 
 msgid "Rename to"
 msgstr "Přejmenovat na"
+
+msgid "Overwrite existing attachment of same name"
+msgstr "Přepsat existující přílohy stejného názvu"
+
+msgid "Upload"
+msgstr "Upload"
 
 msgid "Attached Files"
 msgstr "Přiložené soubory"
@@ -2777,13 +2766,28 @@ msgstr "Nepodporovaná akce pro PřipojitSoubor: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Přílohy k  \"%(pagename)s\""
 
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Nemáte dostatečná práva k prohlížení příloh na této stránce."
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
 msgstr "Soubor bez obsahu. Smažte ne-ASCII znaky ze souboru a zkuste to znovu."
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"Příloha '%(target)s' (vzdálené jméno '%(filename)s') s %(bytes)d byty "
+"uložena."
+
 msgid "You are not allowed to save a drawing on this page."
 msgstr "Nemáte dostatečná práva k uložení obrázku k této stránce."
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "Nemáte dostatečná práva ke smazání přílohy u této stránky!"
 
 #, fuzzy, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -2948,6 +2952,25 @@ msgstr "Nemáte oprávnění spustit na této stránce akci %(action_name)s."
 
 msgid "Login and try again."
 msgstr "Přihlašte se a zkuste to znovu."
+
+#~ msgid "New Page or New Attachment"
+#~ msgstr "Nová Stránka nebo Nová Příloha"
+
+#~ msgid ""
+#~ "You can upload a file to a new page or choose to upload a file as "
+#~ "attachment for the current page"
+#~ msgstr ""
+#~ "Můžete nahrát soubor k nové stránce nebo uložit soubor jako přílohu k "
+#~ "této stránce"
+
+#~ msgid "attachment"
+#~ msgstr "příloha"
+
+#~ msgid "New Name"
+#~ msgstr "Nový Název"
+
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "Příloha '%(target)s' už existuje."
 
 #~ msgid ""
 #~ "An upload will never overwrite an existing file. If there is a name\n"

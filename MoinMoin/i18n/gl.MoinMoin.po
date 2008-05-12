@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2007-02-22 17:39-0300\n"
 "Last-Translator: Iván Méndez <imendez@udc.es>\n"
 "Language-Team: Galician <moin-devel@lists.sourceforge.net>\n"
@@ -2399,42 +2399,28 @@ msgstr "Ignorar cambios na cantidade de espazos en branco"
 msgid "Load"
 msgstr "Subir"
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "Non ten permiso para borrar anexos nesta páxina."
-
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
-msgstr ""
-"O anexo '%(target)s' (nome remoto '%(filename)s') con %(bytes)d bytes foi "
-"gardado."
-
 #, fuzzy
-msgid "New Page or New Attachment"
-msgstr "Novo anexo"
+msgid "Pagename not specified!"
+msgstr "Non especificou un nome para o arquivo anexo!"
+
+msgid "Upload page content"
+msgstr ""
 
 msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
 msgstr ""
 
-msgid "New Attachment"
-msgstr "Novo anexo"
-
-#, fuzzy
-msgid "attachment"
-msgstr "Anexos"
-
-msgid "Overwrite existing attachment of same name"
+msgid "File to load page content from"
 msgstr ""
 
-msgid "Upload"
-msgstr "Subir"
+msgid "Comment"
+msgstr "Comentario"
 
 #, fuzzy
-msgid "New Name"
-msgstr "Nome novo"
+msgid "Page Name"
+msgstr "Nome do paquete"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Non ten permiso para se subscribir a unha páxina que non pode ver."
@@ -2492,9 +2478,6 @@ msgstr "Diferenzas"
 
 msgid "Editor"
 msgstr "Editor"
-
-msgid "Comment"
-msgstr "Comentario"
 
 msgid "view"
 msgstr "ver"
@@ -2780,10 +2763,6 @@ msgstr ""
 "Existe(n) <a href=\"%(link)s\">%(count)s anexos(s)</a> gardados con esta "
 "páxina."
 
-#, fuzzy, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "O anexo '%(target)s' (nome remoto '%(filename)s') xa existe."
-
 msgid "Filename of attachment not specified!"
 msgstr "Non especificou un nome para o arquivo anexo!"
 
@@ -2819,11 +2798,20 @@ msgstr "Non se gardaron os anexos para %(pagename)s"
 msgid "Edit drawing"
 msgstr "Editar debuxo"
 
+msgid "New Attachment"
+msgstr "Novo anexo"
+
 msgid "File to upload"
 msgstr "Arquivo para subir"
 
 msgid "Rename to"
 msgstr "Renomear a"
+
+msgid "Overwrite existing attachment of same name"
+msgstr ""
+
+msgid "Upload"
+msgstr "Subir"
 
 msgid "Attached Files"
 msgstr "Arquivos anexos"
@@ -2839,6 +2827,10 @@ msgstr "A acción para subir arquivos ao servidor non está soportada: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Anexos para \"%(pagename)s\""
 
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Non ten permiso para ver anexos desta páxina."
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
@@ -2846,8 +2838,19 @@ msgstr ""
 "Arquivo sen contidos. Elimina os caracteres que non foren ASCII no nome de "
 "arquivo e intente novamente."
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"O anexo '%(target)s' (nome remoto '%(filename)s') con %(bytes)d bytes foi "
+"gardado."
+
 msgid "You are not allowed to save a drawing on this page."
 msgstr "Non ten permiso para gardar debuxos nesta páxina."
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "Non ten permiso para borrar anexos nesta páxina."
 
 #, fuzzy, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -3019,6 +3022,22 @@ msgstr "Non ten permiso para usar a acción %(actionname)s nesta páxina."
 
 msgid "Login and try again."
 msgstr "Comece a sesión e probe de novo."
+
+#, fuzzy
+#~ msgid "New Page or New Attachment"
+#~ msgstr "Novo anexo"
+
+#, fuzzy
+#~ msgid "attachment"
+#~ msgstr "Anexos"
+
+#, fuzzy
+#~ msgid "New Name"
+#~ msgstr "Nome novo"
+
+#, fuzzy
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "O anexo '%(target)s' (nome remoto '%(filename)s') xa existe."
 
 #~ msgid ""
 #~ "An upload will never overwrite an existing file. If there is a name\n"

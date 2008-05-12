@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2008-04-12 20:07+0200\n"
 "Last-Translator: Mohamed Yahya <yahya.mohamed@gmail.com>\n"
 "Language-Team: \n"
@@ -2207,40 +2207,27 @@ msgstr ""
 msgid "Load"
 msgstr "حمّل"
 
-msgid "You are not allowed to delete attachments on this page."
+msgid "Pagename not specified!"
 msgstr ""
 
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
+msgid "Upload page content"
 msgstr ""
-
-#, fuzzy
-msgid "New Page or New Attachment"
-msgstr "المرفقات"
 
 msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
-msgstr ""
-"بإمكانك تحميل ملف مع صفحة جديدة أو اختيار تحميل الملف كملحق للصفحة الحالية"
-
-msgid "New Attachment"
-msgstr "ملف مرفق جديد"
-
-#, fuzzy
-msgid "attachment"
-msgstr "المرفقات"
-
-msgid "Overwrite existing attachment of same name"
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
 msgstr ""
 
-msgid "Upload"
-msgstr "رفع"
+msgid "File to load page content from"
+msgstr ""
 
 #, fuzzy
-msgid "New Name"
+msgid "Comment"
+msgstr "تعليق"
+
+#, fuzzy
+msgid "Page Name"
 msgstr "صفحة جديدة\n"
 
 msgid "You are not allowed to subscribe to a page you can't read."
@@ -2292,10 +2279,6 @@ msgstr "فروقات"
 
 msgid "Editor"
 msgstr "المحرر"
-
-#, fuzzy
-msgid "Comment"
-msgstr "تعليق"
 
 msgid "view"
 msgstr ""
@@ -2567,10 +2550,6 @@ msgid ""
 "page."
 msgstr ""
 
-#, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr ""
-
 msgid "Filename of attachment not specified!"
 msgstr ""
 
@@ -2601,11 +2580,20 @@ msgstr ""
 msgid "Edit drawing"
 msgstr ""
 
+msgid "New Attachment"
+msgstr "ملف مرفق جديد"
+
 msgid "File to upload"
 msgstr ""
 
 msgid "Rename to"
 msgstr ""
+
+msgid "Overwrite existing attachment of same name"
+msgstr ""
+
+msgid "Upload"
+msgstr "رفع"
 
 msgid "Attached Files"
 msgstr "الملفات المرفقة"
@@ -2621,12 +2609,25 @@ msgstr "نفذ عملية %(actionname)s?"
 msgid "Attachments for \"%(pagename)s\""
 msgstr ""
 
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "لا يسمح لك بتحرير هذه الصفحة"
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
 msgstr ""
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+
 msgid "You are not allowed to save a drawing on this page."
+msgstr ""
+
+msgid "You are not allowed to delete attachments on this page."
 msgstr ""
 
 #, python-format
@@ -2787,6 +2788,24 @@ msgstr "لا يسمح لك باستخدام عملية %(actionname)s في هذ�
 
 msgid "Login and try again."
 msgstr "سجل الدخول و حاول مرة أخرى"
+
+#, fuzzy
+#~ msgid "New Page or New Attachment"
+#~ msgstr "المرفقات"
+
+#~ msgid ""
+#~ "You can upload a file to a new page or choose to upload a file as "
+#~ "attachment for the current page"
+#~ msgstr ""
+#~ "بإمكانك تحميل ملف مع صفحة جديدة أو اختيار تحميل الملف كملحق للصفحة الحالية"
+
+#, fuzzy
+#~ msgid "attachment"
+#~ msgstr "المرفقات"
+
+#, fuzzy
+#~ msgid "New Name"
+#~ msgstr "صفحة جديدة\n"
 
 #, fuzzy
 #~ msgid "overwrite"

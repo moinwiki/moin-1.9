@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2006-12-08 18:50+0000\n"
 "Last-Translator: Erdal Ronahi <erdal.ronahi@gmail.com>\n"
 "Language-Team: Kurdish <ku@li.org>\n"
@@ -2197,38 +2197,27 @@ msgstr ""
 msgid "Load"
 msgstr ""
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr ""
+#, fuzzy
+msgid "Pagename not specified!"
+msgstr "Ji bo pêvekê navê pelgehê nehate diyarkirin!"
 
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
-msgstr ""
-
-msgid "New Page or New Attachment"
+msgid "Upload page content"
 msgstr ""
 
 msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
 msgstr ""
 
-msgid "New Attachment"
+msgid "File to load page content from"
 msgstr ""
+
+msgid "Comment"
+msgstr "Şirove"
 
 #, fuzzy
-msgid "attachment"
-msgstr "[%d heb pêvek]"
-
-msgid "Overwrite existing attachment of same name"
-msgstr ""
-
-msgid "Upload"
-msgstr ""
-
-#, fuzzy
-msgid "New Name"
+msgid "Page Name"
 msgstr "Rûpela nu:\n"
 
 msgid "You are not allowed to subscribe to a page you can't read."
@@ -2280,9 +2269,6 @@ msgstr "Diff"
 
 msgid "Editor"
 msgstr "Edîtor"
-
-msgid "Comment"
-msgstr "Şirove"
 
 msgid "view"
 msgstr "dîtin"
@@ -2554,10 +2540,6 @@ msgid ""
 "page."
 msgstr ""
 
-#, fuzzy, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "Pêveka '%(filename)s' nayê dîtin!"
-
 msgid "Filename of attachment not specified!"
 msgstr "Ji bo pêvekê navê pelgehê nehate diyarkirin!"
 
@@ -2588,11 +2570,20 @@ msgstr ""
 msgid "Edit drawing"
 msgstr ""
 
+msgid "New Attachment"
+msgstr ""
+
 msgid "File to upload"
 msgstr "Pelgeha ku wê were şandin"
 
 msgid "Rename to"
 msgstr "Ji nû ve binavîne"
+
+msgid "Overwrite existing attachment of same name"
+msgstr ""
+
+msgid "Upload"
+msgstr ""
 
 msgid "Attached Files"
 msgstr ""
@@ -2608,12 +2599,26 @@ msgstr ""
 msgid "Attachments for \"%(pagename)s\""
 msgstr ""
 
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr ""
+"Ji bo ku tu karibî li ser rûpel karê %s bikî têra xwe destûra te tuneye."
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
 msgstr ""
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+
 msgid "You are not allowed to save a drawing on this page."
+msgstr ""
+
+msgid "You are not allowed to delete attachments on this page."
 msgstr ""
 
 #, fuzzy, python-format
@@ -2777,6 +2782,14 @@ msgstr ""
 #, fuzzy
 msgid "Login and try again."
 msgstr " %s û dîsa biceribîne."
+
+#, fuzzy
+#~ msgid "attachment"
+#~ msgstr "[%d heb pêvek]"
+
+#, fuzzy
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "Pêveka '%(filename)s' nayê dîtin!"
 
 #, fuzzy
 #~ msgid "SendMyPassword"

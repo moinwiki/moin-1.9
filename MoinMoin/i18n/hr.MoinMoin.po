@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2006-08-17 20:50+0100\n"
 "Last-Translator: Translation sponsored by Tenalt Ltd. (info@tenalt.com)\n"
 "Language-Team: \n"
@@ -2364,40 +2364,28 @@ msgstr "Ignosriraj razlike u broju prazina"
 msgid "Load"
 msgstr "Učitaj"
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "Nije Vam dozvoljeno odstraniti privitke s ove stranice."
+#, fuzzy
+msgid "Pagename not specified!"
+msgstr "Ime datoteke s privitkom mora biti navedeno!"
 
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
+msgid "Upload page content"
 msgstr ""
-"Privitak '%(target)s' je spremljen pod imenom '%(filename)s', %(bytes)d "
-"znakova."
-
-msgid "New Page or New Attachment"
-msgstr "Nova stranica ili privitak"
 
 msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
 msgstr ""
-"Datoteku možete dodati na novu stranicu ili kao privitak postojeće stranice"
 
-msgid "New Attachment"
-msgstr "Novi privitak"
+msgid "File to load page content from"
+msgstr ""
 
-msgid "attachment"
-msgstr "privitak"
+msgid "Comment"
+msgstr "Napomena"
 
-msgid "Overwrite existing attachment of same name"
-msgstr "Prebriši privitak istog imena"
-
-msgid "Upload"
-msgstr "Podigni na poslužitelj"
-
-msgid "New Name"
-msgstr "Novo ime"
+#, fuzzy
+msgid "Page Name"
+msgstr "Ime paketa"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Ne možete se pretplatiti za stranicu kojoj nemate pristupa."
@@ -2450,9 +2438,6 @@ msgstr "Razlike"
 
 msgid "Editor"
 msgstr "Izmijenio"
-
-msgid "Comment"
-msgstr "Napomena"
 
 msgid "view"
 msgstr "prikaži"
@@ -2729,10 +2714,6 @@ msgid ""
 "page."
 msgstr "Ova stranica ima <a href=\"%(link)s\">%(count)s privitaka</a>."
 
-#, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "Privitak '%(target)s' već postoji."
-
 msgid "Filename of attachment not specified!"
 msgstr "Ime datoteke s privitkom mora biti navedeno!"
 
@@ -2767,11 +2748,20 @@ msgstr "Stranica %(pagename)s nema privitaka."
 msgid "Edit drawing"
 msgstr "Izmijeni crtež"
 
+msgid "New Attachment"
+msgstr "Novi privitak"
+
 msgid "File to upload"
 msgstr "Ime datoteke koju podižete:"
 
 msgid "Rename to"
 msgstr "Preimenovati u:"
+
+msgid "Overwrite existing attachment of same name"
+msgstr "Prebriši privitak istog imena"
+
+msgid "Upload"
+msgstr "Podigni na poslužitelj"
 
 msgid "Attached Files"
 msgstr "Priključene datoteke"
@@ -2787,6 +2777,10 @@ msgstr "Nepodržana operacija pri podizanju privitka: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Privitci na stranici \"%(pagename)s\""
 
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Gledanje privitaka ove stranice Vam nije dozvoljeno."
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
@@ -2794,8 +2788,19 @@ msgstr ""
 "Prazan sadržaj. Odstranite ne-ASCII znakove iz imena datoteke in pokušajte "
 "ponovno."
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"Privitak '%(target)s' je spremljen pod imenom '%(filename)s', %(bytes)d "
+"znakova."
+
 msgid "You are not allowed to save a drawing on this page."
 msgstr "Na ovoj stranici nije dozvoljeno spremati crteže."
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "Nije Vam dozvoljeno odstraniti privitke s ove stranice."
 
 #, fuzzy, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -2963,6 +2968,25 @@ msgstr "Ne možete koristiti akciju %(action_name)s na ovoj stranici."
 
 msgid "Login and try again."
 msgstr "Prijavite se i pokušajte ponovno."
+
+#~ msgid "New Page or New Attachment"
+#~ msgstr "Nova stranica ili privitak"
+
+#~ msgid ""
+#~ "You can upload a file to a new page or choose to upload a file as "
+#~ "attachment for the current page"
+#~ msgstr ""
+#~ "Datoteku možete dodati na novu stranicu ili kao privitak postojeće "
+#~ "stranice"
+
+#~ msgid "attachment"
+#~ msgstr "privitak"
+
+#~ msgid "New Name"
+#~ msgstr "Novo ime"
+
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "Privitak '%(target)s' već postoji."
 
 #~ msgid ""
 #~ "An upload will never overwrite an existing file. If there is a name\n"

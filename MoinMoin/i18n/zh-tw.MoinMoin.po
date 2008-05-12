@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2008-03-24 23:30+0800\n"
 "Last-Translator: Rux Li <rux.li3@gmail.com>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
@@ -2306,38 +2306,28 @@ msgstr "忽略空白的改變"
 msgid "Load"
 msgstr "載入"
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "你無權刪除本頁附件。"
+#, fuzzy
+msgid "Pagename not specified!"
+msgstr "附件沒指定檔名！"
 
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
+msgid "Upload page content"
 msgstr ""
-"附件 '%(target)s' (遠端名稱 '%(filename)s') 儲存好了，共計 %(bytes)d 位元組。"
-
-msgid "New Page or New Attachment"
-msgstr "新增頁面或附件"
 
 msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
-msgstr "你可以將檔案上載成一個頁面，也可以上載成本頁面的附件："
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
+msgstr ""
 
-msgid "New Attachment"
-msgstr "新增附件"
+msgid "File to load page content from"
+msgstr ""
 
-msgid "attachment"
-msgstr "附件"
+msgid "Comment"
+msgstr "說明"
 
-msgid "Overwrite existing attachment of same name"
-msgstr "取代同名的附件"
-
-msgid "Upload"
-msgstr "上傳"
-
-msgid "New Name"
-msgstr "新的名稱"
+#, fuzzy
+msgid "Page Name"
+msgstr "包裹名稱"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "你不能訂閱無權瀏覽的頁面。"
@@ -2388,9 +2378,6 @@ msgstr "比較"
 
 msgid "Editor"
 msgstr "編輯者"
-
-msgid "Comment"
-msgstr "說明"
 
 msgid "view"
 msgstr "檢視"
@@ -2661,10 +2648,6 @@ msgid ""
 "page."
 msgstr "本頁包含 <a href=\"%(link)s\">%(count)s 個附件</a>."
 
-#, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "附件 '%(target)s' 已存在。"
-
 msgid "Filename of attachment not specified!"
 msgstr "附件沒指定檔名！"
 
@@ -2699,11 +2682,20 @@ msgstr "頁面 \"%(pagename)s\" 沒有附件"
 msgid "Edit drawing"
 msgstr "編輯圖片"
 
+msgid "New Attachment"
+msgstr "新增附件"
+
 msgid "File to upload"
 msgstr "要上傳的檔案"
 
 msgid "Rename to"
 msgstr "重新命名為"
+
+msgid "Overwrite existing attachment of same name"
+msgstr "取代同名的附件"
+
+msgid "Upload"
+msgstr "上傳"
 
 msgid "Attached Files"
 msgstr "現有附件"
@@ -2719,13 +2711,27 @@ msgstr "不支援 AttachFile 的子功能：%s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "\"%(pagename)s\" 的附件"
 
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "你無權檢視本頁附件。"
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
 msgstr "檔案沒有內容。請刪除檔名中的非 ASCII 字元後，再試試看。"
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"附件 '%(target)s' (遠端名稱 '%(filename)s') 儲存好了，共計 %(bytes)d 位元組。"
+
 msgid "You are not allowed to save a drawing on this page."
 msgstr "你無權在本頁儲存圖片。"
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "你無權刪除本頁附件。"
 
 #, fuzzy, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -2886,6 +2892,23 @@ msgstr "你無權在本頁進行「%(action_name)s」操作。"
 
 msgid "Login and try again."
 msgstr "請先登入後再試一次。"
+
+#~ msgid "New Page or New Attachment"
+#~ msgstr "新增頁面或附件"
+
+#~ msgid ""
+#~ "You can upload a file to a new page or choose to upload a file as "
+#~ "attachment for the current page"
+#~ msgstr "你可以將檔案上載成一個頁面，也可以上載成本頁面的附件："
+
+#~ msgid "attachment"
+#~ msgstr "附件"
+
+#~ msgid "New Name"
+#~ msgstr "新的名稱"
+
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "附件 '%(target)s' 已存在。"
 
 #~ msgid ""
 #~ "An upload will never overwrite an existing file. If there is a name\n"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2006-12-14 19:00+0100\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -2362,41 +2362,28 @@ msgstr "Ne upoštevaj razlik v številu presledkov"
 msgid "Load"
 msgstr "Naloži na strežnik"
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "Ni vam dovoljeno odstraniti priponk s te strani."
+#, fuzzy
+msgid "Pagename not specified!"
+msgstr "Ime datoteke s priponko mora biti navedeno!"
 
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
+msgid "Upload page content"
 msgstr ""
-"Priponka '%(target)s' je shranjena pod imenom '%(filename)s', %(bytes)d "
-"znakov."
-
-msgid "New Page or New Attachment"
-msgstr "Nova stran ali Nova priponka"
 
 msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
 msgstr ""
-"Lahko naložite datoteko na novo stran, ali pa se odločite da naložite "
-"datotekokot priponko na trenutno stran"
 
-msgid "New Attachment"
-msgstr "Nova priponka"
+msgid "File to load page content from"
+msgstr ""
 
-msgid "attachment"
-msgstr "priponke"
+msgid "Comment"
+msgstr "Opomba"
 
-msgid "Overwrite existing attachment of same name"
-msgstr "Prepiši že obstoječo priponko z istim imenom?"
-
-msgid "Upload"
-msgstr "Naloži na strežnik"
-
-msgid "New Name"
-msgstr "Novo Ime"
+#, fuzzy
+msgid "Page Name"
+msgstr "Ime ZIP paketa"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Ni mogoče naročiti se na obvestila s strani, ki vam ni dostopna."
@@ -2450,9 +2437,6 @@ msgstr "Razlike"
 
 msgid "Editor"
 msgstr "Spremenil"
-
-msgid "Comment"
-msgstr "Opomba"
 
 msgid "view"
 msgstr "prikaži"
@@ -2731,10 +2715,6 @@ msgid ""
 "page."
 msgstr "Tej strani je pripetih <a href=\"%(link)s\">%(count)s priponk</a>."
 
-#, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "Priponka '%(target)s' že obstaja."
-
 msgid "Filename of attachment not specified!"
 msgstr "Ime datoteke s priponko mora biti navedeno!"
 
@@ -2770,11 +2750,20 @@ msgstr "Stran %(pagename)s nima priponk."
 msgid "Edit drawing"
 msgstr "Spremeni risbo"
 
+msgid "New Attachment"
+msgstr "Nova priponka"
+
 msgid "File to upload"
 msgstr "Ime datoteke, ki jo nalagate:"
 
 msgid "Rename to"
 msgstr "Preimenovati v:"
+
+msgid "Overwrite existing attachment of same name"
+msgstr "Prepiši že obstoječo priponko z istim imenom?"
+
+msgid "Upload"
+msgstr "Naloži na strežnik"
 
 msgid "Attached Files"
 msgstr "Pripete datoteke"
@@ -2790,6 +2779,10 @@ msgstr "Nepodprta PripniDatoteko pod-akcija: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Priponke na strani \"%(pagename)s\""
 
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Ogled priponk na tej strani vam ni dovoljen."
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
@@ -2797,8 +2790,19 @@ msgstr ""
 "Prazna vsebina. Odstranite ne-ASCII znake z imena datoteke in poskusite "
 "znova."
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"Priponka '%(target)s' je shranjena pod imenom '%(filename)s', %(bytes)d "
+"znakov."
+
 msgid "You are not allowed to save a drawing on this page."
 msgstr "Na to stran ni dovoljeno shraniti risb."
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "Ni vam dovoljeno odstraniti priponk s te strani."
 
 #, fuzzy, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -2965,6 +2969,25 @@ msgstr "Akcije %(action_name)s nad to stranjo vam ni dovoljeno izvesti!"
 
 msgid "Login and try again."
 msgstr "Prijavite se in poskusite ponovno."
+
+#~ msgid "New Page or New Attachment"
+#~ msgstr "Nova stran ali Nova priponka"
+
+#~ msgid ""
+#~ "You can upload a file to a new page or choose to upload a file as "
+#~ "attachment for the current page"
+#~ msgstr ""
+#~ "Lahko naložite datoteko na novo stran, ali pa se odločite da naložite "
+#~ "datotekokot priponko na trenutno stran"
+
+#~ msgid "attachment"
+#~ msgstr "priponke"
+
+#~ msgid "New Name"
+#~ msgstr "Novo Ime"
+
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "Priponka '%(target)s' že obstaja."
 
 #~ msgid ""
 #~ "An upload will never overwrite an existing file. If there is a name\n"

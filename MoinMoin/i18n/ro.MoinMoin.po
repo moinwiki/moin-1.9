@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2005-08-18 14:19+EET\n"
 "Last-Translator: Ovidiu Sabou <ovidiu.sabou@gmail.com>\n"
 "Language-Team: Romanian <ovidiu.sabou@gmail.com>\n"
@@ -2325,42 +2325,28 @@ msgstr "Ignorare modificări în cantitatea de caractere spaţiu"
 msgid "Load"
 msgstr "Trimitere date"
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "Nu aveţi permisiunea de a şterge ataşamentele de pe această pagină."
-
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
-msgstr ""
-"Ataşamentul '%(target)s' (fişier la distanţă '%(filename)s') cu %(bytes)d "
-"octeţi a fost salvat."
-
 #, fuzzy
-msgid "New Page or New Attachment"
-msgstr "Ataşament Nou"
+msgid "Pagename not specified!"
+msgstr "Numele fişierului ataşat nu a fost specificat!"
+
+msgid "Upload page content"
+msgstr ""
 
 msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
 msgstr ""
 
-msgid "New Attachment"
-msgstr "Ataşament Nou"
-
-#, fuzzy
-msgid "attachment"
-msgstr "Ataşamente"
-
-msgid "Overwrite existing attachment of same name"
+msgid "File to load page content from"
 msgstr ""
 
-msgid "Upload"
-msgstr "Trimitere date"
+msgid "Comment"
+msgstr "Comentariu"
 
 #, fuzzy
-msgid "New Name"
-msgstr "Nume nou"
+msgid "Page Name"
+msgstr "Pagini Asemănătoare"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr ""
@@ -2418,9 +2404,6 @@ msgstr "Modificare"
 
 msgid "Editor"
 msgstr "Editor"
-
-msgid "Comment"
-msgstr "Comentariu"
 
 msgid "view"
 msgstr "vizionare"
@@ -2708,10 +2691,6 @@ msgstr ""
 "Există <a href=\"%(link)s\">%(count)s ataşament(e)</a> stocat(e) pentru "
 "această pagină."
 
-#, fuzzy, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "Ataşamentul '%(filename)s' a fost instalat."
-
 msgid "Filename of attachment not specified!"
 msgstr "Numele fişierului ataşat nu a fost specificat!"
 
@@ -2747,11 +2726,20 @@ msgstr "Nici un ataşament stocat pentru %(pagename)s"
 msgid "Edit drawing"
 msgstr "Editare desen"
 
+msgid "New Attachment"
+msgstr "Ataşament Nou"
+
 msgid "File to upload"
 msgstr "Fişier de trimis"
 
 msgid "Rename to"
 msgstr "Redenumeşte în"
+
+msgid "Overwrite existing attachment of same name"
+msgstr ""
+
+msgid "Upload"
+msgstr "Trimitere date"
 
 msgid "Attached Files"
 msgstr "Fişiere Ataşate"
@@ -2767,6 +2755,10 @@ msgstr "Este nepermisă acţiunea de trimitere date: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Ataşamente pentru \"%(pagename)s\""
 
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Nu aveţi permisiunea de a viziona ataşamentele de pe această pagină."
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
@@ -2774,8 +2766,19 @@ msgstr ""
 "Nu există conţinut. Ştergeţi caracterele non ASCII din numele fişierului şi "
 "încercaţi din nou."
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"Ataşamentul '%(target)s' (fişier la distanţă '%(filename)s') cu %(bytes)d "
+"octeţi a fost salvat."
+
 msgid "You are not allowed to save a drawing on this page."
 msgstr "Nu aveţi permisiunea de a salva un desen pe această pagină."
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "Nu aveţi permisiunea de a şterge ataşamentele de pe această pagină."
 
 #, fuzzy, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -2950,6 +2953,22 @@ msgstr "Nu aveţi permisiunea de a salva un desen pe această pagină."
 #, fuzzy
 msgid "Login and try again."
 msgstr " %s şi încercaţi din nou."
+
+#, fuzzy
+#~ msgid "New Page or New Attachment"
+#~ msgstr "Ataşament Nou"
+
+#, fuzzy
+#~ msgid "attachment"
+#~ msgstr "Ataşamente"
+
+#, fuzzy
+#~ msgid "New Name"
+#~ msgstr "Nume nou"
+
+#, fuzzy
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "Ataşamentul '%(filename)s' a fost instalat."
 
 #~ msgid ""
 #~ "An upload will never overwrite an existing file. If there is a name\n"

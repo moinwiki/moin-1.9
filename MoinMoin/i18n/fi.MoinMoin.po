@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2008-02-03 17:21+0200\n"
 "Last-Translator: Ville-Pekka Vainio <vpivaini@cs.helsinki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
@@ -2371,41 +2371,28 @@ msgstr "Jätä huomioimatta muutokset tyhjätilamerkkien määrässä"
 msgid "Load"
 msgstr "Lataa"
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "Sinulla ei ole oikeutta poistaa liitetiedostoja tältä sivulta."
+#, fuzzy
+msgid "Pagename not specified!"
+msgstr "Liitetiedoston nimeä ei määritelty!"
 
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
+msgid "Upload page content"
 msgstr ""
-"Liitetiedosto '%(target)s' (etäpään nimi '%(filename)s'), kooltaan %(bytes)d "
-"tavua, on tallennettu."
-
-msgid "New Page or New Attachment"
-msgstr "Uusi sivu tai liitetiedosto"
 
 msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
 msgstr ""
-"Voit lisätä tiedoston nykyiselle sivulle tai voit luoda uuden sivun ja "
-"lisätä tiedoston kyseiselle sivulle."
 
-msgid "New Attachment"
-msgstr "Uusi liitetiedosto"
+msgid "File to load page content from"
+msgstr ""
 
-msgid "attachment"
-msgstr "Liitetiedosto"
+msgid "Comment"
+msgstr "Kuvaus"
 
-msgid "Overwrite existing attachment of same name"
-msgstr "Korvaa aiempi tiedosto uudemmalla, mikäli nimet ovat samat"
-
-msgid "Upload"
-msgstr "Lähetä"
-
-msgid "New Name"
-msgstr "Uusi nimi"
+#, fuzzy
+msgid "Page Name"
+msgstr "Paketin nimi"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Et voi tilata sivua, sillä sinulla ei ole siihen lukuoikeutta."
@@ -2457,9 +2444,6 @@ msgstr "Erot"
 
 msgid "Editor"
 msgstr "Muokkaaja"
-
-msgid "Comment"
-msgstr "Kuvaus"
 
 msgid "view"
 msgstr "näytä"
@@ -2739,10 +2723,6 @@ msgstr ""
 "Tälle sivulle on tallennettu <a href=\"%(link)s\">%(count)s liitetiedosto(a)"
 "</a>."
 
-#, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "Liitetiedosto '%(target)s' on jo olemassa."
-
 msgid "Filename of attachment not specified!"
 msgstr "Liitetiedoston nimeä ei määritelty!"
 
@@ -2777,11 +2757,20 @@ msgstr "Sivulla %(pagename)s ei ole liitetiedostoja."
 msgid "Edit drawing"
 msgstr "Muokkaa piirrosta"
 
+msgid "New Attachment"
+msgstr "Uusi liitetiedosto"
+
 msgid "File to upload"
 msgstr "Lähetettävä tiedosto"
 
 msgid "Rename to"
 msgstr "Uudelleennimeä"
+
+msgid "Overwrite existing attachment of same name"
+msgstr "Korvaa aiempi tiedosto uudemmalla, mikäli nimet ovat samat"
+
+msgid "Upload"
+msgstr "Lähetä"
 
 msgid "Attached Files"
 msgstr "Liitetiedostot"
@@ -2797,6 +2786,10 @@ msgstr "AttachFile-toiminnon alaluokka ei ole tuettu: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Liitetiedostot sivulla %(pagename)s"
 
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Sinulla ei ole oikeutta katsoa tämän sivun liitetiedostoja."
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
@@ -2804,8 +2797,19 @@ msgstr ""
 "Ei tiedostosisältöä. Poista muut kuin ASCII-merkit nimestä ja yritä "
 "uudelleen."
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"Liitetiedosto '%(target)s' (etäpään nimi '%(filename)s'), kooltaan %(bytes)d "
+"tavua, on tallennettu."
+
 msgid "You are not allowed to save a drawing on this page."
 msgstr "Sinulla ei ole oikeutta tallentaa piirrosta tälle sivulle."
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "Sinulla ei ole oikeutta poistaa liitetiedostoja tältä sivulta."
 
 #, fuzzy, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -2975,6 +2979,25 @@ msgstr ""
 
 msgid "Login and try again."
 msgstr "Kirjaudu sisään ja yritä uudelleen."
+
+#~ msgid "New Page or New Attachment"
+#~ msgstr "Uusi sivu tai liitetiedosto"
+
+#~ msgid ""
+#~ "You can upload a file to a new page or choose to upload a file as "
+#~ "attachment for the current page"
+#~ msgstr ""
+#~ "Voit lisätä tiedoston nykyiselle sivulle tai voit luoda uuden sivun ja "
+#~ "lisätä tiedoston kyseiselle sivulle."
+
+#~ msgid "attachment"
+#~ msgstr "Liitetiedosto"
+
+#~ msgid "New Name"
+#~ msgstr "Uusi nimi"
+
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "Liitetiedosto '%(target)s' on jo olemassa."
 
 #~ msgid ""
 #~ "An upload will never overwrite an existing file. If there is a name\n"

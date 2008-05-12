@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2006-12-05 12:04+0800\n"
 "Last-Translator: Amgalanbaatar Delegdorj <d.amgalanbaatar@gmail.com>\n"
 "Language-Team: Mongolia <d.amgalanbaatar@gmail.com>\n"
@@ -2386,42 +2386,28 @@ msgstr "Хоосон зайнаас бусад өөрчлөлтүүдийг хэ
 msgid "Load"
 msgstr "Файлаа оруулах"
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "Та энэ хуудаснаас хавсралт устгаж болохгүй!"
-
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
-msgstr ""
-"Хавсралт '%(target)s' (ремоут нэр '%(filename)s')  %(bytes)d "
-"bytesхадгалагдлаа."
-
 #, fuzzy
-msgid "New Page or New Attachment"
-msgstr "Шинэ хавсралт файл"
+msgid "Pagename not specified!"
+msgstr "Хавсралт файлын нэр алга байна!"
+
+msgid "Upload page content"
+msgstr ""
 
 msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
 msgstr ""
 
-msgid "New Attachment"
-msgstr "Шинэ хавсралт файл"
-
-#, fuzzy
-msgid "attachment"
-msgstr "Хавсралт"
-
-msgid "Overwrite existing attachment of same name"
+msgid "File to load page content from"
 msgstr ""
 
-msgid "Upload"
-msgstr "Файлаа оруулах"
+msgid "Comment"
+msgstr "Тайлбар"
 
 #, fuzzy
-msgid "New Name"
-msgstr "Шинэ нэр"
+msgid "Page Name"
+msgstr "Багцын нэр"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Та унших эрхгүй хуудсандаа бүртгүүлэх боломжгүй."
@@ -2476,9 +2462,6 @@ msgstr "Ялгаа"
 
 msgid "Editor"
 msgstr "Нийтлэгч"
-
-msgid "Comment"
-msgstr "Тайлбар"
 
 msgid "view"
 msgstr "үзүүлэх"
@@ -2764,10 +2747,6 @@ msgid ""
 msgstr ""
 "Энэ хуудсанд <a href=\"%(link)s\">%(count)s хавсралт</a> хадгалагдсан байна."
 
-#, fuzzy, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "'%(filename)s'нэртэй хавсралт байна."
-
 msgid "Filename of attachment not specified!"
 msgstr "Хавсралт файлын нэр алга байна!"
 
@@ -2804,11 +2783,20 @@ msgstr "Энэ %(pagename)s хуудсанд хавсралт хадгалагд
 msgid "Edit drawing"
 msgstr "Зураг өөрчлөх"
 
+msgid "New Attachment"
+msgstr "Шинэ хавсралт файл"
+
 msgid "File to upload"
 msgstr "Шинэ хавсралт файл"
 
 msgid "Rename to"
 msgstr "нэр өөрчлөх"
+
+msgid "Overwrite existing attachment of same name"
+msgstr ""
+
+msgid "Upload"
+msgstr "Файлаа оруулах"
 
 msgid "Attached Files"
 msgstr "Хавсаргагдсан файлууд"
@@ -2824,6 +2812,10 @@ msgstr "Буруу үйлдэл: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "\"%(pagename)s\" -ийн хавсралтууд"
 
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Та энэ хуудасны хавсралтуудыг үзэж болохгүй."
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
@@ -2831,8 +2823,19 @@ msgstr ""
 "Хоосон файл. Файлын нэрнээс ASCII-тэмдэгтүүдийг нь арилгааддахин оролдоод "
 "үзнэ үү."
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"Хавсралт '%(target)s' (ремоут нэр '%(filename)s')  %(bytes)d "
+"bytesхадгалагдлаа."
+
 msgid "You are not allowed to save a drawing on this page."
 msgstr "Та энэ хуудсандд зураг хадгалж болохгүй."
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "Та энэ хуудаснаас хавсралт устгаж болохгүй!"
 
 #, fuzzy, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -3001,6 +3004,22 @@ msgstr "Та %(action_name)s үйлдлийг энэ хуудас дээр аж�
 
 msgid "Login and try again."
 msgstr "Та эхлээд логин хийгээд дараа нь ахиад оролдоод үзнэ үү."
+
+#, fuzzy
+#~ msgid "New Page or New Attachment"
+#~ msgstr "Шинэ хавсралт файл"
+
+#, fuzzy
+#~ msgid "attachment"
+#~ msgstr "Хавсралт"
+
+#, fuzzy
+#~ msgid "New Name"
+#~ msgstr "Шинэ нэр"
+
+#, fuzzy
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "'%(filename)s'нэртэй хавсралт байна."
 
 #~ msgid ""
 #~ "An upload will never overwrite an existing file. If there is a name\n"

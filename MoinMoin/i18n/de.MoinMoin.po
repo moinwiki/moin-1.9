@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2008-05-12 14:33+0200\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-user@lists.sourceforge.net>\n"
@@ -2339,7 +2339,7 @@ msgstr ""
 "||'''Neue persönliche Seite hinzufügen:'''||'''Zugeordnete ACL-Gruppe:'''||\n"
 "||<<NewPage(HomepageReadWritePageTemplate,Seite (read/write),%(username)s)"
 ">>||[\"%(username)s/ReadWriteGroup\"]||\n"
-"||<<NewPage(HomepageReadPageTemplate,Seite (read-only),%(username)s)>>;||[\"%"
+"||<<NewPage(HomepageReadPageTemplate,Seite (read-only),%(username)s)>>;;;||[\"%"
 "(username)s/ReadGroup\"]||\n"
 "||<<NewPage(HomepagePrivatePageTemplate,Seite (privat),%(username)s)>>||nur %"
 "(username)s||\n"
@@ -2420,41 +2420,29 @@ msgstr "Ausschließlich Leerraum betreffende Änderungen ignorieren"
 msgid "Load"
 msgstr "Laden"
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "Sie dürfen keine Anhänge dieser Seite löschen!"
+msgid "Pagename not specified!"
+msgstr "Seitenname nicht angegeben!"
 
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
-msgstr ""
-"Dateianhang '%(target)s' (ursprünglicher Name '%(filename)s') mit %(bytes)d "
-"Bytes gesichert."
-
-msgid "New Page or New Attachment"
-msgstr "Neue Seite oder neuer Dateianhang"
+msgid "Upload page content"
+msgstr "Seiteninhalt hochladen"
 
 msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
 msgstr ""
-"Sie können eine Datei in eine neue Seite hochladen oder eine Datei als "
-"Dateianhang an die aktuelle Seite hochladen"
+"Sie können für die unten genannte Seite Inhalt hochladen. Wenn Sie den "
+"Seitennamen ändern, können Sie auch Inhalt für eine andere Seite hochladen. "
+"Wenn der Seitenname leer ist, leiten wir den Seitennamen vom Dateinamen ab."
 
-msgid "New Attachment"
-msgstr "Neuer Dateianhang"
+msgid "File to load page content from"
+msgstr "Datei, aus der der Seiteninhalt geladen wird"
 
-msgid "attachment"
-msgstr "Dateianhang"
+msgid "Comment"
+msgstr "Kommentar"
 
-msgid "Overwrite existing attachment of same name"
-msgstr "Anhänge gleichen Namens überschreiben"
-
-msgid "Upload"
-msgstr "Datei hochladen"
-
-msgid "New Name"
-msgstr "Neuer Name"
+msgid "Page Name"
+msgstr "Seitenname"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Sie dürfen keine Seiten abonnieren, die Sie nicht lesen dürfen."
@@ -2506,9 +2494,6 @@ msgstr "Differenz"
 
 msgid "Editor"
 msgstr "Autor"
-
-msgid "Comment"
-msgstr "Kommentar"
 
 msgid "view"
 msgstr "anzeigen"
@@ -2798,10 +2783,6 @@ msgstr ""
 "Es sind <a href=\"%(link)s\">%(count)s Anhänge</a> für diese Seite "
 "gespeichert."
 
-#, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "Dateianhang '%(target)s' existiert bereits."
-
 msgid "Filename of attachment not specified!"
 msgstr "Dateiname des Anhangs fehlt oder ist leer!"
 
@@ -2838,11 +2819,20 @@ msgstr "Es wurden keine Anhänge für die Seite %(pagename)s gespeichert."
 msgid "Edit drawing"
 msgstr "Zeichnung editieren"
 
+msgid "New Attachment"
+msgstr "Neuer Dateianhang"
+
 msgid "File to upload"
 msgstr "Neuer Dateianhang"
 
 msgid "Rename to"
 msgstr "Umbenennen auf"
+
+msgid "Overwrite existing attachment of same name"
+msgstr "Anhänge gleichen Namens überschreiben"
+
+msgid "Upload"
+msgstr "Datei hochladen"
 
 msgid "Attached Files"
 msgstr "Gespeicherte Dateianhänge"
@@ -2858,6 +2848,9 @@ msgstr "Nicht unterstützte Unter-Aktion von AttachFile: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Dateianhänge für \"%(pagename)s\""
 
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Sie dürfen keine Dateianhänge dieser Seite überschreiben."
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
@@ -2865,8 +2858,19 @@ msgstr ""
 "Kein Dateiinhalt. Löschen Sie nicht-ASCII-Zeichen aus dem Dateinamen und "
 "probieren Sie es noch einmal."
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"Dateianhang '%(target)s' (ursprünglicher Name '%(filename)s') mit %(bytes)d "
+"Bytes gesichert."
+
 msgid "You are not allowed to save a drawing on this page."
 msgstr "Sie dürfen auf dieser Seite keine Zeichnung speichern."
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "Sie dürfen keine Anhänge dieser Seite löschen!"
 
 #, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
