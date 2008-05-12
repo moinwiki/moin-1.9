@@ -465,10 +465,7 @@ def send_uploadform(pagename, request):
     # This avoids usability issues if you have to scroll down a lot to upload
     # a new file when the page already has lots of attachments:
     if writeable:
-        request.write('<h2>' + _("New Attachment") + '</h2><p>' +
-_("""An upload will never overwrite an existing file. If there is a name
-conflict, you have to rename the file that you want to upload.
-Otherwise, if "Rename to" is left blank, the original filename will be used.""") + '</p>')
+        request.write('<h2>' + _("New Attachment") + '</h2>')
         request.write("""
 <form action="%(baseurl)s/%(pagename)s" method="POST" enctype="multipart/form-data">
 <dl>
