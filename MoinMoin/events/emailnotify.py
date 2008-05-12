@@ -51,7 +51,7 @@ def prep_page_changed_mail(request, page, comment, email_lang, revisions, trivia
             'username': page.uid_override or user.getUserIdentification(request),
         }
 
-    return {'subject': subject, 'body': change['text'] + pagelink + change['diff']}
+    return {'subject': subject, 'text': change['text'] + pagelink + change['diff']}
 
 
 def send_notification(request, from_address, emails, data):
@@ -62,7 +62,7 @@ def send_notification(request, from_address, emails, data):
     @rtype int
 
     """
-    return sendmail.sendmail(request, emails, data['subject'], data['body'], mail_from=from_address)
+    return sendmail.sendmail(request, emails, data['subject'], data['text'], mail_from=from_address)
 
 
 def handle_page_change(event):
@@ -152,7 +152,7 @@ def handle_file_attached(event):
                   "Page link: %(page)s\n") % {'attach': attachlink, 'page': pagelink}
 
         data = notification.attachment_added(request, _, event.pagename, event.filename, event.size)
-        data['body'] = data['body'] + links
+        data['text'] = data['text'] + links
 
         emails = [usr.email for usr in subscribers[lang]]
 
