@@ -49,15 +49,9 @@ Known main issues:
     make install
 
 
-Version 1.7.0current:
+Version 1.7.0beta2:
 
   Bug Fixes:
-    * Wiki xmlrpc getPageInfoVersion() fixed:
-      * works correctly now for old page versions (was unsupported)
-      * works correctly now for current page version (reported wrong
-        data when a page had attachment uploads after the last page
-        edit)
-      * returns a Fault if it did not find a edit-log entry
     * HINT: page_*_regex processing had to be changed to fix Xapian category
       search. If you don't use the english defaults, you will have to change
       your configuration:
@@ -71,6 +65,46 @@ Version 1.7.0current:
       groups. \S+ means the category key can be anything non-blank.
       If you like to simultaneously support multiple languages, use something
       like this: ur'(?P<all>(Kategorie|Category)(?P<key>\S+))'
+    * Xapian indexing / search / stemming:
+      * fix AttributeError that happened when trying to access an attribute only
+        used with xapian search (but regex search is not done by xapian)
+      * fix IndexErrors happening when pages are renamed/nuked after the index
+        was built
+      * fix crash if default language is un-stemmable
+      * Fixed indexing of WikiWords (index "WikiWords", "Wiki" and "Words")
+      * Fixed category indexing (index CategoryFoo correctly as CategoryFoo, not
+        Foo - for all languages, see page_*_regex change above)
+      * xapian_stemming: removed some strange code (fixes search
+        title:lowercaseword with xapian_stemming enabled)
+    * AttachFile / file upload / download:
+      * WSGI: use wsgi.file_wrapper (or a builtin simple wrapper). Fixes memory
+        consumption for sending of large file attachments.
+      * FastCGI: flush often. Fixes memory consumption for sending of large
+        file attachments
+      * use the open temporary file for file uploads (fixes big memory
+        consumption for large file uploads).
+        !!! Twisted and mod_python is completely untested !!!
+      * AttachFile/Load: remove misleading/outdated text, fix UI cosmetics
+      * Fixed traceback for attachment notifications.
+      * make error msg less confusing when trying to overwrite a file attachment
+        without having acl delete rights
+    * Wiki xmlrpc getPageInfoVersion() fixed:
+      * works correctly now for old page versions (was unsupported)
+      * works correctly now for current page version (reported wrong
+        data when a page had attachment uploads after the last page
+        edit)
+      * returns a Fault if it did not find a edit-log entry
+    * SystemAdmin user browser: handle empty email/jabber addresses correctly
+    * events.wikidictsrescan: handle TrivialPageChangedEvent too (bug fix for
+      MoinMoinBugs/17devWikiDictsDontUpdate)
+    * Fixed detection of WikiWords for the docbook parser.
+
+  New features:
+    * Password recovery (recoverpass action):
+      If you forgot your password, this action sends you an email with a password
+      recovery token (NOT the encrypted password). Token is valid for 12 hours.
+    * Logging: you can use MOINLOGGINGCONF environment variable now to override
+      from where your logging config is read.
 
   Other changes:
     * HINT: in the toplevel dir, we have renamed moin.py to wikiserver.py (it
@@ -81,6 +115,9 @@ Version 1.7.0current:
       * wikiserverlogging.conf - to configure logging for it (default config
         should be ok for all day use, but can easily be modified for debugging)
       * wikiconfig.py - to configure the wiki engine
+    * removed old moin daemonizing script (replaced by moin server standalone
+      --start/stop)
+    * provide moin script command for people not using setup.py, see wiki/server/moin
     * Duplicated file attachment upload code was removed from Load action (just
       use AttachFile action to deal with attachments).
     * Load action now just creates a new revision of the target page, the
@@ -95,6 +132,8 @@ Version 1.7.0current:
     * Page.last_edit() is DEPRECATED, please use Page.edit_info().
     * Page._last_edited() is GONE (was broken anyway), please use
       Page.editlog_entry().
+    * new request.send_file() call, making it possible to use server-specific
+      optimizations
 
 Version 1.7.0beta1:
 
