@@ -81,6 +81,15 @@ Version 1.7.0current:
       * wikiserverlogging.conf - to configure logging for it (default config
         should be ok for all day use, but can easily be modified for debugging)
       * wikiconfig.py - to configure the wiki engine
+    * Duplicated file attachment upload code was removed from Load action (just
+      use AttachFile action to deal with attachments).
+    * Load action now just creates a new revision of the target page, the
+      target pagename defaults to the current page name and can be edited. If
+      the target pagename is empty, moin tries to derive the target pagename
+      from the uploaded file's name.
+      Load tries to decode the file contents first using utf-8 coding and, if
+      that fails, it forces decoding using iso-8859-1 coding (and replacing
+      invalid characters).
 
   Developer notes (these should be moved to the end in the release):
     * Page.last_edit() is DEPRECATED, please use Page.edit_info().
