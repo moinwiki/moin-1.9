@@ -29,6 +29,9 @@
 
 import os, time, zipfile, mimetypes, errno
 
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin import config, wikiutil, packages
 from MoinMoin.Page import Page
 from MoinMoin.util import filesys, timefuncs
@@ -192,8 +195,7 @@ def add_attachment(request, pagename, target, filecontent, overwrite=0):
     fpath = os.path.join(attach_dir, target).encode(config.charset)
     exists = os.path.exists(fpath)
     if exists and not overwrite:
-        filesize = 0
-        msg = _("Attachment '%(target)s' already exists.") % {'target': target, } # XXX unused?
+        raise AttachmentAlreadyExists
     else:
         if exists:
             try:
@@ -543,6 +545,17 @@ def upload_form(pagename, request, msg=''):
     request.theme.send_closing_html()
 
 
+def preprocess_filename(filename):
+    """ preprocess the filename we got from upload form,
+        strip leading drive and path (IE misbehaviour)
+    """
+    if filename and len(filename) > 1 and (filename[1] == ':' or filename[0] == '\\'): # C:.... or \path... or \\server\...
+        bsindex = filename.rfind('\\')
+        if bsindex >= 0:
+            filename = filename[bsindex+1:]
+    return filename
+
+
 def _do_upload(pagename, request):
     _ = request.getText
     # Currently we only check TextCha for upload (this is what spammers ususally do),
@@ -550,7 +563,8 @@ def _do_upload(pagename, request):
     if not TextCha(request).check_answer_from_form():
         return _('TextCha: Wrong answer! Go back and try again...')
 
-    overwrite = request.form.get('overwrite', ['0'])[0]
+    form = request.form
+    overwrite = form.get('overwrite', [u'0'])[0]
     try:
         overwrite = int(overwrite)
     except:
@@ -560,42 +574,29 @@ def _do_upload(pagename, request):
        (not overwrite or not request.user.may.write(pagename) or not request.user.may.delete(pagename)):
         return _('You are not allowed to attach a file to this page.')
 
-    if 'file' not in request.form:
+    filename = form.get('file__filename__')
+    rename = form.get('rename', [u''])[0].strip()
+    if rename:
+        target = rename
+    else:
+        target = filename
+
+    target = preprocess_filename(target)
+    target = wikiutil.clean_input(target)
+
+    if not target:
+        return _("Filename of attachment not specified!")
+
+    # get file content
+    filecontent = request.form.get('file', [None])[0]
+    if filecontent is None:
         # This might happen when trying to upload file names
         # with non-ascii characters on Safari.
         return _("No file content. Delete non ASCII characters from the file name and try again.")
 
-    # make filename
-    filename = request.form.get('file__filename__')
-    rename = request.form.get('rename', [None])[0]
-    if rename:
-        rename = rename.strip()
-
-    # if we use twisted, "rename" field is NOT optional, because we
-    # can't access the client filename
-    if rename:
-        target = rename
-        # clear rename its only once wanted
-        request.form['rename'][0] = u''
-    elif filename:
-        target = filename
-    else:
-        return _("Filename of attachment not specified!")
-
-    # get file content
-    filecontent = request.form['file'][0]
-
-    # preprocess the filename
-    # strip leading drive and path (IE misbehaviour)
-    if len(target) > 1 and (target[1] == ':' or target[0] == '\\'): # C:.... or \path... or \\server\...
-        bsindex = target.rfind('\\')
-        if bsindex >= 0:
-            target = target[bsindex+1:]
-
     # add the attachment
     try:
         target, bytes = add_attachment(request, pagename, target, filecontent, overwrite=overwrite)
-
         msg = _("Attachment '%(target)s' (remote name '%(filename)s')"
                 " with %(bytes)d bytes saved.") % {
                 'target': target, 'filename': filename, 'bytes': bytes}

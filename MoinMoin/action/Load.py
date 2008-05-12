@@ -1,11 +1,14 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - Action macro for page creation from file or attach file to current page
+    MoinMoin - Action to load page content from a file upload
 
-    @copyright: 2007-2008 MoinMoin:ReimarBauer
+    @copyright: 2007-2008 MoinMoin:ReimarBauer,
+                2008 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
+
 import os
+
 from MoinMoin import wikiutil, config
 from MoinMoin.action import ActionBase, AttachFile
 from MoinMoin.PageEditor import PageEditor
@@ -31,73 +34,38 @@ class Load(ActionBase):
         status = False
         _ = self._
         form = self.form
-        author = self.request.user.name
+        request = self.request
 
-        rename = form.get('rename', [u''])[0]
+        comment = form.get('comment', [u''])[0]
+        comment = wikiutil.clean_input(comment)
 
-        filename = None
-        if 'file__filename__' in form:
-            filename = form['file__filename__']
-
-        filecontent = form['file'][0]
-
-        overwrite = False
-        if 'overwrite' in form:
-            overwrite = True
-
-        target = filename
+        filename = form.get('file__filename__')
+        rename = form.get('rename', [''])[0].strip()
         if rename:
-            target = wikiutil.clean_input(rename.strip())
-
-        # preprocess the filename
-        # strip leading drive and path (IE misbehaviour)
-        if len(target) > 1 and (target[1] == ':' or target[0] == '\\'): # C:.... or \path... or \\server\...
-            bsindex = target.rfind('\\')
-            if bsindex >= 0:
-                target = target[bsindex+1:]
-
-        if 'attachment' in self.request.form and self.request.user.may.write(self.pagename):
-            attach_dir = AttachFile.getAttachDir(self.request, self.pagename, create=1)
-            fpath = os.path.join(attach_dir, target).encode(config.charset)
-            exists = os.path.exists(fpath)
-            if exists and not overwrite:
-                msg = _("Attachment '%(target)s' (remote name '%(filename)s') already exists.") % {
-                         'target': target, 'filename': filename}
-                return status, msg
-
-            if exists and overwrite:
-                if self.request.user.may.delete(self.pagename):
-                    try:
-                        os.remove(fpath)
-                    except:
-                        pass
-                else:
-                    msg = _("You are not allowed to delete attachments on this page.")
-                    return status, msg
-
-            target, bytes = AttachFile.add_attachment(self.request, self.pagename, target, filecontent)
-            msg = _("Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes saved.") % {
-                   'target': target, 'filename': filename, 'bytes': bytes}
-            status = True
-
+            target = rename
         else:
-            if isinstance(filecontent, file):
+            target = filename
+
+        target = AttachFile.preprocess_filename(target)
+        target = wikiutil.clean_input(target)
+
+        if target:
+            filecontent = form['file'][0]
+            if hasattr(filecontent, 'read'): # a file-like object
                 filecontent = filecontent.read() # XXX reads complete file into memory!
-            if isinstance(filecontent, str):
-                filecontent = unicode(filecontent, config.charset)
+            filecontent = wikiutil.decodeUnknownInput(filecontent)
+
             self.pagename = target
-            page = Page(self.request, self.pagename)
-            pagedir = page.getPagePath("", check_create=0)
-            rev = Page.get_current_from_pagedir(page, pagedir)
-            pg = PageEditor(self.request, self.pagename, do_editor_backup=0, uid_override=author)
+            pg = PageEditor(request, self.pagename)
             try:
-                msg = pg.saveText(filecontent, rev)
+                msg = pg.saveText(filecontent, 0, comment=comment)
                 status = True
             except pg.EditConflict, e:
                 msg = e.message
             except pg.SaveError, msg:
                 msg = unicode(msg)
-
+        else:
+            msg = _("Pagename not specified!")
         return status, msg
 
     def do_action_finish(self, success):
@@ -111,15 +79,15 @@ class Load(ActionBase):
     def get_form_html(self, buttons_html):
         _ = self._
         return """
-%(querytext_pages)s
+<h2>%(headline)s</h2>
+<p>%(explanation)s</p>
 <dl>
 <dt>%(upload_label_file)s</dt>
 <dd><input type="file" name="file" size="50" value=""></dd>
 <dt>%(upload_label_rename)s</dt>
-<dd><input type="text" name="rename" size="50" value=""></dd>
-%(querytext_attachment)s
-<dt><input type="checkbox" name="attachment" value="off"> %(upload)s</dt>
-<dt><input type="checkbox" name="overwrite" value="off"> %(overwrite)s</dt>
+<dd><input type="text" name="rename" size="50" value="%(pagename)s"></dd>
+<dt>%(upload_label_comment)s</dt>
+<dd><input type="text" name="comment" size="80" maxlength="200"></dd>
 </dl>
 <p>
 <input type="hidden" name="action" value="%(action_name)s">
@@ -128,15 +96,16 @@ class Load(ActionBase):
 <td class="buttons">
 %(buttons_html)s
 </td>""" % {
-    'querytext_pages': '<h2>' + _("New Page or New Attachment") + '</h2><p>' +
-_("""You can upload a file to a new page or choose to upload a file as attachment for the current page""") + '</p>',
-    'querytext_attachment': '<h2>' + _("New Attachment") + '</h2>',
+    'headline': _("Upload page content"),
+    'explanation': _("You can upload content for the page named below. "
+                     "If you change the page name, you can also upload content for another page. "
+                     "If the page name is empty, we derive the page name from the file name."),
+    'upload_label_file': _('File to load page content from'),
+    'upload_label_comment': _('Comment'),
+    'upload_label_rename': _('Page Name'),
+    'pagename': self.pagename,
     'buttons_html': buttons_html,
-    'upload': _('attachment'),
-    'overwrite': _('Overwrite existing attachment of same name'),
     'action_name': self.form_trigger,
-    'upload_label_file': _('Upload'),
-    'upload_label_rename': _('New Name'),
 }
 
 def execute(pagename, request):
