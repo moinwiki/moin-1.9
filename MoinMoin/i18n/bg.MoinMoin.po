@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2006-02-11 12:20-0800\n"
 "Last-Translator: Hristo Iliev <hristo@phys.uni-sofia.bg>\n"
 "Language-Team: Bulgarian <moin-devel@lists.sourceforge.net>\n"
@@ -2388,42 +2388,28 @@ msgstr "Игнориране на разликата в количеството
 msgid "Load"
 msgstr "Качване"
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "Не Ви е позволено да изтривате приложения от тази страница."
-
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
-msgstr ""
-"Приложение '%(target)s' (отдалечено име '%(filename)s') с размер %(bytes)d "
-"байта - запазено."
-
 #, fuzzy
-msgid "New Page or New Attachment"
-msgstr "Ново приложение"
+msgid "Pagename not specified!"
+msgstr "Не е указано име на файл за прикрепяне!"
 
-msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
+msgid "Upload page content"
 msgstr ""
 
-msgid "New Attachment"
-msgstr "Ново приложение"
+msgid ""
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
+msgstr ""
+
+msgid "File to load page content from"
+msgstr ""
+
+msgid "Comment"
+msgstr "Коментар"
 
 #, fuzzy
-msgid "attachment"
-msgstr "Приложения"
-
-msgid "Overwrite existing attachment of same name"
-msgstr "Презаписване на съществуващо приложение със същото име"
-
-msgid "Upload"
-msgstr "Качване"
-
-#, fuzzy
-msgid "New Name"
-msgstr "Ново име"
+msgid "Page Name"
+msgstr "Име на пакета"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr ""
@@ -2478,9 +2464,6 @@ msgstr "Сравни"
 
 msgid "Editor"
 msgstr "Редактор"
-
-msgid "Comment"
-msgstr "Коментар"
 
 msgid "view"
 msgstr "покажи"
@@ -2762,10 +2745,6 @@ msgstr ""
 "Има <a href=\"%(link)s\">%(count)s на брой приложение(я)</a> съхранени на "
 "тази страница."
 
-#, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "Приложение '%(target)s' вече съществува."
-
 msgid "Filename of attachment not specified!"
 msgstr "Не е указано име на файл за прикрепяне!"
 
@@ -2801,11 +2780,20 @@ msgstr "Няма съхранени приложения към %(pagename)s"
 msgid "Edit drawing"
 msgstr "Редакция на чертежа"
 
+msgid "New Attachment"
+msgstr "Ново приложение"
+
 msgid "File to upload"
 msgstr "Файл за качване"
 
 msgid "Rename to"
 msgstr "Преименувай на"
+
+msgid "Overwrite existing attachment of same name"
+msgstr "Презаписване на съществуващо приложение със същото име"
+
+msgid "Upload"
+msgstr "Качване"
 
 msgid "Attached Files"
 msgstr "Приложени файлове"
@@ -2821,6 +2809,10 @@ msgstr "Неподдържано действие при качване: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Приложения към \"%(pagename)s\""
 
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Не Ви е позволено да преглеждате допълненията към тази страница."
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
@@ -2828,8 +2820,19 @@ msgstr ""
 "Нулево съдържание на файла. Изтрийте всички не-ASCII символи от името на "
 "файла и опитайте отново."
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"Приложение '%(target)s' (отдалечено име '%(filename)s') с размер %(bytes)d "
+"байта - запазено."
+
 msgid "You are not allowed to save a drawing on this page."
 msgstr "Не Ви е позволено да записвате чертежи на тази страница."
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "Не Ви е позволено да изтривате приложения от тази страница."
 
 #, fuzzy, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -2995,6 +2998,21 @@ msgstr "Не Ви е позволено да извършвате %(action_name)
 
 msgid "Login and try again."
 msgstr "Влезте и опитайте отново."
+
+#, fuzzy
+#~ msgid "New Page or New Attachment"
+#~ msgstr "Ново приложение"
+
+#, fuzzy
+#~ msgid "attachment"
+#~ msgstr "Приложения"
+
+#, fuzzy
+#~ msgid "New Name"
+#~ msgstr "Ново име"
+
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "Приложение '%(target)s' вече съществува."
 
 #~ msgid ""
 #~ "An upload will never overwrite an existing file. If there is a name\n"

@@ -570,9 +570,11 @@ def _do_upload(pagename, request):
     except:
         overwrite = 0
 
-    if (overwrite or not request.user.may.write(pagename)) and \
-       (not overwrite or not request.user.may.write(pagename) or not request.user.may.delete(pagename)):
+    if not request.user.may.write(pagename):
         return _('You are not allowed to attach a file to this page.')
+
+    if overwrite and not request.user.may.delete(pagename):
+        return _('You are not allowed to overwrite a file attachment of this page.')
 
     filename = form.get('file__filename__')
     rename = form.get('rename', [u''])[0].strip()

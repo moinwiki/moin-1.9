@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2005-11-06 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -2367,41 +2367,28 @@ msgstr "صرف نظر از تغییرات در تعداد فاصله های سف
 msgid "Load"
 msgstr "ارسال"
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "شما مجاز به حذف ضمیمه های این صفحه نمی باشید."
-
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
-msgstr ""
-"ضمیمه '%(target)s' (به نام·'%(filename)s') به حجم %(bytes)d بایت ذخیره شد."
-
 #, fuzzy
-msgid "New Page or New Attachment"
-msgstr "ضمیمه جدید"
+msgid "Pagename not specified!"
+msgstr "نام فایل ضمیمه مشخص نشده است!"
+
+msgid "Upload page content"
+msgstr ""
 
 msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
 msgstr ""
 
-msgid "New Attachment"
-msgstr "ضمیمه جدید"
-
-#, fuzzy
-msgid "attachment"
-msgstr "ضمیمه ها"
-
-msgid "Overwrite existing attachment of same name"
+msgid "File to load page content from"
 msgstr ""
 
-msgid "Upload"
-msgstr "ارسال"
+msgid "Comment"
+msgstr "توضیحات"
 
 #, fuzzy
-msgid "New Name"
-msgstr "نام جدید"
+msgid "Page Name"
+msgstr "نام بسته"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "شما مجاز نیستید در صفحه ای عضو شوید که مجوز خواندن آنرا ندارید."
@@ -2457,9 +2444,6 @@ msgstr "تغییرات"
 
 msgid "Editor"
 msgstr "ویرایش توسط"
-
-msgid "Comment"
-msgstr "توضیحات"
 
 msgid "view"
 msgstr "نمایش"
@@ -2738,10 +2722,6 @@ msgid ""
 "page."
 msgstr "این صفحه  دارای <a·href=\"%(link)s\">%(count)s·ضمیمه</a> می باشد."
 
-#, fuzzy, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "ضمیمه '%(filename)s' نصب شد."
-
 msgid "Filename of attachment not specified!"
 msgstr "نام فایل ضمیمه مشخص نشده است!"
 
@@ -2776,11 +2756,20 @@ msgstr "صفحه %(pagename)s ضمیمه ندارد"
 msgid "Edit drawing"
 msgstr "ویرایش ترسیمات"
 
+msgid "New Attachment"
+msgstr "ضمیمه جدید"
+
 msgid "File to upload"
 msgstr "فایل ارسالی"
 
 msgid "Rename to"
 msgstr "تغییر نام به"
+
+msgid "Overwrite existing attachment of same name"
+msgstr ""
+
+msgid "Upload"
+msgstr "ارسال"
 
 msgid "Attached Files"
 msgstr "فایل های ضمیمه شده"
@@ -2796,6 +2785,10 @@ msgstr "ارسال غیر مجاز: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "ضمیمه های صفحه \"%(pagename)s\""
 
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "شما مجاز به دیدن ضمیمه های این صفحه نمی باشید."
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
@@ -2803,8 +2796,18 @@ msgstr ""
 "محتویات فایل یافت نشد. کاراکترهای غیر ASCII را از نام فایل حذف نموده و مجددا "
 "سعی نمایید."
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"ضمیمه '%(target)s' (به نام·'%(filename)s') به حجم %(bytes)d بایت ذخیره شد."
+
 msgid "You are not allowed to save a drawing on this page."
 msgstr "شما مجاز به ذخیره ترسیمات برای این صفحه نیستید."
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "شما مجاز به حذف ضمیمه های این صفحه نمی باشید."
 
 #, fuzzy, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -2971,6 +2974,22 @@ msgstr "عملیات %(actionname)s روی این صفحه مجاز نیست!"
 
 msgid "Login and try again."
 msgstr "لطفا وارد سایت شده و مجددا سعی نمایید."
+
+#, fuzzy
+#~ msgid "New Page or New Attachment"
+#~ msgstr "ضمیمه جدید"
+
+#, fuzzy
+#~ msgid "attachment"
+#~ msgstr "ضمیمه ها"
+
+#, fuzzy
+#~ msgid "New Name"
+#~ msgstr "نام جدید"
+
+#, fuzzy
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "ضمیمه '%(filename)s' نصب شد."
 
 #~ msgid ""
 #~ "An upload will never overwrite an existing file. If there is a name\n"

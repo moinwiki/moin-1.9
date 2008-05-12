@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2004-12-01 21:30+0200\n"
 "Last-Translator: Joerg Cassens <jmt@cassens.org>\n"
 "Language-Team: Norwegian <moinmoin-nb@cassens.org>\n"
@@ -2307,40 +2307,27 @@ msgstr "Ignorer endringer i antall mellomrom"
 msgid "Load"
 msgstr "Last opp"
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "Du har ikke tillatelse til å slette vedlegg på denne siden."
-
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
-msgstr ""
-"Vedlegg '%(target)s' (eksternt navn '%(filename)s') på %(bytes)d byte lagret."
-
 #, fuzzy
-msgid "New Page or New Attachment"
-msgstr "Nytt vedlegg"
+msgid "Pagename not specified!"
+msgstr "Filnavn for vedlegg mangler!"
+
+msgid "Upload page content"
+msgstr ""
 
 msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
 msgstr ""
 
-msgid "New Attachment"
-msgstr "Nytt vedlegg"
-
-#, fuzzy
-msgid "attachment"
-msgstr "Nytt vedlegg"
-
-msgid "Overwrite existing attachment of same name"
+msgid "File to load page content from"
 msgstr ""
 
-msgid "Upload"
-msgstr "Last opp"
+msgid "Comment"
+msgstr "Kommentar"
 
 #, fuzzy
-msgid "New Name"
+msgid "Page Name"
 msgstr "Nytt navn"
 
 msgid "You are not allowed to subscribe to a page you can't read."
@@ -2397,9 +2384,6 @@ msgstr "Endringer"
 
 msgid "Editor"
 msgstr "Forfatter"
-
-msgid "Comment"
-msgstr "Kommentar"
 
 msgid "view"
 msgstr "vis"
@@ -2673,10 +2657,6 @@ msgid ""
 "page."
 msgstr "Det er <a href=\"%(link)s\">%(count)s vedlegg</a> til denne siden."
 
-#, fuzzy, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "Vedlegg '%(filename)s' slettet."
-
 msgid "Filename of attachment not specified!"
 msgstr "Filnavn for vedlegg mangler!"
 
@@ -2711,12 +2691,21 @@ msgstr "Ingen vedlegg for %(pagename)s"
 msgid "Edit drawing"
 msgstr "Endre tegning"
 
+msgid "New Attachment"
+msgstr "Nytt vedlegg"
+
 msgid "File to upload"
 msgstr "Fil å laste opp"
 
 #, fuzzy
 msgid "Rename to"
 msgstr "Endre sidenavn"
+
+msgid "Overwrite existing attachment of same name"
+msgstr ""
+
+msgid "Upload"
+msgstr "Last opp"
 
 msgid "Attached Files"
 msgstr "Vedlegg"
@@ -2732,14 +2721,28 @@ msgstr "Opplastningsoperasjonen er ikke støttet: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Vedlegg for \"%(pagename)s\""
 
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Du har ikke tillatelse til å se vedlegg til denne siden."
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
 msgstr ""
 "Filen er tom. Slett tegn som ikke er ASCII fra filnavnet og prøv igjen."
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"Vedlegg '%(target)s' (eksternt navn '%(filename)s') på %(bytes)d byte lagret."
+
 msgid "You are not allowed to save a drawing on this page."
 msgstr "Du har ikke tillatelse til å lagre en tegning på denne siden."
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "Du har ikke tillatelse til å slette vedlegg på denne siden."
 
 #, fuzzy, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -2905,6 +2908,18 @@ msgstr "Du har ikke tillatelse til å %s denne siden!"
 #, fuzzy
 msgid "Login and try again."
 msgstr " %s og prøv igjen."
+
+#, fuzzy
+#~ msgid "New Page or New Attachment"
+#~ msgstr "Nytt vedlegg"
+
+#, fuzzy
+#~ msgid "attachment"
+#~ msgstr "Nytt vedlegg"
+
+#, fuzzy
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "Vedlegg '%(filename)s' slettet."
 
 #~ msgid ""
 #~ "An upload will never overwrite an existing file. If there is a name\n"

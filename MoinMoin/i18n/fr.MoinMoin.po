@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2008-03-25 05:16+0100\n"
 "Last-Translator: Jean-Philippe Guérard <fevrier@tigreraye.org>\n"
 "Language-Team: Français\n"
@@ -2425,41 +2425,28 @@ msgstr "Ignorer les modifications du nombre d'espaces"
 msgid "Load"
 msgstr "Charger"
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "Vous n'êtes pas autorisé à supprimer les pièces jointes de cette page."
+#, fuzzy
+msgid "Pagename not specified!"
+msgstr "Le nom du fichier à ajouter n'est pas spécifié !"
 
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
+msgid "Upload page content"
 msgstr ""
-"Pièce jointe « %(target)s » enregistrée (nom distant « %(filename)s » ; %"
-"(bytes)d octets)."
-
-msgid "New Page or New Attachment"
-msgstr "Nouvelle page ou pièce jointe"
 
 msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
 msgstr ""
-"Vous pouvez ajouter un fichier à une nouvelle page ou le joindre à la page "
-"actuelle"
 
-msgid "New Attachment"
-msgstr "Nouvelle pièce jointe"
+msgid "File to load page content from"
+msgstr ""
 
-msgid "attachment"
-msgstr "pièce jointe"
+msgid "Comment"
+msgstr "Commentaire"
 
-msgid "Overwrite existing attachment of same name"
-msgstr "Écraser les pièces-jointes existantes ayant le même nom"
-
-msgid "Upload"
-msgstr "Ajouter un fichier"
-
-msgid "New Name"
-msgstr "Nouveau nom"
+#, fuzzy
+msgid "Page Name"
+msgstr "Nom du paquet"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr ""
@@ -2514,9 +2501,6 @@ msgstr "Comparer"
 
 msgid "Editor"
 msgstr "Éditeur"
-
-msgid "Comment"
-msgstr "Commentaire"
 
 msgid "view"
 msgstr "voir"
@@ -2801,10 +2785,6 @@ msgid ""
 "page."
 msgstr "Il y a <a href=\"%(link)s\">%(count)s pièces jointes</a> à cette page."
 
-#, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "La pièce jointe « %(target)s » existe déjà."
-
 msgid "Filename of attachment not specified!"
 msgstr "Le nom du fichier à ajouter n'est pas spécifié !"
 
@@ -2840,11 +2820,20 @@ msgstr "Pas de pièce jointe enregistrée sur %(pagename)s"
 msgid "Edit drawing"
 msgstr "Édition du dessin"
 
+msgid "New Attachment"
+msgstr "Nouvelle pièce jointe"
+
 msgid "File to upload"
 msgstr "Fichier à ajouter"
 
 msgid "Rename to"
 msgstr "Renommer en"
+
+msgid "Overwrite existing attachment of same name"
+msgstr "Écraser les pièces-jointes existantes ayant le même nom"
+
+msgid "Upload"
+msgstr "Ajouter un fichier"
 
 msgid "Attached Files"
 msgstr "Fichiers joints"
@@ -2860,6 +2849,10 @@ msgstr "Sous-action d'ajout non disponible : %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Pièces jointes de « %(pagename)s »"
 
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Vous n'êtes pas autorisé à voir les pièces jointes de cette page."
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
@@ -2867,8 +2860,19 @@ msgstr ""
 "Aucun contenu trouvé. Supprimez les caractères non ASCII du nom du fichier "
 "et réessayez."
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"Pièce jointe « %(target)s » enregistrée (nom distant « %(filename)s » ; %"
+"(bytes)d octets)."
+
 msgid "You are not allowed to save a drawing on this page."
 msgstr "Vous n'êtes pas autorisé à enregistrer un dessin dans cette page."
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "Vous n'êtes pas autorisé à supprimer les pièces jointes de cette page."
 
 #, fuzzy, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -3042,6 +3046,25 @@ msgstr ""
 
 msgid "Login and try again."
 msgstr "Connectez-vous et essayez à nouveau."
+
+#~ msgid "New Page or New Attachment"
+#~ msgstr "Nouvelle page ou pièce jointe"
+
+#~ msgid ""
+#~ "You can upload a file to a new page or choose to upload a file as "
+#~ "attachment for the current page"
+#~ msgstr ""
+#~ "Vous pouvez ajouter un fichier à une nouvelle page ou le joindre à la "
+#~ "page actuelle"
+
+#~ msgid "attachment"
+#~ msgstr "pièce jointe"
+
+#~ msgid "New Name"
+#~ msgstr "Nouveau nom"
+
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "La pièce jointe « %(target)s » existe déjà."
 
 #~ msgid ""
 #~ "An upload will never overwrite an existing file. If there is a name\n"

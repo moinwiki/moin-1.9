@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2006-02-09 11:25+0100\n"
 "Last-Translator: Radomir Dopieralski <mondev@sheep.art.pl>\n"
 "Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
@@ -2371,41 +2371,28 @@ msgstr "Ignoruj zmiany w ilości spacji"
 msgid "Load"
 msgstr "Wczytaj"
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "Nie możesz kasować załączników tej strony."
+#, fuzzy
+msgid "Pagename not specified!"
+msgstr "Nie została podana nazwa pliku załącznika!"
 
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
+msgid "Upload page content"
 msgstr ""
-"Załącznik '%(target)s' (nazwa zdalna '%(filename)s') o wielkości %(bytes)d "
-"bajtów zapisany."
-
-msgid "New Page or New Attachment"
-msgstr "Nowa strona lub załącznik"
 
 msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
 msgstr ""
-"Możesz uploadować plik do nowej strony albo wybrać upload pliku jako "
-"załącznik do aktualnej strony"
 
-msgid "New Attachment"
-msgstr "Nowy załącznik"
+msgid "File to load page content from"
+msgstr ""
 
-msgid "attachment"
-msgstr "załącznik"
+msgid "Comment"
+msgstr "Komentarz"
 
-msgid "Overwrite existing attachment of same name"
-msgstr "Nadpisz istniejący załącznik o tej samej nazwie"
-
-msgid "Upload"
-msgstr "Przekaż"
-
-msgid "New Name"
-msgstr "Nowa nazwa"
+#, fuzzy
+msgid "Page Name"
+msgstr "Nazwa pakietu"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Nie możesz subskrybować strony, której nie możesz przeczytać."
@@ -2460,9 +2447,6 @@ msgstr "Różnice"
 
 msgid "Editor"
 msgstr "Edytor"
-
-msgid "Comment"
-msgstr "Komentarz"
 
 msgid "view"
 msgstr "zobacz"
@@ -2742,10 +2726,6 @@ msgid ""
 msgstr ""
 "Istnieje <a href=\"%(link)s\">%(count)s załącznik(ów)</a> do tej strony."
 
-#, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "Załącznik '%(target)s' już istnieje."
-
 msgid "Filename of attachment not specified!"
 msgstr "Nie została podana nazwa pliku załącznika!"
 
@@ -2782,11 +2762,20 @@ msgstr "Strona %(pagename)s nie ma żadnych załączników"
 msgid "Edit drawing"
 msgstr "Edytuj rysunek"
 
+msgid "New Attachment"
+msgstr "Nowy załącznik"
+
 msgid "File to upload"
 msgstr "Plik do przekazania"
 
 msgid "Rename to"
 msgstr "Zmień nazwę"
+
+msgid "Overwrite existing attachment of same name"
+msgstr "Nadpisz istniejący załącznik o tej samej nazwie"
+
+msgid "Upload"
+msgstr "Przekaż"
 
 msgid "Attached Files"
 msgstr "Załączone pliki"
@@ -2802,14 +2791,29 @@ msgstr "Nieprzewidziany sposób poboru pliku: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Załączniki do \"%(pagename)s\""
 
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Nie możesz oglądać załączników tej strony."
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
 msgstr ""
 "W pliku nie ma nic. Skasuj wszystkie dziwne znaczki i spróbuj ponownie."
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"Załącznik '%(target)s' (nazwa zdalna '%(filename)s') o wielkości %(bytes)d "
+"bajtów zapisany."
+
 msgid "You are not allowed to save a drawing on this page."
 msgstr "Nie możesz zachowywać rysunków na niniejszej stronie."
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "Nie możesz kasować załączników tej strony."
 
 #, fuzzy, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -2976,6 +2980,25 @@ msgstr "Nie możesz wykonać %(action_name)s na niniejszej stronie."
 
 msgid "Login and try again."
 msgstr "Zaloguj się i spróbuj ponownie."
+
+#~ msgid "New Page or New Attachment"
+#~ msgstr "Nowa strona lub załącznik"
+
+#~ msgid ""
+#~ "You can upload a file to a new page or choose to upload a file as "
+#~ "attachment for the current page"
+#~ msgstr ""
+#~ "Możesz uploadować plik do nowej strony albo wybrać upload pliku jako "
+#~ "załącznik do aktualnej strony"
+
+#~ msgid "attachment"
+#~ msgstr "załącznik"
+
+#~ msgid "New Name"
+#~ msgstr "Nowa nazwa"
+
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "Załącznik '%(target)s' już istnieje."
 
 #~ msgid ""
 #~ "An upload will never overwrite an existing file. If there is a name\n"
