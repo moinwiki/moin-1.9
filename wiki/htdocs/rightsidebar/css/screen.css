@@ -11,6 +11,16 @@ body {
 	border: 0;
 }
 
+a.download {
+    font-size: 120%; 
+    letter-spacing: 0.05em;
+    font-weight: bold;
+    background: #E7E7E7;
+    border: 1px solid #9C9C9C;
+    padding: 0.5em;
+    text-align: center;
+}
+
 .footnotes div {
 	width: 5em;
 	border-top: 1px solid #e5e5e5;
