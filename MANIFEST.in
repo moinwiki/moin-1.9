@@ -5,7 +5,7 @@
 
 # additional files not known by setup.py
 include README MANIFEST.in setup.cfg moin.spec
-include moin.py wikiconfig.py
+include wikiserver.py wikiserverconfig.py wikiserverlogging.conf wikiconfig.py
 
 # documentation and licenses
 recursive-include docs *
@@ -24,11 +24,10 @@ global-include */_tests/*
 recursive-include   wiki *
 
 # omit revision control, python bytecode
-global-exclude */CVS/*
-global-exclude */.cvsignore
-global-exclude */.arch-ids/*
 global-exclude *.pyc
 global-exclude *.pyo
+global-exclude */CVS/*
+global-exclude */.cvsignore
 
 # we distribute a uncompressed version, no need for that:
 global-exclude underlay.tar
