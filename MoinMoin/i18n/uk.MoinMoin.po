@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2007-11-10 16:50+0300\n"
 "Last-Translator: Maxim V. Dziumanenko <dziumanenko@softprom.kiev.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -2355,41 +2355,28 @@ msgstr "Ігнорувати різницю у кількості пробілі
 msgid "Load"
 msgstr "Завантажити"
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "Ви не можете стирати вкладення на цій сторінці."
+#, fuzzy
+msgid "Pagename not specified!"
+msgstr "Не вказано назву файлу вкладення!"
 
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
+msgid "Upload page content"
 msgstr ""
-"Вкладення '%(target)s' (з файлу '%(filename)s') довжиною %(bytes)d байт "
-"записано."
-
-msgid "New Page or New Attachment"
-msgstr "Створити сторінку або вкладення"
 
 msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
 msgstr ""
-"Ви можете відвантажити файл у нову сторінку або відвантажити його у вигляді "
-"вкладення до поточної сторінки"
 
-msgid "New Attachment"
-msgstr "Нове вкладення"
+msgid "File to load page content from"
+msgstr ""
 
-msgid "attachment"
-msgstr "вкладення"
+msgid "Comment"
+msgstr "Коментар"
 
-msgid "Overwrite existing attachment of same name"
-msgstr "Перезаписати існуючі вкладення з тими ж назвами"
-
-msgid "Upload"
-msgstr "Відвантажити"
-
-msgid "New Name"
-msgstr "Нова назва"
+#, fuzzy
+msgid "Page Name"
+msgstr "Назва пакету"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Ви не можете стежити за сторінкою, яку заборонено читати."
@@ -2441,9 +2428,6 @@ msgstr "Порівняти"
 
 msgid "Editor"
 msgstr "Редактор"
-
-msgid "Comment"
-msgstr "Коментар"
 
 msgid "view"
 msgstr "показати"
@@ -2720,10 +2704,6 @@ msgid ""
 msgstr ""
 "До цієї сторінки є <a href=\"%(link)s\">вкладення</a> (всього %(count)s)."
 
-#, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "Вкладення '%(target)s' вже існує."
-
 msgid "Filename of attachment not specified!"
 msgstr "Не вказано назву файлу вкладення!"
 
@@ -2759,11 +2739,20 @@ msgstr "Немає вкладень до %(pagename)s"
 msgid "Edit drawing"
 msgstr "Змінити малюнок"
 
+msgid "New Attachment"
+msgstr "Нове вкладення"
+
 msgid "File to upload"
 msgstr "Файл для відвантаження"
 
 msgid "Rename to"
 msgstr "Перейменувати на "
+
+msgid "Overwrite existing attachment of same name"
+msgstr "Перезаписати існуючі вкладення з тими ж назвами"
+
+msgid "Upload"
+msgstr "Відвантажити"
 
 msgid "Attached Files"
 msgstr "Вкладені файли"
@@ -2779,6 +2768,10 @@ msgstr "Непідтримувана дія ДодатиФайл: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Вкладення для \"%(pagename)s\""
 
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Ви не маєте прав на перегляд цієї сторінки."
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
@@ -2786,8 +2779,19 @@ msgstr ""
 "Неправильна назва файлу. Приберіть всі спец-символи з імені файлу та "
 "спробуйте знову."
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"Вкладення '%(target)s' (з файлу '%(filename)s') довжиною %(bytes)d байт "
+"записано."
+
 msgid "You are not allowed to save a drawing on this page."
 msgstr "Ви не можете зберігати малюнки на цій сторінці."
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "Ви не можете стирати вкладення на цій сторінці."
 
 #, fuzzy, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -2952,6 +2956,25 @@ msgstr "Ви не можете виконувати %(action_name)s на цій 
 
 msgid "Login and try again."
 msgstr "Увійдіть знову та спробуйте ще раз."
+
+#~ msgid "New Page or New Attachment"
+#~ msgstr "Створити сторінку або вкладення"
+
+#~ msgid ""
+#~ "You can upload a file to a new page or choose to upload a file as "
+#~ "attachment for the current page"
+#~ msgstr ""
+#~ "Ви можете відвантажити файл у нову сторінку або відвантажити його у "
+#~ "вигляді вкладення до поточної сторінки"
+
+#~ msgid "attachment"
+#~ msgstr "вкладення"
+
+#~ msgid "New Name"
+#~ msgstr "Нова назва"
+
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "Вкладення '%(target)s' вже існує."
 
 #~ msgid ""
 #~ "An upload will never overwrite an existing file. If there is a name\n"

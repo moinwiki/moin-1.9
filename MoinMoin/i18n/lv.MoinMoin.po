@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2008-05-10 22:31+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000 AT gmail DOT NO SPAM com>\n"
 "Language-Team: Latvian <nad2000 AT gmail DOT NO SPAM com>\n"
@@ -2362,41 +2362,28 @@ msgstr "Ignorēt atstarpju(probelu) starpību"
 msgid "Load"
 msgstr "Ielādēt"
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "Jūs nedrīkstat dzēst šīs lapas piesaistes."
+#, fuzzy
+msgid "Pagename not specified!"
+msgstr "Nav norādīts piesaistes faila vārds!"
 
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
+msgid "Upload page content"
 msgstr ""
-"Piesaiste '%(target)s' (no faila '%(filename)s') ar izmēru %(bytes)d baiti "
-"pievienota."
-
-msgid "New Page or New Attachment"
-msgstr "Jauna lapa vai jauna piesaiste"
 
 msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
 msgstr ""
-"Jūs varat augšuplādēt datni jaunā lapā vai izvēlēties augšuplādēt datni kā "
-"piesaisti pašreizējai lapai"
 
-msgid "New Attachment"
-msgstr "Jauna Piesaiste"
+msgid "File to load page content from"
+msgstr ""
 
-msgid "attachment"
-msgstr "piesaiste"
+msgid "Comment"
+msgstr "Komentārs"
 
-msgid "Overwrite existing attachment of same name"
-msgstr "Pārrakstīt piesaisti ar šādu nosaukumu"
-
-msgid "Upload"
-msgstr "Ielādēt"
-
-msgid "New Name"
-msgstr "Jauns nosaukums"
+#, fuzzy
+msgid "Page Name"
+msgstr "Saiņa nosaukums"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Jūs nedrīkstat parakstīties uz lapu, kuru Jums nav tiesību lasīt."
@@ -2449,9 +2436,6 @@ msgstr "Atšķirība"
 
 msgid "Editor"
 msgstr "Redaktors"
-
-msgid "Comment"
-msgstr "Komentārs"
 
 msgid "view"
 msgstr "skats"
@@ -2731,10 +2715,6 @@ msgid ""
 "page."
 msgstr "Šai lapai ir <a href=\"%(link)s\">%(count)s piesaistes</a>. "
 
-#, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "Piesaiste '%(target)s' jau eksistē."
-
 msgid "Filename of attachment not specified!"
 msgstr "Nav norādīts piesaistes faila vārds!"
 
@@ -2770,11 +2750,20 @@ msgstr "Lapai %(pagename)s nav piesaistes"
 msgid "Edit drawing"
 msgstr "Labot attēlu"
 
+msgid "New Attachment"
+msgstr "Jauna Piesaiste"
+
 msgid "File to upload"
 msgstr "Augšupielādējamais fails"
 
 msgid "Rename to"
 msgstr "Pārdēvēt par"
+
+msgid "Overwrite existing attachment of same name"
+msgstr "Pārrakstīt piesaisti ar šādu nosaukumu"
+
+msgid "Upload"
+msgstr "Ielādēt"
 
 msgid "Attached Files"
 msgstr "Piesaistītie faili"
@@ -2790,14 +2779,29 @@ msgstr "Neatbalstīta AttachFile apakšdarbība: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Lapas \"%(pagename)s\" piesaistes"
 
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Jums nav tiesību skatīt šīs lapas piesaistes."
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
 msgstr ""
 "Tukšs faila saturs. Nodzēsiet visus NE ASCII simbolus un mēģiniet vēlreiz."
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"Piesaiste '%(target)s' (no faila '%(filename)s') ar izmēru %(bytes)d baiti "
+"pievienota."
+
 msgid "You are not allowed to save a drawing on this page."
 msgstr "Šajā lapā Jūs nedrīkstat veidot attēlus."
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "Jūs nedrīkstat dzēst šīs lapas piesaistes."
 
 #, fuzzy, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -2964,6 +2968,25 @@ msgstr "Jums nav tiesību veikt darbību %(action_name)s šajā lapā."
 
 msgid "Login and try again."
 msgstr "Pieslēdzieties un mēģiniet vēlreiz."
+
+#~ msgid "New Page or New Attachment"
+#~ msgstr "Jauna lapa vai jauna piesaiste"
+
+#~ msgid ""
+#~ "You can upload a file to a new page or choose to upload a file as "
+#~ "attachment for the current page"
+#~ msgstr ""
+#~ "Jūs varat augšuplādēt datni jaunā lapā vai izvēlēties augšuplādēt datni "
+#~ "kā piesaisti pašreizējai lapai"
+
+#~ msgid "attachment"
+#~ msgstr "piesaiste"
+
+#~ msgid "New Name"
+#~ msgstr "Jauns nosaukums"
+
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "Piesaiste '%(target)s' jau eksistē."
 
 #~ msgid ""
 #~ "An upload will never overwrite an existing file. If there is a name\n"

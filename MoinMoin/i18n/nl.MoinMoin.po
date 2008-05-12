@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 14:33+0200\n"
+"POT-Creation-Date: 2008-05-12 23:52+0200\n"
 "PO-Revision-Date: 2005-03-13 17:43+0200\n"
 "Last-Translator: Sander Kromwijk <s.kromwijk@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -2375,41 +2375,28 @@ msgstr "Wijzigingen in de hoeveelheid witruimte negeren"
 msgid "Load"
 msgstr "Laad"
 
-msgid "You are not allowed to delete attachments on this page."
-msgstr "U hebt geen toestemming bijlages van deze pagina te verwijderen."
+#, fuzzy
+msgid "Pagename not specified!"
+msgstr "Bestandsnaam van bijlage ontbreekt!"
 
-#, python-format
-msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
+msgid "Upload page content"
 msgstr ""
-"Bijlage '%(target)s' opgeslagen (naam op de server '%(filename)s', %(bytes)d "
-"bytes)."
-
-msgid "New Page or New Attachment"
-msgstr "Nieuw pagina of nieuwe bijlage"
 
 msgid ""
-"You can upload a file to a new page or choose to upload a file as attachment "
-"for the current page"
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
 msgstr ""
-"U kunt een bestand naar een nieuwe pagina opsturen of een bestand als "
-"bijlage naar de huidige pagina opsturen"
 
-msgid "New Attachment"
-msgstr "Nieuwe bijlage"
+msgid "File to load page content from"
+msgstr ""
 
-msgid "attachment"
-msgstr "bijlage"
+msgid "Comment"
+msgstr "Commentaar"
 
-msgid "Overwrite existing attachment of same name"
-msgstr "Overschrijf bestaande bijlagen met dezelfde naam"
-
-msgid "Upload"
-msgstr "Opsturen"
-
-msgid "New Name"
-msgstr "Nieuwe naam"
+#, fuzzy
+msgid "Page Name"
+msgstr "Pakket naam"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr ""
@@ -2464,9 +2451,6 @@ msgstr "Verschil"
 
 msgid "Editor"
 msgstr "Bewerker"
-
-msgid "Comment"
-msgstr "Commentaar"
 
 msgid "view"
 msgstr "bekijken"
@@ -2746,10 +2730,6 @@ msgstr ""
 "Er zijn <a href=\"%(link)s\">%(count)s bijlagen</a> opgeslagen voor deze "
 "pagina."
 
-#, python-format
-msgid "Attachment '%(target)s' already exists."
-msgstr "Bijlage '%(target)s' bestaat al."
-
 msgid "Filename of attachment not specified!"
 msgstr "Bestandsnaam van bijlage ontbreekt!"
 
@@ -2785,11 +2765,20 @@ msgstr "Geen bijlagen opgeslagen voor %(pagename)s"
 msgid "Edit drawing"
 msgstr "Tekening bewerken"
 
+msgid "New Attachment"
+msgstr "Nieuwe bijlage"
+
 msgid "File to upload"
 msgstr "Bestand om op te sturen"
 
 msgid "Rename to"
 msgstr "Hernoemen naar"
+
+msgid "Overwrite existing attachment of same name"
+msgstr "Overschrijf bestaande bijlagen met dezelfde naam"
+
+msgid "Upload"
+msgstr "Opsturen"
 
 msgid "Attached Files"
 msgstr "Bijlagen"
@@ -2806,6 +2795,10 @@ msgstr "Niet ondersteunde BestandHecht sub-aktie: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Bijlages voor \"%(pagename)s\""
 
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "U hebt geen toestemming bijlagen van deze pagina te bekijken."
+
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
@@ -2813,8 +2806,19 @@ msgstr ""
 "Geen bestandsinhoud. Verwijder de non-ASCII tekens uit het bestand en "
 "probeer opnieuw."
 
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"Bijlage '%(target)s' opgeslagen (naam op de server '%(filename)s', %(bytes)d "
+"bytes)."
+
 msgid "You are not allowed to save a drawing on this page."
 msgstr "U hebt geen toestemming een afbeelding op deze pagina te bewaren."
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "U hebt geen toestemming bijlages van deze pagina te verwijderen."
 
 #, fuzzy, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -2980,6 +2984,25 @@ msgstr "Het is u niet toegestaan om %(action_name)s op deze pagina te doen."
 
 msgid "Login and try again."
 msgstr "Login en probeer opnieuw"
+
+#~ msgid "New Page or New Attachment"
+#~ msgstr "Nieuw pagina of nieuwe bijlage"
+
+#~ msgid ""
+#~ "You can upload a file to a new page or choose to upload a file as "
+#~ "attachment for the current page"
+#~ msgstr ""
+#~ "U kunt een bestand naar een nieuwe pagina opsturen of een bestand als "
+#~ "bijlage naar de huidige pagina opsturen"
+
+#~ msgid "attachment"
+#~ msgstr "bijlage"
+
+#~ msgid "New Name"
+#~ msgstr "Nieuwe naam"
+
+#~ msgid "Attachment '%(target)s' already exists."
+#~ msgstr "Bijlage '%(target)s' bestaat al."
 
 #~ msgid ""
 #~ "An upload will never overwrite an existing file. If there is a name\n"
