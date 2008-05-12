@@ -65,24 +65,34 @@ def do_user_browser(request):
                                              },
                                     rel='nofollow')
 
-        mail_link = request.page.link_to(
-                        request, text=_('Mail account data'),
-                        querystr={"action": "recoverpass",
-                                  "email": account.email,
-                                  "account_sendmail": "1",
-                                  "sysadm": "users", },
-                        rel='nofollow')
+        recoverpass_link = request.page.link_to(
+                            request, text=_('Mail account data'),
+                            querystr={"action": "recoverpass",
+                                      "email": account.email,
+                                      "account_sendmail": "1",
+                                      "sysadm": "users", },
+                            rel='nofollow')
+
+        if account.email:
+            email_link = (request.formatter.url(1, 'mailto:' + account.email, css='mailto') +
+                          request.formatter.text(account.email) +
+                          request.formatter.url(0))
+        else:
+            email_link = ''
+
+        if account.jid:
+            jabber_link =  (request.formatter.url(1, 'xmpp:' + account.jid, css='mailto') +
+                            request.formatter.text(account.jid) +
+                            request.formatter.url(0))
+        else:
+            jabber_link = ''
 
         data.addRow((
             request.formatter.rawHTML(namelink),
             request.formatter.rawHTML(list_groups),
-            (request.formatter.url(1, 'mailto:' + account.email, css='mailto') +
-             request.formatter.text(account.email) +
-             request.formatter.url(0)),
-            (request.formatter.url(1, 'xmpp:' + account.jid, css='mailto') +
-             request.formatter.text(account.jid) +
-             request.formatter.url(0)),
-            mail_link + " - " + enable_disable_link
+            email_link,
+            jabber_link,
+            recoverpass_link + " - " + enable_disable_link
         ))
 
     if data:
