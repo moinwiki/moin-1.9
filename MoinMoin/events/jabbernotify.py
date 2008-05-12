@@ -150,7 +150,7 @@ def handle_user_created(event):
         if usr.isSuperUser() and usr.jid and event_name in usr.jabber_subscribed_events:
             jids.append(usr.jid)
 
-    data = {'action': "user_created", 'subject': msg['subject'], 'text': msg['body'],
+    data = {'action': "user_created", 'subject': msg['subject'], 'text': msg['text'],
             'url_list': []}
 
     send_notification(event.request, jids, data)

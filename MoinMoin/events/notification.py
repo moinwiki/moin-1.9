@@ -130,7 +130,7 @@ def user_created_message(request, sitename, username, email):
     """
     _ = request.getText
     subject = _("New user account created on %(sitename)s") % {'sitename': sitename or "Wiki"}
-    body = _("""Dear Superuser, a new user has just been created. Details follow:
+    text = _("""Dear Superuser, a new user has just been created. Details follow:
 
     User name: %(username)s
     Email address: %(useremail)s""") % {
@@ -138,7 +138,7 @@ def user_created_message(request, sitename, username, email):
          'useremail': email,
          }
 
-    return {'subject': subject, 'body': body}
+    return {'subject': subject, 'text': text}
 
 def attachment_added(request, _, page_name, attach_name, attach_size):
     """Formats a message used to notify about new attachments
