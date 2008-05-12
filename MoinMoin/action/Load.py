@@ -118,8 +118,8 @@ class Load(ActionBase):
 <dt>%(upload_label_rename)s</dt>
 <dd><input type="text" name="rename" size="50" value=""></dd>
 %(querytext_attachment)s
-<dt>%(upload)s <input type="checkbox" name="attachment" value="off">
-%(overwrite)s <input type="checkbox" name="overwrite" value="off"></dt>
+<dt><input type="checkbox" name="attachment" value="off"> %(upload)s</dt>
+<dt><input type="checkbox" name="overwrite" value="off"> %(overwrite)s</dt>
 </dl>
 <p>
 <input type="hidden" name="action" value="%(action_name)s">
@@ -130,13 +130,10 @@ class Load(ActionBase):
 </td>""" % {
     'querytext_pages': '<h2>' + _("New Page or New Attachment") + '</h2><p>' +
 _("""You can upload a file to a new page or choose to upload a file as attachment for the current page""") + '</p>',
-    'querytext_attachment': '<h2>' + _("New Attachment") + '</h2><p>' +
-_("""An upload will never overwrite an existing file. If there is a name
-conflict, you have to rename the file that you want to upload.
-Otherwise, if "Rename to" is left blank, the original filename will be used.""") + '</p>',
+    'querytext_attachment': '<h2>' + _("New Attachment") + '</h2>',
     'buttons_html': buttons_html,
     'upload': _('attachment'),
-    'overwrite': _('overwrite'),
+    'overwrite': _('Overwrite existing attachment of same name'),
     'action_name': self.form_trigger,
     'upload_label_file': _('Upload'),
     'upload_label_rename': _('New Name'),
