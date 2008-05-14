@@ -148,12 +148,15 @@ class Config(DefaultConfig):
     # The main wiki language, set the direction of the wiki pages
     language_default = 'en'
 
+    # the following regexes should match the complete name when used in free text
+    # the group 'all' shall match all, while the group 'key' shall match the key only
+    # e.g. CategoryFoo -> group 'all' ==  CategoryFoo, group 'key' == Foo
+    # moin's code will add ^ / $ at beginning / end when needed
     # You must use Unicode strings here [Unicode]
-    page_category_regex = u'^Category[A-Z]'
-    page_dict_regex = u'[a-z]Dict$'
-    page_form_regex = u'[a-z]Form$'
-    page_group_regex = u'[a-z]Group$'
-    page_template_regex = u'[a-z]Template$'
+    page_category_regex = ur'(?P<all>Category(?P<key>\S+))'
+    page_dict_regex = ur'(?P<all>(?P<key>\S+)Dict)'
+    page_group_regex = ur'(?P<all>(?P<key>\S+)Group)'
+    page_template_regex = ur'(?P<all>(?P<key>\S+)Template)'
 
     # Content options ---------------------------------------------------
 
