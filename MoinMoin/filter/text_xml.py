@@ -7,6 +7,10 @@
 """
 
 import re
+
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin.filter.text import execute as textfilter
 
 rx_stripxml = re.compile("<[^>]*?>", re.DOTALL|re.MULTILINE)
@@ -16,7 +20,7 @@ def execute(indexobj, filename):
     try:
         data = " ".join(rx_stripxml.sub(" ", data).split())
     except RuntimeError, err:
-        indexobj.request.log(str(err))
+        logging.error(str(err))
         data = ""
     return data
 
