@@ -1356,7 +1356,6 @@ class Page(object):
                        self.page_name.encode(config.charset), 'exec')
         cache = caching.CacheEntry(request, self, self.getFormatterName(), scope='item')
         cache.update(marshal.dumps(code))
-        self.cache_mtime = cache.mtime()
         return code
 
     def _specialPageText(self, request, special_type):

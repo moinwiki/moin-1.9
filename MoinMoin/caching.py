@@ -81,10 +81,19 @@ class CacheEntry:
         return os.path.exists(self._filename())
 
     def mtime(self):
+        # DEPRECATED for checking a changed on-disk cache, please use
+        # self.uid() for this, see below
         try:
             return os.path.getmtime(self._filename())
         except (IOError, OSError):
             return 0
+
+    def uid(self):
+        """ Return a value that likely changes when the on-disk cache was updated.
+
+            See docstring of MoinMoin.util.filesys.fuid for details.
+        """
+        return filesys.fuid(self._filename())
 
     def needsUpdate(self, filename, attachdir=None):
         # following code is not necessary. will trigger exception and give same result
