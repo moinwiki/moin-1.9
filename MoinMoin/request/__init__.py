@@ -181,7 +181,11 @@ class RequestBase(object):
                 self.action = 'xmlrpc'
                 self.rev = None
             else:
-                self.args = self.form = self.setup_args()
+                try:
+                    self.args = self.form = self.setup_args()
+                except UnicodeError:
+                    self.makeForbidden(403, "The input you sent could not be understood.")
+                    return
                 self.action = self.form.get('action', ['show'])[0]
                 try:
                     self.rev = int(self.form['rev'][0])
