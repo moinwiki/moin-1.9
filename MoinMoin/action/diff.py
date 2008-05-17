@@ -102,12 +102,21 @@ def execute(pagename, request):
     oldrev = oldpage.get_real_rev()
     newrev = newpage.get_real_rev()
 
+    revlist = currentpage.getRevList()
+
+    # code below assumes that the page exists and has at least
+    # one revision in the revlist, just bail out if not. Users
+    # shouldn't really run into this anyway.
+    if not revlist:
+        request.write(f.div(0)) # end content div
+        request.theme.send_footer(pagename)
+        request.theme.send_closing_html()
+        return
+
     title = _('Differences between revisions %d and %d') % (oldrev, newrev)
     if edit_count > 1:
         title += ' ' + _('(spanning %d versions)') % (edit_count, )
     title = f.text(title)
-
-    revlist = currentpage.getRevList()
 
     # Revision list starts from 2...
     if oldrev == min(revlist):
