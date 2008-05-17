@@ -47,7 +47,7 @@ def request_translations(config):
     """
 
     wiki = xmlrpclib.Server(config.wiki_url + "?action=xmlrpc2")
-    log = logging.getLogger("log")
+    log = logging.getLogger(__name__)
     log.debug("Initialising i18n...")
 
     try:

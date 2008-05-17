@@ -81,7 +81,7 @@ class XMLRPCClient(Thread):
 
         """
         Thread.__init__(self)
-        self.log = logging.getLogger("log")
+        self.log = logging.getLogger(__name__)
 
         if not config.secret:
             error = "You must set a (long) secret string!"
@@ -310,7 +310,7 @@ class XMLRPCServer(Thread):
         Thread.__init__(self)
         self.commands = commands
         self.verbose = config.verbose
-        self.log = logging.getLogger("log")
+        self.log = logging.getLogger(__name__)
         self.config = config
 
         if config.secret:

@@ -180,7 +180,7 @@ class XMPPBot(Client, Thread):
         jid = u"%s@%s/%s" % (config.xmpp_node, config.xmpp_server, config.xmpp_resource)
 
         self.config = config
-        self.log = logging.getLogger("log")
+        self.log = logging.getLogger(__name__)
         self.jid = JID(node_or_jid=jid, domain=config.xmpp_server, resource=config.xmpp_resource)
         self.tlsconfig = TLSSettings(require = True, verify_peer=False)
 

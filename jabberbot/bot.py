@@ -50,7 +50,7 @@ def main():
 
         raise SystemExit
 
-    log = logging.getLogger("log")
+    log = logging.getLogger(__name__)
     log.setLevel(logging.DEBUG)
     log.addHandler(logging.StreamHandler())
 
