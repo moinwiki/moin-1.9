@@ -207,7 +207,7 @@ class GroupDict(DictDict):
         self.dictdict = {}
         self.groupdict = {} # unexpanded groups
         self.picklever = DICTS_PICKLE_VERSION
-        self.disk_cache_mtime = 0
+        self.disk_cache_id = None
 
     def has_member(self, groupname, member):
         """ check if we have <member> as a member of group <groupname> """
@@ -289,10 +289,11 @@ class GroupDict(DictDict):
         arena = 'wikidicts'
         key = 'dicts_groups'
         cache = caching.CacheEntry(request, arena, key, scope='wiki', use_pickle=True)
-        current_disk_cache_mtime = cache.mtime()
+        current_disk_cache_id = cache.uid()
         try:
             self.__dict__.update(self.cfg.cache.DICTS_DATA)
-            if current_disk_cache_mtime > self.disk_cache_mtime:
+            if (current_disk_cache_id is None or
+                current_disk_cache_id != self.disk_cache_id):
                 self.reset()
                 raise AttributeError # not fresh, force load from disk
             else:
@@ -301,7 +302,7 @@ class GroupDict(DictDict):
             try:
                 data = cache.content()
                 self.__dict__.update(data)
-                self.disk_cache_mtime = current_disk_cache_mtime
+                self.disk_cache_id = current_disk_cache_id
 
                 # invalidate the cache if the pickle version changed
                 if self.picklever != DICTS_PICKLE_VERSION:
@@ -316,7 +317,7 @@ class GroupDict(DictDict):
             return
 
         data = {
-            "disk_cache_mtime": self.disk_cache_mtime,
+            "disk_cache_id": self.disk_cache_id,
             "dictdict": self.dictdict,
             "groupdict": self.groupdict,
             "picklever": self.picklever
