@@ -28,11 +28,11 @@ class TestEmbedObject:
 
         AttachFile.getAttachDir(request, pagename)
         test_files = [
-            ('test.ogg', u'vorbis'),
-            ('test.svg', u'SVG'),
-            ('test.mpg', u'MPG'),
-            ('test.pdf', u'PDF'),
-            ('test.mp3', u'MP3'),
+            ('test.ogg', str(u'vorbis')),
+            ('test.svg', str(u'SVG')),
+            ('test.mpg', str(u'MPG')),
+            ('test.pdf', str(u'PDF')),
+            ('test.mp3', str(u'MP3')),
         ]
         for filename, filecontent in test_files:
             AttachFile.add_attachment(request, pagename, filename, filecontent, overwrite=0)

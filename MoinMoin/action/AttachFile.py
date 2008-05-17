@@ -172,11 +172,14 @@ def info(pagename, request):
 
 
 def _write_stream(content, stream, bufsize=8192):
-    if isinstance(content, str):
-        stream.write(content)
-    elif isinstance(content, file):
+    if hasattr(content, 'read'): # looks file-like
         import shutil
         shutil.copyfileobj(content, stream, bufsize)
+    elif isinstance(content, str):
+        stream.write(content)
+    else:
+        logging.error("unsupported content object: %r" % content)
+        raise
 
 def add_attachment(request, pagename, target, filecontent, overwrite=0):
     """ save <filecontent> to an attachment <target> of page <pagename>
@@ -626,14 +629,12 @@ def _do_savedrawing(pagename, request):
     attach_dir = getAttachDir(request, pagename, create=1)
     savepath = os.path.join(attach_dir, basename + ext)
 
-    # XXX would be better if it worked without this (at least for the png),
-    # XXX but it does not:
-    filecontent = filecontent.read() # read file completely into memory
-
     if ext == '.draw':
         _addLogEntry(request, 'ATTDRW', pagename, basename + ext)
+        filecontent = filecontent.read() # read file completely into memory
         filecontent = filecontent.replace("\r", "")
     elif ext == '.map':
+        filecontent = filecontent.read() # read file completely into memory
         filecontent = filecontent.strip()
 
     if filecontent:
