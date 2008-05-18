@@ -549,7 +549,6 @@ msgstr ""
 msgid "Login"
 msgstr "ログイン"
 
-#, fuzzy
 msgid "Username"
 msgstr "ユーザ名"
 
@@ -561,7 +560,7 @@ msgid "Email"
 msgstr "メールアドレス"
 
 msgid "Jabber"
-msgstr ""
+msgstr "Jabber"
 
 msgid "Action"
 msgstr "アクション"
@@ -591,12 +590,17 @@ msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
+"アカウントを持っていない場合、<a href=\"%(userprefslink)s\">作成することができます</a>。"
+"<a href=\"%(sendmypasswordlink)s\">もしくはパスワードをお忘れですか?</a>"
 
 msgid ""
 "Please choose an account name now.\n"
 "If you choose an existing account name you will be asked for the\n"
 "password and be able to associate the account with your OpenID."
 msgstr ""
+"アカウント名を指定してください。"
+"既存のアカウント名を指定した場合、パスワードの入力が求められます。"
+"また、アカウントとOpenIDを関連付けることができます。"
 
 #, fuzzy
 msgid "Choose this name"
