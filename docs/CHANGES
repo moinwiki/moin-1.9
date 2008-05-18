@@ -49,6 +49,16 @@ Known main issues:
     make install
 
 
+Version 1.7.0current:
+
+  Bug Fixes:
+    * Fix hmac for Python 2.4.
+    * AttachFile: fix uploading of < 1K files
+    * fix action=info on page that never existed
+    * deny access on invalid input (happens only with spammers anyway)
+    * fix failure of detection of on-disk cache updates
+
+
 Version 1.7.0beta2:
 
   Bug Fixes:
