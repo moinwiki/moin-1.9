@@ -481,6 +481,11 @@ TD.tip {
     margin: 0 0.5em 0 0.125em;
     vertical-align: middle;
 }
+#message a.clear-link {
+    display: block;
+    margin: 0.75em 0 0 0;
+    font-size: small;
+}
 
 
 /* admonition start */
