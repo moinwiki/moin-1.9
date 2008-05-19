@@ -26,6 +26,16 @@ def execute(macro, args):
         return '<span class="error">%s</span>' % err
 
     # Return a title search for needle, sorted by name.
-    results = search.searchPages(macro.request, needle,
-              titlesearch=1, case=case, sort='page_name')
-    return results.pageList(macro.request, macro.formatter, paging=False)
+    try:
+        results = search.searchPages(macro.request, needle,
+                                     titlesearch=1, case=case,
+                                     sort='page_name')
+        ret = results.pageList(macro.request, macro.formatter, paging=False)
+    except ValueError:
+        # same error as in MoinMoin/action/fullsearch.py, keep it that way!
+        ret = ''.join([macro.formatter.text('<<PageList('),
+                      _('Your search query {{{"%s"}}} is invalid. Please refer to '
+                        'HelpOnSearching for more information.', wiki=True,
+                        percent=True) % wikiutil.escape(needle),
+                      macro.formatter.text(')>>')])
+    return ret
