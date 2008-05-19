@@ -1173,7 +1173,7 @@ class Page(object):
         special = None
 
         if not send_special:
-            if not page_exists:
+            if not page_exists and not body:
                 special = 'missing'
             elif not request.user.may.read(self.page_name):
                 special = 'denied'
