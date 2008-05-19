@@ -74,7 +74,7 @@ del c
 # Other stuff
 url_schemas = ['http', 'https', 'ftp', 'file',
                'mailto', 'nntp', 'news',
-               'telnet', 'irc', 'ircs', 'xmpp',
+               'ssh', 'telnet', 'irc', 'ircs', 'xmpp',
                'webcal', 'ed2k', 'rootz',
                'notes',
               ]
