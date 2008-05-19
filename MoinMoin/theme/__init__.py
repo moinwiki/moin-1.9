@@ -574,7 +574,7 @@ class ThemeBase:
         msgs = d['msg']
 
         result = u""
-        close = d['page'].link_to(self.request, text=_('Clear message'))
+        close = d['page'].link_to(self.request, text=_('Clear message'), css_class="clear-link")
         for msg, msg_class in msgs:
             try:
                 result += u'<p>%s</p>' % msg.render()
