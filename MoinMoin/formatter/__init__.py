@@ -314,6 +314,8 @@ class FormatterBase:
             return macro_obj.execute(name, args)
         except ImportError, err:
             errmsg = unicode(err)
+            if errmsg.find(name) == -1:
+                raise
             if markup:
                 return (self.span(1, title=errmsg) +
                         self.text(markup) +
