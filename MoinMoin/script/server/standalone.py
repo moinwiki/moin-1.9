@@ -98,8 +98,13 @@ class PluginScript(MoinScript):
                 if self.options.config_dir:
                     sys.path.insert(0, self.options.config_dir)
                 from wikiserverconfig import Config
-            except ImportError:
-                Config = DefaultConfig
+            except ImportError, err:
+                if 'Config' in str(err):
+                    # we are unable to import Config
+                    Config = DefaultConfig
+                else:
+                    # some other import went wrong
+                    raise
 
             if self.options.docs:
                 Config.docs = self.options.docs
