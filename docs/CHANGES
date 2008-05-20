@@ -725,6 +725,11 @@ Version 1.6.0:
       need to use "from MoinMoin.config.multiconfig import DefaultConfig" now.
       You need to change this in your wikiconfig.py or farmconfig.py file.
       See MoinMoin/multiconfig.py for an alternative way if you can't do that.
+    * HINT: you need to change some imports (if you have them in your config):
+      Old: from MoinMoin.util.antispam import SecurityPolicy
+      New: from MoinMoin.security.antispam import SecurityPolicy
+      Old: from MoinMoin.util.autoadmin import SecurityPolicy
+      New: from MoinMoin.security.autoadmin import SecurityPolicy
     * HINT: you need to change your auth stuff, the new way is:
       from MoinMoin.auth import moin_login, moin_session
       from MoinMoin.auth.http import http
@@ -803,8 +808,6 @@ Version 1.6.0:
       Most stuff will be broken, please help fixing it (usually some imports
       will be missing and the adaptor script will need a change maybe):
       Tested successfully: CGI, CLI, STANDALONE, FCGI, TWISTED
-    * Moved util/antispam.py to security/antispam.py.
-    * Moved util/autoadmin.py to security/autoadmin.py.
     * Moved security.py to security/__init__.py.
     * Moved wikiacl.py to security/__init__.py.
     * Moved logfile/logfile.py to logfile/__init__.py.
