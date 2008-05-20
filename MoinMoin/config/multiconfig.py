@@ -77,10 +77,15 @@ def _url_re_list():
     if _url_re_cache is None:
         try:
             farmconfig, _farmconfig_mtime = _importConfigModule('farmconfig')
-        except ImportError:
-            logging.debug("could not import farmconfig, mapping all URLs to wikiconfig")
-            _farmconfig_mtime = 0
-            _url_re_cache = [('wikiconfig', re.compile(r'.')), ] # matches everything
+        except ImportError, err:
+            if 'farmconfig' in str(err):
+                # we failed importing farmconfig
+                logging.debug("could not import farmconfig, mapping all URLs to wikiconfig")
+                _farmconfig_mtime = 0
+                _url_re_cache = [('wikiconfig', re.compile(r'.')), ] # matches everything
+            else:
+                # maybe there was a failing import statement inside farmconfig
+                raise
         else:
             logging.info("using farm config: %s" % os.path.abspath(farmconfig.__file__))
             try:
