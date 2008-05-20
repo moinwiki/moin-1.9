@@ -46,10 +46,7 @@ class PageGraphicalEditor(PageEditor.PageEditor):
         @keyword comment: comment field (when preview is true)
         """
         from MoinMoin import i18n
-        try:
-            from MoinMoin.action import SpellCheck
-        except ImportError:
-            SpellCheck = None
+        from MoinMoin.action import SpellCheck
 
         request = self.request
         form = request.form
@@ -253,9 +250,7 @@ Please review the page and save then. Do not save this page as it is!""")
             request.write(unicode(html.INPUT(type="hidden", name="backto", value=backto)))
 
         # button bar
-        button_spellcheck = (SpellCheck and
-            '<input class="button" type="submit" name="button_spellcheck" value="%s">'
-                % _('Check Spelling')) or ''
+        button_spellcheck = '<input class="button" type="submit" name="button_spellcheck" value="%s">' % _('Check Spelling')
 
         save_button_text = _('Save Changes')
         cancel_button_text = _('Cancel')
@@ -397,9 +392,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 
         badwords_re = None
         if preview is not None:
-            if SpellCheck and (
-                    'button_spellcheck' in form or
-                    'button_newwords' in form):
+            if 'button_spellcheck' in form or 'button_newwords' in form:
                 badwords, badwords_re, msg = SpellCheck.checkSpelling(self, request, own_form=0)
                 request.write("<p>%s</p>" % msg)
         request.write('</fieldset>')
