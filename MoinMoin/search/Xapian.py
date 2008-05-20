@@ -368,10 +368,10 @@ class Index(BaseIndex):
                 xrev = xapdoc.SortKey('revision', '0')
                 title = " ".join(os.path.join(fs_rootpage, filename).split("/"))
                 xtitle = xapdoc.Keyword('title', title)
-                xmimetype = xapdoc.TextField('mimetype', mimetype, True)
+                xmimetype = xapdoc.Keyword('mimetype', mimetype)
                 xcontent = xapdoc.TextField('content', file_content)
-                doc = xapdoc.Document(textFields=(xcontent, xmimetype, ),
-                                      keywords=(xtitle, xitemid, ),
+                doc = xapdoc.Document(textFields=(xcontent, ),
+                                      keywords=(xtitle, xitemid, xmimetype, ),
                                       sortFields=(xpname, xattachment,
                                           xmtime, xwname, xrev, ),
                                      )
@@ -503,6 +503,7 @@ class Index(BaseIndex):
                     xapdoc.Keyword('fulltitle', pagename),
                     xapdoc.Keyword('revision', revision),
                     xapdoc.Keyword('author', author),
+                    xapdoc.Keyword('mimetype', 'text/%s' % page.pi['format']), # XXX improve this
                 ]
             for pagelink in page.getPageLinks(request):
                 xkeywords.append(xapdoc.Keyword('linkto', pagelink))
