@@ -22,8 +22,7 @@
 # add names here to hide them in the cgitb traceback
 unsafe_names = ("id", "key", "val", "user_data", "enc_password", "recoverpass_key")
 
-import os, time, sha, codecs
-import hmac, sha
+import os, time, sha, codecs, hmac
 
 from MoinMoin import config, caching, wikiutil, i18n, events
 from MoinMoin.util import timefuncs, filesys, random_string
@@ -1039,7 +1038,7 @@ class User:
         if stamp + 12*60*60 < time.time():
             return False
         # check hmac
-        h = hmac.new(self.recoverpass_key, str(stamp), sha.new).hexdigest()
+        h = hmac.new(self.recoverpass_key, str(stamp), sha).hexdigest()
         if h != parts[1]:
             return False
         self.recoverpass_key = ""
