@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-05-12 23:52+0200\n"
-"PO-Revision-Date: 2008-05-12 21:00+0900\n"
-"Last-Translator: MiyagawaHiroyuki\n"
+"PO-Revision-Date: 2008-05-22 02:06+0900\n"
+"Last-Translator: MasatakeIwasaki\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -28,7 +28,7 @@ msgstr ""
 msgid "<unknown>"
 msgstr "<不明>"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
@@ -544,7 +544,7 @@ msgid "Password"
 msgstr "パスワード"
 
 msgid "OpenID"
-msgstr ""
+msgstr "OpenID"
 
 msgid "Login"
 msgstr "ログイン"
@@ -552,9 +552,8 @@ msgstr "ログイン"
 msgid "Username"
 msgstr "ユーザ名"
 
-#, fuzzy
 msgid "Member of Groups"
-msgstr "ページ数"
+msgstr "所属するグループ"
 
 msgid "Email"
 msgstr "メールアドレス"
@@ -581,7 +580,6 @@ msgid "Missing password. Please enter user name and password."
 msgstr ""
 "パスワードが入力されていません。ユーザ名とパスワードを入力してください。"
 
-#, fuzzy
 msgid "You need to log in."
 msgstr "ログインしてください。"
 
@@ -590,21 +588,20 @@ msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
-"アカウントを持っていない場合、<a href=\"%(userprefslink)s\">作成することができます</a>。"
-"<a href=\"%(sendmypasswordlink)s\">もしくはパスワードをお忘れですか?</a>"
+"アカウントを持っていない場合、<a href=\"%(userprefslink)s\">作成することがで"
+"きます</a>。<a href=\"%(sendmypasswordlink)s\">もしくはパスワードをお忘れです"
+"か?</a>"
 
 msgid ""
 "Please choose an account name now.\n"
 "If you choose an existing account name you will be asked for the\n"
 "password and be able to associate the account with your OpenID."
 msgstr ""
-"アカウント名を指定してください。"
-"既存のアカウント名を指定した場合、パスワードの入力が求められます。"
-"また、アカウントとOpenIDを関連付けることができます。"
+"アカウント名を指定してください。既存のアカウント名を指定した場合、パスワード"
+"の入力が求められます。また、アカウントとOpenIDを関連付けることができます。"
 
-#, fuzzy
 msgid "Choose this name"
-msgstr " "
+msgstr "このユーザ名を選択"
 
 msgid ""
 "The username you have chosen is already\n"
@@ -612,17 +609,20 @@ msgid ""
 "the username with your OpenID. Otherwise, please choose a different\n"
 "username and leave the password field blank."
 msgstr ""
+"指定されたユーザ名はすでに利用されています。\n"
+"もしこれがあなたのユーザ名であれば、パスワードを入力し、\n"
+"ユーザ名をOpenIDと結び付けてください。\n"
+"そうでない場合、パスワード欄は空欄のまま、別のユーザ名を指定してください。"
 
 msgid "Associate this name"
-msgstr ""
+msgstr "この名前を関連付ける"
 
 #, python-format
 msgid "OpenID error: %s."
 msgstr "OpenID エラー: %s"
 
-#, fuzzy
 msgid "Verification canceled."
-msgstr "操作はキャンセルされました。"
+msgstr "検証はキャンセルされました。"
 
 msgid "OpenID failure."
 msgstr "OpenID 失敗しました"
@@ -640,10 +640,10 @@ msgid "OpenID verification requires that you click this button:"
 msgstr "このボタンをクリックしてOpenIDを検証してください:"
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
-msgstr ""
+msgstr "OpenIDによるログインを行うためには匿名セッションを有効にする必要があります。"
 
 msgid "Failed to resolve OpenID."
-msgstr ""
+msgstr "OpenIDの解決に失敗しました。"
 
 msgid "OpenID discovery failure, not a valid OpenID."
 msgstr "OpenIDを発見できません。OpenIDが正しくありません。"
@@ -654,7 +654,7 @@ msgstr "OpenIDがありません。"
 msgid ""
 "If you do not have an account yet, you can still log in with your OpenID and "
 "create one during login."
-msgstr ""
+msgstr "まだアカウントを持っていない場合、OpenIDによってログインした状態で作成することができます。"
 
 msgid "Failed to connect to database."
 msgstr "データベースの接続に失敗しました。"
@@ -1000,49 +1000,42 @@ msgstr "ディスカッション"
 #, python-format
 msgid ""
 "Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
-msgstr ""
-"このwikiでは\"%(content)s\"は許可されていません。ページを保存できませんでし"
-"た。"
+msgstr "このwikiでは\"%(content)s\"は許可されていません。ページを保存できませんでした。"
 
-#, fuzzy
 msgid "Notification"
 msgstr "メールで通知"
 
 msgid "Notification settings saved!"
-msgstr ""
+msgstr "通知の設定が保存されました!"
 
-#, fuzzy
 msgid "'''Email'''"
 msgstr "メールアドレス"
 
 msgid "'''Jabber'''"
-msgstr ""
+msgstr "Jabber"
 
 msgid "'''Event type'''"
-msgstr ""
+msgstr "イベント種別"
 
 msgid "Select the events you want to be notified about."
-msgstr ""
+msgstr "通知の対象としたいイベントを選択してください。"
 
 msgid ""
 "Before you can be notified, you need to provide a way to contact you in the "
 "general preferences."
-msgstr ""
+msgstr "通知を受ける前に、プレファレンスで通知の方法を指定することができます。"
 
-#, fuzzy
 msgid "Subscribed events"
-msgstr "購読ユーザ追加"
+msgstr "購読中のイベント"
 
-#, fuzzy
 msgid "Subscribed wiki pages<<BR>>(one regex per line)"
 msgstr "購読中のwikiページ<<BR>>(1行あたりひとつの正規表現)"
 
 msgid "Save"
 msgstr "保存"
 
-#, fuzzy
 msgid "Change password"
-msgstr "パスワード"
+msgstr "パスワード変更"
 
 msgid "Passwords don't match!"
 msgstr "パスワードが一致していません。"
@@ -1055,65 +1048,64 @@ msgid "Password not acceptable: %s"
 msgstr "パスワードを受け入れることはできません: %s"
 
 msgid "Your password has been changed."
-msgstr ""
+msgstr "パスワードが変更されました。"
 
 msgid "To change your password, enter a new password twice."
-msgstr ""
+msgstr "パスワードを変更するためには、新しいパスワードを2回入力してください。"
 
 msgid "Password repeat"
 msgstr "パスワード(もう一度)"
 
 msgid "Switch user"
-msgstr ""
+msgstr "ユーザ切り替え"
 
 msgid "No user selected"
-msgstr ""
+msgstr "ユーザが選択されていません"
 
 msgid ""
 "You can now change the settings of the selected user account; log out to get "
 "back to your account."
-msgstr ""
+msgstr "選択されたユーザの設定変更することができます。あなたのアカウントに戻すにはログアウトしてください。"
 
 msgid "You are the only user."
-msgstr ""
+msgstr "あなたは唯一のユーザです。"
 
 msgid ""
 "As a superuser, you can temporarily assume the identity of another user."
-msgstr ""
+msgstr "スーパーユーザは、一時的に別のユーザとして振舞うことができます。"
 
 msgid "Select User"
 msgstr "ユーザ選択"
 
 msgid "OpenID settings"
-msgstr ""
+msgstr "OpenIDの設定"
 
 msgid "Cannot remove all OpenIDs."
-msgstr ""
+msgstr "すべてのOpenIDを削除することはできません"
 
 msgid "The selected OpenIDs have been removed."
-msgstr ""
+msgstr "選択されたOpenIDは削除されています。"
 
 msgid "No OpenID given."
-msgstr ""
+msgstr "OpenIDが指定されていません。"
 
 msgid "OpenID is already present."
-msgstr ""
+msgstr "OpenIDはすでに存在しています。"
 
-#, fuzzy
 msgid "This OpenID is already used for another account."
-msgstr "このページは既に削除された、またはまだ作られていません。"
+msgstr "このOpenIDはすでに他のユーザに使用されています。"
 
 msgid "OpenID added successfully."
-msgstr ""
+msgstr "OpenIDの追加が成功しました。"
 
 msgid "Current OpenIDs"
-msgstr ""
+msgstr "現在のOpenID"
 
 msgid "Remove selected"
-msgstr ""
+msgstr "選択したものを削除"
 
 msgid "Add OpenID"
-msgstr ""
+msgstr "OpenIDを追加"
 
 msgid "Preferences"
 msgstr "プレファレンス"
@@ -1144,9 +1136,8 @@ msgstr ""
 msgid "This email already belongs to somebody else."
 msgstr "このメールアドレスはすでに利用されています。"
 
-#, fuzzy
 msgid "This jabber id already belongs to somebody else."
-msgstr "このメールアドレスはすでに利用されています。"
+msgstr "このJabber IDはすでに利用されています。"
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -1197,7 +1188,7 @@ msgstr "一般的なオプション"
 msgid "Quick links"
 msgstr "クイックリンク"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear Wiki user,\n"
 "\n"
@@ -1220,7 +1211,7 @@ msgstr "新しいページ:\n"
 msgid "No differences found!\n"
 msgstr "違いは見つかりませんでした。\n"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear wiki user,\n"
 "\n"
@@ -1235,11 +1226,11 @@ msgstr ""
 "\"%(sitename)s\"\n"
 "におけるwikiページの変更通知を希望したユーザにお送りしています。\n"
 "\n"
-"以下のページが%(editor)sさんによって変更されました。\n"
-"%(pagelink)s\n"
+"以下のページが%(editor)sさんによって削除されました。\n"
+"%(pagename)s\n"
 "\n"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear wiki user,\n"
 "\n"
@@ -1254,13 +1245,12 @@ msgstr ""
 "\"%(sitename)s\"\n"
 "におけるwikiページの変更通知を希望したユーザにお送りしています。\n"
 "\n"
-"%(editor)sさんによって\"%(oldname)s\"が\"%(pagename)s\"に名称変更変更されまし"
-"た。\n"
+"%(editor)sさんによって\"%(oldname)s\"が\"%(pagename)s\"に名称変更変更されました。\n"
 "\n"
 
-#, fuzzy, python-format
+#, python-format
 msgid "New user account created on %(sitename)s"
-msgstr "ユーザアカウントが作成されました。"
+msgstr "%(sitename)s において新規ユーザアカウントが作成されました。"
 
 #, python-format
 msgid ""
@@ -1269,10 +1259,14 @@ msgid ""
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
 msgstr ""
+"以下のユーザが作成されました。\n"
+"\n"
+"    ユーザ名: %(username)s\n"
+"    メールアドレス: %(useremail)s"
 
-#, fuzzy, python-format
+#, python-format
 msgid "New attachment added to page %(pagename)s on %(sitename)s"
-msgstr "%(pagename)sの添付ファイル:%(filename)s"
+msgstr "%(sitename)s の %(pagename)s に新しい添付ファイルが追加されました。"
 
 #, python-format
 msgid ""
@@ -1285,6 +1279,14 @@ msgid ""
 "Attachment name: %(attach_name)s\n"
 "Attachment size: %(attach_size)s\n"
 msgstr ""
+"Wikiユーザ様\n"
+"\n"
+"あなたはWikiページ \\\"%(page_name)s\\\" に対する変更の通知を購読しています。\n"
+"%(editor)s によりページに添付ファイルが追加されました。\n"
+"詳細は以下を参照してください。:\n"
+"\n"
+"添付ファイル名: %(attach_name)s\n"
+"添付ファイルサイズ: %(attach_size)s\n"
 
 msgid "Page has been modified"
 msgstr "ページが変更されました"
@@ -1292,32 +1294,26 @@ msgstr "ページが変更されました"
 msgid "Page has been modified in a trivial fashion"
 msgstr "ささいな変更がされました"
 
-#, fuzzy
 msgid "Page has been renamed"
 msgstr "ページの名前が変更されました"
 
-#, fuzzy
 msgid "Page has been deleted"
-msgstr "ページを削除しました。"
+msgstr "ページが削除されました。"
 
-#, fuzzy
 msgid "Page has been copied"
 msgstr "ページがコピーされました"
 
-#, fuzzy
 msgid "A new attachment has been added"
 msgstr "新しい添付ファイルが追加されました"
 
 msgid "A page has been reverted to a previous state"
 msgstr "ページが前の状態に戻されました"
 
-#, fuzzy
 msgid "A user has subscribed to a page"
 msgstr "このページの購読を開始しました。"
 
-#, fuzzy
 msgid "A new account has been created"
-msgstr "ユーザアカウントが作成されました。"
+msgstr "新規ユーザアカウントが作成されました。"
 
 #, python-format
 msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
@@ -1342,21 +1338,17 @@ msgstr "XML-RPC エラー: %s"
 msgid "Low-level communication error: %s"
 msgstr "低レベル通信エラー: %s"
 
-#, fuzzy
 msgid "Attachment link"
-msgstr "添付ファイル"
+msgstr "添付ファイルへのリンク"
 
-#, fuzzy
 msgid "Page link"
 msgstr "ページリンク"
 
-#, fuzzy
 msgid "Changed page"
 msgstr "変更されたページ"
 
-#, fuzzy
 msgid "Page changed"
-msgstr "編集内容の保存"
+msgstr "ページが変更されました"
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr "--pages オプションと --search オプションは、同時には利用できません。"
@@ -1422,7 +1414,6 @@ msgstr "ユーザエージェント"
 msgid "Distribution of User-Agent Types"
 msgstr "User-Agentタイプの分布"
 
-#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
@@ -1440,26 +1431,14 @@ msgid ""
 "\n"
 "(!) For more help, see HelpOnEditing or SyntaxReference.\n"
 msgstr ""
-" 強調:: <<Verbatim('')>>''イタリック''<<Verbatim('')>>、<<Verbatim(''')"
-">>'''ボールド'''<<Verbatim(''')>>、<<Verbatim(''''')>>'''''ボールドイタリッ"
-"ク'''''<<Verbatim(''''')>>、<<Verbatim('')>>''混合 ''<<Verbatim(''')"
-">>'''''ボールド'''<<Verbatim(''')>>とイタリック''<<Verbatim('')>>、<<Verbatim"
-"(----)>> 水平線。\n"
-" 見出し:: <<Verbatim(=)>> タイトル1 <<Verbatim(=)>>、<<Verbatim(==)>> タイト"
-"ル2 <<Verbatim(==)>>、<<Verbatim(===)>> タイトル3 <<Verbatim(===)>>、"
-"<<Verbatim(====)>> タイトル4 <<Verbatim(====)>>、<<Verbatim(=====)>> タイトル"
-"5 <<Verbatim(=====)>>。\n"
-" リスト:: 半角スペースに続けて: * 小丸、1., a., A., i., I. 番号付アイテム、1."
-"#n nから番号開始、半角スペースのみでインデント。\n"
-" リンク:: <<Verbatim(JoinCapitalizedWords)>>、<<Verbatim([[ターゲット|リンク"
-"テキスト]])>>。\n"
-" 表:: || セルテキスト |||| 2列にわたるセルテキスト ||、表やタイトルのあとには"
-"空白を入力しないでください。\n"
+" 強調:: <<Verbatim('')>>''イタリック''<<Verbatim('')>>、<<Verbatim(''')>>'''ボールド'''<<Verbatim(''')>>、<<Verbatim(''''')>>'''''ボールドイタリック'''''<<Verbatim(''''')>>、<<Verbatim('')>>''混合 ''<<Verbatim(''')>>'''''ボールド'''<<Verbatim(''')>>とイタリック''<<Verbatim('')>>、<<Verbatim(----)>> 水平線。\n"
+" 見出し:: <<Verbatim(=)>> タイトル1 <<Verbatim(=)>>、<<Verbatim(==)>> タイトル2 <<Verbatim(==)>>、<<Verbatim(===)>> タイトル3 <<Verbatim(===)>>、<<Verbatim(====)>> タイトル4 <<Verbatim(====)>>、<<Verbatim(=====)>> タイトル5 <<Verbatim(=====)>>。\n"
+" リスト:: 半角スペースに続けて: * 小丸、1., a., A., i., I. 番号付アイテム、1.#n nから番号開始、半角スペースのみでインデント。\n"
+" リンク:: <<Verbatim(JoinCapitalizedWords)>>、<<Verbatim([[ターゲット|リンクテキスト]])>>。\n"
+" 表:: || セルテキスト |||| 2列にわたるセルテキスト ||、表やタイトルのあとには空白を入力しないでください。\n"
 "\n"
-"(!) 詳細はHelpOnEditingや [\"シンタックスリファレンス\"]を参照してくださ"
-"い。\n"
+"(!) 詳細はHelpOnEditingや [\"シンタックスリファレンス\"]を参照してください。\n"
 
-#, fuzzy
 msgid ""
 "{{{\n"
 "Emphasis: *italic* **bold** ``monospace``\n"
@@ -1494,11 +1473,9 @@ msgstr ""
 "リスト: * 小丸; 1., a. 番号付アイテム\n"
 "}}}\n"
 "(!) 詳細は\n"
-"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
-"reStructuredText Quick Reference]].\n"
+"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|reStructuredText Quick Reference]].\n"
 "を参照してください。\n"
 
-#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
 ">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
@@ -1515,24 +1492,13 @@ msgid ""
 "\n"
 "(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
 msgstr ""
-" 強調:: <<Verbatim('')>>''イタリック''<<Verbatim('')>>、<<Verbatim(''')"
-">>'''ボールド'''<<Verbatim(''')>>、<<Verbatim(''''')>>'''''ボールドイタリッ"
-"ク'''''<<Verbatim(''''')>>、<<Verbatim('')>>''混合 ''<<Verbatim(''')"
-">>'''''ボールド'''<<Verbatim(''')>>とイタリック''<<Verbatim('')>>、<<Verbatim"
-"(----)>> 水平線。\n"
-" 見出し:: <<Verbatim(=)>> タイトル1 <<Verbatim(=)>>、<<Verbatim(==)>> タイト"
-"ル2 <<Verbatim(==)>>、<<Verbatim(===)>> タイトル3 <<Verbatim(===)>>、"
-"<<Verbatim(====)>> タイトル4 <<Verbatim(====)>>、<<Verbatim(=====)>> タイトル"
-"5 <<Verbatim(=====)>>。\n"
-" リスト:: 半角スペースに続けて: * 小丸、1., a., A., i., I. 番号付アイテム、1."
-"#n nから番号開始、半角スペースのみでインデント。\n"
-" リンク:: <<Verbatim(JoinCapitalizedWords)>>、<<Verbatim([[ターゲット|リンク"
-"テキスト]])>>。\n"
-" 表:: || セルテキスト |||| 2列にわたるセルテキスト ||、表やタイトルのあとには"
-"空白を入力しないでください。\n"
+" 強調:: <<Verbatim('')>>''イタリック''<<Verbatim('')>>、<<Verbatim(''')>>'''ボールド'''<<Verbatim(''')>>、<<Verbatim(''''')>>'''''ボールドイタリック'''''<<Verbatim(''''')>>、<<Verbatim('')>>''混合 ''<<Verbatim(''')>>'''''ボールド'''<<Verbatim(''')>>とイタリック''<<Verbatim('')>>、<<Verbatim(----)>> 水平線。\n"
+" 見出し:: <<Verbatim(=)>> タイトル1 <<Verbatim(=)>>、<<Verbatim(==)>> タイトル2 <<Verbatim(==)>>、<<Verbatim(===)>> タイトル3 <<Verbatim(===)>>、<<Verbatim(====)>> タイトル4 <<Verbatim(====)>>、<<Verbatim(=====)>> タイトル5 <<Verbatim(=====)>>。\n"
+" リスト:: 半角スペースに続けて: * 小丸、1., a., A., i., I. 番号付アイテム、1.#n nから番号開始、半角スペースのみでインデント。\n"
+" リンク:: <<Verbatim(JoinCapitalizedWords)>>、<<Verbatim([[ターゲット|リンクテキスト]])>>。\n"
+" 表:: || セルテキスト |||| 2列にわたるセルテキスト ||、表やタイトルのあとには空白を入力しないでください。\n"
 "\n"
-"(!) 詳細はHelpOnEditingや [\"シンタックスリファレンス\"]を参照してくださ"
-"い。\n"
+"(!) 詳細はHelpOnEditingや [\"シンタックスリファレンス\"]を参照してください。\n"
 
 msgid "UnSubscribe"
 msgstr "購読中止"
@@ -1591,13 +1557,11 @@ msgstr "(CSSを無効にするには空にする)"
 msgid "Editor size"
 msgstr "エディタのサイズ"
 
-#, fuzzy
 msgid "File attachment browser"
-msgstr "新しい添付ファイル名"
+msgstr "添付ファイルブラウザ"
 
-#, fuzzy
 msgid "User account browser"
-msgstr "ユーザアカウントが作成されました。"
+msgstr "ユーザアカウントブラウザ"
 
 #, python-format
 msgid "Invalid include arguments \"%s\"!"
@@ -1836,19 +1800,19 @@ msgstr "添付ファイル\"%(filename)s\"のアップロード"
 msgid ""
 "%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
 "missing."
-msgstr ""
+msgstr "%(extension_name)s %(extension_type)s: 必要な引数 %(argument_name)s が指定されていません。"
 
 #, python-format
 msgid ""
 "%(extension_name)s %(extension_type)s: Invalid %(argument_name)s=%"
 "(argument_value)s!"
-msgstr ""
+msgstr "%(extension_name)s %(extension_type)s: 引数が不正です %(argument_name)s=%(argument_value)s!"
 
 #, python-format
 msgid ""
 "Current configuration does not allow embedding of the file %(file)s because "
 "of its mimetype %(mimetype)s."
-msgstr ""
+msgstr "現在の設定はMIMEタイプが %(mimetype)s であるファイル %(file)s の埋め込みを許可していません。"
 
 msgid "Embedded"
 msgstr "埋め込み"
@@ -1886,7 +1850,6 @@ msgstr "チャートタイプを指定してください。"
 msgid "Bad chart type \"%s\"!"
 msgstr "チャートタイプ\"%s\"が不正です。"
 
-#, fuzzy
 msgid "Revert"
 msgstr "すべて前のリビジョンに戻す"
 
@@ -1905,13 +1868,11 @@ msgstr ""
 msgid "This page is already deleted or was never created!"
 msgstr "このページは既に削除された、またはまだ作られていません。"
 
-#, fuzzy
 msgid "Optional reason for reverting this page"
-msgstr "コピーについてのコメント(省略可)"
+msgstr "このページへの変更を破棄する理由についてのコメント(省略可)"
 
-#, fuzzy
 msgid "Really revert this page?"
-msgstr "このページの名前を本当に変更しますか？"
+msgstr "このページへの変更を本当に破棄しますか？"
 
 #, python-format
 msgid "Rolled back changes to the page %s."
@@ -1951,7 +1912,6 @@ msgstr ""
 msgid "The ''remoteWiki'' is unknown."
 msgstr "''remoteWiki''は不明です。"
 
-#, fuzzy
 msgid "A severe error occurred:"
 msgstr "サーバエラーが発生しました。"
 
@@ -1961,7 +1921,7 @@ msgstr "同期が完了しました。以下のステータスメッセージを
 msgid "Synchronisation started -"
 msgstr "同期開始 -"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Got a list of %s local and %s remote pages. This results in %s pages to "
 "process."
@@ -2075,13 +2035,18 @@ msgid ""
 "\n"
 "Once you have logged in, simply reload this page."
 msgstr ""
+"あなたのOpenIDを利用可能にするためには、\n"
+"一度OpenIDプロバイダWikiに行き、ログインする必要があります。\n"
+"MoinMoinはここでパスワードを入力することを許可していません。\n"
+"\n"
+"一度ログインを行ったら、このページをリロードしてください。"
 
 msgid "OpenID Trust verification"
 msgstr "OpenID 信頼確認"
 
 #, python-format
 msgid "The site %s has asked for your identity."
-msgstr ""
+msgstr "サイト %s は認証を要求しています。"
 
 #, python-format
 msgid ""
@@ -2091,19 +2056,23 @@ msgid ""
 "identity, the site will take care of reversing the\n"
 "delegation on its own.)"
 msgstr ""
+"\n"
+"あなたが承認した場合、以下のTrust Rootで指定されるサイト(Consumer)には\n"
+"あなたが認証URL %s を持っているということが伝えられます。\n"
+"(もしdelegateを利用している場合は、\n"
+"Consumerサイトがそれを処理してくれます。)"
 
 msgid "Trust root"
-msgstr ""
+msgstr "Trust root"
 
 msgid "Identity URL"
 msgstr "認証URL"
 
-#, fuzzy
 msgid "Remember decision"
 msgstr "この決定を記憶する"
 
 msgid "Remember this trust decision and don't ask again"
-msgstr ""
+msgstr "信用についての決定を記憶し、再確認を行わない"
 
 msgid "Approve"
 msgstr "承認する"
@@ -2112,7 +2081,7 @@ msgid "Don't approve"
 msgstr "承認しない"
 
 msgid "OpenID not served"
-msgstr ""
+msgstr "OpenIDのサービスが提供されていません"
 
 msgid ""
 "\n"
@@ -2121,6 +2090,11 @@ msgid ""
 "and then reload this page or click the button below to cancel this\n"
 "verification."
 msgstr ""
+"\n"
+"まだホームページが作成されていないため、\n"
+"OpenIDを提供することができません。\n"
+"まずホームページを作成してからこのページをリロードするか、\n"
+"下のボタンを押して検証をキャンセルしてください。"
 
 #, python-format
 msgid "Invalid filename \"%s\"!"
@@ -2152,9 +2126,9 @@ msgstr "\"%s\"のようなページはありません。"
 msgid "Please choose:"
 msgstr "選択してください:"
 
-#, fuzzy, python-format
+#, python-format
 msgid "You must login to use this action: %(action)s."
-msgstr "購読を利用するには、ログインしてください。"
+msgstr "%(action)s の操作を実行するためにはログインする必要があります。"
 
 msgid "You must login to remove a quicklink."
 msgstr "クイックリンクを削除するには、ログインしてください。"
@@ -2327,9 +2301,8 @@ msgstr "このページの購読を停止しました。"
 msgid "Can't remove regular expression subscription!"
 msgstr "正規表現で記述した購読を停止することはできません。"
 
-#, fuzzy
 msgid "Edit the subscription regular expressions in your settings."
-msgstr "[\"ユーザプレファレンス\"]にて、購読の正規表現を編集してください。"
+msgstr "[\"ユーザプレファレンス\"]にて、購読対象を指定する正規表現を編集してください。"
 
 msgid "You need to be subscribed to unsubscribe."
 msgstr "購読していないページの購読を止めることはできません。"
@@ -2361,11 +2334,9 @@ msgstr "%dと%dのリビジョン間の差分"
 msgid "(spanning %d versions)"
 msgstr "(その間の編集: %d回)"
 
-#, fuzzy
 msgid "Previous change"
 msgstr "前の変更"
 
-#, fuzzy
 msgid "Next change"
 msgstr "次の変更"
 
@@ -2382,46 +2353,43 @@ msgstr "空白文字数の違いを無視"
 msgid "Load"
 msgstr "ロード"
 
-#, fuzzy
 msgid "Pagename not specified!"
-msgstr " 添付ファイル名が指定されていません。"
+msgstr "ページ名が指定されていません。"
 
 msgid "Upload page content"
-msgstr ""
+msgstr "ページのコンテンツをアップロード"
 
 msgid ""
 "You can upload content for the page named below. If you change the page "
 "name, you can also upload content for another page. If the page name is "
 "empty, we derive the page name from the file name."
 msgstr ""
+"下記のページ名のコンテンツをアップロードすることができます。\n"
+"もしページ名を変更すれば、別のページのコンテンツをアップロードすることもできます。\n"
+"ページ名が空の場合、ファイル名からページ名を決定します。"
 
 msgid "File to load page content from"
-msgstr ""
+msgstr "ページコンテンツを格納したファイル"
 
 msgid "Comment"
 msgstr "コメント"
 
-#, fuzzy
 msgid "Page Name"
-msgstr "パッケージ名"
+msgstr "ページ名"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "読む権限がないページを購読することはできません。"
 
-#, fuzzy
 msgid "This wiki is not enabled for mail/Jabber processing."
-msgstr "このwikiではメールを利用できません。"
+msgstr "このwikiではメール/Jabberを利用できません。"
 
 msgid "You must log in to use subscriptions."
 msgstr "購読を利用するには、ログインしてください。"
 
-#, fuzzy
 msgid ""
 "Add your email address or Jabber ID in your user settings to use "
 "subscriptions."
-msgstr ""
-"購読を利用するには、[\"ユーザプレファレンス\"]にてメールアドレスを登録してく"
-"ださい。"
+msgstr "購読を利用するには、[\"ユーザプレファレンス\"]にてメールアドレスまたはJabber IDを登録してください。"
 
 msgid "You are already subscribed to this page."
 msgstr "このページは既に購読済みです。"
@@ -2460,7 +2428,6 @@ msgstr "編集者"
 msgid "view"
 msgstr "表示"
 
-#, fuzzy
 msgid "to previous"
 msgstr "前へ"
 
@@ -2507,9 +2474,8 @@ msgstr "このページを本当に削除しますか？"
 msgid "You are not allowed to create the supplementation page."
 msgstr "補足ページを作成する権限がありません。"
 
-#, fuzzy
 msgid "Only superuser is allowed to use this action."
-msgstr "このアクションを行う権限がありません。"
+msgstr "このアクションを行うことができるのはスーパーユーザのみです。"
 
 #, python-format
 msgid "Subscribe users to the page %s"
@@ -2594,7 +2560,6 @@ msgstr "TextCha (必須)"
 msgid "Create Profile"
 msgstr "プロファイル作成"
 
-#, fuzzy
 msgid "Create Account"
 msgstr "アカウント作成"
 
@@ -2640,7 +2605,6 @@ msgstr "読む権限がないページのスペルチェックはできません
 msgid "You are now logged out."
 msgstr "ログアウト完了です。"
 
-#, fuzzy
 msgid "If this account exists an email was sent."
 msgstr "このユーザ名のアカウントが存在した場合には、メール送信されました。"
 
@@ -2651,26 +2615,21 @@ msgstr ""
 "このwikiではメールが利用できません。\n"
 "管理者に問い合わせてください。"
 
-#, fuzzy
 msgid "Please provide a valid email address or a username!"
 msgstr "正しいメールアドレスかユーザ名を入力してください。"
 
 msgid "Mail me my account data"
 msgstr "アカウント情報をメールする"
 
-#, fuzzy
 msgid "Recovery token"
 msgstr "回復トークン"
 
-#, fuzzy
 msgid "New password"
 msgstr "新しいパスワード"
 
-#, fuzzy
 msgid "New password (repeat)"
 msgstr "新しいパスワード(もう一度)"
 
-#, fuzzy
 msgid "Reset my password"
 msgstr "パスワードを初期化する"
 
@@ -2680,11 +2639,9 @@ msgstr "パスワードが変更されました。今すぐログインできま
 msgid "Your token is invalid!"
 msgstr "トークンが間違っています!"
 
-#, fuzzy
 msgid "Password reset"
 msgstr "パスワードの初期化"
 
-#, fuzzy
 msgid ""
 "\n"
 "== Password reset ==\n"
@@ -2694,7 +2651,6 @@ msgstr ""
 "== パスワードの初期化 ==\n"
 "以下に新しいパスワードを入力してください。"
 
-#, fuzzy
 msgid "Lost password"
 msgstr "パスワードを忘れた"
 
@@ -2707,6 +2663,12 @@ msgid ""
 "used to change your password. The email will also contain further\n"
 "instructions."
 msgstr ""
+"\n"
+"== パスワードの復旧 ==\n"
+"もしパスワードを忘れた場合、メールアドレスかユーザ名を入力し、\n"
+"'''アカウント情報をメールする''' をクリックしてください。\n"
+"パスワード変更に必要なパスワード回復トークンがメールで通知されます。\n"
+"メールには詳しいパスワードの復旧の手順も書かれています。"
 
 msgid ""
 "\n"
@@ -2714,6 +2676,10 @@ msgid ""
 "If you already have received the email with the recovery token, enter your\n"
 "username, the recovery token and a new password (twice) below."
 msgstr ""
+"\n"
+"=== パスワード初期化 ===\n"
+"もしすでにパスワード回復トークンを通知するメールを受け取っている場合、\n"
+"ユーザ名、パスワード回復トークン、新しいパスワード(2回)を以下に入力してください。"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -2801,9 +2767,8 @@ msgstr "サポートされていないファイル添付アクション: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "\"%(pagename)s の添付ファイル\""
 
-#, fuzzy
 msgid "You are not allowed to overwrite a file attachment of this page."
-msgstr "このページの添付ファイルを見る権限がありません。"
+msgstr "このページの添付ファイルを更新する権限がありません。"
 
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
@@ -2826,21 +2791,20 @@ msgstr "このページにdrawingを保存する権限がありません。"
 msgid "You are not allowed to delete attachments on this page."
 msgstr "このページの添付ファイルを削除する権限がありません。"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
 msgstr "添付ファイル'%(new_pagename)s/%(new_filename)s'はすでに存在します。"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/%"
 "(new_filename)s'."
-msgstr ""
-"添付ファイル'%(pagename)s/%(filename)s'は%(new_pagename)sに移動しました。"
+msgstr "添付ファイル'%(pagename)s/%(filename)s'は'%(new_pagename)s/%(new_filename)s'に移動しました。"
 
 msgid "Nothing changed"
 msgstr "何も変更されませんでした。"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Page '%(new_pagename)s' does not exist or you don't have enough rights."
 msgstr "ページ %(new_pagename)s が存在しないか、必要な権限がありません。"
 
@@ -2853,7 +2817,6 @@ msgstr "対話的なユーザインターフェースから添付ファイルを
 msgid "You are not allowed to move attachments from this page."
 msgstr "このページから添付ファイルを移動する権限がありません。"
 
-#, fuzzy
 msgid "Move aborted because new page name is empty."
 msgstr "ページ名が空であるため、移動は中断されました。"
 
@@ -2861,7 +2824,6 @@ msgstr "ページ名が空であるため、移動は中断されました。"
 msgid "Please use a valid filename for attachment '%(filename)s'."
 msgstr "添付ファイル'%(filename)s'に有効なファイル名を指定してください。"
 
-#, fuzzy
 msgid "Move aborted because new attachment name is empty."
 msgstr "添付ファイル名が空であるため、移動は中断されました。"
 

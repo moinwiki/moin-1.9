@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-05-12 23:52+0200\n"
-"PO-Revision-Date: 2008-04-25 13:30+0200\n"
+"PO-Revision-Date: 2008-05-19 16:30+0200\n"
 "Last-Translator: thomas@marquart.se\n"
 "Language-Team: Swedish <moin-user@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgstr ""
 msgid "<unknown>"
 msgstr "<okänd>"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
@@ -36,11 +36,11 @@ msgid ""
 "\n"
 "Password reset URL: %s/?action=recoverpass&name=%s&token=%s\n"
 msgstr ""
-"Användarnamn: %s\n"
+"Användarnamn: %s"
 "\n"
-"Lösenord: %s\n"
+"Token för att återställa lösenord: %s\n"
 "\n"
-"Inloggnings-URL: %s/?action=login\n"
+"URL för att återställa lösenord: %s/?action=recoverpass&name=%s&token=%s\n"
 
 msgid ""
 "Somebody has requested to email you a password recovery token.\n"
@@ -48,7 +48,11 @@ msgid ""
 "If you lost your password, please go to the password reset URL below or\n"
 "go to the password recovery page again and enter your username and the\n"
 "recovery token.\n"
-msgstr ""
+msgstr "Någon har bett att skicka en token för att återställa lösenordet till dig.\n"
+"\n"
+"Om du har glömt ditt lösenord, var god besök URL:en nedanför för att återställa den eller\n"
+"gå tillbaka till till återställningssidan och skriv in ditt användarnamn och\n"
+"token för återställning.\n"
 
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
@@ -545,9 +549,8 @@ msgstr "Logga in"
 msgid "Username"
 msgstr "Användarnamn"
 
-#, fuzzy
 msgid "Member of Groups"
-msgstr "Antal sidor"
+msgstr "Medlem i grupper"
 
 msgid "Email"
 msgstr "Epost"
@@ -1085,9 +1088,8 @@ msgstr "Kan inte ta bort alla OpenIDs."
 msgid "The selected OpenIDs have been removed."
 msgstr "De valda OpenIDs har tagits bort."
 
-#, fuzzy
 msgid "No OpenID given."
-msgstr "Ingen OpenID."
+msgstr "Ingen OpenID given."
 
 msgid "OpenID is already present."
 msgstr "OpenID finns redan."
@@ -1987,37 +1989,42 @@ msgstr ""
 msgid ""
 "The item %s was renamed locally. This is not implemented yet. Therefore the "
 "full synchronisation history is lost for this page."
-msgstr ""
+msgstr "%s har döpts om lokalt. Detta är inte implemenerat ännu. Därför "
+"har hela synkronisationshistoria till denna sida förlorats."
 
 #, python-format
 msgid "Synchronising page %s with remote page %s ..."
-msgstr ""
+msgstr "Synkroniserar sidan %s med sidan %s på avlägsna sidan ..."
 
 #, python-format
 msgid "The page %s was deleted remotely but changed locally."
-msgstr ""
+msgstr "Sidan %s har tagits bort på avlägsna sidan men ändrats lokalt."
 
 #, python-format
 msgid ""
 "The page %s could not be synced. The remote page was renamed. This is not "
 "supported yet. You may want to delete one of the pages to get it synced."
 msgstr ""
+"Sidan %s kunde inte synkroniseras. Den har döpts om på avlägsna sidan. Detta stöds inte "
+"ännu. Du vill nog ta bort en av de två sidor för att synkronisera."
 
 #, python-format
 msgid "Skipped page %s because of a locally or remotely unresolved conflict."
-msgstr ""
+msgstr "Hoppade över sidan %s pga en olöst konflikt på avlägsna sidan eller lokalt."
 
 #, python-format
 msgid ""
 "This is the first synchronisation between the local and the remote wiki for "
 "the page %s."
 msgstr ""
+"Detta är den första synkroniseringen för sidan %s mellan den lokala och den avlägsna wikin."
 
 #, python-format
 msgid ""
 "The page %s could not be merged because you are not allowed to modify the "
 "page in the remote wiki."
 msgstr ""
+"Sidan %s kunde inte förenas för att du får inte ändra den i den avlägsna wikin."
 
 #, python-format
 msgid "Page %s successfully merged."
@@ -2025,11 +2032,11 @@ msgstr "Sidan %s förenades korrekt."
 
 #, python-format
 msgid "Page %s contains conflicts that were introduced on the remote side."
-msgstr ""
+msgstr "Sidan %s innehåller konflikter som infördes i den avlägsna wikin."
 
 #, python-format
 msgid "Page %s merged with conflicts."
-msgstr ""
+msgstr "Sidan %s förenat med konflikter."
 
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
@@ -2038,13 +2045,18 @@ msgid ""
 "\n"
 "Once you have logged in, simply reload this page."
 msgstr ""
+"Du bör från hand gå till din OpenID leverantörs wiki\n"
+"och logga in innan du kan använda din OpenID. MoinMoin kommer\n"
+"aldrig att låta dig skriva in lösenordet här.\n"
+"\n"
+"När du har loggat in, ladda bara om denna sida."
 
 msgid "OpenID Trust verification"
-msgstr ""
+msgstr "OpenID Trust verification"
 
 #, python-format
 msgid "The site %s has asked for your identity."
-msgstr ""
+msgstr "Sidan %s har frågat efter din identitet."
 
 #, python-format
 msgid ""
@@ -2054,12 +2066,16 @@ msgid ""
 "identity, the site will take care of reversing the\n"
 "delegation on its own.)"
 msgstr ""
+"\n"
+"Om du godkänner, kommer sidan som representeras av förtroende-roten nedanför att\n"
+"få veta att du har makt över identitets-URL:en %s. (Om du änvänder en ombudsidentitet\n"
+"kommer sidan själv se till att ombudet löses upp.)"
 
 msgid "Trust root"
-msgstr ""
+msgstr "Lita på root"
 
 msgid "Identity URL"
-msgstr ""
+msgstr "Identitets-URL"
 
 msgid "Remember decision"
 msgstr "Kom ihåg detta val"
@@ -2074,7 +2090,7 @@ msgid "Don't approve"
 msgstr "Godkänn ej"
 
 msgid "OpenID not served"
-msgstr ""
+msgstr "OpenID levererades inte"
 
 msgid ""
 "\n"
@@ -2083,6 +2099,11 @@ msgid ""
 "and then reload this page or click the button below to cancel this\n"
 "verification."
 msgstr ""
+"\n"
+"Tyvärr har du inte skapat din hemsida än. Därför kan vi inte\n"
+"leverera en OpenID för dig. Var god skapa först din hemsida och\n"
+"sedan ladda om denna sida eller klicka på knappen nedan för att\n"
+"avbryta verifikationen."
 
 #, python-format
 msgid "Invalid filename \"%s\"!"
@@ -2110,11 +2131,11 @@ msgid "No pages like \"%s\"!"
 msgstr "Inga sidor liknar \"%s\"!"
 
 msgid "Please choose:"
-msgstr ""
+msgstr "Var god välj:"
 
-#, fuzzy, python-format
+#, python-format
 msgid "You must login to use this action: %(action)s."
-msgstr "Du måste logga in för att kunna prenumerera på sidor."
+msgstr "Du måste logga in för att använda denna åtgärd: %(action)s."
 
 msgid "You must login to remove a quicklink."
 msgstr "Du måste logga in för att ta bort en snabblänk."
@@ -2205,7 +2226,7 @@ msgstr "Åtgärd %(actionname)s är exkluderad i den här wikin!"
 #, python-format
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr ""
-"Du har inte tillåtelse att använda åtgärden %(actionname)s på den här sidan!"
+"Du får inte använda åtgärden %(actionname)s på den här sidan!"
 
 #, python-format
 msgid "Please use the interactive user interface to use action %(actionname)s!"
@@ -2271,7 +2292,7 @@ msgid "MyPages management"
 msgstr "Hantering av MinaSidor"
 
 msgid "Rename all /subpages too?"
-msgstr ""
+msgstr "Döp om alla /undersidor också?"
 
 msgid "New name"
 msgstr "Nytt namn"
@@ -2342,28 +2363,29 @@ msgstr "Ignorera ändringar i mängden blanktecken"
 msgid "Load"
 msgstr "Ladda"
 
-#, fuzzy
 msgid "Pagename not specified!"
-msgstr "Filnamnet för bilagan ej angivet!"
+msgstr "Sidnamn ej angivet!"
 
 msgid "Upload page content"
-msgstr ""
+msgstr "Ladda upp sidinnehåll"
 
 msgid ""
 "You can upload content for the page named below. If you change the page "
 "name, you can also upload content for another page. If the page name is "
 "empty, we derive the page name from the file name."
 msgstr ""
+"Du kan ladda upp innehåll för sidan som anges nedan. Om du döper om sidan "
+"kan du även ladda upp innehåll för en annan sida. Om sidnamnet är tom bestäms"
+"den utgående från filens namn."
 
 msgid "File to load page content from"
-msgstr ""
+msgstr "Fil för att ladda sidinnehåll ifrån"
 
 msgid "Comment"
 msgstr "Kommentar"
 
-#, fuzzy
 msgid "Page Name"
-msgstr "Paketnamn"
+msgstr "Sidnamn"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Du får inte prenumerera på en sida du inte kan läsa."
@@ -2452,7 +2474,7 @@ msgid "Delete"
 msgstr "Radera"
 
 msgid "Delete all /subpages too?"
-msgstr ""
+msgstr "Radera även alla /undersidor?"
 
 msgid "Optional reason for the deletion"
 msgstr "Anledning för borttagande (valfri)"
@@ -2471,7 +2493,7 @@ msgid "Subscribe users to the page %s"
 msgstr "Teckna en prenumeration på sidan %s åt användarna"
 
 msgid "Enter user names (comma separated):"
-msgstr ""
+msgstr "Skriv användarnamnen (avgränsa med komma):"
 
 #, python-format
 msgid "Subscribed for %s:"
@@ -2485,12 +2507,13 @@ msgstr "Du har inte tillåtelse att utföra den här åtgärden."
 
 #, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
-msgstr ""
+msgstr "(!) Bara sidor som ändrats sedan '''%s''' visas!"
 
 msgid ""
 "/!\\ The modification date you entered was not recognized and is therefore "
 "not considered for the search results!"
-msgstr ""
+msgstr "/!\\ Ändringsdatumet som du skrev in kändes inte igen och tas därför "
+"inte hänsyn till i sökresultaten!"
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -2509,23 +2532,28 @@ msgid ""
 "Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
 "for more information."
 msgstr ""
+"Din sökningsförfrågan {{{\"%s\"}}} är ogiltig. Var god se HelpOnSearching "
+"för mer information."
 
 #, python-format
 msgid ""
 "Your search query {{{\"%s\"}}} didn't return any results. Please change some "
 "terms and refer to HelpOnSearching for more information.%s"
-msgstr ""
+msgstr "Din sökningsförfrågan {{{\"%s\"}}} ledde inte till några resultat. Var "
+"god ändra vissa termer och se HelpOnSearching för mer information.%s"
 
 msgid "(!) Consider performing a"
-msgstr ""
+msgstr "(!) Överväg utföra en"
 
 msgid "full-text search with your search terms"
-msgstr ""
+msgstr "fulltextsökning med dina söktermer"
 
 msgid ""
 "(!) You're performing a title search that might not include all related "
 "results of your search query in this wiki. <<BR>>"
 msgstr ""
+"(!) Du utför en titelsökning som kanske inte innehåller alla relaterade "
+"resultat för din förfrågan i denna wiki. <<BR>>"
 
 msgid "Click here to perform a full-text search with your search terms!"
 msgstr "Klicka här för att göra en fulltextsökning med dina sökord!"
@@ -2586,7 +2614,7 @@ msgid "You are now logged out."
 msgstr "Du är nu utloggad."
 
 msgid "If this account exists an email was sent."
-msgstr ""
+msgstr "Om detta konto existerar har det skickats en epost."
 
 msgid ""
 "This wiki is not enabled for mail processing.\n"
@@ -2595,46 +2623,41 @@ msgstr ""
 "Den här wikin har inte eposthantering påslagen.\n"
 "För att få eposthantering påslagen, kontakta wikins ägare."
 
-#, fuzzy
 msgid "Please provide a valid email address or a username!"
-msgstr "Var god ange en korrekt epostadress!"
+msgstr "Var god ange en giltig epostadress eller användarnamn!"
 
 msgid "Mail me my account data"
 msgstr "Eposta mig information om mitt konto"
 
-#, fuzzy
 msgid "Recovery token"
-msgstr "Återställ"
+msgstr "Token för återställning"
 
-#, fuzzy
 msgid "New password"
-msgstr "Ändra lösenord"
+msgstr "Nytt lösenord"
 
-#, fuzzy
 msgid "New password (repeat)"
-msgstr "Upprepa lösenord"
+msgstr "Nytt lösenord (upprepa)"
 
-#, fuzzy
 msgid "Reset my password"
-msgstr "Glömt lösenord"
+msgstr "Återställ mitt lösenord"
 
-#, fuzzy
 msgid "Your password has been changed, you can log in now."
-msgstr "Ditt lösenord har ändrats."
+msgstr "Ditt lösenord har ändrats, du kan logga in nu."
 
 msgid "Your token is invalid!"
-msgstr ""
+msgstr "Din token är inte giltig!"
 
-#, fuzzy
 msgid "Password reset"
-msgstr "Upprepa lösenord"
+msgstr "Återställ lösenord"
 
-#, fuzzy
 msgid ""
 "\n"
 "== Password reset ==\n"
 "Enter a new password below."
-msgstr "För att ändra ditt lösenord, skriv in ett nytt två gånger."
+msgstr ""
+"\n"
+"== Återställ lösenord ==\n"
+"Skriv in ett nytt lösenord nedanför."
 
 msgid "Lost password"
 msgstr "Glömt lösenord"
@@ -2648,6 +2671,13 @@ msgid ""
 "used to change your password. The email will also contain further\n"
 "instructions."
 msgstr ""
+"\n"
+"== Återställa ett bortglömt lösenord ==\n"
+"Om du har glömt ditt lösenord, ange din epost-adress eller ditt\n"
+"användarnamn och klicka på '''Eposta mig information om mitt konto'''.\n"
+"Du kommer få en epost med en token för återställning av lösenordet som\n"
+"du kan använda för att ändra lösenordet. Denna epost kommer även innhålla\n"
+"vidare instruktioner."
 
 msgid ""
 "\n"
@@ -2655,6 +2685,10 @@ msgid ""
 "If you already have received the email with the recovery token, enter your\n"
 "username, the recovery token and a new password (twice) below."
 msgstr ""
+"\n"
+"=== Återställning av lösenord ===\n"
+"Om du redan har fått epost med en token för återställning, skriv in ditt\n"
+"användarnamn, token och ett nytt lösenord (två gångar) nedan."
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -2701,7 +2735,7 @@ msgstr ""
 "eftersom den inte är permanent och kan ändras."
 
 msgid "move"
-msgstr ""
+msgstr "flytta"
 
 msgid "unzip"
 msgstr "packa upp"
@@ -2745,9 +2779,8 @@ msgstr "Ogiltig sub-åtgärd för AttachFile: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Bilagor till \"%(pagename)s\""
 
-#, fuzzy
 msgid "You are not allowed to overwrite a file attachment of this page."
-msgstr "Du har inte tillåtelse att visa bilagor på den här sidan."
+msgstr "Du får inte skriva över en bilaga på den här sidan."
 
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
