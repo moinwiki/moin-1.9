@@ -28,7 +28,7 @@ msgstr ""
 msgid "<unknown>"
 msgstr "<???>"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
@@ -38,9 +38,9 @@ msgid ""
 msgstr ""
 "Имя: %s\n"
 "\n"
-"Пароль: %s\n"
+"Строка сброса пароля: %s\n"
 "\n"
-"URL для входа: %s/%s?action=login\n"
+"URL для сброса пароля: %s/?action=recoverpass&name=%s&token=%s\n"
 
 msgid ""
 "Somebody has requested to email you a password recovery token.\n"
@@ -49,6 +49,11 @@ msgid ""
 "go to the password recovery page again and enter your username and the\n"
 "recovery token.\n"
 msgstr ""
+"Кто-то запросил отправку вам строки сброса пароля.\n"
+"\n"
+"Если вы забыли ваш пароль, пожалуйста, пройдите по ссылке ниже или\n"
+"снова посетите страницу восстановления пароля и введите ваше имя пользователя и\n"
+"строку сброса пароля.\n"
 
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
@@ -352,7 +357,7 @@ msgstr ""
 "прав администратора на неё!"
 
 msgid "Notifications sent to:"
-msgstr ""
+msgstr "Уведомление отправлено для:"
 
 #, python-format
 msgid ""
@@ -457,7 +462,7 @@ msgstr "Файл %s не найден в пакете."
 
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
-msgstr ""
+msgstr "Неправильное регулярное выражение подсветки \"%(regex)s\": %(error)s"
 
 msgid ""
 "The backed up content of this page is deprecated and will not be included in "
@@ -546,24 +551,22 @@ msgid "Password"
 msgstr "Пароль"
 
 msgid "OpenID"
-msgstr ""
+msgstr "OpenID"
 
 msgid "Login"
 msgstr "Войти"
 
-#, fuzzy
 msgid "Username"
-msgstr "Пользователь"
+msgstr "Имя пользователя"
 
-#, fuzzy
 msgid "Member of Groups"
-msgstr "Всего страниц"
+msgstr "Члены групп"
 
 msgid "Email"
 msgstr "Почтовый адрес"
 
 msgid "Jabber"
-msgstr ""
+msgstr "Jabber"
 
 msgid "Action"
 msgstr "Действие"
@@ -583,24 +586,28 @@ msgstr "Отправить мне почтой информацию по уче�
 msgid "Missing password. Please enter user name and password."
 msgstr "Отсутствует пароль. Пожалуйста, введите имя пользователя и пароль"
 
-#, fuzzy
 msgid "You need to log in."
-msgstr "Вы вышли."
+msgstr "Вам необходимо войти в систему."
 
 #, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
+"Если у вас нет учетной записи, <a href=\"%(userprefslink)s\">вы можете создать его "
+"сейчас</a>. <a href=\"%(sendmypasswordlink)s\">Забыли ваш пароль?</a>"
 
 msgid ""
 "Please choose an account name now.\n"
 "If you choose an existing account name you will be asked for the\n"
 "password and be able to associate the account with your OpenID."
 msgstr ""
+"Пожалуйста, выберите имя учетной записи.\n"
+"Если вы выбрали имя уже существующей учетной записи, вам будет предложено\n"
+"ввести пароль и связать эту учетную запись с вашим OpenID."
 
 msgid "Choose this name"
-msgstr ""
+msgstr "Выберите это имя"
 
 msgid ""
 "The username you have chosen is already\n"
@@ -608,55 +615,60 @@ msgid ""
 "the username with your OpenID. Otherwise, please choose a different\n"
 "username and leave the password field blank."
 msgstr ""
+"Выбранное вами имя пользователя уже используется\n"
+"Если это ваше имя, введите пароль для него чтобы связать его с OpenID.\n"
+"В ином случае, пожалуйста, выберите другое имя пользователя и оставьте "
+"поле пароля пустым."
 
 msgid "Associate this name"
-msgstr ""
+msgstr "Связать это имя"
 
 #, python-format
 msgid "OpenID error: %s."
-msgstr ""
+msgstr "Ошибка OpenID: %s."
 
-#, fuzzy
 msgid "Verification canceled."
-msgstr "Операция отменена."
+msgstr "Проверка отменена."
 
 msgid "OpenID failure."
-msgstr ""
+msgstr "Ошибка OpenID."
 
 msgid "This is not a valid username, choose a different one."
-msgstr ""
+msgstr "Это имя пользователя не верное, выберите другое."
 
 msgid "Your account is now associated to your OpenID."
-msgstr ""
+msgstr "Ваша учетная запись связана с вашим OpenID."
 
 msgid "The password you entered is not valid."
-msgstr ""
+msgstr "Введенный вами пароль не верен."
 
 msgid "OpenID verification requires that you click this button:"
-msgstr ""
+msgstr "Для проверки OpenID вам необходимо нажать на эту кнопку:"
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
-msgstr ""
+msgstr "Для входа по OpenID должны быть включены анонимные сессии."
 
 msgid "Failed to resolve OpenID."
-msgstr ""
+msgstr "Ошибка при разрешении OpenID."
 
 msgid "OpenID discovery failure, not a valid OpenID."
-msgstr ""
+msgstr "Ошибка нахождения OpenID, OpenID не верный."
 
 msgid "No OpenID."
-msgstr ""
+msgstr "Нет OpenID."
 
 msgid ""
 "If you do not have an account yet, you can still log in with your OpenID and "
 "create one during login."
 msgstr ""
+"Если у вас до сих пор не заведена учетная запись, вы все-равно можете войти по "
+"вашему OpenID и создать учетную запись во время входа."
 
 msgid "Failed to connect to database."
-msgstr ""
+msgstr "Ошибка при соединении с базой данных."
 
 msgid "Could not contact botbouncer.com."
-msgstr ""
+msgstr "Не могу соединиться с botbouncer.com."
 
 msgid "Wiki"
 msgstr "Вики"
@@ -731,7 +743,7 @@ msgid "Click to do a full-text search for this title"
 msgstr "Нажмите сюда для поиска этого названия везде"
 
 msgid "Settings"
-msgstr ""
+msgstr "Настройки"
 
 msgid "Logout"
 msgstr "Выйти"
@@ -881,9 +893,9 @@ msgstr ""
 msgid "**Maximum number of allowed includes exceeded**"
 msgstr "**Достигнуто максимально возможное количество вложений**"
 
-#, fuzzy, python-format
+#, python-format
 msgid "**You are not allowed to read the page: %s**"
-msgstr "Вам не разрешено переименовывать эту страницу!"
+msgstr "**У вас нет прав для просмотра этой странцы: %s**"
 
 #, python-format
 msgid "**Could not find the referenced page: %s**"
@@ -988,7 +1000,7 @@ msgid "SpellCheck"
 msgstr "Правописание"
 
 msgid "Discussion"
-msgstr ""
+msgstr "Обсуждение"
 
 #, python-format
 msgid ""
@@ -998,43 +1010,41 @@ msgstr ""
 "в этом вики."
 
 msgid "Notification"
-msgstr ""
+msgstr "Уведомление"
 
 msgid "Notification settings saved!"
-msgstr ""
+msgstr "Настройки уведомлений сохранены!"
 
-#, fuzzy
 msgid "'''Email'''"
-msgstr "Почтовый адрес"
+msgstr "'''Почтовый адрес'''"
 
 msgid "'''Jabber'''"
-msgstr ""
+msgstr "'''Jabber'''"
 
 msgid "'''Event type'''"
-msgstr ""
+msgstr "'''Тип события'''"
 
 msgid "Select the events you want to be notified about."
-msgstr ""
+msgstr "Выберите событие, о которым вы желаете получать уведомления."
 
 msgid ""
 "Before you can be notified, you need to provide a way to contact you in the "
 "general preferences."
 msgstr ""
+"Прежде чем вы сможете получать уведомления, вам необходимо предоставить ваши контакты "
+"в общих настройках."
 
-#, fuzzy
 msgid "Subscribed events"
-msgstr "Подписать пользователя"
+msgstr "Подписанные события"
 
-#, fuzzy
 msgid "Subscribed wiki pages<<BR>>(one regex per line)"
-msgstr "Список подписки на страницы вики (один образец на строчку)"
+msgstr "Подписанные вики-страницы<<BR>(по одному регулярному выражению в строчке)"
 
 msgid "Save"
 msgstr "Записать"
 
-#, fuzzy
 msgid "Change password"
-msgstr "Пароль"
+msgstr "Сменить пароль"
 
 msgid "Passwords don't match!"
 msgstr "Пароли не совпадают!"
@@ -1047,65 +1057,68 @@ msgid "Password not acceptable: %s"
 msgstr "Пароль не принят: %s"
 
 msgid "Your password has been changed."
-msgstr ""
+msgstr "Ваш пароль изменен."
 
 msgid "To change your password, enter a new password twice."
-msgstr ""
+msgstr "Для смены пароля, введите новый пароль дважды."
 
 msgid "Password repeat"
 msgstr "Повторите пароль"
 
 msgid "Switch user"
-msgstr ""
+msgstr "Переключить пользователя"
 
 msgid "No user selected"
-msgstr ""
+msgstr "Пользователь не выбран"
 
 msgid ""
 "You can now change the settings of the selected user account; log out to get "
 "back to your account."
 msgstr ""
+"Вы можете изменить настройки выбранной учетной записи; выйдите чтобы получить вашу "
+"учетную запись обратно."
 
 msgid "You are the only user."
-msgstr ""
+msgstr "Вы единственный пользователь."
 
 msgid ""
 "As a superuser, you can temporarily assume the identity of another user."
 msgstr ""
+"Вы можете временно становиться другим пользователем, будучи суперпользователем."
 
 msgid "Select User"
 msgstr "Выберите пользователя"
 
 msgid "OpenID settings"
 msgstr ""
+"Настройки OpenID"
 
 msgid "Cannot remove all OpenIDs."
-msgstr ""
+msgstr "Не могу удалить все OpenID."
 
 msgid "The selected OpenIDs have been removed."
-msgstr ""
+msgstr "Выбранные OpenID были удалены."
 
 msgid "No OpenID given."
-msgstr ""
+msgstr "Не задано ни одного OpenID."
 
 msgid "OpenID is already present."
-msgstr ""
+msgstr "OpenID уже существует."
 
-#, fuzzy
 msgid "This OpenID is already used for another account."
-msgstr "Такая страница уже удалена или никогда не существовала!"
+msgstr "Этот OpenID уже используется другой учетной записью."
 
 msgid "OpenID added successfully."
-msgstr ""
+msgstr "OpenID успешно добавлен."
 
 msgid "Current OpenIDs"
-msgstr ""
+msgstr "Текущий OpenID"
 
 msgid "Remove selected"
-msgstr ""
+msgstr "Удалить выбранное"
 
 msgid "Add OpenID"
-msgstr ""
+msgstr "Добавить OpenID"
 
 msgid "Preferences"
 msgstr "Настройки"
@@ -1136,9 +1149,8 @@ msgstr ""
 msgid "This email already belongs to somebody else."
 msgstr "Это чужой адрес."
 
-#, fuzzy
 msgid "This jabber id already belongs to somebody else."
-msgstr "Это чужой адрес."
+msgstr "Этот jabber id уже кем-то используется."
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -1189,7 +1201,7 @@ msgstr "Общие параметры"
 msgid "Quick links"
 msgstr "Закладки"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear Wiki user,\n"
 "\n"
@@ -1200,12 +1212,9 @@ msgid ""
 msgstr ""
 "Дорогой пользователь Wiki,\n"
 "\n"
-"Вы подписаны на уведомления об изменениях страницы или категории на \"%"
-"(sitename)s\".\n"
+"Вы подписаны на уведомления об изменениях страницы или категории на \"%(sitename)s\".\n"
 "\n"
-"Эту страницу изменил(а) %(editor)s:\n"
-"%(pagelink)s\n"
-"\n"
+"Страница \"%(pagename)s\" была изменена %(editor)s:\n"
 
 msgid "New page:\n"
 msgstr "Новая страница:\n"
@@ -1213,7 +1222,7 @@ msgstr "Новая страница:\n"
 msgid "No differences found!\n"
 msgstr "Различий не найдено!\n"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear wiki user,\n"
 "\n"
@@ -1225,14 +1234,12 @@ msgid ""
 msgstr ""
 "Дорогой пользователь Wiki,\n"
 "\n"
-"Вы подписаны на уведомления об изменениях страницы или категории на \"%"
-"(sitename)s\".\n"
+"Вы подписаны на уведомления об изменениях страницы или категории на \"%(sitename)s\".\n"
 "\n"
-"Эту страницу изменил(а) %(editor)s:\n"
-"%(pagelink)s\n"
+"Страница \"%(pagename)s\" была удалена %(editor)s:\n"
 "\n"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear wiki user,\n"
 "\n"
@@ -1244,16 +1251,14 @@ msgid ""
 msgstr ""
 "Дорогой пользователь Wiki,\n"
 "\n"
-"Вы подписаны на уведомления об изменениях страницы или категории на \"%"
-"(sitename)s\".\n"
+"Вы подписаны на уведомления об изменениях страницы или категории на \"%(sitename)s\".\n"
 "\n"
-"Эту страницу изменил(а) %(editor)s:\n"
-"%(pagelink)s\n"
+"Страница \"%(pagename)s\" была переименована из \"%(oldname)s\" %(editor)s:\n"
 "\n"
 
 #, python-format
 msgid "New user account created on %(sitename)s"
-msgstr ""
+msgstr "Создана новая учетная запись пользователя на %(sitename)s"
 
 #, python-format
 msgid ""
@@ -1262,10 +1267,14 @@ msgid ""
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
 msgstr ""
+"Дорогой суперюзер, только что был добавлен новый пользователь. Детали произошедшего:\n"
+"\n"
+"    Имя пользователя: %(username)s\n"
+"    Адрес электропочты: %(useremail)s"
 
-#, fuzzy, python-format
+#, python-format
 msgid "New attachment added to page %(pagename)s on %(sitename)s"
-msgstr "вложение:%(filename)s к %(pagename)s"
+msgstr "Добавлено новое вложение к странице %(pagename)s на %(sitename)s"
 
 #, python-format
 msgid ""
@@ -1278,38 +1287,41 @@ msgid ""
 "Attachment name: %(attach_name)s\n"
 "Attachment size: %(attach_size)s\n"
 msgstr ""
+"Дорогой пользователь вики,\n"
+"\n"
+"Вы подписаны на уведомление об изменениях вики-странички \"%(page_name)s\" "
+"К этой странице пользователем %(editor)s было добавлено вложение. "
+"Доступна следующая детальная информация:\n"
+"\n"
+"Имя вложения: %(attach_name)s\n"
+"Размер вложения: %(attach_size)s\n"
 
 msgid "Page has been modified"
-msgstr ""
+msgstr "Страница изменена"
 
 msgid "Page has been modified in a trivial fashion"
-msgstr ""
+msgstr "В страницу были внесены незначительные изменения"
 
-#, fuzzy
 msgid "Page has been renamed"
-msgstr "Запросы и исправления страниц"
+msgstr "Странциа переименована"
 
-#, fuzzy
 msgid "Page has been deleted"
-msgstr "Страница \"%s\" успешно удалена!"
+msgstr "Страница удалена"
 
-#, fuzzy
 msgid "Page has been copied"
-msgstr "Запросы и исправления страниц"
+msgstr "Странца скопирована"
 
-#, fuzzy
 msgid "A new attachment has been added"
-msgstr "Новое имя вложения"
+msgstr "Добавлено новое вложение"
 
 msgid "A page has been reverted to a previous state"
-msgstr ""
+msgstr "Страница возвращена к предыдущему состоянию"
 
-#, fuzzy
 msgid "A user has subscribed to a page"
-msgstr "Вы подписанались на эту страницу."
+msgstr "Пользователь подписан на страницу"
 
 msgid "A new account has been created"
-msgstr ""
+msgstr "Созадана новая учетная запись"
 
 #, python-format
 msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
@@ -1323,30 +1335,28 @@ msgid ""
 "Attachment link: %(attach)s\n"
 "Page link: %(page)s\n"
 msgstr ""
+"Ссылка на вложение: %(attach)s\n"
+"Ссылка на страницу: %(page)s\n"
 
 #, python-format
 msgid "XML RPC error: %s"
-msgstr ""
+msgstr "Ошибка XML RPC: %s"
 
 #, python-format
 msgid "Low-level communication error: %s"
-msgstr ""
+msgstr "Ошибка низкоуровневой коммуникации: %s"
 
-#, fuzzy
 msgid "Attachment link"
-msgstr "Вложения"
+msgstr "Ссылка на вложение"
 
-#, fuzzy
 msgid "Page link"
-msgstr "Страницы похожие на \"%s\""
+msgstr "Ссылка на странцу"
 
-#, fuzzy
 msgid "Changed page"
-msgstr "Страницы пакета"
+msgstr "Измененная страница"
 
-#, fuzzy
 msgid "Page changed"
-msgstr "Сохранить изменения"
+msgstr "Страница изменена"
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr "Опции --pages и --search взаимно исключаемы!"
@@ -1571,7 +1581,7 @@ msgid "Alias-Name"
 msgstr "Никнейм"
 
 msgid "Jabber ID"
-msgstr ""
+msgstr "Jabber ID"
 
 msgid "User CSS URL"
 msgstr "URL пользовательскиого CSS"
@@ -1582,12 +1592,11 @@ msgstr "(Оставьте пустым для использования сис�
 msgid "Editor size"
 msgstr "Размер окна редактирования"
 
-#, fuzzy
 msgid "File attachment browser"
-msgstr "Новое имя вложения"
+msgstr "Просмотр файлов вложений"
 
 msgid "User account browser"
-msgstr ""
+msgstr "Просмотр пользовательских ученых записей"
 
 #, python-format
 msgid "Invalid include arguments \"%s\"!"
@@ -1764,7 +1773,7 @@ msgid "last modified since (e.g. last 2 weeks)"
 msgstr "последний раз отредактирована (например, последние 2 недели назад)"
 
 msgid "any category"
-msgstr ""
+msgstr "любая категория"
 
 msgid "any language"
 msgstr "любой язык"
@@ -1773,7 +1782,7 @@ msgid "any mimetype"
 msgstr "любой тип файла (mime)"
 
 msgid "Categories"
-msgstr ""
+msgstr "Категории"
 
 msgid "File Type"
 msgstr "Тип файла"
@@ -1825,18 +1834,24 @@ msgid ""
 "%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
 "missing."
 msgstr ""
+"%(extension_name)s %(extension_type)s: Отсутствует необходимый аргумент "
+"%(argument_name)s."
 
 #, python-format
 msgid ""
 "%(extension_name)s %(extension_type)s: Invalid %(argument_name)s=%"
 "(argument_value)s!"
 msgstr ""
+"%(extension_name)s %(extension_type)s: Не верное %(argument_name)s=%"
+"(argument_value)s!"
 
 #, python-format
 msgid ""
 "Current configuration does not allow embedding of the file %(file)s because "
 "of its mimetype %(mimetype)s."
 msgstr ""
+"Текующая конфигурация не позволяет встраивать файл %(file)s из-за его MIME-типа "
+"%(mimetype)s."
 
 msgid "Embedded"
 msgstr "Встроенный"
@@ -1874,9 +1889,8 @@ msgstr "Укажите тип диаграммы!"
 msgid "Bad chart type \"%s\"!"
 msgstr "Неправильный тип диаграммы \"%s\"!"
 
-#, fuzzy
 msgid "Revert"
-msgstr "Вернуть всё!"
+msgstr "Вернуть"
 
 msgid "You are not allowed to revert this page!"
 msgstr "Вы не можете восстанавливать из архива эту страницу!"
@@ -1893,13 +1907,11 @@ msgstr ""
 msgid "This page is already deleted or was never created!"
 msgstr "Такая страница уже удалена или никогда не существовала!"
 
-#, fuzzy
 msgid "Optional reason for reverting this page"
-msgstr "Можете указать причину копирования"
+msgstr "Можете указать причину возвращения предыдущей версии страницы"
 
-#, fuzzy
 msgid "Really revert this page?"
-msgstr "Точно переименовать эту страницу?"
+msgstr "Точно возвратить предыдущую версию этой страцы?"
 
 #, python-format
 msgid "Rolled back changes to the page %s."
@@ -1939,23 +1951,22 @@ msgstr ""
 msgid "The ''remoteWiki'' is unknown."
 msgstr "''remoteWiki'' неизвестна."
 
-#, fuzzy
 msgid "A severe error occurred:"
-msgstr "Произошла ошибка:"
+msgstr "Произошла серьезная ошибка:"
 
 msgid "Synchronisation finished. Look below for the status messages."
-msgstr "Синхронизация удалась. Смотрите ниже для статусных сообщений."
+msgstr "Синхронизация закончена. Смотрите ниже для статусных сообщений."
 
 msgid "Synchronisation started -"
 msgstr "Синхронизация началась -"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Got a list of %s local and %s remote pages. This results in %s pages to "
 "process."
 msgstr ""
 "Получен список %s локальных и %s удаленных страниц. Всего обнаружено %s "
-"разных страниц."
+"страниц для обработки."
 
 #, python-format
 msgid "After filtering: %s pages"
@@ -2064,13 +2075,18 @@ msgid ""
 "\n"
 "Once you have logged in, simply reload this page."
 msgstr ""
+"Вам необходимо вручную зайти на вики вашего провайдера OpenID\n"
+"и залогиниться прежде чем вы сможете использовать ваш OpenID. MoinMoin\n"
+"не позволит вам ввести свой пароль здесь.\n"
+"\n"
+"Когда вы залогинитесь, просто перезагрузите эту страницу."
 
 msgid "OpenID Trust verification"
-msgstr ""
+msgstr "Проверка OpenID Trust"
 
 #, python-format
 msgid "The site %s has asked for your identity."
-msgstr ""
+msgstr "Сайт %s попросил вашей идентификации."
 
 #, python-format
 msgid ""
@@ -2080,28 +2096,31 @@ msgid ""
 "identity, the site will take care of reversing the\n"
 "delegation on its own.)"
 msgstr ""
+"\n"
+"Если вы согласитесь, этот сайт, будучи представленным этим trust root будет\n"
+"считать, что вы контролируете идентификационный URL: %s. (Если вы используете\n"
+"делегированнную идентификацию, этот сайт сам позаботиться о разрешении делегации.)"
 
 msgid "Trust root"
-msgstr ""
+msgstr "Trust root"
 
 msgid "Identity URL"
-msgstr ""
+msgstr "URL идентификации"
 
-#, fuzzy
 msgid "Remember decision"
-msgstr "Версия PyStemmer"
+msgstr "Запомнить выбор"
 
 msgid "Remember this trust decision and don't ask again"
-msgstr ""
+msgstr "Запомните это решение о доверии и не спрашивайте еще раз"
 
 msgid "Approve"
-msgstr ""
+msgstr "Согласиться"
 
 msgid "Don't approve"
-msgstr ""
+msgstr "Не согласиться"
 
 msgid "OpenID not served"
-msgstr ""
+msgstr "OpenID не обслуживается"
 
 msgid ""
 "\n"
@@ -2110,6 +2129,11 @@ msgid ""
 "and then reload this page or click the button below to cancel this\n"
 "verification."
 msgstr ""
+"\n"
+"К сожалению, вы еще не создали вашу домашнюю страничку. Поэтому\n"
+"мы не можем обработать OpenID для вас. Пожалуйста, сначала создайте вашу\n"
+"домашнюю страничку, а затем перезагрузите эту или нажмите кнопку ниже чтобы\n"
+"отменить эту проверку."
 
 #, python-format
 msgid "Invalid filename \"%s\"!"
@@ -2137,11 +2161,11 @@ msgid "No pages like \"%s\"!"
 msgstr "Нет страниц похожих на \"%s\"!"
 
 msgid "Please choose:"
-msgstr ""
+msgstr "Пожалуйста, выберите:"
 
-#, fuzzy, python-format
+#, python-format
 msgid "You must login to use this action: %(action)s."
-msgstr "Вы должны войти, чтобы воспользоваться подпиской."
+msgstr "Вам необходимо войти, чтобы пользоваться этой секцией: %(action)s."
 
 msgid "You must login to remove a quicklink."
 msgstr "Вы должны войти, чтобы удалить закладку."
@@ -2316,10 +2340,9 @@ msgstr "Ваша подписка на эту страницу удалена."
 msgid "Can't remove regular expression subscription!"
 msgstr "Не могу удалить подписку по регулярному выражению!"
 
-#, fuzzy
 msgid "Edit the subscription regular expressions in your settings."
 msgstr ""
-"Исправьте регулярные выражения для подписки на страничке ВашиНастройки."
+"Отредактируйте регулярные выражения подписки в ваших настройках."
 
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Вы должны быть подписаны, чтобы отписаться."
@@ -2351,13 +2374,11 @@ msgstr "Различия между версиями %d и %d"
 msgid "(spanning %d versions)"
 msgstr "(по %d версиям)"
 
-#, fuzzy
 msgid "Previous change"
-msgstr "Предыдущий"
+msgstr "Предыдущee изменение"
 
-#, fuzzy
 msgid "Next change"
-msgstr "Ничего не изменилось"
+msgstr "Следующее изменение"
 
 #, python-format
 msgid "The page was saved %(count)d times, though!"
@@ -2372,45 +2393,45 @@ msgstr "Игнорировать разницу в количестве проб
 msgid "Load"
 msgstr "Загрузить"
 
-#, fuzzy
 msgid "Pagename not specified!"
-msgstr "Не указано имя файла вложения!"
+msgstr "Имя странцы не указано!"
 
 msgid "Upload page content"
-msgstr ""
+msgstr "Загрузить содержание страницы"
 
 msgid ""
 "You can upload content for the page named below. If you change the page "
 "name, you can also upload content for another page. If the page name is "
 "empty, we derive the page name from the file name."
 msgstr ""
+"Ниже вы можете загрузить содержание для этой страницы. Если вы измените "
+"имя этой страницы, вы также сможете загрузить содержание для другой страницы. "
+"Если имя страницы не указано, оно будет дедуцировано из имени файла."
 
 msgid "File to load page content from"
-msgstr ""
+msgstr "Файл для загрузки содержания страницы"
 
 msgid "Comment"
 msgstr "Комментарий"
 
-#, fuzzy
 msgid "Page Name"
-msgstr "Имя пакета"
+msgstr "Имя страницы"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Вы не можете подписаться на страницу которую вам нельзя читать."
 
-#, fuzzy
 msgid "This wiki is not enabled for mail/Jabber processing."
-msgstr "В этом вики запрещена отправка почты."
+msgstr "Эта вики не настроена для обработки mail/Jabber сообщений."
 
 msgid "You must log in to use subscriptions."
 msgstr "Вы должны войти, чтобы воспользоваться подпиской."
 
-#, fuzzy
 msgid ""
 "Add your email address or Jabber ID in your user settings to use "
 "subscriptions."
 msgstr ""
-"Добавьте ваш почтовый адрес в ВашиНастройки чтобы воспользоваться подпиской."
+"Чтобы воспользоваться подпиской, добавьте адрес вашей электронной "
+"почты или Jabber ID в ваших настройках."
 
 msgid "You are already subscribed to this page."
 msgstr "Вы уже подписаны на эту страницу."
@@ -2449,9 +2470,8 @@ msgstr "Редактор"
 msgid "view"
 msgstr "показать"
 
-#, fuzzy
 msgid "to previous"
-msgstr "Предыдущий"
+msgstr "К предыдущей"
 
 msgid "get"
 msgstr "получить"
@@ -2492,13 +2512,11 @@ msgstr "Можете указать причину для удаления"
 msgid "Really delete this page?"
 msgstr "Точно удалить эту страницу?"
 
-#, fuzzy
 msgid "You are not allowed to create the supplementation page."
-msgstr "Вам не разрешено переименовывать эту страницу!"
+msgstr "Вам не разрешено создавать вложенную страницу."
 
-#, fuzzy
 msgid "Only superuser is allowed to use this action."
-msgstr "Вам нельзя это делать."
+msgstr "Только суперпользователю разрешено активировать это действие"
 
 #, python-format
 msgid "Subscribe users to the page %s"
@@ -2582,7 +2600,7 @@ msgid "Create Profile"
 msgstr "Создать учетную запись"
 
 msgid "Create Account"
-msgstr ""
+msgstr "Создать учетную запись"
 
 msgid "You must login to add a quicklink."
 msgstr "Чтобы добавить закладку вы должны быть зарегистрированы."
@@ -2626,11 +2644,10 @@ msgstr "Нельзя проверять страницу которую запр
 msgid "You are now logged out."
 msgstr "Вы вышли."
 
-#, fuzzy
 msgid "If this account exists an email was sent."
 msgstr ""
 "Если учетная запись с этим именем пользователя существует, то сообщение "
-"отправлено"
+"было отправлено"
 
 msgid ""
 "This wiki is not enabled for mail processing.\n"
@@ -2639,49 +2656,44 @@ msgstr ""
 "В этом вики запрещена отправка почты. Свяжитесь с владельцем вики, который "
 "может разрешить отправку."
 
-#, fuzzy
 msgid "Please provide a valid email address or a username!"
-msgstr "Пожалуйста укажите правильный почтовый адрес!"
+msgstr "Пожалуйста укажите правильный почтовый адрес или имя пользователя!"
 
 msgid "Mail me my account data"
 msgstr "Отправить мне настройки почтой"
 
-#, fuzzy
 msgid "Recovery token"
-msgstr "Вернуть всё!"
+msgstr "Строка восстановления"
 
-#, fuzzy
 msgid "New password"
-msgstr "Пароль"
+msgstr "Новый пароль"
 
-#, fuzzy
 msgid "New password (repeat)"
-msgstr "Повторите пароль"
+msgstr "Повторите новый пароль"
 
-#, fuzzy
 msgid "Reset my password"
-msgstr "Пароль"
+msgstr "Сбросить мой пароль"
 
 msgid "Your password has been changed, you can log in now."
-msgstr ""
+msgstr "Ваш пароль был изменен, теперь вы можете войти в систему."
 
 msgid "Your token is invalid!"
-msgstr ""
+msgstr "Строка сброса не верная!"
 
-#, fuzzy
 msgid "Password reset"
-msgstr "Повторите пароль"
+msgstr "Сброс пароля"
 
-#, fuzzy
 msgid ""
 "\n"
 "== Password reset ==\n"
 "Enter a new password below."
-msgstr "Отсутствует пароль. Пожалуйста, введите имя пользователя и пароль"
+msgstr ""
+"\n"
+"== Сброс пароля ==\n"
+"Введите новый пароль."
 
-#, fuzzy
 msgid "Lost password"
-msgstr "Пароль"
+msgstr "Забытый пароль"
 
 msgid ""
 "\n"
@@ -2692,6 +2704,13 @@ msgid ""
 "used to change your password. The email will also contain further\n"
 "instructions."
 msgstr ""
+"\n"
+"== Восстановление забытого пароля ==\n"
+"Если вы забыли ваш пароль, введите адрес вашей электронной почты или имя пользователя\n"
+"и кликните по '''Отправить мне данные моей учетной записи'''.\n"
+"Вы получите почтовое сообщение, содержащее строку восстановления, которая может\n"
+"быть использована для смены вашего пароля. Сообщение также будет содержать дальнейшие\n"
+"инструкции."
 
 msgid ""
 "\n"
@@ -2699,6 +2718,10 @@ msgid ""
 "If you already have received the email with the recovery token, enter your\n"
 "username, the recovery token and a new password (twice) below."
 msgstr ""
+"\n"
+"=== Сброс пароля ===\n"
+"Если вы уже получили письмо со строкой для сброса пароля, введите ваше\n"
+"имя пользователя, строку сброса и новый пароль (дважды)."
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -2788,9 +2811,8 @@ msgstr "Неподдерживаемое суб-действие Прикреп�
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Вложения для \"%(pagename)s\""
 
-#, fuzzy
 msgid "You are not allowed to overwrite a file attachment of this page."
-msgstr "Вам нельзя смотреть вложения с этой страницы."
+msgstr "Вам нельзя переписывать вложения на этой странице."
 
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
@@ -2813,22 +2835,23 @@ msgstr "Вам нельзя делать рисунки на этой стран
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Вам нельзя удалять вложения с этой страницы."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
-msgstr "Вложение '%(filename)s' уже существет."
+msgstr "Вложение '%(new_pagename)s/%(new_filename)s' уже существет."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/%"
 "(new_filename)s'."
-msgstr "Вложение '%(filename)s' перемещено на  %(page)s."
+msgstr "Вложение '%(pagename)s/%(filename)s' перемещено на %(new_pagename)s/%"
+"(new_filename)s'."
 
 msgid "Nothing changed"
 msgstr "Ничего не изменилось"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Page '%(new_pagename)s' does not exist or you don't have enough rights."
-msgstr "Страница %(newpagename)s не существует или у вас нет достаточных прав."
+msgstr "Страница '%(new_pagename)s' не существует или у вас нет достаточных прав."
 
 msgid "Move aborted!"
 msgstr "Перемещение отменено!"
@@ -2840,17 +2863,15 @@ msgstr ""
 msgid "You are not allowed to move attachments from this page."
 msgstr "Вам нельзя перемещать вложения с этой страницы."
 
-#, fuzzy
 msgid "Move aborted because new page name is empty."
-msgstr "Перемещение отменено, так как имя страницы пустое"
+msgstr "Перемещение отменено, так как имя новой страницы пустое."
 
 #, python-format
 msgid "Please use a valid filename for attachment '%(filename)s'."
 msgstr "Используйте верное имя файла для вложения '%(filename)s'."
 
-#, fuzzy
 msgid "Move aborted because new attachment name is empty."
-msgstr "Перемещение отменено, так как имя вложения пустое"
+msgstr "Перемещение отменено, так как имя нового вложения пустое"
 
 msgid "Move"
 msgstr "Перемещение"
