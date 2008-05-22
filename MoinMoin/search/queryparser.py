@@ -793,7 +793,12 @@ class MimetypeSearch(BaseExpression):
         return u""
 
     def search(self, page):
-        return None
+        page_mimetype = u'text/%s' % page.pi['format']
+        matches = self.search_re.search(page_mimetype)
+        if matches and not self.negated or not matches and self.negated:
+            return [Match()]
+        else:
+            return None
 
     def xapian_wanted(self):
         return True # only easy regexps possible
