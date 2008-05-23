@@ -29,6 +29,7 @@
 """
 
 from csv import reader, QUOTE_NONE, QUOTE_MINIMAL, Sniffer
+from _csv import Error
 
 from MoinMoin.util.dataset import TupleDataset, Column
 from MoinMoin.widget.browser import DataBrowserWidget
@@ -55,8 +56,18 @@ class Parser:
         # workaround csv.reader deficiency by encoding to utf-8
         data = raw.encode('utf-8').split('\n')
         delimiter = ';'
+        # Previous versions of this parser have used only the delimiter ";" (by default).
+        # This version now tries to sniff the delimiter from the list preferred_delimiters
+        # Although the Python csv sniffer had quite some changes from py 2.3 to 2.5.1, we try
+        # to avoid problems for the case it does not find a delimiter in some given data.
+        # Newer versions of the sniffer do raise an _csv.Error while older versions do
+        # return a whitespace as delimiter.
         if data[0]:
-            delimiter = Sniffer().sniff(data[0]).delimiter
+            try:
+                preferred_delimiters =  [',', '\t', ';', ' ', ':']
+                delimiter = Sniffer().sniff(data[0], preferred_delimiters).delimiter or ';'
+            except Error:
+                pass
 
         visible = None
         hiddenindexes = []
