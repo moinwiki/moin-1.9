@@ -116,7 +116,7 @@ def handle_user_created(event):
         usr = User(request, id=usr_id)
         # Currently send this only to super users
         if usr.isSuperUser() and event_name in usr.email_subscribed_events:
-            _ = lambda text: request.getText(text, lang=usr.language)
+            _ = lambda text: request.getText(text, lang=usr.language or 'en')
             data = notification.user_created_message(request, _, sitename, username, email)
             send_notification(request, from_address, [usr.email], data)
 
