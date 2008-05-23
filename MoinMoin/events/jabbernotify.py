@@ -10,6 +10,9 @@
 
 import xmlrpclib
 
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin.Page import Page
 from MoinMoin.user import User, getUserList
 from MoinMoin.support.python_compatibility import set
@@ -47,18 +50,15 @@ def handle_jid_changed(event):
 
     request = event.request
     server = request.cfg.notification_server
-    _ = request.getText
-
     try:
         if isinstance(event, ev.JabberIDSetEvent):
             server.addJIDToRoster(request.cfg.secret, event.jid)
         else:
             server.removeJIDFromRoster(request.cfg.secret, event.jid)
-
     except xmlrpclib.Error, err:
-        ev.logger.error(_("XML RPC error: %s"), str(err))
+        logging.error("XML RPC error: %s" % str(err))
     except Exception, err:
-        ev.logger.error(_("Low-level communication error: %s"), str(err))
+        logging.error("Low-level communication error: %s" % str(err))
 
 
 def handle_file_attached(event):
@@ -188,7 +188,6 @@ def send_notification(request, jids, notification):
     @type url_list: list
 
     """
-    _ = request.getText
     server = request.cfg.notification_server
 
     if type(notification) != dict:
@@ -201,7 +200,7 @@ def send_notification(request, jids, notification):
         server.send_notification(request.cfg.secret, jids, notification)
         return True
     except xmlrpclib.Error, err:
-        ev.logger.error(_("XML RPC error: %s"), str(err))
+        logging.error("XML RPC error: %s" % str(err))
     except Exception, err:
-        ev.logger.error(_("Low-level communication error: %s"), str(err))
+        logging.error("Low-level communication error: %s" % str(err))
 

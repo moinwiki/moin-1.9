@@ -10,7 +10,7 @@
 """
 
 from MoinMoin import log
-log = log.getLogger(__name__)
+logging = log.getLogger(__name__)
 
 from MoinMoin import wikiutil
 from MoinMoin.util import pysupport
