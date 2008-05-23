@@ -33,7 +33,7 @@ def prep_page_changed_mail(request, page, comment, email_lang, revisions, trivia
 
     """
     change = notification.page_change_message("page_changed", request, page, email_lang, comment=comment, revisions=revisions)
-    _ = lambda s, wiki=False, r=request, l=email_lang: r.getText(s, wiki=wiki, lang=l)
+    _ = lambda text: request.getText(text, lang=email_lang)
 
     if len(revisions) >= 2:
         querystr = {'action': 'diff',
@@ -104,26 +104,21 @@ def handle_page_change(event):
 def handle_user_created(event):
     """Sends an email to super users that have subscribed to this event type"""
 
-    emails = []
-    _ = event.request.getText
-    user_ids = getUserList(event.request)
+    request = event.request
+    sitename = request.cfg.sitename
+    from_address = request.cfg.mail_from
     event_name = event.name
-
-    from_address = event.request.cfg.mail_from
     email = event.user.email or u"NOT SET"
-    sitename = event.request.cfg.sitename
     username = event.user.name
 
-    data = notification.user_created_message(event.request, sitename, username, email)
-
+    user_ids = getUserList(request)
     for usr_id in user_ids:
-        usr = User(event.request, id=usr_id)
-
+        usr = User(request, id=usr_id)
         # Currently send this only to super users
         if usr.isSuperUser() and event_name in usr.email_subscribed_events:
-            emails.append(usr.email)
-
-    send_notification(event.request, from_address, emails, data)
+            _ = lambda text: request.getText(text, lang=usr.language)
+            data = notification.user_created_message(request, _, sitename, username, email)
+            send_notification(request, from_address, [usr.email], data)
 
 
 def handle_file_attached(event):

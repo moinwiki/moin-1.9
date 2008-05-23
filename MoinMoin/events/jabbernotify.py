@@ -132,39 +132,33 @@ def handle_page_renamed(event):
 
 def handle_user_created(event):
     """Handles an event sent when a new user is being created"""
-
-    jids = []
-    user_ids = getUserList(event.request)
+    request = event.request
+    sitename = request.cfg.sitename
     event_name = event.name
-
     email = event.user.email or u"NOT SET"
-    sitename = event.request.cfg.sitename
     username = event.user.name
 
-    msg = notification.user_created_message(event.request, sitename, username, email)
-
+    user_ids = getUserList(request)
     for id in user_ids:
-        usr = User(event.request, id=id)
-
+        usr = User(request, id=id)
         # Currently send this only to super users
         if usr.isSuperUser() and usr.jid and event_name in usr.jabber_subscribed_events:
-            jids.append(usr.jid)
-
-    data = {'action': "user_created", 'subject': msg['subject'], 'text': msg['text'],
-            'url_list': []}
-
-    send_notification(event.request, jids, data)
+            _ = lambda text: request.getText(text, lang=usr.language)
+            msg = notification.user_created_message(request, _, sitename, username, email)
+            data = {'action': "user_created", 'subject': msg['subject'], 'text': msg['text'],
+                    'url_list': []}
+            send_notification(request, [usr.jid], data)
 
 
 def page_change(change_type, request, page, subscribers, **kwargs):
     """Sends notification about page being changed in some way"""
-    _ = request.getText
 
     # send notifications to all subscribers
     if subscribers:
         recipients = set()
 
         for lang in subscribers:
+            _ = lambda text: request.getText(text, lang=lang)
             jids = [u.jid for u in subscribers[lang] if u.jid]
             names = [u.name for u in subscribers[lang] if u.jid]
             msg = notification.page_change_message(change_type, request, page, lang, **kwargs)
