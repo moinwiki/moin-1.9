@@ -55,9 +55,9 @@ class TestDelimiters(ParserTestCase):
         assert '<tbody><tr></tr>\n</tbody>' in  result
 
     def testnodelimiter(self):
-        """ parser.text_csv: empty line """
+        """ parser.text_csv: line without delimiter """
         result = self.parse('ABCDEFGHIJ')
-        assert '<td><strong>ABCDEFGHI</strong></td>' in  result
+        assert '<td><strong>ABCDEFGHIJ</strong></td>' in  result
 
 coverage_modules = ['MoinMoin.parser.text_csv']
 
