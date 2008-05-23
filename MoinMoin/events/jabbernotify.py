@@ -143,7 +143,7 @@ def handle_user_created(event):
         usr = User(request, id=id)
         # Currently send this only to super users
         if usr.isSuperUser() and usr.jid and event_name in usr.jabber_subscribed_events:
-            _ = lambda text: request.getText(text, lang=usr.language)
+            _ = lambda text: request.getText(text, lang=usr.language or 'en')
             msg = notification.user_created_message(request, _, sitename, username, email)
             data = {'action': "user_created", 'subject': msg['subject'], 'text': msg['text'],
                     'url_list': []}
