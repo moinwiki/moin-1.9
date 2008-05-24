@@ -81,7 +81,6 @@ class WikiAnalyzer:
         r"(?P<company>\w+[&@]\w+)|" + # company names like AT&T and Excite@Home.
         r"(?P<email>\w+([.-]\w+)*@\w+([.-]\w+)*)|" +    # email addresses
         r"(?P<hostname>\w+(\.\w+)+)|" +                 # hostnames
-        r"(?P<num>(\w+[-/.,])*\w*\d\w*([-/.,]\w+)*)|" + # version numbers
         r"(?P<acronym>(\w\.)+)|" +          # acronyms: U.S.A., I.B.M., etc.
         r"(?P<word>\w+)",                   # words (including WikiWords)
         re.U)
@@ -136,11 +135,6 @@ class WikiAnalyzer:
                 elif m.group("hostname"):
                     displ = 0
                     for word in self.dot_re.split(m.group("hostname")):
-                        yield (enc(word), m.start() + displ)
-                        displ += len(word) + 1
-                elif m.group("num"):
-                    displ = 0
-                    for word in self.dot_re.split(m.group("num")):
                         yield (enc(word), m.start() + displ)
                         displ += len(word) + 1
                 elif m.group("word"):
