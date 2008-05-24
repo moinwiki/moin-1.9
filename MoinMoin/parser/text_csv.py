@@ -55,6 +55,17 @@ class Parser:
 
         # workaround csv.reader deficiency by encoding to utf-8
         data = raw.encode('utf-8').split('\n')
+
+        # workaraound to remove empty lines in front of the csv table
+        # if this is not done this parser shows only an empty line
+        count = 0
+        for txt in data:
+            if not txt:
+                count += 1
+            else:
+                data = data[count:]
+                break
+
         delimiter = ';'
         # Previous versions of this parser have used only the delimiter ";" (by default).
         # This version now tries to sniff the delimiter from the list preferred_delimiters
@@ -64,7 +75,7 @@ class Parser:
         # return a whitespace as delimiter.
         if data[0]:
             try:
-                preferred_delimiters =  [',', '\t', ';', ' ', ':']
+                preferred_delimiters = [',', '\t', ';', ' ', ':']
                 delimiter = Sniffer().sniff(data[0], preferred_delimiters).delimiter or ';'
             except Error:
                 pass
