@@ -322,7 +322,7 @@ class MoinCookieSessionIDHandler(SessionIDHandler):
 
     def _set_cookie(self, request, cookie_string, expires):
         """ Set cookie, raw helper. """
-        lifetime = expires - time.time()
+        lifetime = int(expires - time.time())
         cookie = self._make_cookie(request, self.cookie_name, cookie_string,
                                    lifetime, expires)
         # Set cookie
