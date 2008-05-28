@@ -126,7 +126,6 @@ class RequestBase(object):
         # Decode values collected by sub classes
         self.path_info = self.decodePagename(self.path_info)
 
-        self.failed = 0
         self._available_actions = None
         self._known_actions = None
 
@@ -1377,23 +1376,6 @@ class RequestBase(object):
         """
         # save a traceback with the header for duplicate bug reporting
         self.user_headers.append((header, ''.join(traceback.format_stack()[:-1])))
-
-    def fail(self, err):
-        """ Fail when we can't continue
-
-        Send 500 status code with the error name. Reference:
-        http://www.w3.org/Protocols/rfc2616/rfc2616-sec6.html#sec6.1.1
-
-        Log the error, then let failure module handle it.
-
-        @param err: Exception instance or subclass.
-        """
-        self.failed = 1 # save state for self.run()
-        # we should not generate the headers two times
-        if not self.sent_headers:
-            self.emit_http_headers(['Status: 500 MoinMoin Internal Error'])
-        from MoinMoin import failure
-        failure.handle(self, err)
 
     def make_unique_id(self, base, namespace=None):
         """
