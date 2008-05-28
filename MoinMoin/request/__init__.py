@@ -126,9 +126,6 @@ class RequestBase(object):
         # Decode values collected by sub classes
         self.path_info = self.decodePagename(self.path_info)
 
-        self._available_actions = None
-        self._known_actions = None
-
         # Pages meta data that we collect in one request
         self.pages = {}
 
