@@ -47,6 +47,7 @@ import traceback
 
 from MoinMoin.Page import Page
 from MoinMoin import config, wikiutil, user, caching, error
+from MoinMoin.action import get_names, get_available_actions
 from MoinMoin.config import multiconfig
 from MoinMoin.support.python_compatibility import set
 from MoinMoin.util import IsWin9x
@@ -771,59 +772,12 @@ class RequestBase(object):
             return ''
         return self.script_name
 
-    def getKnownActions(self):
-        """ Create a dict of avaiable actions
-
-        Return cached version if avaiable.
-
-        @rtype: dict
-        @return: dict of all known actions
-        """
-        try:
-            self.cfg.cache.known_actions # check
-        except AttributeError:
-            from MoinMoin import action
-            self.cfg.cache.known_actions = set(action.getNames(self.cfg))
-
-        # Return a copy, so clients will not change the set.
-        return self.cfg.cache.known_actions.copy()
-
     def getAvailableActions(self, page):
-        """ Get list of avaiable actions for this request
-
-        The dict does not contain actions that starts with lower case.
-        Themes use this dict to display the actions to the user.
-
-        @param page: current page, Page object
-        @rtype: dict
-        @return: dict of avaiable actions
+        """ DEPRECATED! use MoinMoin.action.get_available_actions instead
         """
-        if self._available_actions is None:
-            # some actions might make sense for non-existing pages, so we just
-            # require read access here. Can be later refined to some action
-            # specific check:
-            if not self.user.may.read(page.page_name):
-                return []
-
-            # Filter non ui actions (starts with lower case letter)
-            actions = self.getKnownActions()
-            actions = [action for action in actions if not action[0].islower()]
-
-            # Filter wiki excluded actions
-            actions = [action for action in actions if not action in self.cfg.actions_excluded]
-
-            # Filter actions by page type, acl and user state
-            excluded = []
-            if ((page.isUnderlayPage() and not page.isStandardPage()) or
-                not self.user.may.write(page.page_name) or
-                not self.user.may.delete(page.page_name)):
-                # Prevent modification of underlay only pages, or pages
-                # the user can't write and can't delete
-                excluded = [u'RenamePage', u'DeletePage', ] # AttachFile must NOT be here!
-            actions = [action for action in actions if not action in excluded]
-
-            self._available_actions = set(actions)
-
+        if getattr(self, '_available_actions') is None:
+            self._available_actions = get_available_actions(self.cfg, page, self.user)
+            
         # Return a copy, so clients will not change the dict.
         return self._available_actions.copy()
 
@@ -1267,7 +1221,7 @@ class RequestBase(object):
 
                 msg = None
                 # Complain about unknown actions
-                if not action_name in self.getKnownActions():
+                if not action_name in get_names():
                     msg = _("Unknown action %(action_name)s.") % {
                             'action_name': wikiutil.escape(action_name), }
 
