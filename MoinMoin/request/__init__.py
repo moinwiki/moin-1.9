@@ -771,7 +771,7 @@ class RequestBase(object):
     def getAvailableActions(self, page):
         """ DEPRECATED! use MoinMoin.action.get_available_actions instead
         """
-        if getattr(self, '_available_actions') is None:
+        if getattr(self, '_available_actions', None) is None:
             self._available_actions = get_available_actions(self.cfg, page, self.user)
             
         # Return a copy, so clients will not change the dict.
@@ -1121,6 +1121,7 @@ class RequestBase(object):
         self.loadTheme(theme_name)
 
     def _try_redirect_spaces_page(self, pagename):
+        logging.info('redirect %s', pagename)
         if '_' in pagename and not self.page.exists():
             pname = pagename.replace('_', ' ')
             pg = Page(self, pname)
@@ -1217,7 +1218,7 @@ class RequestBase(object):
 
                 msg = None
                 # Complain about unknown actions
-                if not action_name in get_names():
+                if not action_name in get_names(self.cfg):
                     msg = _("Unknown action %(action_name)s.") % {
                             'action_name': wikiutil.escape(action_name), }
 
@@ -1257,12 +1258,6 @@ class RequestBase(object):
             pass
         except SystemExit:
             raise # fcgi uses this to terminate a thread
-        except Exception, err:
-            try:
-                # nothing we can do about further failures!
-                self.fail(err)
-            except:
-                pass
 
         if self.cfg.log_timing:
             self.timing_log(False, action_name)
