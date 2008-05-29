@@ -773,7 +773,7 @@ class RequestBase(object):
         """
         if getattr(self, '_available_actions', None) is None:
             self._available_actions = get_available_actions(self.cfg, page, self.user)
-            
+
         # Return a copy, so clients will not change the dict.
         return self._available_actions.copy()
 
@@ -1133,7 +1133,7 @@ class RequestBase(object):
 
     def run(self):
         # Exit now if __init__ failed or request is forbidden
-        if self.failed or self.forbidden or self._auth_redirected:
+        if self.forbidden or self._auth_redirected:
             # Don't sleep() here, it binds too much of our resources!
             return self.finish()
 

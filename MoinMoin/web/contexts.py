@@ -29,7 +29,7 @@ class HTTPContext(Context, RequestBase):
     Contains code related to manipulation of HTTP related data like:
     * Headers
     * Cookies
-    * GET/POST/PUT/etc data 
+    * GET/POST/PUT/etc data
     """
     def __init__(self, environ):
         self._wsgirequest = Request(environ)
@@ -84,9 +84,10 @@ import inspect
 def _logfunc(func):
     def _decorated(*args, **kwargs):
         stack = inspect.stack()
-        caller, lineno = stack[1][3], stack[1][0].f_lineno
-        logging.warning("Function '%s' called by '%s' in line '%s'",
-                        func.__name__, caller, lineno)
+        parent = stack[1]
+        caller, filename, lineno = parent[3], parent[1], parent[0].f_lineno
+        logging.warning("Function '%s' called by '%s' in file '%s', line '%s'",
+                        func.__name__, caller, filename, lineno)
         return func(*args, **kwargs)
     _decorated.__name__ = func.__name__
     _decorated.__doc__ = func.__doc__
