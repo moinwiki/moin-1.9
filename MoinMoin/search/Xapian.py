@@ -87,6 +87,7 @@ class WikiAnalyzer:
 
     dot_re = re.compile(r"[-_/,.]")
     mail_re = re.compile(r"[-_/,.]|(@)")
+    alpha_num_re = re.compile(r"\d+|\D+")
 
     # XXX limit stuff above to xapdoc.MAX_KEY_LEN
     # WORD_RE = re.compile('\\w{1,%i}' % MAX_KEY_LEN, re.U)
@@ -104,46 +105,49 @@ class WikiAnalyzer:
                 # lang is not stemmable or not available
                 pass
 
+    def raw_tokenize_word(self, word, pos):
+        """ try to further tokenize some word starting at pos """
+        if self.wikiword_re.match(word):
+            yield (word, pos)
+            # if it is a CamelCaseWord, we additionally try to tokenize Camel, Case and Word
+            for m in re.finditer(self.singleword_re, word):
+                for w, p in self.raw_tokenize_word(m.group(), pos + m.start()):
+                    yield (w, p)
+        else:
+            # if we have Foo42, yield Foo and 42
+            for m in re.finditer(self.alpha_num_re, word):
+                yield (m.group(), pos + m.start())
+
     def raw_tokenize(self, value):
-        """ Yield a stream of lower cased raw and stemmed words from a string.
+        """ Yield a stream of words from a string.
 
         @param value: string to split, must be an unicode object or a list of
                       unicode objects
         """
-        def enc(uc):
-            """ 'encode' unicode results into whatever xapian wants """
-            lower = uc.lower()
-            return lower
-
         if isinstance(value, list): # used for page links
             for v in value:
-                yield (enc(v), 0)
+                yield (v, 0)
         else:
             tokenstream = re.finditer(self.token_re, value)
             for m in tokenstream:
                 if m.group("acronym"):
-                    yield (enc(m.group("acronym").replace('.', '')),
-                            m.start())
+                    yield (m.group("acronym").replace('.', ''), m.start())
                 elif m.group("company"):
-                    yield (enc(m.group("company")), m.start())
+                    yield (m.group("company"), m.start())
                 elif m.group("email"):
                     displ = 0
                     for word in self.mail_re.split(m.group("email")):
                         if word:
-                            yield (enc(word), m.start() + displ)
+                            yield (word, m.start() + displ)
                             displ += len(word) + 1
                 elif m.group("hostname"):
                     displ = 0
                     for word in self.dot_re.split(m.group("hostname")):
-                        yield (enc(word), m.start() + displ)
+                        yield (word, m.start() + displ)
                         displ += len(word) + 1
                 elif m.group("word"):
-                    word = m.group("word")
-                    yield (enc(word), m.start())
-                    # if it is a CamelCaseWord, we additionally yield Camel, Case and Word
-                    if self.wikiword_re.match(word):
-                        for sm in re.finditer(self.singleword_re, word):
-                            yield (enc(sm.group()), m.start() + sm.start())
+                    for word, pos in self.raw_tokenize_word(m.group("word"), m.start()):
+                        yield word, pos
 
     def tokenize(self, value, flat_stemming=True):
         """ Yield a stream of lower cased raw and stemmed words from a string.
@@ -155,6 +159,7 @@ class WikiAnalyzer:
                                 yield both at once as a tuple (False)
         """
         for word, pos in self.raw_tokenize(value):
+            word = word.lower() # transform it into what xapian wants
             if flat_stemming:
                 yield (word, pos)
                 if self.stemmer:
