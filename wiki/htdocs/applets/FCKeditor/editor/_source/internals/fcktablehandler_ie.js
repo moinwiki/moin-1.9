@@ -1,46 +1,56 @@
 ﻿/*
- * FCKeditor - The text editor for internet
- * Copyright (C) 2003-2005 Frederico Caldeira Knabben
- * 
- * Licensed under the terms of the GNU Lesser General Public License:
- * 		http://www.opensource.org/licenses/lgpl-license.php
- * 
- * For further information visit:
- * 		http://www.fckeditor.net/
- * 
- * "Support Open Source software. What about a donation today?"
- * 
- * File Name: fcktablehandler_ie.js
- * 	Manage table operations (IE specific).
- * 
- * File Authors:
- * 		Frederico Caldeira Knabben (fredck@fckeditor.net)
+ * FCKeditor - The text editor for Internet - http://www.fckeditor.net
+ * Copyright (C) 2003-2008 Frederico Caldeira Knabben
+ *
+ * == BEGIN LICENSE ==
+ *
+ * Licensed under the terms of any of the following licenses at your
+ * choice:
+ *
+ *  - GNU General Public License Version 2 or later (the "GPL")
+ *    http://www.gnu.org/licenses/gpl.html
+ *
+ *  - GNU Lesser General Public License Version 2.1 or later (the "LGPL")
+ *    http://www.gnu.org/licenses/lgpl.html
+ *
+ *  - Mozilla Public License Version 1.1 or later (the "MPL")
+ *    http://www.mozilla.org/MPL/MPL-1.1.html
+ *
+ * == END LICENSE ==
+ *
+ * Manage table operations (IE specific).
  */
 
 FCKTableHandler.GetSelectedCells = function()
 {
+	if ( FCKSelection.GetType() == 'Control' )
+	{
+		var td = FCKSelection.MoveToAncestorNode( 'TD' ) ;
+		return td ? [ td ] : [] ;
+	}
+
 	var aCells = new Array() ;
 
-	var oRange = FCK.EditorDocument.selection.createRange() ;
+	var oRange = FCKSelection.GetSelection().createRange() ;
 //	var oParent = oRange.parentElement() ;
 	var oParent = FCKSelection.GetParentElement() ;
-	
-	if ( oParent && oParent.tagName == "TD" )
+
+	if ( oParent && oParent.tagName.Equals( 'TD', 'TH' ) )
 		aCells[0] = oParent ;
 	else
 	{
-		var oParent = FCKSelection.MoveToAncestorNode( "TABLE" ) ;
-		
+		oParent = FCKSelection.MoveToAncestorNode( 'TABLE' ) ;
+
 		if ( oParent )
 		{
 			// Loops throw all cells checking if the cell is, or part of it, is inside the selection
 			// and then add it to the selected cells collection.
 			for ( var i = 0 ; i < oParent.cells.length ; i++ )
 			{
-				var oCellRange = FCK.EditorDocument.selection.createRange() ;
+				var oCellRange = FCK.EditorDocument.body.createTextRange() ;
 				oCellRange.moveToElementText( oParent.cells[i] ) ;
-				
-				if ( oRange.inRange( oCellRange ) 
+
+				if ( oRange.inRange( oCellRange )
 					|| ( oRange.compareEndPoints('StartToStart',oCellRange) >= 0 &&  oRange.compareEndPoints('StartToEnd',oCellRange) <= 0 )
 					|| ( oRange.compareEndPoints('EndToStart',oCellRange) >= 0 &&  oRange.compareEndPoints('EndToEnd',oCellRange) <= 0 ) )
 				{
@@ -49,6 +59,6 @@ FCKTableHandler.GetSelectedCells = function()
 			}
 		}
 	}
-	
+
 	return aCells ;
 }

@@ -1,20 +1,24 @@
 ﻿/*
- * FCKeditor - The text editor for internet
- * Copyright (C) 2003-2005 Frederico Caldeira Knabben
- * 
- * Licensed under the terms of the GNU Lesser General Public License:
- * 		http://www.opensource.org/licenses/lgpl-license.php
- * 
- * For further information visit:
- * 		http://www.fckeditor.net/
- * 
- * "Support Open Source software. What about a donation today?"
- * 
- * File Name: sr.js
- * 	Serbian (Cyrillic) language file.
- * 
- * File Authors:
- * 		Zoran Subić (zoran@tf.zr.ac.yu)
+ * FCKeditor - The text editor for Internet - http://www.fckeditor.net
+ * Copyright (C) 2003-2008 Frederico Caldeira Knabben
+ *
+ * == BEGIN LICENSE ==
+ *
+ * Licensed under the terms of any of the following licenses at your
+ * choice:
+ *
+ *  - GNU General Public License Version 2 or later (the "GPL")
+ *    http://www.gnu.org/licenses/gpl.html
+ *
+ *  - GNU Lesser General Public License Version 2.1 or later (the "LGPL")
+ *    http://www.gnu.org/licenses/lgpl.html
+ *
+ *  - Mozilla Public License Version 1.1 or later (the "MPL")
+ *    http://www.mozilla.org/MPL/MPL-1.1.html
+ *
+ * == END LICENSE ==
+ *
+ * Serbian (Cyrillic) language file.
  */
 
 var FCKLang =
@@ -41,6 +45,7 @@ InsertLinkLbl		: "Линк",
 InsertLink			: "Унеси/измени линк",
 RemoveLink			: "Уклони линк",
 Anchor				: "Унеси/измени сидро",
+AnchorDelete		: "Remove Anchor",	//MISSING
 InsertImageLbl		: "Слика",
 InsertImage			: "Унеси/измени слику",
 InsertFlashLbl		: "Флеш елемент",
@@ -66,6 +71,7 @@ RightJustify		: "Десно равнање",
 BlockJustify		: "Обострано равнање",
 DecreaseIndent		: "Смањи леву маргину",
 IncreaseIndent		: "Увећај леву маргину",
+Blockquote			: "Blockquote",	//MISSING
 Undo				: "Поништи акцију",
 Redo				: "Понови акцију",
 NumberedListLbl		: "Набројиву листу",
@@ -80,7 +86,7 @@ Font				: "Фонт",
 FontSize			: "Величина фонта",
 TextColor			: "Боја текста",
 BGColor				: "Боја позадине",
-Source				: "K&ocirc;д",
+Source				: "Kôд",
 Find				: "Претрага",
 Replace				: "Замена",
 SpellCheck			: "Провери спеловање",
@@ -98,16 +104,28 @@ Button			: "Дугме",
 SelectionField	: "Изборно поље",
 ImageButton		: "Дугме са сликом",
 
+FitWindow		: "Maximize the editor size",	//MISSING
+ShowBlocks		: "Show Blocks",	//MISSING
+
 // Context Menu
 EditLink			: "Промени линк",
-InsertRow			: "Унеси ред",
+CellCM				: "Cell",	//MISSING
+RowCM				: "Row",	//MISSING
+ColumnCM			: "Column",	//MISSING
+InsertRowAfter		: "Insert Row After",	//MISSING
+InsertRowBefore		: "Insert Row Before",	//MISSING
 DeleteRows			: "Обриши редове",
-InsertColumn		: "Унеси колону",
+InsertColumnAfter	: "Insert Column After",	//MISSING
+InsertColumnBefore	: "Insert Column Before",	//MISSING
 DeleteColumns		: "Обриши колоне",
-InsertCell			: "Унеси ћелије",
+InsertCellAfter		: "Insert Cell After",	//MISSING
+InsertCellBefore	: "Insert Cell Before",	//MISSING
 DeleteCells			: "Обриши ћелије",
 MergeCells			: "Спој ћелије",
-SplitCell			: "Раздвоји ћелије",
+MergeRight			: "Merge Right",	//MISSING
+MergeDown			: "Merge Down",	//MISSING
+HorizontalSplitCell	: "Split Cell Horizontally",	//MISSING
+VerticalSplitCell	: "Split Cell Vertically",	//MISSING
 TableDelete			: "Delete Table",	//MISSING
 CellProperties		: "Особине ћелије",
 TableProperties		: "Особине табеле",
@@ -136,7 +154,7 @@ UnknownToolbarItem	: "Непозната ставка toolbara \"%1\"",
 UnknownCommand		: "Непозната наредба \"%1\"",
 NotImplemented		: "Наредба није имплементирана",
 UnknownToolbarSet	: "Toolbar \"%1\" не постоји",
-NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
+NoActiveX			: "Your browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 BrowseServerBlocked : "The resources browser could not be opened. Make sure that all popup blockers are disabled.",	//MISSING
 DialogBlocked		: "It was not possible to open the dialog window. Make sure all popup blockers are disabled.",	//MISSING
 
@@ -146,17 +164,17 @@ DlgBtnCancel		: "Oткажи",
 DlgBtnClose			: "Затвори",
 DlgBtnBrowseServer	: "Претражи сервер",
 DlgAdvancedTag		: "Напредни тагови",
-DlgOpOther			: "&lt;Остали&gt;",
+DlgOpOther			: "<Остали>",
 DlgInfoTab			: "Инфо",
 DlgAlertUrl			: "Молимо Вас, унесите УРЛ",
 
 // General Dialogs Labels
-DlgGenNotSet		: "&lt;није постављено&gt;",
+DlgGenNotSet		: "<није постављено>",
 DlgGenId			: "Ид",
 DlgGenLangDir		: "Смер језика",
 DlgGenLangDirLtr	: "С лева на десно (LTR)",
 DlgGenLangDirRtl	: "С десна на лево (RTL)",
-DlgGenLangCode		: "K&ocirc;д језика",
+DlgGenLangCode		: "Kôд језика",
 DlgGenAccessKey		: "Приступни тастер",
 DlgGenName			: "Назив",
 DlgGenTabIndex		: "Таб индекс",
@@ -215,12 +233,12 @@ DlgLnkTypeURL		: "URL",
 DlgLnkTypeAnchor	: "Сидро на овој страници",
 DlgLnkTypeEMail		: "Eлектронска пошта",
 DlgLnkProto			: "Протокол",
-DlgLnkProtoOther	: "&lt;друго&gt;",
+DlgLnkProtoOther	: "<друго>",
 DlgLnkURL			: "УРЛ",
 DlgLnkAnchorSel		: "Одабери сидро",
 DlgLnkAnchorByName	: "По називу сидра",
 DlgLnkAnchorById	: "Пo Ид-jу елемента",
-DlgLnkNoAnchors		: "&lt;Нема доступних сидра&gt;",
+DlgLnkNoAnchors		: "(Нема доступних сидра)",
 DlgLnkEMail			: "Адреса електронске поште",
 DlgLnkEMailSubject	: "Наслов",
 DlgLnkEMailBody		: "Садржај поруке",
@@ -228,8 +246,8 @@ DlgLnkUpload		: "Пошаљи",
 DlgLnkBtnUpload		: "Пошаљи на сервер",
 
 DlgLnkTarget		: "Meтa",
-DlgLnkTargetFrame	: "&lt;оквир&gt;",
-DlgLnkTargetPopup	: "&lt;искачући прозор&gt;",
+DlgLnkTargetFrame	: "<оквир>",
+DlgLnkTargetPopup	: "<искачући прозор>",
 DlgLnkTargetBlank	: "Нови прозор (_blank)",
 DlgLnkTargetParent	: "Родитељски прозор (_parent)",
 DlgLnkTargetSelf	: "Исти прозор (_self)",
@@ -253,6 +271,7 @@ DlgLnkPopTop		: "Од врха екрана (пиксела)",
 DlnLnkMsgNoUrl		: "Унесите УРЛ линка",
 DlnLnkMsgNoEMail	: "Откуцајте адресу електронске поште",
 DlnLnkMsgNoAnchor	: "Одаберите сидро",
+DlnLnkMsgInvPopName	: "The popup name must begin with an alphabetic character and must not contain spaces",	//MISSING
 
 // Color Dialog
 DlgColorTitle		: "Одаберите боју",
@@ -312,6 +331,9 @@ DlgCellBackColor	: "Боја позадине",
 DlgCellBorderColor	: "Боја оквира",
 DlgCellBtnSelect	: "Oдабери...",
 
+// Find and Replace Dialog
+DlgFindAndReplaceTitle	: "Find and Replace",	//MISSING
+
 // Find Dialog
 DlgFindTitle		: "Пронађи",
 DlgFindFindBtn		: "Пронађи",
@@ -327,7 +349,6 @@ DlgReplaceReplAllBtn	: "Замени све",
 DlgReplaceWordChk		: "Упореди целе речи",
 
 // Paste Operations / Dialog
-PasteErrorPaste	: "Сигурносна подешавања Вашег претраживача не дозвољавају операције аутоматског лепљења текста. Молимо Вас да користите пречицу са тастатуре (Ctrl+V).",
 PasteErrorCut	: "Сигурносна подешавања Вашег претраживача не дозвољавају операције аутоматског исецања текста. Молимо Вас да користите пречицу са тастатуре (Ctrl+X).",
 PasteErrorCopy	: "Сигурносна подешавања Вашег претраживача не дозвољавају операције аутоматског копирања текста. Молимо Вас да користите пречицу са тастатуре (Ctrl+C).",
 
@@ -335,10 +356,9 @@ PasteAsText		: "Залепи као чист текст",
 PasteFromWord	: "Залепи из Worda",
 
 DlgPasteMsg2	: "Молимо Вас да залепите унутар доње површине користећи тастатурну пречицу (<STRONG>Ctrl+V</STRONG>) и да притиснете <STRONG>OK</STRONG>.",
+DlgPasteSec		: "Because of your browser security settings, the editor is not able to access your clipboard data directly. You are required to paste it again in this window.",	//MISSING
 DlgPasteIgnoreFont		: "Игнориши Font Face дефиниције",
 DlgPasteRemoveStyles	: "Уклони дефиниције стилова",
-DlgPasteCleanBox		: "Обриши све",
-
 
 // Color Picker
 ColorAutomatic	: "Аутоматски",
@@ -370,8 +390,11 @@ DlgSpellManyChanges		: "Провера спеловања завршена:  %1 
 IeSpellDownload			: "Провера спеловања није инсталирана. Да ли желите да је скинете са Интернета?",
 
 // Button Dialog
-DlgButtonText	: "Текст (вредност)",
-DlgButtonType	: "Tип",
+DlgButtonText		: "Текст (вредност)",
+DlgButtonType		: "Tип",
+DlgButtonTypeBtn	: "Button",	//MISSING
+DlgButtonTypeSbm	: "Submit",	//MISSING
+DlgButtonTypeRst	: "Reset",	//MISSING
 
 // Checkbox and Radio Button Dialogs
 DlgCheckboxName		: "Назив",
@@ -420,6 +443,7 @@ DlgHiddenValue	: "Вредност",
 // Bulleted List Dialog
 BulletedListProp	: "Особине Bulleted листе",
 NumberedListProp	: "Особине набројиве листе",
+DlgLstStart			: "Start",	//MISSING
 DlgLstType			: "Тип",
 DlgLstTypeCircle	: "Круг",
 DlgLstTypeDisc		: "Disc",	//MISSING
@@ -442,6 +466,15 @@ DlgDocLangDirLTR	: "Слева надесно (LTR)",
 DlgDocLangDirRTL	: "Здесна налево (RTL)",
 DlgDocLangCode		: "Шифра језика",
 DlgDocCharSet		: "Кодирање скупа карактера",
+DlgDocCharSetCE		: "Central European",	//MISSING
+DlgDocCharSetCT		: "Chinese Traditional (Big5)",	//MISSING
+DlgDocCharSetCR		: "Cyrillic",	//MISSING
+DlgDocCharSetGR		: "Greek",	//MISSING
+DlgDocCharSetJP		: "Japanese",	//MISSING
+DlgDocCharSetKR		: "Korean",	//MISSING
+DlgDocCharSetTR		: "Turkish",	//MISSING
+DlgDocCharSetUN		: "Unicode (UTF-8)",	//MISSING
+DlgDocCharSetWE		: "Western European",	//MISSING
 DlgDocCharSetOther	: "Остала кодирања скупа карактера",
 
 DlgDocDocType		: "Заглавље типа документа",
@@ -471,11 +504,12 @@ DlgTemplatesTitle	: "Обрасци за садржај",
 DlgTemplatesSelMsg	: "Молимо Вас да одаберете образац који ће бити примењен на страницу (тренутни садржај ће бити обрисан):",
 DlgTemplatesLoading	: "Учитавам листу образаца. Мало стрпљења...",
 DlgTemplatesNoTpl	: "(Нема дефинисаних образаца)",
+DlgTemplatesReplace	: "Replace actual contents",	//MISSING
 
 // About Dialog
 DlgAboutAboutTab	: "О едитору",
 DlgAboutBrowserInfoTab	: "Информације о претраживачу",
+DlgAboutLicenseTab	: "License",	//MISSING
 DlgAboutVersion		: "верзија",
-DlgAboutLicense		: "Лиценцирано под условима GNU Lesser General Public License",
 DlgAboutInfo		: "За више информација посетите"
-}
+};

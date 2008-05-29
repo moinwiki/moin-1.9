@@ -1,22 +1,26 @@
 #!/usr/bin/env python
 
 """
-FCKeditor - The text editor for internet
-Copyright (C) 2003-2005 Frederico Caldeira Knabben
+FCKeditor - The text editor for Internet - http://www.fckeditor.net
+Copyright (C) 2003-2008 Frederico Caldeira Knabben
 
-Licensed under the terms of the GNU Lesser General Public License:
-		http://www.opensource.org/licenses/lgpl-license.php
+== BEGIN LICENSE ==
 
-For further information visit:
-		http://www.fckeditor.net/
+Licensed under the terms of any of the following licenses at your
+choice:
 
-"Support Open Source software. What about a donation today?"
+ - GNU General Public License Version 2 or later (the "GPL")
+   http://www.gnu.org/licenses/gpl.html
 
-File Name: sampleposteddata.py
-	This page lists the data posted by a form.
+ - GNU Lesser General Public License Version 2.1 or later (the "LGPL")
+   http://www.gnu.org/licenses/lgpl.html
 
-File Authors:
-		Andrew Liu (andrew@liuholdings.com)
+ - Mozilla Public License Version 1.1 or later (the "MPL")
+   http://www.mozilla.org/MPL/MPL-1.1.html
+
+== END LICENSE ==
+
+This page lists the data posted by a form.
 """
 
 import cgi
@@ -44,7 +48,7 @@ print """<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 	<body>
 """
 
-# This is the real work 
+# This is the real work
 print """
 		<h1>FCKeditor - Samples - Posted Data</h1>
 		This page lists all data posted by the form.
@@ -61,7 +65,7 @@ for key in form.keys():
 		print """
 				<tr>
 					<td valign="top" nowrap><b>%s</b></td>
-					<td width="100%%">%s</td>
+					<td width="100%%" style="white-space:pre">%s</td>
 				</tr>
 			""" % (key, value)
 	except Exception, e:

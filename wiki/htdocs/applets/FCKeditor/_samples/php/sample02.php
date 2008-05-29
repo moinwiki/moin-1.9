@@ -1,21 +1,25 @@
-<?php 
+<?php
 /*
- * FCKeditor - The text editor for internet
- * Copyright (C) 2003-2005 Frederico Caldeira Knabben
- * 
- * Licensed under the terms of the GNU Lesser General Public License:
- * 		http://www.opensource.org/licenses/lgpl-license.php
- * 
- * For further information visit:
- * 		http://www.fckeditor.net/
- * 
- * "Support Open Source software. What about a donation today?"
- * 
- * File Name: sample02.php
- * 	Sample page.
- * 
- * File Authors:
- * 		Frederico Caldeira Knabben (fredck@fckeditor.net)
+ * FCKeditor - The text editor for Internet - http://www.fckeditor.net
+ * Copyright (C) 2003-2008 Frederico Caldeira Knabben
+ *
+ * == BEGIN LICENSE ==
+ *
+ * Licensed under the terms of any of the following licenses at your
+ * choice:
+ *
+ *  - GNU General Public License Version 2 or later (the "GPL")
+ *    http://www.gnu.org/licenses/gpl.html
+ *
+ *  - GNU Lesser General Public License Version 2.1 or later (the "LGPL")
+ *    http://www.gnu.org/licenses/lgpl.html
+ *
+ *  - Mozilla Public License Version 1.1 or later (the "MPL")
+ *    http://www.mozilla.org/MPL/MPL-1.1.html
+ *
+ * == END LICENSE ==
+ *
+ * Sample page.
  */
 
 include("../../fckeditor.php") ;
@@ -37,7 +41,7 @@ function FCKeditor_OnComplete( editorInstance )
 		AddComboOption( oCombo, editorInstance.Language.AvailableLanguages[code] + ' (' + code + ')', code ) ;
 	}
 	oCombo.value = editorInstance.Language.ActiveLanguage.Code ;
-}	
+}
 
 function AddComboOption(combo, optionText, optionValue)
 {
@@ -47,7 +51,7 @@ function AddComboOption(combo, optionText, optionValue)
 
 	oOption.innerHTML = optionText ;
 	oOption.value     = optionValue ;
-	
+
 	return oOption ;
 }
 
@@ -77,7 +81,7 @@ function ChangeLanguage( languageCode )
 <?php
 // Automatically calculates the editor base path based on the _samples directory.
 // This is usefull only for these samples. A real application should use something like this:
-// $oFCKeditor->BasePath = '/FCKeditor/' ;	// '/FCKeditor/' is the default value.
+// $oFCKeditor->BasePath = '/fckeditor/' ;	// '/fckeditor/' is the default value.
 $sBasePath = $_SERVER['PHP_SELF'] ;
 $sBasePath = substr( $sBasePath, 0, strpos( $sBasePath, "_samples" ) ) ;
 
@@ -95,7 +99,7 @@ else
 	$oFCKeditor->Config['DefaultLanguage']		= 'en' ;
 }
 
-$oFCKeditor->Value = 'This is some <strong>sample text</strong>. You are using <a href="http://www.fckeditor.net/">FCKeditor</a>.' ;
+$oFCKeditor->Value = '<p>This is some <strong>sample text</strong>. You are using <a href="http://www.fckeditor.net/">FCKeditor</a>.</p>' ;
 $oFCKeditor->Create() ;
 ?>			<br>
 			<input type="submit" value="Submit">

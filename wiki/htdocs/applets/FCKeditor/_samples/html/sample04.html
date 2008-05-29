@@ -1,30 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--
- * FCKeditor - The text editor for internet
- * Copyright (C) 2003-2005 Frederico Caldeira Knabben
- * 
- * Licensed under the terms of the GNU Lesser General Public License:
- * 		http://www.opensource.org/licenses/lgpl-license.php
- * 
- * For further information visit:
- * 		http://www.fckeditor.net/
- * 
- * "Support Open Source software. What about a donation today?"
- * 
- * File Name: sample04.html
- * 	Sample page.
- * 
- * File Authors:
- * 		Frederico Caldeira Knabben (fredck@fckeditor.net)
+ * FCKeditor - The text editor for Internet - http://www.fckeditor.net
+ * Copyright (C) 2003-2008 Frederico Caldeira Knabben
+ *
+ * == BEGIN LICENSE ==
+ *
+ * Licensed under the terms of any of the following licenses at your
+ * choice:
+ *
+ *  - GNU General Public License Version 2 or later (the "GPL")
+ *    http://www.gnu.org/licenses/gpl.html
+ *
+ *  - GNU Lesser General Public License Version 2.1 or later (the "LGPL")
+ *    http://www.gnu.org/licenses/lgpl.html
+ *
+ *  - Mozilla Public License Version 1.1 or later (the "MPL")
+ *    http://www.mozilla.org/MPL/MPL-1.1.html
+ *
+ * == END LICENSE ==
+ *
+ * Sample page.
 -->
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html>
-	<head>
-		<title>FCKeditor - Sample</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<meta name="robots" content="noindex, nofollow">
-		<link href="../sample.css" rel="stylesheet" type="text/css">
-			<script type="text/javascript" src="../../fckeditor.js"></script>
-			<script type="text/javascript">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>FCKeditor - Sample</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="robots" content="noindex, nofollow" />
+	<link href="../sample.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../../fckeditor.js"></script>
+	<script type="text/javascript">
 
 function FCKeditor_OnComplete( editorInstance )
 {
@@ -35,36 +39,39 @@ function FCKeditor_OnComplete( editorInstance )
 
 function ChangeLanguage( languageCode )
 {
-	window.location.href = window.location.pathname + "?" + languageCode ;
+	document.location.href = document.location.href.replace( /\?.*$/, '' ) + "?" + languageCode ;
 }
 
-			</script>
-	</head>
-	<body>
-		<h1>FCKeditor - Javascript - Sample 4</h1>
+	</script>
+</head>
+<body>
+	<h1>
+		FCKeditor - JavaScript - Sample 4</h1>
+	<div>
 		This sample shows how to change the editor toolbar.
-		<hr>
-		<table cellpadding="0" cellspacing="0" border="0">
-			<tr>
-				<td>
-					Select the toolbar to load:&nbsp;
-				</td>
-				<td>
-					<select id="cmbToolbars" onchange="ChangeLanguage(this.value);" style="VISIBILITY: hidden">
-						<option value="Default" selected>Default</option>
-						<option value="Basic">Basic</option>
-					</select>
-				</td>
-			</tr>
-		</table>
-		<br>
-		<form action="sampleposteddata.asp" method="post" target="_blank">
-			<script type="text/javascript">
+	</div>
+	<hr />
+	<table cellpadding="0" cellspacing="0" border="0">
+		<tr>
+			<td>
+				Select the toolbar to load:&nbsp;
+			</td>
+			<td>
+				<select id="cmbToolbars" onchange="ChangeLanguage(this.value);" style="visibility: hidden">
+					<option value="Default" selected="selected">Default</option>
+					<option value="Basic">Basic</option>
+				</select>
+			</td>
+		</tr>
+	</table>
+	<br />
+	<form action="sampleposteddata.asp" method="post" target="_blank">
+		<script type="text/javascript">
 <!--
 // Automatically calculates the editor base path based on the _samples directory.
 // This is usefull only for these samples. A real application should use something like this:
 // oFCKeditor.BasePath = '/fckeditor/' ;	// '/fckeditor/' is the default value.
-var sBasePath = document.location.pathname.substring(0,document.location.pathname.lastIndexOf('/_samples/')+1) ;
+var sBasePath = document.location.href.substring(0,document.location.href.lastIndexOf('_samples')) ;
 
 // Get the toolbar from the URL.
 var sToolbar ;
@@ -77,12 +84,12 @@ oFCKeditor.BasePath	= sBasePath ;
 if ( sToolbar != null )
 	oFCKeditor.ToolbarSet = sToolbar ;
 
-oFCKeditor.Value	= 'This is some <strong>sample text</strong>. You are using <a href="http://www.fckeditor.net/">FCKeditor</a>.' ;
+oFCKeditor.Value = '<p>This is some <strong>sample text<\/strong>. You are using <a href="http://www.fckeditor.net/">FCKeditor<\/a>.<\/p>' ;
 oFCKeditor.Create() ;
 //-->
-			</script>
-			<br>
-			<input type="submit" value="Submit">
-		</form>
-	</body>
+		</script>
+		<br />
+		<input type="submit" value="Submit" />
+	</form>
+</body>
 </html>

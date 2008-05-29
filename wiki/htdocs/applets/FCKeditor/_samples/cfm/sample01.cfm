@@ -1,23 +1,25 @@
-<cfsetting enablecfoutputonly="true" showdebugoutput="false">
+<cfsetting enablecfoutputonly="true">
 <!---
- * FCKeditor - The text editor for internet
- * Copyright (C) 2003-2005 Frederico Caldeira Knabben
- * 
- * Licensed under the terms of the GNU Lesser General Public License:
- * 		http://www.opensource.org/licenses/lgpl-license.php
- * 
- * For further information visit:
- * 		http://www.fckeditor.net/
- * 
- * "Support Open Source software. What about a donation today?"
- * 
- * File Name: sample01.cfm
- * 	Sample page for ColdFusion.
- * 
- * File Authors:
- * 		Hendrik Kramer (hk@lwd.de)
- * 		Mark Woods (mark@thickpaddy.com)
- * 		Wim Lemmens (didgiman@gmail.com)
+ * FCKeditor - The text editor for Internet - http://www.fckeditor.net
+ * Copyright (C) 2003-2008 Frederico Caldeira Knabben
+ *
+ * == BEGIN LICENSE ==
+ *
+ * Licensed under the terms of any of the following licenses at your
+ * choice:
+ *
+ *  - GNU General Public License Version 2 or later (the "GPL")
+ *    http://www.gnu.org/licenses/gpl.html
+ *
+ *  - GNU Lesser General Public License Version 2.1 or later (the "LGPL")
+ *    http://www.gnu.org/licenses/lgpl.html
+ *
+ *  - Mozilla Public License Version 1.1 or later (the "MPL")
+ *    http://www.mozilla.org/MPL/MPL-1.1.html
+ *
+ * == END LICENSE ==
+ *
+ * Sample page for ColdFusion.
 --->
 
 <cfoutput>
@@ -29,57 +31,33 @@
 	<meta name="robots" content="noindex, nofollow">
 	<link href="../sample.css" rel="stylesheet" type="text/css" />
 </head>
-
 <body>
-
 <h1>FCKeditor - ColdFusion - Sample 1</h1>
-	
-This sample displays a normal HTML form with a FCKeditor with full features enabled; invoked by a ColdFusion Custom Tag / Module.<br>
-ColdFusion is a registered trademark and product of <a href="http://www.macromedia.com/software/coldfusion/" target="_blank">Macromedia, Inc</a>.
+
+This sample displays a normal HTML form with a FCKeditor with full features enabled.
 <hr>
-<form method="POST" action="#cgi.script_name#">
+
+<form method="POST" action="sampleposteddata.cfm">
 </cfoutput>
 
-<cfmodule 
+<!--- Calculate basepath for FCKeditor. It's in the folder right above _samples --->
+<cfset basePath = Left( cgi.script_name, FindNoCase( '_samples', cgi.script_name ) - 1 )>
+
+<cfmodule
 	template="../../fckeditor.cfm"
-	basePath="#Left(cgi.script_name, FindNoCase('_samples', cgi.script_name)-1)#"
+	basePath="#basePath#"
 	instanceName="myEditor"
-	value='This is some sample text. You are using <a href="http://fckeditor.net/" target="_blank">FCKeditor</a>.'
+	value='<p>This is some <strong>sample text</strong>. You are using <a href="http://www.fckeditor.net/">FCKeditor</a>.</p>'
 	width="100%"
 	height="200"
 >
+
 <cfoutput>
 <br />
 <input type="submit" value="Submit">
-<br />
+<hr />
 </form>
-</cfoutput>
-
-<cfif isDefined( 'FORM.fieldnames' )>
-	<cfoutput>
-	<style>
-	<!--
-		td, th { font: 11px Verdana, Arial, Helv, Helvetica, sans-serif; }
-	-->
-	</style>
-	<table border="1" cellspacing="0" cellpadding="2" bordercolor="darkblue" bordercolordark="darkblue" bordercolorlight="darkblue">
-	<tr>
-		<th colspan="2" bgcolor="darkblue"><font color="white"><strong>Dump of FORM Variables</strong></font></th>
-	</tr>
-	<tr>
-		<td bgcolor="lightskyblue">FieldNames</td>
-		<td>#FORM.fieldNames#</td>
-	</tr>
-	<cfloop list="#FORM.fieldnames#" index="key">
-	<tr>
-		<td valign="top" bgcolor="lightskyblue">#key#</td>
-		<td>#HTMLEditFormat(evaluate("FORM.#key#"))#</td>
-	</tr>
-	</cfloop>
-	</table>
-	</cfoutput>
-</cfif>
-
 </body>
 </html>
+</cfoutput>
 <cfsetting enablecfoutputonly="false">
