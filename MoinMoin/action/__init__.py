@@ -313,9 +313,9 @@ def get_names(config):
         actions = names[:]
         actions.extend(wikiutil.getPlugins('action', config))
         actions = set(action for action in actions
-                      if not action in self.config.actions_excluded)
+                      if not action in config.actions_excluded)
         config.cache.action_names = actions # remember it
-    return cfg.cache.action_names
+    return config.cache.action_names
 
 def getHandler(request, action, identifier="execute"):
     """ return a handler function for a given action or None.
