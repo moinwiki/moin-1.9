@@ -3,23 +3,23 @@
     MoinMoin - WSGI application
 
 
-    @copyright: 2001-2003 Juergen Hermann <jh@web.de>,
-                2003-2006 MoinMoin:ThomasWaldmann,
+    @copyright: 2003-2008 MoinMoin:ThomasWaldmann,
                 2008-2008 MoinMoin:FlorianKrupicka
     @license: GNU GPL, see COPYING for details.
 """
-
+from werkzeug.utils import responder
 from werkzeug.wrappers import Response
-from werkzeug.debug import DebuggedApplication
 
-from MoinMoin.web.request import Request
+from MoinMoin.web.contexts import HTTPContext
 
-
-def application(request):
+def application(environ, start_response):
+    request = HTTPContext(environ)
     request.run()
+
     response = Response(status=request.status,
                         headers=request.headers)
-    if request._send_file is not None:
+
+    if getattr(request, '_send_file', None) is not None:
         # moin wants to send a file (e.g. AttachFile.do_get)
         def simple_wrapper(fileobj, bufsize):
             return iter(lambda: fileobj.read(bufsize), '')
@@ -27,7 +27,7 @@ def application(request):
         response.response = file_wrapper(request._send_file, request._send_bufsize)
     else:
         response.response = request.output()
+        print request.output()
     return response
 
-application = Request.application(application)
-application = DebuggedApplication(application)
+application = responder(application)
