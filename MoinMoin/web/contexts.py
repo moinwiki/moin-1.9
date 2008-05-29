@@ -43,11 +43,6 @@ class HTTPContext(Context, RequestBase):
         RequestBase.__init__(self, {})
 
     # implementation of methods expected by RequestBase
-    def _setup_args_from_cgi_form(self):
-        logging.warning("Form values requested as plain dict, "
-                        "consider using MultiDicts here")
-        return self._wsgirequest.form.to_dict(flat=False)
-
     def read(self, n=None):
         if n is None:
             return self._wsgirequest.data
@@ -68,7 +63,7 @@ class HTTPContext(Context, RequestBase):
         return ''.join(self.__output)
 
     def _emit_http_headers(self, headers):
-        print 'called', headers
+        logging.info("_emit_http_headers called on HTTPContext")
         st_header, other_headers = headers[0], headers[1:]
         status = STATUS_CODE_RE.match(st_header)
         status = int(status.groups()[0])
@@ -84,11 +79,14 @@ class HTTPContext(Context, RequestBase):
         return self._wsgirequest.values.to_dict(flat=False)
 
 # mangle in logging of function calls
+import inspect
 
 def _logfunc(func):
     def _decorated(*args, **kwargs):
-        logging.warning("Function '%s' called with '%r', '%r'. Consider if"
-                        "this is intended", func.__name__, args, kwargs)
+        stack = inspect.stack()
+        caller, lineno = stack[1][3], stack[1][0].f_lineno
+        logging.warning("Function '%s' called by '%s' in line '%s'",
+                        func.__name__, caller, lineno)
         return func(*args, **kwargs)
     _decorated.__name__ = func.__name__
     _decorated.__doc__ = func.__doc__
