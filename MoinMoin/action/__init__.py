@@ -303,8 +303,8 @@ def do_goto(pagename, request):
 
 # Dispatching ----------------------------------------------------------------
 def get_names(config):
-    """ Get a list of known actions. 
-    
+    """ Get a list of known actions.
+
     @param config: a config object
     @rtype: set
     @return: set of known actions
@@ -339,10 +339,10 @@ def get_available_actions(config, page, user):
 
         The set does not contain actions that starts with lower case.
         Themes use this set to display the actions to the user.
-   
+
         @param config: a config object (for the per-wiki actions)
         @param page: the page to which the actions should apply
-        @param user: the user which wants the 
+        @param user: the user which wants to apply an action
         @rtype: set
         @return: set of avaiable actions
         """

@@ -27,7 +27,6 @@ def application(environ, start_response):
         response.response = file_wrapper(request._send_file, request._send_bufsize)
     else:
         response.response = request.output()
-        print request.output()
     return response
 
 application = responder(application)
