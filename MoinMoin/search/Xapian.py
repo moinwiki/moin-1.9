@@ -367,10 +367,10 @@ class Index(BaseIndex):
                 xrev = xapdoc.SortKey('revision', '0')
                 title = " ".join(os.path.join(fs_rootpage, filename).split("/"))
                 xtitle = xapdoc.Keyword('title', title)
-                xmimetype = xapdoc.Keyword('mimetype', mimetype)
+                xmimetypes = [xapdoc.Keyword('mimetype', mt) for mt in [mimetype, ] + mimetype.split('/')]
                 xcontent = xapdoc.TextField('content', file_content)
                 doc = xapdoc.Document(textFields=(xcontent, ),
-                                      keywords=(xtitle, xitemid, xmimetype, ),
+                                      keywords=xmimetypes + [xtitle, xitemid, ],
                                       sortFields=(xpname, xattachment,
                                           xmtime, xwname, xrev, ),
                                      )
@@ -496,14 +496,16 @@ class Index(BaseIndex):
             xmtime = xapdoc.SortKey('mtime', str(mtime))
             xrev = xapdoc.SortKey('revision', revision)
             xtitle = xapdoc.TextField('title', pagename, True) # prefixed
+            mimetype = 'text/%s' % page.pi['format']  # XXX improve this
             xkeywords = [xapdoc.Keyword('itemid', itemid),
                     xapdoc.Keyword('lang', language),
                     xapdoc.Keyword('stem_lang', stem_language),
                     xapdoc.Keyword('fulltitle', pagename),
                     xapdoc.Keyword('revision', revision),
                     xapdoc.Keyword('author', author),
-                    xapdoc.Keyword('mimetype', 'text/%s' % page.pi['format']), # XXX improve this
-                ]
+                ] + \
+                [xapdoc.Keyword('mimetype', mt) for mt in [mimetype, ] + mimetype.split('/')]
+
             for pagelink in page.getPageLinks(request):
                 xkeywords.append(xapdoc.Keyword('linkto', pagelink))
             for category in categories:
@@ -561,7 +563,7 @@ class Index(BaseIndex):
                 xlanguage = xapdoc.Keyword('lang', language)
                 xstem_language = xapdoc.Keyword('stem_lang', stem_language)
                 mimetype, att_content = self.contentfilter(filename)
-                xmimetype = xapdoc.Keyword('mimetype', mimetype)
+                xmimetypes = [xapdoc.Keyword('mimetype', mt) for mt in [mimetype, ] + mimetype.split('/')]
                 xcontent = xapdoc.TextField('content', att_content)
                 xtitle_txt = xapdoc.TextField('title',
                         '%s/%s' % (pagename, att), True)
@@ -569,9 +571,9 @@ class Index(BaseIndex):
                 xdomains = [xapdoc.Keyword('domain', domain)
                         for domain in domains]
                 doc = xapdoc.Document(textFields=(xcontent, xtitle_txt),
-                                      keywords=xdomains + [xatt_itemid,
+                                      keywords=xdomains + xmimetypes + [xatt_itemid,
                                           xtitle, xlanguage, xstem_language,
-                                          xmimetype, xfulltitle, ],
+                                          xfulltitle, ],
                                       sortFields=(xpname, xattachment, xmtime,
                                           xwname, xrev, ),
                                      )
