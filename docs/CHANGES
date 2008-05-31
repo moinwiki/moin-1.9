@@ -36,10 +36,14 @@ Version 1.7.0current:
     * Center the message icons and fix their spacing. Add a class to the
       "Clear message" link, make the link text smaller and lower.
     * Better handling of ImportErrors (farmconfig, macros, wikiserverconfig).
-    * Xapian mimetype search: fixes, use text/<format> as mimetype for pages
+    * Xapian search/indexing:
+      * use text/<format> as mimetype for pages
+      * remove crappy num regex from WikiAnalyzer, improve tokenization
     * Builtin search: support mimetype: search for builtin engine, too
     * Fix the second hmac use for python 2.4
-    * csv parser: fix delimiter sniffing troubles, fix tests
+    * csv parser:
+      * fix delimiter sniffing troubles, fix tests
+      * remove empty lines above the csv table
     * Event notifications: send notifies in the language of the message
       recipient (not of the current wiki user), other fixes.
 
