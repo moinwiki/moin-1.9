@@ -8,7 +8,7 @@
 
 import py.test
 
-from MoinMoin._tests.ldap_testbase import LDAPTestBase, LdapEnvironment, check_environ
+from MoinMoin._tests.ldap_testbase import LDAPTstBase, LdapEnvironment, check_environ, SLAPD_EXECUTABLE
 from MoinMoin._tests.ldap_testdata import *
 from MoinMoin._tests import nuke_user
 
@@ -20,7 +20,7 @@ del msg
 
 import ldap
 
-class TestSimpleLdap(LDAPTestBase):
+class TestSimpleLdap(LDAPTstBase):
     basedn = BASEDN
     rootdn = ROOTDN
     rootpw = ROOTPW
@@ -72,7 +72,7 @@ class TestSimpleLdap(LDAPTestBase):
         assert u1.id != u2.id
 
 
-class TestBugDefaultPasswd(LDAPTestBase):
+class TestBugDefaultPasswd(LDAPTstBase):
     basedn = BASEDN
     rootdn = ROOTDN
     rootpw = ROOTPW
@@ -137,7 +137,10 @@ class TestTwoLdapServers:
         for instance in range(2):
             ldap_env = LdapEnvironment(self.basedn, self.rootdn, self.rootpw, instance=instance)
             ldap_env.create_env(slapd_config=self.slapd_config)
-            ldap_env.start_slapd()
+            started = ldap_env.start_slapd()
+            if not started:
+                py.test.skip("Failed to start %s process, please see your syslog / log files"
+                             " (and check if stopping apparmor helps, in case you use it)." % SLAPD_EXECUTABLE)
             ldap_env.load_directory(ldif_content=self.ldif_content)
             self.ldap_envs.append(ldap_env)
 
@@ -174,7 +177,10 @@ class TestLdapFailover:
         for instance in range(2):
             ldap_env = LdapEnvironment(self.basedn, self.rootdn, self.rootpw, instance=instance)
             ldap_env.create_env(slapd_config=self.slapd_config)
-            ldap_env.start_slapd()
+            started = ldap_env.start_slapd()
+            if not started:
+                py.test.skip("Failed to start %s process, please see your syslog / log files"
+                             " (and check if stopping apparmor helps, in case you use it)." % SLAPD_EXECUTABLE)
             ldap_env.load_directory(ldif_content=self.ldif_content)
             self.ldap_envs.append(ldap_env)
 
