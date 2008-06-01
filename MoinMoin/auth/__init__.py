@@ -213,13 +213,13 @@ class BaseAuth:
     def login_hint(self, request):
         return None
 
-class MoinLogin(BaseAuth):
+class MoinAuth(BaseAuth):
     """ handle login from moin login form """
     def __init__(self):
         BaseAuth.__init__(self)
 
     login_inputs = ['username', 'password']
-    name = 'moin_login'
+    name = 'moin'
     logout_possible = True
 
     def login(self, request, user_obj, **kw):
