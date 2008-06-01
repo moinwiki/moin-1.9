@@ -47,6 +47,31 @@ Version 1.7.0current:
     * Event notifications: send notifies in the language of the message
       recipient (not of the current wiki user), other fixes.
 
+  Other changes:
+    * HINT: ldap_login behaves a bit different now:
+      In previous moin versions, ldap_login tended to either successfully
+      authenticate a user or to completely cancel the whole login process in
+      any other case (including ldap server down or exceptions happening).
+      This made subsequent auth list entries rather pointless.
+      Now it behaves like this:
+        * user not found in LDAP -> give subsequent auth list entries a
+          chance to authenticate the user (same happens if it finds multiple
+          LDAP entries when searching - it logs an additional warning then).
+        * user found, but wrong password -> cancel login
+        * ldap server not reachable or other exceptions -> give subsequent
+          auth list entries a chance
+      So please make sure that you really trust every auth list entry you have
+      configured when upgrading or it might maybe change behaviour in a
+      unexpected or unwanted way.
+    * ldap_login now supports failover: if it can't contact your LDAP server
+      (e.g. because it is down or unreachable), it will just continue and
+      try to authenticate with other authenticators (if there are any in
+      cfg.auth list). So if you have some mirroring LDAP backup server, just
+      put another authenticator querying it there:
+          ldap_auth1 = LDAPAuth(server_uri='ldap://mainserver', ...)
+          ldap_auth2 = LDAPAuth(server_uri='ldap://backupserver', ...)
+          auth = [ldap_auth1, ldap_auth2, ]
+
 
 Version 1.7.0rc1:
 
