@@ -6,12 +6,18 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import ldap
-
 import py.test
 
-from MoinMoin._tests.ldap_testbase import LDAPTestBase, LdapEnvironment
+from MoinMoin._tests.ldap_testbase import LDAPTestBase, LdapEnvironment, check_environ
 from MoinMoin._tests.ldap_testdata import *
+
+# first check if we have python 2.4, python-ldap and slapd:
+msg = check_environ()
+if msg:
+    py.test.skip(msg)
+del msg
+
+import ldap
 
 class TestSimpleLdap(LDAPTestBase):
     basedn = BASEDN
