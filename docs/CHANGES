@@ -27,21 +27,23 @@ Known main issues:
     USE BOTH ON YOUR OWN RISK!
 
 
-Version 1.7.0current:
+Version 1.7.0rc2:
 
   Bug Fixes:
     * Security Fix: fixed MoinMoinBugs/DummyPasswordInAutoCreatedLdapUserProfiles
-      (bug was present since 1.7.0alpha).
+      (bug was present since some auth refactoring in 1.7.0alpha).
     * Fix editor preview not working for new pages.
     * Add ssh protocol to url_schemas.
     * Fix PageList macro with search errors.
     * Center the message icons and fix their spacing. Add a class to the
       "Clear message" link, make the link text smaller and lower.
     * Better handling of ImportErrors (farmconfig, macros, wikiserverconfig).
+    * Builtin search: support mimetype: search for builtin engine, too
     * Xapian search/indexing:
       * use text/<format> as mimetype for pages
+      * index also major and minor for mimetypes, so it will find 'text' or
+        'plain' as well as 'text/plain'
       * remove crappy num regex from WikiAnalyzer, improve tokenization
-    * Builtin search: support mimetype: search for builtin engine, too
     * Fix the second hmac use for python 2.4
     * csv parser:
       * fix delimiter sniffing troubles, fix tests
