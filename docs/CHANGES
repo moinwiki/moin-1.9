@@ -30,6 +30,8 @@ Known main issues:
 Version 1.7.0current:
 
   Bug Fixes:
+    * Security Fix: fixed MoinMoinBugs/DummyPasswordInAutoCreatedLdapUserProfiles
+      (bug was present since 1.7.0alpha).
     * Fix editor preview not working for new pages.
     * Add ssh protocol to url_schemas.
     * Fix PageList macro with search errors.

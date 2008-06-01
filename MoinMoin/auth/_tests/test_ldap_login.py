@@ -10,6 +10,7 @@ import py.test
 
 from MoinMoin._tests.ldap_testbase import LDAPTestBase, LdapEnvironment, check_environ
 from MoinMoin._tests.ldap_testdata import *
+from MoinMoin._tests import nuke_user
 
 # first check if we have python 2.4, python-ldap and slapd:
 msg = check_environ()
@@ -69,6 +70,58 @@ class TestSimpleLdap(LDAPTestBase):
 
         # check if usera and userb have different ids:
         assert u1.id != u2.id
+
+class TestBugDefaultPasswd(LDAPTestBase):
+    basedn = BASEDN
+    rootdn = ROOTDN
+    rootpw = ROOTPW
+    slapd_config = SLAPD_CONFIG
+    ldif_content = LDIF_CONTENT
+
+    def teardown_class(self):
+        """ Stop slapd, remove LDAP server environment """
+        #self.ldap_env.stop_slapd()  # it is already stopped
+        self.ldap_env.destroy_env()
+
+    def testBugDefaultPasswd(self):
+        """ Login via LDAP (this creates user profile and up to 1.7.0rc1 it put
+            a default password there), then try logging in via moin login using
+            that default password or an empty password.
+        """
+        server_uri = self.ldap_env.slapd.url
+        base_dn = self.ldap_env.basedn
+
+        from MoinMoin.auth.ldap_login import LDAPAuth
+        ldap_auth = LDAPAuth(server_uri=server_uri, base_dn=base_dn)
+        from MoinMoin.auth import MoinAuth
+        moin_auth = MoinAuth()
+        self.config = self.TestConfig(auth=[ldap_auth, moin_auth], user_autocreate=True)
+
+        nuke_user(self.request, u'usera')
+
+        handle_auth = self.request.handle_auth
+
+        # do a LDAPAuth login (as a side effect, this autocreates the user profile):
+        u1 = handle_auth(None, username='usera', password='usera', login=True)
+        assert u1 is not None
+        assert u1.valid
+
+        # now we kill the LDAP server:
+        self.ldap_env.slapd.stop()
+
+        # now try a MoinAuth login:
+        # try the default password that worked in 1.7 up to rc1:
+        u2 = handle_auth(None, username='usera', password='{SHA}NotStored', login=True)
+        assert u2 is None
+
+        # try using no password:
+        u2 = handle_auth(None, username='usera', password='', login=True)
+        assert u2 is None
+
+        # try using wrong password:
+        u2 = handle_auth(None, username='usera', password='wrong', login=True)
+        assert u2 is None
+
 
 class TestComplexLdap:
     basedn = BASEDN

@@ -218,10 +218,10 @@ class LDAPAuth(BaseAuth):
                 aliasname = aliasname.decode(coding)
 
                 if email:
-                    u = user.User(request, auth_username=username, password="{SHA}NotStored", auth_method=self.name, auth_attribs=('name', 'password', 'email', 'mailto_author', ))
+                    u = user.User(request, auth_username=username, auth_method=self.name, auth_attribs=('name', 'password', 'email', 'mailto_author', ))
                     u.email = email
                 else:
-                    u = user.User(request, auth_username=username, password="{SHA}NotStored", auth_method=self.name, auth_attribs=('name', 'password', 'mailto_author', ))
+                    u = user.User(request, auth_username=username, auth_method=self.name, auth_attribs=('name', 'password', 'mailto_author', ))
                 u.name = username
                 u.aliasname = aliasname
                 u.remember_me = 0 # 0 enforces cookie_lifetime config param
