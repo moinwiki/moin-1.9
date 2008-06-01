@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 23:52+0200\n"
+"POT-Creation-Date: 2008-06-01 19:16+0200\n"
 "PO-Revision-Date: 2008-05-19 16:30+0200\n"
 "Last-Translator: thomas@marquart.se\n"
 "Language-Team: Swedish <moin-user@lists.sourceforge.net>\n"
@@ -36,8 +36,7 @@ msgid ""
 "\n"
 "Password reset URL: %s/?action=recoverpass&name=%s&token=%s\n"
 msgstr ""
-"Användarnamn: %s"
-"\n"
+"Användarnamn: %s\n"
 "Token för att återställa lösenord: %s\n"
 "\n"
 "URL för att återställa lösenord: %s/?action=recoverpass&name=%s&token=%s\n"
@@ -48,10 +47,13 @@ msgid ""
 "If you lost your password, please go to the password reset URL below or\n"
 "go to the password recovery page again and enter your username and the\n"
 "recovery token.\n"
-msgstr "Någon har bett att skicka en token för att återställa lösenordet till dig.\n"
+msgstr ""
+"Någon har bett att skicka en token för att återställa lösenordet till dig.\n"
 "\n"
-"Om du har glömt ditt lösenord, var god besök URL:en nedanför för att återställa den eller\n"
-"gå tillbaka till till återställningssidan och skriv in ditt användarnamn och\n"
+"Om du har glömt ditt lösenord, var god besök URL:en nedanför för att "
+"återställa den eller\n"
+"gå tillbaka till till återställningssidan och skriv in ditt användarnamn "
+"och\n"
 "token för återställning.\n"
 
 #, python-format
@@ -575,6 +577,10 @@ msgstr "Skicka kontoinformation som epost"
 
 msgid "Missing password. Please enter user name and password."
 msgstr "Lösenord saknas. Var god ange användarnamn och lösenord."
+
+#, python-format
+msgid "LDAP server %(server)s failed."
+msgstr ""
 
 msgid "You need to log in."
 msgstr "Du måste logga in."
@@ -1326,14 +1332,6 @@ msgstr ""
 "Länk till bilagan: %(attach)s\n"
 "Länk till sidan: %(page)s\n"
 
-#, python-format
-msgid "XML RPC error: %s"
-msgstr "XML RPC fel: %s"
-
-#, python-format
-msgid "Low-level communication error: %s"
-msgstr "Kommunikationsfel på låg nivå: %s"
-
 msgid "Attachment link"
 msgstr "Länk till bilaga"
 
@@ -1801,6 +1799,14 @@ msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr "Var god använd en mer specifik sökterm än {{{\"%s\"}}}"
 
 #, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr ""
+"Din sökningsförfrågan {{{\"%s\"}}} är ogiltig. Var god se HelpOnSearching "
+"för mer information."
+
+#, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "Ladda upp ny bilaga \"%(filename)s\""
 
@@ -1989,8 +1995,9 @@ msgstr ""
 msgid ""
 "The item %s was renamed locally. This is not implemented yet. Therefore the "
 "full synchronisation history is lost for this page."
-msgstr "%s har döpts om lokalt. Detta är inte implemenerat ännu. Därför "
-"har hela synkronisationshistoria till denna sida förlorats."
+msgstr ""
+"%s har döpts om lokalt. Detta är inte implemenerat ännu. Därför har hela "
+"synkronisationshistoria till denna sida förlorats."
 
 #, python-format
 msgid "Synchronising page %s with remote page %s ..."
@@ -2005,26 +2012,29 @@ msgid ""
 "The page %s could not be synced. The remote page was renamed. This is not "
 "supported yet. You may want to delete one of the pages to get it synced."
 msgstr ""
-"Sidan %s kunde inte synkroniseras. Den har döpts om på avlägsna sidan. Detta stöds inte "
-"ännu. Du vill nog ta bort en av de två sidor för att synkronisera."
+"Sidan %s kunde inte synkroniseras. Den har döpts om på avlägsna sidan. Detta "
+"stöds inte ännu. Du vill nog ta bort en av de två sidor för att synkronisera."
 
 #, python-format
 msgid "Skipped page %s because of a locally or remotely unresolved conflict."
-msgstr "Hoppade över sidan %s pga en olöst konflikt på avlägsna sidan eller lokalt."
+msgstr ""
+"Hoppade över sidan %s pga en olöst konflikt på avlägsna sidan eller lokalt."
 
 #, python-format
 msgid ""
 "This is the first synchronisation between the local and the remote wiki for "
 "the page %s."
 msgstr ""
-"Detta är den första synkroniseringen för sidan %s mellan den lokala och den avlägsna wikin."
+"Detta är den första synkroniseringen för sidan %s mellan den lokala och den "
+"avlägsna wikin."
 
 #, python-format
 msgid ""
 "The page %s could not be merged because you are not allowed to modify the "
 "page in the remote wiki."
 msgstr ""
-"Sidan %s kunde inte förenas för att du får inte ändra den i den avlägsna wikin."
+"Sidan %s kunde inte förenas för att du får inte ändra den i den avlägsna "
+"wikin."
 
 #, python-format
 msgid "Page %s successfully merged."
@@ -2067,8 +2077,10 @@ msgid ""
 "delegation on its own.)"
 msgstr ""
 "\n"
-"Om du godkänner, kommer sidan som representeras av förtroende-roten nedanför att\n"
-"få veta att du har makt över identitets-URL:en %s. (Om du änvänder en ombudsidentitet\n"
+"Om du godkänner, kommer sidan som representeras av förtroende-roten nedanför "
+"att\n"
+"få veta att du har makt över identitets-URL:en %s. (Om du änvänder en "
+"ombudsidentitet\n"
 "kommer sidan själv se till att ombudet löses upp.)"
 
 msgid "Trust root"
@@ -2225,8 +2237,7 @@ msgstr "Åtgärd %(actionname)s är exkluderad i den här wikin!"
 
 #, python-format
 msgid "You are not allowed to use action %(actionname)s on this page!"
-msgstr ""
-"Du får inte använda åtgärden %(actionname)s på den här sidan!"
+msgstr "Du får inte använda åtgärden %(actionname)s på den här sidan!"
 
 #, python-format
 msgid "Please use the interactive user interface to use action %(actionname)s!"
@@ -2375,8 +2386,8 @@ msgid ""
 "empty, we derive the page name from the file name."
 msgstr ""
 "Du kan ladda upp innehåll för sidan som anges nedan. Om du döper om sidan "
-"kan du även ladda upp innehåll för en annan sida. Om sidnamnet är tom bestäms"
-"den utgående från filens namn."
+"kan du även ladda upp innehåll för en annan sida. Om sidnamnet är tom "
+"bestämsden utgående från filens namn."
 
 msgid "File to load page content from"
 msgstr "Fil för att ladda sidinnehåll ifrån"
@@ -2512,8 +2523,9 @@ msgstr "(!) Bara sidor som ändrats sedan '''%s''' visas!"
 msgid ""
 "/!\\ The modification date you entered was not recognized and is therefore "
 "not considered for the search results!"
-msgstr "/!\\ Ändringsdatumet som du skrev in kändes inte igen och tas därför "
-"inte hänsyn till i sökresultaten!"
+msgstr ""
+"/!\\ Ändringsdatumet som du skrev in kändes inte igen och tas därför inte "
+"hänsyn till i sökresultaten!"
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -2529,18 +2541,11 @@ msgstr "Fulltextsökning: \"%s\""
 
 #, python-format
 msgid ""
-"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
-"for more information."
-msgstr ""
-"Din sökningsförfrågan {{{\"%s\"}}} är ogiltig. Var god se HelpOnSearching "
-"för mer information."
-
-#, python-format
-msgid ""
 "Your search query {{{\"%s\"}}} didn't return any results. Please change some "
 "terms and refer to HelpOnSearching for more information.%s"
-msgstr "Din sökningsförfrågan {{{\"%s\"}}} ledde inte till några resultat. Var "
-"god ändra vissa termer och se HelpOnSearching för mer information.%s"
+msgstr ""
+"Din sökningsförfrågan {{{\"%s\"}}} ledde inte till några resultat. Var god "
+"ändra vissa termer och se HelpOnSearching för mer information.%s"
 
 msgid "(!) Consider performing a"
 msgstr "(!) Överväg utföra en"
@@ -2967,6 +2972,12 @@ msgstr "Du får inte göra %(action_name)s på den här sidan."
 
 msgid "Login and try again."
 msgstr "Logga in och försök igen."
+
+#~ msgid "XML RPC error: %s"
+#~ msgstr "XML RPC fel: %s"
+
+#~ msgid "Low-level communication error: %s"
+#~ msgstr "Kommunikationsfel på låg nivå: %s"
 
 #~ msgid "New Page or New Attachment"
 #~ msgstr "Ny sida eller ny bilaga"
