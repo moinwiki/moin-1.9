@@ -36,18 +36,55 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+SLAPD_EXECUTABLE = 'slapd'  # filename of LDAP server executable - if it is not
+                            # in your PATH, you have to give full path/filename.
+
 import os, shutil, tempfile, time
 from StringIO import StringIO
 import signal
-import subprocess  # needs Python 2.4
 
-import ldap, ldif, ldap.modlist
+try:
+    import subprocess  # needs Python 2.4
+except ImportError:
+    subprocess = None
+
+try:
+    import ldap, ldif, ldap.modlist  # needs python-ldap
+except ImportError:
+    ldap = None
+
+
+def check_environ():
+    """ Check the system environment whether we are able to run.
+        Either return some failure reason if we can't or None if everything
+        looks OK.
+    """
+    if subprocess is None:
+        return "You need at least python 2.4 to use ldap_testbase."
+    if ldap is None:
+        return "You need python-ldap installed to use ldap_testbase."
+    slapd = False
+    try:
+        p = subprocess.Popen([SLAPD_EXECUTABLE, '-V'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        pid = p.pid
+        rc = p.wait()
+        if pid and rc == 1:
+            slapd = True  # it works
+    except OSError, err:
+        import errno
+        if not (err.errno == errno.ENOENT or
+                (err.errno == 3 and os.name == 'nt')):
+            raise
+    if not slapd:
+        return "Can't start %s (see SLAPD_EXECUTABLE)." % SLAPD_EXECUTABLE
+    return None
+
 
 class Slapd(object):
     """ Manage a slapd process for testing purposes """
     def __init__(self,
                  config=None,  # config filename for -f
-                 executable='slapd',  # slapd executable filename
+                 executable=SLAPD_EXECUTABLE,
                  debug_flags='', # None,  # for -d stats,acl,args,trace,sync,config
                  proto='ldap', ip='127.0.0.1', port=3890,  # use -h proto://ip:port
                  service_name=''  # defaults to -n executable:port, use None to not use -n
@@ -167,7 +204,8 @@ class LdapEnvironment(object):
     def start_slapd(self):
         """ start a slapd and optionally wait until it talks with us """
         self.slapd = Slapd(config=self.slapd_conf, port=3890+self.instance)
-        self.slapd.start(timeout=self.timeout)
+        started = self.slapd.start(timeout=self.timeout)
+        return started
 
     def load_directory(self, ldif_content):
         """ load the directory with the ldif_content (str) """
@@ -190,30 +228,37 @@ class LdapEnvironment(object):
         """ remove the temporary LDAP server environment """
         shutil.rmtree(self.ldap_dir)
 
+try:
+    import py.test
 
-class LDAPTestBase:
-    """ Test base class for py.test based tests which need a LDAP server to talk to.
+    class LDAPTestBase:
+        """ Test base class for py.test based tests which need a LDAP server to talk to.
 
-        Inherit your test class from this base class to test LDAP stuff.
-    """
+            Inherit your test class from this base class to test LDAP stuff.
+        """
 
-    # You MUST define these in your derived class:
-    slapd_config = None  # a string with your slapd.conf template
-    ldif_content = None  # a string with your ldif contents
-    basedn = None  # your base DN
-    rootdn = None  # root DN
-    rootpw = None  # root password
+        # You MUST define these in your derived class:
+        slapd_config = None  # a string with your slapd.conf template
+        ldif_content = None  # a string with your ldif contents
+        basedn = None  # your base DN
+        rootdn = None  # root DN
+        rootpw = None  # root password
 
-    def setup_class(self):
-        """ Create LDAP server environment, start slapd """
-        self.ldap_env = LdapEnvironment(self.basedn, self.rootdn, self.rootpw)
-        self.ldap_env.create_env(slapd_config=self.slapd_config)
-        self.ldap_env.start_slapd()
-        self.ldap_env.load_directory(ldif_content=self.ldif_content)
+        def setup_class(self):
+            """ Create LDAP server environment, start slapd """
+            self.ldap_env = LdapEnvironment(self.basedn, self.rootdn, self.rootpw)
+            self.ldap_env.create_env(slapd_config=self.slapd_config)
+            started = self.ldap_env.start_slapd()
+            if not started:
+                py.test.skip("Failed to start %s process, please see your syslog / log files"
+                             " (and check if stopping apparmor helps, in case you use it)." % SLAPD_EXECUTABLE)
+            self.ldap_env.load_directory(ldif_content=self.ldif_content)
 
-    def teardown_class(self):
-        """ Stop slapd, remove LDAP server environment """
-        self.ldap_env.stop_slapd()
-        self.ldap_env.destroy_env()
+        def teardown_class(self):
+            """ Stop slapd, remove LDAP server environment """
+            self.ldap_env.stop_slapd()
+            self.ldap_env.destroy_env()
 
+except ImportError:
+    pass  # obviously py.test not in use
 
