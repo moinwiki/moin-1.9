@@ -204,12 +204,12 @@ class TestAuth:
             trail = request.session['trail']
             assert trail == trail_expected
 
-    def testMoinLoginAuthSession(self):
-        """ run some requests with moin_login auth, check whether session works """
-        from MoinMoin.auth import MoinLogin
+    def testMoinAuthSession(self):
+        """ run some requests with MoinAuth, check whether session works """
+        from MoinMoin.auth import MoinAuth
         from MoinMoin.user import User
-        self.config = self.TestConfig(auth=[MoinLogin()])
-        username = u'MoinLoginAuthTestUser'
+        self.config = self.TestConfig(auth=[MoinAuth()])
+        username = u'MoinAuthTestUser'
         password = u'secret'
         User(self.request, name=username, password=password).save() # create user
         trail_expected = []
