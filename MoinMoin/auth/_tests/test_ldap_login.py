@@ -71,6 +71,7 @@ class TestSimpleLdap(LDAPTestBase):
         # check if usera and userb have different ids:
         assert u1.id != u2.id
 
+
 class TestBugDefaultPasswd(LDAPTestBase):
     basedn = BASEDN
     rootdn = ROOTDN
@@ -123,7 +124,44 @@ class TestBugDefaultPasswd(LDAPTestBase):
         assert u2 is None
 
 
-class TestComplexLdap:
+class TestTwoLdapServers:
+    basedn = BASEDN
+    rootdn = ROOTDN
+    rootpw = ROOTPW
+    slapd_config = SLAPD_CONFIG
+    ldif_content = LDIF_CONTENT
+
+    def setup_class(self):
+        """ Create LDAP servers environment, start slapds """
+        self.ldap_envs = []
+        for instance in range(2):
+            ldap_env = LdapEnvironment(self.basedn, self.rootdn, self.rootpw, instance=instance)
+            ldap_env.create_env(slapd_config=self.slapd_config)
+            ldap_env.start_slapd()
+            ldap_env.load_directory(ldif_content=self.ldif_content)
+            self.ldap_envs.append(ldap_env)
+
+    def teardown_class(self):
+        """ Stop slapd, remove LDAP server environment """
+        for ldap_env in self.ldap_envs:
+            ldap_env.stop_slapd()
+            ldap_env.destroy_env()
+
+    def testLDAP(self):
+        """ Just try accessing the LDAP servers and see if usera and userb are in LDAP. """
+        for ldap_env in self.ldap_envs:
+            server_uri = ldap_env.slapd.url
+            base_dn = ldap_env.basedn
+            lo = ldap.initialize(server_uri)
+            ldap.set_option(ldap.OPT_PROTOCOL_VERSION, ldap.VERSION3) # ldap v2 is outdated
+            lo.simple_bind_s('', '')
+            lusers = lo.search_st(base_dn, ldap.SCOPE_SUBTREE, '(uid=*)')
+            uids = [ldap_dict['uid'][0] for dn, ldap_dict in lusers]
+            assert 'usera' in uids
+            assert 'userb' in uids
+
+
+class TestLdapFailover:
     basedn = BASEDN
     rootdn = ROOTDN
     rootpw = ROOTPW
@@ -149,21 +187,8 @@ class TestComplexLdap:
                 pass # one will fail, because it is already stopped
             ldap_env.destroy_env()
 
-    def testLDAP(self):
-        """ Just try accessing the LDAP servers and see if usera and userb are in LDAP. """
-        for ldap_env in self.ldap_envs:
-            server_uri = ldap_env.slapd.url
-            base_dn = ldap_env.basedn
-            lo = ldap.initialize(server_uri)
-            ldap.set_option(ldap.OPT_PROTOCOL_VERSION, ldap.VERSION3) # ldap v2 is outdated
-            lo.simple_bind_s('', '')
-            lusers = lo.search_st(base_dn, ldap.SCOPE_SUBTREE, '(uid=*)')
-            uids = [ldap_dict['uid'][0] for dn, ldap_dict in lusers]
-            assert 'usera' in uids
-            assert 'userb' in uids
-
-    def testMoinLDAPLogin(self):
-        """ Just try accessing the LDAP server and see if usera and userb are in LDAP. """
+    def testMoinLDAPFailOver(self):
+        """ Try if it does a failover to a secondary LDAP, if the primary fails. """
         from MoinMoin.auth.ldap_login import LDAPAuth
         authlist = []
         for ldap_env in self.ldap_envs:
@@ -188,5 +213,6 @@ class TestComplexLdap:
         u2 = handle_auth(None, username='usera', password='usera', login=True)
         assert u2 is not None
         assert u2.valid
+
 
 
