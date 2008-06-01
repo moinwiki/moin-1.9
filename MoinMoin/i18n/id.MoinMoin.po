@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 23:52+0200\n"
+"POT-Creation-Date: 2008-06-01 19:16+0200\n"
 "PO-Revision-Date: 2006-10-07 23:19+0700\n"
 "Last-Translator: Fajrin Azis <fajrin.azis@gmail.com>\n"
 "Language-Team: Indonesian <id@ll.com>\n"
@@ -586,6 +586,10 @@ msgstr "Kirim data akun saya lewat email"
 
 msgid "Missing password. Please enter user name and password."
 msgstr "Kurang kata sandi. Silakan masukkan nama pengguna dan kata sandi."
+
+#, python-format
+msgid "LDAP server %(server)s failed."
+msgstr ""
 
 #, fuzzy
 msgid "You need to log in."
@@ -1330,14 +1334,6 @@ msgid ""
 "Page link: %(page)s\n"
 msgstr ""
 
-#, python-format
-msgid "XML RPC error: %s"
-msgstr ""
-
-#, python-format
-msgid "Low-level communication error: %s"
-msgstr ""
-
 #, fuzzy
 msgid "Attachment link"
 msgstr "Lampiran"
@@ -1824,6 +1820,14 @@ msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr ""
 "Silakan menggunakan istilah pencarian yang lebih selektif daripada {{{\"%s"
 "\"}}}"
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr ""
+"Pertanyaan pencarian Anda {{{\"%s\"}}} invalid. Silakan lihat "
+"HelpOnSearching untuk informasi lebih lanjut."
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -2548,14 +2552,6 @@ msgstr "Cari Lebih Lanjut: \"%s\""
 #, python-format
 msgid "Full Text Search: \"%s\""
 msgstr "Cari Teks Penuh: \"%s\""
-
-#, python-format
-msgid ""
-"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
-"for more information."
-msgstr ""
-"Pertanyaan pencarian Anda {{{\"%s\"}}} invalid. Silakan lihat "
-"HelpOnSearching untuk informasi lebih lanjut."
 
 #, python-format
 msgid ""

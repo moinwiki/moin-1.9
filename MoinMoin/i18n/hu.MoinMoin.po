@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 23:52+0200\n"
+"POT-Creation-Date: 2008-06-01 19:16+0200\n"
 "PO-Revision-Date: 2006-06-15 15:55+0200\n"
 "Last-Translator: jmarton@omikk.bme.hu, arostas@omikk.bme.hu\n"
 "Language-Team: Hungarian <HU@li.org>\n"
@@ -572,6 +572,10 @@ msgstr "Kérem a felhasználói adataim elküldését levélben"
 
 msgid "Missing password. Please enter user name and password."
 msgstr "Hiányzik a jelszó. Kérjük adja meg a felhasználónevet és a jelszót."
+
+#, python-format
+msgid "LDAP server %(server)s failed."
+msgstr ""
 
 #, fuzzy
 msgid "You need to log in."
@@ -1318,14 +1322,6 @@ msgid ""
 "Page link: %(page)s\n"
 msgstr ""
 
-#, python-format
-msgid "XML RPC error: %s"
-msgstr ""
-
-#, python-format
-msgid "Low-level communication error: %s"
-msgstr ""
-
 #, fuzzy
 msgid "Attachment link"
 msgstr "Mellékletek (fájlok)"
@@ -1803,6 +1799,12 @@ msgstr "Szövegkeresés"
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr "Kérjük a(z) {{{\"%s\"}}} helyett használjon szelektívebb kifejezést!"
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr ""
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -2513,12 +2515,6 @@ msgstr "Címkeresés, minta: \"%s\""
 #, python-format
 msgid "Full Text Search: \"%s\""
 msgstr "Keresés a teljes szövegben, minta: \"%s\""
-
-#, python-format
-msgid ""
-"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
-"for more information."
-msgstr ""
 
 #, python-format
 msgid ""

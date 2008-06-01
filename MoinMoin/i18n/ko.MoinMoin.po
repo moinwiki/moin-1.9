@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 23:52+0200\n"
+"POT-Creation-Date: 2008-06-01 19:16+0200\n"
 "PO-Revision-Date: 2008-03-12 15:01+0900\n"
 "Last-Translator: Seungik Lee <seungiklee@gmail.com>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
@@ -559,6 +559,10 @@ msgstr "계정 정보를 메일로 발송"
 
 msgid "Missing password. Please enter user name and password."
 msgstr "비밀번호가 없습니다. 사용자 이름과 비밀번호를 다시 입력하세요."
+
+#, python-format
+msgid "LDAP server %(server)s failed."
+msgstr ""
 
 #, fuzzy
 msgid "You need to log in."
@@ -1303,14 +1307,6 @@ msgid ""
 "Page link: %(page)s\n"
 msgstr ""
 
-#, python-format
-msgid "XML RPC error: %s"
-msgstr ""
-
-#, python-format
-msgid "Low-level communication error: %s"
-msgstr ""
-
 #, fuzzy
 msgid "Attachment link"
 msgstr "첨부"
@@ -1790,6 +1786,12 @@ msgstr "내용에서 찾기"
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr "{{{\"%s\"}}} 대신 좀 더 구체적인 단어를 이용해서 검색해주세요!"
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr ""
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -2467,12 +2469,6 @@ msgstr "고급 검색: \"%s\""
 #, python-format
 msgid "Full Text Search: \"%s\""
 msgstr "내용 전체에서 검색: \"%s\""
-
-#, python-format
-msgid ""
-"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
-"for more information."
-msgstr ""
 
 #, python-format
 msgid ""
