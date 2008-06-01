@@ -17,10 +17,14 @@
                 2006 Nick Phillips
     @license: GNU GPL, see COPYING for details.
 """
-import ldap
-
 from MoinMoin import log
 logging = log.getLogger(__name__)
+
+try:
+    import ldap
+except ImportError, err:
+    logging.error("You need to have python-ldap installed (%s)." % str(err))
+    raise
 
 from MoinMoin import user
 from MoinMoin.auth import BaseAuth, CancelLogin, ContinueLogin
@@ -180,10 +184,10 @@ class LDAPAuth(BaseAuth):
                 result_length = len(lusers)
                 if result_length != 1:
                     if result_length > 1:
-                        logging.debug("Search found more than one (%d) matches for %r." % (result_length, filterstr))
+                        logging.warning("Search found more than one (%d) matches for %r." % (result_length, filterstr))
                     if result_length == 0:
                         logging.debug("Search found no matches for %r." % (filterstr, ))
-                    return CancelLogin(_("Invalid username or password."))
+                    return ContinueLogin(user_obj, _("Invalid username or password."))
 
                 dn, ldap_dict = lusers[0]
                 if not self.bind_once:
@@ -231,7 +235,16 @@ class LDAPAuth(BaseAuth):
                 u.create_or_update(True)
             return ContinueLogin(u)
 
+        except ldap.SERVER_DOWN, err:
+            # looks like this LDAP server isn't working, so we just try the next
+            # authenticator object in cfg.auth list (there could be some second
+            # ldap authenticator that queries a backup server or any other auth
+            # method).
+            logging.error("LDAP server %s failed (%s). "
+                          "Trying to authenticate with next auth list entry." % (server, str(err)))
+            return ContinueLogin(user_obj, _("LDAP server %(server)s failed." % {'server': server}))
+
         except:
             logging.exception("caught an exception, traceback follows...")
-            return CancelLogin(None)
+            return ContinueLogin(user_obj)
 
