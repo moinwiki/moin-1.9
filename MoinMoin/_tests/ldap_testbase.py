@@ -231,7 +231,7 @@ class LdapEnvironment(object):
 try:
     import py.test
 
-    class LDAPTestBase:
+    class LDAPTstBase:
         """ Test base class for py.test based tests which need a LDAP server to talk to.
 
             Inherit your test class from this base class to test LDAP stuff.
