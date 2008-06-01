@@ -79,7 +79,6 @@ class TestComplexLdap:
 
     def setup_class(self):
         """ Create LDAP servers environment, start slapds """
-        py.test.skip("Failover not implemented yet")
         self.ldap_envs = []
         for instance in range(2):
             ldap_env = LdapEnvironment(self.basedn, self.rootdn, self.rootpw, instance=instance)
@@ -90,7 +89,6 @@ class TestComplexLdap:
 
     def teardown_class(self):
         """ Stop slapd, remove LDAP server environment """
-        py.test.skip("Failover not implemented yet")
         for ldap_env in self.ldap_envs:
             try:
                 ldap_env.stop_slapd()
@@ -100,7 +98,6 @@ class TestComplexLdap:
 
     def testLDAP(self):
         """ Just try accessing the LDAP servers and see if usera and userb are in LDAP. """
-        py.test.skip("Failover not implemented yet")
         for ldap_env in self.ldap_envs:
             server_uri = ldap_env.slapd.url
             base_dn = ldap_env.basedn
@@ -114,13 +111,13 @@ class TestComplexLdap:
 
     def testMoinLDAPLogin(self):
         """ Just try accessing the LDAP server and see if usera and userb are in LDAP. """
-        py.test.skip("Failover not implemented yet")
         from MoinMoin.auth.ldap_login import LDAPAuth
         authlist = []
         for ldap_env in self.ldap_envs:
             server_uri = ldap_env.slapd.url
             base_dn = ldap_env.basedn
-            ldap_auth = LDAPAuth(server_uri=server_uri, base_dn=base_dn)
+            ldap_auth = LDAPAuth(server_uri=server_uri, base_dn=base_dn,
+                                 timeout=1) # short timeout, faster testing
             authlist.append(ldap_auth)
 
         self.config = self.TestConfig(auth=authlist, user_autocreate=True)
