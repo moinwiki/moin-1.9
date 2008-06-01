@@ -60,6 +60,12 @@
     methods will use the message feature only along with returning False for
     the continue flag.
 
+    Note, however, that when no username is entered or the username is not
+    found in the database, it may be appropriate to return with a message
+    and the continue flag set to true (ContinueLogin) because a subsequent auth
+    plugin might work even without the username, say the openid plugin for
+    example.
+
     The multistage member must evaluate to false or be callable. If it is
     callable, this indicates that the authentication method requires a second
     login stage. In that case, the multistage item will be called with the
