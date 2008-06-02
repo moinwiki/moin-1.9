@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 23:52+0200\n"
+"POT-Creation-Date: 2008-06-01 19:16+0200\n"
 "PO-Revision-Date: 2005-08-18 14:19+EET\n"
 "Last-Translator: Ovidiu Sabou <ovidiu.sabou@gmail.com>\n"
 "Language-Team: Romanian <ovidiu.sabou@gmail.com>\n"
@@ -28,7 +28,7 @@ msgstr ""
 msgid "<unknown>"
 msgstr "<necunoscut>"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
@@ -36,11 +36,11 @@ msgid ""
 "\n"
 "Password reset URL: %s/?action=recoverpass&name=%s&token=%s\n"
 msgstr ""
-"Nume de înregistrare: %s\n"
+"Nume utilizator: %s\n"
 "\n"
-"Parola de înregistrare: %s\n"
+"Codul de recuperare al parolei: %s\n"
 "\n"
-"URL de înregistrare: %s/%s?action=login\n"
+"URL de reconfigurare a parolei: %s/?action=recoverpass&name=%s&token=%s\n"
 
 msgid ""
 "Somebody has requested to email you a password recovery token.\n"
@@ -55,7 +55,7 @@ msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] Datele contului wiki al dumneavoastră"
 
 msgid "You are not allowed to edit this page."
-msgstr "Nu aveţi dreptul să editaţi această pagină."
+msgstr "Nu aveţi dreptul de a edita această pagină."
 
 msgid "Page is immutable!"
 msgstr "Pagina este imuabilă!"
@@ -68,9 +68,9 @@ msgstr ""
 "Blocarea înfiinţată de dumneavoastră a expirat, pregătiţi-vă pentru "
 "conflicte de editare!"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Draft of \"%(pagename)s\""
-msgstr "Previzionarea \"%(pagename)s\""
+msgstr "Ciorna paginii \"%(pagename)s\""
 
 #, python-format
 msgid "Edit \"%(pagename)s\""
@@ -99,20 +99,16 @@ msgstr "Cineva a şters această pagină în timp ce aţi editat-o!"
 msgid "Someone else changed this page while you were editing!"
 msgstr "Cineva a modificat această pagină în timp ce aţi editat-o!"
 
-#, fuzzy
 msgid ""
 "Someone else saved this page while you were editing!\n"
 "Please review the page and save then. Do not save this page as it is!"
 msgstr ""
 "Cineva a salvat această pagină în timp ce aţi editat-o!\n"
-"Vă rugăm să revedeţi pagina şi să o salvaţi apoi. Nu salvaţi pagina în acest "
-"stadiu!\n"
-"Uitaţi-vă la modificările paginii %(difflink)s pentru a vedea ce s-a "
-"schimbat."
+"Vă rugăm să evaluaţi pagina şi să o salvaţi apoi. Nu salvaţi pagina în acest "
+"stadiu!"
 
-#, fuzzy
 msgid "[Content loaded from draft]"
-msgstr "[Conţinutul paginii noi a fost încărcat din %s]"
+msgstr "[Conţinutul paginii noi a fost încărcat din ciornă]"
 
 #, python-format
 msgid "[Content of new page loaded from %s]"
@@ -235,9 +231,9 @@ msgstr ""
 msgid "Argument \"%s\" is required"
 msgstr ""
 
-#, fuzzy, python-format
+#, python-format
 msgid "No argument named \"%s\""
-msgstr "Nici o pagină de genul \"%s\"!"
+msgstr "Niciun argument numit \"%s\"!"
 
 #, python-format
 msgid "Expected \"=\" to follow \"%(token)s\""
@@ -259,13 +255,11 @@ msgstr "Mod GUI"
 msgid "Edit was cancelled."
 msgstr "Editarea a fost anulată"
 
-#, fuzzy
 msgid "You can't copy to an empty pagename."
-msgstr "Nu puteţi salva pagini goale."
+msgstr "Nu puteţi salva cu nume de pagină gol."
 
-#, fuzzy
 msgid "You are not allowed to copy this page!"
-msgstr "Nu aveţi permisiunea de a edita această pagină!"
+msgstr "Nu aveţi permisiunea de a copia această pagină!"
 
 #, python-format
 msgid ""
@@ -277,27 +271,23 @@ msgstr ""
 "\n"
 "Încercaţi un nume diferit."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Could not copy page because of file system error: %s."
-msgstr "Nu s-a putut redenumi pagina datorită erorii de sistem de fişiere: %s."
-
-#, fuzzy
-msgid "You are not allowed to rename this page!"
 msgstr ""
-"Nu aveţi permisiunea de a modifica această pagină la o stare anterioară"
+"Nu s-a putut copia pagina datorită erorii cauzate de sistemul de fişiere: %s."
 
-#, fuzzy
+msgid "You are not allowed to rename this page!"
+msgstr "Nu aveţi permisiunea de a redenumi această pagină!"
+
 msgid "You can't rename to an empty pagename."
-msgstr "Nu puteţi salva pagini goale."
+msgstr "Nu puteţi redenumi într-un nume vid."
 
 #, python-format
 msgid "Could not rename page because of file system error: %s."
 msgstr "Nu s-a putut redenumi pagina datorită erorii de sistem de fişiere: %s."
 
-#, fuzzy
 msgid "You are not allowed to delete this page!"
-msgstr ""
-"Nu aveţi permisiunea de a modifica această pagină la o stare anterioară"
+msgstr "Nu aveţi permisiunea de a şterge această pagină!"
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr ""
@@ -446,9 +436,9 @@ msgstr ""
 msgid "Unknown function %(func)s in line %(lineno)i."
 msgstr ""
 
-#, fuzzy, python-format
+#, python-format
 msgid "The file %s was not found in the package."
-msgstr "Fişierul %s nu este un fişier pachet MoinMoin."
+msgstr "Fişierul %s nu a fost găsit în pachet."
 
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
@@ -497,28 +487,24 @@ msgid ""
 "%(be)s results out of about %(pages)d pages."
 msgstr ""
 
-#, fuzzy
 msgid "seconds"
-msgstr "%.2f secunde"
+msgstr "secunde"
 
-#, fuzzy
 msgid "Previous"
-msgstr "Previzionare"
+msgstr "Precedent"
 
-#, fuzzy
 msgid "Next"
-msgstr "Text"
+msgstr "Următor"
 
-#, fuzzy
 msgid "rev"
-msgstr "revenire"
+msgstr "rev"
 
 msgid "current"
-msgstr ""
+msgstr "curent"
 
-#, fuzzy, python-format
+#, python-format
 msgid "last modified: %s"
-msgstr "modificat ultima oară la %(time)s"
+msgstr "modificat ultima oară: %s"
 
 msgid "match"
 msgstr "potrivire"
@@ -550,13 +536,11 @@ msgstr ""
 msgid "Login"
 msgstr "Login"
 
-#, fuzzy
 msgid "Username"
-msgstr "Utilizator"
+msgstr "Nume utilizator"
 
-#, fuzzy
 msgid "Member of Groups"
-msgstr "Număr de pagini"
+msgstr "Membru în grupurile"
 
 msgid "Email"
 msgstr "Email"
@@ -567,28 +551,27 @@ msgstr ""
 msgid "Action"
 msgstr "Acţiune"
 
-#, fuzzy
 msgid "Enable user"
-msgstr "Activat"
+msgstr "Activare utilizator"
 
-#, fuzzy
 msgid "disabled"
-msgstr "Dezactivat"
+msgstr "dezactivat"
 
-#, fuzzy
 msgid "Disable user"
-msgstr "Dezactivat"
+msgstr "Dezactivare utilizator"
 
-#, fuzzy
 msgid "Mail account data"
-msgstr "Trimitere prin email datele contului"
+msgstr "Datele contului de email"
 
 msgid "Missing password. Please enter user name and password."
 msgstr "Parola lipseşte. Introduceti nume şi parolă"
 
-#, fuzzy
+#, python-format
+msgid "LDAP server %(server)s failed."
+msgstr ""
+
 msgid "You need to log in."
-msgstr "Prăjitura(cookie) a fost ştearsă. Acum sunteţi neînregistrat(ă)."
+msgstr "Trebuie să vă înregistraţi."
 
 #, python-format
 msgid ""
@@ -1340,14 +1323,6 @@ msgid ""
 "Page link: %(page)s\n"
 msgstr ""
 
-#, python-format
-msgid "XML RPC error: %s"
-msgstr ""
-
-#, python-format
-msgid "Low-level communication error: %s"
-msgstr ""
-
 #, fuzzy
 msgid "Attachment link"
 msgstr "Ataşamente"
@@ -1822,6 +1797,12 @@ msgstr "Căutare Text"
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr "Folosiţi un termen de căutare mai selectiv în loc de {{{\"%s\"}}}"
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr ""
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -2503,12 +2484,6 @@ msgstr "Căutare Text Complet: \"%s\""
 
 #, python-format
 msgid ""
-"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
-"for more information."
-msgstr ""
-
-#, python-format
-msgid ""
 "Your search query {{{\"%s\"}}} didn't return any results. Please change some "
 "terms and refer to HelpOnSearching for more information.%s"
 msgstr ""
@@ -2580,20 +2555,17 @@ msgstr "Adăugare cuvinte verificate în dicţionar"
 msgid "No spelling errors found!"
 msgstr "Nu a fost găsită nici o greşeală de ortografie!"
 
-#, fuzzy
 msgid "You can't save spelling words."
 msgstr ""
-"Nu aveţi permisiunea de a verifica ortografia pe o pagină pe care nu o "
-"puteţi citi."
+"Nu aveţi permisiunea de a salva cuvinte folosite la verificarea ortografiei."
 
 msgid "You can't check spelling on a page you can't read."
 msgstr ""
 "Nu aveţi permisiunea de a verifica ortografia pe o pagină pe care nu o "
 "puteţi citi."
 
-#, fuzzy
 msgid "You are now logged out."
-msgstr "Prăjitura(cookie) a fost ştearsă. Acum sunteţi neînregistrat(ă)."
+msgstr "Acum sunteţi neînregistrat(ă)."
 
 msgid "If this account exists an email was sent."
 msgstr ""
@@ -2605,9 +2577,8 @@ msgstr ""
 "Acest wiki nu permite procesare poştei electronice.\n"
 "Contactaţi deţinătorul wiki-ului, care poate activa email."
 
-#, fuzzy
 msgid "Please provide a valid email address or a username!"
-msgstr "Introduceţi o adresă de email validă!"
+msgstr "Introduceţi o adresă validă de email sau un nume de utilizator!"
 
 msgid "Mail me my account data"
 msgstr "Trimitere prin email datele contului"
@@ -2615,17 +2586,14 @@ msgstr "Trimitere prin email datele contului"
 msgid "Recovery token"
 msgstr ""
 
-#, fuzzy
 msgid "New password"
-msgstr "Parolă"
+msgstr "Parolă nouă"
 
-#, fuzzy
 msgid "New password (repeat)"
-msgstr "Repetare parolă"
+msgstr "Repetare parolă nouă"
 
-#, fuzzy
 msgid "Reset my password"
-msgstr "Parolă"
+msgstr "Resetare parolă"
 
 msgid "Your password has been changed, you can log in now."
 msgstr ""
@@ -2633,20 +2601,20 @@ msgstr ""
 msgid "Your token is invalid!"
 msgstr ""
 
-#, fuzzy
 msgid "Password reset"
-msgstr "Repetare parolă"
+msgstr "Resetare parolă"
 
-#, fuzzy
 msgid ""
 "\n"
 "== Password reset ==\n"
 "Enter a new password below."
-msgstr "Parola lipseşte. Introduceti nume şi parolă"
+msgstr ""
+"\n"
+"== Resetare parolă ==\n"
+"Introduceţi noua parolă mai jos."
 
-#, fuzzy
 msgid "Lost password"
-msgstr "Parolă"
+msgstr "Parolă pierdută"
 
 msgid ""
 "\n"
@@ -2669,15 +2637,14 @@ msgstr ""
 msgid "Local Site Map for \"%s\""
 msgstr "Harta Locală a Sitului \"%s\""
 
-#, fuzzy
 msgid "Pages"
-msgstr "Pagină"
+msgstr "Pagini"
 
 msgid "Select Author"
-msgstr ""
+msgstr "Selectare Autor"
 
 msgid "Revert all!"
-msgstr ""
+msgstr "Revenire totală!"
 
 #, python-format
 msgid "[%d attachments]"
@@ -2747,17 +2714,17 @@ msgstr "Fişiere Ataşate"
 msgid "You are not allowed to attach a file to this page."
 msgstr "Nu aveţi permisiunea de a ataşa un fişier la această pagină"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Unsupported AttachFile sub-action: %s"
-msgstr "Este nepermisă acţiunea de trimitere date: %s"
+msgstr "Sub-acţiunea AttachFile este nepermisă: %s"
 
 #, python-format
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Ataşamente pentru \"%(pagename)s\""
 
-#, fuzzy
 msgid "You are not allowed to overwrite a file attachment of this page."
-msgstr "Nu aveţi permisiunea de a viziona ataşamentele de pe această pagină."
+msgstr ""
+"Nu aveţi permisiunea de a suprascrie un ataşament de pe această pagină."
 
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
@@ -2780,56 +2747,55 @@ msgstr "Nu aveţi permisiunea de a salva un desen pe această pagină."
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Nu aveţi permisiunea de a şterge ataşamentele de pe această pagină."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
-msgstr "Ataşamentul '%(filename)s' a fost instalat."
+msgstr "Ataşamentul '%(new_pagename)s/%(new_filename)s' există deja."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/%"
 "(new_filename)s'."
-msgstr "Ataşamentul '%(filename)s' nu există!"
+msgstr ""
+"Ataşamentul '%(pagename)s/%(filename)s' a fost mutat la '%(new_pagename)s/%"
+"(new_filename)s'."
 
 msgid "Nothing changed"
-msgstr ""
+msgstr "Nu s-a modificat nimic"
 
 #, python-format
 msgid "Page '%(new_pagename)s' does not exist or you don't have enough rights."
 msgstr ""
 
 msgid "Move aborted!"
-msgstr ""
+msgstr "Mutare anulată!"
 
-#, fuzzy
 msgid "Please use the interactive user interface to move attachments!"
-msgstr "Folosiţi interfaţa interactivă cu utilizatorul pentru a şterge pagini!"
+msgstr ""
+"Vă rugăm să folosiţi interfaţa interactivă pentru mutarea ataşamentelor!"
 
-#, fuzzy
 msgid "You are not allowed to move attachments from this page."
-msgstr "Nu aveţi permisiunea de a obţine ataşamentele de pe această pagină."
+msgstr "Nu aveţi permisiunea de a muta ataşamentele de pe această pagină."
 
-#, fuzzy
 msgid "Move aborted because new page name is empty."
-msgstr "Nu puteţi salva pagini goale."
+msgstr "Mutarea a fost anulată deoarece noua denumire a paginii este vidă."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Please use a valid filename for attachment '%(filename)s'."
-msgstr "Trimiterea ataşamentului '%(filename)s'."
+msgstr ""
+"Vă rugăm să folosiţi un nume valid de vişier pentru ataşamentul '%(filename)"
+"s'."
 
-#, fuzzy
 msgid "Move aborted because new attachment name is empty."
-msgstr "Nu puteţi salva pagini goale."
+msgstr "Mutarea a fost anulată deoarece noul nume al ataşamentului este vid."
 
 msgid "Move"
-msgstr ""
+msgstr "Mutare"
 
-#, fuzzy
 msgid "New page name"
-msgstr "Nume nou"
+msgstr "Nume pagină nouă"
 
-#, fuzzy
 msgid "New attachment name"
-msgstr "Ataşament Nou"
+msgstr "Nume ataşament nou"
 
 msgid "You are not allowed to get attachments from this page."
 msgstr "Nu aveţi permisiunea de a obţine ataşamentele de pe această pagină."
@@ -2873,9 +2839,9 @@ msgstr ""
 "prea mari, sunt doar fişiere .zip, există deja sau sunt poziţionate în "
 "directoare."
 
-#, fuzzy, python-format
+#, python-format
 msgid "The file %(filename)s is not a .zip file."
-msgstr "Fişierul %(target)s nu este un fişier .zip."
+msgstr "Fişierul %(filename)s nu este un fişier .zip."
 
 #, python-format
 msgid "Attachment '%(filename)s'"
@@ -2927,32 +2893,31 @@ msgstr "%(matchcount)d %(matches)s pentru \"%(title)s\""
 msgid "Inlined image: %(url)s"
 msgstr ""
 
-#, fuzzy, python-format
+#, python-format
 msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Creare desen nou \"%(filename)s\""
+msgstr "Creare desen nou \"%(filename)s (se deschide în fereastră nouă)\""
 
-#, fuzzy, python-format
+#, python-format
 msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Editare desen %(filename)s"
+msgstr "Editare desen %(filename)s (se deschide în fereastră nouă)"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Clickable drawing: %(filename)s"
-msgstr "Editare desen %(filename)s"
+msgstr "Desen clicabil: %(filename)s"
 
 msgid "Toggle line numbers"
-msgstr ""
+msgstr "Comutare numerotare linii"
 
 #, python-format
 msgid "Unknown action %(action_name)s."
-msgstr ""
+msgstr "Acţiune necunoscută %(action_name)s."
 
-#, fuzzy, python-format
+#, python-format
 msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Nu aveţi permisiunea de a salva un desen pe această pagină."
+msgstr "Nu aveţi permisiunea de %(action_name)s pe această pagină."
 
-#, fuzzy
 msgid "Login and try again."
-msgstr " %s şi încercaţi din nou."
+msgstr "Înregistraţi-vă şi încercaţi din nou."
 
 #, fuzzy
 #~ msgid "New Page or New Attachment"

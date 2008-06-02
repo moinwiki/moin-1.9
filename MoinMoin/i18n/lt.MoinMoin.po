@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 23:52+0200\n"
+"POT-Creation-Date: 2008-06-01 19:16+0200\n"
 "PO-Revision-Date: 2007-12-01 00:00+0200\n"
 "Last-Translator: Aurelijus Sudzius <ruledbyfate@gmail.com>\n"
 "Language-Team: Lithuanian <ruledbyfate@gmail.com>\n"
@@ -580,6 +580,10 @@ msgstr "Pašto paskyros informacija"
 
 msgid "Missing password. Please enter user name and password."
 msgstr "Trūkstamas slaptažodis. Prašome įvesti vartotojo vardą ir slaptažodį."
+
+#, python-format
+msgid "LDAP server %(server)s failed."
+msgstr ""
 
 #, fuzzy
 msgid "You need to log in."
@@ -1327,14 +1331,6 @@ msgid ""
 "Page link: %(page)s\n"
 msgstr ""
 
-#, python-format
-msgid "XML RPC error: %s"
-msgstr ""
-
-#, python-format
-msgid "Low-level communication error: %s"
-msgstr ""
-
 #, fuzzy
 msgid "Attachment link"
 msgstr "Priedai"
@@ -1817,6 +1813,14 @@ msgstr "Paieškos tekstas"
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr "Prašome naudoti labiau atrinktą paieškos raktą vietoje {{{\"%s\"}}}"
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr ""
+"Jūsų paieškos užklausa {{{\"%s\"}}} yra netinkama. Prašome žiūrėti į "
+"PagalbaPaieškos dėl papildomos informacijos."
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -2548,14 +2552,6 @@ msgstr "Pažangi paieška: \"%s\""
 #, python-format
 msgid "Full Text Search: \"%s\""
 msgstr "Pilno teksto paieška: \"%s\""
-
-#, python-format
-msgid ""
-"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
-"for more information."
-msgstr ""
-"Jūsų paieškos užklausa {{{\"%s\"}}} yra netinkama. Prašome žiūrėti į "
-"PagalbaPaieškos dėl papildomos informacijos."
 
 #, python-format
 msgid ""

@@ -87,6 +87,7 @@ class WikiAnalyzer:
 
     dot_re = re.compile(r"[-_/,.]")
     mail_re = re.compile(r"[-_/,.]|(@)")
+    alpha_num_re = re.compile(r"\d+|\D+")
 
     # XXX limit stuff above to xapdoc.MAX_KEY_LEN
     # WORD_RE = re.compile('\\w{1,%i}' % MAX_KEY_LEN, re.U)
@@ -104,46 +105,49 @@ class WikiAnalyzer:
                 # lang is not stemmable or not available
                 pass
 
+    def raw_tokenize_word(self, word, pos):
+        """ try to further tokenize some word starting at pos """
+        if self.wikiword_re.match(word):
+            yield (word, pos)
+            # if it is a CamelCaseWord, we additionally try to tokenize Camel, Case and Word
+            for m in re.finditer(self.singleword_re, word):
+                for w, p in self.raw_tokenize_word(m.group(), pos + m.start()):
+                    yield (w, p)
+        else:
+            # if we have Foo42, yield Foo and 42
+            for m in re.finditer(self.alpha_num_re, word):
+                yield (m.group(), pos + m.start())
+
     def raw_tokenize(self, value):
-        """ Yield a stream of lower cased raw and stemmed words from a string.
+        """ Yield a stream of words from a string.
 
         @param value: string to split, must be an unicode object or a list of
                       unicode objects
         """
-        def enc(uc):
-            """ 'encode' unicode results into whatever xapian wants """
-            lower = uc.lower()
-            return lower
-
         if isinstance(value, list): # used for page links
             for v in value:
-                yield (enc(v), 0)
+                yield (v, 0)
         else:
             tokenstream = re.finditer(self.token_re, value)
             for m in tokenstream:
                 if m.group("acronym"):
-                    yield (enc(m.group("acronym").replace('.', '')),
-                            m.start())
+                    yield (m.group("acronym").replace('.', ''), m.start())
                 elif m.group("company"):
-                    yield (enc(m.group("company")), m.start())
+                    yield (m.group("company"), m.start())
                 elif m.group("email"):
                     displ = 0
                     for word in self.mail_re.split(m.group("email")):
                         if word:
-                            yield (enc(word), m.start() + displ)
+                            yield (word, m.start() + displ)
                             displ += len(word) + 1
                 elif m.group("hostname"):
                     displ = 0
                     for word in self.dot_re.split(m.group("hostname")):
-                        yield (enc(word), m.start() + displ)
+                        yield (word, m.start() + displ)
                         displ += len(word) + 1
                 elif m.group("word"):
-                    word = m.group("word")
-                    yield (enc(word), m.start())
-                    # if it is a CamelCaseWord, we additionally yield Camel, Case and Word
-                    if self.wikiword_re.match(word):
-                        for sm in re.finditer(self.singleword_re, word):
-                            yield (enc(sm.group()), m.start() + sm.start())
+                    for word, pos in self.raw_tokenize_word(m.group("word"), m.start()):
+                        yield word, pos
 
     def tokenize(self, value, flat_stemming=True):
         """ Yield a stream of lower cased raw and stemmed words from a string.
@@ -155,6 +159,7 @@ class WikiAnalyzer:
                                 yield both at once as a tuple (False)
         """
         for word, pos in self.raw_tokenize(value):
+            word = word.lower() # transform it into what xapian wants
             if flat_stemming:
                 yield (word, pos)
                 if self.stemmer:
@@ -362,10 +367,10 @@ class Index(BaseIndex):
                 xrev = xapdoc.SortKey('revision', '0')
                 title = " ".join(os.path.join(fs_rootpage, filename).split("/"))
                 xtitle = xapdoc.Keyword('title', title)
-                xmimetype = xapdoc.Keyword('mimetype', mimetype)
+                xmimetypes = [xapdoc.Keyword('mimetype', mt) for mt in [mimetype, ] + mimetype.split('/')]
                 xcontent = xapdoc.TextField('content', file_content)
                 doc = xapdoc.Document(textFields=(xcontent, ),
-                                      keywords=(xtitle, xitemid, xmimetype, ),
+                                      keywords=xmimetypes + [xtitle, xitemid, ],
                                       sortFields=(xpname, xattachment,
                                           xmtime, xwname, xrev, ),
                                      )
@@ -491,14 +496,16 @@ class Index(BaseIndex):
             xmtime = xapdoc.SortKey('mtime', str(mtime))
             xrev = xapdoc.SortKey('revision', revision)
             xtitle = xapdoc.TextField('title', pagename, True) # prefixed
+            mimetype = 'text/%s' % page.pi['format']  # XXX improve this
             xkeywords = [xapdoc.Keyword('itemid', itemid),
                     xapdoc.Keyword('lang', language),
                     xapdoc.Keyword('stem_lang', stem_language),
                     xapdoc.Keyword('fulltitle', pagename),
                     xapdoc.Keyword('revision', revision),
                     xapdoc.Keyword('author', author),
-                    xapdoc.Keyword('mimetype', 'text/%s' % page.pi['format']), # XXX improve this
-                ]
+                ] + \
+                [xapdoc.Keyword('mimetype', mt) for mt in [mimetype, ] + mimetype.split('/')]
+
             for pagelink in page.getPageLinks(request):
                 xkeywords.append(xapdoc.Keyword('linkto', pagelink))
             for category in categories:
@@ -556,7 +563,7 @@ class Index(BaseIndex):
                 xlanguage = xapdoc.Keyword('lang', language)
                 xstem_language = xapdoc.Keyword('stem_lang', stem_language)
                 mimetype, att_content = self.contentfilter(filename)
-                xmimetype = xapdoc.Keyword('mimetype', mimetype)
+                xmimetypes = [xapdoc.Keyword('mimetype', mt) for mt in [mimetype, ] + mimetype.split('/')]
                 xcontent = xapdoc.TextField('content', att_content)
                 xtitle_txt = xapdoc.TextField('title',
                         '%s/%s' % (pagename, att), True)
@@ -564,9 +571,9 @@ class Index(BaseIndex):
                 xdomains = [xapdoc.Keyword('domain', domain)
                         for domain in domains]
                 doc = xapdoc.Document(textFields=(xcontent, xtitle_txt),
-                                      keywords=xdomains + [xatt_itemid,
+                                      keywords=xdomains + xmimetypes + [xatt_itemid,
                                           xtitle, xlanguage, xstem_language,
-                                          xmimetype, xfulltitle, ],
+                                          xfulltitle, ],
                                       sortFields=(xpname, xattachment, xmtime,
                                           xwname, xrev, ),
                                      )

@@ -245,7 +245,7 @@ class DefaultConfig(object):
     allow_xslt = False
     antispam_master_url = "http://master.moinmo.in/?action=xmlrpc2"
 
-    auth = [authmodule.MoinLogin()]
+    auth = [authmodule.MoinAuth()]
     # default to http and xmlrpc_applytoken to get old semantics
     # xmlrpc_applytoken shall be removed once that code is changed
     # to have proper session handling and use request.handle_auth()

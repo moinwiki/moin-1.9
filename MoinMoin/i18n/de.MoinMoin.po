@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 23:52+0200\n"
+"POT-Creation-Date: 2008-06-01 19:16+0200\n"
 "PO-Revision-Date: 2008-05-12 14:33+0200\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-user@lists.sourceforge.net>\n"
@@ -589,6 +589,10 @@ msgstr "E-Mail mit den Zugangsdaten senden"
 
 msgid "Missing password. Please enter user name and password."
 msgstr "Fehlendes Passwort. Bitte geben Sie Benutzername und Passwort ein."
+
+#, python-format
+msgid "LDAP server %(server)s failed."
+msgstr "LDAP-Server %(server)s kann nicht erreicht werden."
 
 msgid "You need to log in."
 msgstr "Sie müssen sich anmelden."
@@ -1355,14 +1359,6 @@ msgstr ""
 "Verweis zu Dateianhang: %(attach)s\n"
 "Verweis zu Seite: %(page)s\n"
 
-#, python-format
-msgid "XML RPC error: %s"
-msgstr "XML-RPC-Fehler: %s"
-
-#, python-format
-msgid "Low-level communication error: %s"
-msgstr "Kommunikationsfehler auf unterer Ebene: %s"
-
 msgid "Attachment link"
 msgstr "Verweis zu Dateianhang"
 
@@ -1834,6 +1830,14 @@ msgstr "Text durchsuchen"
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr ""
 "Bitte verwenden Sie einen selektiveren Suchbegriff anstatt {{{\"%s\"}}}"
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr ""
+"Ihre Suchanfrage {{{\"%s\"}}} ist ungültig. Siehe HilfeZumSuchen für weitere "
+"Informationen."
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -2590,14 +2594,6 @@ msgstr "Volltextsuche: \"%s\""
 
 #, python-format
 msgid ""
-"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
-"for more information."
-msgstr ""
-"Ihre Suchanfrage {{{\"%s\"}}} ist ungültig. Siehe HilfeZumSuchen für weitere "
-"Informationen."
-
-#, python-format
-msgid ""
 "Your search query {{{\"%s\"}}} didn't return any results. Please change some "
 "terms and refer to HelpOnSearching for more information.%s"
 msgstr ""
@@ -3043,3 +3039,9 @@ msgstr "Sie dürfen die Aktion %(action_name)s auf dieser Seite nicht benutzen!"
 
 msgid "Login and try again."
 msgstr "Melden Sie sich an und probieren Sie es noch einmal."
+
+#~ msgid "XML RPC error: %s"
+#~ msgstr "XML-RPC-Fehler: %s"
+
+#~ msgid "Low-level communication error: %s"
+#~ msgstr "Kommunikationsfehler auf unterer Ebene: %s"
