@@ -8,14 +8,19 @@
 
 import re
 
-from werkzeug import wrappers as werkzeug
-from werkzeug.utils import cached_property
+from werkzeug.wrappers import Request as WerkzeugRequest
+from werkzeug.wrappers import Response as WerkzeugResponse
 
 from MoinMoin import config
 
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
-class Request(werkzeug.Request):
+class Request(WerkzeugRequest):
     charset = config.charset
     encoding_errors = 'replace'
+
+class Response(WerkzeugResponse):
+    charset = config.charset
+    default_mimetype = 'text/html'
+    
