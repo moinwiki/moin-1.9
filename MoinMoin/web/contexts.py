@@ -8,9 +8,9 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import re
+import re, time
 
-from werkzeug.utils import Headers
+from werkzeug.utils import Headers, http_date
 
 from MoinMoin.request import RequestBase
 from MoinMoin.web.request import Request
@@ -33,14 +33,20 @@ class HTTPContext(Context, RequestBase):
     """
     def __init__(self, environ):
         self._wsgirequest = Request(environ)
+        self.environ = environ
         self.__output = []
         self.headers = Headers()
 
         self.status = 200
-        self.failed = 0
 
-        self._setup_vars_from_std_env(environ)
-        RequestBase.__init__(self, {})
+        # compat properties (remove when not necessary anymore)
+        self._auth_redirected = False
+        self.forbidden = 0
+        self._cache_disabled = 0
+        self.page = None
+        self.user_headers = []
+        self.sent_headers = None
+        self.writestack = []
 
     # implementation of methods expected by RequestBase
     def read(self, n=None):
@@ -63,7 +69,6 @@ class HTTPContext(Context, RequestBase):
         return ''.join(self.__output)
 
     def _emit_http_headers(self, headers):
-        logging.info("_emit_http_headers called on HTTPContext")
         st_header, other_headers = headers[0], headers[1:]
         status = STATUS_CODE_RE.match(st_header)
         status = int(status.groups()[0])
@@ -77,6 +82,58 @@ class HTTPContext(Context, RequestBase):
 
     def setup_args(self):
         return self._wsgirequest.values.to_dict(flat=False)
+
+    def __getattr__(self, name):
+        logging.debug("Proxying to '%r' for attribute '%s'",
+                      self._wsgirequest, name)
+        return getattr(self._wsgirequest, name)
+
+    def __setattr__(self, name, value):
+        logging.debug("Setting attribute '%s' to value '%r'", name, value)
+        self.__dict__[name] = value
+    
+    # compatibility wrapping
+    cookie = Request.cookies
+    script_name = Request.script_root
+    request_method = Request.method
+    path_info = Request.path
+
+    def setHttpHeader(self, header):
+        header, value = header.split(':', 1)
+        self.headers.add(header, value)
+
+    def disableHttpCaching(self, level=1):
+        if level <= self._cache_disabled:
+            return
+        
+        if level == 1:
+            self.headers.add('Cache-Control', 'private, must-revalidate, mag-age=10')
+        elif level == 2:
+            self.headers.add('Cache-Control', 'no-cache')
+            self.headers.set('Pragma', 'no-cache')
+
+        if not self._cache_disabled:
+            when = time.time() - (3600 * 24 * 365)
+            self.headers.set('Expires', http_date(when))
+
+        self._cache_disabled = level
+
+    def _get_dicts(self):
+        if not hasattr(self, '_dicts'):
+            from MoinMoin import wikidicts
+            dicts = wikidicts.GroupDict(self)
+            dicts.load_dicts()
+            self._dicts = dicts
+        return self._dicts
+
+    def _del_dicts(self):
+        del self._dicts
+
+    dicts = property(_get_dicts, None, _del_dicts)
+    del _get_dicts, _del_dicts
+
+    def finish(self):
+        pass
 
 # mangle in logging of function calls
 import inspect

@@ -338,7 +338,9 @@ class MoinCookieSessionIDHandler(SessionIDHandler):
     def get(self, request):
         session_name = None
         if request.cookie and self.cookie_name in request.cookie:
-            session_name = request.cookie[self.cookie_name].value
+            session_name = request.cookie[self.cookie_name]
+            if hasattr(session_name, 'value'):
+                session_name = session_name.value
             session_name = ''.join([c for c in session_name
                                     if c in self._SESSION_NAME_CHARS])
             session_name = session_name[:self._SESSION_NAME_LEN]
