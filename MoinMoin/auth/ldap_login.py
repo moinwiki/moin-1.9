@@ -173,7 +173,6 @@ class LDAPAuth(BaseAuth):
                 # logging.debug("veliki moji problemi sa .")
                 # raise
                 # we remove entries with dn == None to get the real result list:
-<<<<<<< /home/gizmo/moin-1.7/MoinMoin/auth/ldap_login.py.orig.
                 # lusers = [(dn, ldap_dict) for dn, ldap_dict in lusers if dn is not None]
                 # for dn, ldap_dict in lusers:
                 #    logging.debug("dn:%r" % dn)
@@ -188,7 +187,6 @@ class LDAPAuth(BaseAuth):
                 if result_length == 0:
                     logging.debug("Search found no matches for %r." % (filterstr, ))
                     return CancelLogin(_("Invalid username or password."))
-||||||| /tmp/ldap_login.py~base.fraYxV
                 lusers = [(dn, ldap_dict) for dn, ldap_dict in lusers if dn is not None]
                 for dn, ldap_dict in lusers:
                     logging.debug("dn:%r" % dn)
@@ -202,7 +200,6 @@ class LDAPAuth(BaseAuth):
                     if result_length == 0:
                         logging.debug("Search found no matches for %r." % (filterstr, ))
                     return CancelLogin(_("Invalid username or password."))
-=======
                 lusers = [(dn, ldap_dict) for dn, ldap_dict in lusers if dn is not None]
                 for dn, ldap_dict in lusers:
                     logging.debug("dn:%r" % dn)
@@ -216,9 +213,7 @@ class LDAPAuth(BaseAuth):
                     if result_length == 0:
                         logging.debug("Search found no matches for %r." % (filterstr, ))
                     return ContinueLogin(user_obj, _("Invalid username or password."))
->>>>>>> /tmp/ldap_login.py~other.ikLnu4
 
-<<<<<<< /home/gizmo/moin-1.7/MoinMoin/auth/ldap_login.py.orig.
                 #dn, ldap_dict = lusers[0]
                 #if not self.bind_once:
                 #    logging.debug("DN found is %r, trying to bind with pw" % dn)
@@ -256,7 +251,6 @@ class LDAPAuth(BaseAuth):
                 # u.aliasname = aliasname
                 # u.remember_me = 0 # 0 enforces cookie_lifetime config param
                 # logging.debug("creating userprefs with name %r email %r alias %r" % (username, email, aliasname))
-||||||| /tmp/ldap_login.py~base.fraYxV
                 dn, ldap_dict = lusers[0]
                 if not self.bind_once:
                     logging.debug("DN found is %r, trying to bind with pw" % dn)
@@ -294,7 +288,6 @@ class LDAPAuth(BaseAuth):
                 u.aliasname = aliasname
                 u.remember_me = 0 # 0 enforces cookie_lifetime config param
                 logging.debug("creating userprefs with name %r email %r alias %r" % (username, email, aliasname))
-=======
                 dn, ldap_dict = lusers[0]
                 if not self.bind_once:
                     logging.debug("DN found is %r, trying to bind with pw" % dn)
@@ -332,7 +325,6 @@ class LDAPAuth(BaseAuth):
                 u.aliasname = aliasname
                 u.remember_me = 0 # 0 enforces cookie_lifetime config param
                 logging.debug("creating userprefs with name %r email %r alias %r" % (username, email, aliasname))
->>>>>>> /tmp/ldap_login.py~other.ikLnu4
 
             except ldap.INVALID_CREDENTIALS, err:
                 logging.debug("invalid credentials (wrong password?) for dn %r (username: %r)" % (dn, username))

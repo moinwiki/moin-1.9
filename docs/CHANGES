@@ -26,6 +26,11 @@ Known main issues:
     having made a backup with some other, proven method.
     USE BOTH ON YOUR OWN RISK!
 
+Version 1.8-ldapgroups-mmihaljevic
+   Developer notes (these should be moved to the end in the release):
+    * done ldap_login testing - still got skiped tests 
+    * read about python-ldap and searchiing ldap groups - done some coding but not finished functionality  
+
 
 Version 1.7.0current:
 
