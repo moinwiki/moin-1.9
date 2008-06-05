@@ -118,10 +118,9 @@ class LDAPAuth(BaseAuth):
         # we require non-empty password as ldap bind does a anon (not password
         # protected) bind if the password is empty and SUCCEEDS!
         if not password:
-            return ContinueLogin(user_obj, _('Missing password. Please enter user name and password.LDAP'))
+            return ContinueLogin(user_obj, _('Missing password. Please enter user name and password.'))
 
         try:
-            logging.debug("uso ")
             try:
                 u = None
                 dn = None
@@ -167,39 +166,15 @@ class LDAPAuth(BaseAuth):
                 # you can use %(username)s here to get the stuff entered in the form:
                 filterstr = self.search_filter % locals()
                 logging.debug("Searching %r" % filterstr)
-                # try:
-                # lusers = l.search_st(self.base_dn, self.scope, filterstr.encode(coding))
-                # except(ldap.NO_SUCH_OBJECT), err:
-                # logging.debug("veliki moji problemi sa .")
-                # raise
+                attrs = [getattr(self, attr) for attr in [
+                                         'email_attribute',
+                                         'aliasname_attribute',
+                                         'surname_attribute',
+                                         'givenname_attribute',
+                                         ] if getattr(self, attr) is not None]
+                lusers = l.search_st(self.base_dn, self.scope, filterstr.encode(coding),
+                                     attrlist=attrs, timeout=self.timeout)
                 # we remove entries with dn == None to get the real result list:
-                # lusers = [(dn, ldap_dict) for dn, ldap_dict in lusers if dn is not None]
-                # for dn, ldap_dict in lusers:
-                #    logging.debug("dn:%r" % dn)
-                #    for key, val in ldap_dict.items():
-                #        logging.debug("    %r: %r" % (key, val))
-
-                # result_length = len(lusers)
-                # if result_length != 1:
-                #    if result_length > 1:
-                #        logging.debug("Search found more than one (%d) matches for %r." % (result_length, filterstr))
-                result_length = 0
-                if result_length == 0:
-                    logging.debug("Search found no matches for %r." % (filterstr, ))
-                    return CancelLogin(_("Invalid username or password."))
-                lusers = [(dn, ldap_dict) for dn, ldap_dict in lusers if dn is not None]
-                for dn, ldap_dict in lusers:
-                    logging.debug("dn:%r" % dn)
-                    for key, val in ldap_dict.items():
-                        logging.debug("    %r: %r" % (key, val))
-
-                result_length = len(lusers)
-                if result_length != 1:
-                    if result_length > 1:
-                        logging.debug("Search found more than one (%d) matches for %r." % (result_length, filterstr))
-                    if result_length == 0:
-                        logging.debug("Search found no matches for %r." % (filterstr, ))
-                    return CancelLogin(_("Invalid username or password."))
                 lusers = [(dn, ldap_dict) for dn, ldap_dict in lusers if dn is not None]
                 for dn, ldap_dict in lusers:
                     logging.debug("dn:%r" % dn)
@@ -214,80 +189,6 @@ class LDAPAuth(BaseAuth):
                         logging.debug("Search found no matches for %r." % (filterstr, ))
                     return ContinueLogin(user_obj, _("Invalid username or password."))
 
-                #dn, ldap_dict = lusers[0]
-                #if not self.bind_once:
-                #    logging.debug("DN found is %r, trying to bind with pw" % dn)
-                #    l.simple_bind_s(dn, password.encode(coding))
-                #    logging.debug("Bound with dn %r (username: %r)" % (dn, username))
-
-                #if self.email_callback is None:
-                #    if self.email_attribute:
-                #        email = ldap_dict.get(self.email_attribute, [''])[0].decode(coding)
-                #    else:
-                #        email = None
-                # else:
-                #    email = self.email_callback(ldap_dict)
-
-                # aliasname = ''
-                # try:
-                #    aliasname = ldap_dict[self.aliasname_attribute][0]
-                # except (KeyError, IndexError):
-                #    pass
-                # if not aliasname:
-                #    sn = ldap_dict.get(self.surname_attribute, [''])[0]
-                #    gn = ldap_dict.get(self.givenname_attribute, [''])[0]
-                #    if sn and gn:
-                #        aliasname = "%s, %s" % (sn, gn)
-                #    elif sn:
-                #        aliasname = sn
-                # aliasname = aliasname.decode(coding)
-
-                #if email:
-                #    u = user.User(request, auth_username=username, password="{SHA}NotStored", auth_method=self.name, auth_attribs=('name', 'password', 'email', 'mailto_author', ))
-                #   u.email = email
-                # else:
-                #    u = user.User(request, auth_username=username, password="{SHA}NotStored", auth_method=self.name, auth_attribs=('name', 'password', 'mailto_author', ))
-                # u.name = username
-                # u.aliasname = aliasname
-                # u.remember_me = 0 # 0 enforces cookie_lifetime config param
-                # logging.debug("creating userprefs with name %r email %r alias %r" % (username, email, aliasname))
-                dn, ldap_dict = lusers[0]
-                if not self.bind_once:
-                    logging.debug("DN found is %r, trying to bind with pw" % dn)
-                    l.simple_bind_s(dn, password.encode(coding))
-                    logging.debug("Bound with dn %r (username: %r)" % (dn, username))
-
-                if self.email_callback is None:
-                    if self.email_attribute:
-                        email = ldap_dict.get(self.email_attribute, [''])[0].decode(coding)
-                    else:
-                        email = None
-                else:
-                    email = self.email_callback(ldap_dict)
-
-                aliasname = ''
-                try:
-                    aliasname = ldap_dict[self.aliasname_attribute][0]
-                except (KeyError, IndexError):
-                    pass
-                if not aliasname:
-                    sn = ldap_dict.get(self.surname_attribute, [''])[0]
-                    gn = ldap_dict.get(self.givenname_attribute, [''])[0]
-                    if sn and gn:
-                        aliasname = "%s, %s" % (sn, gn)
-                    elif sn:
-                        aliasname = sn
-                aliasname = aliasname.decode(coding)
-
-                if email:
-                    u = user.User(request, auth_username=username, password="{SHA}NotStored", auth_method=self.name, auth_attribs=('name', 'password', 'email', 'mailto_author', ))
-                    u.email = email
-                else:
-                    u = user.User(request, auth_username=username, password="{SHA}NotStored", auth_method=self.name, auth_attribs=('name', 'password', 'mailto_author', ))
-                u.name = username
-                u.aliasname = aliasname
-                u.remember_me = 0 # 0 enforces cookie_lifetime config param
-                logging.debug("creating userprefs with name %r email %r alias %r" % (username, email, aliasname))
                 dn, ldap_dict = lusers[0]
                 if not self.bind_once:
                     logging.debug("DN found is %r, trying to bind with pw" % dn)
