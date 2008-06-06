@@ -13,6 +13,8 @@
 
 import Cookie
 
+from werkzeug.utils import cookie_date
+
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
@@ -317,7 +319,7 @@ class MoinCookieSessionIDHandler(SessionIDHandler):
                 path = '/'
             cookie[cookie_name]['path'] = path
         # Set expires for older clients
-        cookie[cookie_name]['expires'] = request.httpDate(when=expires, rfc='850')
+        cookie[cookie_name]['expires'] = cookie_date(expires)
         return cookie.output()
 
     def _set_cookie(self, request, cookie_string, expires):

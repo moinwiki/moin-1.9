@@ -1446,45 +1446,6 @@ class RequestBase(object):
         '''
         self.include_id, pids = self._include_stack.pop()
 
-    def httpDate(self, when=None, rfc='1123'):
-        """ Returns http date string, according to rfc2068
-
-        See http://www.cse.ohio-state.edu/cgi-bin/rfc/rfc2068.html#sec-3.3
-
-        A http 1.1 server should use only rfc1123 date, but cookie's
-        "expires" field should use the older obsolete rfc850 date.
-
-        Note: we can not use strftime() because that honors the locale
-        and rfc2822 requires english day and month names.
-
-        We can not use email.Utils.formatdate because it formats the
-        zone as '-0000' instead of 'GMT', and creates only rfc1123
-        dates. This is a modified version of email.Utils.formatdate
-        from Python 2.4.
-
-        @param when: seconds from epoch, as returned by time.time()
-        @param rfc: conform to rfc ('1123' or '850')
-        @rtype: string
-        @return: http date conforming to rfc1123 or rfc850
-        """
-        if when is None:
-            when = time.time()
-        now = time.gmtime(when)
-        month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul',
-                 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][now.tm_mon - 1]
-        if rfc == '1123':
-            day = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][now.tm_wday]
-            date = '%02d %s %04d' % (now.tm_mday, month, now.tm_year)
-        elif rfc == '850':
-            day = ["Monday", "Tuesday", "Wednesday", "Thursday",
-                    "Friday", "Saturday", "Sunday"][now.tm_wday]
-            date = '%02d-%s-%s' % (now.tm_mday, month, str(now.tm_year)[-2:])
-        else:
-            raise ValueError("Invalid rfc value: %s" % rfc)
-
-        return '%s, %s %02d:%02d:%02d GMT' % (day, date, now.tm_hour,
-                                              now.tm_min, now.tm_sec)
-
     def disableHttpCaching(self, level=1):
         """ Prevent caching of pages that should not be cached.
 

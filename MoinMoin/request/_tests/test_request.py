@@ -96,18 +96,6 @@ class TestGroupPages(object):
                 result = self.request.normalizePagename(test)
                 assert result == expected
 
-
-class TestHTTPDate(object):
-
-    def testRFC1123Date(self):
-        """ request: httpDate default rfc1123 """
-        assert self.request.httpDate(0) == 'Thu, 01 Jan 1970 00:00:00 GMT'
-
-    def testRFC850Date(self):
-        """ request: httpDate rfc850 """
-        assert self.request.httpDate(0, rfc='850') == 'Thursday, 01-Jan-70 00:00:00 GMT'
-
-
 class TestHTTPHeaders(object):
     std_headers = ['Status: 200 OK', 'Content-type: text/html; charset=%s' % config.charset]
 
