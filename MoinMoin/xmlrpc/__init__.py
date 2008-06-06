@@ -132,7 +132,7 @@ class XmlRpcBase:
                 # we do not handle xmlrpc v1 and v2 differently
                 response = xmlrpclib.Fault(1, "This moin wiki does not allow xmlrpc method calls.")
             else:
-                data = self.request.read()
+                data = self.request.read(self.request.content_length)
 
                 try:
                     params, method = xmlrpclib.loads(data)
