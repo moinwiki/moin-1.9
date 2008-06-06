@@ -27,6 +27,12 @@ Known main issues:
     USE BOTH ON YOUR OWN RISK!
 
 
+Version 1.7.0current:
+
+  Bug Fixes:
+    * fix xmlrpc request.read() call to use content-length header, if available
+
+
 Version 1.7.0rc2:
 
   Bug Fixes:

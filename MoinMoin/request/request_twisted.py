@@ -7,6 +7,9 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin.request import RequestBase, MoinMoinFinish, RemoteClosedConnection
 
 class Request(RequestBase):
@@ -21,6 +24,10 @@ class Request(RequestBase):
             self.http_accept_language = self.twistd.getHeader('Accept-Language')
             self.saved_cookie = self.twistd.getHeader('Cookie')
             self.http_user_agent = self.twistd.getHeader('User-Agent')
+            try:
+                self.content_length = int(self.twistd.getHeader('Content-Length'))
+            except (TypeError, ValueError):
+                self.content_length = None
             self.if_modified_since = self.twistd.getHeader('If-Modified-Since')
             self.if_none_match = self.twistd.getHeader('If-None-Match')
 
@@ -73,7 +80,7 @@ class Request(RequestBase):
         # All of the arguments, including URL and POST arguments (using keep_blank_values=1 internally).
         return self.decodeArgs(self.twistd.args)
 
-    def read(self, n=None):
+    def read(self, n):
         """ Read from input stream. """
         # XXX why is that wrong?:
         #rd = self.reactor.callFromThread(self.twistd.read)
@@ -82,6 +89,7 @@ class Request(RequestBase):
         # XXX if yes, why doesn't it work?
         self.twistd.content.seek(0, 0)
         if n is None:
+            logging.warning("calling request.read(None) might block")
             rd = self.twistd.content.read()
         else:
             rd = self.twistd.content.read(n)
