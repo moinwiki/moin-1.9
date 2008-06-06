@@ -41,9 +41,9 @@ class TestFootNote:
         """ module_tested: enumbering of Footnotes"""
         m = self._make_macro()
         text = 'a'
-        FootNote.macro_FootNote(m, text)
+        FootNote.execute(m, text)
         text = 'b'
-        FootNote.macro_FootNote(m, text)
+        FootNote.execute(m, text)
         result = FootNote.emit_footnotes(m.request, m.request.formatter)
 
         assert result.endswith('2</a>)</li></ol></div>')
