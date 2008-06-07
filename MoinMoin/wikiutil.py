@@ -709,14 +709,14 @@ def isTemplatePage(request, pagename):
     return request.cfg.cache.page_template_regexact.search(pagename) is not None
 
 
-def isGroupPage(request, pagename):
+def isGroupPage(pagename, cfg):
     """ Is this a name of group page?
 
     @param pagename: the page name
     @rtype: bool
     @return: true if page is a form page
     """
-    return request.cfg.cache.page_group_regexact.search(pagename) is not None
+    return cfg.cache.page_group_regexact.search(pagename) is not None
 
 
 def filterCategoryPages(request, pagelist):
@@ -2222,6 +2222,47 @@ class ParameterParser:
 #############################################################################
 ### Misc
 #############################################################################
+def normalize_pagename(name, cfg):
+    """ Normalize page name
+
+    Prevent creating page names with invisible characters or funny
+    whitespace that might confuse the users or abuse the wiki, or
+    just does not make sense.
+
+    Restrict even more group pages, so they can be used inside acl lines.
+
+    @param name: page name, unicode
+    @rtype: unicode
+    @return: decoded and sanitized page name
+    """
+    # Strip invalid characters
+    name = config.page_invalid_chars_regex.sub(u'', name)
+
+    # Split to pages and normalize each one
+    pages = name.split(u'/')
+    normalized = []
+    for page in pages:
+        # Ignore empty or whitespace only pages
+        if not page or page.isspace():
+            continue
+
+        # Cleanup group pages.
+        # Strip non alpha numeric characters, keep white space
+        if isGroupPage(page, cfg):
+            page = u''.join([c for c in page
+                             if c.isalnum() or c.isspace()])
+
+        # Normalize white space. Each name can contain multiple
+        # words separated with only one space. Split handle all
+        # 30 unicode spaces (isspace() == True)
+        page = u' '.join(page.split())
+
+        normalized.append(page)
+
+    # Assemble components into full pagename
+    name = u'/'.join(normalized)
+    return name
+
 def taintfilename(basename):
     """
     Make a filename that is supposed to be a plain name secure, i.e.

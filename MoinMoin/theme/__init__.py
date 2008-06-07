@@ -361,7 +361,7 @@ class ThemeBase:
             pass
 
         # Handle regular pagename like "FrontPage"
-        pagename = request.normalizePagename(pagename)
+        pagename = wikiutil.normalize_pagename(pagename, request.cfg)
 
         # Use localized pages for the current user
         if localize:
