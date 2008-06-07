@@ -8,7 +8,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import re, time
+import re, time, inspect
 
 from werkzeug.utils import Headers, http_date
 
@@ -89,14 +89,35 @@ class HTTPContext(Context, RequestBase):
         return getattr(self._wsgirequest, name)
 
     def __setattr__(self, name, value):
-        logging.debug("Setting attribute '%s' to value '%r'", name, value)
+        stack = inspect.stack()
+        parent = stack[1]
+        caller, filename, lineno = parent[3], parent[1], parent[0].f_lineno
+        logging.debug("Setting attribute '%s' to value '%r' by '%s' "
+                      "in file '%s',line '%s'", name, value, caller,
+                      filename, lineno)
         self.__dict__[name] = value
     
     # compatibility wrapping
-    cookie = Request.cookies
-    script_name = Request.script_root
-    request_method = Request.method
-    path_info = Request.path
+    def cookie(self):
+        return self._wsgirequest.cookies
+    cookie = property(cookie)
+
+    def script_name(self):
+        return self._wsgirequest.script_root
+    script_name = property(script_name)
+
+    def request_method(self):
+        return self._wsgirequest.method
+    request_method = property(request_method)
+
+    def path_info(self):
+        return self._wsgirequest.path
+    path_info = property(path_info)
+
+    def is_ssl(self):
+        return self._wsgirequest.is_secure
+    is_ssl = property(is_ssl)
+    
 
     def setHttpHeader(self, header):
         header, value = header.split(':', 1)
@@ -136,8 +157,6 @@ class HTTPContext(Context, RequestBase):
         pass
 
 # mangle in logging of function calls
-import inspect
-
 def _logfunc(func):
     def _decorated(*args, **kwargs):
         stack = inspect.stack()
@@ -153,6 +172,7 @@ def _logfunc(func):
 from types import FunctionType
 
 for name, item in RequestBase.__dict__.items():
-    if isinstance(item, FunctionType):
-        setattr(RequestBase, name, _logfunc(item))
+   if isinstance(item, FunctionType):
+       setattr(RequestBase, name, _logfunc(item))
 del name, item, FunctionType, _logfunc
+
