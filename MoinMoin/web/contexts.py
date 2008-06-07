@@ -23,7 +23,19 @@ STATUS_CODE_RE = re.compile('Status:\s*(\d{3,3})', re.IGNORECASE)
 class Context(object):
     pass
 
-class HTTPContext(Context, RequestBase):
+class EnvironContext(Context):
+    def __init__(self, environ):
+        request = environ.get('werkzeug.request')
+        if request and isinstance(request, Request):
+            self._wsgirequest = request
+        else:
+            self._wsgirequest = Request(environ)
+        self.environ = environ
+
+class XMLRPCContext(EnvironContext):
+    pass
+
+class HTTPContext(EnvironContext, RequestBase):
     """ Lowermost context for MoinMoin.
 
     Contains code related to manipulation of HTTP related data like:
@@ -32,11 +44,9 @@ class HTTPContext(Context, RequestBase):
     * GET/POST/PUT/etc data
     """
     def __init__(self, environ):
-        self._wsgirequest = Request(environ)
-        self.environ = environ
+        EnvironContext.__init__(self, environ)
         self.__output = []
         self.headers = Headers()
-
         self.status = 200
 
         # compat properties (remove when not necessary anymore)
