@@ -94,7 +94,7 @@ class FormatterBase:
             return ''
         if not pagename and page:
             pagename = page.page_name
-        pagename = self.request.normalizePagename(pagename)
+        pagename = wikiutil.normalize_pagename(pagename, self.request.cfg)
         if pagename and pagename not in self.pagelinks:
             self.pagelinks.append(pagename)
 

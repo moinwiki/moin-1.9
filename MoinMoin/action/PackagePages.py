@@ -187,7 +187,7 @@ class PackagePages:
 
         pages = []
         for pagename in pagelist:
-            pagename = self.request.normalizePagename(pagename)
+            pagename = wikiutil.normalize_pagename(pagename, self.request.cfg)
             if pagename:
                 page = Page(self.request, pagename)
                 if page.exists() and self.request.user.may.read(pagename):
