@@ -23,12 +23,6 @@ from MoinMoin.Page import Page
 from MoinMoin import config, wikiutil
 from MoinMoin.search.builtin import BaseIndex
 
-try:
-    # PyStemmer, snowball python bindings from http://snowball.tartarus.org/
-    from Stemmer import Stemmer
-except ImportError:
-    Stemmer = None
-
 
 class UnicodeQuery(Query):
     """ Xapian query object which automatically encodes unicode strings """
@@ -98,10 +92,13 @@ class WikiAnalyzer:
         @param language: if given, the language in which to stem words
         """
         self.stemmer = None
-        if request and request.cfg.xapian_stemming and language and Stemmer:
+        if request and request.cfg.xapian_stemming and language:
             try:
-                self.stemmer = Stemmer(language)
-            except (KeyError, TypeError):
+                stemmer = xapian.Stem(language)
+                # we need this wrapper because the stemmer returns a utf-8
+                # encoded string even when it gets fed with unicode objects:
+                self.stemmer = lambda word: stemmer(word).decode('utf-8')
+            except xapian.InvalidArgumentError:
                 # lang is not stemmable or not available
                 pass
 
@@ -163,9 +160,9 @@ class WikiAnalyzer:
             if flat_stemming:
                 yield (word, pos)
                 if self.stemmer:
-                    yield (self.stemmer.stemWord(word), pos)
+                    yield (self.stemmer(word), pos)
             else:
-                yield (word, self.stemmer.stemWord(word), pos)
+                yield (word, self.stemmer(word), pos)
 
 
 #############################################################################
@@ -217,18 +214,11 @@ class Index(BaseIndex):
         self._check_version()
         BaseIndex.__init__(self, request)
 
-        # Check if we should and can stem words
-        if request.cfg.xapian_stemming and not Stemmer:
-            request.cfg.xapian_stemming = False
-
     def _check_version(self):
         """ Checks if the correct version of Xapian is installed """
         # every version greater than or equal to XAPIAN_MIN_VERSION is allowed
-        XAPIAN_MIN_VERSION = (0, 9, 6)
-        try:
-            major, minor, revision = xapian.major_version(), xapian.minor_version(), xapian.revision()
-        except AttributeError:
-            major, minor, revision = xapian.xapian_major_version(), xapian.xapian_minor_version(), xapian.xapian_revision() # deprecated since xapian 0.9.6, removal in 1.1.0
+        XAPIAN_MIN_VERSION = (1, 0, 0)
+        major, minor, revision = xapian.major_version(), xapian.minor_version(), xapian.revision()
         if (major, minor, revision) >= XAPIAN_MIN_VERSION:
             return
 
@@ -393,22 +383,15 @@ class Index(BaseIndex):
         lang = None
         default_lang = page.request.cfg.language_default
 
-        # if we should stem, we check if we have stemmer for the
-        # language available
+        # if we should stem, we check if we have stemmer for the language available
         if page.request.cfg.xapian_stemming:
             lang = page.pi['language']
-            # Stemmer(lang) has an exception bug if the language is not available
-            # TypeError: exceptions must be strings, classes, or instances, not exceptions.KeyError
             try:
-                Stemmer(lang)
+                xapian.Stem(lang)
                 # if there is no exception, lang is stemmable
                 return (lang, lang)
-            except KeyError:
+            except xapian.InvalidArgumentError:
                 # lang is not stemmable
-                pass
-            except TypeError:
-                # Stemmer(lang) has an exception bug if the language is not available
-                # TypeError: exceptions must be strings, classes, or instances,
                 pass
 
         if not lang:
