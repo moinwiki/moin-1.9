@@ -519,10 +519,7 @@ class Search:
 
                 clock.start('_xapianQuery')
                 query = self.query.xapian_term(self.request, index.allterms)
-                try:
-                    description = query.get_description() # deprecated since xapian 1.0, removal in 1.1
-                except AttributeError:
-                    description = str(query)
+                description = str(query)
                 logging.debug("_xapianSearch: query = %r" % description)
                 query = xapwrap.index.QObjQuery(query)
                 enq, mset, hits = index.search(query, sort=self.sort,

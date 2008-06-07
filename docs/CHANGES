@@ -33,6 +33,13 @@ Version 1.7.0current:
     * Fix xmlrpc request.read() call to use content-length header, if available.
     * Fix traceback in filesys.py on Mac OS X when import Carbon fails.
 
+  Other changes:
+    * HINT: If you want to use xapian based indexed search, you need to have
+            Xapian >= 1.0.0.
+    * Removed dependency on PyStemmer (we just use the stemmer built into
+      Xapian (it uses utf-8 since 1.0.0, so we can use it)).
+
+
 Version 1.7.0rc2:
 
   Bug Fixes:

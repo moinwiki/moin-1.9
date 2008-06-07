@@ -130,9 +130,18 @@ class SystemInfo:
         from MoinMoin.search.builtin import Search
         xapState = (_('Disabled'), _('Enabled'))
         idxState = (_('index available'), _('index unavailable'))
-        xapRow = xapState[request.cfg.xapian_search]
 
-        if request.cfg.xapian_search:
+        xapian_enabled = request.cfg.xapian_search
+        xapRow = xapState[xapian_enabled]
+        try:
+            import xapian
+            xapVersion = 'Xapian %s' % xapian.version_string()
+        except ImportError:
+            xapian = None
+            xapVersion = _('Xapian and/or Python Xapian bindings not installed')
+        xapRow += ', %s' % xapVersion
+
+        if xapian and xapian_enabled:
             idx = Search._xapianIndex(request)
             available = idx and idxState[0] or idxState[1]
             mtime = _('last modified: %s') % (idx and
@@ -141,32 +150,12 @@ class SystemInfo:
                     _('N/A'))
             xapRow += ', %s, %s' % (available, mtime)
 
-        try:
-            import xapian
-            try:
-                xapVersion = xapian.version_string()
-            except AttributeError:
-                xapVersion = xapian.xapian_version_string() # deprecated since xapian 0.9.6, removal in 1.1.0
-        except ImportError:
-            xapVersion = _('Xapian and/or Python Xapian bindings not installed')
-
         row(_('Xapian search'), xapRow)
-        row(_('Xapian Version'), xapVersion)
 
-        stems = [nonestr]
-        try:
-            import Stemmer
-            try:
-                stems = Stemmer.algorithms()
-                stemVersion = Stemmer.version()
-            except:
-                stemVersion = _('PyStemmer not installed')
-        except ImportError:
-            stemVersion = _('PyStemmer not installed')
-
-        row(_('Stemming for Xapian'), xapState[request.cfg.xapian_stemming])
-        row(_('PyStemmer Version'), stemVersion)
-        row(_('PyStemmer stems'), ', '.join(stems) or nonestr)
+        if xapian and xapian_enabled:
+            stems = xapian.Stem.get_available_languages()
+            row(_('Stemming for Xapian'), xapState[request.cfg.xapian_stemming] +
+                " (%s)" % (stems or nonestr))
 
         try:
             from threading import activeCount
