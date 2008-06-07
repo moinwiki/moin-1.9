@@ -46,9 +46,6 @@ def _request_init(request):
     from MoinMoin.Page import RootPage
     request.rootpage = RootPage(request)
 
-    from MoinMoin.logfile import editlog
-    request.editlog = editlog.EditLog(request)
-
     from MoinMoin import i18n
     request.i18n = i18n
     i18n.i18n_init(request)

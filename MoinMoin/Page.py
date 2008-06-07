@@ -109,7 +109,8 @@ class ItemCache:
             (for 'meta') or the complete cache ('pagelists').
             @param request: the request object
         """
-        elog = request.editlog
+        from MoinMoin.logfile import editlog
+        elog = editlog.EditLog(request)
         old_pos = self.log_pos
         new_pos, items = elog.news(old_pos)
         if items:
