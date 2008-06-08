@@ -19,11 +19,12 @@
 
 var MoinToolbarFontFormatCombo = function()
 {
- this.Command =  FCKCommands.GetCommand('FontFormat');
+ this.CommandName = 'FontFormat';
+ this.Command =  FCKCommands.GetCommand(this.CommandName);
 }
 
 // Inherit from MoinToolbarSpecialCombo.
-MoinToolbarFontFormatCombo.prototype = new FCKToolbarSpecialCombo;
+MoinToolbarFontFormatCombo.prototype = new FCKToolbarSpecialCombo();
 
 MoinToolbarFontFormatCombo.prototype.GetLabel = function()
 {

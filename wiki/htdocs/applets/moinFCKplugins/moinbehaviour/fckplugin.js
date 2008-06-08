@@ -59,6 +59,8 @@ function Doc_OnKeyUp_IE()
  * ##########################################################################
  */
 
+/*
+// TODO FCK.EditorDocument is seems like deprecated, find alternative method for replace
 if (FCK.EditorDocument.attachEvent) // IE
 {
   FCK.EditorDocument.attachEvent('onkeydown', Doc_OnKeyDown_IE);
@@ -66,3 +68,4 @@ if (FCK.EditorDocument.attachEvent) // IE
 
 }
 
+*/

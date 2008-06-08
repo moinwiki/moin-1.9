@@ -326,7 +326,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 <script type="text/javascript" src="%(fckbasepath)s/fckeditor.js"></script>
 <script type="text/javascript">
 <!--
-    var oFCKeditor = new FCKeditor( 'savetext', '100%%', %(editor_size)s) ;
+    var oFCKeditor = new FCKeditor( 'savetext', '100%%', %(editor_size)s, 'MoinDefault' ) ;
     oFCKeditor.BasePath= '%(fckbasepath)s/' ;
     oFCKeditor.Config['WikiBasePath'] = '%(wikiurl)s' ;
     oFCKeditor.Config['WikiPage'] = '%(wikipage)s' ;

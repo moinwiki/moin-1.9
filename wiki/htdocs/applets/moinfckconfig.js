@@ -2,7 +2,7 @@
  * FCKeditor - Configuration for usage within MoinMoin wiki engine
  */
 
-FCKConfig.Debug = true ;
+FCKConfig.Debug = false ;
 
 FCKConfig.StylesXmlPath	= '../../moinfckstyles.xml' ;
 

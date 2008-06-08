@@ -301,8 +301,10 @@ function dbw_hide_buttons() {
         for (var eidx = 0; eidx < form.elements.length; eidx++) {
             elem = form.elements[eidx];
             name = elem.name;
-            if (name.substr(0,4) == 'dbw.' && name.substr(-7) == '.submit')
-                elem.style.display = 'none';
+			if (name) {
+				if (name.substr(0,4) == 'dbw.' && name.substr(-7) == '.submit')
+					elem.style.display = 'none';
+			}
         }
     }
 }
