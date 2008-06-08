@@ -164,7 +164,7 @@ class XmlRpcBase:
                 # wrap response in a singleton tuple
                 response = (response, )
                 # serialize it
-                response = xmlrpclib.dumps(response, methodresponse=1)
+                response = xmlrpclib.dumps(response, methodresponse=1, allow_none=True)
 
         self.request.emit_http_headers([
             "Content-Type: text/xml; charset=utf-8",
