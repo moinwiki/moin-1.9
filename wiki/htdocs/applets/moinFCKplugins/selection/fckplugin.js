@@ -11,14 +11,13 @@ function showObj(title, obj)
 }
 
 // --------------------------------
-
-if (FCK.EditorWindow.getSelection) // Gecko
+if (FCKSelection.GetSelection) // Gecko
 { 
   // assume exactly one selection
   
   FCKSelection.GetStartNode = function()
     {
-      var oSelection = FCK.EditorWindow.getSelection();
+      var oSelection = FCKSelection.GetSelection();
       var oContainer = oSelection.getRangeAt(0).startContainer;
       var iOffset = oSelection.getRangeAt(0).startOffset;
       if (oContainer.childNodes.length>iOffset) 
@@ -30,12 +29,12 @@ if (FCK.EditorWindow.getSelection) // Gecko
   // only valid if GetStartNode() returns text node
   FCKSelection.GetStartOffset = function()
     {
-      var oSelection = FCK.EditorWindow.getSelection();
+      var oSelection = FCKSelection.GetSelection();
       return oSelection.getRangeAt(0).startOffset;    
     }
   FCKSelection.GetEndNode = function()
     {
-      var oSelection = FCK.EditorWindow.getSelection();
+      var oSelection = FCKSelection.GetSelection();
       var oContainer = oSelection.getRangeAt(0).endContainer;
       var iOffset = oSelection.getRangeAt(0).startEndset;
       if (oContainer.childNodes.length>iOffset) 
@@ -47,17 +46,17 @@ if (FCK.EditorWindow.getSelection) // Gecko
   // only valid if GetEndNode() returns text node
   FCKSelection.GetEndOffset = function()
     {
-      var oSelection = FCK.EditorWindow.getSelection();
+      var oSelection = FCKSelection.GetSelection();
       return oSelection.getRangeAt(0).endOffset;    
     }
   FCKSelection.IsCollapsed = function()
     {
-      var oSelection = FCK.EditorWindow.getSelection();
+      var oSelection = FCKSelection.GetSelection();
       return oSelection.getRangeAt(0).collapsed;    
     }
   FCKSelection.GetText = function()
     {
-      return FCK.EditorWindow.getSelection().toString();
+      return FCKSelection.GetSelection().toString();
     }
 }
 /* ##########################################################################
