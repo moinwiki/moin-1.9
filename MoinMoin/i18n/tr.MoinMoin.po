@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin-1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 19:16+0200\n"
+"POT-Creation-Date: 2008-06-08 20:12+0200\n"
 "PO-Revision-Date: 2007-04-25 16:26+0300\n"
 "Last-Translator: Ekrem SEREN <ekrem.seren@parduslinux.org>\n"
 "Language-Team: Türkçe\n"
@@ -499,6 +499,9 @@ msgstr "[boş]"
 
 msgid "filter"
 msgstr "süzgeç"
+
+msgid "about"
+msgstr ""
 
 #, fuzzy, python-format
 msgid ""
@@ -1721,31 +1724,17 @@ msgstr "dizin müsait"
 msgid "index unavailable"
 msgstr "dizin kullanılamaz"
 
-msgid "N/A"
-msgstr "Bilinmiyor"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "Xapian ve/veya Python Xapian bağlayıcı(lar)ı yüklü değil"
+
+msgid "N/A"
+msgstr "Bilinmiyor"
 
 msgid "Xapian search"
 msgstr "Xapian arama"
 
-msgid "Xapian Version"
-msgstr "Xapian Sürümü"
-
-msgid "PyStemmer not installed"
-msgstr ""
-
 msgid "Stemming for Xapian"
 msgstr ""
-
-#, fuzzy
-msgid "PyStemmer Version"
-msgstr "Python Sürümü"
-
-#, fuzzy
-msgid "PyStemmer stems"
-msgstr "Python Sürümü"
 
 msgid "Active threads"
 msgstr "Etkin yivler"
@@ -2985,6 +2974,17 @@ msgstr ""
 
 msgid "Login and try again."
 msgstr "Giriş yapın ve tekrar deneyin."
+
+#~ msgid "Xapian Version"
+#~ msgstr "Xapian Sürümü"
+
+#, fuzzy
+#~ msgid "PyStemmer Version"
+#~ msgstr "Python Sürümü"
+
+#, fuzzy
+#~ msgid "PyStemmer stems"
+#~ msgstr "Python Sürümü"
 
 #, fuzzy
 #~ msgid "New Page or New Attachment"

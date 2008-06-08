@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 19:16+0200\n"
+"POT-Creation-Date: 2008-06-08 20:12+0200\n"
 "PO-Revision-Date: 2008-05-12 15:58-0400\n"
 "Last-Translator: Igor Miletic <grejigl-gnomeprevod@yahoo.ca>\n"
 "Language-Team: Serbian <fedora-trans-sr@redhat.com>\n"
@@ -495,6 +495,9 @@ msgstr "[празно]"
 
 msgid "filter"
 msgstr "филтер"
+
+msgid "about"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1730,29 +1733,17 @@ msgstr "индекс доступан"
 msgid "index unavailable"
 msgstr "индекс недоступан"
 
-msgid "N/A"
-msgstr "Нема података"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "Xapian и/или Python Xapian везе нису инсталиране"
+
+msgid "N/A"
+msgstr "Нема података"
 
 msgid "Xapian search"
 msgstr "Xapian претрага"
 
-msgid "Xapian Version"
-msgstr "MoinMoin верзија"
-
-msgid "PyStemmer not installed"
-msgstr "PyStemmer није инсталиран"
-
 msgid "Stemming for Xapian"
 msgstr "Разкорењавање за Xapian"
-
-msgid "PyStemmer Version"
-msgstr "PyStemmer верзија"
-
-msgid "PyStemmer stems"
-msgstr "PyStemmer коренови"
 
 msgid "Active threads"
 msgstr "Активни низови"
@@ -2993,6 +2984,18 @@ msgstr "Није вам дозвољено да %(action_name)s на овој с
 
 msgid "Login and try again."
 msgstr "Пријавите се и покушајте поново"
+
+#~ msgid "Xapian Version"
+#~ msgstr "MoinMoin верзија"
+
+#~ msgid "PyStemmer not installed"
+#~ msgstr "PyStemmer није инсталиран"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "PyStemmer верзија"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "PyStemmer коренови"
 
 #~ msgid "New Page or New Attachment"
 #~ msgstr "Нова страница или нови прилог"

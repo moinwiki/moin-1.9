@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 19:16+0200\n"
+"POT-Creation-Date: 2008-06-08 20:12+0200\n"
 "PO-Revision-Date: 2004-12-05 22:41+0100\n"
 "Last-Translator: Jun Hu <j.hu@tue.nl>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -466,6 +466,9 @@ msgstr "[空白]"
 
 msgid "filter"
 msgstr "过滤器"
+
+msgid "about"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1683,29 +1686,17 @@ msgstr "索引可用"
 msgid "index unavailable"
 msgstr "索引不可用"
 
-msgid "N/A"
-msgstr "无"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "Xapian和/或其Python绑定未安装"
+
+msgid "N/A"
+msgstr "无"
 
 msgid "Xapian search"
 msgstr "Xapian搜索"
 
-msgid "Xapian Version"
-msgstr "Xapian版本"
-
-msgid "PyStemmer not installed"
-msgstr "PyStemmer未安装"
-
 msgid "Stemming for Xapian"
 msgstr ""
-
-msgid "PyStemmer Version"
-msgstr "PyStemmer版本"
-
-msgid "PyStemmer stems"
-msgstr "PyStemmer词干"
 
 msgid "Active threads"
 msgstr "活跃线程"
@@ -2895,6 +2886,18 @@ msgstr "您无权对此网页进行%(action_name)s操作."
 
 msgid "Login and try again."
 msgstr "请登录后再试."
+
+#~ msgid "Xapian Version"
+#~ msgstr "Xapian版本"
+
+#~ msgid "PyStemmer not installed"
+#~ msgstr "PyStemmer未安装"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "PyStemmer版本"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "PyStemmer词干"
 
 #~ msgid "New Page or New Attachment"
 #~ msgstr "新网页或新附件"

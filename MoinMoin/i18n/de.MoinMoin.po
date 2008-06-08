@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 19:16+0200\n"
+"POT-Creation-Date: 2008-06-08 20:12+0200\n"
 "PO-Revision-Date: 2008-05-12 14:33+0200\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-user@lists.sourceforge.net>\n"
@@ -503,13 +503,16 @@ msgstr "[leer]"
 msgid "filter"
 msgstr "Filter"
 
+msgid "about"
+msgstr "ungefähr"
+
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
 "%(be)s results out of about %(pages)d pages."
 msgstr ""
 "Ergebnisse %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s von %(aboutHits)s %(bs)s%"
-"(hits)d%(be)s Ergebnisse aus ungefähr %(pages)d Seiten."
+"(hits)d%(be)s Ergebnissen aus ungefähr %(pages)d Seiten."
 
 msgid "seconds"
 msgstr "Sekunden"
@@ -1735,29 +1738,17 @@ msgstr "Index verfügbar"
 msgid "index unavailable"
 msgstr "Index nicht verfügbar"
 
-msgid "N/A"
-msgstr "k.A."
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "Xapian und/oder Python-Xapian-Bindings nicht installiert"
+
+msgid "N/A"
+msgstr "k.A."
 
 msgid "Xapian search"
 msgstr "Xapian-Suche"
 
-msgid "Xapian Version"
-msgstr "Xapian-Version"
-
-msgid "PyStemmer not installed"
-msgstr "PyStemmer ist nicht installiert"
-
 msgid "Stemming for Xapian"
 msgstr "Stamm-Bildung für Xapian"
-
-msgid "PyStemmer Version"
-msgstr "PyStemmer Version"
-
-msgid "PyStemmer stems"
-msgstr "PyStemmer Stämme"
 
 msgid "Active threads"
 msgstr "Aktive Threads"
@@ -3039,6 +3030,18 @@ msgstr "Sie dürfen die Aktion %(action_name)s auf dieser Seite nicht benutzen!"
 
 msgid "Login and try again."
 msgstr "Melden Sie sich an und probieren Sie es noch einmal."
+
+#~ msgid "Xapian Version"
+#~ msgstr "Xapian-Version"
+
+#~ msgid "PyStemmer not installed"
+#~ msgstr "PyStemmer ist nicht installiert"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "PyStemmer Version"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "PyStemmer Stämme"
 
 #~ msgid "XML RPC error: %s"
 #~ msgstr "XML-RPC-Fehler: %s"

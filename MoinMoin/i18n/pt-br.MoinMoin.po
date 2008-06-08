@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 19:16+0200\n"
+"POT-Creation-Date: 2008-06-08 20:12+0200\n"
 "PO-Revision-Date: 2007-11-20 23:40+0000\n"
 "Last-Translator: Evandro Villa Verde <evandro.villaverde.hackerteen@gmail."
 "com>\n"
@@ -491,6 +491,9 @@ msgstr "[vazio]"
 
 msgid "filter"
 msgstr "filtro"
+
+msgid "about"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1719,29 +1722,17 @@ msgstr "índice disponível"
 msgid "index unavailable"
 msgstr "índice não disponível"
 
-msgid "N/A"
-msgstr "N/D"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "Xapian e/ou o bindings Python Xapian não está instalado"
+
+msgid "N/A"
+msgstr "N/D"
 
 msgid "Xapian search"
 msgstr "Busca com Xapian"
 
-msgid "Xapian Version"
-msgstr "Versão do Xapian"
-
-msgid "PyStemmer not installed"
-msgstr "PyStemmer não instalado"
-
 msgid "Stemming for Xapian"
 msgstr "Stemming para Xapian"
-
-msgid "PyStemmer Version"
-msgstr "Versão PyStemmer"
-
-msgid "PyStemmer stems"
-msgstr "PyStemmer stems"
 
 msgid "Active threads"
 msgstr "Ativar threads"
@@ -2993,6 +2984,18 @@ msgstr "Você não tem permissão para fazer %(action_name)s nesta página."
 
 msgid "Login and try again."
 msgstr "Entre com o login e tente novamente."
+
+#~ msgid "Xapian Version"
+#~ msgstr "Versão do Xapian"
+
+#~ msgid "PyStemmer not installed"
+#~ msgstr "PyStemmer não instalado"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "Versão PyStemmer"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "PyStemmer stems"
 
 #~ msgid "New Page or New Attachment"
 #~ msgstr "Nova Página ou Novo Anexo"

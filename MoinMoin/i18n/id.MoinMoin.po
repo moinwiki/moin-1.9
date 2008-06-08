@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 19:16+0200\n"
+"POT-Creation-Date: 2008-06-08 20:12+0200\n"
 "PO-Revision-Date: 2006-10-07 23:19+0700\n"
 "Last-Translator: Fajrin Azis <fajrin.azis@gmail.com>\n"
 "Language-Team: Indonesian <id@ll.com>\n"
@@ -497,6 +497,9 @@ msgstr "[kosong]"
 
 msgid "filter"
 msgstr "saring"
+
+msgid "about"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1724,29 +1727,17 @@ msgstr "indeks tersedia"
 msgid "index unavailable"
 msgstr "indeks tidak tersedia"
 
-msgid "N/A"
-msgstr "T/A"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "Jilidan Xapian dan/atau Python Xapian tidak ter-install"
+
+msgid "N/A"
+msgstr "T/A"
 
 msgid "Xapian search"
 msgstr "Pencarian xapian"
 
-msgid "Xapian Version"
-msgstr "Versi Xapian"
-
-msgid "PyStemmer not installed"
-msgstr "PyStemmer tidek ter-install"
-
 msgid "Stemming for Xapian"
 msgstr "Stemming untuk Xapian"
-
-msgid "PyStemmer Version"
-msgstr "Versi PyStemmer"
-
-msgid "PyStemmer stems"
-msgstr "Stem PyStemmer"
 
 msgid "Active threads"
 msgstr "Thread aktif"
@@ -2987,6 +2978,18 @@ msgstr ""
 
 msgid "Login and try again."
 msgstr "Login dan coba lagi."
+
+#~ msgid "Xapian Version"
+#~ msgstr "Versi Xapian"
+
+#~ msgid "PyStemmer not installed"
+#~ msgstr "PyStemmer tidek ter-install"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "Versi PyStemmer"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "Stem PyStemmer"
 
 #~ msgid "New Page or New Attachment"
 #~ msgstr "Halaman Baru atau Lampiran Baru"

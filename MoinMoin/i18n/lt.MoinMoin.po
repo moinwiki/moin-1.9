@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 19:16+0200\n"
+"POT-Creation-Date: 2008-06-08 20:12+0200\n"
 "PO-Revision-Date: 2007-12-01 00:00+0200\n"
 "Last-Translator: Aurelijus Sudzius <ruledbyfate@gmail.com>\n"
 "Language-Team: Lithuanian <ruledbyfate@gmail.com>\n"
@@ -491,6 +491,9 @@ msgstr "[tušti]"
 
 msgid "filter"
 msgstr "filtras"
+
+msgid "about"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1719,29 +1722,17 @@ msgstr "indeksas prieinamas"
 msgid "index unavailable"
 msgstr "indeksas neprieinamas"
 
-msgid "N/A"
-msgstr "N/A"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "Xapian ir/ar Python Xapian susiejimai neįdiegti"
+
+msgid "N/A"
+msgstr "N/A"
 
 msgid "Xapian search"
 msgstr "Xapian paieška"
 
-msgid "Xapian Version"
-msgstr "Xapian versija"
-
-msgid "PyStemmer not installed"
-msgstr "PyStemmer neįdiegtas"
-
 msgid "Stemming for Xapian"
 msgstr "Sulaikyti Xapian"
-
-msgid "PyStemmer Version"
-msgstr "PyStemmer versija"
-
-msgid "PyStemmer stems"
-msgstr "PyStemmer stiebai"
 
 msgid "Active threads"
 msgstr "Aktyvios gijos"
@@ -2983,6 +2974,18 @@ msgstr "Jums neleidžiama vykdyti %(action_name)s šiame puslapyje."
 
 msgid "Login and try again."
 msgstr "Prisijunkite ir bandykite dar kartą."
+
+#~ msgid "Xapian Version"
+#~ msgstr "Xapian versija"
+
+#~ msgid "PyStemmer not installed"
+#~ msgstr "PyStemmer neįdiegtas"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "PyStemmer versija"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "PyStemmer stiebai"
 
 #~ msgid "New Page or New Attachment"
 #~ msgstr "Naujas puslapis arba priedas"
