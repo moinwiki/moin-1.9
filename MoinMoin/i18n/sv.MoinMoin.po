@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 19:16+0200\n"
-"PO-Revision-Date: 2008-05-19 16:30+0200\n"
+"POT-Creation-Date: 2008-06-08 20:12+0200\n"
+"PO-Revision-Date: 2008-06-02 09:30+0200\n"
 "Last-Translator: thomas@marquart.se\n"
 "Language-Team: Swedish <moin-user@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -491,6 +491,9 @@ msgstr "[tom]"
 msgid "filter"
 msgstr "filter"
 
+msgid "about"
+msgstr ""
+
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -580,7 +583,7 @@ msgstr "Lösenord saknas. Var god ange användarnamn och lösenord."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
-msgstr ""
+msgstr "LDAP-server %(server)s misslyckades."
 
 msgid "You need to log in."
 msgstr "Du måste logga in."
@@ -1703,29 +1706,17 @@ msgstr "index tillgänglig"
 msgid "index unavailable"
 msgstr "index otillgänglig"
 
-msgid "N/A"
-msgstr "Ej tillgänglig"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "Xapian och/eller Pythons Xapian gränssnitt inte installerat"
+
+msgid "N/A"
+msgstr "Ej tillgänglig"
 
 msgid "Xapian search"
 msgstr "Xapian-sökning"
 
-msgid "Xapian Version"
-msgstr "Xapian-version"
-
-msgid "PyStemmer not installed"
-msgstr "PyStemmer inte installerat"
-
 msgid "Stemming for Xapian"
 msgstr "Stemming för Xapian"
-
-msgid "PyStemmer Version"
-msgstr "PyStemmer-version"
-
-msgid "PyStemmer stems"
-msgstr "PyStemmer stems"
 
 msgid "Active threads"
 msgstr "Aktiva trådar"
@@ -2972,6 +2963,18 @@ msgstr "Du får inte göra %(action_name)s på den här sidan."
 
 msgid "Login and try again."
 msgstr "Logga in och försök igen."
+
+#~ msgid "Xapian Version"
+#~ msgstr "Xapian-version"
+
+#~ msgid "PyStemmer not installed"
+#~ msgstr "PyStemmer inte installerat"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "PyStemmer-version"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "PyStemmer stems"
 
 #~ msgid "XML RPC error: %s"
 #~ msgstr "XML RPC fel: %s"

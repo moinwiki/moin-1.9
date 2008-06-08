@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 19:16+0200\n"
+"POT-Creation-Date: 2008-06-08 20:12+0200\n"
 "PO-Revision-Date: 2005-11-06 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -478,6 +478,9 @@ msgid "[empty]"
 msgstr ""
 
 msgid "filter"
+msgstr ""
+
+msgid "about"
 msgstr ""
 
 #, python-format
@@ -1723,32 +1726,17 @@ msgstr ""
 msgid "index unavailable"
 msgstr ""
 
-msgid "N/A"
-msgstr "N/A"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr ""
+
+msgid "N/A"
+msgstr "N/A"
 
 msgid "Xapian search"
 msgstr "Xapian search"
 
-#, fuzzy
-msgid "Xapian Version"
-msgstr "Xapian search"
-
-msgid "PyStemmer not installed"
-msgstr ""
-
 msgid "Stemming for Xapian"
 msgstr ""
-
-#, fuzzy
-msgid "PyStemmer Version"
-msgstr "نسخه python"
-
-#, fuzzy
-msgid "PyStemmer stems"
-msgstr "نسخه python"
 
 msgid "Active threads"
 msgstr "مباحث فعال"
@@ -2970,6 +2958,18 @@ msgstr "عملیات %(actionname)s روی این صفحه مجاز نیست!"
 
 msgid "Login and try again."
 msgstr "لطفا وارد سایت شده و مجددا سعی نمایید."
+
+#, fuzzy
+#~ msgid "Xapian Version"
+#~ msgstr "Xapian search"
+
+#, fuzzy
+#~ msgid "PyStemmer Version"
+#~ msgstr "نسخه python"
+
+#, fuzzy
+#~ msgid "PyStemmer stems"
+#~ msgstr "نسخه python"
 
 #, fuzzy
 #~ msgid "New Page or New Attachment"

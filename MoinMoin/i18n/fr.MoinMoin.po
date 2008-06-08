@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 19:16+0200\n"
+"POT-Creation-Date: 2008-06-08 20:12+0200\n"
 "PO-Revision-Date: 2008-05-25 03:43+0200\n"
 "Last-Translator: Jean-Philippe Guérard <fevrier@tigreraye.org>\n"
 "Language-Team: Français\n"
@@ -517,6 +517,9 @@ msgstr "[vide]"
 msgid "filter"
 msgstr "filtre"
 
+msgid "about"
+msgstr ""
+
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -608,7 +611,7 @@ msgstr ""
 
 #, python-format
 msgid "LDAP server %(server)s failed."
-msgstr ""
+msgstr "Panne du serveur LDAP %(server)s."
 
 msgid "You need to log in."
 msgstr "Vous devez d'abord vous connecter."
@@ -1765,29 +1768,17 @@ msgstr "index disponible"
 msgid "index unavailable"
 msgstr "index non disponible"
 
-msgid "N/A"
-msgstr "Non disponible"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "Xapian ou l'interface Python de Xapian ne sont pas installés"
+
+msgid "N/A"
+msgstr "Non disponible"
 
 msgid "Xapian search"
 msgstr "Recherche Xapian"
 
-msgid "Xapian Version"
-msgstr "Version de Xapian"
-
-msgid "PyStemmer not installed"
-msgstr "PyStemmer n'est pas installé"
-
 msgid "Stemming for Xapian"
 msgstr "Recherche des racines pour Xapian"
-
-msgid "PyStemmer Version"
-msgstr "Version de PyStemmer"
-
-msgid "PyStemmer stems"
-msgstr "Racines de PyStemmer"
 
 msgid "Active threads"
 msgstr "Fils d'exécution actifs"
@@ -3078,6 +3069,18 @@ msgstr ""
 
 msgid "Login and try again."
 msgstr "Connectez-vous et essayez à nouveau."
+
+#~ msgid "Xapian Version"
+#~ msgstr "Version de Xapian"
+
+#~ msgid "PyStemmer not installed"
+#~ msgstr "PyStemmer n'est pas installé"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "Version de PyStemmer"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "Racines de PyStemmer"
 
 #~ msgid "XML RPC error: %s"
 #~ msgstr "Erreur XML RPC:  %s"

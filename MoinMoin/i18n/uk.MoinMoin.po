@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 19:16+0200\n"
+"POT-Creation-Date: 2008-06-08 20:12+0200\n"
 "PO-Revision-Date: 2007-11-10 16:50+0300\n"
 "Last-Translator: Maxim V. Dziumanenko <dziumanenko@softprom.kiev.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -490,6 +490,9 @@ msgstr "[порожні]"
 
 msgid "filter"
 msgstr "фільтр"
+
+msgid "about"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1709,29 +1712,17 @@ msgstr "покажчик доступний"
 msgid "index unavailable"
 msgstr "покажчик недоступний"
 
-msgid "N/A"
-msgstr "немає"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "Не встановлено прив'язки Xapian та/або Python Xapian"
+
+msgid "N/A"
+msgstr "немає"
 
 msgid "Xapian search"
 msgstr "Система пошуку Xapian"
 
-msgid "Xapian Version"
-msgstr "Версія Xapian"
-
-msgid "PyStemmer not installed"
-msgstr "Не встановлено PyStemmer"
-
 msgid "Stemming for Xapian"
 msgstr "Stemming для Xapian"
-
-msgid "PyStemmer Version"
-msgstr "Версія PyStemmer"
-
-msgid "PyStemmer stems"
-msgstr "PyStemmer stems"
 
 msgid "Active threads"
 msgstr "Активних потоків"
@@ -2952,6 +2943,18 @@ msgstr "Ви не можете виконувати %(action_name)s на цій 
 
 msgid "Login and try again."
 msgstr "Увійдіть знову та спробуйте ще раз."
+
+#~ msgid "Xapian Version"
+#~ msgstr "Версія Xapian"
+
+#~ msgid "PyStemmer not installed"
+#~ msgstr "Не встановлено PyStemmer"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "Версія PyStemmer"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "PyStemmer stems"
 
 #~ msgid "New Page or New Attachment"
 #~ msgstr "Створити сторінку або вкладення"

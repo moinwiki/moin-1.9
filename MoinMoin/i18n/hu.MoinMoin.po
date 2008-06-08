@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 19:16+0200\n"
+"POT-Creation-Date: 2008-06-08 20:12+0200\n"
 "PO-Revision-Date: 2006-06-15 15:55+0200\n"
 "Last-Translator: jmarton@omikk.bme.hu, arostas@omikk.bme.hu\n"
 "Language-Team: Hungarian <HU@li.org>\n"
@@ -476,6 +476,9 @@ msgid "[empty]"
 msgstr ""
 
 msgid "filter"
+msgstr ""
+
+msgid "about"
 msgstr ""
 
 #, python-format
@@ -1695,33 +1698,18 @@ msgstr ""
 msgid "index unavailable"
 msgstr ""
 
-msgid "N/A"
-msgstr "Nincs adat"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr ""
+
+msgid "N/A"
+msgstr "Nincs adat"
 
 #, fuzzy
 msgid "Xapian search"
 msgstr "Lupy keresés"
 
-#, fuzzy
-msgid "Xapian Version"
-msgstr "Lupy keresés"
-
-msgid "PyStemmer not installed"
-msgstr ""
-
 msgid "Stemming for Xapian"
 msgstr ""
-
-#, fuzzy
-msgid "PyStemmer Version"
-msgstr "Python változat"
-
-#, fuzzy
-msgid "PyStemmer stems"
-msgstr "Python változat"
 
 msgid "Active threads"
 msgstr "Aktív szálak"
@@ -2951,6 +2939,18 @@ msgstr "Ezen a lapon nem használhatja a %(actionname)s műveletet!"
 
 msgid "Login and try again."
 msgstr "Lépjen be, majd próbálja újra."
+
+#, fuzzy
+#~ msgid "Xapian Version"
+#~ msgstr "Lupy keresés"
+
+#, fuzzy
+#~ msgid "PyStemmer Version"
+#~ msgstr "Python változat"
+
+#, fuzzy
+#~ msgid "PyStemmer stems"
+#~ msgstr "Python változat"
 
 #, fuzzy
 #~ msgid "New Page or New Attachment"

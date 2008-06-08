@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 19:16+0200\n"
+"POT-Creation-Date: 2008-06-08 20:12+0200\n"
 "PO-Revision-Date: 2007-04-22 18:50+0100\n"
 "Last-Translator: Jonas Smedegaard <dr@jones.dk>\n"
 "Language-Team: Danish <moin-devel@lists.sourceforge.net>\n"
@@ -486,6 +486,9 @@ msgstr "[blank]"
 
 msgid "filter"
 msgstr "filter"
+
+msgid "about"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1712,31 +1715,17 @@ msgstr "oversigt tilgængelig"
 msgid "index unavailable"
 msgstr "oversigt ikke tilgængelig"
 
-msgid "N/A"
-msgstr "utilgængelig"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "Xapian og/eller Python Xapian bindinger ikke installeret"
+
+msgid "N/A"
+msgstr "utilgængelig"
 
 msgid "Xapian search"
 msgstr "Xapian søgning"
 
-msgid "Xapian Version"
-msgstr "Xapian version"
-
-msgid "PyStemmer not installed"
-msgstr ""
-
 msgid "Stemming for Xapian"
 msgstr ""
-
-#, fuzzy
-msgid "PyStemmer Version"
-msgstr "Python-version"
-
-#, fuzzy
-msgid "PyStemmer stems"
-msgstr "Python-version"
 
 msgid "Active threads"
 msgstr "Aktive tråde"
@@ -2981,6 +2970,17 @@ msgstr "Du har ikke lov til at anvende %(action_name)s på denne side!"
 
 msgid "Login and try again."
 msgstr "Log på og prøv igen."
+
+#~ msgid "Xapian Version"
+#~ msgstr "Xapian version"
+
+#, fuzzy
+#~ msgid "PyStemmer Version"
+#~ msgstr "Python-version"
+
+#, fuzzy
+#~ msgid "PyStemmer stems"
+#~ msgstr "Python-version"
 
 #, fuzzy
 #~ msgid "New Page or New Attachment"

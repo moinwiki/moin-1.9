@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 19:16+0200\n"
+"POT-Creation-Date: 2008-06-08 20:12+0200\n"
 "PO-Revision-Date: 2008-03-12 15:01+0900\n"
 "Last-Translator: Seungik Lee <seungiklee@gmail.com>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
@@ -470,6 +470,9 @@ msgid "[empty]"
 msgstr ""
 
 msgid "filter"
+msgstr ""
+
+msgid "about"
 msgstr ""
 
 #, python-format
@@ -1692,29 +1695,17 @@ msgstr ""
 msgid "index unavailable"
 msgstr ""
 
-msgid "N/A"
-msgstr "없음"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "Xapian 이나 Python Xapian bindings 가 설치되지 않았습니다"
+
+msgid "N/A"
+msgstr "없음"
 
 msgid "Xapian search"
 msgstr "Xapian 검색"
 
-msgid "Xapian Version"
-msgstr "Xapian 버젼"
-
-msgid "PyStemmer not installed"
-msgstr ""
-
 msgid "Stemming for Xapian"
 msgstr ""
-
-msgid "PyStemmer Version"
-msgstr "PyStemmer 버전"
-
-msgid "PyStemmer stems"
-msgstr "PyStemmer stems"
 
 msgid "Active threads"
 msgstr "사용 중인 쓰레드 개수"
@@ -2893,6 +2884,15 @@ msgstr "이 문서에 %(action_name)s 작업을 수행할 수 있는 권한이 �
 
 msgid "Login and try again."
 msgstr "로그인 후 다시 시도하세요."
+
+#~ msgid "Xapian Version"
+#~ msgstr "Xapian 버젼"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "PyStemmer 버전"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "PyStemmer stems"
 
 #~ msgid "New Page or New Attachment"
 #~ msgstr "새 문서 및 첨부 파일"
