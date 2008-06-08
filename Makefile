@@ -44,9 +44,8 @@ underlay:
 	rm -rf $(share)/underlay
 	MoinMoin/script/moin.py --config-dir=/srv/moin/cfg/1.7 --wiki-url=master17.moinmo.in/ maint globaledit
 	MoinMoin/script/moin.py --config-dir=/srv/moin/cfg/1.7 --wiki-url=master17.moinmo.in/ maint reducewiki --target-dir=$(share)/underlay
-	rm -rf $(share)/underlay/pages/InterWikiMap/
-	echo -ne "#acl All:read\r\nSee MoinMoin:EditingOnMoinMaster.\r\n" > \
-	    $(share)/underlay/pages/MoinPagesEditorGroup/revisions/00000001
+	rm -rf $(share)/underlay/pages/InterWikiMap
+	rm -rf $(share)/underlay/pages/MoinPagesEditorGroup
 	cd $(share); rm -f underlay.tar; tar cf underlay.tar underlay
 
 pagepacks:
