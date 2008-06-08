@@ -17,7 +17,7 @@ def check_spider(useragent, cfg):
     """
     is_spider = False
     if useragent and cfg.cache.ua_spiders:
-        is_spider = cfg.cache.ua_spiders.search(str(useragent)) is not None
+        is_spider = cfg.cache.ua_spiders.search(useragent.browser) is not None
     return is_spider
 
 def handle_auth_form(user_obj):
