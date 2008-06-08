@@ -25,6 +25,17 @@ install-docs:
         build/INSTALL.html >docs/INSTALL.html
 	-rm build/INSTALL.html
 
+	wget -U MoinMoin/Makefile -O build/UPDATE.html "http://master17.moinmo.in/HelpOnUpdating?action=print"
+	sed \
+		-e 's#href="/#href="http://master17.moinmo.in/#g' \
+		-e 's#http://[a-z\.]*/wiki/classic/#/wiki/classic/#g' \
+		-e 's#http://[a-z\.]*/wiki/modern/#/wiki/modern/#g' \
+		-e 's#http://[a-z\.]*/wiki/rightsidebar/#/wiki/rightsidebar/#g' \
+		-e 's#/wiki/classic/#wiki/htdocs/classic/#g' \
+		-e 's#/wiki/modern/#wiki/htdocs/modern/#g' \
+		-e 's#/wiki/rightsidebar/#wiki/htdocs/rightsidebar/#g' \
+        build/UPDATE.html >docs/UPDATE.html
+	-rm build/UPDATE.html
 	-rmdir build
 
 interwiki:
