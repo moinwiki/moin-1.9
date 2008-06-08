@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 19:16+0200\n"
+"POT-Creation-Date: 2008-06-08 20:12+0200\n"
 "PO-Revision-Date: 2006-08-17 20:50+0100\n"
 "Last-Translator: Translation sponsored by Tenalt Ltd. (info@tenalt.com)\n"
 "Language-Team: \n"
@@ -485,6 +485,9 @@ msgstr "[prazno]"
 
 msgid "filter"
 msgstr "filter"
+
+msgid "about"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1708,29 +1711,17 @@ msgstr "indeks dostupan"
 msgid "index unavailable"
 msgstr "indeks nedostupan"
 
-msgid "N/A"
-msgstr "-"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "Xapian i/ili Python Xapian nije instaliran"
+
+msgid "N/A"
+msgstr "-"
 
 msgid "Xapian search"
 msgstr "Xapian pretraživanje"
 
-msgid "Xapian Version"
-msgstr "Inačica Xapiana"
-
-msgid "PyStemmer not installed"
-msgstr "PyStemmer nije instaliran"
-
 msgid "Stemming for Xapian"
 msgstr "Izvlačenje korijena riječi za Xapian"
-
-msgid "PyStemmer Version"
-msgstr "Inačica PyStemmer"
-
-msgid "PyStemmer stems"
-msgstr "PyStemmer stem"
 
 msgid "Active threads"
 msgstr "Aktivne niti"
@@ -2964,6 +2955,18 @@ msgstr "Ne možete koristiti akciju %(action_name)s na ovoj stranici."
 
 msgid "Login and try again."
 msgstr "Prijavite se i pokušajte ponovno."
+
+#~ msgid "Xapian Version"
+#~ msgstr "Inačica Xapiana"
+
+#~ msgid "PyStemmer not installed"
+#~ msgstr "PyStemmer nije instaliran"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "Inačica PyStemmer"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "PyStemmer stem"
 
 #~ msgid "New Page or New Attachment"
 #~ msgstr "Nova stranica ili privitak"

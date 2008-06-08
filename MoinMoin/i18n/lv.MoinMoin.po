@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 19:16+0200\n"
+"POT-Creation-Date: 2008-06-08 20:12+0200\n"
 "PO-Revision-Date: 2008-05-10 22:31+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000 AT gmail DOT NO SPAM com>\n"
 "Language-Team: Latvian <nad2000 AT gmail DOT NO SPAM com>\n"
@@ -494,6 +494,9 @@ msgstr "[tukši]"
 
 msgid "filter"
 msgstr "fitrēt"
+
+msgid "about"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1718,29 +1721,17 @@ msgstr "indekss pieejams"
 msgid "index unavailable"
 msgstr "indekss nav pieejams"
 
-msgid "N/A"
-msgstr "Nav pieejams"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "''Xapian'' un/vai ''Python Xapian'' modulis nav instalēts"
+
+msgid "N/A"
+msgstr "Nav pieejams"
 
 msgid "Xapian search"
 msgstr "''Xapian'' meklēšana"
 
-msgid "Xapian Version"
-msgstr "''Xapian'' versija"
-
-msgid "PyStemmer not installed"
-msgstr "PyStemmer nav uzinstalēts"
-
 msgid "Stemming for Xapian"
 msgstr "Vārdu dalīšana priekš ''Xapian''"
-
-msgid "PyStemmer Version"
-msgstr "PyStemmer versija"
-
-msgid "PyStemmer stems"
-msgstr "''PyStemmer'' celmi"
 
 msgid "Active threads"
 msgstr "Aktīvie pavedieni"
@@ -2964,6 +2955,18 @@ msgstr "Jums nav tiesību veikt darbību %(action_name)s šajā lapā."
 
 msgid "Login and try again."
 msgstr "Pieslēdzieties un mēģiniet vēlreiz."
+
+#~ msgid "Xapian Version"
+#~ msgstr "''Xapian'' versija"
+
+#~ msgid "PyStemmer not installed"
+#~ msgstr "PyStemmer nav uzinstalēts"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "PyStemmer versija"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "''PyStemmer'' celmi"
 
 #~ msgid "New Page or New Attachment"
 #~ msgstr "Jauna lapa vai jauna piesaiste"

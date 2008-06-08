@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 19:16+0200\n"
+"POT-Creation-Date: 2008-06-08 20:12+0200\n"
 "PO-Revision-Date: 2006-02-09 11:25+0100\n"
 "Last-Translator: Radomir Dopieralski <mondev@sheep.art.pl>\n"
 "Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
@@ -493,6 +493,9 @@ msgstr "[puste]"
 
 msgid "filter"
 msgstr "filtr"
+
+msgid "about"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1711,29 +1714,17 @@ msgstr "spis dostępny"
 msgid "index unavailable"
 msgstr "spis niedostępny"
 
-msgid "N/A"
-msgstr "n/d"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "Xapian i/lub bindowanie Python Xapian nie jest zainstalowane"
+
+msgid "N/A"
+msgstr "n/d"
 
 msgid "Xapian search"
 msgstr "Wyszukiwanie przez Xapian"
 
-msgid "Xapian Version"
-msgstr "Wersja Xapian"
-
-msgid "PyStemmer not installed"
-msgstr "PyStemmer niezainstalowany"
-
 msgid "Stemming for Xapian"
 msgstr "Stemming dla Xapiana"
-
-msgid "PyStemmer Version"
-msgstr "Wersja PyStemmera"
-
-msgid "PyStemmer stems"
-msgstr "PyStemmer działa"
 
 msgid "Active threads"
 msgstr "Aktywne wątki"
@@ -2985,6 +2976,18 @@ msgstr "Nie możesz wykonać %(action_name)s na niniejszej stronie."
 
 msgid "Login and try again."
 msgstr "Zaloguj się i spróbuj ponownie."
+
+#~ msgid "Xapian Version"
+#~ msgstr "Wersja Xapian"
+
+#~ msgid "PyStemmer not installed"
+#~ msgstr "PyStemmer niezainstalowany"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "Wersja PyStemmera"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "PyStemmer działa"
 
 #~ msgid "XML RPC error: %s"
 #~ msgstr "Błąd XML RPC: %s"

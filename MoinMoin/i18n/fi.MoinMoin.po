@@ -11,11 +11,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.6\n"
+"Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 19:16+0200\n"
+"POT-Creation-Date: 2008-06-08 20:12+0200\n"
 "PO-Revision-Date: 2008-05-21 20:46+0300\n"
-"Last-Translator: Ville-Pekka Vainio <vpivaini@cs.helsinki.fi>\n"
+"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -352,7 +352,7 @@ msgid ""
 msgstr "Et ole sivun ylläpitäjä, joten et voi muuttaa pääsynvalvontalistoja!"
 
 msgid "Notifications sent to:"
-msgstr "Ilmoituksia lähetetty:"
+msgstr "Ilmoitus lähetetty seuraaville käyttäjille:"
 
 #, python-format
 msgid ""
@@ -496,6 +496,9 @@ msgstr "[tyhjä]"
 msgid "filter"
 msgstr "suodatin"
 
+msgid "about"
+msgstr ""
+
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -585,7 +588,7 @@ msgstr "Salasana puuttuu. Anna käyttäjänimi ja salasana."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
-msgstr ""
+msgstr "Tiedonvaihto LDAP-palvelimen %(server)s kanssa ei onnistunut."
 
 msgid "You need to log in."
 msgstr "Sinun on kirjauduttava sisään."
@@ -1716,29 +1719,17 @@ msgstr "hakemisto käytettävissä"
 msgid "index unavailable"
 msgstr "hakemisto ei käytettävissä"
 
-msgid "N/A"
-msgstr "ei ole"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "Xapian- ja/tai Python Xapian -sidonnaisia ei ole asennettu"
+
+msgid "N/A"
+msgstr "ei ole"
 
 msgid "Xapian search"
 msgstr "Xapian-haku"
 
-msgid "Xapian Version"
-msgstr "Xapian, versio"
-
-msgid "PyStemmer not installed"
-msgstr "PyStemmeriä ei ole asennettu"
-
 msgid "Stemming for Xapian"
 msgstr "Xapian-sanataivutus"
-
-msgid "PyStemmer Version"
-msgstr "PyStemmer, versio"
-
-msgid "PyStemmer stems"
-msgstr "PyStemmerin taivutuskielet"
 
 msgid "Active threads"
 msgstr "Aktiiviset säikeet"
@@ -2097,12 +2088,13 @@ msgid ""
 "delegation on its own.)"
 msgstr ""
 "\n"
-"Jos hyväksyt, trust rootin edustamalle sivustolle kerrotaan, että hallitset\n"
+"Jos hyväksyt, OpenID-luottamusjuuren (trust rootin) edustamalle sivustolle "
+"kerrotaan, että hallitset\n"
 "identiteetti-URL:ää %s. (Jos käytät delegoitua identiteettiä, sivusto\n"
 "huolehtii delegaation kääntämisestä itse.)"
 
 msgid "Trust root"
-msgstr ""
+msgstr "OpenID-luottamusjuuri (trust root)"
 
 msgid "Identity URL"
 msgstr "Identiteetti-URL"
@@ -2995,6 +2987,18 @@ msgstr ""
 
 msgid "Login and try again."
 msgstr "Kirjaudu sisään ja yritä uudelleen."
+
+#~ msgid "Xapian Version"
+#~ msgstr "Xapian, versio"
+
+#~ msgid "PyStemmer not installed"
+#~ msgstr "PyStemmeriä ei ole asennettu"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "PyStemmer, versio"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "PyStemmerin taivutuskielet"
 
 #~ msgid "XML RPC error: %s"
 #~ msgstr "XML RPC -virhe: %s"

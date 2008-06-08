@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 19:16+0200\n"
+"POT-Creation-Date: 2008-06-08 20:12+0200\n"
 "PO-Revision-Date: 2007-02-22 17:39-0300\n"
 "Last-Translator: Iván Méndez <imendez@udc.es>\n"
 "Language-Team: Galician <moin-devel@lists.sourceforge.net>\n"
@@ -494,6 +494,9 @@ msgid "[empty]"
 msgstr ""
 
 msgid "filter"
+msgstr ""
+
+msgid "about"
 msgstr ""
 
 #, python-format
@@ -1742,31 +1745,17 @@ msgstr ""
 msgid "index unavailable"
 msgstr ""
 
-msgid "N/A"
-msgstr "Sen información"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr ""
+
+msgid "N/A"
+msgstr "Sen información"
 
 #, fuzzy
 msgid "Xapian search"
 msgstr "Busca"
 
-#, fuzzy
-msgid "Xapian Version"
-msgstr "Versión de MoinMoin"
-
-msgid "PyStemmer not installed"
-msgstr ""
-
 msgid "Stemming for Xapian"
-msgstr ""
-
-#, fuzzy
-msgid "PyStemmer Version"
-msgstr "Versión de Python"
-
-msgid "PyStemmer stems"
 msgstr ""
 
 msgid "Active threads"
@@ -3018,6 +3007,14 @@ msgstr "Non ten permiso para usar a acción %(actionname)s nesta páxina."
 
 msgid "Login and try again."
 msgstr "Comece a sesión e probe de novo."
+
+#, fuzzy
+#~ msgid "Xapian Version"
+#~ msgstr "Versión de MoinMoin"
+
+#, fuzzy
+#~ msgid "PyStemmer Version"
+#~ msgstr "Versión de Python"
 
 #, fuzzy
 #~ msgid "New Page or New Attachment"

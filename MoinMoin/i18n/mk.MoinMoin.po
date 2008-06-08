@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mk.moinmoin1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 19:16+0200\n"
+"POT-Creation-Date: 2008-06-08 20:12+0200\n"
 "PO-Revision-Date: 2008-03-30 16:24+0200\n"
 "Last-Translator: Novica Nakov\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
@@ -490,6 +490,9 @@ msgstr "[празно]"
 
 msgid "filter"
 msgstr "филтер"
+
+msgid "about"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1715,29 +1718,17 @@ msgstr "достапен индекс"
 msgid "index unavailable"
 msgstr "недостапен индекс"
 
-msgid "N/A"
-msgstr "-"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "Xapian и/или Python Xapian не се инсталирани"
+
+msgid "N/A"
+msgstr "-"
 
 msgid "Xapian search"
 msgstr "Xapian пребарување"
 
-msgid "Xapian Version"
-msgstr "Верзија на Xapian"
-
-msgid "PyStemmer not installed"
-msgstr "PyStemmer не е инсталиран"
-
 msgid "Stemming for Xapian"
 msgstr "Извлекување на корени на зборови за Xapian"
-
-msgid "PyStemmer Version"
-msgstr "Верзија на PyStemmer"
-
-msgid "PyStemmer stems"
-msgstr "PyStemmer корен"
 
 msgid "Active threads"
 msgstr "Активни нишки"
@@ -3005,6 +2996,18 @@ msgstr "На оваа страница не смеете да користите
 
 msgid "Login and try again."
 msgstr "Пријавете се и обидете се повторно."
+
+#~ msgid "Xapian Version"
+#~ msgstr "Верзија на Xapian"
+
+#~ msgid "PyStemmer not installed"
+#~ msgstr "PyStemmer не е инсталиран"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "Верзија на PyStemmer"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "PyStemmer корен"
 
 #~ msgid "XML RPC error: %s"
 #~ msgstr "XML RPC грешка: %s"

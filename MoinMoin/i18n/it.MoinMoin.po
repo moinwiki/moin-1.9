@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 19:16+0200\n"
-"PO-Revision-Date: 2008-05-13 21:18+0200\n"
+"POT-Creation-Date: 2008-06-08 20:12+0200\n"
+"PO-Revision-Date: 2008-06-02 02:29+0200\n"
 "Last-Translator: Milo Casagrande <milo_casagrande@yahoo.it>\n"
 "Language-Team: Italian\n"
 "MIME-Version: 1.0\n"
@@ -505,6 +505,9 @@ msgstr "[vuoto]"
 msgid "filter"
 msgstr "filtro"
 
+msgid "about"
+msgstr ""
+
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -594,7 +597,7 @@ msgstr "Password mancante. Inserire nome utente e password."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
-msgstr ""
+msgstr "Il server LDAP %(server)s ha fallito."
 
 msgid "You need to log in."
 msgstr "È necessario accedere."
@@ -1734,29 +1737,17 @@ msgstr "indice disponibile"
 msgid "index unavailable"
 msgstr "indice non disponibile"
 
-msgid "N/A"
-msgstr "N/D"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "Non sono installati i binding Xapian e/o Python Xapian."
+
+msgid "N/A"
+msgstr "N/D"
 
 msgid "Xapian search"
 msgstr "Ricerca Xapian"
 
-msgid "Xapian Version"
-msgstr "Versione Xapian"
-
-msgid "PyStemmer not installed"
-msgstr "PyStemmer non è installato"
-
 msgid "Stemming for Xapian"
 msgstr "Radici per Xapian"
-
-msgid "PyStemmer Version"
-msgstr "Versione PyStemmer"
-
-msgid "PyStemmer stems"
-msgstr "Radici PyStemmer"
 
 msgid "Active threads"
 msgstr "Thread attivi"
@@ -3032,27 +3023,14 @@ msgstr "Non è consentito usare l'azione %(action_name)s su questa pagina."
 msgid "Login and try again."
 msgstr "Eseguire l'accesso e riprovare."
 
-#~ msgid "XML RPC error: %s"
-#~ msgstr "Errore XML RPC: %s"
+#~ msgid "Xapian Version"
+#~ msgstr "Versione Xapian"
 
-#~ msgid "Low-level communication error: %s"
-#~ msgstr "Errore di comunicazione a basso livello: %s"
+#~ msgid "PyStemmer not installed"
+#~ msgstr "PyStemmer non è installato"
 
-#~ msgid "New Page or New Attachment"
-#~ msgstr "Nuova pagina o nuovo allegato"
+#~ msgid "PyStemmer Version"
+#~ msgstr "Versione PyStemmer"
 
-#~ msgid ""
-#~ "You can upload a file to a new page or choose to upload a file as "
-#~ "attachment for the current page"
-#~ msgstr ""
-#~ "È possibile caricare un file per una nuova pagina oppure caricare un file "
-#~ "come allegato per la pagina attuale"
-
-#~ msgid "attachment"
-#~ msgstr "allegato"
-
-#~ msgid "New Name"
-#~ msgstr "Nuovo nome"
-
-#~ msgid "Attachment '%(target)s' already exists."
-#~ msgstr "L'allegato \"%(target)s\" esiste già."
+#~ msgid "PyStemmer stems"
+#~ msgstr "Radici PyStemmer"

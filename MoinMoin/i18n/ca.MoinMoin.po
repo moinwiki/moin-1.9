@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 19:16+0200\n"
+"POT-Creation-Date: 2008-06-08 20:12+0200\n"
 "PO-Revision-Date: 2007-10-10 13:40+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -482,6 +482,9 @@ msgstr "[buides]"
 
 msgid "filter"
 msgstr "filtre"
+
+msgid "about"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1706,29 +1709,17 @@ msgstr ""
 msgid "index unavailable"
 msgstr ""
 
-msgid "N/A"
-msgstr "N/D"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "El Xapian i les vinculacions Xapian de Python no estan instal·lades"
+
+msgid "N/A"
+msgstr "N/D"
 
 msgid "Xapian search"
 msgstr "Cerca Xapian"
 
-msgid "Xapian Version"
-msgstr "Versió del Xapian"
-
-msgid "PyStemmer not installed"
-msgstr "El PyStemmer no està instal·lat"
-
 msgid "Stemming for Xapian"
 msgstr "Lexemització per a Xapian"
-
-msgid "PyStemmer Version"
-msgstr "Versió de PyStemmer"
-
-msgid "PyStemmer stems"
-msgstr "Lexemes de PyStemmer"
 
 msgid "Active threads"
 msgstr "Fils actius"
@@ -2894,6 +2885,18 @@ msgstr "No teniu permís per a fer %(action_name)s en aquesta pàgina."
 
 msgid "Login and try again."
 msgstr "Entreu i torneu a provar."
+
+#~ msgid "Xapian Version"
+#~ msgstr "Versió del Xapian"
+
+#~ msgid "PyStemmer not installed"
+#~ msgstr "El PyStemmer no està instal·lat"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "Versió de PyStemmer"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "Lexemes de PyStemmer"
 
 #~ msgid "New Page or New Attachment"
 #~ msgstr "Pàgina o adjunció nova"

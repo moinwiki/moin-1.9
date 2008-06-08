@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 19:16+0200\n"
+"POT-Creation-Date: 2008-06-08 20:12+0200\n"
 "PO-Revision-Date: 2005-03-13 17:43+0200\n"
 "Last-Translator: Sander Kromwijk <s.kromwijk@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -492,6 +492,9 @@ msgstr "[leeg]"
 
 msgid "filter"
 msgstr "filter"
+
+msgid "about"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1713,29 +1716,17 @@ msgstr "index beschikbaar"
 msgid "index unavailable"
 msgstr "index niet beschikbaar"
 
-msgid "N/A"
-msgstr "n.v.t."
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "Xapian en/of Python Xapian verbrindingen niet geïnstalleerd"
+
+msgid "N/A"
+msgstr "n.v.t."
 
 msgid "Xapian search"
 msgstr "Xapian zoeken"
 
-msgid "Xapian Version"
-msgstr "Xapian versie"
-
-msgid "PyStemmer not installed"
-msgstr "PyStemmer niet geïnstalleerd"
-
 msgid "Stemming for Xapian"
 msgstr "Gevolg van Xapian"
-
-msgid "PyStemmer Version"
-msgstr "PyStemmer versie"
-
-msgid "PyStemmer stems"
-msgstr "PyStemmer stengels"
 
 msgid "Active threads"
 msgstr "Aktieve threads"
@@ -2980,6 +2971,18 @@ msgstr "Het is u niet toegestaan om %(action_name)s op deze pagina te doen."
 
 msgid "Login and try again."
 msgstr "Login en probeer opnieuw"
+
+#~ msgid "Xapian Version"
+#~ msgstr "Xapian versie"
+
+#~ msgid "PyStemmer not installed"
+#~ msgstr "PyStemmer niet geïnstalleerd"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "PyStemmer versie"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "PyStemmer stengels"
 
 #~ msgid "New Page or New Attachment"
 #~ msgstr "Nieuw pagina of nieuwe bijlage"
