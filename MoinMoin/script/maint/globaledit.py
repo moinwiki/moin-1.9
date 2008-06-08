@@ -71,16 +71,19 @@ General syntax: moin [options] maint globaledit [globaledit-options]
             language_line = '#language en'
         if not format_line:
             format_line = '#format wiki'
+        aclold = '#acl MoinPagesEditorGroup:read,write,delete,revert All:read'
+        if aclold in acl_lines:
+            acl_lines.remove(aclold)
         if not acl_lines and (
             masterpage is None or masterpage not in ['FrontPage', 'WikiSandBox', ] and not masterpage.endswith('Template')):
-            acl_lines = ['#acl MoinPagesEditorGroup:read,write,delete,revert All:read']
+            acl_lines = ['#acl -All:write Default']
         if not master_lines:
             master_lines = ['##master-page:Unknown-Page', '##master-date:Unknown-Date', ]
 
-        c1old = "## Please edit (or translate) system/help pages on the moinmaster wiki ONLY."
-        c2old = "## For more information, please see MoinMaster:MoinPagesEditorGroup."
-        c1 = "## Please edit system and help pages ONLY in the moinmaster wiki! For more"
-        c2 = "## information, please see MoinMaster:MoinPagesEditorGroup."
+        c1old = "## Please edit system and help pages ONLY in the moinmaster wiki! For more"
+        c2old = "## information, please see MoinMaster:MoinPagesEditorGroup."
+        c1 = "## Please edit system and help pages ONLY in the master wiki!"
+        c2 = "## For more information, please see MoinMoin:MoinDev/Translation."
         for c in (c1old, c2old, c1, c2):
             if c in comment_lines:
                 comment_lines.remove(c)
