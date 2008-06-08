@@ -469,13 +469,13 @@ class Search:
         # when xapian was used, we can estimate the numer of matches
         # Note: hits can't be estimated by xapian with historysearch enabled
         if not self.request.cfg.xapian_index_history and hasattr(self, '_xapianMset'):
+            _ = self.request.getText
             mset = self._xapianMset
-            estimated_hits = (
-                (mset.get_matches_estimated() == mset.get_matches_upper_bound()
-                    and
-                 mset.get_matches_estimated() == mset.get_matches_lower_bound())
-                and '' or 'about',
-                mset.get_matches_estimated())
+            m_lower = mset.get_matches_lower_bound()
+            m_estimated = mset.get_matches_estimated()
+            m_upper = mset.get_matches_upper_bound()
+            estimated_hits = (m_estimated == m_upper and m_estimated == m_lower
+                              and '' or _('about'), m_estimated)
         else:
             estimated_hits = None
 
