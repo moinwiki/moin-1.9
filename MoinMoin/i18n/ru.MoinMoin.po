@@ -11,9 +11,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.6\n"
+"Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 19:16+0200\n"
+"POT-Creation-Date: 2008-06-08 20:12+0200\n"
 "PO-Revision-Date: 2006-06-26 21:43-0800\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -304,7 +304,8 @@ msgid "You are not allowed to delete this page!"
 msgstr "Вам не разрешено удалять эту страницу!"
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr "Спасибо за ваши исправления. Мы приветствуем ваше внимание к деталям."
+msgstr ""
+"Спасибо за ваши исправления. Мы признательны за ваше внимание к деталям."
 
 #, python-format
 msgid "Page \"%s\" was successfully deleted!"
@@ -500,6 +501,9 @@ msgstr "[пустой]"
 msgid "filter"
 msgstr "фильтровать"
 
+msgid "about"
+msgstr ""
+
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -512,10 +516,10 @@ msgid "seconds"
 msgstr "секунд"
 
 msgid "Previous"
-msgstr "Предыдущий"
+msgstr "Предыдущая"
 
 msgid "Next"
-msgstr "Следующий"
+msgstr "Следующая"
 
 msgid "rev"
 msgstr "ревизия"
@@ -589,7 +593,7 @@ msgstr "Отсутствует пароль. Пожалуйста, введит�
 
 #, python-format
 msgid "LDAP server %(server)s failed."
-msgstr ""
+msgstr "LDAP-сервер %(server)s недоступен."
 
 msgid "You need to log in."
 msgstr "Вам необходимо войти в систему."
@@ -1733,44 +1737,32 @@ msgstr "индекс доступен"
 msgid "index unavailable"
 msgstr "индекс недоступен"
 
-msgid "N/A"
-msgstr "нет"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "Xapian и/или биндинги Xapian для Python не установлены"
+
+msgid "N/A"
+msgstr "нет"
 
 msgid "Xapian search"
 msgstr "Поиск Xapian"
 
-msgid "Xapian Version"
-msgstr "Версия Xapian"
-
-msgid "PyStemmer not installed"
-msgstr "PyStemmer не установлен"
-
 msgid "Stemming for Xapian"
 msgstr "Стемминг для Xapian"
-
-msgid "PyStemmer Version"
-msgstr "Версия PyStemmer"
-
-msgid "PyStemmer stems"
-msgstr "Стволы (stems) PyStemmer"
 
 msgid "Active threads"
 msgstr "Активных потоков"
 
 msgid "Search for items"
-msgstr "Искать пункты"
+msgstr "Найти страницы"
 
 msgid "containing all the following terms"
-msgstr "содержащий все следующие термины"
+msgstr "со всеми словами"
 
 msgid "containing one or more of the following terms"
-msgstr "содержащий один или более следующих терминов"
+msgstr "с любым из слов"
 
 msgid "not containing the following terms"
-msgstr "не содержащий следующих терминов"
+msgstr "без слов"
 
 msgid "last modified since (e.g. last 2 weeks)"
 msgstr "последний раз отредактирована (например, последние 2 недели назад)"
@@ -1791,22 +1783,22 @@ msgid "File Type"
 msgstr "Тип файла"
 
 msgid "Search only in titles"
-msgstr "Искать только в заголовках"
+msgstr "Искать только в названиях станиц"
 
 msgid "Case-sensitive search"
 msgstr "Поиск с учетом регистра"
 
 msgid "Exclude underlay"
-msgstr "Исключать подлежащее"
+msgstr "Исключить страницы помощи"
 
 msgid "No system items"
-msgstr "Нет системных пунктов"
+msgstr "Исключить системные страницы"
 
 msgid "Search in all page revisions"
 msgstr "Искать во всех ревизиях страницы"
 
 msgid "Go get it!"
-msgstr "Иди и ищи!"
+msgstr "Искать!"
 
 #, python-format
 msgid "No quotes on %(pagename)s."
@@ -3005,6 +2997,18 @@ msgstr "Вам нельзя делать %(action_name)s на этой стра�
 
 msgid "Login and try again."
 msgstr "Войдите и повторите еще раз."
+
+#~ msgid "Xapian Version"
+#~ msgstr "Версия Xapian"
+
+#~ msgid "PyStemmer not installed"
+#~ msgstr "PyStemmer не установлен"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "Версия PyStemmer"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "Стволы (stems) PyStemmer"
 
 #~ msgid "XML RPC error: %s"
 #~ msgstr "Ошибка XML RPC: %s"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 19:16+0200\n"
+"POT-Creation-Date: 2008-06-08 20:12+0200\n"
 "PO-Revision-Date: 2008-05-22 02:06+0900\n"
 "Last-Translator: MasatakeIwasaki\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
@@ -491,6 +491,9 @@ msgstr "[空]"
 
 msgid "filter"
 msgstr "フィルタ"
+
+msgid "about"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1723,29 +1726,17 @@ msgstr "index有効"
 msgid "index unavailable"
 msgstr "index無効"
 
-msgid "N/A"
-msgstr "該当せず"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "XapianまたはPython Xapianバインディングがインストールされていません。"
+
+msgid "N/A"
+msgstr "該当せず"
 
 msgid "Xapian search"
 msgstr "Xapianによる検索"
 
-msgid "Xapian Version"
-msgstr "Xapianバージョン"
-
-msgid "PyStemmer not installed"
-msgstr "PyStemmerがインストールされていません"
-
 msgid "Stemming for Xapian"
 msgstr "Xapian向けStemming"
-
-msgid "PyStemmer Version"
-msgstr "PyStemmerのバージョン"
-
-msgid "PyStemmer stems"
-msgstr "Pythonのバージョン"
 
 msgid "Active threads"
 msgstr "アクティブなスレッド"
@@ -2994,6 +2985,18 @@ msgstr "このページでアクション %(action_name)s を使用する権限�
 
 msgid "Login and try again."
 msgstr "ログインして、もう一度試してみてください。"
+
+#~ msgid "Xapian Version"
+#~ msgstr "Xapianバージョン"
+
+#~ msgid "PyStemmer not installed"
+#~ msgstr "PyStemmerがインストールされていません"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "PyStemmerのバージョン"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "Pythonのバージョン"
 
 #~ msgid "XML RPC error: %s"
 #~ msgstr "XML-RPC エラー: %s"

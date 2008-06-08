@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 19:16+0200\n"
+"POT-Creation-Date: 2008-06-08 20:12+0200\n"
 "PO-Revision-Date: 2007-12-05 11:49+0200\n"
 "Last-Translator: Dor Fire <dorfire@gmail.com>\n"
 "Language-Team: Hebrew <moin-devel@lists.sourceforge.net>\n"
@@ -469,6 +469,9 @@ msgstr "[ריק]"
 
 msgid "filter"
 msgstr "מסנן"
+
+msgid "about"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1675,29 +1678,17 @@ msgstr "מפתח ערכים זמין"
 msgid "index unavailable"
 msgstr "מפתח ערכים לא זמין"
 
-msgid "N/A"
-msgstr "לא זמין"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "Xapian ו/או הרחבת Xapian ל-Python לא מותקנים."
+
+msgid "N/A"
+msgstr "לא זמין"
 
 msgid "Xapian search"
 msgstr "חיפוש Xapian"
 
-msgid "Xapian Version"
-msgstr "גרסת Xapian"
-
-msgid "PyStemmer not installed"
-msgstr "PyStemmer לא מותקן"
-
 msgid "Stemming for Xapian"
 msgstr "משכתב את הערך Xapian"
-
-msgid "PyStemmer Version"
-msgstr "גרסת PyStemmer"
-
-msgid "PyStemmer stems"
-msgstr "שכתובי PyStemmer"
 
 msgid "Active threads"
 msgstr "אשכולות פעילים"
@@ -2899,6 +2890,18 @@ msgstr "אינך מורשה לבצע %(action_name)s בדף זה."
 
 msgid "Login and try again."
 msgstr "התחבר ונסה שוב."
+
+#~ msgid "Xapian Version"
+#~ msgstr "גרסת Xapian"
+
+#~ msgid "PyStemmer not installed"
+#~ msgstr "PyStemmer לא מותקן"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "גרסת PyStemmer"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "שכתובי PyStemmer"
 
 #~ msgid "New Page or New Attachment"
 #~ msgstr "דף חדש או קובץ מצורף חדש"

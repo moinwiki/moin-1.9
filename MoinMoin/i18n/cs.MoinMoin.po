@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 19:16+0200\n"
+"POT-Creation-Date: 2008-06-08 20:12+0200\n"
 "PO-Revision-Date: 2007-11-05 22:11+0100\n"
 "Last-Translator: Václav Haisman <v.haisman@sh.cvut.cz>\n"
 "Language-Team: Czech <moin@lists.sourceforge.net>\n"
@@ -483,6 +483,9 @@ msgstr "[prázdné]"
 
 msgid "filter"
 msgstr "filtr"
+
+msgid "about"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1704,29 +1707,17 @@ msgstr "index je dostupný"
 msgid "index unavailable"
 msgstr "index není dostupný"
 
-msgid "N/A"
-msgstr "N/A"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "Xapian a/nebo Python Xapian bindings nenainstalováno"
+
+msgid "N/A"
+msgstr "N/A"
 
 msgid "Xapian search"
 msgstr "Xapian hledání"
 
-msgid "Xapian Version"
-msgstr "Xapian Verze"
-
-msgid "PyStemmer not installed"
-msgstr "PyStemmer není nainstalován"
-
 msgid "Stemming for Xapian"
 msgstr "Hledání slovních základů pro Xapian"
-
-msgid "PyStemmer Version"
-msgstr "PyStemmer Verze"
-
-msgid "PyStemmer stems"
-msgstr "Lematizátory PyStemmeru"
 
 msgid "Active threads"
 msgstr "Aktivní vlákna"
@@ -2948,6 +2939,18 @@ msgstr "Nemáte oprávnění spustit na této stránce akci %(action_name)s."
 
 msgid "Login and try again."
 msgstr "Přihlašte se a zkuste to znovu."
+
+#~ msgid "Xapian Version"
+#~ msgstr "Xapian Verze"
+
+#~ msgid "PyStemmer not installed"
+#~ msgstr "PyStemmer není nainstalován"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "PyStemmer Verze"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "Lematizátory PyStemmeru"
 
 #~ msgid "New Page or New Attachment"
 #~ msgstr "Nová Stránka nebo Nová Příloha"
