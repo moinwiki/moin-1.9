@@ -955,8 +955,9 @@ class QueryParser:
                         if last.__class__ == OrExpression:
                             orexpr = last
                         else:
-                            if len(sub) == 1:
-                                terms = sub[0]
+                            # Note: do NOT reduce "terms" when it has a single subterm only!
+                            # Doing that would break "-someterm" searches as we rely on AndExpression
+                            # doing a "MatchAll AND_NOT someterm" for that case!
                             orexpr = OrExpression(terms)
                         terms = AndExpression(orexpr)
                     remaining = self._analyse_items(items)
