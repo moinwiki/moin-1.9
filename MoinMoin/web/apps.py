@@ -6,8 +6,20 @@
                 2008-2008 MoinMoin:FlorianKrupicka
     @license: GNU GPL, see COPYING for details.
 """
+from werkzeug.exceptions import HTTPException
+
 from MoinMoin.web.request import Request
 from MoinMoin.web.contexts import XMLRPCContext
+
+class HTTPExceptionsMiddleware(object):
+    def __init__(self, app):
+        self.app = app
+
+    def __call__(self, environ, start_response):
+        try:
+            return self.app(environ, start_response)
+        except HTTPException, e:
+            return e(environ, start_response)
 
 class XMLRPCApp(object):
     """ Handles XML-RPC method calls or dispatches to next layer """

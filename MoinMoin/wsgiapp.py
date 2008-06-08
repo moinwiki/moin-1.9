@@ -12,6 +12,7 @@ from werkzeug.exceptions import NotFound
 
 from MoinMoin.web.contexts import HTTPContext
 from MoinMoin.web.utils import check_spider, handle_auth_form
+from MoinMoin.web.apps import HTTPExceptionsMiddleware
 
 from MoinMoin.Page import Page
 from MoinMoin import config, wikiutil, user, caching, error
@@ -33,7 +34,7 @@ def _request_init(request):
         request.clock.stop('load_multi_cfg')
     except error.NoConfigMatchedError:
         raise NotFound('<p>No wiki configuration matching the URL found!</p>')
-    
+
     request.isSpiderAgent = check_spider(request.user_agent, request.cfg)
     
     request.action = request.form.get('action', 'show')
@@ -112,3 +113,4 @@ def application(environ, start_response):
     return response
 
 application = responder(application)
+application = HTTPExceptionsMiddleware(application)
