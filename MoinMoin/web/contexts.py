@@ -21,21 +21,55 @@ logging = log.getLogger(__name__)
 STATUS_CODE_RE = re.compile('Status:\s*(\d{3,3})', re.IGNORECASE)
 
 class Context(object):
-    pass
+    def __init__(self, parent=None):
+        self._parent = parent
 
-class EnvironContext(Context):
-    def __init__(self, environ):
-        request = environ.get('werkzeug.request')
-        if request and isinstance(request, Request):
-            self._wsgirequest = request
+    def __getattr__(self, name):
+        if self._parent is None:
+            raise AttributeError(name)
+        logging.debug("Proxying to parent '%r' for attribute '%s'",
+                      self._parent, name)
+        return getattr(self._parent, name)
+
+    def __setattr__(self, name, value):
+        stack = inspect.stack()
+        parent = stack[1]
+        caller, filename, lineno = parent[3], parent[1], parent[0].f_lineno
+        logging.debug("Setting attribute '%s' to value '%r' by '%s' "
+                      "in file '%s',line '%s'", name, value, caller,
+                      filename, lineno)
+        self.__dict__[name] = value
+
+    def __repr__(self):
+        if self._parent:
+            return "<%s parent='%r'>" % (self.__class__.__name__,
+                                         self._parent)
         else:
-            self._wsgirequest = Request(environ)
-        self.environ = environ
+            return "<%s>" % self.__class__.__name__
 
-class XMLRPCContext(EnvironContext):
+class RequestContext(Context):
+    def __init__(self, environ_or_request):
+        if isinstance(environ_or_request, dict):
+            request = environ_or_request.get('werkzeug.request')
+            if request and isinstance(request, Request):
+                Context.__init__(self, request)
+            else:
+                Context.__init__(self, Request(environ_or_request))
+        elif isinstance(environ_or_request, Request):
+            Context.__init__(self, environ_or_request)
+        else:
+            raise ArgumentError("Expected environ-dict or Request-object")
+
+    def read(self, n=None):
+        if n is None:
+            return self._parent.data
+        else:
+            return self._parent.input_stream.read(n)
+
+class XMLRPCContext(RequestContext):
     pass
 
-class HTTPContext(EnvironContext, RequestBase):
+class HTTPContext(RequestContext, RequestBase):
     """ Lowermost context for MoinMoin.
 
     Contains code related to manipulation of HTTP related data like:
@@ -43,9 +77,9 @@ class HTTPContext(EnvironContext, RequestBase):
     * Cookies
     * GET/POST/PUT/etc data
     """
-    def __init__(self, environ):
-        EnvironContext.__init__(self, environ)
-        self.__output = []
+    def __init__(self, environ_or_request):
+        RequestContext.__init__(self, environ_or_request)
+        self._output = []
         self.headers = Headers()
         self.status = 200
 
@@ -59,12 +93,6 @@ class HTTPContext(EnvironContext, RequestBase):
         self.writestack = []
 
     # implementation of methods expected by RequestBase
-    def read(self, n=None):
-        if n is None:
-            return self._wsgirequest.data
-        else:
-            return self._wsgirequest.input_stream.read(n)
-
     def send_file(self, fileobj, bufsize=8192, do_flush=None):
         self._sendfile = fileobj
         self._send_bufsize = bufsize
@@ -73,10 +101,10 @@ class HTTPContext(EnvironContext, RequestBase):
         if len(data) > 1:
             logging.warning("Some code still uses write with multiple arguments, "
                             "consider changing this soon")
-        self.__output.extend(data)
+        self._output.extend(data)
 
     def output(self):
-        return ''.join(self.__output)
+        return ''.join(self._output)
 
     def _emit_http_headers(self, headers):
         st_header, other_headers = headers[0], headers[1:]
@@ -91,41 +119,27 @@ class HTTPContext(EnvironContext, RequestBase):
         pass
 
     def setup_args(self):
-        return self._wsgirequest.values.to_dict(flat=False)
-
-    def __getattr__(self, name):
-        logging.debug("Proxying to '%r' for attribute '%s'",
-                      self._wsgirequest, name)
-        return getattr(self._wsgirequest, name)
-
-    def __setattr__(self, name, value):
-        stack = inspect.stack()
-        parent = stack[1]
-        caller, filename, lineno = parent[3], parent[1], parent[0].f_lineno
-        logging.debug("Setting attribute '%s' to value '%r' by '%s' "
-                      "in file '%s',line '%s'", name, value, caller,
-                      filename, lineno)
-        self.__dict__[name] = value
+        return self._parent.values.to_dict(flat=False)
     
     # compatibility wrapping
     def cookie(self):
-        return self._wsgirequest.cookies
+        return self._parent.cookies
     cookie = property(cookie)
 
     def script_name(self):
-        return self._wsgirequest.script_root
+        return self._parent.script_root
     script_name = property(script_name)
 
     def request_method(self):
-        return self._wsgirequest.method
+        return self._parent.method
     request_method = property(request_method)
 
     def path_info(self):
-        return self._wsgirequest.path
+        return self._parent.path
     path_info = property(path_info)
 
     def is_ssl(self):
-        return self._wsgirequest.is_secure
+        return self._parent.is_secure
     is_ssl = property(is_ssl)
     
 
@@ -165,6 +179,17 @@ class HTTPContext(EnvironContext, RequestBase):
 
     def finish(self):
         pass
+
+class RenderContext(Context):
+    """ Context for rendering content
+    
+    Contains code related to the representation of pages:
+    * getText function
+    * formatters
+    * theme
+    * page
+    * output redirection
+    """
 
 # mangle in logging of function calls
 def _logfunc(func):
