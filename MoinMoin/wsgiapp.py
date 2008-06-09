@@ -11,6 +11,7 @@ from werkzeug.wrappers import Response
 from werkzeug.exceptions import NotFound
 
 from MoinMoin.web.contexts import HTTPContext
+from MoinMoin.web.request import Request
 from MoinMoin.web.utils import check_spider, handle_auth_form
 from MoinMoin.web.apps import HTTPExceptionsMiddleware
 
@@ -95,7 +96,8 @@ def _request_init(request):
     request.clock.stop('base__init__')    
 
 def application(environ, start_response):
-    request = HTTPContext(environ)
+    request = Request(environ)
+    request = HTTPContext(request)
     _request_init(request)
     request.run()
 
