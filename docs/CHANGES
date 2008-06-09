@@ -39,6 +39,7 @@ Version 1.7.0current:
       * index filters: redirect stderr to logging system
     * FootNote macro: revert to old behaviour (using the arg parser made
       problems with footnotes including commas)
+    * Fix subscript parsing (was broken for cases like "a,,1,2,,").
     * info action: fix exception happening for invalid query args
 
   Other changes:
