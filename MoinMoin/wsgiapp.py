@@ -36,8 +36,6 @@ def _request_init(request):
     except error.NoConfigMatchedError:
         raise NotFound('<p>No wiki configuration matching the URL found!</p>')
 
-    request.isSpiderAgent = check_spider(request.user_agent, request.cfg)
-    
     request.action = request.form.get('action', 'show')
     
     try:
