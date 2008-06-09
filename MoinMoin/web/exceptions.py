@@ -17,12 +17,12 @@ class SurgeProtection(exceptions.ServiceUnavailable):
         "<p>When you restart doing requests AFTER that, slow down or you might get locked out for a longer time!</p>"
     )
     
-    def __init__(self, retry_after=3600):
-        ServiceUnavailable.__init__(self)
+    def __init__(self, description=None, retry_after=3600):
+        exceptions.ServiceUnavailable.__init__(self, description)
         self.retry_after = retry_after
 
     def get_headers(self, environ):
-        headers = ServiceUnavailable.get_headers(self, environ)
+        headers = exceptions.ServiceUnavailable.get_headers(self, environ)
         headers.append(('Retry-After', '%d' % self.retry_after))
         return headers
 

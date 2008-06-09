@@ -11,9 +11,11 @@
 import re, time, inspect
 
 from werkzeug.utils import Headers, http_date
+from werkzeug.exceptions import Unauthorized, NotFound
 
 from MoinMoin.request import RequestBase
 from MoinMoin.web.request import Request
+from MoinMoin.web.exceptions import Forbidden, SurgeProtection
 
 from MoinMoin import log
 logging = log.getLogger(__name__)
@@ -65,6 +67,13 @@ class RequestContext(Context):
             return self._parent.data
         else:
             return self._parent.input_stream.read(n)
+
+    def makeForbidden(self, resultcode, msg):
+        status = { 401: Unauthorized,
+                   403: Forbidden,
+                   404: NotFound,
+                   503: SurgeProtection }
+        raise status[resultcode](msg)
 
 class XMLRPCContext(RequestContext):
     pass
@@ -211,3 +220,20 @@ for name, item in RequestBase.__dict__.items():
        setattr(RequestBase, name, _logfunc(item))
 del name, item, FunctionType, _logfunc
 
+
+
+
+ 
+ from MoinMoin.request import RequestBase
+ from MoinMoin.web.request import Request
+ 
+ from MoinMoin import log
+ logging = log.getLogger(__name__)
+@@ -65,6 +68,26 @@
+             return self._parent.data
+         else:
+             return self._parent.input_stream.read(n)
+
+ 
+ class XMLRPCContext(RequestContext):
+     pass
