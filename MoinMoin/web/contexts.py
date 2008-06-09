@@ -15,6 +15,7 @@ from werkzeug.exceptions import Unauthorized, NotFound
 
 from MoinMoin.request import RequestBase
 from MoinMoin.web.request import Request
+from MoinMoin.web.utils import check_spider
 from MoinMoin.web.exceptions import Forbidden, SurgeProtection
 
 from MoinMoin import log
@@ -74,6 +75,19 @@ class RequestContext(Context):
                    404: NotFound,
                    503: SurgeProtection }
         raise status[resultcode](msg)
+
+    def is_spideragent(self):
+        if hasattr(self, '_is_spideragent'):
+            return self._is_spideragent
+        if getattr(self, 'cfg', None) is not None:
+            self._is_spideragent = check_spider(self.user_agent, self.cfg)
+            return self._is_spideragent
+        else:
+            return False
+    is_spideragent = property(is_spideragent)
+
+    # legacy compatibility
+    isSpiderAgent = is_spideragent
 
 class XMLRPCContext(RequestContext):
     pass
@@ -219,21 +233,3 @@ for name, item in RequestBase.__dict__.items():
    if isinstance(item, FunctionType):
        setattr(RequestBase, name, _logfunc(item))
 del name, item, FunctionType, _logfunc
-
-
-
-
- 
- from MoinMoin.request import RequestBase
- from MoinMoin.web.request import Request
- 
- from MoinMoin import log
- logging = log.getLogger(__name__)
-@@ -65,6 +68,26 @@
-             return self._parent.data
-         else:
-             return self._parent.input_stream.read(n)
-
- 
- class XMLRPCContext(RequestContext):
-     pass
