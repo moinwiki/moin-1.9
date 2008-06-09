@@ -27,6 +27,29 @@ def test_add_attachment(request):
 
     assert exists
 
+def test_add_attachment_mimetype(request):
+    """Test if add_attachment() with small mimetype file works"""
+
+    become_trusted(request)
+    pagename = "AutoCreatedSillyPageToTestAttachments"
+    filename = "AutoCreatedSillyAttachment.png"
+
+    create_page(request, pagename, u"FooBar!")
+
+    import base64
+    imageEncodeText = "iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAIAAADkharWAAAAD0lEQVQokWNgGAWjgDoAAAJMAAFOlIxNAAAAAElFTkSuQmCC"
+    filecontent = base64.decodestring(imageEncodeText)
+
+    AttachFile.add_attachment(request, pagename, filename, filecontent, True)
+    exists = AttachFile.exists(request, pagename, filename)
+    path = AttachFile.getAttachDir(request, pagename)
+    imagef = os.path.join(path, filename)
+    file_size = os.path.getsize(imagef)
+
+    nuke_page(request, pagename)
+
+    assert exists and file_size == 72
+
 def test_get_attachment_path_created_on_getFilename(request):
     """
     Tests if AttachFile.getFilename creates the attachment dir on requesting
