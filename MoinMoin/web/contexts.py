@@ -14,6 +14,7 @@ from werkzeug.utils import Headers, http_date
 from werkzeug.exceptions import Unauthorized, NotFound
 
 from MoinMoin import i18n
+from MoinMoin.formatter import text_html
 from MoinMoin.request import RequestBase
 from MoinMoin.web.request import Request
 from MoinMoin.web.utils import check_spider
@@ -235,7 +236,6 @@ class RenderContext(Context):
     """ Context for rendering content
     
     Contains code related to the representation of pages:
-    * getText function
     * formatters
     * theme
     * page
@@ -245,6 +245,17 @@ class RenderContext(Context):
         Context.__init__(self, parent)
         self.page = page
         self.user = user
+
+        self.pragma = {}
+        self.mode_getpagelinks = 0
+        self.parsePageLinks_running = {}
+        self.content_lang = self.cfg.language_default
+        
+        self.html_formatter = text_html.Formatter(self)
+        self.formatter = self.html_formatter
+
+        if i18n.languages is None:
+            i18n.i18n_init(self)
     
     def lang(self):
         if self.user.valid and self.user.language:
