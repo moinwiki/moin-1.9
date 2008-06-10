@@ -45,10 +45,6 @@ def _request_init(request):
     from MoinMoin.Page import RootPage
     request.rootpage = RootPage(request)
 
-    from MoinMoin import i18n
-    request.i18n = i18n
-    i18n.i18n_init(request)
-
     user_obj = request.cfg.session_handler.start(request, request.cfg.session_id_handler)
     
     request.user = None
@@ -71,19 +67,9 @@ def _request_init(request):
         if not request.forbidden and request.surge_protect():
             raise SurgeProtection(retry_after=request.cfg.surge_lockout_time)
 
-    request.pragma = {}
-    request.mode_getpagelinks = 0 # is > 0 as long as we are in a getPageLinks call
-    request.parsePageLinks_running = {} # avoid infinite recursion by remembering what we are already running
-
-    request.content_lang = request.cfg.language_default
-
     request.reset()
 
-    from MoinMoin.formatter.text_html import Formatter
-    request.html_formatter = Formatter(request)
-    request.formatter = request.html_formatter
-
-    request.clock.stop('base__init__')    
+    request.clock.stop('base__init__')
 
 def application(environ, start_response):
     request = Request(environ)
