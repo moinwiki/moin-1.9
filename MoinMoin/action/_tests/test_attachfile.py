@@ -3,13 +3,14 @@
     MoinMoin - tests of AttachFile action
 
     @copyright: 2007 by Karol Nowak <grywacz@gmail.com>
-                     MoinMoin:ReimarBauer
+                2007-2008 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
-import os
+import os, StringIO
 from MoinMoin.action import AttachFile
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin._tests import become_trusted, create_page, nuke_page
+
 
 def test_add_attachment(request):
     """Test if add_attachment() works"""
@@ -27,18 +28,17 @@ def test_add_attachment(request):
 
     assert exists
 
-def test_add_attachment_mimetype(request):
-    """Test if add_attachment() with small mimetype file works"""
+def test_add_attachment_for_file_object(request):
+    """Test if add_attachment() works with file like object"""
 
     become_trusted(request)
     pagename = "AutoCreatedSillyPageToTestAttachments"
     filename = "AutoCreatedSillyAttachment.png"
 
     create_page(request, pagename, u"FooBar!")
+    data = "Test content"
 
-    import base64
-    imageEncodeText = "iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAIAAADkharWAAAAD0lEQVQokWNgGAWjgDoAAAJMAAFOlIxNAAAAAElFTkSuQmCC"
-    filecontent = base64.decodestring(imageEncodeText)
+    filecontent = StringIO.StringIO(data)
 
     AttachFile.add_attachment(request, pagename, filename, filecontent, True)
     exists = AttachFile.exists(request, pagename, filename)
@@ -48,7 +48,7 @@ def test_add_attachment_mimetype(request):
 
     nuke_page(request, pagename)
 
-    assert exists and file_size == 72
+    assert exists and file_size == len(data)
 
 def test_get_attachment_path_created_on_getFilename(request):
     """
