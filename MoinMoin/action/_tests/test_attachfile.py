@@ -11,65 +11,66 @@ from MoinMoin.action import AttachFile
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin._tests import become_trusted, create_page, nuke_page
 
+class TestAttachFile:
+    """ testing action AttachFile"""
+    pagename = u"AutoCreatedSillyPageToTestAttachments"
 
-def test_add_attachment(request):
-    """Test if add_attachment() works"""
+    def test_add_attachment(self):
+        """Test if add_attachment() works"""
 
-    become_trusted(request)
-    pagename = "AutoCreatedSillyPageToTestAttachments"
-    filename = "AutoCreatedSillyAttachment"
+        become_trusted(self.request)
+        filename = "AutoCreatedSillyAttachment"
 
-    create_page(request, pagename, u"Foo!")
+        create_page(self.request, self.pagename, u"Foo!")
 
-    AttachFile.add_attachment(request, pagename, filename, "Test content", True)
-    exists = AttachFile.exists(request, pagename, filename)
+        AttachFile.add_attachment(self.request, self.pagename, filename, "Test content", True)
+        exists = AttachFile.exists(self.request, self.pagename, filename)
 
-    nuke_page(request, pagename)
+        nuke_page(self.request, self.pagename)
 
-    assert exists
+        assert exists
 
-def test_add_attachment_for_file_object(request):
-    """Test if add_attachment() works with file like object"""
+    def test_add_attachment_for_file_object(self):
+        """Test if add_attachment() works with file like object"""
 
-    become_trusted(request)
-    pagename = "AutoCreatedSillyPageToTestAttachments"
-    filename = "AutoCreatedSillyAttachment.png"
+        become_trusted(self.request)
 
-    create_page(request, pagename, u"FooBar!")
-    data = "Test content"
+        filename = "AutoCreatedSillyAttachment.png"
 
-    filecontent = StringIO.StringIO(data)
+        create_page(self.request, self.pagename, u"FooBar!")
+        data = "Test content"
 
-    AttachFile.add_attachment(request, pagename, filename, filecontent, True)
-    exists = AttachFile.exists(request, pagename, filename)
-    path = AttachFile.getAttachDir(request, pagename)
-    imagef = os.path.join(path, filename)
-    file_size = os.path.getsize(imagef)
+        filecontent = StringIO.StringIO(data)
 
-    nuke_page(request, pagename)
+        AttachFile.add_attachment(self.request, self.pagename, filename, filecontent, True)
+        exists = AttachFile.exists(self.request, self.pagename, filename)
+        path = AttachFile.getAttachDir(self.request, self.pagename)
+        imagef = os.path.join(path, filename)
+        file_size = os.path.getsize(imagef)
 
-    assert exists and file_size == len(data)
+        nuke_page(self.request, self.pagename)
 
-def test_get_attachment_path_created_on_getFilename(request):
-    """
-    Tests if AttachFile.getFilename creates the attachment dir on requesting
-    """
-    pagename = "ThisPageDoesOnlyExistForThisTest"
-    filename = ""
-    file_exists = os.path.exists(AttachFile.getFilename(request, pagename, filename))
+        assert exists and file_size == len(data)
 
-    nuke_page(request, pagename)
+    def test_get_attachment_path_created_on_getFilename(self):
+        """
+        Tests if AttachFile.getFilename creates the attachment dir on self.requesting
+        """
+        filename = ""
+        file_exists = os.path.exists(AttachFile.getFilename(self.request, self.pagename, filename))
 
-    assert file_exists
+        nuke_page(self.request, self.pagename)
 
-def test_getAttachUrl(request):
-    """
-    Tests if AttachFile.getAttachUrl taints a filename
-    """
-    pagename = "ThisPageDoesOnlyExistForThisTest"
-    filename = "<test2.txt>"
-    expect = "rename=_test2.txt_&"
-    result = AttachFile.getAttachUrl(pagename, filename, request, upload=True)
+        assert file_exists
 
-    assert expect in result
+    def test_getAttachUrl(self):
+        """
+        Tests if AttachFile.getAttachUrl taints a filename
+        """
+        filename = "<test2.txt>"
+        expect = "rename=_test2.txt_&"
+        result = AttachFile.getAttachUrl(self.pagename, filename, self.request, upload=True)
 
+        assert expect in result
+
+coverage_modules = ['MoinMoin.action.AttachFile']
