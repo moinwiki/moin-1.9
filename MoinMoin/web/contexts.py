@@ -13,6 +13,7 @@ import re, time, inspect
 from werkzeug.utils import Headers, http_date
 from werkzeug.exceptions import Unauthorized, NotFound
 
+from MoinMoin import i18n
 from MoinMoin.request import RequestBase
 from MoinMoin.web.request import Request
 from MoinMoin.web.utils import check_spider
@@ -203,6 +204,33 @@ class HTTPContext(RequestContext, RequestBase):
     def finish(self):
         pass
 
+    def lang(self):
+        if i18n.languages is None:
+            i18n.i18n_init(self)
+
+        lang = None
+        
+        if i18n.languages and not self.cfg.language_ignore_browser:
+            for l in self.accept_languages:
+                if l in i18n.languages:
+                    lang = l
+                    break
+
+        if lang is None and self.cfg.language_default in i18n.languages:
+            lang = self.cfg.language_default
+        else:
+            lang = 'en'
+        return lang
+    lang = property(lang)
+
+    def getText(self):
+        lang = self.lang
+            
+        def _(text, i18n=i18n, request=self, lang=lang, **kw):
+            return i18n.getText(text, request, lang, **kw)
+        return _
+    getText = property(getText)
+
 class RenderContext(Context):
     """ Context for rendering content
     
@@ -213,6 +241,17 @@ class RenderContext(Context):
     * page
     * output redirection
     """
+    def __init__(self, parent,  page=None, user=None, lang=None):
+        Context.__init__(self, parent)
+        self.page = page
+        self.user = user
+    
+    def lang(self):
+        if self.user.valid and self.user.language:
+            return self.user.language
+        else:
+            return getattr(self._parent, 'lang')
+    lang = property(lang)
 
 # mangle in logging of function calls
 def _logfunc(func):

@@ -28,7 +28,6 @@ def _request_init(request):
     request.clock = Clock()
     request.clock.start('total')
     request.clock.start('base__init__')
-
     try:
         request.clock.start('load_multi_cfg')
         request.cfg = multiconfig.getConfig(request.url)
@@ -50,9 +49,6 @@ def _request_init(request):
     request.i18n = i18n
     i18n.i18n_init(request)
 
-    lang = i18n.requestLanguage(request, try_user=False)
-    request.getText = lambda text, i18n=i18n, request=request, lang=lang, **kw: i18n.getText(text, request, lang, **kw)
-    
     user_obj = request.cfg.session_handler.start(request, request.cfg.session_id_handler)
     
     request.user = None
@@ -79,11 +75,7 @@ def _request_init(request):
     request.mode_getpagelinks = 0 # is > 0 as long as we are in a getPageLinks call
     request.parsePageLinks_running = {} # avoid infinite recursion by remembering what we are already running
 
-    request.lang = i18n.requestLanguage(request)
-            # Language for content. Page content should use the wiki default lang,
-            # but generated content like search results should use the user language.
     request.content_lang = request.cfg.language_default
-    request.getText = lambda text, i18n=request.i18n, request=request, lang=request.lang, **kv: i18n.getText(text, request, lang, **kv)
 
     request.reset()
 
