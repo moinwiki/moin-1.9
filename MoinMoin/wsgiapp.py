@@ -48,7 +48,7 @@ def _request_init(request):
     user_obj = request.cfg.session_handler.start(request, request.cfg.session_id_handler)
     
     request.user = None
-    request.user = handle_auth_form(user_obj)
+    request.user = handle_auth_form(user_obj, request.form)
 
     request.cfg.session_handler.after_auth(request, request.cfg.session_id_handler, request.user)
 
