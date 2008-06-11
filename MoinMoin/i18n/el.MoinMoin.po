@@ -1,8 +1,8 @@
-## Please edit system and help pages ONLY in the moinmaster wiki! For more
-## information, please see MoinMaster:MoinPagesEditorGroup.
+## Please edit system and help pages ONLY in the master wiki!
+## For more information, please see MoinMoin:MoinDev/Translation.
 ##master-page:None
 ##master-date:None
-#acl MoinPagesEditorGroup:read,write,delete,revert All:read
+#acl -All:write Default
 #format gettext
 #language el
 
@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-08 20:12+0200\n"
+"POT-Creation-Date: 2008-06-11 18:21+0200\n"
 "PO-Revision-Date: 2007-12-22 17:56+0200\n"
 "Last-Translator: YiannisValassakis <tungolcild@gmail.com>\n"
 "Language-Team: Greek <moin-devel@lists.sourceforge.net>\n"
@@ -25,34 +25,35 @@ msgstr ""
 "X-HasWikiMarkup: True\n"
 "X-Direction: ltr\n"
 
-msgid "<unknown>"
-msgstr "<άγνωστο>"
-
-#, fuzzy, python-format
-msgid ""
-"Login Name: %s\n"
-"\n"
-"Password recovery token: %s\n"
-"\n"
-"Password reset URL: %s/?action=recoverpass&name=%s&token=%s\n"
+#, python-format
+msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr ""
-"Όνομα εισόδου: %s\n"
-"\n"
-"Κωδικός εισόδου: %s\n"
-"\n"
-"Σελίδα εισόδου: %s/%s?action=login\n"
 
 msgid ""
-"Somebody has requested to email you a password recovery token.\n"
-"\n"
-"If you lost your password, please go to the password reset URL below or\n"
-"go to the password recovery page again and enter your username and the\n"
-"recovery token.\n"
+"The backed up content of this page is deprecated and will not be included in "
+"search results!"
 msgstr ""
 
 #, python-format
-msgid "[%(sitename)s] Your wiki account data"
-msgstr "[%(sitename)s] Οι πληροφορίες του wiki λογαριασμού σας"
+msgid "Revision %(rev)d as of %(date)s"
+msgstr ""
+
+#, python-format
+msgid "Redirected from page \"%(page)s\""
+msgstr "Ανακατεύθυνση από τη σελίδα \"%(page)s\""
+
+#, python-format
+msgid "This page redirects to page \"%(page)s\""
+msgstr "Αυτή η σελίδα ανακατευθύνεται στην \"%(page)s\""
+
+msgid "Create New Page"
+msgstr "Δημιουργία Νέας Σελίδας"
+
+msgid "You are not allowed to view this page."
+msgstr "Δεν επιτρέπεται να δείτε αυτή τη σελίδα."
+
+msgid "Your changes are not saved!"
+msgstr "Οι αλλαγές σας δεν αποθηκεύθηκαν!"
 
 msgid "You are not allowed to edit this page."
 msgstr "Δεν επιτρέπεται να επεξεργαστείτε αυτή τη σελίδα."
@@ -65,6 +66,11 @@ msgstr "Δε μπορεί να γίνει επεξεργασία σε παλιό
 
 msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr ""
+
+msgid "Page name is too long, try shorter name."
+msgstr ""
+"Το όνομα που δώσατε για τη σελίδα είναι πολύ μεγάλο, δοκιμάστε κάποιο "
+"μικρότερο."
 
 #, python-format
 msgid "Draft of \"%(pagename)s\""
@@ -155,8 +161,8 @@ msgstr ""
 msgid "Preview"
 msgstr "Προεπισκόπηση"
 
-msgid "Text mode"
-msgstr "Λειτουργία Κειμένου"
+msgid "GUI Mode"
+msgstr "Παραθυρική Λειτουργία"
 
 msgid "Load Draft"
 msgstr "Φόρτωσε το Πρότυπο"
@@ -176,84 +182,6 @@ msgstr "Πρόσθεσε στην: %(category)s"
 
 msgid "Remove trailing whitespace from each line"
 msgstr ""
-
-#, python-format
-msgid "Argument \"%s\" must be a boolean value, not \"%s\""
-msgstr "Το όρισμα \"%s\" πρέπει να έχει τιμή boolean και όχι \"%s\""
-
-#, python-format
-msgid "Argument must be a boolean value, not \"%s\""
-msgstr "Το όρισμα πρέπει να έχει τιμή boolean και όχι \"%s\""
-
-#, python-format
-msgid "Argument \"%s\" must be an integer value, not \"%s\""
-msgstr "Το όρισμα \"%s\" πρέπει να έχει τιμή ακέραιου και όχι \"%s\""
-
-#, python-format
-msgid "Argument must be an integer value, not \"%s\""
-msgstr "Το όρισμα πρέπει να έχει τιμή ακέραιου και όχι \"%s\""
-
-#, python-format
-msgid "Argument \"%s\" must be a floating point value, not \"%s\""
-msgstr ""
-"Το όρισμα \"%s\" πρέπει να είναι τιμή τύπου κινητής υποδιαστολής και όχι \"%s"
-"\""
-
-#, python-format
-msgid "Argument must be a floating point value, not \"%s\""
-msgstr ""
-"Το όρισμα πρέπει να είναι τιμή τύπου κινητής υποδιαστολής και όχι \"%s\""
-
-#, python-format
-msgid "Argument \"%s\" must be a complex value, not \"%s\""
-msgstr "Το όρισμα \"%s\" πρέπει να είναι σύνθετη τιμή και όχι \"%s\""
-
-#, python-format
-msgid "Argument must be a complex value, not \"%s\""
-msgstr "Το όρισμα πρέπει να είναι σύνθετη τιμή και όχι \"%s\""
-
-#, python-format
-msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
-msgstr "Το όρισμα \"%s\" πρέπει να είναι κάποιο από τα \"%s\", και όχι \"%s\""
-
-#, python-format
-msgid "Argument must be one of \"%s\", not \"%s\""
-msgstr "Το όρισμα πρέπει να είναι ένα από τα \"%s\", και όχι \"%s\""
-
-msgid "Too many arguments"
-msgstr "Πολλά ορίσματα"
-
-msgid "Cannot have arguments without name following named arguments"
-msgstr ""
-"Δε γίνεται να υπάρχουν ορίσματα χωρίς όνομα που να ακολουθούνται από "
-"ονοματισμένα ορίσματα."
-
-#, python-format
-msgid "Argument \"%s\" is required"
-msgstr "Το όρισμα \"%s\" απαιτείται"
-
-#, python-format
-msgid "No argument named \"%s\""
-msgstr "Δεν υπάρχει όρισμα με όνομα \"%s\""
-
-#, python-format
-msgid "Expected \"=\" to follow \"%(token)s\""
-msgstr "Αναμένονταν το  \"=\" να ακολουθείται από  \"%(token)s\""
-
-#, python-format
-msgid "Expected a value for key \"%(token)s\""
-msgstr ""
-
-msgid "Your changes are not saved!"
-msgstr "Οι αλλαγές σας δεν αποθηκεύθηκαν!"
-
-msgid "Page name is too long, try shorter name."
-msgstr ""
-"Το όνομα που δώσατε για τη σελίδα είναι πολύ μεγάλο, δοκιμάστε κάποιο "
-"μικρότερο."
-
-msgid "GUI Mode"
-msgstr "Παραθυρική Λειτουργία"
 
 msgid "Edit was cancelled."
 msgstr "Η διαδικασία της επεξεργασίας ακυρώθηκε."
@@ -385,17 +313,11 @@ msgid ""
 "To leave the editor, press the Cancel button."
 msgstr ""
 
-msgid "The wiki is currently not reachable."
-msgstr "Το wiki είναι μη προσπελάσιμο αυτή τη στιγμή."
+msgid "<unknown>"
+msgstr "<άγνωστο>"
 
-msgid "Invalid username or password."
-msgstr ""
-
-#, python-format
-msgid ""
-"The remote wiki uses a different InterWiki name (%(remotename)s) internally "
-"than you specified (%(localname)s)."
-msgstr ""
+msgid "Text mode"
+msgstr "Λειτουργία Κειμένου"
 
 #, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
@@ -435,1077 +357,218 @@ msgstr "Άγνωστη συνάρτηση %(func)s στη γραμμή %(lineno)
 msgid "The file %s was not found in the package."
 msgstr "Το αρχείο %s δε βρέθηκε στο πακέτο."
 
-#, python-format
-msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
-msgstr ""
-
-msgid ""
-"The backed up content of this page is deprecated and will not be included in "
-"search results!"
-msgstr ""
-
-#, python-format
-msgid "Revision %(rev)d as of %(date)s"
-msgstr ""
-
-#, python-format
-msgid "Redirected from page \"%(page)s\""
-msgstr "Ανακατεύθυνση από τη σελίδα \"%(page)s\""
-
-#, python-format
-msgid "This page redirects to page \"%(page)s\""
-msgstr "Αυτή η σελίδα ανακατευθύνεται στην \"%(page)s\""
-
-msgid "Create New Page"
-msgstr "Δημιουργία Νέας Σελίδας"
-
-msgid "You are not allowed to view this page."
-msgstr "Δεν επιτρέπεται να δείτε αυτή τη σελίδα."
-
-msgid "[all]"
-msgstr ""
-
-msgid "[not empty]"
-msgstr ""
-
-msgid "[empty]"
-msgstr ""
-
-msgid "filter"
-msgstr ""
-
-msgid "about"
-msgstr ""
-
-#, python-format
-msgid ""
-"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
-"%(be)s results out of about %(pages)d pages."
-msgstr ""
-
-msgid "seconds"
-msgstr "δευτερόλεπτα"
-
-msgid "Previous"
-msgstr "Προηγούμενη"
-
-msgid "Next"
-msgstr "Επόμενη"
-
-msgid "rev"
-msgstr ""
-
-msgid "current"
-msgstr "τρέχον"
-
-#, python-format
-msgid "last modified: %s"
-msgstr "τελευταία τροποποίηση: %s"
-
-msgid "match"
-msgstr "ταίριασμα"
-
-msgid "matches"
-msgstr "ταιριάζουν"
-
-msgid "Line"
-msgstr ""
-
-msgid "No differences found!"
-msgstr "Δε βρέθηκαν διαφορές!"
-
-msgid "Deletions are marked like this."
-msgstr ""
-
-msgid "Additions are marked like this."
-msgstr ""
-
-msgid "Name"
-msgstr "Όνομα"
-
-msgid "Password"
-msgstr "Κωδικός"
-
-msgid "OpenID"
-msgstr ""
-
-msgid "Login"
-msgstr "Είσοδος"
-
-#, fuzzy
-msgid "Username"
-msgstr "Χρήστης"
-
-#, fuzzy
-msgid "Member of Groups"
-msgstr "Αριθμός σελίδων"
-
-msgid "Email"
-msgstr "Email"
-
-msgid "Jabber"
-msgstr ""
-
-msgid "Action"
-msgstr "Δράση"
-
-msgid "Enable user"
-msgstr "Ενεργοποίηση χρήστη"
-
-msgid "disabled"
-msgstr "απενεργοποιημένο"
-
-msgid "Disable user"
-msgstr "Απενεργοποίηση χρήστη"
-
-msgid "Mail account data"
-msgstr "Δεδομένα του λογαριασμού mail"
-
-msgid "Missing password. Please enter user name and password."
-msgstr ""
-
-#, python-format
-msgid "LDAP server %(server)s failed."
-msgstr ""
-
-msgid "You need to log in."
-msgstr ""
-
-#, python-format
-msgid ""
-"If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
-msgstr ""
-
-msgid ""
-"Please choose an account name now.\n"
-"If you choose an existing account name you will be asked for the\n"
-"password and be able to associate the account with your OpenID."
-msgstr ""
-
-msgid "Choose this name"
-msgstr ""
-
-msgid ""
-"The username you have chosen is already\n"
-"taken. If it is your username, enter your password below to associate\n"
-"the username with your OpenID. Otherwise, please choose a different\n"
-"username and leave the password field blank."
-msgstr ""
-
-msgid "Associate this name"
-msgstr ""
-
-#, python-format
-msgid "OpenID error: %s."
-msgstr ""
-
-msgid "Verification canceled."
-msgstr ""
-
-msgid "OpenID failure."
-msgstr ""
-
-msgid "This is not a valid username, choose a different one."
-msgstr ""
-
-msgid "Your account is now associated to your OpenID."
-msgstr ""
-
-msgid "The password you entered is not valid."
-msgstr ""
-
-msgid "OpenID verification requires that you click this button:"
-msgstr ""
-
-msgid "Anonymous sessions need to be enabled for OpenID login."
-msgstr ""
-
-msgid "Failed to resolve OpenID."
-msgstr ""
-
-msgid "OpenID discovery failure, not a valid OpenID."
-msgstr ""
-
-msgid "No OpenID."
-msgstr ""
-
-msgid ""
-"If you do not have an account yet, you can still log in with your OpenID and "
-"create one during login."
-msgstr ""
-
-msgid "Failed to connect to database."
-msgstr ""
-
-msgid "Could not contact botbouncer.com."
-msgstr ""
-
-msgid "Wiki"
-msgstr "Wiki"
-
-msgid "Page"
-msgstr "Σελίδα"
-
-msgid "User"
-msgstr "Χρήστης"
-
-msgid "Diffs"
-msgstr ""
-
-msgid "Info"
-msgstr "Πληροφορίες"
-
-msgid "Edit"
-msgstr "Επεξεργασία"
-
-msgid "Unsubscribe"
-msgstr "Διαγραφή"
-
-msgid "Subscribe"
-msgstr "Εγγραφή"
-
-msgid "Raw"
-msgstr ""
-
-msgid "XML"
-msgstr "XML"
-
-msgid "Print"
-msgstr "Εκτύπωση"
-
-msgid "View"
-msgstr "Προβολή"
-
-msgid "Home"
-msgstr "Αρχική"
-
-msgid "Up"
-msgstr "Επάνω"
-
-msgid "[RSS]"
-msgstr "[RSS]"
-
-msgid "[DELETED]"
-msgstr "[ΔΙΕΓΡΑΜΜΕΝΟ]"
-
-msgid "[UPDATED]"
-msgstr "[ΕΝΗΜΕΡΩΜΕΝΟ]"
-
-msgid "[RENAMED]"
-msgstr "[ΜΕΤΟΝΟΜΑΣΜΕΝΟ]"
-
-msgid "[CONFLICT]"
-msgstr "[ΣΥΓΚΡΟΥΣΗ]"
-
-msgid "[NEW]"
-msgstr "[ΝΕΟ]"
-
-msgid "[DIFF]"
-msgstr "[DIFF]"
-
-msgid "[BOTTOM]"
-msgstr "[ΤΕΛΟΣ]"
-
-msgid "[TOP]"
-msgstr "[ΑΡΧΗ]"
-
-msgid "Click to do a full-text search for this title"
-msgstr "Κάντε κλικ εδώ για να κάνετε πλήρη αναζήτηση γι' αυτόν τον τίτλο"
-
-msgid "Settings"
-msgstr ""
-
-msgid "Logout"
-msgstr "Αποσύνδεση"
-
-msgid "Clear message"
-msgstr "Καθαρισμός του μηνύματος"
-
-#, python-format
-msgid "last edited %(time)s by %(editor)s"
-msgstr "τελευταία τροποποίηση %(time)s από %(editor)s"
-
-#, python-format
-msgid "last modified %(time)s"
-msgstr "τροποποιήθηκε %(time)s"
-
-msgid "Search:"
-msgstr "Αναζήτηση:"
-
-msgid "Text"
-msgstr "Κείμενο"
-
-msgid "Titles"
-msgstr "Τίτλοι"
-
-msgid "Search"
-msgstr "Αναζήτηση"
-
-msgid "More Actions:"
-msgstr "Περισότερες επιλογές:"
-
-msgid "------------------------"
-msgstr "------------------------"
-
-msgid "Raw Text"
-msgstr ""
-
-msgid "Print View"
-msgstr ""
-
-msgid "Delete Cache"
-msgstr ""
-
-msgid "Rename Page"
-msgstr ""
-
-msgid "Copy Page"
-msgstr ""
-
-msgid "Delete Page"
-msgstr ""
-
-msgid "Like Pages"
-msgstr ""
-
-msgid "Local Site Map"
-msgstr ""
-
-msgid "My Pages"
-msgstr "Οι σελίδες μου"
-
-msgid "Subscribe User"
-msgstr ""
-
-msgid "Remove Spam"
-msgstr ""
-
-msgid "Revert to this revision"
-msgstr ""
-
-msgid "Package Pages"
-msgstr ""
-
-msgid "Render as Docbook"
-msgstr ""
-
-msgid "Sync Pages"
-msgstr ""
-
-msgid "Do"
-msgstr ""
-
-msgid "Comments"
-msgstr ""
-
-msgid "Edit (Text)"
-msgstr ""
-
-msgid "Edit (GUI)"
-msgstr ""
-
-msgid "Immutable Page"
-msgstr ""
-
-msgid "Remove Link"
-msgstr ""
-
-msgid "Add Link"
-msgstr ""
-
-msgid "Attachments"
-msgstr "Επισυναπτόμενα αρχεία"
-
-#, python-format
-msgid "Show %s days."
-msgstr ""
-
-msgid "Wiki Markup"
-msgstr ""
-
-msgid "DeleteCache"
-msgstr ""
-
-#, python-format
-msgid "(cached %s)"
-msgstr ""
-
-msgid "Or try one of these actions:"
-msgstr ""
-
-msgid "Date"
-msgstr "Ημερομηνία"
-
-msgid "From"
-msgstr "Από"
-
-msgid "To"
-msgstr "Προς"
-
-msgid "Content"
-msgstr "Περιεχόμενο"
-
-#, python-format
-msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
-msgstr ""
-
-msgid "Mail not sent"
-msgstr "Το mail δε στάλθηκε"
-
-msgid "Mail sent OK"
-msgstr "Το mail στάλθηκε επιτυχώς"
-
-msgid ""
-"Rendering of reStructured text is not possible, please install Docutils."
-msgstr ""
-
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr ""
-
-#, fuzzy, python-format
-msgid "**You are not allowed to read the page: %s**"
-msgstr "Δεν επιτρέπεται να αλλάξετε το όνομα της σελίδας!"
-
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr ""
-
-msgid "XSLT option disabled, please look at HelpOnConfiguration."
-msgstr ""
-
-msgid "XSLT processing is not available, please install 4suite 1.x."
-msgstr ""
-
-#, python-format
-msgid "%(errortype)s processing error"
-msgstr ""
-
-#, python-format
-msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
-msgstr ""
-
-#, python-format
-msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
-msgstr ""
-
-#, python-format
-msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
-msgstr ""
-
-#, python-format
-msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
-msgstr ""
-
-msgid "FrontPage"
-msgstr ""
-
-msgid "RecentChanges"
-msgstr ""
-
-msgid "TitleIndex"
-msgstr ""
-
-msgid "WordIndex"
-msgstr ""
-
-msgid "FindPage"
-msgstr ""
-
-msgid "SiteNavigation"
-msgstr ""
-
-msgid "HelpContents"
-msgstr ""
-
-msgid "HelpOnFormatting"
-msgstr ""
-
-msgid "WikiLicense"
-msgstr ""
-
-msgid "MissingPage"
-msgstr ""
-
-msgid "MissingHomePage"
-msgstr ""
-
-msgid "Mon"
-msgstr "Δε"
-
-msgid "Tue"
-msgstr "Τρ"
-
-msgid "Wed"
-msgstr "Τετ"
-
-msgid "Thu"
-msgstr "Πε"
-
-msgid "Fri"
-msgstr "Πα"
-
-msgid "Sat"
-msgstr "Σαβ"
-
-msgid "Sun"
-msgstr "Κυρ"
-
-msgid "AttachFile"
-msgstr ""
-
-msgid "DeletePage"
-msgstr ""
-
-msgid "LikePages"
-msgstr ""
-
-msgid "LocalSiteMap"
-msgstr ""
-
-msgid "RenamePage"
-msgstr ""
-
-msgid "SpellCheck"
-msgstr ""
-
-msgid "Discussion"
-msgstr ""
-
-#, python-format
-msgid ""
-"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
-msgstr ""
-
-msgid "Notification"
-msgstr ""
-
-msgid "Notification settings saved!"
-msgstr ""
-
-#, fuzzy
-msgid "'''Email'''"
-msgstr "Email"
-
-msgid "'''Jabber'''"
-msgstr ""
-
-msgid "'''Event type'''"
-msgstr ""
-
-msgid "Select the events you want to be notified about."
-msgstr ""
-
-msgid ""
-"Before you can be notified, you need to provide a way to contact you in the "
-"general preferences."
-msgstr ""
-
-#, fuzzy
-msgid "Subscribed events"
-msgstr "Εγγραφή"
-
-#, fuzzy
-msgid "Subscribed wiki pages<<BR>>(one regex per line)"
-msgstr "Σελίδες wiki που έχετε γραφτεί (μόνο ένα regex ανά γραμμή)"
-
-msgid "Save"
-msgstr "Αποθήκευση"
-
-#, fuzzy
-msgid "Change password"
-msgstr "Κωδικός"
-
-msgid "Passwords don't match!"
-msgstr "Οι κωδικοί δεν ταιριάζουν!"
-
-msgid "Please specify a password!"
-msgstr "Παρακαλώ βάλτε κάποιον κωδικό!"
-
-#, python-format
-msgid "Password not acceptable: %s"
-msgstr "Ο κωδικός δε μπορεί να γίνει δεκτός: %s"
-
-msgid "Your password has been changed."
-msgstr ""
-
-msgid "To change your password, enter a new password twice."
-msgstr ""
-
-msgid "Password repeat"
-msgstr ""
-
-msgid "Switch user"
-msgstr ""
-
-msgid "No user selected"
-msgstr ""
-
-msgid ""
-"You can now change the settings of the selected user account; log out to get "
-"back to your account."
-msgstr ""
-
-msgid "You are the only user."
-msgstr ""
-
-msgid ""
-"As a superuser, you can temporarily assume the identity of another user."
-msgstr ""
-
-msgid "Select User"
-msgstr "Επιλογή Χρήστη"
-
-msgid "OpenID settings"
-msgstr ""
-
-msgid "Cannot remove all OpenIDs."
-msgstr ""
-
-msgid "The selected OpenIDs have been removed."
-msgstr ""
-
-msgid "No OpenID given."
-msgstr ""
-
-msgid "OpenID is already present."
-msgstr ""
-
-msgid "This OpenID is already used for another account."
-msgstr ""
-
-msgid "OpenID added successfully."
-msgstr ""
-
-msgid "Current OpenIDs"
-msgstr ""
-
-msgid "Remove selected"
-msgstr ""
-
-msgid "Add OpenID"
-msgstr ""
-
-msgid "Preferences"
-msgstr "Επιλογές"
-
-#, python-format
-msgid ""
-"Invalid user name {{{'%s'}}}.\n"
-"Name may contain any Unicode alpha numeric character, with optional one\n"
-"space between words. Group page name is not allowed."
-msgstr ""
-"Το όνομα χρήστη {{{'%s'}}} δεν είναι έγκυρο .\n"
-"Το όνομα πρέπει να περιέχει οποιονδήποτε Unicode αλφαριθμητικό χαρακτήρα και "
-"προεραιτικά\n"
-"ένα κενό ανάμεσα στις λέξεις. Δεν επιτρέπονται τα ονόματα σελίδων group."
-
-msgid "This user name already belongs to somebody else."
-msgstr "Αυτό το όνομα χρήστη ανήκει ήδη σε κάποιον άλλο."
-
-msgid "Empty user name. Please enter a user name."
-msgstr "Το όνομα χρήστη είναι άδειο. Παρακαλώ πληκτρολογήστε ένα όνομα χρήστη."
-
-msgid ""
-"Please provide your email address. If you lose your login information, you "
-"can get it by email."
-msgstr ""
-"Παρακαλώ βάλτε το email σας έτσι ώστε να σας στείλουμε τις πληροφορίες του "
-"λογαριασμού σε περίπτωση που τον χάσετε."
-
-msgid "This email already belongs to somebody else."
-msgstr "Αυτό το email ανήκει σε κάποιον άλλο."
-
-#, fuzzy
-msgid "This jabber id already belongs to somebody else."
-msgstr "Αυτό το email ανήκει σε κάποιον άλλο."
-
-#, python-format
-msgid "The theme '%(theme_name)s' could not be loaded!"
-msgstr "Το theme '%(theme_name)s' δε μπορεί να ανοίξει!"
-
-msgid "User preferences saved!"
-msgstr "Οι ρυθμίσεις χρήστη αποθηκεύτηκαν!"
-
-msgid "Default"
-msgstr "Default"
-
-msgid "<Browser setting>"
-msgstr "<Επιλογές Φυλλομετρητή>"
-
-msgid "the one preferred"
-msgstr "το προτιμόμενο"
-
-msgid "free choice"
-msgstr "ελεύθερη επιλογή"
-
-msgid "Preferred theme"
-msgstr "Προτιμόμενο θέμα"
-
-msgid "Editor Preference"
-msgstr "Επιλογές του editor"
-
-msgid "Editor shown on UI"
-msgstr "Ο editor που θα εμφανίζεται στο UI"
-
-msgid "Time zone"
-msgstr "Ζώνη ώρας"
-
-msgid "Your time is"
-msgstr "Η ώρα σας είναι"
-
-msgid "Server time is"
-msgstr "Η ώρα του server είναι"
-
-msgid "Date format"
-msgstr "Μορφή ημερομηνίας"
-
-msgid "Preferred language"
-msgstr "Προτιμόμενη γλώσσα"
-
-msgid "General options"
-msgstr "Γενικές επιλογές"
-
-msgid "Quick links"
-msgstr "Γρήγορες συνδέσεις"
-
 #, fuzzy, python-format
 msgid ""
-"Dear Wiki user,\n"
+"Login Name: %s\n"
 "\n"
-"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
-"change notification.\n"
+"Password recovery token: %s\n"
 "\n"
-"The \"%(pagename)s\" page has been changed by %(editor)s:\n"
+"Password reset URL: %s/?action=recoverpass&name=%s&token=%s\n"
 msgstr ""
-"Αγαπητή/ε χρήστη του Wiki,\n"
+"Όνομα εισόδου: %s\n"
 "\n"
-"Έχετε εγγραφεί έτσι ώστε να ενημερώνεστε για μια σελίδα ή κατηγορία wiki με "
-"όνομα \"%(sitename)s\".\n"
+"Κωδικός εισόδου: %s\n"
 "\n"
-"Η παρακάτω σελίδα έχει τροποποιηθεί από τους %(editor)s:\n"
-"%(pagelink)s\n"
-"\n"
+"Σελίδα εισόδου: %s/%s?action=login\n"
 
-msgid "New page:\n"
-msgstr "Νέα σελίδα:\n"
-
-msgid "No differences found!\n"
-msgstr "Δε βρέθηκαν διαφορές!\n"
-
-#, fuzzy, python-format
 msgid ""
-"Dear wiki user,\n"
+"Somebody has requested to email you a password recovery token.\n"
 "\n"
-"You have subscribed to a wiki page \"%(sitename)s\" for change "
-"notification.\n"
-"\n"
-"The page \"%(pagename)s\" has been deleted by %(editor)s:\n"
-"\n"
+"If you lost your password, please go to the password reset URL below or\n"
+"go to the password recovery page again and enter your username and the\n"
+"recovery token.\n"
 msgstr ""
-"Αγαπητή/ε χρήστη του Wiki,\n"
-"\n"
-"Έχετε εγγραφεί έτσι ώστε να ενημερώνεστε για μια σελίδα ή κατηγορία wiki με "
-"όνομα \"%(sitename)s\".\n"
-"\n"
-"Η παρακάτω σελίδα έχει τροποποιηθεί από τους %(editor)s:\n"
-"%(pagelink)s\n"
-"\n"
-
-#, fuzzy, python-format
-msgid ""
-"Dear wiki user,\n"
-"\n"
-"You have subscribed to a wiki page \"%(sitename)s\" for change "
-"notification.\n"
-"\n"
-"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by %(editor)"
-"s:\n"
-msgstr ""
-"Αγαπητή/ε χρήστη του Wiki,\n"
-"\n"
-"Έχετε εγγραφεί έτσι ώστε να ενημερώνεστε για μια σελίδα ή κατηγορία wiki με "
-"όνομα \"%(sitename)s\".\n"
-"\n"
-"Η παρακάτω σελίδα έχει τροποποιηθεί από τους %(editor)s:\n"
-"%(pagelink)s\n"
-"\n"
 
 #, python-format
-msgid "New user account created on %(sitename)s"
+msgid "[%(sitename)s] Your wiki account data"
+msgstr "[%(sitename)s] Οι πληροφορίες του wiki λογαριασμού σας"
+
+msgid "The wiki is currently not reachable."
+msgstr "Το wiki είναι μη προσπελάσιμο αυτή τη στιγμή."
+
+msgid "Invalid username or password."
 msgstr ""
 
 #, python-format
 msgid ""
-"Dear Superuser, a new user has just been created. Details follow:\n"
-"\n"
-"    User name: %(username)s\n"
-"    Email address: %(useremail)s"
+"The remote wiki uses a different InterWiki name (%(remotename)s) internally "
+"than you specified (%(localname)s)."
 msgstr ""
 
 #, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
+msgid "Argument \"%s\" must be a boolean value, not \"%s\""
+msgstr "Το όρισμα \"%s\" πρέπει να έχει τιμή boolean και όχι \"%s\""
+
+#, python-format
+msgid "Argument must be a boolean value, not \"%s\""
+msgstr "Το όρισμα πρέπει να έχει τιμή boolean και όχι \"%s\""
+
+#, python-format
+msgid "Argument \"%s\" must be an integer value, not \"%s\""
+msgstr "Το όρισμα \"%s\" πρέπει να έχει τιμή ακέραιου και όχι \"%s\""
+
+#, python-format
+msgid "Argument must be an integer value, not \"%s\""
+msgstr "Το όρισμα πρέπει να έχει τιμή ακέραιου και όχι \"%s\""
+
+#, python-format
+msgid "Argument \"%s\" must be a floating point value, not \"%s\""
+msgstr ""
+"Το όρισμα \"%s\" πρέπει να είναι τιμή τύπου κινητής υποδιαστολής και όχι \"%s"
+"\""
+
+#, python-format
+msgid "Argument must be a floating point value, not \"%s\""
+msgstr ""
+"Το όρισμα πρέπει να είναι τιμή τύπου κινητής υποδιαστολής και όχι \"%s\""
+
+#, python-format
+msgid "Argument \"%s\" must be a complex value, not \"%s\""
+msgstr "Το όρισμα \"%s\" πρέπει να είναι σύνθετη τιμή και όχι \"%s\""
+
+#, python-format
+msgid "Argument must be a complex value, not \"%s\""
+msgstr "Το όρισμα πρέπει να είναι σύνθετη τιμή και όχι \"%s\""
+
+#, python-format
+msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
+msgstr "Το όρισμα \"%s\" πρέπει να είναι κάποιο από τα \"%s\", και όχι \"%s\""
+
+#, python-format
+msgid "Argument must be one of \"%s\", not \"%s\""
+msgstr "Το όρισμα πρέπει να είναι ένα από τα \"%s\", και όχι \"%s\""
+
+msgid "Too many arguments"
+msgstr "Πολλά ορίσματα"
+
+msgid "Cannot have arguments without name following named arguments"
+msgstr ""
+"Δε γίνεται να υπάρχουν ορίσματα χωρίς όνομα που να ακολουθούνται από "
+"ονοματισμένα ορίσματα."
+
+#, python-format
+msgid "Argument \"%s\" is required"
+msgstr "Το όρισμα \"%s\" απαιτείται"
+
+#, python-format
+msgid "No argument named \"%s\""
+msgstr "Δεν υπάρχει όρισμα με όνομα \"%s\""
+
+#, python-format
+msgid "Expected \"=\" to follow \"%(token)s\""
+msgstr "Αναμένονταν το  \"=\" να ακολουθείται από  \"%(token)s\""
+
+#, python-format
+msgid "Expected a value for key \"%(token)s\""
+msgstr ""
+
+#, python-format
+msgid "[%d attachments]"
 msgstr ""
 
 #, python-format
 msgid ""
-"Dear Wiki user,\n"
-"\n"
-"You have subscribed to a wiki page \"%(page_name)s\" for change "
-"notification. An attachment has been added to that page by %(editor)s. "
-"Following detailed information is available:\n"
-"\n"
-"Attachment name: %(attach_name)s\n"
-"Attachment size: %(attach_size)s\n"
+"There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this "
+"page."
 msgstr ""
 
-msgid "Page has been modified"
-msgstr ""
-
-msgid "Page has been modified in a trivial fashion"
-msgstr ""
-
-msgid "Page has been renamed"
-msgstr ""
-
-msgid "Page has been deleted"
-msgstr ""
-
-msgid "Page has been copied"
-msgstr ""
-
-msgid "A new attachment has been added"
-msgstr ""
-
-msgid "A page has been reverted to a previous state"
-msgstr ""
-
-msgid "A user has subscribed to a page"
-msgstr ""
-
-msgid "A new account has been created"
+msgid "Filename of attachment not specified!"
 msgstr ""
 
 #, python-format
-msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
-msgstr ""
-
-msgid "Trivial "
-msgstr ""
-
-#, python-format
-msgid ""
-"Attachment link: %(attach)s\n"
-"Page link: %(page)s\n"
-msgstr ""
-
-#, fuzzy
-msgid "Attachment link"
-msgstr "Επισυναπτόμενα αρχεία"
-
-#, fuzzy
-msgid "Page link"
-msgstr "Σελίδες όπως η \"%s\""
-
-#, fuzzy
-msgid "Changed page"
-msgstr "Σελίδες πακέτου"
-
-#, fuzzy
-msgid "Page changed"
-msgstr "Αποθήκευση αλλαγών"
-
-msgid "Options --pages and --search are mutually exclusive!"
-msgstr ""
-
-msgid "You must specify an output file!"
-msgstr "Πρέπει να θέσετε κάποιο αρχείο εξόδου!"
-
-msgid "No pages specified using --pages or --search, assuming full package."
-msgstr ""
-
-msgid "Output file already exists! Cowardly refusing to continue!"
-msgstr "Το αρχείο εξόδου υπάρχει ήδη! Φοβάμαι να συνέχισω..."
-
-msgid "Language"
-msgstr "Γλώσσα"
-
-msgid "Others"
-msgstr ""
-
-msgid "Charts are not available!"
-msgstr ""
-
-msgid "Page Size Distribution"
-msgstr ""
-
-msgid "page size upper bound [bytes]"
-msgstr ""
-
-msgid "# of pages of this size"
-msgstr ""
-
-msgid "Views/day"
-msgstr ""
-
-msgid "Edits/day"
-msgstr ""
-
-msgid "Page hits and edits"
-msgstr ""
-
-#, python-format
-msgid "%(chart_title)s for %(filterpage)s"
+msgid "Attachment '%(filename)s' does not exist!"
 msgstr ""
 
 msgid ""
-"green=view\n"
-"red=edit"
+"To refer to attachments on a page, use '''{{{attachment:filename}}}''', \n"
+"as shown below in the list of files. \n"
+"Do '''NOT''' use the URL of the {{{[get]}}} link, \n"
+"since this is subject to change and can break easily."
 msgstr ""
 
-msgid "date"
-msgstr "ημερομηνία"
-
-msgid "# of hits"
-msgstr "# επισκέψεων"
-
-msgid "User agent"
+msgid "del"
 msgstr ""
 
-msgid "Distribution of User-Agent Types"
+msgid "move"
 msgstr ""
 
-msgid ""
-" Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
-">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
-"italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed ''<<Verbatim(''')"
-">>'''''bold'''<<Verbatim(''')>> and italics''<<Verbatim('')>>; <<Verbatim"
-"(----)>> horizontal rule.\n"
-" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
-"===== Title 5 =====.\n"
-" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
-"#n start numbering at n; space alone indents.\n"
-" Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])"
-">>.\n"
-" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
-"white space allowed after tables or titles.\n"
-"\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
-msgstr ""
-
-msgid ""
-"{{{\n"
-"Emphasis: *italic* **bold** ``monospace``\n"
-"\n"
-"Headings: Heading 1  Heading 2  Heading 3\n"
-"          =========  ---------  ~~~~~~~~~\n"
-"\n"
-"Horizontal rule: ----\n"
-"\n"
-"Links: TrailingUnderscore_ `multi word with backticks`_ external_\n"
-"\n"
-".. _external: http://external-site.example.org/foo/\n"
-"\n"
-"Lists: * bullets; 1., a. numbered items.\n"
-"}}}\n"
-"(!) For more help, see the\n"
-"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
-"reStructuredText Quick Reference]].\n"
-msgstr ""
-
-msgid ""
-" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
-">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
-"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
-">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
-" Horizontal Rule:: <<Verbatim(----)>>\n"
-" Force Linebreak:: <<Verbatim(\\\\)>>\n"
-" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
-"===== Title 5 =====.\n"
-" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
-"items.\n"
-" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
-" Tables:: |= header text | cell text | more cell text |;\n"
-"\n"
-"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
-msgstr ""
-
-msgid "UnSubscribe"
-msgstr ""
-
-msgid "Publish my email (not my wiki homepage) in author info"
-msgstr ""
-
-msgid "Open editor on double click"
-msgstr ""
-
-msgid "After login, jump to last visited page"
-msgstr ""
-
-msgid "Show comment sections"
-msgstr ""
-
-msgid "Show question mark for non-existing pagelinks"
-msgstr ""
-
-msgid "Show page trail"
-msgstr ""
-
-msgid "Show icon toolbar"
-msgstr ""
-
-msgid "Show top/bottom links in headings"
-msgstr ""
-
-msgid "Show fancy diffs"
-msgstr ""
-
-msgid "Add spaces to displayed wiki names"
-msgstr ""
-
-msgid "Remember login information"
-msgstr ""
-
-msgid "Disable this account forever"
-msgstr ""
-
-msgid "(Use FirstnameLastname)"
-msgstr ""
-
-msgid "Alias-Name"
-msgstr ""
-
-msgid "Jabber ID"
-msgstr ""
-
-msgid "User CSS URL"
-msgstr ""
-
-msgid "(Leave it empty for disabling user CSS)"
-msgstr ""
-
-msgid "Editor size"
-msgstr "Μέγεθος Editor"
-
-msgid "File attachment browser"
-msgstr ""
-
-msgid "User account browser"
-msgstr ""
-
-#, python-format
-msgid "Invalid include arguments \"%s\"!"
-msgstr ""
-
-#, python-format
-msgid "Nothing found for \"%s\"!"
+msgid "get"
 msgstr ""
 
 msgid "edit"
 msgstr "επεξεργασία"
 
+msgid "view"
+msgstr ""
+
+msgid "unzip"
+msgstr ""
+
+msgid "install"
+msgstr ""
+
 #, python-format
-msgid "Upload of attachment '%(filename)s'."
+msgid "No attachments stored for %(pagename)s"
+msgstr ""
+
+msgid "Edit drawing"
+msgstr ""
+
+msgid "New Attachment"
+msgstr ""
+
+msgid "File to upload"
+msgstr ""
+
+msgid "Rename to"
+msgstr ""
+
+msgid "Overwrite existing attachment of same name"
+msgstr ""
+
+msgid "Upload"
+msgstr ""
+
+msgid "Attached Files"
+msgstr ""
+
+msgid "You are not allowed to attach a file to this page."
+msgstr ""
+
+#, python-format
+msgid "Unsupported AttachFile sub-action: %s"
+msgstr ""
+
+#, python-format
+msgid "Attachments for \"%(pagename)s\""
+msgstr ""
+
+msgid "TextCha: Wrong answer! Go back and try again..."
+msgstr "TextCha: Λάθος απάντηση! Πηγαίντε πίσω και ξανά-προσπαθήστε..."
+
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Δεν επιτρέπεται να αλλάξετε το όνομα της σελίδας!"
+
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+
+#, python-format
+msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
+msgstr ""
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr ""
+
+msgid "You are not allowed to delete attachments on this page."
 msgstr ""
 
 #, python-format
@@ -1513,294 +576,325 @@ msgid "Attachment '%(filename)s' deleted."
 msgstr ""
 
 #, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr ""
-
-#, python-format
-msgid "Revert to revision %(rev)d."
-msgstr ""
-
-#, python-format
-msgid "Renamed from '%(oldpagename)s'."
-msgstr ""
-
-#, python-format
-msgid "%(mins)dm ago"
-msgstr ""
-
-msgid "(no bookmark set)"
-msgstr ""
-
-#, python-format
-msgid "(currently set to %s)"
-msgstr ""
-
-msgid "Delete bookmark"
-msgstr ""
-
-msgid "Set bookmark"
-msgstr ""
-
-msgid "[Bookmark reached]"
-msgstr ""
-
-msgid "Contents"
-msgstr ""
-
-msgid "Include system pages"
-msgstr "Να συμπεριληφθούν οι σελίδες συστήματος"
-
-msgid "Exclude system pages"
-msgstr "Να αποκλεισθούν οι σελίδες συστήματος"
-
-msgid "Go To Page"
-msgstr "Πήγαινε Στη Σελίδα"
-
-msgid "No orphaned pages in this wiki."
-msgstr ""
-
-msgid "Python Version"
-msgstr "Έκδοση Python"
-
-msgid "MoinMoin Version"
-msgstr "Έκδοση MoinMoin"
-
-#, python-format
-msgid "Release %s [Revision %s]"
-msgstr ""
-
-msgid "4Suite Version"
-msgstr "Έκδοση 4Suite"
-
-msgid "Number of pages"
-msgstr "Αριθμός σελίδων"
-
-msgid "Number of system pages"
-msgstr "Αριθμός σελίδων συστήματος"
-
-msgid "Accumulated page sizes"
-msgstr ""
-
-#, python-format
-msgid "Disk usage of %(data_dir)s/pages/"
-msgstr ""
-
-#, python-format
-msgid "Disk usage of %(data_dir)s/"
-msgstr ""
-
-msgid "Entries in edit log"
-msgstr ""
-
-msgid "NONE"
-msgstr "ΚΑΝΕΝΑ"
-
-msgid "Global extension macros"
-msgstr ""
-
-msgid "Local extension macros"
-msgstr ""
-
-msgid "Global extension actions"
-msgstr ""
-
-msgid "Local extension actions"
-msgstr ""
-
-msgid "Global parsers"
-msgstr ""
-
-msgid "Local extension parsers"
-msgstr ""
-
-msgid "Disabled"
-msgstr "Απενεργοποιημένο"
-
-msgid "Enabled"
-msgstr "Ενεργοποιημένο"
-
-msgid "index available"
-msgstr ""
-
-msgid "index unavailable"
-msgstr ""
-
-msgid "Xapian and/or Python Xapian bindings not installed"
-msgstr ""
-
-msgid "N/A"
-msgstr "Δ/Α"
-
-msgid "Xapian search"
-msgstr ""
-
-msgid "Stemming for Xapian"
-msgstr ""
-
-msgid "Active threads"
-msgstr ""
-
-msgid "Search for items"
-msgstr ""
-
-msgid "containing all the following terms"
-msgstr ""
-
-msgid "containing one or more of the following terms"
-msgstr ""
-
-msgid "not containing the following terms"
-msgstr ""
-
-msgid "last modified since (e.g. last 2 weeks)"
-msgstr "τελευταία τροποποίηση εδώ και (π.χ. last 2 weeks)"
-
-msgid "any category"
-msgstr ""
-
-msgid "any language"
-msgstr "οποιαδήποτε γλώσσα"
-
-msgid "any mimetype"
-msgstr ""
-
-msgid "Categories"
-msgstr ""
-
-msgid "File Type"
-msgstr "Τύπος Αρχείου"
-
-msgid "Search only in titles"
-msgstr "Αναζήτηση μόνο σε τίτλους"
-
-msgid "Case-sensitive search"
-msgstr ""
-
-msgid "Exclude underlay"
-msgstr ""
-
-msgid "No system items"
-msgstr ""
-
-msgid "Search in all page revisions"
-msgstr ""
-
-msgid "Go get it!"
-msgstr ""
-
-#, python-format
-msgid "No quotes on %(pagename)s."
-msgstr ""
-
-msgid "Search Titles"
-msgstr "Αναζήτηση τίτλων"
-
-msgid "Display context of search results"
-msgstr ""
-"Να εμφανίζεται το αναλυτικά το περιεχόμενο των αποτελεσμάτων της αναζήτησης"
-
-msgid "Case-sensitive searching"
-msgstr "Αναζήτηση με σημασία στον τύπο των χαρακτήρων (πεζά-κεφαλαία)"
-
-msgid "Search Text"
-msgstr "Αναζήτηση Κειμένου"
-
-#, python-format
-msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
-msgstr ""
-"Παρακαλώ χρησιμοποιείστε κάποιον πιο συγκεκριμένο όρο αναζήτης αντί για τον "
-"{{{\"%s\"}}}"
-
-#, python-format
-msgid ""
-"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
-"for more information."
-msgstr ""
-
-#, python-format
-msgid "Upload new attachment \"%(filename)s\""
+msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
 msgstr ""
 
 #, python-format
 msgid ""
-"%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
-"missing."
+"Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/%"
+"(new_filename)s'."
+msgstr ""
+
+msgid "Nothing changed"
+msgstr ""
+
+#, python-format
+msgid "Page '%(new_pagename)s' does not exist or you don't have enough rights."
+msgstr ""
+
+msgid "Move aborted!"
+msgstr ""
+
+msgid "Please use the interactive user interface to move attachments!"
+msgstr ""
+
+msgid "You are not allowed to move attachments from this page."
+msgstr ""
+
+msgid "Move aborted because new page name is empty."
+msgstr ""
+
+#, python-format
+msgid "Please use a valid filename for attachment '%(filename)s'."
+msgstr ""
+
+msgid "Move aborted because new attachment name is empty."
+msgstr ""
+
+msgid "Move"
+msgstr ""
+
+msgid "New page name"
+msgstr ""
+
+msgid "New attachment name"
+msgstr ""
+
+msgid "You are not allowed to get attachments from this page."
+msgstr ""
+
+msgid "You are not allowed to install files."
+msgstr ""
+
+#, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr ""
+
+msgid "You are not allowed to unzip attachments of this page."
+msgstr ""
+
+#, python-format
+msgid "The file %(filename)s is not a .zip file."
 msgstr ""
 
 #, python-format
 msgid ""
-"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s=%"
-"(argument_value)s!"
+"Attachment '%(filename)s' not unzipped because some files in the zip are "
+"either not in the same directory or exceeded the single file size limit (%"
+"(maxsize_file)d kB)."
 msgstr ""
 
 #, python-format
 msgid ""
-"Current configuration does not allow embedding of the file %(file)s because "
-"of its mimetype %(mimetype)s."
-msgstr ""
-
-msgid "Embedded"
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment storage size limit (%(size)d kB)."
 msgstr ""
 
 #, python-format
-msgid "Unsupported navigation scheme '%(scheme)s'!"
-msgstr ""
-
-#, fuzzy
-msgid "No parent page found!"
-msgstr "Δε βρέθηκε σελίδα!"
-
-msgid "Slideshow"
-msgstr "Slideshow"
-
-msgid "Start"
-msgstr "Εκκίνηση"
-
-#, python-format
-msgid "Slide %(pos)d of %(size)d"
-msgstr ""
-
-msgid "Markup"
-msgstr ""
-
-msgid "Display"
-msgstr ""
-
-msgid "No wanted pages in this wiki."
-msgstr ""
-
-msgid "You need to provide a chart type!"
-msgstr ""
-
-#, python-format
-msgid "Bad chart type \"%s\"!"
-msgstr ""
-
-msgid "Revert"
-msgstr ""
-
-msgid "You are not allowed to revert this page!"
-msgstr "Δεν επιτρέπεται να ανακαλέσετε τη σελίδα αυτή!"
-
 msgid ""
-"You were viewing the current revision of this page when you called the "
-"revert action. If you want to revert to an older revision, first view that "
-"older revision and then call revert to this (older) revision again."
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment count limit (%(count)d)."
 msgstr ""
-"Επιλέξατε να γίνετει ανάκληση ενώ βλέπατε την πιο πρόσφατη έκδοση της "
-"σελίδας. Αν θέλετε να ανακαλέσετε σε μια παλιότερη έκδοση, πρώτα δείτε την "
-"παλιότερη και επιλέξτε ξανά ανάκληση σε εκείνη (την παλιά)."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' partially unzipped (did not overwrite: %(filelist)"
+"s)."
+msgstr ""
+
+#, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr ""
+
+#, python-format
+msgid "Attachment '%(filename)s'"
+msgstr ""
+
+msgid "Download"
+msgstr ""
+
+msgid "Package script:"
+msgstr ""
+
+msgid "File Name"
+msgstr ""
+
+msgid "Modified"
+msgstr ""
+
+msgid "Size"
+msgstr ""
+
+msgid "Unknown file type, cannot display this attachment inline."
+msgstr ""
+
+msgid "You are not allowed to view attachments of this page."
+msgstr ""
+
+#, python-format
+msgid "attachment:%(filename)s of %(pagename)s"
+msgstr ""
+
+msgid "Copy Page"
+msgstr ""
 
 msgid "This page is already deleted or was never created!"
 msgstr ""
 
-#, fuzzy
-msgid "Optional reason for reverting this page"
+msgid "Copy all /subpages too?"
+msgstr "Να αντιγραφούν επίσης όλες οι /subpages;"
+
+msgid "New name"
+msgstr ""
+
+msgid "Optional reason for the copying"
 msgstr "Προεραιτικός λόγος αντιγραφής"
 
-#, fuzzy
-msgid "Really revert this page?"
+msgid "Really copy this page?"
+msgstr "Θέλετε σίγουρα να αντιγράφει αυτή η σελίδα;"
+
+msgid "Delete"
+msgstr "Διαγραφή"
+
+msgid "Delete all /subpages too?"
+msgstr "Να διαγραφούν επίσης όλες οι /subpages;"
+
+msgid "Optional reason for the deletion"
+msgstr "Προεραιτικός λόγος διαγραφής"
+
+msgid "Really delete this page?"
 msgstr "Να διαγραφεί σίγουρα η σελίδα;"
+
+msgid "Editor"
+msgstr ""
+
+msgid "Pages"
+msgstr ""
+
+msgid "Select Author"
+msgstr ""
+
+msgid "Revert all!"
+msgstr ""
+
+msgid "You are not allowed to use this action."
+msgstr ""
+
+#, python-format
+msgid "No pages like \"%s\"!"
+msgstr ""
+
+#, python-format
+msgid "Exactly one page like \"%s\" found, redirecting to page."
+msgstr ""
+
+#, python-format
+msgid "Pages like \"%s\""
+msgstr "Σελίδες όπως η \"%s\""
+
+#, python-format
+msgid "%(matchcount)d %(matches)s for \"%(title)s\""
+msgstr ""
+
+msgid "match"
+msgstr "ταίριασμα"
+
+msgid "matches"
+msgstr "ταιριάζουν"
+
+msgid "Load"
+msgstr ""
+
+msgid "Pagename not specified!"
+msgstr ""
+
+msgid "Upload page content"
+msgstr ""
+
+msgid ""
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
+msgstr ""
+
+msgid "File to load page content from"
+msgstr ""
+
+msgid "Comment"
+msgstr ""
+
+#, fuzzy
+msgid "Page Name"
+msgstr "Όνομα πακέτου"
+
+#, python-format
+msgid "Local Site Map for \"%s\""
+msgstr "Τοπικός Χάρτης Ιστοσελίδας για \"%s\""
+
+msgid "Please log in first."
+msgstr ""
+
+msgid "Please first create a homepage before creating additional pages."
+msgstr ""
+
+#, python-format
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
+"[\"%(username)s/ReadWriteGroup\"]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[\"%"
+"(username)s/ReadGroup\"]||\n"
+"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
+"(username)s only||\n"
+"\n"
+msgstr ""
+
+msgid "MyPages management"
+msgstr ""
+
+#, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr "Το όνομα \"%s\" δεν είναι έγκυρο!"
+
+#, python-format
+msgid "Created the package %s containing the pages %s."
+msgstr "Δημιουργήθηκε το πακέτο %s,όπου περιέχονται οι σελίδες %s."
+
+msgid "Package pages"
+msgstr "Σελίδες πακέτου"
+
+msgid "Package name"
+msgstr "Όνομα πακέτου"
+
+msgid "List of page names - separated by a comma"
+msgstr "Λίστα ονομάτων των σελίδων - χωρισμένες με κόμμα"
+
+msgid "Rename Page"
+msgstr ""
+
+msgid "Rename all /subpages too?"
+msgstr ""
+
+msgid "Optional reason for the renaming"
+msgstr ""
+
+msgid "Really rename this page?"
+msgstr ""
+
+#, python-format
+msgid "(including %(localwords)d %(pagelink)s)"
+msgstr ""
+
+#, python-format
+msgid ""
+"The following %(badwords)d words could not be found in the dictionary of %"
+"(totalwords)d words%(localwords)s and are highlighted below:"
+msgstr ""
+
+msgid "Add checked words to dictionary"
+msgstr ""
+
+msgid "No spelling errors found!"
+msgstr ""
+
+msgid "You can't save spelling words."
+msgstr ""
+
+msgid "You can't check spelling on a page you can't read."
+msgstr ""
+
+#, python-format
+msgid "Subscribe users to the page %s"
+msgstr ""
+
+msgid "Enter user names (comma separated):"
+msgstr ""
+
+#, python-format
+msgid "Subscribed for %s:"
+msgstr ""
+
+msgid "Not a user:"
+msgstr ""
+
+msgid "You are not allowed to perform this action."
+msgstr ""
 
 #, python-format
 msgid "Rolled back changes to the page %s."
@@ -1814,6 +908,12 @@ msgid ""
 "<<BR>> /!\\ You should trust both wikis because the password could be read "
 "by the particular administrators."
 msgstr ""
+
+msgid "Password"
+msgstr "Κωδικός"
+
+msgid "Login"
+msgstr "Είσοδος"
 
 msgid "Operation was canceled."
 msgstr ""
@@ -1933,101 +1033,23 @@ msgstr ""
 msgid "Page %s merged with conflicts."
 msgstr ""
 
-msgid ""
-"You need to manually go to your OpenID provider wiki\n"
-"and log in before you can use your OpenID. MoinMoin will\n"
-"never allow you to enter your password here.\n"
-"\n"
-"Once you have logged in, simply reload this page."
-msgstr ""
+msgid "Do it."
+msgstr "Καν το."
 
-msgid "OpenID Trust verification"
+#, python-format
+msgid "Execute action %(actionname)s?"
 msgstr ""
 
 #, python-format
-msgid "The site %s has asked for your identity."
+msgid "Action %(actionname)s is excluded in this wiki!"
 msgstr ""
 
 #, python-format
-msgid ""
-"\n"
-"If you approve, the site represented by the trust root below will be\n"
-"told that you control the identity URL %s. (If you are using a delegated\n"
-"identity, the site will take care of reversing the\n"
-"delegation on its own.)"
-msgstr ""
-
-msgid "Trust root"
-msgstr ""
-
-msgid "Identity URL"
-msgstr ""
-
-msgid "Remember decision"
-msgstr ""
-
-msgid "Remember this trust decision and don't ask again"
-msgstr ""
-
-msgid "Approve"
-msgstr ""
-
-msgid "Don't approve"
-msgstr ""
-
-msgid "OpenID not served"
-msgstr ""
-
-msgid ""
-"\n"
-"Unfortunately you have not created your homepage yet. Therefore,\n"
-"we cannot serve an OpenID for you. Please create your homepage first\n"
-"and then reload this page or click the button below to cancel this\n"
-"verification."
+msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr ""
 
 #, python-format
-msgid "Invalid filename \"%s\"!"
-msgstr "Το όνομα \"%s\" δεν είναι έγκυρο!"
-
-#, python-format
-msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
-msgstr ""
-
-#, python-format
-msgid "Created the package %s containing the pages %s."
-msgstr "Δημιουργήθηκε το πακέτο %s,όπου περιέχονται οι σελίδες %s."
-
-msgid "Package pages"
-msgstr "Σελίδες πακέτου"
-
-msgid "Package name"
-msgstr "Όνομα πακέτου"
-
-msgid "List of page names - separated by a comma"
-msgstr "Λίστα ονομάτων των σελίδων - χωρισμένες με κόμμα"
-
-#, python-format
-msgid "No pages like \"%s\"!"
-msgstr ""
-
-msgid "Please choose:"
-msgstr ""
-
-#, fuzzy, python-format
-msgid "You must login to use this action: %(action)s."
-msgstr "Πρέπει να συνδεθείτε για να προσθέσετε ένα quicklink."
-
-msgid "You must login to remove a quicklink."
-msgstr ""
-
-msgid "Your quicklink to this page has been removed."
-msgstr ""
-
-msgid "Your quicklink to this page could not be removed."
-msgstr ""
-
-msgid "You need to have a quicklink to this page to remove it."
+msgid "Please use the interactive user interface to use action %(actionname)s!"
 msgstr ""
 
 #, python-format
@@ -2074,97 +1096,19 @@ msgstr ""
 msgid "Unknown backup subaction: %s."
 msgstr ""
 
-msgid "Do it."
-msgstr "Καν το."
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "Πρέπει να συνδεθείτε για να προσθέσετε ένα quicklink."
 
-#, python-format
-msgid "Execute action %(actionname)s?"
+msgid "Charts are not available!"
+msgstr ""
+
+msgid "You need to provide a chart type!"
 msgstr ""
 
 #, python-format
-msgid "Action %(actionname)s is excluded in this wiki!"
+msgid "Bad chart type \"%s\"!"
 msgstr ""
-
-#, python-format
-msgid "You are not allowed to use action %(actionname)s on this page!"
-msgstr ""
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-
-msgid "Please log in first."
-msgstr ""
-
-msgid "Please first create a homepage before creating additional pages."
-msgstr ""
-
-#, python-format
-msgid ""
-"You can add some additional sub pages to your already existing homepage "
-"here.\n"
-"\n"
-"You can choose how open to other readers or writers those pages shall be,\n"
-"access is controlled by group membership of the corresponding group page.\n"
-"\n"
-"Just enter the sub page's name and click on the button to create a new "
-"page.\n"
-"\n"
-"Before creating access protected pages, make sure the corresponding group "
-"page\n"
-"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
-"creating\n"
-"the group pages.\n"
-"\n"
-"||'''Add a new personal page:'''||'''Related access control list "
-"group:'''||\n"
-"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
-"[\"%(username)s/ReadWriteGroup\"]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[\"%"
-"(username)s/ReadGroup\"]||\n"
-"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
-"(username)s only||\n"
-"\n"
-msgstr ""
-
-msgid "MyPages management"
-msgstr ""
-
-msgid "Rename all /subpages too?"
-msgstr ""
-
-msgid "New name"
-msgstr ""
-
-msgid "Optional reason for the renaming"
-msgstr ""
-
-msgid "Really rename this page?"
-msgstr ""
-
-msgid "Your subscription to this page has been removed."
-msgstr ""
-
-msgid "Can't remove regular expression subscription!"
-msgstr ""
-
-msgid "Edit the subscription regular expressions in your settings."
-msgstr ""
-
-msgid "You need to be subscribed to unsubscribe."
-msgstr ""
-
-msgid "TextCha: Wrong answer! Go back and try again..."
-msgstr "TextCha: Λάθος απάντηση! Πηγαίντε πίσω και ξανά-προσπαθήστε..."
-
-msgid "Copy all /subpages too?"
-msgstr "Να αντιγραφούν επίσης όλες οι /subpages;"
-
-msgid "Optional reason for the copying"
-msgstr "Προεραιτικός λόγος αντιγραφής"
-
-msgid "Really copy this page?"
-msgstr "Θέλετε σίγουρα να αντιγράφει αυτή η σελίδα;"
 
 msgid "No older revisions available!"
 msgstr ""
@@ -2181,6 +1125,9 @@ msgstr ""
 msgid "(spanning %d versions)"
 msgstr ""
 
+msgid "Revert to this revision"
+msgstr ""
+
 #, fuzzy
 msgid "Previous change"
 msgstr "Προηγούμενη"
@@ -2188,6 +1135,9 @@ msgstr "Προηγούμενη"
 #, fuzzy
 msgid "Next change"
 msgstr "Αποθήκευση αλλαγών"
+
+msgid "No differences found!"
+msgstr "Δε βρέθηκαν διαφορές!"
 
 #, python-format
 msgid "The page was saved %(count)d times, though!"
@@ -2197,153 +1147,6 @@ msgid "(ignoring whitespace)"
 msgstr "(το κενό αγνοείται)"
 
 msgid "Ignore changes in the amount of whitespace"
-msgstr ""
-
-msgid "Load"
-msgstr ""
-
-msgid "Pagename not specified!"
-msgstr ""
-
-msgid "Upload page content"
-msgstr ""
-
-msgid ""
-"You can upload content for the page named below. If you change the page "
-"name, you can also upload content for another page. If the page name is "
-"empty, we derive the page name from the file name."
-msgstr ""
-
-msgid "File to load page content from"
-msgstr ""
-
-msgid "Comment"
-msgstr ""
-
-#, fuzzy
-msgid "Page Name"
-msgstr "Όνομα πακέτου"
-
-msgid "You are not allowed to subscribe to a page you can't read."
-msgstr ""
-
-#, fuzzy
-msgid "This wiki is not enabled for mail/Jabber processing."
-msgstr ""
-"Δεν έχει ενεργοποιηθεί η δυνατότητα επεξεργασίας mail γι' αυτό το wiki.\n"
-"Επικοινωνήστε με τον ιδιοκτήτη του. Αυτός μπορεί να ενεργοποιήσει το email."
-
-msgid "You must log in to use subscriptions."
-msgstr ""
-
-msgid ""
-"Add your email address or Jabber ID in your user settings to use "
-"subscriptions."
-msgstr ""
-
-msgid "You are already subscribed to this page."
-msgstr ""
-
-msgid "You have been subscribed to this page."
-msgstr ""
-
-msgid "You could not get subscribed to this page."
-msgstr ""
-
-msgid "General Information"
-msgstr ""
-
-#, python-format
-msgid "Page size: %d"
-msgstr ""
-
-msgid "SHA digest of this page's content is:"
-msgstr ""
-
-msgid "The following users subscribed to this page:"
-msgstr ""
-
-msgid "This page links to the following pages:"
-msgstr ""
-
-msgid "Size"
-msgstr ""
-
-msgid "Diff"
-msgstr ""
-
-msgid "Editor"
-msgstr ""
-
-msgid "view"
-msgstr ""
-
-#, fuzzy
-msgid "to previous"
-msgstr "Προηγούμενη"
-
-msgid "get"
-msgstr ""
-
-msgid "del"
-msgstr ""
-
-msgid "Revision History"
-msgstr ""
-
-msgid "No log entries found."
-msgstr ""
-
-#, python-format
-msgid "Info for \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Show \"%(title)s\""
-msgstr ""
-
-msgid "General Page Infos"
-msgstr ""
-
-msgid ""
-"Cannot create a new page without a page name.  Please specify a page name."
-msgstr ""
-
-msgid "Delete"
-msgstr "Διαγραφή"
-
-msgid "Delete all /subpages too?"
-msgstr "Να διαγραφούν επίσης όλες οι /subpages;"
-
-msgid "Optional reason for the deletion"
-msgstr "Προεραιτικός λόγος διαγραφής"
-
-msgid "Really delete this page?"
-msgstr "Να διαγραφεί σίγουρα η σελίδα;"
-
-#, fuzzy
-msgid "You are not allowed to create the supplementation page."
-msgstr "Δεν επιτρέπεται να αλλάξετε το όνομα της σελίδας!"
-
-#, fuzzy
-msgid "Only superuser is allowed to use this action."
-msgstr "Δεν επιτρέπεται να επεξεργαστείτε αυτή τη σελίδα."
-
-#, python-format
-msgid "Subscribe users to the page %s"
-msgstr ""
-
-msgid "Enter user names (comma separated):"
-msgstr ""
-
-#, python-format
-msgid "Subscribed for %s:"
-msgstr ""
-
-msgid "Not a user:"
-msgstr ""
-
-msgid "You are not allowed to perform this action."
 msgstr ""
 
 #, python-format
@@ -2356,6 +1159,12 @@ msgid ""
 msgstr ""
 
 #, python-format
+msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
+msgstr ""
+"Παρακαλώ χρησιμοποιείστε κάποιον πιο συγκεκριμένο όρο αναζήτης αντί για τον "
+"{{{\"%s\"}}}"
+
+#, python-format
 msgid "Title Search: \"%s\""
 msgstr ""
 
@@ -2365,6 +1174,12 @@ msgstr ""
 
 #, python-format
 msgid "Full Text Search: \"%s\""
+msgstr ""
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
 msgstr ""
 
 #, python-format
@@ -2387,10 +1202,123 @@ msgstr ""
 msgid "Click here to perform a full-text search with your search terms!"
 msgstr ""
 
+msgid "General Information"
+msgstr ""
+
+#, python-format
+msgid "Page size: %d"
+msgstr ""
+
+msgid "SHA digest of this page's content is:"
+msgstr ""
+
+msgid "The following users subscribed to this page:"
+msgstr ""
+
+msgid "This page links to the following pages:"
+msgstr ""
+
+msgid "Date"
+msgstr "Ημερομηνία"
+
+msgid "Diff"
+msgstr ""
+
+msgid "Action"
+msgstr "Δράση"
+
+#, fuzzy
+msgid "to previous"
+msgstr "Προηγούμενη"
+
+#, python-format
+msgid "Revert to revision %(rev)d."
+msgstr ""
+
+#, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr ""
+
+msgid "N/A"
+msgstr "Δ/Α"
+
+msgid "Revision History"
+msgstr ""
+
+msgid "No log entries found."
+msgstr ""
+
+#, python-format
+msgid "Info for \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Show \"%(title)s\""
+msgstr ""
+
+msgid "General Page Infos"
+msgstr ""
+
+msgid "Page hits and edits"
+msgstr ""
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr ""
+
+msgid "You are now logged out."
+msgstr ""
+
+msgid "Empty user name. Please enter a user name."
+msgstr "Το όνομα χρήστη είναι άδειο. Παρακαλώ πληκτρολογήστε ένα όνομα χρήστη."
+
+#, python-format
+msgid ""
+"Invalid user name {{{'%s'}}}.\n"
+"Name may contain any Unicode alpha numeric character, with optional one\n"
+"space between words. Group page name is not allowed."
+msgstr ""
+"Το όνομα χρήστη {{{'%s'}}} δεν είναι έγκυρο .\n"
+"Το όνομα πρέπει να περιέχει οποιονδήποτε Unicode αλφαριθμητικό χαρακτήρα και "
+"προεραιτικά\n"
+"ένα κενό ανάμεσα στις λέξεις. Δεν επιτρέπονται τα ονόματα σελίδων group."
+
+msgid "This user name already belongs to somebody else."
+msgstr "Αυτό το όνομα χρήστη ανήκει ήδη σε κάποιον άλλο."
+
+msgid "Passwords don't match!"
+msgstr "Οι κωδικοί δεν ταιριάζουν!"
+
+msgid "Please specify a password!"
+msgstr "Παρακαλώ βάλτε κάποιον κωδικό!"
+
+#, python-format
+msgid "Password not acceptable: %s"
+msgstr "Ο κωδικός δε μπορεί να γίνει δεκτός: %s"
+
+msgid ""
+"Please provide your email address. If you lose your login information, you "
+"can get it by email."
+msgstr ""
+"Παρακαλώ βάλτε το email σας έτσι ώστε να σας στείλουμε τις πληροφορίες του "
+"λογαριασμού σε περίπτωση που τον χάσετε."
+
+msgid "This email already belongs to somebody else."
+msgstr "Αυτό το email ανήκει σε κάποιον άλλο."
+
 msgid "User account created! You can use this account to login now..."
 msgstr ""
 "Επιτυχής δημιουργία λογαριασμού! Τώρα μπορείτε να κάνετε είσοδο με το όνομα "
 "αυτό..."
+
+msgid "Name"
+msgstr "Όνομα"
+
+msgid "Password repeat"
+msgstr ""
+
+msgid "Email"
+msgstr "Email"
 
 msgid "TextCha (required)"
 msgstr "TextCha (απαιτείται)"
@@ -2399,6 +1327,10 @@ msgid "Create Profile"
 msgstr "Δημιουργία Προφιλ"
 
 msgid "Create Account"
+msgstr ""
+
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
 msgstr ""
 
 msgid "You must login to add a quicklink."
@@ -2413,32 +1345,16 @@ msgstr "Δε είναι δυνατόν να προστεθεί ένα quicklink 
 msgid "You already have a quicklink to this page."
 msgstr "Έχετε ήδη εισάγει ένα quicklink στη σελίδα."
 
-msgid "You are not allowed to use this action."
+msgid "You must login to remove a quicklink."
 msgstr ""
 
-#, python-format
-msgid "(including %(localwords)d %(pagelink)s)"
+msgid "Your quicklink to this page has been removed."
 msgstr ""
 
-#, python-format
-msgid ""
-"The following %(badwords)d words could not be found in the dictionary of %"
-"(totalwords)d words%(localwords)s and are highlighted below:"
+msgid "Your quicklink to this page could not be removed."
 msgstr ""
 
-msgid "Add checked words to dictionary"
-msgstr ""
-
-msgid "No spelling errors found!"
-msgstr ""
-
-msgid "You can't save spelling words."
-msgstr ""
-
-msgid "You can't check spelling on a page you can't read."
-msgstr ""
-
-msgid "You are now logged out."
+msgid "You need to have a quicklink to this page to remove it."
 msgstr ""
 
 #, fuzzy
@@ -2455,6 +1371,10 @@ msgstr ""
 #, fuzzy
 msgid "Please provide a valid email address or a username!"
 msgstr "Παρακαλώ βάλτε μια έγκυρη διεύθυνση email!"
+
+#, fuzzy
+msgid "Username"
+msgstr "Χρήστης"
 
 msgid "Mail me my account data"
 msgstr "Στείλτε μου τα δεδομένα του λογαριασμού με email"
@@ -2510,233 +1430,501 @@ msgid ""
 "username, the recovery token and a new password (twice) below."
 msgstr ""
 
+msgid "Revert"
+msgstr ""
+
+msgid "You are not allowed to revert this page!"
+msgstr "Δεν επιτρέπεται να ανακαλέσετε τη σελίδα αυτή!"
+
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
+msgstr ""
+"Επιλέξατε να γίνετει ανάκληση ενώ βλέπατε την πιο πρόσφατη έκδοση της "
+"σελίδας. Αν θέλετε να ανακαλέσετε σε μια παλιότερη έκδοση, πρώτα δείτε την "
+"παλιότερη και επιλέξτε ξανά ανάκληση σε εκείνη (την παλιά)."
+
+#, fuzzy
+msgid "Optional reason for reverting this page"
+msgstr "Προεραιτικός λόγος αντιγραφής"
+
+#, fuzzy
+msgid "Really revert this page?"
+msgstr "Να διαγραφεί σίγουρα η σελίδα;"
+
+msgid ""
+"You need to manually go to your OpenID provider wiki\n"
+"and log in before you can use your OpenID. MoinMoin will\n"
+"never allow you to enter your password here.\n"
+"\n"
+"Once you have logged in, simply reload this page."
+msgstr ""
+
+msgid "OpenID Trust verification"
+msgstr ""
+
 #, python-format
-msgid "Local Site Map for \"%s\""
-msgstr "Τοπικός Χάρτης Ιστοσελίδας για \"%s\""
-
-msgid "Pages"
-msgstr ""
-
-msgid "Select Author"
-msgstr ""
-
-msgid "Revert all!"
-msgstr ""
-
-#, python-format
-msgid "[%d attachments]"
+msgid "The site %s has asked for your identity."
 msgstr ""
 
 #, python-format
 msgid ""
-"There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this "
-"page."
+"\n"
+"If you approve, the site represented by the trust root below will be\n"
+"told that you control the identity URL %s. (If you are using a delegated\n"
+"identity, the site will take care of reversing the\n"
+"delegation on its own.)"
 msgstr ""
 
-msgid "Filename of attachment not specified!"
+msgid "Trust root"
 msgstr ""
 
-#, python-format
-msgid "Attachment '%(filename)s' does not exist!"
+msgid "Identity URL"
+msgstr ""
+
+msgid "Remember decision"
+msgstr ""
+
+msgid "Remember this trust decision and don't ask again"
+msgstr ""
+
+msgid "Approve"
+msgstr ""
+
+msgid "Don't approve"
+msgstr ""
+
+msgid "OpenID not served"
 msgstr ""
 
 msgid ""
-"To refer to attachments on a page, use '''{{{attachment:filename}}}''', \n"
-"as shown below in the list of files. \n"
-"Do '''NOT''' use the URL of the {{{[get]}}} link, \n"
-"since this is subject to change and can break easily."
+"\n"
+"Unfortunately you have not created your homepage yet. Therefore,\n"
+"we cannot serve an OpenID for you. Please create your homepage first\n"
+"and then reload this page or click the button below to cancel this\n"
+"verification."
 msgstr ""
 
-msgid "move"
-msgstr ""
-
-msgid "unzip"
-msgstr ""
-
-msgid "install"
-msgstr ""
-
-#, python-format
-msgid "No attachments stored for %(pagename)s"
-msgstr ""
-
-msgid "Edit drawing"
-msgstr ""
-
-msgid "New Attachment"
-msgstr ""
-
-msgid "File to upload"
-msgstr ""
-
-msgid "Rename to"
-msgstr ""
-
-msgid "Overwrite existing attachment of same name"
-msgstr ""
-
-msgid "Upload"
-msgstr ""
-
-msgid "Attached Files"
-msgstr ""
-
-msgid "You are not allowed to attach a file to this page."
-msgstr ""
-
-#, python-format
-msgid "Unsupported AttachFile sub-action: %s"
-msgstr ""
-
-#, python-format
-msgid "Attachments for \"%(pagename)s\""
+msgid "You are not allowed to subscribe to a page you can't read."
 msgstr ""
 
 #, fuzzy
-msgid "You are not allowed to overwrite a file attachment of this page."
+msgid "This wiki is not enabled for mail/Jabber processing."
+msgstr ""
+"Δεν έχει ενεργοποιηθεί η δυνατότητα επεξεργασίας mail γι' αυτό το wiki.\n"
+"Επικοινωνήστε με τον ιδιοκτήτη του. Αυτός μπορεί να ενεργοποιήσει το email."
+
+msgid "You must log in to use subscriptions."
+msgstr ""
+
+msgid ""
+"Add your email address or Jabber ID in your user settings to use "
+"subscriptions."
+msgstr ""
+
+msgid "You are already subscribed to this page."
+msgstr ""
+
+msgid "You have been subscribed to this page."
+msgstr ""
+
+msgid "You could not get subscribed to this page."
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to create the supplementation page."
 msgstr "Δεν επιτρέπεται να αλλάξετε το όνομα της σελίδας!"
 
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
+msgid "Your subscription to this page has been removed."
+msgstr ""
+
+msgid "Can't remove regular expression subscription!"
+msgstr ""
+
+msgid "Edit the subscription regular expressions in your settings."
+msgstr ""
+
+msgid "You need to be subscribed to unsubscribe."
+msgstr ""
+
+msgid "Please choose:"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+#, fuzzy
+msgid "Only superuser is allowed to use this action."
+msgstr "Δεν επιτρέπεται να επεξεργαστείτε αυτή τη σελίδα."
+
+msgid "Missing password. Please enter user name and password."
 msgstr ""
 
 #, python-format
 msgid ""
-"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
-"saved."
+"If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
+"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
 
-msgid "You are not allowed to save a drawing on this page."
+msgid "Could not contact botbouncer.com."
 msgstr ""
 
-msgid "You are not allowed to delete attachments on this page."
+msgid "You need to log in."
 msgstr ""
 
 #, python-format
-msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
+msgid "LDAP server %(server)s failed."
+msgstr ""
+
+msgid "Failed to connect to database."
+msgstr ""
+
+msgid ""
+"Please choose an account name now.\n"
+"If you choose an existing account name you will be asked for the\n"
+"password and be able to associate the account with your OpenID."
+msgstr ""
+
+msgid "Choose this name"
+msgstr ""
+
+msgid ""
+"The username you have chosen is already\n"
+"taken. If it is your username, enter your password below to associate\n"
+"the username with your OpenID. Otherwise, please choose a different\n"
+"username and leave the password field blank."
+msgstr ""
+
+msgid "Associate this name"
+msgstr ""
+
+#, python-format
+msgid "OpenID error: %s."
+msgstr ""
+
+msgid "Verification canceled."
+msgstr ""
+
+msgid "OpenID failure."
+msgstr ""
+
+msgid "This is not a valid username, choose a different one."
+msgstr ""
+
+msgid "Your account is now associated to your OpenID."
+msgstr ""
+
+msgid "The password you entered is not valid."
+msgstr ""
+
+msgid "OpenID verification requires that you click this button:"
+msgstr ""
+
+msgid "Anonymous sessions need to be enabled for OpenID login."
+msgstr ""
+
+msgid "Failed to resolve OpenID."
+msgstr ""
+
+msgid "OpenID discovery failure, not a valid OpenID."
+msgstr ""
+
+msgid "No OpenID."
+msgstr ""
+
+msgid ""
+"If you do not have an account yet, you can still log in with your OpenID and "
+"create one during login."
+msgstr ""
+
+msgid ""
+" Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
+"italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed ''<<Verbatim(''')"
+">>'''''bold'''<<Verbatim(''')>> and italics''<<Verbatim('')>>; <<Verbatim"
+"(----)>> horizontal rule.\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
+"#n start numbering at n; space alone indents.\n"
+" Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])"
+">>.\n"
+" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
+"white space allowed after tables or titles.\n"
+"\n"
+"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+msgstr ""
+
+msgid ""
+"{{{\n"
+"Emphasis: *italic* **bold** ``monospace``\n"
+"\n"
+"Headings: Heading 1  Heading 2  Heading 3\n"
+"          =========  ---------  ~~~~~~~~~\n"
+"\n"
+"Horizontal rule: ----\n"
+"\n"
+"Links: TrailingUnderscore_ `multi word with backticks`_ external_\n"
+"\n"
+".. _external: http://external-site.example.org/foo/\n"
+"\n"
+"Lists: * bullets; 1., a. numbered items.\n"
+"}}}\n"
+"(!) For more help, see the\n"
+"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
+"reStructuredText Quick Reference]].\n"
+msgstr ""
+
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
+">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+msgstr ""
+
+msgid "Diffs"
+msgstr ""
+
+msgid "Info"
+msgstr "Πληροφορίες"
+
+msgid "Edit"
+msgstr "Επεξεργασία"
+
+msgid "UnSubscribe"
+msgstr ""
+
+msgid "Subscribe"
+msgstr "Εγγραφή"
+
+msgid "Raw"
+msgstr ""
+
+msgid "XML"
+msgstr "XML"
+
+msgid "Print"
+msgstr "Εκτύπωση"
+
+msgid "View"
+msgstr "Προβολή"
+
+msgid "Up"
+msgstr "Επάνω"
+
+msgid "Publish my email (not my wiki homepage) in author info"
+msgstr ""
+
+msgid "Open editor on double click"
+msgstr ""
+
+msgid "After login, jump to last visited page"
+msgstr ""
+
+msgid "Show comment sections"
+msgstr ""
+
+msgid "Show question mark for non-existing pagelinks"
+msgstr ""
+
+msgid "Show page trail"
+msgstr ""
+
+msgid "Show icon toolbar"
+msgstr ""
+
+msgid "Show top/bottom links in headings"
+msgstr ""
+
+msgid "Show fancy diffs"
+msgstr ""
+
+msgid "Add spaces to displayed wiki names"
+msgstr ""
+
+msgid "Remember login information"
+msgstr ""
+
+msgid "Disable this account forever"
+msgstr ""
+
+msgid "(Use FirstnameLastname)"
+msgstr ""
+
+msgid "Alias-Name"
+msgstr ""
+
+msgid "Jabber ID"
+msgstr ""
+
+msgid "User CSS URL"
+msgstr ""
+
+msgid "(Leave it empty for disabling user CSS)"
+msgstr ""
+
+msgid "Editor size"
+msgstr "Μέγεθος Editor"
+
+msgid "Page has been modified"
+msgstr ""
+
+msgid "Page has been modified in a trivial fashion"
+msgstr ""
+
+msgid "Page has been renamed"
+msgstr ""
+
+msgid "Page has been deleted"
+msgstr ""
+
+msgid "Page has been copied"
+msgstr ""
+
+msgid "A new attachment has been added"
+msgstr ""
+
+msgid "A page has been reverted to a previous state"
+msgstr ""
+
+msgid "A user has subscribed to a page"
+msgstr ""
+
+msgid "A new account has been created"
+msgstr ""
+
+#, python-format
+msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
+msgstr ""
+
+msgid "Trivial "
 msgstr ""
 
 #, python-format
 msgid ""
-"Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/%"
-"(new_filename)s'."
+"Attachment link: %(attach)s\n"
+"Page link: %(page)s\n"
 msgstr ""
 
-msgid "Nothing changed"
-msgstr ""
+#, fuzzy
+msgid "Attachment link"
+msgstr "Επισυναπτόμενα αρχεία"
 
-#, python-format
-msgid "Page '%(new_pagename)s' does not exist or you don't have enough rights."
-msgstr ""
-
-msgid "Move aborted!"
-msgstr ""
-
-msgid "Please use the interactive user interface to move attachments!"
-msgstr ""
-
-msgid "You are not allowed to move attachments from this page."
-msgstr ""
-
-msgid "Move aborted because new page name is empty."
-msgstr ""
-
-#, python-format
-msgid "Please use a valid filename for attachment '%(filename)s'."
-msgstr ""
-
-msgid "Move aborted because new attachment name is empty."
-msgstr ""
-
-msgid "Move"
-msgstr ""
-
-msgid "New page name"
-msgstr ""
-
-msgid "New attachment name"
-msgstr ""
-
-msgid "You are not allowed to get attachments from this page."
-msgstr ""
-
-msgid "You are not allowed to install files."
-msgstr ""
-
-#, python-format
-msgid "Attachment '%(filename)s' installed."
-msgstr ""
-
-msgid "You are not allowed to unzip attachments of this page."
-msgstr ""
-
-#, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr ""
-
-#, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too many (%(count)d missing)."
-msgstr ""
-
-#, python-format
-msgid "Attachment '%(filename)s' unzipped."
-msgstr ""
-
-#, python-format
-msgid ""
-"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
-"files only, exist already or reside in folders."
-msgstr ""
-
-#, python-format
-msgid "The file %(filename)s is not a .zip file."
-msgstr ""
-
-#, python-format
-msgid "Attachment '%(filename)s'"
-msgstr ""
-
-msgid "Download"
-msgstr ""
-
-msgid "Package script:"
-msgstr ""
-
-msgid "File Name"
-msgstr ""
-
-msgid "Modified"
-msgstr ""
-
-msgid "Unknown file type, cannot display this attachment inline."
-msgstr ""
-
-msgid "You are not allowed to view attachments of this page."
-msgstr ""
-
-#, python-format
-msgid "attachment:%(filename)s of %(pagename)s"
-msgstr ""
-
-#, python-format
-msgid "Full Link List for \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Exactly one page like \"%s\" found, redirecting to page."
-msgstr ""
-
-#, python-format
-msgid "Pages like \"%s\""
+#, fuzzy
+msgid "Page link"
 msgstr "Σελίδες όπως η \"%s\""
 
+#, fuzzy
+msgid "Changed page"
+msgstr "Σελίδες πακέτου"
+
+#, fuzzy
+msgid "Page changed"
+msgstr "Αποθήκευση αλλαγών"
+
+#, fuzzy, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
+"change notification.\n"
+"\n"
+"The \"%(pagename)s\" page has been changed by %(editor)s:\n"
+msgstr ""
+"Αγαπητή/ε χρήστη του Wiki,\n"
+"\n"
+"Έχετε εγγραφεί έτσι ώστε να ενημερώνεστε για μια σελίδα ή κατηγορία wiki με "
+"όνομα \"%(sitename)s\".\n"
+"\n"
+"Η παρακάτω σελίδα έχει τροποποιηθεί από τους %(editor)s:\n"
+"%(pagelink)s\n"
+"\n"
+
+msgid "New page:\n"
+msgstr "Νέα σελίδα:\n"
+
+msgid "No differences found!\n"
+msgstr "Δε βρέθηκαν διαφορές!\n"
+
+#, fuzzy, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been deleted by %(editor)s:\n"
+"\n"
+msgstr ""
+"Αγαπητή/ε χρήστη του Wiki,\n"
+"\n"
+"Έχετε εγγραφεί έτσι ώστε να ενημερώνεστε για μια σελίδα ή κατηγορία wiki με "
+"όνομα \"%(sitename)s\".\n"
+"\n"
+"Η παρακάτω σελίδα έχει τροποποιηθεί από τους %(editor)s:\n"
+"%(pagelink)s\n"
+"\n"
+
+#, fuzzy, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by %(editor)"
+"s:\n"
+msgstr ""
+"Αγαπητή/ε χρήστη του Wiki,\n"
+"\n"
+"Έχετε εγγραφεί έτσι ώστε να ενημερώνεστε για μια σελίδα ή κατηγορία wiki με "
+"όνομα \"%(sitename)s\".\n"
+"\n"
+"Η παρακάτω σελίδα έχει τροποποιηθεί από τους %(editor)s:\n"
+"%(pagelink)s\n"
+"\n"
+
 #, python-format
-msgid "%(matchcount)d %(matches)s for \"%(title)s\""
+msgid "New user account created on %(sitename)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Dear Superuser, a new user has just been created. Details follow:\n"
+"\n"
+"    User name: %(username)s\n"
+"    Email address: %(useremail)s"
+msgstr ""
+
+#, python-format
+msgid "New attachment added to page %(pagename)s on %(sitename)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(page_name)s\" for change "
+"notification. An attachment has been added to that page by %(editor)s. "
+"Following detailed information is available:\n"
+"\n"
+"Attachment name: %(attach_name)s\n"
+"Attachment size: %(attach_size)s\n"
+msgstr ""
+
+#, python-format
+msgid "Upload new attachment \"%(filename)s\""
 msgstr ""
 
 #, python-format
@@ -2758,6 +1946,402 @@ msgstr ""
 msgid "Toggle line numbers"
 msgstr ""
 
+msgid "FrontPage"
+msgstr ""
+
+msgid "RecentChanges"
+msgstr ""
+
+msgid "TitleIndex"
+msgstr ""
+
+msgid "WordIndex"
+msgstr ""
+
+msgid "FindPage"
+msgstr ""
+
+msgid "SiteNavigation"
+msgstr ""
+
+msgid "HelpContents"
+msgstr ""
+
+msgid "HelpOnFormatting"
+msgstr ""
+
+msgid "WikiLicense"
+msgstr ""
+
+msgid "MissingPage"
+msgstr ""
+
+msgid "MissingHomePage"
+msgstr ""
+
+msgid "Mon"
+msgstr "Δε"
+
+msgid "Tue"
+msgstr "Τρ"
+
+msgid "Wed"
+msgstr "Τετ"
+
+msgid "Thu"
+msgstr "Πε"
+
+msgid "Fri"
+msgstr "Πα"
+
+msgid "Sat"
+msgstr "Σαβ"
+
+msgid "Sun"
+msgstr "Κυρ"
+
+msgid "AttachFile"
+msgstr ""
+
+msgid "DeletePage"
+msgstr ""
+
+msgid "LikePages"
+msgstr ""
+
+msgid "LocalSiteMap"
+msgstr ""
+
+msgid "RenamePage"
+msgstr ""
+
+msgid "SpellCheck"
+msgstr ""
+
+msgid "Discussion"
+msgstr ""
+
+msgid "Search for items"
+msgstr ""
+
+msgid "containing all the following terms"
+msgstr ""
+
+msgid "containing one or more of the following terms"
+msgstr ""
+
+msgid "not containing the following terms"
+msgstr ""
+
+msgid "last modified since (e.g. last 2 weeks)"
+msgstr "τελευταία τροποποίηση εδώ και (π.χ. last 2 weeks)"
+
+msgid "any category"
+msgstr ""
+
+msgid "any language"
+msgstr "οποιαδήποτε γλώσσα"
+
+msgid "any mimetype"
+msgstr ""
+
+msgid "Categories"
+msgstr ""
+
+msgid "Language"
+msgstr "Γλώσσα"
+
+msgid "File Type"
+msgstr "Τύπος Αρχείου"
+
+msgid "Search only in titles"
+msgstr "Αναζήτηση μόνο σε τίτλους"
+
+msgid "Case-sensitive search"
+msgstr ""
+
+msgid "Exclude underlay"
+msgstr ""
+
+msgid "No system items"
+msgstr ""
+
+msgid "Search in all page revisions"
+msgstr ""
+
+msgid "Go get it!"
+msgstr ""
+
+#, python-format
+msgid ""
+"%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
+"missing."
+msgstr ""
+
+#, python-format
+msgid ""
+"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s=%"
+"(argument_value)s!"
+msgstr ""
+
+#, python-format
+msgid ""
+"Current configuration does not allow embedding of the file %(file)s because "
+"of its mimetype %(mimetype)s."
+msgstr ""
+
+msgid "Embedded"
+msgstr ""
+
+msgid "Search Titles"
+msgstr "Αναζήτηση τίτλων"
+
+msgid "Display context of search results"
+msgstr ""
+"Να εμφανίζεται το αναλυτικά το περιεχόμενο των αποτελεσμάτων της αναζήτησης"
+
+msgid "Case-sensitive searching"
+msgstr "Αναζήτηση με σημασία στον τύπο των χαρακτήρων (πεζά-κεφαλαία)"
+
+msgid "Search Text"
+msgstr "Αναζήτηση Κειμένου"
+
+#, python-format
+msgid "Invalid include arguments \"%s\"!"
+msgstr ""
+
+#, python-format
+msgid "Nothing found for \"%s\"!"
+msgstr ""
+
+#, python-format
+msgid "Unsupported navigation scheme '%(scheme)s'!"
+msgstr ""
+
+#, fuzzy
+msgid "No parent page found!"
+msgstr "Δε βρέθηκε σελίδα!"
+
+msgid "Wiki"
+msgstr "Wiki"
+
+msgid "Slideshow"
+msgstr "Slideshow"
+
+msgid "Start"
+msgstr "Εκκίνηση"
+
+#, python-format
+msgid "Slide %(pos)d of %(size)d"
+msgstr ""
+
+msgid "No orphaned pages in this wiki."
+msgstr ""
+
+#, python-format
+msgid "No quotes on %(pagename)s."
+msgstr ""
+
+#, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr ""
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr ""
+
+#, python-format
+msgid "%(mins)dm ago"
+msgstr ""
+
+msgid "(no bookmark set)"
+msgstr ""
+
+#, python-format
+msgid "(currently set to %s)"
+msgstr ""
+
+msgid "Delete bookmark"
+msgstr ""
+
+msgid "Set bookmark"
+msgstr ""
+
+msgid "[Bookmark reached]"
+msgstr ""
+
+msgid "Markup"
+msgstr ""
+
+msgid "Display"
+msgstr ""
+
+msgid "File attachment browser"
+msgstr ""
+
+msgid "User account browser"
+msgstr ""
+
+msgid "Python Version"
+msgstr "Έκδοση Python"
+
+msgid "MoinMoin Version"
+msgstr "Έκδοση MoinMoin"
+
+#, python-format
+msgid "Release %s [Revision %s]"
+msgstr ""
+
+msgid "4Suite Version"
+msgstr "Έκδοση 4Suite"
+
+msgid "Number of pages"
+msgstr "Αριθμός σελίδων"
+
+msgid "Number of system pages"
+msgstr "Αριθμός σελίδων συστήματος"
+
+msgid "Accumulated page sizes"
+msgstr ""
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr ""
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
+msgstr ""
+
+msgid "NONE"
+msgstr "ΚΑΝΕΝΑ"
+
+msgid "Global extension macros"
+msgstr ""
+
+msgid "Local extension macros"
+msgstr ""
+
+msgid "Global extension actions"
+msgstr ""
+
+msgid "Local extension actions"
+msgstr ""
+
+msgid "Global parsers"
+msgstr ""
+
+msgid "Local extension parsers"
+msgstr ""
+
+msgid "Disabled"
+msgstr "Απενεργοποιημένο"
+
+msgid "Enabled"
+msgstr "Ενεργοποιημένο"
+
+msgid "index available"
+msgstr ""
+
+msgid "index unavailable"
+msgstr ""
+
+msgid "Xapian and/or Python Xapian bindings not installed"
+msgstr ""
+
+#, python-format
+msgid "last modified: %s"
+msgstr "τελευταία τροποποίηση: %s"
+
+msgid "Xapian search"
+msgstr ""
+
+msgid "Stemming for Xapian"
+msgstr ""
+
+msgid "Active threads"
+msgstr ""
+
+msgid "Contents"
+msgstr ""
+
+msgid "Include system pages"
+msgstr "Να συμπεριληφθούν οι σελίδες συστήματος"
+
+msgid "Exclude system pages"
+msgstr "Να αποκλεισθούν οι σελίδες συστήματος"
+
+msgid "No wanted pages in this wiki."
+msgstr ""
+
+msgid "Go To Page"
+msgstr "Πήγαινε Στη Σελίδα"
+
+msgid "From"
+msgstr "Από"
+
+msgid "To"
+msgstr "Προς"
+
+msgid "Content"
+msgstr "Περιεχόμενο"
+
+msgid "Attachments"
+msgstr "Επισυναπτόμενα αρχεία"
+
+#, python-format
+msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
+msgstr ""
+
+msgid "Mail not sent"
+msgstr "Το mail δε στάλθηκε"
+
+msgid "Mail sent OK"
+msgstr "Το mail στάλθηκε επιτυχώς"
+
+#, python-format
+msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
+msgstr ""
+
+#, python-format
+msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
+msgstr ""
+
+#, python-format
+msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
+msgstr ""
+
+#, python-format
+msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
+msgstr ""
+
+msgid ""
+"Rendering of reStructured text is not possible, please install Docutils."
+msgstr ""
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "**You are not allowed to read the page: %s**"
+msgstr "Δεν επιτρέπεται να αλλάξετε το όνομα της σελίδας!"
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr ""
+
+msgid "XSLT option disabled, please look at HelpOnConfiguration."
+msgstr ""
+
+msgid "XSLT processing is not available, please install 4suite 1.x."
+msgstr ""
+
+#, python-format
+msgid "%(errortype)s processing error"
+msgstr ""
+
 #, python-format
 msgid "Unknown action %(action_name)s."
 msgstr ""
@@ -2767,6 +2351,429 @@ msgid "You are not allowed to do %(action_name)s on this page."
 msgstr ""
 
 msgid "Login and try again."
+msgstr ""
+
+msgid "Options --pages and --search are mutually exclusive!"
+msgstr ""
+
+msgid "You must specify an output file!"
+msgstr "Πρέπει να θέσετε κάποιο αρχείο εξόδου!"
+
+msgid "No pages specified using --pages or --search, assuming full package."
+msgstr ""
+
+msgid "Output file already exists! Cowardly refusing to continue!"
+msgstr "Το αρχείο εξόδου υπάρχει ήδη! Φοβάμαι να συνέχισω..."
+
+msgid "about"
+msgstr ""
+
+#, python-format
+msgid ""
+"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
+"%(be)s results out of about %(pages)d pages."
+msgstr ""
+
+msgid "seconds"
+msgstr "δευτερόλεπτα"
+
+msgid "Previous"
+msgstr "Προηγούμενη"
+
+msgid "Next"
+msgstr "Επόμενη"
+
+msgid "rev"
+msgstr ""
+
+msgid "current"
+msgstr "τρέχον"
+
+#, python-format
+msgid ""
+"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
+msgstr ""
+
+msgid "Views/day"
+msgstr ""
+
+msgid "Edits/day"
+msgstr ""
+
+#, python-format
+msgid "%(chart_title)s for %(filterpage)s"
+msgstr ""
+
+msgid ""
+"green=view\n"
+"red=edit"
+msgstr ""
+
+msgid "date"
+msgstr "ημερομηνία"
+
+msgid "# of hits"
+msgstr "# επισκέψεων"
+
+msgid "<Browser setting>"
+msgstr "<Επιλογές Φυλλομετρητή>"
+
+msgid "Others"
+msgstr ""
+
+msgid "Page Size Distribution"
+msgstr ""
+
+msgid "page size upper bound [bytes]"
+msgstr ""
+
+msgid "# of pages of this size"
+msgstr ""
+
+msgid "User agent"
+msgstr ""
+
+msgid "Distribution of User-Agent Types"
+msgstr ""
+
+msgid "Unsubscribe"
+msgstr "Διαγραφή"
+
+msgid "Home"
+msgstr "Αρχική"
+
+msgid "[RSS]"
+msgstr "[RSS]"
+
+msgid "[DELETED]"
+msgstr "[ΔΙΕΓΡΑΜΜΕΝΟ]"
+
+msgid "[UPDATED]"
+msgstr "[ΕΝΗΜΕΡΩΜΕΝΟ]"
+
+msgid "[RENAMED]"
+msgstr "[ΜΕΤΟΝΟΜΑΣΜΕΝΟ]"
+
+msgid "[CONFLICT]"
+msgstr "[ΣΥΓΚΡΟΥΣΗ]"
+
+msgid "[NEW]"
+msgstr "[ΝΕΟ]"
+
+msgid "[DIFF]"
+msgstr "[DIFF]"
+
+msgid "[BOTTOM]"
+msgstr "[ΤΕΛΟΣ]"
+
+msgid "[TOP]"
+msgstr "[ΑΡΧΗ]"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Κάντε κλικ εδώ για να κάνετε πλήρη αναζήτηση γι' αυτόν τον τίτλο"
+
+msgid "Logout"
+msgstr "Αποσύνδεση"
+
+msgid "Clear message"
+msgstr "Καθαρισμός του μηνύματος"
+
+#, python-format
+msgid "last edited %(time)s by %(editor)s"
+msgstr "τελευταία τροποποίηση %(time)s από %(editor)s"
+
+#, python-format
+msgid "last modified %(time)s"
+msgstr "τροποποιήθηκε %(time)s"
+
+msgid "Search:"
+msgstr "Αναζήτηση:"
+
+msgid "Text"
+msgstr "Κείμενο"
+
+msgid "Titles"
+msgstr "Τίτλοι"
+
+msgid "Search"
+msgstr "Αναζήτηση"
+
+msgid "More Actions:"
+msgstr "Περισότερες επιλογές:"
+
+msgid "------------------------"
+msgstr "------------------------"
+
+msgid "Raw Text"
+msgstr ""
+
+msgid "Print View"
+msgstr ""
+
+msgid "Delete Cache"
+msgstr ""
+
+msgid "Delete Page"
+msgstr ""
+
+msgid "Like Pages"
+msgstr ""
+
+msgid "Local Site Map"
+msgstr ""
+
+msgid "My Pages"
+msgstr "Οι σελίδες μου"
+
+msgid "Subscribe User"
+msgstr ""
+
+msgid "Remove Spam"
+msgstr ""
+
+msgid "Package Pages"
+msgstr ""
+
+msgid "Render as Docbook"
+msgstr ""
+
+msgid "Sync Pages"
+msgstr ""
+
+msgid "Do"
+msgstr ""
+
+msgid "Comments"
+msgstr ""
+
+msgid "Edit (Text)"
+msgstr ""
+
+msgid "Edit (GUI)"
+msgstr ""
+
+msgid "Immutable Page"
+msgstr ""
+
+msgid "Remove Link"
+msgstr ""
+
+msgid "Add Link"
+msgstr ""
+
+#, python-format
+msgid "Show %s days."
+msgstr ""
+
+msgid "Wiki Markup"
+msgstr ""
+
+msgid "DeleteCache"
+msgstr ""
+
+#, python-format
+msgid "(cached %s)"
+msgstr ""
+
+msgid "Or try one of these actions:"
+msgstr ""
+
+msgid "Page"
+msgstr "Σελίδα"
+
+msgid "User"
+msgstr "Χρήστης"
+
+#, fuzzy
+msgid "Member of Groups"
+msgstr "Αριθμός σελίδων"
+
+msgid "Jabber"
+msgstr ""
+
+msgid "Enable user"
+msgstr "Ενεργοποίηση χρήστη"
+
+msgid "disabled"
+msgstr "απενεργοποιημένο"
+
+msgid "Disable user"
+msgstr "Απενεργοποίηση χρήστη"
+
+msgid "Mail account data"
+msgstr "Δεδομένα του λογαριασμού mail"
+
+msgid "OpenID"
+msgstr ""
+
+#, fuzzy
+msgid "Change password"
+msgstr "Κωδικός"
+
+msgid "Your password has been changed."
+msgstr ""
+
+msgid "To change your password, enter a new password twice."
+msgstr ""
+
+msgid "Notification"
+msgstr ""
+
+msgid "Notification settings saved!"
+msgstr ""
+
+#, fuzzy
+msgid "'''Email'''"
+msgstr "Email"
+
+msgid "'''Jabber'''"
+msgstr ""
+
+msgid "'''Event type'''"
+msgstr ""
+
+msgid "Select the events you want to be notified about."
+msgstr ""
+
+msgid ""
+"Before you can be notified, you need to provide a way to contact you in the "
+"general preferences."
+msgstr ""
+
+#, fuzzy
+msgid "Subscribed events"
+msgstr "Εγγραφή"
+
+#, fuzzy
+msgid "Subscribed wiki pages<<BR>>(one regex per line)"
+msgstr "Σελίδες wiki που έχετε γραφτεί (μόνο ένα regex ανά γραμμή)"
+
+msgid "Save"
+msgstr "Αποθήκευση"
+
+msgid "OpenID settings"
+msgstr ""
+
+msgid "Cannot remove all OpenIDs."
+msgstr ""
+
+msgid "The selected OpenIDs have been removed."
+msgstr ""
+
+msgid "No OpenID given."
+msgstr ""
+
+msgid "OpenID is already present."
+msgstr ""
+
+msgid "This OpenID is already used for another account."
+msgstr ""
+
+msgid "OpenID added successfully."
+msgstr ""
+
+msgid "Current OpenIDs"
+msgstr ""
+
+msgid "Remove selected"
+msgstr ""
+
+msgid "Add OpenID"
+msgstr ""
+
+msgid "Preferences"
+msgstr "Επιλογές"
+
+#, fuzzy
+msgid "This jabber id already belongs to somebody else."
+msgstr "Αυτό το email ανήκει σε κάποιον άλλο."
+
+#, python-format
+msgid "The theme '%(theme_name)s' could not be loaded!"
+msgstr "Το theme '%(theme_name)s' δε μπορεί να ανοίξει!"
+
+msgid "User preferences saved!"
+msgstr "Οι ρυθμίσεις χρήστη αποθηκεύτηκαν!"
+
+msgid "Default"
+msgstr "Default"
+
+msgid "the one preferred"
+msgstr "το προτιμόμενο"
+
+msgid "free choice"
+msgstr "ελεύθερη επιλογή"
+
+msgid "Preferred theme"
+msgstr "Προτιμόμενο θέμα"
+
+msgid "Editor Preference"
+msgstr "Επιλογές του editor"
+
+msgid "Editor shown on UI"
+msgstr "Ο editor που θα εμφανίζεται στο UI"
+
+msgid "Time zone"
+msgstr "Ζώνη ώρας"
+
+msgid "Your time is"
+msgstr "Η ώρα σας είναι"
+
+msgid "Server time is"
+msgstr "Η ώρα του server είναι"
+
+msgid "Date format"
+msgstr "Μορφή ημερομηνίας"
+
+msgid "Preferred language"
+msgstr "Προτιμόμενη γλώσσα"
+
+msgid "General options"
+msgstr "Γενικές επιλογές"
+
+msgid "Quick links"
+msgstr "Γρήγορες συνδέσεις"
+
+msgid "Switch user"
+msgstr ""
+
+msgid "No user selected"
+msgstr ""
+
+msgid ""
+"You can now change the settings of the selected user account; log out to get "
+"back to your account."
+msgstr ""
+
+msgid "You are the only user."
+msgstr ""
+
+msgid ""
+"As a superuser, you can temporarily assume the identity of another user."
+msgstr ""
+
+msgid "Select User"
+msgstr "Επιλογή Χρήστη"
+
+msgid "Line"
+msgstr ""
+
+msgid "Deletions are marked like this."
+msgstr ""
+
+msgid "Additions are marked like this."
+msgstr ""
+
+msgid "[all]"
+msgstr ""
+
+msgid "[not empty]"
+msgstr ""
+
+msgid "[empty]"
+msgstr ""
+
+msgid "filter"
 msgstr ""
 
 #~ msgid "Found no account matching the given email address '%(email)s'!"
