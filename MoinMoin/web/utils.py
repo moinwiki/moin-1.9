@@ -8,6 +8,7 @@
 """
 import time
 
+from werkzeug.exceptions import abort
 from werkzeug.utils import redirect
 
 from MoinMoin import log
@@ -152,11 +153,60 @@ def check_surge_protect(request, kick=False):
     else:
         return False
 
-def handle_auth(user_obj, **kw):
+def handle_auth(user_obj, request, attended=False, username=None,
+                password=None, openid_identifier=None, login=None,
+                logout=None, stage=None):
     logging.warning("handle_auth still needs implementation")
+    extra = { 'cookie': request.cookie }
+    if login:
+        extra['attended'] = attended
+        extra['username'] = username
+        extra['password'] = password
+        extra['openid_identifier'] = openid_identifier
+        if stage:
+            extra['multistage'] = True
+    login_msgs = []
+    request._login_multistage = None
+
+    if logout and 'setuid' in request.session:
+        del request.session['setuid']
+        return user_obj
+
+    for authmethod in request.cfg.auth:
+        if logout:
+            user_obj, cont = authmethod.logout(request, user_obj, **extra)
+        elif login:
+            if stage and authmethod.name != stage:
+                continue
+            ret = authmethod.login(request, user_obj, **extra)
+            user_obj = ret.user_obj
+            cont = ret.continue_flag
+            if stage:
+                stage = None
+                del extra['multistage']
+            if ret.multistage:
+                request._login_multistage = ret.multistage
+                request._login_multistage_name = authmethod.name
+                return user_obj
+            if ret.redirect_to:
+                nextstage = auth.get_multistage_continuation_url(request, authmethod.name)
+                url = ret.redirect_to
+                url = url.replace('%return_form', quote_plus(nextstage))
+                url = url.replace('%return', quote(nextstage))
+                abort(redirect(url))
+            msg = ret.message
+            if msg and not msg in login_msgs:
+                login_msgs.append(msg)
+        else:
+            user_obj, cont = authmethod.request(request, user_obj, **extra)
+        if not cont:
+            break
+
+    request._login_messages = login_msgs
     return user_obj
 
-def handle_auth_form(user_obj, form):
+def handle_auth_form(user_obj, request):
+    form = request.form
     params = {
         'username': form.get('name'),
         'password': form.get('password'),
@@ -166,7 +216,7 @@ def handle_auth_form(user_obj, form):
         'stage': form.get('stage'),
         'attended': True
     }
-    return handle_auth(user_obj, **params)
+    return handle_auth(user_obj, request, **params)
 
 def redirect_last_visited(request):
     pagetrail = request.user.getTrail()
@@ -183,4 +233,4 @@ def redirect_last_visited(request):
         # Or to localized FrontPage
         url = wikiutil.getFrontPage(request).url(request)
     url = request.getQualifiedURL(url)
-    return redirect(url)
+    return abort(redirect(url))
