@@ -29,7 +29,7 @@ class XMLRPCApp(object):
         
     def __call__(self, environ, start_response):
         request = Request(environ)
-        action = Request.args.get('action')
+        action = request.args.get('action')
         
         from MoinMoin import xmlrpc
 
