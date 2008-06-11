@@ -45,6 +45,11 @@ def check_setuid(request):
         return False
 
 def check_forbidden(request):
+    """ Simple action and host access checks
+
+    Spider agents are checked against the called actions,
+    hosts against the blacklist. Raises Forbidden if triggered.
+    """
     args = request.args
     action = args.get('action')
     if ((args or request.method != 'GET') and
@@ -64,8 +69,11 @@ def check_forbidden(request):
     return False
 
 def check_surge_protect(request, kick=False):
-    """ check if someone requesting too much from us,
-        if kick_him is True, we unconditionally blacklist the current user/ip
+    """ Check for excessive requests
+
+    Raises a SurgeProtection exception on wiki overuse.
+
+    @param request: a moin request object
     """
     limits = request.cfg.surge_action_limits
     if not limits:
