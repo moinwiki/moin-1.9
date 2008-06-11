@@ -30,14 +30,16 @@ def handle_auth(user_obj, **kw):
     return user_obj
 
 def handle_auth_form(user_obj, form):
-    username = form.get('name')
-    password = form.get('password')
-    openid_identifier = form.get('openid_identifier')
-    login = 'login' in form
-    logout = 'logout' in form
-    stage = form.get('stage')
-    attended = True
-    return handle_auth(user_obj, **locals())
+    params = {
+        'username': form.get('name'),
+        'password': form.get('password'),
+        'openid_identifier': form.get('openid_identifier'),
+        'login': 'login' in form,
+        'logout': 'logout' in form,
+        'stage': form.get('stage'),
+        'attended': True
+    }
+    return handle_auth(user_obj, **params)
 
 def redirect_last_visited(request):
     pagetrail = request.user.getTrail()
