@@ -12,7 +12,7 @@ from werkzeug.exceptions import NotFound
 
 from MoinMoin.web.contexts import HTTPContext
 from MoinMoin.web.request import Request
-from MoinMoin.web.utils import check_spider, check_forbidden
+from MoinMoin.web.utils import check_spider, check_forbidden, check_setuid
 from MoinMoin.web.utils import check_surge_protect, handle_auth_form
 from MoinMoin.web.apps import HTTPExceptionsMiddleware
 
@@ -56,11 +56,7 @@ def _request_init(request):
     if not request.user:
         request.user = user.User(request, auth_method='request:invalid')
 
-    if 'setuid' in request.session and request.user.isSuperUser():
-        request._setuid_real_user = request.user
-        uid = request.session['setuid']
-        request.user = user.User(request, uid, auth_method='setuid')
-        request.user.valid = True
+    check_setuid(request)
 
     if request.action != 'xmlrpc':
         check_forbidden(request)
