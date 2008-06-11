@@ -12,7 +12,8 @@ from werkzeug.exceptions import NotFound
 
 from MoinMoin.web.contexts import HTTPContext
 from MoinMoin.web.request import Request
-from MoinMoin.web.utils import check_spider, handle_auth_form
+from MoinMoin.web.utils import check_spider, check_forbidden
+from MoinMoin.web.utils import check_surge_protect, handle_auth_form
 from MoinMoin.web.apps import HTTPExceptionsMiddleware
 
 from MoinMoin.Page import Page
@@ -62,10 +63,8 @@ def _request_init(request):
         request.user.valid = True
 
     if request.action != 'xmlrpc':
-        if not request.forbidden and request.isForbidden():
-            raise Forbidden()
-        if not request.forbidden and request.surge_protect():
-            raise SurgeProtection(retry_after=request.cfg.surge_lockout_time)
+        check_forbidden(request)
+        check_surge_protect(request)
 
     request.reset()
 
