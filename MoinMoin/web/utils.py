@@ -28,6 +28,22 @@ def check_spider(useragent, cfg):
         is_spider = cfg.cache.ua_spiders.search(useragent.browser) is not None
     return is_spider
 
+def check_setuid(request):
+    """ Check for setuid conditions and set user accordingly
+    
+    @param request: a moin request object
+    @rtype: boolean
+    @return: Wether a UID change took place
+    """
+    if 'setuid' in request.session and request.user.isSuperUser():
+        request._setuid_real_user = request.user
+        uid = request.session['setuid']
+        request.user = user.User(request, uid, auth_method='setuid')
+        request.user.valid = True
+        return True
+    else:
+        return False
+
 def check_forbidden(request):
     args = request.args
     action = args.get('action')
