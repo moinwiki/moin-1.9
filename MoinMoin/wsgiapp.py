@@ -10,7 +10,7 @@ from werkzeug.utils import responder
 from werkzeug.wrappers import Response
 from werkzeug.exceptions import NotFound
 
-from MoinMoin.web.contexts import HTTPContext
+from MoinMoin.web.contexts import HTTPContext, RenderContext
 from MoinMoin.web.request import Request
 from MoinMoin.web.utils import check_spider, check_forbidden, check_setuid
 from MoinMoin.web.utils import check_surge_protect, handle_auth_form
@@ -29,27 +29,9 @@ def _request_init(request):
     request.clock = Clock()
     request.clock.start('total')
     request.clock.start('base__init__')
-    try:
-        request.clock.start('load_multi_cfg')
-        request.cfg = multiconfig.getConfig(request.url)
-        request.clock.stop('load_multi_cfg')
-    except error.NoConfigMatchedError:
-        raise NotFound('<p>No wiki configuration matching the URL found!</p>')
-
-    request.action = request.form.get('action', 'show')
-    
-    try:
-        request.rev = int(request.form['rev'])
-    except:
-        request.rev = None
-
-    from MoinMoin.Page import RootPage
-    request.rootpage = RootPage(request)
 
     user_obj = request.cfg.session_handler.start(request, request.cfg.session_id_handler)
-    
-    request.user = None
-    request.user = handle_auth_form(user_obj, request.form)
+    request.user = handle_auth_form(user_obj, request)
 
     request.cfg.session_handler.after_auth(request, request.cfg.session_id_handler, request.user)
 
@@ -58,6 +40,8 @@ def _request_init(request):
 
     check_setuid(request)
 
+    request = RenderContext(request)
+
     if request.action != 'xmlrpc':
         check_forbidden(request)
         check_surge_protect(request)
@@ -65,11 +49,12 @@ def _request_init(request):
     request.reset()
 
     request.clock.stop('base__init__')
+    return request
 
 def application(environ, start_response):
     request = Request(environ)
     request = HTTPContext(request)
-    _request_init(request)
+    request = _request_init(request)
     request.run()
 
     response = Response(status=request.status,

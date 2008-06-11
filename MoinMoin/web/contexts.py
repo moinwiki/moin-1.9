@@ -10,10 +10,11 @@
 
 import re, time, inspect
 
-from werkzeug.utils import Headers, http_date
+from werkzeug.utils import Headers, http_date, cached_property
 from werkzeug.exceptions import Unauthorized, NotFound
 
-from MoinMoin import i18n
+from MoinMoin import i18n, error
+from MoinMoin.config import multiconfig
 from MoinMoin.formatter import text_html
 from MoinMoin.request import RequestBase
 from MoinMoin.web.request import Request
@@ -86,7 +87,7 @@ class RequestContext(Context):
             return self._is_spideragent
         else:
             return False
-    is_spideragent = property(is_spideragent)
+    is_spideragent = cached_property(is_spideragent)
 
     # legacy compatibility
     isSpiderAgent = is_spideragent
@@ -222,7 +223,7 @@ class HTTPContext(RequestContext, RequestBase):
         else:
             lang = 'en'
         return lang
-    lang = property(lang)
+    lang = cached_property(lang)
 
     def getText(self):
         lang = self.lang
@@ -230,7 +231,28 @@ class HTTPContext(RequestContext, RequestBase):
         def _(text, i18n=i18n, request=self, lang=lang, **kw):
             return i18n.getText(text, request, lang, **kw)
         return _
-    getText = property(getText)
+    getText = cached_property(getText)
+
+    def action(self):
+        return self.values.get('action','show')
+    action = cached_property(action)
+
+    def rev(self):
+        try:
+            return int(self.values['rev'])
+        except:
+            return None
+    rev = cached_property(rev)
+
+    def cfg(self):
+        try:
+            self.clock.start('load_multicfg')
+            cfg = multiconfig.getConfig(self.url)
+            self.clock.stop('load_multi_cfg')
+            return cfg
+        except error.NoConfigMatchedError:
+            raise NotFound('<p>No wiki configuration matching the URL found!</p>')
+    cfg = cached_property(cfg)
 
 class RenderContext(Context):
     """ Context for rendering content
@@ -241,10 +263,8 @@ class RenderContext(Context):
     * page
     * output redirection
     """
-    def __init__(self, parent,  page=None, user=None, lang=None):
+    def __init__(self, parent):
         Context.__init__(self, parent)
-        self.page = page
-        self.user = user
 
         self.pragma = {}
         self.mode_getpagelinks = 0
@@ -262,7 +282,12 @@ class RenderContext(Context):
             return self.user.language
         else:
             return getattr(self._parent, 'lang')
-    lang = property(lang)
+    lang = cached_property(lang)
+
+    def rootpage(self):
+        from MoinMoin.Page import RootPage
+        return RootPage(self)
+    rootpage = cached_property(rootpage)
 
 # mangle in logging of function calls
 def _logfunc(func):
