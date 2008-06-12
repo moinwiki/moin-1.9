@@ -623,6 +623,12 @@ class User:
             del self._request.cfg.cache.name2id
         except:
             pass
+        key = 'openid2id'
+        caching.CacheEntry(self._request, arena, key, scope='wiki').remove()
+        try:
+            del self._request.cfg.cache.openid2id
+        except:
+            pass
 
         if not self.disabled:
             self.valid = 1
