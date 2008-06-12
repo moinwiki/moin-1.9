@@ -985,18 +985,29 @@ def send_viewfile(pagename, request):
         request.write(request.formatter.preformatted(0))
         return
 
-    package = packages.ZipPackage(request, fpath)
-    if package.isPackage():
-        request.write("<pre><b>%s</b>\n%s</pre>" % (_("Package script:"), wikiutil.escape(package.getScript())))
-        return
+    try:
+        package = packages.ZipPackage(request, fpath)
+        if package.isPackage():
+            request.write("<pre><b>%s</b>\n%s</pre>" % (_("Package script:"), wikiutil.escape(package.getScript())))
+            return
 
-    if zipfile.is_zipfile(fpath) and mt.minor == 'zip':
-        zf = zipfile.ZipFile(fpath, mode='r')
-        request.write("<pre>%-46s %19s %12s\n" % (_("File Name"), _("Modified")+" "*5, _("Size")))
-        for zinfo in zf.filelist:
-            date = "%d-%02d-%02d %02d:%02d:%02d" % zinfo.date_time
-            request.write(wikiutil.escape("%-46s %s %12d\n" % (zinfo.filename, date, zinfo.file_size)))
-        request.write("</pre>")
+        if zipfile.is_zipfile(fpath) and mt.minor == 'zip':
+            zf = zipfile.ZipFile(fpath, mode='r')
+            request.write("<pre>%-46s %19s %12s\n" % (_("File Name"), _("Modified")+" "*5, _("Size")))
+            for zinfo in zf.filelist:
+                date = "%d-%02d-%02d %02d:%02d:%02d" % zinfo.date_time
+                request.write(wikiutil.escape("%-46s %s %12d\n" % (zinfo.filename, date, zinfo.file_size)))
+            request.write("</pre>")
+            return
+    except RuntimeError:
+        # We don't want to crash with a traceback here (an exception
+        # here could be caused by an uploaded defective zip file - and
+        # if we crash here, the user does not get a UI to remove the
+        # defective zip file again).
+        # RuntimeError is raised by zipfile stdlib module in case of
+        # problems (like inconsistent slash and backslash usage in the
+        # archive).
+        logging.exception("An exception within zip file attachment handling occurred:")
         return
 
     from MoinMoin import macro
