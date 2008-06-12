@@ -331,20 +331,30 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
                              fmt.text(label_view) +
                              fmt.url(0))
 
-            is_zipfile = zipfile.is_zipfile(fullpath)
-            if is_zipfile:
-                is_package = packages.ZipPackage(request, fullpath).isPackage()
-                if is_package and request.user.isSuperUser():
-                    links.append(fmt.url(1, getAttachUrl(pagename, file, request, do='install')) +
-                                 fmt.text(label_install) +
-                                 fmt.url(0))
-                elif (not is_package and mt.minor == 'zip' and
-                      may_delete and
-                      request.user.may.read(pagename) and
-                      request.user.may.write(pagename)):
-                    links.append(fmt.url(1, getAttachUrl(pagename, file, request, do='unzip')) +
-                                 fmt.text(label_unzip) +
-                                 fmt.url(0))
+            try:
+                is_zipfile = zipfile.is_zipfile(fullpath)
+                if is_zipfile:
+                    is_package = packages.ZipPackage(request, fullpath).isPackage()
+                    if is_package and request.user.isSuperUser():
+                        links.append(fmt.url(1, getAttachUrl(pagename, file, request, do='install')) +
+                                     fmt.text(label_install) +
+                                     fmt.url(0))
+                    elif (not is_package and mt.minor == 'zip' and
+                          may_delete and
+                          request.user.may.read(pagename) and
+                          request.user.may.write(pagename)):
+                        links.append(fmt.url(1, getAttachUrl(pagename, file, request, do='unzip')) +
+                                     fmt.text(label_unzip) +
+                                     fmt.url(0))
+            except RuntimeError:
+                # We don't want to crash with a traceback here (an exception
+                # here could be caused by an uploaded defective zip file - and
+                # if we crash here, the user does not get a UI to remove the
+                # defective zip file again).
+                # RuntimeError is raised by zipfile stdlib module in case of
+                # problems (like inconsistent slash and backslash usage in the
+                # archive).
+                logging.exception("An exception within zip file attachment handling occurred:")
 
             html.append(fmt.listitem(1))
             html.append("[%s]" % "&nbsp;| ".join(links))
