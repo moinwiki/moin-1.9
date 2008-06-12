@@ -106,8 +106,10 @@ def _create_form(request):
     tbl.append(row)
     row.append(html.TD().append(html.STRONG().append(
                                   html.Text(_("Name")))))
-    row.append(html.TD().append(html.INPUT(type="text", size="36",
-                                           name="name")))
+    cell = html.TD()
+    row.append(cell)
+    cell.append(html.INPUT(type="text", size="36", name="name"))
+    cell.append(html.Text(' ' + _("(Use FirstnameLastname)")))
 
     row = html.TR()
     tbl.append(row)
