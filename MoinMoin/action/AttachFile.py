@@ -888,6 +888,7 @@ def _do_unzip(pagename, request, overwrite=False):
                 mapping = []  # zip is not acceptable
                 break
             finalname = name[fname_index:]  # remove common path prefix
+            finalname = finalname.decode(config.charset, 'replace')  # replaces trash with \uFFFD char
             mapping.append((name, finalname))
             new_fsizes[finalname] = zi.file_size
 
