@@ -34,13 +34,25 @@ Version 1.7.0current:
       fixes hangs with wsgiref server.
     * Fix traceback in filesys.py on Mac OS X when import Carbon fails.
     * Xapian search / indexing:
-      * fix searching for negative terms only
+      * fix searching for negative terms
       * improve result list ordering
       * index filters: redirect stderr to logging system
+      * search results: improve ordering
     * FootNote macro: revert to old behaviour (using the arg parser made
       problems with footnotes including commas)
-    * Fix subscript parsing (was broken for cases like "a,,1,2,,").
+    * Wiki parser: fix subscript parsing (was broken for cases like 'a,,1,2,,').
+    * Fixed MoinMoinBugs/WikiSyncMissingInterWikiNameOnRemoteSide
+    * Fixed 1.7 mig scripts.
+    * Clear openid cache when saving a user.
+    * Add "Use FirstnameLastname" message to newaccount form.
+    * Make recoverpass/newaccount refuse access unless MoinAuth is enabled.
     * info action: fix exception happening for invalid query args
+    * AttachFile action:
+      * catch runtime error raised by zipfile to not make attachments list
+        unusable if someone attached a defective zip
+      * catch runtime error raised by zipfile when viewing a defective zip
+      * when unzipping member files, decode their filenames from utf-8 and
+        replace invalid chars
 
   Other changes:
     * HINT: If you want to use xapian based indexed search, you need to have
@@ -49,6 +61,7 @@ Version 1.7.0current:
       Xapian (it uses utf-8 since 1.0.0, so we can use it)).
     * Use better ACLs and comments on system/help pages,
       remove MoinPagesEditorGroup (not needed any more).
+    * docs: added UPDATE instructions
 
 
 Version 1.7.0rc2:
