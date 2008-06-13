@@ -469,14 +469,13 @@ class Search:
         # when xapian was used, we can estimate the numer of matches
         # Note: hits can't be estimated by xapian with historysearch enabled
         if not self.request.cfg.xapian_index_history and hasattr(self, '_xapianMset'):
-            self.sort = None
+            _ = self.request.getText
             mset = self._xapianMset
-            estimated_hits = (
-                (mset.get_matches_estimated() == mset.get_matches_upper_bound()
-                    and
-                 mset.get_matches_estimated() == mset.get_matches_lower_bound())
-                and '' or 'about',
-                mset.get_matches_estimated())
+            m_lower = mset.get_matches_lower_bound()
+            m_estimated = mset.get_matches_estimated()
+            m_upper = mset.get_matches_upper_bound()
+            estimated_hits = (m_estimated == m_upper and m_estimated == m_lower
+                              and '' or _('about'), m_estimated)
         else:
             estimated_hits = None
 
@@ -519,10 +518,7 @@ class Search:
 
                 clock.start('_xapianQuery')
                 query = self.query.xapian_term(self.request, index.allterms)
-                try:
-                    description = query.get_description() # deprecated since xapian 1.0, removal in 1.1
-                except AttributeError:
-                    description = str(query)
+                description = str(query)
                 logging.debug("_xapianSearch: query = %r" % description)
                 query = xapwrap.index.QObjQuery(query)
                 enq, mset, hits = index.search(query, sort=self.sort,

@@ -10,6 +10,7 @@ from MoinMoin import user, wikiutil, util
 from MoinMoin.Page import Page
 from MoinMoin.widget import html
 from MoinMoin.security.textcha import TextCha
+from MoinMoin.auth import MoinAuth
 
 
 _debug = False
@@ -106,8 +107,10 @@ def _create_form(request):
     tbl.append(row)
     row.append(html.TD().append(html.STRONG().append(
                                   html.Text(_("Name")))))
-    row.append(html.TD().append(html.INPUT(type="text", size="36",
-                                           name="name")))
+    cell = html.TD()
+    row.append(cell)
+    cell.append(html.INPUT(type="text", size="36", name="name"))
+    cell.append(html.Text(' ' + _("(Use FirstnameLastname)")))
 
     row = html.TR()
     tbl.append(row)
@@ -156,7 +159,17 @@ def _create_form(request):
     return unicode(ret)
 
 def execute(pagename, request):
-    pagename = pagename
+    found = False
+    for auth in request.cfg.auth:
+        if isinstance(auth, MoinAuth):
+            found = True
+            break
+
+    if not found:
+        # we will not have linked, so forbid access
+        request.makeForbidden403()
+        return
+
     page = Page(request, pagename)
     _ = request.getText
     form = request.form

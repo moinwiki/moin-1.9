@@ -9,6 +9,9 @@
 """
 import sys, os, cgi
 
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin.request import RequestBase, RemoteClosedConnection
 
 class Request(RequestBase):
@@ -33,9 +36,10 @@ class Request(RequestBase):
         form = cgi.FieldStorage(keep_blank_values=1)
         return RequestBase._setup_args_from_cgi_form(self, form)
 
-    def read(self, n=None):
+    def read(self, n):
         """ Read from input stream. """
         if n is None:
+            logging.warning("calling request.read(None) might block")
             return sys.stdin.read()
         else:
             return sys.stdin.read(n)
