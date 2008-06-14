@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-06-11 18:21+0200\n"
-"PO-Revision-Date: 2008-03-24 23:30+0800\n"
+"PO-Revision-Date: 2008-06-13 23:22+0800\n"
 "Last-Translator: Rux Li <rux.li3@gmail.com>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -359,7 +359,7 @@ msgstr "行號 %(lineno)i 有不明的操作 %(func)s。"
 msgid "The file %s was not found in the package."
 msgstr "檔案 '%s' 不在此包裹檔內！"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
@@ -369,9 +369,9 @@ msgid ""
 msgstr ""
 "登入名稱：%s\n"
 "\n"
-"登入密碼：%s\n"
+"密碼回復憑證：%s\n"
 "\n"
-"登入網址：%s/?action=login\n"
+"登入網址：%s/?action=recoverpass&name=%s&token=%s\n"
 
 msgid ""
 "Somebody has requested to email you a password recovery token.\n"
@@ -548,9 +548,8 @@ msgstr "\"%(pagename)s\" 的附件"
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: 答案錯誤！請再試一次..."
 
-#, fuzzy
 msgid "You are not allowed to overwrite a file attachment of this page."
-msgstr "你無權檢視本頁附件。"
+msgstr "你無權覆蓋本頁的附件。"
 
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
@@ -578,22 +577,23 @@ msgstr "你無權刪除本頁附件。"
 msgid "Attachment '%(filename)s' deleted."
 msgstr "附件 '%(filename)s' 已刪除。"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
-msgstr "附件 '%(filename)s' 已安裝。"
+msgstr "附件 '%(new_pagename)s/%(new_filename)s' 已存在。"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/%"
 "(new_filename)s'."
-msgstr "附件 '%(filename)s' 已搬移至 %(page)s！"
+msgstr "附件 '%(pagename)s/%(filename)s' 已搬移至 '%(new_pagename)s/%"
+"(new_filename)s'。"
 
 msgid "Nothing changed"
 msgstr "沒有任何改變"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Page '%(new_pagename)s' does not exist or you don't have enough rights."
-msgstr "頁面 %(newpagename)s 不存在或你沒有足夠的權限。"
+msgstr "頁面 '%(new_pagename)s' 不存在或你沒有足夠的權限。"
 
 msgid "Move aborted!"
 msgstr "放棄搬移"
@@ -604,17 +604,15 @@ msgstr "請使用互動式介面來搬移頁面附件！"
 msgid "You are not allowed to move attachments from this page."
 msgstr "你無權搬移本頁附件。"
 
-#, fuzzy
 msgid "Move aborted because new page name is empty."
-msgstr "因為空的頁面名稱而放棄搬移"
+msgstr "因為新頁面名稱是空的而放棄搬移"
 
 #, python-format
 msgid "Please use a valid filename for attachment '%(filename)s'."
 msgstr "請替附件 '%(filename)s' 取個合法的檔名。"
 
-#, fuzzy
 msgid "Move aborted because new attachment name is empty."
-msgstr "因為空的附件名稱而放棄搬移"
+msgstr "因為新附件名稱是空的而放棄搬移"
 
 msgid "Move"
 msgstr "搬移"
@@ -642,32 +640,33 @@ msgstr "你無權解壓本頁附件。"
 msgid "The file %(filename)s is not a .zip file."
 msgstr "檔案 %(filename)s 不是 .zip 檔。"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because some files in the zip are "
 "either not in the same directory or exceeded the single file size limit (%"
 "(maxsize_file)d kB)."
 msgstr ""
-"附件 '%(filename)s' 無法解壓縮。可能原因為：檔案太大、不是 .zip 檔、檔案已存"
-"在、或在子目錄內。"
+"附件 '%(filename)s' 無法解壓縮。可能原因：zip 內的檔案不在同一目錄"
+"或有檔案超過單一檔案的大小限制 (%(maxsize_file)d kB)。"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because it would have exceeded the "
 "per page attachment storage size limit (%(size)d kB)."
-msgstr "因結果檔案太大，附件 '%(filename)s' 無法解壓縮 (缺 %(space)d kB)。"
+msgstr "附件 '%(filename)s' 無法解壓縮。原因：檔案太大，"
+"超過頁面附件的大小限制 (%(size)d kB)。"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because it would have exceeded the "
 "per page attachment count limit (%(count)d)."
-msgstr "因結果檔案太多，附件 '%(filename)s' 無法解壓縮 (多 %(count)d 個)。"
+msgstr "附件 '%(filename)s' 無法解壓縮。原因：檔案太多，超過頁面附件的個數限制 (%(count)d)。"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(filename)s' partially unzipped (did not overwrite: %(filelist)"
 "s)."
-msgstr "附件 '%(filename)s' 已解壓縮。"
+msgstr "附件 '%(filename)s' 已部份解壓縮 (沒有覆蓋: %(filelist)s)。"
 
 #, python-format
 msgid "Attachment '%(filename)s' unzipped."
@@ -772,9 +771,8 @@ msgstr "筆"
 msgid "Load"
 msgstr "載入"
 
-#, fuzzy
 msgid "Pagename not specified!"
-msgstr "附件沒指定檔名！"
+msgstr "頁面名稱沒指定！"
 
 msgid "Upload page content"
 msgstr ""
@@ -791,9 +789,8 @@ msgstr ""
 msgid "Comment"
 msgstr "說明"
 
-#, fuzzy
 msgid "Page Name"
-msgstr "包裹名稱"
+msgstr "頁面名稱"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -977,11 +974,11 @@ msgstr "同步完成。請參考以下的狀態訊息。"
 msgid "Synchronisation started -"
 msgstr "同步作業開始 --"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Got a list of %s local and %s remote pages. This results in %s pages to "
 "process."
-msgstr "收到 %s 個本地及 %s 個遠端頁面。總共有 %s 個不同的頁面。"
+msgstr "收到 %s 個本地及 %s 個遠端頁面。總共有 %s 個頁面要處理。"
 
 #, python-format
 msgid "After filtering: %s pages"
@@ -1153,9 +1150,9 @@ msgstr "你無權進行遠端備份。"
 msgid "Unknown backup subaction: %s."
 msgstr "不明的備份子操作：%s。"
 
-#, fuzzy, python-format
+#, python-format
 msgid "You must login to use this action: %(action)s."
-msgstr "登入之後才能訂閱"
+msgstr "登入之後才能使用此功能：%(action)s。"
 
 msgid "Charts are not available!"
 msgstr "不能繪製圖表！"
@@ -1185,13 +1182,11 @@ msgstr "(間隔 %d 版)"
 msgid "Revert to this revision"
 msgstr "回復成此版"
 
-#, fuzzy
 msgid "Previous change"
-msgstr "上一頁"
+msgstr "上一變動"
 
-#, fuzzy
 msgid "Next change"
-msgstr "沒有任何改變"
+msgstr "下一變動"
 
 msgid "No differences found!"
 msgstr "完全相同！"
@@ -1284,9 +1279,8 @@ msgstr "比較"
 msgid "Action"
 msgstr "功能"
 
-#, fuzzy
 msgid "to previous"
-msgstr "上一頁"
+msgstr "回到前面"
 
 #, python-format
 msgid "Revert to revision %(rev)d."
@@ -1409,7 +1403,6 @@ msgstr "無法取消本頁之捷徑。"
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "本頁並未設成捷徑。"
 
-#, fuzzy
 msgid "If this account exists an email was sent."
 msgstr "如果有此帳號存在，就會寄出 email。"
 
@@ -1420,54 +1413,47 @@ msgstr ""
 "本 wiki 不支援郵寄工作。\n"
 "請連絡管理員，看他要不要啟動郵寄功能。"
 
-#, fuzzy
 msgid "Please provide a valid email address or a username!"
-msgstr "請輸入合法的 email 地址！"
+msgstr "請輸入合法的 email 地址或使用者名稱！"
 
-#, fuzzy
 msgid "Username"
 msgstr "使用者"
 
 msgid "Mail me my account data"
 msgstr "把帳號資料寄給我"
 
-#, fuzzy
 msgid "Recovery token"
-msgstr "全部回復"
+msgstr "回復憑證"
 
-#, fuzzy
 msgid "New password"
-msgstr "更改密碼"
+msgstr "新密碼"
 
-#, fuzzy
 msgid "New password (repeat)"
-msgstr "密碼(再一次)"
+msgstr "新密碼(再一次)"
 
-#, fuzzy
 msgid "Reset my password"
-msgstr "密碼"
+msgstr "重設密碼"
 
-#, fuzzy
 msgid "Your password has been changed, you can log in now."
-msgstr "您的密碼已更改。"
+msgstr "您的密碼已更改，可以登入了。"
 
 msgid "Your token is invalid!"
-msgstr ""
+msgstr "你的憑證是無效的！"
 
-#, fuzzy
 msgid "Password reset"
-msgstr "密碼(再一次)"
+msgstr "密碼重設"
 
-#, fuzzy
 msgid ""
 "\n"
 "== Password reset ==\n"
 "Enter a new password below."
-msgstr "為更改您的密碼，請輸入您的新密碼兩次。"
+msgstr  ""
+"\n"
+"== 密碼重設 ==\n"
+"請在以下輸入新密碼。"
 
-#, fuzzy
 msgid "Lost password"
-msgstr "密碼"
+msgstr "忘記密碼"
 
 msgid ""
 "\n"
@@ -1478,6 +1464,12 @@ msgid ""
 "used to change your password. The email will also contain further\n"
 "instructions."
 msgstr ""
+"\n"
+"== 回復已忘記的密碼 ==\n"
+"如果你忘記你的密碼，請輸入你的 email 信箱或使用者名稱，\n"
+"然後點擊 '''Mail me my account data'''。\n"
+"你會收到附上回復憑證的 email。你可以用此憑證來更改你的密碼。\n"
+"在此 email 當中會有詳細的說明。"
 
 msgid ""
 "\n"
@@ -1485,10 +1477,13 @@ msgid ""
 "If you already have received the email with the recovery token, enter your\n"
 "username, the recovery token and a new password (twice) below."
 msgstr ""
+"\n"
+"=== 重設密碼 ===\n"
+"如果你已經收到附上回覆憑證的 email，請在以下輸入你的使用者名稱、\n"
+"回復憑證，以及新密碼 (兩次)。"
 
-#, fuzzy
 msgid "Revert"
-msgstr "全部回復"
+msgstr "回復"
 
 msgid "You are not allowed to revert this page!"
 msgstr "你無權回復本頁！"
