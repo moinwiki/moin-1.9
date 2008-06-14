@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-06-11 18:21+0200\n"
-"PO-Revision-Date: 2008-05-21 20:46+0300\n"
+"PO-Revision-Date: 2008-06-13 18:25+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -675,37 +675,38 @@ msgstr "Sinulla ei ole oikeutta purkaa tämän sivun liitetiedostoja."
 msgid "The file %(filename)s is not a .zip file."
 msgstr "Tiedosto %(filename)s ei ole zip-tiedosto."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because some files in the zip are "
 "either not in the same directory or exceeded the single file size limit (%"
 "(maxsize_file)d kB)."
 msgstr ""
-"Liitettä '%(filename)s' ei purettu, koska sen sisältämät tiedostot ovat joko "
-"liian suuria, zip-tiedostoja, sijaitsevat alihakemistoissa tai ovat jo "
-"olemassa."
+"Liitetiedostoa '%(filename)s' ei purettu, koska sen sisältämät tiedostot "
+"eivät sijaitse samassa hakemistossa tai tiedostot ylittävät kokorajoituksen, joka on (%"
+"(maxsize_file)d kilotavua)."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because it would have exceeded the "
 "per page attachment storage size limit (%(size)d kB)."
 msgstr ""
-"Liitetiedostoa '%(filename)s' ei voitu purkaa, sillä tiedoston sisältö "
-"purettuna veisi liikaa tilaa (%(space)d kilotavua liikaa)."
+"Liitetiedostoa '%(filename)s' ei purettu, sillä purettava tiedosto ylittää "
+"kooltaan sivukohtaisen kokorajoituksen, joka on (%(size)d kilotavua)."
 
 #, fuzzy, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because it would have exceeded the "
 "per page attachment count limit (%(count)d)."
 msgstr ""
-"Liitetiedostoa '%(filename)s' ei voitu purkaa, sillä purettuna tiedostoja "
-"olisi liian monta (%(count)d liikaa)."
+"Liitetiedostoa '%(filename)s' ei purettu, sillä purettuna tiedostojen "
+"määrä ylittäisi sivukohtaisen rajoituksen, joka on (%(count)d) tiedostoa."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(filename)s' partially unzipped (did not overwrite: %(filelist)"
 "s)."
-msgstr "Liitetiedosto '%(filename)s' on purettu."
+msgstr "Liitetiedosto '%(filename)s' on purettu osittain (seuraavia olemassa olevia tiedostoja ei korvattu: %(filelist)"
+"s)."
 
 #, python-format
 msgid "Attachment '%(filename)s' unzipped."
