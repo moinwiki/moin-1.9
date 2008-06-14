@@ -1141,7 +1141,7 @@ Please review the page and save then. Do not save this page as it is!""")
 
                         if recipients:
                             info = _("Notifications sent to:")
-                            msg = msg + "<p>%s %s</p>" % (info, ",".join(recipients))
+                            msg = msg + "<p>%s %s</p>" % (info, ", ".join(recipients))
 
             # Update page trail with the page we just saved.
             # This is needed for NewPage macro with backto because it does not
