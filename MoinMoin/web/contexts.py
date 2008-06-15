@@ -8,7 +8,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import re, time, inspect
+import time, inspect
 
 from werkzeug.utils import Headers, http_date, cached_property
 from werkzeug.exceptions import Unauthorized, NotFound
@@ -23,8 +23,6 @@ from MoinMoin.web.exceptions import Forbidden, SurgeProtection
 
 from MoinMoin import log
 logging = log.getLogger(__name__)
-
-STATUS_CODE_RE = re.compile('Status:\s*(\d{3,3})', re.IGNORECASE)
 
 class renamed_property(property):
     def __init__(self, name):
@@ -49,7 +47,7 @@ class Context(object):
             return self.attr_getter(name)
         except (AttributeError, KeyError):
             pass
-        return super(Context, self).__getattr__(name)
+        return super(Context, self).__getattribute__(name)
 
     def __setattr__(self, name, value):
         stack = inspect.stack()
@@ -154,9 +152,7 @@ class HTTPContext(Context, RequestBase):
 
     def _emit_http_headers(self, headers):
         st_header, other_headers = headers[0], headers[1:]
-        status = STATUS_CODE_RE.match(st_header)
-        status = int(status.groups()[0])
-        self.status = status
+        self.response.status = st_header[8:] # strip 'Status: '
         for header in other_headers:
             key, value = header.split(':', 1)
             self.response.headers.add(key, value)
@@ -211,9 +207,9 @@ class HTTPContext(Context, RequestBase):
             raise NotFound('<p>No wiki configuration matching the URL found!</p>')
     cfg = cached_property(cfg)
 
-    def isSpideragent(self):
+    def isSpiderAgent(self):
         return check_spider(self.user_agent, self.cfg)
-    isSpideragent = cached_property(isSpideragent)
+    isSpiderAgent = cached_property(isSpiderAgent)
 
 
     cookie = renamed_property('cookies')
