@@ -23,9 +23,13 @@ from MoinMoin.config import multiconfig
 from MoinMoin.support.python_compatibility import set
 from MoinMoin.util import IsWin9x
 from MoinMoin.util.clock import Clock
+from MoinMoin.request import MoinMoinFinish, RemoteClosedConnection
 from MoinMoin import auth
 
-def _request_init(request):
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
+def init(request):
     request.clock = Clock()
     request.clock.start('total')
     request.clock.start('base__init__')
@@ -39,26 +43,143 @@ def _request_init(request):
         request.user = user.User(request, auth_method='request:invalid')
 
     check_setuid(request)
+    check_forbidden(request)
+    check_surge_protect(request)
 
-    request = RenderContext(request)
-
-    if request.action != 'xmlrpc':
-        check_forbidden(request)
-        check_surge_protect(request)
-
+    request.become(RenderContext)
     request.reset()
 
     request.clock.stop('base__init__')
     return request
 
-def application(environ, start_response):
-    request = Request(environ)
-    request = HTTPContext(request)
-    request = _request_init(request)
-    request.run()
+def run(request):
+    
+    _ = request.getText
+    request.clock.start('run')
 
-    response = Response(status=request.status,
-                        headers=request.headers)
+    request.initTheme()
+
+    action_name = request.action
+    if request.cfg.log_timing:
+        request.timing_log(True, action_name)
+
+    # parse request data
+    try:
+        # The last component in path_info is the page name, if any
+        path = request.path_info
+
+        # we can have all action URLs like this: /action/ActionName/PageName?action=ActionName&...
+        # this is just for robots.txt being able to forbid them for crawlers
+        prefix = request.cfg.url_prefix_action
+        if prefix is not None:
+            prefix = '/%s/' % prefix # e.g. '/action/'
+            if path.startswith(prefix):
+                # remove prefix and action name
+                path = path[len(prefix):]
+                action, path = (path.split('/', 1) + ['', ''])[:2]
+                path = '/' + path
+
+        if path.startswith('/'):
+            pagename = wikiutil.normalize_pagename(path, request.cfg)
+        else:
+            pagename = None
+
+        # need to inform caches that content changes based on:
+        # * cookie (even if we aren't sending one now)
+        # * User-Agent (because a bot might be denied and get no content)
+        # * Accept-Language (except if moin is told to ignore browser language)
+        if request.cfg.language_ignore_browser:
+            request.setHttpHeader("Vary: Cookie,User-Agent")
+        else:
+            request.setHttpHeader("Vary: Cookie,User-Agent,Accept-Language")
+
+        # Handle request. We have these options:
+        # 1. jump to page where user left off
+        if not pagename and request.user.remember_last_visit and action_name == 'show':
+            pagetrail = request.user.getTrail()
+            if pagetrail:
+                # Redirect to last page visited
+                last_visited = pagetrail[-1]
+                wikiname, pagename = wikiutil.split_interwiki(last_visited)
+                if wikiname != 'Self':
+                    wikitag, wikiurl, wikitail, error = wikiutil.resolve_interwiki(request, wikiname, pagename)
+                    url = wikiurl + wikiutil.quoteWikinameURL(wikitail)
+                else:
+                    url = Page(request, pagename).url(request)
+            else:
+                # Or to localized FrontPage
+                url = wikiutil.getFrontPage(request).url(request)
+            return abort(redirect(url))
+
+        # 2. handle action
+        else:
+            # pagename could be empty after normalization e.g. '///' -> ''
+            # Use localized FrontPage if pagename is empty
+            if not pagename:
+                request.page = wikiutil.getFrontPage(request)
+            else:
+                request.page = Page(request, pagename)
+                if '_' in pagename and not request.page.exists():
+                    pagename = pagename.replace('_', ' ')
+                    page = Page(request, pagename)
+                    if page.exists():
+                        url = page.url(request)
+                        return abort(redirect(url))
+
+            msg = None
+            # Complain about unknown actions
+            if not action_name in get_names(request.cfg):
+                msg = _("Unknown action %(action_name)s.") % {
+                        'action_name': wikiutil.escape(action_name), }
+
+            # Disallow non available actions
+            elif action_name[0].isupper() and not action_name in request.getAvailableActions(request.page):
+                msg = _("You are not allowed to do %(action_name)s on this page.") % {
+                        'action_name': wikiutil.escape(action_name), }
+                if not request.user.valid:
+                    # Suggest non valid user to login
+                    msg += " " + _("Login and try again.")
+
+            if msg:
+                request.theme.add_msg(msg, "error")
+                request.page.send_page()
+            # Try action
+            else:
+                from MoinMoin import action
+                handler = action.getHandler(request, action_name)
+                if handler is None:
+                    msg = _("You are not allowed to do %(action_name)s on this page.") % {
+                            'action_name': wikiutil.escape(action_name), }
+                    if not request.user.valid:
+                        # Suggest non valid user to login
+                        msg += " " + _("Login and try again.")
+                    request.theme.add_msg(msg, "error")
+                    request.page.send_page()
+                else:
+                    handler(request.page.page_name, request)
+
+        # every action that didn't use to raise MoinMoinFinish must call this now:
+        # request.theme.send_closing_html()    
+
+    except MoinMoinFinish:
+        pass
+    except RemoteClosedConnection:
+        # at least clean up
+        pass
+    except SystemExit:
+        raise # fcgi uses this to terminate a thread
+
+    if request.cfg.log_timing:
+        request.timing_log(False, action_name)
+
+        #return request.finish()
+
+def application(environ, start_response):
+    request = HTTPContext(environ)
+    request = init(request)
+    result = run(request)
+
+    response = request.response
 
     if getattr(request, '_send_file', None) is not None:
         # moin wants to send a file (e.g. AttachFile.do_get)
@@ -66,8 +187,6 @@ def application(environ, start_response):
             return iter(lambda: fileobj.read(bufsize), '')
         file_wrapper = environ.get('wsgi.file_wrapper', simple_wrapper)
         response.response = file_wrapper(request._send_file, request._send_bufsize)
-    else:
-        response.response = request.output()
     return response
 
 application = responder(application)
