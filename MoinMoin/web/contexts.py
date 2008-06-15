@@ -17,7 +17,7 @@ from MoinMoin import i18n, error
 from MoinMoin.config import multiconfig
 from MoinMoin.formatter import text_html
 from MoinMoin.request import RequestBase
-from MoinMoin.web.request import Request
+from MoinMoin.web.request import Request, Response
 from MoinMoin.web.utils import check_spider
 from MoinMoin.web.exceptions import Forbidden, SurgeProtection
 
@@ -26,76 +26,63 @@ logging = log.getLogger(__name__)
 
 STATUS_CODE_RE = re.compile('Status:\s*(\d{3,3})', re.IGNORECASE)
 
+class renamed_property(property):
+    def __init__(self, name):
+        property.__init__(self, lambda obj: getattr(obj, name))
+
 class Context(object):
-    def __init__(self, parent=None):
-        self._parent = parent
+    def __init__(self, environ):
+        self.environ = environ
+        self.request = Request(environ)
+        self.personalities = [self.__class__]
+        self.initialize()
+
+    def attr_getter(self, name):
+        return super(Context, self).__getattr__(name)
+
+    def attr_setter(self, name, value):
+        return super(Context, self).__setattr__(name, value)        
 
     def __getattr__(self, name):
-        if self._parent is None:
-            raise AttributeError(name)
-        logging.debug("Proxying to parent '%r' for attribute '%s'",
-                      self._parent, name)
-        return getattr(self._parent, name)
+        logging.debug("GET: '%s' on '%r'", name, self)
+        try:
+            return self.attr_getter(name)
+        except (AttributeError, KeyError):
+            pass
+        return super(Context, self).__getattr__(name)
 
     def __setattr__(self, name, value):
         stack = inspect.stack()
         parent = stack[1]
-        caller, filename, lineno = parent[3], parent[1], parent[0].f_lineno
-        logging.debug("Setting attribute '%s' to value '%r' by '%s' "
-                      "in file '%s',line '%s'", name, value, caller,
-                      filename, lineno)
-        self.__dict__[name] = value
+        c, f, l = parent[3], parent[1], parent[0].f_lineno
 
-    def __repr__(self):
-        if self._parent:
-            return "<%s parent='%r'>" % (self.__class__.__name__,
-                                         self._parent)
+        logging.debug("SET: '%s' on '%r' to '%r'", name, self, value)
+        logging.debug("^^^: line %i, file '%s', caller '%s'", l, f, c)
+        if name not in ('environ', 'request', 'personalities',
+                        '__class__', '__dict__'):
+            self.attr_setter(name, value)
         else:
-            return "<%s>" % self.__class__.__name__
+            super(Context, self).__setattr__(name, value)
 
-class RequestContext(Context):
-    def __init__(self, environ_or_request):
-        if isinstance(environ_or_request, dict):
-            request = environ_or_request.get('werkzeug.request')
-            if request and isinstance(request, Request):
-                Context.__init__(self, request)
-            else:
-                Context.__init__(self, Request(environ_or_request))
-        elif isinstance(environ_or_request, Request):
-            Context.__init__(self, environ_or_request)
-        else:
-            raise ArgumentError("Expected environ-dict or Request-object")
+    def initialize(self):
+        pass
 
-    def read(self, n=None):
-        if n is None:
-            return self._parent.data
-        else:
-            return self._parent.input_stream.read(n)
-
-    def makeForbidden(self, resultcode, msg):
-        status = { 401: Unauthorized,
-                   403: Forbidden,
-                   404: NotFound,
-                   503: SurgeProtection }
-        raise status[resultcode](msg)
-
-    def is_spideragent(self):
-        if hasattr(self, '_is_spideragent'):
-            return self._is_spideragent
-        if getattr(self, 'cfg', None) is not None:
-            self._is_spideragent = check_spider(self.user_agent, self.cfg)
-            return self._is_spideragent
-        else:
+    def become(self, cls):
+        if self.__class__ is cls:
             return False
-    is_spideragent = cached_property(is_spideragent)
+        elif cls in self.personalities:
+            self.__class__ = cls
+            return True
+        else:
+            self.personalities.append(cls)
+            self.__class__ = cls
+            self.initialize()
+            return True
 
-    # legacy compatibility
-    isSpiderAgent = is_spideragent
-
-class XMLRPCContext(RequestContext):
+class XMLRPCContext(Context):
     pass
 
-class HTTPContext(RequestContext, RequestBase):
+class HTTPContext(Context, RequestBase):
     """ Lowermost context for MoinMoin.
 
     Contains code related to manipulation of HTTP related data like:
@@ -103,13 +90,8 @@ class HTTPContext(RequestContext, RequestBase):
     * Cookies
     * GET/POST/PUT/etc data
     """
-    def __init__(self, environ_or_request):
-        RequestContext.__init__(self, environ_or_request)
-        self._output = []
-        self.headers = Headers()
-        self.status = 200
-
-        # compat properties (remove when not necessary anymore)
+    def initialize(self):
+        self.response = Response()
         self._auth_redirected = False
         self.forbidden = 0
         self._cache_disabled = 0
@@ -118,19 +100,57 @@ class HTTPContext(RequestContext, RequestBase):
         self.sent_headers = None
         self.writestack = []
 
+    def attr_getter(self, name):
+        if hasattr(self.request, name):
+            return getattr(self.request, name)
+        else:
+            return Context.attr_getter(self, name)
+        
+    def write(self, *data):
+        if len(data) > 1:
+            logging.warning("Some code still uses write with multiple arguments, "
+                            "consider changing this soon")
+        self.response.stream.writelines(data)
+    
     # implementation of methods expected by RequestBase
     def send_file(self, fileobj, bufsize=8192, do_flush=None):
         self._sendfile = fileobj
         self._send_bufsize = bufsize
 
-    def write(self, *data):
-        if len(data) > 1:
-            logging.warning("Some code still uses write with multiple arguments, "
-                            "consider changing this soon")
-        self._output.extend(data)
 
-    def output(self):
-        return ''.join(self._output)
+
+    def read(self, n=None):
+        if n is None:
+            return self.request.data
+        else:
+            return self.request.input_stream.read(n)
+
+    def makeForbidden(self, resultcode, msg):
+        status = { 401: Unauthorized,
+                   403: Forbidden,
+                   404: NotFound,
+                   503: SurgeProtection }
+        raise status[resultcode](msg)
+
+    def setHttpHeader(self, header):
+        header, value = header.split(':', 1)
+        self.response.headers.add(header, value)
+
+    def disableHttpCaching(self, level=1):
+        if level <= self._cache_disabled:
+            return
+        
+        if level == 1:
+            self.response.headers.add('Cache-Control', 'private, must-revalidate, mag-age=10')
+        elif level == 2:
+            self.response.headers.add('Cache-Control', 'no-cache')
+            self.response.headers.set('Pragma', 'no-cache')
+
+        if not self._cache_disabled:
+            when = time.time() - (3600 * 24 * 365)
+            self.response.headers.set('Expires', http_date(when))
+
+        self._cache_disabled = level
 
     def _emit_http_headers(self, headers):
         st_header, other_headers = headers[0], headers[1:]
@@ -139,73 +159,10 @@ class HTTPContext(RequestContext, RequestBase):
         self.status = status
         for header in other_headers:
             key, value = header.split(':', 1)
-            self.headers.add(key, value)
+            self.response.headers.add(key, value)
 
-    def flush(self):
-        pass
-
-    def setup_args(self):
-        return self._parent.values.to_dict(flat=False)
-    
-    # compatibility wrapping
-    def cookie(self):
-        return self._parent.cookies
-    cookie = property(cookie)
-
-    def script_name(self):
-        return self._parent.script_root
-    script_name = property(script_name)
-
-    def request_method(self):
-        return self._parent.method
-    request_method = property(request_method)
-
-    def path_info(self):
-        return self._parent.path
-    path_info = property(path_info)
-
-    def is_ssl(self):
-        return self._parent.is_secure
-    is_ssl = property(is_ssl)
-    
-
-    def setHttpHeader(self, header):
-        header, value = header.split(':', 1)
-        self.headers.add(header, value)
-
-    def disableHttpCaching(self, level=1):
-        if level <= self._cache_disabled:
-            return
-        
-        if level == 1:
-            self.headers.add('Cache-Control', 'private, must-revalidate, mag-age=10')
-        elif level == 2:
-            self.headers.add('Cache-Control', 'no-cache')
-            self.headers.set('Pragma', 'no-cache')
-
-        if not self._cache_disabled:
-            when = time.time() - (3600 * 24 * 365)
-            self.headers.set('Expires', http_date(when))
-
-        self._cache_disabled = level
-
-    def _get_dicts(self):
-        if not hasattr(self, '_dicts'):
-            from MoinMoin import wikidicts
-            dicts = wikidicts.GroupDict(self)
-            dicts.load_dicts()
-            self._dicts = dicts
-        return self._dicts
-
-    def _del_dicts(self):
-        del self._dicts
-
-    dicts = property(_get_dicts, None, _del_dicts)
-    del _get_dicts, _del_dicts
-
-    def finish(self):
-        pass
-
+    # legacy compatibility & properties
+    # e.g. different names in werkzeug
     def lang(self):
         if i18n.languages is None:
             i18n.i18n_init(self)
@@ -246,7 +203,7 @@ class HTTPContext(RequestContext, RequestBase):
 
     def cfg(self):
         try:
-            self.clock.start('load_multicfg')
+            self.clock.start('load_multi_cfg')
             cfg = multiconfig.getConfig(self.url)
             self.clock.stop('load_multi_cfg')
             return cfg
@@ -254,7 +211,18 @@ class HTTPContext(RequestContext, RequestBase):
             raise NotFound('<p>No wiki configuration matching the URL found!</p>')
     cfg = cached_property(cfg)
 
-class RenderContext(Context):
+    def isSpideragent(self):
+        return check_spider(self.user_agent, self.cfg)
+    isSpideragent = cached_property(isSpideragent)
+
+
+    cookie = renamed_property('cookies')
+    script_name = renamed_property('script_root')
+    path_info = renamed_property('path')
+    is_ssl = renamed_property('is_secure')
+    request_method = renamed_property('method')
+
+class RenderContext(HTTPContext):
     """ Context for rendering content
     
     Contains code related to the representation of pages:
@@ -263,25 +231,31 @@ class RenderContext(Context):
     * page
     * output redirection
     """
-    def __init__(self, parent):
-        Context.__init__(self, parent)
-
+    def initialize(self):
         self.pragma = {}
         self.mode_getpagelinks = 0
         self.parsePageLinks_running = {}
-        self.content_lang = self.cfg.language_default
-        
-        self.html_formatter = text_html.Formatter(self)
-        self.formatter = self.html_formatter
 
         if i18n.languages is None:
             i18n.i18n_init(self)
+
+    def html_formatter(self):
+        return text_html.Formatter(self)
+    html_formatter = cached_property(html_formatter)
+
+    def formatter(self):
+        return self.html_formatter
+    formatter = cached_property(formatter)
+
+    def content_lang(self):
+        return self.cfg.language_default
+    content_lang = cached_property(content_lang)
     
     def lang(self):
         if self.user.valid and self.user.language:
             return self.user.language
         else:
-            return getattr(self._parent, 'lang')
+            return super(RenderContext, self).lang
     lang = cached_property(lang)
 
     def rootpage(self):
@@ -289,22 +263,11 @@ class RenderContext(Context):
         return RootPage(self)
     rootpage = cached_property(rootpage)
 
-# mangle in logging of function calls
-def _logfunc(func):
-    def _decorated(*args, **kwargs):
-        stack = inspect.stack()
-        parent = stack[1]
-        caller, filename, lineno = parent[3], parent[1], parent[0].f_lineno
-        logging.warning("Function '%s' called by '%s' in file '%s', line '%s'",
-                        func.__name__, caller, filename, lineno)
-        return func(*args, **kwargs)
-    _decorated.__name__ = func.__name__
-    _decorated.__doc__ = func.__doc__
-    return _decorated
+    def dicts(self):
+        """ Lazy initialize the dicts on the first access """
+        from MoinMoin import wikidicts
+        dicts = wikidicts.GroupDict(self)
+        dicts.load_dicts()
+        return dicts
+    dicts = cached_property(dicts)
 
-from types import FunctionType
-
-for name, item in RequestBase.__dict__.items():
-   if isinstance(item, FunctionType):
-       setattr(RequestBase, name, _logfunc(item))
-del name, item, FunctionType, _logfunc
