@@ -1,8 +1,12 @@
 MoinMoin Version History
 ========================
 
-Please completely read CHANGES text until you reach the version you were
-using until now. Otherwise you might miss some important upgrading and
+Documentations with generic instructions about installing or updating MoinMoin
+are available as docs/INSTALL.html and docs/UPDATE.html. A special documenation
+about the migration procedure for your data_dir is in docs/README.migration.
+
+Additionally, please completely read CHANGES text until you reach the version
+you were using until now. Otherwise you might miss some important upgrading and
 configuration hints.
 
 Starting with 1.5.3, update installation hints are marked with HINT.
@@ -33,7 +37,7 @@ Version 1.8.0current:
     * ...
 
 
-Version 1.7.0current:
+Version 1.7.0rc3:
 
   Bug Fixes:
     * Fix xmlrpc request.read() call to use content-length, if available,
@@ -54,9 +58,8 @@ Version 1.7.0current:
     * Make recoverpass/newaccount refuse access unless MoinAuth is enabled.
     * info action: fix exception happening for invalid query args
     * AttachFile action:
-      * catch runtime error raised by zipfile to not make attachments list
-        unusable if someone attached a defective zip
-      * catch runtime error raised by zipfile when viewing a defective zip
+      * catch runtime errors raised by zipfile stdlib modules when trying to
+        process a defective zip
       * when unzipping member files, decode their filenames from utf-8 and
         replace invalid chars
 

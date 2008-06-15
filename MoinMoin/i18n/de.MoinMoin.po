@@ -693,31 +693,34 @@ msgid ""
 "either not in the same directory or exceeded the single file size limit (%"
 "(maxsize_file)d kB)."
 msgstr ""
-"Dateianhang '%(filename)s' wurde nicht ausgepackt, weil einige Dateien im Archiv "
-"entweder nicht im selben Verzeichnis sind oder die erlaubte Maximalgröße einer Einzeldatei "
-"(%(maxsize_file)d kB) überschritten haben."
+"Dateianhang '%(filename)s' wurde nicht ausgepackt, weil einige Dateien im "
+"Archiv entweder nicht im selben Verzeichnis sind oder die erlaubte "
+"Maximalgröße einer Einzeldatei (%(maxsize_file)d kB) überschritten haben."
 
 #, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because it would have exceeded the "
 "per page attachment storage size limit (%(size)d kB)."
 msgstr ""
-"Dateianhang '%(filename)s' wurde nicht ausgepackt, weil es den maximal erlaubten Speicherplatz "
-"für Dateianhänge pro Seite (%(size)d kB) überschritten hätte."
+"Dateianhang '%(filename)s' wurde nicht ausgepackt, weil es den maximal "
+"erlaubten Speicherplatz für Dateianhänge pro Seite (%(size)d kB) "
+"überschritten hätte."
 
 #, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because it would have exceeded the "
 "per page attachment count limit (%(count)d)."
 msgstr ""
-"Dateianhang '%(filename)s' wurde nicht ausgepackt, weil es die maximal erlaubte Anzahl "
-"von Dateianhängen pro Seite (%(count)d) überschritten hätte."
+"Dateianhang '%(filename)s' wurde nicht ausgepackt, weil es die maximal "
+"erlaubte Anzahl von Dateianhängen pro Seite (%(count)d) überschritten hätte."
 
 #, python-format
 msgid ""
 "Attachment '%(filename)s' partially unzipped (did not overwrite: %(filelist)"
 "s)."
-msgstr "Dateianhang '%(filename)s' wurde teilweise ausgepackt (nicht überschrieben wurden: %(filelist)s)."
+msgstr ""
+"Dateianhang '%(filename)s' wurde teilweise ausgepackt (nicht überschrieben "
+"wurden: %(filelist)s)."
 
 #, python-format
 msgid "Attachment '%(filename)s' unzipped."

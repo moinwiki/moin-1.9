@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-06-11 18:21+0200\n"
-"PO-Revision-Date: 2008-06-08 22:10+0200\n"
+"PO-Revision-Date: 2008-06-11 19:30+0200\n"
 "Last-Translator: thomas@marquart.se\n"
 "Language-Team: Swedish <moin-user@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -667,36 +667,38 @@ msgstr "Du har inte tillåtelse att packa upp bilagor till den här sidan."
 msgid "The file %(filename)s is not a .zip file."
 msgstr "Filen %(filename)s är inte en .zip-fil."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because some files in the zip are "
 "either not in the same directory or exceeded the single file size limit (%"
 "(maxsize_file)d kB)."
 msgstr ""
-"Bilagan \"%(filename)s\" kunde inte packas upp eftersom filerna är för "
-"stora, endast är .zip-filer, redan existerar eller ligger i kataloger."
+"Bilagan '%(filename)s' kunde inte packas upp eftersom några filer i zip-filen är "
+"antingen inte i samma mapp eller överskrider maximala filstorleken (%"
+"(maxsize_file)d kB)."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because it would have exceeded the "
 "per page attachment storage size limit (%(size)d kB)."
 msgstr ""
-"Bilagan \"%(filename)s\" kunde inte packas upp eftersom de resulterande "
-"filerna skulle bli för stora (%(space)d kB saknas)."
+"Bilagan '%(filename)s' kunde inte packas upp eftersom det skulle överskrida "
+"begränsningen på utrymme per sida (%(size)d kB)."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because it would have exceeded the "
 "per page attachment count limit (%(count)d)."
 msgstr ""
-"Bilagan \"%(filename)s\" kunde inte packas upp eftersom de resulterande "
-"filerna skulle bli för många (%(count)d för många)."
+"Bilagan '%(filename)s' kunde inte packas upp eftersom det skulle överskrida "
+"maxantalet per sida (%(count)d)."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(filename)s' partially unzipped (did not overwrite: %(filelist)"
 "s)."
-msgstr "Bilagan \"%(filename)s\" uppackad."
+msgstr "Bilagan '%(filename)s' delvis uppackad (överskrev inte: %(filelist)"
+"s)."
 
 #, python-format
 msgid "Attachment '%(filename)s' unzipped."

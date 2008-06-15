@@ -859,83 +859,94 @@ def _do_unzip(pagename, request, overwrite=False):
     if not filename:
         return # error msg already sent in _access_file
 
-    if not zipfile.is_zipfile(fpath):
-        return _('The file %(filename)s is not a .zip file.') % {'filename': filename}
+    try:
+        if not zipfile.is_zipfile(fpath):
+            return _('The file %(filename)s is not a .zip file.') % {'filename': filename}
 
-    # determine how which attachment names we have and how much space each is occupying
-    curr_fsizes = dict([(f, size(request, pagename, f)) for f in _get_files(request, pagename)])
+        # determine how which attachment names we have and how much space each is occupying
+        curr_fsizes = dict([(f, size(request, pagename, f)) for f in _get_files(request, pagename)])
 
-    # Checks for the existance of one common prefix path shared among
-    # all files in the zip file. If this is the case, remove the common prefix.
-    # We also prepare a dict of the new filenames->filesizes.
-    zip_path_sep = '/'  # we assume '/' is as zip standard suggests
-    fname_index = None
-    mapping = []
-    new_fsizes = {}
-    zf = zipfile.ZipFile(fpath)
-    for zi in zf.infolist():
-        name = zi.filename
-        if not name.endswith(zip_path_sep):  # a file (not a directory)
-            if fname_index is None:
-                fname_index = name.rfind(zip_path_sep) + 1
-                path = name[:fname_index]
-            if (name.rfind(zip_path_sep) + 1 != fname_index  # different prefix len
-                or
-                name[:fname_index] != path): # same len, but still different
-                mapping = []  # zip is not acceptable
-                break
-            if zi.file_size >= request.cfg.unzip_single_file_size:  # file too big
-                mapping = []  # zip is not acceptable
-                break
-            finalname = name[fname_index:]  # remove common path prefix
-            finalname = finalname.decode(config.charset, 'replace')  # replaces trash with \uFFFD char
-            mapping.append((name, finalname))
-            new_fsizes[finalname] = zi.file_size
+        # Checks for the existance of one common prefix path shared among
+        # all files in the zip file. If this is the case, remove the common prefix.
+        # We also prepare a dict of the new filenames->filesizes.
+        zip_path_sep = '/'  # we assume '/' is as zip standard suggests
+        fname_index = None
+        mapping = []
+        new_fsizes = {}
+        zf = zipfile.ZipFile(fpath)
+        for zi in zf.infolist():
+            name = zi.filename
+            if not name.endswith(zip_path_sep):  # a file (not a directory)
+                if fname_index is None:
+                    fname_index = name.rfind(zip_path_sep) + 1
+                    path = name[:fname_index]
+                if (name.rfind(zip_path_sep) + 1 != fname_index  # different prefix len
+                    or
+                    name[:fname_index] != path): # same len, but still different
+                    mapping = []  # zip is not acceptable
+                    break
+                if zi.file_size >= request.cfg.unzip_single_file_size:  # file too big
+                    mapping = []  # zip is not acceptable
+                    break
+                finalname = name[fname_index:]  # remove common path prefix
+                finalname = finalname.decode(config.charset, 'replace')  # replaces trash with \uFFFD char
+                mapping.append((name, finalname))
+                new_fsizes[finalname] = zi.file_size
 
-    # now we either have an empty mapping (if the zip is not acceptable),
-    # an identity mapping (no subdirs in zip, just all flat), or
-    # a mapping (origname, finalname) where origname is the zip member filename
-    # (including some prefix path) and finalname is a simple filename.
+        # now we either have an empty mapping (if the zip is not acceptable),
+        # an identity mapping (no subdirs in zip, just all flat), or
+        # a mapping (origname, finalname) where origname is the zip member filename
+        # (including some prefix path) and finalname is a simple filename.
 
-    # calculate resulting total file size / count after unzipping:
-    if overwrite:
-        curr_fsizes.update(new_fsizes)
-        total = curr_fsizes
-    else:
-        new_fsizes.update(curr_fsizes)
-        total = new_fsizes
-    total_count = len(total)
-    total_size = sum(total.values())
-
-    if not mapping:
-        msg = _("Attachment '%(filename)s' not unzipped because some files in the zip "
-                "are either not in the same directory or exceeded the single file size limit (%(maxsize_file)d kB)."
-               ) % {'filename': filename,
-                    'maxsize_file': request.cfg.unzip_single_file_size / 1000, }
-    elif total_size > request.cfg.unzip_attachments_space:
-        msg = _("Attachment '%(filename)s' not unzipped because it would have exceeded "
-                "the per page attachment storage size limit (%(size)d kB).") % {
-                    'filename': filename,
-                    'size': request.cfg.unzip_attachments_space / 1000, }
-    elif total_count > request.cfg.unzip_attachments_count:
-        msg = _("Attachment '%(filename)s' not unzipped because it would have exceeded "
-                "the per page attachment count limit (%(count)d).") % {
-                    'filename': filename,
-                    'count': request.cfg.unzip_attachments_count, }
-    else:
-        not_overwritten = []
-        for origname, finalname in mapping:
-            try:
-                # Note: reads complete zip member file into memory. ZipFile does not offer block-wise reading:
-                add_attachment(request, pagename, finalname, zf.read(origname), overwrite)
-            except AttachmentAlreadyExists:
-                not_overwritten.append(finalname)
-        if not_overwritten:
-            msg = _("Attachment '%(filename)s' partially unzipped (did not overwrite: %(filelist)s).") % {
-                    'filename': filename,
-                    'filelist': ', '.join(not_overwritten), }
+        # calculate resulting total file size / count after unzipping:
+        if overwrite:
+            curr_fsizes.update(new_fsizes)
+            total = curr_fsizes
         else:
-            msg = _("Attachment '%(filename)s' unzipped.") % {'filename': filename}
+            new_fsizes.update(curr_fsizes)
+            total = new_fsizes
+        total_count = len(total)
+        total_size = sum(total.values())
+
+        if not mapping:
+            msg = _("Attachment '%(filename)s' not unzipped because some files in the zip "
+                    "are either not in the same directory or exceeded the single file size limit (%(maxsize_file)d kB)."
+                   ) % {'filename': filename,
+                        'maxsize_file': request.cfg.unzip_single_file_size / 1000, }
+        elif total_size > request.cfg.unzip_attachments_space:
+            msg = _("Attachment '%(filename)s' not unzipped because it would have exceeded "
+                    "the per page attachment storage size limit (%(size)d kB).") % {
+                        'filename': filename,
+                        'size': request.cfg.unzip_attachments_space / 1000, }
+        elif total_count > request.cfg.unzip_attachments_count:
+            msg = _("Attachment '%(filename)s' not unzipped because it would have exceeded "
+                    "the per page attachment count limit (%(count)d).") % {
+                        'filename': filename,
+                        'count': request.cfg.unzip_attachments_count, }
+        else:
+            not_overwritten = []
+            for origname, finalname in mapping:
+                try:
+                    # Note: reads complete zip member file into memory. ZipFile does not offer block-wise reading:
+                    add_attachment(request, pagename, finalname, zf.read(origname), overwrite)
+                except AttachmentAlreadyExists:
+                    not_overwritten.append(finalname)
+            if not_overwritten:
+                msg = _("Attachment '%(filename)s' partially unzipped (did not overwrite: %(filelist)s).") % {
+                        'filename': filename,
+                        'filelist': ', '.join(not_overwritten), }
+            else:
+                msg = _("Attachment '%(filename)s' unzipped.") % {'filename': filename}
+    except RuntimeError, err:
+        # We don't want to crash with a traceback here (an exception
+        # here could be caused by an uploaded defective zip file - and
+        # if we crash here, the user does not get a UI to remove the
+        # defective zip file again).
+        # RuntimeError is raised by zipfile stdlib module in case of
+        # problems (like inconsistent slash and backslash usage in the
+        # archive).
+        logging.exception("An exception within zip file attachment handling occurred:")
+        msg = _("A severe error occurred:") + ' ' + str(err)
 
     upload_form(pagename, request, msg=wikiutil.escape(msg))
 
