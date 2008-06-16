@@ -17,6 +17,7 @@ from MoinMoin import i18n, error
 from MoinMoin.config import multiconfig
 from MoinMoin.formatter import text_html
 from MoinMoin.request import RequestBase
+from MoinMoin.theme import load_theme_fallback
 from MoinMoin.web.request import Request, Response
 from MoinMoin.web.utils import check_spider, UniqueIDGenerator
 from MoinMoin.web.exceptions import Forbidden, SurgeProtection
@@ -280,3 +281,11 @@ class RenderContext(HTTPContext):
             del self._fmt_hd_counters
         if hasattr(self, 'uid_generator'):
             del self.uid_generator
+
+    def initTheme(self):
+        """ Set theme - forced theme, user theme or wiki default """
+        if self.cfg.theme_force:
+            theme_name = self.cfg.theme_default
+        else:
+            theme_name = self.user.theme_name
+        load_theme_fallback(self, theme_name)
