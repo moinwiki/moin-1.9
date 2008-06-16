@@ -1015,7 +1015,7 @@ class RequestBase(object):
 
     def getBaseURL(self):
         """ Return a fully qualified URL to this script. """
-        return self.getQualifiedURL(self.getScriptname())
+        return self.getQualifiedURL(self.script_root)
 
     def getQualifiedURL(self, uri=''):
         """ Return an absolute URL starting with schema and host.

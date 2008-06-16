@@ -314,7 +314,7 @@ class MoinCookieSessionIDHandler(SessionIDHandler):
         if cfg.cookie_path:
             cookie[cookie_name]['path'] = cfg.cookie_path
         else:
-            path = request.getScriptname()
+            path = request.script_root
             if not path:
                 path = '/'
             cookie[cookie_name]['path'] = path

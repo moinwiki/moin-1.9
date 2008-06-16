@@ -136,7 +136,7 @@ class ActionBase:
 
         d = {
             'method': self.method,
-            'baseurl': self.request.getScriptname(),
+            'baseurl': self.request.script_root,
             'enctype': self.enctype,
             'error_html': error_html,
             'actionname': self.actionname,

@@ -80,7 +80,7 @@ class Context(object):
 class XMLRPCContext(Context):
     pass
 
-class HTTPContext(Context, RequestBase):
+class HTTPContext(Context): #, RequestBase):
     """ Lowermost context for MoinMoin.
 
     Contains code related to manipulation of HTTP related data like:

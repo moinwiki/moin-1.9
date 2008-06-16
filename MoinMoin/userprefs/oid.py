@@ -150,7 +150,7 @@ class Settings(UserPrefBase):
         return
 
     def _make_form(self):
-        sn = self.request.getScriptname()
+        sn = self.request.script_root
         pi = self.request.getPathinfo()
         action = u"%s%s" % (sn, pi)
         _form = html.FORM(action=action)

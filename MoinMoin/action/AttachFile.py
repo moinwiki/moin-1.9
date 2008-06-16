@@ -83,7 +83,7 @@ def attachUrl(request, pagename, filename=None, **kw):
         qs = '?%s' % wikiutil.makeQueryString(kw, want_unicode=False)
     else:
         qs = ''
-    return "%s/%s%s" % (request.getScriptname(), wikiutil.quoteWikinameURL(pagename), qs)
+    return "%s/%s%s" % (request.script_root, wikiutil.quoteWikinameURL(pagename), qs)
 
 
 def getAttachUrl(pagename, filename, request, addts=0, escaped=0, do='get', drawing='', upload=False):
@@ -489,7 +489,7 @@ def send_uploadform(pagename, request):
 </p>
 </form>
 """ % {
-    'baseurl': request.getScriptname(),
+    'baseurl': request.script_root,
     'pagename': wikiutil.quoteWikinameURL(pagename),
     'action_name': action_name,
     'upload_label_file': _('File to upload'),
@@ -755,7 +755,7 @@ def _do_move(pagename, request):
 
     # move file
     d = {'action': action_name,
-         'baseurl': request.getScriptname(),
+         'baseurl': request.script_root,
          'do': 'attachment_move',
          'ticket': wikiutil.createTicket(request),
          'pagename': pagename,

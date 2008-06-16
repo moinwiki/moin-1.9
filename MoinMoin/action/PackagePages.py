@@ -114,7 +114,7 @@ class PackagePages:
             error = u'<p class="error">%s</p>\n' % error
 
         d = {
-            'baseurl': self.request.getScriptname(),
+            'baseurl': self.request.script_root,
             'error': error,
             'action': self.__class__.__name__,
             'pagename': wikiutil.escape(self.pagename, True),

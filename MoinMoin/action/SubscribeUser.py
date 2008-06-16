@@ -25,7 +25,7 @@ def show_form(pagename, request):
 %s <input type="text" name="users" size="50">
 <input type="submit" value="Subscribe">
 </form>
-""" % (request.getScriptname(), wikiutil.quoteWikinameURL(pagename),
+""" % (request.script_root, wikiutil.quoteWikinameURL(pagename),
       _("Enter user names (comma separated):")))
     request.theme.send_footer(pagename)
     request.theme.send_closing_html()
