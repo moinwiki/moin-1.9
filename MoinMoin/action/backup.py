@@ -104,7 +104,7 @@ Please make sure your wiki configuration backup_* values are correct and complet
 <input type="submit" value="%(restore_button)s">
 </form>
 """ % {
-    'baseurl': request.getScriptname(),
+    'baseurl': request.script_root,
     'pagename': wikiutil.quoteWikinameURL(pagename),
     'backup_button': _('Backup'),
     'restore_button': _('Restore'),

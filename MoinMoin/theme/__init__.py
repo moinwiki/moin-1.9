@@ -743,7 +743,7 @@ class ThemeBase:
             'search_value': wikiutil.escape(form.get('value', [''])[0], 1),
             'search_full_label': _('Text'),
             'search_title_label': _('Titles'),
-            'baseurl': self.request.getScriptname(),
+            'baseurl': self.request.script_root,
             'pagename_quoted': wikiutil.quoteWikinameURL(d['page'].page_name),
             }
         d.update(updates)
@@ -1035,7 +1035,7 @@ var search_hint = "%(search_hint)s";
             'options': '\n'.join(options),
             'rev_field': rev and '<input type="hidden" name="rev" value="%d">' % rev or '',
             'do_button': _("Do"),
-            'baseurl': self.request.getScriptname(),
+            'baseurl': self.request.script_root,
             'pagename_quoted': wikiutil.quoteWikinameURL(page.page_name),
             }
         html = '''
@@ -1538,7 +1538,7 @@ var gui_editor_link_text = "%(text)s";
             page = Page(request, pagename)
         if keywords.get('msg', ''):
             raise DeprecationWarning("Using send_page(msg=) is deprecated! Use theme.add_msg() instead!")
-        scriptname = request.getScriptname()
+        scriptname = request.script_root
         pagename_quoted = wikiutil.quoteWikinameURL(pagename)
 
         # get name of system pages
@@ -1632,12 +1632,12 @@ var gui_editor_link_text = "%(text)s";
             #~         # this shopuld never happend in theory, but let's be sure
             #~         pass
             #~     else:
-            #~         request.write('<link rel="First" href="%s/%s">\n' % (request.getScriptname(), quoteWikinameURL(all_pages[0]))
+            #~         request.write('<link rel="First" href="%s/%s">\n' % (request.script_root, quoteWikinameURL(all_pages[0]))
             #~         if pos > 0:
-            #~             request.write('<link rel="Previous" href="%s/%s">\n' % (request.getScriptname(), quoteWikinameURL(all_pages[pos-1])))
+            #~             request.write('<link rel="Previous" href="%s/%s">\n' % (request.script_root, quoteWikinameURL(all_pages[pos-1])))
             #~         if pos+1 < len(all_pages):
-            #~             request.write('<link rel="Next" href="%s/%s">\n' % (request.getScriptname(), quoteWikinameURL(all_pages[pos+1])))
-            #~         request.write('<link rel="Last" href="%s/%s">\n' % (request.getScriptname(), quoteWikinameURL(all_pages[-1])))
+            #~             request.write('<link rel="Next" href="%s/%s">\n' % (request.script_root, quoteWikinameURL(all_pages[pos+1])))
+            #~         request.write('<link rel="Last" href="%s/%s">\n' % (request.script_root, quoteWikinameURL(all_pages[-1])))
 
             if page_parent_page:
                 output.append('<link rel="Up" href="%s/%s">\n' % (scriptname, wikiutil.quoteWikinameURL(page_parent_page)))

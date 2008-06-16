@@ -33,7 +33,7 @@ class Login:
         """ Create the complete HTML form code. """
         _ = self._
         request = self.request
-        sn = request.getScriptname()
+        sn = request.script_root
         pi = request.getPathinfo()
         action = u"%s%s" % (sn, pi)
         hints = []

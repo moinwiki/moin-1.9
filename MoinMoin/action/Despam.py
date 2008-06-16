@@ -110,7 +110,7 @@ def show_pages(request, pagename, editor, timestamp):
 <input type="submit" name="ok" value="%s">
 </form>
 </p>
-''' % (request.getScriptname(), wikiutil.quoteWikinameURL(pagename),
+''' % (request.script_root, wikiutil.quoteWikinameURL(pagename),
        wikiutil.url_quote(editor), _("Revert all!")))
 
 def revert_page(request, pagename, editor):

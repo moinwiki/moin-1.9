@@ -242,7 +242,7 @@ def link_dialog(request):
 
     # wiki url
     url_prefix_static = request.cfg.url_prefix_static
-    scriptname = request.getScriptname()
+    scriptname = request.script_root
     if not scriptname or scriptname[-1] != "/":
         scriptname += "/"
     action = scriptname
@@ -393,7 +393,7 @@ def attachment_dialog(request):
 
     # wiki url
     url_prefix_static = request.cfg.url_prefix_static
-    scriptname = request.getScriptname()
+    scriptname = request.script_root
     if not scriptname or scriptname[-1] != "/":
         scriptname += "/"
     action = scriptname

@@ -563,7 +563,7 @@ def load_wikimap(request):
             if not line or line[0] == '#':
                 continue
             try:
-                line = "%s %s/InterWiki" % (line, request.getScriptname())
+                line = "%s %s/InterWiki" % (line, request.script_root)
                 wikitag, urlprefix, dummy = line.split(None, 2)
             except ValueError:
                 pass
@@ -573,9 +573,9 @@ def load_wikimap(request):
         del lines
 
         # add own wiki as "Self" and by its configured name
-        _interwiki_list['Self'] = request.getScriptname() + '/'
+        _interwiki_list['Self'] = request.script_root + '/'
         if request.cfg.interwikiname:
-            _interwiki_list[request.cfg.interwikiname] = request.getScriptname() + '/'
+            _interwiki_list[request.cfg.interwikiname] = request.script_root + '/'
 
         # save for later
         request.cfg.cache.interwiki_list = _interwiki_list
@@ -647,7 +647,7 @@ def resolve_wiki(request, wikiurl):
     if wikiname in _interwiki_list:
         return (wikiname, _interwiki_list[wikiname], pagename, False)
     else:
-        return (wikiname, request.getScriptname(), "/InterWiki", True)
+        return (wikiname, request.script_root, "/InterWiki", True)
 
 def resolve_interwiki(request, wikiname, pagename):
     """ Resolve an interwiki reference (wikiname:pagename).
@@ -662,7 +662,7 @@ def resolve_interwiki(request, wikiname, pagename):
     if wikiname in _interwiki_list:
         return (wikiname, _interwiki_list[wikiname], pagename, False)
     else:
-        return (wikiname, request.getScriptname(), "/InterWiki", True)
+        return (wikiname, request.script_root, "/InterWiki", True)
 
 def join_wiki(wikiurl, wikitail):
     """
@@ -2380,7 +2380,7 @@ def link_tag(request, params, text=None, formatter=None, on=None, **kw):
     if text is None:
         text = params # default
     if formatter:
-        url = "%s/%s" % (request.getScriptname(), params)
+        url = "%s/%s" % (request.script_root, params)
         # formatter.url will escape the url part
         if on is not None:
             tag = formatter.url(on, url, css_class, **kw)
@@ -2399,7 +2399,7 @@ def link_tag(request, params, text=None, formatter=None, on=None, **kw):
                 attrs += ' id="%s"' % id
             if name:
                 attrs += ' name="%s"' % name
-            tag = '<a%s href="%s/%s">' % (attrs, request.getScriptname(), params)
+            tag = '<a%s href="%s/%s">' % (attrs, request.script_root, params)
             if not on:
                 tag = "%s%s</a>" % (tag, text)
         logging.warning("wikiutil.link_tag called without formatter and without request.html_formatter. tag=%r" % (tag, ))

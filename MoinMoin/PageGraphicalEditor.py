@@ -223,7 +223,7 @@ Please review the page and save then. Do not save this page as it is!""")
 
         # send form
         request.write('<form id="editor" method="post" action="%s/%s#preview">' % (
-            request.getScriptname(),
+            request.script_root,
             wikiutil.quoteWikinameURL(self.page_name),
             ))
 
@@ -313,7 +313,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         url_prefix_local = request.cfg.url_prefix_local
         wikipage = wikiutil.quoteWikinameURL(self.page_name)
         fckbasepath = url_prefix_local + '/applets/FCKeditor'
-        wikiurl = request.getScriptname()
+        wikiurl = request.script_root
         if not wikiurl or wikiurl[-1] != '/':
             wikiurl += '/'
         themepath = '%s/%s' % (url_prefix_static, request.theme.name)

@@ -759,7 +759,7 @@ class Page(object):
             url = "%s#%s" % (url, wikiutil.url_quote_plus(anchor))
 
         if not relative:
-            url = '%s/%s' % (request.getScriptname(), url)
+            url = '%s/%s' % (request.script_root, url)
         return url
 
     def link_to_raw(self, request, text, querystr=None, anchor=None, **kw):
@@ -1028,7 +1028,7 @@ class Page(object):
             # note that by including "action=show", we prevent endless looping
             # (see code in "request") or any cascaded redirection
             request.http_redirect('%s/%s?action=show&redirect=%s' % (
-                request.getScriptname(),
+                request.script_root,
                 wikiutil.quoteWikinameURL(pi['redirect']),
                 wikiutil.url_quote_plus(self.page_name, ''), ))
             return

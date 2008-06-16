@@ -332,7 +332,7 @@ Please review the page and save then. Do not save this page as it is!""")
 
         # send form
         request.write('<form id="editor" method="post" action="%s/%s#preview" onSubmit="flgChange = false;">' % (
-            request.getScriptname(),
+            request.script_root,
             wikiutil.quoteWikinameURL(self.page_name),
             ))
 
