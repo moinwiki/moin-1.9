@@ -265,7 +265,7 @@ class UniqueIDGenerator(object):
         self.page_ids, self.include_id = self.unique_stack.pop()
         return self.page_ids, self.include_id
 
-    def begin(self):
+    def begin(self, base):
         """
         Called by the formatter when a document begins, which means
         that include causing nested documents gives us an include
