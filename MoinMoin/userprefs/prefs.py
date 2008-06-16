@@ -9,6 +9,7 @@
 
 import time
 from MoinMoin import user, util, wikiutil, events
+from MoinMoin.theme import load_theme_fallback
 from MoinMoin.widget import html
 from MoinMoin.userprefs import UserPrefBase
 
@@ -163,7 +164,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
             # already loaded theme is just replaced (works cause
             # nothing has been emitted yet)
             request.user.theme_name = theme_name
-            if request.loadTheme(theme_name) > 0:
+            if load_theme_fallback(request, theme_name) > 0:
                 theme_name = wikiutil.escape(theme_name)
                 return 'error', _("The theme '%(theme_name)s' could not be loaded!") % locals()
 
