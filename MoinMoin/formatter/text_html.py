@@ -410,7 +410,7 @@ class Formatter(FormatterBase):
         """
 
         if hasattr(self, 'page'):
-            self.request.begin_include(self.page.page_name)
+            self.request.uid_generator.begin(self.page.page_name)
 
         result = []
         # Use the content language
@@ -434,7 +434,7 @@ class Formatter(FormatterBase):
         result.append(self.anchordef('bottom'))
         result.append(self._close('div', newline=newline))
         if hasattr(self, 'page'):
-            self.request.end_include()
+            self.request.uid_generator.end()
         return ''.join(result)
 
     def lang(self, on, lang_name):

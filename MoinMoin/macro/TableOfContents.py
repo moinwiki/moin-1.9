@@ -142,7 +142,7 @@ Prints a table of contents.
 
     pname = macro.formatter.page.page_name
 
-    macro.request.push_unique_ids()
+    macro.request.uid_generator.push()
 
     macro.request._tocfm_collected_headings = []
     macro.request._tocfm_orig_formatter = macro.formatter
@@ -205,7 +205,7 @@ Prints a table of contents.
         result.append(macro.formatter.number_list(0))
         lastlvl -= 1
 
-    macro.request.pop_unique_ids()
+    macro.request.uid_generator.pop()
 
     result.append(macro.formatter.div(0))
     return ''.join(result)
