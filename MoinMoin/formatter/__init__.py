@@ -75,12 +75,12 @@ class FormatterBase:
 
     def startContent(self, content_id="content", **kw):
         if self.page:
-            self.request.begin_include(self.page.page_name)
+            self.request.uid_generator.begin(self.page.page_name)
         return ""
 
     def endContent(self):
         if self.page:
-            self.request.end_include()
+            self.request.uid_generator.end()
         return ""
 
     # Links ##############################################################
@@ -415,7 +415,7 @@ class FormatterBase:
         if not ns is None:
             ns = self.sanitize_to_id(ns)
         id = self.sanitize_to_id(id)
-        id = self.request.make_unique_id(id, ns)
+        id = self.request.uid_generator(id, ns)
         return id
 
     def qualify_id(self, id):

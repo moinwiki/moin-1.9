@@ -18,7 +18,7 @@ from MoinMoin.config import multiconfig
 from MoinMoin.formatter import text_html
 from MoinMoin.request import RequestBase
 from MoinMoin.web.request import Request, Response
-from MoinMoin.web.utils import check_spider
+from MoinMoin.web.utils import check_spider, UniqueIDGenerator
 from MoinMoin.web.exceptions import Forbidden, SurgeProtection
 
 from MoinMoin import log
@@ -267,3 +267,16 @@ class RenderContext(HTTPContext):
         return dicts
     dicts = cached_property(dicts)
 
+    def uid_generator(self):
+        pagename = None
+        if hasattr(self, 'page') and self.page.pagename:
+            pagename = self.page.pagename
+        return UniqueIDGenerator(pagename=pagename)
+    uid_generator = cached_property(uid_generator)
+
+    def reset(self):
+        self.current_lang = self.cfg.language_default
+        if hasattr(self, '_fmt_hd_counters'):
+            del self._fmt_hd_counters
+        if hasattr(self, 'uid_generator'):
+            del self.uid_generator
