@@ -270,8 +270,8 @@ class RenderContext(HTTPContext):
 
     def uid_generator(self):
         pagename = None
-        if hasattr(self, 'page') and self.page.pagename:
-            pagename = self.page.pagename
+        if hasattr(self, 'page') and self.page.page_name:
+            pagename = self.page.page_name
         return UniqueIDGenerator(pagename=pagename)
     uid_generator = cached_property(uid_generator)
 
