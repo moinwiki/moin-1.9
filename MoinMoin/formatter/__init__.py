@@ -411,7 +411,7 @@ class FormatterBase:
         '''
         Take an ID and make it unique in the current namespace.
         '''
-        ns = self.request.include_id
+        ns = self.request.uid_generator.include_id
         if not ns is None:
             ns = self.sanitize_to_id(ns)
         id = self.sanitize_to_id(id)
@@ -425,7 +425,7 @@ class FormatterBase:
         is suitable if the dot ('.') is valid in IDs for your
         formatter.
         '''
-        ns = self.request.include_id
+        ns = self.request.uid_generator.include_id
         if not ns is None:
             ns = self.sanitize_to_id(ns)
             return '%s.%s' % (ns, id)
