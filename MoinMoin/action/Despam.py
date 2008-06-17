@@ -187,7 +187,6 @@ def execute(pagename, request):
     timestamp = time.time() - DAYS * 24 * 3600
     ok = request.form.get('ok', [0])[0]
 
-    request.emit_http_headers()
     request.theme.send_title("Despam", pagename=pagename)
     # Start content (important for RTL support)
     request.write(request.formatter.startContent("content"))

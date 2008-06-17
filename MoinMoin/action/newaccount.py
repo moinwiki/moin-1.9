@@ -167,7 +167,6 @@ def execute(pagename, request):
         request.theme.add_msg(_create_user(request), "dialog")
         return page.send_page()
     else: # show create form
-        request.emit_http_headers()
         request.theme.send_title(_("Create Account"), pagename=pagename)
 
         request.write(request.formatter.startContent("content"))

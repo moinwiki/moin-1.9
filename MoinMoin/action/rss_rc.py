@@ -24,8 +24,7 @@ def execute(pagename, request):
     """ Send recent changes as an RSS document
     """
     if not wikixml.ok:
-        httpheaders = ["Content-Type: text/plain; charset=%s" % config.charset]
-        request.emit_http_headers(httpheaders)
+        request.response.mimetype = 'text/plain'
         request.write("rss_rc action is not supported because of missing pyxml module.")
         return
 
@@ -86,28 +85,26 @@ def execute(pagename, request):
     if request.if_modified_since == timestamp:
         if request.if_none_match:
             if request.if_none_match == etag:
-                request.emit_http_headers(["Status: 304 Not modified"])
+                request.response.status_code = 304
         else:
-            request.emit_http_headers(["Status: 304 Not modified"])
+            request.response.status_code = 304
     elif request.if_none_match == etag:
         if request.if_modified_since:
             if request.if_modified_since == timestamp:
-                request.emit_http_headers(["Status: 304 Not modified"])
+                request.response.status_code = 304
         else:
-            request.emit_http_headers(["Status: 304 Not modified"])
+            request.response.status_code = 304
     else:
         # generate an Expires header, using whatever setting the admin
         # defined for suggested cache lifetime of the RecentChanges RSS doc
-        expires = timefuncs.formathttpdate(time.time() + cfg.rss_cache)
+        expires = time.time() + cfg.rss_cache
 
-        httpheaders = ["Content-Type: text/xml; charset=%s" % config.charset,
-                       "Expires: %s" % expires,
-                       "Last-Modified: %s" % timestamp,
-                       "Etag: %s" % etag, ]
+        request.response.mime_type = 'text/xml'
+        request.response.expires = expires
+        request.response.last_modified = lastmod
+        request.response.headers.add('Etag', etag)
 
         # send the generated XML document
-        request.emit_http_headers(httpheaders)
-
         baseurl = request.getBaseURL()
         if not baseurl.endswith('/'):
             baseurl += '/'

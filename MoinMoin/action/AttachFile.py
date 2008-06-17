@@ -536,7 +536,6 @@ def _do_upload_form(pagename, request):
 def upload_form(pagename, request, msg=''):
     _ = request.getText
 
-    request.emit_http_headers()
     # Use user interface language for this generated page
     request.setContentLanguage(request.lang)
     request.theme.add_msg(msg, "dialog")
@@ -656,7 +655,6 @@ def _do_savedrawing(pagename, request):
     if ext == '.map':
         os.utime(attach_dir, None)
 
-    request.emit_http_headers()
     request.write("OK")
 
 
@@ -808,9 +806,10 @@ def _do_get(pagename, request):
     if not filename:
         return # error msg already sent in _access_file
 
-    timestamp = timefuncs.formathttpdate(int(os.path.getmtime(fpath)))
-    if request.if_modified_since == timestamp:
-        request.emit_http_headers(["Status: 304 Not modified"])
+    timestamp = os.path.getmtime(fpath)
+    if_modified = time.mktime(request.if_modified_since.timetuple())
+    if if_modified >= timestamp:
+        request.response.status_code = 304
     else:
         mt = wikiutil.MimeType(filename=filename)
         content_type = mt.content_type()
@@ -826,12 +825,11 @@ def _do_get(pagename, request):
         dangerous = mime_type in request.cfg.mimetypes_xss_protect
         content_dispo = dangerous and 'attachment' or 'inline'
 
-        request.emit_http_headers([
-            'Content-Type: %s' % content_type,
-            'Last-Modified: %s' % timestamp,
-            'Content-Length: %d' % os.path.getsize(fpath),
-            'Content-Disposition: %s; filename="%s"' % (content_dispo, filename_enc),
-        ])
+        request.response.content_type = content_type
+        request.response.last_modified = timestamp
+        request.response.content_length = os.path.getsize(fpath)
+        content_dispo_string = '%s; filename="%s"' % (content_dispo, filename_enc)
+        request.response.headers.add('Content-Disposition', content_dispo_string)
 
         # send data
         request.send_file(open(fpath, 'rb'))
@@ -1038,7 +1036,6 @@ def _do_view(pagename, request):
         return
 
     # send header & title
-    request.emit_http_headers()
     # Use user interface language for this generated page
     request.setContentLanguage(request.lang)
     title = _('attachment:%(filename)s of %(pagename)s') % {

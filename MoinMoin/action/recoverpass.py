@@ -179,7 +179,6 @@ Contact the owner of the wiki, who can enable email."""), 'warning')
             return
 
     if token and name:
-        request.emit_http_headers()
         request.theme.send_title(_("Password reset"), pagename=pagename)
 
         request.write(request.formatter.startContent("content"))
@@ -200,7 +199,6 @@ Enter a new password below.""", wiki=True))
         request.theme.add_msg(msg, "dialog")
         page.send_page()
     else: # show create form
-        request.emit_http_headers()
         request.theme.send_title(_("Lost password"), pagename=pagename)
 
         request.write(request.formatter.startContent("content"))
