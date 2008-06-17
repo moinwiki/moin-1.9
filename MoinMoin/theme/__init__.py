@@ -7,6 +7,7 @@
 """
 
 from MoinMoin import i18n, wikiutil, config, version, caching
+from MoinMoin.action import get_available_actions
 from MoinMoin.Page import Page
 from MoinMoin.util import pysupport
 
@@ -964,7 +965,7 @@ var search_hint = "%(search_hint)s";
         disabled = ' disabled class="disabled"'
 
         # Format standard actions
-        available = request.getAvailableActions(page)
+        available = get_available_actions(request.cfg, page, request.user)
         for action in menu:
             data = {'action': action, 'disabled': '', 'title': titles[action]}
             # removes excluded actions from the more actions menu
