@@ -69,13 +69,11 @@ class Context(object):
     def become(self, cls):
         if self.__class__ is cls:
             return False
-        elif cls in self.personalities:
-            self.__class__ = cls
-            return True
         else:
             self.personalities.append(cls)
             self.__class__ = cls
-            self.initialize()
+            if cls in self.personalities:
+                self.initialize()
             return True
 
 class XMLRPCContext(Context):
