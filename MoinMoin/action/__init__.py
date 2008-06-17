@@ -269,9 +269,8 @@ def do_format(pagename, request):
 def do_content(pagename, request):
     """ same as do_show, but we only show the content """
     # XXX temporary fix to make it work until Page.send_page gets refactored
-    request.setHttpHeader("Content-Type: text/html; charset=%s" % config.charset)
-    request.setHttpHeader('Status: 200 OK')
-    request.emit_http_headers()
+    request.response.mimetype = 'text/html'
+    request.response.status_code = 200
     do_show(pagename, request, count_hit=0, content_only=1)
 
 def do_print(pagename, request):

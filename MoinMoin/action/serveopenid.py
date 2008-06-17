@@ -31,9 +31,8 @@ class MoinOpenIDServer:
 
     def serveYadisEP(self, endpoint_url):
         request = self.request
-        hdrs = ['Content-type: application/xrds+xml']
+        request.response.content_type = 'application/xrds+xml'
 
-        request.emit_http_headers(hdrs)
         user_url = request.getQualifiedURL(request.page.url(request))
         self.request.write("""\
 <?xml version="1.0" encoding="UTF-8"?>
@@ -79,9 +78,8 @@ class MoinOpenIDServer:
 
     def serveYadisIDP(self, endpoint_url):
         request = self.request
-        hdrs = ['Content-type: application/xrds+xml']
+        request.response.content_type = 'application/xrds+xml'
 
-        request.emit_http_headers(hdrs)
         user_url = request.getQualifiedURL(request.page.url(request))
         self.request.write("""\
 <?xml version="1.0" encoding="UTF-8"?>
@@ -249,10 +247,9 @@ class MoinOpenIDServer:
             else:
                 answer = openidsrv.handleRequest(openidreq)
         webanswer = openidsrv.encodeResponse(answer)
-        headers = ['Status: %d OpenID status' % webanswer.code]
+        request.response.status = '%d OpenID status' % webanswer.code
         for hdr in webanswer.headers:
-            headers += [hdr+': '+webanswer.headers[hdr]]
-        request.emit_http_headers(headers)
+            request.response.headers.add(hdr, webanswer.headers[hdr])
         request.write(webanswer.body)
         raise MoinMoinFinish
 
@@ -324,7 +321,6 @@ never allow you to enter your password here.
 Once you have logged in, simply reload this page.'''))
             return
 
-        request.emit_http_headers()
         request.theme.send_title(_("OpenID Trust verification"), pagename=request.page.page_name)
         # Start content (important for RTL support)
         request.write(request.formatter.startContent("content"))
@@ -397,7 +393,6 @@ delegation on its own.)''') % openidreq.identity)
         request = self.request
         _ = self._
 
-        request.emit_http_headers()
         request.theme.send_title(_("OpenID not served"), pagename=request.page.page_name)
         # Start content (important for RTL support)
         request.write(request.formatter.startContent("content"))

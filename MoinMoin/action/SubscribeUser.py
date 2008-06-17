@@ -16,7 +16,6 @@ from MoinMoin import wikiutil
 
 def show_form(pagename, request):
     _ = request.getText
-    request.emit_http_headers()
     request.theme.send_title(_("Subscribe users to the page %s") % pagename, pagename=pagename)
 
     request.write("""
@@ -32,7 +31,6 @@ def show_form(pagename, request):
 
 def show_result(pagename, request):
     _ = request.getText
-    request.emit_http_headers()
 
     request.theme.send_title(_("Subscribed for %s:") % pagename, pagename=pagename)
 

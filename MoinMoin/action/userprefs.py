@@ -101,7 +101,6 @@ def execute(pagename, request):
         title = _("Settings") + ":" + title
     else:
         title = _("Settings")
-    request.emit_http_headers()
     request.theme.add_msg(msg, msg_class)
     request.theme.send_title(title, page=request.page, pagename=pagename)
     # Start content (important for RTL support)

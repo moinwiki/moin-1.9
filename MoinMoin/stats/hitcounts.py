@@ -252,11 +252,8 @@ def draw(pagename, request):
         (request.cfg.chart_options['width'], request.cfg.chart_options['height']),
         image, days)
 
-    headers = [
-        "Content-Type: image/gif",
-        "Content-Length: %d" % len(image.getvalue()),
-    ]
-    request.emit_http_headers(headers)
+    request.response.content_type = 'image/gif'
+    request.response.content_length = len(image.getvalue())
 
     # copy the image
     image.reset()

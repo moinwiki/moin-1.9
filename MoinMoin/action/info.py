@@ -187,8 +187,6 @@ def execute(pagename, request):
     page = Page(request, pagename)
     title = page.split_title()
 
-    request.emit_http_headers()
-
     request.setContentLanguage(request.lang)
     f = request.formatter
 

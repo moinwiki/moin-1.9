@@ -166,10 +166,8 @@ class XmlRpcBase:
                 # serialize it
                 response = xmlrpclib.dumps(response, methodresponse=1)
 
-        self.request.emit_http_headers([
-            "Content-Type: text/xml; charset=utf-8",
-            "Content-Length: %d" % len(response),
-        ])
+        self.request.response.content_type = 'text/xml'
+        self.request.response.content_length = len(response)
         self.request.write(response)
 
     def dispatch(self, method, params):

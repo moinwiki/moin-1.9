@@ -983,7 +983,6 @@ class Page(object):
             request.setHttpHeader('Status: 404 NOTFOUND')
             text = u"Page %s not found." % self.page_name
 
-        request.emit_http_headers()
         request.write(text)
 
     def send_page(self, **keywords):
@@ -1077,12 +1076,12 @@ class Page(object):
         page_exists = self.exists()
         if not content_only:
             if emit_headers:
-                request.setHttpHeader("Content-Type: %s; charset=%s" % (self.output_mimetype, self.output_charset))
+                request.response.content_type = "%s; charset=%s" % (self.output_mimetype, self.output_charset)
                 if page_exists:
                     if not request.user.may.read(self.page_name):
-                        request.setHttpHeader('Status: 403 Permission Denied')
+                        request.response.status_code = 403
                     else:
-                        request.setHttpHeader('Status: 200 OK')
+                        request.response.status_code = 200
                     if not request.cacheable:
                         # use "nocache" headers if we're using a method that is not simply "display"
                         request.disableHttpCaching(level=2)
@@ -1097,8 +1096,7 @@ class Page(object):
                         #request.setHttpHeader("Last-Modified: %s" % util.timefuncs.formathttpdate(lastmod))
                         pass
                 else:
-                    request.setHttpHeader('Status: 404 NOTFOUND')
-                request.emit_http_headers()
+                    request.response.status_code = 404
 
             if not page_exists and self.request.isSpiderAgent:
                 # don't send any 404 content to bots

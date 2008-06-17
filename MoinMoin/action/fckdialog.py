@@ -15,7 +15,6 @@ import re
 
 def macro_dialog(request):
     help = get_macro_help(request)
-    request.emit_http_headers()
     request.write(
         '''<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
@@ -170,7 +169,6 @@ def page_list(request):
         pages = [p.page_name for p in searchresult.hits]
     else:
         pages = [name]
-    request.emit_http_headers()
     request.write(
         '''<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
@@ -201,7 +199,6 @@ def page_list(request):
 ''' % "".join(["<option>%s</option>\n" % p for p in pages]))
 
 def link_dialog(request):
-    request.emit_http_headers()
     # list of wiki pages
     name = request.form.get("pagename", [""])[0]
     if name:
@@ -367,7 +364,6 @@ def link_dialog(request):
 ##############################################################################
 
 def attachment_dialog(request):
-    request.emit_http_headers()
     # list of wiki pages
     name = request.form.get("pagename", [""])[0]
     if name:
@@ -461,7 +457,6 @@ def attachment_dialog(request):
 ##############################################################################
 
 def image_dialog(request):
-    request.emit_http_headers()
     url_prefix_static = request.cfg.url_prefix_static
     request.write('''
 <!--

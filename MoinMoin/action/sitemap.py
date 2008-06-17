@@ -64,7 +64,7 @@ def execute(pagename, request):
     request.user.datetime_fmt = datetime_fmt
     base = request.getBaseURL()
 
-    request.emit_http_headers(["Content-Type: text/xml; charset=UTF-8"])
+    request.response.mimetype ='text/xml'
 
     # we emit a piece of data so other side doesn't get bored:
     request.write("""<?xml version="1.0" encoding="UTF-8"?>\r\n""")
