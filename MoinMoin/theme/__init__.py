@@ -1663,7 +1663,6 @@ var gui_editor_link_text = "%(text)s";
         output.append("</head>\n")
         request.write(''.join(output))
         output = []
-        request.flush()
 
         # start the <body>
         bodyattr = []
@@ -1755,7 +1754,6 @@ var gui_editor_link_text = "%(text)s";
         # emit it
         request.write(''.join(output))
         output = []
-        request.flush()
         self._send_title_called = True
 
     def send_footer(self, pagename, **keywords):
