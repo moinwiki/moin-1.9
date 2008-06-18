@@ -325,10 +325,12 @@ class MoinCookieSessionIDHandler(SessionIDHandler):
     def _set_cookie(self, request, cookie_string, expires):
         """ Set cookie, raw helper. """
         lifetime = expires - time.time()
-        cookie = self._make_cookie(request, self.cookie_name, cookie_string,
-                                   lifetime, expires)
+        domain = request.cfg.cookie_domain or None
+        path = request.cfg.cookie_path or None
         # Set cookie
-        request.setHttpHeader(cookie)
+        request.response.set_cookie(self.cookie_name, cookie_string,
+                                    max_age=lifetime, expires=expires,
+                                    path=path, domain=domain)
         # IMPORTANT: Prevent caching of current page and cookie
         request.disableHttpCaching()
 
