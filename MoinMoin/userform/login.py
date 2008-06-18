@@ -34,7 +34,7 @@ class Login:
         _ = self._
         request = self.request
         sn = request.script_root
-        pi = request.getPathinfo()
+        pi = request.path
         action = u"%s%s" % (sn, pi)
         hints = []
         for authm in request.cfg.auth:
