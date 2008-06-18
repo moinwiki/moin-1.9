@@ -151,7 +151,7 @@ class Settings(UserPrefBase):
 
     def _make_form(self):
         sn = self.request.script_root
-        pi = self.request.getPathinfo()
+        pi = self.request.path
         action = u"%s%s" % (sn, pi)
         _form = html.FORM(action=action)
         _form.append(html.INPUT(type="hidden", name="action", value="userprefs"))
