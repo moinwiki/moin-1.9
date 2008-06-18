@@ -964,23 +964,23 @@ class Page(object):
             offer a dialogue to save it to disk (used by Save action).
         """
         request = self.request
-        request.setHttpHeader("Content-type: text/plain; charset=%s" % config.charset)
+        request.response.mimetype = 'text/plain'
         if self.exists():
             # use the correct last-modified value from the on-disk file
             # to ensure cacheability where supported. Because we are sending
             # RAW (file) content, the file mtime is correct as Last-Modified header.
-            request.setHttpHeader("Status: 200 OK")
-            request.setHttpHeader("Last-Modified: %s" % util.timefuncs.formathttpdate(os.path.getmtime(self._text_filename())))
+            request.response.status_code = 200
+            request.response.last_modified = os.path.getmtime(self._text_filename())
             text = self.encodeTextMimeType(self.body)
             #request.setHttpHeader("Content-Length: %d" % len(text))  # XXX WRONG! text is unicode obj, but we send utf-8!
             if content_disposition:
                 # TODO: fix the encoding here, plain 8 bit is not allowed according to the RFCs
                 # There is no solution that is compatible to IE except stripping non-ascii chars
                 filename_enc = "%s.txt" % self.page_name.encode(config.charset)
-                request.setHttpHeader('Content-Disposition: %s; filename="%s"' % (
-                                      content_disposition, filename_enc))
+                dispo_string = '%s; filename="%s"' % (content_disposition, filename_enc)
+                request.response.headers.add('Content-Disposition', dispo_string)
         else:
-            request.setHttpHeader('Status: 404 NOTFOUND')
+            request.response.status_code = 404
             text = u"Page %s not found." % self.page_name
 
         request.write(text)

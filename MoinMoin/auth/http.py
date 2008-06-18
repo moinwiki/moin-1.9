@@ -35,14 +35,13 @@ class HTTPAuth(BaseAuth):
         # for standalone, request authorization and verify it,
         # deny access if it isn't verified
         if isinstance(request, request_standalone.Request):
-            request.setHttpHeader('WWW-Authenticate: Basic realm="MoinMoin"')
-            auth = request.headers.get('Authorization')
+            request.response.www_authenticate.set_basic(realm="MoinMoin")
+            
+            auth = request.authorization
             if auth:
-                auth = auth.split()[-1]
-                info = decodestring(auth).split(':', 1)
-                if len(info) == 2:
-                    u = user.User(request, auth_username=info[0], password=info[1],
-                                  auth_method=self.name, auth_attribs=[])
+                u = user.User(request, auth_username=auth.username,
+                              password=auth.password,
+                              auth_method=self.name, auth_attribs=[])
             if not u:
                 request.makeForbidden(401, _('You need to log in.'))
         # for Twisted, just check
