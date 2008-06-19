@@ -30,6 +30,7 @@ from MoinMoin import log
 logging = log.getLogger(__name__)
 
 def init(request):
+    request = HTTPContext(request)
     request.clock = Clock()
     request.clock.start('total')
     request.clock.start('base__init__')
@@ -66,7 +67,8 @@ def run(request):
     # parse request data
     try:
         # The last component in path_info is the page name, if any
-        path = request.path_info
+        request.become(HTTPContext)
+        path = request.path
 
         # we can have all action URLs like this: /action/ActionName/PageName?action=ActionName&...
         # this is just for robots.txt being able to forbid them for crawlers
@@ -174,12 +176,9 @@ def run(request):
 
         #return request.finish()
 
-def application(environ, start_response):
-    request = HTTPContext(environ)
+def application(request):
     request = init(request)
     result = run(request)
-
-    response = request.response
 
     if getattr(request, '_send_file', None) is not None:
         # moin wants to send a file (e.g. AttachFile.do_get)
@@ -187,7 +186,7 @@ def application(environ, start_response):
             return iter(lambda: fileobj.read(bufsize), '')
         file_wrapper = environ.get('wsgi.file_wrapper', simple_wrapper)
         response.response = file_wrapper(request._send_file, request._send_bufsize)
-    return response
+    return request
 
-application = responder(application)
+application = Request.application(application)
 application = HTTPExceptionsMiddleware(application)
