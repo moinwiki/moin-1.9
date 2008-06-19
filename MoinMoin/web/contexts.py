@@ -17,6 +17,7 @@ from MoinMoin import i18n, error
 from MoinMoin.config import multiconfig
 from MoinMoin.formatter import text_html
 from MoinMoin.theme import load_theme_fallback
+from MoinMoin.util.clock import Clock
 from MoinMoin.web.request import Request
 from MoinMoin.web.utils import check_spider, UniqueIDGenerator
 from MoinMoin.web.exceptions import Forbidden, SurgeProtection
@@ -70,6 +71,7 @@ class Context(object):
         assert isinstance(request, Request)
         self.request = request
         self.environ = request.environ
+        self.personalities.append(self.__class__)
 
     personalities = EnvironProxy('context.personalities', lambda o: list())
 
@@ -314,8 +316,11 @@ class RedirectMixin(object):
         else:
             self.write = self.writestack.pop()
 
+class ClockMixin(object):
+    clock = EnvironProxy('clock', lambda o: Clock())
+
 class HTTPContext(Context, HTTPMixin, ConfigMixin, UserMixin,
-                  LanguageMixin, RenamedMixin, ActionMixin):
+                  LanguageMixin, RenamedMixin, ClockMixin):
     def __getattribute__(self, name):
          try:
              return super(HTTPContext, self).__getattribute__(name)
@@ -324,7 +329,8 @@ class HTTPContext(Context, HTTPMixin, ConfigMixin, UserMixin,
 
 class RenderContext(Context, RedirectMixin, ConfigMixin, UserMixin,
                     LanguageMixin, PragmaMixin, ThemeMixin,
-                    AuxilaryMixin, DictsMixin, ActionMixin): pass
+                    AuxilaryMixin, DictsMixin, ActionMixin,
+                    ClockMixin): pass
 
 class XMLRPCContext(HTTPContext):
     pass

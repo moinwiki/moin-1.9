@@ -22,7 +22,6 @@ from MoinMoin.action import get_names, get_available_actions
 from MoinMoin.config import multiconfig
 from MoinMoin.support.python_compatibility import set
 from MoinMoin.util import IsWin9x
-from MoinMoin.util.clock import Clock
 from MoinMoin.request import MoinMoinFinish, RemoteClosedConnection
 from MoinMoin import auth
 
@@ -31,7 +30,6 @@ logging = log.getLogger(__name__)
 
 def init(request):
     request = HTTPContext(request)
-    request.clock = Clock()
     request.clock.start('total')
     request.clock.start('base__init__')
 
