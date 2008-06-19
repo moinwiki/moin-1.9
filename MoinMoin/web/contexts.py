@@ -8,63 +8,70 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import time, inspect
+import time, inspect, StringIO
 
-from werkzeug.utils import Headers, http_date, cached_property
+from werkzeug.utils import Headers, http_date
 from werkzeug.exceptions import Unauthorized, NotFound
 
 from MoinMoin import i18n, error
 from MoinMoin.config import multiconfig
 from MoinMoin.formatter import text_html
-from MoinMoin.request import RequestBase
 from MoinMoin.theme import load_theme_fallback
-from MoinMoin.web.request import Request, Response
+from MoinMoin.web.request import Request
 from MoinMoin.web.utils import check_spider, UniqueIDGenerator
 from MoinMoin.web.exceptions import Forbidden, SurgeProtection
 
 from MoinMoin import log
 logging = log.getLogger(__name__)
+default = object()
 
 class renamed_property(property):
     def __init__(self, name):
-        property.__init__(self, lambda obj: getattr(obj, name))
+        property.__init__(self, lambda obj: getattr(obj.request, name))
+
+class EnvironProxy(property):
+    def __init__(self, name, factory=default):
+        if not isinstance(name, basestring):
+            factory = name
+            name = factory.__name__
+        self.name = name
+        self.full_name = 'moin.%s' % name
+        self.factory = factory
+        property.__init__(self, self.get, self.set, self.delete)
+
+    def get(self, obj):
+        logging.debug("GET: '%s' on '%r'", self.name, obj)
+        if self.full_name in obj.environ:
+            res = obj.environ[self.full_name]
+        else:
+            factory = self.factory
+            if factory is default:
+                raise AttributeError(self.name)
+            elif hasattr(factory, '__call__'):
+                res = obj.environ.setdefault(self.full_name, factory(obj))
+            else:
+                res = obj.environ.setdefault(self.full_name, factory)
+        return res
+    
+    def set(self, obj, value):
+        logging.debug("SET: '%s' on '%r' to '%r'", self.name, obj, value)
+        obj.environ[self.full_name] = value
+
+    def delete(self, obj):
+        logging.debug("DEL: '%s' on '%r'", self.name, obj)
+        del obj.environ[self.full_name]
+
+    def __repr__(self):
+        return "<%s for '%s'>" % (self.__class__.__name__,
+                                  self.full_name)
 
 class Context(object):
-    def __init__(self, environ):
-        self.environ = environ
-        self.request = Request(environ)
-        self.personalities = [self.__class__]
-        self.initialize()
+    def __init__(self, request):
+        assert isinstance(request, Request)
+        self.request = request
+        self.environ = request.environ
 
-    def attr_getter(self, name):
-        return super(Context, self).__getattr__(name)
-
-    def attr_setter(self, name, value):
-        return super(Context, self).__setattr__(name, value)        
-
-    def __getattr__(self, name):
-        logging.debug("GET: '%s' on '%r'", name, self)
-        try:
-            return self.attr_getter(name)
-        except (AttributeError, KeyError):
-            pass
-        return super(Context, self).__getattribute__(name)
-
-    def __setattr__(self, name, value):
-        stack = inspect.stack()
-        parent = stack[1]
-        c, f, l = parent[3], parent[1], parent[0].f_lineno
-
-        logging.debug("SET: '%s' on '%r' to '%r'", name, self, value)
-        logging.debug("^^^: line %i, file '%s', caller '%s'", l, f, c)
-        if name not in ('environ', 'request', 'personalities',
-                        '__class__', '__dict__'):
-            self.attr_setter(name, value)
-        else:
-            super(Context, self).__setattr__(name, value)
-
-    def initialize(self):
-        pass
+    personalities = EnvironProxy('context.personalities', lambda o: list())
 
     def become(self, cls):
         if self.__class__ is cls:
@@ -72,53 +79,83 @@ class Context(object):
         else:
             self.personalities.append(cls)
             self.__class__ = cls
-            if cls in self.personalities:
-                self.initialize()
             return True
 
-class XMLRPCContext(Context):
-    pass
+class UserMixin(object):
+    user = EnvironProxy('user')
 
-class HTTPContext(Context): #, RequestBase):
-    """ Lowermost context for MoinMoin.
+class LanguageMixin(object):
+    def lang(self):
+        for key in ('moin.user.lang', 'moin.request.lang'):
+            if key in self.environ:
+                return self.environ[key]
 
-    Contains code related to manipulation of HTTP related data like:
-    * Headers
-    * Cookies
-    * GET/POST/PUT/etc data
-    """
-    def initialize(self):
-        self.response = Response()
-        self._auth_redirected = False
-        self.forbidden = 0
-        self._cache_disabled = 0
-        self.page = None
-        self.user_headers = []
-        self.sent_headers = None
-        self.writestack = []
+        if i18n.languages is None:
+            i18n.i18n_init(self)
+        lang = None
 
-    def attr_getter(self, name):
-        if hasattr(self.request, name):
-            return getattr(self.request, name)
+        user = getattr(self, 'user')
+        if user and user.valid and user.language:
+            lang = user.language
+            self.environ['moin.user.lang'] = lang
         else:
-            return Context.attr_getter(self, name)
+            if i18n.languages and not self.cfg.language_ignore_browser:
+                for l in self.request.accept_languages:
+                    if l in i18n.languages:
+                        lang = l
+                        break
+
+            if lang is None and self.cfg.language_default in i18n.languages:
+                lang = self.cfg.language_default
+            else:
+                lang = 'en'
+            self.environ['moin.request.lang'] = lang
+        return lang
+    lang = property(lang)
+
+    def getText(self):
+        lang = self.lang
+        def _(text, i18n=i18n, request=self, lang=lang, **kw):
+            return i18n.getText(text, request, lang, **kw)
+        return _
+    getText = EnvironProxy(getText)
+
+    def content_lang(self):
+        return self.cfg.language_default
+    content_lang = EnvironProxy(content_lang)
+    current_lang = EnvironProxy('current_lang')
+
+    def setContentLanguage(self, lang):
+        """ Set the content language, used for the content div
+
+        Actions that generate content in the user language, like search,
+        should set the content direction to the user language before they
+        call send_title!
+        """
+        self.content_lang = lang
+        self.current_lang = lang
+
+
+class HTTPMixin(object):
+    forbidden = EnvironProxy('old.forbidden', 0)
+
+    
+    _auth_redirected = EnvironProxy('old._auth_redirected', 0)
+    _cache_disabled = EnvironProxy('old._cache_disabled', 0)
         
     def write(self, *data):
         if len(data) > 1:
             logging.warning("Some code still uses write with multiple arguments, "
                             "consider changing this soon")
-        self.response.stream.writelines(data)
+        self.request.stream.writelines(data)
     
     # implementation of methods expected by RequestBase
     def send_file(self, fileobj, bufsize=8192, do_flush=None):
-        self._sendfile = fileobj
-        self._send_bufsize = bufsize
-
-
+        pass
 
     def read(self, n=None):
         if n is None:
-            return self.request.data
+            return self.request.in_data
         else:
             return self.request.input_stream.read(n)
 
@@ -131,147 +168,93 @@ class HTTPContext(Context): #, RequestBase):
 
     def setHttpHeader(self, header):
         header, value = header.split(':', 1)
-        self.response.headers.add(header, value)
+        self.headers.add(header, value)
 
     def disableHttpCaching(self, level=1):
         if level <= self._cache_disabled:
             return
         
         if level == 1:
-            self.response.headers.add('Cache-Control', 'private, must-revalidate, mag-age=10')
+            self.headers.add('Cache-Control', 'private, must-revalidate, mag-age=10')
         elif level == 2:
-            self.response.headers.add('Cache-Control', 'no-cache')
-            self.response.headers.set('Pragma', 'no-cache')
+            self.headers.add('Cache-Control', 'no-cache')
+            self.headers.set('Pragma', 'no-cache')
 
         if not self._cache_disabled:
             when = time.time() - (3600 * 24 * 365)
-            self.response.headers.set('Expires', http_date(when))
+            self.headers.set('Expires', http_date(when))
 
         self._cache_disabled = level
 
-    def _emit_http_headers(self, headers):
-        st_header, other_headers = headers[0], headers[1:]
-        self.response.status = st_header[8:] # strip 'Status: '
-        for header in other_headers:
-            key, value = header.split(':', 1)
-            self.response.headers.add(key, value)
+    def isSpiderAgent(self):
+        return check_spider(self.request.user_agent, self.cfg)
+    isSpiderAgent = EnvironProxy(isSpiderAgent)
 
-    # legacy compatibility & properties
-    # e.g. different names in werkzeug
-    def lang(self):
-        if i18n.languages is None:
-            i18n.i18n_init(self)
-
-        lang = None
-        
-        if i18n.languages and not self.cfg.language_ignore_browser:
-            for l in self.accept_languages:
-                if l in i18n.languages:
-                    lang = l
-                    break
-
-        if lang is None and self.cfg.language_default in i18n.languages:
-            lang = self.cfg.language_default
-        else:
-            lang = 'en'
-        return lang
-    lang = cached_property(lang)
-
-    def getText(self):
-        lang = self.lang
-            
-        def _(text, i18n=i18n, request=self, lang=lang, **kw):
-            return i18n.getText(text, request, lang, **kw)
-        return _
-    getText = cached_property(getText)
-
+class ActionMixin(object):
     def action(self):
-        return self.values.get('action','show')
-    action = cached_property(action)
+        return self.request.values.get('action','show')
+    action = EnvironProxy(action)
 
+class RevisionMixin(object):
     def rev(self):
         try:
             return int(self.values['rev'])
         except:
             return None
-    rev = cached_property(rev)
+    rev = EnvironProxy(rev)
 
+class ConfigMixin(object):
     def cfg(self):
         try:
             self.clock.start('load_multi_cfg')
-            cfg = multiconfig.getConfig(self.url)
+            cfg = multiconfig.getConfig(self.request.url)
             self.clock.stop('load_multi_cfg')
             return cfg
         except error.NoConfigMatchedError:
             raise NotFound('<p>No wiki configuration matching the URL found!</p>')
-    cfg = cached_property(cfg)
+    cfg = EnvironProxy(cfg)
 
-    def isSpiderAgent(self):
-        return check_spider(self.user_agent, self.cfg)
-    isSpiderAgent = cached_property(isSpiderAgent)
-
-
+class RenamedMixin(object):
     cookie = renamed_property('cookies')
     script_name = renamed_property('script_root')
     path_info = renamed_property('path')
     is_ssl = renamed_property('is_secure')
     request_method = renamed_property('method')
 
-class RenderContext(HTTPContext):
-    """ Context for rendering content
-    
-    Contains code related to the representation of pages:
-    * formatters
-    * theme
-    * page
-    * output redirection
-    """
-    def initialize(self):
-        self.pragma = {}
-        self.mode_getpagelinks = 0
-        self.parsePageLinks_running = {}
-
-        if i18n.languages is None:
-            i18n.i18n_init(self)
-
+class FormatterMixin(object):
     def html_formatter(self):
         return text_html.Formatter(self)
-    html_formatter = cached_property(html_formatter)
+    html_formatter = EnvironProxy(html_formatter)
 
     def formatter(self):
         return self.html_formatter
-    formatter = cached_property(formatter)
+    formatter = EnvironProxy(formatter)
 
-    def content_lang(self):
-        return self.cfg.language_default
-    content_lang = cached_property(content_lang)
-    
-    def lang(self):
-        if self.user.valid and self.user.language:
-            return self.user.language
-        else:
-            return super(RenderContext, self).lang
-    lang = cached_property(lang)
-
+class PageMixin(object):
+    page = EnvironProxy('page', None)
     def rootpage(self):
         from MoinMoin.Page import RootPage
         return RootPage(self)
-    rootpage = cached_property(rootpage)
+    rootpage = EnvironProxy(rootpage)
 
+class DictsMixin(object):
     def dicts(self):
         """ Lazy initialize the dicts on the first access """
         from MoinMoin import wikidicts
         dicts = wikidicts.GroupDict(self)
         dicts.load_dicts()
         return dicts
-    dicts = cached_property(dicts)
+    dicts = EnvironProxy(dicts)
+
+class AuxilaryMixin(object):
+    _fmt_hd_counters = EnvironProxy('_fmt_hd_counters')
 
     def uid_generator(self):
         pagename = None
         if hasattr(self, 'page') and self.page.page_name:
             pagename = self.page.page_name
         return UniqueIDGenerator(pagename=pagename)
-    uid_generator = cached_property(uid_generator)
+    uid_generator = EnvironProxy(uid_generator)
 
     def reset(self):
         self.current_lang = self.cfg.language_default
@@ -280,6 +263,9 @@ class RenderContext(HTTPContext):
         if hasattr(self, 'uid_generator'):
             del self.uid_generator
 
+class ThemeMixin(object):
+    theme = EnvironProxy('theme')
+
     def initTheme(self):
         """ Set theme - forced theme, user theme or wiki default """
         if self.cfg.theme_force:
@@ -287,3 +273,58 @@ class RenderContext(HTTPContext):
         else:
             theme_name = self.user.theme_name
         load_theme_fallback(self, theme_name)
+
+class PragmaMixin(object):
+    pragma = EnvironProxy('pragma', lambda o: dict())
+
+    def getPragma(self, key, defval=None):
+        """ Query a pragma value (#pragma processing instruction)
+
+            Keys are not case-sensitive.
+        """
+        return self.pragma.get(key.lower(), defval)
+
+    def setPragma(self, key, value):
+        """ Set a pragma value (#pragma processing instruction)
+
+            Keys are not case-sensitive.
+        """
+        self.pragma[key.lower()] = value    
+
+class RedirectMixin(object):
+    writestack = EnvironProxy('old.writestack', lambda o: list())
+
+    def redirectedOutput(self, function, *args, **kw):
+        """ Redirect output during function, return redirected output """
+        buf = StringIO.StringIO()
+        self.redirect(buf)
+        try:
+            function(*args, **kw)
+        finally:
+            self.redirect()
+        text = buf.getvalue()
+        buf.close()
+        return text
+
+    def redirect(self, file=None):
+        """ Redirect output to file, or restore saved output """
+        if file:
+            self.writestack.append(self.write)
+            self.write = file.write
+        else:
+            self.write = self.writestack.pop()
+
+class HTTPContext(Context, HTTPMixin, ConfigMixin, UserMixin,
+                  LanguageMixin, RenamedMixin, ActionMixin):
+    def __getattribute__(self, name):
+         try:
+             return super(HTTPContext, self).__getattribute__(name)
+         except AttributeError:
+             return getattr(self.request, name)
+
+class RenderContext(Context, RedirectMixin, ConfigMixin, UserMixin,
+                    LanguageMixin, PragmaMixin, ThemeMixin,
+                    AuxilaryMixin, DictsMixin, ActionMixin): pass
+
+class XMLRPCContext(HTTPContext):
+    pass
