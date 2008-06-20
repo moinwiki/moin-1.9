@@ -27,10 +27,11 @@ class DictBase(dict):
             self.loadFromPage(request, pagename)
 
     # Regular expression used to parse text - subclass should override this
-    regex = ''
+    regex = u''
     def initRegex(cls):
         """ Make it a class attribute to avoid it being pickled. """
-        cls.regex = re.compile(cls.regex, re.MULTILINE | re.UNICODE)
+        if isinstance(cls.regex, unicode):  # not compiled yet
+            cls.regex = re.compile(cls.regex, re.MULTILINE | re.UNICODE)
     initRegex = classmethod(initRegex)
 
     def loadFromPage(self, request, name):
@@ -59,7 +60,7 @@ class Dict(DictBase):
        any text ignored
     """
     # Key:: Value - ignore all but key:: value pairs, strip whitespace
-    regex = r'^ (?P<key>.+?):: (?P<val>.*?) *$' # exactly one space after the :: is required
+    regex = ur'^ (?P<key>.+?):: (?P<val>.*?) *$' # exactly one space after the :: is required
 
     def initFromText(self, text):
         for match in self.regex.finditer(text):
@@ -88,7 +89,7 @@ class Group(DictBase):
     """
     # * Member - ignore all but first level list items, strip whitespace,
     # strip free links markup if exists.
-    regex = r'^ \* +(?:\[\[)?(?P<member>.+?)(?:\]\])? *$'
+    regex = ur'^ \* +(?:\[\[)?(?P<member>.+?)(?:\]\])? *$'
 
     def __init__(self, request=None, pagename=None):
         self._list = []
