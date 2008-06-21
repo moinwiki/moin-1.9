@@ -156,7 +156,6 @@ def check_surge_protect(request, kick=False):
 def handle_auth(user_obj, request, attended=False, username=None,
                 password=None, openid_identifier=None, login=None,
                 logout=None, stage=None):
-    logging.warning("handle_auth still needs implementation")
     extra = { 'cookie': request.cookie }
     if login:
         extra['attended'] = attended
