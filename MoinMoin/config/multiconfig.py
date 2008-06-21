@@ -736,18 +736,6 @@ Lists: * bullets; 1., a. numbered items.
     ('log_reverse_dns_lookups', True, None),
     ('log_timing', False, None),
 
-    ('mail_from', None, None),
-    ('mail_login', None, None),
-    ('mail_smarthost', None, None),
-    ('mail_sendmail', None, None),
-
-    ('mail_import_secret', "", None),
-    ('mail_import_subpage_template', u"$from-$date-$subject", None),
-    ('mail_import_pagename_search', ['subject', 'to', ], None),
-    ('mail_import_pagename_envelope', u"%s", None),
-    ('mail_import_pagename_regex', r'\[\[([^\]]*)\]\]', None),
-    ('mail_import_wiki_addrs', [], None),
-
     # some dangerous mimetypes (we don't use "content-disposition: inline" for them when a user
     # downloads such attachments, because the browser might execute e.g. Javascript contained
     # in the HTML and steal your moin session cookie or do other nasty stuff)
@@ -1070,6 +1058,22 @@ options = {
       ('enabled', False, None),
       ('restricted_users_group', None, None),
       ('enable_user', False, None),
+    )),
+
+    'mail': ('Mail settings',
+        'These settings control outgoing and incoming email from and to the wiki.',
+    (
+      ('from', None, None),
+      ('login', None, None),
+      ('smarthost', None, None),
+      ('sendmail', None, None),
+
+      ('import_secret', "", None),
+      ('import_subpage_template', u"$from-$date-$subject", None),
+      ('import_pagename_search', ['subject', 'to', ], None),
+      ('import_pagename_envelope', u"%s", None),
+      ('import_pagename_regex', r'\[\[([^\]]*)\]\]', None),
+      ('import_wiki_addrs', [], None),
     )),
 }
 
