@@ -10,7 +10,7 @@ from werkzeug.utils import responder
 from werkzeug.wrappers import Response
 from werkzeug.exceptions import NotFound
 
-from MoinMoin.web.contexts import HTTPContext, RenderContext
+from MoinMoin.web.contexts import HTTPContext, RenderContext, AllContext
 from MoinMoin.web.request import Request
 from MoinMoin.web.utils import check_spider, check_forbidden, check_setuid
 from MoinMoin.web.utils import check_surge_protect, handle_auth_form
@@ -29,7 +29,7 @@ from MoinMoin import log
 logging = log.getLogger(__name__)
 
 def init(request):
-    request = HTTPContext(request)
+    request = AllContext(request)
     request.clock.start('total')
     request.clock.start('base__init__')
 
@@ -45,7 +45,6 @@ def init(request):
     check_forbidden(request)
     check_surge_protect(request)
 
-    request.become(RenderContext)
     request.reset()
 
     request.clock.stop('base__init__')
@@ -65,7 +64,6 @@ def run(request):
     # parse request data
     try:
         # The last component in path_info is the page name, if any
-        request.become(HTTPContext)
         path = request.path
 
         # we can have all action URLs like this: /action/ActionName/PageName?action=ActionName&...
@@ -173,17 +171,17 @@ def run(request):
         request.timing_log(False, action_name)
 
         #return request.finish()
+    return request
 
 def application(request):
-    request = init(request)
-    result = run(request)
+    run(init(request))
 
     if getattr(request, '_send_file', None) is not None:
         # moin wants to send a file (e.g. AttachFile.do_get)
         def simple_wrapper(fileobj, bufsize):
             return iter(lambda: fileobj.read(bufsize), '')
-        file_wrapper = environ.get('wsgi.file_wrapper', simple_wrapper)
-        response.response = file_wrapper(request._send_file, request._send_bufsize)
+        file_wrapper = request.environ.get('wsgi.file_wrapper', simple_wrapper)
+        request.response = file_wrapper(request._send_file, request._send_bufsize)
     return request
 
 application = Request.application(application)
