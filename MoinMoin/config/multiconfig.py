@@ -241,7 +241,10 @@ class DefaultConfig(object):
     acl_rights_after = u""
     acl_rights_valid = ['read', 'write', 'delete', 'revert', 'admin']
 
-    actions_excluded = ['xmlrpc'] # ['DeletePage', 'AttachFile', 'RenamePage', 'test', ]
+    actions_excluded = ['xmlrpc',  # we do not want wiki admins unknowingly offering xmlrpc service
+                        'MyPages',  # only works when used with a non-default SecurityPolicy (e.g. autoadmin)
+                        'CopyPage',  # has questionable behaviour regarding subpages a user can't read, but can copy
+                       ]
     allow_xslt = False
     antispam_master_url = "http://master.moinmo.in/?action=xmlrpc2"
 
