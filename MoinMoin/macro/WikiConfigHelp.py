@@ -23,7 +23,7 @@ def macro_WikiConfigHelp(macro):
     for groupname, addgroup, optsdict in groups:
         heading, desc, opts = optsdict[groupname]
         ret.extend([
-            f.heading(1, 1),
+            f.heading(1, 1, id=groupname),
             ## XXX: translate description?
             f.text(heading),
             f.heading(0, 1),
