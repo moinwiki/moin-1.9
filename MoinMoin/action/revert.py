@@ -54,7 +54,7 @@ class revert(ActionBase):
         comment = form.get('comment', [u''])[0]
         comment = wikiutil.clean_input(comment)
 
-        if self.request.request_method != 'POST':
+        if self.request.method != 'POST':
             return False, u''
 
         rev = self.request.rev

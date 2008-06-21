@@ -97,7 +97,7 @@ class NewPage:
 
 def execute(pagename, request):
     """ Temporary glue code for current moin action system """
-    if request.request_method != 'POST':
+    if request.method != 'POST':
         return False, u''
 
     return NewPage(request, pagename).render()

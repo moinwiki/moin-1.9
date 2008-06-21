@@ -62,7 +62,7 @@ class Settings(UserPrefBase):
         form = self.request.form
         request = self.request
 
-        if request.request_method != 'POST':
+        if request.method != 'POST':
             return
 
         if not 'name' in request.user.auth_attribs:

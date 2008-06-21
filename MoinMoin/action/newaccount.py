@@ -18,7 +18,7 @@ def _create_user(request):
     _ = request.getText
     form = request.form
 
-    if request.request_method != 'POST':
+    if request.method != 'POST':
         return
 
     if not TextCha(request).check_answer_from_form():
