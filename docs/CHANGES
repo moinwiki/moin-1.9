@@ -31,6 +31,30 @@ Known main issues:
     USE BOTH ON YOUR OWN RISK!
 
 
+Version 1.7.0current:
+
+  Bug Fixes:
+    * PageEditor: fixed msg displaying the notified people - use a breakable
+      list.
+    * Fixed RenamePage comment handling, let RecentChanges generate (and
+      translate) the comment.
+    * Fixed OpenID RP bug when invalid usernames were entered.
+    * Fix MyPages action (gave traceback and used wrong link markup).
+
+  New Features:
+    * ThemeBase: support Universal Edit Button, see there for details:
+      http://universaleditbutton.org/
+    * Added OpenID server settings dialog to allow removing trusted websites.
+    * Add moin account resetpw script.
+
+  Other Changes:
+    * Allow trusted users to go beyond surge action limits, but log their names
+      if it happens.
+    * Added MyPages and CopyPage to actions_excluded because MyPages doesn't
+      work without special SecurityPolicy anyway and CopyPage has questionable
+      behaviour.
+
+
 Version 1.7.0rc3:
 
   Bug Fixes:
