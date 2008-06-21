@@ -331,6 +331,10 @@ class RequestBase(object):
         except StandardError:
             pass
 
+        if surge_detected and validuser and self.user.auth_method in self.cfg.auth_methods_trusted:
+            logging.info("Trusted user %s would have triggered surge protection if not trusted." % self.user.name)
+            return False  # do not subject trusted users to surge protection
+
         return surge_detected
 
     def getDicts(self):

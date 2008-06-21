@@ -70,6 +70,10 @@ Version 1.7.0rc3:
       Xapian (it uses utf-8 since 1.0.0, so we can use it)).
     * Use better ACLs and comments on system/help pages,
       remove MoinPagesEditorGroup (not needed any more).
+    * If a user is authenticated by a trusted authentication (see also
+      cfg.auth_methods_trusted) then he won't trigger surge protection.
+      But moin will log a INFO level log msg with the user's name so you can
+      find the culprit in case he/she is overusing ressources.
     * docs: added UPDATE instructions
 
 

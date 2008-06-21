@@ -870,6 +870,7 @@ var search_hint = "%(search_hint)s";
             self.guiEditorScript(d),
             self.html_stylesheets(d),
             self.rsslink(d),
+            self.universal_edit_button(d),
             ]
         return '\n'.join(html)
 
@@ -877,6 +878,21 @@ var search_hint = "%(search_hint)s";
         """ Format external script html """
         src = '%s/common/js/%s.js' % (self.request.cfg.url_prefix_static, name)
         return '<script type="text/javascript" src="%s"></script>' % src
+
+    def universal_edit_button(self, d, **keywords):
+        """ Generate HTML for an edit link in the header."""
+        page = d['page']
+        if 'edit' in self.request.cfg.actions_excluded:
+            return ""
+        if not (page.isWritable() and
+                self.request.user.may.write(page.page_name)):
+            return ""
+        _ = self.request.getText
+        querystr = {'action': 'edit'}
+        text = _(u'Edit')
+        url = page.url(self.request, querystr=querystr, escape=0)
+        return (u'<link rel="alternate" type="application/wiki" '
+                u'title="%s" href="%s" />' % (text, url))
 
     def credits(self, d, **keywords):
         """ Create credits html from credits list """

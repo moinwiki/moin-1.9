@@ -64,13 +64,13 @@ the group pages.
     request.setContentLanguage(request.lang)
     request.theme.send_title(_('MyPages management'), page=homepage)
 
-    # Start content - IMPORTANT - without content div, there is no direction support!
-    request.write(request.formatter.startContent("content"))
-
     parser = WikiParser(pagecontent, request)
     p = Page(request, "$$$")
     request.formatter.setPage(p)
     parser.format(request.formatter)
+
+    # Start content - IMPORTANT - without content div, there is no direction support!
+    request.write(request.formatter.startContent("content"))
 
     request.write(request.formatter.endContent())
     request.theme.send_footer(homepage.page_name)
