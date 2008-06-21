@@ -8,6 +8,9 @@
 """
 import cgi
 
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin.request import RequestBase, RemoteClosedConnection
 
 class Request(RequestBase):
@@ -30,6 +33,10 @@ class Request(RequestBase):
             self.http_accept_language = (sa.headers.getheader('accept-language')
                                          or self.http_accept_language)
             self.http_user_agent = sa.headers.getheader('user-agent', '')
+            try:
+                self.content_length = int(sa.headers.getheader('content-length'))
+            except (TypeError, ValueError):
+                self.content_length = None
             co = [c for c in sa.headers.getheaders('cookie') if c]
             self.saved_cookie = ', '.join(co) or ''
             self.if_modified_since = sa.headers.getheader('if-modified-since')
@@ -61,23 +68,13 @@ class Request(RequestBase):
                                 keep_blank_values=1)
         return RequestBase._setup_args_from_cgi_form(self, form)
 
-    def read(self, n=None):
-        """ Read from input stream
-
-        Since self.rfile.read() will block, content-length will be used instead.
-
-        TODO: test with n > content length, or when calling several times
-        with smaller n but total over content length.
-        """
+    def read(self, n):
+        """ Read from input stream """
         if n is None:
-            try:
-                n = int(self.headers.get('content-length'))
-            except (TypeError, ValueError):
-                import warnings
-                warnings.warn("calling request.read() when content-length is "
-                              "not available will block")
-                return self.rfile.read()
-        return self.rfile.read(n)
+            logging.warning("calling request.read(None) might block")
+            return self.rfile.read()
+        else:
+            return self.rfile.read(n)
 
     def write(self, *data):
         """ Write to output stream. """

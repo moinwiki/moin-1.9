@@ -326,7 +326,7 @@ class User:
         self.tz_offset = int(float(self._cfg.tz_offset) * 3600)
         self.language = ""
         self.real_language = "" # In case user uses "Browser setting". For language-statistics
-        self.loaded = False
+        self._loaded = False
         self.date_fmt = ""
         self.datetime_fmt = ""
         self.quicklinks = self._cfg.quicklinks_default
@@ -495,7 +495,7 @@ class User:
             self.valid = 1
 
         # Mark this user as loaded from disk, so UserCreatedEvent is not sent
-        self.loaded = True
+        self._loaded = True
 
         # If user data has been changed, save fixed user data.
         if changed:
@@ -623,11 +623,17 @@ class User:
             del self._request.cfg.cache.name2id
         except:
             pass
+        key = 'openid2id'
+        caching.CacheEntry(self._request, arena, key, scope='wiki').remove()
+        try:
+            del self._request.cfg.cache.openid2id
+        except:
+            pass
 
         if not self.disabled:
             self.valid = 1
 
-        if not self.loaded:
+        if not self._loaded:
             event = events.UserCreatedEvent(self._request, self)
             events.send_event(event)
 

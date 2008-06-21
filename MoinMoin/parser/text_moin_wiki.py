@@ -280,7 +280,7 @@ class Parser:
     \^  # off
 )|(?P<sub>
     ,,  # subscript on
-    (?P<sub_text>[^,]{1,40})  # capture 1..40 chars of text
+    (?P<sub_text>.*?)  # capture the text
     ,,  # off
 )|(?P<tt>
     \{\{\{  # teletype on

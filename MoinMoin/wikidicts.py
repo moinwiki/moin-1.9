@@ -26,17 +26,12 @@ class DictBase(dict):
         if request is not None and pagename is not None:
             self.loadFromPage(request, pagename)
 
-    # Regular expression used to parse text - subclass should override this
-    regex = ''
-    def initRegex(cls):
-        """ Make it a class attribute to avoid it being pickled. """
-        cls.regex = re.compile(cls.regex, re.MULTILINE | re.UNICODE)
-    initRegex = classmethod(initRegex)
+    # Regular expression used to parse text - subclass must override this
+    regex = None  # re.compile(u'...', re.MULTILINE | re.UNICODE)
 
     def loadFromPage(self, request, name):
         """ load the dict from wiki page <name>'s content """
         self.name = name
-        self.initRegex()
         text = Page.Page(request, name).get_raw_body()
         self.initFromText(text)
 
@@ -58,8 +53,8 @@ class Dict(DictBase):
         keyn:: ....
        any text ignored
     """
-    # Key:: Value - ignore all but key:: value pairs, strip whitespace
-    regex = r'^ (?P<key>.+?):: (?P<val>.*?) *$' # exactly one space after the :: is required
+    # Key:: Value - ignore all but key:: value pairs, strip whitespace, exactly one space after the :: is required
+    regex = re.compile(ur'^ (?P<key>.+?):: (?P<val>.*?) *$', re.MULTILINE | re.UNICODE)
 
     def initFromText(self, text):
         for match in self.regex.finditer(text):
@@ -86,9 +81,8 @@ class Group(DictBase):
     If there are any free links using [[free link]] notation, the markup
     is stripped from the member.
     """
-    # * Member - ignore all but first level list items, strip whitespace,
-    # strip free links markup if exists.
-    regex = r'^ \* +(?:\[\[)?(?P<member>.+?)(?:\]\])? *$'
+    # * Member - ignore all but first level list items, strip whitespace, strip free links markup
+    regex = re.compile(ur'^ \* +(?:\[\[)?(?P<member>.+?)(?:\]\])? *$', re.MULTILINE | re.UNICODE)
 
     def __init__(self, request=None, pagename=None):
         self._list = []

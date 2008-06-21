@@ -207,8 +207,14 @@ def execute(pagename, request):
         request.write("[%s] " % page.link_to(request, text=text, querystr=querystr, rel='nofollow'))
     request.write(f.paragraph(0))
 
-    show_hitcounts = int(request.form.get('hitcounts', [0])[0]) != 0
-    show_general = int(request.form.get('general', [0])[0]) != 0
+    try:
+        show_hitcounts = int(request.form.get('hitcounts', [0])[0]) != 0
+    except ValueError:
+        show_hitcounts = False
+    try:
+        show_general = int(request.form.get('general', [0])[0]) != 0
+    except ValueError:
+        show_general = False
 
     if show_hitcounts:
         from MoinMoin.stats import hitcounts

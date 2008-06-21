@@ -1,8 +1,12 @@
 MoinMoin Version History
 ========================
 
-Please completely read CHANGES text until you reach the version you were
-using until now. Otherwise you might miss some important upgrading and
+Documentations with generic instructions about installing or updating MoinMoin
+are available as docs/INSTALL.html and docs/UPDATE.html. A special documenation
+about the migration procedure for your data_dir is in docs/README.migration.
+
+Additionally, please completely read CHANGES text until you reach the version
+you were using until now. Otherwise you might miss some important upgrading and
 configuration hints.
 
 Starting with 1.5.3, update installation hints are marked with HINT.
@@ -31,6 +35,46 @@ Version 1.8.0current:
 
   Bug Fixes:
     * ...
+
+
+Version 1.7.0rc3:
+
+  Bug Fixes:
+    * Fix xmlrpc request.read() call to use content-length, if available,
+      fixes hangs with wsgiref server.
+    * Fix traceback in filesys.py on Mac OS X when import Carbon fails.
+    * Xapian search / indexing:
+      * fix searching for negative terms
+      * improve result list ordering
+      * index filters: redirect stderr to logging system
+      * search results: improve ordering
+    * FootNote macro: revert to old behaviour (using the arg parser made
+      problems with footnotes including commas)
+    * Wiki parser: fix subscript parsing (was broken for cases like 'a,,1,2,,').
+    * Fixed MoinMoinBugs/WikiSyncMissingInterWikiNameOnRemoteSide
+    * Fixed 1.7 mig scripts.
+    * Clear openid cache when saving a user.
+    * Add "Use FirstnameLastname" message to newaccount form.
+    * Make recoverpass/newaccount refuse access unless MoinAuth is enabled.
+    * info action: fix exception happening for invalid query args
+    * AttachFile action:
+      * catch runtime errors raised by zipfile stdlib modules when trying to
+        process a defective zip
+      * when unzipping member files, decode their filenames from utf-8 and
+        replace invalid chars
+
+  Other changes:
+    * HINT: If you want to use xapian based indexed search, you need to have
+            Xapian >= 1.0.0.
+    * Removed dependency on PyStemmer (we just use the stemmer built into
+      Xapian (it uses utf-8 since 1.0.0, so we can use it)).
+    * Use better ACLs and comments on system/help pages,
+      remove MoinPagesEditorGroup (not needed any more).
+    * If a user is authenticated by a trusted authentication (see also
+      cfg.auth_methods_trusted) then he won't trigger surge protection.
+      But moin will log a INFO level log msg with the user's name so you can
+      find the culprit in case he/she is overusing ressources.
+    * docs: added UPDATE instructions
 
 
 Version 1.7.0rc2:

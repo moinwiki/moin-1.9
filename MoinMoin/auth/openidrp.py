@@ -93,6 +93,11 @@ password and be able to associate the account with your OpenID.""")))
                               value=_('Choose this name')))
         table.append(html.TR().append(td1).append(td2))
 
+    def _get_account_name_inval_user(self, request, form):
+        _ = request.getText
+        msg = _('This is not a valid username, choose a different one.')
+        return self._get_account_name(request, form, msg=msg)
+
     def _associate_account(self, request, form, accountname, msg=None):
         _ = request.getText
 
@@ -170,8 +175,7 @@ username and leave the password field blank.""")))
         if not newname:
             return MultistageFormLogin(self._get_account_name)
         if not user.isValidName(request, newname):
-            return MultistageFormLogin(self._get_account_name,
-                    _('This is not a valid username, choose a different one.'))
+            return MultistageFormLogin(self._get_account_name_inval_user)
         uid = None
         if newname:
             uid = user.getUserId(request, newname)
