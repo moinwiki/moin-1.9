@@ -39,7 +39,7 @@ Version 1.8.0current:
   Removed Features:
     * url_prefix setting
 
-Version 1.7.0current:
+Version 1.7.0:
   Note: This is a reduced CHANGES, ommitting details from rc/beta test and
         also less interesting minor changes and fixes. It shows changes
         relative to 1.6.3 release.
