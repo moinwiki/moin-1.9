@@ -628,6 +628,16 @@ class DefaultExpression(object):
         self.value = eval(exprstr)
 
 options_no_group_name = {
+  'session': ('Session settings', None, (
+    ('session_handler', DefaultExpression('session.DefaultSessionHandler()'),
+     "See HelpOnSessions."),
+    ('session_id_handler', DefaultExpression('session.MoinCookieSessionIDHandler()'),
+     "Only used by the DefaultSessionHandler, see HelpOnSessions."),
+    ('cookie_domain', None, None),
+    ('cookie_path', None, None),
+    ('cookie_lifetime', 12, None),
+  )),
+
   'various': ('Various', None, (
     ('DesktopEdition',
      False,
@@ -655,10 +665,6 @@ options_no_group_name = {
     ('chart_options', None, None),
 
     ('config_check_enabled', False, None),
-
-    ('cookie_domain', None, None),
-    ('cookie_path', None, None),
-    ('cookie_lifetime', 12, None),
 
     ('data_dir', './data/', None),
     ('data_underlay_dir', './underlay/', None),
@@ -837,9 +843,6 @@ Lists: * bullets; 1., a. numbered items.
     ('rss_cache', 60, None),
 
     ('search_results_per_page', 25, None),
-
-    ('session_handler', session.DefaultSessionHandler(), None),
-    ('session_id_handler', session.MoinCookieSessionIDHandler(), None),
 
     ('shared_intermap', None, None),
 
