@@ -1048,7 +1048,7 @@ options = {
        None),
     )),
 
-    'backup': (None, (
+    'backup': ('Backup', (
       ('compression', 'gz', None),
       ('users', [], None),
       ('include', [], None),
