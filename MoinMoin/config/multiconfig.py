@@ -528,7 +528,7 @@ Lists: * bullets; 1., a. numbered items.
     refresh = None # (minimum_delay, type), e.g.: (2, 'internal')
     rss_cache = 60 # suggested caching time for RecentChanges RSS, in seconds
 
-    search_results_per_page = 10
+    search_results_per_page = 25
 
     session_handler = session.DefaultSessionHandler()
     session_id_handler = session.MoinCookieSessionIDHandler()

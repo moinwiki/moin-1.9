@@ -201,6 +201,7 @@ Version 1.7.0current:
       Xapian >= 1.0.0 (and you can remove PyStemmer in case you have installed
       it just for moin - we now use the stemmer built into Xapian as it
       supports utf-8 since 1.0.0).
+    * Changed default value of cfg.search_results_per_page to 25.
     * Surge Protection: If a user is authenticated by a trusted authentication
       (see also cfg.auth_methods_trusted) then he/she won't trigger surge
       protection, but moin will just log a INFO level log msg with the user's
