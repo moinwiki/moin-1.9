@@ -636,6 +636,8 @@ options_no_group_name = {
     ('cookie_domain', None, None),
     ('cookie_path', None, None),
     ('cookie_lifetime', 12, None),
+    ('anonymous_session_lifetime', None,
+     'Session lifetime of users who are not logged in.'),
   )),
 
   'various': ('Various', None, (
