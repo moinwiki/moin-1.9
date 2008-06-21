@@ -36,6 +36,8 @@ Version 1.8.0current:
   Bug Fixes:
     * ...
 
+  Removed Features:
+    * url_prefix setting
 
 Version 1.7.0current:
   Note: This is a reduced CHANGES, ommitting details from rc/beta test and
