@@ -32,23 +32,23 @@ def execute(pagename, request):
     if request.if_modified_since == timestamp:
         if request.if_none_match:
             if request.if_none_match == etag:
-                request.response.status_code = 304
+                request.status_code = 304
         else:
-            request.response.status_code = 304
+            request.status_code = 304
     elif request.if_none_match == etag:
         if request.if_modified_since:
             if request.if_modified_since == timestamp:
-                request.response.status_code = 304
+                request.status_code = 304
         else:
-            request.response.status_code = 304
+            request.status_code = 304
     else:
         # generate an Expires header, using 1d cache lifetime of sisterpages list
         expires = time.time() + 24*3600
 
-        request.response.mime_type = 'text/plain'
-        request.response.expires = expires
-        request.response.last_modified = timestamp
-        request.response.headers.add("Etag", etag)
+        request.mime_type = 'text/plain'
+        request.expires = expires
+        request.last_modified = timestamp
+        request.headers.add("Etag", etag)
 
         # send the generated XML document
         baseurl = request.getBaseURL()

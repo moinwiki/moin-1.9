@@ -809,7 +809,7 @@ def _do_get(pagename, request):
     timestamp = os.path.getmtime(fpath)
     if_modified = time.mktime(request.if_modified_since.timetuple())
     if if_modified >= timestamp:
-        request.response.status_code = 304
+        request.status_code = 304
     else:
         mt = wikiutil.MimeType(filename=filename)
         content_type = mt.content_type()
@@ -825,11 +825,11 @@ def _do_get(pagename, request):
         dangerous = mime_type in request.cfg.mimetypes_xss_protect
         content_dispo = dangerous and 'attachment' or 'inline'
 
-        request.response.content_type = content_type
-        request.response.last_modified = timestamp
-        request.response.content_length = os.path.getsize(fpath)
+        request.content_type = content_type
+        request.last_modified = timestamp
+        request.content_length = os.path.getsize(fpath)
         content_dispo_string = '%s; filename="%s"' % (content_dispo, filename_enc)
-        request.response.headers.add('Content-Disposition', content_dispo_string)
+        request.headers.add('Content-Disposition', content_dispo_string)
 
         # send data
         request.send_file(open(fpath, 'rb'))

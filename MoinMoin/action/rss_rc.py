@@ -24,7 +24,7 @@ def execute(pagename, request):
     """ Send recent changes as an RSS document
     """
     if not wikixml.ok:
-        request.response.mimetype = 'text/plain'
+        request.mimetype = 'text/plain'
         request.write("rss_rc action is not supported because of missing pyxml module.")
         return
 
@@ -85,24 +85,24 @@ def execute(pagename, request):
     if request.if_modified_since == timestamp:
         if request.if_none_match:
             if request.if_none_match == etag:
-                request.response.status_code = 304
+                request.status_code = 304
         else:
-            request.response.status_code = 304
+            request.status_code = 304
     elif request.if_none_match == etag:
         if request.if_modified_since:
             if request.if_modified_since == timestamp:
-                request.response.status_code = 304
+                request.status_code = 304
         else:
-            request.response.status_code = 304
+            request.status_code = 304
     else:
         # generate an Expires header, using whatever setting the admin
         # defined for suggested cache lifetime of the RecentChanges RSS doc
         expires = time.time() + cfg.rss_cache
 
-        request.response.mime_type = 'text/xml'
-        request.response.expires = expires
-        request.response.last_modified = lastmod
-        request.response.headers.add('Etag', etag)
+        request.mime_type = 'text/xml'
+        request.expires = expires
+        request.last_modified = lastmod
+        request.headers.add('Etag', etag)
 
         # send the generated XML document
         baseurl = request.getBaseURL()
