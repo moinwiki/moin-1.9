@@ -24,23 +24,32 @@ def macro_WikiConfigHelp(macro):
         desc, opts = optsdict[groupname]
         ret.extend([
             f.heading(1, 1),
+            ## XXX: translate description?
             f.text(desc),
             f.heading(0, 1),
-            f.definition_list(1),
+            f.table(1),
+            f.table_row(1),
+            f.table_cell(1), f.strong(1), f.text(_('Variable name')), f.strong(0), f.table_cell(0),
+            f.table_cell(1), f.strong(1), f.text(_('Default')), f.strong(0), f.table_cell(0),
+            f.table_cell(1), f.strong(1), f.text(_('Description')), f.strong(0), f.table_cell(0),
+            f.table_row(0),
         ])
         opts = list(opts)
         opts.sort()
         for name, default, description in opts:
             if addgroup:
                 name = groupname + '_' + name
+            default_txt = '%r' % (default, )
+            if len(default_txt) > 50:
+                default_txt = '...'
             ret.extend([
-                f.definition_term(1),
-                f.text(name),
-                f.definition_term(0),
-                f.definition_desc(1),
-                f.text(description or u'No help available'),
-                f.definition_desc(0),
+                f.table_row(1),
+                f.table_cell(1), f.text(name), f.table_cell(0),
+                f.table_cell(1), f.code(1, css="backtick"), f.text(default_txt), f.code(0), f.table_cell(0),
+                ## XXX: translate description?
+                f.table_cell(1), f.text(description or 'No description provided'), f.table_cell(0),
+                f.table_row(0),
             ])
-        ret.append(f.definition_list(0))
+        ret.append(f.table(0))
 
     return ''.join(ret)
