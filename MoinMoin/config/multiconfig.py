@@ -222,501 +222,11 @@ class CacheClass:
 
 
 class DefaultConfig(object):
-    """ default config values
-
-        When adding new config attributes, PLEASE use a name with the TOPIC as prefix,
-        so it will sort naturally. E.g. use "actions_excluded", not "excluded_actions".
-
-        Also, please keep it (roughly) sorted (except if you have good reasons to group otherwise).
+    """ Configuration base class with default config values
+        (added below)
     """
-
-    DesktopEdition = False # True gives all local users special powers - ONLY use for MMDE style usage!
-
-    SecurityPolicy = None
-
-    acl_hierarchic = False # True to use hierarchical ACLs
-    # All acl_rights_* lines must use unicode!
-    acl_rights_default = u"Trusted:read,write,delete,revert Known:read,write,delete,revert All:read,write"
-    acl_rights_before = u""
-    acl_rights_after = u""
-    acl_rights_valid = ['read', 'write', 'delete', 'revert', 'admin']
-
-    actions_excluded = ['xmlrpc',  # we do not want wiki admins unknowingly offering xmlrpc service
-                        'MyPages',  # only works when used with a non-default SecurityPolicy (e.g. autoadmin)
-                        'CopyPage',  # has questionable behaviour regarding subpages a user can't read, but can copy
-                       ]
-    allow_xslt = False
-    antispam_master_url = "http://master.moinmo.in/?action=xmlrpc2"
-
-    auth = [authmodule.MoinAuth()]
-    # default to http and xmlrpc_applytoken to get old semantics
-    # xmlrpc_applytoken shall be removed once that code is changed
-    # to have proper session handling and use request.handle_auth()
-    auth_methods_trusted = ['http', 'xmlrpc_applytoken']
-
-    backup_compression = 'gz'
-    backup_users = []
-    backup_include = []
-    backup_exclude = [
-        r"(.+\.py(c|o)$)",
-        r"%(cache_dir)s",
-        r"%(/)spages%(/)s.+%(/)scache%(/)s[^%(/)s]+$" % {'/': os.sep},
-        r"%(/)s(edit-lock|event-log|\.DS_Store)$" % {'/': os.sep},
-        ]
-    backup_storage_dir = '/tmp'
-    backup_restore_target_dir = '/tmp'
-
-    bang_meta = True
-    caching_formats = ['text_html']
-    changed_time_fmt = '%H:%M'
-
-    # chars_{upper,lower,digits,spaces} see MoinMoin/util/chartypes.py
-
-    # if you have gdchart, add something like
-    # chart_options = {'width = 720, 'height': 540}
-    chart_options = None
-
-    config_check_enabled = False
-
-    cookie_domain = None # use '.domain.tld" for a farm with hosts in that domain
-    cookie_path = None   # use '/wikifarm" for a farm with pathes below that path
-    cookie_lifetime = 12 # 12 hours from now
-
-    data_dir = './data/'
-    data_underlay_dir = './underlay/'
-
-    date_fmt = '%Y-%m-%d'
-    datetime_fmt = '%Y-%m-%d %H:%M:%S'
-
-    default_markup = 'wiki'
-    docbook_html_dir = r"/usr/share/xml/docbook/stylesheet/nwalsh/html/" # correct for debian sarge
-
-    edit_bar = ['Edit', 'Comments', 'Discussion', 'Info', 'Subscribe', 'Quicklink', 'Attachments', 'ActionsMenu']
-    editor_default = 'text' # which editor is called when nothing is specified
-    editor_force = False # force using the default editor
-    editor_ui = 'freechoice' # which editor links are shown on user interface
-    editor_quickhelp = {
-        # editor markup hints quickhelp
-        # MUST be in wiki markup, even if the help is not for the wiki parser!
-        'wiki': _(u"""\
- Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')>>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed ''<<Verbatim(''')>>'''''bold'''<<Verbatim(''')>> and italics''<<Verbatim('')>>; <<Verbatim(----)>> horizontal rule.
- Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; ===== Title 5 =====.
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])>>.
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
-
-(!) For more help, see HelpOnEditing or SyntaxReference.
-"""),
-        'rst': _("""\
-{{{
-Emphasis: *italic* **bold** ``monospace``
-
-Headings: Heading 1  Heading 2  Heading 3
-          =========  ---------  ~~~~~~~~~
-
-Horizontal rule: ----
-
-Links: TrailingUnderscore_ `multi word with backticks`_ external_
-
-.. _external: http://external-site.example.org/foo/
-
-Lists: * bullets; 1., a. numbered items.
-}}}
-(!) For more help, see the
-[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|reStructuredText Quick Reference]].
-"""),
-        'creole': _(u"""\
- Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)>>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)>>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;
- Horizontal Rule:: <<Verbatim(----)>>
- Force Linebreak:: <<Verbatim(\\\\)>>
- Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; ===== Title 5 =====.
- Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub items.
- Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.
- Tables:: |= header text | cell text | more cell text |;
-
-(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.
-"""),
-    }
-    edit_locking = 'warn 10' # None, 'warn <timeout mins>', 'lock <timeout mins>'
-    edit_ticketing = True
-    edit_rows = 20
-
-    hacks = {} # { 'feature1': value1, ... }
-               # Configuration for features still in development.
-               # For boolean stuff just use config like this:
-               #   hacks = { 'feature': True, ...}
-               # and in the code use:
-               #   if cfg.hacks.get('feature', False): <doit>
-               # A non-existing hack key should ever mean False, None, "", [] or {}!
-
-    history_count = (100, 200) # (default_revisions_shown, max_revisions_shown)
-
-    hosts_deny = []
-
-    html_head = ''
-    html_head_queries = '''<meta name="robots" content="noindex,nofollow">\n'''
-    html_head_posts   = '''<meta name="robots" content="noindex,nofollow">\n'''
-    html_head_index   = '''<meta name="robots" content="index,follow">\n'''
-    html_head_normal  = '''<meta name="robots" content="index,nofollow">\n'''
-    html_pagetitle = None
-
-    interwikiname = None # our own interwikiname. choose wisely and never change!
-    interwiki_preferred = [] # list of wiki names to show at top of interwiki list
-
-    language_default = 'en'
-    language_ignore_browser = False # ignore browser settings, use language_default
-                                    # or user prefs
-
-    logo_string = None # can be either just some text or a piece of html shown as "logo"
-
-    log_reverse_dns_lookups = True  # if we do reverse dns lookups for logging hostnames
-                                    # instead of just IPs
-    log_timing = False # log infos about timing of actions, good to analyze load conditions
-
-    mail_from = None # u'Juergen Wiki <noreply@jhwiki.org>'
-    mail_login = None # "user pwd" if you need to use SMTP AUTH when using your mail server
-    mail_smarthost = None # your SMTP mail server
-    mail_sendmail = None # "/usr/sbin/sendmail -t -i" to not use SMTP, but sendmail
-
-    mail_import_secret = "" # a shared secret also known to the mail importer xmlrpc script
-    mail_import_subpage_template = u"$from-$date-$subject" # used for mail import
-    mail_import_pagename_search = ['subject', 'to', ] # where to look for target pagename (and in which order)
-    mail_import_pagename_envelope = u"%s" # use u"+ %s/" to add "+ " and "/" automatically
-    mail_import_pagename_regex = r'\[\[([^\]]*)\]\]' # how to find/extract the pagename from the subject
-    mail_import_wiki_addrs = [] # the e-mail addresses for e-mails that should go into the wiki
-
-    # some dangerous mimetypes (we don't use "content-disposition: inline" for them when a user
-    # downloads such attachments, because the browser might execute e.g. Javascript contained
-    # in the HTML and steal your moin session cookie or do other nasty stuff)
-    mimetypes_xss_protect = [
-        'text/html',
-        'application/x-shockwave-flash',
-        'application/xhtml+xml',
-    ]
-
-    mimetypes_embed = [
-        'application/x-dvi',
-        'application/postscript',
-        'application/pdf',
-        'application/ogg',
-        'application/vnd.visio',
-        'image/x-ms-bmp',
-        'image/svg+xml',
-        'image/tiff',
-        'image/x-photoshop',
-        'audio/mpeg',
-        'audio/midi',
-        'audio/x-wav',
-        'video/fli',
-        'video/mpeg',
-        'video/quicktime',
-        'video/x-msvideo',
-        'chemical/x-pdb',
-        'x-world/x-vrml',
-    ]
-
-
-    navi_bar = [u'RecentChanges', u'FindPage', u'HelpContents', ]
-    nonexist_qm = False
-
-    notification_bot_uri = None # uri of the jabber bot
-
-    # OpenID server support
-    openid_server_enabled = False
-    openid_server_restricted_users_group = None
-    openid_server_enable_user = False
-
-    page_credits = [
-        # Feel free to add other credits, but PLEASE do NOT change or remove
-        # the following links - you help us by keeping them "as is":
-        '<a href="http://moinmo.in/" title="This site uses the MoinMoin Wiki software.">MoinMoin Powered</a>',
-        '<a href="http://moinmo.in/Python" title="MoinMoin is written in Python.">Python Powered</a>',
-
-        # Optional credits:
-        # if you think it can be maybe misunderstood as applying to content or topic of your wiki,
-        # feel free to remove this one:
-        '<a href="http://moinmo.in/GPL" title="MoinMoin is GPL licensed.">GPL licensed</a>',
-
-        # if you don't need/want to check the html output, feel free to remove this one:
-        '<a href="http://validator.w3.org/check?uri=referer" title="Click here to validate this page.">Valid HTML 4.01</a>',
-        ]
-
-    # you can put some pieces of html at specific places into the theme output:
-    page_footer1 = ''
-    page_footer2 = ''
-    page_header1 = ''
-    page_header2 = ''
-
-    page_front_page = u'HelpOnLanguages' # this will make people choose a sane config
-    page_local_spelling_words = u'LocalSpellingWords'
-
-    # the following regexes should match the complete name when used in free text
-    # the group 'all' shall match all, while the group 'key' shall match the key only
-    # e.g. CategoryFoo -> group 'all' ==  CategoryFoo, group 'key' == Foo
-    # moin's code will add ^ / $ at beginning / end when needed
-    page_category_regex = ur'(?P<all>Category(?P<key>\S+))'
-    page_dict_regex = ur'(?P<all>(?P<key>\S+)Dict)'
-    page_group_regex = ur'(?P<all>(?P<key>\S+)Group)'
-    page_template_regex = ur'(?P<all>(?P<key>\S+)Template)'
-
-    page_license_enabled = False
-    page_license_page = u'WikiLicense'
-
-    # These icons will show in this order in the iconbar, unless they
-    # are not relevant, e.g email icon when the wiki is not configured
-    # for email.
-    page_iconbar = ["up", "edit", "view", "diff", "info", "subscribe", "raw", "print", ]
-
-    # Standard buttons in the iconbar
-    page_icons_table = {
-        # key           pagekey, querystr dict, title, icon-key
-        'diff':        ('page', {'action': 'diff'}, _("Diffs"), "diff"),
-        'info':        ('page', {'action': 'info'}, _("Info"), "info"),
-        'edit':        ('page', {'action': 'edit'}, _("Edit"), "edit"),
-        'unsubscribe': ('page', {'action': 'unsubscribe'}, _("UnSubscribe"), "unsubscribe"),
-        'subscribe':   ('page', {'action': 'subscribe'}, _("Subscribe"), "subscribe"),
-        'raw':         ('page', {'action': 'raw'}, _("Raw"), "raw"),
-        'xml':         ('page', {'action': 'show', 'mimetype': 'text/xml'}, _("XML"), "xml"),
-        'print':       ('page', {'action': 'print'}, _("Print"), "print"),
-        'view':        ('page', {}, _("View"), "view"),
-        'up':          ('page_parent_page', {}, _("Up"), "up"),
-        }
-
-
-    def password_checker(username, password):
-        """ Check if a password is secure enough.
-            We use a built-in check to get rid of the worst passwords.
-
-            We do NOT use cracklib / python-crack here any more because it is
-            not thread-safe (we experienced segmentation faults when using it).
-
-            If you don't want to check passwords, use password_checker = None.
-
-            @return: None if there is no problem with the password,
-                     some string with an error msg, if the password is problematic.
-        """
-
-        try:
-            # in any case, do a very simple built-in check to avoid the worst passwords
-            if len(password) < 6:
-                raise ValueError("Password too short.")
-            if len(set(password)) < 4:
-                raise ValueError("Password has not enough different characters.")
-
-            username_lower = username.lower()
-            password_lower = password.lower()
-            if username in password or password in username or \
-               username_lower in password_lower or password_lower in username_lower:
-                raise ValueError("Password too easy (containment).")
-
-            keyboards = (ur"`1234567890-=qwertyuiop[]\asdfghjkl;'zxcvbnm,./", # US kbd
-                         ur"^1234567890ß´qwertzuiopü+asdfghjklöä#yxcvbnm,.-", # german kbd
-                        ) # add more keyboards!
-            for kbd in keyboards:
-                rev_kbd = kbd[::-1]
-                if password in kbd or password in rev_kbd or \
-                   password_lower in kbd or password_lower in rev_kbd:
-                    raise ValueError("Password too easy (kbd sequence)")
-            return None
-        except ValueError, err:
-            return str(err)
-
-    password_checker = staticmethod(password_checker)
-
-    quicklinks_default = [] # preload user quicklinks with this page list
-
-    refresh = None # (minimum_delay, type), e.g.: (2, 'internal')
-    rss_cache = 60 # suggested caching time for RecentChanges RSS, in seconds
-
-    search_results_per_page = 25
-
-    session_handler = session.DefaultSessionHandler()
-    session_id_handler = session.MoinCookieSessionIDHandler()
-
-    shared_intermap = None # can be string or list of strings (filenames)
-
-    show_hosts = True # show hostnames on RecentChanges / info/history action
-    show_interwiki = False # show our interwiki name (usually in front of the page name)
-    show_names = True # show editor names on RecentChanges / info/history action
-    show_section_numbers = 0 # enumerate sections (headlines) by default?
-    show_timings = False # show some timing stats (usually in the footer)
-    show_version = False # show moin version info / (C) (depends on theme)
-
-    sistersites = [
-        #('Self', 'http://localhost:8080/?action=sisterpages'),
-        #('EmacsWiki', 'http://www.emacswiki.org/cgi-bin/test?action=sisterpages'),
-        #('JspWiki', 'http://www.jspwiki.org/SisterSites.jsp'),
-    ] # list of (sistersitename, sisterpagelistfetchurl)
-
-    siteid = 'default'
-    sitename = u'Untitled Wiki' # Wiki identity
-
-    stylesheets = [] # list of tuples (media, csshref) to insert after theme css, before user css
-
-    _subscribable_events = None # A list of event types that user can subscribe to
-    subscribed_pages_default = [] # preload user subscribed pages with this page list
-    email_subscribed_events_default = [
-        PageChangedEvent.__name__,
-        PageRenamedEvent.__name__,
-        PageDeletedEvent.__name__,
-        PageCopiedEvent.__name__,
-        PageRevertedEvent.__name__,
-        FileAttachedEvent.__name__,
-    ]
-    jabber_subscribed_events_default = []
-
-    superuser = [] # list of unicode user names that have super powers :)
-
-    supplementation_page = False # use supplementation pages (show a link in the theme)?
-    supplementation_page_name = u'Discussion' # name of suppl. subpage
-    supplementation_page_template = u'DiscussionTemplate' # name of template used to create suppl. pages
-
-    surge_action_limits = {# allow max. <count> <action> requests per <dt> secs
-        # action: (count, dt)
-        'all': (30, 30),
-        'show': (30, 60),
-        'recall': (10, 120),
-        'raw': (20, 40),  # some people use this for css
-        'AttachFile': (90, 60),
-        'diff': (30, 60),
-        'fullsearch': (10, 120),
-        'edit': (30, 300), # can be lowered after making preview different from edit
-        'rss_rc': (1, 60),
-        'default': (30, 60),
-    }
-    surge_lockout_time = 3600 # secs you get locked out when you ignore warnings
-
-    textchas = None # a data structure with site-specific questions/answers, see HelpOnTextChas
-    textchas_disabled_group = None # e.g. u'NoTextChasGroup' if you are a member of this group, you don't get textchas
-
-    theme_default = 'modern'
-    theme_force = False
-
-    traceback_show = True # if True, tracebacks are displayed in the web browser
-    traceback_log_dir = None # if set to a directory path, tracebacks are written to files there
-
-    trail_size = 5 # number of recently visited pagenames shown in the trail display
-    tz_offset = 0.0 # default time zone offset in hours from UTC
-
-    # a regex of HTTP_USER_AGENTS that should be excluded from logging
-    # and receive a FORBIDDEN for anything except viewing a page
-    # list must not contain 'java' because of twikidraw wanting to save drawing uses this useragent
-    ua_spiders = ('archiver|cfetch|charlotte|crawler|curl|gigabot|googlebot|heritrix|holmes|htdig|httrack|httpunit|'
-                  'intelix|jeeves|larbin|leech|libwww-perl|linkbot|linkmap|linkwalk|litefinder|mercator|'
-                  'microsoft.url.control|mirror| mj12bot|msnbot|msrbot|neomo|nutbot|omniexplorer|puf|robot|scooter|seekbot|'
-                  'sherlock|slurp|sitecheck|snoopy|spider|teleport|twiceler|voilabot|voyager|webreaper|wget|yeti')
-
-    unzip_single_file_size = 2.0 * 1000 ** 2
-    unzip_attachments_space = 200.0 * 1000 ** 2
-    unzip_attachments_count = 101 # 1 zip file + 100 files contained in it
-
-    url_mappings = {}
-
-    # url_prefix is DEPRECATED and not used any more by the code.
-    # it confused many people by its name and default value of '/wiki' to the
-    # wrong conclusion that it is the url of the wiki (the dynamic) stuff,
-    # but it was used to address the static stuff (images, css, js).
-    # Thus we use the more clear url_prefix_static ['/moin_staticVVV'] setting now.
-    # For a limited time, we still look at url_prefix - if it is not None, we
-    # copy the value to url_prefix_static to ease transition.
-    url_prefix = None
-
-    # includes the moin version number, so we can have a unlimited cache lifetime
-    # for the static stuff. if stuff changes on version upgrade, url will change
-    # immediately and we have no problem with stale caches.
-    url_prefix_static = config.url_prefix_static
-    url_prefix_local = None # if None, use same value as url_prefix_static.
-                            # must be same site as wiki engine (for e.g. JS permissions)
-
-    # we could prefix actions to be able to exclude them by robots.txt:
-    #url_prefix_action = 'action' # no leading or trailing '/'
-    url_prefix_action = None # compatiblity
-
-    # allow disabling certain userpreferences plugins
-    userprefs_disabled = []
-
-    user_autocreate = False # do we auto-create user profiles
-    user_email_unique = True # do we check whether a user's email is unique?
-    user_jid_unique = True # do we check whether a user's email is unique?
-
-    user_homewiki = 'Self' # interwiki name for where user homepages are located
-
-    user_checkbox_fields = [
-        ('mailto_author', lambda _: _('Publish my email (not my wiki homepage) in author info')),
-        ('edit_on_doubleclick', lambda _: _('Open editor on double click')),
-        ('remember_last_visit', lambda _: _('After login, jump to last visited page')),
-        ('show_comments', lambda _: _('Show comment sections')),
-        ('show_nonexist_qm', lambda _: _('Show question mark for non-existing pagelinks')),
-        ('show_page_trail', lambda _: _('Show page trail')),
-        ('show_toolbar', lambda _: _('Show icon toolbar')),
-        ('show_topbottom', lambda _: _('Show top/bottom links in headings')),
-        ('show_fancy_diff', lambda _: _('Show fancy diffs')),
-        ('wikiname_add_spaces', lambda _: _('Add spaces to displayed wiki names')),
-        ('remember_me', lambda _: _('Remember login information')),
-
-        ('disabled', lambda _: _('Disable this account forever')),
-        # if an account is disabled, it may be used for looking up
-        # id -> username for page info and recent changes, but it
-        # is not usable for the user any more:
-    ]
-
-    user_checkbox_defaults = {'mailto_author':       0,
-                              'edit_on_doubleclick': 0,
-                              'remember_last_visit': 0,
-                              'show_comments':       0,
-                              'show_nonexist_qm':    nonexist_qm,
-                              'show_page_trail':     1,
-                              'show_toolbar':        1,
-                              'show_topbottom':      0,
-                              'show_fancy_diff':     1,
-                              'wikiname_add_spaces': 0,
-                              'remember_me':         1,
-                             }
-
-    # don't let the user change those
-    # user_checkbox_disable = ['disabled']
-    user_checkbox_disable = []
-
-    # remove those checkboxes:
-    #user_checkbox_remove = ['edit_on_doubleclick', 'show_nonexist_qm', 'show_toolbar', 'show_topbottom',
-    #                        'show_fancy_diff', 'wikiname_add_spaces', 'remember_me', 'disabled',]
-    user_checkbox_remove = []
-
-    user_form_fields = [
-        ('name', _('Name'), "text", "36", _("(Use FirstnameLastname)")),
-        ('aliasname', _('Alias-Name'), "text", "36", ''),
-        ('email', _('Email'), "text", "36", ''),
-        ('jid', _('Jabber ID'), "text", "36", ''),
-        ('css_url', _('User CSS URL'), "text", "40", _('(Leave it empty for disabling user CSS)')),
-        ('edit_rows', _('Editor size'), "text", "3", ''),
-    ]
-
-    user_form_defaults = {# key: default - do NOT remove keys from here!
-        'name': '',
-        'aliasname': '',
-        'password': '',
-        'password2': '',
-        'email': '',
-        'jid': '',
-        'css_url': '',
-        'edit_rows': "20",
-    }
-
-    # don't let the user change those, but show them:
-    #user_form_disable = ['name', 'aliasname', 'email',]
-    user_form_disable = []
-
-    # remove those completely:
-    #user_form_remove = ['password', 'password2', 'css_url', 'logout', 'create', 'account_sendmail',]
-    user_form_remove = []
-
-    # attributes we do NOT save to the userpref file
-    user_transient_fields = ['id', 'valid', 'may', 'auth_username', 'password', 'password2', 'auth_method', 'auth_attribs', ]
-
-    xapian_search = False
-    xapian_index_dir = None
-    xapian_stemming = False
-    xapian_index_history = False
+    # Things that shouldn't be here...
+    _subscribable_events = None
 
     def __init__(self, siteid):
         """ Init Config instance """
@@ -1072,6 +582,505 @@ that the data/plugin directory has an __init__.py file.
         """ Make it possible to access a config object like a dict """
         return getattr(self, item)
 
+
+def _default_password_checker(request, username, password):
+    """ Check if a password is secure enough.
+        We use a built-in check to get rid of the worst passwords.
+
+        We do NOT use cracklib / python-crack here any more because it is
+        not thread-safe (we experienced segmentation faults when using it).
+
+        If you don't want to check passwords, use password_checker = None.
+
+        @return: None if there is no problem with the password,
+                 some string with an error msg, if the password is problematic.
+    """
+
+    try:
+        # in any case, do a very simple built-in check to avoid the worst passwords
+        if len(password) < 6:
+            raise ValueError("Password too short.")
+        if len(set(password)) < 4:
+            raise ValueError("Password has not enough different characters.")
+
+        username_lower = username.lower()
+        password_lower = password.lower()
+        if username in password or password in username or \
+           username_lower in password_lower or password_lower in username_lower:
+            raise ValueError("Password too easy (containment).")
+
+        keyboards = (ur"`1234567890-=qwertyuiop[]\asdfghjkl;'zxcvbnm,./", # US kbd
+                     ur"^1234567890ß´qwertzuiopü+asdfghjklöä#yxcvbnm,.-", # german kbd
+                    ) # add more keyboards!
+        for kbd in keyboards:
+            rev_kbd = kbd[::-1]
+            if password in kbd or password in rev_kbd or \
+               password_lower in kbd or password_lower in rev_kbd:
+                raise ValueError("Password too easy (kbd sequence)")
+        return None
+    except ValueError, err:
+        return str(err)
+
+
+options_no_group_name = {
+  'various': ('Various', (
+    ('DesktopEdition',
+     False,
+     'True gives all local users special powers - ONLY use for MMDE style usage!'),
+    ('SecurityPolicy',
+     None,
+     None),
+
+    ('actions_excluded',
+     ['xmlrpc',  # we do not want wiki admins unknowingly offering xmlrpc service
+      'MyPages',  # only works when used with a non-default SecurityPolicy (e.g. autoadmin)
+      'CopyPage',  # has questionable behaviour regarding subpages a user can't read, but can copy
+     ],
+     None),
+
+    ('allow_xslt', False, None),
+    ('antispam_master_url', "http://master.moinmo.in/?action=xmlrpc2", None),
+    ('auth', [authmodule.MoinAuth()], None),
+    ('auth_methods_trusted', ['http', 'xmlrpc_applytoken'], None),
+
+    ('bang_meta', True, None),
+    ('caching_formats', ['text_html'], None),
+    ('changed_time_fmt', '%H:%M', None),
+
+    ('chart_options', None, None),
+
+    ('config_check_enabled', False, None),
+
+    ('cookie_domain', None, None),
+    ('cookie_path', None, None),
+    ('cookie_lifetime', 12, None),
+
+    ('data_dir', './data/', None),
+    ('data_underlay_dir', './underlay/', None),
+
+    ('date_fmt', '%Y-%m-%d', None),
+    ('datetime_fmt', '%Y-%m-%d %H:%M:%S', None),
+
+    ('default_markup', 'wiki', None),
+    ('docbook_html_dir', r"/usr/share/xml/docbook/stylesheet/nwalsh/html/", None),
+
+    ('edit_bar', ['Edit', 'Comments', 'Discussion', 'Info', 'Subscribe', 'Quicklink', 'Attachments', 'ActionsMenu'], None),
+    ('editor_default', 'text', None),
+    ('editor_force', False, None),
+    ('editor_ui', 'freechoice', None),
+    ('editor_quickhelp', {
+        # editor markup hints quickhelp
+        # MUST be in wiki markup, even if the help is not for the wiki parser!
+        'wiki': _(u"""\
+ Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')>>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed ''<<Verbatim(''')>>'''''bold'''<<Verbatim(''')>> and italics''<<Verbatim('')>>; <<Verbatim(----)>> horizontal rule.
+ Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; ===== Title 5 =====.
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])>>.
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+"""),
+        'rst': _("""\
+{{{
+Emphasis: *italic* **bold** ``monospace``
+
+Headings: Heading 1  Heading 2  Heading 3
+          =========  ---------  ~~~~~~~~~
+
+Horizontal rule: ----
+
+Links: TrailingUnderscore_ `multi word with backticks`_ external_
+
+.. _external: http://external-site.example.org/foo/
+
+Lists: * bullets; 1., a. numbered items.
+}}}
+(!) For more help, see the
+[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|reStructuredText Quick Reference]].
+"""),
+        'creole': _(u"""\
+ Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)>>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)>>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;
+ Horizontal Rule:: <<Verbatim(----)>>
+ Force Linebreak:: <<Verbatim(\\\\)>>
+ Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; ===== Title 5 =====.
+ Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub items.
+ Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.
+ Tables:: |= header text | cell text | more cell text |;
+
+(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.
+"""),
+    }, None),
+    ('edit_locking', 'warn 10', None),
+    ('edit_ticketing', True, None),
+    ('edit_rows', 20, None),
+
+    ('history_count', (100, 200), None),
+
+    ('hosts_deny', [], None),
+
+    ('html_head', '', None),
+    ('html_head_queries', '''<meta name="robots" content="noindex,nofollow">\n''', None),
+    ('html_head_posts', '''<meta name="robots" content="noindex,nofollow">\n''', None),
+    ('html_head_index', '''<meta name="robots" content="index,follow">\n''', None),
+    ('html_head_normal', '''<meta name="robots" content="index,nofollow">\n''', None),
+    ('html_pagetitle', None, None),
+
+    ('interwikiname', None, None),
+    ('interwiki_preferred', [], None),
+
+    ('language_default', 'en', None),
+    ('language_ignore_browser', False, None),
+
+    ('logo_string', None, None),
+
+    ('log_reverse_dns_lookups', True, None),
+    ('log_timing', False, None),
+
+    ('mail_from', None, None),
+    ('mail_login', None, None),
+    ('mail_smarthost', None, None),
+    ('mail_sendmail', None, None),
+
+    ('mail_import_secret', "", None),
+    ('mail_import_subpage_template', u"$from-$date-$subject", None),
+    ('mail_import_pagename_search', ['subject', 'to', ], None),
+    ('mail_import_pagename_envelope', u"%s", None),
+    ('mail_import_pagename_regex', r'\[\[([^\]]*)\]\]', None),
+    ('mail_import_wiki_addrs', [], None),
+
+    # some dangerous mimetypes (we don't use "content-disposition: inline" for them when a user
+    # downloads such attachments, because the browser might execute e.g. Javascript contained
+    # in the HTML and steal your moin session cookie or do other nasty stuff)
+    ('mimetypes_xss_protect',
+     [
+       'text/html',
+       'application/x-shockwave-flash',
+       'application/xhtml+xml',
+     ], None),
+
+    ('mimetypes_embed',
+     [
+       'application/x-dvi',
+       'application/postscript',
+       'application/pdf',
+       'application/ogg',
+       'application/vnd.visio',
+       'image/x-ms-bmp',
+       'image/svg+xml',
+       'image/tiff',
+       'image/x-photoshop',
+       'audio/mpeg',
+       'audio/midi',
+       'audio/x-wav',
+       'video/fli',
+       'video/mpeg',
+       'video/quicktime',
+       'video/x-msvideo',
+       'chemical/x-pdb',
+       'x-world/x-vrml',
+     ], None),
+
+
+    ('navi_bar', [u'RecentChanges', u'FindPage', u'HelpContents', ], None),
+    ('nonexist_qm', False, None),
+
+    ('notification_bot_uri', None, None),
+
+    ('page_credits',
+     [
+       '<a href="http://moinmo.in/" title="This site uses the MoinMoin Wiki software.">MoinMoin Powered</a>',
+       '<a href="http://moinmo.in/Python" title="MoinMoin is written in Python.">Python Powered</a>',
+       '<a href="http://moinmo.in/GPL" title="MoinMoin is GPL licensed.">GPL licensed</a>',
+       '<a href="http://validator.w3.org/check?uri=referer" title="Click here to validate this page.">Valid HTML 4.01</a>',
+     ], None),
+
+    ('page_footer1', '', None),
+    ('page_footer2', '', None),
+    ('page_header1', '', None),
+    ('page_header2', '', None),
+
+    ('page_front_page', u'HelpOnLanguages', None),
+    ('page_local_spelling_words', u'LocalSpellingWords', None),
+
+    # the following regexes should match the complete name when used in free text
+    # the group 'all' shall match all, while the group 'key' shall match the key only
+    # e.g. CategoryFoo -> group 'all' ==  CategoryFoo, group 'key' == Foo
+    # moin's code will add ^ / $ at beginning / end when needed
+    ('page_category_regex', ur'(?P<all>Category(?P<key>\S+))', None),
+    ('page_dict_regex', ur'(?P<all>(?P<key>\S+)Dict)', None),
+    ('page_group_regex', ur'(?P<all>(?P<key>\S+)Group)', None),
+    ('page_template_regex', ur'(?P<all>(?P<key>\S+)Template)', None),
+
+    ('page_license_enabled', False, None),
+    ('page_license_page', u'WikiLicense', None),
+
+    # These icons will show in this order in the iconbar, unless they
+    # are not relevant, e.g email icon when the wiki is not configured
+    # for email.
+    ('page_iconbar', ["up", "edit", "view", "diff", "info", "subscribe", "raw", "print", ], None),
+
+    # Standard buttons in the iconbar
+    ('page_icons_table',
+     {
+        # key           pagekey, querystr dict, title, icon-key
+        'diff':        ('page', {'action': 'diff'}, _("Diffs"), "diff"),
+        'info':        ('page', {'action': 'info'}, _("Info"), "info"),
+        'edit':        ('page', {'action': 'edit'}, _("Edit"), "edit"),
+        'unsubscribe': ('page', {'action': 'unsubscribe'}, _("UnSubscribe"), "unsubscribe"),
+        'subscribe':   ('page', {'action': 'subscribe'}, _("Subscribe"), "subscribe"),
+        'raw':         ('page', {'action': 'raw'}, _("Raw"), "raw"),
+        'xml':         ('page', {'action': 'show', 'mimetype': 'text/xml'}, _("XML"), "xml"),
+        'print':       ('page', {'action': 'print'}, _("Print"), "print"),
+        'view':        ('page', {}, _("View"), "view"),
+        'up':          ('page_parent_page', {}, _("Up"), "up"),
+     }, None),
+
+
+
+    ('password_checker', _default_password_checker, None),
+
+    ('quicklinks_default', [], None),
+
+    ('refresh', None, None),
+    ('rss_cache', 60, None),
+
+    ('search_results_per_page', 25, None),
+
+    ('session_handler', session.DefaultSessionHandler(), None),
+    ('session_id_handler', session.MoinCookieSessionIDHandler(), None),
+
+    ('shared_intermap', None, None),
+
+    ('show_hosts', True, None),
+    ('show_interwiki', False, None),
+    ('show_names', True, None),
+    ('show_section_numbers', 0, None),
+    ('show_timings', False, None),
+    ('show_version', False, None),
+
+    ('sistersites', [], None),
+
+    ('siteid', 'default', None),
+    ('sitename', u'Untitled Wiki', None),
+
+    ('stylesheets', [], None),
+
+    ('subscribed_pages_default', [], None),
+    ('email_subscribed_events_default',
+     [
+        PageChangedEvent.__name__,
+        PageRenamedEvent.__name__,
+        PageDeletedEvent.__name__,
+        PageCopiedEvent.__name__,
+        PageRevertedEvent.__name__,
+        FileAttachedEvent.__name__,
+     ], None),
+    ('jabber_subscribed_events_default', [], None),
+
+    ('superuser', [], None),
+
+    ('supplementation_page', False, None),
+    ('supplementation_page_name', u'Discussion', None),
+    ('supplementation_page_template', u'DiscussionTemplate', None),
+
+    ('surge_action_limits',
+     {# allow max. <count> <action> requests per <dt> secs
+        # action: (count, dt)
+        'all': (30, 30),
+        'show': (30, 60),
+        'recall': (10, 120),
+        'raw': (20, 40),  # some people use this for css
+        'AttachFile': (90, 60),
+        'diff': (30, 60),
+        'fullsearch': (10, 120),
+        'edit': (30, 300), # can be lowered after making preview different from edit
+        'rss_rc': (1, 60),
+        'default': (30, 60),
+     }, None),
+    ('surge_lockout_time', 3600, None),
+
+    ('textchas', None, None),
+    ('textchas_disabled_group', None, None),
+
+    ('theme_default', 'modern', None),
+    ('theme_force', False, None),
+
+    ('traceback_show', True, None),
+    ('traceback_log_dir', None, None),
+
+    ('trail_size', 5, None),
+    ('tz_offset', 0.0, None),
+
+    # a regex of HTTP_USER_AGENTS that should be excluded from logging
+    # and receive a FORBIDDEN for anything except viewing a page
+    # list must not contain 'java' because of twikidraw wanting to save drawing uses this useragent
+    ('ua_spiders',
+     ('archiver|cfetch|charlotte|crawler|curl|gigabot|googlebot|heritrix|holmes|htdig|httrack|httpunit|'
+      'intelix|jeeves|larbin|leech|libwww-perl|linkbot|linkmap|linkwalk|litefinder|mercator|'
+      'microsoft.url.control|mirror| mj12bot|msnbot|msrbot|neomo|nutbot|omniexplorer|puf|robot|scooter|seekbot|'
+      'sherlock|slurp|sitecheck|snoopy|spider|teleport|twiceler|voilabot|voyager|webreaper|wget|yeti'),
+     None),
+
+    ('unzip_single_file_size', 2.0 * 1000 ** 2, None),
+    ('unzip_attachments_space', 200.0 * 1000 ** 2, None),
+    ('unzip_attachments_count', 101, None),
+
+    ('url_mappings', {}, None),
+
+    # url_prefix is DEPRECATED and not used any more by the code.
+    # it confused many people by its name and default value of '/wiki' to the
+    # wrong conclusion that it is the url of the wiki (the dynamic) stuff,
+    # but it was used to address the static stuff (images, css, js).
+    # Thus we use the more clear url_prefix_static ['/moin_staticVVV'] setting now.
+    # For a limited time, we still look at url_prefix - if it is not None, we
+    # copy the value to url_prefix_static to ease transition.
+    ('url_prefix', None, None),
+
+    # includes the moin version number, so we can have a unlimited cache lifetime
+    # for the static stuff. if stuff changes on version upgrade, url will change
+    # immediately and we have no problem with stale caches.
+    ('url_prefix_static', config.url_prefix_static, None),
+    ('url_prefix_local', None, None),
+
+    # we could prefix actions to be able to exclude them by robots.txt:
+    #url_prefix_action', 'action' # no leading or trailing '/'
+    ('url_prefix_action', None, None),
+
+    # allow disabling certain userpreferences plugins
+    ('userprefs_disabled', [], None),
+  )),
+}
+
+options = {
+    'acl': ('Access control lists', (
+      ('hierarchic', False, 'True to use hierarchical ACLs'),
+      ('rights_default', u"Trusted:read,write,delete,revert Known:read,write,delete,revert All:read,write", None),
+      ('rights_before', u"", None),
+      ('rights_after', u"", None),
+      ('rights_valid', ['read', 'write', 'delete', 'revert', 'admin'], None),
+    )),
+
+    'xapian': ('Xapian search', (
+      ('search', False, None),
+      ('index_dir', None, None),
+      ('stemming', False, None),
+      ('index_history', False, None),
+    )),
+
+    'user': ('Users / User settings', (
+      ('autocreate', False, None),
+      ('email_unique', True, None),
+      ('jid_unique', True, None),
+
+      ('homewiki', 'Self', None),
+
+      ('checkbox_fields',
+       [
+        ('mailto_author', lambda _: _('Publish my email (not my wiki homepage) in author info')),
+        ('edit_on_doubleclick', lambda _: _('Open editor on double click')),
+        ('remember_last_visit', lambda _: _('After login, jump to last visited page')),
+        ('show_comments', lambda _: _('Show comment sections')),
+        ('show_nonexist_qm', lambda _: _('Show question mark for non-existing pagelinks')),
+        ('show_page_trail', lambda _: _('Show page trail')),
+        ('show_toolbar', lambda _: _('Show icon toolbar')),
+        ('show_topbottom', lambda _: _('Show top/bottom links in headings')),
+        ('show_fancy_diff', lambda _: _('Show fancy diffs')),
+        ('wikiname_add_spaces', lambda _: _('Add spaces to displayed wiki names')),
+        ('remember_me', lambda _: _('Remember login information')),
+
+        ('disabled', lambda _: _('Disable this account forever')),
+        # if an account is disabled, it may be used for looking up
+        # id -> username for page info and recent changes, but it
+        # is not usable for the user any more:
+       ],
+       None),
+
+      ('checkbox_defaults',
+       {
+        'mailto_author':       0,
+        'edit_on_doubleclick': 0,
+        'remember_last_visit': 0,
+        'show_comments':       0,
+        'show_nonexist_qm':    False,
+        'show_page_trail':     1,
+        'show_toolbar':        1,
+        'show_topbottom':      0,
+        'show_fancy_diff':     1,
+        'wikiname_add_spaces': 0,
+        'remember_me':         1,
+       },
+       None),
+
+      ('checkbox_disable', [], None),
+
+      ('checkbox_remove', [], None),
+
+      ('form_fields',
+       [
+        ('name', _('Name'), "text", "36", _("(Use FirstnameLastname)")),
+        ('aliasname', _('Alias-Name'), "text", "36", ''),
+        ('email', _('Email'), "text", "36", ''),
+        ('jid', _('Jabber ID'), "text", "36", ''),
+        ('css_url', _('User CSS URL'), "text", "40", _('(Leave it empty for disabling user CSS)')),
+        ('edit_rows', _('Editor size'), "text", "3", ''),
+       ],
+       None),
+
+      ('form_defaults',
+       { # key: default - do NOT remove keys from here!
+        'name': '',
+        'aliasname': '',
+        'password': '',
+        'password2': '',
+        'email': '',
+        'jid': '',
+        'css_url': '',
+        'edit_rows': "20",
+       },
+       None),
+
+      ('form_disable', [], None),
+
+      ('form_remove', [], None),
+
+      ('transient_fields',
+       ['id', 'valid', 'may', 'auth_username', 'password', 'password2', 'auth_method', 'auth_attribs', ],
+       None),
+    )),
+
+    'backup': (None, (
+      ('compression', 'gz', None),
+      ('users', [], None),
+      ('include', [], None),
+      ('exclude',
+       [
+        r"(.+\.py(c|o)$)",
+        r"%(cache_dir)s",
+        r"%(/)spages%(/)s.+%(/)scache%(/)s[^%(/)s]+$" % {'/': os.sep},
+        r"%(/)s(edit-lock|event-log|\.DS_Store)$" % {'/': os.sep},
+       ],
+       None),
+      ('storage_dir', '/tmp', None),
+      ('restore_target_dir', '/tmp', None),
+    )),
+
+    'openid_server': ('OpenID Server', (
+      ('enabled', False, None),
+      ('restricted_users_group', None, None),
+      ('enable_user', False, None),
+    )),
+}
+
+def _add_options_to_defconfig(opts, addgroup=True):
+    for groupname in opts:
+        group_doc, group_opts = opts[groupname]
+        for name, default, doc in group_opts:
+            if addgroup:
+                name = groupname + '_' + name
+            setattr(DefaultConfig, name, default)
+
+_add_options_to_defconfig(options)
+_add_options_to_defconfig(options_no_group_name, False)
+
 # remove the gettext pseudo function
 del _
-
