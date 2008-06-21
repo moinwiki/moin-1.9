@@ -7,6 +7,9 @@
                 2003-2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin.request import RequestBase, RemoteClosedConnection
 
 class Request(RequestBase):
@@ -35,9 +38,10 @@ class Request(RequestBase):
         # thfcgi used keep_blank_values=1 internally for fcgform
         return RequestBase._setup_args_from_cgi_form(self, self.fcgform)
 
-    def read(self, n=None):
+    def read(self, n):
         """ Read from input stream. """
         if n is None:
+            logging.warning("calling request.read(None) might block")
             return self.fcgreq.stdin.read()
         else:
             return self.fcgreq.stdin.read(n)

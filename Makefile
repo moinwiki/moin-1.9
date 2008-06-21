@@ -25,6 +25,17 @@ install-docs:
         build/INSTALL.html >docs/INSTALL.html
 	-rm build/INSTALL.html
 
+	wget -U MoinMoin/Makefile -O build/UPDATE.html "http://master17.moinmo.in/HelpOnUpdating?action=print"
+	sed \
+		-e 's#href="/#href="http://master17.moinmo.in/#g' \
+		-e 's#http://[a-z\.]*/wiki/classic/#/wiki/classic/#g' \
+		-e 's#http://[a-z\.]*/wiki/modern/#/wiki/modern/#g' \
+		-e 's#http://[a-z\.]*/wiki/rightsidebar/#/wiki/rightsidebar/#g' \
+		-e 's#/wiki/classic/#wiki/htdocs/classic/#g' \
+		-e 's#/wiki/modern/#wiki/htdocs/modern/#g' \
+		-e 's#/wiki/rightsidebar/#wiki/htdocs/rightsidebar/#g' \
+        build/UPDATE.html >docs/UPDATE.html
+	-rm build/UPDATE.html
 	-rmdir build
 
 interwiki:
@@ -44,9 +55,8 @@ underlay:
 	rm -rf $(share)/underlay
 	MoinMoin/script/moin.py --config-dir=/srv/moin/cfg/1.7 --wiki-url=master17.moinmo.in/ maint globaledit
 	MoinMoin/script/moin.py --config-dir=/srv/moin/cfg/1.7 --wiki-url=master17.moinmo.in/ maint reducewiki --target-dir=$(share)/underlay
-	rm -rf $(share)/underlay/pages/InterWikiMap/
-	echo -ne "#acl All:read\r\nSee MoinMoin:EditingOnMoinMaster.\r\n" > \
-	    $(share)/underlay/pages/MoinPagesEditorGroup/revisions/00000001
+	rm -rf $(share)/underlay/pages/InterWikiMap
+	rm -rf $(share)/underlay/pages/MoinPagesEditorGroup
 	cd $(share); rm -f underlay.tar; tar cf underlay.tar underlay
 
 pagepacks:
