@@ -16,7 +16,7 @@ from MoinMoin import log
 logging = log.getLogger(__name__)
 
 from MoinMoin import config, error, util, wikiutil
-import MoinMoin.auth as authmodule
+from MoinMoin.auth import MoinAuth
 import MoinMoin.events as events
 from MoinMoin.events import PageChangedEvent, PageRenamedEvent
 from MoinMoin.events import PageDeletedEvent, PageCopiedEvent
@@ -622,6 +622,11 @@ def _default_password_checker(request, username, password):
         return str(err)
 
 
+class DefaultExpression(object):
+    def __init__(self, exprstr):
+        self.text = exprstr
+        self.value = eval(exprstr)
+
 options_no_group_name = {
   'various': ('Various', None, (
     ('DesktopEdition',
@@ -640,7 +645,7 @@ options_no_group_name = {
 
     ('allow_xslt', False, None),
     ('antispam_master_url', "http://master.moinmo.in/?action=xmlrpc2", None),
-    ('auth', [authmodule.MoinAuth()], None),
+    ('auth', DefaultExpression('[MoinAuth()]'), None),
     ('auth_methods_trusted', ['http', 'xmlrpc_applytoken'], None),
 
     ('bang_meta', True, None),
@@ -824,7 +829,7 @@ Lists: * bullets; 1., a. numbered items.
 
 
 
-    ('password_checker', _default_password_checker, None),
+    ('password_checker', DefaultExpression('_default_password_checker'), None),
 
     ('quicklinks_default', [], None),
 
@@ -1082,6 +1087,8 @@ def _add_options_to_defconfig(opts, addgroup=True):
         for name, default, doc in group_opts:
             if addgroup:
                 name = groupname + '_' + name
+            if isinstance(default, DefaultExpression):
+                default = default.value
             setattr(DefaultConfig, name, default)
 
 _add_options_to_defconfig(options)

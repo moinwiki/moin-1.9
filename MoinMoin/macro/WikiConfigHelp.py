@@ -47,9 +47,12 @@ def macro_WikiConfigHelp(macro):
         for name, default, description in opts:
             if addgroup:
                 name = groupname + '_' + name
-            default_txt = '%r' % (default, )
-            if len(default_txt) > 50:
-                default_txt = '...'
+            if isinstance(default, multiconfig.DefaultExpression):
+                default_txt = default.text
+            else:
+                default_txt = '%r' % (default, )
+                if len(default_txt) > 50:
+                    default_txt = '...'
             ret.extend([
                 f.table_row(1),
                 f.table_cell(1), f.text(name), f.table_cell(0),
