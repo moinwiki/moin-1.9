@@ -323,9 +323,10 @@ FCKSelection.CheckForNodeNames = function(pattern)
 
   // Check surrounding nodes
   var oElement = oStart;
+
   while (oElement)
   {
-    if (pattern.test(oElement.nodeName))
+    if (pattern != null && pattern.test(oElement.nodeName))
       { 
         //Alert("Start:" + oStart.nodeName + ':' + oElement.nodeName + 
         //      ':' + oEnd.nodeName);
@@ -336,7 +337,7 @@ FCKSelection.CheckForNodeNames = function(pattern)
   oElement = oEnd;
   while (oElement)
   {
-    if (pattern.test(oElement.nodeName))
+    if (pattern != null && pattern.test(oElement.nodeName))
       { 
         //Alert("End:" + oStart.nodeName + ':' + oElement.nodeName + 
         //      ':' + oEnd.nodeName);

@@ -134,6 +134,8 @@ RestrictedStyleCommand.prototype.Execute = function(styleName, styleComboItem )
 
 var StyleButtonCommand = function(stylename, unique)
 {
+  this.StylesLoader = new FCKStylesLoader() ; 
+  this.StylesLoader.Load( FCKConfig.StylesXmlPath ) ; 
   this.style = this.StylesLoader.Styles[stylename];
   this.unique = unique;
 }
