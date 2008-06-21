@@ -79,7 +79,10 @@ Version 1.7.0current:
       * cfg.trusted_auth_methods is a list of auth methods that put an
         authenticated user into the "Trusted" ACL group.
 
-    * User preferences / password recovery / notification:
+    * User profiles / password recovery / notification:
+      * New newacount action for creating new user accounts/profiles. If you
+        don't want users creating new accounts on their own, you can add this
+        action to actions_excluded list.
       * New recoverpass action for password recovery:
         If you forgot your password, recoverpass sends you an email with a
         password recovery token (NOT the encrypted password) that is valid
@@ -91,7 +94,8 @@ Version 1.7.0current:
         HelpOnNotification. HINT: wiki users have to check their notification
         settings, esp. if they want to receive trivial update notifications.
 
-    * The diff action now has navigation buttons for prev/next change.
+    * The diff action now has navigation buttons for prev/next change and also
+      a revert button to revert to the revision shown below the diff display.
     * ThemeBase: support Universal Edit Button, see there for details:
       http://universaleditbutton.org/
     * ?action=info&max_count=42 - show the last 42 history entries of the page.
@@ -111,12 +115,15 @@ Version 1.7.0current:
         revision history. Doesn't add history of included pages.
       * supports for the MoinMoin comment element, though only inline comments
         are likely to be valid since the DocBook remark is an inline element.
+    * New Hits macro: shows the total hits for the page it is used on.
 
   Removed Features: ==========================================================
     * HINT: Removed attachments direct serving (cfg.attachments - this was
             deprecated since long!). Use AttachFile action to serve attachments.
     * Duplicated file attachment upload code was removed from Load action (just
       use AttachFile action to deal with attachments).
+    * Removed 'test' action. If you like to run unit tests, use py.test.
+    * Removed Login macro.
 
   Bug Fixes: =================================================================
     * Better handling of ImportErrors (farmconfig, macros, wikiserverconfig).
@@ -134,9 +141,22 @@ Version 1.7.0current:
         process a defective zip.
       * When unzipping member files, decode their filenames from utf-8 and
         replace invalid chars.
-      * AttachFile/Load: remove misleading/outdated text, fix UI cosmetics.
       * Make error msg less confusing when trying to overwrite a file attachment
         without having 'delete' rights.
+
+    * HINT: page_*_regex processing had to be changed to fix category search.
+      If you don't use the builtin (english) defaults, you will have to change
+      your configuration:
+        old (default): page_category_regex = u'^Category[A-Z]'
+        new (default): page_category_regex = ur'(?P<all>Category(?P<key>\S+))'
+      As you see, the old regex did work for detecting whether a pagename is
+      a category, but it could not be used to search for a category tag in the
+      page text. The new regex can be used for both and identifies the complete
+      category tag (match in group 'all', e.g. "CategoryFoo") as well as the
+      category key (match in group 'key', e.g. "Foo") by using named regex
+      groups. \S+ means the category key can be anything non-blank.
+      If you like to simultaneously support multiple languages, use something
+      like this: ur'(?P<all>(Kategorie|Category)(?P<key>\S+))'
 
     * Xapian search / indexing / stemming:
       * Use text/<format> as mimetype for pages.
@@ -155,23 +175,9 @@ Version 1.7.0current:
       * xapian_stemming: removed some strange code (fixes search
         title:lowercaseword with xapian_stemming enabled)
       * Fixed category indexing (index CategoryFoo correctly as CategoryFoo, not
-        Foo - for all languages, see page_*_regex change below).
+        Foo - for all languages, see page_*_regex change above).
     * Builtin search: support mimetype: search for pages for the builtin search
       engine (using text/<format>).
-
-    * HINT: page_*_regex processing had to be changed to fix Xapian category
-      search. If you don't use the builtin (english) defaults, you will have
-      to change your configuration:
-        old (default): page_category_regex = u'^Category[A-Z]'
-        new (default): page_category_regex = ur'(?P<all>Category(?P<key>\S+))'
-      As you see, the old regex did work for detecting whether a pagename is
-      a category, but it could not be used to search for a category tag in the
-      page text. The new regex can be used for both and identifies the complete
-      category tag (match in group 'all', e.g. "CategoryFoo") as well as the
-      category key (match in group 'key', e.g. "Foo") by using named regex
-      groups. \S+ means the category key can be anything non-blank.
-      If you like to simultaneously support multiple languages, use something
-      like this: ur'(?P<all>(Kategorie|Category)(?P<key>\S+))'
 
     * Parser fixes:
       * Wiki: fix subscript parsing (was broken for cases like 'a,,1,2,,').
