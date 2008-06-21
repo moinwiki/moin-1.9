@@ -193,7 +193,7 @@ Enter a new password below.""", wiki=True))
         request.theme.send_footer(pagename)
         request.theme.send_closing_html()
     elif submitted: # user pressed create button
-        if request.request_method != 'POST':
+        if request.method != 'POST':
             return
         msg = _do_recover(request)
         request.theme.add_msg(msg, "dialog")

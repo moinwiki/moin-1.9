@@ -156,7 +156,7 @@ def check_surge_protect(request, kick=False):
 def handle_auth(user_obj, request, attended=False, username=None,
                 password=None, openid_identifier=None, login=None,
                 logout=None, stage=None):
-    extra = { 'cookie': request.cookie }
+    extra = { 'cookie': request.cookies }
     if login:
         extra['attended'] = attended
         extra['username'] = username

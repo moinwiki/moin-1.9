@@ -39,7 +39,7 @@ class Settings(UserPrefBase):
             return
 
         if (wikiutil.checkTicket(self.request, self.request.form['ticket'][0])
-            and self.request.request_method == 'POST'):
+            and self.request.method == 'POST'):
             uid = form.get('selected_user', [''])[0]
             if not uid:
                 return 'error', _("No user selected")

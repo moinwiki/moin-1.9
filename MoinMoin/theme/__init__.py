@@ -1571,7 +1571,7 @@ var gui_editor_link_text = "%(text)s";
         # if it is an action or edit/search, send query headers (noindex,nofollow):
         if request.query_string:
             user_head.append(request.cfg.html_head_queries)
-        elif request.request_method == 'POST':
+        elif request.method == 'POST':
             user_head.append(request.cfg.html_head_posts)
         # we don't want to have BadContent stuff indexed:
         elif pagename in ['BadContent', 'LocalBadContent', ]:
