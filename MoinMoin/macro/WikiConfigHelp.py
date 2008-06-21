@@ -21,12 +21,20 @@ def macro_WikiConfigHelp(macro):
     groups.sort()
 
     for groupname, addgroup, optsdict in groups:
-        desc, opts = optsdict[groupname]
+        heading, desc, opts = optsdict[groupname]
         ret.extend([
             f.heading(1, 1),
             ## XXX: translate description?
-            f.text(desc),
+            f.text(heading),
             f.heading(0, 1),
+        ])
+        if desc:
+            ret.extend([
+                f.paragraph(1),
+                f.text(desc),
+                f.paragraph(0)
+            ])
+        ret.extend([
             f.table(1),
             f.table_row(1),
             f.table_cell(1), f.strong(1), f.text(_('Variable name')), f.strong(0), f.table_cell(0),

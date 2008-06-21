@@ -623,7 +623,7 @@ def _default_password_checker(request, username, password):
 
 
 options_no_group_name = {
-  'various': ('Various', (
+  'various': ('Various', None, (
     ('DesktopEdition',
      False,
      'True gives all local users special powers - ONLY use for MMDE style usage!'),
@@ -952,7 +952,7 @@ Lists: * bullets; 1., a. numbered items.
 }
 
 options = {
-    'acl': ('Access control lists', (
+    'acl': ('Access control lists', None, (
       ('hierarchic', False, 'True to use hierarchical ACLs'),
       ('rights_default', u"Trusted:read,write,delete,revert Known:read,write,delete,revert All:read,write", None),
       ('rights_before', u"", None),
@@ -960,14 +960,14 @@ options = {
       ('rights_valid', ['read', 'write', 'delete', 'revert', 'admin'], None),
     )),
 
-    'xapian': ('Xapian search', (
+    'xapian': ('Xapian search', None, (
       ('search', False, None),
       ('index_dir', None, None),
       ('stemming', False, None),
       ('index_history', False, None),
     )),
 
-    'user': ('Users / User settings', (
+    'user': ('Users / User settings', None, (
       ('autocreate', False, None),
       ('email_unique', True, None),
       ('jid_unique', True, None),
@@ -1048,7 +1048,7 @@ options = {
        None),
     )),
 
-    'backup': ('Backup', (
+    'backup': ('Backup', None, (
       ('compression', 'gz', None),
       ('users', [], None),
       ('include', [], None),
@@ -1064,7 +1064,9 @@ options = {
       ('restore_target_dir', '/tmp', None),
     )),
 
-    'openid_server': ('OpenID Server', (
+    'openid_server': ('OpenID Server',
+        'These settings control the built-in OpenID Identity Provider (server).',
+    (
       ('enabled', False, None),
       ('restricted_users_group', None, None),
       ('enable_user', False, None),
@@ -1073,7 +1075,7 @@ options = {
 
 def _add_options_to_defconfig(opts, addgroup=True):
     for groupname in opts:
-        group_doc, group_opts = opts[groupname]
+        group_short, group_doc, group_opts = opts[groupname]
         for name, default, doc in group_opts:
             if addgroup:
                 name = groupname + '_' + name
