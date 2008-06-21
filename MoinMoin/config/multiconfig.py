@@ -770,7 +770,6 @@ Lists: * bullets; 1., a. numbered items.
 
 
     ('navi_bar', [u'RecentChanges', u'FindPage', u'HelpContents', ], None),
-    ('nonexist_qm', False, None),
 
     ('notification_bot_uri', None, None),
 
