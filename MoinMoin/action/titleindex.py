@@ -21,7 +21,7 @@ def execute(pagename, request):
         mimetype = form['mimetype'][0]
     else:
         mimetype = "text/plain"
-    request.response.mimetype = mimetype
+    request.mimetype = mimetype
 
     # Get list of user readable pages
     pages = request.rootpage.getPageList()

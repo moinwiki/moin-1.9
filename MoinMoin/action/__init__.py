@@ -245,7 +245,8 @@ def do_show(pagename, request, content_only=0, count_hit=1, cacheable=1, print_m
     if not request.user.may.read(pagename):
         Page(request, pagename).send_page()
     else:
-        mimetype = request.form.get('mimetype', [u"text/html"])[0]
+        from MoinMoin.web.contexts import HTTPContext, RenderContext
+        mimetype = request.form.get('mimetype', u"text/html")
         rev = request.rev or 0
         if rev == 0:
             request.cacheable = cacheable
@@ -269,8 +270,8 @@ def do_format(pagename, request):
 def do_content(pagename, request):
     """ same as do_show, but we only show the content """
     # XXX temporary fix to make it work until Page.send_page gets refactored
-    request.response.mimetype = 'text/html'
-    request.response.status_code = 200
+    request.mimetype = 'text/html'
+    request.status_code = 200
     do_show(pagename, request, count_hit=0, content_only=1)
 
 def do_print(pagename, request):

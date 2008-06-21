@@ -29,9 +29,9 @@ def sendBackup(request):
     """ Send compressed tar file """
     dateStamp = time.strftime("%Y-%m-%d--%H-%M-%S-UTC", time.gmtime())
     filename = "%s-%s.tar.%s" % (request.cfg.siteid, dateStamp, request.cfg.backup_compression)
-    request.response.content_type = "application/octet-stream"
+    request.content_type = "application/octet-stream"
     dispo_string = 'inline; filename="%s"' % filename
-    request.response.headers.add('Content-Disposition', dispo_string)
+    request.headers.add('Content-Disposition', dispo_string)
 
     tar = tarfile.open(fileobj=request, mode="w|%s" % request.cfg.backup_compression)
     # allow GNU tar's longer file/pathnames

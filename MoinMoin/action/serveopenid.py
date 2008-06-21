@@ -31,7 +31,7 @@ class MoinOpenIDServer:
 
     def serveYadisEP(self, endpoint_url):
         request = self.request
-        request.response.content_type = 'application/xrds+xml'
+        request.content_type = 'application/xrds+xml'
 
         user_url = request.getQualifiedURL(request.page.url(request))
         self.request.write("""\
@@ -78,7 +78,7 @@ class MoinOpenIDServer:
 
     def serveYadisIDP(self, endpoint_url):
         request = self.request
-        request.response.content_type = 'application/xrds+xml'
+        request.content_type = 'application/xrds+xml'
 
         user_url = request.getQualifiedURL(request.page.url(request))
         self.request.write("""\
@@ -247,9 +247,9 @@ class MoinOpenIDServer:
             else:
                 answer = openidsrv.handleRequest(openidreq)
         webanswer = openidsrv.encodeResponse(answer)
-        request.response.status = '%d OpenID status' % webanswer.code
+        request.status = '%d OpenID status' % webanswer.code
         for hdr in webanswer.headers:
-            request.response.headers.add(hdr, webanswer.headers[hdr])
+            request.headers.add(hdr, webanswer.headers[hdr])
         request.write(webanswer.body)
         raise MoinMoinFinish
 

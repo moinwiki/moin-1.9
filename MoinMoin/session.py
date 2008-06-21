@@ -328,7 +328,7 @@ class MoinCookieSessionIDHandler(SessionIDHandler):
         domain = request.cfg.cookie_domain or None
         path = request.cfg.cookie_path or None
         # Set cookie
-        request.response.set_cookie(self.cookie_name, cookie_string,
+        request.set_cookie(self.cookie_name, cookie_string,
                                     max_age=lifetime, expires=expires,
                                     path=path, domain=domain)
         # IMPORTANT: Prevent caching of current page and cookie

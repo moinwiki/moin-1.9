@@ -964,13 +964,13 @@ class Page(object):
             offer a dialogue to save it to disk (used by Save action).
         """
         request = self.request
-        request.response.mimetype = 'text/plain'
+        request.mimetype = 'text/plain'
         if self.exists():
             # use the correct last-modified value from the on-disk file
             # to ensure cacheability where supported. Because we are sending
             # RAW (file) content, the file mtime is correct as Last-Modified header.
-            request.response.status_code = 200
-            request.response.last_modified = os.path.getmtime(self._text_filename())
+            request.status_code = 200
+            request.last_modified = os.path.getmtime(self._text_filename())
             text = self.encodeTextMimeType(self.body)
             #request.setHttpHeader("Content-Length: %d" % len(text))  # XXX WRONG! text is unicode obj, but we send utf-8!
             if content_disposition:
@@ -978,9 +978,9 @@ class Page(object):
                 # There is no solution that is compatible to IE except stripping non-ascii chars
                 filename_enc = "%s.txt" % self.page_name.encode(config.charset)
                 dispo_string = '%s; filename="%s"' % (content_disposition, filename_enc)
-                request.response.headers.add('Content-Disposition', dispo_string)
+                request.headers.add('Content-Disposition', dispo_string)
         else:
-            request.response.status_code = 404
+            request.status_code = 404
             text = u"Page %s not found." % self.page_name
 
         request.write(text)
@@ -1007,7 +1007,7 @@ class Page(object):
         send_special = keywords.get('send_special', False)
         print_mode = keywords.get('print_mode', 0)
         if print_mode:
-            media = 'media' in request.form and request.form['media'][0] or 'print'
+            media = request.form.get('media', 'print')
         else:
             media = 'screen'
         self.hilite_re = (keywords.get('hilite_re') or
@@ -1076,12 +1076,12 @@ class Page(object):
         page_exists = self.exists()
         if not content_only:
             if emit_headers:
-                request.response.content_type = "%s; charset=%s" % (self.output_mimetype, self.output_charset)
+                request.content_type = "%s; charset=%s" % (self.output_mimetype, self.output_charset)
                 if page_exists:
                     if not request.user.may.read(self.page_name):
-                        request.response.status_code = 403
+                        request.status_code = 403
                     else:
-                        request.response.status_code = 200
+                        request.status_code = 200
                     if not request.cacheable:
                         # use "nocache" headers if we're using a method that is not simply "display"
                         request.disableHttpCaching(level=2)
@@ -1096,7 +1096,7 @@ class Page(object):
                         #request.setHttpHeader("Last-Modified: %s" % util.timefuncs.formathttpdate(lastmod))
                         pass
                 else:
-                    request.response.status_code = 404
+                    request.status_code = 404
 
             if not page_exists and self.request.isSpiderAgent:
                 # don't send any 404 content to bots

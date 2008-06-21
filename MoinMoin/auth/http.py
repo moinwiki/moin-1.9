@@ -35,7 +35,7 @@ class HTTPAuth(BaseAuth):
         # for standalone, request authorization and verify it,
         # deny access if it isn't verified
         if isinstance(request, request_standalone.Request):
-            request.response.www_authenticate.set_basic(realm="MoinMoin")
+            request.www_authenticate.set_basic(realm="MoinMoin")
             
             auth = request.authorization
             if auth:

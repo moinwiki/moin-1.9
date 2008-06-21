@@ -19,7 +19,7 @@ def execute(pagename, request):
     else:
         mimetype = "text/html"
 
-    request.response.mimetype = mimetype
+    request.mimetype = mimetype
 
     if mimetype == "text/html":
         request.theme.send_title(_('Full Link List for "%s"') % request.cfg.sitename)
