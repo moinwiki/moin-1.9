@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-14 13:14+0200\n"
+"POT-Creation-Date: 2008-06-21 22:47+0200\n"
 "PO-Revision-Date: 2005-01-8 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -551,6 +551,9 @@ msgstr ""
 msgid "Choose this name"
 msgstr ""
 
+msgid "This is not a valid username, choose a different one."
+msgstr ""
+
 msgid ""
 "The username you have chosen is already\n"
 "taken. If it is your username, enter your password below to associate\n"
@@ -569,9 +572,6 @@ msgid "Verification canceled."
 msgstr ""
 
 msgid "OpenID failure."
-msgstr ""
-
-msgid "This is not a valid username, choose a different one."
 msgstr ""
 
 msgid "Your account is now associated to your OpenID."
@@ -1121,6 +1121,15 @@ msgid "General options"
 msgstr ""
 
 msgid "Quick links"
+msgstr ""
+
+msgid "OpenID server"
+msgstr ""
+
+msgid "The selected websites have been removed."
+msgstr ""
+
+msgid "Trusted websites"
 msgstr ""
 
 #, python-format
@@ -2036,9 +2045,9 @@ msgid ""
 "||'''Add a new personal page:'''||'''Related access control list "
 "group:'''||\n"
 "||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
-"[\"%(username)s/ReadWriteGroup\"]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[\"%"
-"(username)s/ReadGroup\"]||\n"
+"[[%(username)s/ReadWriteGroup]]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
+"(username)s/ReadGroup]]||\n"
 "||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
 "(username)s only||\n"
 "\n"
