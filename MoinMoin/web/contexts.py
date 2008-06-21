@@ -67,6 +67,8 @@ class EnvironProxy(property):
                                   self.full_name)
 
 class Context(object):
+    __slots__ = ['request', 'environ']
+
     def __init__(self, request):
         assert isinstance(request, Request)
         self.request = request
@@ -140,7 +142,6 @@ class LanguageMixin(object):
 
 class HTTPMixin(object):
     forbidden = EnvironProxy('old.forbidden', 0)
-
     
     _auth_redirected = EnvironProxy('old._auth_redirected', 0)
     _cache_disabled = EnvironProxy('old._cache_disabled', 0)
@@ -319,18 +320,35 @@ class RedirectMixin(object):
 class ClockMixin(object):
     clock = EnvironProxy('clock', lambda o: Clock())
 
-class HTTPContext(Context, HTTPMixin, ConfigMixin, UserMixin,
-                  LanguageMixin, RenamedMixin, ClockMixin):
+class _AuxilaryContext(Context, ConfigMixin, UserMixin,
+                      ClockMixin, LanguageMixin):
+    pass
+
+class HTTPContext(_AuxilaryContext, HTTPMixin):
     def __getattribute__(self, name):
          try:
              return super(HTTPContext, self).__getattribute__(name)
          except AttributeError:
-             return getattr(self.request, name)
+             try:
+                 return getattr(self.request, name)
+             except AttributeError:
+                 msg = "'%s' object has no attribute '%s'"
+                 msg = msg % (self.__class__.__name__,
+                              name)
+                 raise AttributeError(msg)
 
-class RenderContext(Context, RedirectMixin, ConfigMixin, UserMixin,
-                    LanguageMixin, PragmaMixin, ThemeMixin,
-                    AuxilaryMixin, DictsMixin, ActionMixin,
-                    ClockMixin): pass
+class RenderContext(_AuxilaryContext, RedirectMixin, PragmaMixin, ThemeMixin,
+                    AuxilaryMixin, DictsMixin, ActionMixin, PageMixin,
+                    RevisionMixin, FormatterMixin):
+    def write(self, *data):
+        if len(data) > 1:
+            logging.warning("Some code still uses write with multiple arguments, "
+                            "consider changing this soon")
+        self.request.stream.writelines(data)
 
 class XMLRPCContext(HTTPContext):
     pass
+
+class AllContext(HTTPContext, RenderContext):
+    pass
+
