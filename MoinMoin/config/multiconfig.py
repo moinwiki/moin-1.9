@@ -345,9 +345,6 @@ class DefaultConfig(object):
         self.cache.acl_rights_default = AccessControlList(self, [self.acl_rights_default])
         self.cache.acl_rights_after = AccessControlList(self, [self.acl_rights_after])
 
-        if self.url_prefix is not None: # remove this code when url_prefix setting is removed
-            self.url_prefix_static = self.url_prefix
-
         action_prefix = self.url_prefix_action
         if action_prefix is not None and action_prefix.endswith('/'): # make sure there is no trailing '/'
             self.url_prefix_action = action_prefix[:-1]
@@ -923,15 +920,6 @@ Lists: * bullets; 1., a. numbered items.
     ('unzip_attachments_count', 101, None),
 
     ('url_mappings', {}, None),
-
-    # url_prefix is DEPRECATED and not used any more by the code.
-    # it confused many people by its name and default value of '/wiki' to the
-    # wrong conclusion that it is the url of the wiki (the dynamic) stuff,
-    # but it was used to address the static stuff (images, css, js).
-    # Thus we use the more clear url_prefix_static ['/moin_staticVVV'] setting now.
-    # For a limited time, we still look at url_prefix - if it is not None, we
-    # copy the value to url_prefix_static to ease transition.
-    ('url_prefix', None, None),
 
     # includes the moin version number, so we can have a unlimited cache lifetime
     # for the static stuff. if stuff changes on version upgrade, url will change
