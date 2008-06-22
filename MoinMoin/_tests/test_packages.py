@@ -103,7 +103,7 @@ class TestRealCreation:
                                 include_underlay=False,
                                 filter=lambda name: not wikiutil.isSystemPage(self.request, name)),
                                 temp)
-        if package:
+        if not package:
             py.test.skip("No user created pages in wiki!")
         assert zipfile.is_zipfile(temp.name)
 
