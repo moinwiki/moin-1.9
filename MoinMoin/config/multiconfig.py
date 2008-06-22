@@ -641,6 +641,7 @@ class DefaultExpression(object):
 
 
 options_no_group_name = {
+  # ==========================================================================
   'session': ('Session settings', "Session-related settings, see HelpOnSessions.", (
     ('session_handler', DefaultExpression('session.DefaultSessionHandler()'),
      "See HelpOnSessions."),
@@ -655,15 +656,20 @@ options_no_group_name = {
     ('anonymous_session_lifetime', None,
      'Session lifetime [h] of users who are not logged in (None = disable anon sessions).'),
   )),
-
-  'various': ('Various', None, (
+  # ==========================================================================
+  'auth': ('Authentication / Authorization / Security settings', None, (
+    ('superuser', [],
+     "List of trusted user names with wiki system administration super powers (not to be confused with ACL admin rights!). Used for e.g. making full backups, software installation, language installation via SystemPagesSetup and more. See also HelpOnSuperUser."),
+    ('auth', DefaultExpression('[MoinAuth()]'),
+     "list of auth objects, to be called in this order (see HelpOnAuthentication)"),
+    ('auth_methods_trusted', ['http', 'xmlrpc_applytoken'],
+     'authentication methods for which users should be included in the special "Trusted" ACL group.'),
     ('DesktopEdition',
      False,
      "if True, give all local users special powers - ''only use this for a local desktop wiki!''"),
     ('SecurityPolicy',
      None,
      "Class object hook for implementing security restrictions or relaxations"),
-
     ('actions_excluded',
      ['xmlrpc',  # we do not want wiki admins unknowingly offering xmlrpc service
       'MyPages',  # only works when used with a non-default SecurityPolicy (e.g. autoadmin)
@@ -673,36 +679,154 @@ options_no_group_name = {
 
     ('allow_xslt', False,
      "if True, enables XSLT processing via 4Suite (note that this enables anyone with enough know-how to insert '''arbitrary HTML''' into your wiki, which is why it defaults to `False`)"),
+
+    ('password_checker', DefaultExpression('_default_password_checker'),
+     'checks whether a password is acceptable (default check is length >= 6, at least 4 different chars, no keyboard sequence, not username used somehow (you can switch this off by using `None`)'),
+
+  )),
+  # ==========================================================================
+  'spam_leech_dos': ('Anti-Spam/Leech/DOS', None, (
+    ('hosts_deny', [], "List of denied IPs; if an IP ends with a dot, it denies a whole subnet (class A, B or C)"),
+
+    ('surge_action_limits',
+     {# allow max. <count> <action> requests per <dt> secs
+        # action: (count, dt)
+        'all': (30, 30),
+        'show': (30, 60),
+        'recall': (10, 120),
+        'raw': (20, 40),  # some people use this for css
+        'AttachFile': (90, 60),
+        'diff': (30, 60),
+        'fullsearch': (10, 120),
+        'edit': (30, 300), # can be lowered after making preview different from edit
+        'rss_rc': (1, 60),
+        'default': (30, 60),
+     },
+     "Surge protection tries to deny clients causing too much load/traffic, see /SurgeProtection."),
+    ('surge_lockout_time', 3600, "time [s] someone gets locked out when ignoring the warnings"),
+
+    ('textchas', None,
+     "Spam protection setup using site-specific questions/answers, see HelpOnTextChas."),
+    ('textchas_disabled_group', None,
+     "Name of a group of trusted users who do not get asked TextCha questions."),
+
     ('antispam_master_url', "http://master.moinmo.in/?action=xmlrpc2",
      "where antispam security policy fetches spam pattern updates (if it is enabled)"),
-    ('auth', DefaultExpression('[MoinAuth()]'),
-     "list of auth objects, to be called in this order (see HelpOnAuthentication)"),
-    ('auth_methods_trusted', ['http', 'xmlrpc_applytoken'],
-     'authentication methods for which users should be included in the special "Trusted" ACL group.'),
 
-    ('bang_meta', True, 'if True, enable {{{!NoWikiName}}} markup'),
-    ('caching_formats', ['text_html'], "output formats that are cached; set to [] to turn off caching (useful for development)"),
+    # a regex of HTTP_USER_AGENTS that should be excluded from logging
+    # and receive a FORBIDDEN for anything except viewing a page
+    # list must not contain 'java' because of twikidraw wanting to save drawing uses this useragent
+    ('ua_spiders',
+     ('archiver|cfetch|charlotte|crawler|curl|gigabot|googlebot|heritrix|holmes|htdig|httrack|httpunit|'
+      'intelix|jeeves|larbin|leech|libwww-perl|linkbot|linkmap|linkwalk|litefinder|mercator|'
+      'microsoft.url.control|mirror| mj12bot|msnbot|msrbot|neomo|nutbot|omniexplorer|puf|robot|scooter|seekbot|'
+      'sherlock|slurp|sitecheck|snoopy|spider|teleport|twiceler|voilabot|voyager|webreaper|wget|yeti'),
+     "A regex of HTTP_USER_AGENTs that should be excluded from logging and are not allowed to use actions."),
+
+    ('unzip_single_file_size', 2.0 * 1000 ** 2,
+     "max. number of files which are extracted from the zip file"),
+    ('unzip_attachments_space', 200.0 * 1000 ** 2,
+     "max. total amount of bytes can be used to unzip files [bytes]"),
+    ('unzip_attachments_count', 101,
+     "max. size of a single file in the archive which will be extracted [bytes]"),
+  )),
+  # ==========================================================================
+  'style': ('Style / Theme / UI related', None, (
+    ('sitename', u'Untitled Wiki',
+     "Short description of your wiki site, displayed below the logo on each page, and used in RSS documents as the channel title [Unicode]"),
+    ('interwikiname', None, "unique and stable InterWiki name (prefix, moniker) of the site, or None"),
+    ('logo_string', None, "The wiki logo top of page, HTML is allowed (`<img>` is possible as well) [Unicode]"),
+    ('html_pagetitle', None, "Allows you to set a specific HTML page title (if None, it defaults to the value of `sitename`)"),
+    ('navi_bar', [u'RecentChanges', u'FindPage', u'HelpContents', ],
+     'Most important page names. Users can add more names in their quick links in user preferences. To link to URL, use `u"[url link title]"`, to use a shortened name for long page name, use `u"[LongLongPageName title]"`. To use page names with spaces, use `u"[page_name_with_spaces any title]"` [list of Unicode strings]'),
+
+    ('theme_default', 'modern',
+     "the name of the theme that is used by default (see HelpOnThemes)"),
+    ('theme_force', False,
+     "if True, do not allow to change the theme"),
+
+    ('stylesheets', [],
+     "List of tuples (media, csshref) to insert after theme css, before user css, see HelpOnThemes."),
+
+    ('supplementation_page', False,
+     "if True, show a link to the supplementation page in the theme"),
+    ('supplementation_page_name', u'Discussion',
+     "default name of the supplementation (sub)page [unicode]"),
+    ('supplementation_page_template', u'DiscussionTemplate',
+     "default template used for creation of the supplementation page [unicode]"),
+
+    ('interwiki_preferred', [], "In dialogues, show those wikis at the top of the list."),
+    ('sistersites', [], "list of tuples `('WikiName', 'sisterpagelist_fetch_url')`"),
+
+    ('trail_size', 5,
+     "Number of pages in the trail of visited pages"),
+
+    ('page_footer1', '', "Custom HTML markup sent ''before'' the system footer."),
+    ('page_footer2', '', "Custom HTML markup sent ''after'' the system footer."),
+    ('page_header1', '', "Custom HTML markup sent ''before'' the system header / title area but after the body tag."),
+    ('page_header2', '', "Custom HTML markup sent ''after'' the system header / title area (and body tag)."),
+
     ('changed_time_fmt', '%H:%M', "Time format used on Recent``Changes for page edits within the last 24 hours"),
-
-    ('chart_options', None, "If you have gdchart, use something like chart_options = {'width': 720, 'height': 540}"),
-
-    ('config_check_enabled', False, "if True, check configuration for unknown settings."),
-
-    ('data_dir', './data/', "Path to the data directory containing your (locally made) wiki pages."),
-    ('data_underlay_dir', './underlay/', "Path to the underlay directory containing distribution system and help pages."),
-
     ('date_fmt', '%Y-%m-%d', "System date format, used mostly in Recent``Changes"),
     ('datetime_fmt', '%Y-%m-%d %H:%M:%S', 'Default format for dates and times (when the user has no preferences or chose the "default" date format)'),
-
-    ('default_markup', 'wiki', 'Default page parser / format (name of module in `MoinMoin.parser`)'),
-    ('docbook_html_dir', r"/usr/share/xml/docbook/stylesheet/nwalsh/html/",
-     'Path to the directory with the Docbook to HTML XSLT files (optional, used by the docbook parser). The default value is correct for Debian Etch.'),
+    ('chart_options', None, "If you have gdchart, use something like chart_options = {'width': 720, 'height': 540}"),
 
     ('edit_bar', ['Edit', 'Comments', 'Discussion', 'Info', 'Subscribe', 'Quicklink', 'Attachments', 'ActionsMenu'],
      'list of edit bar entries'),
+    ('history_count', (100, 200), "number of revisions shown for info/history action (default_count_shown, max_count_shown)"),
+
+    ('show_hosts', True,
+     "if True, show host names and IPs. Set to False to hide them."),
+    ('show_interwiki', False,
+     "if True, let the theme display your interwiki name"),
+    ('show_names', True,
+     "if True, show user names in the revision history and on Recent``Changes. Set to False to hide them."),
+    ('show_section_numbers', False,
+     'show section numbers in headings by default'),
+    ('show_timings', False, "show some timing values at bottom of a page"),
+    ('show_version', False, "show moin's version at the bottom of a page"),
+    ('traceback_show', True,
+     "if True, show debug tracebacks to users when moin crashes"),
+
+    ('page_credits',
+     [
+       '<a href="http://moinmo.in/" title="This site uses the MoinMoin Wiki software.">MoinMoin Powered</a>',
+       '<a href="http://moinmo.in/Python" title="MoinMoin is written in Python.">Python Powered</a>',
+       '<a href="http://moinmo.in/GPL" title="MoinMoin is GPL licensed.">GPL licensed</a>',
+       '<a href="http://validator.w3.org/check?uri=referer" title="Click here to validate this page.">Valid HTML 4.01</a>',
+     ],
+     'list with html fragments with logos or strings for crediting.'),
+
+    # These icons will show in this order in the iconbar, unless they
+    # are not relevant, e.g email icon when the wiki is not configured
+    # for email.
+    ('page_iconbar', ["up", "edit", "view", "diff", "info", "subscribe", "raw", "print", ],
+     'list of icons to show in iconbar, valid values are only those in page_icons_table. Available only in classic theme.'),
+
+    # Standard buttons in the iconbar
+    ('page_icons_table',
+     {
+        # key           pagekey, querystr dict, title, icon-key
+        'diff': ('page', {'action': 'diff'}, _("Diffs"), "diff"),
+        'info': ('page', {'action': 'info'}, _("Info"), "info"),
+        'edit': ('page', {'action': 'edit'}, _("Edit"), "edit"),
+        'unsubscribe': ('page', {'action': 'unsubscribe'}, _("UnSubscribe"), "unsubscribe"),
+        'subscribe': ('page', {'action': 'subscribe'}, _("Subscribe"), "subscribe"),
+        'raw': ('page', {'action': 'raw'}, _("Raw"), "raw"),
+        'xml': ('page', {'action': 'show', 'mimetype': 'text/xml'}, _("XML"), "xml"),
+        'print': ('page', {'action': 'print'}, _("Print"), "print"),
+        'view': ('page', {}, _("View"), "view"),
+        'up': ('page_parent_page', {}, _("Up"), "up"),
+     },
+     "dict of {'iconname': (url, title, icon-img-key), ...}. Available only in classic theme."),
+
+  )),
+  # ==========================================================================
+  'editor': ('Editor related', None, (
     ('editor_default', 'text', "Editor to use by default, 'text' or 'gui'"),
     ('editor_force', False, "if True, force using the default editor"),
     ('editor_ui', 'freechoice', "Editor choice shown on the user interface, 'freechoice' or 'theonepreferred'"),
+    ('page_license_enabled', False, 'if True, show a license hint in page editor.'),
     ('editor_quickhelp', {
         # editor markup hints quickhelp
         # MUST be in wiki markup, even if the help is not for the wiki parser!
@@ -750,9 +874,91 @@ Lists: * bullets; 1., a. numbered items.
     ('edit_ticketing', True, None),
     ('edit_rows', 20, "Default height of the edit box"),
 
-    ('history_count', (100, 200), "number of revisions shown for info/history action (default_count_shown, max_count_shown)"),
+  )),
+  # ==========================================================================
+  'pathes': ('Pathes', None, (
+    ('data_dir', './data/', "Path to the data directory containing your (locally made) wiki pages."),
+    ('data_underlay_dir', './underlay/', "Path to the underlay directory containing distribution system and help pages."),
 
-    ('hosts_deny', [], "List of denied IPs; if an IP ends with a dot, it denies a whole subnet (class A, B or C)"),
+    ('docbook_html_dir', r"/usr/share/xml/docbook/stylesheet/nwalsh/html/",
+     'Path to the directory with the Docbook to HTML XSLT files (optional, used by the docbook parser). The default value is correct for Debian Etch.'),
+    ('shared_intermap', None,
+     "Path to a file containing global InterWiki definitions (or a list of such filenames)"),
+  )),
+  # ==========================================================================
+  'urls': ('URLs', None, (
+    # includes the moin version number, so we can have a unlimited cache lifetime
+    # for the static stuff. if stuff changes on version upgrade, url will change
+    # immediately and we have no problem with stale caches.
+    ('url_prefix_static', config.url_prefix_static,
+     "used as the base URL for icons, css, etc. - includes the moin version number and changes on every release. This replaces the deprecated and sometimes confusing `url_prefix = '/wiki'` setting."),
+    ('url_prefix_local', None,
+     "used as the base URL for some Javascript - set this to a URL on same server as the wiki if your url_prefix_static points to a different server."),
+
+    ('url_prefix_action', None,
+     "Use 'action' to enable action URL generation to be compatible with robots.txt. It will generate .../action/info/PageName?action=info then. Recommended for internet wikis."),
+
+    ('notification_bot_uri', None, "URI of the Jabber notification bot."),
+
+    ('url_mappings', {},
+     "lookup table to remap URL prefixes (dict of {{{'prefix': 'replacement'}}}); especially useful in intranets, when whole trees of externally hosted documents move around"),
+
+  )),
+  # ==========================================================================
+  'pages': ('Special page names', None, (
+    ('page_front_page', u'HelpOnLanguages',
+     "Name of the front page. We don't expect you to keep the default. Just read HelpOnLanguages in case you're wondering... [Unicode]"),
+
+    # the following regexes should match the complete name when used in free text
+    # the group 'all' shall match all, while the group 'key' shall match the key only
+    # e.g. CategoryFoo -> group 'all' ==  CategoryFoo, group 'key' == Foo
+    # moin's code will add ^ / $ at beginning / end when needed
+    ('page_category_regex', ur'(?P<all>Category(?P<key>\S+))',
+     'Pagenames exactly matching this regex are regarded as Wiki categories [Unicode]'),
+    ('page_dict_regex', ur'(?P<all>(?P<key>\S+)Dict)',
+     'Pagenames exactly matching this regex are regarded as pages containing variable dictionary definitions [Unicode]'),
+    ('page_group_regex', ur'(?P<all>(?P<key>\S+)Group)',
+     'Pagenames exactly matching this regex are regarded as pages containing group definitions [Unicode]'),
+    ('page_template_regex', ur'(?P<all>(?P<key>\S+)Template)',
+     'Pagenames exactly matching this regex are regarded as pages containing templates for new pages [Unicode]'),
+
+    ('page_license_page', u'WikiLicense', 'Page linked from the license hint. [Unicode]'),
+
+    ('page_local_spelling_words', u'LocalSpellingWords',
+     'Name of the page containing user-provided spellchecker words [Unicode]'),
+  )),
+  # ==========================================================================
+  'user': ('User Preferences related', None, (
+    ('quicklinks_default', [],
+     'List of preset quicklinks for a newly created user accounts. Existing accounts are not affected by this option whereas changes in navi_bar do always affect existing accounts. Preset quicklinks can be removed by the user in the user preferences menu, navi_bar settings not.'),
+    ('subscribed_pages_default', [],
+     "List of pagenames used for presetting page subscriptions for newly created user accounts."),
+
+    ('email_subscribed_events_default',
+     [
+        PageChangedEvent.__name__,
+        PageRenamedEvent.__name__,
+        PageDeletedEvent.__name__,
+        PageCopiedEvent.__name__,
+        PageRevertedEvent.__name__,
+        FileAttachedEvent.__name__,
+     ], None),
+    ('jabber_subscribed_events_default', [], None),
+
+    ('tz_offset', 0.0,
+     "default time zone offset in hours from UTC"),
+
+    ('userprefs_disabled', [],
+     "Disable the listed user preferences plugins."),
+  )),
+  # ==========================================================================
+  'various': ('Various', None, (
+    ('bang_meta', True, 'if True, enable {{{!NoWikiName}}} markup'),
+    ('caching_formats', ['text_html'], "output formats that are cached; set to [] to turn off caching (useful for development)"),
+
+    ('config_check_enabled', False, "if True, check configuration for unknown settings."),
+
+    ('default_markup', 'wiki', 'Default page parser / format (name of module in `MoinMoin.parser`)'),
 
     ('html_head', '', "Additional <HEAD> tags, see HelpOnThemes."),
     ('html_head_queries', '<meta name="robots" content="noindex,nofollow">\n',
@@ -763,15 +969,9 @@ Lists: * bullets; 1., a. numbered items.
      "Additional <HEAD> tags for some few index pages."),
     ('html_head_normal', '<meta name="robots" content="index,nofollow">\n',
      "Additional <HEAD> tags for most normal pages."),
-    ('html_pagetitle', None, "Allows you to set a specific HTML page title (if None, it defaults to the value of `sitename`)"),
-
-    ('interwikiname', None, "InterWiki name (prefix, moniker) of the site, or None"),
-    ('interwiki_preferred', [], "In dialogues, show those wikis at the top of the list."),
 
     ('language_default', 'en', "Default language for user interface and page content, see HelpOnLanguages."),
     ('language_ignore_browser', False, "if True, ignore user's browser language settings, see HelpOnLanguages."),
-
-    ('logo_string', None, "The wiki logo top of page, HTML is allowed (`<img>` is possible as well) [Unicode]"),
 
     ('log_reverse_dns_lookups', True,
      "if True, do a reverse DNS lookup on page SAVE. If your DNS is broken, set this to False to speed up SAVE."),
@@ -812,198 +1012,13 @@ Lists: * bullets; 1., a. numbered items.
      ],
      'mimetypes that can be embedded by the [[HelpOnMacros/EmbedObject|EmbedObject macro]]'),
 
-    ('navi_bar', [u'RecentChanges', u'FindPage', u'HelpContents', ],
-     'Most important page names. Users can add more names in their quick links in user preferences. To link to URL, use `u"[url link title]"`, to use a shortened name for long page name, use `u"[LongLongPageName title]"`. To use page names with spaces, use `u"[page_name_with_spaces any title]"` [list of Unicode strings]'),
-
-    ('notification_bot_uri', None, "URI of the Jabber notification bot."),
-
-    ('page_credits',
-     [
-       '<a href="http://moinmo.in/" title="This site uses the MoinMoin Wiki software.">MoinMoin Powered</a>',
-       '<a href="http://moinmo.in/Python" title="MoinMoin is written in Python.">Python Powered</a>',
-       '<a href="http://moinmo.in/GPL" title="MoinMoin is GPL licensed.">GPL licensed</a>',
-       '<a href="http://validator.w3.org/check?uri=referer" title="Click here to validate this page.">Valid HTML 4.01</a>',
-     ],
-     'list with html fragments with logos or strings for crediting.'),
-
-    ('page_footer1', '', "Custom HTML markup sent ''before'' the system footer."),
-    ('page_footer2', '', "Custom HTML markup sent ''after'' the system footer."),
-    ('page_header1', '', "Custom HTML markup sent ''before'' the system header / title area but after the body tag."),
-    ('page_header2', '', "Custom HTML markup sent ''after'' the system header / title area (and body tag)."),
-
-    ('page_front_page', u'HelpOnLanguages',
-     "Name of the front page. We don't expect you to keep the default. Just read HelpOnLanguages in case you're wondering... [Unicode]"),
-    ('page_local_spelling_words', u'LocalSpellingWords',
-     'Name of the page containing user-provided spellchecker words [Unicode]'),
-
-    # the following regexes should match the complete name when used in free text
-    # the group 'all' shall match all, while the group 'key' shall match the key only
-    # e.g. CategoryFoo -> group 'all' ==  CategoryFoo, group 'key' == Foo
-    # moin's code will add ^ / $ at beginning / end when needed
-    ('page_category_regex', ur'(?P<all>Category(?P<key>\S+))',
-     'Pagenames exactly matching this regex are regarded as Wiki categories [Unicode]'),
-    ('page_dict_regex', ur'(?P<all>(?P<key>\S+)Dict)',
-     'Pagenames exactly matching this regex are regarded as pages containing variable dictionary definitions [Unicode]'),
-    ('page_group_regex', ur'(?P<all>(?P<key>\S+)Group)',
-     'Pagenames exactly matching this regex are regarded as pages containing group definitions [Unicode]'),
-    ('page_template_regex', ur'(?P<all>(?P<key>\S+)Template)',
-     'Pagenames exactly matching this regex are regarded as pages containing templates for new pages [Unicode]'),
-
-    ('page_license_enabled', False, 'if True, show a license hint in page editor.'),
-    ('page_license_page', u'WikiLicense', 'Page linked from the license hint. [Unicode]'),
-
-    # These icons will show in this order in the iconbar, unless they
-    # are not relevant, e.g email icon when the wiki is not configured
-    # for email.
-    ('page_iconbar', ["up", "edit", "view", "diff", "info", "subscribe", "raw", "print", ],
-     'list of icons to show in iconbar, valid values are only those in page_icons_table. Available only in classic theme.'),
-
-    # Standard buttons in the iconbar
-    ('page_icons_table',
-     {
-        # key           pagekey, querystr dict, title, icon-key
-        'diff': ('page', {'action': 'diff'}, _("Diffs"), "diff"),
-        'info': ('page', {'action': 'info'}, _("Info"), "info"),
-        'edit': ('page', {'action': 'edit'}, _("Edit"), "edit"),
-        'unsubscribe': ('page', {'action': 'unsubscribe'}, _("UnSubscribe"), "unsubscribe"),
-        'subscribe': ('page', {'action': 'subscribe'}, _("Subscribe"), "subscribe"),
-        'raw': ('page', {'action': 'raw'}, _("Raw"), "raw"),
-        'xml': ('page', {'action': 'show', 'mimetype': 'text/xml'}, _("XML"), "xml"),
-        'print': ('page', {'action': 'print'}, _("Print"), "print"),
-        'view': ('page', {}, _("View"), "view"),
-        'up': ('page_parent_page', {}, _("Up"), "up"),
-     },
-     "dict of {'iconname': (url, title, icon-img-key), ...}. Available only in classic theme."),
-
-    ('password_checker', DefaultExpression('_default_password_checker'),
-     'checks whether a password is acceptable (default check is length >= 6, at least 4 different chars, no keyboard sequence, not username used somehow (you can switch this off by using `None`)'),
-
-    ('quicklinks_default', [],
-     'List of preset quicklinks for a newly created user accounts. Existing accounts are not affected by this option whereas changes in navi_bar do always affect existing accounts. Preset quicklinks can be removed by the user in the user preferences menu, navi_bar settings not.'),
-
     ('refresh', None,
      "refresh = (minimum_delay_s, targets_allowed) enables use of `#refresh 5 PageName` processing instruction, targets_allowed must be either `'internal'` or `'external'`"),
     ('rss_cache', 60, "suggested caching time for Recent''''''Changes RSS, in second"),
 
     ('search_results_per_page', 25, "Number of hits shown per page in the search results"),
 
-    ('shared_intermap', None,
-     "Path to a file containing global InterWiki definitions (or a list of such filenames)"),
-
-    ('show_hosts', True,
-     "if True, show host names and IPs. Set to False to hide them."),
-    ('show_interwiki', False,
-     "if True, let the theme display your interwiki name"),
-    ('show_names', True,
-     "if True, show user names in the revision history and on Recent``Changes. Set to False to hide them."),
-    ('show_section_numbers', False,
-     'show section numbers in headings by default'),
-    ('show_timings', False, "show some timing values at bottom of a page"),
-    ('show_version', False, "show moin's version at the bottom of a page"),
-
-    ('sistersites', [], "list of tuples `('WikiName', 'sisterpagelist_fetch_url')`"),
-
     ('siteid', 'default', None),
-    ('sitename', u'Untitled Wiki',
-     "Short description of your wiki site, displayed below the logo on each page, and used in RSS documents as the channel title [Unicode]"),
-
-    ('stylesheets', [],
-     "List of tuples (media, csshref) to insert after theme css, before user css, see HelpOnThemes."),
-
-    ('subscribed_pages_default', [],
-     "List of pagenames used for presetting page subscriptions for newly created user accounts."),
-    ('email_subscribed_events_default',
-     [
-        PageChangedEvent.__name__,
-        PageRenamedEvent.__name__,
-        PageDeletedEvent.__name__,
-        PageCopiedEvent.__name__,
-        PageRevertedEvent.__name__,
-        FileAttachedEvent.__name__,
-     ], None),
-    ('jabber_subscribed_events_default', [], None),
-
-    ('superuser', [],
-     "List of trusted user names with wiki system administration super powers (not to be confused with ACL admin rights!). Used for e.g. making full backups, software installation, language installation via SystemPagesSetup and more. See also HelpOnSuperUser."),
-
-    ('supplementation_page', False,
-     "if True, show a link to the supplementation page in the theme"),
-    ('supplementation_page_name', u'Discussion',
-     "default name of the supplementation (sub)page [unicode]"),
-    ('supplementation_page_template', u'DiscussionTemplate',
-     "default template used for creation of the supplementation page [unicode]"),
-
-    ('surge_action_limits',
-     {# allow max. <count> <action> requests per <dt> secs
-        # action: (count, dt)
-        'all': (30, 30),
-        'show': (30, 60),
-        'recall': (10, 120),
-        'raw': (20, 40),  # some people use this for css
-        'AttachFile': (90, 60),
-        'diff': (30, 60),
-        'fullsearch': (10, 120),
-        'edit': (30, 300), # can be lowered after making preview different from edit
-        'rss_rc': (1, 60),
-        'default': (30, 60),
-     },
-     "Surge protection tries to deny clients causing too much load/traffic, see /SurgeProtection."),
-    ('surge_lockout_time', 3600, "time [s] someone gets locked out when ignoring the warnings"),
-
-    ('textchas', None,
-     "Spam protection setup using site-specific questions/answers, see HelpOnTextChas."),
-    ('textchas_disabled_group', None,
-     "Name of a group of trusted users who do not get asked TextCha questions."),
-
-    ('theme_default', 'modern',
-     "the name of the theme that is used by default (see HelpOnThemes)"),
-    ('theme_force', False,
-     "if True, do not allow to change the theme"),
-
-    ('traceback_show', True,
-     "if True, show debug tracebacks to users when moin crashes"),
-
-    ('trail_size', 5,
-     "Number of pages in the trail of visited pages"),
-    ('tz_offset', 0.0,
-     "default time zone offset in hours from UTC"),
-
-    # a regex of HTTP_USER_AGENTS that should be excluded from logging
-    # and receive a FORBIDDEN for anything except viewing a page
-    # list must not contain 'java' because of twikidraw wanting to save drawing uses this useragent
-    ('ua_spiders',
-     ('archiver|cfetch|charlotte|crawler|curl|gigabot|googlebot|heritrix|holmes|htdig|httrack|httpunit|'
-      'intelix|jeeves|larbin|leech|libwww-perl|linkbot|linkmap|linkwalk|litefinder|mercator|'
-      'microsoft.url.control|mirror| mj12bot|msnbot|msrbot|neomo|nutbot|omniexplorer|puf|robot|scooter|seekbot|'
-      'sherlock|slurp|sitecheck|snoopy|spider|teleport|twiceler|voilabot|voyager|webreaper|wget|yeti'),
-     "A regex of HTTP_USER_AGENTs that should be excluded from logging and are not allowed to use actions."),
-
-    ('unzip_single_file_size', 2.0 * 1000 ** 2,
-     "max. number of files which are extracted from the zip file"),
-    ('unzip_attachments_space', 200.0 * 1000 ** 2,
-     "max. total amount of bytes can be used to unzip files [bytes]"),
-    ('unzip_attachments_count', 101,
-     "max. size of a single file in the archive which will be extracted [bytes]"),
-
-    ('url_mappings', {},
-     "lookup table to remap URL prefixes (dict of {{{'prefix': 'replacement'}}}); especially useful in intranets, when whole trees of externally hosted documents move around"),
-
-    # includes the moin version number, so we can have a unlimited cache lifetime
-    # for the static stuff. if stuff changes on version upgrade, url will change
-    # immediately and we have no problem with stale caches.
-    ('url_prefix_static', config.url_prefix_static,
-     "used as the base URL for icons, css, etc. - includes the moin version number and changes on every release. This replaces the deprecated and sometimes confusing `url_prefix = '/wiki'` setting."),
-    ('url_prefix_local', None,
-     "used as the base URL for some Javascript - set this to a URL on same server as the wiki if your url_prefix_static points to a different server."),
-
-    # we could prefix actions to be able to exclude them by robots.txt:
-    #url_prefix_action', 'action' # no leading or trailing '/'
-    ('url_prefix_action', None,
-     "Use 'action' to enable action URL generation to be compatible with robots.txt. It will generate .../action/info/PageName?action=info then. Recommended for internet wikis."),
-
-    # allow disabling certain userpreferences plugins
-    ('userprefs_disabled', [],
-     "Disable the listed user preferences plugins."),
   )),
 }
 
