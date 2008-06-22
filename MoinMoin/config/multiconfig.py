@@ -646,11 +646,14 @@ options_no_group_name = {
      "See HelpOnSessions."),
     ('session_id_handler', DefaultExpression('session.MoinCookieSessionIDHandler()'),
      "Only used by the DefaultSessionHandler, see HelpOnSessions."),
-    ('cookie_domain', None, None),
-    ('cookie_path', None, None),
-    ('cookie_lifetime', 12, None),
+    ('cookie_domain', None,
+     'Domain used in the session cookie. (None = do not specify domain).'),
+    ('cookie_path', None,
+     'Path used in the session cookie (None = auto-detect).'),
+    ('cookie_lifetime', 12,
+     'Session lifetime [h] of logged-in users (see HelpOnSessions for details).'),
     ('anonymous_session_lifetime', None,
-     'Session lifetime of users who are not logged in.'),
+     'Session lifetime [h] of users who are not logged in (None = disable anon sessions).'),
   )),
 
   'various': ('Various', None, (
@@ -659,7 +662,7 @@ options_no_group_name = {
      "if True, give all local users special powers - ''only use this for a local desktop wiki!''"),
     ('SecurityPolicy',
      None,
-     "Class object hook for implementing security restrictions"),
+     "Class object hook for implementing security restrictions or relaxations"),
 
     ('actions_excluded',
      ['xmlrpc',  # we do not want wiki admins unknowingly offering xmlrpc service
@@ -683,7 +686,7 @@ options_no_group_name = {
 
     ('chart_options', None, "If you have gdchart, use something like chart_options = {'width': 720, 'height': 540}"),
 
-    ('config_check_enabled', False, None),
+    ('config_check_enabled', False, "if True, check configuration for unknown settings."),
 
     ('data_dir', './data/', "Path to the data directory containing your (locally made) wiki pages."),
     ('data_underlay_dir', './underlay/', "Path to the underlay directory containing distribution system and help pages."),
@@ -752,10 +755,14 @@ Lists: * bullets; 1., a. numbered items.
     ('hosts_deny', [], "List of denied IPs; if an IP ends with a dot, it denies a whole subnet (class A, B or C)"),
 
     ('html_head', '', "Additional <HEAD> tags, see HelpOnThemes."),
-    ('html_head_queries', '<meta name="robots" content="noindex,nofollow">\n', None),
-    ('html_head_posts', '<meta name="robots" content="noindex,nofollow">\n', None),
-    ('html_head_index', '<meta name="robots" content="index,follow">\n', None),
-    ('html_head_normal', '<meta name="robots" content="index,nofollow">\n', None),
+    ('html_head_queries', '<meta name="robots" content="noindex,nofollow">\n',
+     "Additional <HEAD> tags for requests with query strings, like actions."),
+    ('html_head_posts', '<meta name="robots" content="noindex,nofollow">\n',
+     "Additional <HEAD> tags for POST requests."),
+    ('html_head_index', '<meta name="robots" content="index,follow">\n',
+     "Additional <HEAD> tags for some few index pages."),
+    ('html_head_normal', '<meta name="robots" content="index,nofollow">\n',
+     "Additional <HEAD> tags for most normal pages."),
     ('html_pagetitle', None, "Allows you to set a specific HTML page title (if None, it defaults to the value of `sitename`)"),
 
     ('interwikiname', None, "InterWiki name (prefix, moniker) of the site, or None"),
@@ -808,7 +815,7 @@ Lists: * bullets; 1., a. numbered items.
     ('navi_bar', [u'RecentChanges', u'FindPage', u'HelpContents', ],
      'Most important page names. Users can add more names in their quick links in user preferences. To link to URL, use `u"[url link title]"`, to use a shortened name for long page name, use `u"[LongLongPageName title]"`. To use page names with spaces, use `u"[page_name_with_spaces any title]"` [list of Unicode strings]'),
 
-    ('notification_bot_uri', None, None),
+    ('notification_bot_uri', None, "URI of the Jabber notification bot."),
 
     ('page_credits',
      [
@@ -819,10 +826,10 @@ Lists: * bullets; 1., a. numbered items.
      ],
      'list with html fragments with logos or strings for crediting.'),
 
-    ('page_footer1', '', None),
-    ('page_footer2', '', None),
-    ('page_header1', '', None),
-    ('page_header2', '', None),
+    ('page_footer1', '', "Custom HTML markup sent ''before'' the system footer."),
+    ('page_footer2', '', "Custom HTML markup sent ''after'' the system footer."),
+    ('page_header1', '', "Custom HTML markup sent ''before'' the system header / title area but after the body tag."),
+    ('page_header2', '', "Custom HTML markup sent ''after'' the system header / title area (and body tag)."),
 
     ('page_front_page', u'HelpOnLanguages',
      "Name of the front page. We don't expect you to keep the default. Just read HelpOnLanguages in case you're wondering... [Unicode]"),
@@ -941,11 +948,12 @@ Lists: * bullets; 1., a. numbered items.
         'default': (30, 60),
      },
      "Surge protection tries to deny clients causing too much load/traffic, see /SurgeProtection."),
-    ('surge_lockout_time', 3600, None),
+    ('surge_lockout_time', 3600, "time [s] someone gets locked out when ignoring the warnings"),
 
     ('textchas', None,
      "Spam protection setup using site-specific questions/answers, see HelpOnTextChas."),
-    ('textchas_disabled_group', None, None),
+    ('textchas_disabled_group', None,
+     "Name of a group of trusted users who do not get asked TextCha questions."),
 
     ('theme_default', 'modern',
      "the name of the theme that is used by default (see HelpOnThemes)"),
@@ -985,7 +993,8 @@ Lists: * bullets; 1., a. numbered items.
     # immediately and we have no problem with stale caches.
     ('url_prefix_static', config.url_prefix_static,
      "used as the base URL for icons, css, etc. - includes the moin version number and changes on every release. This replaces the deprecated and sometimes confusing `url_prefix = '/wiki'` setting."),
-    ('url_prefix_local', None, None),
+    ('url_prefix_local', None,
+     "used as the base URL for some Javascript - set this to a URL on same server as the wiki if your url_prefix_static points to a different server."),
 
     # we could prefix actions to be able to exclude them by robots.txt:
     #url_prefix_action', 'action' # no leading or trailing '/'
@@ -1001,17 +1010,25 @@ Lists: * bullets; 1., a. numbered items.
 options = {
     'acl': ('Access control lists', None, (
       ('hierarchic', False, 'True to use hierarchical ACLs'),
-      ('rights_default', u"Trusted:read,write,delete,revert Known:read,write,delete,revert All:read,write", None),
-      ('rights_before', u"", None),
-      ('rights_after', u"", None),
-      ('rights_valid', ['read', 'write', 'delete', 'revert', 'admin'], None),
+      ('rights_default', u"Trusted:read,write,delete,revert Known:read,write,delete,revert All:read,write",
+       "ACL used if no ACL is specified on the page"),
+      ('rights_before', u"",
+       "ACL that is processed before the on-page/default ACL"),
+      ('rights_after', u"",
+       "ACL that is processed after the on-page/default ACL"),
+      ('rights_valid', ['read', 'write', 'delete', 'revert', 'admin'],
+       "Valid tokens for right sides of ACL entries."),
     )),
 
     'xapian': ('Xapian search', "Configuration of the Xapian based indexed search, see HelpOnXapian.", (
-      ('search', False, None),
-      ('index_dir', None, None),
-      ('stemming', False, None),
-      ('index_history', False, None),
+      ('search', False,
+       "True to enable the fast, indexed search (based on the Xapian search library)"),
+      ('index_dir', None,
+       "Directory where the Xapian search index is stored (None = auto-configure wiki local storage)"),
+      ('stemming', False,
+       "True to enable Xapian word stemmer usage for indexing / searching."),
+      ('index_history', False,
+       "True to enable indexing of non-current page revisions."),
     )),
 
     'user': ('Users / User settings', None, (
@@ -1092,13 +1109,13 @@ options = {
        },
        None),
 
-      ('form_disable', [], None),
+      ('form_disable', [], "list of field names used to disable user preferences form fields"),
 
-      ('form_remove', [], None),
+      ('form_remove', [], "list of field names used to remove user preferences form fields"),
 
       ('transient_fields',
        ['id', 'valid', 'may', 'auth_username', 'password', 'password2', 'auth_method', 'auth_attribs', ],
-       None),
+       "User object attributes that are not persisted to permanent storage (internal use)."),
     )),
 
     'backup': ('Backup', None, (
@@ -1120,25 +1137,25 @@ options = {
     'openid_server': ('OpenID Server',
         'These settings control the built-in OpenID Identity Provider (server).',
     (
-      ('enabled', False, None),
-      ('restricted_users_group', None, None),
-      ('enable_user', False, None),
+      ('enabled', False, "True to enable the built-in OpenID server."),
+      ('restricted_users_group', None, "If set to a group name, the group members are allowed to use the wiki as an OpenID provider. (None = allow for all users)"),
+      ('enable_user', False, "If True, the OpenIDUser processing instruction is allowed."),
     )),
 
     'mail': ('Mail settings',
         'These settings control outgoing and incoming email from and to the wiki.',
     (
-      ('from', None, None),
-      ('login', None, None),
-      ('smarthost', None, None),
-      ('sendmail', None, None),
+      ('from', None, "Used as From: address for generated mail."),
+      ('login', None, "'username userpass' for SMTP server authentication (None = don't use auth)."),
+      ('smarthost', None, "Address of SMTP server to use for sending mail (None = don't use SMTP server)."),
+      ('sendmail', None, "sendmail command to use for sending mail (None = don't use sendmail)"),
 
-      ('import_secret', "", None),
-      ('import_subpage_template', u"$from-$date-$subject", None),
-      ('import_pagename_search', ['subject', 'to', ], None),
-      ('import_pagename_envelope', u"%s", None),
-      ('import_pagename_regex', r'\[\[([^\]]*)\]\]', None),
-      ('import_wiki_addrs', [], None),
+      ('import_secret', "", "Shared secret for mail importing"),
+      ('import_subpage_template', u"$from-$date-$subject", "Create subpages using this template when importing mail."),
+      ('import_pagename_search', ['subject', 'to', ], "Where to look for target pagename specification."),
+      ('import_pagename_envelope', u"%s", "Use this to add some fixed prefix/postfix to the generated target pagename."),
+      ('import_pagename_regex', r'\[\[([^\]]*)\]\]', "Regular expression used to search for target pagename specification."),
+      ('import_wiki_addrs', [], "Target mail addresses to consider when importing mail"),
     )),
 }
 
