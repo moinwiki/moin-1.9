@@ -76,7 +76,7 @@ patchlevel:
 
 # Report translations status
 check-i18n:
-	MoinMoin/i18n/check_i18n.py
+	MoinMoin/i18n/tools/check_i18n.py
 
 # Update the workdir from the default pull repo
 update:
