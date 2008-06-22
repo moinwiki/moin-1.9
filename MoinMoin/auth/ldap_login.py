@@ -242,7 +242,7 @@ class LDAPAuth(BaseAuth):
             # method).
             logging.error("LDAP server %s failed (%s). "
                           "Trying to authenticate with next auth list entry." % (server, str(err)))
-            return ContinueLogin(user_obj, _("LDAP server %(server)s failed." % {'server': server}))
+            return ContinueLogin(user_obj, _("LDAP server %(server)s failed.") % {'server': server})
 
         except:
             logging.exception("caught an exception, traceback follows...")
