@@ -954,8 +954,6 @@ Lists: * bullets; 1., a. numbered items.
 
     ('traceback_show', True,
      "if True, show debug tracebacks to users when moin crashes"),
-    ('traceback_log_dir', None,
-     "Directory to store tracebacks or None."),
 
     ('trail_size', 5,
      "Number of pages in the trail of visited pages"),
