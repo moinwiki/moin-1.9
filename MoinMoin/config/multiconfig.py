@@ -160,24 +160,6 @@ use the wikiconfig.py file from the distribution.
 }
         raise error.ConfigurationError(msg)
 
-    # postprocess configuration
-    # 'setuid' special auth method auth method can log out
-    cfg.auth_can_logout = ['setuid']
-    cfg.auth_login_inputs = []
-    found_names = []
-    for auth in cfg.auth:
-        if not auth.name:
-            raise error.ConfigurationError("Auth methods must have a name.")
-        if auth.name in found_names:
-            raise error.ConfigurationError("Auth method names must be unique.")
-        found_names.append(auth.name)
-        if auth.logout_possible and auth.name:
-            cfg.auth_can_logout.append(auth.name)
-        for input in auth.login_inputs:
-            if not input in cfg.auth_login_inputs:
-                cfg.auth_login_inputs.append(input)
-    cfg.auth_have_login = len(cfg.auth_login_inputs) > 0
-
     return cfg
 
 
@@ -297,6 +279,23 @@ class DefaultConfig(object):
                 self.chart_options = None
 
         # post process
+
+        # 'setuid' special auth method auth method can log out
+        self.auth_can_logout = ['setuid']
+        self.auth_login_inputs = []
+        found_names = []
+        for auth in self.auth:
+            if not auth.name:
+                raise error.ConfigurationError("Auth methods must have a name.")
+            if auth.name in found_names:
+                raise error.ConfigurationError("Auth method names must be unique.")
+            found_names.append(auth.name)
+            if auth.logout_possible and auth.name:
+                self.auth_can_logout.append(auth.name)
+            for input in auth.login_inputs:
+                if not input in self.auth_login_inputs:
+                    self.auth_login_inputs.append(input)
+        self.auth_have_login = len(self.auth_login_inputs) > 0
 
         # internal dict for plugin `modules' lists
         self._site_plugin_lists = {}
