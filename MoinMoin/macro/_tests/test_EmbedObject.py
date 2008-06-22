@@ -55,7 +55,7 @@ class TestEmbedObject:
     def testEmbedObjectMimetype(self):
         """ tests defined mimetyes """
         tests = [
-            (u'test.ogg', 'application/ogg'),
+            (u'test.pdf', 'application/pdf'),
             (u'test.svg', 'image/svg+xml'),
             (u'test.mpg', 'video/mpeg'),
             (u'test.mp3', 'audio/mpeg'),
@@ -68,27 +68,27 @@ class TestEmbedObject:
     def testEmbedObjectDefaultValues(self):
         """ tests default values of macro EmbedObject """
         m = self._make_macro()
-        filename = 'test.ogg'
+        filename = 'test.mpg'
         result = m.execute('EmbedObject', u'%s' % filename)
-        assert '<object data="./AutoCreatedMoinMoinTemporaryTestPageForEmbedObject?action=AttachFile&amp;do=get&amp;target=test.ogg"' in result
+        assert '<object data="./AutoCreatedMoinMoinTemporaryTestPageForEmbedObject?action=AttachFile&amp;do=get&amp;target=test.mpg"' in result
         assert 'align="middle"' in result
         assert 'value="transparent"' in result
 
     def testEmbedObjectPercentHeight(self):
         """ tests a unit value for macro EmbedObject """
         m = self._make_macro()
-        filename = 'test.ogg'
+        filename = 'test.mpg'
         height = '50 %' # also tests that space is allowed in there
         result = m.execute('EmbedObject', u'target=%s, height=%s' % (filename, height))
-        assert '<object data="./AutoCreatedMoinMoinTemporaryTestPageForEmbedObject?action=AttachFile&amp;do=get&amp;target=test.ogg"' in result
+        assert '<object data="./AutoCreatedMoinMoinTemporaryTestPageForEmbedObject?action=AttachFile&amp;do=get&amp;target=test.mpg"' in result
         assert 'height="50%"' in result
         assert 'align="middle"' in result
 
     def testEmbedObjectFromUrl(self):
         """ tests using a URL for macro EmbedObject """
         m = self._make_macro()
-        target = 'http://localhost/%s?action=AttachFile&do=view&target=test.ogg' % self.pagename
-        result = m.execute('EmbedObject', u'target=%s, url_mimetype=application/ogg' % target)
-        assert '<object data="http://localhost/AutoCreatedMoinMoinTemporaryTestPageForEmbedObject?action=AttachFile&amp;do=view&amp;target=test.ogg" type="application/ogg"' in result
+        target = 'http://localhost/%s?action=AttachFile&do=view&target=test.mpg' % self.pagename
+        result = m.execute('EmbedObject', u'target=%s, url_mimetype=video/mpeg' % target)
+        assert '<object data="http://localhost/AutoCreatedMoinMoinTemporaryTestPageForEmbedObject?action=AttachFile&amp;do=view&amp;target=test.mpg" type="video/mpeg"' in result
 
 coverage_modules = ['MoinMoin.macro.EmbedObject']
