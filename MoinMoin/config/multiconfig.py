@@ -48,12 +48,12 @@ def _importConfigModule(name):
         raise
     except IndentationError, err:
         logging.exception('Your source code / config file is not correctly indented!')
-        msg = '''IndentationError: %(err)s
+        msg = """IndentationError: %(err)s
 
-The configuration files are python modules. Therefore, whitespace is
+The configuration files are Python modules. Therefore, whitespace is
 important. Make sure that you use only spaces, no tabs are allowed here!
 You have to use four spaces at the beginning of the line mostly.
-''' % {
+""" % {
     'err': err,
 }
         raise error.ConfigurationError(msg)
@@ -68,7 +68,7 @@ def _url_re_list():
     """ Return url matching regular expression
 
     Import wikis list from farmconfig on the first call and compile the
-    regexes. Later then return the cached regex list.
+    regexes. Later just return the cached regex list.
 
     @rtype: list of tuples of (name, compiled re object)
     @return: url to wiki config name matching list
@@ -124,7 +124,7 @@ def _makeConfig(name):
         logging.info("using wiki config: %s" % os.path.abspath(module.__file__))
     except ImportError, err:
         logging.exception('Could not import.')
-        msg = '''ImportError: %(err)s
+        msg = """ImportError: %(err)s
 
 Check that the file is in the same directory as the server script. If
 it is not, you must add the path of the directory where the file is
@@ -134,13 +134,13 @@ the top of the server script.
 Check that the configuration file name is either "wikiconfig.py" or the
 module name specified in the wikis list in farmconfig.py. Note that the
 module name does not include the ".py" suffix.
-''' % {
+""" % {
     'err': err,
 }
         raise error.ConfigurationError(msg)
     except AttributeError, err:
         logging.exception('An exception occured.')
-        msg = '''AttributeError: %(err)s
+        msg = """AttributeError: %(err)s
 
 Could not find required "Config" class in "%(name)s.py".
 
@@ -148,13 +148,13 @@ This might happen if you are trying to use a pre 1.3 configuration file, or
 made a syntax or spelling error.
 
 Another reason for this could be a name clash. It is not possible to have
-config names like e.g. stats.py - because that colides with MoinMoin/stats/ -
+config names like e.g. stats.py - because that collides with MoinMoin/stats/ -
 have a look into your MoinMoin code directory what other names are NOT
 possible.
 
 Please check your configuration file. As an example for correct syntax,
 use the wikiconfig.py file from the distribution.
-''' % {
+""" % {
     'name': name,
     'err': err,
 }
@@ -201,6 +201,7 @@ def _(text):
 class CacheClass:
     """ just a container for stuff we cache """
     pass
+
 
 class ConfigFunctionality(object):
     """ Configuration base class with config class behaviour.
@@ -255,7 +256,7 @@ class ConfigFunctionality(object):
         self.cache.page_group_regexact = re.compile(u'^%s$' % self.page_group_regex, re.UNICODE)
         self.cache.page_template_regexact = re.compile(u'^%s$' % self.page_template_regex, re.UNICODE)
 
-        self.cache.ua_spiders = self.ua_spiders and re.compile(self.ua_spiders, re.I)
+        self.cache.ua_spiders = self.ua_spiders and re.compile(self.ua_spiders, re.IGNORECASE)
 
         self._check_directories()
 
@@ -458,13 +459,13 @@ configuration for typos before requesting support or reporting a bug.
         config files.
         """
         charset = 'utf-8'
-        message = u'''
+        message = u"""
 "%(name)s" configuration variable is a string, but should be
 unicode. Use %(name)s = u"value" syntax for unicode variables.
 
 Also check your "-*- coding -*-" line at the top of your configuration
 file. It should match the actual charset of the configuration file.
-'''
+"""
 
         decode_names = (
             'sitename', 'logo_string', 'navi_bar', 'page_front_page',
@@ -511,7 +512,7 @@ file. It should match the actual charset of the configuration file.
 
             path_pages = os.path.join(path, "pages")
             if not (os.path.isdir(path_pages) and os.access(path_pages, mode)):
-                msg = '''
+                msg = """
 %(attr)s "%(path)s" does not exist, or has incorrect ownership or
 permissions.
 
@@ -521,7 +522,7 @@ and group.
 
 It is recommended to use absolute paths and not relative paths. Check
 also the spelling of the directory name.
-''' % {'attr': attr, 'path': path, }
+""" % {'attr': attr, 'path': path, }
                 raise error.ConfigurationError(msg)
 
     def _loadPluginModule(self):
@@ -557,13 +558,13 @@ also the spelling of the directory name.
             finally:
                 imp.release_lock()
         except ImportError, err:
-            msg = '''
+            msg = """
 Could not import plugin package "%(path)s/plugin" because of ImportError:
 %(err)s.
 
 Make sure your data directory path is correct, check permissions, and
 that the data/plugin directory has an __init__.py file.
-''' % {
+""" % {
     'path': self.data_dir,
     'err': str(err),
 }
@@ -584,6 +585,7 @@ that the data/plugin directory has an __init__.py file.
         """ Make it possible to access a config object like a dict """
         return getattr(self, item)
 
+
 class DefaultConfig(ConfigFunctionality):
     """ Configuration base class with default config values
         (added below)
@@ -592,6 +594,7 @@ class DefaultConfig(ConfigFunctionality):
     # be added above to avoid having the methods show up in
     # the WikiConfig macro. Settings must be added below to
     # the options dictionary.
+
 
 def _default_password_checker(request, username, password):
     """ Check if a password is secure enough.
@@ -605,7 +608,6 @@ def _default_password_checker(request, username, password):
         @return: None if there is no problem with the password,
                  some string with an error msg, if the password is problematic.
     """
-
     try:
         # in any case, do a very simple built-in check to avoid the worst passwords
         if len(password) < 6:
@@ -636,6 +638,7 @@ class DefaultExpression(object):
     def __init__(self, exprstr):
         self.text = exprstr
         self.value = eval(exprstr)
+
 
 options_no_group_name = {
   'session': ('Session settings', "Session-related settings, see HelpOnSessions.", (
@@ -749,10 +752,10 @@ Lists: * bullets; 1., a. numbered items.
     ('hosts_deny', [], "List of denied IPs; if an IP ends with a dot, it denies a whole subnet (class A, B or C)"),
 
     ('html_head', '', "Additional <HEAD> tags, see HelpOnThemes."),
-    ('html_head_queries', '''<meta name="robots" content="noindex,nofollow">\n''', None),
-    ('html_head_posts', '''<meta name="robots" content="noindex,nofollow">\n''', None),
-    ('html_head_index', '''<meta name="robots" content="index,follow">\n''', None),
-    ('html_head_normal', '''<meta name="robots" content="index,nofollow">\n''', None),
+    ('html_head_queries', '<meta name="robots" content="noindex,nofollow">\n', None),
+    ('html_head_posts', '<meta name="robots" content="noindex,nofollow">\n', None),
+    ('html_head_index', '<meta name="robots" content="index,follow">\n', None),
+    ('html_head_normal', '<meta name="robots" content="index,nofollow">\n', None),
     ('html_pagetitle', None, "Allows you to set a specific HTML page title (if None, it defaults to the value of `sitename`)"),
 
     ('interwikiname', None, "InterWiki name (prefix, moniker) of the site, or None"),
@@ -801,7 +804,6 @@ Lists: * bullets; 1., a. numbered items.
        'x-world/x-vrml',
      ],
      'mimetypes that can be embedded by the [[HelpOnMacros/EmbedObject|EmbedObject macro]]'),
-
 
     ('navi_bar', [u'RecentChanges', u'FindPage', u'HelpContents', ],
      'Most important page names. Users can add more names in their quick links in user preferences. To link to URL, use `u"[url link title]"`, to use a shortened name for long page name, use `u"[LongLongPageName title]"`. To use page names with spaces, use `u"[page_name_with_spaces any title]"` [list of Unicode strings]'),
@@ -853,20 +855,18 @@ Lists: * bullets; 1., a. numbered items.
     ('page_icons_table',
      {
         # key           pagekey, querystr dict, title, icon-key
-        'diff':        ('page', {'action': 'diff'}, _("Diffs"), "diff"),
-        'info':        ('page', {'action': 'info'}, _("Info"), "info"),
-        'edit':        ('page', {'action': 'edit'}, _("Edit"), "edit"),
+        'diff': ('page', {'action': 'diff'}, _("Diffs"), "diff"),
+        'info': ('page', {'action': 'info'}, _("Info"), "info"),
+        'edit': ('page', {'action': 'edit'}, _("Edit"), "edit"),
         'unsubscribe': ('page', {'action': 'unsubscribe'}, _("UnSubscribe"), "unsubscribe"),
-        'subscribe':   ('page', {'action': 'subscribe'}, _("Subscribe"), "subscribe"),
-        'raw':         ('page', {'action': 'raw'}, _("Raw"), "raw"),
-        'xml':         ('page', {'action': 'show', 'mimetype': 'text/xml'}, _("XML"), "xml"),
-        'print':       ('page', {'action': 'print'}, _("Print"), "print"),
-        'view':        ('page', {}, _("View"), "view"),
-        'up':          ('page_parent_page', {}, _("Up"), "up"),
+        'subscribe': ('page', {'action': 'subscribe'}, _("Subscribe"), "subscribe"),
+        'raw': ('page', {'action': 'raw'}, _("Raw"), "raw"),
+        'xml': ('page', {'action': 'show', 'mimetype': 'text/xml'}, _("XML"), "xml"),
+        'print': ('page', {'action': 'print'}, _("Print"), "print"),
+        'view': ('page', {}, _("View"), "view"),
+        'up': ('page_parent_page', {}, _("Up"), "up"),
      },
      "dict of {'iconname': (url, title, icon-img-key), ...}. Available only in classic theme."),
-
-
 
     ('password_checker', DefaultExpression('_default_password_checker'),
      'checks whether a password is acceptable (default check is length >= 6, at least 4 different chars, no keyboard sequence, not username used somehow (you can switch this off by using `None`)'),
@@ -1048,17 +1048,17 @@ options = {
 
       ('checkbox_defaults',
        {
-        'mailto_author':       0,
+        'mailto_author': 0,
         'edit_on_doubleclick': 0,
         'remember_last_visit': 0,
-        'show_comments':       0,
-        'show_nonexist_qm':    False,
-        'show_page_trail':     1,
-        'show_toolbar':        1,
-        'show_topbottom':      0,
-        'show_fancy_diff':     1,
+        'show_comments': 0,
+        'show_nonexist_qm': False,
+        'show_page_trail': 1,
+        'show_toolbar': 1,
+        'show_topbottom': 0,
+        'show_fancy_diff': 1,
         'wikiname_add_spaces': 0,
-        'remember_me':         1,
+        'remember_me': 1,
        },
        "Defaults for user preferences, see /UserPreferences."),
 
@@ -1080,7 +1080,7 @@ options = {
        None),
 
       ('form_defaults',
-       { # key: default - do NOT remove keys from here!
+       {# key: default - do NOT remove keys from here!
         'name': '',
         'aliasname': '',
         'password': '',
@@ -1157,3 +1157,4 @@ _add_options_to_defconfig(options_no_group_name, False)
 
 # remove the gettext pseudo function
 del _
+
