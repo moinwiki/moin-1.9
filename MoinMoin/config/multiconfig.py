@@ -369,9 +369,10 @@ class ConfigFunctionality(object):
             self.computed_settings[k] = True
 
 
+    _meta_dict = None
     def load_meta_dict(self):
         """ The meta_dict contains meta data about the wiki instance. """
-        if getattr(self, "_meta_dict", None) is None:
+        if self._meta_dict is None:
             self._meta_dict = wikiutil.MetaDict(os.path.join(self.data_dir, 'meta'), self.cache_dir)
         return self._meta_dict
     meta_dict = property(load_meta_dict)
@@ -387,11 +388,12 @@ class ConfigFunctionality(object):
     iwid_full = make_iwid_property("_iwid_full")
 
     # lazily create a list of event handlers
+    _event_handlers = None
     def make_event_handlers_prop():
         def getter(self):
-            if getattr(self, "_event_handlers", None) is None:
+            if self._event_handlers is None:
                 self._event_handlers = events.get_handlers(self)
-            return getattr(self, "_event_handlers")
+            return self._event_handlers
 
         def setter(self, new_handlers):
             self._event_handlers = new_handlers
