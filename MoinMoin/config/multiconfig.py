@@ -202,14 +202,25 @@ class CacheClass:
     """ just a container for stuff we cache """
     pass
 
+class ConfigFunctionality(object):
+    """ Configuration base class with config class behaviour.
 
-class DefaultConfig(object):
-    """ Configuration base class with default config values
-        (added below)
+        This class contains the functionality for the DefaultConfig
+        class for the benefit of the WikiConfig macro.
     """
-
     def __init__(self, siteid):
         """ Init Config instance """
+        # keep first!
+        settings = {}
+        for k in self.__dict__:
+            settings[k] = True
+
+        # will be assigned in by loader code (see above, _makeConfig)
+        self.cfg_mtime = None
+
+        # will be lazily loaded by interwiki code when needed (?)
+        self.shared_intermap_files = None
+
         self.siteid = siteid
         self.cache = CacheClass()
 
@@ -349,6 +360,13 @@ class DefaultConfig(object):
 
         if self.url_prefix_local is None:
             self.url_prefix_local = self.url_prefix_static
+
+        # keep last!!
+        self.computed_settings = {}
+        for k in self.__dict__:
+            if k in settings:
+                continue
+            self.computed_settings[k] = True
 
 
     def load_meta_dict(self):
@@ -564,6 +582,14 @@ that the data/plugin directory has an __init__.py file.
         """ Make it possible to access a config object like a dict """
         return getattr(self, item)
 
+class DefaultConfig(ConfigFunctionality):
+    """ Configuration base class with default config values
+        (added below)
+    """
+    # Do not add anything into this class. Functionality must
+    # be added above to avoid having the methods show up in
+    # the WikiConfig macro. Settings must be added below to
+    # the options dictionary.
 
 def _default_password_checker(request, username, password):
     """ Check if a password is secure enough.
