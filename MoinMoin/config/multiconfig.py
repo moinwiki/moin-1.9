@@ -321,6 +321,7 @@ class DefaultConfig(object):
 
         # check if mail is possible and set flag:
         self.mail_enabled = (self.mail_smarthost is not None or self.mail_sendmail is not None) and self.mail_from
+        self.mail_enabled = self.mail_enabled and True or False
 
         # check if jabber bot is available and set flag:
         self.jabber_enabled = self.notification_bot_uri is not None
