@@ -35,6 +35,13 @@ def macro_WikiConfig(macro):
         f.heading(1, 1, id='current_config'),
         f.text(_("Wiki configuration")),
         f.heading(0, 1),
+        f.paragraph(1),
+        _("This table shows all settings in this wiki that do not have default values. "
+          "Settings that the configuration system doesn't know about are shown in ''italic'', "
+          "those may be due to third-party extensions needing configuration or settings that "
+          "were removed from Moin.",
+          wiki=True),
+        f.paragraph(0),
     ])
     ret.extend([
         f.table(1),
