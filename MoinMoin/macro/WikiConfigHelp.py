@@ -4,7 +4,7 @@
 """
 from MoinMoin.config import multiconfig
 
-Dependencies = ['']
+Dependencies = []
 generates_headings = True
 
 def macro_WikiConfigHelp(macro):
