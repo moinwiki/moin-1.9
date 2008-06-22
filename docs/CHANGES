@@ -31,6 +31,16 @@ Known main issues:
     USE BOTH ON YOUR OWN RISK!
 
 
+Version 1.8.0current:
+
+  Bug Fixes:
+    * ...
+
+  Removed Features:
+    * url_prefix setting
+    * traceback_log_dir setting (we just use logging.exception)
+
+
 Version 1.7.0:
   Note: This is a reduced CHANGES, ommitting details from rc/beta test and
         also less interesting minor changes and fixes. It shows changes
