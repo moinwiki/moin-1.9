@@ -25,13 +25,10 @@ General syntax: moin [options] account disable [disable-options]
     0. Verify that you really want to disable the account.
        While there is a disable script, no such enable script exists.
 
-    1. If using usernames, verify that multiple usernames with the same
-       user ID do not exist.
-
-    2. To disable the user 'JohnSmith':
+    1. To disable the user 'JohnSmith':
        moin ... account disable --name JohnSmith
 
-    3. To disable the user 'JohnSmith', based on his UID '1198872910.78.56322':
+    2. To disable the user 'JohnSmith', based on his UID '1198872910.78.56322':
        moin ... account disable --uid 1198872910.78.56322
 """
 
@@ -65,6 +62,11 @@ General syntax: moin [options] account disable [disable-options]
             u = user.User(request, self.options.uid)
         elif self.options.uname:
             u = user.User(request, None, self.options.uname)
+
+        if not u.exists():
+            print 'This user "%s" does not exists!' % u.name
+            return
+
         print " %-20s %-25s %-35s" % (u.id, u.name, u.email),
         if not u.disabled: # only disable once
             u.disabled = 1
