@@ -7,13 +7,13 @@
     @license: GNU GPL, see COPYING for details.
 """
 import sys, os
+import traceback
 
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
 from MoinMoin.support import cgitb
 from MoinMoin.error import ConfigurationError
-from traceback import extract_tb
 
 
 class View(cgitb.View):
@@ -69,7 +69,7 @@ function toggleDebugInfo() {
         text = [self.formatExceptionMessage(self.info)]
 
         if self.info[0] == ConfigurationError:
-            tbt = extract_tb(self.info[1].exceptions()[-1][2])[-1]
+            tbt = traceback.extract_tb(self.info[1].exceptions()[-1][2])[-1]
             text.append(
                 f.paragraph('Error in your configuration file "%s"'
                             ' around line %d.' % tbt[:2]))
@@ -157,32 +157,43 @@ def handle(request, err):
 
     savedError = sys.exc_info()
     logging.exception('An exception occured.')
+
     try:
-        debug = 'debug' in getattr(request, 'form', {})
+        display = request.cfg.traceback_show # might fail if we have no cfg yet
+    except:
         # default to True here to allow an admin setting up the wiki
         # to see the errors made in the configuration file
         display = True
-        logdir = None
-        if hasattr(request, 'cfg'):
-            display = request.cfg.traceback_show
-            logdir = request.cfg.traceback_log_dir
-        handler = cgitb.Hook(file=request, display=display, logdir=logdir,
-                             viewClass=View, debug=debug)
-        handler.handle()
+
+    try:
+        debug = 'debug' in request.form
     except:
+        debug = False
+
+    try:
+        # try to output a nice html error page
+        handler = cgitb.Hook(file=request, display=display, viewClass=View, debug=debug)
+        handler.handle(savedError)
+    except:
+        # if that fails, log the cgitb problem ...
+        logging.exception('cgitb raised this exception')
+        # ... and try again with a simpler output method:
         request.write('<pre>\n')
-        printTextException(request, savedError)
+        printTextException(request, savedError, display)
         request.write('\nAdditionally cgitb raised this exception:\n')
-        printTextException(request)
+        printTextException(request, display=display)
         request.write('</pre>\n')
 
 
-def printTextException(request, info=None):
+
+def printTextException(request, info=None, display=True):
     """ Simple text exception that should never fail
 
     Print all exceptions in a composite error.
     """
-    import traceback
+    if not display:
+        request.write("(Traceback display forbidden by configuration)\n")
+        return
     from MoinMoin import wikiutil
     if info is None:
         info = sys.exc_info()

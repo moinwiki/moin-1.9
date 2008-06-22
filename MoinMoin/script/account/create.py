@@ -22,9 +22,6 @@ General syntax: moin [options] account create [create-options]
     --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
 
 [create-options] see below:
-    0. Verify that the account does not exist.
-       Currently this script does not check if the user exists.
-
     1. Verify that you have specified the right options.
        This script does no verification of email addresses or the like.
 
@@ -49,7 +46,7 @@ General syntax: moin [options] account create [create-options]
         )
         self.parser.add_option(
             "--password", metavar="PASSWORD", dest="password",
-            help="Set the user's password to PASSWORD (either cleartext or {SHA1}...)."
+            help="Set the user's password to PASSWORD."
         )
 
     def mainloop(self):
@@ -67,6 +64,12 @@ General syntax: moin [options] account create [create-options]
         request = self.request
 
         from MoinMoin import user
+        if user.User(request, name=self.options.uname).exists():
+            print 'This username "%s" exists already!' % self.options.uname
+            return
+        if user.get_by_email_address(request, self.options.email):
+            print 'This emailaddress "%s" belongs to someone else!' % self.options.email
+            return
         u = user.User(request, None, self.options.uname, password=self.options.password)
         u.email = self.options.email
         u.aliasname = self.options.ualiasname or ''
