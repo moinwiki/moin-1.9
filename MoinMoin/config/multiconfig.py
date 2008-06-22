@@ -225,8 +225,6 @@ class DefaultConfig(object):
     """ Configuration base class with default config values
         (added below)
     """
-    # Things that shouldn't be here...
-    _subscribable_events = None
 
     def __init__(self, siteid):
         """ Init Config instance """
@@ -370,19 +368,6 @@ class DefaultConfig(object):
         return property(getter)
     iwid = make_iwid_property("_iwid")
     iwid_full = make_iwid_property("_iwid_full")
-
-    # lazily load a list of events a user can subscribe to
-    def make_subscribable_events_prop():
-        def getter(self):
-            if getattr(self, "_subscribable_events", None) is None:
-                self._subscribable_events = events.get_subscribable_events()
-            return getattr(self, "_subscribable_events")
-
-        def setter(self, new_events):
-            self._subscribable_events = new_events
-
-        return property(getter, setter)
-    subscribable_events = make_subscribable_events_prop()
 
     # lazily create a list of event handlers
     def make_event_handlers_prop():
