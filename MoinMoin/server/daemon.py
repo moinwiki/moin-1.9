@@ -17,7 +17,8 @@ Typical usage::
     # Daemon script
     import daemon
     import myserver
-    script = daemon.DaemonScript('myserver', myserver.run, myserver.Config)
+    script = daemon.DaemonScript('myserver', 'myserver.pid',
+                                 myserver.run, myserver.Config)
     script.run()
 
 
@@ -61,10 +62,11 @@ class Daemon:
     """
     commandPrefix = 'do_'
 
-    def __init__(self, name, function, *args, **kw):
+    def __init__(self, name, pidfile, function, *args, **kw):
         """ Create a daemon
 
-        @param name: name of the process (determines pid filename, too)
+        @param name: name of the process
+        @param pidfile: pid filename
         @param function: the server main function, will block until the
             server is done.
         @param args: arguments to pass to function
@@ -74,7 +76,7 @@ class Daemon:
         self.function = function
         self.args = args
         self.kw = kw
-        self.pidFile = os.path.abspath(name + '.pid')
+        self.pidFile = os.path.abspath(pidfile)
 
     # --------------------------------------------------------------------
     # Commands
