@@ -68,8 +68,6 @@ def macro_WikiConfig(macro):
     for vname, value in iter_vnames(request.cfg):
         if hasattr(multiconfig.ConfigFunctionality, vname):
             continue
-        if vname in request.cfg.computed_settings:
-            continue
         if vname in settings and settings[vname] == value:
             continue
         found.append((vname, value))

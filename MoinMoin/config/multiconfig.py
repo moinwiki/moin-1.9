@@ -4,6 +4,7 @@
 
     @copyright: 2000-2004 Juergen Hermann <jh@web.de>,
                 2005-2008 MoinMoin:ThomasWaldmann.
+                2008      MoinMoin:JohannesBerg
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -209,19 +210,27 @@ class ConfigFunctionality(object):
         This class contains the functionality for the DefaultConfig
         class for the benefit of the WikiConfig macro.
     """
+
+    # attributes of this class that should not be shown
+    # in the WikiConfig() macro.
+    cfg_mtime = None
+    siteid = None
+    cache = None
+    mail_enabled = None
+    jabber_enabled = None
+    auth_can_logout = None
+    auth_have_login = None
+    auth_login_inputs = None
+    _site_plugin_lists = None
+    _iwid = None
+    _iwid_full = None
+    xapian_searchers = None
+    moinmoin_dir = None
+    # will be lazily loaded by interwiki code when needed (?)
+    shared_intermap_files = None
+
     def __init__(self, siteid):
         """ Init Config instance """
-        # keep first!
-        settings = {}
-        for k in self.__dict__:
-            settings[k] = True
-
-        # will be assigned in by loader code (see above, _makeConfig)
-        self.cfg_mtime = None
-
-        # will be lazily loaded by interwiki code when needed (?)
-        self.shared_intermap_files = None
-
         self.siteid = siteid
         self.cache = CacheClass()
 
@@ -361,14 +370,6 @@ class ConfigFunctionality(object):
 
         if self.url_prefix_local is None:
             self.url_prefix_local = self.url_prefix_static
-
-        # keep last!!
-        self.computed_settings = {}
-        for k in self.__dict__:
-            if k in settings:
-                continue
-            self.computed_settings[k] = True
-
 
     _meta_dict = None
     def load_meta_dict(self):
@@ -876,9 +877,12 @@ Lists: * bullets; 1., a. numbered items.
 
   )),
   # ==========================================================================
-  'pathes': ('Pathes', None, (
+  'paths': ('Paths', None, (
     ('data_dir', './data/', "Path to the data directory containing your (locally made) wiki pages."),
     ('data_underlay_dir', './underlay/', "Path to the underlay directory containing distribution system and help pages."),
+    ('cache_dir', None, "Directory for caching, by default computed from `data_dir`/cache."),
+    ('user_dir', None, "Directory for user storage, by default computed to be `data_dir`/user."),
+    ('plugin_dir', None, "Plugin directory, by default computed to be `data_dir`/user."),
 
     ('docbook_html_dir', r"/usr/share/xml/docbook/stylesheet/nwalsh/html/",
      'Path to the directory with the Docbook to HTML XSLT files (optional, used by the docbook parser). The default value is correct for Debian Etch.'),
