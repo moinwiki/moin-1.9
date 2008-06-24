@@ -7,7 +7,9 @@
     @copyright: 2008 MoinMoin:FlorianKrupicka
     @license: GNU GPL, see COPYING for details.
 """
+import time
 
+from werkzeug.utils import dump_cookie
 from werkzeug.contrib.sessions import FilesystemSessionStore, Session
 
 from MoinMoin.web.api import ISessionService
@@ -48,4 +50,4 @@ class FileSessionService(object):
                                  cookie_lifetime, cookie_expires,
                                  request.cfg.cookie_domain,
                                  request.cfg.cookie_path)
-            request.headers.append(('Set-Cookie', cookie))
+            request.headers.add('Set-Cookie', cookie)
