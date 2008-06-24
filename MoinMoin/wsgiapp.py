@@ -33,13 +33,7 @@ def init(request):
     request.clock.start('total')
     request.clock.start('base__init__')
 
-    user_obj = request.cfg.session_handler.start(request, request.cfg.session_id_handler)
-    request.user = handle_auth_form(user_obj, request)
-
-    request.cfg.session_handler.after_auth(request, request.cfg.session_id_handler, request.user)
-
-    if not request.user:
-        request.user = user.User(request, auth_method='request:invalid')
+    request.session = request.cfg.session_service.get_session(request)
 
     check_setuid(request)
     check_forbidden(request)
@@ -171,6 +165,7 @@ def run(request):
         request.timing_log(False, action_name)
 
         #return request.finish()
+    request.cfg.session_service.finalize(request, request.session)
     return request
 
 def application(request):
