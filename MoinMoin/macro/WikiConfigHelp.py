@@ -53,12 +53,12 @@ def macro_WikiConfigHelp(macro):
                 default_txt = '%r' % (default, )
                 if len(default_txt) > 50:
                     default_txt = '...'
+                description = _(description or '', wiki=True)
             ret.extend([
                 f.table_row(1),
                 f.table_cell(1), f.text(name), f.table_cell(0),
                 f.table_cell(1), f.code(1, css="backtick"), f.text(default_txt), f.code(0), f.table_cell(0),
-                ## XXX: translate description?
-                f.table_cell(1), f.text(description or ''), f.table_cell(0),
+                f.table_cell(1), description, f.table_cell(0),
                 f.table_row(0),
             ])
         ret.append(f.table(0))
