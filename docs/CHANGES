@@ -25,11 +25,6 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
-  * "Backup" and especially "Restore" action have some issues, so please DON'T
-    USE THEM except if you want to help debugging and improving it and after
-    having made a backup with some other, proven method.
-    USE BOTH ON YOUR OWN RISK!
-
 
 Version 1.8.0current:
 
@@ -40,6 +35,7 @@ Version 1.8.0current:
     * url_prefix setting
     * traceback_log_dir setting (we just use logging.exception)
     * editor_quickhelp setting (replaced by per-parser quickhelp)
+    * backup action and associated settings
 
   New Features:
     * per-parser quickhelp, 'quickhelp' class variable of parser class

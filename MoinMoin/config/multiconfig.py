@@ -324,7 +324,6 @@ class ConfigFunctionality(object):
         # we replace any string placeholders with config values
         # e.g u'%(page_front_page)s' % self
         self.navi_bar = [elem % self for elem in self.navi_bar]
-        self.backup_exclude = [elem % self for elem in self.backup_exclude]
 
         # check if python-xapian is installed
         if self.xapian_search:
@@ -660,7 +659,7 @@ options_no_group_name = {
   # ==========================================================================
   'auth': ('Authentication / Authorization / Security settings', None, (
     ('superuser', [],
-     "List of trusted user names with wiki system administration super powers (not to be confused with ACL admin rights!). Used for e.g. making full backups, software installation, language installation via SystemPagesSetup and more. See also HelpOnSuperUser."),
+     "List of trusted user names with wiki system administration super powers (not to be confused with ACL admin rights!). Used for e.g. software installation, language installation via SystemPagesSetup and more. See also HelpOnSuperUser."),
     ('auth', DefaultExpression('[MoinAuth()]'),
      "list of auth objects, to be called in this order (see HelpOnAuthentication)"),
     ('auth_methods_trusted', ['http', 'xmlrpc_applytoken'],
@@ -1091,22 +1090,6 @@ options = {
       ('transient_fields',
        ['id', 'valid', 'may', 'auth_username', 'password', 'password2', 'auth_method', 'auth_attribs', ],
        "User object attributes that are not persisted to permanent storage (internal use)."),
-    )),
-
-    'backup': ('Backup', None, (
-      ('compression', 'gz', None),
-      ('users', [], None),
-      ('include', [], None),
-      ('exclude',
-       [
-        r"(.+\.py(c|o)$)",
-        r"%(cache_dir)s",
-        r"%(/)spages%(/)s.+%(/)scache%(/)s[^%(/)s]+$" % {'/': os.sep},
-        r"%(/)s(edit-lock|event-log|\.DS_Store)$" % {'/': os.sep},
-       ],
-       None),
-      ('storage_dir', '/tmp', None),
-      ('restore_target_dir', '/tmp', None),
     )),
 
     'openid_server': ('OpenID Server',
