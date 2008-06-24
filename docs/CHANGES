@@ -39,6 +39,10 @@ Version 1.8.0current:
   Removed Features:
     * url_prefix setting
     * traceback_log_dir setting (we just use logging.exception)
+    * editor_quickhelp setting (replaced by per-parser quickhelp)
+
+  New Features:
+    * per-parser quickhelp, 'quickhelp' class variable of parser class
 
 
 Version 1.7.0:
