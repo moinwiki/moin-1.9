@@ -13,7 +13,7 @@ import time, inspect, StringIO
 from werkzeug.utils import Headers, http_date
 from werkzeug.exceptions import Unauthorized, NotFound
 
-from MoinMoin import i18n, error
+from MoinMoin import i18n, error, user
 from MoinMoin.config import multiconfig
 from MoinMoin.formatter import text_html
 from MoinMoin.theme import load_theme_fallback
@@ -106,7 +106,9 @@ class Context(object):
 
 class UserMixin(object):
     """ Mixin for user attributes and methods. """
-    user = EnvironProxy('user')
+    def user(self):
+        return user.User(self, auth_method='request:invalid')
+    user = EnvironProxy(user)
 
 class LanguageMixin(object):
     """ Mixin for language attributes and methods. """
@@ -164,6 +166,7 @@ class LanguageMixin(object):
 class HTTPMixin(object):
     """ Mixin for HTTP attributes and methods. """
     forbidden = EnvironProxy('old.forbidden', 0)
+    session = EnvironProxy('session')
     
     _auth_redirected = EnvironProxy('old._auth_redirected', 0)
     _cache_disabled = EnvironProxy('old._cache_disabled', 0)
