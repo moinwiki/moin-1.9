@@ -960,6 +960,8 @@ class QueryParser:
                             # doing a "MatchAll AND_NOT someterm" for that case!
                             orexpr = OrExpression(terms)
                         terms = AndExpression(orexpr)
+                    else:
+                        raise ValueError('Nothing to OR')
                     remaining = self._analyse_items(items)
                     if remaining.__class__ == OrExpression:
                         for sub in remaining.subterms():
