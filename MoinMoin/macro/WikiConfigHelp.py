@@ -51,13 +51,15 @@ def macro_WikiConfigHelp(macro):
                 default_txt = default.text
             else:
                 default_txt = '%r' % (default, )
-                if len(default_txt) > 50:
-                    default_txt = '...'
+                if len(default_txt) <= 30:
+                    default_txt = f.text(default_txt)
+                else:
+                    default_txt = f.span(1, title=default_txt) + f.text('...') + f.span(0)
                 description = _(description or '', wiki=True)
             ret.extend([
                 f.table_row(1),
                 f.table_cell(1), f.text(name), f.table_cell(0),
-                f.table_cell(1), f.code(1, css="backtick"), f.text(default_txt), f.code(0), f.table_cell(0),
+                f.table_cell(1), f.code(1, css="backtick"), default_txt, f.code(0), f.table_cell(0),
                 f.table_cell(1), description, f.table_cell(0),
                 f.table_row(0),
             ])
