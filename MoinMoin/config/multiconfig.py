@@ -828,6 +828,7 @@ options_no_group_name = {
     ('editor_force', False, "if True, force using the default editor"),
     ('editor_ui', 'freechoice', "Editor choice shown on the user interface, 'freechoice' or 'theonepreferred'"),
     ('page_license_enabled', False, 'if True, show a license hint in page editor.'),
+    ('page_license_page', u'WikiLicense', 'Page linked from the license hint. [Unicode]'),
     ('edit_locking', 'warn 10', "Editor locking policy: `None`, `'warn <timeout in minutes>'`, or `'lock <timeout in minutes>'`"),
     ('edit_ticketing', True, None),
     ('edit_rows', 20, "Default height of the edit box"),
@@ -882,8 +883,6 @@ options_no_group_name = {
      'Pagenames exactly matching this regex are regarded as pages containing group definitions [Unicode]'),
     ('page_template_regex', ur'(?P<all>(?P<key>\S+)Template)',
      'Pagenames exactly matching this regex are regarded as pages containing templates for new pages [Unicode]'),
-
-    ('page_license_page', u'WikiLicense', 'Page linked from the license hint. [Unicode]'),
 
     ('page_local_spelling_words', u'LocalSpellingWords',
      'Name of the page containing user-provided spellchecker words [Unicode]'),
