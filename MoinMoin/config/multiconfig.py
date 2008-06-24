@@ -828,49 +828,6 @@ options_no_group_name = {
     ('editor_force', False, "if True, force using the default editor"),
     ('editor_ui', 'freechoice', "Editor choice shown on the user interface, 'freechoice' or 'theonepreferred'"),
     ('page_license_enabled', False, 'if True, show a license hint in page editor.'),
-    ('editor_quickhelp', {
-        # editor markup hints quickhelp
-        # MUST be in wiki markup, even if the help is not for the wiki parser!
-        'wiki': _(u"""\
- Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')>>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed ''<<Verbatim(''')>>'''''bold'''<<Verbatim(''')>> and italics''<<Verbatim('')>>; <<Verbatim(----)>> horizontal rule.
- Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; ===== Title 5 =====.
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])>>.
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
-
-(!) For more help, see HelpOnEditing or SyntaxReference.
-"""),
-        'rst': _("""\
-{{{
-Emphasis: *italic* **bold** ``monospace``
-
-Headings: Heading 1  Heading 2  Heading 3
-          =========  ---------  ~~~~~~~~~
-
-Horizontal rule: ----
-
-Links: TrailingUnderscore_ `multi word with backticks`_ external_
-
-.. _external: http://external-site.example.org/foo/
-
-Lists: * bullets; 1., a. numbered items.
-}}}
-(!) For more help, see the
-[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|reStructuredText Quick Reference]].
-"""),
-        'creole': _(u"""\
- Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)>>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)>>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;
- Horizontal Rule:: <<Verbatim(----)>>
- Force Linebreak:: <<Verbatim(\\\\)>>
- Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; ===== Title 5 =====.
- Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub items.
- Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.
- Tables:: |= header text | cell text | more cell text |;
-
-(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.
-"""),
-    },
-    "Quickhelp provided at the bottom of edit pages.  To customize, specify a dictionary with key matching default_markup (e.g. 'wiki') and give a string value containing wiki markup."),
     ('edit_locking', 'warn 10', "Editor locking policy: `None`, `'warn <timeout in minutes>'`, or `'lock <timeout in minutes>'`"),
     ('edit_ticketing', True, None),
     ('edit_rows', 20, "Default height of the edit box"),
