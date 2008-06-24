@@ -25,6 +25,7 @@ from MoinMoin import session
 from MoinMoin.packages import packLine
 from MoinMoin.security import AccessControlList
 from MoinMoin.support.python_compatibility import set
+from MoinMoin.web.session import FileSessionService
 
 _url_re_cache = None
 _farmconfig_mtime = None
@@ -529,6 +530,9 @@ Lists: * bullets; 1., a. numbered items.
 
     session_handler = session.DefaultSessionHandler()
     session_id_handler = session.MoinCookieSessionIDHandler()
+    
+    # new session service
+    session_service = FileSessionService()
 
     shared_intermap = None # can be string or list of strings (filenames)
 
