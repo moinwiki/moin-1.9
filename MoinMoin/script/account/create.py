@@ -67,9 +67,11 @@ General syntax: moin [options] account create [create-options]
         if user.User(request, name=self.options.uname).exists():
             print 'This username "%s" exists already!' % self.options.uname
             return
-        if user.get_by_email_address(request, self.options.email):
-            print 'This emailaddress "%s" belongs to someone else!' % self.options.email
-            return
+        # Email should be unique - see also MoinMoin.action.newaccount
+        if self.options.email and request.cfg.user_email_unique:
+            if user.get_by_email_address(request, self.options.email):
+                print 'This emailaddress "%s" belongs to someone else!' % self.options.email
+                return
         u = user.User(request, None, self.options.uname, password=self.options.password)
         u.email = self.options.email
         u.aliasname = self.options.ualiasname or ''
