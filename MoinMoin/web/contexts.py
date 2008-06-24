@@ -21,17 +21,24 @@ from MoinMoin.util.clock import Clock
 from MoinMoin.web.request import Request
 from MoinMoin.web.utils import check_spider, UniqueIDGenerator
 from MoinMoin.web.exceptions import Forbidden, SurgeProtection
+from MoinMoin.web.api import IContext
 
 from MoinMoin import log
 logging = log.getLogger(__name__)
 default = object()
 
-class renamed_property(property):
-    def __init__(self, name):
-        property.__init__(self, lambda obj: getattr(obj.request, name))
-
 class EnvironProxy(property):
+    """ Proxy attribute lookups to keys in the environ. """
     def __init__(self, name, factory=default):
+        """
+        An entry will be proxied to the supplied name in the .environ
+        object of the property holder. A factory can be supplied, for
+        values that need to be preinstantiated. If given as first
+        parameter name is taken from the callable too.
+
+        @param name: key (or factory for convenience)
+        @param factory: literal object or callable
+        """
         if not isinstance(name, basestring):
             factory = name
             name = factory.__name__
@@ -67,7 +74,13 @@ class EnvironProxy(property):
                                   self.full_name)
 
 class Context(object):
+    """ Standard implementation for the context interface.
+
+    This one wraps up a Moin-Request object and the associated
+    environ and also keeps track of it's changes.
+    """
     __slots__ = ['request', 'environ']
+    __implements__ = (IContext,)
 
     def __init__(self, request):
         assert isinstance(request, Request)
@@ -78,6 +91,12 @@ class Context(object):
     personalities = EnvironProxy('context.personalities', lambda o: list())
 
     def become(self, cls):
+        """ Become another context, based on given class.
+
+        @param cls: class to change to, must be a sister class
+        @rtype: boolean
+        @return: wether a class change took place
+        """
         if self.__class__ is cls:
             return False
         else:
@@ -86,9 +105,11 @@ class Context(object):
             return True
 
 class UserMixin(object):
+    """ Mixin for user attributes and methods. """
     user = EnvironProxy('user')
 
 class LanguageMixin(object):
+    """ Mixin for language attributes and methods. """
     def lang(self):
         for key in ('moin.user.lang', 'moin.request.lang'):
             if key in self.environ:
@@ -141,10 +162,12 @@ class LanguageMixin(object):
 
 
 class HTTPMixin(object):
+    """ Mixin for HTTP attributes and methods. """
     forbidden = EnvironProxy('old.forbidden', 0)
     
     _auth_redirected = EnvironProxy('old._auth_redirected', 0)
     _cache_disabled = EnvironProxy('old._cache_disabled', 0)
+    cacheable = EnvironProxy('old.cacheable', 0)
         
     def write(self, *data):
         if len(data) > 1:
@@ -194,11 +217,11 @@ class HTTPMixin(object):
     isSpiderAgent = EnvironProxy(isSpiderAgent)
 
 class ActionMixin(object):
+    """ Mixin for the action related attributes. """
     def action(self):
         return self.request.values.get('action','show')
     action = EnvironProxy(action)
 
-class RevisionMixin(object):
     def rev(self):
         try:
             return int(self.values['rev'])
@@ -207,6 +230,7 @@ class RevisionMixin(object):
     rev = EnvironProxy(rev)
 
 class ConfigMixin(object):
+    """ Mixin for the everneeded config object. """
     def cfg(self):
         try:
             self.clock.start('load_multi_cfg')
@@ -217,14 +241,8 @@ class ConfigMixin(object):
             raise NotFound('<p>No wiki configuration matching the URL found!</p>')
     cfg = EnvironProxy(cfg)
 
-class RenamedMixin(object):
-    cookie = renamed_property('cookies')
-    script_name = renamed_property('script_root')
-    path_info = renamed_property('path')
-    is_ssl = renamed_property('is_secure')
-    request_method = renamed_property('method')
-
 class FormatterMixin(object):
+    """ Mixin for the standard formatter attributes. """
     def html_formatter(self):
         return text_html.Formatter(self)
     html_formatter = EnvironProxy(html_formatter)
@@ -234,23 +252,23 @@ class FormatterMixin(object):
     formatter = EnvironProxy(formatter)
 
 class PageMixin(object):
+    """ Mixin for ondemand rootpage. """
     page = EnvironProxy('page', None)
     def rootpage(self):
         from MoinMoin.Page import RootPage
         return RootPage(self)
     rootpage = EnvironProxy(rootpage)
 
-class DictsMixin(object):
-    def dicts(self):
-        """ Lazy initialize the dicts on the first access """
-        from MoinMoin import wikidicts
-        dicts = wikidicts.GroupDict(self)
-        dicts.load_dicts()
-        return dicts
-    dicts = EnvironProxy(dicts)
-
 class AuxilaryMixin(object):
+    """
+    Mixin for diverse attributes and methods that aren't clearly assignable
+    to a particular phase of the request.
+    """
     _fmt_hd_counters = EnvironProxy('_fmt_hd_counters')
+    parsePageLinks_running = EnvironProxy('parsePageLinks_running', lambda o: {})
+    mode_getpagelinks = EnvironProxy('mode_getpagelinks', 0)
+    clock = EnvironProxy('clock', lambda o: Clock())
+    pragma = EnvironProxy('pragma', lambda o: dict())
 
     def uid_generator(self):
         pagename = None
@@ -259,26 +277,20 @@ class AuxilaryMixin(object):
         return UniqueIDGenerator(pagename=pagename)
     uid_generator = EnvironProxy(uid_generator)
 
+    def dicts(self):
+        """ Lazy initialize the dicts on the first access """
+        from MoinMoin import wikidicts
+        dicts = wikidicts.GroupDict(self)
+        dicts.load_dicts()
+        return dicts
+    dicts = EnvironProxy(dicts)
+
     def reset(self):
         self.current_lang = self.cfg.language_default
         if hasattr(self, '_fmt_hd_counters'):
             del self._fmt_hd_counters
         if hasattr(self, 'uid_generator'):
             del self.uid_generator
-
-class ThemeMixin(object):
-    theme = EnvironProxy('theme')
-
-    def initTheme(self):
-        """ Set theme - forced theme, user theme or wiki default """
-        if self.cfg.theme_force:
-            theme_name = self.cfg.theme_default
-        else:
-            theme_name = self.user.theme_name
-        load_theme_fallback(self, theme_name)
-
-class PragmaMixin(object):
-    pragma = EnvironProxy('pragma', lambda o: dict())
 
     def getPragma(self, key, defval=None):
         """ Query a pragma value (#pragma processing instruction)
@@ -294,7 +306,20 @@ class PragmaMixin(object):
         """
         self.pragma[key.lower()] = value    
 
+class ThemeMixin(object):
+    """ Mixin for the theme attributes and methods. """
+    theme = EnvironProxy('theme')
+
+    def initTheme(self):
+        """ Set theme - forced theme, user theme or wiki default """
+        if self.cfg.theme_force:
+            theme_name = self.cfg.theme_default
+        else:
+            theme_name = self.user.theme_name
+        load_theme_fallback(self, theme_name)
+
 class RedirectMixin(object):
+    """ Mixin to redirect output into buffers instead to the client. """
     writestack = EnvironProxy('old.writestack', lambda o: list())
 
     def redirectedOutput(self, function, *args, **kw):
@@ -317,16 +342,12 @@ class RedirectMixin(object):
         else:
             self.write = self.writestack.pop()
 
-class ClockMixin(object):
-    clock = EnvironProxy('clock', lambda o: Clock())
-
-class _AuxilaryContext(Context, ConfigMixin, UserMixin,
-                      ClockMixin, LanguageMixin):
-    pass
-
-class HTTPContext(_AuxilaryContext, HTTPMixin):
+class HTTPContext(Context, HTTPMixin, ConfigMixin, UserMixin,
+                  LanguageMixin, AuxilaryMixin):
+    """ Context to act mainly in HTTP handling related phases. """
     def __getattribute__(self, name):
          try:
+             logging.debug('Attribute access: %s', name)
              return super(HTTPContext, self).__getattribute__(name)
          except AttributeError:
              try:
@@ -337,18 +358,19 @@ class HTTPContext(_AuxilaryContext, HTTPMixin):
                               name)
                  raise AttributeError(msg)
 
-class RenderContext(_AuxilaryContext, RedirectMixin, PragmaMixin, ThemeMixin,
-                    AuxilaryMixin, DictsMixin, ActionMixin, PageMixin,
-                    RevisionMixin, FormatterMixin):
+class RenderContext(Context, RedirectMixin, ConfigMixin, UserMixin,
+                    LanguageMixin, ThemeMixin, AuxilaryMixin,
+                    ActionMixin, PageMixin, FormatterMixin):
+    """ Context to act during the rendering phase. """
     def write(self, *data):
         if len(data) > 1:
             logging.warning("Some code still uses write with multiple arguments, "
                             "consider changing this soon")
         self.request.stream.writelines(data)
 
+# TODO: extend xmlrpc context
 class XMLRPCContext(HTTPContext):
-    pass
+    """ Context to act during a XMLRPC request. """
 
 class AllContext(HTTPContext, RenderContext):
-    pass
-
+    """ Catchall context to be able to quickly test old Moin code. """
