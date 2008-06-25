@@ -92,7 +92,6 @@ var RestrictedStyleCommand = function(forbidden)
 }
 
 RestrictedStyleCommand.prototype = new FCKStyleCommand();
-
 RestrictedStyleCommand.prototype.GetState =  function()
 {
  if (FCKSelection.CheckForNodeNames(this.forbidden))
@@ -134,10 +133,8 @@ RestrictedStyleCommand.prototype.Execute = function(styleName, styleComboItem )
 
 var StyleButtonCommand = function(stylename, unique)
 {
- // this.StylesLoader = new FCKStylesLoader() ; 
- // this.StylesLoader.Load( FCKConfig.StylesXmlPath ) ; 
- // this.style = this.StylesLoader.Styles[stylename];
- // this.unique = unique;
+ this.style = FCK.Styles.GetStyle(stylename);   // using FCK.Style instead of fckstylesloader
+ this.unique = unique;
 }
 
 StyleButtonCommand.prototype = new FCKStyleCommand();
@@ -164,11 +161,10 @@ StyleButtonCommand.prototype.Execute = function()
  * RestrictedStyleButtonCommand
  * ####################################################################
  */
-/*
+
 var RestrictedStyleButtonCommand = function(stylename, forbidden, unique)
 {
-  this.style = this.StylesLoader.Styles[stylename];
-// this.style = stylename;
+  this.style = FCK.Styles.GetStyle(stylename);      // using FCK.Style instead of fckstylesloader
   this.forbidden = forbidden;
   this.unique = unique;
 }
@@ -187,7 +183,7 @@ RestrictedStyleButtonCommand.prototype.GetState = function()
     return FCK_TRISTATE_OFF;
   }
 }
-*/
+
 // ####################################################################
 
 var noformat = "H1|H2|H3|H4|H5|H6|PRE|A|TT|IMG";
@@ -249,6 +245,7 @@ FCKCommands.RegisterCommand('FontFormat',
  new RestrictedFormatBlockCommand(noBlock));
 FCKCommands.RegisterCommand('Style', 
  new RestrictedStyleCommand(noFormat));
+
 // misc
 FCKCommands.RegisterCommand('Smiley',
   new FCKDialogCommand( 'Smiley', FCKLang.DlgSmileyTitle, 
@@ -259,13 +256,14 @@ FCKCommands.RegisterCommand('Table', new FCKDialogCommand
  ('Table', FCKLang.DlgTableTitle, 'dialog/fck_table.html', 400, 250,
   FCKSelection.CheckForNodeNames, noTable));
 
-
+// useless code, this code make each menu's icon disapear.
+/*
 // Make toolbar items context sensitive
 FCKToolbarItems.RegisterItem('Smiley', new FCKToolbarButton
  ('Smiley', FCKLang.InsertSmileyLbl, FCKLang.InsertSmiley, null, false, true));
 FCKToolbarItems.RegisterItem('Table', new FCKToolbarButton
  ('Table', FCKLang.InsertTableLbl, FCKLang.InsertTable, null, false, true));
-
+*/
 
 FCKToolbarItems.RegisterItem('Big', new FCKToolbarButton
 			     ('Big', 'Big>', 'Big', 
