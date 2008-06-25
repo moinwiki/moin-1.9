@@ -134,10 +134,10 @@ RestrictedStyleCommand.prototype.Execute = function(styleName, styleComboItem )
 
 var StyleButtonCommand = function(stylename, unique)
 {
-  this.StylesLoader = new FCKStylesLoader() ; 
-  this.StylesLoader.Load( FCKConfig.StylesXmlPath ) ; 
-  this.style = this.StylesLoader.Styles[stylename];
-  this.unique = unique;
+ // this.StylesLoader = new FCKStylesLoader() ; 
+ // this.StylesLoader.Load( FCKConfig.StylesXmlPath ) ; 
+ // this.style = this.StylesLoader.Styles[stylename];
+ // this.unique = unique;
 }
 
 StyleButtonCommand.prototype = new FCKStyleCommand();
@@ -164,10 +164,11 @@ StyleButtonCommand.prototype.Execute = function()
  * RestrictedStyleButtonCommand
  * ####################################################################
  */
-
+/*
 var RestrictedStyleButtonCommand = function(stylename, forbidden, unique)
 {
   this.style = this.StylesLoader.Styles[stylename];
+// this.style = stylename;
   this.forbidden = forbidden;
   this.unique = unique;
 }
@@ -186,7 +187,7 @@ RestrictedStyleButtonCommand.prototype.GetState = function()
     return FCK_TRISTATE_OFF;
   }
 }
-
+*/
 // ####################################################################
 
 var noformat = "H1|H2|H3|H4|H5|H6|PRE|A|TT|IMG";
@@ -200,8 +201,7 @@ var noSmileys = /^(?:H1|H2|H3|H4|H5|H6|PRE|A|TT|SUB|SUPER)$/i;
 var noTable = new RegExp("^(?:" + noextendedformat + "|TABLE|UL|OL|DL)$", "i");
 
 // Register some context sensitive commands
-
-if (1 || !FCKBrowserInfo.IsIE){
+// register commands every browser
 
 // formats
 FCKCommands.RegisterCommand('Bold', 
@@ -214,10 +214,12 @@ FCKCommands.RegisterCommand('Underline',
 FCKCommands.RegisterCommand('StrikeThrough',
  new RestrictedNamedCommand('StrikeThrough', noExtendedFormat));
 
+
 FCKCommands.RegisterCommand('Small',
  new RestrictedStyleButtonCommand('Small', noExtendedFormat));
 FCKCommands.RegisterCommand('Big',
  new RestrictedStyleButtonCommand('Big', noExtendedFormat));
+
 
 // formats no allowing formats inside
 FCKCommands.RegisterCommand('Subscript',
@@ -225,8 +227,10 @@ FCKCommands.RegisterCommand('Subscript',
 FCKCommands.RegisterCommand('Superscript',
  new RestrictedUniqueNamedFormat('Superscript', noFormat));
 
+
 FCKCommands.RegisterCommand('Typewriter',
  new RestrictedStyleButtonCommand('Typewriter', noTT, true));
+
 
 // lists, hline
 FCKCommands.RegisterCommand('Outdent',
@@ -263,16 +267,6 @@ FCKToolbarItems.RegisterItem('Table', new FCKToolbarButton
  ('Table', FCKLang.InsertTableLbl, FCKLang.InsertTable, null, false, true));
 
 
-}
-else // IE
-{
-
-FCKCommands.RegisterCommand('Small', new StyleButtonCommand('Small'));
-FCKCommands.RegisterCommand('Big', new StyleButtonCommand('Big'));
-FCKCommands.RegisterCommand('Typewriter', 
-  new StyleButtonCommand('Typewriter', true));
-}
-
 FCKToolbarItems.RegisterItem('Big', new FCKToolbarButton
 			     ('Big', 'Big>', 'Big', 
 			      FCK_TOOLBARITEM_ONLYICON, false, true));
@@ -282,4 +276,3 @@ FCKToolbarItems.RegisterItem('Small', new FCKToolbarButton
 FCKToolbarItems.RegisterItem('Typewriter', new FCKToolbarButton
 			     ('Typewriter', 'Typewriter', 'Typewriter', 
 			      FCK_TOOLBARITEM_ONLYICON, false, true));
-

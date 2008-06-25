@@ -1,3 +1,5 @@
+// debug function.
+// TODO : can bind this kind of function
 function showObj(title, obj)
 { // show an object in a alert box
   var res = '';
@@ -11,7 +13,9 @@ function showObj(title, obj)
 }
 
 // --------------------------------
-if (FCKSelection.GetSelection) // Gecko
+// Gecko. it changed. also able to use FCKSelection.GetSelection in IE
+// --------------------------------
+if (FCKSelection.GetSelection) 
 { 
   // assume exactly one selection
   
@@ -311,6 +315,9 @@ FCKSelection.CheckForNodeNames = function(pattern)
     //Alert("No End");
     return 0;
   }
+  if (!pattern) {
+	  return 0;
+  }
   
   /* Crashes IE
   if ((FCKSelection.GetType()=="None") && (oStart!=oEnd))
@@ -326,7 +333,7 @@ FCKSelection.CheckForNodeNames = function(pattern)
 
   while (oElement)
   {
-    if (pattern != null && pattern.test(oElement.nodeName))
+    if (pattern.test(oElement.nodeName))
       { 
         //Alert("Start:" + oStart.nodeName + ':' + oElement.nodeName + 
         //      ':' + oEnd.nodeName);
@@ -334,10 +341,11 @@ FCKSelection.CheckForNodeNames = function(pattern)
       }
     oElement = oElement.parentNode;
   }
+
   oElement = oEnd;
   while (oElement)
   {
-    if (pattern != null && pattern.test(oElement.nodeName))
+    if (pattern.test(oElement.nodeName))
       { 
         //Alert("End:" + oStart.nodeName + ':' + oElement.nodeName + 
         //      ':' + oEnd.nodeName);
@@ -345,6 +353,7 @@ FCKSelection.CheckForNodeNames = function(pattern)
       }
     oElement = oElement.parentNode;
   }
+
 
   if (FCKSelection.IsCollapsed()) 
   {

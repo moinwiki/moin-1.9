@@ -34,7 +34,7 @@ FCKConfig.ToolbarSets["MoinDefault"] = [
  ['Undo','Redo'], ['Find','Replace'],
  ['MoinFormat'],
  // disabled some styles until IE endless loop is fixed:
- // ['Bold', 'Italic', 'Typewriter', 'Underline', 'StrikeThrough', '-', 'Big', 'Small', 'Superscript', 'Subscript'],
+ //['Bold', 'Italic', 'Typewriter', 'Underline', 'StrikeThrough', '-', 'Big', 'Small', 'Superscript', 'Subscript'],
  ['Bold', 'Italic', 'Underline', 'StrikeThrough', 'RemoveFormat'],
  ['OrderedList','UnorderedList','-','Indent','Outdent'],
  ['Link','Unlink','Attachment','Image','Smiley'],
