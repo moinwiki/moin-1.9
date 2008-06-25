@@ -94,7 +94,8 @@ function can_use_gui_editor() {
         return true ;
 
     // Opera
-    if ( this.EnableOpera )
+	// remove this.EnableOpera code to enable opera
+    if ( sAgent.indexOf("opera") != -1 )
     {   
         var aMatch = sAgent.match( /^opera\/(\d+\.\d+)/ ) ;
         if ( aMatch && aMatch[1] >= 9.0 )
@@ -102,7 +103,8 @@ function can_use_gui_editor() {
     }
     
     // Safari
-    if ( this.EnableSafari && sAgent.indexOf( 'safari' ) != -1 )
+	// remove this.EnableSafari code to enable safari
+    if ( sAgent.indexOf( 'safari' ) != -1 )
         return ( sAgent.match( /safari\/(\d+)/ )[1] >= 312 ) ;  // Build must be at least 312 (1.3)
 
     return false ;
