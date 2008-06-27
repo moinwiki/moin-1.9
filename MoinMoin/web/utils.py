@@ -29,21 +29,23 @@ def check_spider(useragent, cfg):
         is_spider = cfg.cache.ua_spiders.search(useragent.browser) is not None
     return is_spider
 
-def check_setuid(request):
-    """ Check for setuid conditions and set user accordingly
+def check_setuid(request, userobj):
+    """ Check for setuid conditions.
+    Returns a tuple of either new user and old user
+    or just user and None.
     
     @param request: a moin request object
+    @param userobj: a moin user object
     @rtype: boolean
-    @return: Wether a UID change took place
+    @return: (new_user, user) or (user, None)
     """
-    if 'setuid' in request.session and request.user.isSuperUser():
-        request._setuid_real_user = request.user
+    old_user = None
+    if 'setuid' in request.session and userobj.isSuperUser():
+        old_user = userobj
         uid = request.session['setuid']
-        request.user = user.User(request, uid, auth_method='setuid')
-        request.user.valid = True
-        return True
-    else:
-        return False
+        userobj = user.User(request, uid, auth_method='setuid')
+        userobj.valid = True
+    return (userobj, old_user)
 
 def check_forbidden(request):
     """ Simple action and host access checks
@@ -152,70 +154,6 @@ def check_surge_protect(request, kick=False):
         raise SurgeProtection(retry_after=request.cfg.surge_lockout_time)
     else:
         return False
-
-def handle_auth(user_obj, request, attended=False, username=None,
-                password=None, openid_identifier=None, login=None,
-                logout=None, stage=None):
-    extra = { 'cookie': request.cookies }
-    if login:
-        extra['attended'] = attended
-        extra['username'] = username
-        extra['password'] = password
-        extra['openid_identifier'] = openid_identifier
-        if stage:
-            extra['multistage'] = True
-    login_msgs = []
-    request._login_multistage = None
-
-    if logout and 'setuid' in request.session:
-        del request.session['setuid']
-        return user_obj
-
-    for authmethod in request.cfg.auth:
-        if logout:
-            user_obj, cont = authmethod.logout(request, user_obj, **extra)
-        elif login:
-            if stage and authmethod.name != stage:
-                continue
-            ret = authmethod.login(request, user_obj, **extra)
-            user_obj = ret.user_obj
-            cont = ret.continue_flag
-            if stage:
-                stage = None
-                del extra['multistage']
-            if ret.multistage:
-                request._login_multistage = ret.multistage
-                request._login_multistage_name = authmethod.name
-                return user_obj
-            if ret.redirect_to:
-                nextstage = auth.get_multistage_continuation_url(request, authmethod.name)
-                url = ret.redirect_to
-                url = url.replace('%return_form', quote_plus(nextstage))
-                url = url.replace('%return', quote(nextstage))
-                abort(redirect(url))
-            msg = ret.message
-            if msg and not msg in login_msgs:
-                login_msgs.append(msg)
-        else:
-            user_obj, cont = authmethod.request(request, user_obj, **extra)
-        if not cont:
-            break
-
-    request._login_messages = login_msgs
-    return user_obj
-
-def handle_auth_form(user_obj, request):
-    form = request.form
-    params = {
-        'username': form.get('name'),
-        'password': form.get('password'),
-        'openid_identifier': form.get('openid_identifier'),
-        'login': 'login' in form,
-        'logout': 'logout' in form,
-        'stage': form.get('stage'),
-        'attended': True
-    }
-    return handle_auth(user_obj, request, **params)
 
 def redirect_last_visited(request):
     pagetrail = request.user.getTrail()

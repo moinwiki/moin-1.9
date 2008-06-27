@@ -13,7 +13,7 @@ from werkzeug.exceptions import NotFound
 from MoinMoin.web.contexts import HTTPContext, RenderContext, AllContext
 from MoinMoin.web.request import Request
 from MoinMoin.web.utils import check_spider, check_forbidden, check_setuid
-from MoinMoin.web.utils import check_surge_protect, handle_auth_form
+from MoinMoin.web.utils import check_surge_protect
 from MoinMoin.web.apps import HTTPExceptionsMiddleware
 
 from MoinMoin.Page import Page
@@ -35,7 +35,34 @@ def init(request):
 
     request.session = request.cfg.session_service.get_session(request)
 
-    check_setuid(request)
+    # auth & user handling
+    userobj = None
+    form = request.form
+
+    if 'login' in form:
+        params = {
+            'username': form.get('name'),
+            'password': form.get('password'),
+            'attended': True,
+            'openid_identifier': form.get('openid_identifier'),
+            'stage': form.get('stage')
+        }
+        userobj = auth.handle_login(request, userobj, **params)
+    elif 'logout' in form:
+        userobj = auth.handle_logout(request, userobj)
+    else:
+        userobj = auth.handle_request(request, userobj)
+
+    userobj, olduser = check_setuid(request, userobj)
+
+    if not userobj:
+        userobj = user.User(request, auth_method='request:invalid')
+
+    request.user = userobj
+    request._setuid_real_user = olduser
+
+    # preliminary access control
+    # check against spiders, blacklists and request-spam
     check_forbidden(request)
     check_surge_protect(request)
 

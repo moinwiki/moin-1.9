@@ -15,6 +15,9 @@ from werkzeug.contrib.sessions import FilesystemSessionStore, Session
 from MoinMoin.web.api import ISessionService
 from MoinMoin import caching
 
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 class MoinSession(Session):
     """ Compatibility interface to Werkzeug-sessions for old Moin-code. """
     is_new = property(lambda s: s.new)
@@ -42,6 +45,18 @@ class FileSessionService(object):
         return session
 
     def finalize(self, request, session):
+        userobj = request.user
+        if userobj and userobj.valid:
+            if 'user.id' in session and session['user.id'] != userobj.id:
+                request.cfg.session_service.delete(session)
+            session['user.id'] = userobj.id
+            session['user.auth_method'] = userobj.auth_method
+            session['user.auth_attribs'] = userobj.auth_attribs
+            logging.debug("after auth: storing valid user into session: %r" % userobj.name)
+        else:
+            if 'user.id' in session:
+                request.cfg.session_service.delete(session)                
+
         if session.should_save:
             self.store.save(session)
             cookie_lifetime = request.cfg.cookie_lifetime * 3600

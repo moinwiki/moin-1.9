@@ -29,7 +29,7 @@ def _create_user(request):
 
     # Require non-empty name
     try:
-        theuser.name = form['name'][0]
+        theuser.name = form['name']
     except KeyError:
         return _("Empty user name. Please enter a user name.")
 
@@ -44,8 +44,8 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
         return _("This user name already belongs to somebody else.")
 
     # try to get the password and pw repeat
-    password = form.get('password1', [''])[0]
-    password2 = form.get('password2', [''])[0]
+    password = form.get('password1', '')
+    password2 = form.get('password2', '')
 
     # Check if password is given and matches with password repeat
     if password != password2:
@@ -68,7 +68,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
             return "Can't encode password: %s" % str(err)
 
     # try to get the email, for new users it is required
-    email = wikiutil.clean_input(form.get('email', [''])[0])
+    email = wikiutil.clean_input(form.get('email', ''))
     theuser.email = email.strip()
     if not theuser.email and 'email' not in request.cfg.user_form_remove:
         return _("Please provide your email address. If you lose your"
@@ -82,7 +82,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
     # save data
     theuser.save()
 
-    if form.has_key('create_and_mail'):
+    if 'create_and_mail' in form:
         theuser.mailAccountData()
 
     result = _("User account created! You can use this account to login now...")
@@ -161,7 +161,7 @@ def execute(pagename, request):
     _ = request.getText
     form = request.form
 
-    submitted = form.has_key('create_only') or form.has_key('create_and_mail')
+    submitted = 'create_only' in form or 'create_and_mail' in form:
 
     if submitted: # user pressed create button
         request.theme.add_msg(_create_user(request), "dialog")

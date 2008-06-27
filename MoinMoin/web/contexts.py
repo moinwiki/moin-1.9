@@ -271,7 +271,12 @@ class AuxilaryMixin(object):
     parsePageLinks_running = EnvironProxy('parsePageLinks_running', lambda o: {})
     mode_getpagelinks = EnvironProxy('mode_getpagelinks', 0)
     clock = EnvironProxy('clock', lambda o: Clock())
-    pragma = EnvironProxy('pragma', lambda o: dict())
+    pragma = EnvironProxy('pragma', lambda o: {})
+    _login_messages = EnvironProxy('_login_messages', lambda o: [])
+    _login_multistage = EnvironProxy('_login_multistage', None)
+
+
+    _setuid_real_user = EnvironProxy('_setuid_real_user', None)
 
     def uid_generator(self):
         pagename = None
