@@ -870,8 +870,8 @@ class convert_tree(visitor):
         if class_ == "comment": # we currently use this for stuff like ## or #acl
             for i in node.childNodes:
                 if i.nodeType == Node.TEXT_NODE:
-                    self.text.append(i.data)
-                    #print "'%s'" % i.data
+                    self.text.append(i.data.replace('\n', '')) # remove useless new line
+                    #print "'%s'" % i.data.replace('\n', '')
                 elif i.localName == 'br':
                     self.text.append(self.new_line)
                 else:
