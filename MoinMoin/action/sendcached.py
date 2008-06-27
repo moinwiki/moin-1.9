@@ -112,24 +112,39 @@ def put_cache(request, key, data,
 
 
 def get_url(request, key):
+    """ get URL for the object cached for key """
     return "%s/?%s" % (
         request.getScriptname(),
         wikiutil.makeQueryString(dict(action=action_name, key=key), want_unicode=False))
 
 
-def execute(pagename, request):
-    key = request.form.get('key', [None])[0]
+def get_cache_headers(request, key):
+    """ get last_modified and headers cached for key """
     meta_cache = caching.CacheEntry(request, sendcached_arena, key+'.meta',
                                     sendcached_scope, do_locking=do_locking, use_pickle=True)
     last_modified, headers = meta_cache.content()
+    return last_modified, headers
 
+
+def get_cache_datafile(request, key):
+    """ get an open data file for the data cached for key """
+    data_cache = caching.CacheEntry(request, sendcached_arena, key+'.data',
+                                    sendcached_scope, do_locking=do_locking)
+    data_file = open(data_cache._filename(), 'rb')
+    return data_file
+
+
+def send_cached(request, key):
+    """ send a complete http response with headers/data cached for key """
+    last_modified, headers = get_cache_headers(request, key)
     if request.if_modified_since == last_modified:
         request.emit_http_headers(["Status: 304 Not modified"])
     else:
         request.emit_http_headers(headers)
+        request.send_file(get_cache_datafile(request, key))
 
-        data_cache = caching.CacheEntry(request, sendcached_arena, key+'.data',
-                                        sendcached_scope, do_locking=do_locking)
-        data_file = open(data_cache._filename(), 'rb')
-        request.send_file(data_file)
+
+def execute(pagename, request):
+    key = request.form.get('key', [None])[0]
+    send_cached(key)
 
