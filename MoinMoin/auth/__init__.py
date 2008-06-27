@@ -251,3 +251,53 @@ class MoinLogin(BaseAuth):
                'userprefslink': userprefslink,
                'sendmypasswordlink': sendmypasswordlink}
 
+def handle_login(request, userobj=None, username=None, password=None,
+                 attended=True, openid_identifier=None, stage=None):
+    params = {
+        'username': username,
+        'password': password,
+        'attended': attended,
+        'openid_identifier': openid_identifier,
+        'multistage': (stage and True) or None
+    }
+    for authmethod in request.cfg.auth:
+        if stage and authmethod.name != stage:
+            continue
+        ret = authmethod.login(request, userobj, **params)
+
+        userobj = ret.user_obj
+        cont = ret.continue_flag
+        if stage:
+            stage = None
+            del params['multistage']
+
+        if ret.multistage:
+            request._login_multistage = ret.multistage
+            request._login_multistage_name = authmethod.name
+            return userobj
+
+        if ret.redirect_to:
+            nextstage = auth.get_multistage_continuation_url(request, authmethod.name)
+            url = ret.redirect_to
+            url = url.replace('%return_form', quote_plus(nextstage))
+            url = url.replace('%return', quote(nextstage))
+            abort(redirect(url))
+        msg = ret.message
+        if msg and not msg in request._login_messages:
+            request._login_messages.append(msg)
+
+    return userobj
+
+def handle_logout(request, userobj):
+    for authmethod in request.cfg.auth:
+        userobj, cont = authmethod.logout(request, userobj, cookie=request.cookies)
+        if not cont:
+            break
+    return userobj
+
+def handle_request(request, userobj):
+    for authmethod in request.cfg.auth:
+        userobj, cont = authmethod.request(request, userobj, cookie=request.cookies)
+        if not cont:
+            break
+    return userobj
