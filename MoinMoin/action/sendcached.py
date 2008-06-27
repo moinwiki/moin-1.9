@@ -87,7 +87,7 @@ def put_cache(request, key, data,
     else:
         data_cache.update(data)
 
-    content_length = content_length or os.path.size(data_cache_fname)
+    content_length = content_length or os.path.getsize(data_cache_fname)
     last_modified = last_modified or os.path.getmtime(data_cache_fname)
 
     last_modified = timefuncs.formathttpdate(int(last_modified))
