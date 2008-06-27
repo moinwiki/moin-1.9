@@ -247,6 +247,7 @@ def link_dialog(request):
         scriptname += "/"
     action = scriptname
     basepage = request.page.page_name.encode(config.charset)
+            
     request.write('''
 <!--
  * FCKeditor - The text editor for internet
@@ -323,7 +324,7 @@ def link_dialog(request):
          <td>
           <span fckLang="WikiDlgName">Wiki:PageName</span><br>
           <select id="sctInterwiki" size="1">
-          %(interwiki)s
+          %(interwiki)s 
           </select>:
           <input id="txtInterwikipagename"></input>
          </td>
