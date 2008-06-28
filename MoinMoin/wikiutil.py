@@ -1083,9 +1083,11 @@ class PluginAttributeError(PluginError):
 def importPlugin(cfg, kind, name, function="execute"):
     """ Import wiki or builtin plugin
 
-    Returns function from a plugin module name. If name can not be
-    imported, raise PluginMissingError. If function is missing, raise
-    PluginAttributeError.
+    Returns <function> attr from a plugin module <name>.
+    If <function> attr is missing, raise PluginAttributeError.
+    If <function> is None, return the whole module object.
+
+    If <name> plugin can not be imported, raise PluginMissingError.
 
     kind may be one of 'action', 'formatter', 'macro', 'parser' or any other
     directory that exist in MoinMoin or data/plugin.
@@ -1130,15 +1132,28 @@ def importBuiltinPlugin(kind, name, function="execute"):
 
 
 def importNameFromPlugin(moduleName, name):
-    """ Return name from plugin module
+    """ Return <name> attr from <moduleName> module,
+        raise PluginAttributeError if name does not exist.
 
-    Raise PluginAttributeError if name does not exist.
+        If name is None, return the <moduleName> module object.
     """
-    module = __import__(moduleName, globals(), {}, [name])
-    try:
-        return getattr(module, name)
-    except AttributeError:
-        raise PluginAttributeError
+    if name is None:
+        fromlist = []
+    else:
+        fromlist = [name]
+    module = __import__(moduleName, globals(), {}, fromlist)
+    if fromlist:
+        # module has the obj for module <moduleName>
+        try:
+            return getattr(module, name)
+        except AttributeError:
+            raise PluginAttributeError
+    else:
+       # module now has the toplevel module of <moduleName> (see __import__ docs!)
+       components = moduleName.split('.')
+       for comp in components[1:]:
+           module = getattr(module, comp)
+       return module
 
 
 def builtinPlugins(kind):
