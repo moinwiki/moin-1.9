@@ -44,6 +44,11 @@ class FileSessionService(object):
             session = self.store.get(sid)
         return session
 
+    def destroy_session(self, request, session):
+        session.clear()
+        self.store.delete(session)
+        session.modified = session.new = False
+
     def finalize(self, request, session):
         userobj = request.user
         if userobj and userobj.valid:
@@ -55,7 +60,7 @@ class FileSessionService(object):
             logging.debug("after auth: storing valid user into session: %r" % userobj.name)
         else:
             if 'user.id' in session:
-                request.cfg.session_service.delete(session)                
+                self.destroy_session(request, session)
 
         if session.should_save:
             self.store.save(session)
