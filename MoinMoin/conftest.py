@@ -71,19 +71,14 @@ except ImportError:
 
 
 def init_test_request(static_state=[False]):
-    from MoinMoin.request import request_cli
-    from MoinMoin.user import User
-    from MoinMoin.formatter.text_html import Formatter as HtmlFormatter
+    from MoinMoin.web.request import create_request
+    from MoinMoin.wsgiapp import init as request_init
     if not static_state[0]:
         maketestwiki.run(True)
         static_state[0] = True
-    request = request_cli.Request()
-    request.form = request.args = request.setup_args()
-    request.user = User(request)
-    request.html_formatter = HtmlFormatter(request)
-    request.formatter = request.html_formatter
+    request = create_request()
+    request = request_init(request)
     return request
-
 
 class TestConfig:
     """ Custom configuration for unit tests
