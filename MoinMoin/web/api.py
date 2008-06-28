@@ -30,9 +30,11 @@ class ISessionService(Interface):
     def get_session(request):
         """ Return a session object pertaining to the particular request."""
 
+    def destroy_session(request, session):
+        """ Destroy an existing session (make it unusable). """
+
     def finalize(request, session):
         """
         Do final modifications to the request and/or session before sending
         headers and body to the cliebt.
         """
-        
