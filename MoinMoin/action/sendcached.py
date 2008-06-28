@@ -111,6 +111,29 @@ def put_cache(request, key, data,
     return get_url(request, key)
 
 
+def is_cached(request, key, strict=False):
+    """
+    Check if we have already cached an object for this key.
+
+    @param request: the request object
+    @param key: non-guessable key into sendcached cache (str)
+    @param strict: if True, also check the data cache, not only meta (bool, default: False)
+    @return: is object cached? (bool)
+    """
+    if strict:
+        data_cache = caching.CacheEntry(request, sendcached_arena, key+'.data',
+                                        sendcached_scope, do_locking=do_locking)
+        data_cached = data_cache.exists()
+    else:
+        data_cached = True  # we assume data will be there if meta is there
+
+    meta_cache = caching.CacheEntry(request, sendcached_arena, key+'.meta',
+                                    sendcached_scope, do_locking=do_locking, use_pickle=True)
+    meta_cached = meta_cache.exists()
+
+    return meta_cached and data_cached
+
+
 def get_url(request, key):
     """ get URL for the object cached for key """
     return "%s/?%s" % (
@@ -146,5 +169,5 @@ def send_cached(request, key):
 
 def execute(pagename, request):
     key = request.form.get('key', [None])[0]
-    send_cached(key)
+    send_cached(request, key)
 
