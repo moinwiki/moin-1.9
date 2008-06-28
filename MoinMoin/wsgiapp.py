@@ -36,7 +36,10 @@ def init(request):
     request.session = request.cfg.session_service.get_session(request)
 
     # auth & user handling
-    userobj = None
+    # first try setting up from session
+    userobj = auth.setup_from_session(request, request.session)
+
+    # then handle login/logout forms 
     form = request.form
 
     if 'login' in form:
@@ -53,6 +56,7 @@ def init(request):
     else:
         userobj = auth.handle_request(request, userobj)
 
+    # check for setuid-handling of users
     userobj, olduser = check_setuid(request, userobj)
 
     if not userobj:

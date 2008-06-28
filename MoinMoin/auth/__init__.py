@@ -301,3 +301,17 @@ def handle_request(request, userobj):
         if not cont:
             break
     return userobj
+
+def setup_from_session(request, session):
+    userobj = None
+    if 'user.id' in session:
+        auth_userid = session['user.id']
+        auth_method = session['user.auth_method']
+        auth_attrs = session['user.auth_attribs']
+        if auth_method and auth_method in \
+                [ auth.name for auth in request.cfg.auth]:
+            userobj = user.User(request, id=auth_userid,
+                                auth_method=auth_method,
+                                auth_attribs=auth_attrs)
+    logging.debug("session started for user %r", userobj)
+    return userobj
