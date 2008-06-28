@@ -51,3 +51,16 @@ class Request(WerkzeugRequest, WerkzeugResponse):
     def in_data(self):
         return self.in_stream.read()
     in_data = cached_property(in_data, doc=WerkzeugRequest.data.__doc__)
+
+def create_request(pagename='/'):
+    """
+    Creates an environment for a local request and returns the  already
+    intialized Request-object
+    """
+    from werkzeug.utils import create_environ
+    if not pagename.startswith('/'):
+        pagename = '/' + pagename
+    environ = create_environ(path=pagename)
+    environ['HTTP_USER_AGENT'] = 'CLI/Script'
+    return Request(environ)
+        
