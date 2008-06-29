@@ -98,14 +98,16 @@ function can_use_gui_editor() {
 	if ( window.opera && window.opera.version && parseFloat( window.opera.version() ) >= 9.5 )
 		return true ;
 
+	// diable safari until fix p tag finish problem
+
 	// Adobe AIR
 	// Checked before Safari because AIR have the WebKit rich text editor
 	// features from Safari 3.0.4, but the version reported is 420.
-	if ( sAgent.indexOf( ' adobeair/' ) != -1 )
+	if ( false && sAgent.indexOf( ' adobeair/' ) != -1 )
 		return ( sAgent.match( / adobeair\/(\d+)/ )[1] >= 1 ) ;	// Build must be at least v1
 
 	// Safari 3+
-	if ( sAgent.indexOf( ' applewebkit/' ) != -1 )
+	if ( false && sAgent.indexOf( ' applewebkit/' ) != -1 )
 		return ( sAgent.match( / applewebkit\/(\d+)/ )[1] >= 522 ) ;	// Build must be at least 522 (v3)
 
 	return false ;

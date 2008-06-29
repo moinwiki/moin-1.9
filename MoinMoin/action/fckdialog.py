@@ -239,7 +239,7 @@ def link_dialog(request):
         resultlist = iwpreferred[:-1]
     interwiki = "\n".join(
         ['<option value="%s">%s</option>' % (key, key) for key in resultlist])
-
+    
     # wiki url
     url_prefix_static = request.cfg.url_prefix_static
     scriptname = request.getScriptname()
@@ -247,6 +247,8 @@ def link_dialog(request):
         scriptname += "/"
     action = scriptname
     basepage = request.page.page_name.encode(config.charset)
+
+    print locals()
             
     request.write('''
 <!--
