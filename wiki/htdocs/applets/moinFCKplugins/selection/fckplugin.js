@@ -1,5 +1,5 @@
 // debug function.
-// TODO : can bind this kind of function
+// TODO : make common javascript class and extract this one
 function showObj(title, obj)
 { // show an object in a alert box
   var res = '';
@@ -64,7 +64,7 @@ if (FCKSelection.GetSelection)
     }
 }
 /* ##########################################################################
- * ###   IE 
+ * ###   IE  : it dosen't work. ie also use FCKSelection.
  * #########################################################################
  */
 else if (FCK.EditorDocument.selection)
@@ -203,7 +203,7 @@ else if (FCK.EditorDocument.selection)
       {
         var oTmpRange = FCK.EditorDocument.selection.createRange();
         var oNode = oRange.parentElement()
-	var following_text = false;
+        var following_text = false;
         if (!oNode.hasChildNodes()) return oNode; // selection in empty tag
         oNode = oNode.lastChild;
         var oLastText = oNode;
@@ -211,7 +211,7 @@ else if (FCK.EditorDocument.selection)
         {
           if (oNode.nodeName!="#text") 
             {
-	      following_text = false;
+              following_text = false;
               oTmpRange.moveToElementText(oNode);
               if (oRange.compareEndPoints('EndToStart', oTmpRange)>0)
                 {
@@ -302,6 +302,10 @@ var Alert = function(sText)
   }
 }
 
+
+
+// this function make toolbar's button enable/disable using inserted pattern.
+// check coverage is contains its parent and children.
 FCKSelection.CheckForNodeNames = function(pattern)
 {
   var oStart = FCKSelection.GetStartNode();

@@ -1295,6 +1295,10 @@ def parse(request, text):
     text = u'<?xml version="1.0"?>%s%s' % (dtd, text)
     text = text.encode(config.charset)
     try:
+        logname = os.path.join(request.cfg.data_dir, "expaterror.log")
+        f = file(logname, "w")
+        f.write(text)
+        f.close()
         return xml.dom.minidom.parseString(text)
     except xml.parsers.expat.ExpatError, msg:
         # this sometimes crashes when it should not, so save the stuff to analyze it:
