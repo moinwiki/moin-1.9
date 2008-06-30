@@ -730,7 +730,7 @@ class CategorySearch(TextSearch):
         """
         kwargs['use_re'] = True
         TextSearch._build_re(self,
-                r'(?m)(^-----*\r?\n)(^##.*\r?\n)*^(?!##)(.*)\b%s\b' % pattern, **kwargs)
+                r'(?m)(^-----*\s*\r?\n)(^##.*\r?\n)*^(?!##)(.*)\b%s\b' % pattern, **kwargs)
 
     def costs(self):
         return 5000 # cheaper than a TextSearch
