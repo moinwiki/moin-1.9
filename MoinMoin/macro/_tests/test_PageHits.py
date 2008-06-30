@@ -1,0 +1,71 @@
+# -*- coding: iso-8859-1 -*-
+"""
+    MoinMoin - MoinMoin.macro PageHits tested
+
+    @copyright: 2008 MoinMoin:ReimarBauer
+
+    @license: GNU GPL, see COPYING for details.
+"""
+import os
+
+from MoinMoin import caching, macro
+from MoinMoin.logfile import eventlog
+from MoinMoin.PageEditor import PageEditor
+from MoinMoin.Page import Page
+
+from MoinMoin._tests import become_trusted, create_page, nuke_page
+
+class TestHits:
+    """Hits: testing Hits macro """
+    pagename = u'AutoCreatedMoinMoinTemporaryTestPageForPageHits'
+
+    def setup_class(self):
+        request = self.request
+        become_trusted(request)
+        self.page = create_page(request, self.pagename, u"Foo!")
+
+        # for that test eventlog needs to be empty
+        fpath = request.rootpage.getPagePath('event-log', isfile=1)
+        if os.path.exists(fpath):
+            os.remove(fpath)
+
+        # hits is based on hitcounts which reads the cache
+        caching.CacheEntry(request, 'charts', 'pagehits', scope='wiki').remove()
+        caching.CacheEntry(request, 'charts', 'hitcounts', scope='wiki').remove()
+
+    def teardown_class(self):
+        nuke_page(self.request, self.pagename)
+
+    def _make_macro(self):
+        """Test helper"""
+        from MoinMoin.parser.text import Parser
+        from MoinMoin.formatter.text_html import Formatter
+        p = Parser("##\n", self.request)
+        p.formatter = Formatter(self.request)
+        p.formatter.page = self.page
+        self.request.formatter = p.formatter
+        p.form = self.request.form
+        m = macro.Macro(p)
+        return m
+
+    def _test_macro(self, name, args):
+        m = self._make_macro()
+        return m.execute(name, args)
+
+    def testPageHits(self):
+        """ macro PageHits test: updating of cache from event-log for multiple call of PageHits"""
+        count = 20
+        for counter in range(count):
+            eventlog.EventLog(self.request).add(self.request, 'VIEWPAGE', {'pagename': 'PageHits'})
+            result = self._test_macro(u'PageHits', u'') # XXX SENSE???
+
+        cache = caching.CacheEntry(self.request, 'charts', 'pagehits', scope='wiki', use_pickle=True)
+        date, hits = 0, {}
+        if cache.exists():
+            try:
+                date, hits = cache.content()
+            except caching.CacheError:
+                cache.remove()
+        assert hits['PageHits'] == count
+
+coverage_modules = ['MoinMoin.macro.PageHits']
