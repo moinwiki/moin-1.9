@@ -22,7 +22,7 @@
 # add names here to hide them in the cgitb traceback
 unsafe_names = ("id", "key", "val", "user_data", "enc_password", "recoverpass_key")
 
-import os, time, sha, codecs, hmac
+import os, time, sha, codecs, hmac, base64
 
 from MoinMoin import config, caching, wikiutil, i18n, events
 from MoinMoin.util import timefuncs, filesys, random_string
@@ -140,13 +140,8 @@ def getUserIdentification(request, username=None):
     return username or (request.cfg.show_hosts and request.remote_addr) or _("<unknown>")
 
 
-def encodePassword(pwd, charset='utf-8'):
+def encodePassword(pwd):
     """ Encode a cleartext password
-
-    Compatible to Apache htpasswd SHA encoding.
-
-    When using different encoding than 'utf-8', the encoding might fail
-    and raise UnicodeError.
 
     @param pwd: the cleartext password, (unicode)
     @param charset: charset used to encode password, used only for
@@ -155,15 +150,13 @@ def encodePassword(pwd, charset='utf-8'):
     @return: the password in apache htpasswd compatible SHA-encoding,
         or None
     """
-    import base64
+    pwd = pwd.encode('utf-8')
 
-    # Might raise UnicodeError, but we can't do anything about it here,
-    # so let the caller handle it.
-    pwd = pwd.encode(charset)
+    salt = random_string(20)
+    hash = sha.new(pwd)
+    hash.update(salt)
 
-    pwd = sha.new(pwd).digest()
-    pwd = '{SHA}' + base64.encodestring(pwd).rstrip()
-    return pwd
+    return '{SSHA}' + base64.b64encode(hash.digest() + salt).rstrip()
 
 
 def normalizeName(name):
@@ -316,11 +309,6 @@ class User:
         self.recoverpass_key = ""
 
         self.enc_password = ""
-        if password:
-            try:
-                self.enc_password = encodePassword(password)
-            except UnicodeError:
-                pass # Should never happen
 
         #self.edit_cols = 80
         self.tz_offset = int(float(self._cfg.tz_offset) * 3600)
@@ -343,17 +331,18 @@ class User:
         self._trail = []
 
         # we got an already authenticated username:
-        check_pass = 0
+        check_password = None
         if not self.id and self.auth_username:
             self.id = getUserId(request, self.auth_username)
             if not password is None:
-                check_pass = 1
+                check_password = password
         if self.id:
-            self.load_from_id(check_pass)
+            self.load_from_id(check_password)
         elif self.name:
             self.id = getUserId(self._request, self.name)
             if self.id:
-                self.load_from_id(1)
+                # no password given should fail
+                self.load_from_id(password or u'')
             else:
                 self.id = self.make_id()
         else:
@@ -407,7 +396,7 @@ class User:
         """
         return os.path.exists(self.__filename())
 
-    def load_from_id(self, check_pass=0):
+    def load_from_id(self, password=None):
         """ Load user account data from disk.
 
         Can only load user data if the id number is already known.
@@ -415,8 +404,8 @@ class User:
         This loads all member variables, except "id" and "valid" and
         those starting with an underscore.
 
-        @param check_pass: If 1, then self.enc_password must match the
-                           password in the user account file.
+        @param password: If not None, then the given password must match the
+                         password in the user account file.
         """
         if not self.exists():
             return
@@ -450,11 +439,8 @@ class User:
         # values, we set 'changed' flag, and later save the user data.
         changed = 0
 
-        if check_pass:
-            # If we have no password set, we don't accept login with username
-            if not user_data['enc_password']:
-                return
-            # Check for a valid password, possibly changing encoding
+        if password is not None:
+            # Check for a valid password, possibly changing storage
             valid, changed = self._validatePassword(user_data)
             if not valid:
                 return
@@ -502,43 +488,20 @@ class User:
             self.save()
 
     def _validatePassword(self, data):
-        """ Try to validate user password
+        """
+        Check user password.
 
         This is a private method and should not be used by clients.
 
-        In pre 1.3, the wiki used some 8 bit charset. The user password
-        was entered in this 8 bit password and passed to
-        encodePassword. So old passwords can use any of the charset
-        used.
-
-        In 1.3, we use unicode internally, so we encode the password in
-        encodePassword using utf-8.
-
-        When we compare passwords we must compare with same encoding, or
-        the passwords will not match. We don't know what encoding the
-        password on the user file uses. We may ask the wiki admin to put
-        this into the config, but he may be wrong.
-
-        The way chosen is to try to encode and compare passwords using
-        all the encoding that were available on 1.2, until we get a
-        match, which means that the user is valid.
-
-        If we get a match, we replace the user password hash with the
-        utf-8 encoded version, and next time it will match on first try
-        as before. The user password did not change, this change is
-        completely transparent for the user. Only the sha digest will
-        change.
-
-        @param data: dict with user data
+        @param data: dict with user data (from storage)
         @rtype: 2 tuple (bool, bool)
-        @return: password is valid, password did change
+        @return: password is valid, enc_password changed
         """
-        # First try with default encoded password. Match only non empty
-        # passwords. (require non empty enc_password)
-        if self.enc_password and self.enc_password == data['enc_password']:
-            return True, False
+        epwd = data['enc_password']
 
-        # Try to match using one of pre 1.3 8 bit charsets
+        # If we have no password set, we don't accept login with username
+        if not epwd:
+            return False, False
 
         # Get the clear text password from the form (require non empty
         # password)
@@ -546,30 +509,20 @@ class User:
         if not password:
             return False, False
 
-        # First get all available pre13 charsets on this system
-        pre13 = ['iso-8859-1', 'iso-8859-2', 'euc-jp', 'gb2312', 'big5', ]
-        available = []
-        for charset in pre13:
-            try:
-                encoder = codecs.getencoder(charset)
-                available.append(charset)
-            except LookupError:
-                pass # missing on this system
-
-        # Now try to match the password
-        for charset in available:
-            # Try to encode, failure is expected
-            try:
-                enc_password = encodePassword(password, charset=charset)
-            except UnicodeError:
-                continue
-
-            # And match (require non empty enc_password)
-            if enc_password and enc_password == data['enc_password']:
-                # User password match - replace the user password in the
-                # file with self.password
-                data['enc_password'] = self.enc_password
+        if epwd[:5] == '{SHA}':
+            enc = '{SHA}' + base64.encodestring(sha.new(password).digest()).rstrip()
+            if epwd == enc:
+                data['enc_password'] = encodePassword(password)
                 return True, True
+            return False, False
+
+        if epwd[:6] == '{SSHA}':
+            print epwd[6:]
+            data = base64.b64decode(epwd[6:])
+            salt = data[20:]
+            hash = sha.new(password)
+            hash.update(salt)
+            return hash.digest() == data[:20], False
 
         # No encoded password match, this must be wrong password
         return False, False
