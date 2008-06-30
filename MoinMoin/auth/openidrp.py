@@ -135,9 +135,9 @@ username and leave the password field blank.""")))
         query = {}
         for key in request.form:
             query[key] = request.form[key][0]
-        return_to = get_multistage_continuation_url(request, self.name,
-                                                    {'oidstage': '1'})
-        info = oidconsumer.complete(query, return_to=return_to)
+        current_url = get_multistage_continuation_url(request, self.name,
+                                                      {'oidstage': '1'})
+        info = oidconsumer.complete(query, current_url)
         if info.status == consumer.FAILURE:
             return CancelLogin(_('OpenID error: %s.') % info.message)
         elif info.status == consumer.CANCEL:
