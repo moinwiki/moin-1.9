@@ -12,10 +12,10 @@ import sys
 try:
     from MoinMoin.patchlevel import patchlevel
 except:
-    patchlevel = 'release'
+    patchlevel = 'alpha'
 
 project = "MoinMoin"
-release = '1.8.0alpha'
+release = '1.8.0'
 release_short = '180' # used for url_prefix_static
 revision = patchlevel
 
