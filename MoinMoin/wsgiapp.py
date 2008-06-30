@@ -39,7 +39,7 @@ def init(request):
     # first try setting up from session
     userobj = auth.setup_from_session(request, request.session)
 
-    # then handle login/logout forms 
+    # then handle login/logout forms
     form = request.values
 
     if 'login' in form:
@@ -76,7 +76,7 @@ def init(request):
     return request
 
 def run(request):
-    
+
     _ = request.getText
     request.clock.start('run')
 
@@ -182,7 +182,7 @@ def run(request):
                     handler(request.page.page_name, request)
 
         # every action that didn't use to raise MoinMoinFinish must call this now:
-        # request.theme.send_closing_html()    
+        # request.theme.send_closing_html()
 
     except MoinMoinFinish:
         pass

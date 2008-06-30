@@ -20,7 +20,7 @@ logging = log.getLogger(__name__)
 
 def check_spider(useragent, cfg):
     """ Simple check if useragent is a spider bot
-    
+
     @param useragent: werkzeug.useragents.UserAgent
     @param cfg: wikiconfig instance
     """
@@ -33,7 +33,7 @@ def check_setuid(request, userobj):
     """ Check for setuid conditions.
     Returns a tuple of either new user and old user
     or just user and None.
-    
+
     @param request: a moin request object
     @param userobj: a moin user object
     @rtype: boolean
@@ -83,7 +83,8 @@ def check_surge_protect(request, kick=False):
         return False
 
     validuser = request.user.valid
-    current_id = validuser and request.user.name or request.remote_addr
+    current_id = validuser and request.user.name or request.remote_addr or ''
+
     if not validuser and current_id.startswith('127.'): # localnet
         return False
     current_action = request.action
@@ -247,4 +248,4 @@ class UniqueIDGenerator(object):
         self.page_ids[namespace][base] = count
         if not count:
             return base
-        return u'%s-%d' % (base, count)        
+        return u'%s-%d' % (base, count)
