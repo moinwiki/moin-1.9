@@ -81,6 +81,7 @@ FCKConfig.Plugins.Add( 'moinlink' ) ;
 FCKConfig.Plugins.Add( 'moinattachment' ) ;
 FCKConfig.Plugins.Add( 'moinformat' ) ;
 FCKConfig.Plugins.Add( 'moinimage' ) ;
+FCKConfig.Plugins.Add( 'smiley' );
 
 /* The list of the smiley images. MUST be done from here, auto-generating in MoinMoin-Code does not work! */
 
@@ -112,6 +113,35 @@ FCKConfig.SmileyImages = [
 'tongue.png'
 ] ;
 
+// use smiley with this data mapping object. when insert smiley image with gui editor
+// smiley plugin insert additional attribute (title, alt) with this data
+FCKConfig.SmileyMap = {
+	'alert.png' : '/!\\',
+	'angry.png' : 'X-(', 
+	'attention.png' : '<!>', 
+	'biggrin.png' : ':D', 
+	'checkmark.png' : '(./)', 
+	'devil.png' : '>:>', 
+	'frown.png' : '<:(', 
+	'icon-error.png' : '{X}', 
+	'icon-info.png' : '{i}', 
+	'idea.png' : '(!)', 
+	'ohwell.png' : ':\\', 
+	'prio1.png' : '{1}', 
+	'prio2.png' : '{2}', 
+	'prio3.png' : '{3}', 
+	'redface.png' : ':o', 
+	'sad.png' : ':(', 
+	'smile.png' : ':)', 
+	'smile2.png' : 'B)', 
+	'smile3.png' : ':))', 
+	'smile4.png' : ';)', 
+	'star_off.png' : '{o}', 
+	'star_on.png' : '{*}', 
+	'thumbs-up.png' : '{OK}', 
+	'tired.png' : '|)', 
+	'tongue.png' : ':-?'
+};
 
 
 FCKConfig.CustomStyles =
