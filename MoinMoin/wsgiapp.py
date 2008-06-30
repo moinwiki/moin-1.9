@@ -40,7 +40,7 @@ def init(request):
     userobj = auth.setup_from_session(request, request.session)
 
     # then handle login/logout forms 
-    form = request.form
+    form = request.values
 
     if 'login' in form:
         params = {
