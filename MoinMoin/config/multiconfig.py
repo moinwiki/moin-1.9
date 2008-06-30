@@ -530,7 +530,7 @@ Lists: * bullets; 1., a. numbered items.
 
     session_handler = session.DefaultSessionHandler()
     session_id_handler = session.MoinCookieSessionIDHandler()
-    
+
     # new session service
     session_service = FileSessionService()
 

@@ -60,7 +60,7 @@ class EnvironProxy(property):
             else:
                 res = obj.environ.setdefault(self.full_name, factory)
         return res
-    
+
     def set(self, obj, value):
         logging.debug("SET: '%s' on '%r' to '%r'", self.name, obj, value)
         obj.environ[self.full_name] = value
@@ -80,7 +80,7 @@ class Context(object):
     environ and also keeps track of it's changes.
     """
     __slots__ = ['request', 'environ']
-    __implements__ = (IContext,)
+    __implements__ = (IContext, )
 
     def __init__(self, request):
         assert isinstance(request, Request)
@@ -167,17 +167,17 @@ class HTTPMixin(object):
     """ Mixin for HTTP attributes and methods. """
     forbidden = EnvironProxy('old.forbidden', 0)
     session = EnvironProxy('session')
-    
+
     _auth_redirected = EnvironProxy('old._auth_redirected', 0)
     _cache_disabled = EnvironProxy('old._cache_disabled', 0)
     cacheable = EnvironProxy('old.cacheable', 0)
-        
+
     def write(self, *data):
         if len(data) > 1:
             logging.warning("Some code still uses write with multiple arguments, "
                             "consider changing this soon")
         self.request.stream.writelines(data)
-    
+
     # implementation of methods expected by RequestBase
     def send_file(self, fileobj, bufsize=8192, do_flush=None):
         pass
@@ -189,10 +189,10 @@ class HTTPMixin(object):
             return self.request.input_stream.read(n)
 
     def makeForbidden(self, resultcode, msg):
-        status = { 401: Unauthorized,
-                   403: Forbidden,
-                   404: NotFound,
-                   503: SurgeProtection }
+        status = {401: Unauthorized,
+                  403: Forbidden,
+                  404: NotFound,
+                  503: SurgeProtection}
         raise status[resultcode](msg)
 
     def setHttpHeader(self, header):
@@ -202,7 +202,7 @@ class HTTPMixin(object):
     def disableHttpCaching(self, level=1):
         if level <= self._cache_disabled:
             return
-        
+
         if level == 1:
             self.headers.add('Cache-Control', 'private, must-revalidate, mag-age=10')
         elif level == 2:
@@ -222,7 +222,7 @@ class HTTPMixin(object):
 class ActionMixin(object):
     """ Mixin for the action related attributes. """
     def action(self):
-        return self.request.values.get('action','show')
+        return self.request.values.get('action', 'show')
     action = EnvironProxy(action)
 
     def rev(self):
@@ -274,8 +274,6 @@ class AuxilaryMixin(object):
     pragma = EnvironProxy('pragma', lambda o: {})
     _login_messages = EnvironProxy('_login_messages', lambda o: [])
     _login_multistage = EnvironProxy('_login_multistage', None)
-
-
     _setuid_real_user = EnvironProxy('_setuid_real_user', None)
 
     def uid_generator(self):
@@ -312,7 +310,7 @@ class AuxilaryMixin(object):
 
             Keys are not case-sensitive.
         """
-        self.pragma[key.lower()] = value    
+        self.pragma[key.lower()] = value
 
 class ThemeMixin(object):
     """ Mixin for the theme attributes and methods. """
@@ -354,17 +352,16 @@ class HTTPContext(Context, HTTPMixin, ConfigMixin, UserMixin,
                   LanguageMixin, AuxilaryMixin):
     """ Context to act mainly in HTTP handling related phases. """
     def __getattribute__(self, name):
-         try:
-             logging.debug('Attribute access: %s', name)
-             return super(HTTPContext, self).__getattribute__(name)
-         except AttributeError:
-             try:
-                 return getattr(self.request, name)
-             except AttributeError:
-                 msg = "'%s' object has no attribute '%s'"
-                 msg = msg % (self.__class__.__name__,
-                              name)
-                 raise AttributeError(msg)
+        try:
+            return super(HTTPContext, self).__getattribute__(name)
+        except AttributeError:
+            try:
+                return getattr(self.request, name)
+            except AttributeError:
+                msg = "'%s' object has no attribute '%s'"
+                msg = msg % (self.__class__.__name__,
+                             name)
+                raise AttributeError(msg)
 
 class RenderContext(Context, RedirectMixin, ConfigMixin, UserMixin,
                     LanguageMixin, ThemeMixin, AuxilaryMixin,
@@ -380,5 +377,5 @@ class RenderContext(Context, RedirectMixin, ConfigMixin, UserMixin,
 class XMLRPCContext(HTTPContext):
     """ Context to act during a XMLRPC request. """
 
-class AllContext(HTTPContext, RenderContext):
+class AllContext(HTTPContext, RenderContext, AuxilaryMixin):
     """ Catchall context to be able to quickly test old Moin code. """

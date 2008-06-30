@@ -63,4 +63,4 @@ def create_request(pagename='/'):
     environ = create_environ(path=pagename)
     environ['HTTP_USER_AGENT'] = 'CLI/Script'
     return Request(environ)
-        
+

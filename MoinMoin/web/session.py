@@ -29,13 +29,13 @@ class FileSessionService(object):
     directory and identifis the session via a cookie in the request/response
     cycle.
     """
-    
-    __implements__ = (ISessionService,)
+
+    __implements__ = (ISessionService, )
 
     def __init__(self, cookie_name='MOIN_SESSION'):
         self.store = FilesystemSessionStore(session_class=MoinSession)
         self.cookie_name = cookie_name
-        
+
     def get_session(self, request):
         sid = request.cookies.get(self.cookie_name, None)
         if sid is None:

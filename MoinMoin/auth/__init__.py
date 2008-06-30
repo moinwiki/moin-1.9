@@ -309,7 +309,7 @@ def setup_from_session(request, session):
         auth_method = session['user.auth_method']
         auth_attrs = session['user.auth_attribs']
         if auth_method and auth_method in \
-                [ auth.name for auth in request.cfg.auth]:
+                [auth.name for auth in request.cfg.auth]:
             userobj = user.User(request, id=auth_userid,
                                 auth_method=auth_method,
                                 auth_attribs=auth_attrs)
