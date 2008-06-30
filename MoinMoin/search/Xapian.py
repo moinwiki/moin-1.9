@@ -414,7 +414,7 @@ class Index(BaseIndex):
         while next:
             if next != 1:
                 pos += next.end()
-            prev, next = next, re.search(r'----*\r?\n', body[pos:])
+            prev, next = next, re.search(r'-----*\s*\r?\n', body[pos:])
 
         if not prev or prev == 1:
             return []
