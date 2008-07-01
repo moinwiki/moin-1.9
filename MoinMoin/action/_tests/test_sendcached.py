@@ -81,7 +81,7 @@ class TestSendCached:
 
     def test_put_cache_complex(self):
         """Test if put_cache() works for a more complex, practical scenario:
-            
+
            As 'source' we just use some random integer as count value.
 
            The 'rendered representation' of it is just the word "spam" repeated
@@ -90,7 +90,7 @@ class TestSendCached:
            The cache key calculation (for the 'non-guessable' keys) is also
            rather simple.
 
-           In real world, source would be likely some big image, rendered 
+           In real world, source would be likely some big image, rendered
            representation of it a thumbnail / preview of it. Or some LaTeX
            source and its rendered representation as png image.
            Key calculation could be some MAC or some other hard to guess and
