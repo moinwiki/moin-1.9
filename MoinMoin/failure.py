@@ -156,7 +156,7 @@ def handle(request, err):
         raise err
 
     savedError = sys.exc_info()
-    logging.exception('An exception occured.')
+    logging.exception('An exception occurred, URI was "%s".' % request.request_uri)
 
     try:
         display = request.cfg.traceback_show # might fail if we have no cfg yet
