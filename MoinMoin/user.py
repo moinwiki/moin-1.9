@@ -517,7 +517,6 @@ class User:
             return False, False
 
         if epwd[:6] == '{SSHA}':
-            print epwd[6:]
             data = base64.b64decode(epwd[6:])
             salt = data[20:]
             hash = sha.new(password)
