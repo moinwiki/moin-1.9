@@ -275,10 +275,11 @@ class AuxilaryMixin(object):
     _login_messages = EnvironProxy('_login_messages', lambda o: [])
     _login_multistage = EnvironProxy('_login_multistage', None)
     _setuid_real_user = EnvironProxy('_setuid_real_user', None)
+    pages = EnvironProxy('pages', lambda o: {})
 
     def uid_generator(self):
         pagename = None
-        if hasattr(self, 'page') and self.page.page_name:
+        if hasattr(self, 'page') and hasattr(self.page, 'page_name'):
             pagename = self.page.page_name
         return UniqueIDGenerator(pagename=pagename)
     uid_generator = EnvironProxy(uid_generator)
@@ -351,17 +352,11 @@ class RedirectMixin(object):
 class HTTPContext(Context, HTTPMixin, ConfigMixin, UserMixin,
                   LanguageMixin, AuxilaryMixin):
     """ Context to act mainly in HTTP handling related phases. """
-    def __getattribute__(self, name):
+    def __getattr__(self, name):
         try:
+            return getattr(self.request, name)
+        except AttributeError, e:
             return super(HTTPContext, self).__getattribute__(name)
-        except AttributeError:
-            try:
-                return getattr(self.request, name)
-            except AttributeError:
-                msg = "'%s' object has no attribute '%s'"
-                msg = msg % (self.__class__.__name__,
-                             name)
-                raise AttributeError(msg)
 
 class RenderContext(Context, RedirectMixin, ConfigMixin, UserMixin,
                     LanguageMixin, ThemeMixin, AuxilaryMixin,
@@ -377,5 +372,6 @@ class RenderContext(Context, RedirectMixin, ConfigMixin, UserMixin,
 class XMLRPCContext(HTTPContext):
     """ Context to act during a XMLRPC request. """
 
-class AllContext(HTTPContext, RenderContext, AuxilaryMixin):
+class AllContext(HTTPContext, RenderContext):
     """ Catchall context to be able to quickly test old Moin code. """
+
