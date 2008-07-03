@@ -640,6 +640,11 @@ class DefaultExpression(object):
         self.value = eval(exprstr)
 
 
+#
+# Options that are not prefixed automatically with their
+# group name, see below (at the options dict) for more
+# information on the layout of this structure.
+#
 options_no_group_name = {
   # ==========================================================================
   'session': ('Session settings', "Session-related settings, see HelpOnSessions.", (
@@ -981,6 +986,29 @@ options_no_group_name = {
   )),
 }
 
+#
+# The 'options' dict carries default MoinMoin options. The dict is a
+# group name to tuple mapping.
+# Each group tuple consists of the following items:
+#   group section heading, group help text, option list
+#
+# where each 'option list' is a tuple or list of option tuples
+#
+# each option tuple consists of
+#   option name, default value, help text
+#
+# All the help texts will be displayed by the WikiConfigHelp() macro.
+#
+# Unlike the options_no_group_name dict, option names in this dict
+# are automatically prefixed with "group name '_'" (i.e. the name of
+# the group they are in and an underscore), e.g. the 'hierarchic'
+# below creates an option called "acl_hierarchic".
+#
+# If you need to add a complex default expression that results in an
+# object and should not be shown in the __repr__ form in WikiConfigHelp(),
+# you can use the DefaultExpression class, see 'auth' above for example.
+#
+#
 options = {
     'acl': ('Access control lists', None, (
       ('hierarchic', False, 'True to use hierarchical ACLs'),
