@@ -247,9 +247,6 @@ def link_dialog(request):
         scriptname += "/"
     action = scriptname
     basepage = request.page.page_name.encode(config.charset)
-
-    print locals()
-            
     request.write('''
 <!--
  * FCKeditor - The text editor for internet
