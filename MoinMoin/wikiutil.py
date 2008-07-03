@@ -1424,6 +1424,8 @@ def parse_quoted_separated_ext(args, separator=None, name_value_separator=None,
                 cur.append(None)
             else:
                 if not multikey:
+                    if cur[-1] is None:
+                        cur[-1] = ''
                     cur[-1] += name_value_separator
                 else:
                     cur.append(None)
