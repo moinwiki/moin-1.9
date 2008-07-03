@@ -68,10 +68,10 @@ class PackagePages:
         form = self.request.form
 
         # Get new name from form and normalize.
-        pagelist = form.get('pagelist', [u''])[0]
-        packagename = form.get('packagename', [u''])[0]
+        pagelist = form.get('pagelist', u'')
+        packagename = form.get('packagename', u'')
 
-        if not form.get('submit', [None])[0]:
+        if not form.get('submit'):
             self.request.theme.add_msg(self.makeform(), "dialog")
             raise ActionError
 

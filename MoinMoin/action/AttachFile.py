@@ -251,10 +251,10 @@ def _access_file(pagename, request):
     _ = request.getText
 
     error = None
-    if not request.form.get('target', [''])[0]:
+    if not request.form.get('target'):
         error = _("Filename of attachment not specified!")
     else:
-        filename = wikiutil.taintfilename(request.form['target'][0])
+        filename = wikiutil.taintfilename(request.form['target'])
         fpath = getFilename(request, pagename, filename)
 
         if os.path.isfile(fpath):
@@ -420,14 +420,14 @@ def send_hotdraw(pagename, request):
 
     now = time.time()
     pubpath = request.cfg.url_prefix_static + "/applets/TWikiDrawPlugin"
-    basename = request.form['drawing'][0]
+    basename = request.form['drawing']
     drawpath = getAttachUrl(pagename, basename + '.draw', request, escaped=1)
     pngpath = getAttachUrl(pagename, basename + '.png', request, escaped=1)
     pagelink = attachUrl(request, pagename, '', action=action_name, ts=now)
     helplink = Page(request, "HelpOnActions/AttachFile").url(request)
     savelink = attachUrl(request, pagename, '', action=action_name, do='savedrawing')
     #savelink = Page(request, pagename).url(request) # XXX include target filename param here for twisted
-                                           # request, {'savename': request.form['drawing'][0]+'.draw'}
+                                           # request, {'savename': request.form['drawing']+'.draw'}
     #savelink = '/cgi-bin/dumpform.bat'
 
     timestamp = '&amp;ts=%s' % now
@@ -494,9 +494,9 @@ def send_uploadform(pagename, request):
     'action_name': action_name,
     'upload_label_file': _('File to upload'),
     'upload_label_rename': _('Rename to'),
-    'rename': request.form.get('rename', [''])[0],
+    'rename': request.form.get('rename', ''),
     'upload_label_overwrite': _('Overwrite existing attachment of same name'),
-    'overwrite_checked': ('', 'checked')[request.form.get('overwrite', ['0'])[0] == '1'],
+    'overwrite_checked': ('', 'checked')[request.form.get('overwrite', '0') == '1'],
     'upload_button': _('Upload'),
     'textcha': TextCha(request).render(),
 })
@@ -507,7 +507,7 @@ def send_uploadform(pagename, request):
     if not writeable:
         request.write('<p>%s</p>' % _('You are not allowed to attach a file to this page.'))
 
-    if writeable and request.form.get('drawing', [None])[0]:
+    if writeable and request.form.get('drawing'):
         send_hotdraw(pagename, request)
 
 
@@ -519,8 +519,8 @@ def execute(pagename, request):
     """ Main dispatcher for the 'AttachFile' action. """
     _ = request.getText
 
-    do = request.form.get('do', ['upload_form'])
-    handler = globals().get('_do_%s' % do[0])
+    do = request.form.get('do', 'upload_form')
+    handler = globals().get('_do_%s' % do)
     if handler:
         msg = handler(pagename, request)
     else:
@@ -566,7 +566,7 @@ def _do_upload(pagename, request):
         return _('TextCha: Wrong answer! Go back and try again...')
 
     form = request.form
-    overwrite = form.get('overwrite', [u'0'])[0]
+    overwrite = form.get('overwrite', u'0')
     try:
         overwrite = int(overwrite)
     except:
@@ -579,7 +579,7 @@ def _do_upload(pagename, request):
         return _('You are not allowed to overwrite a file attachment of this page.')
 
     filename = form.get('file__filename__')
-    rename = form.get('rename', [u''])[0].strip()
+    rename = form.get('rename', u'').strip()
     if rename:
         target = rename
     else:
@@ -592,7 +592,7 @@ def _do_upload(pagename, request):
         return _("Filename of attachment not specified!")
 
     # get file content
-    filecontent = request.form.get('file', [None])[0]
+    filecontent = request.form.get('file')
     if filecontent is None:
         # This might happen when trying to upload file names
         # with non-ascii characters on Safari.
@@ -618,8 +618,8 @@ def _do_savedrawing(pagename, request):
     if not request.user.may.write(pagename):
         return _('You are not allowed to save a drawing on this page.')
 
-    filename = request.form['filename'][0]
-    filecontent = request.form['filepath'][0]
+    filename = request.form['filename']
+    filecontent = request.form['filepath']
 
     basepath, basename = os.path.split(filename)
     basename, ext = os.path.splitext(basename)
@@ -720,17 +720,17 @@ def _do_attachment_move(pagename, request):
 
     if 'cancel' in request.form:
         return _('Move aborted!')
-    if not wikiutil.checkTicket(request, request.form['ticket'][0]):
+    if not wikiutil.checkTicket(request, request.form['ticket']):
         return _('Please use the interactive user interface to move attachments!')
     if not request.user.may.delete(pagename):
         return _('You are not allowed to move attachments from this page.')
 
     if 'newpagename' in request.form:
-        new_pagename = request.form.get('newpagename')[0]
+        new_pagename = request.form.get('newpagename')
     else:
         upload_form(pagename, request, msg=_("Move aborted because new page name is empty."))
     if 'newattachmentname' in request.form:
-        new_attachment = request.form.get('newattachmentname')[0]
+        new_attachment = request.form.get('newattachmentname')
         if new_attachment != wikiutil.taintfilename(new_attachment):
             upload_form(pagename, request, msg=_("Please use a valid filename for attachment '%(filename)s'.") % {
                                   'filename': new_attachment})
@@ -738,7 +738,7 @@ def _do_attachment_move(pagename, request):
     else:
         upload_form(pagename, request, msg=_("Move aborted because new attachment name is empty."))
 
-    attachment = request.form.get('oldattachmentname')[0]
+    attachment = request.form.get('oldattachmentname')
     move_file(request, pagename, new_pagename, attachment, new_attachment)
 
 

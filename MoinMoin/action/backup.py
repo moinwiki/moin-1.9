@@ -130,7 +130,7 @@ def execute(pagename, request):
         return sendMsg(request, pagename,
                        msg=_('You are not allowed to do remote backup.'), msgtype="error")
 
-    dowhat = request.form.get('do', [None])[0]
+    dowhat = request.form.get('do')
     if dowhat == 'backup':
         sendBackup(request)
     elif dowhat == 'restore':

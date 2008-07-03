@@ -83,7 +83,7 @@ def execute(pagename, request):
 
     # Get page dict readable by current user
     try:
-        underlay = int(form.get('underlay', [1])[0])
+        underlay = int(form.get('underlay', 1))
     except ValueError:
         underlay = 1
     pages = request.rootpage.getPageDict(include_underlay=underlay)

@@ -51,7 +51,7 @@ class revert(ActionBase):
     def do_action(self):
         """ revert pagename """
         form = self.form
-        comment = form.get('comment', [u''])[0]
+        comment = form.get('comment', u'')
         comment = wikiutil.clean_input(comment)
 
         if self.request.method != 'POST':

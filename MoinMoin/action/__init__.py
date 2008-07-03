@@ -90,7 +90,7 @@ class ActionBase:
             return True
         # Require a valid ticket. Make outside attacks harder by
         # requiring two full HTTP transactions
-        ticket = self.form.get('ticket', [''])[0]
+        ticket = self.form.get('ticket', '')
         return wikiutil.checkTicket(self.request, ticket)
 
     # UI ---------------------------------------------------------------------
@@ -264,7 +264,7 @@ def do_format(pagename, request):
         DEPRECATED: remove this action when we don't need it any more for compatibility.
     """
     if 'mimetype' not in request.form:
-        request.form['mimetype'] = [u"text/plain"]
+        request.form['mimetype'] = u"text/plain"
     do_show(pagename, request, count_hit=0, cacheable=0)
 
 def do_content(pagename, request):
@@ -285,10 +285,10 @@ def do_recall(pagename, request):
 def do_refresh(pagename, request):
     """ Handle refresh action """
     # Without arguments, refresh action will refresh the page text_html cache.
-    arena = request.form.get('arena', ['Page.py'])[0]
+    arena = request.form.get('arena', 'Page.py')
     if arena == 'Page.py':
         arena = Page(request, pagename)
-    key = request.form.get('key', ['text_html'])[0]
+    key = request.form.get('key', 'text_html')
 
     # Remove cache entry (if exists), and send the page
     from MoinMoin import caching
@@ -298,7 +298,7 @@ def do_refresh(pagename, request):
 
 def do_goto(pagename, request):
     """ redirect to another page """
-    target = request.form.get('target', [''])[0]
+    target = request.form.get('target', '')
     request.http_redirect(Page(request, target).url(request))
 
 # Dispatching ----------------------------------------------------------------

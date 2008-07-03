@@ -37,7 +37,7 @@ def show_result(pagename, request):
     from MoinMoin.formatter.text_html import Formatter
     formatter = Formatter(request)
 
-    result = subscribe_users(request, request.form['users'][0].split(","), pagename, formatter)
+    result = subscribe_users(request, request.form['users'].split(","), pagename, formatter)
     request.write(result)
 
     request.theme.send_footer(pagename)
