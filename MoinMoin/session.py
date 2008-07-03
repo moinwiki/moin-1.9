@@ -347,7 +347,7 @@ class MoinCookieSessionIDHandler(SessionIDHandler):
 
 
 def _get_anon_session_lifetime(request):
-    if hasattr(request.cfg, 'anonymous_session_lifetime'):
+    if request.cfg.anonymous_session_lifetime:
         return request.cfg.anonymous_session_lifetime * 3600
     return 0
 
@@ -407,12 +407,12 @@ class DefaultSessionHandler(SessionHandler):
                             if user_obj:
                                 sessiondata.is_stored = True
             else:
-                store = hasattr(request.cfg, 'anonymous_session_lifetime')
+                store = not (not request.cfg.anonymous_session_lifetime)
                 sessiondata.is_stored = store
         else:
             session_name = session_id_handler.generate_new_id(request)
             logging.debug("starting session (new session_name %r)" % session_name)
-            store = hasattr(request.cfg, 'anonymous_session_lifetime')
+            store = not (not request.cfg.anonymous_session_lifetime)
             sessiondata = self.dataclass(request, session_name)
             sessiondata.is_new = True
             sessiondata.is_stored = store
