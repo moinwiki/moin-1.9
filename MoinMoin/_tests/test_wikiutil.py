@@ -297,6 +297,21 @@ class TestParamParsing:
             for val in result[2]:
                 assert val is None or isinstance(val, unicode)
 
+    def testDoubleNameValueSeparator(self):
+        tests = [
+                  # regular and quoting tests
+                  (u'd==4,=3 ',    ([], {u'd': u'=4', u'': u'3'}, [])),
+                  (u'===a,b,c,d',  ([], {u'': u'==a'}, [u'b', u'c', u'd'])),
+                  (u'a,b,===,c,d', ([u'a', u'b'], {u'': u'=='}, [u'c', u'd'])),
+                ]
+
+        def _check(a, e):
+            r = wikiutil.parse_quoted_separated(a)
+            assert r == e
+
+        for args, expected in tests:
+            yield _check, args, expected
+
     def testNoNameValue(self):
         abcd = [u'a', u'b', u'c', u'd']
         tests = [
