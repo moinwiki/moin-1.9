@@ -1054,8 +1054,8 @@ class QueryParser:
                                                         brackets=('()', ),
                                                         quotes='\'"')
             logging.debug("parse_quoted_separated items: %r" % items)
-        except wikiutil.BracketError:
-            raise ValueError()
+        except wikiutil.BracketError, err:
+            raise ValueError(str(err))
         query = self._analyse_items(items)
         logging.debug("analyse_items query: %r" % query)
         return query
