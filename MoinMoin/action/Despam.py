@@ -183,9 +183,9 @@ def execute(pagename, request):
         request.theme.add_msg(_('You are not allowed to use this action.'), "error")
         return Page.Page(request, pagename).send_page()
 
-    editor = request.form.get('editor', [None])[0]
+    editor = request.form.get('editor')
     timestamp = time.time() - DAYS * 24 * 3600
-    ok = request.form.get('ok', [0])[0]
+    ok = request.form.get('ok', 0)
 
     request.theme.send_title("Despam", pagename=pagename)
     # Start content (important for RTL support)

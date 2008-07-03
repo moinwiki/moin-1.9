@@ -29,7 +29,7 @@ def _do_recover(request):
 Contact the owner of the wiki, who can enable email.""")
 
     try:
-        email = wikiutil.clean_input(form['email'][0].lower())
+        email = wikiutil.clean_input(form['email'].lower())
         if not email:
             # continue if email not given
             raise KeyError
@@ -41,7 +41,7 @@ Contact the owner of the wiki, who can enable email.""")
         pass
 
     try:
-        username = wikiutil.clean_input(form['name'][0])
+        username = wikiutil.clean_input(form['name'])
         if not username:
             # continue if name not given
             raise KeyError
@@ -149,13 +149,13 @@ Contact the owner of the wiki, who can enable email."""), 'warning')
         page.send_page()
         return
 
-    submitted = form.get('account_sendmail', [''])[0]
-    token = form.get('token', [''])[0]
-    newpass = form.get('password', [''])[0]
-    name = form.get('name', [''])[0]
+    submitted = form.get('account_sendmail', '')
+    token = form.get('token', '')
+    newpass = form.get('password', '')
+    name = form.get('name', '')
 
     if token and name and newpass:
-        newpass2 = form.get('password_repeat', [''])[0]
+        newpass2 = form.get('password_repeat', '')
         msg = _("Passwords don't match!")
         msg_type = 'error'
         if newpass == newpass2:

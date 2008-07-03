@@ -58,7 +58,7 @@ class LoginHandler:
 
         error = None
 
-        islogin = form.get('login', [''])[0]
+        islogin = form.get('login', '')
 
         if islogin: # user pressed login button
             if request._login_multistage:

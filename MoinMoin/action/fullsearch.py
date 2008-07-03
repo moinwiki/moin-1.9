@@ -27,7 +27,7 @@ def checkTitleSearch(request):
         ret = -1 # spammer / bot
     else:
         try:
-            ret = int(form['titlesearch'][0])
+            ret = int(form['titlesearch'])
         except ValueError:
             ret = 1
         except KeyError:
@@ -37,7 +37,7 @@ def checkTitleSearch(request):
 def isAdvancedSearch(request):
     """ Return True if advanced search is requested """
     try:
-        return int(request.form['advancedsearch'][0])
+        return int(request.form['advancedsearch'])
     except KeyError:
         return False
 
@@ -72,32 +72,32 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
     elif advancedsearch:
         context = 180 # XXX: hardcoded context count for advancedsearch
     else:
-        context = int(request.form.get('context', [0])[0])
+        context = int(request.form.get('context', 0))
 
     # Get other form parameters
-    needle = request.form.get(fieldname, [''])[0]
-    case = int(request.form.get('case', [0])[0])
-    regex = int(request.form.get('regex', [0])[0]) # no interface currently
-    hitsFrom = int(request.form.get('from', [0])[0])
+    needle = request.form.get(fieldname, '')
+    case = int(request.form.get('case', 0))
+    regex = int(request.form.get('regex', 0)) # no interface currently
+    hitsFrom = int(request.form.get('from', 0))
     mtime = None
     msg = ''
     historysearch = 0
 
     # if advanced search is enabled we construct our own search query
     if advancedsearch:
-        and_terms = request.form.get('and_terms', [''])[0].strip()
-        or_terms = request.form.get('or_terms', [''])[0].strip()
-        not_terms = request.form.get('not_terms', [''])[0].strip()
-        #xor_terms = request.form.get('xor_terms', [''])[0].strip()
-        categories = request.form.get('categories', [''])
-        timeframe = request.form.get('time', [''])[0].strip()
-        language = request.form.get('language', [''])
-        mimetype = request.form.get('mimetype', [0])
-        excludeunderlay = request.form.get('excludeunderlay', [0])[0]
-        nosystemitems = request.form.get('nosystemitems', [0])[0]
-        historysearch = request.form.get('historysearch', [0])[0]
+        and_terms = request.form.get('and_terms', '').strip()
+        or_terms = request.form.get('or_terms', '').strip()
+        not_terms = request.form.get('not_terms', '').strip()
+        #xor_terms = request.form.get('xor_terms', '').strip()
+        categories = request.form.getlist('categories') or ['']
+        timeframe = request.form.get('time', '').strip()
+        language = request.form.getlist('language') or ['']
+        mimetype = request.form.getlist('mimetype') or [0]
+        excludeunderlay = request.form.get('excludeunderlay', 0)
+        nosystemitems = request.form.get('nosystemitems', 0)
+        historysearch = request.form.get('historysearch', 0)
 
-        mtime = request.form.get('mtime', [''])[0]
+        mtime = request.form.get('mtime', '')
         if mtime:
             mtime_parsed = None
 

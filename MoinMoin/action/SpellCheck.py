@@ -102,7 +102,7 @@ def _addLocalWords(request):
     from MoinMoin.PageEditor import PageEditor
     # get the new words as a string (if any are marked at all)
     try:
-        newwords = request.form['newwords']
+        newwords = request.form.getlist('newwords')
     except KeyError:
         # no new words checked
         return
