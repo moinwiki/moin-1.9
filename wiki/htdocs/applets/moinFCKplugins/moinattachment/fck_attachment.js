@@ -78,21 +78,18 @@ window.onload = function()
 
 function LoadSelection()
 {
- if (!oLink) return;
+  if (!oLink) return;
 
- if (oLink.getAttribute('title') && 
-          oLink.getAttribute('title').startsWith('attachment:'))
- {
-  GetE('txtAttachmentname').value = decodeUrl(
-     oLink.getAttribute('title').Remove(0, 'attachment:'.length));
- }
-
+  if (oLink.getAttribute('title') && oLink.getAttribute('title').StartsWith('attachment:'))
+  {
+    GetE('txtAttachmentname').value = decodeUrl(oLink.getAttribute('title').Remove(0, 'attachment:'.length));
+  }
 }
 
 //#### Link type selection.
 function SetLinkType(linkType)
 {
- ShowE('divLinkTypeAttachment' , (linkType == 'attachment'));
+  ShowE('divLinkTypeAttachment' , (linkType == 'attachment'));
 }
 
 //#### Called when user selects Wikipage.
@@ -104,18 +101,18 @@ function OnChangePagename(pagename)
 //#### Called while the user types the URL.
 function OnUrlChange()
 {
- var sUrl = GetE('txtUrl').value;
- var sProtocol = oRegex.UrlOnChangeProtocol.exec(sUrl);
+  var sUrl = GetE('txtUrl').value;
+  var sProtocol = oRegex.UrlOnChangeProtocol.exec(sUrl);
 
- if (sProtocol)
- {
-  sUrl = sUrl.substr(sProtocol[0].length);
-  GetE('txtUrl').value = sUrl;
- }
- else if (oRegex.UrlOnChangeTestOther.test(sUrl))
- {
-  GetE('cmbLinkProtocol').value = '';
- }
+  if (sProtocol)
+  {
+    sUrl = sUrl.substr(sProtocol[0].length);
+    GetE('txtUrl').value = sUrl;
+  }
+  else if (oRegex.UrlOnChangeTestOther.test(sUrl))
+  {
+    GetE('cmbLinkProtocol').value = '';
+  }
 }
 
 //#### The OK button was hit.
