@@ -19,17 +19,17 @@ class TestEncodePassword(object):
     def testAscii(self):
         """user: encode ascii password"""
         # u'MoinMoin' and 'MoinMoin' should be encoded to same result
-        expected = "{SHA}X+lk6KR7JuJEH43YnmettCwICdU="
+        expected = "{SSHA}xkDIIx1I7A4gC98Vt/+UelIkTDYxMjM0NQ=="
 
-        result = user.encodePassword("MoinMoin")
+        result = user.encodePassword("MoinMoin", salt='12345')
         assert result == expected
-        result = user.encodePassword(u"MoinMoin")
+        result = user.encodePassword(u"MoinMoin", salt='12345')
         assert result == expected
 
     def testUnicode(self):
         """ user: encode unicode password """
-        result = user.encodePassword(u'סיסמה סודית בהחלט') # Hebrew
-        expected = "{SHA}GvvkgYzv5MoF9Ljivv2oc81FmkE="
+        result = user.encodePassword(u'סיסמה סודית בהחלט', salt='12345') # Hebrew
+        expected = "{SSHA}YiwfeVWdVW9luqyVn8t2JivlzmUxMjM0NQ=="
         assert result == expected
 
 
@@ -99,49 +99,12 @@ class TestLoginWithPassword(object):
         theUser = user.User(self.request, name=name, password=password)
         assert theUser.valid
 
-    def testOldNonAsciiPassword(self):
-        """ user: login with non-ascii password in pre 1.3 user file
-
-        When trying to login with an old non-ascii password in the user
-        file, utf-8 encoded password will not match. In this case, try
-        all other encoding available on pre 1.3 before failing.
-        """
-        # Create test user
-        # Use iso charset to create user with old enc_password, as if
-        # the user file was migrated from pre 1.3 wiki.
-        name = u'__Jürgen Herman__'
-        password = name
-        self.createUser(name, password, charset='iso-8859-1')
-
-        # Try to "login"
-        theUser = user.User(self.request, name=name, password=password)
-        assert theUser.valid
-
-    def testReplaceOldNonAsciiPassword(self):
-        """ user: login replace old non-ascii password in pre 1.3 user file
-
-        When trying to login with an old non-ascii password in the user
-        file, the password hash should be replaced with new utf-8 hash.
-        """
-        # Create test user
-        # Use iso charset to create user with old enc_password, as if
-        # the user file was migrated from pre 1.3 wiki.
-        name = u'__Jürgen Herman__'
-        password = name
-        self.createUser(name, password, charset='iso-8859-1')
-        # Login - this should replace the old password in the user file
-        theUser = user.User(self.request, name=name, password=password)
-        # Login again - the password should be new unicode password
-        expected = user.encodePassword(password)
-        theUser = user.User(self.request, name=name, password=password)
-        assert theUser.enc_password == expected
-
     def testSubscriptionSubscribedPage(self):
         """ user: tests isSubscribedTo  """
         pagename = u'HelpMiscellaneous'
         name = u'__Jürgen Herman__'
         password = name
-        self.createUser(name, password, charset='iso-8859-1')
+        self.createUser(name, password)
         # Login - this should replace the old password in the user file
         theUser = user.User(self.request, name=name, password=password)
         theUser.subscribe(pagename)
@@ -153,7 +116,7 @@ class TestLoginWithPassword(object):
         testPagename = u'HelpMiscellaneous/FrequentlyAskedQuestions'
         name = u'__Jürgen Herman__'
         password = name
-        self.createUser(name, password, charset='iso-8859-1')
+        self.createUser(name, password)
         # Login - this should replace the old password in the user file
         theUser = user.User(self.request, name=name, password=password)
         theUser.subscribe(pagename)
@@ -164,8 +127,6 @@ class TestLoginWithPassword(object):
         if the old username is removed from the cache name2id
         """
         # Create test user
-        # Use iso charset to create user with old enc_password, as if
-        # the user file was migrated from pre 1.3 wiki.
         name = u'__Some Name__'
         password = name
         self.createUser(name, password)
@@ -178,12 +139,22 @@ class TestLoginWithPassword(object):
 
         assert not theUser.exists()
 
+    def test_upgrade_password_to_salted(self):
+        """
+        Create user with {SHA} password and check that logging in
+        upgrades to {SSHA}.
+        """
+        name = u'/no such user/'
+        password = '{SHA}jLIjfQZ5yojbZGTqxg2pY0VROWQ=' # 12345
+        self.createUser(name, password, True)
+        self.request.form['password'] = ['12345']
+        theuser = user.User(self.request, name=name)
+        assert theuser.enc_password[:6] == '{SSHA}'
+
     # Helpers ---------------------------------------------------------
 
-    def createUser(self, name, password, charset='utf-8'):
+    def createUser(self, name, password, pwencoded=False):
         """ helper to create test user
-
-        charset is used to create user with pre 1.3 password hash
         """
         # Hack self.request form to contain the password
         self.request.form['password'] = [password]
@@ -191,7 +162,9 @@ class TestLoginWithPassword(object):
         # Create user
         self.user = user.User(self.request)
         self.user.name = name
-        self.user.enc_password = user.encodePassword(password, charset=charset)
+        if not pwencoded:
+            password = user.encodePassword(password)
+        self.user.enc_password = password
 
         # Validate that we are not modifying existing user data file!
         if self.user.exists():

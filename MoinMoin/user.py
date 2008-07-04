@@ -140,19 +140,20 @@ def getUserIdentification(request, username=None):
     return username or (request.cfg.show_hosts and request.remote_addr) or _("<unknown>")
 
 
-def encodePassword(pwd):
+def encodePassword(pwd, salt=None):
     """ Encode a cleartext password
 
     @param pwd: the cleartext password, (unicode)
-    @param charset: charset used to encode password, used only for
-        compatibility with old passwords generated on moin-1.2.
+    @param salt: the salt for the password (string)
     @rtype: string
     @return: the password in apache htpasswd compatible SHA-encoding,
         or None
     """
     pwd = pwd.encode('utf-8')
 
-    salt = random_string(20)
+    if salt is None:
+        salt = random_string(20)
+    assert isinstance(salt, str)
     hash = sha.new(pwd)
     hash.update(salt)
 
@@ -508,6 +509,8 @@ class User:
         password = self._request.form.get('password', [None])[0]
         if not password:
             return False, False
+
+        password = password.encode('utf-8')
 
         if epwd[:5] == '{SHA}':
             enc = '{SHA}' + base64.encodestring(sha.new(password).digest()).rstrip()
