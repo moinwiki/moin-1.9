@@ -19,7 +19,7 @@
  */
 
 var dialog	= window.parent ;
-var oEditor  = window.parent.InnerDialogLoaded();
+var oEditor  = dialog.InnerDialogLoaded();
 var FCK   = oEditor.FCK;
 var FCKLang  = oEditor.FCKLang;
 var FCKConfig = oEditor.FCKConfig;

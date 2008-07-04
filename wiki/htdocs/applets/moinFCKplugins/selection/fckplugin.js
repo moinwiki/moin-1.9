@@ -12,146 +12,100 @@ function showObj(title, obj)
   alert(res);
 }
 
-// --------------------------------
-// Gecko. it changed. also able to use FCKSelection.GetSelection in IE
-// --------------------------------
-if (FCKSelection.GetSelection) 
-{ 
-  // assume exactly one selection
-  
-  FCKSelection.GetStartNode = function()
-    {
-      var oSelection = FCKSelection.GetSelection();
-      var oContainer = oSelection.getRangeAt(0).startContainer;
-      var iOffset = oSelection.getRangeAt(0).startOffset;
-      if (oContainer.childNodes.length>iOffset) 
-        return oContainer.childNodes[iOffset];
-      else
-        return oContainer;
-        
-    }
-  // only valid if GetStartNode() returns text node
-  FCKSelection.GetStartOffset = function()
-    {
-      var oSelection = FCKSelection.GetSelection();
-      return oSelection.getRangeAt(0).startOffset;    
-    }
-  FCKSelection.GetEndNode = function()
-    {
-      var oSelection = FCKSelection.GetSelection();
-      var oContainer = oSelection.getRangeAt(0).endContainer;
-      var iOffset = oSelection.getRangeAt(0).startEndset;
-      if (oContainer.childNodes.length>iOffset) 
-        return oContainer.childNodes[iOffset];
-      else
-        return oContainer;
 
-    }
-  // only valid if GetEndNode() returns text node
-  FCKSelection.GetEndOffset = function()
-    {
-      var oSelection = FCKSelection.GetSelection();
-      return oSelection.getRangeAt(0).endOffset;    
-    }
-  FCKSelection.IsCollapsed = function()
-    {
-      var oSelection = FCKSelection.GetSelection();
-      return oSelection.getRangeAt(0).collapsed;    
-    }
-  FCKSelection.GetText = function()
-    {
-      return FCKSelection.GetSelection().toString();
-    }
-}
-/* ##########################################################################
- * ###   IE  : it dosen't work. ie also use FCKSelection.
- * #########################################################################
- */
-else if (FCK.EditorDocument.selection)
-{
-
+// --------------------------------
+// IE
+// --------------------------------
+if (sSuffix == 'ie') {
+  // initialize startNode and endNode
   function invalidSelection()
-    {
+  {
       FCKSelection._startNode = null;
       FCKSelection._endNode = null;
-    }
+  }
 
   FCK.AttachToOnSelectionChange(invalidSelection);
 
   FCKSelection._startNode = null;
   FCKSelection._endNode = null;
 
-  FCKSelection.GetStartNode = function()
-    {
-      if (!FCKSelection._startNode) 
-      {
-	FCKSelection._startNode = FCKSelection._getStartNode()
-      }
-      return FCKSelection._startNode;
-    }
 
+  // get StartNode
+  FCKSelection.GetStartNode = function()
+  {
+    if (!FCKSelection._startNode) 
+    {
+      FCKSelection._startNode = FCKSelection._getStartNode()
+    }
+    return FCKSelection._startNode;
+  }
 
   FCKSelection._getStartNode = function()
+  {
+    if (FCKSelection._startNode) return FCKSelection._startNode;
+
+    var oRange = FCKSelection.GetSelection().createRange();
+
+    if (FCKSelection.GetType()=="Control")
     {
-      if (FCKSelection._startNode) return FCKSelection._startNode;
-      var oRange = FCK.EditorDocument.selection.createRange();
-      if (FCKSelection.GetType()=="Control")
-      {
-        return oRange.item(0);
-      }
-      else // Text, None
-      {
-        var oTmpRange = FCK.EditorDocument.selection.createRange();
-        var parent = oRange.parentElement();
-        var oNode = null;
-	var following_text = 0;
-        if (!parent.hasChildNodes()) 
-          return parent; // selection in empty tag
-        oNode = parent.firstChild;
-        var oLastText = oNode;
-        while (oNode)
-        {
-          if (oNode.nodeName!="#text") 
-            {
-	      following_text = false;
-              oTmpRange.moveToElementText(oNode);
-              if (oRange.compareEndPoints('StartToEnd', oTmpRange)<0)
-                {
-                  // found
-                  if (oRange.compareEndPoints('StartToStart', oTmpRange)<=0)
-                    return oLastText; // already inside selection
-                  oNode = oNode.firstChild;
-                }
-              else
-                oNode = oNode.nextSibling;
-            }
-          else
-            {
-	      if (!following_text)
-		{
-		  oLastText = oNode;
-		  following_text = true;
-		}
-              try {
-                 oNode = oNode.nextSibling;
-              }
-              catch (e) {
-		if (parent.childNodes.length>=2)
-		  oNode = parent.childNodes[1];
-		else
-		  return parent;
-		  
-                 // alert(e);
-                 //showObj('parent', parent);
-		 //showObj('node', oNode);
-                 // showObj('childNodes[0]', parent.childNodes[0]);
-                 //oNode = false;
-              }
-            }
-        }
-        return oLastText;
-      }
+      return oRange.item(0);
     }
+    else // Text, None
+    {
+      var oTmpRange = FCKSelection.GetSelection().createRange();
+      var parent = oRange.parentElement();
+      var oNode = null;
+      var following_text = 0;
+      if (!parent.hasChildNodes()) 
+        return parent; // selection in empty tag
+
+      oNode = parent.firstChild;
+      var oLastText = oNode;
+
+      while (oNode)
+      {
+        if (oNode.nodeName != "#text") 
+        {
+          following_text = false;
+          oTmpRange.moveToElementText(oNode);
+          if (oRange.compareEndPoints('StartToEnd', oTmpRange)<0)
+          {
+            // found
+            if (oRange.compareEndPoints('StartToStart', oTmpRange)<=0)
+            return oLastText; // already inside selection
+            oNode = oNode.firstChild;
+          }
+          else 
+          {
+            oNode = oNode.nextSibling;
+          }
+        }
+        else
+        {
+          if (!following_text)
+          {
+            oLastText = oNode;
+            following_text = true;
+          }
+          try {
+            oNode = oNode.nextSibling;
+          }
+          catch (e) {
+            if (parent.childNodes.length>=2)
+              oNode = parent.childNodes[1];
+            else
+              // alert(e);
+              // showObj('parent', parent);
+              // showObj('node', oNode);
+              // showObj('childNodes[0]', parent.childNodes[0]);
+              // oNode = false;
+              return parent;
+          } // end of catch
+        } // end of else
+      } // end of while
+      return oLastText;
+    } // end of else
+  }
 
   FCKSelection.GetStartOffset = function() 
     {
@@ -159,7 +113,7 @@ else if (FCK.EditorDocument.selection)
       var oNode = FCKSelection.GetStartNode();
       if (oNode.nodeType!=3) return 0; // not a text node 
       var startoffset = 0;
-      var selrange = FCK.EditorDocument.selection.createRange();
+      var selrange = FCKSelection.GetSelection().createRange();
       var elrange = selrange.duplicate();
       if (oNode.previousSilbing)
       {
@@ -194,14 +148,14 @@ else if (FCK.EditorDocument.selection)
   FCKSelection._getEndNode = function()
     {
       FCKSelection.sEnd = "";
-      var oRange = FCK.EditorDocument.selection.createRange();
+      var oRange = FCKSelection.GetSelection().createRange();
       if (FCKSelection.GetType()=="Control")
       {
         return oRange.item(oRange.length-1);
       }
       else // Text, None
       {
-        var oTmpRange = FCK.EditorDocument.selection.createRange();
+        var oTmpRange = FCKSelection.GetSelection().createRange();
         var oNode = oRange.parentElement()
         var following_text = false;
         if (!oNode.hasChildNodes()) return oNode; // selection in empty tag
@@ -250,7 +204,7 @@ else if (FCK.EditorDocument.selection)
       var oNode = FCKSelection.GetEndNode();
       if (oNode.nodeType!=3) return 0; // not a text node 
       var endoffset = 0;
-      var selrange = FCK.EditorDocument.selection.createRange();
+      var selrange = FCKSelection.GetSelection().createRange();
       var elrange = selrange.duplicate();
       if (oNode.nextSilbing)
       {
@@ -276,7 +230,7 @@ else if (FCK.EditorDocument.selection)
 
   FCKSelection.GetText = function()
     {
-      var oRange = FCK.EditorDocument.selection.createRange();
+      var oRange = FCKSelection.GetSelection().createRange();
       return oRange.text;
     }
   FCKSelection.IsCollapsed = function()
@@ -284,6 +238,57 @@ else if (FCK.EditorDocument.selection)
       return FCKSelection.GetType()=='None';
     }
 }
+// --------------------------------
+// Others
+// --------------------------------
+else {
+  // assume exactly one selection
+  FCKSelection.GetStartNode = function()
+    {
+      var oSelection = FCKSelection.GetSelection();
+      var oContainer = oSelection.getRangeAt(0).startContainer;
+      var iOffset = oSelection.getRangeAt(0).startOffset;
+      if (oContainer.childNodes.length>iOffset) 
+        return oContainer.childNodes[iOffset];
+      else
+        return oContainer;
+        
+    }
+  // only valid if GetStartNode() returns text node
+  FCKSelection.GetStartOffset = function()
+    {
+      var oSelection = FCKSelection.GetSelection();
+      return oSelection.getRangeAt(0).startOffset;    
+    }
+  FCKSelection.GetEndNode = function()
+    {
+      var oSelection = FCKSelection.GetSelection();
+      var oContainer = oSelection.getRangeAt(0).endContainer;
+      var iOffset = oSelection.getRangeAt(0).startEndset;
+      if (oContainer.childNodes.length>iOffset) 
+        return oContainer.childNodes[iOffset];
+      else
+        return oContainer;
+
+    }
+  // only valid if GetEndNode() returns text node
+  FCKSelection.GetEndOffset = function()
+    {
+      var oSelection = FCKSelection.GetSelection();
+      return oSelection.getRangeAt(0).endOffset;    
+    }
+  FCKSelection.IsCollapsed = function()
+    {
+      var oSelection = FCKSelection.GetSelection();
+      return oSelection.getRangeAt(0).collapsed;    
+    }
+  FCKSelection.GetText = function()
+    {
+      return FCKSelection.GetSelection().toString();
+    }
+}
+
+
 
 /* 
  * Checks if the name of any of the selected nodes or the nodes surrounding 
