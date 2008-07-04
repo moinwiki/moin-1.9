@@ -344,10 +344,11 @@ class User:
             if self.id:
                 # no password given should fail
                 self.load_from_id(password or u'')
-            else:
-                self.id = self.make_id()
-        else:
+        # Still no ID - make new user
+        if not self.id:
             self.id = self.make_id()
+            if password is not None:
+                self.enc_password = encodePassword(password)
 
         # "may" so we can say "if user.may.read(pagename):"
         if self._cfg.SecurityPolicy:
@@ -442,7 +443,7 @@ class User:
 
         if password is not None:
             # Check for a valid password, possibly changing storage
-            valid, changed = self._validatePassword(user_data)
+            valid, changed = self._validatePassword(user_data, password)
             if not valid:
                 return
 
@@ -488,13 +489,14 @@ class User:
         if changed:
             self.save()
 
-    def _validatePassword(self, data):
+    def _validatePassword(self, data, password):
         """
         Check user password.
 
         This is a private method and should not be used by clients.
 
         @param data: dict with user data (from storage)
+        @param password: password to verify
         @rtype: 2 tuple (bool, bool)
         @return: password is valid, enc_password changed
         """
@@ -504,9 +506,7 @@ class User:
         if not epwd:
             return False, False
 
-        # Get the clear text password from the form (require non empty
-        # password)
-        password = self._request.form.get('password', [None])[0]
+        # require non empty password
         if not password:
             return False, False
 
