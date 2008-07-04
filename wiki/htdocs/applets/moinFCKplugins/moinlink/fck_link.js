@@ -18,6 +18,7 @@
  *   Frederico Caldeira Knabben (fredck@fckeditor.net)
  */
 
+var dialog	= window.parent ;
 var oEditor  = window.parent.InnerDialogLoaded();
 var FCK   = oEditor.FCK;
 var FCKLang  = oEditor.FCKLang;
@@ -102,9 +103,9 @@ oParser.CreateEMailUri = function(address, subject, body)
 //#### Initialization Code
 
 // oLink: The actual selected link in the editor.
-var oLink = FCK.Selection.MoveToAncestorNode('A');
-if (oLink)
- FCK.Selection.SelectNode(oLink);
+var oLink = dialog.Selection.GetSelection().MoveToAncestorNode( 'A' ) ;
+if ( oLink )
+	FCK.Selection.SelectNode( oLink ) ;
 
 window.onload = function()
 {
@@ -131,7 +132,7 @@ function LoadSelection()
  var sType = 'url';
 
  // Get the actual Link href.
- var sHRef = oLink.getAttribute('href',2) + '';
+ var sHRef = ''+oLink.getAttribute('href',2);
 
  // Search for the protocol.
  var sProtocol = oRegex.UriProtocol.exec(sHRef);
@@ -162,13 +163,13 @@ function LoadSelection()
   GetE('sctInterwiki').value = oLink.getAttribute('title');
   GetE('txtInterwikipagename').value = decodeUrl(sHRef);
  }
- else if (sHRef.startsWith(FCKConfig['WikiBasePath']))
+ else if (sHRef.StartsWith(FCKConfig['WikiBasePath']))
  {
   sType = 'wiki';
-  sHRef = sHRef.remove(0, FCKConfig['WikiBasePath'].length);
+  sHRef = sHRef.Remove(0, FCKConfig['WikiBasePath'].length);
   // make links to subpages of own page relative links
-  if (sHRef.startsWith(FCKConfig['WikiPage']))
-      sHRef = sHRef.remove(0, FCKConfig['WikiPage'].length);
+  if (sHRef.StartsWith(FCKConfig['WikiPage']))
+      sHRef = sHRef.Remove(0, FCKConfig['WikiPage'].length);
   GetE('txtPagename').value = decodeUrl(sHRef);
  }
  else     // It is another type of link.
@@ -265,8 +266,10 @@ function Ok()
    break;
  }
 
- if (oLink) // Modifying an existent link.
+// Modifying an existent link.
+ if (oLink) {
   oLink.href = sUri;
+ }
  else   // Creating a new link.
  {
   oLink = oEditor.FCK.CreateLink(sUri);

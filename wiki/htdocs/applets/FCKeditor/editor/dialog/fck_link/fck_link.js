@@ -126,7 +126,7 @@ oParser.CreateEMailUri = function( address, subject, body )
 //#### Initialization Code
 
 // oLink: The actual selected link in the editor.
-var oLink = dialog.Selection.GetSelection().MoveToAncestorNode( 'A' ) ;
+var oLink = FCK.Selection.GetSelection().MoveToAncestorNode( 'A' ) ;
 if ( oLink )
 	FCK.Selection.SelectNode( oLink ) ;
 
