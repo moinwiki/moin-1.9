@@ -14,16 +14,16 @@ RestrictedNamedCommand.prototype = new FCKNamedCommand();
 
 RestrictedNamedCommand.prototype.GetState = function()
 {
- var bState = FCK.GetNamedCommandState(this.Name);
- if (FCKSelection.GetType() == 'Control')
- {
+  var bState = FCK.GetNamedCommandState(this.Name);
+  if (FCKSelection.GetType() == 'Control')
+  {
+    return bState;
+  }
+  else if (FCKSelection.CheckForNodeNames(this.forbidden))
+  { 
+    return FCK_TRISTATE_DISABLED;
+  }
   return bState;
- }
- else if (FCKSelection.CheckForNodeNames(this.forbidden))
- { 
-  return FCK_TRISTATE_DISABLED;
- }
- return bState;
 }
 
 /* #######################################################
@@ -34,8 +34,8 @@ RestrictedNamedCommand.prototype.GetState = function()
 
 var RestrictedUniqueNamedFormat = function(commandName, forbidden)
 {
- this.Name = commandName;
- this.forbidden = forbidden;
+  this.Name = commandName;
+  this.forbidden = forbidden;
 }
 
 RestrictedUniqueNamedFormat.prototype = new RestrictedNamedCommand();
@@ -44,6 +44,7 @@ RestrictedUniqueNamedFormat.prototype.Execute = function()
 {
   if (FCK.GetNamedCommandState(this.Name)==FCK_TRISTATE_OFF)
     FCK.ExecuteNamedCommand('RemoveFormat');
+
   FCK.ExecuteNamedCommand(this.Name);
 }
 
@@ -63,8 +64,8 @@ RestrictedFormatBlockCommand.prototype = new FCKFormatBlockCommand();
 
 RestrictedFormatBlockCommand.prototype.GetState = function()
 {
- if (FCKSelection.CheckForNodeNames(this.forbidden))
-   return FCK_TRISTATE_DISABLED;
+  if (FCKSelection.CheckForNodeNames(this.forbidden))
+    return FCK_TRISTATE_DISABLED;
  else
    return FCK.GetNamedCommandValue( 'FormatBlock' ) ;
 }
@@ -133,8 +134,8 @@ RestrictedStyleCommand.prototype.Execute = function(styleName, styleComboItem )
 
 var StyleButtonCommand = function(stylename, unique)
 {
- this.style = FCK.Styles.GetStyle(stylename);   // using FCK.Style instead of fckstylesloader
- this.unique = unique;
+  this.style = FCK.Styles.GetStyle(stylename);   // using FCK.Style instead of fckstylesloader
+  this.unique = unique;
 }
 
 StyleButtonCommand.prototype = new FCKStyleCommand();
