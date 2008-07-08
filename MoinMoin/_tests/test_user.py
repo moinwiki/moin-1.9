@@ -147,8 +147,7 @@ class TestLoginWithPassword(object):
         name = u'/no such user/'
         password = '{SHA}jLIjfQZ5yojbZGTqxg2pY0VROWQ=' # 12345
         self.createUser(name, password, True)
-        self.request.form['password'] = ['12345']
-        theuser = user.User(self.request, name=name)
+        theuser = user.User(self.request, name=name, password='12345')
         assert theuser.enc_password[:6] == '{SSHA}'
 
     # Helpers ---------------------------------------------------------
@@ -156,9 +155,6 @@ class TestLoginWithPassword(object):
     def createUser(self, name, password, pwencoded=False):
         """ helper to create test user
         """
-        # Hack self.request form to contain the password
-        self.request.form['password'] = [password]
-
         # Create user
         self.user = user.User(self.request)
         self.user.name = name
