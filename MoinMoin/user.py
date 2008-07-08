@@ -309,7 +309,8 @@ class User:
 
         self.recoverpass_key = ""
 
-        self.enc_password = ""
+        if password:
+            self.enc_password = encodePassword(password)
 
         #self.edit_cols = 80
         self.tz_offset = int(float(self._cfg.tz_offset) * 3600)
