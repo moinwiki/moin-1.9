@@ -315,7 +315,10 @@ class AuxilaryMixin(object):
 
 class ThemeMixin(object):
     """ Mixin for the theme attributes and methods. """
-    theme = EnvironProxy('theme')
+    def _theme(self):
+        self.initTheme()
+        return self.theme
+    theme = EnvironProxy('theme', _theme)
 
     def initTheme(self):
         """ Set theme - forced theme, user theme or wiki default """
@@ -367,6 +370,9 @@ class RenderContext(Context, RedirectMixin, ConfigMixin, UserMixin,
             logging.warning("Some code still uses write with multiple arguments, "
                             "consider changing this soon")
         self.request.stream.writelines(data)
+
+    def output(self):
+        return self.request()
 
 # TODO: extend xmlrpc context
 class XMLRPCContext(HTTPContext):
