@@ -23,14 +23,14 @@ class HTTPExceptionsMiddleware(object):
 
 class XMLRPCApp(object):
     """ Handles XML-RPC method calls or dispatches to next layer """
-    
+
     def __init__(self, app):
         self.app = app
-        
+
     def __call__(self, environ, start_response):
         request = Request(environ)
         action = request.args.get('action')
-        
+
         from MoinMoin import xmlrpc
 
         if action == 'xmlrpc':

@@ -16,7 +16,7 @@ class SurgeProtection(exceptions.ServiceUnavailable):
         "<p>Please make a short break reading the stuff you already got.</p>"
         "<p>When you restart doing requests AFTER that, slow down or you might get locked out for a longer time!</p>"
     )
-    
+
     def __init__(self, description=None, retry_after=3600):
         exceptions.ServiceUnavailable.__init__(self, description)
         self.retry_after = retry_after

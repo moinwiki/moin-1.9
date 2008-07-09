@@ -36,6 +36,8 @@ modules["unittest"] = compat # evil hack
 sys.path.insert(0, str(moindir.join("tests")))
 
 from MoinMoin.support.python_compatibility import set
+from MoinMoin.web.request import TestRequest
+from MoinMoin.wsgiapp import init as request_init
 
 coverage_modules = set()
 
@@ -71,12 +73,10 @@ except ImportError:
 
 
 def init_test_request(static_state=[False]):
-    from MoinMoin.web.request import create_request
-    from MoinMoin.wsgiapp import init as request_init
     if not static_state[0]:
         maketestwiki.run(True)
         static_state[0] = True
-    request = create_request()
+    request = TestRequest()
     request = request_init(request)
     return request
 

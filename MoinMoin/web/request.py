@@ -78,7 +78,7 @@ class TestRequest(Request):
                                  content_length=content_length,
                                  errors_stream=self.errors_stream)
 
-        for k,v in env.items():
+        for k, v in env.items():
             environ[k] = v
 
         environ['HTTP_USER_AGENT'] = 'MoinMoin/TestRequest'

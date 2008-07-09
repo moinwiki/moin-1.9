@@ -174,7 +174,7 @@ def execute(pagename, request):
     _ = request.getText
     form = request.form
 
-    submitted = 'create_only' in form or 'create_and_mail' in form:
+    submitted = 'create_only' in form or 'create_and_mail' in form
 
     if submitted: # user pressed create button
         request.theme.add_msg(_create_user(request), "dialog")

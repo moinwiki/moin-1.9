@@ -137,7 +137,7 @@ def is_cached(request, key, strict=False):
 def get_url(request, key):
     """ get URL for the object cached for key """
     return "%s/?%s" % (
-        request.getScriptname(),
+        request.script_root,
         wikiutil.makeQueryString(dict(action=action_name, key=key), want_unicode=False))
 
 
