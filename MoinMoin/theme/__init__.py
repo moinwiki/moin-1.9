@@ -1826,7 +1826,7 @@ def load_theme(request, theme_name=None):
     """
     if theme_name is None or theme_name == '<default>':
         theme_name = request.cfg.theme_default
-        
+
     try:
         Theme = wikiutil.importPlugin(request.cfg, 'theme', theme_name, 'Theme')
     except wikiutil.PluginMissingError:
@@ -1843,7 +1843,7 @@ def load_theme_fallback(request, theme_name=None):
     @rtype: int
     @return: A statuscode for how successful the loading was
              0 - theme was loaded
-             1 - fallback to default theme 
+             1 - fallback to default theme
              2 - serious fallback to builtin theme
     """
     fallback = 0
