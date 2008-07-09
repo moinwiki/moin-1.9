@@ -39,6 +39,12 @@ class Request(WerkzeugRequest, WerkzeugResponse):
 
     data = WerkzeugResponse.data
     stream = WerkzeugResponse.stream
+    cache_control = WerkzeugResponse.cache_control
+
+    def in_cache_control(self):
+        cache_control = self.environ.get('HTTP_CACHE_CONTROL')
+        return parse_cache_control_header(cache_control)
+    in_cache_control = cached_property(in_cache_control)
 
     def in_headers(self):
         return EnvironHeaders(self.environ)
@@ -57,7 +63,7 @@ class Request(WerkzeugRequest, WerkzeugResponse):
 class TestRequest(Request):
     def __init__(self, path="/", query_string=None, method='GET',
                  input_stream=None, content_type=None, content_length=0,
-                 form_data=None):
+                 form_data=None, **env):
         self.errors_stream = StringIO()
         self.output_stream = StringIO()
 
@@ -71,6 +77,9 @@ class TestRequest(Request):
                                  content_type=content_type,
                                  content_length=content_length,
                                  errors_stream=self.errors_stream)
+
+        for k,v in env.items():
+            environ[k] = v
 
         environ['HTTP_USER_AGENT'] = 'MoinMoin/TestRequest'
         super(TestRequest, self).__init__(environ)
