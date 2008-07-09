@@ -255,7 +255,7 @@ class ActionClass(object):
             match_direction = None
 
         local_full_iwid = packLine([local.get_iwid(), local.get_interwiki_name()])
-        remote_full_iwid = packLine([remote.get_iwid(), remote.get_interwiki_name()])
+        remote_full_iwid = remote.iwid_full
 
         self.log_status(self.INFO, _("Synchronisation started -"), raw_suffix=" <<DateTime(%s)>>" % self.page._get_local_timestamp())
 

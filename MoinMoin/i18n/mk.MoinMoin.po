@@ -1,8 +1,8 @@
-## Please edit system and help pages ONLY in the moinmaster wiki! For more
-## information, please see MoinMaster:MoinPagesEditorGroup.
+## Please edit system and help pages ONLY in the master wiki!
+## For more information, please see MoinMoin:MoinDev/Translation.
 ##master-page:None
 ##master-date:None
-#acl MoinPagesEditorGroup:read,write,delete,revert All:read
+#acl -All:write Default
 #format gettext
 #language mk
 
@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mk.moinmoin1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 23:52+0200\n"
+"POT-Creation-Date: 2008-06-21 22:47+0200\n"
 "PO-Revision-Date: 2008-03-30 16:24+0200\n"
 "Last-Translator: Novica Nakov\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
@@ -491,6 +491,9 @@ msgstr "[празно]"
 msgid "filter"
 msgstr "филтер"
 
+msgid "about"
+msgstr ""
+
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -579,6 +582,10 @@ msgstr "Испрати податоци за корисничката сметк
 msgid "Missing password. Please enter user name and password."
 msgstr "Лозинката не е внесена. Внесете корисничко име и лозинка."
 
+#, python-format
+msgid "LDAP server %(server)s failed."
+msgstr ""
+
 msgid "You need to log in."
 msgstr "Треба да се пријавите."
 
@@ -601,6 +608,9 @@ msgstr ""
 
 msgid "Choose this name"
 msgstr "Одбери го ова име"
+
+msgid "This is not a valid username, choose a different one."
+msgstr "Ова корисничко име не е важечко. Одберете друго."
 
 msgid ""
 "The username you have chosen is already\n"
@@ -625,9 +635,6 @@ msgstr "Проверката е откажана."
 
 msgid "OpenID failure."
 msgstr "Неуспех на OpenID."
-
-msgid "This is not a valid username, choose a different one."
-msgstr "Ова корисничко име не е важечко. Одберете друго."
 
 msgid "Your account is now associated to your OpenID."
 msgstr "Вашата сметка сега е поврзана со Вашиот OpenID."
@@ -1194,6 +1201,17 @@ msgstr "Општи опции"
 msgid "Quick links"
 msgstr "Кратенки"
 
+#, fuzzy
+msgid "OpenID server"
+msgstr "Нема OpenID сервис"
+
+#, fuzzy
+msgid "The selected websites have been removed."
+msgstr "Одбраните OpenID-а се отстранети."
+
+msgid "Trusted websites"
+msgstr ""
+
 #, python-format
 msgid ""
 "Dear Wiki user,\n"
@@ -1336,14 +1354,6 @@ msgid ""
 msgstr ""
 "Врска за прилог: %(attach)s\n"
 "Врска за страница: %(page)s\n"
-
-#, python-format
-msgid "XML RPC error: %s"
-msgstr "XML RPC грешка: %s"
-
-#, python-format
-msgid "Low-level communication error: %s"
-msgstr "Комуникациска грешка од ниско ниво: %s"
 
 msgid "Attachment link"
 msgstr "Врска за прилог"
@@ -1719,29 +1729,17 @@ msgstr "достапен индекс"
 msgid "index unavailable"
 msgstr "недостапен индекс"
 
-msgid "N/A"
-msgstr "-"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "Xapian и/или Python Xapian не се инсталирани"
+
+msgid "N/A"
+msgstr "-"
 
 msgid "Xapian search"
 msgstr "Xapian пребарување"
 
-msgid "Xapian Version"
-msgstr "Верзија на Xapian"
-
-msgid "PyStemmer not installed"
-msgstr "PyStemmer не е инсталиран"
-
 msgid "Stemming for Xapian"
 msgstr "Извлекување на корени на зборови за Xapian"
-
-msgid "PyStemmer Version"
-msgstr "Верзија на PyStemmer"
-
-msgid "PyStemmer stems"
-msgstr "PyStemmer корен"
 
 msgid "Active threads"
 msgstr "Активни нишки"
@@ -1813,6 +1811,14 @@ msgstr "Барај во текстот"
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr "Наведете попрецизен израз за пребарување од {{{\"%s\"}}}"
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr ""
+"Вашиот внес за пребарување {{{\"%s\"}}} не е важечки. За повеќе информации "
+"видете во ПомошЗаПребарување."
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -2266,7 +2272,7 @@ msgstr "Прво пријавете се"
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Пред да креирате други страници, морате да креирате домашна страница."
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "You can add some additional sub pages to your already existing homepage "
 "here.\n"
@@ -2286,9 +2292,9 @@ msgid ""
 "||'''Add a new personal page:'''||'''Related access control list "
 "group:'''||\n"
 "||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
-"[\"%(username)s/ReadWriteGroup\"]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[\"%"
-"(username)s/ReadGroup\"]||\n"
+"[[%(username)s/ReadWriteGroup]]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
+"(username)s/ReadGroup]]||\n"
 "||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
 "(username)s only||\n"
 "\n"
@@ -2557,14 +2563,6 @@ msgstr "Напредно пребарување: \"%s\""
 #, python-format
 msgid "Full Text Search: \"%s\""
 msgstr "Барај во текстот: \"%s\""
-
-#, python-format
-msgid ""
-"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
-"for more information."
-msgstr ""
-"Вашиот внес за пребарување {{{\"%s\"}}} не е важечки. За повеќе информации "
-"видете во ПомошЗаПребарување."
 
 #, python-format
 msgid ""
@@ -2905,37 +2903,44 @@ msgid "You are not allowed to unzip attachments of this page."
 msgstr "Не Ви е дозволено да отпакувате прилози од оваа страница."
 
 #, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr ""
-"Прилогот '%(filename)s' не може да се отпакува, бидејќи создадените датотеки "
-"би зазеле премногу простор (недостасуваат %(space)d kB)."
+msgid "The file %(filename)s is not a .zip file."
+msgstr "Датотеката %(filename)s не е .zip архива."
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too many (%(count)d missing)."
-msgstr ""
-"Прилогот '%(filename)s' не може да се отпакува, бидејќи создадените датотеки "
-"би биле премногу (%(count)d повеќе датотеки)."
-
-#, python-format
-msgid "Attachment '%(filename)s' unzipped."
-msgstr "ZIP датотеката '%(filename)s' е отпакувана."
-
-#, python-format
-msgid ""
-"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
-"files only, exist already or reside in folders."
+"Attachment '%(filename)s' not unzipped because some files in the zip are "
+"either not in the same directory or exceeded the single file size limit (%"
+"(maxsize_file)d kB)."
 msgstr ""
 "Прилогот '%(filename)s' не може да се отпакува поради тоа што илидатотеките "
 "се преголеми, или прилогот има само .zip датотека, или името постои или "
 "содржи датотеки во подпапките."
 
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment storage size limit (%(size)d kB)."
+msgstr ""
+"Прилогот '%(filename)s' не може да се отпакува, бидејќи создадените датотеки "
+"би зазеле премногу простор (недостасуваат %(space)d kB)."
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment count limit (%(count)d)."
+msgstr ""
+"Прилогот '%(filename)s' не може да се отпакува, бидејќи создадените датотеки "
+"би биле премногу (%(count)d повеќе датотеки)."
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' partially unzipped (did not overwrite: %(filelist)"
+"s)."
+msgstr "ZIP датотеката '%(filename)s' е отпакувана."
+
 #, python-format
-msgid "The file %(filename)s is not a .zip file."
-msgstr "Датотеката %(filename)s не е .zip архива."
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "ZIP датотеката '%(filename)s' е отпакувана."
 
 #, python-format
 msgid "Attachment '%(filename)s'"
@@ -3009,6 +3014,24 @@ msgstr "На оваа страница не смеете да користите
 
 msgid "Login and try again."
 msgstr "Пријавете се и обидете се повторно."
+
+#~ msgid "Xapian Version"
+#~ msgstr "Верзија на Xapian"
+
+#~ msgid "PyStemmer not installed"
+#~ msgstr "PyStemmer не е инсталиран"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "Верзија на PyStemmer"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "PyStemmer корен"
+
+#~ msgid "XML RPC error: %s"
+#~ msgstr "XML RPC грешка: %s"
+
+#~ msgid "Low-level communication error: %s"
+#~ msgstr "Комуникациска грешка од ниско ниво: %s"
 
 #~ msgid "New Page or New Attachment"
 #~ msgstr "Нова страница или прилог"

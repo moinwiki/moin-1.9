@@ -163,7 +163,21 @@ Prints a table of contents.
         macro.formatter.paragraph(0),
     ]
 
-    lastlvl = 0
+
+    # find smallest used level and use that as the outer-most indentation,
+    # to fix pages like HelpOnMacros that only use h2 and lower levels.
+    lastlvl = 100
+    for lvl, id, txt in macro.request._tocfm_collected_headings:
+        if txt is None:
+            incl_id = id
+            continue
+        if lvl > maxdepth or id is None:
+            continue
+        if lvl < lastlvl:
+            lastlvl = lvl
+
+    # headings are 1-based, lastlvl needs to be one less so that one is closed
+    lastlvl -= 1
 
     for lvl, id, txt in macro.request._tocfm_collected_headings:
         if txt is None:

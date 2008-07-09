@@ -4,7 +4,7 @@
 
     # authentication methods used (default shown, see also other snippets):
     #from MoinMoin import auth as authmodule
-    #auth = [authmodule.MoinLogin()]
+    #auth = [authmodule.MoinAuth()]
 
     # auth methods that get a user into "Trusted" group:
     #auth_methods_trusted = ['http', 'xmlrpc_applytoken']

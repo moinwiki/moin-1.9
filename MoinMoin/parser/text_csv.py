@@ -54,17 +54,8 @@ class Parser:
         formatter = request.formatter
 
         # workaround csv.reader deficiency by encoding to utf-8
-        data = raw.encode('utf-8').split('\n')
-
-        # workaraound to remove empty lines in front of the csv table
-        # if this is not done this parser shows only an empty line
-        count = 0
-        for txt in data:
-            if not txt:
-                count += 1
-            else:
-                data = data[count:]
-                break
+        # removes empty lines in front of the csv table
+        data = raw.encode('utf-8').lstrip('\n').split('\n')
 
         delimiter = ';'
         # Previous versions of this parser have used only the delimiter ";" (by default).
