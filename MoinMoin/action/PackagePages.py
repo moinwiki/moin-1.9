@@ -217,7 +217,7 @@ class PackagePages:
                     zipname = "%d_attachment" % cnt
                     script.append(packLine(["AddAttachment", zipname, attname, page.page_name, userid, "Created by the PackagePages action."]))
                     filename = AttachFile.getFilename(self.request, page.page_name, attname)
-                    zf.write(filename.encode("cp437"), zipname)
+                    zf.write(filename, zipname)
         script += [packLine(['Print', 'Thank you for using PackagePages!'])]
 
         zf.writestr(MOIN_PACKAGE_FILE, u"\n".join(script).encode("utf-8"))

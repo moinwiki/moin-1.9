@@ -1,8 +1,8 @@
-## Please edit system and help pages ONLY in the moinmaster wiki! For more
-## information, please see MoinMaster:MoinPagesEditorGroup.
+## Please edit system and help pages ONLY in the master wiki!
+## For more information, please see MoinMoin:MoinDev/Translation.
 ##master-page:None
 ##master-date:None
-#acl MoinPagesEditorGroup:read,write,delete,revert All:read
+#acl -All:write Default
 #format gettext
 #language tr
 
@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin-1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 23:52+0200\n"
+"POT-Creation-Date: 2008-06-21 22:47+0200\n"
 "PO-Revision-Date: 2007-04-25 16:26+0300\n"
 "Last-Translator: Ekrem SEREN <ekrem.seren@parduslinux.org>\n"
 "Language-Team: Türkçe\n"
@@ -500,6 +500,9 @@ msgstr "[boş]"
 msgid "filter"
 msgstr "süzgeç"
 
+msgid "about"
+msgstr ""
+
 #, fuzzy, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -594,6 +597,10 @@ msgstr "Hesap bilgilerimi e-posta ile gönder"
 msgid "Missing password. Please enter user name and password."
 msgstr "Parola eksik. Lütfen kullanıcı adı ve parolayı girin."
 
+#, python-format
+msgid "LDAP server %(server)s failed."
+msgstr ""
+
 #, fuzzy
 msgid "You need to log in."
 msgstr "Çıkış yaptınız."
@@ -611,6 +618,9 @@ msgid ""
 msgstr ""
 
 msgid "Choose this name"
+msgstr ""
+
+msgid "This is not a valid username, choose a different one."
 msgstr ""
 
 msgid ""
@@ -632,9 +642,6 @@ msgid "Verification canceled."
 msgstr "İşlem iptal edildi."
 
 msgid "OpenID failure."
-msgstr ""
-
-msgid "This is not a valid username, choose a different one."
 msgstr ""
 
 msgid "Your account is now associated to your OpenID."
@@ -1207,6 +1214,15 @@ msgstr "Genel seçenekler"
 msgid "Quick links"
 msgstr "Hızlı erişim bağlantıları"
 
+msgid "OpenID server"
+msgstr ""
+
+msgid "The selected websites have been removed."
+msgstr ""
+
+msgid "Trusted websites"
+msgstr ""
+
 #, fuzzy, python-format
 msgid ""
 "Dear Wiki user,\n"
@@ -1342,14 +1358,6 @@ msgstr "Küçük "
 msgid ""
 "Attachment link: %(attach)s\n"
 "Page link: %(page)s\n"
-msgstr ""
-
-#, python-format
-msgid "XML RPC error: %s"
-msgstr ""
-
-#, python-format
-msgid "Low-level communication error: %s"
 msgstr ""
 
 #, fuzzy
@@ -1725,31 +1733,17 @@ msgstr "dizin müsait"
 msgid "index unavailable"
 msgstr "dizin kullanılamaz"
 
-msgid "N/A"
-msgstr "Bilinmiyor"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "Xapian ve/veya Python Xapian bağlayıcı(lar)ı yüklü değil"
+
+msgid "N/A"
+msgstr "Bilinmiyor"
 
 msgid "Xapian search"
 msgstr "Xapian arama"
 
-msgid "Xapian Version"
-msgstr "Xapian Sürümü"
-
-msgid "PyStemmer not installed"
-msgstr ""
-
 msgid "Stemming for Xapian"
 msgstr ""
-
-#, fuzzy
-msgid "PyStemmer Version"
-msgstr "Python Sürümü"
-
-#, fuzzy
-msgid "PyStemmer stems"
-msgstr "Python Sürümü"
 
 msgid "Active threads"
 msgstr "Etkin yivler"
@@ -1823,6 +1817,14 @@ msgstr "Metin Arama"
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr "{{{\"%s\"}}} yerine daha seçici bir arama tümcesi kullanınız."
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr ""
+"{{{\"%s\"}}} arama sorgunuz geçersiz. Lütfen yardım için HelpOnSearching "
+"sayfasına bakın."
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -2264,9 +2266,9 @@ msgid ""
 "||'''Add a new personal page:'''||'''Related access control list "
 "group:'''||\n"
 "||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
-"[\"%(username)s/ReadWriteGroup\"]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[\"%"
-"(username)s/ReadGroup\"]||\n"
+"[[%(username)s/ReadWriteGroup]]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
+"(username)s/ReadGroup]]||\n"
 "||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
 "(username)s only||\n"
 "\n"
@@ -2546,14 +2548,6 @@ msgstr "Gelişmiş Arama: \"%s\""
 #, python-format
 msgid "Full Text Search: \"%s\""
 msgstr "Metin Arama: \"%s\""
-
-#, python-format
-msgid ""
-"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
-"for more information."
-msgstr ""
-"{{{\"%s\"}}} arama sorgunuz geçersiz. Lütfen yardım için HelpOnSearching "
-"sayfasına bakın."
 
 #, python-format
 msgid ""
@@ -2884,37 +2878,44 @@ msgid "You are not allowed to unzip attachments of this page."
 msgstr "Sayfa üzerindeki ekleri listelemek için yeterli izne sahip değilsiniz."
 
 #, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr ""
-"Oluşacak dosyalar çok büyük (%(space)d kB fazla) olduğundan dolayı '%"
-"(filename)s' eki açılamıyor."
+msgid "The file %(filename)s is not a .zip file."
+msgstr "%(filename)s bir .zip dosyası değil."
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too many (%(count)d missing)."
-msgstr ""
-".zip dosyası biçimindeki '%(filename)s' eki, oluşacak dosya sayısı çok fazla "
-"olduğundan açılmadı. (%(count)d adet fazla)"
-
-#, python-format
-msgid "Attachment '%(filename)s' unzipped."
-msgstr "'%(filename)s eki açıldı."
-
-#, python-format
-msgid ""
-"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
-"files only, exist already or reside in folders."
+"Attachment '%(filename)s' not unzipped because some files in the zip are "
+"either not in the same directory or exceeded the single file size limit (%"
+"(maxsize_file)d kB)."
 msgstr ""
 "Oluşacak dosyalar çok büyük, zaten sistemde mevcut, diğer dizinlere taşıyor "
 "ya da kendi içinde .zip dosyası içerdiğinden dolayı '%(filename)s' eki "
 "açılmadı."
 
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment storage size limit (%(size)d kB)."
+msgstr ""
+"Oluşacak dosyalar çok büyük (%(space)d kB fazla) olduğundan dolayı '%"
+"(filename)s' eki açılamıyor."
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment count limit (%(count)d)."
+msgstr ""
+".zip dosyası biçimindeki '%(filename)s' eki, oluşacak dosya sayısı çok fazla "
+"olduğundan açılmadı. (%(count)d adet fazla)"
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' partially unzipped (did not overwrite: %(filelist)"
+"s)."
+msgstr "'%(filename)s eki açıldı."
+
 #, python-format
-msgid "The file %(filename)s is not a .zip file."
-msgstr "%(filename)s bir .zip dosyası değil."
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "'%(filename)s eki açıldı."
 
 #, python-format
 msgid "Attachment '%(filename)s'"
@@ -2989,6 +2990,17 @@ msgstr ""
 
 msgid "Login and try again."
 msgstr "Giriş yapın ve tekrar deneyin."
+
+#~ msgid "Xapian Version"
+#~ msgstr "Xapian Sürümü"
+
+#, fuzzy
+#~ msgid "PyStemmer Version"
+#~ msgstr "Python Sürümü"
+
+#, fuzzy
+#~ msgid "PyStemmer stems"
+#~ msgstr "Python Sürümü"
 
 #, fuzzy
 #~ msgid "New Page or New Attachment"

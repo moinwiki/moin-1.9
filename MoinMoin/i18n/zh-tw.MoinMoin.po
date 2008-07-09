@@ -1,8 +1,8 @@
-## Please edit system and help pages ONLY in the moinmaster wiki! For more
-## information, please see MoinMaster:MoinPagesEditorGroup.
+## Please edit system and help pages ONLY in the master wiki!
+## For more information, please see MoinMoin:MoinDev/Translation.
 ##master-page:None
 ##master-date:None
-#acl MoinPagesEditorGroup:read,write,delete,revert All:read
+#acl -All:write Default
 #format gettext
 #language zh-tw
 
@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 23:52+0200\n"
-"PO-Revision-Date: 2008-03-24 23:30+0800\n"
+"POT-Creation-Date: 2008-06-21 22:47+0200\n"
+"PO-Revision-Date: 2008-06-14 22:44+0800\n"
 "Last-Translator: Rux Li <rux.li3@gmail.com>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -31,7 +31,7 @@ msgstr ""
 msgid "<unknown>"
 msgstr "<不明>"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
@@ -41,9 +41,9 @@ msgid ""
 msgstr ""
 "登入名稱：%s\n"
 "\n"
-"登入密碼：%s\n"
+"密碼回復憑證：%s\n"
 "\n"
-"登入網址：%s/?action=login\n"
+"登入網址：%s/?action=recoverpass&name=%s&token=%s\n"
 
 msgid ""
 "Somebody has requested to email you a password recovery token.\n"
@@ -472,6 +472,9 @@ msgstr "[空]"
 msgid "filter"
 msgstr "過濾"
 
+msgid "about"
+msgstr ""
+
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -529,13 +532,11 @@ msgstr ""
 msgid "Login"
 msgstr "登入"
 
-#, fuzzy
 msgid "Username"
 msgstr "使用者"
 
-#, fuzzy
 msgid "Member of Groups"
-msgstr "總頁面數"
+msgstr "群組成員"
 
 msgid "Email"
 msgstr "Email"
@@ -561,9 +562,12 @@ msgstr "郵寄帳號資料"
 msgid "Missing password. Please enter user name and password."
 msgstr "沒輸入密碼！請輸入名稱及密碼。"
 
-#, fuzzy
+#, python-format
+msgid "LDAP server %(server)s failed."
+msgstr ""
+
 msgid "You need to log in."
-msgstr "你已經登出了。"
+msgstr "你必須先登入。"
 
 #, python-format
 msgid ""
@@ -579,9 +583,11 @@ msgid ""
 "password and be able to associate the account with your OpenID."
 msgstr ""
 
-#, fuzzy
 msgid "Choose this name"
-msgstr " "
+msgstr "選此名稱"
+
+msgid "This is not a valid username, choose a different one."
+msgstr "此非合法使用者名稱，請選擇另一個。"
 
 msgid ""
 "The username you have chosen is already\n"
@@ -591,42 +597,38 @@ msgid ""
 msgstr ""
 
 msgid "Associate this name"
-msgstr ""
+msgstr "連結此名稱"
 
 #, python-format
 msgid "OpenID error: %s."
-msgstr ""
+msgstr "OpenID 錯誤: %s。"
 
-#, fuzzy
 msgid "Verification canceled."
-msgstr "動作已取消。"
+msgstr "驗證已取消。"
 
 msgid "OpenID failure."
-msgstr ""
-
-msgid "This is not a valid username, choose a different one."
-msgstr "此非合法使用者名稱，請選擇另一個。"
+msgstr "OpenID 失敗"
 
 msgid "Your account is now associated to your OpenID."
-msgstr ""
+msgstr "你的帳號已連結到你的 OpenID"
 
 msgid "The password you entered is not valid."
 msgstr "密碼不正確。"
 
 msgid "OpenID verification requires that you click this button:"
-msgstr ""
+msgstr "OpenID 驗證需要你點擊此按鈕"
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
-msgstr ""
+msgstr "匿名會談必須啟動才能用 OpenID 登入。"
 
 msgid "Failed to resolve OpenID."
-msgstr ""
+msgstr "OpenID 解析失敗"
 
 msgid "OpenID discovery failure, not a valid OpenID."
-msgstr ""
+msgstr "OpenID 探查失敗，此 ID 無效。"
 
 msgid "No OpenID."
-msgstr ""
+msgstr "無 OpenID"
 
 msgid ""
 "If you do not have an account yet, you can still log in with your OpenID and "
@@ -998,13 +1000,11 @@ msgid ""
 "general preferences."
 msgstr ""
 
-#, fuzzy
 msgid "Subscribed events"
-msgstr "新增訂戶"
+msgstr "訂閱事件"
 
-#, fuzzy
 msgid "Subscribed wiki pages<<BR>>(one regex per line)"
-msgstr "訂閱的 wiki 頁面 (每行一個正規表示式)"
+msgstr "訂閱的 wiki 頁面 <<BR>>(每行一個正規表示式)"
 
 msgid "Save"
 msgstr "存檔"
@@ -1067,12 +1067,11 @@ msgstr ""
 msgid "OpenID is already present."
 msgstr ""
 
-#, fuzzy
 msgid "This OpenID is already used for another account."
-msgstr "本頁已經刪除或還沒建立！"
+msgstr "此 OpenID 已經被別的帳號使用。"
 
 msgid "OpenID added successfully."
-msgstr "OpenID 已新增。"
+msgstr "OpenID 新增成功。"
 
 msgid "Current OpenIDs"
 msgstr "目前的 OpenID"
@@ -1110,9 +1109,8 @@ msgstr "請輸入 email 地址，不然你忘記名稱或密碼的時候，就�
 msgid "This email already belongs to somebody else."
 msgstr "這個 email 地址已經有人用了。"
 
-#, fuzzy
 msgid "This jabber id already belongs to somebody else."
-msgstr "這個 email 地址已經有人用了。"
+msgstr "這個 jabber id 已經有人用了。"
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -1163,7 +1161,18 @@ msgstr "一般選項"
 msgid "Quick links"
 msgstr "自訂頁面捷徑"
 
-#, fuzzy, python-format
+#, fuzzy
+msgid "OpenID server"
+msgstr "無 OpenID 服務"
+
+#, fuzzy
+msgid "The selected websites have been removed."
+msgstr "選擇的 OpenID 已移除"
+
+msgid "Trusted websites"
+msgstr ""
+
+#, python-format
 msgid ""
 "Dear Wiki user,\n"
 "\n"
@@ -1177,7 +1186,7 @@ msgstr ""
 "你在 \"%(sitename)s\" 網站訂閱了 wiki 頁面或 wiki 類別的修訂通知服務。\n"
 "\n"
 "在此通知你以下頁面被 %(editor)s 編輯過了：\n"
-"%(pagelink)s\n"
+"\"%(pagename)s\"\n"
 "\n"
 
 msgid "New page:\n"
@@ -1231,9 +1240,9 @@ msgid ""
 "    Email address: %(useremail)s"
 msgstr ""
 
-#, fuzzy, python-format
+#, python-format
 msgid "New attachment added to page %(pagename)s on %(sitename)s"
-msgstr "%(pagename)s 的附件 <<Verbatim(attachment:)>>%(filename)s"
+msgstr "新附件已加入 %(sitename)s 站的頁面 %(pagename)s"
 
 #, python-format
 msgid ""
@@ -1259,23 +1268,20 @@ msgstr "頁面已重新命名"
 msgid "Page has been deleted"
 msgstr "頁面已刪除"
 
-#, fuzzy
 msgid "Page has been copied"
-msgstr "人氣和編輯次數"
+msgstr "頁面已被複製"
 
-#, fuzzy
 msgid "A new attachment has been added"
-msgstr "新的附件名稱"
+msgstr "新的附件已經加入"
 
 msgid "A page has been reverted to a previous state"
-msgstr ""
+msgstr "頁面已經被回復到先前的狀態"
 
-#, fuzzy
 msgid "A user has subscribed to a page"
-msgstr "訂閱完成。"
+msgstr "有使用者訂閱頁面。"
 
 msgid "A new account has been created"
-msgstr ""
+msgstr "有新帳號建立"
 
 #, python-format
 msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
@@ -1290,29 +1296,17 @@ msgid ""
 "Page link: %(page)s\n"
 msgstr ""
 
-#, python-format
-msgid "XML RPC error: %s"
-msgstr ""
-
-#, python-format
-msgid "Low-level communication error: %s"
-msgstr ""
-
-#, fuzzy
 msgid "Attachment link"
-msgstr "附件"
+msgstr "附件連結"
 
-#, fuzzy
 msgid "Page link"
-msgstr "類似 \"%s\" 的頁面："
+msgstr "頁面連結"
 
-#, fuzzy
 msgid "Changed page"
-msgstr "打包頁面"
+msgstr "改變過的頁面"
 
-#, fuzzy
 msgid "Page changed"
-msgstr "存檔"
+msgstr "頁面已改變"
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr "--pages 和 --search 兩個參數是互斥的！"
@@ -1376,7 +1370,6 @@ msgstr "瀏覽器類型"
 msgid "Distribution of User-Agent Types"
 msgstr "瀏覽器類型分佈"
 
-#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
@@ -1394,24 +1387,20 @@ msgid ""
 "\n"
 "(!) For more help, see HelpOnEditing or SyntaxReference.\n"
 msgstr ""
-" 強調::  <<Verbatim('')>>''斜體 ''<<Verbatim('')>>； <<Verbatim(''')>>'''粗"
-"體'''<<Verbatim(''')>>； <<Verbatim(''''')>>'''''粗斜體 '''''<<Verbatim"
-"(''''')>>； <<Verbatim('')>>''混合 ''<<Verbatim(''')>>'''''粗體 '''<<Verbatim"
-"(''')>>斜體 ''<<Verbatim('')>>；<<Verbatim(----)>> 分隔線\n"
-" 標題::  <<Verbatim(=)>> 標題1 <<Verbatim(=)>>； <<Verbatim(==)>> 標題2 "
-"<<Verbatim(==)>>； <<Verbatim(===)>> 標題3 <<Verbatim(===)>>； <<Verbatim"
-"(====)>> 標題4 <<Verbatim(====)>>； <<Verbatim(=====)>> 標題5 <<Verbatim"
-"(=====)>>\n"
-" 條列::  空白再加下列符號之一： *、1.、a.、A.、i.、I.； 1.#n 從 n 開始編； 只"
-"有空白則代表縮排\n"
-" 連結::  <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])"
-">>\n"
-" 表格::  || 儲存格內文 |||| 跨兩欄的儲存格 ||\n"
+" 強調:: <<Verbatim('')>>''斜體 ''<<Verbatim('')>>; <<Verbatim(''')>>'''粗"
+"體'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''粗斜體 '''''<<Verbatim(''''')"
+">>; <<Verbatim('')>>''混合 ''<<Verbatim(''')>>'''''粗體'''<<Verbatim(''')>> "
+"斜體 ''<<Verbatim('')>>; <<Verbatim(----)>> 分隔線.\n"
+" 標題:: = 標題 1 =; == 標題 2 ==; === 標題 3 ===; ==== 標題 4 ====; ===== 標"
+"題 5 =====.\n"
+" 條列:: 空白再加下列符號之一: *、1.、a.、A.、i.、I.； 1.#n 從 n 開始編； 只有"
+"空白則代表縮排\n"
+" 連結:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])"
+">>.\n"
+" 表格:: || 儲存格內文 |||| 跨兩欄的儲存格 ||;    表格或標題尾端不可有空白\n"
 "\n"
-"(!) 表格或標題尾端不可有空白<<BR>>\n"
 "(!) 更詳細的說明請參看 [[說明/編輯頁面]] 或 [[語法參考]]\n"
 
-#, fuzzy
 msgid ""
 "{{{\n"
 "Emphasis: *italic* **bold** ``monospace``\n"
@@ -1437,7 +1426,7 @@ msgstr ""
 "標題: 標題1  標題2  標題3\n"
 "      =====  -----  ~~~~~\n"
 "\n"
-"分隔線: ---- \n"
+"分隔線: ----\n"
 "\n"
 "連結: TrailingUnderscore_ `multi word with backticks`_ external_ \n"
 "\n"
@@ -1540,12 +1529,11 @@ msgstr "(空白表示不要自訂 CSS)"
 msgid "Editor size"
 msgstr "編輯框列數"
 
-#, fuzzy
 msgid "File attachment browser"
-msgstr "新的附件名稱"
+msgstr "附件檔瀏覽器"
 
 msgid "User account browser"
-msgstr ""
+msgstr "使用者帳號瀏覽器"
 
 #, python-format
 msgid "Invalid include arguments \"%s\"!"
@@ -1679,29 +1667,17 @@ msgstr "有索引"
 msgid "index unavailable"
 msgstr "無索引"
 
-msgid "N/A"
-msgstr "無"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "未安裝 Xapian 及/或 Python Xapian bindings"
+
+msgid "N/A"
+msgstr "無"
 
 msgid "Xapian search"
 msgstr "Xapian 搜尋"
 
-msgid "Xapian Version"
-msgstr "Xapian 版本"
-
-msgid "PyStemmer not installed"
-msgstr "PyStemmer 未安裝"
-
 msgid "Stemming for Xapian"
 msgstr "Xapian 詞幹解析"
-
-msgid "PyStemmer Version"
-msgstr "PyStemmer 版本"
-
-msgid "PyStemmer stems"
-msgstr "PyStemmer 詞幹"
 
 msgid "Active threads"
 msgstr "緒程數目"
@@ -1775,6 +1751,12 @@ msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr "{{{\"%s\"}}} 找到太多資料，請輸入更精確的關鍵字！"
 
 #, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr "你個查詢 {{{\"%s\"}}} 並不合法。詳情請參見 HelpOnSearching。"
+
+#, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "上傳新附件 \"%(filename)s\""
 
@@ -1832,9 +1814,8 @@ msgstr "請指定圖表類型！"
 msgid "Bad chart type \"%s\"!"
 msgstr "錯誤的圖表類型 \"%s\"！"
 
-#, fuzzy
 msgid "Revert"
-msgstr "全部回復"
+msgstr "回復"
 
 msgid "You are not allowed to revert this page!"
 msgstr "你無權回復本頁！"
@@ -1850,9 +1831,8 @@ msgstr ""
 msgid "This page is already deleted or was never created!"
 msgstr "本頁已經刪除或還沒建立！"
 
-#, fuzzy
 msgid "Optional reason for reverting this page"
-msgstr "複製頁面的理由："
+msgstr "回復頁面的理由 (可略)："
 
 msgid "Really revert this page?"
 msgstr "確定要回復本頁嗎？"
@@ -1904,11 +1884,11 @@ msgstr "同步完成。請參考以下的狀態訊息。"
 msgid "Synchronisation started -"
 msgstr "同步作業開始 --"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Got a list of %s local and %s remote pages. This results in %s pages to "
 "process."
-msgstr "收到 %s 個本地及 %s 個遠端頁面。總共有 %s 個不同的頁面。"
+msgstr "收到 %s 個本地及 %s 個遠端頁面。總共有 %s 個頁面要處理。"
 
 #, python-format
 msgid "After filtering: %s pages"
@@ -2032,21 +2012,20 @@ msgstr ""
 msgid "Identity URL"
 msgstr ""
 
-#, fuzzy
 msgid "Remember decision"
-msgstr "PyStemmer 版本"
+msgstr "記下決定"
 
 msgid "Remember this trust decision and don't ask again"
-msgstr ""
+msgstr "記下決定並不需要再詢問"
 
 msgid "Approve"
-msgstr ""
+msgstr "承認"
 
 msgid "Don't approve"
-msgstr ""
+msgstr "不承認"
 
 msgid "OpenID not served"
-msgstr ""
+msgstr "無 OpenID 服務"
 
 msgid ""
 "\n"
@@ -2084,9 +2063,9 @@ msgstr "沒有類似 \"%s\" 的頁面！"
 msgid "Please choose:"
 msgstr "請選擇："
 
-#, fuzzy, python-format
+#, python-format
 msgid "You must login to use this action: %(action)s."
-msgstr "登入之後才能訂閱"
+msgstr "登入之後才能使用此功能：%(action)s。"
 
 msgid "You must login to remove a quicklink."
 msgstr "登入之後才能移除頁面捷徑。"
@@ -2184,7 +2163,7 @@ msgstr "請先登入。"
 msgid "Please first create a homepage before creating additional pages."
 msgstr "建立其他頁面之前，請先建立個人首頁。"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "You can add some additional sub pages to your already existing homepage "
 "here.\n"
@@ -2204,9 +2183,9 @@ msgid ""
 "||'''Add a new personal page:'''||'''Related access control list "
 "group:'''||\n"
 "||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
-"[\"%(username)s/ReadWriteGroup\"]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[\"%"
-"(username)s/ReadGroup\"]||\n"
+"[[%(username)s/ReadWriteGroup]]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
+"(username)s/ReadGroup]]||\n"
 "||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
 "(username)s only||\n"
 "\n"
@@ -2251,9 +2230,8 @@ msgstr "取消訂閱完成。"
 msgid "Can't remove regular expression subscription!"
 msgstr "無法取消用正規表示式設定的訂閱！"
 
-#, fuzzy
 msgid "Edit the subscription regular expressions in your settings."
-msgstr "請在 UserPreferences 設定正規表示式訂閱。"
+msgstr "請在你的設定編輯訂閱頁面的正規表示式。"
 
 msgid "You need to be subscribed to unsubscribe."
 msgstr "你並未訂閱本頁。"
@@ -2285,13 +2263,11 @@ msgstr "修訂版 %d 和 %d 的差異如下："
 msgid "(spanning %d versions)"
 msgstr "(間隔 %d 版)"
 
-#, fuzzy
 msgid "Previous change"
-msgstr "上一頁"
+msgstr "上一變動"
 
-#, fuzzy
 msgid "Next change"
-msgstr "沒有任何改變"
+msgstr "下一變動"
 
 #, python-format
 msgid "The page was saved %(count)d times, though!"
@@ -2306,9 +2282,8 @@ msgstr "忽略空白的改變"
 msgid "Load"
 msgstr "載入"
 
-#, fuzzy
 msgid "Pagename not specified!"
-msgstr "附件沒指定檔名！"
+msgstr "頁面名稱沒指定！"
 
 msgid "Upload page content"
 msgstr ""
@@ -2325,25 +2300,22 @@ msgstr ""
 msgid "Comment"
 msgstr "說明"
 
-#, fuzzy
 msgid "Page Name"
-msgstr "包裹名稱"
+msgstr "頁面名稱"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "你不能訂閱無權瀏覽的頁面。"
 
-#, fuzzy
 msgid "This wiki is not enabled for mail/Jabber processing."
-msgstr "本 wiki 站不支援郵寄處理。"
+msgstr "本 wiki 站不支援郵寄和 Jabber 處理。"
 
 msgid "You must log in to use subscriptions."
 msgstr "登入之後才能訂閱"
 
-#, fuzzy
 msgid ""
 "Add your email address or Jabber ID in your user settings to use "
 "subscriptions."
-msgstr "在 UserPreferences 設定 email 地址之後才能訂閱"
+msgstr "設定 email 信箱或 Jabber ID 之後才能訂閱"
 
 msgid "You are already subscribed to this page."
 msgstr "本頁已經訂閱過了。"
@@ -2382,9 +2354,8 @@ msgstr "編輯者"
 msgid "view"
 msgstr "檢視"
 
-#, fuzzy
 msgid "to previous"
-msgstr "上一頁"
+msgstr "回到前面"
 
 msgid "get"
 msgstr "下載"
@@ -2428,9 +2399,8 @@ msgstr "真的要刪除本頁？"
 msgid "You are not allowed to create the supplementation page."
 msgstr "你無權建立補充頁"
 
-#, fuzzy
 msgid "Only superuser is allowed to use this action."
-msgstr "你無權使用本項操作。"
+msgstr "只有管理者才能使用本項操作。"
 
 #, python-format
 msgid "Subscribe users to the page %s"
@@ -2469,12 +2439,6 @@ msgstr "進階搜尋：\"%s\""
 #, python-format
 msgid "Full Text Search: \"%s\""
 msgstr "全文檢索：\"%s\""
-
-#, python-format
-msgid ""
-"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
-"for more information."
-msgstr "你個查詢 {{{\"%s\"}}} 並不合法。詳情請參見 HelpOnSearching。"
 
 #, python-format
 msgid ""
@@ -2552,7 +2516,6 @@ msgstr "不能檢查無權瀏覽的頁面。"
 msgid "You are now logged out."
 msgstr "你已經登出了。"
 
-#, fuzzy
 msgid "If this account exists an email was sent."
 msgstr "如果有此帳號存在，就會寄出 email。"
 
@@ -2563,50 +2526,44 @@ msgstr ""
 "本 wiki 不支援郵寄工作。\n"
 "請連絡管理員，看他要不要啟動郵寄功能。"
 
-#, fuzzy
 msgid "Please provide a valid email address or a username!"
-msgstr "請輸入合法的 email 地址！"
+msgstr "請輸入合法的 email 地址或使用者名稱！"
 
 msgid "Mail me my account data"
 msgstr "把帳號資料寄給我"
 
-#, fuzzy
 msgid "Recovery token"
-msgstr "全部回復"
+msgstr "回復憑證"
 
-#, fuzzy
 msgid "New password"
-msgstr "更改密碼"
+msgstr "新密碼"
 
-#, fuzzy
 msgid "New password (repeat)"
-msgstr "密碼(再一次)"
+msgstr "新密碼(再一次)"
 
-#, fuzzy
 msgid "Reset my password"
-msgstr "密碼"
+msgstr "重設密碼"
 
-#, fuzzy
 msgid "Your password has been changed, you can log in now."
-msgstr "您的密碼已更改。"
+msgstr "您的密碼已更改，可以登入了。"
 
 msgid "Your token is invalid!"
-msgstr ""
+msgstr "你的憑證是無效的！"
 
-#, fuzzy
 msgid "Password reset"
-msgstr "密碼(再一次)"
+msgstr "密碼重設"
 
-#, fuzzy
 msgid ""
 "\n"
 "== Password reset ==\n"
 "Enter a new password below."
-msgstr "為更改您的密碼，請輸入您的新密碼兩次。"
+msgstr ""
+"\n"
+"== 密碼重設 ==\n"
+"請在以下輸入新密碼。"
 
-#, fuzzy
 msgid "Lost password"
-msgstr "密碼"
+msgstr "忘記密碼"
 
 msgid ""
 "\n"
@@ -2617,6 +2574,12 @@ msgid ""
 "used to change your password. The email will also contain further\n"
 "instructions."
 msgstr ""
+"\n"
+"== 回復已忘記的密碼 ==\n"
+"如果你忘記你的密碼，請輸入你的 email 信箱或使用者名稱，\n"
+"然後點擊 '''Mail me my account data'''。\n"
+"你會收到附上回復憑證的 email。你可以用此憑證來更改你的密碼。\n"
+"在此 email 當中會有詳細的說明。"
 
 msgid ""
 "\n"
@@ -2624,6 +2587,10 @@ msgid ""
 "If you already have received the email with the recovery token, enter your\n"
 "username, the recovery token and a new password (twice) below."
 msgstr ""
+"\n"
+"=== 重設密碼 ===\n"
+"如果你已經收到附上回覆憑證的 email，請在以下輸入你的使用者名稱、\n"
+"回復憑證，以及新密碼 (兩次)。"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -2711,9 +2678,8 @@ msgstr "不支援 AttachFile 的子功能：%s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "\"%(pagename)s\" 的附件"
 
-#, fuzzy
 msgid "You are not allowed to overwrite a file attachment of this page."
-msgstr "你無權檢視本頁附件。"
+msgstr "你無權覆蓋本頁的附件。"
 
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
@@ -2733,22 +2699,24 @@ msgstr "你無權在本頁儲存圖片。"
 msgid "You are not allowed to delete attachments on this page."
 msgstr "你無權刪除本頁附件。"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
-msgstr "附件 '%(filename)s' 已安裝。"
+msgstr "附件 '%(new_pagename)s/%(new_filename)s' 已存在。"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/%"
 "(new_filename)s'."
-msgstr "附件 '%(filename)s' 已搬移至 %(page)s！"
+msgstr ""
+"附件 '%(pagename)s/%(filename)s' 已搬移至 '%(new_pagename)s/%(new_filename)"
+"s'。"
 
 msgid "Nothing changed"
 msgstr "沒有任何改變"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Page '%(new_pagename)s' does not exist or you don't have enough rights."
-msgstr "頁面 %(newpagename)s 不存在或你沒有足夠的權限。"
+msgstr "頁面 '%(new_pagename)s' 不存在或你沒有足夠的權限。"
 
 msgid "Move aborted!"
 msgstr "放棄搬移"
@@ -2759,17 +2727,15 @@ msgstr "請使用互動式介面來搬移頁面附件！"
 msgid "You are not allowed to move attachments from this page."
 msgstr "你無權搬移本頁附件。"
 
-#, fuzzy
 msgid "Move aborted because new page name is empty."
-msgstr "因為空的頁面名稱而放棄搬移"
+msgstr "因為新頁面名稱是空的而放棄搬移"
 
 #, python-format
 msgid "Please use a valid filename for attachment '%(filename)s'."
 msgstr "請替附件 '%(filename)s' 取個合法的檔名。"
 
-#, fuzzy
 msgid "Move aborted because new attachment name is empty."
-msgstr "因為空的附件名稱而放棄搬移"
+msgstr "因為新附件名稱是空的而放棄搬移"
 
 msgid "Move"
 msgstr "搬移"
@@ -2794,32 +2760,43 @@ msgid "You are not allowed to unzip attachments of this page."
 msgstr "你無權解壓本頁附件。"
 
 #, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr "因結果檔案太大，附件 '%(filename)s' 無法解壓縮 (缺 %(space)d kB)。"
+msgid "The file %(filename)s is not a .zip file."
+msgstr "檔案 %(filename)s 不是 .zip 檔。"
 
 #, python-format
 msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too many (%(count)d missing)."
-msgstr "因結果檔案太多，附件 '%(filename)s' 無法解壓縮 (多 %(count)d 個)。"
+"Attachment '%(filename)s' not unzipped because some files in the zip are "
+"either not in the same directory or exceeded the single file size limit (%"
+"(maxsize_file)d kB)."
+msgstr ""
+"附件 '%(filename)s' 無法解壓縮。可能原因：zip 內的檔案不在同一目錄或有檔案超"
+"過單一檔案的大小限制 (%(maxsize_file)d kB)。"
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment storage size limit (%(size)d kB)."
+msgstr ""
+"附件 '%(filename)s' 無法解壓縮。原因：檔案太大，超過頁面附件的大小限制 (%"
+"(size)d kB)。"
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment count limit (%(count)d)."
+msgstr ""
+"附件 '%(filename)s' 無法解壓縮。原因：檔案太多，超過頁面附件的個數限制 (%"
+"(count)d)。"
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' partially unzipped (did not overwrite: %(filelist)"
+"s)."
+msgstr "附件 '%(filename)s' 已部份解壓縮 (沒有覆蓋: %(filelist)s)。"
 
 #, python-format
 msgid "Attachment '%(filename)s' unzipped."
 msgstr "附件 '%(filename)s' 已解壓縮。"
-
-#, python-format
-msgid ""
-"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
-"files only, exist already or reside in folders."
-msgstr ""
-"附件 '%(filename)s' 無法解壓縮。可能原因為：檔案太大、不是 .zip 檔、檔案已存"
-"在、或在子目錄內。"
-
-#, python-format
-msgid "The file %(filename)s is not a .zip file."
-msgstr "檔案 %(filename)s 不是 .zip 檔。"
 
 #, python-format
 msgid "Attachment '%(filename)s'"
@@ -2892,6 +2869,18 @@ msgstr "你無權在本頁進行「%(action_name)s」操作。"
 
 msgid "Login and try again."
 msgstr "請先登入後再試一次。"
+
+#~ msgid "Xapian Version"
+#~ msgstr "Xapian 版本"
+
+#~ msgid "PyStemmer not installed"
+#~ msgstr "PyStemmer 未安裝"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "PyStemmer 版本"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "PyStemmer 詞幹"
 
 #~ msgid "New Page or New Attachment"
 #~ msgstr "新增頁面或附件"

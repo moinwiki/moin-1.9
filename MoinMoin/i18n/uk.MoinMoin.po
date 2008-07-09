@@ -1,8 +1,8 @@
-## Please edit system and help pages ONLY in the moinmaster wiki! For more
-## information, please see MoinMaster:MoinPagesEditorGroup.
+## Please edit system and help pages ONLY in the master wiki!
+## For more information, please see MoinMoin:MoinDev/Translation.
 ##master-page:None
 ##master-date:None
-#acl MoinPagesEditorGroup:read,write,delete,revert All:read
+#acl -All:write Default
 #format gettext
 #language uk
 
@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 23:52+0200\n"
+"POT-Creation-Date: 2008-06-21 22:47+0200\n"
 "PO-Revision-Date: 2007-11-10 16:50+0300\n"
 "Last-Translator: Maxim V. Dziumanenko <dziumanenko@softprom.kiev.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -491,6 +491,9 @@ msgstr "[порожні]"
 msgid "filter"
 msgstr "фільтр"
 
+msgid "about"
+msgstr ""
+
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -580,6 +583,10 @@ msgstr "Надіслати дані рахунку"
 msgid "Missing password. Please enter user name and password."
 msgstr "Відсутній пароль. Введіть ім'я користувача й пароль."
 
+#, python-format
+msgid "LDAP server %(server)s failed."
+msgstr ""
+
 #, fuzzy
 msgid "You need to log in."
 msgstr "Ви вийшли."
@@ -597,6 +604,9 @@ msgid ""
 msgstr ""
 
 msgid "Choose this name"
+msgstr ""
+
+msgid "This is not a valid username, choose a different one."
 msgstr ""
 
 msgid ""
@@ -618,9 +628,6 @@ msgid "Verification canceled."
 msgstr "Операцію скасовано."
 
 msgid "OpenID failure."
-msgstr ""
-
-msgid "This is not a valid username, choose a different one."
 msgstr ""
 
 msgid "Your account is now associated to your OpenID."
@@ -1186,6 +1193,15 @@ msgstr "Загальні параметри"
 msgid "Quick links"
 msgstr "Закладки"
 
+msgid "OpenID server"
+msgstr ""
+
+msgid "The selected websites have been removed."
+msgstr ""
+
+msgid "Trusted websites"
+msgstr ""
+
 #, fuzzy, python-format
 msgid ""
 "Dear Wiki user,\n"
@@ -1319,14 +1335,6 @@ msgstr "Незначна"
 msgid ""
 "Attachment link: %(attach)s\n"
 "Page link: %(page)s\n"
-msgstr ""
-
-#, python-format
-msgid "XML RPC error: %s"
-msgstr ""
-
-#, python-format
-msgid "Low-level communication error: %s"
 msgstr ""
 
 #, fuzzy
@@ -1713,29 +1721,17 @@ msgstr "покажчик доступний"
 msgid "index unavailable"
 msgstr "покажчик недоступний"
 
-msgid "N/A"
-msgstr "немає"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "Не встановлено прив'язки Xapian та/або Python Xapian"
+
+msgid "N/A"
+msgstr "немає"
 
 msgid "Xapian search"
 msgstr "Система пошуку Xapian"
 
-msgid "Xapian Version"
-msgstr "Версія Xapian"
-
-msgid "PyStemmer not installed"
-msgstr "Не встановлено PyStemmer"
-
 msgid "Stemming for Xapian"
 msgstr "Stemming для Xapian"
-
-msgid "PyStemmer Version"
-msgstr "Версія PyStemmer"
-
-msgid "PyStemmer stems"
-msgstr "PyStemmer stems"
 
 msgid "Active threads"
 msgstr "Активних потоків"
@@ -1807,6 +1803,14 @@ msgstr "Пошук у тексті"
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr "Уточніть що шукати замість {{{\"%s\"}}}"
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr ""
+"Запит пошуку {{{\"%s\"}}} є некоректним. Додаткову інформацію шукайте на "
+"сторінці ДовідкаПошук."
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -2229,7 +2233,7 @@ msgstr "Спочатку необхідно увійти."
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Створіть домашню сторінку перед створенням інших сторінок."
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "You can add some additional sub pages to your already existing homepage "
 "here.\n"
@@ -2249,9 +2253,9 @@ msgid ""
 "||'''Add a new personal page:'''||'''Related access control list "
 "group:'''||\n"
 "||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
-"[\"%(username)s/ReadWriteGroup\"]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[\"%"
-"(username)s/ReadGroup\"]||\n"
+"[[%(username)s/ReadWriteGroup]]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
+"(username)s/ReadGroup]]||\n"
 "||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
 "(username)s only||\n"
 "\n"
@@ -2522,14 +2526,6 @@ msgstr "Розширений пошук: \"%s\""
 #, python-format
 msgid "Full Text Search: \"%s\""
 msgstr "Пошук у тексті: \"%s\""
-
-#, python-format
-msgid ""
-"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
-"for more information."
-msgstr ""
-"Запит пошуку {{{\"%s\"}}} є некоректним. Додаткову інформацію шукайте на "
-"сторінці ДовідкаПошук."
 
 #, python-format
 msgid ""
@@ -2854,36 +2850,43 @@ msgid "You are not allowed to unzip attachments of this page."
 msgstr "Ви не можете розпаковувати вкладення до цієї сторінки."
 
 #, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr ""
-"Вкладення '%(filename)s' не розпаковано, оскільки бракує місця (%(space)d "
-"Кб)."
+msgid "The file %(filename)s is not a .zip file."
+msgstr "Файл %(filename)s не є файлом .zip."
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too many (%(count)d missing)."
-msgstr ""
-"Вкладення '%(filename)s' не розпаковано, оскільки містить надто багато "
-"файлів (%(count)d зайвих)."
-
-#, python-format
-msgid "Attachment '%(filename)s' unzipped."
-msgstr "Вкладення '%(filename)s' розпаковано."
-
-#, python-format
-msgid ""
-"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
-"files only, exist already or reside in folders."
+"Attachment '%(filename)s' not unzipped because some files in the zip are "
+"either not in the same directory or exceeded the single file size limit (%"
+"(maxsize_file)d kB)."
 msgstr ""
 "Вкладення '%(filename)s' не розпаковано, оскільки файли надто великі, файли ."
 "zip вже існує або розташований у теках."
 
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment storage size limit (%(size)d kB)."
+msgstr ""
+"Вкладення '%(filename)s' не розпаковано, оскільки бракує місця (%(space)d "
+"Кб)."
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment count limit (%(count)d)."
+msgstr ""
+"Вкладення '%(filename)s' не розпаковано, оскільки містить надто багато "
+"файлів (%(count)d зайвих)."
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' partially unzipped (did not overwrite: %(filelist)"
+"s)."
+msgstr "Вкладення '%(filename)s' розпаковано."
+
 #, python-format
-msgid "The file %(filename)s is not a .zip file."
-msgstr "Файл %(filename)s не є файлом .zip."
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "Вкладення '%(filename)s' розпаковано."
 
 #, python-format
 msgid "Attachment '%(filename)s'"
@@ -2956,6 +2959,18 @@ msgstr "Ви не можете виконувати %(action_name)s на цій 
 
 msgid "Login and try again."
 msgstr "Увійдіть знову та спробуйте ще раз."
+
+#~ msgid "Xapian Version"
+#~ msgstr "Версія Xapian"
+
+#~ msgid "PyStemmer not installed"
+#~ msgstr "Не встановлено PyStemmer"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "Версія PyStemmer"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "PyStemmer stems"
 
 #~ msgid "New Page or New Attachment"
 #~ msgstr "Створити сторінку або вкладення"

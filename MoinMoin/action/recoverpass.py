@@ -9,6 +9,7 @@
 from MoinMoin import user, wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.widget import html
+from MoinMoin.auth import MoinAuth
 
 def _do_email(request, u):
     _ = request.getText
@@ -138,7 +139,17 @@ def _create_token_form(request, name=None, token=None):
 
 
 def execute(pagename, request):
-    pagename = pagename
+    found = False
+    for auth in request.cfg.auth:
+        if isinstance(auth, MoinAuth):
+            found = True
+            break
+
+    if not found:
+        # we will not have linked, so forbid access
+        request.makeForbidden403()
+        return
+
     page = Page(request, pagename)
     _ = request.getText
     form = request.form

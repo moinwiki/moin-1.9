@@ -18,7 +18,7 @@ from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
 
 Dependencies = ["time"] # footnote macro cannot be cached
 
-def macro_FootNote(macro, text=u''):
+def execute(macro, args):
     request = macro.request
     formatter = macro.formatter
 
@@ -28,27 +28,27 @@ def macro_FootNote(macro, text=u''):
         request.footnote_ctr = 0
         request.footnote_show_ctr = 0
 
-    if not text:
+    if not args:
         return emit_footnotes(request, formatter)
     else:
         # grab new footnote backref number
         idx = request.footnote_ctr
         request.footnote_ctr += 1
 
-        shahex = sha.new(text.encode(config.charset)).hexdigest()
+        shahex = sha.new(args.encode(config.charset)).hexdigest()
         backlink_id = "fndef-%s-%d" % (shahex, idx)
         fwdlink_id = "fnref-%s" % shahex
 
-        if not text in request.footnotes:
+        if not args in request.footnotes:
             showidx = request.footnote_show_ctr
             request.footnote_show_ctr += 1
-            request.footnotes[text] = ([], fwdlink_id, showidx)
-        flist, dummy, showidx = request.footnotes[text]
-        request.footnotes[text] = (flist + [(backlink_id, idx)], fwdlink_id, showidx)
+            request.footnotes[args] = ([], fwdlink_id, showidx)
+        flist, dummy, showidx = request.footnotes[args]
+        request.footnotes[args] = (flist + [(backlink_id, idx)], fwdlink_id, showidx)
 
         # do index -> text mapping in the same dict, that's fine because
-        # text is always a string and idx alwas a number.
-        request.footnotes[idx] = text
+        # args is always a string and idx alwas a number.
+        request.footnotes[idx] = args
 
         return "%s%s%s%s%s" % (
             formatter.sup(1),
