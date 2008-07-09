@@ -7,10 +7,12 @@
 """
 
 import re
+from StringIO import StringIO
 
 from werkzeug.wrappers import Request as WerkzeugRequest
 from werkzeug.wrappers import Response as WerkzeugResponse
 from werkzeug.utils import EnvironHeaders, cached_property
+from werkzeug.utils import create_environ, url_encode
 
 from MoinMoin import config
 
@@ -52,15 +54,42 @@ class Request(WerkzeugRequest, WerkzeugResponse):
         return self.in_stream.read()
     in_data = cached_property(in_data, doc=WerkzeugRequest.data.__doc__)
 
-def create_request(pagename='/'):
-    """
-    Creates an environment for a local request and returns the  already
-    intialized Request-object
-    """
-    from werkzeug.utils import create_environ
-    if not pagename.startswith('/'):
-        pagename = '/' + pagename
-    environ = create_environ(path=pagename)
-    environ['HTTP_USER_AGENT'] = 'CLI/Script'
-    return Request(environ)
+class TestRequest(Request):
+    def __init__(self, path="/", query_string=None, method='GET',
+                 input_stream=None, content_type=None, content_length=0,
+                 form_data=None):
+        self.errors_stream = StringIO()
+        self.output_stream = StringIO()
 
+        if form_data is not None:
+            form_data = url_encode(form_data)
+            content_type = 'application/x-www-form-urlencoded'
+            content_length = len(form_data)
+            input_stream = StringIO(form_data)
+        environ = create_environ(path=path, query_string=query_string,
+                                 method=method, input_stream=input_stream,
+                                 content_type=content_type,
+                                 content_length=content_length,
+                                 errors_stream=self.errors_stream)
+
+        environ['HTTP_USER_AGENT'] = 'MoinMoin/TestRequest'
+        super(TestRequest, self).__init__(environ)
+
+    def __call__(self):
+        def start_response(status, headers, exc_info=None):
+            return self.output_stream.write
+
+        appiter = Request.__call__(self, self.environ, start_response)
+        for s in appiter:
+            self.output_stream.write(s)
+        return self.output_stream.getvalue()
+
+    def output(self):
+        """ Content of the WSGI output stream. """
+        return self.output_stream.getvalue()
+    output = property(output, doc=output.__doc__)
+
+    def errors(self):
+        """ Content of the WSGI error stream. """
+        return self.errors_stream.getvalue()
+    errors = property(errors, doc=errors.__doc__)
