@@ -30,7 +30,7 @@ import os, sys, time, xmlrpclib
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
-from MoinMoin import config, user, wikiutil
+from MoinMoin import auth, config, user, wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.logfile import editlog
@@ -679,12 +679,12 @@ class XmlRpcBase:
             or the password were wrong.
         """
         id_handler = XmlRpcAuthTokenIDHandler()
+        request = self.request
 
-        u = self.request.cfg.session_handler.start(self.request, id_handler)
-        u = self.request.handle_auth(u, username=username,
-                                     password=password, login=True)
+        request.session = request.cfg.session_service.get_session(request)
 
-        self.request.cfg.session_handler.after_auth(self.request, id_handler, u)
+        u = auth.setup_from_session(request, request.session)
+        u = auth.handle_login(request, u, username=username, password=password)
 
         if u and u.valid:
             return id_handler.token
