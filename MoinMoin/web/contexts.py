@@ -21,7 +21,6 @@ from MoinMoin.util.clock import Clock
 from MoinMoin.web.request import Request
 from MoinMoin.web.utils import check_spider, UniqueIDGenerator
 from MoinMoin.web.exceptions import Forbidden, SurgeProtection
-from MoinMoin.web.api import IContext
 
 from MoinMoin import log
 logging = log.getLogger(__name__)
@@ -80,7 +79,6 @@ class Context(object):
     environ and also keeps track of it's changes.
     """
     __slots__ = ['request', 'environ']
-    __implements__ = (IContext, )
 
     def __init__(self, request):
         assert isinstance(request, Request)

@@ -12,7 +12,6 @@ import time
 from werkzeug.utils import dump_cookie
 from werkzeug.contrib.sessions import FilesystemSessionStore, Session
 
-from MoinMoin.web.api import ISessionService
 from MoinMoin import caching
 
 from MoinMoin import log
@@ -23,14 +22,32 @@ class MoinSession(Session):
     is_new = property(lambda s: s.new)
     is_stored = property(lambda s: True)
 
-class FileSessionService(object):
+class SessionService(object):
+    """
+    A session service returns a session object given a request object and
+    provides services like persisting sessions and cleaning up occasionally.
+    """
+    def get_session(self, request):
+        """ Return a session object pertaining to the particular request."""
+        raise NotImplementedError
+
+    def destroy_session(self, request, session):
+        """ Destroy an existing session (make it unusable). """
+        raise NotImplementedError
+
+    def finalize(self, request, session):
+        """
+        Do final modifications to the request and/or session before sending
+        headers and body to the cliebt.
+        """
+        raise NotImplementedError
+
+class FileSessionService(SessionService):
     """
     This sample session service stores session information in a temporary
     directory and identifis the session via a cookie in the request/response
     cycle.
     """
-
-    __implements__ = (ISessionService, )
 
     def __init__(self, cookie_name='MOIN_SESSION'):
         self.store = FilesystemSessionStore(session_class=MoinSession)
