@@ -157,7 +157,7 @@ def encodePassword(pwd, salt=None):
     hash = sha.new(pwd)
     hash.update(salt)
 
-    return '{SSHA}' + base64.b64encode(hash.digest() + salt).rstrip()
+    return '{SSHA}' + base64.encodestring(hash.digest() + salt).rstrip()
 
 
 def normalizeName(name):
