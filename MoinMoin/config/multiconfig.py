@@ -879,7 +879,7 @@ options_no_group_name = {
     # the group 'all' shall match all, while the group 'key' shall match the key only
     # e.g. CategoryFoo -> group 'all' ==  CategoryFoo, group 'key' == Foo
     # moin's code will add ^ / $ at beginning / end when needed
-    ('page_category_regex', ur'(?P<all>Category(?P<key>\S+))',
+    ('page_category_regex', ur'(?P<all>Category(?P<key>(?!Template)\S+))',
      'Pagenames exactly matching this regex are regarded as Wiki categories [Unicode]'),
     ('page_dict_regex', ur'(?P<all>(?P<key>\S+)Dict)',
      'Pagenames exactly matching this regex are regarded as pages containing variable dictionary definitions [Unicode]'),
