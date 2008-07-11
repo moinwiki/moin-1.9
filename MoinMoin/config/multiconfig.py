@@ -567,13 +567,13 @@ also the spelling of the directory name.
                 imp.release_lock()
         except ImportError, err:
             msg = """
-Could not import plugin package "%(path)s/plugin" because of ImportError:
+Could not import plugin package "%(path)s" because of ImportError:
 %(err)s.
 
 Make sure your data directory path is correct, check permissions, and
 that the data/plugin directory has an __init__.py file.
 """ % {
-    'path': self.data_dir,
+    'path': pdir,
     'err': str(err),
 }
             raise error.ConfigurationError(msg)
