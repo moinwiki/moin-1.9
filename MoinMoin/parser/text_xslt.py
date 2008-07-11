@@ -28,7 +28,7 @@ class Parser:
     Dependencies = Dependencies
 
     def __init__(self, raw, request, **kw):
-        self.raw = raw.encode(config.charset)
+        self.raw = raw
         self.request = request
         self.form = request.form
         self._ = request.getText
@@ -87,14 +87,15 @@ class Parser:
                 input_factory = InputSource.InputSourceFactory(resolver=wiki_resolver)
 
                 page_uri = self.base_uri + wikiutil.url_quote(formatter.page.page_name)
-                raw = self.raw.strip()
-
+                # 4Suite needs an utf-8 encoded byte string instead of an unicode object
+                raw = self.raw.strip().encode('utf-8')
                 self.processor = Processor()
                 self.append_stylesheet() # hook, for extending this parser
                 self.processor.run(
                     input_factory.fromString(raw, uri=page_uri),
                     outputStream=out_file)
-                result = out_file.getvalue()
+                # Convert utf-8 encoded byte string into unicode
+                result = out_file.getvalue().decode('utf-8')
                 result = self.parse_result(result) # hook, for extending this parser
 
             except FtException, msg:
