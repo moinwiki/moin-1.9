@@ -996,7 +996,9 @@ class QueryParser:
                 domain = False
                 while len(item) > 1:
                     m = item[0]
-                    if m == M:
+                    if m is None:
+                        raise ValueError("Invalid search prefix")
+                    elif m == M:
                         negate = True
                     elif "title".startswith(m):
                         title_search = True
@@ -1014,6 +1016,8 @@ class QueryParser:
                         mimetype = True
                     elif "domain".startswith(m):
                         domain = True
+                    else:
+                        raise ValueError("Invalid search prefix")
                     item = item[1:]
 
                 text = item[0]
