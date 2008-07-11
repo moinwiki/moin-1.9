@@ -526,35 +526,43 @@ also the spelling of the directory name.
                 raise error.ConfigurationError(msg)
 
     def _loadPluginModule(self):
-        """ import plugin module under configname.plugin
+        """
+        import all plugin modules
 
         To be able to import plugin from arbitrary path, we have to load
         the base package once using imp.load_module. Later, we can use
         standard __import__ call to load plugins in this package.
 
-        Since each wiki has unique plugins, we load the plugin package
-        under the wiki configuration module, named self.siteid.
+        Since each configured plugin path has unique plugins, we load the
+        plugin packages as "moin_plugin_<sha1(path)>.plugin".
         """
-        import imp
+        import imp, sha
 
-        name = self.siteid + '.plugin'
+        plugin_dirs = [self.plugin_dir] + self.plugin_dirs
+        self._plugin_modules = []
+
         try:
             # Lock other threads while we check and import
             imp.acquire_lock()
             try:
-                # If the module is not loaded, try to load it
-                if not name in sys.modules:
-                    # Find module on disk and try to load - slow!
-                    plugin_parent_dir = os.path.abspath(os.path.join(self.plugin_dir, '..'))
-                    fp, path, info = imp.find_module('plugin', [plugin_parent_dir])
-                    try:
-                        # Load the module and set in sys.modules
-                        module = imp.load_module(name, fp, path, info)
-                        sys.modules[self.siteid].plugin = module
-                    finally:
-                        # Make sure fp is closed properly
-                        if fp:
-                            fp.close()
+                for pdir in plugin_dirs:
+                    csum = 'p_%s' % sha.new(pdir).hexdigest()
+                    modname = '%s.%s' % (self.siteid, csum)
+                    # If the module is not loaded, try to load it
+                    if not modname in sys.modules:
+                        # Find module on disk and try to load - slow!
+                        abspath = os.path.abspath(pdir)
+                        parent_dir, pname = os.path.split(abspath)
+                        fp, path, info = imp.find_module(pname, [parent_dir])
+                        try:
+                            # Load the module and set in sys.modules
+                            module = imp.load_module(modname, fp, path, info)
+                            setattr(sys.modules[self.siteid], 'csum', module)
+                            self._plugin_modules.append(modname)
+                        finally:
+                            # Make sure fp is closed properly
+                            if fp:
+                                fp.close()
             finally:
                 imp.release_lock()
         except ImportError, err:
@@ -844,7 +852,8 @@ options_no_group_name = {
     ('data_underlay_dir', './underlay/', "Path to the underlay directory containing distribution system and help pages."),
     ('cache_dir', None, "Directory for caching, by default computed from `data_dir`/cache."),
     ('user_dir', None, "Directory for user storage, by default computed to be `data_dir`/user."),
-    ('plugin_dir', None, "Plugin directory, by default computed to be `data_dir`/user."),
+    ('plugin_dir', None, "Plugin directory, by default computed to be `data_dir`/plugin."),
+    ('plugin_dirs', [], "Additional plugin directories."),
 
     ('docbook_html_dir', r"/usr/share/xml/docbook/stylesheet/nwalsh/html/",
      'Path to the directory with the Docbook to HTML XSLT files (optional, used by the docbook parser). The default value is correct for Debian Etch.'),
