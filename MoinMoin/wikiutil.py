@@ -1175,18 +1175,22 @@ def wikiPlugins(kind, cfg):
     @return: module names
     """
     # Wiki plugins are located in wikiconfig.plugin module
-    modulename = '%s.plugin.%s' % (cfg.siteid, kind)
+    modulename = '%s.plugin' % (cfg.siteid, )
 
     # short-cut if we've loaded the list already
     # (or already failed to load it)
     if kind in cfg._site_plugin_lists:
         return cfg._site_plugin_lists[kind]
 
+    import sys
     try:
-        plugins = pysupport.importName(modulename, "modules")
+        module = pysupport.importName(modulename, kind)
+        packagepath = os.path.dirname(module.__file__)
+        plugins = pysupport.getPluginModules(packagepath)
+
         cfg._site_plugin_lists[kind] = plugins
         return plugins
-    except ImportError:
+    except AttributeError:
         cfg._site_plugin_lists[kind] = []
         return []
 
