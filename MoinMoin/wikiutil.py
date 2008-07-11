@@ -1767,7 +1767,7 @@ class UnitArgument(IEFArgument):
         """
         IEFArgument.__init__(self)
         self._units = list(units)
-        self._units.sort(cmp=lambda x, y: len(y) - len(x))
+        self._units.sort(lambda x, y: len(y) - len(x))
         self._type = argtype
         self._defaultunit = defaultunit
         assert defaultunit is None or defaultunit in units
