@@ -46,12 +46,12 @@ class TOCFormatter(FormatterBase):
 
     def startContent(self, *args, **kw):
         res = FormatterBase.startContent(self, *args, **kw)
-        self.collected_headings.append([1, self.request.include_id, None])
+        self.collected_headings.append([1, self.request.uid_generator.include_id, None])
         return res
 
     def endContent(self):
         res = FormatterBase.endContent(self)
-        self.collected_headings.append([0, self.request.include_id, None])
+        self.collected_headings.append([0, self.request.uid_generator.include_id, None])
         return res
 
     def heading(self, on, depth, **kw):
