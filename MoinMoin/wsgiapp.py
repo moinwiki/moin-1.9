@@ -80,8 +80,6 @@ def run(request):
     _ = request.getText
     request.clock.start('run')
 
-    request.initTheme()
-
     action_name = request.action
     if request.cfg.log_timing:
         request.timing_log(True, action_name)
