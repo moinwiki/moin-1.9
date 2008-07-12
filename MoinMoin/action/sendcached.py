@@ -10,6 +10,7 @@
     IMPORTANT: use some non-guessable key derived from your source content.
 
     TODO:
+    * add secret to wikiconfig
     * add error handling
     * maybe use page local caching, not global:
       + smaller directories
@@ -22,14 +23,18 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+import hmac, sha
+
 from MoinMoin import log
 logging = log.getLogger(__name__)
-
-from MoinMoin import config, caching
 
 # keep both imports below as they are, order is important:
 from MoinMoin import wikiutil
 import mimetypes
+
+from MoinMoin import config, caching
+from MoinMoin.util import filesys
+from MoinMoin.action import AttachFile
 
 action_name = 'sendcached'
 
@@ -37,6 +42,38 @@ action_name = 'sendcached'
 sendcached_arena = action_name
 sendcached_scope = 'wiki'
 do_locking = False
+
+def cache_key(request, wikiname=None, itemname=None, attachname=None, content=None, secret=None):
+    """
+    Calculate a (hard-to-guess) cache key.
+
+    If content is supplied, we will calculate and return a hMAC of the content.
+
+    If wikiname, itemname, attachname is given, we don't touch the content (nor do
+    we read it ourselves from the attachment file), but we just calculate a key
+    from the given metadata values and some metadata we get from the filesystem.
+
+    @param request: the request object
+    @param wikiname: the name of the wiki (if not given, will be read from cfg)
+    @param itemname: the name of the page
+    @param attachname: the filename of the attachment
+    @param content: content data as unicode object (e.g. for page content or
+                    parser section content)
+    """
+    secret = secret or 'nobodyexpectedsuchasecret'
+    if content:
+        hmac_data = content
+    elif itemname is not None and attachname is not None:
+        wikiname = wikiname or request.cfg.interwikiname or request.cfg.siteid
+        fuid = filesys.fuid(AttachFile.getFilename(request, itemname, attachname))
+        hmac_data = u''.join([wikiname, itemname, attachname, repr(fuid)])
+    else:
+        raise AssertionError('cache_key called with unsupported parameters')
+
+    hmac_data = hmac_data.encode('utf-8')
+    key = hmac.new(secret, hmac_data, sha).hexdigest()
+    return key
+
 
 def put_cache(request, key, data,
               filename=None,
