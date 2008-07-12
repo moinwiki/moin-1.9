@@ -9,13 +9,51 @@
 import os, StringIO
 
 from MoinMoin import caching
-from MoinMoin.action import sendcached
+from MoinMoin.action import AttachFile, sendcached
 
 from MoinMoin._tests import become_trusted, create_page, nuke_page
 
 class TestSendCached:
     """ testing action sendcached """
     pagename = u"AutoCreatedSillyPageToTestAttachments"
+
+    def test_cache_key_content(self):
+        request = self.request
+        result1 = sendcached.cache_key(request, content='foo', secret='bar')
+        result2 = sendcached.cache_key(request, content='foo', secret='baz')
+        assert result1  # not empty
+        assert result1 != result2  # different for different secret
+        result3 = sendcached.cache_key(request, content='foofoo', secret='baz')
+        assert result3 != result2  # different for different content
+        result4 = sendcached.cache_key(request, content='foo'*1000, secret='baz')
+        assert len(result4) == len(result3)  # same length of key for different input lengths
+
+    def test_cache_key_attachment(self):
+        request = self.request
+        pagename = self.pagename
+        attachname = 'foo.txt'
+
+        become_trusted(request)
+        create_page(request, pagename, u"Foo!")
+
+        AttachFile.add_attachment(request, pagename, attachname, "Test content1", True)
+
+        result1 = sendcached.cache_key(request, itemname=pagename, attachname=attachname, secret='bar')
+        result2 = sendcached.cache_key(request, itemname=pagename, attachname=attachname, secret='baz')
+        assert result1  # not empty
+        assert result1 != result2  # different for different secret
+
+        # test below does not work, because mtime is often same, inode can be same due to how add_attachment
+        # works, file size is same, attachment name is same, wikiname/pagename is same.
+        # In practice, this should rather rarely cause problems:
+        #AttachFile.add_attachment(request, pagename, attachname, "Test content2", True)
+        #result3 = sendcached.cache_key(request, itemname=pagename, attachname=attachname, secret='baz')
+        #assert result3 != result2  # different for different content
+
+        AttachFile.add_attachment(request, pagename, attachname, "Test content33333", True)
+        result4 = sendcached.cache_key(request, itemname=pagename, attachname=attachname, secret='baz')
+        assert len(result4) == len(result2)  # same length of key for different input lengths
+        nuke_page(request, pagename)
 
     def test_put_cache_minimal(self):
         """Test if put_cache() works"""
