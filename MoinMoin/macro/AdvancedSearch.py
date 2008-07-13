@@ -38,14 +38,18 @@ def getCategories(request):
     return pages
 
 
-def form_get(request, name, default=''):
+def form_get(request, name, default='', escaped=False):
     """ Fetches a form field
 
     @param request: current request
     @param name: name of the field
-    @keyword default: value if not present (default: '')
+    @param default: value if not present (default: '')
+    @param escaped: if True, escape value so it can be used for html generation (default: False)
     """
-    return request.form.get(name, [default])[0]
+    value = request.form.get(name, [default])[0]
+    if escaped:
+        value = wikiutil.escape(value, quote=True)
+    return value
 
 
 def advanced_ui(macro):
@@ -77,20 +81,20 @@ def advanced_ui(macro):
         ]) for txt, input_field in (
             (_('containing all the following terms'),
                 '<input type="text" name="and_terms" size="30" value="%s">'
-                % (form_get(request, 'and_terms') or form_get(request, 'value'))),
+                % (form_get(request, 'and_terms', escaped=True) or form_get(request, 'value', escaped=True))),
             (_('containing one or more of the following terms'),
                 '<input type="text" name="or_terms" size="30" value="%s">'
-                % form_get(request, 'or_terms')),
+                % form_get(request, 'or_terms', escaped=True)),
             (_('not containing the following terms'),
                 '<input type="text" name="not_terms" size="30" value="%s">'
-                % form_get(request, 'not_terms')),
+                % form_get(request, 'not_terms', escaped=True)),
             #('containing only one of the following terms',
             #    '<input type="text" name="xor_terms" size="30" value="%s">'
-            #    % form_get(request, 'xor_terms')),
+            #    % form_get(request, 'xor_terms', escaped=True)),
             # TODO: dropdown-box?
             (_('last modified since (e.g. last 2 weeks)'),
                 '<input type="text" name="mtime" size="30" value="%s">'
-                % form_get(request, 'mtime')),
+                % form_get(request, 'mtime', escaped=True)),
         )])
     ])
 
@@ -136,22 +140,23 @@ def advanced_ui(macro):
                 (_('Language'), unicode(lang_select), ''),
                 (_('File Type'), unicode(mt_select), ''),
                 ('', html.INPUT(type='checkbox', name='titlesearch',
-                    value='1', checked=form_get(request, 'titlesearch'),
+                    value='1', checked=form_get(request, 'titlesearch', escaped=True),
                     id='titlesearch'),
                     '<label for="titlesearch">%s</label>' % _('Search only in titles')),
                 ('', html.INPUT(type='checkbox', name='case', value='1',
-                    checked=form_get(request, 'case'), id='case'),
+                    checked=form_get(request, 'case', escaped=True),
+                    id='case'),
                     '<label for="case">%s</label>' % _('Case-sensitive search')),
                 ('', html.INPUT(type='checkbox', name='excludeunderlay',
-                    value='1', checked=form_get(request, 'excludeunderlay'),
+                    value='1', checked=form_get(request, 'excludeunderlay', escaped=True),
                     id='excludeunderlay'),
                     '<label for="excludeunderlay">%s</label>' % _('Exclude underlay')),
                 ('', html.INPUT(type='checkbox', name='nosystemitems',
-                    value='1', checked=form_get(request, 'nosystemitems'),
+                    value='1', checked=form_get(request, 'nosystemitems', escaped=True),
                     id='nosystempages'),
                     '<label for="nosystempages">%s</label>' % _('No system items')),
                 ('', html.INPUT(type='checkbox', name='historysearch',
-                    value='1', checked=form_get(request, 'historysearch'),
+                    value='1', checked=form_get(request, 'historysearch', escaped=True),
                     disabled=(not request.cfg.xapian_search or
                         not request.cfg.xapian_index_history),
                     id='historysearch'),
