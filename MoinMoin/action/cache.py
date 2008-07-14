@@ -55,6 +55,11 @@ def key(request, wikiname=None, itemname=None, attachname=None, content=None, se
     we read it ourselves from the attachment file), but we just calculate a key
     from the given metadata values and some metadata we get from the filesystem.
 
+    Hint: if you need multiple cache objects for the same source content (e.g.
+          thumbnails of different sizes for the same image), calculate the key
+          only once and then add some different prefixes to it to get the final
+          cache keys.
+
     @param request: the request object
     @param wikiname: the name of the wiki (if not given, will be read from cfg)
     @param itemname: the name of the page
@@ -137,10 +142,7 @@ def put(request, key, data,
         # TODO: fix the encoding here, plain 8 bit is not allowed according to the RFCs
         # There is no solution that is compatible to IE except stripping non-ascii chars
         filename = filename.encode(config.charset)
-
-        headers.append(
-               'Content-Disposition: %s; filename="%s"' % (content_disposition, filename)
-        )
+        headers.append('Content-Disposition: %s; filename="%s"' % (content_disposition, filename))
 
     meta_cache = caching.CacheEntry(request, cache_arena, key+'.meta', cache_scope, do_locking=do_locking, use_pickle=True)
     meta_cache.update((last_modified, headers))
