@@ -40,6 +40,32 @@ Version 1.8.0current:
   New Features:
     * per-parser quickhelp, 'quickhelp' class variable of parser class
 
+Version 1.7.current:
+  Fixes:
+    * Security fix: XSS fix for advanced search form
+    * Avoid creation of new pagedirs with empty edit-log files by just
+      accessing a non-existant page. If you used 1.7 before, you likely have
+      quite some trash pagedirs now and you can clean them up by using:
+      moin --config-dir=... --wiki-url=... maint cleanpage
+      This will output some shell script (please review it before running!)
+      that can be used to move trash pages into some trash/ directory and also
+      moves deleted pages into some deleted/ directory. Maybe keep a copy of
+      those directories for a while just for the case.
+    * Standalone server: fix --pidfile option
+    * Search:
+      * Xapian indexing: Removed crappy "hostname" tokenization.
+        Fixes MoinMoinBugs/1.7 XapianNotWorkingWithLeadingNumbersInTitle.
+      * Make query parser reject more invalid input.
+      * If query parsing raises a BracketError, at least tell what the problem
+        is (and not just raise empty  ValueError).
+     * Category search: ignore traling whitespace after ----
+    * Argument parser:
+      * Fixed sort() usage in UnitArgument to be Python 2.3 compatible.
+      * Fixed MoinMoinBugs/TypeErrorInWikiutils.
+    * TableOfContents macro: skip outer-most <ol> levels when page isn't using
+      the biggest headings
+    * OpenID RP: make it compatible to python-openid 2.2.x
+    * PackagePages.collectpackage: removed encoding from file name of zipfile
 
 Version 1.7.0:
   Note: This is a reduced CHANGES, ommitting details from rc/beta test and
