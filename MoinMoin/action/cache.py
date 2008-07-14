@@ -3,9 +3,9 @@
     MoinMoin - Send a raw object from the caching system
 
     This can be used e.g. for all image generating extensions:
-    E.g. a thumbnail generating extension just uses sendcached.put_cache to
-    write the thumbnails into the cache and emits <img src="sendcached_url">
-    to display them. sendcached_url is returned by put_cache or get_url.
+    E.g. a thumbnail generating extension just uses cache.put_cache to
+    write the thumbnails into the cache and emits <img src="cache_url">
+    to display them. cache_url is returned by put_cache or get_url.
 
     IMPORTANT: use some non-guessable key derived from your source content.
 
@@ -36,11 +36,11 @@ from MoinMoin import config, caching
 from MoinMoin.util import filesys
 from MoinMoin.action import AttachFile
 
-action_name = 'sendcached'
+action_name = 'cache'
 
 # Do NOT get this directly from request.form or user would be able to read any cache!
-sendcached_arena = action_name
-sendcached_scope = 'wiki'
+cache_arena = action_name
+cache_scope = 'wiki'
 do_locking = False
 
 def cache_key(request, wikiname=None, itemname=None, attachname=None, content=None, secret=None):
@@ -83,10 +83,10 @@ def put_cache(request, key, data,
               last_modified=None,
               bufsize=8192):
     """
-    Cache an object to send with sendcached action later.
+    Cache an object to send with cache action later.
 
     @param request: the request object
-    @param key: non-guessable key into sendcached cache (str)
+    @param key: non-guessable key into cache (str)
     @param data: content data (str or open file-like obj)
     @param filename: filename for content-disposition header and for autodetecting
                      content_type (unicode, default: None)
@@ -112,8 +112,7 @@ def put_cache(request, key, data,
     if content_type is None:
         content_type = 'application/octet-stream'
 
-    data_cache = caching.CacheEntry(request, sendcached_arena, key+'.data',
-                                    sendcached_scope, do_locking=do_locking)
+    data_cache = caching.CacheEntry(request, cache_arena, key+'.data', cache_scope, do_locking=do_locking)
     data_cache_fname = data_cache._filename()
 
     if hasattr(data, 'read'):
@@ -141,8 +140,7 @@ def put_cache(request, key, data,
                'Content-Disposition: %s; filename="%s"' % (content_disposition, filename)
         )
 
-    meta_cache = caching.CacheEntry(request, sendcached_arena, key+'.meta',
-                                    sendcached_scope, do_locking=do_locking, use_pickle=True)
+    meta_cache = caching.CacheEntry(request, cache_arena, key+'.meta', cache_scope, do_locking=do_locking, use_pickle=True)
     meta_cache.update((last_modified, headers))
 
     return get_url(request, key)
@@ -153,19 +151,17 @@ def is_cached(request, key, strict=False):
     Check if we have already cached an object for this key.
 
     @param request: the request object
-    @param key: non-guessable key into sendcached cache (str)
+    @param key: non-guessable key into cache (str)
     @param strict: if True, also check the data cache, not only meta (bool, default: False)
     @return: is object cached? (bool)
     """
     if strict:
-        data_cache = caching.CacheEntry(request, sendcached_arena, key+'.data',
-                                        sendcached_scope, do_locking=do_locking)
+        data_cache = caching.CacheEntry(request, cache_arena, key+'.data', cache_scope, do_locking=do_locking)
         data_cached = data_cache.exists()
     else:
         data_cached = True  # we assume data will be there if meta is there
 
-    meta_cache = caching.CacheEntry(request, sendcached_arena, key+'.meta',
-                                    sendcached_scope, do_locking=do_locking, use_pickle=True)
+    meta_cache = caching.CacheEntry(request, cache_arena, key+'.meta', cache_scope, do_locking=do_locking, use_pickle=True)
     meta_cached = meta_cache.exists()
 
     return meta_cached and data_cached
@@ -180,16 +176,14 @@ def get_url(request, key):
 
 def get_cache_headers(request, key):
     """ get last_modified and headers cached for key """
-    meta_cache = caching.CacheEntry(request, sendcached_arena, key+'.meta',
-                                    sendcached_scope, do_locking=do_locking, use_pickle=True)
+    meta_cache = caching.CacheEntry(request, cache_arena, key+'.meta', cache_scope, do_locking=do_locking, use_pickle=True)
     last_modified, headers = meta_cache.content()
     return last_modified, headers
 
 
 def get_cache_datafile(request, key):
     """ get an open data file for the data cached for key """
-    data_cache = caching.CacheEntry(request, sendcached_arena, key+'.data',
-                                    sendcached_scope, do_locking=do_locking)
+    data_cache = caching.CacheEntry(request, cache_arena, key+'.data', cache_scope, do_locking=do_locking)
     data_file = open(data_cache._filename(), 'rb')
     return data_file
 
