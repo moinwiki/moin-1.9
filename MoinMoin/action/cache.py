@@ -1,13 +1,15 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - Send a raw object from the caching system
+    MoinMoin - Send a raw object from the caching system (and offer utility
+    functions to put data into cache, calculate cache key, etc.).
 
     This can be used e.g. for all image generating extensions:
-    E.g. a thumbnail generating extension just uses cache.put_cache to
+    E.g. a thumbnail generating extension just uses cache.put() to
     write the thumbnails into the cache and emits <img src="cache_url">
-    to display them. cache_url is returned by put_cache or get_url.
+    to display them. cache_url is returned by put() or url().
 
-    IMPORTANT: use some non-guessable key derived from your source content.
+    IMPORTANT: use some non-guessable key derived from your source content,
+               use cache.key() if you don't have something better.
 
     TODO:
     * add secret to wikiconfig
@@ -39,11 +41,11 @@ from MoinMoin.action import AttachFile
 action_name = 'cache'
 
 # Do NOT get this directly from request.form or user would be able to read any cache!
-cache_arena = action_name
+cache_arena = 'sendcache'
 cache_scope = 'wiki'
 do_locking = False
 
-def cache_key(request, wikiname=None, itemname=None, attachname=None, content=None, secret=None):
+def key(request, wikiname=None, itemname=None, attachname=None, content=None, secret=None):
     """
     Calculate a (hard-to-guess) cache key.
 
@@ -75,15 +77,15 @@ def cache_key(request, wikiname=None, itemname=None, attachname=None, content=No
     return key
 
 
-def put_cache(request, key, data,
-              filename=None,
-              content_type=None,
-              content_disposition=None,
-              content_length=None,
-              last_modified=None,
-              bufsize=8192):
+def put(request, key, data,
+        filename=None,
+        content_type=None,
+        content_disposition=None,
+        content_length=None,
+        last_modified=None,
+        bufsize=8192):
     """
-    Cache an object to send with cache action later.
+    Put an object into the cache to send it with cache action later.
 
     @param request: the request object
     @param key: non-guessable key into cache (str)
@@ -143,12 +145,12 @@ def put_cache(request, key, data,
     meta_cache = caching.CacheEntry(request, cache_arena, key+'.meta', cache_scope, do_locking=do_locking, use_pickle=True)
     meta_cache.update((last_modified, headers))
 
-    return get_url(request, key)
+    return url(request, key, do='get')
 
 
-def is_cached(request, key, strict=False):
+def exists(request, key, strict=False):
     """
-    Check if we have already cached an object for this key.
+    Check if a cached object for this key exists.
 
     @param request: the request object
     @param key: non-guessable key into cache (str)
@@ -167,38 +169,54 @@ def is_cached(request, key, strict=False):
     return meta_cached and data_cached
 
 
-def get_url(request, key):
-    """ get URL for the object cached for key """
+def url(request, key, do='get'):
+    """ return URL for the object cached for key """
     return "%s/?%s" % (
         request.getScriptname(),
-        wikiutil.makeQueryString(dict(action=action_name, key=key), want_unicode=False))
+        wikiutil.makeQueryString(dict(action=action_name, do=do, key=key), want_unicode=False))
 
 
-def get_cache_headers(request, key):
+def _get_headers(request, key):
     """ get last_modified and headers cached for key """
     meta_cache = caching.CacheEntry(request, cache_arena, key+'.meta', cache_scope, do_locking=do_locking, use_pickle=True)
     last_modified, headers = meta_cache.content()
     return last_modified, headers
 
 
-def get_cache_datafile(request, key):
+def _get_datafile(request, key):
     """ get an open data file for the data cached for key """
     data_cache = caching.CacheEntry(request, cache_arena, key+'.data', cache_scope, do_locking=do_locking)
     data_file = open(data_cache._filename(), 'rb')
     return data_file
 
 
-def send_cached(request, key):
+def _do_get(request, key):
     """ send a complete http response with headers/data cached for key """
-    last_modified, headers = get_cache_headers(request, key)
+    last_modified, headers = _get_headers(request, key)
     if request.if_modified_since == last_modified:
         request.emit_http_headers(["Status: 304 Not modified"])
     else:
         request.emit_http_headers(headers)
-        request.send_file(get_cache_datafile(request, key))
+        request.send_file(_get_datafile(request, key))
 
+
+def _do_del(request, key):
+    """ delete headers/data cache for key """
+    meta_cache = caching.CacheEntry(request, cache_arena, key+'.meta', cache_scope, do_locking=do_locking, use_pickle=True)
+    meta_cache.remove()
+    data_cache = caching.CacheEntry(request, cache_arena, key+'.data', cache_scope, do_locking=do_locking)
+    data_cache.remove()
+    request.emit_http_headers(["Status: 200 OK"])
+
+
+def _do(request, do, key):
+    if do == 'get':
+        _do_get(request, key)
+    elif do == 'del':
+        _do_del(request, key)
 
 def execute(pagename, request):
+    do = request.form.get('do', [None])[0]
     key = request.form.get('key', [None])[0]
-    send_cached(request, key)
+    _do(request, do, key)
 
