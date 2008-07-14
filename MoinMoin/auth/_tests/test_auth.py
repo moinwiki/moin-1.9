@@ -210,7 +210,7 @@ class TestAuth:
         from MoinMoin.user import User
         self.config = self.TestConfig(auth=[MoinAuth()])
         username = u'MoinAuthTestUser'
-        password = u'secret'
+        password = u'ßecretß'
         User(self.request, name=username, password=password).save() # create user
         trail_expected = []
         first = True
