@@ -25,6 +25,7 @@ import sys
 
 import py
 
+from werkzeug.test import Client
 
 rootdir = py.magic.autopath().dirpath()
 moindir = rootdir.join("..")
@@ -37,7 +38,7 @@ sys.path.insert(0, str(moindir.join("tests")))
 
 from MoinMoin.support.python_compatibility import set
 from MoinMoin.web.request import TestRequest
-from MoinMoin.wsgiapp import init as request_init
+from MoinMoin.wsgiapp import application, init
 
 coverage_modules = set()
 
@@ -63,7 +64,6 @@ try:
         coverage.erase()
         coverage.start()
 
-
     py.test.config.addoptions('MoinMoin options', py.test.config.Option('-C',
         '--coverage', action='callback', callback=callback,
         help='Output information about code coverage (slow!)'))
@@ -77,7 +77,7 @@ def init_test_request(static_state=[False]):
         maketestwiki.run(True)
         static_state[0] = True
     request = TestRequest()
-    request = request_init(request)
+    request = init(request)
     return request
 
 class TestConfig:
@@ -177,6 +177,7 @@ class MoinClassCollector(py.test.collect.Class):
         cls = self.obj
         cls.request = self.parent.request
         cls.TestConfig = TestConfig(cls.request)
+        cls.client = Client(application)
         super(MoinClassCollector, self).setup()
 
 
