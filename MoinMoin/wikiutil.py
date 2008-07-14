@@ -1149,11 +1149,11 @@ def importNameFromPlugin(moduleName, name):
         except AttributeError:
             raise PluginAttributeError
     else:
-       # module now has the toplevel module of <moduleName> (see __import__ docs!)
-       components = moduleName.split('.')
-       for comp in components[1:]:
-           module = getattr(module, comp)
-       return module
+        # module now has the toplevel module of <moduleName> (see __import__ docs!)
+        components = moduleName.split('.')
+        for comp in components[1:]:
+            module = getattr(module, comp)
+        return module
 
 
 def builtinPlugins(kind):
