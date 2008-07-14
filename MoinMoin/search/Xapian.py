@@ -103,16 +103,21 @@ class WikiAnalyzer:
 
     def raw_tokenize_word(self, word, pos):
         """ try to further tokenize some word starting at pos """
+        yield (word, pos)
         if self.wikiword_re.match(word):
-            yield (word, pos)
             # if it is a CamelCaseWord, we additionally try to tokenize Camel, Case and Word
             for m in re.finditer(self.singleword_re, word):
-                for w, p in self.raw_tokenize_word(m.group(), pos + m.start()):
+                mw, mp = m.group(), pos + m.start()
+                for w, p in self.raw_tokenize_word(mw, mp):
                     yield (w, p)
         else:
             # if we have Foo42, yield Foo and 42
             for m in re.finditer(self.alpha_num_re, word):
-                yield (m.group(), pos + m.start())
+                mw, mp = m.group(), pos + m.start()
+                if mw != word:
+                    for w, p in self.raw_tokenize_word(mw, mp):
+                        yield (w, p)
+
 
     def raw_tokenize(self, value):
         """ Yield a stream of words from a string.
