@@ -38,10 +38,10 @@ from MoinMoin import config, caching
 from MoinMoin.util import filesys
 from MoinMoin.action import AttachFile
 
-action_name = 'cache'
+action_name = __name__.split('.')[-1]
 
 # Do NOT get this directly from request.form or user would be able to read any cache!
-cache_arena = 'sendcache'
+cache_arena = 'sendcache'  # just using action_name is maybe rather confusing
 cache_scope = 'wiki'
 do_locking = False
 
