@@ -169,6 +169,14 @@ def exists(request, key, strict=False):
     return meta_cached and data_cached
 
 
+def remove(request, key):
+    """ delete headers/data cache for key """
+    meta_cache = caching.CacheEntry(request, cache_arena, key+'.meta', cache_scope, do_locking=do_locking, use_pickle=True)
+    meta_cache.remove()
+    data_cache = caching.CacheEntry(request, cache_arena, key+'.data', cache_scope, do_locking=do_locking)
+    data_cache.remove()
+
+
 def url(request, key, do='get'):
     """ return URL for the object cached for key """
     return "%s/?%s" % (
@@ -200,20 +208,17 @@ def _do_get(request, key):
         request.send_file(_get_datafile(request, key))
 
 
-def _do_del(request, key):
+def _do_remove(request, key):
     """ delete headers/data cache for key """
-    meta_cache = caching.CacheEntry(request, cache_arena, key+'.meta', cache_scope, do_locking=do_locking, use_pickle=True)
-    meta_cache.remove()
-    data_cache = caching.CacheEntry(request, cache_arena, key+'.data', cache_scope, do_locking=do_locking)
-    data_cache.remove()
+    remove(request, key)
     request.emit_http_headers(["Status: 200 OK"])
 
 
 def _do(request, do, key):
     if do == 'get':
         _do_get(request, key)
-    elif do == 'del':
-        _do_del(request, key)
+    elif do == 'remove':
+        _do_remove(request, key)
 
 def execute(pagename, request):
     do = request.form.get('do', [None])[0]
