@@ -13,15 +13,15 @@
 
 import py
 import sys, traceback
+
 import MoinMoin.parser
 from MoinMoin.Page import Page
 
 class TestParserOutput(object):
-    """Parser has to generate unicode output.
-    """
+    """ Parser has to generate unicode output. """
     def test_ParserOutput(self):
-        """The method aims generally at MoinMoin.parser.text_xslt
-        This parser should encode Unicode input to UTF8 as late as possible
+        """ This method aims generally at MoinMoin.parser.text_xslt -
+            this parser should encode Unicode input to UTF8 as late as possible.
         """
         request = self.request
         assert not request.cfg.allow_xslt, u'allow_xslt should be disabled'
@@ -36,8 +36,7 @@ class TestParserOutput(object):
             u'text_xslt': u'<?xml version="1.0" encoding="ISO-8859-1"?><!-- %s -->',
         }
 
-        # Blacklist for parsers that don't work
-        # This list should be empty !
+        # Blacklist for parsers that don't work - this list should be empty !
         parser_blacklist = []
 
         # Create a page if it doesn't exist already.
@@ -67,3 +66,4 @@ class TestParserOutput(object):
                 assert isinstance(r, unicode), u'MoinMoin.parser.%s does not write UNICODE data but %s' % (parsername, type(r), )
 
 coverage_modules = ['MoinMoin.parser']
+
