@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin.web.request import TestRequest
+from MoinMoin.web.request import TestRequest, evaluate_request
 from MoinMoin import wsgiapp
 
 class TestAuth:
@@ -28,8 +28,6 @@ class TestAuth:
         pass
 
     def run_request(self, **params):
-        if not 'REMOTE_ADDR' in params:
-            params['REMOTE_ADDR'] = '10.10.10.10'
         request = TestRequest(**params)
         request = wsgiapp.init(request)
         return wsgiapp.run(request)
@@ -41,10 +39,11 @@ class TestAuth:
         # anon user?
         assert not request.user.valid
 
+        appiter, status, headers = evaluate_request(request.request)
         # check if the request resulted in normal status, result headers and content
-        assert request.status == '200 OK'
+        assert status[:3] == '200'
         has_ct = has_v = has_cc = False
-        for k, v in request.headers:
+        for k, v in headers:
             if k == 'Content-Type':
                 assert v.startswith('text/html')
                 has_ct = True
@@ -61,7 +60,7 @@ class TestAuth:
         assert has_v
         # XXX BROKEN?:
         #assert has_cc # cache anon user's content
-        assert '</html>' in request.output()
+        assert '</html>' in ''.join(appiter)
 
     def testAnonSession(self):
         """ run some requests, no auth, check if anon sessions work """
@@ -70,8 +69,9 @@ class TestAuth:
         trail_expected = []
         first = True
         for pagename in self.PAGES:
+            environ_overrides = { 'HTTP_COOKIE': cookie }
             request = self.run_request(path='/%s' % pagename,
-                                       HTTP_COOKIE=cookie)
+                                       environ_overrides=environ_overrides)
 
             # anon user?
             assert not request.user.valid
@@ -79,10 +79,11 @@ class TestAuth:
             # Do we have a session?
             assert request.session is not None
 
+            appiter, status, headers = evaluate_request(request.request)
             # check if the request resulted in normal status, result headers and content
-            assert request.status == '200 OK'
+            assert status[:3] == '200'
             has_ct = has_v = has_cc = False
-            for k, v in request.headers:
+            for k, v in headers:
                 if k == 'Content-Type':
                     assert v.startswith('text/html')
                     has_ct = True
@@ -100,7 +101,7 @@ class TestAuth:
             assert has_v
             # XX BROKEN
             #assert not has_cc # do not cache anon user's (with session!) content
-            assert '</html>' in request.output()
+            assert '</html>' in ''.join(appiter)
 
             # The trail is only ever saved on the second page display
             # because otherwise anonymous sessions would be created
@@ -131,9 +132,10 @@ class TestAuth:
         trail_expected = []
         first = True
         for pagename in self.PAGES:
+            environ_overrides = { 'HTTP_COOKIE': cookie,
+                                  'HTTP_AUTHORIZATION': auth_header }
             request = self.run_request(path='/%s' % pagename,
-                                       HTTP_COOKIE=cookie,
-                                       HTTP_AUTHORIZATION=auth_header)
+                                       environ_overrides=environ_overrides)
 
             # Login worked?
             assert request.user.valid
@@ -142,8 +144,9 @@ class TestAuth:
             # Do we have a session?
             assert request.session is not None
 
+            appiter, status, headers = evaluate_request(request.request)
             # check if the request resulted in normal status, result headers and content
-            assert request.status == '200 OK'
+            assert status[:3] == '200'
             has_ct = has_v = has_cc = False
             for k, v in request.headers:
                 if k == 'Content-Type':
@@ -162,7 +165,7 @@ class TestAuth:
             assert has_ct
             assert has_v
             assert has_cc # do not cache logged-in user's content
-            assert '</html>' in request.output()
+            assert '</html>' in ''.join(appiter)
 
             # The trail is only ever saved on the second page display
             # because otherwise anonymous sessions would be created
@@ -201,8 +204,9 @@ class TestAuth:
                                            query_string='action=login',
                                            method='POST', form_data=formdata)
             else: # not first page, use session cookie
+                environ_overrides = { 'HTTP_COOKIE': cookie }
                 request = self.run_request(path='/%s' % pagename,
-                                           HTTP_COOKIE=cookie)
+                                           environ_overrides=environ_overrides)
 
             # Login worked?
             assert request.user.valid
@@ -211,8 +215,9 @@ class TestAuth:
             # Do we have a session?
             assert request.session is not None
 
+            appiter, status, headers = evaluate_request(request.request)
             # check if the request resulted in normal status, result headers and content
-            assert request.status == '200 OK'
+            assert status[:3] == '200'
             has_ct = has_v = has_cc = False
             for k, v in request.headers:
                 if k == 'Content-Type':
@@ -231,7 +236,7 @@ class TestAuth:
             assert has_ct
             assert has_v
             assert has_cc # do not cache logged-in user's content
-            assert '</html>' in request.output()
+            assert '</html>' in ''.join(appiter)
 
             # The trail is only ever saved on the second page display
             # because otherwise anonymous sessions would be created

@@ -369,9 +369,6 @@ class RenderContext(Context, RedirectMixin, ConfigMixin, UserMixin,
                             "consider changing this soon")
         self.request.stream.writelines(data)
 
-    def output(self):
-        return self.request()
-
 # TODO: extend xmlrpc context
 class XMLRPCContext(HTTPContext):
     """ Context to act during a XMLRPC request. """

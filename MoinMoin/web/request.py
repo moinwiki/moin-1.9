@@ -62,11 +62,13 @@ class Request(WerkzeugRequest, WerkzeugResponse):
     in_data = cached_property(in_data, doc=WerkzeugRequest.data.__doc__)
 
 class TestRequest(Request):
+    """
+    Simple subclass of Request to initialize an environment for testing.
+    """
     def __init__(self, path="/", query_string=None, method='GET',
-                 input_stream=None, content_type=None, content_length=0,
-                 form_data=None, **env):
-        self.errors_stream = StringIO()
-        self.output_stream = StringIO()
+                 content_type=None, content_length=0, form_data=None,
+                 environ_overrides=None):
+        input_stream = None
 
         if form_data is not None:
             form_data = url_encode(form_data)
@@ -76,30 +78,29 @@ class TestRequest(Request):
         environ = create_environ(path=path, query_string=query_string,
                                  method=method, input_stream=input_stream,
                                  content_type=content_type,
-                                 content_length=content_length,
-                                 errors_stream=self.errors_stream)
-
-        for k, v in env.items():
-            environ[k] = v
+                                 content_length=content_length)
 
         environ['HTTP_USER_AGENT'] = 'MoinMoin/TestRequest'
+        environ['REMOTE_ADDR'] = '10.10.10.10'
+
+        if environ_overrides:
+            environ.update(environ_overrides)
+
         super(TestRequest, self).__init__(environ)
 
-    def __call__(self):
-        def start_response(status, headers, exc_info=None):
-            return self.output_stream.write
+def evaluate_request(request):
+    """ Evaluate a request and returns a tuple of application iterator,
+    status code and list of headers.
+    """
+    out = []
+    res = []
+    def start_response(status, headers, exc_info=None):
+        res.append(status)
+        res.append(headers)
+        return out.append
+    res.insert(0, request(request.environ, start_response))
 
-        appiter = Request.__call__(self, self.environ, start_response)
-        for s in appiter:
-            self.output_stream.write(s)
-        return self.output_stream.getvalue()
-
-    def output(self):
-        """ Content of the WSGI output stream. """
-        return self.output_stream.getvalue()
-    output = property(output, doc=output.__doc__)
-
-    def errors(self):
-        """ Content of the WSGI error stream. """
-        return self.errors_stream.getvalue()
-    errors = property(errors, doc=errors.__doc__)
+    # any output via (WSGI-deprecated) write-callable?
+    if out:
+        res[0] = out
+    return tuple(res)
