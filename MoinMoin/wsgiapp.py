@@ -154,7 +154,8 @@ def run(request):
                         'action_name': wikiutil.escape(action_name), }
 
             # Disallow non available actions
-            elif action_name[0].isupper() and not action_name in request.getAvailableActions(request.page):
+            elif action_name[0].isupper() and not action_name in \
+                    get_available_actions(request.cfg, request.page, request.user):
                 msg = _("You are not allowed to do %(action_name)s on this page.") % {
                         'action_name': wikiutil.escape(action_name), }
                 if not request.user.valid:
