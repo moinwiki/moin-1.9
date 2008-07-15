@@ -18,6 +18,7 @@ from MoinMoin.config import multiconfig
 from MoinMoin.formatter import text_html
 from MoinMoin.theme import load_theme_fallback
 from MoinMoin.util.clock import Clock
+from MoinMoin.request import MoinMoinFinish
 from MoinMoin.web.request import Request
 from MoinMoin.web.utils import check_spider, UniqueIDGenerator
 from MoinMoin.web.exceptions import Forbidden, SurgeProtection
@@ -178,7 +179,11 @@ class HTTPMixin(object):
 
     # implementation of methods expected by RequestBase
     def send_file(self, fileobj, bufsize=8192, do_flush=None):
-        pass
+        def simple_wrapper(fileobj, bufsize):
+            return iter(lambda: fileobj.read(bufsize), '')
+        file_wrapper = self.environ.get('wsgi.file_wrapper', simple_wrapper)
+        self.response = file_wrapper(request._send_file, request._send_bufsize)
+        raise MoinMoinFinish('sent file')
 
     def read(self, n=None):
         if n is None:
