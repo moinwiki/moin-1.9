@@ -68,7 +68,7 @@ def _create_page(request, cancel=False):
     else:
         msg_class, msg = None, None
 
-    sub = request.form.get('sub', '')
+    sub = request.args.get('sub', '')
     cls = None
     if sub and sub not in request.cfg.userprefs_disabled:
         try:
