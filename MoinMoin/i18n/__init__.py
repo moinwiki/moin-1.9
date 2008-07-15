@@ -358,15 +358,12 @@ def browserLanguages(request):
     the request, normalizing to lower case.
     """
     fallback = []
-    accepted = request.http_accept_language
+    accepted = request.accept_languages
     if accepted:
-        # Extract the languages names from the string
-        accepted = accepted.split(',')
-        accepted = [lang.split(';')[0] for lang in accepted]
         # Add base language for each sub language. If the user specified
         # a sub language like "en-us", we will try to to provide it or
         # a least the base language "en" in this case.
-        for lang in accepted:
+        for lang, quality in accepted:
             lang = lang.lower()
             fallback.append(lang)
             if '-' in lang:
