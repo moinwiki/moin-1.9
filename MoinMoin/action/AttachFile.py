@@ -251,10 +251,10 @@ def _access_file(pagename, request):
     _ = request.getText
 
     error = None
-    if not request.form.get('target'):
+    if not request.values.get('target'):
         error = _("Filename of attachment not specified!")
     else:
-        filename = wikiutil.taintfilename(request.form['target'])
+        filename = wikiutil.taintfilename(request.values['target'])
         fpath = getFilename(request, pagename, filename)
 
         if os.path.isfile(fpath):
@@ -507,12 +507,12 @@ def execute(pagename, request):
     """ Main dispatcher for the 'AttachFile' action. """
     _ = request.getText
 
-    do = request.form.get('do', 'upload_form')
+    do = request.values.get('do', 'upload_form')
     handler = globals().get('_do_%s' % do)
     if handler:
         msg = handler(pagename, request)
     else:
-        msg = _('Unsupported AttachFile sub-action: %s') % (wikiutil.escape(do[0]), )
+        msg = _('Unsupported AttachFile sub-action: %s') % wikiutil.escape(do)
     if msg:
         error_msg(pagename, request, msg)
 
@@ -554,9 +554,15 @@ def _do_upload(pagename, request):
         return _('TextCha: Wrong answer! Go back and try again...')
 
     form = request.form
-    overwrite = form.get('overwrite', u'0')
+
+    file_upload = request.files.get('file')
+    if not file_upload:
+        # This might happen when trying to upload file names
+        # with non-ascii characters on Safari.
+        return _("No file content. Delete non ASCII characters from the file name and try again.")
+
     try:
-        overwrite = int(overwrite)
+        overwrite = int(form.get('overwrite', '0'))
     except:
         overwrite = 0
 
@@ -566,35 +572,26 @@ def _do_upload(pagename, request):
     if overwrite and not request.user.may.delete(pagename):
         return _('You are not allowed to overwrite a file attachment of this page.')
 
-    filename = form.get('file__filename__')
     rename = form.get('rename', u'').strip()
     if rename:
         target = rename
     else:
-        target = filename
+        target = file_upload.filename
 
-    target = preprocess_filename(target)
     target = wikiutil.clean_input(target)
 
     if not target:
         return _("Filename of attachment not specified!")
 
-    # get file content
-    filecontent = request.form.get('file')
-    if filecontent is None:
-        # This might happen when trying to upload file names
-        # with non-ascii characters on Safari.
-        return _("No file content. Delete non ASCII characters from the file name and try again.")
-
     # add the attachment
     try:
-        target, bytes = add_attachment(request, pagename, target, filecontent, overwrite=overwrite)
+        target, bytes = add_attachment(request, pagename, target, file_upload.stream, overwrite=overwrite)
         msg = _("Attachment '%(target)s' (remote name '%(filename)s')"
                 " with %(bytes)d bytes saved.") % {
-                'target': target, 'filename': filename, 'bytes': bytes}
+                'target': target, 'filename': file_upload.filename, 'bytes': bytes}
     except AttachmentAlreadyExists:
         msg = _("Attachment '%(target)s' (remote name '%(filename)s') already exists.") % {
-            'target': target, 'filename': filename}
+            'target': target, 'filename': file_upload.filename}
 
     # return attachment list
     upload_form(pagename, request, msg)
