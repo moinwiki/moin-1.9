@@ -201,12 +201,6 @@ def run(request):
 def application(request):
     run(init(request))
 
-    if getattr(request, '_send_file', None) is not None:
-        # moin wants to send a file (e.g. AttachFile.do_get)
-        def simple_wrapper(fileobj, bufsize):
-            return iter(lambda: fileobj.read(bufsize), '')
-        file_wrapper = request.environ.get('wsgi.file_wrapper', simple_wrapper)
-        request.response = file_wrapper(request._send_file, request._send_bufsize)
     return request
 
 application = Request.application(application)
