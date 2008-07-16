@@ -73,6 +73,7 @@ class CacheEntry:
             self.lock_dir = os.path.join(self.arena_dir, '__lock__')
             self.rlock = lock.LazyReadLock(self.lock_dir, 60.0)
             self.wlock = lock.LazyWriteLock(self.lock_dir, 60.0)
+        self._fileobj = None
 
     def _filename(self):
         return os.path.join(self.arena_dir, self.key)
@@ -133,6 +134,60 @@ class CacheEntry:
 #                    self.wlock.release()
 #        else:
 #            logging.error("Can't acquire write lock in %s" % self.lock_dir)
+
+    def _determine_locktype(self, mode):
+        #returns the correct locker object for a specific file access mode
+        if 'r' in mode:
+            lock = self.rlock
+        if 'w' in mode or 'a' in mode:
+            lock = self.wlock
+        return lock
+
+    # file-like interface ----------------------------------------------------
+
+    def open(self, filename=None, mode='r', bufsize=-1):
+        if self._fileobj:
+            # bug-possibility: this doesn't check, if there is any lock on the file
+            # we assume this, as the first call to open should
+            # acquire the lock.
+            return
+        if filename is None:
+            filename = self._filename()
+        else:
+            raise Exception('caching: giving a filename is not supported (yet?)')
+
+        #acquire the correct lock for the desired mode
+        lock = self._determine_locktype(mode)
+
+        if not self.locking or self.locking and lock.acquire(1.0):
+            try:
+                self._fileobj = open(filename, mode, bufsize)
+            except IOError:
+                if self.locking:
+                    lock.release()
+                logging.error("Can't open cache file %s" % filename)
+                raise
+        else:
+            logging.error("Can't acquire read/write lock in %s" % self.lock_dir)
+
+
+    def read(self, size=-1):
+        return self._fileobj.read(size)
+
+    def write(self, data):
+        self._fileobj.write(data)
+
+    def close(self):
+        if self._fileobj:
+            lock = self._determine_locktype(self._fileobj.mode)
+            self._fileobj.close()
+
+        if self.locking:
+            lock.release()
+
+        self._fileobj = None
+
+    # ------------------------------------------------------------------------
 
     def update(self, content):
         try:
