@@ -154,6 +154,8 @@ class CacheEntry:
 
         @param filename: should be None (default - means to use self._filename())
         @param mode: 'r' (read, default), 'w' (write), 'a' (append)
+                     Note: if mode does not include 'b' (binary), it will be
+                           automatically changed to include 'b'.
         @param bufsize: size of read/write buffer (default: -1 meaning automatic)
         @return: None (the opened file object is kept in self._fileobj and used
                  implicitely by read/write/close functions of CacheEntry object.
@@ -170,6 +172,9 @@ class CacheEntry:
             raise Exception('caching: giving a filename is not supported (yet?)')
 
         self._lock = self._determine_locktype(mode)
+
+        if 'b' not in mode:
+            mode += 'b'  # we want to use binary mode, ever!
 
         if not self.locking or self.locking and self._lock.acquire(1.0):
             try:
