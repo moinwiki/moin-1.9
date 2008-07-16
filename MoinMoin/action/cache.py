@@ -120,18 +120,9 @@ def put(request, key, data,
         content_type = 'application/octet-stream'
 
     data_cache = caching.CacheEntry(request, cache_arena, key+'.data', cache_scope, do_locking=do_locking)
-    data_cache_fname = data_cache._filename()
-
-    if hasattr(data, 'read'):
-        import shutil
-        data_cache_file = open(data_cache_fname, 'wb')
-        shutil.copyfileobj(data, data_cache_file)
-        data_cache_file.close()
-    else:
-        data_cache.update(data)
-
-    content_length = content_length or os.path.getsize(data_cache_fname)
-    last_modified = last_modified or os.path.getmtime(data_cache_fname)
+    data_cache.update(data)
+    content_length = content_length or data_cache.size()
+    last_modified = last_modified or data_cache.mtime()
 
     last_modified = timefuncs.formathttpdate(int(last_modified))
     headers = ['Content-Type: %s' % content_type,
@@ -196,8 +187,8 @@ def _get_headers(request, key):
 def _get_datafile(request, key):
     """ get an open data file for the data cached for key """
     data_cache = caching.CacheEntry(request, cache_arena, key+'.data', cache_scope, do_locking=do_locking)
-    data_file = open(data_cache._filename(), 'rb')
-    return data_file
+    data_cache.open(mode='r')
+    return data_cache
 
 
 def _do_get(request, key):

@@ -9,6 +9,7 @@
 """
 
 import os
+import shutil
 import tempfile
 
 from MoinMoin import log
@@ -97,6 +98,12 @@ class CacheEntry:
         # self.uid() for this, see below
         try:
             return os.path.getmtime(self._fname)
+        except (IOError, OSError):
+            return 0
+
+    def size(self):
+        try:
+            return os.path.getsize(self._fname)
         except (IOError, OSError):
             return 0
 
@@ -217,16 +224,26 @@ class CacheEntry:
 
     def update(self, content):
         try:
-            if self.use_pickle:
-                content = pickle.dumps(content, PICKLE_PROTOCOL)
-            elif self.use_encode:
-                content = content.encode(config.charset)
+            if hasattr(content, 'read'):
+                # content is file-like
+                assert not (self.use_pickle or self.use_encode), 'caching: use_pickle and use_encode not supported with file-like api'
+                try:
+                    self.open(mode='w')
+                    shutil.copyfileobj(content, self)
+                finally:
+                    self.close()
+            else:
+                # content is a string
+                if self.use_pickle:
+                    content = pickle.dumps(content, PICKLE_PROTOCOL)
+                elif self.use_encode:
+                    content = content.encode(config.charset)
 
-            try:
-                self.open(mode='w')
-                self.write(content)
-            finally:
-                self.close()
+                try:
+                    self.open(mode='w')
+                    self.write(content)
+                finally:
+                    self.close()
         except (pickle.PicklingError, OSError, IOError, ValueError), err:
             raise CacheError(str(err))
 
