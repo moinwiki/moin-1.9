@@ -3,7 +3,8 @@
     MoinMoin caching module
 
     @copyright: 2001-2004 by Juergen Hermann <jh@web.de>,
-                2006-2008 MoinMoin:ThomasWaldmann
+                2006-2008 MoinMoin:ThomasWaldmann,
+                2008 MoinMoin:ThomasPfaff
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -20,6 +21,7 @@ from MoinMoin.util import filesys, lock, pickle, PICKLE_PROTOCOL
 class CacheError(Exception):
     """ raised if we have trouble reading or writing to the cache """
     pass
+
 
 def get_arena_dir(request, arena, scope):
     if scope == 'page_or_wiki': # XXX DEPRECATED, remove later
@@ -138,7 +140,7 @@ class CacheEntry:
 #            logging.error("Can't acquire write lock in %s" % self.lock_dir)
 
     def _determine_locktype(self, mode):
-        #returns the correct locker object for a specific file access mode
+        """ return the correct lock object for a specific file access mode """
         if 'r' in mode:
             lock = self.rlock
         if 'w' in mode or 'a' in mode:
@@ -148,17 +150,25 @@ class CacheEntry:
     # file-like interface ----------------------------------------------------
 
     def open(self, filename=None, mode='r', bufsize=-1):
+        """ open the cache file for reading/writing
+
+        @param filename: should be None (default - means to use self._filename())
+        @param mode: 'r' (read, default), 'w' (write), 'a' (append)
+        @param bufsize: size of read/write buffer (default: -1 meaning automatic)
+        @return: None (the opened file object is kept in self._fileobj and used
+                 implicitely by read/write/close functions of CacheEntry object.
+        """
         if self._fileobj:
             # bug-possibility: this doesn't check, if there is any lock on the file
             # we assume this, as the first call to open should
             # acquire the lock.
             return
+
         if filename is None:
             filename = self._filename()
         else:
             raise Exception('caching: giving a filename is not supported (yet?)')
 
-        #acquire the correct lock for the desired mode
         self._lock = self._determine_locktype(mode)
 
         if not self.locking or self.locking and self._lock.acquire(1.0):
@@ -167,6 +177,7 @@ class CacheEntry:
             except IOError:
                 if self.locking:
                     self._lock.release()
+                    self._lock = None
                 logging.error("Can't open cache file %s" % filename)
                 raise
         else:
@@ -174,12 +185,22 @@ class CacheEntry:
 
 
     def read(self, size=-1):
+        """ read data from cache file
+
+        @param size: how many bytes to read (default: -1 == everything)
+        @return: read data (str)
+        """
         return self._fileobj.read(size)
 
     def write(self, data):
+        """ write data to cache file
+
+        @param data: write data (str)
+        """
         self._fileobj.write(data)
 
     def close(self):
+        """ close cache file (and release lock, if any) """
         if self._fileobj:
             self._fileobj.close()
             self._fileobj = None
