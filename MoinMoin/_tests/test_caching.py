@@ -76,6 +76,24 @@ class TestCaching(object):
         page._write_file(test_data2)
         assert cache.needsUpdate(page._text_filename())
 
+    def test_filelike_readwrite(self):
+        request = self.request
+        key = 'nooneknowsit'
+        arena = 'somethingfunny'
+        data = "dontcare"
+        cacheentry = caching.CacheEntry(request, arena, key, scope='wiki', do_locking=True,
+                 use_pickle=False, use_encode=True)
+        cacheentry.open(mode='w')
+        cacheentry.write(data)
+        cacheentry.close()
+
+        assert cacheentry.exists()
+
+        cacheentry.open(mode='r')
+        rdata = cacheentry.read()
+        cacheentry.close()
+
+        assert data == rdata
 
 coverage_modules = ['MoinMoin.caching']
 
