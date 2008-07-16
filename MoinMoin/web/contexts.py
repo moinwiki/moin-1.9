@@ -182,7 +182,7 @@ class HTTPMixin(object):
         def simple_wrapper(fileobj, bufsize):
             return iter(lambda: fileobj.read(bufsize), '')
         file_wrapper = self.environ.get('wsgi.file_wrapper', simple_wrapper)
-        self.response = file_wrapper(request._send_file, request._send_bufsize)
+        self.request.response = file_wrapper(fileobj, bufsize)
         raise MoinMoinFinish('sent file')
 
     def read(self, n=None):
