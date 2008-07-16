@@ -73,7 +73,9 @@ class CacheEntry:
             self.lock_dir = os.path.join(self.arena_dir, '__lock__')
             self.rlock = lock.LazyReadLock(self.lock_dir, 60.0)
             self.wlock = lock.LazyWriteLock(self.lock_dir, 60.0)
+        # used by file-like api:
         self._fileobj = None
+        self._lock = None
 
     def _filename(self):
         return os.path.join(self.arena_dir, self.key)
@@ -157,14 +159,14 @@ class CacheEntry:
             raise Exception('caching: giving a filename is not supported (yet?)')
 
         #acquire the correct lock for the desired mode
-        lock = self._determine_locktype(mode)
+        self._lock = self._determine_locktype(mode)
 
-        if not self.locking or self.locking and lock.acquire(1.0):
+        if not self.locking or self.locking and self._lock.acquire(1.0):
             try:
                 self._fileobj = open(filename, mode, bufsize)
             except IOError:
                 if self.locking:
-                    lock.release()
+                    self._lock.release()
                 logging.error("Can't open cache file %s" % filename)
                 raise
         else:
@@ -179,13 +181,13 @@ class CacheEntry:
 
     def close(self):
         if self._fileobj:
-            lock = self._determine_locktype(self._fileobj.mode)
             self._fileobj.close()
+            self._fileobj = None
 
-        if self.locking:
-            lock.release()
-
-        self._fileobj = None
+        if self._lock:
+            if self.locking:
+                self._lock.release()
+            self._lock = None
 
     # ------------------------------------------------------------------------
 
