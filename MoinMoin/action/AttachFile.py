@@ -27,7 +27,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, time, zipfile, mimetypes, errno
+import os, time, zipfile, mimetypes, errno, datetime
 
 from MoinMoin import log
 logging = log.getLogger(__name__)
@@ -791,9 +791,9 @@ def _do_get(pagename, request):
     if not filename:
         return # error msg already sent in _access_file
 
-    timestamp = os.path.getmtime(fpath)
-    if_modified = time.mktime(request.if_modified_since.timetuple())
-    if if_modified >= timestamp:
+    timestamp = datetime.datetime.fromtimestamp(os.path.getmtime(fpath))
+    if_modified = request.if_modified_since
+    if if_modified and if_modified >= timestamp:
         request.status_code = 304
     else:
         mt = wikiutil.MimeType(filename=filename)
