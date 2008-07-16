@@ -72,7 +72,7 @@ class CacheEntry:
         if not os.path.exists(self.arena_dir):
             os.makedirs(self.arena_dir)
         self._fname = os.path.join(self.arena_dir, key)
-        
+
         if self.locking:
             self.lock_dir = os.path.join(self.arena_dir, '__lock__')
             self.rlock = lock.LazyReadLock(self.lock_dir, 60.0)
@@ -244,7 +244,7 @@ class CacheEntry:
             return data
         except (pickle.UnpicklingError, IOError, EOFError, ValueError), err:
             raise CacheError(str(err))
-    
+
     def remove(self):
         if not self.locking or self.locking and self.wlock.acquire(1.0):
             try:
