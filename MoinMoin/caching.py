@@ -248,6 +248,7 @@ class CacheEntry:
             raise CacheError(str(err))
 
     def content(self):
+        # no file-like api yet, we implement it when we need it
         try:
             try:
                 self.open(mode='r')
@@ -266,7 +267,7 @@ class CacheEntry:
         if not self.locking or self.locking and self.wlock.acquire(1.0):
             try:
                 try:
-                    os.remove(self._filename())
+                    os.remove(self._fname)
                 except OSError:
                     pass
             finally:
