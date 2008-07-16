@@ -1176,7 +1176,7 @@ def wikiPlugins(kind, cfg):
 
     @param kind: what kind of modules we look for
     @rtype: dict
-    @return: plugin name to containing module name mapping  
+    @return: plugin name to containing module name mapping
     """
     # short-cut if we've loaded the dict already
     # (or already failed to load it)
