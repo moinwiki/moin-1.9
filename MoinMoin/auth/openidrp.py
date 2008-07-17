@@ -25,12 +25,14 @@ class OpenIDAuth(BaseAuth):
     def __init__(self, modify_request=None,
                        update_user=None,
                        create_user=None,
-                       forced_service=None):
+                       forced_service=None,
+                       idselector_com=None):
         BaseAuth.__init__(self)
         self._modify_request = modify_request or (lambda x: None)
         self._update_user = update_user or (lambda i, u: None)
         self._create_user = create_user or (lambda i, u: None)
         self._forced_service = forced_service
+        self._idselector_com = idselector_com
         if forced_service:
             self.login_inputs = ['special_no_input']
 
@@ -93,6 +95,11 @@ password and be able to associate the account with your OpenID.""")))
                               value=_('Choose this name')))
         table.append(html.TR().append(td1).append(td2))
 
+    def _get_account_name_inval_user(self, request, form):
+        _ = request.getText
+        msg = _('This is not a valid username, choose a different one.')
+        return self._get_account_name(request, form, msg=msg)
+
     def _associate_account(self, request, form, accountname, msg=None):
         _ = request.getText
 
@@ -130,9 +137,9 @@ username and leave the password field blank.""")))
         query = {}
         for key in request.form:
             query[key] = request.form[key][0]
-        return_to = get_multistage_continuation_url(request, self.name,
-                                                    {'oidstage': '1'})
-        info = oidconsumer.complete(query, return_to=return_to)
+        current_url = get_multistage_continuation_url(request, self.name,
+                                                      {'oidstage': '1'})
+        info = oidconsumer.complete(query, current_url)
         if info.status == consumer.FAILURE:
             return CancelLogin(_('OpenID error: %s.') % info.message)
         elif info.status == consumer.CANCEL:
@@ -170,8 +177,7 @@ username and leave the password field blank.""")))
         if not newname:
             return MultistageFormLogin(self._get_account_name)
         if not user.isValidName(request, newname):
-            return MultistageFormLogin(self._get_account_name,
-                    _('This is not a valid username, choose a different one.'))
+            return MultistageFormLogin(self._get_account_name_inval_user)
         uid = None
         if newname:
             uid = user.getUserId(request, newname)
@@ -290,5 +296,9 @@ document.getElementById("openid_message").submit();
 
     def login_hint(self, request):
         _ = request.getText
-        return _("If you do not have an account yet, you can still log in "
+        msg = u''
+        if self._idselector_com:
+            msg = self._idselector_com
+        msg += _("If you do not have an account yet, you can still log in "
                  "with your OpenID and create one during login.")
+        return msg

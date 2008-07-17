@@ -331,6 +331,10 @@ class RequestBase(object):
         except StandardError:
             pass
 
+        if surge_detected and validuser and self.user.auth_method in self.cfg.auth_methods_trusted:
+            logging.info("Trusted user %s would have triggered surge protection if not trusted." % self.user.name)
+            return False  # do not subject trusted users to surge protection
+
         return surge_detected
 
     def getDicts(self):
@@ -410,6 +414,10 @@ class RequestBase(object):
         self.request_method = env.get('REQUEST_METHOD', None)
         self.remote_addr = env.get('REMOTE_ADDR', '')
         self.http_user_agent = env.get('HTTP_USER_AGENT', '')
+        try:
+            self.content_length = int(env.get('CONTENT_LENGTH'))
+        except (TypeError, ValueError):
+            self.content_length = None
         self.if_modified_since = env.get('If-modified-since') or env.get(cgiMetaVariable('If-modified-since'))
         self.if_none_match = env.get('If-none-match') or env.get(cgiMetaVariable('If-none-match'))
 
@@ -1001,7 +1009,7 @@ class RequestBase(object):
         name = u'/'.join(normalized)
         return name
 
-    def read(self, n=None):
+    def read(self, n):
         """ Read n bytes from input stream. """
         raise NotImplementedError
 

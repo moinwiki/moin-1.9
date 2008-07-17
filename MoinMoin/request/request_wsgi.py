@@ -8,6 +8,9 @@
 """
 import cgi, StringIO
 
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin.request import RequestBase, RemoteClosedConnection
 
 class Request(RequestBase):
@@ -39,22 +42,10 @@ class Request(RequestBase):
         form = cgi.FieldStorage(fp=self.stdin, environ=self.env, keep_blank_values=1)
         return RequestBase._setup_args_from_cgi_form(self, form)
 
-    def read(self, n=None):
+    def read(self, n):
         if n is None:
-            # We can't do that, because wsgi 1.0 requires n:
-            #return self.stdin.read()
-            # Thus, if we have no n, we have to simulate the usual behaviour (or
-            # it won't work e.g. with mod_wsgi 1.3 and maybe other wsgi 1.0 servers).
-            # Note: just requesting a extremely large amount (expecting it to never
-            # be reached, but still all data returned) also does not work (mod_wsgi
-            # 1.3 gives a MemoryError when doing that):
-            data = []
-            while True:
-                read_data = self.stdin.read(4000)
-                if not read_data:
-                    break
-                data.append(read_data)
-            return ''.join(data)
+            logging.warning("calling request.read(None) might block")
+            return self.stdin.read()
         else:
             return self.stdin.read(n)
 

@@ -483,7 +483,8 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 
         # QuickHelp originally by Georg Mischler <schorsch@lightingwiki.com>
         markup = self.pi['format'] or request.cfg.default_markup
-        quickhelp = request.cfg.editor_quickhelp.get(markup, "")
+        parser = wikiutil.searchAndImportPlugin(self.request.cfg, "parser", markup)
+        quickhelp = getattr(parser, 'quickhelp', None)
         if quickhelp:
             request.write(request.formatter.div(1, id="editor-help"))
             request.write(_(quickhelp, wiki=True))
@@ -520,7 +521,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
             request.theme.add_msg(_('Edit was cancelled.'), "error")
             self.send_page()
 
-    def copyPage(self, newpagename, comment=None):
+    def copyPage(self, newpagename, comment=u''):
         """ Copy the current version of the page (keeping the backups, logs and attachments).
 
         @param comment: Comment given by user
@@ -557,8 +558,6 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
         try:
             filesys.copytree(oldpath, newpath)
             self.error = None
-            if not comment:
-                comment = u"## page was copied from %s" % self.page_name
             savetext = u"## page was copied from %s\n%s" % (self.page_name, savetext)
             Page.__init__(self, request, newpagename)
             self._write_file(savetext, "SAVENEW", comment)
@@ -575,7 +574,7 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
             else:
                 return False, _('Could not copy page because of file system error: %s.') % unicode(err)
 
-    def renamePage(self, newpagename, comment=None):
+    def renamePage(self, newpagename, comment=u''):
         """ Rename the current version of the page (making a backup before deletion
             and keeping the backups, logs and attachments).
 
@@ -620,8 +619,6 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
         try:
             os.rename(oldpath, newpath)
             self.error = None
-            if not comment:
-                comment = u"## page was renamed from %s" % self.page_name
             # Save page text with a comment about the old name
             savetext = u"## page was renamed from %s\n%s" % (self.page_name, savetext)
             newpage.saveText(savetext, 0, comment=comment, extra=self.page_name, action='SAVE/RENAME', notify=False)
@@ -1141,7 +1138,7 @@ Please review the page and save then. Do not save this page as it is!""")
 
                         if recipients:
                             info = _("Notifications sent to:")
-                            msg = msg + "<p>%s %s</p>" % (info, ",".join(recipients))
+                            msg = msg + "<p>%s %s</p>" % (info, ", ".join(recipients))
 
             # Update page trail with the page we just saved.
             # This is needed for NewPage macro with backto because it does not

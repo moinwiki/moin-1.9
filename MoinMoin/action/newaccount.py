@@ -10,6 +10,7 @@ from MoinMoin import user, wikiutil, util
 from MoinMoin.Page import Page
 from MoinMoin.widget import html
 from MoinMoin.security.textcha import TextCha
+from MoinMoin.auth import MoinAuth
 
 
 _debug = False
@@ -82,9 +83,6 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
     # save data
     theuser.save()
 
-    if form.has_key('create_and_mail'):
-        theuser.mailAccountData()
-
     result = _("User account created! You can use this account to login now...")
     if _debug:
         result = result + util.dumpFormData(form)
@@ -106,8 +104,10 @@ def _create_form(request):
     tbl.append(row)
     row.append(html.TD().append(html.STRONG().append(
                                   html.Text(_("Name")))))
-    row.append(html.TD().append(html.INPUT(type="text", size="36",
-                                           name="name")))
+    cell = html.TD()
+    row.append(cell)
+    cell.append(html.INPUT(type="text", size="36", name="name"))
+    cell.append(html.Text(' ' + _("(Use FirstnameLastname)")))
 
     row = html.TR()
     tbl.append(row)
@@ -145,23 +145,28 @@ def _create_form(request):
     row.append(html.TD())
     td = html.TD()
     row.append(td)
-    td.append(html.INPUT(type="submit", name="create_only",
+    td.append(html.INPUT(type="submit", name="create",
                          value=_('Create Profile')))
-    if request.cfg.mail_enabled:
-        td.append(html.Text(' '))
-        td.append(html.INPUT(type="submit", name="create_and_mail",
-                             value="%s + %s" % (_('Create Profile'),
-                                                _('Email'))))
 
     return unicode(ret)
 
 def execute(pagename, request):
-    pagename = pagename
+    found = False
+    for auth in request.cfg.auth:
+        if isinstance(auth, MoinAuth):
+            found = True
+            break
+
+    if not found:
+        # we will not have linked, so forbid access
+        request.makeForbidden403()
+        return
+
     page = Page(request, pagename)
     _ = request.getText
     form = request.form
 
-    submitted = form.has_key('create_only') or form.has_key('create_and_mail')
+    submitted = form.has_key('create')
 
     if submitted: # user pressed create button
         request.theme.add_msg(_create_user(request), "dialog")

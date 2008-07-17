@@ -8,6 +8,9 @@
 """
 import sys
 
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin.request import RequestBase, RemoteClosedConnection
 
 class Request(RequestBase):
@@ -26,6 +29,7 @@ class Request(RequestBase):
         self.http_host = 'localhost'
         self.http_referer = ''
         self.script_name = '.'
+        self.content_length = None
         self.if_modified_since = None
         self.if_none_match = None
         RequestBase.__init__(self, properties)
@@ -38,9 +42,10 @@ class Request(RequestBase):
         #return RequestBase._setup_args_from_cgi_form(self, form)
         return {}
 
-    def read(self, n=None):
+    def read(self, n):
         """ Read from input stream. """
         if n is None:
+            logging.warning("calling request.read(None) might block")
             return sys.stdin.read()
         else:
             return sys.stdin.read(n)

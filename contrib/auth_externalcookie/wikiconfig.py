@@ -64,9 +64,9 @@ class ExternalCookie(BaseAuth):
         return user, try_next
 
 class FarmConfig(DefaultConfig):
-    from MoinMoin.auth import MoinLogin
+    from MoinMoin.auth import MoinAuth
     # use ExternalCookie, also allow the usual moin login
-    auth = [ExternalCookie(), MoinLogin()]
+    auth = [ExternalCookie(), MoinAuth()]
 
     # ... (rest of your config follows here) ...
 

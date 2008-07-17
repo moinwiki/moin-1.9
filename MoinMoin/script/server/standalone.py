@@ -121,8 +121,7 @@ class PluginScript(MoinScript):
                 Config.requestQueueSize = self.options.requestQueueSize
 
             if self.options.start:
-                daemon = Daemon('moin', run, Config)
-                daemon.pidfile = pidfile
+                daemon = Daemon('moin', pidfile, run, Config)
                 daemon.do_start()
             else:
                 run(Config)

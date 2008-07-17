@@ -1,8 +1,8 @@
-## Please edit system and help pages ONLY in the moinmaster wiki! For more
-## information, please see MoinMaster:MoinPagesEditorGroup.
+## Please edit system and help pages ONLY in the master wiki!
+## For more information, please see MoinMoin:MoinDev/Translation.
 ##master-page:None
 ##master-date:None
-#acl MoinPagesEditorGroup:read,write,delete,revert All:read
+#acl -All:write Default
 #format gettext
 #language pt
 
@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 23:52+0200\n"
+"POT-Creation-Date: 2008-06-21 22:47+0200\n"
 "PO-Revision-Date: 2007-01-05 22:27+0000\n"
 "Last-Translator: Rita Farinha <rita.farinha@intraneia.com>\n"
 "Language-Team: Portuguese <moin-devel@lists.sourceforge.net>\n"
@@ -494,6 +494,9 @@ msgstr "[vazio]"
 msgid "filter"
 msgstr "filtro"
 
+msgid "about"
+msgstr ""
+
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -588,6 +591,10 @@ msgstr "Enviar os dados por correio electrónico"
 msgid "Missing password. Please enter user name and password."
 msgstr "Senha em falta. Por favor, insira o nome de utilizador e a senha."
 
+#, python-format
+msgid "LDAP server %(server)s failed."
+msgstr ""
+
 #, fuzzy
 msgid "You need to log in."
 msgstr "Saiu do sistema."
@@ -605,6 +612,9 @@ msgid ""
 msgstr ""
 
 msgid "Choose this name"
+msgstr ""
+
+msgid "This is not a valid username, choose a different one."
 msgstr ""
 
 msgid ""
@@ -626,9 +636,6 @@ msgid "Verification canceled."
 msgstr "A operação foi cancelada."
 
 msgid "OpenID failure."
-msgstr ""
-
-msgid "This is not a valid username, choose a different one."
 msgstr ""
 
 msgid "Your account is now associated to your OpenID."
@@ -1197,6 +1204,15 @@ msgstr "Opções gerais"
 msgid "Quick links"
 msgstr "Ligações rápidas"
 
+msgid "OpenID server"
+msgstr ""
+
+msgid "The selected websites have been removed."
+msgstr ""
+
+msgid "Trusted websites"
+msgstr ""
+
 #, fuzzy, python-format
 msgid ""
 "Dear Wiki user,\n"
@@ -1331,14 +1347,6 @@ msgstr "Mínima "
 msgid ""
 "Attachment link: %(attach)s\n"
 "Page link: %(page)s\n"
-msgstr ""
-
-#, python-format
-msgid "XML RPC error: %s"
-msgstr ""
-
-#, python-format
-msgid "Low-level communication error: %s"
 msgstr ""
 
 #, fuzzy
@@ -1731,29 +1739,17 @@ msgstr "índice disponível"
 msgid "index unavailable"
 msgstr "índice indisponível"
 
-msgid "N/A"
-msgstr "N/A"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "Xapian e/ou bindings Python para Xapian não instalados"
+
+msgid "N/A"
+msgstr "N/A"
 
 msgid "Xapian search"
 msgstr "Pesquisa Xapian"
 
-msgid "Xapian Version"
-msgstr "Versão de Xapian"
-
-msgid "PyStemmer not installed"
-msgstr "PyStemmer nãi instalado"
-
 msgid "Stemming for Xapian"
 msgstr "Stemming para Xapian"
-
-msgid "PyStemmer Version"
-msgstr "Versão do PyStemmer"
-
-msgid "PyStemmer stems"
-msgstr "Stems do PyStemmer"
 
 msgid "Active threads"
 msgstr "Tópicos activos"
@@ -1826,6 +1822,14 @@ msgstr "Pesquisa por Texto"
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr ""
 "Por favor, utilize um termo de pesquisa mais específico que {{{\"%s\"}}}"
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr ""
+"A sua pesquisa {{{\"%s\"}}} é inválida. Por favor, consulte a página de "
+"AjudaNaPesquisa para mais informações."
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -2262,7 +2266,7 @@ msgstr "Por favor, identifique-se primeiro."
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Por favor, crie uma página principal antes de criar outras páginas."
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "You can add some additional sub pages to your already existing homepage "
 "here.\n"
@@ -2282,9 +2286,9 @@ msgid ""
 "||'''Add a new personal page:'''||'''Related access control list "
 "group:'''||\n"
 "||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
-"[\"%(username)s/ReadWriteGroup\"]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[\"%"
-"(username)s/ReadGroup\"]||\n"
+"[[%(username)s/ReadWriteGroup]]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
+"(username)s/ReadGroup]]||\n"
 "||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
 "(username)s only||\n"
 "\n"
@@ -2561,14 +2565,6 @@ msgstr "Pesquisa Avançada: \"%s\""
 #, python-format
 msgid "Full Text Search: \"%s\""
 msgstr "Pesquisar por conteúdo: \"%s\""
-
-#, python-format
-msgid ""
-"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
-"for more information."
-msgstr ""
-"A sua pesquisa {{{\"%s\"}}} é inválida. Por favor, consulte a página de "
-"AjudaNaPesquisa para mais informações."
 
 #, python-format
 msgid ""
@@ -2895,36 +2891,43 @@ msgid "You are not allowed to unzip attachments of this page."
 msgstr "Não tem permissão para descomprimir anexos desta página."
 
 #, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr ""
-"Anexo '%(filename)s' não pôde ser descomprimido porque os ficheiros "
-"resultantes seriam demasiado grandes (faltam %(space)d kB)."
+msgid "The file %(filename)s is not a .zip file."
+msgstr "O ficheiro %(filename)s não é um ficheiro .zip."
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too many (%(count)d missing)."
-msgstr ""
-"Anexo '%(filename)s' não pôde ser descomprimido porque os ficheiros "
-"resultantes seriam demasiados (faltam %(count)d)."
-
-#, python-format
-msgid "Attachment '%(filename)s' unzipped."
-msgstr "Anexo '%(filename)s' descomprimido."
-
-#, python-format
-msgid ""
-"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
-"files only, exist already or reside in folders."
+"Attachment '%(filename)s' not unzipped because some files in the zip are "
+"either not in the same directory or exceeded the single file size limit (%"
+"(maxsize_file)d kB)."
 msgstr ""
 "Anexo '%(filename)s' não foi descomprimido porque os ficheiros são demasiado "
 "grandes, são apenas ficheiros .zip, já existem ou existem em pastas."
 
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment storage size limit (%(size)d kB)."
+msgstr ""
+"Anexo '%(filename)s' não pôde ser descomprimido porque os ficheiros "
+"resultantes seriam demasiado grandes (faltam %(space)d kB)."
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment count limit (%(count)d)."
+msgstr ""
+"Anexo '%(filename)s' não pôde ser descomprimido porque os ficheiros "
+"resultantes seriam demasiados (faltam %(count)d)."
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' partially unzipped (did not overwrite: %(filelist)"
+"s)."
+msgstr "Anexo '%(filename)s' descomprimido."
+
 #, python-format
-msgid "The file %(filename)s is not a .zip file."
-msgstr "O ficheiro %(filename)s não é um ficheiro .zip."
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "Anexo '%(filename)s' descomprimido."
 
 #, python-format
 msgid "Attachment '%(filename)s'"
@@ -2998,6 +3001,18 @@ msgstr "Não tem permissão para fazer %(action_name)s nesta página."
 
 msgid "Login and try again."
 msgstr "Entre e tente de novo."
+
+#~ msgid "Xapian Version"
+#~ msgstr "Versão de Xapian"
+
+#~ msgid "PyStemmer not installed"
+#~ msgstr "PyStemmer nãi instalado"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "Versão do PyStemmer"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "Stems do PyStemmer"
 
 #~ msgid "New Page or New Attachment"
 #~ msgstr "Nova Página ou Novo Anexo"
