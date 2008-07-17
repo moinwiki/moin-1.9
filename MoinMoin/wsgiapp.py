@@ -6,6 +6,7 @@
                 2008-2008 MoinMoin:FlorianKrupicka
     @license: GNU GPL, see COPYING for details.
 """
+from werkzeug.http import HeaderSet
 from werkzeug.utils import responder
 from werkzeug.wrappers import Response
 from werkzeug.exceptions import NotFound
@@ -109,10 +110,10 @@ def run(request):
         # * cookie (even if we aren't sending one now)
         # * User-Agent (because a bot might be denied and get no content)
         # * Accept-Language (except if moin is told to ignore browser language)
-        if request.cfg.language_ignore_browser:
-            request.setHttpHeader("Vary: Cookie,User-Agent")
-        else:
-            request.setHttpHeader("Vary: Cookie,User-Agent,Accept-Language")
+        hs = HeaderSet(('Cookie', 'User-Agent'))
+        if not request.cfg.language_ignore_browser:
+            hs.add('Accept-Language')
+        request.headers.add('Vary', str(hs))
 
         # Handle request. We have these options:
         # 1. jump to page where user left off
