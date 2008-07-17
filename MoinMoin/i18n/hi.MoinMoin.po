@@ -1,8 +1,8 @@
-## Please edit system and help pages ONLY in the moinmaster wiki! For more
-## information, please see MoinMaster:MoinPagesEditorGroup.
+## Please edit system and help pages ONLY in the master wiki!
+## For more information, please see MoinMoin:MoinDev/Translation.
 ##master-page:None
 ##master-date:None
-#acl MoinPagesEditorGroup:read,write,delete,revert All:read
+#acl -All:write Default
 #format gettext
 #language hi
 
@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 23:52+0200\n"
+"POT-Creation-Date: 2008-06-21 22:47+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rakesh Pandit <rakesh.pandit@gmail.com>\n"
 "Language-Team: Hindi\n"
@@ -457,6 +457,9 @@ msgstr ""
 msgid "filter"
 msgstr ""
 
+msgid "about"
+msgstr ""
+
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -542,6 +545,10 @@ msgstr "मेल एकाऊट िववरन"
 msgid "Missing password. Please enter user name and password."
 msgstr ""
 
+#, python-format
+msgid "LDAP server %(server)s failed."
+msgstr ""
+
 #, fuzzy
 msgid "You need to log in."
 msgstr "आप अभी लागूड आवूट है।"
@@ -559,6 +566,9 @@ msgid ""
 msgstr ""
 
 msgid "Choose this name"
+msgstr ""
+
+msgid "This is not a valid username, choose a different one."
 msgstr ""
 
 msgid ""
@@ -579,9 +589,6 @@ msgid "Verification canceled."
 msgstr ""
 
 msgid "OpenID failure."
-msgstr ""
-
-msgid "This is not a valid username, choose a different one."
 msgstr ""
 
 msgid "Your account is now associated to your OpenID."
@@ -1143,6 +1150,15 @@ msgstr "सामान्य िवक्लप"
 msgid "Quick links"
 msgstr "आवश्यक िलन्क"
 
+msgid "OpenID server"
+msgstr ""
+
+msgid "The selected websites have been removed."
+msgstr ""
+
+msgid "Trusted websites"
+msgstr ""
+
 #, python-format
 msgid ""
 "Dear Wiki user,\n"
@@ -1249,14 +1265,6 @@ msgstr ""
 msgid ""
 "Attachment link: %(attach)s\n"
 "Page link: %(page)s\n"
-msgstr ""
-
-#, python-format
-msgid "XML RPC error: %s"
-msgstr ""
-
-#, python-format
-msgid "Low-level communication error: %s"
 msgstr ""
 
 msgid "Attachment link"
@@ -1584,28 +1592,16 @@ msgstr ""
 msgid "index unavailable"
 msgstr ""
 
-msgid "N/A"
+msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr ""
 
-msgid "Xapian and/or Python Xapian bindings not installed"
+msgid "N/A"
 msgstr ""
 
 msgid "Xapian search"
 msgstr ""
 
-msgid "Xapian Version"
-msgstr ""
-
-msgid "PyStemmer not installed"
-msgstr ""
-
 msgid "Stemming for Xapian"
-msgstr ""
-
-msgid "PyStemmer Version"
-msgstr ""
-
-msgid "PyStemmer stems"
 msgstr ""
 
 msgid "Active threads"
@@ -1677,6 +1673,12 @@ msgstr ""
 
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
+msgstr ""
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
 msgstr ""
 
 #, python-format
@@ -2093,9 +2095,9 @@ msgid ""
 "||'''Add a new personal page:'''||'''Related access control list "
 "group:'''||\n"
 "||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
-"[\"%(username)s/ReadWriteGroup\"]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[\"%"
-"(username)s/ReadGroup\"]||\n"
+"[[%(username)s/ReadWriteGroup]]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
+"(username)s/ReadGroup]]||\n"
 "||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
 "(username)s only||\n"
 "\n"
@@ -2341,12 +2343,6 @@ msgstr "उच्च श्रेणी की खोज: \"%s\""
 #, python-format
 msgid "Full Text Search: \"%s\""
 msgstr "पूरी टेक्सट सरच: \"%s\""
-
-#, python-format
-msgid ""
-"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
-"for more information."
-msgstr ""
 
 #, python-format
 msgid ""
@@ -2654,29 +2650,36 @@ msgid "You are not allowed to unzip attachments of this page."
 msgstr ""
 
 #, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
+msgid "The file %(filename)s is not a .zip file."
 msgstr ""
 
 #, python-format
 msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too many (%(count)d missing)."
+"Attachment '%(filename)s' not unzipped because some files in the zip are "
+"either not in the same directory or exceeded the single file size limit (%"
+"(maxsize_file)d kB)."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment storage size limit (%(size)d kB)."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment count limit (%(count)d)."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' partially unzipped (did not overwrite: %(filelist)"
+"s)."
 msgstr ""
 
 #, python-format
 msgid "Attachment '%(filename)s' unzipped."
-msgstr ""
-
-#, python-format
-msgid ""
-"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
-"files only, exist already or reside in folders."
-msgstr ""
-
-#, python-format
-msgid "The file %(filename)s is not a .zip file."
 msgstr ""
 
 #, python-format

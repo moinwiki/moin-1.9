@@ -1,7 +1,8 @@
 Post 1.5.3 new style migration
 ==============================
 
-First you have to do all steps described in the sections below or it won't work.
+If you are migrating from a moin version older than 1.5.3, you first you have
+to do all steps described in the sections below or it won't work.
 
 After you have switched to new style migration, the procedure will be the same
 with every moin upgrade, simply follow these steps:

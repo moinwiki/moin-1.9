@@ -1083,9 +1083,11 @@ class PluginAttributeError(PluginError):
 def importPlugin(cfg, kind, name, function="execute"):
     """ Import wiki or builtin plugin
 
-    Returns function from a plugin module name. If name can not be
-    imported, raise PluginMissingError. If function is missing, raise
-    PluginAttributeError.
+    Returns <function> attr from a plugin module <name>.
+    If <function> attr is missing, raise PluginAttributeError.
+    If <function> is None, return the whole module object.
+
+    If <name> plugin can not be imported, raise PluginMissingError.
 
     kind may be one of 'action', 'formatter', 'macro', 'parser' or any other
     directory that exist in MoinMoin or data/plugin.
@@ -1112,9 +1114,11 @@ def importWikiPlugin(cfg, kind, name, function="execute"):
 
     See importPlugin docstring.
     """
-    if not name in wikiPlugins(kind, cfg):
-        raise PluginMissingError
-    moduleName = '%s.plugin.%s.%s' % (cfg.siteid, kind, name)
+    plugins = wikiPlugins(kind, cfg)
+    modname = plugins.get(name, None)
+    if modname is None:
+        raise PluginMissingError()
+    moduleName = '%s.%s' % (modname, name)
     return importNameFromPlugin(moduleName, function)
 
 
@@ -1130,15 +1134,28 @@ def importBuiltinPlugin(kind, name, function="execute"):
 
 
 def importNameFromPlugin(moduleName, name):
-    """ Return name from plugin module
+    """ Return <name> attr from <moduleName> module,
+        raise PluginAttributeError if name does not exist.
 
-    Raise PluginAttributeError if name does not exist.
+        If name is None, return the <moduleName> module object.
     """
-    module = __import__(moduleName, globals(), {}, [name])
-    try:
-        return getattr(module, name)
-    except AttributeError:
-        raise PluginAttributeError
+    if name is None:
+        fromlist = []
+    else:
+        fromlist = [name]
+    module = __import__(moduleName, globals(), {}, fromlist)
+    if fromlist:
+        # module has the obj for module <moduleName>
+        try:
+            return getattr(module, name)
+        except AttributeError:
+            raise PluginAttributeError
+    else:
+        # module now has the toplevel module of <moduleName> (see __import__ docs!)
+        components = moduleName.split('.')
+        for comp in components[1:]:
+            module = getattr(module, comp)
+        return module
 
 
 def builtinPlugins(kind):
@@ -1153,27 +1170,35 @@ def builtinPlugins(kind):
 
 
 def wikiPlugins(kind, cfg):
-    """ Gets a list of modules in data/plugin/'kind'
+    """
+    Gets a dict containing the names of all plugins of @kind
+    as the key and the containing module name as the value.
 
     @param kind: what kind of modules we look for
-    @rtype: list
-    @return: module names
+    @rtype: dict
+    @return: plugin name to containing module name mapping
     """
-    # Wiki plugins are located in wikiconfig.plugin module
-    modulename = '%s.plugin.%s' % (cfg.siteid, kind)
-
-    # short-cut if we've loaded the list already
+    # short-cut if we've loaded the dict already
     # (or already failed to load it)
     if kind in cfg._site_plugin_lists:
         return cfg._site_plugin_lists[kind]
 
-    try:
-        plugins = pysupport.importName(modulename, "modules")
-        cfg._site_plugin_lists[kind] = plugins
-        return plugins
-    except ImportError:
-        cfg._site_plugin_lists[kind] = []
-        return []
+    result = {}
+
+    for modname in cfg._plugin_modules:
+        try:
+            module = pysupport.importName(modname, kind)
+            packagepath = os.path.dirname(module.__file__)
+            plugins = pysupport.getPluginModules(packagepath)
+
+            for p in plugins:
+                if not p in result:
+                    result[p] = '%s.%s' % (modname, kind)
+        except AttributeError:
+            pass
+
+    cfg._site_plugin_lists[kind] = result
+    return result
 
 
 def getPlugins(kind, cfg):
@@ -1424,6 +1449,8 @@ def parse_quoted_separated_ext(args, separator=None, name_value_separator=None,
                 cur.append(None)
             else:
                 if not multikey:
+                    if cur[-1] is None:
+                        cur[-1] = ''
                     cur[-1] += name_value_separator
                 else:
                     cur.append(None)
@@ -1750,7 +1777,7 @@ class UnitArgument(IEFArgument):
         """
         IEFArgument.__init__(self)
         self._units = list(units)
-        self._units.sort(cmp=lambda x, y: len(y) - len(x))
+        self._units.sort(lambda x, y: len(y) - len(x))
         self._type = argtype
         self._defaultunit = defaultunit
         assert defaultunit is None or defaultunit in units

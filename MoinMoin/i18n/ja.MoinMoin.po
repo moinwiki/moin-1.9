@@ -1,8 +1,8 @@
-## Please edit system and help pages ONLY in the moinmaster wiki! For more
-## information, please see MoinMaster:MoinPagesEditorGroup.
+## Please edit system and help pages ONLY in the master wiki!
+## For more information, please see MoinMoin:MoinDev/Translation.
 ##master-page:None
 ##master-date:None
-#acl MoinPagesEditorGroup:read,write,delete,revert All:read
+#acl -All:write Default
 #format gettext
 #language ja
 
@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 23:52+0200\n"
-"PO-Revision-Date: 2008-05-22 02:06+0900\n"
+"POT-Creation-Date: 2008-06-21 22:47+0200\n"
+"PO-Revision-Date: 2008-06-18 07:54+0900\n"
 "Last-Translator: MasatakeIwasaki\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -492,6 +492,9 @@ msgstr "[空]"
 msgid "filter"
 msgstr "フィルタ"
 
+msgid "about"
+msgstr "約"
+
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -580,6 +583,10 @@ msgid "Missing password. Please enter user name and password."
 msgstr ""
 "パスワードが入力されていません。ユーザ名とパスワードを入力してください。"
 
+#, python-format
+msgid "LDAP server %(server)s failed."
+msgstr "LDAP server %(server)s への接続に失敗しました。"
+
 msgid "You need to log in."
 msgstr "ログインしてください。"
 
@@ -602,6 +609,9 @@ msgstr ""
 
 msgid "Choose this name"
 msgstr "このユーザ名を選択"
+
+msgid "This is not a valid username, choose a different one."
+msgstr "正しいユーザ名ではありません、別のユーザ名を選んでください"
 
 msgid ""
 "The username you have chosen is already\n"
@@ -627,9 +637,6 @@ msgstr "検証はキャンセルされました。"
 msgid "OpenID failure."
 msgstr "OpenID 失敗しました"
 
-msgid "This is not a valid username, choose a different one."
-msgstr "正しいユーザ名ではありません、別のユーザ名を選んでください"
-
 msgid "Your account is now associated to your OpenID."
 msgstr "あなたのアカウントはOpenIDと結びつけられています。"
 
@@ -640,7 +647,8 @@ msgid "OpenID verification requires that you click this button:"
 msgstr "このボタンをクリックしてOpenIDを検証してください:"
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
-msgstr "OpenIDによるログインを行うためには匿名セッションを有効にする必要があります。"
+msgstr ""
+"OpenIDによるログインを行うためには匿名セッションを有効にする必要があります。"
 
 msgid "Failed to resolve OpenID."
 msgstr "OpenIDの解決に失敗しました。"
@@ -654,7 +662,9 @@ msgstr "OpenIDがありません。"
 msgid ""
 "If you do not have an account yet, you can still log in with your OpenID and "
 "create one during login."
-msgstr "まだアカウントを持っていない場合、OpenIDによってログインした状態で作成することができます。"
+msgstr ""
+"まだアカウントを持っていない場合、OpenIDによってログインした状態で作成するこ"
+"とができます。"
 
 msgid "Failed to connect to database."
 msgstr "データベースの接続に失敗しました。"
@@ -1000,7 +1010,9 @@ msgstr "ディスカッション"
 #, python-format
 msgid ""
 "Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
-msgstr "このwikiでは\"%(content)s\"は許可されていません。ページを保存できませんでした。"
+msgstr ""
+"このwikiでは\"%(content)s\"は許可されていません。ページを保存できませんでし"
+"た。"
 
 msgid "Notification"
 msgstr "メールで通知"
@@ -1065,7 +1077,9 @@ msgstr "ユーザが選択されていません"
 msgid ""
 "You can now change the settings of the selected user account; log out to get "
 "back to your account."
-msgstr "選択されたユーザの設定変更することができます。あなたのアカウントに戻すにはログアウトしてください。"
+msgstr ""
+"選択されたユーザの設定変更することができます。あなたのアカウントに戻すにはロ"
+"グアウトしてください。"
 
 msgid "You are the only user."
 msgstr "あなたは唯一のユーザです。"
@@ -1188,6 +1202,17 @@ msgstr "一般的なオプション"
 msgid "Quick links"
 msgstr "クイックリンク"
 
+#, fuzzy
+msgid "OpenID server"
+msgstr "OpenIDのサービスが提供されていません"
+
+#, fuzzy
+msgid "The selected websites have been removed."
+msgstr "選択されたOpenIDは削除されています。"
+
+msgid "Trusted websites"
+msgstr ""
+
 #, python-format
 msgid ""
 "Dear Wiki user,\n"
@@ -1245,7 +1270,8 @@ msgstr ""
 "\"%(sitename)s\"\n"
 "におけるwikiページの変更通知を希望したユーザにお送りしています。\n"
 "\n"
-"%(editor)sさんによって\"%(oldname)s\"が\"%(pagename)s\"に名称変更変更されました。\n"
+"%(editor)sさんによって\"%(oldname)s\"が\"%(pagename)s\"に名称変更変更されまし"
+"た。\n"
 "\n"
 
 #, python-format
@@ -1281,7 +1307,8 @@ msgid ""
 msgstr ""
 "Wikiユーザ様\n"
 "\n"
-"あなたはWikiページ \\\"%(page_name)s\\\" に対する変更の通知を購読しています。\n"
+"あなたはWikiページ \\\"%(page_name)s\\\" に対する変更の通知を購読していま"
+"す。\n"
 "%(editor)s によりページに添付ファイルが追加されました。\n"
 "詳細は以下を参照してください。:\n"
 "\n"
@@ -1329,14 +1356,6 @@ msgid ""
 msgstr ""
 "添付ファイル: %(attach)s\n"
 "ページリンク: %(page)s\n"
-
-#, python-format
-msgid "XML RPC error: %s"
-msgstr "XML-RPC エラー: %s"
-
-#, python-format
-msgid "Low-level communication error: %s"
-msgstr "低レベル通信エラー: %s"
 
 msgid "Attachment link"
 msgstr "添付ファイルへのリンク"
@@ -1431,13 +1450,24 @@ msgid ""
 "\n"
 "(!) For more help, see HelpOnEditing or SyntaxReference.\n"
 msgstr ""
-" 強調:: <<Verbatim('')>>''イタリック''<<Verbatim('')>>、<<Verbatim(''')>>'''ボールド'''<<Verbatim(''')>>、<<Verbatim(''''')>>'''''ボールドイタリック'''''<<Verbatim(''''')>>、<<Verbatim('')>>''混合 ''<<Verbatim(''')>>'''''ボールド'''<<Verbatim(''')>>とイタリック''<<Verbatim('')>>、<<Verbatim(----)>> 水平線。\n"
-" 見出し:: <<Verbatim(=)>> タイトル1 <<Verbatim(=)>>、<<Verbatim(==)>> タイトル2 <<Verbatim(==)>>、<<Verbatim(===)>> タイトル3 <<Verbatim(===)>>、<<Verbatim(====)>> タイトル4 <<Verbatim(====)>>、<<Verbatim(=====)>> タイトル5 <<Verbatim(=====)>>。\n"
-" リスト:: 半角スペースに続けて: * 小丸、1., a., A., i., I. 番号付アイテム、1.#n nから番号開始、半角スペースのみでインデント。\n"
-" リンク:: <<Verbatim(JoinCapitalizedWords)>>、<<Verbatim([[ターゲット|リンクテキスト]])>>。\n"
-" 表:: || セルテキスト |||| 2列にわたるセルテキスト ||、表やタイトルのあとには空白を入力しないでください。\n"
+" 強調:: <<Verbatim('')>>''イタリック''<<Verbatim('')>>、<<Verbatim(''')"
+">>'''ボールド'''<<Verbatim(''')>>、<<Verbatim(''''')>>'''''ボールドイタリッ"
+"ク'''''<<Verbatim(''''')>>、<<Verbatim('')>>''混合 ''<<Verbatim(''')"
+">>'''''ボールド'''<<Verbatim(''')>>とイタリック''<<Verbatim('')>>、<<Verbatim"
+"(----)>> 水平線。\n"
+" 見出し:: <<Verbatim(=)>> タイトル1 <<Verbatim(=)>>、<<Verbatim(==)>> タイト"
+"ル2 <<Verbatim(==)>>、<<Verbatim(===)>> タイトル3 <<Verbatim(===)>>、"
+"<<Verbatim(====)>> タイトル4 <<Verbatim(====)>>、<<Verbatim(=====)>> タイトル"
+"5 <<Verbatim(=====)>>。\n"
+" リスト:: 半角スペースに続けて: * 小丸、1., a., A., i., I. 番号付アイテム、1."
+"#n nから番号開始、半角スペースのみでインデント。\n"
+" リンク:: <<Verbatim(JoinCapitalizedWords)>>、<<Verbatim([[ターゲット|リンク"
+"テキスト]])>>。\n"
+" 表:: || セルテキスト |||| 2列にわたるセルテキスト ||、表やタイトルのあとには"
+"空白を入力しないでください。\n"
 "\n"
-"(!) 詳細はHelpOnEditingや [\"シンタックスリファレンス\"]を参照してください。\n"
+"(!) 詳細はHelpOnEditingや [\"シンタックスリファレンス\"]を参照してくださ"
+"い。\n"
 
 msgid ""
 "{{{\n"
@@ -1473,7 +1503,8 @@ msgstr ""
 "リスト: * 小丸; 1., a. 番号付アイテム\n"
 "}}}\n"
 "(!) 詳細は\n"
-"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|reStructuredText Quick Reference]].\n"
+"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
+"reStructuredText Quick Reference]].\n"
 "を参照してください。\n"
 
 msgid ""
@@ -1492,13 +1523,24 @@ msgid ""
 "\n"
 "(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
 msgstr ""
-" 強調:: <<Verbatim('')>>''イタリック''<<Verbatim('')>>、<<Verbatim(''')>>'''ボールド'''<<Verbatim(''')>>、<<Verbatim(''''')>>'''''ボールドイタリック'''''<<Verbatim(''''')>>、<<Verbatim('')>>''混合 ''<<Verbatim(''')>>'''''ボールド'''<<Verbatim(''')>>とイタリック''<<Verbatim('')>>、<<Verbatim(----)>> 水平線。\n"
-" 見出し:: <<Verbatim(=)>> タイトル1 <<Verbatim(=)>>、<<Verbatim(==)>> タイトル2 <<Verbatim(==)>>、<<Verbatim(===)>> タイトル3 <<Verbatim(===)>>、<<Verbatim(====)>> タイトル4 <<Verbatim(====)>>、<<Verbatim(=====)>> タイトル5 <<Verbatim(=====)>>。\n"
-" リスト:: 半角スペースに続けて: * 小丸、1., a., A., i., I. 番号付アイテム、1.#n nから番号開始、半角スペースのみでインデント。\n"
-" リンク:: <<Verbatim(JoinCapitalizedWords)>>、<<Verbatim([[ターゲット|リンクテキスト]])>>。\n"
-" 表:: || セルテキスト |||| 2列にわたるセルテキスト ||、表やタイトルのあとには空白を入力しないでください。\n"
+" 強調:: <<Verbatim('')>>''イタリック''<<Verbatim('')>>、<<Verbatim(''')"
+">>'''ボールド'''<<Verbatim(''')>>、<<Verbatim(''''')>>'''''ボールドイタリッ"
+"ク'''''<<Verbatim(''''')>>、<<Verbatim('')>>''混合 ''<<Verbatim(''')"
+">>'''''ボールド'''<<Verbatim(''')>>とイタリック''<<Verbatim('')>>、<<Verbatim"
+"(----)>> 水平線。\n"
+" 見出し:: <<Verbatim(=)>> タイトル1 <<Verbatim(=)>>、<<Verbatim(==)>> タイト"
+"ル2 <<Verbatim(==)>>、<<Verbatim(===)>> タイトル3 <<Verbatim(===)>>、"
+"<<Verbatim(====)>> タイトル4 <<Verbatim(====)>>、<<Verbatim(=====)>> タイトル"
+"5 <<Verbatim(=====)>>。\n"
+" リスト:: 半角スペースに続けて: * 小丸、1., a., A., i., I. 番号付アイテム、1."
+"#n nから番号開始、半角スペースのみでインデント。\n"
+" リンク:: <<Verbatim(JoinCapitalizedWords)>>、<<Verbatim([[ターゲット|リンク"
+"テキスト]])>>。\n"
+" 表:: || セルテキスト |||| 2列にわたるセルテキスト ||、表やタイトルのあとには"
+"空白を入力しないでください。\n"
 "\n"
-"(!) 詳細はHelpOnEditingや [\"シンタックスリファレンス\"]を参照してください。\n"
+"(!) 詳細はHelpOnEditingや [\"シンタックスリファレンス\"]を参照してくださ"
+"い。\n"
 
 msgid "UnSubscribe"
 msgstr "購読中止"
@@ -1695,29 +1737,17 @@ msgstr "index有効"
 msgid "index unavailable"
 msgstr "index無効"
 
-msgid "N/A"
-msgstr "該当せず"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "XapianまたはPython Xapianバインディングがインストールされていません。"
+
+msgid "N/A"
+msgstr "該当せず"
 
 msgid "Xapian search"
 msgstr "Xapianによる検索"
 
-msgid "Xapian Version"
-msgstr "Xapianバージョン"
-
-msgid "PyStemmer not installed"
-msgstr "PyStemmerがインストールされていません"
-
 msgid "Stemming for Xapian"
 msgstr "Xapian向けStemming"
-
-msgid "PyStemmer Version"
-msgstr "PyStemmerのバージョン"
-
-msgid "PyStemmer stems"
-msgstr "Pythonのバージョン"
 
 msgid "Active threads"
 msgstr "アクティブなスレッド"
@@ -1793,6 +1823,14 @@ msgstr ""
 "ださい。"
 
 #, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr ""
+"検索条件 {{{\"%s\"}}} が不適切です。詳細は HelpOnSearching を参照してくださ"
+"い。"
+
+#, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "添付ファイル\"%(filename)s\"のアップロード"
 
@@ -1800,19 +1838,25 @@ msgstr "添付ファイル\"%(filename)s\"のアップロード"
 msgid ""
 "%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
 "missing."
-msgstr "%(extension_name)s %(extension_type)s: 必要な引数 %(argument_name)s が指定されていません。"
+msgstr ""
+"%(extension_name)s %(extension_type)s: 必要な引数 %(argument_name)s が指定さ"
+"れていません。"
 
 #, python-format
 msgid ""
 "%(extension_name)s %(extension_type)s: Invalid %(argument_name)s=%"
 "(argument_value)s!"
-msgstr "%(extension_name)s %(extension_type)s: 引数が不正です %(argument_name)s=%(argument_value)s!"
+msgstr ""
+"%(extension_name)s %(extension_type)s: 引数が不正です %(argument_name)s=%"
+"(argument_value)s!"
 
 #, python-format
 msgid ""
 "Current configuration does not allow embedding of the file %(file)s because "
 "of its mimetype %(mimetype)s."
-msgstr "現在の設定はMIMEタイプが %(mimetype)s であるファイル %(file)s の埋め込みを許可していません。"
+msgstr ""
+"現在の設定はMIMEタイプが %(mimetype)s であるファイル %(file)s の埋め込みを許"
+"可していません。"
 
 msgid "Embedded"
 msgstr "埋め込み"
@@ -2232,7 +2276,7 @@ msgstr "ログインが必要です。"
 msgid "Please first create a homepage before creating additional pages."
 msgstr "最初にホームページを作成してください。"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "You can add some additional sub pages to your already existing homepage "
 "here.\n"
@@ -2252,9 +2296,9 @@ msgid ""
 "||'''Add a new personal page:'''||'''Related access control list "
 "group:'''||\n"
 "||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
-"[\"%(username)s/ReadWriteGroup\"]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[\"%"
-"(username)s/ReadGroup\"]||\n"
+"[[%(username)s/ReadWriteGroup]]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
+"(username)s/ReadGroup]]||\n"
 "||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
 "(username)s only||\n"
 "\n"
@@ -2302,7 +2346,9 @@ msgid "Can't remove regular expression subscription!"
 msgstr "正規表現で記述した購読を停止することはできません。"
 
 msgid "Edit the subscription regular expressions in your settings."
-msgstr "[\"ユーザプレファレンス\"]にて、購読対象を指定する正規表現を編集してください。"
+msgstr ""
+"[\"ユーザプレファレンス\"]にて、購読対象を指定する正規表現を編集してくださ"
+"い。"
 
 msgid "You need to be subscribed to unsubscribe."
 msgstr "購読していないページの購読を止めることはできません。"
@@ -2365,7 +2411,8 @@ msgid ""
 "empty, we derive the page name from the file name."
 msgstr ""
 "下記のページ名のコンテンツをアップロードすることができます。\n"
-"もしページ名を変更すれば、別のページのコンテンツをアップロードすることもできます。\n"
+"もしページ名を変更すれば、別のページのコンテンツをアップロードすることもでき"
+"ます。\n"
 "ページ名が空の場合、ファイル名からページ名を決定します。"
 
 msgid "File to load page content from"
@@ -2389,7 +2436,9 @@ msgstr "購読を利用するには、ログインしてください。"
 msgid ""
 "Add your email address or Jabber ID in your user settings to use "
 "subscriptions."
-msgstr "購読を利用するには、[\"ユーザプレファレンス\"]にてメールアドレスまたはJabber IDを登録してください。"
+msgstr ""
+"購読を利用するには、[\"ユーザプレファレンス\"]にてメールアドレスまたはJabber "
+"IDを登録してください。"
 
 msgid "You are already subscribed to this page."
 msgstr "このページは既に購読済みです。"
@@ -2516,14 +2565,6 @@ msgstr "高機能検索: \"%s\""
 #, python-format
 msgid "Full Text Search: \"%s\""
 msgstr "テキスト検索: \"%s\""
-
-#, python-format
-msgid ""
-"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
-"for more information."
-msgstr ""
-"検索条件 {{{\"%s\"}}} が不適切です。詳細は HelpOnSearching を参照してくださ"
-"い。"
 
 #, python-format
 msgid ""
@@ -2679,7 +2720,8 @@ msgstr ""
 "\n"
 "=== パスワード初期化 ===\n"
 "もしすでにパスワード回復トークンを通知するメールを受け取っている場合、\n"
-"ユーザ名、パスワード回復トークン、新しいパスワード(2回)を以下に入力してください。"
+"ユーザ名、パスワード回復トークン、新しいパスワード(2回)を以下に入力してくださ"
+"い。"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -2799,7 +2841,9 @@ msgstr "添付ファイル'%(new_pagename)s/%(new_filename)s'はすでに存在�
 msgid ""
 "Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/%"
 "(new_filename)s'."
-msgstr "添付ファイル'%(pagename)s/%(filename)s'は'%(new_pagename)s/%(new_filename)s'に移動しました。"
+msgstr ""
+"添付ファイル'%(pagename)s/%(filename)s'は'%(new_pagename)s/%(new_filename)"
+"s'に移動しました。"
 
 msgid "Nothing changed"
 msgstr "何も変更されませんでした。"
@@ -2850,36 +2894,46 @@ msgid "You are not allowed to unzip attachments of this page."
 msgstr "このページの添付ファイルをunzipする権限がありません。"
 
 #, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr ""
-"添付ファイル'%(filename)s'はunzipされませんでした。原因は展開されたファイルが"
-"大きすぎるためです(%(space)d kB足りません)。"
+msgid "The file %(filename)s is not a .zip file."
+msgstr "%(filename)sはzipファイルではありません。"
 
 #, python-format
 msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too many (%(count)d missing)."
+"Attachment '%(filename)s' not unzipped because some files in the zip are "
+"either not in the same directory or exceeded the single file size limit (%"
+"(maxsize_file)d kB)."
 msgstr ""
-"添付ファイル'%(filename)s'はunzipされませんでした。原因は展開されたファイル数"
-"が多すぎるためです(%(count)d個不足しています)。"
+"添付ファイル'%(filename)s'はunzipされませんでした。アーカイブ内のファイルが同"
+"一ディレクトリにないか、ファイルサイズの上限(%(maxsize_file)d)を超えているこ"
+"とが原因です。"
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment storage size limit (%(size)d kB)."
+msgstr ""
+"添付ファイル'%(filename)s'はunzipされませんでした。1ページに添付できるファイ"
+"ルサイズの上限を(%(size)d kB)を超えています。"
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment count limit (%(count)d)."
+msgstr ""
+"添付ファイル'%(filename)s'はunzipされませんでした。1ページに添付できるファイ"
+"ル数の上限(%(count)d)を超えています。"
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' partially unzipped (did not overwrite: %(filelist)"
+"s)."
+msgstr ""
+"添付ファイル'%(filename)s'を部分的にunzipしました。(以下のファイルは上書きさ"
+"れませんでした。: %(filelist)s)"
 
 #, python-format
 msgid "Attachment '%(filename)s' unzipped."
 msgstr "添付ファイル'%(filename)s'をunzipしました。"
-
-#, python-format
-msgid ""
-"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
-"files only, exist already or reside in folders."
-msgstr ""
-"添付ファイル'%(filename)s'はunzipされませんでした。原因はファイルが大きすぎ"
-"る、すでにファイルが存在するなどが考えられます。"
-
-#, python-format
-msgid "The file %(filename)s is not a .zip file."
-msgstr "%(filename)sはzipファイルではありません。"
 
 #, python-format
 msgid "Attachment '%(filename)s'"
@@ -2952,6 +3006,24 @@ msgstr "このページでアクション %(action_name)s を使用する権限�
 
 msgid "Login and try again."
 msgstr "ログインして、もう一度試してみてください。"
+
+#~ msgid "Xapian Version"
+#~ msgstr "Xapianバージョン"
+
+#~ msgid "PyStemmer not installed"
+#~ msgstr "PyStemmerがインストールされていません"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "PyStemmerのバージョン"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "Pythonのバージョン"
+
+#~ msgid "XML RPC error: %s"
+#~ msgstr "XML-RPC エラー: %s"
+
+#~ msgid "Low-level communication error: %s"
+#~ msgstr "低レベル通信エラー: %s"
 
 #~ msgid "New Page or New Attachment"
 #~ msgstr "新しいページまたは添付ファイル"

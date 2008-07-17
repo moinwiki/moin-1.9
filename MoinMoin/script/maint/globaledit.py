@@ -1,4 +1,4 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 """
 MoinMoin - do global changes to all pages in a wiki.
 
@@ -35,7 +35,7 @@ General syntax: moin [options] maint globaledit [globaledit-options]
         MoinScript.__init__(self, argv, def_values)
 
     def do_edit(self, pagename, origtext):
-        if pagename in ['LocalSpellingWords', 'LocalBadContent', ] or pagename.endswith('Template'):
+        if pagename in ['LocalSpellingWords', 'LocalBadContent', ]:
             return origtext
         language_line = format_line = masterpage = None
         acl_lines = []
@@ -71,21 +71,27 @@ General syntax: moin [options] maint globaledit [globaledit-options]
             language_line = '#language en'
         if not format_line:
             format_line = '#format wiki'
+        aclold = '#acl MoinPagesEditorGroup:read,write,delete,revert All:read'
+        if aclold in acl_lines:
+            acl_lines.remove(aclold)
         if not acl_lines and (
-            masterpage is None or masterpage not in ['FrontPage', 'WikiSandBox', ] and not masterpage.endswith('Template')):
-            acl_lines = ['#acl MoinPagesEditorGroup:read,write,delete,revert All:read']
+            masterpage is None and not pagename.endswith('Template') or
+            masterpage not in ['FrontPage', 'WikiSandBox', ] and not (pagename.endswith('Template') or masterpage.endswith('Template'))):
+            acl_lines = ['#acl -All:write Default']
         if not master_lines:
             master_lines = ['##master-page:Unknown-Page', '##master-date:Unknown-Date', ]
 
-        c1old = "## Please edit (or translate) system/help pages on the moinmaster wiki ONLY."
-        c2old = "## For more information, please see MoinMaster:MoinPagesEditorGroup."
-        c1 = "## Please edit system and help pages ONLY in the moinmaster wiki! For more"
-        c2 = "## information, please see MoinMaster:MoinPagesEditorGroup."
-        for c in (c1old, c2old, c1, c2):
+        cold = [u"## Please edit system and help pages ONLY in the moinmaster wiki! For more",
+                u"## information, please see MoinMaster:MoinPagesEditorGroup.",
+        ]
+        cnew = [u"## Please edit system and help pages ONLY in the master wiki!",
+                u"## For more information, please see MoinMoin:MoinDev/Translation.",
+        ]
+        for c in cold + cnew:
             if c in comment_lines:
                 comment_lines.remove(c)
 
-        comment_lines = [c1, c2, ] + comment_lines
+        comment_lines = cnew + comment_lines
 
         if content_lines and content_lines[-1].strip(): # not an empty line at EOF
             content_lines.append('')

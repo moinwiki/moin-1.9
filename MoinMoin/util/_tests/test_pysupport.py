@@ -11,7 +11,8 @@ import os, errno
 
 import py
 
-from MoinMoin.util import pysupport
+from MoinMoin.util import pysupport, random_string
+from MoinMoin import wikiutil
 
 
 class TestImportNameFromMoin(object):
@@ -47,7 +48,6 @@ class TestImportNameFromPlugin(object):
         """ Check for valid plugin package """
         self.pluginDirectory = os.path.join(self.request.cfg.data_dir, 'plugin', 'parser')
         self.checkPackage(self.pluginDirectory)
-        self.pluginModule = (self.request.cfg.siteid + '.plugin.parser.' + self.plugin)
 
     def checkPackage(self, path):
         for item in (path, os.path.join(path, '__init__.py')):
@@ -62,16 +62,18 @@ class TestImportNameFromPlugin(object):
         return os.path.join(self.pluginDirectory, self.plugin + suffix)
 
 
-class TestImportNonExisiting(TestImportNameFromPlugin):
+class TestImportNonExisting(TestImportNameFromPlugin):
 
     plugin = 'NonExistingWikiPlugin'
 
-    def testNonEsisting(self):
+    def testNonExisting(self):
         """ pysupport: import nonexistent wiki plugin fail """
         if self.pluginExists():
             py.test.skip('plugin exists: %s' % self.plugin)
-        py.test.raises(ImportError, pysupport.importName,
-                       self.pluginModule, self.name)
+        py.test.raises(wikiutil.PluginMissingError,
+                       wikiutil.importWikiPlugin,
+                           self.request.cfg, 'parser',
+                           self.plugin, 'Parser')
 
 
 class TestImportExisting(TestImportNameFromPlugin):
@@ -90,8 +92,12 @@ class TestImportExisting(TestImportNameFromPlugin):
         """
         try:
             self.createTestPlugin()
-            plugin = pysupport.importName(self.pluginModule, self.name)
-            assert getattr(plugin, '__name__', None) == self.name
+            # clear the plugin cache...
+            self.request.cfg._site_plugin_lists = {}
+            parser = wikiutil.importWikiPlugin(self.request.cfg, 'parser',
+                                               self.plugin, 'Parser')
+            assert getattr(parser, '__name__', None) == 'Parser'
+            assert parser.key == self.key
         finally:
             self.deleteTestPlugin()
 
@@ -100,14 +106,15 @@ class TestImportExisting(TestImportNameFromPlugin):
         if self.pluginExists():
             self.shouldDeleteTestPlugin = False
             py.test.skip("Won't overwrite exiting plugin: %s" % self.plugin)
+        self.key = random_string(32, 'abcdefg')
         data = '''
 # If you find this file in your wiki plugin directory, you can safely
 # delete it.
 import sys, os
 
 class Parser:
-    pass
-'''
+    key = '%s'
+''' % self.key
         try:
             file(self.pluginFilePath('.py'), 'w').write(data)
         except Exception, err:

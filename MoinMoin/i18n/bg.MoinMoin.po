@@ -1,8 +1,8 @@
-## Please edit system and help pages ONLY in the moinmaster wiki! For more
-## information, please see MoinMaster:MoinPagesEditorGroup.
+## Please edit system and help pages ONLY in the master wiki!
+## For more information, please see MoinMoin:MoinDev/Translation.
 ##master-page:None
 ##master-date:None
-#acl MoinPagesEditorGroup:read,write,delete,revert All:read
+#acl -All:write Default
 #format gettext
 #language bg
 
@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 23:52+0200\n"
+"POT-Creation-Date: 2008-06-21 22:47+0200\n"
 "PO-Revision-Date: 2006-02-11 12:20-0800\n"
 "Last-Translator: Hristo Iliev <hristo@phys.uni-sofia.bg>\n"
 "Language-Team: Bulgarian <moin-devel@lists.sourceforge.net>\n"
@@ -492,6 +492,9 @@ msgstr "[празни]"
 msgid "filter"
 msgstr "филтър"
 
+msgid "about"
+msgstr ""
+
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -586,6 +589,10 @@ msgstr "Изпрати ми моите данни по пощата"
 msgid "Missing password. Please enter user name and password."
 msgstr "Липсва парола. Моля, въведете потребителско име и парола."
 
+#, python-format
+msgid "LDAP server %(server)s failed."
+msgstr ""
+
 #, fuzzy
 msgid "You need to log in."
 msgstr "Вие излязохте успешно."
@@ -603,6 +610,9 @@ msgid ""
 msgstr ""
 
 msgid "Choose this name"
+msgstr ""
+
+msgid "This is not a valid username, choose a different one."
 msgstr ""
 
 msgid ""
@@ -624,9 +634,6 @@ msgid "Verification canceled."
 msgstr "Операцията беше отменена."
 
 msgid "OpenID failure."
-msgstr ""
-
-msgid "This is not a valid username, choose a different one."
 msgstr ""
 
 msgid "Your account is now associated to your OpenID."
@@ -1194,6 +1201,15 @@ msgstr "Общи настройки"
 msgid "Quick links"
 msgstr "Бързи връзки"
 
+msgid "OpenID server"
+msgstr ""
+
+msgid "The selected websites have been removed."
+msgstr ""
+
+msgid "Trusted websites"
+msgstr ""
+
 #, fuzzy, python-format
 msgid ""
 "Dear Wiki user,\n"
@@ -1327,14 +1343,6 @@ msgstr "Незначителна "
 msgid ""
 "Attachment link: %(attach)s\n"
 "Page link: %(page)s\n"
-msgstr ""
-
-#, python-format
-msgid "XML RPC error: %s"
-msgstr ""
-
-#, python-format
-msgid "Low-level communication error: %s"
 msgstr ""
 
 #, fuzzy
@@ -1723,31 +1731,17 @@ msgstr "достъпен индекс"
 msgid "index unavailable"
 msgstr "недостъпен индекс"
 
-msgid "N/A"
-msgstr "няма"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "Xapian и/или Python Xapian не са инсталирани"
+
+msgid "N/A"
+msgstr "няма"
 
 msgid "Xapian search"
 msgstr "Търсене чрез Xapian"
 
-msgid "Xapian Version"
-msgstr "Версия на Xapian"
-
-msgid "PyStemmer not installed"
-msgstr ""
-
 msgid "Stemming for Xapian"
 msgstr ""
-
-#, fuzzy
-msgid "PyStemmer Version"
-msgstr "Версия на Python"
-
-#, fuzzy
-msgid "PyStemmer stems"
-msgstr "Версия на Python"
 
 msgid "Active threads"
 msgstr "Активни нишки"
@@ -1819,6 +1813,14 @@ msgstr "Търсене в текста"
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr "Моля използвайте по-избирателни термини за търсене вместо {{{\"%s\"}}}"
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr ""
+"Заявката за търсене {{{\"%s\"}}} е невалидна. Моля, погледнете "
+"HelpOnSearching за повече информация."
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -2254,7 +2256,7 @@ msgid "Please first create a homepage before creating additional pages."
 msgstr ""
 "Моля, създайте Ваша домашна страница преди да започнете да създавате други."
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "You can add some additional sub pages to your already existing homepage "
 "here.\n"
@@ -2274,9 +2276,9 @@ msgid ""
 "||'''Add a new personal page:'''||'''Related access control list "
 "group:'''||\n"
 "||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
-"[\"%(username)s/ReadWriteGroup\"]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[\"%"
-"(username)s/ReadGroup\"]||\n"
+"[[%(username)s/ReadWriteGroup]]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
+"(username)s/ReadGroup]]||\n"
 "||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
 "(username)s only||\n"
 "\n"
@@ -2560,14 +2562,6 @@ msgstr "Разширено Търсене: \"%s\""
 #, python-format
 msgid "Full Text Search: \"%s\""
 msgstr "Търсене на текст: \"%s\""
-
-#, python-format
-msgid ""
-"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
-"for more information."
-msgstr ""
-"Заявката за търсене {{{\"%s\"}}} е невалидна. Моля, погледнете "
-"HelpOnSearching за повече информация."
 
 #, python-format
 msgid ""
@@ -2895,36 +2889,43 @@ msgid "You are not allowed to unzip attachments of this page."
 msgstr "Не Ви е позволено да разархивирате допълнения от тази страница."
 
 #, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr ""
-"Приложение '%(filename)s' не може да бъде разархивирано, защото файловете ще "
-"станат твърде дълги (липсват %(space)d kB)."
+msgid "The file %(filename)s is not a .zip file."
+msgstr "Файлът %(filename)s не е .zip файл."
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too many (%(count)d missing)."
-msgstr ""
-"Приложение '%(filename)s' не може да бъде разархивирано, защото файловете ще "
-"станат твърде много (липсват %(count)d)."
-
-#, python-format
-msgid "Attachment '%(filename)s' unzipped."
-msgstr "Приложение '%(filename)s' - разархивирано."
-
-#, python-format
-msgid ""
-"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
-"files only, exist already or reside in folders."
+"Attachment '%(filename)s' not unzipped because some files in the zip are "
+"either not in the same directory or exceeded the single file size limit (%"
+"(maxsize_file)d kB)."
 msgstr ""
 "Приложение '%(filename)s' не може да бъде разархивирано, защото файловете са "
 "твъде големи, само .zip са, вече съществуват или се намират в папки."
 
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment storage size limit (%(size)d kB)."
+msgstr ""
+"Приложение '%(filename)s' не може да бъде разархивирано, защото файловете ще "
+"станат твърде дълги (липсват %(space)d kB)."
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment count limit (%(count)d)."
+msgstr ""
+"Приложение '%(filename)s' не може да бъде разархивирано, защото файловете ще "
+"станат твърде много (липсват %(count)d)."
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' partially unzipped (did not overwrite: %(filelist)"
+"s)."
+msgstr "Приложение '%(filename)s' - разархивирано."
+
 #, python-format
-msgid "The file %(filename)s is not a .zip file."
-msgstr "Файлът %(filename)s не е .zip файл."
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "Приложение '%(filename)s' - разархивирано."
 
 #, python-format
 msgid "Attachment '%(filename)s'"
@@ -2998,6 +2999,17 @@ msgstr "Не Ви е позволено да извършвате %(action_name)
 
 msgid "Login and try again."
 msgstr "Влезте и опитайте отново."
+
+#~ msgid "Xapian Version"
+#~ msgstr "Версия на Xapian"
+
+#, fuzzy
+#~ msgid "PyStemmer Version"
+#~ msgstr "Версия на Python"
+
+#, fuzzy
+#~ msgid "PyStemmer stems"
+#~ msgstr "Версия на Python"
 
 #, fuzzy
 #~ msgid "New Page or New Attachment"
