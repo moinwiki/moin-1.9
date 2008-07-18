@@ -246,7 +246,7 @@ def do_show(pagename, request, content_only=0, count_hit=1, cacheable=1, print_m
         Page(request, pagename).send_page()
     else:
         from MoinMoin.web.contexts import HTTPContext, RenderContext
-        mimetype = request.form.get('mimetype', u"text/html")
+        mimetype = request.values.get('mimetype', u"text/html")
         rev = request.rev or 0
         if rev == 0:
             request.cacheable = cacheable
@@ -317,17 +317,17 @@ def get_names(config):
         config.cache.action_names = actions # remember it
     return config.cache.action_names
 
-def getHandler(request, action, identifier="execute"):
+def getHandler(cfg, action, identifier="execute"):
     """ return a handler function for a given action or None.
 
     TODO: remove request dependency
     """
     # check for excluded actions
-    if action in request.cfg.actions_excluded:
+    if action in cfg.actions_excluded:
         return None
 
     try:
-        handler = wikiutil.importPlugin(request.cfg, "action", action, identifier)
+        handler = wikiutil.importPlugin(cfg, "action", action, identifier)
     except wikiutil.PluginMissingError:
         handler = globals().get('do_' + action)
 
@@ -363,7 +363,6 @@ def get_available_actions(config, page, user):
                 # Prevent modification of underlay only pages, or pages
                 # the user can't write and can't delete
                 excluded = [u'RenamePage', u'DeletePage', ] # AttachFile must NOT be here!
-
         return set(action for action in actions if not action in excluded)
 
 
