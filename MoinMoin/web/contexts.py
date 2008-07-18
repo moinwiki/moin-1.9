@@ -171,6 +171,24 @@ class HTTPMixin(object):
     _cache_disabled = EnvironProxy('old._cache_disabled', 0)
     cacheable = EnvironProxy('old.cacheable', 0)
 
+    def _getter(self):
+        return self.request.mimetype
+    def _setter(self, value):
+        self.request.mimetype = value
+    def _deleter(self):
+        del self.request.mimetype
+    mimetype = property(_getter, _setter, _deleter)
+
+    def _getter(self):
+        return self.request.content_type
+    def _setter(self, value):
+        self.request.content_type = value
+    def _deleter(self):
+        del self.request.content_type
+    content_type = property(_getter, _setter, _deleter)
+
+    del _getter, _setter, _deleter
+
     def write(self, *data):
         if len(data) > 1:
             logging.warning("Some code still uses write with multiple arguments, "
