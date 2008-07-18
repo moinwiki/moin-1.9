@@ -169,7 +169,7 @@ def run(request):
             # Try action
             else:
                 from MoinMoin import action
-                handler = action.getHandler(request, action_name)
+                handler = action.getHandler(request.cfg, action_name)
                 if handler is None:
                     msg = _("You are not allowed to do %(action_name)s on this page.") % {
                             'action_name': wikiutil.escape(action_name), }
@@ -206,3 +206,22 @@ def application(request):
 
 application = Request.application(application)
 application = HTTPExceptionsMiddleware(application)
+
+def run_server(config):
+    from os import path
+    from MoinMoin.config import url_prefix_static
+    from werkzeug.serving import run_simple
+    from werkzeug.utils import SharedDataMiddleware
+
+    shared = {url_prefix_static: config.docs,
+              '/favicon.ico': path.join(config.docs, 'favicon.ico'),
+              '/robots.txt': path.join(config.docs, 'robots.txt')}
+
+    app = SharedDataMiddleware(application, shared)
+
+    params = {}
+    params['use_debugger'] = config.traceback_show
+    params['threaded'] = True
+    params['use_reloader'] = config.reload_server
+
+    run_simple(config.interface, config.port, app, **params)

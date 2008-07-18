@@ -11,8 +11,9 @@ import sys
 import signal
 
 from MoinMoin.script import MoinScript
-from MoinMoin.server.server_standalone import StandaloneConfig, run
+from MoinMoin.server.server_standalone import StandaloneConfig
 from MoinMoin.server.daemon import Daemon
+from MoinMoin.wsgiapp import run_server
 
 class PluginScript(MoinScript):
     def __init__(self, argv, def_values):
@@ -38,18 +39,6 @@ class PluginScript(MoinScript):
             help="Set the ip to listen on. Use \"\" for all interfaces. Default: localhost"
         )
         self.parser.add_option(
-            "--serverClass", dest="serverClass",
-            help="Set the server model to use. Choices: ThreadPool, serverClass, Forking, Simple. Default: ThreadPool"
-        )
-        self.parser.add_option(
-            "--threadLimit", dest="threadLimit", type="int",
-            help="Set the maximum number of threads to use. Default: 10"
-        )
-        self.parser.add_option(
-            "--requestQueueSize", dest="requestQueueSize", type="int",
-            help="Set the size of the request queue. Default: 50"
-        )
-        self.parser.add_option(
             "--start", dest="start", action="store_true",
             help="Start server in background."
         )
@@ -61,22 +50,15 @@ class PluginScript(MoinScript):
             "--pidfile", dest="pidfile",
             help="Set file to store pid of moin daemon in. Default: moin.pid"
         )
+        self.parser.add_option(
+            "--reload", dest="reload", action="store_true",
+            help="Reload the server if there are changes to any loaded python files"
+         )
 
     def mainloop(self):
         # we don't expect non-option arguments
         if self.args:
             self.parser.error("incorrect number of arguments")
-
-        thread_choices = ["ThreadPool", "Threading", "Forking", "Simple"]
-        serverClass = "ThreadPool"
-        if self.options.serverClass:
-            thread_choices2 = [x.upper() for x in thread_choices]
-            thread_choice = self.options.serverClass.upper()
-            try:
-                serverClass_index = thread_choices2.index(thread_choice)
-            except ValueError:
-                self.parser.error("invalid serverClass type")
-            serverClass = thread_choices[serverClass_index]
 
         pidfile = "moin.pid"
         if self.options.pidfile:
@@ -97,7 +79,7 @@ class PluginScript(MoinScript):
             try:
                 if self.options.config_dir:
                     sys.path.insert(0, self.options.config_dir)
-                from wikiserverconfig import Config
+                from wikiconfig import Config
             except ImportError, err:
                 if 'Config' in str(err):
                     # we are unable to import Config
@@ -114,17 +96,20 @@ class PluginScript(MoinScript):
                 Config.port = self.options.port
             if self.options.interface:
                 Config.interface = self.options.interface
-            Config.serverClass = serverClass + 'Server'
-            if self.options.threadLimit:
-                Config.threadLimit = self.options.threadLimit
-            if self.options.requestQueueSize:
-                Config.requestQueueSize = self.options.requestQueueSize
+
+            if not hasattr(Config, 'docs'):
+                docs = os.path.join('wiki', 'htdocs')
+                if not os.path.exists(docs):
+                    docs = "/usr/share/moin/htdocs"
+                Config.docs = docs
+
+            Config.reload_server = self.options.reload
 
             if self.options.start:
-                daemon = Daemon('moin', pidfile, run, Config)
+                daemon = Daemon('moin', pidfile, run_server, Config)
                 daemon.do_start()
             else:
-                run(Config)
+                run_server(Config)
 
 class DefaultConfig(StandaloneConfig):
     docs = os.path.join('wiki', 'htdocs')
@@ -134,6 +119,3 @@ class DefaultConfig(StandaloneConfig):
     group = ''
     port = 8080
     interface = 'localhost'
-    serverClass = 'ThreadPoolServer'
-    threadLimit = 10
-    requestQueueSize = 50
