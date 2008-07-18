@@ -365,6 +365,7 @@ def execute(macro, text):
                             title = match.group(1)
                             title = wikiutil.escape(title).replace("'", "\\'")
                             titletext.append(title)
+                    link = wikiutil.escape(link).replace("'", "\\'")
                     tipname = link
                     tiptitle = link
                     tiptext = '<br>'.join(titletext)
