@@ -2432,7 +2432,7 @@ def anchor_name_from_text(text):
 ########################################################################
 
 def createTicket(request, tm=None, action=None):
-    """ Create a ticket using a site-specific secret (the config)
+    """ Create a ticket using a configured secret
 
         @param tm: unix timestamp (optional, uses current time if not given)
         @param action: action name (optional, uses current action if not given)
@@ -2457,19 +2457,11 @@ def createTicket(request, tm=None, action=None):
         except:
             action = 'None'
 
+    secret = request.cfg.secrets['wikiutil/tickets']
+    digest = sha.new(secret)
 
     ticket = "%s.%s.%s" % (tm, pagename, action)
-    digest = sha.new()
     digest.update(ticket)
-
-    varnames = ['data_dir', 'data_underlay_dir', 'language_default',
-                'mail_smarthost', 'mail_from', 'page_front_page',
-                'theme_default', 'sitename', 'logo_string',
-                'interwikiname', 'user_homewiki', 'acl_rights_before', ]
-    for varname in varnames:
-        var = getattr(request.cfg, varname, None)
-        if isinstance(var, (str, unicode)):
-            digest.update(repr(var))
 
     return "%s.%s" % (ticket, digest.hexdigest())
 
