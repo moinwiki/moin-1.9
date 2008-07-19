@@ -60,7 +60,8 @@ class TestSendCached:
         request = self.request
         key = 'nooneknowsit'
         data = "dontcare"
-        url = cache.put(request, key, data)
+        cache.put(request, key, data)
+        url = cache.url(request, key)
 
         assert key in url
         meta_cache = caching.CacheEntry(request,
@@ -78,7 +79,8 @@ class TestSendCached:
         key = 'nooneknowsit'
         filename = "test.png"
         data = "dontcare"
-        url = cache.put(request, key, data, filename=filename, last_modified=1)
+        cache.put(request, key, data, filename=filename, last_modified=1)
+        url = cache.url(request, key)
         assert key in url
 
         meta_cache = caching.CacheEntry(request,
@@ -97,7 +99,8 @@ class TestSendCached:
         filename = "test.png"
         data = "dontcareatall"
         data_file = StringIO.StringIO(data)
-        url = cache.put(request, key, data_file)
+        cache.put(request, key, data_file)
+        url = cache.url(request, key)
 
         assert key in url
         meta_cache = caching.CacheEntry(request,
@@ -143,7 +146,8 @@ class TestSendCached:
         rendered1 = render(source)
         key1 = keycalc(source)
 
-        url1 = cache.put(request, key1, rendered1)
+        cache.put(request, key1, rendered1)
+        url1 = cache.url(request, key1)
         assert 'key=%s' % key1 in url1
 
         data_cache = caching.CacheEntry(request,
@@ -160,7 +164,8 @@ class TestSendCached:
         rendered2 = render(source)
         key2 = keycalc(source)
 
-        url2 = cache.put(request, key2, rendered2)
+        cache.put(request, key2, rendered2)
+        url2 = cache.url(request, key2)
         assert 'key=%s' % key2 in url2
 
         data_cache = caching.CacheEntry(request,
