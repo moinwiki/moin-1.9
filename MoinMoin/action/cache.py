@@ -210,12 +210,16 @@ def _get_datafile(request, key):
 
 def _do_get(request, key):
     """ send a complete http response with headers/data cached for key """
-    last_modified, headers = _get_headers(request, key)
-    if request.if_modified_since == last_modified:
-        request.emit_http_headers(["Status: 304 Not modified"])
-    else:
-        request.emit_http_headers(headers)
-        request.send_file(_get_datafile(request, key))
+    try:
+        last_modified, headers = _get_headers(request, key)
+        if request.if_modified_since == last_modified:
+            request.emit_http_headers(["Status: 304 Not modified"])
+        else:
+            data_file = _get_datafile(request, key)
+            request.emit_http_headers(headers)
+            request.send_file(data_file)
+    except caching.CacheError:
+        request.emit_http_headers(["Status: 404 Not found"])
 
 
 def _do_remove(request, key):
