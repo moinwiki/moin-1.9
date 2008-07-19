@@ -6,7 +6,7 @@
     This can be used e.g. for all image generating extensions:
     E.g. a thumbnail generating extension just uses cache.put() to
     write the thumbnails into the cache and emits <img src="cache_url">
-    to display them. cache_url is returned by put() or url().
+    to display them. cache_url is returned by url().
 
     IMPORTANT: use some non-guessable key derived from your source content,
                use cache.key() if you don't have something better.
@@ -101,7 +101,6 @@ def put(request, key, data,
     @param content_type: content-type header value (str, default: autodetect from filename)
     @param last_modified: last modified timestamp (int, default: autodetect)
     @param content_length: data length for content-length header (int, default: autodetect)
-    @return: URL of cached object
     """
     import os.path
     from MoinMoin.util import timefuncs
@@ -137,8 +136,6 @@ def put(request, key, data,
 
     meta_cache = caching.CacheEntry(request, cache_arena, key+'.meta', cache_scope, do_locking=do_locking, use_pickle=True)
     meta_cache.update((last_modified, headers))
-
-    return url(request, key, do='get')
 
 
 def exists(request, key, strict=False):
