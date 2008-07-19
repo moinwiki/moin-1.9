@@ -7,7 +7,7 @@
     ------------
     Assume we have a big picture (bigpic) and we want to efficiently show some
     thumbnail (thumbpic) for it:
-    
+
     # first calculate a (hard to guess) cache key (this key will change if the
     # original data (bigpic) changes):
     key = cache.key(..., attachname=bigpic, ...)
@@ -22,16 +22,6 @@
 
     url = cache.url(..., key)
     html = '<img src="%s">' % url
-    
-    TODO:
-    * add secret to wikiconfig
-    * add error handling
-    * maybe use page local caching, not global:
-      + smaller directories
-      - but harder to clean
-      - harder to backup data_dir
-    * move file-like code to caching module
-    * add auto-key generation?
 
     @copyright: 2008 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
@@ -54,7 +44,12 @@ action_name = __name__.split('.')[-1]
 
 # Do NOT get this directly from request.form or user would be able to read any cache!
 cache_arena = 'sendcache'  # just using action_name is maybe rather confusing
+
+# We maybe could use page local caching (not 'wiki' global) to have less directory entries.
+# Local is easier to automatically cleanup if an item changes. Global is easier to manually cleanup.
+# Local makes data_dir much larger, harder to backup.
 cache_scope = 'wiki'
+
 do_locking = False
 
 def key(request, wikiname=None, itemname=None, attachname=None, content=None, secret=None):
