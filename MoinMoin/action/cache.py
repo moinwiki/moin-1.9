@@ -89,8 +89,10 @@ def key(request, wikiname=None, itemname=None, attachname=None, content=None, se
     @param attachname: the filename of the attachment
     @param content: content data as unicode object (e.g. for page content or
                     parser section content)
+    @param secret: secret for hMAC calculation (default: use secret from cfg)
     """
-    secret = secret or 'nobodyexpectedsuchasecret'
+    if secret is None:
+        secret = request.cfg.secrets['action/cache']
     if content:
         hmac_data = content
     elif itemname is not None and attachname is not None:
