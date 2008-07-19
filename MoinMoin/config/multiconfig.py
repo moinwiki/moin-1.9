@@ -533,6 +533,8 @@ Lists: * bullets; 1., a. numbered items.
     session_handler = session.DefaultSessionHandler()
     session_id_handler = session.MoinCookieSessionIDHandler()
 
+    secrets = None  # if wiki admin does not set it, will get calculated from some cfg values
+
     shared_intermap = None # can be string or list of strings (filenames)
 
     show_hosts = True # show hostnames on RecentChanges / info/history action
@@ -828,6 +830,10 @@ Lists: * bullets; 1., a. numbered items.
             from xmlrpclib import Server
             self.notification_server = Server(self.notification_bot_uri, )
 
+        if self.secrets is None:  # Note: this is 'secrets' (with s at the end), not 'secret' (as above)
+                                  # This stuff is already cleaned up in 1.8 repo...
+            self.secrets = self.calc_secrets()
+
         # Cache variables for the properties below
         self._iwid = self._iwid_full = self._meta_dict = None
 
@@ -845,6 +851,19 @@ Lists: * bullets; 1., a. numbered items.
         if self.url_prefix_local is None:
             self.url_prefix_local = self.url_prefix_static
 
+
+    def calc_secrets(self):
+        """ make up some 'secret' using some config values """
+        varnames = ['data_dir', 'data_underlay_dir', 'language_default',
+                    'mail_smarthost', 'mail_from', 'page_front_page',
+                    'theme_default', 'sitename', 'logo_string',
+                    'interwikiname', 'user_homewiki', 'acl_rights_before', ]
+        secret = ''
+        for varname in varnames:
+            var = getattr(self, varname, None)
+            if isinstance(var, (str, unicode)):
+                secret += repr(var)
+        return secret
 
     def load_meta_dict(self):
         """ The meta_dict contains meta data about the wiki instance. """

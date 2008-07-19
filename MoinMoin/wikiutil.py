@@ -2449,20 +2449,10 @@ def createTicket(request, tm=None, action=None):
 
 
     ticket = "%s.%s.%s" % (tm, pagename, action)
-    digest = sha.new()
+    digest = sha.new(request.cfg.secrets)
     digest.update(ticket)
 
-    varnames = ['data_dir', 'data_underlay_dir', 'language_default',
-                'mail_smarthost', 'mail_from', 'page_front_page',
-                'theme_default', 'sitename', 'logo_string',
-                'interwikiname', 'user_homewiki', 'acl_rights_before', ]
-    for varname in varnames:
-        var = getattr(request.cfg, varname, None)
-        if isinstance(var, (str, unicode)):
-            digest.update(repr(var))
-
     return "%s.%s" % (ticket, digest.hexdigest())
-
 
 def checkTicket(request, ticket):
     """Check validity of a previously created ticket"""
