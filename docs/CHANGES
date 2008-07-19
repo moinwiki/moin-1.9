@@ -31,6 +31,12 @@ Known main issues:
     USE BOTH ON YOUR OWN RISK!
 
 Version 1.7.current:
+  New features:
+    * New 'cache' action (can be used to cache expensively rendered output, e.g.
+      scaled images, parsers that render text to images). Once put into the
+      cache, moin can emit a http response for that content very fast and very
+      efficient (including "304 not changed" handling).
+
   Fixes:
     * Security fix: XSS fix for advanced search form
     * Avoid creation of new pagedirs with empty edit-log files by just
@@ -56,6 +62,12 @@ Version 1.7.current:
       the biggest headings
     * OpenID RP: make it compatible to python-openid 2.2.x
     * PackagePages.collectpackage: removed encoding from file name of zipfile
+
+  Developer notes:
+    * New file-like API in MoinMoin.caching (good for dealing with medium
+      to large files without consuming lots of memory).
+    * New MoinMoin.action.cache - fast/efficient serving of stuff you put
+      into the cache.
 
 Version 1.7.0:
   Note: This is a reduced CHANGES, ommitting details from rc/beta test and
