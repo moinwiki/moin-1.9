@@ -81,6 +81,8 @@ class FileSessionService(SessionService):
 
         if session.should_save:
             self.store.save(session)
+
+        if session.new:
             cookie_lifetime = request.cfg.cookie_lifetime * 3600
             cookie_expires = time.time() + cookie_lifetime
             cookie = dump_cookie(self.cookie_name, session.sid,
