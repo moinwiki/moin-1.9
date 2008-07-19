@@ -11,7 +11,7 @@ from StringIO import StringIO
 
 from werkzeug.wrappers import Request as WerkzeugRequest
 from werkzeug.wrappers import Response as WerkzeugResponse
-from werkzeug.utils import EnvironHeaders, cached_property
+from werkzeug.utils import EnvironHeaders, cached_property, Href
 from werkzeug.utils import create_environ, url_encode
 from werkzeug.http import parse_cache_control_header
 
@@ -37,6 +37,11 @@ class Request(WerkzeugRequest, WerkzeugResponse):
         WerkzeugRequest.__init__(self, environ, populate_request, shallow)
         WerkzeugResponse.__init__(self, response, status, headers,
                                   mimetype, content_type)
+        if self.script_root:
+            self.href = Href(self.script_root, self.charset)
+        else:
+            self.href = Href('/')
+        self.abs_href = Href(self.url_root, self.charset)
 
     data = WerkzeugResponse.data
     stream = WerkzeugResponse.stream

@@ -76,34 +76,20 @@ def absoluteName(url, pagename):
     else:
         return u"/".join(pieces[:-1]), pieces[-1]
 
-
-def attachUrl(request, pagename, filename=None, **kw):
-    # filename is not used yet, but should be used later to make a sub-item url
-    if kw:
-        qs = '?%s' % wikiutil.makeQueryString(kw, want_unicode=False)
-    else:
-        qs = ''
-    return "%s/%s%s" % (request.script_root, wikiutil.quoteWikinameURL(pagename), qs)
-
-
 def getAttachUrl(pagename, filename, request, addts=0, escaped=0, do='get', drawing='', upload=False):
     """ Get URL that points to attachment `filename` of page `pagename`. """
     if upload:
         if not drawing:
-            url = attachUrl(request, pagename, filename,
-                            rename=wikiutil.taintfilename(filename), action=action_name)
+            url = request.href(pagename, rename=wikiutil.taintfilename(filename),
+                               action=action_name)
         else:
-            url = attachUrl(request, pagename, filename,
-                            rename=wikiutil.taintfilename(filename), drawing=drawing, action=action_name)
+            url = request.href(pagename, rename=wikiutil.taintfilename(filename),
+                               drawing=drawing, action=action_name)
     else:
         if not drawing:
-            url = attachUrl(request, pagename, filename,
-                            target=filename, action=action_name, do=do)
+            url = request.href(pagename, target=filename, action=action_name, do=do)
         else:
-            url = attachUrl(request, pagename, filename,
-                            drawing=drawing, action=action_name)
-    if escaped:
-        url = wikiutil.escape(url)
+            url = request.href(pagename, drawing=drawing, action=action_name)
     return url
 
 
@@ -123,7 +109,7 @@ def getIndicator(request, pagename):
     fmt = request.formatter
     attach_count = _('[%d attachments]') % len(files)
     attach_icon = request.theme.make_icon('attach', vars={'attach_count': attach_count})
-    attach_link = (fmt.url(1, attachUrl(request, pagename, action=action_name), rel='nofollow') +
+    attach_link = (fmt.url(1, request.href(pagename, action=action_name), rel='nofollow') +
                    attach_icon +
                    fmt.url(0))
     return attach_link
@@ -411,9 +397,9 @@ def send_hotdraw(pagename, request):
     basename = request.form['drawing']
     drawpath = getAttachUrl(pagename, basename + '.draw', request, escaped=1)
     pngpath = getAttachUrl(pagename, basename + '.png', request, escaped=1)
-    pagelink = attachUrl(request, pagename, '', action=action_name, ts=now)
+    pagelink = request.href(pagename, action=action_name, ts=now)
     helplink = Page(request, "HelpOnActions/AttachFile").url(request)
-    savelink = attachUrl(request, pagename, '', action=action_name, do='savedrawing')
+    savelink = request.href(pagename, action=action_name, do='savedrawing')
     #savelink = Page(request, pagename).url(request) # XXX include target filename param here for twisted
                                            # request, {'savename': request.form['drawing']+'.draw'}
     #savelink = '/cgi-bin/dumpform.bat'
@@ -460,7 +446,7 @@ def send_uploadform(pagename, request):
     if writeable:
         request.write('<h2>' + _("New Attachment") + '</h2>')
         request.write("""
-<form action="%(baseurl)s/%(pagename)s" method="POST" enctype="multipart/form-data">
+<form action="%(url)s" method="POST" enctype="multipart/form-data">
 <dl>
 <dt>%(upload_label_file)s</dt>
 <dd><input type="file" name="file" size="50"></dd>
@@ -477,8 +463,7 @@ def send_uploadform(pagename, request):
 </p>
 </form>
 """ % {
-    'baseurl': request.script_root,
-    'pagename': wikiutil.quoteWikinameURL(pagename),
+    'url': request.href(pagename),
     'action_name': action_name,
     'upload_label_file': _('File to upload'),
     'upload_label_rename': _('Rename to'),
