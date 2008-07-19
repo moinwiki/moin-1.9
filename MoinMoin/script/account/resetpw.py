@@ -23,13 +23,10 @@ General syntax: moin [options] account resetpw [newpw-options] newpassword
     --config-dir=/path/to/my/cfg/ --wiki-url=wiki.example.org/
 
 [newpw-options] see below:
-    1. If using usernames, verify that multiple usernames with the same
-       user ID do not exist.
-
-    2. To change JohnSmith's password:
+    1. To change JohnSmith's password:
        moin ... account resetpw --name JohnSmith new-password
 
-    3. To change the password for the UID '1198872910.78.56322':
+    2. To change the password for the UID '1198872910.78.56322':
        moin ... account resetpw --uid 1198872910.78.56322 new-password
 """
 
@@ -64,5 +61,10 @@ General syntax: moin [options] account resetpw [newpw-options] newpassword
             u = user.User(request, self.options.uid)
         elif self.options.uname:
             u = user.User(request, None, self.options.uname)
+
+        if not u.exists():
+            print 'This user "%s" does not exists!' % u.name
+            return
+
         u.enc_password = user.encodePassword(newpass)
         u.save()
