@@ -3,14 +3,26 @@
     MoinMoin - Send a raw object from the caching system (and offer utility
     functions to put data into cache, calculate cache key, etc.).
 
-    This can be used e.g. for all image generating extensions:
-    E.g. a thumbnail generating extension just uses cache.put() to
-    write the thumbnails into the cache and emits <img src="cache_url">
-    to display them. cache_url is returned by url().
+    Sample usage
+    ------------
+    Assume we have a big picture (bigpic) and we want to efficiently show some
+    thumbnail (thumbpic) for it:
+    
+    # first calculate a (hard to guess) cache key (this key will change if the
+    # original data (bigpic) changes):
+    key = cache.key(..., attachname=bigpic, ...)
 
-    IMPORTANT: use some non-guessable key derived from your source content,
-               use cache.key() if you don't have something better.
+    # check if we don't have it in cache yet
+    if not cache.exists(..., key):
+        # if we don't have it in cache, we need to render it - this is an
+        # expensive operation that we want to avoid by caching:
+        thumbpic = render_thumb(bigpic)
+        # put expensive operation's results into cache:
+        cache.put(..., key, thumbpic, ...)
 
+    url = cache.url(..., key)
+    html = '<img src="%s">' % url
+    
     TODO:
     * add secret to wikiconfig
     * add error handling
@@ -48,6 +60,17 @@ do_locking = False
 def key(request, wikiname=None, itemname=None, attachname=None, content=None, secret=None):
     """
     Calculate a (hard-to-guess) cache key.
+
+    Important key properties:
+    * The key must be hard to guess (this is because do=get does no ACL checks,
+      so whoever got the key [e.g. from html rendering of an ACL protected wiki
+      page], will be able to see the cached content.
+    * The key must change if the (original) content changes. This is because
+      ACLs on some item may change and even if somebody was allowed to see some
+      revision of some item, it does not implicate that he is allowed to see
+      any other revision also. There will be no harm if he can see exactly the
+      same content again, but there could be harm if he could access a revision
+      with different content.
 
     If content is supplied, we will calculate and return a hMAC of the content.
 
