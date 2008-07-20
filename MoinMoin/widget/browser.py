@@ -74,7 +74,7 @@ class DataBrowserWidget(base.Widget):
         value = None
         name = '%sfilter%d' % (self.data_id, idx)
         if name in self.request.form:
-            value = self.request.form[name][0]
+            value = self.request.form[name]
         while row:
             option = row[idx]
             if isinstance(option, tuple):
@@ -143,7 +143,7 @@ class DataBrowserWidget(base.Widget):
                 for idx in range(len(row)):
                     name = '%sfilter%d' % (self.data_id, idx)
                     if name in self.request.form:
-                        filters[idx] = self.request.form[name][0]
+                        filters[idx] = self.request.form[name]
                         if filters[idx] == self._all:
                             filters[idx] = None
 

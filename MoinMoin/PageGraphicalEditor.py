@@ -89,7 +89,7 @@ class PageGraphicalEditor(PageEditor.PageEditor):
         # check if we want to load a draft
         use_draft = None
         if 'button_load_draft' in form:
-            wanted_draft_timestamp = int(form.get('draft_ts', ['0'])[0])
+            wanted_draft_timestamp = int(form.get('draft_ts', '0'))
             if wanted_draft_timestamp:
                 draft = self._load_draft()
                 if draft is not None:
@@ -101,7 +101,7 @@ class PageGraphicalEditor(PageEditor.PageEditor):
         if use_draft is not None:
             title = _('Draft of "%(pagename)s"')
             # Propagate original revision
-            rev = int(form['draft_rev'][0])
+            rev = int(form['draft_rev'])
             self.set_raw_body(use_draft, modified=1)
             preview = use_draft
         elif preview is None:
@@ -121,7 +121,7 @@ class PageGraphicalEditor(PageEditor.PageEditor):
 
         # get request parameters
         try:
-            text_rows = int(form['rows'][0])
+            text_rows = int(form['rows'])
         except StandardError:
             text_rows = self.cfg.edit_rows
             if request.user.valid:
@@ -167,7 +167,7 @@ Please review the page and save then. Do not save this page as it is!""")
             raw_body = self.get_raw_body()
         elif 'template' in form:
             # If the page does not exist, we try to get the content from the template parameter.
-            template_page = wikiutil.unquoteWikiname(form['template'][0])
+            template_page = wikiutil.unquoteWikiname(form['template'])
             if request.user.may.read(template_page):
                 raw_body = Page(request, template_page).get_raw_body()
                 if raw_body:
@@ -243,7 +243,7 @@ Please review the page and save then. Do not save this page as it is!""")
         request.write('<input type="hidden" name="ticket" value="%s">' % wikiutil.createTicket(request))
 
         # Save backto in a hidden input
-        backto = form.get('backto', [None])[0]
+        backto = form.get('backto')
         if backto:
             request.write(unicode(html.INPUT(type="hidden", name="backto", value=backto)))
 
@@ -294,7 +294,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 <input type="checkbox" name="trivial" id="chktrivialtop" value="1" %(checked)s onclick="toggle_trivial(this)">
 <label for="chktrivialtop">%(label)s</label>
 ''' % {
-          'checked': ('', 'checked')[form.get('trivial', ['0'])[0] == '1'],
+          'checked': ('', 'checked')[form.get('trivial', '0') == '1'],
           'label': _("Trivial change"),
        })
 
@@ -373,7 +373,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 &nbsp;
 <input type="checkbox" name="trivial" id="chktrivial" value="1" %(checked)s onclick="toggle_trivial(this)">
 <label for="chktrivial">%(label)s</label> ''' % {
-                'checked': ('', 'checked')[form.get('trivial', ['0'])[0] == '1'],
+                'checked': ('', 'checked')[form.get('trivial', '0') == '1'],
                 'label': _("Trivial change"),
                 })
 
@@ -382,7 +382,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 <input type="checkbox" name="rstrip" id="chkrstrip" value="1" %(checked)s>
 <label for="chkrstrip">%(label)s</label>
 </p> ''' % {
-            'checked': ('', 'checked')[form.get('rstrip', ['0'])[0] == '1'],
+            'checked': ('', 'checked')[form.get('rstrip', '0') == '1'],
             'label': _('Remove trailing whitespace from each line')
             })
 

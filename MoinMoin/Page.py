@@ -1114,7 +1114,7 @@ class Page(object):
                 # This redirect message is very annoying.
                 # Less annoying now without the warning sign.
                 if 'redirect' in request.form:
-                    redir = request.form['redirect'][0]
+                    redir = request.form['redirect']
                     request.theme.add_msg('<strong>%s</strong><br>' % (
                         _('Redirected from page "%(page)s"') % {'page':
                             wikiutil.link_tag(request, wikiutil.quoteWikinameURL(redir) + "?action=show", self.formatter.text(redir))}), "info")

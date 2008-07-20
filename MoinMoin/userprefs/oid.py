@@ -100,7 +100,7 @@ class Settings(UserPrefBase):
                                         MoinOpenIDStore(request))
         query = {}
         for key in request.form:
-            query[key] = request.form[key][0]
+            query[key] = request.form[key]
         qstr = wikiutil.makeQueryString({'action': 'userprefs',
                                          'handler': 'oid',
                                          'oid.return': '1'})

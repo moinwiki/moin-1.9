@@ -43,7 +43,7 @@ def search_box(type, macro):
     """
     _ = macro._
     if 'value' in macro.form:
-        default = wikiutil.escape(macro.form["value"][0], quote=1)
+        default = wikiutil.escape(macro.form["value"], quote=1)
     else:
         default = ''
 
