@@ -79,15 +79,15 @@ class Context(object):
     This one wraps up a Moin-Request object and the associated
     environ and also keeps track of it's changes.
     """
-    __slots__ = ['request', 'environ']
-
     def __init__(self, request):
         assert isinstance(request, Request)
-        self.request = request
-        self.environ = request.environ
-        self.personalities.append(self.__class__)
 
-    personalities = EnvironProxy('context.personalities', lambda o: list())
+        self.request = request
+        self.environ = environ = request.environ
+        self.personalities = self.environ.setdefault(
+            'context.personalities', []
+        )
+        self.personalities.append(self.__class__.__name__)
 
     def become(self, cls):
         """ Become another context, based on given class.
@@ -102,6 +102,9 @@ class Context(object):
             self.personalities.append(cls)
             self.__class__ = cls
             return True
+
+    def __repr__(self):
+        return "<%s %r>" % (self.__class__.__name__, self.personalities)
 
 class UserMixin(object):
     """ Mixin for user attributes and methods. """
@@ -171,23 +174,23 @@ class HTTPMixin(object):
     _cache_disabled = EnvironProxy('old._cache_disabled', 0)
     cacheable = EnvironProxy('old.cacheable', 0)
 
-    def _getter(self):
-        return self.request.mimetype
-    def _setter(self, value):
-        self.request.mimetype = value
-    def _deleter(self):
-        del self.request.mimetype
-    mimetype = property(_getter, _setter, _deleter)
+    class _proxy(property):
+        def __init__(self, name):
+            self.name = name
+            property.__init__(self, self.get, self.set, self.delete)
+        def get(self, obj):
+            return getattr(obj.request, self.name)
+        def set(self, obj, value):
+            setattr(obj.request, self.name, value)
+        def delete(self, obj):
+            delattr(obj.request, self.name)
 
-    def _getter(self):
-        return self.request.content_type
-    def _setter(self, value):
-        self.request.content_type = value
-    def _deleter(self):
-        del self.request.content_type
-    content_type = property(_getter, _setter, _deleter)
+    mimetype = _proxy('mimetype')
+    content_type = _proxy('content_type')
+    status = _proxy('status')
+    status_code = _proxy('status_code')
 
-    del _getter, _setter, _deleter
+    del _proxy
 
     def write(self, *data):
         if len(data) > 1:
