@@ -30,7 +30,7 @@ Known main issues:
     having made a backup with some other, proven method.
     USE BOTH ON YOUR OWN RISK!
 
-Version 1.7.current:
+Version 1.7.1:
   New features:
     * New 'cache' action (see developer notes).
 
@@ -45,7 +45,8 @@ Version 1.7.current:
       moves deleted pages into some deleted/ directory. Maybe keep a copy of
       those directories for a while just for the case.
     * Server specific fixes:
-      * standalone (wikiserver.py): fix --pidfile option
+      * standalone (wikiserver.py): fix --pidfile and --group option, fix
+        operation without a wikiserverconfig.py (use builtin defaults).
       * mod_python: work around mod_python 3.3.1 problems with file uploads.
         Note: if you are still using mod_python, we strongly recommend you
 	      try out mod_wsgi (in daemon mode) - it has less bugs, better
