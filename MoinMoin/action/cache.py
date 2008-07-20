@@ -107,7 +107,8 @@ def put(request, key, data,
         content_type=None,
         content_disposition=None,
         content_length=None,
-        last_modified=None):
+        last_modified=None,
+        original=None):
     """
     Put an object into the cache to send it with cache action later.
 
@@ -120,6 +121,9 @@ def put(request, key, data,
     @param content_disposition: type for content-disposition header (str, default: None)
     @param content_length: data length for content-length header (int, default: autodetect)
     @param last_modified: last modified timestamp (int, default: autodetect)
+    @param original: location of original object (default: None) - this is just written to
+                     the metadata cache "as is" and could be used for cache cleanup,
+                     use (wikiname, itemname, attachname or None))
     """
     import os.path
     from MoinMoin.util import timefuncs
@@ -142,9 +146,9 @@ def put(request, key, data,
     content_length = content_length or data_cache.size()
     last_modified = last_modified or data_cache.mtime()
 
-    last_modified = timefuncs.formathttpdate(int(last_modified))
+    httpdate_last_modified = timefuncs.formathttpdate(int(last_modified))
     headers = ['Content-Type: %s' % content_type,
-               'Last-Modified: %s' % last_modified,
+               'Last-Modified: %s' % httpdate_last_modified,
                'Content-Length: %s' % content_length,
               ]
     if content_disposition and filename:
@@ -154,7 +158,12 @@ def put(request, key, data,
         headers.append('Content-Disposition: %s; filename="%s"' % (content_disposition, filename))
 
     meta_cache = caching.CacheEntry(request, cache_arena, key+'.meta', cache_scope, do_locking=do_locking, use_pickle=True)
-    meta_cache.update((last_modified, headers))
+    meta_cache.update({
+        'httpdate_last_modified': httpdate_last_modified,
+        'last_modified': last_modified,
+        'headers': headers,
+        'original':original,
+    })
 
 
 def exists(request, key, strict=False):
@@ -196,8 +205,8 @@ def url(request, key, do='get'):
 def _get_headers(request, key):
     """ get last_modified and headers cached for key """
     meta_cache = caching.CacheEntry(request, cache_arena, key+'.meta', cache_scope, do_locking=do_locking, use_pickle=True)
-    last_modified, headers = meta_cache.content()
-    return last_modified, headers
+    meta = meta_cache.content()
+    return meta['httpdate_last_modified'], meta['headers']
 
 
 def _get_datafile(request, key):
