@@ -754,12 +754,13 @@ class Page(object):
                 url = "%s/%s/%s" % (request.cfg.url_prefix_action, action, url)
             url = '%s?%s' % (url, querystr)
 
+        if not relative:
+            url = request.href(url)
+
         # Add anchor
         if anchor:
             url = "%s#%s" % (url, wikiutil.url_quote_plus(anchor))
 
-        if not relative:
-            url = '%s/%s' % (request.script_root, url)
         return url
 
     def link_to_raw(self, request, text, querystr=None, anchor=None, **kw):
@@ -1026,10 +1027,7 @@ class Page(object):
             # redirect to another page
             # note that by including "action=show", we prevent endless looping
             # (see code in "request") or any cascaded redirection
-            request.http_redirect('%s/%s?action=show&redirect=%s' % (
-                request.script_root,
-                wikiutil.quoteWikinameURL(pi['redirect']),
-                wikiutil.url_quote_plus(self.page_name, ''), ))
+            request.http_redirect(request.href(pi['redirect'], action='show', redirect=self.page_name))
             return
 
         # if necessary, load the formatter

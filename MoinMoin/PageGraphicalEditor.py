@@ -221,9 +221,8 @@ Please review the page and save then. Do not save this page as it is!""")
             raw_body = _('Describe %s here.') % (self.page_name, )
 
         # send form
-        request.write('<form id="editor" method="post" action="%s/%s#preview">' % (
-            request.script_root,
-            wikiutil.quoteWikinameURL(self.page_name),
+        request.write('<form id="editor" method="post" action="%s#preview">' % (
+                request.href(self.page_name)
             ))
 
         # yet another weird workaround for broken IE6 (it expands the text

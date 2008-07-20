@@ -19,12 +19,12 @@ def show_form(pagename, request):
     request.theme.send_title(_("Subscribe users to the page %s") % pagename, pagename=pagename)
 
     request.write("""
-<form action="%s/%s" method="POST" enctype="multipart/form-data">
+<form action="%s" method="POST" enctype="multipart/form-data">
 <input type="hidden" name="action" value="SubscribeUser">
 %s <input type="text" name="users" size="50">
 <input type="submit" value="Subscribe">
 </form>
-""" % (request.script_root, wikiutil.quoteWikinameURL(pagename),
+""" % (request.href(pagename),
       _("Enter user names (comma separated):")))
     request.theme.send_footer(pagename)
     request.theme.send_closing_html()

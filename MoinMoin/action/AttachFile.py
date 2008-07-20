@@ -723,11 +723,10 @@ def _do_move(pagename, request):
 
     # move file
     d = {'action': action_name,
-         'baseurl': request.script_root,
+         'url': request.href(pagename),
          'do': 'attachment_move',
          'ticket': wikiutil.createTicket(request),
          'pagename': pagename,
-         'pagename_quoted': wikiutil.quoteWikinameURL(pagename),
          'attachment_name': filename,
          'move': _('Move'),
          'cancel': _('Cancel'),
@@ -735,7 +734,7 @@ def _do_move(pagename, request):
          'attachment_label': _("New attachment name"),
         }
     formhtml = '''
-<form action="%(baseurl)s/%(pagename_quoted)s" method="POST">
+<form action="%(url)s" method="POST">
 <input type="hidden" name="action" value="%(action)s">
 <input type="hidden" name="do" value="%(do)s">
 <input type="hidden" name="ticket" value="%(ticket)s">

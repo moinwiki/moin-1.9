@@ -744,13 +744,12 @@ class ThemeBase:
             'search_value': wikiutil.escape(form.get('value', [''])[0], 1),
             'search_full_label': _('Text'),
             'search_title_label': _('Titles'),
-            'baseurl': self.request.script_root,
-            'pagename_quoted': wikiutil.quoteWikinameURL(d['page'].page_name),
+            'url': self.request.href(d['page'].page_name)
             }
         d.update(updates)
 
         html = u'''
-<form id="searchform" method="get" action="%(baseurl)s/%(pagename_quoted)s">
+<form id="searchform" method="get" action="%(url)s">
 <div>
 <input type="hidden" name="action" value="fullsearch">
 <input type="hidden" name="context" value="180">
@@ -1052,11 +1051,10 @@ var search_hint = "%(search_hint)s";
             'options': '\n'.join(options),
             'rev_field': rev and '<input type="hidden" name="rev" value="%d">' % rev or '',
             'do_button': _("Do"),
-            'baseurl': self.request.script_root,
-            'pagename_quoted': wikiutil.quoteWikinameURL(page.page_name),
+            'url': self.request.href(page.page_name)
             }
         html = '''
-<form class="actionsmenu" method="GET" action="%(baseurl)s/%(pagename_quoted)s">
+<form class="actionsmenu" method="GET" action="%(url)s">
 <div>
     <label>%(label)s</label>
     <select name="action"
@@ -1632,12 +1630,12 @@ var gui_editor_link_text = "%(text)s";
         ))
 
         # Links
-        output.append('<link rel="Start" href="%s/%s">\n' % (scriptname, wikiutil.quoteWikinameURL(page_front_page)))
+        output.append('<link rel="Start" href="%s">\n' % request.href(page_front_page))
         if pagename:
-            output.append('<link rel="Alternate" title="%s" href="%s/%s?action=raw">\n' % (
-                _('Wiki Markup'), scriptname, pagename_quoted, ))
-            output.append('<link rel="Alternate" media="print" title="%s" href="%s/%s?action=print">\n' % (
-                _('Print View'), scriptname, pagename_quoted, ))
+            output.append('<link rel="Alternate" title="%s" href="%s">\n' % (
+                    _('Wiki Markup'), request.href(pagename, action='raw')))
+            output.append('<link rel="Alternate" media="print" title="%s" href="%s">\n' % (
+                    _('Print View'), request.href(pagename, action='print')))
 
             # !!! currently disabled due to Mozilla link prefetching, see
             # http://www.mozilla.org/projects/netlib/Link_Prefetching_FAQ.html
@@ -1657,7 +1655,7 @@ var gui_editor_link_text = "%(text)s";
             #~         request.write('<link rel="Last" href="%s/%s">\n' % (request.script_root, quoteWikinameURL(all_pages[-1])))
 
             if page_parent_page:
-                output.append('<link rel="Up" href="%s/%s">\n' % (scriptname, wikiutil.quoteWikinameURL(page_parent_page)))
+                output.append('<link rel="Up" href="%s">\n' % request.href(page_parent_page))
 
         # write buffer because we call AttachFile
         request.write(''.join(output))
@@ -1670,10 +1668,10 @@ var gui_editor_link_text = "%(text)s";
             AttachFile.send_link_rel(request, pagename)
 
         output.extend([
-            '<link rel="Search" href="%s/%s">\n' % (scriptname, wikiutil.quoteWikinameURL(page_find_page)),
-            '<link rel="Index" href="%s/%s">\n' % (scriptname, wikiutil.quoteWikinameURL(page_title_index)),
-            '<link rel="Glossary" href="%s/%s">\n' % (scriptname, wikiutil.quoteWikinameURL(page_word_index)),
-            '<link rel="Help" href="%s/%s">\n' % (scriptname, wikiutil.quoteWikinameURL(page_help_formatting)),
+            '<link rel="Search" href="%s">\n' % request.href(page_find_page),
+            '<link rel="Index" href="%s">\n' % request.href(page_title_index),
+            '<link rel="Glossary" href="%s">\n' % request.href(page_word_index),
+            '<link rel="Help" href="%s">\n' % request.href(page_help_formatting),
                       ])
 
         output.append("</head>\n")

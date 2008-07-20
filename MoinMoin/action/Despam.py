@@ -104,14 +104,13 @@ def show_pages(request, pagename, editor, timestamp):
     request.write('''
 </table>
 <p>
-<form method="post" action="%s/%s">
+<form method="post" action="%s">
 <input type="hidden" name="action" value="Despam">
 <input type="hidden" name="editor" value="%s">
 <input type="submit" name="ok" value="%s">
 </form>
 </p>
-''' % (request.script_root, wikiutil.quoteWikinameURL(pagename),
-       wikiutil.url_quote(editor), _("Revert all!")))
+''' % (request.href(pagename), wikiutil.url_quote(editor), _("Revert all!")))
 
 def revert_page(request, pagename, editor):
     if not request.user.may.revert(pagename):
