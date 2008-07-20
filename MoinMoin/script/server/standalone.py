@@ -110,6 +110,8 @@ class PluginScript(MoinScript):
                 Config.docs = self.options.docs
             if self.options.user:
                 Config.user = self.options.user
+            if self.options.group:
+                Config.group = self.options.group
             if self.options.port:
                 Config.port = self.options.port
             if self.options.interface:
