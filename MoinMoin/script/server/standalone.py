@@ -99,8 +99,8 @@ class PluginScript(MoinScript):
                     sys.path.insert(0, self.options.config_dir)
                 from wikiserverconfig import Config
             except ImportError, err:
-                if 'Config' in str(err):
-                    # we are unable to import Config
+                if 'wikiserverconfig' in str(err):
+                    # we are unable to import from wikiserverconfig module
                     Config = DefaultConfig
                 else:
                     # some other import went wrong
