@@ -162,7 +162,7 @@ def put(request, key, data,
         'httpdate_last_modified': httpdate_last_modified,
         'last_modified': last_modified,
         'headers': headers,
-        'original':original,
+        'original': original,
     })
 
 
