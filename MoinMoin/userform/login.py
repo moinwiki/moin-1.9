@@ -33,9 +33,7 @@ class Login:
         """ Create the complete HTML form code. """
         _ = self._
         request = self.request
-        sn = request.script_root
-        pi = request.path
-        action = u"%s%s" % (sn, pi)
+        action = "%s%s" % (request.script_root, request.path)
         hints = []
         for authm in request.cfg.auth:
             hint = authm.login_hint(request)

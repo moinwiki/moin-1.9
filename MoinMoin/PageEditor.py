@@ -330,10 +330,9 @@ Please review the page and save then. Do not save this page as it is!""")
             raw_body = _('Describe %s here.') % (self.page_name, )
 
         # send form
-        request.write('<form id="editor" method="post" action="%s/%s#preview" onSubmit="flgChange = false;">' % (
-            request.script_root,
-            wikiutil.quoteWikinameURL(self.page_name),
-            ))
+        request.write('<form id="editor" method="post" action="%s#preview" onSubmit="flgChange = false;">' % (
+                request.href(self.page_name)
+        ))
 
         # yet another weird workaround for broken IE6 (it expands the text
         # editor area to the right after you begin to type...). IE sucks...

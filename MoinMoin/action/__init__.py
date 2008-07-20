@@ -136,19 +136,17 @@ class ActionBase:
 
         d = {
             'method': self.method,
-            'baseurl': self.request.script_root,
+            'url': self.request.href(self.pagename),
             'enctype': self.enctype,
             'error_html': error_html,
             'actionname': self.actionname,
-            'pagename': self.pagename,
-            'pagename_quoted': wikiutil.quoteWikinameURL(self.pagename),
             'ticket_html': ticket_html,
             'user_html': self.get_form_html(buttons_html),
         }
 
         form_html = '''
 %(error_html)s
-<form action="%(baseurl)s/%(pagename_quoted)s" method="%(method)s" enctype="%(enctype)s">
+<form action="%(url)s/%(pagename_quoted)s" method="%(method)s" enctype="%(enctype)s">
 <div>
 <input type="hidden" name="action" value="%(actionname)s">
 %(ticket_html)s

@@ -161,7 +161,7 @@ def advanced_ui(macro):
 
     # the dialogue
     return f.rawHTML('\n'.join([
-        u'<form method="get" action="%s/%s">' % (macro.request.script_root, wikiutil.quoteWikinameURL(macro.request.formatter.page.page_name)),
+        u'<form method="get" action="%s">' % macro.request.href(macro.request.formatter.page.page_name),
         u'<div>',
         u'<input type="hidden" name="action" value="fullsearch">',
         u'<input type="hidden" name="advancedsearch" value="1">',
