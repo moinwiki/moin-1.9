@@ -151,7 +151,7 @@ def text(pagename, request, params=''):
         filterpage = wikiutil.decodeUserInput(params)
 
     if request and request.form and 'page' in request.form:
-        filterpage = request.form['page'][0]
+        filterpage = request.form['page']
 
     days, views, edits = get_data(pagename, request, filterpage)
 
@@ -201,7 +201,7 @@ def draw(pagename, request):
     # check params
     filterpage = None
     if request and request.form and 'page' in request.form:
-        filterpage = request.form['page'][0]
+        filterpage = request.form['page']
 
     days, views, edits = get_data(pagename, request, filterpage)
 

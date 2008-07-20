@@ -217,7 +217,7 @@ def execute(macro, text):
     # does the url have calendar params (= somebody has clicked on prev/next links in calendar) ?
     if 'calparms' in macro.form:
         has_calparms = 1 # yes!
-        text2 = macro.form['calparms'][0]
+        text2 = macro.form['calparms']
         try:
             cparmpagename, cparmyear, cparmmonth, cparmoffset, cparmoffset2, cparmheight6, cparmanniversary, cparmtemplate = \
                 parseargs(request, text2, thispage, currentyear, currentmonth, 0, 0, False, False, u'')

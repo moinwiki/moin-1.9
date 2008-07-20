@@ -54,7 +54,7 @@ class DeletePage(ActionBase):
 
         delete_subpages = 0
         try:
-            delete_subpages = int(form['delete_subpages'][0])
+            delete_subpages = int(form['delete_subpages'])
         except:
             pass
 
