@@ -32,10 +32,7 @@ Known main issues:
 
 Version 1.7.current:
   New features:
-    * New 'cache' action (can be used to cache expensively rendered output, e.g.
-      scaled images, parsers that render text to images). Once put into the
-      cache, moin can emit a http response for that content very fast and very
-      efficient (including "304 not changed" handling).
+    * New 'cache' action (see developer notes).
 
   Fixes:
     * Security fix: XSS fix for advanced search form
@@ -47,27 +44,51 @@ Version 1.7.current:
       that can be used to move trash pages into some trash/ directory and also
       moves deleted pages into some deleted/ directory. Maybe keep a copy of
       those directories for a while just for the case.
-    * Standalone server: fix --pidfile option
+    * Server specific fixes:
+      * standalone (wikiserver.py): fix --pidfile option
+      * mod_python: work around mod_python 3.3.1 problems with file uploads.
+        Note: if you are still using mod_python, we strongly recommend you
+	      try out mod_wsgi (in daemon mode) - it has less bugs, better
+	      security, better separation, WSGI is a Python standard, and moin
+	      developers also use WSGI. See HelpOnInstalling/ApacheWithModWSGI.
+    * revert action: fixed for deleted pages.
     * Search:
       * Xapian indexing: Removed crappy "hostname" tokenization.
         Fixes MoinMoinBugs/1.7 XapianNotWorkingWithLeadingNumbersInTitle.
+        Also tokenize CamelCase parts of non-wikiwords.
       * Make query parser reject more invalid input.
       * If query parsing raises a BracketError, at least tell what the problem
         is (and not just raise empty  ValueError).
-     * Category search: ignore traling whitespace after ----
+      * Category search: ignore traling whitespace after ----
     * Argument parser:
       * Fixed sort() usage in UnitArgument to be Python 2.3 compatible.
       * Fixed MoinMoinBugs/TypeErrorInWikiutils.
-    * TableOfContents macro: skip outer-most <ol> levels when page isn't using
-      the biggest headings
+    * Macros:
+      * TableOfContents: skip outer-most <ol> levels when page isn't using
+        the biggest headings
+      * MonthCalendar: fix MoinMoinBugs/MonthCalendarBreaksOnApostrophe
+    * xslt parser: fix MoinMoinBugs/DoNotConvertUnicodeToUTF8ForXsltParser
     * OpenID RP: make it compatible to python-openid 2.2.x
     * PackagePages.collectpackage: removed encoding from file name of zipfile
+    * Surge protection: exclude localnet no matter whether user is known or not.
+    * Notifications: fix MoinMoinBugs/DuplicateNewUserNotification
+    * Script moin account create/disable/resetpw: checks for already existing
+      user now.
+
+  Other changes:
+    * Prevent CategoryTemplate being listed as a category (it is a Template)
+      by changing the default page_category_regex.
 
   Developer notes:
+    * New MoinMoin.action.cache - can be used to cache expensively rendered
+      output, e.g. generated images). Once put into the cache, moin can emit
+      a http response for that content very fast and very efficient (including
+      "304 not changed" handling.
     * New file-like API in MoinMoin.caching (good for dealing with medium
       to large files without consuming lots of memory).
-    * New MoinMoin.action.cache - fast/efficient serving of stuff you put
-      into the cache.
+    * wikiutil.importPlugin supports getting the whole plugin module object
+      by giving function=None.
+
 
 Version 1.7.0:
   Note: This is a reduced CHANGES, ommitting details from rc/beta test and
