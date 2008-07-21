@@ -3,23 +3,25 @@
     MoinMoin - Send a raw object from the caching system (and offer utility
     functions to put data into cache, calculate cache key, etc.).
 
-    This can be used e.g. for all image generating extensions:
-    E.g. a thumbnail generating extension just uses cache.put() to
-    write the thumbnails into the cache and emits <img src="cache_url">
-    to display them. cache_url is returned by put() or url().
+    Sample usage
+    ------------
+    Assume we have a big picture (bigpic) and we want to efficiently show some
+    thumbnail (thumbpic) for it:
 
-    IMPORTANT: use some non-guessable key derived from your source content,
-               use cache.key() if you don't have something better.
+    # first calculate a (hard to guess) cache key (this key will change if the
+    # original data (bigpic) changes):
+    key = cache.key(..., attachname=bigpic, ...)
 
-    TODO:
-    * add secret to wikiconfig
-    * add error handling
-    * maybe use page local caching, not global:
-      + smaller directories
-      - but harder to clean
-      - harder to backup data_dir
-    * move file-like code to caching module
-    * add auto-key generation?
+    # check if we don't have it in cache yet
+    if not cache.exists(..., key):
+        # if we don't have it in cache, we need to render it - this is an
+        # expensive operation that we want to avoid by caching:
+        thumbpic = render_thumb(bigpic)
+        # put expensive operation's results into cache:
+        cache.put(..., key, thumbpic, ...)
+
+    url = cache.url(..., key)
+    html = '<img src="%s">' % url
 
     @copyright: 2008 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
@@ -42,12 +44,28 @@ action_name = __name__.split('.')[-1]
 
 # Do NOT get this directly from request.form or user would be able to read any cache!
 cache_arena = 'sendcache'  # just using action_name is maybe rather confusing
+
+# We maybe could use page local caching (not 'wiki' global) to have less directory entries.
+# Local is easier to automatically cleanup if an item changes. Global is easier to manually cleanup.
+# Local makes data_dir much larger, harder to backup.
 cache_scope = 'wiki'
+
 do_locking = False
 
 def key(request, wikiname=None, itemname=None, attachname=None, content=None, secret=None):
     """
     Calculate a (hard-to-guess) cache key.
+
+    Important key properties:
+    * The key must be hard to guess (this is because do=get does no ACL checks,
+      so whoever got the key [e.g. from html rendering of an ACL protected wiki
+      page], will be able to see the cached content.
+    * The key must change if the (original) content changes. This is because
+      ACLs on some item may change and even if somebody was allowed to see some
+      revision of some item, it does not implicate that he is allowed to see
+      any other revision also. There will be no harm if he can see exactly the
+      same content again, but there could be harm if he could access a revision
+      with different content.
 
     If content is supplied, we will calculate and return a hMAC of the content.
 
@@ -66,8 +84,10 @@ def key(request, wikiname=None, itemname=None, attachname=None, content=None, se
     @param attachname: the filename of the attachment
     @param content: content data as unicode object (e.g. for page content or
                     parser section content)
+    @param secret: secret for hMAC calculation (default: use secret from cfg)
     """
-    secret = secret or 'nobodyexpectedsuchasecret'
+    if secret is None:
+        secret = request.cfg.secrets['action/cache']
     if content:
         hmac_data = content
     elif itemname is not None and attachname is not None:
@@ -101,7 +121,6 @@ def put(request, key, data,
     @param content_type: content-type header value (str, default: autodetect from filename)
     @param last_modified: last modified timestamp (int, default: autodetect)
     @param content_length: data length for content-length header (int, default: autodetect)
-    @return: URL of cached object
     """
     import os.path
     from MoinMoin.util import timefuncs
@@ -137,8 +156,6 @@ def put(request, key, data,
 
     meta_cache = caching.CacheEntry(request, cache_arena, key+'.meta', cache_scope, do_locking=do_locking, use_pickle=True)
     meta_cache.update((last_modified, headers))
-
-    return url(request, key, do='get')
 
 
 def exists(request, key, strict=False):
@@ -193,12 +210,16 @@ def _get_datafile(request, key):
 
 def _do_get(request, key):
     """ send a complete http response with headers/data cached for key """
-    last_modified, headers = _get_headers(request, key)
-    if request.if_modified_since == last_modified:
-        request.emit_http_headers(["Status: 304 Not modified"])
-    else:
-        request.emit_http_headers(headers)
-        request.send_file(_get_datafile(request, key))
+    try:
+        last_modified, headers = _get_headers(request, key)
+        if request.if_modified_since == last_modified:
+            request.emit_http_headers(["Status: 304 Not modified"])
+        else:
+            data_file = _get_datafile(request, key)
+            request.emit_http_headers(headers)
+            request.send_file(data_file)
+    except caching.CacheError:
+        request.emit_http_headers(["Status: 404 Not found"])
 
 
 def _do_remove(request, key):

@@ -23,9 +23,8 @@ class LocalConfig(DefaultConfig):
     page_front_page = u'FrontPage' # change to some better value
     # ^^^ DON'T TOUCH THIS EXCEPT IF YOU KNOW WHAT YOU DO ^^^
 
-
     # Add your configuration items here.
-
+    secrets = 'This string is NOT a secret, please make up your own, long, random secret string!'
 
 
 # DEVELOPERS! Do not add your configuration items there,
