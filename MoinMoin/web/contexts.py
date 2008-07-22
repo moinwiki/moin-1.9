@@ -372,7 +372,7 @@ class RenderContext(Context, RedirectMixin, ConfigMixin, UserMixin,
         self.request.stream.writelines(data)
 
 # TODO: extend xmlrpc context
-class XMLRPCContext(HTTPContext):
+class XMLRPCContext(HTTPContext, PageMixin):
     """ Context to act during a XMLRPC request. """
 
 class AllContext(HTTPContext, RenderContext):
