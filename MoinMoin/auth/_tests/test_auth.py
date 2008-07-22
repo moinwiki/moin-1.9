@@ -69,7 +69,7 @@ class TestAuth:
         trail_expected = []
         first = True
         for pagename in self.PAGES:
-            environ_overrides = { 'HTTP_COOKIE': cookie }
+            environ_overrides = {'HTTP_COOKIE': cookie}
             request = self.run_request(path='/%s' % pagename,
                                        environ_overrides=environ_overrides)
 
@@ -132,8 +132,8 @@ class TestAuth:
         trail_expected = []
         first = True
         for pagename in self.PAGES:
-            environ_overrides = { 'HTTP_COOKIE': cookie,
-                                  'HTTP_AUTHORIZATION': auth_header }
+            environ_overrides = {'HTTP_COOKIE': cookie,
+                                 'HTTP_AUTHORIZATION': auth_header}
             request = self.run_request(path='/%s' % pagename,
                                        environ_overrides=environ_overrides)
 
@@ -204,7 +204,7 @@ class TestAuth:
                                            query_string='action=login',
                                            method='POST', form_data=formdata)
             else: # not first page, use session cookie
-                environ_overrides = { 'HTTP_COOKIE': cookie }
+                environ_overrides = {'HTTP_COOKIE': cookie}
                 request = self.run_request(path='/%s' % pagename,
                                            environ_overrides=environ_overrides)
 
