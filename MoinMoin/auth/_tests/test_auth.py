@@ -29,8 +29,9 @@ class TestAuth:
 
     def run_request(self, **params):
         request = TestRequest(**params)
-        request = wsgiapp.init(request)
-        return wsgiapp.run(request)
+        context = wsgiapp.init(request)
+        wsgiapp.run(context)
+        return context
 
     def testNoAuth(self):
         """ run a simple request, no auth, just check if it succeeds """
