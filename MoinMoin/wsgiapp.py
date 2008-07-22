@@ -7,41 +7,180 @@
     @license: GNU GPL, see COPYING for details.
 """
 from werkzeug.http import HeaderSet
-from werkzeug.utils import responder
-from werkzeug.wrappers import Response
-from werkzeug.exceptions import NotFound
+from werkzeug.exceptions import HTTPException
 
-from MoinMoin.web.contexts import HTTPContext, RenderContext, AllContext
+from MoinMoin.web.contexts import AllContext, Context, XMLRPCContext
 from MoinMoin.web.request import Request
-from MoinMoin.web.utils import check_spider, check_forbidden, check_setuid
-from MoinMoin.web.utils import check_surge_protect
-from MoinMoin.web.apps import HTTPExceptionsMiddleware
+from MoinMoin.web.utils import check_forbidden, check_setuid, check_surge_protect
 
 from MoinMoin.Page import Page
-from MoinMoin import config, wikiutil, user, caching, error
+from MoinMoin import auth, i18n, user, wikiutil, xmlrpc
 from MoinMoin.action import get_names, get_available_actions
-from MoinMoin.config import multiconfig
-from MoinMoin.support.python_compatibility import set
-from MoinMoin.util import IsWin9x
-from MoinMoin.request import MoinMoinFinish, RemoteClosedConnection
-from MoinMoin import auth
 
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
 def init(request):
-    request = AllContext(request)
-    request.clock.start('total')
-    request.clock.start('base__init__')
+    """
+    Wraps an incoming WSGI request in a Context object and initializes
+    several important attributes.
+    """
+    context = AllContext(request)
+    context.clock.start('total')
+    context.clock.start('init')
 
-    request.session = request.cfg.session_service.get_session(request)
+    context.lang = setup_i18n_preauth(context)
 
-    # auth & user handling
+    context.session = context.cfg.session_service.get_session(request)
+
+    userobj = setup_user(context, context.session)
+    userobj, olduser = check_setuid(context, userobj)
+
+    if not userobj:
+        userobj = user.User(context, auth_method='request:invalid')
+
+    context.user = userobj
+    context._setuid_realuser = olduser
+
+    context.lang = setup_i18n_postauth(context)
+
+    context.reset()
+
+    context.clock.stop('init')
+    return context
+
+def run(context):
+    """ Run a context trough the application. """
+    context.clock.start('run')
+    request = context.request
+
+    # preliminary access checks (forbidden, bots, surge protection)
+    check_forbidden(context)
+    check_surge_protect(context)
+
+    action_name = context.action
+
+    # handle XMLRPC calls
+    if action_name == 'xmlrpc':
+        response = xmlrpc.xmlrpc(XMLRPCContext(request))
+    elif action_name == 'xmlrpc2':
+        response = xmlrpc.xmlrpc2(XMLRPCContext(request))
+    else:
+        response = dispatch(request, context, action_name)
+    context.cfg.session_service.finalize(context, context.session)
+    context.clock.stop('run')
+    return response
+
+def remove_prefix(path, prefix=None):
+    """ Remove an url prefix from the path info and return shortened path. """
+    # we can have all action URLs like this: /action/ActionName/PageName?action=ActionName&...
+    # this is just for robots.txt being able to forbid them for crawlers
+    if prefix is not None:
+        prefix = '/%s/' % prefix # e.g. '/action/'
+        if path.startswith(prefix):
+            # remove prefix and action name
+            path = path[len(prefix):]
+            action, path = (path.split('/', 1) + ['', ''])[:2]
+            path = '/' + path
+    return path
+
+def dispatch(request, context, action_name='show'):
+    cfg = context.cfg
+
+    # The last component in path_info is the page name, if any
+    path = remove_prefix(request.path, cfg.url_prefix_action)
+
+    if path.startswith('/'):
+        pagename = wikiutil.normalize_pagename(path, cfg)
+    else:
+        pagename = None
+
+    # need to inform caches that content changes based on:
+    # * cookie (even if we aren't sending one now)
+    # * User-Agent (because a bot might be denied and get no content)
+    # * Accept-Language (except if moin is told to ignore browser language)
+    hs = HeaderSet(('Cookie', 'User-Agent'))
+    if not cfg.language_ignore_browser:
+        hs.add('Accept-Language')
+    request.headers.add('Vary', str(hs))
+
+    # Handle request. We have these options:
+    # 1. jump to page where user left off
+    if not pagename and context.user.remember_last_visit and action_name == 'show':
+        response = handle_last_visit(context)
+    # 2. handle action
+    else:
+        response = handle_action(context, pagename, action_name)
+    if isinstance(response, Context):
+        response = response.request
+    return response
+
+def handle_action(context, pagename, action_name='show'):
+    """ Actual dispatcher function for non-XMLRPC actions.
+
+    Also sets up the Page object for this request, normalizes and
+    redirects to canonical pagenames and checks for non-allowed
+    actions.
+    """
+    _ = context.getText
+    cfg = context.cfg
+
+    # pagename could be empty after normalization e.g. '///' -> ''
+    # Use localized FrontPage if pagename is empty
+    if not pagename:
+        context.page = wikiutil.getFrontPage(context)
+    else:
+        context.page = Page(context, pagename)
+        if '_' in pagename and not context.page.exists():
+            pagename = pagename.replace('_', ' ')
+            page = Page(context, pagename)
+            if page.exists():
+                url = page.url(context)
+                return abort(redirect(url))
+
+    msg = None
+    # Complain about unknown actions
+    if not action_name in get_names(cfg):
+        msg = _("Unknown action %(action_name)s.") % {
+                'action_name': wikiutil.escape(action_name), }
+
+    # Disallow non available actions
+    elif action_name[0].isupper() and not action_name in \
+            get_available_actions(cfg, context.page, context.user):
+        msg = _("You are not allowed to do %(action_name)s on this page.") % {
+                'action_name': wikiutil.escape(action_name), }
+        if not context.user.valid:
+            # Suggest non valid user to login
+            msg += " " + _("Login and try again.")
+
+    if msg:
+        context.theme.add_msg(msg, "error")
+        context.page.send_page()
+    # Try action
+    else:
+        from MoinMoin import action
+        handler = action.getHandler(cfg, action_name)
+        if handler is None:
+            msg = _("You are not allowed to do %(action_name)s on this page.") % {
+                    'action_name': wikiutil.escape(action_name), }
+            if not context.user.valid:
+                # Suggest non valid user to login
+                msg += " " + _("Login and try again.")
+            context.theme.add_msg(msg, "error")
+            context.page.send_page()
+        else:
+            handler(context.page.page_name, context)
+
+    return context
+
+def setup_user(context, session):
+    """ Try to retrieve a valid user object from the request, be it
+    either through the session or through a login. """
     # first try setting up from session
-    userobj = auth.setup_from_session(request, request.session)
+    userobj = auth.setup_from_session(context, session)
 
     # then handle login/logout forms
-    form = request.values
+    form = context.request.values
 
     if 'login' in form:
         params = {
@@ -51,161 +190,68 @@ def init(request):
             'openid_identifier': form.get('openid_identifier'),
             'stage': form.get('stage')
         }
-        userobj = auth.handle_login(request, userobj, **params)
+        userobj = auth.handle_login(context, userobj, **params)
     elif 'logout' in form:
-        userobj = auth.handle_logout(request, userobj)
+        userobj = auth.handle_logout(context, userobj)
     else:
-        userobj = auth.handle_request(request, userobj)
+        userobj = auth.handle_request(context, userobj)
 
-    # check for setuid-handling of users
-    userobj, olduser = check_setuid(request, userobj)
+    return userobj
 
-    if not userobj:
-        userobj = user.User(request, auth_method='request:invalid')
+def setup_i18n_preauth(context):
+    """ Determine language for the request in absence of any user info. """
+    if i18n.languages is None:
+        i18n.i18n_init(context)
 
-    request.user = userobj
-    request._setuid_real_user = olduser
+    cfg = context.cfg
+    lang = None
+    if i18n.languages and not cfg.language_ignore_browser:
+        for l in context.request.accept_languages:
+            if l in i18n.languages:
+                lang = l
+                break
+    if lang is None and cfg.language_default in i18n.languages:
+        lang = cfg.language_default
+    else:
+        lang = 'en'
+    return lang
 
-    # preliminary access control
-    # check against spiders, blacklists and request-spam
-    check_forbidden(request)
-    check_surge_protect(request)
+def setup_i18n_postauth(context):
+    """ Determine language for the request after user-id is established. """
+    user = context.user
+    if user and user.valid and user.language:
+        return user.language
+    else:
+        return context.lang
 
-    request.reset()
+def handle_last_visit(request, context):
+    """ Redirect to last visited page (or frontpage) on missing pagename. """
+    pagetrail = context.user.getTrail()
+    if pagetrail:
+        # Redirect to last page visited
+        last_visited = pagetrail[-1]
+        wikiname, pagename = wikiutil.split_interwiki(last_visited)
+        if wikiname != 'Self':
+            wikitag, wikiurl, wikitail, error = wikiutil.resolve_interwiki(context, wikiname, pagename)
+            url = wikiurl + wikiutil.quoteWikinameURL(wikitail)
+        else:
+            url = Page(context, pagename).url(context)
+    else:
+        # Or to localized FrontPage
+        url = wikiutil.getFrontPage(context).url(context)
+    return abort(redirect(url))
 
-    request.clock.stop('base__init__')
-    return request
-
-def run(request):
-
-    _ = request.getText
-    request.clock.start('run')
-
-    action_name = request.action
-    if request.cfg.log_timing:
-        request.timing_log(True, action_name)
-
-    # parse request data
+def application(environ, start_response):
     try:
-        # The last component in path_info is the page name, if any
-        path = request.path
+        request = Request(environ)
+        context = init(request)
+        response = run(context)
+    except HTTPException, e:
+        context.clock.stop('run')
+        context.clock.stop('total')
+        response = e
 
-        # we can have all action URLs like this: /action/ActionName/PageName?action=ActionName&...
-        # this is just for robots.txt being able to forbid them for crawlers
-        prefix = request.cfg.url_prefix_action
-        if prefix is not None:
-            prefix = '/%s/' % prefix # e.g. '/action/'
-            if path.startswith(prefix):
-                # remove prefix and action name
-                path = path[len(prefix):]
-                action, path = (path.split('/', 1) + ['', ''])[:2]
-                path = '/' + path
-
-        if path.startswith('/'):
-            pagename = wikiutil.normalize_pagename(path, request.cfg)
-        else:
-            pagename = None
-
-        # need to inform caches that content changes based on:
-        # * cookie (even if we aren't sending one now)
-        # * User-Agent (because a bot might be denied and get no content)
-        # * Accept-Language (except if moin is told to ignore browser language)
-        hs = HeaderSet(('Cookie', 'User-Agent'))
-        if not request.cfg.language_ignore_browser:
-            hs.add('Accept-Language')
-        request.headers.add('Vary', str(hs))
-
-        # Handle request. We have these options:
-        # 1. jump to page where user left off
-        if not pagename and request.user.remember_last_visit and action_name == 'show':
-            pagetrail = request.user.getTrail()
-            if pagetrail:
-                # Redirect to last page visited
-                last_visited = pagetrail[-1]
-                wikiname, pagename = wikiutil.split_interwiki(last_visited)
-                if wikiname != 'Self':
-                    wikitag, wikiurl, wikitail, error = wikiutil.resolve_interwiki(request, wikiname, pagename)
-                    url = wikiurl + wikiutil.quoteWikinameURL(wikitail)
-                else:
-                    url = Page(request, pagename).url(request)
-            else:
-                # Or to localized FrontPage
-                url = wikiutil.getFrontPage(request).url(request)
-            return abort(redirect(url))
-
-        # 2. handle action
-        else:
-            # pagename could be empty after normalization e.g. '///' -> ''
-            # Use localized FrontPage if pagename is empty
-            if not pagename:
-                request.page = wikiutil.getFrontPage(request)
-            else:
-                request.page = Page(request, pagename)
-                if '_' in pagename and not request.page.exists():
-                    pagename = pagename.replace('_', ' ')
-                    page = Page(request, pagename)
-                    if page.exists():
-                        url = page.url(request)
-                        return abort(redirect(url))
-
-            msg = None
-            # Complain about unknown actions
-            if not action_name in get_names(request.cfg):
-                msg = _("Unknown action %(action_name)s.") % {
-                        'action_name': wikiutil.escape(action_name), }
-
-            # Disallow non available actions
-            elif action_name[0].isupper() and not action_name in \
-                    get_available_actions(request.cfg, request.page, request.user):
-                msg = _("You are not allowed to do %(action_name)s on this page.") % {
-                        'action_name': wikiutil.escape(action_name), }
-                if not request.user.valid:
-                    # Suggest non valid user to login
-                    msg += " " + _("Login and try again.")
-
-            if msg:
-                request.theme.add_msg(msg, "error")
-                request.page.send_page()
-            # Try action
-            else:
-                from MoinMoin import action
-                handler = action.getHandler(request.cfg, action_name)
-                if handler is None:
-                    msg = _("You are not allowed to do %(action_name)s on this page.") % {
-                            'action_name': wikiutil.escape(action_name), }
-                    if not request.user.valid:
-                        # Suggest non valid user to login
-                        msg += " " + _("Login and try again.")
-                    request.theme.add_msg(msg, "error")
-                    request.page.send_page()
-                else:
-                    handler(request.page.page_name, request)
-
-        # every action that didn't use to raise MoinMoinFinish must call this now:
-        # request.theme.send_closing_html()
-
-    except MoinMoinFinish:
-        pass
-    except RemoteClosedConnection:
-        # at least clean up
-        pass
-    except SystemExit:
-        raise # fcgi uses this to terminate a thread
-
-    if request.cfg.log_timing:
-        request.timing_log(False, action_name)
-
-        #return request.finish()
-    request.cfg.session_service.finalize(request, request.session)
-    return request
-
-def application(request):
-    run(init(request))
-
-    return request
-
-application = Request.application(application)
-application = HTTPExceptionsMiddleware(application)
+    return response(environ, start_response)
 
 def run_server(config):
     from os import path
