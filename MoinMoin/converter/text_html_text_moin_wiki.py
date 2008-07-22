@@ -821,10 +821,10 @@ class convert_tree(visitor):
         node_style = node.getAttribute("style")        
       
         is_strike = node.getAttribute("class") == "strike"
-        is_strike = is_strike or node_style.find("line-through") > -1
-        is_strong = node_style.find("bold") > -1
-        is_italic = node_style.find("italic") > -1
-        is_underline = node_style.find("underline") > -1
+        is_strike = is_strike or "line-through" in node_style
+        is_strong = "bold" in node_style
+        is_italic = "italic" in node_style
+        is_underline = "underline" in node_style
         
         
         if is_strike:
