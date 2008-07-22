@@ -815,12 +815,34 @@ class convert_tree(visitor):
         self.text.append(command)
 
     def process_span(self, node):
-        # ignore span tags - just descend
+        # process span tag for firefox3
+        # see this : http://dev.fckeditor.net/ticket/2210
+
+        node_style = node.getAttribute("style")        
+      
         is_strike = node.getAttribute("class") == "strike"
+        is_strike = is_strike or node_style.find("line-through") > -1
+        is_strong = node_style.find("bold") > -1
+        is_italic = node_style.find("italic") > -1
+        is_underline = node_style.find("underline") > -1
+        
+        
         if is_strike:
             self.text.append("--(")
+        if is_strong:
+            self.text.append("'''")
+        if is_italic:
+            self.text.append("''")
+        if is_underline:
+            self.text.append("__")
         for i in node.childNodes:
             self.process_inline(i)
+        if is_underline:
+            self.text.append("__")
+        if is_italic:
+            self.text.append("''")
+        if is_strong:
+            self.text.append("'''")
         if is_strike:
             self.text.append(")--")
 
