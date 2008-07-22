@@ -755,7 +755,7 @@ class Page(object):
             url = '%s?%s' % (url, querystr)
 
         if not relative:
-            url = request.href(url)
+            url = '%s/%s' % (request.script_root, url)
 
         # Add anchor
         if anchor:
