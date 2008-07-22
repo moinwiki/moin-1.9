@@ -114,40 +114,16 @@ class UserMixin(object):
 
 class LanguageMixin(object):
     """ Mixin for language attributes and methods. """
-    def lang(self):
-        for key in ('moin.user.lang', 'moin.request.lang'):
-            if key in self.environ:
-                return self.environ[key]
-
-        if i18n.languages is None:
-            i18n.i18n_init(self)
-        lang = None
-
-        user = getattr(self, 'user')
-        if user and user.valid and user.language:
-            lang = user.language
-            self.environ['moin.user.lang'] = lang
-        else:
-            if i18n.languages and not self.cfg.language_ignore_browser:
-                for l in self.request.accept_languages:
-                    if l in i18n.languages:
-                        lang = l
-                        break
-
-            if lang is None and self.cfg.language_default in i18n.languages:
-                lang = self.cfg.language_default
-            else:
-                lang = 'en'
-            self.environ['moin.request.lang'] = lang
-        return lang
-    lang = property(lang)
+    lang = EnvironProxy('lang')
 
     def getText(self):
         lang = self.lang
         def _(text, i18n=i18n, request=self, lang=lang, **kw):
             return i18n.getText(text, request, lang, **kw)
         return _
-    getText = EnvironProxy(getText)
+
+    getText = property(getText)
+    _ = getText
 
     def content_lang(self):
         return self.cfg.language_default
