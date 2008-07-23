@@ -1164,7 +1164,9 @@ class convert_tree(visitor):
                 else:
                     raise ConvertError("Invalid InterWiki link: '%s'" % href)
             elif css_class == "badinterwiki" and title:
-                pagename = wikiutil.url_unquote(href.lstrip('/'))
+                if href == "/": # we used this as replacement for empty href
+                    href = ""
+                pagename = wikiutil.url_unquote(href)
                 interwikiname = "%s:%s" % (title, pagename)
             if interwikiname and pagename == desc:
                 if ' ' in interwikiname:
