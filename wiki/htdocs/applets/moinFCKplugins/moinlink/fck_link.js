@@ -269,6 +269,7 @@ function Ok()
 // Modifying an existent link.
  if (oLink) {
   oLink.href = sUri;
+  SetAttribute( oLink, '_fcksavedurl', sUri ) ;
  }
  else   // Creating a new link.
  {
