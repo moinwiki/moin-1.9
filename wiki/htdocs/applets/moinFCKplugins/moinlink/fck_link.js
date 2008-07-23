@@ -273,7 +273,7 @@ function Ok()
  }
  else   // Creating a new link.
  {
-  oLink = oEditor.FCK.CreateLink(sUri);
+  oLink = oEditor.FCK.CreateLink(sUri)[0];
   if (! oLink)
   {
     oLink = oEditor.FCK.CreateElement('A');
