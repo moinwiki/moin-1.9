@@ -202,7 +202,7 @@ class TestAuth:
                     'login': 'login',
                 }
                 request = self.run_request(path='/%s' % pagename,
-                                           query_string='action=login',
+                                           query_string='login=login',
                                            method='POST', form_data=formdata)
             else: # not first page, use session cookie
                 environ_overrides = {'HTTP_COOKIE': cookie}
