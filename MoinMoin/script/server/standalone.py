@@ -79,7 +79,7 @@ class PluginScript(MoinScript):
             try:
                 if self.options.config_dir:
                     sys.path.insert(0, self.options.config_dir)
-                from wikiconfig import Config
+                from wikiserverconfig import Config
             except ImportError, err:
                 if 'Config' in str(err):
                     # we are unable to import Config
@@ -88,6 +88,13 @@ class PluginScript(MoinScript):
                     # some other import went wrong
                     raise
 
+            # intialize some defaults if missing
+            for option in ('docs', 'user', 'group', 'port', 'interface'):
+                if not hasattr(Config, option):
+                    value = getattr(DefaultConfig, option)
+                    setattr(Config, option, value)
+
+            # override with cmdline options
             if self.options.docs:
                 Config.docs = self.options.docs
             if self.options.user:
@@ -119,3 +126,4 @@ class DefaultConfig(StandaloneConfig):
     group = ''
     port = 8080
     interface = 'localhost'
+    reload_server = False
