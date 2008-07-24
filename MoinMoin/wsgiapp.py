@@ -253,6 +253,28 @@ def application(environ, start_response):
 
     return response(environ, start_response)
 
+class ProxyTrust(object):
+    def __init__(self, app, proxies):
+        self.app = app
+        self.proxies = proxies
+
+    def __call__(environ, start_response):
+        if 'HTTP_X_FORWARDED_FOR' in environ:
+            addrs = environ.pop('HTTP_X_FORWARDED_FOR').split(',')
+            addrs = [x.strip() for addr in addrs]
+        elif 'REMOTE_ADDR' in environ:
+            addrs = [environ['REMOTE_ADDR']]
+        else:
+            addrs = [None]
+        result = [addr for addr in addrs if addr not in self.proxies]
+        if result:
+            environ['REMOTE_ADDR'] = result[-1]
+        elif addrs[-1] is not None:
+            environ['REMOTE_ADDR'] = addrs[-1]
+        else:
+            del environ['REMOTE_ADDR']
+        return self.app(environ, start_response)
+
 def run_server(config):
     from os import path
     from MoinMoin.config import url_prefix_static
