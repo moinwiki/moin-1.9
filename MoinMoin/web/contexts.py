@@ -147,7 +147,6 @@ class HTTPMixin(object):
     session = EnvironProxy('session')
 
     _auth_redirected = EnvironProxy('old._auth_redirected', 0)
-    _cache_disabled = EnvironProxy('old._cache_disabled', 0)
     cacheable = EnvironProxy('old.cacheable', 0)
 
     class _proxy(property):
@@ -200,20 +199,15 @@ class HTTPMixin(object):
         self.headers.add(header, value)
 
     def disableHttpCaching(self, level=1):
-        if level <= self._cache_disabled:
+        if level == 1 and self.headers.get('Pragma') == 'no-cache':
             return
 
         if level == 1:
-            self.headers.add('Cache-Control', 'private, must-revalidate, mag-age=10')
+            self.headers.set('Cache-Control', 'private, must-revalidate, mag-age=10')
         elif level == 2:
-            self.headers.add('Cache-Control', 'no-cache')
+            self.headers.set('Cache-Control', 'no-cache')
             self.headers.set('Pragma', 'no-cache')
-
-        if not self._cache_disabled:
-            when = time.time() - (3600 * 24 * 365)
-            self.headers.set('Expires', http_date(when))
-
-        self._cache_disabled = level
+        self.request.expires = time.time() - 3600 * 24 * 365
 
     def isSpiderAgent(self):
         return check_spider(self.request.user_agent, self.cfg)
