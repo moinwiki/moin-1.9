@@ -288,8 +288,7 @@ def run_server(config):
     app = SharedDataMiddleware(application, shared)
 
     params = {}
-    params['use_debugger'] = config.traceback_show
+    params['use_debugger'] = config.debug
     params['threaded'] = True
-    params['use_reloader'] = config.reload_server
 
     run_simple(config.interface, config.port, app, **params)
