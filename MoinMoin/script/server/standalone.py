@@ -51,9 +51,9 @@ class PluginScript(MoinScript):
             help="Set file to store pid of moin daemon in. Default: moin.pid"
         )
         self.parser.add_option(
-            "--reload", dest="reload", action="store_true",
-            help="Reload the server if there are changes to any loaded python files"
-         )
+            "--debug", dest="debug", action="store_true",
+            help="Enable debug mode of server (show tracebacks)"
+        )
 
     def mainloop(self):
         # we don't expect non-option arguments
@@ -89,7 +89,7 @@ class PluginScript(MoinScript):
                     raise
 
             # intialize some defaults if missing
-            for option in ('docs', 'user', 'group', 'port', 'interface'):
+            for option in ('docs', 'user', 'group', 'port', 'interface', 'debug'):
                 if not hasattr(Config, option):
                     value = getattr(DefaultConfig, option)
                     setattr(Config, option, value)
@@ -103,14 +103,14 @@ class PluginScript(MoinScript):
                 Config.port = self.options.port
             if self.options.interface:
                 Config.interface = self.options.interface
+            if self.options.debug:
+                Config.debug = True
 
             if not hasattr(Config, 'docs'):
                 docs = os.path.join('wiki', 'htdocs')
                 if not os.path.exists(docs):
                     docs = "/usr/share/moin/htdocs"
                 Config.docs = docs
-
-            Config.reload_server = self.options.reload
 
             if self.options.start:
                 daemon = Daemon('moin', pidfile, run_server, Config)
@@ -126,4 +126,4 @@ class DefaultConfig(StandaloneConfig):
     group = ''
     port = 8080
     interface = 'localhost'
-    reload_server = False
+    debug = False
