@@ -503,7 +503,7 @@ msgid "Create New Page"
 msgstr "Créer une page"
 
 msgid "You are not allowed to view this page."
-msgstr "Vous n'êtes pas autorisé à voir cette page."
+msgstr "Vous n'êtes pas autorisé à lire cette page."
 
 msgid "[all]"
 msgstr "[tout]"
@@ -1247,16 +1247,14 @@ msgstr "Options générales"
 msgid "Quick links"
 msgstr "Liens rapides"
 
-#, fuzzy
 msgid "OpenID server"
-msgstr "OpenID n'est pas proposé"
+msgstr "Serveur OpenID"
 
-#, fuzzy
 msgid "The selected websites have been removed."
-msgstr "Les identifiants OpenID sélectionnés ont été enlevés."
+msgstr "Les sites web sélectionnés ont été supprimés."
 
 msgid "Trusted websites"
-msgstr ""
+msgstr "Sites web de confiance."
 
 #, python-format
 msgid ""
@@ -1749,22 +1747,22 @@ msgid "NONE"
 msgstr "RIEN"
 
 msgid "Global extension macros"
-msgstr "Macros d'extension globales"
+msgstr "Macros globales"
 
 msgid "Local extension macros"
-msgstr "Macros d'extension locales"
+msgstr "Macros locales"
 
 msgid "Global extension actions"
-msgstr "Actions d'extension globales "
+msgstr "Actions globales "
 
 msgid "Local extension actions"
-msgstr "Actions d'extension locales"
+msgstr "Actions locales"
 
 msgid "Global parsers"
-msgstr "Analyseurs généraux"
+msgstr "Analyseurs globaux"
 
 msgid "Local extension parsers"
-msgstr "Analyseurs d'extension locaux"
+msgstr "Analyseurs locaux"
 
 msgid "Disabled"
 msgstr "Désactivée"
@@ -2334,7 +2332,7 @@ msgstr "Veuillez d'abord vous identifier."
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Veuillez créer une page personnelle avant de créer d'autres pages."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "You can add some additional sub pages to your already existing homepage "
 "here.\n"
@@ -2380,9 +2378,9 @@ msgstr ""
 "||'''Ajout d'une nouvelle page personnelle :'''||'''Groupes utilisés pour "
 "les listes de contrôle d'accès :'''||\n"
 "||<<NewPage(HomepageReadWritePageTemplate,page ouverte en écriture,%"
-"(username)s)>>||[\"%(username)s/GroupeDesRédacteurs\"]||\n"
+"(username)s)>>||[%(username)s/GroupeDesRédacteurs]||\n"
 "||<<NewPage(HomepageReadPageTemplate,page en lecture seule,%(username)s)>>||"
-"[\"%(username)s/GroupeDesLecteurs\"]||\n"
+"[%(username)s/GroupeDesLecteurs]||\n"
 "||<<NewPage(HomepagePrivatePageTemplate,page privée,%(username)s)>>||"
 "Uniquement (username)s||\n"
 "\n"
