@@ -270,7 +270,7 @@ class RequestBase(object):
         current_id = validuser and self.user.name or self.remote_addr
         current_action = self.action
 
-        default_limit = self.cfg.surge_action_limits.get('default', (30, 60))
+        default_limit = limits.get('default', (30, 60))
 
         now = int(time.time())
         surgedict = {}
@@ -305,7 +305,7 @@ class RequestBase(object):
                 if len(timestamps) < maxnum * 2:
                     timestamps.append((now + self.cfg.surge_lockout_time, surge_indicator)) # continue like that and get locked out
 
-            if current_action != 'AttachFile': # don't add AttachFile accesses to all or picture galleries will trigger SP
+            if current_action not in ('cache', 'AttachFile', ): # don't add cache/AttachFile accesses to all or picture galleries will trigger SP
                 current_action = 'all' # put a total limit on user's requests
                 maxnum, dt = limits.get(current_action, default_limit)
                 events = surgedict.setdefault(current_id, {})
