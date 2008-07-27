@@ -1255,8 +1255,11 @@ class Parser:
         #logging.debug("parser_content: %r" % line)
         if self.in_pre == 'search_parser' and line.strip():
             # try to find a parser specification
+            parser_name = ''
             if line.strip().startswith("#!"):
-                parser_name = line.strip()[2:].split()[0]
+                parser_name = line.strip()[2:]
+            if parser_name:
+                parser_name = parser_name.split()[0]
             else:
                 parser_name = 'text'
             self.setParser(parser_name)
