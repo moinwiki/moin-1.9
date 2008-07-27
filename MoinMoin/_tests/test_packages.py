@@ -84,11 +84,9 @@ class TestQuoting:
 
 class TestRealCreation:
 
-    def testSearchCreate(self):
+    def testSearch(self):
         package = PackagePages(self.request.rootpage.page_name, self.request)
-        temp = tempfile.NamedTemporaryFile(suffix='.zip')
-        package.collectpackage(package.searchpackage(self.request, "Category"), temp)
-        assert zipfile.is_zipfile(temp.name)
+        assert package.searchpackage(self.request, "Bad") == [u'BadContent']
 
     def testListCreate(self):
         package = PackagePages(self.request.rootpage.page_name, self.request)
