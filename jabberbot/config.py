@@ -41,9 +41,8 @@ class BotConfig:
 
     # A secret shared with Wiki , must be the same in both
     # configs for communication to work.
-    #
-    # CHANGE IT TO A LONG RANDOM STRING, OR YOU WILL HAVE A SECURITY ISSUE!
-    secret = u""
+    secret = "use same string as in secrets setting in wiki config"
+
 
     # Maximum number of items in service discovery cache (XEP-0115)
     disco_cache_size = 100

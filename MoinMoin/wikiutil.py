@@ -1114,9 +1114,11 @@ def importWikiPlugin(cfg, kind, name, function="execute"):
 
     See importPlugin docstring.
     """
-    if not name in wikiPlugins(kind, cfg):
-        raise PluginMissingError
-    moduleName = '%s.plugin.%s.%s' % (cfg.siteid, kind, name)
+    plugins = wikiPlugins(kind, cfg)
+    modname = plugins.get(name, None)
+    if modname is None:
+        raise PluginMissingError()
+    moduleName = '%s.%s' % (modname, name)
     return importNameFromPlugin(moduleName, function)
 
 
@@ -1168,27 +1170,35 @@ def builtinPlugins(kind):
 
 
 def wikiPlugins(kind, cfg):
-    """ Gets a list of modules in data/plugin/'kind'
+    """
+    Gets a dict containing the names of all plugins of @kind
+    as the key and the containing module name as the value.
 
     @param kind: what kind of modules we look for
-    @rtype: list
-    @return: module names
+    @rtype: dict
+    @return: plugin name to containing module name mapping
     """
-    # Wiki plugins are located in wikiconfig.plugin module
-    modulename = '%s.plugin.%s' % (cfg.siteid, kind)
-
-    # short-cut if we've loaded the list already
+    # short-cut if we've loaded the dict already
     # (or already failed to load it)
     if kind in cfg._site_plugin_lists:
         return cfg._site_plugin_lists[kind]
 
-    try:
-        plugins = pysupport.importName(modulename, "modules")
-        cfg._site_plugin_lists[kind] = plugins
-        return plugins
-    except ImportError:
-        cfg._site_plugin_lists[kind] = []
-        return []
+    result = {}
+
+    for modname in cfg._plugin_modules:
+        try:
+            module = pysupport.importName(modname, kind)
+            packagepath = os.path.dirname(module.__file__)
+            plugins = pysupport.getPluginModules(packagepath)
+
+            for p in plugins:
+                if not p in result:
+                    result[p] = '%s.%s' % (modname, kind)
+        except AttributeError:
+            pass
+
+    cfg._site_plugin_lists[kind] = result
+    return result
 
 
 def getPlugins(kind, cfg):
@@ -2422,7 +2432,7 @@ def anchor_name_from_text(text):
 ########################################################################
 
 def createTicket(request, tm=None, action=None):
-    """ Create a ticket using a site-specific secret (the config)
+    """ Create a ticket using a configured secret
 
         @param tm: unix timestamp (optional, uses current time if not given)
         @param action: action name (optional, uses current action if not given)
@@ -2447,19 +2457,11 @@ def createTicket(request, tm=None, action=None):
         except:
             action = 'None'
 
+    secret = request.cfg.secrets['wikiutil/tickets']
+    digest = sha.new(secret)
 
     ticket = "%s.%s.%s" % (tm, pagename, action)
-    digest = sha.new()
     digest.update(ticket)
-
-    varnames = ['data_dir', 'data_underlay_dir', 'language_default',
-                'mail_smarthost', 'mail_from', 'page_front_page',
-                'theme_default', 'sitename', 'logo_string',
-                'interwikiname', 'user_homewiki', 'acl_rights_before', ]
-    for varname in varnames:
-        var = getattr(request.cfg, varname, None)
-        if isinstance(var, (str, unicode)):
-            digest.update(repr(var))
 
     return "%s.%s" % (ticket, digest.hexdigest())
 
