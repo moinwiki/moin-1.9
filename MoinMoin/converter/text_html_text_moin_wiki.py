@@ -870,6 +870,15 @@ class convert_tree(visitor):
         self.text.extend([self.new_line, "-" * length, self.new_line])
 
     def process_p(self, node):
+        # process indent
+        node_style = node.getAttribute("style")
+        match = re.match(r"margin-left:\s*(\d+)px", node_style)
+        if match:
+            left_margin = int(match.group(1))
+            indent_depth = int(left_margin / 40)
+            if indent_depth > 0:
+                self.text.append(' . ')
+            
         self.process_paragraph_item(node)
         self.text.append("\n\n") # do not use self.new_line here!
 
