@@ -10,7 +10,7 @@ from werkzeug.http import HeaderSet
 from werkzeug.exceptions import HTTPException
 
 from MoinMoin.web.contexts import AllContext, Context, XMLRPCContext
-from MoinMoin.web.request import Request
+from MoinMoin.web.request import Request, MoinMoinFinish
 from MoinMoin.web.utils import check_forbidden, check_setuid, check_surge_protect
 
 from MoinMoin.Page import Page
@@ -55,21 +55,25 @@ def run(context):
     request = context.request
 
     # preliminary access checks (forbidden, bots, surge protection)
-    check_forbidden(context)
-    check_surge_protect(context)
+    try:
+        check_forbidden(context)
+        check_surge_protect(context)
 
-    action_name = context.action
+        action_name = context.action
 
-    # handle XMLRPC calls
-    if action_name == 'xmlrpc':
-        response = xmlrpc.xmlrpc(XMLRPCContext(request))
-    elif action_name == 'xmlrpc2':
-        response = xmlrpc.xmlrpc2(XMLRPCContext(request))
-    else:
-        response = dispatch(request, context, action_name)
-    context.cfg.session_service.finalize(context, context.session)
-    context.clock.stop('run')
-    return response
+        # handle XMLRPC calls
+        if action_name == 'xmlrpc':
+            response = xmlrpc.xmlrpc(XMLRPCContext(request))
+        elif action_name == 'xmlrpc2':
+            response = xmlrpc.xmlrpc2(XMLRPCContext(request))
+        else:
+            response = dispatch(request, context, action_name)
+        context.cfg.session_service.finalize(context, context.session)
+        return response
+    except MoinMoinFinish:
+        return request
+    finally:
+        context.clock.stop('run')
 
 def remove_prefix(path, prefix=None):
     """ Remove an url prefix from the path info and return shortened path. """
@@ -247,10 +251,9 @@ def application(environ, start_response):
         context = init(request)
         response = run(context)
     except HTTPException, e:
-        context.clock.stop('run')
-        context.clock.stop('total')
         response = e
 
+    context.clock.stop('total')
     return response(environ, start_response)
 
 class ProxyTrust(object):

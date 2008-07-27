@@ -20,6 +20,9 @@ from MoinMoin import config
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
+class MoinMoinFinish(Exception):
+    """ Raised to jump directly to end of run() function, where finish is called """
+
 class Request(WerkzeugRequest, WerkzeugResponse):
     """ A full featured Request/Response object.
 
