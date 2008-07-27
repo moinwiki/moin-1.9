@@ -74,9 +74,7 @@ set_umask()
 
 # Exceptions -----------------------------------------------------------
 
-class MoinMoinFinish(Exception):
-    """ Raised to jump directly to end of run() function, where finish is called """
-
+from MoinMoin.web.request import MoinMoinFinish
 
 class HeadersAlreadySentException(Exception):
     """ Is raised if the headers were already sent when emit_http_headers is called."""

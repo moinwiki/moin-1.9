@@ -18,8 +18,7 @@ from MoinMoin.config import multiconfig
 from MoinMoin.formatter import text_html
 from MoinMoin.theme import load_theme_fallback
 from MoinMoin.util.clock import Clock
-from MoinMoin.request import MoinMoinFinish
-from MoinMoin.web.request import Request
+from MoinMoin.web.request import Request, MoinMoinFinish
 from MoinMoin.web.utils import check_spider, UniqueIDGenerator
 from MoinMoin.web.exceptions import Forbidden, SurgeProtection
 
