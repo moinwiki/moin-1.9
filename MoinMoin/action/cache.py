@@ -107,8 +107,7 @@ def put(request, key, data,
         content_type=None,
         content_disposition=None,
         content_length=None,
-        last_modified=None,
-        bufsize=8192):
+        last_modified=None):
     """
     Put an object into the cache to send it with cache action later.
 
@@ -117,10 +116,10 @@ def put(request, key, data,
     @param data: content data (str or open file-like obj)
     @param filename: filename for content-disposition header and for autodetecting
                      content_type (unicode, default: None)
-    @param content_disposition: type for content-disposition header (str, default: None)
     @param content_type: content-type header value (str, default: autodetect from filename)
-    @param last_modified: last modified timestamp (int, default: autodetect)
+    @param content_disposition: type for content-disposition header (str, default: None)
     @param content_length: data length for content-length header (int, default: autodetect)
+    @param last_modified: last modified timestamp (int, default: autodetect)
     """
     import os.path
     from MoinMoin.util import timefuncs
