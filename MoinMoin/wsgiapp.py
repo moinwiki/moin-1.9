@@ -281,6 +281,7 @@ class ProxyTrust(object):
 def run_server(config):
     from os import path
     from MoinMoin.config import url_prefix_static
+    from MoinMoin.web.serving import RequestHandler
     from werkzeug.serving import run_simple
     from werkzeug.utils import SharedDataMiddleware
 
@@ -293,5 +294,6 @@ def run_server(config):
     params = {}
     params['use_debugger'] = config.debug
     params['threaded'] = True
+    params['request_handler'] = RequestHandler
 
     run_simple(config.interface, config.port, app, **params)
