@@ -87,5 +87,5 @@ def used_languages(request):
 
     table = DataBrowserWidget(request)
     table.setData(languages)
-    return table.format()
+    return table.render()
 

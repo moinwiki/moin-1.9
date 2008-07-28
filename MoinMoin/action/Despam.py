@@ -71,7 +71,7 @@ def show_editors(request, pagename, timestamp):
 
     table = DataBrowserWidget(request)
     table.setData(dataset)
-    return table.format()
+    return table.render()
 
 class tmp:
     pass
