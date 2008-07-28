@@ -113,7 +113,7 @@ window.onload = function()
  oEditor.FCKLanguageManager.TranslatePage(document);
 
  // Load the selected link information (if any).
- LoadSelection();
+ var firstElement = LoadSelection();
 
  // Update the dialog box.
  SetLinkType(GetE('cmbLinkType').value);
@@ -123,11 +123,17 @@ window.onload = function()
 
  // Activate the "OK" button.
  window.parent.SetOkButton(true);
+
+ // select first text input element of dialog for usability
+ SelectField(firstElement);
 }
 
 function LoadSelection()
 {
- if (!oLink) return;
+ // variable for first element of dialog
+ var firstElement = 'txtPagename';
+
+ if (!oLink) return firstElement;
 
  var sType = 'url';
 
@@ -155,6 +161,7 @@ function LoadSelection()
    sType = 'url';
    GetE('txtUrl').value = sUrl;
   }
+  firstElement  = 'txtUrl';
  }
  else if (oLink.getAttribute('class')=='interwiki' || 
           oLink.getAttribute('class')=='badinterwiki') 
@@ -162,6 +169,7 @@ function LoadSelection()
   sType = 'interwiki';
   GetE('sctInterwiki').value = oLink.getAttribute('title');
   GetE('txtInterwikipagename').value = decodeUrl(sHRef);
+  firstElement = 'txtInterwikipagename';
  }
  else if (sHRef.StartsWith(FCKConfig['WikiBasePath']))
  {
@@ -171,6 +179,7 @@ function LoadSelection()
   if (sHRef.StartsWith(FCKConfig['WikiPage']))
       sHRef = sHRef.Remove(0, FCKConfig['WikiPage'].length);
   GetE('txtPagename').value = decodeUrl(sHRef);
+  firstElement  = 'txtPagename';
  }
  else     // It is another type of link.
  {
@@ -178,10 +187,13 @@ function LoadSelection()
 
   GetE('cmbLinkProtocol').value = '';
   GetE('txtUrl').value = sHRef;
+  firstElement  = 'txtUrl';
  }
 
  // Update the Link type combo.
  GetE('cmbLinkType').value = sType;
+
+ return firstElement;
 }
 
 //#### Link type selection.
