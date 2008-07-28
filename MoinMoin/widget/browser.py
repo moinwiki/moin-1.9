@@ -93,7 +93,7 @@ class DataBrowserWidget(base.Widget):
         common[2] = self._makeoption(self._notempty, value == self.__notempty, self.__notempty)
         return '\n'.join(common + result)
 
-    def format(self, formatter=None):
+    def _format(self, formatter=None):
         fmt = formatter or self.request.formatter
 
         result = []
@@ -186,4 +186,9 @@ class DataBrowserWidget(base.Widget):
         result.append(fmt.div(0))
         result.append(fmt.rawHTML('</form>'))
         return ''.join(result)
+
+    format = _format # DEPRECATED, use render()
+
+    render = _format # Note: in moin <= 1.7.1 render() used request.write(), this was wrong!
+                     # Now it just returns the result, as the other widgets do.
 
