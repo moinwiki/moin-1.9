@@ -74,6 +74,9 @@ window.onload = function()
 
  // Activate the "OK" button.
  window.parent.SetOkButton(true);
+
+  // select first text input element of dialog for usability
+  SelectField('txtAttachmentname');
 }
 
 function LoadSelection()
