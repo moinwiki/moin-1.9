@@ -15,9 +15,7 @@ def execute(xmlrpcobj, their_secret, argv):
     request = xmlrpcobj.request
     their_secret = xmlrpcobj._instr(their_secret)
 
-    our_secret = request.cfg.remote_script_secret
-    if not our_secret:
-        return u"No password set"
+    our_secret = request.cfg.secrets['xmlrpc/RemoteScript']
 
     if our_secret != their_secret:
         return u"Invalid password"

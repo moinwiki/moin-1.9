@@ -82,14 +82,15 @@ def check_surge_protect(request, kick=False):
     if not limits:
         return False
 
-    validuser = request.user.valid
-    current_id = validuser and request.user.name or request.remote_addr or ''
-
-    if not validuser and current_id.startswith('127.'): # localnet
+    remote_addr = request.remote_addr or ''
+    if remote_addr.startswith('127.'):
         return False
+
+    validuser = request.user.valid
+    current_id = validuser and request.user.name or remote_addr
     current_action = request.action
 
-    default_limit = request.cfg.surge_action_limits.get('default', (30, 60))
+    default_limit = limits.get('default', (30, 60))
 
     now = int(time.time())
     surgedict = {}
@@ -124,7 +125,7 @@ def check_surge_protect(request, kick=False):
             if len(timestamps) < maxnum * 2:
                 timestamps.append((now + request.cfg.surge_lockout_time, surge_indicator)) # continue like that and get locked out
 
-        if current_action != 'AttachFile': # don't add AttachFile accesses to all or picture galleries will trigger SP
+        if current_action not in ('cache', 'AttachFile', ): # don't add cache/AttachFile accesses to all or picture galleries will trigger SP
             current_action = 'all' # put a total limit on user's requests
             maxnum, dt = limits.get(current_action, default_limit)
             events = surgedict.setdefault(current_id, {})
@@ -151,7 +152,10 @@ def check_surge_protect(request, kick=False):
     except StandardError:
         pass
 
-    if surge_detected:
+    if surge_detected and validuser and request.user.auth_method in request.cfg.auth_methods_trusted:
+        logging.info("Trusted user %s would have triggered surge protection if not trusted.", request.user.name)
+        return False
+    elif surge_detected:
         raise SurgeProtection(retry_after=request.cfg.surge_lockout_time)
     else:
         return False

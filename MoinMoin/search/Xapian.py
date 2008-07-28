@@ -74,7 +74,6 @@ class WikiAnalyzer:
     token_re = re.compile(
         r"(?P<company>\w+[&@]\w+)|" + # company names like AT&T and Excite@Home.
         r"(?P<email>\w+([.-]\w+)*@\w+([.-]\w+)*)|" +    # email addresses
-        r"(?P<hostname>\w+(\.\w+)+)|" +                 # hostnames
         r"(?P<acronym>(\w\.)+)|" +          # acronyms: U.S.A., I.B.M., etc.
         r"(?P<word>\w+)",                   # words (including WikiWords)
         re.U)
@@ -104,16 +103,21 @@ class WikiAnalyzer:
 
     def raw_tokenize_word(self, word, pos):
         """ try to further tokenize some word starting at pos """
+        yield (word, pos)
         if self.wikiword_re.match(word):
-            yield (word, pos)
             # if it is a CamelCaseWord, we additionally try to tokenize Camel, Case and Word
             for m in re.finditer(self.singleword_re, word):
-                for w, p in self.raw_tokenize_word(m.group(), pos + m.start()):
+                mw, mp = m.group(), pos + m.start()
+                for w, p in self.raw_tokenize_word(mw, mp):
                     yield (w, p)
         else:
             # if we have Foo42, yield Foo and 42
             for m in re.finditer(self.alpha_num_re, word):
-                yield (m.group(), pos + m.start())
+                mw, mp = m.group(), pos + m.start()
+                if mw != word:
+                    for w, p in self.raw_tokenize_word(mw, mp):
+                        yield (w, p)
+
 
     def raw_tokenize(self, value):
         """ Yield a stream of words from a string.
@@ -137,11 +141,6 @@ class WikiAnalyzer:
                         if word:
                             yield (word, m.start() + displ)
                             displ += len(word) + 1
-                elif m.group("hostname"):
-                    displ = 0
-                    for word in self.dot_re.split(m.group("hostname")):
-                        yield (word, m.start() + displ)
-                        displ += len(word) + 1
                 elif m.group("word"):
                     for word, pos in self.raw_tokenize_word(m.group("word"), m.start()):
                         yield word, pos

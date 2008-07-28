@@ -25,12 +25,14 @@ class OpenIDAuth(BaseAuth):
     def __init__(self, modify_request=None,
                        update_user=None,
                        create_user=None,
-                       forced_service=None):
+                       forced_service=None,
+                       idselector_com=None):
         BaseAuth.__init__(self)
         self._modify_request = modify_request or (lambda x: None)
         self._update_user = update_user or (lambda i, u: None)
         self._create_user = create_user or (lambda i, u: None)
         self._forced_service = forced_service
+        self._idselector_com = idselector_com
         if forced_service:
             self.login_inputs = ['special_no_input']
 
@@ -294,5 +296,9 @@ document.getElementById("openid_message").submit();
 
     def login_hint(self, request):
         _ = request.getText
-        return _("If you do not have an account yet, you can still log in "
+        msg = u''
+        if self._idselector_com:
+            msg = self._idselector_com
+        msg += _("If you do not have an account yet, you can still log in "
                  "with your OpenID and create one during login.")
+        return msg

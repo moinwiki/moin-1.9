@@ -20,6 +20,9 @@ class Config(DefaultConfig):
     data_underlay_dir = os.path.join(_base_dir, "underlay")
 
     show_hosts = 1
+
+    secrets = 'some not secret string just to make tests happy'
+
     # used to check if it is really a wiki we may modify
     is_test_wiki = True
 

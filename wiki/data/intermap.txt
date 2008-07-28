@@ -20,7 +20,7 @@ MoinDoc http://hg.moinmo.in/moin/1.6/
 
 # for Germany: bookzilla.de instead of amazon == supporting GNU/Linux and 5% for FSF Europe
 # ISBN http://bookzilla.de/shop/action/advancedSearch?action=search&isbn=
-ISBN http://www.amazon.com/exec/obidos/ISBN=
+ISBN http://isbndb.com/search-all.html?kw=9780321481009
 RFC http://www.ietf.org/rfc/rfc
 FreshMeat http://freshmeat.net/
 Thinki http://www.thinkware.se/cgi-bin/thinki.cgi/
@@ -121,6 +121,7 @@ ReseauCitoyen http://reseaucitoyen.be/?
 Tavi http://tavi.sourceforge.net/
 ThoughtStorms http://www.nooranch.com/synaesmedia/wiki/wiki.cgi?
 TWiki http://twiki.org/cgi-bin/view/
+UPC http://www.upcdatabase.com/item/
 Unreal http://wiki.beyondunreal.com/wiki/
 UseMod http://www.usemod.com/cgi-bin/wiki.pl?
 WebSeitzWiki http://webseitz.fluxent.com/wiki/

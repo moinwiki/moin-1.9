@@ -3,7 +3,7 @@
     MoinMoin - revert a page to a previous revision
 
     @copyright: 2000-2004 Juergen Hermann <jh@web.de>,
-                2006 MoinMoin:ThomasWaldmann,
+                2006-2008 MoinMoin:ThomasWaldmann,
                 2007 MoinMoin:ReimarBauer,
                 2008 MoinMoin:JohannesBerg
     @license: GNU GPL, see COPYING for details.
@@ -30,7 +30,7 @@ class revert(ActionBase):
         # as well
         _ = self._
         may = self.request.user.may
-        allowed = may.write(self.pagename) and may.delete(self.pagename)
+        allowed = may.write(self.pagename) and may.revert(self.pagename)
         return allowed, _('You are not allowed to revert this page!')
 
     def check_condition(self):
@@ -42,9 +42,6 @@ class revert(ActionBase):
                      'If you want to revert to an older revision, first view that older revision and '
                      'then call revert to this (older) revision again.')
             return note
-
-        if not self.page.exists():
-            return _('This page is already deleted or was never created!')
         else:
             return None
 

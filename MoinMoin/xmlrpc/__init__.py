@@ -702,7 +702,7 @@ class XmlRpcBase:
 
         @param jid: a bare Jabber ID
         """
-        if self.cfg.secret != secret:
+        if self.cfg.secrets['jabberbot'] != secret:
             return ""
 
         u = self.request.handle_jid_auth(jid)

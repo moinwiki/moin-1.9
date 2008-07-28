@@ -347,14 +347,6 @@ class ConfigFunctionality(object):
 
         # if we are to use the jabber bot, instantiate a server object for future use
         if self.jabber_enabled:
-
-            errmsg = "You must set a (long) secret string to send notifications!"
-            try:
-                if not self.secret:
-                    raise error.ConfigurationError(errmsg)
-            except AttributeError, err:
-                raise error.ConfigurationError(errmsg)
-
             from xmlrpclib import Server
             self.notification_server = Server(self.notification_bot_uri, )
 
@@ -371,6 +363,47 @@ class ConfigFunctionality(object):
 
         if self.url_prefix_local is None:
             self.url_prefix_local = self.url_prefix_static
+
+        if self.secrets is None:  # admin did not setup a real secret, so make up something
+            self.secrets = self.calc_secrets()
+
+        secret_key_names = ['action/cache', 'wikiutil/tickets', 'xmlrpc/ProcessMail', 'xmlrpc/RemoteScript', ]
+        if self.jabber_enabled:
+            secret_key_names.append('jabberbot')
+
+        secret_min_length = 10
+        if isinstance(self.secrets, str):
+            if len(self.secrets) < secret_min_length:
+                raise error.ConfigurationError("The secrets = '...' wiki config setting is a way too short string (minimum length is %d chars)!" % (
+                    secret_min_length))
+            # for lazy people: set all required secrets to same value
+            secrets = {}
+            for key in secret_key_names:
+                secrets[key] = self.secrets
+            self.secrets = secrets
+
+        # we check if we have all secrets we need and that they have minimum length
+        for secret_key_name in secret_key_names:
+            try:
+                secret = self.secrets[secret_key_name]
+                if len(secret) < secret_min_length:
+                    raise ValueError
+            except (KeyError, ValueError):
+                raise error.ConfigurationError("You must set a (at least %d chars long) secret string for secrets['%s']!" % (
+                    secret_min_length, secret_key_name))
+
+    def calc_secrets(self):
+        """ make up some 'secret' using some config values """
+        varnames = ['data_dir', 'data_underlay_dir', 'language_default',
+                    'mail_smarthost', 'mail_from', 'page_front_page',
+                    'theme_default', 'sitename', 'logo_string',
+                    'interwikiname', 'user_homewiki', 'acl_rights_before', ]
+        secret = ''
+        for varname in varnames:
+            var = getattr(self, varname, None)
+            if isinstance(var, (str, unicode)):
+                secret += repr(var)
+        return secret
 
     _meta_dict = None
     def load_meta_dict(self):
@@ -528,46 +561,54 @@ also the spelling of the directory name.
                 raise error.ConfigurationError(msg)
 
     def _loadPluginModule(self):
-        """ import plugin module under configname.plugin
+        """
+        import all plugin modules
 
         To be able to import plugin from arbitrary path, we have to load
         the base package once using imp.load_module. Later, we can use
         standard __import__ call to load plugins in this package.
 
-        Since each wiki has unique plugins, we load the plugin package
-        under the wiki configuration module, named self.siteid.
+        Since each configured plugin path has unique plugins, we load the
+        plugin packages as "moin_plugin_<sha1(path)>.plugin".
         """
-        import imp
+        import imp, sha
 
-        name = self.siteid + '.plugin'
+        plugin_dirs = [self.plugin_dir] + self.plugin_dirs
+        self._plugin_modules = []
+
         try:
             # Lock other threads while we check and import
             imp.acquire_lock()
             try:
-                # If the module is not loaded, try to load it
-                if not name in sys.modules:
-                    # Find module on disk and try to load - slow!
-                    plugin_parent_dir = os.path.abspath(os.path.join(self.plugin_dir, '..'))
-                    fp, path, info = imp.find_module('plugin', [plugin_parent_dir])
-                    try:
-                        # Load the module and set in sys.modules
-                        module = imp.load_module(name, fp, path, info)
-                        sys.modules[self.siteid].plugin = module
-                    finally:
-                        # Make sure fp is closed properly
-                        if fp:
-                            fp.close()
+                for pdir in plugin_dirs:
+                    csum = 'p_%s' % sha.new(pdir).hexdigest()
+                    modname = '%s.%s' % (self.siteid, csum)
+                    # If the module is not loaded, try to load it
+                    if not modname in sys.modules:
+                        # Find module on disk and try to load - slow!
+                        abspath = os.path.abspath(pdir)
+                        parent_dir, pname = os.path.split(abspath)
+                        fp, path, info = imp.find_module(pname, [parent_dir])
+                        try:
+                            # Load the module and set in sys.modules
+                            module = imp.load_module(modname, fp, path, info)
+                            setattr(sys.modules[self.siteid], 'csum', module)
+                            self._plugin_modules.append(modname)
+                        finally:
+                            # Make sure fp is closed properly
+                            if fp:
+                                fp.close()
             finally:
                 imp.release_lock()
         except ImportError, err:
             msg = """
-Could not import plugin package "%(path)s/plugin" because of ImportError:
+Could not import plugin package "%(path)s" because of ImportError:
 %(err)s.
 
 Make sure your data directory path is correct, check permissions, and
 that the data/plugin directory has an __init__.py file.
 """ % {
-    'path': self.data_dir,
+    'path': pdir,
     'err': str(err),
 }
             raise error.ConfigurationError(msg)
@@ -673,6 +714,7 @@ options_no_group_name = {
      "list of auth objects, to be called in this order (see HelpOnAuthentication)"),
     ('auth_methods_trusted', ['http', 'xmlrpc_applytoken'],
      'authentication methods for which users should be included in the special "Trusted" ACL group.'),
+    ('secrets', None, """Either a long shared secret string used for multiple purposes or a dict {"purpose": "longsecretstring", ...} for setting up different shared secrets for different purposes. If you don't setup own secret(s), a secret string will be auto-generated from other config settings."""),
     ('DesktopEdition',
      False,
      "if True, give all local users special powers - ''only use this for a local desktop wiki!''"),
@@ -696,20 +738,22 @@ options_no_group_name = {
   # ==========================================================================
   'spam_leech_dos': ('Anti-Spam/Leech/DOS', None, (
     ('hosts_deny', [], "List of denied IPs; if an IP ends with a dot, it denies a whole subnet (class A, B or C)"),
-
     ('surge_action_limits',
      {# allow max. <count> <action> requests per <dt> secs
         # action: (count, dt)
-        'all': (30, 30),
+        'all': (30, 30), # all requests (except cache/AttachFile action) count for this limit
+        'default': (30, 60), # default limit for actions without a specific limit
         'show': (30, 60),
         'recall': (10, 120),
         'raw': (20, 40),  # some people use this for css
-        'AttachFile': (90, 60),
         'diff': (30, 60),
         'fullsearch': (10, 120),
         'edit': (30, 300), # can be lowered after making preview different from edit
         'rss_rc': (1, 60),
-        'default': (30, 60),
+        # The following actions are often used for images - to avoid pages with lots of images
+        # (like photo galleries) triggering surge protection, we assign rather high limits:
+        'AttachFile': (90, 60),
+        'cache': (600, 30), # cache action is very cheap/efficient
      },
      "Surge protection tries to deny clients causing too much load/traffic, see /SurgeProtection."),
     ('surge_lockout_time', 3600, "time [s] someone gets locked out when ignoring the warnings"),
@@ -848,7 +892,8 @@ options_no_group_name = {
     ('data_underlay_dir', './underlay/', "Path to the underlay directory containing distribution system and help pages."),
     ('cache_dir', None, "Directory for caching, by default computed from `data_dir`/cache."),
     ('user_dir', None, "Directory for user storage, by default computed to be `data_dir`/user."),
-    ('plugin_dir', None, "Plugin directory, by default computed to be `data_dir`/user."),
+    ('plugin_dir', None, "Plugin directory, by default computed to be `data_dir`/plugin."),
+    ('plugin_dirs', [], "Additional plugin directories."),
 
     ('docbook_html_dir', r"/usr/share/xml/docbook/stylesheet/nwalsh/html/",
      'Path to the directory with the Docbook to HTML XSLT files (optional, used by the docbook parser). The default value is correct for Debian Etch.'),
@@ -883,7 +928,7 @@ options_no_group_name = {
     # the group 'all' shall match all, while the group 'key' shall match the key only
     # e.g. CategoryFoo -> group 'all' ==  CategoryFoo, group 'key' == Foo
     # moin's code will add ^ / $ at beginning / end when needed
-    ('page_category_regex', ur'(?P<all>Category(?P<key>\S+))',
+    ('page_category_regex', ur'(?P<all>Category(?P<key>(?!Template)\S+))',
      'Pagenames exactly matching this regex are regarded as Wiki categories [Unicode]'),
     ('page_dict_regex', ur'(?P<all>(?P<key>\S+)Dict)',
      'Pagenames exactly matching this regex are regarded as pages containing variable dictionary definitions [Unicode]'),
@@ -1140,7 +1185,6 @@ options = {
       ('smarthost', None, "Address of SMTP server to use for sending mail (None = don't use SMTP server)."),
       ('sendmail', None, "sendmail command to use for sending mail (None = don't use sendmail)"),
 
-      ('import_secret', "", "Shared secret for mail importing"),
       ('import_subpage_template', u"$from-$date-$subject", "Create subpages using this template when importing mail."),
       ('import_pagename_search', ['subject', 'to', ], "Where to look for target pagename specification."),
       ('import_pagename_envelope', u"%s", "Use this to add some fixed prefix/postfix to the generated target pagename."),

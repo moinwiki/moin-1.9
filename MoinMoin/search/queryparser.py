@@ -996,7 +996,9 @@ class QueryParser:
                 domain = False
                 while len(item) > 1:
                     m = item[0]
-                    if m == M:
+                    if m is None:
+                        raise ValueError("Invalid search prefix")
+                    elif m == M:
                         negate = True
                     elif "title".startswith(m):
                         title_search = True
@@ -1014,6 +1016,8 @@ class QueryParser:
                         mimetype = True
                     elif "domain".startswith(m):
                         domain = True
+                    else:
+                        raise ValueError("Invalid search prefix")
                     item = item[1:]
 
                 text = item[0]
@@ -1054,8 +1058,8 @@ class QueryParser:
                                                         brackets=('()', ),
                                                         quotes='\'"')
             logging.debug("parse_quoted_separated items: %r" % items)
-        except wikiutil.BracketError:
-            raise ValueError()
+        except wikiutil.BracketError, err:
+            raise ValueError(str(err))
         query = self._analyse_items(items)
         logging.debug("analyse_items query: %r" % query)
         return query
