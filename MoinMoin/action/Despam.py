@@ -71,7 +71,7 @@ def show_editors(request, pagename, timestamp):
 
     table = DataBrowserWidget(request)
     table.setData(dataset)
-    table.render()
+    return table.format()
 
 class tmp:
     pass
@@ -197,7 +197,7 @@ def execute(pagename, request):
     elif editor:
         show_pages(request, pagename, editor, timestamp)
     else:
-        show_editors(request, pagename, timestamp)
+        request.write(show_editors(request, pagename, timestamp))
 
     # End content and send footer
     request.write(request.formatter.endContent())

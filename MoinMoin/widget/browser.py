@@ -93,8 +93,8 @@ class DataBrowserWidget(base.Widget):
         common[2] = self._makeoption(self._notempty, value == self.__notempty, self.__notempty)
         return '\n'.join(common + result)
 
-    def format(self):
-        fmt = self.request.formatter
+    def format(self, formatter=None):
+        fmt = formatter or self.request.formatter
 
         result = []
         result.append(fmt.rawHTML('<form action="%s/%s" method="GET" name="%sform">' % (self.request.getScriptname(), wikiutil.quoteWikinameURL(self.request.page.page_name), self.data_id)))
@@ -186,9 +186,4 @@ class DataBrowserWidget(base.Widget):
         result.append(fmt.div(0))
         result.append(fmt.rawHTML('</form>'))
         return ''.join(result)
-
-    toHTML = format # old name of "format" function DEPRECATED, will be removed in 1.7
-
-    def render(self):
-        self.request.write(self.format())
 
