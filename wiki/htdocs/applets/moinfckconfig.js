@@ -11,7 +11,7 @@ FCKConfig.EnableSourceXHTML = true ;
 
 FCKConfig.FillEmptyBlocks = false ;
 
-FCKConfig.FormatSource = false ;
+FCKConfig.FormatSource = true ;
 FCKConfig.FormatOutput = false ;
 
 FCKConfig.GeckoUseSPAN = false ;
