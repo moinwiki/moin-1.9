@@ -47,6 +47,7 @@ import traceback
 
 from MoinMoin.Page import Page
 from MoinMoin import config, wikiutil, user, caching, error
+from MoinMoin.action import get_names, get_available_actions
 from MoinMoin.config import multiconfig
 from MoinMoin.support.python_compatibility import set
 from MoinMoin.util import IsWin9x
@@ -73,9 +74,7 @@ set_umask()
 
 # Exceptions -----------------------------------------------------------
 
-class MoinMoinFinish(Exception):
-    """ Raised to jump directly to end of run() function, where finish is called """
-
+from MoinMoin.web.request import MoinMoinFinish
 
 class HeadersAlreadySentException(Exception):
     """ Is raised if the headers were already sent when emit_http_headers is called."""
@@ -124,10 +123,6 @@ class RequestBase(object):
 
         # Decode values collected by sub classes
         self.path_info = self.decodePagename(self.path_info)
-
-        self.failed = 0
-        self._available_actions = None
-        self._known_actions = None
 
         # Pages meta data that we collect in one request
         self.pages = {}
@@ -194,9 +189,6 @@ class RequestBase(object):
 
             from MoinMoin.Page import RootPage
             self.rootpage = RootPage(self)
-
-            from MoinMoin.logfile import editlog
-            self.editlog = editlog.EditLog(self)
 
             from MoinMoin import i18n
             self.i18n = i18n
@@ -780,58 +772,11 @@ class RequestBase(object):
             return ''
         return self.script_name
 
-    def getKnownActions(self):
-        """ Create a dict of avaiable actions
-
-        Return cached version if avaiable.
-
-        @rtype: dict
-        @return: dict of all known actions
-        """
-        try:
-            self.cfg.cache.known_actions # check
-        except AttributeError:
-            from MoinMoin import action
-            self.cfg.cache.known_actions = set(action.getNames(self.cfg))
-
-        # Return a copy, so clients will not change the set.
-        return self.cfg.cache.known_actions.copy()
-
     def getAvailableActions(self, page):
-        """ Get list of avaiable actions for this request
-
-        The dict does not contain actions that starts with lower case.
-        Themes use this dict to display the actions to the user.
-
-        @param page: current page, Page object
-        @rtype: dict
-        @return: dict of avaiable actions
+        """ DEPRECATED! use MoinMoin.action.get_available_actions instead
         """
-        if self._available_actions is None:
-            # some actions might make sense for non-existing pages, so we just
-            # require read access here. Can be later refined to some action
-            # specific check:
-            if not self.user.may.read(page.page_name):
-                return []
-
-            # Filter non ui actions (starts with lower case letter)
-            actions = self.getKnownActions()
-            actions = [action for action in actions if not action[0].islower()]
-
-            # Filter wiki excluded actions
-            actions = [action for action in actions if not action in self.cfg.actions_excluded]
-
-            # Filter actions by page type, acl and user state
-            excluded = []
-            if ((page.isUnderlayPage() and not page.isStandardPage()) or
-                not self.user.may.write(page.page_name) or
-                not self.user.may.delete(page.page_name)):
-                # Prevent modification of underlay only pages, or pages
-                # the user can't write and can't delete
-                excluded = [u'RenamePage', u'DeletePage', ] # AttachFile must NOT be here!
-            actions = [action for action in actions if not action in excluded]
-
-            self._available_actions = set(actions)
+        if getattr(self, '_available_actions', None) is None:
+            self._available_actions = get_available_actions(self.cfg, page, self.user)
 
         # Return a copy, so clients will not change the dict.
         return self._available_actions.copy()
@@ -969,48 +914,7 @@ class RequestBase(object):
         name = u'/'.join(decoded)
         return name
 
-    def normalizePagename(self, name):
-        """ Normalize page name
-
-        Prevent creating page names with invisible characters or funny
-        whitespace that might confuse the users or abuse the wiki, or
-        just does not make sense.
-
-        Restrict even more group pages, so they can be used inside acl lines.
-
-        @param name: page name, unicode
-        @rtype: unicode
-        @return: decoded and sanitized page name
-        """
-        # Strip invalid characters
-        name = config.page_invalid_chars_regex.sub(u'', name)
-
-        # Split to pages and normalize each one
-        pages = name.split(u'/')
-        normalized = []
-        for page in pages:
-            # Ignore empty or whitespace only pages
-            if not page or page.isspace():
-                continue
-
-            # Cleanup group pages.
-            # Strip non alpha numeric characters, keep white space
-            if wikiutil.isGroupPage(self, page):
-                page = u''.join([c for c in page
-                                 if c.isalnum() or c.isspace()])
-
-            # Normalize white space. Each name can contain multiple
-            # words separated with only one space. Split handle all
-            # 30 unicode spaces (isspace() == True)
-            page = u' '.join(page.split())
-
-            normalized.append(page)
-
-        # Assemble components into full pagename
-        name = u'/'.join(normalized)
-        return name
-
-    def read(self, n):
+    def read(self, n=None):
         """ Read n bytes from input stream. """
         raise NotImplementedError
 
@@ -1118,7 +1022,7 @@ class RequestBase(object):
 
     def getBaseURL(self):
         """ Return a fully qualified URL to this script. """
-        return self.getQualifiedURL(self.getScriptname())
+        return self.getQualifiedURL(self.script_root)
 
     def getQualifiedURL(self, uri=''):
         """ Return an absolute URL starting with schema and host.
@@ -1180,6 +1084,7 @@ class RequestBase(object):
         self.loadTheme(theme_name)
 
     def _try_redirect_spaces_page(self, pagename):
+        logging.info('redirect %s', pagename)
         if '_' in pagename and not self.page.exists():
             pname = pagename.replace('_', ' ')
             pg = Page(self, pname)
@@ -1191,7 +1096,7 @@ class RequestBase(object):
 
     def run(self):
         # Exit now if __init__ failed or request is forbidden
-        if self.failed or self.forbidden or self._auth_redirected:
+        if self.forbidden or self._auth_redirected:
             # Don't sleep() here, it binds too much of our resources!
             return self.finish()
 
@@ -1231,7 +1136,7 @@ class RequestBase(object):
                     path = '/' + path
 
             if path.startswith('/'):
-                pagename = self.normalizePagename(path)
+                pagename = wikiutil.normalize_pagename(path, self.cfg)
             else:
                 pagename = None
 
@@ -1276,7 +1181,7 @@ class RequestBase(object):
 
                 msg = None
                 # Complain about unknown actions
-                if not action_name in self.getKnownActions():
+                if not action_name in get_names(self.cfg):
                     msg = _("Unknown action %(action_name)s.") % {
                             'action_name': wikiutil.escape(action_name), }
 
@@ -1316,12 +1221,6 @@ class RequestBase(object):
             pass
         except SystemExit:
             raise # fcgi uses this to terminate a thread
-        except Exception, err:
-            try:
-                # nothing we can do about further failures!
-                self.fail(err)
-            except:
-                pass
 
         if self.cfg.log_timing:
             self.timing_log(False, action_name)
@@ -1433,23 +1332,6 @@ class RequestBase(object):
         # save a traceback with the header for duplicate bug reporting
         self.user_headers.append((header, ''.join(traceback.format_stack()[:-1])))
 
-    def fail(self, err):
-        """ Fail when we can't continue
-
-        Send 500 status code with the error name. Reference:
-        http://www.w3.org/Protocols/rfc2616/rfc2616-sec6.html#sec6.1.1
-
-        Log the error, then let failure module handle it.
-
-        @param err: Exception instance or subclass.
-        """
-        self.failed = 1 # save state for self.run()
-        # we should not generate the headers two times
-        if not self.sent_headers:
-            self.emit_http_headers(['Status: 500 MoinMoin Internal Error'])
-        from MoinMoin import failure
-        failure.handle(self, err)
-
     def make_unique_id(self, base, namespace=None):
         """
         Generates a unique ID using a given base name. Appends a running count to the base.
@@ -1526,45 +1408,6 @@ class RequestBase(object):
         the page IDs state we kept around for push_unique_ids().
         '''
         self.include_id, pids = self._include_stack.pop()
-
-    def httpDate(self, when=None, rfc='1123'):
-        """ Returns http date string, according to rfc2068
-
-        See http://www.cse.ohio-state.edu/cgi-bin/rfc/rfc2068.html#sec-3.3
-
-        A http 1.1 server should use only rfc1123 date, but cookie's
-        "expires" field should use the older obsolete rfc850 date.
-
-        Note: we can not use strftime() because that honors the locale
-        and rfc2822 requires english day and month names.
-
-        We can not use email.Utils.formatdate because it formats the
-        zone as '-0000' instead of 'GMT', and creates only rfc1123
-        dates. This is a modified version of email.Utils.formatdate
-        from Python 2.4.
-
-        @param when: seconds from epoch, as returned by time.time()
-        @param rfc: conform to rfc ('1123' or '850')
-        @rtype: string
-        @return: http date conforming to rfc1123 or rfc850
-        """
-        if when is None:
-            when = time.time()
-        now = time.gmtime(when)
-        month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul',
-                 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][now.tm_mon - 1]
-        if rfc == '1123':
-            day = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][now.tm_wday]
-            date = '%02d %s %04d' % (now.tm_mday, month, now.tm_year)
-        elif rfc == '850':
-            day = ["Monday", "Tuesday", "Wednesday", "Thursday",
-                    "Friday", "Saturday", "Sunday"][now.tm_wday]
-            date = '%02d-%s-%s' % (now.tm_mday, month, str(now.tm_year)[-2:])
-        else:
-            raise ValueError("Invalid rfc value: %s" % rfc)
-
-        return '%s, %s %02d:%02d:%02d GMT' % (day, date, now.tm_hour,
-                                              now.tm_min, now.tm_sec)
 
     def disableHttpCaching(self, level=1):
         """ Prevent caching of pages that should not be cached.

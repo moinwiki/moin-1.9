@@ -15,7 +15,6 @@ import re
 
 def macro_dialog(request):
     help = get_macro_help(request)
-    request.emit_http_headers()
     request.write(
         '''<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
@@ -164,13 +163,12 @@ def get_macro_help(request):
 
 def page_list(request):
     from MoinMoin import search
-    name = request.form.get("pagename", [""])[0]
+    name = request.form.get("pagename", "")
     if name:
         searchresult = search.searchPages(request, 't:"%s"' % name)
         pages = [p.page_name for p in searchresult.hits]
     else:
         pages = [name]
-    request.emit_http_headers()
     request.write(
         '''<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
@@ -201,9 +199,8 @@ def page_list(request):
 ''' % "".join(["<option>%s</option>\n" % p for p in pages]))
 
 def link_dialog(request):
-    request.emit_http_headers()
     # list of wiki pages
-    name = request.form.get("pagename", [""])[0]
+    name = request.form.get("pagename", "")
     if name:
         from MoinMoin import search
         # XXX error handling!
@@ -242,7 +239,7 @@ def link_dialog(request):
 
     # wiki url
     url_prefix_static = request.cfg.url_prefix_static
-    scriptname = request.getScriptname()
+    scriptname = request.script_root
     if not scriptname or scriptname[-1] != "/":
         scriptname += "/"
     action = scriptname
@@ -367,9 +364,8 @@ def link_dialog(request):
 ##############################################################################
 
 def attachment_dialog(request):
-    request.emit_http_headers()
     # list of wiki pages
-    name = request.form.get("pagename", [""])[0]
+    name = request.form.get("pagename", "")
     if name:
         from MoinMoin import search
         # XXX error handling!
@@ -393,7 +389,7 @@ def attachment_dialog(request):
 
     # wiki url
     url_prefix_static = request.cfg.url_prefix_static
-    scriptname = request.getScriptname()
+    scriptname = request.script_root
     if not scriptname or scriptname[-1] != "/":
         scriptname += "/"
     action = scriptname
@@ -461,7 +457,6 @@ def attachment_dialog(request):
 ##############################################################################
 
 def image_dialog(request):
-    request.emit_http_headers()
     url_prefix_static = request.cfg.url_prefix_static
     request.write('''
 <!--

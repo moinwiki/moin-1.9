@@ -40,7 +40,7 @@ class TestAction:
         result = Action.macro_Action(m, 'raw')
         nuke_page(request, self.pagename)
 
-        expected = '<a href="./AutoCreatedMoinMoinTemporaryTestPageForAction?action=raw">raw</a>'
+        expected = '<a href="/AutoCreatedMoinMoinTemporaryTestPageForAction?action=raw">raw</a>'
         assert result == expected
 
 

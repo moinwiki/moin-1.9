@@ -184,7 +184,7 @@ def get_pagename_content(request, msg):
         generate_summary = True
         pagename = pagename[1:].lstrip()
 
-    pagename = request.normalizePagename(pagename)
+    pagename = wikiutil.normalize_pagename(pagename, request.cfg)
 
     if choose_html and msg['html']:
         content = "{{{#!html\n%s\n}}}" % msg['html'].replace("}}}", "} } }")

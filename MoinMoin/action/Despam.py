@@ -104,14 +104,13 @@ def show_pages(request, pagename, editor, timestamp):
     request.write('''
 </table>
 <p>
-<form method="post" action="%s/%s">
+<form method="post" action="%s">
 <input type="hidden" name="action" value="Despam">
 <input type="hidden" name="editor" value="%s">
 <input type="submit" name="ok" value="%s">
 </form>
 </p>
-''' % (request.getScriptname(), wikiutil.quoteWikinameURL(pagename),
-       wikiutil.url_quote(editor), _("Revert all!")))
+''' % (request.href(pagename), wikiutil.url_quote(editor), _("Revert all!")))
 
 def revert_page(request, pagename, editor):
     if not request.user.may.revert(pagename):
@@ -183,11 +182,10 @@ def execute(pagename, request):
         request.theme.add_msg(_('You are not allowed to use this action.'), "error")
         return Page.Page(request, pagename).send_page()
 
-    editor = request.form.get('editor', [None])[0]
+    editor = request.form.get('editor')
     timestamp = time.time() - DAYS * 24 * 3600
-    ok = request.form.get('ok', [0])[0]
+    ok = request.form.get('ok', 0)
 
-    request.emit_http_headers()
     request.theme.send_title("Despam", pagename=pagename)
     # Start content (important for RTL support)
     request.write(request.formatter.startContent("content"))

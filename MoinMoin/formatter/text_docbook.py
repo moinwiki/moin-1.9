@@ -364,7 +364,7 @@ class Formatter(FormatterBase):
     def url(self, on, url=None, css=None, **kw):
         if url and url.startswith("/"):
             # convert to absolute path:
-            url = "%s%s"%(self.request.getBaseURL(), url)
+            url = "%s%s"%(self.request.base_url, url)
 
         if not on:
             self._cleanupUlinkNode()

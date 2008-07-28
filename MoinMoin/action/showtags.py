@@ -13,9 +13,7 @@ from MoinMoin.Page import Page
 from MoinMoin.wikisync import TagStore
 
 def execute(pagename, request):
-    mimetype = "text/plain"
-
-    request.emit_http_headers(["Content-Type: %s; charset=%s" % (mimetype, config.charset)])
+    request.mimetype = "text/plain"
 
     page = Page(request, pagename)
     tags = TagStore(page)

@@ -197,10 +197,7 @@ def remove(request, key):
 
 def url(request, key, do='get'):
     """ return URL for the object cached for key """
-    return "%s/?%s" % (
-        request.getScriptname(),
-        wikiutil.makeQueryString(dict(action=action_name, do=do, key=key), want_unicode=False))
-
+    return request.href(action=action_name, do=do, key=key)
 
 def _get_headers(request, key):
     """ get last_modified and headers cached for key """
@@ -243,7 +240,7 @@ def _do(request, do, key):
         _do_remove(request, key)
 
 def execute(pagename, request):
-    do = request.form.get('do', [None])[0]
-    key = request.form.get('key', [None])[0]
+    do = request.form.get('do')
+    key = request.form.get('key')
     _do(request, do, key)
 

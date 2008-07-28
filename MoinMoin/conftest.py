@@ -25,6 +25,7 @@ import sys
 
 import py
 
+from werkzeug.test import Client
 
 rootdir = py.magic.autopath().dirpath()
 moindir = rootdir.join("..")
@@ -36,6 +37,8 @@ modules["unittest"] = compat # evil hack
 sys.path.insert(0, str(moindir.join("tests")))
 
 from MoinMoin.support.python_compatibility import set
+from MoinMoin.web.request import TestRequest
+from MoinMoin.wsgiapp import application, init
 
 coverage_modules = set()
 
@@ -61,7 +64,6 @@ try:
         coverage.erase()
         coverage.start()
 
-
     py.test.config.addoptions('MoinMoin options', py.test.config.Option('-C',
         '--coverage', action='callback', callback=callback,
         help='Output information about code coverage (slow!)'))
@@ -71,19 +73,12 @@ except ImportError:
 
 
 def init_test_request(static_state=[False]):
-    from MoinMoin.request import request_cli
-    from MoinMoin.user import User
-    from MoinMoin.formatter.text_html import Formatter as HtmlFormatter
     if not static_state[0]:
         maketestwiki.run(True)
         static_state[0] = True
-    request = request_cli.Request()
-    request.form = request.args = request.setup_args()
-    request.user = User(request)
-    request.html_formatter = HtmlFormatter(request)
-    request.formatter = request.html_formatter
+    request = TestRequest()
+    request = init(request)
     return request
-
 
 class TestConfig:
     """ Custom configuration for unit tests
@@ -182,6 +177,7 @@ class MoinClassCollector(py.test.collect.Class):
         cls = self.obj
         cls.request = self.parent.request
         cls.TestConfig = TestConfig(cls.request)
+        cls.client = Client(application)
         super(MoinClassCollector, self).setup()
 
 

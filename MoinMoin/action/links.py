@@ -15,11 +15,11 @@ def execute(pagename, request):
 
     # get the MIME type
     if 'mimetype' in form:
-        mimetype = form['mimetype'][0]
+        mimetype = form['mimetype']
     else:
         mimetype = "text/html"
 
-    request.emit_http_headers(["Content-Type: %s; charset=%s" % (mimetype, config.charset)])
+    request.mimetype = mimetype
 
     if mimetype == "text/html":
         request.theme.send_title(_('Full Link List for "%s"') % request.cfg.sitename)

@@ -38,8 +38,8 @@ class Settings(UserPrefBase):
         if 'cancel' in form:
             return
 
-        if (wikiutil.checkTicket(self.request, self.request.form['ticket'][0])
-            and self.request.request_method == 'POST'):
+        if (wikiutil.checkTicket(self.request, self.request.form['ticket'])
+            and self.request.method == 'POST'):
             uid = form.get('selected_user', [''])[0]
             if not uid:
                 return 'error', _("No user selected")
