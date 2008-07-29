@@ -22,7 +22,7 @@ def checkTitleSearch(request):
     'fullsearch' with localized string. If both missing, default to
     True (might happen with Safari) if this isn't an advanced search.
 """
-    form = request.form
+    form = request.values
     if 'titlesearch' in form and 'fullsearch' in form:
         ret = -1 # spammer / bot
     else:
@@ -37,7 +37,7 @@ def checkTitleSearch(request):
 def isAdvancedSearch(request):
     """ Return True if advanced search is requested """
     try:
-        return int(request.form['advancedsearch'])
+        return int(request.values['advancedsearch'])
     except KeyError:
         return False
 
@@ -66,38 +66,40 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
 
     advancedsearch = isAdvancedSearch(request)
 
+    form = request.values
+
     # context is relevant only for full search
     if titlesearch:
         context = 0
     elif advancedsearch:
         context = 180 # XXX: hardcoded context count for advancedsearch
     else:
-        context = int(request.form.get('context', 0))
+        context = int(form.get('context', 0))
 
     # Get other form parameters
-    needle = request.form.get(fieldname, '')
-    case = int(request.form.get('case', 0))
-    regex = int(request.form.get('regex', 0)) # no interface currently
-    hitsFrom = int(request.form.get('from', 0))
+    needle = form.get(fieldname, '')
+    case = int(form.get('case', 0))
+    regex = int(form.get('regex', 0)) # no interface currently
+    hitsFrom = int(form.get('from', 0))
     mtime = None
     msg = ''
     historysearch = 0
 
     # if advanced search is enabled we construct our own search query
     if advancedsearch:
-        and_terms = request.form.get('and_terms', '').strip()
-        or_terms = request.form.get('or_terms', '').strip()
-        not_terms = request.form.get('not_terms', '').strip()
-        #xor_terms = request.form.get('xor_terms', '').strip()
-        categories = request.form.getlist('categories') or ['']
-        timeframe = request.form.get('time', '').strip()
-        language = request.form.getlist('language') or ['']
-        mimetype = request.form.getlist('mimetype') or [0]
-        excludeunderlay = request.form.get('excludeunderlay', 0)
-        nosystemitems = request.form.get('nosystemitems', 0)
-        historysearch = request.form.get('historysearch', 0)
+        and_terms = form.get('and_terms', '').strip()
+        or_terms = form.get('or_terms', '').strip()
+        not_terms = form.get('not_terms', '').strip()
+        #xor_terms = form.get('xor_terms', '').strip()
+        categories = form.getlist('categories') or ['']
+        timeframe = form.get('time', '').strip()
+        language = form.getlist('language') or ['']
+        mimetype = form.getlist('mimetype') or [0]
+        excludeunderlay = form.get('excludeunderlay', 0)
+        nosystemitems = form.get('nosystemitems', 0)
+        historysearch = form.get('historysearch', 0)
 
-        mtime = request.form.get('mtime', '')
+        mtime = form.get('mtime', '')
         if mtime:
             mtime_parsed = None
 
@@ -226,7 +228,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0, statistic=0):
     # This action generates data using the user language
     request.setContentLanguage(request.lang)
 
-    request.theme.send_title(title % needle, form=request.form, pagename=pagename)
+    request.theme.send_title(title % needle, form=form, pagename=pagename)
 
     # Start content (important for RTL support)
     request.write(request.formatter.startContent("content"))
