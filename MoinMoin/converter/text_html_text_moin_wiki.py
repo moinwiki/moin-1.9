@@ -825,8 +825,11 @@ class convert_tree(visitor):
         is_strong = "bold" in node_style
         is_italic = "italic" in node_style
         is_underline = "underline" in node_style
-        
-        
+        is_comment = node.getAttribute("class") == "comment"
+
+        # start tag        
+        if is_comment:
+            self.text.append("/* ")
         if is_strike:
             self.text.append("--(")
         if is_strong:
@@ -835,8 +838,12 @@ class convert_tree(visitor):
             self.text.append("''")
         if is_underline:
             self.text.append("__")
+
+        # body        
         for i in node.childNodes:
             self.process_inline(i)
+
+        # end tag
         if is_underline:
             self.text.append("__")
         if is_italic:
@@ -845,6 +852,8 @@ class convert_tree(visitor):
             self.text.append("'''")
         if is_strike:
             self.text.append(")--")
+        if is_comment:
+            self.text.append(" */")
 
     def process_div(self, node):
         # ignore div tags - just descend
