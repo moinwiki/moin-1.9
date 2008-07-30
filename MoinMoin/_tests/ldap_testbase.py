@@ -32,6 +32,8 @@
 
     # /etc/init.d/apparmor stop
 
+    Requires Python 2.4 (for subprocess module).
+
     @copyright: 2008 by Thomas Waldmann
     @license: GNU GPL, see COPYING for details.
 """
