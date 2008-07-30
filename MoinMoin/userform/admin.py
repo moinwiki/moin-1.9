@@ -97,7 +97,7 @@ def do_user_browser(request):
 
         browser = DataBrowserWidget(request)
         browser.setData(data)
-        return browser.toHTML()
+        return browser.render()
 
     # No data
     return ''
