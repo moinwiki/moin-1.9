@@ -17,7 +17,6 @@ from MoinMoin import user
 from MoinMoin.action.AttachFile import add_attachment, AttachmentAlreadyExists
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
-from MoinMoin.request.request_cli import Request as RequestCLI
 # python, at least up to 2.4, ships a broken parser for headers
 from MoinMoin.support.HeaderFixed import decode_header
 
@@ -313,11 +312,12 @@ def import_mail_from_message(request, message):
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
-        url = sys.argv[1]
+        request_url = sys.argv[1]
     else:
-        url = 'localhost/'
+        request_url = 'localhost/'
 
-    request = RequestCLI(url=url)
+    from MoinMoin.web.contexts import ScriptContext
+    request = ScriptContext(url=request_url)
 
     try:
         import_mail_from_file(request, infile)
