@@ -8,12 +8,12 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import time, inspect, StringIO
+import time, inspect, StringIO, sys
 
-from werkzeug.utils import Headers, http_date
+from werkzeug.utils import Headers, http_date, create_environ
 from werkzeug.exceptions import Unauthorized, NotFound
 
-from MoinMoin import i18n, error, user
+from MoinMoin import i18n, error, user, config
 from MoinMoin.config import multiconfig
 from MoinMoin.formatter import text_html
 from MoinMoin.theme import load_theme_fallback
@@ -371,3 +371,29 @@ class XMLRPCContext(HTTPContext, PageMixin):
 class AllContext(HTTPContext, RenderContext):
     """ Catchall context to be able to quickly test old Moin code. """
 
+class ScriptContext(AllContext):
+    """ Context to act in scripting environments (e.g. former request_cli).
+
+    For input, sys.stdin is used as 'wsgi.input', output is written directly
+    to sys.stdout though.
+    """
+    def __init__(self, url='CLI', pagename=''):
+        environ = create_environ()
+        environ['HTTP_USER_AGENT'] = 'CLI/Script'
+        environ['wsgi.input'] = sys.stdin
+        request = Request(environ)
+        super(ScriptContext, self).__init__(request)
+        from MoinMoin import wsgiapp
+        wsgiapp.init(self)
+        request.url = url
+
+    def write(self, *data):
+        if len(data) > 1:
+            logging.warning("Some code still uses write with multiple arguments, "
+                            "consider changing this soon")
+        for d in data:
+            if isinstance(d, unicode):
+                d = d.encode(config.charset)
+            else:
+                d = str(d)
+            sys.stdout.write(d)
