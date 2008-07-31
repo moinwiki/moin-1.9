@@ -43,7 +43,7 @@ class Request(WerkzeugRequest, WerkzeugResponse):
         if self.script_root:
             self.href = Href(self.script_root, self.charset)
         else:
-            self.href = Href('/')
+            self.href = Href('/', self.charset)
         self.abs_href = Href(self.url_root, self.charset)
 
     data = WerkzeugResponse.data
