@@ -25,7 +25,10 @@ def init(request):
     Wraps an incoming WSGI request in a Context object and initializes
     several important attributes.
     """
-    context = AllContext(request)
+    if isinstance(request, Context):
+        context, request = request, request.request
+    else:
+        context = AllContext(request)
     context.clock.start('total')
     context.clock.start('init')
 
