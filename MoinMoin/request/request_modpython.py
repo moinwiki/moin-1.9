@@ -6,6 +6,9 @@
                 2003-2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin import wikiutil
 from MoinMoin.request import RequestBase, RemoteClosedConnection
 
@@ -100,12 +103,19 @@ class Request(RequestBase):
                     fixedResult.append(item.file)
                     # Remember filenames with a name hack
                     args[key + '__filename__'] = item.filename
+                    # XXX Now it gets extremely dirty to work around a problem in mod_python 3.3.1: XXX
+                    # Without the next line, item.file will be closed when item/form leaves this scope.
+                    # I guess some reference counting is not implemented correctly for item.file,
+                    # so we just keep a reference to item to keep it alive...
+                    fixedResult.append(item)  # we are lucky, nobody uses the 2nd list item anyway
+                    # If you are reading this, please switch to mod_wsgi. :)
                 elif isinstance(item, str):
                     # mod_python 2.7 might return strings instead of Field objects.
                     fixedResult.append(item)
             args[key] = fixedResult
 
-        return self.decodeArgs(args)
+        result = self.decodeArgs(args)
+        return result  # XXX without the hack above, item.file gets closed when returning! XXX
 
     def run(self, req):
         """ mod_python calls this with its request object. We don't
@@ -116,9 +126,10 @@ class Request(RequestBase):
         """
         return RequestBase.run(self)
 
-    def read(self, n=None):
+    def read(self, n):
         """ Read from input stream. """
         if n is None:
+            logging.warning("calling request.read(None) might block")
             return self.mpyreq.read()
         else:
             return self.mpyreq.read(n)

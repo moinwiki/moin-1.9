@@ -241,11 +241,14 @@ class DefaultConfig(object):
     acl_rights_after = u""
     acl_rights_valid = ['read', 'write', 'delete', 'revert', 'admin']
 
-    actions_excluded = ['xmlrpc'] # ['DeletePage', 'AttachFile', 'RenamePage', 'test', ]
+    actions_excluded = ['xmlrpc',  # we do not want wiki admins unknowingly offering xmlrpc service
+                        'MyPages',  # only works when used with a non-default SecurityPolicy (e.g. autoadmin)
+                        'CopyPage',  # has questionable behaviour regarding subpages a user can't read, but can copy
+                       ]
     allow_xslt = False
     antispam_master_url = "http://master.moinmo.in/?action=xmlrpc2"
 
-    auth = [authmodule.MoinLogin()]
+    auth = [authmodule.MoinAuth()]
     # default to http and xmlrpc_applytoken to get old semantics
     # xmlrpc_applytoken shall be removed once that code is changed
     # to have proper session handling and use request.handle_auth()
@@ -451,7 +454,7 @@ Lists: * bullets; 1., a. numbered items.
     # the group 'all' shall match all, while the group 'key' shall match the key only
     # e.g. CategoryFoo -> group 'all' ==  CategoryFoo, group 'key' == Foo
     # moin's code will add ^ / $ at beginning / end when needed
-    page_category_regex = ur'(?P<all>Category(?P<key>\S+))'
+    page_category_regex =  ur'(?P<all>Category(?P<key>(?!Template)\S+))'
     page_dict_regex = ur'(?P<all>(?P<key>\S+)Dict)'
     page_group_regex = ur'(?P<all>(?P<key>\S+)Group)'
     page_template_regex = ur'(?P<all>(?P<key>\S+)Template)'
@@ -525,10 +528,12 @@ Lists: * bullets; 1., a. numbered items.
     refresh = None # (minimum_delay, type), e.g.: (2, 'internal')
     rss_cache = 60 # suggested caching time for RecentChanges RSS, in seconds
 
-    search_results_per_page = 10
+    search_results_per_page = 25
 
     session_handler = session.DefaultSessionHandler()
     session_id_handler = session.MoinCookieSessionIDHandler()
+
+    secrets = None  # if wiki admin does not set it, will get calculated from some cfg values
 
     shared_intermap = None # can be string or list of strings (filenames)
 
@@ -570,16 +575,19 @@ Lists: * bullets; 1., a. numbered items.
 
     surge_action_limits = {# allow max. <count> <action> requests per <dt> secs
         # action: (count, dt)
-        'all': (30, 30),
+        'all': (30, 30), # all requests (except cache/AttachFile action) count for this limit
+        'default': (30, 60), # default limit for actions without a specific limit
         'show': (30, 60),
         'recall': (10, 120),
         'raw': (20, 40),  # some people use this for css
-        'AttachFile': (90, 60),
         'diff': (30, 60),
         'fullsearch': (10, 120),
         'edit': (30, 300), # can be lowered after making preview different from edit
         'rss_rc': (1, 60),
-        'default': (30, 60),
+        # The following actions are often used for images - to avoid pages with lots of images
+        # (like photo galleries) triggering surge protection, we assign rather high limits:
+        'AttachFile': (90, 60),
+        'cache': (600, 30), # cache action is very cheap/efficient
     }
     surge_lockout_time = 3600 # secs you get locked out when you ignore warnings
 
@@ -825,6 +833,10 @@ Lists: * bullets; 1., a. numbered items.
             from xmlrpclib import Server
             self.notification_server = Server(self.notification_bot_uri, )
 
+        if self.secrets is None:  # Note: this is 'secrets' (with s at the end), not 'secret' (as above)
+                                  # This stuff is already cleaned up in 1.8 repo...
+            self.secrets = self.calc_secrets()
+
         # Cache variables for the properties below
         self._iwid = self._iwid_full = self._meta_dict = None
 
@@ -842,6 +854,19 @@ Lists: * bullets; 1., a. numbered items.
         if self.url_prefix_local is None:
             self.url_prefix_local = self.url_prefix_static
 
+
+    def calc_secrets(self):
+        """ make up some 'secret' using some config values """
+        varnames = ['data_dir', 'data_underlay_dir', 'language_default',
+                    'mail_smarthost', 'mail_from', 'page_front_page',
+                    'theme_default', 'sitename', 'logo_string',
+                    'interwikiname', 'user_homewiki', 'acl_rights_before', ]
+        secret = ''
+        for varname in varnames:
+            var = getattr(self, varname, None)
+            if isinstance(var, (str, unicode)):
+                secret += repr(var)
+        return secret
 
     def load_meta_dict(self):
         """ The meta_dict contains meta data about the wiki instance. """

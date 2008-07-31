@@ -263,13 +263,14 @@ class RequestBase(object):
         if not limits:
             return False
 
+        if self.remote_addr.startswith('127.'): # localnet
+            return False
+
         validuser = self.user.valid
         current_id = validuser and self.user.name or self.remote_addr
-        if not validuser and current_id.startswith('127.'): # localnet
-            return False
         current_action = self.action
 
-        default_limit = self.cfg.surge_action_limits.get('default', (30, 60))
+        default_limit = limits.get('default', (30, 60))
 
         now = int(time.time())
         surgedict = {}
@@ -304,7 +305,7 @@ class RequestBase(object):
                 if len(timestamps) < maxnum * 2:
                     timestamps.append((now + self.cfg.surge_lockout_time, surge_indicator)) # continue like that and get locked out
 
-            if current_action != 'AttachFile': # don't add AttachFile accesses to all or picture galleries will trigger SP
+            if current_action not in ('cache', 'AttachFile', ): # don't add cache/AttachFile accesses to all or picture galleries will trigger SP
                 current_action = 'all' # put a total limit on user's requests
                 maxnum, dt = limits.get(current_action, default_limit)
                 events = surgedict.setdefault(current_id, {})
@@ -330,6 +331,10 @@ class RequestBase(object):
             cache.update(data)
         except StandardError:
             pass
+
+        if surge_detected and validuser and self.user.auth_method in self.cfg.auth_methods_trusted:
+            logging.info("Trusted user %s would have triggered surge protection if not trusted." % self.user.name)
+            return False  # do not subject trusted users to surge protection
 
         return surge_detected
 
@@ -410,6 +415,10 @@ class RequestBase(object):
         self.request_method = env.get('REQUEST_METHOD', None)
         self.remote_addr = env.get('REMOTE_ADDR', '')
         self.http_user_agent = env.get('HTTP_USER_AGENT', '')
+        try:
+            self.content_length = int(env.get('CONTENT_LENGTH'))
+        except (TypeError, ValueError):
+            self.content_length = None
         self.if_modified_since = env.get('If-modified-since') or env.get(cgiMetaVariable('If-modified-since'))
         self.if_none_match = env.get('If-none-match') or env.get(cgiMetaVariable('If-none-match'))
 
@@ -1001,7 +1010,7 @@ class RequestBase(object):
         name = u'/'.join(normalized)
         return name
 
-    def read(self, n=None):
+    def read(self, n):
         """ Read n bytes from input stream. """
         raise NotImplementedError
 

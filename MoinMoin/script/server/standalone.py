@@ -99,8 +99,8 @@ class PluginScript(MoinScript):
                     sys.path.insert(0, self.options.config_dir)
                 from wikiserverconfig import Config
             except ImportError, err:
-                if 'Config' in str(err):
-                    # we are unable to import Config
+                if 'wikiserverconfig' in str(err):
+                    # we are unable to import from wikiserverconfig module
                     Config = DefaultConfig
                 else:
                     # some other import went wrong
@@ -110,6 +110,8 @@ class PluginScript(MoinScript):
                 Config.docs = self.options.docs
             if self.options.user:
                 Config.user = self.options.user
+            if self.options.group:
+                Config.group = self.options.group
             if self.options.port:
                 Config.port = self.options.port
             if self.options.interface:
@@ -121,8 +123,7 @@ class PluginScript(MoinScript):
                 Config.requestQueueSize = self.options.requestQueueSize
 
             if self.options.start:
-                daemon = Daemon('moin', run, Config)
-                daemon.pidfile = pidfile
+                daemon = Daemon('moin', pidfile, run, Config)
                 daemon.do_start()
             else:
                 run(Config)

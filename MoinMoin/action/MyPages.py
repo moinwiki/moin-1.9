@@ -48,8 +48,8 @@ exists and has the appropriate members in it. Use HomepageGroupsTemplate for cre
 the group pages.
 
 ||'''Add a new personal page:'''||'''Related access control list group:'''||
-||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||["%(username)s/ReadWriteGroup"]||
-||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||["%(username)s/ReadGroup"]||
+||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||[[%(username)s/ReadWriteGroup]]||
+||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%(username)s/ReadGroup]]||
 ||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%(username)s only||
 
 """)
@@ -64,13 +64,13 @@ the group pages.
     request.setContentLanguage(request.lang)
     request.theme.send_title(_('MyPages management'), page=homepage)
 
-    # Start content - IMPORTANT - without content div, there is no direction support!
-    request.write(request.formatter.startContent("content"))
-
     parser = WikiParser(pagecontent, request)
     p = Page(request, "$$$")
     request.formatter.setPage(p)
     parser.format(request.formatter)
+
+    # Start content - IMPORTANT - without content div, there is no direction support!
+    request.write(request.formatter.startContent("content"))
 
     request.write(request.formatter.endContent())
     request.theme.send_footer(homepage.page_name)

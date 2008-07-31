@@ -1,8 +1,8 @@
-## Please edit system and help pages ONLY in the moinmaster wiki! For more
-## information, please see MoinMaster:MoinPagesEditorGroup.
+## Please edit system and help pages ONLY in the master wiki!
+## For more information, please see MoinMoin:MoinDev/Translation.
 ##master-page:None
 ##master-date:None
-#acl MoinPagesEditorGroup:read,write,delete,revert All:read
+#acl -All:write Default
 #format gettext
 #language ca
 
@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 23:52+0200\n"
+"POT-Creation-Date: 2008-06-21 22:47+0200\n"
 "PO-Revision-Date: 2007-10-10 13:40+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -483,6 +483,9 @@ msgstr "[buides]"
 msgid "filter"
 msgstr "filtre"
 
+msgid "about"
+msgstr ""
+
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -575,6 +578,10 @@ msgstr "Envia'm les dades del meu compte"
 msgid "Missing password. Please enter user name and password."
 msgstr "Manca la contrasenya. Introduïu el nom d'usuari i contrasenya."
 
+#, python-format
+msgid "LDAP server %(server)s failed."
+msgstr ""
+
 #, fuzzy
 msgid "You need to log in."
 msgstr "Heu sortit del vostre compte."
@@ -592,6 +599,9 @@ msgid ""
 msgstr ""
 
 msgid "Choose this name"
+msgstr ""
+
+msgid "This is not a valid username, choose a different one."
 msgstr ""
 
 msgid ""
@@ -613,9 +623,6 @@ msgid "Verification canceled."
 msgstr "S'ha cancel·lat l'operació."
 
 msgid "OpenID failure."
-msgstr ""
-
-msgid "This is not a valid username, choose a different one."
 msgstr ""
 
 msgid "Your account is now associated to your OpenID."
@@ -1179,6 +1186,15 @@ msgstr "Opcions generals"
 msgid "Quick links"
 msgstr "Enllaços ràpids"
 
+msgid "OpenID server"
+msgstr ""
+
+msgid "The selected websites have been removed."
+msgstr ""
+
+msgid "Trusted websites"
+msgstr ""
+
 #, fuzzy, python-format
 msgid ""
 "Dear Wiki user,\n"
@@ -1313,14 +1329,6 @@ msgstr " trivial "
 msgid ""
 "Attachment link: %(attach)s\n"
 "Page link: %(page)s\n"
-msgstr ""
-
-#, python-format
-msgid "XML RPC error: %s"
-msgstr ""
-
-#, python-format
-msgid "Low-level communication error: %s"
 msgstr ""
 
 #, fuzzy
@@ -1710,29 +1718,17 @@ msgstr ""
 msgid "index unavailable"
 msgstr ""
 
-msgid "N/A"
-msgstr "N/D"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "El Xapian i les vinculacions Xapian de Python no estan instal·lades"
+
+msgid "N/A"
+msgstr "N/D"
 
 msgid "Xapian search"
 msgstr "Cerca Xapian"
 
-msgid "Xapian Version"
-msgstr "Versió del Xapian"
-
-msgid "PyStemmer not installed"
-msgstr "El PyStemmer no està instal·lat"
-
 msgid "Stemming for Xapian"
 msgstr "Lexemització per a Xapian"
-
-msgid "PyStemmer Version"
-msgstr "Versió de PyStemmer"
-
-msgid "PyStemmer stems"
-msgstr "Lexemes de PyStemmer"
 
 msgid "Active threads"
 msgstr "Fils actius"
@@ -1804,6 +1800,12 @@ msgstr "Text a cercar"
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr "Utilitzeu un terme més selectiu en comptes de {{{«%s»}}}"
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr ""
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -2207,9 +2209,9 @@ msgid ""
 "||'''Add a new personal page:'''||'''Related access control list "
 "group:'''||\n"
 "||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
-"[\"%(username)s/ReadWriteGroup\"]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[\"%"
-"(username)s/ReadGroup\"]||\n"
+"[[%(username)s/ReadWriteGroup]]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
+"(username)s/ReadGroup]]||\n"
 "||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
 "(username)s only||\n"
 "\n"
@@ -2462,12 +2464,6 @@ msgstr "Cerca avançada: «%s»"
 #, python-format
 msgid "Full Text Search: \"%s\""
 msgstr "Cerca de text sencer: «%s»"
-
-#, python-format
-msgid ""
-"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
-"for more information."
-msgstr ""
 
 #, python-format
 msgid ""
@@ -2793,36 +2789,43 @@ msgid "You are not allowed to unzip attachments of this page."
 msgstr "No teniu permís per a decomprimir les adjuncions d'aquesta pàgina."
 
 #, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr ""
-"L'adjunció «%(filename)s» no s'ha pogut desempaquetar perquè els fitxers "
-"resultants serien massa grans (falten %(space)d kB)."
+msgid "The file %(filename)s is not a .zip file."
+msgstr "El fitxer %(filename)s no és un fitxer .zip."
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too many (%(count)d missing)."
-msgstr ""
-"L'adjunció «%(filename)s» no s'ha pogut desempaquetar perquè hi hauria massa "
-"fitxers resultants (falten %(count)d)."
-
-#, python-format
-msgid "Attachment '%(filename)s' unzipped."
-msgstr "S'ha desempaquetat l'adjunció «%(filename)s»."
-
-#, python-format
-msgid ""
-"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
-"files only, exist already or reside in folders."
+"Attachment '%(filename)s' not unzipped because some files in the zip are "
+"either not in the same directory or exceeded the single file size limit (%"
+"(maxsize_file)d kB)."
 msgstr ""
 "No s'ha desempaquetat l'adjunció «%(filename)s» perquè els fitxers són massa "
 "grans, només fitxers .zip, ja existeixen o estan dins de carpetes."
 
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment storage size limit (%(size)d kB)."
+msgstr ""
+"L'adjunció «%(filename)s» no s'ha pogut desempaquetar perquè els fitxers "
+"resultants serien massa grans (falten %(space)d kB)."
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment count limit (%(count)d)."
+msgstr ""
+"L'adjunció «%(filename)s» no s'ha pogut desempaquetar perquè hi hauria massa "
+"fitxers resultants (falten %(count)d)."
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' partially unzipped (did not overwrite: %(filelist)"
+"s)."
+msgstr "S'ha desempaquetat l'adjunció «%(filename)s»."
+
 #, python-format
-msgid "The file %(filename)s is not a .zip file."
-msgstr "El fitxer %(filename)s no és un fitxer .zip."
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "S'ha desempaquetat l'adjunció «%(filename)s»."
 
 #, python-format
 msgid "Attachment '%(filename)s'"
@@ -2898,6 +2901,18 @@ msgstr "No teniu permís per a fer %(action_name)s en aquesta pàgina."
 
 msgid "Login and try again."
 msgstr "Entreu i torneu a provar."
+
+#~ msgid "Xapian Version"
+#~ msgstr "Versió del Xapian"
+
+#~ msgid "PyStemmer not installed"
+#~ msgstr "El PyStemmer no està instal·lat"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "Versió de PyStemmer"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "Lexemes de PyStemmer"
 
 #~ msgid "New Page or New Attachment"
 #~ msgstr "Pàgina o adjunció nova"

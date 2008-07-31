@@ -1,8 +1,8 @@
-## Please edit system and help pages ONLY in the moinmaster wiki! For more
-## information, please see MoinMaster:MoinPagesEditorGroup.
+## Please edit system and help pages ONLY in the master wiki!
+## For more information, please see MoinMoin:MoinDev/Translation.
 ##master-page:None
 ##master-date:None
-#acl MoinPagesEditorGroup:read,write,delete,revert All:read
+#acl -All:write Default
 #format gettext
 #language sv
 
@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 23:52+0200\n"
-"PO-Revision-Date: 2008-05-19 16:30+0200\n"
+"POT-Creation-Date: 2008-06-21 22:47+0200\n"
+"PO-Revision-Date: 2008-06-22 17:05+0200\n"
 "Last-Translator: thomas@marquart.se\n"
 "Language-Team: Swedish <moin-user@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -36,8 +36,7 @@ msgid ""
 "\n"
 "Password reset URL: %s/?action=recoverpass&name=%s&token=%s\n"
 msgstr ""
-"Användarnamn: %s"
-"\n"
+"Användarnamn: %s\n"
 "Token för att återställa lösenord: %s\n"
 "\n"
 "URL för att återställa lösenord: %s/?action=recoverpass&name=%s&token=%s\n"
@@ -48,10 +47,13 @@ msgid ""
 "If you lost your password, please go to the password reset URL below or\n"
 "go to the password recovery page again and enter your username and the\n"
 "recovery token.\n"
-msgstr "Någon har bett att skicka en token för att återställa lösenordet till dig.\n"
+msgstr ""
+"Någon har bett att skicka en token för att återställa lösenordet till dig.\n"
 "\n"
-"Om du har glömt ditt lösenord, var god besök URL:en nedanför för att återställa den eller\n"
-"gå tillbaka till till återställningssidan och skriv in ditt användarnamn och\n"
+"Om du har glömt ditt lösenord, var god besök URL:en nedanför för att "
+"återställa den eller\n"
+"gå tillbaka till till återställningssidan och skriv in ditt användarnamn "
+"och\n"
 "token för återställning.\n"
 
 #, python-format
@@ -489,6 +491,9 @@ msgstr "[tom]"
 msgid "filter"
 msgstr "filter"
 
+msgid "about"
+msgstr "om"
+
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -576,6 +581,10 @@ msgstr "Skicka kontoinformation som epost"
 msgid "Missing password. Please enter user name and password."
 msgstr "Lösenord saknas. Var god ange användarnamn och lösenord."
 
+#, python-format
+msgid "LDAP server %(server)s failed."
+msgstr "LDAP-server %(server)s misslyckades."
+
 msgid "You need to log in."
 msgstr "Du måste logga in."
 
@@ -598,6 +607,9 @@ msgstr ""
 
 msgid "Choose this name"
 msgstr "Välj detta namn"
+
+msgid "This is not a valid username, choose a different one."
+msgstr "Detta är inte ett giltigt användarnamn, välj ett annat."
 
 msgid ""
 "The username you have chosen is already\n"
@@ -622,9 +634,6 @@ msgstr "Verifieringen avbröts."
 
 msgid "OpenID failure."
 msgstr "OpenID fel."
-
-msgid "This is not a valid username, choose a different one."
-msgstr "Detta är inte ett giltigt användarnamn, välj ett annat."
 
 msgid "Your account is now associated to your OpenID."
 msgstr "Ditt konto är nu förknippat med din OpenID."
@@ -1190,6 +1199,15 @@ msgstr "Allmänna inställningar"
 msgid "Quick links"
 msgstr "Snabblänkar"
 
+msgid "OpenID server"
+msgstr "OpenID-server"
+
+msgid "The selected websites have been removed."
+msgstr "De valda webbsidor har tagits bort."
+
+msgid "Trusted websites"
+msgstr "Betrodda webbsidor"
+
 #, python-format
 msgid ""
 "Dear Wiki user,\n"
@@ -1325,14 +1343,6 @@ msgid ""
 msgstr ""
 "Länk till bilagan: %(attach)s\n"
 "Länk till sidan: %(page)s\n"
-
-#, python-format
-msgid "XML RPC error: %s"
-msgstr "XML RPC fel: %s"
-
-#, python-format
-msgid "Low-level communication error: %s"
-msgstr "Kommunikationsfel på låg nivå: %s"
 
 msgid "Attachment link"
 msgstr "Länk till bilaga"
@@ -1705,29 +1715,17 @@ msgstr "index tillgänglig"
 msgid "index unavailable"
 msgstr "index otillgänglig"
 
-msgid "N/A"
-msgstr "Ej tillgänglig"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "Xapian och/eller Pythons Xapian gränssnitt inte installerat"
+
+msgid "N/A"
+msgstr "Ej tillgänglig"
 
 msgid "Xapian search"
 msgstr "Xapian-sökning"
 
-msgid "Xapian Version"
-msgstr "Xapian-version"
-
-msgid "PyStemmer not installed"
-msgstr "PyStemmer inte installerat"
-
 msgid "Stemming for Xapian"
 msgstr "Stemming för Xapian"
-
-msgid "PyStemmer Version"
-msgstr "PyStemmer-version"
-
-msgid "PyStemmer stems"
-msgstr "PyStemmer stems"
 
 msgid "Active threads"
 msgstr "Aktiva trådar"
@@ -1799,6 +1797,14 @@ msgstr "Sök i text"
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr "Var god använd en mer specifik sökterm än {{{\"%s\"}}}"
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr ""
+"Din sökningsförfrågan {{{\"%s\"}}} är ogiltig. Var god se HelpOnSearching "
+"för mer information."
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -1989,8 +1995,9 @@ msgstr ""
 msgid ""
 "The item %s was renamed locally. This is not implemented yet. Therefore the "
 "full synchronisation history is lost for this page."
-msgstr "%s har döpts om lokalt. Detta är inte implemenerat ännu. Därför "
-"har hela synkronisationshistoria till denna sida förlorats."
+msgstr ""
+"%s har döpts om lokalt. Detta är inte implemenerat ännu. Därför har hela "
+"synkronisationshistoria till denna sida förlorats."
 
 #, python-format
 msgid "Synchronising page %s with remote page %s ..."
@@ -2005,26 +2012,29 @@ msgid ""
 "The page %s could not be synced. The remote page was renamed. This is not "
 "supported yet. You may want to delete one of the pages to get it synced."
 msgstr ""
-"Sidan %s kunde inte synkroniseras. Den har döpts om på avlägsna sidan. Detta stöds inte "
-"ännu. Du vill nog ta bort en av de två sidor för att synkronisera."
+"Sidan %s kunde inte synkroniseras. Den har döpts om på avlägsna sidan. Detta "
+"stöds inte ännu. Du vill nog ta bort en av de två sidor för att synkronisera."
 
 #, python-format
 msgid "Skipped page %s because of a locally or remotely unresolved conflict."
-msgstr "Hoppade över sidan %s pga en olöst konflikt på avlägsna sidan eller lokalt."
+msgstr ""
+"Hoppade över sidan %s pga en olöst konflikt på avlägsna sidan eller lokalt."
 
 #, python-format
 msgid ""
 "This is the first synchronisation between the local and the remote wiki for "
 "the page %s."
 msgstr ""
-"Detta är den första synkroniseringen för sidan %s mellan den lokala och den avlägsna wikin."
+"Detta är den första synkroniseringen för sidan %s mellan den lokala och den "
+"avlägsna wikin."
 
 #, python-format
 msgid ""
 "The page %s could not be merged because you are not allowed to modify the "
 "page in the remote wiki."
 msgstr ""
-"Sidan %s kunde inte förenas för att du får inte ändra den i den avlägsna wikin."
+"Sidan %s kunde inte förenas för att du får inte ändra den i den avlägsna "
+"wikin."
 
 #, python-format
 msgid "Page %s successfully merged."
@@ -2067,8 +2077,10 @@ msgid ""
 "delegation on its own.)"
 msgstr ""
 "\n"
-"Om du godkänner, kommer sidan som representeras av förtroende-roten nedanför att\n"
-"få veta att du har makt över identitets-URL:en %s. (Om du änvänder en ombudsidentitet\n"
+"Om du godkänner, kommer sidan som representeras av förtroende-roten nedanför "
+"att\n"
+"få veta att du har makt över identitets-URL:en %s. (Om du änvänder en "
+"ombudsidentitet\n"
 "kommer sidan själv se till att ombudet löses upp.)"
 
 msgid "Trust root"
@@ -2225,8 +2237,7 @@ msgstr "Åtgärd %(actionname)s är exkluderad i den här wikin!"
 
 #, python-format
 msgid "You are not allowed to use action %(actionname)s on this page!"
-msgstr ""
-"Du får inte använda åtgärden %(actionname)s på den här sidan!"
+msgstr "Du får inte använda åtgärden %(actionname)s på den här sidan!"
 
 #, python-format
 msgid "Please use the interactive user interface to use action %(actionname)s!"
@@ -2260,17 +2271,17 @@ msgid ""
 "||'''Add a new personal page:'''||'''Related access control list "
 "group:'''||\n"
 "||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
-"[\"%(username)s/ReadWriteGroup\"]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[\"%"
-"(username)s/ReadGroup\"]||\n"
+"[[%(username)s/ReadWriteGroup]]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
+"(username)s/ReadGroup]]||\n"
 "||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
 "(username)s only||\n"
 "\n"
 msgstr ""
 "Du kan lägga till undersidor till din redan existerande hemsida här.\n"
 "\n"
-"Du kan välja vilka andra som ska kunna läsa och ändra sidorna. Åtkomst\n"
-"bestäms av medlemskap i motsvarande gruppsida.\n"
+"Du kan välja hur öppen dessa sidor ska vara för andra läsare och skribenter.\n"
+"Åtkomst bestäms av medlemskap i motsvarande gruppsida.\n"
 "\n"
 "Ange undersidans namn och tryck på knappen för att skapa en ny sida.\n"
 "\n"
@@ -2278,12 +2289,12 @@ msgstr ""
 "existerar och har rätt medlemmar angivna. Använd HemsidaGruppMall för\n"
 "att skapa gruppsidor.\n"
 "\n"
-"||'''Lägg till en ny personlig sida:'''||'''Relaterade "
-"åtkomstlistgrupper:'''||\n"
+"||'''Lägg till en ny personlig sida:'''||'''Relaterad "
+"åtkomstlistgrupp:'''||\n"
 "||<<NewPage(HomepageReadWritePageTemplate,läs- och skrivbar sida,%(username)"
-"s)>>||[\"%(username)s/ReadWriteGroup\"]||\n"
-"||<<NewPage(HomepageReadPageTemplate,endast läsbar sida,%(username)s)>>||[\"%"
-"(username)s/ReadGroup\"]||\n"
+"s)>>||[%(username)s/ReadWriteGroup]||\n"
+"||<<NewPage(HomepageReadPageTemplate,endast läsbar sida,%(username)s)>>||[%"
+"(username)s/ReadGroup]||\n"
 "||<<NewPage(HomepagePrivatePageTemplate,privat sida,%(username)s)>>||%"
 "(username)s only||\n"
 "\n"
@@ -2375,8 +2386,8 @@ msgid ""
 "empty, we derive the page name from the file name."
 msgstr ""
 "Du kan ladda upp innehåll för sidan som anges nedan. Om du döper om sidan "
-"kan du även ladda upp innehåll för en annan sida. Om sidnamnet är tom bestäms"
-"den utgående från filens namn."
+"kan du även ladda upp innehåll för en annan sida. Om sidnamnet är tom "
+"bestämsden utgående från filens namn."
 
 msgid "File to load page content from"
 msgstr "Fil för att ladda sidinnehåll ifrån"
@@ -2512,8 +2523,9 @@ msgstr "(!) Bara sidor som ändrats sedan '''%s''' visas!"
 msgid ""
 "/!\\ The modification date you entered was not recognized and is therefore "
 "not considered for the search results!"
-msgstr "/!\\ Ändringsdatumet som du skrev in kändes inte igen och tas därför "
-"inte hänsyn till i sökresultaten!"
+msgstr ""
+"/!\\ Ändringsdatumet som du skrev in kändes inte igen och tas därför inte "
+"hänsyn till i sökresultaten!"
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -2529,18 +2541,11 @@ msgstr "Fulltextsökning: \"%s\""
 
 #, python-format
 msgid ""
-"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
-"for more information."
-msgstr ""
-"Din sökningsförfrågan {{{\"%s\"}}} är ogiltig. Var god se HelpOnSearching "
-"för mer information."
-
-#, python-format
-msgid ""
 "Your search query {{{\"%s\"}}} didn't return any results. Please change some "
 "terms and refer to HelpOnSearching for more information.%s"
-msgstr "Din sökningsförfrågan {{{\"%s\"}}} ledde inte till några resultat. Var "
-"god ändra vissa termer och se HelpOnSearching för mer information.%s"
+msgstr ""
+"Din sökningsförfrågan {{{\"%s\"}}} ledde inte till några resultat. Var god "
+"ändra vissa termer och se HelpOnSearching för mer information.%s"
 
 msgid "(!) Consider performing a"
 msgstr "(!) Överväg utföra en"
@@ -2865,36 +2870,44 @@ msgid "You are not allowed to unzip attachments of this page."
 msgstr "Du har inte tillåtelse att packa upp bilagor till den här sidan."
 
 #, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr ""
-"Bilagan \"%(filename)s\" kunde inte packas upp eftersom de resulterande "
-"filerna skulle bli för stora (%(space)d kB saknas)."
+msgid "The file %(filename)s is not a .zip file."
+msgstr "Filen %(filename)s är inte en .zip-fil."
 
 #, python-format
 msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too many (%(count)d missing)."
+"Attachment '%(filename)s' not unzipped because some files in the zip are "
+"either not in the same directory or exceeded the single file size limit (%"
+"(maxsize_file)d kB)."
 msgstr ""
-"Bilagan \"%(filename)s\" kunde inte packas upp eftersom de resulterande "
-"filerna skulle bli för många (%(count)d för många)."
+"Bilagan '%(filename)s' kunde inte packas upp eftersom några filer i zip-"
+"filen är antingen inte i samma mapp eller överskrider maximala filstorleken "
+"(%(maxsize_file)d kB)."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment storage size limit (%(size)d kB)."
+msgstr ""
+"Bilagan '%(filename)s' kunde inte packas upp eftersom det skulle överskrida "
+"begränsningen på utrymme per sida (%(size)d kB)."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment count limit (%(count)d)."
+msgstr ""
+"Bilagan '%(filename)s' kunde inte packas upp eftersom det skulle överskrida "
+"maxantalet per sida (%(count)d)."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' partially unzipped (did not overwrite: %(filelist)"
+"s)."
+msgstr "Bilagan '%(filename)s' delvis uppackad (överskrev inte: %(filelist)s)."
 
 #, python-format
 msgid "Attachment '%(filename)s' unzipped."
 msgstr "Bilagan \"%(filename)s\" uppackad."
-
-#, python-format
-msgid ""
-"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
-"files only, exist already or reside in folders."
-msgstr ""
-"Bilagan \"%(filename)s\" kunde inte packas upp eftersom filerna är för "
-"stora, endast är .zip-filer, redan existerar eller ligger i kataloger."
-
-#, python-format
-msgid "The file %(filename)s is not a .zip file."
-msgstr "Filen %(filename)s är inte en .zip-fil."
 
 #, python-format
 msgid "Attachment '%(filename)s'"
@@ -2967,6 +2980,24 @@ msgstr "Du får inte göra %(action_name)s på den här sidan."
 
 msgid "Login and try again."
 msgstr "Logga in och försök igen."
+
+#~ msgid "Xapian Version"
+#~ msgstr "Xapian-version"
+
+#~ msgid "PyStemmer not installed"
+#~ msgstr "PyStemmer inte installerat"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "PyStemmer-version"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "PyStemmer stems"
+
+#~ msgid "XML RPC error: %s"
+#~ msgstr "XML RPC fel: %s"
+
+#~ msgid "Low-level communication error: %s"
+#~ msgstr "Kommunikationsfel på låg nivå: %s"
 
 #~ msgid "New Page or New Attachment"
 #~ msgstr "Ny sida eller ny bilaga"

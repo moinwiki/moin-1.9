@@ -6,7 +6,7 @@
     The days are links to Wiki pages following this naming convention:
     BasePageName/year-month-day
 
-    @copyright: 2002-2007 MoinMoin:ThomasWaldmann
+    @copyright: 2002-2008 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 
     Revisions:
@@ -91,7 +91,7 @@
         * adapted to moin 1.7 new macro parameter parsing
 
     Usage:
-        <<MonthCalendar(BasePage,year,month,monthoffset,monthoffset2,height6)>>
+        <<MonthCalendar(BasePage,year,month,monthoffset,monthoffset2,height6,anniversary,template)>>
 
         each parameter can be empty and then defaults to currentpage or currentdate or monthoffset=0
 
@@ -144,7 +144,7 @@ calendar and not have to re-enter each year.
 
 This creates a calendar which uses MonthCalendarTemplate for directly editing
 nonexisting day pages:
-<<MonthCalendar(,,,,,,MonthCalendarTemplate)>>
+<<MonthCalendar(,,,,,,,MonthCalendarTemplate)>>
 """
 
 Dependencies = ['namespace', 'time', ]
@@ -221,6 +221,8 @@ def execute(macro, text):
         try:
             cparmpagename, cparmyear, cparmmonth, cparmoffset, cparmoffset2, cparmheight6, cparmanniversary, cparmtemplate = \
                 parseargs(request, text2, thispage, currentyear, currentmonth, 0, 0, False, False, u'')
+            # Note: cparmheight6 and cparmanniversary are not used, they are just there
+            # to have a consistent parameter string in calparms and macro args
         except (ValueError, TypeError), err:
             return macro.format_error(err)
     else:
@@ -272,7 +274,7 @@ def execute(macro, text):
     p = Page(request, thispage)
     qpagenames = '*'.join([wikiutil.quoteWikinameURL(pn) for pn in parmpagename])
     qtemplate = wikiutil.quoteWikinameURL(parmtemplate)
-    querystr = "calparms=%%s,%d,%d,%d,%%d,%%s" % (parmyear, parmmonth, parmoffset)
+    querystr = "calparms=%%s,%d,%d,%d,%%d,,,%%s" % (parmyear, parmmonth, parmoffset)
     prevlink = p.url(request, querystr % (qpagenames, parmoffset2 - 1, qtemplate))
     nextlink = p.url(request, querystr % (qpagenames, parmoffset2 + 1, qtemplate))
     prevylink = p.url(request, querystr % (qpagenames, parmoffset2 - 12, qtemplate))
@@ -365,6 +367,7 @@ def execute(macro, text):
                             title = match.group(1)
                             title = wikiutil.escape(title).replace("'", "\\'")
                             titletext.append(title)
+                    link = wikiutil.escape(link).replace("'", "\\'")
                     tipname = link
                     tiptitle = link
                     tiptext = '<br>'.join(titletext)

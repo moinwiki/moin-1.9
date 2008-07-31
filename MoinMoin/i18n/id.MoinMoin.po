@@ -1,8 +1,8 @@
-## Please edit system and help pages ONLY in the moinmaster wiki! For more
-## information, please see MoinMaster:MoinPagesEditorGroup.
+## Please edit system and help pages ONLY in the master wiki!
+## For more information, please see MoinMoin:MoinDev/Translation.
 ##master-page:None
 ##master-date:None
-#acl MoinPagesEditorGroup:read,write,delete,revert All:read
+#acl -All:write Default
 #format gettext
 #language id
 
@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 23:52+0200\n"
+"POT-Creation-Date: 2008-06-21 22:47+0200\n"
 "PO-Revision-Date: 2006-10-07 23:19+0700\n"
 "Last-Translator: Fajrin Azis <fajrin.azis@gmail.com>\n"
 "Language-Team: Indonesian <id@ll.com>\n"
@@ -498,6 +498,9 @@ msgstr "[kosong]"
 msgid "filter"
 msgstr "saring"
 
+msgid "about"
+msgstr ""
+
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -587,6 +590,10 @@ msgstr "Kirim data akun saya lewat email"
 msgid "Missing password. Please enter user name and password."
 msgstr "Kurang kata sandi. Silakan masukkan nama pengguna dan kata sandi."
 
+#, python-format
+msgid "LDAP server %(server)s failed."
+msgstr ""
+
 #, fuzzy
 msgid "You need to log in."
 msgstr "Sekarang Anda telah logout."
@@ -604,6 +611,9 @@ msgid ""
 msgstr ""
 
 msgid "Choose this name"
+msgstr ""
+
+msgid "This is not a valid username, choose a different one."
 msgstr ""
 
 msgid ""
@@ -625,9 +635,6 @@ msgid "Verification canceled."
 msgstr "Operasi dibatalkan."
 
 msgid "OpenID failure."
-msgstr ""
-
-msgid "This is not a valid username, choose a different one."
 msgstr ""
 
 msgid "Your account is now associated to your OpenID."
@@ -1193,6 +1200,15 @@ msgstr "Opsi umum"
 msgid "Quick links"
 msgstr "Taut cepat"
 
+msgid "OpenID server"
+msgstr ""
+
+msgid "The selected websites have been removed."
+msgstr ""
+
+msgid "Trusted websites"
+msgstr ""
+
 #, fuzzy, python-format
 msgid ""
 "Dear Wiki user,\n"
@@ -1328,14 +1344,6 @@ msgstr "Remeh-temeh "
 msgid ""
 "Attachment link: %(attach)s\n"
 "Page link: %(page)s\n"
-msgstr ""
-
-#, python-format
-msgid "XML RPC error: %s"
-msgstr ""
-
-#, python-format
-msgid "Low-level communication error: %s"
 msgstr ""
 
 #, fuzzy
@@ -1728,29 +1736,17 @@ msgstr "indeks tersedia"
 msgid "index unavailable"
 msgstr "indeks tidak tersedia"
 
-msgid "N/A"
-msgstr "T/A"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr "Jilidan Xapian dan/atau Python Xapian tidak ter-install"
+
+msgid "N/A"
+msgstr "T/A"
 
 msgid "Xapian search"
 msgstr "Pencarian xapian"
 
-msgid "Xapian Version"
-msgstr "Versi Xapian"
-
-msgid "PyStemmer not installed"
-msgstr "PyStemmer tidek ter-install"
-
 msgid "Stemming for Xapian"
 msgstr "Stemming untuk Xapian"
-
-msgid "PyStemmer Version"
-msgstr "Versi PyStemmer"
-
-msgid "PyStemmer stems"
-msgstr "Stem PyStemmer"
 
 msgid "Active threads"
 msgstr "Thread aktif"
@@ -1824,6 +1820,14 @@ msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr ""
 "Silakan menggunakan istilah pencarian yang lebih selektif daripada {{{\"%s"
 "\"}}}"
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr ""
+"Pertanyaan pencarian Anda {{{\"%s\"}}} invalid. Silakan lihat "
+"HelpOnSearching untuk informasi lebih lanjut."
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -2254,7 +2258,7 @@ msgstr "Silakan login dahulu."
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Silakan buat laman dulu sebelum membuat halaman tambahan."
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "You can add some additional sub pages to your already existing homepage "
 "here.\n"
@@ -2274,9 +2278,9 @@ msgid ""
 "||'''Add a new personal page:'''||'''Related access control list "
 "group:'''||\n"
 "||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
-"[\"%(username)s/ReadWriteGroup\"]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[\"%"
-"(username)s/ReadGroup\"]||\n"
+"[[%(username)s/ReadWriteGroup]]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
+"(username)s/ReadGroup]]||\n"
 "||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
 "(username)s only||\n"
 "\n"
@@ -2548,14 +2552,6 @@ msgstr "Cari Lebih Lanjut: \"%s\""
 #, python-format
 msgid "Full Text Search: \"%s\""
 msgstr "Cari Teks Penuh: \"%s\""
-
-#, python-format
-msgid ""
-"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
-"for more information."
-msgstr ""
-"Pertanyaan pencarian Anda {{{\"%s\"}}} invalid. Silakan lihat "
-"HelpOnSearching untuk informasi lebih lanjut."
 
 #, python-format
 msgid ""
@@ -2888,36 +2884,43 @@ msgid "You are not allowed to unzip attachments of this page."
 msgstr "Anda tidak diizinkan untuk meng-unzip lampiran dari halaman ini."
 
 #, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr ""
-"Tak dapat meng-unzip lampiran '%(filename)s' karena berkas yang dihasilkan "
-"terlalu besar (hilang %(space)d kB)."
+msgid "The file %(filename)s is not a .zip file."
+msgstr "Berkas %(filename)s bukan berkas .zip."
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too many (%(count)d missing)."
-msgstr ""
-"Tak dapat meng-unzip lampiran '%(filename)s' karena berkas yang dihasilkan "
-"terlalu banyak (hilang %(count)d)."
-
-#, python-format
-msgid "Attachment '%(filename)s' unzipped."
-msgstr "Meng-unzip lampiran '%(filename)s'."
-
-#, python-format
-msgid ""
-"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
-"files only, exist already or reside in folders."
+"Attachment '%(filename)s' not unzipped because some files in the zip are "
+"either not in the same directory or exceeded the single file size limit (%"
+"(maxsize_file)d kB)."
 msgstr ""
 "Tak dapat meng-unzip lampiran '%(filename)s' karena berkas terlalu besar, "
 "berkas .zip saja, sudah ada atau terletak di dalam pelipat."
 
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment storage size limit (%(size)d kB)."
+msgstr ""
+"Tak dapat meng-unzip lampiran '%(filename)s' karena berkas yang dihasilkan "
+"terlalu besar (hilang %(space)d kB)."
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment count limit (%(count)d)."
+msgstr ""
+"Tak dapat meng-unzip lampiran '%(filename)s' karena berkas yang dihasilkan "
+"terlalu banyak (hilang %(count)d)."
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' partially unzipped (did not overwrite: %(filelist)"
+"s)."
+msgstr "Meng-unzip lampiran '%(filename)s'."
+
 #, python-format
-msgid "The file %(filename)s is not a .zip file."
-msgstr "Berkas %(filename)s bukan berkas .zip."
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "Meng-unzip lampiran '%(filename)s'."
 
 #, python-format
 msgid "Attachment '%(filename)s'"
@@ -2991,6 +2994,18 @@ msgstr ""
 
 msgid "Login and try again."
 msgstr "Login dan coba lagi."
+
+#~ msgid "Xapian Version"
+#~ msgstr "Versi Xapian"
+
+#~ msgid "PyStemmer not installed"
+#~ msgstr "PyStemmer tidek ter-install"
+
+#~ msgid "PyStemmer Version"
+#~ msgstr "Versi PyStemmer"
+
+#~ msgid "PyStemmer stems"
+#~ msgstr "Stem PyStemmer"
 
 #~ msgid "New Page or New Attachment"
 #~ msgstr "Halaman Baru atau Lampiran Baru"

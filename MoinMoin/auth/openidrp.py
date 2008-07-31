@@ -93,6 +93,11 @@ password and be able to associate the account with your OpenID.""")))
                               value=_('Choose this name')))
         table.append(html.TR().append(td1).append(td2))
 
+    def _get_account_name_inval_user(self, request, form):
+        _ = request.getText
+        msg = _('This is not a valid username, choose a different one.')
+        return self._get_account_name(request, form, msg=msg)
+
     def _associate_account(self, request, form, accountname, msg=None):
         _ = request.getText
 
@@ -130,9 +135,9 @@ username and leave the password field blank.""")))
         query = {}
         for key in request.form:
             query[key] = request.form[key][0]
-        return_to = get_multistage_continuation_url(request, self.name,
-                                                    {'oidstage': '1'})
-        info = oidconsumer.complete(query, return_to=return_to)
+        current_url = get_multistage_continuation_url(request, self.name,
+                                                      {'oidstage': '1'})
+        info = oidconsumer.complete(query, current_url)
         if info.status == consumer.FAILURE:
             return CancelLogin(_('OpenID error: %s.') % info.message)
         elif info.status == consumer.CANCEL:
@@ -170,8 +175,7 @@ username and leave the password field blank.""")))
         if not newname:
             return MultistageFormLogin(self._get_account_name)
         if not user.isValidName(request, newname):
-            return MultistageFormLogin(self._get_account_name,
-                    _('This is not a valid username, choose a different one.'))
+            return MultistageFormLogin(self._get_account_name_inval_user)
         uid = None
         if newname:
             uid = user.getUserId(request, newname)

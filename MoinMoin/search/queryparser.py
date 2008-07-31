@@ -213,23 +213,28 @@ class AndExpression(BaseExpression):
                 not_terms.append(term.xapian_term(request, allterms))
 
         # prepare query for not negated terms
-        if len(terms) == 1:
+        if not terms:
+            t1 = None
+        elif len(terms) == 1:
             t1 = Query(terms[0])
         else:
             t1 = Query(Query.OP_AND, terms)
 
-        # negated terms?
+        # prepare query for negated terms
         if not not_terms:
-            # no, just return query for not negated terms
-            return t1
-
-        # yes, link not negated and negated terms' query with a AND_NOT query
-        if len(not_terms) == 1:
+            t2 = None
+        elif len(not_terms) == 1:
             t2 = Query(not_terms[0])
         else:
             t2 = Query(Query.OP_OR, not_terms)
 
-        return Query(Query.OP_AND_NOT, t1, t2)
+        if t1 and not t2:
+            return t1
+        elif t2 and not t1:
+            return Query(Query.OP_AND_NOT, Query(""), t2)  # Query("") == MatchAll
+        else:
+            # yes, link not negated and negated terms' query with a AND_NOT query
+            return Query(Query.OP_AND_NOT, t1, t2)
 
 
 class OrExpression(AndExpression):
@@ -725,7 +730,7 @@ class CategorySearch(TextSearch):
         """
         kwargs['use_re'] = True
         TextSearch._build_re(self,
-                r'(?m)(^-----*\r?\n)(^##.*\r?\n)*^(?!##)(.*)\b%s\b' % pattern, **kwargs)
+                r'(?m)(^-----*\s*\r?\n)(^##.*\r?\n)*^(?!##)(.*)\b%s\b' % pattern, **kwargs)
 
     def costs(self):
         return 5000 # cheaper than a TextSearch
@@ -950,10 +955,13 @@ class QueryParser:
                         if last.__class__ == OrExpression:
                             orexpr = last
                         else:
-                            if len(sub) == 1:
-                                terms = sub[0]
+                            # Note: do NOT reduce "terms" when it has a single subterm only!
+                            # Doing that would break "-someterm" searches as we rely on AndExpression
+                            # doing a "MatchAll AND_NOT someterm" for that case!
                             orexpr = OrExpression(terms)
                         terms = AndExpression(orexpr)
+                    else:
+                        raise ValueError('Nothing to OR')
                     remaining = self._analyse_items(items)
                     if remaining.__class__ == OrExpression:
                         for sub in remaining.subterms():
@@ -988,7 +996,9 @@ class QueryParser:
                 domain = False
                 while len(item) > 1:
                     m = item[0]
-                    if m == M:
+                    if m is None:
+                        raise ValueError("Invalid search prefix")
+                    elif m == M:
                         negate = True
                     elif "title".startswith(m):
                         title_search = True
@@ -1006,6 +1016,8 @@ class QueryParser:
                         mimetype = True
                     elif "domain".startswith(m):
                         domain = True
+                    else:
+                        raise ValueError("Invalid search prefix")
                     item = item[1:]
 
                 text = item[0]
@@ -1028,9 +1040,10 @@ class QueryParser:
             elif isinstance(item, list):
                 # strip off the opening parenthesis
                 terms.append(self._analyse_items(item[1:]))
-        sub = terms.subterms()
-        if len(sub) == 1:
-            return sub[0]
+
+        # Note: do NOT reduce "terms" when it has a single subterm only!
+        # Doing that would break "-someterm" searches as we rely on AndExpression
+        # doing a "MatchAll AND_NOT someterm" for that case!
         return terms
 
     def parse_query(self, query):
@@ -1044,7 +1057,9 @@ class QueryParser:
                                                         multikey=True,
                                                         brackets=('()', ),
                                                         quotes='\'"')
-        except wikiutil.BracketError:
-            raise ValueError()
+            logging.debug("parse_quoted_separated items: %r" % items)
+        except wikiutil.BracketError, err:
+            raise ValueError(str(err))
         query = self._analyse_items(items)
+        logging.debug("analyse_items query: %r" % query)
         return query

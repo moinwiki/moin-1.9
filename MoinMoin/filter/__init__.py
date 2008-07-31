@@ -2,11 +2,15 @@
 """
     MoinMoin - Filter Package
 
-    @copyright: 2006 Thomas Waldmann
+    @copyright: 2006-2008 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
 import os
+
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin.util import pysupport
 
 modules = pysupport.getPackageModules(__file__)
@@ -18,9 +22,13 @@ def execfilter(cmd, filename, codings=standard_codings):
         to decode to unicode, we use the first coding of codings list that
         does not throw an exception or force ascii
     """
-    f = os.popen(cmd % filename)
-    data = f.read()
-    f.close()
+    filter_cmd = cmd % filename
+    child_stdin, child_stdout, child_stderr = os.popen3(filter_cmd)
+    data = child_stdout.read()
+    errors = child_stderr.read()
+    child_stdout.close()
+    child_stderr.close()
+    logging.debug("cmd: %s stderr: %s" % (filter_cmd, errors))
     for c in codings:
         try:
             return data.decode(c)

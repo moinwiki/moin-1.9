@@ -1083,9 +1083,11 @@ class PluginAttributeError(PluginError):
 def importPlugin(cfg, kind, name, function="execute"):
     """ Import wiki or builtin plugin
 
-    Returns function from a plugin module name. If name can not be
-    imported, raise PluginMissingError. If function is missing, raise
-    PluginAttributeError.
+    Returns <function> attr from a plugin module <name>.
+    If <function> attr is missing, raise PluginAttributeError.
+    If <function> is None, return the whole module object.
+
+    If <name> plugin can not be imported, raise PluginMissingError.
 
     kind may be one of 'action', 'formatter', 'macro', 'parser' or any other
     directory that exist in MoinMoin or data/plugin.
@@ -1130,15 +1132,28 @@ def importBuiltinPlugin(kind, name, function="execute"):
 
 
 def importNameFromPlugin(moduleName, name):
-    """ Return name from plugin module
+    """ Return <name> attr from <moduleName> module,
+        raise PluginAttributeError if name does not exist.
 
-    Raise PluginAttributeError if name does not exist.
+        If name is None, return the <moduleName> module object.
     """
-    module = __import__(moduleName, globals(), {}, [name])
-    try:
-        return getattr(module, name)
-    except AttributeError:
-        raise PluginAttributeError
+    if name is None:
+        fromlist = []
+    else:
+        fromlist = [name]
+    module = __import__(moduleName, globals(), {}, fromlist)
+    if fromlist:
+        # module has the obj for module <moduleName>
+        try:
+            return getattr(module, name)
+        except AttributeError:
+            raise PluginAttributeError
+    else:
+        # module now has the toplevel module of <moduleName> (see __import__ docs!)
+        components = moduleName.split('.')
+        for comp in components[1:]:
+            module = getattr(module, comp)
+        return module
 
 
 def builtinPlugins(kind):
@@ -1424,6 +1439,8 @@ def parse_quoted_separated_ext(args, separator=None, name_value_separator=None,
                 cur.append(None)
             else:
                 if not multikey:
+                    if cur[-1] is None:
+                        cur[-1] = ''
                     cur[-1] += name_value_separator
                 else:
                     cur.append(None)
@@ -1750,7 +1767,7 @@ class UnitArgument(IEFArgument):
         """
         IEFArgument.__init__(self)
         self._units = list(units)
-        self._units.sort(cmp=lambda x, y: len(y) - len(x))
+        self._units.sort(lambda x, y: len(y) - len(x))
         self._type = argtype
         self._defaultunit = defaultunit
         assert defaultunit is None or defaultunit in units
@@ -2432,20 +2449,10 @@ def createTicket(request, tm=None, action=None):
 
 
     ticket = "%s.%s.%s" % (tm, pagename, action)
-    digest = sha.new()
+    digest = sha.new(request.cfg.secrets)
     digest.update(ticket)
 
-    varnames = ['data_dir', 'data_underlay_dir', 'language_default',
-                'mail_smarthost', 'mail_from', 'page_front_page',
-                'theme_default', 'sitename', 'logo_string',
-                'interwikiname', 'user_homewiki', 'acl_rights_before', ]
-    for varname in varnames:
-        var = getattr(request.cfg, varname, None)
-        if isinstance(var, (str, unicode)):
-            digest.update(repr(var))
-
     return "%s.%s" % (ticket, digest.hexdigest())
-
 
 def checkTicket(request, ticket):
     """Check validity of a previously created ticket"""

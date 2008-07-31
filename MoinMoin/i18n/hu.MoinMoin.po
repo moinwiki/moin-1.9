@@ -1,8 +1,8 @@
-## Please edit system and help pages ONLY in the moinmaster wiki! For more
-## information, please see MoinMaster:MoinPagesEditorGroup.
+## Please edit system and help pages ONLY in the master wiki!
+## For more information, please see MoinMoin:MoinDev/Translation.
 ##master-page:None
 ##master-date:None
-#acl MoinPagesEditorGroup:read,write,delete,revert All:read
+#acl -All:write Default
 #format gettext
 #language hu
 
@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-12 23:52+0200\n"
+"POT-Creation-Date: 2008-06-21 22:47+0200\n"
 "PO-Revision-Date: 2006-06-15 15:55+0200\n"
 "Last-Translator: jmarton@omikk.bme.hu, arostas@omikk.bme.hu\n"
 "Language-Team: Hungarian <HU@li.org>\n"
@@ -478,6 +478,9 @@ msgstr ""
 msgid "filter"
 msgstr ""
 
+msgid "about"
+msgstr ""
+
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
@@ -573,6 +576,10 @@ msgstr "Kérem a felhasználói adataim elküldését levélben"
 msgid "Missing password. Please enter user name and password."
 msgstr "Hiányzik a jelszó. Kérjük adja meg a felhasználónevet és a jelszót."
 
+#, python-format
+msgid "LDAP server %(server)s failed."
+msgstr ""
+
 #, fuzzy
 msgid "You need to log in."
 msgstr "A sütit letöröltük. Ön kilépett."
@@ -590,6 +597,9 @@ msgid ""
 msgstr ""
 
 msgid "Choose this name"
+msgstr ""
+
+msgid "This is not a valid username, choose a different one."
 msgstr ""
 
 msgid ""
@@ -611,9 +621,6 @@ msgid "Verification canceled."
 msgstr "A szerkesztés visszavonva."
 
 msgid "OpenID failure."
-msgstr ""
-
-msgid "This is not a valid username, choose a different one."
 msgstr ""
 
 msgid "Your account is now associated to your OpenID."
@@ -1189,6 +1196,15 @@ msgstr "Általános opciók"
 msgid "Quick links"
 msgstr "Gyorskapcsok (-linkek)"
 
+msgid "OpenID server"
+msgstr ""
+
+msgid "The selected websites have been removed."
+msgstr ""
+
+msgid "Trusted websites"
+msgstr ""
+
 #, fuzzy, python-format
 msgid ""
 "Dear Wiki user,\n"
@@ -1316,14 +1332,6 @@ msgstr "lényegtelen "
 msgid ""
 "Attachment link: %(attach)s\n"
 "Page link: %(page)s\n"
-msgstr ""
-
-#, python-format
-msgid "XML RPC error: %s"
-msgstr ""
-
-#, python-format
-msgid "Low-level communication error: %s"
 msgstr ""
 
 #, fuzzy
@@ -1699,33 +1707,18 @@ msgstr ""
 msgid "index unavailable"
 msgstr ""
 
-msgid "N/A"
-msgstr "Nincs adat"
-
 msgid "Xapian and/or Python Xapian bindings not installed"
 msgstr ""
+
+msgid "N/A"
+msgstr "Nincs adat"
 
 #, fuzzy
 msgid "Xapian search"
 msgstr "Lupy keresés"
 
-#, fuzzy
-msgid "Xapian Version"
-msgstr "Lupy keresés"
-
-msgid "PyStemmer not installed"
-msgstr ""
-
 msgid "Stemming for Xapian"
 msgstr ""
-
-#, fuzzy
-msgid "PyStemmer Version"
-msgstr "Python változat"
-
-#, fuzzy
-msgid "PyStemmer stems"
-msgstr "Python változat"
 
 msgid "Active threads"
 msgstr "Aktív szálak"
@@ -1803,6 +1796,12 @@ msgstr "Szövegkeresés"
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr "Kérjük a(z) {{{\"%s\"}}} helyett használjon szelektívebb kifejezést!"
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr ""
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -2210,7 +2209,7 @@ msgstr "Először be kell jelentkeznie."
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Mielőtt további oldalakat készít kérjük, készítse el a honlapját!"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "You can add some additional sub pages to your already existing homepage "
 "here.\n"
@@ -2230,9 +2229,9 @@ msgid ""
 "||'''Add a new personal page:'''||'''Related access control list "
 "group:'''||\n"
 "||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
-"[\"%(username)s/ReadWriteGroup\"]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[\"%"
-"(username)s/ReadGroup\"]||\n"
+"[[%(username)s/ReadWriteGroup]]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
+"(username)s/ReadGroup]]||\n"
 "||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
 "(username)s only||\n"
 "\n"
@@ -2513,12 +2512,6 @@ msgstr "Címkeresés, minta: \"%s\""
 #, python-format
 msgid "Full Text Search: \"%s\""
 msgstr "Keresés a teljes szövegben, minta: \"%s\""
-
-#, python-format
-msgid ""
-"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
-"for more information."
-msgstr ""
 
 #, python-format
 msgid ""
@@ -2851,38 +2844,45 @@ msgstr "A(z) '%(filename)s' melléklet telepítve."
 msgid "You are not allowed to unzip attachments of this page."
 msgstr "Az oldal mellékleteinek kicsomagolása nem engedélyezett."
 
-#, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr ""
-"A(z) '%(filename)s' mellékletet nem lehet kicsomagolni, mert a keletkező "
-"fájlok mérete túl nagy lenne (%(space)d kB hiányzik)."
+#, fuzzy, python-format
+msgid "The file %(filename)s is not a .zip file."
+msgstr "A %(target)s fájl nem egy .zip állomány."
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too many (%(count)d missing)."
-msgstr ""
-"A(z) '%(filename)s' mellékletet nem lehet kicsomagolni, mert túl sok fájl "
-"keletkezne (%(count)d hiányzik)."
-
-#, python-format
-msgid "Attachment '%(filename)s' unzipped."
-msgstr "A(z) '%(filename)s' melléklet kicsomagolása megtörtént."
-
-#, python-format
-msgid ""
-"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
-"files only, exist already or reside in folders."
+"Attachment '%(filename)s' not unzipped because some files in the zip are "
+"either not in the same directory or exceeded the single file size limit (%"
+"(maxsize_file)d kB)."
 msgstr ""
 "A(z) '%(filename)s' melléklet nem lett kicsomagolva, mert a fájlok túl "
 "nagyok, csak .zip fájlokat fogad a wiki, a fájlok már léteznek vagy mappába "
 "rendezettek."
 
 #, fuzzy, python-format
-msgid "The file %(filename)s is not a .zip file."
-msgstr "A %(target)s fájl nem egy .zip állomány."
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment storage size limit (%(size)d kB)."
+msgstr ""
+"A(z) '%(filename)s' mellékletet nem lehet kicsomagolni, mert a keletkező "
+"fájlok mérete túl nagy lenne (%(space)d kB hiányzik)."
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because it would have exceeded the "
+"per page attachment count limit (%(count)d)."
+msgstr ""
+"A(z) '%(filename)s' mellékletet nem lehet kicsomagolni, mert túl sok fájl "
+"keletkezne (%(count)d hiányzik)."
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' partially unzipped (did not overwrite: %(filelist)"
+"s)."
+msgstr "A(z) '%(filename)s' melléklet kicsomagolása megtörtént."
+
+#, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "A(z) '%(filename)s' melléklet kicsomagolása megtörtént."
 
 #, python-format
 msgid "Attachment '%(filename)s'"
@@ -2955,6 +2955,18 @@ msgstr "Ezen a lapon nem használhatja a %(actionname)s műveletet!"
 
 msgid "Login and try again."
 msgstr "Lépjen be, majd próbálja újra."
+
+#, fuzzy
+#~ msgid "Xapian Version"
+#~ msgstr "Lupy keresés"
+
+#, fuzzy
+#~ msgid "PyStemmer Version"
+#~ msgstr "Python változat"
+
+#, fuzzy
+#~ msgid "PyStemmer stems"
+#~ msgstr "Python változat"
 
 #, fuzzy
 #~ msgid "New Page or New Attachment"

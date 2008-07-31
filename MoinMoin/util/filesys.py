@@ -212,8 +212,11 @@ if sys.platform == 'darwin':
         """
         try:
             from Carbon import File
+        except ImportError:
+            return None
+        try:
             return File.FSRef(path).as_pathname()
-        except (ImportError, File.Error):
+        except File.Error:
             return None
 
 else:
