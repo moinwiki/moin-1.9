@@ -10,6 +10,7 @@ import time
 
 from werkzeug.exceptions import abort
 from werkzeug.utils import redirect
+from werkzeug.wrappers import Response
 
 from MoinMoin import log
 from MoinMoin import wikiutil
@@ -253,3 +254,18 @@ class UniqueIDGenerator(object):
         if not count:
             return base
         return u'%s-%d' % (base, count)
+
+FATALTMPL = """
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head><title>%(title)s</title></head>
+<body><h1>%(title)s</h1>
+<pre>
+%(body)s
+</pre></body></html>
+"""
+def fatal_response(error):
+    """ Create a response from MoinMoin.error.FatalError instances. """
+    html = FATALTMPL % dict(title=error.__class__.__name__,
+                            body=str(error))
+    return Response(html, status=500, mimetype='text/html')

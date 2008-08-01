@@ -11,10 +11,10 @@ from werkzeug.exceptions import HTTPException
 
 from MoinMoin.web.contexts import AllContext, Context, XMLRPCContext
 from MoinMoin.web.request import Request, MoinMoinFinish
-from MoinMoin.web.utils import check_forbidden, check_setuid, check_surge_protect
+from MoinMoin.web.utils import check_forbidden, check_setuid, check_surge_protect, fatal_response
 
 from MoinMoin.Page import Page
-from MoinMoin import auth, i18n, user, wikiutil, xmlrpc
+from MoinMoin import auth, i18n, user, wikiutil, xmlrpc, error
 from MoinMoin.action import get_names, get_available_actions
 
 from MoinMoin import log
@@ -253,10 +253,12 @@ def application(environ, start_response):
         request = Request(environ)
         context = init(request)
         response = run(context)
+        context.clock.stop('total')
     except HTTPException, e:
         response = e
+    except error.ConfigurationError, e:
+        response = fatal_response(e)
 
-    context.clock.stop('total')
     return response(environ, start_response)
 
 class ProxyTrust(object):
