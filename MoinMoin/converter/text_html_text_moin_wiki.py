@@ -924,7 +924,9 @@ class convert_tree(visitor):
             for i in node.childNodes:
                 if i.nodeType == Node.TEXT_NODE:
                     # get longest pre tag({{{) from content
-                    longest_inner_formater = max([longest_inner_formater, max(re.compile("(?u){+").findall(i.data))])
+                    delimiters = re.compile("(?u){+").findall(i.data)
+                    if delimiters:
+                        longest_inner_formater = max([longest_inner_formater, max(delimiters)])
                     content_buffer.append(i.data)
                     #print "'%s'" % i.data
                 elif i.localName == 'br':
@@ -935,11 +937,11 @@ class convert_tree(visitor):
 
             if (len(longest_inner_formater) >= 3):
                 self.text.extend(["{" * (len(longest_inner_formater) + 1), self.new_line])
-                map(lambda item : self.text.append(item), content_buffer)
+                self.text.extend(content_buffer)
                 self.text.extend(["}" * (len(longest_inner_formater) + 1), self.new_line])
             else:                
                 self.text.extend(["{{{", self.new_line])
-                map(lambda item : self.text.append(item), content_buffer)
+                self.text.extend(content_buffer)
                 self.text.extend(["}}}", self.new_line])
 
     _alignment = {"left": "(",
