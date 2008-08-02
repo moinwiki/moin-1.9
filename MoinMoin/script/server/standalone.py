@@ -13,7 +13,7 @@ import signal
 from MoinMoin.script import MoinScript
 from MoinMoin.server.server_standalone import StandaloneConfig
 from MoinMoin.server.daemon import Daemon
-from MoinMoin.wsgiapp import run_server
+from MoinMoin.web.serving import run_server
 
 class PluginScript(MoinScript):
     def __init__(self, argv, def_values):
@@ -118,7 +118,8 @@ class PluginScript(MoinScript):
                 daemon = Daemon('moin', pidfile, run_server, Config)
                 daemon.do_start()
             else:
-                run_server(Config)
+                run_server(Config.interface, Config.port, Config.docs,
+                           use_debugger=Config.debug)
 
 class DefaultConfig(StandaloneConfig):
     docs = os.path.join('wiki', 'htdocs')
