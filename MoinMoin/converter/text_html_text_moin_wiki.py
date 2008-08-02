@@ -661,7 +661,10 @@ class convert_tree(visitor):
             self.text.append(indent)
         for i in nodelist:
             if i.nodeType == Node.ELEMENT_NODE:
-                self.process_inline(i)
+                if i.localName == 'br':
+                    self.text.append('<<BR>>')
+                else:
+                    self.process_inline(i)
             elif i.nodeType == Node.TEXT_NODE:
                 self.text.append(i.data.strip('\n').replace('\n', ' '))
         self.text.append(self.new_line)
@@ -700,6 +703,8 @@ class convert_tree(visitor):
                     self.text.append(indent)
                 self.process_table(i)
                 found = True
+            elif name == 'br':
+                pending.append(i)
             else:
                 pending.append(i)
 
