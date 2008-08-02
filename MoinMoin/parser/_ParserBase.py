@@ -94,12 +94,12 @@ class FormattingRulePair:
         return self.str_begin
 
     def getText(self, parser, hit):
-        match = self.end_re.search(parser.line, parser.lastpos)
+        match = self.end_re.search(parser.text, parser.lastpos)
         if not match:
-            next_lastpos = len(parser.line)
+            next_lastpos = parser.text_len
         else:
             next_lastpos = match.end() + (match.end() == parser.lastpos)
-        r = parser.line[parser.lastpos:next_lastpos]
+        r = parser.text[parser.lastpos:next_lastpos]
         parser.lastpos = next_lastpos
         return hit + r
 
@@ -221,7 +221,8 @@ class ParserBase:
         scan_re = re.compile("|".join(formatting_regexes), re_flags)
 
         self.lastpos = 0
-        self.line = self.raw
+        self.text = self.raw
+        self.text_len = len(self.text)
 
         self._code_id = sha.new(self.raw.encode(config.charset)).hexdigest()
         self.request.write(formatter.code_area(1, self._code_id, self.parsername, self.show_nums, self.num_start, self.num_step))
@@ -229,20 +230,19 @@ class ParserBase:
         self.request.write(formatter.code_line(1))
             #formatter, len('%d' % (self.line_count,)))
 
-        match = scan_re.search(self.line)
-
-        while match and self.lastpos < len(self.line):
+        match = scan_re.search(self.text)
+        while match and self.lastpos < self.text_len:
             # add the match we found
             self.write_normal_text(formatter,
-                                   self.line[self.lastpos:match.start()])
+                                   self.text[self.lastpos:match.start()])
             self.lastpos = match.end() + (match.end() == self.lastpos)
 
             self.write_match(formatter, match)
 
             # search for the next one
-            match = scan_re.search(self.line, self.lastpos)
+            match = scan_re.search(self.text, self.lastpos)
 
-        self.write_normal_text(formatter, self.line[self.lastpos:])
+        self.write_normal_text(formatter, self.text[self.lastpos:])
 
         self.request.write(formatter.code_area(0, self._code_id))
 
