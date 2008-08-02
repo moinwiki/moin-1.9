@@ -31,6 +31,14 @@ from MoinMoin import config, wikiutil
 class FormatTextBase:
     pass
 
+class FormatBeginLine(FormatTextBase):
+    def formatString(self, formatter, word):
+        return formatter.code_line(1)
+
+class FormatEndLine(FormatTextBase):
+    def formatString(self, formatter, word):
+        return formatter.code_line(0)
+
 class FormatText(FormatTextBase):
 
     def __init__(self, fmt):
@@ -147,6 +155,11 @@ class ParserBase:
     parsername = 'ParserBase'
     tabwidth = 4
 
+    # for dirty tricks, see comment in format():
+    STARTL, STARTL_RE = u"^\n", ur"\^\n"
+    ENDL, ENDL_RE = u"\n$", ur"\n\$"
+    LINESEP = ENDL + STARTL
+
     def __init__(self, raw, request, **kw):
         self.raw = raw
         self.request = request
@@ -160,6 +173,12 @@ class ParserBase:
         #self.line_count = len(raw.split('\n')) + 1
 
     def setupRules(self):
+        self.addRuleFormat("BEGINLINE", FormatBeginLine())
+        self.addRuleFormat("ENDLINE", FormatEndLine())
+        # we need a little dirty trick here, see comment in format():
+        self.addRule("BEGINLINE", self.STARTL_RE)
+        self.addRule("ENDLINE", self.ENDL_RE)
+
         self.def_format = FormatText('Default')
         self.reserved_word_format = FormatText('ResWord')
         self.constant_word_format = FormatText('ConsWord')
@@ -221,6 +240,12 @@ class ParserBase:
         scan_re = re.compile("|".join(formatting_regexes), re_flags)
 
         self.text = self.raw
+
+        # dirty little trick to work around re lib's limitations (it can't have
+        # zero length matches at line beginning for ^ and at the same time match
+        # something else at the beginning of the line):
+        self.text = self.LINESEP.join([line.replace('\r', '') for line in self.text.splitlines()])
+        self.text = self.STARTL + self.text + self.ENDL
         self.text_len = len(self.text)
 
         result = [] # collects output
@@ -228,54 +253,48 @@ class ParserBase:
         self._code_id = sha.new(self.raw.encode(config.charset)).hexdigest()
         result.append(formatter.code_area(1, self._code_id, self.parsername, self.show_nums, self.num_start, self.num_step))
 
-        result.append(formatter.code_line(1))
-            #formatter, len('%d' % (self.line_count,)))
-
         self.lastpos = 0
         match = scan_re.search(self.text)
         while match and self.lastpos < self.text_len:
-            # add the match we found
-            result.extend(self.format_normal_text(formatter,
-                                                  self.text[self.lastpos:match.start()]))
+            # add the rendering of the text left of the match we found
+            text = self.text[self.lastpos:match.start()]
+            if text:
+                result.extend(self.format_normal_text(formatter, text))
             self.lastpos = match.end() + (match.end() == self.lastpos)
 
+            # add the rendering of the match we found
             result.extend(self.format_match(formatter, match))
 
             # search for the next one
             match = scan_re.search(self.text, self.lastpos)
 
-        result.extend(self.format_normal_text(formatter, self.text[self.lastpos:]))
+        # add the rendering of the text right of the last match we found
+        text = self.text[self.lastpos:]
+        if text:
+            result.extend(self.format_normal_text(formatter, text))
 
         result.append(formatter.code_area(0, self._code_id))
         self.request.write(''.join(result))
 
     def format_normal_text(self, formatter, text):
-        result = []
-        first = True
-        for line in text.expandtabs(self.tabwidth).split('\n'):
-            if not first:
-                result.append(formatter.code_line(1))
-            else:
-                first = False
-            result.append(formatter.text(line))
-        return result
+        return [formatter.text(text.expandtabs(self.tabwidth))]
 
     def format_match(self, formatter, match):
         result = []
         for n, hit in match.groupdict().items():
-            if not hit:
+            if hit is None:
                 continue
             r = self._formatting_rules_n2r[n]
             s = r.getText(self, hit)
             c = self.rule_fmt.get(r.name, None)
             if not c:
                 c = self.def_format
-            first = True
-            for line in s.expandtabs(self.tabwidth).split('\n'):
-                if not first:
-                    result.append(formatter.code_line(1))
-                else:
-                    first = False
-                result.append(c.formatString(formatter, line))
+            if s:
+                lines = s.expandtabs(self.tabwidth).split(self.LINESEP)
+                for line in lines[:-1]:
+                    result.append(c.formatString(formatter, line))
+                    result.append(FormatEndLine().formatString(formatter, ''))
+                    result.append(FormatBeginLine().formatString(formatter, ''))
+                result.append(c.formatString(formatter, lines[-1]))
         return result
 
