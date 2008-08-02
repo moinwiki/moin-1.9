@@ -2,27 +2,29 @@
 """
     MoinMoin - highlighting Python Source Parser
 
-    @copyright: 2001 Juergen Hermann <jh@web.de>
+    @copyright: 2001 Juergen Hermann <jh@web.de>,
+                2006-2008 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
 import StringIO
 import keyword, token, tokenize, sha
+
 from MoinMoin import config, wikiutil
 from MoinMoin.parser._ParserBase import parse_start_step
 
 _KEYWORD = token.NT_OFFSET + 1
-_TEXT    = token.NT_OFFSET + 2
+_TEXT = token.NT_OFFSET + 2
 
 _tokens = {
-    token.NUMBER:       'Number',
-    token.OP:           'Operator',
-    token.STRING:       'String',
-    tokenize.COMMENT:   'Comment',
-    token.NAME:         'ID',
-    token.ERRORTOKEN:   'Error',
-    _KEYWORD:           'ResWord',
-    _TEXT:              'Text',
+    token.NUMBER: 'Number',
+    token.OP: 'Operator',
+    token.STRING: 'String',
+    tokenize.COMMENT: 'Comment',
+    token.NAME: 'ID',
+    token.ERRORTOKEN: 'Error',
+    _KEYWORD: 'ResWord',
+    _TEXT: 'Text',
 }
 
 Dependencies = ['user'] # the "Toggle line numbers link" depends on user's language
@@ -117,13 +119,13 @@ class Parser:
         tokid = _tokens.get(toktype, _tokens[_TEXT])
 
         # send text
-        first = 1
+        first = True
         for part in toktext.split('\n'):
             if not first:
                 self.request.write(self.formatter.code_line(0))
                 self.request.write(self.formatter.code_line(1))
             else:
-                first = 0
+                first = False
             self.request.write(self.formatter.code_token(1, tokid) +
                                self.formatter.text(part) +
                                self.formatter.code_token(0, tokid))
