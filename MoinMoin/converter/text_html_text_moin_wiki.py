@@ -816,10 +816,8 @@ class convert_tree(visitor):
 
     def process_span(self, node):
         # process span tag for firefox3
-        # see this : http://dev.fckeditor.net/ticket/2210
+        node_style = node.getAttribute("style")
 
-        node_style = node.getAttribute("style")        
-      
         is_strike = node.getAttribute("class") == "strike"
         is_strike = is_strike or "line-through" in node_style
         is_strong = "bold" in node_style
@@ -827,7 +825,7 @@ class convert_tree(visitor):
         is_underline = "underline" in node_style
         is_comment = node.getAttribute("class") == "comment"
 
-        # start tag        
+        # start tag
         if is_comment:
             self.text.append("/* ")
         if is_strike:
@@ -839,7 +837,7 @@ class convert_tree(visitor):
         if is_underline:
             self.text.append("__")
 
-        # body        
+        # body
         for i in node.childNodes:
             self.process_inline(i)
 
@@ -887,7 +885,7 @@ class convert_tree(visitor):
             indent_depth = int(left_margin / 40)
             if indent_depth > 0:
                 self.text.append(' . ')
-            
+
         self.process_paragraph_item(node)
         self.text.append("\n\n") # do not use self.new_line here!
 
@@ -910,13 +908,11 @@ class convert_tree(visitor):
         if class_ == "comment": # we currently use this for stuff like ## or #acl
             for i in node.childNodes:
                 if i.nodeType == Node.TEXT_NODE:
-                    self.text.append(i.data.replace('\n', '')) # remove useless new line
-                    #print "'%s'" % i.data.replace('\n', '')
+                    self.text.append(i.data.replace('\n', ''))
                 elif i.localName == 'br':
                     self.text.append(self.new_line)
                 else:
                     pass
-                    #print i.localName
         else:
             content_buffer = []
             longest_inner_formater = ''
@@ -926,7 +922,8 @@ class convert_tree(visitor):
                     # get longest pre tag({{{) from content
                     delimiters = re.compile("(?u){+").findall(i.data)
                     if delimiters:
-                        longest_inner_formater = max([longest_inner_formater, max(delimiters)])
+                        longest_inner_formater = max([longest_inner_formater,\
+                                                      max(delimiters)])
                     content_buffer.append(i.data)
                     #print "'%s'" % i.data
                 elif i.localName == 'br':
@@ -936,10 +933,12 @@ class convert_tree(visitor):
                     #print i.localName
 
             if (len(longest_inner_formater) >= 3):
-                self.text.extend(["{" * (len(longest_inner_formater) + 1), self.new_line])
+                self.text.extend(["{" * (len(longest_inner_formater) + 1), \
+                                  self.new_line])
                 self.text.extend(content_buffer)
-                self.text.extend(["}" * (len(longest_inner_formater) + 1), self.new_line])
-            else:                
+                self.text.extend(["}" * (len(longest_inner_formater) + 1), \
+                                      self.new_line])
+            else:
                 self.text.extend(["{{{", self.new_line])
                 self.text.extend(content_buffer)
                 self.text.extend(["}}}", self.new_line])
