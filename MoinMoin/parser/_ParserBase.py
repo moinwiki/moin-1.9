@@ -157,10 +157,12 @@ class ParserBase:
         self._formatting_rules_n2r = {}
         self._formatting_rule_index = 0
         self.rule_fmt = {}
-        self.line_count = len(raw.split('\n')) + 1
+        #self.line_count = len(raw.split('\n')) + 1
 
     def setupRules(self):
         self.def_format = FormatText('Default')
+        self.reserved_word_format = FormatText('ResWord')
+        self.constant_word_format = FormatText('ConsWord')
         self.ID_format = FormatTextID('ID', self._ignore_case)
         self.addRuleFormat("ID", self.ID_format)
         self.addRuleFormat("Operator")
@@ -175,22 +177,18 @@ class ParserBase:
         self.addRuleFormat("Special")
         self.addRuleFormat("Preprc")
         self.addRuleFormat("Error")
-        self.reserved_word_format = FormatText('ResWord')
-        self.constant_word_format = FormatText('ConsWord')
+
+    def _addRule(self, name, fmt):
+        self._formatting_rule_index += 1
+        name = "%s_%s" % (name, self._formatting_rule_index) # create unique name
+        self._formatting_rules.append((name, fmt))
+        self._formatting_rules_n2r[name] = fmt
 
     def addRule(self, name, str_re):
-        self._formatting_rule_index += 1
-        n = "%s_%s" % (name, self._formatting_rule_index)
-        f = FormattingRuleSingle(name, str_re, self._ignore_case)
-        self._formatting_rules.append((n, f))
-        self._formatting_rules_n2r[n] = f
+        self._addRule(name, FormattingRuleSingle(name, str_re, self._ignore_case))
 
     def addRulePair(self, name, start_re, end_re):
-        self._formatting_rule_index += 1
-        n = "%s_%s" % (name, self._formatting_rule_index)
-        f = FormattingRulePair(name, start_re, end_re, self._ignore_case)
-        self._formatting_rules.append((n, f))
-        self._formatting_rules_n2r[n] = f
+        self._addRule(name, FormattingRulePair(name, start_re, end_re, self._ignore_case))
 
     def addWords(self, words, fmt):
         if not isinstance(fmt, FormatTextBase):
