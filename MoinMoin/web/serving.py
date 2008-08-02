@@ -8,13 +8,19 @@
     @copyright: 2008-2008 MoinMoin:FlorianKrupicka
     @license: GNU GPL, see COPYING for details.
 """
-
-from werkzeug.serving import BaseRequestHandler
+import os
+from MoinMoin import config
+from werkzeug.utils import SharedDataMiddleware
+from werkzeug.serving import BaseRequestHandler, run_simple
 
 from MoinMoin import version, log
 logging = log.getLogger(__name__)
 
 class RequestHandler(BaseRequestHandler):
+    """
+    A request-handler for WSGI, that overrides the default logging
+    mechanisms to log via MoinMoin's logging framework.
+    """
     server_version = "MoinMoin %s %s" % (version.release,
                                          version.revision)
 
@@ -28,3 +34,44 @@ class RequestHandler(BaseRequestHandler):
 
     def log_message(self, format, *args):
         logging.info("%s %s", self.address_string(), (format % args))
+
+class ProxyTrust(object):
+    """
+    Middleware that rewrites the remote address according to trusted
+    proxies in the forward chain.
+    """
+
+    def __init__(self, app, proxies):
+        self.app = app
+        self.proxies = proxies
+
+    def __call__(environ, start_response):
+        if 'HTTP_X_FORWARDED_FOR' in environ:
+            addrs = environ.pop('HTTP_X_FORWARDED_FOR').split(',')
+            addrs = [x.strip() for addr in addrs]
+        elif 'REMOTE_ADDR' in environ:
+            addrs = [environ['REMOTE_ADDR']]
+        else:
+            addrs = [None]
+        result = [addr for addr in addrs if addr not in self.proxies]
+        if result:
+            environ['REMOTE_ADDR'] = result[-1]
+        elif addrs[-1] is not None:
+            environ['REMOTE_ADDR'] = addrs[-1]
+        else:
+            del environ['REMOTE_ADDR']
+        return self.app(environ, start_response)
+
+def run_server(host='localhost', port=8080, docs='/usr/share/moin/htdocs',
+               threaded=True, use_debugger=False):
+    """ Run a standalone server on specified host/port. """
+    from MoinMoin.wsgiapp import application
+
+    if docs and os.path.isdir(docs):
+        shared = {url_prefix_static: docs,
+                  '/favicon.ico': os.path.join(docs, 'favicon.ico'),
+                  '/robots.txt': os.path.join(docs, 'robots.txt')}
+        application = SharedDataMiddleware(application, shared)
+
+    run_simple(host, port, application, threaded=threaded,
+               use_debugger=use_debugger)
