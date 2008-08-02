@@ -2,10 +2,12 @@
 """
     MoinMoin - Base Source Parser
 
-    @copyright: 2002 by Taesu Pyo <bigflood@hitel.net>
+    @copyright: 2002 by Taesu Pyo <bigflood@hitel.net>,
+                2005 by Oliver Graf <ograf@bitart.de>,
+                2005-2008 MoinMoin:ThomasWaldmann
+
     @license: GNU GPL, see COPYING for details.
 
-    Docstrings and some refactoring by Oliver Graf <ograf@bitart.de>
 
 basic css:
 
@@ -23,7 +25,86 @@ pre.codearea span.ConsWord { color: #008080; font-weight: bold; }
 """
 
 import re, sha
+
 from MoinMoin import config, wikiutil
+
+class FormatTextBase:
+    pass
+
+class FormatText(FormatTextBase):
+
+    def __init__(self, fmt):
+        self.fmt = fmt
+
+    def formatString(self, formatter, word):
+        return (formatter.code_token(1, self.fmt) +
+                formatter.text(word) +
+                formatter.code_token(0, self.fmt))
+
+class FormatTextID(FormatTextBase):
+
+    def __init__(self, fmt, icase=False):
+        if not isinstance(fmt, FormatText):
+            fmt = FormatText(fmt)
+        self.setDefaultFormat(fmt)
+        self._ignore_case = icase
+        self.fmt = {}
+
+    def setDefaultFormat(self, fmt):
+        self._def_fmt = fmt
+
+    def addFormat(self, word, fmt):
+        if self._ignore_case:
+            word = word.lower()
+        self.fmt[word] = fmt
+
+    def formatString(self, formatter, word):
+        if self._ignore_case:
+            sword = word.lower()
+        else:
+            sword = word
+        return self.fmt.get(sword, self._def_fmt).formatString(formatter, word)
+
+
+class FormattingRuleSingle:
+
+    def __init__(self, name, str_re, icase=False):
+        self.name = name
+        self.str_re = str_re
+
+    def getStartRe(self):
+        return self.str_re
+
+    def getText(self, parser, hit):
+        return hit
+
+
+class FormattingRulePair:
+
+    def __init__(self, name, str_begin, str_end, icase=False):
+        self.name = name
+        self.str_begin = str_begin
+        self.str_end = str_end
+        re_flags = re.M
+        if icase:
+            re_flags |= re.I
+        self.end_re = re.compile(str_end, re_flags)
+
+    def getStartRe(self):
+        return self.str_begin
+
+    def getText(self, parser, hit):
+        match = self.end_re.search(parser.line, parser.lastpos)
+        if not match:
+            next_lastpos = len(parser.line)
+        else:
+            next_lastpos = match.end() + (match.end() == parser.lastpos)
+        r = parser.line[parser.lastpos:next_lastpos]
+        parser.lastpos = next_lastpos
+        return hit + r
+
+
+# ------------------------------------------------------------------------
 
 def parse_start_step(request, args):
     """
@@ -60,98 +141,23 @@ def parse_start_step(request, args):
             nums = -1
     return nums, start, step, attrs
 
-class FormatTextBase:
-    pass
-
-class FormatText(FormatTextBase):
-
-    def __init__(self, fmt):
-        self.fmt = fmt
-
-    def formatString(self, formatter, word):
-        return (formatter.code_token(1, self.fmt) +
-                formatter.text(word) +
-                formatter.code_token(0, self.fmt))
-
-class FormatTextID(FormatTextBase):
-
-    def __init__(self, fmt, icase=0):
-        if not isinstance(fmt, FormatText):
-            self.def_fmt = FormatText(fmt)
-        else:
-            self.def_fmt = fmt
-        self._ignore_case = icase
-        self.fmt = {}
-
-    def addFormat(self, word, fmt):
-        if self._ignore_case:
-            word = word.lower()
-        self.fmt[word] = fmt
-
-    def setDefaultFormat(self, fmt):
-        self.def_fmt = fmt
-
-    def formatString(self, formatter, word):
-        if self._ignore_case:
-            sword = word.lower()
-        else:
-            sword = word
-        return self.fmt.get(sword, self.def_fmt).formatString(formatter, word)
-
-class FormattingRuleSingle:
-
-    def __init__(self, name, str_re, icase=0):
-        self.name = name
-        self.str_re = str_re
-
-    def getStartRe(self):
-        return self.str_re
-
-    def getText(self, parser, hit):
-        return hit
-
-class FormattingRulePair:
-
-    def __init__(self, name, str_begin, str_end, icase=0):
-        self.name = name
-        self.str_begin = str_begin
-        self.str_end = str_end
-        if icase:
-            self.end_re = re.compile(str_end, re.M|re.I)
-        else:
-            self.end_re = re.compile(str_end, re.M)
-
-    def getStartRe(self):
-        return self.str_begin
-
-    def getText(self, parser, hit):
-        match = self.end_re.search(parser.line, parser.lastpos)
-        if not match:
-            next_lastpos = len(parser.line)
-        else:
-            next_lastpos = match.end() + (match.end() == parser.lastpos)
-        r = parser.line[parser.lastpos:next_lastpos]
-        parser.lastpos = next_lastpos
-        return hit + r
-
-
-# ------------------------------------------------------------------------
 
 class ParserBase:
 
     parsername = 'ParserBase'
+    tabwidth = 4
 
     def __init__(self, raw, request, **kw):
         self.raw = raw
         self.request = request
         self.show_nums, self.num_start, self.num_step, attrs = parse_start_step(request, kw.get('format_args', ''))
 
-        self._ignore_case = 0
+        self._ignore_case = False
         self._formatting_rules = []
         self._formatting_rules_n2r = {}
         self._formatting_rule_index = 0
         self.rule_fmt = {}
-        self.line_count = len(raw.split('\n'))+1
+        self.line_count = len(raw.split('\n')) + 1
 
     def setupRules(self):
         self.def_format = FormatText('Default')
@@ -209,14 +215,12 @@ class ParserBase:
 
         self.setupRules()
 
-        l = []
-        for n, f in self._formatting_rules:
-            l.append("(?P<%s>%s)" % (n, f.getStartRe()))
-
+        formatting_regexes = ["(?P<%s>%s)" % (n, f.getStartRe())
+                              for n, f in self._formatting_rules]
+        re_flags = re.M
         if self._ignore_case:
-            scan_re = re.compile("|".join(l), re.M|re.I)
-        else:
-            scan_re = re.compile("|".join(l), re.M)
+            re_flags |= re.I
+        scan_re = re.compile("|".join(formatting_regexes), re_flags)
 
         self.lastpos = 0
         self.line = self.raw
@@ -244,14 +248,13 @@ class ParserBase:
 
         self.request.write(formatter.code_area(0, self._code_id))
 
-
     def write_normal_text(self, formatter, text):
-        first = 1
-        for line in text.expandtabs(4).split('\n'):
+        first = True
+        for line in text.expandtabs(self.tabwidth).split('\n'):
             if not first:
                 self.request.write(formatter.code_line(1))
             else:
-                first = 0
+                first = False
             self.request.write(formatter.text(line))
 
     def write_match(self, formatter, match):
@@ -263,10 +266,11 @@ class ParserBase:
             c = self.rule_fmt.get(r.name, None)
             if not c:
                 c = self.def_format
-            first = 1
-            for line in s.expandtabs(4).split('\n'):
+            first = True
+            for line in s.expandtabs(self.tabwidth).split('\n'):
                 if not first:
                     self.request.write(formatter.code_line(1))
                 else:
-                    first = 0
+                    first = False
                 self.request.write(c.formatString(formatter, line))
+
