@@ -220,42 +220,48 @@ class ParserBase:
             re_flags |= re.I
         scan_re = re.compile("|".join(formatting_regexes), re_flags)
 
-        self.lastpos = 0
         self.text = self.raw
         self.text_len = len(self.text)
 
-        self._code_id = sha.new(self.raw.encode(config.charset)).hexdigest()
-        self.request.write(formatter.code_area(1, self._code_id, self.parsername, self.show_nums, self.num_start, self.num_step))
+        result = [] # collects output
 
-        self.request.write(formatter.code_line(1))
+        self._code_id = sha.new(self.raw.encode(config.charset)).hexdigest()
+        result.append(formatter.code_area(1, self._code_id, self.parsername, self.show_nums, self.num_start, self.num_step))
+
+        result.append(formatter.code_line(1))
             #formatter, len('%d' % (self.line_count,)))
 
+        self.lastpos = 0
         match = scan_re.search(self.text)
         while match and self.lastpos < self.text_len:
             # add the match we found
-            self.write_normal_text(formatter,
-                                   self.text[self.lastpos:match.start()])
+            result.extend(self.format_normal_text(formatter,
+                                                  self.text[self.lastpos:match.start()]))
             self.lastpos = match.end() + (match.end() == self.lastpos)
 
-            self.write_match(formatter, match)
+            result.extend(self.format_match(formatter, match))
 
             # search for the next one
             match = scan_re.search(self.text, self.lastpos)
 
-        self.write_normal_text(formatter, self.text[self.lastpos:])
+        result.extend(self.format_normal_text(formatter, self.text[self.lastpos:]))
 
-        self.request.write(formatter.code_area(0, self._code_id))
+        result.append(formatter.code_area(0, self._code_id))
+        self.request.write(''.join(result))
 
-    def write_normal_text(self, formatter, text):
+    def format_normal_text(self, formatter, text):
+        result = []
         first = True
         for line in text.expandtabs(self.tabwidth).split('\n'):
             if not first:
-                self.request.write(formatter.code_line(1))
+                result.append(formatter.code_line(1))
             else:
                 first = False
-            self.request.write(formatter.text(line))
+            result.append(formatter.text(line))
+        return result
 
-    def write_match(self, formatter, match):
+    def format_match(self, formatter, match):
+        result = []
         for n, hit in match.groupdict().items():
             if not hit:
                 continue
@@ -267,8 +273,9 @@ class ParserBase:
             first = True
             for line in s.expandtabs(self.tabwidth).split('\n'):
                 if not first:
-                    self.request.write(formatter.code_line(1))
+                    result.append(formatter.code_line(1))
                 else:
                     first = False
-                self.request.write(c.formatString(formatter, line))
+                result.append(c.formatString(formatter, line))
+        return result
 
