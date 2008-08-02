@@ -10,8 +10,8 @@
 
 import time, inspect, StringIO, sys
 
-from werkzeug.utils import Headers, http_date, create_environ
-from werkzeug.exceptions import Unauthorized, NotFound
+from werkzeug.utils import Headers, http_date, create_environ, redirect 
+from werkzeug.exceptions import Unauthorized, NotFound, abort
 
 from MoinMoin import i18n, error, user, config
 from MoinMoin.config import multiconfig
@@ -207,6 +207,10 @@ class HTTPMixin(object):
             self.headers.set('Cache-Control', 'no-cache')
             self.headers.set('Pragma', 'no-cache')
         self.request.expires = time.time() - 3600 * 24 * 365
+
+    def http_redirect(self, url):
+        """ Raise a simple redirect exception. """
+        abort(redirect(url))
 
     def isSpiderAgent(self):
         return check_spider(self.request.user_agent, self.cfg)
