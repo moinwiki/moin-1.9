@@ -764,6 +764,7 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
         request = self.request
         now = self._get_local_timestamp()
         u = request.user
+        obfuscate_email_address = u.email.replace('@', ' AT SPAMFREE ')[::-1].replace('.', ' TOD ', 1)[::-1]
         signature = u.signature()
         variables = {
             'PAGE': self.page_name,
@@ -773,6 +774,7 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
             'USERNAME': signature,
             'USER': "-- %s" % signature,
             'SIG': "-- %s <<DateTime(%s)>>" % (signature, now),
+            'EMAIL': "<<MailTo(%s)>>" % (obfuscate_email_address)
         }
 
         if u.valid and u.name:
