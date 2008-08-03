@@ -188,7 +188,7 @@ def decodeSpamSafeEmail(address):
         "AT"    -> "@"
         "DASH"  -> "-"
 
-    Any unknown all-uppercase words simply get stripped.
+    Any unknown all-uppercase words or an uppercase letter simply get stripped.
     Use that to make it even harder for spam bots!
 
     Blanks (spaces) simply get stripped.
