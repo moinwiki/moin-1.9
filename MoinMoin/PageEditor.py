@@ -764,7 +764,7 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
         request = self.request
         now = self._get_local_timestamp()
         u = request.user
-        obfuscate_email_address = u.email.replace('@', ' AT SPAMFREE ')[::-1].replace('.', ' TOD ', 1)[::-1]
+        obfuscate_email_address = u.email.lower().replace('@', ' AT ').replace('.', ' DOT ')
         signature = u.signature()
         variables = {
             'PAGE': self.page_name,
