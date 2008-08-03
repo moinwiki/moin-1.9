@@ -24,6 +24,7 @@ from MoinMoin.Page import Page
 from MoinMoin.widget import html
 from MoinMoin.widget.dialog import Status
 from MoinMoin.logfile import editlog, eventlog
+from MoinMoin.mail.sendmail import encodeSpamSafeEmail
 from MoinMoin.support.python_compatibility import set
 from MoinMoin.util import filesys, timefuncs, web
 from MoinMoin.events import PageDeletedEvent, PageRenamedEvent, PageCopiedEvent, PageRevertedEvent
@@ -764,7 +765,7 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
         request = self.request
         now = self._get_local_timestamp()
         u = request.user
-        obfuscate_email_address = u.email.lower().replace('@', ' AT ').replace('.', ' DOT ')
+        obfuscate_email_address = encodeSpamSafeEmail(u.email)
         signature = u.signature()
         variables = {
             'PAGE': self.page_name,
