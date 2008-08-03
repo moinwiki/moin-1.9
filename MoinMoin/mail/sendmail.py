@@ -159,7 +159,7 @@ def sendmail(request, to, subject, text, mail_from=None):
 def encodeSpamSafeEmail(email_address, obfuscation_text=''):
     """ Encodes a standard email address to an obfuscated address
     @param email_address: mail address to encode.
-                          Known signs and their all-uppercase words translation:
+                          Known characters and their all-uppercase words translation:
                           "." -> " DOT "
                           "@" -> " AT "
                           "-" -> " DASH "
