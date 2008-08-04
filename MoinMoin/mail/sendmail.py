@@ -156,6 +156,26 @@ def sendmail(request, to, subject, text, mail_from=None):
     logging.debug("Mail sent OK")
     return (1, _("Mail sent OK"))
 
+def encodeSpamSafeEmail(email_address, obfuscation_text=''):
+    """ Encodes a standard email address to an obfuscated address
+    @param email_address: mail address to encode.
+                          Known characters and their all-uppercase words translation:
+                          "." -> " DOT "
+                          "@" -> " AT "
+                          "-" -> " DASH "
+    @param obfuscation_text: optional text to obfuscate the email.
+                             All characters in the string must be alphabetic
+                             and they will be added in uppercase.
+    """
+    address = email_address.lower()
+    # uppercase letters will be stripped by decodeSpamSafeEmail
+    for word, sign in _transdict.items():
+        address = address.replace(sign, ' %s ' % word)
+    if obfuscation_text.isalpha():
+        # is the obfuscation_text alphabetic
+        address = address.replace(' AT ', ' AT %s ' % obfuscation_text.upper())
+
+    return address
 
 def decodeSpamSafeEmail(address):
     """ Decode obfuscated email address to standard email address
@@ -168,7 +188,7 @@ def decodeSpamSafeEmail(address):
         "AT"    -> "@"
         "DASH"  -> "-"
 
-    Any unknown all-uppercase words simply get stripped.
+    Any unknown all-uppercase words or an uppercase letter simply get stripped.
     Use that to make it even harder for spam bots!
 
     Blanks (spaces) simply get stripped.
