@@ -62,17 +62,29 @@ class ProxyTrust(object):
             del environ['REMOTE_ADDR']
         return self.app(environ, start_response)
 
+def make_application(shared=None):
+    from MoinMoin.wsgiapp import application
+
+    if isinstance(shared, dict):
+        application = SharedDataMiddleware(application, shared)
+    elif shared:
+        if shared is True:
+            shared = '/use/share/moin/htdocs'
+
+        if os.path.isdir(shared):
+            mapping = {config.url_prefix_static: shared,
+                       '/favicon.ico': os.path.join(shared, 'favicon.ico'),
+                       '/robots.txt': os.path.join(shared, 'robots.txt')}
+            application = SharedDataMiddleware(application, mapping)
+
+    return application
+
 def run_server(host='localhost', port=8080, docs='/usr/share/moin/htdocs',
                threaded=True, use_debugger=False):
     """ Run a standalone server on specified host/port. """
-    from MoinMoin.wsgiapp import application
-
-    if docs and os.path.isdir(docs):
-        shared = {config.url_prefix_static: docs,
-                  '/favicon.ico': os.path.join(docs, 'favicon.ico'),
-                  '/robots.txt': os.path.join(docs, 'robots.txt')}
-        application = SharedDataMiddleware(application, shared)
+    application = make_application(shared=docs)
 
     run_simple(host, port, application, threaded=threaded,
                use_debugger=use_debugger,
                request_handler=RequestHandler)
+
