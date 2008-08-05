@@ -921,6 +921,7 @@ class convert_tree(visitor):
         else:
             content_buffer = []
             longest_inner_formater = ''
+            bang_args = ''
 
             for i in node.childNodes:
                 if i.nodeType == Node.TEXT_NODE:
@@ -929,8 +930,14 @@ class convert_tree(visitor):
                     if delimiters:
                         longest_inner_formater = max([longest_inner_formater,\
                                                       max(delimiters)])
-                    content_buffer.append(i.data)
-                    #print "'%s'" % i.data
+                    for line in i.data.strip().split('\n'):
+                        if line.strip().startswith('#!'):
+                            if bang_args == '':
+                                bang_args = line.strip()
+                            else:
+                                content_buffer.extend([line, self.new_line])
+                        else:
+                            content_buffer.extend([line, self.new_line])
                 elif i.localName == 'br':
                     content_buffer.append(self.new_line_dont_remove)
                 else:
@@ -938,13 +945,13 @@ class convert_tree(visitor):
                     #print i.localName
 
             if (len(longest_inner_formater) >= 3):
-                self.text.extend(["{" * (len(longest_inner_formater) + 1), \
-                                  self.new_line])
+                self.text.extend([("{" * (len(longest_inner_formater) + 1)) + bang_args, \
+                                      self.new_line])
                 self.text.extend(content_buffer)
                 self.text.extend(["}" * (len(longest_inner_formater) + 1), \
                                       self.new_line])
             else:
-                self.text.extend(["{{{", self.new_line])
+                self.text.extend(["{{{"+bang_args, self.new_line])
                 self.text.extend(content_buffer)
                 self.text.extend(["}}}", self.new_line])
 
