@@ -46,13 +46,4 @@ import sys, os
 # Debug mode - show detailed error reports
 #os.environ['MOIN_DEBUG'] = '1'
 
-
-from MoinMoin.server.server_wsgi import WsgiConfig, moinmoinApp
-
-class Config(WsgiConfig):
-    pass
-
-config = Config()
-
-application = moinmoinApp
-
+from MoinMoin.wsgiapp import application
