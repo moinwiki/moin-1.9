@@ -18,7 +18,7 @@ from openid.cryptutil import randomString
 from openid.server import server
 from openid.message import IDENTIFIER_SELECT
 from MoinMoin.widget import html
-from MoinMoin.request import MoinMoinFinish
+from MoinMoin.web.request import MoinMoinFinish
 
 def execute(pagename, request):
     return MoinOpenIDServer(pagename, request).handle()
