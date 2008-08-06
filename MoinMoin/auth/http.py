@@ -14,7 +14,6 @@
 """
 
 from MoinMoin import config, user
-from MoinMoin.request import request_twisted, request_cli, request_standalone
 from MoinMoin.auth import BaseAuth
 from base64 import decodestring
 
