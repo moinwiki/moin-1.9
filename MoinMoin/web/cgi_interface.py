@@ -28,11 +28,13 @@ def run():
                             "to a unix socket. Default: localhost"))
     parser.set_default('interface', 'localhost')
 
+    cgi_fallback = False
+
     try:
         from flup.server.fcgi import WSGIServer
     except ImportError:
-        # TODO: insert some fallback here
-        pass
+        from MoinMoin.web._fallback_cgi import WSGIServer
+        cgi_fallback = True
 
     options, args = parser.parse_args()
 
@@ -46,7 +48,12 @@ def run():
         kwargs['bindAddress'] = options.interface
 
     app = make_application()
-    WSGIServer(app, **kwargs).run()
+    if not cgi_fallback:
+        WSGIServer(app, **kwargs).run()
+    else:
+        if 'bindAddress' in kwargs:
+            logging.warning('Cannot bind to socket when running with CGI fallback')
+        WSGIServer(app).run()
 
 if __name__ == '__main__':
     run()
