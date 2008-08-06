@@ -11,7 +11,6 @@ import sys
 import signal
 
 from MoinMoin.script import MoinScript
-from MoinMoin.server.server_standalone import StandaloneConfig
 from MoinMoin.server.daemon import Daemon
 from MoinMoin.web.serving import run_server
 
@@ -121,7 +120,7 @@ class PluginScript(MoinScript):
                 run_server(Config.interface, Config.port, Config.docs,
                            use_debugger=Config.debug)
 
-class DefaultConfig(StandaloneConfig):
+class DefaultConfig:
     docs = os.path.join('wiki', 'htdocs')
     if not os.path.exists(docs):
         docs = "/usr/share/moin/htdocs"
