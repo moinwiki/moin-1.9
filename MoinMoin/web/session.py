@@ -64,7 +64,6 @@ class FileSessionService(SessionService):
     def destroy_session(self, request, session):
         session.clear()
         self.store.delete(session)
-        session.modified = session.new = False
 
     def finalize(self, request, session):
         userobj = request.user
@@ -79,14 +78,17 @@ class FileSessionService(SessionService):
             if 'user.id' in session:
                 self.destroy_session(request, session)
 
-        if session.should_save:
-            self.store.save(session)
-
         if session.new:
             cookie_lifetime = request.cfg.cookie_lifetime * 3600
             cookie_expires = time.time() + cookie_lifetime
+            if request.cfg.cookie_path:
+                cookie_path = request.cfg.cookie_path
+            else:
+                cookie_path = request.script_root or '/'
             cookie = dump_cookie(self.cookie_name, session.sid,
                                  cookie_lifetime, cookie_expires,
-                                 request.cfg.cookie_domain,
-                                 request.cfg.cookie_path)
+                                 cookie_path, request.cfg.cookie_domain)
             request.headers.add('Set-Cookie', cookie)
+
+        if session.should_save:
+            self.store.save(session)
