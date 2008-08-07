@@ -922,6 +922,7 @@ class convert_tree(visitor):
             content_buffer = []
             longest_inner_formater = ''
             bang_args = ''
+            delimiters = []
 
             """ 
             below code fixed for MoinMoinBugs/GuiEditorCantNest bug
@@ -931,11 +932,9 @@ class convert_tree(visitor):
 
             for i in node.childNodes:
                 if i.nodeType == Node.TEXT_NODE:
-                    # get longest pre tag({{{) from content
-                    delimiters = re.compile("(?u){+").findall(i.data)
-                    if delimiters:
-                        longest_inner_formater = max([longest_inner_formater,\
-                                                      max(delimiters)])
+                    # get longest pre tag({{{ or }}}) from content
+                    delimiters.extend(re.compile("((?u){+)").findall(i.data))
+                    delimiters.extend(re.compile("((?u)}+)").findall(i.data))
                     for line in i.data.strip().split('\n'):
                         if line.strip().startswith('#!'):
                             if bang_args == '':
@@ -949,6 +948,9 @@ class convert_tree(visitor):
                 else:
                     pass
                     #print i.localName
+
+            if delimiters:
+                longest_inner_formater = max(delimiters)
 
             if (len(longest_inner_formater) >= 3):
                 self.text.extend([("{" * (len(longest_inner_formater) + 1)) + bang_args, \
