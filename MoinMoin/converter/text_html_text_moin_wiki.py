@@ -859,6 +859,9 @@ class convert_tree(visitor):
             self.text.append(" */")
 
     def process_div(self, node):
+        # process indent
+        self._process_indent(node)
+
         # ignore div tags - just descend
         for i in node.childNodes:
             self.visit(i)
@@ -883,6 +886,12 @@ class convert_tree(visitor):
 
     def process_p(self, node):
         # process indent
+        self._process_indent(node)
+        self.process_paragraph_item(node)
+        self.text.append("\n\n") # do not use self.new_line here!
+
+    def _process_indent(self, node):
+        # process indent
         node_style = node.getAttribute("style")
         match = re.match(r"margin-left:\s*(\d+)px", node_style)
         if match:
@@ -890,9 +899,6 @@ class convert_tree(visitor):
             indent_depth = int(left_margin / 40)
             if indent_depth > 0:
                 self.text.append(' . ')
-
-        self.process_paragraph_item(node)
-        self.text.append("\n\n") # do not use self.new_line here!
 
     def process_paragraph_item(self, node):
         for i in node.childNodes:
