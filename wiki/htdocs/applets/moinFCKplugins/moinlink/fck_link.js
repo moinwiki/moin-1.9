@@ -36,6 +36,25 @@ function OnDialogTabChange(tabCode)
  ShowE('divInfo'  , (tabCode == 'Info'));
 }
 
+// Extends the String object, creating a "EndsWith" method on it.
+// this method is part of fckeditor dialog common library
+String.prototype.EndsWith = function( value, ignoreCase )
+{
+	var L1 = this.length ;
+	var L2 = value.length ;
+
+	if ( L2 > L1 )
+		return false ;
+
+	if ( ignoreCase )
+	{
+		var oRegex = new RegExp( value + '$' , 'i' ) ;
+		return oRegex.test( this ) ;
+	}
+	else
+		return ( L2 == 0 || this.substr( L1 - L2, L2 ) == value ) ;
+}
+
 //#### Regular Expressions library.
 var oRegex = new Object();
 
@@ -179,6 +198,11 @@ function LoadSelection()
   // make links to subpages of own page relative links
   if (sHRef.StartsWith(FCKConfig['WikiPage']))
       sHRef = sHRef.Remove(0, FCKConfig['WikiPage'].length);
+  // relative link ../
+  if (oLink.innerHTML.StartsWith('../') && 
+      sHRef.EndsWith(oLink.innerHTML.substring(3, oLink.innerHTML.length))) {
+    sHRef = oLink.innerHTML;
+  }
   GetE('txtPagename').value = decodeUrl(sHRef);
   firstElement  = 'txtPagename';
  }
