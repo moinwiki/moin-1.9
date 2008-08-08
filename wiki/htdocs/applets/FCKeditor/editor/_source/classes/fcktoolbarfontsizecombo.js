@@ -1,47 +1,76 @@
 ﻿/*
- * FCKeditor - The text editor for internet
- * Copyright (C) 2003-2005 Frederico Caldeira Knabben
- * 
- * Licensed under the terms of the GNU Lesser General Public License:
- * 		http://www.opensource.org/licenses/lgpl-license.php
- * 
- * For further information visit:
- * 		http://www.fckeditor.net/
- * 
- * "Support Open Source software. What about a donation today?"
- * 
- * File Name: fcktoolbarfontsizecombo.js
- * 	FCKToolbarPanelButton Class: Handles the Fonts combo selector.
- * 
- * File Authors:
- * 		Frederico Caldeira Knabben (fredck@fckeditor.net)
+ * FCKeditor - The text editor for Internet - http://www.fckeditor.net
+ * Copyright (C) 2003-2008 Frederico Caldeira Knabben
+ *
+ * == BEGIN LICENSE ==
+ *
+ * Licensed under the terms of any of the following licenses at your
+ * choice:
+ *
+ *  - GNU General Public License Version 2 or later (the "GPL")
+ *    http://www.gnu.org/licenses/gpl.html
+ *
+ *  - GNU Lesser General Public License Version 2.1 or later (the "LGPL")
+ *    http://www.gnu.org/licenses/lgpl.html
+ *
+ *  - Mozilla Public License Version 1.1 or later (the "MPL")
+ *    http://www.mozilla.org/MPL/MPL-1.1.html
+ *
+ * == END LICENSE ==
+ *
+ * FCKToolbarPanelButton Class: Handles the Fonts combo selector.
  */
 
 var FCKToolbarFontSizeCombo = function( tooltip, style )
 {
-	this.Command	= FCKCommands.GetCommand( 'FontSize' ) ;
+	this.CommandName	= 'FontSize' ;
 	this.Label		= this.GetLabel() ;
 	this.Tooltip	= tooltip ? tooltip : this.Label ;
 	this.Style		= style ? style : FCK_TOOLBARITEM_ICONTEXT ;
+
+	this.DefaultLabel = FCKConfig.DefaultFontSizeLabel || '' ;
+
+	this.FieldWidth = 70 ;
 }
 
 // Inherit from FCKToolbarSpecialCombo.
-FCKToolbarFontSizeCombo.prototype = new FCKToolbarSpecialCombo ;
+FCKToolbarFontSizeCombo.prototype = new FCKToolbarFontFormatCombo( false ) ;
 
 FCKToolbarFontSizeCombo.prototype.GetLabel = function()
 {
 	return FCKLang.FontSize ;
 }
 
-FCKToolbarFontSizeCombo.prototype.CreateItems = function( targetSpecialCombo )
+FCKToolbarFontSizeCombo.prototype.GetStyles = function()
 {
-	targetSpecialCombo.FieldWidth = 70 ;
-	
-	var aSizes = FCKConfig.FontSizes.split(';') ;
-	
-	for ( var i = 0 ; i < aSizes.length ; i++ )
+	var baseStyle = FCKStyles.GetStyle( '_FCK_Size' ) ;
+
+	if ( !baseStyle )
 	{
-		var aSizeParts = aSizes[i].split('/') ;
-		this._Combo.AddItem( aSizeParts[0], '<font size="' + aSizeParts[0] + '">' + aSizeParts[1] + '</font>', aSizeParts[1] ) ;
+		alert( "The FCKConfig.CoreStyles['FontFace'] setting was not found. Please check the fckconfig.js file" ) ;
+		return {} ;
 	}
+
+	var styles = {} ;
+
+	var fonts = FCKConfig.FontSizes.split(';') ;
+
+	for ( var i = 0 ; i < fonts.length ; i++ )
+	{
+		var fontParts = fonts[i].split('/') ;
+		var font = fontParts[0] ;
+		var caption = fontParts[1] || font ;
+
+		var style = FCKTools.CloneObject( baseStyle ) ;
+		style.SetVariable( 'Size', font ) ;
+		style.Label = caption ;
+
+		styles[ caption ] = style ;
+	}
+
+	return styles ;
 }
+
+FCKToolbarFontSizeCombo.prototype.RefreshActiveItems = FCKToolbarStyleCombo.prototype.RefreshActiveItems ;
+
+FCKToolbarFontSizeCombo.prototype.StyleCombo_OnBeforeClick = FCKToolbarFontsCombo.prototype.StyleCombo_OnBeforeClick ;

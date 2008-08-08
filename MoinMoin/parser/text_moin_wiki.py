@@ -1364,7 +1364,9 @@ class Parser:
                     lastpos += 1 # proceed, we don't want to match this again
             else:
                 if self.in_pre:
-                    self._parser_content(line[lastpos:])
+                    # ilastpos is more then 0 and result of line slice is empty make useless line
+                    if not (lastpos > 0 and line[lastpos:] == ''):
+                        self._parser_content(line[lastpos:])
                 elif line[lastpos:]:
                     ###result.append('<span class="info">[no match, add rest: <tt>"%s"<tt>]</span>' % line[lastpos:])
                     if not (inhibit_p or self.inhibit_p or self.in_pre or self.formatter.in_p or
