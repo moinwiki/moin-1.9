@@ -23,6 +23,7 @@ var oEditor  = dialog.InnerDialogLoaded();
 var FCK   = oEditor.FCK;
 var FCKLang  = oEditor.FCKLang;
 var FCKConfig = oEditor.FCKConfig;
+var isNameRelatedLink = false;
 
 //#### Dialog Tabs
 
@@ -193,6 +194,12 @@ function LoadSelection()
  // Update the Link type combo.
  GetE('cmbLinkType').value = sType;
 
+ // when inner html of link and url of link are same set isNameRelatedLink true
+ // if isNameRelatedLink is true, inner html is change when url change
+  if (sHRef == oLink.innerHTML) {
+    isNameRelatedLink = true;
+  }
+
  return firstElement;
 }
 
@@ -282,6 +289,9 @@ function Ok()
  if (oLink) {
   oLink.href = sUri;
   SetAttribute( oLink, '_fcksavedurl', sUri ) ;
+  if (isNameRelatedLink) {
+    oLink.innerHTML = sText;
+  }
  }
  else   // Creating a new link.
  {
