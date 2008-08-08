@@ -55,3 +55,9 @@ class ServerFrontEnd(FrontEnd):
                                 "with '/' or './' it is interpreted as a path "
                                 "to a unix socket. Default: localhost"))
         parser.set_default('interface', 'localhost')
+
+class CGIFrontEnd(FrontEnd):
+    """ Simple WSGI CGI Adapter. """
+    def run_server(self, application, options):
+        from MoinMoin.web._fallback_cgi import WSGIServer
+        return WSGIServer(application).run()
