@@ -257,7 +257,7 @@ class TestPageAcls(object):
     subpage_name = u'AclTestMainPage/SubPage'
     pages = [
         # pagename, content
-        (mainpage_name, u"#acl JoeDoe: JaneDoe:read,write\nFoo!"),
+        (mainpage_name, u"#acl JoeDoe:\n#acl JaneDoe:read,write\nFoo!"),
         (subpage_name, u"FooFoo!"),
     ]
 
