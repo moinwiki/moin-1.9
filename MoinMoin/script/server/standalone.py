@@ -11,7 +11,7 @@ import sys
 import signal
 
 from MoinMoin.script import MoinScript
-from MoinMoin.server.daemon import Daemon
+from MoinMoin.util.daemon import Daemon
 from MoinMoin.web.serving import run_server
 
 class PluginScript(MoinScript):
