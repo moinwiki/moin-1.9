@@ -31,5 +31,5 @@ import sys, os
 #from MoinMoin import log
 #log.load_config('/path/to/logging_configuration_file')
 
-from MoinMoin.web.flup_frontend import FCGIFrontEnd
-FCGIFrontEnd().run()
+from MoinMoin.web.flup_frontend import CGIFrontEnd
+CGIFrontEnd().run()
