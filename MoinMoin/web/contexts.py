@@ -167,6 +167,7 @@ class HTTPMixin(object):
     del _proxy
 
     def write(self, *data):
+        """ Write to output stream. """
         if len(data) > 1:
             logging.warning("Some code still uses write with multiple arguments, "
                             "consider changing this soon")
@@ -174,6 +175,12 @@ class HTTPMixin(object):
 
     # implementation of methods expected by RequestBase
     def send_file(self, fileobj, bufsize=8192, do_flush=None):
+        """ Send a file to the output stream.
+
+        @param fileobj: a file-like object (supporting read, close)
+        @param bufsize: size of chunks to read/write
+        @param do_flush: call flush after writing?
+        """
         def simple_wrapper(fileobj, bufsize):
             return iter(lambda: fileobj.read(bufsize), '')
         file_wrapper = self.environ.get('wsgi.file_wrapper', simple_wrapper)
@@ -181,6 +188,7 @@ class HTTPMixin(object):
         raise MoinMoinFinish('sent file')
 
     def read(self, n=None):
+        """ Read n bytes (or everything) from input stream. """
         if n is None:
             return self.request.in_data
         else:
@@ -198,6 +206,19 @@ class HTTPMixin(object):
         self.headers.add(header, value)
 
     def disableHttpCaching(self, level=1):
+        """ Prevent caching of pages that should not be cached.
+
+        level == 1 means disabling caching when we have a cookie set
+        level == 2 means completely disabling caching (used by Page*Editor)
+
+        This is important to prevent caches break acl by providing one
+        user pages meant to be seen only by another user, when both users
+        share the same caching proxy.
+
+        AVOID using no-cache and no-store for attachments as it is completely broken on IE!
+
+        Details: http://support.microsoft.com/support/kb/articles/Q234/0/67.ASP
+        """
         if level == 1 and self.headers.get('Pragma') == 'no-cache':
             return
 
