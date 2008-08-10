@@ -62,8 +62,11 @@ class ProxyTrust(object):
             del environ['REMOTE_ADDR']
         return self.app(environ, start_response)
 
-def make_application(shared=None):
+def make_application(shared=None, trusted_proxies=None):
     from MoinMoin.wsgiapp import application
+
+    if trusted_proxies:
+        application = ProxyTrust(application, trusted_proxies)
 
     if isinstance(shared, dict):
         application = SharedDataMiddleware(application, shared)
