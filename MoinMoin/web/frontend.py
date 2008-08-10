@@ -56,8 +56,5 @@ class ServerFrontEnd(FrontEnd):
                                 "to a unix socket. Default: localhost"))
         parser.set_default('interface', 'localhost')
 
-class CGIFrontEnd(FrontEnd):
-    """ Simple WSGI CGI Adapter. """
-    def run_server(self, application, options):
-        from MoinMoin.web._fallback_cgi import WSGIServer
-        return WSGIServer(application).run()
+class FrontEndNotAvailable(Exception):
+    """ Raised if a frontend is not available for one reason or another. """
