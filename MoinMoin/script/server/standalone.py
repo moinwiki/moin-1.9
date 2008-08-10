@@ -118,14 +118,15 @@ class PluginScript(MoinScript):
                 daemon.do_start()
             else:
                 run_server(Config.interface, Config.port, Config.docs,
-                           use_debugger=Config.debug)
+                           use_debugger=Config.debug, user=Config.user,
+                           group=Config.group)
 
 class DefaultConfig:
     docs = os.path.join('wiki', 'htdocs')
     if not os.path.exists(docs):
         docs = "/usr/share/moin/htdocs"
-    user = ''
-    group = ''
+    user = None
+    group = None
     port = 8080
     interface = 'localhost'
     debug = False
