@@ -63,6 +63,15 @@ class ProxyTrust(object):
         return self.app(environ, start_response)
 
 def make_application(shared=None, trusted_proxies=None):
+    """
+    Make an instance of the MoinMoin WSGI application. This involves
+    wrapping it in middlewares as needed (static files, debugging, etc.).
+
+    @param shared: directory where static files are located
+    @param trusted_proxies: list of trusted proxies
+    @rtype: callable
+    @return: a WSGI callable
+    """
     from MoinMoin.wsgiapp import application
 
     if trusted_proxies:
