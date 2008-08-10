@@ -79,10 +79,55 @@ def make_application(shared=None):
 
     return application
 
+def switch_user(uid, gid=None):
+    """ Switch identity to safe user and group
+
+    Does not support Windows, because the necessary calls are not available.
+    TODO: can we use win32api calls to achieve the same effect on Windows?
+
+    Raise RuntimeError if can't switch or trying to switch to root.
+    """
+    # no switch on windows
+    if os.name == 'nt':
+        return
+
+    import pwd, grp
+    if isinstance(uid, basestring):
+        try:
+            uid = pwd.getpwnam(uid)[2]
+        except KeyError:
+            raise RuntimeError("Unknown user: '%s', check user setting" % uid)
+    if gid is not None and isinstance(gid, basestring):
+        try:
+            gid = grp.getgrnam(gid)[2]
+        except KeyError:
+            raise RuntimeError("Unknown group: '%s', check group setting" % gid)
+
+    if uid == 0 or gid == 0:
+        # We will not run as root. If you like to run a web
+        # server as root, then hack this code.
+        raise RuntimeError('will not run as root!')
+    try:
+        if gid:
+            os.setgid(gid)
+        os.setuid(uid)
+    except (OSError, AttributeError):
+        # Either we can't switch, or we are on windows, which does not have
+        # those calls.
+        raise RuntimeError("can't change uid/gid to %s/%s" % (uid, gid))
+    logging.info("Running as uid/gid %d/%d" % (uid, gid))
+
 def run_server(host='localhost', port=8080, docs='/usr/share/moin/htdocs',
-               threaded=True, use_debugger=False):
+               threaded=True, use_debugger=False, user=None, group=None):
     """ Run a standalone server on specified host/port. """
     application = make_application(shared=docs)
+
+    if port < 1024 and os.getuid() != 0:
+        raise RuntimeError('Must run as root to serve port number under 1024. '
+                           'Run as root or change port setting.')
+
+    if user:
+        switch_user(user, group)
 
     run_simple(host, port, application, threaded=threaded,
                use_debugger=use_debugger,
