@@ -605,7 +605,10 @@ class convert_tree(visitor):
                 before = self.new_line_dont_remove
             style = listitem.getAttribute("style")
             if re.match(ur"list-style-type:\s*none", style, re.I):
-                markup = ". "
+                if u'table' in map(lambda x: x.localName, listitem.childNodes):
+                    markup = " "
+                else:
+                    markup = ". "
             else:
                 markup = "* "
         elif name == 'dl':
@@ -1086,7 +1089,8 @@ class convert_tree(visitor):
         return " ".join(result).strip()
 
     def process_table(self, node, style=""):
-        self.text.append(self.new_line)
+        if self.depth == 0:
+            self.text.append(self.new_line)
         self.new_table = True
         style += self._table_style(node)
         for i in node.childNodes:
