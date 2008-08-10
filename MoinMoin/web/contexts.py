@@ -10,7 +10,7 @@
 
 import time, inspect, StringIO, sys
 
-from werkzeug.utils import Headers, http_date, create_environ, redirect 
+from werkzeug.utils import Headers, http_date, create_environ, redirect
 from werkzeug.exceptions import Unauthorized, NotFound, abort
 
 from MoinMoin import i18n, error, user, config
