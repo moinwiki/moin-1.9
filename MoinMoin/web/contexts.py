@@ -47,7 +47,6 @@ class EnvironProxy(property):
         property.__init__(self, self.get, self.set, self.delete)
 
     def get(self, obj):
-        logging.debug("GET: '%s' on '%r'", self.name, obj)
         if self.full_name in obj.environ:
             res = obj.environ[self.full_name]
         else:
@@ -61,11 +60,9 @@ class EnvironProxy(property):
         return res
 
     def set(self, obj, value):
-        logging.debug("SET: '%s' on '%r' to '%r'", self.name, obj, value)
         obj.environ[self.full_name] = value
 
     def delete(self, obj):
-        logging.debug("DEL: '%s' on '%r'", self.name, obj)
         del obj.environ[self.full_name]
 
     def __repr__(self):
@@ -168,9 +165,6 @@ class HTTPMixin(object):
 
     def write(self, *data):
         """ Write to output stream. """
-        if len(data) > 1:
-            logging.warning("Some code still uses write with multiple arguments, "
-                            "consider changing this soon")
         self.request.stream.writelines(data)
 
     # implementation of methods expected by RequestBase
@@ -384,9 +378,6 @@ class RenderContext(Context, RedirectMixin, ConfigMixin, UserMixin,
                     ActionMixin, PageMixin, FormatterMixin):
     """ Context to act during the rendering phase. """
     def write(self, *data):
-        if len(data) > 1:
-            logging.warning("Some code still uses write with multiple arguments, "
-                            "consider changing this soon")
         self.request.stream.writelines(data)
 
 # TODO: extend xmlrpc context
@@ -413,9 +404,6 @@ class ScriptContext(AllContext):
         request.url = url
 
     def write(self, *data):
-        if len(data) > 1:
-            logging.warning("Some code still uses write with multiple arguments, "
-                            "consider changing this soon")
         for d in data:
             if isinstance(d, unicode):
                 d = d.encode(config.charset)
