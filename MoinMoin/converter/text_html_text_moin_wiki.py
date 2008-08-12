@@ -605,12 +605,12 @@ class convert_tree(visitor):
                 before = self.new_line_dont_remove
             style = listitem.getAttribute("style")
             if re.match(ur"list-style-type:\s*none", style, re.I):
-                if u'table' in map(lambda x: x.localName, listitem.childNodes):
-                    markup = " "
-                else:
-                    markup = ". "
-            else:
-                markup = "* "
+                markup = ". "
+                # set markup with white space when list element containes table
+                for i in listitem.childNodes:
+                    if i.nodeType == Node.ELEMENT_NODE:
+                        if i.localName == 'table':
+                            markup = " "
         elif name == 'dl':
             markup = ":: "
         else:
