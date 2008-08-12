@@ -937,6 +937,7 @@ class convert_tree(visitor):
             below code fixed for MoinMoinBugs/GuiEditorCantNest bug
             this has problem when outer delimiter has two more { than inside one
             e.g. {{{{{{ {{{ foo }}} }}}}}}  --> {{{{ {{{ foo }}} }}}}
+                   {{{foo {{{ }}} foo}}} --> {{{{ {{{ }}} }}}}
             """
 
             for i in node.childNodes:
