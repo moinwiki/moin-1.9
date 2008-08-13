@@ -611,6 +611,8 @@ class convert_tree(visitor):
                     if i.nodeType == Node.ELEMENT_NODE:
                         if i.localName == 'table':
                             markup = " "
+            else:
+                markup = "* "
         elif name == 'dl':
             markup = ":: "
         else:
