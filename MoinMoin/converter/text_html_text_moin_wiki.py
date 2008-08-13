@@ -1274,8 +1274,8 @@ class convert_tree(visitor):
                 elif desc.startswith('../') and href.endswith(desc[3:]):
                     self.text.append(wikiutil.pagelinkmarkup(desc))
                 # internal link #internal
-                elif desc.startswith('#') and href.endswith(desc):
-                    self.text.append(wikiutil.pagelinkmarkup(desc))
+                elif '#' in href and pagename.startswith(self.pagename):
+                    self.text.append(wikiutil.pagelinkmarkup(href[href.index('#'):], desc))
                 # labeled link
                 else:
                     self.text.append(wikiutil.pagelinkmarkup(pagename, desc))
