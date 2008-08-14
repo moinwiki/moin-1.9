@@ -19,7 +19,7 @@ from MoinMoin.formatter import text_html
 from MoinMoin.theme import load_theme_fallback
 from MoinMoin.util.clock import Clock
 from MoinMoin.web.request import Request, MoinMoinFinish
-from MoinMoin.web.utils import check_spider, UniqueIDGenerator
+from MoinMoin.web.utils import UniqueIDGenerator
 from MoinMoin.web.exceptions import Forbidden, SurgeProtection
 
 from MoinMoin import log
@@ -228,7 +228,12 @@ class HTTPMixin(object):
         abort(redirect(url))
 
     def isSpiderAgent(self):
-        return check_spider(self.request.user_agent, self.cfg)
+        """ Simple check if useragent is a spider bot. """
+        cfg = self.cfg
+        useragent = self.request.useragent
+        if useragent and cfg.cache.ua_spiders:
+            return cfg.cache.ua_spiders.search(seluseragent.browser) is not None
+        return False
     isSpiderAgent = EnvironProxy(isSpiderAgent)
 
 class ActionMixin(object):
