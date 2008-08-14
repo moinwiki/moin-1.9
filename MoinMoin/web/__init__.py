@@ -25,7 +25,7 @@ def _fixup_deps():
             found = True
             break
     if not found:
-        sys.path.append(dirname)
+        sys.path.insert(0, dirname)
 
 try:
     _fixup_deps()
