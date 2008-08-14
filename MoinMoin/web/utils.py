@@ -19,17 +19,6 @@ from MoinMoin.web.exceptions import Forbidden, SurgeProtection
 
 logging = log.getLogger(__name__)
 
-def check_spider(useragent, cfg):
-    """ Simple check if useragent is a spider bot
-
-    @param useragent: werkzeug.useragents.UserAgent
-    @param cfg: wikiconfig instance
-    """
-    is_spider = False
-    if useragent and cfg.cache.ua_spiders:
-        is_spider = cfg.cache.ua_spiders.search(useragent.browser) is not None
-    return is_spider
-
 def check_setuid(request, userobj):
     """ Check for setuid conditions.
     Returns a tuple of either new user and old user
@@ -59,7 +48,7 @@ def check_forbidden(request):
     if ((args or request.method != 'GET') and
         action not in ['rss_rc', 'show', 'sitemap'] and
         not (action == 'AttachFile' and args.get('do') == 'get')):
-        if check_spider(request.user_agent, request.cfg):
+        if request.isSpiderAgent:
             raise Forbidden()
     if request.cfg.hosts_deny:
         remote_addr = request.remote_addr
