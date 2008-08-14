@@ -11,7 +11,7 @@ from werkzeug.exceptions import HTTPException
 
 from MoinMoin.web.contexts import AllContext, Context, XMLRPCContext
 from MoinMoin.web.request import Request, MoinMoinFinish
-from MoinMoin.web.utils import check_forbidden, check_setuid, check_surge_protect, fatal_response
+from MoinMoin.web.utils import check_forbidden, check_surge_protect, fatal_response
 
 from MoinMoin.Page import Page
 from MoinMoin import auth, i18n, user, wikiutil, xmlrpc, error
@@ -37,7 +37,7 @@ def init(request):
     context.session = context.cfg.session_service.get_session(request)
 
     userobj = setup_user(context, context.session)
-    userobj, olduser = check_setuid(context, userobj)
+    userobj, olduser = auth.setup_setuid(context, userobj)
 
     if not userobj:
         userobj = user.User(context, auth_method='request:invalid')

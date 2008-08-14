@@ -308,6 +308,23 @@ def handle_request(request, userobj):
             break
     return userobj
 
+def setup_setuid(request, userobj):
+    """ Check for setuid conditions in the session and setup an user
+    object accordingly. Returns a tuple of the new user objects.
+
+    @param request: a moin request object
+    @param userobj: a moin user object
+    @rtype: boolean
+    @return: (new_user, user) or (user, None)
+    """
+    old_user = None
+    if 'setuid' in request.session and userobj.isSuperUser():
+        old_user = userobj
+        uid = request.session['setuid']
+        userobj = user.User(request, uid, auth_method='setuid')
+        userobj.valid = True
+    return (userobj, old_user)
+
 def setup_from_session(request, session):
     userobj = None
     if 'user.id' in session:

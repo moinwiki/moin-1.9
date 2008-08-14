@@ -19,24 +19,6 @@ from MoinMoin.web.exceptions import Forbidden, SurgeProtection
 
 logging = log.getLogger(__name__)
 
-def check_setuid(request, userobj):
-    """ Check for setuid conditions.
-    Returns a tuple of either new user and old user
-    or just user and None.
-
-    @param request: a moin request object
-    @param userobj: a moin user object
-    @rtype: boolean
-    @return: (new_user, user) or (user, None)
-    """
-    old_user = None
-    if 'setuid' in request.session and userobj.isSuperUser():
-        old_user = userobj
-        uid = request.session['setuid']
-        userobj = user.User(request, uid, auth_method='setuid')
-        userobj.valid = True
-    return (userobj, old_user)
-
 def check_forbidden(request):
     """ Simple action and host access checks
 
