@@ -51,31 +51,44 @@ class Request(WerkzeugRequest, WerkzeugResponse):
     cache_control = WerkzeugResponse.cache_control
 
     def in_cache_control(self):
+        """A `CacheControl` object for the incoming cache control headers."""
         cache_control = self.environ.get('HTTP_CACHE_CONTROL')
         return parse_cache_control_header(cache_control)
     in_cache_control = cached_property(in_cache_control)
 
     def in_headers(self):
+        """The headers from the WSGI environ as immutable `EnvironHeaders`."""
         return EnvironHeaders(self.environ)
     in_headers = cached_property(in_headers, doc=WerkzeugRequest.headers.__doc__)
 
     def in_stream(self):
+        """The parsed stream if the submitted data was not multipart or
+        urlencoded form data.  This stream is the stream left by the CGI
+        module after parsing.  This is *not* the WSGI input stream.
+        """
         if self._data_stream is None:
             self._load_form_data()
         return self._data_stream
     in_stream = property(in_stream, doc=WerkzeugRequest.stream.__doc__)
 
     def in_data(self):
+        """This reads the buffered incoming data from the client into the
+        string.  Usually it's a bad idea to access `data` because a client
+        could send dozens of megabytes or more to cause memory problems on the
+        server.
+        """
         return self.in_stream.read()
     in_data = cached_property(in_data, doc=WerkzeugRequest.data.__doc__)
 
 class TestRequest(Request):
-    """
-    Simple subclass of Request to initialize an environment for testing.
-    """
+    """ Request with customized `environ` for test purposes. """
     def __init__(self, path="/", query_string=None, method='GET',
                  content_type=None, content_length=0, form_data=None,
                  environ_overrides=None):
+        """
+        For parameter reference see the documentation of the werkzeug.utils
+        package, especially the functions `url_encode` and `create_environ`.
+        """
         input_stream = None
 
         if form_data is not None:
@@ -98,17 +111,19 @@ class TestRequest(Request):
 
 def evaluate_request(request):
     """ Evaluate a request and returns a tuple of application iterator,
-    status code and list of headers.
+    status code and list of headers. This method is meant for testing
+    purposes.
     """
-    out = []
-    res = []
+    output = []
+    status_code = None
+    headers_result = None
     def start_response(status, headers, exc_info=None):
-        res.append(status)
-        res.append(headers)
-        return out.append
-    res.insert(0, request(request.environ, start_response))
+        status_code = status
+        headers_result = headers
+        return output.append
+    result = request(request.environ, start_response)
 
     # any output via (WSGI-deprecated) write-callable?
-    if out:
-        res[0] = out
-    return tuple(res)
+    if output:
+        result = output
+    return (result, status_code, headers_result)
