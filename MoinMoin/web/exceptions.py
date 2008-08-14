@@ -2,6 +2,8 @@
 """
     MoinMoin - HTTP exceptions
 
+    Customization of werkzeug.exceptions classes for use in MoinMoin.
+
     @copyright: 2008-2008 MoinMoin:FlorianKrupicka
     @license: GNU GPL, see COPYING for details.
 """
@@ -9,6 +11,11 @@
 from werkzeug import exceptions
 
 class SurgeProtection(exceptions.ServiceUnavailable):
+    """ A surge protection error in MoinMoin is based on the HTTP status
+    `Service Unavailable`. This HTTP exception gives a short description
+    on what triggered the surge protection mechanism to the user.
+    """
+
     name = 'Surge protection'
     description = (
         "<strong>Warning:</strong>"
@@ -27,7 +34,11 @@ class SurgeProtection(exceptions.ServiceUnavailable):
         return headers
 
 class Forbidden(exceptions.Forbidden):
+    """
+    Override the default description of werkzeug.exceptions.Forbidden to a
+    less technical sounding one.
+    """
     description = "<p>You are not allowed to access this!</p>"
 
-class PageNotFound(exceptions.NotFound):
-    pass
+# handy exception raising
+abort = exceptions.abort
