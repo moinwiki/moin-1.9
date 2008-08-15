@@ -259,6 +259,11 @@ class MoinAuth(BaseAuth):
 
 def handle_login(request, userobj=None, username=None, password=None,
                  attended=True, openid_identifier=None, stage=None):
+    """
+    Process a 'login' request by going through the configured authentication
+    methods in turn. The passable keyword arguments are explained in more
+    detail at the top of this file.
+    """
     params = {
         'username': username,
         'password': password,
@@ -292,9 +297,13 @@ def handle_login(request, userobj=None, username=None, password=None,
         if msg and not msg in request._login_messages:
             request._login_messages.append(msg)
 
+        if not cont:
+            break
+
     return userobj
 
 def handle_logout(request, userobj):
+    """ Logout the passed user from every configured authentication method. """
     for authmethod in request.cfg.auth:
         userobj, cont = authmethod.logout(request, userobj, cookie=request.cookies)
         if not cont:
@@ -302,6 +311,7 @@ def handle_logout(request, userobj):
     return userobj
 
 def handle_request(request, userobj):
+    """ Handle the per-request callbacks of the configured authentication methods. """
     for authmethod in request.cfg.auth:
         userobj, cont = authmethod.request(request, userobj, cookie=request.cookies)
         if not cont:
