@@ -30,6 +30,20 @@ Known main issues:
     having made a backup with some other, proven method.
     USE BOTH ON YOUR OWN RISK!
 
+Version 1.7.current:
+  Fixes:
+    * Xapian indexing filters (MoinMoin/filter/ or data/plugin/filter/):
+      Some indexing filter scripts (e.g. for MS Word documents or PDF files)
+      failed on windows because of the single-quote quoting we used (that
+      works on Linux and other Posix systems). The fix introduces platform-
+      dependant automatic quoting, using double-quotes on win32 and single-
+      quotes on posix.
+      HINT: if you use own filter plugins based on execfilter, you have to
+      update them as the filename quoting (was '%s') is now done automatically
+      and must not be part of the command string any more (now just use %s).
+      See MoinMoin/filter/ for some up-to-date code (esp. the PDF filter).
+
+
 Version 1.7.1:
   New features:
     * New 'cache' action (see developer notes).
