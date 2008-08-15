@@ -11,5 +11,5 @@
 from MoinMoin.filter import execfilter
 
 def execute(indexobj, filename):
-    return execfilter("pdftotext -enc UTF-8 '%s' -", filename)
+    return execfilter("pdftotext -enc UTF-8 %s -", filename)
 

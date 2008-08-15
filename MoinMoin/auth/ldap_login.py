@@ -140,7 +140,7 @@ class LDAPAuth(BaseAuth):
                         (ldap.OPT_X_TLS, self.start_tls),
                         #(ldap.OPT_X_TLS_ALLOW, 1),
                     ):
-                        if value:
+                        if value is not None:
                             ldap.set_option(option, value)
 
                 server = self.server_uri
