@@ -210,6 +210,7 @@ class TestDictPageDeletion(object):
         """
         simple test if it is possible to delete a Dict page after creation
         """
+        become_trusted(self.request)
         pagename = u'SomeDict'
         page = PageEditor(self.request, pagename, do_editor_backup=0)
         body = u"This is an example text"
