@@ -3,10 +3,11 @@
     MoinMoin - WSGI middlewares for profiling
 
     These have been ported from server_standalone to provide application
-    profiling for MoinMoin.wsgiapp
+    profiling for a WSGI application.
+
+    TODO: put them back in place, where the old profilers used to be
 
     @copyright: 2008 MoinMoin:FlorianKrupicka,
-
     @license: GNU GPL, see COPYING for details.
 """
 from werkzeug.utils import get_current_url
@@ -15,36 +16,46 @@ from MoinMoin import log
 logging = log.getLogger(__name__)
 
 class ProfilerMiddleware(object):
+    """ Abstract base class for profiling middlewares.
+
+    Concrete implementations of this class should provide implementations
+    of `run_profile` and `shutdown`, the latter which should be called by
+    the code utilizing the profiler.
+    """
     def __init__(self, app):
         self.app = app
 
     def profile(self, environ, start_response):
+        """
+        Profile the request. Exceptions encountered during the profile are
+        logged before being propagated for further handling.
+        """
         method = environ.get('REQUEST_METHOD', 'GET')
         url = get_current_url(environ)
         logging.debug("Profiling call for '%s %s'", method, url)
         try:
             res = self.run_profile(self.app, (environ, start_response))
         except Exception, e:
-            logging.error("Exception while profiling '%s %s': %r",
-                          method, url, e)
+            logging.exception("Exception while profiling '%s %s'", method, url)
             raise
         return res
 
     __call__ = profile
 
     def run_profile(self, app, *args, **kwargs):
-        """ Override in subclasses. Call signature tries to compatible
-        with common profilers .runcall methods.
+        """ Override in subclasses.
+
+        Several profilers available for python use the same call signature,
+        therefore simplifying the implementation.
         """
         raise NotImplementedError()
 
     def shutdown(self):
-        """ Override in subclasses to clean up when server/script
-        shuts down.
-        """
+        """ Override in subclasses to clean up when server/script shuts down. """
         pass
 
 class CProfileMiddleware(ProfilerMiddleware):
+    """ A profiler based on the the cProfile module from the standard lib. """
     def __init__(self, app, filename):
         super(CProfileMiddleware, self).__init__(app)
         import cProfile
@@ -56,6 +67,7 @@ class CProfileMiddleware(ProfilerMiddleware):
         self._profile.dump_stats(self._filename)
 
 class HotshotMiddleware(ProfilerMiddleware):
+    """ A profiler based on the more recent hotshot module from the stdlib. """
     def __init__(self, app, *args, **kwargs):
         super(HotshotMiddleware, self).__init__(app)
         import hotshot
@@ -66,6 +78,8 @@ class HotshotMiddleware(ProfilerMiddleware):
         self._profile.close()
 
 class PycallgraphMiddleware(ProfilerMiddleware):
+    """ A call graphing middleware utilizing the pycallgraph 3rd party
+    module (available at http://pycallgraph.slowchop.com/). """
     def __init__(self, app, filename):
         super(PycallgraphMiddleware, self).__init__(app)
         import pycallgraph
