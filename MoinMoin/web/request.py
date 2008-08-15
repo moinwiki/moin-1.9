@@ -115,15 +115,13 @@ def evaluate_request(request):
     purposes.
     """
     output = []
-    status_code = None
-    headers_result = None
+    headers_set = []
     def start_response(status, headers, exc_info=None):
-        status_code = status
-        headers_result = headers
+        headers_set[:] = [status, headers]
         return output.append
     result = request(request.environ, start_response)
 
     # any output via (WSGI-deprecated) write-callable?
     if output:
         result = output
-    return (result, status_code, headers_result)
+    return (result, headers_set[0], headers_set[1])
