@@ -86,7 +86,7 @@ class TestRealCreation:
 
     def testSearch(self):
         package = PackagePages(self.request.rootpage.page_name, self.request)
-        assert package.searchpackage(self.request, "Bad") == [u'BadContent']
+        assert package.searchpackage(self.request, "BadCon") == [u'BadContent']
 
     def testListCreate(self):
         package = PackagePages(self.request.rootpage.page_name, self.request)

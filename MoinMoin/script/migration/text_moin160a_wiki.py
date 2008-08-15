@@ -113,7 +113,7 @@ class Parser:
         'word_rule': word_rule,
         'smiley': u'|'.join(map(re.escape, config.smileys))}
 
-    # Don't start p before these 
+    # Don't start p before these
     no_new_p_before = ("heading rule table tableZ tr td "
                        "ul ol dl dt dd li li_none indent "
                        "macro parser pre")
@@ -1092,7 +1092,7 @@ class Parser:
                 self.request.write(self._indent_to(indlen, indtype, numtype, numstart))
 
                 # Table mode
-                # TODO: move into function?                
+                # TODO: move into function?
                 if (not self.in_table and line[indlen:indlen + 2] == "||"
                     and line.endswith("|| ") and len(line) >= 5 + indlen):
                     # Start table
