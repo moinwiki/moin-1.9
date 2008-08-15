@@ -170,9 +170,9 @@ class TestConfig:
 
 class MoinTestFunction(py.test.collect.Function):
     def execute(self, target, *args):
-        request = self.parent.request
         co = target.func_code
         if 'request' in co.co_varnames[:co.co_argcount]:
+            request = init_test_request()
             target(request, *args)
         else:
             target(*args)
@@ -183,18 +183,15 @@ class MoinClassCollector(py.test.collect.Class):
 
     def setup(self):
         cls = self.obj
-        cls.request = self.parent.request
-        cls.TestConfig = TestConfig(cls.request)
+        if not hasattr(cls, 'request'):
+            cls.request = init_test_request()
+            cls.TestConfig = TestConfig(cls.request)
         super(MoinClassCollector, self).setup()
 
 
 class Module(py.test.collect.Module):
     Class = MoinClassCollector
     Function = MoinTestFunction
-
-    def __init__(self, *args, **kwargs):
-        self.request = init_test_request()
-        super(Module, self).__init__(*args, **kwargs)
 
     def run(self, *args, **kwargs):
         if coverage is not None:
