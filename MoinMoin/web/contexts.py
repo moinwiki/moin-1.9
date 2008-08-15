@@ -230,9 +230,9 @@ class HTTPMixin(object):
     def isSpiderAgent(self):
         """ Simple check if useragent is a spider bot. """
         cfg = self.cfg
-        useragent = self.request.useragent
-        if useragent and cfg.cache.ua_spiders:
-            return cfg.cache.ua_spiders.search(seluseragent.browser) is not None
+        user_agent = self.request.user_agent
+        if user_agent and cfg.cache.ua_spiders:
+            return cfg.cache.ua_spiders.search(user_agent.browser) is not None
         return False
     isSpiderAgent = EnvironProxy(isSpiderAgent)
 
