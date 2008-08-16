@@ -3,15 +3,14 @@
     MoinMoin - MoinMoin.macro.FootNote Tests
 
     @copyright: 2008 MoinMoin:ReimarBauer
-
     @license: GNU GPL, see COPYING for details.
 """
 import os
+
 from MoinMoin import macro
 from MoinMoin.macro import FootNote
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
-
 from MoinMoin._tests import become_trusted, create_page, make_macro, nuke_page
 
 class TestFootNote:
@@ -33,8 +32,6 @@ class TestFootNote:
         text = 'b'
         FootNote.execute(m, text)
         result = FootNote.emit_footnotes(m.request, m.request.formatter)
-
         assert result.endswith('2</a>)</li></ol></div>')
-
 
 coverage_modules = ['MoinMoin.macro.FootNote']
