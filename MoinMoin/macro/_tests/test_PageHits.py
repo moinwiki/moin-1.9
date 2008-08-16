@@ -3,7 +3,6 @@
     MoinMoin - MoinMoin.macro PageHits tested
 
     @copyright: 2008 MoinMoin:ReimarBauer
-
     @license: GNU GPL, see COPYING for details.
 """
 import os
@@ -23,10 +22,8 @@ class TestHits:
         request = self.request
         become_trusted(request)
         self.page = create_page(request, self.pagename, u"Foo!")
-
         # for that test eventlog needs to be empty
         nuke_eventlog(self.request)
-
         # hits is based on hitcounts which reads the cache
         caching.CacheEntry(request, 'charts', 'pagehits', scope='wiki').remove()
         caching.CacheEntry(request, 'charts', 'hitcounts', scope='wiki').remove()
@@ -44,7 +41,6 @@ class TestHits:
         for counter in range(count):
             eventlog.EventLog(self.request).add(self.request, 'VIEWPAGE', {'pagename': 'PageHits'})
             result = self._test_macro(u'PageHits', u'') # XXX SENSE???
-
         cache = caching.CacheEntry(self.request, 'charts', 'pagehits', scope='wiki', use_pickle=True)
         date, hits = 0, {}
         if cache.exists():
