@@ -12,7 +12,7 @@ from MoinMoin.logfile import eventlog
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.Page import Page
 
-from MoinMoin._tests import become_trusted, create_page, nuke_page
+from MoinMoin._tests import become_trusted, create_page, make_macro, nuke_eventlog, nuke_page
 
 class TestHits:
     """Hits: testing Hits macro """
@@ -24,9 +24,7 @@ class TestHits:
         self.page = create_page(request, self.pagename, u"Foo!")
 
         # for that test eventlog needs to be empty
-        fpath = request.rootpage.getPagePath('event-log', isfile=1)
-        if os.path.exists(fpath):
-            os.remove(fpath)
+        nuke_eventlog(request)
 
         # hits is based on hitcounts which reads the cache
         caching.CacheEntry(request, 'charts', 'hitcounts', scope='wiki').remove()
@@ -34,27 +32,13 @@ class TestHits:
     def teardown_class(self):
         nuke_page(self.request, self.pagename)
 
-    def _make_macro(self):
-        """Test helper"""
-        from MoinMoin.parser.text import Parser
-        from MoinMoin.formatter.text_html import Formatter
-        p = Parser("##\n", self.request)
-        p.formatter = Formatter(self.request)
-        p.formatter.page = self.page
-        self.request.formatter = p.formatter
-        p.form = self.request.form
-        m = macro.Macro(p)
-        return m
-
     def _test_macro(self, name, args):
-        m = self._make_macro()
+        m = make_macro(self.request, self.page)
         return m.execute(name, args)
 
     def _cleanStats(self):
         # cleans all involved cache and log files
-        fpath = self.request.rootpage.getPagePath('event-log', isfile=1)
-        if os.path.exists(fpath):
-            os.remove(fpath)
+        nuke_eventlog(self.request)
         # hits is based on hitcounts which reads the cache
         caching.CacheEntry(self.request, 'charts', 'hitcounts', scope='wiki').remove()
         arena = Page(self.request, self.pagename)

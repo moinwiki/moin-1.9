@@ -12,7 +12,7 @@ from MoinMoin import macro
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
 
-from MoinMoin._tests import become_trusted, create_page, nuke_page
+from MoinMoin._tests import become_trusted, create_page, make_macro, nuke_page
 
 class TestGetVal:
     """GetVal: testing getVal macro """
@@ -25,43 +25,24 @@ class TestGetVal:
     def teardown_class(self):
         nuke_page(self.request, self.pagename)
 
-    def _make_macro(self):
-        """Test helper"""
-        from MoinMoin.parser.text import Parser
-        from MoinMoin.formatter.text_html import Formatter
-        p = Parser("##\n", self.request)
-        p.formatter = Formatter(self.request)
-        p.formatter.page = self.page
-        self.request.formatter = p.formatter
-        p.form = self.request.form
-        m = macro.Macro(p)
-        return m
-
     def _test_macro(self, name, args):
-        m = self._make_macro()
+        m = make_macro(self.request, self.page)
         return m.execute(name, args)
 
     def testGetValNoACLs(self):
         """ macro GetVal test: 'reads VAR' """
-
         self.page = create_page(self.request, self.pagename, u' VAR:: This is an example')
-
         result = self._test_macro(u'GetVal', "%s,%s" % (self.pagename, u'VAR'))
-
         assert result == "This is an example"
 
     def testGetValAfterADictPageIsDeleted(self):
         """ macro GetVal test: 'reads Dict var after another Dict is removed' """
         request = self.request
-
         page = create_page(request, u'SomeDict', u" EXAMPLE:: This is an example text")
         page.deletePage()
-
         page = create_page(request, self.pagename, u' VAR:: This is a brand new example')
         result = self._test_macro(u'GetVal', "%s,%s" % (self.pagename, u'VAR'))
-
         nuke_page(request, u'SomeDict')
-
         assert result == "This is a brand new example"
 
     def testGetValACLs(self):
