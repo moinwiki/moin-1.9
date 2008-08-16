@@ -24,11 +24,11 @@ from MoinMoin.web.exceptions import Forbidden, SurgeProtection
 
 from MoinMoin import log
 logging = log.getLogger(__name__)
-default = object()
+NoDefault = object()
 
 class EnvironProxy(property):
     """ Proxy attribute lookups to keys in the environ. """
-    def __init__(self, name, factory=default):
+    def __init__(self, name, default=NoDefault):
         """
         An entry will be proxied to the supplied name in the .environ
         object of the property holder. A factory can be supplied, for
@@ -36,38 +36,37 @@ class EnvironProxy(property):
         parameter name is taken from the callable too.
 
         @param name: key (or factory for convenience)
-        @param factory: literal object or callable
+        @param default: literal object or callable
         """
         if not isinstance(name, basestring):
-            factory = name
-            name = factory.__name__
-        self.name = name
-        self.full_name = 'moin.%s' % name
-        self.factory = factory
+            default = name
+            name = default.__name__
+        self.name = 'moin.' + name
+        self.default = default
         property.__init__(self, self.get, self.set, self.delete)
 
     def get(self, obj):
-        if self.full_name in obj.environ:
-            res = obj.environ[self.full_name]
+        if self.name in obj.environ:
+            res = obj.environ[self.name]
         else:
-            factory = self.factory
-            if factory is default:
+            factory = self.default
+            if factory is NoDefault:
                 raise AttributeError(self.name)
             elif hasattr(factory, '__call__'):
-                res = obj.environ.setdefault(self.full_name, factory(obj))
+                res = obj.environ.setdefault(self.name, factory(obj))
             else:
-                res = obj.environ.setdefault(self.full_name, factory)
+                res = obj.environ.setdefault(self.name, factory)
         return res
 
     def set(self, obj, value):
-        obj.environ[self.full_name] = value
+        obj.environ[self.name] = value
 
     def delete(self, obj):
-        del obj.environ[self.full_name]
+        del obj.environ[self.name]
 
     def __repr__(self):
         return "<%s for '%s'>" % (self.__class__.__name__,
-                                  self.full_name)
+                                  self.name)
 
 class Context(object):
     """ Standard implementation for the context interface.
@@ -102,15 +101,34 @@ class Context(object):
     def __repr__(self):
         return "<%s %r>" % (self.__class__.__name__, self.personalities)
 
-class UserMixin(object):
-    """ Mixin for user attributes and methods. """
-    def user(self):
-        return user.User(self, auth_method='request:invalid')
-    user = EnvironProxy(user)
+class BaseContext(Context):
+    """ Implements a basic context, that provides some common attributes.
+    Most attributes are lazily initialized via descriptors. """
 
-class LanguageMixin(object):
-    """ Mixin for language attributes and methods. """
+    # first the trivial attributes
+    action = EnvironProxy('action', lambda o: o.request.values.get('action', 'show'))
+    clock = EnvironProxy('clock', lambda o: Clock())
+    user = EnvironProxy('user', lambda o: user.User(o, auth_method='request:invalid'))
+
     lang = EnvironProxy('lang')
+    content_lang = EnvironProxy('content_lang', lambda o: o.cfg.language_default)
+    current_lang = EnvironProxy('current_lang')
+
+    html_formatter = EnvironProxy('html_formatter', lambda o: text_html.Formatter(o))
+    formatter = EnvironProxy('formatter', lambda o: o.html_formatter)
+
+    page = EnvironProxy('page', None)
+
+    # now the more complex factories
+    def cfg(self):
+        try:
+            self.clock.start('load_multi_cfg')
+            cfg = multiconfig.getConfig(self.request.url)
+            self.clock.stop('load_multi_cfg')
+            return cfg
+        except error.NoConfigMatchedError:
+            raise NotFound('<p>No wiki configuration matching the URL found!</p>')
+    cfg = EnvironProxy(cfg)
 
     def getText(self):
         lang = self.lang
@@ -121,11 +139,33 @@ class LanguageMixin(object):
     getText = property(getText)
     _ = getText
 
-    def content_lang(self):
-        return self.cfg.language_default
-    content_lang = EnvironProxy(content_lang)
-    current_lang = EnvironProxy('current_lang')
+    def isSpiderAgent(self):
+        """ Simple check if useragent is a spider bot. """
+        cfg = self.cfg
+        user_agent = self.request.user_agent
+        if user_agent and cfg.cache.ua_spiders:
+            return cfg.cache.ua_spiders.search(user_agent.browser) is not None
+        return False
+    isSpiderAgent = EnvironProxy(isSpiderAgent)
 
+    def rootpage(self):
+        from MoinMoin.Page import RootPage
+        return RootPage(self)
+    rootpage = EnvironProxy(rootpage)
+
+    def rev(self):
+        try:
+            return int(self.values['rev'])
+        except:
+            return None
+    rev = EnvironProxy(rev)
+
+    def _theme(self):
+        self.initTheme()
+        return self.theme
+    theme = EnvironProxy('theme', _theme)
+
+    # finally some methods to act on those attributes
     def setContentLanguage(self, lang):
         """ Set the content language, used for the content div
 
@@ -136,15 +176,26 @@ class LanguageMixin(object):
         self.content_lang = lang
         self.current_lang = lang
 
+    def initTheme(self):
+        """ Set theme - forced theme, user theme or wiki default """
+        if self.cfg.theme_force:
+            theme_name = self.cfg.theme_default
+        else:
+            theme_name = self.user.theme_name
+        load_theme_fallback(self, theme_name)
 
-class HTTPMixin(object):
-    """ Mixin for HTTP attributes and methods. """
-    forbidden = EnvironProxy('old.forbidden', 0)
+
+class HTTPContext(BaseContext):
+    """ Context that holds attributes and methods for manipulation of
+    incoming and outgoing HTTP data. """
+
     session = EnvironProxy('session')
-
     _auth_redirected = EnvironProxy('old._auth_redirected', 0)
     cacheable = EnvironProxy('old.cacheable', 0)
+    writestack = EnvironProxy('old.writestack', lambda o: list())
 
+    # proxy some descriptors of the underlying WSGI request, since
+    # setting on those does not work over __(g|s)etattr__-proxies
     class _proxy(property):
         def __init__(self, name):
             self.name = name
@@ -163,24 +214,14 @@ class HTTPMixin(object):
 
     del _proxy
 
-    def write(self, *data):
-        """ Write to output stream. """
-        self.request.stream.writelines(data)
+    # proxy further attribute lookups to the underlying request first
+    def __getattr__(self, name):
+        try:
+            return getattr(self.request, name)
+        except AttributeError, e:
+            return super(HTTPContext, self).__getattribute__(name)
 
-    # implementation of methods expected by RequestBase
-    def send_file(self, fileobj, bufsize=8192, do_flush=None):
-        """ Send a file to the output stream.
-
-        @param fileobj: a file-like object (supporting read, close)
-        @param bufsize: size of chunks to read/write
-        @param do_flush: call flush after writing?
-        """
-        def simple_wrapper(fileobj, bufsize):
-            return iter(lambda: fileobj.read(bufsize), '')
-        file_wrapper = self.environ.get('wsgi.file_wrapper', simple_wrapper)
-        self.request.response = file_wrapper(fileobj, bufsize)
-        raise MoinMoinFinish('sent file')
-
+    # methods regarding manipulation of HTTP related data
     def read(self, n=None):
         """ Read n bytes (or everything) from input stream. """
         if n is None:
@@ -227,70 +268,59 @@ class HTTPMixin(object):
         """ Raise a simple redirect exception. """
         abort(redirect(url))
 
-    def isSpiderAgent(self):
-        """ Simple check if useragent is a spider bot. """
-        cfg = self.cfg
-        user_agent = self.request.user_agent
-        if user_agent and cfg.cache.ua_spiders:
-            return cfg.cache.ua_spiders.search(user_agent.browser) is not None
-        return False
-    isSpiderAgent = EnvironProxy(isSpiderAgent)
+    # the output related methods
+    def write(self, *data):
+        """ Write to output stream. """
+        self.request.stream.writelines(data)
 
-class ActionMixin(object):
-    """ Mixin for the action related attributes. """
-    def action(self):
-        return self.request.values.get('action', 'show')
-    action = EnvironProxy(action)
-
-    def rev(self):
+    def redirectedOutput(self, function, *args, **kw):
+        """ Redirect output during function, return redirected output """
+        buf = StringIO.StringIO()
+        self.redirect(buf)
         try:
-            return int(self.values['rev'])
-        except:
-            return None
-    rev = EnvironProxy(rev)
+            function(*args, **kw)
+        finally:
+            self.redirect()
+        text = buf.getvalue()
+        buf.close()
+        return text
 
-class ConfigMixin(object):
-    """ Mixin for the everneeded config object. """
-    def cfg(self):
-        try:
-            self.clock.start('load_multi_cfg')
-            cfg = multiconfig.getConfig(self.request.url)
-            self.clock.stop('load_multi_cfg')
-            return cfg
-        except error.NoConfigMatchedError:
-            raise NotFound('<p>No wiki configuration matching the URL found!</p>')
-    cfg = EnvironProxy(cfg)
+    def redirect(self, file=None):
+        """ Redirect output to file, or restore saved output """
+        if file:
+            self.writestack.append(self.write)
+            self.write = file.write
+        else:
+            self.write = self.writestack.pop()
 
-class FormatterMixin(object):
-    """ Mixin for the standard formatter attributes. """
-    def html_formatter(self):
-        return text_html.Formatter(self)
-    html_formatter = EnvironProxy(html_formatter)
+    def send_file(self, fileobj, bufsize=8192, do_flush=None):
+        """ Send a file to the output stream.
 
-    def formatter(self):
-        return self.html_formatter
-    formatter = EnvironProxy(formatter)
-
-class PageMixin(object):
-    """ Mixin for ondemand rootpage. """
-    page = EnvironProxy('page', None)
-    def rootpage(self):
-        from MoinMoin.Page import RootPage
-        return RootPage(self)
-    rootpage = EnvironProxy(rootpage)
+        @param fileobj: a file-like object (supporting read, close)
+        @param bufsize: size of chunks to read/write
+        @param do_flush: call flush after writing?
+        """
+        def simple_wrapper(fileobj, bufsize):
+            return iter(lambda: fileobj.read(bufsize), '')
+        file_wrapper = self.environ.get('wsgi.file_wrapper', simple_wrapper)
+        self.request.response = file_wrapper(fileobj, bufsize)
+        raise MoinMoinFinish('sent file')
 
 class AuxilaryMixin(object):
     """
     Mixin for diverse attributes and methods that aren't clearly assignable
     to a particular phase of the request.
     """
+
+    # several attributes used by other code to hold state across calls
     _fmt_hd_counters = EnvironProxy('_fmt_hd_counters')
     parsePageLinks_running = EnvironProxy('parsePageLinks_running', lambda o: {})
     mode_getpagelinks = EnvironProxy('mode_getpagelinks', 0)
-    clock = EnvironProxy('clock', lambda o: Clock())
+
     pragma = EnvironProxy('pragma', lambda o: {})
     _login_messages = EnvironProxy('_login_messages', lambda o: [])
     _login_multistage = EnvironProxy('_login_multistage', None)
+    _login_multistage_name = EnvironProxy('_login_multistage_name', None)
     _setuid_real_user = EnvironProxy('_setuid_real_user', None)
     pages = EnvironProxy('pages', lambda o: {})
 
@@ -330,66 +360,10 @@ class AuxilaryMixin(object):
         """
         self.pragma[key.lower()] = value
 
-class ThemeMixin(object):
-    """ Mixin for the theme attributes and methods. """
-    def _theme(self):
-        self.initTheme()
-        return self.theme
-    theme = EnvironProxy('theme', _theme)
-
-    def initTheme(self):
-        """ Set theme - forced theme, user theme or wiki default """
-        if self.cfg.theme_force:
-            theme_name = self.cfg.theme_default
-        else:
-            theme_name = self.user.theme_name
-        load_theme_fallback(self, theme_name)
-
-class RedirectMixin(object):
-    """ Mixin to redirect output into buffers instead to the client. """
-    writestack = EnvironProxy('old.writestack', lambda o: list())
-
-    def redirectedOutput(self, function, *args, **kw):
-        """ Redirect output during function, return redirected output """
-        buf = StringIO.StringIO()
-        self.redirect(buf)
-        try:
-            function(*args, **kw)
-        finally:
-            self.redirect()
-        text = buf.getvalue()
-        buf.close()
-        return text
-
-    def redirect(self, file=None):
-        """ Redirect output to file, or restore saved output """
-        if file:
-            self.writestack.append(self.write)
-            self.write = file.write
-        else:
-            self.write = self.writestack.pop()
-
-class HTTPContext(Context, HTTPMixin, ConfigMixin, UserMixin,
-                  LanguageMixin, AuxilaryMixin):
-    """ Context to act mainly in HTTP handling related phases. """
-    def __getattr__(self, name):
-        try:
-            return getattr(self.request, name)
-        except AttributeError, e:
-            return super(HTTPContext, self).__getattribute__(name)
-
-class RenderContext(Context, RedirectMixin, ConfigMixin, UserMixin,
-                    LanguageMixin, ThemeMixin, AuxilaryMixin,
-                    ActionMixin, PageMixin, FormatterMixin):
-    """ Context to act during the rendering phase. """
-    def write(self, *data):
-        self.request.stream.writelines(data)
-
-# TODO: extend xmlrpc context
-class XMLRPCContext(HTTPContext, PageMixin):
+class XMLRPCContext(HTTPContext, AuxilaryMixin):
     """ Context to act during a XMLRPC request. """
 
-class AllContext(HTTPContext, RenderContext):
+class AllContext(HTTPContext, AuxilaryMixin):
     """ Catchall context to be able to quickly test old Moin code. """
 
 class ScriptContext(AllContext):
