@@ -4,10 +4,8 @@
 
     @copyright: 2008 MoinMoin:ReimarBauer,
                 2008 MoinMoin:JohannesBerg
-
     @license: GNU GPL, see COPYING for details.
 """
-
 import py
 
 from MoinMoin import macro
@@ -22,10 +20,8 @@ class TestEmbedObject:
     def setup_class(self):
         request = self.request
         pagename = self.pagename
-
         become_trusted(request)
         self.page = create_page(request, pagename, u"Foo")
-
         AttachFile.getAttachDir(request, pagename)
         test_files = [
             ('test.ogg', 'vorbis'),

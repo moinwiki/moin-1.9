@@ -3,11 +3,12 @@
     MoinMoin - some common code for testing
 
     @copyright: 2007 MoinMoin:KarolNowak,
-                2008 MoinMoin:ThomasWaldmann
+                2008 MoinMoin:ThomasWaldmann, MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 
 import os, shutil
+
 from MoinMoin.parser.text import Parser
 from MoinMoin.formatter.text_html import Formatter
 from MoinMoin.Page import Page
@@ -114,5 +115,3 @@ def make_macro(request, page):
     p.form = request.form
     m = macro.Macro(p)
     return m
-
-

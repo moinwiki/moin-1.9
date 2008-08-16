@@ -3,7 +3,6 @@
     MoinMoin - MoinMoin.macro StatsChart tested
 
     @copyright: 2008 MoinMoin:ReimarBauer
-
     @license: GNU GPL, see COPYING for details.
 """
 import os
