@@ -3,7 +3,6 @@
     MoinMoin - MoinMoin.macro GetVal tested
 
     @copyright: 2007 MoinMoin:ReimarBauer
-
     @license: GNU GPL, see COPYING for details.
 """
 import os, py
@@ -11,7 +10,6 @@ import os, py
 from MoinMoin import macro
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
-
 from MoinMoin._tests import become_trusted, create_page, make_macro, nuke_page
 
 class TestGetVal:

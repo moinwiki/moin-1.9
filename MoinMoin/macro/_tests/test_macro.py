@@ -30,6 +30,5 @@ class TestMacro:
         result = m.execute("BR", "")
         assert result == expected
 
-
 coverage_modules = ['MoinMoin.macro']
 
