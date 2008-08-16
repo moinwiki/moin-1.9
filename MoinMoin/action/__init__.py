@@ -243,7 +243,6 @@ def do_show(pagename, request, content_only=0, count_hit=1, cacheable=1, print_m
     if not request.user.may.read(pagename):
         Page(request, pagename).send_page()
     else:
-        from MoinMoin.web.contexts import HTTPContext, RenderContext
         mimetype = request.values.get('mimetype', u"text/html")
         rev = request.rev or 0
         if rev == 0:
