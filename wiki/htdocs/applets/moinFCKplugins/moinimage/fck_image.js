@@ -168,7 +168,7 @@ function Ok()
         oLink.src = sSrc;
     } else
     {
-    if (oLink) FCK.ExecuteNamedCommand('Unlink');
+      if (oLink) FCK.ExecuteNamedCommand('Unlink');
     }
   }
   oImage.src = sSrc;
