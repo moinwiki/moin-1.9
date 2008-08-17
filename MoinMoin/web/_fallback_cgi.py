@@ -1,6 +1,13 @@
-# Taken from <http://www.python.org/dev/peps/pep-0333/>
-# which was placed in the public domain.
+# -*- coding: iso-8859-1 -*-
+"""
+    MoinMoin - Fallback CGI WSGI interface
 
+    Provide a simple WSGI-to-CGI adapter in case flup is not available.
+    It is taken from http://www.python.org/dev/peps/pep-0333/.
+
+    @copyright: 2003-2006 Phillip J. Eby <pje at telecommunity.com>
+    @license: Public Domain
+"""
 import os, sys
 
 
