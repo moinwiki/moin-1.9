@@ -2,7 +2,10 @@
 """
     MoinMoin - WSGI session handling
 
-    Session handling
+    To provide sessions, the MoinMoin WSGI application interacts with an
+    object implementing the `SessionService` API. The interface is quite
+    straight forward. For documentation of the expected methods, refer
+    to the documentation of `SessionService` in this module.
 
     @copyright: 2008 MoinMoin:FlorianKrupicka
     @license: GNU GPL, see COPYING for details.
@@ -37,18 +40,20 @@ class SessionService(object):
 
     def finalize(self, request, session):
         """
-        Do final modifications to the request and/or session before sending
-        headers and body to the cliebt.
+        If the service needs to do anything to the session and/or request,
+        before it is sent back to the client, he can chose to do so here.
+        Typical examples would be setting cookies for the client.
         """
         raise NotImplementedError
 
 class FileSessionService(SessionService):
     """
     This sample session service stores session information in a temporary
-    directory and identifis the session via a cookie in the request/response
-    cycle.
+    directory and identifies the session via a cookie in the request/response
+    cycle. It is based on werkzeug's FilesystemSessionStore, that implements
+    the whole logic for creating the actual session objects (which are
+    inherited from the builtin `dict`)
     """
-
     def __init__(self, cookie_name='MOIN_SESSION'):
         self.store = FilesystemSessionStore(session_class=MoinSession)
         self.cookie_name = cookie_name
