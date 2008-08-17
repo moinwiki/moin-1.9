@@ -419,7 +419,6 @@ FCKSelection.CheckForNodeNames = function(pattern)
     oElement = oElement.parentNode;
   }
 
-
   if (FCKSelection.IsCollapsed()) 
   {
     return 0;

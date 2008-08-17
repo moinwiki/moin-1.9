@@ -6,7 +6,9 @@ MoinUnlink.prototype = new FCKNamedCommand('Unlink');
 
 MoinUnlink.prototype.Execute = function()
 {
-  if (0) // code for selection debugging
+  /*
+  // code for selection debugging
+  if (0) 
   {
     var oStart = FCKSelection.GetStartNode()
     var sStart = ""
@@ -34,6 +36,7 @@ MoinUnlink.prototype.Execute = function()
 	  "Type:" + FCKSelection.GetType());
     return
   }
+  */
 
   if(FCKSelection.GetType()=='Control')
   {
@@ -42,13 +45,15 @@ MoinUnlink.prototype.Execute = function()
   else //if (FCK.GetNamedCommandState("Unlink")==FCK_TRISTATE_ON)
   {
     if (FCKSelection.IsCollapsed()) 
-      {
-	FCKSelection.SelectNode(FCKSelection.MoveToAncestorNode('A'));
-      }
+    {
+      FCKSelection.SelectNode(FCKSelection.MoveToAncestorNode('A'));
+    }
+
     var sText = FCKSelection.GetText();
-    //alert("'" + sText + "'");
+
     FCK.ExecuteNamedCommand('Unlink');
     FCKSelection.Collapse();
+
     if (word_rule.test(sText))
     {
       FCK.InsertHtml('<span style="background-color:#ffff11">!</span>');
@@ -59,4 +64,3 @@ MoinUnlink.prototype.Execute = function()
 //MoinUnlink.prototype.GetState = function(){return FCK_TRISTATE_OFF}
 
 FCKCommands.RegisterCommand('Unlink', new MoinUnlink());
-

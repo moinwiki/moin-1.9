@@ -349,4 +349,3 @@ function SetUrl(url)
   document.getElementById('txtUrl').value = url;
   OnUrlChange();
 }
-
