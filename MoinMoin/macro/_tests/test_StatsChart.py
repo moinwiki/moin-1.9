@@ -3,7 +3,6 @@
     MoinMoin - MoinMoin.macro StatsChart tested
 
     @copyright: 2008 MoinMoin:ReimarBauer
-
     @license: GNU GPL, see COPYING for details.
 """
 import os
@@ -12,7 +11,7 @@ from MoinMoin import caching, macro
 from MoinMoin.logfile import eventlog
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.Page import Page
-from MoinMoin._tests import become_trusted, create_page, nuke_page
+from MoinMoin._tests import become_trusted, create_page, make_macro, nuke_page
 
 class TestStatsCharts:
     """StartsChart: testing StatsChart macro """
@@ -28,21 +27,8 @@ class TestStatsCharts:
     def teardown_class(self):
         nuke_page(self.request, self.pagename)
 
-    def _make_macro(self):
-        """Test helper"""
-        from MoinMoin.parser.text import Parser
-        from MoinMoin.formatter.text_html import Formatter
-        p = Parser("##\n", self.request)
-        p.formatter = Formatter(self.request)
-        p.formatter.page = self.page
-        self.request.page = self.page
-        self.request.formatter = p.formatter
-        p.form = self.request.form
-        m = macro.Macro(p)
-        return m
-
     def _test_macro(self, name, args):
-        m = self._make_macro()
+        m = make_macro(self.request, self.page)
         return m.execute(name, args)
 
     def testStatsChart_useragents(self):

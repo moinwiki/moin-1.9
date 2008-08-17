@@ -4,12 +4,15 @@
 
     Depends on: antiword command from antiword package
 
-    @copyright: 2006 MoinMoin:ThomasWaldmann
+    @copyright: 2006-2008 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
 from MoinMoin.filter import execfilter
 
 def execute(indexobj, filename):
-    return execfilter("HOME=/tmp antiword '%s'", filename) # no HOME makes antiword complain
+    cmd = "antiword %s"
+    if os.name == 'posix':
+        cmd = "HOME=/tmp " + cmd  # no HOME makes antiword complain (on Linux)
+    return execfilter(cmd, filename)
 

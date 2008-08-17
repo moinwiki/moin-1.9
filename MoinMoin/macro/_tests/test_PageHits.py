@@ -3,7 +3,6 @@
     MoinMoin - MoinMoin.macro PageHits tested
 
     @copyright: 2008 MoinMoin:ReimarBauer
-
     @license: GNU GPL, see COPYING for details.
 """
 import os
@@ -13,7 +12,7 @@ from MoinMoin.logfile import eventlog
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.Page import Page
 
-from MoinMoin._tests import become_trusted, create_page, nuke_page
+from MoinMoin._tests import become_trusted, create_page, make_macro, nuke_eventlog, nuke_page
 
 class TestHits:
     """Hits: testing Hits macro """
@@ -23,12 +22,8 @@ class TestHits:
         request = self.request
         become_trusted(request)
         self.page = create_page(request, self.pagename, u"Foo!")
-
         # for that test eventlog needs to be empty
-        fpath = request.rootpage.getPagePath('event-log', isfile=1)
-        if os.path.exists(fpath):
-            os.remove(fpath)
-
+        nuke_eventlog(self.request)
         # hits is based on hitcounts which reads the cache
         caching.CacheEntry(request, 'charts', 'pagehits', scope='wiki').remove()
         caching.CacheEntry(request, 'charts', 'hitcounts', scope='wiki').remove()
@@ -36,20 +31,8 @@ class TestHits:
     def teardown_class(self):
         nuke_page(self.request, self.pagename)
 
-    def _make_macro(self):
-        """Test helper"""
-        from MoinMoin.parser.text import Parser
-        from MoinMoin.formatter.text_html import Formatter
-        p = Parser("##\n", self.request)
-        p.formatter = Formatter(self.request)
-        p.formatter.page = self.page
-        self.request.formatter = p.formatter
-        p.form = self.request.form
-        m = macro.Macro(p)
-        return m
-
     def _test_macro(self, name, args):
-        m = self._make_macro()
+        m = make_macro(self.request, self.page)
         return m.execute(name, args)
 
     def testPageHits(self):
@@ -58,7 +41,6 @@ class TestHits:
         for counter in range(count):
             eventlog.EventLog(self.request).add(self.request, 'VIEWPAGE', {'pagename': 'PageHits'})
             result = self._test_macro(u'PageHits', u'') # XXX SENSE???
-
         cache = caching.CacheEntry(self.request, 'charts', 'pagehits', scope='wiki', use_pickle=True)
         date, hits = 0, {}
         if cache.exists():
