@@ -82,6 +82,8 @@ function OnProtocolChange()
 { 
   var sProtocol = GetE('cmbLinkProtocol').value;
   ShowE('divChkLink', (sProtocol!='attachment:' && sProtocol!='drawing:'));
+  // select first text input element of dialog for usability
+  SelectField('txtUrl');
 }
 
 //#### Called while the user types the URL.
