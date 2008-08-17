@@ -6,8 +6,8 @@
  */
 var RestrictedNamedCommand = function(commandName, forbidden)
 {
- this.Name = commandName;
- this.forbidden = forbidden;
+  this.Name = commandName;
+  this.forbidden = forbidden;
 }
 
 RestrictedNamedCommand.prototype = new FCKNamedCommand();
@@ -53,11 +53,10 @@ RestrictedUniqueNamedFormat.prototype.Execute = function()
  *  extends FCKFormatBlockCommand
  * #######################################################
  */
-
 var RestrictedFormatBlockCommand = function(forbidden)
 {
- this.Name = 'FormatBlock' ;
- this.forbidden = forbidden;
+  this.Name = 'FormatBlock' ;
+  this.forbidden = forbidden;
 }
 
 RestrictedFormatBlockCommand.prototype = new FCKFormatBlockCommand();
@@ -121,10 +120,11 @@ RestrictedStyleCommand.prototype.Execute = function(styleName, styleComboItem )
   {
     if (styleName == "Typewriter")
       FCK.ExecuteNamedCommand('RemoveFormat');
+
     styleComboItem.Style.ApplyToSelection() ;
   }
-  FCK.Focus() ;        
-  FCK.Events.FireEvent( "OnSelectionChange" ) ;
+  FCK.Focus();
+  FCK.Events.FireEvent( "OnSelectionChange" );
 }
 
 /* ####################################################################
@@ -134,7 +134,8 @@ RestrictedStyleCommand.prototype.Execute = function(styleName, styleComboItem )
 
 var StyleButtonCommand = function(stylename, unique)
 {
-  this.style = FCK.Styles.GetStyle(stylename);   // using FCK.Style instead of fckstylesloader
+  // using FCK.Style instead of fckstylesloader
+  this.style = FCK.Styles.GetStyle(stylename);
   this.unique = unique;
 }
 
@@ -267,11 +268,11 @@ FCKToolbarItems.RegisterItem('Table', new FCKToolbarButton
 */
 
 FCKToolbarItems.RegisterItem('Big', new FCKToolbarButton
-			     ('Big', 'Big>', 'Big', 
-			      FCK_TOOLBARITEM_ONLYICON, false, true));
-FCKToolbarItems.RegisterItem('Small', new FCKToolbarButton
-			     ('Small', 'Small', 'Small', 
-			      FCK_TOOLBARITEM_ONLYICON, false, true));
-FCKToolbarItems.RegisterItem('Typewriter', new FCKToolbarButton
-			     ('Typewriter', 'Typewriter', 'Typewriter', 
-			      FCK_TOOLBARITEM_ONLYICON, false, true));
+           ('Big', 'Big>', 'Big', 
+            FCK_TOOLBARITEM_ONLYICON, false, true));
+  FCKToolbarItems.RegisterItem('Small', new FCKToolbarButton
+           ('Small', 'Small', 'Small', 
+            FCK_TOOLBARITEM_ONLYICON, false, true));
+  FCKToolbarItems.RegisterItem('Typewriter', new FCKToolbarButton
+           ('Typewriter', 'Typewriter', 'Typewriter', 
+            FCK_TOOLBARITEM_ONLYICON, false, true));
