@@ -2,6 +2,22 @@
 """
     MoinMoin - Flup based WSGI adapters
 
+    This module provides adapters between popular gateway interfaces
+    like CGI, FastCGI, SCGI and AJP to the MoinMoin WSGI application.
+    They are based on the adapters in the flup package and upon the
+    MoinMoin.frontend.ServerFrontEnd to provide configuration via
+    command line switches.
+
+    Typically they are simply run from the CGI-scripts like this:
+
+    > from MoinMoin.web.flup_frontend import CGIFrontEnd
+    > CGIFrontEnd().run()
+
+    They automatically parse the options given on the commandline and
+    behave accordingly. Flup makes it possible to serve FCGI, SCGI and
+    AJP from a bound network or unix socket, in different flavours of
+    multiprocessing/multithreading.
+
     @copyright: 2008 MoinMoin:FlorianKrupicka
     @license: GNU GPL, see COPYING for details.
 """
