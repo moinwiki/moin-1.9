@@ -947,8 +947,11 @@ class convert_tree(visitor):
                     # get longest pre tag({{{ or }}}) from content
                     delimiters.extend(re.compile("((?u){+)").findall(i.data))
                     delimiters.extend(re.compile("((?u)}+)").findall(i.data))
-                    # to remove useless line start iteration second line of i.data
-                    for line in i.data.rstrip().split('\n')[1:]:
+                    # when first line is empty, start iteration second line of i.data
+                    data_lines = i.data.rstrip().split('\n')
+                    if data_lines[0].strip() == '':
+                        data_lines = data_lines[1:]
+                    for line in data_lines:
                         if line.strip().startswith('#!'):
                             if bang_args == '':
                                 bang_args = line.strip()
