@@ -13,14 +13,13 @@
 
 import Cookie
 
-from werkzeug.utils import cookie_date
-
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
 from MoinMoin import caching
 from MoinMoin.user import User
 from MoinMoin.util import random_string
+from MoinMoin.web.utils import cookie_date
 import time, random
 
 class SessionData(object):

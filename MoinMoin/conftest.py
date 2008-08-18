@@ -25,8 +25,6 @@ import sys
 
 import py
 
-from werkzeug.test import Client
-
 rootdir = py.magic.autopath().dirpath()
 moindir = rootdir.join("..")
 
@@ -37,7 +35,7 @@ modules["unittest"] = compat # evil hack
 sys.path.insert(0, str(moindir.join("tests")))
 
 from MoinMoin.support.python_compatibility import set
-from MoinMoin.web.request import TestRequest
+from MoinMoin.web.request import TestRequest, Client
 from MoinMoin.wsgiapp import application, init
 
 coverage_modules = set()

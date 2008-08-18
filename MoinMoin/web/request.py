@@ -13,7 +13,8 @@ from werkzeug.wrappers import Request as WerkzeugRequest
 from werkzeug.wrappers import Response as WerkzeugResponse
 from werkzeug.utils import EnvironHeaders, cached_property, Href
 from werkzeug.utils import create_environ, url_encode
-from werkzeug.http import parse_cache_control_header
+from werkzeug.http import parse_cache_control_header, HeaderSet
+from werkzeug.test import Client
 
 from MoinMoin import config
 

@@ -6,13 +6,11 @@
                 2008-2008 MoinMoin:FlorianKrupicka
     @license: GNU GPL, see COPYING for details.
 """
-from werkzeug.http import HeaderSet
-from werkzeug.exceptions import HTTPException
-
 from MoinMoin.web.contexts import AllContext, Context, XMLRPCContext
-from MoinMoin.web.request import Request, MoinMoinFinish
-from MoinMoin.web.utils import check_forbidden, check_surge_protect, fatal_response
-
+from MoinMoin.web.exceptions import HTTPException
+from MoinMoin.web.request import Request, MoinMoinFinish, HeaderSet
+from MoinMoin.web.utils import check_forbidden, check_surge_protect, fatal_response, \
+    redirect_last_visited
 from MoinMoin.Page import Page
 from MoinMoin import auth, i18n, user, wikiutil, xmlrpc, error
 from MoinMoin.action import get_names, get_available_actions
@@ -114,7 +112,7 @@ def dispatch(request, context, action_name='show'):
     # Handle request. We have these options:
     # 1. jump to page where user left off
     if not pagename and context.user.remember_last_visit and action_name == 'show':
-        response = handle_last_visit(context)
+        response = redirect_last_visited(context)
     # 2. handle action
     else:
         response = handle_action(context, pagename, action_name)
@@ -143,7 +141,7 @@ def handle_action(context, pagename, action_name='show'):
             page = Page(context, pagename)
             if page.exists():
                 url = page.url(context)
-                return abort(redirect(url))
+                return context.http_redirect(url)
 
     msg = None
     # Complain about unknown actions
@@ -230,23 +228,6 @@ def setup_i18n_postauth(context):
         return user.language
     else:
         return context.lang
-
-def handle_last_visit(request, context):
-    """ Redirect to last visited page (or frontpage) on missing pagename. """
-    pagetrail = context.user.getTrail()
-    if pagetrail:
-        # Redirect to last page visited
-        last_visited = pagetrail[-1]
-        wikiname, pagename = wikiutil.split_interwiki(last_visited)
-        if wikiname != 'Self':
-            wikitag, wikiurl, wikitail, error = wikiutil.resolve_interwiki(context, wikiname, pagename)
-            url = wikiurl + wikiutil.quoteWikinameURL(wikitail)
-        else:
-            url = Page(context, pagename).url(context)
-    else:
-        # Or to localized FrontPage
-        url = wikiutil.getFrontPage(context).url(context)
-    return abort(redirect(url))
 
 def application(environ, start_response):
     try:
