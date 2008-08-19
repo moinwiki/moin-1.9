@@ -29,7 +29,41 @@ Known main issues:
 Version 1.8.0current:
 
   Bug Fixes:
-    * ...
+    * GUI Editor - fixed bugs:
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorExtendsAnchorsToThePageName
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorIndentingChangedForTables
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorIndentStyledText
+     * Fixed MoinMoin:MoinMoinBugs/GUIEditorConvertsRelativeLinkstoAbsoluteAfterChangingAnExistingLink
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorDestroysParserSyntax
+     * Fixed MoinMoin:MoinMoinBugs/GUIEditorConvertsRelativeLinkstoAbsolute
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorCantCancel
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorRemovesInlineComments
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorPasteFromWordError
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorPasteFromOpenOfficeCausingConvertError
+     * Fixed MoinMoin:MoinMoinBugs/GUIDoesNotChangeLinks
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorTabsCausesConvertError
+     * Fixed MoinMoin:MoinMoinBugs/1.6devGuiPreviewEatsTextBeforeMacro
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorAddingACellDestroysTable
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorBreaksTables
+     * Fixed MoinMoin:MoinMoinBugs/GUIEditorInsertsInvalidLinkInFirefox3
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorExcelPasteProblem
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorExpatErrorWhenPastingTable
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorFailsOnAttachmentsToOtherPage
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorHorizontalLine
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorLineBreak
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorLineBreakInLists
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorLinkContainsJavaScript
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorLosesEmptyLinesInFirefox1.5
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorPasteFromWordCausingConvertError
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorPreviewDataLoss
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorTableOfContentsIncomplete
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorUnusableAfterThemeChange
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorCorruptingNonWikiPages
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorInterwikiLinksMiss"wiki%3A"prefix 
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorExcelPasteUnboundPrefix
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorFormatDropdownCrashesIE
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorWordsGetJoinedTogether
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorShouldWorkOnSyntaxReference
 
   Removed Features:
     * url_prefix setting
@@ -38,7 +72,11 @@ Version 1.8.0current:
     * backup action and associated settings
 
   New Features:
+    * GUI Editor:
+      * upgraded to use FCKEditor version 2.6.3 (current version)
+      * user can insert and modify various types of MoinMoin links
     * per-parser quickhelp, 'quickhelp' class variable of parser class
+
 
 Version 1.7.current:
   Fixes:
