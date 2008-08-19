@@ -788,6 +788,67 @@ test
 """
         self.do(test, output)
 
+    def testPreSuccess10(self):
+        test = ur"""
+ * {{{{
+{{{
+test
+}}}
+}}}}
+
+"""
+        output = ur"""
+<ul>
+<li>
+<pre>
+{{{
+test
+}}}
+</pre>
+</li>
+</ul>
+"""
+
+    def testPreSuccess11(self):
+        test = ur"""
+ * {{{{
+test
+}}}
+}}}}
+
+"""
+        output = ur"""
+<ul>
+<li>
+<pre>
+test
+}}}
+</pre>
+</li>
+</ul>
+"""
+
+    def testPreSuccess12(self):
+        test = ur"""
+ * {{{{
+{{{
+test
+}}}}
+
+"""
+        output = ur"""
+<ul>
+<li>
+<pre>
+{{{
+test
+</pre>
+</li>
+</ul>
+"""
+
+        self.do(test, output)
+
     def testRule1(self):
         py.test.skip('broken test')
         test = ur"""
