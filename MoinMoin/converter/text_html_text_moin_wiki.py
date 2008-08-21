@@ -1306,6 +1306,7 @@ class convert_tree(visitor):
 
     def _process_img(self, node):
         attrs = get_attrs(node)
+        print attrs
 
         title = attrs.pop('title', '')
         if title.startswith("smiley:"):
@@ -1380,7 +1381,16 @@ def get_attrs(node):
     """ get the attributes of <node> into an easy-to-use dict """
     attrs = {}
     for attr_name in node.attributes.keys():
-        attrs[attr_name] = node.attributes.get(attr_name).nodeValue
+        # get attributes of style element
+        if attr_name == "style":
+            for style_element in node.attributes.get(attr_name).nodeValue.split(';'):
+                if style_element.strip() != '':
+                    style_elements = style_element.split(':')
+                    if len(style_elements) == 2:
+                        attrs[style_elements[0].strip()] = style_elements[1].strip()
+        # get attributes without style element
+        else:
+            attrs[attr_name] = node.attributes.get(attr_name).nodeValue
     return attrs
 
 
