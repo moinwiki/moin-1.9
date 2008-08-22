@@ -103,7 +103,8 @@ class TestRequest(Request):
                                  content_length=content_length)
 
         environ['HTTP_USER_AGENT'] = 'MoinMoin/TestRequest'
-        environ['REMOTE_ADDR'] = '10.10.10.10'
+        # must have reverse lookup or tests will be extremely slow:
+        environ['REMOTE_ADDR'] = '127.0.0.1'
 
         if environ_overrides:
             environ.update(environ_overrides)
