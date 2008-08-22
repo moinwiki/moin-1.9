@@ -234,3 +234,9 @@ class Formatter(text_html.Formatter):
     def line_anchorlink(self, on, lineno=0):
         return '' # not needed for gui editor feeding
 
+    def span(self, on, **kw):
+        previous_state = self.request.user.show_comments
+        self.request.user.show_comments = True
+        ret = text_html.Formatter.span(self, on, **kw)
+        self.request.user.show_comments = previous_state
+        return ret

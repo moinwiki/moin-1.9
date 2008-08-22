@@ -93,8 +93,8 @@ class DataBrowserWidget(base.Widget):
         common[2] = self._makeoption(self._notempty, value == self.__notempty, self.__notempty)
         return '\n'.join(common + result)
 
-    def format(self):
-        fmt = self.request.formatter
+    def _format(self, formatter=None):
+        fmt = formatter or self.request.formatter
 
         result = []
         result.append(fmt.rawHTML('<form action="%s/%s" method="GET" name="%sform">' % (self.request.script_root, wikiutil.quoteWikinameURL(self.request.page.page_name), self.data_id)))
@@ -187,8 +187,8 @@ class DataBrowserWidget(base.Widget):
         result.append(fmt.rawHTML('</form>'))
         return ''.join(result)
 
-    toHTML = format # old name of "format" function DEPRECATED, will be removed in 1.7
+    format = _format # DEPRECATED, use render()
 
-    def render(self):
-        self.request.write(self.format())
+    render = _format # Note: in moin <= 1.7.1 render() used request.write(), this was wrong!
+                     # Now it just returns the result, as the other widgets do.
 

@@ -14,7 +14,6 @@ import os, sys, shutil, errno
 
 filename = globals().get("__file__") or sys.argv[0]
 moinpath = os.path.abspath(os.path.join(os.path.dirname(filename), os.pardir, os.pardir))
-sys.path.insert(0, moinpath)
 
 from MoinMoin.support import tarfile
 
@@ -62,5 +61,6 @@ def run(skip_if_existing=False):
     untarUnderlay()
 
 if __name__ == '__main__':
+    sys.path.insert(0, moinpath)
     run()
 

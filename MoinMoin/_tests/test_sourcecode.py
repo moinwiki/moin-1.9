@@ -33,6 +33,8 @@ FIX_TS_RE = re.compile(r' +$', re.M) # 'fix' mode: everything matching the trail
 
 try:
     import xattr
+    if not hasattr(xattr, "xattr"): # there seem to be multiple modules with that name
+        raise ImportError
     def mark_file_ok(path, mtime):
         x = xattr.xattr(path)
         try:
