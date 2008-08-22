@@ -32,7 +32,7 @@ sys.path.insert(0, str(moindir))
 from MoinMoin._tests import maketestwiki, compat
 modules["unittest"] = compat # evil hack
 
-sys.path.insert(0, str(moindir.join("tests")))
+wikiconfig_dir = str(moindir.join("tests"))
 
 from MoinMoin.support.python_compatibility import set
 from MoinMoin.web.request import TestRequest, Client
@@ -74,6 +74,9 @@ def init_test_request(static_state=[False]):
     if not static_state[0]:
         maketestwiki.run(True)
         static_state[0] = True
+    if sys.path[0] != wikiconfig_dir:
+        sys.path.insert(0, wikiconfig_dir) # this is a race with py.test's collectors
+                                           # because they modify sys.path as well
     request = TestRequest()
     request = init(request)
     return request

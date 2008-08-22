@@ -257,7 +257,7 @@ class TestPageAcls(object):
     subpage_name = u'AclTestMainPage/SubPage'
     pages = [
         # pagename, content
-        (mainpage_name, u"#acl JoeDoe: JaneDoe:read,write\nFoo!"),
+        (mainpage_name, u"#acl JoeDoe:\n#acl JaneDoe:read,write\nFoo!"),
         (subpage_name, u"FooFoo!"),
     ]
 
@@ -319,12 +319,11 @@ class TestPageAcls(object):
         ]
 
         for hierarchic, pagename, username, may in tests:
-            self.request.cfg.acl_hierarchic = hierarchic
             u = User(self.request, auth_username=username)
             u.valid = True
 
-            # User should have these rights...
-            for right in may:
+            def _have_right(u, right, pagename, hierarchic):
+                self.request.cfg.acl_hierarchic = hierarchic
                 can_access = u.may.__getattr__(right)(pagename)
                 if can_access:
                     print "page %s: %s test if %s may %s (success)" % (
@@ -334,10 +333,12 @@ class TestPageAcls(object):
                         pagename, ['normal', 'hierarchic'][hierarchic], username, right)
                 assert can_access
 
-            # User should NOT have these rights:
-            mayNot = [right for right in self.request.cfg.acl_rights_valid
-                      if right not in may]
-            for right in mayNot:
+            # User should have these rights...
+            for right in may:
+                yield _have_right, u, right, pagename, hierarchic
+
+            def _not_have_right(u, right, pagename, hierarchic):
+                self.request.cfg.acl_hierarchic = hierarchic
                 can_access = u.may.__getattr__(right)(pagename)
                 if can_access:
                     print "page %s: %s test if %s may not %s (failure)" % (
@@ -346,5 +347,11 @@ class TestPageAcls(object):
                     print "page %s: %s test if %s may not %s (success)" % (
                         pagename, ['normal', 'hierarchic'][hierarchic], username, right)
                 assert not can_access
+
+            # User should NOT have these rights:
+            mayNot = [right for right in self.request.cfg.acl_rights_valid
+                      if right not in may]
+            for right in mayNot:
+                yield _not_have_right, u, right, pagename, hierarchic
 
 coverage_modules = ['MoinMoin.security']

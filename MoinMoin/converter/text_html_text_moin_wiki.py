@@ -606,6 +606,11 @@ class convert_tree(visitor):
             style = listitem.getAttribute("style")
             if re.match(ur"list-style-type:\s*none", style, re.I):
                 markup = ". "
+                # set markup with white space when list element containes table
+                for i in listitem.childNodes:
+                    if i.nodeType == Node.ELEMENT_NODE:
+                        if i.localName == 'table':
+                            markup = " "
             else:
                 markup = "* "
         elif name == 'dl':
@@ -661,7 +666,10 @@ class convert_tree(visitor):
             self.text.append(indent)
         for i in nodelist:
             if i.nodeType == Node.ELEMENT_NODE:
-                self.process_inline(i)
+                if i.localName == 'br':
+                    self.text.append('<<BR>>')
+                else:
+                    self.process_inline(i)
             elif i.nodeType == Node.TEXT_NODE:
                 self.text.append(i.data.strip('\n').replace('\n', ' '))
         self.text.append(self.new_line)
@@ -700,6 +708,8 @@ class convert_tree(visitor):
                     self.text.append(indent)
                 self.process_table(i)
                 found = True
+            elif name == 'br':
+                pending.append(i)
             else:
                 pending.append(i)
 
@@ -815,16 +825,48 @@ class convert_tree(visitor):
         self.text.append(command)
 
     def process_span(self, node):
-        # ignore span tags - just descend
+        # process span tag for firefox3
+        node_style = node.getAttribute("style")
+
         is_strike = node.getAttribute("class") == "strike"
+        is_strike = is_strike or "line-through" in node_style
+        is_strong = "bold" in node_style
+        is_italic = "italic" in node_style
+        is_underline = "underline" in node_style
+        is_comment = node.getAttribute("class") == "comment"
+
+        # start tag
+        if is_comment:
+            self.text.append("/* ")
         if is_strike:
             self.text.append("--(")
+        if is_strong:
+            self.text.append("'''")
+        if is_italic:
+            self.text.append("''")
+        if is_underline:
+            self.text.append("__")
+
+        # body
         for i in node.childNodes:
             self.process_inline(i)
+
+        # end tag
+        if is_underline:
+            self.text.append("__")
+        if is_italic:
+            self.text.append("''")
+        if is_strong:
+            self.text.append("'''")
         if is_strike:
             self.text.append(")--")
+        if is_comment:
+            self.text.append(" */")
 
     def process_div(self, node):
+        # process indent
+        self._process_indent(node)
+
         # ignore div tags - just descend
         for i in node.childNodes:
             self.visit(i)
@@ -848,8 +890,20 @@ class convert_tree(visitor):
         self.text.extend([self.new_line, "-" * length, self.new_line])
 
     def process_p(self, node):
+        # process indent
+        self._process_indent(node)
         self.process_paragraph_item(node)
         self.text.append("\n\n") # do not use self.new_line here!
+
+    def _process_indent(self, node):
+        # process indent
+        node_style = node.getAttribute("style")
+        match = re.match(r"margin-left:\s*(\d+)px", node_style)
+        if match:
+            left_margin = int(match.group(1))
+            indent_depth = int(left_margin / 40)
+            if indent_depth > 0:
+                self.text.append(' . ')
 
     def process_paragraph_item(self, node):
         for i in node.childNodes:
@@ -870,25 +924,60 @@ class convert_tree(visitor):
         if class_ == "comment": # we currently use this for stuff like ## or #acl
             for i in node.childNodes:
                 if i.nodeType == Node.TEXT_NODE:
-                    self.text.append(i.data)
-                    #print "'%s'" % i.data
+                    self.text.append(i.data.replace('\n', ''))
                 elif i.localName == 'br':
                     self.text.append(self.new_line)
                 else:
                     pass
-                    #print i.localName
         else:
-            self.text.extend(["{{{", self.new_line])
+            content_buffer = []
+            longest_inner_formater = ''
+            bang_args = ''
+            delimiters = []
+
+            """
+            below code fixed for MoinMoinBugs/GuiEditorCantNest bug
+            this has problem when outer delimiter has two more { than inside one
+            e.g. {{{{{{ {{{ foo }}} }}}}}}  --> {{{{ {{{ foo }}} }}}}
+                   {{{foo {{{ }}} foo}}} --> {{{{ {{{ }}} }}}}
+            """
+
             for i in node.childNodes:
                 if i.nodeType == Node.TEXT_NODE:
-                    self.text.append(i.data)
-                    #print "'%s'" % i.data
+                    # get longest pre tag({{{ or }}}) from content
+                    delimiters.extend(re.compile("((?u){+)").findall(i.data))
+                    delimiters.extend(re.compile("((?u)}+)").findall(i.data))
+                    # when first line is empty, start iteration second line of i.data
+                    data_lines = i.data.rstrip().split('\n')
+                    if data_lines[0].strip() == '':
+                        data_lines = data_lines[1:]
+                    for line in data_lines:
+                        if line.strip().startswith('#!'):
+                            if bang_args == '':
+                                bang_args = line.strip()
+                            else:
+                                content_buffer.extend([line, self.new_line])
+                        else:
+                            content_buffer.extend([line, self.new_line])
                 elif i.localName == 'br':
-                    self.text.append(self.new_line_dont_remove)
+                    content_buffer.append(self.new_line_dont_remove)
                 else:
                     pass
                     #print i.localName
-            self.text.extend(["}}}", self.new_line])
+
+            if delimiters:
+                longest_inner_formater = max(delimiters)
+
+            if (len(longest_inner_formater) >= 3):
+                self.text.extend([("{" * (len(longest_inner_formater) + 1)) + bang_args, \
+                                      self.new_line])
+                self.text.extend(content_buffer)
+                self.text.extend(["}" * (len(longest_inner_formater) + 1), \
+                                      self.new_line])
+            else:
+                self.text.extend(["{{{"+bang_args, self.new_line])
+                self.text.extend(content_buffer)
+                self.text.extend(["}}}", self.new_line])
 
     _alignment = {"left": "(",
                   "center": ":",
@@ -1007,7 +1096,8 @@ class convert_tree(visitor):
         return " ".join(result).strip()
 
     def process_table(self, node, style=""):
-        self.text.append(self.new_line)
+        if self.depth == 0:
+            self.text.append(self.new_line)
         self.new_table = True
         style += self._table_style(node)
         for i in node.childNodes:
@@ -1187,6 +1277,9 @@ class convert_tree(visitor):
                 # relative link ../
                 elif desc.startswith('../') and href.endswith(desc[3:]):
                     self.text.append(wikiutil.pagelinkmarkup(desc))
+                # internal link #internal
+                elif '#' in href and pagename.startswith(self.pagename):
+                    self.text.append(wikiutil.pagelinkmarkup(href[href.index('#'):], desc))
                 # labeled link
                 else:
                     self.text.append(wikiutil.pagelinkmarkup(pagename, desc))

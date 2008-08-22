@@ -1,12 +1,14 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - Create an action link
+    MoinMoin - Create a list of currentpage?action=edit&template=X links
+    for all available templates X. Used by MissingPage.
 
     @copyright: 2004 Johannes Berg <johannes@sipsolutions.de>
     @license: GNU GPL, see COPYING for details.
 """
 
 Dependencies = ["language"]
+
 def macro_EditTemplates(macro):
     result = ''
     # we don't want to spend much CPU for spiders requesting nonexisting pages
