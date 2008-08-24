@@ -7,7 +7,7 @@
 """
 
 import py.test
-py.test.skip("Broken due to TestConfig refactoring")
+py.test.skip("Broken due to test Config refactoring")
 
 from MoinMoin._tests.ldap_testbase import LDAPTstBase, LdapEnvironment, check_environ, SLAPD_EXECUTABLE
 from MoinMoin._tests.ldap_testdata import *
@@ -47,7 +47,7 @@ class TestMoinLDAPLogin(LDAPTstBase):
     slapd_config = SLAPD_CONFIG
     ldif_content = LDIF_CONTENT
 
-    class TestConfig(wikiconfig.Config):
+    class Config(wikiconfig.Config):
         from MoinMoin.auth.ldap_login import LDAPAuth
         server_uri = self.ldap_env.slapd.url # XXX no self
         base_dn = self.ldap_env.basedn
@@ -90,7 +90,7 @@ class TestBugDefaultPasswd(LDAPTstBase):
     slapd_config = SLAPD_CONFIG
     ldif_content = LDIF_CONTENT
 
-    class TestConfig(wikiconfig.Config):
+    class Config(wikiconfig.Config):
         from MoinMoin.auth.ldap_login import LDAPAuth
         from MoinMoin.auth import MoinAuth
         server_uri = self.ldap_env.slapd.url # XXX no self
@@ -184,7 +184,7 @@ class TestLdapFailover:
     slapd_config = SLAPD_CONFIG
     ldif_content = LDIF_CONTENT
 
-    class TestConfig(wikiconfig.Config):
+    class Config(wikiconfig.Config):
         from MoinMoin.auth.ldap_login import LDAPAuth
         authlist = []
         for ldap_env in self.ldap_envs: # XXX no self
