@@ -73,11 +73,7 @@ class TestExpandExtendedName(TestExpandUserName):
 
     def testExtendedNamesEnabled(self):
         """ PageEditor: expand @USERNAME@ extended name - enabled """
-        try:
-            config = self.TestConfig()
-            assert self.expand() == u'[[%s]]' % self.name
-        finally:
-            del config
+        assert self.expand() == u'[[%s]]' % self.name
 
 
 class TestExpandMailto(TestExpandUserName):

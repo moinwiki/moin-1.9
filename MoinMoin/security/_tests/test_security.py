@@ -23,11 +23,6 @@ from MoinMoin._tests import become_trusted, create_page, nuke_page
 
 class TestACLStringIterator(object):
 
-    def setup_method(self, method):
-        self.config = self.TestConfig(defaults=['acl_rights_valid', 'acl_rights_before'])
-    def teardown_method(self, method):
-        del self.config
-
     def testEmpty(self):
         """ security: empty acl string raise StopIteration """
         iter = acliter(self.request.cfg.acl_rights_valid, '')
@@ -192,13 +187,11 @@ class TestAcl(object):
     """
     def setup_method(self, method):
         # Backup user
-        self.config = self.TestConfig(defaults=['acl_rights_valid', 'acl_rights_before'])
         self.savedUser = self.request.user.name
 
     def teardown_method(self, method):
         # Restore user
         self.request.user.name = self.savedUser
-        del self.config
 
     def testApplyACLByUser(self):
         """ security: applying acl by user name"""
@@ -250,9 +243,6 @@ class TestAcl(object):
 class TestPageAcls(object):
     """ security: real-life access control list on pages testing
     """
-    acls_before = u"WikiAdmin:admin,read,write,delete,revert"
-    acls_default = u"All:read,write"
-    acls_after = u"All:read"
     mainpage_name = u'AclTestMainPage'
     subpage_name = u'AclTestMainPage/SubPage'
     pages = [
@@ -261,20 +251,15 @@ class TestPageAcls(object):
         (subpage_name, u"FooFoo!"),
     ]
 
-    def setup_class(self):
-        self.config = self.TestConfig(
-            acl_rights_before=self.acls_before,
-            acl_rights_default=self.acls_default,
-            acl_rights_after=self.acls_after,
-            acl_hierarchic=False,
-            defaults=['acl_rights_valid'])
-        # TestConfig is crap, it does some wild hack and does not inherit from DefaultConfig
-        # nor call DefaultConfig's __init__() to do post processing, thus we do it here for now:
-        cfg = self.request.cfg
-        cfg.cache.acl_rights_before = AccessControlList(cfg, [cfg.acl_rights_before])
-        cfg.cache.acl_rights_default = AccessControlList(cfg, [cfg.acl_rights_default])
-        cfg.cache.acl_rights_after = AccessControlList(cfg, [cfg.acl_rights_after])
+    from MoinMoin._tests import wikiconfig
+    class TestConfig(wikiconfig.Config):
+        acl_rights_before = u"WikiAdmin:admin,read,write,delete,revert"
+        acl_rights_default = u"All:read,write"
+        acl_rights_after = u"All:read"
+        acl_hierarchic = False
+    TestConfig = staticmethod(TestConfig)
 
+    def setup_class(self):
         # Backup user
         self.savedUser = self.request.user.name
         self.request.user = User(self.request, auth_username=u'WikiAdmin')
@@ -284,12 +269,6 @@ class TestPageAcls(object):
             create_page(self.request, page_name, page_content)
 
     def teardown_class(self):
-        del self.config
-        cfg = self.request.cfg
-        cfg.cache.acl_rights_before = AccessControlList(cfg, [cfg.acl_rights_before])
-        cfg.cache.acl_rights_default = AccessControlList(cfg, [cfg.acl_rights_default])
-        cfg.cache.acl_rights_after = AccessControlList(cfg, [cfg.acl_rights_after])
-
         # Restore user
         self.request.user.name = self.savedUser
 
