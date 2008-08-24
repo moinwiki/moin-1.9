@@ -1128,7 +1128,7 @@ def importBuiltinPlugin(kind, name, function="execute"):
     See importPlugin docstring.
     """
     if not name in builtinPlugins(kind):
-        raise PluginMissingError
+        raise PluginMissingError()
     moduleName = 'MoinMoin.%s.%s' % (kind, name)
     return importNameFromPlugin(moduleName, function)
 
@@ -1180,24 +1180,22 @@ def wikiPlugins(kind, cfg):
     """
     # short-cut if we've loaded the dict already
     # (or already failed to load it)
-    if kind in cfg._site_plugin_lists:
-        return cfg._site_plugin_lists[kind]
-
-    result = {}
-
-    for modname in cfg._plugin_modules:
-        try:
-            module = pysupport.importName(modname, kind)
-            packagepath = os.path.dirname(module.__file__)
-            plugins = pysupport.getPluginModules(packagepath)
-
-            for p in plugins:
-                if not p in result:
-                    result[p] = '%s.%s' % (modname, kind)
-        except AttributeError:
-            pass
-
-    cfg._site_plugin_lists[kind] = result
+    cache = cfg._site_plugin_lists
+    if kind in cache:
+        result = cache[kind]
+    else:
+        result = {}
+        for modname in cfg._plugin_modules:
+            try:
+                module = pysupport.importName(modname, kind)
+                packagepath = os.path.dirname(module.__file__)
+                plugins = pysupport.getPluginModules(packagepath)
+                for p in plugins:
+                    if not p in result:
+                        result[p] = '%s.%s' % (modname, kind)
+            except AttributeError:
+                pass
+        cache[kind] = result
     return result
 
 
