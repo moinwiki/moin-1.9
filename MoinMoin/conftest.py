@@ -30,8 +30,7 @@ moindir = rootdir.join("..")
 sys.path.insert(0, str(moindir))
 
 from MoinMoin.support.python_compatibility import set
-from MoinMoin._tests import maketestwiki, compat, wikiconfig
-sys.modules["unittest"] = compat # evil hack
+from MoinMoin._tests import maketestwiki, wikiconfig
 
 coverage_modules = set()
 
