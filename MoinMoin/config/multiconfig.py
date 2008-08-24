@@ -591,11 +591,12 @@ also the spelling of the directory name.
                             # Load the module and set in sys.modules
                             module = imp.load_module(modname, fp, path, info)
                             setattr(sys.modules[self.siteid], 'csum', module)
-                            self._plugin_modules.append(modname)
                         finally:
                             # Make sure fp is closed properly
                             if fp:
                                 fp.close()
+                    if modname not in self._plugin_modules:
+                        self._plugin_modules.append(modname)
             finally:
                 imp.release_lock()
         except ImportError, err:
