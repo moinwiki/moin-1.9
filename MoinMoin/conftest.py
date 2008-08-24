@@ -13,31 +13,27 @@ classes by the framework.
 
 Tests that require a certain configuration, like section_numbers = 1, must
 use a TestConfig to create the required configuration before the test.
-Deleting the TestConfig instance will restore the previous configuration.
 
-@copyright: 2005 Nir Soffer, 2007 Alexander Schremmer
+@copyright: 2005 MoinMoin:NirSoffer,
+            2007 MoinMoin:AlexanderSchremmer,
+            2008 MoinMoin:ThomasWaldmann
 @license: GNU GPL, see COPYING for details.
 """
 
 import atexit
-from sys import modules
 import sys
 
 import py
 
-
 rootdir = py.magic.autopath().dirpath()
 moindir = rootdir.join("..")
-
 sys.path.insert(0, str(moindir))
-from MoinMoin._tests import maketestwiki, compat, wikiconfig
-modules["unittest"] = compat # evil hack
-
 
 from MoinMoin.support.python_compatibility import set
+from MoinMoin._tests import maketestwiki, compat, wikiconfig
+sys.modules["unittest"] = compat # evil hack
 
 coverage_modules = set()
-
 
 try:
     """
@@ -51,7 +47,7 @@ try:
 
     def report_coverage():
         coverage.stop()
-        module_list = [modules[mod] for mod in coverage_modules]
+        module_list = [sys.modules[mod] for mod in coverage_modules]
         module_list.sort()
         coverage.report(module_list)
 
