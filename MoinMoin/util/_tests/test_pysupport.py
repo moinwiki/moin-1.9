@@ -105,7 +105,7 @@ class TestImportExisting(TestImportNameFromPlugin):
         """ Create test plugin, skiping if plugin exists """
         if self.pluginExists():
             self.shouldDeleteTestPlugin = False
-            py.test.skip("Won't overwrite exiting plugin: %s" % self.plugin)
+            py.test.skip("Won't overwrite existing plugin: %s" % self.plugin)
         self.key = random_string(32, 'abcdefg')
         data = '''
 # If you find this file in your wiki plugin directory, you can safely
