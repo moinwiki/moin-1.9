@@ -19,7 +19,7 @@ and older python + wsgiref module installed, it will serve the content on
 http://localhost:8000/ - this is mainly for debugging THIS script.
 
 @copyright: 2008 by MoinMoin:ThomasWaldmann
-@license: GPL v2 or later, see COPYING for details.
+@license: Python License, see LICENSE.Python for details.
 """
 import os.path
 import os
@@ -33,12 +33,14 @@ except NameError:
 html_template = """\
 <html>
 <head>
- <title>WSGI Test Script working!</title>
+ <title>WSGI Test Script</title>
 </head>
 <body>
+ <h1>WSGI test script is working!</h1>
  <table border=1>
   <tr><th colspan=2>1. System Information</th></tr>
   <tr><td>Python</td><td>%(python_version)s</td></tr>
+  <tr><td>Python Path</td><td>%(python_path)s</td></tr>
   <tr><td>Platform</td><td>%(platform)s</td></tr>
   <tr><td>Absolute path of this script</td><td>%(abs_path)s</td></tr>
   <tr><td>Filename</td><td>%(filename)s</td></tr>
@@ -65,7 +67,7 @@ def application(environ, start_response):
         'platform': sys.platform,
         'abs_path': os.path.abspath('.'),
         'filename': __file__,
-        'python path': repr(sys.path),
+        'python_path': repr(sys.path),
         'wsgi_env': '\n'.join([row_template % item for item in environ.items()]),
     }
     return [content]
@@ -76,6 +78,7 @@ if __name__ == '__main__':
     try:
         # create a simple WSGI server and run the application
         from wsgiref import simple_server
+        print "Running test application - point your browser at http://localhost:8000/ ..."
         httpd = simple_server.WSGIServer(('', 8000), simple_server.WSGIRequestHandler)
         httpd.set_app(application)
         httpd.serve_forever()
