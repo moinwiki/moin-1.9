@@ -46,9 +46,8 @@ class TestComplexStuff:
     )
 
     from MoinMoin._tests import wikiconfig
-    class TestConfig(wikiconfig.Config):
+    class Config(wikiconfig.Config):
         foo = 'bar'  # we want to have this non-default setting
-    TestConfig = staticmethod(TestConfig)
 
     def setup_class(self):
         """ Stuff that should be run to init the state of this test class

@@ -252,12 +252,11 @@ class TestPageAcls(object):
     ]
 
     from MoinMoin._tests import wikiconfig
-    class TestConfig(wikiconfig.Config):
+    class Config(wikiconfig.Config):
         acl_rights_before = u"WikiAdmin:admin,read,write,delete,revert"
         acl_rights_default = u"All:read,write"
         acl_rights_after = u"All:read"
         acl_hierarchic = False
-    TestConfig = staticmethod(TestConfig)
 
     def setup_class(self):
         # Backup user

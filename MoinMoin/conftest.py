@@ -12,7 +12,7 @@ instance, can refer to self.request. It is injected into all test case
 classes by the framework.
 
 Tests that require a certain configuration, like section_numbers = 1, must
-use a TestConfig to create the required configuration before the test.
+use a Config class to define the required configuration within the test class.
 
 @copyright: 2005 MoinMoin:NirSoffer,
             2007 MoinMoin:AlexanderSchremmer,
@@ -97,8 +97,8 @@ class MoinClassCollector(py.test.collect.Class):
 
     def setup(self):
         cls = self.obj
-        if hasattr(cls, 'TestConfig'):
-            cls.request = init_test_request(given_config=cls.TestConfig)
+        if hasattr(cls, 'Config'):
+            cls.request = init_test_request(given_config=cls.Config)
         else:
             cls.request = self.parent.request
         super(MoinClassCollector, self).setup()

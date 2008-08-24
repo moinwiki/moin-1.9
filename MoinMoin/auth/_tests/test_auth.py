@@ -7,7 +7,7 @@
 """
 
 import py.test
-py.test.skip("broken due to TestConfig replacement, fix later")
+py.test.skip("broken due to test Config refactoring, fix later")
 
 import StringIO, urllib
 
@@ -92,9 +92,8 @@ class TestNoAuth(AuthTest):
         assert '</html>' in output
 
 class TestAnonSession(AuthTest):
-    class TestConfig(wikiconfig.Config):
+    class Config(wikiconfig.Config):
         anonymous_session_lifetime = 1
-    TestConfig = staticmethod(TestConfig)
 
     def testAnonSession(self):
         """ run some requests, no auth, check if anon sessions work """
@@ -155,11 +154,10 @@ class TestAnonSession(AuthTest):
             assert trail == trail_expected
 
 class TestHttpAuthSession(AuthTest):
-    class TestConfig(wikiconfig.Config):
+    class Config(wikiconfig.Config):
         from MoinMoin.auth.http import HTTPAuth
         auth = [HTTPAuth()]
         user_autocreate = True
-    TestConfig = staticmethod(TestConfig)
 
     def testHttpAuthSession(self):
         """ run some requests with http auth, check whether session works """
@@ -220,10 +218,9 @@ class TestHttpAuthSession(AuthTest):
             assert trail == trail_expected
 
 class TestMoinAuthSession(AuthTest):
-    class TestConfig(wikiconfig.Config):
+    class Config(wikiconfig.Config):
         from MoinMoin.auth import MoinAuth
         auth = [MoinAuth()]
-    TestConfig = staticmethod(TestConfig)
 
     def testMoinAuthSession(self):
         """ run some requests with MoinAuth, check whether session works """
