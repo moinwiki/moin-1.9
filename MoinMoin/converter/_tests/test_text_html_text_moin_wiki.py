@@ -23,12 +23,6 @@ error = ConvertError
 
 class TestBase(object):
 
-    def setup_method(self, method):
-        self.cfg = self.TestConfig(bang_meta=True)
-
-    def teardown_method(self, method):
-        del self.cfg
-
     def do_convert_real(self, func_args, successful=True):
         try:
             ret = convert(*func_args)

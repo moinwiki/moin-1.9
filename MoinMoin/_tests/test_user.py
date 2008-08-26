@@ -178,19 +178,9 @@ class TestLoginWithPassword(object):
 
 class TestGroupName(object):
 
-    def setUp(self):
-        self.config = self.TestConfig(page_group_regex=r'.+Group')
-
-    def tearDown(self):
-        del self.config
-
-    import re
-    group = re.compile(r'.+Group', re.UNICODE)
-
     def testGroupNames(self):
         """ user: isValidName: reject group names """
         test = u'AdminGroup'
-        assert self.group.search(test)
         assert not user.isValidName(self.request, test)
 
 
