@@ -325,6 +325,11 @@ class ConfigFunctionality(object):
         # e.g u'%(page_front_page)s' % self
         self.navi_bar = [elem % self for elem in self.navi_bar]
 
+        # expand %(...)s placeholders, compile regex and cache it
+        self.cache.backup_exclude_regex = re.compile("|".join(
+                                              [elem % self for elem in self.backup_exclude]))
+        self.cache.backup_include = [elem % self for elem in self.backup_include]
+
         # check if python-xapian is installed
         if self.xapian_search:
             try:
@@ -1185,6 +1190,22 @@ options = {
       ('import_pagename_envelope', u"%s", "Use this to add some fixed prefix/postfix to the generated target pagename."),
       ('import_pagename_regex', r'\[\[([^\]]*)\]\]', "Regular expression used to search for target pagename specification."),
       ('import_wiki_addrs', [], "Target mail addresses to consider when importing mail"),
+    )),
+
+    'backup': ('Backup settings',
+        'These settings control how the backup action works and who is allowed to use it.',
+    (
+      ('compression', 'gz', 'What compression to use for the backup ("gz" or "bz2").'),
+      ('users', [], 'List of trusted user names who are allowed to get a backup.'),
+      ('include', ['%(data_dir)s', ], 'List of pathes to backup.'),
+      ('exclude',
+       [
+        r"(.+\.py(c|o)$)",
+        r"%(cache_dir)s",
+        r"%(/)spages%(/)s.+%(/)scache%(/)s[^%(/)s]+$" % {'/': os.sep},
+        r"%(/)s(edit-lock|event-log|\.DS_Store)$" % {'/': os.sep},
+       ],
+       'List of regular expressions matching files that should be excluded from the backup.'),
     )),
 }
 

@@ -69,7 +69,12 @@ Version 1.8.0current:
     * url_prefix setting
     * traceback_log_dir setting (we just use logging.exception)
     * editor_quickhelp setting (replaced by per-parser quickhelp)
-    * backup action and associated settings
+    * restoring backups with the backup action and related settings (while
+      creating backups is no big issue and should work OK, restoring them
+      had fundamental issues related to overwriting or not-overwriting of
+      existing files - thus we removed the "restore" part of the action and
+      recommend that you just contact the wiki server admin in case of trouble,
+      give him your wiki backup file and let him carefully restore it.)
 
   New Features:
     * New "modernized" theme.
@@ -87,6 +92,8 @@ Version 1.8.0current:
     * user_autocreate setting was removed from wiki configuration and replaced
       by a autocreate=<boolean> parameter of the auth objects that support user
       profile auto creation.
+    * backup action: you can now use placeholders for backup_include setting
+      and this list now defaults to ['%(data_dir)s', ].
 
 
 Version 1.7.current:
