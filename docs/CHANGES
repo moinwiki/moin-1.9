@@ -25,10 +25,68 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
-  * "Backup" and especially "Restore" action have some issues, so please DON'T
-    USE THEM except if you want to help debugging and improving it and after
-    having made a backup with some other, proven method.
-    USE BOTH ON YOUR OWN RISK!
+
+Version 1.8.0current:
+
+  Bug Fixes:
+    * GUI Editor - fixed bugs:
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorExtendsAnchorsToThePageName
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorIndentingChangedForTables
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorIndentStyledText
+     * Fixed MoinMoin:MoinMoinBugs/GUIEditorConvertsRelativeLinkstoAbsoluteAfterChangingAnExistingLink
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorDestroysParserSyntax
+     * Fixed MoinMoin:MoinMoinBugs/GUIEditorConvertsRelativeLinkstoAbsolute
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorCantCancel
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorRemovesInlineComments
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorPasteFromWordError
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorPasteFromOpenOfficeCausingConvertError
+     * Fixed MoinMoin:MoinMoinBugs/GUIDoesNotChangeLinks
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorTabsCausesConvertError
+     * Fixed MoinMoin:MoinMoinBugs/1.6devGuiPreviewEatsTextBeforeMacro
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorAddingACellDestroysTable
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorBreaksTables
+     * Fixed MoinMoin:MoinMoinBugs/GUIEditorInsertsInvalidLinkInFirefox3
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorExcelPasteProblem
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorExpatErrorWhenPastingTable
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorFailsOnAttachmentsToOtherPage
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorHorizontalLine
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorLineBreak
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorLineBreakInLists
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorLinkContainsJavaScript
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorLosesEmptyLinesInFirefox1.5
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorPasteFromWordCausingConvertError
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorPreviewDataLoss
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorTableOfContentsIncomplete
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorUnusableAfterThemeChange
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorCorruptingNonWikiPages
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorInterwikiLinksMiss"wiki%3A"prefix 
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorExcelPasteUnboundPrefix
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorFormatDropdownCrashesIE
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorWordsGetJoinedTogether
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorShouldWorkOnSyntaxReference
+
+  Removed Features:
+    * url_prefix setting
+    * traceback_log_dir setting (we just use logging.exception)
+    * editor_quickhelp setting (replaced by per-parser quickhelp)
+    * backup action and associated settings
+
+  New Features:
+    * New "modernized" theme.
+    * New macros "WikiConfig" and "WikiConfigHelp".
+    * GUI Editor:
+      * upgraded to use FCKEditor version 2.6.3 (current version)
+      * user can insert and modify various types of MoinMoin links
+    * Per-parser quickhelp, 'quickhelp' class variable of parser class.
+    * New plugin_dirs setting to allow multiple plugin paths (additional to
+      the automatically configured plugin_dir [default: data_dir/plugin]).
+    * @EMAIL@ expands to a MailTo macro call with the obfuscated email address
+      of the current user.
+
+  Other Changes:
+    * user_autocreate setting was removed from wiki configuration and replaced
+      by a autocreate=<boolean> parameter of the auth objects that support user
+      profile auto creation.
 
 
 Version 1.7.current:

@@ -83,9 +83,6 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
     # save data
     theuser.save()
 
-    if form.has_key('create_and_mail'):
-        theuser.mailAccountData()
-
     result = _("User account created! You can use this account to login now...")
     if _debug:
         result = result + util.dumpFormData(form)
@@ -148,13 +145,8 @@ def _create_form(request):
     row.append(html.TD())
     td = html.TD()
     row.append(td)
-    td.append(html.INPUT(type="submit", name="create_only",
+    td.append(html.INPUT(type="submit", name="create",
                          value=_('Create Profile')))
-    if request.cfg.mail_enabled:
-        td.append(html.Text(' '))
-        td.append(html.INPUT(type="submit", name="create_and_mail",
-                             value="%s + %s" % (_('Create Profile'),
-                                                _('Email'))))
 
     return unicode(ret)
 
@@ -174,7 +166,7 @@ def execute(pagename, request):
     _ = request.getText
     form = request.form
 
-    submitted = form.has_key('create_only') or form.has_key('create_and_mail')
+    submitted = form.has_key('create')
 
     if submitted: # user pressed create button
         request.theme.add_msg(_create_user(request), "dialog")

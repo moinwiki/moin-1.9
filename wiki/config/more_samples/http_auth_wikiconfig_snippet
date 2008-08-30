@@ -2,11 +2,9 @@
     # See HelpOnSessions, HelpOnAuthentication and HelpOnConfiguration for more infos.
 
     # authentication methods used (default shown, see also other snippets):
+    # if autocreate is True user profiles are created automatically
     #from MoinMoin.auth.http import HTTPAuth
-    #auth = [HTTPAuth()]
-
-    # If set to True user accounts are created automatically
-    #user_autocreate = True
+    #auth = [HTTPAuth(autocreate=True)]
 
     # a list of form field names to be disabled in the UserPreferences.
     #user_form_disable = ['name', ]
