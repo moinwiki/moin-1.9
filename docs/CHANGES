@@ -88,6 +88,31 @@ Version 1.8.0current:
       by a autocreate=<boolean> parameter of the auth objects that support user
       profile auto creation.
 
+
+Version 1.7.current:
+  Fixes:
+    * Fix leakage of edit-log file handles (leaked 1 file handle / request!).
+    * Wiki parser: avoid IndexError for empty #! line
+    * MonthCalendar macro: fix parameter parsing / url generation
+    * Xapian indexing filters (MoinMoin/filter/ or data/plugin/filter/):
+      Some indexing filter scripts (e.g. for MS Word documents or PDF files)
+      failed on windows because of the single-quote quoting we used (that
+      works on Linux and other Posix systems). The fix introduces platform-
+      dependant automatic quoting, using double-quotes on win32 and single-
+      quotes on posix.
+      HINT: if you use own filter plugins based on execfilter, you have to
+      update them as the filename quoting (was '%s') is now done automatically
+      and must not be part of the command string any more (now just use %s).
+      See MoinMoin/filter/ for some up-to-date code (esp. the PDF filter).
+    * Prevent CategoryTemplate being listed as a category (it is a Template,
+      but matched also the category regex) - added to sample wikiconfig.
+    * LDAP auth: fix processing of TLS options
+    * UpdateGroup xmlrpc server side: fix wrong arg count error
+    * UpdateGroup client: use multicall / auth_token, refactor code so that
+      updateGroup function is reusable.
+    * Improve Python 2.3 compatibility, add notes where 2.4 is required.
+
+
 Version 1.7.1:
   New features:
     * New 'cache' action (see developer notes).

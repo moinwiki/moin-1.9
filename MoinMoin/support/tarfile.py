@@ -1053,22 +1053,21 @@ class TarFile(object):
            can be determined, `mode' is overridden by `fileobj's mode.
            `fileobj' is not closed, when TarFile is closed.
         """
-        self.name = os.path.abspath(name)
-
         if len(mode) > 1 or mode not in "raw":
             raise ValueError("mode must be 'r', 'a' or 'w'")
         self._mode = mode
         self.mode = {"r": "rb", "a": "r+b", "w": "wb"}[mode]
 
         if not fileobj:
-            fileobj = file(self.name, self.mode)
+            fileobj = file(name, self.mode)
             self._extfileobj = False
         else:
-            if self.name is None and hasattr(fileobj, "name"):
-                self.name = os.path.abspath(fileobj.name)
+            if name is None and hasattr(fileobj, "name"):
+                name = fileobj.name
             if hasattr(fileobj, "mode"):
                 self.mode = fileobj.mode
             self._extfileobj = True
+        self.name = name and os.path.abspath(name) or None
         self.fileobj = fileobj
 
         # Init datastructures
