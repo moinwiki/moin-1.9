@@ -156,8 +156,7 @@ class TestAnonSession(AuthTest):
 class TestHttpAuthSession(AuthTest):
     class Config(wikiconfig.Config):
         from MoinMoin.auth.http import HTTPAuth
-        auth = [HTTPAuth()]
-        user_autocreate = True
+        auth = [HTTPAuth(autocreate=True)]
 
     def testHttpAuthSession(self):
         """ run some requests with http auth, check whether session works """

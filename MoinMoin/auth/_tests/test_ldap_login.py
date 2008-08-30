@@ -51,9 +51,8 @@ class TestMoinLDAPLogin(LDAPTstBase):
         from MoinMoin.auth.ldap_login import LDAPAuth
         server_uri = self.ldap_env.slapd.url # XXX no self
         base_dn = self.ldap_env.basedn
-        ldap_auth1 = LDAPAuth(server_uri=server_uri, base_dn=base_dn)
+        ldap_auth1 = LDAPAuth(server_uri=server_uri, base_dn=base_dn, autocreate=True)
         auth = [ldap_auth1, ]
-        user_autocreate = True
 
     def testMoinLDAPLogin(self):
         """ Just try accessing the LDAP server and see if usera and userb are in LDAP. """
@@ -95,10 +94,9 @@ class TestBugDefaultPasswd(LDAPTstBase):
         from MoinMoin.auth import MoinAuth
         server_uri = self.ldap_env.slapd.url # XXX no self
         base_dn = self.ldap_env.basedn
-        ldap_auth = LDAPAuth(server_uri=server_uri, base_dn=base_dn)
+        ldap_auth = LDAPAuth(server_uri=server_uri, base_dn=base_dn, autocreate=True)
         moin_auth = MoinAuth()
         auth = [ldap_auth, moin_auth]
-        user_autocreate = True
 
     def teardown_class(self):
         """ Stop slapd, remove LDAP server environment """
@@ -191,10 +189,10 @@ class TestLdapFailover:
             server_uri = ldap_env.slapd.url
             base_dn = ldap_env.basedn
             ldap_auth = LDAPAuth(server_uri=server_uri, base_dn=base_dn,
+                                 autocreate=True,
                                  timeout=1) # short timeout, faster testing
             authlist.append(ldap_auth)
         auth = authlist
-        user_autocreate = True
 
     def setup_class(self):
         """ Create LDAP servers environment, start slapds """

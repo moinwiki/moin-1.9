@@ -300,7 +300,7 @@ class User:
 
         if name:
             self.name = name
-        elif auth_username: # this is needed for user_autocreate
+        elif auth_username: # this is needed for user autocreate
             self.name = auth_username
 
         # create checkbox fields (with default 0)
@@ -379,9 +379,8 @@ class User:
 
         @param changed: bool, set this to True if you updated the user profile values
         """
-        if self._cfg.user_autocreate:
-            if not self.valid and not self.disabled or changed: # do we need to save/update?
-                self.save() # yes, create/update user profile
+        if not self.valid and not self.disabled or changed: # do we need to save/update?
+            self.save() # yes, create/update user profile
 
     def __filename(self):
         """ Get filename of the user's file on disk

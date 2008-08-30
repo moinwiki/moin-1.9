@@ -83,6 +83,10 @@ Version 1.8.0current:
     * @EMAIL@ expands to a MailTo macro call with the obfuscated email address
       of the current user.
 
+  Other Changes:
+    * user_autocreate setting was removed from wiki configuration and replaced
+      by a autocreate=<boolean> parameter of the auth objects that support user
+      profile auto creation.
 
 Version 1.7.1:
   New features:
