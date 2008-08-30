@@ -1618,12 +1618,21 @@ class RequestBase(object):
         # only execute finishers once
         self._finishers = []
 
-        try:
-            #del self.user    # keeping this is useful for testing
-            del self.theme
-            del self.dicts
-        except:
-            pass
+        for attr_name in [
+            'editlog', # avoid leaking file handles for open edit-log
+            'theme',
+            'dicts',
+            'user',
+            'rootpage',
+            'page',
+            'html_formatter',
+            'formatter',
+            'cfg',
+            ]:
+            try:
+                delattr(self, attr_name)
+            except:
+                pass
 
     def add_finisher(self, method):
         self._finishers.append(method)
