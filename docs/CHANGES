@@ -30,8 +30,12 @@ Known main issues:
     having made a backup with some other, proven method.
     USE BOTH ON YOUR OWN RISK!
 
+
 Version 1.7.current:
   Fixes:
+    * Fix leakage of edit-log file handles (leaked 1 file handle / request!).
+    * Wiki parser: avoid IndexError for empty #! line
+    * MonthCalendar macro: fix parameter parsing / url generation
     * Xapian indexing filters (MoinMoin/filter/ or data/plugin/filter/):
       Some indexing filter scripts (e.g. for MS Word documents or PDF files)
       failed on windows because of the single-quote quoting we used (that
@@ -42,6 +46,13 @@ Version 1.7.current:
       update them as the filename quoting (was '%s') is now done automatically
       and must not be part of the command string any more (now just use %s).
       See MoinMoin/filter/ for some up-to-date code (esp. the PDF filter).
+    * Prevent CategoryTemplate being listed as a category (it is a Template,
+      but matched also the category regex) - added to sample wikiconfig.
+    * LDAP auth: fix processing of TLS options
+    * UpdateGroup xmlrpc server side: fix wrong arg count error
+    * UpdateGroup client: use multicall / auth_token, refactor code so that
+      updateGroup function is reusable.
+    * Improve Python 2.3 compatibility, add notes where 2.4 is required.
 
 
 Version 1.7.1:
