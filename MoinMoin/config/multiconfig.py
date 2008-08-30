@@ -1080,8 +1080,6 @@ options = {
     )),
 
     'user': ('Users / User settings', None, (
-      ('autocreate', False,
-       "if True, user accounts are created automatically (see HelpOnAuthentication)."),
       ('email_unique', True,
        "if True, check email addresses for uniqueness and don't accept duplicates."),
       ('jid_unique', True,
