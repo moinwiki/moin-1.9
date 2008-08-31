@@ -2,7 +2,7 @@
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - client side of xmlrpc UpdateGroup functionality.
-    
+
     You can use this code to update a group page in a target wiki via xmlrpc.
     Of course you need to enable the xmlrpc service in the target wiki, see
     your actions_excluded settings (by default, it contains 'xmlrpc')!
@@ -33,7 +33,6 @@ def updateGroup(server_url, username, password, groupname, groupdesc, groupmembe
     @param groupdesc: group description (unicode)
     @param groupmembers: group member names (list of unicode)
     @param acl: Access Control List value (optional, unicode)
-    @return: 
     """
     wiki = xmlrpclib.ServerProxy(server_url)
     auth_token = wiki.getAuthToken(username, password)
