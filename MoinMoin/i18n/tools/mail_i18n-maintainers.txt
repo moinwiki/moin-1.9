@@ -1,0 +1,88 @@
+Dear MoinMoin i18n maintainer / translator,
+
+You get this mail because one of the MoinMoin wiki engine's i18n files
+lists you as maintainer of it.
+
+By maintaining "%(lang)s", you do great work and all MoinMoin users say
+"Thank you" for that (or at least think it ;)!
+
+We are planning to do a new major release soon, with quite some attractive
+new features and lots of cleanup.
+
+What we need
+============
+
+Please note that we currently have 2 "MoinMaster" wikis:
+    * http://master17.moinmo.in/ (currently same as http://master.moinmo.in/)
+      This wiki is for the 1.7.x releases.
+    * http://master18.moinmo.in/
+      This wiki is for the 1.8.x releases.
+
+We need your help again for updating the following (high priority and
+most important stuff is on top of the list):
+
+[X] If you didn't do this already for the 1.7 release:
+    Check po file, system and help pages for errors due to conversion
+    to 1.6/1.7 markup:
+    * Links have new syntax, see MoinMaster:HelpOnLinking
+    * Macros have new syntax, see MoinMaster:HelpOnMacros
+    * Check these and other help pages (the converter did most of the
+      work, but it could not auto-convert the content of PRE sections,
+      thus they need manual fixing).
+    * You can check what the converter has done, see action=info.
+
+[X] There are also some notes on the http://moinmo.in/MoinDev/Translation
+    page about changes that need to be done.
+
+[X] MoinMaster:MoinI18n/%(lang)s page (source for the .po file)
+
+[X] "%(lang)s" system pages on the MoinMaster wiki
+
+[X] "%(lang)s" help pages on the MoinMaster wiki (optional - would be
+    nice, if you had the time)
+
+We need that until 2008-xx-xx - because MoinMoin 1.8.0 will be released
+then, so we can include that stuff into the distribution archive to make
+people speaking your language happy. ;)
+
+Please, after translating the current stuff, keep an eye on MoinMaster
+wikis - some strings in the PO file may still change or get added/deleted.
+
+See http://moinmo.in/MoinMoinTodo/Release%%201.8 for our planned release schedule.
+
+Please reply immediately
+========================
+
+You can use the form below.
+
+Or even better: directly edit the wiki page listed under Ressources.
+
+[ ] Great! I have some time, can do it now and finish in time.
+
+[ ] I would like to, but have no time these days. Maintenance should
+    be better done by anyone else volunteering, but you can keep me
+    on the list for next time.
+
+[ ] Sorry, but can't do that any more.
+    For this case, please remove yourself from the MoinI18n/%(lang)s page
+    by putting ***vacant*** into the Last-Translator: metadata field.
+
+Please, even if you can't help us this time, a fast response will help
+us finding another volunteer.
+
+
+Ressources
+==========
+
+If you want to do it (or update status page), please read on here:
+http://moinmo.in/MoinDev/Translation
+
+You will find all you need there. If you have questions, also put them
+there (in English, please) - you can also contact us on IRC channel
+#moin on server chat.freenode.net.
+
+Thanks,
+
+The MoinMoin development team
+
+
