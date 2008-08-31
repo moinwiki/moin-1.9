@@ -10,7 +10,7 @@
 from MoinMoin import user, wikiutil
 from MoinMoin.util.dataset import TupleDataset, Column
 from MoinMoin.Page import Page
-
+from MoinMoin.widget import html
 
 def do_user_browser(request):
     """ Browser for SystemAdmin macro. """
@@ -42,33 +42,32 @@ def do_user_browser(request):
         else:
             namelink = wikiutil.escape(account.name)
 
+        # creates the POST data for account disable/enable
+        val = "1"
+        text=_('Disable user')
         if account.disabled:
-            enable_disable_link = request.page.link_to(
-                                    request, text=_('Enable user'),
-                                    querystr={"action": "userprofile",
-                                              "name": account.name,
-                                              "key": "disabled",
-                                              "val": "0",
-                                             },
-                                    rel='nofollow')
+            text=_('Enable user')
+            val = "0"
             namelink += " (%s)" % _("disabled")
-        else:
-            enable_disable_link = request.page.link_to(
-                                    request, text=_('Disable user'),
-                                    querystr={"action": "userprofile",
-                                              "name": account.name,
-                                              "key": "disabled",
-                                              "val": "1",
-                                             },
-                                    rel='nofollow')
 
-        recoverpass_link = request.page.link_to(
-                            request, text=_('Mail account data'),
-                            querystr={"action": "recoverpass",
-                                      "email": account.email,
-                                      "account_sendmail": "1",
-                                      "sysadm": "users", },
-                            rel='nofollow')
+        url = request.page.url(request)
+        ret = html.FORM(action=url)
+        ret.append(html.INPUT(type='hidden', name='action', value='userprofile'))
+        ret.append(html.INPUT(type='hidden', name='name', value=account.name))
+        ret.append(html.INPUT(type='hidden', name='key', value="disabled"))
+        ret.append(html.INPUT(type='hidden', name='val', value=val))
+        ret.append(html.INPUT(type='submit', name='userprofile', value=text))
+        enable_disable_link = unicode(unicode(ret))
+
+        # creates the POST data for recoverpass
+        url = request.page.url(request)
+        ret = html.FORM(action=url)
+        ret.append(html.INPUT(type='hidden', name='action', value='recoverpass'))
+        ret.append(html.INPUT(type='hidden', name='email', value=account.email))
+        ret.append(html.INPUT(type='hidden', name='account_sendmail', value="1"))
+        ret.append(html.INPUT(type='hidden', name='sysadm', value="users"))
+        ret.append(html.INPUT(type='submit', name='recoverpass', value=_('Mail account data')))
+        recoverpass_link =  unicode(unicode(ret))
 
         if account.email:
             email_link = (request.formatter.url(1, 'mailto:' + account.email, css='mailto') +
@@ -89,7 +88,7 @@ def do_user_browser(request):
             request.formatter.rawHTML(grouppage_links),
             email_link,
             jabber_link,
-            recoverpass_link + " - " + enable_disable_link
+            recoverpass_link + enable_disable_link
         ))
 
     if data:
@@ -97,7 +96,7 @@ def do_user_browser(request):
 
         browser = DataBrowserWidget(request)
         browser.setData(data)
-        return browser.toHTML()
+        return browser.toHTML(method="POST")
 
     # No data
     return ''
