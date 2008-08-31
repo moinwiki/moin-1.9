@@ -93,11 +93,15 @@ class DataBrowserWidget(base.Widget):
         common[2] = self._makeoption(self._notempty, value == self.__notempty, self.__notempty)
         return '\n'.join(common + result)
 
-    def format(self):
+    def format(self, method="GET"):
+        """
+        formats the table
+        @param method: GET or POST method
+        """
         fmt = self.request.formatter
 
         result = []
-        result.append(fmt.rawHTML('<form action="%s/%s" method="GET" name="%sform">' % (self.request.getScriptname(), wikiutil.quoteWikinameURL(self.request.page.page_name), self.data_id)))
+        result.append(fmt.rawHTML('<form action="%s/%s" method="%s" name="%sform">' % (self.request.getScriptname(), wikiutil.quoteWikinameURL(self.request.page.page_name), method, self.data_id)))
         result.append(fmt.div(1))
 
         havefilters = False
@@ -189,6 +193,9 @@ class DataBrowserWidget(base.Widget):
 
     toHTML = format # old name of "format" function DEPRECATED, will be removed in 1.7
 
-    def render(self):
-        self.request.write(self.format())
+    def render(self, method="GET"):
+        """
+        @param method: GET or POST method
+        """
+        self.request.write(self.format(method=method))
 
