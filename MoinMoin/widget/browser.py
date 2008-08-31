@@ -93,11 +93,16 @@ class DataBrowserWidget(base.Widget):
         common[2] = self._makeoption(self._notempty, value == self.__notempty, self.__notempty)
         return '\n'.join(common + result)
 
-    def _format(self, formatter=None):
+    def _format(self, formatter=None, method="GET"):
+        """
+        does the formatting of the table
+        @param formatter: formatter
+        @param method: GET or POST method
+        """
         fmt = formatter or self.request.formatter
 
         result = []
-        result.append(fmt.rawHTML('<form action="%s/%s" method="GET" name="%sform">' % (self.request.getScriptname(), wikiutil.quoteWikinameURL(self.request.page.page_name), self.data_id)))
+        result.append(fmt.rawHTML('<form action="%s/%s" method="%s" name="%sform">' % (self.request.getScriptname(), wikiutil.quoteWikinameURL(self.request.page.page_name), method, self.data_id)))
         result.append(fmt.div(1))
 
         havefilters = False
