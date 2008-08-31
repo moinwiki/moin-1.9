@@ -51,7 +51,9 @@ class TestAuth:
 
     def process_request(self, environ):
         request = request_wsgi.Request(environ)
+        save_user = request.user # keep a reference, request.finish does "del request.user"
         request.run()
+        request.user = save_user
         return request # request.status, request.headers, request.output()
 
     def testNoAuth(self):
