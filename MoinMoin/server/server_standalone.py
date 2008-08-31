@@ -133,6 +133,7 @@ class ThreadingServer(SimpleServer):
                 return
             t = Thread(target=self.process_request_thread,
                        args=(request, client_address))
+            t.setDaemon(True)
             t.start()
         finally:
             self.lock.release()
@@ -164,11 +165,6 @@ class ThreadPoolServer(SimpleServer):
 
     This server is 5 times faster than ThreadingServer for static
     files, and about the same for wiki pages.
-
-    TODO: sometimes the server won't exit on Conrol-C, and continue to
-    run with few threads (you can kill it with kill -9). Same problem
-    exist with the twisted server. When the problem is finally solved,
-    remove the commented debug prints.
     """
     use_threads = True
 
@@ -186,6 +182,7 @@ class ThreadPoolServer(SimpleServer):
         from threading import Thread
         for dummy in range(self.poolSize):
             t = Thread(target=self.serve_forever_thread)
+            t.setDaemon(True)
             t.start()
         SimpleServer.serve_forever(self)
 
@@ -219,7 +216,6 @@ class ThreadPoolServer(SimpleServer):
             except:
                 self.handle_error(request, client_address)
             self.close_request(request)
-        # sys.stderr.write('thread exiting...\n')
 
     def pop_request(self):
         """ Pop a request from the queue
@@ -240,7 +236,6 @@ class ThreadPoolServer(SimpleServer):
                     self.lock.wait()
         finally:
             self.lock.release()
-        # sys.stderr.write('thread exiting...\n')
         sys.exit()
 
     def die(self):
@@ -256,7 +251,6 @@ class ThreadPoolServer(SimpleServer):
     def wake_all_threads(self):
         self.lock.acquire()
         try:
-            # sys.stderr.write('waking up all threads...\n')
             self.lock.notifyAll()
         finally:
             self.lock.release()
