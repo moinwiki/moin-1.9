@@ -176,7 +176,7 @@ def execute(pagename, request):
 
         div = html.DIV(id="page-history")
         div.append(html.INPUT(type="hidden", name="action", value="diff"))
-        div.append(history_table.toHTML())
+        div.append(history_table.render())
 
         form = html.FORM(method="GET", action="")
         form.append(div)

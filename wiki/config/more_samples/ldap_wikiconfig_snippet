@@ -46,13 +46,13 @@
         tls_keyfile='',
         tls_require_cert=0, # 0 == ldap.OPT_X_TLS_NEVER (needed for self-signed certs)
         bind_once=False, # set to True to only do one bind - useful if configured to bind as the user on the first attempt
+        autocreate=True, # set to True to automatically create/update user profiles
     )
 
     auth = [ldap_authenticator1, ] # this is a list, you may have multiple ldap authenticators
                                    # as well as other authenticators
 
     cookie_lifetime = 1 # 1 hour after last access ldap login is required again
-    user_autocreate = True
 
     # customize user preferences (optional, see MoinMoin/config/multiconfig for internal defaults)
     # you maybe want to use user_checkbox_remove, user_checkbox_defaults, user_form_defaults,
