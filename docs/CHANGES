@@ -34,6 +34,7 @@ Known main issues:
 Version 1.7.current:
   Fixes:
     * Fix leakage of edit-log file handles (leaked 1 file handle / request!).
+    * Fix for MoinMoinBugs/SystemAdminMailAccountData (using POST and forms)
     * Wiki parser: avoid IndexError for empty #! line
     * MonthCalendar macro: fix parameter parsing / url generation
     * Xapian indexing filters (MoinMoin/filter/ or data/plugin/filter/):
