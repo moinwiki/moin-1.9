@@ -8,6 +8,8 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+import os
+
 from MoinMoin.filter import execfilter
 
 def execute(indexobj, filename):
