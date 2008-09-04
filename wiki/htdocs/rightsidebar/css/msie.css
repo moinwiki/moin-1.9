@@ -25,6 +25,9 @@ a.interwiki { padding-left: 14px; background: url(../img/moin-inter.png) left ce
 /* Spans for line-anchors - needed for IE6 and IE7 where omitting the "display: none" triggers rendering bugs. */
 span.anchor { display: none; }
 
+/* Fix for PeekABoo Bug */
+#page { min-height: 1%; }
+
 /* Some * html hacks for IE6 and below only (IE7 ignores * html) */
 
 /* IE6 has a bug with rendering of float elements. We workaround this bug by
