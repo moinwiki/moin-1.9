@@ -31,7 +31,7 @@ Known main issues:
     USE BOTH ON YOUR OWN RISK!
 
 
-Version 1.7.current:
+Version 1.7.2:
   Fixes:
     * Fix leakage of edit-log file handles (leaked 1 file handle / request!).
     * Fix for MoinMoinBugs/SystemAdminMailAccountData (using POST and forms)
