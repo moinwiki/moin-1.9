@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 21:14+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1023,6 +1023,9 @@ msgstr ""
 msgid "No pages specified using --pages or --search, assuming full package."
 msgstr ""
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr ""
 
@@ -1041,13 +1044,13 @@ msgstr ""
 msgid "Action"
 msgstr ""
 
+msgid "Disable user"
+msgstr ""
+
 msgid "Enable user"
 msgstr ""
 
 msgid "disabled"
-msgstr ""
-
-msgid "Disable user"
 msgstr ""
 
 msgid "Mail account data"
@@ -1212,6 +1215,34 @@ msgid ""
 "=== Password reset ===\n"
 "If you already have received the email with the recovery token, enter your\n"
 "username, the recovery token and a new password (twice) below."
+msgstr ""
+
+msgid "Wiki Backup"
+msgstr ""
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr ""
+
+msgid "You are not allowed to do remote backup."
+msgstr ""
+
+#, python-format
+msgid "Unknown backup subaction: %s."
 msgstr ""
 
 msgid "You must login to add a quicklink."
@@ -1568,6 +1599,9 @@ msgstr ""
 
 #, python-format
 msgid "Created the package %s containing the pages %s."
+msgstr ""
+
+msgid "Include all attachments?"
 msgstr ""
 
 msgid "Package pages"

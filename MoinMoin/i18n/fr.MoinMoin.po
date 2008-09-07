@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2008-06-12 00:32+0200\n"
 "Last-Translator: Jean-Philippe Guérard <fevrier@tigreraye.org>\n"
 "Language-Team: Français\n"
@@ -1239,6 +1239,9 @@ msgid "No pages specified using --pages or --search, assuming full package."
 msgstr ""
 "Aucune page indiquée via --pages ou --search, on prend le paquet complet."
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "Le fichier de sortie existe déjà ! Abandon lâche de l'opération."
 
@@ -1257,14 +1260,14 @@ msgstr "Jabber"
 msgid "Action"
 msgstr "Action"
 
+msgid "Disable user"
+msgstr "Désactiver l'utilisateur"
+
 msgid "Enable user"
 msgstr "Activer l'utilisateur"
 
 msgid "disabled"
 msgstr "désactivé"
-
-msgid "Disable user"
-msgstr "Désactiver l'utilisateur"
 
 msgid "Mail account data"
 msgstr "Envoi de vos identifiants de connexion"
@@ -1480,6 +1483,35 @@ msgstr ""
 "Si vous avez déjà reçu le courrier électronique avec le mot-clef\n"
 "de récupération, entrez votre nom d'utilisateur, le mot-clef et\n"
 "un nouveau mot de passe (deux fois) ci-dessous"
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Balisage Wiki"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "Sauvegarde"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Vous n'êtes pas autorisé à réaliser une sauvegarde à distance."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Sous-action de sauvegarde inconnue : %s."
 
 msgid "You must login to add a quicklink."
 msgstr "Vous devez être identifié pour ajouter un lien rapide."
@@ -1871,6 +1903,10 @@ msgstr "Nom de fichier incorrect : « %s » !"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "Page %s créée contenant les pages %s."
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d pièces jointes]"
 
 msgid "Package pages"
 msgstr "Pages du paquet"
@@ -3099,14 +3135,5 @@ msgstr "Afficher/masquer les numéros de lignes"
 #~ "corrects.\n"
 #~ "\n"
 
-#~ msgid "Backup"
-#~ msgstr "Sauvegarde"
-
 #~ msgid "Restore"
 #~ msgstr "Restauration"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "Vous n'êtes pas autorisé à réaliser une sauvegarde à distance."
-
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "Sous-action de sauvegarde inconnue : %s."

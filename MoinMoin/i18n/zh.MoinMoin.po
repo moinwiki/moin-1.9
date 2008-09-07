@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2008-08-14 09:37+0800\n"
 "Last-Translator: Jiang Xin <worldhello.net@gmail.com>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -1152,6 +1152,9 @@ msgstr "您必须定义一个输出文件！"
 msgid "No pages specified using --pages or --search, assuming full package."
 msgstr "使用 --pages 或 --search 时没有指定页面，认为是全部。"
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "输出文件已经存在！拒绝执行！"
 
@@ -1170,14 +1173,14 @@ msgstr "Jabber"
 msgid "Action"
 msgstr "操作"
 
+msgid "Disable user"
+msgstr "禁用帐户"
+
 msgid "Enable user"
 msgstr "启用帐户"
 
 msgid "disabled"
 msgstr "禁用"
-
-msgid "Disable user"
-msgstr "禁用帐户"
 
 msgid "Mail account data"
 msgstr "把帐号资料寄给我"
@@ -1375,6 +1378,35 @@ msgstr ""
 "=== 口令重置 ===\n"
 "如果您已经收到包含恢复令牌的邮件，输入\n"
 "您的用户名，恢复令牌以及新口令（两次）。"
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "维基标记"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "备份"
+
+msgid "You are not allowed to do remote backup."
+msgstr "您无权作远程备份。"
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "未知的备份子操作：%s。"
 
 msgid "You must login to add a quicklink."
 msgstr "您必须首先登录才能添加快捷链接。"
@@ -1742,6 +1774,10 @@ msgstr "无效的文件名 \"%s\"！"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "生成的包%s包含网页%s。"
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d个附件]"
 
 msgid "Package pages"
 msgstr "网页打包"
@@ -2905,14 +2941,5 @@ msgstr "切换行号显示"
 #~ "请确保维基配置 backup_* 设定值是正确完整的。\n"
 #~ "\n"
 
-#~ msgid "Backup"
-#~ msgstr "备份"
-
 #~ msgid "Restore"
 #~ msgstr "恢复"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "您无权作远程备份。"
-
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "未知的备份子操作：%s。"

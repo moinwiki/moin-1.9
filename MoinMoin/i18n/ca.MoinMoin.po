@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2008-07-30 17:24+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -1166,6 +1166,9 @@ msgstr ""
 msgid "No pages specified using --pages or --search, assuming full package."
 msgstr ""
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr ""
 
@@ -1184,14 +1187,14 @@ msgstr "Jabber"
 msgid "Action"
 msgstr "Acció"
 
+msgid "Disable user"
+msgstr "Inhabilita l'usuari"
+
 msgid "Enable user"
 msgstr "Habilita l'usuari"
 
 msgid "disabled"
 msgstr "inhabilita"
-
-msgid "Disable user"
-msgstr "Inhabilita l'usuari"
 
 msgid "Mail account data"
 msgstr "Envia les dades del compte"
@@ -1372,6 +1375,35 @@ msgid ""
 "If you already have received the email with the recovery token, enter your\n"
 "username, the recovery token and a new password (twice) below."
 msgstr ""
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Marcat del Wiki"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "Copia"
+
+msgid "You are not allowed to do remote backup."
+msgstr "No esteu autoritzat a fer una còpia de seguretat remota."
+
+#, fuzzy, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "L'acció %(action_name)s és desconeguda."
 
 msgid "You must login to add a quicklink."
 msgstr "Heu d'entrar per a afegir un enllaç ràpid"
@@ -1756,6 +1788,10 @@ msgstr ""
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr ""
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d adjuncions]"
 
 msgid "Package pages"
 msgstr ""
@@ -2858,14 +2894,8 @@ msgstr "Commuta els números de línia"
 #~ msgid "Wiki Backup / Restore"
 #~ msgstr "Còpia de seguretat / Restauració del wiki"
 
-#~ msgid "Backup"
-#~ msgstr "Copia"
-
 #~ msgid "Restore"
 #~ msgstr "Restaura"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "No esteu autoritzat a fer una còpia de seguretat remota."
 
 #~ msgid "Xapian Version"
 #~ msgstr "Versió del Xapian"

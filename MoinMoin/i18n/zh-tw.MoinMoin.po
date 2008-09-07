@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2008-06-14 22:44+0800\n"
 "Last-Translator: Rux Li <rux.li3@gmail.com>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
@@ -1137,6 +1137,9 @@ msgstr "你必須指定輸出檔！"
 msgid "No pages specified using --pages or --search, assuming full package."
 msgstr "沒有使用 --page 和 --search 來指定頁面，預設是整體打包。"
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "輸出檔已經存在！無法繼續。"
 
@@ -1155,14 +1158,14 @@ msgstr ""
 msgid "Action"
 msgstr "功能"
 
+msgid "Disable user"
+msgstr "停止使用"
+
 msgid "Enable user"
 msgstr "允許使用"
 
 msgid "disabled"
 msgstr "已停用"
-
-msgid "Disable user"
-msgstr "停止使用"
 
 msgid "Mail account data"
 msgstr "郵寄帳號資料"
@@ -1360,6 +1363,35 @@ msgstr ""
 "=== 重設密碼 ===\n"
 "如果你已經收到附上回覆憑證的 email，請在以下輸入你的使用者名稱、\n"
 "回復憑證，以及新密碼 (兩次)。"
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Wiki 標記"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "備份"
+
+msgid "You are not allowed to do remote backup."
+msgstr "你無權進行遠端備份。"
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "不明的備份子操作：%s。"
 
 msgid "You must login to add a quicklink."
 msgstr "登入之後才能設定頁面捷徑。"
@@ -1729,6 +1761,10 @@ msgstr "不合法的檔名 \"%s\"！"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "包裹檔 %s 已打包，包含頁面 %s。"
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d 個附件]"
 
 msgid "Package pages"
 msgstr "打包頁面"
@@ -2879,17 +2915,8 @@ msgstr "切換行號"
 #~ "請確定你的 Wiki 的 backup_* 設定值是正確且完整。\n"
 #~ "\n"
 
-#~ msgid "Backup"
-#~ msgstr "備份"
-
 #~ msgid "Restore"
 #~ msgstr "復原"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "你無權進行遠端備份。"
-
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "不明的備份子操作：%s。"
 
 #~ msgid "Xapian Version"
 #~ msgstr "Xapian 版本"

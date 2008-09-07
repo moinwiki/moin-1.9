@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2006-02-11 12:20-0800\n"
 "Last-Translator: Hristo Iliev <hristo@phys.uni-sofia.bg>\n"
 "Language-Team: Bulgarian <moin-devel@lists.sourceforge.net>\n"
@@ -1191,6 +1191,9 @@ msgstr ""
 msgid "No pages specified using --pages or --search, assuming full package."
 msgstr ""
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr ""
 
@@ -1212,15 +1215,15 @@ msgid "Action"
 msgstr "Действие"
 
 #, fuzzy
+msgid "Disable user"
+msgstr "Изключен"
+
+#, fuzzy
 msgid "Enable user"
 msgstr "Включен"
 
 #, fuzzy
 msgid "disabled"
-msgstr "Изключен"
-
-#, fuzzy
-msgid "Disable user"
 msgstr "Изключен"
 
 #, fuzzy
@@ -1432,6 +1435,35 @@ msgid ""
 "If you already have received the email with the recovery token, enter your\n"
 "username, the recovery token and a new password (twice) below."
 msgstr ""
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Уики маркировка"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "Архивиране"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Не Ви е позволено да правите отдалечено архивиране."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Непознато поддействие при архивиране: %s."
 
 msgid "You must login to add a quicklink."
 msgstr "Трябва да сте влезли, за да добавите бърза връзка."
@@ -1818,6 +1850,10 @@ msgstr "Невалидно име на файл \"%s\"!"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "Създаден беше пакет %s, съдържащ страниците %s."
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d приложения]"
 
 msgid "Package pages"
 msgstr "Страници в пакета"
@@ -3009,17 +3045,8 @@ msgstr "Превключи показването на номерата на р�
 #~ "са верни и пълни.\n"
 #~ "\n"
 
-#~ msgid "Backup"
-#~ msgstr "Архивиране"
-
 #~ msgid "Restore"
 #~ msgstr "Възстановяване"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "Не Ви е позволено да правите отдалечено архивиране."
-
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "Непознато поддействие при архивиране: %s."
 
 #~ msgid "Xapian Version"
 #~ msgstr "Версия на Xapian"

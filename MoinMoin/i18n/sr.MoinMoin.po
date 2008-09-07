@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2008-05-12 15:58-0400\n"
 "Last-Translator: Igor Miletic <grejigl-gnomeprevod@yahoo.ca>\n"
 "Language-Team: Serbian <fedora-trans-sr@redhat.com>\n"
@@ -1212,6 +1212,9 @@ msgstr ""
 "Ни једна страница није наведена користећи опције --pages и --search, "
 "претпоставља се потпуни пакет."
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "Излазна датотека већ постоји! Кукавички одбија да настави!"
 
@@ -1230,14 +1233,14 @@ msgstr "Џабер"
 msgid "Action"
 msgstr "Радња"
 
+msgid "Disable user"
+msgstr "Искључи корисника"
+
 msgid "Enable user"
 msgstr "Укључи корисника"
 
 msgid "disabled"
 msgstr "искључен"
-
-msgid "Disable user"
-msgstr "Искључи корисника"
 
 msgid "Mail account data"
 msgstr "Подаци поштанског налога"
@@ -1445,6 +1448,35 @@ msgid ""
 "If you already have received the email with the recovery token, enter your\n"
 "username, the recovery token and a new password (twice) below."
 msgstr ""
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Изворни текст Викија"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "Направи резерву"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Није вам дозвољено да направите удаљену резерву."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Непозната подрадња прављења резерве: %s."
 
 msgid "You must login to add a quicklink."
 msgstr "Морате се пријавити да бисте додали брзу везу"
@@ -1823,6 +1855,10 @@ msgstr "Неважеће име датотеке: „%s“!"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "Направите пакет %s који садржи странице %s."
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d прилога]"
 
 msgid "Package pages"
 msgstr "Странице пакета"
@@ -3012,17 +3048,8 @@ msgstr "Укључи/искучи бројеве редова"
 #~ "правилно и потпуна.\n"
 #~ "\n"
 
-#~ msgid "Backup"
-#~ msgstr "Направи резерву"
-
 #~ msgid "Restore"
 #~ msgstr "Поврати резерву"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "Није вам дозвољено да направите удаљену резерву."
-
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "Непозната подрадња прављења резерве: %s."
 
 #~ msgid "Xapian Version"
 #~ msgstr "MoinMoin верзија"

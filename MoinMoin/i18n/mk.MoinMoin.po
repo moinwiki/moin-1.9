@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2008-06-27 22:39+0200\n"
 "Last-Translator: Novica Nakov\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
@@ -1200,6 +1200,9 @@ msgstr ""
 "Ниедна страница не е одбрана со помош на --pages или --search. Претпоставено "
 "е дека е одбрано сѐ."
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "Излезната датотека веќе постои! Операцијата нема да продолжи!"
 
@@ -1218,14 +1221,14 @@ msgstr "Jabber"
 msgid "Action"
 msgstr "Дејство"
 
+msgid "Disable user"
+msgstr "Исклучено"
+
 msgid "Enable user"
 msgstr "Вклучено"
 
 msgid "disabled"
 msgstr "исклучено"
-
-msgid "Disable user"
-msgstr "Исклучено"
 
 msgid "Mail account data"
 msgstr "Испрати податоци за корисничката сметка"
@@ -1436,6 +1439,35 @@ msgstr ""
 "=== Ресетирање на лозинка ===\n"
 "Ако веќе сте ја добиле пораката со белегот за пронаоѓање, внесете го\n"
 "Вашето корисничко име, белегот и два пати новата лозинка."
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Вики означување"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "Резервна копија"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Не Ви е дозволено да правите оддалечена резервна копија."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Непознато дејство за резервна копија: %s."
 
 msgid "You must login to add a quicklink."
 msgstr "Морате да се пријавите за да додавате кратенки."
@@ -1819,6 +1851,10 @@ msgstr "Неправилно име на датотека \"%s\"!"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "Создаден е пакетот %s што ги содржи страниците %s."
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d прилози]"
 
 msgid "Package pages"
 msgstr "Спакувај ги страниците"
@@ -3024,17 +3060,8 @@ msgstr "Вклучи/исклучи нумерирање на редовите"
 #~ "и целосни.\n"
 #~ "\n"
 
-#~ msgid "Backup"
-#~ msgstr "Резервна копија"
-
 #~ msgid "Restore"
 #~ msgstr "Враќање"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "Не Ви е дозволено да правите оддалечена резервна копија."
-
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "Непознато дејство за резервна копија: %s."
 
 #~ msgid "Xapian Version"
 #~ msgstr "Верзија на Xapian"

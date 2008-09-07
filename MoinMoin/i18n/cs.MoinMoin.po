@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2007-11-05 22:11+0100\n"
 "Last-Translator: Václav Haisman <v.haisman@sh.cvut.cz>\n"
 "Language-Team: Czech <moin@lists.sourceforge.net>\n"
@@ -1182,6 +1182,9 @@ msgstr ""
 msgid "No pages specified using --pages or --search, assuming full package."
 msgstr ""
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr ""
 
@@ -1202,14 +1205,14 @@ msgstr ""
 msgid "Action"
 msgstr "Akce"
 
+msgid "Disable user"
+msgstr "Zakaž uživatele"
+
 msgid "Enable user"
 msgstr "Povol uživatele"
 
 msgid "disabled"
 msgstr "zakázáno"
-
-msgid "Disable user"
-msgstr "Zakaž uživatele"
 
 msgid "Mail account data"
 msgstr "Zašli mi má data k účtu"
@@ -1409,6 +1412,35 @@ msgid ""
 "If you already have received the email with the recovery token, enter your\n"
 "username, the recovery token and a new password (twice) below."
 msgstr ""
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Značkování Wiki"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "Záloha"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Nemáte dovoleno provést vzdálenou zálohu."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Neznámá podakce zálohy: %s."
 
 msgid "You must login to add a quicklink."
 msgstr "Bez přihlášení nelze přidat pohotový odkaz."
@@ -1787,6 +1819,10 @@ msgstr "Neplatný název souboru \"%s\"!"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "Vytvořen balíček %s obsahující stránky %s."
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d přílohy]"
 
 msgid "Package pages"
 msgstr "Zbalit stránky"
@@ -2964,17 +3000,8 @@ msgstr "Přepnout zobrazení čísel řádků"
 #~ "Zajistěte prosím správné a kompletní nastavení backup_* hodnot v "
 #~ "konfiguraci.\n"
 
-#~ msgid "Backup"
-#~ msgstr "Záloha"
-
 #~ msgid "Restore"
 #~ msgstr "Obnova"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "Nemáte dovoleno provést vzdálenou zálohu."
-
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "Neznámá podakce zálohy: %s."
 
 #~ msgid "Xapian Version"
 #~ msgstr "Xapian Verze"

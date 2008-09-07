@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin-1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2007-04-25 16:26+0300\n"
 "Last-Translator: Ekrem SEREN <ekrem.seren@parduslinux.org>\n"
 "Language-Team: Türkçe\n"
@@ -1191,6 +1191,9 @@ msgstr ""
 msgid "No pages specified using --pages or --search, assuming full package."
 msgstr ""
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr ""
 
@@ -1212,15 +1215,15 @@ msgid "Action"
 msgstr "İşlev"
 
 #, fuzzy
+msgid "Disable user"
+msgstr "Etkisiz"
+
+#, fuzzy
 msgid "Enable user"
 msgstr "Etkin"
 
 #, fuzzy
 msgid "disabled"
-msgstr "Etkisiz"
-
-#, fuzzy
-msgid "Disable user"
 msgstr "Etkisiz"
 
 #, fuzzy
@@ -1427,6 +1430,37 @@ msgid ""
 "If you already have received the email with the recovery token, enter your\n"
 "username, the recovery token and a new password (twice) below."
 msgstr ""
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Wiki İmleme"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "Yedekle"
+
+msgid "You are not allowed to do remote backup."
+msgstr ""
+"Sayfa üzerinde uzaktan yedekleme işlemi yapmak için yeterli izne sahip "
+"değilsiniz."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Bilinmeyen yedekleme alt eylemi: %s."
 
 msgid "You must login to add a quicklink."
 msgstr "Hızlı erişim bağlantısı eklemek için giriş yapmalısınız."
@@ -1812,6 +1846,10 @@ msgstr "Geçersiz dosya ismi \"%s\"!"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "%s paketi %s sayfalarını içerecek şekilde yaratıldı."
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d tane ek]"
 
 msgid "Package pages"
 msgstr "Paket sayfaları"
@@ -2979,19 +3017,8 @@ msgstr "Satır numaralandırmayı aç/kapa"
 #~ msgid "Wiki Backup / Restore"
 #~ msgstr "Wiki Yedekleme / Geri Yükleme"
 
-#~ msgid "Backup"
-#~ msgstr "Yedekle"
-
 #~ msgid "Restore"
 #~ msgstr "Geri yükle"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr ""
-#~ "Sayfa üzerinde uzaktan yedekleme işlemi yapmak için yeterli izne sahip "
-#~ "değilsiniz."
-
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "Bilinmeyen yedekleme alt eylemi: %s."
 
 #~ msgid "Xapian Version"
 #~ msgstr "Xapian Sürümü"

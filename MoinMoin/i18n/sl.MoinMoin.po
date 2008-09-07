@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2008-05-23 03:00+0200\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -1194,6 +1194,9 @@ msgstr ""
 "Nobena stran ni bila navedena s --pages ali --search opcijo, predpostavljam "
 "celotni paket."
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "Izhodna datoteka že obstaja! Za vsak primer ukaz ne bo izvršen!"
 
@@ -1212,14 +1215,14 @@ msgstr "Jabber naslov"
 msgid "Action"
 msgstr "Akcija"
 
+msgid "Disable user"
+msgstr "Onemogoči uporabnika"
+
 msgid "Enable user"
 msgstr "Omogoči uporabnika"
 
 msgid "disabled"
 msgstr "onemogočeno"
-
-msgid "Disable user"
-msgstr "Onemogoči uporabnika"
 
 msgid "Mail account data"
 msgstr "Pošlji mi podatke o tem uporabniškem računu"
@@ -1424,6 +1427,35 @@ msgstr ""
 "Spodaj vnesite žeton za rešitev gesla, ki ste ga prejeli v e-poštnem "
 "sporočilu,\n"
 "svoje uporabniško ime in novo geslo (dvakrat) ."
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Označevanje viki"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "Izdelava varnostne kopije"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Izdelava varnostne kopije ni dovoljena z oddaljene lokacije."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Neznana podakcija pri upravljanju z varnostno kopijo: %s"
 
 msgid "You must login to add a quicklink."
 msgstr "Za dodajanje hitre povezave se je treba prej prijaviti."
@@ -1805,6 +1837,10 @@ msgstr "Neveljavno ime datoteke \"%s\"!"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "Tvorjen je paket %s, ki vsebuje strani %s."
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d priponk]"
 
 msgid "Package pages"
 msgstr "Spakiraj strani v ZIP"
@@ -3007,14 +3043,5 @@ msgstr "Vklopi/izklopi številke vrstic"
 #~ "pravilne in popolne.\n"
 #~ "\n"
 
-#~ msgid "Backup"
-#~ msgstr "Izdelava varnostne kopije"
-
 #~ msgid "Restore"
 #~ msgstr "Vrnitev iz varnostne kopije"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "Izdelava varnostne kopije ni dovoljena z oddaljene lokacije."
-
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "Neznana podakcija pri upravljanju z varnostno kopijo: %s"

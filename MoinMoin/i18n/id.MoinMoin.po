@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2006-10-07 23:19+0700\n"
 "Last-Translator: Fajrin Azis <fajrin.azis@gmail.com>\n"
 "Language-Team: Indonesian <id@ll.com>\n"
@@ -1203,6 +1203,9 @@ msgstr ""
 "Tidak ada halaman yang dirincikan menggunakan --halaman atau --cari, menduga "
 "paket penuh."
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "Berkas output sudah ada! Menolak untuk lanjut!"
 
@@ -1223,14 +1226,14 @@ msgstr ""
 msgid "Action"
 msgstr "Aksi"
 
+msgid "Disable user"
+msgstr "Nonaktifkan pengguna"
+
 msgid "Enable user"
 msgstr "Aktifkan pengguna"
 
 msgid "disabled"
 msgstr "nonaktifkan"
-
-msgid "Disable user"
-msgstr "Nonaktifkan pengguna"
 
 msgid "Mail account data"
 msgstr "Kirim data akun saya lewat email"
@@ -1435,6 +1438,35 @@ msgid ""
 "If you already have received the email with the recovery token, enter your\n"
 "username, the recovery token and a new password (twice) below."
 msgstr ""
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Markup Wiki"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "Backup"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Anda tidak diizinkan mem-backup dari jauh."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Sub aksi untuk backup tidak diketahui: %s."
 
 msgid "You must login to add a quicklink."
 msgstr "Anda harus login untuk menambah taut cepat."
@@ -1817,6 +1849,10 @@ msgstr "Nama berkas tidak benar: \"%s\"!"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "Membuat paket %s yang memuat halaman %s."
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d lampiran]"
 
 msgid "Package pages"
 msgstr "Halaman paket"
@@ -3003,17 +3039,8 @@ msgstr "On/Off nomor baris"
 #~ "Tolong pastikan nilai konfigurasi backup_* wiki Anda benar dan lengkap.\n"
 #~ "\n"
 
-#~ msgid "Backup"
-#~ msgstr "Backup"
-
 #~ msgid "Restore"
 #~ msgstr "Restore"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "Anda tidak diizinkan mem-backup dari jauh."
-
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "Sub aksi untuk backup tidak diketahui: %s."
 
 #~ msgid "Xapian Version"
 #~ msgstr "Versi Xapian"

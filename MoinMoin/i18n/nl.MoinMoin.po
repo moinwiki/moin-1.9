@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2005-03-13 17:43+0200\n"
 "Last-Translator: Sander Kromwijk <s.kromwijk@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -1191,6 +1191,9 @@ msgstr ""
 msgid "No pages specified using --pages or --search, assuming full package."
 msgstr ""
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr ""
 
@@ -1211,14 +1214,14 @@ msgstr ""
 msgid "Action"
 msgstr "Actie"
 
+msgid "Disable user"
+msgstr "Geblokeerde gebruiker"
+
 msgid "Enable user"
 msgstr "Gebruiker activeren"
 
 msgid "disabled"
 msgstr "geblokeerd"
-
-msgid "Disable user"
-msgstr "Geblokeerde gebruiker"
 
 msgid "Mail account data"
 msgstr "E-mail accountgegevens"
@@ -1428,6 +1431,35 @@ msgid ""
 "If you already have received the email with the recovery token, enter your\n"
 "username, the recovery token and a new password (twice) below."
 msgstr ""
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Wikiopmaak"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "Backup"
+
+msgid "You are not allowed to do remote backup."
+msgstr "U hebt geen toestemming om een externe backup te maken."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Onbekende backup subaktie: %s."
 
 msgid "You must login to add a quicklink."
 msgstr "Je moet inloggen om een quicklink te gebruiken."
@@ -1810,6 +1842,10 @@ msgstr "Ongeldig bestandsnaam \"%s\"!"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "Het gemaakte pakket %s die de paginas %s bevatten"
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d bijlagen]"
 
 msgid "Package pages"
 msgstr "Pakket paginas"
@@ -2997,17 +3033,8 @@ msgstr "Lijnnummers aan/uit doen"
 #~ "zijn.\n"
 #~ "\n"
 
-#~ msgid "Backup"
-#~ msgstr "Backup"
-
 #~ msgid "Restore"
 #~ msgstr "Herstel"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "U hebt geen toestemming om een externe backup te maken."
-
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "Onbekende backup subaktie: %s."
 
 #~ msgid "Xapian Version"
 #~ msgstr "Xapian versie"

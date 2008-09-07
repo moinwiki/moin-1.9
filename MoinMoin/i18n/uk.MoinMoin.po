@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2007-11-10 16:50+0300\n"
 "Last-Translator: Maxim V. Dziumanenko <dziumanenko@softprom.kiev.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -1185,6 +1185,9 @@ msgstr ""
 msgid "No pages specified using --pages or --search, assuming full package."
 msgstr ""
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr ""
 
@@ -1205,14 +1208,14 @@ msgstr ""
 msgid "Action"
 msgstr "Дія"
 
+msgid "Disable user"
+msgstr "Вимкнути користувача"
+
 msgid "Enable user"
 msgstr "Увімкнути користувача"
 
 msgid "disabled"
 msgstr "вимкнено"
-
-msgid "Disable user"
-msgstr "Вимкнути користувача"
 
 msgid "Mail account data"
 msgstr "Надіслати дані рахунку"
@@ -1411,6 +1414,35 @@ msgid ""
 "If you already have received the email with the recovery token, enter your\n"
 "username, the recovery token and a new password (twice) below."
 msgstr ""
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Wiki-розмітка"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "Зберегти копію"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Ви не можете робити віддалену копію."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Невідома вкладена дія резервного копіювання: %s."
 
 msgid "You must login to add a quicklink."
 msgstr "Зареєструйтесь, щоб додати закладку."
@@ -1792,6 +1824,10 @@ msgstr "Некоректна назва файлу \"%s\"!"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "Створено пакунок %s зі сторінками %s."
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d вкладень]"
 
 msgid "Package pages"
 msgstr "Запакувати сторінки"
@@ -2973,17 +3009,8 @@ msgstr "Увімкнути/вимкнути нумерацію рядків"
 #~ "backup_*.\n"
 #~ "\n"
 
-#~ msgid "Backup"
-#~ msgstr "Зберегти копію"
-
 #~ msgid "Restore"
 #~ msgstr "Відновити з копії"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "Ви не можете робити віддалену копію."
-
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "Невідома вкладена дія резервного копіювання: %s."
 
 #~ msgid "Xapian Version"
 #~ msgstr "Версія Xapian"

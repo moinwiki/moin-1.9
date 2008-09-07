@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2008-08-22 02:05+0300\n"
 "Last-Translator: Dror Livne <livne.dror@gmail.com>\n"
 "Language-Team: Hebrew <moin-user@lists.sourceforge.net>\n"
@@ -1154,6 +1154,9 @@ msgstr ""
 msgid "No pages specified using --pages or --search, assuming full package."
 msgstr ""
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr ""
 
@@ -1172,14 +1175,14 @@ msgstr "Jabber"
 msgid "Action"
 msgstr "פעולה"
 
+msgid "Disable user"
+msgstr "משתמש מבוטל"
+
 msgid "Enable user"
 msgstr "אפשר משתמש"
 
 msgid "disabled"
 msgstr "מבוטל"
-
-msgid "Disable user"
-msgstr "משתמש מבוטל"
 
 msgid "Mail account data"
 msgstr "שלח את פרטי החשבון בדואר"
@@ -1379,6 +1382,35 @@ msgstr ""
 "=== איפוס ססמה ===\n"
 "אם קיבלת הודעת דוא\"ל המכילה מפתח לאיפוס ססמה, הקלד את שם המשתמש, את המפתח "
 "וססמה חדשה (פעמיים)"
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "סימון ויקי"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "גיבוי"
+
+msgid "You are not allowed to do remote backup."
+msgstr "הינך לא מורשה לבצע גיבוי מרחוק."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "תת פעולת גיבוי בלתי ידועה: %s"
 
 msgid "You must login to add a quicklink."
 msgstr "יש להתחבר בכדי להוסיף קישור מהיר."
@@ -1753,6 +1785,10 @@ msgstr "שם קובץ בלתי חוקי \"%s\"!"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "נוצרה חבילה %s המכילה את הדפים %s."
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d קבצים מצורפים]"
 
 msgid "Package pages"
 msgstr "דפי חבילה"
@@ -2910,14 +2946,5 @@ msgstr "סמן מספרי שורות"
 #~ "אנא וודא שהגדרות הויקי לערכי backup_* הינן נכונות ומדוייקות.\n"
 #~ "\n"
 
-#~ msgid "Backup"
-#~ msgstr "גיבוי"
-
 #~ msgid "Restore"
 #~ msgstr "שחזר"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "הינך לא מורשה לבצע גיבוי מרחוק."
-
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "תת פעולת גיבוי בלתי ידועה: %s"

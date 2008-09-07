@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2005-07-22 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -1201,6 +1201,9 @@ msgid "No pages specified using --pages or --search, assuming full package."
 msgstr ""
 "هیچ صفحه‌ای با --pages یا --search مشخص نشد، یک بسته کامل در نظر گرفته میشود."
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "فایل خروجی هم اکنون وجود دارد! ادامه کار ممکن نیست!"
 
@@ -1219,14 +1222,14 @@ msgstr "حساب Jabber"
 msgid "Action"
 msgstr "امکانات"
 
+msgid "Disable user"
+msgstr "کاربر را غیرفعال نما"
+
 msgid "Enable user"
 msgstr "کاربر را فعال نما"
 
 msgid "disabled"
 msgstr "غیرفعال"
-
-msgid "Disable user"
-msgstr "کاربر را غیرفعال نما"
 
 msgid "Mail account data"
 msgstr "اطلاعات ایمیل"
@@ -1436,6 +1439,35 @@ msgstr ""
 "=== تغییر کلمه عبور ===\n"
 "درصورتیکه ایمیل حاوی رمز تغییر کلمه عبور را دریافت نموده‌اید، نام‌کاربری خود،\n"
 "رمز تغییر کلمه عبور و کلمه عبور جدید خود را (دوبار) وارد نمایید."
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "زبان نوشتاری ویکی"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "پشتیبان‌گیری"
+
+msgid "You are not allowed to do remote backup."
+msgstr "شما مجاز به پشتیبان‌گیری از راه دور نیستید."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "عملیات ناشناخته %s در پشتیبان‌گیری."
 
 msgid "You must login to add a quicklink."
 msgstr "جهت اضافه نمودن یک لینک دسترسی سریع باید وارد سیستم شوید."
@@ -1815,6 +1847,10 @@ msgstr "نام \"%s\" معتبر نیست!"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "بسته %s شامل صفحات %s ساخته شد."
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d ضمیمه‌ها]"
 
 msgid "Package pages"
 msgstr "بسته صفحات"
@@ -3008,14 +3044,5 @@ msgstr "شماره خطوط"
 #~ "لطفا مطمئن شوید که مقادیر تنظیمی backup_* صحیح و کامل هستند.\n"
 #~ "\n"
 
-#~ msgid "Backup"
-#~ msgstr "پشتیبان‌گیری"
-
 #~ msgid "Restore"
 #~ msgstr "بازیافت"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "شما مجاز به پشتیبان‌گیری از راه دور نیستید."
-
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "عملیات ناشناخته %s در پشتیبان‌گیری."

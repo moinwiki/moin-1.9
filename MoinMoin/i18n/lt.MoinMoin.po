@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2008-06-29 13:35+0200\n"
 "Last-Translator: Aurelijus Sudzius <ruledbyfate@gmail.com>\n"
 "Language-Team: Lithuanian <ruledbyfate@gmail.com>\n"
@@ -1201,6 +1201,9 @@ msgstr ""
 "Nenurodyti puslapiai naudojant --pages arba --search, numatomas pilnas "
 "paketas"
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "Išvesties failas jau egzistuoja! Atsisakoma tęsti!"
 
@@ -1219,14 +1222,14 @@ msgstr "Jabber"
 msgid "Action"
 msgstr "Veiksmas"
 
+msgid "Disable user"
+msgstr "Pasyvinti naudotoją"
+
 msgid "Enable user"
 msgstr "Aktyvinti naudotoją"
 
 msgid "disabled"
 msgstr "pasyvintas"
-
-msgid "Disable user"
-msgstr "Pasyvinti naudotoją"
 
 msgid "Mail account data"
 msgstr "Pašto paskyros informacija"
@@ -1437,6 +1440,35 @@ msgstr ""
 "=== Slaptažodžio atkūrimas ===\n"
 "Jeigu jau gavote el. pašto laišką su atkūrimo raktu, įveskite savo\n"
 "naudotojo vardą, atkūrimo raktą ir naują slaptažodį (du kartus) žemiau."
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Wiki žymėjimas"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "Kopija"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Jums neleidžiama daryti nuotolinės kopijos."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Nežinomas kopijos poveiksmis: %s."
 
 msgid "You must login to add a quicklink."
 msgstr "Jūs privalote prisijungti, kad įdėtumėte greitąją nuorodą."
@@ -1819,6 +1851,10 @@ msgstr "Klaidingas failo pavadinimas „%s“!"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "Sukurtas paketas %s, turintis puslapius %s."
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d priedų]"
 
 msgid "Package pages"
 msgstr "Paketo puslapiai"
@@ -3014,14 +3050,5 @@ msgstr "Keisti eilučių numerius"
 #~ "teisingos ir užbaigtos.\n"
 #~ "\n"
 
-#~ msgid "Backup"
-#~ msgstr "Kopija"
-
 #~ msgid "Restore"
 #~ msgstr "Atkurti"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "Jums neleidžiama daryti nuotolinės kopijos."
-
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "Nežinomas kopijos poveiksmis: %s."

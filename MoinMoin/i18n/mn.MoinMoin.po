@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2006-12-05 12:04+0800\n"
 "Last-Translator: Amgalanbaatar Delegdorj <d.amgalanbaatar@gmail.com>\n"
 "Language-Team: Mongolia <d.amgalanbaatar@gmail.com>\n"
@@ -1189,6 +1189,9 @@ msgstr ""
 msgid "No pages specified using --pages or --search, assuming full package."
 msgstr ""
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr ""
 
@@ -1210,15 +1213,15 @@ msgid "Action"
 msgstr "А"
 
 #, fuzzy
+msgid "Disable user"
+msgstr "Идэвхгүй"
+
+#, fuzzy
 msgid "Enable user"
 msgstr "Идэвхтэй"
 
 #, fuzzy
 msgid "disabled"
-msgstr "Идэвхгүй"
-
-#, fuzzy
-msgid "Disable user"
 msgstr "Идэвхгүй"
 
 #, fuzzy
@@ -1424,6 +1427,35 @@ msgid ""
 "If you already have received the email with the recovery token, enter your\n"
 "username, the recovery token and a new password (twice) below."
 msgstr ""
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Wiki эх текст"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "Backup"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Та Remote-Backup хийж болохгүй."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Тодорхойгүй backup -ын туслах үйлдэл: %s."
 
 msgid "You must login to add a quicklink."
 msgstr "quicklink үүсгэхийн тулд логин хийсэн байх шаарлагатай"
@@ -1815,6 +1847,10 @@ msgstr "Файлын буруу нэр: \"%s\"!"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "%s -ийг агуулсан %s багц үүсгэгдлээ."
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d Хавсралт]"
 
 msgid "Package pages"
 msgstr "Хуудсуудыг багцлах"
@@ -3015,17 +3051,8 @@ msgstr "Мөрний дугаарыг нээх, хаах"
 #~ "Таны викиний тохиргооны backup_* утгууд үнэн зөв, бүрэнбайгаа эсэхээ "
 #~ "шалгана уу.\n"
 
-#~ msgid "Backup"
-#~ msgstr "Backup"
-
 #~ msgid "Restore"
 #~ msgstr "Backup сэргээх"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "Та Remote-Backup хийж болохгүй."
-
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "Тодорхойгүй backup -ын туслах үйлдэл: %s."
 
 #~ msgid "Xapian Version"
 #~ msgstr "Xapian-Хувилбар"

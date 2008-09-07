@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2007-01-05 22:27+0000\n"
 "Last-Translator: Rita Farinha <rita.farinha@intraneia.com>\n"
 "Language-Team: Portuguese <moin-devel@lists.sourceforge.net>\n"
@@ -1199,6 +1199,9 @@ msgstr ""
 msgid "No pages specified using --pages or --search, assuming full package."
 msgstr ""
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr ""
 
@@ -1220,15 +1223,15 @@ msgid "Action"
 msgstr "Acção"
 
 #, fuzzy
+msgid "Disable user"
+msgstr "Desligado"
+
+#, fuzzy
 msgid "Enable user"
 msgstr "Ligado"
 
 #, fuzzy
 msgid "disabled"
-msgstr "Desligado"
-
-#, fuzzy
-msgid "Disable user"
 msgstr "Desligado"
 
 #, fuzzy
@@ -1434,6 +1437,35 @@ msgid ""
 "If you already have received the email with the recovery token, enter your\n"
 "username, the recovery token and a new password (twice) below."
 msgstr ""
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Formato Wiki"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "Cópia de segurança"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Não tem permissão para fazer uma cópia de segurança remota."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Sub-acção desconhecida de cópia de segurança: %s."
 
 msgid "You must login to add a quicklink."
 msgstr "Tem de entrar para adicionar uma ligação rápida."
@@ -1817,6 +1849,10 @@ msgstr "Nome de ficheiro \"%s\" inválido!"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "O pacote %s com as páginas %s foi criado."
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d anexos]"
 
 msgid "Package pages"
 msgstr "Páginas de pacote"
@@ -3010,17 +3046,8 @@ msgstr "Ligar/Desligar números de linhas"
 #~ "estão correctos e completos.\n"
 #~ "\n"
 
-#~ msgid "Backup"
-#~ msgstr "Cópia de segurança"
-
 #~ msgid "Restore"
 #~ msgstr "Recuperar"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "Não tem permissão para fazer uma cópia de segurança remota."
-
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "Sub-acção desconhecida de cópia de segurança: %s."
 
 #~ msgid "Xapian Version"
 #~ msgstr "Versão de Xapian"

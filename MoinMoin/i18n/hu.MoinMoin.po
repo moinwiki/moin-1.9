@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2006-06-15 15:55+0200\n"
 "Last-Translator: jmarton@omikk.bme.hu, arostas@omikk.bme.hu\n"
 "Language-Team: Hungarian <HU@li.org>\n"
@@ -1159,6 +1159,9 @@ msgstr ""
 msgid "No pages specified using --pages or --search, assuming full package."
 msgstr ""
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr ""
 
@@ -1180,15 +1183,15 @@ msgid "Action"
 msgstr "Művelet"
 
 #, fuzzy
+msgid "Disable user"
+msgstr "Kikapcsolt"
+
+#, fuzzy
 msgid "Enable user"
 msgstr "Bekapcsolt"
 
 #, fuzzy
 msgid "disabled"
-msgstr "Kikapcsolt"
-
-#, fuzzy
-msgid "Disable user"
 msgstr "Kikapcsolt"
 
 #, fuzzy
@@ -1396,6 +1399,35 @@ msgid ""
 "If you already have received the email with the recovery token, enter your\n"
 "username, the recovery token and a new password (twice) below."
 msgstr ""
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Wiki-jelölés"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "Biztonsági másolat készítése"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Nem készíthet távoli biztonsági másolatot (backup)."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Érvénytelen biztonsági mentési mód: %s."
 
 msgid "You must login to add a quicklink."
 msgstr "Be kell lépnie a gyorslinkek hozzáadásához."
@@ -1788,6 +1820,10 @@ msgstr "Érvénytelen fájlnév: \"%s\""
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "%s nevű csomag, mely tartalmazza a(z) %s oldalakat, létre lett hozva."
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d melléklet]"
 
 msgid "Package pages"
 msgstr "Oldalak csomagolása"
@@ -2965,17 +3001,8 @@ msgstr "Sorszámozás megjelenítése/elrejtése"
 #~ "helyesek és teljesek.\n"
 #~ "\n"
 
-#~ msgid "Backup"
-#~ msgstr "Biztonsági másolat készítése"
-
 #~ msgid "Restore"
 #~ msgstr "Visszaállít"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "Nem készíthet távoli biztonsági másolatot (backup)."
-
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "Érvénytelen biztonsági mentési mód: %s."
 
 #, fuzzy
 #~ msgid "Xapian Version"

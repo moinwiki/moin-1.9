@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2007-12-22 17:56+0200\n"
 "Last-Translator: YiannisValassakis <tungolcild@gmail.com>\n"
 "Language-Team: Greek <moin-devel@lists.sourceforge.net>\n"
@@ -1102,6 +1102,9 @@ msgstr "Πρέπει να θέσετε κάποιο αρχείο εξόδου!"
 msgid "No pages specified using --pages or --search, assuming full package."
 msgstr ""
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "Το αρχείο εξόδου υπάρχει ήδη! Φοβάμαι να συνέχισω..."
 
@@ -1122,14 +1125,14 @@ msgstr ""
 msgid "Action"
 msgstr "Δράση"
 
+msgid "Disable user"
+msgstr "Απενεργοποίηση χρήστη"
+
 msgid "Enable user"
 msgstr "Ενεργοποίηση χρήστη"
 
 msgid "disabled"
 msgstr "απενεργοποιημένο"
-
-msgid "Disable user"
-msgstr "Απενεργοποίηση χρήστη"
 
 msgid "Mail account data"
 msgstr "Δεδομένα του λογαριασμού mail"
@@ -1304,6 +1307,36 @@ msgid ""
 "=== Password reset ===\n"
 "If you already have received the email with the recovery token, enter your\n"
 "username, the recovery token and a new password (twice) below."
+msgstr ""
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Backup"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "Backup"
+
+#, fuzzy
+msgid "You are not allowed to do remote backup."
+msgstr "Δεν επιτρέπεται να επεξεργαστείτε αυτή τη σελίδα."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
 msgstr ""
 
 msgid "You must login to add a quicklink."
@@ -1664,6 +1697,9 @@ msgstr "Το όνομα \"%s\" δεν είναι έγκυρο!"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "Δημιουργήθηκε το πακέτο %s,όπου περιέχονται οι σελίδες %s."
+
+msgid "Include all attachments?"
+msgstr ""
 
 msgid "Package pages"
 msgstr "Σελίδες πακέτου"
@@ -2763,9 +2799,6 @@ msgstr ""
 
 msgid "Toggle line numbers"
 msgstr ""
-
-#~ msgid "Backup"
-#~ msgstr "Backup"
 
 #~ msgid "Restore"
 #~ msgstr "Επαναφορά"

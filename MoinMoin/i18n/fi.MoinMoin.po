@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2008-06-13 18:25+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
@@ -1194,6 +1194,9 @@ msgstr ""
 "Sivuja ei määritelty valinnoilla --pages tai --search, suoritetaan "
 "täyspakkaus."
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr ""
 "Tiedosto on jo olemassa! Anna tallennettavalle tiedostolle toinen nimi ja "
@@ -1214,14 +1217,14 @@ msgstr "Jabber"
 msgid "Action"
 msgstr "Toiminto"
 
+msgid "Disable user"
+msgstr "Kytke käyttäjätunnus pois käytöstä"
+
 msgid "Enable user"
 msgstr "Ota käyttäjätunnus käyttöön"
 
 msgid "disabled"
 msgstr "Poissa"
-
-msgid "Disable user"
-msgstr "Kytke käyttäjätunnus pois käytöstä"
 
 msgid "Mail account data"
 msgstr "Lähetä käyttäjätiedot sähköpostitse"
@@ -1429,6 +1432,35 @@ msgstr ""
 "=== Salasanan asettaminen uudelleen ===\n"
 "Jos olet jo saanut palautustunnisteen sisältävän sähköpostiviestin, syötä\n"
 "käyttäjätunnuksesi, palautustunniste ja uusi salasana (kahdesti) alle."
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Wiki-merkintä"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "Varmuuskopio"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Sinulla ei ole oikeuksia etävarmuuskopioiden ottamiseksi."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Tuntematon varmistuksen osatoiminto: %s."
 
 msgid "You must login to add a quicklink."
 msgstr "Sinun täytyy kirjautua sisään lisätäksesi pikalinkin."
@@ -1814,6 +1846,10 @@ msgstr "Kelvoton tiedostonimi \"%s\"!"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "Luotu paketti %s sivu(i)sta %s."
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d liitetiedosto(a)]"
 
 msgid "Package pages"
 msgstr "Paketoi sivuja"
@@ -3016,17 +3052,8 @@ msgstr "Rivinumerot päälle/pois"
 #~ "kattavat.\n"
 #~ "\n"
 
-#~ msgid "Backup"
-#~ msgstr "Varmuuskopio"
-
 #~ msgid "Restore"
 #~ msgstr "Palauta kopio"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "Sinulla ei ole oikeuksia etävarmuuskopioiden ottamiseksi."
-
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "Tuntematon varmistuksen osatoiminto: %s."
 
 #~ msgid "Xapian Version"
 #~ msgstr "Xapian, versio"
