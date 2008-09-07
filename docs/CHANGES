@@ -1,17 +1,23 @@
+MoinMoin Documentation Overview
+===============================
+
+docs/INSTALL.html: generic instructions about installing MoinMoin
+
+docs/UPDATE.html: generic instructions about updating MoinMoin
+
+docs/README.migration: migration procedure for your data_dir
+
+docs/CHANGES (this file): please completely read it until you reach the version
+                          you were using until now - otherwise you might miss
+                          some important upgrading and configuration hints.
+                          Starting with 1.5.3, update installation hints are
+                          marked with HINT. They assume you are upgrading from
+                          the last release version before (e.g. from 1.5.2 to
+                          1.5.3).
+
+
 MoinMoin Version History
 ========================
-
-Documentations with generic instructions about installing or updating MoinMoin
-are available as docs/INSTALL.html and docs/UPDATE.html. A special documenation
-about the migration procedure for your data_dir is in docs/README.migration.
-
-Additionally, please completely read CHANGES text until you reach the version
-you were using until now. Otherwise you might miss some important upgrading and
-configuration hints.
-
-Starting with 1.5.3, update installation hints are marked with HINT.
-They assume you are upgrading from the last release version before (e.g. from
-1.5.2 to 1.5.3).
 
 This release has known bugs (see MoinMoin:MoinMoinBugs), but we think it is
 already better than the previous stable release. Our release policy is not
@@ -27,6 +33,18 @@ Known main issues:
 
 
 Version 1.8.0current:
+
+  New Features:
+    * New "modernized" theme.
+    * New macros "WikiConfig" and "WikiConfigHelp".
+    * GUI Editor:
+      * upgraded to use FCKEditor version 2.6.3 (current version)
+      * user can insert and modify various types of MoinMoin links
+    * Per-parser quickhelp, 'quickhelp' class variable of parser class.
+    * New plugin_dirs setting to allow multiple plugin paths (additional to
+      the automatically configured plugin_dir [default: data_dir/plugin]).
+    * @EMAIL@ expands to a MailTo macro call with the obfuscated email address
+      of the current user.
 
   Bug Fixes:
     * GUI Editor - fixed bugs:
@@ -75,18 +93,6 @@ Version 1.8.0current:
       existing files - thus we removed the "restore" part of the action and
       recommend that you just contact the wiki server admin in case of trouble,
       give him your wiki backup file and let him carefully restore it.)
-
-  New Features:
-    * New "modernized" theme.
-    * New macros "WikiConfig" and "WikiConfigHelp".
-    * GUI Editor:
-      * upgraded to use FCKEditor version 2.6.3 (current version)
-      * user can insert and modify various types of MoinMoin links
-    * Per-parser quickhelp, 'quickhelp' class variable of parser class.
-    * New plugin_dirs setting to allow multiple plugin paths (additional to
-      the automatically configured plugin_dir [default: data_dir/plugin]).
-    * @EMAIL@ expands to a MailTo macro call with the obfuscated email address
-      of the current user.
 
   Other Changes:
     * user_autocreate setting was removed from wiki configuration and replaced
