@@ -74,7 +74,6 @@ class RenamePage(ActionBase):
         if success:
             url = Page(self.request, self.newpagename).url(self.request)
             self.request.http_redirect(url)
-            self.request.finish()
         else:
             self.render_msg(self.make_form(), "dialog")
 
