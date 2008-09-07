@@ -963,7 +963,6 @@ class convert_tree(visitor):
                     content_buffer.append(self.new_line_dont_remove)
                 else:
                     pass
-                    #print i.localName
 
             if delimiters:
                 longest_inner_formater = max(delimiters)
@@ -1306,7 +1305,6 @@ class convert_tree(visitor):
 
     def _process_img(self, node):
         attrs = get_attrs(node)
-        print attrs
 
         title = attrs.pop('title', '')
         if title.startswith("smiley:"):
