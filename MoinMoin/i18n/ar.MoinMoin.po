@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2008-04-12 20:07+0200\n"
 "Last-Translator: Mohamed Yahya <yahya.mohamed@gmail.com>\n"
 "Language-Team: \n"
@@ -1066,6 +1066,9 @@ msgstr ""
 msgid "No pages specified using --pages or --search, assuming full package."
 msgstr ""
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr ""
 
@@ -1088,15 +1091,15 @@ msgid "Action"
 msgstr "إجراء"
 
 #, fuzzy
+msgid "Disable user"
+msgstr "معطل"
+
+#, fuzzy
 msgid "Enable user"
 msgstr "مفعل"
 
 #, fuzzy
 msgid "disabled"
-msgstr "معطل"
-
-#, fuzzy
-msgid "Disable user"
 msgstr "معطل"
 
 #, fuzzy
@@ -1274,6 +1277,36 @@ msgid ""
 "If you already have received the email with the recovery token, enter your\n"
 "username, the recovery token and a new password (twice) below."
 msgstr ""
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "نسخ احتياطي"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "نسخ احتياطي"
+
+#, fuzzy
+msgid "You are not allowed to do remote backup."
+msgstr "لا يسمح لك القيام بهذا الإجراء."
+
+#, fuzzy, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "نفذ عملية %(actionname)s?"
 
 msgid "You must login to add a quicklink."
 msgstr "يجب عليك تسجيل دخولك لإضافة رابط سريع"
@@ -1640,6 +1673,9 @@ msgstr ""
 
 #, python-format
 msgid "Created the package %s containing the pages %s."
+msgstr ""
+
+msgid "Include all attachments?"
 msgstr ""
 
 #, fuzzy
@@ -2774,19 +2810,8 @@ msgstr ""
 #~ msgid "Wiki Backup / Restore"
 #~ msgstr "نسخ إحتياطي / إستعادة ويكي"
 
-#~ msgid "Backup"
-#~ msgstr "نسخ احتياطي"
-
 #~ msgid "Restore"
 #~ msgstr "استعادة"
-
-#, fuzzy
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "لا يسمح لك القيام بهذا الإجراء."
-
-#, fuzzy
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "نفذ عملية %(actionname)s?"
 
 #, fuzzy
 #~ msgid "New Page or New Attachment"

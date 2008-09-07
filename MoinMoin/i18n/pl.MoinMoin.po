@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2006-02-09 11:25+0100\n"
 "Last-Translator: Radomir Dopieralski <mondev@sheep.art.pl>\n"
 "Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
@@ -1193,6 +1193,9 @@ msgid "No pages specified using --pages or --search, assuming full package."
 msgstr ""
 "Nie podano stron dla --pages lub --search, zakładam że chodzi o pełen pakiet."
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "Plik wyjściowy już istnieje! Tchórzliwie odmawiam kontynuacji!"
 
@@ -1211,14 +1214,14 @@ msgstr "Jabber"
 msgid "Action"
 msgstr "Akcja"
 
+msgid "Disable user"
+msgstr "Wyłącz konto czytelnika"
+
 msgid "Enable user"
 msgstr "Włącz konto czytelnika"
 
 msgid "disabled"
 msgstr "wyłączone"
-
-msgid "Disable user"
-msgstr "Wyłącz konto czytelnika"
 
 msgid "Mail account data"
 msgstr "Prześlij dane konta"
@@ -1427,6 +1430,35 @@ msgstr ""
 "=== Ustawianie hasła ===Jeśli już masz wiadomość zawierającą kod "
 "odzyskiwania hasła, wprowadź\n"
 "swój identyfikator czytelnika, kod oraz nowe hasło (dwukrotnie)."
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Język oznaczeń wiki"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "Kopia zapasowa"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Nie możesz wykonać kopii zapasowej na tej stronie."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Nieznana akcja: %s"
 
 msgid "You must login to add a quicklink."
 msgstr "Musisz się zalogować by dodać szybki odnośnik."
@@ -1807,6 +1839,10 @@ msgstr "Nieprawidłowa nazwa pliku \"%s\"!"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "Utworzono pakiet %s zawierający strony %s."
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d załączników]"
 
 msgid "Package pages"
 msgstr "Spakuj strony"
@@ -3004,17 +3040,8 @@ msgstr "Ustaw numery linii"
 #~ "complete.\n"
 #~ "\n"
 
-#~ msgid "Backup"
-#~ msgstr "Kopia zapasowa"
-
 #~ msgid "Restore"
 #~ msgstr "Przywróć"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "Nie możesz wykonać kopii zapasowej na tej stronie."
-
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "Nieznana akcja: %s"
 
 #~ msgid "Xapian Version"
 #~ msgstr "Wersja Xapian"

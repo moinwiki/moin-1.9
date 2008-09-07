@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2006-08-17 20:50+0100\n"
 "Last-Translator: Translation sponsored by Tenalt Ltd. (info@tenalt.com)\n"
 "Language-Team: \n"
@@ -1187,6 +1187,9 @@ msgstr ""
 "Nijedna stranica nije odabrana koristeći --pages ili --search, "
 "pretpostavljeno je da je odabrano sve."
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "Izlazna datoteka već postoji! Operacija neće biti nastavljena!"
 
@@ -1205,14 +1208,14 @@ msgstr "Jabber"
 msgid "Action"
 msgstr "Akcija"
 
+msgid "Disable user"
+msgstr "Isključeno"
+
 msgid "Enable user"
 msgstr "Uključeno"
 
 msgid "disabled"
 msgstr "isključeno"
-
-msgid "Disable user"
-msgstr "Isključeno"
 
 msgid "Mail account data"
 msgstr "Pošalji podatke o korisničkom računu"
@@ -1415,6 +1418,35 @@ msgid ""
 "If you already have received the email with the recovery token, enter your\n"
 "username, the recovery token and a new password (twice) below."
 msgstr ""
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Označavanje wiki"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "Arhiviranje"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Nije vam dozvoljeno raditi udaljeno arhiviranje."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Nepoznata akcija arhiviranja: %s."
 
 msgid "You must login to add a quicklink."
 msgstr "Morate se prijaviti za dodavanje brzih linkova."
@@ -1794,6 +1826,10 @@ msgstr "Nepravilno ime datoteke \"%s\"!"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "Stvoren paket %s koji sadrži stranice %s."
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d privitaka]"
 
 msgid "Package pages"
 msgstr "Zapakiraj stranice"
@@ -2981,17 +3017,8 @@ msgstr "Uključi/isključi obrojčavanje redova"
 #~ "Pripazite da su vrijednosti vaše konfiguracije backup_* točne i potpune.\n"
 #~ "\n"
 
-#~ msgid "Backup"
-#~ msgstr "Arhiviranje"
-
 #~ msgid "Restore"
 #~ msgstr "Vraćanje"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "Nije vam dozvoljeno raditi udaljeno arhiviranje."
-
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "Nepoznata akcija arhiviranja: %s."
 
 #~ msgid "Xapian Version"
 #~ msgstr "Inačica Xapiana"

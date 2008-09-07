@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
-"PO-Revision-Date: 2006-06-26 21:43-0800\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
+"PO-Revision-Date: 2008-09-01 07:26-0800\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -1208,6 +1208,9 @@ msgid "No pages specified using --pages or --search, assuming full package."
 msgstr ""
 "Страницы не указаны используя --pager или --search, использую весь пакет."
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "Файл вывода уже существует! Я боюсь продолжать!"
 
@@ -1226,14 +1229,14 @@ msgstr "Jabber"
 msgid "Action"
 msgstr "Действие"
 
+msgid "Disable user"
+msgstr "Запретить использование учётной записи"
+
 msgid "Enable user"
 msgstr "Разрешить использование учётной записи"
 
 msgid "disabled"
 msgstr "запрещён"
-
-msgid "Disable user"
-msgstr "Запретить использование учётной записи"
 
 msgid "Mail account data"
 msgstr "Отправить мне почтой информацию по учетной записи"
@@ -1444,6 +1447,35 @@ msgstr ""
 "=== Сброс пароля ===\n"
 "Если вы уже получили письмо со строкой для сброса пароля, введите ваше\n"
 "имя пользователя, строку сброса и новый пароль (дважды)."
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Вики-разметка"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "Сделать резервную копию"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Вам нельзя совершать удаленное резервное копирование."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Неизвестная команда резервного копирования: %s."
 
 msgid "You must login to add a quicklink."
 msgstr "Чтобы добавить закладку вы должны быть зарегистрированы."
@@ -1826,6 +1858,10 @@ msgstr "Неправильное имя файла \"%s\"!"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "Создан пакет %s со страницами %s."
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d вложений]"
 
 msgid "Package pages"
 msgstr "Страницы пакета"
@@ -2558,14 +2594,13 @@ msgid "User"
 msgstr "Пользователь"
 
 msgid "[ATTACH]"
-msgstr ""
+msgstr "[ВЛОЖЕНИЕ]"
 
-#, fuzzy
 msgid "Variable name"
-msgstr "Имя файла"
+msgstr "Имя переменной"
 
 msgid "Description"
-msgstr ""
+msgstr "Описание"
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -2614,7 +2649,7 @@ msgid "Display"
 msgstr "Просмотр"
 
 msgid "Wiki configuration"
-msgstr ""
+msgstr "Конфигурация Вики"
 
 msgid ""
 "This table shows all settings in this wiki that do not have default values. "
@@ -2622,10 +2657,13 @@ msgid ""
 "''italic'', those may be due to third-party extensions needing configuration "
 "or settings that were removed from Moin."
 msgstr ""
+"Эта таблица содержит все настройки вики для которых нет значений по "
+"умолчанию. ''Курсивом'' отмечены настройки, неизвестные системе. Возможно, "
+"они относятся к расширениям сторонних разработчиков или к предыдущим версиям "
+"Моин-Моин."
 
-#, fuzzy
 msgid "Setting"
-msgstr "Настройки"
+msgstr "Настройка"
 
 msgid "Search for items"
 msgstr "Найти страницы"
@@ -3022,17 +3060,8 @@ msgstr "Переключить отображение номеров строк"
 #~ "backup_*.\n"
 #~ "\n"
 
-#~ msgid "Backup"
-#~ msgstr "Сделать резервную копию"
-
 #~ msgid "Restore"
 #~ msgstr "Восстановить из резервной копии"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "Вам нельзя совершать удаленное резервное копирование."
-
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "Неизвестная команда резервного копирования: %s."
 
 #~ msgid "Xapian Version"
 #~ msgstr "Версия Xapian"

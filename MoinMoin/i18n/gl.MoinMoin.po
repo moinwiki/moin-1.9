@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2007-02-22 17:39-0300\n"
 "Last-Translator: Iván Méndez <imendez@udc.es>\n"
 "Language-Team: Galician <moin-devel@lists.sourceforge.net>\n"
@@ -1199,6 +1199,9 @@ msgstr ""
 msgid "No pages specified using --pages or --search, assuming full package."
 msgstr ""
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr ""
 
@@ -1220,15 +1223,15 @@ msgid "Action"
 msgstr "Acción"
 
 #, fuzzy
+msgid "Disable user"
+msgstr "Desactivado"
+
+#, fuzzy
 msgid "Enable user"
 msgstr "Activado"
 
 #, fuzzy
 msgid "disabled"
-msgstr "Desactivado"
-
-#, fuzzy
-msgid "Disable user"
 msgstr "Desactivado"
 
 #, fuzzy
@@ -1449,6 +1452,35 @@ msgid ""
 "If you already have received the email with the recovery token, enter your\n"
 "username, the recovery token and a new password (twice) below."
 msgstr ""
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Formato Wiki"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "Copia de seguranza"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Non ten permiso para facer arquivos de seguranza remotos."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Subacción de copia de seguranza descoñecida: %s."
 
 msgid "You must login to add a quicklink."
 msgstr ""
@@ -1848,6 +1880,10 @@ msgstr "Nome de arquivo non válido \"%s\"!"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "Creouse o paquete %s que contén as páxinas %s"
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d anexos]"
 
 msgid "Package pages"
 msgstr "Empaquetar páxinas"
@@ -3032,17 +3068,8 @@ msgstr "[des]activar nros. de liña"
 #~ "correctos e completos.\n"
 #~ "\n"
 
-#~ msgid "Backup"
-#~ msgstr "Copia de seguranza"
-
 #~ msgid "Restore"
 #~ msgstr "Restaurar"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "Non ten permiso para facer arquivos de seguranza remotos."
-
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "Subacción de copia de seguranza descoñecida: %s."
 
 #, fuzzy
 #~ msgid "Xapian Version"

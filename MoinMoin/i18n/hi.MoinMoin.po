@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rakesh Pandit <rakesh.pandit@gmail.com>\n"
 "Language-Team: Hindi\n"
@@ -1062,6 +1062,9 @@ msgstr ""
 msgid "No pages specified using --pages or --search, assuming full package."
 msgstr ""
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr ""
 
@@ -1080,14 +1083,14 @@ msgstr ""
 msgid "Action"
 msgstr "क्रिया"
 
+msgid "Disable user"
+msgstr "बाद्य प्रयोगकर्त्ता"
+
 msgid "Enable user"
 msgstr "सक्रिय प्रयोगकर्त्ता"
 
 msgid "disabled"
 msgstr "बाद्य"
-
-msgid "Disable user"
-msgstr "बाद्य प्रयोगकर्त्ता"
 
 msgid "Mail account data"
 msgstr "मेल एकाऊट िववरन"
@@ -1263,6 +1266,35 @@ msgid ""
 "If you already have received the email with the recovery token, enter your\n"
 "username, the recovery token and a new password (twice) below."
 msgstr ""
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "बचाव"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "बचाव"
+
+msgid "You are not allowed to do remote backup."
+msgstr "अापको दूरवर्ती बेकेप की आग्या नहीं है।"
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "अज्ञान पुराना छोटी क्रिया: %s ।"
 
 msgid "You must login to add a quicklink."
 msgstr ""
@@ -1623,6 +1655,9 @@ msgstr "अमान्य फायल का नाम \"%s\"!"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "%s पेकेज को बनाया जिसमे %s पृष्ट है।"
+
+msgid "Include all attachments?"
+msgstr ""
 
 msgid "Package pages"
 msgstr "पेकेज पृष्ट"
@@ -2762,17 +2797,8 @@ msgstr ""
 #~ "\n"
 #~ "कृपया यह दयान में रखे की वीकी कानफिगरेशन पुरी अाैरसही है ।\n"
 
-#~ msgid "Backup"
-#~ msgstr "बचाव"
-
 #~ msgid "Restore"
 #~ msgstr "बहाल करना"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "अापको दूरवर्ती बेकेप की आग्या नहीं है।"
-
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "अज्ञान पुराना छोटी क्रिया: %s ।"
 
 #~ msgid "New Name"
 #~ msgstr "नया नाम"

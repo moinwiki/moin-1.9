@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2008-03-12 15:01+0900\n"
 "Last-Translator: Seungik Lee <seungiklee@gmail.com>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
@@ -1171,6 +1171,9 @@ msgstr "output 파일을 명시해야 합니다."
 msgid "No pages specified using --pages or --search, assuming full package."
 msgstr ""
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr ""
 
@@ -1191,14 +1194,14 @@ msgstr ""
 msgid "Action"
 msgstr "액션"
 
+msgid "Disable user"
+msgstr "사용 차단"
+
 msgid "Enable user"
 msgstr "사용 허가"
 
 msgid "disabled"
 msgstr "사용 불가"
-
-msgid "Disable user"
-msgstr "사용 차단"
 
 msgid "Mail account data"
 msgstr "계정 정보를 메일로 발송"
@@ -1378,6 +1381,35 @@ msgid ""
 "If you already have received the email with the recovery token, enter your\n"
 "username, the recovery token and a new password (twice) below."
 msgstr ""
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "위키 부호"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "백업"
+
+msgid "You are not allowed to do remote backup."
+msgstr "원격 백업을 할 수 있는 권한이 없습니다."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "알 수 없는 백업 하위 작업: %s"
 
 msgid "You must login to add a quicklink."
 msgstr "즐겨찾기를 추가하시려면 로그인을 하셔야 합니다."
@@ -1759,6 +1791,10 @@ msgstr "\"%s\"는(은) 잘못된 파일 이름입니다!"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "문서 %s를(을) 포함하는 패키지 %s를(을) 생성했습니다."
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[첨부 %d개]"
 
 msgid "Package pages"
 msgstr "문서 묶기"
@@ -2910,17 +2946,8 @@ msgstr "줄 번호 보이기/숨기기"
 #~ "complete.\n"
 #~ "\n"
 
-#~ msgid "Backup"
-#~ msgstr "백업"
-
 #~ msgid "Restore"
 #~ msgstr "복원"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "원격 백업을 할 수 있는 권한이 없습니다."
-
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "알 수 없는 백업 하위 작업: %s"
 
 #~ msgid "Xapian Version"
 #~ msgstr "Xapian 버젼"

@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
-"PO-Revision-Date: 2008-06-22 17:05+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
+"PO-Revision-Date: 2008-08-31 12:35+0200\n"
 "Last-Translator: thomas@marquart.se\n"
 "Language-Team: Swedish <moin-user@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -1184,6 +1184,9 @@ msgstr "Du måste ange en fil för output!"
 msgid "No pages specified using --pages or --search, assuming full package."
 msgstr "Inga sidor angivna med --pages eller --search, antar hela paketet."
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "Filen för output finns redan! Jag är feg och vägrar fortsätta!"
 
@@ -1202,14 +1205,14 @@ msgstr "Jabber"
 msgid "Action"
 msgstr "Åtgärd"
 
+msgid "Disable user"
+msgstr "Avaktivera användare"
+
 msgid "Enable user"
 msgstr "Aktivera användare"
 
 msgid "disabled"
 msgstr "avaktiverad"
-
-msgid "Disable user"
-msgstr "Avaktivera användare"
 
 msgid "Mail account data"
 msgstr "Skicka kontoinformation som epost"
@@ -1415,6 +1418,35 @@ msgstr ""
 "=== Återställning av lösenord ===\n"
 "Om du redan har fått epost med en token för återställning, skriv in ditt\n"
 "användarnamn, token och ett nytt lösenord (två gångar) nedan."
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Wiki-märkning"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "Säkerhetskopiera"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Du har inte tillåtelse att göra fjärrbackup."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Okänd backup-underåtgärd: %s."
 
 msgid "You must login to add a quicklink."
 msgstr "Du måste logga in för att kunna lägga till en snabblänk."
@@ -1795,6 +1827,10 @@ msgstr "Ogiltigt filnamn \"%s\"!"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "Skapade paketet %s som innehåller sidorna %s."
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d bilagor]"
 
 msgid "Package pages"
 msgstr "Paketsidor"
@@ -2528,14 +2564,13 @@ msgid "User"
 msgstr "Användare"
 
 msgid "[ATTACH]"
-msgstr ""
+msgstr "[BIFOGA]"
 
-#, fuzzy
 msgid "Variable name"
-msgstr "Filnamn"
+msgstr "Variablenamn"
 
 msgid "Description"
-msgstr ""
+msgstr "Beskrivning"
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -2584,7 +2619,7 @@ msgid "Display"
 msgstr "Visa"
 
 msgid "Wiki configuration"
-msgstr ""
+msgstr "Wikiinställningar"
 
 msgid ""
 "This table shows all settings in this wiki that do not have default values. "
@@ -2592,10 +2627,13 @@ msgid ""
 "''italic'', those may be due to third-party extensions needing configuration "
 "or settings that were removed from Moin."
 msgstr ""
+"Tabellen visar alla inställningar i denna wiki som inte har ett "
+"standardvärde. Inställningar som systemet inte känner till visas "
+"''kursivt''. Dessa kan komma från tredje-parts insticksmoduler som behöver "
+"konfigureras eller inställningar som har tagits bort ur Moin."
 
-#, fuzzy
 msgid "Setting"
-msgstr "Inställningar"
+msgstr "Inställning"
 
 msgid "Search for items"
 msgstr "Sök efter poster"
@@ -2991,17 +3029,8 @@ msgstr "Slå av/på radnumrering"
 #~ "kompletta.\n"
 #~ "\n"
 
-#~ msgid "Backup"
-#~ msgstr "Säkerhetskopiera"
-
 #~ msgid "Restore"
 #~ msgstr "Återställ"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "Du har inte tillåtelse att göra fjärrbackup."
-
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "Okänd backup-underåtgärd: %s."
 
 #~ msgid "Xapian Version"
 #~ msgstr "Xapian-version"

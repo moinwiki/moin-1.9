@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2008-08-15 10:04-0500\n"
 "Last-Translator: Igor Támara <igor@tamaraptino.org>\n"
 "Language-Team: Spanish <moin-devel@lists.sourceforge.net>\n"
@@ -1202,6 +1202,9 @@ msgstr ""
 "No se especificaron páginas usando --paginas o --busqueda, se asume un "
 "paquete completo."
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "El archivo de salida YA existe! No continuaré cobardemente!"
 
@@ -1220,14 +1223,14 @@ msgstr "Jabber"
 msgid "Action"
 msgstr "Acción"
 
+msgid "Disable user"
+msgstr "Desactir usuario"
+
 msgid "Enable user"
 msgstr "Activar usuario"
 
 msgid "disabled"
 msgstr "desactivado"
-
-msgid "Disable user"
-msgstr "Desactir usuario"
 
 msgid "Mail account data"
 msgstr "Enviar datos de cuenta vía e-mail"
@@ -1431,6 +1434,35 @@ msgid ""
 "If you already have received the email with the recovery token, enter your\n"
 "username, the recovery token and a new password (twice) below."
 msgstr ""
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Formato Wiki"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "Copia de respaldo"
+
+msgid "You are not allowed to do remote backup."
+msgstr "No tienes permisos para hacer respaldos remotos."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Subacción de copia de seguridad desconocida: %s."
 
 msgid "You must login to add a quicklink."
 msgstr ""
@@ -1818,6 +1850,10 @@ msgstr "Nombre de archivo no válido \"%s\"!"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "Se creó el paquete %s conteniendo las páginas %s"
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d adjuntos]"
 
 msgid "Package pages"
 msgstr "Empaquetar páginas"
@@ -3017,17 +3053,8 @@ msgstr "[des]activar nros. de línea"
 #~ "correctos y completos.\n"
 #~ "\n"
 
-#~ msgid "Backup"
-#~ msgstr "Copia de respaldo"
-
 #~ msgid "Restore"
 #~ msgstr "Restaurar"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "No tienes permisos para hacer respaldos remotos."
-
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "Subacción de copia de seguridad desconocida: %s."
 
 #~ msgid "Xapian Version"
 #~ msgstr "Versión Xapian"

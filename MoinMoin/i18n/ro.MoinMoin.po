@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2005-08-18 14:19+EET\n"
 "Last-Translator: Ovidiu Sabou <ovidiu.sabou@gmail.com>\n"
 "Language-Team: Romanian <ovidiu.sabou@gmail.com>\n"
@@ -1159,6 +1159,9 @@ msgstr ""
 msgid "No pages specified using --pages or --search, assuming full package."
 msgstr ""
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr ""
 
@@ -1177,14 +1180,14 @@ msgstr ""
 msgid "Action"
 msgstr "Acţiune"
 
+msgid "Disable user"
+msgstr "Dezactivare utilizator"
+
 msgid "Enable user"
 msgstr "Activare utilizator"
 
 msgid "disabled"
 msgstr "dezactivat"
-
-msgid "Disable user"
-msgstr "Dezactivare utilizator"
 
 msgid "Mail account data"
 msgstr "Datele contului de email"
@@ -1366,6 +1369,37 @@ msgid ""
 "If you already have received the email with the recovery token, enter your\n"
 "username, the recovery token and a new password (twice) below."
 msgstr ""
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Text Sursă Wiki"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+#, fuzzy
+msgid "Backup"
+msgstr "Marcare"
+
+#, fuzzy
+msgid "You are not allowed to do remote backup."
+msgstr "Pe această pagină nu puteţi face %s"
+
+#, fuzzy, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Acţiune necunoscută %(action_name)s."
 
 msgid "You must login to add a quicklink."
 msgstr "Trebuie să vă logaţi pentru a putea adăuga o legătură rapidă"
@@ -1766,6 +1800,10 @@ msgstr "Argumente de includere \"%s\" sunt invalide!"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr ""
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d ataşamente]"
 
 #, fuzzy
 msgid "Package pages"
@@ -2899,14 +2937,6 @@ msgstr "Desen clicabil: %(filename)s"
 
 msgid "Toggle line numbers"
 msgstr "Comutare numerotare linii"
-
-#, fuzzy
-#~ msgid "Backup"
-#~ msgstr "Marcare"
-
-#, fuzzy
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "Pe această pagină nu puteţi face %s"
 
 #, fuzzy
 #~ msgid "Xapian Version"

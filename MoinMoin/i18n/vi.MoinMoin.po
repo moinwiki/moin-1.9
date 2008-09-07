@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2004-11-19 21:03+0800\n"
 "Last-Translator: Nam T. Nguyen <nnt@nntsoft.com>\n"
 "Language-Team: Vietnamese <moin-devel@lists.sourceforge.net>\n"
@@ -1167,6 +1167,9 @@ msgstr ""
 msgid "No pages specified using --pages or --search, assuming full package."
 msgstr ""
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr ""
 
@@ -1187,13 +1190,13 @@ msgstr ""
 msgid "Action"
 msgstr "Công việc"
 
+msgid "Disable user"
+msgstr ""
+
 msgid "Enable user"
 msgstr ""
 
 msgid "disabled"
-msgstr ""
-
-msgid "Disable user"
 msgstr ""
 
 #, fuzzy
@@ -1375,6 +1378,37 @@ msgid ""
 "If you already have received the email with the recovery token, enter your\n"
 "username, the recovery token and a new password (twice) below."
 msgstr ""
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Đánh dấu kiểu wiki"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+#, fuzzy
+msgid "Backup"
+msgstr "Đánh dấu"
+
+#, fuzzy
+msgid "You are not allowed to do remote backup."
+msgstr "Bạn không thể %s vào trang này."
+
+#, fuzzy, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Việc không rõ"
 
 msgid "You must login to add a quicklink."
 msgstr ""
@@ -1762,6 +1796,10 @@ msgstr "Không hiểu tham số \"%s\"!"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr ""
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d attachments]"
 
 msgid "Package pages"
 msgstr ""
@@ -2891,14 +2929,6 @@ msgstr "Sửa bản vẽ \"%(filename)s\""
 
 msgid "Toggle line numbers"
 msgstr ""
-
-#, fuzzy
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "Bạn không thể %s vào trang này."
-
-#, fuzzy
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "Việc không rõ"
 
 #, fuzzy
 #~ msgid "Xapian Version"

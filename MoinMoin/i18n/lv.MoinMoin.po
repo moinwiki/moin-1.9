@@ -13,10 +13,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2008-05-10 22:31+0200\n"
-"Last-Translator: Radomirs Cirskis <nad2000 AT gmail DOT NO SPAM com>\n"
-"Language-Team: Latvian <nad2000 AT gmail DOT NO SPAM com>\n"
+"Last-Translator: Radomirs Cirskis <nad2000 AT AT AT AT gmail SPAM NO NO DOT "
+"NO SPAM com>\n"
+"Language-Team: Latvian <nad2000 AT AT AT AT gmail SPAM NO NO DOT NO SPAM "
+"com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -450,7 +452,7 @@ msgstr "Rindā %(lineno)i nedefinēta funkcija %(func)s."
 msgid "The file %s was not found in the package."
 msgstr "Fails %s pakotnē netika atrasts."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
@@ -460,9 +462,9 @@ msgid ""
 msgstr ""
 "Lietotāja vārds: %s\n"
 "\n"
-"Lietotāja parole: %s\n"
+"Parole atjaunošanas marķieris: %s\n"
 "\n"
-"Lietotāja URL: %s/%s?action=login\n"
+"Paroles atstatīšanas URL: %s/?action=recoverpass&name=%s&token=%s\n"
 
 msgid ""
 "Somebody has requested to email you a password recovery token.\n"
@@ -609,9 +611,8 @@ msgid ""
 "one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
 
-#, fuzzy
 msgid "You need to log in."
-msgstr "Jūs esat atslēgts(-a)."
+msgstr "Nepieciešams pieslēgties."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -649,33 +650,32 @@ msgstr ""
 msgid "OpenID error: %s."
 msgstr ""
 
-#, fuzzy
 msgid "Verification canceled."
-msgstr "Operācija tika atsaukta."
+msgstr "Verificēšanās tika atsaukta."
 
 msgid "OpenID failure."
-msgstr ""
+msgstr "OpenID kļūda."
 
 msgid "Your account is now associated to your OpenID."
-msgstr ""
+msgstr "Jūsu konts ir asociēts ar Jūsu OpenID."
 
 msgid "The password you entered is not valid."
-msgstr ""
+msgstr "Parole, kuru Jus ievadījāt, nav derīga."
 
 msgid "OpenID verification requires that you click this button:"
-msgstr ""
+msgstr "OpenID verificēšanai nepieciešams, lai Jūs nospiestu šo spiedpogu:"
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
-msgstr ""
+msgstr "OpenID autentificēšanai jābūt iespējotām anonīmām sesijām."
 
 msgid "Failed to resolve OpenID."
-msgstr ""
+msgstr "Neveiksmīga OpenID noteikšana."
 
 msgid "OpenID discovery failure, not a valid OpenID."
-msgstr ""
+msgstr "Neveiksmīga OpenID noteikšana, nederīgs OpenID identifikators."
 
 msgid "No OpenID."
-msgstr ""
+msgstr "Nav OpenID."
 
 msgid ""
 "If you do not have an account yet, you can still log in with your OpenID and "
@@ -688,31 +688,26 @@ msgstr ""
 msgid "Page has been modified in a trivial fashion"
 msgstr ""
 
-#, fuzzy
 msgid "Page has been renamed"
-msgstr "Apmeklējumi un labojumi"
+msgstr "Lapa ir pārdēvēta"
 
-#, fuzzy
 msgid "Page has been deleted"
-msgstr "Lapa \"%s\" veiksmīgi dzēsta!"
+msgstr "Lapa ir dzēsta"
 
-#, fuzzy
 msgid "Page has been copied"
-msgstr "Apmeklējumi un labojumi"
+msgstr "Lapa ir bijusi pārkopēta"
 
-#, fuzzy
 msgid "A new attachment has been added"
-msgstr "Jauna piesaistes nosaukums"
+msgstr "Jauna piesaiste ir bijusi pievienota"
 
 msgid "A page has been reverted to a previous state"
-msgstr ""
+msgstr "Lapa ir atgriezta uz iepriekšēju stāvokli"
 
-#, fuzzy
 msgid "A user has subscribed to a page"
-msgstr "Tagad Jūs esat parakstījies(-usies) uz šo lapu."
+msgstr "Lietotājs ir parakstījies uz lapu."
 
 msgid "A new account has been created"
-msgstr ""
+msgstr "Jauns konts ir bijis izveidots"
 
 #, python-format
 msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
@@ -798,9 +793,9 @@ msgid ""
 "    Email address: %(useremail)s"
 msgstr ""
 
-#, fuzzy, python-format
+#, python-format
 msgid "New attachment added to page %(pagename)s on %(sitename)s"
-msgstr "piesaiste:%(filename)s lapai %(pagename)s"
+msgstr "Jauna piesaiste piesaistīta lapai %(pagename)s uz %(sitename)s"
 
 #, python-format
 msgid ""
@@ -814,21 +809,17 @@ msgid ""
 "Attachment size: %(attach_size)s\n"
 msgstr ""
 
-#, fuzzy
 msgid "Attachment link"
-msgstr "Piesaistes"
+msgstr "Piesaistes saite"
 
-#, fuzzy
 msgid "Page link"
-msgstr "\"%s\" līdzīgas lapas"
+msgstr "Lapas saite"
 
-#, fuzzy
 msgid "Changed page"
-msgstr "Iesaiņot lapas"
+msgstr "Mainīta lapa"
 
-#, fuzzy
 msgid "Page changed"
-msgstr "Saglabāt izmaiņas"
+msgstr "Mainītā lapa"
 
 #, fuzzy
 msgid ""
@@ -939,9 +930,9 @@ msgstr ""
 msgid "**Maximum number of allowed includes exceeded**"
 msgstr "**Pārsniegts maksimālais pieļaujamo iekļaušanu skaits**"
 
-#, fuzzy, python-format
+#, python-format
 msgid "**You are not allowed to read the page: %s**"
-msgstr "Jums nav tiesību pārdēvēt šo lapu!"
+msgstr "**Jums nav tiesību lasīt šo lapu: %s"
 
 #, python-format
 msgid "**Could not find the referenced page: %s**"
@@ -1013,9 +1004,8 @@ msgstr ""
 msgid "This email already belongs to somebody else."
 msgstr "Šāda e-pasta adrese jau kādam pieder."
 
-#, fuzzy
 msgid "This jabber id already belongs to somebody else."
-msgstr "Šāda e-pasta adrese jau kādam pieder."
+msgstr "Šis jabber identifikators jau kādam pieder."
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -1140,16 +1130,14 @@ msgstr "Parakstītie notikumi"
 msgid "Subscribed wiki pages<<BR>>(one regex per line)"
 msgstr "Parakstītās Viki lapas<<BR>>(pa vienai regulārai izteiksmei rindā)"
 
-#, fuzzy
 msgid "OpenID server"
-msgstr "OpenID iestatījumi"
+msgstr "OpenID serveris"
 
-#, fuzzy
 msgid "The selected websites have been removed."
-msgstr "Norādītie OpenID identifikatori ir dzēsti."
+msgstr "Norādītā vietne ir dzēsta."
 
 msgid "Trusted websites"
-msgstr ""
+msgstr "Uzticamas vietnes"
 
 msgid "Remove selected"
 msgstr "Dzēst atzīmēto"
@@ -1191,34 +1179,35 @@ msgid "No pages specified using --pages or --search, assuming full package."
 msgstr ""
 "Nav norādītas lapas ar ''--pages'' vai ''--search''. Izvēlēta pilna pakotne."
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "Izvaddatne jau eksistē!"
 
-#, fuzzy
 msgid "Username"
-msgstr "Lietotājs"
+msgstr "Lietotājvārds"
 
-#, fuzzy
 msgid "Member of Groups"
-msgstr "Lapu skaits"
+msgstr "Grupas dalībnieks"
 
 msgid "Email"
 msgstr "E-pasts"
 
 msgid "Jabber"
-msgstr ""
+msgstr "Jabber"
 
 msgid "Action"
 msgstr "Darbība"
+
+msgid "Disable user"
+msgstr "Atslēgt lietotāju"
 
 msgid "Enable user"
 msgstr "Aktivizēt lietotāju"
 
 msgid "disabled"
 msgstr "atslēgts"
-
-msgid "Disable user"
-msgstr "Atslēgt lietotāju"
 
 msgid "Mail account data"
 msgstr "Sūtīt konta datus"
@@ -1420,6 +1409,35 @@ msgid ""
 "If you already have received the email with the recovery token, enter your\n"
 "username, the recovery token and a new password (twice) below."
 msgstr ""
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Viki marķējums"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "Dublēt"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Jūs nedrīkstat veikt attālinātu dublēšanu."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Nezināma dublēšanas apakšdarbība: %s."
 
 msgid "You must login to add a quicklink."
 msgstr "Lai izveidotu ātrsaiti, Jums jāpieslēdzas."
@@ -1798,6 +1816,10 @@ msgstr "Nepareizs faila nosaukums \"%s\"!"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "Izveidots sainis %s, kas satur lapas %s."
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d piesaistes]"
 
 msgid "Package pages"
 msgstr "Iesaiņot lapas"
@@ -2982,17 +3004,8 @@ msgstr "Pārslēgt rindu numerāciju"
 #~ "ir korektas.\n"
 #~ "\n"
 
-#~ msgid "Backup"
-#~ msgstr "Dublēt"
-
 #~ msgid "Restore"
 #~ msgstr "Atjaunot"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "Jūs nedrīkstat veikt attālinātu dublēšanu."
-
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "Nezināma dublēšanas apakšdarbība: %s."
 
 #~ msgid "Xapian Version"
 #~ msgstr "''Xapian'' versija"

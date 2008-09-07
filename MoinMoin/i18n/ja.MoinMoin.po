@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-30 19:48+0200\n"
+"POT-Creation-Date: 2008-09-07 21:01+0200\n"
 "PO-Revision-Date: 2008-06-18 07:54+0900\n"
 "Last-Translator: MasatakeIwasaki\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
@@ -1207,6 +1207,9 @@ msgstr ""
 "--pages や --search でページが指定されませんでした。すべてのパッケージを対象"
 "とします。"
 
+msgid "All attachments included into the package."
+msgstr ""
+
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "出力ファイルがすでに存在します。安全のため処理を停止します。"
 
@@ -1225,14 +1228,14 @@ msgstr "Jabber"
 msgid "Action"
 msgstr "アクション"
 
+msgid "Disable user"
+msgstr "ユーザの無効化"
+
 msgid "Enable user"
 msgstr "ユーザの有効化"
 
 msgid "disabled"
 msgstr "無効"
-
-msgid "Disable user"
-msgstr "ユーザの無効化"
 
 msgid "Mail account data"
 msgstr "アカウント情報をメール"
@@ -1438,6 +1441,35 @@ msgstr ""
 "もしすでにパスワード回復トークンを通知するメールを受け取っている場合、\n"
 "ユーザ名、パスワード回復トークン、新しいパスワード(2回)を以下に入力してくださ"
 "い。"
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Wikiマークアップ"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "バックアップ"
+
+msgid "You are not allowed to do remote backup."
+msgstr "このページをリモートバックアップする権限がありません。"
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "未定義のバックアップサブアクション: %s 。"
 
 msgid "You must login to add a quicklink."
 msgstr "クイックリンクを追加するには、ログインしてください。"
@@ -1819,6 +1851,10 @@ msgstr "ファイル名\"%s\"が不正です。"
 #, python-format
 msgid "Created the package %s containing the pages %s."
 msgstr "パッケージ %s を作成しました。(ページ %s を含む)"
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[添付ファイル数: %d]"
 
 msgid "Package pages"
 msgstr "ページをパッケージ化"
@@ -3016,17 +3052,8 @@ msgstr "行番号表示/非表示切替"
 #~ "Wiki設定中の backup_* が正しいことを確認してください。\n"
 #~ "\n"
 
-#~ msgid "Backup"
-#~ msgstr "バックアップ"
-
 #~ msgid "Restore"
 #~ msgstr "リストア"
-
-#~ msgid "You are not allowed to do remote backup."
-#~ msgstr "このページをリモートバックアップする権限がありません。"
-
-#~ msgid "Unknown backup subaction: %s."
-#~ msgstr "未定義のバックアップサブアクション: %s 。"
 
 #~ msgid "Xapian Version"
 #~ msgstr "Xapianバージョン"
