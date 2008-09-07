@@ -87,7 +87,7 @@ def key(request, wikiname=None, itemname=None, attachname=None, content=None, se
     @param secret: secret for hMAC calculation (default: use secret from cfg)
     """
     if secret is None:
-        secret = request.cfg.secrets
+        secret = request.cfg.secrets['action/cache']
     if content:
         hmac_data = content
     elif itemname is not None and attachname is not None:
