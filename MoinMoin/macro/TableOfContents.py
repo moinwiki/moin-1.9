@@ -149,6 +149,11 @@ Prints a table of contents.
 
     tocfm = TOCFormatter(macro.request)
     p = Page(macro.request, pname, formatter=tocfm, rev=macro.request.rev)
+
+    # this is so we get a correctly updated TOC if we just preview in the editor -
+    # the new content is not stored on disk yet, but available as macro.parser.raw:
+    p.set_raw_body(macro.parser.raw, modified=1)
+
     output = macro.request.redirectedOutput(p.send_page,
                                             content_only=True,
                                             count_hit=False,

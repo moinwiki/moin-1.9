@@ -42,6 +42,9 @@ General syntax: moin [options] export package [package-options]
 
     4. Optionally, the --user argument could be added to any of the above examples,
        causing the script to respect ACLs.
+
+    5. Optionally, the --include_attachments argument could be added to any of the above examples,
+       causing the script to include attachments into the output file.
 """
 
     def __init__(self, argv=None, def_values=None):
@@ -49,6 +52,10 @@ General syntax: moin [options] export package [package-options]
         self.parser.add_option(
             "-p", "--pages", dest="pages",
             help="List of pages to package. Can be regular expressions, comma seperated lists, or a lone * for everything."
+        )
+        self.parser.add_option(
+            "-a", "--include_attachments", action="store_true", dest="attachment",
+            help="Include attachments from each page"
         )
         self.parser.add_option(
             "-o", "--output", dest="output",
@@ -80,6 +87,10 @@ General syntax: moin [options] export package [package-options]
         elif not self.options.pages and not self.options.search:
             script.log(_("No pages specified using --pages or --search, assuming full package."))
 
+        include_attachments = self.options.attachment or False
+        if include_attachments:
+            script.log(_("All attachments included into the package."))
+
         # Sanity checks
         if os.path.exists(self.options.output):
             script.fatal(_("Output file already exists! Cowardly refusing to continue!"))
@@ -96,14 +107,15 @@ General syntax: moin [options] export package [package-options]
         packageoutput = open(self.options.output, "wb")
         if self.options.search:
             packagedata = package.collectpackage(package.searchpackage(request,
-                                                                       self.options.search), packageoutput)
+                                                                       self.options.search), packageoutput,
+                                                                       include_attachments=include_attachments)
         elif self.options.pages:
-            packagedata = package.collectpackage(self.options.pages.split(","), packageoutput)
+            packagedata = package.collectpackage(self.options.pages.split(","), packageoutput, include_attachments=include_attachments)
         else:
             packagedata = package.collectpackage(request.rootpage.getPageList(
                                 include_underlay=False,
                                 filter=lambda name: not wikiutil.isSystemPage(request, name)),
-                                packageoutput)
+                                packageoutput, include_attachments=include_attachments)
         if packagedata:
             script.fatal(packagedata)
 

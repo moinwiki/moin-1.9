@@ -279,7 +279,7 @@ def getText(original, request, lang, **kw):
     else:
         try:
             language = languages[lang]['x-language-in-english']
-            dictpagename = "%sDict" % language
+            dictpagename = "%sDict" % language.replace(' ', '')
             dicts = request.dicts
             if dicts.has_dict(dictpagename):
                 userdict = dicts.dict(dictpagename)
