@@ -1627,7 +1627,7 @@ class RequestBase(object):
             'page',
             'html_formatter',
             'formatter',
-            'cfg',
+            #'cfg', -- do NOT delattr cfg - it causes problems in the xapian indexing thread
             ]:
             try:
                 delattr(self, attr_name)
