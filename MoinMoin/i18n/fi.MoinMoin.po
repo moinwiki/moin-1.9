@@ -717,7 +717,7 @@ msgid "A user has subscribed to a page"
 msgstr "Käyttäjä on tilannut jonkin sivun"
 
 msgid "A new account has been created"
-msgstr "UUsi käyttäjätunnus on luotu"
+msgstr "Uusi käyttäjätunnus on luotu"
 
 #, python-format
 msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
@@ -1195,7 +1195,7 @@ msgstr ""
 "täyspakkaus."
 
 msgid "All attachments included into the package."
-msgstr ""
+msgstr "Kaikki liitetiedostot yhdessä paketissa."
 
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr ""
@@ -1224,7 +1224,7 @@ msgid "Enable user"
 msgstr "Ota käyttäjätunnus käyttöön"
 
 msgid "disabled"
-msgstr "Poissa"
+msgstr "Poissa käytöstä"
 
 msgid "Mail account data"
 msgstr "Lähetä käyttäjätiedot sähköpostitse"
@@ -1433,9 +1433,8 @@ msgstr ""
 "Jos olet jo saanut palautustunnisteen sisältävän sähköpostiviestin, syötä\n"
 "käyttäjätunnuksesi, palautustunniste ja uusi salasana (kahdesti) alle."
 
-#, fuzzy
 msgid "Wiki Backup"
-msgstr "Wiki-merkintä"
+msgstr "Wiki-varmuuskopio"
 
 msgid ""
 "= Downloading a backup =\n"
@@ -1456,7 +1455,7 @@ msgid "Backup"
 msgstr "Varmuuskopio"
 
 msgid "You are not allowed to do remote backup."
-msgstr "Sinulla ei ole oikeuksia etävarmuuskopioiden ottamiseksi."
+msgstr "Sinulla ei ole oikeutta suorittaa etävarmuuskopiointia."
 
 #, python-format
 msgid "Unknown backup subaction: %s."
@@ -1500,7 +1499,7 @@ msgstr ""
 "sivun nimi on tyhjä, sivu nimetään tiedoston nimen mukaan."
 
 msgid "File to load page content from"
-msgstr "Tiedosto, josta ladataan sisältöä"
+msgstr "Tiedosto, josta ladataan sisältö sivulle"
 
 msgid "Comment"
 msgstr "Kuvaus"
@@ -1847,9 +1846,8 @@ msgstr "Kelvoton tiedostonimi \"%s\"!"
 msgid "Created the package %s containing the pages %s."
 msgstr "Luotu paketti %s sivu(i)sta %s."
 
-#, fuzzy
 msgid "Include all attachments?"
-msgstr "[%d liitetiedosto(a)]"
+msgstr "Sisällytetäänkö kaikki liitetiedostot?"
 
 msgid "Package pages"
 msgstr "Paketoi sivuja"
@@ -2592,7 +2590,7 @@ msgid "Variable name"
 msgstr "Tiedostonimi"
 
 msgid "Description"
-msgstr ""
+msgstr "Kuvaus"
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -2641,7 +2639,7 @@ msgid "Display"
 msgstr "Näytä"
 
 msgid "Wiki configuration"
-msgstr ""
+msgstr "Wiki-asetukset"
 
 msgid ""
 "This table shows all settings in this wiki that do not have default values. "
@@ -2650,9 +2648,8 @@ msgid ""
 "or settings that were removed from Moin."
 msgstr ""
 
-#, fuzzy
 msgid "Setting"
-msgstr "Asetukset"
+msgstr "Asetus"
 
 msgid "Search for items"
 msgstr "Hae kohteita"
