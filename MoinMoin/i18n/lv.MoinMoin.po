@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-07 21:01+0200\n"
+"POT-Creation-Date: 2008-09-08 12:35-0900\n"
 "PO-Revision-Date: 2008-05-10 22:31+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000 AT AT AT AT gmail SPAM NO NO DOT "
 "NO SPAM com>\n"
@@ -416,7 +416,7 @@ msgstr "Teksta režīms"
 
 #, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
-msgstr "Pakotnei nepieciešama jaunāka MoinMoin versija (vismaz %s)."
+msgstr "Sainim nepieciešama jaunāka MoinMoin versija (vismaz %s)."
 
 msgid "The theme name is not set."
 msgstr "Tēmas nosaukums nav uzstādīts."
@@ -432,17 +432,17 @@ msgstr "Nesekmīga faila '%(filename)s' instalēšana."
 
 #, python-format
 msgid "The file %s is not a MoinMoin package file."
-msgstr "Fails %s nav MoinMoin pakotnes fails."
+msgstr "Datne %s nav MoinMoin saiņa datne."
 
 #, python-format
 msgid "The page %s does not exist."
 msgstr "Lapa %s neeksistē!"
 
 msgid "Invalid package file header."
-msgstr "Nekorekta pakotnes faila galvene."
+msgstr "Nekorekta saiņa datnes galvene."
 
 msgid "Package file format unsupported."
-msgstr "Neatbalstīts pakotnes faila formāts."
+msgstr "Neatbalstīts saiņa datnes formāts."
 
 #, python-format
 msgid "Unknown function %(func)s in line %(lineno)i."
@@ -450,7 +450,7 @@ msgstr "Rindā %(lineno)i nedefinēta funkcija %(func)s."
 
 #, python-format
 msgid "The file %s was not found in the package."
-msgstr "Fails %s pakotnē netika atrasts."
+msgstr "Datne %s sainī nav atrasta."
 
 #, python-format
 msgid ""
@@ -722,7 +722,7 @@ msgid ""
 "Page link: %(page)s\n"
 msgstr ""
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear Wiki user,\n"
 "\n"
@@ -733,10 +733,10 @@ msgid ""
 msgstr ""
 "Godājamais Viki lietotāj,\n"
 "\n"
-"Jūs esat parakstījies(-usies) Viki lapas vai kategorijas \"%(sitename)s\" "
-"izmaiņām.\n"
+"Jūs esat parakstījies(-usies) viki lapas vai kategorijas "
+"izmaiņām vietnē \"%(sitename)s\".\n"
 "\n"
-"Lapu %(pagelink)s ir mainījis(-usi) %(editor)s:\n"
+"Lapu %(pagename)s ir mainījis(-usi) %(editor)s:\n"
 "\n"
 
 msgid "New page:\n"
@@ -745,7 +745,7 @@ msgstr "Jauna lapa:\n"
 msgid "No differences found!\n"
 msgstr "Izmaiņas nav atrastas!\n"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear wiki user,\n"
 "\n"
@@ -757,13 +757,13 @@ msgid ""
 msgstr ""
 "Godājamais Viki lietotāj,\n"
 "\n"
-"Jūs esat parakstījies(-usies) Viki lapas vai kategorijas \"%(sitename)s\" "
-"izmaiņām.\n"
+"Jūs esat parakstījies(-usies) viki lapas"
+"izmaiņām vietnē \"%(sitename)s\".\n"
 "\n"
-"Lapu %(pagelink)s ir mainījis(-usi) %(editor)s:\n"
+"Lapu %(pagename)s ir izdzēsis lietotājs %(editor)s:\n"
 "\n"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear wiki user,\n"
 "\n"
@@ -775,15 +775,15 @@ msgid ""
 msgstr ""
 "Godājamais Viki lietotāj,\n"
 "\n"
-"Jūs esat parakstījies(-usies) Viki lapas vai kategorijas \"%(sitename)s\" "
-"izmaiņām.\n"
+"Jūs esat parakstījies(-usies) viki lapas "
+"izmaiņām vietnē \"%(sitename)s\".\n"
 "\n"
-"Lapu %(pagelink)s ir mainījis(-usi) %(editor)s:\n"
+"Lapu \"%(oldname)s\" ir pārdēvējis par \"%(pagename)s\" lietotājs %(editor)s:\n"
 "\n"
 
 #, python-format
 msgid "New user account created on %(sitename)s"
-msgstr ""
+msgstr "Jauns lietotāja konts izveidots vietnē %(sitename)s"
 
 #, python-format
 msgid ""
@@ -792,6 +792,11 @@ msgid ""
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
 msgstr ""
+"Godājamais \"Superlietotāj\", tikko ir izveidots jauns lietotājs:\n"
+"\n"
+"    Lietotāja vārds: %(username)s\n"
+"    E-pasta adrese: %(useremail)s"
+
 
 #, python-format
 msgid "New attachment added to page %(pagename)s on %(sitename)s"
@@ -1177,10 +1182,10 @@ msgstr "Jums jānorāda izvaddatne!"
 
 msgid "No pages specified using --pages or --search, assuming full package."
 msgstr ""
-"Nav norādītas lapas ar ''--pages'' vai ''--search''. Izvēlēta pilna pakotne."
+"Nav norādītas lapas ar ''--pages'' vai ''--search''. Izvēlēts pilns sainis."
 
 msgid "All attachments included into the package."
-msgstr ""
+msgstr "Visas piesaistes iekļautas sainī."
 
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "Izvaddatne jau eksistē!"
@@ -1286,27 +1291,25 @@ msgstr "Darbību %(actionname)s, lūdzu, izmantojiet interaktīvi!"
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha tests: nepareiza atbilde! Atgriezieties un mēginiet vēlreiz..."
 
-#, fuzzy, python-format
+#, python-format
 msgid "You must login to use this action: %(action)s."
-msgstr "Lai izmanototu parasktīšanos, Jums jāpieslēdzas."
+msgstr "Lai izmanototu darbību \"%(action)s.\", Jums jāpieslēdzas."
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Jūs nedrīkstat parakstīties uz lapu, kuru Jums nav tiesību lasīt."
 
-#, fuzzy
 msgid "This wiki is not enabled for mail/Jabber processing."
-msgstr "Šajā viki pasta sūtīšana nav iespējota."
+msgstr "Šajā viki e-pasta/\"Jabber\" apstrāde nav iespējota."
 
 msgid "You must log in to use subscriptions."
 msgstr "Lai izmanototu parasktīšanos, Jums jāpieslēdzas."
 
-#, fuzzy
 msgid ""
 "Add your email address or Jabber ID in your user settings to use "
 "subscriptions."
 msgstr ""
 "Lai izmantotu parakstīšanos, uzrādiet savu e-pasta adresi "
-"LietotājaIestatījumos."
+"vai \"Jabber\" identifikatoru."
 
 msgid "You are already subscribed to this page."
 msgstr "Jūs jau esat parakstījies(-usies) uz šo lapu."
@@ -1336,10 +1339,8 @@ msgstr "Darbība %(actionname)s ir veikta šajā Viki!"
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr "Jums nav tiesību izmantot darbību %(actionname)s šajā lapā."
 
-#, fuzzy
 msgid "If this account exists an email was sent."
-msgstr ""
-"Ja konts ar šādu lietotāja vārdu jau eksistē, e-pasta ziņojumums ir nosūtīts."
+msgstr "Ja šāds konts pastāv, e-pasta ziņojumums ir nosūtīts."
 
 msgid ""
 "This wiki is not enabled for mail processing.\n"
@@ -1348,50 +1349,44 @@ msgstr ""
 "Šajā viki pasta sūtīšana ir aizliegta.\n"
 "Sazinieties ar viki īpašnieku, lai viņš piešķir jums tiesības lietot e-pastu."
 
-#, fuzzy
 msgid "Please provide a valid email address or a username!"
-msgstr "Lūdzu, norādiet pareizu e-pasta adresi!"
+msgstr "Lūdzu, norādiet derīgu e-pasta adresi vai lietotāja vārdu!"
 
 msgid "Mail me my account data"
 msgstr "Atsūtīt mana sistēmas konta datus"
 
-#, fuzzy
 msgid "Recovery token"
-msgstr "Atgriezt visu!"
+msgstr "Atjaunošanas \"marķieris\""
 
-#, fuzzy
 msgid "New password"
-msgstr "Nomainīt paroli"
+msgstr "Jaunā parole"
 
-#, fuzzy
 msgid "New password (repeat)"
-msgstr "Atkārtot paroli"
+msgstr "Jaunā parole (atkārtoti)"
 
-#, fuzzy
 msgid "Reset my password"
-msgstr "Parole"
+msgstr "Atstatīt paroli"
 
-#, fuzzy
 msgid "Your password has been changed, you can log in now."
-msgstr "Jūsu parole ir nomainīta."
+msgstr "Jūsu parole ir nomainīta. Mēģiniet pieslēgties."
 
 msgid "Your token is invalid!"
 msgstr "Jūsu \"marķieris\" ir nederīgs!"
 
-#, fuzzy
 msgid "Password reset"
-msgstr "Atkārtot paroli"
+msgstr "Paroles atstatījums"
 
-#, fuzzy
 msgid ""
 "\n"
 "== Password reset ==\n"
 "Enter a new password below."
-msgstr "Lai nomainītu paroli, veco paroli ievadiet divas reizes."
+msgstr
+"\n"
+"== Paroles atstatīšana ==\n"
+"Zemāk ievadiet jauno paroli."
 
-#, fuzzy
 msgid "Lost password"
-msgstr "Parole"
+msgstr "Nozaudētā parole"
 
 msgid ""
 "\n"
@@ -1410,9 +1405,8 @@ msgid ""
 "username, the recovery token and a new password (twice) below."
 msgstr ""
 
-#, fuzzy
 msgid "Wiki Backup"
-msgstr "Viki marķējums"
+msgstr "Viki Dublējums"
 
 msgid ""
 "= Downloading a backup =\n"
@@ -1461,12 +1455,11 @@ msgstr "Slikts diagrammas tips \"%s\"!"
 msgid "Load"
 msgstr "Ielādēt"
 
-#, fuzzy
 msgid "Pagename not specified!"
-msgstr "Nav norādīts piesaistes faila vārds!"
+msgstr "Lapas nosaukums nav norādīts!"
 
 msgid "Upload page content"
-msgstr ""
+msgstr "Ielādēt lapas saturu"
 
 msgid ""
 "You can upload content for the page named below. If you change the page "
@@ -1475,14 +1468,13 @@ msgid ""
 msgstr ""
 
 msgid "File to load page content from"
-msgstr ""
+msgstr "Lapas satura ielādes datne"
 
 msgid "Comment"
 msgstr "Komentārs"
 
-#, fuzzy
 msgid "Page Name"
-msgstr "Saiņa nosaukums"
+msgstr "Lapas nosaukums"
 
 msgid "You are not allowed to create the supplementation page."
 msgstr "Jums nav tiesību veidot pielikuma lapu."
@@ -1585,9 +1577,8 @@ msgstr "Neatbalstīta AttachFile apakšdarbība: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Lapas \"%(pagename)s\" piesaistes"
 
-#, fuzzy
 msgid "You are not allowed to overwrite a file attachment of this page."
-msgstr "Jums nav tiesību skatīt šīs lapas piesaistes."
+msgstr "Jums nav tiesību pārrasktīt šai lapai piesaistītās datnes."
 
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
@@ -1617,22 +1608,23 @@ msgstr "Jūs nedrīkstat dzēst šīs lapas piesaistes."
 msgid "Attachment '%(filename)s' deleted."
 msgstr "Piesaiste '%(filename)s' izdzēsta."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
-msgstr "Piesaiste '%(filename)s' jau eksistē."
+msgstr "Piesaiste '%(new_pagename)s/%(new_filename)s' jau pastāv."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/%"
 "(new_filename)s'."
-msgstr "Piesaiste '%(filename)s' pārvietota uz %(page)s."
+msgstr "Piesaiste '%(pagename)s/%(filename)s' pārvietota uz '%(new_pagename)s/%"
+"(new_filename)s'."
 
 msgid "Nothing changed"
 msgstr "Bez izmaiņām"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Page '%(new_pagename)s' does not exist or you don't have enough rights."
-msgstr "Lapa %(newpagename)s neeksistē vai arī Jums nav tiesību."
+msgstr "Lapa '%(new_pagename)s' neeksistē vai arī Jums nav tiesību."
 
 msgid "Move aborted!"
 msgstr "Pārvietošana pārtraukta!"
@@ -1645,26 +1637,24 @@ msgstr ""
 msgid "You are not allowed to move attachments from this page."
 msgstr "Jūs nav tiesību pārvietot piesaistes no šīs lapas."
 
-#, fuzzy
 msgid "Move aborted because new page name is empty."
-msgstr "Pārvietošana pārtraukta dēl tukšā lapas nosaukuma"
+msgstr "Pārvietošana pārtraukta dēļ tukšā lapas nosaukuma."
 
 #, python-format
 msgid "Please use a valid filename for attachment '%(filename)s'."
 msgstr "Lūdzu, piesaistei izmantojiet pieļaujamu nosaukumu: '%(filename)s'."
 
-#, fuzzy
 msgid "Move aborted because new attachment name is empty."
-msgstr "Piesaistes vārds ir tukšs - pārvietošana pārtraukta"
+msgstr "Piesaistes vārds ir tukšs - pārvietošana pārtraukta."
 
 msgid "Move"
 msgstr "Pārvietot"
 
 msgid "New page name"
-msgstr "Jauns lapas nosaukums"
+msgstr "Jaunais lapas nosaukums"
 
 msgid "New attachment name"
-msgstr "Jauna piesaistes nosaukums"
+msgstr "Jaunais piesaistes nosaukums"
 
 msgid "You are not allowed to get attachments from this page."
 msgstr "Jums nav tiesību saņemt šīs lapas piesaistes."
@@ -1718,7 +1708,6 @@ msgstr "Piesaiste '%(filename)s' atspiesta."
 msgid "Attachment '%(filename)s' unzipped."
 msgstr "Piesaiste '%(filename)s' atspiesta."
 
-#, fuzzy
 msgid "A severe error occurred:"
 msgstr "Notikusi servera kļūda:"
 
@@ -1730,7 +1719,7 @@ msgid "Download"
 msgstr "Lejuplādēt"
 
 msgid "Package script:"
-msgstr "Pakotnes skripts:"
+msgstr "Saiņa skripts:"
 
 msgid "File Name"
 msgstr "Faila nosaukums"
@@ -1817,9 +1806,8 @@ msgstr "Nepareizs faila nosaukums \"%s\"!"
 msgid "Created the package %s containing the pages %s."
 msgstr "Izveidots sainis %s, kas satur lapas %s."
 
-#, fuzzy
 msgid "Include all attachments?"
-msgstr "[%d piesaistes]"
+msgstr "Iekļaut visas piesaistes?"
 
 msgid "Package pages"
 msgstr "Iesaiņot lapas"
@@ -2004,9 +1992,8 @@ msgstr "Izvēlēties Autoru"
 msgid "Revert all!"
 msgstr "Atgriezt visu!"
 
-#, fuzzy
 msgid "Only superuser is allowed to use this action."
-msgstr "Jums nav tiesību lietot šo darbību."
+msgstr "Tikai superlietotājs drīkst lietot šo kontu."
 
 msgid "No older revisions available!"
 msgstr "Vecākas versijas nav!"

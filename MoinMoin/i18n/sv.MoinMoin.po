@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-09-07 21:01+0200\n"
-"PO-Revision-Date: 2008-08-31 12:35+0200\n"
+"PO-Revision-Date: 2008-09-09 21:09+0200\n"
 "Last-Translator: thomas@marquart.se\n"
 "Language-Team: Swedish <moin-user@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -392,7 +392,7 @@ msgid "Create New Page"
 msgstr "Skapa ny sida"
 
 msgid "You are not allowed to view this page."
-msgstr "Du har inte tillåtelse att titta på den här sidan."
+msgstr "Du får inte titta på den här sidan."
 
 msgid "The wiki is currently not reachable."
 msgstr "Wikin går för tillfället inte att nå."
@@ -1185,7 +1185,7 @@ msgid "No pages specified using --pages or --search, assuming full package."
 msgstr "Inga sidor angivna med --pages eller --search, antar hela paketet."
 
 msgid "All attachments included into the package."
-msgstr ""
+msgstr "Alla bilagor inkluderade i paketet."
 
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "Filen för output finns redan! Jag är feg och vägrar fortsätta!"
@@ -1419,9 +1419,8 @@ msgstr ""
 "Om du redan har fått epost med en token för återställning, skriv in ditt\n"
 "användarnamn, token och ett nytt lösenord (två gångar) nedan."
 
-#, fuzzy
 msgid "Wiki Backup"
-msgstr "Wiki-märkning"
+msgstr "Wiki-säkerhetskopia"
 
 msgid ""
 "= Downloading a backup =\n"
@@ -1437,12 +1436,22 @@ msgid ""
 "\n"
 "To get a backup, just click here:"
 msgstr ""
+"= Ladda ner en säkerhetskopia ="
+"\n"
+"Vänligen notera:\n"
+" * Spara säkerhetskopior på en säker plats - de innehåller känslig "
+"information.\n"
+" * Försäkra dig att inställningsvärden backup_* är korrekta och "
+"fullständiga.\n"
+" * Försäkra dig att det har laddats ner utan problem.\n"
+"\n"
+"För att få en säkerhetskopia, klicka bara här:"
 
 msgid "Backup"
 msgstr "Säkerhetskopiera"
 
 msgid "You are not allowed to do remote backup."
-msgstr "Du har inte tillåtelse att göra fjärrbackup."
+msgstr "Du får inte göra fjärrbackup."
 
 #, python-format
 msgid "Unknown backup subaction: %s."
@@ -1587,7 +1596,7 @@ msgid "Attached Files"
 msgstr "Bifogade filer"
 
 msgid "You are not allowed to attach a file to this page."
-msgstr "Du har inte tillåtelse att bifoga en fil till den här sidan."
+msgstr "Du får inte bifoga en fil till den här sidan."
 
 #, python-format
 msgid "Unsupported AttachFile sub-action: %s"
@@ -1618,10 +1627,10 @@ msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "Bilagan \"%(target)s\" (fjärrnamn \"%(filename)s\") existerar redan."
 
 msgid "You are not allowed to save a drawing on this page."
-msgstr "Du har inte tillåtelse att spara en teckning på den här sidan."
+msgstr "Du får inte spara en teckning på den här sidan."
 
 msgid "You are not allowed to delete attachments on this page."
-msgstr "Du har inte tillåtelse att ta bort bilagor från den här sidan."
+msgstr "Du får inte ta bort bilagor från den här sidan."
 
 #, python-format
 msgid "Attachment '%(filename)s' deleted."
@@ -1678,17 +1687,17 @@ msgid "New attachment name"
 msgstr "Ny bilaga för bilaga"
 
 msgid "You are not allowed to get attachments from this page."
-msgstr "Du har inte tillåtelse att hämta bilagor från den här sidan."
+msgstr "Du får inte hämta bilagor från den här sidan."
 
 msgid "You are not allowed to install files."
-msgstr "Du har inte tillåtelse att installera filer."
+msgstr "Du får inte installera filer."
 
 #, python-format
 msgid "Attachment '%(filename)s' installed."
 msgstr "Bilagan '%(filename)s' installerad."
 
 msgid "You are not allowed to unzip attachments of this page."
-msgstr "Du har inte tillåtelse att packa upp bilagor till den här sidan."
+msgstr "Du får inte packa upp bilagor till den här sidan."
 
 #, python-format
 msgid "The file %(filename)s is not a .zip file."
@@ -1756,7 +1765,7 @@ msgid "Unknown file type, cannot display this attachment inline."
 msgstr "Okänd filtyp, kan inte visa bilagan direkt."
 
 msgid "You are not allowed to view attachments of this page."
-msgstr "Du har inte tillåtelse att visa bilagor på den här sidan."
+msgstr "Du får inte se bilagor på den här sidan."
 
 #, python-format
 msgid "attachment:%(filename)s of %(pagename)s"
@@ -1781,10 +1790,10 @@ msgid "Not a user:"
 msgstr "Inte en användare:"
 
 msgid "You are not allowed to perform this action."
-msgstr "Du har inte tillåtelse att utföra den här åtgärden."
+msgstr "Du får inte utföra den här åtgärden."
 
 msgid "You are not allowed to use this action."
-msgstr "Du har inte tillåtelse att använda den här åtgärden."
+msgstr "Du får inte använda den här åtgärden."
 
 msgid "Rename Page"
 msgstr "Byt namn på sida"
@@ -1828,9 +1837,8 @@ msgstr "Ogiltigt filnamn \"%s\"!"
 msgid "Created the package %s containing the pages %s."
 msgstr "Skapade paketet %s som innehåller sidorna %s."
 
-#, fuzzy
 msgid "Include all attachments?"
-msgstr "[%d bilagor]"
+msgstr "Inkludera alla bilagor?"
 
 msgid "Package pages"
 msgstr "Paketsidor"
@@ -2499,7 +2507,7 @@ msgid "My Pages"
 msgstr "Mina sidor"
 
 msgid "Subscribe User"
-msgstr "Skapa prenumeration åt användare"
+msgstr "Användarprenumeration"
 
 msgid "Remove Spam"
 msgstr "Ta bort spam"
@@ -3226,7 +3234,7 @@ msgstr "Slå av/på radnumrering"
 #~ msgstr "sätt bokmärke"
 
 #~ msgid "You are not allowed to do %s on this page."
-#~ msgstr "Du har inte tillåtelse att göra %s på den här sidan."
+#~ msgstr "Du får inte göra %s på den här sidan."
 
 #~ msgid "%(hits)d results out of about %(pages)d pages."
 #~ msgstr "%(hits)d resultat av ungefär %(pages)d sidor."
