@@ -318,6 +318,10 @@ class MoinCookieSessionIDHandler(SessionIDHandler):
             cookie[cookie_name]['path'] = path
         # Set expires for older clients
         cookie[cookie_name]['expires'] = request.httpDate(when=expires, rfc='850')
+        # a secure cookie is not transmitted over unsecure connections:
+        if (cfg.cookie_secure or  # True means: force secure cookies
+            cfg.cookie_secure is None and request.is_ssl):  # None means: https -> secure cookie
+            cookie[cookie_name]['secure'] = True
         return cookie.output()
 
     def _set_cookie(self, request, cookie_string, expires):
