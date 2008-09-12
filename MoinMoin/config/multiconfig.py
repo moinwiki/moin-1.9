@@ -281,6 +281,10 @@ class DefaultConfig(object):
     cookie_domain = None # use '.domain.tld" for a farm with hosts in that domain
     cookie_path = None   # use '/wikifarm" for a farm with pathes below that path
     cookie_lifetime = 12 # 12 hours from now
+    cookie_secure = None # a secure cookie is not transmitted over unsecure connection
+                         # None = auto-enable secure cookie for https
+                         # True = ever use secure cookie
+                         # False = never use secure cookie
 
     data_dir = './data/'
     data_underlay_dir = './underlay/'
