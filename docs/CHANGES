@@ -102,7 +102,7 @@ Version 1.8.0current:
       and this list now defaults to ['%(data_dir)s', ].
 
 
-Version 1.7.current:
+Version 1.7.2:
   Fixes:
     * Fix leakage of edit-log file handles (leaked 1 file handle / request!).
     * Fix for MoinMoinBugs/SystemAdminMailAccountData (using POST and forms)

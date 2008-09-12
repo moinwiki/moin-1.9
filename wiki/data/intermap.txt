@@ -20,7 +20,7 @@ MoinDoc http://hg.moinmo.in/moin/1.6/
 
 # for Germany: bookzilla.de instead of amazon == supporting GNU/Linux and 5% for FSF Europe
 # ISBN http://bookzilla.de/shop/action/advancedSearch?action=search&isbn=
-ISBN http://isbndb.com/search-all.html?kw=9780321481009
+ISBN http://isbndb.com/search-all.html?kw=
 RFC http://www.ietf.org/rfc/rfc
 FreshMeat http://freshmeat.net/
 Thinki http://www.thinkware.se/cgi-bin/thinki.cgi/
