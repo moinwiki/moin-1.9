@@ -699,6 +699,8 @@ options_no_group_name = {
      "See HelpOnSessions."),
     ('session_id_handler', DefaultExpression('session.MoinCookieSessionIDHandler()'),
      "Only used by the DefaultSessionHandler, see HelpOnSessions."),
+    ('cookie_secure', None,
+     'Use secure cookie. (None = auto-enable secure cookie for https, True = ever use secure cookie, False = never use secure cookie).'),
     ('cookie_domain', None,
      'Domain used in the session cookie. (None = do not specify domain).'),
     ('cookie_path', None,
