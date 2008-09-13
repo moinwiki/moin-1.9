@@ -81,6 +81,7 @@ class LDAPAuth(BaseAuth):
         tls_keyfile='',
         tls_require_cert=0, # 0 == ldap.OPT_X_TLS_NEVER (needed for self-signed certs)
         bind_once=False, # set to True to only do one bind - useful if configured to bind as the user on the first attempt
+        autocreate=False, # set to True if you want to autocreate user profiles
         ):
         self.server_uri = server_uri
         self.bind_dn = bind_dn
@@ -107,7 +108,7 @@ class LDAPAuth(BaseAuth):
         self.tls_require_cert = tls_require_cert
 
         self.bind_once = bind_once
-
+        self.autocreate = autocreate
 
     def login(self, request, user_obj, **kw):
         username = kw.get('username')
@@ -231,7 +232,7 @@ class LDAPAuth(BaseAuth):
                 logging.debug("invalid credentials (wrong password?) for dn %r (username: %r)" % (dn, username))
                 return CancelLogin(_("Invalid username or password."))
 
-            if u:
+            if u and self.autocreate:
                 u.create_or_update(True)
             return ContinueLogin(u)
 

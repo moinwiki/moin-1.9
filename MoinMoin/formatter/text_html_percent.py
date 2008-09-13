@@ -17,7 +17,7 @@ from MoinMoin.formatter.text_html import Formatter as TextHtmlFormatter
 class Formatter(TextHtmlFormatter):
 
     def _open(self, tag, newline=False, attr=None, allowed_attrs=None, **kw):
-        """ Escape % signs in tags, see also text_html.Formatter._open. """
+        """ Escape % characters in tags, see also text_html.Formatter._open. """
         tagstr = TextHtmlFormatter._open(self, tag, newline, attr, allowed_attrs, **kw)
         return tagstr.replace('%', '%%')
 

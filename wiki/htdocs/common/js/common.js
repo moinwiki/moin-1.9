@@ -1,4 +1,4 @@
-//
+        //
 // MoinMoin commonly used JavaScript functions
 //
 
@@ -79,33 +79,39 @@ function addLoadEvent(func) {
   }
 }
 
+// copy from fckeditor browser check code (fckeditor.js:298, function : FCKeditor_IsCompatibleBrowser)
 function can_use_gui_editor() {
-    var sAgent = navigator.userAgent.toLowerCase() ;
+	var sAgent = navigator.userAgent.toLowerCase() ;
 
-    // Internet Explorer
-    if ( sAgent.indexOf("msie") != -1 && sAgent.indexOf("mac") == -1 && sAgent.indexOf("opera") == -1 )
-    {   
-        var sBrowserVersion = navigator.appVersion.match(/MSIE (.\..)/)[1] ;
-        return ( sBrowserVersion >= 5.5 ) ;
-    }
-    
-    // Gecko
-    if ( navigator.product == "Gecko" && navigator.productSub >= 20030210 )
-        return true ;
+	// Internet Explorer 5.5+
+	if ( /*@cc_on!@*/false && sAgent.indexOf("mac") == -1 )
+	{
+		var sBrowserVersion = navigator.appVersion.match(/MSIE (.\..)/)[1] ;
+		return ( sBrowserVersion >= 5.5 ) ;
+	}
 
-    // Opera
-    if ( this.EnableOpera )
-    {   
-        var aMatch = sAgent.match( /^opera\/(\d+\.\d+)/ ) ;
-        if ( aMatch && aMatch[1] >= 9.0 )
-            return true ;
-    }
-    
-    // Safari
-    if ( this.EnableSafari && sAgent.indexOf( 'safari' ) != -1 )
-        return ( sAgent.match( /safari\/(\d+)/ )[1] >= 312 ) ;  // Build must be at least 312 (1.3)
+	// Gecko (Opera 9 tries to behave like Gecko at this point).
+	if ( navigator.product == "Gecko" && navigator.productSub >= 20030210 && !( typeof(opera) == 'object' && opera.postError ) )
+		return true ;
 
-    return false ;
+	// Opera 9.50+
+	if ( window.opera && window.opera.version && parseFloat( window.opera.version() ) >= 9.5 )
+		return true ;
+
+/*
+  // disable safari : until fck devteam fix http://dev.fckeditor.net/ticket/2333
+  
+	// Adobe AIR
+	// Checked before Safari because AIR have the WebKit rich text editor
+	// features from Safari 3.0.4, but the version reported is 420.
+	if ( sAgent.indexOf( ' adobeair/' ) != -1 )
+		return ( sAgent.match( / adobeair\/(\d+)/ )[1] >= 1 ) ;	// Build must be at least v1
+
+	// Safari 3+
+	if ( sAgent.indexOf( ' applewebkit/' ) != -1 )
+		return ( sAgent.match( / applewebkit\/(\d+)/ )[1] >= 522 ) ;	// Build must be at least 522 (v3)
+*/
+	return false ;
 
 }
 
@@ -301,8 +307,10 @@ function dbw_hide_buttons() {
         for (var eidx = 0; eidx < form.elements.length; eidx++) {
             elem = form.elements[eidx];
             name = elem.name;
-            if (name.substr(0,4) == 'dbw.' && name.substr(-7) == '.submit')
-                elem.style.display = 'none';
+			if (name) {
+				if (name.substr(0,4) == 'dbw.' && name.substr(-7) == '.submit')
+					elem.style.display = 'none';
+			}
         }
     }
 }

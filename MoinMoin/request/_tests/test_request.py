@@ -10,6 +10,7 @@
 import py
 
 from MoinMoin import config, wikiutil
+from MoinMoin._tests import wikiconfig
 
 from MoinMoin.request import HeadersAlreadySentException
 
@@ -72,12 +73,6 @@ class TestNormalizePagename(object):
 
 
 class TestGroupPages(object):
-
-    def setup_method(self, method):
-        self.config = self.TestConfig(page_group_regex=r'.+Group')
-
-    def teardown_method(self, method):
-        del self.config
 
     def testNormalizeGroupName(self):
         """ request: normalize pagename: restrict groups to alpha numeric Unicode

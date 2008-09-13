@@ -1,17 +1,23 @@
+MoinMoin Documentation Overview
+===============================
+
+docs/INSTALL.html: generic instructions about installing MoinMoin
+
+docs/UPDATE.html: generic instructions about updating MoinMoin
+
+docs/README.migration: migration procedure for your data_dir
+
+docs/CHANGES (this file): please completely read it until you reach the version
+                          you were using until now - otherwise you might miss
+                          some important upgrading and configuration hints.
+                          Starting with 1.5.3, update installation hints are
+                          marked with HINT. They assume you are upgrading from
+                          the last release version before (e.g. from 1.5.2 to
+                          1.5.3).
+
+
 MoinMoin Version History
 ========================
-
-Documentations with generic instructions about installing or updating MoinMoin
-are available as docs/INSTALL.html and docs/UPDATE.html. A special documenation
-about the migration procedure for your data_dir is in docs/README.migration.
-
-Additionally, please completely read CHANGES text until you reach the version
-you were using until now. Otherwise you might miss some important upgrading and
-configuration hints.
-
-Starting with 1.5.3, update installation hints are marked with HINT.
-They assume you are upgrading from the last release version before (e.g. from
-1.5.2 to 1.5.3).
 
 This release has known bugs (see MoinMoin:MoinMoinBugs), but we think it is
 already better than the previous stable release. Our release policy is not
@@ -25,10 +31,75 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
-  * "Backup" and especially "Restore" action have some issues, so please DON'T
-    USE THEM except if you want to help debugging and improving it and after
-    having made a backup with some other, proven method.
-    USE BOTH ON YOUR OWN RISK!
+
+Version 1.8.0current:
+
+  New Features:
+    * New "modernized" theme.
+    * New macros "WikiConfig" and "WikiConfigHelp".
+    * GUI Editor:
+      * upgraded to use FCKEditor version 2.6.3 (current version)
+      * user can insert and modify various types of MoinMoin links
+    * Per-parser quickhelp, 'quickhelp' class variable of parser class.
+    * New plugin_dirs setting to allow multiple plugin paths (additional to
+      the automatically configured plugin_dir [default: data_dir/plugin]).
+    * @EMAIL@ expands to a MailTo macro call with the obfuscated email address
+      of the current user.
+
+  Bug Fixes:
+    * GUI Editor - fixed bugs:
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorExtendsAnchorsToThePageName
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorIndentingChangedForTables
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorIndentStyledText
+     * Fixed MoinMoin:MoinMoinBugs/GUIEditorConvertsRelativeLinkstoAbsoluteAfterChangingAnExistingLink
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorDestroysParserSyntax
+     * Fixed MoinMoin:MoinMoinBugs/GUIEditorConvertsRelativeLinkstoAbsolute
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorCantCancel
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorRemovesInlineComments
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorPasteFromWordError
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorPasteFromOpenOfficeCausingConvertError
+     * Fixed MoinMoin:MoinMoinBugs/GUIDoesNotChangeLinks
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorTabsCausesConvertError
+     * Fixed MoinMoin:MoinMoinBugs/1.6devGuiPreviewEatsTextBeforeMacro
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorAddingACellDestroysTable
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorBreaksTables
+     * Fixed MoinMoin:MoinMoinBugs/GUIEditorInsertsInvalidLinkInFirefox3
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorExcelPasteProblem
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorExpatErrorWhenPastingTable
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorFailsOnAttachmentsToOtherPage
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorHorizontalLine
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorLineBreak
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorLineBreakInLists
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorLinkContainsJavaScript
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorLosesEmptyLinesInFirefox1.5
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorPasteFromWordCausingConvertError
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorPreviewDataLoss
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorTableOfContentsIncomplete
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorUnusableAfterThemeChange
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorCorruptingNonWikiPages
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorInterwikiLinksMiss"wiki%3A"prefix 
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorExcelPasteUnboundPrefix
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorFormatDropdownCrashesIE
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorWordsGetJoinedTogether
+     * Fixed MoinMoin:MoinMoinBugs/GuiEditorShouldWorkOnSyntaxReference
+
+  Removed Features:
+    * url_prefix setting
+    * traceback_log_dir setting (we just use logging.exception)
+    * editor_quickhelp setting (replaced by per-parser quickhelp)
+    * restoring backups with the backup action and related settings (while
+      creating backups is no big issue and should work OK, restoring them
+      had fundamental issues related to overwriting or not-overwriting of
+      existing files - thus we removed the "restore" part of the action and
+      recommend that you just contact the wiki server admin in case of trouble,
+      give him your wiki backup file and let him carefully restore it.)
+
+  Other Changes:
+    * user_autocreate setting was removed from wiki configuration and replaced
+      by a autocreate=<boolean> parameter of the auth objects that support user
+      profile auto creation.
+    * backup action: you can now use placeholders for backup_include setting
+      and this list now defaults to ['%(data_dir)s', ].
 
 
 Version 1.7.2:

@@ -49,7 +49,7 @@ def macro_ShowSmileys(macro):
     if data:
         browser = DataBrowserWidget(macro.request)
         browser.setData(data)
-        return browser.toHTML()
+        return browser.render()
 
     return ''
 
