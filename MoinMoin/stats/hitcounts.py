@@ -189,7 +189,7 @@ def text(pagename, request, params=''):
 
     table = DataBrowserWidget(request)
     table.setData(hits)
-    return table.render()
+    return table.render(method="GET")
 
 
 def draw(pagename, request):

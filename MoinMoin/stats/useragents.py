@@ -116,7 +116,7 @@ def text(pagename, request):
 
     table = DataBrowserWidget(request)
     table.setData(agents)
-    return table.render()
+    return table.render(method="GET")
 
 def draw(pagename, request):
     import shutil, cStringIO
