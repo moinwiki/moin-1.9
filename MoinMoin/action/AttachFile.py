@@ -1107,7 +1107,7 @@ def do_admin_browser(request):
 
         browser = DataBrowserWidget(request)
         browser.setData(data)
-        return browser.render()
+        return browser.render(method="GET")
 
     return ''
 
