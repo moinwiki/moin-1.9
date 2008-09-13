@@ -892,7 +892,7 @@ var search_hint = "%(search_hint)s";
         text = _(u'Edit')
         url = page.url(self.request, querystr=querystr, escape=0)
         return (u'<link rel="alternate" type="application/wiki" '
-                u'title="%s" href="%s" />' % (text, url))
+                u'title="%s" href="%s">' % (text, url))
 
     def credits(self, d, **keywords):
         """ Create credits html from credits list """
