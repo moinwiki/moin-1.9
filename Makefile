@@ -3,7 +3,7 @@
 #
 
 # location for the wikiconfig.py we use for testing:
-export PYTHONPATH=$(PWD)/tests:$(PWD)
+export PYTHONPATH=$(PWD)
 
 testwiki := ./tests/wiki
 share := ./wiki
@@ -61,7 +61,7 @@ underlay:
 
 pagepacks:
 	@python MoinMoin/_tests/maketestwiki.py
-	@MoinMoin/script/moin.py --config-dir=$(testwiki)/.. maint mkpagepacks
+	@MoinMoin/script/moin.py --config-dir=MoinMoin/_tests maint mkpagepacks
 	cd $(share) ; rm -rf underlay
 	cp -a $(testwiki)/underlay $(share)/
 	
