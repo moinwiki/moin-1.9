@@ -97,8 +97,8 @@ class DataBrowserWidget(base.Widget):
         """
         does the formatting of the table
         @param formatter: formatter
-        @param method: None is the default and does not create a form 
-                       while "GET" or "POST" will create the form using the given method 
+        @param method: None is the default and does not create a form
+                       while "GET" or "POST" will create the form using the given method
         """
         fmt = formatter or self.request.formatter
 
