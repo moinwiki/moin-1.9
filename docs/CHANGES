@@ -102,8 +102,10 @@ Version 1.8.0beta1:
     * user_autocreate setting was removed from wiki configuration and replaced
       by a autocreate=<boolean> parameter of the auth objects that support user
       profile auto creation.
-    * backup action: you can now use placeholders for backup_include setting
-      and this list now defaults to ['%(data_dir)s', ].
+    * backup action: backup_exclude does not do %(placeholder)s expansion any
+      more, because of unfixable problems with regex special characters in
+      pathes (e.g. backslashes in windows pathes). The %(cache_dir)s placeholder
+      was removed because of this.
 
 
 Version 1.7.2:
