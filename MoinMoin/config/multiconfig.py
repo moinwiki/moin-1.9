@@ -325,10 +325,8 @@ class ConfigFunctionality(object):
         # e.g u'%(page_front_page)s' % self
         self.navi_bar = [elem % self for elem in self.navi_bar]
 
-        # expand %(...)s placeholders, compile regex and cache it
-        self.cache.backup_exclude_regex = re.compile("|".join(
-                                              [elem % self for elem in self.backup_exclude]))
-        self.cache.backup_include = [elem % self for elem in self.backup_include]
+        # compile regex for backup exclusions and cache it
+        self.cache.backup_exclude_regex = re.compile("|".join(self.backup_exclude))
 
         # check if python-xapian is installed
         if self.xapian_search:
@@ -1205,11 +1203,10 @@ options = {
     (
       ('compression', 'gz', 'What compression to use for the backup ("gz" or "bz2").'),
       ('users', [], 'List of trusted user names who are allowed to get a backup.'),
-      ('include', ['%(data_dir)s', ], 'List of pathes to backup.'),
+      ('include', [], 'List of pathes to backup.'),
       ('exclude',
        [
         r"(.+\.py(c|o)$)",
-        r"%(cache_dir)s",
         r"%(/)spages%(/)s.+%(/)scache%(/)s[^%(/)s]+$" % {'/': os.sep},
         r"%(/)s(edit-lock|event-log|\.DS_Store)$" % {'/': os.sep},
        ],

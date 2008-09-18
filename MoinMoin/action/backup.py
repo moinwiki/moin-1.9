@@ -44,7 +44,7 @@ def sendBackup(request):
     tar = tarfile.open(fileobj=request, mode="w|%s" % request.cfg.backup_compression)
     # allow GNU tar's longer file/pathnames
     tar.posix = False
-    for path in request.cfg.cache.backup_include:
+    for path in request.cfg.backup_include:
         addFiles(path, tar, request.cfg.cache.backup_exclude_regex)
     tar.close()
 
