@@ -22,13 +22,13 @@ from MoinMoin import wikiutil
 from MoinMoin.support import tarfile
 
 
-def addFiles(path, tar, exclude_regex):
+def addFiles(path, tar, exclude_func):
     """ Add files in path to tar """
     for root, dirs, files in os.walk(path):
         files.sort() # sorted page revs may compress better
         for name in files:
             path = os.path.join(root, name)
-            if exclude_regex.search(path):
+            if exclude_func(path):
                 continue
             tar.add(path)
 
@@ -45,7 +45,7 @@ def sendBackup(request):
     # allow GNU tar's longer file/pathnames
     tar.posix = False
     for path in request.cfg.backup_include:
-        addFiles(path, tar, request.cfg.cache.backup_exclude_regex)
+        addFiles(path, tar, request.cfg.backup_exclude)
     tar.close()
 
 
