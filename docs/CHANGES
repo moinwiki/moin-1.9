@@ -102,11 +102,15 @@ Version 1.8.0beta1:
     * user_autocreate setting was removed from wiki configuration and replaced
       by a autocreate=<boolean> parameter of the auth objects that support user
       profile auto creation.
-    * backup action: backup_exclude does not do %(placeholder)s expansion any
-      more, because of unfixable problems with regex special characters in
-      pathes (e.g. backslashes in windows pathes). The %(cache_dir)s placeholder
-      was removed because of this.
-
+    * backup action: backup_exclude (default: "do not exclude anything") is now
+      a function f(filename) that tells whether a file should be excluded from
+      backup.
+      You can get the old regex exclusion functionality by using:
+      backup_exclude = re.compile(your_regex).search
+      Be careful with your regex, you might need to use re.escape() to escape
+      characters that have a special meaning in regexes (e.g.: \.[] etc.).
+      If in doubt, maybe just leave backup_exclude at the default and don't
+      exclude anything.
 
 Version 1.7.2:
   Fixes:
