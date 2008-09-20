@@ -998,6 +998,8 @@ class convert_tree(visitor):
             match = re.match(r"rgb\((\d+),\s*(\d+),\s*(\d+)\)", value)
             if match:
                 value = '#%X%X%X' % (int(match.group(1)), int(match.group(2)), int(match.group(3)))
+            else:
+                match = re.match(r"#[0-9A-Fa-f]{6}", value)
             if not prefix and match:
                 result = value
             else:
