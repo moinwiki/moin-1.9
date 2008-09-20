@@ -991,19 +991,24 @@ class convert_tree(visitor):
         except ValueError:
             return value
 
-    def _table_style(self, node):
-        # TODO: attrs = get_attrs(node)
-        result = []
+    def _get_color(self, node, prefix):
         if node.hasAttribute("bgcolor"):
             value = node.getAttribute("bgcolor")
             match = re.match(r"rgb\((\d+),\s*(\d+),\s*(\d+)\)", value)
             if match:
-                result.append('tablebgcolor="#%X%X%X"' %
-                              (int(match.group(1)),
-                               int(match.group(2)),
-                               int(match.group(3))))
+                value = '#%X%X%X' % (int(match.group(1)), int(match.group(2)), int(match.group(3)))
+            if not prefix and match:
+                result = value
             else:
-                result.append('tablebgcolor="%s"' % value)
+                result = '%sbgcolor="%s"' % (prefix, value)
+        else:
+            result = ''
+        return result
+
+    def _table_style(self, node):
+        # TODO: attrs = get_attrs(node)
+        result = []
+        result.append(self._get_color(node, 'table'))
         if node.hasAttribute("width"):
             value = node.getAttribute("width")
             result.append('tablewidth="%s"' % self._check_length(value))
@@ -1022,16 +1027,7 @@ class convert_tree(visitor):
     def _row_style(self, node):
         # TODO: attrs = get_attrs(node)
         result = []
-        if node.hasAttribute("bgcolor"):
-            value = node.getAttribute("bgcolor")
-            match = re.match(r"rgb\((\d+),\s*(\d+),\s*(\d+)\)", value)
-            if match:
-                result.append('rowbgcolor="#%X%X%X"' %
-                              (int(match.group(1)),
-                               int(match.group(2)),
-                               int(match.group(3))))
-            else:
-                result.append('rowbgcolor="%s"' % value)
+        result.append(self._get_color(node, 'row'))
         if node.hasAttribute("style"):
             result.append('rowstyle="%s"' % node.getAttribute("style"))
         if node.hasAttribute("class"):
@@ -1054,15 +1050,7 @@ class convert_tree(visitor):
 
         align = ""
         result = []
-        if  node.hasAttribute("bgcolor"):
-            value = node.getAttribute("bgcolor")
-            match = re.match(r"rgb\((\d+),\s*(\d+),\s*(\d+)\)", value)
-            if match:
-                result.append("#%X%X%X" % (int(match.group(1)),
-                                           int(match.group(2)),
-                                           int(match.group(3))))
-            else:
-                result.append('bgcolor="%s"' % value)
+        result.append(self._get_color(node, ''))
         if node.hasAttribute("align"):
             value = node.getAttribute("align")
             if not spanning or value != "center":
