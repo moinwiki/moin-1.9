@@ -802,7 +802,8 @@ class convert_tree(visitor):
             command = ",,"
         elif name == 'sup':
             command = "^"
-        elif name in ('font', 'meta', ):
+        elif name in ('area', 'center', 'code', 'embed', 'fieldset', 'font', 'form', 'iframe', 'input', 'label', 'link', 'map',
+                      'meta', 'noscript', 'option', 'script', 'select', 'textarea', 'wbr'):
             command = "" # just throw away unsupported elements
         else:
             raise ConvertError("process_inline: Don't support %s element" % name)
