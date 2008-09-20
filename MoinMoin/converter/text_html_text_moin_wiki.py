@@ -1195,7 +1195,7 @@ class convert_tree(visitor):
         for i in node.childNodes:
             if i.nodeType == Node.ELEMENT_NODE:
                 name = i.localName
-                if name == 'td':
+                if name in ('td', 'th', ):
                     self.process_table_data(i, style=style)
                     style = ""
                 else:
