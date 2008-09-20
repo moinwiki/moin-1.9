@@ -571,7 +571,7 @@ class convert_tree(visitor):
     def process_heading(self, node):
         text = self.node_list_text_only(node.childNodes).strip()
         if text:
-            depth = int(node.localName[1]) - 1
+            depth = int(node.localName[1])
             hstr = "=" * depth
             self.text.append(self.new_line)
             self.text.append("%s %s %s" % (hstr, text.replace("\n", " "), hstr))

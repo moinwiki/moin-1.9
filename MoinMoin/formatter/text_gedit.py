@@ -25,7 +25,7 @@ class Formatter(text_html.Formatter):
             self._base_depth = depth
 
         count_depth = max(depth - (self._base_depth - 1), 1)
-        heading_depth = depth + 1
+        heading_depth = depth
 
         # closing tag, with empty line after, to make source more readable
         if not on:
