@@ -4,7 +4,7 @@
 
     Generate a URL list of all your pages (using google's sitemap XML format).
 
-    @copyright: 2006 MoinMoin:ThomasWaldmann
+    @copyright: 2006-2008 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 import time
@@ -15,18 +15,20 @@ datetime_fmt = "%Y-%m-%dT%H:%M:%S+00:00"
 def now():
     return time.strftime(datetime_fmt, time.gmtime())
 
-def make_url_xml(vars):
+def make_url_xml(request, vars):
     """ assemble a single <url> xml fragment """
+    # add protocol:server - url must be complete path starting with/from /
+    vars['url'] = request.getQualifiedURL(vars['url'])
     return """\
 <url>
-  <loc>%(base)s%(url)s</loc>
+  <loc>%(url)s</loc>
   <lastmod>%(lastmod)s</lastmod>
   <changefreq>%(changefreq)s</changefreq>
   <priority>%(priority)s</priority>
 </url>
 """ % vars
 
-def sitemap_url(request, base, page):
+def sitemap_url(request, page):
     """ return a sitemap <url>..</url> fragment for page object <page> """
     url = page.url(request)
     pagename = page.page_name
@@ -56,13 +58,12 @@ def sitemap_url(request, base, page):
         changefreq = "daily"
         priority = "0.5"
 
-    return make_url_xml(locals())
+    return make_url_xml(request, locals())
 
 def execute(pagename, request):
     _ = request.getText
     form = request.form
     request.user.datetime_fmt = datetime_fmt
-    base = request.getBaseURL()
 
     request.emit_http_headers(["Content-Type: text/xml; charset=UTF-8"])
 
@@ -70,12 +71,14 @@ def execute(pagename, request):
     request.write("""<?xml version="1.0" encoding="UTF-8"?>\r\n""")
 
     result = []
-    result.append("""<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n""")
+    result.append("""<urlset xmlns="http://www.google.com/schemas/sitemap/0.84">\n""")
 
-    # we include the / url as an important and often changed URL
-    result.append(make_url_xml({
-        'base': base,
-        'url': '/',
+    # we include the root url as an important and often changed URL
+    rooturl = request.getScriptname()
+    if not rooturl.endswith('/'):
+        rooturl += '/'
+    result.append(make_url_xml(request, {
+        'url': rooturl,
         'lastmod': now(), # fake
         'changefreq': 'hourly',
         'priority': '1.0',
@@ -90,7 +93,7 @@ def execute(pagename, request):
     pagelist = pages.keys()
     pagelist.sort()
     for name in pagelist:
-        result.append(sitemap_url(request, base, pages[name]))
+        result.append(sitemap_url(request, pages[name]))
 
     result.append("""</urlset>\n""")
 
