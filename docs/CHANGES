@@ -32,6 +32,32 @@ Known main issues:
     editor_default = 'text'  # internal default, just for completeness
 
 
+Version 1.8.0beta2:
+  Bug Fixes:
+    * GUI Editor - fixed bugs:
+      * Create shorter output for colors (better roundtripping).
+      * Fixed heading level roundtripping.
+      * Handle th in the same way as td (instead of giving traceback due to
+        unhandled element).
+      * MoinMoinBugs/1.6GuiEditorRemovesLinkOptions (fix roundtripping of
+        attachment links with &do=get param (q&d fix)
+      * MoinMoinBugs/GuiEditorInterwikiLinksMiss"wiki:"prefix (fix roundtripping
+        of free interwiki links)
+      * MoinMoinBugs/GuiEditorWrongConversionOfTableAttributes (fix processing
+        of table caption)
+      * MoinMoinBugs/1.8_GUIEditorDoesNotSupportScriptElement (added some more
+        unsupported elements, do not traceback for these)
+    * MoinMoinBugs/DoubleScriptNameInSitemap (fixing urls given by sitemap
+      action, if the wiki does not run in the root url of the site)
+    * Fixed a Python2.3 incompatibility (base64.b64decode).
+    * Fixed backup action configuration (broke on win32).
+    * Added link icon for ssh: links.
+    * "modernized" theme:
+      * Increased padding-left for correct rendering of bigger icons on MS IE.
+      * Changed some modernized images to always get the same white background
+        for MS IE6.
+
+
 Version 1.8.0beta1:
 
   New Features:
