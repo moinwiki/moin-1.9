@@ -806,7 +806,7 @@ msgstr ""
 msgid "New user account created on %(sitename)s"
 msgstr "Neues Benutzer-Konto erzeugt auf %(sitename)s"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear Superuser, a new user has just been created on %(sitename)s\". Details "
 "follow:\n"
@@ -814,7 +814,7 @@ msgid ""
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
 msgstr ""
-"Lieber Superuser, ein neuer Benutzer wurde gerade erzeugt. Details folgen:\n"
+"Lieber Superuser, ein neuer Benutzer wurde gerade auf %(sitename)s erzeugt. Details folgen:\n"
 "\n"
 "    Benutzer-Name:  %(username)s\n"
 "    E-Mail-Adresse: %(useremail)s"
@@ -2641,7 +2641,7 @@ msgid "User"
 msgstr "Benutzer"
 
 msgid "[ATTACH]"
-msgstr "[ANHANG]"
+msgstr "[ANHÄNGEN]"
 
 msgid "Variable name"
 msgstr "Variablenname"
