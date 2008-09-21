@@ -1135,7 +1135,9 @@ class convert_tree(visitor):
             colspan = 1
         text = self.node_list_text_only(node.childNodes).replace('\n', ' ').strip()
         if text:
-            self.text.extend(["%s'''%s%s'''||" % ('||' * colspan, style, text), self.new_line_dont_remove])
+            if style:
+                style = '<%s>' % style
+            self.text.extend(["%s%s'''%s'''||" % ('||' * colspan, style, text), self.new_line_dont_remove])
 
     def process_table_data(self, node, style=""):
         if node.hasAttribute("colspan"):
