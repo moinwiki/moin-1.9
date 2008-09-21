@@ -13,6 +13,9 @@ from xml.dom import Node
 from MoinMoin import config, wikiutil
 from MoinMoin.error import ConvertError
 
+from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
+interwiki_re = re.compile(WikiParser.interwiki_rule, re.VERBOSE|re.UNICODE)
+
 # Portions (C) International Organization for Standardization 1986
 # Permission to copy in any form is granted for use with
 # conforming SGML systems and applications as defined in
@@ -1229,10 +1232,11 @@ class convert_tree(visitor):
                 pagename = wikiutil.url_unquote(href)
                 interwikiname = "%s:%s" % (title, pagename)
             if interwikiname and pagename == desc:
-                if ' ' in interwikiname:
-                    self.text.append("[[%s]]" % interwikiname)
-                else:
+                if interwiki_re.match(interwikiname+' '): # the blank is needed by interwiki_re to match
+                    # this is valid as a free interwiki link
                     self.text.append("%s" % interwikiname)
+                else:
+                    self.text.append("[[%s]]" % interwikiname)
                 return
             elif title == 'Self':
                 self.text.append('[[%s|%s]]' % (href, desc))
