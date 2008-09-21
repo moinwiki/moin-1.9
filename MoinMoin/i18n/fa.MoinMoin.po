@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Direction: rtl\n"
-"X-Language: Farsi\n"
+"X-Language: Persian\n"
 "X-HasWikiMarkup: True\n"
 "X-Language-in-English: Persian\n"
 
@@ -329,14 +329,14 @@ msgstr ""
 #, python-format
 msgid ""
 "Other users will be ''blocked'' from editing this page until %(bumptime)s."
-msgstr "سایر کاربران تا %(bumptime)s دیگر مجاز به تغییر این صفحه نخواهند بود."
+msgstr "سایر کاربران تا %(bumptime)s مجاز به تغییر این صفحه نخواهند بود."
 
 #, python-format
 msgid ""
 "Other users will be ''warned'' until %(bumptime)s that you are editing this "
 "page."
 msgstr ""
-"سایر کاربران تا %(bumptime)s دیگر پیغامی مبنی بر اینکه شما در حال ویرایش این "
+"سایر کاربران تا %(bumptime)s پیغامی مبنی بر اینکه شما در حال ویرایش این "
 "صفحه هستید، دریافت خواهند نمود."
 
 msgid "Use the Preview button to extend the locking period."
@@ -797,7 +797,7 @@ msgstr ""
 msgid "New user account created on %(sitename)s"
 msgstr "حساب کاربری جدید در %(sitename)s ایجاد شد"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear Superuser, a new user has just been created on %(sitename)s\". Details "
 "follow:\n"
@@ -805,7 +805,7 @@ msgid ""
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
 msgstr ""
-"مدیر گرامی، یک حساب کاربری جدید هم اکنون ایجاد شد. جزئیات به شرح زیر است:\n"
+"مدیر گرامی، یک حساب کاربری جدید هم اکنون در %(sitename)s ایجاد شده است. جزئیات به شرح زیر است:\n"
 "\n"
 "    نام کاربری: %(username)s\n"
 "    آدرس ایمیل: %(useremail)s"
@@ -1203,7 +1203,7 @@ msgstr ""
 "هیچ صفحه‌ای با --pages یا --search مشخص نشد، یک بسته کامل در نظر گرفته میشود."
 
 msgid "All attachments included into the package."
-msgstr ""
+msgstr "کلیه ضمیمه‌ها در بسته اضافه شدند."
 
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "فایل خروجی هم اکنون وجود دارد! ادامه کار ممکن نیست!"
@@ -1441,9 +1441,8 @@ msgstr ""
 "درصورتیکه ایمیل حاوی رمز تغییر کلمه عبور را دریافت نموده‌اید، نام‌کاربری خود،\n"
 "رمز تغییر کلمه عبور و کلمه عبور جدید خود را (دوبار) وارد نمایید."
 
-#, fuzzy
 msgid "Wiki Backup"
-msgstr "زبان نوشتاری ویکی"
+msgstr "پشتیبان‌گیری ویکی"
 
 msgid ""
 "= Downloading a backup =\n"
@@ -1849,9 +1848,8 @@ msgstr "نام \"%s\" معتبر نیست!"
 msgid "Created the package %s containing the pages %s."
 msgstr "بسته %s شامل صفحات %s ساخته شد."
 
-#, fuzzy
 msgid "Include all attachments?"
-msgstr "[%d ضمیمه‌ها]"
+msgstr "همه ضمیمه‌ها وارد شوند؟"
 
 msgid "Package pages"
 msgstr "بسته صفحات"
@@ -2583,14 +2581,13 @@ msgid "User"
 msgstr "کاربر"
 
 msgid "[ATTACH]"
-msgstr ""
+msgstr "[ضمیمه]"
 
-#, fuzzy
 msgid "Variable name"
-msgstr "نام بسته"
+msgstr "نام متغیر"
 
 msgid "Description"
-msgstr ""
+msgstr "توضیحات"
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -2638,7 +2635,7 @@ msgid "Display"
 msgstr "نمایش"
 
 msgid "Wiki configuration"
-msgstr ""
+msgstr "پیکربندی ویکی"
 
 msgid ""
 "This table shows all settings in this wiki that do not have default values. "
@@ -2647,7 +2644,6 @@ msgid ""
 "or settings that were removed from Moin."
 msgstr ""
 
-#, fuzzy
 msgid "Setting"
 msgstr "تنظیمات"
 

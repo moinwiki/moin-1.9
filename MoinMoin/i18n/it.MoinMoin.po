@@ -11,11 +11,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.7\n"
+"Project-Id-Version: MoinMoin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-09-12 23:35+0200\n"
-"PO-Revision-Date: 2008-06-21 22:56+0200\n"
-"Last-Translator: Milo Casagrande <milo_casagrande@yahoo.it>\n"
+"PO-Revision-Date: 2008-09-20 16:31+0200\n"
+"Last-Translator: Milo Casagrande <milo@ubuntu.com>\n"
 "Language-Team: Italian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -134,16 +134,16 @@ msgstr ""
 "Il blocco alle modifiche sulla pagina %(lock_page)s scadrà tra # secondi."
 
 msgid "Someone else deleted this page while you were editing!"
-msgstr "Qualcun altro ha rimosso la pagina mentre la stavi modificando tu."
+msgstr "Qualcun altro ha eliminato la pagina mentre era in modifica."
 
 msgid "Someone else changed this page while you were editing!"
-msgstr "Qualcun altro ha cambiato la pagina mentre la stavi modificando tu."
+msgstr "Qualcun altro ha cambiato la pagina mentre era in modifica."
 
 msgid ""
 "Someone else saved this page while you were editing!\n"
 "Please review the page and save then. Do not save this page as it is!"
 msgstr ""
-"Qualcun altro ha salvato la pagina mentre la stavi modificando.\n"
+"Qualcun altro ha salvato la pagina mentre era in modifica.\n"
 "Rivedere la pagina e salvarla, non salvarla così com'è."
 
 msgid "[Content loaded from draft]"
@@ -261,15 +261,14 @@ msgid "Could not rename page because of file system error: %s."
 msgstr "Impossibile rinominare la pagina per un errore del file system: %s."
 
 msgid "You are not allowed to delete this page!"
-msgstr "Non si è autorizzati a cancellare questa pagina."
+msgstr "Non si è autorizzati a eliminare questa pagina."
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr ""
-"Grazie per il tuo contributo. La tua attenzione ai dettagli è apprezzata."
+msgstr "Grazie per il proprio contributo. La vostra attenzione ai dettagli è molto apprezzata."
 
 #, python-format
 msgid "Page \"%s\" was successfully deleted!"
-msgstr "La pagina \"%s\" è stata cancellata correttamente!"
+msgstr "La pagina \"%s\" è stata eliminata correttamente."
 
 #, python-format
 msgid "Page could not get locked. Unexpected error (errno=%d)."
@@ -500,10 +499,10 @@ msgid "No differences found!"
 msgstr "Nessuna differenza riscontrata."
 
 msgid "Deletions are marked like this."
-msgstr "Le cancellazioni sono marcate in questo modo."
+msgstr "Le cancellazioni sono segnalate in questo modo."
 
 msgid "Additions are marked like this."
-msgstr "Le aggiunte sono marcate in questo modo."
+msgstr "Le aggiunte sono segnalate in questo modo."
 
 #, python-format
 msgid ""
@@ -712,7 +711,7 @@ msgid "Page has been renamed"
 msgstr "La pagina è stata rinominata"
 
 msgid "Page has been deleted"
-msgstr "La pagina è stata cancellata"
+msgstr "La pagina è stata eliminata"
 
 msgid "Page has been copied"
 msgstr "La pagina è stata copiata"
@@ -783,7 +782,7 @@ msgstr ""
 "ti sei abbonato/a alla notifica in caso di modifiche a una pagina o a una\n"
 "categoria sul wiki \"%(sitename)s\".\n"
 "\n"
-"La pagina \"%(pagename)s\" è stata modificata da %(editor)s:\n"
+"La pagina \"%(pagename)s\" è stata eliminata da %(editor)s:\n"
 "\n"
 
 #, python-format
@@ -808,7 +807,7 @@ msgstr ""
 msgid "New user account created on %(sitename)s"
 msgstr "Nuovo account creato su %(sitename)s"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear Superuser, a new user has just been created on %(sitename)s\". Details "
 "follow:\n"
@@ -816,8 +815,7 @@ msgid ""
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
 msgstr ""
-"Gentile Super-utente, è stato appena creato un nuovo utente. Seguono i "
-"dettagli:\n"
+"Gentile Super-utente, è stato appena creato un nuovo utente su \"%(sitename)s\". Seguono i dettagli:\n"
 "\n"
 "    Nome utente: %(username)s\n"
 "    Indirizzo email: %(useremail)s"
@@ -1214,7 +1212,7 @@ msgstr ""
 "pacchetto complessivo."
 
 msgid "All attachments included into the package."
-msgstr ""
+msgstr "Tutti gli allegati inclusi nel pacchetto."
 
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "Il file di output esiste già. Azione annullata."
@@ -1453,9 +1451,8 @@ msgstr ""
 "Se è stata ricevuta l'email con il token di recupero, inserire il proprio\n"
 "nome utente, il token e la nuova password (due volte) qui sotto."
 
-#, fuzzy
 msgid "Wiki Backup"
-msgstr "Formattazione wiki"
+msgstr "Backup wiki"
 
 msgid ""
 "= Downloading a backup =\n"
@@ -1471,6 +1468,15 @@ msgid ""
 "\n"
 "To get a backup, just click here:"
 msgstr ""
+"= Scaricare un backup =\n"
+"\n"
+"Prestare attenzione:\n"
+" * Salvare i backup in un luogo sicuro, contengono informazioni sensibili.\n"
+" * Assicurarsi che i valori \"backup_*\" della configurazione del wiki siano corretti.\n"
+" * Assicurarsi che il file di backup ottenuto contenga tutto quello che serve in caso di problemi.\n"
+" * Assicurarsi che venga scaricato senza alcun problema.\n"
+"\n"
+"Per ottenere un backup, fare clic qui:"
 
 msgid "Backup"
 msgstr "Backup"
@@ -1480,7 +1486,7 @@ msgstr "Non è consentito eseguire un backup remoto."
 
 #, python-format
 msgid "Unknown backup subaction: %s."
-msgstr "Sotto-azione di backup %s sconosciuta."
+msgstr "Sotto-azione di backup sconosciuta: %s."
 
 msgid "You must login to add a quicklink."
 msgstr "È necessario accedere per aggiungere un collegamento rapido."
@@ -1612,16 +1618,16 @@ msgid "File to upload"
 msgstr "File da caricare"
 
 msgid "Rename to"
-msgstr "Rinomina come"
+msgstr "Rinominare come"
 
 msgid "Overwrite existing attachment of same name"
-msgstr "Sostituire un allegato di medesimo nome"
+msgstr "Sostituire un allegato dallo stesso nome"
 
 msgid "Upload"
 msgstr "Carica"
 
 msgid "Attached Files"
-msgstr "File allegati"
+msgstr "Allegati"
 
 msgid "You are not allowed to attach a file to this page."
 msgstr "Non si è autorizzati a inserire allegati in questa pagina."
@@ -1640,9 +1646,7 @@ msgstr "Non si è autorizzati a sovrascrivere gli allegati di questa pagina."
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
-msgstr ""
-"Nessun contenuto. Cancellare i caratteri non ASCII dal nome del file e "
-"riprovare."
+msgstr "Nessun contenuto. Eliminare i caratteri non ASCII dal nome del file e riprovare."
 
 #, python-format
 msgid ""
@@ -1661,11 +1665,11 @@ msgid "You are not allowed to save a drawing on this page."
 msgstr "Non si è autorizzati a salvare un disegno in questa pagina."
 
 msgid "You are not allowed to delete attachments on this page."
-msgstr "Non si è autorizzati a cancellare i file allegati."
+msgstr "Non si è autorizzati a eliminare i file allegati."
 
 #, python-format
 msgid "Attachment '%(filename)s' deleted."
-msgstr "L'allegato \"%(filename)s\" è stato cancellato."
+msgstr "L'allegato \"%(filename)s\" è stato eliminato."
 
 #, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -1835,7 +1839,7 @@ msgid "Rename Page"
 msgstr "Rinomina pagina"
 
 msgid "This page is already deleted or was never created!"
-msgstr "Questa pagina è già stata cancellata o non è mai stata creata."
+msgstr "Questa pagina è già stata eliminata o non è mai stata creata."
 
 msgid "Rename all /subpages too?"
 msgstr "Rinominare anche tutte le /sotto-pagine?"
@@ -1874,9 +1878,8 @@ msgstr "Nome di file \"%s\" non valido."
 msgid "Created the package %s containing the pages %s."
 msgstr "Il pacchetto %s contenente le pagine %s è stato creato."
 
-#, fuzzy
 msgid "Include all attachments?"
-msgstr "[%d allegati]"
+msgstr "Includere tutti gli allegati?"
 
 msgid "Package pages"
 msgstr "Pagine del pacchetto"
@@ -1888,23 +1891,23 @@ msgid "List of page names - separated by a comma"
 msgstr "Elenco dei nomi di pagina, separati da virgole"
 
 msgid "Delete"
-msgstr "Cancella"
+msgstr "Elimina"
 
 msgid "Delete all /subpages too?"
-msgstr "Cancellare anche tutte le /sotto-pagine?"
+msgstr "Eliminare anche tutte le /sotto-pagine?"
 
 msgid "Optional reason for the deletion"
-msgstr "Ragione facoltativa per la cancellazione"
+msgstr "Ragione facoltativa per l'eliminazione"
 
 msgid "Really delete this page?"
-msgstr "Cancellare veramente questa pagina?"
+msgstr "Eliminare veramente questa pagina?"
 
 msgid "You are now logged out."
 msgstr "Si è ora disconnessi."
 
 #, python-format
 msgid "Rolled back changes to the page %s."
-msgstr "Annullati i cambiamenti alla pagina %s."
+msgstr "Annullate le modifiche alla pagina %s."
 
 msgid "Exception while calling rollback function:"
 msgstr "Eccezione nell'annullare i cambiamenti:"
@@ -1913,10 +1916,7 @@ msgid ""
 "Please enter your password of your account at the remote wiki below. "
 "<<BR>> /!\\ You should trust both wikis because the password could be read "
 "by the particular administrators."
-msgstr ""
-"Inserire la propria password per il wiki remoto qui sotto. <<BR>> /!\\ È "
-"necessario fidarsi di entrambi i wiki, poiché agli amministratori è "
-"possibile leggere la password."
+msgstr "Inserire qui sotto la propria password per il wiki remoto. <<BR>> /!\\ È necessario fidarsi di entrambi i wiki, poiché agli amministratori è possibile leggere la password."
 
 msgid "Operation was canceled."
 msgstr "L'operazione è stata annullata."
@@ -1966,37 +1966,31 @@ msgstr ""
 
 #, python-format
 msgid "Deleted page %s locally."
-msgstr "Cancellata la pagina locale %s."
+msgstr "La pagina %s è stata eliminata localmente."
 
 #, python-format
 msgid "Error while deleting page %s locally:"
-msgstr "Errore nel cancellare la pagina locale %s:"
+msgstr "Errore nell'eliminare localmente la pagina %s:"
 
 #, python-format
 msgid "Deleted page %s remotely."
-msgstr "Cancellata la pagina remota %s."
+msgstr "Eliminata la pagina remota %s."
 
 #, python-format
 msgid "Error while deleting page %s remotely:"
-msgstr "Errore nel cancellare la pagina remota %s:"
+msgstr "Errore nell'eliminare la pagina remota %s:"
 
 #, python-format
 msgid ""
 "The item %s cannot be merged automatically but was changed in both wikis. "
 "Please delete it in one of both wikis and try again."
-msgstr ""
-"Non è stato possibile unire automaticamente l'articolo %s, ma è stato "
-"modificato in tutti e due i wiki. Cancellarlo in uno dei due wiki e "
-"riprovare."
+msgstr "Non è stato possibile unire automaticamente l'elemento %s, ma è stato modificato in entrambi i wiki. Eliminarlo in uno dei due wiki e riprovare."
 
 #, python-format
 msgid ""
 "The item %s has different mime types in both wikis and cannot be merged. "
 "Please delete it in one of both wikis or unify the mime type, and try again."
-msgstr ""
-"Non è stato possibile unire l'articolo %s perché ha dei tipi MIME differenti "
-"nei due wiki. Cancellarlo in uno dei due wiki oppure sistemare i tipi MIME e "
-"riprovare."
+msgstr "Non è stato possibile unire l'elemento %s perché ha dei tipi MIME differenti nei due wiki. Eliminarlo in uno dei due wiki oppure sistemare i tipi MIME e riprovare."
 
 #, python-format
 msgid ""
@@ -2013,16 +2007,13 @@ msgstr "Sincronizzazione della pagina %s con la pagina remota %s..."
 
 #, python-format
 msgid "The page %s was deleted remotely but changed locally."
-msgstr "La pagina remota %s è stata cancellata, ma modificata localmente."
+msgstr "La pagina remota %s è stata eliminata, ma modificata localmente."
 
 #, python-format
 msgid ""
 "The page %s could not be synced. The remote page was renamed. This is not "
 "supported yet. You may want to delete one of the pages to get it synced."
-msgstr ""
-"Non è stato possibile sincronizzare la pagina %s. La pagina remota è stata "
-"rinominata. Questa operazione non è ancora supportata. È possibile "
-"cancellarla in uno dei due wiki per sincronizzarla."
+msgstr "Non è stato possibile sincronizzare la pagina %s. La pagina remota è stata rinominata. Questa operazione non è ancora supportata. È possibile eliminarla in uno dei due wiki per sincronizzarla."
 
 #, python-format
 msgid "Skipped page %s because of a locally or remotely unresolved conflict."
@@ -2474,7 +2465,7 @@ msgid "[RSS]"
 msgstr "[RSS]"
 
 msgid "[DELETED]"
-msgstr "[CANCELLATO]"
+msgstr "[ELIMINATO]"
 
 msgid "[UPDATED]"
 msgstr "[AGGIORNATO]"
@@ -2540,10 +2531,10 @@ msgid "Print View"
 msgstr "Versione stampabile"
 
 msgid "Delete Cache"
-msgstr "Cancella file temporanei"
+msgstr "Elimina file temporanei"
 
 msgid "Delete Page"
-msgstr "Cancella pagina"
+msgstr "Elimina pagina"
 
 msgid "Like Pages"
 msgstr "Pagine simili"
@@ -2601,7 +2592,7 @@ msgid "Wiki Markup"
 msgstr "Formattazione wiki"
 
 msgid "DeleteCache"
-msgstr "Cancella file temporanei"
+msgstr "EliminaFileTemporanei"
 
 #, python-format
 msgid "(cached %s)"
@@ -2620,14 +2611,13 @@ msgid "User"
 msgstr "Utente"
 
 msgid "[ATTACH]"
-msgstr ""
+msgstr "[ALLEGA]"
 
-#, fuzzy
 msgid "Variable name"
-msgstr "Nome del pacchetto"
+msgstr "Nome variabile"
 
 msgid "Description"
-msgstr ""
+msgstr "Descrizione"
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -2676,16 +2666,15 @@ msgid "Display"
 msgstr "Visualizza"
 
 msgid "Wiki configuration"
-msgstr ""
+msgstr "Configurazione wiki"
 
 msgid ""
 "This table shows all settings in this wiki that do not have default values. "
 "Settings that the configuration system doesn't know about are shown in "
 "''italic'', those may be due to third-party extensions needing configuration "
 "or settings that were removed from Moin."
-msgstr ""
+msgstr "Questa tabella mostra tutte le impostazioni di questo wiki che non hanno valori predefiniti. Le impostazioni di cui il sistema di configurazione non è a conoscenza sono mostrate in ''corsivo''; potrebbero essere estensioni di terze parti che necessitano di impostazioni o di una configurazione tolta da Moin."
 
-#, fuzzy
 msgid "Setting"
 msgstr "Impostazioni"
 
@@ -2880,7 +2869,7 @@ msgid "(currently set to %s)"
 msgstr "(attualmente impostato a %s)"
 
 msgid "Delete bookmark"
-msgstr "Cancella segnalibro"
+msgstr "Elimina segnalibro"
 
 msgid "Set bookmark"
 msgstr "Imposta segnalibro"
@@ -3001,7 +2990,7 @@ msgid "AttachFile"
 msgstr "AllegaFile"
 
 msgid "DeletePage"
-msgstr "CancellaPagina"
+msgstr "EliminaPagina"
 
 msgid "LikePages"
 msgstr "PagineSimili"
@@ -3036,69 +3025,3 @@ msgstr "Disegno selezionabile: %(filename)s"
 
 msgid "Toggle line numbers"
 msgstr "Dis/Attivare numerazione delle righe"
-
-#~ msgid ""
-#~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
-#~ "Files: %(filecount)d, Directories: %(dircount)d"
-#~ msgstr ""
-#~ "Backup %(filename)s ripristinato nella directory di destinazione %"
-#~ "(targetdir)s.\n"
-#~ "N. file: %(filecount)d, n. cartelle: %(dircount)d"
-
-#~ msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
-#~ msgstr ""
-#~ "Ripristino della copia di backup %(filename)s nella directory di "
-#~ "destinazione %(targetdir)s fallito."
-
-#~ msgid "Wiki Backup / Restore"
-#~ msgstr "Wiki Backup / Recupero"
-
-#~ msgid ""
-#~ "Some hints:\n"
-#~ " * To restore a backup:\n"
-#~ "  * Restoring a backup will overwrite existing data, so be careful.\n"
-#~ "  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
-#~ "stuff).\n"
-#~ "  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
-#~ "  * Hit the <<GetText(Restore)>> button below.\n"
-#~ "\n"
-#~ " * To make a backup, just hit the <<GetText(Backup)>> button and save the "
-#~ "file\n"
-#~ "   you get to a secure place.\n"
-#~ "\n"
-#~ "Please make sure your wiki configuration backup_* values are correct and "
-#~ "complete.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Alcuni suggerimenti:\n"
-#~ " * Per ripristinare un backup:\n"
-#~ "  * Attenzione, il ripristino di un backup sovrascriverà i dati "
-#~ "esistenti.\n"
-#~ "  * Rinominare il backup in <siteid>.tar.<compression> (rimuovere la "
-#~ "parte --date--time--UTC)\n"
-#~ "  * Mettere il file di backup nella directory_di_archiviazione_backup "
-#~ "(usare scp, ftp, ...).\n"
-#~ "  * Fare clic sul pulsante <<GetText(Restore)>> qui sotto.\n"
-#~ "\n"
-#~ " * Per fare una copia di backup, fare clic sul pulsante <<GetText(Backup)"
-#~ ">> e salvare il file\n"
-#~ "   ottenuto in un posto sicuro.\n"
-#~ "\n"
-#~ "Assicurarsi che la configurazione dei parametri backup_* nel wiki sia "
-#~ "corretta e completa.\n"
-#~ "\n"
-
-#~ msgid "Restore"
-#~ msgstr "Ripristina"
-
-#~ msgid "Xapian Version"
-#~ msgstr "Versione Xapian"
-
-#~ msgid "PyStemmer not installed"
-#~ msgstr "PyStemmer non è installato"
-
-#~ msgid "PyStemmer Version"
-#~ msgstr "Versione PyStemmer"
-
-#~ msgid "PyStemmer stems"
-#~ msgstr "Radici PyStemmer"
