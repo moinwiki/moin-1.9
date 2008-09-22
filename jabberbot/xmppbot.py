@@ -177,11 +177,10 @@ class XMPPBot(Client, Thread):
 
         self.from_commands = from_commands
         self.to_commands = to_commands
-        jid = u"%s@%s/%s" % (config.xmpp_node, config.xmpp_server, config.xmpp_resource)
 
         self.config = config
         self.log = logging.getLogger(__name__)
-        self.jid = JID(node_or_jid=jid, domain=config.xmpp_server, resource=config.xmpp_resource)
+        self.jid = JID(node_or_jid=config.xmpp_node, domain=config.xmpp_server)
         self.tlsconfig = TLSSettings(require = True, verify_peer=False)
 
         # A dictionary of contact objects, ordered by bare JID
