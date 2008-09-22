@@ -30,6 +30,10 @@ Known main issues:
     having made a backup with some other, proven method.
     USE BOTH ON YOUR OWN RISK!
 
+1.7.current:
+  Fixes:
+    * Jabber bot can now be configured to use an authentication realm which
+      is different from the server's hostname
 
 Version 1.7.2:
   Fixes:

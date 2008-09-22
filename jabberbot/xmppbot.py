@@ -178,6 +178,11 @@ class XMPPBot(Client, Thread):
         self.from_commands = from_commands
         self.to_commands = to_commands
         jid = u"%s@%s/%s" % (config.xmpp_node, config.xmpp_server, config.xmpp_resource)
+        if u"@" in config.xmpp_node:
+            jid = u"%s/%s" % (config.xmpp_node, config.xmpp_resource)
+        else:
+            jid = u"%s@%s/%s" % (config.xmpp_node, config.xmpp_server, config.xmpp_resource)
+
 
         self.config = config
         self.log = logging.getLogger(__name__)
