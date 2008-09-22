@@ -11,8 +11,8 @@ import sys
 import signal
 
 from MoinMoin.script import MoinScript
-from MoinMoin.server.server_standalone import StandaloneConfig, run
-from MoinMoin.server.daemon import Daemon
+from MoinMoin.util.daemon import Daemon
+from MoinMoin.web.serving import run_server
 
 class PluginScript(MoinScript):
     def __init__(self, argv, def_values):
@@ -38,18 +38,6 @@ class PluginScript(MoinScript):
             help="Set the ip to listen on. Use \"\" for all interfaces. Default: localhost"
         )
         self.parser.add_option(
-            "--serverClass", dest="serverClass",
-            help="Set the server model to use. Choices: ThreadPool, serverClass, Forking, Simple. Default: ThreadPool"
-        )
-        self.parser.add_option(
-            "--threadLimit", dest="threadLimit", type="int",
-            help="Set the maximum number of threads to use. Default: 10"
-        )
-        self.parser.add_option(
-            "--requestQueueSize", dest="requestQueueSize", type="int",
-            help="Set the size of the request queue. Default: 50"
-        )
-        self.parser.add_option(
             "--start", dest="start", action="store_true",
             help="Start server in background."
         )
@@ -61,22 +49,15 @@ class PluginScript(MoinScript):
             "--pidfile", dest="pidfile",
             help="Set file to store pid of moin daemon in. Default: moin.pid"
         )
+        self.parser.add_option(
+            "--debug", dest="debug", action="store_true",
+            help="Enable debug mode of server (show tracebacks)"
+        )
 
     def mainloop(self):
         # we don't expect non-option arguments
         if self.args:
             self.parser.error("incorrect number of arguments")
-
-        thread_choices = ["ThreadPool", "Threading", "Forking", "Simple"]
-        serverClass = "ThreadPool"
-        if self.options.serverClass:
-            thread_choices2 = [x.upper() for x in thread_choices]
-            thread_choice = self.options.serverClass.upper()
-            try:
-                serverClass_index = thread_choices2.index(thread_choice)
-            except ValueError:
-                self.parser.error("invalid serverClass type")
-            serverClass = thread_choices[serverClass_index]
 
         pidfile = "moin.pid"
         if self.options.pidfile:
@@ -106,6 +87,13 @@ class PluginScript(MoinScript):
                     # some other import went wrong
                     raise
 
+            # intialize some defaults if missing
+            for option in ('docs', 'user', 'group', 'port', 'interface', 'debug'):
+                if not hasattr(Config, option):
+                    value = getattr(DefaultConfig, option)
+                    setattr(Config, option, value)
+
+            # override with cmdline options
             if self.options.docs:
                 Config.docs = self.options.docs
             if self.options.user:
@@ -116,26 +104,29 @@ class PluginScript(MoinScript):
                 Config.port = self.options.port
             if self.options.interface:
                 Config.interface = self.options.interface
-            Config.serverClass = serverClass + 'Server'
-            if self.options.threadLimit:
-                Config.threadLimit = self.options.threadLimit
-            if self.options.requestQueueSize:
-                Config.requestQueueSize = self.options.requestQueueSize
+            if self.options.debug:
+                Config.debug = True
+
+            if not hasattr(Config, 'docs'):
+                docs = os.path.join('wiki', 'htdocs')
+                if not os.path.exists(docs):
+                    docs = "/usr/share/moin/htdocs"
+                Config.docs = docs
 
             if self.options.start:
-                daemon = Daemon('moin', pidfile, run, Config)
+                daemon = Daemon('moin', pidfile, run_server, Config)
                 daemon.do_start()
             else:
-                run(Config)
+                run_server(Config.interface, Config.port, Config.docs,
+                           use_debugger=Config.debug, user=Config.user,
+                           group=Config.group)
 
-class DefaultConfig(StandaloneConfig):
+class DefaultConfig:
     docs = os.path.join('wiki', 'htdocs')
     if not os.path.exists(docs):
         docs = "/usr/share/moin/htdocs"
-    user = ''
-    group = ''
+    user = None
+    group = None
     port = 8080
     interface = 'localhost'
-    serverClass = 'ThreadPoolServer'
-    threadLimit = 10
-    requestQueueSize = 50
+    debug = False

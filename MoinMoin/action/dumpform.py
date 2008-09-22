@@ -12,6 +12,5 @@ def execute(pagename, request):
     """ dump the form data we received in this request for debugging """
     data = util.dumpFormData(request.form)
 
-    request.emit_http_headers()
     request.write("<html><body>%s</body></html>" % data)
 

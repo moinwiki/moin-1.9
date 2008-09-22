@@ -41,8 +41,6 @@ def execute(pagename, request):
         return
 
     # more than one match, list 'em
-    request.emit_http_headers()
-
     # This action generate data using the user language
     request.setContentLanguage(request.lang)
 

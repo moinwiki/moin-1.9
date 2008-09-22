@@ -280,7 +280,7 @@ class Macro:
         """
         _ = self._
         html = [
-            u'<form method="get" action="%s/%s"><div>' % (self.request.getScriptname(), wikiutil.quoteWikinameURL(self.formatter.page.page_name)),
+            u'<form method="get" action="%s"><div>' % self.request.href(self.formatter.page.page_name),
             u'<div>',
             u'<input type="hidden" name="action" value="goto">',
             u'<input type="text" name="target" size="30">',

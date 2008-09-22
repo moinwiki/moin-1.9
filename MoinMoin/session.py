@@ -19,6 +19,7 @@ logging = log.getLogger(__name__)
 from MoinMoin import caching
 from MoinMoin.user import User
 from MoinMoin.util import random_string
+from MoinMoin.web.utils import cookie_date
 import time, random
 
 class SessionData(object):
@@ -312,12 +313,12 @@ class MoinCookieSessionIDHandler(SessionIDHandler):
         if cfg.cookie_path:
             cookie[cookie_name]['path'] = cfg.cookie_path
         else:
-            path = request.getScriptname()
+            path = request.script_root
             if not path:
                 path = '/'
             cookie[cookie_name]['path'] = path
         # Set expires for older clients
-        cookie[cookie_name]['expires'] = request.httpDate(when=expires, rfc='850')
+        cookie[cookie_name]['expires'] = cookie_date(expires)
         # a secure cookie is not transmitted over unsecure connections:
         if (cfg.cookie_secure or  # True means: force secure cookies
             cfg.cookie_secure is None and request.is_ssl):  # None means: https -> secure cookie
@@ -326,11 +327,13 @@ class MoinCookieSessionIDHandler(SessionIDHandler):
 
     def _set_cookie(self, request, cookie_string, expires):
         """ Set cookie, raw helper. """
-        lifetime = int(expires - time.time())
-        cookie = self._make_cookie(request, self.cookie_name, cookie_string,
-                                   lifetime, expires)
+        lifetime = expires - time.time()
+        domain = request.cfg.cookie_domain or None
+        path = request.cfg.cookie_path or None
         # Set cookie
-        request.setHttpHeader(cookie)
+        request.set_cookie(self.cookie_name, cookie_string,
+                                    max_age=lifetime, expires=expires,
+                                    path=path, domain=domain)
         # IMPORTANT: Prevent caching of current page and cookie
         request.disableHttpCaching()
 
@@ -341,8 +344,10 @@ class MoinCookieSessionIDHandler(SessionIDHandler):
 
     def get(self, request):
         session_name = None
-        if request.cookie and self.cookie_name in request.cookie:
-            session_name = request.cookie[self.cookie_name].value
+        if request.cookies and self.cookie_name in request.cookies:
+            session_name = request.cookies[self.cookie_name]
+            if hasattr(session_name, 'value'):
+                session_name = session_name.value
             session_name = ''.join([c for c in session_name
                                     if c in self._SESSION_NAME_CHARS])
             session_name = session_name[:self._SESSION_NAME_LEN]
@@ -351,7 +356,7 @@ class MoinCookieSessionIDHandler(SessionIDHandler):
 
 
 def _get_anon_session_lifetime(request):
-    if request.cfg.anonymous_session_lifetime:
+    if hasattr(request.cfg, 'anonymous_session_lifetime'):
         return request.cfg.anonymous_session_lifetime * 3600
     return 0
 
@@ -411,12 +416,12 @@ class DefaultSessionHandler(SessionHandler):
                             if user_obj:
                                 sessiondata.is_stored = True
             else:
-                store = not (not request.cfg.anonymous_session_lifetime)
+                store = hasattr(request.cfg, 'anonymous_session_lifetime')
                 sessiondata.is_stored = store
         else:
             session_name = session_id_handler.generate_new_id(request)
             logging.debug("starting session (new session_name %r)" % session_name)
-            store = not (not request.cfg.anonymous_session_lifetime)
+            store = hasattr(request.cfg, 'anonymous_session_lifetime')
             sessiondata = self.dataclass(request, session_name)
             sessiondata.is_new = True
             sessiondata.is_stored = store

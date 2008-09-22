@@ -30,7 +30,7 @@ import os, sys, time, xmlrpclib
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
-from MoinMoin import config, user, wikiutil
+from MoinMoin import auth, config, user, wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.logfile import editlog
@@ -127,12 +127,13 @@ class XmlRpcBase:
 
     def process(self):
         """ xmlrpc v1 and v2 dispatcher """
+        request = self.request
         try:
             if 'xmlrpc' in self.request.cfg.actions_excluded:
                 # we do not handle xmlrpc v1 and v2 differently
                 response = xmlrpclib.Fault(1, "This moin wiki does not allow xmlrpc method calls.")
             else:
-                data = self.request.read(self.request.content_length)
+                data = request.in_data
 
                 try:
                     params, method = xmlrpclib.loads(data)
@@ -166,11 +167,10 @@ class XmlRpcBase:
                 # serialize it
                 response = xmlrpclib.dumps(response, methodresponse=1, allow_none=True)
 
-        self.request.emit_http_headers([
-            "Content-Type: text/xml; charset=utf-8",
-            "Content-Length: %d" % len(response),
-        ])
-        self.request.write(response)
+        request = request.request
+        request.content_type = 'text/xml'
+        request.data = response
+        return request
 
     def dispatch(self, method, params):
         """ call dispatcher - for method==xxx it either locates a method called
@@ -681,12 +681,12 @@ class XmlRpcBase:
             or the password were wrong.
         """
         id_handler = XmlRpcAuthTokenIDHandler()
+        request = self.request
 
-        u = self.request.cfg.session_handler.start(self.request, id_handler)
-        u = self.request.handle_auth(u, username=username,
-                                     password=password, login=True)
+        request.session = request.cfg.session_service.get_session(request)
 
-        self.request.cfg.session_handler.after_auth(self.request, id_handler, u)
+        u = auth.setup_from_session(request, request.session)
+        u = auth.handle_login(request, u, username=username, password=password)
 
         if u and u.valid:
             return id_handler.token
@@ -1063,9 +1063,8 @@ class XmlRpc2(XmlRpcBase):
 
 
 def xmlrpc(request):
-    XmlRpc1(request).process()
-
+    return XmlRpc1(request).process()
 
 def xmlrpc2(request):
-    XmlRpc2(request).process()
+    return XmlRpc2(request).process()
 
