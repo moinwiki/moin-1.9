@@ -8,17 +8,14 @@
 
 
 class BotConfig:
-    # Node name (username on the jabber server) to be used
-    xmpp_node = u"moinbot"
+    # Node name (a valid JID) to be used
+    xmpp_node = u"moinbot@jabber.example2.org/wiki"
 
     # Server to be used
     xmpp_server = u"jabber.example.com"
 
     # Port to connect to or None, if default
     xmpp_port = None
-
-    # Resource name (entity@server/resource) to be used
-    xmpp_resource = u"wiki"
 
     # Password used to connect to the xmpp server
     xmpp_password = u""
@@ -41,7 +38,7 @@ class BotConfig:
 
     # A secret shared with Wiki , must be the same in both
     # configs for communication to work.
-    secret = "use same string as in secrets setting in wiki config"
+    secret = "use the same string as in secrets setting in wiki config"
 
 
     # Maximum number of items in service discovery cache (XEP-0115)
