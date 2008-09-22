@@ -292,21 +292,17 @@ class ScriptEngine:
         @param comment:  comment related to this revision (optional)
         @param trivial:  boolean, if it is a trivial edit
         """
+        _ = self.request.getText
+        trivial = str2boolean(trivial)
         if self.request.user.may.write(pagename):
-            _ = self.request.getText
-            trivial = str2boolean(trivial)
-            uid = user.getUserId(self.request, author)
-            theuser = user.User(self.request, uid)
-            save_user = self.request.user
-            self.request.user = theuser
-            page = PageEditor(self.request, pagename, do_editor_backup=0, uid_override=author)
+            page = PageEditor(self.request, pagename, do_editor_backup=0)
             try:
                 page.saveText(self.extract_file(filename).decode("utf-8"), 0, trivial=trivial, comment=comment)
-                self.msg += u"%(pagename)s added \n" % {"pagename": pagename}
             except PageEditor.Unchanged:
                 pass
-            self.request.user = save_user
-            page.clean_acl_cache()
+            else:
+                self.msg += u"%(pagename)s added \n" % {"pagename": pagename}
+                page.clean_acl_cache()
         else:
             self.msg += u"action add revision: not enough rights - nothing done \n"
 

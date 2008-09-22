@@ -236,7 +236,7 @@ def link_dialog(request):
         resultlist = iwpreferred[:-1]
     interwiki = "\n".join(
         ['<option value="%s">%s</option>' % (key, key) for key in resultlist])
-    
+
     # wiki url
     url_prefix_static = request.cfg.url_prefix_static
     scriptname = request.script_root
@@ -320,7 +320,7 @@ def link_dialog(request):
          <td>
           <span fckLang="WikiDlgName">Wiki:PageName</span><br>
           <select id="sctInterwiki" size="1">
-          %(interwiki)s 
+          %(interwiki)s
           </select>:
           <input id="txtInterwikipagename"></input>
          </td>

@@ -20,13 +20,15 @@ class SSLClientCertAuth(BaseAuth):
 
     def __init__(self, authorities=None,
                  email_key=True, name_key=True,
-                 use_email=False, use_name=False):
+                 use_email=False, use_name=False,
+                 autocreate=False):
         self.use_email = use_email
         self.authorities = authorities
         self.email_key = email_key
         self.name_key = name_key
         self.use_email = use_email
         self.use_name = use_name
+        self.autocreate = autocreate
         BaseAuth.__init__(self)
 
     def request(self, request, user_obj, **kw):
@@ -79,7 +81,7 @@ class SSLClientCertAuth(BaseAuth):
         elif user_obj and user_obj.auth_method == self.name:
             user_obj.valid = False
             return user_obj, False
-        if u:
+        if u and self.autocreate:
             u.create_or_update(changed)
         if u and u.valid:
             return u, True

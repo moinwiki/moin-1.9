@@ -13,6 +13,9 @@ from xml.dom import Node
 from MoinMoin import config, wikiutil
 from MoinMoin.error import ConvertError
 
+from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
+interwiki_re = re.compile(WikiParser.interwiki_rule, re.VERBOSE|re.UNICODE)
+
 # Portions (C) International Organization for Standardization 1986
 # Permission to copy in any form is granted for use with
 # conforming SGML systems and applications as defined in
@@ -571,7 +574,7 @@ class convert_tree(visitor):
     def process_heading(self, node):
         text = self.node_list_text_only(node.childNodes).strip()
         if text:
-            depth = int(node.localName[1]) - 1
+            depth = int(node.localName[1])
             hstr = "=" * depth
             self.text.append(self.new_line)
             self.text.append("%s %s %s" % (hstr, text.replace("\n", " "), hstr))
@@ -802,7 +805,8 @@ class convert_tree(visitor):
             command = ",,"
         elif name == 'sup':
             command = "^"
-        elif name in ('font', 'meta', ):
+        elif name in ('area', 'center', 'code', 'embed', 'fieldset', 'font', 'form', 'iframe', 'input', 'label', 'link', 'map',
+                      'meta', 'noscript', 'option', 'script', 'select', 'textarea', 'wbr'):
             command = "" # just throw away unsupported elements
         else:
             raise ConvertError("process_inline: Don't support %s element" % name)
@@ -963,7 +967,6 @@ class convert_tree(visitor):
                     content_buffer.append(self.new_line_dont_remove)
                 else:
                     pass
-                    #print i.localName
 
             if delimiters:
                 longest_inner_formater = max(delimiters)
@@ -992,19 +995,26 @@ class convert_tree(visitor):
         except ValueError:
             return value
 
-    def _table_style(self, node):
-        # TODO: attrs = get_attrs(node)
-        result = []
+    def _get_color(self, node, prefix):
         if node.hasAttribute("bgcolor"):
             value = node.getAttribute("bgcolor")
             match = re.match(r"rgb\((\d+),\s*(\d+),\s*(\d+)\)", value)
             if match:
-                result.append('tablebgcolor="#%X%X%X"' %
-                              (int(match.group(1)),
-                               int(match.group(2)),
-                               int(match.group(3))))
+                value = '#%X%X%X' % (int(match.group(1)), int(match.group(2)), int(match.group(3)))
             else:
-                result.append('tablebgcolor="%s"' % value)
+                match = re.match(r"#[0-9A-Fa-f]{6}", value)
+            if not prefix and match:
+                result = value
+            else:
+                result = '%sbgcolor="%s"' % (prefix, value)
+        else:
+            result = ''
+        return result
+
+    def _table_style(self, node):
+        # TODO: attrs = get_attrs(node)
+        result = []
+        result.append(self._get_color(node, 'table'))
         if node.hasAttribute("width"):
             value = node.getAttribute("width")
             result.append('tablewidth="%s"' % self._check_length(value))
@@ -1023,16 +1033,7 @@ class convert_tree(visitor):
     def _row_style(self, node):
         # TODO: attrs = get_attrs(node)
         result = []
-        if node.hasAttribute("bgcolor"):
-            value = node.getAttribute("bgcolor")
-            match = re.match(r"rgb\((\d+),\s*(\d+),\s*(\d+)\)", value)
-            if match:
-                result.append('rowbgcolor="#%X%X%X"' %
-                              (int(match.group(1)),
-                               int(match.group(2)),
-                               int(match.group(3))))
-            else:
-                result.append('rowbgcolor="%s"' % value)
+        result.append(self._get_color(node, 'row'))
         if node.hasAttribute("style"):
             result.append('rowstyle="%s"' % node.getAttribute("style"))
         if node.hasAttribute("class"):
@@ -1055,15 +1056,7 @@ class convert_tree(visitor):
 
         align = ""
         result = []
-        if  node.hasAttribute("bgcolor"):
-            value = node.getAttribute("bgcolor")
-            match = re.match(r"rgb\((\d+),\s*(\d+),\s*(\d+)\)", value)
-            if match:
-                result.append("#%X%X%X" % (int(match.group(1)),
-                                           int(match.group(2)),
-                                           int(match.group(3))))
-            else:
-                result.append('bgcolor="%s"' % value)
+        result.append(self._get_color(node, ''))
         if node.hasAttribute("align"):
             value = node.getAttribute("align")
             if not spanning or value != "center":
@@ -1145,7 +1138,9 @@ class convert_tree(visitor):
             colspan = 1
         text = self.node_list_text_only(node.childNodes).replace('\n', ' ').strip()
         if text:
-            self.text.extend(["%s'''%s%s'''||" % ('||' * colspan, style, text), self.new_line_dont_remove])
+            if style:
+                style = '<%s>' % style
+            self.text.extend(["%s%s'''%s'''||" % ('||' * colspan, style, text), self.new_line_dont_remove])
 
     def process_table_data(self, node, style=""):
         if node.hasAttribute("colspan"):
@@ -1196,7 +1191,7 @@ class convert_tree(visitor):
         for i in node.childNodes:
             if i.nodeType == Node.ELEMENT_NODE:
                 name = i.localName
-                if name == 'td':
+                if name in ('td', 'th', ):
                     self.process_table_data(i, style=style)
                     style = ""
                 else:
@@ -1237,10 +1232,11 @@ class convert_tree(visitor):
                 pagename = wikiutil.url_unquote(href)
                 interwikiname = "%s:%s" % (title, pagename)
             if interwikiname and pagename == desc:
-                if ' ' in interwikiname:
-                    self.text.append("[[%s]]" % interwikiname)
-                else:
+                if interwiki_re.match(interwikiname+' '): # the blank is needed by interwiki_re to match
+                    # this is valid as a free interwiki link
                     self.text.append("%s" % interwikiname)
+                else:
+                    self.text.append("[[%s]]" % interwikiname)
                 return
             elif title == 'Self':
                 self.text.append('[[%s|%s]]' % (href, desc))
@@ -1258,10 +1254,17 @@ class convert_tree(visitor):
             # Attachments
             if title.startswith("attachment:"):
                 attname = wikiutil.url_unquote(title[len("attachment:"):])
-                if attname != desc:
-                    self.text.append('[[attachment:%s|%s]]' % (attname, desc))
+                if 'do=get' in href: # quick&dirty fix for not dropping &do=get param
+                    parms = '|&do=get'
                 else:
-                    self.text.append('[[attachment:%s]]' % (attname, ))
+                    parms = ''
+                if attname != desc:
+                    desc = '|%s' % desc
+                elif parms:
+                    desc = '|'
+                else:
+                    desc = ''
+                self.text.append('[[attachment:%s%s%s]]' % (attname, desc, parms))
             # wiki link
             elif href.startswith(scriptname):
                 pagename = href[len(scriptname):]
@@ -1380,7 +1383,16 @@ def get_attrs(node):
     """ get the attributes of <node> into an easy-to-use dict """
     attrs = {}
     for attr_name in node.attributes.keys():
-        attrs[attr_name] = node.attributes.get(attr_name).nodeValue
+        # get attributes of style element
+        if attr_name == "style":
+            for style_element in node.attributes.get(attr_name).nodeValue.split(';'):
+                if style_element.strip() != '':
+                    style_elements = style_element.split(':')
+                    if len(style_elements) == 2:
+                        attrs[style_elements[0].strip()] = style_elements[1].strip()
+        # get attributes without style element
+        else:
+            attrs[attr_name] = node.attributes.get(attr_name).nodeValue
     return attrs
 
 

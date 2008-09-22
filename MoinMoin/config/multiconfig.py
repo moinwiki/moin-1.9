@@ -593,11 +593,12 @@ also the spelling of the directory name.
                             # Load the module and set in sys.modules
                             module = imp.load_module(modname, fp, path, info)
                             setattr(sys.modules[self.siteid], 'csum', module)
-                            self._plugin_modules.append(modname)
                         finally:
                             # Make sure fp is closed properly
                             if fp:
                                 fp.close()
+                    if modname not in self._plugin_modules:
+                        self._plugin_modules.append(modname)
             finally:
                 imp.release_lock()
         except ImportError, err:
@@ -697,6 +698,8 @@ options_no_group_name = {
      "Only used by the DefaultSessionHandler, see HelpOnSessions."),
     ('session_service', DefaultExpression('web.session.FileSessionService()'),
      "New session service (used by the new WSGI layer)"),
+    ('cookie_secure', None,
+     'Use secure cookie. (None = auto-enable secure cookie for https, True = ever use secure cookie, False = never use secure cookie).'),
     ('cookie_domain', None,
      'Domain used in the session cookie. (None = do not specify domain).'),
     ('cookie_path', None,
@@ -736,7 +739,9 @@ options_no_group_name = {
 
   )),
   # ==========================================================================
-  'spam_leech_dos': ('Anti-Spam/Leech/DOS', None, (
+  'spam_leech_dos': ('Anti-Spam/Leech/DOS',
+  'These settings help limiting ressource usage and avoiding abuse.',
+  (
     ('hosts_deny', [], "List of denied IPs; if an IP ends with a dot, it denies a whole subnet (class A, B or C)"),
     ('surge_action_limits',
      {# allow max. <count> <action> requests per <dt> secs
@@ -777,14 +782,16 @@ options_no_group_name = {
      "A regex of HTTP_USER_AGENTs that should be excluded from logging and are not allowed to use actions."),
 
     ('unzip_single_file_size', 2.0 * 1000 ** 2,
-     "max. number of files which are extracted from the zip file"),
+     "max. size of a single file in the archive which will be extracted [bytes]"),
     ('unzip_attachments_space', 200.0 * 1000 ** 2,
      "max. total amount of bytes can be used to unzip files [bytes]"),
     ('unzip_attachments_count', 101,
-     "max. size of a single file in the archive which will be extracted [bytes]"),
+     "max. number of files which are extracted from the zip file"),
   )),
   # ==========================================================================
-  'style': ('Style / Theme / UI related', None, (
+  'style': ('Style / Theme / UI related',
+  'These settings control how the wiki user interface will look like.',
+  (
     ('sitename', u'Untitled Wiki',
      "Short description of your wiki site, displayed below the logo on each page, and used in RSS documents as the channel title [Unicode]"),
     ('interwikiname', None, "unique and stable InterWiki name (prefix, moniker) of the site, or None"),
@@ -1059,7 +1066,9 @@ options_no_group_name = {
 #
 #
 options = {
-    'acl': ('Access control lists', None, (
+    'acl': ('Access control lists',
+    'ACLs control who may do what, see HelpOnAccessControlLists.',
+    (
       ('hierarchic', False, 'True to use hierarchical ACLs'),
       ('rights_default', u"Trusted:read,write,delete,revert Known:read,write,delete,revert All:read,write",
        "ACL used if no ACL is specified on the page"),
@@ -1083,8 +1092,6 @@ options = {
     )),
 
     'user': ('Users / User settings', None, (
-      ('autocreate', False,
-       "if True, user accounts are created automatically (see HelpOnAuthentication)."),
       ('email_unique', True,
        "if True, check email addresses for uniqueness and don't accept duplicates."),
       ('jid_unique', True,
@@ -1190,6 +1197,15 @@ options = {
       ('import_pagename_envelope', u"%s", "Use this to add some fixed prefix/postfix to the generated target pagename."),
       ('import_pagename_regex', r'\[\[([^\]]*)\]\]', "Regular expression used to search for target pagename specification."),
       ('import_wiki_addrs', [], "Target mail addresses to consider when importing mail"),
+    )),
+
+    'backup': ('Backup settings',
+        'These settings control how the backup action works and who is allowed to use it.',
+    (
+      ('compression', 'gz', 'What compression to use for the backup ("gz" or "bz2").'),
+      ('users', [], 'List of trusted user names who are allowed to get a backup.'),
+      ('include', [], 'List of pathes to backup.'),
+      ('exclude', lambda filename: False, 'Function f(filename) that tells whether a file should be excluded from backup. By default, nothing is excluded.'),
     )),
 }
 

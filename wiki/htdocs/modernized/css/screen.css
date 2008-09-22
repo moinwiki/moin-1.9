@@ -80,7 +80,7 @@ textarea {
 
 
 #username {
-    display; block;
+    display: block;
     margin: 8px 12px 4px 12px;
     padding: 0;
     font-size: 0.82em;

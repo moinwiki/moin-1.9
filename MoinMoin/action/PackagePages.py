@@ -70,6 +70,7 @@ class PackagePages:
         # Get new name from form and normalize.
         pagelist = form.get('pagelist', u'')
         packagename = form.get('packagename', u'')
+        include_attachments = form.get('include_attachments', False)
 
         if not form.get('submit'):
             self.request.theme.add_msg(self.makeform(), "dialog")
@@ -91,7 +92,7 @@ class PackagePages:
 
         # Generate a package
         output = open(fpath, "wb")
-        package = self.collectpackage(unpackLine(pagelist, ","), output, target)
+        package = self.collectpackage(unpackLine(pagelist, ","), output, target, include_attachments)
 
         if package:
             self.request.theme.add_msg(self.makeform(), "dialog")
@@ -118,6 +119,8 @@ class PackagePages:
             'error': error,
             'action': self.__class__.__name__,
             'pagename': wikiutil.escape(self.pagename, True),
+            'pagename_quoted': wikiutil.quoteWikinameURL(self.pagename),
+            'include_attachments_label': _('Include all attachments?'),
             'package': _('Package pages'),
             'cancel': _('Cancel'),
             'newname_label': _("Package name"),
@@ -139,6 +142,11 @@ class PackagePages:
         <td class="content">
             <input type="text" name="pagelist" size="80" maxlength="200" value="%(pagename)s">
         </td>
+    </tr>
+    <tr>
+        <td class="label">
+        %(include_attachments_label)s<input type="checkbox" name="include_attachments" value="0" %(include_attachments_label)s>
+    </td>
     </tr>
     <tr>
         <td></td>
@@ -171,7 +179,7 @@ class PackagePages:
                 titles.append(title.page_name)
         return titles
 
-    def collectpackage(self, pagelist, fileobject, pkgname=""):
+    def collectpackage(self, pagelist, fileobject, pkgname="", include_attachments=False):
         """ Expects a list of pages as an argument, and fileobject to be an open
         file object, which a zipfile will get written to.
 
@@ -180,6 +188,8 @@ class PackagePages:
         @param pkgname: optional file name, to prevent self packaging
         @rtype: string or None
         @return: error message, if one happened
+        @rtype: boolean
+        @param include_attachments: True if you want attachments collected
         """
         _ = self.request.getText
         COMPRESSION_LEVEL = zipfile.ZIP_DEFLATED
@@ -210,13 +220,14 @@ class PackagePages:
             zi = zipfile.ZipInfo(filename=str(cnt), date_time=datetime.fromtimestamp(timestamp).timetuple()[:6])
             zi.compress_type = COMPRESSION_LEVEL
             zf.writestr(zi, page.get_raw_body().encode("utf-8"))
-            for attname in files:
-                if attname != pkgname:
-                    cnt += 1
-                    zipname = "%d_attachment" % cnt
-                    script.append(packLine(["AddAttachment", zipname, attname, page.page_name, userid, "Created by the PackagePages action."]))
-                    filename = AttachFile.getFilename(self.request, page.page_name, attname)
-                    zf.write(filename, zipname)
+            if include_attachments:
+                for attname in files:
+                    if attname != pkgname:
+                        cnt += 1
+                        zipname = "%d_attachment" % cnt
+                        script.append(packLine(["AddAttachment", zipname, attname, page.page_name, userid, "Created by the PackagePages action."]))
+                        filename = AttachFile.getFilename(self.request, page.page_name, attname)
+                        zf.write(filename, zipname)
         script += [packLine(['Print', 'Thank you for using PackagePages!'])]
 
         zf.writestr(MOIN_PACKAGE_FILE, u"\n".join(script).encode("utf-8"))

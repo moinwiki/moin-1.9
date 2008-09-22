@@ -22,6 +22,7 @@ class TestApplication:
         for page in self.PAGES:
             def _test_():
                 appiter, status, headers = self.client.get('/%s' % page)
+                print repr(list(appiter))
                 assert status[:3] == '200'
                 assert ('Content-Type', 'text/html; charset=utf-8') in headers
                 output = ''.join(appiter)

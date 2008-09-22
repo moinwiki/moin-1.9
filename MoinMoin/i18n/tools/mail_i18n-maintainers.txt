@@ -6,33 +6,24 @@ lists you as maintainer of it.
 By maintaining "%(lang)s", you do great work and all MoinMoin users say
 "Thank you" for that (or at least think it ;)!
 
-We are planning to do a new major release soon, with quite some attractive
-new features and lots of cleanup.
+We are planning to do a new major release (1.8.0) soon, with quite some
+attractive new features and lots of cleanup.
 
 What we need
 ============
 
 Please note that we currently have 2 "MoinMaster" wikis:
-    * http://master16.moinmo.in/ (currently same as http://master.moinmo.in/)
-      This wiki is for the 1.6.x releases.
-    * http://master17.moinmo.in/
-      This wiki is for the 1.7.x releases.
+    * http://master17.moinmo.in/ (currently same as http://master.moinmo.in/)
+      This wiki is for the "current" 1.7.x releases.
+    * http://master18.moinmo.in/
+      This wiki is for the "upcoming" 1.8.x releases.
 
 We need your help again for updating the following (high priority and
 most important stuff is on top of the list):
 
-[X] If you didn't do this already for the 1.6 release:
-    Check po file, system and help pages for errors due to conversion
-    to 1.6 markup:
-    * Links have new syntax, see MoinMaster:HelpOnLinking
-    * Macros have new syntax, see MoinMaster:HelpOnMacros
-    * Check these and other help pages (the converter did most of the
-      work, but it could not auto-convert the content of PRE sections,
-      thus they need manual fixing).
-    * You can check what the converter has done, see action=info.
-
-[X] There are also some notes on the http://moinmo.in/MoinDev/Translation
-    page about changes that need to be done.
+[X] There are some notes on the http://moinmo.in/MoinDev/Translation page
+    about changes that need to be done and about common errors in the
+    translations.
 
 [X] MoinMaster:MoinI18n/%(lang)s page (source for the .po file)
 
@@ -41,14 +32,14 @@ most important stuff is on top of the list):
 [X] "%(lang)s" help pages on the MoinMaster wiki (optional - would be
     nice, if you had the time)
 
-We need that until 2008-05-23 - because MoinMoin 1.7.0 will be released
+We need that until 2008-10-31 - because MoinMoin 1.8.0 will be released
 then, so we can include that stuff into the distribution archive to make
 people speaking your language happy. ;)
 
 Please, after translating the current stuff, keep an eye on MoinMaster
 wikis - some strings in the PO file may still change or get added/deleted.
 
-See http://moinmo.in/MoinMoinTodo/Release%%201.7 for our planned release schedule.
+See http://moinmo.in/MoinMoinTodo/Release%%201.8 for our planned release schedule.
 
 Please reply immediately
 ========================

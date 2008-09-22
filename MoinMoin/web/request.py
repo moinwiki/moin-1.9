@@ -34,6 +34,7 @@ class Request(WerkzeugRequest, WerkzeugResponse):
     charset = config.charset
     encoding_errors = 'replace'
     default_mimetype = 'text/html'
+    given_config = None # if None, load wiki config from disk
 
     def __init__(self, environ, populate_request=True, shallow=False,
                  response=None, status=None, headers=None, mimetype=None,

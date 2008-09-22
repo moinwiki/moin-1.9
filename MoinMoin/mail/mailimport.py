@@ -244,7 +244,7 @@ def import_mail_from_message(request, message):
                     fname = att.filename + new_suffix
             try:
                 # get the fname again, it might have changed
-                fname = add_attachment(request, pagename, fname, att.data)
+                fname, fsize = add_attachment(request, pagename, fname, att.data)
                 attachments.append(fname)
             except AttachmentAlreadyExists:
                 i += 1

@@ -92,15 +92,6 @@ foo ''bar'' baz.
 class TestHeadings(ParserTestCase):
     """ Test various heading problems """
 
-    def class_setup(self):
-        """ Require show_section_numbers = 0 to workaround counter
-        global state saved in request.
-        """
-        self.config = self.TestConfig(show_section_numbers=0)
-
-    def class_teardown(self):
-        del self.config
-
     def testIgnoreWhiteSpaceAroundHeadingText(self):
         """ parser.wiki: ignore white space around heading text
 
@@ -120,15 +111,6 @@ class TestHeadings(ParserTestCase):
 
 
 class TestTOC(ParserTestCase):
-
-    def class_setup(self):
-        """ Require show_section_numbers = 0 to workaround counter
-        global state saved in request.
-        """
-        self.config = self.TestConfig(show_section_numbers=0)
-
-    def class_teardown(self):
-        del self.config
 
     def testHeadingWithWhiteSpace(self):
         """ parser.wiki: TOC links to headings with white space
@@ -181,13 +163,6 @@ class TestDateTimeMacro(ParserTestCase):
         (u'<<Date(2002-02-02T01:02:03Z)>>',      '2002-02-02'),
         (u'<<DateTime(1970-01-06T00:00:00)>>',   '1970-01-06 00:00:00'), # fails e.g. for Europe/Vilnius
         )
-
-    def class_setup(self):
-        """ Require default date and time format config values """
-        self.config = self.TestConfig(defaults=('date_fmt', 'datetime_fmt'))
-
-    def class_teardown(self):
-        del self.config
 
     def testDateTimeMacro(self):
         """ parser.wiki: DateTime macro """

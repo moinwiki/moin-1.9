@@ -121,6 +121,8 @@ class BaseContext(Context):
 
     # now the more complex factories
     def cfg(self):
+        if self.request.given_config is not None:
+            return self.request.given_config('MoinMoin._tests.wikiconfig')
         try:
             self.clock.start('load_multi_cfg')
             cfg = multiconfig.getConfig(self.request.url)
