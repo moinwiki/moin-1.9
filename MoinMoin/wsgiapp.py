@@ -57,22 +57,23 @@ def run(context):
 
     # preliminary access checks (forbidden, bots, surge protection)
     try:
-        check_forbidden(context)
-        check_surge_protect(context)
+        try:
+            check_forbidden(context)
+            check_surge_protect(context)
 
-        action_name = context.action
+            action_name = context.action
 
-        # handle XMLRPC calls
-        if action_name == 'xmlrpc':
-            response = xmlrpc.xmlrpc(XMLRPCContext(request))
-        elif action_name == 'xmlrpc2':
-            response = xmlrpc.xmlrpc2(XMLRPCContext(request))
-        else:
-            response = dispatch(request, context, action_name)
-        context.cfg.session_service.finalize(context, context.session)
-        return response
-    except MoinMoinFinish:
-        return request
+            # handle XMLRPC calls
+            if action_name == 'xmlrpc':
+                response = xmlrpc.xmlrpc(XMLRPCContext(request))
+            elif action_name == 'xmlrpc2':
+                response = xmlrpc.xmlrpc2(XMLRPCContext(request))
+            else:
+                response = dispatch(request, context, action_name)
+            context.cfg.session_service.finalize(context, context.session)
+            return response
+        except MoinMoinFinish:
+            return request
     finally:
         context.clock.stop('run')
 
