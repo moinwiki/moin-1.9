@@ -30,6 +30,8 @@ moindir = rootdir.join("..")
 sys.path.insert(0, str(moindir))
 
 from MoinMoin.support.python_compatibility import set
+from MoinMoin.web.request import TestRequest, Client
+from MoinMoin.wsgiapp import application, init
 from MoinMoin._tests import maketestwiki, wikiconfig
 
 coverage_modules = set()
@@ -55,7 +57,6 @@ try:
         coverage.erase()
         coverage.start()
 
-
     py.test.config.addoptions('MoinMoin options', py.test.config.Option('-C',
         '--coverage', action='callback', callback=callback,
         help='Output information about code coverage (slow!)'))
@@ -65,17 +66,12 @@ except ImportError:
 
 
 def init_test_request(given_config=None, static_state=[False]):
-    from MoinMoin.request import request_cli
-    from MoinMoin.user import User
-    from MoinMoin.formatter.text_html import Formatter as HtmlFormatter
     if not static_state[0]:
         maketestwiki.run(True)
         static_state[0] = True
-    request = request_cli.Request(given_config=given_config)
-    request.form = request.args = request.setup_args()
-    request.user = User(request)
-    request.html_formatter = HtmlFormatter(request)
-    request.formatter = request.html_formatter
+    request = TestRequest()
+    request.given_config = given_config
+    request = init(request)
     return request
 
 
@@ -100,6 +96,7 @@ class MoinClassCollector(py.test.collect.Class):
             cls.request = init_test_request(given_config=cls.Config)
         else:
             cls.request = self.parent.request
+        cls.client = Client(application)
         super(MoinClassCollector, self).setup()
 
 

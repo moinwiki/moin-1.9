@@ -13,6 +13,9 @@ recursive-include docs *
 # include stuff for translators
 recursive-include   MoinMoin/i18n *
 
+# include non-py stuff from werkzeug
+recursive-include   MoinMoin/support/werkzeug/debug *
+
 # contrib stuff
 recursive-include   contrib *
 

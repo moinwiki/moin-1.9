@@ -100,7 +100,7 @@ class Settings(UserPrefBase):
                                         MoinOpenIDStore(request))
         query = {}
         for key in request.form:
-            query[key] = request.form[key][0]
+            query[key] = request.form[key]
         qstr = wikiutil.makeQueryString({'action': 'userprefs',
                                          'handler': 'oid',
                                          'oid.return': '1'})
@@ -138,7 +138,7 @@ class Settings(UserPrefBase):
         if form.has_key('cancel'):
             return
 
-        if self.request.request_method != 'POST':
+        if self.request.method != 'POST':
             return
 
         if form.has_key('remove'):
@@ -150,9 +150,7 @@ class Settings(UserPrefBase):
         return
 
     def _make_form(self):
-        sn = self.request.getScriptname()
-        pi = self.request.getPathinfo()
-        action = u"%s%s" % (sn, pi)
+        action = "%s%s" % (self.request.script_root, self.request.path)
         _form = html.FORM(action=action)
         _form.append(html.INPUT(type="hidden", name="action", value="userprefs"))
         _form.append(html.INPUT(type="hidden", name="handler", value="oid"))

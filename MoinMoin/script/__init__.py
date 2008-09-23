@@ -173,11 +173,11 @@ class MoinScript(Script):
 
     def init_request(self):
         """ create request """
-        from MoinMoin.request import request_cli
+        from MoinMoin.web.contexts import ScriptContext
         if self.options.wiki_url:
-            self.request = request_cli.Request(self.options.wiki_url, self.options.page)
+            self.request = ScriptContext(self.options.wiki_url, self.options.page)
         else:
-            self.request = request_cli.Request(pagename=self.options.page)
+            self.request = ScriptContext(pagename=self.options.page)
 
     def mainloop(self):
         # Insert config dir or the current directory to the start of the path.

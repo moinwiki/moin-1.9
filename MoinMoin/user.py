@@ -195,7 +195,7 @@ def isValidName(request, name):
     @param name: user name, unicode
     """
     normalized = normalizeName(name)
-    return (name == normalized) and not wikiutil.isGroupPage(request, name)
+    return (name == normalized) and not wikiutil.isGroupPage(name, request.cfg)
 
 
 def encodeList(items):
