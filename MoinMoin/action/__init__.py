@@ -30,6 +30,7 @@
 from MoinMoin.util import pysupport
 from MoinMoin import config, wikiutil
 from MoinMoin.Page import Page
+from MoinMoin.support.python_compatibility import set
 
 # create a list of extension actions from the package directory
 modules = pysupport.getPackageModules(__file__)
@@ -309,8 +310,8 @@ def get_names(config):
     if not hasattr(config.cache, 'action_names'):
         actions = names[:]
         actions.extend(wikiutil.getPlugins('action', config))
-        actions = set(action for action in actions
-                      if not action in config.actions_excluded)
+        actions = set([action for action in actions
+                      if not action in config.actions_excluded])
         config.cache.action_names = actions # remember it
     return config.cache.action_names
 
@@ -360,6 +361,6 @@ def get_available_actions(config, page, user):
                 # Prevent modification of underlay only pages, or pages
                 # the user can't write and can't delete
                 excluded = [u'RenamePage', u'DeletePage', ] # AttachFile must NOT be here!
-        return set(action for action in actions if not action in excluded)
+        return set([action for action in actions if not action in excluded])
 
 
