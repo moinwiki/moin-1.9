@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2008-09-25 18:31+0200\n"
 "PO-Revision-Date: 2005-07-22 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -24,6 +24,77 @@ msgstr ""
 "X-Language: Persian\n"
 "X-HasWikiMarkup: True\n"
 "X-Language-in-English: Persian\n"
+
+#, python-format
+msgid "The package needs a newer version of MoinMoin (at least %s)."
+msgstr "این بسته نیازمند نسخه جدیدتری از موین موین (حداقل %s) است."
+
+msgid "The theme name is not set."
+msgstr "نام قالب گرافیکی ذکر نشده اسا."
+
+msgid "Installing theme files is only supported for standalone type servers."
+msgstr "نصب قالب تنها در سرویس‌دهنده‌های مستقل پشتیبانی میشود."
+
+#, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "نصب '%(filename)s' ناموفق بود."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr "فایل %s فایلی از بسته موین موین نیست."
+
+#, python-format
+msgid "The page %s does not exist."
+msgstr "صفحه %s وجود ندارد."
+
+msgid "Invalid package file header."
+msgstr "بسته نامعتبر"
+
+msgid "Package file format unsupported."
+msgstr "بسته با ساختار پشتیبانی نشده"
+
+#, python-format
+msgid "Unknown function %(func)s in line %(lineno)i."
+msgstr "عملیات نامشخص %(func)s در خط %(lineno)i."
+
+#, python-format
+msgid "The file %s was not found in the package."
+msgstr "فایل %s در بسته یافت نشد."
+
+msgid "<unknown>"
+msgstr "<نامشخص>"
+
+#, python-format
+msgid ""
+"Login Name: %s\n"
+"\n"
+"Password recovery token: %s\n"
+"\n"
+"Password reset URL: %s/?action=recoverpass&name=%s&token=%s\n"
+msgstr ""
+"نام کاربری: %s\n"
+"\n"
+"رمز بازیافت کلمه عبور: %s\n"
+"\n"
+"آدرس بازنشانی کلمه عبور: %s/?action=recoverpass&name=%s&token=%s\n"
+
+msgid ""
+"Somebody has requested to email you a password recovery token.\n"
+"\n"
+"If you lost your password, please go to the password reset URL below or\n"
+"go to the password recovery page again and enter your username and the\n"
+"recovery token.\n"
+msgstr ""
+"شخصی درخواست نموده تا رمز تغییر کلمه عبور برای شما ارسال شود.\n"
+"\n"
+"درصورتیکه که کلمه عبور خود را از دست داده‌اید، لطفا به صفحه اینترنتی "
+"بازنشاندن کلمه عبور که در زیر آمده است رفته و یا\n"
+"مجددا به صفحه بازیافت کلمه عبور رفته و نام کاربری\n"
+"و رمز بازیافت کلمه عبور را وارد نمایید.\n"
+
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr "[%(sitename)s] اطلاعات مربوط به حساب کاربری شما"
 
 #, python-format
 msgid "Argument \"%s\" must be a boolean value, not \"%s\""
@@ -336,8 +407,8 @@ msgid ""
 "Other users will be ''warned'' until %(bumptime)s that you are editing this "
 "page."
 msgstr ""
-"سایر کاربران تا %(bumptime)s پیغامی مبنی بر اینکه شما در حال ویرایش این "
-"صفحه هستید، دریافت خواهند نمود."
+"سایر کاربران تا %(bumptime)s پیغامی مبنی بر اینکه شما در حال ویرایش این صفحه "
+"هستید، دریافت خواهند نمود."
 
 msgid "Use the Preview button to extend the locking period."
 msgstr "جهت تمدید مدت زمان قفل ویرایش دکمه پیش‌نمایش را فشار دهید."
@@ -364,9 +435,6 @@ msgstr ""
 "تا %(mins_valid)d·دقیقه(s),\n"
 "دیگر خودداری نمایید.'''<<BR>>\n"
 "جهت خروج از محیط ویرایش، دکمه لغو را فشار دهید."
-
-msgid "<unknown>"
-msgstr "<نامشخص>"
 
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
@@ -397,6 +465,9 @@ msgstr "ایجاد صفحه جدید"
 msgid "You are not allowed to view this page."
 msgstr "شما مجاز به مشاهده این صفحه نمی‌باشید."
 
+msgid "Text mode"
+msgstr "ویرایش متنی"
+
 msgid "The wiki is currently not reachable."
 msgstr "ویکی در حال حاضر در دسترس نمی‌باشد."
 
@@ -411,198 +482,238 @@ msgstr ""
 "ویکی راه‌دور از نام داخلی دیگری (%(remotename)s) غیر از نامی که شما ذکر "
 "نمودید (%(localname)s) استفاده میکند."
 
-msgid "Text mode"
-msgstr "ویرایش متنی"
+msgid "FrontPage"
+msgstr "صفحه اولیه"
 
-#, python-format
-msgid "The package needs a newer version of MoinMoin (at least %s)."
-msgstr "این بسته نیازمند نسخه جدیدتری از موین موین (حداقل %s) است."
+msgid "RecentChanges"
+msgstr "آخرین تغییرات"
 
-msgid "The theme name is not set."
-msgstr "نام قالب گرافیکی ذکر نشده اسا."
+msgid "TitleIndex"
+msgstr "فهرست موضوعات"
 
-msgid "Installing theme files is only supported for standalone type servers."
-msgstr "نصب قالب تنها در سرویس‌دهنده‌های مستقل پشتیبانی میشود."
+msgid "WordIndex"
+msgstr "فهرست لغات"
 
-#, python-format
-msgid "Installation of '%(filename)s' failed."
-msgstr "نصب '%(filename)s' ناموفق بود."
+msgid "FindPage"
+msgstr "جستجوی صفحه"
 
-#, python-format
-msgid "The file %s is not a MoinMoin package file."
-msgstr "فایل %s فایلی از بسته موین موین نیست."
+msgid "SiteNavigation"
+msgstr "پیمایش سایت"
 
-#, python-format
-msgid "The page %s does not exist."
-msgstr "صفحه %s وجود ندارد."
+msgid "HelpContents"
+msgstr "عناوین راهنما"
 
-msgid "Invalid package file header."
-msgstr "بسته نامعتبر"
+msgid "HelpOnFormatting"
+msgstr "راهنمای فرمت‌ها"
 
-msgid "Package file format unsupported."
-msgstr "بسته با ساختار پشتیبانی نشده"
+msgid "WikiLicense"
+msgstr "اجازه‌نامه ویکی"
 
-#, python-format
-msgid "Unknown function %(func)s in line %(lineno)i."
-msgstr "عملیات نامشخص %(func)s در خط %(lineno)i."
+msgid "MissingPage"
+msgstr "صفحه گم شده"
 
-#, python-format
-msgid "The file %s was not found in the package."
-msgstr "فایل %s در بسته یافت نشد."
+msgid "MissingHomePage"
+msgstr "صفحه خانگی یافت نشد"
 
-#, python-format
-msgid ""
-"Login Name: %s\n"
-"\n"
-"Password recovery token: %s\n"
-"\n"
-"Password reset URL: %s/?action=recoverpass&name=%s&token=%s\n"
+msgid "Mon"
+msgstr "دوشنبه"
+
+msgid "Tue"
+msgstr "سه شنبه"
+
+msgid "Wed"
+msgstr "چهارشنبه"
+
+msgid "Thu"
+msgstr "پنج شنبه"
+
+msgid "Fri"
+msgstr "جمعه"
+
+msgid "Sat"
+msgstr "شنبه"
+
+msgid "Sun"
+msgstr "یکشنبه"
+
+msgid "AttachFile"
+msgstr "انضمام فایل"
+
+msgid "DeletePage"
+msgstr "حذف صفحه"
+
+msgid "LikePages"
+msgstr "شبیه صفحات"
+
+msgid "LocalSiteMap"
+msgstr "نقشه سایت"
+
+msgid "RenamePage"
+msgstr "تغییرنام صفحه"
+
+msgid "SpellCheck"
+msgstr "تصحیح املایی"
+
+msgid "Discussion"
+msgstr "بحث"
+
+#, fuzzy
+msgid "Password is too short."
+msgstr "کلمه عبور تغییر یافت"
+
+msgid "Password has not enough different characters."
 msgstr ""
-"نام کاربری: %s\n"
-"\n"
-"رمز بازیافت کلمه عبور: %s\n"
-"\n"
-"آدرس بازنشانی کلمه عبور: %s/?action=recoverpass&name=%s&token=%s\n"
 
+#, fuzzy
 msgid ""
-"Somebody has requested to email you a password recovery token.\n"
-"\n"
-"If you lost your password, please go to the password reset URL below or\n"
-"go to the password recovery page again and enter your username and the\n"
-"recovery token.\n"
+"Password is too easy (password contains name or name contains password)."
 msgstr ""
-"شخصی درخواست نموده تا رمز تغییر کلمه عبور برای شما ارسال شود.\n"
-"\n"
-"درصورتیکه که کلمه عبور خود را از دست داده‌اید، لطفا به صفحه اینترنتی "
-"بازنشاندن کلمه عبور که در زیر آمده است رفته و یا\n"
-"مجددا به صفحه بازیافت کلمه عبور رفته و نام کاربری\n"
-"و رمز بازیافت کلمه عبور را وارد نمایید.\n"
+"کلمه رمز وارد نشده است. لطفا نام کاربری و کلمه عبور صحیح خود را مجددا وارد "
+"نمایید."
 
-#, python-format
-msgid "[%(sitename)s] Your wiki account data"
-msgstr "[%(sitename)s] اطلاعات مربوط به حساب کاربری شما"
-
-msgid "Line"
-msgstr "خط"
-
-msgid "No differences found!"
-msgstr "تغییری مشاهده نشد!"
-
-msgid "Deletions are marked like this."
-msgstr "حذفیات در این ستون و با این رنگ نمایش داده میشوند."
-
-msgid "Additions are marked like this."
-msgstr "اضافات در این ستون و با این رنگ نمایش داده میشوند."
-
-#, python-format
-msgid ""
-"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
+msgid "Password is too easy (keyboard sequence)."
 msgstr ""
-"متاسفم! این صفحه بدلیل اینکه عبارت \"%(content)s\" در این ویکی مجاز "
-"نمی‌باشد،ذخیره نشد."
 
-#, python-format
-msgid ""
-"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
-"%(be)s results out of about %(pages)d pages."
-msgstr ""
-"نتایج %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s از %(aboutHits)s %(bs)s%(hits)d%"
-"(be)s نتایج استخراج شده از حدود %(pages)d صفحه."
+msgid "Diffs"
+msgstr "تغییرات"
 
-msgid "seconds"
-msgstr "ثانیه"
+msgid "Info"
+msgstr "گزارشات"
 
-msgid "Previous"
-msgstr "قبلی"
-
-msgid "Next"
-msgstr "بعدی"
-
-msgid "rev"
+msgid "Edit"
 msgstr "ویرایش"
 
-msgid "current"
-msgstr "جاری"
+msgid "UnSubscribe"
+msgstr "لغو عضویت"
 
-#, python-format
-msgid "last modified: %s"
-msgstr "آخرین ویرایش: %s"
+msgid "Subscribe"
+msgstr "عضویت"
 
-msgid "match"
-msgstr "نتیجه"
+msgid "Raw"
+msgstr "متن‌خام"
 
-msgid "matches"
-msgstr "نتایج"
+msgid "XML"
+msgstr "XML"
 
-msgid "about"
-msgstr "درباره"
+msgid "Print"
+msgstr "چاپ"
 
-msgid "Language"
-msgstr "زبان"
+msgid "View"
+msgstr "مشاهده"
 
-msgid "<Browser setting>"
-msgstr "<بر اساس تنظیمات مرورگر>"
+msgid "Up"
+msgstr "بالا"
 
-msgid "Others"
-msgstr "سایرین"
+msgid "Publish my email (not my wiki homepage) in author info"
+msgstr "آدرس ایمیل من را به جای صفحه خانگی در قسمت اطلاعات نویسنده قرار بده"
 
-msgid "Date"
-msgstr "تاریخ"
+msgid "Open editor on double click"
+msgstr "ویرایشگر را با دوبار کلیک باز کن"
 
-msgid "Views/day"
-msgstr "نمایش/روز"
+msgid "After login, jump to last visited page"
+msgstr "پس از ورود به آخرین صفحه بازدید شده برو"
 
-msgid "Edits/day"
-msgstr "ویرایش/روز"
+msgid "Show comment sections"
+msgstr "بخشهای توضیحات را نمایش بده"
 
-msgid "Page hits and edits"
-msgstr "نمایش و ویرایشهای صفحه"
+msgid "Show question mark for non-existing pagelinks"
+msgstr "به جای لینکهایی که وجود ندارند علامت سوال بگذار"
 
-#, python-format
-msgid "%(chart_title)s for %(filterpage)s"
-msgstr "%(chart_title)s برای %(filterpage)s"
+msgid "Show page trail"
+msgstr "دنبالک صفحه را نمایش بده"
 
-msgid ""
-"green=view\n"
-"red=edit"
-msgstr ""
-"سبز=نمایش\n"
-"قرمز=ویرایش"
+msgid "Show icon toolbar"
+msgstr "نوار ابزار آیکنها را نشان بده"
 
-msgid "date"
-msgstr "تاریخ"
+msgid "Show top/bottom links in headings"
+msgstr "لینکهای رفتن به بالا/پایین را در کنار لینکهای اصلی نشان بده"
 
-msgid "# of hits"
-msgstr "تعداد بازدید"
+msgid "Show fancy diffs"
+msgstr "دکمه‌های تفاوتها را نشان بده"
 
-msgid "Charts are not available!"
-msgstr "نمودارها در دسترس نیستند!"
+msgid "Add spaces to displayed wiki names"
+msgstr "بین نام ویکی های نمایش داده شده فاصله اضافه کن"
 
-msgid "Page Size Distribution"
-msgstr "جزئیات اندازه صفحه"
+msgid "Remember login information"
+msgstr "اطلاعات ورودی من را به خاطر بسپار"
 
-msgid "page size upper bound [bytes]"
-msgstr "حد بالایی اندازه صفحه [بایت]"
+msgid "Disable this account forever"
+msgstr "این حساب کاربری را برای همیشه غیرفعال نما"
 
-msgid "# of pages of this size"
-msgstr "تعداد صفحات با این حجم"
+msgid "Name"
+msgstr "نام کاربری"
 
-msgid "User agent"
-msgstr "خادم کاربر"
+msgid "(Use FirstnameLastname)"
+msgstr "(از نام و نام خانوادگی به صورت FirstnameLastname استفاده نمایید)"
 
-msgid "Distribution of User-Agent Types"
-msgstr "توزیع انواع خادمهای کاربر"
+msgid "Alias-Name"
+msgstr "نام مستعار"
+
+msgid "Email"
+msgstr "ایمیل"
+
+msgid "Jabber ID"
+msgstr "حساب Jabber"
+
+msgid "User CSS URL"
+msgstr "آدرس CSS کاربر"
+
+msgid "(Leave it empty for disabling user CSS)"
+msgstr "(جهت غیر فعال نمودن CSS کاربر، این قسمت را خالی گذارید)"
+
+msgid "Editor size"
+msgstr "اندازه ویرایشگر"
+
+msgid "Username"
+msgstr "کاربر"
+
+msgid "Member of Groups"
+msgstr "عضو گروههای"
+
+msgid "Jabber"
+msgstr "حساب Jabber"
+
+msgid "Action"
+msgstr "امکانات"
+
+msgid "Disable user"
+msgstr "کاربر را غیرفعال نما"
+
+msgid "Enable user"
+msgstr "کاربر را فعال نما"
+
+msgid "disabled"
+msgstr "غیرفعال"
+
+msgid "Mail account data"
+msgstr "اطلاعات ایمیل"
+
+msgid "Password"
+msgstr "کلمه عبور"
+
+msgid "OpenID"
+msgstr "OpenID"
+
+msgid "Login"
+msgstr "ورود"
+
+msgid "Failed to connect to database."
+msgstr "ارتباط با پایگاه داده برقرار نشد."
 
 msgid "Could not contact botbouncer.com."
 msgstr "ارتباط با botbouncer.com برقرار نشد."
 
-msgid "Failed to connect to database."
-msgstr "ارتباط با پایگاه داده برقرار نشد."
+msgid "You need to log in."
+msgstr "شما می‌بایست مجددا وارد شوید."
 
 msgid "Missing password. Please enter user name and password."
 msgstr ""
 "کلمه رمز وارد نشده است. لطفا نام کاربری و کلمه عبور صحیح خود را مجددا وارد "
 "نمایید."
+
+#, python-format
+msgid "LDAP server %(server)s failed."
+msgstr "سرویس دهنده LDAP %(server)s پاسخ نداد."
 
 #, python-format
 msgid ""
@@ -613,13 +724,6 @@ msgstr ""
 "میتوانید یک حساب کاربری جدید بسازید</a>. <a href=\"%(sendmypasswordlink)s"
 "\">کلمه عبور خود را فراموش نموده‌اید؟</a>"
 
-msgid "You need to log in."
-msgstr "شما می‌بایست مجددا وارد شوید."
-
-#, python-format
-msgid "LDAP server %(server)s failed."
-msgstr "سرویس دهنده LDAP %(server)s پاسخ نداد."
-
 msgid ""
 "Please choose an account name now.\n"
 "If you choose an existing account name you will be asked for the\n"
@@ -629,9 +733,6 @@ msgstr ""
 "درصورتیکه یکی از حسابهای موجود را انتخاب نمایید از شما\n"
 "کلمه عبور پرسیده خواهد شد، همچنین قادر خواهید بود از حساب OpenID خود استفاده "
 "نمایید."
-
-msgid "Name"
-msgstr "نام کاربری"
 
 msgid "Choose this name"
 msgstr "این نام را انتخاب نمایید"
@@ -650,9 +751,6 @@ msgstr ""
 "تا این کاربری به حساب OpenID شما اختصاص داده شود. در غیر اینصورت، لطفا نام "
 "کاربری\n"
 "دیگری انتخاب نموده و جای کلمه عبور را خالی گذارید."
-
-msgid "Password"
-msgstr "کلمه عبور"
 
 msgid "Associate this name"
 msgstr "با این نام مطابق شود"
@@ -695,305 +793,90 @@ msgstr ""
 "درصورتیکه هنوز حساب کاربری ندارید، میتوانید به کمک حساب OpenID خود وارد شده "
 "و یک حساب در زمان ورود بسازید."
 
-msgid "Page has been modified"
-msgstr "صفحه ویرایش شده است"
+msgid "Change password"
+msgstr "تغییر کلمه‌عبور"
 
-msgid "Page has been modified in a trivial fashion"
-msgstr "صفحه با تغییرات جزیی ویرایش شده است"
+msgid "Passwords don't match!"
+msgstr "کلمات عبور وارد شده یکی نیستند!"
 
-msgid "Page has been renamed"
-msgstr "صفحه تغییرنام یافته است"
-
-msgid "Page has been deleted"
-msgstr "صفحه حذف شده است"
-
-msgid "Page has been copied"
-msgstr "صفحه کپی‌برداری شده است"
-
-msgid "A new attachment has been added"
-msgstr "ضمیمه جدید اضافه شده است"
-
-msgid "A page has been reverted to a previous state"
-msgstr "یک صفحه به وضعیت قبلی خود بازگشته است"
-
-msgid "A user has subscribed to a page"
-msgstr "یک کاربر عضو صفحه‌ای شده است"
-
-msgid "A new account has been created"
-msgstr "یک حساب کاربری جدید ایجاد شده است"
+msgid "Please specify a password!"
+msgstr "لطفا یک کلمه عبور وارد نمایید!"
 
 #, python-format
-msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
-msgstr "[%(sitename)s] %(trivial)sبروزآوری \"%(pagename)s\" توسط %(username)s"
+msgid "Password not acceptable: %s"
+msgstr "کلمه‌عبور قابل قبول نیست: %s"
 
-msgid "Trivial "
-msgstr "جزئي"
+msgid "Your password has been changed."
+msgstr "کلمه‌عبور شما تغییر یافت."
 
-#, python-format
-msgid ""
-"Attachment link: %(attach)s\n"
-"Page link: %(page)s\n"
-msgstr ""
-"آدرس ضمیمه: %(attach)s\n"
-"آدرس صفحه: %(page)s\n"
+msgid "To change your password, enter a new password twice."
+msgstr "جهت تغییر کلمه‌عبور، کلمه‌عبور جدید مورد نظر خود را دوبار وارد نمایید."
 
-#, python-format
-msgid ""
-"Dear Wiki user,\n"
-"\n"
-"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
-"change notification.\n"
-"\n"
-"The \"%(pagename)s\" page has been changed by %(editor)s:\n"
-msgstr ""
-"کاربر گرامی،\n"
-"\n"
-"شما در صفحه یا طبقه‌بندی \"%(sitename)s\" برای اطلاع از تغییرات صورت گرفته "
-"عضو می‌باشید\n"
-"صفحه \"%(pagename)s\" توسط %(editor)s ویرایش شده است:\n"
+msgid "Password repeat"
+msgstr "تکرار کلمه‌عبور"
 
-msgid "New page:\n"
-msgstr "صفحه جدید:\n"
+msgid "Switch user"
+msgstr "تغییر کاربر"
 
-msgid "No differences found!\n"
-msgstr "تغییری مشاهده نشد!\n"
-
-#, python-format
-msgid ""
-"Dear wiki user,\n"
-"\n"
-"You have subscribed to a wiki page \"%(sitename)s\" for change "
-"notification.\n"
-"\n"
-"The page \"%(pagename)s\" has been deleted by %(editor)s:\n"
-"\n"
-msgstr ""
-"کاربر گرامی،\n"
-"\n"
-"شما جهت مشاهده تغییرات در صفحه ویکی \"%(sitename)s\" عضو شده‌اید.\n"
-"\n"
-"صفحه \"%(pagename)s\" توسط %(editor)s حذف شده است:\n"
-"\n"
-
-#, python-format
-msgid ""
-"Dear wiki user,\n"
-"\n"
-"You have subscribed to a wiki page \"%(sitename)s\" for change "
-"notification.\n"
-"\n"
-"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by %(editor)"
-"s:\n"
-msgstr ""
-"کاربر گرامی،\n"
-"\n"
-"شما جهت مشاهده تغییرات در صفحه ویکی \"%(sitename)s\" عضو شده‌اید.\n"
-"\n"
-"صفحه \"%(pagename)s\" توسط %(editor)s از نام قبلی \"%(oldname)s\" تغییر نام "
-"یافته است:\n"
-"\n"
-
-#, python-format
-msgid "New user account created on %(sitename)s"
-msgstr "حساب کاربری جدید در %(sitename)s ایجاد شد"
-
-#, python-format
-msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
-"\n"
-"    User name: %(username)s\n"
-"    Email address: %(useremail)s"
-msgstr ""
-"مدیر گرامی، یک حساب کاربری جدید هم اکنون در %(sitename)s ایجاد شده است. جزئیات به شرح زیر است:\n"
-"\n"
-"    نام کاربری: %(username)s\n"
-"    آدرس ایمیل: %(useremail)s"
-
-#, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
-msgstr "ضمیمه جدید به صفحه %(pagename)s در سایت %(sitename)s الصاق شد"
-
-#, python-format
-msgid ""
-"Dear Wiki user,\n"
-"\n"
-"You have subscribed to a wiki page \"%(page_name)s\" for change "
-"notification. An attachment has been added to that page by %(editor)s. "
-"Following detailed information is available:\n"
-"\n"
-"Attachment name: %(attach_name)s\n"
-"Attachment size: %(attach_size)s\n"
-msgstr ""
-"کاربر گرامی،\n"
-"\n"
-"کاربر گرامی،\n"
-"\n"
-"شما جهت مشاهده تغییرات در صفحه ویکی \"%(page_name)s\" عضو شده‌اید. یک ضمیمه "
-"توسط %(editor)s به آن صفحه الصاق شده است.\n"
-"جزئیات بیشتر در مورد این ضمیمه به شرح ذیل است:\n"
-"\n"
-"نام ضمیمه: %(attach_name)s\n"
-"اندازه ضمیمه: %(attach_size)s\n"
-
-msgid "Attachment link"
-msgstr "آدرس ضمیمه"
-
-msgid "Page link"
-msgstr "آدرس صفحه"
-
-msgid "Changed page"
-msgstr "صفحه بروز شده"
-
-msgid "Page changed"
-msgstr "صفحه بروز شد"
+msgid "No user selected"
+msgstr "کاربری انتخاب نشد"
 
 msgid ""
-" Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
-">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
-"italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed ''<<Verbatim(''')"
-">>'''''bold'''<<Verbatim(''')>> and italics''<<Verbatim('')>>; <<Verbatim"
-"(----)>> horizontal rule.\n"
-" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
-"===== Title 5 =====.\n"
-" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
-"#n start numbering at n; space alone indents.\n"
-" Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])"
-">>.\n"
-" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
-"white space allowed after tables or titles.\n"
-"\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"You can now change the settings of the selected user account; log out to get "
+"back to your account."
 msgstr ""
-" تاکیدها:: <<Verbatim('')>>''مورب‌سازی''<<Verbatim('')>>; <<Verbatim(''')"
-">>'''پررنگ'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''پررنگ "
-"مورب‌سازی'''''<<Verbatim(''''')>>; <<Verbatim('')>>''پررنگ و مورب ''<<Verbatim"
-"(''')>>'''''پررنگ'''<<Verbatim(''')>> و مورب''<<Verbatim('')>>; <<Verbatim"
-"(----)>> خط افقی.\n"
-" عناوین:: = عنوان ۱ =; == عنوان ۲ ==; === عنوان ۳ ===; ==== عنوان ۴ ====; "
-"===== عنوان ۵ =====.\n"
-" فهرستها:: یک فاصله در ابتدای خط و سپس یکی از کاراکترهای: * برای لیست "
-"گلوله‌ای و 1, a, A, i, I برای لیستهای عددی و آیتمی. \n"
-"#n شروع شماره‌گذاری از n; فاصله تنها تورفتگی ایجاد میکند.\n"
-" لینکها:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[مقصد|متنی که باید "
-"لینک شود]])>>.\n"
-" جدولها:: || متن درون سلول |||| متن بین دو ستون ||;    بدون دنباله فاصله پس "
-"از جدولها و یا عناوین مجاز است.\n"
-"\n"
-"(!) برای راهنمایی بیشتر HelpOnEditing و یا SyntaxReference را ببینید.\n"
+"شما اکنون میتوانید تنظیمات شخصی کاربر انتخاب شده را تغییر دهید. جهت بازگشت "
+"به حساب خود از سیستم خارج شوید."
 
-#, python-format
-msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
-msgstr ""
-"پس از عبارت \"%(key)s\" می‌بایست عبارت \"%(wanted)s\" می‌آمد که به اشتباه \"%"
-"(token)s\" آمده است"
-
-#, python-format
-msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
-msgstr "پیش از \"%(token)s\" می‌بایست یک عبارت عددی \"%(key)s\" بیاید"
-
-#, python-format
-msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
-msgstr "پس از \"%(key)s\" می‌بایست یک کاراکتر عددی \"%(arg)s\" بیاید"
-
-#, python-format
-msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
-msgstr "پس از \"%(key)s\" یک مقدار رنگ \"%(arg)s\" وارد شود"
-
-msgid "XSLT option disabled, please look at HelpOnConfiguration."
-msgstr "امکان XSLT غیرفعال است، لطفا HelpOnConfiguration را ببینید."
-
-msgid "XSLT processing is not available, please install 4suite 1.x."
-msgstr "پردازش XSLT قابل انجام نیست، لطفا بسته 4suite 1.x را نصب نمایید."
-
-#, python-format
-msgid "%(errortype)s processing error"
-msgstr "ایراد پردازش %(errortype)s"
+msgid "You are the only user."
+msgstr "شما تنها کاربر هستید."
 
 msgid ""
-"Rendering of reStructured text is not possible, please install Docutils."
+"As a superuser, you can temporarily assume the identity of another user."
 msgstr ""
-"آماده‌سازی صفحه با ساختار درخواستی شما ممکن نیست، لطفا Docutils را نصب نمایید."
+"به عنوان مدیر سیستم، بطور موقت میتوانید مشخصات کاربر دیگری را داشته باشید."
 
-msgid ""
-"{{{\n"
-"Emphasis: *italic* **bold** ``monospace``\n"
-"\n"
-"Headings: Heading 1  Heading 2  Heading 3\n"
-"          =========  ---------  ~~~~~~~~~\n"
-"\n"
-"Horizontal rule: ----\n"
-"\n"
-"Links: TrailingUnderscore_ `multi word with backticks`_ external_\n"
-"\n"
-".. _external: http://external-site.example.org/foo/\n"
-"\n"
-"Lists: * bullets; 1., a. numbered items.\n"
-"}}}\n"
-"(!) For more help, see the\n"
-"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
-"reStructuredText Quick Reference]].\n"
-msgstr ""
-"{{{\n"
-"تاکیدها: *مورب* **پررنگ** ``تک‌فاصله``\n"
-"\n"
-"سرنویسها: سرنویس ۱  سرنویس ۲  سرنویس ۳\n"
-"          =========  ---------  ~~~~~~~~~\n"
-"\n"
-"خط افقی: ----\n"
-"\n"
-"لینکها: خط تیره پایین_ `چند کلمه با تیک پشتی`_ خارجی_\n"
-"\n"
-".. _خارجی: http://external-site.example.org/foo/\n"
-"\n"
-"فهرستها: * گلوله‌ها; 1., a. عنوانهای شماره‌دار.\n"
-"}}}\n"
-"(!) برای راهنمای بیشتر، \n"
-"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|مرجع سریع "
-"reStructuredText]] را ببینید.\n"
+msgid "Select User"
+msgstr "انتخاب کاربر"
 
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr "**تعداد گنجاندن‌ها بیش از حد مجاز شده است**"
+msgid "OpenID settings"
+msgstr "تنظیمات حساب OpenID"
 
-#, python-format
-msgid "**You are not allowed to read the page: %s**"
-msgstr "**شما مجاز به خواندن صفحه %s نیستید**"
+msgid "Cannot remove all OpenIDs."
+msgstr "امکان حذف کلیه حسابهای OpenID وجود ندارد."
 
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr "**صفحه درخواستی یافت نشد: %s**"
+msgid "The selected OpenIDs have been removed."
+msgstr "حسابهای OpenID انتخاب شده حذف شدند."
 
-msgid ""
-" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
-">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
-"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
-">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
-" Horizontal Rule:: <<Verbatim(----)>>\n"
-" Force Linebreak:: <<Verbatim(\\\\)>>\n"
-" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
-"===== Title 5 =====.\n"
-" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
-"items.\n"
-" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
-" Tables:: |= header text | cell text | more cell text |;\n"
-"\n"
-"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
-msgstr ""
-" تاکیدها:: <<Verbatim(//)>>''مورب‌سازی''<<Verbatim(//)>>; <<Verbatim(**)"
-">>'''پررنگ'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''پررنگ "
-"مورب'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''پررنگ و مورب ''<<Verbatim(**)"
-">>'''''پررنگ'''<<Verbatim(**)>> و مورب''<<Verbatim(//)>>;\n"
-" خط افقی:: <<Verbatim(----)>>\n"
-" شکست خط اجباری:: <<Verbatim(\\\\)>>\n"
-" عناوین:: = عنوان ۱ =; == عنوان ۲ ==; === عنوان ۳ ===; ==== عنوان ۴ ====; "
-"===== عنوان ۵ =====.\n"
-" فهرستها:: * گلوله‌ها; ** گلوله‌های زیرین; # فهرستهای شماره‌دار; ## فهرستهای "
-"شماره‌دار زیرین آیتمها.\n"
-" لینکها:: <<Verbatim([[مقصد]])>>; <<Verbatim([[مقصد|متنی که باید لینک شود]])"
-">>.\n"
-" جدولها:: |= متن بالا | متن سلول | متن بیشتر در سلول |;\n"
-"\n"
-"(!) برای راهنمایی بیشتر HelpOnEditing و یا HelpOnCreoleSyntax را ببینید.\n"
+msgid "No OpenID given."
+msgstr "حساب OpenID دریافت نشد."
+
+msgid "OpenID is already present."
+msgstr "حساب OpenID در حال حاضر وجود دارد."
+
+msgid "This OpenID is already used for another account."
+msgstr "این حساب OpenID در حال حاضر به حساب دیگری مرتبط شده است."
+
+msgid "OpenID added successfully."
+msgstr "حساب OpenID با موفقیت اضافه شد."
+
+msgid "Current OpenIDs"
+msgstr "حسابهای OpenID فعلی"
+
+msgid "Remove selected"
+msgstr "حذف انتخاب شده‌ها"
+
+msgid "Add OpenID"
+msgstr "اضافه نما"
+
+msgid "OpenID server"
+msgstr "سرویس دهنده OpenID"
+
+msgid "The selected websites have been removed."
+msgstr "وبسایتهای انتخاب شده حذف شده‌اند."
+
+msgid "Trusted websites"
+msgstr "وبسایتهای قابل اطمینان"
 
 msgid "Preferences"
 msgstr "اطلاعات کاربری"
@@ -1037,6 +920,9 @@ msgstr "اطلاعات کاربری شما ذخیره شد!"
 msgid "Default"
 msgstr "پیش گزینه"
 
+msgid "<Browser setting>"
+msgstr "<بر اساس تنظیمات مرورگر>"
+
 msgid "the one preferred"
 msgstr "گزینه ارجح"
 
@@ -1076,52 +962,6 @@ msgstr "گزینه های عمومی"
 msgid "Quick links"
 msgstr "لینکهای دسترسی سریع"
 
-msgid "Switch user"
-msgstr "تغییر کاربر"
-
-msgid "No user selected"
-msgstr "کاربری انتخاب نشد"
-
-msgid ""
-"You can now change the settings of the selected user account; log out to get "
-"back to your account."
-msgstr ""
-"شما اکنون میتوانید تنظیمات شخصی کاربر انتخاب شده را تغییر دهید. جهت بازگشت "
-"به حساب خود از سیستم خارج شوید."
-
-msgid "You are the only user."
-msgstr "شما تنها کاربر هستید."
-
-msgid ""
-"As a superuser, you can temporarily assume the identity of another user."
-msgstr ""
-"به عنوان مدیر سیستم، بطور موقت میتوانید مشخصات کاربر دیگری را داشته باشید."
-
-msgid "Select User"
-msgstr "انتخاب کاربر"
-
-msgid "Change password"
-msgstr "تغییر کلمه‌عبور"
-
-msgid "Passwords don't match!"
-msgstr "کلمات عبور وارد شده یکی نیستند!"
-
-msgid "Please specify a password!"
-msgstr "لطفا یک کلمه عبور وارد نمایید!"
-
-#, python-format
-msgid "Password not acceptable: %s"
-msgstr "کلمه‌عبور قابل قبول نیست: %s"
-
-msgid "Your password has been changed."
-msgstr "کلمه‌عبور شما تغییر یافت."
-
-msgid "To change your password, enter a new password twice."
-msgstr "جهت تغییر کلمه‌عبور، کلمه‌عبور جدید مورد نظر خود را دوبار وارد نمایید."
-
-msgid "Password repeat"
-msgstr "تکرار کلمه‌عبور"
-
 msgid "Notification"
 msgstr "آگاه‌سازی"
 
@@ -1153,44 +993,17 @@ msgstr "وقایعی که در آن عضو هستید"
 msgid "Subscribed wiki pages<<BR>>(one regex per line)"
 msgstr "صفحات ویکی که در آنها عضو می‌باشید (یک صفحه در هر خط)"
 
-msgid "OpenID server"
-msgstr "سرویس دهنده OpenID"
+msgid "[all]"
+msgstr "[همه]"
 
-msgid "The selected websites have been removed."
-msgstr "وبسایتهای انتخاب شده حذف شده‌اند."
+msgid "[not empty]"
+msgstr "[غیر خالی]"
 
-msgid "Trusted websites"
-msgstr "وبسایتهای قابل اطمینان"
+msgid "[empty]"
+msgstr "[خالی]"
 
-msgid "Remove selected"
-msgstr "حذف انتخاب شده‌ها"
-
-msgid "OpenID settings"
-msgstr "تنظیمات حساب OpenID"
-
-msgid "Cannot remove all OpenIDs."
-msgstr "امکان حذف کلیه حسابهای OpenID وجود ندارد."
-
-msgid "The selected OpenIDs have been removed."
-msgstr "حسابهای OpenID انتخاب شده حذف شدند."
-
-msgid "No OpenID given."
-msgstr "حساب OpenID دریافت نشد."
-
-msgid "OpenID is already present."
-msgstr "حساب OpenID در حال حاضر وجود دارد."
-
-msgid "This OpenID is already used for another account."
-msgstr "این حساب OpenID در حال حاضر به حساب دیگری مرتبط شده است."
-
-msgid "OpenID added successfully."
-msgstr "حساب OpenID با موفقیت اضافه شد."
-
-msgid "Current OpenIDs"
-msgstr "حسابهای OpenID فعلی"
-
-msgid "Add OpenID"
-msgstr "اضافه نما"
+msgid "filter"
+msgstr "فیلتر"
 
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr "گزینه‌های --pages و --search همراه با هم منحصر هستند!"
@@ -1208,159 +1021,59 @@ msgstr "کلیه ضمیمه‌ها در بسته اضافه شدند."
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "فایل خروجی هم اکنون وجود دارد! ادامه کار ممکن نیست!"
 
-msgid "Username"
-msgstr "کاربر"
-
-msgid "Member of Groups"
-msgstr "عضو گروههای"
-
-msgid "Email"
-msgstr "ایمیل"
-
-msgid "Jabber"
-msgstr "حساب Jabber"
-
-msgid "Action"
-msgstr "امکانات"
-
-msgid "Disable user"
-msgstr "کاربر را غیرفعال نما"
-
-msgid "Enable user"
-msgstr "کاربر را فعال نما"
-
-msgid "disabled"
-msgstr "غیرفعال"
-
-msgid "Mail account data"
-msgstr "اطلاعات ایمیل"
-
-msgid "OpenID"
-msgstr "OpenID"
-
-msgid "Login"
-msgstr "ورود"
+#, python-format
+msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
+msgstr ""
+"پس از عبارت \"%(key)s\" می‌بایست عبارت \"%(wanted)s\" می‌آمد که به اشتباه \"%"
+"(token)s\" آمده است"
 
 #, python-format
-msgid "Local Site Map for \"%s\""
-msgstr "نقشه سایت محلی برای \"%s\""
+msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
+msgstr "پیش از \"%(token)s\" می‌بایست یک عبارت عددی \"%(key)s\" بیاید"
 
-msgid "Please log in first."
-msgstr "لطفا وارد سیستم شوید."
+#, python-format
+msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
+msgstr "پس از \"%(key)s\" می‌بایست یک کاراکتر عددی \"%(arg)s\" بیاید"
 
-msgid "Please first create a homepage before creating additional pages."
-msgstr "لطفا پیش از ساخت صفحات بیشتر، یک صفحه خانگی برای خود بسازید."
+#, python-format
+msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
+msgstr "پس از \"%(key)s\" یک مقدار رنگ \"%(arg)s\" وارد شود"
 
 #, python-format
 msgid ""
-"You can add some additional sub pages to your already existing homepage "
-"here.\n"
-"\n"
-"You can choose how open to other readers or writers those pages shall be,\n"
-"access is controlled by group membership of the corresponding group page.\n"
-"\n"
-"Just enter the sub page's name and click on the button to create a new "
-"page.\n"
-"\n"
-"Before creating access protected pages, make sure the corresponding group "
-"page\n"
-"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
-"creating\n"
-"the group pages.\n"
-"\n"
-"||'''Add a new personal page:'''||'''Related access control list "
-"group:'''||\n"
-"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
-"[[%(username)s/ReadWriteGroup]]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
-"(username)s/ReadGroup]]||\n"
-"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
-"(username)s only||\n"
-"\n"
+"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
+"%(be)s results out of about %(pages)d pages."
 msgstr ""
-"شما میتوانید به صفحه خانگی خود تعدادی زیر صفحه نیز اضافه نمایید.\n"
-"\n"
-"شما به دلخواه خود میتوانید مجوز خواندن و نوشتن این صفحات توسط کاربران دیگر "
-"را تنظیم نمایید\n"
-"این دسترسی ها توسط اعضای گروه نویسندگان این صفحه قابل تنظیم می باشند.\n"
-"\n"
-"تنها کافیست نام زیر صفحه مورد نظر خود را نوشته و روی ایجاد صفحه جدید کلیک "
-"نمایید.\n"
-"\n"
-"پیش از ایجاد این صفحات، صفحه اسامی گروه نویسندگان دارای حق دسترسی به این "
-"صفحه را نیز ایجاد نموده و اسامی کاربران دارای حق ویرایش را در ان صفحه ذکر "
-"نمایید.\n"
-"جهت ساخت این صفحات گروهی میتوانید از الگوی HomepageGroupsTemplate استفاده  "
-"نمایید.\n"
-"\n"
-"||'''صفحه شخصی جدید:'''||'''حق دسترسی های گروه:'''||\n"
-"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
-"[[%(username)s/ReadWriteGroup]]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
-"(username)s/ReadGroup]]||\n"
-"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
-"(username)s فقط||\n"
-"\n"
+"نتایج %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s از %(aboutHits)s %(bs)s%(hits)d%"
+"(be)s نتایج استخراج شده از حدود %(pages)d صفحه."
 
-msgid "MyPages management"
-msgstr "مدیریت صفحات من"
+msgid "seconds"
+msgstr "ثانیه"
+
+msgid "Previous"
+msgstr "قبلی"
+
+msgid "Next"
+msgstr "بعدی"
+
+msgid "rev"
+msgstr "ویرایش"
+
+msgid "current"
+msgstr "جاری"
 
 #, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"لطفا جهت انجام عملیات %(actionname)s از جلوه های کاربردی استفاده نمایید!"
+msgid "last modified: %s"
+msgstr "آخرین ویرایش: %s"
 
-msgid "TextCha: Wrong answer! Go back and try again..."
-msgstr "حروف معوج: پاسخ صحیح نیست! مجددا سعی نمایید..."
+msgid "match"
+msgstr "نتیجه"
 
-#, python-format
-msgid "You must login to use this action: %(action)s."
-msgstr "جهت استفاده از عملیات %(action)s می‌بایست وارد شوید."
+msgid "matches"
+msgstr "نتایج"
 
-msgid "You are not allowed to subscribe to a page you can't read."
-msgstr "شما مجاز نیستید در صفحه‌ای عضو شوید که مجوز خواندن آنرا ندارید."
-
-msgid "This wiki is not enabled for mail/Jabber processing."
-msgstr "گزینه جابجایی ایمیل و Jabber در این ویکی فعال نشده است."
-
-msgid "You must log in to use subscriptions."
-msgstr "جهت استفاده از امکانات مشترکان حتما می‌بایست وارد شوید."
-
-msgid ""
-"Add your email address or Jabber ID in your user settings to use "
-"subscriptions."
-msgstr ""
-"جهت استفاده از امکانات عضو شدن در هر صفحه، آدرس ایمیل و یا حساب Jabber خود "
-"را در صفحه تنظیمات کاربری اضافه نمایید."
-
-msgid "You are already subscribed to this page."
-msgstr "شما هم اکنون عضو این صفحه می‌باشید."
-
-msgid "You have been subscribed to this page."
-msgstr "شما در این صفحه عضو شده‌اید."
-
-msgid "You could not get subscribed to this page."
-msgstr "امکانات عضویت شما در این صفحه وجود ندارد."
-
-msgid ""
-"Cannot create a new page without a page name.  Please specify a page name."
-msgstr ""
-"سیستم نمی تواند صفحه جدید بدون نام ایجاد کند.  لطفا یک نام صفحه مشخص نمایید."
-
-msgid "Do it."
-msgstr "انجام بده."
-
-#, python-format
-msgid "Execute action %(actionname)s?"
-msgstr "عملیات %(actionname)s انجام شود؟"
-
-#, python-format
-msgid "Action %(actionname)s is excluded in this wiki!"
-msgstr "عملیات %(actionname)s در این ویکی حذف شده است!"
-
-#, python-format
-msgid "You are not allowed to use action %(actionname)s on this page!"
-msgstr "شما مجاز به انجام عملیات %(actionname)s روی این صفحه نیستید!"
+msgid "about"
+msgstr "درباره"
 
 msgid "If this account exists an email was sent."
 msgstr "در صورتیکه این حساب کاربری وجود داشته باشد یک ایمیل ارسال شده است."
@@ -1441,6 +1154,156 @@ msgstr ""
 "درصورتیکه ایمیل حاوی رمز تغییر کلمه عبور را دریافت نموده‌اید، نام‌کاربری خود،\n"
 "رمز تغییر کلمه عبور و کلمه عبور جدید خود را (دوبار) وارد نمایید."
 
+#, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "جهت استفاده از عملیات %(action)s می‌بایست وارد شوید."
+
+msgid "Your subscription to this page has been removed."
+msgstr "عضویت شما در این صفحه لغو شده است."
+
+msgid "Can't remove regular expression subscription!"
+msgstr "عضویت در اصطلاحات عمومی قابل حذف نمی‌باشد!"
+
+msgid "Edit the subscription regular expressions in your settings."
+msgstr "عضویت در اصطلاحات عمومی را در صفحه تنظیمات شخصی خود ویرایش نمایید."
+
+msgid "You need to be subscribed to unsubscribe."
+msgstr "پیش لغو عضویت می‌بایست عضو باشید."
+
+msgid "Please choose:"
+msgstr "لطفا انتخاب نمایید:"
+
+msgid "Settings"
+msgstr "تنظیمات"
+
+msgid "Editor"
+msgstr "ویرایش توسط"
+
+msgid "Pages"
+msgstr "صفحات"
+
+msgid "Select Author"
+msgstr "انتخاب نویسنده"
+
+msgid "Revert all!"
+msgstr "بازگردانی کلیه ویرایش‌ها!"
+
+msgid "You are not allowed to use this action."
+msgstr "عملیات غیر مجاز"
+
+msgid "No older revisions available!"
+msgstr "ویرایش قدیمیتری موجود نیست!"
+
+#, python-format
+msgid "Diff for \"%s\""
+msgstr "تغییرات \"%s\""
+
+#, python-format
+msgid "Differences between revisions %d and %d"
+msgstr "تغییرات بین ویرایش های %d و %d"
+
+#, python-format
+msgid "(spanning %d versions)"
+msgstr "(spanning %d versions)"
+
+msgid "Revert to this revision"
+msgstr "بازیابی این صفحه"
+
+msgid "Previous change"
+msgstr "تغییرات قبلی"
+
+msgid "Next change"
+msgstr "تغییرات بعدی"
+
+msgid "No differences found!"
+msgstr "تغییری مشاهده نشد!"
+
+#, python-format
+msgid "The page was saved %(count)d times, though!"
+msgstr "این صفحه %(count)d بار ذخیره شده است!"
+
+msgid "(ignoring whitespace)"
+msgstr "(صرف نظر از فاصله‌های خالی)"
+
+msgid "Ignore changes in the amount of whitespace"
+msgstr "صرف نظر از تغییرات در تعداد فاصله‌های خالی"
+
+msgid "You must login to add a quicklink."
+msgstr "جهت اضافه نمودن یک لینک دسترسی سریع باید وارد سیستم شوید."
+
+msgid "A quicklink to this page has been added for you."
+msgstr "یک لینک دسترسی سریع به این صفحه برای شما اضافه شد."
+
+msgid "A quicklink to this page could not be added for you."
+msgstr "امکان ایجاد لینک دسترسی سریع به این صفحه برای شما وجود ندارد."
+
+msgid "You already have a quicklink to this page."
+msgstr "شما هم اکنون یک لینک دسترسی سریع به این صفحه دارید."
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr "لیست کامل لینکها برای \"%s\""
+
+#, python-format
+msgid "(including %(localwords)d %(pagelink)s)"
+msgstr "( مرجع لغت %(pagelink)s دارای %(localwords)d لغت )"
+
+#, python-format
+msgid ""
+"The following %(badwords)d words could not be found in the dictionary of %"
+"(totalwords)d words%(localwords)s and are highlighted below:"
+msgstr ""
+"این لغات %(badwords)d در مرجع لغات %(totalwords)d شما %(localwords)s یافت "
+"نشدند و در زیر مشخص شده‌اند:"
+
+msgid "Add checked words to dictionary"
+msgstr "لغات تیک دار را به مرجع لغات اضافه نما"
+
+msgid "No spelling errors found!"
+msgstr "اشتباه املایی یافت نشد!"
+
+msgid "You can't save spelling words."
+msgstr "شما نمیتوانید لغات املایی را ذخیره نمایید."
+
+msgid "You can't check spelling on a page you can't read."
+msgstr ""
+"شما نمی‌توانید صفحه‌ای که مجاز به خواندن آن نیستید را تصحیح املایی نمایید."
+
+msgid "You must login to remove a quicklink."
+msgstr "جهت حذف لینک دسترسی سریع می‌بایست وارد شوید."
+
+msgid "Your quicklink to this page has been removed."
+msgstr "لینک دسترسی سریع برای این صفحه حذف شد."
+
+msgid "Your quicklink to this page could not be removed."
+msgstr "لینک سریع شما برای این صفحه حذف نشد."
+
+msgid "You need to have a quicklink to this page to remove it."
+msgstr ""
+"شما می‌بایست برای این صفحه لینک دسترسی سریع داشته باشید تا قادر به حذف آن "
+"باشید."
+
+msgid "Revert"
+msgstr "بازگشت"
+
+msgid "You are not allowed to revert this page!"
+msgstr "شما مجار به بازگشت دادن این صفحه نیستید!"
+
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
+msgstr ""
+"شما در حال مشاهده این ویرایش از صفحه حاضر بودید که درخواست بازگشت دادید. در "
+"صورتیکه مایلید به نسخه قدیمیتری بازگردید، ابتدا آن نسخه قدیمی را ببینید و "
+"سپس عملیات بازگشت را صادر نمایید."
+
+msgid "Optional reason for reverting this page"
+msgstr "توضیحات اختیاری جهت بازگشت به این ویرایش"
+
+msgid "Really revert this page?"
+msgstr "واقعا به این ویرایش باز میگردید؟"
+
 msgid "Wiki Backup"
 msgstr "پشتیبان‌گیری ویکی"
 
@@ -1469,17 +1332,8 @@ msgstr "شما مجاز به پشتیبان‌گیری از راه دور نیس
 msgid "Unknown backup subaction: %s."
 msgstr "عملیات ناشناخته %s در پشتیبان‌گیری."
 
-msgid "You must login to add a quicklink."
-msgstr "جهت اضافه نمودن یک لینک دسترسی سریع باید وارد سیستم شوید."
-
-msgid "A quicklink to this page has been added for you."
-msgstr "یک لینک دسترسی سریع به این صفحه برای شما اضافه شد."
-
-msgid "A quicklink to this page could not be added for you."
-msgstr "امکان ایجاد لینک دسترسی سریع به این صفحه برای شما وجود ندارد."
-
-msgid "You already have a quicklink to this page."
-msgstr "شما هم اکنون یک لینک دسترسی سریع به این صفحه دارید."
+msgid "Charts are not available!"
+msgstr "نمودارها در دسترس نیستند!"
 
 msgid "You need to provide a chart type!"
 msgstr "شما باید نوع چارت را مشخص نمایید!"
@@ -1488,50 +1342,157 @@ msgstr "شما باید نوع چارت را مشخص نمایید!"
 msgid "Bad chart type \"%s\"!"
 msgstr "چارت \"%s\" صحیح نمی‌باشد!"
 
-msgid "Load"
-msgstr "بارگذاری"
+msgid "This page is already deleted or was never created!"
+msgstr "این صفحه یا اخیرا حذف شده و یا هرگز وجود نداشته است!"
 
-msgid "Pagename not specified!"
-msgstr "نام صفحه مشخص نشده است!"
+#, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr "نام \"%s\" معتبر نیست!"
 
-msgid "Upload page content"
-msgstr "ارسال محتویات صفحه"
+#, python-format
+msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
+msgstr "ضمیمه '%(target)s' (نام را دور '%(filename)s') هم‌اکنون وجود دارد."
 
-msgid ""
-"You can upload content for the page named below. If you change the page "
-"name, you can also upload content for another page. If the page name is "
-"empty, we derive the page name from the file name."
-msgstr ""
-"شما میتوانید محتویات صفحه‌ای که نام آن در زیر آورده شده است را اسال نمایید. "
-"در صورتیکه صفحه را تغییرنام دهید، میتوانید محتویات صفحه دیگری را نیز ارسال "
-"نمایید. در صورتیکه نام صفحه خالی باشد، نام‌گذاری صفحه بر اساس نام فایل انجام "
-"خواهد شد."
+#, python-format
+msgid "Created the package %s containing the pages %s."
+msgstr "بسته %s شامل صفحات %s ساخته شد."
 
-msgid "File to load page content from"
-msgstr "فایل بارگذاری محتویات صفحه"
+msgid "Include all attachments?"
+msgstr "همه ضمیمه‌ها وارد شوند؟"
+
+msgid "Package pages"
+msgstr "بسته صفحات"
+
+msgid "Package name"
+msgstr "نام بسته"
+
+msgid "List of page names - separated by a comma"
+msgstr "فهرست نامهای صفحه - جدا شده با کاما"
+
+#, python-format
+msgid "No pages like \"%s\"!"
+msgstr "صفحه‌ای شبیه \"%s\" نیست!"
+
+msgid "Rename Page"
+msgstr "تغیرنام صفحه"
+
+msgid "Rename all /subpages too?"
+msgstr "تغییرنام کلیه /زیر صفحات؟"
+
+msgid "New name"
+msgstr "نام جدید"
+
+msgid "Optional reason for the renaming"
+msgstr "توضیحات اختیاری جهت تغببر نام صفحه"
+
+msgid "Really rename this page?"
+msgstr "از تغییرنام این صفحه مطمئنید؟"
+
+msgid "Copy Page"
+msgstr "کپی‌برداری صفحه"
+
+msgid "Copy all /subpages too?"
+msgstr "کپی کلیه زیر صفحات نیز انجام شود؟"
+
+msgid "Optional reason for the copying"
+msgstr "توضیحات اختیاری برای کپی کردن"
+
+msgid "Really copy this page?"
+msgstr "از کپی‌برداری این صفحه مطمئنید؟"
+
+msgid "General Information"
+msgstr "اطلاعات عمومی"
+
+#, python-format
+msgid "Page size: %d"
+msgstr "اندازه صفحه: %d"
+
+msgid "SHA digest of this page's content is:"
+msgstr "اطلاعات SHA محتویات این صفحه:"
+
+msgid "The following users subscribed to this page:"
+msgstr "کاربران زیر در این صفحه عضو می‌باشند:"
+
+msgid "This page links to the following pages:"
+msgstr "این صفحه به صفحات زیر لینک دارد:"
+
+msgid "Date"
+msgstr "تاریخ"
+
+msgid "Size"
+msgstr "اندازه"
+
+msgid "Diff"
+msgstr "تغییرات"
 
 msgid "Comment"
 msgstr "توضیحات"
 
-msgid "Page Name"
-msgstr "نام صفحه"
+msgid "view"
+msgstr "نمایش"
 
-msgid "You are not allowed to create the supplementation page."
-msgstr "شما مجاز نیستید صفحه مکمل ایجاد نمایید."
+msgid "to previous"
+msgstr "به پیشین"
 
-msgid "You must login to remove a quicklink."
-msgstr "جهت حذف لینک دسترسی سریع می‌بایست وارد شوید."
+#, python-format
+msgid "Revert to revision %(rev)d."
+msgstr "نسخه %(rev)d بازیابی شد"
 
-msgid "Your quicklink to this page has been removed."
-msgstr "لینک دسترسی سریع برای این صفحه حذف شد."
+#, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "تغییرنام یافته از '%(oldpagename)s'."
 
-msgid "Your quicklink to this page could not be removed."
-msgstr "لینک سریع شما برای این صفحه حذف نشد."
+msgid "edit"
+msgstr "ویرایش"
 
-msgid "You need to have a quicklink to this page to remove it."
+msgid "get"
+msgstr "دریافت"
+
+msgid "del"
+msgstr "حذف"
+
+msgid "N/A"
+msgstr "در دسترس نیست"
+
+msgid "Revision History"
+msgstr "تاریخچه ویرایش"
+
+msgid "No log entries found."
+msgstr "گزارشی یافت نشد."
+
+#, python-format
+msgid "Info for \"%s\""
+msgstr "اطلاعات مربوط به \"%s\""
+
+#, python-format
+msgid "Show \"%(title)s\""
+msgstr "\"%(title)s\" را نشان بده"
+
+msgid "General Page Infos"
+msgstr "اطلاعات عمومی صفحه"
+
+msgid "Page hits and edits"
+msgstr "نمایش و ویرایشهای صفحه"
+
+msgid "Do it."
+msgstr "انجام بده."
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr "عملیات %(actionname)s انجام شود؟"
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr "عملیات %(actionname)s در این ویکی حذف شده است!"
+
+#, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "شما مجاز به انجام عملیات %(actionname)s روی این صفحه نیستید!"
+
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
 msgstr ""
-"شما می‌بایست برای این صفحه لینک دسترسی سریع داشته باشید تا قادر به حذف آن "
-"باشید."
+"لطفا جهت انجام عملیات %(actionname)s از جلوه های کاربردی استفاده نمایید!"
 
 #, python-format
 msgid "[%d attachments]"
@@ -1561,20 +1522,8 @@ msgstr ""
 "اینگونه که در زیر در قسمت لیست فایل ها نشان داده شده است از لینک آدرس "
 "{{{[get]}}} استفاده ننمایید."
 
-msgid "del"
-msgstr "حذف"
-
 msgid "move"
 msgstr "جابجایی"
-
-msgid "get"
-msgstr "دریافت"
-
-msgid "edit"
-msgstr "ویرایش"
-
-msgid "view"
-msgstr "نمایش"
 
 msgid "unzip"
 msgstr "فایل فشرده بار شود"
@@ -1618,6 +1567,9 @@ msgstr "ارسال فایل پشتیبانی نشده: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "ضمیمه‌های صفحه \"%(pagename)s\""
 
+msgid "TextCha: Wrong answer! Go back and try again..."
+msgstr "حروف معوج: پاسخ صحیح نیست! مجددا سعی نمایید..."
+
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr ""
 "شما مجاز به بازنشانی فایل جدید به نام فایل ذخیره شده قبلی در این صفحه نیستید."
@@ -1635,10 +1587,6 @@ msgid ""
 "saved."
 msgstr ""
 "ضمیمه '%(target)s' (به نام·'%(filename)s') به حجم %(bytes)d بایت ذخیره شد."
-
-#, python-format
-msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
-msgstr "ضمیمه '%(target)s' (نام را دور '%(filename)s') هم‌اکنون وجود دارد."
 
 msgid "You are not allowed to save a drawing on this page."
 msgstr "شما مجاز به ذخیره ترسیمات در این صفحه نیستید."
@@ -1769,9 +1717,6 @@ msgstr "نام فایل"
 msgid "Modified"
 msgstr "اصلاح شده"
 
-msgid "Size"
-msgstr "اندازه"
-
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr "نوع فایل نامشخص است، این فایل ضمیمه قابل نمایش نمی‌باشد."
 
@@ -1782,9 +1727,140 @@ msgstr "شما مجاز به دیدن ضمیمه‌های این صفحه نمی
 msgid "attachment:%(filename)s of %(pagename)s"
 msgstr "ضمیمه:%(filename)s در %(pagename)s"
 
+msgid "Delete"
+msgstr "حذف"
+
+msgid "Delete all /subpages too?"
+msgstr "حذف کلیه زیر صفحات نیز انجام شود؟"
+
+msgid "Optional reason for the deletion"
+msgstr "توضیحات دلخواه برای این حذف"
+
+msgid "Really delete this page?"
+msgstr "اطمینان دارید که این صفحه می‌بایست حذف شود؟"
+
 #, python-format
-msgid "Full Link List for \"%s\""
-msgstr "لیست کامل لینکها برای \"%s\""
+msgid "(!) Only pages changed since '''%s''' are being displayed!"
+msgstr "(!) تنها صفحاتی که پس از '''%s''' شده‌اند نمایش داده شدند!"
+
+msgid ""
+"/!\\ The modification date you entered was not recognized and is therefore "
+"not considered for the search results!"
+msgstr ""
+"/!\\ تاریخ تغییراتی که وارد نموده‌اید یافت نشد و بنابراین در نتایج جستجو لحاظ "
+"نگردید!"
+
+#, python-format
+msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
+msgstr "لطفا به جای {{{\"%s\"}}} جستجوی گزیده‌تری انجام دهید"
+
+#, python-format
+msgid "Title Search: \"%s\""
+msgstr "جستجوی عنوان: \"%s\""
+
+#, python-format
+msgid "Advanced Search: \"%s\""
+msgstr "جستجوی پیشرفته: \"%s\""
+
+#, python-format
+msgid "Full Text Search: \"%s\""
+msgstr "جستجوی کامل متن: \"%s\""
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr ""
+"جستجوی {{{\"%s\"}}} نادرست است. جهت کسب اطلاعات بیشتر HelpOnSearching را "
+"ببینید."
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} didn't return any results. Please change some "
+"terms and refer to HelpOnSearching for more information.%s"
+msgstr ""
+"جستجوی مورد نظر شما {{{\"%s\"}}} هیچ پاسخی نداشت. لطفا برخی گزینه‌های جستجو "
+"را تغییر داده و جهت کسب اطلاعات بیشتر به HelpOnSearching مراجعه نمایید.%s"
+
+msgid "(!) Consider performing a"
+msgstr "(!) اجرای a را نیز داشته باشید"
+
+msgid "full-text search with your search terms"
+msgstr "جستجوی کامل متن با گزینه‌های مورد نظر شما"
+
+msgid ""
+"(!) You're performing a title search that might not include all related "
+"results of your search query in this wiki. <<BR>>"
+msgstr ""
+"(!) شما یک جستجو در عنوانها انجام داده‌اید که ممکن است همه پاسخهای جستجوی شما "
+"در ویکی را در بر نداشته باشد. <<BR>>"
+
+msgid "Click here to perform a full-text search with your search terms!"
+msgstr ""
+"جهت انجام یک جستجوی کامل در متون با گزینه‌های مورد نظر خود اینجا کلیک نمایید!"
+
+msgid "Please log in first."
+msgstr "لطفا وارد سیستم شوید."
+
+msgid "Please first create a homepage before creating additional pages."
+msgstr "لطفا پیش از ساخت صفحات بیشتر، یک صفحه خانگی برای خود بسازید."
+
+#, python-format
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
+"[[%(username)s/ReadWriteGroup]]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
+"(username)s/ReadGroup]]||\n"
+"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
+"(username)s only||\n"
+"\n"
+msgstr ""
+"شما میتوانید به صفحه خانگی خود تعدادی زیر صفحه نیز اضافه نمایید.\n"
+"\n"
+"شما به دلخواه خود میتوانید مجوز خواندن و نوشتن این صفحات توسط کاربران دیگر "
+"را تنظیم نمایید\n"
+"این دسترسی ها توسط اعضای گروه نویسندگان این صفحه قابل تنظیم می باشند.\n"
+"\n"
+"تنها کافیست نام زیر صفحه مورد نظر خود را نوشته و روی ایجاد صفحه جدید کلیک "
+"نمایید.\n"
+"\n"
+"پیش از ایجاد این صفحات، صفحه اسامی گروه نویسندگان دارای حق دسترسی به این "
+"صفحه را نیز ایجاد نموده و اسامی کاربران دارای حق ویرایش را در ان صفحه ذکر "
+"نمایید.\n"
+"جهت ساخت این صفحات گروهی میتوانید از الگوی HomepageGroupsTemplate استفاده  "
+"نمایید.\n"
+"\n"
+"||'''صفحه شخصی جدید:'''||'''حق دسترسی های گروه:'''||\n"
+"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
+"[[%(username)s/ReadWriteGroup]]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
+"(username)s/ReadGroup]]||\n"
+"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
+"(username)s فقط||\n"
+"\n"
+
+msgid "MyPages management"
+msgstr "مدیریت صفحات من"
+
+msgid "Only superuser is allowed to use this action."
+msgstr "فقط مدیر سیستم مجار به انجام این عملیات است."
 
 #, python-format
 msgid "Subscribe users to the page %s"
@@ -1803,31 +1879,6 @@ msgstr "کاربر ثبت نشده:"
 msgid "You are not allowed to perform this action."
 msgstr "عملیات غیر مجاز"
 
-msgid "You are not allowed to use this action."
-msgstr "عملیات غیر مجاز"
-
-msgid "Rename Page"
-msgstr "تغیرنام صفحه"
-
-msgid "This page is already deleted or was never created!"
-msgstr "این صفحه یا اخیرا حذف شده و یا هرگز وجود نداشته است!"
-
-msgid "Rename all /subpages too?"
-msgstr "تغییرنام کلیه /زیر صفحات؟"
-
-msgid "New name"
-msgstr "نام جدید"
-
-msgid "Optional reason for the renaming"
-msgstr "توضیحات اختیاری جهت تغببر نام صفحه"
-
-msgid "Really rename this page?"
-msgstr "از تغییرنام این صفحه مطمئنید؟"
-
-#, python-format
-msgid "No pages like \"%s\"!"
-msgstr "صفحه‌ای شبیه \"%s\" نیست!"
-
 #, python-format
 msgid "Exactly one page like \"%s\" found, redirecting to page."
 msgstr "یک صفحه شبیه \"%s\" پیدا شد، اکنون به آن صفحه میروید."
@@ -1840,40 +1891,33 @@ msgstr "صفحات شبیه \"%s\""
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s برای \"%(title)s\""
 
-#, python-format
-msgid "Invalid filename \"%s\"!"
-msgstr "نام \"%s\" معتبر نیست!"
-
-#, python-format
-msgid "Created the package %s containing the pages %s."
-msgstr "بسته %s شامل صفحات %s ساخته شد."
-
-msgid "Include all attachments?"
-msgstr "همه ضمیمه‌ها وارد شوند؟"
-
-msgid "Package pages"
-msgstr "بسته صفحات"
-
-msgid "Package name"
-msgstr "نام بسته"
-
-msgid "List of page names - separated by a comma"
-msgstr "فهرست نامهای صفحه - جدا شده با کاما"
-
-msgid "Delete"
-msgstr "حذف"
-
-msgid "Delete all /subpages too?"
-msgstr "حذف کلیه زیر صفحات نیز انجام شود؟"
-
-msgid "Optional reason for the deletion"
-msgstr "توضیحات دلخواه برای این حذف"
-
-msgid "Really delete this page?"
-msgstr "اطمینان دارید که این صفحه می‌بایست حذف شود؟"
-
 msgid "You are now logged out."
 msgstr "شما از سیستم خارج شدید."
+
+msgid "You are not allowed to subscribe to a page you can't read."
+msgstr "شما مجاز نیستید در صفحه‌ای عضو شوید که مجوز خواندن آنرا ندارید."
+
+msgid "This wiki is not enabled for mail/Jabber processing."
+msgstr "گزینه جابجایی ایمیل و Jabber در این ویکی فعال نشده است."
+
+msgid "You must log in to use subscriptions."
+msgstr "جهت استفاده از امکانات مشترکان حتما می‌بایست وارد شوید."
+
+msgid ""
+"Add your email address or Jabber ID in your user settings to use "
+"subscriptions."
+msgstr ""
+"جهت استفاده از امکانات عضو شدن در هر صفحه، آدرس ایمیل و یا حساب Jabber خود "
+"را در صفحه تنظیمات کاربری اضافه نمایید."
+
+msgid "You are already subscribed to this page."
+msgstr "شما هم اکنون عضو این صفحه می‌باشید."
+
+msgid "You have been subscribed to this page."
+msgstr "شما در این صفحه عضو شده‌اید."
+
+msgid "You could not get subscribed to this page."
+msgstr "امکانات عضویت شما در این صفحه وجود ندارد."
 
 #, python-format
 msgid "Rolled back changes to the page %s."
@@ -2023,112 +2067,42 @@ msgstr "صفحه %s دارای ناسازگاریهایی در سیستم راه
 msgid "Page %s merged with conflicts."
 msgstr "صفحه %s با ناسازگاریها ترکیب شد."
 
-msgid "Editor"
-msgstr "ویرایش توسط"
+msgid "Load"
+msgstr "بارگذاری"
 
-msgid "Pages"
-msgstr "صفحات"
+msgid "Pagename not specified!"
+msgstr "نام صفحه مشخص نشده است!"
 
-msgid "Select Author"
-msgstr "انتخاب نویسنده"
-
-msgid "Revert all!"
-msgstr "بازگردانی کلیه ویرایش‌ها!"
-
-msgid "Only superuser is allowed to use this action."
-msgstr "فقط مدیر سیستم مجار به انجام این عملیات است."
-
-msgid "No older revisions available!"
-msgstr "ویرایش قدیمیتری موجود نیست!"
-
-#, python-format
-msgid "Diff for \"%s\""
-msgstr "تغییرات \"%s\""
-
-#, python-format
-msgid "Differences between revisions %d and %d"
-msgstr "تغییرات بین ویرایش های %d و %d"
-
-#, python-format
-msgid "(spanning %d versions)"
-msgstr "(spanning %d versions)"
-
-msgid "Revert to this revision"
-msgstr "بازیابی این صفحه"
-
-msgid "Previous change"
-msgstr "تغییرات قبلی"
-
-msgid "Next change"
-msgstr "تغییرات بعدی"
-
-#, python-format
-msgid "The page was saved %(count)d times, though!"
-msgstr "این صفحه %(count)d بار ذخیره شده است!"
-
-msgid "(ignoring whitespace)"
-msgstr "(صرف نظر از فاصله‌های خالی)"
-
-msgid "Ignore changes in the amount of whitespace"
-msgstr "صرف نظر از تغییرات در تعداد فاصله‌های خالی"
-
-#, python-format
-msgid "(including %(localwords)d %(pagelink)s)"
-msgstr "( مرجع لغت %(pagelink)s دارای %(localwords)d لغت )"
-
-#, python-format
-msgid ""
-"The following %(badwords)d words could not be found in the dictionary of %"
-"(totalwords)d words%(localwords)s and are highlighted below:"
-msgstr ""
-"این لغات %(badwords)d در مرجع لغات %(totalwords)d شما %(localwords)s یافت "
-"نشدند و در زیر مشخص شده‌اند:"
-
-msgid "Add checked words to dictionary"
-msgstr "لغات تیک دار را به مرجع لغات اضافه نما"
-
-msgid "No spelling errors found!"
-msgstr "اشتباه املایی یافت نشد!"
-
-msgid "You can't save spelling words."
-msgstr "شما نمیتوانید لغات املایی را ذخیره نمایید."
-
-msgid "You can't check spelling on a page you can't read."
-msgstr ""
-"شما نمی‌توانید صفحه‌ای که مجاز به خواندن آن نیستید را تصحیح املایی نمایید."
-
-msgid "Copy Page"
-msgstr "کپی‌برداری صفحه"
-
-msgid "Copy all /subpages too?"
-msgstr "کپی کلیه زیر صفحات نیز انجام شود؟"
-
-msgid "Optional reason for the copying"
-msgstr "توضیحات اختیاری برای کپی کردن"
-
-msgid "Really copy this page?"
-msgstr "از کپی‌برداری این صفحه مطمئنید؟"
-
-msgid "Revert"
-msgstr "بازگشت"
-
-msgid "You are not allowed to revert this page!"
-msgstr "شما مجار به بازگشت دادن این صفحه نیستید!"
+msgid "Upload page content"
+msgstr "ارسال محتویات صفحه"
 
 msgid ""
-"You were viewing the current revision of this page when you called the "
-"revert action. If you want to revert to an older revision, first view that "
-"older revision and then call revert to this (older) revision again."
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
 msgstr ""
-"شما در حال مشاهده این ویرایش از صفحه حاضر بودید که درخواست بازگشت دادید. در "
-"صورتیکه مایلید به نسخه قدیمیتری بازگردید، ابتدا آن نسخه قدیمی را ببینید و "
-"سپس عملیات بازگشت را صادر نمایید."
+"شما میتوانید محتویات صفحه‌ای که نام آن در زیر آورده شده است را اسال نمایید. "
+"در صورتیکه صفحه را تغییرنام دهید، میتوانید محتویات صفحه دیگری را نیز ارسال "
+"نمایید. در صورتیکه نام صفحه خالی باشد، نام‌گذاری صفحه بر اساس نام فایل انجام "
+"خواهد شد."
 
-msgid "Optional reason for reverting this page"
-msgstr "توضیحات اختیاری جهت بازگشت به این ویرایش"
+msgid "File to load page content from"
+msgstr "فایل بارگذاری محتویات صفحه"
 
-msgid "Really revert this page?"
-msgstr "واقعا به این ویرایش باز میگردید؟"
+msgid "Page Name"
+msgstr "نام صفحه"
+
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr ""
+"سیستم نمی تواند صفحه جدید بدون نام ایجاد کند.  لطفا یک نام صفحه مشخص نمایید."
+
+#, python-format
+msgid "Local Site Map for \"%s\""
+msgstr "نقشه سایت محلی برای \"%s\""
+
+msgid "You are not allowed to create the supplementation page."
+msgstr "شما مجاز نیستید صفحه مکمل ایجاد نمایید."
 
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
@@ -2200,129 +2174,10 @@ msgstr ""
 "و سپس این صفحه را بارگذاری مجدد نمایید و یا دکمه زیر را برای لغو\n"
 "تشخیص هویت فشار دهید."
 
-msgid "Please choose:"
-msgstr "لطفا انتخاب نمایید:"
-
-msgid "Settings"
-msgstr "تنظیمات"
-
-msgid "General Information"
-msgstr "اطلاعات عمومی"
-
-#, python-format
-msgid "Page size: %d"
-msgstr "اندازه صفحه: %d"
-
-msgid "SHA digest of this page's content is:"
-msgstr "اطلاعات SHA محتویات این صفحه:"
-
-msgid "The following users subscribed to this page:"
-msgstr "کاربران زیر در این صفحه عضو می‌باشند:"
-
-msgid "This page links to the following pages:"
-msgstr "این صفحه به صفحات زیر لینک دارد:"
-
-msgid "Diff"
-msgstr "تغییرات"
-
-msgid "to previous"
-msgstr "به پیشین"
-
-#, python-format
-msgid "Revert to revision %(rev)d."
-msgstr "نسخه %(rev)d بازیابی شد"
-
-#, python-format
-msgid "Renamed from '%(oldpagename)s'."
-msgstr "تغییرنام یافته از '%(oldpagename)s'."
-
-msgid "N/A"
-msgstr "در دسترس نیست"
-
-msgid "Revision History"
-msgstr "تاریخچه ویرایش"
-
-msgid "No log entries found."
-msgstr "گزارشی یافت نشد."
-
-#, python-format
-msgid "Info for \"%s\""
-msgstr "اطلاعات مربوط به \"%s\""
-
-#, python-format
-msgid "Show \"%(title)s\""
-msgstr "\"%(title)s\" را نشان بده"
-
-msgid "General Page Infos"
-msgstr "اطلاعات عمومی صفحه"
-
-#, python-format
-msgid "(!) Only pages changed since '''%s''' are being displayed!"
-msgstr "(!) تنها صفحاتی که پس از '''%s''' شده‌اند نمایش داده شدند!"
-
-msgid ""
-"/!\\ The modification date you entered was not recognized and is therefore "
-"not considered for the search results!"
-msgstr ""
-"/!\\ تاریخ تغییراتی که وارد نموده‌اید یافت نشد و بنابراین در نتایج جستجو لحاظ "
-"نگردید!"
-
-#, python-format
-msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
-msgstr "لطفا به جای {{{\"%s\"}}} جستجوی گزیده‌تری انجام دهید"
-
-#, python-format
-msgid "Title Search: \"%s\""
-msgstr "جستجوی عنوان: \"%s\""
-
-#, python-format
-msgid "Advanced Search: \"%s\""
-msgstr "جستجوی پیشرفته: \"%s\""
-
-#, python-format
-msgid "Full Text Search: \"%s\""
-msgstr "جستجوی کامل متن: \"%s\""
-
-#, python-format
-msgid ""
-"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
-"for more information."
-msgstr ""
-"جستجوی {{{\"%s\"}}} نادرست است. جهت کسب اطلاعات بیشتر HelpOnSearching را "
-"ببینید."
-
-#, python-format
-msgid ""
-"Your search query {{{\"%s\"}}} didn't return any results. Please change some "
-"terms and refer to HelpOnSearching for more information.%s"
-msgstr ""
-"جستجوی مورد نظر شما {{{\"%s\"}}} هیچ پاسخی نداشت. لطفا برخی گزینه‌های جستجو "
-"را تغییر داده و جهت کسب اطلاعات بیشتر به HelpOnSearching مراجعه نمایید.%s"
-
-msgid "(!) Consider performing a"
-msgstr "(!) اجرای a را نیز داشته باشید"
-
-msgid "full-text search with your search terms"
-msgstr "جستجوی کامل متن با گزینه‌های مورد نظر شما"
-
-msgid ""
-"(!) You're performing a title search that might not include all related "
-"results of your search query in this wiki. <<BR>>"
-msgstr ""
-"(!) شما یک جستجو در عنوانها انجام داده‌اید که ممکن است همه پاسخهای جستجوی شما "
-"در ویکی را در بر نداشته باشد. <<BR>>"
-
-msgid "Click here to perform a full-text search with your search terms!"
-msgstr ""
-"جهت انجام یک جستجوی کامل در متون با گزینه‌های مورد نظر خود اینجا کلیک نمایید!"
-
 msgid "User account created! You can use this account to login now..."
 msgstr ""
 "حساب کاربری شما ایجاد شد! شما می توانید از این حساب کاربری جهت ورود به سیستم "
 "استفاده نمائید..."
-
-msgid "(Use FirstnameLastname)"
-msgstr "(از نام و نام خانوادگی به صورت FirstnameLastname استفاده نمایید)"
 
 msgid "TextCha (required)"
 msgstr "بررسی حروف معوج (ضروریست)"
@@ -2333,104 +2188,658 @@ msgstr "ثبت کاربر جدید"
 msgid "Create Account"
 msgstr "ساخت حساب کاربری"
 
-msgid "Your subscription to this page has been removed."
-msgstr "عضویت شما در این صفحه لغو شده است."
+msgid "Views/day"
+msgstr "نمایش/روز"
 
-msgid "Can't remove regular expression subscription!"
-msgstr "عضویت در اصطلاحات عمومی قابل حذف نمی‌باشد!"
+msgid "Edits/day"
+msgstr "ویرایش/روز"
 
-msgid "Edit the subscription regular expressions in your settings."
-msgstr "عضویت در اصطلاحات عمومی را در صفحه تنظیمات شخصی خود ویرایش نمایید."
+#, python-format
+msgid "%(chart_title)s for %(filterpage)s"
+msgstr "%(chart_title)s برای %(filterpage)s"
 
-msgid "You need to be subscribed to unsubscribe."
-msgstr "پیش لغو عضویت می‌بایست عضو باشید."
+msgid ""
+"green=view\n"
+"red=edit"
+msgstr ""
+"سبز=نمایش\n"
+"قرمز=ویرایش"
 
-msgid "Diffs"
-msgstr "تغییرات"
+msgid "date"
+msgstr "تاریخ"
 
-msgid "Info"
-msgstr "گزارشات"
+msgid "# of hits"
+msgstr "تعداد بازدید"
 
-msgid "Edit"
-msgstr "ویرایش"
+msgid "Language"
+msgstr "زبان"
 
-msgid "UnSubscribe"
-msgstr "لغو عضویت"
+msgid "Others"
+msgstr "سایرین"
 
-msgid "Subscribe"
-msgstr "عضویت"
+msgid "User agent"
+msgstr "خادم کاربر"
 
-msgid "Raw"
-msgstr "متن‌خام"
+msgid "Distribution of User-Agent Types"
+msgstr "توزیع انواع خادمهای کاربر"
 
-msgid "XML"
-msgstr "XML"
+msgid "Page Size Distribution"
+msgstr "جزئیات اندازه صفحه"
 
-msgid "Print"
-msgstr "چاپ"
+msgid "page size upper bound [bytes]"
+msgstr "حد بالایی اندازه صفحه [بایت]"
 
-msgid "View"
-msgstr "مشاهده"
+msgid "# of pages of this size"
+msgstr "تعداد صفحات با این حجم"
 
-msgid "Up"
-msgstr "بالا"
+msgid "Line"
+msgstr "خط"
 
-msgid "Publish my email (not my wiki homepage) in author info"
-msgstr "آدرس ایمیل من را به جای صفحه خانگی در قسمت اطلاعات نویسنده قرار بده"
+msgid "Deletions are marked like this."
+msgstr "حذفیات در این ستون و با این رنگ نمایش داده میشوند."
 
-msgid "Open editor on double click"
-msgstr "ویرایشگر را با دوبار کلیک باز کن"
+msgid "Additions are marked like this."
+msgstr "اضافات در این ستون و با این رنگ نمایش داده میشوند."
 
-msgid "After login, jump to last visited page"
-msgstr "پس از ورود به آخرین صفحه بازدید شده برو"
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "عملیات ناشناخته %(action_name)s."
 
-msgid "Show comment sections"
-msgstr "بخشهای توضیحات را نمایش بده"
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "شما مجاز به انجام عملیات %(action_name)s روی این صفحه نیستید."
 
-msgid "Show question mark for non-existing pagelinks"
-msgstr "به جای لینکهایی که وجود ندارند علامت سوال بگذار"
+msgid "Login and try again."
+msgstr "وارد سایت شده و مجددا سعی نمایید."
 
-msgid "Show page trail"
-msgstr "دنبالک صفحه را نمایش بده"
+#, python-format
+msgid ""
+"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
+msgstr ""
+"متاسفم! این صفحه بدلیل اینکه عبارت \"%(content)s\" در این ویکی مجاز "
+"نمی‌باشد،ذخیره نشد."
 
-msgid "Show icon toolbar"
-msgstr "نوار ابزار آیکنها را نشان بده"
+msgid "Attachment link"
+msgstr "آدرس ضمیمه"
 
-msgid "Show top/bottom links in headings"
-msgstr "لینکهای رفتن به بالا/پایین را در کنار لینکهای اصلی نشان بده"
+msgid "Page link"
+msgstr "آدرس صفحه"
 
-msgid "Show fancy diffs"
-msgstr "دکمه‌های تفاوتها را نشان بده"
+msgid "Changed page"
+msgstr "صفحه بروز شده"
 
-msgid "Add spaces to displayed wiki names"
-msgstr "بین نام ویکی های نمایش داده شده فاصله اضافه کن"
+msgid "Page changed"
+msgstr "صفحه بروز شد"
 
-msgid "Remember login information"
-msgstr "اطلاعات ورودی من را به خاطر بسپار"
+#, python-format
+msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
+msgstr "[%(sitename)s] %(trivial)sبروزآوری \"%(pagename)s\" توسط %(username)s"
 
-msgid "Disable this account forever"
-msgstr "این حساب کاربری را برای همیشه غیرفعال نما"
+msgid "Trivial "
+msgstr "جزئي"
 
-msgid "Alias-Name"
-msgstr "نام مستعار"
+#, python-format
+msgid ""
+"Attachment link: %(attach)s\n"
+"Page link: %(page)s\n"
+msgstr ""
+"آدرس ضمیمه: %(attach)s\n"
+"آدرس صفحه: %(page)s\n"
 
-msgid "Jabber ID"
-msgstr "حساب Jabber"
+msgid "Page has been modified"
+msgstr "صفحه ویرایش شده است"
 
-msgid "User CSS URL"
-msgstr "آدرس CSS کاربر"
+msgid "Page has been modified in a trivial fashion"
+msgstr "صفحه با تغییرات جزیی ویرایش شده است"
 
-msgid "(Leave it empty for disabling user CSS)"
-msgstr "(جهت غیر فعال نمودن CSS کاربر، این قسمت را خالی گذارید)"
+msgid "Page has been renamed"
+msgstr "صفحه تغییرنام یافته است"
 
-msgid "Editor size"
-msgstr "اندازه ویرایشگر"
+msgid "Page has been deleted"
+msgstr "صفحه حذف شده است"
 
-msgid "Unsubscribe"
-msgstr "لغو عضویت"
+msgid "Page has been copied"
+msgstr "صفحه کپی‌برداری شده است"
 
-msgid "Home"
-msgstr "صفحه خانگی"
+msgid "A new attachment has been added"
+msgstr "ضمیمه جدید اضافه شده است"
+
+msgid "A page has been reverted to a previous state"
+msgstr "یک صفحه به وضعیت قبلی خود بازگشته است"
+
+msgid "A user has subscribed to a page"
+msgstr "یک کاربر عضو صفحه‌ای شده است"
+
+msgid "A new account has been created"
+msgstr "یک حساب کاربری جدید ایجاد شده است"
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
+"change notification.\n"
+"\n"
+"The \"%(pagename)s\" page has been changed by %(editor)s:\n"
+msgstr ""
+"کاربر گرامی،\n"
+"\n"
+"شما در صفحه یا طبقه‌بندی \"%(sitename)s\" برای اطلاع از تغییرات صورت گرفته "
+"عضو می‌باشید\n"
+"صفحه \"%(pagename)s\" توسط %(editor)s ویرایش شده است:\n"
+
+msgid "New page:\n"
+msgstr "صفحه جدید:\n"
+
+msgid "No differences found!\n"
+msgstr "تغییری مشاهده نشد!\n"
+
+#, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been deleted by %(editor)s:\n"
+"\n"
+msgstr ""
+"کاربر گرامی،\n"
+"\n"
+"شما جهت مشاهده تغییرات در صفحه ویکی \"%(sitename)s\" عضو شده‌اید.\n"
+"\n"
+"صفحه \"%(pagename)s\" توسط %(editor)s حذف شده است:\n"
+"\n"
+
+#, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by %(editor)"
+"s:\n"
+msgstr ""
+"کاربر گرامی،\n"
+"\n"
+"شما جهت مشاهده تغییرات در صفحه ویکی \"%(sitename)s\" عضو شده‌اید.\n"
+"\n"
+"صفحه \"%(pagename)s\" توسط %(editor)s از نام قبلی \"%(oldname)s\" تغییر نام "
+"یافته است:\n"
+"\n"
+
+#, python-format
+msgid "New user account created on %(sitename)s"
+msgstr "حساب کاربری جدید در %(sitename)s ایجاد شد"
+
+#, python-format
+msgid ""
+"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
+"follow:\n"
+"\n"
+"    User name: %(username)s\n"
+"    Email address: %(useremail)s"
+msgstr ""
+"مدیر گرامی، یک حساب کاربری جدید هم اکنون در %(sitename)s ایجاد شده است. "
+"جزئیات به شرح زیر است:\n"
+"\n"
+"    نام کاربری: %(username)s\n"
+"    آدرس ایمیل: %(useremail)s"
+
+#, python-format
+msgid "New attachment added to page %(pagename)s on %(sitename)s"
+msgstr "ضمیمه جدید به صفحه %(pagename)s در سایت %(sitename)s الصاق شد"
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(page_name)s\" for change "
+"notification. An attachment has been added to that page by %(editor)s. "
+"Following detailed information is available:\n"
+"\n"
+"Attachment name: %(attach_name)s\n"
+"Attachment size: %(attach_size)s\n"
+msgstr ""
+"کاربر گرامی،\n"
+"\n"
+"کاربر گرامی،\n"
+"\n"
+"شما جهت مشاهده تغییرات در صفحه ویکی \"%(page_name)s\" عضو شده‌اید. یک ضمیمه "
+"توسط %(editor)s به آن صفحه الصاق شده است.\n"
+"جزئیات بیشتر در مورد این ضمیمه به شرح ذیل است:\n"
+"\n"
+"نام ضمیمه: %(attach_name)s\n"
+"اندازه ضمیمه: %(attach_size)s\n"
+
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
+">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+msgstr ""
+" تاکیدها:: <<Verbatim(//)>>''مورب‌سازی''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''پررنگ'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''پررنگ "
+"مورب'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''پررنگ و مورب ''<<Verbatim(**)"
+">>'''''پررنگ'''<<Verbatim(**)>> و مورب''<<Verbatim(//)>>;\n"
+" خط افقی:: <<Verbatim(----)>>\n"
+" شکست خط اجباری:: <<Verbatim(\\\\)>>\n"
+" عناوین:: = عنوان ۱ =; == عنوان ۲ ==; === عنوان ۳ ===; ==== عنوان ۴ ====; "
+"===== عنوان ۵ =====.\n"
+" فهرستها:: * گلوله‌ها; ** گلوله‌های زیرین; # فهرستهای شماره‌دار; ## فهرستهای "
+"شماره‌دار زیرین آیتمها.\n"
+" لینکها:: <<Verbatim([[مقصد]])>>; <<Verbatim([[مقصد|متنی که باید لینک شود]])"
+">>.\n"
+" جدولها:: |= متن بالا | متن سلول | متن بیشتر در سلول |;\n"
+"\n"
+"(!) برای راهنمایی بیشتر HelpOnEditing و یا HelpOnCreoleSyntax را ببینید.\n"
+
+msgid "XSLT option disabled, please look at HelpOnConfiguration."
+msgstr "امکان XSLT غیرفعال است، لطفا HelpOnConfiguration را ببینید."
+
+msgid "XSLT processing is not available, please install 4suite 1.x."
+msgstr "پردازش XSLT قابل انجام نیست، لطفا بسته 4suite 1.x را نصب نمایید."
+
+#, python-format
+msgid "%(errortype)s processing error"
+msgstr "ایراد پردازش %(errortype)s"
+
+msgid ""
+" Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
+"italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed ''<<Verbatim(''')"
+">>'''''bold'''<<Verbatim(''')>> and italics''<<Verbatim('')>>; <<Verbatim"
+"(----)>> horizontal rule.\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
+"#n start numbering at n; space alone indents.\n"
+" Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])"
+">>.\n"
+" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
+"white space allowed after tables or titles.\n"
+"\n"
+"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+msgstr ""
+" تاکیدها:: <<Verbatim('')>>''مورب‌سازی''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''پررنگ'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''پررنگ "
+"مورب‌سازی'''''<<Verbatim(''''')>>; <<Verbatim('')>>''پررنگ و مورب ''<<Verbatim"
+"(''')>>'''''پررنگ'''<<Verbatim(''')>> و مورب''<<Verbatim('')>>; <<Verbatim"
+"(----)>> خط افقی.\n"
+" عناوین:: = عنوان ۱ =; == عنوان ۲ ==; === عنوان ۳ ===; ==== عنوان ۴ ====; "
+"===== عنوان ۵ =====.\n"
+" فهرستها:: یک فاصله در ابتدای خط و سپس یکی از کاراکترهای: * برای لیست "
+"گلوله‌ای و 1, a, A, i, I برای لیستهای عددی و آیتمی. \n"
+"#n شروع شماره‌گذاری از n; فاصله تنها تورفتگی ایجاد میکند.\n"
+" لینکها:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[مقصد|متنی که باید "
+"لینک شود]])>>.\n"
+" جدولها:: || متن درون سلول |||| متن بین دو ستون ||;    بدون دنباله فاصله پس "
+"از جدولها و یا عناوین مجاز است.\n"
+"\n"
+"(!) برای راهنمایی بیشتر HelpOnEditing و یا SyntaxReference را ببینید.\n"
+
+msgid ""
+"Rendering of reStructured text is not possible, please install Docutils."
+msgstr ""
+"آماده‌سازی صفحه با ساختار درخواستی شما ممکن نیست، لطفا Docutils را نصب نمایید."
+
+msgid ""
+"{{{\n"
+"Emphasis: *italic* **bold** ``monospace``\n"
+"\n"
+"Headings: Heading 1  Heading 2  Heading 3\n"
+"          =========  ---------  ~~~~~~~~~\n"
+"\n"
+"Horizontal rule: ----\n"
+"\n"
+"Links: TrailingUnderscore_ `multi word with backticks`_ external_\n"
+"\n"
+".. _external: http://external-site.example.org/foo/\n"
+"\n"
+"Lists: * bullets; 1., a. numbered items.\n"
+"}}}\n"
+"(!) For more help, see the\n"
+"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
+"reStructuredText Quick Reference]].\n"
+msgstr ""
+"{{{\n"
+"تاکیدها: *مورب* **پررنگ** ``تک‌فاصله``\n"
+"\n"
+"سرنویسها: سرنویس ۱  سرنویس ۲  سرنویس ۳\n"
+"          =========  ---------  ~~~~~~~~~\n"
+"\n"
+"خط افقی: ----\n"
+"\n"
+"لینکها: خط تیره پایین_ `چند کلمه با تیک پشتی`_ خارجی_\n"
+"\n"
+".. _خارجی: http://external-site.example.org/foo/\n"
+"\n"
+"فهرستها: * گلوله‌ها; 1., a. عنوانهای شماره‌دار.\n"
+"}}}\n"
+"(!) برای راهنمای بیشتر، \n"
+"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|مرجع سریع "
+"reStructuredText]] را ببینید.\n"
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr "**تعداد گنجاندن‌ها بیش از حد مجاز شده است**"
+
+#, python-format
+msgid "**You are not allowed to read the page: %s**"
+msgstr "**شما مجاز به خواندن صفحه %s نیستید**"
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr "**صفحه درخواستی یافت نشد: %s**"
+
+#, python-format
+msgid "Upload new attachment \"%(filename)s\""
+msgstr "ارسال ضمیمه جدید \"%(filename)s\""
+
+#, python-format
+msgid ""
+"%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
+"missing."
+msgstr ""
+"%(extension_name)s %(extension_type)s: آرگومان %(argument_name)s نیاز است. "
+
+#, python-format
+msgid ""
+"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s=%"
+"(argument_value)s!"
+msgstr ""
+"%(extension_name)s %(extension_type)s: آرگومان نامعتبر %(argument_name)s=%"
+"(argument_value)s!"
+
+#, python-format
+msgid ""
+"Current configuration does not allow embedding of the file %(file)s because "
+"of its mimetype %(mimetype)s."
+msgstr ""
+"تنظیمات جاری سرویس دهنده امکان جاسازی %(file)s را به شما نمیدهد، بدلیل اینکه "
+"شما میخواهید  فایلی از نوع %(mimetype)s را جاسازی نمایید."
+
+msgid "Embedded"
+msgstr "جاسازی شد"
+
+msgid "Search for items"
+msgstr "جستجو برای عناوین"
+
+msgid "containing all the following terms"
+msgstr "شامل کلیه این عبارات"
+
+msgid "containing one or more of the following terms"
+msgstr "شامل یک یا چند مورد از این عبارات"
+
+msgid "not containing the following terms"
+msgstr "شامل این عبارات نباشد"
+
+msgid "last modified since (e.g. last 2 weeks)"
+msgstr "آخرین بار ویرایش شده در (مثلا: ۲ هفته اخیر)"
+
+msgid "any category"
+msgstr "همه طبقه‌بندیها"
+
+msgid "any language"
+msgstr "همه زبانها"
+
+msgid "any mimetype"
+msgstr "همه انواع فایل"
+
+msgid "Categories"
+msgstr "طبقه‌بندیها"
+
+msgid "File Type"
+msgstr "انواع فایلها"
+
+msgid "Search only in titles"
+msgstr "جستجو در کلیه عناوین"
+
+msgid "Case-sensitive search"
+msgstr "جستجوی حساس به حروف بزرگ و کوچک"
+
+msgid "Exclude underlay"
+msgstr "نادیده گرفتن خط زیرین"
+
+msgid "No system items"
+msgstr "نایده گرفتن آیتمهای سیستمی"
+
+msgid "Search in all page revisions"
+msgstr "جستجو در همه نسخه‌ها"
+
+msgid "Go get it!"
+msgstr "برو بگیرش!"
+
+msgid "File attachment browser"
+msgstr "مرورگر فایلهای ضمیمه"
+
+msgid "User account browser"
+msgstr "مرورگر حسابهای کاربران"
+
+msgid "No orphaned pages in this wiki."
+msgstr "در این ویکی هیچ صفحه بی والد یافت نشد."
+
+#, python-format
+msgid "Invalid include arguments \"%s\"!"
+msgstr "عبارت \"%s\" غیر مجاز است!"
+
+#, python-format
+msgid "Nothing found for \"%s\"!"
+msgstr "برای \"%s\" چیزی یافت نشد!"
+
+msgid "Include system pages"
+msgstr "با در نظر گرفتن صفحات سیستمی"
+
+msgid "Exclude system pages"
+msgstr "بدون در نظر گرفتن صفحات سیستمی"
+
+msgid "No wanted pages in this wiki."
+msgstr "در این ویکی صفحه‌ای مورد درخواست نیست."
+
+msgid "Python Version"
+msgstr "نسخه python"
+
+msgid "MoinMoin Version"
+msgstr "نسخه MoinMoin"
+
+#, python-format
+msgid "Release %s [Revision %s]"
+msgstr "انتشار %s [Revision %s]"
+
+msgid "4Suite Version"
+msgstr "4Suite Version"
+
+msgid "Number of pages"
+msgstr "تعداد صفحات"
+
+msgid "Number of system pages"
+msgstr "تعداد صفحات سیستمی"
+
+msgid "Accumulated page sizes"
+msgstr "حجم صفحات جمع شده"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr "فضای اشغال شده روی دیسک توسط صفحات %(data_dir)s/"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/"
+msgstr "فضای اشغال شده روی دیسک توسط %(data_dir)s/"
+
+msgid "Entries in edit log"
+msgstr "محتویات گزارشات ویرایشهای صورت گرفته"
+
+msgid "NONE"
+msgstr "هیچ یک"
+
+msgid "Global extension macros"
+msgstr "ماکروهای تکمیلی عمومی"
+
+msgid "Local extension macros"
+msgstr "ماکروهای تکمیلی محلی"
+
+msgid "Global extension actions"
+msgstr "عملیاتهای تکمیلی عمومی"
+
+msgid "Local extension actions"
+msgstr "عملیاتهای تکمیلی محلی"
+
+msgid "Global parsers"
+msgstr "تجزیه کننده‌های عمومی"
+
+msgid "Local extension parsers"
+msgstr "تجزیه کننده‌های محلی"
+
+msgid "Disabled"
+msgstr "غیرفعال"
+
+msgid "Enabled"
+msgstr "فعال"
+
+msgid "index available"
+msgstr "فهرست در دسترس است"
+
+msgid "index unavailable"
+msgstr "فهرست در دسترس نیست"
+
+msgid "Xapian and/or Python Xapian bindings not installed"
+msgstr "Xapian و یا Python Xapian نصب نیستند"
+
+msgid "Xapian search"
+msgstr "جستجوی Xapian"
+
+msgid "Stemming for Xapian"
+msgstr "دنباله جستجوی Xapian"
+
+msgid "Active threads"
+msgstr "مباحث فعال"
+
+msgid "Wiki configuration"
+msgstr "پیکربندی ویکی"
+
+msgid ""
+"This table shows all settings in this wiki that do not have default values. "
+"Settings that the configuration system doesn't know about are shown in "
+"''italic'', those may be due to third-party extensions needing configuration "
+"or settings that were removed from Moin."
+msgstr ""
+
+msgid "Variable name"
+msgstr "نام متغیر"
+
+msgid "Setting"
+msgstr "تنظیمات"
+
+#, python-format
+msgid "No quotes on %(pagename)s."
+msgstr "برای صفحه %(pagename)s نظری وجود ندارد."
+
+msgid "Markup"
+msgstr "زبان نگارش"
+
+msgid "Display"
+msgstr "نمایش"
+
+#, python-format
+msgid "Unsupported navigation scheme '%(scheme)s'!"
+msgstr "طرح ناوش '%(scheme)s' پشتیبانی نشده است!"
+
+msgid "No parent page found!"
+msgstr "صفحه والد بالاتر یافت نشد!"
+
+msgid "Wiki"
+msgstr "ویکی"
+
+msgid "Slideshow"
+msgstr "نمایش اسلاید گونه"
+
+msgid "Start"
+msgstr "شروع"
+
+#, python-format
+msgid "Slide %(pos)d of %(size)d"
+msgstr "اسلاید %(pos)d با حجم %(size)d"
+
+msgid "Go To Page"
+msgstr "برو به صفحه"
+
+msgid "Description"
+msgstr "توضیحات"
+
+msgid "Contents"
+msgstr "فهرست"
+
+msgid "Search Titles"
+msgstr "جستجو در عناوین"
+
+msgid "Display context of search results"
+msgstr "نتایج جستجو را نشان بده"
+
+msgid "Case-sensitive searching"
+msgstr "جستجوی حساس به حروف بزرگ و کوچک"
+
+msgid "Search Text"
+msgstr "جستجو در متون"
+
+#, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "ارسال ضمیمه '%(filename)s'"
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "ترسیم '%(filename)s' ذخیره شد."
+
+#, python-format
+msgid "%(mins)dm ago"
+msgstr "%(mins)dm دقیقه پیش"
+
+msgid "(no bookmark set)"
+msgstr "(بدون چوب‌الفها)"
+
+#, python-format
+msgid "(currently set to %s)"
+msgstr "(در حال حاضر تنظیم شده روی %s)"
+
+msgid "Delete bookmark"
+msgstr "حذف چوب‌الفها"
+
+msgid "Set bookmark"
+msgstr "چوب‌الفها بگذار"
+
+msgid "[Bookmark reached]"
+msgstr "[به چوب‌الفها رسید]"
+
+#, python-format
+msgid "Inlined image: %(url)s"
+msgstr "تصویر توکار: %(url)s"
+
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "ترسیم جدید \"%(filename)s\" را بساز (در پنجره جدید باز میشود)\""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "ویرایش ترسیم %(filename)s (در پنجره جدید باز میشود)\""
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "ترسیم قابل کلیک: %(filename)s"
+
+msgid "Toggle line numbers"
+msgstr "شماره خطوط"
+
+msgid "[ATTACH]"
+msgstr "[ضمیمه]"
 
 msgid "[RSS]"
 msgstr "[خوراک]"
@@ -2464,6 +2873,12 @@ msgstr "جهت جستجوی کامل این موضوع در سایت کلیک ن
 
 msgid "Logout"
 msgstr "خروج"
+
+msgid "Unsubscribe"
+msgstr "لغو عضویت"
+
+msgid "Home"
+msgstr "صفحه خانگی"
 
 msgid "Clear message"
 msgstr "پیغام حذف شود"
@@ -2561,6 +2976,12 @@ msgstr "نمایش %s روز"
 msgid "Wiki Markup"
 msgstr "زبان نوشتاری ویکی"
 
+msgid "Page"
+msgstr "صفحه"
+
+msgid "User"
+msgstr "کاربر"
+
 msgid "DeleteCache"
 msgstr "حذف حافظه جانبی"
 
@@ -2570,301 +2991,6 @@ msgstr "(در حافظه ذخیره شد %s)"
 
 msgid "Or try one of these actions:"
 msgstr "و یا یکی از امکانات زیر را انتخاب نمایید:"
-
-msgid "Wiki"
-msgstr "ویکی"
-
-msgid "Page"
-msgstr "صفحه"
-
-msgid "User"
-msgstr "کاربر"
-
-msgid "[ATTACH]"
-msgstr "[ضمیمه]"
-
-msgid "Variable name"
-msgstr "نام متغیر"
-
-msgid "Description"
-msgstr "توضیحات"
-
-#, python-format
-msgid "Upload new attachment \"%(filename)s\""
-msgstr "ارسال ضمیمه جدید \"%(filename)s\""
-
-#, python-format
-msgid ""
-"%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
-"missing."
-msgstr ""
-"%(extension_name)s %(extension_type)s: آرگومان %(argument_name)s نیاز است. "
-
-#, python-format
-msgid ""
-"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s=%"
-"(argument_value)s!"
-msgstr ""
-"%(extension_name)s %(extension_type)s: آرگومان نامعتبر %(argument_name)s=%"
-"(argument_value)s!"
-
-#, python-format
-msgid ""
-"Current configuration does not allow embedding of the file %(file)s because "
-"of its mimetype %(mimetype)s."
-msgstr ""
-"تنظیمات جاری سرویس دهنده امکان جاسازی %(file)s را به شما نمیدهد، بدلیل اینکه "
-"شما میخواهید  فایلی از نوع %(mimetype)s را جاسازی نمایید."
-
-msgid "Embedded"
-msgstr "جاسازی شد"
-
-msgid "Include system pages"
-msgstr "با در نظر گرفتن صفحات سیستمی"
-
-msgid "Exclude system pages"
-msgstr "بدون در نظر گرفتن صفحات سیستمی"
-
-msgid "Go To Page"
-msgstr "برو به صفحه"
-
-msgid "Markup"
-msgstr "زبان نگارش"
-
-msgid "Display"
-msgstr "نمایش"
-
-msgid "Wiki configuration"
-msgstr "پیکربندی ویکی"
-
-msgid ""
-"This table shows all settings in this wiki that do not have default values. "
-"Settings that the configuration system doesn't know about are shown in "
-"''italic'', those may be due to third-party extensions needing configuration "
-"or settings that were removed from Moin."
-msgstr ""
-
-msgid "Setting"
-msgstr "تنظیمات"
-
-msgid "Search for items"
-msgstr "جستجو برای عناوین"
-
-msgid "containing all the following terms"
-msgstr "شامل کلیه این عبارات"
-
-msgid "containing one or more of the following terms"
-msgstr "شامل یک یا چند مورد از این عبارات"
-
-msgid "not containing the following terms"
-msgstr "شامل این عبارات نباشد"
-
-msgid "last modified since (e.g. last 2 weeks)"
-msgstr "آخرین بار ویرایش شده در (مثلا: ۲ هفته اخیر)"
-
-msgid "any category"
-msgstr "همه طبقه‌بندیها"
-
-msgid "any language"
-msgstr "همه زبانها"
-
-msgid "any mimetype"
-msgstr "همه انواع فایل"
-
-msgid "Categories"
-msgstr "طبقه‌بندیها"
-
-msgid "File Type"
-msgstr "انواع فایلها"
-
-msgid "Search only in titles"
-msgstr "جستجو در کلیه عناوین"
-
-msgid "Case-sensitive search"
-msgstr "جستجوی حساس به حروف بزرگ و کوچک"
-
-msgid "Exclude underlay"
-msgstr "نادیده گرفتن خط زیرین"
-
-msgid "No system items"
-msgstr "نایده گرفتن آیتمهای سیستمی"
-
-msgid "Search in all page revisions"
-msgstr "جستجو در همه نسخه‌ها"
-
-msgid "Go get it!"
-msgstr "برو بگیرش!"
-
-msgid "File attachment browser"
-msgstr "مرورگر فایلهای ضمیمه"
-
-msgid "User account browser"
-msgstr "مرورگر حسابهای کاربران"
-
-msgid "No wanted pages in this wiki."
-msgstr "در این ویکی صفحه‌ای مورد درخواست نیست."
-
-#, python-format
-msgid "Unsupported navigation scheme '%(scheme)s'!"
-msgstr "طرح ناوش '%(scheme)s' پشتیبانی نشده است!"
-
-msgid "No parent page found!"
-msgstr "صفحه والد بالاتر یافت نشد!"
-
-msgid "Slideshow"
-msgstr "نمایش اسلاید گونه"
-
-msgid "Start"
-msgstr "شروع"
-
-#, python-format
-msgid "Slide %(pos)d of %(size)d"
-msgstr "اسلاید %(pos)d با حجم %(size)d"
-
-msgid "Contents"
-msgstr "فهرست"
-
-msgid "Search Titles"
-msgstr "جستجو در عناوین"
-
-msgid "Display context of search results"
-msgstr "نتایج جستجو را نشان بده"
-
-msgid "Case-sensitive searching"
-msgstr "جستجوی حساس به حروف بزرگ و کوچک"
-
-msgid "Search Text"
-msgstr "جستجو در متون"
-
-#, python-format
-msgid "No quotes on %(pagename)s."
-msgstr "برای صفحه %(pagename)s نظری وجود ندارد."
-
-msgid "Python Version"
-msgstr "نسخه python"
-
-msgid "MoinMoin Version"
-msgstr "نسخه MoinMoin"
-
-#, python-format
-msgid "Release %s [Revision %s]"
-msgstr "انتشار %s [Revision %s]"
-
-msgid "4Suite Version"
-msgstr "4Suite Version"
-
-msgid "Number of pages"
-msgstr "تعداد صفحات"
-
-msgid "Number of system pages"
-msgstr "تعداد صفحات سیستمی"
-
-msgid "Accumulated page sizes"
-msgstr "حجم صفحات جمع شده"
-
-#, python-format
-msgid "Disk usage of %(data_dir)s/pages/"
-msgstr "فضای اشغال شده روی دیسک توسط صفحات %(data_dir)s/"
-
-#, python-format
-msgid "Disk usage of %(data_dir)s/"
-msgstr "فضای اشغال شده روی دیسک توسط %(data_dir)s/"
-
-msgid "Entries in edit log"
-msgstr "محتویات گزارشات ویرایشهای صورت گرفته"
-
-msgid "NONE"
-msgstr "هیچ یک"
-
-msgid "Global extension macros"
-msgstr "ماکروهای تکمیلی عمومی"
-
-msgid "Local extension macros"
-msgstr "ماکروهای تکمیلی محلی"
-
-msgid "Global extension actions"
-msgstr "عملیاتهای تکمیلی عمومی"
-
-msgid "Local extension actions"
-msgstr "عملیاتهای تکمیلی محلی"
-
-msgid "Global parsers"
-msgstr "تجزیه کننده‌های عمومی"
-
-msgid "Local extension parsers"
-msgstr "تجزیه کننده‌های محلی"
-
-msgid "Disabled"
-msgstr "غیرفعال"
-
-msgid "Enabled"
-msgstr "فعال"
-
-msgid "index available"
-msgstr "فهرست در دسترس است"
-
-msgid "index unavailable"
-msgstr "فهرست در دسترس نیست"
-
-msgid "Xapian and/or Python Xapian bindings not installed"
-msgstr "Xapian و یا Python Xapian نصب نیستند"
-
-msgid "Xapian search"
-msgstr "جستجوی Xapian"
-
-msgid "Stemming for Xapian"
-msgstr "دنباله جستجوی Xapian"
-
-msgid "Active threads"
-msgstr "مباحث فعال"
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "ارسال ضمیمه '%(filename)s'"
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "ترسیم '%(filename)s' ذخیره شد."
-
-#, python-format
-msgid "%(mins)dm ago"
-msgstr "%(mins)dm دقیقه پیش"
-
-msgid "(no bookmark set)"
-msgstr "(بدون چوب‌الفها)"
-
-#, python-format
-msgid "(currently set to %s)"
-msgstr "(در حال حاضر تنظیم شده روی %s)"
-
-msgid "Delete bookmark"
-msgstr "حذف چوب‌الفها"
-
-msgid "Set bookmark"
-msgstr "چوب‌الفها بگذار"
-
-msgid "[Bookmark reached]"
-msgstr "[به چوب‌الفها رسید]"
-
-#, python-format
-msgid "Invalid include arguments \"%s\"!"
-msgstr "عبارت \"%s\" غیر مجاز است!"
-
-#, python-format
-msgid "Nothing found for \"%s\"!"
-msgstr "برای \"%s\" چیزی یافت نشد!"
-
-msgid "No orphaned pages in this wiki."
-msgstr "در این ویکی هیچ صفحه بی والد یافت نشد."
-
-msgid "From"
-msgstr "از"
-
-msgid "To"
-msgstr "به"
-
-msgid "Content"
-msgstr "محتوا"
 
 #, python-format
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
@@ -2876,122 +3002,14 @@ msgstr "پیغام شما ارسال نشد"
 msgid "Mail sent OK"
 msgstr "پیغام با موفقیت ارسال شد"
 
-msgid "[all]"
-msgstr "[همه]"
+msgid "From"
+msgstr "از"
 
-msgid "[not empty]"
-msgstr "[غیر خالی]"
+msgid "To"
+msgstr "به"
 
-msgid "[empty]"
-msgstr "[خالی]"
-
-msgid "filter"
-msgstr "فیلتر"
-
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "عملیات ناشناخته %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "شما مجاز به انجام عملیات %(action_name)s روی این صفحه نیستید."
-
-msgid "Login and try again."
-msgstr "وارد سایت شده و مجددا سعی نمایید."
-
-msgid "FrontPage"
-msgstr "صفحه اولیه"
-
-msgid "RecentChanges"
-msgstr "آخرین تغییرات"
-
-msgid "TitleIndex"
-msgstr "فهرست موضوعات"
-
-msgid "WordIndex"
-msgstr "فهرست لغات"
-
-msgid "FindPage"
-msgstr "جستجوی صفحه"
-
-msgid "SiteNavigation"
-msgstr "پیمایش سایت"
-
-msgid "HelpContents"
-msgstr "عناوین راهنما"
-
-msgid "HelpOnFormatting"
-msgstr "راهنمای فرمت‌ها"
-
-msgid "WikiLicense"
-msgstr "اجازه‌نامه ویکی"
-
-msgid "MissingPage"
-msgstr "صفحه گم شده"
-
-msgid "MissingHomePage"
-msgstr "صفحه خانگی یافت نشد"
-
-msgid "Mon"
-msgstr "دوشنبه"
-
-msgid "Tue"
-msgstr "سه شنبه"
-
-msgid "Wed"
-msgstr "چهارشنبه"
-
-msgid "Thu"
-msgstr "پنج شنبه"
-
-msgid "Fri"
-msgstr "جمعه"
-
-msgid "Sat"
-msgstr "شنبه"
-
-msgid "Sun"
-msgstr "یکشنبه"
-
-msgid "AttachFile"
-msgstr "انضمام فایل"
-
-msgid "DeletePage"
-msgstr "حذف صفحه"
-
-msgid "LikePages"
-msgstr "شبیه صفحات"
-
-msgid "LocalSiteMap"
-msgstr "نقشه سایت"
-
-msgid "RenamePage"
-msgstr "تغییرنام صفحه"
-
-msgid "SpellCheck"
-msgstr "تصحیح املایی"
-
-msgid "Discussion"
-msgstr "بحث"
-
-#, python-format
-msgid "Inlined image: %(url)s"
-msgstr "تصویر توکار: %(url)s"
-
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "ترسیم جدید \"%(filename)s\" را بساز (در پنجره جدید باز میشود)\""
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "ویرایش ترسیم %(filename)s (در پنجره جدید باز میشود)\""
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "ترسیم قابل کلیک: %(filename)s"
-
-msgid "Toggle line numbers"
-msgstr "شماره خطوط"
+msgid "Content"
+msgstr "محتوا"
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
