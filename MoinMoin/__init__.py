@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-MoinMoin Version 1.8.0beta
+MoinMoin Version 1.9.0
 
 @copyright: 2000-2006 by Juergen Hermann <jh@web.de>,
             2002-2008 MoinMoin:ThomasWaldmann
