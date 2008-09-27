@@ -179,7 +179,7 @@ function show_switch2gui() {
 comments = null;
 
 function toggleComments() {
-    // Toggle visibility of every tag with class == *comment*
+    // Toggle visibility of every tag with class "comment"
     for (i = 0; i < comments.length; i++){
         el = comments[i];
         if ( el.style.display != 'none' ) {
@@ -294,6 +294,7 @@ function dbw_update_search(dbw_id)
 function dbw_hide_buttons() {
     var form;
     var elem;
+    var name;
 
     for (var fidx = 0; fidx < document.forms.length; fidx++) {
         form = document.forms[fidx];
