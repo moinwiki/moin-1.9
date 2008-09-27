@@ -120,12 +120,12 @@ def execute(pagename, request):
 
     # Revision list starts from 2...
     if oldrev == min(revlist):
-        disable_prev = u' disabled="true"'
+        disable_prev = u' disabled="disabled"'
     else:
         disable_prev = u''
 
     if newrev == max(revlist):
-        disable_next = u' disabled="true"'
+        disable_next = u' disabled="disabled"'
     else:
         disable_next = u''
 
@@ -135,13 +135,13 @@ def execute(pagename, request):
     if request.user.may.revert(pagename):
         revert_html = """
  <td style="border:0">
-  <span style="text-align:center">
-   <form action="%s" method="get">
+  <form action="%s" method="get">
+   <div style="text-align:center">
     <input name="action" value="revert" type="hidden">
     <input name="rev" value="%d" type="hidden">
     <input value="%s" type="submit"%s>
-   </form>
-  </span>
+   </div>
+  </form>
  </td>
  """ % (page_url, rev2, _("Revert to this revision"), disable_next)
 
@@ -150,25 +150,25 @@ def execute(pagename, request):
 <table class="diff">
 <tr>
  <td style="border:0">
-  <span style="text-align:left">
-   <form action="%s" method="get">
+  <form action="%s" method="get">
+   <div style="text-align:left">
     <input name="action" value="diff" type="hidden">
     <input name="rev1" value="%d" type="hidden">
     <input name="rev2" value="%d" type="hidden">
     <input value="%s" type="submit"%s>
-   </form>
-  </span>
+   </div>
+  </form>
  </td>
  %s
  <td style="border:0">
-  <span style="text-align:right">
-   <form action="%s" method="get">
+  <form action="%s" method="get">
+   <div style="text-align:right">
     <input name="action" value="diff" type="hidden">
     <input name="rev1" value="%d" type="hidden">
     <input name="rev2" value="%d" type="hidden">
     <input value="%s" type="submit"%s>
-   </form>
-  </span>
+   </div>
+  </form>
  </td>
 </tr>
 </table>
