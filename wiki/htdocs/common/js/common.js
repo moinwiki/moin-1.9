@@ -191,13 +191,13 @@ function toggleComments() {
 }
 
 function show_toggleComments() {
-    // Show edit bar item "ToggleComments" if inline comments exist on this page
+    // Show edit bar item for toggling inline comments on/off only if inline comments exist on the page
     comments = getElementsByClassName('comment', null, document);
     if (comments.length > 0) {
         var buttons = getElementsByClassName('toggleCommentsButton', null, document);
         for (i = 0; i < buttons.length; i++){
             el = buttons[i];
-            el.style.display = 'inline';
+            el.style.display = '';
         }
     }
 }
