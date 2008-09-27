@@ -1,4 +1,4 @@
-        //
+//
 // MoinMoin commonly used JavaScript functions
 //
 
@@ -67,16 +67,16 @@ function actionsMenuInit(title) {
 
 // use this instead of assigning to window.onload directly:
 function addLoadEvent(func) {
-  // alert("addLoadEvent " + func)
-  var oldonload = window.onload;
-  if (typeof window.onload != 'function') {
-    window.onload = func;
-  } else {
-    window.onload = function() {
-      oldonload();
-      func();
+    // alert("addLoadEvent " + func)
+    var oldonload = window.onload;
+    if (typeof window.onload != 'function') {
+        window.onload = func;
+    } else {
+        window.onload = function() {
+            oldonload();
+            func();
+        }
     }
-  }
 }
 
 // copy from fckeditor browser check code (fckeditor.js:298, function : FCKeditor_IsCompatibleBrowser)
