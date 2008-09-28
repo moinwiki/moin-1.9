@@ -574,7 +574,9 @@ msgstr "Passwort hat nicht genug unterschiedliche Buchstaben."
 
 msgid ""
 "Password is too easy (password contains name or name contains password)."
-msgstr "Passwort ist zu einfach (das Passwort enthält den Namen oder der Name enthält das Passwort)."
+msgstr ""
+"Passwort ist zu einfach (das Passwort enthält den Namen oder der Name "
+"enthält das Passwort)."
 
 msgid "Password is too easy (keyboard sequence)."
 msgstr "Passwort ist zu einfach (Tastatur-Sequenz)."

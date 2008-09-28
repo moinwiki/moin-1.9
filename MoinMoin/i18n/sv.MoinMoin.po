@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-09-25 18:31+0200\n"
-"PO-Revision-Date: 2008-09-13 11:05+0200\n"
+"PO-Revision-Date: 2008-09-25 20:00+0200\n"
 "Last-Translator: thomas@marquart.se\n"
 "Language-Team: Swedish <moin-user@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -554,20 +554,19 @@ msgstr "StavningsKontroll"
 msgid "Discussion"
 msgstr "Diskussion"
 
-#, fuzzy
 msgid "Password is too short."
-msgstr "Återställ lösenord"
+msgstr "Lösenordet är för kort."
 
 msgid "Password has not enough different characters."
-msgstr ""
+msgstr "Lösenordet har inte tillräckligt många olika tecken."
 
-#, fuzzy
 msgid ""
 "Password is too easy (password contains name or name contains password)."
-msgstr "Lösenord saknas. Var god ange användarnamn och lösenord."
+msgstr ""
+"Lösenordet är för enkelt (lösenordet innehåller namnet eller tvärtom)."
 
 msgid "Password is too easy (keyboard sequence)."
-msgstr ""
+msgstr "Lösenordet är för enkelt (tangentbordssekvens)."
 
 msgid "Diffs"
 msgstr "Skillnader"
@@ -3131,9 +3130,8 @@ msgstr "Innehåll"
 #~ msgid "File attachments are not allowed in this wiki!"
 #~ msgstr "Bilagor är inte tillåtna i den här wikin!"
 
-#, fuzzy
 #~ msgid "SendMyPassword"
-#~ msgstr "Lösenord"
+#~ msgstr "SkickaMittLösenord"
 
 #~ msgid "Use UserPreferences to change your settings or create an account."
 #~ msgstr ""
