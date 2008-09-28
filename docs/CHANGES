@@ -32,7 +32,7 @@ Known main issues:
     editor_default = 'text'  # internal default, just for completeness
 
 
-Version 1.8current:
+Version 1.8.0beta3:
   Bug Fixes:
     * Jabber bot can now be configured to use an authentication realm which
       is different from the server's hostname; the xmpp_node configuration
