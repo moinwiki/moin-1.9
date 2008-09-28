@@ -32,12 +32,23 @@ Known main issues:
     editor_default = 'text'  # internal default, just for completeness
 
 
-Current:
+Version 1.8current:
   Bug Fixes:
     * Jabber bot can now be configured to use an authentication realm which
       is different from the server's hostname; the xmpp_node configuration
       parameter can now contain a full JID and the xmpp_resource parameter
-      is no longer supported
+      is no longer supported.
+    * Added translation to the password checker result messages.
+    * Bug fix for language not installed (MoinMoinBugs/WikiLanguageNotDefined).
+    * diff action: make output valid html 4.01
+    * Fixed editbar hidden comment link cosmetics for sidebar themes (hide the
+      complete list element).
+    * Standalone server: fix serverClass argument processing, announce used
+      serverClass in log output.
+
+  Other changes:
+    * Speed up javascript comments processing on IE by getElementsByClassName()
+
 
 Version 1.8.0beta2:
   Bug Fixes:
