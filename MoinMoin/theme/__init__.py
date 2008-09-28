@@ -1103,7 +1103,7 @@ actionsMenuInit('%(label)s');
                     if 'nbcomment' in item:
                         # hiding the complete list item is cosmetically better than just
                         # hiding the contents (e.g. for sidebar themes).
-                        items.append('<li class="toggleCommentsButton" style="display:none;">%s</li>' % item) 
+                        items.append('<li class="toggleCommentsButton" style="display:none;">%s</li>' % item)
                     else:
                         items.append('<li>%s</li>' % item)
             html = u'<ul class="editbar">%s</ul>\n' % ''.join(items)
