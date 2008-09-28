@@ -295,14 +295,17 @@ function dbw_update_search(dbw_id)
 function dbw_hide_buttons() {
     var form;
     var elem;
+    var name;
 
     for (var fidx = 0; fidx < document.forms.length; fidx++) {
         form = document.forms[fidx];
         for (var eidx = 0; eidx < form.elements.length; eidx++) {
             elem = form.elements[eidx];
             name = elem.name;
-            if (name.substr(0,4) == 'dbw.' && name.substr(-7) == '.submit')
-                elem.style.display = 'none';
+            if (name) {
+                if (name.substr(0,4) == 'dbw.' && name.substr(-7) == '.submit')
+                    elem.style.display = 'none';
+            }
         }
     }
 }
