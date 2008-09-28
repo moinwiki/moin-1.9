@@ -67,9 +67,8 @@ class PluginScript(MoinScript):
         if self.args:
             self.parser.error("incorrect number of arguments")
 
-        thread_choices = ["ThreadPool", "Threading", "Forking", "Simple"]
-        serverClass = "ThreadPool"
         if self.options.serverClass:
+            thread_choices = ["ThreadPool", "Threading", "Forking", "Simple"]
             thread_choices2 = [x.upper() for x in thread_choices]
             thread_choice = self.options.serverClass.upper()
             try:
@@ -77,6 +76,8 @@ class PluginScript(MoinScript):
             except ValueError:
                 self.parser.error("invalid serverClass type")
             serverClass = thread_choices[serverClass_index]
+        else:
+            serverClass = None
 
         pidfile = "moin.pid"
         if self.options.pidfile:
@@ -116,7 +117,8 @@ class PluginScript(MoinScript):
                 Config.port = self.options.port
             if self.options.interface:
                 Config.interface = self.options.interface
-            Config.serverClass = serverClass + 'Server'
+            if serverClass:
+                Config.serverClass = serverClass + 'Server'
             if self.options.threadLimit:
                 Config.threadLimit = self.options.threadLimit
             if self.options.requestQueueSize:

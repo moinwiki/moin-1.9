@@ -67,7 +67,9 @@ class SimpleServer(BaseHTTPServer.HTTPServer):
 
     def server_activate(self):
         BaseHTTPServer.HTTPServer.server_activate(self)
-        logging.info("Serving on %s:%d" % self.server_address)
+        logging.info("%s serving on %s:%d" % (self.__class__.__name__,
+                                              self.server_address[0],
+                                              self.server_address[1]))
 
     def serve_forever(self):
         """Handle one request at a time until we die """
