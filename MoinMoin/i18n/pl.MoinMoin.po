@@ -11,12 +11,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.6\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: 1.8\n"
+"Report-Msgid-Bugs-To: Sergiusz Pawłowicz <moin@pawlowicz.name>\n"
 "POT-Creation-Date: 2008-09-25 18:31+0200\n"
 "PO-Revision-Date: 2006-02-09 11:25+0100\n"
-"Last-Translator: Radomir Dopieralski <mondev@sheep.art.pl>\n"
-"Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
+"Last-Translator: Sergiusz Pawłowicz <moin@pawlowicz.name>\n"
+"Language-Team: Polish <moin@pawlowicz.name>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -557,20 +557,18 @@ msgstr "SprawdźPisownię"
 msgid "Discussion"
 msgstr "Dyskusja"
 
-#, fuzzy
 msgid "Password is too short."
-msgstr "Ustaw hasło"
+msgstr "Hasło jest zbyt krótkie."
 
 msgid "Password has not enough different characters."
-msgstr ""
+msgstr "Hasło nie ma wystarczająco wiele różnych znaków."
 
-#, fuzzy
 msgid ""
 "Password is too easy (password contains name or name contains password)."
-msgstr "Brak hasła. Podaj identyfikator i hasło."
+msgstr "Asło jest zbyt łatwe (hasło zawiera nazwę użytkownika albo odwrotnie)."
 
 msgid "Password is too easy (keyboard sequence)."
-msgstr ""
+msgstr "Hasło jest zbyt łatwe (sekwencja klawiatury)."
 
 msgid "Diffs"
 msgstr "Różnice"
@@ -861,16 +859,14 @@ msgstr "Usuń wskazane"
 msgid "Add OpenID"
 msgstr "Dodaj OpenID"
 
-#, fuzzy
 msgid "OpenID server"
-msgstr "OpenID nie jest serwowany"
+msgstr "Serwer OpenID"
 
-#, fuzzy
 msgid "The selected websites have been removed."
-msgstr "Wskazane OpenID zostały usunięte."
+msgstr "Wskazane strony internetowe zostały usunięte."
 
 msgid "Trusted websites"
-msgstr ""
+msgstr "Zaufane strony internetowe"
 
 msgid "Preferences"
 msgstr "PreferencjeCzytelnika"
@@ -1293,9 +1289,8 @@ msgstr "Opcjonalna przyczyna odtworzenia tej strony"
 msgid "Really revert this page?"
 msgstr "Czy na pewno odtworzyć niniejszą stronę?"
 
-#, fuzzy
 msgid "Wiki Backup"
-msgstr "Język oznaczeń wiki"
+msgstr "Kopia zapasowa wiki."
 
 msgid ""
 "= Downloading a backup =\n"
@@ -1347,9 +1342,8 @@ msgstr "Załącznik '%(target)s' (nazwa zdalna '%(filename)s') już istnieje."
 msgid "Created the package %s containing the pages %s."
 msgstr "Utworzono pakiet %s zawierający strony %s."
 
-#, fuzzy
 msgid "Include all attachments?"
-msgstr "[%d załączników]"
+msgstr "Zawrzeć wszystkie załączniki?"
 
 msgid "Package pages"
 msgstr "Spakuj strony"
@@ -1655,36 +1649,38 @@ msgstr "Nie możesz rozpakowywać załączników tej strony."
 msgid "The file %(filename)s is not a .zip file."
 msgstr "Plik %(filename)s nie jest typu .zip."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because some files in the zip are "
 "either not in the same directory or exceeded the single file size limit (%"
 "(maxsize_file)d kB)."
 msgstr ""
 "Nie rozpakowano załącznika '%(filename)s', ponieważ pliki są zbyt duże, "
-"tylko typu .zip, już istnieją, albo znajdują się w podkatalogach."
+"przekraczają limit wielkości pojedycznego pliku (%(maxsize_file)d kB) "
+"albo też znajdują się w podkatalogach."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because it would have exceeded the "
 "per page attachment storage size limit (%(size)d kB)."
 msgstr ""
-"Załącznik '%(filename)s' nie mógł zostać rozpakowany, ponieważ powstałe "
-"pliki byłyby zbyt duże (zabrakło %(space)d kB)."
+"Załącznik '%(filename)s' nie mógł zostać rozpakowany, ponieważ przekroczony "
+"zostałby limit objętości załączników na stronie (%s(size)d kB)."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because it would have exceeded the "
 "per page attachment count limit (%(count)d)."
 msgstr ""
-"Załącznik '%(filename)s' nie mógł zostać rozpakowany, ponieważ powstałoby "
-"zbyt wiele plików (zabrakło %(count)d)."
+"Załącznik '%(filename)s' nie mógł zostać rozpakowany, ponieważ przekroczony "
+"zostałby limit największej ilości plików na stronie (%(count)d)."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(filename)s' partially unzipped (did not overwrite: %(filelist)"
 "s)."
-msgstr "Załącznik '%(filename)s' rozpakowano."
+msgstr "Załącznik '%(filename)s' rozpakowano częściowo (nie zamazano: %(filelist)"
+"s)."
 
 #, python-format
 msgid "Attachment '%(filename)s' unzipped."
@@ -2371,7 +2367,7 @@ msgstr ""
 msgid "New user account created on %(sitename)s"
 msgstr "Nowe konto czytelnika utworzone na %(sitename)s"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear Superuser, a new user has just been created on %(sitename)s\". Details "
 "follow:\n"
@@ -2379,7 +2375,8 @@ msgid ""
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
 msgstr ""
-"Drogi nadczytelniku, zostało właśnie utworzone nowe konto czytelnika.\n"
+"Drogi nadczytelniku, zostało właśnie utworzone nowe konto czytelnika "
+"na stronie %(sitename)s\". Oto szczegóły:\n"
 "\n"
 "    Identyfikator: %(username)s\n"
 "    Adres e-mail: %(useremail)s"
@@ -2718,7 +2715,7 @@ msgid "Active threads"
 msgstr "Aktywne wątki"
 
 msgid "Wiki configuration"
-msgstr ""
+msgstr "Konfiguracja wiki"
 
 msgid ""
 "This table shows all settings in this wiki that do not have default values. "
@@ -2727,13 +2724,11 @@ msgid ""
 "or settings that were removed from Moin."
 msgstr ""
 
-#, fuzzy
 msgid "Variable name"
-msgstr "Nazwa pliku"
+msgstr "Nazwa zmiennej"
 
-#, fuzzy
 msgid "Setting"
-msgstr "Ustawienia"
+msgstr "Ustawienie"
 
 #, python-format
 msgid "No quotes on %(pagename)s."
@@ -2769,7 +2764,7 @@ msgid "Go To Page"
 msgstr "Idź do strony"
 
 msgid "Description"
-msgstr ""
+msgstr "Opis"
 
 msgid "Contents"
 msgstr "PomocSpisTreści"
@@ -2834,7 +2829,7 @@ msgid "Toggle line numbers"
 msgstr "Ustaw numery linii"
 
 msgid "[ATTACH]"
-msgstr ""
+msgstr "[ZAŁĄCZ]"
 
 msgid "[RSS]"
 msgstr "[RSS]"

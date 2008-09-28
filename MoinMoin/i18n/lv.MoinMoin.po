@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-25 18:31+0200\n"
+"POT-Creation-Date: 2008-09-25 15:31+1200\n"
 "PO-Revision-Date: 2008-05-10 22:31+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000 AT AT AT AT gmail SPAM NO NO DOT "
 "NO SPAM com>\n"
@@ -567,20 +567,18 @@ msgstr "Pareizrakstība"
 msgid "Discussion"
 msgstr "Diskusija"
 
-#, fuzzy
 msgid "Password is too short."
-msgstr "Paroles atstatījums"
+msgstr "Parole ir pārāk īsa."
 
 msgid "Password has not enough different characters."
-msgstr ""
+msgstr "Parolē ir parmaz atšķirīgu zīmju."
 
-#, fuzzy
 msgid ""
 "Password is too easy (password contains name or name contains password)."
-msgstr "Trūkst paroles. Lūdzu, ievadiet vārdu un paroli."
+msgstr "Parole ir pārak vienkārša (parole satur vārdu vai vārds satur paroli)."
 
 msgid "Password is too easy (keyboard sequence)."
-msgstr ""
+msgstr "Parole ir pārāk vienkārša (secīgi spiesti taustiņi)."
 
 msgid "Diffs"
 msgstr "Atšķirības"
@@ -1140,18 +1138,17 @@ msgstr "Jūs vairs neesat parakstījies(-usies) uz šo lapu."
 msgid "Can't remove regular expression subscription!"
 msgstr "Regulāras izteiksmes pierakstu izdzēst nevar!"
 
-#, fuzzy
 msgid "Edit the subscription regular expressions in your settings."
-msgstr "Labojiet parasktīšanās regulāras izteiksmes savā LietotājaIstatījumi."
+msgstr "Labojiet parasktīšanās regulāras izteiksmes savos iestatījumos."
 
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Lai atrakstītos, jums nepieciešams būt parakstījušam(-šai) uz šo lapu."
 
 msgid "Please choose:"
-msgstr ""
+msgstr "Lūdzu izvēlieties:"
 
 msgid "Settings"
-msgstr ""
+msgstr "Iestatījumi"
 
 msgid "Editor"
 msgstr "Redaktors"
@@ -1186,13 +1183,11 @@ msgstr "(pēc %d versijām)"
 msgid "Revert to this revision"
 msgstr "Atgriezties pie šīs versijas"
 
-#, fuzzy
 msgid "Previous change"
-msgstr "iepriekšējā"
+msgstr "Iepriekšējais labojums"
 
-#, fuzzy
 msgid "Next change"
-msgstr "Bez izmaiņām"
+msgstr "Nākamais labojums"
 
 msgid "No differences found!"
 msgstr "Atšķirības nav atrastas!"
@@ -1259,9 +1254,8 @@ msgstr "Nevar izdzēst Jūsu ātrsaiti uz šo lapu."
 msgid "You need to have a quicklink to this page to remove it."
 msgstr "Nepieciešama ātrsaite uz šo lapu, lai to varētu izdzēst."
 
-#, fuzzy
 msgid "Revert"
-msgstr "Atgriezt visu!"
+msgstr "Atgriezt"
 
 msgid "You are not allowed to revert this page!"
 msgstr "Jūs nedrīkstat atjaunot no arhīva šo lapu!"
@@ -1275,13 +1269,11 @@ msgstr ""
 "Jūs vēlaties atgriezt iepriekšēju lapas versiju, sākumā atveriet aplūkošanai "
 "lapas iepriekšējo versiju."
 
-#, fuzzy
 msgid "Optional reason for reverting this page"
-msgstr "Kopēšanas iemesls (neobligāts)"
+msgstr "Šīs lapas atgriešanas iemesls (neobligāts)"
 
-#, fuzzy
 msgid "Really revert this page?"
-msgstr "Jūs tiešām vēlaties pārdēvēt šo lapu?"
+msgstr "Jūs tiešām vēlaties atgriezt šo lapu?"
 
 msgid "Wiki Backup"
 msgstr "Viki Dublējums"
@@ -1410,9 +1402,8 @@ msgstr "Komentārs"
 msgid "view"
 msgstr "skats"
 
-#, fuzzy
 msgid "to previous"
-msgstr "iepriekšējā"
+msgstr "uz iepriekšējo"
 
 #, python-format
 msgid "Revert to revision %(rev)d."
@@ -2103,20 +2094,19 @@ msgid "Trust root"
 msgstr ""
 
 msgid "Identity URL"
-msgstr ""
+msgstr "Identitātes URL"
 
-#, fuzzy
 msgid "Remember decision"
-msgstr "PyStemmer versija"
+msgstr ""
 
 msgid "Remember this trust decision and don't ask again"
 msgstr ""
 
 msgid "Approve"
-msgstr ""
+msgstr "Apstiprināt"
 
 msgid "Don't approve"
-msgstr ""
+msgstr "Neapstiprināt"
 
 msgid "OpenID not served"
 msgstr ""
@@ -2566,12 +2556,11 @@ msgstr "Meklēt visās lapas versijās"
 msgid "Go get it!"
 msgstr "Satver!"
 
-#, fuzzy
 msgid "File attachment browser"
-msgstr "Jauna piesaistes nosaukums"
+msgstr "Datnes piesaistes pārlūks"
 
 msgid "User account browser"
-msgstr ""
+msgstr "Lietotāju kontu pārlūks"
 
 msgid "No orphaned pages in this wiki."
 msgstr "Šajā viki nav nevienas bāreņlapas."
@@ -2681,12 +2670,11 @@ msgid ""
 "or settings that were removed from Moin."
 msgstr ""
 
-#, fuzzy
 msgid "Variable name"
-msgstr "Faila nosaukums"
+msgstr "Mainīgā nosaukums"
 
 msgid "Setting"
-msgstr ""
+msgstr "Iestatījums"
 
 #, python-format
 msgid "No quotes on %(pagename)s."
@@ -3090,7 +3078,7 @@ msgstr "Saturs"
 #~ msgid "Use UserPreferences to change settings of the selected user account"
 #~ msgstr ""
 #~ "Lai mainītu lietotāja iestatījumus vai izveidotu lietotāja kontu, "
-#~ "izmantojiet LietotājaIstatījumi"
+#~ "izmantojiet LietotājaIestatījumi"
 
 #~ msgid ""
 #~ "This list does not work, unless you have entered a valid email address!"

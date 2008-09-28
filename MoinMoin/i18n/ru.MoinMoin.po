@@ -564,20 +564,20 @@ msgstr "Правописание"
 msgid "Discussion"
 msgstr "Обсуждение"
 
-#, fuzzy
 msgid "Password is too short."
-msgstr "Сброс пароля"
+msgstr "Слишком короткий пароль"
 
 msgid "Password has not enough different characters."
-msgstr ""
+msgstr "Слишком простой пароль - в пароле должно присутствовать больше разных символов"
 
-#, fuzzy
 msgid ""
 "Password is too easy (password contains name or name contains password)."
-msgstr "Отсутствует пароль. Пожалуйста, введите имя пользователя и пароль"
+msgstr "Слишком простой пароль (в пароле присутствует имя пользователя, "
+"либо пароль содержится в имени)"
+
 
 msgid "Password is too easy (keyboard sequence)."
-msgstr ""
+msgstr "Слишком простой пароль (клавиатурная последовательность)"
 
 msgid "Diffs"
 msgstr "Изменения"
