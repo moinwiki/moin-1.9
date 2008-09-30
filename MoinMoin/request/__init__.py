@@ -891,7 +891,7 @@ class RequestBase(object):
                 indicator += "B"
 
         pid = os.getpid()
-        msg = 'Timing %5d %-6s %4s %-10s %s\n' % (pid, total, indicator, action, self.url)
+        msg = 'Timing %5d %-6s %4s %-10s %s' % (pid, total, indicator, action, self.url)
         logging.info(msg)
 
     def send_file(self, fileobj, bufsize=8192, do_flush=False):
