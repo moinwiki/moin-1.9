@@ -25,12 +25,7 @@ class CacheError(Exception):
 
 
 def get_arena_dir(request, arena, scope):
-    if scope == 'page_or_wiki': # XXX DEPRECATED, remove later
-        if isinstance(arena, str):
-            return os.path.join(request.cfg.cache_dir, request.cfg.siteid, arena)
-        else: # arena is in fact a page object
-            return arena.getPagePath('cache', check_create=1)
-    elif scope == 'item': # arena is a Page instance
+    if scope == 'item': # arena is a Page instance
         # we could move cache out of the page directory and store it to cache_dir
         return arena.getPagePath('cache', check_create=1)
     elif scope == 'wiki':
@@ -49,7 +44,7 @@ def get_cache_list(request, arena, scope):
 
 
 class CacheEntry:
-    def __init__(self, request, arena, key, scope='page_or_wiki', do_locking=True,
+    def __init__(self, request, arena, key, scope='wiki', do_locking=True,
                  use_pickle=False, use_encode=False):
         """ init a cache entry
             @param request: the request object

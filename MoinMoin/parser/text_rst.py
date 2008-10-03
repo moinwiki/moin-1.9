@@ -170,9 +170,30 @@ class MoinWriter(html4css1.Writer):
                 setattr(self, attr, getattr(visitor, attr))
         self.output = html_escape_unicode(visitor.astext())
 
+# mark quickhelp as translatable
+_ = lambda x: x
+
 class Parser:
     caching = 1
     Dependencies = Dependencies # copy dependencies from module-scope
+    quickhelp = _("""\
+{{{
+Emphasis: *italic* **bold** ``monospace``
+
+Headings: Heading 1  Heading 2  Heading 3
+          =========  ---------  ~~~~~~~~~
+
+Horizontal rule: ----
+
+Links: TrailingUnderscore_ `multi word with backticks`_ external_
+
+.. _external: http://external-site.example.org/foo/
+
+Lists: * bullets; 1., a. numbered items.
+}}}
+(!) For more help, see the
+[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|reStructuredText Quick Reference]].
+""")
 
     def __init__(self, raw, request, **kw):
         self.raw = raw
@@ -612,3 +633,4 @@ class MoinDirectives:
 if ErrorParser: # fixup in case of missing docutils
     Parser = ErrorParser
 
+del _

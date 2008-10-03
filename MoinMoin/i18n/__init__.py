@@ -290,7 +290,7 @@ def getText(original, request, lang, **kw):
             # do not simply return trans with str, but recursively call
             # to get english translation, maybe formatted.
             # if we don't find an english "translation", we just format it
-            # on the fly (this is needed for cfg.editor_quickhelp).
+            # on the fly (this is needed for quickhelp).
             if lang != 'en':
                 logging.debug("falling back to english, requested string not in %r translation: %r" % (lang, original))
                 translated = getText(original, request, 'en', wiki=formatted, percent=percent)
