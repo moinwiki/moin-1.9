@@ -93,6 +93,26 @@ import logging, logging.config
 configured = False
 fallback_config = False
 
+import warnings
+
+# hashlib was added in python 2.5 - we can't use it as long as we do not require 2.5
+# sha is deprecated since 2.5, but still present in 2.6
+warnings.filterwarnings('ignore', r'the sha module is deprecated; use the hashlib module instead')
+
+# 'CacheNeedsUpdate' string exception in Page.py is supported for backwards compat reasons:
+warnings.filterwarnings('ignore', r'catching of string exceptions is deprecated', module='MoinMoin.Page')
+
+# subprocess was added in python 2.4 - we can't use it as long as we do not require 2.4:
+warnings.filterwarnings('ignore', r'The popen\d? module is deprecated.  Use the subprocess module.')
+
+
+def _log_warning(message, category, filename, lineno, file=None, line=None):
+    # for warnings, we just want to use the logging system, not stderr or other files
+    msg = "%s:%s: %s: %s" % (filename, lineno, category.__name__, message)
+    logger = getLogger(__name__)
+    logger.warning(msg) # Note: the warning will look like coming from here,
+                        # but msg contains info about where it really comes from
+
 
 def load_config(conf_fname=None):
     """ load logging config from conffile """
@@ -106,6 +126,7 @@ def load_config(conf_fname=None):
             configured = True
             l = getLogger(__name__)
             l.info('using logging configuration read from "%s"' % conf_fname)
+            warnings.showwarning = _log_warning
         except Exception, err: # XXX be more precise
             err_msg = str(err)
     if not configured:
@@ -118,6 +139,7 @@ def load_config(conf_fname=None):
         if err_msg:
             l.warning('load_config for "%s" failed with "%s".' % (conf_fname, err_msg))
         l.warning('using logging configuration read from built-in fallback in MoinMoin.log module!')
+        warnings.showwarning = _log_warning
 
 
 def getLogger(name):
