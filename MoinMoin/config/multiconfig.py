@@ -569,7 +569,8 @@ also the spelling of the directory name.
         Since each configured plugin path has unique plugins, we load the
         plugin packages as "moin_plugin_<sha1(path)>.plugin".
         """
-        import imp, sha
+        import imp
+        from MoinMoin.support.python_compatibility import hash_new
 
         plugin_dirs = [self.plugin_dir] + self.plugin_dirs
         self._plugin_modules = []
@@ -579,7 +580,7 @@ also the spelling of the directory name.
             imp.acquire_lock()
             try:
                 for pdir in plugin_dirs:
-                    csum = 'p_%s' % sha.new(pdir).hexdigest()
+                    csum = 'p_%s' % hash_new('sha1', pdir).hexdigest()
                     modname = '%s.%s' % (self.siteid, csum)
                     # If the module is not loaded, try to load it
                     if not modname in sys.modules:

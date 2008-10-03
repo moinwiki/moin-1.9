@@ -81,13 +81,21 @@ This is a feature from python 2.5, needed for compatibility with python 2.3 and 
 although it may not be 100% compatible.
 """
 try:
-    from hashlib import new as hash_new
+    import hashlib, hmac
+    hash_new = hashlib.new
+    def hmac_new(key, msg, digestmod=hashlib.sha1):
+        return hmac.new(key, msg, digestmod)
+
 except (NameError,  ImportError):
+    import sha
     def hash_new(name, string=''):
         if name in ('SHA1', 'sha1'):
-            import sha
             return sha.new(string)
         elif name in ('MD5', 'md5'):
             import md5
             return md5.new(string)
         raise ValueError("unsupported hash type")
+
+    def hmac_new(key, msg, digestmod=sha):
+        return hmac.new(key, msg, digestmod)
+

@@ -8,10 +8,11 @@
 """
 
 import StringIO
-import keyword, token, tokenize, sha
+import keyword, token, tokenize
 
 from MoinMoin import config, wikiutil
 from MoinMoin.parser._ParserBase import parse_start_step
+from MoinMoin.support.python_compatibility import hash_new
 
 _KEYWORD = token.NT_OFFSET + 1
 _TEXT = token.NT_OFFSET + 2
@@ -62,7 +63,7 @@ class Parser:
 
         self.result = [] # collects output
 
-        self._code_id = sha.new(self.raw.encode(config.charset)).hexdigest()
+        self._code_id = hash_new('sha1', self.raw.encode(config.charset)).hexdigest()
         self.result.append(formatter.code_area(1, self._code_id, 'ColorizedPython', self.show_num, self.num_start, self.num_step))
         self.formatter = formatter
         self.result.append(formatter.code_line(1))
