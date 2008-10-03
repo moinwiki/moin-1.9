@@ -228,10 +228,11 @@ class Emitter:
 #        return self.formatter.smiley(node.content)
 
     def header_emit(self, node):
-        import sha
+        from MoinMoin.support.python_compatibility import hash_new
+
         pntt = '%s%s%d' % (self.formatter.page.page_name,
             self.get_text(node), node.level)
-        ident = "head-%s" % sha.new(pntt.encode(config.charset)).hexdigest()
+        ident = "head-%s" % hash_new('sha1', pntt.encode(config.charset)).hexdigest()
         return ''.join([
             self.formatter.heading(1, node.level, id=ident),
             self.formatter.text(node.content or ''),

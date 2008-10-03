@@ -2439,7 +2439,7 @@ def createTicket(request, tm=None, action=None):
                              action you call when posting the form.
     """
 
-    import sha
+    from MoinMoin.support.python_compatibility import hash_new
     if tm is None:
         tm = "%010x" % time.time()
 
@@ -2456,7 +2456,7 @@ def createTicket(request, tm=None, action=None):
             action = 'None'
 
     secret = request.cfg.secrets['wikiutil/tickets']
-    digest = sha.new(secret)
+    digest = hash_new('sha1', secret)
 
     ticket = "%s.%s.%s" % (tm, pagename, action)
     digest.update(ticket)
