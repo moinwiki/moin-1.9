@@ -185,4 +185,4 @@ class Parser:
     def format(self, formatter):
         browser = DataBrowserWidget(self.request, show_header=self._show_header)
         browser.setData(self.data)
-        self.request.write(browser.format())
+        self.request.write(browser.render(method="GET"))

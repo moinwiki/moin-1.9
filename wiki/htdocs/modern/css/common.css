@@ -29,8 +29,8 @@ a.file:before {content: url(../img/moin-ftp.png); margin: 0 0.2em;}
 a.ftp:before {content: url(../img/moin-ftp.png); margin: 0 0.2em;}
 a.nntp:before {content: url(../img/moin-news.png); margin: 0 0.2em;}
 a.news:before {content: url(../img/moin-news.png); margin: 0 0.2em;}
-a.telnet:before {content: url(../img/moin-telnet.png); margin: 0 0.2em;}
-a.irc:before,a.ircs:before  {content: url(../img/moin-telnet.png); margin: 0 0.2em;}
+a.telnet:before, a.ssh:before {content: url(../img/moin-telnet.png); margin: 0 0.2em;}
+a.irc:before, a.ircs:before  {content: url(../img/moin-telnet.png); margin: 0 0.2em;}
 a.mailto:before {content: url(../img/moin-email.png); margin: 0 0.2em;}
 a.attachment:before {content: url(../img/moin-attach.png); margin: 0 0.2em;}
 a.badinterwiki:before {content: url(../img/moin-inter.png); margin: 0 0.2em;}

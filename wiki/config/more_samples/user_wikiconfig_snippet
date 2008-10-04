@@ -3,8 +3,6 @@
 
     #userprefs_disabled = [] # allow disabling certain userpreferences plugins
 
-    #user_autocreate = False # auto-create user profiles? needs support in auth method!
-
     #user_homewiki = 'Self' # interwiki name for where user homepages are located
 
     #password_checker = None

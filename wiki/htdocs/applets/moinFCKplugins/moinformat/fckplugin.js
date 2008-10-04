@@ -19,39 +19,39 @@
 
 var MoinToolbarFontFormatCombo = function()
 {
- this.Command =  FCKCommands.GetCommand('FontFormat');
+  this.CommandName = 'FontFormat';
+  this.Command =  FCKCommands.GetCommand(this.CommandName);
 }
 
 // Inherit from MoinToolbarSpecialCombo.
-MoinToolbarFontFormatCombo.prototype = new FCKToolbarSpecialCombo;
+MoinToolbarFontFormatCombo.prototype = new FCKToolbarSpecialCombo();
 
 MoinToolbarFontFormatCombo.prototype.GetLabel = function()
 {
- return FCKLang.FontFormat;
+  return FCKLang.FontFormat;
 }
 
 MoinToolbarFontFormatCombo.prototype.CreateItems = function(targetSpecialCombo)
 {
- // Get the format names from the language file.
- var aNames = FCKLang['FontFormats'].split(';');
- var oNames = {
-  p  : aNames[0],
-  pre  : aNames[1],
-  h2  : aNames[3], // h2 as Title 1
-  h3  : aNames[4], // and so on
-  h4  : aNames[5],
-  h5  : aNames[6],
-  h6  : aNames[7]
- };
+  // Get the format names from the language file.
+  var aNames = FCKLang['FontFormats'].split(';');
+  var oNames = {
+    p  : aNames[0],
+    pre  : aNames[1],
+    h2  : aNames[3], // h2 as Title 1
+    h3  : aNames[4], // and so on
+    h4  : aNames[5],
+    h5  : aNames[6],
+    h6  : aNames[7]
+  };
 
- // Get the available formats from the configuration file.
- var aTags = FCKConfig.FontFormats.split(';');
- 
- for (var i in oNames)
- {
-  this._Combo.AddItem(i, '<' + i + '>' + oNames[i] + '</' + i + '>', oNames[i]);
- }
+  // Get the available formats from the configuration file.
+  var aTags = FCKConfig.FontFormats.split(';');
+
+  for (var i in oNames)
+  {
+    this._Combo.AddItem(i, '<' + i + '>' + oNames[i] + '</' + i + '>', oNames[i]);
+  }
 }
 
 FCKToolbarItems.RegisterItem( 'MoinFormat', new MoinToolbarFontFormatCombo());
-

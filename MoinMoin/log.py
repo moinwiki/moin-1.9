@@ -95,10 +95,6 @@ fallback_config = False
 
 import warnings
 
-# hashlib was added in python 2.5 - we can't use it as long as we do not require 2.5
-# sha is deprecated since 2.5, but still present in 2.6
-warnings.filterwarnings('ignore', r'the sha module is deprecated; use the hashlib module instead')
-
 # 'CacheNeedsUpdate' string exception in Page.py is supported for backwards compat reasons:
 warnings.filterwarnings('ignore', r'catching of string exceptions is deprecated', module='MoinMoin.Page')
 
