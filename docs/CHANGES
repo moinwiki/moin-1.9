@@ -32,7 +32,7 @@ Known main issues:
     editor_default = 'text'  # internal default, just for completeness
 
 
-Version 1.8.0current:
+Version 1.8.0rc1:
   Bug Fixes:
     * Search results: link to 'view' rendering of found attachments.
     * Fixed moin server standalone argument processing for --interface="".
