@@ -160,9 +160,7 @@ def get_multistage_continuation_url(request, auth_name, extra_fields={}):
     if request.page:
         return request.page.url(request, querystr=fields)
     else:
-        qstr = wikiutil.makeQueryString(fields)
-        return ''.join([request.getBaseURL(), '?', qstr])
-
+        return request.abs_href(**fields)
 
 class LoginReturn(object):
     """ LoginReturn - base class for auth method login() return value"""

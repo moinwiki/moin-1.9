@@ -82,7 +82,7 @@ class Settings(UserPrefBase):
                                              'handler': 'oid',
                                              'oid.return': '1'})
             return_to = request.getQualifiedURL(request.page.url(request, qstr))
-            trust_root = request.getBaseURL()
+            trust_root = request.url_root
             if oidreq.shouldSendRedirect():
                 redirect_url = oidreq.redirectURL(trust_root, return_to)
                 request.http_redirect(redirect_url)

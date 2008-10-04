@@ -457,7 +457,7 @@ class Formatter(FormatterBase):
             src = kw['src']
             if src.startswith("/"):
                 # convert to absolute path:
-                src = self.request.getBaseURL()+src
+                src = self.request.url_root + src
             image.setAttribute('fileref', src)
         if kw.has_key('width'):
             image.setAttribute('width', str(kw['width']))
