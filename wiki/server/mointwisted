@@ -26,6 +26,9 @@ import sys, os
 #from MoinMoin import log
 #log.load_config('/path/to/logging_configuration_file')
 
+# PID file location, please use some appropriate full path (needs to be writable):
+pidFile = 'moin.pid'
+
 # Debug mode - show detailed error reports
 #os.environ['MOIN_DEBUG'] = '1'
 
@@ -41,6 +44,6 @@ class TwistedScript(daemon.DaemonScript):
         os.system('twistd --python mointwisted.py --pidfile %s' % self.pidFile)
 
 
-script = TwistedScript(Config.name, None)
+script = TwistedScript(Config.name, pidFile, None)
 script.run()
 
