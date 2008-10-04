@@ -32,6 +32,18 @@ Known main issues:
     editor_default = 'text'  # internal default, just for completeness
 
 
+Version 1.8.0current:
+  Bug Fixes:
+    * Search results: link to 'view' rendering of found attachments.
+    * Fixed moin server standalone argument processing for --interface="".
+    * mointwisted: fixed Twisted start script.
+    * Fix dbw_hide_buttons javascript.
+    * Logging:
+      * Use logging framework for messages emitted by warnings module (e.g.
+        DeprecationWarning), silence some specific warnings.
+      * Removed superfluous linefeeds in timing log output.
+
+
 Version 1.8.0beta3:
   Bug Fixes:
     * Jabber bot can now be configured to use an authentication realm which
