@@ -115,7 +115,7 @@ class PluginScript(MoinScript):
                 Config.group = self.options.group
             if self.options.port:
                 Config.port = self.options.port
-            if self.options.interface:
+            if hasattr(self.options, 'interface'): # needs to work for "" value also
                 Config.interface = self.options.interface
             if serverClass:
                 Config.serverClass = serverClass + 'Server'
@@ -141,3 +141,4 @@ class DefaultConfig(StandaloneConfig):
     serverClass = 'ThreadPoolServer'
     threadLimit = 10
     requestQueueSize = 50
+
