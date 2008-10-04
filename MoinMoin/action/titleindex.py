@@ -18,11 +18,10 @@ def execute(pagename, request):
 
     # get the MIME type
     if 'mimetype' in form:
-        mimetype = form['mimetype'][0]
+        mimetype = form['mimetype']
     else:
         mimetype = "text/plain"
-
-    request.emit_http_headers(["Content-Type: %s; charset=%s" % (mimetype, config.charset)])
+    request.mimetype = mimetype
 
     # Get list of user readable pages
     pages = request.rootpage.getPageList()

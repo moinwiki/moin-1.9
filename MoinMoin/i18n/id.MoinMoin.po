@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-28 20:59+0200\n"
+"POT-Creation-Date: 2008-09-12 23:35+0200\n"
 "PO-Revision-Date: 2006-10-07 23:19+0700\n"
 "Last-Translator: Fajrin Azis <fajrin.azis@gmail.com>\n"
 "Language-Team: Indonesian <id@ll.com>\n"
@@ -2348,21 +2348,6 @@ msgstr "Sunting ekspresi regular pada langganan dalam PreferensiPengguna Anda."
 
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Anda butuh menjadi berlangganan ke tidak berlangganan."
-
-#, fuzzy
-msgid "Password is too short."
-msgstr "Ulangi kata sandi"
-
-msgid "Password has not enough different characters."
-msgstr ""
-
-#, fuzzy
-msgid ""
-"Password is too easy (password contains name or name contains password)."
-msgstr "Kurang kata sandi. Silakan masukkan nama pengguna dan kata sandi."
-
-msgid "Password is too easy (keyboard sequence)."
-msgstr ""
 
 msgid "Diffs"
 msgstr "Perbedaan"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-28 20:59+0200\n"
+"POT-Creation-Date: 2008-09-12 23:35+0200\n"
 "PO-Revision-Date: 2004-12-01 21:30+0200\n"
 "Last-Translator: Joerg Cassens <jmt@cassens.org>\n"
 "Language-Team: Norwegian <moinmoin-nb@cassens.org>\n"
@@ -2255,21 +2255,6 @@ msgstr ""
 #, fuzzy
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Du abonnerer nå på denne siden."
-
-#, fuzzy
-msgid "Password is too short."
-msgstr "Gjenta passord"
-
-msgid "Password has not enough different characters."
-msgstr ""
-
-#, fuzzy
-msgid ""
-"Password is too easy (password contains name or name contains password)."
-msgstr "Passordet mangler. Oppgi et passord."
-
-msgid "Password is too easy (keyboard sequence)."
-msgstr ""
 
 msgid "Diffs"
 msgstr "Endringer"

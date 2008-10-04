@@ -41,7 +41,7 @@
 SLAPD_EXECUTABLE = 'slapd'  # filename of LDAP server executable - if it is not
                             # in your PATH, you have to give full path/filename.
 
-import os, shutil, tempfile, time
+import os, shutil, tempfile, time, base64, md5
 from StringIO import StringIO
 import signal
 
@@ -187,6 +187,8 @@ class LdapEnvironment(object):
         f.write(db_config)
         f.close()
 
+        rootpw = '{MD5}' + base64.b64encode(md5.new(self.rootpw).digest())
+
         # create slapd.conf from content template in slapd_config
         slapd_config = slapd_config % {
             'ldap_dir': self.ldap_dir,
@@ -194,7 +196,7 @@ class LdapEnvironment(object):
             'schema_dir': self.schema_dir,
             'basedn': self.basedn,
             'rootdn': self.rootdn,
-            'rootpw': self.rootpw,
+            'rootpw': rootpw,
         }
         if isinstance(slapd_config, unicode):
             slapd_config = slapd_config.encode(self.coding)

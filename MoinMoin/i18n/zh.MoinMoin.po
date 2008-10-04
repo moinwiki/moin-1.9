@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-28 20:59+0200\n"
+"POT-Creation-Date: 2008-09-12 23:35+0200\n"
 "PO-Revision-Date: 2008-08-14 09:37+0800\n"
 "Last-Translator: Jiang Xin <worldhello.net@gmail.com>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -2248,21 +2248,6 @@ msgstr "在用户设置中编辑订阅正则表达式。"
 
 msgid "You need to be subscribed to unsubscribe."
 msgstr "您需要先订阅才能退订。"
-
-#, fuzzy
-msgid "Password is too short."
-msgstr "口令重置"
-
-msgid "Password has not enough different characters."
-msgstr ""
-
-#, fuzzy
-msgid ""
-"Password is too easy (password contains name or name contains password)."
-msgstr "需要密码，请输入用户名和密码。"
-
-msgid "Password is too easy (keyboard sequence)."
-msgstr ""
 
 msgid "Diffs"
 msgstr "版本比较"

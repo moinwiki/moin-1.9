@@ -16,13 +16,15 @@ import time
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
-from MoinMoin import config, error, util, wikiutil
+from MoinMoin import config, error, util, wikiutil, web
 from MoinMoin.auth import MoinAuth
+import MoinMoin.auth as authmodule
 import MoinMoin.events as events
 from MoinMoin.events import PageChangedEvent, PageRenamedEvent
 from MoinMoin.events import PageDeletedEvent, PageCopiedEvent
 from MoinMoin.events import PageRevertedEvent, FileAttachedEvent
 from MoinMoin import session
+import MoinMoin.web.session
 from MoinMoin.packages import packLine
 from MoinMoin.security import AccessControlList
 from MoinMoin.support.python_compatibility import set
@@ -696,6 +698,8 @@ options_no_group_name = {
      "See HelpOnSessions."),
     ('session_id_handler', DefaultExpression('session.MoinCookieSessionIDHandler()'),
      "Only used by the DefaultSessionHandler, see HelpOnSessions."),
+    ('session_service', DefaultExpression('web.session.FileSessionService()'),
+     "New session service (used by the new WSGI layer)"),
     ('cookie_secure', None,
      'Use secure cookie. (None = auto-enable secure cookie for https, True = ever use secure cookie, False = never use secure cookie).'),
     ('cookie_domain', None,

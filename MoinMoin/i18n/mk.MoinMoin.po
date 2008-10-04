@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-28 20:59+0200\n"
+"POT-Creation-Date: 2008-09-12 23:35+0200\n"
 "PO-Revision-Date: 2008-06-27 22:39+0200\n"
 "Last-Translator: Novica Nakov\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
@@ -2356,21 +2356,6 @@ msgstr ""
 msgid "You need to be subscribed to unsubscribe."
 msgstr ""
 "Не можете да откажете претплата од страница на која не сте претплатени."
-
-#, fuzzy
-msgid "Password is too short."
-msgstr "Ресетирање на лозинка"
-
-msgid "Password has not enough different characters."
-msgstr ""
-
-#, fuzzy
-msgid ""
-"Password is too easy (password contains name or name contains password)."
-msgstr "Лозинката не е внесена. Внесете корисничко име и лозинка."
-
-msgid "Password is too easy (keyboard sequence)."
-msgstr ""
 
 msgid "Diffs"
 msgstr "Разлики"

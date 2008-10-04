@@ -136,7 +136,7 @@ username and leave the password field blank.""")))
                                         MoinOpenIDStore(request))
         query = {}
         for key in request.form:
-            query[key] = request.form[key][0]
+            query[key] = request.form[key]
         current_url = get_multistage_continuation_url(request, self.name,
                                                       {'oidstage': '1'})
         info = oidconsumer.complete(query, current_url)
@@ -282,7 +282,7 @@ document.getElementById("openid_message").submit();
 
             return_to = get_multistage_continuation_url(request, self.name,
                                                         {'oidstage': '1'})
-            trust_root = request.getBaseURL()
+            trust_root = request.url_root
             if oidreq.shouldSendRedirect():
                 redirect_url = oidreq.redirectURL(trust_root, return_to)
                 return MultistageRedirectLogin(redirect_url)

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-28 20:59+0200\n"
+"POT-Creation-Date: 2008-09-12 23:35+0200\n"
 "PO-Revision-Date: 2008-09-13 23:53+0200\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -2366,23 +2366,6 @@ msgstr "Отредактируйте регулярные выражения п�
 
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Вы должны быть подписаны, чтобы отписаться."
-
-msgid "Password is too short."
-msgstr "Слишком короткий пароль"
-
-msgid "Password has not enough different characters."
-msgstr ""
-"Слишком простой пароль - в пароле должно присутствовать больше разных "
-"символов"
-
-msgid ""
-"Password is too easy (password contains name or name contains password)."
-msgstr ""
-"Слишком простой пароль (в пароле присутствует имя пользователя, либо пароль "
-"содержится в имени)"
-
-msgid "Password is too easy (keyboard sequence)."
-msgstr "Слишком простой пароль (клавиатурная последовательность)"
 
 msgid "Diffs"
 msgstr "Изменения"
