@@ -115,7 +115,7 @@ class PluginScript(MoinScript):
                 Config.group = self.options.group
             if self.options.port:
                 Config.port = self.options.port
-            if hasattr(self.options, 'interface'): # needs to work for "" value also
+            if self.options.interface is not None: # needs to work for "" value also
                 Config.interface = self.options.interface
             if serverClass:
                 Config.serverClass = serverClass + 'Server'
