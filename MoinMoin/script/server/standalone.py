@@ -102,7 +102,7 @@ class PluginScript(MoinScript):
                 Config.group = self.options.group
             if self.options.port:
                 Config.port = self.options.port
-            if self.options.interface:
+            if self.options.interface is not None: # needs to work for "" value also
                 Config.interface = self.options.interface
             if self.options.debug:
                 Config.debug = True
@@ -130,3 +130,4 @@ class DefaultConfig:
     port = 8080
     interface = 'localhost'
     debug = False
+

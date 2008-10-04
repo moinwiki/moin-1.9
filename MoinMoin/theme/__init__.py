@@ -1093,10 +1093,19 @@ actionsMenuInit('%(label)s');
 
         html = self._cache.get('editbar')
         if html is None:
-            # Remove empty items and format as list
-            items = ''.join(['<li>%s</li>' % item
-                             for item in self.editbarItems(page) if item])
-            html = u'<ul class="editbar">%s</ul>\n' % items
+            # Remove empty items and format as list. The item for showing inline comments
+            # is hidden by default. It gets activated through javascript only if inline
+            # comments exist on the page.
+            items = []
+            for item in self.editbarItems(page):
+                if item:
+                    if 'nbcomment' in item:
+                        # hiding the complete list item is cosmetically better than just
+                        # hiding the contents (e.g. for sidebar themes).
+                        items.append('<li class="toggleCommentsButton" style="display:none;">%s</li>' % item)
+                    else:
+                        items.append('<li>%s</li>' % item)
+            html = u'<ul class="editbar">%s</ul>\n' % ''.join(items)
             self._cache['editbar'] = html
 
         return html
@@ -1143,7 +1152,7 @@ actionsMenuInit('%(label)s');
                 # we just use <a> to get same style as other links, but we add some dummy
                 # link target to get correct mouseover pointer appearance. return false
                 # keeps the browser away from jumping to the link target::
-                editbar_actions.append('<a href="#" class="toggleCommentsButton" style="display:none;" onClick="toggleComments();return false;">%s</a>' % _('Comments'))
+                editbar_actions.append('<a href="#" class="nbcomment" onClick="toggleComments();return false;">%s</a>' % _('Comments'))
             elif editbar_item == 'Edit':
                 editbar_actions.append(self.editorLink(page))
             elif editbar_item == 'Info':

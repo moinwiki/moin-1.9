@@ -89,8 +89,8 @@ class TextCha(object):
                 self.answer_re = re.compile(self.answer_regex, re.U|re.I)
             except KeyError:
                 # this question does not exist, thus there is no answer
-                self.answer_regex = ur"[^.]*" # this shall never match!
-                self.answer_re = re.compile(self.answer_regex, re.U|re.I)
+                self.answer_regex = ur"[Never match for cheaters]"
+                self.answer_re = None
                 logging.warning(u"TextCha: Non-existing question '%s'. User '%s' trying to cheat?" % (
                                 self.question, self.user_info))
             except re.error:
@@ -116,7 +116,11 @@ class TextCha(object):
     def check_answer(self, given_answer):
         """ check if the given answer to the question is correct """
         if self.is_enabled():
-            success = self.answer_re.match(given_answer.strip()) is not None
+            if self.answer_re is not None:
+                success = self.answer_re.match(given_answer.strip()) is not None
+            else:
+                # someone trying to cheat!?
+                success = False
             success_status = success and u"success" or u"failure"
             logging.info(u"TextCha: %s (u='%s', a='%s', re='%s', q='%s')" % (
                              success_status,

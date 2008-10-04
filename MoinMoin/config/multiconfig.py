@@ -571,7 +571,8 @@ also the spelling of the directory name.
         Since each configured plugin path has unique plugins, we load the
         plugin packages as "moin_plugin_<sha1(path)>.plugin".
         """
-        import imp, sha
+        import imp
+        from MoinMoin.support.python_compatibility import hash_new
 
         plugin_dirs = [self.plugin_dir] + self.plugin_dirs
         self._plugin_modules = []
@@ -581,7 +582,7 @@ also the spelling of the directory name.
             imp.acquire_lock()
             try:
                 for pdir in plugin_dirs:
-                    csum = 'p_%s' % sha.new(pdir).hexdigest()
+                    csum = 'p_%s' % hash_new('sha1', pdir).hexdigest()
                     modname = '%s.%s' % (self.siteid, csum)
                     # If the module is not loaded, try to load it
                     if not modname in sys.modules:
@@ -640,7 +641,7 @@ class DefaultConfig(ConfigFunctionality):
     # the options dictionary.
 
 
-def _default_password_checker(request, username, password):
+def _default_password_checker(cfg, request, username, password):
     """ Check if a password is secure enough.
         We use a built-in check to get rid of the worst passwords.
 
@@ -652,18 +653,19 @@ def _default_password_checker(request, username, password):
         @return: None if there is no problem with the password,
                  some string with an error msg, if the password is problematic.
     """
+    _ = request.getText
     try:
         # in any case, do a very simple built-in check to avoid the worst passwords
         if len(password) < 6:
-            raise ValueError("Password too short.")
+            raise ValueError(_("Password is too short."))
         if len(set(password)) < 4:
-            raise ValueError("Password has not enough different characters.")
+            raise ValueError(_("Password has not enough different characters."))
 
         username_lower = username.lower()
         password_lower = password.lower()
         if username in password or password in username or \
            username_lower in password_lower or password_lower in username_lower:
-            raise ValueError("Password too easy (containment).")
+            raise ValueError(_("Password is too easy (password contains name or name contains password)."))
 
         keyboards = (ur"`1234567890-=qwertyuiop[]\asdfghjkl;'zxcvbnm,./", # US kbd
                      ur"^1234567890ß´qwertzuiopü+asdfghjklöä#yxcvbnm,.-", # german kbd
@@ -672,10 +674,10 @@ def _default_password_checker(request, username, password):
             rev_kbd = kbd[::-1]
             if password in kbd or password in rev_kbd or \
                password_lower in kbd or password_lower in rev_kbd:
-                raise ValueError("Password too easy (kbd sequence)")
+                raise ValueError(_("Password is too easy (keyboard sequence)."))
         return None
     except ValueError, err:
-        return str(err)
+        return unicode(err)
 
 
 class DefaultExpression(object):

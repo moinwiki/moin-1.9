@@ -32,8 +32,8 @@ def execute(pagename, request):
                       f.text(_("Page size: %d") % page.size()),
                       f.paragraph(0))
 
-        import sha
-        digest = sha.new(page.get_raw_body().encode(config.charset)).hexdigest().upper()
+        from MoinMoin.support.python_compatibility import hash_new
+        digest = hash_new('sha1', page.get_raw_body().encode(config.charset)).hexdigest().upper()
         request.write(f.paragraph(1),
                       f.rawHTML('%(label)s <tt>%(value)s</tt>' % {
                           'label': _("SHA digest of this page's content is:"),

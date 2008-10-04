@@ -56,7 +56,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
 
     pw_checker = request.cfg.password_checker
     if pw_checker:
-        pw_error = pw_checker(theuser.name, password)
+        pw_error = pw_checker(request, theuser.name, password)
         if pw_error:
             return _("Password not acceptable: %s") % pw_error
 

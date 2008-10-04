@@ -22,7 +22,9 @@
 # add names here to hide them in the cgitb traceback
 unsafe_names = ("id", "key", "val", "user_data", "enc_password", "recoverpass_key")
 
-import os, time, sha, codecs, hmac, base64
+import os, time, codecs, base64
+
+from MoinMoin.support.python_compatibility import hash_new, hmac_new
 
 from MoinMoin import config, caching, wikiutil, i18n, events
 from MoinMoin.util import timefuncs, filesys, random_string
@@ -154,7 +156,7 @@ def encodePassword(pwd, salt=None):
     if salt is None:
         salt = random_string(20)
     assert isinstance(salt, str)
-    hash = sha.new(pwd)
+    hash = hash_new('sha1', pwd)
     hash.update(salt)
 
     return '{SSHA}' + base64.encodestring(hash.digest() + salt).rstrip()
@@ -514,7 +516,7 @@ class User:
         password = password.encode('utf-8')
 
         if epwd[:5] == '{SHA}':
-            enc = '{SHA}' + base64.encodestring(sha.new(password).digest()).rstrip()
+            enc = '{SHA}' + base64.encodestring(hash_new('sha1', password).digest()).rstrip()
             if epwd == enc:
                 data['enc_password'] = encodePassword(password)
                 return True, True
@@ -523,7 +525,7 @@ class User:
         if epwd[:6] == '{SSHA}':
             data = base64.decodestring(epwd[6:])
             salt = data[20:]
-            hash = sha.new(password)
+            hash = hash_new('sha1', password)
             hash.update(salt)
             return hash.digest() == data[:20], False
 
@@ -983,7 +985,7 @@ class User:
     def generate_recovery_token(self):
         key = random_string(64, "abcdefghijklmnopqrstuvwxyz0123456789")
         msg = str(int(time.time()))
-        h = hmac.new(key, msg, sha).hexdigest()
+        h = hmac_new(key, msg).hexdigest()
         self.recoverpass_key = key
         self.save()
         return msg + '-' + h
@@ -1001,7 +1003,7 @@ class User:
         if stamp + 12*60*60 < time.time():
             return False
         # check hmac
-        h = hmac.new(self.recoverpass_key, str(stamp), sha).hexdigest()
+        h = hmac_new(self.recoverpass_key, str(stamp)).hexdigest()
         if h != parts[1]:
             return False
         self.recoverpass_key = ""

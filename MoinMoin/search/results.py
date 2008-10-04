@@ -333,7 +333,7 @@ class SearchResults:
                 if page.attachment:
                     querydict = {
                         'action': 'AttachFile',
-                        'do': 'get',
+                        'do': 'view',
                         'target': page.attachment,
                     }
                 elif page.page.rev and page.page.rev != page.page.getRevList()[0]:
@@ -416,7 +416,7 @@ class SearchResults:
                     fmt_context = ""
                     querydict = {
                         'action': 'AttachFile',
-                        'do': 'get',
+                        'do': 'view',
                         'target': page.attachment,
                     }
                 elif page.page_name.startswith('FS/'): # XXX FS hardcoded
