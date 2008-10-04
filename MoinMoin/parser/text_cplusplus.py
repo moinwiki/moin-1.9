@@ -36,13 +36,13 @@ class Parser(ParserBase):
     def setupRules(self):
         ParserBase.setupRules(self)
 
-        self.addRulePair("Comment", "/[*]", "[*]/")
-        self.addRule("Comment", "//.*$")
-        self.addRulePair("String", 'L?"', r'$|[^\\](\\\\)*"')
+        self.addRulePair("Comment", r"/[*]", r"[*]/")
+        self.addRule("Comment", r"//.*$")
+        self.addRulePair("String", r'L?"', r'$|[^\\](\\\\)*"')
         self.addRule("Char", r"'\\.'|'[^\\]'")
         self.addRule("Number", r"[0-9](\.[0-9]*)?(eE[+-][0-9])?[flFLdD]?|0[xX][0-9a-fA-F]+[Ll]?")
         self.addRule("Preprc", r"^\s*#(.*\\\n)*(.*(?!\\))$")
-        self.addRule("ID", "[a-zA-Z_][0-9a-zA-Z_]*")
+        self.addRule("ID", r"[a-zA-Z_][0-9a-zA-Z_]*")
         self.addRule("SPChar", r"[~!%^&*()+=|\[\]:;,.<>/?{}-]")
 
         reserved_words = ['struct', 'class', 'union', 'enum',

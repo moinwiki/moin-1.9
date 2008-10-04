@@ -1,17 +1,23 @@
+MoinMoin Documentation Overview
+===============================
+
+docs/INSTALL.html: generic instructions about installing MoinMoin
+
+docs/UPDATE.html: generic instructions about updating MoinMoin
+
+docs/README.migration: migration procedure for your data_dir
+
+docs/CHANGES (this file): please completely read it until you reach the version
+                          you were using until now - otherwise you might miss
+                          some important upgrading and configuration hints.
+                          Starting with 1.5.3, update installation hints are
+                          marked with HINT. They assume you are upgrading from
+                          the last release version before (e.g. from 1.5.2 to
+                          1.5.3).
+
+
 MoinMoin Version History
 ========================
-
-Documentations with generic instructions about installing or updating MoinMoin
-are available as docs/INSTALL.html and docs/UPDATE.html. A special documenation
-about the migration procedure for your data_dir is in docs/README.migration.
-
-Additionally, please completely read CHANGES text until you reach the version
-you were using until now. Otherwise you might miss some important upgrading and
-configuration hints.
-
-Starting with 1.5.3, update installation hints are marked with HINT.
-They assume you are upgrading from the last release version before (e.g. from
-1.5.2 to 1.5.3).
 
 This release has known bugs (see MoinMoin:MoinMoinBugs), but we think it is
 already better than the previous stable release. Our release policy is not
@@ -25,15 +31,142 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
-  * "Backup" and especially "Restore" action have some issues, so please DON'T
-    USE THEM except if you want to help debugging and improving it and after
-    having made a backup with some other, proven method.
-    USE BOTH ON YOUR OWN RISK!
 
-1.7.current:
-  Fixes:
+Version 1.8.0current:
+  Bug Fixes:
+    * Search results: link to 'view' rendering of found attachments.
+    * Fixed moin server standalone argument processing for --interface="".
+    * mointwisted: fixed Twisted start script.
+    * Fix dbw_hide_buttons javascript.
+    * Logging:
+      * Use logging framework for messages emitted by warnings module (e.g.
+        DeprecationWarning), silence some specific warnings.
+      * Removed superfluous linefeeds in timing log output.
+
+
+Version 1.8.0beta3:
+  Bug Fixes:
     * Jabber bot can now be configured to use an authentication realm which
-      is different from the server's hostname
+      is different from the server's hostname; the xmpp_node configuration
+      parameter can now contain a full JID and the xmpp_resource parameter
+      is no longer supported.
+    * Added translation to the password checker result messages.
+    * Bug fix for language not installed (MoinMoinBugs/WikiLanguageNotDefined).
+    * diff action: make output valid html 4.01
+    * Fixed editbar hidden comment link cosmetics for sidebar themes (hide the
+      complete list element).
+    * Standalone server: fix serverClass argument processing, announce used
+      serverClass in log output.
+
+  Other changes:
+    * Speed up javascript comments processing on IE by getElementsByClassName()
+
+
+Version 1.8.0beta2:
+  Bug Fixes:
+    * GUI Editor - fixed bugs:
+      * Create shorter output for colors (better roundtripping).
+      * Fixed heading level roundtripping.
+      * Handle th in the same way as td (instead of giving traceback due to
+        unhandled element).
+      * MoinMoinBugs/1.6GuiEditorRemovesLinkOptions (fix roundtripping of
+        attachment links with &do=get param (q&d fix)
+      * MoinMoinBugs/GuiEditorInterwikiLinksMiss"wiki:"prefix (fix roundtripping
+        of free interwiki links)
+      * MoinMoinBugs/GuiEditorWrongConversionOfTableAttributes (fix processing
+        of table caption)
+      * MoinMoinBugs/1.8_GUIEditorDoesNotSupportScriptElement (added some more
+        unsupported elements, do not traceback for these)
+    * MoinMoinBugs/DoubleScriptNameInSitemap (fixing urls given by sitemap
+      action, if the wiki does not run in the root url of the site)
+    * Fixed a Python2.3 incompatibility (base64.b64decode).
+    * Fixed backup action configuration (broke on win32).
+    * Added link icon for ssh: links.
+    * "modernized" theme:
+      * Increased padding-left for correct rendering of bigger icons on MS IE.
+      * Changed some modernized images to always get the same white background
+        for MS IE6.
+
+
+Version 1.8.0beta1:
+
+  New Features:
+    * New "modernized" theme.
+    * GUI Editor:
+      * upgraded to use FCKEditor version 2.6.3 (current version)
+      * user can insert and modify various types of MoinMoin links
+    * New plugin_dirs setting to allow multiple plugin paths (additional to
+      the automatically configured plugin_dir [default: data_dir/plugin]).
+    * @EMAIL@ expands to a MailTo macro call with the obfuscated email address
+      of the current user.
+    * New macros "WikiConfig" and "WikiConfigHelp".
+    * Per-parser quickhelp, 'quickhelp' class variable of parser class.
+    * Secure session cookies for https (see cfg.cookie_secure).
+
+  Bug Fixes:
+    * GUI Editor - fixed bugs:
+      * Fixed MoinMoin:MoinMoinBugs/GuiEditorExtendsAnchorsToThePageName
+      * Fixed MoinMoin:MoinMoinBugs/GuiEditorIndentingChangedForTables
+      * Fixed MoinMoin:MoinMoinBugs/GuiEditorIndentStyledText
+      * Fixed MoinMoin:MoinMoinBugs/GUIEditorConvertsRelativeLinkstoAbsoluteAfterChangingAnExistingLink
+      * Fixed MoinMoin:MoinMoinBugs/GuiEditorDestroysParserSyntax
+      * Fixed MoinMoin:MoinMoinBugs/GUIEditorConvertsRelativeLinkstoAbsolute
+      * Fixed MoinMoin:MoinMoinBugs/GuiEditorCantCancel
+      * Fixed MoinMoin:MoinMoinBugs/GuiEditorRemovesInlineComments
+      * Fixed MoinMoin:MoinMoinBugs/GuiEditorPasteFromWordError
+      * Fixed MoinMoin:MoinMoinBugs/GuiEditorPasteFromOpenOfficeCausingConvertError
+      * Fixed MoinMoin:MoinMoinBugs/GUIDoesNotChangeLinks
+      * Fixed MoinMoin:MoinMoinBugs/GuiEditorTabsCausesConvertError
+      * Fixed MoinMoin:MoinMoinBugs/1.6devGuiPreviewEatsTextBeforeMacro
+      * Fixed MoinMoin:MoinMoinBugs/GuiEditorAddingACellDestroysTable
+      * Fixed MoinMoin:MoinMoinBugs/GuiEditorBreaksTables
+      * Fixed MoinMoin:MoinMoinBugs/GUIEditorInsertsInvalidLinkInFirefox3
+      * Fixed MoinMoin:MoinMoinBugs/GuiEditorExcelPasteProblem
+      * Fixed MoinMoin:MoinMoinBugs/GuiEditorExpatErrorWhenPastingTable
+      * Fixed MoinMoin:MoinMoinBugs/GuiEditorFailsOnAttachmentsToOtherPage
+      * Fixed MoinMoin:MoinMoinBugs/GuiEditorHorizontalLine
+      * Fixed MoinMoin:MoinMoinBugs/GuiEditorLineBreak
+      * Fixed MoinMoin:MoinMoinBugs/GuiEditorLineBreakInLists
+      * Fixed MoinMoin:MoinMoinBugs/GuiEditorLinkContainsJavaScript
+      * Fixed MoinMoin:MoinMoinBugs/GuiEditorLosesEmptyLinesInFirefox1.5
+      * Fixed MoinMoin:MoinMoinBugs/GuiEditorPasteFromWordCausingConvertError
+      * Fixed MoinMoin:MoinMoinBugs/GuiEditorPreviewDataLoss
+      * Fixed MoinMoin:MoinMoinBugs/GuiEditorTableOfContentsIncomplete
+      * Fixed MoinMoin:MoinMoinBugs/GuiEditorUnusableAfterThemeChange
+      * Fixed MoinMoin:MoinMoinBugs/GuiEditorCorruptingNonWikiPages
+      * Fixed MoinMoin:MoinMoinBugs/GuiEditorInterwikiLinksMiss"wiki%3A"prefix 
+      * Fixed MoinMoin:MoinMoinBugs/GuiEditorExcelPasteUnboundPrefix
+      * Fixed MoinMoin:MoinMoinBugs/GuiEditorFormatDropdownCrashesIE
+      * Fixed MoinMoin:MoinMoinBugs/GuiEditorWordsGetJoinedTogether
+      * Fixed MoinMoin:MoinMoinBugs/GuiEditorShouldWorkOnSyntaxReference
+    * Fixed MoinMoinBugs/PackagesAddRevision.
+
+  Removed Features:
+    * url_prefix setting (use url_prefix_static or just use the default)
+    * traceback_log_dir setting (we just use logging.exception)
+    * editor_quickhelp setting (replaced by per-parser quickhelp)
+    * Restoring backups with the backup action and related settings (while
+      creating backups is no big issue and should work OK, restoring them
+      had fundamental issues related to overwriting or not-overwriting of
+      existing files - thus we removed the "restore" part of the action and
+      recommend that you just contact the wiki server admin in case of trouble,
+      give him your wiki backup file and let him carefully restore it.)
+    * Removed unmaintained DesktopEdition (moin 1.5.x style) and phpwiki
+      migration scripts from contrib/ directory.
+
+  Other Changes:
+    * user_autocreate setting was removed from wiki configuration and replaced
+      by a autocreate=<boolean> parameter of the auth objects that support user
+      profile auto creation.
+    * backup action: backup_exclude (default: "do not exclude anything") is now
+      a function f(filename) that tells whether a file should be excluded from
+      backup.
+      You can get the old regex exclusion functionality by using:
+      backup_exclude = re.compile(your_regex).search
+      Be careful with your regex, you might need to use re.escape() to escape
+      characters that have a special meaning in regexes (e.g.: \.[] etc.).
+      If in doubt, maybe just leave backup_exclude at the default and don't
+      exclude anything.
 
 Version 1.7.2:
   Fixes:
