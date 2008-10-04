@@ -86,7 +86,7 @@ try:
     def hmac_new(key, msg, digestmod=hashlib.sha1):
         return hmac.new(key, msg, digestmod)
 
-except (NameError,  ImportError):
+except (NameError, ImportError):
     import sha
     def hash_new(name, string=''):
         if name in ('SHA1', 'sha1'):
@@ -97,5 +97,6 @@ except (NameError,  ImportError):
         raise ValueError("unsupported hash type")
 
     def hmac_new(key, msg, digestmod=sha):
+        import hmac
         return hmac.new(key, msg, digestmod)
 
