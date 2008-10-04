@@ -282,7 +282,7 @@ document.getElementById("openid_message").submit();
 
             return_to = get_multistage_continuation_url(request, self.name,
                                                         {'oidstage': '1'})
-            trust_root = request.getBaseURL()
+            trust_root = request.url_root
             if oidreq.shouldSendRedirect():
                 redirect_url = oidreq.redirectURL(trust_root, return_to)
                 return MultistageRedirectLogin(redirect_url)

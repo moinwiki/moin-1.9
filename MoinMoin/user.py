@@ -1028,7 +1028,7 @@ Password reset URL: %s/?action=recoverpass&name=%s&token=%s
 """) % (
                         self.name,
                         tok,
-                        self._request.getBaseURL(),
+                        self._request.url_root,
                         url_quote_plus(self.name),
                         tok, )
 

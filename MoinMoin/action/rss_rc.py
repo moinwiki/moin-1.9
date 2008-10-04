@@ -105,9 +105,7 @@ def execute(pagename, request):
         request.headers.add('Etag', etag)
 
         # send the generated XML document
-        baseurl = request.getBaseURL()
-        if not baseurl.endswith('/'):
-            baseurl += '/'
+        baseurl = request.url_root
 
         logo = re.search(r'src="([^"]*)"', cfg.logo_string)
         if logo:
@@ -136,7 +134,7 @@ def execute(pagename, request):
 
         # emit channel description
         handler.startNode('channel', {
-            (handler.xmlns['rdf'], 'about'): request.getBaseURL(),
+            (handler.xmlns['rdf'], 'about'): request.url_root,
             })
         handler.simpleNode('title', cfg.sitename)
         page = Page(request, pagename)

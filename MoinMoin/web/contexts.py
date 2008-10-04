@@ -8,7 +8,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import time, inspect, StringIO, sys
+import time, inspect, StringIO, sys, warnings
 
 from werkzeug.utils import Headers, http_date, create_environ, redirect
 from werkzeug.exceptions import Unauthorized, NotFound, abort
@@ -307,6 +307,14 @@ class HTTPContext(BaseContext):
         file_wrapper = self.environ.get('wsgi.file_wrapper', simple_wrapper)
         self.request.response = file_wrapper(fileobj, bufsize)
         raise MoinMoinFinish('sent file')
+
+    # fully deprecated functions, with warnings
+    def getBaseURL(self):
+        warnings.warn(
+            "request.getBaseURL() is deprecated, please use the request's "
+            "url_root property or the abs_href object if urls should be generated.",
+            DeprecationWarning)
+        return self.request.url_root
 
 class AuxilaryMixin(object):
     """
