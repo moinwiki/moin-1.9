@@ -246,8 +246,8 @@ def link_dialog(request):
     if not scriptname or scriptname[-1] != "/":
         scriptname += "/"
     action = scriptname
-    basepage = request.page.page_name.encode(config.charset)
-    request.write('''
+    basepage = request.page.page_name
+    request.write(u'''
 <!--
  * FCKeditor - The text editor for internet
  * Copyright (C) 2003-2004 Frederico Caldeira Knabben
