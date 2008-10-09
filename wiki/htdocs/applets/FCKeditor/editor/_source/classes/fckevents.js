@@ -1,50 +1,71 @@
 ﻿/*
- * FCKeditor - The text editor for internet
- * Copyright (C) 2003-2005 Frederico Caldeira Knabben
- * 
- * Licensed under the terms of the GNU Lesser General Public License:
- * 		http://www.opensource.org/licenses/lgpl-license.php
- * 
- * For further information visit:
- * 		http://www.fckeditor.net/
- * 
- * "Support Open Source software. What about a donation today?"
- * 
- * File Name: fckevents.js
- * 	FCKEvents Class: used to handle events is a advanced way.
- * 
- * File Authors:
- * 		Frederico Caldeira Knabben (fredck@fckeditor.net)
+ * FCKeditor - The text editor for Internet - http://www.fckeditor.net
+ * Copyright (C) 2003-2008 Frederico Caldeira Knabben
+ *
+ * == BEGIN LICENSE ==
+ *
+ * Licensed under the terms of any of the following licenses at your
+ * choice:
+ *
+ *  - GNU General Public License Version 2 or later (the "GPL")
+ *    http://www.gnu.org/licenses/gpl.html
+ *
+ *  - GNU Lesser General Public License Version 2.1 or later (the "LGPL")
+ *    http://www.gnu.org/licenses/lgpl.html
+ *
+ *  - Mozilla Public License Version 1.1 or later (the "MPL")
+ *    http://www.mozilla.org/MPL/MPL-1.1.html
+ *
+ * == END LICENSE ==
+ *
+ * FCKEvents Class: used to handle events is a advanced way.
  */
 
-var FCKEvents ;
-
-if ( !( FCKEvents = NS.FCKEvents ) )
+var FCKEvents = function( eventsOwner )
 {
-	FCKEvents = NS.FCKEvents = function( eventsOwner )
+	this.Owner = eventsOwner ;
+	this._RegisteredEvents = new Object() ;
+}
+
+FCKEvents.prototype.AttachEvent = function( eventName, functionPointer )
+{
+	var aTargets ;
+
+	if ( !( aTargets = this._RegisteredEvents[ eventName ] ) )
+		this._RegisteredEvents[ eventName ] = [ functionPointer ] ;
+	else
 	{
-		this.Owner = eventsOwner ;
-		this.RegisteredEvents = new Object() ;
+		// Check that the event handler isn't already registered with the same listener
+		// It doesn't detect function pointers belonging to an object (at least in Gecko)
+		if ( aTargets.IndexOf( functionPointer ) == -1 )
+			aTargets.push( functionPointer ) ;
 	}
+}
 
-	FCKEvents.prototype.AttachEvent = function( eventName, functionPointer )
+FCKEvents.prototype.FireEvent = function( eventName, params )
+{
+	var bReturnValue = true ;
+
+	var oCalls = this._RegisteredEvents[ eventName ] ;
+
+	if ( oCalls )
 	{
-		if ( ! this.RegisteredEvents[ eventName ] ) this.RegisteredEvents[ eventName ] = new Array() ;
-
-		this.RegisteredEvents[ eventName ][ this.RegisteredEvents[ eventName ].length ] = functionPointer ;
-	}
-
-	FCKEvents.prototype.FireEvent = function( eventName, params )
-	{
-		var bReturnValue = true ;
-
-		var oCalls = this.RegisteredEvents[ eventName ] ;
-		if ( oCalls )
+		for ( var i = 0 ; i < oCalls.length ; i++ )
 		{
-			for ( var i = 0 ; i < oCalls.length ; i++ )
+			try
+			{
 				bReturnValue = ( oCalls[ i ]( this.Owner, params ) && bReturnValue ) ;
+			}
+			catch(e)
+			{
+				// Ignore the following error. It may happen if pointing to a
+				// script not anymore available (#934):
+				// -2146823277 = Can't execute code from a freed script
+				if ( e.number != -2146823277 )
+					throw e ;
+			}
 		}
-
-		return bReturnValue ;
 	}
+
+	return bReturnValue ;
 }

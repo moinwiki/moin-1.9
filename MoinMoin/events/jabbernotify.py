@@ -50,11 +50,12 @@ def handle_jid_changed(event):
 
     request = event.request
     server = request.cfg.notification_server
+    secret = request.cfg.secrets['jabberbot']
     try:
         if isinstance(event, ev.JabberIDSetEvent):
-            server.addJIDToRoster(request.cfg.secret, event.jid)
+            server.addJIDToRoster(secret, event.jid)
         else:
-            server.removeJIDFromRoster(request.cfg.secret, event.jid)
+            server.removeJIDFromRoster(secret, event.jid)
     except xmlrpclib.Error, err:
         logging.error("XML RPC error: %s" % str(err))
     except Exception, err:
@@ -197,7 +198,7 @@ def send_notification(request, jids, notification):
         raise ValueError("url_list must be of type list!")
 
     try:
-        server.send_notification(request.cfg.secret, jids, notification)
+        server.send_notification(request.cfg.secrets['jabberbot'], jids, notification)
         return True
     except xmlrpclib.Error, err:
         logging.error("XML RPC error: %s" % str(err))

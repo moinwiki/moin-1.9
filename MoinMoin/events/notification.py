@@ -128,12 +128,13 @@ def user_created_message(request, _, sitename, username, email):
     @return: a dict containing message body and subject
     """
     subject = _("New user account created on %(sitename)s") % {'sitename': sitename or "Wiki"}
-    text = _("""Dear Superuser, a new user has just been created. Details follow:
+    text = _("""Dear Superuser, a new user has just been created on %(sitename)s". Details follow:
 
     User name: %(username)s
     Email address: %(useremail)s""") % {
          'username': username,
          'useremail': email,
+         'sitename': sitename or "Wiki",
          }
 
     return {'subject': subject, 'text': text}
