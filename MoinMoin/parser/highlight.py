@@ -63,6 +63,16 @@ class PygmentsFormatter(pygments.formatter.Formatter):
             return 'ID'
         elif ttype in Token.Comment:
             return 'Comment'
+        elif ttype in Token.Generic.Heading:
+            return 'Comment'
+        elif ttype in Token.Generic.Subheading:
+            return 'DiffSeparator'
+        elif ttype in Token.Generic.Inserted:
+            return 'DiffAdded'
+        elif ttype in Token.Generic.Deleted:
+            return 'DiffRemoved'
+        elif ttype in Token.Generic.Strong:
+            return 'DiffChanged'
         else:
             # skip tags that have no class defined
             return None
