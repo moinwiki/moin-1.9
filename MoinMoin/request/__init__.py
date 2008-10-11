@@ -452,7 +452,7 @@ class RequestBase(object):
         """
         self.is_ssl = bool(env.get('SSL_PROTOCOL') or
                            env.get('SSL_PROTOCOL_VERSION') or
-                           env.get('HTTPS').lower() in ('on', '1') or
+                           env.get('HTTPS', 'off').lower() in ('on', '1') or
                            env.get('wsgi.url_scheme') == 'https')
 
     def setHost(self, host=None):
