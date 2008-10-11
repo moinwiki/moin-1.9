@@ -1,19 +1,12 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-
+# -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - Pygments Parser
+    MoinMoin - highlighting parser using the Pygments highlighting library
 
     @copyright: 2008 Radomir Dopieralski <moindev@sheep.art.pl>
-
     @license: GNU GPL, see COPYING for details.
 """
 
 import re
-
-from MoinMoin.parser._ParserBase import parse_start_step
-from MoinMoin.support.python_compatibility import hash_new
-from MoinMoin import config, wikiutil
 
 import pygments
 import pygments.util
@@ -21,8 +14,12 @@ import pygments.lexers
 import pygments.formatter
 from pygments.token import Token
 
+from MoinMoin import config
+from MoinMoin.parser._ParserBase import parse_start_step
+from MoinMoin.support.python_compatibility import hash_new
+
 Dependencies = []
-extensions = ['.py']
+extensions = []
 extension_re = re.compile(r'^\*(\..*$)')
 for name, short, patterns, mime in pygments.lexers.get_all_lexers():
     for pattern in patterns:
@@ -30,7 +27,9 @@ for name, short, patterns, mime in pygments.lexers.get_all_lexers():
         if m and m.groups(0):
             extensions.extend(m.groups(0))
 
+
 class PygmentsFormatter(pygments.formatter.Formatter):
+    """ a formatter for Pygments that uses the moin formatter for creating output """
     line_re = re.compile(r'(\n)')
 
     def __init__(self, formatter):
@@ -41,7 +40,7 @@ class PygmentsFormatter(pygments.formatter.Formatter):
     def get_class(self, ttype):
         if ttype in Token.Text:
             return None
-        # Reuse existing MoinMoin's class names
+        # Reuse existing MoinMoin css class names
         elif ttype in Token.Keyword.Constant:
             return 'ConsWord'
         elif ttype in Token.Keyword:
@@ -93,6 +92,7 @@ class PygmentsFormatter(pygments.formatter.Formatter):
 #        if line_ready:
 #            result.append(fmt.code_line(0))
 
+
 class Parser:
     parsername = "highlight"
     Dependencies = Dependencies
@@ -134,3 +134,4 @@ class Parser:
         fmt.result.append(formatter.code_area(0, self._code_id))
         fmt.result.append(formatter.div(0))
         self.request.write("".join(fmt.result))
+
