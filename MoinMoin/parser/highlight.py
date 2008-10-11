@@ -41,6 +41,8 @@ class PygmentsFormatter(pygments.formatter.Formatter):
         if ttype in Token.Text:
             return None
         # Reuse existing MoinMoin css class names
+        elif ttype in Token.Comment.Preproc:
+            return 'Preprc'
         elif ttype in Token.Keyword.Constant:
             return 'ConsWord'
         elif ttype in Token.Keyword:
