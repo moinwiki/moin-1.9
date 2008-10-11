@@ -96,23 +96,29 @@ class PygmentsFormatter(pygments.formatter.Formatter):
 
 
 class Parser:
-    parsername = "highlight"
+    parsername = "highlight"  # compatibility wrappers override this with the pygments lexer name
     Dependencies = Dependencies
     extensions = extensions
 
-    def __init__(self, raw, request, filename=None, **kw):
+    def __init__(self, raw, request, filename=None, format_args='', **kw):
         self.request = request
         self.raw = raw.strip('\n')
         self.filename = filename
-        parts = kw.get('format_args', '').split(None)
-        if parts:
-            self.syntax = parts[0]
+        if self.parsername == 'highlight':
+            # user is directly using the highlight parser
+            parts = format_args.split(None)
+            if parts:
+                self.syntax = parts[0]
+            else:
+                self.syntax = ''
+            if len(parts) > 1:
+                params = ' '.join(parts[1:])
+            else:
+                params = ''
         else:
-            self.syntax = ''
-        if len(parts) > 1:
-            params = ' '.join(parts[1:])
-        else:
-            params = ''
+            # a compatibility wrapper inherited from this class
+            self.syntax = self.parsername
+            params = format_args
         self.show_nums, self.num_start, self.num_step, attrs = parse_start_step(request, params)
 
     def format(self, formatter):
