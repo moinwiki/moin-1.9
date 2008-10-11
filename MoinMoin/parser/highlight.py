@@ -110,7 +110,7 @@ class Parser:
         else:
             self.syntax = ''
         if len(parts) > 1:
-            params = ''.join(parts[1:])
+            params = ' '.join(parts[1:])
         else:
             params = ''
         self.show_nums, self.num_start, self.num_step, attrs = parse_start_step(request, params)
