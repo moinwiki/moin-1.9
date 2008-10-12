@@ -41,12 +41,6 @@ class PygmentsFormatter(pygments.formatter.Formatter):
         if ttype in Token.Text:
             return None
         # Reuse existing MoinMoin css class names
-        elif ttype in Token.Generic.Deleted:
-            return 'DiffRemoved'
-        elif ttype in Token.Generic.Inserted:
-            return 'DiffAdded'
-        elif ttype in Token.Generic.Subheading:
-            return 'DiffSeparator'
         elif ttype in Token.Operator.Word:
             return 'ResWord'
         elif ttype in Token.Comment.Preproc:
