@@ -88,6 +88,10 @@ pre.comment:before {
 .dashed { border: 2px dashed #000000; padding: 2px; }
 .dotted { border: 2px dotted #000000; padding: 2px; }
 
+.left { text-align: left; }
+.center { text-align: center; }
+.right { text-align: right; }
+.justify { text-align: justify; }
 
 table {
 	margin: 0.5em 0 0 0.5em;
