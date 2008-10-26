@@ -50,7 +50,7 @@ def generate_ver(identities, features, algo='sha-1'):
     ident = list(identities)
     # default sorting already considers both, category and type
     ident.sort()
-    ident = ('%s/%s' % (idcat, idtype) for idcat, idtype in ident)
+    ident = ['%s/%s' % (idcat, idtype) for idcat, idtype in ident]
 
     feat = list(features)
     # strings (byte arrays) are ordered by i;octet by default
