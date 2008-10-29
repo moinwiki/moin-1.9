@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-02 15:00+0200\n"
+"POT-Creation-Date: 2008-09-28 20:59+0200\n"
 "PO-Revision-Date: 2008-05-23 03:00+0200\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -2359,8 +2359,7 @@ msgstr "Geslo ne vsebuje dovolj različnih znakov."
 
 msgid ""
 "Password is too easy (password contains name or name contains password)."
-msgstr
-"Geslo je preveč preprosto (vsebuje ime ali pa je vsebovano v imenu)."
+msgstr "Geslo je preveč preprosto (vsebuje ime ali pa je vsebovano v imenu)."
 
 msgid "Password is too easy (keyboard sequence)."
 msgstr "Geslo je preveč preprosto (zaporedje s tipkovnice)"
