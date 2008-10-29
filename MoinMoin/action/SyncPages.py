@@ -46,8 +46,12 @@ class ActionClass(object):
         self.status = []
         self.rollback = set()
 
-    def log_status(self, level, message="", substitutions=(), raw_suffix=""):
+    def log_status(self, level, message=u"", substitutions=(), raw_suffix=u""):
         """ Appends the message with a given importance level to the internal log. """
+        if isinstance(message, str):
+            message = message.decode("utf-8")
+        if isinstance(raw_suffix, str):
+            raw_suffix = raw_suffix.decode("utf-8")
         self.status.append((level, message, substitutions, raw_suffix))
 
     def register_rollback(self, func):
