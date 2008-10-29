@@ -97,7 +97,7 @@ while (i < aImages.length)
 		if (aImages[i])
 		{
 			var sUrl = sBasePath + aImages[i] ;
-			document.write( '<td width="' + iColWidth + '%" align="center" class="DarkBackground Hand" onclick="InsertSmiley(\'' + sUrl.replace(/'/g, "\\'" ) + '\', \'' + FCKConfig.SmileyMap[aImages[i]] + '\')" onmouseover="over(this)" onmouseout="out(this)">' ) ;
+			document.write( '<td width="' + iColWidth + '%" align="center" class="DarkBackground Hand" onclick="InsertSmiley(\'' + sUrl.replace(/'/g, "\\'" ) + '\', \'' + FCKConfig.SmileyMap[aImages[i]].replace(/'/g, "\\'" ).replace(/\\/g, "\\\\") + '\')" onmouseover="over(this)" onmouseout="out(this)">' ) ;
 			document.write( '<img src="' + sUrl + '" border="0" />' ) ;
 		}
 		else
