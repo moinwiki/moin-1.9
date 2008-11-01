@@ -32,6 +32,22 @@ Known main issues:
     editor_default = 'text'  # internal default, just for completeness
 
 
+Version 1.8.0current:
+  Bug Fixes:
+    * Python 2.3 compatibility fixes
+    * Fixing https detection for servers using HTTPS=1 and also for WSGI
+      servers not using HTTPS/SSL_ environment, but just wsgi.url_scheme.
+    * GUI editor:
+      * Fix crash when editing a page with non-ASCII pagename and inserting
+        a link.
+      * Fix inserting smiley markup that contains a backslash or single-quote.
+    * SyncPages: add workaround for callers calling log_status with encoded
+      bytestrings.
+  Other changes:
+    * moin import irclog: use irssi parser to format logs, mapped .irc
+      extension to text/plain mimetype.
+    * Added sk (slovak) i18n, updated i18n.
+
 Version 1.8.0rc1:
   Bug Fixes:
     * Search results: link to 'view' rendering of found attachments.
