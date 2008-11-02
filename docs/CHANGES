@@ -54,6 +54,11 @@ Version 1.8.0:
     * New macros "WikiConfig" and "WikiConfigHelp".
     * Per-parser quickhelp, 'quickhelp' class variable of parser class.
     * Secure session cookies for https (see cfg.cookie_secure).
+    * Added left/center/right/justify css classes to builtin themes.
+      Use them like:
+      {{{#!wiki justify
+      this content is justified....
+      }}}
 
   Removed Features: ==========================================================
     * HINT: url_prefix setting (use url_prefix_static or just use the default)
