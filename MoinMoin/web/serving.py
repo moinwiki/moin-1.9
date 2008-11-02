@@ -10,11 +10,16 @@
 """
 import os
 from MoinMoin import config
-from werkzeug.utils import SharedDataMiddleware
-from werkzeug.serving import BaseRequestHandler, run_simple
 
 from MoinMoin import version, log
 logging = log.getLogger(__name__)
+
+# make werkzeug use our logging framework and configuration:
+import werkzeug._internal
+werkzeug._internal._logger = log.getLogger('werkzeug')
+
+from werkzeug.utils import SharedDataMiddleware
+from werkzeug.serving import BaseRequestHandler, run_simple
 
 class RequestHandler(BaseRequestHandler):
     """
