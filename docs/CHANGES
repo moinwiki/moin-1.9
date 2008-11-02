@@ -31,6 +31,19 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
+Version 1.9.current:
+  New features:
+    * HINT: MoinMoin is now a WSGI application.
+      Please read the new install docs about how to use it.
+    * We use the pygments highlighting library now, use it like this:
+      {{{#!highlight xxx
+      ...
+      }}}
+      xxx is any of the markups pygments supports.
+      Note: we still have some (deprecated) small wrappers around pygments,
+      so the old syntax #!python/pascal/cplusplus/... still works.
+
+
 
 Version 1.8.0:
   Note: This is a reduced CHANGES, ommitting details from rc/beta test and
