@@ -441,7 +441,7 @@ pattern = re.compile(r'{{{This is some nested text}}}')
 }}}}"""
         output = self.parse(raw)
         output = ''.join(output)
-        assert "r'{{{This is some nested text}}}'" in output
+        assert "{{{This is some nested text}}}" in output
 
     def testNestingPreBrackets(self):
         """ tests nested {{{ }}} for the wiki parser

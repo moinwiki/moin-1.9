@@ -302,20 +302,7 @@ pattern = re.compile(r'{{{This is some nested text}}}')
 }}}"""
         output = self.parse(raw)
         output = ''.join(output)
-        assert "r'{{{This is some nested text}}}'" in output
-
-    def testColorizedPythonParserAndNestingPreBracketsWithLinebreak(self):
-        """ tests nested {{{ }}} for the python colorized parser
-        """
-
-        raw = """{{{
-#!python
-import re
-pattern = re.compile(r'{{{This is some nested text}}}')
-}}}"""
-        output = self.parse(raw)
-        output = ''.join(output)
-        assert "r'{{{This is some nested text}}}'" in output
+        assert "{{{This is some nested text}}}" in output
 
     def testNestingPreBracketsWithLinebreak(self):
         """ tests nested {{{ }}} for the wiki parser
