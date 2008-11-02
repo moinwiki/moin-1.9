@@ -11,8 +11,8 @@
 from MoinMoin.support.python_compatibility import rsplit
 from MoinMoin.util.moinoid import MoinOpenIDStore, strbase64
 from MoinMoin import wikiutil
-from openid.consumer.discover import (OPENID_1_0_TYPE,
-    OPENID_1_1_TYPE, OPENID_2_0_TYPE, OPENID_IDP_2_0_TYPE)
+from openid.consumer.discover import OPENID_1_0_TYPE, \
+    OPENID_1_1_TYPE, OPENID_2_0_TYPE, OPENID_IDP_2_0_TYPE
 from openid import sreg
 from openid.cryptutil import randomString
 from openid.server import server

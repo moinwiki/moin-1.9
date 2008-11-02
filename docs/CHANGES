@@ -32,117 +32,36 @@ Known main issues:
     editor_default = 'text'  # internal default, just for completeness
 
 
-Version 1.8.0rc1:
-  Bug Fixes:
-    * Search results: link to 'view' rendering of found attachments.
-    * Fixed moin server standalone argument processing for --interface="".
-    * mointwisted: fixed Twisted start script.
-    * Fix dbw_hide_buttons javascript.
-    * Logging:
-      * Use logging framework for messages emitted by warnings module (e.g.
-        DeprecationWarning), silence some specific warnings.
-      * Removed superfluous linefeeds in timing log output.
+Version 1.8.0:
+  Note: This is a reduced CHANGES, ommitting details from rc/beta test and
+        also less interesting minor changes and fixes. It shows changes
+        relative to 1.7.2 release.
+        If you want to see full detail, read it there:
+        http://hg.moinmo.in/moin/1.8/file/6130eab15936/docs/CHANGES
 
-
-Version 1.8.0beta3:
-  Bug Fixes:
-    * Jabber bot can now be configured to use an authentication realm which
-      is different from the server's hostname; the xmpp_node configuration
-      parameter can now contain a full JID and the xmpp_resource parameter
-      is no longer supported.
-    * Added translation to the password checker result messages.
-    * Bug fix for language not installed (MoinMoinBugs/WikiLanguageNotDefined).
-    * diff action: make output valid html 4.01
-    * Fixed editbar hidden comment link cosmetics for sidebar themes (hide the
-      complete list element).
-    * Standalone server: fix serverClass argument processing, announce used
-      serverClass in log output.
-
-  Other changes:
-    * Speed up javascript comments processing on IE by getElementsByClassName()
-
-
-Version 1.8.0beta2:
-  Bug Fixes:
-    * GUI Editor - fixed bugs:
-      * Create shorter output for colors (better roundtripping).
-      * Fixed heading level roundtripping.
-      * Handle th in the same way as td (instead of giving traceback due to
-        unhandled element).
-      * MoinMoinBugs/1.6GuiEditorRemovesLinkOptions (fix roundtripping of
-        attachment links with &do=get param (q&d fix)
-      * MoinMoinBugs/GuiEditorInterwikiLinksMiss"wiki:"prefix (fix roundtripping
-        of free interwiki links)
-      * MoinMoinBugs/GuiEditorWrongConversionOfTableAttributes (fix processing
-        of table caption)
-      * MoinMoinBugs/1.8_GUIEditorDoesNotSupportScriptElement (added some more
-        unsupported elements, do not traceback for these)
-    * MoinMoinBugs/DoubleScriptNameInSitemap (fixing urls given by sitemap
-      action, if the wiki does not run in the root url of the site)
-    * Fixed a Python2.3 incompatibility (base64.b64decode).
-    * Fixed backup action configuration (broke on win32).
-    * Added link icon for ssh: links.
-    * "modernized" theme:
-      * Increased padding-left for correct rendering of bigger icons on MS IE.
-      * Changed some modernized images to always get the same white background
-        for MS IE6.
-
-
-Version 1.8.0beta1:
-
-  New Features:
-    * New "modernized" theme.
+  New Features: ==============================================================
+    * HINT: New "modernized" theme - if you use "modern" [default], try:
+      theme_default = 'modernized'
+      If you find problems with "modernized", please report them because we
+      want to use it as default theme in future.
     * GUI Editor:
-      * upgraded to use FCKEditor version 2.6.3 (current version)
+      * upgraded to use FCKEditor version 2.6.3
       * user can insert and modify various types of MoinMoin links
-    * New plugin_dirs setting to allow multiple plugin paths (additional to
+    * New plugin_dirs setting to allow multiple plugin pathes (additional to
       the automatically configured plugin_dir [default: data_dir/plugin]).
     * @EMAIL@ expands to a MailTo macro call with the obfuscated email address
       of the current user.
     * New macros "WikiConfig" and "WikiConfigHelp".
     * Per-parser quickhelp, 'quickhelp' class variable of parser class.
     * Secure session cookies for https (see cfg.cookie_secure).
+    * Added left/center/right/justify css classes to builtin themes.
+      Use them like:
+      {{{#!wiki justify
+      this content is justified....
+      }}}
 
-  Bug Fixes:
-    * GUI Editor - fixed bugs:
-      * Fixed MoinMoin:MoinMoinBugs/GuiEditorExtendsAnchorsToThePageName
-      * Fixed MoinMoin:MoinMoinBugs/GuiEditorIndentingChangedForTables
-      * Fixed MoinMoin:MoinMoinBugs/GuiEditorIndentStyledText
-      * Fixed MoinMoin:MoinMoinBugs/GUIEditorConvertsRelativeLinkstoAbsoluteAfterChangingAnExistingLink
-      * Fixed MoinMoin:MoinMoinBugs/GuiEditorDestroysParserSyntax
-      * Fixed MoinMoin:MoinMoinBugs/GUIEditorConvertsRelativeLinkstoAbsolute
-      * Fixed MoinMoin:MoinMoinBugs/GuiEditorCantCancel
-      * Fixed MoinMoin:MoinMoinBugs/GuiEditorRemovesInlineComments
-      * Fixed MoinMoin:MoinMoinBugs/GuiEditorPasteFromWordError
-      * Fixed MoinMoin:MoinMoinBugs/GuiEditorPasteFromOpenOfficeCausingConvertError
-      * Fixed MoinMoin:MoinMoinBugs/GUIDoesNotChangeLinks
-      * Fixed MoinMoin:MoinMoinBugs/GuiEditorTabsCausesConvertError
-      * Fixed MoinMoin:MoinMoinBugs/1.6devGuiPreviewEatsTextBeforeMacro
-      * Fixed MoinMoin:MoinMoinBugs/GuiEditorAddingACellDestroysTable
-      * Fixed MoinMoin:MoinMoinBugs/GuiEditorBreaksTables
-      * Fixed MoinMoin:MoinMoinBugs/GUIEditorInsertsInvalidLinkInFirefox3
-      * Fixed MoinMoin:MoinMoinBugs/GuiEditorExcelPasteProblem
-      * Fixed MoinMoin:MoinMoinBugs/GuiEditorExpatErrorWhenPastingTable
-      * Fixed MoinMoin:MoinMoinBugs/GuiEditorFailsOnAttachmentsToOtherPage
-      * Fixed MoinMoin:MoinMoinBugs/GuiEditorHorizontalLine
-      * Fixed MoinMoin:MoinMoinBugs/GuiEditorLineBreak
-      * Fixed MoinMoin:MoinMoinBugs/GuiEditorLineBreakInLists
-      * Fixed MoinMoin:MoinMoinBugs/GuiEditorLinkContainsJavaScript
-      * Fixed MoinMoin:MoinMoinBugs/GuiEditorLosesEmptyLinesInFirefox1.5
-      * Fixed MoinMoin:MoinMoinBugs/GuiEditorPasteFromWordCausingConvertError
-      * Fixed MoinMoin:MoinMoinBugs/GuiEditorPreviewDataLoss
-      * Fixed MoinMoin:MoinMoinBugs/GuiEditorTableOfContentsIncomplete
-      * Fixed MoinMoin:MoinMoinBugs/GuiEditorUnusableAfterThemeChange
-      * Fixed MoinMoin:MoinMoinBugs/GuiEditorCorruptingNonWikiPages
-      * Fixed MoinMoin:MoinMoinBugs/GuiEditorInterwikiLinksMiss"wiki%3A"prefix 
-      * Fixed MoinMoin:MoinMoinBugs/GuiEditorExcelPasteUnboundPrefix
-      * Fixed MoinMoin:MoinMoinBugs/GuiEditorFormatDropdownCrashesIE
-      * Fixed MoinMoin:MoinMoinBugs/GuiEditorWordsGetJoinedTogether
-      * Fixed MoinMoin:MoinMoinBugs/GuiEditorShouldWorkOnSyntaxReference
-    * Fixed MoinMoinBugs/PackagesAddRevision.
-
-  Removed Features:
-    * url_prefix setting (use url_prefix_static or just use the default)
+  Removed Features: ==========================================================
+    * HINT: url_prefix setting (use url_prefix_static or just use the default)
     * traceback_log_dir setting (we just use logging.exception)
     * editor_quickhelp setting (replaced by per-parser quickhelp)
     * Restoring backups with the backup action and related settings (while
@@ -154,19 +73,51 @@ Version 1.8.0beta1:
     * Removed unmaintained DesktopEdition (moin 1.5.x style) and phpwiki
       migration scripts from contrib/ directory.
 
-  Other Changes:
-    * user_autocreate setting was removed from wiki configuration and replaced
-      by a autocreate=<boolean> parameter of the auth objects that support user
-      profile auto creation.
-    * backup action: backup_exclude (default: "do not exclude anything") is now
-      a function f(filename) that tells whether a file should be excluded from
-      backup.
+  Bug Fixes: =================================================================
+    * GUI Editor - fixed lots of bugs.
+    * Fixing https detection for servers using HTTPS=1 and also for WSGI
+      servers not using HTTPS/SSL_ environment, but just wsgi.url_scheme.
+    * Search results: link to 'view' rendering of found attachments.
+    * Standalone server: fix serverClass and interface argument processing,
+      announce used serverClass in log output.
+    * mointwisted: fixed Twisted start script.
+    * Logging:
+      * Use logging framework for messages emitted by warnings module (e.g.
+        DeprecationWarning), silence some specific warnings.
+      * Removed superfluous linefeeds in timing log output.
+    * Bug fix for language not installed (MoinMoinBugs/WikiLanguageNotDefined).
+    * Fixed editbar hidden comment link cosmetics for sidebar themes (hide the
+      complete list element).
+    * MoinMoinBugs/DoubleScriptNameInSitemap (fixing urls given by sitemap
+      action, if the wiki does not run in the root url of the site)
+    * Fixed backup action configuration (broke on win32).
+    * Fixed MoinMoinBugs/PackagesAddRevision.
+    * SyncPages: add workaround for callers calling log_status with encoded
+      bytestrings.
+    * Fixed dbw_hide_buttons javascript.
+    * HINT: Jabber bot can now be configured to use an authentication realm
+      which is different from the server's hostname; the xmpp_node
+      configuration parameter can now contain a full JID and the xmpp_resource
+      parameter is no longer supported.
+
+  Other Changes: =============================================================
+    * HINT: user_autocreate setting was removed from wiki configuration and
+      replaced by a autocreate=<boolean> parameter of the auth objects that
+      support user profile auto creation.
+    * moin import irclog: use irssi parser to format logs, mapped .irc
+      extension to text/plain mimetype.
+    * HINT: backup action: backup_exclude (default: "do not exclude anything")
+      is now a function f(filename) that tells whether a file should be
+      excluded from backup.
       You can get the old regex exclusion functionality by using:
       backup_exclude = re.compile(your_regex).search
       Be careful with your regex, you might need to use re.escape() to escape
       characters that have a special meaning in regexes (e.g.: \.[] etc.).
       If in doubt, maybe just leave backup_exclude at the default and don't
       exclude anything.
+    * Speed up javascript comments processing on IE by getElementsByClassName()
+    * Added sk (slovak) i18n, updated i18n.
+
 
 Version 1.7.2:
   Fixes:
