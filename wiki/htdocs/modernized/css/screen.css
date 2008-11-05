@@ -18,6 +18,8 @@ a:link { color: #47f; text-decoration: none; }
 a:link:hover, a:link:active { text-decoration: underline; color: green; }
 a:visited { text-decoration: none; color: #04a;}
 a:visited:hover { text-decoration: none; color: red; }
+a.nonexistent:link { color: #666 }
+a.nonexistent:hover { color: black; text-decoration: underline }
 
 a.download {
     font-size: 120%; 
