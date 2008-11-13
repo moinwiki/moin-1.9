@@ -2,12 +2,16 @@
 """
     MoinMoin - File System Utilities
 
-    @copyright: 2002 Juergen Hermann <jh@web.de>
+    @copyright: 2002 Juergen Hermann <jh@web.de>,
+                2006-2008 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
-import sys, os, shutil, time
+import sys, os, shutil, time, errno
 from stat import S_ISDIR, ST_MODE, S_IMODE
+
+from MoinMoin import log
+logging = log.getLogger(__name__)
 
 #############################################################################
 ### Misc Helpers
@@ -66,6 +70,37 @@ def touch(name):
             win32file.CloseHandle(handle)
     else:
         os.utime(name, None)
+
+
+def access_denied_decorator(fn):
+    """ Due to unknown reasons, some os.* functions on Win32 sometimes fail
+        with Access Denied (although access should be possible).
+        Just retrying it a bit later works and this is what we do.
+    """
+    if sys.platform == 'win32':
+        def wrapper(*args, **kwargs):
+            max_retries = 10
+            retry = 0
+            while True:
+                try:
+                    return fn(*args, **kwargs)
+                except OSError, err:
+                    retry += 1
+                    if retry > max_retries:
+                        raise
+                    if err.errno == errno.EACCES:
+                        logging.warning('%s(%r, %r) -> access denied. retrying...' % (fn.__name__, args, kwargs))
+                        time.sleep(0.01)
+                        continue
+                    raise
+        return wrapper
+    else:
+        return fn
+
+stat = access_denied_decorator(os.stat)
+mkdir = access_denied_decorator(os.mkdir)
+rmdir = access_denied_decorator(os.rmdir)
+
 
 def fuid(filename, max_staleness=3600):
     """ return a unique id for a file
