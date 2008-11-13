@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-28 20:59+0200\n"
+"POT-Creation-Date: 2008-09-12 23:35+0200\n"
 "PO-Revision-Date: 2005-03-13 17:43+0200\n"
 "Last-Translator: Sander Kromwijk <s.kromwijk@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -2338,21 +2338,6 @@ msgstr ""
 
 msgid "You need to be subscribed to unsubscribe."
 msgstr "U moet geabonneerd zijn om uit te schrijven."
-
-#, fuzzy
-msgid "Password is too short."
-msgstr "Wachtwoord herhalen"
-
-msgid "Password has not enough different characters."
-msgstr ""
-
-#, fuzzy
-msgid ""
-"Password is too easy (password contains name or name contains password)."
-msgstr "Geen wachtwoord. Geef een gebruikersnaam en wachtwoord op."
-
-msgid "Password is too easy (keyboard sequence)."
-msgstr ""
 
 msgid "Diffs"
 msgstr "Verschillen"

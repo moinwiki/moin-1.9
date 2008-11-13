@@ -38,7 +38,6 @@ class LoginHandler:
         form.append(html.INPUT(type='hidden', name='stage',
                                value=request._login_multistage_name))
 
-        request.emit_http_headers()
         request.theme.send_title(_("Login"), pagename=self.pagename)
         # Start content (important for RTL support)
         request.write(request.formatter.startContent("content"))
@@ -59,7 +58,7 @@ class LoginHandler:
 
         error = None
 
-        islogin = form.get('login', [''])[0]
+        islogin = form.get('login', '')
 
         if islogin: # user pressed login button
             if request._login_multistage:
@@ -74,7 +73,6 @@ class LoginHandler:
             return self.page.send_page()
 
         else: # show login form
-            request.emit_http_headers()
             request.theme.send_title(_("Login"), pagename=self.pagename)
             # Start content (important for RTL support)
             request.write(request.formatter.startContent("content"))

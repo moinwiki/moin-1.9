@@ -563,7 +563,7 @@ def load_wikimap(request):
             if not line or line[0] == '#':
                 continue
             try:
-                line = "%s %s/InterWiki" % (line, request.getScriptname())
+                line = "%s %s/InterWiki" % (line, request.script_root)
                 wikitag, urlprefix, dummy = line.split(None, 2)
             except ValueError:
                 pass
@@ -573,9 +573,9 @@ def load_wikimap(request):
         del lines
 
         # add own wiki as "Self" and by its configured name
-        _interwiki_list['Self'] = request.getScriptname() + '/'
+        _interwiki_list['Self'] = request.script_root + '/'
         if request.cfg.interwikiname:
-            _interwiki_list[request.cfg.interwikiname] = request.getScriptname() + '/'
+            _interwiki_list[request.cfg.interwikiname] = request.script_root + '/'
 
         # save for later
         request.cfg.cache.interwiki_list = _interwiki_list
@@ -647,7 +647,7 @@ def resolve_wiki(request, wikiurl):
     if wikiname in _interwiki_list:
         return (wikiname, _interwiki_list[wikiname], pagename, False)
     else:
-        return (wikiname, request.getScriptname(), "/InterWiki", True)
+        return (wikiname, request.script_root, "/InterWiki", True)
 
 def resolve_interwiki(request, wikiname, pagename):
     """ Resolve an interwiki reference (wikiname:pagename).
@@ -662,7 +662,7 @@ def resolve_interwiki(request, wikiname, pagename):
     if wikiname in _interwiki_list:
         return (wikiname, _interwiki_list[wikiname], pagename, False)
     else:
-        return (wikiname, request.getScriptname(), "/InterWiki", True)
+        return (wikiname, request.script_root, "/InterWiki", True)
 
 def join_wiki(wikiurl, wikitail):
     """
@@ -709,14 +709,14 @@ def isTemplatePage(request, pagename):
     return request.cfg.cache.page_template_regexact.search(pagename) is not None
 
 
-def isGroupPage(request, pagename):
+def isGroupPage(pagename, cfg):
     """ Is this a name of group page?
 
     @param pagename: the page name
     @rtype: bool
     @return: true if page is a form page
     """
-    return request.cfg.cache.page_group_regexact.search(pagename) is not None
+    return cfg.cache.page_group_regexact.search(pagename) is not None
 
 
 def filterCategoryPages(request, pagelist):
@@ -2248,6 +2248,47 @@ class ParameterParser:
 #############################################################################
 ### Misc
 #############################################################################
+def normalize_pagename(name, cfg):
+    """ Normalize page name
+
+    Prevent creating page names with invisible characters or funny
+    whitespace that might confuse the users or abuse the wiki, or
+    just does not make sense.
+
+    Restrict even more group pages, so they can be used inside acl lines.
+
+    @param name: page name, unicode
+    @rtype: unicode
+    @return: decoded and sanitized page name
+    """
+    # Strip invalid characters
+    name = config.page_invalid_chars_regex.sub(u'', name)
+
+    # Split to pages and normalize each one
+    pages = name.split(u'/')
+    normalized = []
+    for page in pages:
+        # Ignore empty or whitespace only pages
+        if not page or page.isspace():
+            continue
+
+        # Cleanup group pages.
+        # Strip non alpha numeric characters, keep white space
+        if isGroupPage(page, cfg):
+            page = u''.join([c for c in page
+                             if c.isalnum() or c.isspace()])
+
+        # Normalize white space. Each name can contain multiple
+        # words separated with only one space. Split handle all
+        # 30 unicode spaces (isspace() == True)
+        page = u' '.join(page.split())
+
+        normalized.append(page)
+
+    # Assemble components into full pagename
+    name = u'/'.join(normalized)
+    return name
+
 def taintfilename(basename):
     """
     Make a filename that is supposed to be a plain name secure, i.e.
@@ -2365,7 +2406,7 @@ def link_tag(request, params, text=None, formatter=None, on=None, **kw):
     if text is None:
         text = params # default
     if formatter:
-        url = "%s/%s" % (request.getScriptname(), params)
+        url = "%s/%s" % (request.script_root, params)
         # formatter.url will escape the url part
         if on is not None:
             tag = formatter.url(on, url, css_class, **kw)
@@ -2384,7 +2425,7 @@ def link_tag(request, params, text=None, formatter=None, on=None, **kw):
                 attrs += ' id="%s"' % id
             if name:
                 attrs += ' name="%s"' % name
-            tag = '<a%s href="%s/%s">' % (attrs, request.getScriptname(), params)
+            tag = '<a%s href="%s/%s">' % (attrs, request.script_root, params)
             if not on:
                 tag = "%s%s</a>" % (tag, text)
         logging.warning("wikiutil.link_tag called without formatter and without request.html_formatter. tag=%r" % (tag, ))

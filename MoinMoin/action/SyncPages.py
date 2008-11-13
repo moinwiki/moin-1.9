@@ -123,7 +123,7 @@ class ActionClass(object):
         """ Does some fixup on the parameters. """
         # Load the password
         if "password" in self.request.form:
-            params["password"] = self.request.form["password"][0]
+            params["password"] = self.request.form["password"]
 
         # merge the pageList case into the pageMatch case
         if params["pageList"] is not None:

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-28 20:59+0200\n"
+"POT-Creation-Date: 2008-09-12 23:35+0200\n"
 "PO-Revision-Date: 2008-08-15 10:04-0500\n"
 "Last-Translator: Igor Támara <igor@tamaraptino.org>\n"
 "Language-Team: Spanish <moin-devel@lists.sourceforge.net>\n"
@@ -2352,23 +2352,6 @@ msgstr "Edita la suscripción a expresiones regulares en tus preferencias."
 
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Necesitas estar suscrito para cancelar la suscripción."
-
-#, fuzzy
-msgid "Password is too short."
-msgstr "Restaurar clave"
-
-msgid "Password has not enough different characters."
-msgstr ""
-
-#, fuzzy
-msgid ""
-"Password is too easy (password contains name or name contains password)."
-msgstr ""
-"Faltó ingresar la contraseña. Por favor, ingresa el nombre de usuario y "
-"contraseña"
-
-msgid "Password is too easy (keyboard sequence)."
-msgstr ""
 
 msgid "Diffs"
 msgstr "Diferencias"

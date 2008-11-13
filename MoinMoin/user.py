@@ -197,7 +197,7 @@ def isValidName(request, name):
     @param name: user name, unicode
     """
     normalized = normalizeName(name)
-    return (name == normalized) and not wikiutil.isGroupPage(request, name)
+    return (name == normalized) and not wikiutil.isGroupPage(name, request.cfg)
 
 
 def encodeList(items):
@@ -1030,7 +1030,7 @@ Password reset URL: %s/?action=recoverpass&name=%s&token=%s
 """) % (
                         self.name,
                         tok,
-                        self._request.getBaseURL(),
+                        self._request.url_root,
                         url_quote_plus(self.name),
                         tok, )
 

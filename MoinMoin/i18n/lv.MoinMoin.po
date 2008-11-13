@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-28 20:59+0200\n"
+"POT-Creation-Date: 2008-09-12 23:35+0200\n"
 "PO-Revision-Date: 2008-05-10 22:31+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000 AT AT AT AT gmail SPAM NO NO DOT "
 "NO SPAM com>\n"
@@ -2013,11 +2013,13 @@ msgstr "(pēc %d versijām)"
 msgid "Revert to this revision"
 msgstr "Atgriezties pie šīs versijas"
 
+#, fuzzy
 msgid "Previous change"
-msgstr "Iepriekšējais labojums"
+msgstr "iepriekšējā"
 
+#, fuzzy
 msgid "Next change"
-msgstr "Nākamais labojums"
+msgstr "Bez izmaiņām"
 
 #, python-format
 msgid "The page was saved %(count)d times, though!"
@@ -2065,8 +2067,9 @@ msgstr "Kopēšanas iemesls (neobligāts)"
 msgid "Really copy this page?"
 msgstr "Jūs tiešām vēlaties kopēt šo lapu?"
 
+#, fuzzy
 msgid "Revert"
-msgstr "Atgriezt"
+msgstr "Atgriezt visu!"
 
 msgid "You are not allowed to revert this page!"
 msgstr "Jūs nedrīkstat atjaunot no arhīva šo lapu!"
@@ -2080,11 +2083,13 @@ msgstr ""
 "Jūs vēlaties atgriezt iepriekšēju lapas versiju, sākumā atveriet aplūkošanai "
 "lapas iepriekšējo versiju."
 
+#, fuzzy
 msgid "Optional reason for reverting this page"
-msgstr "Šīs lapas atgriešanas iemesls (neobligāts)"
+msgstr "Kopēšanas iemesls (neobligāts)"
 
+#, fuzzy
 msgid "Really revert this page?"
-msgstr "Jūs tiešām vēlaties atgriezt šo lapu?"
+msgstr "Jūs tiešām vēlaties pārdēvēt šo lapu?"
 
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
@@ -2114,19 +2119,20 @@ msgid "Trust root"
 msgstr ""
 
 msgid "Identity URL"
-msgstr "Identitātes URL"
-
-msgid "Remember decision"
 msgstr ""
+
+#, fuzzy
+msgid "Remember decision"
+msgstr "PyStemmer versija"
 
 msgid "Remember this trust decision and don't ask again"
 msgstr ""
 
 msgid "Approve"
-msgstr "Apstiprināt"
+msgstr ""
 
 msgid "Don't approve"
-msgstr "Neapstiprināt"
+msgstr ""
 
 msgid "OpenID not served"
 msgstr ""
@@ -2140,10 +2146,10 @@ msgid ""
 msgstr ""
 
 msgid "Please choose:"
-msgstr "Lūdzu izvēlieties:"
+msgstr ""
 
 msgid "Settings"
-msgstr "Iestatījumi"
+msgstr ""
 
 msgid "General Information"
 msgstr "Vispārēja informācija"
@@ -2164,8 +2170,9 @@ msgstr "Šajā lapā ir saites uz sekojošām lapām:"
 msgid "Diff"
 msgstr "Atšķirība"
 
+#, fuzzy
 msgid "to previous"
-msgstr "uz iepriekšējo"
+msgstr "iepriekšējā"
 
 #, python-format
 msgid "Revert to revision %(rev)d."
@@ -2277,24 +2284,12 @@ msgstr "Jūs vairs neesat parakstījies(-usies) uz šo lapu."
 msgid "Can't remove regular expression subscription!"
 msgstr "Regulāras izteiksmes pierakstu izdzēst nevar!"
 
+#, fuzzy
 msgid "Edit the subscription regular expressions in your settings."
-msgstr "Labojiet parasktīšanās regulāras izteiksmes savos iestatījumos."
+msgstr "Labojiet parasktīšanās regulāras izteiksmes savā LietotājaIstatījumi."
 
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Lai atrakstītos, jums nepieciešams būt parakstījušam(-šai) uz šo lapu."
-
-msgid "Password is too short."
-msgstr "Parole ir pārāk īsa."
-
-msgid "Password has not enough different characters."
-msgstr "Parolē ir parmaz atšķirīgu zīmju."
-
-msgid ""
-"Password is too easy (password contains name or name contains password)."
-msgstr "Parole ir pārak vienkārša (parole satur vārdu vai vārds satur paroli)."
-
-msgid "Password is too easy (keyboard sequence)."
-msgstr "Parole ir pārāk vienkārša (secīgi spiesti taustiņi)."
 
 msgid "Diffs"
 msgstr "Atšķirības"
@@ -2535,8 +2530,9 @@ msgstr "Lietotājs"
 msgid "[ATTACH]"
 msgstr ""
 
+#, fuzzy
 msgid "Variable name"
-msgstr "Mainīgā nosaukums"
+msgstr "Faila nosaukums"
 
 msgid "Description"
 msgstr ""
@@ -2592,7 +2588,7 @@ msgid ""
 msgstr ""
 
 msgid "Setting"
-msgstr "Iestatījums"
+msgstr ""
 
 msgid "Search for items"
 msgstr "Meklēt vienības"
@@ -2642,11 +2638,12 @@ msgstr "Meklēt visās lapas versijās"
 msgid "Go get it!"
 msgstr "Satver!"
 
+#, fuzzy
 msgid "File attachment browser"
-msgstr "Datnes piesaistes pārlūks"
+msgstr "Jauna piesaistes nosaukums"
 
 msgid "User account browser"
-msgstr "Lietotāju kontu pārlūks"
+msgstr ""
 
 msgid "No wanted pages in this wiki."
 msgstr "Šajā viki pieprasīto lapu nav."
@@ -3078,7 +3075,7 @@ msgstr "Pārslēgt rindu numerāciju"
 #~ msgid "Use UserPreferences to change settings of the selected user account"
 #~ msgstr ""
 #~ "Lai mainītu lietotāja iestatījumus vai izveidotu lietotāja kontu, "
-#~ "izmantojiet LietotājaIestatījumi"
+#~ "izmantojiet LietotājaIstatījumi"
 
 #~ msgid ""
 #~ "This list does not work, unless you have entered a valid email address!"

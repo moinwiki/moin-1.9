@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-28 20:59+0200\n"
+"POT-Creation-Date: 2008-09-12 23:35+0200\n"
 "PO-Revision-Date: 2007-12-22 17:56+0200\n"
 "Last-Translator: YiannisValassakis <tungolcild@gmail.com>\n"
 "Language-Team: Greek <moin-devel@lists.sourceforge.net>\n"
@@ -2153,20 +2153,6 @@ msgid "Edit the subscription regular expressions in your settings."
 msgstr ""
 
 msgid "You need to be subscribed to unsubscribe."
-msgstr ""
-
-#, fuzzy
-msgid "Password is too short."
-msgstr "Κωδικός"
-
-msgid "Password has not enough different characters."
-msgstr ""
-
-msgid ""
-"Password is too easy (password contains name or name contains password)."
-msgstr ""
-
-msgid "Password is too easy (keyboard sequence)."
 msgstr ""
 
 msgid "Diffs"
