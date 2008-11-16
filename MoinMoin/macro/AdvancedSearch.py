@@ -46,7 +46,7 @@ def form_get(request, name, default='', escaped=False):
     @param default: value if not present (default: '')
     @param escaped: if True, escape value so it can be used for html generation (default: False)
     """
-    value = request.form.get(name, default)
+    value = request.values.get(name, default)
     if escaped:
         value = wikiutil.escape(value, quote=True)
     return value

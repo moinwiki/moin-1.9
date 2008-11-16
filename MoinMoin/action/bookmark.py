@@ -19,7 +19,7 @@ def execute(pagename, request):
         request.theme.add_msg(_("You must login to use this action: %(action)s.") % {"action": actname}, "error")
         return Page(request, pagename).send_page()
 
-    timestamp = request.form.get('time')
+    timestamp = request.values.get('time')
     if timestamp is not None:
         if timestamp == 'del':
             tm = None

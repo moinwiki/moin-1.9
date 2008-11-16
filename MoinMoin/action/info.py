@@ -76,7 +76,7 @@ def execute(pagename, request):
         _ = request.getText
         default_count, limit_max_count = request.cfg.history_count
         try:
-            max_count = int(request.form.get('max_count', [default_count])[0])
+            max_count = int(request.values.get('max_count', default_count))
         except:
             max_count = default_count
         max_count = min(max_count, limit_max_count)
@@ -205,8 +205,8 @@ def execute(pagename, request):
         request.write("[%s] " % page.link_to(request, text=text, querystr=querystr, rel='nofollow'))
     request.write(f.paragraph(0))
 
-    show_hitcounts = int(request.form.get('hitcounts', 0)) != 0
-    show_general = int(request.form.get('general', 0)) != 0
+    show_hitcounts = int(request.values.get('hitcounts', 0)) != 0
+    show_general = int(request.values.get('general', 0)) != 0
 
     if show_hitcounts:
         from MoinMoin.stats import hitcounts

@@ -11,14 +11,8 @@ from MoinMoin import config, wikiutil
 
 def execute(pagename, request):
     _ = request.getText
-    form = request.form
-
     # get the MIME type
-    if 'mimetype' in form:
-        mimetype = form['mimetype']
-    else:
-        mimetype = "text/html"
-
+    mimetype = request.values.get('mimetype', 'text/html')
     request.mimetype = mimetype
 
     if mimetype == "text/html":

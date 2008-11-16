@@ -33,7 +33,7 @@ def execute(pagename, request):
     if editor not in valideditors:
         editor = request.cfg.editor_default
 
-    editorparam = request.form.get('editor', editor)
+    editorparam = request.values.get('editor', editor)
     if editorparam == "guipossible":
         lasteditor = editor
     elif editorparam == "textonly":

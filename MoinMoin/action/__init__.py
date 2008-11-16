@@ -237,7 +237,7 @@ def do_raw(pagename, request):
         Page(request, pagename, rev=rev).send_raw()
 
 def do_show(pagename, request, content_only=0, count_hit=1, cacheable=1, print_mode=0):
-    """ show a page, either current revision or the revision given by rev form value.
+    """ show a page, either current revision or the revision given by "rev=" value.
         if count_hit is non-zero, we count the request for statistics.
     """
     # We must check if the current page has different ACLs.
@@ -255,14 +255,14 @@ def do_show(pagename, request, content_only=0, count_hit=1, cacheable=1, print_m
         )
 
 def do_format(pagename, request):
-    """ send a page using a specific formatter given by mimetype form key.
+    """ send a page using a specific formatter given by "mimetype=" value.
         Since 5.5.2006 this functionality is also done by do_show, but do_format
         has a default of text/plain when no format is given.
         It also does not count in statistics and also does not set the cacheable flag.
         DEPRECATED: remove this action when we don't need it any more for compatibility.
     """
-    if 'mimetype' not in request.form:
-        request.form['mimetype'] = u"text/plain"
+    if 'mimetype' not in request.values:
+        request.values['mimetype'] = u"text/plain"
     do_show(pagename, request, count_hit=0, cacheable=0)
 
 def do_content(pagename, request):
@@ -283,10 +283,10 @@ def do_recall(pagename, request):
 def do_refresh(pagename, request):
     """ Handle refresh action """
     # Without arguments, refresh action will refresh the page text_html cache.
-    arena = request.form.get('arena', 'Page.py')
+    arena = request.values.get('arena', 'Page.py')
     if arena == 'Page.py':
         arena = Page(request, pagename)
-    key = request.form.get('key', 'text_html')
+    key = request.values.get('key', 'text_html')
 
     # Remove cache entry (if exists), and send the page
     from MoinMoin import caching
@@ -296,7 +296,7 @@ def do_refresh(pagename, request):
 
 def do_goto(pagename, request):
     """ redirect to another page """
-    target = request.form.get('target', '')
+    target = request.values.get('target', '')
     request.http_redirect(Page(request, target).url(request))
 
 # Dispatching ----------------------------------------------------------------

@@ -41,7 +41,7 @@ from MoinMoin.support.python_compatibility import hmac_new
 
 action_name = __name__.split('.')[-1]
 
-# Do NOT get this directly from request.form or user would be able to read any cache!
+# Do NOT get this directly from request.values or user would be able to read any cache!
 cache_arena = 'sendcache'  # just using action_name is maybe rather confusing
 
 # We maybe could use page local caching (not 'wiki' global) to have less directory entries.
@@ -239,7 +239,7 @@ def _do(request, do, key):
         _do_remove(request, key)
 
 def execute(pagename, request):
-    do = request.form.get('do')
-    key = request.form.get('key')
+    do = request.values.get('do')
+    key = request.values.get('key')
     _do(request, do, key)
 
