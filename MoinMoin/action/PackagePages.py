@@ -119,7 +119,6 @@ class PackagePages:
             'error': error,
             'action': self.__class__.__name__,
             'pagename': wikiutil.escape(self.pagename, True),
-            'pagename_quoted': wikiutil.quoteWikinameURL(self.pagename),
             'include_attachments_label': _('Include all attachments?'),
             'package': _('Package pages'),
             'cancel': _('Cancel'),

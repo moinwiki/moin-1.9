@@ -1563,7 +1563,6 @@ var gui_editor_link_text = "%(text)s";
         if keywords.get('msg', ''):
             raise DeprecationWarning("Using send_page(msg=) is deprecated! Use theme.add_msg() instead!")
         scriptname = request.script_root
-        pagename_quoted = wikiutil.quoteWikinameURL(pagename)
 
         # get name of system pages
         page_front_page = wikiutil.getFrontPage(request).page_name
