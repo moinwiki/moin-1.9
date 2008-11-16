@@ -192,7 +192,7 @@ class Macro:
         _ = self._
         request = self.request
         fmt = self.formatter
-        allpages = int(self.form.get('allpages', [0])[0]) != 0
+        allpages = int(request.values.get('allpages', 0)) != 0
         # Get page list readable by current user, filter by isSystemPage if needed
         if allpages:
             pages = request.rootpage.getPageList()

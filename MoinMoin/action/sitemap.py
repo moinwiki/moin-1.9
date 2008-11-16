@@ -62,7 +62,6 @@ def sitemap_url(request, page):
 
 def execute(pagename, request):
     _ = request.getText
-    form = request.form
     request.user.datetime_fmt = datetime_fmt
 
     request.mimetype ='text/xml'
@@ -86,7 +85,7 @@ def execute(pagename, request):
 
     # Get page dict readable by current user
     try:
-        underlay = int(form.get('underlay', 1))
+        underlay = int(request.values.get('underlay', 1))
     except ValueError:
         underlay = 1
     pages = request.rootpage.getPageDict(include_underlay=underlay)

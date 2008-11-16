@@ -14,7 +14,7 @@ def getIntegerInput(request, fieldname, default=None, minval=None, maxval=None):
         is missing).
     """
     try:
-        result = int(request.form[fieldname])
+        result = int(request.values[fieldname])
     except (KeyError, ValueError):
         return default
     else:

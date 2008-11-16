@@ -33,22 +33,22 @@ def execute(pagename, request):
     # get params
     items_limit = 100
     try:
-        max_items = int(request.form['items'])
+        max_items = int(request.values['items'])
         max_items = min(max_items, items_limit) # not more than `items_limit`
     except (KeyError, ValueError):
         # not more than 15 items in a RSS file by default
         max_items = 15
     try:
-        unique = int(request.form.get('unique', 0))
+        unique = int(request.values.get('unique', 0))
     except ValueError:
         unique = 0
     try:
-        diffs = int(request.form.get('diffs', 0))
+        diffs = int(request.values.get('diffs', 0))
     except ValueError:
         diffs = 0
     ## ddiffs inserted by Ralf Zosel <ralf@zosel.com>, 04.12.2003
     try:
-        ddiffs = int(request.form.get('ddiffs', 0))
+        ddiffs = int(request.values.get('ddiffs', 0))
     except ValueError:
         ddiffs = 0
 

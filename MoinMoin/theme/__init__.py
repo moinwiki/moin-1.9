@@ -738,10 +738,10 @@ class ThemeBase:
         @return: search form html
         """
         _ = self.request.getText
-        form = self.request.form
+        form = self.request.values
         updates = {
             'search_label': _('Search:'),
-            'search_value': wikiutil.escape(form.get('value', [''])[0], 1),
+            'search_value': wikiutil.escape(form.get('value', ''), 1),
             'search_full_label': _('Text'),
             'search_title_label': _('Titles'),
             'url': self.request.href(d['page'].page_name)

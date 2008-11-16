@@ -1008,11 +1008,11 @@ class Page(object):
         send_special = keywords.get('send_special', False)
         print_mode = keywords.get('print_mode', 0)
         if print_mode:
-            media = request.form.get('media', 'print')
+            media = request.values.get('media', 'print')
         else:
             media = 'screen'
         self.hilite_re = (keywords.get('hilite_re') or
-                          request.form.get('highlight', [None])[0])
+                          request.values.get('highlight'))
 
         # count hit?
         if keywords.get('count_hit', 0):
@@ -1023,7 +1023,7 @@ class Page(object):
         pi = self.pi
 
         if 'redirect' in pi and not (
-            'action' in request.form or 'redirect' in request.form or content_only):
+            'action' in request.values or 'redirect' in request.values or content_only):
             # redirect to another page
             # note that by including "action=show", we prevent endless looping
             # (see code in "request") or any cascaded redirection
@@ -1048,8 +1048,8 @@ class Page(object):
             try:
                 self.formatter.set_highlight_re(self.hilite_re)
             except re.error, err:
-                if 'highlight' in request.form:
-                    del request.form['highlight']
+                if 'highlight' in request.values:
+                    del request.values['highlight']
                 request.theme.add_msg(_('Invalid highlighting regular expression "%(regex)s": %(error)s') % {
                                           'regex': self.hilite_re,
                                           'error': str(err),
@@ -1113,8 +1113,8 @@ class Page(object):
 
                 # This redirect message is very annoying.
                 # Less annoying now without the warning sign.
-                if 'redirect' in request.form:
-                    redir = request.form['redirect']
+                if 'redirect' in request.values:
+                    redir = request.values['redirect']
                     request.theme.add_msg('<strong>%s</strong><br>' % (
                         _('Redirected from page "%(page)s"') % {'page':
                             wikiutil.link_tag(request, wikiutil.quoteWikinameURL(redir) + "?action=show", self.formatter.text(redir))}), "info")

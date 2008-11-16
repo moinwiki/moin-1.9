@@ -165,9 +165,9 @@ Please review the page and save then. Do not save this page as it is!""")
             # If the page exists, we get the text from the page.
             # TODO: maybe warn if template argument was ignored because the page exists?
             raw_body = self.get_raw_body()
-        elif 'template' in form:
+        elif 'template' in request.values:
             # If the page does not exist, we try to get the content from the template parameter.
-            template_page = wikiutil.unquoteWikiname(form['template'])
+            template_page = wikiutil.unquoteWikiname(request.values['template'])
             if request.user.may.read(template_page):
                 raw_body = Page(request, template_page).get_raw_body()
                 if raw_body:
@@ -243,7 +243,7 @@ Please review the page and save then. Do not save this page as it is!""")
         request.write('<input type="hidden" name="ticket" value="%s">' % wikiutil.createTicket(request))
 
         # Save backto in a hidden input
-        backto = form.get('backto')
+        backto = request.values.get('backto')
         if backto:
             request.write(unicode(html.INPUT(type="hidden", name="backto", value=backto)))
 

@@ -21,7 +21,7 @@ def execute(pagename, request):
         return
 
     try:
-        date = request.form['date']
+        date = request.values['date']
         try:
             date = long(date) # must be long for py 2.2.x
         except StandardError:
@@ -30,11 +30,11 @@ def execute(pagename, request):
         date = 0
 
     try:
-        rev1 = int(request.form.get('rev1', -1))
+        rev1 = int(request.values.get('rev1', -1))
     except StandardError:
         rev1 = 0
     try:
-        rev2 = int(request.form.get('rev2', 0))
+        rev2 = int(request.values.get('rev2', 0))
     except StandardError:
         rev2 = 0
 
@@ -44,7 +44,7 @@ def execute(pagename, request):
             rev1 = -1
 
     # spacing flag?
-    ignorews = int(request.form.get('ignorews', 0))
+    ignorews = int(request.values.get('ignorews', 0))
 
     _ = request.getText
 
