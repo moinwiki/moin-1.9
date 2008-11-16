@@ -147,7 +147,7 @@ class ActionBase:
 
         form_html = '''
 %(error_html)s
-<form action="%(url)s/%(pagename_quoted)s" method="%(method)s" enctype="%(enctype)s">
+<form action="%(url)s" method="%(method)s" enctype="%(enctype)s">
 <div>
 <input type="hidden" name="action" value="%(actionname)s">
 %(ticket_html)s
