@@ -163,7 +163,7 @@ def get_macro_help(request):
 
 def page_list(request):
     from MoinMoin import search
-    name = request.form.get("pagename", "")
+    name = request.values.get("pagename", "")
     if name:
         searchresult = search.searchPages(request, 't:"%s"' % name)
         pages = [p.page_name for p in searchresult.hits]
@@ -200,7 +200,7 @@ def page_list(request):
 
 def link_dialog(request):
     # list of wiki pages
-    name = request.form.get("pagename", "")
+    name = request.values.get("pagename", "")
     if name:
         from MoinMoin import search
         # XXX error handling!
@@ -365,7 +365,7 @@ def link_dialog(request):
 
 def attachment_dialog(request):
     # list of wiki pages
-    name = request.form.get("pagename", "")
+    name = request.values.get("pagename", "")
     if name:
         from MoinMoin import search
         # XXX error handling!
@@ -519,7 +519,7 @@ def image_dialog(request):
 #############################################################################
 
 def execute(pagename, request):
-    dialog = request.form.get("dialog", [""])[0]
+    dialog = request.values.get("dialog", "")
 
     if dialog == "macro":
         macro_dialog(request)
