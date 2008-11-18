@@ -173,7 +173,7 @@ username and leave the password field blank.""")))
             return CancelLogin(None)
 
         _ = request.getText
-        newname = request.form.get('username', [''])[0]
+        newname = request.form.get('username', '')
         if not newname:
             return MultistageFormLogin(self._get_account_name)
         if not user.isValidName(request, newname):
@@ -198,8 +198,8 @@ username and leave the password field blank.""")))
             return CancelLogin()
 
         _ = request.getText
-        username = request.form.get('username', [''])[0]
-        password = request.form.get('password', [''])[0]
+        username = request.form.get('username', '')
+        password = request.form.get('password', '')
         if not password:
             return self._handle_name_continuation(request)
         u = user.User(request, name=username, password=password,
@@ -214,7 +214,7 @@ username and leave the password field blank.""")))
             return MultistageFormLogin(assoc)
 
     def _handle_continuation(self, request):
-        oidstage = request.form.get('oidstage', [0])[0]
+        oidstage = request.form.get('oidstage', '0')
         if oidstage == '1':
             return self._handle_verify_continuation(request)
         elif oidstage == '2':

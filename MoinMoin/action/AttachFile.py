@@ -394,14 +394,14 @@ def send_hotdraw(pagename, request):
 
     now = time.time()
     pubpath = request.cfg.url_prefix_static + "/applets/TWikiDrawPlugin"
-    basename = request.form['drawing']
+    basename = request.values['drawing']
     drawpath = getAttachUrl(pagename, basename + '.draw', request, escaped=1)
     pngpath = getAttachUrl(pagename, basename + '.png', request, escaped=1)
     pagelink = request.href(pagename, action=action_name, ts=now)
     helplink = Page(request, "HelpOnActions/AttachFile").url(request)
     savelink = request.href(pagename, action=action_name, do='savedrawing')
     #savelink = Page(request, pagename).url(request) # XXX include target filename param here for twisted
-                                           # request, {'savename': request.form['drawing']+'.draw'}
+                                           # request, {'savename': request.values['drawing']+'.draw'}
     #savelink = '/cgi-bin/dumpform.bat'
 
     timestamp = '&amp;ts=%s' % now
@@ -480,7 +480,7 @@ def send_uploadform(pagename, request):
     if not writeable:
         request.write('<p>%s</p>' % _('You are not allowed to attach a file to this page.'))
 
-    if writeable and request.form.get('drawing'):
+    if writeable and request.values.get('drawing'):
         send_hotdraw(pagename, request)
 
 
