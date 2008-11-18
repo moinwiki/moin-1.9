@@ -44,9 +44,8 @@ class PackagePages:
         redirects to new page.
         """
         _ = self.request.getText
-        form = self.request.form
 
-        if 'cancel' in form:
+        if 'cancel' in self.request.values:
             # User canceled
             return self.page.send_page()
 
@@ -65,14 +64,13 @@ class PackagePages:
     def package(self):
         """ Calls collectpackage() with the arguments specified. """
         _ = self.request.getText
-        form = self.request.form
 
         # Get new name from form and normalize.
-        pagelist = form.get('pagelist', u'')
-        packagename = form.get('packagename', u'')
-        include_attachments = form.get('include_attachments', False)
+        pagelist = self.request.values.get('pagelist', u'')
+        packagename = self.request.values.get('packagename', u'')
+        include_attachments = self.request.values.get('include_attachments', False)
 
-        if not form.get('submit'):
+        if not self.request.values.get('submit'):
             self.request.theme.add_msg(self.makeform(), "dialog")
             raise ActionError
 

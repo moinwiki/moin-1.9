@@ -19,8 +19,8 @@ class NewPage:
     def __init__(self, request, referrer):
         self.request = request
         self.referrer = referrer # The page the user came from
-        self.pagename = self.request.form.get('pagename')
-        self.nametemplate = self.request.form.get('nametemplate', '%s')
+        self.pagename = self.request.values.get('pagename')
+        self.nametemplate = self.request.values.get('nametemplate', '%s')
         self.nametemplate = self.nametemplate.replace('\x00', '')
 
     def checkAndCombineArguments(self):
@@ -82,11 +82,11 @@ class NewPage:
             pagename = self.pagename
             query = {'action': 'edit', 'backto': self.referrer}
 
-            template = self.request.form.get('template', '')
+            template = self.request.values.get('template', '')
             if template:
                 query['template'] = template
 
-            parent = self.request.form.get('parent', '')
+            parent = self.request.values.get('parent', '')
             if parent:
                 pagename = "%s/%s" % (parent, pagename)
 
