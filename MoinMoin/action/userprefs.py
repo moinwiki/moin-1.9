@@ -16,7 +16,7 @@ def _handle_submission(request):
     Return error msg_class, msg tuple or None, None.
     """
     _ = request.getText
-    sub = request.form.get('handler')
+    sub = request.values.get('handler')
 
     if sub in request.cfg.userprefs_disabled:
         return None, None
@@ -63,7 +63,7 @@ def _create_page(request, cancel=False):
     # returns text, title, msg_class, msg
     pagename = request.page.page_name
 
-    if 'handler' in request.form:
+    if 'handler' in request.values:
         msg_class, msg = _handle_submission(request)
     else:
         msg_class, msg = None, None
