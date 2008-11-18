@@ -32,7 +32,7 @@ class Settings(UserPrefBase):
         @rtype: list of unicode strings
         @return: list of normalized names
         """
-        text = self.request.form.get(key, [''])[0]
+        text = self.request.form.get(key, '')
         text = text.replace('\r', '')
         items = []
         for item in text.split('\n'):

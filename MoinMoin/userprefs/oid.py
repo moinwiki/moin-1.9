@@ -59,7 +59,7 @@ class Settings(UserPrefBase):
         _ = self.request.getText
         request = self.request
 
-        openid_id = request.form.get('openid_identifier', [''])[0]
+        openid_id = request.form.get('openid_identifier', '')
         if not openid_id:
             return 'error', _("No OpenID given.")
 
@@ -133,7 +133,7 @@ class Settings(UserPrefBase):
         _ = self._
         form = self.request.form
 
-        if form.has_key('oid.return'):
+        if self.request.values.has_key('oid.return'):
             return self._handle_oidreturn()
 
         if form.has_key('cancel'):
