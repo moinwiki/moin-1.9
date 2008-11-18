@@ -19,7 +19,7 @@ def execute(pagename, request):
         request.theme.add_msg(_("Charts are not available!"), "error")
         return request.page.send_page()
 
-    chart_type = request.form.get('type', '').strip()
+    chart_type = request.values.get('type', '').strip()
     if not chart_type:
         request.theme.add_msg(_('You need to provide a chart type!'), "error")
         return request.page.send_page()
