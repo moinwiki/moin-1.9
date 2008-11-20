@@ -13,7 +13,7 @@ import time, inspect, StringIO, sys, warnings
 from werkzeug.utils import Headers, http_date, create_environ, redirect
 from werkzeug.exceptions import Unauthorized, NotFound, abort
 
-from MoinMoin import i18n, error, user, config
+from MoinMoin import i18n, error, user, config, wikiutil
 from MoinMoin.config import multiconfig
 from MoinMoin.formatter import text_html
 from MoinMoin.theme import load_theme_fallback
@@ -315,6 +315,26 @@ class HTTPContext(BaseContext):
             "url_root property or the abs_href object if urls should be generated.",
             DeprecationWarning)
         return self.request.url_root
+
+    def getQualifiedURL(self, uri=''):
+        """ Return an absolute URL starting with schema and host.
+
+        Already qualified urls are returned unchanged.
+
+        @param uri: server rooted uri e.g /scriptname/pagename.
+                    It must start with a slash. Must be ascii and url encoded.
+        """
+        import urlparse
+        scheme = urlparse.urlparse(uri)[0]
+        if scheme:
+            return uri
+
+        result = "%s%s" % (self.request.host_url, uri)
+
+        # This might break qualified urls in redirects!
+        # e.g. mapping 'http://netloc' -> '/'
+        return wikiutil.mapURL(self, result)
+
 
 class AuxilaryMixin(object):
     """
