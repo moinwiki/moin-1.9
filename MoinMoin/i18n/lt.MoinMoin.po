@@ -1098,7 +1098,7 @@ msgstr ""
 "paketas"
 
 msgid "All attachments included into the package."
-msgstr ""
+msgstr "Visi priedai įtraukti į paketą."
 
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "Išvesties failas jau egzistuoja! Atsisakoma tęsti!"
@@ -1781,9 +1781,8 @@ msgstr "Klaidingas failo pavadinimas „%s“!"
 msgid "Created the package %s containing the pages %s."
 msgstr "Sukurtas paketas %s, turintis puslapius %s."
 
-#, fuzzy
 msgid "Include all attachments?"
-msgstr "[%d priedų]"
+msgstr "Įtraukti visus priedus?"
 
 msgid "Package pages"
 msgstr "Paketo puslapiai"
