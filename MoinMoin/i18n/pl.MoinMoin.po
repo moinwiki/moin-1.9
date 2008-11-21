@@ -1043,13 +1043,11 @@ msgstr "Subskrybowane zdarzenia"
 msgid "Subscribed wiki pages<<BR>>(one regex per line)"
 msgstr "Zasubskrybowane strony wiki<<BR>>(jedno wyrażenie regularne w linii)"
 
-#, fuzzy
 msgid "OpenID server"
-msgstr "OpenID nie jest serwowany"
+msgstr "serwer OpenID"
 
-#, fuzzy
 msgid "The selected websites have been removed."
-msgstr "Wskazane OpenID zostały usunięte."
+msgstr "Wskazane strony internetowe zostały usunięte."
 
 msgid "Trusted websites"
 msgstr ""
@@ -1640,36 +1638,37 @@ msgstr "Nie możesz rozpakowywać załączników tej strony."
 msgid "The file %(filename)s is not a .zip file."
 msgstr "Plik %(filename)s nie jest typu .zip."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because some files in the zip are "
 "either not in the same directory or exceeded the single file size limit (%"
 "(maxsize_file)d kB)."
 msgstr ""
-"Nie rozpakowano załącznika '%(filename)s', ponieważ pliki są zbyt duże, "
-"tylko typu .zip, już istnieją, albo znajdują się w podkatalogach."
+"Nie rozpakowano załącznika '%(filename)s', ponieważ iektóre pliki nie "
+"znajdują się w archiwum w jednym katalogu lub są zbyt duże"
+"(%(maxsize_file)d kB)."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because it would have exceeded the "
 "per page attachment storage size limit (%(size)d kB)."
 msgstr ""
 "Załącznik '%(filename)s' nie mógł zostać rozpakowany, ponieważ powstałe "
-"pliki byłyby zbyt duże (zabrakło %(space)d kB)."
+"pliki przekroczyłyby limit wielkości na stronę (%(size)d kB)."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because it would have exceeded the "
 "per page attachment count limit (%(count)d)."
 msgstr ""
 "Załącznik '%(filename)s' nie mógł zostać rozpakowany, ponieważ powstałoby "
-"zbyt wiele plików (zabrakło %(count)d)."
+"zbyt wiele plików (dozwolone %(count)d)."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(filename)s' partially unzipped (did not overwrite: %(filelist)"
 "s)."
-msgstr "Załącznik '%(filename)s' rozpakowano."
+msgstr "Załącznik '%(filename)s' rozpakowano częściowo (nie nadpisano: %(filelist)s)."
 
 #, python-format
 msgid "Attachment '%(filename)s' unzipped."
@@ -1705,7 +1704,7 @@ msgstr "Nie możesz oglądać załączników tej strony."
 
 #, python-format
 msgid "attachment:%(filename)s of %(pagename)s"
-msgstr "<<Verbatim(załącznik:)>>%(filename)s z %(pagename)s"
+msgstr "załącznik:%(filename)s z %(pagename)s"
 
 #, python-format
 msgid "Full Link List for \"%s\""
@@ -1775,9 +1774,8 @@ msgstr "Nieprawidłowa nazwa pliku \"%s\"!"
 msgid "Created the package %s containing the pages %s."
 msgstr "Utworzono pakiet %s zawierający strony %s."
 
-#, fuzzy
 msgid "Include all attachments?"
-msgstr "[%d załączników]"
+msgstr "Włączając w to wszystkie załączniki?"
 
 msgid "Package pages"
 msgstr "Spakuj strony"
@@ -3000,7 +2998,7 @@ msgid "Clickable drawing: %(filename)s"
 msgstr "Klikalny rysunek %(filename)s"
 
 msgid "Toggle line numbers"
-msgstr "Ustaw numery linii"
+msgstr "Przełącz numery linii"
 
 #~ msgid "Xapian Version"
 #~ msgstr "Wersja Xapian"

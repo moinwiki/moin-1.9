@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-07 23:23+0200\n"
+"POT-Creation-Date: 2008-09-22 14:45+0200\n"
 "PO-Revision-Date: 2008-05-23 03:00+0200\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -1091,7 +1091,7 @@ msgstr ""
 "celotni paket."
 
 msgid "All attachments included into the package."
-msgstr ""
+msgstr "Vse priponke so vključene v paket."
 
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "Izhodna datoteka že obstaja! Za vsak primer ukaz ne bo izvršen!"
@@ -1770,9 +1770,8 @@ msgstr "Neveljavno ime datoteke \"%s\"!"
 msgid "Created the package %s containing the pages %s."
 msgstr "Tvorjen je paket %s, ki vsebuje strani %s."
 
-#, fuzzy
 msgid "Include all attachments?"
-msgstr "[%d priponk]"
+msgstr "Vključi vse priponke?"
 
 msgid "Package pages"
 msgstr "Spakiraj strani v ZIP"

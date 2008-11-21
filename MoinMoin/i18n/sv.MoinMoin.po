@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-09-07 23:23+0200\n"
-"PO-Revision-Date: 2008-06-22 17:05+0200\n"
+"PO-Revision-Date: 2008-09-20 12:05+0200\n"
 "Last-Translator: thomas@marquart.se\n"
 "Language-Team: Swedish <moin-user@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -297,8 +297,7 @@ msgid "You already saved this page!"
 msgstr "Du har redan sparat den här sidan!"
 
 msgid "You already edited this page! Please do not use the back button."
-msgstr ""
-"Du har redan redigerat den här sidan! Du bör inte använda bakåt-knappen."
+msgstr "Du har redan redigerat den här sidan! Du bör inte använda bakåt-knappen."
 
 msgid "You did not change the page content, not saved!"
 msgstr "Ingen ny version har sparats eftersom du inte ändrade sidans innehåll!"
@@ -1084,7 +1083,7 @@ msgid "No pages specified using --pages or --search, assuming full package."
 msgstr "Inga sidor angivna med --pages eller --search, antar hela paketet."
 
 msgid "All attachments included into the package."
-msgstr ""
+msgstr "Alla bilagor inkluderat i paketet."
 
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "Filen för output finns redan! Jag är feg och vägrar fortsätta!"
@@ -1761,9 +1760,8 @@ msgstr "Ogiltigt filnamn \"%s\"!"
 msgid "Created the package %s containing the pages %s."
 msgstr "Skapade paketet %s som innehåller sidorna %s."
 
-#, fuzzy
 msgid "Include all attachments?"
-msgstr "[%d bilagor]"
+msgstr "Inkludera alla bilagor?"
 
 msgid "Package pages"
 msgstr "Paketsidor"
