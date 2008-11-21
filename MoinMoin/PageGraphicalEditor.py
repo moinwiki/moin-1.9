@@ -51,8 +51,6 @@ class PageGraphicalEditor(PageEditor.PageEditor):
         request = self.request
         form = request.form
         _ = self._
-        request.disableHttpCaching(level=2)
-        request.emit_http_headers()
 
         raw_body = ''
         msg = None
@@ -86,6 +84,10 @@ class PageGraphicalEditor(PageEditor.PageEditor):
             request.theme.add_msg(msg, "error")
             self.send_page()
             return
+
+        # Emit http_headers after checks (send_page)
+        request.disableHttpCaching(level=2)
+        request.emit_http_headers()
 
         # check if we want to load a draft
         use_draft = None
