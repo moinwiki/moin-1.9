@@ -195,7 +195,7 @@ class PageEditor(Page):
             self.send_page()
             return
 
-        # Emmit http_headers after checks (send_page)
+        # Emit http_headers after checks (send_page)
         request.disableHttpCaching(level=2)
         request.emit_http_headers()
 
