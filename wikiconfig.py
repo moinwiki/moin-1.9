@@ -19,7 +19,7 @@ class LocalConfig(DefaultConfig):
     acl_rights_default = u"All:read,write,delete,revert,admin"
     surge_action_limits = None # no surge protection
     sitename = u'MoinMoin DesktopEdition'
-    logo_string = u'<img src="/moin_static172/common/moinmoin.png" alt="MoinMoin Logo">'
+    logo_string = u'<img src="/moin_static173/common/moinmoin.png" alt="MoinMoin Logo">'
     page_front_page = u'FrontPage' # change to some better value
     # ^^^ DON'T TOUCH THIS EXCEPT IF YOU KNOW WHAT YOU DO ^^^
 
