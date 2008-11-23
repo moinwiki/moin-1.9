@@ -593,7 +593,7 @@ def _do_savedrawing(pagename, request):
         # This might happen when trying to upload file names
         # with non-ascii characters on Safari.
         return _("No file content. Delete non ASCII characters from the file name and try again.")
-
+    filecontent = file_upload.stream
     filename = request.form['filename']
 
     basepath, basename = os.path.split(filename)
@@ -605,10 +605,10 @@ def _do_savedrawing(pagename, request):
 
     if ext == '.draw':
         _addLogEntry(request, 'ATTDRW', pagename, basename + ext)
-        filecontent = file_upload.stream.read() # read file completely into memory
+        filecontent = filecontent.read() # read file completely into memory
         filecontent = filecontent.replace("\r", "")
     elif ext == '.map':
-        filecontent = file_upload.stream.read() # read file completely into memory
+        filecontent = filecontent.read() # read file completely into memory
         filecontent = filecontent.strip()
 
     if filecontent:
