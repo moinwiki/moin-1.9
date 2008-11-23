@@ -588,8 +588,13 @@ def _do_savedrawing(pagename, request):
     if not request.user.may.write(pagename):
         return _('You are not allowed to save a drawing on this page.')
 
+    file_upload = request.files.get('filepath')
+    if not file_upload:
+        # This might happen when trying to upload file names
+        # with non-ascii characters on Safari.
+        return _("No file content. Delete non ASCII characters from the file name and try again.")
+
     filename = request.form['filename']
-    filecontent = request.form['filepath']
 
     basepath, basename = os.path.split(filename)
     basename, ext = os.path.splitext(basename)
@@ -600,10 +605,10 @@ def _do_savedrawing(pagename, request):
 
     if ext == '.draw':
         _addLogEntry(request, 'ATTDRW', pagename, basename + ext)
-        filecontent = filecontent.read() # read file completely into memory
+        filecontent = file_upload.stream.read() # read file completely into memory
         filecontent = filecontent.replace("\r", "")
     elif ext == '.map':
-        filecontent = filecontent.read() # read file completely into memory
+        filecontent = file_upload.stream.read() # read file completely into memory
         filecontent = filecontent.strip()
 
     if filecontent:
