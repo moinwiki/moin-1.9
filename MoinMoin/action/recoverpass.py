@@ -152,7 +152,7 @@ def execute(pagename, request):
 
     page = Page(request, pagename)
     _ = request.getText
-    form = request.form
+    form = request.values # link in mail -> GET request
 
     if not request.cfg.mail_enabled:
         request.theme.add_msg(_("""This wiki is not enabled for mail processing.
