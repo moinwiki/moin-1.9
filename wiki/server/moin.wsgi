@@ -5,7 +5,7 @@
     To use this, add those statements to your Apache's VirtualHost definition:
     
     # this is for icons, css, js (and must match url_prefix from wiki config):
-    Alias       /moin_static180/ /usr/share/moin/htdocs/
+    Alias       /moin_static190/ /usr/share/moin/htdocs/
 
     # this is the URL http://servername/moin/ you will use later to invoke moin:
     WSGIScriptAlias /moin/ /some/path/moin.wsgi
