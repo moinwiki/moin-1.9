@@ -57,7 +57,7 @@ dd {
 dd p {
     margin: 0.25em 0;
 }
-   
+
 a, img, img.drawing {
 	border: 0;
 }
@@ -127,18 +127,42 @@ td p {
 }
 
 /* TableOfContents macro */
-.table-of-contents { border: 1px solid #bbbbbb;
-                     color: black; background-color: #eeeeee;
-                     font-size: small;
-                     text-align:left;
-                     margin: 0.5em; padding-left: 2em;
-                     min-width:50%; }
-.table-of-contents ol { margin:0; margin-left:1em;
-                        list-style-type:decimal; }
-.table-of-contents ul { margin:0;
-                        list-style-type:none; }
-.table-of-contents-heading { font-weight:bold; padding:0; margin:0; }
+div.table-of-contents {
+    border: 1px solid #bbbbbb;
+    color: black;
+    background-color: #eeeeee;
+    font-size: 80%;
+    text-align: left;
+    margin: 0.5em 0 0.5em 1em;
+    padding: 0.5em 0.75em 0.5em 0.5em;
+    max-width: 50%;
+    display: inline-table;
+}
+div.table-of-contents ol {
+    margin: 0;
+    padding: 0 0 0 1em;
+    list-style:decimal inside;
+}
+div.table-of-contents ul {
+    margin: 0;
+    list-style:none;
+}
+div.table-of-contents li {
+    margin:0;
+    padding: 0;
+}
+p.table-of-contents-heading {
+    font-weight:bold;
+    padding:0;
+    margin: 0 0 0.5em 0;
+    letter-spacing: 0.075em;
+}
 
+/* Navigation macro */
+table.navigation {
+    background: #fff;
+    margin: 0;
+}
 
 .footnotes div {
 	width: 5em;
@@ -189,17 +213,17 @@ hr {
 .strike {text-decoration: line-through;}
 
 /* eye catchers */
-.warning 
+.warning
 {
 	color: red;
 }
 
-.error 
+.error
 {
 	color: red;
 }
 
-strong.highlight 
+strong.highlight
 {
 	background-color: #CCE0FF;
 	padding: 1pt;
@@ -319,7 +343,7 @@ div.codearea pre span.DiffSeparator {color: #228B22; font-weight: bold}
 
 .advancedsearch td {
     vertical-align: top;
-    background-color: #E7E7E7;    
+    background-color: #E7E7E7;
     border: 0px;
 }
 
@@ -481,7 +505,7 @@ TD.tip {
     vertical-align: middle;
 }
 #message .error:before {
-    content: url('../img/icon-error.png'); 
+    content: url('../img/icon-error.png');
     margin: 0 0.5em 0 0.125em;
     vertical-align: middle;
 }
@@ -493,26 +517,26 @@ TD.tip {
 
 
 /* admonition start */
-#content div.caution, 
-#content div.important, 
-#content div.note, 
-#content div.tip, 
+#content div.caution,
+#content div.important,
+#content div.note,
+#content div.tip,
 #content div.warning {
     border: 1pt solid #E5E5E5;
     background-color: #F9F9FF;
     color: black;
-    
+
     margin: 10pt 30pt 10pt 30pt;
     background-repeat: no-repeat;
     background-position: 8px 8px;
     min-height: 64px; /*64=48+8+8 but doesn't work with IE*/
     padding-left: 64px;
 }
- 
-#content div.caution p, 
-#content div.important p, 
-#content div.note p, 
-#content div.tip p, 
+
+#content div.caution p,
+#content div.important p,
+#content div.note p,
+#content div.tip p,
 #content div.warning p {
     margin-top: 8px; /*to align text with bg graphic*/
 }
