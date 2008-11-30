@@ -632,7 +632,7 @@ class ThemeBase:
         return html
 
     def _stylesheet_link(self, theme, media, href, title=None):
-        """ 
+        """
         Create a link tag for a stylesheet.
 
         @param theme: True: href gives the basename of a theme stylesheet,
