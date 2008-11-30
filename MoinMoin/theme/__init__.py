@@ -1153,10 +1153,9 @@ actionsMenuInit('%(label)s');
         _ = self.request.getText
         editbar_actions = []
         for editbar_item in self.request.cfg.edit_bar:
-            if editbar_item == 'Discussion':
-                if not self.request.cfg.supplementation_page and self.request.getPragma('supplementation-page', 1) in ('on', '1'):
-                    editbar_actions.append(self.supplementation_page_nameLink(page))
-                elif self.request.cfg.supplementation_page and not self.request.getPragma('supplementation-page', 1) in ('off', '0'):
+            if (editbar_item == 'Discussion' and
+               (self.request.getPragma('supplementation-page', self.request.cfg.supplementation_page)
+                                                   in (True, 1, 'on', '1'))):
                     editbar_actions.append(self.supplementation_page_nameLink(page))
             elif editbar_item == 'Comments':
                 # we just use <a> to get same style as other links, but we add some dummy
