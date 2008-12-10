@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os
+import sys, os
 
 from MoinMoin import log
 logging = log.getLogger(__name__)
