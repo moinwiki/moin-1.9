@@ -32,6 +32,39 @@ Known main issues:
     editor_default = 'text'  # internal default, just for completeness
 
 
+Version 1.8.current:
+  Bug fixes:
+    * Workaround win32 locking problems (caused by spurious access denied
+      exceptions on that platform).
+    * "modernized" theme:
+      * make broken links gray
+      * add new right/center/left/justify css classes
+    * Standalone server: be more specific when catching socket exceptions,
+      treat socket errors in http header emission in the same way.
+    * GUI editor:
+      * Fix heading levels when inserting new headings.
+      * Fix headers already sent exception when using e.g. edit LOCKing.
+    * Xapian indexing: fixed missing import for execfilter (only happened on
+      non-posix platforms like win32)
+
+  * New features:
+    * Themes:
+     * Make the TOC shrinkwrap, add white background to navigation macro.
+       The table of contents looked bad spanning the whole width of the page.
+       It's made to shrinkwrap now, so it will only get as wide, as the longest
+       heading. We use display:inline-table, so this won't work in MS IE6,
+       which still displays it the old way.
+       Navigation macro now has a white background, to make it more readable
+       when it's floating over a pre block or TOC.
+     * Refactored and extended theme.html_stylesheets() to make alternate
+       stylesheets possible. Stylesheet definitions now can either be:
+       2-tuples: (media, href)  # backwards compatibility
+       or:
+       3-tuples: (media, href, title)  # new, for defining alternate stylesheets
+       This works within themes as well as in the wiki config.
+       See also: http://www.w3.org/Style/Examples/007/alternatives.html
+
+
 Version 1.8.0:
   Note: This is a reduced CHANGES, ommitting details from rc/beta test and
         also less interesting minor changes and fixes. It shows changes
