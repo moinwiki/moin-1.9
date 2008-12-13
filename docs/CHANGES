@@ -119,6 +119,37 @@ Version 1.8.0:
     * Added sk (slovak) i18n, updated i18n.
 
 
+1.7.3:
+  New features:
+    * Secure session cookies for https, see cfg.cookie_secure.
+    * Add left/center/right/justify classes to builtin themes.
+
+  Fixes:
+    * Python 2.3 compatibility fixes.
+    * Fixed https detection for servers using HTTPS=1 and also for wsgi servers
+      not using HTTPS/SSL_ environment, but just wsgi.url_scheme.
+    * GUI editor:
+      * Fix crash when editing a page with non-ASCII pagename and inserting a link
+      * Fix "headers already sent exception" with edit LOCKs.
+    * i18n.__init__: Bug fix for wiki language not installed.
+    * Fixed URLs given by sitemap action, if the wiki does not run at / URL.
+    * Search results: link to 'view' rendering of found attachments
+    * Logging:    
+      * Removed superfluous linefeed in timing log output.
+      * Use logging framework for messages emitted by warnings module (e.g.
+        DeprecationWarning), silence some specific warnings.
+    * Fix dbw_hide_buttons javascript.
+    * Standalone server:
+      * fix serverClass argument processing
+      * fix --interface="" argument processing
+    * mointwisted:
+      * added missing pidFile parameter
+      * better use Config.name for pidFile to avoid conflicts and keep same
+        behaviour as in the past
+    * Jabber bot can now be configured to use an authentication realm which
+      is different from the server's hostname
+
+
 Version 1.7.2:
   Fixes:
     * Fix leakage of edit-log file handles (leaked 1 file handle / request!).
