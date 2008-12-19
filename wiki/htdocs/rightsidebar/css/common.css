@@ -156,8 +156,7 @@ div.table-of-contents {
 }
 div.table-of-contents ol {
     margin: 0;
-    padding: 0 0 0 1em;
-    list-style:decimal inside;
+    padding: 0 0 0 2em;
 }
 div.table-of-contents ul {
     margin: 0;
