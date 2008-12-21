@@ -2542,7 +2542,7 @@ msgid "Logout"
 msgstr "Abmelden"
 
 msgid "Clear message"
-msgstr "Nachricht löschen"
+msgstr "Meldung ausblenden"
 
 #, python-format
 msgid "last edited %(time)s by %(editor)s"

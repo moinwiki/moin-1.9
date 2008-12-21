@@ -1685,7 +1685,7 @@ msgid "New page name"
 msgstr "Nytt sidonamn"
 
 msgid "New attachment name"
-msgstr "Ny bilaga för bilaga"
+msgstr "Nya namnet för bilagan"
 
 msgid "You are not allowed to get attachments from this page."
 msgstr "Du får inte hämta bilagor från den här sidan."

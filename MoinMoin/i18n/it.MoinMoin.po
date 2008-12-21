@@ -415,8 +415,8 @@ msgid ""
 "The remote wiki uses a different InterWiki name (%(remotename)s) internally "
 "than you specified (%(localname)s)."
 msgstr ""
-"Il wiki remoto usa all'interno un altro nome InterWiki (%(remotename)s) "
-"rispetto a quello che specificato (%(localname)s)."
+"Il wiki remoto usa internamente un altro nome InterWiki (%(remotename)s) "
+"rispetto a quello specifato (%(localname)s)."
 
 msgid "Text mode"
 msgstr "Modo testuale"
@@ -645,7 +645,7 @@ msgid "Choose this name"
 msgstr "Scegli questo nome"
 
 msgid "This is not a valid username, choose a different one."
-msgstr "Non è un nome utente valido, sceglierne uno diverso."
+msgstr "Questo nome utente non è valido, sceglierne uno diverso."
 
 msgid ""
 "The username you have chosen is already\n"
@@ -1636,7 +1636,7 @@ msgid "Attached Files"
 msgstr "Allegati"
 
 msgid "You are not allowed to attach a file to this page."
-msgstr "Non si è autorizzati a inserire allegati in questa pagina."
+msgstr "Non è consentito inserire allegati su questa pagina."
 
 #, python-format
 msgid "Unsupported AttachFile sub-action: %s"
@@ -2400,7 +2400,9 @@ msgstr "La password non è composta da abbastanza caratteri diversi."
 
 msgid ""
 "Password is too easy (password contains name or name contains password)."
-msgstr "La password è troppo facile (contiene il nome o il nome contiene la password)."
+msgstr ""
+"La password è troppo facile (contiene il nome o il nome contiene la "
+"password)."
 
 msgid "Password is too easy (keyboard sequence)."
 msgstr "La password è troppo facile (sequenza di tasti)."
@@ -2446,7 +2448,7 @@ msgid "After login, jump to last visited page"
 msgstr "Ad accesso eseguito, andare all'ultima pagina visitata"
 
 msgid "Show comment sections"
-msgstr "Mostrare le sezioni con commenti"
+msgstr "Mostrare le sezioni di commento"
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "Mostrare un punto di domanda per i collegamenti a pagine non esistenti"
