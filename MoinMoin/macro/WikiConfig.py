@@ -4,7 +4,7 @@
 """
 from MoinMoin.config import multiconfig
 
-Dependencies = ['user']
+Dependencies = ['user'] # table headings are translated to user language
 generates_headings = True
 
 def macro_WikiConfig(macro):
