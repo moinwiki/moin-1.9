@@ -36,9 +36,13 @@ Version 1.8.current:
   Bug fixes:
     * Workaround win32 locking problems (caused by spurious access denied
       exceptions on that platform).
+    * Fix unicode errors that happened when password checker failed a password
+    * WikiConfig/WikiConfigHelp: fixed wrong language table headings
+    * Themes: make the margins around trail line work properly
     * "modernized" theme:
       * make broken links gray
       * add new right/center/left/justify css classes
+      * don't force Arial
     * Standalone server: be more specific when catching socket exceptions,
       treat socket errors in http header emission in the same way.
     * GUI editor:
@@ -56,6 +60,7 @@ Version 1.8.current:
        which still displays it the old way.
        Navigation macro now has a white background, to make it more readable
        when it's floating over a pre block or TOC.
+     * Make the numbers in lists in table of contents right-aligned.
      * Refactored and extended theme.html_stylesheets() to make alternate
        stylesheets possible. Stylesheet definitions now can either be:
        2-tuples: (media, href)  # backwards compatibility
