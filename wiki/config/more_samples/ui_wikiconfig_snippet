@@ -4,7 +4,7 @@
     # Wiki logo. You can use an image, text or both. [Unicode]
     # For no logo or text, use '' - the default is to show the sitename.
     # See also url_prefix setting below!
-    #logo_string = u'<img src="/moin_static180/common/moinmoin.png" alt="MoinMoin Logo">'
+    #logo_string = u'<img src="/moin_static181/common/moinmoin.png" alt="MoinMoin Logo">'
 
     # The default theme anonymous or new users get
     #theme_default = 'modern'

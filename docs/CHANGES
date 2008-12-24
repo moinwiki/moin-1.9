@@ -32,7 +32,7 @@ Known main issues:
     editor_default = 'text'  # internal default, just for completeness
 
 
-Version 1.8.current:
+Version 1.8.1:
   Bug fixes:
     * Workaround win32 locking problems (caused by spurious access denied
       exceptions on that platform).
