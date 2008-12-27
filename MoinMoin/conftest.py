@@ -31,7 +31,7 @@ sys.path.insert(0, str(moindir))
 
 from MoinMoin.support.python_compatibility import set
 from MoinMoin.web.request import TestRequest, Client
-from MoinMoin.wsgiapp import application, init
+from MoinMoin.wsgiapp import Application, init
 from MoinMoin._tests import maketestwiki, wikiconfig
 
 coverage_modules = set()
@@ -94,9 +94,12 @@ class MoinClassCollector(py.test.collect.Class):
         cls = self.obj
         if hasattr(cls, 'Config'):
             cls.request = init_test_request(given_config=cls.Config)
+            cls.client = Client(Application(cls.Config))
         else:
             cls.request = self.parent.request
-        cls.client = Client(application)
+            #XXX: this is the extremely messy way to configure the wsgi app
+            #     with the correct testing config
+            cls.client = Client(Application(self.parent.request.cfg.__class__))
         super(MoinClassCollector, self).setup()
 
 

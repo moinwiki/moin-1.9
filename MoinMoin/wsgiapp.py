@@ -230,16 +230,26 @@ def setup_i18n_postauth(context):
     else:
         return context.lang
 
-def application(environ, start_response):
-    try:
-        request = Request(environ)
-        context = init(request)
-        response = run(context)
-        context.clock.stop('total')
-    except HTTPException, e:
-        response = e
-    except error.ConfigurationError, e:
-        response = fatal_response(e)
+class Application(object):
+    def __init__(self, app_config=None):
 
-    return response(environ, start_response)
+        class AppRequest(Request):
+            given_config = app_config
 
+        self.Request = AppRequest
+
+    def __call__(self, environ, start_response):
+        try:
+            request = self.Request(environ)
+            context = init(request)
+            response = run(context)
+            context.clock.stop('total')
+        except HTTPException, e:
+            response = e
+        except error.ConfigurationError, e:
+            response = fatal_response(e)
+
+        return response(environ, start_response)
+
+#XXX: default application using the default config from disk
+application = Application()
