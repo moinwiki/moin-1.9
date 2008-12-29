@@ -102,6 +102,7 @@ class EditLogLine:
     def getEditor(self, request):
         """ Return a HTML-safe string representing the user that did the edit.
         """
+        _ = request.getText
         if request.cfg.show_hosts and self.hostname and self.addr:
             title = " @ %s[%s]" % (self.hostname, self.addr)
         else:
