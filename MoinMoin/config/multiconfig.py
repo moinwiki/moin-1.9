@@ -988,6 +988,8 @@ options_no_group_name = {
     ('language_default', 'en', "Default language for user interface and page content, see HelpOnLanguages."),
     ('language_ignore_browser', False, "if True, ignore user's browser language settings, see HelpOnLanguages."),
 
+    ('log_remote_addr', True,
+     "if True, log the remote IP address (and maybe hostname)."),
     ('log_reverse_dns_lookups', True,
      "if True, do a reverse DNS lookup on page SAVE. If your DNS is broken, set this to False to speed up SAVE."),
     ('log_timing', False,
