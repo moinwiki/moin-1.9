@@ -653,56 +653,37 @@ class Formatter(FormatterBase):
 
     def attachment_drawing(self, url, text, **kw):
         _ = self.request.getText
-        pagename, filename = AttachFile.absoluteName(url, self.page.page_name)
-        fname = wikiutil.taintfilename(filename)
-        drawing = fname
-        fname = fname + u".png"
-        filename = filename + u".png"
-        # fallback for old gif drawings (1.1 -> 1.2)
-        exists = AttachFile.exists(self.request, pagename, fname)
-        if not exists:
-            gfname = fname[:-4] + u".gif"
-            gfilename = filename[:-4] + u".gif"
-            exists = AttachFile.exists(self.request, pagename, gfname)
-            if exists:
-                fname, filename = gfname, gfilename
+        pagename, drawing = AttachFile.absoluteName(url, self.page.page_name)
+        containername = wikiutil.taintfilename(drawing) + ".tdraw"
 
-        # check whether attachment exists, possibly point to upload form
-        drawing_url = AttachFile.getAttachUrl(pagename, fname, self.request, drawing=drawing, upload=True)
-        if not exists:
-            linktext = _('Create new drawing "%(filename)s (opens in new window)"')
+        drawing_url = AttachFile.getAttachUrl(pagename, containername, self.request, drawing=drawing, upload=True)
+        ci = AttachFile.ContainerItem(self.request, pagename, containername)
+        if not ci.exists():
             return (self.url(1, drawing_url) +
-                    self.text(linktext % {'filename': fname}) +
+                    self.text(_('Create new drawing "%(filename)s (opens in new window)"') % {'filename': drawing}) +
                     self.url(0))
 
-        mappath = AttachFile.getFilename(self.request, pagename, drawing + u'.map')
+        src = ci.member_url(drawing + u'.png')
+        mapfile = ci.get(drawing + u'.map')
+        map = mapfile.read()
+        mapfile.close()
 
-        # check for map file
-        if os.path.exists(mappath):
+        if map:
             # we have a image map. inline it and add a map ref to the img tag
-            try:
-                map = file(mappath, 'r').read()
-            except IOError:
-                pass
-            except OSError:
-                pass
-            else:
-                mapid = 'ImageMapOf' + drawing
-                # replace MAPNAME
-                map = map.replace('%MAPNAME%', mapid)
-                # add alt and title tags to areas
-                map = re.sub('href\s*=\s*"((?!%TWIKIDRAW%).+?)"', r'href="\1" alt="\1" title="\1"', map)
-                # add in edit links plus alt and title attributes
-                alt = title = _('Edit drawing %(filename)s (opens in new window)') % {'filename': self.text(fname)}
-                map = map.replace('%TWIKIDRAW%"', '%s" alt="%s" title="%s"' % (drawing_url, alt, title))
-                # unxml, because 4.01 concrete will not validate />
-                map = map.replace('/>', '>')
-                alt = title = _('Clickable drawing: %(filename)s') % {'filename': self.text(fname)}
-                src = AttachFile.getAttachUrl(pagename, filename, self.request, addts=1)
-                return (map + self.image(alt=alt, title=title, src=src, usemap='#'+mapid, css="drawing"))
+            mapid = 'ImageMapOf' + drawing
+            # replace MAPNAME
+            map = map.replace('%MAPNAME%', mapid)
+            # add alt and title tags to areas
+            map = re.sub(r'href\s*=\s*"((?!%TWIKIDRAW%).+?)"', r'href="\1" alt="\1" title="\1"', map)
+            # add in edit links plus alt and title attributes
+            alt = title = _('Edit drawing %(filename)s (opens in new window)') % {'filename': self.text(drawing)}
+            map = map.replace('%TWIKIDRAW%"', '%s" alt="%s" title="%s"' % (drawing_url, alt, title))
+            # unxml, because 4.01 concrete will not validate />
+            map = map.replace('/>', '>')
+            alt = title = _('Clickable drawing: %(filename)s') % {'filename': self.text(drawing)}
+            return (map + self.image(alt=alt, title=title, src=src, usemap='#'+mapid, css="drawing"))
         else:
-            alt = title = _('Edit drawing %(filename)s (opens in new window)') % {'filename': self.text(fname)}
-            src = AttachFile.getAttachUrl(pagename, filename, self.request, addts=1)
+            alt = title = _('Edit drawing %(filename)s (opens in new window)') % {'filename': self.text(drawing)}
             return (self.url(1, drawing_url) +
                     self.image(alt=alt, title=title, src=src, css="drawing") +
                     self.url(0))
