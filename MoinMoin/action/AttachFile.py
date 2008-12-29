@@ -28,6 +28,7 @@
 """
 
 import os, time, zipfile, mimetypes, errno, datetime
+from StringIO import StringIO
 
 from MoinMoin import log
 logging = log.getLogger(__name__)
@@ -37,6 +38,7 @@ from MoinMoin.Page import Page
 from MoinMoin.util import filesys, timefuncs
 from MoinMoin.security.textcha import TextCha
 from MoinMoin.events import FileAttachedEvent, send_event
+from MoinMoin.support import tarfile
 
 action_name = __name__.split('.')[-1]
 
@@ -308,7 +310,7 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
                          fmt.text(label_get) +
                          fmt.url(0))
 
-            if ext == '.draw':
+            if ext == '.tdraw':
                 links.append(fmt.url(1, getAttachUrl(pagename, file, request, drawing=base)) +
                              fmt.text(label_edit) +
                              fmt.url(0))
@@ -395,8 +397,9 @@ def send_hotdraw(pagename, request):
     now = time.time()
     pubpath = request.cfg.url_prefix_static + "/applets/TWikiDrawPlugin"
     basename = request.values['drawing']
-    drawpath = getAttachUrl(pagename, basename + '.draw', request, escaped=1)
-    pngpath = getAttachUrl(pagename, basename + '.png', request, escaped=1)
+    ci = ContainerItem(request, pagename, basename + '.tdraw')
+    drawpath = ci.member_url(basename + '.draw')
+    pngpath = ci.member_url(basename + '.png')
     pagelink = request.href(pagename, action=action_name, ts=now)
     helplink = Page(request, "HelpOnActions/AttachFile").url(request)
     savelink = request.href(pagename, action=action_name, do='savedrawing')
@@ -582,6 +585,59 @@ def _do_upload(pagename, request):
     upload_form(pagename, request, msg)
 
 
+class ContainerItem:
+    """ A storage container (multiple objects in 1 tarfile) """
+
+    def __init__(self, request, pagename, containername):
+        self.request = request
+        self.pagename = pagename
+        self.containername = containername
+        self.container_filename = getFilename(request, pagename, containername)
+
+    def member_url(self, member):
+        """ return URL for accessing container member
+            (we use same URL for get (GET) and put (POST))
+        """
+        url = Page(self.request, self.pagename).url(self.request, {
+            'action': 'AttachFile',
+            'do': 'box',  # shorter to type than 'container'
+            'target': self.containername,
+            #'member': member,
+        })
+        return url + '&member=%s' % member
+        # member needs to be last in qs because twikidraw looks for "file extension" at the end
+
+    def get(self, member):
+        """ return a file-like object with the member file data
+        """
+        tf = tarfile.TarFile(self.container_filename)
+        return tf.extractfile(member)
+
+    def put(self, member, content, content_length=None):
+        """ save data into a container's member """
+        tf = tarfile.TarFile(self.container_filename, mode='a')
+        if isinstance(member, unicode):
+            member = member.encode('utf-8')
+        ti = tarfile.TarInfo(member)
+        if isinstance(content, str):
+            if content_length is None:
+                content_length = len(content)
+            content = StringIO(content) # we need a file obj
+        elif not hasattr(content, 'read'):
+            logging.error("unsupported content object: %r" % content)
+            raise
+        assert content_length >= 0  # we don't want -1 interpreted as 4G-1
+        ti.size = content_length
+        tf.addfile(ti, content)
+        tf.close()
+
+    def truncate(self):
+        f = open(self.container_filename, 'w')
+        f.close()
+
+    def exists(self):
+        return os.path.exists(self.container_filename)
+
 def _do_savedrawing(pagename, request):
     _ = request.getText
 
@@ -593,42 +649,32 @@ def _do_savedrawing(pagename, request):
         # This might happen when trying to upload file names
         # with non-ascii characters on Safari.
         return _("No file content. Delete non ASCII characters from the file name and try again.")
-    filecontent = file_upload.stream
-    filename = request.form['filename']
 
+    filename = request.form['filename']
     basepath, basename = os.path.split(filename)
     basename, ext = os.path.splitext(basename)
 
-    # get directory, and possibly create it
-    attach_dir = getAttachDir(request, pagename, create=1)
-    savepath = os.path.join(attach_dir, basename + ext)
-
-    if ext == '.draw':
-        _addLogEntry(request, 'ATTDRW', pagename, basename + ext)
+    ci = ContainerItem(request, pagename, basename + '.tdraw')
+    filecontent = file_upload.stream
+    content_length = None
+    if ext == '.draw': # TWikiDraw POSTs this first
+        _addLogEntry(request, 'ATTDRW', pagename, basename + '.tdraw')
+        ci.truncate()
         filecontent = filecontent.read() # read file completely into memory
         filecontent = filecontent.replace("\r", "")
     elif ext == '.map':
+        # touch attachment directory to invalidate cache if new map is saved
+        attach_dir = getAttachDir(request, pagename)
+        os.utime(attach_dir, None)
         filecontent = filecontent.read() # read file completely into memory
         filecontent = filecontent.strip()
-
-    if filecontent:
-        # filecontent is either a file or a non-empty string
-        stream = open(savepath, 'wb')
-        try:
-            _write_stream(filecontent, stream)
-        finally:
-            stream.close()
     else:
-        # filecontent is empty string (e.g. empty map file), delete the target file
-        try:
-            os.unlink(savepath)
-        except OSError, err:
-            if err.errno != errno.ENOENT: # no such file
-                raise
+        #content_length = file_upload.content_length
+        # XXX gives -1 for wsgiref :( If this is fixed, we could use the file obj,
+        # without reading it into memory completely:
+        filecontent = filecontent.read()
 
-    # touch attachment directory to invalidate cache if new map is saved
-    if ext == '.map':
-        os.utime(attach_dir, None)
+    ci.put(basename + ext, filecontent, content_length)
 
     request.write("OK")
 
@@ -769,6 +815,46 @@ def _do_move(pagename, request):
     thispage = Page(request, pagename)
     request.theme.add_msg(formhtml, "dialog")
     return thispage.send_page()
+
+
+def _do_box(pagename, request):
+    _ = request.getText
+
+    pagename, filename, fpath = _access_file(pagename, request)
+    if not request.user.may.read(pagename):
+        return _('You are not allowed to get attachments from this page.')
+    if not filename:
+        return # error msg already sent in _access_file
+
+    timestamp = datetime.datetime.fromtimestamp(os.path.getmtime(fpath))
+    if_modified = request.if_modified_since
+    if if_modified and if_modified >= timestamp:
+        request.status_code = 304
+    else:
+        ci = ContainerItem(request, pagename, filename)
+        filename = wikiutil.taintfilename(request.values['member'])
+        mt = wikiutil.MimeType(filename=filename)
+        content_type = mt.content_type()
+        mime_type = mt.mime_type()
+
+        # TODO: fix the encoding here, plain 8 bit is not allowed according to the RFCs
+        # There is no solution that is compatible to IE except stripping non-ascii chars
+        filename_enc = filename.encode(config.charset)
+
+        # for dangerous files (like .html), when we are in danger of cross-site-scripting attacks,
+        # we just let the user store them to disk ('attachment').
+        # For safe files, we directly show them inline (this also works better for IE).
+        dangerous = mime_type in request.cfg.mimetypes_xss_protect
+        content_dispo = dangerous and 'attachment' or 'inline'
+
+        request.content_type = content_type
+        request.last_modified = timestamp
+        #request.content_length = os.path.getsize(fpath)
+        content_dispo_string = '%s; filename="%s"' % (content_dispo, filename_enc)
+        request.headers.add('Content-Disposition', content_dispo_string)
+
+        # send data
+        request.send_file(ci.get(filename))
 
 
 def _do_get(pagename, request):

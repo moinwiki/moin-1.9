@@ -143,7 +143,7 @@ def execute(pagename, request):
                     if line.action == 'ATTNEW':
                         actions.append(render_action(_('view'), {'action': 'AttachFile', 'do': 'view', 'target': '%s' % filename}))
                     elif line.action == 'ATTDRW':
-                        actions.append(render_action(_('edit'), {'action': 'AttachFile', 'drawing': '%s' % filename.replace(".draw", "")}))
+                        actions.append(render_action(_('edit'), {'action': 'AttachFile', 'drawing': '%s' % filename.replace(".tdraw", "")}))
 
                     actions.append(render_action(_('get'), {'action': 'AttachFile', 'do': 'get', 'target': '%s' % filename}))
                     if request.user.may.delete(pagename):
