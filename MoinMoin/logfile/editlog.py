@@ -81,9 +81,11 @@ class EditLogLine:
             representing the user that did the edit.
 
             The type id is one of 'ip' (DNS or numeric IP), 'user' (user name)
-            or 'homepage' (Page instance of user's homepage).
+            or 'homepage' (Page instance of user's homepage) or 'anon' ('').
         """
-        result = 'ip', request.cfg.show_hosts and self.hostname or ''
+        result = 'anon', ''
+        if request.cfg.show_hosts and self.hostname:
+            result = 'ip', self.hostname
         if self.userid:
             if self.userid not in self._usercache:
                 self._usercache[self.userid] = user.User(request, self.userid, auth_method="editlog:75")
@@ -100,7 +102,7 @@ class EditLogLine:
     def getEditor(self, request):
         """ Return a HTML-safe string representing the user that did the edit.
         """
-        if request.cfg.show_hosts:
+        if request.cfg.show_hosts and self.hostname and self.addr:
             title = " @ %s[%s]" % (self.hostname, self.addr)
         else:
             title = ""
@@ -131,6 +133,9 @@ class EditLogLine:
                 idx = len(info)
             title = '???' + title
             text = request.formatter.text(info[:idx])
+        elif kind == 'anon':
+            title = ''
+            text = _('anonymous')
         else:
             raise Exception("unknown EditorData type")
         return (request.formatter.span(1, title=title) +
@@ -162,18 +167,22 @@ class EditLog(LogFile):
 
         If `host` is None, it's read from request vars.
         """
-        if host is None:
-            host = request.remote_addr
+        if request.cfg.log_remote_addr:
+            if host is None:
+                host = request.remote_addr
 
-        if request.cfg.log_reverse_dns_lookups:
-            import socket
-            try:
-                hostname = socket.gethostbyaddr(host)[0]
-                hostname = unicode(hostname, config.charset)
-            except (socket.error, UnicodeError):
+            if request.cfg.log_reverse_dns_lookups:
+                import socket
+                try:
+                    hostname = socket.gethostbyaddr(host)[0]
+                    hostname = unicode(hostname, config.charset)
+                except (socket.error, UnicodeError):
+                    hostname = host
+            else:
                 hostname = host
         else:
-            hostname = host
+            host = ''
+            hostname = ''
 
         comment = wikiutil.clean_input(comment)
         user_id = request.user.valid and request.user.id or ''

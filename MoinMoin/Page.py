@@ -554,7 +554,7 @@ class Page(object):
             if editordata[0] == 'interwiki':
                 editor = "%s:%s" % editordata[1]
             else:
-                editor = editordata[1] # ip or email
+                editor = editordata[1] # ip or email or anon
             result = {
                 'timestamp': line.ed_time_usecs,
                 'editor': editor,
