@@ -1,9 +1,9 @@
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - Pascal Source Parser
-    
+
     DEPRECATED compatibility wrapper calling the highlight parser.
-    
+
     This is to support (deprecated) existing syntax like:
     {{{#!pascal ...
     ...
