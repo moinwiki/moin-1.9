@@ -13,9 +13,9 @@ all:
 
 install-docs:
 	-mkdir build
-	wget -U MoinMoin/Makefile -O build/INSTALL.html "http://master18.moinmo.in/MoinMoin/InstallDocs?action=print"
+	wget -U MoinMoin/Makefile -O build/INSTALL.html "http://master19.moinmo.in/MoinMoin/InstallDocs?action=print"
 	sed \
-		-e 's#href="/#href="http://master18.moinmo.in/#g' \
+		-e 's#href="/#href="http://master19.moinmo.in/#g' \
 		-e 's#http://[a-z\.]*/wiki/classic/#/wiki/classic/#g' \
 		-e 's#http://[a-z\.]*/wiki/modern/#/wiki/modern/#g' \
 		-e 's#http://[a-z\.]*/wiki/rightsidebar/#/wiki/rightsidebar/#g' \
@@ -25,9 +25,9 @@ install-docs:
         build/INSTALL.html >docs/INSTALL.html
 	-rm build/INSTALL.html
 
-	wget -U MoinMoin/Makefile -O build/UPDATE.html "http://master18.moinmo.in/HelpOnUpdating?action=print"
+	wget -U MoinMoin/Makefile -O build/UPDATE.html "http://master19.moinmo.in/HelpOnUpdating?action=print"
 	sed \
-		-e 's#href="/#href="http://master18.moinmo.in/#g' \
+		-e 's#href="/#href="http://master19.moinmo.in/#g' \
 		-e 's#http://[a-z\.]*/wiki/classic/#/wiki/classic/#g' \
 		-e 's#http://[a-z\.]*/wiki/modern/#/wiki/modern/#g' \
 		-e 's#http://[a-z\.]*/wiki/rightsidebar/#/wiki/rightsidebar/#g' \
@@ -39,7 +39,7 @@ install-docs:
 	-rmdir build
 
 interwiki:
-	wget -U MoinMoin/Makefile -O $(share)/data/intermap.txt "http://master18.moinmo.in/InterWikiMap?action=raw"
+	wget -U MoinMoin/Makefile -O $(share)/data/intermap.txt "http://master19.moinmo.in/InterWikiMap?action=raw"
 	chmod 664 $(share)/data/intermap.txt
 
 check-tabs:
@@ -53,8 +53,8 @@ epydoc: patchlevel
 # Should be used only on TW machine
 underlay:
 	rm -rf $(share)/underlay
-	MoinMoin/script/moin.py --config-dir=/srv/moin/cfg/1.8 --wiki-url=master18.moinmo.in/ maint globaledit
-	MoinMoin/script/moin.py --config-dir=/srv/moin/cfg/1.8 --wiki-url=master18.moinmo.in/ maint reducewiki --target-dir=$(share)/underlay
+	MoinMoin/script/moin.py --config-dir=/srv/moin/cfg/1.8 --wiki-url=master19.moinmo.in/ maint globaledit
+	MoinMoin/script/moin.py --config-dir=/srv/moin/cfg/1.8 --wiki-url=master19.moinmo.in/ maint reducewiki --target-dir=$(share)/underlay
 	rm -rf $(share)/underlay/pages/InterWikiMap
 	rm -rf $(share)/underlay/pages/MoinPagesEditorGroup
 	cd $(share); rm -f underlay.tar; tar cf underlay.tar underlay
