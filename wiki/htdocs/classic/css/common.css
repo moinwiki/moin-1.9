@@ -131,15 +131,41 @@ hr {
 .strike {text-decoration: line-through;}
 
 /* TableOfContents macro */
-.table-of-contents { font-size: small;
-                     text-align:left;
-                     margin: 0.5em; padding-left: 2em;
-                     min-width:50%; }
-.table-of-contents ol { margin:0; margin-left:1em;
-                        list-style-type:decimal; }
-.table-of-contents ul { margin:0;
-                        list-style-type:none; }
-.table-of-contents-heading { font-weight:bold; padding:0; margin:0; }
+div.table-of-contents {
+    border: 1px solid #bbbbbb;
+    color: black;
+    background-color: #eeeeee;
+    font-size: 80%;
+    text-align: left;
+    margin: 0.5em 0 0.5em 1em;
+    padding: 0.5em 0.75em 0.5em 0.5em;
+    max-width: 50%;
+    display: inline-table;
+}
+div.table-of-contents ol {
+    margin: 0;
+    padding: 0 0 0 2em;
+}
+div.table-of-contents ul {
+    margin: 0;
+    list-style:none;
+}
+div.table-of-contents li {
+    margin:0;
+    padding: 0;
+}
+p.table-of-contents-heading {
+    font-weight:bold;
+    padding:0;
+    margin: 0 0 0.5em 0;
+    letter-spacing: 0.075em;
+}
+
+/* Navigation macro */
+table.navigation {
+    background: #fff;
+    margin: 0;
+}
 
 
 .footnotes ol {

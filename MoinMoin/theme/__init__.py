@@ -632,6 +632,28 @@ class ThemeBase:
 </ul>''' % ''.join(items)
         return html
 
+    def _stylesheet_link(self, theme, media, href, title=None):
+        """
+        Create a link tag for a stylesheet.
+
+        @param theme: True: href gives the basename of a theme stylesheet,
+                      False: href is a full url of a user/admin defined stylesheet.
+        @param media: 'all', 'screen', 'print', 'projection', ...
+        @param href: see param theme
+        @param title: optional title (for alternate stylesheets), see
+                      http://www.w3.org/Style/Examples/007/alternatives
+        @rtype: string
+        @return: stylesheet link html
+        """
+        if theme:
+            href = '%s/%s/css/%s.css' % (self.cfg.url_prefix_static, self.name, href)
+        attrs = 'type="text/css" charset="%s" media="%s" href="%s"' % (
+                self.stylesheetsCharset, media, href, )
+        if title:
+            return '<link rel="alternate stylesheet" %s title="%s">' % (attrs, title)
+        else:
+            return '<link rel="stylesheet" %s>' % attrs
+
     def html_stylesheets(self, d):
         """ Assemble html head stylesheet links
 
@@ -639,45 +661,32 @@ class ThemeBase:
         @rtype: string
         @return: stylesheets links
         """
-        link = '<link rel="stylesheet" type="text/css" charset="%s" media="%s" href="%s">'
-
+        request = self.request
         # Check mode
         if d.get('print_mode'):
             media = d.get('media', 'print')
             stylesheets = getattr(self, 'stylesheets_' + media)
         else:
             stylesheets = self.stylesheets
-        usercss = self.request.user.valid and self.request.user.css_url
 
-        # Create stylesheets links
-        html = []
-        prefix = self.cfg.url_prefix_static
-        csshref = '%s/%s/css' % (prefix, self.name)
-        for media, basename in stylesheets:
-            href = '%s/%s.css' % (csshref, basename)
-            html.append(link % (self.stylesheetsCharset, media, href))
+        theme_css = [self._stylesheet_link(True, *stylesheet) for stylesheet in stylesheets]
+        cfg_css = [self._stylesheet_link(False, *stylesheet) for stylesheet in request.cfg.stylesheets]
 
-            # Don't add user css url if it matches one of ours
-            if usercss and usercss == href:
-                usercss = None
-
-        # admin configurable additional css (farm or wiki level)
-        for media, csshref in self.request.cfg.stylesheets:
-            html.append(link % (self.stylesheetsCharset, media, csshref))
-
-        csshref = '%s/%s/css/msie.css' % (prefix, self.name)
-        html.append("""
+        msie_css = """
 <!-- css only for MSIE browsers -->
 <!--[if IE]>
    %s
 <![endif]-->
-""" % link % (self.stylesheetsCharset, 'all', csshref))
+""" % self._stylesheet_link(True, 'all', 'msie')
 
         # Add user css url (assuming that user css uses same charset)
-        if usercss and usercss.lower() != "none":
-            html.append(link % (self.stylesheetsCharset, 'all', usercss))
+        href = request.user.valid and request.user.css_url
+        if href and href.lower() != "none":
+            user_css = self._stylesheet_link(False, 'all', href)
+        else:
+            user_css = ''
 
-        return '\n'.join(html)
+        return '\n'.join(theme_css + cfg_css + [msie_css, user_css])
 
     def shouldShowPageinfo(self, page):
         """ Should we show page info?
@@ -1143,10 +1152,9 @@ actionsMenuInit('%(label)s');
         _ = self.request.getText
         editbar_actions = []
         for editbar_item in self.request.cfg.edit_bar:
-            if editbar_item == 'Discussion':
-                if not self.request.cfg.supplementation_page and self.request.getPragma('supplementation-page', 1) in ('on', '1'):
-                    editbar_actions.append(self.supplementation_page_nameLink(page))
-                elif self.request.cfg.supplementation_page and not self.request.getPragma('supplementation-page', 1) in ('off', '0'):
+            if (editbar_item == 'Discussion' and
+               (self.request.getPragma('supplementation-page', self.request.cfg.supplementation_page)
+                                                   in (True, 1, 'on', '1'))):
                     editbar_actions.append(self.supplementation_page_nameLink(page))
             elif editbar_item == 'Comments':
                 # we just use <a> to get same style as other links, but we add some dummy

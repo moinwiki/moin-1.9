@@ -651,33 +651,30 @@ def _default_password_checker(cfg, request, username, password):
         If you don't want to check passwords, use password_checker = None.
 
         @return: None if there is no problem with the password,
-                 some string with an error msg, if the password is problematic.
+                 some unicode object with an error msg, if the password is problematic.
     """
     _ = request.getText
-    try:
-        # in any case, do a very simple built-in check to avoid the worst passwords
-        if len(password) < 6:
-            raise ValueError(_("Password is too short."))
-        if len(set(password)) < 4:
-            raise ValueError(_("Password has not enough different characters."))
+    # in any case, do a very simple built-in check to avoid the worst passwords
+    if len(password) < 6:
+        return _("Password is too short.")
+    if len(set(password)) < 4:
+        return _("Password has not enough different characters.")
 
-        username_lower = username.lower()
-        password_lower = password.lower()
-        if username in password or password in username or \
-           username_lower in password_lower or password_lower in username_lower:
-            raise ValueError(_("Password is too easy (password contains name or name contains password)."))
+    username_lower = username.lower()
+    password_lower = password.lower()
+    if username in password or password in username or \
+       username_lower in password_lower or password_lower in username_lower:
+        return _("Password is too easy (password contains name or name contains password).")
 
-        keyboards = (ur"`1234567890-=qwertyuiop[]\asdfghjkl;'zxcvbnm,./", # US kbd
-                     ur"^1234567890ß´qwertzuiopü+asdfghjklöä#yxcvbnm,.-", # german kbd
-                    ) # add more keyboards!
-        for kbd in keyboards:
-            rev_kbd = kbd[::-1]
-            if password in kbd or password in rev_kbd or \
-               password_lower in kbd or password_lower in rev_kbd:
-                raise ValueError(_("Password is too easy (keyboard sequence)."))
-        return None
-    except ValueError, err:
-        return unicode(err)
+    keyboards = (ur"`1234567890-=qwertyuiop[]\asdfghjkl;'zxcvbnm,./", # US kbd
+                 ur"^1234567890ß´qwertzuiopü+asdfghjklöä#yxcvbnm,.-", # german kbd
+                ) # add more keyboards!
+    for kbd in keyboards:
+        rev_kbd = kbd[::-1]
+        if password in kbd or password in rev_kbd or \
+           password_lower in kbd or password_lower in rev_kbd:
+            return _("Password is too easy (keyboard sequence).")
+    return None
 
 
 class DefaultExpression(object):
@@ -995,6 +992,8 @@ options_no_group_name = {
     ('language_default', 'en', "Default language for user interface and page content, see HelpOnLanguages."),
     ('language_ignore_browser', False, "if True, ignore user's browser language settings, see HelpOnLanguages."),
 
+    ('log_remote_addr', True,
+     "if True, log the remote IP address (and maybe hostname)."),
     ('log_reverse_dns_lookups', True,
      "if True, do a reverse DNS lookup on page SAVE. If your DNS is broken, set this to False to speed up SAVE."),
     ('log_timing', False,

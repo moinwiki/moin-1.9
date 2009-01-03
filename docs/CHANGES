@@ -45,6 +45,44 @@ Version 1.9.current:
 
 
 
+Version 1.8.1:
+  Bug fixes:
+    * Workaround win32 locking problems (caused by spurious access denied
+      exceptions on that platform).
+    * Fix unicode errors that happened when password checker failed a password
+    * WikiConfig/WikiConfigHelp: fixed wrong language table headings
+    * Themes: make the margins around trail line work properly
+    * "modernized" theme:
+      * make broken links gray
+      * add new right/center/left/justify css classes
+      * don't force Arial
+    * Standalone server: be more specific when catching socket exceptions,
+      treat socket errors in http header emission in the same way.
+    * GUI editor:
+      * Fix heading levels when inserting new headings.
+      * Fix headers already sent exception when using e.g. edit LOCKing.
+    * Xapian indexing: fixed missing import for execfilter (only happened on
+      non-posix platforms like win32)
+
+  * New features:
+    * Themes:
+     * Make the TOC shrinkwrap, add white background to navigation macro.
+       The table of contents looked bad spanning the whole width of the page.
+       It's made to shrinkwrap now, so it will only get as wide, as the longest
+       heading. We use display:inline-table, so this won't work in MS IE6,
+       which still displays it the old way.
+       Navigation macro now has a white background, to make it more readable
+       when it's floating over a pre block or TOC.
+     * Make the numbers in lists in table of contents right-aligned.
+     * Refactored and extended theme.html_stylesheets() to make alternate
+       stylesheets possible. Stylesheet definitions now can either be:
+       2-tuples: (media, href)  # backwards compatibility
+       or:
+       3-tuples: (media, href, title)  # new, for defining alternate stylesheets
+       This works within themes as well as in the wiki config.
+       See also: http://www.w3.org/Style/Examples/007/alternatives.html
+
+
 Version 1.8.0:
   Note: This is a reduced CHANGES, ommitting details from rc/beta test and
         also less interesting minor changes and fixes. It shows changes
@@ -130,6 +168,37 @@ Version 1.8.0:
       exclude anything.
     * Speed up javascript comments processing on IE by getElementsByClassName()
     * Added sk (slovak) i18n, updated i18n.
+
+
+1.7.3:
+  New features:
+    * Secure session cookies for https, see cfg.cookie_secure.
+    * Add left/center/right/justify classes to builtin themes.
+
+  Fixes:
+    * Python 2.3 compatibility fixes.
+    * Fixed https detection for servers using HTTPS=1 and also for wsgi servers
+      not using HTTPS/SSL_ environment, but just wsgi.url_scheme.
+    * GUI editor:
+      * Fix crash when editing a page with non-ASCII pagename and inserting a link
+      * Fix "headers already sent exception" with edit LOCKs.
+    * i18n.__init__: Bug fix for wiki language not installed.
+    * Fixed URLs given by sitemap action, if the wiki does not run at / URL.
+    * Search results: link to 'view' rendering of found attachments
+    * Logging:    
+      * Removed superfluous linefeed in timing log output.
+      * Use logging framework for messages emitted by warnings module (e.g.
+        DeprecationWarning), silence some specific warnings.
+    * Fix dbw_hide_buttons javascript.
+    * Standalone server:
+      * fix serverClass argument processing
+      * fix --interface="" argument processing
+    * mointwisted:
+      * added missing pidFile parameter
+      * better use Config.name for pidFile to avoid conflicts and keep same
+        behaviour as in the past
+    * Jabber bot can now be configured to use an authentication realm which
+      is different from the server's hostname
 
 
 Version 1.7.2:
