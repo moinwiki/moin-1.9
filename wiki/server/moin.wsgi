@@ -5,7 +5,7 @@
     To use this, add those statements to your Apache's VirtualHost definition:
     
     # this is for icons, css, js (and must match url_prefix from wiki config):
-    Alias       /moin_static181/ /usr/share/moin/htdocs/
+    Alias       /moin_static190/ /usr/share/moin/htdocs/
 
     # this is the URL http://servername/moin/ you will use later to invoke moin:
     WSGIScriptAlias /moin/ /some/path/moin.wsgi
@@ -46,13 +46,4 @@ import sys, os
 # Debug mode - show detailed error reports
 #os.environ['MOIN_DEBUG'] = '1'
 
-
-from MoinMoin.server.server_wsgi import WsgiConfig, moinmoinApp
-
-class Config(WsgiConfig):
-    pass
-
-config = Config()
-
-application = moinmoinApp
-
+from MoinMoin.wsgiapp import application

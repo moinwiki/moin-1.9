@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-28 20:59+0200\n"
+"POT-Creation-Date: 2008-09-12 23:35+0200\n"
 "PO-Revision-Date: 2006-08-17 20:50+0100\n"
 "Last-Translator: Translation sponsored by Tenalt Ltd. (info@tenalt.com)\n"
 "Language-Team: \n"
@@ -2319,21 +2319,6 @@ msgstr ""
 
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Ne možete odjaviti pretplatu sa stranica na koje niste pretplaćeni."
-
-#, fuzzy
-msgid "Password is too short."
-msgstr "Lozinka (ponovno)"
-
-msgid "Password has not enough different characters."
-msgstr ""
-
-#, fuzzy
-msgid ""
-"Password is too easy (password contains name or name contains password)."
-msgstr "Lozinka nije unešena. Upišite korisničko ime i lozinku"
-
-msgid "Password is too easy (keyboard sequence)."
-msgstr ""
 
 msgid "Diffs"
 msgstr "Razlike"

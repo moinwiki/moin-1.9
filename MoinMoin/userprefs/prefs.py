@@ -9,6 +9,7 @@
 
 import time
 from MoinMoin import user, util, wikiutil, events
+from MoinMoin.theme import load_theme_fallback
 from MoinMoin.widget import html
 from MoinMoin.userprefs import UserPrefBase
 
@@ -46,7 +47,7 @@ class Settings(UserPrefBase):
         @rtype: list of unicode strings
         @return: list of normalized names
         """
-        text = self.request.form.get(key, [''])[0]
+        text = self.request.form.get(key, '')
         text = text.replace('\r', '')
         items = []
         for item in text.split('\n'):
@@ -61,12 +62,12 @@ class Settings(UserPrefBase):
         form = self.request.form
         request = self.request
 
-        if request.request_method != 'POST':
+        if request.method != 'POST':
             return
 
         if not 'name' in request.user.auth_attribs:
             # Require non-empty name
-            new_name = form.get('name', [request.user.name])[0]
+            new_name = form.get('name', request.user.name)
 
             # Don't allow changing the name to an invalid one
             if not user.isValidName(request, new_name):
@@ -89,7 +90,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
 
         if not 'email' in request.user.auth_attribs:
             # try to get the email
-            new_email = wikiutil.clean_input(form.get('email', [request.user.email])[0])
+            new_email = wikiutil.clean_input(form.get('email', request.user.email))
             new_email = new_email.strip()
 
             # Require email
@@ -109,7 +110,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
 
         if not 'jid' in request.user.auth_attribs:
             # try to get the jid
-            new_jid = wikiutil.clean_input(form.get('jid', [''])[0]).strip()
+            new_jid = wikiutil.clean_input(form.get('jid', '')).strip()
 
             jid_changed = request.user.jid != new_jid
             previous_jid = request.user.jid
@@ -131,15 +132,15 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
 
         if not 'aliasname' in request.user.auth_attribs:
             # aliasname
-            request.user.aliasname = wikiutil.clean_input(form.get('aliasname', [''])[0])
+            request.user.aliasname = wikiutil.clean_input(form.get('aliasname', ''))
 
         # editor size
         request.user.edit_rows = util.web.getIntegerInput(request, 'edit_rows',
                                                           request.user.edit_rows, 10, 60)
 
         # try to get the editor
-        request.user.editor_default = form.get('editor_default', [self.cfg.editor_default])[0]
-        request.user.editor_ui = form.get('editor_ui', [self.cfg.editor_ui])[0]
+        request.user.editor_default = form.get('editor_default', self.cfg.editor_default)
+        request.user.editor_ui = form.get('editor_ui', self.cfg.editor_ui)
 
         # time zone
         request.user.tz_offset = util.web.getIntegerInput(request, 'tz_offset',
@@ -147,14 +148,14 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
 
         # datetime format
         try:
-            dt_d_combined = Settings._date_formats.get(form['datetime_fmt'][0], '')
+            dt_d_combined = Settings._date_formats.get(form['datetime_fmt'], '')
             request.user.datetime_fmt, request.user.date_fmt = dt_d_combined.split(' & ')
         except (KeyError, ValueError):
             request.user.datetime_fmt = '' # default
             request.user.date_fmt = '' # default
 
         # try to get the (optional) theme
-        theme_name = form.get('theme_name', [self.cfg.theme_default])[0]
+        theme_name = form.get('theme_name', self.cfg.theme_default)
         if theme_name != request.user.theme_name:
             # if the theme has changed, load the new theme
             # so the user has a direct feedback
@@ -163,12 +164,12 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
             # already loaded theme is just replaced (works cause
             # nothing has been emitted yet)
             request.user.theme_name = theme_name
-            if request.loadTheme(theme_name) > 0:
+            if load_theme_fallback(request, theme_name) > 0:
                 theme_name = wikiutil.escape(theme_name)
                 return 'error', _("The theme '%(theme_name)s' could not be loaded!") % locals()
 
         # try to get the (optional) preferred language
-        request.user.language = form.get('language', [''])[0]
+        request.user.language = form.get('language', '')
         if request.user.language == u'': # For language-statistics
             from MoinMoin import i18n
             request.user.real_language = i18n.get_browser_language(request)
@@ -193,13 +194,13 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
                 or (key in already_handled)):
                 continue
             default = self.cfg.user_form_defaults[key]
-            value = form.get(key, [default])[0]
+            value = form.get(key, default)
             setattr(request.user, key, value)
 
         # checkbox options
         for key, label in self.cfg.user_checkbox_fields:
             if key not in self.cfg.user_checkbox_disable and key not in self.cfg.user_checkbox_remove:
-                value = form.get(key, ["0"])[0]
+                value = form.get(key, "0")
                 try:
                     value = int(value)
                 except ValueError:
@@ -227,10 +228,10 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
         _ = self._
         form = self.request.form
 
-        if form.has_key('cancel'):
+        if 'cancel' in form:
             return
 
-        if form.has_key('save'): # Save user profile
+        if 'save' in form: # Save user profile
             return self._save_user_prefs()
 
     # form generation part

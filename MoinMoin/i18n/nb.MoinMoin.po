@@ -11,9 +11,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.8\n"
-"PO-Revision-Date: 2008-12-02 15:24+0100\n"
-"Last-Translator: Martin Thorsen Ranang <mtr@ranang.org>\n"
+"Project-Id-Version: MoinMoin 1.6\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"PO-Revision-Date: 2004-12-01 21:30+0200\n"
+"Last-Translator: Joerg Cassens <jmt@cassens.org>\n"
 "Language-Team: Norwegian <moinmoin-nb@cassens.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -70,11 +72,11 @@ msgstr ""
 
 #, python-format
 msgid "Argument \"%s\" is required"
-msgstr "Argumentet \\\"%s\\\" er påkrevd"
+msgstr ""
 
-#, python-format
+#, fuzzy, python-format
 msgid "No argument named \"%s\""
-msgstr "Ingen argumenter heter \"%s\""
+msgstr "Ingen sider matcher \"%s\"!"
 
 #, python-format
 msgid "Expected \"=\" to follow \"%(token)s\""
@@ -84,8 +86,9 @@ msgstr "Forventet et \"=\" etter \"%(token)s\""
 msgid "Expected a value for key \"%(token)s\""
 msgstr "Forventet en verdi for variablen \"%(token)s\""
 
+#, fuzzy
 msgid "Your changes are not saved!"
-msgstr "Dine endringer er ikke lagret!"
+msgstr "Du har ikke endret på sidens innhold, så den ble ikke lagret!"
 
 msgid "You are not allowed to edit this page."
 msgstr "Du har ikke tillatelse til å redigere denne siden."
@@ -98,10 +101,10 @@ msgstr "Kan ikke redigere gamle utgaver!"
 
 #, fuzzy
 msgid "The lock you held timed out. Be prepared for editing conflicts!"
-msgstr "Din låsing av siden er utgått på tid, så vær forberedt på redigeringskonflikter!"
+msgstr "Din låsing av siden er utgått på tid, så vær forberedt på konflikter!"
 
 msgid "Page name is too long, try shorter name."
-msgstr "Sidenavnet er for langt, forsøk med et kortere navn."
+msgstr ""
 
 #, fuzzy, python-format
 msgid "Draft of \"%(pagename)s\""
@@ -117,15 +120,15 @@ msgstr "Forhåndsvisning av \"%(pagename)s\""
 
 #, python-format
 msgid "Your edit lock on %(lock_page)s has expired!"
-msgstr "Din redigeringslås på %(lock_page)s har gått ut!"
+msgstr "Din lås på %(lock_page)s har gått ut!"
 
 #, python-format
 msgid "Your edit lock on %(lock_page)s will expire in # minutes."
-msgstr "Din redigeringslås på %(lock_page)s går ut om # minutter."
+msgstr "Din lås på %(lock_page)s går ut om # minutter."
 
 #, python-format
 msgid "Your edit lock on %(lock_page)s will expire in # seconds."
-msgstr "Din redigeringslås på %(lock_page)s går ut om # sekunder."
+msgstr "Din lås på %(lock_page)s går ut om # sekunder."
 
 msgid "Someone else deleted this page while you were editing!"
 msgstr "En annen har slettet denne siden mens du redigerte den!"
@@ -196,7 +199,7 @@ msgid "Preview"
 msgstr "Forhåndsvisning"
 
 msgid "GUI Mode"
-msgstr "GUI-modus"
+msgstr ""
 
 msgid "Load Draft"
 msgstr ""
@@ -204,18 +207,19 @@ msgstr ""
 msgid "Trivial change"
 msgstr "Mindre oppdatering"
 
+#, fuzzy
 msgid "Comment:"
-msgstr "Kommentar:"
+msgstr "Kommentar"
 
 msgid "<No addition>"
-msgstr "<Ingen tilføyelse>"
+msgstr "<Ingen tilføyelser>"
 
 #, python-format
 msgid "Add to: %(category)s"
-msgstr "Legg til i: %(category)s"
+msgstr ""
 
 msgid "Remove trailing whitespace from each line"
-msgstr "Fjern ekstra mellomrom på slutten av hver linje"
+msgstr "Fjern ekstra mellomrom på slutten av linjer"
 
 msgid "Edit was cancelled."
 msgstr "Redigeringen ble avbrutt."
@@ -254,8 +258,9 @@ msgstr "Du kan ikke lagre tomme sider."
 msgid "Could not rename page because of file system error: %s."
 msgstr "Navn ikke endret på grunn av filsystemfeil: %s."
 
+#, fuzzy
 msgid "You are not allowed to delete this page!"
-msgstr "Du har ikke tillatelse til å slette denne siden!"
+msgstr "Du har ikke tillatelse til å tilbakestille denne siden!"
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr "Takk for dine endringer. Ditt bidrag er verdsatt."
@@ -392,10 +397,10 @@ msgid "You are not allowed to view this page."
 msgstr "Du har ikke tillatelse til å se denne siden."
 
 msgid "The wiki is currently not reachable."
-msgstr "Wikien er for øyeblikket ikke tilgjengelig."
+msgstr ""
 
 msgid "Invalid username or password."
-msgstr "Ugyldig brukernavn eller passord."
+msgstr ""
 
 #, python-format
 msgid ""
@@ -404,21 +409,21 @@ msgid ""
 msgstr ""
 
 msgid "Text mode"
-msgstr "Tekstmodus"
+msgstr ""
 
 #, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
-msgstr "Pakken trenger en nyere versjon av MoinMoin (minst %s)."
+msgstr ""
 
 msgid "The theme name is not set."
-msgstr "Temanavnet er ikke satt."
+msgstr ""
 
 msgid "Installing theme files is only supported for standalone type servers."
 msgstr ""
 
-#, python-format
+#, fuzzy, python-format
 msgid "Installation of '%(filename)s' failed."
-msgstr "Installasjonen av '%(filename)s' mislyktes."
+msgstr "Tegningen '%(filename)s' er lagret."
 
 #, python-format
 msgid "The file %s is not a MoinMoin package file."
@@ -488,24 +493,28 @@ msgid ""
 "%(be)s results out of about %(pages)d pages."
 msgstr ""
 
+#, fuzzy
 msgid "seconds"
-msgstr "sekunder"
+msgstr "%.2f sekunder"
 
+#, fuzzy
 msgid "Previous"
-msgstr "Forrige"
+msgstr "Forhåndsvisning"
 
+#, fuzzy
 msgid "Next"
-msgstr "Neste"
+msgstr "Tekst"
 
+#, fuzzy
 msgid "rev"
-msgstr "rev"
+msgstr "tilbakestill"
 
 msgid "current"
-msgstr "nåværende"
+msgstr ""
 
-#, python-format
+#, fuzzy, python-format
 msgid "last modified: %s"
-msgstr "sist endret: %s"
+msgstr "sist endret %(time)s"
 
 msgid "match"
 msgstr "resultat"
@@ -517,7 +526,7 @@ msgid "about"
 msgstr ""
 
 msgid "Language"
-msgstr "Språk"
+msgstr ""
 
 msgid "<Browser setting>"
 msgstr "<Nettleseroppsett>"
@@ -528,14 +537,16 @@ msgstr "Andre"
 msgid "Date"
 msgstr "Dato"
 
+#, fuzzy
 msgid "Views/day"
-msgstr "Visninger/dag"
+msgstr "Vis"
 
+#, fuzzy
 msgid "Edits/day"
-msgstr "Endringer/dag"
+msgstr "Rediger"
 
 msgid "Page hits and edits"
-msgstr "Sidebesøk og -endringer"
+msgstr "Sidebesøk og -redigeringer"
 
 #, python-format
 msgid "%(chart_title)s for %(filterpage)s"
@@ -576,10 +587,10 @@ msgid "Could not contact botbouncer.com."
 msgstr ""
 
 msgid "Failed to connect to database."
-msgstr "Mislyktes med databasetilkobling."
+msgstr ""
 
 msgid "Missing password. Please enter user name and password."
-msgstr "Passordet mangler. Vær vennlig å oppgi brukernavn og passord."
+msgstr "Passordet mangler. Oppgi et passord."
 
 #, python-format
 msgid ""
@@ -605,10 +616,10 @@ msgid "Name"
 msgstr "Navn"
 
 msgid "Choose this name"
-msgstr "Velg dette navnet"
+msgstr ""
 
 msgid "This is not a valid username, choose a different one."
-msgstr "Dette er ikke et gyldig brukernavn, velg et annet."
+msgstr ""
 
 msgid ""
 "The username you have chosen is already\n"
@@ -629,7 +640,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Verification canceled."
-msgstr "Verifiseringen ble avbrutt."
+msgstr "Redigeringen ble avbrutt."
 
 msgid "OpenID failure."
 msgstr ""
@@ -638,7 +649,7 @@ msgid "Your account is now associated to your OpenID."
 msgstr ""
 
 msgid "The password you entered is not valid."
-msgstr "Passordet du oppga er ikke gyldig."
+msgstr ""
 
 msgid "OpenID verification requires that you click this button:"
 msgstr ""
@@ -661,35 +672,40 @@ msgid ""
 msgstr ""
 
 msgid "Page has been modified"
-msgstr "Siden har blitt endret"
+msgstr ""
 
 msgid "Page has been modified in a trivial fashion"
-msgstr "Siden har gjennomgått mindre endringer"
+msgstr ""
 
+#, fuzzy
 msgid "Page has been renamed"
-msgstr "Siden har fått nytt navn"
+msgstr "Sidebesøk og -redigeringer"
 
+#, fuzzy
 msgid "Page has been deleted"
-msgstr "Siden har blitt slettet"
+msgstr "Siden \"%s\" ble slettet."
 
+#, fuzzy
 msgid "Page has been copied"
-msgstr "Siden har blitt kopiert"
+msgstr "Sidebesøk og -redigeringer"
 
+#, fuzzy
 msgid "A new attachment has been added"
-msgstr "En nytt vedlegg har blitt lagt til"
+msgstr "Nytt vedlegg"
 
 msgid "A page has been reverted to a previous state"
-msgstr "En side har gått tilbake til sin forrige tilstand"
+msgstr ""
 
+#, fuzzy
 msgid "A user has subscribed to a page"
-msgstr "En bruker har abonnert på en side"
+msgstr "Du abonnerer nå på denne siden."
 
 msgid "A new account has been created"
-msgstr "En ny konto har blitt opprettet"
+msgstr ""
 
-#, python-format
+#, fuzzy, python-format
 msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
-msgstr "[%(sitename)s] %(trivial)soppdatering av \"%(pagename)s\" av %(username)s"
+msgstr "[%(sitename)s] %(trivial)soppdatering av \"%(pagename)s\""
 
 msgid "Trivial "
 msgstr "Mindre "
@@ -709,11 +725,13 @@ msgid ""
 "\n"
 "The \"%(pagename)s\" page has been changed by %(editor)s:\n"
 msgstr ""
-"Kjære, wiki-bruker.\n"
+"Hei, wiki-bruker!\n"
 "\n"
-"Du har abonnert på endringer av wiki-siden \"%(sitename)s\".\n"
+"Du abonnerer på oppdateringer på en wiki-side eller wiki-kategori på \"%"
+"(sitename)s\".\n"
 "\n"
-"Siden \"%(pagename)s\" har blitt endret av %(editor)s:\n"
+"Følgende sider er redigert av %(editor)s:\n"
+"%(pagelink)s\n"
 "\n"
 
 msgid "New page:\n"
@@ -722,7 +740,7 @@ msgstr "Ny side:\n"
 msgid "No differences found!\n"
 msgstr "Fant ingen endringer!\n"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Dear wiki user,\n"
 "\n"
@@ -732,14 +750,16 @@ msgid ""
 "The page \"%(pagename)s\" has been deleted by %(editor)s:\n"
 "\n"
 msgstr ""
-"Kjære, wiki-bruker.\n"
+"Hei, wiki-bruker!\n"
 "\n"
-"Du har abonnert på endringer av wiki-siden \"%(sitename)s\".\n"
+"Du abonnerer på oppdateringer på en wiki-side eller wiki-kategori på \"%"
+"(sitename)s\".\n"
 "\n"
-"Siden \"%(pagename)s\" har blitt slettet av %(editor)s:\n"
+"Følgende sider er redigert av %(editor)s:\n"
+"%(pagelink)s\n"
 "\n"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Dear wiki user,\n"
 "\n"
@@ -749,11 +769,13 @@ msgid ""
 "The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by %(editor)"
 "s:\n"
 msgstr ""
-"Kjære, wiki-bruker.\n"
+"Hei, wiki-bruker!\n"
 "\n"
-"Du har abonnert på endringer av wiki-siden \"%(sitename)s\".\n"
+"Du abonnerer på oppdateringer på en wiki-side eller wiki-kategori på \"%"
+"(sitename)s\".\n"
 "\n"
-"Siden \"%(pagename)s\" fikk endret navn fra \"%(oldname)s\" av %(editor)s:\n"
+"Følgende sider er redigert av %(editor)s:\n"
+"%(pagelink)s\n"
 "\n"
 
 #, python-format
@@ -785,18 +807,20 @@ msgid ""
 "Attachment size: %(attach_size)s\n"
 msgstr ""
 
+#, fuzzy
 msgid "Attachment link"
-msgstr "Vedleggslenke"
+msgstr "Nytt vedlegg"
 
+#, fuzzy
 msgid "Page link"
-msgstr "Sidelenke"
+msgstr "Sider som \"%s\"!"
 
 msgid "Changed page"
-msgstr "Endret side"
+msgstr ""
 
 #, fuzzy
 msgid "Page changed"
-msgstr "Siden ble endret"
+msgstr "Lagre endringene"
 
 #, fuzzy
 msgid ""
@@ -932,7 +956,7 @@ msgstr ""
 "(!) For more help, see HelpOnEditing or SyntaxReference.\n"
 
 msgid "Preferences"
-msgstr "Preferanser"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -949,7 +973,7 @@ msgid "This user name already belongs to somebody else."
 msgstr "Dette brukernavnet er allerede i bruk."
 
 msgid "Empty user name. Please enter a user name."
-msgstr "Tomt brukernavn. Vær vennlig å oppgi et gyldig brukernavn."
+msgstr "Tomt brukernavn. Oppgi gyldig brukernavn."
 
 #, fuzzy
 msgid ""
@@ -962,12 +986,13 @@ msgstr ""
 msgid "This email already belongs to somebody else."
 msgstr "Denne e-postadressen tilhører en annen bruker."
 
+#, fuzzy
 msgid "This jabber id already belongs to somebody else."
-msgstr "Denne jabber-id'en tilhører allerede en annen bruker."
+msgstr "Denne e-postadressen tilhører en annen bruker."
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
-msgstr "Utseendet '%(theme_name)s' kunne ikke lastes!"
+msgstr "Utseendet '%(theme_name)s' finnes ikke!"
 
 msgid "User preferences saved!"
 msgstr "Brukerprofil lagret!"
@@ -976,10 +1001,10 @@ msgid "Default"
 msgstr "Standard"
 
 msgid "the one preferred"
-msgstr "den foretrukne"
+msgstr ""
 
 msgid "free choice"
-msgstr "fritt valg"
+msgstr ""
 
 msgid "Save"
 msgstr "Lagre"
@@ -1015,10 +1040,10 @@ msgid "Quick links"
 msgstr "Hurtiglenker"
 
 msgid "Switch user"
-msgstr "Bytt bruker"
+msgstr ""
 
 msgid "No user selected"
-msgstr "Ingen bruker er valgt"
+msgstr ""
 
 msgid ""
 "You can now change the settings of the selected user account; log out to get "
@@ -1026,30 +1051,31 @@ msgid ""
 msgstr ""
 
 msgid "You are the only user."
-msgstr "Du er den eneste brukeren."
+msgstr ""
 
 msgid ""
 "As a superuser, you can temporarily assume the identity of another user."
 msgstr ""
 
 msgid "Select User"
-msgstr "Velg bruker"
+msgstr ""
 
+#, fuzzy
 msgid "Change password"
-msgstr "Endre passord"
+msgstr "Passord"
 
 msgid "Passwords don't match!"
 msgstr "Passordene er ikke like!"
 
 msgid "Please specify a password!"
-msgstr "Vær vennlig å oppgi et passord!"
+msgstr "Oppgi et passord!"
 
 #, python-format
 msgid "Password not acceptable: %s"
-msgstr "Passordet er ikke godkjent: %s"
+msgstr ""
 
 msgid "Your password has been changed."
-msgstr "Passordet ditt er blitt endret."
+msgstr ""
 
 msgid "To change your password, enter a new password twice."
 msgstr ""
@@ -1083,7 +1109,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Subscribed events"
-msgstr "Abonnerte hendelser"
+msgstr "Abonner"
 
 #, fuzzy
 msgid "Subscribed wiki pages<<BR>>(one regex per line)"
@@ -1144,12 +1170,13 @@ msgstr ""
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr ""
 
+#, fuzzy
 msgid "Username"
-msgstr "Brukernavn"
+msgstr "Bruker"
 
 #, fuzzy
 msgid "Member of Groups"
-msgstr "Medlem av grupper"
+msgstr "Antall sider"
 
 msgid "Email"
 msgstr "E-postadresse"
@@ -1184,7 +1211,7 @@ msgid "Local Site Map for \"%s\""
 msgstr "Lokal oversikt for \"%s\""
 
 msgid "Please log in first."
-msgstr "Vær vennlig å logge inn først."
+msgstr ""
 
 msgid "Please first create a homepage before creating additional pages."
 msgstr ""
@@ -1229,10 +1256,10 @@ msgstr ""
 
 #, fuzzy, python-format
 msgid "You must login to use this action: %(action)s."
-msgstr "Du må logge inn for å utføre denne operasjonen: %(action)s."
+msgstr "Du har ikke tillatelse til å redigere denne siden."
 
 msgid "You are not allowed to subscribe to a page you can't read."
-msgstr "Du får ikke lov til å abonnere på en side du ikke kan lese."
+msgstr "Du har ikke tillatelse til å abonnere på en side du ikke kan lese!"
 
 #, fuzzy
 msgid "This wiki is not enabled for mail/Jabber processing."
@@ -1319,21 +1346,20 @@ msgstr ""
 msgid "Your token is invalid!"
 msgstr ""
 
+#, fuzzy
 msgid "Password reset"
-msgstr "Nullstill passord"
+msgstr "Gjenta passord"
 
+#, fuzzy
 msgid ""
 "\n"
 "== Password reset ==\n"
 "Enter a new password below."
-msgstr ""
-"\n"
-"== Nullstilling av passord ==\n"
-"Oppgi et nytt passord nedenfor."
+msgstr "Passordet mangler. Oppgi et passord."
 
 #, fuzzy
 msgid "Lost password"
-msgstr "Tapt passord"
+msgstr "Passord"
 
 msgid ""
 "\n"
@@ -1352,8 +1378,9 @@ msgid ""
 "username, the recovery token and a new password (twice) below."
 msgstr ""
 
+#, fuzzy
 msgid "Wiki Backup"
-msgstr "Wiki-sikkerhetskopi"
+msgstr "Wiki-markering"
 
 msgid ""
 "= Downloading a backup =\n"
@@ -1370,16 +1397,17 @@ msgid ""
 "To get a backup, just click here:"
 msgstr ""
 
+#, fuzzy
 msgid "Backup"
-msgstr "Sikkerhetskopi"
+msgstr "Oppmerking"
 
 #, fuzzy
 msgid "You are not allowed to do remote backup."
-msgstr "Du har ikke tillatelse til å utføre en sikkerhetskopi til et annet sted."
+msgstr "Du har ikke tillatelse til å redigere denne siden."
 
 #, fuzzy, python-format
 msgid "Unknown backup subaction: %s."
-msgstr ""
+msgstr "Opplastningsoperasjonen er ikke støttet: %s"
 
 msgid "You must login to add a quicklink."
 msgstr ""
@@ -1424,8 +1452,9 @@ msgstr ""
 msgid "Comment"
 msgstr "Kommentar"
 
+#, fuzzy
 msgid "Page Name"
-msgstr "Sidenavn"
+msgstr "Nytt navn"
 
 #, fuzzy
 msgid "You are not allowed to create the supplementation page."
@@ -1478,7 +1507,7 @@ msgid "del"
 msgstr "slett"
 
 msgid "move"
-msgstr "flytt"
+msgstr ""
 
 msgid "get"
 msgstr "hent"
@@ -1493,7 +1522,7 @@ msgid "unzip"
 msgstr ""
 
 msgid "install"
-msgstr "installer"
+msgstr ""
 
 #, python-format
 msgid "No attachments stored for %(pagename)s"
@@ -1519,7 +1548,7 @@ msgid "Upload"
 msgstr "Last opp"
 
 msgid "Attached Files"
-msgstr "Vedlagte filer"
+msgstr "Vedlegg"
 
 msgid "You are not allowed to attach a file to this page."
 msgstr "Du har ikke tillatelse til å legge ved filer til denne siden."
@@ -1574,7 +1603,7 @@ msgid ""
 msgstr "Vedlegg '%(filename)s' eksisterer ikke!"
 
 msgid "Nothing changed"
-msgstr "Ingenting ble endret"
+msgstr ""
 
 #, python-format
 msgid "Page '%(new_pagename)s' does not exist or you don't have enough rights."
@@ -1603,13 +1632,15 @@ msgid "Move aborted because new attachment name is empty."
 msgstr "Du kan ikke lagre tomme sider."
 
 msgid "Move"
-msgstr "Flytt"
+msgstr ""
 
+#, fuzzy
 msgid "New page name"
-msgstr "Nytt sidenavn"
+msgstr "Nytt navn"
 
+#, fuzzy
 msgid "New attachment name"
-msgstr "Nytt vedleggsnavn"
+msgstr "Nytt vedlegg"
 
 msgid "You are not allowed to get attachments from this page."
 msgstr "Du har ikke tillatelse til å hente vedlegg fra denne siden."
@@ -2225,21 +2256,6 @@ msgstr ""
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Du abonnerer nå på denne siden."
 
-#, fuzzy
-msgid "Password is too short."
-msgstr "Gjenta passord"
-
-msgid "Password has not enough different characters."
-msgstr ""
-
-#, fuzzy
-msgid ""
-"Password is too easy (password contains name or name contains password)."
-msgstr "Passordet mangler. Oppgi et passord."
-
-msgid "Password is too easy (keyboard sequence)."
-msgstr ""
-
 msgid "Diffs"
 msgstr "Endringer"
 
@@ -2442,22 +2458,23 @@ msgid "Comments"
 msgstr "Kommentar"
 
 msgid "Edit (Text)"
-msgstr "Rediger (Tekst)"
+msgstr ""
 
 msgid "Edit (GUI)"
-msgstr "Rediger (GUI)"
+msgstr ""
 
 msgid "Immutable Page"
 msgstr "Siden kan ikke endres"
 
 msgid "Remove Link"
-msgstr "Fjern lenke"
+msgstr ""
 
 msgid "Add Link"
-msgstr "Legg til lenke"
+msgstr ""
 
+#, fuzzy
 msgid "Attachments"
-msgstr "Vedlegg"
+msgstr "Nytt vedlegg"
 
 #, python-format
 msgid "Show %s days."
@@ -2468,7 +2485,7 @@ msgstr "Wiki-markering"
 
 #, fuzzy
 msgid "DeleteCache"
-msgstr "SlettCache"
+msgstr "SlettSide"
 
 #, python-format
 msgid "(cached %s)"
@@ -2491,10 +2508,10 @@ msgstr ""
 
 #, fuzzy
 msgid "Variable name"
-msgstr "Variabelnavn"
+msgstr "Filnavn"
 
 msgid "Description"
-msgstr "Beskrivelse"
+msgstr ""
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -2525,7 +2542,7 @@ msgid "Include system pages"
 msgstr "Ta med systemsider"
 
 msgid "Exclude system pages"
-msgstr "Utelat systemsider"
+msgstr "Uten systemsider"
 
 msgid "Go To Page"
 msgstr "Gå til siden"
@@ -2537,7 +2554,7 @@ msgid "Display"
 msgstr "Vis"
 
 msgid "Wiki configuration"
-msgstr "Wikikonfigurasjon"
+msgstr ""
 
 msgid ""
 "This table shows all settings in this wiki that do not have default values. "
@@ -2547,11 +2564,11 @@ msgid ""
 msgstr ""
 
 msgid "Setting"
-msgstr "Innstilling"
+msgstr ""
 
 #, fuzzy
 msgid "Search for items"
-msgstr "Søk etter elementer"
+msgstr "Søk på tittel"
 
 msgid "containing all the following terms"
 msgstr ""
@@ -2566,22 +2583,25 @@ msgid "last modified since (e.g. last 2 weeks)"
 msgstr ""
 
 msgid "any category"
-msgstr "enhver kategori"
+msgstr ""
 
+#, fuzzy
 msgid "any language"
-msgstr "ethvert språk"
+msgstr "Språkinnstilling"
 
 msgid "any mimetype"
 msgstr ""
 
 msgid "Categories"
-msgstr "Kategorier"
+msgstr ""
 
+#, fuzzy
 msgid "File Type"
-msgstr "Filtype"
+msgstr "Filnavn"
 
+#, fuzzy
 msgid "Search only in titles"
-msgstr "Søk bare blant titler"
+msgstr "Søk på tittel"
 
 #, fuzzy
 msgid "Case-sensitive search"
@@ -2590,8 +2610,9 @@ msgstr "Skill mellom STORE og små bokstaver"
 msgid "Exclude underlay"
 msgstr ""
 
+#, fuzzy
 msgid "No system items"
-msgstr "Ingen systemelementer"
+msgstr "Antall systemsider"
 
 msgid "Search in all page revisions"
 msgstr ""
@@ -2601,10 +2622,10 @@ msgstr ""
 
 #, fuzzy
 msgid "File attachment browser"
-msgstr "Filvedleggsutforsker"
+msgstr "Nytt vedlegg"
 
 msgid "User account browser"
-msgstr "Brukerkontoutforsker"
+msgstr ""
 
 msgid "No wanted pages in this wiki."
 msgstr "Ingen ønskede sider i denne wikien."
@@ -2631,7 +2652,7 @@ msgid "Contents"
 msgstr "Innhold"
 
 msgid "Search Titles"
-msgstr "Søk blant titler"
+msgstr "Søk på tittel"
 
 msgid "Display context of search results"
 msgstr "Vis søketekst i søkeresultater"

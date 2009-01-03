@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-28 20:59+0200\n"
+"POT-Creation-Date: 2008-09-12 23:35+0200\n"
 "PO-Revision-Date: 2008-08-22 02:05+0300\n"
 "Last-Translator: Dror Livne <livne.dror@gmail.com>\n"
 "Language-Team: Hebrew <moin-user@lists.sourceforge.net>\n"
@@ -2254,21 +2254,6 @@ msgstr "ערוך את הביטויים הרגולריים של המינויים 
 
 msgid "You need to be subscribed to unsubscribe."
 msgstr "חובה לבצע מינוי לדף בכדי להסיר את המינוי."
-
-#, fuzzy
-msgid "Password is too short."
-msgstr "איפוס ססמה"
-
-msgid "Password has not enough different characters."
-msgstr ""
-
-#, fuzzy
-msgid ""
-"Password is too easy (password contains name or name contains password)."
-msgstr "סיסמה חסרה. אנא הכנס שם משתמש וסיסמה."
-
-msgid "Password is too easy (keyboard sequence)."
-msgstr ""
 
 msgid "Diffs"
 msgstr "הבדלים"

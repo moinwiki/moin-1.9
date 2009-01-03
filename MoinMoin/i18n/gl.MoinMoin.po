@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-28 20:59+0200\n"
+"POT-Creation-Date: 2008-09-12 23:35+0200\n"
 "PO-Revision-Date: 2007-02-22 17:39-0300\n"
 "Last-Translator: Iván Méndez <imendez@udc.es>\n"
 "Language-Team: Galician <moin-devel@lists.sourceforge.net>\n"
@@ -2352,23 +2352,6 @@ msgstr "Edite a expresión regular de subscrición en PreferenciasDoUsuario"
 #, fuzzy
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Subscribiuse a esta páxina."
-
-#, fuzzy
-msgid "Password is too short."
-msgstr "Repetir o contrasinal para validalo"
-
-msgid "Password has not enough different characters."
-msgstr ""
-
-#, fuzzy
-msgid ""
-"Password is too easy (password contains name or name contains password)."
-msgstr ""
-"Faltou introducir o contrasinal. Por favor, introduza o nome de usuario e o "
-"contrasinal"
-
-msgid "Password is too easy (keyboard sequence)."
-msgstr ""
 
 msgid "Diffs"
 msgstr "Diferenzas"

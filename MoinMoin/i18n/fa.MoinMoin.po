@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-28 20:59+0200\n"
+"POT-Creation-Date: 2008-09-12 23:35+0200\n"
 "PO-Revision-Date: 2005-07-22 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -336,8 +336,8 @@ msgid ""
 "Other users will be ''warned'' until %(bumptime)s that you are editing this "
 "page."
 msgstr ""
-"سایر کاربران تا %(bumptime)s پیغامی مبنی بر اینکه شما در حال ویرایش این صفحه "
-"هستید، دریافت خواهند نمود."
+"سایر کاربران تا %(bumptime)s پیغامی مبنی بر اینکه شما در حال ویرایش این "
+"صفحه هستید، دریافت خواهند نمود."
 
 msgid "Use the Preview button to extend the locking period."
 msgstr "جهت تمدید مدت زمان قفل ویرایش دکمه پیش‌نمایش را فشار دهید."
@@ -805,8 +805,7 @@ msgid ""
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
 msgstr ""
-"مدیر گرامی، یک حساب کاربری جدید هم اکنون در %(sitename)s ایجاد شده است. "
-"جزئیات به شرح زیر است:\n"
+"مدیر گرامی، یک حساب کاربری جدید هم اکنون در %(sitename)s ایجاد شده است. جزئیات به شرح زیر است:\n"
 "\n"
 "    نام کاربری: %(username)s\n"
 "    آدرس ایمیل: %(useremail)s"
@@ -2345,20 +2344,6 @@ msgstr "عضویت در اصطلاحات عمومی را در صفحه تنظی�
 
 msgid "You need to be subscribed to unsubscribe."
 msgstr "پیش لغو عضویت می‌بایست عضو باشید."
-
-msgid "Password is too short."
-msgstr "طول کلمه عبور بسیار کوتاه است"
-
-msgid "Password has not enough different characters."
-msgstr "کلمه عبور دارای حروف متفاوت کافی نیست."
-
-msgid ""
-"Password is too easy (password contains name or name contains password)."
-msgstr ""
-"کلمه عبور آسان است (کلمه عبور شامل نام است و یا نام شامل کلمه عبور است)."
-
-msgid "Password is too easy (keyboard sequence)."
-msgstr "کلمه عبور بسیار آسان است (حروف صفحه‌کلید پشت سر هم)."
 
 msgid "Diffs"
 msgstr "تغییرات"
