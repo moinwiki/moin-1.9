@@ -13,27 +13,21 @@ all:
 
 install-docs:
 	-mkdir build
-	wget -U MoinMoin/Makefile -O build/INSTALL.html "http://master19.moinmo.in/MoinMoin/InstallDocs?action=print"
+	wget -U MoinMoin/Makefile -O build/INSTALL.html "http://master19.moinmo.in/InstallDocs?action=print"
 	sed \
 		-e 's#href="/#href="http://master19.moinmo.in/#g' \
-		-e 's#http://[a-z\.]*/wiki/classic/#/wiki/classic/#g' \
-		-e 's#http://[a-z\.]*/wiki/modern/#/wiki/modern/#g' \
-		-e 's#http://[a-z\.]*/wiki/rightsidebar/#/wiki/rightsidebar/#g' \
-		-e 's#/wiki/classic/#wiki/htdocs/classic/#g' \
-		-e 's#/wiki/modern/#wiki/htdocs/modern/#g' \
-		-e 's#/wiki/rightsidebar/#wiki/htdocs/rightsidebar/#g' \
+		-e 's#http://[a-z0-9\.]*/wiki/modernized/#../wiki/htdocs/modernized/#g' \
+		-e 's#/wiki/common/#../wiki/htdocs/common/#g' \
+		-e 's#/wiki/modernized/#../wiki/htdocs/modernized/#g' \
         build/INSTALL.html >docs/INSTALL.html
 	-rm build/INSTALL.html
 
 	wget -U MoinMoin/Makefile -O build/UPDATE.html "http://master19.moinmo.in/HelpOnUpdating?action=print"
 	sed \
 		-e 's#href="/#href="http://master19.moinmo.in/#g' \
-		-e 's#http://[a-z\.]*/wiki/classic/#/wiki/classic/#g' \
-		-e 's#http://[a-z\.]*/wiki/modern/#/wiki/modern/#g' \
-		-e 's#http://[a-z\.]*/wiki/rightsidebar/#/wiki/rightsidebar/#g' \
-		-e 's#/wiki/classic/#wiki/htdocs/classic/#g' \
-		-e 's#/wiki/modern/#wiki/htdocs/modern/#g' \
-		-e 's#/wiki/rightsidebar/#wiki/htdocs/rightsidebar/#g' \
+		-e 's#http://[a-z0-9\.]*/wiki/modernized/#../wiki/htdocs/modernized/#g' \
+		-e 's#/wiki/common/#../wiki/htdocs/common/#g' \
+		-e 's#/wiki/modernized/#../wiki/htdocs/modernized/#g' \
         build/UPDATE.html >docs/UPDATE.html
 	-rm build/UPDATE.html
 	-rmdir build
