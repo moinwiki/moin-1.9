@@ -769,7 +769,14 @@ class Parser:
                             return m.execute('EmbedObject', u'target=%s' % url)
                 elif scheme == 'drawing':
                     desc = self._transclude_description(desc, url)
-                    return self.formatter.attachment_drawing(url, desc)
+                    if desc:
+                        tag_attrs= {'alt': desc, 'title': desc, }
+                    else:
+                        tag_attrs = {}
+                    tag_attrs, query_args = self._get_params(params,
+                                                             tag_attrs=tag_attrs,
+                                                             acceptable_attrs=acceptable_attrs_img)
+                    return self.formatter.attachment_drawing(url, desc, **tag_attrs)
 
             elif m.group('page_name'):
                 # experimental client side transclusion
