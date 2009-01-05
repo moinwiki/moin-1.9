@@ -42,7 +42,7 @@ class Parser:
  Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])>>.
  Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
 
-(!) For more help, see HelpOnEditing or SyntaxReference.
+(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.
 """)
 
     # some common strings

@@ -54,7 +54,7 @@ def sendBackupForm(request, pagename):
     request.emit_http_headers()
     request.setContentLanguage(request.lang)
     title = _('Wiki Backup')
-    request.theme.send_title(title, form=request.form, pagename=pagename)
+    request.theme.send_title(title, pagename=pagename)
     request.write(request.formatter.startContent("content"))
 
     request.write(_("""= Downloading a backup =
@@ -103,7 +103,7 @@ def execute(pagename, request):
         return sendMsg(request, pagename,
                        msg=_('You are not allowed to do remote backup.'), msgtype="error")
 
-    dowhat = request.form.get('do', [None])[0]
+    dowhat = request.form.get('do')
     if dowhat == 'backup':
         sendBackup(request)
     elif dowhat is None:

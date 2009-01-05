@@ -410,7 +410,7 @@ class Formatter(FormatterBase):
         """
 
         if hasattr(self, 'page'):
-            self.request.begin_include(self.page.page_name)
+            self.request.uid_generator.begin(self.page.page_name)
 
         result = []
         # Use the content language
@@ -434,7 +434,7 @@ class Formatter(FormatterBase):
         result.append(self.anchordef('bottom'))
         result.append(self._close('div', newline=newline))
         if hasattr(self, 'page'):
-            self.request.end_include()
+            self.request.uid_generator.end()
         return ''.join(result)
 
     def lang(self, on, lang_name):
@@ -654,35 +654,25 @@ class Formatter(FormatterBase):
     def attachment_drawing(self, url, text, **kw):
         # XXX text arg is unused!
         _ = self.request.getText
-        pagename, filename = AttachFile.absoluteName(url, self.page.page_name)
-        fname = wikiutil.taintfilename(filename)
-        drawing = fname
-        fname = fname + u".png"
-        filename = filename + u".png"
-        # fallback for old gif drawings (1.1 -> 1.2)
-        exists = AttachFile.exists(self.request, pagename, fname)
-        if not exists:
-            gfname = fname[:-4] + u".gif"
-            gfilename = filename[:-4] + u".gif"
-            exists = AttachFile.exists(self.request, pagename, gfname)
-            if exists:
-                fname, filename = gfname, gfilename
+        pagename, drawing = AttachFile.absoluteName(url, self.page.page_name)
+        containername = wikiutil.taintfilename(drawing) + ".tdraw"
 
-        # check whether attachment exists, possibly point to upload form
-        drawing_url = AttachFile.getAttachUrl(pagename, fname, self.request, drawing=drawing, upload=True)
-        if not exists:
-            title = _('Create new drawing "%(filename)s (opens in new window)"') % {'filename': fname}
+        drawing_url = AttachFile.getAttachUrl(pagename, containername, self.request, drawing=drawing, upload=True)
+        ci = AttachFile.ContainerItem(self.request, pagename, containername)
+        if not ci.exists():
+            title = _('Create new drawing "%(filename)s (opens in new window)"') % {'filename': drawing}
             img = self.icon('attachimg')  # TODO: we need a new "drawimg" in similar grey style and size
             css = 'nonexistent'
             return self.url(1, drawing_url, css=css, title=title) + img + self.url(0)
 
-        title = _('Edit drawing %(filename)s (opens in new window)') % {'filename': self.text(fname)}
-        kw['src'] = AttachFile.getAttachUrl(pagename, filename, self.request, addts=1)
+        title = _('Edit drawing %(filename)s (opens in new window)') % {'filename': self.text(drawing)}
+        kw['src'] = src = ci.member_url(drawing + u'.png')
         kw['css'] = 'drawing'
 
-        mappath = AttachFile.getFilename(self.request, pagename, drawing + u'.map')
+        mapfile = ci.get(drawing + u'.map')
         try:
-            map = file(mappath, 'r').read()
+            map = mapfile.read()
+            mapfile.close()
         except (IOError, OSError):
             map = ''
         if map:
@@ -690,11 +680,11 @@ class Formatter(FormatterBase):
             mapid = 'ImageMapOf' + drawing
             map = map.replace('%MAPNAME%', mapid)
             # add alt and title tags to areas
-            map = re.sub('href\s*=\s*"((?!%TWIKIDRAW%).+?)"', r'href="\1" alt="\1" title="\1"', map)
+            map = re.sub(r'href\s*=\s*"((?!%TWIKIDRAW%).+?)"', r'href="\1" alt="\1" title="\1"', map)
             map = map.replace('%TWIKIDRAW%"', '%s" alt="%s" title="%s"' % (drawing_url, title, title))
             # unxml, because 4.01 concrete will not validate />
             map = map.replace('/>', '>')
-            title = _('Clickable drawing: %(filename)s') % {'filename': self.text(fname)}
+            title = _('Clickable drawing: %(filename)s') % {'filename': self.text(drawing)}
             if 'title' not in kw:
                 kw['title'] = title
             if 'alt' not in kw:

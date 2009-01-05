@@ -14,15 +14,9 @@ from MoinMoin import config, util
 
 
 def execute(pagename, request):
-    form = request.form
-
     # get the MIME type
-    if 'mimetype' in form:
-        mimetype = form['mimetype'][0]
-    else:
-        mimetype = "text/plain"
-
-    request.emit_http_headers(["Content-Type: %s; charset=%s" % (mimetype, config.charset)])
+    mimetype = request.values.get('mimetype', "text/plain")
+    request.mimetype = mimetype
 
     # Get list of user readable pages
     pages = request.rootpage.getPageList()

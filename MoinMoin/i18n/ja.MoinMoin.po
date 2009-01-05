@@ -11,9 +11,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.8\n"
+"Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-28 20:59+0200\n"
+"POT-Creation-Date: 2008-09-12 23:35+0200\n"
 "PO-Revision-Date: 2008-06-18 07:54+0900\n"
 "Last-Translator: MasatakeIwasaki\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
@@ -869,8 +869,10 @@ msgstr ""
 "ク'''''<<Verbatim(''''')>>、<<Verbatim('')>>''混合 ''<<Verbatim(''')"
 ">>'''''ボールド'''<<Verbatim(''')>>とイタリック''<<Verbatim('')>>、<<Verbatim"
 "(----)>> 水平線。\n"
-" 見出し:: = タイトル1 =、== タイトル2 ==、=== タイトル3 ===、==== タイトル4 "
-"====、===== タイトル5 =====。\n"
+" 見出し:: <<Verbatim(=)>> タイトル1 <<Verbatim(=)>>、<<Verbatim(==)>> タイト"
+"ル2 <<Verbatim(==)>>、<<Verbatim(===)>> タイトル3 <<Verbatim(===)>>、"
+"<<Verbatim(====)>> タイトル4 <<Verbatim(====)>>、<<Verbatim(=====)>> タイトル"
+"5 <<Verbatim(=====)>>。\n"
 " リスト:: 半角スペースに続けて: * 小丸、1., a., A., i., I. 番号付アイテム、1."
 "#n nから番号開始、半角スペースのみでインデント。\n"
 " リンク:: <<Verbatim(JoinCapitalizedWords)>>、<<Verbatim([[ターゲット|リンク"
@@ -1154,11 +1156,13 @@ msgstr "購読中のイベント"
 msgid "Subscribed wiki pages<<BR>>(one regex per line)"
 msgstr "購読中のwikiページ<<BR>>(1行あたりひとつの正規表現)"
 
+#, fuzzy
 msgid "OpenID server"
-msgstr ""
+msgstr "OpenIDのサービスが提供されていません"
 
+#, fuzzy
 msgid "The selected websites have been removed."
-msgstr ""
+msgstr "選択されたOpenIDは削除されています。"
 
 msgid "Trusted websites"
 msgstr ""
@@ -1439,8 +1443,9 @@ msgstr ""
 "ユーザ名、パスワード回復トークン、新しいパスワード(2回)を以下に入力してくださ"
 "い。"
 
+#, fuzzy
 msgid "Wiki Backup"
-msgstr ""
+msgstr "Wikiマークアップ"
 
 msgid ""
 "= Downloading a backup =\n"
@@ -1848,8 +1853,9 @@ msgstr "ファイル名\"%s\"が不正です。"
 msgid "Created the package %s containing the pages %s."
 msgstr "パッケージ %s を作成しました。(ページ %s を含む)"
 
+#, fuzzy
 msgid "Include all attachments?"
-msgstr ""
+msgstr "[添付ファイル数: %d]"
 
 msgid "Package pages"
 msgstr "ページをパッケージ化"
@@ -2348,19 +2354,6 @@ msgstr ""
 msgid "You need to be subscribed to unsubscribe."
 msgstr "購読していないページの購読を止めることはできません。"
 
-msgid "Password is too short."
-msgstr ""
-
-msgid "Password has not enough different characters."
-msgstr ""
-
-msgid ""
-"Password is too easy (password contains name or name contains password)."
-msgstr ""
-
-msgid "Password is too easy (keyboard sequence)."
-msgstr ""
-
 msgid "Diffs"
 msgstr "差分"
 
@@ -2599,8 +2592,9 @@ msgstr "ユーザ"
 msgid "[ATTACH]"
 msgstr ""
 
+#, fuzzy
 msgid "Variable name"
-msgstr ""
+msgstr "ファイル名"
 
 msgid "Description"
 msgstr ""

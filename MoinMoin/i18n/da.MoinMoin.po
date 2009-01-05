@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-28 20:59+0200\n"
+"POT-Creation-Date: 2008-09-12 23:35+0200\n"
 "PO-Revision-Date: 2007-04-22 18:50+0100\n"
 "Last-Translator: Jonas Smedegaard <dr@jones.dk>\n"
 "Language-Team: Danish <moin-devel@lists.sourceforge.net>\n"
@@ -2338,21 +2338,6 @@ msgstr "Redigér regulære udtryk (regexp) for abonnement under BrugerProfil."
 #, fuzzy
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Du abonnerer nu på denne side."
-
-#, fuzzy
-msgid "Password is too short."
-msgstr "Adgangskode gentaget"
-
-msgid "Password has not enough different characters."
-msgstr ""
-
-#, fuzzy
-msgid ""
-"Password is too easy (password contains name or name contains password)."
-msgstr "Manglende adgangskode. Angiv venligst brugernavn og adgangskode."
-
-msgid "Password is too easy (keyboard sequence)."
-msgstr ""
 
 msgid "Diffs"
 msgstr "forskelle"

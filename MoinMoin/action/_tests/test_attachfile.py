@@ -68,7 +68,7 @@ class TestAttachFile:
         Tests if AttachFile.getAttachUrl taints a filename
         """
         filename = "<test2.txt>"
-        expect = "rename=_test2.txt_&"
+        expect = "rename=_test2.txt_"
         result = AttachFile.getAttachUrl(self.pagename, filename, self.request, upload=True)
 
         assert expect in result

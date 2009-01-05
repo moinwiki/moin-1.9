@@ -40,11 +40,11 @@ class Settings(UserPrefBase):
         if form.has_key('cancel'):
             return
 
-        if request.request_method != 'POST':
+        if request.method != 'POST':
             return
 
-        password = form.get('password1', [''])[0]
-        password2 = form.get('password2', [''])[0]
+        password = form.get('password1', '')
+        password2 = form.get('password2', '')
 
         # Check if password is given and matches with password repeat
         if password != password2:
