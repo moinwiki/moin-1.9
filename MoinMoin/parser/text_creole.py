@@ -351,7 +351,7 @@ class Emitter:
                     return self.formatter.attachment_image(
                         url, alt=text, html_class='image')
                 elif scheme == 'drawing':
-                    return self.formatter.attachment_drawing(url, text)
+                    return self.formatter.attachment_drawing(url, text, alt=text)
                 else:
                     pass
             elif m.group('inter_wiki'):
