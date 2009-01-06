@@ -88,7 +88,9 @@ class=logging.Formatter
 """
 
 import os
-import logging, logging.config
+import logging
+import logging.config
+import logging.handlers  # needed for handlers defined there being configurable in logging.conf file
 
 configured = False
 fallback_config = False
