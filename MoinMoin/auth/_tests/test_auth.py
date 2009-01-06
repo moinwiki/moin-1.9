@@ -6,7 +6,6 @@
     @license: GNU GPL, see COPYING for details.
 """
 import py.test
-py.test.skip("broken due to test Config refactoring, fix later")
 
 from MoinMoin.web.request import TestRequest, evaluate_request
 from MoinMoin import wsgiapp
@@ -30,6 +29,8 @@ class AuthTest:
 
     def run_request(self, **params):
         request = TestRequest(**params)
+        #XXX: config passing hack
+        request.given_config = getattr(self, 'Config', wikiconfig.Config)
         context = wsgiapp.init(request)
         wsgiapp.run(context)
         return context
