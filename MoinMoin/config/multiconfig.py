@@ -789,7 +789,7 @@ options_no_group_name = {
   (
     ('sitename', u'Untitled Wiki',
      "Short description of your wiki site, displayed below the logo on each page, and used in RSS documents as the channel title [Unicode]"),
-    ('interwikiname', None, "unique and stable InterWiki name (prefix, moniker) of the site, or None"),
+    ('interwikiname', None, "unique and stable InterWiki name (prefix, moniker) of the site [Unicode], or None"),
     ('logo_string', None, "The wiki logo top of page, HTML is allowed (`<img>` is possible as well) [Unicode]"),
     ('html_pagetitle', None, "Allows you to set a specific HTML page title (if None, it defaults to the value of `sitename`)"),
     ('navi_bar', [u'RecentChanges', u'FindPage', u'HelpContents', ],
