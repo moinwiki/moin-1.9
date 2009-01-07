@@ -682,7 +682,7 @@ class User:
         @param tm: timestamp
         """
         if self.valid:
-            interwikiname = unicode(self._cfg.interwikiname or '')
+            interwikiname = self._cfg.interwikiname or u''
             bookmark = unicode(tm)
             self.bookmarks[interwikiname] = bookmark
             self.save()
@@ -694,7 +694,7 @@ class User:
         @return: bookmark timestamp or None
         """
         bm = None
-        interwikiname = unicode(self._cfg.interwikiname or '')
+        interwikiname = self._cfg.interwikiname or u''
         if self.valid:
             try:
                 bm = int(self.bookmarks[interwikiname])
@@ -708,7 +708,7 @@ class User:
         @rtype: int
         @return: 0 on success, 1 on failure
         """
-        interwikiname = unicode(self._cfg.interwikiname or '')
+        interwikiname = self._cfg.interwikiname or u''
         if self.valid:
             try:
                 del self.bookmarks[interwikiname]
