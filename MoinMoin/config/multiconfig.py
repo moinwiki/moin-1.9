@@ -793,7 +793,7 @@ options_no_group_name = {
     ('logo_string', None, "The wiki logo top of page, HTML is allowed (`<img>` is possible as well) [Unicode]"),
     ('html_pagetitle', None, "Allows you to set a specific HTML page title (if None, it defaults to the value of `sitename`)"),
     ('navi_bar', [u'RecentChanges', u'FindPage', u'HelpContents', ],
-     'Most important page names. Users can add more names in their quick links in user preferences. To link to URL, use `u"[url link title]"`, to use a shortened name for long page name, use `u"[LongLongPageName title]"`. To use page names with spaces, use `u"[page_name_with_spaces any title]"` [list of Unicode strings]'),
+     'Most important page names. Users can add more names in their quick links in user preferences. To link to URL, use `u"[[url|link title]]"`, to use a shortened name for long page name, use `u"[[LongLongPageName|title]]"`. [list of Unicode strings]'),
 
     ('theme_default', 'modern',
      "the name of the theme that is used by default (see HelpOnThemes)"),
