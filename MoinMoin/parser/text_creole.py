@@ -30,6 +30,8 @@ from _creole import Parser as CreoleParser
 
 Dependencies = []
 
+_ = lambda x: x
+
 class Parser:
     """
     Glue the DocParser and DocEmitter with the
@@ -39,6 +41,17 @@ class Parser:
     # Enable caching
     caching = 1
     Dependencies = Dependencies
+    quickhelp = _(u"""\
+ Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)>>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)>>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;
+ Horizontal Rule:: <<Verbatim(----)>>
+ Force Linebreak:: <<Verbatim(\\\\)>>
+ Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; ===== Title 5 =====.
+ Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub items.
+ Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.
+ Tables:: |= header text | cell text | more cell text |;
+
+(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.
+""")
 
     def __init__(self, raw, request, **kw):
         """Create a minimal Parser object with required attributes."""
@@ -215,10 +228,11 @@ class Emitter:
 #        return self.formatter.smiley(node.content)
 
     def header_emit(self, node):
-        import sha
+        from MoinMoin.support.python_compatibility import hash_new
+
         pntt = '%s%s%d' % (self.formatter.page.page_name,
             self.get_text(node), node.level)
-        ident = "head-%s" % sha.new(pntt.encode(config.charset)).hexdigest()
+        ident = "head-%s" % hash_new('sha1', pntt.encode(config.charset)).hexdigest()
         return ''.join([
             self.formatter.heading(1, node.level, id=ident),
             self.formatter.text(node.content or ''),
@@ -337,7 +351,7 @@ class Emitter:
                     return self.formatter.attachment_image(
                         url, alt=text, html_class='image')
                 elif scheme == 'drawing':
-                    return self.formatter.attachment_drawing(url, text)
+                    return self.formatter.attachment_drawing(url, text, alt=text)
                 else:
                     pass
             elif m.group('inter_wiki'):
@@ -455,3 +469,5 @@ class Emitter:
         # restore 'smart' formatting if it was set
         self.formatter.no_magic = magic_save
         return output
+
+del _

@@ -934,6 +934,7 @@ MIMETYPES_MORE = {
  '.py': 'text/x-python',
  '.cfg': 'text/plain',
  '.conf': 'text/plain',
+ '.irc': 'text/plain',
 }
 [mimetypes.add_type(mimetype, ext, True) for ext, mimetype in MIMETYPES_MORE.items()]
 
@@ -1114,9 +1115,11 @@ def importWikiPlugin(cfg, kind, name, function="execute"):
 
     See importPlugin docstring.
     """
-    if not name in wikiPlugins(kind, cfg):
-        raise PluginMissingError
-    moduleName = '%s.plugin.%s.%s' % (cfg.siteid, kind, name)
+    plugins = wikiPlugins(kind, cfg)
+    modname = plugins.get(name, None)
+    if modname is None:
+        raise PluginMissingError()
+    moduleName = '%s.%s' % (modname, name)
     return importNameFromPlugin(moduleName, function)
 
 
@@ -1126,7 +1129,7 @@ def importBuiltinPlugin(kind, name, function="execute"):
     See importPlugin docstring.
     """
     if not name in builtinPlugins(kind):
-        raise PluginMissingError
+        raise PluginMissingError()
     moduleName = 'MoinMoin.%s.%s' % (kind, name)
     return importNameFromPlugin(moduleName, function)
 
@@ -1168,27 +1171,33 @@ def builtinPlugins(kind):
 
 
 def wikiPlugins(kind, cfg):
-    """ Gets a list of modules in data/plugin/'kind'
+    """
+    Gets a dict containing the names of all plugins of @kind
+    as the key and the containing module name as the value.
 
     @param kind: what kind of modules we look for
-    @rtype: list
-    @return: module names
+    @rtype: dict
+    @return: plugin name to containing module name mapping
     """
-    # Wiki plugins are located in wikiconfig.plugin module
-    modulename = '%s.plugin.%s' % (cfg.siteid, kind)
-
-    # short-cut if we've loaded the list already
+    # short-cut if we've loaded the dict already
     # (or already failed to load it)
-    if kind in cfg._site_plugin_lists:
-        return cfg._site_plugin_lists[kind]
-
-    try:
-        plugins = pysupport.importName(modulename, "modules")
-        cfg._site_plugin_lists[kind] = plugins
-        return plugins
-    except ImportError:
-        cfg._site_plugin_lists[kind] = []
-        return []
+    cache = cfg._site_plugin_lists
+    if kind in cache:
+        result = cache[kind]
+    else:
+        result = {}
+        for modname in cfg._plugin_modules:
+            try:
+                module = pysupport.importName(modname, kind)
+                packagepath = os.path.dirname(module.__file__)
+                plugins = pysupport.getPluginModules(packagepath)
+                for p in plugins:
+                    if not p in result:
+                        result[p] = '%s.%s' % (modname, kind)
+            except AttributeError:
+                pass
+        cache[kind] = result
+    return result
 
 
 def getPlugins(kind, cfg):
@@ -2422,7 +2431,7 @@ def anchor_name_from_text(text):
 ########################################################################
 
 def createTicket(request, tm=None, action=None):
-    """ Create a ticket using a site-specific secret (the config)
+    """ Create a ticket using a configured secret
 
         @param tm: unix timestamp (optional, uses current time if not given)
         @param action: action name (optional, uses current action if not given)
@@ -2431,7 +2440,7 @@ def createTicket(request, tm=None, action=None):
                              action you call when posting the form.
     """
 
-    import sha
+    from MoinMoin.support.python_compatibility import hash_new
     if tm is None:
         tm = "%010x" % time.time()
 
@@ -2447,12 +2456,14 @@ def createTicket(request, tm=None, action=None):
         except:
             action = 'None'
 
+    secret = request.cfg.secrets['wikiutil/tickets']
+    digest = hash_new('sha1', secret)
 
     ticket = "%s.%s.%s" % (tm, pagename, action)
-    digest = sha.new(request.cfg.secrets)
     digest.update(ticket)
 
     return "%s.%s" % (ticket, digest.hexdigest())
+
 
 def checkTicket(request, ticket):
     """Check validity of a previously created ticket"""
