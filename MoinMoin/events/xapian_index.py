@@ -69,7 +69,7 @@ def handle(event):
         handle_renamed(event)
     elif isinstance(event, ev.PageCopiedEvent):
         handle_copied(event)
-    elif isinstance(event, ev.PageChangedEvent):
+    elif isinstance(event, ev.PageChangedEvent) or isinstance(event, ev.TrivialPageChangedEvent):
         handle_changed(event)
     elif isinstance(event, ev.PageDeletedEvent):
         handle_deleted(event)
