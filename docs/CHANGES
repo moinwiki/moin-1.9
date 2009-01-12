@@ -31,6 +31,9 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
+current:
+  Bug fixes:
+    * Fix update xapian index by trivial changes (MoinMoinBugs/TrivialChangesDoesNotUpdateTheXapianIndex)
 
 Version 1.8.1:
   Bug fixes:
