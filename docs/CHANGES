@@ -30,6 +30,9 @@ Known main issues:
     having made a backup with some other, proven method.
     USE BOTH ON YOUR OWN RISK!
 
+current:
+  Fixes:
+    * update xapian index by trivial changes (MoinMoinBugs/TrivialChangesDoesNotUpdateTheXapianIndex)
 
 1.7.3:
   New features:
