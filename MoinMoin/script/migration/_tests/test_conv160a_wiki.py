@@ -37,6 +37,23 @@ class TestWikiConversion:
         }
 
         tests = [
+            # 1.6.0a specific tests (jk)
+            # attachment links
+            ("attachment:filename.ext", {}, "[[attachment:filename.ext]]"),
+            ("[attachment:'Filename.ext' Aliasname]", {}, "[[attachment:Filename.ext|Aliasname]]"),
+            ("[attachment:'Pagename/Filename.ext' Aliasname]", {}, "[[attachment:Pagename/Filename.ext|Aliasname]]"),
+            ("[attachment:'Pagename/Subpage/Filename.ext' Aliasname]", {}, "[[attachment:Pagename/Subpage/Filename.ext|Aliasname]]"),
+            ('[attachment:"Pagename/Subpage/File Name.ext" Aliasname]', {}, "[[attachment:Pagename/Subpage/File Name.ext|Aliasname]]"),
+            # page links
+            ('["Pagename"]', {}, "[[Pagename]]"),
+            ('["/Subpage"]', {}, "[[/Subpage]]"),
+            ('["Pagename/Subpage"]', {}, "[[Pagename/Subpage]]"),
+            ("['Pagename/Subpage' Aliasname]", {}, "[[Pagename/Subpage|Aliasname]]"),
+            # other links
+            ("[http://google.de google]", {}, "[[http://google.de|google]]"),
+            # other stuff
+            ("[[GetText(To)]]", {}, "<<GetText(To)>>"),
+
             # 1.6.0a specific tests
             ('["some page" somepage]', {}, '[[some page|somepage]]'),
             ("['some page' somepage]", {}, '[[some page|somepage]]'),
@@ -64,18 +81,17 @@ class TestWikiConversion:
             ('http://some_server/some_page', rename_some_page, 'http://some_server/some_page'), # external link
             ('[http://some_server/some_page]', rename_some_page, '[[http://some_server/some_page]]'), # external link
             ('[#some_page]', rename_some_page, '[[#some_page]]'), # link to anchor that has same name
-            #XXX ('[attachment:some_page.png]', rename_some_page, '[[attachment:some_page.png]]'), # att, not page
-            #XXX ('[attachment:some_page.png test picture]', rename_some_page, '[[attachment:some_page.png|test picture]]'), # att, not page
-            # url unquote stuff (%20 was popular for space)
-            #XXX ('attachment:My%20Attachment.jpg', {}, '{{attachment:My Attachment.jpg}}'), # embed!
-            #XXX ('[attachment:My%20Attachment.jpg]', {}, '[[attachment:My Attachment.jpg]]'), # link!
-            #XXX ('[attachment:My%20Attachment.jpg it works]', {}, '[[attachment:My Attachment.jpg|it works]]'),
+            ('[attachment:some_page.png]', rename_some_page, '[[attachment:some_page.png]]'), # att, not page
+            ('[attachment:some_page.png test picture]', rename_some_page, '[[attachment:some_page.png|test picture]]'), # att, not page
 
             # page rename changes result
             ('["some_page"]', rename_some_page, '[[some page]]'),
             ('[:some_page]', rename_some_page, '[[some page]]'),
+            ('[:some_page#anchor]', rename_some_page, '[[some page#anchor]]'),
             ('[:some_page:]', rename_some_page, '[[some page]]'),
+            ('[:some_page#anchor:]', rename_some_page, '[[some page#anchor]]'),
             ('[:some_page:some text]', rename_some_page, '[[some page|some text]]'),
+            ('[:some_page#anchor:some text]', rename_some_page, '[[some page#anchor|some text]]'),
             ('Self:some_page', rename_some_page, '[[some page]]'),
             ('wiki:Self:some_page', rename_some_page, '[[some page]]'),
             ('[wiki:Self:some_page some text]', rename_some_page, '[[some page|some text]]'),
@@ -87,22 +103,16 @@ class TestWikiConversion:
             ('[:other page:other text]', {}, '[[other page|other text]]'),
             # XXX TODO ('Self:CamelCase', {}, 'CamelCase'),
             # XXX TODO ('[wiki:WikiPedia:Lynx_%28web_browser%29 Lynx]', {}, '[[WikiPedia:Lynx_(web_browser)|Lynx]]'),
-            # XXX TODO ('[:Something:Something]', {}, '[[Something]]'), # optimize markup
+            ('[:Something:Something]', {}, '[[Something]]'), # optimize markup
 
             # "nothing changed" checks
             ('attachment:OtherPage/with_underscore', rename_some_file, '[[attachment:OtherPage/with_underscore]]'),
 
             # file rename changes result
-            # XXX TODO ('attachment:with_underscore', rename_some_file, '[[attachment:without underscore]]'),
-            # XXX TODO ('attachment:TestPage/with_underscore', rename_some_file, '[[attachment:without underscore]]'), # remove superfluous pagename
+            ('attachment:with_underscore', rename_some_file, '[[attachment:without underscore]]'),
+            ('attachment:TestPage/with_underscore', rename_some_file, '[[attachment:without underscore]]'), # remove superfluous pagename
 
-            # attachment syntax: kill %20
-            # XXX TODO ('attachment:with%20blank', rename_some_file, '[[attachment:without_blank]]'), # plus rename
-            # XXX TODO ('attachment:keep%20blank', rename_some_file, '[[attachment:keep blank]]'), # no rename
-            # XXX TODO ('attachment:TestPage/keep%20blank', rename_some_file, '[[attachment:keep blank]]'), # remove superfluous pagename
-            # XXX TODO ('attachment:OtherPage/keep%20blank', rename_some_file, '[[attachment:OtherPage/keep blank]]'),
-
-            # embed images
+            # embed images, all verified on 160a
             ('http://server/image.png', {}, '{{http://server/image.png}}'),
             ('attachment:image.gif', {}, '{{attachment:image.gif}}'),
             ('inline:image.jpg', {}, '{{attachment:image.jpg}}'), # inline is now implied by {{...}}
