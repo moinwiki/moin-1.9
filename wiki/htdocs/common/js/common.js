@@ -302,7 +302,7 @@ function dbw_hide_buttons() {
             elem = form.elements[eidx];
             name = elem.name;
             if (name) {
-                if (name.substr(0,4) == 'dbw.' && name.substr(-7) == '.submit')
+                if (name.indexOf('dbw.') >= 0 && name.substr(-7) == '.submit')
                     elem.style.display = 'none';
             }
         }
