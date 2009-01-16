@@ -991,7 +991,6 @@ class User:
         return msg + '-' + h
 
     def apply_recovery_token(self, tok, newpass):
-        key = self.recoverpass_key
         parts = tok.split('-')
         if len(parts) != 2:
             return False
@@ -1003,7 +1002,8 @@ class User:
         if stamp + 12*60*60 < time.time():
             return False
         # check hmac
-        h = hmac_new(self.recoverpass_key, str(stamp)).hexdigest()
+        # key must be of type string
+        h = hmac_new(str(self.recoverpass_key), str(stamp)).hexdigest()
         if h != parts[1]:
             return False
         self.recoverpass_key = ""
