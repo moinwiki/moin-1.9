@@ -275,22 +275,24 @@ class Converter(Parser):
     def interwiki(self, target_and_text, **kw):
         scheme, rest = target_and_text.split(':', 1)
         wikiname, pagename, text = wikiutil160a.split_wiki(rest)
-        if text:
-            text = '|' + text
 
-        if (pagename.startswith(wikiutil.CHILD_PREFIX) or # fancy link to subpage [wiki:/SubPage text]
-            Page(self.request, pagename).exists()): # fancy link to local page [wiki:LocalPage text]
-            pagename = wikiutil.url_unquote(pagename)
-            pagename = self._replace_target(pagename)
-            return '[[%s%s]]' % (pagename, text)
+        #if (pagename.startswith(wikiutil.CHILD_PREFIX) or # fancy link to subpage [wiki:/SubPage text]
+        #    Page(self.request, pagename).exists()): # fancy link to local page [wiki:LocalPage text]
+        #    # XXX OtherWiki:FooPage markup -> checks for local FooPage -sense???
+        #    pagename = wikiutil.url_unquote(pagename)
+        #    pagename = self._replace_target(pagename)
+        #    return '[[%s%s]]' % (pagename, text)
 
         if wikiname in ('Self', self.request.cfg.interwikiname, ''): # [wiki:Self:LocalPage text] or [:LocalPage:text]
+            orig_pagename = pagename
             pagename = wikiutil.url_unquote(pagename)
             pagename = self._replace_target(pagename)
             camelcase = wikiutil.isStrictWikiname(pagename)
-            if camelcase and text == pagename:
-                return '%s' % pagename # optimize special case
+            if camelcase and (not text or text == orig_pagename):
+                return pagename # optimize special case
             else:
+                if text:
+                    text = '|' + text
                 return '[[%s%s]]' % (pagename, text)
 
         wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, wikiname+':')
@@ -308,6 +310,8 @@ class Converter(Parser):
             if ' ' not in wikitail and not text:
                 return '%s:%s' % (wikitag, wikitail)
             else:
+                if text:
+                    text = '|' + text
                 return '[[%s:%s%s]]' % (wikitag, wikitail, text)
 
     def attachment(self, target_and_text, **kw):
