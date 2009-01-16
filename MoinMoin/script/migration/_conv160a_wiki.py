@@ -394,8 +394,12 @@ class Converter(Parser):
                 return self.interwiki(word, pretty_url=1)
             if scheme in self.attachment_schemas:
                 m = self.attachment(word)
-                # with url_bracket markup, 1.6.0a parser does not embed pictures, but link!
-                return '[[%s]]' % m[2:-2]
+                if scheme == 'attachment':
+                    # with url_bracket markup, 1.6.0a parser does not embed pictures, but link!
+                    return '[[%s]]' % m[2:-2]
+                else:
+                    # drawing and inline
+                    return m
 
             words = word.split(None, 1)
             if len(words) == 1:
