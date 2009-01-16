@@ -3,7 +3,6 @@
     MoinMoin - tests of wiki content conversion
 
     TODO:
-    * fix failing tests
     * fix parser/converter anchor link handling
     * emit a warning if we find some page name that was renamed as a macro argument?
     * shall we support camelcase renaming?
@@ -37,49 +36,38 @@ class TestWikiConversion:
         }
 
         tests = [
-            # 1.6.0a specific tests (jk)
             # attachment links
             ("attachment:filename.ext", {}, "[[attachment:filename.ext]]"),
             ("[attachment:'Filename.ext' Aliasname]", {}, "[[attachment:Filename.ext|Aliasname]]"),
             ("[attachment:'Pagename/Filename.ext' Aliasname]", {}, "[[attachment:Pagename/Filename.ext|Aliasname]]"),
             ("[attachment:'Pagename/Subpage/Filename.ext' Aliasname]", {}, "[[attachment:Pagename/Subpage/Filename.ext|Aliasname]]"),
             ('[attachment:"Pagename/Subpage/File Name.ext" Aliasname]', {}, "[[attachment:Pagename/Subpage/File Name.ext|Aliasname]]"),
-            # page links
-            ('["Pagename"]', {}, "[[Pagename]]"),
-            ('["/Subpage"]', {}, "[[/Subpage]]"),
-            ('["Pagename/Subpage"]', {}, "[[Pagename/Subpage]]"),
-            ("['Pagename/Subpage' Aliasname]", {}, "[[Pagename/Subpage|Aliasname]]"),
-            # other links
-            ("[http://google.de google]", {}, "[[http://google.de|google]]"),
-            # other stuff
-            ("[[GetText(To)]]", {}, "<<GetText(To)>>"),
 
-            # 1.6.0a specific tests
-            ('["some page" somepage]', {}, '[[some page|somepage]]'),
-            ("['some page' somepage]", {}, '[[some page|somepage]]'),
-            ("MoinMaster:'some page'", {}, '[[MoinMaster:some page]]'),
-            ('MoinMaster:"some page"', {}, '[[MoinMaster:some page]]'),
-            #("MoinMaster:'some page'", {}, '[[MoinMaster:some page]]'),
             # "nothing changed" checks (except markup)
             ('', {}, ''),
             ('CamelCase', {}, 'CamelCase'),
-            # XXX TODO ('MoinMaster:CamelCase', {}, 'MoinMaster:CamelCase'),
+            ('["/Subpage"]', {}, "[[/Subpage]]"),
+            ('["Pagename/Subpage"]', {}, "[[Pagename/Subpage]]"),
+            ("['Pagename/Subpage' Aliasname]", {}, "[[Pagename/Subpage|Aliasname]]"),
+            ('["some page" somepage]', {}, '[[some page|somepage]]'),
+            ("['some page' somepage]", {}, '[[some page|somepage]]'),
 
-            # did not work in 1.6a
-            #('[wiki:LinuxWiki: LinuxWiki.de]', {}, '[[LinuxWiki:|LinuxWiki.de]]'),
-            #('[wiki:/OtherPage]', rename_some_page, '[[/OtherPage]]'),
-            #('[wiki:/OtherPage other page]', rename_some_page, '[[/OtherPage|other page]]'),
+            ('Doesnotexist:CamelCase', {}, 'Doesnotexist:CamelCase'),
+            ('MoinMaster:CamelCase', {}, 'MoinMaster:CamelCase'),
+            ("MoinMaster:'some page'", {}, '[[MoinMaster:some page]]'),
+            ('MoinMaster:"some page"', {}, '[[MoinMaster:some page]]'),
 
-            # XXX TODO  ('[wiki:MoinMoin/FrontPage]', {}, 'MoinMoin:FrontPage'),
+            ('[wiki:MoinMoin/FrontPage]', {}, 'MoinMoin:FrontPage'),
             ('some_text', {}, 'some_text'),
             ('["some_text"]', {}, '[[some_text]]'),
             ('some_page', rename_some_page, 'some_page'), # not a link
             ('{{{["some_page"]}}}', rename_some_page, '{{{["some_page"]}}}'), # not a link
             ('`["some_page"]`', rename_some_page, '`["some_page"]`'), # not a link
             ('["OtherPage/some_page"]', rename_some_page, '[[OtherPage/some_page]]'), # different link
-            # XXX TODO ('MoinMaster:some_page', rename_some_page, 'MoinMaster:some_page'), # external link
+            ('MoinMaster:some_page', rename_some_page, 'MoinMaster:some_page'), # external link
             ('http://some_server/some_page', rename_some_page, 'http://some_server/some_page'), # external link
             ('[http://some_server/some_page]', rename_some_page, '[[http://some_server/some_page]]'), # external link
+            ('[http://some_server/some_page foo]', rename_some_page, '[[http://some_server/some_page|foo]]'), # external link
             ('[#some_page]', rename_some_page, '[[#some_page]]'), # link to anchor that has same name
             ('[attachment:some_page.png]', rename_some_page, '[[attachment:some_page.png]]'), # att, not page
             ('[attachment:some_page.png test picture]', rename_some_page, '[[attachment:some_page.png|test picture]]'), # att, not page
@@ -101,8 +89,8 @@ class TestWikiConversion:
             ('[:other page]', {}, '[[other page]]'),
             ('[:other page:]', {}, '[[other page]]'),
             ('[:other page:other text]', {}, '[[other page|other text]]'),
-            # XXX TODO ('Self:CamelCase', {}, 'CamelCase'),
-            # XXX TODO ('[wiki:WikiPedia:Lynx_%28web_browser%29 Lynx]', {}, '[[WikiPedia:Lynx_(web_browser)|Lynx]]'),
+            ('Self:CamelCase', {}, 'CamelCase'),
+            ('[wiki:WikiPedia:Lynx_%28web_browser%29 Lynx]', {}, '[[WikiPedia:Lynx_(web_browser)|Lynx]]'),
             ('[:Something:Something]', {}, '[[Something]]'), # optimize markup
 
             # "nothing changed" checks
