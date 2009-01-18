@@ -20,7 +20,6 @@ from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
 from MoinMoin.Page import Page
 from MoinMoin.action import AttachFile
 from MoinMoin import wikiutil
-from MoinMoin.support.python_compatibility import rsplit
 
 Dependencies = [] # this parser just depends on the raw text
 
@@ -400,10 +399,7 @@ class MoinTranslator(html4css1.HTMLTranslator):
                     node['classes'].append(prefix)
             else:
                 # Default case - make a link to a wiki page.
-                pagename = refuri
-                anchor = ''
-                if '#' in refuri:
-                    pagename, anchor = rsplit(refuri, '#', 1)
+                pagename, anchor = wikiutil.split_anchor(refuri)
                 page = Page(self.request, wikiutil.AbsPageName(self.formatter.page.page_name, pagename))
                 node['refuri'] = page.url(self.request, anchor=anchor)
                 if not page.exists():

@@ -14,7 +14,7 @@ from MoinMoin.formatter import FormatterBase
 from MoinMoin import wikiutil, i18n
 from MoinMoin.Page import Page
 from MoinMoin.action import AttachFile
-from MoinMoin.support.python_compatibility import set, rsplit
+from MoinMoin.support.python_compatibility import set
 
 # insert IDs into output wherever they occur
 # warning: breaks toggle line numbers javascript
@@ -488,8 +488,6 @@ class Formatter(FormatterBase):
         wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_interwiki(self.request, interwiki, pagename)
         wikiurl = wikiutil.mapURL(self.request, wikiurl)
         if wikitag == 'Self': # for own wiki, do simple links
-            if '#' in wikitail:
-                wikitail, kw['anchor'] = rsplit(wikitail, '#', 1)
             wikitail = wikiutil.url_unquote(wikitail)
             try: # XXX this is the only place where we access self.page - do we need it? Crashes silently on actions!
                 pagename = wikiutil.AbsPageName(self.page.page_name, wikitail)
@@ -502,6 +500,9 @@ class Formatter(FormatterBase):
                 if querystr:
                     separator = ('?', '&')['?' in href]
                     href = '%s%s%s' % (href, separator, wikiutil.makeQueryString(querystr))
+                anchor = kw.get('anchor')
+                if anchor:
+                    href = '%s#%s' % (href, anchor)
                 if wikitag_bad:
                     html_class = 'badinterwiki'
                 else:

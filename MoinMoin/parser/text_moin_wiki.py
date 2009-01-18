@@ -15,7 +15,7 @@ logging = log.getLogger(__name__)
 
 from MoinMoin import config, wikiutil, macro
 from MoinMoin.Page import Page
-from MoinMoin.support.python_compatibility import rsplit, set
+from MoinMoin.support.python_compatibility import set
 
 Dependencies = ['user'] # {{{#!wiki comment ... }}} has different output depending on the user's profile settings
 
@@ -600,7 +600,8 @@ class Parser:
             text = groups.get('interwiki')
             return self.formatter.text(text)
         else:
-            return (self.formatter.interwikilink(1, wiki, page) +
+            page, anchor = wikiutil.split_anchor(page)
+            return (self.formatter.interwikilink(1, wiki, page, anchor=anchor) +
                     self.formatter.text(page) +
                     self.formatter.interwikilink(0, wiki, page))
     _interwiki_wiki_repl = _interwiki_repl
@@ -623,11 +624,7 @@ class Parser:
         if abs_name == current_page:
             return self.formatter.text(word)
         else:
-            # handle anchors
-            try:
-                abs_name, anchor = rsplit(abs_name, "#", 1)
-            except ValueError:
-                anchor = ""
+            abs_name, anchor = wikiutil.split_anchor(abs_name)
             return (bang +
                     self.formatter.pagelink(1, abs_name, anchor=anchor) +
                     self.formatter.text(word) +
@@ -864,11 +861,7 @@ class Parser:
                 else:
                     err = True
                 if err: # not a interwiki link / not in interwiki map
-                    # handle anchors
-                    try:
-                        page_name, anchor = rsplit(page_name_and_anchor, "#", 1)
-                    except ValueError:
-                        page_name, anchor = page_name_and_anchor, ""
+                    page_name, anchor = wikiutil.split_anchor(page_name_and_anchor)
                     current_page = self.formatter.page.page_name
                     if not page_name:
                         page_name = current_page
@@ -881,10 +874,11 @@ class Parser:
                             self._link_description(desc, target, page_name_and_anchor) +
                             self.formatter.pagelink(0, abs_page_name))
                 else: # interwiki link
+                    page_name, anchor = wikiutil.split_anchor(page_name)
                     tag_attrs, query_args = self._get_params(params,
                                                              tag_attrs={},
                                                              acceptable_attrs=acceptable_attrs)
-                    return (self.formatter.interwikilink(1, wiki_name, page_name, querystr=query_args, **tag_attrs) +
+                    return (self.formatter.interwikilink(1, wiki_name, page_name, anchor=anchor, querystr=query_args, **tag_attrs) +
                             self._link_description(desc, target, page_name) +
                             self.formatter.interwikilink(0, wiki_name, page_name))
 

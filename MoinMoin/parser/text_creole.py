@@ -25,7 +25,6 @@ import re
 import StringIO
 from MoinMoin import config, wikiutil
 from MoinMoin.macro import Macro
-from MoinMoin.support.python_compatibility import rsplit # Needed for python 2.3
 from _creole import Parser as CreoleParser
 
 Dependencies = []
@@ -273,11 +272,7 @@ class Emitter:
                 elif word.startswith(wikiutil.CHILD_PREFIX):
                     word = "%s/%s" % (self.formatter.page.page_name,
                         word[wikiutil.CHILD_PREFIX_LEN:])
-                # handle anchors
-                parts = rsplit(word, "#", 1)
-                anchor = ""
-                if len(parts) == 2:
-                    word, anchor = parts
+                word, anchor = wikiutil.split_anchor(word)
                 return ''.join([
                     self.formatter.pagelink(1, word, anchor=anchor),
                     self.emit_children(node) or self.formatter.text(target),
@@ -296,8 +291,9 @@ class Emitter:
                 # interwiki link
                 wiki = m.group('inter_wiki')
                 page = m.group('inter_page')
+                page, anchor = wikiutil.split_anchor(page)
                 return ''.join([
-                    self.formatter.interwikilink(1, wiki, page),
+                    self.formatter.interwikilink(1, wiki, page, anchor=anchor),
                     self.emit_children(node) or self.formatter.text(page),
                     self.formatter.interwikilink(0),
                 ])
