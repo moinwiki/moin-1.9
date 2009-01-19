@@ -613,7 +613,7 @@ class convert_tree(visitor):
                 for i in listitem.childNodes:
                     if i.nodeType == Node.ELEMENT_NODE:
                         if i.localName == 'table':
-                            markup = " "
+                            markup = ""
             else:
                 markup = "* "
         elif name == 'dl':
