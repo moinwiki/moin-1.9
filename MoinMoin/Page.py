@@ -1026,10 +1026,11 @@ class Page(object):
             # redirect to another page
             # note that by including "action=show", we prevent endless looping
             # (see code in "request") or any cascaded redirection
-            request.http_redirect('%s/%s?action=show&redirect=%s' % (
-                request.getScriptname(),
-                wikiutil.quoteWikinameURL(pi['redirect']),
-                wikiutil.url_quote_plus(self.page_name, ''), ))
+            pagename, anchor = wikiutil.split_anchor(pi['redirect'])
+            redirect_url = Page(request, pagename).url(request,
+                                                       querystr={'action': 'show', 'redirect': self.page_name, },
+                                                       anchor=anchor)
+            request.http_redirect(redirect_url)
             return
 
         # if necessary, load the formatter
