@@ -31,9 +31,26 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
-current:
+Version 1.8.current:
   Bug fixes:
-    * Fix update xapian index by trivial changes (MoinMoinBugs/TrivialChangesDoesNotUpdateTheXapianIndex)
+    * Fix AttachFile XSS issues.
+    * Fix anchor parsing for interwiki links and #redirect processing
+      instruction.
+    * user.apply_recovery_token: key must be of type string (for Python 2.6).
+    * Fix MoinMoinBugs/GuiEditorBreaksIndentedTable.
+    * Fix autofilter javascript breakage caused by including a databrowser
+      widget.
+    * Made cfg.interwikiname a unicode object (str only worked for ascii).
+    * Fix Xapian search index updating for trivial changes.
+    * Make logging handlers defined in logging.handlers work (e.g.
+      class=handlers.RotatingFileHandler)
+
+  Other changes:
+    * Added setting for enhanced privacy: cfg.log_remote_addr (default: True),
+      it controls whether moin logs the remote's IP/hostname to edit-log and
+      event-log. Use log_remote_addr = False to enhance privacy.
+    * Streamline attachment_drawing formatter behaviour.
+
 
 Version 1.8.1:
   Bug fixes:
