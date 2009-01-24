@@ -648,7 +648,7 @@ Lists: * bullets; 1., a. numbered items.
     user_email_unique = True # do we check whether a user's email is unique?
     user_jid_unique = True # do we check whether a user's email is unique?
 
-    user_homewiki = 'Self' # interwiki name for where user homepages are located
+    user_homewiki = u'Self' # interwiki name for where user homepages are located
 
     user_checkbox_fields = [
         ('mailto_author', lambda _: _('Publish my email (not my wiki homepage) in author info')),
@@ -981,7 +981,7 @@ file. It should match the actual charset of the configuration file.
 '''
 
         decode_names = (
-            'sitename', 'interwikiname', 'logo_string', 'navi_bar',
+            'sitename', 'interwikiname', 'user_homewiki', 'logo_string', 'navi_bar',
             'page_front_page', 'page_category_regex', 'page_dict_regex',
             'page_group_regex', 'page_template_regex', 'page_license_page',
             'page_local_spelling_words', 'acl_rights_default',
