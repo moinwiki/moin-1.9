@@ -20,7 +20,7 @@ class Config(FarmConfig):
 
     # basic options (you normally need to change these)
     sitename = u'MyWiki' # [Unicode]
-    interwikiname = 'MyWiki'
+    interwikiname = u'MyWiki' # [Unicode]
 
     # name of entry page / front page [Unicode], choose one of those:
 
