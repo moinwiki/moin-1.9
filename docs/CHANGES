@@ -403,6 +403,12 @@ Version 1.7.0:
       groups. \S+ means the category key can be anything non-blank.
       If you like to simultaneously support multiple languages, use something
       like this: ur'(?P<all>(Kategorie|Category)(?P<key>\S+))'
+      HINT: after changing your configuration, please rebuild the cache:
+        * stop moin
+        * moin ... maint cleancache
+        * start moin
+      If you don't do this, your groups / dicts will stop working (and also
+      your ACLs that use those groups). You better do a test whether it works.
 
     * Xapian search / indexing / stemming:
       * Use text/<format> as mimetype for pages.
