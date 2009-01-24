@@ -54,7 +54,7 @@ class Settings(UserPrefBase):
 
         pw_checker = request.cfg.password_checker
         if pw_checker:
-            pw_error = pw_checker(request.user.name, password)
+            pw_error = pw_checker(request, request.user.name, password)
             if pw_error:
                 return 'error', _("Password not acceptable: %s") % pw_error
 

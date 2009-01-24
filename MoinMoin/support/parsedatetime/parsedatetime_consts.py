@@ -574,4 +574,3 @@ class Constants:
 
         return sources
 
-        

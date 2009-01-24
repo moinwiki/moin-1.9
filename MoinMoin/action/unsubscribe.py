@@ -28,6 +28,7 @@ def execute(pagename, request):
     else:
         # The user is not subscribed
         msg = _('You need to be subscribed to unsubscribe.')
-
-    Page(request, pagename).send_page(msg=msg)
+    if msg:
+        request.theme.add_msg(msg)
+    Page(request, pagename).send_page()
 
