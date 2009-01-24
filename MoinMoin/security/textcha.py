@@ -141,8 +141,8 @@ class TextCha(object):
     def _extract_form_values(self, form=None):
         if form is None:
             form = self.request.form
-        question = form.get('textcha-question', [None])[0]
-        given_answer = form.get('textcha-answer', [u''])[0]
+        question = form.get('textcha-question')
+        given_answer = form.get('textcha-answer', u'')
         return question, given_answer
 
     def render(self, form=None):

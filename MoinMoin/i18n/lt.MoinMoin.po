@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-28 20:59+0200\n"
+"POT-Creation-Date: 2008-09-12 23:35+0200\n"
 "PO-Revision-Date: 2008-06-29 13:35+0200\n"
 "Last-Translator: Aurelijus Sudzius <ruledbyfate@gmail.com>\n"
 "Language-Team: Lithuanian <ruledbyfate@gmail.com>\n"
@@ -2350,21 +2350,6 @@ msgstr ""
 
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Juma pirma reikia užsiprenumeruoti, kad galėtumėte atsisakyti."
-
-#, fuzzy
-msgid "Password is too short."
-msgstr "Slaptažodžio atkūrimas"
-
-msgid "Password has not enough different characters."
-msgstr ""
-
-#, fuzzy
-msgid ""
-"Password is too easy (password contains name or name contains password)."
-msgstr "Trūksta slaptažodžio. Prašome įvesti naudotojo vardą ir slaptažodį."
-
-msgid "Password is too easy (keyboard sequence)."
-msgstr ""
 
 msgid "Diffs"
 msgstr "Pakeitimai"

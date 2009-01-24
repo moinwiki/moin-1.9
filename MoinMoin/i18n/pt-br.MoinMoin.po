@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-28 20:59+0200\n"
+"POT-Creation-Date: 2008-09-12 23:35+0200\n"
 "PO-Revision-Date: 2007-11-20 23:40+0000\n"
 "Last-Translator: Evandro Villa Verde <evandro.villaverde.hackerteen@gmail."
 "com>\n"
@@ -109,7 +109,7 @@ msgstr "O nome desta página é muito grande, tente um mais curto."
 
 #, python-format
 msgid "Draft of \"%(pagename)s\""
-msgstr "Rascunho de \"%(pagename)s\""
+msgstr "Previsão de \"%(pagename)s\""
 
 #, python-format
 msgid "Edit \"%(pagename)s\""
@@ -153,7 +153,7 @@ msgstr "[Conteúdo da nova página carregado de %s]"
 
 #, python-format
 msgid "[Template %s not found]"
-msgstr "[Modelo %s não encontrado]"
+msgstr "[Template %s não encontrado]"
 
 #, python-format
 msgid "[You may not read %s]"
@@ -206,7 +206,7 @@ msgid "GUI Mode"
 msgstr "Visualização Gráfica"
 
 msgid "Load Draft"
-msgstr "Carregar Rascunho"
+msgstr "Carregar Previsão"
 
 msgid "Trivial change"
 msgstr "Alterações superficiais"
@@ -308,7 +308,8 @@ msgid "You already edited this page! Please do not use the back button."
 msgstr "Você já editou esta página! Por favor não use o botão voltar."
 
 msgid "You did not change the page content, not saved!"
-msgstr "Você não alterou o conteúdo da página, a página não foi salva!"
+msgstr ""
+"Você não pode alterar o conteúdo da página, alterações não foram salvas!"
 
 msgid ""
 "You can't change ACLs on this page since you have no admin rights on it!"
@@ -317,7 +318,7 @@ msgstr ""
 "administração sobre ela!"
 
 msgid "Notifications sent to:"
-msgstr "Notificação enviada para:"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -400,7 +401,7 @@ msgid "You are not allowed to view this page."
 msgstr "Você não tem permissão para ver esta página!"
 
 msgid "The wiki is currently not reachable."
-msgstr "O wiki está atualmente indisponível."
+msgstr "A wiki está atualmente não disponível."
 
 msgid "Invalid username or password."
 msgstr "Usuário ou senha inválida."
@@ -410,8 +411,8 @@ msgid ""
 "The remote wiki uses a different InterWiki name (%(remotename)s) internally "
 "than you specified (%(localname)s)."
 msgstr ""
-"O wiki remoto está usando um nome de InterWiki diferente (%(remotename)s) "
-"internamente que aquele que você especificou (%(localname)s)."
+"O wiki remota está usando um nome de InterWiki diferente (%(remotename)s) "
+"internamente que o especificado (%(localname)s)."
 
 msgid "Text mode"
 msgstr "Modo texto"
@@ -425,8 +426,7 @@ msgid "The theme name is not set."
 msgstr "O nome do tema não está definido."
 
 msgid "Installing theme files is only supported for standalone type servers."
-msgstr ""
-"Instalar arquivos de temas só é possível para servidores do tipo standalone."
+msgstr "Instalar arquivos de temas só é suportado por servidores."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -592,10 +592,10 @@ msgid "Distribution of User-Agent Types"
 msgstr "Distribuição dos Tipos de User-Agent"
 
 msgid "Could not contact botbouncer.com."
-msgstr "Não foi possível conectar botbouncer.com"
+msgstr ""
 
 msgid "Failed to connect to database."
-msgstr "Falha em conectar a base de dados"
+msgstr ""
 
 msgid "Missing password. Please enter user name and password."
 msgstr "Senha não foi informada. Por favor, informe o nome do usuário e senha."
@@ -605,16 +605,14 @@ msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
-"Se você não tem uma conta, <a href=\"%(userprefslink)s\">você pode criar uma "
-"agora</a>. <a href=\"%(sendmypasswordlink)s\">Esqueceu sua senha?</a>"
 
 #, fuzzy
 msgid "You need to log in."
-msgstr "Você precisa fazer o login."
+msgstr "Você não está mais logado."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
-msgstr "Servidor LDAP %(server)s falhou"
+msgstr ""
 
 msgid ""
 "Please choose an account name now.\n"
@@ -626,10 +624,10 @@ msgid "Name"
 msgstr "Nome"
 
 msgid "Choose this name"
-msgstr "Escolha este nome"
+msgstr ""
 
 msgid "This is not a valid username, choose a different one."
-msgstr "Este não é um nome de usuário válido, escolha outro."
+msgstr ""
 
 msgid ""
 "The username you have chosen is already\n"
@@ -642,46 +640,44 @@ msgid "Password"
 msgstr "Senha"
 
 msgid "Associate this name"
-msgstr "Associe este nome"
+msgstr ""
 
 #, python-format
 msgid "OpenID error: %s."
-msgstr "Erro OpenID: %s."
+msgstr ""
 
 #, fuzzy
 msgid "Verification canceled."
-msgstr "Verificação cancelada."
+msgstr "Operação foi cancelada."
 
 msgid "OpenID failure."
-msgstr "Falha OpenID"
+msgstr ""
 
 msgid "Your account is now associated to your OpenID."
-msgstr "Sua conta está agora associada a sua OpenID"
+msgstr ""
 
 msgid "The password you entered is not valid."
-msgstr "A senha que você informou não é válida."
+msgstr ""
 
 msgid "OpenID verification requires that you click this button:"
-msgstr "A verificação OpenID requer que você clique neste botão:"
+msgstr ""
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
-msgstr "Sessões anônimas necessitam ser habilitadas para login OpenID"
+msgstr ""
 
 msgid "Failed to resolve OpenID."
-msgstr "Falha em resolver OpenID"
+msgstr ""
 
 msgid "OpenID discovery failure, not a valid OpenID."
-msgstr "Falha em recuperar OpenIF, não é uma OpenID válida"
+msgstr ""
 
 msgid "No OpenID."
-msgstr "Nenhuma OpenID."
+msgstr ""
 
 msgid ""
 "If you do not have an account yet, you can still log in with your OpenID and "
 "create one during login."
 msgstr ""
-"Se você ainda não tem uma conta, você ainda assim pode realizar o login com "
-"uma OpenID e criar uma durante o login."
 
 msgid "Page has been modified"
 msgstr ""
@@ -1076,33 +1072,29 @@ msgid "Quick links"
 msgstr "Links rápidos"
 
 msgid "Switch user"
-msgstr "Mudar o usuário"
+msgstr ""
 
 msgid "No user selected"
-msgstr "Nenhum usuário selecionado"
+msgstr ""
 
 msgid ""
 "You can now change the settings of the selected user account; log out to get "
 "back to your account."
 msgstr ""
-"Você agora pode alterar as preferências do usuário selecionado; faça o "
-"logout para retornar a sua conta."
 
 msgid "You are the only user."
-msgstr "Você é o único usuário"
+msgstr ""
 
 msgid ""
 "As a superuser, you can temporarily assume the identity of another user."
 msgstr ""
-"Como superusuário, você pode assumir temporariamente a identidade de outro "
-"usuário."
 
 msgid "Select User"
 msgstr "Selecionar Usuário"
 
 #, fuzzy
 msgid "Change password"
-msgstr "Mudar a senha"
+msgstr "Senha"
 
 msgid "Passwords don't match!"
 msgstr "As senhas não conferem!"
@@ -1115,10 +1107,10 @@ msgid "Password not acceptable: %s"
 msgstr "Passord não aceitável: %s"
 
 msgid "Your password has been changed."
-msgstr "Sua senha foi alterada"
+msgstr ""
 
 msgid "To change your password, enter a new password twice."
-msgstr "Para alterar sua senha, informe uma nova senha duas vezes."
+msgstr ""
 
 msgid "Password repeat"
 msgstr "Repita a senha"
@@ -1168,19 +1160,19 @@ msgid "Remove selected"
 msgstr ""
 
 msgid "OpenID settings"
-msgstr "Configurações OpenID"
+msgstr ""
 
 msgid "Cannot remove all OpenIDs."
-msgstr "Não pode remover todas as OpenIDs"
+msgstr ""
 
 msgid "The selected OpenIDs have been removed."
-msgstr "As OpenIDS selecionadas foram removidas."
+msgstr ""
 
 msgid "No OpenID given."
-msgstr "Nenhuma OpenID fornecida."
+msgstr ""
 
 msgid "OpenID is already present."
-msgstr "A OpenID já está presente."
+msgstr ""
 
 #, fuzzy
 msgid "This OpenID is already used for another account."
@@ -1218,22 +1210,22 @@ msgstr "Usuário"
 
 #, fuzzy
 msgid "Member of Groups"
-msgstr "Membro dos Grupos"
+msgstr "Número de páginas"
 
 msgid "Email"
 msgstr "Email"
 
 msgid "Jabber"
-msgstr "Jabber"
+msgstr ""
 
 msgid "Action"
 msgstr "Ação"
 
 msgid "Disable user"
-msgstr "Desabilitar usuário"
+msgstr "Usuário desabilitado"
 
 msgid "Enable user"
-msgstr "Habilitar usuário"
+msgstr "Usuário habilitado"
 
 msgid "disabled"
 msgstr "desabilitado"
@@ -1242,7 +1234,7 @@ msgid "Mail account data"
 msgstr "Dados da conta no email"
 
 msgid "OpenID"
-msgstr "OpenID"
+msgstr ""
 
 msgid "Login"
 msgstr "Login"
@@ -2360,21 +2352,6 @@ msgstr "Edite suas inscrições de páginas nas PreferênciasDoUsuário."
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Sua inscrição a esta página foi efetivada."
 
-#, fuzzy
-msgid "Password is too short."
-msgstr "Senha muito curta"
-
-msgid "Password has not enough different characters."
-msgstr "A senha não tem um número suficiente de caracteres diferentes"
-
-#, fuzzy
-msgid ""
-"Password is too easy (password contains name or name contains password)."
-msgstr "Senha não foi informada. Por favor, informe o nome do usuário e senha."
-
-msgid "Password is too easy (keyboard sequence)."
-msgstr "Senha muito simples (seqüência de teclado)."
-
 msgid "Diffs"
 msgstr "Diffs"
 
@@ -2407,7 +2384,7 @@ msgstr "Acima"
 
 msgid "Publish my email (not my wiki homepage) in author info"
 msgstr ""
-"Publique meu e-mail (não minha homepage do wiki) nas informações do autor"
+"Publique meu e-mail (não em minha homepage do wiki) nas informações do autor"
 
 msgid "Open editor on double click"
 msgstr "Abra o editor com um duplo clique"
@@ -2446,7 +2423,7 @@ msgid "Alias-Name"
 msgstr "Apelido"
 
 msgid "Jabber ID"
-msgstr "Identidade Jabber"
+msgstr ""
 
 msgid "User CSS URL"
 msgstr "URL da folha de estilo (CSS) do usuário"
@@ -3000,7 +2977,7 @@ msgid "SpellCheck"
 msgstr "VerificaçãoOrtográfica"
 
 msgid "Discussion"
-msgstr "Discussão"
+msgstr ""
 
 #, python-format
 msgid "Inlined image: %(url)s"

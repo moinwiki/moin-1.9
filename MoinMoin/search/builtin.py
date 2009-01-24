@@ -401,9 +401,9 @@ class BaseIndex:
 
         @param request: current request
         """
-        from MoinMoin.request.request_cli import Request
+        from MoinMoin.web.contexts import ScriptContext
         from MoinMoin.security import Permissions
-        request = Request(request.url)
+        request = ScriptContext(request.url)
         class SecurityPolicy(Permissions):
             def read(self, *args, **kw):
                 return True

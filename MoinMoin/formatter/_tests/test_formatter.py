@@ -21,7 +21,7 @@ class TestFormatter:
             pass
         else:
             print "Formatting using %r" % formatter
-            self.formatPage("SyntaxReference", formatter)
+            self.formatPage("HelpOnMoinWikiSyntax", formatter)
             print "Done."
 
     def testSyntaxReferenceDocBook(self):
@@ -57,7 +57,7 @@ class TestFormatter:
                 pass
             else:
                 print "Formatting using %r" % formatter
-                self.formatPage("SyntaxReference", formatter)
+                self.formatPage("HelpOnMoinWikiSyntax", formatter)
                 print "Done."
 
     def formatPage(self, pagename, formatter):
