@@ -210,7 +210,7 @@ class ThemeBase:
         """
         if self.request.cfg.show_interwiki:
             page = wikiutil.getFrontPage(self.request)
-            text = self.request.cfg.interwikiname or 'Self'
+            text = self.request.cfg.interwikiname or u'Self'
             link = page.link_to(self.request, text=text, rel='nofollow')
             html = u'<div id="interwiki"><span>%s</span></div>' % link
         else:

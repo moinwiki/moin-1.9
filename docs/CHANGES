@@ -31,6 +31,7 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
+
 Version 1.9.current:
   New features:
     * HINT: MoinMoin is now a WSGI application.
@@ -43,6 +44,10 @@ Version 1.9.current:
       Note: we still have some (deprecated) small wrappers around pygments,
       so the old syntax #!python/pascal/cplusplus/... still works.
 
+
+Version 1.8.current:
+  Bug fixes:
+    * Fix update xapian index by trivial changes (MoinMoinBugs/TrivialChangesDoesNotUpdateTheXapianIndex)
 
 
 Version 1.8.1:

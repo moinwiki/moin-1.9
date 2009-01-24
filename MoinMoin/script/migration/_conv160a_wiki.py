@@ -3,25 +3,13 @@
     MoinMoin - convert content in 1.6.0alpha (rev 1844: 58ebb64243cc) wiki markup to 1.6.0 style
                by using a modified 1.6.0alpha parser as translator.
 
-    Assuming we have this "renames" map:
-    -------------------------------------------------------
-    'PAGE', 'some_page'        -> 'some page'
-    'FILE', 'with%20blank.txt' -> 'with blank.txt'
-
-    Markup transformations needed:
-    -------------------------------------------------------
-    ["some_page"]           -> [[some page]] # renamed
-    [:some_page:some text]  -> [[some page|some text]]
-    [:page:text]            -> [[page|text]]
-                               (with a page not being renamed)
-
-    attachment:with%20blank.txt -> [[attachment:with blank.txt]]
-    attachment:some_page/with%20blank.txt -> [[attachment:some page/with blank.txt]]
-    The attachment processing should also urllib.unquote the filename (or at
-    least replace %20 by space) and put it into "quotes" if it contains spaces.
+    PLEASE NOTE: most moin users will never need to execute this code,
+                 because it is just for users of 1.6.0alpha version,
+                 that used modified link markup, but was never released.
+                 The 1.5.x/1.6.x releases use a different link markup than 1.6.0a.
 
     @copyright: 2007 MoinMoin:JohannesBerg,
-                2007 MoinMoin:ThomasWaldmann
+                2007-2009 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -276,29 +264,6 @@ class Converter(Parser):
         else:
             return text
 
-    ''' old:
-    def _interwiki_repl(self, word):
-        """Handle InterWiki links."""
-        wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, word)
-        if wikitag_bad:
-            return word
-        else:
-            wikiname, pagename = word.split(':', 1)
-            pagename = wikiutil.url_unquote(pagename) # maybe someone has used %20 for blanks in pagename
-            camelcase = wikiutil.isStrictWikiname(pagename)
-            if wikiname in ('Self', self.request.cfg.interwikiname):
-                pagename = self._replace(('PAGE', pagename))
-                if camelcase:
-                    return '%s' % pagename # optimize special case
-                else:
-                    return '[[%s]]' % pagename # optimize special case
-            else:
-                if ' ' in pagename: # we could get a ' '  by urlunquoting
-                    return '[[%s:%s]]' % (wikiname, pagename)
-                else:
-                    return '%s:%s' % (wikiname, pagename)
-    '''
-
     def _interwiki_repl(self, word):
         """Handle InterWiki links."""
         wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, word)
@@ -310,22 +275,24 @@ class Converter(Parser):
     def interwiki(self, target_and_text, **kw):
         scheme, rest = target_and_text.split(':', 1)
         wikiname, pagename, text = wikiutil160a.split_wiki(rest)
-        if text:
-            text = '|' + text
 
-        if (pagename.startswith(wikiutil.CHILD_PREFIX) or # fancy link to subpage [wiki:/SubPage text]
-            Page(self.request, pagename).exists()): # fancy link to local page [wiki:LocalPage text]
-            pagename = wikiutil.url_unquote(pagename)
-            pagename = self._replace_target(pagename)
-            return '[[%s%s]]' % (pagename, text)
+        #if (pagename.startswith(wikiutil.CHILD_PREFIX) or # fancy link to subpage [wiki:/SubPage text]
+        #    Page(self.request, pagename).exists()): # fancy link to local page [wiki:LocalPage text]
+        #    # XXX OtherWiki:FooPage markup -> checks for local FooPage -sense???
+        #    pagename = wikiutil.url_unquote(pagename)
+        #    pagename = self._replace_target(pagename)
+        #    return '[[%s%s]]' % (pagename, text)
 
         if wikiname in ('Self', self.request.cfg.interwikiname, ''): # [wiki:Self:LocalPage text] or [:LocalPage:text]
+            orig_pagename = pagename
             pagename = wikiutil.url_unquote(pagename)
             pagename = self._replace_target(pagename)
             camelcase = wikiutil.isStrictWikiname(pagename)
-            if camelcase and text == pagename:
-                return '%s' % pagename # optimize special case
+            if camelcase and (not text or text == orig_pagename):
+                return pagename # optimize special case
             else:
+                if text:
+                    text = '|' + text
                 return '[[%s%s]]' % (pagename, text)
 
         wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, wikiname+':')
@@ -343,58 +310,27 @@ class Converter(Parser):
             if ' ' not in wikitail and not text:
                 return '%s:%s' % (wikitag, wikitail)
             else:
+                if text:
+                    text = '|' + text
                 return '[[%s:%s%s]]' % (wikitag, wikitail, text)
 
-    ''' old:
-    def interwiki(self, url_and_text):
-        # keep track of whether this is a self-reference, so links
-        # are always shown even the page doesn't exist.
-        wikiname, pagename = wikiutil.split_wiki(url)
-    '''
-    '''
-    def attachment(self, url_and_text):
-        """ This gets called on attachment URLs. """
-        if len(url_and_text) == 1:
-            url = url_and_text[0]
-            text = ''
-        else:
-            url, text = url_and_text
-            text = '|' + text
-
-        scheme, fname = url.split(":", 1)
-        #scheme, fname, text = wikiutil.split_wiki(target_and_text)
+    def attachment(self, target_and_text, **kw):
+        """ This gets called on attachment URLs """
+        _ = self._
+        scheme, fname, text = wikiutil160a.split_wiki(target_and_text)
 
         pagename, fname = AttachFile.absoluteName(fname, self.pagename)
         from_this_page = pagename == self.pagename
         fname = self._replace(('FILE', pagename, fname))
-        fname = wikiutil.url_unquote(fname, want_unicode=True)
-        fname = self._replace(('FILE', pagename, fname))
+        #fname = wikiutil.url_unquote(fname, want_unicode=True)
+        #fname = self._replace(('FILE', pagename, fname))
         pagename = self._replace(('PAGE', pagename))
         if from_this_page:
             name = fname
         else:
             name = "%s/%s" % (pagename, fname)
 
-        if scheme == 'drawing':
-            return "{{drawing:%s%s}}" % (name, text)
-
-        # check for image URL, and possibly return IMG tag
-        # (images are always inlined, just like for other URLs)
-        if wikiutil.isPicture(name):
-            return "{{attachment:%s%s}}" % (name, text)
-
-        # inline the attachment
-        if scheme == 'inline':
-            return '{{attachment:%s%s}}' % (name, text)
-        else: # 'attachment'
-            return '[[attachment:%s%s]]' % (name, text)
-    '''
-
-    def attachment(self, target_and_text, **kw):
-        """ This gets called on attachment URLs """
-        _ = self._
-        scheme, fname, text = wikiutil160a.split_wiki(target_and_text)
-        fn_txt = fname
+        fn_txt = name
         if text:
             fn_txt += '|' + text
 
@@ -433,30 +369,37 @@ class Converter(Parser):
         # Local extended link? [:page name:link text] XXX DEPRECATED
         if word[0] == ':':
             words = word[1:].split(':', 1)
-            pagename = self._replace(('PAGE', words[0]))
-            if len(words) == 1 or len(words) == 2 and not words[1]:
-                return '[[%s]]' % (pagename, )
-            else:
-                return '[[%s|%s]]' % (pagename, words[1])
+            link, text = (words + ['', ''])[:2]
+            if link.strip() == text.strip():
+                text = ''
+            link = self._replace_target(link)
+            if text:
+                text = '|' + text
+            return '[[%s%s]]' % (link, text)
 
         scheme_and_rest = word.split(":", 1)
         if len(scheme_and_rest) == 1: # no scheme
             # Traditional split on space
             words = word.split(None, 1)
-            if len(words) == 1:
-                words = words * 2
-
             if words[0].startswith('#'): # anchor link
-                if words[0] == words[1]:
-                    return '[[%s]]' % words[0]
-                else:
-                    return '[[%s|%s]]' % tuple(words)
+                link, text = (words + ['', ''])[:2]
+                if link.strip() == text.strip():
+                    text = ''
+                if text:
+                    text = '|' + text
+                return '[[%s%s]]' % (link, text)
         else:
-            scheme, rest = scheme_and_rest
+            scheme = scheme_and_rest[0]
             if scheme == "wiki":
                 return self.interwiki(word, pretty_url=1)
             if scheme in self.attachment_schemas:
-                return self.attachment(word)
+                m = self.attachment(word)
+                if scheme == 'attachment':
+                    # with url_bracket markup, 1.6.0a parser does not embed pictures, but link!
+                    return '[[%s]]' % m[2:-2]
+                else:
+                    # drawing and inline
+                    return m
 
             words = word.split(None, 1)
             if len(words) == 1:
@@ -470,65 +413,6 @@ class Converter(Parser):
                 return '[[%s]]' % target
             else:
                 return '[[%s|%s]]' % (target, text)
-
-
-    '''
-    def _url_bracket_repl(self, word):
-        """Handle bracketed URLs."""
-        word = word[1:-1] # strip brackets
-
-        # Local extended link?
-        if word[0] == ':':
-            words = word[1:].split(':', 1)
-            link, text = (words + ['', ''])[:2]
-            if link.strip() == text.strip():
-                text = ''
-            link = self._replace_target(link)
-            if text:
-                text = '|' + text
-            return '[[%s%s]]' % (link, text)
-
-        # Traditional split on space
-        words = word.split(None, 1)
-        if words[0][0] == '#':
-            # anchor link
-            link, text = (words + ['', ''])[:2]
-            if link.strip() == text.strip():
-                text = ''
-            #link = self._replace_target(link)
-            if text:
-                text = '|' + text
-            return '[[%s%s]]' % (link, text)
-
-        scheme = words[0].split(":", 1)[0]
-        if scheme == "wiki":
-            return self.interwiki(words)
-            #scheme, wikiname, pagename, text = self.interwiki(word)
-            #print "%r %r %r %r" % (scheme, wikiname, pagename, text)
-            #if wikiname in ('Self', self.request.cfg.interwikiname, ''):
-            #    if text:
-            #        text = '|' + text
-            #    return '[[%s%s]]' % (pagename, text)
-            #else:
-            #    if text:
-            #        text = '|' + text
-            #    return "[[%s:%s%s]]" % (wikiname, pagename, text)
-        if scheme in self.attachment_schemas:
-            m = self.attachment(words)
-            if m.startswith('{{') and m.endswith('}}'):
-                # with url_bracket markup, 1.5.8 parser does not embed, but link!
-                m = '[[%s]]' % m[2:-2]
-            return m
-
-        target, desc = (words + ['', ''])[:2]
-        if wikiutil.isPicture(desc) and re.match(self.url_rule, desc):
-            #return '[[%s|{{%s|%s}}]]' % (words[0], words[1], words[0])
-            return '[[%s|{{%s}}]]' % (target, desc)
-        else:
-            if desc:
-                desc = '|' + desc
-            return '[[%s%s]]' % (target, desc)
-    '''
 
     def _pre_repl(self, word):
         w = word.strip()

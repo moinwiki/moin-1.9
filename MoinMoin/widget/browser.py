@@ -15,7 +15,8 @@ class DataBrowserWidget(base.Widget):
         _ = request.getText
         base.Widget.__init__(self, request, **kw)
         self.data = None
-        self.data_id = 'dbw.'
+        self.unqual_data_id = 'dbw.'
+        self.data_id = request.formatter.qualify_id(self.unqual_data_id)
         # prefixed with __ are untranslated and to be used in the JS
         self._all = _('[all]')
         self.__all = '[all]'
@@ -37,7 +38,8 @@ class DataBrowserWidget(base.Widget):
         """
         self.data = dataset
         if dataset.data_id:
-            self.data_id = 'dbw.%s.' % dataset.data_id
+            self.unqual_data_id = 'dbw.%s.' % dataset.data_id
+            self.data_id = self.request.formatter.qualify_id(self.unqual_data_id)
 
     def _name(self, elem):
         """ return name tag for a HTML element
@@ -115,7 +117,7 @@ class DataBrowserWidget(base.Widget):
         if havefilters:
             result.append(fmt.rawHTML('<input type="submit" value="%s" %s>' % (self._filter, self._name('submit'))))
 
-        result.append(fmt.table(1, id='%stable' % self.data_id))
+        result.append(fmt.table(1, id='%stable' % self.unqual_data_id))
 
         # add header line
         if self._show_header:

@@ -639,7 +639,7 @@ class User:
         @param tm: timestamp
         """
         if self.valid:
-            interwikiname = unicode(self._cfg.interwikiname or '')
+            interwikiname = self._cfg.interwikiname or u''
             bookmark = unicode(tm)
             self.bookmarks[interwikiname] = bookmark
             self.save()
@@ -651,7 +651,7 @@ class User:
         @return: bookmark timestamp or None
         """
         bm = None
-        interwikiname = unicode(self._cfg.interwikiname or '')
+        interwikiname = self._cfg.interwikiname or u''
         if self.valid:
             try:
                 bm = int(self.bookmarks[interwikiname])
@@ -665,7 +665,7 @@ class User:
         @rtype: int
         @return: 0 on success, 1 on failure
         """
-        interwikiname = unicode(self._cfg.interwikiname or '')
+        interwikiname = self._cfg.interwikiname or u''
         if self.valid:
             try:
                 del self.bookmarks[interwikiname]
@@ -991,7 +991,6 @@ class User:
         return msg + '-' + h
 
     def apply_recovery_token(self, tok, newpass):
-        key = self.recoverpass_key
         parts = tok.split('-')
         if len(parts) != 2:
             return False
@@ -1003,7 +1002,8 @@ class User:
         if stamp + 12*60*60 < time.time():
             return False
         # check hmac
-        h = hmac_new(self.recoverpass_key, str(stamp)).hexdigest()
+        # key must be of type string
+        h = hmac_new(str(self.recoverpass_key), str(stamp)).hexdigest()
         if h != parts[1]:
             return False
         self.recoverpass_key = ""

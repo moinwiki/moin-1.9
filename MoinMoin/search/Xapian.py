@@ -327,7 +327,7 @@ class Index(BaseIndex):
         fs_rootpage = 'FS' # XXX FS hardcoded
 
         try:
-            wikiname = request.cfg.interwikiname or 'Self'
+            wikiname = request.cfg.interwikiname or u'Self'
             itemid = "%s:%s" % (wikiname, os.path.join(fs_rootpage, filename))
             mtime = os.path.getmtime(filename)
             mtime = wikiutil.timestamp2version(mtime)
@@ -349,7 +349,7 @@ class Index(BaseIndex):
             if updated:
                 xitemid = xapdoc.Keyword('itemid', itemid)
                 mimetype, file_content = self.contentfilter(filename)
-                xwname = xapdoc.SortKey('wikiname', request.cfg.interwikiname or "Self")
+                xwname = xapdoc.SortKey('wikiname', request.cfg.interwikiname or u"Self")
                 xpname = xapdoc.SortKey('pagename', fs_rootpage)
                 xattachment = xapdoc.SortKey('attachment', filename) # XXX we should treat files like real pages, not attachments
                 xmtime = xapdoc.SortKey('mtime', mtime)
@@ -441,7 +441,7 @@ class Index(BaseIndex):
                    'update' = check if already in index and update if needed (mtime)
         """
         request = page.request
-        wikiname = request.cfg.interwikiname or "Self"
+        wikiname = request.cfg.interwikiname or u"Self"
         pagename = page.page_name
         mtime = page.mtime_usecs()
         revision = str(page.get_real_rev())
@@ -537,7 +537,7 @@ class Index(BaseIndex):
             if updated:
                 xatt_itemid = xapdoc.Keyword('itemid', att_itemid)
                 xpname = xapdoc.SortKey('pagename', pagename)
-                xwname = xapdoc.SortKey('wikiname', request.cfg.interwikiname or "Self")
+                xwname = xapdoc.SortKey('wikiname', request.cfg.interwikiname or u"Self")
                 xattachment = xapdoc.SortKey('attachment', att) # this is an attachment, store its filename
                 xmtime = xapdoc.SortKey('mtime', mtime)
                 xrev = xapdoc.SortKey('revision', '0')
@@ -572,7 +572,7 @@ class Index(BaseIndex):
 
     def _remove_item(self, writer, page, attachment=None):
         request = page.request
-        wikiname = request.cfg.interwikiname or 'Self'
+        wikiname = request.cfg.interwikiname or u'Self'
         pagename = page.page_name
 
         if not attachment:

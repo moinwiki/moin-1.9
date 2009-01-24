@@ -22,6 +22,7 @@ logging = log.getLogger(__name__)
 
 from MoinMoin import config
 from MoinMoin.util import pysupport, lock
+from MoinMoin.support.python_compatibility import rsplit
 from inspect import getargspec, isfunction, isclass, ismethod
 
 
@@ -2466,6 +2467,31 @@ def anchor_name_from_text(text):
         return 'A%s' % res
     return res
 
+def split_anchor(pagename):
+    """
+    Split a pagename that (optionally) has an anchor into the real pagename
+    and the anchor part. If there is no anchor, it returns an empty string
+    for the anchor.
+
+    Note: if pagename contains a # (as part of the pagename, not as anchor),
+          you can use a trick to make it work nevertheless: just append a
+          # at the end:
+          "C##" returns ("C#", "")
+          "Problem #1#" returns ("Problem #1", "")
+
+    TODO: We shouldn't deal with composite pagename#anchor strings, but keep
+          it separate.
+          Current approach: [[pagename#anchor|label|attr=val,&qarg=qval]]
+          Future approach:  [[pagename|label|attr=val,&qarg=qval,#anchor]]
+          The future approach will avoid problems when there is a # in the
+          pagename part (and no anchor). Also, we need to append #anchor
+          at the END of the generated URL (AFTER the query string).
+    """
+    parts = rsplit(pagename, '#', 1)
+    if len(parts) == 2:
+        return parts
+    else:
+        return pagename, ""
 
 ########################################################################
 ### Tickets - used by RenamePage and DeletePage
