@@ -49,7 +49,7 @@ class Config(DefaultConfig):
     #page_front_page = u"FrontPage"
 
     # The interwiki name used in interwiki links
-    #interwikiname = 'UntitledWiki'
+    #interwikiname = u'UntitledWiki'
     # Show the interwiki name (and link it to page_front_page) in the Theme,
     # nice for farm setups or when your logo does not show the wiki's name.
     #show_interwiki = 1
