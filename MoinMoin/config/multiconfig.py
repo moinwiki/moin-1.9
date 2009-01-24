@@ -501,7 +501,7 @@ file. It should match the actual charset of the configuration file.
 """
 
         decode_names = (
-            'sitename', 'interwikiname', 'logo_string', 'navi_bar',
+            'sitename', 'interwikiname', 'user_homewiki', 'logo_string', 'navi_bar',
             'page_front_page', 'page_category_regex', 'page_dict_regex',
             'page_group_regex', 'page_template_regex', 'page_license_page',
             'page_local_spelling_words', 'acl_rights_default',
@@ -1094,8 +1094,8 @@ options = {
       ('jid_unique', True,
        "if True, check Jabber IDs for uniqueness and don't accept duplicates."),
 
-      ('homewiki', 'Self',
-       "interwiki name of the wiki where the user home pages are located (useful if you have ''many'' users). You could even link to nonwiki \"user pages\" if the wiki username is in the target URL."),
+      ('homewiki', u'Self',
+       "interwiki name of the wiki where the user home pages are located [Unicode] - useful if you have ''many'' users. You could even link to nonwiki \"user pages\" if the wiki username is in the target URL."),
 
       ('checkbox_fields',
        [
