@@ -4,7 +4,7 @@
     MoinMoin - Version Information
 
     @copyright: 2000-2006 Juergen Hermann <jh@web.de>,
-                2003-2008 MoinMoin:ThomasWaldmann
+                2003-2009 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 import sys
