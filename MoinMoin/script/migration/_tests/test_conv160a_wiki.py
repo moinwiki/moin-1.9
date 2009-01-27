@@ -3,7 +3,6 @@
     MoinMoin - tests of wiki content conversion
 
     TODO:
-    * fix failing tests
     * fix parser/converter anchor link handling
     * emit a warning if we find some page name that was renamed as a macro argument?
     * shall we support camelcase renaming?
@@ -37,45 +36,56 @@ class TestWikiConversion:
         }
 
         tests = [
-            # 1.6.0a specific tests
-            ('["some page" somepage]', {}, '[[some page|somepage]]'),
-            ("['some page' somepage]", {}, '[[some page|somepage]]'),
-            ("MoinMaster:'some page'", {}, '[[MoinMaster:some page]]'),
-            ('MoinMaster:"some page"', {}, '[[MoinMaster:some page]]'),
-            #("MoinMaster:'some page'", {}, '[[MoinMaster:some page]]'),
+            # attachment links
+            ("attachment:filename.ext", {}, "[[attachment:filename.ext]]"),
+            ("[attachment:'Filename.ext' Aliasname]", {}, "[[attachment:Filename.ext|Aliasname]]"),
+            ("[attachment:'Pagename/Filename.ext' Aliasname]", {}, "[[attachment:Pagename/Filename.ext|Aliasname]]"),
+            ("[attachment:'Pagename/Subpage/Filename.ext' Aliasname]", {}, "[[attachment:Pagename/Subpage/Filename.ext|Aliasname]]"),
+            ('[attachment:"Pagename/Subpage/File Name.ext" Aliasname]', {}, "[[attachment:Pagename/Subpage/File Name.ext|Aliasname]]"),
+            ('[inline:text.txt]', {}, '{{attachment:text.txt}}'), # inline is now implied by {{...}}
+            ('[inline:image.jpg]', {}, '{{attachment:image.jpg}}'), # inline is now implied by {{...}}
+            ('[drawing:image]', {}, '{{drawing:image}}'),
+            ('[inline:text.txt foo]', {}, '{{attachment:text.txt|foo}}'), # inline is now implied by {{...}}
+            ('[inline:image.jpg foo]', {}, '{{attachment:image.jpg|foo}}'), # inline is now implied by {{...}}
+            ('[drawing:image foo]', {}, '{{drawing:image|foo}}'),
+
             # "nothing changed" checks (except markup)
             ('', {}, ''),
             ('CamelCase', {}, 'CamelCase'),
-            # XXX TODO ('MoinMaster:CamelCase', {}, 'MoinMaster:CamelCase'),
+            ('["/Subpage"]', {}, "[[/Subpage]]"),
+            ('["Pagename/Subpage"]', {}, "[[Pagename/Subpage]]"),
+            ("['Pagename/Subpage' Aliasname]", {}, "[[Pagename/Subpage|Aliasname]]"),
+            ('["some page" somepage]', {}, '[[some page|somepage]]'),
+            ("['some page' somepage]", {}, '[[some page|somepage]]'),
 
-            # did not work in 1.6a
-            #('[wiki:LinuxWiki: LinuxWiki.de]', {}, '[[LinuxWiki:|LinuxWiki.de]]'),
-            #('[wiki:/OtherPage]', rename_some_page, '[[/OtherPage]]'),
-            #('[wiki:/OtherPage other page]', rename_some_page, '[[/OtherPage|other page]]'),
+            ('Doesnotexist:CamelCase', {}, 'Doesnotexist:CamelCase'),
+            ('MoinMaster:CamelCase', {}, 'MoinMaster:CamelCase'),
+            ("MoinMaster:'some page'", {}, '[[MoinMaster:some page]]'),
+            ('MoinMaster:"some page"', {}, '[[MoinMaster:some page]]'),
 
-            # XXX TODO  ('[wiki:MoinMoin/FrontPage]', {}, 'MoinMoin:FrontPage'),
+            ('[wiki:MoinMoin/FrontPage]', {}, 'MoinMoin:FrontPage'),
             ('some_text', {}, 'some_text'),
             ('["some_text"]', {}, '[[some_text]]'),
             ('some_page', rename_some_page, 'some_page'), # not a link
             ('{{{["some_page"]}}}', rename_some_page, '{{{["some_page"]}}}'), # not a link
             ('`["some_page"]`', rename_some_page, '`["some_page"]`'), # not a link
             ('["OtherPage/some_page"]', rename_some_page, '[[OtherPage/some_page]]'), # different link
-            # XXX TODO ('MoinMaster:some_page', rename_some_page, 'MoinMaster:some_page'), # external link
+            ('MoinMaster:some_page', rename_some_page, 'MoinMaster:some_page'), # external link
             ('http://some_server/some_page', rename_some_page, 'http://some_server/some_page'), # external link
             ('[http://some_server/some_page]', rename_some_page, '[[http://some_server/some_page]]'), # external link
+            ('[http://some_server/some_page foo]', rename_some_page, '[[http://some_server/some_page|foo]]'), # external link
             ('[#some_page]', rename_some_page, '[[#some_page]]'), # link to anchor that has same name
-            #XXX ('[attachment:some_page.png]', rename_some_page, '[[attachment:some_page.png]]'), # att, not page
-            #XXX ('[attachment:some_page.png test picture]', rename_some_page, '[[attachment:some_page.png|test picture]]'), # att, not page
-            # url unquote stuff (%20 was popular for space)
-            #XXX ('attachment:My%20Attachment.jpg', {}, '{{attachment:My Attachment.jpg}}'), # embed!
-            #XXX ('[attachment:My%20Attachment.jpg]', {}, '[[attachment:My Attachment.jpg]]'), # link!
-            #XXX ('[attachment:My%20Attachment.jpg it works]', {}, '[[attachment:My Attachment.jpg|it works]]'),
+            ('[attachment:some_page.png]', rename_some_page, '[[attachment:some_page.png]]'), # att, not page
+            ('[attachment:some_page.png test picture]', rename_some_page, '[[attachment:some_page.png|test picture]]'), # att, not page
 
             # page rename changes result
             ('["some_page"]', rename_some_page, '[[some page]]'),
             ('[:some_page]', rename_some_page, '[[some page]]'),
+            ('[:some_page#anchor]', rename_some_page, '[[some page#anchor]]'),
             ('[:some_page:]', rename_some_page, '[[some page]]'),
+            ('[:some_page#anchor:]', rename_some_page, '[[some page#anchor]]'),
             ('[:some_page:some text]', rename_some_page, '[[some page|some text]]'),
+            ('[:some_page#anchor:some text]', rename_some_page, '[[some page#anchor|some text]]'),
             ('Self:some_page', rename_some_page, '[[some page]]'),
             ('wiki:Self:some_page', rename_some_page, '[[some page]]'),
             ('[wiki:Self:some_page some text]', rename_some_page, '[[some page|some text]]'),
@@ -85,24 +95,18 @@ class TestWikiConversion:
             ('[:other page]', {}, '[[other page]]'),
             ('[:other page:]', {}, '[[other page]]'),
             ('[:other page:other text]', {}, '[[other page|other text]]'),
-            # XXX TODO ('Self:CamelCase', {}, 'CamelCase'),
-            # XXX TODO ('[wiki:WikiPedia:Lynx_%28web_browser%29 Lynx]', {}, '[[WikiPedia:Lynx_(web_browser)|Lynx]]'),
-            # XXX TODO ('[:Something:Something]', {}, '[[Something]]'), # optimize markup
+            ('Self:CamelCase', {}, 'CamelCase'),
+            ('[wiki:WikiPedia:Lynx_%28web_browser%29 Lynx]', {}, '[[WikiPedia:Lynx_(web_browser)|Lynx]]'),
+            ('[:Something:Something]', {}, '[[Something]]'), # optimize markup
 
             # "nothing changed" checks
             ('attachment:OtherPage/with_underscore', rename_some_file, '[[attachment:OtherPage/with_underscore]]'),
 
             # file rename changes result
-            # XXX TODO ('attachment:with_underscore', rename_some_file, '[[attachment:without underscore]]'),
-            # XXX TODO ('attachment:TestPage/with_underscore', rename_some_file, '[[attachment:without underscore]]'), # remove superfluous pagename
+            ('attachment:with_underscore', rename_some_file, '[[attachment:without underscore]]'),
+            ('attachment:TestPage/with_underscore', rename_some_file, '[[attachment:without underscore]]'), # remove superfluous pagename
 
-            # attachment syntax: kill %20
-            # XXX TODO ('attachment:with%20blank', rename_some_file, '[[attachment:without_blank]]'), # plus rename
-            # XXX TODO ('attachment:keep%20blank', rename_some_file, '[[attachment:keep blank]]'), # no rename
-            # XXX TODO ('attachment:TestPage/keep%20blank', rename_some_file, '[[attachment:keep blank]]'), # remove superfluous pagename
-            # XXX TODO ('attachment:OtherPage/keep%20blank', rename_some_file, '[[attachment:OtherPage/keep blank]]'),
-
-            # embed images
+            # embed images, all verified on 160a
             ('http://server/image.png', {}, '{{http://server/image.png}}'),
             ('attachment:image.gif', {}, '{{attachment:image.gif}}'),
             ('inline:image.jpg', {}, '{{attachment:image.jpg}}'), # inline is now implied by {{...}}
@@ -158,4 +162,262 @@ class TestWikiConversion:
         for data, renames, expected in tests:
             assert convert_wiki(request, pagename, data, renames) == expected
 
+    def test_full_page(self):
+        #py.test.skip("not wanted right now")
+        markup_160a = u"""\
+= CamelCase =
+== Pages ==
+ 1. SomePage
+ 2. TestPage (does not link to current page)
+ 3. SomePage/SubPage
+
+## not supported on 160a
+##== Pages with anchor ==
+## 1. SomePage#anchor
+## 2. TestPage#anchor
+## 3. SomePage/SubPage#anchor
+
+= Interwiki =
+== Pages ==
+ 1. Self:SomePage
+ 2. Self:some_page
+ 3. Self:'some page'
+ 4. Self:"some page"
+ 5. MoinMoin:SomePage
+ 6. MoinMoin:some_page
+ 7. MoinMoin:'some page'
+ 8. MoinMoin:"some page"
+
+== Pages with anchor ==
+ 1. Self:SomePage#anchor
+ 2. Self:some_page#anchor
+ 3. Self:'some page#anchor'
+ 4. Self:"some page#anchor"
+ 5. MoinMoin:SomePage#anchor
+ 6. MoinMoin:some_page#anchor
+ 7. MoinMoin:'some page#anchor'
+ 8. MoinMoin:"some page#anchor"
+
+== Invalid wiki name ==
+ 1. Doesnotexist:CamelCase (shall not link)
+ 2. Foo:bar (shall not link)
+
+= URL =
+== simple ==
+ 1. http://moinmo.in/MoinMoin
+ 2. http://static.moinmo.in/logos/moinmoin.png (renders image in 160a)
+ 3. mailto:someone@example.org
+ 4. wiki:Self:some_page
+
+== with anchor ==
+ 1. http://moinmo.in/MoinMoin#anchor
+ 2. wiki:Self:some_page#anchor
+
+= bracketed link =
+== Page ==
+ 1. ["some page"]
+ 2. ["some page" somepage]
+ 3. ['some page' somepage]
+ 4. ["/Subpage"]
+ 5. ["SomePage/Subpage"]
+ 6. ['SomePage/Subpage' Some Page]
+
+== Page with anchor ==
+ 1. ["some page#anchor"]
+ 2. ["some page#anchor" somepage]
+ 3. ['some page#anchor' somepage]
+ 4. ["/Subpage#anchor"]
+ 5. ["SomePage/Subpage#anchor"]
+ 6. ['SomePage/Subpage#anchor' Some Page]
+
+== Anchor on current page ==
+ 1. [#anchor]
+## 1. [TestPage#anchor]  not supported on 160a
+
+== URL ==
+ 1. [http://some_server/some_page]
+ 2. [http://some_server/some_page some page]
+ 3. [wiki:MoinMoin/FrontPage]
+ 4. [wiki:Self:some_page some page]
+ 5. [wiki:WikiPedia:Lynx_(web_browser) Lynx]
+ 6. [:some_page]
+ 7. [:some_page:]
+ 8. [:some_page:some page]
+ 9. [:Something:Something]
+
+== URL with anchor ==
+ 1. [http://some_server/some_page#anchor]
+ 2. [http://some_server/some_page#anchor some page]
+ 3. [wiki:MoinMoin/FrontPage#anchor]
+ 4. [wiki:Self:some_page#anchor some page]
+ 5. [wiki:WikiPedia:Lynx_(web_browser)#anchor Lynx]
+ 6. [:some_page#anchor]
+ 7. [:some_page#anchor:]
+ 8. [:some_page#anchor:some page]
+ 9. [:Something#anchor:Something]
+
+= preformatted =
+ 1. {{{["some_page"]}}} (converter shall not change pre content)
+ 2. `["some_page"]` (converter shall not change pre content)
+
+= Attachments, Drawings, Images =
+== simple ==
+ 1. attachment:text.txt is linking
+ 2. inline:text.txt is embedding
+ 3. attachment:image.png is embedding
+ 4. inline:image.png is embedding
+ 5. drawing:image is embedding
+
+== bracketed ==
+ 1. [attachment:text.txt] is linking
+ 2. [inline:text.txt] is embedding
+ 3. [attachment:image.png] is linking
+ 4. [drawing:image] is embedding png image
+ 5. [inline:image.png] is showing binary content as text in 160a (wrong)
+
+== bracketed with label ==
+ 1. [attachment:text.txt some label] is linking
+ 2. [inline:text.txt some label] is embedding
+ 3. [attachment:image.png some label] is linking
+ 4. [drawing:image some label] is embedding png image
+ 5. [inline:image.png some label] is showing binary content as text in 160a (wrong)
+
+== bracketed, on other page, with label ==
+ 1. [attachment:SomePage/text.txt some label] is linking
+ 2. [inline:SomePage/text.txt some label] is embedding
+ 3. [attachment:SomePage/image.png some label] is linking
+ 4. [drawing:SomePage/image some label] is embedding png image
+ 5. [inline:SomePage/image.png some label] is showing binary content as text in 160a (wrong)
+
+"""
+        expected_markup_160 = u"""\
+= CamelCase =
+== Pages ==
+ 1. SomePage
+ 2. TestPage (does not link to current page)
+ 3. [[SomePage/SubPage]]
+
+## not supported on 160a
+##== Pages with anchor ==
+## 1. SomePage#anchor
+## 2. TestPage#anchor
+## 3. SomePage/SubPage#anchor
+
+= Interwiki =
+== Pages ==
+ 1. SomePage
+ 2. [[some_page]]
+ 3. [[some page]]
+ 4. [[some page]]
+ 5. MoinMoin:SomePage
+ 6. MoinMoin:some_page
+ 7. [[MoinMoin:some page]]
+ 8. [[MoinMoin:some page]]
+
+== Pages with anchor ==
+ 1. [[SomePage#anchor]]
+ 2. [[some_page#anchor]]
+ 3. [[some page#anchor]]
+ 4. [[some page#anchor]]
+ 5. MoinMoin:SomePage#anchor
+ 6. MoinMoin:some_page#anchor
+ 7. [[MoinMoin:some page#anchor]]
+ 8. [[MoinMoin:some page#anchor]]
+
+== Invalid wiki name ==
+ 1. Doesnotexist:CamelCase (shall not link)
+ 2. Foo:bar (shall not link)
+
+= URL =
+== simple ==
+ 1. http://moinmo.in/MoinMoin
+ 2. {{http://static.moinmo.in/logos/moinmoin.png}} (renders image in 160a)
+ 3. mailto:someone@example.org
+ 4. [[some_page]]
+
+== with anchor ==
+ 1. http://moinmo.in/MoinMoin#anchor
+ 2. [[some_page#anchor]]
+
+= bracketed link =
+== Page ==
+ 1. [[some page]]
+ 2. [[some page|somepage]]
+ 3. [[some page|somepage]]
+ 4. [[/Subpage]]
+ 5. [[SomePage/Subpage]]
+ 6. [[SomePage/Subpage|Some Page]]
+
+== Page with anchor ==
+ 1. [[some page#anchor]]
+ 2. [[some page#anchor|somepage]]
+ 3. [[some page#anchor|somepage]]
+ 4. [[/Subpage#anchor]]
+ 5. [[SomePage/Subpage#anchor]]
+ 6. [[SomePage/Subpage#anchor|Some Page]]
+
+== Anchor on current page ==
+ 1. [[#anchor]]
+## 1. [TestPage#anchor]  not supported on 160a
+
+== URL ==
+ 1. [[http://some_server/some_page]]
+ 2. [[http://some_server/some_page|some page]]
+ 3. MoinMoin:FrontPage
+ 4. [[some_page|some page]]
+ 5. [[WikiPedia:Lynx_(web_browser)|Lynx]]
+ 6. [[some_page]]
+ 7. [[some_page]]
+ 8. [[some_page|some page]]
+ 9. [[Something]]
+
+== URL with anchor ==
+ 1. [[http://some_server/some_page#anchor]]
+ 2. [[http://some_server/some_page#anchor|some page]]
+ 3. MoinMoin:FrontPage#anchor
+ 4. [[some_page#anchor|some page]]
+ 5. [[WikiPedia:Lynx_(web_browser)#anchor|Lynx]]
+ 6. [[some_page#anchor]]
+ 7. [[some_page#anchor]]
+ 8. [[some_page#anchor|some page]]
+ 9. [[Something#anchor|Something]]
+
+= preformatted =
+ 1. {{{["some_page"]}}} (converter shall not change pre content)
+ 2. `["some_page"]` (converter shall not change pre content)
+
+= Attachments, Drawings, Images =
+== simple ==
+ 1. [[attachment:text.txt]] is linking
+ 2. {{attachment:text.txt}} is embedding
+ 3. {{attachment:image.png}} is embedding
+ 4. {{attachment:image.png}} is embedding
+ 5. {{drawing:image}} is embedding
+
+== bracketed ==
+ 1. [[attachment:text.txt]] is linking
+ 2. {{attachment:text.txt}} is embedding
+ 3. [[attachment:image.png]] is linking
+ 4. {{drawing:image}} is embedding png image
+ 5. {{attachment:image.png}} is showing binary content as text in 160a (wrong)
+
+== bracketed with label ==
+ 1. [[attachment:text.txt|some label]] is linking
+ 2. {{attachment:text.txt|some label}} is embedding
+ 3. [[attachment:image.png|some label]] is linking
+ 4. {{drawing:image|some label}} is embedding png image
+ 5. {{attachment:image.png|some label}} is showing binary content as text in 160a (wrong)
+
+== bracketed, on other page, with label ==
+ 1. [[attachment:SomePage/text.txt|some label]] is linking
+ 2. {{attachment:SomePage/text.txt|some label}} is embedding
+ 3. [[attachment:SomePage/image.png|some label]] is linking
+ 4. {{drawing:SomePage/image|some label}} is embedding png image
+ 5. {{attachment:SomePage/image.png|some label}} is showing binary content as text in 160a (wrong)
+
+"""
+        markup_160 = convert_wiki(self.request, u'TestPage', markup_160a, {})
+        #print markup_160a ; print "---" ; print markup_160
+        markup_160 = markup_160.replace('\r\n', '\n')
+        assert markup_160 == expected_markup_160
 
