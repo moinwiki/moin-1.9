@@ -26,7 +26,7 @@ level=%(loglevel)s
 args=('%(logfile)s', 'at')
 
 [formatter_logfile]
-format=%(levelname)s %(asctime)s %(name)s %(funcName)s %(lineno)d %(message)s
+format=%(levelname)s %(asctime)s %(name)s:%(lineno)d %(message)s
 datefmt=
 class=logging.Formatter
 
