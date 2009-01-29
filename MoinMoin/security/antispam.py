@@ -184,7 +184,7 @@ class SecurityPolicy(Permissions):
                         # Log error and raise SaveError, PageEditor should handle this.
                         _ = editor.request.getText
                         msg = _('Sorry, can not save page because "%(content)s" is not allowed in this wiki.') % {
-                                'content': match.group()
+                                  'content': wikiutil.escape(match.group())
                               }
                         logging.info(msg)
                         raise editor.SaveError(msg)

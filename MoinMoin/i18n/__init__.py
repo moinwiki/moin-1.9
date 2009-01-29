@@ -60,7 +60,10 @@ def i18n_init(request):
     request.clock.start('i18n_init')
     if languages is None:
         logging.debug("trying to load translations from cache")
-        meta_cache = caching.CacheEntry(request, 'i18n', 'meta', scope='farm', use_pickle=True)
+        # the scope of the i18n cache needs to be per-wiki, because some translations
+        # have http links (to some help pages) and they must not point to another
+        # wiki in the farm (confusing and maybe not even readable due to ACLs):
+        meta_cache = caching.CacheEntry(request, 'i18n', 'meta', scope='wiki', use_pickle=True)
         i18n_dir = os.path.join(request.cfg.moinmoin_dir, 'i18n')
         if meta_cache.needsUpdate(i18n_dir):
             logging.debug("cache needs update")
@@ -199,7 +202,8 @@ class Translation(object):
 
     def loadLanguage(self, request, trans_dir="i18n"):
         request.clock.start('loadLanguage')
-        cache = caching.CacheEntry(request, arena='i18n', key=self.language, scope='farm', use_pickle=True)
+        # see comment about per-wiki scope above
+        cache = caching.CacheEntry(request, arena='i18n', key=self.language, scope='wiki', use_pickle=True)
         langfilename = po_filename(request, self.language, self.domain, i18n_dir=trans_dir)
         needsupdate = cache.needsUpdate(langfilename)
         if not needsupdate:
