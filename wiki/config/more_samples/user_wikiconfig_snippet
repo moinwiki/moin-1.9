@@ -3,7 +3,7 @@
 
     #userprefs_disabled = [] # allow disabling certain userpreferences plugins
 
-    #user_homewiki = 'Self' # interwiki name for where user homepages are located
+    #user_homewiki = u'Self' # interwiki name for where user homepages are located
 
     #password_checker = None
     #user_email_unique = True # do we check whether a user's email is unique?
