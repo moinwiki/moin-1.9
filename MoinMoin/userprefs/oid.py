@@ -9,7 +9,8 @@
 from MoinMoin import wikiutil, user
 from MoinMoin.widget import html
 from MoinMoin.userprefs import UserPrefBase
-import sha
+from MoinMoin.support.python_compatibility import hash_new
+
 try:
     from MoinMoin.auth.openidrp import OpenIDAuth
     from MoinMoin.util.moinoid import MoinOpenIDStore
@@ -45,7 +46,7 @@ class Settings(UserPrefBase):
             return
         openids = self.request.user.openids[:]
         for oid in self.request.user.openids:
-            name = "rm-%s" % sha.new(oid).hexdigest()
+            name = "rm-%s" % hash_new('sha1', oid).hexdigest()
             if name in self.request.form:
                 openids.remove(oid)
         if not openids and len(self.request.cfg.auth) == 1:
@@ -170,7 +171,7 @@ class Settings(UserPrefBase):
         _ = self.request.getText
         form = self._make_form()
         for oid in self.request.user.openids:
-            name = "rm-%s" % sha.new(oid).hexdigest()
+            name = "rm-%s" % hash_new('sha1', oid).hexdigest()
             form.append(html.INPUT(type="checkbox", name=name, id=name))
             form.append(html.LABEL(for_=name).append(html.Text(oid)))
             form.append(html.BR())

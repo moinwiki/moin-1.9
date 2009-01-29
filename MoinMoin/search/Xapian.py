@@ -282,12 +282,7 @@ class Index(BaseIndex):
         # do all page updates
         pages = self.update_queue.pages()[:amount]
         for name in pages:
-            p = Page(request, name)
-            if request.cfg.xapian_index_history:
-                for rev in p.getRevList():
-                    self._index_page(writer, Page(request, name, rev=rev), mode='update')
-            else:
-                self._index_page(writer, p, mode='update')
+            self._index_page(request, writer, name, mode='update')
             self.update_queue.remove([name])
 
         # do page/attachment removals
@@ -295,7 +290,7 @@ class Index(BaseIndex):
         for item in items:
             _item = item.split('//')
             p = Page(request, _item[0])
-            self._remove_item(writer, p, _item[1])
+            self._remove_item(request, writer, p, _item[1])
             self.remove_queue.remove([item])
 
         writer.close()
@@ -352,7 +347,7 @@ class Index(BaseIndex):
                 xwname = xapdoc.SortKey('wikiname', request.cfg.interwikiname or u"Self")
                 xpname = xapdoc.SortKey('pagename', fs_rootpage)
                 xattachment = xapdoc.SortKey('attachment', filename) # XXX we should treat files like real pages, not attachments
-                xmtime = xapdoc.SortKey('mtime', mtime)
+                xmtime = xapdoc.SortKey('mtime', str(mtime))
                 xrev = xapdoc.SortKey('revision', '0')
                 title = " ".join(os.path.join(fs_rootpage, filename).split("/"))
                 xtitle = xapdoc.Keyword('title', title)
@@ -432,15 +427,91 @@ class Index(BaseIndex):
         if wikiutil.isSystemPage(self.request, page.page_name):
             yield 'system'
 
-    def _index_page(self, writer, page, mode='update'):
+    def _index_page(self, request, writer, pagename, mode='update'):
         """ Index a page - assumes that the write lock is acquired
+
+        @arg writer: the index writer object
+        @arg pagename: a page name
+        @arg mode: 'add' = just add, no checks
+                   'update' = check if already in index and update if needed (mtime)
+        """
+        p = Page(request, pagename)
+        if request.cfg.xapian_index_history:
+            for rev in p.getRevList():
+                self._index_page_rev(request, writer, Page(request, pagename, rev=rev), mode=mode)
+        else:
+            self._index_page_rev(request, writer, p, mode=mode)
+
+        from MoinMoin.action import AttachFile
+        wikiname = request.cfg.interwikiname or u"Self"
+        # XXX: Hack until we get proper metadata
+        language, stem_language = self._get_languages(p)
+        domains = tuple(self._get_domains(p))
+        updated = False
+
+        attachments = AttachFile._get_files(request, pagename)
+        for att in attachments:
+            filename = AttachFile.getFilename(request, pagename, att)
+            att_itemid = "%s:%s//%s" % (wikiname, pagename, att)
+            mtime = wikiutil.timestamp2version(os.path.getmtime(filename))
+            if mode == 'update':
+                query = xapidx.RawQuery(xapdoc.makePairForWrite('itemid', att_itemid))
+                enq, mset, docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', ])
+                logging.debug("##%r %r" % (filename, docs))
+                if docs:
+                    doc = docs[0] # there should be only one
+                    uid = doc['uid']
+                    docmtime = long(doc['values']['mtime'])
+                    updated = mtime > docmtime
+                    logging.debug("uid %r: mtime %r > docmtime %r == updated %r" % (uid, mtime, docmtime, updated))
+                else:
+                    uid = None
+                    updated = True
+            elif mode == 'add':
+                updated = True
+            logging.debug("%s %s %r" % (pagename, att, updated))
+            if updated:
+                xatt_itemid = xapdoc.Keyword('itemid', att_itemid)
+                xpname = xapdoc.SortKey('pagename', pagename)
+                xwname = xapdoc.SortKey('wikiname', request.cfg.interwikiname or u"Self")
+                xattachment = xapdoc.SortKey('attachment', att) # this is an attachment, store its filename
+                xmtime = xapdoc.SortKey('mtime', str(mtime))
+                xrev = xapdoc.SortKey('revision', '0')
+                xtitle = xapdoc.Keyword('title', '%s/%s' % (pagename, att))
+                xlanguage = xapdoc.Keyword('lang', language)
+                xstem_language = xapdoc.Keyword('stem_lang', stem_language)
+                mimetype, att_content = self.contentfilter(filename)
+                xmimetypes = [xapdoc.Keyword('mimetype', mt) for mt in [mimetype, ] + mimetype.split('/')]
+                xcontent = xapdoc.TextField('content', att_content)
+                xtitle_txt = xapdoc.TextField('title', '%s/%s' % (pagename, att), True)
+                xfulltitle = xapdoc.Keyword('fulltitle', pagename)
+                xdomains = [xapdoc.Keyword('domain', domain) for domain in domains]
+                doc = xapdoc.Document(textFields=(xcontent, xtitle_txt),
+                                      keywords=xdomains + xmimetypes + [xatt_itemid,
+                                          xtitle, xlanguage, xstem_language,
+                                          xfulltitle, ],
+                                      sortFields=(xpname, xattachment, xmtime,
+                                          xwname, xrev, ),
+                                     )
+                doc.analyzerFactory = getWikiAnalyzerFactory(request, stem_language)
+                if mode == 'update':
+                    logging.debug("%s (replace %r)" % (pagename, uid))
+                    doc.uid = uid
+                    id = writer.index(doc)
+                elif mode == 'add':
+                    logging.debug("%s (add)" % (pagename, ))
+                    id = writer.index(doc)
+        #writer.flush()
+
+    def _index_page_rev(self, request, writer, page, mode='update'):
+        """ Index a page revision - assumes that the write lock is acquired
 
         @arg writer: the index writer object
         @arg page: a page object
         @arg mode: 'add' = just add, no checks
                    'update' = check if already in index and update if needed (mtime)
         """
-        request = page.request
+        request.page = page
         wikiname = request.cfg.interwikiname or u"Self"
         pagename = page.page_name
         mtime = page.mtime_usecs()
@@ -511,67 +582,8 @@ class Index(BaseIndex):
                 logging.debug("%s (add)" % (pagename, ))
                 id = writer.index(doc)
 
-        from MoinMoin.action import AttachFile
 
-        attachments = AttachFile._get_files(request, pagename)
-        for att in attachments:
-            filename = AttachFile.getFilename(request, pagename, att)
-            att_itemid = "%s:%s//%s" % (wikiname, pagename, att)
-            mtime = wikiutil.timestamp2version(os.path.getmtime(filename))
-            if mode == 'update':
-                query = xapidx.RawQuery(xapdoc.makePairForWrite('itemid', att_itemid))
-                enq, mset, docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', ])
-                logging.debug("##%r %r" % (filename, docs))
-                if docs:
-                    doc = docs[0] # there should be only one
-                    uid = doc['uid']
-                    docmtime = long(doc['values']['mtime'])
-                    updated = mtime > docmtime
-                    logging.debug("uid %r: mtime %r > docmtime %r == updated %r" % (uid, mtime, docmtime, updated))
-                else:
-                    uid = None
-                    updated = True
-            elif mode == 'add':
-                updated = True
-            logging.debug("%s %s %r" % (pagename, att, updated))
-            if updated:
-                xatt_itemid = xapdoc.Keyword('itemid', att_itemid)
-                xpname = xapdoc.SortKey('pagename', pagename)
-                xwname = xapdoc.SortKey('wikiname', request.cfg.interwikiname or u"Self")
-                xattachment = xapdoc.SortKey('attachment', att) # this is an attachment, store its filename
-                xmtime = xapdoc.SortKey('mtime', mtime)
-                xrev = xapdoc.SortKey('revision', '0')
-                xtitle = xapdoc.Keyword('title', '%s/%s' % (pagename, att))
-                xlanguage = xapdoc.Keyword('lang', language)
-                xstem_language = xapdoc.Keyword('stem_lang', stem_language)
-                mimetype, att_content = self.contentfilter(filename)
-                xmimetypes = [xapdoc.Keyword('mimetype', mt) for mt in [mimetype, ] + mimetype.split('/')]
-                xcontent = xapdoc.TextField('content', att_content)
-                xtitle_txt = xapdoc.TextField('title',
-                        '%s/%s' % (pagename, att), True)
-                xfulltitle = xapdoc.Keyword('fulltitle', pagename)
-                xdomains = [xapdoc.Keyword('domain', domain)
-                        for domain in domains]
-                doc = xapdoc.Document(textFields=(xcontent, xtitle_txt),
-                                      keywords=xdomains + xmimetypes + [xatt_itemid,
-                                          xtitle, xlanguage, xstem_language,
-                                          xfulltitle, ],
-                                      sortFields=(xpname, xattachment, xmtime,
-                                          xwname, xrev, ),
-                                     )
-                doc.analyzerFactory = getWikiAnalyzerFactory(request,
-                        stem_language)
-                if mode == 'update':
-                    logging.debug("%s (replace %r)" % (pagename, uid))
-                    doc.uid = uid
-                    id = writer.index(doc)
-                elif mode == 'add':
-                    logging.debug("%s (add)" % (pagename, ))
-                    id = writer.index(doc)
-        #writer.flush()
-
-    def _remove_item(self, writer, page, attachment=None):
-        request = page.request
+    def _remove_item(self, request, writer, page, attachment=None):
         wikiname = request.cfg.interwikiname or u'Self'
         pagename = page.page_name
 
@@ -627,15 +639,7 @@ class Index(BaseIndex):
             pages = request.rootpage.getPageList(user='', exists=1)
             logging.debug("indexing all (%d) pages..." % len(pages))
             for pagename in pages:
-                p = Page(request, pagename)
-                request.page = p
-                if request.cfg.xapian_index_history:
-                    for rev in p.getRevList():
-                        self._index_page(writer,
-                                Page(request, pagename, rev=rev),
-                                mode)
-                else:
-                    self._index_page(writer, p, mode)
+                self._index_page(request, writer, pagename, mode=mode)
             if files:
                 logging.debug("indexing all files...")
                 for fname in files:
