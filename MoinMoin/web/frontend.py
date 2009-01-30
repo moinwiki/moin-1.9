@@ -58,3 +58,4 @@ class ServerFrontEnd(FrontEnd):
 
 class FrontEndNotAvailable(Exception):
     """ Raised if a frontend is not available for one reason or another. """
+    pass
