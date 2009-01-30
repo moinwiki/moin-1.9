@@ -8,7 +8,6 @@
 import optparse
 
 from MoinMoin.web.serving import make_application
-
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
@@ -37,9 +36,9 @@ class FrontEnd(object):
             application = make_application(shared=options.htdocs)
         else:
             application = make_application()
-
         try:
-            self.run_server(application, options)
+            from MoinMoin.web.flup_frontend import FlupFrontEnd
+            return FlupFrontEnd().run_server(application, options)
         except:
             logging.error('Error while running %s', self.__class__.__name__)
             raise
