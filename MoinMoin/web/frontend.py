@@ -37,8 +37,12 @@ class FrontEnd(object):
         else:
             application = make_application()
         try:
-            from MoinMoin.web.flup_frontend import FlupFrontEnd
-            return FlupFrontEnd().run_server(application, options)
+            if self.__class__.__name__ == "CGIFrontEnd":
+                from MoinMoin.web._fallback_cgi import WSGIServer
+                return WSGIServer(application).run()
+            else:
+                from MoinMoin.web.flup_frontend import FlupFrontEnd
+                return FlupFrontEnd().run_server(application, options)
         except:
             logging.error('Error while running %s', self.__class__.__name__)
             raise
