@@ -279,7 +279,7 @@ class BaseIndex:
             return
 
         from threading import Thread
-        indexThread = Thread(target=self._index_pages, args=(files, mode))
+        indexThread = Thread(target=self._index_pages, args=(self.request, files, mode))
         indexThread.setDaemon(True)
 
         # Join the index thread after current request finish, prevent
@@ -403,12 +403,14 @@ class BaseIndex:
         """
         from MoinMoin.web.contexts import ScriptContext
         from MoinMoin.security import Permissions
-        request = ScriptContext(request.url)
+        from MoinMoin.logfile import editlog
+        r = ScriptContext(request.url)
         class SecurityPolicy(Permissions):
             def read(self, *args, **kw):
                 return True
-        request.user.may = SecurityPolicy(request.user)
-        return request
+        r.user.may = SecurityPolicy(r.user)
+        r.editlog = editlog.EditLog(r)
+        return r
 
     def _unsign(self):
         """ Remove sig file - assume write lock acquired """
@@ -636,12 +638,12 @@ class Search:
             wikiname = valuedict['wikiname']
             pagename = valuedict['pagename']
             attachment = valuedict['attachment']
-            logging.debug("_getHits processing %r %r %r" % (wikiname, pagename, attachment))
 
             if 'revision' in valuedict and valuedict['revision']:
                 revision = int(valuedict['revision'])
             else:
                 revision = 0
+            logging.debug("_getHits processing %r %r %d %r" % (wikiname, pagename, revision, attachment))
 
             if wikiname in (self.request.cfg.interwikiname, 'Self'): # THIS wiki
                 page = Page(self.request, pagename, rev=revision)
@@ -650,14 +652,16 @@ class Search:
                     # revlist can be empty if page was nuked/renamed since it was included in xapian index
                     if not revlist or revlist[0] != revision:
                         # nothing there at all or not the current revision
+                        logging.debug("no history search, skipping non-current revision...")
                         continue
                 if attachment:
+                    # revision currently is 0 ever
                     if pagename == fs_rootpage: # not really an attachment
                         page = Page(self.request, "%s/%s" % (fs_rootpage, attachment))
-                        hits.append((wikiname, page, None, None))
+                        hits.append((wikiname, page, None, None, revision))
                     else:
                         matches = matchSearchFunction(page=None, uid=uid)
-                        hits.append((wikiname, page, attachment, matches))
+                        hits.append((wikiname, page, attachment, matches, revision))
                 else:
                     matches = matchSearchFunction(page=page, uid=uid)
                     logging.debug("matchSearchFunction %r returned %r" % (matchSearchFunction, matches))
@@ -667,10 +671,11 @@ class Search:
                                 revisionCache[pagename][0] < revision:
                             hits.remove(revisionCache[pagename][1])
                             del revisionCache[pagename]
-                        hits.append((wikiname, page, attachment, matches))
+                        hits.append((wikiname, page, attachment, matches, revision))
                         revisionCache[pagename] = (revision, hits[-1])
             else: # other wiki
                 hits.append((wikiname, pagename, attachment, None, revision))
+        logging.debug("_getHits returning %r." % hits)
         return hits
 
     def _getPageList(self):
@@ -697,8 +702,8 @@ class Search:
         userMayRead = self.request.user.may.read
         fs_rootpage = self.fs_rootpage + "/"
         thiswiki = (self.request.cfg.interwikiname, 'Self')
-        filtered = [(wikiname, page, attachment, match)
-                for wikiname, page, attachment, match in hits
+        filtered = [(wikiname, page, attachment, match, rev)
+                for wikiname, page, attachment, match, rev in hits
                     if (not wikiname in thiswiki or
                        page.exists() and userMayRead(page.page_name) or
                        page.page_name.startswith(fs_rootpage)) and
