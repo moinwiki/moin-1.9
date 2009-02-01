@@ -50,7 +50,7 @@ class ProxyTrust(object):
         self.app = app
         self.proxies = proxies
 
-    def __call__(environ, start_response):
+    def __call__(self, environ, start_response):
         if 'HTTP_X_FORWARDED_FOR' in environ:
             addrs = environ.pop('HTTP_X_FORWARDED_FOR').split(',')
             addrs = [x.strip() for addr in addrs]
