@@ -58,23 +58,19 @@ if have_flup:
 
         def run_server(self, application, options):
             server_type = options.server_type
-            # ToDo solve server_types mismatch of definitions
-            server_types = ['single', 'threaded']
 
             if not server_type:
-                if 'single' in server_types:
+                if 'single' in self.server_types:
                     server_type = (options.port and 'threaded') or 'single'
                 else:
                     server_type = 'threaded'
 
-            if server_type not in server_types:
+            if server_type not in self.server_types:
                 raise TypeError("Unknown server type '%s'" % options.server_type)
 
             multi = server_type in ('threaded', 'forking')
-            # ToDo find a better solution, there are more servers available
-            server_types = {'single': 'flup.server.fcgi_single',
-                            'threaded': 'flup.server.fcgi'}
-            mod = server_types[server_type]
+
+            mod = self.server_types[server_type]
             mod = __import__(mod, fromlist=['WSGIServer'])
             WSGIServer = mod.WSGIServer
 
