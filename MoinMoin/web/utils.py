@@ -12,6 +12,7 @@ from werkzeug.exceptions import abort
 from werkzeug.utils import redirect, cookie_date
 from werkzeug.wrappers import Response
 
+from MoinMoin import caching
 from MoinMoin import log
 from MoinMoin import wikiutil
 from MoinMoin.Page import Page
