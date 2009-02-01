@@ -837,7 +837,7 @@ def getInterwikiHomePage(request, username=None):
 
     homewiki = request.cfg.user_homewiki
     if homewiki == request.cfg.interwikiname:
-        homewiki = 'Self'
+        homewiki = u'Self'
 
     return homewiki, username
 

@@ -20,6 +20,7 @@ body {
 
 a {color: #0044B3;}
 a:visited {color: #597BB3;}
+a.nonexistent:visited, a.badinterwiki:visited,
 a.nonexistent, a.badinterwiki {color: gray;}
 
 a.www:before {content: url(../img/moin-www.png); margin: 0 0.2em;}

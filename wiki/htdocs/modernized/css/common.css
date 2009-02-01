@@ -21,7 +21,9 @@ body {
 a {color: #0044B3;}
 /* a:visited {color: #597BB3;} */
 a:visited {color: #FF7BB3;}
-a.nonexistent, a.badinterwiki {color: gray;}
+
+a.nonexistent:visited, a.nonexistent, 
+a.badinterwiki:visited, a.badinterwiki {color: gray;}
 
 a.www:before {content: url(../img/moin-www.png); margin: 0 0.2em;}
 a.http:before {content: url(../img/moin-www.png); margin: 0 0.2em;}
