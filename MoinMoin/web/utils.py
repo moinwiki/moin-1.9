@@ -103,7 +103,7 @@ def check_surge_protect(request, kick=False):
             events = surgedict.setdefault(current_id, {})
             timestamps = events.setdefault(current_action, [])
 
-            if kick_him: # ban this guy, NOW
+            if kick: # ban this guy, NOW
                 timestamps.extend([(now + request.cfg.surge_lockout_time, "!")] * (2 * maxnum))
 
             surge_detected = surge_detected or len(timestamps) > maxnum
