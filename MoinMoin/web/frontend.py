@@ -40,9 +40,13 @@ class FrontEnd(object):
 
         try:
             self.run_server(application, options)
+        except SystemExit, err:
+            # the flup CGIRequest uses sys.exit(0) to terminate
+            if err.code: # log a non-zero exit status (0 means no error)
+                logging.exception('A SystemExit(%d) exception occurred.' % err.code)
+            raise # exit now with this exit status
         except:
-            logging.error('Error while running %s', self.__class__.__name__)
-            raise
+            logging.exception('An exception occurred while running %s' % self.__class__.__name__)
 
 class ServerFrontEnd(FrontEnd):
     def add_options(self):
