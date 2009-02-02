@@ -32,7 +32,7 @@ def init(request):
 
     context.lang = setup_i18n_preauth(context)
 
-    context.session = context.cfg.session_service.get_session(request)
+    context.session = context.cfg.session_service.get_session(context)
 
     context.user = setup_user(context, context.session)
 

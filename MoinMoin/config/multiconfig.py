@@ -251,6 +251,11 @@ class ConfigFunctionality(object):
             name = dirname + '_dir'
             if not getattr(self, name, None):
                 setattr(self, name, os.path.abspath(os.path.join(data_dir, dirname)))
+        # directories below cache_dir (using __dirname__ to avoid conflicts)
+        for dirname in ('session', ):
+            name = dirname + '_dir'
+            if not getattr(self, name, None):
+                setattr(self, name, os.path.abspath(os.path.join(self.cache_dir, '__%s__' % dirname)))
 
         # Try to decode certain names which allow unicode
         self._decode()
@@ -898,6 +903,7 @@ options_no_group_name = {
     ('data_dir', './data/', "Path to the data directory containing your (locally made) wiki pages."),
     ('data_underlay_dir', './underlay/', "Path to the underlay directory containing distribution system and help pages."),
     ('cache_dir', None, "Directory for caching, by default computed from `data_dir`/cache."),
+    ('session_dir', None, "Directory for session storage, by default computed to be `cache_dir`/__session__."),
     ('user_dir', None, "Directory for user storage, by default computed to be `data_dir`/user."),
     ('plugin_dir', None, "Plugin directory, by default computed to be `data_dir`/plugin."),
     ('plugin_dirs', [], "Additional plugin directories."),
