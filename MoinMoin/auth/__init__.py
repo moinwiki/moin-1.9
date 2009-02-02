@@ -302,6 +302,12 @@ def handle_login(request, userobj=None, username=None, password=None,
 
 def handle_logout(request, userobj):
     """ Logout the passed user from every configured authentication method. """
+    if userobj.auth_method == 'setuid':
+        # we have no authmethod object for setuid
+        userobj = request._setuid_real_user
+        del request._setuid_real_user
+        return userobj
+
     for authmethod in request.cfg.auth:
         userobj, cont = authmethod.logout(request, userobj, cookie=request.cookies)
         if not cont:
@@ -331,6 +337,7 @@ def setup_setuid(request, userobj):
         uid = request.session['setuid']
         userobj = user.User(request, uid, auth_method='setuid')
         userobj.valid = True
+    logging.debug("setup_suid returns %r, %r" % (userobj, old_user))
     return (userobj, old_user)
 
 def setup_from_session(request, session):
@@ -339,10 +346,12 @@ def setup_from_session(request, session):
         auth_userid = session['user.id']
         auth_method = session['user.auth_method']
         auth_attrs = session['user.auth_attribs']
-        if auth_method and auth_method in \
-                [auth.name for auth in request.cfg.auth]:
+        logging.debug("got from session: %r %r" % (auth_userid, auth_method))
+        logging.debug("current auth methods: %r" % request.cfg.auth_methods)
+        if auth_method and auth_method in request.cfg.auth_methods:
             userobj = user.User(request, id=auth_userid,
                                 auth_method=auth_method,
                                 auth_attribs=auth_attrs)
     logging.debug("session started for user %r", userobj)
     return userobj
+
