@@ -39,18 +39,6 @@ from MoinMoin import caching
 from MoinMoin import session
 
 
-class XmlRpcAuthTokenIDHandler(session.SessionIDHandler):
-    def __init__(self, token=None):
-        session.SessionIDHandler.__init__(self)
-        self.token = token
-
-    def get(self, request):
-        return self.token
-
-    def set(self, request, session_id, expires):
-        self.token = session_id
-
-
 logging_tearline = '- XMLRPC %s ' + '-' * 40
 
 class XmlRpcBase:
@@ -679,17 +667,19 @@ class XmlRpcBase:
         """ Returns a token which can be used for authentication
             in other XMLRPC calls. If the token is empty, the username
             or the password were wrong.
-        """
-        id_handler = XmlRpcAuthTokenIDHandler()
-        request = self.request
 
+            Implementation note: token is same as cookie content would be for http session
+        """
+        request = self.request
         request.session = request.cfg.session_service.get_session(request)
 
         u = auth.setup_from_session(request, request.session)
         u = auth.handle_login(request, u, username=username, password=password)
 
         if u and u.valid:
-            return id_handler.token
+            request.user = u
+            request.cfg.session_service.finalize(request, request.session)
+            return request.session.sid
         else:
             return ""
 
@@ -717,11 +707,10 @@ class XmlRpcBase:
         if not auth_token:
             return xmlrpclib.Fault("INVALID", "Empty token.")
 
-        id_handler = XmlRpcAuthTokenIDHandler(auth_token)
+        request = self.request
+        request.session = request.cfg.session_service.get_session(request, auth_token)
+        u = auth.setup_from_session(request, request.session)
 
-        u = self.request.cfg.session_handler.start(self.request, id_handler)
-        u = self.request.handle_auth(u)
-        self.request.cfg.session_handler.after_auth(self.request, id_handler, u)
         if u and u.valid:
             self.request.user = u
             return "SUCCESS"
@@ -731,13 +720,12 @@ class XmlRpcBase:
 
     def xmlrpc_deleteAuthToken(self, auth_token):
         """ Delete the given auth token. """
-        id_handler = XmlRpcAuthTokenIDHandler(auth_token)
+        if not auth_token:
+            return xmlrpclib.Fault("INVALID", "Empty token.")
 
-        u = self.request.cfg.session_handler.start(self.request, id_handler)
-        u = self.request.handle_auth(u)
-        self.request.cfg.session_handler.after_auth(self.request, id_handler, u)
-
-        self.request.session.delete()
+        request = self.request
+        request.session = request.cfg.session_service.get_session(request, auth_token)
+        request.cfg.session_service.destroy_session(request, request.session)
 
         return "SUCCESS"
 
