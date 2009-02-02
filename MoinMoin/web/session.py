@@ -30,7 +30,7 @@ class SessionService(object):
     A session service returns a session object given a request object and
     provides services like persisting sessions and cleaning up occasionally.
     """
-    def get_session(self, request):
+    def get_session(self, request, sid=None):
         """ Return a session object pertaining to the particular request."""
         raise NotImplementedError
 
@@ -58,8 +58,9 @@ class FileSessionService(SessionService):
         self.store = FilesystemSessionStore(session_class=MoinSession)
         self.cookie_name = cookie_name
 
-    def get_session(self, request):
-        sid = request.cookies.get(self.cookie_name, None)
+    def get_session(self, request, sid=None):
+        if sid is None:
+            sid = request.cookies.get(self.cookie_name, None)
         if sid is None:
             session = self.store.new()
         else:
@@ -97,3 +98,4 @@ class FileSessionService(SessionService):
 
         if session.should_save:
             self.store.save(session)
+
