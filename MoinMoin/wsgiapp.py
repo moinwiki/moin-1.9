@@ -34,14 +34,7 @@ def init(request):
 
     context.session = context.cfg.session_service.get_session(request)
 
-    userobj = setup_user(context, context.session)
-    userobj, olduser = auth.setup_setuid(context, userobj)
-
-    if not userobj:
-        userobj = user.User(context, auth_method='request:invalid')
-
-    context.user = userobj
-    context._setuid_realuser = olduser
+    context.user = setup_user(context, context.session)
 
     context.lang = setup_i18n_postauth(context)
 
@@ -184,6 +177,10 @@ def setup_user(context, session):
     either through the session or through a login. """
     # first try setting up from session
     userobj = auth.setup_from_session(context, session)
+    userobj, olduser = auth.setup_setuid(context, userobj)
+    context._setuid_real_user = olduser
+    if not userobj:
+        userobj = user.User(context, auth_method='invalid')
 
     # then handle login/logout forms
     form = context.request.values

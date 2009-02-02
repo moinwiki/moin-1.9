@@ -319,6 +319,7 @@ class ConfigFunctionality(object):
                 if not input in self.auth_login_inputs:
                     self.auth_login_inputs.append(input)
         self.auth_have_login = len(self.auth_login_inputs) > 0
+        self.auth_methods = found_names
 
         # internal dict for plugin `modules' lists
         self._site_plugin_lists = {}

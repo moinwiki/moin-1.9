@@ -72,13 +72,21 @@ class FileSessionService(SessionService):
         self.store.delete(session)
 
     def finalize(self, request, session):
-        userobj = request.user
+        if request.user.auth_method == 'setuid':
+            userobj = request._setuid_real_user
+            setuid = request.user.id
+        else:
+            userobj = request.user
+            setuid = None
+        logging.debug("finalize userobj = %r, setuid = %r" % (userobj, setuid))
         if userobj and userobj.valid:
-            if 'user.id' in session and session['user.id'] != userobj.id:
-                request.cfg.session_service.delete(session)
             session['user.id'] = userobj.id
             session['user.auth_method'] = userobj.auth_method
             session['user.auth_attribs'] = userobj.auth_attribs
+            if setuid:
+                session['setuid'] = setuid
+            elif 'setuid' in session:
+                del session['setuid']
             logging.debug("after auth: storing valid user into session: %r" % userobj.name)
         else:
             if 'user.id' in session:
