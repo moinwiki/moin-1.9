@@ -179,8 +179,6 @@ def setup_user(context, session):
     userobj = auth.setup_from_session(context, session)
     userobj, olduser = auth.setup_setuid(context, userobj)
     context._setuid_real_user = olduser
-    if not userobj:
-        userobj = user.User(context, auth_method='invalid')
 
     # then handle login/logout forms
     form = context.request.values
@@ -198,6 +196,10 @@ def setup_user(context, session):
         userobj = auth.handle_logout(context, userobj)
     else:
         userobj = auth.handle_request(context, userobj)
+
+    # if we still have no user obj, create a dummy:
+    if not userobj:
+        userobj = user.User(context, auth_method='invalid')
 
     return userobj
 
