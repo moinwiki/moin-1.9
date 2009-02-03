@@ -31,5 +31,9 @@ import sys, os
 #from MoinMoin import log
 #log.load_config('/path/to/logging_configuration_file')
 
+# this works around a bug in flup's CGI autodetection (as of flup 1.0.1):
+os.environ['FCGI_FORCE_CGI'] = 'Y' # 'Y' for (slow) CGI, 'N' for FCGI
+
 from MoinMoin.web.flup_frontend import CGIFrontEnd
 CGIFrontEnd().run()
+
