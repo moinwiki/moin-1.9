@@ -603,7 +603,7 @@ class XMPPBot(Client, Thread):
                   }
 
         data = {'text': message, 'subject': msg_data.get('subject', '')}
-        self.send_message(jid, data, u"message")
+        self.send_message(jid, data, u"normal")
 
     def send_deleted_form(self, jid, msg_data):
         """Sends a page deleted notification using Data Forms
@@ -669,7 +669,7 @@ class XMPPBot(Client, Thread):
                   }
 
         data = {'text': message, 'subject': msg_data.get('subject', '')}
-        self.send_message(jid, data, u"message")
+        self.send_message(jid, data, u"normal")
 
     def send_attached_form(self, jid, msg_data):
         """Sends a new attachment notification using Data Forms
@@ -739,7 +739,7 @@ class XMPPBot(Client, Thread):
                   }
 
         data = {'text': message, 'subject': msg_data['subject']}
-        self.send_message(jid, data, u"message")
+        self.send_message(jid, data, u"normal")
 
     def send_renamed_form(self, jid, msg_data):
         """Sends a page rename notification using Data Forms
@@ -813,7 +813,7 @@ class XMPPBot(Client, Thread):
                   }
 
         data = {'text': message, 'subject': msg_data['subject']}
-        self.send_message(jid, data, u"message")
+        self.send_message(jid, data, u"normal")
 
     def handle_page_info(self, command):
         """Handles GetPageInfo commands
@@ -983,7 +983,7 @@ Current version: %(version)s""") % {
                 self.handle_search_form(jid, form)
             else:
                 data = {'text': _('The form you submitted was invalid!'), 'subject': _('Invalid data')}
-                self.send_message(jid.as_unicode(), data, u"message")
+                self.send_message(jid.as_unicode(), data, u"normal")
         elif "options" in form:
             option = form["options"].value
 
@@ -1022,7 +1022,7 @@ Current version: %(version)s""") % {
         for field in required_fields:
             if field not in form:
                 data = {'text': _('The form you submitted was invalid!'), 'subject': _('Invalid data')}
-                self.send_message(jid.as_unicode(), data, u"message")
+                self.send_message(jid.as_unicode(), data, u"normal")
 
         case_sensitive = form['case'].value
         regexp_terms = form['regexp'].value
