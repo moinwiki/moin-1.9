@@ -78,8 +78,8 @@ if have_flup:
 
             if options.port:
                 kwargs['bindAddress'] = (options.interface, options.port)
-            elif options.interface.startswith('/') or \
-                    options.interface.startswith('./'):
+            elif options.interface and (
+                 options.interface.startswith('/') or options.interface.startswith('./')):
                 kwargs['bindAddress'] = options.interface
 
             if options.min_spare and multi:
@@ -91,7 +91,7 @@ if have_flup:
                     kwargs['maxThreads'] = options.max_childs
                 else:
                     kwargs['maxChildren'] = options.max_childs
-
+            logging.debug("WSGIServer(%r, %r)" % (application, kwargs))
             return WSGIServer(application, **kwargs).run()
 
     class CGIFrontEnd(FlupFrontEnd):
