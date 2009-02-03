@@ -2,20 +2,20 @@
 """
     MoinMoin - http authentication
 
-    You need either your webserver configured for doing HTTP auth (like Apache
-    reading some .htpasswd file) or Twisted (will accept HTTP auth against
-    password stored in moin user profile, but currently will NOT ask for auth)
-    or Standalone (in which case it will ask for auth and accept auth against
-    stored user profile.)
+    You need your webserver configured for doing authentication (like Apache
+    reading some .htpasswd file and requesting http basic auth) and pass the
+    authenticated username as REMOTE_USER environment var.
 
-    @copyright: 2006 MoinMoin:ThomasWaldmann
+    @copyright: 2006-2009 MoinMoin:ThomasWaldmann
                 2007 MoinMoin:JohannesBerg
     @license: GNU GPL, see COPYING for details.
 """
 
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin import config, user
 from MoinMoin.auth import BaseAuth
-from base64 import decodestring
 
 class HTTPAuth(BaseAuth):
     """ authenticate via http basic/digest/ntlm auth """
@@ -33,11 +33,13 @@ class HTTPAuth(BaseAuth):
             user_obj = None
         # something else authenticated before us
         if user_obj:
+            logging.debug("already authenticated, doing nothing")
             return user_obj, True
 
-        authobj = request.authorization
-        if authobj:
-            u = user.User(request, auth_username=authobj.username,
+        auth_username = request.remote_user
+        logging.debug("REMOTE_USER = %r" % auth_username)
+        if auth_username:
+            u = user.User(request, auth_username=auth_username.decode('utf-8'), # XXX correct?
                           auth_method=self.name, auth_attribs=('name', 'password'))
 
         if u and self.autocreate:
@@ -46,3 +48,4 @@ class HTTPAuth(BaseAuth):
             return u, True # True to get other methods called, too
         else:
             return user_obj, True
+
