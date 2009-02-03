@@ -266,11 +266,61 @@ class GivenAuth(BaseAuth):
     """
     name = 'given' # was 'http' in 1.8.x and before
 
-    def __init__(self, env_var=None, user_name=None, autocreate=False):
+    def __init__(self,
+                 env_var=None,  # environment variable we want to read (default: REMOTE_USER)
+                 user_name=None,  # can be used to just give a specific user name to log in
+                 autocreate=False,  # create/update the user profile for the auth. user
+                 strip_maildomain=False,  # joe@example.org -> joe
+                 strip_windomain=False,  # DOMAIN\joe -> joe
+                 titlecase=False,  # joe doe -> Joe Doe
+                 remove_blanks=False,  # Joe Doe -> JoeDoe
+                 coding=None,  # for decoding REMOTE_USER correctly (default: auto)
+                ):
         self.env_var = env_var
         self.user_name = user_name
         self.autocreate = autocreate
+        self.strip_maildomain = strip_maildomain
+        self.strip_windomain = strip_windomain
+        self.titlecase = titlecase
+        self.remove_blanks = remove_blanks
+        self.coding = coding
         BaseAuth.__init__(self)
+
+    def decode_username(self, name):
+        """ decode the name we got from the environment var to unicode """
+        if isinstance(name, str):
+            if self.coding:
+                name = name.decode(self.coding)
+            else:
+                # XXX we have no idea about REMOTE_USER encoding, please help if
+                # you know how to do that cleanly
+                name = wikiutil.decodeUnknownInput(name)
+        return name
+
+    def transform_username(self, name):
+        """ transform the name we got (unicode in, unicode out)
+
+            Note: if you need something more special, you could create your own
+                  auth class, inherit from this class and overwrite this function.
+        """
+        assert isinstance(name, unicode)
+        if self.strip_maildomain:
+            # split off mail domain, e.g. "user@example.org" -> "user"
+            name = name.split(u'@')[0]
+
+        if self.strip_windomain:
+            # split off window domain, e.g. "DOMAIN\user" -> "user"
+            name = name.split(u'\\')[-1]
+
+        if self.titlecase:
+            # this "normalizes" the login name, e.g. meier, Meier, MEIER -> Meier
+            name = name.title()
+
+        if self.remove_blanks:
+            # remove blanks e.g. "Joe Doe" -> "JoeDoe"
+            name = u''.join(name.split())
+
+        return name
 
     def request(self, request, user_obj, **kw):
         u = None
@@ -292,8 +342,9 @@ class GivenAuth(BaseAuth):
 
         logging.debug("auth_username = %r" % auth_username)
         if auth_username:
-            if isinstance(auth_username, str):
-                auth_username = auth_username.decode('utf-8') # XXX correct?
+            auth_username = self.decode_username(auth_username)
+            auth_username = self.transform_username(auth_username)
+            logging.debug("auth_username (after decode/transform) = %r" % auth_username)
             u = user.User(request, auth_username=auth_username,
                           auth_method=self.name, auth_attribs=('name', 'password'))
 
