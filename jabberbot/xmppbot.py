@@ -417,8 +417,9 @@ class XMPPBot(Client, Thread):
         @type contact: Contact
 
         """
-        pass
-
+        # TODO: send as form if user-client supports it
+        self.send_user_created_text(jid.as_unicode(), cmd_data)
+        
     def ask_for_subscription(self, jid):
         """Sends a <presence/> stanza with type="subscribe"
 
@@ -811,6 +812,21 @@ class XMPPBot(Client, Thread):
                     'comment': msg_data.get('comment', _('no comment')),
                     'links': urls_text,
                   }
+
+        data = {'text': message, 'subject': msg_data['subject']}
+        self.send_message(jid, data, u"normal")
+
+    def send_user_created_text(self, jid, msg_data):
+        """Sends a simple, text page user-created-notification
+
+        @param jid: a Jabber ID to send the notification to
+        @type jid: unicode
+        @param msg_data: dictionary with notification data
+        @type msg_data: dict
+
+        """
+        _ = self.get_text(jid)
+        message = _("%(text)s") % {'text': msg_data['text']}
 
         data = {'text': message, 'subject': msg_data['subject']}
         self.send_message(jid, data, u"normal")
