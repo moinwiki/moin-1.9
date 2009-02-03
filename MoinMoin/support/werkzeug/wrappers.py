@@ -297,7 +297,7 @@ class BaseRequest(object):
         return self.environ.get('REMOTE_ADDR')
     remote_addr = property(remote_addr)
 
-    remote_user = environ_property('REMOTE_ADDR', doc='''
+    remote_user = environ_property('REMOTE_USER', doc='''
         If the server supports user authentication, and the script is
         protected, this attribute contains the username the user has
         authenticated as.''')
