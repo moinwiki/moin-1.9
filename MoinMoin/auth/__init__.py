@@ -128,7 +128,7 @@
     @copyright: 2005-2006 Bastian Blank, Florian Festi,
                           MoinMoin:AlexanderSchremmer, Nick Phillips,
                           MoinMoin:FrankieChow, MoinMoin:NirSoffer,
-                2005-2008 MoinMoin:ThomasWaldmann,
+                2005-2009 MoinMoin:ThomasWaldmann,
                 2007      MoinMoin:JohannesBerg
 
     @license: GNU GPL, see COPYING for details.
@@ -254,6 +254,56 @@ class MoinAuth(BaseAuth):
                  '<a href="%(sendmypasswordlink)s">Forgot your password?</a>') % {
                'userprefslink': userprefslink,
                'sendmypasswordlink': sendmypasswordlink}
+
+
+class GivenAuth(BaseAuth):
+    """ reuse a given authentication, e.g. http basic auth (or any other auth)
+        done by the web server, that sets REMOTE_USER environment variable.
+        This is the default behaviour.
+        You can also specify to read another environment variable (env_var).
+        Alternatively you can directly give a fixed user name (user_name)
+        that will be considered as authenticated.
+    """
+    name = 'given' # was 'http' in 1.8.x and before
+
+    def __init__(self, env_var=None, user_name=None, autocreate=False):
+        self.env_var = env_var
+        self.user_name = user_name
+        self.autocreate = autocreate
+        BaseAuth.__init__(self)
+
+    def request(self, request, user_obj, **kw):
+        u = None
+        _ = request.getText
+        # always revalidate auth
+        if user_obj and user_obj.auth_method == self.name:
+            user_obj = None
+        # something else authenticated before us
+        if user_obj:
+            logging.debug("already authenticated, doing nothing")
+            return user_obj, True
+
+        if self.user_name is not None:
+            auth_username = self.user_name
+        elif self.env_var is None:
+            auth_username = request.remote_user
+        else:
+            auth_username = request.environ.get(self.env_var)
+
+        logging.debug("auth_username = %r" % auth_username)
+        if auth_username:
+            if isinstance(auth_username, str):
+                auth_username = auth_username.decode('utf-8') # XXX correct?
+            u = user.User(request, auth_username=auth_username,
+                          auth_method=self.name, auth_attribs=('name', 'password'))
+
+        if u and self.autocreate:
+            u.create_or_update()
+        if u and u.valid:
+            return u, True # True to get other methods called, too
+        else:
+            return user_obj, True
+
 
 def handle_login(request, userobj=None, username=None, password=None,
                  attended=True, openid_identifier=None, stage=None):
