@@ -438,7 +438,11 @@ class Index(BaseIndex):
         p = Page(request, pagename)
         if request.cfg.xapian_index_history:
             for rev in p.getRevList():
-                self._index_page_rev(request, writer, Page(request, pagename, rev=rev), mode=mode)
+                updated = self._index_page_rev(request, writer, Page(request, pagename, rev=rev), mode=mode)
+                logging.debug("updated page %r rev %d (updated==%r)" % (pagename, rev, updated))
+                if not updated:
+                    # we reached the revisions that are already present in the index
+                    break
         else:
             self._index_page_rev(request, writer, p, mode=mode)
 
@@ -581,7 +585,7 @@ class Index(BaseIndex):
             elif mode == 'add':
                 logging.debug("%s (add)" % (pagename, ))
                 id = writer.index(doc)
-
+        return updated
 
     def _remove_item(self, request, writer, page, attachment=None):
         wikiname = request.cfg.interwikiname or u'Self'
