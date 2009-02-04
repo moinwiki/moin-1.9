@@ -38,7 +38,7 @@ class Config(DefaultConfig):
     # Wiki logo. You can use an image, text or both. [Unicode]
     # For no logo or text, use '' - the default is to show the sitename.
     # See also url_prefix setting below!
-    logo_string = u'<img src="/moin_static181/common/moinmoin.png" alt="MoinMoin Logo">'
+    logo_string = u'<img src="/moin_static182/common/moinmoin.png" alt="MoinMoin Logo">'
 
     # name of entry page / front page [Unicode], choose one of those:
 
@@ -76,12 +76,12 @@ class Config(DefaultConfig):
 
     # The URL prefix we use to access the static stuff (img, css, js).
     # NOT touching this is maybe the best way to handle this setting as moin
-    # uses a good internal default (something like '/moin_static181' for moin
-    # version 1.8.1).
+    # uses a good internal default (something like '/moin_static182' for moin
+    # version 1.8.2).
     # For Twisted and standalone server, the default will automatically work.
     # For others, you should make a matching server config (e.g. an Apache
     # Alias definition pointing to the directory with the static stuff).
-    #url_prefix_static = '/moin_static181'
+    #url_prefix_static = '/moin_static182'
 
 
     # Security ----------------------------------------------------------

@@ -31,7 +31,7 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
-Version 1.8.current:
+Version 1.8.2:
   Bug fixes:
     * Fix AttachFile XSS issues.
     * Fix anchor parsing for interwiki links and #redirect processing
