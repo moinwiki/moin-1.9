@@ -106,7 +106,7 @@ class Settings(UserPrefBase):
                                          'handler': 'oid',
                                          'oid.return': '1'})
         return_to = request.getQualifiedURL(request.page.url(request, qstr))
-        info = oidconsumer.complete(query, return_to=return_to)
+        info = oidconsumer.complete(query, return_to)
         if info.status == consumer.FAILURE:
             return 'error', _('OpenID error: %s.') % info.message
         elif info.status == consumer.CANCEL:

@@ -417,8 +417,9 @@ class XMPPBot(Client, Thread):
         @type contact: Contact
 
         """
-        pass
-
+        # TODO: send as form if user-client supports it
+        self.send_user_created_text(jid.as_unicode(), cmd_data)
+        
     def ask_for_subscription(self, jid):
         """Sends a <presence/> stanza with type="subscribe"
 
@@ -603,7 +604,7 @@ class XMPPBot(Client, Thread):
                   }
 
         data = {'text': message, 'subject': msg_data.get('subject', '')}
-        self.send_message(jid, data, u"message")
+        self.send_message(jid, data, u"normal")
 
     def send_deleted_form(self, jid, msg_data):
         """Sends a page deleted notification using Data Forms
@@ -669,7 +670,7 @@ class XMPPBot(Client, Thread):
                   }
 
         data = {'text': message, 'subject': msg_data.get('subject', '')}
-        self.send_message(jid, data, u"message")
+        self.send_message(jid, data, u"normal")
 
     def send_attached_form(self, jid, msg_data):
         """Sends a new attachment notification using Data Forms
@@ -739,7 +740,7 @@ class XMPPBot(Client, Thread):
                   }
 
         data = {'text': message, 'subject': msg_data['subject']}
-        self.send_message(jid, data, u"message")
+        self.send_message(jid, data, u"normal")
 
     def send_renamed_form(self, jid, msg_data):
         """Sends a page rename notification using Data Forms
@@ -813,7 +814,22 @@ class XMPPBot(Client, Thread):
                   }
 
         data = {'text': message, 'subject': msg_data['subject']}
-        self.send_message(jid, data, u"message")
+        self.send_message(jid, data, u"normal")
+
+    def send_user_created_text(self, jid, msg_data):
+        """Sends a simple, text page user-created-notification
+
+        @param jid: a Jabber ID to send the notification to
+        @type jid: unicode
+        @param msg_data: dictionary with notification data
+        @type msg_data: dict
+
+        """
+        _ = self.get_text(jid)
+        message = _("%(text)s") % {'text': msg_data['text']}
+
+        data = {'text': message, 'subject': msg_data['subject']}
+        self.send_message(jid, data, u"normal")
 
     def handle_page_info(self, command):
         """Handles GetPageInfo commands
@@ -983,7 +999,7 @@ Current version: %(version)s""") % {
                 self.handle_search_form(jid, form)
             else:
                 data = {'text': _('The form you submitted was invalid!'), 'subject': _('Invalid data')}
-                self.send_message(jid.as_unicode(), data, u"message")
+                self.send_message(jid.as_unicode(), data, u"normal")
         elif "options" in form:
             option = form["options"].value
 
@@ -1022,7 +1038,7 @@ Current version: %(version)s""") % {
         for field in required_fields:
             if field not in form:
                 data = {'text': _('The form you submitted was invalid!'), 'subject': _('Invalid data')}
-                self.send_message(jid.as_unicode(), data, u"message")
+                self.send_message(jid.as_unicode(), data, u"normal")
 
         case_sensitive = form['case'].value
         regexp_terms = form['regexp'].value

@@ -388,7 +388,7 @@ def send_link_rel(request, pagename):
     for fname in files:
         url = getAttachUrl(pagename, fname, request, do='view', escaped=1)
         request.write(u'<link rel="Appendix" title="%s" href="%s">\n' % (
-                      wikiutil.escape(fname), url))
+                      wikiutil.escape(fname, 1), url))
 
 
 def send_hotdraw(pagename, request):
@@ -427,7 +427,7 @@ def send_hotdraw(pagename, request):
     'pngpath': pngpath, 'timestamp': timestamp,
     'pubpath': pubpath, 'drawpath': drawpath,
     'savelink': savelink, 'pagelink': pagelink, 'helplink': helplink,
-    'basename': wikiutil.escape(basename),
+    'basename': wikiutil.escape(basename, 1),
 })
 
 
