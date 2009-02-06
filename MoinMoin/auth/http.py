@@ -4,7 +4,7 @@
 
     This is just a dummy redirecting to MoinMoin.auth.GivenAuth for backwards
     compatibility.
-    
+
     Please fix your setup, this dummy will be removed soon:
 
     Old (1.8.x):

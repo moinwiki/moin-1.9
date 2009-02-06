@@ -419,7 +419,7 @@ class XMPPBot(Client, Thread):
         """
         # TODO: send as form if user-client supports it
         self.send_user_created_text(jid.as_unicode(), cmd_data)
-        
+
     def ask_for_subscription(self, jid):
         """Sends a <presence/> stanza with type="subscribe"
 
