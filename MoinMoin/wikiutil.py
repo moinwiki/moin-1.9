@@ -2417,10 +2417,13 @@ def pagediff(request, pagename1, rev1, pagename2, rev2, **kw):
 
 def anchor_name_from_text(text):
     '''
-    Generate an anchor name from the given text
+    Generate an anchor name from the given text.
     This function generates valid HTML IDs matching: [A-Za-z][A-Za-z0-9:_.-]*
+    Note: this transformation has a special feature: when you feed it with a
+          valid ID/name, it will return it without modification (identity
+          transformation).
     '''
-    quoted = urllib.quote_plus(text.encode('utf-7'))
+    quoted = urllib.quote_plus(text.encode('utf-7'), safe=':')
     res = quoted.replace('%', '.').replace('+', '_')
     if not res[:1].isalpha():
         return 'A%s' % res

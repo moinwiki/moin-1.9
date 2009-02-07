@@ -913,6 +913,9 @@ class TestAnchorNames:
             (u'level_2',              'level_2'),
             (u'',                     'A'),
             (u'123',                  'A123'),
+            # make sure that a valid anchor is not modified:
+            (u'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789:_.-',
+             u'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789:_.-')
         ]
         for text, expected in tests:
             yield self._check, text, expected
