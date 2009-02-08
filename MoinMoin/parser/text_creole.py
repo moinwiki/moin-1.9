@@ -227,14 +227,10 @@ class Emitter:
 #        return self.formatter.smiley(node.content)
 
     def header_emit(self, node):
-        from MoinMoin.support.python_compatibility import hash_new
-
-        pntt = '%s%s%d' % (self.formatter.page.page_name,
-            self.get_text(node), node.level)
-        ident = "head-%s" % hash_new('sha1', pntt.encode(config.charset)).hexdigest()
+        text = self.get_text(node)
         return ''.join([
-            self.formatter.heading(1, node.level, id=ident),
-            self.formatter.text(node.content or ''),
+            self.formatter.heading(1, node.level, id=text),
+            self.formatter.text(text),
             self.formatter.heading(0, node.level),
         ])
 
@@ -327,7 +323,7 @@ class Emitter:
                 # inserted anchors
                 url = wikiutil.url_unquote(target, want_unicode=True)
                 if target.startswith('#'):
-                    return self.formatter.rawHTML(u'<a name="%s"></a>' % url[1:])
+                    return self.formatter.anchordef(url[1:])
                 # default to images
                 return self.formatter.attachment_image(
                     url, alt=text, html_class='image')

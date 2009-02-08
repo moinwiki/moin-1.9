@@ -755,7 +755,10 @@ class Page(object):
 
         # Add anchor
         if anchor:
-            url = "%s#%s" % (url, wikiutil.url_quote_plus(anchor))
+            fmt = getattr(self, 'formatter', request.html_formatter)
+            if fmt:
+                anchor = fmt.sanitize_to_id(anchor)
+            url = "%s#%s" % (url, anchor)
 
         if not relative:
             url = '%s/%s' % (request.getScriptname(), url)
