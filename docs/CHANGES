@@ -51,6 +51,7 @@ Version 1.8.2:
       * With history search enabled and in update mode, do not try to re-index
         old page revisions again.
       * With history search enabled, index page attachments only once.
+      * Fix last modified time of xapian index (shown on SystemInfo page).
     * Make logging handlers defined in logging.handlers work (e.g.
       class=handlers.RotatingFileHandler)
     * Jabber notifications:
@@ -58,6 +59,23 @@ Version 1.8.2:
       * Fix user creation notifications.
     * OpenID: Compatibility fix for python-openid 2.x.x (also works with
       1.x.x), fixes crash when trying to associate moin user to OpenID.
+    * Have a wikiserverconfig.py in wiki/server/ so setup.py copies it.
+    * Fixed inconsistent handling of fragments / anchor IDs:
+      * Fixed creole and wiki parser, other parsers might need similar fixes.
+      * IDs with blanks, non-ASCII chars etc. are now sanitized in the same way
+        for links as well as for link targets, so the user editing a page won't
+        have to bother with it.
+        E.g. [[#123 foo bar]] will link to:
+        * <<Anchor(123 foo bar)>> (moin) or {{#123 foo bar}} (creole)
+        * headline = 123 foo bar = (moin / creole)
+        Simple rule: if the link and the target are consistent, it should work.
+      * The creole wiki parser created non-human-readable sha1 heading IDs
+        before 1.8.2, now it creates same (sometimes readable) heading IDs as
+        the moin wiki parser.
+      * TitleIndex/WordIndex now also use IDs sanitized in that way internally.
+      HINT: if you manually worked around the inconsistencies/bugs before, you
+            likely have to remove those workarounds now. Same thing if you used
+            creole's sha1 heading IDs or IDs on TitleIndex/WordIndex.
 
   Other changes:
     * Updated FCKeditor to 2.6.4 (== many bug fixes in the GUI editor).
