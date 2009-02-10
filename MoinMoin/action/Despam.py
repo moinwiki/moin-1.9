@@ -66,7 +66,7 @@ def show_editors(request, pagename, timestamp):
             pg.link_to(request, text=_("Select Author"),
                 querystr={
                     'action': 'Despam',
-                    'editor': editor, # was: url_quote_plus()
+                    'editor': repr(editor),
                 })))
 
     table = DataBrowserWidget(request)
