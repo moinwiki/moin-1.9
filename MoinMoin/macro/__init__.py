@@ -222,8 +222,9 @@ class Macro:
         for word in all_words:
             letter = wikiutil.getUnicodeIndexGroup(word)
             if letter != current_letter:
-                cssid = "idx" + wikiutil.quoteWikinameURL(letter).replace('%', '')
-                output.append(fmt.heading(1, 2, id=cssid)) # fmt.anchordef didn't work
+                anchor = "idx-%s" % letter
+                output.append(fmt.anchordef(anchor))
+                output.append(fmt.heading(1, 2))
                 output.append(fmt.text(letter.replace('~', 'Others')))
                 output.append(fmt.heading(0, 2))
                 current_letter = letter
@@ -249,8 +250,8 @@ class Macro:
         def _make_index_key(index_letters):
             index_letters.sort()
             def letter_link(ch):
-                cssid = "idx" + wikiutil.quoteWikinameURL(ch).replace('%', '')
-                return fmt.anchorlink(1, cssid) + fmt.text(ch.replace('~', 'Others')) + fmt.anchorlink(0)
+                anchor = "idx-%s" % ch
+                return fmt.anchorlink(1, anchor) + fmt.text(ch.replace('~', 'Others')) + fmt.anchorlink(0)
             links = [letter_link(letter) for letter in index_letters]
             return ' | '.join(links)
 

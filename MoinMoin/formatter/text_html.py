@@ -502,7 +502,7 @@ class Formatter(FormatterBase):
                     href = '%s%s%s' % (href, separator, wikiutil.makeQueryString(querystr))
                 anchor = kw.get('anchor')
                 if anchor:
-                    href = '%s#%s' % (href, anchor)
+                    href = '%s#%s' % (href, self.sanitize_to_id(anchor))
                 if wikitag_bad:
                     html_class = 'badinterwiki'
                 else:
