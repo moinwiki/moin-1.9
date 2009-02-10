@@ -130,9 +130,10 @@ class TestAnonSession(AuthTest):
             assert trail == trail_expected
 
 class TestHttpAuthSession(AuthTest):
+    py.test.skip("We currently have no http auth code in moin. GivenAuth relies on the web server doing the http auth check.")
     class Config(wikiconfig.Config):
-        from MoinMoin.auth.http import HTTPAuth
-        auth = [HTTPAuth(autocreate=True)]
+        from MoinMoin.auth.http import HttpAuth # does not exist (yet?)
+        auth = [HttpAuth(autocreate=True)]
 
     def testHttpAuthSession(self):
         """ run some requests with http auth, check whether session works """
