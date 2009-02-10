@@ -32,26 +32,6 @@ CHILD_PREFIX_LEN = len(CHILD_PREFIX)
 ### Getting data from user/Sending data to user
 #############################################################################
 
-def decodeWindowsPath(text):
-    """ Decode Windows path names correctly. This is needed because many CGI
-    servers follow the RFC recommendation and re-encode the path_info variable
-    according to the file system semantics.
-
-    @param text: the text to decode, string
-    @rtype: unicode
-    @return: decoded text
-    """
-
-    import locale
-    cur_charset = locale.getdefaultlocale()[1]
-    try:
-        return unicode(text, 'utf-8')
-    except UnicodeError:
-        try:
-            return unicode(text, cur_charset, 'replace')
-        except LookupError:
-            return unicode(text, 'iso-8859-1', 'replace')
-
 def decodeUnknownInput(text):
     """ Decode unknown input, like text attachments
 
