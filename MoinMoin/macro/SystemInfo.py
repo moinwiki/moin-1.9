@@ -145,9 +145,7 @@ class SystemInfo:
             idx = Search._xapianIndex(request)
             available = idx and idxState[0] or idxState[1]
             mtime = _('last modified: %s') % (idx and
-                request.user.getFormattedDateTime(
-                    wikiutil.version2timestamp(idx.mtime())) or
-                    _('N/A'))
+                request.user.getFormattedDateTime(idx.mtime()) or _('N/A'))
             xapRow += ', %s, %s' % (available, mtime)
 
         row(_('Xapian search'), xapRow)

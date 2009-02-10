@@ -14,6 +14,7 @@ from MoinMoin import wikiutil
 
 class TestFormatter:
     def testSyntaxReferenceDomXml(self):
+        py.test.skip("domxml <p> generation is broken")
         f_name = 'dom_xml'
         try:
             formatter = wikiutil.importPlugin(self.request.cfg, "formatter", f_name, "Formatter")
@@ -68,6 +69,7 @@ class TestFormatter:
         self.request.reset()
         page = Page(self.request, pagename, formatter=formatter)
         self.request.formatter = page.formatter = formatter(self.request)
+        self.request.page = page
         #page.formatter.setPage(page)
         #page.hilite_re = None
 

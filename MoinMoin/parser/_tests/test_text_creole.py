@@ -38,6 +38,7 @@ class ParserTestCase(object):
         formatter.setPage(page)
         page.formatter = formatter
         request.formatter = formatter
+        request.page = page
         parser = CreoleParser(body, request, line_anchors=False)
         formatter.startContent('') # needed for _include_stack init
         output = request.redirectedOutput(parser.format, formatter)
@@ -396,9 +397,7 @@ class TestLinkingMarkup(ParserTestCase):
 
     def testAnchor(self):
         html = self.parse("{{#anchor}}")
-        assert '<a ' in html # must create a link
-        assert 'name="anchor"' in html
-        assert '></a>' in html
+        assert 'id="anchor"' in html
 
 coverage_modules = ['MoinMoin.parser.text_creole']
 
