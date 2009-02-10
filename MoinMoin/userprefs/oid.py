@@ -79,9 +79,9 @@ class Settings(UserPrefBase):
             if oidreq is None:
                 return 'error', _("No OpenID given.") # ??
 
-            qstr = wikiutil.makeQueryString({'action': 'userprefs',
-                                             'handler': 'oid',
-                                             'oid.return': '1'})
+            qstr = {'action': 'userprefs',
+                    'handler': 'oid',
+                    'oid.return': '1'}
             return_to = request.getQualifiedURL(request.page.url(request, qstr))
             trust_root = request.getBaseURL()
             if oidreq.shouldSendRedirect():
@@ -102,9 +102,9 @@ class Settings(UserPrefBase):
         query = {}
         for key in request.form:
             query[key] = request.form[key][0]
-        qstr = wikiutil.makeQueryString({'action': 'userprefs',
-                                         'handler': 'oid',
-                                         'oid.return': '1'})
+        qstr = {'action': 'userprefs',
+                'handler': 'oid',
+                'oid.return': '1'}
         return_to = request.getQualifiedURL(request.page.url(request, qstr))
         info = oidconsumer.complete(query, return_to)
         if info.status == consumer.FAILURE:
