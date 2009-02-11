@@ -12,6 +12,9 @@ DAYS = 30 # we look for spam edits in the last x days
 
 import time
 
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin.logfile import editlog
 from MoinMoin.util.dataset import TupleDataset, Column
 from MoinMoin.widget.browser import DataBrowserWidget
@@ -182,9 +185,10 @@ def execute(pagename, request):
         request.theme.add_msg(_('You are not allowed to use this action.'), "error")
         return Page.Page(request, pagename).send_page()
 
-    editor = request.form.get('editor')
+    editor = request.values.get('editor')
     timestamp = time.time() - DAYS * 24 * 3600
     ok = request.form.get('ok', 0)
+    logging.debug("editor: %r ok: %r" % (editor, ok))
 
     request.theme.send_title("Despam", pagename=pagename)
     # Start content (important for RTL support)
