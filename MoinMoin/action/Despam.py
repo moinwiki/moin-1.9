@@ -149,7 +149,7 @@ def revert_page(request, pagename, editor):
 def revert_pages(request, editor, timestamp):
     _ = request.getText
 
-    editor = wikiutil.url_unquote(editor, want_unicode=False)
+    editor = wikiutil.url_unquote(editor)
     timestamp = int(timestamp * 1000000)
     log = editlog.EditLog(request)
     pages = {}

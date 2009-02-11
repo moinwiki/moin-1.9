@@ -11,6 +11,8 @@ import py
 
 from MoinMoin import config, wikiutil
 
+from werkzeug.utils import MultiDict
+
 
 class TestQueryStringSupport:
     tests = [
@@ -21,17 +23,13 @@ class TestQueryStringSupport:
     ]
     def testParseQueryString(self):
         for qstr, expected_str, expected_unicode in self.tests:
-            assert wikiutil.parseQueryString(qstr, want_unicode=False) == expected_str
-            assert wikiutil.parseQueryString(qstr, want_unicode=True) == expected_unicode
-            assert wikiutil.parseQueryString(unicode(qstr), want_unicode=False) == expected_str
-            assert wikiutil.parseQueryString(unicode(qstr), want_unicode=True) == expected_unicode
+            assert wikiutil.parseQueryString(qstr) == MultiDict(expected_unicode)
+            assert wikiutil.parseQueryString(unicode(qstr)) == MultiDict(expected_unicode)
 
     def testMakeQueryString(self):
         for qstr, in_str, in_unicode in self.tests:
-            assert wikiutil.parseQueryString(wikiutil.makeQueryString(in_unicode, want_unicode=False), want_unicode=False) == in_str
-            assert wikiutil.parseQueryString(wikiutil.makeQueryString(in_str, want_unicode=False), want_unicode=False) == in_str
-            assert wikiutil.parseQueryString(wikiutil.makeQueryString(in_unicode, want_unicode=True), want_unicode=True) == in_unicode
-            assert wikiutil.parseQueryString(wikiutil.makeQueryString(in_str, want_unicode=True), want_unicode=True) == in_unicode
+            assert wikiutil.parseQueryString(wikiutil.makeQueryString(in_unicode)) == MultiDict(in_unicode)
+            assert wikiutil.parseQueryString(wikiutil.makeQueryString(in_str)) == MultiDict(in_unicode)
 
 
 class TestTickets:
