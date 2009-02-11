@@ -692,7 +692,7 @@ class Parser:
     def _transclude_repl(self, word, groups):
         """Handles transcluding content, usually embedding images."""
         target = groups.get('transclude_target', '')
-        target = wikiutil.url_unquote(target, want_unicode=True)
+        target = wikiutil.url_unquote(target)
         desc = groups.get('transclude_desc', '') or ''
         params = groups.get('transclude_params', u'') or u''
         acceptable_attrs_img = ['class', 'title', 'longdesc', 'width', 'height', 'align', ] # no style because of JS
@@ -723,7 +723,7 @@ class Parser:
 
             elif m.group('attach_scheme'):
                 scheme = m.group('attach_scheme')
-                url = wikiutil.url_unquote(m.group('attach_addr'), want_unicode=True)
+                url = wikiutil.url_unquote(m.group('attach_addr'))
                 if scheme == 'attachment':
                     mt = wikiutil.MimeType(filename=url)
                     if mt.major == 'text':
@@ -894,7 +894,7 @@ class Parser:
 
             elif mt.group('attach_scheme'):
                 scheme = mt.group('attach_scheme')
-                url = wikiutil.url_unquote(mt.group('attach_addr'), want_unicode=True)
+                url = wikiutil.url_unquote(mt.group('attach_addr'))
                 tag_attrs, query_args = self._get_params(params,
                                                          tag_attrs={'title': desc, },
                                                          acceptable_attrs=acceptable_attrs)

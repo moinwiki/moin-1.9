@@ -219,7 +219,7 @@ def _addLogEntry(request, action, pagename, filename):
     """
     from MoinMoin.logfile import editlog
     t = wikiutil.timestamp2version(time.time())
-    fname = wikiutil.url_quote(filename, want_unicode=True)
+    fname = wikiutil.url_quote(filename)
 
     # Write to global log
     log = editlog.EditLog(request)

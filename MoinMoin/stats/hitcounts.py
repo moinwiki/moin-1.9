@@ -146,9 +146,7 @@ def text(pagename, request, params=''):
     # check params
     filterpage = None
     if params.startswith('page='):
-        params = params[len('page='):]
-        params = wikiutil.url_unquote(params, want_unicode=False)
-        filterpage = wikiutil.decodeUserInput(params)
+        filterpage = wikiutil.url_unquote(params[len('page='):])
 
     if request and request.values and 'page' in request.values:
         filterpage = request.values['page']

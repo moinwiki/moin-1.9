@@ -25,6 +25,8 @@ from MoinMoin.util import pysupport, lock
 from MoinMoin.support.python_compatibility import rsplit
 from inspect import getargspec, isfunction, isclass, ismethod
 
+from MoinMoin import web # needed so that next line works:
+import werkzeug.utils
 
 # Exceptions
 class InvalidFileNameError(Exception):
@@ -88,107 +90,67 @@ def decodeUserInput(s, charsets=[config.charset]):
     raise UnicodeError('The string %r cannot be decoded.' % s)
 
 
-# this is a thin wrapper around urllib (urllib only handles str, not unicode)
-# with py <= 2.4.1, it would give incorrect results with unicode
-# with py == 2.4.2, it crashes with unicode, if it contains non-ASCII chars
-def url_quote(s, safe='/', want_unicode=False):
-    """
-    Wrapper around urllib.quote doing the encoding/decoding as usually wanted:
+def url_quote(s, safe='/', want_unicode=None):
+    """ see werkzeug.utils.url_quote, we use a different safe param default value """
+    try:
+        assert want_unicode is None
+    except AssertionError:
+        log.exception("call with deprecated want_unicode param, please fix caller")
+    return werkzeug.utils.url_quote(s, charset=config.charset, safe=safe)
 
-    @param s: the string to quote (can be str or unicode, if it is unicode,
-              config.charset is used to encode it before calling urllib)
-    @param safe: just passed through to urllib
-    @param want_unicode: for the less usual case that you want to get back
-                         unicode and not str, set this to True
-                         Default is False.
-    """
-    if isinstance(s, unicode):
-        s = s.encode(config.charset)
-    elif not isinstance(s, str):
-        s = str(s)
-    s = urllib.quote(s, safe)
-    if want_unicode:
-        s = s.decode(config.charset) # ascii would also work
-    return s
+def url_quote_plus(s, safe='/', want_unicode=None):
+    """ see werkzeug.utils.url_quote_plus, we use a different safe param default value """
+    try:
+        assert want_unicode is None
+    except AssertionError:
+        log.exception("call with deprecated want_unicode param, please fix caller")
+    return werkzeug.utils.url_quote_plus(s, charset=config.charset, safe=safe)
 
-def url_quote_plus(s, safe='/', want_unicode=False):
-    """
-    Wrapper around urllib.quote_plus doing the encoding/decoding as usually wanted:
+def url_unquote(s, want_unicode=None):
+    """ see werkzeug.utils.url_unquote """
+    try:
+        assert want_unicode is None
+    except AssertionError:
+        log.exception("call with deprecated want_unicode param, please fix caller")
+    return werkzeug.utils.url_unquote(s, charset=config.charset, errors='fallback:iso-8859-1')
 
-    @param s: the string to quote (can be str or unicode, if it is unicode,
-              config.charset is used to encode it before calling urllib)
-    @param safe: just passed through to urllib
-    @param want_unicode: for the less usual case that you want to get back
-                         unicode and not str, set this to True
-                         Default is False.
-    """
-    if isinstance(s, unicode):
-        s = s.encode(config.charset)
-    elif not isinstance(s, str):
-        s = str(s)
-    s = urllib.quote_plus(s, safe)
-    if want_unicode:
-        s = s.decode(config.charset) # ascii would also work
-    return s
 
-def url_unquote(s, want_unicode=True):
-    """
-    Wrapper around urllib.unquote doing the encoding/decoding as usually wanted:
+def parseQueryString(qstr, want_unicode=None):
+    """ see werkzeug.utils.url_decode """
+    try:
+        assert want_unicode is None
+    except AssertionError:
+        log.exception("call with deprecated want_unicode param, please fix caller")
+    return werkzeug.utils.url_decode(qstr, charset=config.charset, errors='fallback:iso-8859-1',
+                                     decode_keys=False, include_empty=False)
 
-    @param s: the string to unquote (can be str or unicode, if it is unicode,
-              config.charset is used to encode it before calling urllib)
-    @param want_unicode: for the less usual case that you want to get back
-                         str and not unicode, set this to False.
-                         Default is True.
-    """
-    if isinstance(s, unicode):
-        s = s.encode(config.charset) # ascii would also work
-    s = urllib.unquote(s)
-    if want_unicode:
-        try:
-            s = decodeUserInput(s, [config.charset, 'iso-8859-1', ]) # try hard
-        except UnicodeError:
-            s = s.decode('ascii', 'replace') # better than crashing
-    return s
-
-def parseQueryString(qstr, want_unicode=True):
-    """ Parse a querystring "key=value&..." into a dict.
-    """
-    is_unicode = isinstance(qstr, unicode)
-    if is_unicode:
-        qstr = qstr.encode(config.charset)
-    values = {}
-    for key, value in cgi.parse_qs(qstr).items():
-        if len(value) < 2:
-            v = ''.join(value)
-            if want_unicode:
-                try:
-                    v = unicode(v, config.charset)
-                except UnicodeDecodeError:
-                    v = unicode(v, 'iso-8859-1', 'replace')
-            values[key] = v
-    return values
-
-def makeQueryString(qstr=None, want_unicode=False, **kw):
+def makeQueryString(qstr=None, want_unicode=None, **kw):
     """ Make a querystring from arguments.
 
     kw arguments overide values in qstr.
 
-    If a string is passed in, it's returned verbatim and
-    keyword parameters are ignored.
+    If a string is passed in, it's returned verbatim and keyword parameters are ignored.
+
+    See also: werkzeug.utils.url_encode
 
     @param qstr: dict to format as query string, using either ascii or unicode
     @param kw: same as dict when using keywords, using ascii or unicode
     @rtype: string
     @return: query string ready to use in a url
     """
+    try:
+        assert want_unicode is None
+    except AssertionError:
+        log.exception("call with deprecated want_unicode param, please fix caller")
     if qstr is None:
         qstr = {}
+    elif isinstance(qstr, (str, unicode)):
+        return qstr
     if isinstance(qstr, dict):
         qstr.update(kw)
-        items = ['%s=%s' % (url_quote_plus(key, want_unicode=want_unicode), url_quote_plus(value, want_unicode=want_unicode)) for key, value in qstr.items()]
-        qstr = '&'.join(items)
-    return qstr
+        return werkzeug.utils.url_encode(qstr, charset=config.charset, encode_keys=True)
+    else:
+        raise ValueError("Unsupported argument type, should be dict.")
 
 
 def quoteWikinameURL(pagename, charset=config.charset):
@@ -203,35 +165,13 @@ def quoteWikinameURL(pagename, charset=config.charset):
     @rtype: string
     @return: the quoted filename, all unsafe characters encoded
     """
-    pagename = pagename.encode(charset)
-    return urllib.quote(pagename)
+    # XXX please note that urllib.quote and werkzeug.utils.url_quote have
+    # XXX different defaults for safe=...
+    return werkzeug.utils.url_quote(pagename, charset=charset, safe='/')
 
 
-def escape(s, quote=0):
-    """ Escape possible html tags
+escape = werkzeug.utils.escape
 
-    Replace special characters '&', '<' and '>' by SGML entities.
-    (taken from cgi.escape so we don't have to include that, even if we
-    don't use cgi at all)
-
-    @param s: (unicode) string to escape
-    @param quote: bool, should transform '\"' to '&quot;'
-    @rtype: when called with a unicode object, return unicode object - otherwise return string object
-    @return: escaped version of s
-    """
-    if not isinstance(s, (str, unicode)):
-        s = str(s)
-
-    # Must first replace &
-    s = s.replace("&", "&amp;")
-
-    # Then other...
-    s = s.replace("<", "&lt;")
-    s = s.replace(">", "&gt;")
-    if quote:
-        s = s.replace('"', "&quot;")
-        s = s.replace("'", "&#x27;")
-    return s
 
 def clean_input(text, max_len=201):
     """ Clean input:
