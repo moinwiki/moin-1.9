@@ -73,7 +73,7 @@ def execute(pagename, request):
     result.append("""<urlset xmlns="http://www.google.com/schemas/sitemap/0.84">\n""")
 
     # we include the root url as an important and often changed URL
-    rooturl = request.getScriptname()
+    rooturl = request.url_root
     if not rooturl.endswith('/'):
         rooturl += '/'
     result.append(make_url_xml(request, {
