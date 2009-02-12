@@ -37,10 +37,8 @@ def sendBackup(request):
     """ Send compressed tar file """
     dateStamp = time.strftime("%Y-%m-%d--%H-%M-%S-UTC", time.gmtime())
     filename = "%s-%s.tar.%s" % (request.cfg.siteid, dateStamp, request.cfg.backup_compression)
-    request.emit_http_headers([
-        'Content-Type: application/octet-stream',
-        'Content-Disposition: inline; filename="%s"' % filename, ])
-
+    request.headers.add('Content-Disposition', '%s; filename="%s"' %
+                        ('application/octet-stream', filename))
     tar = tarfile.open(fileobj=request, mode="w|%s" % request.cfg.backup_compression)
     # allow GNU tar's longer file/pathnames
     tar.posix = False
@@ -51,7 +49,6 @@ def sendBackup(request):
 
 def sendBackupForm(request, pagename):
     _ = request.getText
-    request.emit_http_headers()
     request.setContentLanguage(request.lang)
     title = _('Wiki Backup')
     request.theme.send_title(title, pagename=pagename)
