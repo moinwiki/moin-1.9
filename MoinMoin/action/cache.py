@@ -146,15 +146,15 @@ def put(request, key, data,
     last_modified = last_modified or data_cache.mtime()
 
     httpdate_last_modified = timefuncs.formathttpdate(int(last_modified))
-    headers = ['Content-Type: %s' % content_type,
-               'Last-Modified: %s' % httpdate_last_modified,
-               'Content-Length: %s' % content_length,
+    headers = [('Content-Type', content_type),
+               ('Last-Modified', httpdate_last_modified),
+               ('Content-Length', content_length),
               ]
     if content_disposition and filename:
         # TODO: fix the encoding here, plain 8 bit is not allowed according to the RFCs
         # There is no solution that is compatible to IE except stripping non-ascii chars
         filename = filename.encode(config.charset)
-        headers.append('Content-Disposition: %s; filename="%s"' % (content_disposition, filename))
+        headers.append(('Content-Disposition', '%s; filename="%s"' % (content_disposition, filename)))
 
     meta_cache = caching.CacheEntry(request, cache_arena, key+'.meta', cache_scope, do_locking=do_locking, use_pickle=True)
     meta_cache.update({
@@ -217,19 +217,27 @@ def _do_get(request, key):
     try:
         last_modified, headers = _get_headers(request, key)
         if request.if_modified_since == last_modified:
-            request.emit_http_headers(["Status: 304 Not modified"])
+            request.status_code = 304
         else:
             data_file = _get_datafile(request, key)
-            request.emit_http_headers(headers)
+            for key, value in headers:
+                lkey = key.lower()
+                if lkey == 'content-type':
+                    request.content_type = value
+                elif lkey == 'last-modified':
+                    request.last_modified = value
+                elif lkey == 'content-length':
+                    request.content_length = value
+                else:
+                    request.headers.add(key, value)
             request.send_file(data_file)
     except caching.CacheError:
-        request.emit_http_headers(["Status: 404 Not found"])
+        request.status_code = 404
 
 
 def _do_remove(request, key):
     """ delete headers/data cache for key """
     remove(request, key)
-    request.emit_http_headers(["Status: 200 OK"])
 
 
 def _do(request, do, key):
