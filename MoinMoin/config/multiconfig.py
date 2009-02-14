@@ -1213,7 +1213,7 @@ options = {
       ('compression', 'gz', 'What compression to use for the backup ("gz" or "bz2").'),
       ('users', [], 'List of trusted user names who are allowed to get a backup.'),
       ('include', [], 'List of pathes to backup.'),
-      ('exclude', lambda filename: False, 'Function f(filename) that tells whether a file should be excluded from backup. By default, nothing is excluded.'),
+      ('exclude', lambda self, filename: False, 'Function f(self, filename) that tells whether a file should be excluded from backup. By default, nothing is excluded.'),
     )),
 }
 
