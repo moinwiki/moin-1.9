@@ -44,9 +44,8 @@ class PackagePages:
         redirects to new page.
         """
         _ = self.request.getText
-        form = self.request.form
 
-        if 'cancel' in form:
+        if 'cancel' in self.request.values:
             # User canceled
             return self.page.send_page()
 
@@ -65,14 +64,13 @@ class PackagePages:
     def package(self):
         """ Calls collectpackage() with the arguments specified. """
         _ = self.request.getText
-        form = self.request.form
 
         # Get new name from form and normalize.
-        pagelist = form.get('pagelist', [u''])[0]
-        packagename = form.get('packagename', [u''])[0]
-        include_attachments = form.get('include_attachments', [False])[0]
+        pagelist = self.request.values.get('pagelist', u'')
+        packagename = self.request.values.get('packagename', u'')
+        include_attachments = self.request.values.get('include_attachments', False)
 
-        if not form.get('submit', [None])[0]:
+        if not self.request.values.get('submit'):
             self.request.theme.add_msg(self.makeform(), "dialog")
             raise ActionError
 
@@ -115,11 +113,10 @@ class PackagePages:
             error = u'<p class="error">%s</p>\n' % error
 
         d = {
-            'baseurl': self.request.getScriptname(),
+            'url': self.request.href(self.pagename),
             'error': error,
             'action': self.__class__.__name__,
             'pagename': wikiutil.escape(self.pagename, True),
-            'pagename_quoted': wikiutil.quoteWikinameURL(self.pagename),
             'include_attachments_label': _('Include all attachments?'),
             'package': _('Package pages'),
             'cancel': _('Cancel'),
@@ -128,7 +125,7 @@ class PackagePages:
         }
         form = '''
 %(error)s
-<form method="post" action="%(baseurl)s/%(pagename_quoted)s">
+<form method="post" action="%(url)s">
 <input type="hidden" name="action" value="%(action)s">
 <table>
     <tr>
@@ -196,7 +193,7 @@ class PackagePages:
 
         pages = []
         for pagename in pagelist:
-            pagename = self.request.normalizePagename(pagename)
+            pagename = wikiutil.normalize_pagename(pagename, self.request.cfg)
             if pagename:
                 page = Page(self.request, pagename)
                 if page.exists() and self.request.user.may.read(pagename):

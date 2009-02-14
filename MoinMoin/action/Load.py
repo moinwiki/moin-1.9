@@ -36,11 +36,17 @@ class Load(ActionBase):
         form = self.form
         request = self.request
 
-        comment = form.get('comment', [u''])[0]
+        comment = form.get('comment', u'')
         comment = wikiutil.clean_input(comment)
 
-        filename = form.get('file__filename__')
-        rename = form.get('rename', [''])[0].strip()
+        file_upload = request.files.get('file')
+        if not file_upload:
+            # This might happen when trying to upload file names
+            # with non-ascii characters on Safari.
+            return False, _("No file content. Delete non ASCII characters from the file name and try again.")
+
+        filename = file_upload.filename
+        rename = form.get('rename', '').strip()
         if rename:
             target = rename
         else:
@@ -50,9 +56,7 @@ class Load(ActionBase):
         target = wikiutil.clean_input(target)
 
         if target:
-            filecontent = form['file'][0]
-            if hasattr(filecontent, 'read'): # a file-like object
-                filecontent = filecontent.read() # XXX reads complete file into memory!
+            filecontent = file_upload.stream.read() # XXX reads complete file into memory!
             filecontent = wikiutil.decodeUnknownInput(filecontent)
 
             self.pagename = target

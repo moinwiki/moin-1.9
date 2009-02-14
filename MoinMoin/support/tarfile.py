@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #-------------------------------------------------------------------
-# tarfile.py (from Python 2.5.1, some 2.3/2.4 compat hacks added)
+# tarfile.py (from Python 2.5.4, some 2.3/2.4 compat hacks added,
+# fix for mode='a' [from 2.6 trunk])
 # tarfile was broken in misc. python versions before, thus we are
 # using this (sane) version because else our tests fail).
 #-------------------------------------------------------------------
@@ -148,13 +149,22 @@ def stn(s, length):
     """
     return s[:length] + (length - len(s)) * NUL
 
+def nts(s):
+    """Convert a null-terminated string field to a python string.
+    """
+    # Use the string up to the first null char.
+    p = s.find("\0")
+    if p == -1:
+        return s
+    return s[:p]
+
 def nti(s):
     """Convert a number field to a python number.
     """
     # There are two possible encodings for a number field, see
     # itn() below.
     if s[0] != chr(0200):
-        n = int(s.rstrip(NUL + " ") or "0", 8)
+        n = int(nts(s) or "0", 8)
     else:
         n = 0L
         for i in xrange(len(s) - 1):
@@ -880,7 +890,7 @@ class TarInfo(object):
 
         tarinfo = cls()
         tarinfo.buf = buf
-        tarinfo.name = buf[0:100].rstrip(NUL)
+        tarinfo.name = nts(buf[0:100])
         tarinfo.mode = nti(buf[100:108])
         tarinfo.uid = nti(buf[108:116])
         tarinfo.gid = nti(buf[116:124])
@@ -888,12 +898,12 @@ class TarInfo(object):
         tarinfo.mtime = nti(buf[136:148])
         tarinfo.chksum = nti(buf[148:156])
         tarinfo.type = buf[156:157]
-        tarinfo.linkname = buf[157:257].rstrip(NUL)
-        tarinfo.uname = buf[265:297].rstrip(NUL)
-        tarinfo.gname = buf[297:329].rstrip(NUL)
+        tarinfo.linkname = nts(buf[157:257])
+        tarinfo.uname = nts(buf[265:297])
+        tarinfo.gname = nts(buf[297:329])
         tarinfo.devmajor = nti(buf[329:337])
         tarinfo.devminor = nti(buf[337:345])
-        prefix = buf[345:500].rstrip(NUL)
+        prefix = nts(buf[345:500])
 
         if prefix and not tarinfo.issparse():
             tarinfo.name = prefix + "/" + tarinfo.name
@@ -972,7 +982,7 @@ class TarInfo(object):
             stn(prefix, 155)
         ]
 
-        buf += struct.pack("%ds" % BLOCKSIZE, "".join(parts))
+        buf += "".join(parts).ljust(BLOCKSIZE, NUL)
         chksum = calc_chksums(buf[-BLOCKSIZE:])[0]
         buf = buf[:-364] + "%06o\0" % chksum + buf[-357:]
         self.buf = buf
@@ -1059,6 +1069,10 @@ class TarFile(object):
         self.mode = {"r": "rb", "a": "r+b", "w": "wb"}[mode]
 
         if not fileobj:
+            if self._mode == "a" and not os.path.exists(name):
+                # Create nonexistent files in append mode.
+                self._mode = "w"
+                self.mode = "wb"
             fileobj = file(name, self.mode)
             self._extfileobj = False
         else:
@@ -1074,7 +1088,8 @@ class TarFile(object):
         self.closed = False
         self.members = []       # list of members as TarInfo objects
         self._loaded = False    # flag if all members have been read
-        self.offset = 0L        # current position in the archive file
+        self.offset = self.fileobj.tell()
+                                # current position in the archive file
         self.inodes = {}        # dictionary caching the inodes of
                                 # archive members already added
 
@@ -1093,7 +1108,8 @@ class TarFile(object):
                     self.fileobj.seek(0)
                     break
                 if tarinfo is None:
-                    self.fileobj.seek(- BLOCKSIZE, 1)
+                    if self.offset > 0:
+                        self.fileobj.seek(- BLOCKSIZE, 1)
                     break
 
         if self._mode in "aw":
@@ -1119,7 +1135,7 @@ class TarFile(object):
            'r:'         open for reading exclusively uncompressed
            'r:gz'       open for reading with gzip compression
            'r:bz2'      open for reading with bzip2 compression
-           'a' or 'a:'  open for appending
+           'a' or 'a:'  open for appending, creating the file if necessary
            'w' or 'w:'  open for writing without compression
            'w:gz'       open for writing with gzip compression
            'w:bz2'      open for writing with bzip2 compression
@@ -1517,15 +1533,11 @@ class TarFile(object):
 
         for tarinfo in members:
             if tarinfo.isdir():
-                # Extract directory with a safe mode, so that
-                # all files below can be extracted as well.
-                try:
-                    os.makedirs(os.path.join(path, tarinfo.name), 0777)
-                except EnvironmentError:
-                    pass
+                # Extract directories with a safe mode.
                 directories.append(tarinfo)
-            else:
-                self.extract(tarinfo, path)
+                tarinfo = copy.copy(tarinfo)
+                tarinfo.mode = 0700
+            self.extract(tarinfo, path)
 
         # Reverse sort directories.
         directories.sort(lambda a, b: cmp(a.name, b.name))
@@ -1533,11 +1545,11 @@ class TarFile(object):
 
         # Set correct owner, mtime and filemode on directories.
         for tarinfo in directories:
-            path = os.path.join(path, tarinfo.name)
+            dirpath = os.path.join(path, tarinfo.name)
             try:
-                self.chown(tarinfo, path)
-                self.utime(tarinfo, path)
-                self.chmod(tarinfo, path)
+                self.chown(tarinfo, dirpath)
+                self.utime(tarinfo, dirpath)
+                self.chmod(tarinfo, dirpath)
             except ExtractError, e:
                 if self.errorlevel > 1:
                     raise
@@ -1630,19 +1642,9 @@ class TarFile(object):
         # Create all upper directories.
         upperdirs = os.path.dirname(targetpath)
         if upperdirs and not os.path.exists(upperdirs):
-            ti = TarInfo()
-            ti.name  = upperdirs
-            ti.type  = DIRTYPE
-            ti.mode  = 0777
-            ti.mtime = tarinfo.mtime
-            ti.uid   = tarinfo.uid
-            ti.gid   = tarinfo.gid
-            ti.uname = tarinfo.uname
-            ti.gname = tarinfo.gname
-            try:
-                self._extract_member(ti, ti.name)
-            except:
-                pass
+            # Create directories that are not part of the archive with
+            # default permissions.
+            os.makedirs(upperdirs)
 
         if tarinfo.islnk() or tarinfo.issym():
             self._dbg(1, "%s -> %s" % (tarinfo.name, tarinfo.linkname))
@@ -1678,7 +1680,9 @@ class TarFile(object):
         """Make a directory called targetpath.
         """
         try:
-            os.mkdir(targetpath)
+            # Use a safe mode for the directory, the real mode is set
+            # later in _extract_member().
+            os.mkdir(targetpath, 0700)
         except EnvironmentError, e:
             if e.errno != errno.EEXIST:
                 raise
@@ -1850,7 +1854,7 @@ class TarFile(object):
             tarinfo.type = DIRTYPE
 
         # Directory names should have a '/' at the end.
-        if tarinfo.isdir():
+        if tarinfo.isdir() and not tarinfo.name.endswith("/"):
             tarinfo.name += "/"
 
         self.members.append(tarinfo)
@@ -1912,9 +1916,9 @@ class TarFile(object):
         # the longname information.
         next.offset = tarinfo.offset
         if tarinfo.type == GNUTYPE_LONGNAME:
-            next.name = buf.rstrip(NUL)
+            next.name = nts(buf)
         elif tarinfo.type == GNUTYPE_LONGLINK:
-            next.linkname = buf.rstrip(NUL)
+            next.linkname = nts(buf)
 
         return next
 

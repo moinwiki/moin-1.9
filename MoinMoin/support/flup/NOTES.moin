@@ -1,0 +1,17 @@
+NOTES for bundled flup:
+=======================
+This directory contains the flup WSGI adapter package. It has been
+patched to support completely singlethreaded non-forking servers for
+deployment in webservers, that have their own process spawning strategy.
+
+The shipped version is available via mercurial checkout:
+
+hg clone -r aa983e43105e http://hg.saddi.com/flup-server
+
+The singlethreaded server patch was provided via a trac bugreport
+(http://trac.saddi.com/flup/ticket/22) and is provided in this directory
+as singleserver.diff for convenience. It has already been applied.
+
+Thanks to Allan Saddi <allan@saddi.com> for writing flup and to
+the unnamed contributor <tv@inoi.fi> for the single-thread patch.
+

@@ -31,6 +31,20 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
+
+Version 1.9.current:
+  New features:
+    * HINT: MoinMoin is now a WSGI application.
+      Please read the new install docs about how to use it.
+    * We use the pygments highlighting library now, use it like this:
+      {{{#!highlight xxx
+      ...
+      }}}
+      xxx is any of the markups pygments supports.
+      Note: we still have some (deprecated) small wrappers around pygments,
+      so the old syntax #!python/pascal/cplusplus/... still works.
+
+
 Version 1.8.2:
   Bug fixes:
     * Fix AttachFile and antispam XSS issues.
@@ -85,6 +99,7 @@ Version 1.8.2:
     * Streamline attachment_drawing formatter behaviour.
     * Search results: only redirect to a single search result for titlesearch
       (fuzzy goto functionality), but not for fulltext search results.
+
 
 
 Version 1.8.1:

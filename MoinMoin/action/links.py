@@ -11,15 +11,9 @@ from MoinMoin import config, wikiutil
 
 def execute(pagename, request):
     _ = request.getText
-    form = request.form
-
     # get the MIME type
-    if 'mimetype' in form:
-        mimetype = form['mimetype'][0]
-    else:
-        mimetype = "text/html"
-
-    request.emit_http_headers(["Content-Type: %s; charset=%s" % (mimetype, config.charset)])
+    mimetype = request.values.get('mimetype', 'text/html')
+    request.mimetype = mimetype
 
     if mimetype == "text/html":
         request.theme.send_title(_('Full Link List for "%s"') % request.cfg.sitename)

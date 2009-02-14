@@ -41,7 +41,7 @@ from MoinMoin.support.python_compatibility import hmac_new
 
 action_name = __name__.split('.')[-1]
 
-# Do NOT get this directly from request.form or user would be able to read any cache!
+# Do NOT get this directly from request.values or user would be able to read any cache!
 cache_arena = 'sendcache'  # just using action_name is maybe rather confusing
 
 # We maybe could use page local caching (not 'wiki' global) to have less directory entries.
@@ -196,10 +196,7 @@ def remove(request, key):
 
 def url(request, key, do='get'):
     """ return URL for the object cached for key """
-    return "%s/?%s" % (
-        request.getScriptname(),
-        wikiutil.makeQueryString(dict(action=action_name, do=do, key=key), want_unicode=False))
-
+    return request.href(action=action_name, do=do, key=key)
 
 def _get_headers(request, key):
     """ get last_modified and headers cached for key """
@@ -242,7 +239,7 @@ def _do(request, do, key):
         _do_remove(request, key)
 
 def execute(pagename, request):
-    do = request.form.get('do', [None])[0]
-    key = request.form.get('key', [None])[0]
+    do = request.values.get('do')
+    key = request.values.get('key')
     _do(request, do, key)
 
