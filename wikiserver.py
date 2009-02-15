@@ -14,7 +14,7 @@ import sys, os
 
 # a1) Path of the directory where the MoinMoin code package is located.
 #     Needed if you installed with --prefix=PREFIX or you didn't use setup.py.
-#sys.path.insert(0, 'PREFIX/lib/python2.3/site-packages')
+#sys.path.insert(0, 'PREFIX/lib/python2.4/site-packages')
 
 # a2) Path of the directory where wikiconfig.py / farmconfig.py is located.
 moinpath = os.path.abspath(os.path.normpath(os.path.dirname(sys.argv[0])))

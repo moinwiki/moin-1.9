@@ -154,15 +154,3 @@ def getLogger(name):
             setattr(logger, levelname, levelnumber)
     return logger
 
-
-# Python 2.3's logging module has no .log, this provides it:
-if not hasattr(logging, 'log'):
-    def log(level, msg, *args, **kwargs):
-        if len(logging.root.handlers) == 0:
-            logging.basicConfig()
-        if logging.root.manager.disable >= level:
-            return
-        if level >= logging.root.getEffectiveLevel():
-            logging.root._log(level, msg, args, **kwargs)
-    logging.log = log
-
