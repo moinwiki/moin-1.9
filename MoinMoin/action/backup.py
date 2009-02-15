@@ -71,7 +71,7 @@ To get a backup, just click here:""", wiki=True))
 <input type="submit" value="%(backup_button)s">
 </form>
 """ % {
-    'baseurl': request.url_root,
+    'baseurl': request.script_root,
     'pagename': wikiutil.quoteWikinameURL(pagename),
     'backup_button': _('Backup'),
 })

@@ -64,7 +64,7 @@ def execute(pagename, request):
     _ = request.getText
     request.user.datetime_fmt = datetime_fmt
 
-    request.mimetype ='text/xml'
+    request.mimetype = 'text/xml'
 
     # we emit a piece of data so other side doesn't get bored:
     request.write("""<?xml version="1.0" encoding="UTF-8"?>\r\n""")
@@ -73,9 +73,7 @@ def execute(pagename, request):
     result.append("""<urlset xmlns="http://www.google.com/schemas/sitemap/0.84">\n""")
 
     # we include the root url as an important and often changed URL
-    rooturl = request.url_root
-    if not rooturl.endswith('/'):
-        rooturl += '/'
+    rooturl = request.script_root + '/'
     result.append(make_url_xml(request, {
         'url': rooturl,
         'lastmod': now(), # fake

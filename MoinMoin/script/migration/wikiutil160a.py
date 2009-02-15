@@ -544,7 +544,7 @@ def load_wikimap(request):
         for line in lines:
             if not line or line[0] == '#': continue
             try:
-                line = "%s %s/InterWiki" % (line, request.url_root)
+                line = "%s %s/InterWiki" % (line, request.script_root)
                 wikitag, urlprefix, dummy = line.split(None, 2)
             except ValueError:
                 pass
@@ -554,9 +554,9 @@ def load_wikimap(request):
         del lines
 
         # add own wiki as "Self" and by its configured name
-        _interwiki_list['Self'] = request.url_root + '/'
+        _interwiki_list['Self'] = request.script_root + '/'
         if request.cfg.interwikiname:
-            _interwiki_list[request.cfg.interwikiname] = request.url_root + '/'
+            _interwiki_list[request.cfg.interwikiname] = request.script_root + '/'
 
         # save for later
         request.cfg.cache.interwiki_list = _interwiki_list
@@ -615,7 +615,7 @@ def resolve_wiki(request, wikiurl):
     if _interwiki_list.has_key(wikiname):
         return (wikiname, _interwiki_list[wikiname], pagename, False)
     else:
-        return (wikiname, request.url_root, "/InterWiki", True)
+        return (wikiname, request.script_root, "/InterWiki", True)
 
 def join_wiki(wikiurl, wikitail):
     """
@@ -1522,7 +1522,7 @@ def link_tag(request, params, text=None, formatter=None, on=None, **kw):
     if text is None:
         text = params # default
     if formatter:
-        url = "%s/%s" % (request.url_root, params)
+        url = "%s/%s" % (request.script_root, params)
         # formatter.url will escape the url part
         if on is not None:
             tag = formatter.url(on, url, css_class, **kw)
@@ -1541,7 +1541,7 @@ def link_tag(request, params, text=None, formatter=None, on=None, **kw):
                 attrs += ' id="%s"' % id
             if name:
                 attrs += ' name="%s"' % name
-            tag = '<a%s href="%s/%s">' % (attrs, request.url_root, params)
+            tag = '<a%s href="%s/%s">' % (attrs, request.script_root, params)
             if not on:
                 tag = "%s%s</a>" % (tag, text)
         request.log("Warning: wikiutil.link_tag called without formatter and without request.html_formatter. tag=%r" % (tag, ))

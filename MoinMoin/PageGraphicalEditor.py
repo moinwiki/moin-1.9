@@ -313,9 +313,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         url_prefix_local = request.cfg.url_prefix_local
         wikipage = wikiutil.quoteWikinameURL(self.page_name)
         fckbasepath = url_prefix_local + '/applets/FCKeditor'
-        wikiurl = request.script_root
-        if not wikiurl or wikiurl[-1] != '/':
-            wikiurl += '/'
+        wikiurl = request.script_root + '/'
         themepath = '%s/%s' % (url_prefix_static, request.theme.name)
         smileypath = themepath + '/img'
         # auto-generating a list for SmileyImages does NOT work from here!

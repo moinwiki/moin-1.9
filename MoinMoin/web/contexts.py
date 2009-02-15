@@ -309,6 +309,12 @@ class HTTPContext(BaseContext):
         raise MoinMoinFinish('sent file')
 
     # fully deprecated functions, with warnings
+    def getScriptname(self):
+        warnings.warn(
+            "request.getScriptname() is deprecated, please use the request's script_root property.",
+            DeprecationWarning)
+        return self.request.script_root
+
     def getBaseURL(self):
         warnings.warn(
             "request.getBaseURL() is deprecated, please use the request's "
@@ -329,12 +335,13 @@ class HTTPContext(BaseContext):
         if scheme:
             return uri
 
-        result = "%s%s" % (self.request.host_url, uri)
+        host_url = self.request.host_url.rstrip('/')
+        result = "%s%s" % (host_url, uri)
 
         # This might break qualified urls in redirects!
         # e.g. mapping 'http://netloc' -> '/'
-        return wikiutil.mapURL(self, result)
-
+        result = wikiutil.mapURL(self, result)
+        return result
 
 class AuxilaryMixin(object):
     """
