@@ -100,7 +100,7 @@ import warnings
 # 'CacheNeedsUpdate' string exception in Page.py is supported for backwards compat reasons:
 warnings.filterwarnings('ignore', r'catching of string exceptions is deprecated', module='MoinMoin.Page')
 
-# subprocess was added in python 2.4 - we can't use it as long as we do not require 2.4:
+# TODO: subprocess was added in python 2.4, we now can refactor the code to use it and remove this:
 warnings.filterwarnings('ignore', r'The popen\d? module is deprecated.  Use the subprocess module.')
 
 
