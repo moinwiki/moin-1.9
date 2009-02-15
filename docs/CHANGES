@@ -34,12 +34,16 @@ Known main issues:
 
 Version 1.9.0beta1:
 
-  Please note: for beta1, we updated the *.po files with the system text
-  translations, so translators can see the current state in a working wiki.
-  We did NOT update the system and help pages yet in the download archive
-  of beta1, because we know that they still require much more work - please
-  see http://master19.moinmo.in/ for the current system and help pages and
-  their translations and please help cleaning up there.
+  Please note:
+  * This is a BETA version, not meant for production usage, but just to
+    discover bugs, incompatibilities, installation issues, documentation issues,
+    etc. - please report issues on MoinMoin:MoinMoinBugs.
+  * For the beta1 download archive, we updated the *.po files with the system
+    text translations and also the system and help pages, so translators can
+    see the current state in a working local wiki.
+    We know that translations and system / help pages are not yet finished and
+    that  they still require much more work.
+    Please see http://master19.moinmo.in/ and help cleaning up there.
 
   New features:
     * HINT: MoinMoin requires Python 2.4 now. If you only have Python 2.3 and
@@ -48,7 +52,12 @@ Version 1.9.0beta1:
       Please read the new install docs about how to use it.
       We are still working on the docs, please try to use them and report any
       bugs you find: http://master19.moinmo.in/InstallDocs
+      You also have a local copy of that page as docs/INSTALL.html.
       There is also some stuff in docs/INSTALL.wsgi.
+    * HINT: due to big changes in the request processing and the request
+      object (related to the WSGI refactoring), many 3rd party plugins might
+      need code updates to work with moin 1.9.
+      We are working on some docs about how to update them to work with 1.9.
     * We use the pygments highlighting library now, use it like this:
       {{{#!highlight xxx
       ...
@@ -56,6 +65,13 @@ Version 1.9.0beta1:
       xxx is any of the markups pygments supports.
       Note: we still have some (deprecated) small wrappers around pygments,
       so the old syntax #!python/pascal/cplusplus/... still works.
+    * TWikiDraw drawings are now stored as a single attachment foo.tdraw.
+      We added a migration script that converts your existing drawings.
+    * HINT: auth.http.HTTPAuth is now auth.GivenAuth
+      This was badly named from the beginning as for most servers, it just
+      looked at REMOTE_USER environment variable and relied on the server
+      doing the authentication (could be http basic auth or any other auth).
+      See HelpOnAuthentication.
 
 
 Version 1.8.2:
