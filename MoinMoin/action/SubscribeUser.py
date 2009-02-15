@@ -114,7 +114,7 @@ Example:
     if len(args) > 3:
         request_url = args[3]
     else:
-        request_url = "localhost/"
+        request_url = None
 
     # Setup MoinMoin environment
     from MoinMoin.web.contexts import ScriptContext

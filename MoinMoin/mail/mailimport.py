@@ -314,7 +314,7 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         request_url = sys.argv[1]
     else:
-        request_url = 'localhost/'
+        request_url = None
 
     from MoinMoin.web.contexts import ScriptContext
     request = ScriptContext(url=request_url)
