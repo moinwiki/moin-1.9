@@ -32,10 +32,23 @@ Known main issues:
     editor_default = 'text'  # internal default, just for completeness
 
 
-Version 1.9.current:
+Version 1.9.0beta1:
+
+  Please note: for beta1, we updated the *.po files with the system text
+  translations, so translators can see the current state in a working wiki.
+  We did NOT update the system and help pages yet in the download archive
+  of beta1, because we know that they still require much more work - please
+  see http://master19.moinmo.in/ for the current system and help pages and
+  their translations and please help cleaning up there.
+
   New features:
+    * HINT: MoinMoin requires Python 2.4 now. If you only have Python 2.3 and
+            you don't want to upgrade it, please use MoinMoin 1.8.x.
     * HINT: MoinMoin is now a WSGI application.
       Please read the new install docs about how to use it.
+      We are still working on the docs, please try to use them and report any
+      bugs you find: http://master19.moinmo.in/InstallDocs
+      There is also some stuff in docs/INSTALL.wsgi.
     * We use the pygments highlighting library now, use it like this:
       {{{#!highlight xxx
       ...
