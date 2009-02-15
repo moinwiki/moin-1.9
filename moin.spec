@@ -1,6 +1,6 @@
 %define name moin
 %define version 1.9.0
-%define release 0.0.alpha
+%define release 0.1.beta1
 #Upgrade Path Example:
 #     moin-1.3-0.1.beta1
 #         Patched
@@ -33,7 +33,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildArchitectures: noarch
 BuildRequires:  python-devel
-Requires:       python >= 2.3
+Requires:       python >= 2.4
 
 %description
 
@@ -47,12 +47,11 @@ only requiring a Python installation.
 echo $RPM_BUILD_ROOT
 
 %build
-# replace python by python2 if python refers to version 1.5 on your system
 python setup.py build
 
 %install
-# replace python by python2 if python refers to version 1.5 on your system
 python setup.py install --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -62,9 +61,14 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
 /usr
-%doc  README docs/CHANGES docs/INSTALL.html docs/licenses/COPYING
+%doc  README docs/CHANGES docs/INSTALL.html docs/UPDATE.html docs/licenses/COPYING
 
 %changelog
+* Sun Feb 15 2009 Thomas Waldmann
+- Raised requirement to Python 2.4
+- Removed references to Python 1.5
+- Fixed doc files.
+
 * Thu Jun  8 2006 Johannes Poehlmann
 - Fix RPM build errror "Files listet twice" 
   Replaced files list and just package all of /usr.
