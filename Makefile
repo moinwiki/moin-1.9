@@ -41,14 +41,14 @@ check-tabs:
 
 # Create documentation
 epydoc: patchlevel
-	@epydoc -o ../html-1.8 --name=MoinMoin --url=http://moinmo.in/ --graph=all --graph-font=Arial MoinMoin
+	@epydoc -o ../html-1.9 --name=MoinMoin --url=http://moinmo.in/ --graph=all --graph-font=Arial MoinMoin
 
 # Create new underlay directory from MoinMaster
 # Should be used only on TW machine
 underlay:
 	rm -rf $(share)/underlay
-	MoinMoin/script/moin.py --config-dir=/srv/moin/cfg/1.8 --wiki-url=master19.moinmo.in/ maint globaledit
-	MoinMoin/script/moin.py --config-dir=/srv/moin/cfg/1.8 --wiki-url=master19.moinmo.in/ maint reducewiki --target-dir=$(share)/underlay
+	MoinMoin/script/moin.py --config-dir=/srv/moin/cfg/1.9 --wiki-url=master19.moinmo.in/ maint globaledit
+	MoinMoin/script/moin.py --config-dir=/srv/moin/cfg/1.9 --wiki-url=master19.moinmo.in/ maint reducewiki --target-dir=$(share)/underlay
 	rm -rf $(share)/underlay/pages/InterWikiMap
 	rm -rf $(share)/underlay/pages/MoinPagesEditorGroup
 	cd $(share); rm -f underlay.tar; tar cf underlay.tar underlay
