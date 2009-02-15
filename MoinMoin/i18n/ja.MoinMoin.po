@@ -11,9 +11,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.6\n"
+"Project-Id-Version: MoinMoin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: 2008-06-18 07:54+0900\n"
 "Last-Translator: MasatakeIwasaki\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
@@ -86,6 +86,17 @@ msgstr "\"%(token)s\"の後に\"=\"がありません。"
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "\"%(token)s\"キーに値がありません。"
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "不明なアクション %(action_name)s。"
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "このページでアクション %(action_name)s を使用する権限がありません。"
+
+msgid "Login and try again."
+msgstr "ログインして、もう一度試してみてください。"
 
 msgid "Your changes are not saved!"
 msgstr "このページに対する変更は保存されませんでした。"
@@ -535,6 +546,9 @@ msgstr "箇所一致"
 msgid "about"
 msgstr "約"
 
+msgid "anonymous"
+msgstr ""
+
 msgid "Language"
 msgstr "言語"
 
@@ -609,9 +623,6 @@ msgstr ""
 "アカウントを持っていない場合、<a href=\"%(userprefslink)s\">作成することがで"
 "きます</a>。<a href=\"%(sendmypasswordlink)s\">もしくはパスワードをお忘れです"
 "か?</a>"
-
-msgid "You need to log in."
-msgstr "ログインしてください。"
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -847,6 +858,7 @@ msgstr "変更されたページ"
 msgid "Page changed"
 msgstr "ページが変更されました"
 
+#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
@@ -862,17 +874,15 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " 強調:: <<Verbatim('')>>''イタリック''<<Verbatim('')>>、<<Verbatim(''')"
 ">>'''ボールド'''<<Verbatim(''')>>、<<Verbatim(''''')>>'''''ボールドイタリッ"
 "ク'''''<<Verbatim(''''')>>、<<Verbatim('')>>''混合 ''<<Verbatim(''')"
 ">>'''''ボールド'''<<Verbatim(''')>>とイタリック''<<Verbatim('')>>、<<Verbatim"
 "(----)>> 水平線。\n"
-" 見出し:: <<Verbatim(=)>> タイトル1 <<Verbatim(=)>>、<<Verbatim(==)>> タイト"
-"ル2 <<Verbatim(==)>>、<<Verbatim(===)>> タイトル3 <<Verbatim(===)>>、"
-"<<Verbatim(====)>> タイトル4 <<Verbatim(====)>>、<<Verbatim(=====)>> タイトル"
-"5 <<Verbatim(=====)>>。\n"
+" 見出し:: = タイトル1 =、== タイトル2 ==、=== タイトル3 ===、==== タイトル4 "
+"====、===== タイトル5 =====。\n"
 " リスト:: 半角スペースに続けて: * 小丸、1., a., A., i., I. 番号付アイテム、1."
 "#n nから番号開始、半角スペースのみでインデント。\n"
 " リンク:: <<Verbatim(JoinCapitalizedWords)>>、<<Verbatim([[ターゲット|リンク"
@@ -1156,13 +1166,11 @@ msgstr "購読中のイベント"
 msgid "Subscribed wiki pages<<BR>>(one regex per line)"
 msgstr "購読中のwikiページ<<BR>>(1行あたりひとつの正規表現)"
 
-#, fuzzy
 msgid "OpenID server"
-msgstr "OpenIDのサービスが提供されていません"
+msgstr ""
 
-#, fuzzy
 msgid "The selected websites have been removed."
-msgstr "選択されたOpenIDは削除されています。"
+msgstr ""
 
 msgid "Trusted websites"
 msgstr ""
@@ -1443,9 +1451,8 @@ msgstr ""
 "ユーザ名、パスワード回復トークン、新しいパスワード(2回)を以下に入力してくださ"
 "い。"
 
-#, fuzzy
 msgid "Wiki Backup"
-msgstr "Wikiマークアップ"
+msgstr ""
 
 msgid ""
 "= Downloading a backup =\n"
@@ -1493,6 +1500,13 @@ msgstr "チャートタイプ\"%s\"が不正です。"
 
 msgid "Load"
 msgstr "ロード"
+
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"ファイルの中身がありません。ファイル名からASCII以外の文字を削除して、もう一度"
+"試してください。"
 
 msgid "Pagename not specified!"
 msgstr "ページ名が指定されていません。"
@@ -1621,13 +1635,6 @@ msgstr "\"%(pagename)s の添付ファイル\""
 
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "このページの添付ファイルを更新する権限がありません。"
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"ファイルの中身がありません。ファイル名からASCII以外の文字を削除して、もう一度"
-"試してください。"
 
 #, python-format
 msgid ""
@@ -1853,9 +1860,8 @@ msgstr "ファイル名\"%s\"が不正です。"
 msgid "Created the package %s containing the pages %s."
 msgstr "パッケージ %s を作成しました。(ページ %s を含む)"
 
-#, fuzzy
 msgid "Include all attachments?"
-msgstr "[添付ファイル数: %d]"
+msgstr ""
 
 msgid "Package pages"
 msgstr "ページをパッケージ化"
@@ -2354,6 +2360,19 @@ msgstr ""
 msgid "You need to be subscribed to unsubscribe."
 msgstr "購読していないページの購読を止めることはできません。"
 
+msgid "Password is too short."
+msgstr ""
+
+msgid "Password has not enough different characters."
+msgstr ""
+
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr ""
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr ""
+
 msgid "Diffs"
 msgstr "差分"
 
@@ -2592,9 +2611,8 @@ msgstr "ユーザ"
 msgid "[ATTACH]"
 msgstr ""
 
-#, fuzzy
 msgid "Variable name"
-msgstr "ファイル名"
+msgstr ""
 
 msgid "Description"
 msgstr ""
@@ -2900,17 +2918,6 @@ msgstr "[空]"
 msgid "filter"
 msgstr "フィルタ"
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "不明なアクション %(action_name)s。"
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "このページでアクション %(action_name)s を使用する権限がありません。"
-
-msgid "Login and try again."
-msgstr "ログインして、もう一度試してみてください。"
-
 msgid "FrontPage"
 msgstr "フロントページ"
 
@@ -3004,6 +3011,9 @@ msgstr "クリック可能なdrawing: %(filename)s"
 
 msgid "Toggle line numbers"
 msgstr "行番号表示/非表示切替"
+
+#~ msgid "You need to log in."
+#~ msgstr "ログインしてください。"
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

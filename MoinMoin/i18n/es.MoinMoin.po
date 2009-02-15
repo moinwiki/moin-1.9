@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: 2008-08-15 10:04-0500\n"
 "Last-Translator: Igor Támara <igor@tamaraptino.org>\n"
 "Language-Team: Spanish <moin-devel@lists.sourceforge.net>\n"
@@ -88,6 +88,17 @@ msgstr "Se espera \"=\" luego de \"%(token)s\""
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "Se esperaba un valor para la llave \"%(token)s\""
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Acción desconocida %(action_name)s"
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "No tienes permisos para la acción %(action_name)s en esta página."
+
+msgid "Login and try again."
+msgstr "Ingresa al sistema e inténtalo nuevamente."
 
 msgid "Your changes are not saved!"
 msgstr "¡Tus cambios NO se han grabado!"
@@ -553,6 +564,9 @@ msgstr "coincidencias"
 msgid "about"
 msgstr "acerca de"
 
+msgid "anonymous"
+msgstr ""
+
 msgid "Language"
 msgstr "Idioma"
 
@@ -625,9 +639,6 @@ msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
-
-msgid "You need to log in."
-msgstr "Se requiere tu ingreso."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -859,7 +870,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Énfasis:: <<Verbatim('')>>''cursiva''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''negrilla'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''negrilla "
@@ -1490,6 +1501,13 @@ msgstr "¡Tipo de gráfico incorrecto \"%s\"!"
 msgid "Load"
 msgstr "Subir"
 
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Archivo sin contenidos. Elimina los caracteres que no sean ASCII en el "
+"nombre de archivo e intenta nuevamente."
+
 msgid "Pagename not specified!"
 msgstr "No especificaste un nombre para la página"
 
@@ -1621,13 +1639,6 @@ msgstr "Adjuntos para \"%(pagename)s\""
 
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "No tienes permisos para sobreescribir adjuntos de esta página."
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"Archivo sin contenidos. Elimina los caracteres que no sean ASCII en el "
-"nombre de archivo e intenta nuevamente."
 
 #, python-format
 msgid ""
@@ -2353,6 +2364,23 @@ msgstr "Edita la suscripción a expresiones regulares en tus preferencias."
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Necesitas estar suscrito para cancelar la suscripción."
 
+#, fuzzy
+msgid "Password is too short."
+msgstr "Restaurar clave"
+
+msgid "Password has not enough different characters."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr ""
+"Faltó ingresar la contraseña. Por favor, ingresa el nombre de usuario y "
+"contraseña"
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr ""
+
 msgid "Diffs"
 msgstr "Diferencias"
 
@@ -2898,17 +2926,6 @@ msgstr "[vacíos]"
 msgid "filter"
 msgstr "filtro"
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Acción desconocida %(action_name)s"
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "No tienes permisos para la acción %(action_name)s en esta página."
-
-msgid "Login and try again."
-msgstr "Ingresa al sistema e inténtalo nuevamente."
-
 msgid "FrontPage"
 msgstr "PáginaInicial"
 
@@ -3002,6 +3019,9 @@ msgstr "Dibujo clickeable: %(filename)s"
 
 msgid "Toggle line numbers"
 msgstr "[des]activar nros. de línea"
+
+#~ msgid "You need to log in."
+#~ msgstr "Se requiere tu ingreso."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

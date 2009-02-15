@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: 2007-12-22 17:56+0200\n"
 "Last-Translator: YiannisValassakis <tungolcild@gmail.com>\n"
 "Language-Team: Greek <moin-devel@lists.sourceforge.net>\n"
@@ -90,6 +90,17 @@ msgstr "Αναμένονταν το  \"=\" να ακολουθείται από 
 
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
+msgstr ""
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr ""
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr ""
+
+msgid "Login and try again."
 msgstr ""
 
 msgid "Your changes are not saved!"
@@ -513,6 +524,9 @@ msgstr "ταιριάζουν"
 msgid "about"
 msgstr ""
 
+msgid "anonymous"
+msgstr ""
+
 msgid "Language"
 msgstr "Γλώσσα"
 
@@ -580,9 +594,6 @@ msgstr ""
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
-msgstr ""
-
-msgid "You need to log in."
 msgstr ""
 
 #, python-format
@@ -815,7 +826,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 
 #, python-format
@@ -1362,6 +1373,11 @@ msgstr ""
 msgid "Load"
 msgstr ""
 
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+
 msgid "Pagename not specified!"
 msgstr ""
 
@@ -1484,11 +1500,6 @@ msgstr ""
 #, fuzzy
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "Δεν επιτρέπεται να αλλάξετε το όνομα της σελίδας!"
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
 
 #, python-format
 msgid ""
@@ -2155,6 +2166,20 @@ msgstr ""
 msgid "You need to be subscribed to unsubscribe."
 msgstr ""
 
+#, fuzzy
+msgid "Password is too short."
+msgstr "Κωδικός"
+
+msgid "Password has not enough different characters."
+msgstr ""
+
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr ""
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr ""
+
 msgid "Diffs"
 msgstr ""
 
@@ -2694,17 +2719,6 @@ msgid "[empty]"
 msgstr ""
 
 msgid "filter"
-msgstr ""
-
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr ""
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr ""
-
-msgid "Login and try again."
 msgstr ""
 
 msgid "FrontPage"

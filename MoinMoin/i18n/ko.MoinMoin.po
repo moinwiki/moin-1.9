@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: 2008-03-12 15:01+0900\n"
 "Last-Translator: Seungik Lee <seungiklee@gmail.com>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
@@ -86,6 +86,17 @@ msgstr "\"%(token)s\" 뒤에는 \"=\"이 와야 합니다"
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "\"%(token)s\" 뒤에는 값이 필요합니다."
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "알 수 없는 액션: %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "이 문서에 %(action_name)s 작업을 수행할 수 있는 권한이 없습니다!"
+
+msgid "Login and try again."
+msgstr "로그인 후 다시 시도하세요."
 
 msgid "Your changes are not saved!"
 msgstr "변경 사항이 저장되지 않았습니다!"
@@ -514,6 +525,9 @@ msgstr " 개 포함"
 msgid "about"
 msgstr ""
 
+msgid "anonymous"
+msgstr ""
+
 msgid "Language"
 msgstr "언어"
 
@@ -588,10 +602,6 @@ msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
-
-#, fuzzy
-msgid "You need to log in."
-msgstr "로그아웃 되었습니다."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -831,7 +841,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " 강조:: <<Verbatim('')>>''뉘여쓰기''<<Verbatim('')>>; <<Verbatim(''')>>'''굵"
 "게'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''굵게 뉘여쓰기'''''<<Verbatim"
@@ -1434,6 +1444,13 @@ msgstr "잘못된 차트 종류 입니다: \"%s\""
 msgid "Load"
 msgstr "로드"
 
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"파일 내용이 전송되지 않았습니다. ASCII 문자만으로 이루어진 파일 이름을 사용해"
+"보세요."
+
 #, fuzzy
 msgid "Pagename not specified!"
 msgstr "첨부 파일 이름이 지정되지 않았습니다!"
@@ -1559,13 +1576,6 @@ msgstr "\"%(pagename)s\"의 첨부파일들"
 #, fuzzy
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "이 문서에 첨부된 파일을 볼 수 있는 권한이 없습니다."
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"파일 내용이 전송되지 않았습니다. ASCII 문자만으로 이루어진 파일 이름을 사용해"
-"보세요."
 
 #, python-format
 msgid ""
@@ -2253,6 +2263,21 @@ msgstr "UserPreferences에서 정규표현식으로 된 구독 목록을 수정�
 msgid "You need to be subscribed to unsubscribe."
 msgstr "구독하고 있지 않으므로 구독 취소할 수 없습니다."
 
+#, fuzzy
+msgid "Password is too short."
+msgstr "암호 (확인)"
+
+msgid "Password has not enough different characters."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr "비밀번호가 없습니다. 사용자 이름과 비밀번호를 다시 입력하세요."
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr ""
+
 msgid "Diffs"
 msgstr "차이점 비교"
 
@@ -2794,17 +2819,6 @@ msgstr ""
 msgid "filter"
 msgstr ""
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "알 수 없는 액션: %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "이 문서에 %(action_name)s 작업을 수행할 수 있는 권한이 없습니다!"
-
-msgid "Login and try again."
-msgstr "로그인 후 다시 시도하세요."
-
 msgid "FrontPage"
 msgstr "대문"
 
@@ -2898,6 +2912,10 @@ msgstr "클릭 가능 그림 \"%(filename)s\""
 
 msgid "Toggle line numbers"
 msgstr "줄 번호 보이기/숨기기"
+
+#, fuzzy
+#~ msgid "You need to log in."
+#~ msgstr "로그아웃 되었습니다."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

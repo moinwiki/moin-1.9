@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: 2008-05-12 15:58-0400\n"
 "Last-Translator: Igor Miletic <grejigl-gnomeprevod@yahoo.ca>\n"
 "Language-Team: Serbian <fedora-trans-sr@redhat.com>\n"
@@ -89,6 +89,17 @@ msgstr "Очекивано „=“ после „%(token)s“"
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "Очекивана вредност за кључ „%(token)s“"
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Непозната радња %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Није вам дозвољено да %(action_name)s на овој страници."
+
+msgid "Login and try again."
+msgstr "Пријавите се и покушајте поново"
 
 msgid "Your changes are not saved!"
 msgstr "Ваше промене нису сачуване!"
@@ -539,6 +550,9 @@ msgstr "поклапа"
 msgid "about"
 msgstr ""
 
+msgid "anonymous"
+msgstr ""
+
 msgid "Language"
 msgstr "Језик"
 
@@ -611,9 +625,6 @@ msgid ""
 msgstr ""
 "Немате налог,  <a href=\"%(userprefslink)s\">можете направити један сада</"
 "a>. <a href=\"%(sendmypasswordlink)s\">Заборавилисте лозинку?</a>"
-
-msgid "You need to log in."
-msgstr "Морате се пријавити."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -865,7 +876,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Наглашавање:: <<Verbatim('')>>''укошено''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''задебљано'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''задебљано и "
@@ -1501,6 +1512,13 @@ msgstr "Лош графикон врсте „%s“!"
 msgid "Load"
 msgstr "Учитај"
 
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Нема садржаја у датотеци. Избришите ASCII занкове из имена датотеке и "
+"покушајте поново."
+
 #, fuzzy
 msgid "Pagename not specified!"
 msgstr "Име датотеке прилога није одређено!"
@@ -1629,13 +1647,6 @@ msgstr "Прилози за „%(pagename)s“"
 #, fuzzy
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "Није вам дозвољено да видите прилоге на овој страници."
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"Нема садржаја у датотеци. Избришите ASCII занкове из имена датотеке и "
-"покушајте поново."
 
 #, python-format
 msgid ""
@@ -2351,6 +2362,21 @@ msgstr ""
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Морате се прво претплатити да би могли укинути претплату."
 
+#, fuzzy
+msgid "Password is too short."
+msgstr "Понови лозинку"
+
+msgid "Password has not enough different characters."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr "Недостаје лозинка. Упишите корисничко име и лозинку."
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr ""
+
 msgid "Diffs"
 msgstr "Разлике"
 
@@ -2893,17 +2919,6 @@ msgstr "[празно]"
 msgid "filter"
 msgstr "филтер"
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Непозната радња %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Није вам дозвољено да %(action_name)s на овој страници."
-
-msgid "Login and try again."
-msgstr "Пријавите се и покушајте поново"
-
 msgid "FrontPage"
 msgstr "НасловнаСтрана"
 
@@ -2997,6 +3012,9 @@ msgstr "Цртеж на који се може притиснути: %(filename)
 
 msgid "Toggle line numbers"
 msgstr "Укључи/искучи бројеве редова"
+
+#~ msgid "You need to log in."
+#~ msgstr "Морате се пријавити."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

@@ -11,9 +11,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.7\n"
+"Project-Id-Version: MoinMoin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: 2008-06-13 18:25+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
@@ -87,6 +87,18 @@ msgstr "Merkin \"=\" täytyy seurata sanaa \"%(token)s\""
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "Odotettiin arvoa avaimelle \"%(token)s\""
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Tuntematon toiminto %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr ""
+"Sinulla ei ole oikeutta käyttää toimintoa %(action_name)s tällä sivulla!"
+
+msgid "Login and try again."
+msgstr "Kirjaudu sisään ja yritä uudelleen."
 
 msgid "Your changes are not saved!"
 msgstr "Muutoksiasi ei ole tallennettu!"
@@ -242,7 +254,7 @@ msgid ""
 msgstr ""
 "'''Sivu nimeltä {{{'%s'}}} on jo olemassa.'''\n"
 "\n"
-"Koeta eri nimeä."
+"Anna sivulle eri nimi."
 
 #, python-format
 msgid "Could not copy page because of file system error: %s."
@@ -451,7 +463,6 @@ msgstr "Tuntematon funktio %(func)s rivillä %(lineno)i."
 msgid "The file %s was not found in the package."
 msgstr "Tiedostoa %s ei löytynyt paketista."
 
-# Is ”asettamiseksi uudelleen” ok in Finnish?
 #, python-format
 msgid ""
 "Login Name: %s\n"
@@ -481,7 +492,7 @@ msgstr ""
 
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
-msgstr "[%(sitename)s] Wikitunnuksesi tiedot"
+msgstr "[%(sitename)s] Wiki-tunnuksesi tiedot"
 
 msgid "Line"
 msgstr "Rivi"
@@ -537,6 +548,9 @@ msgstr "osumaa"
 
 msgid "about"
 msgstr "noin"
+
+msgid "anonymous"
+msgstr ""
 
 msgid "Language"
 msgstr "Kieli"
@@ -611,9 +625,6 @@ msgstr ""
 "Jos sinulla ei ole käyttäjätunnusta, <a href=\"%(userprefslink)s\">voit "
 "luoda sen nyt</a>. <a href=\"%(sendmypasswordlink)s\">Unohditko salasanasi?</"
 "a>"
-
-msgid "You need to log in."
-msgstr "Sinun on kirjauduttava sisään."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -793,7 +804,7 @@ msgstr ""
 msgid "New user account created on %(sitename)s"
 msgstr "Wikiin %(sitename)s on luotu uusi käyttäjätunnus"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear Superuser, a new user has just been created on %(sitename)s\". Details "
 "follow:\n"
@@ -801,8 +812,8 @@ msgid ""
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
 msgstr ""
-"Tiedoksi pääkäyttäjälle, uusi käyttäjä on luotu äskettäin.\n"
-"Lisätietoja:\n"
+"Tiedoksi pääkäyttäjälle, uusi käyttäjä on luotu äskettäin sivustolle %"
+"(sitename)s\". Lisätietoja käyttäjästä:\n"
 "\n"
 "    Käyttäjätunnus: %(username)s\n"
 "    Sähköpostiosoite: %(useremail)s"
@@ -841,6 +852,7 @@ msgstr "Muutettu sivu"
 msgid "Page changed"
 msgstr "Sivua on muutettu"
 
+#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
@@ -856,7 +868,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Korostus:: <<Verbatim('')>>''kursiivi''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''lihavoitu'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''lihavoitu "
@@ -1246,7 +1258,7 @@ msgstr "Kirjaudu ensin sisään."
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Luo kotisivu, ennen kuin luot muita sivuja."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "You can add some additional sub pages to your already existing homepage "
 "here.\n"
@@ -1274,9 +1286,9 @@ msgid ""
 "\n"
 msgstr ""
 "Voit lisätä omalle kotisivullesi alasivuja\n"
-"tästä. \n"
-"Voit valita kuinka avoimia sivuja haluat muiden lukijoiden ja\n"
-"kirjoittajien suhteen. Oikeudet riippuvat kuulumisesta vastaavalle "
+"tästä.\n"
+"Voit valita, millaiset oikeudet muilla käyttäjillä on\n"
+"sivuillesi. Oikeudet riippuvat tietyn käyttäjän kuulumisesta vastaavalle "
 "ryhmäsivulle.\n"
 "\n"
 "Kirjoita vain alasivun nimi ja napsauta painiketta luodaksesi sivu.\n"
@@ -1284,9 +1296,10 @@ msgstr ""
 "Ennen kuin teet pääsyltään rajoitettuja sivuja, varmista että vastaava\n"
 "ryhmäsivu on olemassa ja että kyseisellä sivulla on haluttujen käyttäjien "
 "tunnukset. Käytä ryhmäsivun\n"
-"luomiseksi sivupohjaa HomepageGroupsTemplate.\n"
+"luomiseksi sivupohjaa KotiSivuRyhmätPohja.\n"
 "\n"
-"||'''Lisää uusi oma sivu:'''||'''Vastaava pääsyrajoituksen ryhmä:'''||\n"
+"||'''Lisää uusi henkilökohtainen sivu:'''||'''Vastaava pääsyrajoituksen "
+"ryhmä:'''||\n"
 "||<<NewPage(HomepageReadWritePageTemplate,luettavissa ja kirjoitettavissa,%"
 "(username)s)>>||[\"%(username)s/ReadWriteGroup\"]||\n"
 "||<<NewPage(HomepageReadPageTemplate,vain luettavissa,%(username)s)>>||[\"%"
@@ -1400,7 +1413,7 @@ msgid ""
 "Enter a new password below."
 msgstr ""
 "\n"
-"== Salasanan asettaminen uudelleen ==\n"
+"== Salasanan uusiminen ==\n"
 "Syötä uusi salasana alle."
 
 msgid "Lost password"
@@ -1451,6 +1464,18 @@ msgid ""
 "\n"
 "To get a backup, just click here:"
 msgstr ""
+"= Varmuuskopion lataus =\n"
+"\n"
+"Ota seuraavat asiat huomioon:\n"
+" * Säilytä varmuuskopiot turvallisessa paikassa - ne sisältävät "
+"arkaluonteista tietoa.\n"
+" * Varmista, että wikin backup_*-määritykset ovat kelvolliset ja kattavat "
+"kaikki asetukset.\n"
+" * Varmista, että varmuuskopiotiedosto sisältää kaiken oleellisen, jotta "
+"palautus onnistuisi mahdollisissa ongelmatilanteissa.\n"
+" * Varmista, että varmuuskopiotiedoston lataus onnistuu.\n"
+"\n"
+"Lataa varmuuskopiotiedosto oheisesta linkistä:"
 
 msgid "Backup"
 msgstr "Varmuuskopio"
@@ -1483,6 +1508,13 @@ msgstr "Kelvoton kaavion tyyppi \"%s\"!"
 
 msgid "Load"
 msgstr "Lataa"
+
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Ei tiedostosisältöä. Poista muut kuin ASCII-merkit nimestä ja yritä "
+"uudelleen."
 
 msgid "Pagename not specified!"
 msgstr "Nimeä ei ole määritelty!"
@@ -1613,13 +1645,6 @@ msgstr "Liitetiedostot sivulla %(pagename)s"
 
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "Sinulla ei ole oikeutta korvata tämän sivun liitetiedostoja."
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"Ei tiedostosisältöä. Poista muut kuin ASCII-merkit nimestä ja yritä "
-"uudelleen."
 
 #, python-format
 msgid ""
@@ -2348,6 +2373,20 @@ msgstr "Muokkaa tilauksien säännöllisiä lausekkeita asetuksistasi."
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Et voi perua tilausta, sillä et ole tilaaja."
 
+msgid "Password is too short."
+msgstr "Salasana on liian lyhyt."
+
+msgid "Password has not enough different characters."
+msgstr "Salasanassa ei ole riittävästi eri merkkejä."
+
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr ""
+"Salasana on liian helppo arvata (salasana sisältää nimen tai nimi salasanan)."
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr "Salasana on liian helppo arvata."
+
 msgid "Diffs"
 msgstr "Erot"
 
@@ -2584,11 +2623,10 @@ msgid "User"
 msgstr "Käyttäjä"
 
 msgid "[ATTACH]"
-msgstr ""
+msgstr "[LIITÄ]"
 
-#, fuzzy
 msgid "Variable name"
-msgstr "Tiedostonimi"
+msgstr "Muuttujan nimi"
 
 msgid "Description"
 msgstr "Kuvaus"
@@ -2648,6 +2686,10 @@ msgid ""
 "''italic'', those may be due to third-party extensions needing configuration "
 "or settings that were removed from Moin."
 msgstr ""
+"Taulukossa näkyvät asetukset, joilla ei ole oletusarvoja tässä wikissä. "
+"Asetukset, joita järjestelmä ei tunnista, näytetään ''kursivoituna''. Ne "
+"saattavat olla kolmansien osapuolien laajennuksiin liittyviä asetuksia tai "
+"vaihtoehtoisesti asetuksia, jotka on poistettu MoinMoinista."
 
 msgid "Setting"
 msgstr "Asetus"
@@ -2894,18 +2936,6 @@ msgstr "[tyhjä]"
 msgid "filter"
 msgstr "suodatin"
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Tuntematon toiminto %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr ""
-"Sinulla ei ole oikeutta käyttää toimintoa %(action_name)s tällä sivulla!"
-
-msgid "Login and try again."
-msgstr "Kirjaudu sisään ja yritä uudelleen."
-
 msgid "FrontPage"
 msgstr "EtuSivu"
 
@@ -2999,6 +3029,9 @@ msgstr "Napsautettava piirros: %(filename)s"
 
 msgid "Toggle line numbers"
 msgstr "Rivinumerot päälle/pois"
+
+#~ msgid "You need to log in."
+#~ msgstr "Sinun on kirjauduttava sisään."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
@@ -3254,8 +3287,7 @@ msgstr "Rivinumerot päälle/pois"
 
 #~ msgid ""
 #~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-#~ msgstr ""
-#~ "Tuntematon käyttäjänimi: {{{\"%s\"}}}. Anna käyttäjänimi ja salasana."
+#~ msgstr "Tuntematon käyttäjä: {{{\"%s\"}}}. Anna käyttäjänimi ja salasana."
 
 #~ msgid "raw"
 #~ msgstr "muotoilematon"
@@ -3311,6 +3343,5 @@ msgstr "Rivinumerot päälle/pois"
 #~ msgstr ""
 #~ "Valitettavasti joku muu tallensi sivun sillä aikaa kun muokkasit sitä.\n"
 #~ "\n"
-#~ "Ystävällisesti toimi seuraavasti: Käytä selaimesi Takaisin-nappia ja "
-#~ "kopioi\n"
+#~ "Toimi seuraavasti: Käytä selaimen Takaisin-painiketta ja kopioi\n"
 #~ "muutoksesi leikepöydälle. Eteenpäin-napilla pääset takaisin t"

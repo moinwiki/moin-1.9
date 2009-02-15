@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rakesh Pandit <rakesh.pandit@gmail.com>\n"
 "Language-Team: Hindi\n"
@@ -86,6 +86,17 @@ msgstr "\"%(token)s\" के बाद \"=\" अनुमािनत है।"
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "\"%(token)s\" कुंजी के िलए अनुमािनत मान"
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr ""
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr ""
+
+msgid "Login and try again."
+msgstr ""
 
 msgid "Your changes are not saved!"
 msgstr "आपका परिवर्तन सुरक्षित नहीं किया गया। "
@@ -496,6 +507,9 @@ msgstr ""
 msgid "about"
 msgstr ""
 
+msgid "anonymous"
+msgstr ""
+
 msgid "Language"
 msgstr ""
 
@@ -564,10 +578,6 @@ msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
-
-#, fuzzy
-msgid "You need to log in."
-msgstr "आप अभी लागूड आवूट है।"
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -776,7 +786,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 
 #, python-format
@@ -1320,6 +1330,11 @@ msgstr ""
 msgid "Load"
 msgstr ""
 
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+
 msgid "Pagename not specified!"
 msgstr ""
 
@@ -1442,11 +1457,6 @@ msgstr ""
 #, fuzzy
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "आप यह पृष्ठ कॉपी नही कर सकते।"
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
 
 #, python-format
 msgid ""
@@ -2112,6 +2122,20 @@ msgstr ""
 msgid "You need to be subscribed to unsubscribe."
 msgstr "आप इस पृष्ट पर अिभदािनत कर दिए गए है।"
 
+#, fuzzy
+msgid "Password is too short."
+msgstr "संकेत शब्द"
+
+msgid "Password has not enough different characters."
+msgstr ""
+
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr ""
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr ""
+
 msgid "Diffs"
 msgstr ""
 
@@ -2651,17 +2675,6 @@ msgstr ""
 msgid "filter"
 msgstr ""
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr ""
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr ""
-
-msgid "Login and try again."
-msgstr ""
-
 msgid "FrontPage"
 msgstr ""
 
@@ -2755,6 +2768,10 @@ msgstr ""
 
 msgid "Toggle line numbers"
 msgstr ""
+
+#, fuzzy
+#~ msgid "You need to log in."
+#~ msgstr "आप अभी लागूड आवूट है।"
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

@@ -11,12 +11,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.7\n"
+"Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
-"PO-Revision-Date: 2008-06-29 13:35+0200\n"
-"Last-Translator: Aurelijus Sudzius <ruledbyfate@gmail.com>\n"
-"Language-Team: Lithuanian <ruledbyfate@gmail.com>\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
+"PO-Revision-Date: 2009-02-03 00:30+0200\n"
+"Last-Translator: Ernestas Liubarskij <e.liubarskij@gmail.com>\n"
+"Language-Team: Lithuanian <e.liubarskij@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -27,11 +27,11 @@ msgstr ""
 
 #, python-format
 msgid "Argument \"%s\" must be a boolean value, not \"%s\""
-msgstr "Argumentas „%s“ privalo būti teigiamos/neigiamos reikšmės, o ne „%s“"
+msgstr "Argumentas „%s“ privalo būti loginės reikšmės, o ne „%s“"
 
 #, python-format
 msgid "Argument must be a boolean value, not \"%s\""
-msgstr "Argumentas privalo būti teigiamos/neigiamos reikšmės, o ne „%s“"
+msgstr "Argumentas privalo būti loginės reikšmės, o ne „%s“"
 
 #, python-format
 msgid "Argument \"%s\" must be an integer value, not \"%s\""
@@ -69,7 +69,7 @@ msgid "Too many arguments"
 msgstr "Per daug argumentų"
 
 msgid "Cannot have arguments without name following named arguments"
-msgstr "Po įvardintų argumentų negali būtia argumentų be pavadinimo"
+msgstr "Po įvardintų argumentų negali būti argumentų be pavadinimo"
 
 #, python-format
 msgid "Argument \"%s\" is required"
@@ -86,6 +86,17 @@ msgstr "Po „%(token)s“ tikimasi „=“"
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "Raktui „%(token)s“ tikimasi reikšmės"
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Nežinomas veiksmas %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Jums neleidžiama vykdyti %(action_name)s šiame puslapyje."
+
+msgid "Login and try again."
+msgstr "Prisijunkite ir bandykite dar kartą."
 
 msgid "Your changes are not saved!"
 msgstr "Jūsų nustatymai neišaugoti!"
@@ -212,7 +223,7 @@ msgid "Load Draft"
 msgstr "Įkrauti juodraštį"
 
 msgid "Trivial change"
-msgstr "Paprastas pakeitimas"
+msgstr "Nežymus pakeitimas"
 
 msgid "Comment:"
 msgstr "Komentaras:"
@@ -264,7 +275,7 @@ msgid "You are not allowed to delete this page!"
 msgstr "Jūs negalite pašalinti šio puslapio!"
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr "Ačiū už jūsų pakeitimus. Jūsų pastabumas yra vertinamas."
+msgstr "Ačiū už pakeitimus. Jūsų pastabumas ypač vertinamas."
 
 #, python-format
 msgid "Page \"%s\" was successfully deleted!"
@@ -341,7 +352,7 @@ msgstr ""
 "puslapį."
 
 msgid "Use the Preview button to extend the locking period."
-msgstr "Naudokite peržiūros mygtuką, kad pratęstumėte užrakinimo periodą."
+msgstr "Naudokite peržiūros mygtuką, kad pratęstumėte užrakinimo laikotarpį."
 
 #, python-format
 msgid ""
@@ -530,13 +541,16 @@ msgid "last modified: %s"
 msgstr "paskutinį kartą modifikuota: %s"
 
 msgid "match"
-msgstr "sutapti"
+msgstr "sutapimas"
 
 msgid "matches"
-msgstr "sutampa"
+msgstr "sutapimai(-ų)"
 
 msgid "about"
 msgstr "apie"
+
+msgid "anonymous"
+msgstr "anoniminis"
 
 msgid "Language"
 msgstr "Kalba"
@@ -610,9 +624,6 @@ msgid ""
 msgstr ""
 "Jei dar neturite paskyros, <a href=\"%(userprefslink)s\">galite sukurti ją "
 "dabar</a>. <a href=\"%(sendmypasswordlink)s\">Pamiršote savo slaptažodį?</a>"
-
-msgid "You need to log in."
-msgstr "Jūs turite prisijungti."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -796,7 +807,7 @@ msgstr ""
 msgid "New user account created on %(sitename)s"
 msgstr "%(sitename)s sukurta nauja naudotojo paskyra"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear Superuser, a new user has just been created on %(sitename)s\". Details "
 "follow:\n"
@@ -804,7 +815,8 @@ msgid ""
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
 msgstr ""
-"Mielasis administratoriau, ką tik sukurtas naujas naudotojas. Informacija:\n"
+"Mielasis administratoriau, %(sitename)s\" ką tik sukurtas naujas naudotojas. "
+"Informacija:\n"
 "\n"
 "    Naudotojo vardas: %(username)s\n"
 "    El. pašto adresas: %(useremail)s"
@@ -860,20 +872,20 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Šriftas:: <<Verbatim('')>>''pasviręs''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''paryškintas'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''paryškintas ir "
 "pasviręs'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mišrus ''<<Verbatim(''')"
 ">>'''''paryškintas'''<<Verbatim(''')>> ir pasviręs''<<Verbatim('')>>; "
-"<<Verbatim(----)>> horizontali liniuotė.\n"
+"<<Verbatim(----)>> horizontali linija.\n"
 " Antraštės:: = 1 antraštė =; == 2 antraštė ==; === 3 antraštė ===; ==== 4 "
 "antraštė ====; ===== 5 antraštė =====.\n"
 " Sąrašai:: tarpas ir vienas iš: * punktų; 1., a., A., i., I. sunumeruotų "
 "punktų; 1.#n pradedant numeraciją nuo n; vienas tarpas rikiavimui.\n"
-" Nuorodos:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[adresas|"
+" Nuorodos:: <<Verbatim(TaipSujungtiŽodžiai)>>; <<Verbatim([[adresas|"
 "tekstas]])>>.\n"
-" Lentelės:: || stulpelio tekstas |||| stulpelio teksto trukmė 2 stulpeliams "
+" Lentelės:: || langelio tekstas |||| langelio tekstas, apimantis 2 stulpelius "
 "||;    neleidžiami baigtiniai tarpai po lentelių ar pavadinimų.\n"
 "\n"
 "(!) Dėl papildomos informacijos žiūrėkite PagalbaRedagavimo arba "
@@ -934,11 +946,11 @@ msgstr ""
 "Antraštės: 1 antraštė  2 antraštė  3 antraštė\n"
 "           ==========  ----------  ~~~~~~~~~~\n"
 "\n"
-"Horizontali liniuotė: ---- \n"
+"Horizontali linija: ---- \n"
 "Nuorodos: BaigiamasisBrūkšnys_ `keli žodžiai atbulinėse kabutėse`_ "
-"išorinis_\n"
+"išorinė_\n"
 "\n"
-".. _išorinis: http://išorinė-svetainė.example.org/foo/\n"
+".. _išorinė: http://išorinė-svetainė.example.org/foo/\n"
 "\n"
 "Sąrašai: * punktai; 1., a. sunumeruoti punktai.\n"
 "}}}\n"
@@ -977,7 +989,7 @@ msgstr ""
 ">>'''paryškintas'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''paryškintas ir "
 "pasviręs'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mišrus ''<<Verbatim(**)"
 ">>'''''paryškintas'''<<Verbatim(**)>> ir pasviręs''<<Verbatim(//)>>;\n"
-" Horizontali liniuotė:: <<Verbatim(----)>>\n"
+" Horizontali linija:: <<Verbatim(----)>>\n"
 " Priverstinis eilutės nutraukimas:: <<Verbatim(\\\\)>>\n"
 " Antraštės:: = 1 antraštė =; == 2 antraštė ==; === 3 antraštė ===; ==== 4 "
 "antraštė ====; ===== 5 antraštė =====.\n"
@@ -1203,7 +1215,7 @@ msgstr ""
 "paketas"
 
 msgid "All attachments included into the package."
-msgstr ""
+msgstr "Visi priedai įtraukti į paketą"
 
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "Išvesties failas jau egzistuoja! Atsisakoma tęsti!"
@@ -1442,9 +1454,8 @@ msgstr ""
 "Jeigu jau gavote el. pašto laišką su atkūrimo raktu, įveskite savo\n"
 "naudotojo vardą, atkūrimo raktą ir naują slaptažodį (du kartus) žemiau."
 
-#, fuzzy
 msgid "Wiki Backup"
-msgstr "Wiki žymėjimas"
+msgstr "Atsarginis Wiki kopijavimas"
 
 msgid ""
 "= Downloading a backup =\n"
@@ -1460,16 +1471,28 @@ msgid ""
 "\n"
 "To get a backup, just click here:"
 msgstr ""
+"= Atsarginės kopijos parsisiuntimas =\n"
+"\n"
+"Įsidėmėkite:\n"
+" * Laikykite atsargines kopijas saugioje ir patikimoje vietoje - jose "
+"yra slaptos informacijos.\n"
+" * Įsitikinkite, jog jūsų wiki konfigūracijos backup_* reikšmės teisingos "
+"pilnos.\n"
+" * Įsitikinkite, jog jūsų gautoje atsarginėje kopijoje yra viskas, ko jums "
+"gali prireikti atsiradus problemai.\n"
+" * Įsitikinkite, jog ji parsisiųsta be problemų.\n"
+"\n"
+"Norėdami gauti atsarginę kopiją, tiesiog spustelėkite čia:"
 
 msgid "Backup"
-msgstr "Kopija"
+msgstr "Atsarginė kopija"
 
 msgid "You are not allowed to do remote backup."
-msgstr "Jums neleidžiama daryti nuotolinės kopijos."
+msgstr "Jums neleidžiama nuotoliniu būdu daryti atsarginio kopijavimo."
 
 #, python-format
 msgid "Unknown backup subaction: %s."
-msgstr "Nežinomas kopijos poveiksmis: %s."
+msgstr "Nežinomas atsarginio kopijavimo poveiksmis: %s."
 
 msgid "You must login to add a quicklink."
 msgstr "Jūs privalote prisijungti, kad įdėtumėte greitąją nuorodą."
@@ -1492,6 +1515,13 @@ msgstr "Klaidingas diagramos tipas „%s“!"
 
 msgid "Load"
 msgstr "Įkrauti"
+
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Nėra naujo turinio. Pašaliknite ne ASCII simbolius iš failo vardo ir "
+"bandykite dar kartą."
 
 msgid "Pagename not specified!"
 msgstr "Puslapio pavadinimas nenurodytas!"
@@ -1622,13 +1652,6 @@ msgstr "Priedai „%(pagename)s“"
 
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "Jums neleidžiama perrašyti priedų šiame puslapyje."
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"Nėra naujo turinio. Pašaliknite ne ASCII simbolius iš failo vardo ir "
-"bandykite dar kartą."
 
 #, python-format
 msgid ""
@@ -1853,9 +1876,8 @@ msgstr "Klaidingas failo pavadinimas „%s“!"
 msgid "Created the package %s containing the pages %s."
 msgstr "Sukurtas paketas %s, turintis puslapius %s."
 
-#, fuzzy
 msgid "Include all attachments?"
-msgstr "[%d priedų]"
+msgstr "Įtraukti visus priedus?"
 
 msgid "Package pages"
 msgstr "Paketo puslapiai"
@@ -2351,6 +2373,20 @@ msgstr ""
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Juma pirma reikia užsiprenumeruoti, kad galėtumėte atsisakyti."
 
+msgid "Password is too short."
+msgstr "Slaptažodis per trumpas."
+
+msgid "Password has not enough different characters."
+msgstr "Slaptažodyje nepakankamai skirtingų simbolių."
+
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr ""
+"Slaptažodis per lengvas (slaptažodyje yra vardas arba varde slaptažodis)."
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr "Slaptažodis per lengvas (klaviatūros seka)"
+
 msgid "Diffs"
 msgstr "Pakeitimai"
 
@@ -2361,10 +2397,10 @@ msgid "Edit"
 msgstr "Redaguoti"
 
 msgid "UnSubscribe"
-msgstr "Atsisakyti"
+msgstr "Atsisakyti prenumeratos"
 
 msgid "Subscribe"
-msgstr "Užsisakyti"
+msgstr "Užsiprenumeruoti"
 
 msgid "Raw"
 msgstr "Neapdorotas"
@@ -2383,7 +2419,7 @@ msgstr "Į viršų"
 
 msgid "Publish my email (not my wiki homepage) in author info"
 msgstr ""
-"Platinti mano paštą (ne mano wiki namų puslapyje) autoriaus informacijoje"
+"Platinti mano paštą (ne mano wiki namų puslapį) autoriaus informacijoje"
 
 msgid "Open editor on double click"
 msgstr "Atidaryti redaktorių spragtelėjus du kartus"
@@ -2588,14 +2624,13 @@ msgid "User"
 msgstr "Naudotojas"
 
 msgid "[ATTACH]"
-msgstr ""
+msgstr "[PRIDĖTI]"
 
-#, fuzzy
 msgid "Variable name"
-msgstr "Paketo pavadinimas"
+msgstr "Kintamojo pavadinimas"
 
 msgid "Description"
-msgstr ""
+msgstr "Aprašymas"
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -2644,7 +2679,7 @@ msgid "Display"
 msgstr "Rodymas"
 
 msgid "Wiki configuration"
-msgstr ""
+msgstr "Wiki konfigūracija"
 
 msgid ""
 "This table shows all settings in this wiki that do not have default values. "
@@ -2652,10 +2687,13 @@ msgid ""
 "''italic'', those may be due to third-party extensions needing configuration "
 "or settings that were removed from Moin."
 msgstr ""
+"Ši lentelė parodo visas šio wiki nuostatas, neturinčias numatytos reikšmės. "
+"Nuostatos, apie kurias konfigūracinė sistema nežino, parodytos "
+"''pasvirusiu'' šriftu. Jos gali būti dėl trečiosios šalies plėtinių, kuriems "
+"reikia konfigūracijos, ar nuostatų, pašalintų iš Moin."
 
-#, fuzzy
 msgid "Setting"
-msgstr "Nuostatos"
+msgstr "Nuostata"
 
 msgid "Search for items"
 msgstr "Ieškoti įrašų"
@@ -2898,17 +2936,6 @@ msgstr "[tuščia]"
 msgid "filter"
 msgstr "filtras"
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Nežinomas veiksmas %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Jums neleidžiama vykdyti %(action_name)s šiame puslapyje."
-
-msgid "Login and try again."
-msgstr "Prisijunkite ir bandykite dar kartą."
-
 msgid "FrontPage"
 msgstr "PirmasisPuslapis"
 
@@ -3002,6 +3029,9 @@ msgstr "Paspaudžiamas piešinys: %(filename)s"
 
 msgid "Toggle line numbers"
 msgstr "Keisti eilučių numerius"
+
+#~ msgid "You need to log in."
+#~ msgstr "Jūs turite prisijungti."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

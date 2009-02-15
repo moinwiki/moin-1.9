@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: 2008-08-30 19:48+0200\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-user@lists.sourceforge.net>\n"
@@ -86,6 +86,17 @@ msgstr "\"=\" fehlt hinter dem Attribut \"%(token)s\""
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "Attribut \"%(token)s\" wurde kein Wert zugewiesen"
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Unbekannte Aktion %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Sie dürfen die Aktion %(action_name)s auf dieser Seite nicht benutzen!"
+
+msgid "Login and try again."
+msgstr "Melden Sie sich an und probieren Sie es noch einmal."
 
 msgid "Your changes are not saved!"
 msgstr "Ihre Änderungen sind nicht gesichert!"
@@ -546,6 +557,9 @@ msgstr "Treffer"
 msgid "about"
 msgstr "ungefähr"
 
+msgid "anonymous"
+msgstr "anonym"
+
 msgid "Language"
 msgstr "Sprache"
 
@@ -618,9 +632,6 @@ msgid ""
 msgstr ""
 "Wenn Sie kein Konto haben, können Sie <a href=\"%(userprefslink)s\">nun eins "
 "anlegen</a>. <a href=\"%(sendmypasswordlink)s\">Passwort vergessen?</a>"
-
-msgid "You need to log in."
-msgstr "Sie müssen sich anmelden."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -814,7 +825,8 @@ msgid ""
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
 msgstr ""
-"Lieber Superuser, ein neuer Benutzer wurde gerade auf %(sitename)s erzeugt. Details folgen:\n"
+"Lieber Superuser, ein neuer Benutzer wurde gerade auf %(sitename)s erzeugt. "
+"Details folgen:\n"
 "\n"
 "    Benutzer-Name:  %(username)s\n"
 "    E-Mail-Adresse: %(useremail)s"
@@ -871,7 +883,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Betonung:: <<Verbatim('')>>''kursiv''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''fett'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''fett "
@@ -888,7 +900,7 @@ msgstr ""
 " Tabellen:: || Zelltext |||| Zelltext über 2 Spalten ||;    keine "
 "anhängenden Leerzeichen erlaubt nach Tabellenzeilen oder Überschriften.\n"
 "\n"
-"(!) Weitere Hilfe unter HilfeZumEditieren oder SyntaxReferenz.\n"
+"(!) Weitere Hilfe unter HilfeZumEditieren oder HelpOnMoinWikiSyntax.\n"
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
@@ -1522,6 +1534,13 @@ msgstr "Unbekannter Diagrammtyp \"%s\"!"
 msgid "Load"
 msgstr "Laden"
 
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Kein Dateiinhalt. Löschen Sie nicht-ASCII-Zeichen aus dem Dateinamen und "
+"probieren Sie es noch einmal."
+
 msgid "Pagename not specified!"
 msgstr "Seitenname nicht angegeben!"
 
@@ -1654,13 +1673,6 @@ msgstr "Dateianhänge für \"%(pagename)s\""
 
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "Sie dürfen keine Dateianhänge dieser Seite überschreiben."
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"Kein Dateiinhalt. Löschen Sie nicht-ASCII-Zeichen aus dem Dateinamen und "
-"probieren Sie es noch einmal."
 
 #, python-format
 msgid ""
@@ -2403,6 +2415,21 @@ msgstr ""
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Sie müssen die Seite abonniert haben, um das Abonnement zu entfernen."
 
+msgid "Password is too short."
+msgstr "Passwort ist zu kurz."
+
+msgid "Password has not enough different characters."
+msgstr "Passwort hat nicht genug unterschiedliche Buchstaben."
+
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr ""
+"Passwort ist zu einfach (das Passwort enthält den Namen oder der Name "
+"enthält das Passwort)."
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr "Passwort ist zu einfach (Tastatur-Sequenz)."
+
 msgid "Diffs"
 msgstr "DifferenzAnzeige"
 
@@ -2954,17 +2981,6 @@ msgstr "[leer]"
 msgid "filter"
 msgstr "Filter"
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Unbekannte Aktion %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Sie dürfen die Aktion %(action_name)s auf dieser Seite nicht benutzen!"
-
-msgid "Login and try again."
-msgstr "Melden Sie sich an und probieren Sie es noch einmal."
-
 msgid "FrontPage"
 msgstr "StartSeite"
 
@@ -3058,3 +3074,6 @@ msgstr "Anklickbare Zeichnung %(filename)s"
 
 msgid "Toggle line numbers"
 msgstr "Zeilennummern ein/ausschalten"
+
+#~ msgid "You need to log in."
+#~ msgstr "Sie müssen sich anmelden."

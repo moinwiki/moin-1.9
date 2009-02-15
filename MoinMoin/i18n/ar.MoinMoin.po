@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: 2008-04-12 20:07+0200\n"
 "Last-Translator: Mohamed Yahya <yahya.mohamed@gmail.com>\n"
 "Language-Team: \n"
@@ -86,6 +86,17 @@ msgstr "تتوقع \"=\" أن تتبع \"%(token)s\""
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "تتوقع قيمة للمفتاح \"%(token)s\""
+
+#, fuzzy, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "نفذ عملية %(actionname)s?"
+
+#, fuzzy, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "لا يسمح لك باستخدام عملية %(actionname)s في هذه الصفحة!"
+
+msgid "Login and try again."
+msgstr "سجل الدخول و حاول مرة أخرى"
 
 msgid "Your changes are not saved!"
 msgstr "لم يتم حفظ تغييراتك!"
@@ -498,6 +509,9 @@ msgstr "تطابق"
 msgid "about"
 msgstr ""
 
+msgid "anonymous"
+msgstr ""
+
 msgid "Language"
 msgstr "لغة"
 
@@ -566,10 +580,6 @@ msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
-
-#, fuzzy
-msgid "You need to log in."
-msgstr "لقد قمت بتسجيل الخروج."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -780,7 +790,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 
 #, python-format
@@ -1332,6 +1342,11 @@ msgstr ""
 msgid "Load"
 msgstr "حمّل"
 
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+
 msgid "Pagename not specified!"
 msgstr ""
 
@@ -1457,11 +1472,6 @@ msgstr ""
 #, fuzzy
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "لا يسمح لك بتحرير هذه الصفحة"
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
 
 #, python-format
 msgid ""
@@ -2144,6 +2154,21 @@ msgstr ""
 msgid "You need to be subscribed to unsubscribe."
 msgstr "لا يسمح لك بتحرير هذه الصفحة"
 
+#, fuzzy
+msgid "Password is too short."
+msgstr "اعادة كلمة السر"
+
+msgid "Password has not enough different characters."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr "لا يوجد كلمة سر. الرجاء إدخال إسم مستخدم و كلمة سر"
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr ""
+
 msgid "Diffs"
 msgstr ""
 
@@ -2703,17 +2728,6 @@ msgstr ""
 msgid "filter"
 msgstr "مرشح"
 
-#, fuzzy, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "نفذ عملية %(actionname)s?"
-
-#, fuzzy, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "لا يسمح لك باستخدام عملية %(actionname)s في هذه الصفحة!"
-
-msgid "Login and try again."
-msgstr "سجل الدخول و حاول مرة أخرى"
-
 msgid "FrontPage"
 msgstr ""
 
@@ -2807,6 +2821,10 @@ msgstr ""
 
 msgid "Toggle line numbers"
 msgstr ""
+
+#, fuzzy
+#~ msgid "You need to log in."
+#~ msgstr "لقد قمت بتسجيل الخروج."
 
 #~ msgid "Wiki Backup / Restore"
 #~ msgstr "نسخ إحتياطي / إستعادة ويكي"

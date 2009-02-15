@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: 2008-08-22 02:05+0300\n"
 "Last-Translator: Dror Livne <livne.dror@gmail.com>\n"
 "Language-Team: Hebrew <moin-user@lists.sourceforge.net>\n"
@@ -88,6 +88,17 @@ msgstr "ציפיתי ל \"=\" אחרי \"%(token)s\""
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "ציפיתי לערך למפתח \"%(token)s\""
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "פעולה לא ידועה %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "אינך מורשה לבצע %(action_name)s בדף זה."
+
+msgid "Login and try again."
+msgstr "התחבר ונסה שוב."
 
 msgid "Your changes are not saved!"
 msgstr "השינויים שלך לא נשמרו!"
@@ -516,6 +527,9 @@ msgstr "התאמות"
 msgid "about"
 msgstr "אודות"
 
+msgid "anonymous"
+msgstr ""
+
 msgid "Language"
 msgstr "שפה"
 
@@ -588,9 +602,6 @@ msgid ""
 msgstr ""
 "אם אין לך חשבון במערכת, ניתן לפתוח <a href=\"%(userprefslink)s\">חשבון חדש</"
 "a>. האם <a href=\"%(sendmypasswordlink)s\">שכחת את הססמה?</a>"
-
-msgid "You need to log in."
-msgstr "נדרשת הזדהות בפני המערכת."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -812,6 +823,7 @@ msgstr "הדף ששונה"
 msgid "Page changed"
 msgstr "הדף שונה"
 
+#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
@@ -827,7 +839,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " הדגשה:: {{{''}}}''נטוי''{{{''}}}, {{{'''}}}'''מודגש'''{{{'''}}}, "
 "{{{'''''}}}'''''נטוי ומודגש'''''{{{'''''}}}, {{{''}}}''נטוי ו"
@@ -1435,6 +1447,11 @@ msgstr "סוג גרף שגוי \"%s\""
 msgid "Load"
 msgstr "טען"
 
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr "קובץ חסר. נסה למחוק תווים שהם לא תווי אסקי מתוך שם הקובץ."
+
 msgid "Pagename not specified!"
 msgstr "לא צוין שם דף"
 
@@ -1560,11 +1577,6 @@ msgstr "קבצים מצורפים ל–\"%(pagename)s\""
 
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "אין לכם הרשאות לדרוס קבצים מצורפים בדף זה"
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr "קובץ חסר. נסה למחוק תווים שהם לא תווי אסקי מתוך שם הקובץ."
 
 #, python-format
 msgid ""
@@ -2255,6 +2267,21 @@ msgstr "ערוך את הביטויים הרגולריים של המינויים 
 msgid "You need to be subscribed to unsubscribe."
 msgstr "חובה לבצע מינוי לדף בכדי להסיר את המינוי."
 
+#, fuzzy
+msgid "Password is too short."
+msgstr "איפוס ססמה"
+
+msgid "Password has not enough different characters."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr "סיסמה חסרה. אנא הכנס שם משתמש וסיסמה."
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr ""
+
 msgid "Diffs"
 msgstr "הבדלים"
 
@@ -2797,17 +2824,6 @@ msgstr "[ריק]"
 msgid "filter"
 msgstr "מסנן"
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "פעולה לא ידועה %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "אינך מורשה לבצע %(action_name)s בדף זה."
-
-msgid "Login and try again."
-msgstr "התחבר ונסה שוב."
-
 msgid "FrontPage"
 msgstr "דף ראשי"
 
@@ -2901,6 +2917,9 @@ msgstr "איור לחיץ: %(filename)s"
 
 msgid "Toggle line numbers"
 msgstr "סמן מספרי שורות"
+
+#~ msgid "You need to log in."
+#~ msgstr "נדרשת הזדהות בפני המערכת."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: 2004-11-19 21:03+0800\n"
 "Last-Translator: Nam T. Nguyen <nnt@nntsoft.com>\n"
 "Language-Team: Vietnamese <moin-devel@lists.sourceforge.net>\n"
@@ -86,6 +86,18 @@ msgstr "Dự đoán \"=\" sẽ theo sau \"%(token)s\""
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "Dự đoán \"%(token)s\" sẽ chứa giá trị nào đó"
+
+#, fuzzy, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Việc không rõ"
+
+#, fuzzy, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Bạn không thể tạo một bản vẽ ở trang này."
+
+#, fuzzy
+msgid "Login and try again."
+msgstr " %s và thử lại."
 
 #, fuzzy
 msgid "Your changes are not saved!"
@@ -525,6 +537,9 @@ msgstr "phù hợp"
 msgid "about"
 msgstr ""
 
+msgid "anonymous"
+msgstr ""
+
 msgid "Language"
 msgstr ""
 
@@ -597,10 +612,6 @@ msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
-
-#, fuzzy
-msgid "You need to log in."
-msgstr "Bạn đã thoát ra khỏi hệ thống."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -838,7 +849,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Nhấn mạnh:: <<Verbatim('')>>''nghiêng''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''đậm'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''nghiêng "
@@ -1437,6 +1448,12 @@ msgstr "Không hiểu loại biểu đồ \"%s\"!"
 msgid "Load"
 msgstr "Tải lên"
 
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Không có nội dung. Xóa các ký tự không nằm trong bảng mã ASCII và thử lại."
+
 #, fuzzy
 msgid "Pagename not specified!"
 msgstr "Tên file gửi kèm không được định rõ!"
@@ -1570,12 +1587,6 @@ msgstr "File gửi kèm trong trang \"%(pagename)s\""
 #, fuzzy
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "Bạn không thể xem các file gửi kèm trong trang này."
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"Không có nội dung. Xóa các ký tự không nằm trong bảng mã ASCII và thử lại."
 
 #, python-format
 msgid ""
@@ -2266,6 +2277,21 @@ msgstr ""
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Bạn vừa đăng ký vào trang này."
 
+#, fuzzy
+msgid "Password is too short."
+msgstr "Lập lại mật khẩu"
+
+msgid "Password has not enough different characters."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr "Thiếu mật khẩu. Vui lòng nhập tên người dùng và mật khẩu."
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr ""
+
 msgid "Diffs"
 msgstr "Các bản diff"
 
@@ -2825,18 +2851,6 @@ msgstr ""
 msgid "filter"
 msgstr ""
 
-#, fuzzy, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Việc không rõ"
-
-#, fuzzy, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Bạn không thể tạo một bản vẽ ở trang này."
-
-#, fuzzy
-msgid "Login and try again."
-msgstr " %s và thử lại."
-
 msgid "FrontPage"
 msgstr "Trang đầu"
 
@@ -2930,6 +2944,10 @@ msgstr "Sửa bản vẽ \"%(filename)s\""
 
 msgid "Toggle line numbers"
 msgstr ""
+
+#, fuzzy
+#~ msgid "You need to log in."
+#~ msgstr "Bạn đã thoát ra khỏi hệ thống."
 
 #, fuzzy
 #~ msgid "Xapian Version"

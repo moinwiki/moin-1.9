@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: 2006-08-17 20:50+0100\n"
 "Last-Translator: Translation sponsored by Tenalt Ltd. (info@tenalt.com)\n"
 "Language-Team: \n"
@@ -86,6 +86,17 @@ msgstr "Atributu \"%(token)s\" mora slijediti \"=\""
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "Atributu \"%(token)s\" mora biti navedena vrijednost"
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Nepoznata akcija %(action_name)s"
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Ne možete koristiti akciju %(action_name)s na ovoj stranici."
+
+msgid "Login and try again."
+msgstr "Prijavite se i pokušajte ponovno."
 
 msgid "Your changes are not saved!"
 msgstr "Vaše izmjene nisu spremljene!"
@@ -534,6 +545,9 @@ msgstr "pogodaka"
 msgid "about"
 msgstr "opis"
 
+msgid "anonymous"
+msgstr ""
+
 msgid "Language"
 msgstr "Jezik"
 
@@ -604,9 +618,6 @@ msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
-
-msgid "You need to log in."
-msgstr "Morate se prijaviti."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -843,7 +854,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Naglašeno:: <<Verbatim('')>>''ukošeno''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''podebljano'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''podebljano "
@@ -1471,6 +1482,13 @@ msgstr "Pogrešan ili nepoznat tip diagrama \"%s\"!"
 msgid "Load"
 msgstr "Učitaj"
 
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Prazan sadržaj. Odstranite ne-ASCII znakove iz imena datoteke in pokušajte "
+"ponovno."
+
 #, fuzzy
 msgid "Pagename not specified!"
 msgstr "Ime datoteke s privitkom mora biti navedeno!"
@@ -1597,13 +1615,6 @@ msgstr "Privitci na stranici \"%(pagename)s\""
 #, fuzzy
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "Gledanje privitaka ove stranice Vam nije dozvoljeno."
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"Prazan sadržaj. Odstranite ne-ASCII znakove iz imena datoteke in pokušajte "
-"ponovno."
 
 #, python-format
 msgid ""
@@ -2320,6 +2331,21 @@ msgstr ""
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Ne možete odjaviti pretplatu sa stranica na koje niste pretplaćeni."
 
+#, fuzzy
+msgid "Password is too short."
+msgstr "Lozinka (ponovno)"
+
+msgid "Password has not enough different characters."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr "Lozinka nije unešena. Upišite korisničko ime i lozinku"
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr ""
+
 msgid "Diffs"
 msgstr "Razlike"
 
@@ -2865,17 +2891,6 @@ msgstr "[prazno]"
 msgid "filter"
 msgstr "filter"
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Nepoznata akcija %(action_name)s"
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Ne možete koristiti akciju %(action_name)s na ovoj stranici."
-
-msgid "Login and try again."
-msgstr "Prijavite se i pokušajte ponovno."
-
 msgid "FrontPage"
 msgstr "Početna"
 
@@ -2969,6 +2984,9 @@ msgstr "Aktivni crtež: %(filename)s"
 
 msgid "Toggle line numbers"
 msgstr "Uključi/isključi obrojčavanje redova"
+
+#~ msgid "You need to log in."
+#~ msgstr "Morate se prijaviti."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

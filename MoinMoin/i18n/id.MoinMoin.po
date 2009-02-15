@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: 2006-10-07 23:19+0700\n"
 "Last-Translator: Fajrin Azis <fajrin.azis@gmail.com>\n"
 "Language-Team: Indonesian <id@ll.com>\n"
@@ -86,6 +86,18 @@ msgstr "Diharapkan \"=\" mengikuti \"%(token)s\"\""
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "Diharapkan nilai untuk kunci \"%(token)s\""
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Aksi tak dikenal %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr ""
+"Anda tidak diizinkan untuk menggunakan aksi %(action_name)s di halaman ini."
+
+msgid "Login and try again."
+msgstr "Login dan coba lagi."
 
 msgid "Your changes are not saved!"
 msgstr "Perubahan Anda tidak disimpan!"
@@ -541,6 +553,9 @@ msgstr "cocok"
 msgid "about"
 msgstr ""
 
+msgid "anonymous"
+msgstr ""
+
 msgid "Language"
 msgstr "Bahasa"
 
@@ -611,10 +626,6 @@ msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
-
-#, fuzzy
-msgid "You need to log in."
-msgstr "Sekarang Anda telah logout."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -855,7 +866,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Penekanan:: <<Verbatim('')>>''teks miring''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''teks tebal'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''tebal "
@@ -1491,6 +1502,13 @@ msgstr "Jenis bagan tidak benar \"%s\"!"
 msgid "Load"
 msgstr "Load"
 
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Tak ada isi berkas. Hapus karakter bukan ASCII dari nama berkas dan coba "
+"lagi."
+
 #, fuzzy
 msgid "Pagename not specified!"
 msgstr "Nama berkas dari lampiran tidak ditetapkan!"
@@ -1621,13 +1639,6 @@ msgstr "Lampiran untuk \"%(pagename)s\""
 #, fuzzy
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "Anda tidak diizinkan menilik lampiran dari halaman ini."
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"Tak ada isi berkas. Hapus karakter bukan ASCII dari nama berkas dan coba "
-"lagi."
 
 #, python-format
 msgid ""
@@ -2349,6 +2360,21 @@ msgstr "Sunting ekspresi regular pada langganan dalam PreferensiPengguna Anda."
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Anda butuh menjadi berlangganan ke tidak berlangganan."
 
+#, fuzzy
+msgid "Password is too short."
+msgstr "Ulangi kata sandi"
+
+msgid "Password has not enough different characters."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr "Kurang kata sandi. Silakan masukkan nama pengguna dan kata sandi."
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr ""
+
 msgid "Diffs"
 msgstr "Perbedaan"
 
@@ -2889,18 +2915,6 @@ msgstr "[kosong]"
 msgid "filter"
 msgstr "saring"
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Aksi tak dikenal %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr ""
-"Anda tidak diizinkan untuk menggunakan aksi %(action_name)s di halaman ini."
-
-msgid "Login and try again."
-msgstr "Login dan coba lagi."
-
 msgid "FrontPage"
 msgstr "HalamanMuka"
 
@@ -2994,6 +3008,10 @@ msgstr "Penggambaran yang dapat di-klik: %(filename)s"
 
 msgid "Toggle line numbers"
 msgstr "On/Off nomor baris"
+
+#, fuzzy
+#~ msgid "You need to log in."
+#~ msgstr "Sekarang Anda telah logout."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

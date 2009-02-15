@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: 2007-04-22 18:50+0100\n"
 "Last-Translator: Jonas Smedegaard <dr@jones.dk>\n"
 "Language-Team: Danish <moin-devel@lists.sourceforge.net>\n"
@@ -88,6 +88,17 @@ msgstr "Forventede et \"=\" efter \"%(token)s\""
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "Forventede en værdi for variablen \"%(token)s\""
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Ukendt rutine %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Du har ikke lov til at anvende %(action_name)s på denne side!"
+
+msgid "Login and try again."
+msgstr "Log på og prøv igen."
 
 msgid "Your changes are not saved!"
 msgstr "Dine ændringer er ikke gemt!"
@@ -531,6 +542,9 @@ msgstr "resultater"
 msgid "about"
 msgstr ""
 
+msgid "anonymous"
+msgstr ""
+
 msgid "Language"
 msgstr "Sprog"
 
@@ -601,10 +615,6 @@ msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
-
-#, fuzzy
-msgid "You need to log in."
-msgstr "Du er nu logget ud."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -844,7 +854,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Fremhævelser:: <<Verbatim('')>>''kursiv''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''fed'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''fed "
@@ -1480,6 +1490,13 @@ msgstr "Dårlig diagram-type·\"%s\"!"
 msgid "Load"
 msgstr "Overfør"
 
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Intet indhold i fil. Slet ikke-ASCII tegn (specielle bogstaver og tegn) fra "
+"filnavnet og prøv igen."
+
 #, fuzzy
 msgid "Pagename not specified!"
 msgstr "Filnavn for vedhæftning ikke angivet!"
@@ -1611,13 +1628,6 @@ msgstr "Vedhæftninger til \"%(pagename)s\""
 #, fuzzy
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "Du har ikke lov til at se vedhæftninger til denne side."
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"Intet indhold i fil. Slet ikke-ASCII tegn (specielle bogstaver og tegn) fra "
-"filnavnet og prøv igen."
 
 #, python-format
 msgid ""
@@ -2339,6 +2349,21 @@ msgstr "Redigér regulære udtryk (regexp) for abonnement under BrugerProfil."
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Du abonnerer nu på denne side."
 
+#, fuzzy
+msgid "Password is too short."
+msgstr "Adgangskode gentaget"
+
+msgid "Password has not enough different characters."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr "Manglende adgangskode. Angiv venligst brugernavn og adgangskode."
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr ""
+
 msgid "Diffs"
 msgstr "forskelle"
 
@@ -2879,17 +2904,6 @@ msgstr "[blank]"
 msgid "filter"
 msgstr "filter"
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Ukendt rutine %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Du har ikke lov til at anvende %(action_name)s på denne side!"
-
-msgid "Login and try again."
-msgstr "Log på og prøv igen."
-
 msgid "FrontPage"
 msgstr "ForSide"
 
@@ -2983,6 +2997,10 @@ msgstr "Redigérbar tegning: %(filename)s"
 
 msgid "Toggle line numbers"
 msgstr "Skift linjenummerering"
+
+#, fuzzy
+#~ msgid "You need to log in."
+#~ msgstr "Du er nu logget ud."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: 2008-05-10 22:31+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000 AT AT AT AT gmail SPAM NO NO DOT "
 "NO SPAM com>\n"
@@ -88,6 +88,17 @@ msgstr "Nepieciešama vienādības zīme \"=\" pēc \"%(token)s\""
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "Nepieciešama vērtība atslēgai \"%(token)s\""
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Nezināma darbība %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Jums nav tiesību veikt darbību %(action_name)s šajā lapā."
+
+msgid "Login and try again."
+msgstr "Pieslēdzieties un mēģiniet vēlreiz."
 
 msgid "Your changes are not saved!"
 msgstr "Jūs izmaiņas nav saglabātas!"
@@ -540,6 +551,9 @@ msgstr "saskaņas"
 msgid "about"
 msgstr ""
 
+msgid "anonymous"
+msgstr ""
+
 msgid "Language"
 msgstr "Valoda"
 
@@ -610,9 +624,6 @@ msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
-
-msgid "You need to log in."
-msgstr "Nepieciešams pieslēgties."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -841,7 +852,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Uzsvērt:: <<Verbatim('')>>''kursīvā''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''treknrakstā'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''treknā "
@@ -1454,6 +1465,12 @@ msgstr "Slikts diagrammas tips \"%s\"!"
 msgid "Load"
 msgstr "Ielādēt"
 
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Tukšs faila saturs. Nodzēsiet visus NE ASCII simbolus un mēģiniet vēlreiz."
+
 msgid "Pagename not specified!"
 msgstr "Lapas nosaukums nav norādīts!"
 
@@ -1578,12 +1595,6 @@ msgstr "Lapas \"%(pagename)s\" piesaistes"
 
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "Jums nav tiesību pārrasktīt šai lapai piesaistītās datnes."
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"Tukšs faila saturs. Nodzēsiet visus NE ASCII simbolus un mēģiniet vēlreiz."
 
 #, python-format
 msgid ""
@@ -2013,13 +2024,11 @@ msgstr "(pēc %d versijām)"
 msgid "Revert to this revision"
 msgstr "Atgriezties pie šīs versijas"
 
-#, fuzzy
 msgid "Previous change"
-msgstr "iepriekšējā"
+msgstr "Iepriekšējais labojums"
 
-#, fuzzy
 msgid "Next change"
-msgstr "Bez izmaiņām"
+msgstr "Nākamais labojums"
 
 #, python-format
 msgid "The page was saved %(count)d times, though!"
@@ -2067,9 +2076,8 @@ msgstr "Kopēšanas iemesls (neobligāts)"
 msgid "Really copy this page?"
 msgstr "Jūs tiešām vēlaties kopēt šo lapu?"
 
-#, fuzzy
 msgid "Revert"
-msgstr "Atgriezt visu!"
+msgstr "Atgriezt"
 
 msgid "You are not allowed to revert this page!"
 msgstr "Jūs nedrīkstat atjaunot no arhīva šo lapu!"
@@ -2083,13 +2091,11 @@ msgstr ""
 "Jūs vēlaties atgriezt iepriekšēju lapas versiju, sākumā atveriet aplūkošanai "
 "lapas iepriekšējo versiju."
 
-#, fuzzy
 msgid "Optional reason for reverting this page"
-msgstr "Kopēšanas iemesls (neobligāts)"
+msgstr "Šīs lapas atgriešanas iemesls (neobligāts)"
 
-#, fuzzy
 msgid "Really revert this page?"
-msgstr "Jūs tiešām vēlaties pārdēvēt šo lapu?"
+msgstr "Jūs tiešām vēlaties atgriezt šo lapu?"
 
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
@@ -2119,20 +2125,19 @@ msgid "Trust root"
 msgstr ""
 
 msgid "Identity URL"
-msgstr ""
+msgstr "Identitātes URL"
 
-#, fuzzy
 msgid "Remember decision"
-msgstr "PyStemmer versija"
+msgstr ""
 
 msgid "Remember this trust decision and don't ask again"
 msgstr ""
 
 msgid "Approve"
-msgstr ""
+msgstr "Apstiprināt"
 
 msgid "Don't approve"
-msgstr ""
+msgstr "Neapstiprināt"
 
 msgid "OpenID not served"
 msgstr ""
@@ -2146,10 +2151,10 @@ msgid ""
 msgstr ""
 
 msgid "Please choose:"
-msgstr ""
+msgstr "Lūdzu izvēlieties:"
 
 msgid "Settings"
-msgstr ""
+msgstr "Iestatījumi"
 
 msgid "General Information"
 msgstr "Vispārēja informācija"
@@ -2170,9 +2175,8 @@ msgstr "Šajā lapā ir saites uz sekojošām lapām:"
 msgid "Diff"
 msgstr "Atšķirība"
 
-#, fuzzy
 msgid "to previous"
-msgstr "iepriekšējā"
+msgstr "uz iepriekšējo"
 
 #, python-format
 msgid "Revert to revision %(rev)d."
@@ -2284,12 +2288,24 @@ msgstr "Jūs vairs neesat parakstījies(-usies) uz šo lapu."
 msgid "Can't remove regular expression subscription!"
 msgstr "Regulāras izteiksmes pierakstu izdzēst nevar!"
 
-#, fuzzy
 msgid "Edit the subscription regular expressions in your settings."
-msgstr "Labojiet parasktīšanās regulāras izteiksmes savā LietotājaIstatījumi."
+msgstr "Labojiet parasktīšanās regulāras izteiksmes savos iestatījumos."
 
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Lai atrakstītos, jums nepieciešams būt parakstījušam(-šai) uz šo lapu."
+
+msgid "Password is too short."
+msgstr "Parole ir pārāk īsa."
+
+msgid "Password has not enough different characters."
+msgstr "Parolē ir parmaz atšķirīgu zīmju."
+
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr "Parole ir pārak vienkārša (parole satur vārdu vai vārds satur paroli)."
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr "Parole ir pārāk vienkārša (secīgi spiesti taustiņi)."
 
 msgid "Diffs"
 msgstr "Atšķirības"
@@ -2530,9 +2546,8 @@ msgstr "Lietotājs"
 msgid "[ATTACH]"
 msgstr ""
 
-#, fuzzy
 msgid "Variable name"
-msgstr "Faila nosaukums"
+msgstr "Mainīgā nosaukums"
 
 msgid "Description"
 msgstr ""
@@ -2588,7 +2603,7 @@ msgid ""
 msgstr ""
 
 msgid "Setting"
-msgstr ""
+msgstr "Iestatījums"
 
 msgid "Search for items"
 msgstr "Meklēt vienības"
@@ -2638,12 +2653,11 @@ msgstr "Meklēt visās lapas versijās"
 msgid "Go get it!"
 msgstr "Satver!"
 
-#, fuzzy
 msgid "File attachment browser"
-msgstr "Jauna piesaistes nosaukums"
+msgstr "Datnes piesaistes pārlūks"
 
 msgid "User account browser"
-msgstr ""
+msgstr "Lietotāju kontu pārlūks"
 
 msgid "No wanted pages in this wiki."
 msgstr "Šajā viki pieprasīto lapu nav."
@@ -2832,17 +2846,6 @@ msgstr "[tukši]"
 msgid "filter"
 msgstr "fitrēt"
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Nezināma darbība %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Jums nav tiesību veikt darbību %(action_name)s šajā lapā."
-
-msgid "Login and try again."
-msgstr "Pieslēdzieties un mēģiniet vēlreiz."
-
 msgid "FrontPage"
 msgstr "SākumLapa"
 
@@ -2943,6 +2946,9 @@ msgstr "Klikšķināms attēls %(filename)s"
 
 msgid "Toggle line numbers"
 msgstr "Pārslēgt rindu numerāciju"
+
+#~ msgid "You need to log in."
+#~ msgstr "Nepieciešams pieslēgties."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
@@ -3075,7 +3081,7 @@ msgstr "Pārslēgt rindu numerāciju"
 #~ msgid "Use UserPreferences to change settings of the selected user account"
 #~ msgstr ""
 #~ "Lai mainītu lietotāja iestatījumus vai izveidotu lietotāja kontu, "
-#~ "izmantojiet LietotājaIstatījumi"
+#~ "izmantojiet LietotājaIestatījumi"
 
 #~ msgid ""
 #~ "This list does not work, unless you have entered a valid email address!"

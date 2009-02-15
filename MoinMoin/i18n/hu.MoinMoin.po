@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: 2006-06-15 15:55+0200\n"
 "Last-Translator: jmarton@omikk.bme.hu, arostas@omikk.bme.hu\n"
 "Language-Team: Hungarian <HU@li.org>\n"
@@ -86,6 +86,17 @@ msgstr "A(z) \"%(token)s\" után \"=\" kell"
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "A(z) \"%(token)s\" értéke hiányzik"
+
+#, fuzzy, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Végrehajtja a %(actionname)s műveletet?"
+
+#, fuzzy, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Ezen a lapon nem használhatja a %(actionname)s műveletet!"
+
+msgid "Login and try again."
+msgstr "Lépjen be, majd próbálja újra."
 
 msgid "Your changes are not saved!"
 msgstr "A változtatások nem lettek elmentve!"
@@ -523,6 +534,9 @@ msgstr "találatok"
 msgid "about"
 msgstr ""
 
+msgid "anonymous"
+msgstr ""
+
 msgid "Language"
 msgstr ""
 
@@ -593,10 +607,6 @@ msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
-
-#, fuzzy
-msgid "You need to log in."
-msgstr "A sütit letöröltük. Ön kilépett."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -829,7 +839,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Kiemelés:: <<Verbatim('')>>''kurzív''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''félkövér'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''félkövér "
@@ -1455,6 +1465,13 @@ msgstr "Hibás diagramtípus: \"%s\""
 msgid "Load"
 msgstr "Feltöltés"
 
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Hibás az állománynév. Kérjük törölje a nem-ASCII karaktereket az "
+"állománynévből, és próbálja újra."
+
 #, fuzzy
 msgid "Pagename not specified!"
 msgstr "A melléklet nevét nem adta meg!"
@@ -1586,13 +1603,6 @@ msgstr "A(z) \"%(pagename)s\" lap mellékletei"
 #, fuzzy
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "A mellékletek megtekintése nem engedélyezett ennél a lapnál."
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"Hibás az állománynév. Kérjük törölje a nem-ASCII karaktereket az "
-"állománynévből, és próbálja újra."
 
 #, python-format
 msgid ""
@@ -2293,6 +2303,21 @@ msgstr ""
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Ön előfizetett erre a lapra."
 
+#, fuzzy
+msgid "Password is too short."
+msgstr "Jelszó mégegyszer"
+
+msgid "Password has not enough different characters."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr "Hiányzik a jelszó. Kérjük adja meg a felhasználónevet és a jelszót."
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr ""
+
 msgid "Diffs"
 msgstr "Különbségek"
 
@@ -2848,17 +2873,6 @@ msgstr ""
 msgid "filter"
 msgstr ""
 
-#, fuzzy, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Végrehajtja a %(actionname)s műveletet?"
-
-#, fuzzy, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Ezen a lapon nem használhatja a %(actionname)s műveletet!"
-
-msgid "Login and try again."
-msgstr "Lépjen be, majd próbálja újra."
-
 msgid "FrontPage"
 msgstr "KezdőLap"
 
@@ -2952,6 +2966,10 @@ msgstr "A(z) %(filename)s nevű rajz szerkesztése"
 
 msgid "Toggle line numbers"
 msgstr "Sorszámozás megjelenítése/elrejtése"
+
+#, fuzzy
+#~ msgid "You need to log in."
+#~ msgstr "A sütit letöröltük. Ön kilépett."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

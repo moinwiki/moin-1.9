@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: 2005-03-13 17:43+0200\n"
 "Last-Translator: Sander Kromwijk <s.kromwijk@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -87,6 +87,17 @@ msgstr "Verwacht \"=\" volgend op \"%(token)s\""
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "Verwacht een waarde voor sleutel \"%(token)s\""
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Onbekende aktie %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Het is u niet toegestaan om %(action_name)s op deze pagina te doen."
+
+msgid "Login and try again."
+msgstr "Login en probeer opnieuw"
 
 msgid "Your changes are not saved!"
 msgstr "U veranderingen zijn niet opgeslagen!"
@@ -536,6 +547,9 @@ msgstr "overeenkomsten"
 msgid "about"
 msgstr ""
 
+msgid "anonymous"
+msgstr ""
+
 msgid "Language"
 msgstr "Taal"
 
@@ -606,10 +620,6 @@ msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
-
-#, fuzzy
-msgid "You need to log in."
-msgstr "U bent nu uitgelogd."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -849,7 +859,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Nadruk:: <<Verbatim('')>>''cursief''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''vet'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''vet "
@@ -1484,6 +1494,13 @@ msgstr "Ongeldig grafiektype \"%s\"!"
 msgid "Load"
 msgstr "Laad"
 
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Geen bestandsinhoud. Verwijder de non-ASCII tekens uit het bestand en "
+"probeer opnieuw."
+
 #, fuzzy
 msgid "Pagename not specified!"
 msgstr "Bestandsnaam van bijlage ontbreekt!"
@@ -1615,13 +1632,6 @@ msgstr "Bijlages voor \"%(pagename)s\""
 #, fuzzy
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "U hebt geen toestemming bijlagen van deze pagina te bekijken."
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"Geen bestandsinhoud. Verwijder de non-ASCII tekens uit het bestand en "
-"probeer opnieuw."
 
 #, python-format
 msgid ""
@@ -2339,6 +2349,21 @@ msgstr ""
 msgid "You need to be subscribed to unsubscribe."
 msgstr "U moet geabonneerd zijn om uit te schrijven."
 
+#, fuzzy
+msgid "Password is too short."
+msgstr "Wachtwoord herhalen"
+
+msgid "Password has not enough different characters."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr "Geen wachtwoord. Geef een gebruikersnaam en wachtwoord op."
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr ""
+
 msgid "Diffs"
 msgstr "Verschillen"
 
@@ -2880,17 +2905,6 @@ msgstr "[leeg]"
 msgid "filter"
 msgstr "filter"
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Onbekende aktie %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Het is u niet toegestaan om %(action_name)s op deze pagina te doen."
-
-msgid "Login and try again."
-msgstr "Login en probeer opnieuw"
-
 msgid "FrontPage"
 msgstr "VoorPagina"
 
@@ -2984,6 +2998,10 @@ msgstr "Klikbare tekening: %(filename)s"
 
 msgid "Toggle line numbers"
 msgstr "Lijnnummers aan/uit doen"
+
+#, fuzzy
+#~ msgid "You need to log in."
+#~ msgstr "U bent nu uitgelogd."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

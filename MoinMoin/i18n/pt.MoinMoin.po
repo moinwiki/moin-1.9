@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: 2007-01-05 22:27+0000\n"
 "Last-Translator: Rita Farinha <rita.farinha@intraneia.com>\n"
 "Language-Team: Portuguese <moin-devel@lists.sourceforge.net>\n"
@@ -92,6 +92,17 @@ msgstr "Espera-se \"=\" a seguir a \"%(token)s\""
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "Espera-se um valor para a chave \"%(token)s\""
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Acção desconhecida %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Não tem permissão para fazer %(action_name)s nesta página."
+
+msgid "Login and try again."
+msgstr "Entre e tente de novo."
 
 msgid "Your changes are not saved!"
 msgstr "As suas alterações não foram guardadas!"
@@ -538,6 +549,9 @@ msgstr "coincidências"
 msgid "about"
 msgstr ""
 
+msgid "anonymous"
+msgstr ""
+
 msgid "Language"
 msgstr "Idioma"
 
@@ -608,10 +622,6 @@ msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
-
-#, fuzzy
-msgid "You need to log in."
-msgstr "Saiu do sistema."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -851,7 +861,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Ênfase:: <<Verbatim('')>>''itálico''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''negrito'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''negrito "
@@ -1491,6 +1501,13 @@ msgstr "Tipo de gráfico incorrecto \"%s\"!"
 msgid "Load"
 msgstr "Enviar"
 
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Ficheiro sem conteúdo. Elimine os caracteres, existentes no nome do "
+"ficheiro, que não sejam ASCII e tente novamente."
+
 #, fuzzy
 msgid "Pagename not specified!"
 msgstr "Não foi especificado um nome para o ficheiro anexo!"
@@ -1621,13 +1638,6 @@ msgstr "Anexos de \"%(pagename)s\""
 #, fuzzy
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "Não tem permissão para ver anexos desta página."
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"Ficheiro sem conteúdo. Elimine os caracteres, existentes no nome do "
-"ficheiro, que não sejam ASCII e tente novamente."
 
 #, python-format
 msgid ""
@@ -2350,6 +2360,21 @@ msgstr ""
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Subscreveu esta página."
 
+#, fuzzy
+msgid "Password is too short."
+msgstr "Repetir senha"
+
+msgid "Password has not enough different characters."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr "Senha em falta. Por favor, insira o nome de utilizador e a senha."
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr ""
+
 msgid "Diffs"
 msgstr "Diferenças"
 
@@ -2892,17 +2917,6 @@ msgstr "[vazio]"
 msgid "filter"
 msgstr "filtro"
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Acção desconhecida %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Não tem permissão para fazer %(action_name)s nesta página."
-
-msgid "Login and try again."
-msgstr "Entre e tente de novo."
-
 msgid "FrontPage"
 msgstr "PáginaPrincipal"
 
@@ -2996,6 +3010,10 @@ msgstr "Desenho %(filename)s clicável"
 
 msgid "Toggle line numbers"
 msgstr "Ligar/Desligar números de linhas"
+
+#, fuzzy
+#~ msgid "You need to log in."
+#~ msgstr "Saiu do sistema."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

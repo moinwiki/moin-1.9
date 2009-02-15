@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: 2008-09-13 23:53+0200\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -91,6 +91,17 @@ msgstr "Нужен \"=\" после \"%(token)s\""
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "Нужно значение для ключа \"%(token)s\""
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Неизвестное действие %(action_name)s ."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Вам нельзя делать %(action_name)s на этой странице!"
+
+msgid "Login and try again."
+msgstr "Войдите и повторите еще раз."
 
 msgid "Your changes are not saved!"
 msgstr "Ваши исправления не сохранены!"
@@ -544,6 +555,9 @@ msgstr "совпадений"
 msgid "about"
 msgstr "примерно"
 
+msgid "anonymous"
+msgstr ""
+
 msgid "Language"
 msgstr "Язык"
 
@@ -617,9 +631,6 @@ msgstr ""
 "Если у вас нет учетной записи, <a href=\"%(userprefslink)s\">вы можете "
 "создать его сейчас</a>. <a href=\"%(sendmypasswordlink)s\">Забыли ваш пароль?"
 "</a>"
-
-msgid "You need to log in."
-msgstr "Вам необходимо войти в систему."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -852,6 +863,7 @@ msgstr "Измененная страница"
 msgid "Page changed"
 msgstr "Страница изменена"
 
+#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
@@ -867,17 +879,15 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Выделение:: <<Verbatim('')>>''курсивом''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''жирным'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''жирным "
 "курсивом'''''<<Verbatim(''''')>>; <<Verbatim('')>>''смешаным ''<<Verbatim"
 "(''')>>'''''жирным'''<<Verbatim(''')>> и курсивом''<<Verbatim('')>>; "
 "<<Verbatim(----)>> горизонтальная черта.\n"
-" Заголовки:: <<Verbatim(=)>> Уровня 1 <<Verbatim(=)>>; <<Verbatim(==)>> "
-"Уровня 2 <<Verbatim(==)>>; <<Verbatim(===)>> Уровня 3 <<Verbatim(===)>>; "
-"<<Verbatim(====)>> Уровня 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Уровня 5 "
-"<<Verbatim(=====)>>.\n"
+" Заголовки:: = Уровня 1 =; == Уровня 2 ==; === Уровня 3 ===; ==== Уровня 4 "
+"====; ===== Уровня 5 =====.\n"
 " Списки:: пробел и одно из: * ненумерованный список; 1., a., A., i., I. "
 "нумерованный список; 1.#n - начать нумерацию с n; пробелы увеличивают "
 "уровень отступа.\n"
@@ -989,10 +999,8 @@ msgstr ""
 ">>'''''жирным'''<<Verbatim(**)>> и курсивом''<<Verbatim(//)>>; "
 "Горизонтальная черта:: <<Verbatim(----)>> .\n"
 "Перевод строки:: <<Verbatim(\\\\)>>\n"
-" Заголовки:: <<Verbatim(=)>> Уровня 1 <<Verbatim(=)>>; <<Verbatim(==)>> "
-"Уровня 2 <<Verbatim(==)>>; <<Verbatim(===)>> Уровня 3 <<Verbatim(===)>>; "
-"<<Verbatim(====)>> Уровня 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Уровня 5 "
-"<<Verbatim(=====)>>.\n"
+" Заголовки:: = Уровня 1 =; == Уровня 2 ==; === Уровня 3 ===; ==== Уровня 4 "
+"====; ===== Уровня 5 =====.\n"
 " Списки:: пробел и одно из: * ненумерованный список; ** ненумерованный "
 "подсписок; # нумерованный список ## нумерованный подсписок;\n"
 " Ссылки:: <<Verbatim(ЗаглавныеСловаСлитно)>>;<<Verbatim([[название страницы|"
@@ -1511,6 +1519,13 @@ msgstr "Неправильный тип диаграммы \"%s\"!"
 msgid "Load"
 msgstr "Загрузить"
 
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Неправильное имя файла. Уберите все не-ASCII символы из имени файла и "
+"попробуйте снова."
+
 msgid "Pagename not specified!"
 msgstr "Имя странцы не указано!"
 
@@ -1639,13 +1654,6 @@ msgstr "Вложения для \"%(pagename)s\""
 
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "Вам нельзя переписывать вложения на этой странице."
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"Неправильное имя файла. Уберите все не-ASCII символы из имени файла и "
-"попробуйте снова."
 
 #, python-format
 msgid ""
@@ -2367,6 +2375,23 @@ msgstr "Отредактируйте регулярные выражения п�
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Вы должны быть подписаны, чтобы отписаться."
 
+msgid "Password is too short."
+msgstr "Слишком короткий пароль"
+
+msgid "Password has not enough different characters."
+msgstr ""
+"Слишком простой пароль - в пароле должно присутствовать больше разных "
+"символов"
+
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr ""
+"Слишком простой пароль (в пароле присутствует имя пользователя, либо пароль "
+"содержится в имени)"
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr "Слишком простой пароль (клавиатурная последовательность)"
+
 msgid "Diffs"
 msgstr "Изменения"
 
@@ -2917,17 +2942,6 @@ msgstr "[пустой]"
 msgid "filter"
 msgstr "фильтровать"
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Неизвестное действие %(action_name)s ."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Вам нельзя делать %(action_name)s на этой странице!"
-
-msgid "Login and try again."
-msgstr "Войдите и повторите еще раз."
-
 msgid "FrontPage"
 msgstr "Начало"
 
@@ -3021,6 +3035,9 @@ msgstr "Нажимаемый рисунок: %(filename)s"
 
 msgid "Toggle line numbers"
 msgstr "Переключить отображение номеров строк"
+
+#~ msgid "You need to log in."
+#~ msgstr "Вам необходимо войти в систему."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
