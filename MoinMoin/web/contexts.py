@@ -409,7 +409,9 @@ class ScriptContext(AllContext):
     For input, sys.stdin is used as 'wsgi.input', output is written directly
     to sys.stdout though.
     """
-    def __init__(self, url='CLI', pagename=''):
+    def __init__(self, url=None, pagename=''):
+        if url is None:
+            url = 'http://localhost:0/' # just some somehow valid dummy URL
         environ = create_environ(base_url=url) # XXX not sure about base_url, but makes "make underlay" work
         environ['HTTP_USER_AGENT'] = 'CLI/Script'
         environ['wsgi.input'] = sys.stdin
