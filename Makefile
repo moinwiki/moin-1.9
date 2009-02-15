@@ -55,7 +55,7 @@ underlay:
 
 pagepacks:
 	@python MoinMoin/_tests/maketestwiki.py
-	@MoinMoin/script/moin.py --config-dir=MoinMoin/_tests maint mkpagepacks
+	@MoinMoin/script/moin.py --config-dir=MoinMoin/_tests --wiki-url=http://localhost/ maint mkpagepacks
 	cd $(share) ; rm -rf underlay
 	cp -a $(testwiki)/underlay $(share)/
 	
