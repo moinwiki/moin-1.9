@@ -1030,7 +1030,7 @@ Password reset URL: %s/?action=recoverpass&name=%s&token=%s
 """) % (
                         self.name,
                         tok,
-                        self._request.url_root,
+                        self._request.script_root,
                         url_quote_plus(self.name),
                         tok, )
 

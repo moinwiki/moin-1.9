@@ -51,8 +51,6 @@ def execute(pagename, request):
         request.headers.add("Etag", etag)
 
         # send the generated XML document
-        baseurl = request.url_root
-
         # Get list of user readable pages
         pages = request.rootpage.getPageList()
         pages.sort()
