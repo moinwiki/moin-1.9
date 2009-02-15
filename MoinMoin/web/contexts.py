@@ -410,14 +410,13 @@ class ScriptContext(AllContext):
     to sys.stdout though.
     """
     def __init__(self, url='CLI', pagename=''):
-        environ = create_environ()
+        environ = create_environ(base_url=url) # XXX not sure about base_url, but makes "make underlay" work
         environ['HTTP_USER_AGENT'] = 'CLI/Script'
         environ['wsgi.input'] = sys.stdin
         request = Request(environ)
         super(ScriptContext, self).__init__(request)
         from MoinMoin import wsgiapp
         wsgiapp.init(self)
-        request.url = url
 
     def write(self, *data):
         for d in data:

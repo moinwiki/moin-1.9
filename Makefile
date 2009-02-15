@@ -47,8 +47,8 @@ epydoc: patchlevel
 # Should be used only on TW machine
 underlay:
 	rm -rf $(share)/underlay
-	MoinMoin/script/moin.py --config-dir=/srv/moin/cfg/1.9 --wiki-url=master19.moinmo.in/ maint globaledit
-	MoinMoin/script/moin.py --config-dir=/srv/moin/cfg/1.9 --wiki-url=master19.moinmo.in/ maint reducewiki --target-dir=$(share)/underlay
+	MoinMoin/script/moin.py --config-dir=/srv/moin/cfg/1.9 --wiki-url=http://master19.moinmo.in/ maint globaledit
+	MoinMoin/script/moin.py --config-dir=/srv/moin/cfg/1.9 --wiki-url=http://master19.moinmo.in/ maint reducewiki --target-dir=$(share)/underlay
 	rm -rf $(share)/underlay/pages/InterWikiMap
 	rm -rf $(share)/underlay/pages/MoinPagesEditorGroup
 	cd $(share); rm -f underlay.tar; tar cf underlay.tar underlay
