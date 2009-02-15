@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: 2008-06-14 22:44+0800\n"
 "Last-Translator: Rux Li <rux.li3@gmail.com>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
@@ -89,6 +89,17 @@ msgstr "\"%(token)s\" 後面應該有個 \"=\""
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "\"%(token)s\" 應該有對應的值"
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "不明的操作 %(action_name)s。"
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "你無權在本頁進行「%(action_name)s」操作。"
+
+msgid "Login and try again."
+msgstr "請先登入後再試一次。"
 
 msgid "Your changes are not saved!"
 msgstr "你的修改沒有儲存！"
@@ -513,6 +524,9 @@ msgstr "筆"
 msgid "about"
 msgstr ""
 
+msgid "anonymous"
+msgstr ""
+
 msgid "Language"
 msgstr "語言"
 
@@ -585,9 +599,6 @@ msgid ""
 msgstr ""
 "如果您沒有帳號，您可以<a href=\"%(userprefslink)s\">新增帳號</a>。<a href=\"%"
 "(sendmypasswordlink)s\">忘了您的密碼？</a>"
-
-msgid "You need to log in."
-msgstr "你必須先登入。"
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -794,6 +805,7 @@ msgstr "改變過的頁面"
 msgid "Page changed"
 msgstr "頁面已改變"
 
+#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
@@ -809,7 +821,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " 強調:: <<Verbatim('')>>''斜體 ''<<Verbatim('')>>; <<Verbatim(''')>>'''粗"
 "體'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''粗斜體 '''''<<Verbatim(''''')"
@@ -1416,6 +1428,11 @@ msgstr "錯誤的圖表類型 \"%s\"！"
 msgid "Load"
 msgstr "載入"
 
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr "檔案沒有內容。請刪除檔名中的非 ASCII 字元後，再試試看。"
+
 msgid "Pagename not specified!"
 msgstr "頁面名稱沒指定！"
 
@@ -1539,11 +1556,6 @@ msgstr "\"%(pagename)s\" 的附件"
 
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "你無權覆蓋本頁的附件。"
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr "檔案沒有內容。請刪除檔名中的非 ASCII 字元後，再試試看。"
 
 #, python-format
 msgid ""
@@ -2227,6 +2239,21 @@ msgstr "請在你的設定編輯訂閱頁面的正規表示式。"
 msgid "You need to be subscribed to unsubscribe."
 msgstr "你並未訂閱本頁。"
 
+#, fuzzy
+msgid "Password is too short."
+msgstr "密碼重設"
+
+msgid "Password has not enough different characters."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr "沒輸入密碼！請輸入名稱及密碼。"
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr ""
+
 msgid "Diffs"
 msgstr "版本比較"
 
@@ -2767,17 +2794,6 @@ msgstr "[空]"
 msgid "filter"
 msgstr "過濾"
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "不明的操作 %(action_name)s。"
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "你無權在本頁進行「%(action_name)s」操作。"
-
-msgid "Login and try again."
-msgstr "請先登入後再試一次。"
-
 msgid "FrontPage"
 msgstr "首頁"
 
@@ -2871,6 +2887,9 @@ msgstr "可點擊的圖片 \"%(filename)s\""
 
 msgid "Toggle line numbers"
 msgstr "切換行號"
+
+#~ msgid "You need to log in."
+#~ msgstr "你必須先登入。"
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

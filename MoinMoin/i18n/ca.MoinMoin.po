@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: 2008-07-30 17:24+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -86,6 +86,17 @@ msgstr "S'esperava que «=» seguira a «%(token)s»"
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "S'esperava un valor per a la clau «%(token)s»"
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "L'acció %(action_name)s és desconeguda."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "No teniu permís per a fer %(action_name)s en aquesta pàgina."
+
+msgid "Login and try again."
+msgstr "Entreu i torneu a provar."
 
 msgid "Your changes are not saved!"
 msgstr "No s'han desat els vostres canvis!"
@@ -523,6 +534,9 @@ msgstr "coincidències"
 msgid "about"
 msgstr ""
 
+msgid "anonymous"
+msgstr ""
+
 msgid "Language"
 msgstr "Llengua"
 
@@ -593,10 +607,6 @@ msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
-
-#, fuzzy
-msgid "You need to log in."
-msgstr "Heu sortit del vostre compte."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -819,6 +829,7 @@ msgstr "Llengua"
 msgid "Page changed"
 msgstr "Desa els canvis"
 
+#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
@@ -834,7 +845,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Èmfasi:: <<Verbatim('')>>''cursiva''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''negreta'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''negreta "
@@ -1428,6 +1439,13 @@ msgstr "El tipus de gràfica «%s» és invàlid."
 msgid "Load"
 msgstr "Carrega"
 
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"No hi ha contingut del fitxer. Suprimiu els caracters no ASCII del nom del "
+"fitxer i torneu-ho a provar."
+
 #, fuzzy
 msgid "Pagename not specified!"
 msgstr "El nom del fitxer per a l'adjunció no s'ha especificat."
@@ -1560,13 +1578,6 @@ msgstr "Adjuncions per a «%(pagename)s»"
 #, fuzzy
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "No teniu permís per a visualitzar adjuncions d'aquesta pàgina."
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"No hi ha contingut del fitxer. Suprimiu els caracters no ASCII del nom del "
-"fitxer i torneu-ho a provar."
 
 #, python-format
 msgid ""
@@ -2244,6 +2255,21 @@ msgstr ""
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Vos heu subscrit a aquesta pàgina."
 
+#, fuzzy
+msgid "Password is too short."
+msgstr "Contrasenya (comprovació)"
+
+msgid "Password has not enough different characters."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr "Manca la contrasenya. Introduïu el nom d'usuari i contrasenya."
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr ""
+
 msgid "Diffs"
 msgstr "Diferències"
 
@@ -2787,17 +2813,6 @@ msgstr "[buides]"
 msgid "filter"
 msgstr "filtre"
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "L'acció %(action_name)s és desconeguda."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "No teniu permís per a fer %(action_name)s en aquesta pàgina."
-
-msgid "Login and try again."
-msgstr "Entreu i torneu a provar."
-
 msgid "FrontPage"
 msgstr "PàginaPrincipal"
 
@@ -2891,6 +2906,10 @@ msgstr "Dibuix clicable: %(filename)s"
 
 msgid "Toggle line numbers"
 msgstr "Commuta els números de línia"
+
+#, fuzzy
+#~ msgid "You need to log in."
+#~ msgstr "Heu sortit del vostre compte."
 
 #~ msgid "Wiki Backup / Restore"
 #~ msgstr "Còpia de seguretat / Restauració del wiki"

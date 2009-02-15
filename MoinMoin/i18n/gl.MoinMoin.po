@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: 2007-02-22 17:39-0300\n"
 "Last-Translator: Iván Méndez <imendez@udc.es>\n"
 "Language-Team: Galician <moin-devel@lists.sourceforge.net>\n"
@@ -86,6 +86,17 @@ msgstr "Agárdase \"=\" logo de \"%(token)s\""
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "Agárdase un valor para a chave \"%(token)s\""
+
+#, fuzzy, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Executar a acción  %(actionname)s?"
+
+#, fuzzy, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Non ten permiso para usar a acción %(actionname)s nesta páxina."
+
+msgid "Login and try again."
+msgstr "Comece a sesión e probe de novo."
 
 msgid "Your changes are not saved!"
 msgstr "Os seus cambios NON se gravaron!"
@@ -541,6 +552,9 @@ msgstr "coincidencias"
 msgid "about"
 msgstr ""
 
+msgid "anonymous"
+msgstr ""
+
 msgid "Language"
 msgstr ""
 
@@ -613,10 +627,6 @@ msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
-
-#, fuzzy
-msgid "You need to log in."
-msgstr "Saiu do sistema."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -857,7 +867,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Énfase:: <<Verbatim('')>>''cursiva''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''negra'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''negra "
@@ -1512,6 +1522,13 @@ msgstr "Tipo de gráfico incorrecto \"%s\"!"
 msgid "Load"
 msgstr "Subir"
 
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Arquivo sen contidos. Elimina os caracteres que non foren ASCII no nome de "
+"arquivo e intente novamente."
+
 #, fuzzy
 msgid "Pagename not specified!"
 msgstr "Non especificou un nome para o arquivo anexo!"
@@ -1647,13 +1664,6 @@ msgstr "Anexos para \"%(pagename)s\""
 #, fuzzy
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "Non ten permiso para ver anexos desta páxina."
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"Arquivo sen contidos. Elimina os caracteres que non foren ASCII no nome de "
-"arquivo e intente novamente."
 
 #, python-format
 msgid ""
@@ -2353,6 +2363,23 @@ msgstr "Edite a expresión regular de subscrición en PreferenciasDoUsuario"
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Subscribiuse a esta páxina."
 
+#, fuzzy
+msgid "Password is too short."
+msgstr "Repetir o contrasinal para validalo"
+
+msgid "Password has not enough different characters."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr ""
+"Faltou introducir o contrasinal. Por favor, introduza o nome de usuario e o "
+"contrasinal"
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr ""
+
 msgid "Diffs"
 msgstr "Diferenzas"
 
@@ -2913,17 +2940,6 @@ msgstr ""
 msgid "filter"
 msgstr ""
 
-#, fuzzy, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Executar a acción  %(actionname)s?"
-
-#, fuzzy, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Non ten permiso para usar a acción %(actionname)s nesta páxina."
-
-msgid "Login and try again."
-msgstr "Comece a sesión e probe de novo."
-
 msgid "FrontPage"
 msgstr "PáxinaInicial"
 
@@ -3017,6 +3033,10 @@ msgstr "Editar debuxo %(filename)s"
 
 msgid "Toggle line numbers"
 msgstr "[des]activar nros. de liña"
+
+#, fuzzy
+#~ msgid "You need to log in."
+#~ msgstr "Saiu do sistema."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

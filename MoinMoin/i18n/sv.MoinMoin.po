@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
-"PO-Revision-Date: 2008-09-13 11:05+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
+"PO-Revision-Date: 2009-02-02 09:00+0200\n"
 "Last-Translator: thomas@marquart.se\n"
 "Language-Team: Swedish <moin-user@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -86,6 +86,17 @@ msgstr "Förväntade \"=\" följa \"%(token)s\""
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "Förväntade ett värde för nyckel \"%(token)s\""
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Okänd åtgärd %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Du får inte göra %(action_name)s på den här sidan."
+
+msgid "Login and try again."
+msgstr "Logga in och försök igen."
 
 msgid "Your changes are not saved!"
 msgstr "Dina ändringar sparas inte!"
@@ -534,6 +545,9 @@ msgstr "träffar"
 msgid "about"
 msgstr "om"
 
+msgid "anonymous"
+msgstr "anonym"
+
 msgid "Language"
 msgstr "Språk"
 
@@ -606,9 +620,6 @@ msgid ""
 msgstr ""
 "Om du inte har ett konto, kan du <a href=\"%(userprefslink)s\">skapa ett nu</"
 "a>. <a href=\"%(sendmypasswordlink)s\">Glömt ditt lösenord?</a>"
-
-msgid "You need to log in."
-msgstr "Du måste logga in."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -797,8 +808,8 @@ msgid ""
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
 msgstr ""
-"Hej administrator, en ny användare har just skapats på %(sitename)s\". Detaljer "
-"följer:\n"
+"Hej administrator, en ny användare har just skapats på %(sitename)s\". "
+"Detaljer följer:\n"
 "\n"
 "    Användarnamn: %(username)s\n"
 "    Epost-adress: %(useremail)s"
@@ -837,6 +848,7 @@ msgstr "Ändrad sida"
 msgid "Page changed"
 msgstr "Sidan har förändrats"
 
+#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
@@ -852,7 +864,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Emfas:: <<Verbatim('')>>''kursiv''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''fetstil'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''kursiv "
@@ -1480,6 +1492,12 @@ msgstr "Ogiltig diagramtyp \"%s\"!"
 msgid "Load"
 msgstr "Ladda"
 
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Inget filinnehåll. Ta bort icke-ASCII-tecken från filnamnet och försök igen."
+
 msgid "Pagename not specified!"
 msgstr "Sidnamn ej angivet!"
 
@@ -1610,12 +1628,6 @@ msgstr "Bilagor till \"%(pagename)s\""
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "Du får inte skriva över en bilaga på den här sidan."
 
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"Inget filinnehåll. Ta bort icke-ASCII-tecken från filnamnet och försök igen."
-
 #, python-format
 msgid ""
 "Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
@@ -1685,7 +1697,7 @@ msgid "New page name"
 msgstr "Nytt sidonamn"
 
 msgid "New attachment name"
-msgstr "Ny bilaga för bilaga"
+msgstr "Nya namnet för bilagan"
 
 msgid "You are not allowed to get attachments from this page."
 msgstr "Du får inte hämta bilagor från den här sidan."
@@ -2336,6 +2348,19 @@ msgstr ""
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Du måste prenumera för att kunna sluta prenumera."
 
+msgid "Password is too short."
+msgstr "Lösenordet är för kort."
+
+msgid "Password has not enough different characters."
+msgstr "Lösenordet har inte tillräckligt många olika tecken."
+
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr "Lösenordet är för enkelt (lösenordet innehåller namnet eller tvärtom)."
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr "Lösenordet är för enkelt (tangentbordssekvens)."
+
 msgid "Diffs"
 msgstr "Skillnader"
 
@@ -2885,17 +2910,6 @@ msgstr "[tom]"
 msgid "filter"
 msgstr "filter"
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Okänd åtgärd %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Du får inte göra %(action_name)s på den här sidan."
-
-msgid "Login and try again."
-msgstr "Logga in och försök igen."
-
 msgid "FrontPage"
 msgstr "StartSida"
 
@@ -2989,6 +3003,9 @@ msgstr "Klickbar teckning %(filename)s"
 
 msgid "Toggle line numbers"
 msgstr "Slå av/på radnumrering"
+
+#~ msgid "You need to log in."
+#~ msgstr "Du måste logga in."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
@@ -3116,9 +3133,8 @@ msgstr "Slå av/på radnumrering"
 #~ msgid "File attachments are not allowed in this wiki!"
 #~ msgstr "Bilagor är inte tillåtna i den här wikin!"
 
-#, fuzzy
 #~ msgid "SendMyPassword"
-#~ msgstr "Lösenord"
+#~ msgstr "SkickaMittLösenord"
 
 #~ msgid "Use UserPreferences to change your settings or create an account."
 #~ msgstr ""

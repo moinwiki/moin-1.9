@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: 2005-08-18 14:19+EET\n"
 "Last-Translator: Ovidiu Sabou <ovidiu.sabou@gmail.com>\n"
 "Language-Team: Romanian <ovidiu.sabou@gmail.com>\n"
@@ -86,6 +86,17 @@ msgstr "Este necesar ca \"=\" să urmeze după \"%(token)s\""
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "Este necesară o valoare pentru cheia \"%(token)s\""
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Acţiune necunoscută %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Nu aveţi permisiunea de %(action_name)s pe această pagină."
+
+msgid "Login and try again."
+msgstr "Înregistraţi-vă şi încercaţi din nou."
 
 msgid "Your changes are not saved!"
 msgstr "Modificările dumneavoastră nu sunt salvate!"
@@ -521,6 +532,9 @@ msgstr "potriviri"
 msgid "about"
 msgstr ""
 
+msgid "anonymous"
+msgstr ""
+
 msgid "Language"
 msgstr ""
 
@@ -591,9 +605,6 @@ msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
-
-msgid "You need to log in."
-msgstr "Trebuie să vă înregistraţi."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -833,7 +844,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Accentuare:: <<Verbatim('')>>''înclinare''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''îngroşare'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''îngroşare şi "
@@ -1429,6 +1440,13 @@ msgstr "Este invalid tipul de grafic \"%s\"!"
 msgid "Load"
 msgstr "Trimitere date"
 
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Nu există conţinut. Ştergeţi caracterele non ASCII din numele fişierului şi "
+"încercaţi din nou."
+
 #, fuzzy
 msgid "Pagename not specified!"
 msgstr "Numele fişierului ataşat nu a fost specificat!"
@@ -1563,13 +1581,6 @@ msgstr "Ataşamente pentru \"%(pagename)s\""
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr ""
 "Nu aveţi permisiunea de a suprascrie un ataşament de pe această pagină."
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"Nu există conţinut. Ştergeţi caracterele non ASCII din numele fişierului şi "
-"încercaţi din nou."
 
 #, python-format
 msgid ""
@@ -2275,6 +2286,21 @@ msgstr ""
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Aţi fost înregistrat(ă) pe această pagină."
 
+#, fuzzy
+msgid "Password is too short."
+msgstr "Resetare parolă"
+
+msgid "Password has not enough different characters."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr "Parola lipseşte. Introduceti nume şi parolă"
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr ""
+
 msgid "Diffs"
 msgstr "Modificări"
 
@@ -2834,17 +2860,6 @@ msgstr ""
 msgid "filter"
 msgstr ""
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Acţiune necunoscută %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Nu aveţi permisiunea de %(action_name)s pe această pagină."
-
-msgid "Login and try again."
-msgstr "Înregistraţi-vă şi încercaţi din nou."
-
 msgid "FrontPage"
 msgstr "PaginaPrincipală"
 
@@ -2938,6 +2953,9 @@ msgstr "Desen clicabil: %(filename)s"
 
 msgid "Toggle line numbers"
 msgstr "Comutare numerotare linii"
+
+#~ msgid "You need to log in."
+#~ msgstr "Trebuie să vă înregistraţi."
 
 #, fuzzy
 #~ msgid "Xapian Version"

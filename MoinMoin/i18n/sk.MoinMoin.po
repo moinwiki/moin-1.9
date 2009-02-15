@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-28 20:59+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: 2008-11-01 11:35+0100\n"
 "Last-Translator: Radovan Garabík <rg-m18@kassiopeia.juls.savba.sk>\n"
 "Language-Team: Slovak\n"
@@ -86,6 +86,17 @@ msgstr "Očakával sa znak „=“ po „%(token)s“"
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "Očakávala sa hodnota pre kľúč „%(token)s“"
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Neznáma akcia %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Nemáte oprávnenie použiť akciu %(action_name)s na tejto stránke."
+
+msgid "Login and try again."
+msgstr "Prihláste sa a skúste znovu."
 
 msgid "Your changes are not saved!"
 msgstr "Uskutočnené zmeny sa neuložili!"
@@ -319,8 +330,8 @@ msgid ""
 "The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were "
 "granted the lock for this page."
 msgstr ""
-"Zámok užívateľa %(owner)s vypršal pred %(mins_ago)d minútami. Teraz ste zámok "
-"na túto stránku dostali Vy."
+"Zámok užívateľa %(owner)s vypršal pred %(mins_ago)d minútami. Teraz ste "
+"zámok na túto stránku dostali Vy."
 
 #, python-format
 msgid ""
@@ -456,12 +467,12 @@ msgid ""
 "Password recovery token: %s\n"
 "\n"
 "Password reset URL: %s/?action=recoverpass&name=%s&token=%s\n"
-msgstr "Prihlasovacie meno: %s\n"
+msgstr ""
+"Prihlasovacie meno: %s\n"
 "\n"
 "Token pre obnovu hesla: %s\n"
 "\n"
 "URL pre resetovanie hesla: %s/?action=recoverpass&name=%s&token=%s\n"
-
 
 msgid ""
 "Somebody has requested to email you a password recovery token.\n"
@@ -535,6 +546,9 @@ msgstr "zhody"
 msgid "about"
 msgstr "približne"
 
+msgid "anonymous"
+msgstr ""
+
 msgid "Language"
 msgstr "Jazyk"
 
@@ -605,9 +619,6 @@ msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
-
-msgid "You need to log in."
-msgstr "Musíte sa prihlásiť."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -773,7 +784,8 @@ msgstr ""
 "Požiadali ste o zasielanie zmien wiki stránky\n"
 "%(sitename)s.\n"
 "\n"
-"Stránka \"%(pagename)s\" bola premenovaná z mena \"%(oldname)s\" redaktorom %(editor)s\n"
+"Stránka \"%(pagename)s\" bola premenovaná z mena \"%(oldname)s\" redaktorom %"
+"(editor)s\n"
 
 #, python-format
 msgid "New user account created on %(sitename)s"
@@ -831,7 +843,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 
 #, python-format
@@ -1004,8 +1016,9 @@ msgstr "Nezvolený žiadny uživateľ"
 msgid ""
 "You can now change the settings of the selected user account; log out to get "
 "back to your account."
-msgstr "Teraz môžete zmeniť nastavenia vybraného užívateľa; odhláste sa "
-"aby ste sa dostali naspäť na svoj účet."
+msgstr ""
+"Teraz môžete zmeniť nastavenia vybraného užívateľa; odhláste sa aby ste sa "
+"dostali naspäť na svoj účet."
 
 msgid "You are the only user."
 msgstr "Ste jediný užívateľ"
@@ -1227,8 +1240,8 @@ msgid ""
 "Add your email address or Jabber ID in your user settings to use "
 "subscriptions."
 msgstr ""
-"Uveďte svoju mailovú alebo jabber adresu v NastaveniachUžívateľa a budete môcť využívať "
-"odoberanie."
+"Uveďte svoju mailovú alebo jabber adresu v NastaveniachUžívateľa a budete "
+"môcť využívať odoberanie."
 
 msgid "You are already subscribed to this page."
 msgstr "Na odoberanie tejto stránky ste už prihásený."
@@ -1382,6 +1395,13 @@ msgstr "Nesprávny typ diagramu \"%s\"!"
 msgid "Load"
 msgstr "Nahrať"
 
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Nenašiel sa nijaký obsah. Vymažte iné ako ASCII znaky z mena súboru askúste "
+"znovu."
+
 msgid "Pagename not specified!"
 msgstr "Názor súboru ako prílohy nie je špecifikovaný!"
 
@@ -1510,13 +1530,6 @@ msgstr "Prílohy pre „%(pagename)s“"
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "Nemáte oprávnenie prepísať si prílohy na tejto stránke."
 
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"Nenašiel sa nijaký obsah. Vymažte iné ako ASCII znaky z mena súboru askúste "
-"znovu."
-
 #, python-format
 msgid ""
 "Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
@@ -1547,7 +1560,9 @@ msgstr "Príloha „%(new_pagename)s/%(new_filename)s“ už existuje."
 msgid ""
 "Attachment '%(pagename)s/%(filename)s' moved to '%(new_pagename)s/%"
 "(new_filename)s'."
-msgstr "Príloha „%(pagename)s/%(filename)s“ bola presunutá do „%(new_pagename)s/%(new_filename)s.“"
+msgstr ""
+"Príloha „%(pagename)s/%(filename)s“ bola presunutá do „%(new_pagename)s/%"
+"(new_filename)s.“"
 
 msgid "Nothing changed"
 msgstr "Nijaká zmena"
@@ -1608,8 +1623,8 @@ msgid ""
 "(maxsize_file)d kB)."
 msgstr ""
 "Príloha „%(filename)s“ sa nedala rozzipovať, pretože výsledné súbory nie sú "
-"v tom istom adresári alebo prevyšujú limit pre veľkosť jedného súboru "
-"(%(maxsize_file)d kB)."
+"v tom istom adresári alebo prevyšujú limit pre veľkosť jedného súboru (%"
+"(maxsize_file)d kB)."
 
 #, python-format
 msgid ""
@@ -1632,7 +1647,8 @@ msgid ""
 "Attachment '%(filename)s' partially unzipped (did not overwrite: %(filelist)"
 "s)."
 msgstr ""
-"Príloha '%(filename)s' bola čiastočne rozzipovaná (nebolo prepísané: %(filelist)s)."
+"Príloha '%(filename)s' bola čiastočne rozzipovaná (nebolo prepísané: %"
+"(filelist)s)."
 
 #, python-format
 msgid "Attachment '%(filename)s' unzipped."
@@ -1719,8 +1735,7 @@ msgstr "Žiadna stránka sa nepodobá na „%s“!"
 #, python-format
 msgid "Exactly one page like \"%s\" found, redirecting to page."
 msgstr ""
-"Našla sa len jedna podobná stránka ako „%s“, presmerovávam na túto "
-"stránku."
+"Našla sa len jedna podobná stránka ako „%s“, presmerovávam na túto stránku."
 
 #, python-format
 msgid "Pages like \"%s\""
@@ -1816,8 +1831,8 @@ msgid ""
 "Got a list of %s local and %s remote pages. This results in %s pages to "
 "process."
 msgstr ""
-"Mám zoznam %s lokálnych stránok a  %s vzdialených stránok. Celkovo je teda treba "
-"spracovať %s stránok."
+"Mám zoznam %s lokálnych stránok a  %s vzdialených stránok. Celkovo je teda "
+"treba spracovať %s stránok."
 
 #, python-format
 msgid "After filtering: %s pages"
@@ -2779,17 +2794,6 @@ msgstr "[prázdne]"
 msgid "filter"
 msgstr "filter"
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Neznáma akcia %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Nemáte oprávnenie použiť akciu %(action_name)s na tejto stránke."
-
-msgid "Login and try again."
-msgstr "Prihláste sa a skúste znovu."
-
 msgid "FrontPage"
 msgstr "HlavnáStránka"
 
@@ -2883,3 +2887,6 @@ msgstr "Klikateľná kresba %(filename)s"
 
 msgid "Toggle line numbers"
 msgstr "Prepnúť zobrazenia čísel riadkov"
+
+#~ msgid "You need to log in."
+#~ msgstr "Musíte sa prihlásiť."

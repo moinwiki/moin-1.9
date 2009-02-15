@@ -11,12 +11,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.6\n"
+"Project-Id-Version: 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: 2006-02-09 11:25+0100\n"
-"Last-Translator: Radomir Dopieralski <mondev@sheep.art.pl>\n"
-"Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
+"Last-Translator: Sergiusz Pawłowicz <moin@pawlowicz.name>\n"
+"Language-Team: Polish <moin@pawlowicz.name>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -88,6 +88,17 @@ msgstr "Za \"%(token)s\" powinno być \"=\""
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "Spodziewana wartość dla klucza \"%(token)s\""
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Nieznana akcja %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Nie możesz wykonać %(action_name)s na niniejszej stronie."
+
+msgid "Login and try again."
+msgstr "Zaloguj się i spróbuj ponownie."
 
 msgid "Your changes are not saved!"
 msgstr "Nic nie zapisano!"
@@ -535,6 +546,9 @@ msgid "matches"
 msgstr "porównania"
 
 msgid "about"
+msgstr "około"
+
+msgid "anonymous"
 msgstr ""
 
 msgid "Language"
@@ -610,12 +624,9 @@ msgstr ""
 "Jeśli nie masz jeszcze hasła, <a href=\"%(userprefslink)s\">możesz je "
 "założyć teraz</a>. <a href=\"%(sendmypasswordlink)s\">Zapomniane hasło?</a>"
 
-msgid "You need to log in."
-msgstr "Musisz się zalogować."
-
 #, python-format
 msgid "LDAP server %(server)s failed."
-msgstr ""
+msgstr "Serwer LDAP %(server)s zawiódł."
 
 msgid ""
 "Please choose an account name now.\n"
@@ -794,7 +805,7 @@ msgstr ""
 msgid "New user account created on %(sitename)s"
 msgstr "Nowe konto czytelnika utworzone na %(sitename)s"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear Superuser, a new user has just been created on %(sitename)s\". Details "
 "follow:\n"
@@ -802,7 +813,8 @@ msgid ""
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
 msgstr ""
-"Drogi nadczytelniku, zostało właśnie utworzone nowe konto czytelnika.\n"
+"Drogi nadczytelniku, zostało właśnie utworzone nowe konto czytelnika na "
+"stronie %(sitename)s\". Oto szczegóły:\n"
 "\n"
 "    Identyfikator: %(username)s\n"
 "    Adres e-mail: %(useremail)s"
@@ -841,6 +853,7 @@ msgstr "Zmieniona strona"
 msgid "Page changed"
 msgstr "Strona zmieniona"
 
+#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
@@ -856,7 +869,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Wyróżnienie:: <<Verbatim('')>>''kursywa''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''pogrubienie'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''pogrubienie "
@@ -1143,16 +1156,14 @@ msgstr "Subskrybowane zdarzenia"
 msgid "Subscribed wiki pages<<BR>>(one regex per line)"
 msgstr "Zasubskrybowane strony wiki<<BR>>(jedno wyrażenie regularne w linii)"
 
-#, fuzzy
 msgid "OpenID server"
-msgstr "OpenID nie jest serwowany"
+msgstr "Serwer OpenID"
 
-#, fuzzy
 msgid "The selected websites have been removed."
-msgstr "Wskazane OpenID zostały usunięte."
+msgstr "Wskazane strony internetowe zostały usunięte."
 
 msgid "Trusted websites"
-msgstr ""
+msgstr "Zaufane strony internetowe"
 
 msgid "Remove selected"
 msgstr "Usuń wskazane"
@@ -1195,7 +1206,7 @@ msgstr ""
 "Nie podano stron dla --pages lub --search, zakładam że chodzi o pełen pakiet."
 
 msgid "All attachments included into the package."
-msgstr ""
+msgstr "Wszystkie załączniki dołączone do pakietu."
 
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "Plik wyjściowy już istnieje! Tchórzliwie odmawiam kontynuacji!"
@@ -1428,13 +1439,13 @@ msgid ""
 "username, the recovery token and a new password (twice) below."
 msgstr ""
 "\n"
-"=== Ustawianie hasła ===Jeśli już masz wiadomość zawierającą kod "
+"=== Ustawianie hasła ===\n"
+"Jeśli już masz wiadomość zawierającą kod "
 "odzyskiwania hasła, wprowadź\n"
 "swój identyfikator czytelnika, kod oraz nowe hasło (dwukrotnie)."
 
-#, fuzzy
 msgid "Wiki Backup"
-msgstr "Język oznaczeń wiki"
+msgstr "Kopia zapasowa wiki."
 
 msgid ""
 "= Downloading a backup =\n"
@@ -1450,6 +1461,18 @@ msgid ""
 "\n"
 "To get a backup, just click here:"
 msgstr ""
+"= Pobieranie kopii zapasowej =\n"
+"\n"
+"Uwaga:\n"
+" * Trzymaj kopie zapsowe w bezpiecznym miejscu; zawierają poufne "
+"informacje.\n"
+" * Upewnij się, że w konfiguracji wiki parametry backup_* są uzupełnione i "
+"poprawne.\n"
+" * Upewnij się, że kopia zapasowa którą uzyskasz zawiera wszystko czego "
+"potrzebujesz w razie problemów.\n"
+" * Upewnij się że jest pobrana bez problemów.\n"
+"\n"
+"Aby pobrać kopię zapasową, kliknij tutaj:"
 
 msgid "Backup"
 msgstr "Kopia zapasowa"
@@ -1482,6 +1505,12 @@ msgstr "Nieprawidłowy rodzaj wykresu \"%s\"!"
 
 msgid "Load"
 msgstr "Wczytaj"
+
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"W pliku nie ma nic. Skasuj wszystkie dziwne znaczki i spróbuj ponownie."
 
 msgid "Pagename not specified!"
 msgstr "Nie została podana nazwa strony!"
@@ -1613,12 +1642,6 @@ msgstr "Załączniki do \"%(pagename)s\""
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "Nie możesz zastąpić istniejącego załącznika na tej stronie."
 
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"W pliku nie ma nic. Skasuj wszystkie dziwne znaczki i spróbuj ponownie."
-
 #, python-format
 msgid ""
 "Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
@@ -1706,36 +1729,38 @@ msgstr "Nie możesz rozpakowywać załączników tej strony."
 msgid "The file %(filename)s is not a .zip file."
 msgstr "Plik %(filename)s nie jest typu .zip."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because some files in the zip are "
 "either not in the same directory or exceeded the single file size limit (%"
 "(maxsize_file)d kB)."
 msgstr ""
 "Nie rozpakowano załącznika '%(filename)s', ponieważ pliki są zbyt duże, "
-"tylko typu .zip, już istnieją, albo znajdują się w podkatalogach."
+"przekraczają limit wielkości pojedycznego pliku (%(maxsize_file)d kB) albo "
+"też znajdują się w podkatalogach."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because it would have exceeded the "
 "per page attachment storage size limit (%(size)d kB)."
 msgstr ""
-"Załącznik '%(filename)s' nie mógł zostać rozpakowany, ponieważ powstałe "
-"pliki byłyby zbyt duże (zabrakło %(space)d kB)."
+"Załącznik '%(filename)s' nie mógł zostać rozpakowany, ponieważ przekroczony "
+"zostałby limit objętości załączników na stronie (%(size)d kB)."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because it would have exceeded the "
 "per page attachment count limit (%(count)d)."
 msgstr ""
-"Załącznik '%(filename)s' nie mógł zostać rozpakowany, ponieważ powstałoby "
-"zbyt wiele plików (zabrakło %(count)d)."
+"Załącznik '%(filename)s' nie mógł zostać rozpakowany, ponieważ przekroczony "
+"zostałby limit największej ilości plików na stronie (%(count)d)."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Attachment '%(filename)s' partially unzipped (did not overwrite: %(filelist)"
 "s)."
-msgstr "Załącznik '%(filename)s' rozpakowano."
+msgstr ""
+"Załącznik '%(filename)s' rozpakowano częściowo (nie zamazano: %(filelist)s)."
 
 #, python-format
 msgid "Attachment '%(filename)s' unzipped."
@@ -1841,9 +1866,8 @@ msgstr "Nieprawidłowa nazwa pliku \"%s\"!"
 msgid "Created the package %s containing the pages %s."
 msgstr "Utworzono pakiet %s zawierający strony %s."
 
-#, fuzzy
 msgid "Include all attachments?"
-msgstr "[%d załączników]"
+msgstr "Zawrzeć wszystkie załączniki?"
 
 msgid "Package pages"
 msgstr "Spakuj strony"
@@ -2340,6 +2364,19 @@ msgstr ""
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Nie było subskrypcji do tej strony, więc nie można z niej zrezygnować."
 
+msgid "Password is too short."
+msgstr "Hasło jest zbyt krótkie."
+
+msgid "Password has not enough different characters."
+msgstr "Hasło nie ma wystarczająco wiele różnych znaków."
+
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr "Asło jest zbyt łatwe (hasło zawiera nazwę użytkownika albo odwrotnie)."
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr "Hasło jest zbyt łatwe (sekwencja klawiatury)."
+
 msgid "Diffs"
 msgstr "Różnice"
 
@@ -2576,14 +2613,13 @@ msgid "User"
 msgstr "Czytelnik"
 
 msgid "[ATTACH]"
-msgstr ""
+msgstr "[ZAŁĄCZ]"
 
-#, fuzzy
 msgid "Variable name"
-msgstr "Nazwa pliku"
+msgstr "Nazwa zmiennej"
 
 msgid "Description"
-msgstr ""
+msgstr "Opis"
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -2632,7 +2668,7 @@ msgid "Display"
 msgstr "Pokaż"
 
 msgid "Wiki configuration"
-msgstr ""
+msgstr "Konfiguracja wiki"
 
 msgid ""
 "This table shows all settings in this wiki that do not have default values. "
@@ -2640,10 +2676,13 @@ msgid ""
 "''italic'', those may be due to third-party extensions needing configuration "
 "or settings that were removed from Moin."
 msgstr ""
+"Ta tabelka pokazuje wszystkie ustawienia tego wiki które nie mają domyslnych "
+"wartości. Ustawienia nieznane systemowi konfiguracji są wyświetlone "
+"''italikami'', mogą to być ustawienia dodatkowych rozszerzeń i wtyczek lub "
+"ustawienia usunięte z tej wersji MoinMoin."
 
-#, fuzzy
 msgid "Setting"
-msgstr "Ustawienia"
+msgstr "Ustawienie"
 
 msgid "Search for items"
 msgstr "Poszukuj obiektów"
@@ -2888,17 +2927,6 @@ msgstr "[puste]"
 msgid "filter"
 msgstr "filtr"
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Nieznana akcja %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Nie możesz wykonać %(action_name)s na niniejszej stronie."
-
-msgid "Login and try again."
-msgstr "Zaloguj się i spróbuj ponownie."
-
 msgid "FrontPage"
 msgstr "StronaGłówna"
 
@@ -2992,6 +3020,9 @@ msgstr "Klikalny rysunek %(filename)s"
 
 msgid "Toggle line numbers"
 msgstr "Ustaw numery linii"
+
+#~ msgid "You need to log in."
+#~ msgstr "Musisz się zalogować."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

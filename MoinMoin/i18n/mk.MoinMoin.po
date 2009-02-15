@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: 2008-06-27 22:39+0200\n"
 "Last-Translator: Novica Nakov\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
@@ -87,6 +87,17 @@ msgstr "По атрибутот \"%(token)s\" мора да следи \"=\""
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "По атрибутот \"%(token)s\" мора да биде наведена вредност"
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Непознато дејство %(action_name)s"
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "На оваа страница не смеете да користите %(action_name)s."
+
+msgid "Login and try again."
+msgstr "Пријавете се и обидете се повторно."
 
 msgid "Your changes are not saved!"
 msgstr "Вашите промени не се снимени!"
@@ -540,6 +551,9 @@ msgstr "совпаѓања"
 msgid "about"
 msgstr "за"
 
+msgid "anonymous"
+msgstr ""
+
 msgid "Language"
 msgstr "Јазик"
 
@@ -612,9 +626,6 @@ msgid ""
 msgstr ""
 "Ако немате сметка, <a href=\"%(userprefslink)s\">можете сега да отворите</"
 "a>. <a href=\"%(sendmypasswordlink)s\">Ја заборавивте лозинката?</a>"
-
-msgid "You need to log in."
-msgstr "Треба да се пријавите."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -849,6 +860,7 @@ msgstr "Променета страница"
 msgid "Page changed"
 msgstr "Страницата е промета"
 
+#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
@@ -864,7 +876,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Нагласено:: <<Verbatim('')>>''искосено''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''здебелено'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''здебелено "
@@ -1492,6 +1504,13 @@ msgstr "Погрешн тип на дијаграм \"%s\"!"
 msgid "Load"
 msgstr "Вчитај"
 
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Празна содржина. Избришете ги не-ASCII знаците од името на датотеката и "
+"обидете се повторно."
+
 msgid "Pagename not specified!"
 msgstr "Името на страницата не е наведено!"
 
@@ -1619,13 +1638,6 @@ msgstr "Прилози на страницата \"%(pagename)s\""
 
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "Не Ви е дозволено да запишувате врз прилозите на оваа страница."
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"Празна содржина. Избришете ги не-ASCII знаците од името на датотеката и "
-"обидете се повторно."
 
 #, python-format
 msgid ""
@@ -2357,6 +2369,21 @@ msgid "You need to be subscribed to unsubscribe."
 msgstr ""
 "Не можете да откажете претплата од страница на која не сте претплатени."
 
+#, fuzzy
+msgid "Password is too short."
+msgstr "Ресетирање на лозинка"
+
+msgid "Password has not enough different characters."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr "Лозинката не е внесена. Внесете корисничко име и лозинка."
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr ""
+
 msgid "Diffs"
 msgstr "Разлики"
 
@@ -2905,17 +2932,6 @@ msgstr "[празно]"
 msgid "filter"
 msgstr "филтер"
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Непознато дејство %(action_name)s"
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "На оваа страница не смеете да користите %(action_name)s."
-
-msgid "Login and try again."
-msgstr "Пријавете се и обидете се повторно."
-
 msgid "FrontPage"
 msgstr "Почетна"
 
@@ -3009,6 +3025,9 @@ msgstr "Активен цртеж: %(filename)s"
 
 msgid "Toggle line numbers"
 msgstr "Вклучи/исклучи нумерирање на редовите"
+
+#~ msgid "You need to log in."
+#~ msgstr "Треба да се пријавите."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

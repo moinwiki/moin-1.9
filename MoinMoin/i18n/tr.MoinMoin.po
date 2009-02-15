@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin-1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: 2007-04-25 16:26+0300\n"
 "Last-Translator: Ekrem SEREN <ekrem.seren@parduslinux.org>\n"
 "Language-Team: Türkçe\n"
@@ -88,6 +88,19 @@ msgstr "\"%(token)s\" tümcesi için \"=\" karakteri girilmeliydi."
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "\"%(token)s\" anahtarı için yanlış değer"
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "%(action_name)s bilinmeyen işlem."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr ""
+"Sayfa üzerinde %(action_name)s işlemini yapmak için yeterli izne sahip "
+"değilsiniz."
+
+msgid "Login and try again."
+msgstr "Giriş yapın ve tekrar deneyin."
 
 msgid "Your changes are not saved!"
 msgstr "Değişiklikleriniz kaydedilmedi!"
@@ -544,6 +557,9 @@ msgstr "eşleniyor"
 msgid "about"
 msgstr ""
 
+msgid "anonymous"
+msgstr ""
+
 msgid "Language"
 msgstr "Dil"
 
@@ -614,10 +630,6 @@ msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
-
-#, fuzzy
-msgid "You need to log in."
-msgstr "Çıkış yaptınız."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -858,7 +870,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Vurgulama:: <<Verbatim('')>>''italik''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''kalın'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''kalın "
@@ -1487,6 +1499,13 @@ msgstr "Geçersiz çizelge tipi: \"%s\""
 msgid "Load"
 msgstr "Gönder"
 
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Dosya içeriği boş. Dosya adında yer alan ASCII olmayan karakterleri silerek "
+"tekrar deneyiniz."
+
 #, fuzzy
 msgid "Pagename not specified!"
 msgstr "Ek için dosya adı belirtilmedi!"
@@ -1617,13 +1636,6 @@ msgstr "\"%(pagename)s\" için Ekler"
 #, fuzzy
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "Sayfa üzerindeki ekleri listelemek için yeterli izne sahip değilsiniz."
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"Dosya içeriği boş. Dosya adında yer alan ASCII olmayan karakterleri silerek "
-"tekrar deneyiniz."
 
 #, python-format
 msgid ""
@@ -2349,6 +2361,21 @@ msgstr ""
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Bu sayfaya üye oldunuz."
 
+#, fuzzy
+msgid "Password is too short."
+msgstr "Parola (Tekrar)"
+
+msgid "Password has not enough different characters."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr "Parola eksik. Lütfen kullanıcı adı ve parolayı girin."
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr ""
+
 msgid "Diffs"
 msgstr "Farklar"
 
@@ -2895,19 +2922,6 @@ msgstr "[boş]"
 msgid "filter"
 msgstr "süzgeç"
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "%(action_name)s bilinmeyen işlem."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr ""
-"Sayfa üzerinde %(action_name)s işlemini yapmak için yeterli izne sahip "
-"değilsiniz."
-
-msgid "Login and try again."
-msgstr "Giriş yapın ve tekrar deneyin."
-
 msgid "FrontPage"
 msgstr "AnaSayfa"
 
@@ -3001,6 +3015,10 @@ msgstr "Tıklanabilir çizim: %(filename)s"
 
 msgid "Toggle line numbers"
 msgstr "Satır numaralandırmayı aç/kapa"
+
+#, fuzzy
+#~ msgid "You need to log in."
+#~ msgstr "Çıkış yaptınız."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

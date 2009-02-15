@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: 2006-02-11 12:20-0800\n"
 "Last-Translator: Hristo Iliev <hristo@phys.uni-sofia.bg>\n"
 "Language-Team: Bulgarian <moin-devel@lists.sourceforge.net>\n"
@@ -87,6 +87,17 @@ msgstr "Очаква се \"=\" след \"%(token)s\""
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "Очаква се стойност на ключа \"%(token)s\""
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Непознато действие %(action_name)s?"
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Не Ви е позволено да извършвате %(action_name)s на тази страница."
+
+msgid "Login and try again."
+msgstr "Влезте и опитайте отново."
 
 msgid "Your changes are not saved!"
 msgstr "Вашите промени не са записани!"
@@ -536,6 +547,9 @@ msgstr "съвпадения"
 msgid "about"
 msgstr ""
 
+msgid "anonymous"
+msgstr ""
+
 msgid "Language"
 msgstr "Език"
 
@@ -606,10 +620,6 @@ msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
-
-#, fuzzy
-msgid "You need to log in."
-msgstr "Вие излязохте успешно."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -848,7 +858,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Наблягане:: <<Verbatim('')>>''наклонен''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''удебелен'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''удебелен и "
@@ -1490,6 +1500,13 @@ msgstr "Лош тип на схема \"%s\"!"
 msgid "Load"
 msgstr "Качване"
 
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Нулево съдържание на файла. Изтрийте всички не-ASCII символи от името на "
+"файла и опитайте отново."
+
 #, fuzzy
 msgid "Pagename not specified!"
 msgstr "Не е указано име на файл за прикрепяне!"
@@ -1622,13 +1639,6 @@ msgstr "Приложения към \"%(pagename)s\""
 #, fuzzy
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "Не Ви е позволено да преглеждате допълненията към тази страница."
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"Нулево съдържание на файла. Изтрийте всички не-ASCII символи от името на "
-"файла и опитайте отново."
 
 #, python-format
 msgid ""
@@ -2350,6 +2360,21 @@ msgstr "Редактирате шаблоните за абонамент във
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Бяхте абонирани за тази страница."
 
+#, fuzzy
+msgid "Password is too short."
+msgstr "Повторение на паролата"
+
+msgid "Password has not enough different characters."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr "Липсва парола. Моля, въведете потребителско име и парола."
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr ""
+
 msgid "Diffs"
 msgstr "Разлики"
 
@@ -2892,17 +2917,6 @@ msgstr "[празни]"
 msgid "filter"
 msgstr "филтър"
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Непознато действие %(action_name)s?"
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Не Ви е позволено да извършвате %(action_name)s на тази страница."
-
-msgid "Login and try again."
-msgstr "Влезте и опитайте отново."
-
 msgid "FrontPage"
 msgstr "НачалнаСтраница"
 
@@ -2996,6 +3010,10 @@ msgstr "Рисунка, по която може да се цъка: %(filename)
 
 msgid "Toggle line numbers"
 msgstr "Превключи показването на номерата на редовете"
+
+#, fuzzy
+#~ msgid "You need to log in."
+#~ msgstr "Вие излязохте успешно."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

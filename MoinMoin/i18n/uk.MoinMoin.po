@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: 2007-11-10 16:50+0300\n"
 "Last-Translator: Maxim V. Dziumanenko <dziumanenko@softprom.kiev.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -87,6 +87,17 @@ msgstr "За \"%(token)s\" очікувався символ \"=\""
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "Для ключа \"%(token)s\" очікувалось значення"
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Невідома дія %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Ви не можете виконувати %(action_name)s на цій сторінці."
+
+msgid "Login and try again."
+msgstr "Увійдіть знову та спробуйте ще раз."
 
 msgid "Your changes are not saved!"
 msgstr "Ваші зміни не збережено!"
@@ -533,6 +544,9 @@ msgstr "відповідностей"
 msgid "about"
 msgstr ""
 
+msgid "anonymous"
+msgstr ""
+
 msgid "Language"
 msgstr "Мова"
 
@@ -603,9 +617,6 @@ msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
-
-msgid "You need to log in."
-msgstr "Вам потібно увійти."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -844,7 +855,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Виділити:: <<Verbatim('')>>''курсивом''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''жирним'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''жирним "
@@ -1467,6 +1478,13 @@ msgstr "Неправильний тип діаграми \"%s\"!"
 msgid "Load"
 msgstr "Завантажити"
 
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Неправильна назва файлу. Приберіть всі спец-символи з імені файлу та "
+"спробуйте знову."
+
 #, fuzzy
 msgid "Pagename not specified!"
 msgstr "Назву сторінки не вказано!"
@@ -1596,13 +1614,6 @@ msgstr "Вкладення для \"%(pagename)s\""
 #, fuzzy
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "Ви не маєте прав на перезаписування вкладення до сторінки."
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"Неправильна назва файлу. Приберіть всі спец-символи з імені файлу та "
-"спробуйте знову."
 
 #, python-format
 msgid ""
@@ -2316,6 +2327,21 @@ msgstr ""
 "Щоб припинити стеження за сторінкою, треба щоб спочатку стеження було "
 "встановлено."
 
+#, fuzzy
+msgid "Password is too short."
+msgstr "Скинути пароль"
+
+msgid "Password has not enough different characters."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr "Відсутній пароль. Введіть ім'я користувача й пароль."
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr ""
+
 msgid "Diffs"
 msgstr "Зміни"
 
@@ -2860,17 +2886,6 @@ msgstr "[порожні]"
 msgid "filter"
 msgstr "фільтр"
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Невідома дія %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Ви не можете виконувати %(action_name)s на цій сторінці."
-
-msgid "Login and try again."
-msgstr "Увійдіть знову та спробуйте ще раз."
-
 msgid "FrontPage"
 msgstr "Початок"
 
@@ -2964,6 +2979,9 @@ msgstr "Малюнок-посилання: %(filename)s"
 
 msgid "Toggle line numbers"
 msgstr "Увімкнути/вимкнути нумерацію рядків"
+
+#~ msgid "You need to log in."
+#~ msgstr "Вам потібно увійти."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"

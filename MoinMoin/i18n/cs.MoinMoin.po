@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 23:35+0200\n"
+"POT-Creation-Date: 2009-02-02 01:17+0100\n"
 "PO-Revision-Date: 2007-11-05 22:11+0100\n"
 "Last-Translator: Václav Haisman <v.haisman@sh.cvut.cz>\n"
 "Language-Team: Czech <moin@lists.sourceforge.net>\n"
@@ -86,6 +86,17 @@ msgstr "Za \"%(token)s\" je očekáváno \"=\" "
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
 msgstr "Je očekávána hodnota klíče \"%(token)s\""
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Neznámá akce %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Nemáte oprávnění spustit na této stránce akci %(action_name)s."
+
+msgid "Login and try again."
+msgstr "Přihlašte se a zkuste to znovu."
 
 msgid "Your changes are not saved!"
 msgstr "Provedené změny nejsou uloženy!"
@@ -527,6 +538,9 @@ msgstr "nálezů"
 msgid "about"
 msgstr ""
 
+msgid "anonymous"
+msgstr ""
+
 msgid "Language"
 msgstr "Jazyk"
 
@@ -597,10 +611,6 @@ msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
-
-#, fuzzy
-msgid "You need to log in."
-msgstr "Jste nyní odhlášeni."
 
 #, python-format
 msgid "LDAP server %(server)s failed."
@@ -841,7 +851,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Zvýraznění:: <<Verbatim('')>>''kurzíva''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''tučně'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''tučně "
@@ -1466,6 +1476,11 @@ msgstr "Neplatný diagram typu \"%s\"!"
 msgid "Load"
 msgstr "Nahrát"
 
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr "Soubor bez obsahu. Smažte ne-ASCII znaky ze souboru a zkuste to znovu."
+
 #, fuzzy
 msgid "Pagename not specified!"
 msgstr "Není zadáno jméno přílohy!"
@@ -1595,11 +1610,6 @@ msgstr "Přílohy k  \"%(pagename)s\""
 #, fuzzy
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "Nemáte dostatečná práva k prohlížení příloh na této stránce."
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr "Soubor bez obsahu. Smažte ne-ASCII znaky ze souboru a zkuste to znovu."
 
 #, python-format
 msgid ""
@@ -2308,6 +2318,21 @@ msgstr "Upravte výrazy pro odebírání v NastaveniUzivatele."
 msgid "You need to be subscribed to unsubscribe."
 msgstr "Přihlásili jste se k odběru této stránky."
 
+#, fuzzy
+msgid "Password is too short."
+msgstr "Opakovat heslo"
+
+msgid "Password has not enough different characters."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr "Prázdné heslo. Prosím vložte jméno a heslo."
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr ""
+
 msgid "Diffs"
 msgstr "Rozdíly"
 
@@ -2849,17 +2874,6 @@ msgstr "[prázdné]"
 msgid "filter"
 msgstr "filtr"
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Neznámá akce %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Nemáte oprávnění spustit na této stránce akci %(action_name)s."
-
-msgid "Login and try again."
-msgstr "Přihlašte se a zkuste to znovu."
-
 msgid "FrontPage"
 msgstr "HlavniStranka"
 
@@ -2953,6 +2967,10 @@ msgstr "Klikací kresba %(filename)s"
 
 msgid "Toggle line numbers"
 msgstr "Přepnout zobrazení čísel řádků"
+
+#, fuzzy
+#~ msgid "You need to log in."
+#~ msgstr "Jste nyní odhlášeni."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
