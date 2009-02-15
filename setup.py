@@ -16,23 +16,6 @@ from distutils.command.build_scripts import build_scripts
 
 from MoinMoin.version import release, revision
 
-# we need this for distutils from python 2.3 compatibility, python 2.4 has the
-# 'package_data' keyword to the 'setup' function to install data in packages
-# see http://wiki.python.org/moin/DistutilsInstallDataScattered
-from distutils.command.install_data import install_data
-class smart_install_data(install_data):
-    def run(self):
-        i18n_data_files = [(target, files) for (target, files) in self.data_files if target.startswith('MoinMoin/i18n')]
-        share_data_files = [(target, files) for (target, files) in self.data_files if target.startswith('share/moin')]
-        # first install the share/moin stuff:
-        self.data_files = share_data_files
-        install_data.run(self)
-        # now we need to install the *.po files to the package dir:
-        # need to change self.install_dir to the library dir
-        install_cmd = self.get_finalized_command('install')
-        self.install_dir = getattr(install_cmd, 'install_lib')
-        self.data_files = i18n_data_files
-        return install_data.run(self)
 
 #############################################################################
 ### Helpers
@@ -327,17 +310,16 @@ Topic :: Text Processing :: Markup""".splitlines(),
         #'MoinMoin._tests',
     ],
 
-    # We can use package_* instead of the smart_install_data hack when we
-    # require Python 2.4.
-    #'package_dir': { 'MoinMoin.i18n': 'MoinMoin/i18n', },
-    #'package_data': { 'MoinMoin.i18n': ['README', 'Makefile', 'MoinMoin.pot', 'POTFILES.in',
-    #                                    '*.po',
-    #                                    'tools/*',], },
+    'package_dir': {'MoinMoin.i18n': 'MoinMoin/i18n', },
+    'package_data': {'MoinMoin.i18n': ['README', 'Makefile', 'MoinMoin.pot', 'POTFILES.in',
+                                       '*.po',
+                                       'tools/*',
+                                       'jabberbot/*',
+                                      ], },
 
     # Override certain command classes with our own ones
     'cmdclass': {
         'build_scripts': build_scripts_moin,
-        'install_data': smart_install_data, # hack needed for 2.3
     },
 
     'scripts': moin_scripts,
@@ -345,7 +327,7 @@ Topic :: Text Processing :: Markup""".splitlines(),
     # This copies the contents of wiki dir under sys.prefix/share/moin
     # Do not put files that should not be installed in the wiki dir, or
     # clean the dir before you make the distribution tarball.
-    'data_files': makeDataFiles('share/moin', 'wiki') + makeDataFiles('MoinMoin/i18n', 'MoinMoin/i18n')
+    'data_files': makeDataFiles('share/moin', 'wiki')
 }
 
 if hasattr(distutils.dist.DistributionMetadata, 'get_keywords'):
