@@ -421,3 +421,39 @@ class TestWikiConversion:
         markup_160 = markup_160.replace('\r\n', '\n')
         assert markup_160 == expected_markup_160
 
+    def test_parser(self):
+        markup_160a = u"""\
+{{{#!html
+...
+}}}
+
+"""
+        expected_markup_160 = u"""\
+{{{#!html
+...
+}}}
+
+"""
+        markup_160 = convert_wiki(self.request, u'TestPage', markup_160a, {})
+        #print markup_160a ; print "---" ; print markup_160
+        markup_160 = markup_160.replace('\r\n', '\n')
+        assert markup_160 == expected_markup_160
+
+    def test_pre(self):
+        markup_160a = u"""\
+{{{
+...
+}}}
+
+"""
+        expected_markup_160 = u"""\
+{{{
+...
+}}}
+
+"""
+        markup_160 = convert_wiki(self.request, u'TestPage', markup_160a, {})
+        #print markup_160a ; print "---" ; print markup_160
+        markup_160 = markup_160.replace('\r\n', '\n')
+        assert markup_160 == expected_markup_160
+
