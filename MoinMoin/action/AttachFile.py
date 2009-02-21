@@ -470,7 +470,7 @@ def send_uploadform(pagename, request):
     'action_name': action_name,
     'upload_label_file': _('File to upload'),
     'upload_label_rename': _('Rename to'),
-    'rename': wikiutil.escape(request.form.get('rename', ''), 1),
+    'rename': wikiutil.escape(request.values.get('rename', ''), 1),
     'upload_label_overwrite': _('Overwrite existing attachment of same name'),
     'overwrite_checked': ('', 'checked')[request.form.get('overwrite', '0') == '1'],
     'upload_button': _('Upload'),
