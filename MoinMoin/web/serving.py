@@ -86,7 +86,7 @@ def make_application(shared=None, trusted_proxies=None):
         application = SharedDataMiddleware(application, shared)
     elif shared:
         if shared is True:
-            shared = '/use/share/moin/htdocs'
+            shared = '/usr/share/moin/htdocs'
 
         if os.path.isdir(shared):
             mapping = {config.url_prefix_static: shared,
