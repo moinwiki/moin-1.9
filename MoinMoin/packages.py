@@ -203,6 +203,7 @@ class ScriptEngine:
         version_int = [int(x) for x in version.split(".")]
         # use a regex here to get only the numbers of the release string (e.g. ignore betaX)
         release = re.compile('\d+').findall(release)[0:3]
+        release = [int(x) for x in release]
         if version_int > release:
             if lines > 0:
                 self.goto = lines
