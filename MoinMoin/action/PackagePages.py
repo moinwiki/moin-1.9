@@ -7,9 +7,10 @@
     TODO: use ActionBase class
 
     @copyright: 2005 MoinMoin:AlexanderSchremmer
+                2007-2009 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
-
+import cStringIO
 import os
 import zipfile
 from datetime import datetime
@@ -80,26 +81,14 @@ class PackagePages:
             self.request.theme.add_msg(self.makeform(_('Invalid filename "%s"!') % wikiutil.escape(packagename)), "error")
             raise ActionError
 
-        # get directory, and possibly create it
-        attach_dir = Page(self.request, self.page.page_name).getPagePath("attachments", check_create=1)
-        fpath = os.path.join(attach_dir, target).encode(config.charset)
-        if os.path.exists(fpath):
-            self.request.theme.add_msg(_("Attachment '%(target)s' (remote name '%(filename)s') already exists.") % {
-                'target': wikiutil.escape(target), 'filename': wikiutil.escape(target)}, "error")
-            raise ActionError
-
-        # Generate a package
-        output = open(fpath, "wb")
-        package = self.collectpackage(unpackLine(pagelist, ","), output, target, include_attachments)
-
-        if package:
-            self.request.theme.add_msg(self.makeform(), "dialog")
-            raise ActionError
-
-        _addLogEntry(self.request, 'ATTNEW', self.pagename, target)
-
-        self.request.theme.add_msg(_("Created the package %s containing the pages %s.") % (wikiutil.escape(target), wikiutil.escape(pagelist)))
-        raise ActionError
+        request = self.request
+        filelike = cStringIO.StringIO()
+        package = self.collectpackage(unpackLine(pagelist, ","), filelike, target, include_attachments)
+        request.content_type = 'application/zip'
+        request.content_length = filelike.tell()
+        request.headers.add('Content-Disposition', 'inline; filename="%s"' % target)
+        request.write(filelike.getvalue())
+        filelike.close()
 
     def makeform(self, error=""):
         """ Display a package page form
