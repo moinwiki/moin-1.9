@@ -19,9 +19,6 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-# add names here to hide them in the cgitb traceback
-unsafe_names = ("id", "key", "val", "user_data", "enc_password", "recoverpass_key")
-
 import os, time, codecs, base64
 
 from MoinMoin.support.python_compatibility import hash_new, hmac_new

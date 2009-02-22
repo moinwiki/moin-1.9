@@ -28,9 +28,6 @@ os.chdir(moinpath)
 from MoinMoin import log
 log.load_config('wikiserverlogging.conf')
 
-# Debug mode - show detailed error reports
-#os.environ['MOIN_DEBUG'] = '1'
-
 from MoinMoin.script import MoinScript
 
 if __name__ == '__main__':

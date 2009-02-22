@@ -43,7 +43,4 @@ import sys, os
 #from MoinMoin import log
 #log.load_config('/path/to/logging_configuration_file')
 
-# Debug mode - show detailed error reports
-#os.environ['MOIN_DEBUG'] = '1'
-
 from MoinMoin.wsgiapp import application
