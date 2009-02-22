@@ -850,8 +850,6 @@ options_no_group_name = {
      'show section numbers in headings by default'),
     ('show_timings', False, "show some timing values at bottom of a page"),
     ('show_version', False, "show moin's version at the bottom of a page"),
-    ('traceback_show', True,
-     "if True, show debug tracebacks to users when moin crashes"),
 
     ('page_credits',
      [
