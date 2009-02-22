@@ -236,7 +236,7 @@ def do_raw(pagename, request):
         rev = request.rev or 0
         Page(request, pagename, rev=rev).send_raw()
 
-def do_show(pagename, request, content_only=0, count_hit=1, cacheable=1, print_mode=0):
+def do_show(pagename, request, content_only=0, count_hit=1, cacheable=1, print_mode=0, mimetype=u'text/html'):
     """ show a page, either current revision or the revision given by "rev=" value.
         if count_hit is non-zero, we count the request for statistics.
     """
@@ -244,7 +244,7 @@ def do_show(pagename, request, content_only=0, count_hit=1, cacheable=1, print_m
     if not request.user.may.read(pagename):
         Page(request, pagename).send_page()
     else:
-        mimetype = request.values.get('mimetype', u"text/html")
+        mimetype = request.values.get('mimetype', mimetype)
         rev = request.rev or 0
         if rev == 0:
             request.cacheable = cacheable
@@ -261,9 +261,7 @@ def do_format(pagename, request):
         It also does not count in statistics and also does not set the cacheable flag.
         DEPRECATED: remove this action when we don't need it any more for compatibility.
     """
-    if 'mimetype' not in request.values:
-        request.values['mimetype'] = u"text/plain"
-    do_show(pagename, request, count_hit=0, cacheable=0)
+    do_show(pagename, request, count_hit=0, cacheable=0, mimetype=u'text/plain')
 
 def do_content(pagename, request):
     """ same as do_show, but we only show the content """
