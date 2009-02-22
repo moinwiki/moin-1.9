@@ -1055,8 +1055,6 @@ class Page(object):
             try:
                 self.formatter.set_highlight_re(self.hilite_re)
             except re.error, err:
-                if 'highlight' in request.values:
-                    del request.values['highlight']
                 request.theme.add_msg(_('Invalid highlighting regular expression "%(regex)s": %(error)s') % {
                                           'regex': self.hilite_re,
                                           'error': str(err),
