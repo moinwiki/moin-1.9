@@ -246,7 +246,13 @@ class Application(object):
         except HTTPException, e:
             response = e
         except error.ConfigurationError, e:
+            # this is stuff the user should see on the web interface:
             response = fatal_response(e)
+        except Exception, e:
+            # have exceptions logged within the moin logging framework:
+            logging.exception("An exception has occurred.")
+            # re-raise exception, so e.g. the debugger middleware gets it
+            raise
 
         return response(environ, start_response)
 
