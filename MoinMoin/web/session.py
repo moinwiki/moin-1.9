@@ -12,7 +12,7 @@
 """
 import time
 
-from werkzeug.utils import dump_cookie
+from werkzeug import dump_cookie
 from werkzeug.contrib.sessions import FilesystemSessionStore, Session
 
 from MoinMoin import caching
