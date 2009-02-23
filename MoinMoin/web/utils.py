@@ -8,9 +8,7 @@
 """
 import time
 
-from werkzeug.exceptions import abort
-from werkzeug.utils import redirect, cookie_date
-from werkzeug.wrappers import Response
+from werkzeug import abort, redirect, cookie_date, Response
 
 from MoinMoin import caching
 from MoinMoin import log

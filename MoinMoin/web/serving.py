@@ -18,8 +18,8 @@ logging = log.getLogger(__name__)
 import werkzeug._internal
 werkzeug._internal._logger = log.getLogger('werkzeug')
 
-from werkzeug.utils import SharedDataMiddleware
-from werkzeug.serving import BaseRequestHandler, run_simple
+from werkzeug import SharedDataMiddleware, run_simple
+from werkzeug.serving import BaseRequestHandler
 
 class RequestHandler(BaseRequestHandler):
     """

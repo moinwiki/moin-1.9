@@ -9,12 +9,10 @@
 import re
 from StringIO import StringIO
 
-from werkzeug.wrappers import Request as WerkzeugRequest
-from werkzeug.wrappers import Response as WerkzeugResponse
-from werkzeug.utils import EnvironHeaders, cached_property, Href
-from werkzeug.utils import create_environ, url_encode
-from werkzeug.http import parse_cache_control_header, HeaderSet
-from werkzeug.test import Client
+from werkzeug import Request as WerkzeugRequest
+from werkzeug import Response as WerkzeugResponse
+from werkzeug import EnvironHeaders, cached_property, Href, create_environ
+from werkzeug import parse_cache_control_header, HeaderSet, url_encode, Client
 
 from MoinMoin import config
 
@@ -88,7 +86,7 @@ class TestRequest(Request):
                  content_type=None, content_length=0, form_data=None,
                  environ_overrides=None):
         """
-        For parameter reference see the documentation of the werkzeug.utils
+        For parameter reference see the documentation of the werkzeug
         package, especially the functions `url_encode` and `create_environ`.
         """
         input_stream = None

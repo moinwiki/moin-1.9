@@ -26,7 +26,7 @@ from MoinMoin.support.python_compatibility import rsplit
 from inspect import getargspec, isfunction, isclass, ismethod
 
 from MoinMoin import web # needed so that next line works:
-import werkzeug.utils
+import werkzeug
 
 # Exceptions
 class InvalidFileNameError(Exception):
@@ -91,38 +91,38 @@ def decodeUserInput(s, charsets=[config.charset]):
 
 
 def url_quote(s, safe='/', want_unicode=None):
-    """ see werkzeug.utils.url_quote, we use a different safe param default value """
+    """ see werkzeug.url_quote, we use a different safe param default value """
     try:
         assert want_unicode is None
     except AssertionError:
         log.exception("call with deprecated want_unicode param, please fix caller")
-    return werkzeug.utils.url_quote(s, charset=config.charset, safe=safe)
+    return werkzeug.url_quote(s, charset=config.charset, safe=safe)
 
 def url_quote_plus(s, safe='/', want_unicode=None):
-    """ see werkzeug.utils.url_quote_plus, we use a different safe param default value """
+    """ see werkzeug.url_quote_plus, we use a different safe param default value """
     try:
         assert want_unicode is None
     except AssertionError:
         log.exception("call with deprecated want_unicode param, please fix caller")
-    return werkzeug.utils.url_quote_plus(s, charset=config.charset, safe=safe)
+    return werkzeug.url_quote_plus(s, charset=config.charset, safe=safe)
 
 def url_unquote(s, want_unicode=None):
-    """ see werkzeug.utils.url_unquote """
+    """ see werkzeug.url_unquote """
     try:
         assert want_unicode is None
     except AssertionError:
         log.exception("call with deprecated want_unicode param, please fix caller")
-    return werkzeug.utils.url_unquote(s, charset=config.charset, errors='fallback:iso-8859-1')
+    return werkzeug.url_unquote(s, charset=config.charset, errors='fallback:iso-8859-1')
 
 
 def parseQueryString(qstr, want_unicode=None):
-    """ see werkzeug.utils.url_decode """
+    """ see werkzeug.url_decode """
     try:
         assert want_unicode is None
     except AssertionError:
         log.exception("call with deprecated want_unicode param, please fix caller")
-    return werkzeug.utils.url_decode(qstr, charset=config.charset, errors='fallback:iso-8859-1',
-                                     decode_keys=False, include_empty=False)
+    return werkzeug.url_decode(qstr, charset=config.charset, errors='fallback:iso-8859-1',
+                               decode_keys=False, include_empty=False)
 
 def makeQueryString(qstr=None, want_unicode=None, **kw):
     """ Make a querystring from arguments.
@@ -131,7 +131,7 @@ def makeQueryString(qstr=None, want_unicode=None, **kw):
 
     If a string is passed in, it's returned verbatim and keyword parameters are ignored.
 
-    See also: werkzeug.utils.url_encode
+    See also: werkzeug.url_encode
 
     @param qstr: dict to format as query string, using either ascii or unicode
     @param kw: same as dict when using keywords, using ascii or unicode
@@ -148,7 +148,7 @@ def makeQueryString(qstr=None, want_unicode=None, **kw):
         return qstr
     if isinstance(qstr, dict):
         qstr.update(kw)
-        return werkzeug.utils.url_encode(qstr, charset=config.charset, encode_keys=True)
+        return werkzeug.url_encode(qstr, charset=config.charset, encode_keys=True)
     else:
         raise ValueError("Unsupported argument type, should be dict.")
 
@@ -165,12 +165,12 @@ def quoteWikinameURL(pagename, charset=config.charset):
     @rtype: string
     @return: the quoted filename, all unsafe characters encoded
     """
-    # XXX please note that urllib.quote and werkzeug.utils.url_quote have
+    # XXX please note that urllib.quote and werkzeug.url_quote have
     # XXX different defaults for safe=...
-    return werkzeug.utils.url_quote(pagename, charset=charset, safe='/')
+    return werkzeug.url_quote(pagename, charset=charset, safe='/')
 
 
-escape = werkzeug.utils.escape
+escape = werkzeug.escape
 
 
 def clean_input(text, max_len=201):
