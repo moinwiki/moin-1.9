@@ -16,19 +16,16 @@ def execute(pagename, request):
         request.theme.add_msg(_("You must login to use this action: %(action)s.") % {"action": actname}, "error")
         return Page(request, pagename).send_page()
 
-    msg = None
-
     if request.user.isSubscribedTo([pagename]):
         # Try to unsubscribe
         if request.user.unsubscribe(pagename):
-            msg = _('Your subscription to this page has been removed.')
+            request.theme.add_msg(_('Your subscription to this page has been removed.'), "info")
         else:
             msg = _("Can't remove regular expression subscription!") + u' ' + \
                   _("Edit the subscription regular expressions in your settings.")
+            request.theme.add_msg(msg, "error")
     else:
         # The user is not subscribed
-        msg = _('You need to be subscribed to unsubscribe.')
-    if msg:
-        request.theme.add_msg(msg)
+        request.theme.add_msg(_('You need to be subscribed to unsubscribe.'), "info")
     Page(request, pagename).send_page()
 
