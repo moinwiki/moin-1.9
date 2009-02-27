@@ -9,10 +9,11 @@
 import re
 from StringIO import StringIO
 
-from werkzeug import Request as WerkzeugRequest
-from werkzeug import Response as WerkzeugResponse
-from werkzeug import EnvironHeaders, cached_property, Href, create_environ
-from werkzeug import parse_cache_control_header, HeaderSet, url_encode, Client
+from werkzeug import Request as RequestBase
+from werkzeug import Response as ResponseBase
+from werkzeug import EnvironHeaders, Headers, HeaderSet
+from werkzeug import Href, create_environ, url_encode, cached_property
+from werkzeug import Client # used by tests
 
 from MoinMoin import config
 
@@ -22,7 +23,7 @@ logging = log.getLogger(__name__)
 class MoinMoinFinish(Exception):
     """ Raised to jump directly to end of run() function, where finish is called """
 
-class Request(WerkzeugRequest, WerkzeugResponse):
+class Request(ResponseBase, RequestBase):
     """ A full featured Request/Response object.
 
     To better distinguish incoming and outgoing data/headers,
@@ -34,51 +35,28 @@ class Request(WerkzeugRequest, WerkzeugResponse):
     default_mimetype = 'text/html'
     given_config = None # if None, load wiki config from disk
 
-    def __init__(self, environ, populate_request=True, shallow=False,
-                 response=None, status=None, headers=None, mimetype=None,
-                 content_type=None):
-        WerkzeugRequest.__init__(self, environ, populate_request, shallow)
-        WerkzeugResponse.__init__(self, response, status, headers,
-                                  mimetype, content_type)
-        if self.script_root:
-            self.href = Href(self.script_root, self.charset)
-        else:
-            self.href = Href('/', self.charset)
+    # get rid of some inherited descriptors
+    headers = None
+
+    def __init__(self, environ, populate_request=True, shallow=False):
+        ResponseBase.__init__(self)
+        RequestBase.__init__(self, environ, populate_request, shallow)
+        self.href = Href(self.script_root or '/', self.charset)
         self.abs_href = Href(self.url_root, self.charset)
+        self.headers = Headers([('Content-Type', 'text/html')])
+        self.response = []
+        self.status_code = 200
 
-    data = WerkzeugResponse.data
-    stream = WerkzeugResponse.stream
-    cache_control = WerkzeugResponse.cache_control
+    in_stream = RequestBase.stream
 
-    def in_cache_control(self):
-        """A `CacheControl` object for the incoming cache control headers."""
-        cache_control = self.environ.get('HTTP_CACHE_CONTROL')
-        return parse_cache_control_header(cache_control)
-    in_cache_control = cached_property(in_cache_control)
-
-    def in_headers(self):
-        """The headers from the WSGI environ as immutable `EnvironHeaders`."""
-        return EnvironHeaders(self.environ)
-    in_headers = cached_property(in_headers, doc=WerkzeugRequest.headers.__doc__)
-
-    def in_stream(self):
-        """The parsed stream if the submitted data was not multipart or
-        urlencoded form data.  This stream is the stream left by the CGI
-        module after parsing.  This is *not* the WSGI input stream.
-        """
-        if self._data_stream is None:
-            self._load_form_data()
-        return self._data_stream
-    in_stream = property(in_stream, doc=WerkzeugRequest.stream.__doc__)
-
+    @cached_property
     def in_data(self):
-        """This reads the buffered incoming data from the client into the
-        string.  Usually it's a bad idea to access `data` because a client
-        could send dozens of megabytes or more to cause memory problems on the
-        server.
-        """
         return self.in_stream.read()
-    in_data = cached_property(in_data, doc=WerkzeugRequest.data.__doc__)
+
+    @cached_property
+    def in_headers(self):
+        return EnvironHeaders(self.environ)
+
 
 class TestRequest(Request):
     """ Request with customized `environ` for test purposes. """
