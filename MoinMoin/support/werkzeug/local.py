@@ -10,12 +10,12 @@
     application is not thread safe any longer.
 
     The python standard library comes with a utility called "thread locals".
-    A thread local is a global object where you can put stuff on and get back
+    A thread local is a global object where you can put stuff in and get back
     later in a thread safe way.  That means whenever you set or get an object
     to / from a thread local object the thread local object checks in which
     thread you are and delivers the correct value.
 
-    This however has a few disadvantages.  For example beside threads there
+    This however has a few disadvantages.  For example besides threads there
     are other ways to handle concurrency in Python.  A very popular approach
     are greenlets.  Also, whether every request gets its own thread is not
     guaranteed in WSGI.  It could be that a request is reusing a thread from
@@ -64,14 +64,15 @@
     context.
 
 
-    :copyright: 2007-2008 by Armin Ronacher.
+    :copyright: (c) 2009 by the Werkzeug Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
 try:
     from py.magic import greenlet
     get_current_greenlet = greenlet.getcurrent
     del greenlet
-except (RuntimeError, ImportError):
+except:
+    # catch all, py.* fails with so many different errors.
     get_current_greenlet = int
 try:
     from thread import get_ident as get_current_thread, allocate_lock
@@ -83,11 +84,11 @@ from werkzeug._internal import _patch_wrapper
 
 # get the best ident function.  if greenlets are not installed we can
 # savely just use the builtin thread function and save a python methodcall
-# and the cost of caculating a hash.
+# and the cost of calculating a hash.
 if get_current_greenlet is int:
     get_ident = get_current_thread
 else:
-    get_ident = lambda: hash((get_current_thread(), get_current_greenlet()))
+    get_ident = lambda: (get_current_thread(), get_current_greenlet())
 
 
 class Local(object):
@@ -147,11 +148,10 @@ class LocalManager(object):
     def __init__(self, locals=None):
         if locals is None:
             self.locals = []
+        elif isinstance(locals, Local):
+            self.locals = [locals]
         else:
-            try:
-                self.locals = list(locals)
-            except TypeError:
-                self.locals = [locals]
+            self.locals = list(locals)
 
     def get_ident(self):
         """Return the context identifier the local objects use internally for
@@ -254,7 +254,7 @@ class LocalProxy(object):
 
     def __unicode__(self):
         try:
-            return unicode(self.__current_oject)
+            return unicode(self.__current_object)
         except RuntimeError:
             return repr(self)
 

@@ -3,7 +3,7 @@
     werkzeug.contrib.sessions
     ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    This module contains some helper classes that helps one to add session
+    This module contains some helper classes that help one to add session
     support to a python WSGI application.
 
     Example::
@@ -42,15 +42,14 @@
                 response.set_cookie('cookie_name', request.session.sid)
             return response(environ, start_response)
 
-
-    :copyright: 2007 by Armin Ronacher.
+    :copyright: (c) 2009 by the Werkzeug Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
 import re
 import os
-from os import path, unlink
+from os import path
 from time import time
-from random import Random, random
+from random import random
 try:
     from hashlib import sha1
 except ImportError:
@@ -142,15 +141,15 @@ class Session(ModificationTrackingDict):
             self.should_save and '*' or ''
         )
 
+    @property
     def should_save(self):
         """True if the session should be saved."""
         return self.modified or self.new
-    should_save = property(should_save)
 
 
 class SessionStore(object):
     """Baseclass for all session stores.  The Werkzeug contrib module does not
-    implement any useful stores beside the filesystem store, application
+    implement any useful stores besides the filesystem store, application
     developers are encouraged to create their own stores.
     """
 
@@ -191,7 +190,7 @@ class SessionStore(object):
 
 
 class FilesystemSessionStore(SessionStore):
-    """Simple example session store that saves session on the filesystem like
+    """Simple example session store that saves sessions in the filesystem like
     PHP does.
     """
 
@@ -217,6 +216,8 @@ class FilesystemSessionStore(SessionStore):
     def delete(self, session):
         fn = self.get_session_filename(session.sid)
         try:
+            # Late import because Google Appengine won't allow os.unlink
+            from os import unlink
             unlink(fn)
         except OSError:
             pass

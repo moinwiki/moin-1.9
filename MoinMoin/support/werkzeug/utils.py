@@ -7,396 +7,30 @@
     them are used by the request and response wrappers but especially for
     middleware development it makes sense to use them without the wrappers.
 
-    :copyright: 2007-2008 by Armin Ronacher, Georg Brandl.
+    :copyright: (c) 2009 by the Werkzeug Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
 import re
 import os
 import sys
-import cgi
 import urllib
 import urlparse
 import posixpath
-from itertools import chain
 from time import asctime, gmtime, time
 from datetime import timedelta
-try:
-    set = set
-except NameError:
-    from sets import Set as set
-    def reversed(item):
-        return item[::-1]
+
 from werkzeug._internal import _patch_wrapper, _decode_unicode, \
      _empty_stream, _iter_modules, _ExtendedCookie, _ExtendedMorsel, \
-     _StorageHelper, _DictAccessorProperty, _dump_date, \
-     _parse_signature
-from werkzeug.http import generate_etag, parse_etags
+     _DictAccessorProperty, _dump_date, _parse_signature, _missing
 
 
-_format_re = re.compile(r'\$(%s|\{%s\})' % (('[a-zA-Z_][a-zA-Z0-9_]*',) * 2))
+_format_re = re.compile(r'\$(?:(%s)|\{(%s)\})' % (('[a-zA-Z_][a-zA-Z0-9_]*',) * 2))
 _entity_re = re.compile(r'&([^;]+);')
 
 
-class MultiDict(dict):
-    """A `MultiDict` is a dictionary subclass customized to deal with multiple
-    values for the same key which is for example used by the parsing functions
-    in the wrappers.  This is necessary because some HTML form elements pass
-    multiple values for the same key.
-
-    `MultiDict` implements the all standard dictionary methods.  Internally,
-    it saves all values for a key as a list, but the standard dict access
-    methods will only return the first value for a key. If you want to gain
-    access to the other values too you have to use the `list` methods as
-    explained below.
-
-    Basic Usage:
-
-    >>> d = MultiDict([('a', 'b'), ('a', 'c')])
-    >>> d
-    MultiDict([('a', 'b'), ('a', 'c')])
-    >>> d['a']
-    'b'
-    >>> d.getlist('a')
-    ['b', 'c']
-    >>> 'a' in d
-    True
-
-    It behaves like a normal dict thus all dict functions will only return the
-    first value when multiple values for one key are found.
-
-    From Werkzeug 0.3 onwards, the `KeyError` raised by this class is also a
-    subclass of the `BadRequest` HTTP exception and will render a page for a
-    ``400 BAD REQUEST`` if catched in a catch-all for HTTP exceptions.
-    """
-
-    #: the key error this class raises.  Because of circular dependencies
-    #: with the http exception module this class is created at the end of
-    #: this module.
-    KeyError = None
-
-    def __init__(self, mapping=()):
-        """A `MultiDict` can be constructed from an iterable of
-        ``(key, value)`` tuples, a dict, a `MultiDict` or with Werkzeug 0.2
-        onwards some keyword parameters.
-        """
-        if isinstance(mapping, MultiDict):
-            dict.__init__(self, [(k, v[:]) for k, v in mapping.lists()])
-        elif isinstance(mapping, dict):
-            tmp = {}
-            for key, value in mapping.iteritems():
-                if isinstance(value, (tuple, list)):
-                    value = list(value)
-                else:
-                    value = [value]
-                tmp[key] = value
-            dict.__init__(self, tmp)
-        else:
-            tmp = {}
-            for key, value in mapping:
-                tmp.setdefault(key, []).append(value)
-            dict.__init__(self, tmp)
-
-    def __getitem__(self, key):
-        """Return the first data value for this key;
-        raises KeyError if not found.
-
-        :raise KeyError: if the key does not exist
-        """
-        if key in self:
-            return dict.__getitem__(self, key)[0]
-        raise self.KeyError(key)
-
-    def __setitem__(self, key, value):
-        """Set an item as list."""
-        dict.__setitem__(self, key, [value])
-
-    def get(self, key, default=None, type=None):
-        """Return the default value if the requested data doesn't exist.
-        If `type` is provided and is a callable it should convert the value,
-        return it or raise a `ValueError` if that is not possible.  In this
-        case the function will return the default as if the value was not
-        found.
-
-        Example:
-
-        >>> d = MultiDict(foo='42', bar='blub')
-        >>> d.get('foo', type=int)
-        42
-        >>> d.get('bar', -1, type=int)
-        -1
-        """
-        try:
-            rv = self[key]
-            if type is not None:
-                rv = type(rv)
-        except (KeyError, ValueError):
-            rv = default
-        return rv
-
-    def getlist(self, key, type=None):
-        """Return the list of items for a given key. If that key is not in the
-        `MultiDict`, the return value will be an empty list.  Just as `get`
-        `getlist` accepts a `type` parameter.  All items will be converted
-        with the callable defined there.
-
-        :return: list
-        """
-        try:
-            rv = dict.__getitem__(self, key)
-        except KeyError:
-            return []
-        if type is None:
-            return rv
-        result = []
-        for item in rv:
-            try:
-                result.append(type(item))
-            except ValueError:
-                pass
-        return result
-
-    def setlist(self, key, new_list):
-        """Remove the old values for a key and add new ones.  Note that the list
-        you pass the values in will be shallow-copied before it is inserted in
-        the dictionary.
-
-        >>> multidict.setlist('foo', ['1', '2'])
-        >>> multidict['foo']
-        '1'
-        >>> multidict.getlist('foo')
-        ['1', '2']
-        """
-        dict.__setitem__(self, key, list(new_list))
-
-    def setdefault(self, key, default=None):
-        if key not in self:
-            self[key] = default
-        else:
-            default = self[key]
-        return default
-
-    def setlistdefault(self, key, default_list=()):
-        """Like `setdefault` but sets multiple values."""
-        if key not in self:
-            default_list = list(default_list)
-            dict.__setitem__(self, key, default_list)
-        else:
-            default_list = self.getlist(key)
-        return default_list
-
-    def items(self):
-        """Return a list of (key, value) pairs, where value is the last item
-        in the list associated with the key.
-        """
-        return [(key, self[key]) for key in self.iterkeys()]
-
-    lists = dict.items
-
-    def values(self):
-        """Returns a list of the last value on every key list."""
-        return [self[key] for key in self.iterkeys()]
-
-    listvalues = dict.values
-
-    def iteritems(self):
-        for key, values in dict.iteritems(self):
-            yield key, values[0]
-
-    iterlists = dict.iteritems
-
-    def itervalues(self):
-        for values in dict.itervalues(self):
-            yield values[0]
-
-    iterlistvalues = dict.itervalues
-
-    def copy(self):
-        """Return a shallow copy of this object."""
-        return self.__class__(self)
-
-    def to_dict(self, flat=True):
-        """Return the contents as regular dict.  If `flat` is `True` the
-        returned dict will only have the first item present, if `flat` is
-        `False` all values will be returned as lists.
-
-        :return: dict
-        """
-        if flat:
-            return dict(self.iteritems())
-        return dict(self)
-
-    def update(self, other_dict):
-        """update() extends rather than replaces existing key lists."""
-        if isinstance(other_dict, MultiDict):
-            for key, value_list in other_dict.iterlists():
-                self.setlistdefault(key, []).extend(value_list)
-        elif isinstance(other_dict, dict):
-            for key, value in other_dict.items():
-                self.setlistdefault(key, []).append(value)
-        else:
-            for key, value in other_dict:
-                self.setlistdefault(key, []).append(value)
-
-    def pop(self, *args):
-        """Pop the first item for a list on the dict."""
-        return dict.pop(self, *args)[0]
-
-    def popitem(self):
-        """Pop an item from the dict."""
-        item = dict.popitem(self)
-        return (item[0], item[1][0])
-
-    poplist = dict.pop
-    popitemlist = dict.popitem
-
-    def __repr__(self):
-        tmp = []
-        for key, values in self.iterlists():
-            for value in values:
-                tmp.append((key, value))
-        return '%s(%r)' % (self.__class__.__name__, tmp)
-
-
-class CombinedMultiDict(MultiDict):
-    """A read only `MultiDict` decorator that you can pass multiple `MultiDict`
-    instances as sequence and it will combine the return values of all wrapped
-    dicts:
-
-    >>> from werkzeug import MultiDict, CombinedMultiDict
-    >>> post = MultiDict([('foo', 'bar')])
-    >>> get = MultiDict([('blub', 'blah')])
-    >>> combined = CombinedMultiDict([get, post])
-    >>> combined['foo']
-    'bar'
-    >>> combined['blub']
-    'blah'
-
-    This works for all read operations and will raise a `TypeError` for
-    methods that usually change data which isn't possible.
-
-    From Werkzeug 0.3 onwards, the `KeyError` raised by this class is also a
-    subclass of the `BadRequest` HTTP exception and will render a page for a
-    ``400 BAD REQUEST`` if catched in a catch-all for HTTP exceptions.
-    """
-
-    def __init__(self, dicts=None):
-        self.dicts = dicts or []
-
-    def fromkeys(cls):
-        raise TypeError('cannot create %r instances by fromkeys' %
-                        cls.__name__)
-    fromkeys = classmethod(fromkeys)
-
-    def __getitem__(self, key):
-        for d in self.dicts:
-            if key in d:
-                return d[key]
-        raise self.KeyError(key)
-
-    def get(self, key, default=None, type=None):
-        for d in self.dicts:
-            if key in d:
-                if type is not None:
-                    try:
-                        return type(d[key])
-                    except ValueError:
-                        continue
-                return d[key]
-        return default
-
-    def getlist(self, key, type=None):
-        rv = []
-        for d in self.dicts:
-            rv.extend(d.getlist(key, type))
-        return rv
-
-    def keys(self):
-        rv = set()
-        for d in self.dicts:
-            rv.update(d.keys())
-        return list(rv)
-
-    def iteritems(self):
-        found = set()
-        for d in self.dicts:
-            for key, value in d.iteritems():
-                if not key in found:
-                    found.add(key)
-                    yield key, value
-
-    def itervalues(self):
-        for key, value in self.iteritems():
-            yield value
-
-    def values(self):
-        return list(self.itervalues())
-
-    def items(self):
-        return list(self.iteritems())
-
-    def lists(self):
-        rv = {}
-        for d in self.dicts:
-            rv.update(d)
-        return rv.items()
-
-    def listvalues(self):
-        rv = {}
-        for d in reversed(self.dicts):
-            rv.update(d)
-        return rv.values()
-
-    def iterkeys(self):
-        return iter(self.keys())
-
-    __iter__ = iterkeys
-
-    def iterlists(self):
-        return iter(self.lists())
-
-    def iterlistvalues(self):
-        return iter(self.listvalues())
-
-    def copy(self):
-        """Return a shallow copy of this object."""
-        return self.__class__(self.dicts[:])
-
-    def to_dict(self, flat=True):
-        """Returns the contents as simple dict.  If `flat` is `True` the
-        resulting dict will only have the first item present, if `flat`
-        is `False` all values will be lists.
-        """
-        rv = {}
-        for d in reversed(self.dicts):
-            rv.update(d.to_dict(flat))
-        return rv
-
-    def _immutable(self, *args):
-        raise TypeError('%r instances are immutable' %
-                        self.__class__.__name__)
-
-    setlist = setdefault = setlistdefault = update = pop = popitem = \
-    poplist = popitemlist = __setitem__ = __delitem__ = _immutable
-    del _immutable
-
-    def __len__(self):
-        return len(self.keys())
-
-    def __contains__(self, key):
-        for d in self.dicts:
-            if key in d:
-                return True
-        return False
-
-    has_key = __contains__
-
-    def __repr__(self):
-        return '%s(%r)' % (self.__class__.__name__, self.dicts)
-
-
 class FileStorage(object):
-    """The `FileStorage` object is a thin wrapper over incoming files.  It is
-    used by the request object to represent uploaded files.  All the
+    """The :class:`FileStorage` class is a thin wrapper over incoming files.
+    It is used by the request object to represent uploaded files.  All the
     attributes of the wrapper stream are proxied by the file storage so
     it's possible to do ``storage.read()`` instead of the long form
     ``storage.stream.read()``.
@@ -404,15 +38,6 @@ class FileStorage(object):
 
     def __init__(self, stream=None, filename=None, name=None,
                  content_type='application/octet-stream', content_length=-1):
-        """Creates a new `FileStorage` object.
-
-        :param stream: the input stream for uploaded file.  Usually this
-                       points to a temporary file.
-        :param filename: The filename of the file on the client.
-        :param name: the name of the form field
-        :param content_type: the content type of the file
-        :param content_length: the content length of the file.
-        """
         self.name = name
         self.stream = stream or _empty_stream
         self.filename = filename or getattr(stream, 'name', None)
@@ -422,8 +47,14 @@ class FileStorage(object):
     def save(self, dst, buffer_size=16384):
         """Save the file to a destination path or file object.  If the
         destination is a file object you have to close it yourself after the
-        call.  The buffer size is the number of bytes held in the memory
-        during the copy process.  It defaults to 16KB.
+        call.  The buffer size is the number of bytes held in memory during
+        the copy process.  It defaults to 16KB.
+
+        :param dst: a filename or open file object the uploaded file
+                    is saved to.
+        :param buffer_size: the size of the buffer.  This works the same as
+                            the `length` parameter of
+                            :func:`shutil.copyfileobj`.
         """
         from shutil import copyfileobj
         close_dst = False
@@ -436,14 +67,15 @@ class FileStorage(object):
             if close_dst:
                 dst.close()
 
+    def close(self):
+        """Close the underlaying file if possible."""
+        try:
+            self.stream.close()
+        except:
+            pass
+
     def __getattr__(self, name):
         return getattr(self.stream, name)
-
-    def __nonzero__(self):
-        return bool(self.filename and self.content_length)
-
-    def __len__(self):
-        return max(self.content_length, 0)
 
     def __iter__(self):
         return iter(self.readline, '')
@@ -454,268 +86,6 @@ class FileStorage(object):
             self.filename,
             self.content_type
         )
-
-
-class Headers(object):
-    """An object that stores some headers.  It has a dict like interface
-    but is ordered and can store keys multiple times.
-
-    This data structure is useful if you want a nicer way to handle WSGI
-    headers which are stored as tuples in a list.
-
-    From Werkzeug 0.3 onwards, the `KeyError` raised by this class is also a
-    subclass of the `BadRequest` HTTP exception and will render a page for a
-    ``400 BAD REQUEST`` if catched in a catch-all for HTTP exceptions.
-    """
-
-    #: the key error this class raises.  Because of circular dependencies
-    #: with the http exception module this class is created at the end of
-    #: this module.
-    KeyError = None
-
-    def __init__(self, defaults=None, _list=None):
-        """Create a new `Headers` object based on a list or dict of headers
-        which are used as default values.  This does not reuse the list passed
-        to the constructor for internal usage.  To create a `Headers` object
-        that uses as internal storage the list or list-like object provided
-        it's possible to use the `linked` classmethod.
-        """
-        if _list is None:
-            _list = []
-        self._list = _list
-        if isinstance(defaults, dict):
-            for key, value in defaults.iteritems():
-                if isinstance(value, (tuple, list)):
-                    for v in value:
-                        self._list.append((key, v))
-                else:
-                    self._list.append((key, value))
-        elif defaults is not None:
-            self._list[:] = defaults
-
-    def linked(cls, headerlist):
-        """Create a new `Headers` object that uses the list of headers passed
-        as internal storage:
-
-        >>> headerlist = [('Content-Length', '40')]
-        >>> headers = Headers.linked(headerlist)
-        >>> headers.add('Content-Type', 'text/html')
-        >>> headerlist
-        [('Content-Length', '40'), ('Content-Type', 'text/html')]
-
-        :return: new linked `Headers` object.
-        """
-        return cls(_list=headerlist)
-    linked = classmethod(linked)
-
-    def __getitem__(self, key):
-        ikey = key.lower()
-        for k, v in self._list:
-            if k.lower() == ikey:
-                return v
-        raise self.KeyError(key)
-
-    def __eq__(self, other):
-        return other.__class__ is self.__class__ and \
-               set(other._list) == set(self._list)
-
-    def __ne__(self, other):
-        return not self.__eq__(other)
-
-    def get(self, key, default=None, type=None):
-        """Return the default value if the requested data doesn't exist.
-        If `type` is provided and is a callable it should convert the value,
-        return it or raise a `ValueError` if that is not possible.  In this
-        case the function will return the default as if the value was not
-        found.
-
-        Example:
-
-        >>> d = Headers([('Content-Length', '42')])
-        >>> d.get('Content-Length', type=int)
-        42
-
-        If a headers object is bound you must notadd unicode strings
-        because no encoding takes place.
-        """
-        try:
-            rv = self[key]
-        except KeyError:
-            return default
-        if type is None:
-            return rv
-        try:
-            return type(rv)
-        except ValueError:
-            return default
-
-    def getlist(self, key, type=None):
-        """Return the list of items for a given key. If that key is not in the
-        `MultiDict`, the return value will be an empty list.  Just as `get`
-        `getlist` accepts a `type` parameter.  All items will be converted
-        with the callable defined there.
-
-        :return: list
-        """
-        ikey = key.lower()
-        result = []
-        for k, v in self:
-            if k.lower() == ikey:
-                if type is not None:
-                    try:
-                        v = type(v)
-                    except ValueError:
-                        continue
-                result.append(v)
-        return result
-
-    def iteritems(self, lower=False):
-        for key, value in self:
-            if lower:
-                key = key.lower()
-            yield key, value
-
-    def iterkeys(self, lower=False):
-        for key, _ in self.iteritems(lower):
-            yield key
-
-    def itervalues(self):
-        for _, value in self.iteritems():
-            yield value
-
-    def keys(self, lower=False):
-        return list(self.iterkeys(lower))
-
-    def values(self):
-        return list(self.itervalues())
-
-    def items(self, lower=False):
-        return list(self.iteritems(lower))
-
-    def extend(self, iterable):
-        """Extend the headers with a dict or an iterable yielding keys and
-        values.
-        """
-        if isinstance(iterable, dict):
-            iterable = iterable.iteritems()
-        for key, value in iterable:
-            self.add(key, value)
-
-    def __delitem__(self, key):
-        key = key.lower()
-        new = []
-        for k, v in self._list:
-            if k.lower() != key:
-                new.append((k, v))
-        self._list[:] = new
-
-    remove = __delitem__
-
-    def __contains__(self, key):
-        """Check if a key is present."""
-        try:
-            self[key]
-        except KeyError:
-            return False
-        return True
-
-    has_key = __contains__
-
-    def __iter__(self):
-        """Yield ``(key, value)`` tuples."""
-        return iter(self._list)
-
-    def add(self, key, value):
-        """add a new header tuple to the list"""
-        self._list.append((key, value))
-
-    def clear(self):
-        """clears all headers"""
-        del self._list[:]
-
-    def set(self, key, value):
-        """remove all header tuples for key and add
-        a new one
-        """
-        lc_key = key.lower()
-        for idx, (old_key, old_value) in enumerate(self._list):
-            if old_key.lower() == lc_key:
-                self._list[idx] = (key, value)
-                return
-        self.add(key, value)
-
-    __setitem__ = set
-
-    def to_list(self, charset='utf-8'):
-        """Convert the headers into a list and converts the unicode header
-        items to the specified charset.
-
-        :return: list
-        """
-        result = []
-        for k, v in self:
-            if isinstance(v, unicode):
-                v = v.encode(charset)
-            else:
-                v = str(v)
-            result.append((k, v))
-        return result
-
-    def copy(self):
-        return self.__class__(self._list)
-
-    def __copy__(self):
-        return self.copy()
-
-    def __repr__(self):
-        return '%s(%r)' % (
-            self.__class__.__name__,
-            list(self)
-        )
-
-
-class EnvironHeaders(Headers):
-    """Read only version of the headers from a WSGI environment.  This
-    provides the same interface as `Headers` and is constructed from
-    a WSGI environment.
-
-    From Werkzeug 0.3 onwards, the `KeyError` raised by this class is also a
-    subclass of the `BadRequest` HTTP exception and will render a page for a
-    ``400 BAD REQUEST`` if catched in a catch-all for HTTP exceptions.
-    """
-
-    def __init__(self, environ):
-        self.environ = environ
-
-    def linked(cls, environ):
-        raise TypeError('%r object is always linked to environment, '
-                        'no separate initializer' % self.__class__.__name__)
-    linked = classmethod(linked)
-
-    def __eq__(self, other):
-        return self is other
-
-    def __getitem__(self, key):
-        key = key.upper().replace('-', '_')
-        if key in ('CONTENT_TYPE', 'CONTENT_LENGTH'):
-            return self.environ[key]
-        return self.environ['HTTP_' + key]
-
-    def __iter__(self):
-        for key, value in self.environ.iteritems():
-            if key.startswith('HTTP_'):
-                yield key[5:].replace('_', '-').title(), value
-            elif key in ('CONTENT_TYPE', 'CONTENT_LENGTH'):
-                yield key.replace('_', '-').title(), value
-
-    def copy(self):
-        raise TypeError('cannot create %r copies' % self.__class__.__name__)
-
-    def _immutable(self, *a, **kw):
-        raise TypeError('%r is immutable' % self.__class__.__name__)
-    remove = __delitem__ = add = clear = extend = set = __setitem__ = \
-        _immutable
-    del _immutable
 
 
 class SharedDataMiddleware(object):
@@ -744,8 +114,15 @@ class SharedDataMiddleware(object):
         })
 
     This will then serve the ``shared_files`` folder in the `myapplication`
-    python package.
+    Python package.
+
+    The optional `disallow` parameter can be a list of `fnmatch` rules for
+    files that are not accessible from the web.  If `cache` is set to `False`
+    no caching headers are sent.
     """
+
+    # TODO: use wsgi.file_wrapper or something, just don't yield everything
+    # at once.  Also consider switching to BaseResponse
 
     def __init__(self, app, exports, disallow=None, cache=True):
         self.app = app
@@ -767,6 +144,10 @@ class SharedDataMiddleware(object):
             self.is_allowed = lambda x: not fnmatch(x, disallow)
 
     def is_allowed(self, filename):
+        """Subclasses can override this method to disallow the access to
+        certain files.  However by providing `disallow` in the constructor
+        this method is overwritten.
+        """
         return True
 
     def get_file_loader(self, filename):
@@ -822,14 +203,20 @@ class SharedDataMiddleware(object):
             data = stream.read()
         finally:
             stream.close()
-        headers = [('Content-Type', mime_type), ('Cache-Control', 'public')]
+
+        headers = [('Cache-Control', 'public')]
         if self.cache:
             etag = generate_etag(data)
             headers += [('Expires', expiry), ('ETag', etag)]
             if parse_etags(environ.get('HTTP_IF_NONE_MATCH')).contains(etag):
+                remove_entity_headers(headers)
                 start_response('304 Not Modified', headers)
                 return []
 
+        headers.extend((
+            ('Content-Type', mime_type),
+            ('Content-Length', str(len(data)))
+        ))
         start_response('200 OK', headers)
         return [data]
 
@@ -875,10 +262,10 @@ class ClosingIterator(object):
         return ClosingIterator(app(environ, start_response), [cleanup_session,
                                                               cleanup_locals])
 
-    If there is just one close function it can be bassed instead of the list.
+    If there is just one close function it can be passed instead of the list.
 
-    A closing iterator is non needed if the application uses response objects
-    and finishes the processing if the resonse is started::
+    A closing iterator is not needed if the application uses response objects
+    and finishes the processing if the response is started::
 
         try:
             return response(environ, start_response)
@@ -912,6 +299,159 @@ class ClosingIterator(object):
             callback()
 
 
+class FileWrapper(object):
+    """This class can be used to convert a :class:`file`-like object into
+    an iterable.  It yields `buffer_size` blocks until the file is fully
+    read.
+
+    You should not use this class directly but rather use the
+    :func:`wrap_file` function that uses the WSGI server's file wrapper
+    support if it's available.
+
+    .. versionadded:: 0.5
+
+    :param file: a :class:`file`-like object with a :meth:`~file.read` method.
+    :param buffer_size: number of bytes for one iteration.
+    """
+
+    def __init__(self, file, buffer_size=8192):
+        self.file = file
+        self.buffer_size = buffer_size
+
+    def close(self):
+        if hasattr(self.file, 'close'):
+            self.file.close()
+
+    def __iter__(self):
+        return self
+
+    def next(self):
+        data = self.file.read(self.buffer_size)
+        if data:
+            return data
+        raise StopIteration()
+
+
+class LimitedStream(object):
+    """Wraps a stream so that it doesn't read more than n bytes.  If the
+    stream is exhausted and the caller tries to get more bytes from it
+    :func:`on_exhausted` is called which by default raises a
+    :exc:`~werkzeug.exceptions.BadRequest`.  The return value of that
+    function is forwarded to the reader function.  So if it returns an
+    empty string :meth:`read` will return an empty string as well.
+
+    The limit however must never be higher than what the stream can
+    output.  Otherwise :meth:`readlines` will try to read past the
+    limit.
+
+    The `silent` parameter has no effect if :meth:`is_exhausted` is
+    overriden by a subclass.
+
+    :param stream: the stream to wrap.
+    :param limit: the limit for the stream, must not be longer than
+                  what the string can provide if the stream does not
+                  end with `EOF` (like `wsgi.input`)
+    :param silent: If set to `True` the stream will allow reading
+                   past the limit and will return an empty string.
+    """
+
+    def __init__(self, stream, limit, silent=False):
+        self._stream = stream
+        self._pos = 0
+        self.limit = limit
+        self.silent = silent
+
+    def __iter__(self):
+        return self
+
+    @property
+    def is_exhausted(self):
+        """If the stream is exhausted this attribute is `True`."""
+        return self._pos >= self.limit
+
+    def on_exhausted(self):
+        """This is called when the stream tries to read past the limit.
+        The return value of this function is returned from the reading
+        function.
+
+        Per default this raises a :exc:`~werkzeug.exceptions.BadRequest`.
+        """
+        if self.silent:
+            return ''
+        raise BadRequest('input stream exhausted')
+
+    def exhaust(self, chunk_size=1024 * 16):
+        """Exhaust the stream.  This consumes all the data left until the
+        limit is reached.
+
+        :param chunk_size: the size for a chunk.  It will read the chunk
+                           until the stream is exhausted and throw away
+                           the results.
+        """
+        to_read = self.limit - self._pos
+        chunk = chunk_size
+        while to_read > 0:
+            chunk = min(to_read, chunk)
+            self.read(chunk)
+            to_read -= chunk
+
+    def read(self, size=None):
+        """Read `size` bytes or if size is not provided everything is read.
+
+        :param size: the number of bytes read.
+        """
+        if self._pos >= self.limit:
+            return self.on_exhausted()
+        if size is None:
+            size = self.limit
+        read = self._stream.read(min(self.limit - self._pos, size))
+        self._pos += len(read)
+        return read
+
+    def readline(self, size=None):
+        """Read a line from the stream.  Arguments are forwarded to the
+        `readline` function of the underlaying stream if it supports
+        them.
+        """
+        if self._pos >= self.limit:
+            return self.on_exhausted()
+        if size is None:
+            size = self.limit - self._pos
+        else:
+            size = min(size, self.limit - self._pos)
+        line = self._stream.readline(size)
+        self._pos += len(line)
+        return line
+
+    def readlines(self, size=None):
+        """Reads a file into a list of strings.  It calls :meth:`readline`
+        until the file is read to the end.  It does support the optional
+        `size` argument if the underlaying stream supports it for
+        `readline`.
+        """
+        last_pos = self._pos
+        result = []
+        if size is not None:
+            end = min(self.limit, last_pos + size)
+        else:
+            end = self.limit
+        while 1:
+            if size is not None:
+                size -= last_pos - self._pos
+            if self._pos >= end:
+                break
+            result.append(self.readline(size))
+            if size is not None:
+                last_pos = self._pos
+        return result
+
+    def next(self):
+        line = self.readline()
+        if line is None:
+            raise StopIteration()
+        return line
+
+
 class Href(object):
     """Implements a callable that constructs URLs with the given base. The
     function can be called with any number of positional and keyword
@@ -929,12 +469,21 @@ class Href(object):
 
     If any of the arguments (positional or keyword) evaluates to `None` it
     will be skipped.  If no keyword arguments are given the last argument
-    can be a `dict` or `MultiDict` (or any other dict subclass), otherwise
-    the keyword arguments are used for the query parameters, cutting off
-    the first trailing underscore of the parameter name:
+    can be a :class:`dict` or :class:`MultiDict` (or any other dict subclass),
+    otherwise the keyword arguments are used for the query parameters, cutting
+    off the first trailing underscore of the parameter name:
 
     >>> href(is_=42)
     '/foo?is=42'
+    >>> href({'foo': 'bar'})
+    '/foo?foo=bar'
+
+    Combining of both methods is not allowed:
+
+    >>> href({'foo': 'bar'}, bar=42)
+    Traceback (most recent call last):
+      ...
+    TypeError: keyword arguments and query-dicts can't be combined
 
     Accessing attributes on the href object creates a new href object with
     the attribute name as prefix:
@@ -942,13 +491,25 @@ class Href(object):
     >>> bar_href = href.bar
     >>> bar_href("blub")
     '/foo/bar/blub'
+
+    If `sort` is set to `True` the items are sorted by `key` or the default
+    sorting algorithm:
+
+    >>> href = Href("/", sort=True)
+    >>> href(a=1, b=2, c=3)
+    '/?a=1&b=2&c=3'
+
+    .. versionadded:: 0.5
+        `sort` and `key` were added.
     """
 
-    def __init__(self, base='./', charset='utf-8'):
+    def __init__(self, base='./', charset='utf-8', sort=False, key=None):
         if not base:
             base = './'
         self.base = base
         self.charset = charset
+        self.sort = sort
+        self.key = key
 
     def __getattr__(self, name):
         if name[:2] == '__':
@@ -956,15 +517,18 @@ class Href(object):
         base = self.base
         if base[-1:] != '/':
             base += '/'
-        return Href(urlparse.urljoin(base, name), self.charset)
+        return Href(urlparse.urljoin(base, name), self.charset, self.sort,
+                    self.key)
 
     def __call__(self, *path, **query):
-        if query:
-            if path and isinstance(path[-1], dict):
-                query, path = path[-1], path[:-1]
-            else:
-                query = dict([(k.endswith('_') and k[:-1] or k, v)
-                              for k, v in query.items()])
+        if path and isinstance(path[-1], dict):
+            if query:
+                raise TypeError('keyword arguments and query-dicts '
+                                'can\'t be combined')
+            query, path = path[-1], path[:-1]
+        elif query:
+            query = dict([(k.endswith('_') and k[:-1] or k, v)
+                          for k, v in query.items()])
         path = '/'.join([url_quote(x, self.charset) for x in path
                          if x is not None]).lstrip('/')
         rv = self.base
@@ -973,12 +537,13 @@ class Href(object):
                 rv += '/'
             rv = urlparse.urljoin(rv, path)
         if query:
-            rv += '?' + url_encode(query, self.charset)
+            rv += '?' + url_encode(query, self.charset, sort=self.sort,
+                                   key=self.key)
         return str(rv)
 
 
 class cached_property(object):
-    """A decorator that converts a function into a lazy property. The
+    """A decorator that converts a function into a lazy property.  The
     function wrapped is called the first time to retrieve the result
     and than that calculated result is used the next time you access
     the value::
@@ -989,19 +554,30 @@ class cached_property(object):
             def foo(self):
                 # calculate something important here
                 return 42
+
+    .. versionchanged:: 0.5
+       cached properties are now optionally writeable.
     """
 
-    def __init__(self, func, name=None, doc=None):
+    def __init__(self, func, name=None, doc=None, writeable=False):
         self.func = func
+        self.writeable = writeable
         self.__name__ = name or func.__name__
         self.__doc__ = doc or func.__doc__
 
     def __get__(self, obj, type=None):
         if obj is None:
             return self
-        value = self.func(obj)
-        setattr(obj, self.__name__, value)
+        value = obj.__dict__.get(self.__name__, _missing)
+        if value is _missing:
+            value = self.func(obj)
+            obj.__dict__[self.__name__] = value
         return value
+
+    def __set__(self, obj, value):
+        if not self.writeable:
+            raise TypeError('read only attribute')
+        obj.__dict__[self.__name__] = value
 
 
 class environ_property(_DictAccessorProperty):
@@ -1009,17 +585,17 @@ class environ_property(_DictAccessorProperty):
     for the Werzeug request object, but also any other class with an
     environ attribute:
 
-    >>> class test_p(object):
-    ...     environ = { 'test': 'test' }
-    ...     test = environ_property('test')
-    >>> var = test_p()
+    >>> class Test(object):
+    ...     environ = {'key': 'value'}
+    ...     test = environ_property('key')
+    >>> var = Test()
     >>> var.test
-    test
+    'value'
 
     If you pass it a second value it's used as default if the key does not
     exist, the third one can be a converter that takes a value and converts
-    it.  If it raises `ValueError` or `TypeError` the default value is used.
-    If no default value is provided `None` is used.
+    it.  If it raises :exc:`ValueError` or :exc:`TypeError` the default value
+    is used. If no default value is provided `None` is used.
 
     Per default the property is read only.  You have to explicitly enable it
     by passing ``read_only=False`` to the constructor.
@@ -1052,7 +628,7 @@ class HTMLBuilder(object):
 
     >>> html.p(class_='foo', *[html.a('foo', href='foo.html'), ' ',
     ...                        html.a('bar', href='bar.html')])
-    '<p class="foo"><a href="foo.html">foo</a> <a href="bar.html">bar</a></p>'
+    u'<p class="foo"><a href="foo.html">foo</a> <a href="bar.html">bar</a></p>'
 
     This class works around some browser limitations and can not be used for
     arbitrary SGML/XML generation.  For that purpose lxml and similar
@@ -1061,7 +637,7 @@ class HTMLBuilder(object):
     Calling the builder escapes the string passed:
 
     >>> html.p(html("<foo>"))
-    '<p>&lt;foo&gt;</p>'
+    u'<p>&lt;foo&gt;</p>'
     """
 
     from htmlentitydefs import name2codepoint
@@ -1098,6 +674,8 @@ class HTMLBuilder(object):
                 if key.endswith('_'):
                     key = key[:-1]
                 if key in self._boolean_attributes:
+                    if not value:
+                        continue
                     value = self._dialect == 'xhtml' and '="%s"' % key or ''
                 else:
                     value = '="%s"' % escape(value, True)
@@ -1106,7 +684,8 @@ class HTMLBuilder(object):
                 write(self._dialect == 'xhtml' and ' />' or '>')
                 return ''.join(buffer)
             write('>')
-            children_as_string = ''.join(children)
+            children_as_string = ''.join(unicode(x) for x in children
+                                         if x is not None)
             if children_as_string:
                 if tag in self._plaintext_elements:
                     children_as_string = escape(children_as_string)
@@ -1129,39 +708,84 @@ xhtml = HTMLBuilder('xhtml')
 
 
 def parse_form_data(environ, stream_factory=None, charset='utf-8',
-                    errors='ignore'):
+                    errors='ignore', max_form_memory_size=None,
+                    max_content_length=None, dict_class=None):
     """Parse the form data in the environ and return it as tuple in the form
     ``(stream, form, files)``.  You should only call this method if the
     transport method is `POST` or `PUT`.
 
     If the mimetype of the data transmitted is `multipart/form-data` the
     files multidict will be filled with `FileStorage` objects.  If the
-    mimetype is unknow the input stream is wrapped and returned as first
+    mimetype is unknown the input stream is wrapped and returned as first
     argument, else the stream is empty.
+
+    This function does not raise exceptions, even if the input data is
+    malformed.
+
+    Have a look at :ref:`dealing-with-request-data` for more details.
+
+    .. versionadded:: 0.5
+       The `max_form_memory_size`, `max_content_length` and
+       `dict_class` parameters were added.
+
+    :param environ: the WSGI environment to be used for parsing.
+    :param stream_factory: An optional callable that returns a new read and
+                           writeable file descriptor.  This callable works
+                           the same as :meth:`~BaseResponse._get_file_stream`.
+    :param charset: The character set for URL and url encoded form data.
+    :param errors: The encoding error behavior.
+    :param max_form_memory_size: the maximum number of bytes to be accepted for
+                           in-memory stored form data.  If the data
+                           exceeds the value specified an
+                           :exc:`~exceptions.RequestURITooLarge`
+                           exception is raised.
+    :param max_content_length: If this is provided and the transmitted data
+                               is longer than this value an
+                               :exc:`~exceptions.RequestEntityTooLarge`
+                               exception is raised.
+    :param dict_class: an optional dict class to use.  If this is not specified
+                       or `None` the default :class:`MultiDict` is used.
+    :return: A tuple in the form ``(stream, form, files)``.
     """
+    content_type, extra = parse_options_header(environ.get('CONTENT_TYPE', ''))
+    try:
+        content_length = int(environ['CONTENT_LENGTH'])
+    except (KeyError, ValueError):
+        content_length = 0
+
+    if dict_class is None:
+        dict_class = MultiDict
+
+    if max_content_length is not None and content_length > max_content_length:
+        raise RequestEntityTooLarge()
+
     stream = _empty_stream
-    form = []
-    files = []
-    storage = _StorageHelper(environ, stream_factory)
-    if storage.file:
-        stream = storage.file
-    if storage.list is not None:
-        for key in storage.keys():
-            values = storage[key]
-            if not isinstance(values, list):
-                values = [values]
-            for item in values:
-                if getattr(item, 'filename', None) is not None:
-                    fn = _decode_unicode(item.filename, charset, errors)
-                    # fix stupid IE bug (IE6 sends the whole path)
-                    if fn[1:3] == ':\\' or fn[:2] == '\\\\':
-                        fn = fn.split('\\')[-1]
-                    files.append((key, FileStorage(item.file, fn, key,
-                                  item.type, item.length)))
-                else:
-                    form.append((key, _decode_unicode(item.value,
-                                 charset, errors)))
-    return stream, MultiDict(form), MultiDict(files)
+    files = ()
+
+    if content_type == 'multipart/form-data':
+        try:
+            form, files = parse_multipart(environ['wsgi.input'],
+                                          extra.get('boundary'),
+                                          content_length, stream_factory,
+                                          charset, errors,
+                                          max_form_memory_size=max_form_memory_size)
+        except ValueError, e:
+            form = dict_class()
+        else:
+            form = dict_class(form)
+    elif content_type == 'application/x-www-form-urlencoded' or \
+         content_type == 'application/x-url-encoded':
+        if max_form_memory_size is not None and \
+           content_length > max_form_memory_size:
+            raise RequestEntityTooLarge()
+        form = url_decode(environ['wsgi.input'].read(content_length),
+                          charset, errors=errors, dict_class=dict_class)
+    else:
+        form = dict_class()
+        stream = LimitedStream(environ['wsgi.input'], content_length,
+                               silent=True)
+
+    return stream, form, dict_class(files)
 
 
 def get_content_type(mimetype, charset):
@@ -1169,6 +793,10 @@ def get_content_type(mimetype, charset):
 
     If the mimetype represents text the charset will be appended as charset
     parameter, otherwise the mimetype is returned unchanged.
+
+    :param mimetype: the mimetype to be used as content type.
+    :param charset: the charset to be appended in case it was a text mimetype.
+    :return: the content type.
     """
     if mimetype.startswith('text/') or \
        mimetype == 'application/xml' or \
@@ -1179,16 +807,19 @@ def get_content_type(mimetype, charset):
 
 
 def format_string(string, context):
-    """String-template format a string::
+    """String-template format a string:
 
-        >>> format_string('$foo and ${foo}s', dict(foo=42))
-        '42 and 42s'
+    >>> format_string('$foo and ${foo}s', dict(foo=42))
+    '42 and 42s'
 
     This does not do any attribute lookup etc.  For more advanced string
     formattings have a look at the `werkzeug.template` module.
+
+    :param string: the format string.
+    :param context: a dict with the variables to insert.
     """
     def lookup_arg(match):
-        x = context[match.group(1)]
+        x = context[match.group(1) or match.group(2)]
         if not isinstance(x, basestring):
             x = type(string)(x)
         return x
@@ -1196,43 +827,87 @@ def format_string(string, context):
 
 
 def url_decode(s, charset='utf-8', decode_keys=False, include_empty=True,
-               errors='ignore'):
-    """Parse a querystring and return it as `MultiDict`.  Per default only
-    values are decoded into unicode strings.  If `decode_keys` is set to
-    ``True`` the same will happen for keys.
+               errors='ignore', separator='&', dict_class=None):
+    """Parse a querystring and return it as :class:`MultiDict`.  Per default
+    only values are decoded into unicode strings.  If `decode_keys` is set to
+    `True` the same will happen for keys.
 
     Per default a missing value for a key will default to an empty key.  If
     you don't want that behavior you can set `include_empty` to `False`.
 
-    Per default encoding errors are ignore.  If you want a different behavior
+    Per default encoding errors are ignored.  If you want a different behavior
     you can set `errors` to ``'replace'`` or ``'strict'``.  In strict mode a
     `HTTPUnicodeError` is raised.
+
+    .. versionchanged:: 0.5
+       In previous versions ";" and "&" could be used for url decoding.
+       This changed in 0.5 where only "&" is supported.  If you want to
+       use ";" instead a different `separator` can be provided.
+
+       The `dict_class` parameter was added.
+
+    :param s: a string with the query string to decode.
+    :param charset: the charset of the query string.
+    :param decode_keys: set to `True` if you want the keys to be decoded
+                        as well.
+    :param include_empty: Set to `False` if you don't want empty values to
+                          appear in the dict.
+    :param errors: the decoding error behavior.
+    :param separator: the pair separator to be used, defaults to ``&``
+    :param dict_class: an optional dict class to use.  If this is not specified
+                       or `None` the default :class:`MultiDict` is used.
     """
-    tmp = []
-    for key, values in cgi.parse_qs(str(s), include_empty).iteritems():
-        for value in values:
-            if decode_keys:
-                key = _decode_unicode(key, charset, errors)
-            tmp.append((key, _decode_unicode(value, charset, errors)))
-    return MultiDict(tmp)
+    if dict_class is None:
+        dict_class = MultiDict
+    result = []
+    for pair in str(s).split(separator):
+        if not pair:
+            continue
+        if '=' in pair:
+            key, value = pair.split('=', 1)
+        else:
+            key = pair
+            value = ''
+        key = urllib.unquote_plus(key)
+        if decode_keys:
+            key = _decode_unicode(key, charset, errors)
+        result.append((key, url_unquote_plus(value, charset, errors)))
+    return dict_class(result)
 
 
-def url_encode(obj, charset='utf-8', encode_keys=False):
+def url_encode(obj, charset='utf-8', encode_keys=False, sort=False, key=None,
+               separator='&'):
     """URL encode a dict/`MultiDict`.  If a value is `None` it will not appear
     in the result string.  Per default only values are encoded into the target
     charset strings.  If `encode_keys` is set to ``True`` unicode keys are
     supported too.
+
+    If `sort` is set to `True` the items are sorted by `key` or the default
+    sorting algorithm.
+
+    .. versionadded:: 0.5
+        `sort`, `key`, and `separator` were added.
+
+    :param obj: the object to encode into a query string.
+    :param charset: the charset of the query string.
+    :param encode_keys: set to `True` if you have unicode keys.
+    :param sort: set to `True` if you want parameters to be sorted by `key`.
+    :param separator: the separator to be used for the pairs.
+    :param key: an optional function to be used for sorting.  For more details
+                check out the :func:`sorted` documentation.
     """
     if isinstance(obj, MultiDict):
         items = obj.lists()
     elif isinstance(obj, dict):
         items = []
-        for key, value in obj.iteritems():
-            if not isinstance(value, (tuple, list)):
-                value = [value]
-            items.append((key, value))
+        for k, v in obj.iteritems():
+            if not isinstance(v, (tuple, list)):
+                v = [v]
+            items.append((k, v))
     else:
         items = obj or ()
+    if sort:
+        items.sort(key=key)
     tmp = []
     for key, values in items:
         if encode_keys and isinstance(key, unicode):
@@ -1248,11 +923,16 @@ def url_encode(obj, charset='utf-8', encode_keys=False):
                 value = str(value)
             tmp.append('%s=%s' % (urllib.quote(key),
                                   urllib.quote_plus(value)))
-    return '&'.join(tmp)
+    return separator.join(tmp)
 
 
 def url_quote(s, charset='utf-8', safe='/:'):
-    """URL encode a single string with a given encoding."""
+    """URL encode a single string with a given encoding.
+
+    :param s: the string to quote.
+    :param charset: the charset to be used.
+    :param safe: an optional sequence of safe characters.
+    """
     if isinstance(s, unicode):
         s = s.encode(charset)
     elif not isinstance(s, str):
@@ -1263,6 +943,10 @@ def url_quote(s, charset='utf-8', safe='/:'):
 def url_quote_plus(s, charset='utf-8', safe=''):
     """URL encode a single string with the given encoding and convert
     whitespace to "+".
+
+    :param s: the string to quote.
+    :param charset: the charset to be used.
+    :param safe: an optional sequence of safe characters.
     """
     if isinstance(s, unicode):
         s = s.encode(charset)
@@ -1274,9 +958,13 @@ def url_quote_plus(s, charset='utf-8', safe=''):
 def url_unquote(s, charset='utf-8', errors='ignore'):
     """URL decode a single string with a given decoding.
 
-    Per default encoding errors are ignore.  If you want a different behavior
+    Per default encoding errors are ignored.  If you want a different behavior
     you can set `errors` to ``'replace'`` or ``'strict'``.  In strict mode a
     `HTTPUnicodeError` is raised.
+
+    :param s: the string to unquote.
+    :param charset: the charset to be used.
+    :param errors: the error handling for the charset decoding.
     """
     return _decode_unicode(urllib.unquote(s), charset, errors)
 
@@ -1285,22 +973,27 @@ def url_unquote_plus(s, charset='utf-8', errors='ignore'):
     """URL decode a single string with the given decoding and decode
     a "+" to whitespace.
 
-    Per default encoding errors are ignore.  If you want a different behavior
+    Per default encoding errors are ignored.  If you want a different behavior
     you can set `errors` to ``'replace'`` or ``'strict'``.  In strict mode a
     `HTTPUnicodeError` is raised.
+
+    :param s: the string to unquote.
+    :param charset: the charset to be used.
+    :param errors: the error handling for the charset decoding.
     """
     return _decode_unicode(urllib.unquote_plus(s), charset, errors)
 
 
 def url_fix(s, charset='utf-8'):
-    """Sometimes you get an URL by a user that just isn't a real URL because
+    r"""Sometimes you get an URL by a user that just isn't a real URL because
     it contains unsafe characters like ' ' and so on.  This function can fix
     some of the problems in a similar way browsers handle data entered by the
     user:
 
-    >>> url_fix(u'http://de.wikipedia.org/wiki/Elf (Begriffsklärung)')
+    >>> url_fix(u'http://de.wikipedia.org/wiki/Elf (Begriffskl\xe4rung)')
     'http://de.wikipedia.org/wiki/Elf%20%28Begriffskl%C3%A4rung%29'
 
+    :param s: the string with the URL to fix.
     :param charset: The target charset for the URL if the url was given as
                     unicode string.
     """
@@ -1318,6 +1011,9 @@ def escape(s, quote=False):
     also translated.
 
     There is a special handling for `None` which escapes to an empty string.
+
+    :param s: the string to escape.
+    :param quote: set to true to also escape double quotes.
     """
     if s is None:
         return ''
@@ -1334,6 +1030,8 @@ def escape(s, quote=False):
 def unescape(s):
     """The reverse function of `escape`.  This unescapes all the HTML
     entities, not only the XML entities inserted by `escape`.
+
+    :param s: the string to unescape.
     """
     def handle_match(m):
         name = m.group(1)
@@ -1351,8 +1049,10 @@ def unescape(s):
 
 
 def get_host(environ):
-    """Return the real host for the given WSGI enviornment.  This takes care
+    """Return the real host for the given WSGI environment.  This takes care
     of the `X-Forwarded-Host` header.
+
+    :param environ: the WSGI environment to get the host of.
     """
     if 'HTTP_X_FORWARDED_HOST' in environ:
         return environ['HTTP_X_FORWARDED_HOST']
@@ -1379,6 +1079,11 @@ def get_current_url(environ, root_only=False, strip_querystring=False,
     'http://localhost/'
     >>> get_current_url(env, strip_querystring=True)
     'http://localhost/script/'
+
+    :param environ: the WSGI environment to get the current URL from.
+    :param root_only: set `True` if you only want the root URL.
+    :param strip_querystring: set to `True` if you don't want the querystring.
+    :param host_only: set to `True` if the host URL should be returned.
     """
     tmp = [environ['wsgi.url_scheme'], '://', get_host(environ)]
     cat = tmp.append
@@ -1396,28 +1101,109 @@ def get_current_url(environ, root_only=False, strip_querystring=False,
     return ''.join(tmp)
 
 
+def pop_path_info(environ):
+    """Removes and returns the next segment of `PATH_INFO`, pushing it onto
+    `SCRIPT_NAME`.  Returns `None` if there is nothing left on `PATH_INFO`.
+
+    If there are empty segments (``'/foo//bar``) these are ignored but
+    properly pushed to the `SCRIPT_NAME`:
+
+    >>> env = {'SCRIPT_NAME': '/foo', 'PATH_INFO': '/a/b'}
+    >>> pop_path_info(env)
+    'a'
+    >>> env['SCRIPT_NAME']
+    '/foo/a'
+    >>> pop_path_info(env)
+    'b'
+    >>> env['SCRIPT_NAME']
+    '/foo/a/b'
+
+    .. versionadded:: 0.5
+
+    :param environ: the WSGI environment that is modified.
+    """
+    path = environ.get('PATH_INFO')
+    if not path:
+        return None
+
+    script_name = environ.get('SCRIPT_NAME', '')
+
+    # shift multiple leading slashes over
+    old_path = path
+    path = path.lstrip('/')
+    if path != old_path:
+        script_name += '/' * (len(old_path) - len(path))
+
+    if '/' not in path:
+        environ['PATH_INFO'] = ''
+        environ['SCRIPT_NAME'] = script_name + path
+        return path
+
+    segment, path = path.split('/', 1)
+    environ['PATH_INFO'] = '/' + path
+    environ['SCRIPT_NAME'] = script_name + segment
+    return segment
+
+
+def peek_path_info(environ):
+    """Returns the next segment on the `PATH_INFO` or `None` if there
+    is none.  Works like :func:`pop_path_info` without modifying the
+    environment:
+
+    >>> env = {'SCRIPT_NAME': '/foo', 'PATH_INFO': '/a/b'}
+    >>> peek_path_info(env)
+    'a'
+    >>> peek_path_info(env)
+    'a'
+
+    .. versionadded:: 0.5
+
+    :param environ: the WSGI environment that is checked.
+    """
+    segments = environ.get('PATH_INFO', '').lstrip('/').split('/', 1)
+    if segments:
+        return segments[0]
+
+
 def cookie_date(expires=None):
     """Formats the time to ensure compatibility with Netscape's cookie
     standard.
 
     Accepts a floating point number expressed in seconds since the epoc in, a
-    datetime object or a timetuple.  All times in UTC.  The `parse_date`
-    function in `werkzeug.http` can be used to parse such a date.
+    datetime object or a timetuple.  All times in UTC.  The :func:`parse_date`
+    function can be used to parse such a date.
 
     Outputs a string in the format ``Wdy, DD-Mon-YYYY HH:MM:SS GMT``.
+
+    :param expires: If provided that date is used, otherwise the current.
     """
     return _dump_date(expires, '-')
 
 
-def parse_cookie(header, charset='utf-8', errors='ignore'):
+def parse_cookie(header, charset='utf-8', errors='ignore',
+                 dict_class=None):
     """Parse a cookie.  Either from a string or WSGI environ.
 
-    Per default encoding errors are ignore.  If you want a different behavior
+    Per default encoding errors are ignored.  If you want a different behavior
     you can set `errors` to ``'replace'`` or ``'strict'``.  In strict mode a
-    `HTTPUnicodeError` is raised.
+    :exc:`HTTPUnicodeError` is raised.
+
+    .. versionchanged:: 0.5
+       This function now returns a :class:`TypeConversionDict` instead of a
+       regular dict.  The `dict_class` parameter was added.
+
+    :param header: the header to be used to parse the cookie.  Alternatively
+                   this can be a WSGI environment.
+    :param charset: the charset for the cookie values.
+    :param errors: the error behavior for the charset decoding.
+    :param dict_class: an optional dict class to use.  If this is not specified
+                       or `None` the default :class:`TypeConversionDict` is
+                       used.
     """
     if isinstance(header, dict):
         header = header.get('HTTP_COOKIE', '')
+    if dict_class is None:
+        dict_class = TypeConversionDict
     cookie = _ExtendedCookie()
     cookie.load(header)
     result = {}
@@ -1429,7 +1215,7 @@ def parse_cookie(header, charset='utf-8', errors='ignore'):
         if value.value is not None:
             result[key] = _decode_unicode(value.value, charset, errors)
 
-    return result
+    return dict_class(result)
 
 
 def dump_cookie(key, value='', max_age=None, expires=None, path='/',
@@ -1437,12 +1223,12 @@ def dump_cookie(key, value='', max_age=None, expires=None, path='/',
                 sync_expires=True):
     """Creates a new Set-Cookie header without the ``Set-Cookie`` prefix
     The parameters are the same as in the cookie Morsel object in the
-    Python standard library but it accepts unicode data too.
+    Python standard library but it accepts unicode data, too.
 
     :param max_age: should be a number of seconds, or `None` (default) if
                     the cookie should last only as long as the client's
                     browser session.  Additionally `timedelta` objects
-                    are accepted too.
+                    are accepted, too.
     :param expires: should be a `datetime` object or unix timestamp.
     :param path: limits the cookie to a given path, per default it will
                  span the whole domain.
@@ -1485,10 +1271,12 @@ def http_date(timestamp=None):
     """Formats the time to match the RFC1123 date format.
 
     Accepts a floating point number expressed in seconds since the epoc in, a
-    datetime object or a timetuple.  All times in UTC.  The `parse_date`
-    function in `werkzeug.http` can be used to parse such a date.
+    datetime object or a timetuple.  All times in UTC.  The :func:`parse_date`
+    function can be used to parse such a date.
 
     Outputs a string in the format ``Wdy, DD Mon YYYY HH:MM:SS GMT``.
+
+    :param timestamp: If provided that date is used, otherwise the current.
     """
     return _dump_date(timestamp, ' ')
 
@@ -1499,8 +1287,11 @@ def redirect(location, code=302):
     302, 303, 305, and 307.  300 is not supported because it's not a real
     redirect and 304 because it's the answer for a request with a request
     with defined If-Modified-Since headers.
+
+    :param location: the location the response should redirect to.
+    :param code: the redirect status code.
     """
-    assert code in (301, 302, 303, 305, 307)
+    assert code in (301, 302, 303, 305, 307), 'invalid code'
     from werkzeug.wrappers import BaseResponse
     response = BaseResponse(
         '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">\n'
@@ -1516,14 +1307,16 @@ def redirect(location, code=302):
 def append_slash_redirect(environ, code=301):
     """Redirect to the same URL but with a slash appended.  The behavior
     of this function is undefined if the path ends with a slash already.
+
+    :param environ: the WSGI environment for the request that triggers
+                    the redirect.
+    :param code: the status code for the redirect.
     """
     new_path = environ['PATH_INFO'].strip('/') + '/'
     query_string = environ['QUERY_STRING']
     if query_string:
         new_path += '?' + query_string
-    if not new_path.startswith('/'):
-        new_path = '/' + new_path
-    return redirect(new_path)
+    return redirect(new_path, code)
 
 
 def responder(f):
@@ -1539,15 +1332,36 @@ def responder(f):
     return _patch_wrapper(f, lambda *a: f(*a)(*a[-2:]))
 
 
+def wrap_file(environ, file, buffer_size=8192):
+    """Wraps a file.  This uses the WSGI server's file wrapper if available
+    or otherwise the generic :class:`FileWrapper`.
+
+    .. versionadded:: 0.5
+
+    If the file wrapper from the WSGI server is used it's important to not
+    iterate over it from inside the application but to pass it through
+    unchanged.  If you want to pass out a file wrapper inside a response
+    object you have to set :attr:`~BaseResponse.direct_passthrough` to `True`.
+
+    More information about file wrappers are available in :pep:`333`.
+
+    :param file: a :class:`file`-like object with a :meth:`~file.read` method.
+    :param buffer_size: number of bytes for one iteration.
+    """
+    return environ.get('wsgi.file_wrapper', FileWrapper)(file, buffer_size)
+
+
 def import_string(import_name, silent=False):
-    """Imports an object based on a string.  This use useful if you want to
+    """Imports an object based on a string.  This is useful if you want to
     use import paths as endpoints or something similar.  An import path can
     be specified either in dotted notation (``xml.sax.saxutils.escape``)
     or with a colon as object delimiter (``xml.sax.saxutils:escape``).
 
-    If the `silent` is True the return value will be `None` if the import
-    fails.
+    If `silent` is True the return value will be `None` if the import fails.
 
+    :param import_name: the dotted name for the object to import.
+    :param silent: if set to `True` import errors are ignored and
+                   `None` is returned instead.
     :return: imported object
     """
     try:
@@ -1575,6 +1389,9 @@ def find_modules(import_path, include_packages=False, recursive=False):
     also recursively list modules but in that case it will import all the
     packages to get the correct load path of that module.
 
+    :param import_name: the dotted name for the package to find child modules.
+    :param include_packages: set to `True` if packages should be returned, too.
+    :param recursive: set to `True` if recursion should happen.
     :return: generator
     """
     module = import_string(import_path)
@@ -1592,144 +1409,6 @@ def find_modules(import_path, include_packages=False, recursive=False):
                     yield item
         else:
             yield modname
-
-
-def create_environ(path='/', base_url=None, query_string=None, method='GET',
-                   input_stream=None, content_type=None, content_length=0,
-                   errors_stream=None, multithread=False,
-                   multiprocess=False, run_once=False):
-    """Create a new WSGI environ dict based on the values passed.  The first
-    parameter should be the path of the request which defaults to '/'.  The
-    second one can either be a absolute path (in that case the host is
-    localhost:80) or a full path to the request with scheme, netloc port and
-    the path to the script.
-
-    If the `path` contains a query string it will be used, even if the
-    `query_string` parameter was given.  If it does not contain one
-    the `query_string` parameter is used as querystring.  In that case
-    it can either be a dict, MultiDict or string.
-
-    The following options exist:
-
-    `method`
-        The request method.  Defaults to `GET`
-
-    `input_stream`
-        The input stream.  Defaults to an empty read only stream.
-
-    `content_type`
-        The content type for this request.  Default is an empty content
-        type.
-
-    `content_length`
-        The value for the content length header.  Defaults to 0.
-
-    `errors_stream`
-        The wsgi.errors stream.  Defaults to `sys.stderr`.
-
-    `multithread`
-        The multithreaded flag for the WSGI Environment.  Defaults to `False`.
-
-    `multiprocess`
-        The multiprocess flag for the WSGI Environment.  Defaults to `False`.
-
-    `run_once`
-        The run_once flag for the WSGI Environment.  Defaults to `False`.
-    """
-    if base_url is not None:
-        scheme, netloc, script_name, qs, fragment = urlparse.urlsplit(base_url)
-        if ':' in netloc:
-            server_name, server_port = netloc.split(':')
-        else:
-            if scheme == 'http':
-                server_port = '80'
-            elif scheme == 'https':
-                server_port = '443'
-            server_name = netloc
-        if qs or fragment:
-            raise ValueError('base url cannot contain a query string '
-                             'or fragment')
-        script_name = urllib.unquote(script_name) or ''
-    else:
-        scheme = 'http'
-        server_name = netloc = 'localhost'
-        server_port = '80'
-        script_name = ''
-    if path and '?' in path:
-        path, query_string = path.split('?', 1)
-    elif not isinstance(query_string, basestring):
-        query_string = url_encode(query_string)
-    path = urllib.unquote(path) or '/'
-
-    return {
-        'REQUEST_METHOD':       method,
-        'SCRIPT_NAME':          script_name,
-        'PATH_INFO':            path,
-        'QUERY_STRING':         query_string,
-        'SERVER_NAME':          server_name,
-        'SERVER_PORT':          server_port,
-        'HTTP_HOST':            netloc,
-        'SERVER_PROTOCOL':      'HTTP/1.0',
-        'CONTENT_TYPE':         content_type or '',
-        'CONTENT_LENGTH':       str(content_length),
-        'wsgi.version':         (1, 0),
-        'wsgi.url_scheme':      scheme,
-        'wsgi.input':           input_stream or _empty_stream,
-        'wsgi.errors':          errors_stream or sys.stderr,
-        'wsgi.multithread':     multithread,
-        'wsgi.multiprocess':    multiprocess,
-        'wsgi.run_once':        run_once
-    }
-
-
-def run_wsgi_app(app, environ, buffered=False):
-    """Return a tuple in the form (app_iter, status, headers) of the
-    application output.  This works best if you pass it an application that
-    returns a iterator all the time.
-
-    Sometimes applications may use the `write()` callable returned
-    by the `start_response` function.  This tries to resolve such edge
-    cases automatically.  But if you don't get the expected output you
-    should set `buffered` to `True` which enforces buffering.
-
-    If passed an invalid WSGI application the behavior of this function is
-    undefined.  Never pass non-conforming WSGI applications to this function.
-    """
-    response = []
-    buffer = []
-
-    def start_response(status, headers, exc_info=None):
-        if exc_info is not None:
-            raise exc_info[0], exc_info[1], exc_info[2]
-        response[:] = [status, headers]
-        return buffer.append
-
-    app_iter = app(environ, start_response)
-
-    # when buffering we emit the close call early and conver the
-    # application iterator into a regular list
-    if buffered:
-        close_func = getattr(app_iter, 'close', None)
-        try:
-            app_iter = list(app_iter)
-        finally:
-            if close_func is not None:
-                close_func()
-
-    # otherwise we iterate the application iter until we have
-    # a response, chain the already received data with the already
-    # collected data and wrap it in a new `ClosingIterator` if
-    # we have a close callable.
-    else:
-        while not response:
-            buffer.append(app_iter.next())
-        if buffer:
-            app_iter = chain(buffer, app_iter)
-            close_func = getattr(app_iter, 'close', None)
-            if close_func is not None:
-                app_iter = ClosingIterator(app_iter, close_func)
-
-    return app_iter, response[0], response[1]
 
 
 def validate_arguments(func, args, kwargs, drop_extra=True):
@@ -1768,6 +1447,13 @@ def validate_arguments(func, args, kwargs, drop_extra=True):
                                      'the data expected.')
                 return f(*args, **kwargs)
             return proxy
+
+    :param func: the function the validation is performed against.
+    :param args: a tuple of positional arguments.
+    :param kwargs: a dict of keyword arguments.
+    :param drop_extra: set to `False` if you don't want extra arguments
+                       to be silently dropped.
+    :return: tuple in the form ``(args, kwargs)``.
     """
     parser = _parse_signature(func)
     args, kwargs, missing, extra, extra_positional = parser(args, kwargs)[:5]
@@ -1784,6 +1470,11 @@ def bind_arguments(func, args, kwargs):
     returns a dict of names as the function would see it.  This can be useful
     to implement a cache decorator that uses the function arguments to build
     the cache key based on the values of the arguments.
+
+    :param func: the function the arguments should be bound for.
+    :param args: tuple of positional arguments.
+    :param kwargs: a dict of keyword arguments.
+    :return: a :class:`dict` of bound keyword arguments.
     """
     args, kwargs, missing, extra, extra_positional, \
         arg_spec, vararg_var, kwarg_var = _parse_signature(func)(args, kwargs)
@@ -1807,7 +1498,7 @@ def bind_arguments(func, args, kwargs):
 
 
 class ArgumentValidationError(ValueError):
-    """Raised if `validate_arguments` fails to validate"""
+    """Raised if :func:`validate_arguments` fails to validate"""
 
     def __init__(self, missing=None, extra=None, extra_positional=None):
         self.missing = set(missing or ())
@@ -1820,8 +1511,26 @@ class ArgumentValidationError(ValueError):
         ))
 
 
-# create all the special key errors now that the classes are defined.
-from werkzeug.exceptions import BadRequest
-for _cls in MultiDict, CombinedMultiDict, Headers, EnvironHeaders:
-    _cls.KeyError = BadRequest.wrap(KeyError, _cls.__name__ + '.KeyError')
-del BadRequest, _cls
+# circular dependency fun
+from werkzeug.http import generate_etag, parse_etags, \
+     remove_entity_headers, parse_multipart, parse_options_header, \
+     dump_options_header
+from werkzeug.exceptions import BadRequest, RequestEntityTooLarge
+from werkzeug.datastructures import MultiDict, TypeConversionDict
+
+
+# DEPRECATED
+# these objects were previously in this module as well.  we import
+# them here for backwards compatibility.  Will go away in 0.6
+from werkzeug.datastructures import MultiDict, CombinedMultiDict, \
+     Headers, EnvironHeaders
+
+def create_environ(*args, **kwargs):
+    """backward compatibility."""
+    from werkzeug.test import create_environ
+    return create_environ(*args, **kwargs)
+
+def run_wsgi_app(*args, **kwargs):
+    """backwards compatibility."""
+    from werkzeug.test import run_wsgi_app
+    return run_wsgi_app(*args, **kwargs)

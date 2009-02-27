@@ -6,17 +6,17 @@
     Addon module that allows to create a JavaScript function from a map
     that generates rules.
 
-    :copyright: 2007 by Armin Ronacher, Leif K-Brooks.
+    :copyright: (c) 2009 by the Werkzeug Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
 try:
     from simplejson import dumps
 except ImportError:
     def dumps(*args):
-        raise RuntimeErrr('simplejson required for jsrouting')
+        raise RuntimeError('simplejson required for jsrouting')
 
 from inspect import getmro
-from werkzeug.minitmpl import Template
+from werkzeug.templates import Template
 from werkzeug.routing import NumberConverter
 
 

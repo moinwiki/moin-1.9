@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
-"""
+r"""
     werkzeug.contrib.iterio
     ~~~~~~~~~~~~~~~~~~~~~~~
 
-    This module implements a `IterIO` that converts an iterator into a stream
-    object and the other way round.  Converting streams into iterators
-    requires the `greenlet`_ module.
-
+    This module implements a :class:`IterIO` that converts an iterator into
+    a stream object and the other way round.  Converting streams into
+    iterators requires the `greenlet`_ module.
 
     To convert an iterator into a stream all you have to do is to pass it
-    directly to the `IterIO` constructor.  In this example we pass it a newly
-    created generator::
+    directly to the :class:`IterIO` constructor.  In this example we pass it
+    a newly created generator::
 
         def foo():
             yield "something\n"
@@ -19,10 +18,11 @@
         print stream.read()         # read the whole iterator
 
     The other way round works a bit different because we have to ensure that
-    the code execution doesn't take place yet.  An `IterIO` call with a
+    the code execution doesn't take place yet.  An :class:`IterIO` call with a
     callable as first argument does two things.  The function itself is passed
-    an `IterI` stream it can feed.  The object returned by the `IterIO`
-    constructor on the other hand is not an stream object but an iterator::
+    an :class:`IterIO` stream it can feed.  The object returned by the
+    :class:`IterIO` constructor on the other hand is not an stream object but
+    an iterator::
 
         def foo(stream):
             stream.write("some")
@@ -34,21 +34,21 @@
         print iterator.next()       # prints otherthing
         iterator.next()             # raises StopIteration
 
-
     .. _greenlet: http://codespeak.net/py/dist/greenlet.html
 
-    :copyright: 2007 by Armin Ronacher.
+    :copyright: (c) 2009 by the Werkzeug Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
 try:
     from py.magic import greenlet
-except (RuntimeError, ImportError):
+except:
     greenlet = None
 
 
 class IterIO(object):
-    """
-    Baseclass for iterator IOs.
+    """Instances of this object implement an interface compatible with the
+    standard Python :class:`file` object.  Streams are either read-only or
+    write-only depending on how the object is created.
     """
 
     def __new__(cls, obj):
@@ -121,9 +121,7 @@ class IterIO(object):
 
 
 class IterI(IterIO):
-    """
-    Convert an stream into an iterator.
-    """
+    """Convert an stream into an iterator."""
 
     def __new__(cls, func):
         if greenlet is None:
@@ -158,7 +156,7 @@ class IterI(IterIO):
         self.pos += len(s)
         self._buffer.append(s)
 
-    def writelines(slf, list):
+    def writelines(self, list):
         self.write(''.join(list))
 
     def flush(self):
@@ -170,11 +168,10 @@ class IterI(IterIO):
 
 
 class IterO(IterIO):
-    """
-    Iter output.  Wrap an iterator and give it a stream like interface.
-    """
+    """Iter output.  Wrap an iterator and give it a stream like interface."""
 
-    __new__ = object.__new__
+    def __new__(cls, gen):
+        return object.__new__(cls)
 
     def __init__(self, gen):
         self._gen = gen
@@ -197,18 +194,22 @@ class IterO(IterIO):
         if mode == 1:
             pos += self.pos
         elif mode == 2:
-            pos += len(self._buf)
+            self.read()
+            self.pos = min(self.pos, self.pos + pos)
+            return
+        elif mode != 0:
+            raise IOError('Invalid argument')
+        buf = []
         try:
-            buf = []
             tmp_end_pos = len(self._buf)
             while pos > tmp_end_pos:
                 item = self._gen.next()
                 tmp_end_pos += len(item)
                 buf.append(item)
-            if buf:
-                self._buf += ''.join(buf)
         except StopIteration:
             pass
+        if buf:
+            self._buf += ''.join(buf)
         self.pos = max(0, pos)
 
     def read(self, n=-1):
@@ -216,24 +217,26 @@ class IterO(IterIO):
             raise ValueError('I/O operation on closed file')
         if n < 0:
             self._buf += ''.join(self._gen)
-            return self._buf[self.pos:]
+            result = self._buf[self.pos:]
+            self.pos += len(result)
+            return result
         new_pos = self.pos + n
+        buf = []
         try:
-            buf = []
             tmp_end_pos = len(self._buf)
             while new_pos > tmp_end_pos:
                 item = self._gen.next()
                 tmp_end_pos += len(item)
                 buf.append(item)
-            if buf:
-                self._buf += ''.join(buf)
         except StopIteration:
             pass
+        if buf:
+            self._buf += ''.join(buf)
         new_pos = max(0, new_pos)
         try:
             return self._buf[self.pos:new_pos]
         finally:
-            self.pos = new_pos
+            self.pos = min(new_pos, len(self._buf))
 
     def readline(self, length=None):
         if self.closed:
@@ -244,10 +247,10 @@ class IterO(IterIO):
             pos = self.pos
             while nl_pos < 0:
                 item = self._gen.next()
-                pos2 = item.find('\n', pos)
+                local_pos = item.find('\n')
                 buf.append(item)
-                if pos2 >= 0:
-                    nl_pos = pos
+                if local_pos >= 0:
+                    nl_pos = pos + local_pos
                     break
                 pos += len(item)
         except StopIteration:
@@ -263,7 +266,7 @@ class IterO(IterIO):
         try:
             return self._buf[self.pos:new_pos]
         finally:
-            self.pos = new_pos
+            self.pos = min(new_pos, len(self._buf))
 
     def readlines(self, sizehint=0):
         total = 0
