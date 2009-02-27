@@ -5,7 +5,7 @@
 
     There are many ways to serve a WSGI application.  While you're developing
     it you usually don't want a full blown webserver like Apache but a simple
-    standalone one.  With Python 2.5 onwards there is the `wsgiref`_ server in
+    standalone one.  From Python 2.5 onwards there is the `wsgiref`_ server in
     the standard library.  If you're using older versions of Python you can
     download the package from the cheeseshop.
 
@@ -38,7 +38,7 @@
     .. _wsgiref: http://cheeseshop.python.org/pypi/wsgiref
 
 
-    :copyright: 2007-2008 by Armin Ronacher.
+    :copyright: (c) 2009 by the Werkzeug Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
 import os
@@ -46,88 +46,153 @@ import socket
 import sys
 import time
 import thread
+from urlparse import urlparse
 from itertools import chain
-try:
-    from wsgiref.simple_server import ServerHandler, WSGIRequestHandler, \
-         WSGIServer
-    have_wsgiref = True
-except ImportError:
-    have_wsgiref = False
 from SocketServer import ThreadingMixIn, ForkingMixIn
+from BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
 from werkzeug._internal import _log
+from werkzeug.utils import responder
+from werkzeug.exceptions import InternalServerError
 
 
-if have_wsgiref:
-    class BaseRequestHandler(WSGIRequestHandler):
-        """
-        Subclass of the normal request handler that thinks it is
-        threaded or something like that. The default wsgiref handler
-        has wrong information so we need this class.
-        """
-        multithreaded = False
-        multiprocess = False
-        _handler_class = None
+class BaseRequestHandler(BaseHTTPRequestHandler, object):
 
-        def get_handler(self):
-            handler = self._handler_class
-            if handler is None:
-                class handler(ServerHandler):
-                    wsgi_multithread = self.multithreaded
-                    wsgi_multiprocess = self.multiprocess
-                self._handler_class = handler
+    def run_wsgi(self):
+        path_info, _, query = urlparse(self.path)[2:5]
+        app = self.server.app
+        environ = {
+            'wsgi.version':         (1, 0),
+            'wsgi.url_scheme':      'http',
+            'wsgi.input':           self.rfile,
+            'wsgi.errors':          sys.stderr,
+            'wsgi.multithread':     self.server.multithread,
+            'wsgi.multiprocess':    self.server.multiprocess,
+            'wsgi.run_once':        0,
+            'REQUEST_METHOD':       self.command,
+            'SCRIPT_NAME':          '',
+            'QUERY_STRING':         query,
+            'CONTENT_TYPE':         self.headers.get('Content-Type', ''),
+            'CONTENT_LENGTH':       self.headers.get('Content-Length', ''),
+            'REMOTE_ADDR':          self.client_address[0],
+            'REMOTE_PORT':          self.client_address[1],
+            'SERVER_NAME':          self.server.server_address[0],
+            'SERVER_PORT':          str(self.server.server_address[1]),
+            'SERVER_PROTOCOL':      self.request_version
+        }
+        if path_info:
+            from urllib import unquote
+            environ['PATH_INFO'] = unquote(path_info)
+        for key, value in self.headers.items():
+            environ['HTTP_' + key.upper().replace('-', '_')] = value
 
-            rv = handler(self.rfile, self.wfile, self.get_stderr(),
-                         self.get_environ())
-            rv.request_handler = self
-            return rv
+        headers_set = []
+        headers_sent = []
 
-        def handle(self):
-            self.raw_requestline = self.rfile.readline()
-            if self.parse_request():
-                self.get_handler().run(self.server.get_app())
+        def write(data):
+            assert headers_set, 'write() before start_response'
+            if not headers_sent:
+                status, response_headers = headers_sent[:] = headers_set
+                code, msg = status.split(None, 1)
+                self.send_response(int(code), msg)
+                for line in response_headers:
+                    self.send_header(*line)
+                self.end_headers()
 
-        def log_request(self, code='-', size='-'):
-            _log('info', '%s -- [%s] %s %s',
-                self.address_string(),
-                self.requestline,
-                code,
-                size
-            )
+            assert type(data) is str, 'applications must write bytes'
+            self.wfile.write(data)
+            self.wfile.flush()
 
-        def log_error(self, format, *args):
-            _log('error', 'Error: %s', format % args)
+        def start_response(status, response_headers, exc_info=None):
+            if exc_info:
+                try:
+                    if headers_sent:
+                        raise exc_info[0], exc_info[1], exc_info[2]
+                finally:
+                    exc_info = None
+            elif headers_set:
+                raise AssertionError('Headers already set')
+            headers_set[:] = [status, response_headers]
+            return write
 
-        def log_message(self, format, *args):
-            _log('info', format, args)
+        def execute(app):
+            application_iter = app(environ, start_response)
+            try:
+                for data in application_iter:
+                    write(data)
+            finally:
+                if hasattr(application_iter, 'close'):
+                    application_iter.close()
+
+        try:
+            execute(app)
+        except (socket.error, socket.timeout):
+            return
+        except:
+            from werkzeug.debug.tbtools import get_current_traceback
+            traceback = get_current_traceback(ignore_system_exceptions=True)
+            try:
+                # if we haven't yet sent the headers but they are set
+                # we roll back to be able to set them again.
+                if not headers_sent:
+                    del headers_set[:]
+                execute(InternalServerError())
+            except:
+                pass
+            self.server.log('error', 'Error on request:\n%s',
+                            traceback.plaintext)
+
+    def __getattr__(self, name):
+        if name.startswith('do_'):
+            return self.run_wsgi
+        raise AttributeError(name)
+
+
+class BaseWSGIServer(HTTPServer):
+    multithread = False
+    multiprocess = False
+
+    def __init__(self, host, port, app, handler=None):
+        if handler is None:
+            handler = BaseRequestHandler
+        HTTPServer.__init__(self, (host, int(port)), handler)
+        self.app = app
+
+    def log(self, type, message, *args):
+        _log(type, message, *args)
+
+    def serve_forever(self):
+        try:
+            HTTPServer.serve_forever(self)
+        except KeyboardInterrupt:
+            pass
+
+
+class ThreadedWSGIServer(ThreadingMixIn, BaseWSGIServer):
+    multithread = True
+
+
+class ForkingWSGIServer(ForkingMixIn, BaseWSGIServer):
+    multiprocess = True
+
+    def __init__(self, host, port, app, processes=40, handler=None):
+        BaseWSGIServer.__init__(self, host, port, app, handler)
+        self.max_children = processes
 
 
 def make_server(host, port, app=None, threaded=False, processes=1,
                 request_handler=None):
-    """Create a new wsgiref server that is either threaded, or forks
+    """Create a new server instance that is either threaded, or forks
     or just processes one request after another.
     """
-    if not have_wsgiref:
-        raise RuntimeError('All the Werkzeug serving features require '
-                           'an installed wsgiref library.')
-    request_handler = request_handler or BaseRequestHandler
     if threaded and processes > 1:
         raise ValueError("cannot have a multithreaded and "
                          "multi process server.")
     elif threaded:
-        class request_handler(request_handler):
-            multithreaded = True
-        class server(ThreadingMixIn, WSGIServer):
-            pass
+        return ThreadedWSGIServer(host, port, app, request_handler)
     elif processes > 1:
-        class request_handler(request_handler):
-            multiprocess = True
-        class server(ForkingMixIn, WSGIServer):
-            max_children = processes - 1
+        return ForkingWSGIServer(host, port, app, processes, request_handler)
     else:
-        server = WSGIServer
-    srv = server((host, port), request_handler)
-    srv.set_app(app)
-    return srv
+        return BaseWSGIServer(host, port, app, request_handler)
 
 
 def reloader_loop(extra_files=None, interval=1):
@@ -203,10 +268,13 @@ def run_with_reloader(main_func, extra_files=None, interval=1):
 def run_simple(hostname, port, application, use_reloader=False,
                use_debugger=False, use_evalex=True,
                extra_files=None, reloader_interval=1, threaded=False,
-               processes=1, request_handler=None):
+               processes=1, request_handler=None, static_files=None):
     """Start an application using wsgiref and with an optional reloader.  This
     wraps `wsgiref` to fix the wrong default reporting of the multithreaded
     WSGI variable and adds optional multithreading and fork support.
+
+    .. versionadded:: 0.5
+       `static_files` was added to simplify serving of static files.
 
     :param hostname: The host for the application.  eg: ``'localhost'``
     :param port: The port for the server.  eg: ``8080``
@@ -215,7 +283,7 @@ def run_simple(hostname, port, application, use_reloader=False,
                          process if modules were changed?
     :param use_debugger: should the werkzeug debugging system be used?
     :param use_evalex: should the exception evaluation feature be enabled?
-    :param extra_files: a list of files the reloader should listen for
+    :param extra_files: a list of files the reloader should watch
                         additionally to the modules.  For example configuration
                         files.
     :param reloader_interval: the interval for the reloader in seconds.
@@ -223,21 +291,25 @@ def run_simple(hostname, port, application, use_reloader=False,
                      thread?
     :param processes: number of processes to spawn.
     :param request_handler: optional parameter that can be used to replace
-                            the default wsgiref request handler.  Have a look
-                            at the `werkzeug.serving` sourcecode for more
-                            details.
+                            the default one.  You can use this to replace it
+                            with a different
+                            :class:`~BaseHTTPServer.BaseHTTPRequestHandler`
+                            subclass.
+    :param static_files: a dict of paths for static files.  This works exactly
+                         like :class:`SharedDataMiddleware`, it's actually
+                         just wrapping the application in that middleware before
+                         serving.
     """
     if use_debugger:
         from werkzeug.debug import DebuggedApplication
         application = DebuggedApplication(application, use_evalex)
+    if static_files:
+        from werkzeug.utils import SharedDataMiddleware
+        application = SharedDataMiddleware(application, static_files)
 
     def inner():
-        srv = make_server(hostname, port, application, threaded,
-                          processes, request_handler)
-        try:
-            srv.serve_forever()
-        except KeyboardInterrupt:
-            pass
+        make_server(hostname, port, application, threaded,
+                    processes, request_handler).serve_forever()
 
     if os.environ.get('WERKZEUG_RUN_MAIN') != 'true':
         display_hostname = hostname or '127.0.0.1'

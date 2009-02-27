@@ -4,7 +4,7 @@
     ~~~~~~~~~~~~~~~~~~~
 
     This module implements a number of Python exceptions you can raise from
-    within your views to trigger a standard non 200 response.
+    within your views to trigger a standard non-200 response.
 
 
     Usage Example
@@ -28,9 +28,8 @@
 
 
     As you can see from this example those exceptions are callable WSGI
-    applications.  Because of Python 2.3 / 2.4 compatibility those do not
-    extend from the response objects but only from the python exception
-    class.
+    applications.  Because of Python 2.4 compatibility those do not extend
+    from the response objects but only from the python exception class.
 
     As a matter of fact they are not Werkzeug response objects.  However you
     can get a response object by calling ``get_response()`` on a HTTP
@@ -40,7 +39,7 @@
     because some errors fetch additional information from the WSGI
     environment.
 
-    If you want to hook in a different exception page to say, an 404 status
+    If you want to hook in a different exception page to say, a 404 status
     code, you can add a second except for a specific subclass of an error::
 
         @responder
@@ -54,7 +53,7 @@
                 return e
 
 
-    :copyright: 2007-2008 by Armin Ronacher.
+    :copyright: (c) 2009 by the Werkzeug Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
 import sys
@@ -117,7 +116,11 @@ class HTTPException(Exception):
         return [('Content-Type', 'text/html')]
 
     def get_response(self, environ):
-        """Get a response object."""
+        """Get a response object.
+
+        :param environ: the environ for the request.
+        :return: a :class:`BaseResponse` object or a subclass thereof.
+        """
         # lazyly imported for various reasons.  For one can use the exceptions
         # with custom responses (testing exception instances against types) and
         # so we don't ever have to import the wrappers, but also because there
@@ -127,15 +130,18 @@ class HTTPException(Exception):
         return BaseResponse(self.get_body(environ), self.code, headers)
 
     def __call__(self, environ, start_response):
-        """Call the exception as WSGI application."""
+        """Call the exception as WSGI application.
+
+        :param environ: the WSGI environment.
+        :param start_response: the response callable provided by the WSGI
+                               server.
+        """
         response = self.get_response(environ)
         return response(environ, start_response)
 
 
 class _ProxyException(HTTPException):
-    """
-    An HTTP exception that expands renders a WSGI application on error.
-    """
+    """An HTTP exception that expands renders a WSGI application on error."""
 
     def __init__(self, response):
         Exception.__init__(self, 'proxy exception for %r' % response)
@@ -146,10 +152,9 @@ class _ProxyException(HTTPException):
 
 
 class BadRequest(HTTPException):
-    """
-    *400* `Bad Request`
+    """*400* `Bad Request`
 
-    Raise if the browser send something to the application the application
+    Raise if the browser sends something to the application the application
     or server cannot handle.
     """
     code = 400
@@ -160,8 +165,7 @@ class BadRequest(HTTPException):
 
 
 class Unauthorized(HTTPException):
-    """
-    *401* `Unauthorized`
+    """*401* `Unauthorized`
 
     Raise if the user is not authorized.  Also used if you want to use HTTP
     basic auth.
@@ -169,8 +173,8 @@ class Unauthorized(HTTPException):
     code = 401
     description = (
         '<p>The server could not verify that you are authorized to access '
-        'the URL requested.  You either supplied the wrong credentials (e.g.'
-        ', bad password), or your browser doesn\'t understand how to supply '
+        'the URL requested.  You either supplied the wrong credentials (e.g. '
+        'a bad password), or your browser doesn\'t understand how to supply '
         'the credentials required.</p><p>In case you are allowed to request '
         'the document, please check your user-id and password and try '
         'again.</p>'
@@ -178,8 +182,7 @@ class Unauthorized(HTTPException):
 
 
 class Forbidden(HTTPException):
-    """
-    *403* `Forbidden`
+    """*403* `Forbidden`
 
     Raise if the user doesn't have the permission for the requested resource
     but was authenticated.
@@ -192,8 +195,7 @@ class Forbidden(HTTPException):
 
 
 class NotFound(HTTPException):
-    """
-    *404* `Not Found`
+    """*404* `Not Found`
 
     Raise if a resource does not exist and never existed.
     """
@@ -206,8 +208,7 @@ class NotFound(HTTPException):
 
 
 class MethodNotAllowed(HTTPException):
-    """
-    *405* `Method Not Allowed`
+    """*405* `Method Not Allowed`
 
     Raise if the server used a method the resource does not handle.  For
     example `POST` if the resource is view only.  Especially useful for REST.
@@ -236,10 +237,9 @@ class MethodNotAllowed(HTTPException):
 
 
 class NotAcceptable(HTTPException):
-    """
-    *406* `Not Acceptable`
+    """*406* `Not Acceptable`
 
-    Raise if the server cant return any content conforming to the
+    Raise if the server can't return any content conforming to the
     `Accept` headers of the client.
     """
     code = 406
@@ -253,8 +253,7 @@ class NotAcceptable(HTTPException):
 
 
 class RequestTimeout(HTTPException):
-    """
-    *408* `Request Timeout`
+    """*408* `Request Timeout`
 
     Raise to signalize a timeout.
     """
@@ -266,8 +265,7 @@ class RequestTimeout(HTTPException):
 
 
 class Gone(HTTPException):
-    """
-    *410* `Gone`
+    """*410* `Gone`
 
     Raise if a resource existed previously and went away without new location.
     """
@@ -280,8 +278,7 @@ class Gone(HTTPException):
 
 
 class LengthRequired(HTTPException):
-    """
-    *411* `Length Required`
+    """*411* `Length Required`
 
     Raise if the browser submitted data but no ``Content-Length`` header which
     is required for the kind of processing the server does.
@@ -289,13 +286,12 @@ class LengthRequired(HTTPException):
     code = 411
     description = (
         '<p>A request with this method requires a valid <code>Content-'
-        'Lenght</code> header.</p>'
+        'Length</code> header.</p>'
     )
 
 
 class PreconditionFailed(HTTPException):
-    """
-    *412* `Precondition Failed`
+    """*412* `Precondition Failed`
 
     Status code used in combination with ``If-Match``, ``If-None-Match``, or
     ``If-Unmodified-Since``.
@@ -308,21 +304,19 @@ class PreconditionFailed(HTTPException):
 
 
 class RequestEntityTooLarge(HTTPException):
-    """
-    *413* `Request Entity Too Large`
+    """*413* `Request Entity Too Large`
 
     The status code one should return if the data submitted exceeded a given
     limit.
     """
     code = 413
     description = (
-        '<p>The data value transmitted exceed the capacity limit.</p>'
+        '<p>The data value transmitted exceeds the capacity limit.</p>'
     )
 
 
 class RequestURITooLarge(HTTPException):
-    """
-    *414* `Request URI Too Large`
+    """*414* `Request URI Too Large`
 
     Like *413* but for too long URLs.
     """
@@ -334,8 +328,7 @@ class RequestURITooLarge(HTTPException):
 
 
 class UnsupportedMediaType(HTTPException):
-    """
-    *415* `Unsupported Media Type`
+    """*415* `Unsupported Media Type`
 
     The status code returned if the server is unable to handle the media type
     the client transmitted.
@@ -348,11 +341,10 @@ class UnsupportedMediaType(HTTPException):
 
 
 class InternalServerError(HTTPException):
-    """
-    *500* `Internal Server Error`
+    """*500* `Internal Server Error`
 
-    Raise if an internal server error occoured.  This is a good fallback if an
-    unknown error occoured in the dispatcher.
+    Raise if an internal server error occurred.  This is a good fallback if an
+    unknown error occurred in the dispatcher.
     """
     code = 500
     description = (
@@ -363,8 +355,7 @@ class InternalServerError(HTTPException):
 
 
 class NotImplemented(HTTPException):
-    """
-    *501* `Not Implemented`
+    """*501* `Not Implemented`
 
     Raise if the application does not support the action requested by the
     browser.
@@ -377,10 +368,9 @@ class NotImplemented(HTTPException):
 
 
 class BadGateway(HTTPException):
-    """
-    *502* `Bad Gateway`
+    """*502* `Bad Gateway`
 
-    If you do proxing in your application you should return this status code
+    If you do proxying in your application you should return this status code
     if you received an invalid response from the upstream server it accessed
     in attempting to fulfill the request.
     """
@@ -392,8 +382,7 @@ class BadGateway(HTTPException):
 
 
 class ServiceUnavailable(HTTPException):
-    """
-    *503* `Service Unavailable`
+    """*503* `Service Unavailable`
 
     Status code you should return if a service is temporarily unavailable.
     """
@@ -421,7 +410,7 @@ del _find_exceptions
 
 
 #: raised by the request functions if they were unable to decode the
-#: incomding data properly.
+#: incoming data properly.
 HTTPUnicodeError = BadRequest.wrap(UnicodeError, 'HTTPUnicodeError')
 
 

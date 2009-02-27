@@ -10,22 +10,17 @@
     Together with the CSS and JavaScript files of the debugger this gives
     a colorful and more compact output.
 
-    :copyright: Copyright 2008 by Armin Ronacher.
+    :copyright: (c) 2009 by the Werkzeug Team, see AUTHORS for more details.
     :license: BSD.
 """
 import sys
 import re
-from types import InstanceType
 from traceback import format_exception_only
 try:
     from collections import deque
 except ImportError:
     deque = None
-from cgi import escape
-try:
-    set
-except NameError:
-    from sets import Set as set, ImmutableSet as frozenset
+from werkzeug.utils import escape
 from werkzeug.debug.utils import render_template
 
 
@@ -53,7 +48,7 @@ def dump(obj=missing):
 
 class _Helper(object):
     """Displays an HTML version of the normal help, for the interactive
-    debugger only because it requirse a patched sys.stdout.
+    debugger only because it requires a patched sys.stdout.
     """
 
     def __call__(self, topic=None):

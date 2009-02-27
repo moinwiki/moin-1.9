@@ -5,15 +5,14 @@
 
     This module provides internally used helpers and constants.
 
-    :copyright: Copyright 2008 by Armin Ronacher.
-    :license: GNU GPL.
+    :copyright: (c) 2009 by the Werkzeug Team, see AUTHORS for more details.
+    :license: BSD, see LICENSE for more details.
 """
-import cgi
 import inspect
 from weakref import WeakKeyDictionary
 from cStringIO import StringIO
 from Cookie import BaseCookie, Morsel, CookieError
-from time import asctime, gmtime, time
+from time import gmtime
 from datetime import datetime
 
 
@@ -60,6 +59,7 @@ HTTP_STATUS_CODES = {
     415:    'Unsupported Media Type',
     416:    'Requested Range Not Satisfiable',
     417:    'Expectation Failed',
+    418:    'I\'m a teapot',        # see RFC 2324
     422:    'Unprocessable Entity',
     423:    'Locked',
     424:    'Failed Dependency',
@@ -76,15 +76,33 @@ HTTP_STATUS_CODES = {
 }
 
 
+class _Missing(object):
+
+    def __repr__(self):
+        return 'no value'
+
+    def __reduce__(self):
+        return '_missing'
+
+_missing = _Missing()
+
+
+def _proxy_repr(cls):
+    def proxy_repr(self):
+        return '%s(%s)' % (self.__class__.__name__, cls.__repr__(self))
+    return proxy_repr
+
+
 def _log(type, message, *args, **kwargs):
     """Log into the internal werkzeug logger."""
     global _logger
     if _logger is None:
         import logging
-        handler = logging.StreamHandler()
         _logger = logging.getLogger('werkzeug')
-        _logger.addHandler(handler)
-        _logger.setLevel(logging.INFO)
+        if _logger.level == logging.NOTSET:
+            _logger.setLevel(logging.INFO)
+            handler = logging.StreamHandler()
+            _logger.addHandler(handler)
     getattr(_logger, type)(message.rstrip(), *args, **kwargs)
 
 
@@ -183,6 +201,7 @@ def _decode_unicode(value, charset, errors):
 
 def _iter_modules(path):
     """Iterate over all modules in a package."""
+    import os
     import pkgutil
     if hasattr(pkgutil, 'iter_modules'):
         for importer, modname, ispkg in pkgutil.iter_modules(path):
@@ -233,35 +252,6 @@ class _ExtendedMorsel(Morsel):
         if httponly:
             result += '; HttpOnly'
         return result
-
-
-class _StorageHelper(cgi.FieldStorage):
-    """Helper class used by `parse_form_data` to parse submitted file and
-    form data.  Don't use this class directly.  This also defines a simple
-    repr that prints just the filename as the default repr reads the
-    complete data of the stream.
-    """
-
-    FieldStorageClass = cgi.FieldStorage
-
-    def __init__(self, environ, stream_factory):
-        if stream_factory is not None:
-            self.make_file = lambda binary=None: stream_factory()
-        cgi.FieldStorage.__init__(self,
-            fp=environ['wsgi.input'],
-            environ={
-                'REQUEST_METHOD':   environ['REQUEST_METHOD'],
-                'CONTENT_TYPE':     environ['CONTENT_TYPE'],
-                'CONTENT_LENGTH':   environ['CONTENT_LENGTH']
-            },
-            keep_blank_values=True
-        )
-
-    def __repr__(self):
-        return '<%s %r>' % (
-            self.__class__.__name__,
-            self.name
-        )
 
 
 class _ExtendedCookie(BaseCookie):
@@ -326,33 +316,8 @@ class _DictAccessorProperty(object):
         )
 
 
-class _UpdateDict(dict):
-    """A dict that calls `on_update` on modifications."""
-
-    def __init__(self, data, on_update):
-        dict.__init__(self, data)
-        self.on_update = on_update
-
-    def calls_update(f):
-        def oncall(self, *args, **kw):
-            rv = f(self, *args, **kw)
-            if self.on_update is not None:
-                self.on_update(self)
-            return rv
-        return _patch_wrapper(f, oncall)
-
-    __setitem__ = calls_update(dict.__setitem__)
-    __delitem__ = calls_update(dict.__delitem__)
-    clear = calls_update(dict.clear)
-    pop = calls_update(dict.pop)
-    popitem = calls_update(dict.popitem)
-    setdefault = calls_update(dict.setdefault)
-    update = calls_update(dict.update)
-
-
-
 def _easteregg(app):
-    """Like the name says."""
+    """Like the name says.  But who knows how it works?"""
     gyver = '\n'.join([x + (77 - len(x)) * ' ' for x in '''
 eJyFlzuOJDkMRP06xRjymKgDJCDQStBYT8BCgK4gTwfQ2fcFs2a2FzvZk+hvlcRvRJD148efHt9m
 9Xz94dRY5hGt1nrYcXx7us9qlcP9HHNh28rz8dZj+q4rynVFFPdlY4zH873NKCexrDM6zxxRymzz

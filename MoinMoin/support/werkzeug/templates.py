@@ -3,127 +3,9 @@ r"""
     werkzeug.templates
     ~~~~~~~~~~~~~~~~~~
 
-    This template engine recognizes ASP/PHP like blocks and executes the code
-    in them::
+    A minimal template engine.
 
-        t = Template('<% for u in users %>${u["username"]}\n<% endfor %>')
-        t.render(users=[{'username': 'John'},
-                        {'username': 'Jane'}])
-
-    would result in::
-
-        John
-        Jane
-
-    You can also create templates from files::
-
-        t = Template.from_file('test.html')
-
-    The syntax elements are a mixture of django, genshi text and mod_python
-    templates and used internally in werkzeug components.
-
-    We do not recommend using this template engine in a real environment
-    because is quite slow and does not provide any advanced features.  For
-    simple applications (cgi script like) this can however be sufficient.
-
-
-    Syntax Elements
-    ---------------
-
-    Printing Variables:
-
-    .. sourcecode:: text
-
-        $variable
-        $variable.attribute[item](some, function)(calls)
-        ${expression} or <%py print expression %>
-
-    Keep in mind that the print statement adds a newline after the call or
-    a whitespace if it ends with a comma.
-
-    For Loops:
-
-    .. sourcecode:: text
-
-        <% for item in seq %>
-            ...
-        <% endfor %>
-
-    While Loops:
-
-    .. sourcecode:: text
-
-        <% while expression %>
-            <%py break / continue %>
-        <% endwhile %>
-
-    If Conditions:
-
-    .. sourcecode:: text
-
-        <% if expression %>
-            ...
-        <% elif expression %>
-            ...
-        <% else %>
-            ...
-        <% endif %>
-
-    Python Expressions:
-
-    .. sourcecode:: text
-
-        <%py
-            ...
-        %>
-
-        <%python
-            ...
-        %>
-
-    Note on python expressions:  You cannot start a loop in a python block
-    and continue it in another one.  This example does *not* work:
-
-    .. sourcecode:: text
-
-        <%python
-            for item in seq:
-        %>
-            ...
-
-    Comments:
-
-    .. sourcecode:: text
-
-        <%#
-            This is a comment
-        %>
-
-
-    Missing Variables
-    -----------------
-
-    If you try to access a missing variable you will get back an `Undefined`
-    object.  You can iterate over such an object or print it and it won't
-    fail.  However every other operation will raise an error.  To test if a
-    variable is undefined you can use this expression:
-
-    .. sourcecode:: text
-
-        <% if variable is Undefined %>
-            ...
-        <% endif %>
-
-
-    Python 2.3 Compatibility
-    ------------------------
-
-    Because of limitations in Python 2.3 it's impossible to achieve the
-    semi-silent variable lookup fallback.  If a template relies on undefined
-    variables it won't execute under Python 2.3.
-
-
-    :copyright: 2006-2008 by Armin Ronacher, Ka-Ping Yee.
+    :copyright: (c) 2009 by the Werkzeug Team, see AUTHORS for more details.
     :license: BSD License.
 """
 import sys
@@ -135,22 +17,6 @@ from compiler.pycodegen import ModuleCodeGenerator
 from tokenize import PseudoToken
 from werkzeug import utils
 from werkzeug._internal import _decode_unicode
-
-# Anything older than Python 2.4 
-if sys.version_info < (2, 4):
-    class AstMangler(object):
-
-        def __getattr__(self, key):
-            class_ = getattr(_ast, key)
-            def wrapper(*args, **kw):
-                lineno = kw.pop('lineno', None)
-                obj = class_(*args, **kw)
-                obj.lineno = lineno
-                return obj
-            return wrapper
-
-    _ast = ast
-    ast = AstMangler()
 
 
 # Copyright notice: The `parse_data` method uses the string interpolation
@@ -394,8 +260,8 @@ class Parser(object):
 
 class Context(object):
 
-    def __init__(self, namespace, encoding, errors):
-        self.encoding = encoding
+    def __init__(self, namespace, charset, errors):
+        self.charset = charset
         self.errors = errors
         self._namespace = namespace
         self._buffer = []
@@ -414,13 +280,13 @@ class Context(object):
 
     def to_unicode(self, value):
         if isinstance(value, str):
-            return _decode_unicode(value, self.encoding, self.errors)
+            return _decode_unicode(value, self.charset, self.errors)
         return unicode(value)
 
     def get_value(self, as_unicode=True):
         rv = u''.join(self._buffer)
         if not as_unicode:
-            return rv.encode(self.encoding, self.errors)
+            return rv.encode(self.charset, self.errors)
         return rv
 
     def __getitem__(self, key, default=undefined):
@@ -461,48 +327,69 @@ class Template(object):
         'url_encode':       utils.url_encode
     }
 
-    def __init__(self, source, filename='<template>', encoding='utf-8',
+    def __init__(self, source, filename='<template>', charset='utf-8',
                  errors='strict', unicode_mode=True):
         if isinstance(source, str):
-            source = _decode_unicode(source, encoding, errors)
+            source = _decode_unicode(source, charset, errors)
         if isinstance(filename, unicode):
             filename = filename.encode('utf-8')
         node = Parser(tokenize(u'\n'.join(source.splitlines()),
                                filename), filename).parse()
         self.code = TemplateCodeGenerator(node, filename).getCode()
         self.filename = filename
-        self.encoding = encoding
+        self.charset = charset
         self.errors = errors
         self.unicode_mode = unicode_mode
 
-    def from_file(cls, file, encoding='utf-8', errors='strict',
-                  unicode_mode=True):
-        """Load a template from a file."""
+    @classmethod
+    def from_file(cls, file, charset='utf-8', errors='strict',
+                  unicode_mode=True, encoding=None):
+        """Load a template from a file.
+
+        .. versionchanged:: 0.5
+            The encoding parameter was renamed to charset.
+
+        :param file: a filename or file object to load the template from.
+        :param charset: the charset of the template to load.
+        :param errors: the error behavior of the charset decoding.
+        :param unicode_mode: set to `False` to disable unicode mode.
+        :return: a template
+        """
+        if encoding is not None:
+            from warnings import warn
+            warn(DeprecationWarning('the encoding parameter is deprecated. '
+                                    'use charset instead.'), stacklevel=2)
+            charset = encoding
         close = False
         if isinstance(file, basestring):
             f = open(file, 'r')
             close = True
         try:
-            data = _decode_unicode(f.read(), encoding, errors)
+            data = _decode_unicode(f.read(), charset, errors)
         finally:
             if close:
                 f.close()
-        return cls(data, getattr(f, 'name', '<template>'), encoding,
+        return cls(data, getattr(f, 'name', '<template>'), charset,
                    errors, unicode_mode)
-    from_file = classmethod(from_file)
 
     def render(self, *args, **kwargs):
         """This function accepts either a dict or some keyword arguments which
         will then be the context the template is evaluated in.  The return
         value will be the rendered template.
+
+        :param context: the function accepts the same arguments as the
+                        :class:`dict` constructor.
+        :return: the rendered template as string
         """
         ns = self.default_context.copy()
-        ns.update(dict(*args, **kwargs))
-        context = Context(ns, self.encoding, self.errors)
-        if sys.version_info < (2, 4):
-            exec self.code in context.runtime, ns
+        if len(args) == 1 and isinstance(args[0], utils.MultiDict):
+            ns.update(args[0].to_dict(flat=True))
         else:
-            exec self.code in context.runtime, context
+            ns.update(dict(*args))
+        if kwargs:
+            ns.update(kwargs)
+        context = Context(ns, self.charset, self.errors)
+        exec self.code in context.runtime, context
         return context.get_value(self.unicode_mode)
 
     def substitute(self, *args, **kwargs):

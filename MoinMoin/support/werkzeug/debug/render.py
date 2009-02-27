@@ -5,14 +5,13 @@
 
     Render the traceback debugging page.
 
-    :copyright: 2007 by Georg Brandl, Armin Ronacher.
+    :copyright: (c) 2009 by the Werkzeug Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
 import pprint
 from os.path import dirname, join
 
 from werkzeug.templates import Template
-from werkzeug.debug.util import Namespace
 
 
 def get_template(name):
@@ -37,6 +36,7 @@ t_vartable = get_template('vartable.tmpl')
 
 
 def code_table(frame):
+    from werkzeug.debug.util import Namespace
     lines = []
     lineno = frame['context_lineno']
     if lineno is not None:

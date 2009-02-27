@@ -5,7 +5,7 @@
 
     This module provides various traceback related utility functions.
 
-    :copyright: Copyright 2008 by Armin Ronacher.
+    :copyright: (c) 2009 by the Werkzeug Team, see AUTHORS for more details.
     :license: BSD.
 """
 import re
@@ -142,8 +142,6 @@ class Traceback(object):
         from xmlrpclib import ServerProxy
         srv = ServerProxy('http://paste.pocoo.org/xmlrpc/')
         return srv.pastes.newPaste('pytb', self.plaintext)
-        return '{"url": "http://paste.pocoo.org/show/%d/", "id": %d}' % \
-               (paste_id, paste_id)
 
     def render_summary(self, include_title=True):
         """Render the traceback for the interactive console."""
@@ -233,15 +231,22 @@ class Frame(object):
             return eval(code, self.globals, self.locals)
         exec code in self.globals, self.locals
 
+    @cached_property
     def sourcelines(self):
         """The sourcecode of the file as list of unicode strings."""
         # get sourcecode from loader or file
         source = None
         if self.loader is not None:
-            if hasattr(self.loader, 'get_source'):
-                source = self.loader.get_source(self.module)
-            elif hasattr(self.loader, 'get_source_by_code'):
-                source = self.loader.get_source_by_code(self.code)
+            try:
+                if hasattr(self.loader, 'get_source'):
+                    source = self.loader.get_source(self.module)
+                elif hasattr(self.loader, 'get_source_by_code'):
+                    source = self.loader.get_source_by_code(self.code)
+            except:
+                # we munch the exception so that we don't cause troubles
+                # if the loader is broken.
+                pass
+
         if source is None:
             try:
                 f = file(self.filename)
@@ -277,17 +282,16 @@ class Frame(object):
             charset = 'utf-8'
 
         return source.decode(charset, 'replace').splitlines()
-    sourcelines = cached_property(sourcelines)
 
+    @property
     def current_line(self):
         try:
             return self.sourcelines[self.lineno - 1]
         except IndexError:
             return u''
-    current_line = property(current_line)
 
+    @cached_property
     def console(self):
         return Console(self.globals, self.locals)
-    console = cached_property(console)
 
     id = property(lambda x: id(x))

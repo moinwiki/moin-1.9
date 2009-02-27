@@ -4,11 +4,11 @@
     ~~~~~~~~~~~~~~~~~~~
 
     This module provides a helper to inspect user agent strings.  This module
-    is far from complete but should work for most of the current browsers that
-    are available.
+    is far from complete but should work for most of the currently available
+    browsers.
 
 
-    :copyright: 2007-2008 by Armin Ronacher.
+    :copyright: (c) 2009 by the Werkzeug Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
 import re
@@ -18,11 +18,12 @@ class UserAgentParser(object):
     """A simple user agent parser.  Used by the `UserAgent`."""
 
     platforms = (
+        ('iphone', 'iphone'),
         (r'darwin|mac|os\s*x', 'macos'),
         ('win', 'windows'),
+        (r'android', 'android'),
         (r'x11|lin(\b|ux)?', 'linux'),
         ('(sun|i86)os', 'solaris'),
-        ('iphone', 'iphone'),
         (r'nintendo\s+wii', 'wii'),
         ('irix', 'irix'),
         ('hp-?ux', 'hpux'),
@@ -38,6 +39,7 @@ class UserAgentParser(object):
         ('ask jeeves', 'ask'),
         (r'aol|america\s+online\s+browser', 'aol'),
         ('opera', 'opera'),
+        ('chrome', 'chrome'),
         ('firefox|firebird|phoenix|iceweasel', 'firefox'),
         ('galeon', 'galeon'),
         ('safari', 'safari'),
@@ -59,17 +61,15 @@ class UserAgentParser(object):
     )
 
     def __init__(self):
-        self.platforms = re.compile(r'|'.join(['(?P<%s>%s)' % (b, a) for a, b
-                                    in self.platforms]), re.I)
+        self.platforms = [(b, re.compile(a, re.I)) for a, b in self.platforms]
         self.browsers = [(b, re.compile(self._browser_version_re % a))
                          for a, b in self.browsers]
 
     def __call__(self, user_agent):
-        match = self.platforms.search(user_agent)
-        if match is not None:
-            for platform, value in match.groupdict().iteritems():
-                if value:
-                    break
+        for platform, regex in self.platforms:
+            match = regex.search(user_agent)
+            if match is not None:
+                break
         else:
             platform = None
         for browser, regex in self.browsers:
@@ -88,15 +88,29 @@ class UserAgentParser(object):
 
 
 class UserAgent(object):
-    """Represents a user agent.  Pass it a WSGI environment or an user agent
+    """Represents a user agent.  Pass it a WSGI environment or a user agent
     string and you can inspect some of the details from the user agent
-    string via the attributes.  The following attribute exist:
+    string via the attributes.  The following attributes exist:
 
-    -   `string`, the raw user agent string
-    -   `platform`, the browser platform
-    -   `browser`, the name of the browser
-    -   `version`, the version of the browser
-    -   `language`, the language of the browser
+    .. attribute:: string
+
+       the raw user agent string
+
+    .. attribute:: platform
+
+       the browser platform
+
+    .. attribute:: browser
+
+        the name of the browser
+
+    .. attribute:: version
+
+        the version of the browser
+
+    .. attribute:: language
+
+        the language of the browser
     """
     _parser = UserAgentParser()
 

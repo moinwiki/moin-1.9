@@ -5,7 +5,7 @@
 
     WSGI application traceback debugger.
 
-    :copyright: 2008 by Georg Brandl, Armin Ronacher.
+    :copyright: (c) 2009 by the Werkzeug Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
 from os.path import join, dirname, basename, isfile
@@ -37,12 +37,26 @@ class DebuggedApplication(object):
     The `evalex` keyword argument allows evaluating expressions in a
     traceback's frame context.
 
-    THIS IS A GAPING SECURITY HOLE IF PUBLICLY ACCESSIBLE!
+    :param app: the WSGI application to run debugged.
+    :param evalex: enable exception evaluation feature (interactive
+                   debugging).  This requires a non-forking server.
+    :param request_key: The key that points to the request object in ths
+                        environment.  This parameter is ignored in current
+                        versions.
+    :param console_path: the URL for a general purpose console.
+    :param console_init_func: the function that is executed before starting
+                              the general purpose console.  The return value
+                              is used as initial namespace.
+    :param show_hidden_frames: by default hidden traceback frames are skipped.
+                               You can show them by setting this parameter
+                               to `True`.
     """
 
     def __init__(self, app, evalex=False, request_key='werkzeug.request',
-                 console_path='/console', console_init_func=dict,
+                 console_path='/console', console_init_func=None,
                  show_hidden_frames=False):
+        if console_init_func:
+            console_init_func = dict
         self.app = app
         self.evalex = evalex
         self.frames = {}
@@ -65,7 +79,8 @@ class DebuggedApplication(object):
             if hasattr(app_iter, 'close'):
                 app_iter.close()
             traceback = get_current_traceback(skip=1, show_hidden_frames=
-                                              self.show_hidden_frames)
+                                              self.show_hidden_frames,
+                                              ignore_system_exceptions=True)
             for frame in traceback.frames:
                 self.frames[frame.id] = frame
             self.tracebacks[traceback.id] = traceback
@@ -80,14 +95,13 @@ class DebuggedApplication(object):
                 # more, better log something into the error log and fall
                 # back gracefully.
                 environ['wsgi.errors'].write(
-                    '\nDebugging middlware catched exception in streamed '
-                    'reponse a point where response headers were already '
+                    'Debugging middleware catched exception in streamed '
+                    'response at a point where response headers were already '
                     'sent.\n')
-                traceback.log(environ['wsgi.errors'])
-                return
+            else:
+                yield traceback.render_full(evalex=self.evalex) \
+                               .encode('utf-8', 'replace')
 
-            yield traceback.render_full(evalex=self.evalex) \
-                           .encode('utf-8', 'replace')
             traceback.log(environ['wsgi.errors'])
 
     def execute_command(self, request, command, frame):
@@ -103,7 +117,7 @@ class DebuggedApplication(object):
     def paste_traceback(self, request, traceback):
         """Paste the traceback and return a JSON response."""
         paste_id = traceback.paste()
-        return Response('{"url": "http://paste.pocoo.org/show/%d/", "id": %d}'
+        return Response('{"url": "http://paste.pocoo.org/show/%s/", "id": %s}'
                         % (paste_id, paste_id), mimetype='application/json')
 
     def get_source(self, request, frame):
