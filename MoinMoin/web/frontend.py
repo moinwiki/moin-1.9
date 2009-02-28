@@ -33,10 +33,7 @@ class FrontEnd(object):
         options, args = self.parser.parse_args(args)
         logging.debug('Options: %r', options)
 
-        if options.htdocs:
-            application = make_application(shared=options.htdocs)
-        else:
-            application = make_application()
+        application = make_application(shared=options.htdocs)
 
         try:
             self.run_server(application, options)

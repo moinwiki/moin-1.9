@@ -72,8 +72,12 @@ def make_application(shared=None, trusted_proxies=None):
     Make an instance of the MoinMoin WSGI application. This involves
     wrapping it in middlewares as needed (static files, debugging, etc.).
 
-    @param shared: directory where static files are located
-    @param trusted_proxies: list of trusted proxies
+    @param shared: directory where static files are located (then we create the
+                   usual mapping dict we need automatically), or a ready-to-use
+                   mapping dict for SharedDataMiddleware. If None or empty, do
+                   not use the SharedDateMiddleware.
+    @param trusted_proxies: list of trusted proxies. If None or empty, do not
+                            use the ProxyTrust middleware.
     @rtype: callable
     @return: a WSGI callable
     """
@@ -82,17 +86,15 @@ def make_application(shared=None, trusted_proxies=None):
     if trusted_proxies:
         application = ProxyTrust(application, trusted_proxies)
 
-    if isinstance(shared, dict):
+    if shared:
+        if not isinstance(shared, dict):
+            if os.path.isdir(shared):
+                shared = {config.url_prefix_static: shared,
+                          '/favicon.ico': os.path.join(shared, 'favicon.ico'),
+                          '/robots.txt': os.path.join(shared, 'robots.txt')}
+            else:
+                raise ValueError("Invalid path given for shared parameter")
         application = SharedDataMiddleware(application, shared)
-    elif shared:
-        if shared is True:
-            shared = '/usr/share/moin/htdocs'
-
-        if os.path.isdir(shared):
-            mapping = {config.url_prefix_static: shared,
-                       '/favicon.ico': os.path.join(shared, 'favicon.ico'),
-                       '/robots.txt': os.path.join(shared, 'robots.txt')}
-            application = SharedDataMiddleware(application, mapping)
 
     return application
 
