@@ -16,8 +16,8 @@ import sys
 import urllib
 import urlparse
 import posixpath
-from time import asctime, gmtime, time
-from datetime import timedelta
+from time import time
+from datetime import datetime, timedelta
 
 from werkzeug._internal import _patch_wrapper, _decode_unicode, \
      _empty_stream, _iter_modules, _ExtendedCookie, _ExtendedMorsel, \
@@ -116,18 +116,27 @@ class SharedDataMiddleware(object):
     This will then serve the ``shared_files`` folder in the `myapplication`
     Python package.
 
-    The optional `disallow` parameter can be a list of `fnmatch` rules for
-    files that are not accessible from the web.  If `cache` is set to `False`
-    no caching headers are sent.
+    The optional `disallow` parameter can be a list of :func:`~fnmatch.fnmatch`
+    rules for files that are not accessible from the web.  If `cache` is set to
+    `False` no caching headers are sent.
+
+    .. versionchanged:: 0.5
+       The cache timeout is configurable now.
+
+    :param app: the application to wrap.  If you don't want to wrap an
+                application you can pass it :exc:`NotFound`.
+    :param exports: a dict of exported files and folders.
+    :param diallow: a list of :func:`~fnmatch.fnmatch` rules.
+    :param cache: enable or disable caching headers.
+    :Param cache_timeout: the cache timeout in seconds for the headers.
     """
 
-    # TODO: use wsgi.file_wrapper or something, just don't yield everything
-    # at once.  Also consider switching to BaseResponse
-
-    def __init__(self, app, exports, disallow=None, cache=True):
+    def __init__(self, app, exports, disallow=None, cache=True,
+                 cache_timeout=60 * 60 * 12):
         self.app = app
         self.exports = {}
         self.cache = cache
+        self.cache_timeout = cache_timeout
         for key, value in exports.iteritems():
             if isinstance(value, tuple):
                 loader = self.get_package_loader(*value)
@@ -150,25 +159,42 @@ class SharedDataMiddleware(object):
         """
         return True
 
+    def _opener(self, filename):
+        return lambda: (
+            open(filename, 'rb'),
+            datetime.utcfromtimestamp(os.path.getmtime(filename)),
+            int(os.path.getsize(filename))
+        )
+
     def get_file_loader(self, filename):
-        return lambda x: (os.path.basename(filename), \
-                          lambda: open(filename, 'rb'))
+        return lambda x: (os.path.basename(filename), self._opener(filename))
 
     def get_package_loader(self, package, package_path):
-        from pkg_resources import resource_exists, resource_stream
+        from pkg_resources import DefaultProvider, ResourceManager, \
+             get_provider
+        loadtime = datetime.utcnow()
+        provider = get_provider(package)
+        manager = ResourceManager()
+        filesystem_bound = isinstance(provider, DefaultProvider)
         def loader(path):
-            path = posixpath.join(package_path, path)
-            if resource_exists(package, path):
-                return posixpath.basename(path), \
-                       lambda: resource_stream(package, path)
-            return None, None
+            if not provider.has_resource(path):
+                return None, None
+            basename = posixpath.basename(path)
+            if filesystem_bound:
+                return basename, self._opener(
+                    provider.get_resource_filename(manager, path))
+            return basename, lambda: (
+                provider.get_resource_stream(manager, path),
+                loadtime,
+                0
+            )
         return loader
 
     def get_directory_loader(self, directory):
         def loader(path):
             path = os.path.join(directory, path)
             if os.path.isfile(path):
-                return os.path.basename(path), lambda: open(path, 'rb')
+                return os.path.basename(path), self._opener(path)
             return None, None
         return loader
 
@@ -180,45 +206,47 @@ class SharedDataMiddleware(object):
                 cleaned_path = cleaned_path.replace(sep, '/')
         path = '/'.join([''] + [x for x in cleaned_path.split('/')
                                 if x and x != '..'])
-        stream_maker = None
+        file_loader = None
         for search_path, loader in self.exports.iteritems():
             if search_path == path:
-                real_filename, stream_maker = loader(None)
-                if stream_maker is not None:
+                real_filename, file_loader = loader(None)
+                if file_loader is not None:
                     break
             if not search_path.endswith('/'):
                 search_path += '/'
             if path.startswith(search_path):
-                real_filename, stream_maker = loader(path[len(search_path):])
-                if stream_maker is not None:
+                real_filename, file_loader = loader(path[len(search_path):])
+                if file_loader is not None:
                     break
-        if stream_maker is None or not self.is_allowed(real_filename):
+        if file_loader is None or not self.is_allowed(real_filename):
             return self.app(environ, start_response)
         from mimetypes import guess_type
         guessed_type = guess_type(real_filename)
         mime_type = guessed_type[0] or 'text/plain'
-        expiry = asctime(gmtime(time() + 3600))
-        stream = stream_maker()
-        try:
-            data = stream.read()
-        finally:
-            stream.close()
+        f, mtime, file_size = file_loader()
 
-        headers = [('Cache-Control', 'public')]
+        headers = [('Last-Modified', http_date(mtime)), ('Date', http_date())]
         if self.cache:
-            etag = generate_etag(data)
-            headers += [('Expires', expiry), ('ETag', etag)]
-            if parse_etags(environ.get('HTTP_IF_NONE_MATCH')).contains(etag):
-                remove_entity_headers(headers)
+            timeout = self.cache_timeout
+            etag = 'wzsdm-%s-%s-%s' % (mtime, file_size, hash(real_filename))
+            headers += [
+                ('Etag', '"%s"' % etag),
+                ('Cache-Control', 'max-age=%d, public' % timeout)
+            ]
+            if not is_resource_modified(environ, etag, last_modified=mtime):
+                f.close()
                 start_response('304 Not Modified', headers)
                 return []
+            headers.append(('Expires', http_date(time() + timeout)))
+        else:
+            headers.append(('Cache-Control', 'public'))
 
         headers.extend((
             ('Content-Type', mime_type),
-            ('Content-Length', str(len(data)))
+            ('Content-Length', str(file_size))
         ))
         start_response('200 OK', headers)
-        return [data]
+        return wrap_file(environ, f)
 
 
 class DispatcherMiddleware(object):
@@ -1512,9 +1540,8 @@ class ArgumentValidationError(ValueError):
 
 
 # circular dependency fun
-from werkzeug.http import generate_etag, parse_etags, \
-     remove_entity_headers, parse_multipart, parse_options_header, \
-     dump_options_header
+from werkzeug.http import parse_multipart, parse_options_header, \
+     is_resource_modified
 from werkzeug.exceptions import BadRequest, RequestEntityTooLarge
 from werkzeug.datastructures import MultiDict, TypeConversionDict
 
