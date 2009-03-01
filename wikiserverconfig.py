@@ -17,8 +17,12 @@ class Config(DefaultConfig):
     # use '' for all interface or "1.2.3.4" for some specific IP
     #interface = 'localhost'
 
-    # where the static data is served from:
-    #docs = "/usr/share/moin/htdocs"
+    # where the static data is served from - you can either use:
+    # docs = True  # serve the builtin static data from MoinMoin/web/static/htdocs
+    # docs = '/where/ever/you/like/to/keep/htdocs'  # serve it from the given path
+    # docs = False  # do not serve static files at all (will not work except
+    #               # you serve them in some other working way)
+    docs = True
 
     # tuning options:
     #serverClass = 'ThreadPoolServer'
