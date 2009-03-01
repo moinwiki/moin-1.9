@@ -26,8 +26,8 @@ class FrontEnd(object):
                                 "configuration files. Default: current directory"))
         parser.add_option("--htdocs", dest="htdocs",
                           help=("Path to the directory containing Moin's "
-                                "static files. Default: /usr/share/moin/htdocs"))
-        parser.set_default('htdocs', '/usr/share/moin/htdocs')
+                                "static files. Default: use builtin MoinMoin/web/static/htdocs"))
+        parser.set_default('htdocs', True)
 
     def run(self, args=None):
         options, args = self.parser.parse_args(args)

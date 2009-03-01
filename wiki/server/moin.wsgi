@@ -4,15 +4,11 @@
 
     To use this, add those statements to your Apache's VirtualHost definition:
     
-    # this is for icons, css, js (and must match url_prefix from wiki config):
-    Alias       /moin_static190/ /usr/share/moin/htdocs/
-
-    # this is the URL http://servername/moin/ you will use later to invoke moin:
-    WSGIScriptAlias /moin/ /some/path/moin.wsgi
+    # you will invoke your moin wiki at the root url, like http://servername/FrontPage:
+    WSGIScriptAlias / /some/path/moin.wsgi
 
     # create some wsgi daemons - use someuser.somegroup same as your data_dir:
-    WSGIDaemonProcess daemonname user=someuser group=somegroup processes=5 threads=10 maximum-requests=1000
-    # umask=0007 does not work for mod_wsgi 1.0rc1, but will work later
+    WSGIDaemonProcess daemonname user=someuser group=somegroup processes=5 threads=10 maximum-requests=1000 umask=0007
 
     # use the daemons we defined above to process requests!
     WSGIProcessGroup daemonname
@@ -43,4 +39,11 @@ import sys, os
 #from MoinMoin import log
 #log.load_config('/path/to/logging_configuration_file')
 
-from MoinMoin.wsgiapp import application
+from MoinMoin.web.serving import make_application
+
+# Creating the WSGI application
+# use shared=True to have moin serve the builtin static docs
+# use shared=False to not have moin serve static docs
+# use shared='/my/path/to/htdocs' to serve static docs from that path
+application = make_application(shared=True)
+

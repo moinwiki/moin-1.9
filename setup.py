@@ -88,6 +88,26 @@ def visit((prefix, strip, found), dirname, names):
     destination = os.path.join(prefix, dirname[strip:])
     found.append((destination, files))
 
+def make_filelist(dir, strip_prefix=''):
+    """ package_data is pretty stupid: if the globs that can be given there
+        match a directory, then setup.py install will fall over that later,
+        because it expects only files.
+        Use make_filelist(dir, strip) to create a list of all FILES below dir,
+        stripping off the strip_prefix at the left side.
+    """
+    found = []
+    def _visit((found, strip), dirname, names):
+        files = []
+        for name in names:
+            path = os.path.join(dirname, name)
+            if os.path.isfile(path):
+                if path.startswith(strip):
+                    path = path[len(strip):]
+                files.append(path)
+        found.extend(files)
+
+    os.path.walk(dir, _visit, (found, strip_prefix))
+    return found
 
 #############################################################################
 ### Build script files
@@ -302,6 +322,7 @@ Topic :: Text Processing :: Markup""".splitlines(),
         'MoinMoin.userprefs',
         'MoinMoin.util',
         'MoinMoin.web',
+        'MoinMoin.web.static',
         'MoinMoin.widget',
         'MoinMoin.wikixml',
         'MoinMoin.xmlrpc',
@@ -310,12 +331,17 @@ Topic :: Text Processing :: Markup""".splitlines(),
         #'MoinMoin._tests',
     ],
 
-    'package_dir': {'MoinMoin.i18n': 'MoinMoin/i18n', },
+    'package_dir': {'MoinMoin.i18n': 'MoinMoin/i18n',
+                    'MoinMoin.web.static': 'MoinMoin/web/static',
+                   },
     'package_data': {'MoinMoin.i18n': ['README', 'Makefile', 'MoinMoin.pot', 'POTFILES.in',
                                        '*.po',
                                        'tools/*',
                                        'jabberbot/*',
-                                      ], },
+                                      ],
+                     'MoinMoin.web.static': make_filelist('MoinMoin/web/static/htdocs',
+                                                          strip_prefix='MoinMoin/web/static/'),
+                    },
 
     # Override certain command classes with our own ones
     'cmdclass': {
@@ -337,13 +363,14 @@ if hasattr(distutils.dist.DistributionMetadata, 'get_platforms'):
     setup_args['platforms'] = "any"
 
 
-try:
-    setup(**setup_args)
-except distutils.errors.DistutilsPlatformError, ex:
-    print
-    print str(ex)
+if __name__ == '__main__':
+    try:
+        setup(**setup_args)
+    except distutils.errors.DistutilsPlatformError, ex:
+        print
+        print str(ex)
 
-    print """
+        print """
 POSSIBLE CAUSE
 
 "distutils" often needs developer support installed to work
