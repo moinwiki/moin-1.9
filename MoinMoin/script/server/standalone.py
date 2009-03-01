@@ -50,8 +50,8 @@ class PluginScript(MoinScript):
             help="Set file to store pid of moin daemon in. Default: moin.pid"
         )
         self.parser.add_option(
-            "--debug", dest="debug", action="store_true",
-            help="Enable debug mode of server (show tracebacks)"
+            "--debug", dest="debug",
+            help="Debug mode of server. off: no debugging (default), web: for browser based debugging, external: for using an external debugger."
         )
 
     def mainloop(self):
@@ -105,7 +105,7 @@ class PluginScript(MoinScript):
             if self.options.interface is not None: # needs to work for "" value also
                 Config.interface = self.options.interface
             if self.options.debug:
-                Config.debug = True
+                Config.debug = self.options.debug
 
             if self.options.start:
                 daemon = Daemon('moin', pidfile, run_server, Config)
@@ -126,5 +126,5 @@ class DefaultConfig:
     group = None
     port = 8080
     interface = 'localhost'
-    debug = False
+    debug = 'off'
 

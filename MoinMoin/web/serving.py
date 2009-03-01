@@ -129,7 +129,7 @@ def switch_user(uid, gid=None):
     logging.info("Running as uid/gid %d/%d" % (uid, gid))
 
 def run_server(host='localhost', port=8080, docs=True,
-               threaded=True, debug=False, user=None, group=None):
+               threaded=True, debug='off', user=None, group=None):
     """ Run a standalone server on specified host/port. """
     application = make_application(shared=docs)
 
@@ -140,7 +140,13 @@ def run_server(host='localhost', port=8080, docs=True,
     if user:
         switch_user(user, group)
 
+    if debug == 'external':
+        # no threading is better for debugging, the main (and only)
+        # thread then will just terminate when an exception happens
+        threaded = False
+
     run_simple(host, port, application, threaded=threaded,
-               use_debugger=debug,
+               use_debugger=(debug == 'web'),
+               passthrough_errors=(debug == 'external'),
                request_handler=RequestHandler)
 
