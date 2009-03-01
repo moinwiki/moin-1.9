@@ -32,8 +32,6 @@
 
     # /etc/init.d/apparmor stop
 
-    Requires Python 2.4 (for subprocess module).
-
     @copyright: 2008 by Thomas Waldmann
     @license: GNU GPL, see COPYING for details.
 """
@@ -44,11 +42,7 @@ SLAPD_EXECUTABLE = 'slapd'  # filename of LDAP server executable - if it is not
 import os, shutil, tempfile, time, base64, md5
 from StringIO import StringIO
 import signal
-
-try:
-    import subprocess  # needs Python 2.4
-except ImportError:
-    subprocess = None
+import subprocess
 
 try:
     import ldap, ldif, ldap.modlist  # needs python-ldap
@@ -61,8 +55,6 @@ def check_environ():
         Either return some failure reason if we can't or None if everything
         looks OK.
     """
-    if subprocess is None:
-        return "You need at least python 2.4 to use ldap_testbase."
     if ldap is None:
         return "You need python-ldap installed to use ldap_testbase."
     slapd = False

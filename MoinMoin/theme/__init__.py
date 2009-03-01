@@ -14,7 +14,7 @@ from MoinMoin.util import pysupport
 modules = pysupport.getPackageModules(__file__)
 
 # Check whether we can emit a RSS feed.
-# RSS is broken on plain Python 2.3.x/2.4.x, and works only when installing PyXML.
+# RSS is broken on plain Python 2.4.x, and works only when installing PyXML.
 # News: A user reported that the RSS is valid when using Python 2.5.1 on Windows.
 import sys, xml
 rss_supported = sys.version_info[:3] >= (2, 5, 1) or '_xmlplus' in xml.__file__
