@@ -129,7 +129,7 @@ def switch_user(uid, gid=None):
     logging.info("Running as uid/gid %d/%d" % (uid, gid))
 
 def run_server(host='localhost', port=8080, docs=True,
-               threaded=True, use_debugger=False, user=None, group=None):
+               threaded=True, debug=False, user=None, group=None):
     """ Run a standalone server on specified host/port. """
     application = make_application(shared=docs)
 
@@ -141,6 +141,6 @@ def run_server(host='localhost', port=8080, docs=True,
         switch_user(user, group)
 
     run_simple(host, port, application, threaded=threaded,
-               use_debugger=use_debugger,
+               use_debugger=debug,
                request_handler=RequestHandler)
 
