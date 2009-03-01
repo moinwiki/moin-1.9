@@ -25,10 +25,42 @@
     from the wikifarm directory instead! **
 """
 
-from MoinMoin.config.multiconfig import DefaultConfig
+import os
+
+from MoinMoin.config import multiconfig, url_prefix_static
 
 
-class Config(DefaultConfig):
+class Config(multiconfig.DefaultConfig):
+
+    # Critical setup  ---------------------------------------------------
+
+    # Directory containing THIS wikiconfig:
+    wikiconfig_dir = os.path.abspath(os.path.dirname(__file__))
+
+    # We assume that this config file is located in the instance directory, like:
+    # instance_dir/
+    #              wikiconfig.py
+    #              data/
+    #              underlay/
+    # If that's not true, feel free to just set instance_dir to the real path
+    # where data/ and underlay/ is located:
+    #instance_dir = '/where/ever/your/instance/is'
+    instance_dir = wikiconfig_dir
+
+    # Where your own wiki pages are (make regular backups of this directory):
+    data_dir = os.path.join(instance_dir, 'data', '') # path with trailing /
+
+    # Where system and help pages are (you may exclude this from backup):
+    data_underlay_dir = os.path.join(instance_dir, 'underlay', '') # path with trailing /
+
+    # The URL prefix we use to access the static stuff (img, css, js).
+    # Note: moin runs a static file server at url_prefix_static path (relative
+    # to the script url).
+    # If you run your wiki script at the root of your site (/), just do NOT
+    # use this setting and it will automatically work.
+    # If you run your wiki script at /mywiki, you need to use this:
+    #url_prefix_static = '/mywiki' + url_prefix_static
+
 
     # Wiki identity ----------------------------------------------------
 
@@ -38,7 +70,7 @@ class Config(DefaultConfig):
     # Wiki logo. You can use an image, text or both. [Unicode]
     # For no logo or text, use '' - the default is to show the sitename.
     # See also url_prefix setting below!
-    logo_string = u'<img src="/moin_static190/common/moinmoin.png" alt="MoinMoin Logo">'
+    logo_string = u'<img src="%s/common/moinmoin.png" alt="MoinMoin Logo">' % url_prefix_static
 
     # name of entry page / front page [Unicode], choose one of those:
 
@@ -53,35 +85,6 @@ class Config(DefaultConfig):
     # Show the interwiki name (and link it to page_front_page) in the Theme,
     # nice for farm setups or when your logo does not show the wiki's name.
     #show_interwiki = 1
-
-
-    # Critical setup  ---------------------------------------------------
-
-    # Misconfiguration here will render your wiki unusable. Check that
-    # all directories are accessible by the web server or moin server.
-
-    # If you encounter problems, try to set data_dir and data_underlay_dir
-    # to absolute paths.
-
-    # Where your mutable wiki pages are. You want to make regular
-    # backups of this directory.
-    data_dir = './data/'
-
-    # Where read-only system and help page are. You might want to share
-    # this directory between several wikis. When you update MoinMoin,
-    # you can safely replace the underlay directory with a new one. This
-    # directory is part of MoinMoin distribution, you don't have to
-    # backup it.
-    data_underlay_dir = './underlay/'
-
-    # The URL prefix we use to access the static stuff (img, css, js).
-    # NOT touching this is maybe the best way to handle this setting as moin
-    # uses a good internal default (something like '/moin_static190' for moin
-    # version 1.9.0).
-    # For Twisted and standalone server, the default will automatically work.
-    # For others, you should make a matching server config (e.g. an Apache
-    # Alias definition pointing to the directory with the static stuff).
-    #url_prefix_static = '/moin_static190'
 
 
     # Security ----------------------------------------------------------

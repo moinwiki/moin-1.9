@@ -40,16 +40,14 @@
 #  * in the right part, "^" means "beginning" and "$" means "end"
 
 wikis = [
-    # Standalone server needs the port e.g. localhost:8000
-    # Twisted server can now use the port, too.
 
-    # wikiname,     url regular expression (no protocol)
+    # wikiname, url regular expression
     # ---------------------------------------------------------------
     ("mywiki", r".*"),   # this is ok for a single wiki
 
     # for multiple wikis, do something like this:
-    #("moinmoin",    r"^moinmo.in/.*$"),
-    #("moinmaster",  r"^master.moinmo.in/.*$"),
+    #("wiki1", r"^http://wiki1\.example\.org/.*$"),
+    #("wiki2", r"^http://wiki2\.example\.org/.*$"),
 ]
 
 
@@ -65,41 +63,24 @@ wikis = [
 # this is to get everything to sane defaults, so we need to change only what
 # we like to have different:
 
-from MoinMoin.config.multiconfig import DefaultConfig
+from MoinMoin.config import multiconfig, url_prefix_static
 
 # Now we subclass this DefaultConfig. This means that we inherit every setting
 # from the DefaultConfig, except those we explicitely define different.
 
-class FarmConfig(DefaultConfig):
+class FarmConfig(multiconfig.DefaultConfig):
 
     # Critical setup  ---------------------------------------------------
 
-    # Misconfiguration here will render your wiki unusable. Check that
-    # all directories are accessible by the web server or moin server.
-
-    # If you encounter problems, try to set data_dir and data_underlay_dir
-    # to absolute paths.
-
-    # Where your mutable wiki pages are. You want to make regular
-    # backups of this directory.
-    data_dir = './data/'
-
-    # Where read-only system and help page are. You might want to share
-    # this directory between several wikis. When you update MoinMoin,
-    # you can safely replace the underlay directory with a new one. This
-    # directory is part of MoinMoin distribution, you don't have to
-    # backup it.
-    data_underlay_dir = './underlay/'
-
     # The URL prefix we use to access the static stuff (img, css, js).
-    # NOT touching this is maybe the best way to handle this setting as moin
-    # uses a good internal default (something like '/moin_static190' for moin
-    # version 1.9.0).
-    # For Twisted and standalone server, the default will automatically work.
-    # For others, you should make a matching server config (e.g. an Apache
-    # Alias definition pointing to the directory with the static stuff).
-    #url_prefix_static = '/moin_static190'
-
+    # Note: moin runs a static file server at url_prefix_static path (relative
+    # to the script url).
+    # If you run your wiki script at the root of your site (/), just do NOT
+    # use this setting and it will automatically work.
+    # If you run your wiki script at /mywiki, you need to use this:
+    #url_prefix_static = '/mywiki' + url_prefix_static
+    # If you need different url_prefix_static setups for your wikis,
+    # you'll have to do it in each wiki's config.
 
     # Security ----------------------------------------------------------
 
