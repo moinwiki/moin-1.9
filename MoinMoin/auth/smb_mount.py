@@ -6,8 +6,6 @@
     authentication at the SMB server). This can be used if you need access
     to files on some share via the wiki, but needs more code to be useful.
 
-    Note: requires Python 2.4 (for subprocess module)
-
     @copyright: 2006-2008 MoinMoin:ThomasWaldmann
                 2007 MoinMoin:JohannesBerg
     @license: GNU GPL, see COPYING for details.
