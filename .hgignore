@@ -4,9 +4,14 @@
 ^wiki/underlay/
 ^wiki/data/edit-log
 ^wiki/data/event-log
+^wiki/data/user/
 ^wiki/data/cache/
 ^wikiconfig_local.*
 ^wikiserverconfig_local.*
 ^MoinMoin/i18n/POTFILES(\.in)?$
 .coverage
+^.project
+^.pydevproject
+^.settings
+^MANIFEST
 
