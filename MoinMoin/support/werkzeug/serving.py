@@ -176,6 +176,12 @@ class BaseWSGIServer(HTTPServer):
         except KeyboardInterrupt:
             pass
 
+    def handle_error(self, request, client_address):
+        if self.passthrough_errors:
+            raise
+        else:
+            return HTTPServer.handle_error(self, request, client_address)
+
 
 class ThreadedWSGIServer(ThreadingMixIn, BaseWSGIServer):
     multithread = True
@@ -316,7 +322,7 @@ def run_simple(hostname, port, application, use_reloader=False,
                          like :class:`SharedDataMiddleware`, it's actually
                          just wrapping the application in that middleware before
                          serving.
-    :param passthrough_errors: set this to `False` to disable the error catching.
+    :param passthrough_errors: set this to `True` to disable the error catching.
                                This means that the server will die on errors but
                                it can be useful to hook debuggers in (pdb etc.)
     """
