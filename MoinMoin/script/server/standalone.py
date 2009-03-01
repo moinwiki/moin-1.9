@@ -112,8 +112,7 @@ class PluginScript(MoinScript):
                 daemon.do_start()
             else:
                 run_server(Config.interface, Config.port, Config.docs,
-                           use_debugger=Config.debug, user=Config.user,
-                           group=Config.group)
+                           debug=Config.debug, user=Config.user, group=Config.group)
 
 class DefaultConfig:
     # where the static data is served from - you can either use:
