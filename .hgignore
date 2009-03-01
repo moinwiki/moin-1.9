@@ -6,6 +6,7 @@
 ^wiki/data/event-log
 ^wiki/data/cache/
 ^wikiconfig_local.*
+^wikiserverconfig_local.*
 ^MoinMoin/i18n/POTFILES(\.in)?$
 .coverage
 
