@@ -29,16 +29,17 @@ class LocalConfig(DefaultConfig):
     #threadLimit = 10
     #requestQueueSize = 50
 
-    # Use werkzeug's debugging middleware?
-    # debug can be either set to True or False to directly enable/disable
-    # the debugger.
-    # CAUTION: Do not use True for production environments as it might disclose
-    # sensitive informations and even enable doing evil things from the
-    # debugger's web interface!
+    # How to debug? Your options:
+    # debug = 'off' # for production wikis, exceptions are logged
+    # debug = 'web' # show traceback in the browser, offer debug console,
+    #               # this makes use of a built-in debugger (werkzeug.debug)
+    # debug = 'external' # don't catch Exceptions, so some external debugger gets them
+    # CAUTION: Do not use anything but 'off' for production environments as it
+    #          might disclose sensitive informations and even enable doing evil
+    #          things from some debugger's web interface!
     # For convenience, the default behaviour (see below) is to read the
-    # environment variable MOIN_DEBUGGER. Setting it to True will enable the
-    # debugger, anything else (or not setting it) will disable the debugger.
-    debug = os.environ.get('MOIN_DEBUGGER', 'False') == 'True'
+    # environment variable MOIN_DEBUGGER. If not set, it means the same as 'off'.
+    debug = os.environ.get('MOIN_DEBUGGER', 'off')
 
 # DEVELOPERS! Do not add your configuration items there,
 # you could accidentally commit them! Instead, create a
