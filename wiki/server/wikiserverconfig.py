@@ -6,7 +6,7 @@ import os
 
 from MoinMoin.script.server.standalone import DefaultConfig
 
-class Config(DefaultConfig):
+class LocalConfig(DefaultConfig):
     port = 8080 # if you use port < 1024, you need to start as root
 
     # if you start the server as root, the standalone server can change
@@ -40,3 +40,19 @@ class Config(DefaultConfig):
     # debugger, anything else (or not setting it) will disable the debugger.
     debug = os.environ.get('MOIN_DEBUGGER', 'False') == 'True'
 
+# DEVELOPERS! Do not add your configuration items there,
+# you could accidentally commit them! Instead, create a
+# wikiserverconfig_local.py file containing this:
+#
+# from wikiserverconfig import LocalConfig
+#
+# class Config(LocalConfig):
+#     configuration_item_1 = 'value1'
+#
+
+try:
+    from wikiserverconfig_local import Config
+except ImportError, err:
+    if not str(err).endswith('wikiserverconfig_local'):
+        raise
+    Config = LocalConfig
