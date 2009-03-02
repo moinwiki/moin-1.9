@@ -27,13 +27,17 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, time, zipfile, mimetypes, errno, datetime
+import os, time, zipfile, errno, datetime
 from StringIO import StringIO
 
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
-from MoinMoin import config, wikiutil, packages
+# keep both imports below as they are, order is important:
+from MoinMoin import wikiutil
+import mimetypes
+
+from MoinMoin import config, packages
 from MoinMoin.Page import Page
 from MoinMoin.util import filesys, timefuncs
 from MoinMoin.security.textcha import TextCha
