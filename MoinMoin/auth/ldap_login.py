@@ -72,6 +72,7 @@ class LDAPAuth(BaseAuth):
         aliasname_attribute=None, # ('displayName') ldap attribute we get the aliasname from
         email_attribute=None, # ('mail') ldap attribute we get the email address from
         email_callback=None, # called to make up email address
+        name_callback=None, # called to use a Wiki name different from the login name
         coding='utf-8', # coding used for ldap queries and result values
         timeout=10, # how long we wait for the ldap server [s]
         start_tls=0, # 0 = No, 1 = Try, 2 = Required
@@ -96,6 +97,7 @@ class LDAPAuth(BaseAuth):
         self.aliasname_attribute = aliasname_attribute
         self.email_attribute = email_attribute
         self.email_callback = email_callback
+        self.name_callback = name_callback
 
         self.coding = coding
         self.timeout = timeout
@@ -217,6 +219,9 @@ class LDAPAuth(BaseAuth):
                     elif sn:
                         aliasname = sn
                 aliasname = aliasname.decode(coding)
+
+                if self.name_callback:
+                    username = self.name_callback(ldap_dict)
 
                 if email:
                     u = user.User(request, auth_username=username, auth_method=self.name, auth_attribs=('name', 'password', 'email', 'mailto_author', ))
