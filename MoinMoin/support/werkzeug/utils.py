@@ -16,7 +16,9 @@ import sys
 import urllib
 import urlparse
 import posixpath
-from time import time
+import mimetypes
+from zlib import adler32
+from time import time, mktime
 from datetime import datetime, timedelta
 
 from werkzeug._internal import _patch_wrapper, _decode_unicode, \
@@ -26,6 +28,9 @@ from werkzeug._internal import _patch_wrapper, _decode_unicode, \
 
 _format_re = re.compile(r'\$(?:(%s)|\{(%s)\})' % (('[a-zA-Z_][a-zA-Z0-9_]*',) * 2))
 _entity_re = re.compile(r'&([^;]+);')
+_filename_ascii_strip_re = re.compile(r'[^A-Za-z0-9_.-]')
+_windows_device_files = ('CON', 'AUX', 'COM1', 'COM2', 'COM3', 'COM4', 'LPT1',
+                         'LPT2', 'LPT3', 'PRN', 'NUL')
 
 
 class FileStorage(object):
@@ -49,6 +54,8 @@ class FileStorage(object):
         destination is a file object you have to close it yourself after the
         call.  The buffer size is the number of bytes held in memory during
         the copy process.  It defaults to 16KB.
+
+        For secure file saving also have a look at :func:`secure_filename`.
 
         :param dst: a filename or open file object the uploaded file
                     is saved to.
@@ -119,6 +126,11 @@ class SharedDataMiddleware(object):
     The optional `disallow` parameter can be a list of :func:`~fnmatch.fnmatch`
     rules for files that are not accessible from the web.  If `cache` is set to
     `False` no caching headers are sent.
+
+    Currently the middleware does not support non ASCII filenames.  If the
+    encoding on the file system happens to be the encoding of the URI it may
+    work but this could also be by accident.  We strongly suggest using ASCII
+    only file names for static files.
 
     .. versionchanged:: 0.5
        The cache timeout is configurable now.
@@ -201,6 +213,13 @@ class SharedDataMiddleware(object):
             return None, None
         return loader
 
+    def generate_etag(self, mtime, file_size, real_filename):
+        return 'wzsdm-%d-%s-%s' % (
+            mktime(mtime.timetuple()),
+            file_size,
+            adler32(real_filename) & 0xffffffff
+        )
+
     def __call__(self, environ, start_response):
         # sanitize the path for non unix systems
         cleaned_path = environ.get('PATH_INFO', '').strip('/')
@@ -223,15 +242,15 @@ class SharedDataMiddleware(object):
                     break
         if file_loader is None or not self.is_allowed(real_filename):
             return self.app(environ, start_response)
-        from mimetypes import guess_type
-        guessed_type = guess_type(real_filename)
+
+        guessed_type = mimetypes.guess_type(real_filename)
         mime_type = guessed_type[0] or 'text/plain'
         f, mtime, file_size = file_loader()
 
         headers = [('Date', http_date())]
         if self.cache:
             timeout = self.cache_timeout
-            etag = 'wzsdm-%s-%s-%s' % (mtime, file_size, hash(real_filename))
+            etag = self.generate_etag(mtime, file_size, real_filename)
             headers += [
                 ('Etag', '"%s"' % etag),
                 ('Cache-Control', 'max-age=%d, public' % timeout)
@@ -364,13 +383,53 @@ class FileWrapper(object):
         raise StopIteration()
 
 
+
+def make_line_iter(stream, limit=None, buffer_size=10 * 1024):
+    """Savely iterates line-based over an input stream.  If the input stream
+    is not a :class:`LimitedStream` the `limit` parameter is mandatory.
+
+    This uses the stream's :meth:`~file.read` method internally as opposite
+    to the :meth:`~file.readline` method that is unsafe and can only be used
+    in violation of the WSGI specification.  The same problem applies to the
+    `__iter__` function of the input stream which calls :meth:`~file.readline`
+    without arguments.
+
+    If you need line-by-line processing it's strongly recommended to iterate
+    over the input stream using this helper function.
+
+    :param stream: the stream to iterate over.
+    :param limit: the limit in bytes for the stream.  (Usually
+                  content length.  Not necessary if the `stream`
+                  is a :class:`LimitedStream`.
+    :param buffer_size: The optional buffer size.
+    """
+    if not isinstance(stream, LimitedStream):
+        if limit is None:
+            raise TypeError('stream not limited and no limit provided.')
+        stream = LimitedStream(stream, limit)
+    buffer = []
+    while 1:
+        if len(buffer) > 1:
+            yield buffer.pop(0)
+            continue
+        chunks = stream.read(buffer_size).splitlines(True)
+        first_chunk = buffer and buffer[0] or ''
+        if chunks:
+            first_chunk += chunks.pop(0)
+        buffer = chunks
+        if not first_chunk:
+            return
+        yield first_chunk
+
+
 class LimitedStream(object):
     """Wraps a stream so that it doesn't read more than n bytes.  If the
     stream is exhausted and the caller tries to get more bytes from it
-    :func:`on_exhausted` is called which by default raises a
-    :exc:`~werkzeug.exceptions.BadRequest`.  The return value of that
-    function is forwarded to the reader function.  So if it returns an
-    empty string :meth:`read` will return an empty string as well.
+    :func:`on_exhausted` is called which by default returns an empty
+    string or raises :exc:`~werkzeug.exceptions.BadRequest` if silent
+    is set to `False`.  The return value of that function is forwarded
+    to the reader function.  So if it returns an empty string
+    :meth:`read` will return an empty string as well.
 
     The limit however must never be higher than what the stream can
     output.  Otherwise :meth:`readlines` will try to read past the
@@ -378,6 +437,22 @@ class LimitedStream(object):
 
     The `silent` parameter has no effect if :meth:`is_exhausted` is
     overriden by a subclass.
+
+    .. admonition:: Note on WSGI compliance
+
+       calls to :meth:`readline` and :meth:`readlines` are not
+       WSGI compliant because it passes a size argument to the
+       readline methods.  Unfortunately the WSGI PEP is not safely
+       implementable without a size argument to :meth:`readline`
+       because there is no EOF marker in the stream.  As a result
+       of that the use of :meth:`readline` is discouraged.
+
+       For the same reason iterating over the :class:`LimitedStream`
+       is not portable.  It internally calls :meth:`readline`.
+
+       We strongly suggest using :meth:`read` only or using the
+       :func:`make_line_iter` which savely iterates line-based
+       over a WSGI input stream.
 
     :param stream: the stream to wrap.
     :param limit: the limit for the stream, must not be longer than
@@ -387,7 +462,7 @@ class LimitedStream(object):
                    past the limit and will return an empty string.
     """
 
-    def __init__(self, stream, limit, silent=False):
+    def __init__(self, stream, limit, silent=True):
         self._stream = stream
         self._pos = 0
         self.limit = limit
@@ -441,10 +516,7 @@ class LimitedStream(object):
         return read
 
     def readline(self, size=None):
-        """Read a line from the stream.  Arguments are forwarded to the
-        `readline` function of the underlaying stream if it supports
-        them.
-        """
+        """Reads one line from the stream."""
         if self._pos >= self.limit:
             return self.on_exhausted()
         if size is None:
@@ -741,7 +813,7 @@ xhtml = HTMLBuilder('xhtml')
 
 def parse_form_data(environ, stream_factory=None, charset='utf-8',
                     errors='ignore', max_form_memory_size=None,
-                    max_content_length=None, dict_class=None):
+                    max_content_length=None, cls=None):
     """Parse the form data in the environ and return it as tuple in the form
     ``(stream, form, files)``.  You should only call this method if the
     transport method is `POST` or `PUT`.
@@ -758,7 +830,7 @@ def parse_form_data(environ, stream_factory=None, charset='utf-8',
 
     .. versionadded:: 0.5
        The `max_form_memory_size`, `max_content_length` and
-       `dict_class` parameters were added.
+       `cls` parameters were added.
 
     :param environ: the WSGI environment to be used for parsing.
     :param stream_factory: An optional callable that returns a new read and
@@ -775,7 +847,7 @@ def parse_form_data(environ, stream_factory=None, charset='utf-8',
                                is longer than this value an
                                :exc:`~exceptions.RequestEntityTooLarge`
                                exception is raised.
-    :param dict_class: an optional dict class to use.  If this is not specified
+    :param cls: an optional dict class to use.  If this is not specified
                        or `None` the default :class:`MultiDict` is used.
     :return: A tuple in the form ``(stream, form, files)``.
     """
@@ -785,8 +857,8 @@ def parse_form_data(environ, stream_factory=None, charset='utf-8',
     except (KeyError, ValueError):
         content_length = 0
 
-    if dict_class is None:
-        dict_class = MultiDict
+    if cls is None:
+        cls = MultiDict
 
     if max_content_length is not None and content_length > max_content_length:
         raise RequestEntityTooLarge()
@@ -802,22 +874,21 @@ def parse_form_data(environ, stream_factory=None, charset='utf-8',
                                           charset, errors,
                                           max_form_memory_size=max_form_memory_size)
         except ValueError, e:
-            form = dict_class()
+            form = cls()
         else:
-            form = dict_class(form)
+            form = cls(form)
     elif content_type == 'application/x-www-form-urlencoded' or \
          content_type == 'application/x-url-encoded':
         if max_form_memory_size is not None and \
            content_length > max_form_memory_size:
             raise RequestEntityTooLarge()
         form = url_decode(environ['wsgi.input'].read(content_length),
-                          charset, errors=errors, dict_class=dict_class)
+                          charset, errors=errors, cls=cls)
     else:
-        form = dict_class()
-        stream = LimitedStream(environ['wsgi.input'], content_length,
-                               silent=True)
+        form = cls()
+        stream = LimitedStream(environ['wsgi.input'], content_length)
 
-    return stream, form, dict_class(files)
+    return stream, form, cls(files)
 
 
 def get_content_type(mimetype, charset):
@@ -859,7 +930,7 @@ def format_string(string, context):
 
 
 def url_decode(s, charset='utf-8', decode_keys=False, include_empty=True,
-               errors='ignore', separator='&', dict_class=None):
+               errors='ignore', separator='&', cls=None):
     """Parse a querystring and return it as :class:`MultiDict`.  Per default
     only values are decoded into unicode strings.  If `decode_keys` is set to
     `True` the same will happen for keys.
@@ -876,7 +947,7 @@ def url_decode(s, charset='utf-8', decode_keys=False, include_empty=True,
        This changed in 0.5 where only "&" is supported.  If you want to
        use ";" instead a different `separator` can be provided.
 
-       The `dict_class` parameter was added.
+       The `cls` parameter was added.
 
     :param s: a string with the query string to decode.
     :param charset: the charset of the query string.
@@ -886,11 +957,11 @@ def url_decode(s, charset='utf-8', decode_keys=False, include_empty=True,
                           appear in the dict.
     :param errors: the decoding error behavior.
     :param separator: the pair separator to be used, defaults to ``&``
-    :param dict_class: an optional dict class to use.  If this is not specified
+    :param cls: an optional dict class to use.  If this is not specified
                        or `None` the default :class:`MultiDict` is used.
     """
-    if dict_class is None:
-        dict_class = MultiDict
+    if cls is None:
+        cls = MultiDict
     result = []
     for pair in str(s).split(separator):
         if not pair:
@@ -904,7 +975,7 @@ def url_decode(s, charset='utf-8', decode_keys=False, include_empty=True,
         if decode_keys:
             key = _decode_unicode(key, charset, errors)
         result.append((key, url_unquote_plus(value, charset, errors)))
-    return dict_class(result)
+    return cls(result)
 
 
 def url_encode(obj, charset='utf-8', encode_keys=False, sort=False, key=None,
@@ -1035,6 +1106,45 @@ def url_fix(s, charset='utf-8'):
     path = urllib.quote(path, '/%')
     qs = urllib.quote_plus(qs, ':&=')
     return urlparse.urlunsplit((scheme, netloc, path, qs, anchor))
+
+
+def secure_filename(filename):
+    """Pass it a filename and it will return a secure version of it.  This
+    filename can then savely be stored on a regular file system and passed
+    to :func:`os.path.join`.  The filename returned is an ASCII only string
+    for maximum portability.
+
+    On windows system the function also makes sure that the file is not
+    named after one of the special device files.
+
+    >>> secure_filename("My cool movie.mov")
+    'My_cool_movie.mov'
+    >>> secure_filename("../../../etc/passwd")
+    'etc_passwd'
+    >>> secure_filename(u'i contain cool \xfcml\xe4uts.txt')
+    'i_contain_cool_umlauts.txt'
+
+    .. versionadded:: 0.5
+
+    :param filename: the filename to secure
+    """
+    if isinstance(filename, unicode):
+        from unicodedata import normalize
+        filename = normalize('NFKD', filename).encode('ascii', 'ignore')
+    for sep in os.path.sep, os.path.altsep:
+        if sep:
+            filename = filename.replace(sep, ' ')
+    filename = str(_filename_ascii_strip_re.sub('', '_'.join(
+                   filename.split()))).strip('._')
+
+    # on nt a couple of special files are present in each folder.  We
+    # have to ensure that the target file is not such a filename.  In
+    # this case we prepend an underline
+    if os.name == 'nt':
+        if filename.split('.')[0].upper() in _windows_device_files:
+            filename = '_' + filename
+
+    return filename
 
 
 def escape(s, quote=False):
@@ -1213,7 +1323,7 @@ def cookie_date(expires=None):
 
 
 def parse_cookie(header, charset='utf-8', errors='ignore',
-                 dict_class=None):
+                 cls=None):
     """Parse a cookie.  Either from a string or WSGI environ.
 
     Per default encoding errors are ignored.  If you want a different behavior
@@ -1222,20 +1332,20 @@ def parse_cookie(header, charset='utf-8', errors='ignore',
 
     .. versionchanged:: 0.5
        This function now returns a :class:`TypeConversionDict` instead of a
-       regular dict.  The `dict_class` parameter was added.
+       regular dict.  The `cls` parameter was added.
 
     :param header: the header to be used to parse the cookie.  Alternatively
                    this can be a WSGI environment.
     :param charset: the charset for the cookie values.
     :param errors: the error behavior for the charset decoding.
-    :param dict_class: an optional dict class to use.  If this is not specified
+    :param cls: an optional dict class to use.  If this is not specified
                        or `None` the default :class:`TypeConversionDict` is
                        used.
     """
     if isinstance(header, dict):
         header = header.get('HTTP_COOKIE', '')
-    if dict_class is None:
-        dict_class = TypeConversionDict
+    if cls is None:
+        cls = TypeConversionDict
     cookie = _ExtendedCookie()
     cookie.load(header)
     result = {}
@@ -1247,7 +1357,7 @@ def parse_cookie(header, charset='utf-8', errors='ignore',
         if value.value is not None:
             result[key] = _decode_unicode(value.value, charset, errors)
 
-    return dict_class(result)
+    return cls(result)
 
 
 def dump_cookie(key, value='', max_age=None, expires=None, path='/',
