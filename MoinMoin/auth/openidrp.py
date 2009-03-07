@@ -254,7 +254,7 @@ document.getElementById("openid_message").submit();
         _ = request.getText
 
         # user entered something but the session can't be stored
-        if not request.session.is_stored:
+        if not request.cfg.cookie_lifetime[0]:
             return ContinueLogin(user_obj,
                                  _('Anonymous sessions need to be enabled for OpenID login.'))
 

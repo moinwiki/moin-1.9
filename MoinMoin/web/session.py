@@ -23,7 +23,6 @@ logging = log.getLogger(__name__)
 class MoinSession(Session):
     """ Compatibility interface to Werkzeug-sessions for old Moin-code. """
     is_new = property(lambda s: s.new)
-    is_stored = property(lambda s: True)
 
 class SessionService(object):
     """
