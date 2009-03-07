@@ -329,7 +329,6 @@ class User:
 
         # attrs not saved to profile
         self._request = request
-        self._trail = []
 
         # we got an already authenticated username:
         check_password = None
@@ -474,9 +473,6 @@ class User:
         # convert (old) hourly format to seconds
         if -24 <= self.tz_offset and self.tz_offset <= 24:
             self.tz_offset = self.tz_offset * 3600
-
-        # clear trail
-        self._trail = []
 
         if not self.disabled:
             self.valid = 1
@@ -877,7 +873,7 @@ class User:
     # Trail
 
     def _wantTrail(self):
-        return (not self.valid and self._request.session.is_stored  # anon session
+        return (not self.valid and self._request.cfg.cookie_lifetime[0]  # anon sessions enabled
                 or self.valid and (self.show_page_trail or self.remember_last_visit))  # logged-in session
 
     def addTrail(self, page):
@@ -886,9 +882,6 @@ class User:
         @param page: the page (object) to add to the trail
         """
         if self._wantTrail():
-            # load trail if not known
-            self.getTrail()
-
             pagename = page.page_name
             # Add only existing pages that the user may read
             if not (page.exists() and self._request.user.may.read(pagename)):
@@ -898,20 +891,18 @@ class User:
             if self._cfg.interwikiname:
                 pagename = self._interWikiName(pagename)
 
+            trail = self._request.session.get('trail', [])
+
             # Don't append tail to trail ;)
-            if self._trail and self._trail[-1] == pagename:
+            if trail and trail[-1] == pagename:
                 return
 
             # Append new page, limiting the length
-            self._trail = [p for p in self._trail if p != pagename]
-            self._trail = self._trail[-(self._cfg.trail_size-1):]
-            self._trail.append(pagename)
-            self.saveTrail()
-
-    def saveTrail(self):
-        """ Save trail into session """
-        if not self._request.session.is_new:
-            self._request.session['trail'] = self._trail
+            trail = [p for p in trail if p != pagename]
+            pagename_stripped = pagename.strip()
+            if pagename_stripped:
+                trail.append(pagename_stripped)
+            self._request.session['trail'] = trail[-(self._cfg.trail_size-1):]
 
     def getTrail(self):
         """ Return list of recently visited pages.
@@ -919,13 +910,11 @@ class User:
         @rtype: list
         @return: pages in trail
         """
-        if not self._trail and self._wantTrail():
+        if self._wantTrail():
             trail = self._request.session.get('trail', [])
-            trail = [t.strip() for t in trail]
-            trail = [t for t in trail if t]
-            self._trail = trail[-self._cfg.trail_size:]
-
-        return self._trail
+        else:
+            trail = []
+        return trail
 
     # -----------------------------------------------------------------
     # Other
