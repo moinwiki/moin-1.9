@@ -7,15 +7,14 @@
     straight forward. For documentation of the expected methods, refer
     to the documentation of `SessionService` in this module.
 
-    @copyright: 2008 MoinMoin:FlorianKrupicka
+    @copyright: 2008 MoinMoin:FlorianKrupicka,
+                2009 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 import time
 
-from werkzeug import dump_cookie
 from werkzeug.contrib.sessions import FilesystemSessionStore, Session
 
-from MoinMoin import caching
 from MoinMoin.util import filesys
 
 from MoinMoin import log
@@ -92,6 +91,8 @@ class FileSessionService(SessionService):
             userobj = request.user
             setuid = None
         logging.debug("finalize userobj = %r, setuid = %r" % (userobj, setuid))
+        cfg = request.cfg
+        cookie_path = cfg.cookie_path or request.script_root or '/'
         if userobj and userobj.valid:
             session['user.id'] = userobj.id
             session['user.auth_method'] = userobj.auth_method
@@ -102,22 +103,29 @@ class FileSessionService(SessionService):
                 del session['setuid']
             logging.debug("after auth: storing valid user into session: %r" % userobj.name)
         else:
+            logging.debug("after auth: user is invalid")
             if 'user.id' in session:
+                logging.debug("after auth: destroying session: %r" % session)
                 self.destroy_session(request, session)
+                logging.debug("after auth: deleting session cookie!")
+                request.delete_cookie(self.cookie_name, path=cookie_path, domain=cfg.cookie_domain)
 
         if session.new:
-            cookie_lifetime = request.cfg.cookie_lifetime * 3600
-            cookie_expires = time.time() + cookie_lifetime
-            if request.cfg.cookie_path:
-                cookie_path = request.cfg.cookie_path
-            else:
-                cookie_path = request.script_root or '/'
-            cookie = dump_cookie(self.cookie_name, session.sid,
-                                 cookie_lifetime, cookie_expires,
-                                 cookie_path, request.cfg.cookie_domain)
-            request.headers.add('Set-Cookie', cookie)
+            lifetime_h = cfg.cookie_lifetime[userobj and userobj.valid]
+            cookie_lifetime = int(float(lifetime_h) * 3600)
+            if cookie_lifetime:
+                cookie_expires = time.time() + cookie_lifetime
+                # a secure cookie is not transmitted over unsecure connections:
+                cookie_secure = (cfg.cookie_secure or  # True means: force secure cookies
+                    cfg.cookie_secure is None and request.is_secure)  # None means: https -> secure cookie
+                logging.debug("user: %r, setting session cookie: %r" % (userobj, session.sid))
+                request.set_cookie(self.cookie_name, session.sid,
+                                   max_age=cookie_lifetime, expires=cookie_expires,
+                                   path=cookie_path, domain=cfg.cookie_domain,
+                                   secure=cookie_secure, httponly=cfg.cookie_httponly)
 
         if session.should_save:
             store = self._store_get(request)
+            logging.debug("saving session: %r" % session)
             store.save(session)
 
