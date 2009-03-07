@@ -23,7 +23,6 @@ import MoinMoin.events as events
 from MoinMoin.events import PageChangedEvent, PageRenamedEvent
 from MoinMoin.events import PageDeletedEvent, PageCopiedEvent
 from MoinMoin.events import PageRevertedEvent, FileAttachedEvent
-from MoinMoin import session
 import MoinMoin.web.session
 from MoinMoin.packages import packLine
 from MoinMoin.security import AccessControlList
@@ -697,22 +696,18 @@ class DefaultExpression(object):
 options_no_group_name = {
   # ==========================================================================
   'session': ('Session settings', "Session-related settings, see HelpOnSessions.", (
-    ('session_handler', DefaultExpression('session.DefaultSessionHandler()'),
-     "See HelpOnSessions."),
-    ('session_id_handler', DefaultExpression('session.MoinCookieSessionIDHandler()'),
-     "Only used by the DefaultSessionHandler, see HelpOnSessions."),
     ('session_service', DefaultExpression('web.session.FileSessionService()'),
-     "New session service (used by the new WSGI layer)"),
+     "The session service."),
     ('cookie_secure', None,
      'Use secure cookie. (None = auto-enable secure cookie for https, True = ever use secure cookie, False = never use secure cookie).'),
+    ('cookie_httponly', True,
+     'Use a httponly cookie that can only be used by the server, not by clientside scripts.'),
     ('cookie_domain', None,
      'Domain used in the session cookie. (None = do not specify domain).'),
     ('cookie_path', None,
      'Path used in the session cookie (None = auto-detect).'),
-    ('cookie_lifetime', 12,
-     'Session lifetime [h] of logged-in users (see HelpOnSessions for details).'),
-    ('anonymous_session_lifetime', None,
-     'Session lifetime [h] of users who are not logged in (None = disable anon sessions).'),
+    ('cookie_lifetime', (0, 12),
+     'Session lifetime [h] of (anonymous, logged-in) users (see HelpOnSessions for details).'),
   )),
   # ==========================================================================
   'auth': ('Authentication / Authorization / Security settings', None, (

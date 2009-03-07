@@ -36,7 +36,6 @@ from MoinMoin.PageEditor import PageEditor
 from MoinMoin.logfile import editlog
 from MoinMoin.action import AttachFile
 from MoinMoin import caching
-from MoinMoin import session
 
 
 logging_tearline = '- XMLRPC %s ' + '-' * 40

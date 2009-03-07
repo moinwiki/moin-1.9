@@ -69,7 +69,7 @@ class TestNoAuth(AuthTest):
 
 class TestAnonSession(AuthTest):
     class Config(wikiconfig.Config):
-        anonymous_session_lifetime = 1
+        cookie_lifetime = 1, 12
 
     def testAnonSession(self):
         """ run some requests, no auth, check if anon sessions work """
