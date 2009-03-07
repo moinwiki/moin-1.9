@@ -78,14 +78,16 @@ dn: uid=usera,ou=Unit A,ou=Users,ou=testing,dc=example,dc=org
 objectClass: account
 objectClass: simpleSecurityObject
 uid: usera
-userPassword: usera
+# this is md5 encoded 'usera' for password
+userPassword: {MD5}aXqgOSc5gSW7YoLi9BSmvg==
 
 dn: uid=userb,ou=Unit B,ou=Users,ou=testing,dc=example,dc=org
 cn: Vorname Nachname
 objectClass: inetOrgPerson
 sn: Nachname
 uid: userb
-userPassword: userb
+# this is md5 encoded 'userb' for password
+userPassword: {MD5}ThvfQsM7OQFjqSUQOX2XsA==
 
 dn: cn=Group A,ou=Groups,ou=testing,dc=example,dc=org
 cn: Group A

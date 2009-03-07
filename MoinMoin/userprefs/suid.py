@@ -38,9 +38,9 @@ class Settings(UserPrefBase):
         if 'cancel' in form:
             return
 
-        if (wikiutil.checkTicket(self.request, self.request.form['ticket'][0])
-            and self.request.request_method == 'POST'):
-            uid = form.get('selected_user', [''])[0]
+        if (wikiutil.checkTicket(self.request, self.request.form['ticket'])
+            and self.request.method == 'POST'):
+            uid = form.get('selected_user', '')
             if not uid:
                 return 'error', _("No user selected")
             theuser = user.User(self.request, uid, auth_method='setuid')
@@ -49,7 +49,6 @@ class Settings(UserPrefBase):
             # set valid to True so superusers can even switch
             # to disable accounts
             theuser.valid = True
-            self.request.session['setuid'] = uid
             self.request._setuid_real_user = self.request.user
             # now continue as the other user
             self.request.user = theuser

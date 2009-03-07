@@ -13,10 +13,10 @@ What we need
 ============
 
 Please note that we currently have 2 "MoinMaster" wikis:
-    * http://master17.moinmo.in/ (currently same as http://master.moinmo.in/)
-      This wiki is for the "current" 1.7.x releases.
-    * http://master18.moinmo.in/
-      This wiki is for the "upcoming" 1.8.x releases.
+    * http://master18.moinmo.in/ (currently same as http://master.moinmo.in/)
+      This wiki is for the "current" 1.8.x releases.
+    * http://master19.moinmo.in/
+      This wiki is for the "upcoming" 1.9.x releases.
 
 We need your help again for updating the following (high priority and
 most important stuff is on top of the list):
@@ -32,14 +32,14 @@ most important stuff is on top of the list):
 [X] "%(lang)s" help pages on the MoinMaster wiki (optional - would be
     nice, if you had the time)
 
-We need that until 2008-10-31 - because MoinMoin 1.8.0 will be released
+We need that until 2009-xx-xx - because MoinMoin 1.9.0 will be released
 then, so we can include that stuff into the distribution archive to make
 people speaking your language happy. ;)
 
 Please, after translating the current stuff, keep an eye on MoinMaster
 wikis - some strings in the PO file may still change or get added/deleted.
 
-See http://moinmo.in/MoinMoinTodo/Release%%201.8 for our planned release schedule.
+See http://moinmo.in/MoinMoinTodo/Release%%201.9 for our planned release schedule.
 
 Please reply immediately
 ========================

@@ -11,7 +11,6 @@ from SimpleXMLRPCServer import SimpleXMLRPCServer
 from threading import Thread
 
 import jabberbot.commands as cmd
-from jabberbot.multicall import MultiCall
 
 
 class ConfigurationError(Exception):
@@ -33,7 +32,7 @@ def _xmlrpc_decorator(function):
         _ = lambda x: x
 
         self.token = None
-        self.multicall = MultiCall(self.connection)
+        self.multicall = xmlrpclib.MultiCall(self.connection)
         jid = command.jid
         if type(jid) is not list:
             jid = [jid]

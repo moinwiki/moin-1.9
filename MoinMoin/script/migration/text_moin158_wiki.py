@@ -217,7 +217,7 @@ class Parser:
         inline = url[0] == 'i'
         drawing = url[0] == 'd'
         url = url.split(":", 1)[1]
-        url = wikiutil.url_unquote(url, want_unicode=True)
+        url = wikiutil.url_unquote(url)
         text = text or url
 
         from MoinMoin.action import AttachFile

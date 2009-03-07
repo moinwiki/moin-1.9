@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-07 14:05+0100\n"
+"POT-Creation-Date: 2009-02-15 02:04+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,6 +76,17 @@ msgstr ""
 
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
+msgstr ""
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr ""
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr ""
+
+msgid "Login and try again."
 msgstr ""
 
 msgid "Your changes are not saved!"
@@ -545,9 +556,6 @@ msgid ""
 "one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
 
-msgid "You need to log in."
-msgstr ""
-
 #, python-format
 msgid "LDAP server %(server)s failed."
 msgstr ""
@@ -750,7 +758,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 
 #, python-format
@@ -1271,6 +1279,11 @@ msgstr ""
 msgid "Load"
 msgstr ""
 
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+
 msgid "Pagename not specified!"
 msgstr ""
 
@@ -1389,11 +1402,6 @@ msgid "Attachments for \"%(pagename)s\""
 msgstr ""
 
 msgid "You are not allowed to overwrite a file attachment of this page."
-msgstr ""
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
 msgstr ""
 
 #, python-format
@@ -2597,17 +2605,6 @@ msgid "[empty]"
 msgstr ""
 
 msgid "filter"
-msgstr ""
-
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr ""
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr ""
-
-msgid "Login and try again."
 msgstr ""
 
 msgid "FrontPage"

@@ -31,7 +31,6 @@ class MaxNodesReachedException(Exception):
 
 def execute(pagename, request):
     _ = request.getText
-    request.emit_http_headers()
 
     # This action generate data using the user language
     request.setContentLanguage(request.lang)

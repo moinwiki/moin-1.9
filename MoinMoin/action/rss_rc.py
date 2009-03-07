@@ -24,8 +24,7 @@ def execute(pagename, request):
     """ Send recent changes as an RSS document
     """
     if not wikixml.ok:
-        httpheaders = ["Content-Type: text/plain; charset=%s" % config.charset]
-        request.emit_http_headers(httpheaders)
+        request.mimetype = 'text/plain'
         request.write("rss_rc action is not supported because of missing pyxml module.")
         return
 
@@ -34,22 +33,22 @@ def execute(pagename, request):
     # get params
     items_limit = 100
     try:
-        max_items = int(request.form['items'][0])
+        max_items = int(request.values['items'])
         max_items = min(max_items, items_limit) # not more than `items_limit`
     except (KeyError, ValueError):
         # not more than 15 items in a RSS file by default
         max_items = 15
     try:
-        unique = int(request.form.get('unique', [0])[0])
+        unique = int(request.values.get('unique', 0))
     except ValueError:
         unique = 0
     try:
-        diffs = int(request.form.get('diffs', [0])[0])
+        diffs = int(request.values.get('diffs', 0))
     except ValueError:
         diffs = 0
     ## ddiffs inserted by Ralf Zosel <ralf@zosel.com>, 04.12.2003
     try:
-        ddiffs = int(request.form.get('ddiffs', [0])[0])
+        ddiffs = int(request.values.get('ddiffs', 0))
     except ValueError:
         ddiffs = 0
 
@@ -86,31 +85,27 @@ def execute(pagename, request):
     if request.if_modified_since == timestamp:
         if request.if_none_match:
             if request.if_none_match == etag:
-                request.emit_http_headers(["Status: 304 Not modified"])
+                request.status_code = 304
         else:
-            request.emit_http_headers(["Status: 304 Not modified"])
+            request.status_code = 304
     elif request.if_none_match == etag:
         if request.if_modified_since:
             if request.if_modified_since == timestamp:
-                request.emit_http_headers(["Status: 304 Not modified"])
+                request.status_code = 304
         else:
-            request.emit_http_headers(["Status: 304 Not modified"])
+            request.status_code = 304
     else:
         # generate an Expires header, using whatever setting the admin
         # defined for suggested cache lifetime of the RecentChanges RSS doc
-        expires = timefuncs.formathttpdate(time.time() + cfg.rss_cache)
+        expires = time.time() + cfg.rss_cache
 
-        httpheaders = ["Content-Type: text/xml; charset=%s" % config.charset,
-                       "Expires: %s" % expires,
-                       "Last-Modified: %s" % timestamp,
-                       "Etag: %s" % etag, ]
+        request.mime_type = 'text/xml'
+        request.expires = expires
+        request.last_modified = lastmod
+        request.headers.add('Etag', etag)
 
         # send the generated XML document
-        request.emit_http_headers(httpheaders)
-
-        baseurl = request.getBaseURL()
-        if not baseurl.endswith('/'):
-            baseurl += '/'
+        baseurl = request.url_root
 
         logo = re.search(r'src="([^"]*)"', cfg.logo_string)
         if logo:
@@ -139,7 +134,7 @@ def execute(pagename, request):
 
         # emit channel description
         handler.startNode('channel', {
-            (handler.xmlns['rdf'], 'about'): request.getBaseURL(),
+            (handler.xmlns['rdf'], 'about'): request.url_root,
             })
         handler.simpleNode('title', cfg.sitename)
         page = Page(request, pagename)
