@@ -414,16 +414,16 @@ class Converter(Parser):
             else:
                 return '[[%s|%s]]' % (target, text)
 
+    def _parser_repl(self, word):
+        self.in_pre = 'no_parser'
+        return word
+
     def _pre_repl(self, word):
         w = word.strip()
         if w == '{{{' and not self.in_pre:
-            self.in_pre = True
+            self.in_pre = 'no_parser'
         elif w == '}}}' and self.in_pre:
-            self.in_pre = False
-        return word
-
-    def _processor_repl(self, word):
-        self.in_pre = True
+            self.in_pre = None
         return word
 
     def scan(self, scan_re, line):
