@@ -26,10 +26,7 @@ class Settings(UserPrefBase):
         self.name = 'suid'
 
     def allowed(self):
-        return (UserPrefBase.allowed(self) and
-                self.request.user.isSuperUser() or
-                (not self.request._setuid_real_user is None and
-                 (self.request._setuid_real_user.isSuperUser())))
+        return UserPrefBase.allowed(self) and self.request.user.isSuperUser()
 
     def handle_form(self):
         _ = self._
@@ -59,19 +56,12 @@ class Settings(UserPrefBase):
     def _user_select(self):
         options = []
         users = user.getUserList(self.request)
-        realuid = None
-        if hasattr(self.request, '_setuid_real_user') and self.request._setuid_real_user:
-            realuid = self.request._setuid_real_user.id
-        else:
-            realuid = self.request.user.id
+        current_uid = self.request.user.id
         for uid in users:
-            if uid != realuid:
+            if uid != current_uid:
                 name = user.User(self.request, id=uid).name
                 options.append((uid, name))
         options.sort(lambda x, y: cmp(x[1].lower(), y[1].lower()))
-
-        size = min(5, len(options))
-        current_user = self.request.user.id
 
         if not options:
             _ = self._
@@ -79,7 +69,8 @@ class Settings(UserPrefBase):
             return _("You are the only user.")
 
         self._only = False
-        return util.web.makeSelection('selected_user', options, current_user, size=size)
+        size = min(10, len(options))
+        return util.web.makeSelection('selected_user', options, current_uid, size=size)
 
     def create_form(self):
         """ Create the complete HTML form code. """
