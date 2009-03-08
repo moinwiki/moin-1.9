@@ -109,10 +109,10 @@ class FileSessionService(SessionService):
                 logging.debug("after auth: deleting session cookie!")
                 request.delete_cookie(self.cookie_name, path=cookie_path, domain=cfg.cookie_domain)
 
-        if session.new:
-            lifetime_h = cfg.cookie_lifetime[userobj and userobj.valid]
-            cookie_lifetime = int(float(lifetime_h) * 3600)
-            if cookie_lifetime:
+        lifetime_h = cfg.cookie_lifetime[userobj and userobj.valid]
+        cookie_lifetime = int(float(lifetime_h) * 3600)
+        if cookie_lifetime:
+            if session.new:
                 cookie_expires = time.time() + cookie_lifetime
                 # a secure cookie is not transmitted over unsecure connections:
                 cookie_secure = (cfg.cookie_secure or  # True means: force secure cookies
@@ -123,8 +123,8 @@ class FileSessionService(SessionService):
                                    path=cookie_path, domain=cfg.cookie_domain,
                                    secure=cookie_secure, httponly=cfg.cookie_httponly)
 
-        if session.should_save:
-            store = self._store_get(request)
-            logging.debug("saving session: %r" % session)
-            store.save(session)
+            if session.should_save:
+                store = self._store_get(request)
+                logging.debug("saving session: %r" % session)
+                store.save(session)
 
