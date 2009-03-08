@@ -433,7 +433,7 @@ def setup_setuid(request, userobj):
     @return: (new_user, user) or (user, None)
     """
     old_user = None
-    if 'setuid' in request.session and userobj.isSuperUser():
+    if 'setuid' in request.session and userobj and userobj.isSuperUser():
         old_user = userobj
         uid = request.session['setuid']
         userobj = user.User(request, uid, auth_method='setuid')
