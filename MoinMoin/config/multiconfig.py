@@ -362,6 +362,9 @@ class ConfigFunctionality(object):
         if self.url_prefix_local is None:
             self.url_prefix_local = self.url_prefix_static
 
+        if self.url_prefix_fckeditor is None:
+            self.url_prefix_fckeditor = self.url_prefix_local + '/applets/FCKeditor'
+
         if self.secrets is None:  # admin did not setup a real secret, so make up something
             self.secrets = self.calc_secrets()
 
@@ -911,6 +914,8 @@ options_no_group_name = {
      "used as the base URL for icons, css, etc. - includes the moin version number and changes on every release. This replaces the deprecated and sometimes confusing `url_prefix = '/wiki'` setting."),
     ('url_prefix_local', None,
      "used as the base URL for some Javascript - set this to a URL on same server as the wiki if your url_prefix_static points to a different server."),
+    ('url_prefix_fckeditor', None,
+     "used as the base URL for FCKeditor - similar to url_prefix_local, but just for FCKeditor."),
 
     ('url_prefix_action', None,
      "Use 'action' to enable action URL generation to be compatible with robots.txt. It will generate .../action/info/PageName?action=info then. Recommended for internet wikis."),
