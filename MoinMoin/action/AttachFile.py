@@ -557,7 +557,7 @@ def _do_upload(pagename, request):
     if rename:
         target = rename
     else:
-        target = file_upload.filename
+        target = file_upload.filename or u''
 
     target = wikiutil.clean_input(target)
 
