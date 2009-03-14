@@ -5,6 +5,7 @@
 #acl -All:write Default
 #format gettext
 #language fr
+
 #
 # MoinMoin fr system text translation
 #
@@ -12,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-02 01:17+0100\n"
+"POT-Creation-Date: 2009-02-15 02:04+0100\n"
 "PO-Revision-Date: 2009-02-07 20:54+0100\n"
 "Last-Translator: Jean-Philippe Guérard <fevrier@tigreraye.org>\n"
 "Language-Team: Français\n"
@@ -95,7 +96,8 @@ msgstr "Action inconnue %(action_name)s."
 
 #, python-format
 msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Vous n'êtes pas autorisé à utiliser l'action %(action_name)s sur cette page."
+msgstr ""
+"Vous n'êtes pas autorisé à utiliser l'action %(action_name)s sur cette page."
 
 msgid "Login and try again."
 msgstr "Connectez-vous et essayez à nouveau."
@@ -304,7 +306,8 @@ msgstr ""
 
 #, python-format
 msgid "Cannot save page %s, no storage space left."
-msgstr "Impossible d'enregistrer la page %s, il ne reste plus d'espace de stockage"
+msgstr ""
+"Impossible d'enregistrer la page %s, il ne reste plus d'espace de stockage"
 
 #, python-format
 msgid "An I/O error occurred while saving page %s (errno=%d)"
@@ -323,15 +326,16 @@ msgstr "Vous avez déjà enregistré cette page !"
 
 msgid "You already edited this page! Please do not use the back button."
 msgstr ""
-"Vous avez déjà modifié cette page ! Veuillez ne pas utiliser le bouton « "
-"Précédent »."
+"Vous avez déjà modifié cette page ! Veuillez ne pas utiliser le bouton "
+"« Précédent »."
 
 msgid "You did not change the page content, not saved!"
 msgstr ""
 "Vous n'avez pas modifié le contenu de cette page, elle n'a pas été "
 "enregistrée !"
 
-msgid "You can't change ACLs on this page since you have no admin rights on it!"
+msgid ""
+"You can't change ACLs on this page since you have no admin rights on it!"
 msgstr ""
 "Vous ne pouvez pas modifier la liste de contrôle d'accès (ACL) de cette "
 "page, car vous n'en avez pas les droits d'administration !"
@@ -348,7 +352,8 @@ msgstr ""
 "et il vous a été accordé."
 
 #, python-format
-msgid "Other users will be ''blocked'' from editing this page until %(bumptime)s."
+msgid ""
+"Other users will be ''blocked'' from editing this page until %(bumptime)s."
 msgstr ""
 "Les autres utilisateurs ''ne'' pourront ''pas'' éditer cette page jusqu'au %"
 "(bumptime)s."
@@ -362,7 +367,8 @@ msgstr ""
 "êtes en train d'éditer cette page."
 
 msgid "Use the Preview button to extend the locking period."
-msgstr "Utilisez le bouton « Aperçu » pour prolonger la période de verrouillage."
+msgstr ""
+"Utilisez le bouton « Aperçu » pour prolonger la période de verrouillage."
 
 #, python-format
 msgid ""
@@ -440,7 +446,8 @@ msgstr "Mode texte"
 
 #, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
-msgstr "Ce paquet a besoin d'une version plus récente de MoinMoin (au minimum %s)."
+msgstr ""
+"Ce paquet a besoin d'une version plus récente de MoinMoin (au minimum %s)."
 
 msgid "The theme name is not set."
 msgstr "Le nom du thème n'est pas défini."
@@ -523,7 +530,8 @@ msgid "Additions are marked like this."
 msgstr "Texte ajouté."
 
 #, python-format
-msgid "Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
+msgid ""
+"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
 msgstr ""
 "Désolé, impossible d'enregistrer la page car « %(content)s » n'est pas "
 "autorisé sur ce wiki."
@@ -703,7 +711,8 @@ msgid "OpenID verification requires that you click this button:"
 msgstr "Veuillez cliquer sur ce bouton pour l'identification OpenID :"
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
-msgstr "L'identification OpenID nécessite que les sessions anonymes soient activées."
+msgstr ""
+"L'identification OpenID nécessite que les sessions anonymes soient activées."
 
 msgid "Failed to resolve OpenID."
 msgstr "Échec de la résolution de l'identifiant OpenID."
@@ -750,7 +759,8 @@ msgstr "Un nouveau compte vient d'être créé"
 
 #, python-format
 msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
-msgstr "[%(sitename)s] Mise à jour %(trivial)sde « %(pagename)s » par %(username)s"
+msgstr ""
+"[%(sitename)s] Mise à jour %(trivial)sde « %(pagename)s » par %(username)s"
 
 msgid "Trivial "
 msgstr "mineure "
@@ -912,7 +922,8 @@ msgstr ""
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
-msgstr "« %(wanted)s » était attendu après « %(key)s », mais « %(token)s » a été obtenu"
+msgstr ""
+"« %(wanted)s » était attendu après « %(key)s », mais « %(token)s » a été obtenu"
 
 #, python-format
 msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
@@ -938,7 +949,8 @@ msgstr ""
 msgid "%(errortype)s processing error"
 msgstr "Erreur d'exécution : %(errortype)s"
 
-msgid "Rendering of reStructured text is not possible, please install Docutils."
+msgid ""
+"Rendering of reStructured text is not possible, please install Docutils."
 msgstr ""
 "Le rendu du format reStructuredText n'est pas possible. Veuillez installer "
 "docutils."
@@ -990,7 +1002,8 @@ msgstr "** Vous n'êtes pas autorisé à lire la page : %s ! **"
 
 #, python-format
 msgid "**Could not find the referenced page: %s**"
-msgstr "**Impossible de trouver la page à laquelle il est fait référence : %s**"
+msgstr ""
+"**Impossible de trouver la page à laquelle il est fait référence : %s**"
 
 msgid ""
 " Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
@@ -1125,7 +1138,8 @@ msgstr ""
 msgid "You are the only user."
 msgstr "Vous êtes le seul utilisateur."
 
-msgid "As a superuser, you can temporarily assume the identity of another user."
+msgid ""
+"As a superuser, you can temporarily assume the identity of another user."
 msgstr ""
 "En tant que superutilisateur, vous pouvez vous connecter temporairement sous "
 "l'identité d'un autre utilisateur."
@@ -1150,7 +1164,8 @@ msgid "Your password has been changed."
 msgstr "Votre mot de passe a été changé."
 
 msgid "To change your password, enter a new password twice."
-msgstr "Pour changer votre mot de passe, entrez deux fois un nouveau mot de passe."
+msgstr ""
+"Pour changer votre mot de passe, entrez deux fois un nouveau mot de passe."
 
 msgid "Password repeat"
 msgstr "Répétez le mot de passe"
@@ -1234,7 +1249,8 @@ msgid "You must specify an output file!"
 msgstr "Vous devez indiquer un fichier de sortie !"
 
 msgid "No pages specified using --pages or --search, assuming full package."
-msgstr "Aucune page indiquée via --pages ou --search, on prend le paquet complet."
+msgstr ""
+"Aucune page indiquée via --pages ou --search, on prend le paquet complet."
 
 msgid "All attachments included into the package."
 msgstr "Toutes les pièces-jointes sont incluses dans le paquet."
@@ -1343,7 +1359,8 @@ msgstr "Gestion de MesPages"
 
 #, python-format
 msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "Utilisez l'interface interactive pour exécuter l'action %(actionname)s !"
+msgstr ""
+"Utilisez l'interface interactive pour exécuter l'action %(actionname)s !"
 
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha : mauvaise réponse ! Revenez en arrière et réessayez..."
@@ -1379,8 +1396,10 @@ msgstr "Vous avez été abonné à cette page."
 msgid "You could not get subscribed to this page."
 msgstr "Il n'a pas été possible de vous abonner à cette page."
 
-msgid "Cannot create a new page without a page name.  Please specify a page name."
-msgstr "Impossible de créer une page sans nom. Veuillez indiquer un nom de page."
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr ""
+"Impossible de créer une page sans nom. Veuillez indiquer un nom de page."
 
 msgid "Do it."
 msgstr "Exécuter."
@@ -1395,7 +1414,8 @@ msgstr "L'action %(actionname)s est interdite sur ce wiki !"
 
 #, python-format
 msgid "You are not allowed to use action %(actionname)s on this page!"
-msgstr "Vous n'êtes pas autorisé à utiliser l'action %(actionname)s sur cette page."
+msgstr ""
+"Vous n'êtes pas autorisé à utiliser l'action %(actionname)s sur cette page."
 
 msgid "If this account exists an email was sent."
 msgstr "Si ce compte existe, un courrier a été envoyé."
@@ -1408,7 +1428,8 @@ msgstr ""
 "Contactez le propriétaire de ce wiki, qui pourra l'activer."
 
 msgid "Please provide a valid email address or a username!"
-msgstr "Veuillez indiquer une adresse électronique ou un nom d'utilisateur correct !"
+msgstr ""
+"Veuillez indiquer une adresse électronique ou un nom d'utilisateur correct !"
 
 msgid "Mail me my account data"
 msgstr "Envoyez-moi mes identifiants de connexion"
@@ -1583,7 +1604,8 @@ msgid "Your quicklink to this page could not be removed."
 msgstr "Votre lien rapide vers cette page n'a pu être supprimé."
 
 msgid "You need to have a quicklink to this page to remove it."
-msgstr "Il doit y avoir un lien rapide sur cette page pour pouvoir le supprimer."
+msgstr ""
+"Il doit y avoir un lien rapide sur cette page pour pouvoir le supprimer."
 
 #, python-format
 msgid "[%d attachments]"
@@ -1684,7 +1706,8 @@ msgstr ""
 
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
-msgstr "La pièce jointe « %(target)s » (nom distant « %(filename)s ») existe déjà."
+msgstr ""
+"La pièce jointe « %(target)s » (nom distant « %(filename)s ») existe déjà."
 
 msgid "You are not allowed to save a drawing on this page."
 msgstr "Vous n'êtes pas autorisé à enregistrer un dessin dans cette page."
@@ -1724,7 +1747,8 @@ msgid "Please use the interactive user interface to move attachments!"
 msgstr "Utilisez l'interface interactive pour déplacer des pièces jointes !"
 
 msgid "You are not allowed to move attachments from this page."
-msgstr "Vous n'êtes pas autorisé à déplacer des pièces jointes depuis cette page."
+msgstr ""
+"Vous n'êtes pas autorisé à déplacer des pièces jointes depuis cette page."
 
 msgid "Move aborted because new page name is empty."
 msgstr "Impossible de renommer sans indiquer un nouveau nom."
@@ -1758,7 +1782,8 @@ msgid "Attachment '%(filename)s' installed."
 msgstr "Pièce jointe « %(filename)s » installée."
 
 msgid "You are not allowed to unzip attachments of this page."
-msgstr "Vous n'êtes pas autorisé à décompresser les pièces jointes de cette page."
+msgstr ""
+"Vous n'êtes pas autorisé à décompresser les pièces jointes de cette page."
 
 #, python-format
 msgid "The file %(filename)s is not a .zip file."
@@ -1827,7 +1852,8 @@ msgid "Size"
 msgstr "Taille"
 
 msgid "Unknown file type, cannot display this attachment inline."
-msgstr "Type de fichier inconnu, impossible d'afficher son contenu dans la page."
+msgstr ""
+"Type de fichier inconnu, impossible d'afficher son contenu dans la page."
 
 msgid "You are not allowed to view attachments of this page."
 msgstr "Vous n'êtes pas autorisé à voir les pièces jointes de cette page."
@@ -1951,7 +1977,8 @@ msgid "Operation was canceled."
 msgstr "L'opération a été annulée."
 
 msgid "The only supported directions are BOTH and DOWN."
-msgstr "Les seules directions acceptées sont BOTH (les deux) et DOWN (vers le bas)."
+msgstr ""
+"Les seules directions acceptées sont BOTH (les deux) et DOWN (vers le bas)."
 
 msgid ""
 "Please set an interwikiname in your wikiconfig (see HelpOnConfiguration) to "
@@ -2060,13 +2087,15 @@ msgstr ""
 
 #, python-format
 msgid "Skipped page %s because of a locally or remotely unresolved conflict."
-msgstr "La page %s a été sautée du fait d'un conflit local ou distant non résolu."
+msgstr ""
+"La page %s a été sautée du fait d'un conflit local ou distant non résolu."
 
 #, python-format
 msgid ""
 "This is the first synchronisation between the local and the remote wiki for "
 "the page %s."
-msgstr "Première synchronisation de la page %s entre les wikis local et distant."
+msgstr ""
+"Première synchronisation de la page %s entre les wikis local et distant."
 
 #, python-format
 msgid ""
@@ -2181,7 +2210,8 @@ msgid "Revert"
 msgstr "Restaurer !"
 
 msgid "You are not allowed to revert this page!"
-msgstr "Vous n'êtes pas autorisé à restaurer une version antérieure de cette page !"
+msgstr ""
+"Vous n'êtes pas autorisé à restaurer une version antérieure de cette page !"
 
 msgid ""
 "You were viewing the current revision of this page when you called the "
@@ -2384,7 +2414,8 @@ msgstr ""
 "de ne pas contenir toutes les pages du wiki relatives à ce sujet. <<BR>>"
 
 msgid "Click here to perform a full-text search with your search terms!"
-msgstr "Cliquez ici pour appliquer cette recherche au texte des pages du wiki !"
+msgstr ""
+"Cliquez ici pour appliquer cette recherche au texte des pages du wiki !"
 
 msgid "User account created! You can use this account to login now..."
 msgstr ""
@@ -2407,7 +2438,8 @@ msgid "Your subscription to this page has been removed."
 msgstr "Votre abonnement à cette page a été supprimé."
 
 msgid "Can't remove regular expression subscription!"
-msgstr "Impossible de retirer un abonnement défini par une expression rationnelle !"
+msgstr ""
+"Impossible de retirer un abonnement défini par une expression rationnelle !"
 
 msgid "Edit the subscription regular expressions in your settings."
 msgstr ""
@@ -2423,7 +2455,8 @@ msgstr "Mot de passe trop court."
 msgid "Password has not enough different characters."
 msgstr "Le mot de passe ne contient pas assez de caractères différents."
 
-msgid "Password is too easy (password contains name or name contains password)."
+msgid ""
+"Password is too easy (password contains name or name contains password)."
 msgstr ""
 "Mot de passe trop simple (le mot de passe contient le nom, ou bien le nom "
 "est contenu dans le mot de passe)."
@@ -2476,7 +2509,8 @@ msgid "Show comment sections"
 msgstr "Afficher les commentaires"
 
 msgid "Show question mark for non-existing pagelinks"
-msgstr "Afficher un point d'interrogation pour les liens vers une page inexistante"
+msgstr ""
+"Afficher un point d'interrogation pour les liens vers une page inexistante"
 
 msgid "Show page trail"
 msgstr "Voir le chemin suivi"
@@ -2964,7 +2998,8 @@ msgstr "Sommaire"
 
 #, python-format
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
-msgstr "La connexion au serveur de messagerie « %(server)s » a échouée : %(reason)s"
+msgstr ""
+"La connexion au serveur de messagerie « %(server)s » a échouée : %(reason)s"
 
 msgid "Mail not sent"
 msgstr "Courrier non envoyé"
