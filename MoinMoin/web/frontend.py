@@ -19,8 +19,8 @@ class FrontEnd(object):
 
     def add_options(self):
         parser = self.parser
-        parser.add_option("-d", "--debug", action="store_true",
-                          help="Enable debug mode of server (show tracebacks)")
+        parser.add_option("-d", "--debug", dest="debug",
+                          help="Debug mode of server (off/web/external, default is to use MOIN_DEBUGGER env var)")
         parser.add_option("-c", "--config-dir", dest="config_dir", metavar="DIR",
                           help=("Path to the directory containing the wiki "
                                 "configuration files. Default: current directory"))
