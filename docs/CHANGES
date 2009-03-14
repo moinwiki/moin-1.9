@@ -31,22 +31,65 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
-Current:
-  * PackagePage action creates now packages on the fly and stores them only locally.
-
-Version 1.9.0beta1:
+Version 1.9.0beta2:
 
   Please note:
   * This is a BETA version, not meant for production usage, but just to
     discover bugs, incompatibilities, installation issues, documentation issues,
     etc. - please report issues on MoinMoin:MoinMoinBugs.
-  * For the beta1 download archive, we updated the *.po files with the system
+  * For the beta download archive, we updated the *.po files with the system
     text translations and also the system and help pages, so translators can
     see the current state in a working local wiki.
     We know that translations and system / help pages are not yet finished and
     that  they still require much more work.
     Please see http://master19.moinmo.in/ and help cleaning up there.
 
+  New features:
+  * Added modernized_cms theme (hides most wiki widgets from modernized if the
+    user is not logged in).
+  * Static file serving built-in (moved wiki/htdocs to MoinMoin/web/static/htdocs).
+    MoinMoin.web.static has a static file serving wrapper that uses the files
+    from htdocs subdirectory by default (docs=True).
+    You can also give another path or switch off creation of that static wrapper.
+    See the docstring of the static package for details.
+  * Handle wikiserverconfig(_local) in the same way as wikiconfig(_local)
+  * PackagePages: create package file in memory and send it to the caller
+  * Environment variable MOIN_DEBUGGER=off/web/external (default is like "off")
+  * HTTPAuthMoin: http basic auth done by moin
+  * ldap auth: new name_callback param to create a custom wiki username (not the
+    ldap login username)
+  * wikiconfig/farmconfig: improve values for data(_underlay)_dir, make logo
+    work automatically
+  * New session code:
+    * cfg.cookie_lifetime is now a tuple (anon, loggedin), giving the lifetime
+      of the cookie in hours, accepting floats, for anon sessions and logged in
+      sessions. Default is (0, 12). 0 means not to use a session cookie (== not
+      to establish a session) and makes only sense for anon users.
+  * cfg.cookie_httponly is new and defaults to True.
+
+  Removed features:
+  * Removed cfg.traceback_* settings (use logging configuration)
+  * Removed old session code and settings:
+    * Removed cfg.session_handler and session_id_handler (use cfg.session_service)
+    * Removed cfg.anonymous_session_lifetime (use cfg.cookie_lifetime)
+
+  Fixes:
+  * Fix ScriptContext URL default value
+  * AttachFile: get the rename field content from qs args, too
+  * Changed code to support werkzeug 0.5pre
+  * run_server param name need to match Config attribute name 'debug'
+  * Fix wiki regex samples in farmconfig
+  * 1.6.0a mig script/converter: fixed converter bug for parser sections
+  * login action: fix formatting of error messages
+  * AttachFile do=view: quote filename and pagename params for EmbedObject
+    macro call
+  * unsubscribe action: add msg types so icons get displayed
+  * Only save session data if we also have a cookie establishing a session
+  * suid: simplify and fix, bigger selection box
+  * Drawings: fix KeyError for non-existing map file
+
+
+Version 1.9.0beta1:
   New features:
     * HINT: MoinMoin requires Python 2.4 now. If you only have Python 2.3 and
             you don't want to upgrade it, please use MoinMoin 1.8.x.
