@@ -7,15 +7,20 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import tempfile
+import os
 import py
+import tempfile
 import zipfile
 
-from MoinMoin import wikiutil
-from MoinMoin.Page import Page
+from datetime import datetime
+from MoinMoin import user, wikiutil
+from MoinMoin.action import AttachFile
 from MoinMoin.action.PackagePages import PackagePages
-from MoinMoin.packages import Package, ScriptEngine, MOIN_PACKAGE_FILE, packLine, unpackLine
-from MoinMoin._tests import become_superuser
+from MoinMoin.packages import Package, ScriptEngine, MOIN_PACKAGE_FILE, ZipPackage, packLine, unpackLine
+from MoinMoin._tests import become_superuser, create_page, nuke_page
+from MoinMoin.Page import Page
+from MoinMoin.PageEditor import PageEditor
+
 
 
 class DebugPackage(Package, ScriptEngine):
@@ -110,5 +115,59 @@ class TestRealCreation:
         temp = tempfile.NamedTemporaryFile(suffix='.zip')
         package.collectpackage(['___//THIS PAGE SHOULD NOT EXIST\\___'], temp)
         assert not zipfile.is_zipfile(temp.name)
+
+
+class TestRealPackageInstallation:
+
+
+    def create_package(self, script, page=None):
+        # creates the package example zip file
+        userid = user.getUserIdentification(self.request)
+        COMPRESSION_LEVEL = zipfile.ZIP_DEFLATED
+        zip_file = tempfile.mkstemp(suffix='.zip')[1]
+        zf = zipfile.ZipFile(zip_file, "w", COMPRESSION_LEVEL)
+        if page:
+            timestamp = wikiutil.version2timestamp(page.mtime_usecs())
+            zi = zipfile.ZipInfo(filename="1", date_time=datetime.fromtimestamp(timestamp).timetuple()[:6])
+            zi.compress_type = COMPRESSION_LEVEL
+            zf.writestr(zi, page.get_raw_body().encode("utf-8"))
+        zf.writestr("1_attachment", "sample attachment")
+        zf.writestr(MOIN_PACKAGE_FILE, script.encode("utf-8"))
+        zf.close()
+        return zip_file
+
+    def testAttachments_after_page_creation(self):
+        pagename = u'PackageTestPageCreatedFirst'
+        page = create_page(self.request, pagename, u"This page has not yet an attachments dir")
+        script = u"""MoinMoinPackage|1
+AddRevision|1|%(pagename)s
+AddAttachment|1_attachment|my_test.txt|%(pagename)s
+Print|Thank you for using PackagePages!
+""" % {"pagename": pagename}
+        zip_file = self.create_package(script, page)
+        package = ZipPackage(self.request, zip_file)
+        package.installPackage()
+        assert Page(self.request, pagename).exists()
+        assert AttachFile.exists(self.request, pagename, "my_test.txt")
+
+        nuke_page(self.request, pagename)
+        os.unlink(zip_file)
+
+    def testAttachments_without_page_creation(self):
+        pagename = u"PackageAttachmentAttachWithoutPageCreation"
+        script = u"""MoinMoinPackage|1
+AddAttachment|1_attachment|my_test.txt|%(pagename)s
+Print|Thank you for using PackagePages!
+""" % {"pagename": pagename}
+        zip_file = self.create_package(script)
+        package = ZipPackage(self.request, zip_file)
+        package.installPackage()
+        assert not Page(self.request, pagename).exists()
+        assert AttachFile.exists(self.request, pagename, "my_test.txt")
+
+        nuke_page(self.request, pagename)
+        os.unlink(zip_file)
+
+
 coverage_modules = ['MoinMoin.packages']
 
