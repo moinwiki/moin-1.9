@@ -13,6 +13,7 @@ from MoinMoin import wikiutil, config
 from MoinMoin.action import ActionBase, AttachFile
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.Page import Page
+from MoinMoin.security.textcha import TextCha
 
 class Load(ActionBase):
     """ Load page action
@@ -35,6 +36,10 @@ class Load(ActionBase):
         _ = self._
         form = self.form
         request = self.request
+        # Currently we only check TextCha for upload (this is what spammers ususally do),
+        # but it could be extended to more/all attachment write access
+        if not TextCha(request).check_answer_from_form():
+            return status, _('TextCha: Wrong answer! Go back and try again...')
 
         comment = form.get('comment', [u''])[0]
         comment = wikiutil.clean_input(comment)
@@ -88,6 +93,7 @@ class Load(ActionBase):
 <dt>%(upload_label_comment)s</dt>
 <dd><input type="text" name="comment" size="80" maxlength="200"></dd>
 </dl>
+%(textcha)s
 <p>
 <input type="hidden" name="action" value="%(action_name)s">
 <input type="hidden" name="do" value="upload">
@@ -105,6 +111,7 @@ class Load(ActionBase):
     'pagename': self.pagename,
     'buttons_html': buttons_html,
     'action_name': self.form_trigger,
+    'textcha': TextCha(self.request).render(),
 }
 
 def execute(pagename, request):
