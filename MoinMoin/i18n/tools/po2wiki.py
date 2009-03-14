@@ -4,10 +4,17 @@
     prepend some processing instructions to a .po file to be able to put it
     onto moinmaster wiki, letting it get processed by gettext parser
 """
-def run():
-    import sys, os, xmlrpclib
-    sys.path.insert(0, '../..')
 
+master_url = "http://master18.moinmo.in/?action=xmlrpc2"
+user = "ThomasWaldmann" # must be a known Wiki account
+
+import sys, os
+import xmlrpclib
+
+password = os.environ.get("PASS", "")
+sys.path.insert(0, '../..')
+
+def run():
     excluded = ["en", ] # languages managed in repository, not in wiki
 
     lang = sys.argv[1]
@@ -40,12 +47,10 @@ def run():
 %s""" % (lang, lang, data)
 
 
-    user = "ThomasWaldmann" # must be a known Wiki account
-    password = os.environ.get("PASS", "")
     pagename = "MoinI18n/%s" % lang
     pagedata = data.encode('utf-8')
 
-    wiki = xmlrpclib.ServerProxy("http://master17.moinmo.in/?action=xmlrpc2")
+    wiki = xmlrpclib.ServerProxy(master_url)
     token = wiki.getAuthToken(user, password)
     mc = xmlrpclib.MultiCall(wiki)
     mc.applyAuthToken(token)

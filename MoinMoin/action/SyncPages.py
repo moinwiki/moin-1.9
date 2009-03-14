@@ -46,8 +46,12 @@ class ActionClass(object):
         self.status = []
         self.rollback = set()
 
-    def log_status(self, level, message="", substitutions=(), raw_suffix=""):
+    def log_status(self, level, message=u"", substitutions=(), raw_suffix=u""):
         """ Appends the message with a given importance level to the internal log. """
+        if isinstance(message, str):
+            message = message.decode("utf-8")
+        if isinstance(raw_suffix, str):
+            raw_suffix = raw_suffix.decode("utf-8")
         self.status.append((level, message, substitutions, raw_suffix))
 
     def register_rollback(self, func):
@@ -74,17 +78,18 @@ class ActionClass(object):
         table = []
 
         for line in self.status:
-            if line[1]:
-                if line[2]:
-                    macro_args = [line[1]] + list(line[2])
+            level, message, substitutions, raw_suffix = line
+            if message:
+                if substitutions:
+                    macro_args = [message] + list(substitutions)
                     message = u"<<GetText2(|%s)>>" % (packLine(macro_args), )
                 else:
-                    message = u"<<GetText(%s)>>" % (line[1], )
+                    message = u"<<GetText(%s)>>" % (message, )
             else:
                 message = u""
-            table.append(table_line % {"smiley": line[0][1],
+            table.append(table_line % {"smiley": level[1],
                                        "message": message,
-                                       "raw_suffix": line[3].replace("\n", "<<BR>>")})
+                                       "raw_suffix": raw_suffix.replace("\n", "<<BR>>")})
 
         return "\n".join(table)
 
