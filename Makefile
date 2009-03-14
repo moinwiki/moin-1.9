@@ -61,6 +61,10 @@ pagepacks:
 	
 dist:
 	-rm MANIFEST
+	-rm -rf tests/wiki
+	-rm -rf wiki/data/cache/{__metalock__,__session__,wikiconfig}
+	->wiki/data/event-log
+	->wiki/data/edit-log
 	python setup.py sdist
 
 # Create patchlevel module
