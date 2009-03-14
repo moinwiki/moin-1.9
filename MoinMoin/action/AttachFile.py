@@ -527,17 +527,6 @@ def upload_form(pagename, request, msg=''):
     request.theme.send_closing_html()
 
 
-def preprocess_filename(filename):
-    """ preprocess the filename we got from upload form,
-        strip leading drive and path (IE misbehaviour)
-    """
-    if filename and len(filename) > 1 and (filename[1] == ':' or filename[0] == '\\'): # C:.... or \path... or \\server\...
-        bsindex = filename.rfind('\\')
-        if bsindex >= 0:
-            filename = filename[bsindex+1:]
-    return filename
-
-
 def _do_upload(pagename, request):
     _ = request.getText
     # Currently we only check TextCha for upload (this is what spammers ususally do),

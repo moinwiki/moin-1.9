@@ -52,7 +52,6 @@ class Load(ActionBase):
         else:
             target = filename
 
-        target = AttachFile.preprocess_filename(target)
         target = wikiutil.clean_input(target)
 
         if target:
