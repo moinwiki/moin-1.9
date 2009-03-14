@@ -670,11 +670,11 @@ class Formatter(FormatterBase):
         kw['src'] = src = ci.member_url(drawing + u'.png')
         kw['css'] = 'drawing'
 
-        mapfile = ci.get(drawing + u'.map')
         try:
+            mapfile = ci.get(drawing + u'.map')
             map = mapfile.read()
             mapfile.close()
-        except (IOError, OSError):
+        except (KeyError, IOError, OSError):
             map = ''
         if map:
             # we have a image map. inline it and add a map ref to the img tag
