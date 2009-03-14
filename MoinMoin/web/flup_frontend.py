@@ -18,9 +18,13 @@
     AJP from a bound network or unix socket, in different flavours of
     multiprocessing/multithreading.
 
-    @copyright: 2008 MoinMoin:FlorianKrupicka
+    @copyright: 2008 MoinMoin:FlorianKrupicka,
+                2009 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
+
+import os, sys
+
 try:
     import flup.server.fcgi
     have_flup = True
@@ -38,6 +42,7 @@ from MoinMoin import log
 logging = log.getLogger(__name__)
 
 if have_flup:
+    from flup.server.fcgi_base import FCGI_RESPONDER
     class FlupFrontEnd(ServerFrontEnd):
         def add_options(self):
             super(FlupFrontEnd, self).add_options()
@@ -72,9 +77,41 @@ if have_flup:
 
             mod = self.server_types[server_type]
             mod = __import__(mod, fromlist=['WSGIServer'])
-            WSGIServer = mod.WSGIServer
+            WSGIServerWrapped = mod.WSGIServer
+
+            class WSGIServer(WSGIServerWrapped):
+                def __init__(self, application, environ=None,
+                             multithreaded=True, multiprocess=False,
+                             bindAddress=None, umask=None, multiplexed=False,
+                             debug="off", roles=(FCGI_RESPONDER, )):
+                    WSGIServerWrapped.__init__(self, application, environ=environ,
+                                               multithreaded=multithreaded, multiprocess=multiprocess,
+                                               bindAddress=bindAddress, umask=umask, multiplexed=multiplexed,
+                                               debug=debug, roles=roles)
+
+                def error(self, req):
+                    """ Override the default handler, so it implements debug=web/external/off. """
+                    if self.debug == 'external':
+                        raise
+                    elif self.debug == 'web':
+                        import cgitb
+                        req.stdout.write('Content-Type: text/html\r\n\r\n' +
+                                         cgitb.html(sys.exc_info()))
+                    else: # 'off'
+                        errorpage = """<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>Unhandled Exception</title>
+</head><body>
+<h1>Unhandled Exception</h1>
+<p>An unhandled exception was thrown by the application.</p>
+</body></html>
+"""
+                        req.stdout.write('Content-Type: text/html\r\n\r\n' + errorpage)
+
 
             kwargs = {}
+
+            kwargs['debug'] = options.debug or os.environ.get('MOIN_DEBUGGER', 'off')
 
             if options.port:
                 kwargs['bindAddress'] = (options.interface, options.port)
