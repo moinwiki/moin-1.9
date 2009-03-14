@@ -567,7 +567,7 @@ def _do_upload(pagename, request):
     if overwrite and not request.user.may.delete(pagename):
         return _('You are not allowed to overwrite a file attachment of this page.')
 
-    filename = form.get('file__filename__')
+    filename = form.get('file__filename__', u'')
     rename = form.get('rename', [u''])[0].strip()
     if rename:
         target = rename
