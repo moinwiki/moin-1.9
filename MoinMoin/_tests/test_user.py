@@ -158,7 +158,7 @@ class TestLoginWithPassword(object):
         name = u"__TestUser__"
         password = u"ekfdweurwerh"
         email = "__TestUser__@moinhost"
-        self.createUser(name, password, True, email=email)
+        self.createUser(name, password, email=email)
         theuser = user.User(self.request, name=name)
         assert theuser.email == ""
 
@@ -169,7 +169,7 @@ class TestLoginWithPassword(object):
         name = u"__TestUser2__"
         password = u"ekERErwerwerh"
         email = "__TestUser2__@moinhost"
-        self.createUser(name, password, True, email=email)
+        self.createUser(name, password, email=email)
         uid = user.getUserId(self.request, name)
         theuser = user.User(self.request, uid)
         assert theuser.email == email
