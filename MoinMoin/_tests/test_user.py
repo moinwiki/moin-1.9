@@ -3,6 +3,7 @@
     MoinMoin - MoinMoin.user Tests
 
     @copyright: 2003-2004 by Juergen Hermann <jh@web.de>
+                2009 by ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -150,14 +151,38 @@ class TestLoginWithPassword(object):
         theuser = user.User(self.request, name=name, password='12345')
         assert theuser.enc_password[:6] == '{SSHA}'
 
+    def test_for_email_attribute_by_name(self):
+        """
+        checks for no access to the email attribute by getting the user object from name
+        """
+        name = u"__TestUser__"
+        password = u"ekfdweurwerh"
+        email = "__TestUser__@moinhost"
+        self.createUser(name, password, email=email)
+        theuser = user.User(self.request, name=name)
+        assert theuser.email == ""
+
+    def test_for_email_attribut_by_uid(self):
+        """
+        checks access to the email attribute by getting the user object from the uid
+        """
+        name = u"__TestUser2__"
+        password = u"ekERErwerwerh"
+        email = "__TestUser2__@moinhost"
+        self.createUser(name, password, email=email)
+        uid = user.getUserId(self.request, name)
+        theuser = user.User(self.request, uid)
+        assert theuser.email == email
+
     # Helpers ---------------------------------------------------------
 
-    def createUser(self, name, password, pwencoded=False):
+    def createUser(self, name, password, pwencoded=False, email=None):
         """ helper to create test user
         """
         # Create user
         self.user = user.User(self.request)
         self.user.name = name
+        self.user.email = email
         if not pwencoded:
             password = user.encodePassword(password)
         self.user.enc_password = password
