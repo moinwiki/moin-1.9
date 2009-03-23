@@ -218,7 +218,7 @@ def execute(pagename, request):
 
     if show_hitcounts:
         from MoinMoin.stats import hitcounts
-        request.write(hitcounts.linkto(pagename, request, 'page=' + wikiutil.url_quote_plus(pagename)))
+        request.write(hitcounts.linkto(pagename, request, 'page=' + wikiutil.url_quote(pagename)))
     elif show_general:
         general(page, pagename, request)
     else:
