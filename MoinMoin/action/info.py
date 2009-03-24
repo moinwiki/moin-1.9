@@ -32,8 +32,8 @@ def execute(pagename, request):
                       f.text(_("Page size: %d") % page.size()),
                       f.paragraph(0))
 
-        import sha
-        digest = sha.new(page.get_raw_body().encode(config.charset)).hexdigest().upper()
+        from MoinMoin.support.python_compatibility import hash_new
+        digest = hash_new('sha1', page.get_raw_body().encode(config.charset)).hexdigest().upper()
         request.write(f.paragraph(1),
                       f.rawHTML('%(label)s <tt>%(value)s</tt>' % {
                           'label': _("SHA digest of this page's content is:"),
@@ -176,7 +176,7 @@ def execute(pagename, request):
 
         div = html.DIV(id="page-history")
         div.append(html.INPUT(type="hidden", name="action", value="diff"))
-        div.append(history_table.toHTML())
+        div.append(history_table.render(method="GET"))
 
         form = html.FORM(method="GET", action="")
         form.append(div)
@@ -218,7 +218,7 @@ def execute(pagename, request):
 
     if show_hitcounts:
         from MoinMoin.stats import hitcounts
-        request.write(hitcounts.linkto(pagename, request, 'page=' + wikiutil.url_quote_plus(pagename)))
+        request.write(hitcounts.linkto(pagename, request, 'page=' + wikiutil.url_quote(pagename)))
     elif show_general:
         general(page, pagename, request)
     else:

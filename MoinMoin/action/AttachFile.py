@@ -1038,7 +1038,7 @@ def send_viewfile(pagename, request):
                 fmt.url(0))
         request.write('For using an external program follow this link %s' % link)
         return
-    request.write(m.execute('EmbedObject', u'target=%s, pagename=%s' % (filename, pagename)))
+    request.write(m.execute('EmbedObject', u'target="%s", pagename="%s"' % (filename, pagename)))
     return
 
 
@@ -1107,7 +1107,7 @@ def do_admin_browser(request):
 
         browser = DataBrowserWidget(request)
         browser.setData(data)
-        return browser.toHTML()
+        return browser.render(method="GET")
 
     return ''
 

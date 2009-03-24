@@ -1,0 +1,20 @@
+MoinMoin Documentation Overview
+===============================
+
+docs/INSTALL.html: generic instructions about installing MoinMoin
+
+docs/UPDATE.html: generic instructions about updating MoinMoin
+
+docs/CHANGES: if you are upgrading from an older moin version, please
+              completely read all changes that happened after the version you
+              were using until now (in order)- otherwise you might miss some
+              important upgrading and configuration hints.
+              Starting with 1.5.3, update installation hints are marked with
+              HINT. They assume you are upgrading from the last release version
+              before (e.g. from 1.5.2 to 1.5.3).
+
+docs/README.migration: migration procedure for your data_dir (read this file
+                       to know how to upgrade your DATA).
+                       You MUST read UPDATE.html and CHANGES also for important
+                       infos about general update procedure and config changes.
+
