@@ -1,23 +1,8 @@
-MoinMoin Documentation Overview
-===============================
-
-docs/INSTALL.html: generic instructions about installing MoinMoin
-
-docs/UPDATE.html: generic instructions about updating MoinMoin
-
-docs/README.migration: migration procedure for your data_dir
-
-docs/CHANGES (this file): please completely read it until you reach the version
-                          you were using until now - otherwise you might miss
-                          some important upgrading and configuration hints.
-                          Starting with 1.5.3, update installation hints are
-                          marked with HINT. They assume you are upgrading from
-                          the last release version before (e.g. from 1.5.2 to
-                          1.5.3).
-
-
 MoinMoin Version History
 ========================
+
+Please note: Starting from the MoinMoin version you used previously, you
+should read all more recent entries (or at least everything marked with HINT).
 
 This release has known bugs (see MoinMoin:MoinMoinBugs), but we think it is
 already better than the previous stable release. Our release policy is not
