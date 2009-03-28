@@ -41,7 +41,7 @@ def execute(pagename, request):
                       f.paragraph(0))
 
         # show attachments (if allowed)
-        attachment_info = action.getHandler(request, 'AttachFile', 'info')
+        attachment_info = action.getHandler(request.cfg, 'AttachFile', 'info')
         if attachment_info:
             request.write(attachment_info(pagename, request))
 
