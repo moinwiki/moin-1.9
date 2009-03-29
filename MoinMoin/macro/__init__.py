@@ -20,6 +20,9 @@
 from MoinMoin.util import pysupport
 modules = pysupport.getPackageModules(__file__)
 
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 import re, time, os
 from MoinMoin import action, config, util
 from MoinMoin import wikiutil, i18n
@@ -91,17 +94,6 @@ class Macro:
         # Initialized on execute
         self.name = None
 
-    def _wrap(self, function, args, fixed=[]):
-        try:
-            return wikiutil.invoke_extension_function(self.request, function,
-                                                      args, fixed)
-        except ValueError, e:
-            return self.format_error(e)
-
-    def format_error(self, err):
-        """ format an error object for output instead of normal macro output """
-        return self.formatter.text(u'<<%s: %s>>' % (self.name, err.args[0]))
-
     def execute(self, macro_name, args):
         """ Get and execute a macro
 
@@ -112,20 +104,34 @@ class Macro:
         try:
             call = wikiutil.importPlugin(self.cfg, 'macro', macro_name,
                                          function='macro_%s' % macro_name)
-            execute = lambda _self, _args: _self._wrap(call, _args, [self])
+            execute = lambda _self, _args: wikiutil.invoke_extension_function(
+                                               _self.request, call, _args, [_self])
         except wikiutil.PluginAttributeError:
             # fall back to old execute() method, no longer recommended
             execute = wikiutil.importPlugin(self.cfg, 'macro', macro_name)
         except wikiutil.PluginMissingError:
             try:
                 call = getattr(self, 'macro_%s' % macro_name)
-                execute = lambda _self, _args: _self._wrap(call, _args)
+                execute = lambda _self, _args: wikiutil.invoke_extension_function(
+                                                   _self.request, call, _args, [])
             except AttributeError:
                 if macro_name in i18n.wikiLanguages():
                     execute = self.__class__._m_lang
                 else:
                     raise ImportError("Cannot load macro %s" % macro_name)
-        return execute(self, args)
+        try:
+            return execute(self, args)
+        except Exception, err:
+            # we do not want that a faulty macro aborts rendering of the page
+            # and makes the wiki UI unusable (by emitting a Server Error),
+            # thus, in case of exceptions, we just log the problem and return
+            # some standard text.
+            logging.exception("Macro %s raised an exception:" % self.name)
+            _ = self.request.getText
+            return self.formatter.text(_('<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>') % {
+                   'macro_name': self.name,
+                   'error_msg': str(err),
+                 })
 
     def _m_lang(self, text):
         """ Set the current language for page content.
