@@ -218,13 +218,10 @@ def execute(macro, text):
     if 'calparms' in macro.form:
         has_calparms = 1 # yes!
         text2 = macro.form['calparms']
-        try:
-            cparmpagename, cparmyear, cparmmonth, cparmoffset, cparmoffset2, cparmheight6, cparmanniversary, cparmtemplate = \
-                parseargs(request, text2, thispage, currentyear, currentmonth, 0, 0, False, False, u'')
-            # Note: cparmheight6 and cparmanniversary are not used, they are just there
-            # to have a consistent parameter string in calparms and macro args
-        except (ValueError, TypeError), err:
-            return macro.format_error(err)
+        cparmpagename, cparmyear, cparmmonth, cparmoffset, cparmoffset2, cparmheight6, cparmanniversary, cparmtemplate = \
+            parseargs(request, text2, thispage, currentyear, currentmonth, 0, 0, False, False, u'')
+        # Note: cparmheight6 and cparmanniversary are not used, they are just there
+        # to have a consistent parameter string in calparms and macro args
     else:
         has_calparms = 0
 
@@ -232,11 +229,8 @@ def execute(macro, text):
         text = u''
 
     # parse and check arguments
-    try:
-        parmpagename, parmyear, parmmonth, parmoffset, parmoffset2, parmheight6, anniversary, parmtemplate = \
-            parseargs(request, text, thispage, currentyear, currentmonth, 0, 0, False, False, u'')
-    except (ValueError, TypeError), err:
-        return macro.format_error(err)
+    parmpagename, parmyear, parmmonth, parmoffset, parmoffset2, parmheight6, anniversary, parmtemplate = \
+        parseargs(request, text, thispage, currentyear, currentmonth, 0, 0, False, False, u'')
 
     # does url have calendar params and is THIS the right calendar to modify (we can have multiple
     # calendars on the same page)?
