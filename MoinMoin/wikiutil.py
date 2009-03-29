@@ -112,6 +112,8 @@ def url_unquote(s, want_unicode=None):
         assert want_unicode is None
     except AssertionError:
         log.exception("call with deprecated want_unicode param, please fix caller")
+    if isinstance(s, unicode):
+        s = s.encode(config.charset)
     return werkzeug.url_unquote(s, charset=config.charset, errors='fallback:iso-8859-1')
 
 
