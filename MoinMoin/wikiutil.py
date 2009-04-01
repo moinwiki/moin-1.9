@@ -858,6 +858,7 @@ MIMETYPES_MORE = {
  '.cfg': 'text/plain',
  '.conf': 'text/plain',
  '.irc': 'text/plain',
+ '.md5': 'text/plain',
 }
 [mimetypes.add_type(mimetype, ext, True) for ext, mimetype in MIMETYPES_MORE.items()]
 

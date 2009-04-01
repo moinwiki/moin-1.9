@@ -137,6 +137,11 @@ Prints a table of contents.
 
  maxdepth:: maximum depth the table of contents is generated for (defaults to unlimited)
     """
+    try:
+        mindepth = int(macro.request.getPragma('section-numbers', 1))
+    except (ValueError, TypeError):
+        mindepth = 1
+
     if maxdepth is None:
         maxdepth = 99
 
@@ -176,7 +181,7 @@ Prints a table of contents.
         if txt is None:
             incl_id = id
             continue
-        if lvl > maxdepth or id is None:
+        if lvl < mindepth or lvl > maxdepth or id is None:
             continue
         if lvl < lastlvl:
             lastlvl = lvl
@@ -188,7 +193,7 @@ Prints a table of contents.
         if txt is None:
             incl_id = id
             continue
-        if lvl > maxdepth or id is None:
+        if lvl < mindepth or lvl > maxdepth or id is None:
             continue
 
         # will be reset by pop_unique_ids below
