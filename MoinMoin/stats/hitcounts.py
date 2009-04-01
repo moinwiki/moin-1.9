@@ -146,12 +146,10 @@ def text(pagename, request, params=''):
     # check params
     filterpage = None
     if params.startswith('page='):
-        params = params[len('page='):]
-        params = wikiutil.url_unquote(params, want_unicode=False)
-        filterpage = wikiutil.decodeUserInput(params)
+        filterpage = wikiutil.url_unquote(params[len('page='):])
 
-    if request and request.form and 'page' in request.form:
-        filterpage = request.form['page'][0]
+    if request and request.values and 'page' in request.values:
+        filterpage = request.values['page']
 
     days, views, edits = get_data(pagename, request, filterpage)
 
@@ -200,8 +198,8 @@ def draw(pagename, request):
 
     # check params
     filterpage = None
-    if request and request.form and 'page' in request.form:
-        filterpage = request.form['page'][0]
+    if request and request.values and 'page' in request.values:
+        filterpage = request.values['page']
 
     days, views, edits = get_data(pagename, request, filterpage)
 
@@ -252,11 +250,8 @@ def draw(pagename, request):
         (request.cfg.chart_options['width'], request.cfg.chart_options['height']),
         image, days)
 
-    headers = [
-        "Content-Type: image/gif",
-        "Content-Length: %d" % len(image.getvalue()),
-    ]
-    request.emit_http_headers(headers)
+    request.content_type = 'image/gif'
+    request.content_length = len(image.getvalue())
 
     # copy the image
     image.reset()

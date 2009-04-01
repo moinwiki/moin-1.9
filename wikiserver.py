@@ -14,7 +14,7 @@ import sys, os
 
 # a1) Path of the directory where the MoinMoin code package is located.
 #     Needed if you installed with --prefix=PREFIX or you didn't use setup.py.
-#sys.path.insert(0, 'PREFIX/lib/python2.3/site-packages')
+#sys.path.insert(0, 'PREFIX/lib/python2.4/site-packages')
 
 # a2) Path of the directory where wikiconfig.py / farmconfig.py is located.
 moinpath = os.path.abspath(os.path.normpath(os.path.dirname(sys.argv[0])))
@@ -27,9 +27,6 @@ os.chdir(moinpath)
 #    See wiki/config/logging/... for some sample config files.
 from MoinMoin import log
 log.load_config('wikiserverlogging.conf')
-
-# Debug mode - show detailed error reports
-#os.environ['MOIN_DEBUG'] = '1'
 
 from MoinMoin.script import MoinScript
 

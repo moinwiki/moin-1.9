@@ -157,7 +157,6 @@ General syntax: moin [options] maint mkpagepacks [mkpagepacks-options]
         self.init_request() # this request will work on a test wiki in tests/wiki/ directory
                             # we assume that there are current moinmaster pages there
         request = self.request
-        request.form = request.args = request.setup_args()
 
         if not ('tests/wiki' in request.cfg.data_dir.replace("\\", "/") and 'tests/wiki' in request.cfg.data_underlay_dir.replace("\\", "/")):
             import sys
