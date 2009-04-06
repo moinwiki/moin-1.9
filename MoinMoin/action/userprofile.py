@@ -17,9 +17,9 @@ def execute(pagename, request):
     if not request.user.isSuperUser():
         request.theme.add_msg(_("Only superuser is allowed to use this action."), "error")
     else:
-        user_name = form.get('name', [''])[0]
-        key = form.get('key', [''])[0]
-        val = form.get('val', [''])[0]
+        user_name = form.get('name', '')
+        key = form.get('key', '')
+        val = form.get('val', '')
         if key in cfg.user_checkbox_fields:
             val = int(val)
         uid = user.getUserId(request, user_name)

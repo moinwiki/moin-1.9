@@ -11,7 +11,6 @@
 """
 
 from MoinMoin import config, user
-from MoinMoin.request import request_twisted
 from MoinMoin.auth import BaseAuth
 
 class SSLClientCertAuth(BaseAuth):
@@ -35,60 +34,53 @@ class SSLClientCertAuth(BaseAuth):
     def request(self, request, user_obj, **kw):
         u = None
         changed = False
-        # check if we are running Twisted
-        if isinstance(request, request_twisted.Request):
-            return user_obj, True # not supported if we run twisted
-            # Addendum: this seems to need quite some twisted insight and coding.
-            # A pointer i got on #twisted: divmod's vertex.sslverify
-            # If you really need this, feel free to implement and test it and
-            # submit a patch if it works.
-        else:
-            env = request.env
-            if env.get('SSL_CLIENT_VERIFY', 'FAILURE') == 'SUCCESS':
 
-                # check authority list if given
-                if self.authorities and env.get('SSL_CLIENT_I_DN_OU') in self.authorities:
-                    return user_obj, True
+        env = request.environ
+        if env.get('SSL_CLIENT_VERIFY', 'FAILURE') == 'SUCCESS':
 
-                email_lower = None
-                if self.email_key:
-                    email = env.get('SSL_CLIENT_S_DN_Email', '').decode(config.charset)
-                    email_lower = email.lower()
-                commonname_lower = None
-                if self.name_key:
-                    commonname = env.get('SSL_CLIENT_S_DN_CN', '').decode(config.charset)
-                    commonname_lower = commonname.lower()
-                if email_lower or commonname_lower:
-                    for uid in user.getUserList(request):
-                        u = user.User(request, uid,
-                                      auth_method=self.name, auth_attribs=())
-                        if self.email_key and email_lower and u.email.lower() == email_lower:
-                            u.auth_attribs = ('email', 'password')
-                            if self.use_name and commonname_lower != u.name.lower():
-                                u.name = commonname
-                                changed = True
-                                u.auth_attribs = ('email', 'name', 'password')
-                            break
-                        if self.name_key and commonname_lower and u.name.lower() == commonname_lower:
-                            u.auth_attribs = ('name', 'password')
-                            if self.use_email and email_lower != u.email.lower():
-                                u.email = email
-                                changed = True
-                                u.auth_attribs = ('name', 'email', 'password')
-                            break
-                    else:
-                        u = None
-                    if u is None:
-                        # user wasn't found, so let's create a new user object
-                        u = user.User(request, name=commonname_lower, auth_username=commonname_lower,
-                                      auth_method=self.name)
+            # check authority list if given
+            if self.authorities and env.get('SSL_CLIENT_I_DN_OU') in self.authorities:
+                return user_obj, True
+
+            email_lower = None
+            if self.email_key:
+                email = env.get('SSL_CLIENT_S_DN_Email', '').decode(config.charset)
+                email_lower = email.lower()
+            commonname_lower = None
+            if self.name_key:
+                commonname = env.get('SSL_CLIENT_S_DN_CN', '').decode(config.charset)
+                commonname_lower = commonname.lower()
+            if email_lower or commonname_lower:
+                for uid in user.getUserList(request):
+                    u = user.User(request, uid,
+                                  auth_method=self.name, auth_attribs=())
+                    if self.email_key and email_lower and u.email.lower() == email_lower:
+                        u.auth_attribs = ('email', 'password')
+                        if self.use_name and commonname_lower != u.name.lower():
+                            u.name = commonname
+                            changed = True
+                            u.auth_attribs = ('email', 'name', 'password')
+                        break
+                    if self.name_key and commonname_lower and u.name.lower() == commonname_lower:
                         u.auth_attribs = ('name', 'password')
-                        if self.use_email:
+                        if self.use_email and email_lower != u.email.lower():
                             u.email = email
+                            changed = True
                             u.auth_attribs = ('name', 'email', 'password')
-            elif user_obj and user_obj.auth_method == self.name:
-                user_obj.valid = False
-                return user_obj, False
+                        break
+                else:
+                    u = None
+                if u is None:
+                    # user wasn't found, so let's create a new user object
+                    u = user.User(request, name=commonname_lower, auth_username=commonname_lower,
+                                  auth_method=self.name)
+                    u.auth_attribs = ('name', 'password')
+                    if self.use_email:
+                        u.email = email
+                        u.auth_attribs = ('name', 'email', 'password')
+        elif user_obj and user_obj.auth_method == self.name:
+            user_obj.valid = False
+            return user_obj, False
         if u and self.autocreate:
             u.create_or_update(changed)
         if u and u.valid:
