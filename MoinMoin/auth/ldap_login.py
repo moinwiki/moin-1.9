@@ -76,10 +76,10 @@ class LDAPAuth(BaseAuth):
         coding='utf-8', # coding used for ldap queries and result values
         timeout=10, # how long we wait for the ldap server [s]
         start_tls=0, # 0 = No, 1 = Try, 2 = Required
-        tls_cacertdir='',
-        tls_cacertfile='',
-        tls_certfile='',
-        tls_keyfile='',
+        tls_cacertdir=None,
+        tls_cacertfile=None,
+        tls_certfile=None,
+        tls_keyfile=None,
         tls_require_cert=0, # 0 == ldap.OPT_X_TLS_NEVER (needed for self-signed certs)
         bind_once=False, # set to True to only do one bind - useful if configured to bind as the user on the first attempt
         autocreate=False, # set to True if you want to autocreate user profiles
