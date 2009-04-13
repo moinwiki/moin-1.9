@@ -7,6 +7,27 @@
     extracting translateable strings).
     Also, some strings need to be organized somehow.
 
+    TODO i18n.strings / general:
+    * check page lists (complete? correct?)
+    * update po files on master19 wiki
+    * fix "de" translation for more experiments
+    * fix other translations (can be done using ##master-page, but help
+      from a native speaker would be the preferred solution)
+    * use pagelists here + translation from po file if there is no SystemPagesInXxGroup
+      for creation of language packs (keep group pages as long as needed!)
+    * delete SystemPagesInGermanGroup to try it
+    * delete other SystemPagesInXXXGroup if their po file is complete
+
+    TODO "checktranslation" plugin action for master19:
+    * uses request.values.get("lang", request.user.lang or "en")
+    * uses page lists to create table:
+      * | OriginalPageLink (raw) | TranslatedPageLink (edit) | <update> |
+      * page links make it easy to see what exists and what not
+      * additionally raw and edit links are given to support c&p
+      * <update> can indicate an update need for the translation
+    * list pages on master19 that are not referenced by any original or
+      translated page name (in any supported language)
+
     @copyright: 2009 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
