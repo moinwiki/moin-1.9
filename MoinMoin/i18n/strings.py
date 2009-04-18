@@ -244,6 +244,13 @@ course_pages = [
     _('WikiCourseHandOut'),
 ]
 
+all_essential_pages = (
+    essential_system_pages +
+    essential_category_pages +
+    essential_template_pages +
+    essential_help_pages
+)
+
 all_pages = (
     all_system_pages +
     all_category_pages +
