@@ -403,6 +403,10 @@ def handle_login(request, userobj=None, username=None, password=None,
 
 def handle_logout(request, userobj):
     """ Logout the passed user from every configured authentication method. """
+    if userobj is None:
+        # not logged in
+        return userobj
+
     if userobj.auth_method == 'setuid':
         # we have no authmethod object for setuid
         userobj = request._setuid_real_user
