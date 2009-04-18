@@ -130,7 +130,7 @@ class Macro:
             _ = self.request.getText
             return self.formatter.text(_('<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>') % {
                    'macro_name': self.name,
-                   'error_msg': str(err),
+                   'error_msg': err.args[0], # note: str(err) or unicode(err) does not work for py2.4/5/6
                  })
 
     def _m_lang(self, text):
