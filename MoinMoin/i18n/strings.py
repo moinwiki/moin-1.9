@@ -18,16 +18,6 @@
     * delete SystemPagesInGermanGroup to try it
     * delete other SystemPagesInXXXGroup if their po file is complete
 
-    TODO "checktranslation" plugin action for master19:
-    * uses request.values.get("lang", request.user.lang or "en")
-    * uses page lists to create table:
-      * | OriginalPageLink (raw) | TranslatedPageLink (edit) | <update> |
-      * page links make it easy to see what exists and what not
-      * additionally raw and edit links are given to support c&p
-      * <update> can indicate an update need for the translation
-    * list pages on master19 that are not referenced by any original or
-      translated page name (in any supported language)
-
     @copyright: 2009 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
@@ -195,7 +185,7 @@ optional_help_pages = [
     _('HelpOnSlideShows/100 Creating the slides'),
     _('HelpOnSlideShows/900 Last but not least: Running your presentation'),
     _('HelpOnSmileys'),
-    _('HelpOnSpam '),
+    _('HelpOnSpam'),
     _('HelpOnSpellCheck'),
     _('HelpOnSuperUser'),
     _('HelpOnSynchronisation'),
@@ -269,7 +259,28 @@ all_pages = (
 )
 
 # a set with all the *_pages attribute names we have defined above
-pagesets = set([attr for attr in globals().keys() if attr.endswith("_pages")])
+pagesets = [
+    'not_translated_system_pages',
+    'essential_system_pages',
+    'essential_help_pages',
+    'essential_category_pages',
+    'essential_template_pages',
+    'essential_pages',
+    'optional_system_pages',
+    'optional_help_pages',
+    'optional_category_pages',
+    'optional_template_pages',
+    'optional_pages',
+    'translated_system_pages',
+    'all_system_pages',
+    'all_help_pages',
+    'all_category_pages',
+    'all_template_pages',
+    'admin_pages',
+    'course_pages',
+    'obsolete_pages',
+    'all_pages',
+]
 
 # we use Sun at index 0 and 7 to be compatible with EU and US day indexing
 # schemes, like it is also done within crontab entries:
