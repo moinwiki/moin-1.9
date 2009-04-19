@@ -244,11 +244,18 @@ course_pages = [
     _('WikiCourseHandOut'),
 ]
 
-all_essential_pages = (
+essential_pages = (
     essential_system_pages +
     essential_category_pages +
     essential_template_pages +
     essential_help_pages
+)
+
+optional_pages = (
+    optional_system_pages +
+    optional_category_pages +
+    optional_template_pages +
+    optional_help_pages
 )
 
 all_pages = (
@@ -260,6 +267,9 @@ all_pages = (
     obsolete_pages +
     course_pages
 )
+
+# a set with all the *_pages attribute names we have defined above
+pagesets = set([attr for attr in globals().keys() if attr.endswith("_pages")])
 
 # we use Sun at index 0 and 7 to be compatible with EU and US day indexing
 # schemes, like it is also done within crontab entries:
