@@ -33,8 +33,10 @@ not_translated_system_pages = [
     _('EditedSystemPages'),
     _('LocalSpellingWords'),
     _('SystemAdmin'),
+    _('SystemInfo'),
     _('ProjectTemplate'),
     _('ProjectGroupsTemplate'),
+    _('PermissionDeniedPage'),
 ]
 
 essential_system_pages = [
@@ -45,16 +47,17 @@ essential_system_pages = [
     _('FindPage'),
     _('MissingPage'),
     _('MissingHomePage'),
-    _('PermissionDeniedPage'),
-    _('SystemInfo'),
-    _('WikiHomePage'), # used by ...?
+    _('WikiHomePage'), # used by CategoryHomepage
+
+    # these are still in use, but should be killed:
+    _('WikiName'), # linked from misc. help/tips pages
+    _('WikiWikiWeb'), # used by FrontPage/WikiHomePage
 ]
 
 optional_system_pages = [
     _('FrontPage'),
     _('WikiSandBox'),
     _('InterWiki'),
-    _('WikiLicense'),
     _('AbandonedPages'),
     _('OrphanedPages'),
     _('WantedPages'),
@@ -67,6 +70,7 @@ optional_system_pages = [
     _('RandomPage'),
     _('XsltVersion'),
     _('FortuneCookies'), # use by RandomQuote macro
+    _('WikiLicense'), # does not exist, but can be created by wiki admin
 ]
 
 translated_system_pages = essential_system_pages + optional_system_pages
@@ -127,16 +131,12 @@ admin_pages = [
 
 # Stuff that should live on moinmo.in wiki:
 obsolete_pages = [
-    _('HelpMiscellaneous'),
-    _('HelpMiscellaneous/FrequentlyAskedQuestions'),
-    _('WikiWikiWeb'),
-    _('CamelCase'),
-    _('WikiName'),
 ]
 
 essential_help_pages = [
     _('HelpOnMoinWikiSyntax'), # used by edit action
     _('HelpOnCreoleSyntax'), # used by edit action
+    # HelpOnParsers/ReStructuredText/RstPrimer could be renamed and used in a similar way
 ]
 
 optional_help_pages = [
@@ -197,6 +197,9 @@ optional_help_pages = [
     _('HelpOnXmlPages'),
     _('HelpOnComments'),
     _('HelpOnSubscribing'),
+
+    # these are still in use, but should be killed:
+    _('CamelCase'), # linked from misc. help/course pages
 ]
 
 all_help_pages = essential_help_pages + optional_help_pages
@@ -258,7 +261,8 @@ all_pages = (
     course_pages
 )
 
-# a set with all the *_pages attribute names we have defined above
+# an list of page sets translators should look at,
+# ordered in the order translators should look at them
 pagesets = [
     'not_translated_system_pages',
     'essential_system_pages',
