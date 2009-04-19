@@ -26,17 +26,17 @@ _ = lambda x: x # dummy translation function
 
 # Some basic pages used for every language, but we only need them once in English (don't translate!):
 not_translated_system_pages = [
-    _('SystemPagesSetup'),
-    _('InterWikiMap'),
-    _('BadContent'),
-    _('LocalBadContent'),
-    _('EditedSystemPages'),
-    _('LocalSpellingWords'),
-    _('SystemAdmin'),
-    _('SystemInfo'),
-    _('ProjectTemplate'),
-    _('ProjectGroupsTemplate'),
-    _('PermissionDeniedPage'),
+    'SystemPagesSetup',
+    'InterWikiMap',
+    'BadContent',
+    'LocalBadContent',
+    'EditedSystemPages',
+    'LocalSpellingWords',
+    'SystemAdmin',
+    'SystemInfo',
+    'ProjectTemplate',
+    'ProjectGroupsTemplate',
+    'PermissionDeniedPage',
 ]
 
 essential_system_pages = [
