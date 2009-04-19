@@ -3,7 +3,7 @@
 MoinMoin - Package Generator
 
 @copyright: 2005 Alexander Schremmer,
-            2006 MoinMoin:ThomasWaldmann
+            2006-2009 MoinMoin:ThomasWaldmann
 @license: GNU GPL, see COPYING for details.
 """
 
@@ -12,14 +12,14 @@ import zipfile
 from datetime import datetime
 
 from MoinMoin.support.python_compatibility import set
-from MoinMoin import wikidicts, wikiutil
+from MoinMoin import wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.packages import packLine, MOIN_PACKAGE_FILE
 from MoinMoin.script import MoinScript
+from MoinMoin import i18n
+from MoinMoin.i18n import strings
+i18n.strings = strings
 
-EXTRA = u'extra'
-NODIST = u'nodist'
-ALL = u'all_languages'
 COMPRESSION_LEVEL = zipfile.ZIP_STORED
 
 class PluginScript(MoinScript):
@@ -47,43 +47,31 @@ General syntax: moin [options] maint mkpagepacks [mkpagepacks-options]
     def buildPageSets(self):
         """ Calculates which pages should go into which package. """
         request = self.request
+
+        languages = i18n.wikiLanguages()
+        pageset_names = ['all_pages', ] # TODO: refine later
         pageSets = {}
+        for lang in languages:
+            def trans(text, request=request, lang=lang, **kw):
+                return i18n.getText(text, request, lang, **kw)
 
-        allPages = set(request.rootpage.getPageList())
+            try:
+                lang_long = languages[lang]['x-language-in-english']
+                lang_long = lang_long.replace('/', '_').replace(' ', '_')
+            except KeyError:
+                lang_long = lang
 
-        systemPages = wikidicts.Group(request, "SystemPagesGroup").members()
+            for pageset_name in pageset_names:
+                pageset_orig = set(getattr(i18n.strings, pageset_name))
+                pageset_trans = set([trans(pn) for pn in pageset_orig])
+                key = u"%s_%s" % (lang_long, pageset_name)
+                pageset = pageset_trans
+                if lang != 'en':
+                    pageset -= pageset_orig
+                if pageset:
+                    print key, len(pageset)
+                    pageSets[key] = pageset
 
-        for pagename in systemPages:
-            if pagename.endswith("Group"):
-                #print x + " -> " + repr(wikidicts.Group(request, x).members())
-                self.gd.addgroup(request, pagename)
-
-        langPages = set()
-        for name, group in self.gd.dictdict.items():
-            groupPages = set(group.members() + [name])
-            name = name.replace("SystemPagesIn", "").replace("Group", "")
-            pageSets[name] = groupPages
-            langPages |= groupPages
-
-        specialPages = set(["SystemPagesGroup"])
-
-        masterNonSystemPages = allPages - langPages - specialPages
-
-        moinI18nPages = set([x for x in masterNonSystemPages if x.startswith("MoinI18n")])
-
-        nodistPages = moinI18nPages | set(["InterWikiMap", ])
-
-        extraPages = masterNonSystemPages - nodistPages
-
-        pageSets[ALL] = langPages
-
-        for name in pageSets.keys():
-            if name not in (u"English"):
-                pageSets[name] -= pageSets[u"English"]
-                pageSets[name] -= nodistPages
-
-        pageSets[EXTRA] = extraPages   # stuff that maybe should be in some language group
-        pageSets[NODIST] = nodistPages # we dont want to have them in dist archive
         return pageSets
 
     def packagePages(self, pagelist, filename, function):
@@ -131,23 +119,6 @@ General syntax: moin [options] maint mkpagepacks [mkpagepacks-options]
             except:
                 pass
 
-    def packageCompoundInstaller(self, bundledict, filename):
-        """ Creates a package which installs all other packages. """
-        try:
-            os.remove(filename)
-        except OSError:
-            pass
-        zf = zipfile.ZipFile(filename, "w", COMPRESSION_LEVEL)
-
-        script = [packLine(['MoinMoinPackage', '1']), ]
-
-        script += [packLine(["InstallPackage", "SystemPagesSetup", name + ".zip"])
-                   for name in bundledict if name not in (NODIST, EXTRA, ALL, u"English")]
-        script += [packLine(['Print', 'Installed all MoinMaster page bundles.'])]
-
-        zf.writestr(MOIN_PACKAGE_FILE, u"\n".join(script).encode("utf-8"))
-        zf.close()
-
     def mainloop(self):
         # self.options.wiki_url = 'localhost/'
         if self.options.wiki_url and '.' in self.options.wiki_url:
@@ -164,22 +135,16 @@ General syntax: moin [options] maint mkpagepacks [mkpagepacks-options]
             print "NEVER EVER RUN THIS ON A REAL WIKI!!! This must be run on a local testwiki."
             return
 
-        self.gd = wikidicts.GroupDict(request)
-        self.gd.reset()
-
         print "Building page sets ..."
         pageSets = self.buildPageSets()
 
         print "Creating packages ..."
         generate_filename = lambda name: os.path.join('tests', 'wiki', 'underlay', 'pages', 'SystemPagesSetup', 'attachments', '%s.zip' % name)
+        [self.packagePages(list(pages), generate_filename(name), "ReplaceUnderlay") for name, pages in pageSets.items()]
 
-        self.packageCompoundInstaller(pageSets, generate_filename(ALL))
-
-        [self.packagePages(list(pages), generate_filename(name), "ReplaceUnderlay")
-            for name, pages in pageSets.items() if not name in (u'English', ALL, NODIST)]
-
-        [self.removePages(list(pages))
-            for name, pages in pageSets.items() if not name in (u'English', ALL)]
+        print "Removing pagedirs of packaged pages ..."
+        dontkill = set(['SystemPagesSetup'])
+        [self.removePages(list(pages - dontkill)) for name, pages in pageSets.items()]
 
         print "Finished."
 
