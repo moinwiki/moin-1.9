@@ -8,14 +8,8 @@
     Also, some strings need to be organized somehow.
 
     TODO i18n.strings / general:
-    * check page lists (complete? correct?)
-    * update po files on master19 wiki
-    * fix "de" translation for more experiments
     * fix other translations (can be done using ##master-page, but help
       from a native speaker would be the preferred solution)
-    * use pagelists here + translation from po file if there is no SystemPagesInXxGroup
-      for creation of language packs (keep group pages as long as needed!)
-    * delete SystemPagesInGermanGroup to try it
     * delete other SystemPagesInXXXGroup if their po file is complete
 
     @copyright: 2009 MoinMoin:ThomasWaldmann
@@ -147,7 +141,6 @@ optional_help_pages = [
     _('HelpForUsers'),
     _('HelpIndex'),
     _('HelpOnAccessControlLists'),
-    _('HelpOnAcl'),
     _('HelpOnActions'),
     _('HelpOnActions/AttachFile'),
     _('HelpOnAdmonitions'),
