@@ -1083,6 +1083,7 @@ Please review the page and save then. Do not save this page as it is!""")
             raise self.EditConflict, msg
         elif newtext == self.get_raw_body():
             msg = _('You did not change the page content, not saved!')
+            self.lock.release()
             raise self.Unchanged, msg
         else:
             from MoinMoin.security import parseACL

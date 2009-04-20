@@ -104,6 +104,17 @@ Version 1.9.0beta1:
       See HelpOnAuthentication.
 
 
+Version 1.8.current:
+  Bug fixes:
+    * Fixed docs bug: see HINT about secrets configuration at version 1.8.0
+      (1.8.0 Other changes).
+
+  New features:
+    * ...
+
+  Other changes:
+    * ...
+
 Version 1.8.2:
   Bug fixes:
     * Fix AttachFile and antispam XSS issues.
@@ -268,6 +279,21 @@ Version 1.8.0:
       parameter is no longer supported.
 
   Other Changes: =============================================================
+    * HINT: new configuration for misc. secrets, please use either:
+          secrets = "MySecretLooongString!" # one secret for everything
+      or:
+          secrets = {
+              'xmlrpc/ProcessMail': 'yourmailsecret', # for mailimport
+              'xmlrpc/RemoteScript': 'yourremotescriptsecret',
+              'action/cache': 'yourcachesecret', # unguessable cache keys
+              'wikiutil/tickets': 'yourticketsecret', # edit tickets
+              'jabberbot': 'yourjabberbotsecret', # jabberbot communication
+          }
+      Secret strings must be at least 10 chars long.
+      Note: mail_import_secret setting is gone, use
+            secrets["xmlrpc/ProcessMail"] instead of it.
+      Note: jabberbot secret setting is gone, use
+            secrets["jabberbot"] instead of it.
     * HINT: user_autocreate setting was removed from wiki configuration and
       replaced by a autocreate=<boolean> parameter of the auth objects that
       support user profile auto creation.

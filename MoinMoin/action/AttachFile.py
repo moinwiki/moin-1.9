@@ -379,6 +379,7 @@ def _get_filelist(request, pagename):
 
 
 def error_msg(pagename, request, msg):
+    msg = wikiutil.escape(msg)
     request.theme.add_msg(msg, "error")
     Page(request, pagename).send_page()
 
@@ -504,7 +505,7 @@ def execute(pagename, request):
     if handler:
         msg = handler(pagename, request)
     else:
-        msg = _('Unsupported AttachFile sub-action: %s') % wikiutil.escape(do)
+        msg = _('Unsupported AttachFile sub-action: %s') % do
     if msg:
         error_msg(pagename, request, msg)
 
@@ -514,6 +515,8 @@ def _do_upload_form(pagename, request):
 
 
 def upload_form(pagename, request, msg=''):
+    if msg:
+        msg = wikiutil.escape(msg)
     _ = request.getText
 
     # Use user interface language for this generated page
@@ -770,8 +773,8 @@ def _do_move(pagename, request):
          'url': request.href(pagename),
          'do': 'attachment_move',
          'ticket': wikiutil.createTicket(request),
-         'pagename': pagename,
-         'attachment_name': filename,
+         'pagename': wikiutil.escape(pagename, 1),
+         'attachment_name': wikiutil.escape(filename, 1),
          'move': _('Move'),
          'cancel': _('Cancel'),
          'newname_label': _("New page name"),
@@ -901,13 +904,13 @@ def _do_install(pagename, request):
 
     if package.isPackage():
         if package.installPackage():
-            msg = _("Attachment '%(filename)s' installed.") % {'filename': wikiutil.escape(target)}
+            msg = _("Attachment '%(filename)s' installed.") % {'filename': target}
         else:
-            msg = _("Installation of '%(filename)s' failed.") % {'filename': wikiutil.escape(target)}
+            msg = _("Installation of '%(filename)s' failed.") % {'filename': target}
         if package.msg:
-            msg += "<br><pre>%s</pre>" % wikiutil.escape(package.msg)
+            msg += " " + package.msg
     else:
-        msg = _('The file %s is not a MoinMoin package file.') % wikiutil.escape(target)
+        msg = _('The file %s is not a MoinMoin package file.') % target
 
     upload_form(pagename, request, msg=msg)
 
@@ -1011,7 +1014,7 @@ def _do_unzip(pagename, request, overwrite=False):
         logging.exception("An exception within zip file attachment handling occurred:")
         msg = _("A severe error occurred:") + ' ' + str(err)
 
-    upload_form(pagename, request, msg=wikiutil.escape(msg))
+    upload_form(pagename, request, msg=msg)
 
 
 def send_viewfile(pagename, request):
