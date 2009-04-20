@@ -52,8 +52,7 @@ def page_link(request, page, querystr):
     @param querystr: a dict passed to wikiutil.makeQueryString
 
     """
-    query = wikiutil.makeQueryString(querystr, True)
-    return request.getQualifiedURL(page.url(request, query))
+    return request.getQualifiedURL(page.url(request, querystr))
 
 def page_change_message(msgtype, request, page, lang, **kwargs):
     """Prepare a notification text for a page change of given type
@@ -128,12 +127,13 @@ def user_created_message(request, _, sitename, username, email):
     @return: a dict containing message body and subject
     """
     subject = _("New user account created on %(sitename)s") % {'sitename': sitename or "Wiki"}
-    text = _("""Dear Superuser, a new user has just been created. Details follow:
+    text = _("""Dear Superuser, a new user has just been created on %(sitename)s". Details follow:
 
     User name: %(username)s
     Email address: %(useremail)s""") % {
          'username': username,
          'useremail': email,
+         'sitename': sitename or "Wiki",
          }
 
     return {'subject': subject, 'text': text}

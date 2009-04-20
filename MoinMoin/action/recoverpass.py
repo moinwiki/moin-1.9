@@ -173,7 +173,7 @@ Contact the owner of the wiki, who can enable email."""), 'warning')
             pw_checker = request.cfg.password_checker
             pw_error = None
             if pw_checker:
-                pw_error = pw_checker(name, newpass)
+                pw_error = pw_checker(request, name, newpass)
                 if pw_error:
                     msg = _("Password not acceptable: %s") % pw_error
             if not pw_error:

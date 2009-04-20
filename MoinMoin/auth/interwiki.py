@@ -20,9 +20,10 @@ class InterwikiAuth(BaseAuth):
     logout_possible = True
     login_inputs = ['username', 'password']
 
-    def __init__(self, trusted_wikis):
+    def __init__(self, trusted_wikis, autocreate=False):
         BaseAuth.__init__(self)
         self.trusted_wikis = trusted_wikis
+        self.autocreate = autocreate
 
     def login(self, request, user_obj, **kw):
         username = kw.get('username')
@@ -68,7 +69,8 @@ class InterwikiAuth(BaseAuth):
             if key not in request.cfg.user_transient_fields:
                 setattr(u, key, value)
         u.valid = True
-        u.create_or_update(True)
+        if self.autocreate:
+            u.create_or_update(True)
         logging.debug("successful interwiki auth for %r" % name)
         return ContinueLogin(u)
 
