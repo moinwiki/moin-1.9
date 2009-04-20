@@ -21,7 +21,7 @@ def macro_WantedPages(macro):
         return ''
 
     # Get allpages switch from the form
-    allpages = int(request.form.get('allpages', [0])[0]) != 0
+    allpages = int(request.values.get('allpages', 0)) != 0
 
     # Control bar - filter the list of pages
     # TODO: we should make this a widget and use on all page listing pages

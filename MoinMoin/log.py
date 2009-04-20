@@ -100,7 +100,7 @@ import warnings
 # 'CacheNeedsUpdate' string exception in Page.py is supported for backwards compat reasons:
 warnings.filterwarnings('ignore', r'catching of string exceptions is deprecated', module='MoinMoin.Page')
 
-# subprocess was added in python 2.4 - we can't use it as long as we do not require 2.4:
+# TODO: subprocess was added in python 2.4, we now can refactor the code to use it and remove this:
 warnings.filterwarnings('ignore', r'The popen\d? module is deprecated.  Use the subprocess module.')
 
 
@@ -153,16 +153,4 @@ def getLogger(name):
         if isinstance(levelnumber, int): # that list has also the reverse mapping...
             setattr(logger, levelname, levelnumber)
     return logger
-
-
-# Python 2.3's logging module has no .log, this provides it:
-if not hasattr(logging, 'log'):
-    def log(level, msg, *args, **kwargs):
-        if len(logging.root.handlers) == 0:
-            logging.basicConfig()
-        if logging.root.manager.disable >= level:
-            return
-        if level >= logging.root.getEffectiveLevel():
-            logging.root._log(level, msg, args, **kwargs)
-    logging.log = log
 

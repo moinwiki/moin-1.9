@@ -364,7 +364,7 @@ class Formatter(FormatterBase):
     def url(self, on, url=None, css=None, **kw):
         if url and url.startswith("/"):
             # convert to absolute path:
-            url = "%s%s"%(self.request.getBaseURL(), url)
+            url = "%s%s"%(self.request.base_url, url)
 
         if not on:
             self._cleanupUlinkNode()
@@ -457,7 +457,7 @@ class Formatter(FormatterBase):
             src = kw['src']
             if src.startswith("/"):
                 # convert to absolute path:
-                src = self.request.getBaseURL()+src
+                src = self.request.url_root + src
             image.setAttribute('fileref', src)
         if kw.has_key('width'):
             image.setAttribute('width', str(kw['width']))

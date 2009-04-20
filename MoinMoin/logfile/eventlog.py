@@ -46,7 +46,7 @@ class EventLog(LogFile):
                     # Save those http headers in UPPERcase
                     values[key.upper()] = value
         # Encode values in a query string TODO: use more readable format
-        values = wikiutil.makeQueryString(values, want_unicode=True)
+        values = wikiutil.makeQueryString(values)
         self._add(u"%d\t%s\t%s\n" % (mtime_usecs, eventtype, values))
 
     def parser(self, line):

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-24 04:45+0100\n"
+"POT-Creation-Date: 2009-04-19 23:09+0200\n"
 "PO-Revision-Date: 2006-12-05 12:04+0800\n"
 "Last-Translator: Amgalanbaatar Delegdorj <d.amgalanbaatar@gmail.com>\n"
 "Language-Team: Mongolia <d.amgalanbaatar@gmail.com>\n"
@@ -25,95 +25,22 @@ msgstr ""
 "X-HasWikiMarkup: True\n"
 "X-Direction: ltr\n"
 
-#, python-format
-msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
-msgstr ""
+msgid "The wiki is currently not reachable."
+msgstr "Вики одоогоор холбогдох боломжгүй байна."
 
+msgid "Invalid username or password."
+msgstr "Хэрэглэгчийн нэр эсвэл нууц үг буруу байна."
+
+#, python-format
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
-"search results!"
+"The remote wiki uses a different InterWiki name (%(remotename)s) internally "
+"than you specified (%(localname)s)."
 msgstr ""
-"Сүүлийн агуулгын BackUp хуучирсан байгаа бахайлтад өртөхгүй болсон болно!"
+"Алсын Вики таны оруулсан (%(localname)s) гэсэн нэрнээс өөр (%(remotename)s)"
+"гэдэг ИнтерВики-Нэр ашиглаж байна."
 
-#, python-format
-msgid "Revision %(rev)d as of %(date)s"
-msgstr "Хяналтын хувилбар %(rev)d , огноо: %(date)s"
-
-#, python-format
-msgid "Redirected from page \"%(page)s\""
-msgstr "\"%(page)s\" гэсэн хуудаснаас ийшээ шилжигдлээ"
-
-#, python-format
-msgid "This page redirects to page \"%(page)s\""
-msgstr "Энэ хуудас \"%(page)s\" хуудас руу шилжигдлээ"
-
-msgid "Create New Page"
-msgstr "Шинэ хуудас үүсгэх"
-
-msgid "You are not allowed to view this page."
-msgstr "Та энэ хуудсыг харах боломжгүй."
-
-#, python-format
-msgid "Argument \"%s\" must be a boolean value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument must be a boolean value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument \"%s\" must be an integer value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument must be an integer value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument \"%s\" must be a floating point value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument must be a floating point value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument \"%s\" must be a complex value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument must be a complex value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument must be one of \"%s\", not \"%s\""
-msgstr ""
-
-msgid "Too many arguments"
-msgstr ""
-
-msgid "Cannot have arguments without name following named arguments"
-msgstr ""
-
-#, python-format
-msgid "Argument \"%s\" is required"
-msgstr ""
-
-#, fuzzy, python-format
-msgid "No argument named \"%s\""
-msgstr "\"%s\" -тай ямар ч хуудас төстэй биш байна!"
-
-#, python-format
-msgid "Expected \"=\" to follow \"%(token)s\""
-msgstr "\"=\" дараахи өгөгдлийн ард алга байна \"%(token)s\""
-
-#, python-format
-msgid "Expected a value for key \"%(token)s\""
-msgstr "\"%(token)s\" өгөгдөлд утга оруулаагүй байна"
+msgid "Your changes are not saved!"
+msgstr "Таны хийсэн өөрчлөлтүүд хадгалагдсангүй!"
 
 msgid "You are not allowed to edit this page."
 msgstr "Та энэ хуудсанд өөрчлөлт оруулах эрхгүй."
@@ -127,6 +54,9 @@ msgstr "Хуучин хувилбарт өөрчлөлт оруулах боло
 msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr ""
 "Таны тавьсан хамгаалалтын хугацаа дууссан.Өөрчлөлтийн алдаа гарч болох юм!"
+
+msgid "Page name is too long, try shorter name."
+msgstr "Хуудасны нэр дэндүү урт байгаа тул богиносгоно уу."
 
 #, python-format
 msgid "Draft of \"%(pagename)s\""
@@ -223,8 +153,8 @@ msgstr ""
 msgid "Preview"
 msgstr "Үзүүлэх"
 
-msgid "Text mode"
-msgstr "Текст-хэлбэр"
+msgid "GUI Mode"
+msgstr "GUI-хэлбэр"
 
 msgid "Load Draft"
 msgstr "Ноорог ачаалах"
@@ -244,80 +174,6 @@ msgstr "%(category)s -д нэмэх:"
 
 msgid "Remove trailing whitespace from each line"
 msgstr "Мөр болгоны төгсгөл дэхь хоосон зайг арилга"
-
-#, python-format
-msgid "The package needs a newer version of MoinMoin (at least %s)."
-msgstr "Тус Пакет МойнМойны шинэ хувилбар шаардаж байна (ядаж %s)."
-
-msgid "The theme name is not set."
-msgstr "Загварын нэр өгөгдөөгүй байна."
-
-msgid "Installing theme files is only supported for standalone type servers."
-msgstr "Суулгах загварын файлууд нь зөвхөн Server-Typ standalone -ыгдэмждэг."
-
-#, python-format
-msgid "Installation of '%(filename)s' failed."
-msgstr "'%(filename)s' файлын суурьлуулалтад алдаа гарлаа."
-
-#, python-format
-msgid "The file %s is not a MoinMoin package file."
-msgstr "%s файл нь MoinMoin-ы пакет файл биш байна."
-
-#, python-format
-msgid "The page %s does not exist."
-msgstr "%s гэсэн хуудас алга байна."
-
-msgid "Invalid package file header."
-msgstr "Буруу package file header."
-
-msgid "Package file format unsupported."
-msgstr "Пакет файлын форматыг дэмжихгүй."
-
-#, python-format
-msgid "Unknown function %(func)s in line %(lineno)i."
-msgstr "%(lineno)i -р мөрөнд тодорхойгүй функц: %(func)s ."
-
-#, python-format
-msgid "The file %s was not found in the package."
-msgstr " %s гэсэн файл пакетаас олдсонгүй."
-
-msgid "<unknown>"
-msgstr "<тодорхойгүй>"
-
-#, fuzzy, python-format
-msgid ""
-"Login Name: %s\n"
-"\n"
-"Password recovery token: %s\n"
-"\n"
-"Password reset URL: %s/?action=recoverpass&name=%s&token=%s\n"
-msgstr ""
-"Логин-Нэр: %s\n"
-"\n"
-"Логин-НууцҮг: %s\n"
-"\n"
-"Логин-URL: %s/%s?action=login\n"
-
-msgid ""
-"Somebody has requested to email you a password recovery token.\n"
-"\n"
-"If you lost your password, please go to the password reset URL below or\n"
-"go to the password recovery page again and enter your username and the\n"
-"recovery token.\n"
-msgstr ""
-
-#, python-format
-msgid "[%(sitename)s] Your wiki account data"
-msgstr "[%(sitename)s] Таны Вики дансны мэдээлэл"
-
-msgid "Your changes are not saved!"
-msgstr "Таны хийсэн өөрчлөлтүүд хадгалагдсангүй!"
-
-msgid "Page name is too long, try shorter name."
-msgstr "Хуудасны нэр дэндүү урт байгаа тул богиносгоно уу."
-
-msgid "GUI Mode"
-msgstr "GUI-хэлбэр"
 
 msgid "Edit was cancelled."
 msgstr "Өөрчлөлт цуцлагдлаа."
@@ -462,68 +318,195 @@ msgstr ""
 "оруулахгүй'' байж, зөрчил үүсгэхгүйн тулд'''<<BR>>\n"
 "\"Цуцлах\" дээр дарж Эдиторыг орхино уу."
 
-msgid "The wiki is currently not reachable."
-msgstr "Вики одоогоор холбогдох боломжгүй байна."
+msgid "<unknown>"
+msgstr "<тодорхойгүй>"
 
-msgid "Invalid username or password."
-msgstr "Хэрэглэгчийн нэр эсвэл нууц үг буруу байна."
-
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"The remote wiki uses a different InterWiki name (%(remotename)s) internally "
-"than you specified (%(localname)s)."
+"Login Name: %s\n"
+"\n"
+"Password recovery token: %s\n"
+"\n"
+"Password reset URL: %s/?action=recoverpass&name=%s&token=%s\n"
 msgstr ""
-"Алсын Вики таны оруулсан (%(localname)s) гэсэн нэрнээс өөр (%(remotename)s)"
-"гэдэг ИнтерВики-Нэр ашиглаж байна."
+"Логин-Нэр: %s\n"
+"\n"
+"Логин-НууцҮг: %s\n"
+"\n"
+"Логин-URL: %s/%s?action=login\n"
 
-#, python-format
 msgid ""
-"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
-"%(be)s results out of about %(pages)d pages."
+"Somebody has requested to email you a password recovery token.\n"
+"\n"
+"If you lost your password, please go to the password reset URL below or\n"
+"go to the password recovery page again and enter your username and the\n"
+"recovery token.\n"
 msgstr ""
-"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
-"%(be)s results out of about %(pages)d pages."
-
-msgid "seconds"
-msgstr "Секунд"
-
-msgid "Previous"
-msgstr "Өмнөх"
-
-msgid "Next"
-msgstr "Дараагийн"
-
-#, fuzzy
-msgid "rev"
-msgstr "дахин сэргээх"
-
-msgid "current"
-msgstr "Одоогийн"
 
 #, python-format
-msgid "last modified: %s"
-msgstr "Сүүлийн өөрчлөлт: %s"
+msgid "[%(sitename)s] Your wiki account data"
+msgstr "[%(sitename)s] Таны Вики дансны мэдээлэл"
 
-msgid "match"
-msgstr "Оноолт"
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Тодорхойгүй үйлдэл %(action_name)s."
 
-msgid "matches"
-msgstr "Оноолт"
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Та %(action_name)s үйлдлийг энэ хуудас дээр ажиллуулж болохгүй!"
 
-msgid "about"
+msgid "Login and try again."
+msgstr "Та эхлээд логин хийгээд дараа нь ахиад оролдоод үзнэ үү."
+
+#, python-format
+msgid "The package needs a newer version of MoinMoin (at least %s)."
+msgstr "Тус Пакет МойнМойны шинэ хувилбар шаардаж байна (ядаж %s)."
+
+msgid "The theme name is not set."
+msgstr "Загварын нэр өгөгдөөгүй байна."
+
+msgid "Installing theme files is only supported for standalone type servers."
+msgstr "Суулгах загварын файлууд нь зөвхөн Server-Typ standalone -ыгдэмждэг."
+
+#, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "'%(filename)s' файлын суурьлуулалтад алдаа гарлаа."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr "%s файл нь MoinMoin-ы пакет файл биш байна."
+
+#, python-format
+msgid "The page %s does not exist."
+msgstr "%s гэсэн хуудас алга байна."
+
+msgid "Invalid package file header."
+msgstr "Буруу package file header."
+
+msgid "Package file format unsupported."
+msgstr "Пакет файлын форматыг дэмжихгүй."
+
+#, python-format
+msgid "Unknown function %(func)s in line %(lineno)i."
+msgstr "%(lineno)i -р мөрөнд тодорхойгүй функц: %(func)s ."
+
+#, python-format
+msgid "The file %s was not found in the package."
+msgstr " %s гэсэн файл пакетаас олдсонгүй."
+
+msgid "Text mode"
+msgstr "Текст-хэлбэр"
+
+#, python-format
+msgid "Argument \"%s\" must be a boolean value, not \"%s\""
 msgstr ""
 
-msgid "[all]"
+#, python-format
+msgid "Argument must be a boolean value, not \"%s\""
 msgstr ""
 
-msgid "[not empty]"
+#, python-format
+msgid "Argument \"%s\" must be an integer value, not \"%s\""
 msgstr ""
 
-msgid "[empty]"
+#, python-format
+msgid "Argument must be an integer value, not \"%s\""
 msgstr ""
 
-msgid "filter"
+#, python-format
+msgid "Argument \"%s\" must be a floating point value, not \"%s\""
 msgstr ""
+
+#, python-format
+msgid "Argument must be a floating point value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" must be a complex value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument must be a complex value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument must be one of \"%s\", not \"%s\""
+msgstr ""
+
+msgid "Too many arguments"
+msgstr ""
+
+msgid "Cannot have arguments without name following named arguments"
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" is required"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "No argument named \"%s\""
+msgstr "\"%s\" -тай ямар ч хуудас төстэй биш байна!"
+
+#, python-format
+msgid "Expected \"=\" to follow \"%(token)s\""
+msgstr "\"=\" дараахи өгөгдлийн ард алга байна \"%(token)s\""
+
+#, python-format
+msgid "Expected a value for key \"%(token)s\""
+msgstr "\"%(token)s\" өгөгдөлд утга оруулаагүй байна"
+
+#, python-format
+msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
+msgstr ""
+
+msgid ""
+"The backed up content of this page is deprecated and will not be included in "
+"search results!"
+msgstr ""
+"Сүүлийн агуулгын BackUp хуучирсан байгаа бахайлтад өртөхгүй болсон болно!"
+
+#, python-format
+msgid "Revision %(rev)d as of %(date)s"
+msgstr "Хяналтын хувилбар %(rev)d , огноо: %(date)s"
+
+#, python-format
+msgid "Redirected from page \"%(page)s\""
+msgstr "\"%(page)s\" гэсэн хуудаснаас ийшээ шилжигдлээ"
+
+#, python-format
+msgid "This page redirects to page \"%(page)s\""
+msgstr "Энэ хуудас \"%(page)s\" хуудас руу шилжигдлээ"
+
+msgid "Create New Page"
+msgstr "Шинэ хуудас үүсгэх"
+
+msgid "You are not allowed to view this page."
+msgstr "Та энэ хуудсыг харах боломжгүй."
+
+msgid "Switch user"
+msgstr ""
+
+msgid "No user selected"
+msgstr ""
+
+msgid ""
+"You can now change the settings of the selected user account; log out to get "
+"back to your account."
+msgstr ""
+
+msgid "You are the only user."
+msgstr ""
+
+msgid ""
+"As a superuser, you can temporarily assume the identity of another user."
+msgstr ""
+
+msgid "Select User"
+msgstr "Хэрэглэгч сонгох"
 
 #, fuzzy
 msgid "Change password"
@@ -550,6 +533,92 @@ msgstr "Нууц үг"
 
 msgid "Password repeat"
 msgstr "Нууц үгээ давт"
+
+msgid "OpenID settings"
+msgstr ""
+
+msgid "Cannot remove all OpenIDs."
+msgstr ""
+
+msgid "The selected OpenIDs have been removed."
+msgstr ""
+
+msgid "No OpenID given."
+msgstr ""
+
+msgid "OpenID is already present."
+msgstr ""
+
+msgid "Failed to resolve OpenID."
+msgstr ""
+
+msgid "OpenID discovery failure, not a valid OpenID."
+msgstr ""
+
+#, python-format
+msgid "OpenID error: %s."
+msgstr ""
+
+#, fuzzy
+msgid "Verification canceled."
+msgstr "Ажиллагаа цуцлагдлаа."
+
+#, fuzzy
+msgid "This OpenID is already used for another account."
+msgstr "Энэхүү хуудас нь устгагдсан эсвэл бүр үүсгэгдээгүй ч байж болох юм!"
+
+msgid "OpenID added successfully."
+msgstr ""
+
+msgid "OpenID failure."
+msgstr ""
+
+msgid "Current OpenIDs"
+msgstr ""
+
+msgid "Remove selected"
+msgstr ""
+
+msgid "Add OpenID"
+msgstr ""
+
+msgid "OpenID verification requires that you click this button:"
+msgstr ""
+
+msgid "Notification"
+msgstr ""
+
+msgid "Notification settings saved!"
+msgstr ""
+
+#, fuzzy
+msgid "'''Email'''"
+msgstr "Е-Мэйл"
+
+msgid "'''Jabber'''"
+msgstr ""
+
+msgid "'''Event type'''"
+msgstr ""
+
+msgid "Select the events you want to be notified about."
+msgstr ""
+
+msgid ""
+"Before you can be notified, you need to provide a way to contact you in the "
+"general preferences."
+msgstr ""
+
+#, fuzzy
+msgid "Subscribed events"
+msgstr "Хэрэглэгч бүртгэх"
+
+#, fuzzy
+msgid "Subscribed wiki pages<<BR>>(one regex per line)"
+msgstr "Бүртгэгдсэн Вики сайтууд (мөр мөрөөрхи ердийн дүрслэл)"
+
+msgid "Save"
+msgstr "Хадгалах"
 
 msgid "Preferences"
 msgstr "Тохиргоо"
@@ -603,9 +672,6 @@ msgstr "илүү таалагддаг"
 msgid "free choice"
 msgstr "Чөлөөт сонголт"
 
-msgid "Save"
-msgstr "Хадгалах"
-
 msgid "Preferred theme"
 msgstr "Илүү таалагддаг загвар"
 
@@ -636,59 +702,6 @@ msgstr "Ерөнхий тохиргоо"
 msgid "Quick links"
 msgstr "Шууд холбоос"
 
-msgid "Notification"
-msgstr ""
-
-msgid "Notification settings saved!"
-msgstr ""
-
-#, fuzzy
-msgid "'''Email'''"
-msgstr "Е-Мэйл"
-
-msgid "'''Jabber'''"
-msgstr ""
-
-msgid "'''Event type'''"
-msgstr ""
-
-msgid "Select the events you want to be notified about."
-msgstr ""
-
-msgid ""
-"Before you can be notified, you need to provide a way to contact you in the "
-"general preferences."
-msgstr ""
-
-#, fuzzy
-msgid "Subscribed events"
-msgstr "Хэрэглэгч бүртгэх"
-
-#, fuzzy
-msgid "Subscribed wiki pages<<BR>>(one regex per line)"
-msgstr "Бүртгэгдсэн Вики сайтууд (мөр мөрөөрхи ердийн дүрслэл)"
-
-msgid "Switch user"
-msgstr ""
-
-msgid "No user selected"
-msgstr ""
-
-msgid ""
-"You can now change the settings of the selected user account; log out to get "
-"back to your account."
-msgstr ""
-
-msgid "You are the only user."
-msgstr ""
-
-msgid ""
-"As a superuser, you can temporarily assume the identity of another user."
-msgstr ""
-
-msgid "Select User"
-msgstr "Хэрэглэгч сонгох"
-
 msgid "OpenID server"
 msgstr ""
 
@@ -698,98 +711,170 @@ msgstr ""
 msgid "Trusted websites"
 msgstr ""
 
-msgid "Remove selected"
+msgid "Line"
+msgstr "Мөр"
+
+msgid "No differences found!"
+msgstr "Ялгаа олдсонгүй!"
+
+msgid "Deletions are marked like this."
+msgstr "Арилгагдсан текстүүд ингэж тэмдэглэгдсэн."
+
+msgid "Additions are marked like this."
+msgstr "Нэмж оруулсан текстүүд ингэж тэмдэглэгдсэн."
+
+msgid "Please log in first."
+msgstr "Эхлээд логин хийнэ үү."
+
+msgid ""
+"Please choose an account name now.\n"
+"If you choose an existing account name you will be asked for the\n"
+"password and be able to associate the account with your OpenID."
 msgstr ""
-
-msgid "OpenID settings"
-msgstr ""
-
-msgid "Cannot remove all OpenIDs."
-msgstr ""
-
-msgid "The selected OpenIDs have been removed."
-msgstr ""
-
-msgid "No OpenID given."
-msgstr ""
-
-msgid "OpenID is already present."
-msgstr ""
-
-msgid "Failed to resolve OpenID."
-msgstr ""
-
-msgid "OpenID discovery failure, not a valid OpenID."
-msgstr ""
-
-#, python-format
-msgid "OpenID error: %s."
-msgstr ""
-
-#, fuzzy
-msgid "Verification canceled."
-msgstr "Ажиллагаа цуцлагдлаа."
-
-#, fuzzy
-msgid "This OpenID is already used for another account."
-msgstr "Энэхүү хуудас нь устгагдсан эсвэл бүр үүсгэгдээгүй ч байж болох юм!"
-
-msgid "OpenID added successfully."
-msgstr ""
-
-msgid "OpenID failure."
-msgstr ""
-
-msgid "Current OpenIDs"
-msgstr ""
-
-msgid "Add OpenID"
-msgstr ""
-
-msgid "OpenID verification requires that you click this button:"
-msgstr ""
-
-#, fuzzy
-msgid "Username"
-msgstr "Хэрэглэгч"
-
-#, fuzzy
-msgid "Member of Groups"
-msgstr "Хуудасны тоо"
-
-msgid "Email"
-msgstr "Е-Мэйл"
-
-msgid "Jabber"
-msgstr ""
-
-msgid "Action"
-msgstr "А"
-
-#, fuzzy
-msgid "Disable user"
-msgstr "Идэвхгүй"
-
-#, fuzzy
-msgid "Enable user"
-msgstr "Идэвхтэй"
-
-#, fuzzy
-msgid "disabled"
-msgstr "Идэвхгүй"
-
-#, fuzzy
-msgid "Mail account data"
-msgstr "Дансны мэдээлэл мэйлээр илгээх"
 
 msgid "Name"
 msgstr "Нэр"
 
-msgid "OpenID"
+msgid "Choose this name"
 msgstr ""
 
-msgid "Login"
-msgstr "логин"
+msgid "This is not a valid username, choose a different one."
+msgstr ""
+
+msgid ""
+"The username you have chosen is already\n"
+"taken. If it is your username, enter your password below to associate\n"
+"the username with your OpenID. Otherwise, please choose a different\n"
+"username and leave the password field blank."
+msgstr ""
+
+msgid "Associate this name"
+msgstr ""
+
+msgid "Your account is now associated to your OpenID."
+msgstr ""
+
+msgid "The password you entered is not valid."
+msgstr ""
+
+msgid "Anonymous sessions need to be enabled for OpenID login."
+msgstr ""
+
+msgid "No OpenID."
+msgstr ""
+
+msgid ""
+"If you do not have an account yet, you can still log in with your OpenID and "
+"create one during login."
+msgstr ""
+
+msgid "Could not contact botbouncer.com."
+msgstr ""
+
+msgid "Missing password. Please enter user name and password."
+msgstr "Нууц үг алга байна. Хэрэглэгчийн нэр болон нууц үг оруулна уу."
+
+#, python-format
+msgid "LDAP server %(server)s failed."
+msgstr ""
+
+msgid "Failed to connect to database."
+msgstr ""
+
+#, python-format
+msgid ""
+"If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
+"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+msgstr ""
+
+#, fuzzy
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
+">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+msgstr ""
+" Өргөлт:: <<Verbatim('')>>''ташуу''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''бүдүүн'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''бүдүүн болон "
+"ташуу'''''<<Verbatim(''''')>>; <<Verbatim('')>>''холимог''<<Verbatim(''')"
+">>'''''бүдүүн'''<<Verbatim(''')>> болон ташуу''<<Verbatim('')>>; <<Verbatim"
+"(----)>> хэвтээ шугам.\n"
+" Гарчиг:: <<Verbatim(=)>> Гарчиг 1 <<Verbatim(=)>>; <<Verbatim(==)>> Гарчиг "
+"2 <<Verbatim(==)>>; <<Verbatim(===)>> Гарчиг 3 <<Verbatim(===)>>;   "
+"<<Verbatim(====)>> Гарчиг 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Гарчиг 5 "
+"<<Verbatim(=====)>>.\n"
+" Жаргсаалт:: Хоосон зай болон дараахи тэмдэгтүүдийн нэг: * Цэгүүд; 1., a., "
+"A., i., I. дугаарласан Цэгүүд; 1.#n дугаарлалт n; эхэлнэ зөвхөн хоосон зай "
+"шахагдана.\n"
+" Линкүүд:: <<Verbatim(НийлүүлжБичсэнТомҮгс)>>; <<Verbatim([\"Хаалт болон "
+"тодорхойлох цэг\"])>>; url; [url]; [url label].\n"
+" Хүснэгт:: || Нүдний текст |||| Нүдний текст, 2 нүд дамнасан ||;    гарчигны "
+"ар дахь хоосон зай эсвэл хүснэгтүүд.\n"
+"\n"
+"(!) Бусад тусламжийг ӨөрчлөлтХийхТусламж -аас эсвэл SyntaxReference -ээс.\n"
+
+#, fuzzy
+msgid ""
+" Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
+"italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed ''<<Verbatim(''')"
+">>'''''bold'''<<Verbatim(''')>> and italics''<<Verbatim('')>>; <<Verbatim"
+"(----)>> horizontal rule.\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
+"#n start numbering at n; space alone indents.\n"
+" Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])"
+">>.\n"
+" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
+"white space allowed after tables or titles.\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
+msgstr ""
+" Өргөлт:: <<Verbatim('')>>''ташуу''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''бүдүүн'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''бүдүүн болон "
+"ташуу'''''<<Verbatim(''''')>>; <<Verbatim('')>>''холимог''<<Verbatim(''')"
+">>'''''бүдүүн'''<<Verbatim(''')>> болон ташуу''<<Verbatim('')>>; <<Verbatim"
+"(----)>> хэвтээ шугам.\n"
+" Гарчиг:: <<Verbatim(=)>> Гарчиг 1 <<Verbatim(=)>>; <<Verbatim(==)>> Гарчиг "
+"2 <<Verbatim(==)>>; <<Verbatim(===)>> Гарчиг 3 <<Verbatim(===)>>;   "
+"<<Verbatim(====)>> Гарчиг 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Гарчиг 5 "
+"<<Verbatim(=====)>>.\n"
+" Жаргсаалт:: Хоосон зай болон дараахи тэмдэгтүүдийн нэг: * Цэгүүд; 1., a., "
+"A., i., I. дугаарласан Цэгүүд; 1.#n дугаарлалт n; эхэлнэ зөвхөн хоосон зай "
+"шахагдана.\n"
+" Линкүүд:: <<Verbatim(НийлүүлжБичсэнТомҮгс)>>; <<Verbatim([\"Хаалт болон "
+"тодорхойлох цэг\"])>>; url; [url]; [url label].\n"
+" Хүснэгт:: || Нүдний текст |||| Нүдний текст, 2 нүд дамнасан ||;    гарчигны "
+"ар дахь хоосон зай эсвэл хүснэгтүүд.\n"
+"\n"
+"(!) Бусад тусламжийг ӨөрчлөлтХийхТусламж -аас эсвэл SyntaxReference -ээс.\n"
+
+#, python-format
+msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
+msgstr "Хүссэн \"%(wanted)s\" -> \"%(key)s\", өгөгдсөн \"%(token)s\""
+
+#, python-format
+msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
+msgstr "Хүссэн бүхэл тоо \"%(key)s\" өмнө \"%(token)s\""
+
+#, python-format
+msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
+msgstr "Хүссэн бүхэл тоо \"%(arg)s\" дараа \"%(key)s\""
+
+#, python-format
+msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
+msgstr "Хүссэн өнгөний утга \"%(arg)s\" дараа \"%(key)s\""
 
 msgid ""
 "Rendering of reStructured text is not possible, please install Docutils."
@@ -854,98 +939,6 @@ msgstr "XSLT-Stylesheets ажиллахгүй байна, 4suite 1.x суулг�
 #, python-format
 msgid "%(errortype)s processing error"
 msgstr "Алдаа \"%(errortype)s\""
-
-#, fuzzy
-msgid ""
-" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
-">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
-"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
-">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
-" Horizontal Rule:: <<Verbatim(----)>>\n"
-" Force Linebreak:: <<Verbatim(\\\\)>>\n"
-" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
-"===== Title 5 =====.\n"
-" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
-"items.\n"
-" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
-" Tables:: |= header text | cell text | more cell text |;\n"
-"\n"
-"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
-msgstr ""
-" Өргөлт:: <<Verbatim('')>>''ташуу''<<Verbatim('')>>; <<Verbatim(''')"
-">>'''бүдүүн'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''бүдүүн болон "
-"ташуу'''''<<Verbatim(''''')>>; <<Verbatim('')>>''холимог''<<Verbatim(''')"
-">>'''''бүдүүн'''<<Verbatim(''')>> болон ташуу''<<Verbatim('')>>; <<Verbatim"
-"(----)>> хэвтээ шугам.\n"
-" Гарчиг:: <<Verbatim(=)>> Гарчиг 1 <<Verbatim(=)>>; <<Verbatim(==)>> Гарчиг "
-"2 <<Verbatim(==)>>; <<Verbatim(===)>> Гарчиг 3 <<Verbatim(===)>>;   "
-"<<Verbatim(====)>> Гарчиг 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Гарчиг 5 "
-"<<Verbatim(=====)>>.\n"
-" Жаргсаалт:: Хоосон зай болон дараахи тэмдэгтүүдийн нэг: * Цэгүүд; 1., a., "
-"A., i., I. дугаарласан Цэгүүд; 1.#n дугаарлалт n; эхэлнэ зөвхөн хоосон зай "
-"шахагдана.\n"
-" Линкүүд:: <<Verbatim(НийлүүлжБичсэнТомҮгс)>>; <<Verbatim([\"Хаалт болон "
-"тодорхойлох цэг\"])>>; url; [url]; [url label].\n"
-" Хүснэгт:: || Нүдний текст |||| Нүдний текст, 2 нүд дамнасан ||;    гарчигны "
-"ар дахь хоосон зай эсвэл хүснэгтүүд.\n"
-"\n"
-"(!) Бусад тусламжийг ӨөрчлөлтХийхТусламж -аас эсвэл SyntaxReference -ээс.\n"
-
-#, fuzzy
-msgid ""
-" Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
-">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
-"italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed ''<<Verbatim(''')"
-">>'''''bold'''<<Verbatim(''')>> and italics''<<Verbatim('')>>; <<Verbatim"
-"(----)>> horizontal rule.\n"
-" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
-"===== Title 5 =====.\n"
-" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
-"#n start numbering at n; space alone indents.\n"
-" Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])"
-">>.\n"
-" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
-"white space allowed after tables or titles.\n"
-"\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
-msgstr ""
-" Өргөлт:: <<Verbatim('')>>''ташуу''<<Verbatim('')>>; <<Verbatim(''')"
-">>'''бүдүүн'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''бүдүүн болон "
-"ташуу'''''<<Verbatim(''''')>>; <<Verbatim('')>>''холимог''<<Verbatim(''')"
-">>'''''бүдүүн'''<<Verbatim(''')>> болон ташуу''<<Verbatim('')>>; <<Verbatim"
-"(----)>> хэвтээ шугам.\n"
-" Гарчиг:: <<Verbatim(=)>> Гарчиг 1 <<Verbatim(=)>>; <<Verbatim(==)>> Гарчиг "
-"2 <<Verbatim(==)>>; <<Verbatim(===)>> Гарчиг 3 <<Verbatim(===)>>;   "
-"<<Verbatim(====)>> Гарчиг 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Гарчиг 5 "
-"<<Verbatim(=====)>>.\n"
-" Жаргсаалт:: Хоосон зай болон дараахи тэмдэгтүүдийн нэг: * Цэгүүд; 1., a., "
-"A., i., I. дугаарласан Цэгүүд; 1.#n дугаарлалт n; эхэлнэ зөвхөн хоосон зай "
-"шахагдана.\n"
-" Линкүүд:: <<Verbatim(НийлүүлжБичсэнТомҮгс)>>; <<Verbatim([\"Хаалт болон "
-"тодорхойлох цэг\"])>>; url; [url]; [url label].\n"
-" Хүснэгт:: || Нүдний текст |||| Нүдний текст, 2 нүд дамнасан ||;    гарчигны "
-"ар дахь хоосон зай эсвэл хүснэгтүүд.\n"
-"\n"
-"(!) Бусад тусламжийг ӨөрчлөлтХийхТусламж -аас эсвэл SyntaxReference -ээс.\n"
-
-#, python-format
-msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
-msgstr "Хүссэн \"%(wanted)s\" -> \"%(key)s\", өгөгдсөн \"%(token)s\""
-
-#, python-format
-msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
-msgstr "Хүссэн бүхэл тоо \"%(key)s\" өмнө \"%(token)s\""
-
-#, python-format
-msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
-msgstr "Хүссэн бүхэл тоо \"%(arg)s\" дараа \"%(key)s\""
-
-#, python-format
-msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
-msgstr "Хүссэн өнгөний утга \"%(arg)s\" дараа \"%(key)s\""
-
-msgid "anonymous"
-msgstr ""
 
 #, fuzzy
 msgid "Password is too short."
@@ -1036,6 +1029,9 @@ msgstr "(Овог''''''Нэр ашигла)"
 msgid "Alias-Name"
 msgstr "Алиас-Нэр"
 
+msgid "Email"
+msgstr "Е-Мэйл"
+
 msgid "Jabber ID"
 msgstr ""
 
@@ -1047,6 +1043,42 @@ msgstr "Хэрэглэгчийн CSS хаахын тулд хоосон орхи
 
 msgid "Editor size"
 msgstr "Текст оруулах хэмжээ"
+
+#, fuzzy
+msgid "Username"
+msgstr "Хэрэглэгч"
+
+#, fuzzy
+msgid "Member of Groups"
+msgstr "Хуудасны тоо"
+
+msgid "Jabber"
+msgstr ""
+
+msgid "Action"
+msgstr "А"
+
+#, fuzzy
+msgid "Disable user"
+msgstr "Идэвхгүй"
+
+#, fuzzy
+msgid "Enable user"
+msgstr "Идэвхтэй"
+
+#, fuzzy
+msgid "disabled"
+msgstr "Идэвхгүй"
+
+#, fuzzy
+msgid "Mail account data"
+msgstr "Дансны мэдээлэл мэйлээр илгээх"
+
+msgid "OpenID"
+msgstr ""
+
+msgid "Login"
+msgstr "логин"
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -1079,26 +1111,1396 @@ msgstr "Хяналтын хувилбар %(rev)d сэргээгдлээ."
 msgid "Renamed from '%(oldpagename)s'."
 msgstr "\"%(pagename)s\" -ийн хавсралтууд"
 
-msgid "You are now logged out."
-msgstr "Та логаут хийсэн байна."
+msgid "Options --pages and --search are mutually exclusive!"
+msgstr ""
+
+msgid "You must specify an output file!"
+msgstr ""
+
+msgid "No pages specified using --pages or --search, assuming full package."
+msgstr ""
+
+msgid "All attachments included into the package."
+msgstr ""
+
+msgid "Output file already exists! Cowardly refusing to continue!"
+msgstr ""
+
+#, fuzzy, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
+"change notification.\n"
+"\n"
+"The \"%(pagename)s\" page has been changed by %(editor)s:\n"
+msgstr ""
+"Эрхэм хүндэт Вики хэрэглэгч та,\n"
+"\n"
+" \"%(sitename)s\" гэсэн хуудас, категорийн өөрчлөлтийн талаар мэдээлэл "
+"авахаар бүртгэгдсэн байна.\n"
+"\n"
+"Дараахи хуудсанд %(editor)s гэдэг хэрэглэгч өөрчлөлт оруулсан байна:\n"
+"%(pagelink)s\n"
+"\n"
+
+msgid "New page:\n"
+msgstr "Шинэ хуудас:\n"
+
+msgid "No differences found!\n"
+msgstr "Өөрчлөлт олдсонгүй!\n"
+
+#, fuzzy, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been deleted by %(editor)s:\n"
+"\n"
+msgstr ""
+"Эрхэм хүндэт Вики хэрэглэгч та,\n"
+"\n"
+" \"%(sitename)s\" гэсэн хуудас, категорийн өөрчлөлтийн талаар мэдээлэл "
+"авахаар бүртгэгдсэн байна.\n"
+"\n"
+"Дараахи хуудсанд %(editor)s гэдэг хэрэглэгч өөрчлөлт оруулсан байна:\n"
+"%(pagelink)s\n"
+"\n"
+
+#, fuzzy, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by %(editor)"
+"s:\n"
+msgstr ""
+"Эрхэм хүндэт Вики хэрэглэгч та,\n"
+"\n"
+" \"%(sitename)s\" гэсэн хуудас, категорийн өөрчлөлтийн талаар мэдээлэл "
+"авахаар бүртгэгдсэн байна.\n"
+"\n"
+"Дараахи хуудсанд %(editor)s гэдэг хэрэглэгч өөрчлөлт оруулсан байна:\n"
+"%(pagelink)s\n"
+"\n"
+
+#, python-format
+msgid "New user account created on %(sitename)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
+"follow:\n"
+"\n"
+"    User name: %(username)s\n"
+"    Email address: %(useremail)s"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "New attachment added to page %(pagename)s on %(sitename)s"
+msgstr "%(pagename)s дахь <<Verbatim(attachment:)>>%(filename)s"
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(page_name)s\" for change "
+"notification. An attachment has been added to that page by %(editor)s. "
+"Following detailed information is available:\n"
+"\n"
+"Attachment name: %(attach_name)s\n"
+"Attachment size: %(attach_size)s\n"
+msgstr ""
+
+#, python-format
+msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
+msgstr ""
+"Өөрчлөлт:[%(sitename)s] %(trivial)s, Хуудас: \"%(pagename)s\" Хэрэглэгч: %"
+"(username)s"
+
+msgid "Trivial "
+msgstr "Ердийн"
+
+#, python-format
+msgid ""
+"Attachment link: %(attach)s\n"
+"Page link: %(page)s\n"
+msgstr ""
+
+msgid "Page has been modified"
+msgstr ""
+
+msgid "Page has been modified in a trivial fashion"
+msgstr ""
+
+#, fuzzy
+msgid "Page has been renamed"
+msgstr "Хуудасны хандалтууд болон өөрчлөлтүүд"
+
+#, fuzzy
+msgid "Page has been deleted"
+msgstr "\"%s\" гэсэн хуудас амжилттай устгагдлаа!"
+
+#, fuzzy
+msgid "Page has been copied"
+msgstr "Хуудасны хандалтууд болон өөрчлөлтүүд"
+
+#, fuzzy
+msgid "A new attachment has been added"
+msgstr "Хавсралтын шинэ нэр"
+
+msgid "A page has been reverted to a previous state"
+msgstr ""
+
+#, fuzzy
+msgid "A user has subscribed to a page"
+msgstr "Энэ хуудас нь бүртгэгдсэн хуудсуудын жагсаалтад нэмэгдлээ."
+
+msgid "A new account has been created"
+msgstr ""
+
+#, fuzzy
+msgid "Attachment link"
+msgstr "Хавсралт"
+
+#, fuzzy
+msgid "Page link"
+msgstr "\"%s\" -тай адил төстэй"
+
+#, fuzzy
+msgid "Changed page"
+msgstr "Хуудсуудыг багцлах"
+
+#, fuzzy
+msgid "Page changed"
+msgstr "Өөрчлөлтийг хадгалах"
+
+msgid "about"
+msgstr ""
+
+#, python-format
+msgid ""
+"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
+"%(be)s results out of about %(pages)d pages."
+msgstr ""
+"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
+"%(be)s results out of about %(pages)d pages."
+
+msgid "seconds"
+msgstr "Секунд"
+
+msgid "Previous"
+msgstr "Өмнөх"
+
+msgid "Next"
+msgstr "Дараагийн"
+
+#, fuzzy
+msgid "rev"
+msgstr "дахин сэргээх"
+
+msgid "current"
+msgstr "Одоогийн"
+
+#, python-format
+msgid "last modified: %s"
+msgstr "Сүүлийн өөрчлөлт: %s"
+
+msgid "match"
+msgstr "Оноолт"
+
+msgid "matches"
+msgstr "Оноолт"
+
+msgid "RecentChanges"
+msgstr "Хамгийн сүүлийн өөрчлөлт"
+
+msgid "WikiTipOfTheDay"
+msgstr ""
+
+msgid "TitleIndex"
+msgstr "TitleIndex"
+
+msgid "WordIndex"
+msgstr "WortIndex"
+
+msgid "FindPage"
+msgstr "ХуудасОл"
+
+msgid "MissingPage"
+msgstr "ОлдохгүйХуудас"
+
+msgid "MissingHomePage"
+msgstr "ОлдохгүйНүүрХуудас"
+
+#, fuzzy
+msgid "WikiHomePage"
+msgstr "ОлдохгүйНүүрХуудас"
+
+#, fuzzy
+msgid "WikiName"
+msgstr "Нэр"
+
+msgid "WikiWikiWeb"
+msgstr ""
+
+msgid "FrontPage"
+msgstr "Эхний хуудас"
+
+msgid "WikiSandBox"
+msgstr ""
+
+#, fuzzy
+msgid "InterWiki"
+msgstr "Вики"
+
+msgid "AbandonedPages"
+msgstr ""
+
+#, fuzzy
+msgid "OrphanedPages"
+msgstr "Хуудсуудыг багцлах"
+
+#, fuzzy
+msgid "WantedPages"
+msgstr "ХуудасОл"
+
+msgid "EventStats"
+msgstr ""
+
+msgid "EventStats/HitCounts"
+msgstr ""
+
+msgid "EventStats/Languages"
+msgstr ""
+
+msgid "EventStats/UserAgents"
+msgstr ""
+
+#, fuzzy
+msgid "PageSize"
+msgstr "Хэмжээ"
+
+#, fuzzy
+msgid "PageHits"
+msgstr "Хуудсууд"
+
+#, fuzzy
+msgid "RandomPage"
+msgstr "ХуудасНэрлэх"
+
+#, fuzzy
+msgid "XsltVersion"
+msgstr "Python хувилбар"
+
+msgid "FortuneCookies"
+msgstr ""
+
+msgid "WikiLicense"
+msgstr "ВикиЛиценз"
+
+msgid "CategoryCategory"
+msgstr ""
+
+msgid "CategoryHomepage"
+msgstr ""
+
+msgid "CategoryTemplate"
+msgstr ""
+
+msgid "HomepageTemplate"
+msgstr ""
+
+msgid "HelpTemplate"
+msgstr ""
+
+msgid "HomepageReadWritePageTemplate"
+msgstr ""
+
+msgid "HomepageReadPageTemplate"
+msgstr ""
+
+msgid "HomepagePrivatePageTemplate"
+msgstr ""
+
+msgid "HomepageGroupsTemplate"
+msgstr ""
+
+msgid "SlideShowHandOutTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "SlideShowTemplate"
+msgstr "Слайд үзүүлэх"
+
+msgid "SlideTemplate"
+msgstr ""
+
+msgid "SyncJobTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration"
+msgstr "ФорматлахТусламж"
+
+msgid "HelpOnConfiguration/EmailSupport"
+msgstr ""
+
+msgid "HelpOnConfiguration/SecurityPolicy"
+msgstr ""
+
+msgid "HelpOnConfiguration/FileAttachments"
+msgstr ""
+
+msgid "HelpOnConfiguration/SupplementationPage"
+msgstr ""
+
+msgid "HelpOnConfiguration/SurgeProtection"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration/UserPreferences"
+msgstr "ХэрэглэгчийнТохиргоо"
+
+msgid "HelpOnPackageInstaller"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUpdating"
+msgstr "ФорматлахТусламж"
+
+#, fuzzy
+msgid "HelpOnUpdatingPython"
+msgstr "ФорматлахТусламж"
+
+#, fuzzy
+msgid "HelpOnAdministration"
+msgstr "ФорматлахТусламж"
+
+msgid "HelpOnAuthentication"
+msgstr ""
+
+msgid "HelpOnAuthentication/ExternalCookie"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnMoinCommand"
+msgstr "ФорматлахТусламж"
+
+msgid "HelpOnMoinCommand/ExportDump"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNotification"
+msgstr "ФорматлахТусламж"
+
+#, fuzzy
+msgid "HelpOnSessions"
+msgstr "АгуулгынТусламж"
+
+#, fuzzy
+msgid "HelpOnUserHandling"
+msgstr "ФорматлахТусламж"
+
+#, fuzzy
+msgid "HelpOnXapian"
+msgstr "ФорматлахТусламж"
+
+msgid "HelpOnMoinWikiSyntax"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnCreoleSyntax"
+msgstr "АгуулгынТусламж"
+
+msgid "HelpOnFormatting"
+msgstr "ФорматлахТусламж"
+
+#, fuzzy
+msgid "MoinMoin"
+msgstr "MoinMoin хувилбар"
+
+msgid "HelpContents"
+msgstr "АгуулгынТусламж"
+
+msgid "HelpForBeginners"
+msgstr ""
+
+msgid "HelpForUsers"
+msgstr ""
+
+#, fuzzy
+msgid "HelpIndex"
+msgstr "TitleIndex"
+
+msgid "HelpOnAccessControlLists"
+msgstr ""
+
+msgid "HelpOnAcl"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnActions"
+msgstr "АгуулгынТусламж"
+
+msgid "HelpOnActions/AttachFile"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnAdmonitions"
+msgstr "АгуулгынТусламж"
+
+#, fuzzy
+msgid "HelpOnAutoAdmin"
+msgstr "ФорматлахТусламж"
+
+msgid "HelpOnCategories"
+msgstr ""
+
+msgid "HelpOnDictionaries"
+msgstr ""
+
+msgid "HelpOnEditLocks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnEditing"
+msgstr "ФорматлахТусламж"
+
+msgid "HelpOnEditing/SubPages"
+msgstr ""
+
+msgid "HelpOnGraphicalEditor"
+msgstr ""
+
+msgid "HelpOnHeadlines"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnLanguages"
+msgstr "хэл"
+
+#, fuzzy
+msgid "HelpOnLinking"
+msgstr "ФорматлахТусламж"
+
+msgid "HelpOnLinking/NotesLinks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnLists"
+msgstr "АгуулгынТусламж"
+
+#, fuzzy
+msgid "HelpOnLogin"
+msgstr "ФорматлахТусламж"
+
+msgid "HelpOnMacros"
+msgstr ""
+
+msgid "HelpOnMacros/EmbedObject"
+msgstr ""
+
+msgid "HelpOnMacros/ImageLink"
+msgstr ""
+
+msgid "HelpOnMacros/Include"
+msgstr ""
+
+msgid "HelpOnMacros/MailTo"
+msgstr ""
+
+msgid "HelpOnMacros/MonthCalendar"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNavigation"
+msgstr "ХуудасныНавигаци"
+
+msgid "HelpOnOpenIDProvider"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnPageCreation"
+msgstr "ФорматлахТусламж"
+
+msgid "HelpOnPageDeletion"
+msgstr ""
+
+msgid "HelpOnParsers"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText/RstPrimer"
+msgstr ""
+
+msgid "HelpOnProcessingInstructions"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnRules"
+msgstr "АгуулгынТусламж"
+
+#, fuzzy
+msgid "HelpOnSearching"
+msgstr "ФорматлахТусламж"
+
+#, fuzzy
+msgid "HelpOnSlideShows"
+msgstr "Слайд үзүүлэх"
+
+msgid "HelpOnSlideShows/000 Introduction"
+msgstr ""
+
+msgid "HelpOnSlideShows/100 Creating the slides"
+msgstr ""
+
+msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
+msgstr ""
+
+msgid "HelpOnSmileys"
+msgstr ""
+
+msgid "HelpOnSpam"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSpellCheck"
+msgstr "ДүрэмШалгах"
+
+msgid "HelpOnSuperUser"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSynchronisation"
+msgstr "Синхронизаци эхэллээ -"
+
+msgid "HelpOnTables"
+msgstr ""
+
+msgid "HelpOnTemplates"
+msgstr ""
+
+msgid "HelpOnThemes"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUserPreferences"
+msgstr "ХэрэглэгчийнТохиргоо"
+
+msgid "HelpOnVariables"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnXmlPages"
+msgstr "ФорматлахТусламж"
+
+#, fuzzy
+msgid "HelpOnComments"
+msgstr "АгуулгынТусламж"
+
+#, fuzzy
+msgid "HelpOnSubscribing"
+msgstr "Бүртгүүлэхгүй"
+
+msgid "CamelCase"
+msgstr ""
+
+msgid "WikiCourse"
+msgstr ""
+
+msgid "WikiCourse/01 What is a MoinMoin wiki?"
+msgstr ""
+
+msgid "WikiCourse/02 Finding information"
+msgstr ""
+
+msgid "WikiCourse/03 Staying up to date"
+msgstr ""
+
+msgid "WikiCourse/04 Creating a wiki account"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/05 User preferences"
+msgstr "ХэрэглэгчийнТохиргоо"
+
+msgid "WikiCourse/06 Your own wiki homepage"
+msgstr ""
+
+msgid "WikiCourse/07 The text editor"
+msgstr ""
+
+msgid "WikiCourse/08 Hot Keys"
+msgstr ""
+
+msgid "WikiCourse/10 Text layout with wiki markup"
+msgstr ""
+
+msgid "WikiCourse/11 Paragraphs"
+msgstr ""
+
+msgid "WikiCourse/12 Headlines"
+msgstr ""
+
+msgid "WikiCourse/13 Lists"
+msgstr ""
+
+msgid "WikiCourse/14 Text styles"
+msgstr ""
+
+msgid "WikiCourse/15 Tables"
+msgstr ""
+
+msgid "WikiCourse/16 Wiki internal links"
+msgstr ""
+
+msgid "WikiCourse/17 External links"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/18 Attachments"
+msgstr "Шинэ хавсралт файл"
+
+msgid "WikiCourse/19 Symbols"
+msgstr ""
+
+msgid "WikiCourse/20 Dynamic content"
+msgstr ""
+
+msgid "WikiCourse/21 Macros"
+msgstr ""
+
+msgid "WikiCourse/22 Parsers"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/23 Actions"
+msgstr "Бусад ...:"
+
+msgid "WikiCourse/30 The graphical editor"
+msgstr ""
+
+msgid "WikiCourse/40 Creating more pages"
+msgstr ""
+
+msgid "WikiCourse/50 Wiki etiquette"
+msgstr ""
+
+msgid "WikiCourse/51 Applications"
+msgstr ""
+
+msgid "WikiCourse/52 Structure in the wiki"
+msgstr ""
+
+msgid "WikiCourseHandOut"
+msgstr ""
+
+msgid "Sun"
+msgstr "Ня"
+
+msgid "Mon"
+msgstr "Да"
+
+msgid "Tue"
+msgstr "Мя"
+
+msgid "Wed"
+msgstr "Лх"
+
+msgid "Thu"
+msgstr "Пү"
+
+msgid "Fri"
+msgstr "Ба"
+
+msgid "Sat"
+msgstr "Бя"
+
+msgid "AttachFile"
+msgstr "ФайлХавсаргах"
+
+msgid "DeletePage"
+msgstr "ХуудасУстгах"
+
+msgid "LikePages"
+msgstr "ТөстэйХуудас"
+
+msgid "LocalSiteMap"
+msgstr "СайтынБүтцийнЗураглал"
+
+msgid "RenamePage"
+msgstr "ХуудасНэрлэх"
+
+msgid "SpellCheck"
+msgstr "ДүрэмШалгах"
+
+msgid "Discussion"
+msgstr ""
+
+msgid "[all]"
+msgstr ""
+
+msgid "[not empty]"
+msgstr ""
+
+msgid "[empty]"
+msgstr ""
+
+msgid "filter"
+msgstr ""
+
+msgid "Wiki"
+msgstr "Вики"
+
+msgid "Page"
+msgstr "Хуудас"
+
+msgid "User"
+msgstr "Хэрэглэгч"
+
+msgid "[ATTACH]"
+msgstr ""
+
+msgid "[RSS]"
+msgstr "[RSS]"
+
+msgid "[DELETED]"
+msgstr "[УСТГАГДСАН]"
+
+msgid "[UPDATED]"
+msgstr "[ШИНЭЧЛЭСЭН]"
+
+msgid "[RENAMED]"
+msgstr ""
+
+msgid "[CONFLICT]"
+msgstr ""
+
+msgid "[NEW]"
+msgstr "[ШИНЭ]"
+
+msgid "[DIFF]"
+msgstr "[DIFF]"
+
+msgid "[BOTTOM]"
+msgstr "[ДООД]"
+
+msgid "[TOP]"
+msgstr "[ДЭЭД]"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Энд дарж ийшээ заасан хуудсуудыг харж болно"
+
+msgid "Settings"
+msgstr ""
+
+msgid "Logout"
+msgstr "Гарах"
+
+msgid "DeleteCache"
+msgstr "CacheУстгах"
+
+#, python-format
+msgid "(cached %s)"
+msgstr "(кэйшлэсэн %s)"
+
+msgid "Or try one of these actions:"
+msgstr "Эсвэл өөр сонголт хий:"
+
+msgid "Unsubscribe"
+msgstr "Бүртгүүлэхгүй"
+
+msgid "Home"
+msgstr "Нүүр"
+
+msgid "Clear message"
+msgstr "Мэссэж устгах"
+
+#, python-format
+msgid "last edited %(time)s by %(editor)s"
+msgstr "Сүүлийн өөрчлөлтийн огноо: %(time)s Өөрчилсөн: %(editor)s"
+
+#, python-format
+msgid "last modified %(time)s"
+msgstr "Сүүлийн өөрчлөлтийн огноо: %(time)s"
+
+msgid "Search:"
+msgstr "Хайлт:"
+
+msgid "Text"
+msgstr "Teкст"
+
+msgid "Titles"
+msgstr "Titel"
+
+msgid "Search"
+msgstr "Хайлт"
+
+msgid "More Actions:"
+msgstr "Бусад ...:"
+
+#, fuzzy
+msgid "------------------------"
+msgstr "--------------------------"
+
+msgid "Raw Text"
+msgstr "Түүхий текст"
+
+msgid "Print View"
+msgstr "Хэвлэх хувилбар"
+
+msgid "Delete Cache"
+msgstr "Cache устгах"
+
+msgid "Rename Page"
+msgstr "Хуудасны хэр солих"
+
+#, fuzzy
+msgid "Copy Page"
+msgstr "Миний хуудас"
+
+msgid "Delete Page"
+msgstr "Хуудас устгах"
+
+msgid "Like Pages"
+msgstr "Төстэй хуудсууд"
+
+msgid "Local Site Map"
+msgstr "Хуудасны бүтцийн зураглал"
+
+msgid "My Pages"
+msgstr "Миний хуудас"
+
+msgid "Subscribe User"
+msgstr "Хэрэглэгч бүртгэх"
+
+msgid "Remove Spam"
+msgstr "Spam зайлуулах"
+
+#, fuzzy
+msgid "Revert to this revision"
+msgstr "Хяналтын хувилбар %(rev)d сэргээгдлээ."
+
+msgid "Package Pages"
+msgstr "Хуудас пакетлах"
+
+msgid "Render as Docbook"
+msgstr "Docbook болгон гаргах"
+
+#, fuzzy
+msgid "Sync Pages"
+msgstr "Миний хуудас"
+
+msgid "Do"
+msgstr "Эхлэ!"
+
+#, fuzzy
+msgid "Comments"
+msgstr "Тайлбар"
+
+msgid "Edit (Text)"
+msgstr "Өөрчлөх (Text)"
+
+msgid "Edit (GUI)"
+msgstr "Өөрчлөх (GUI)"
+
+msgid "Immutable Page"
+msgstr "Хамгаалагдсан хуудас"
+
+msgid "Remove Link"
+msgstr "Линк устгах"
+
+msgid "Add Link"
+msgstr "Линк оруулах"
+
+msgid "Attachments"
+msgstr "Хавсралт"
+
+#, python-format
+msgid "Show %s days."
+msgstr "%s хоног үзүүлэх."
+
+msgid "Wiki Markup"
+msgstr "Wiki эх текст"
+
+#, fuzzy
+msgid "File attachment browser"
+msgstr "Хавсралтын шинэ нэр"
+
+msgid "User account browser"
+msgstr ""
+
+msgid "Wiki configuration"
+msgstr ""
+
+msgid ""
+"This table shows all settings in this wiki that do not have default values. "
+"Settings that the configuration system doesn't know about are shown in "
+"''italic'', those may be due to third-party extensions needing configuration "
+"or settings that were removed from Moin."
+msgstr ""
+
+#, fuzzy
+msgid "Variable name"
+msgstr "Файлын нэр"
+
+msgid "Setting"
+msgstr ""
+
+msgid "Search Titles"
+msgstr "Гарчиг хайх"
+
+msgid "Display context of search results"
+msgstr "Хайлтын үр дүнг үзүүлэх"
+
+msgid "Case-sensitive searching"
+msgstr "Том, бага үсгийн ялгааг анхаарах"
+
+msgid "Search Text"
+msgstr "Текстээр хайх"
+
+#, python-format
+msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
+msgstr "{{{\"%s\"}}} -ийн оронд сонгогдсон хайлтын ухагдахуунаас хэрэглэнэ үү"
+
+#, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "'%(filename)s' файл хавсаргагдсан байна."
+
+#, python-format
+msgid "Attachment '%(filename)s' deleted."
+msgstr "Хавсралт файл '%(filename)s' устгагдлаа."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Зураг '%(filename)s' хадгалагдлаа."
+
+#, python-format
+msgid "%(mins)dm ago"
+msgstr "%(mins)dm -ийн өмнө"
+
+msgid "(no bookmark set)"
+msgstr "(хавчуурга хийгдээгүй)"
+
+#, python-format
+msgid "(currently set to %s)"
+msgstr "(одоо %s)"
+
+msgid "Delete bookmark"
+msgstr "Хавчуурга устгах"
+
+msgid "Set bookmark"
+msgstr "Хавчуурга оруулах"
+
+msgid "[Bookmark reached]"
+msgstr "[Хавчуурганд хүрсэн]"
+
+msgid "Python Version"
+msgstr "Python хувилбар"
+
+msgid "MoinMoin Version"
+msgstr "MoinMoin хувилбар"
+
+#, python-format
+msgid "Release %s [Revision %s]"
+msgstr "Хувилбар %s [Revision %s]"
+
+msgid "4Suite Version"
+msgstr "4Suite хувилбар"
+
+msgid "Number of pages"
+msgstr "Хуудасны тоо"
+
+msgid "Number of system pages"
+msgstr "Системийн хуудасны тоо"
+
+msgid "Accumulated page sizes"
+msgstr "Цуглуулсан хуудасны хэмжээ"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr "Дискний ашиглалт %(data_dir)s/pages/"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/"
+msgstr "Дискний ашиглалт %(data_dir)s/"
+
+msgid "Entries in edit log"
+msgstr "Өөрчлөлтийн явцын мэдээлэл"
+
+msgid "NONE"
+msgstr "үгүй"
+
+msgid "Global extension macros"
+msgstr "Глобаль өргөтгөсөн макро"
+
+msgid "Local extension macros"
+msgstr "Локаль өргөтгөсөн макро"
+
+msgid "Global extension actions"
+msgstr "Глобаль өргөтгөл"
+
+msgid "Local extension actions"
+msgstr "Локаль өргөтгөл"
+
+msgid "Global parsers"
+msgstr "Глобаль парзер"
+
+msgid "Local extension parsers"
+msgstr "Локаль өргөтгөсөн парзер"
+
+msgid "Disabled"
+msgstr "Идэвхгүй"
+
+msgid "Enabled"
+msgstr "Идэвхтэй"
+
+msgid "index available"
+msgstr "Индэксжсэн"
+
+msgid "index unavailable"
+msgstr "Индексжээгүй"
+
+msgid "Xapian and/or Python Xapian bindings not installed"
+msgstr "Xapian ба/эсвэл Python Xapian bindings суулгаагүй"
+
+msgid "N/A"
+msgstr "өгөгдөлгүй"
+
+msgid "Xapian search"
+msgstr "Xapian-Хайлт"
+
+msgid "Stemming for Xapian"
+msgstr ""
+
+msgid "Active threads"
+msgstr "Active threads"
+
+msgid "No orphaned pages in this wiki."
+msgstr "No orphaned pages in this wiki."
+
+#, python-format
+msgid "Invalid include arguments \"%s\"!"
+msgstr "Буруу \"Include\"-arguments: \"%s\"!"
+
+#, python-format
+msgid "Nothing found for \"%s\"!"
+msgstr " \"%s\" гэсэн текст тэмдэглэгээ олдсонгүй!"
+
+msgid "edit"
+msgstr "өөрчлөх"
+
+#, python-format
+msgid ""
+"%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
+"missing."
+msgstr ""
+
+#, python-format
+msgid ""
+"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s=%"
+"(argument_value)s!"
+msgstr ""
+
+#, python-format
+msgid ""
+"Current configuration does not allow embedding of the file %(file)s because "
+"of its mimetype %(mimetype)s."
+msgstr ""
+
+msgid "Embedded"
+msgstr ""
+
+msgid "Search for items"
+msgstr "Нэгжээр хайх"
+
+msgid "containing all the following terms"
+msgstr "дараах бүх ухагдахуунуудыг агуулсан"
+
+msgid "containing one or more of the following terms"
+msgstr "дараах ухагдахуунуудаас нэг болон хэд хэдийн агуулсан"
+
+msgid "not containing the following terms"
+msgstr "дараах ухагдахуунуудыг агуулаагүй"
+
+msgid "last modified since (e.g. last 2 weeks)"
+msgstr "сүүлийн өөрчлөлт (Жбэл: 'сүүлийн 2 долоо хоног')"
+
+msgid "any category"
+msgstr ""
+
+msgid "any language"
+msgstr "бүх хэл"
+
+msgid "any mimetype"
+msgstr ""
+
+msgid "Categories"
+msgstr ""
+
+msgid "Language"
+msgstr "хэл"
+
+msgid "File Type"
+msgstr "файлын төрөл"
+
+msgid "Search only in titles"
+msgstr "Зөвхөн гарчгаар хайх"
+
+msgid "Case-sensitive search"
+msgstr "Том, бага үсгийн ялгаатай хайлт"
+
+msgid "Exclude underlay"
+msgstr "Underlay ороогүй"
+
+msgid "No system items"
+msgstr "System Items-гүй"
+
+msgid "Search in all page revisions"
+msgstr "Бүх хяналтын хувилбарт хайх"
+
+msgid "Go get it!"
+msgstr "Эхлэ!"
+
+msgid "Include system pages"
+msgstr "Системийн хуудсуудыг хамарсан"
+
+msgid "Exclude system pages"
+msgstr "Системийн хуудсуудыг хамраагүй"
+
+msgid "No wanted pages in this wiki."
+msgstr "Энэ вики-д таны хүссэн хуудас алга байна."
+
+msgid "Description"
+msgstr ""
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr ""
+"Таны {{{\"%s\"}}} хайлт хүчингүй. Нэмэлт мэдээлэл шаардлагатай бол "
+"ХайлтХийхТусламж -ийг үзнэ үү."
+
+msgid "Markup"
+msgstr "Notation"
+
+msgid "Display"
+msgstr "Markup"
+
+#, python-format
+msgid "No quotes on %(pagename)s."
+msgstr " %(pagename)s хуудсанд ишлэл олдсонгүй."
+
+msgid "You need to provide a chart type!"
+msgstr "Диаграм шаардлагатай!"
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "Буруу диаграмын төрөл \"%s\"!"
+
+msgid "Contents"
+msgstr "Агуулгын жагсаалт"
+
+#, python-format
+msgid "Unsupported navigation scheme '%(scheme)s'!"
+msgstr "Тодорхойгүй навигцийн схем: '%(scheme)s'!"
+
+msgid "No parent page found!"
+msgstr "Энэ хуудас дэд хуудас биш!"
+
+msgid "Slideshow"
+msgstr "Слайд үзүүлэх"
+
+msgid "Start"
+msgstr "Эхлэх"
+
+#, python-format
+msgid "Slide %(pos)d of %(size)d"
+msgstr " %(size)d -ийн хуудас: %(pos)d von "
+
+#, python-format
+msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
+msgstr ""
+
+msgid "Go To Page"
+msgstr "Хуудас руу оч"
 
 msgid "You are not allowed to use this action."
 msgstr "Та энэ үйлдлийг хийж болохгүй."
 
-msgid "Delete"
-msgstr "Устгах"
+#, python-format
+msgid "No pages like \"%s\"!"
+msgstr "\"%s\" -тай ямар ч хуудас төстэй биш байна!"
 
-msgid "This page is already deleted or was never created!"
-msgstr "Энэхүү хуудас нь устгагдсан эсвэл бүр үүсгэгдээгүй ч байж болох юм!"
+#, python-format
+msgid "Exactly one page like \"%s\" found, redirecting to page."
+msgstr "Яг \"%s\" шиг хуудас олдоо, тийш нь шилжүүл."
 
-msgid "Delete all /subpages too?"
+#, python-format
+msgid "Pages like \"%s\""
+msgstr "\"%s\" -тай адил төстэй"
+
+#, python-format
+msgid "%(matchcount)d %(matches)s for \"%(title)s\""
+msgstr "%(matchcount)d %(matches)s for \"%(title)s\""
+
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr "Нэргүй хуудас үүсгэх боломжгүй - хуудасандаа нэр оруулна уу."
+
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "Та Abonnements ашиглахын тулд бүртгүүлэх шаардлагатай."
+
+#, fuzzy
+msgid "You must login to remove a quicklink."
+msgstr "quicklink үүсгэхийн тулд логин хийсэн байх шаарлагатай"
+
+msgid "Your quicklink to this page has been removed."
+msgstr "Таны энэ хуудас руу заасан quicklink устгагдсан."
+
+#, fuzzy
+msgid "Your quicklink to this page could not be removed."
+msgstr "Таны энэ хуудас руу заасан quicklink устгагдсан."
+
+#, fuzzy
+msgid "You need to have a quicklink to this page to remove it."
+msgstr "Таны энэ хуудас руу заасан quicklink устгагдсан."
+
+msgid ""
+"You need to manually go to your OpenID provider wiki\n"
+"and log in before you can use your OpenID. MoinMoin will\n"
+"never allow you to enter your password here.\n"
+"\n"
+"Once you have logged in, simply reload this page."
 msgstr ""
 
-msgid "Optional reason for the deletion"
-msgstr "Устгах шалтгаан"
+msgid "OpenID Trust verification"
+msgstr ""
 
-msgid "Really delete this page?"
-msgstr "Та энэ хуудсыг үнэхээр устгахыг хүсч байна уу?"
+#, python-format
+msgid "The site %s has asked for your identity."
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"If you approve, the site represented by the trust root below will be\n"
+"told that you control the identity URL %s. (If you are using a delegated\n"
+"identity, the site will take care of reversing the\n"
+"delegation on its own.)"
+msgstr ""
+
+msgid "Trust root"
+msgstr ""
+
+msgid "Identity URL"
+msgstr ""
+
+#, fuzzy
+msgid "Remember decision"
+msgstr "Python хувилбар"
+
+msgid "Remember this trust decision and don't ask again"
+msgstr ""
+
+msgid "Approve"
+msgstr ""
+
+msgid "Don't approve"
+msgstr ""
+
+msgid "OpenID not served"
+msgstr ""
+
+msgid ""
+"\n"
+"Unfortunately you have not created your homepage yet. Therefore,\n"
+"we cannot serve an OpenID for you. Please create your homepage first\n"
+"and then reload this page or click the button below to cancel this\n"
+"verification."
+msgstr ""
+
+msgid "If this account exists an email was sent."
+msgstr ""
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"Энэ Викид мэйлтэй ажиллах функц нь идэвхижээгүй байна.\n"
+"Энэхүү Викигийн мэйлийн функцийг идэвхижүүлж чадах эрх бүхийВики эзэмшигчтэй "
+"холбоо барина уу."
+
+#, fuzzy
+msgid "Please provide a valid email address or a username!"
+msgstr "Мэйл хаягаа зөв оруулна уу!"
+
+msgid "Mail me my account data"
+msgstr "Дансны мэдээлэл мэйлээр илгээх"
+
+#, fuzzy
+msgid "Recovery token"
+msgstr "Бүгдийг сэргээх!"
+
+#, fuzzy
+msgid "New password"
+msgstr "Нууц үг"
+
+#, fuzzy
+msgid "New password (repeat)"
+msgstr "Нууц үгээ давт"
+
+#, fuzzy
+msgid "Reset my password"
+msgstr "Нууц үг"
+
+msgid "Your password has been changed, you can log in now."
+msgstr ""
+
+msgid "Your token is invalid!"
+msgstr ""
+
+#, fuzzy
+msgid "Password reset"
+msgstr "Нууц үгээ давт"
+
+#, fuzzy
+msgid ""
+"\n"
+"== Password reset ==\n"
+"Enter a new password below."
+msgstr "Нууц үг алга байна. Хэрэглэгчийн нэр болон нууц үг оруулна уу."
+
+#, fuzzy
+msgid "Lost password"
+msgstr "Нууц үг"
+
+msgid ""
+"\n"
+"== Recovering a lost password ==\n"
+"If you have forgotten your password, provide your email address or\n"
+"username and click on '''Mail me my account data'''.\n"
+"You will receive an email containing a recovery token that can be\n"
+"used to change your password. The email will also contain further\n"
+"instructions."
+msgstr ""
+
+msgid ""
+"\n"
+"=== Password reset ===\n"
+"If you already have received the email with the recovery token, enter your\n"
+"username, the recovery token and a new password (twice) below."
+msgstr ""
 
 #, python-format
 msgid "[%d attachments]"
@@ -1139,9 +2541,6 @@ msgstr "зөөх"
 
 msgid "get"
 msgstr "ачаалах"
-
-msgid "edit"
-msgstr "өөрчлөх"
 
 msgid "view"
 msgstr "үзүүлэх"
@@ -1191,16 +2590,16 @@ msgstr "\"%(pagename)s\" -ийн хавсралтууд"
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 
-#, fuzzy
-msgid "You are not allowed to overwrite a file attachment of this page."
-msgstr "Та энэ хуудасны хавсралтуудыг үзэж болохгүй."
-
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
 msgstr ""
 "Хоосон файл. Файлын нэрнээс ASCII-тэмдэгтүүдийг нь арилгааддахин оролдоод "
 "үзнэ үү."
+
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Та энэ хуудасны хавсралтуудыг үзэж болохгүй."
 
 #, python-format
 msgid ""
@@ -1219,10 +2618,6 @@ msgstr "Та энэ хуудсандд зураг хадгалж болохгү�
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Та энэ хуудаснаас хавсралт устгаж болохгүй!"
-
-#, python-format
-msgid "Attachment '%(filename)s' deleted."
-msgstr "Хавсралт файл '%(filename)s' устгагдлаа."
 
 #, fuzzy, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -1360,266 +2755,52 @@ msgstr "Та энэ хуудасны хавсралтуудыг үзэж бол�
 msgid "attachment:%(filename)s of %(pagename)s"
 msgstr "%(pagename)s дахь attachment:%(filename)s"
 
+msgid "User account created! You can use this account to login now..."
+msgstr ""
+"Хэрэглэгчийн данс бүртгэгдлээ! Та одоо энэ дансаа логин хийхдээ ашиглаж "
+"болно..."
+
+msgid "TextCha (required)"
+msgstr ""
+
+msgid "Create Profile"
+msgstr "Профиль үүсгэх"
+
+msgid "Create Account"
+msgstr ""
+
+msgid "Editor"
+msgstr "Нийтлэгч"
+
+msgid "Pages"
+msgstr "Хуудсууд"
+
+msgid "Select Author"
+msgstr "Нийтлэгчээ сонгох"
+
+msgid "Revert all!"
+msgstr "Бүгдийг сэргээх!"
+
+#, fuzzy
+msgid "Revert"
+msgstr "Бүгдийг сэргээх!"
+
+msgid "You are not allowed to revert this page!"
+msgstr "Та энэ хуудсыг нөхөн сэргээж болохгүй!"
+
 msgid ""
-"Cannot create a new page without a page name.  Please specify a page name."
-msgstr "Нэргүй хуудас үүсгэх боломжгүй - хуудасандаа нэр оруулна уу."
-
-#, python-format
-msgid "Full Link List for \"%s\""
-msgstr "\"%s\" -ын линкүүдийн жагсаалт"
-
-#, python-format
-msgid "No pages like \"%s\"!"
-msgstr "\"%s\" -тай ямар ч хуудас төстэй биш байна!"
-
-#, python-format
-msgid "Exactly one page like \"%s\" found, redirecting to page."
-msgstr "Яг \"%s\" шиг хуудас олдоо, тийш нь шилжүүл."
-
-#, python-format
-msgid "Pages like \"%s\""
-msgstr "\"%s\" -тай адил төстэй"
-
-#, python-format
-msgid "%(matchcount)d %(matches)s for \"%(title)s\""
-msgstr "%(matchcount)d %(matches)s for \"%(title)s\""
-
-msgid ""
-"You need to manually go to your OpenID provider wiki\n"
-"and log in before you can use your OpenID. MoinMoin will\n"
-"never allow you to enter your password here.\n"
-"\n"
-"Once you have logged in, simply reload this page."
-msgstr ""
-
-msgid "OpenID Trust verification"
-msgstr ""
-
-#, python-format
-msgid "The site %s has asked for your identity."
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"If you approve, the site represented by the trust root below will be\n"
-"told that you control the identity URL %s. (If you are using a delegated\n"
-"identity, the site will take care of reversing the\n"
-"delegation on its own.)"
-msgstr ""
-
-msgid "Trust root"
-msgstr ""
-
-msgid "Identity URL"
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
 msgstr ""
 
 #, fuzzy
-msgid "Remember decision"
-msgstr "Python хувилбар"
-
-msgid "Remember this trust decision and don't ask again"
-msgstr ""
-
-msgid "Approve"
-msgstr ""
-
-msgid "Don't approve"
-msgstr ""
-
-msgid "OpenID not served"
-msgstr ""
-
-msgid ""
-"\n"
-"Unfortunately you have not created your homepage yet. Therefore,\n"
-"we cannot serve an OpenID for you. Please create your homepage first\n"
-"and then reload this page or click the button below to cancel this\n"
-"verification."
-msgstr ""
-
-#, fuzzy, python-format
-msgid "You must login to use this action: %(action)s."
-msgstr "Та Abonnements ашиглахын тулд бүртгүүлэх шаардлагатай."
-
-msgid "Your subscription to this page has been removed."
-msgstr "Таны энэ хуудасны Abonnement арилгагдсан байна."
-
-msgid "Can't remove regular expression subscription!"
-msgstr "Ердийн утгатай Abonnement арилахгүй байна."
-
-#, fuzzy
-msgid "Edit the subscription regular expressions in your settings."
-msgstr ""
-"Та өөрийнхөө ХэрэглэгчийнТохиргоо -нд Abonnement-ын Ердийн утгыгөөрчилнө үү."
-
-#, fuzzy
-msgid "You need to be subscribed to unsubscribe."
-msgstr "Энэ хуудас нь бүртгэгдсэн хуудсуудын жагсаалтад нэмэгдлээ."
-
-#, fuzzy
-msgid "Wiki Backup"
-msgstr "Wiki эх текст"
-
-msgid ""
-"= Downloading a backup =\n"
-"\n"
-"Please note:\n"
-" * Store backups in a safe and secure place - they contain sensitive "
-"information.\n"
-" * Make sure your wiki configuration backup_* values are correct and "
-"complete.\n"
-" * Make sure the backup file you get contains everything you need in case of "
-"problems.\n"
-" * Make sure it is downloaded without problems.\n"
-"\n"
-"To get a backup, just click here:"
-msgstr ""
-
-msgid "Backup"
-msgstr "Backup"
-
-msgid "You are not allowed to do remote backup."
-msgstr "Та Remote-Backup хийж болохгүй."
-
-#, python-format
-msgid "Unknown backup subaction: %s."
-msgstr "Тодорхойгүй backup -ын туслах үйлдэл: %s."
-
-#, python-format
-msgid "Subscribe users to the page %s"
-msgstr "%s хуудсанд хэрэглэгчдийг бүртгэх"
-
-msgid "Enter user names (comma separated):"
-msgstr ""
-
-#, python-format
-msgid "Subscribed for %s:"
-msgstr "%s -д бүртгэгдсэн:"
-
-msgid "Not a user:"
-msgstr "Хэрэглэгч биш:"
-
-msgid "You are not allowed to perform this action."
-msgstr "Та энэ үйлдлийг гүйцэтгэж болохгүй."
-
-msgid "Rename Page"
-msgstr "Хуудасны хэр солих"
-
-msgid "Rename all /subpages too?"
-msgstr ""
-
-msgid "New name"
-msgstr "Шинэ нэр"
-
-msgid "Optional reason for the renaming"
+msgid "Optional reason for reverting this page"
 msgstr "Нэр солих шалтгаан"
 
 #, fuzzy
-msgid "Really rename this page?"
+msgid "Really revert this page?"
 msgstr "Та энэ хуудсыг үнэхээр устгахыг хүсч байна уу?"
-
-msgid "No older revisions available!"
-msgstr "Энэ хуудасны хуучин хувилбар алга байна!"
-
-#, python-format
-msgid "Diff for \"%s\""
-msgstr " \"%s\" -ийн ялгаа"
-
-#, python-format
-msgid "Differences between revisions %d and %d"
-msgstr "%d болон %d хяналтын хувилбаруудын хоорондын ялгаа"
-
-#, python-format
-msgid "(spanning %d versions)"
-msgstr "( %d хувилбарыг дайруулан)"
-
-#, fuzzy
-msgid "Revert to this revision"
-msgstr "Хяналтын хувилбар %(rev)d сэргээгдлээ."
-
-#, fuzzy
-msgid "Previous change"
-msgstr "Өмнөх"
-
-#, fuzzy
-msgid "Next change"
-msgstr "Юу ч өөрчлөгдөөгүй."
-
-msgid "No differences found!"
-msgstr "Ялгаа олдсонгүй!"
-
-#, python-format
-msgid "The page was saved %(count)d times, though!"
-msgstr "Хуудас %(count)d удаа хадгалагдсан байх юм!"
-
-msgid "(ignoring whitespace)"
-msgstr "(хоосон зайг хэрэгсэхгүй)"
-
-msgid "Ignore changes in the amount of whitespace"
-msgstr "Хоосон зайнаас бусад өөрчлөлтүүдийг хэрэгсэхгүй байх"
-
-#, python-format
-msgid "(!) Only pages changed since '''%s''' are being displayed!"
-msgstr "(!) Зөвхөн '''%s''' -аас хойш өөрчлөгдсөн хуудсуудыг үзүүл!"
-
-msgid ""
-"/!\\ The modification date you entered was not recognized and is therefore "
-"not considered for the search results!"
-msgstr ""
-"/!\\ Өгөгдсөн өөрчлөлт хийсэн огноо нь тодорхойгүй байгаа тул хайлтад "
-"хамрагдсангүй."
-
-#, python-format
-msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
-msgstr "{{{\"%s\"}}} -ийн оронд сонгогдсон хайлтын ухагдахуунаас хэрэглэнэ үү"
-
-#, python-format
-msgid "Title Search: \"%s\""
-msgstr "Гарчгийн хайлт: \"%s\""
-
-#, python-format
-msgid "Advanced Search: \"%s\""
-msgstr "Өргөтгөсөн хайлт: \"%s\""
-
-#, python-format
-msgid "Full Text Search: \"%s\""
-msgstr "Бүрэн текст хайлт: \"%s\""
-
-#, python-format
-msgid ""
-"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
-"for more information."
-msgstr ""
-"Таны {{{\"%s\"}}} хайлт хүчингүй. Нэмэлт мэдээлэл шаардлагатай бол "
-"ХайлтХийхТусламж -ийг үзнэ үү."
-
-#, python-format
-msgid ""
-"Your search query {{{\"%s\"}}} didn't return any results. Please change some "
-"terms and refer to HelpOnSearching for more information.%s"
-msgstr ""
-"Таны {{{\"%s\"}}} -аар хайсан хайлт тодорхой үр дүнд хүрсэнгүй.Зарим хайлтын "
-"ухагдахуунуудаа өөрчлөх болон нэмэлт мэдээлэл шаардлагатай бол "
-"ХайлтХийхТусламж -аас уншина уу. %s"
-
-msgid "(!) Consider performing a"
-msgstr "(!) Сайн бод доо,"
-
-msgid "full-text search with your search terms"
-msgstr "Таны хайлтын ухагдахуунуудын дагуу бүрэн текстийн хайлт"
-
-msgid ""
-"(!) You're performing a title search that might not include all related "
-"results of your search query in this wiki. <<BR>>"
-msgstr ""
-"(!) Та гарчгийн хайлт хийж байна. Энэ нь магадгүй энэ викид байгаа таны "
-"хайлтын бүх шаардлагатай үр дүнг үзүүлж чадахгүй байж болох юм . <<BR>>"
-
-msgid "Click here to perform a full-text search with your search terms!"
-msgstr ""
-"Өгөгдсөн хайлтын ухагдхуунуудаар бүрэн текстийн хайлт хийхийн тулд энд дарна "
-"уу!"
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
@@ -1645,300 +2826,6 @@ msgstr "Та унших эрхгүй хуудсан дахь Зөв бичих �
 
 msgid "You can't check spelling on a page you can't read."
 msgstr "Та унших эрхгүй хуудсан дахь Зөв бичих дүрмийн алдаагшалгах боломжгүй."
-
-#, fuzzy
-msgid "You are not allowed to create the supplementation page."
-msgstr "Та энэ хуудсыг нөхөн сэргээж болохгүй!"
-
-msgid "General Information"
-msgstr "Ерөнхий мэдээлэл"
-
-#, python-format
-msgid "Page size: %d"
-msgstr "Хуудасны хэмжээ: %d"
-
-msgid "SHA digest of this page's content is:"
-msgstr "Хуудасны агуулгын SHA баталгаа:"
-
-msgid "The following users subscribed to this page:"
-msgstr "Дараахи хэрэглэгч энэ хуудсанд бүртгүүлсэн байна:"
-
-msgid "This page links to the following pages:"
-msgstr "Энэхүү хуудас нь дараахи хуудсуудтай холбогдсон байна:"
-
-msgid "Date"
-msgstr "Огноо"
-
-msgid "Diff"
-msgstr "Ялгаа"
-
-msgid "Editor"
-msgstr "Нийтлэгч"
-
-msgid "Comment"
-msgstr "Тайлбар"
-
-#, fuzzy
-msgid "to previous"
-msgstr "Өмнөх"
-
-msgid "N/A"
-msgstr "өгөгдөлгүй"
-
-msgid "Revision History"
-msgstr "Хяналтын хувилбарын явц"
-
-msgid "No log entries found."
-msgstr "Log-өгөгдлүүд олдсонгүй."
-
-#, python-format
-msgid "Info for \"%s\""
-msgstr " \"%s\" -ийн мэдээлэл"
-
-#, python-format
-msgid "Show \"%(title)s\""
-msgstr "\"%(title)s\" -ийг харуулах"
-
-msgid "General Page Infos"
-msgstr "Ерөнхий хуудасны мэдээллүүд"
-
-msgid "Page hits and edits"
-msgstr "Хуудасны хандалтууд болон өөрчлөлтүүд"
-
-msgid "User account created! You can use this account to login now..."
-msgstr ""
-"Хэрэглэгчийн данс бүртгэгдлээ! Та одоо энэ дансаа логин хийхдээ ашиглаж "
-"болно..."
-
-msgid "TextCha (required)"
-msgstr ""
-
-msgid "Create Profile"
-msgstr "Профиль үүсгэх"
-
-msgid "Create Account"
-msgstr ""
-
-#, fuzzy
-msgid "Copy Page"
-msgstr "Миний хуудас"
-
-msgid "Copy all /subpages too?"
-msgstr ""
-
-#, fuzzy
-msgid "Optional reason for the copying"
-msgstr "Нэр солих шалтгаан"
-
-#, fuzzy
-msgid "Really copy this page?"
-msgstr "Та энэ хуудсыг үнэхээр устгахыг хүсч байна уу?"
-
-#, fuzzy
-msgid "Revert"
-msgstr "Бүгдийг сэргээх!"
-
-msgid "You are not allowed to revert this page!"
-msgstr "Та энэ хуудсыг нөхөн сэргээж болохгүй!"
-
-msgid ""
-"You were viewing the current revision of this page when you called the "
-"revert action. If you want to revert to an older revision, first view that "
-"older revision and then call revert to this (older) revision again."
-msgstr ""
-
-#, fuzzy
-msgid "Optional reason for reverting this page"
-msgstr "Нэр солих шалтгаан"
-
-#, fuzzy
-msgid "Really revert this page?"
-msgstr "Та энэ хуудсыг үнэхээр устгахыг хүсч байна уу?"
-
-msgid "You must login to add a quicklink."
-msgstr "quicklink үүсгэхийн тулд логин хийсэн байх шаарлагатай"
-
-msgid "A quicklink to this page has been added for you."
-msgstr "Энэ хуудсанд quicklink нэмэгдсэн."
-
-#, fuzzy
-msgid "A quicklink to this page could not be added for you."
-msgstr "Энэ хуудсанд quicklink нэмэгдсэн."
-
-#, fuzzy
-msgid "You already have a quicklink to this page."
-msgstr "Та уг нь энэ хуудсыг сая хадгалсан л байна даа!"
-
-msgid "Please choose:"
-msgstr ""
-
-msgid "Settings"
-msgstr ""
-
-msgid "Charts are not available!"
-msgstr "Диаграм алга байна!"
-
-msgid "You need to provide a chart type!"
-msgstr "Диаграм шаардлагатай!"
-
-#, python-format
-msgid "Bad chart type \"%s\"!"
-msgstr "Буруу диаграмын төрөл \"%s\"!"
-
-#, python-format
-msgid "Local Site Map for \"%s\""
-msgstr "\"%s\" -ийн локаль хуудасны бүтэц"
-
-#, fuzzy
-msgid "You must login to remove a quicklink."
-msgstr "quicklink үүсгэхийн тулд логин хийсэн байх шаарлагатай"
-
-msgid "Your quicklink to this page has been removed."
-msgstr "Таны энэ хуудас руу заасан quicklink устгагдсан."
-
-#, fuzzy
-msgid "Your quicklink to this page could not be removed."
-msgstr "Таны энэ хуудас руу заасан quicklink устгагдсан."
-
-#, fuzzy
-msgid "You need to have a quicklink to this page to remove it."
-msgstr "Таны энэ хуудас руу заасан quicklink устгагдсан."
-
-#, fuzzy
-msgid "Load"
-msgstr "Файлаа оруулах"
-
-#, fuzzy
-msgid "Pagename not specified!"
-msgstr "Хавсралт файлын нэр алга байна!"
-
-msgid "Upload page content"
-msgstr ""
-
-msgid ""
-"You can upload content for the page named below. If you change the page "
-"name, you can also upload content for another page. If the page name is "
-"empty, we derive the page name from the file name."
-msgstr ""
-
-msgid "File to load page content from"
-msgstr ""
-
-#, fuzzy
-msgid "Page Name"
-msgstr "Багцын нэр"
-
-#, python-format
-msgid "Invalid filename \"%s\"!"
-msgstr "Файлын буруу нэр: \"%s\"!"
-
-#, python-format
-msgid "Created the package %s containing the pages %s."
-msgstr "%s -ийг агуулсан %s багц үүсгэгдлээ."
-
-#, fuzzy
-msgid "Include all attachments?"
-msgstr "[%d Хавсралт]"
-
-msgid "Package pages"
-msgstr "Хуудсуудыг багцлах"
-
-msgid "Package name"
-msgstr "Багцын нэр"
-
-msgid "List of page names - separated by a comma"
-msgstr "Хуудасны нэрсийн жагсаалт - Таслалаар тусгаарлагдсан"
-
-msgid "Do it."
-msgstr "Гүйцэтгэ"
-
-#, python-format
-msgid "Execute action %(actionname)s?"
-msgstr "%(actionname)s үйлдлийг гүйцэтгэх үү?"
-
-#, python-format
-msgid "Action %(actionname)s is excluded in this wiki!"
-msgstr "%(actionname)s үйлдэл энэ вики-д хамаарахгүй!"
-
-#, python-format
-msgid "You are not allowed to use action %(actionname)s on this page!"
-msgstr "Та энэ %(actionname)s үйлдлийг энэ хуудас дээр гүйцэтгэх боломжгүй!"
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Энэ %(actionname)s үйлдлийг хэрэглэхийн тулд интерактив хэрэглэгчийн "
-"интерфэйс ашиглана уу!"
-
-msgid "Please log in first."
-msgstr "Эхлээд логин хийнэ үү."
-
-msgid "Please first create a homepage before creating additional pages."
-msgstr "Хуудсууд үүсгэхээсээ өмнө нүүр хуудсаа үүсгэнэ үү."
-
-#, fuzzy, python-format
-msgid ""
-"You can add some additional sub pages to your already existing homepage "
-"here.\n"
-"\n"
-"You can choose how open to other readers or writers those pages shall be,\n"
-"access is controlled by group membership of the corresponding group page.\n"
-"\n"
-"Just enter the sub page's name and click on the button to create a new "
-"page.\n"
-"\n"
-"Before creating access protected pages, make sure the corresponding group "
-"page\n"
-"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
-"creating\n"
-"the group pages.\n"
-"\n"
-"||'''Add a new personal page:'''||'''Related access control list "
-"group:'''||\n"
-"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
-"[[%(username)s/ReadWriteGroup]]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
-"(username)s/ReadGroup]]||\n"
-"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
-"(username)s only||\n"
-"\n"
-msgstr ""
-"Та энд өмнө нь байсан нүүр хуудсандаа дэд хуудсууд нэмж оруулна.\n"
-"\n"
-"Та энэхүү хуудсыг бусад уншигчид болон нийтлэгчдэд хэр нээлттэй байлгах "
-"эсэхээсонгож,\n"
-"холбогдох группд нь гишүүн болгох замаар хандалтыг нь хянана.\n"
-"\n"
-"Та дэд хуудсынхаа нэрийг оруулаад шинэ хуудас үүсгэх товчин дээр дарна.\n"
-"\n"
-"Хандалтын хяналт бүхий хуудас үүсгэхийн тулд өмнө ньтухайн групп хуудас нь "
-"байгаад гишүүд нь зөв байгаа эсэхийг тогтоох хэрэгтэй. Групп хуудас "
-"үүсгэхийн тулд ГруппНүүрхуудасЗагвар -ыг ашигана уу.\n"
-"\n"
-"||'''Өөрийн шинэ хуудас нэмж оруулах:'''||'''Харъялагдах ACL-Груп:'''||\n"
-"||<<ШинэХуудас(HomepageReadWritePageTemplate,Хуудас (read/write),%(username)"
-"s)>>||[\"%(username)s/ReadWriteGroup\"]||\n"
-"||<<ШинэХуудас(HomepageReadPageTemplate,Хуудас (read-only),%(username)s)>>||"
-"[\"%(username)s/ReadGroup\"]||\n"
-"||<<ШинэХуудас(HomepagePrivatePageTemplate,Хуудас (privat),%(username)s)>>||"
-"nur %(username)s||\n"
-"\n"
-
-msgid "MyPages management"
-msgstr "Миний хуудасны менежмент"
-
-msgid "Pages"
-msgstr "Хуудсууд"
-
-msgid "Select Author"
-msgstr "Нийтлэгчээ сонгох"
-
-msgid "Revert all!"
-msgstr "Бүгдийг сэргээх!"
-
-#, fuzzy
-msgid "Only superuser is allowed to use this action."
-msgstr "Та энэ үйлдлийг хийж болохгүй."
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Та унших эрхгүй хуудсандаа бүртгүүлэх боломжгүй."
@@ -1969,77 +2856,14 @@ msgstr "Энэ хуудас нь бүртгэгдсэн хуудсуудын ж�
 msgid "You could not get subscribed to this page."
 msgstr "Энэ хуудас нь бүртгэгдсэн хуудсуудын жагсаалтад нэмэгдлээ."
 
-msgid "If this account exists an email was sent."
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
 msgstr ""
+"Энэ %(actionname)s үйлдлийг хэрэглэхийн тулд интерактив хэрэглэгчийн "
+"интерфэйс ашиглана уу!"
 
-msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
-msgstr ""
-"Энэ Викид мэйлтэй ажиллах функц нь идэвхижээгүй байна.\n"
-"Энэхүү Викигийн мэйлийн функцийг идэвхижүүлж чадах эрх бүхийВики эзэмшигчтэй "
-"холбоо барина уу."
-
-#, fuzzy
-msgid "Please provide a valid email address or a username!"
-msgstr "Мэйл хаягаа зөв оруулна уу!"
-
-msgid "Mail me my account data"
-msgstr "Дансны мэдээлэл мэйлээр илгээх"
-
-#, fuzzy
-msgid "Recovery token"
-msgstr "Бүгдийг сэргээх!"
-
-#, fuzzy
-msgid "New password"
-msgstr "Нууц үг"
-
-#, fuzzy
-msgid "New password (repeat)"
-msgstr "Нууц үгээ давт"
-
-#, fuzzy
-msgid "Reset my password"
-msgstr "Нууц үг"
-
-msgid "Your password has been changed, you can log in now."
-msgstr ""
-
-msgid "Your token is invalid!"
-msgstr ""
-
-#, fuzzy
-msgid "Password reset"
-msgstr "Нууц үгээ давт"
-
-#, fuzzy
-msgid ""
-"\n"
-"== Password reset ==\n"
-"Enter a new password below."
-msgstr "Нууц үг алга байна. Хэрэглэгчийн нэр болон нууц үг оруулна уу."
-
-#, fuzzy
-msgid "Lost password"
-msgstr "Нууц үг"
-
-msgid ""
-"\n"
-"== Recovering a lost password ==\n"
-"If you have forgotten your password, provide your email address or\n"
-"username and click on '''Mail me my account data'''.\n"
-"You will receive an email containing a recovery token that can be\n"
-"used to change your password. The email will also contain further\n"
-"instructions."
-msgstr ""
-
-msgid ""
-"\n"
-"=== Password reset ===\n"
-"If you already have received the email with the recovery token, enter your\n"
-"username, the recovery token and a new password (twice) below."
-msgstr ""
+msgid "You are now logged out."
+msgstr "Та логаут хийсэн байна."
 
 #, python-format
 msgid "Rolled back changes to the page %s."
@@ -2199,609 +3023,383 @@ msgstr "%s хуудас нь алсын вики талаасаа зөрчилт
 msgid "Page %s merged with conflicts."
 msgstr "%s хуудас зөрчилтөй нэгтгэгдсэн байна."
 
+#, fuzzy
+msgid "You are not allowed to create the supplementation page."
+msgstr "Та энэ хуудсыг нөхөн сэргээж болохгүй!"
+
+msgid "Delete"
+msgstr "Устгах"
+
+msgid "This page is already deleted or was never created!"
+msgstr "Энэхүү хуудас нь устгагдсан эсвэл бүр үүсгэгдээгүй ч байж болох юм!"
+
+msgid "Delete all /subpages too?"
+msgstr ""
+
+msgid "Optional reason for the deletion"
+msgstr "Устгах шалтгаан"
+
+msgid "Really delete this page?"
+msgstr "Та энэ хуудсыг үнэхээр устгахыг хүсч байна уу?"
+
+msgid "General Information"
+msgstr "Ерөнхий мэдээлэл"
+
 #, python-format
-msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
-msgstr " '%(server)s'Мэйл сервер холбогдсонгүй, алдаа: %(reason)s"
+msgid "Page size: %d"
+msgstr "Хуудасны хэмжээ: %d"
 
-msgid "Mail not sent"
-msgstr "E-мэйл илгээгдсэнгүй"
+msgid "SHA digest of this page's content is:"
+msgstr "Хуудасны агуулгын SHA баталгаа:"
 
-msgid "Mail sent OK"
-msgstr "E-Mмэйл илгээгдлээ"
+msgid "The following users subscribed to this page:"
+msgstr "Дараахи хэрэглэгч энэ хуудсанд бүртгүүлсэн байна:"
 
-msgid "From"
-msgstr "Хэнээс"
+msgid "This page links to the following pages:"
+msgstr "Энэхүү хуудас нь дараахи хуудсуудтай холбогдсон байна:"
 
-msgid "To"
-msgstr "Хэнд"
+msgid "Date"
+msgstr "Огноо"
 
-msgid "Content"
-msgstr "Агуулга"
+msgid "Diff"
+msgstr "Ялгаа"
 
-msgid "Attachments"
-msgstr "Хавсралт"
-
-msgid "Line"
-msgstr "Мөр"
-
-msgid "Deletions are marked like this."
-msgstr "Арилгагдсан текстүүд ингэж тэмдэглэгдсэн."
-
-msgid "Additions are marked like this."
-msgstr "Нэмж оруулсан текстүүд ингэж тэмдэглэгдсэн."
+msgid "Comment"
+msgstr "Тайлбар"
 
 #, fuzzy
-msgid "Attachment link"
-msgstr "Хавсралт"
+msgid "to previous"
+msgstr "Өмнөх"
+
+msgid "Revision History"
+msgstr "Хяналтын хувилбарын явц"
+
+msgid "No log entries found."
+msgstr "Log-өгөгдлүүд олдсонгүй."
+
+#, python-format
+msgid "Info for \"%s\""
+msgstr " \"%s\" -ийн мэдээлэл"
+
+#, python-format
+msgid "Show \"%(title)s\""
+msgstr "\"%(title)s\" -ийг харуулах"
+
+msgid "General Page Infos"
+msgstr "Ерөнхий хуудасны мэдээллүүд"
+
+msgid "Page hits and edits"
+msgstr "Хуудасны хандалтууд болон өөрчлөлтүүд"
+
+msgid "You must login to add a quicklink."
+msgstr "quicklink үүсгэхийн тулд логин хийсэн байх шаарлагатай"
+
+msgid "A quicklink to this page has been added for you."
+msgstr "Энэ хуудсанд quicklink нэмэгдсэн."
 
 #, fuzzy
-msgid "Page link"
-msgstr "\"%s\" -тай адил төстэй"
+msgid "A quicklink to this page could not be added for you."
+msgstr "Энэ хуудсанд quicklink нэмэгдсэн."
 
 #, fuzzy
-msgid "Changed page"
+msgid "You already have a quicklink to this page."
+msgstr "Та уг нь энэ хуудсыг сая хадгалсан л байна даа!"
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Wiki эх текст"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "Backup"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Та Remote-Backup хийж болохгүй."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Тодорхойгүй backup -ын туслах үйлдэл: %s."
+
+msgid "Please choose:"
+msgstr ""
+
+msgid "Rename all /subpages too?"
+msgstr ""
+
+msgid "New name"
+msgstr "Шинэ нэр"
+
+msgid "Optional reason for the renaming"
+msgstr "Нэр солих шалтгаан"
+
+#, fuzzy
+msgid "Really rename this page?"
+msgstr "Та энэ хуудсыг үнэхээр устгахыг хүсч байна уу?"
+
+msgid "Copy all /subpages too?"
+msgstr ""
+
+#, fuzzy
+msgid "Optional reason for the copying"
+msgstr "Нэр солих шалтгаан"
+
+#, fuzzy
+msgid "Really copy this page?"
+msgstr "Та энэ хуудсыг үнэхээр устгахыг хүсч байна уу?"
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr "\"%s\" -ын линкүүдийн жагсаалт"
+
+msgid "No older revisions available!"
+msgstr "Энэ хуудасны хуучин хувилбар алга байна!"
+
+#, python-format
+msgid "Diff for \"%s\""
+msgstr " \"%s\" -ийн ялгаа"
+
+#, python-format
+msgid "Differences between revisions %d and %d"
+msgstr "%d болон %d хяналтын хувилбаруудын хоорондын ялгаа"
+
+#, python-format
+msgid "(spanning %d versions)"
+msgstr "( %d хувилбарыг дайруулан)"
+
+#, fuzzy
+msgid "Previous change"
+msgstr "Өмнөх"
+
+#, fuzzy
+msgid "Next change"
+msgstr "Юу ч өөрчлөгдөөгүй."
+
+#, python-format
+msgid "The page was saved %(count)d times, though!"
+msgstr "Хуудас %(count)d удаа хадгалагдсан байх юм!"
+
+msgid "(ignoring whitespace)"
+msgstr "(хоосон зайг хэрэгсэхгүй)"
+
+msgid "Ignore changes in the amount of whitespace"
+msgstr "Хоосон зайнаас бусад өөрчлөлтүүдийг хэрэгсэхгүй байх"
+
+#, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr "Файлын буруу нэр: \"%s\"!"
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d Хавсралт]"
+
+msgid "Package pages"
 msgstr "Хуудсуудыг багцлах"
 
-#, fuzzy
-msgid "Page changed"
-msgstr "Өөрчлөлтийг хадгалах"
+msgid "Package name"
+msgstr "Багцын нэр"
 
-msgid "Page has been modified"
+msgid "List of page names - separated by a comma"
+msgstr "Хуудасны нэрсийн жагсаалт - Таслалаар тусгаарлагдсан"
+
+#, python-format
+msgid "Subscribe users to the page %s"
+msgstr "%s хуудсанд хэрэглэгчдийг бүртгэх"
+
+msgid "Enter user names (comma separated):"
 msgstr ""
 
-msgid "Page has been modified in a trivial fashion"
+#, python-format
+msgid "Subscribed for %s:"
+msgstr "%s -д бүртгэгдсэн:"
+
+msgid "Not a user:"
+msgstr "Хэрэглэгч биш:"
+
+msgid "You are not allowed to perform this action."
+msgstr "Та энэ үйлдлийг гүйцэтгэж болохгүй."
+
+msgid "Please first create a homepage before creating additional pages."
+msgstr "Хуудсууд үүсгэхээсээ өмнө нүүр хуудсаа үүсгэнэ үү."
+
+#, fuzzy, python-format
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
+"[[%(username)s/ReadWriteGroup]]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
+"(username)s/ReadGroup]]||\n"
+"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
+"(username)s only||\n"
+"\n"
 msgstr ""
+"Та энд өмнө нь байсан нүүр хуудсандаа дэд хуудсууд нэмж оруулна.\n"
+"\n"
+"Та энэхүү хуудсыг бусад уншигчид болон нийтлэгчдэд хэр нээлттэй байлгах "
+"эсэхээсонгож,\n"
+"холбогдох группд нь гишүүн болгох замаар хандалтыг нь хянана.\n"
+"\n"
+"Та дэд хуудсынхаа нэрийг оруулаад шинэ хуудас үүсгэх товчин дээр дарна.\n"
+"\n"
+"Хандалтын хяналт бүхий хуудас үүсгэхийн тулд өмнө ньтухайн групп хуудас нь "
+"байгаад гишүүд нь зөв байгаа эсэхийг тогтоох хэрэгтэй. Групп хуудас "
+"үүсгэхийн тулд ГруппНүүрхуудасЗагвар -ыг ашигана уу.\n"
+"\n"
+"||'''Өөрийн шинэ хуудас нэмж оруулах:'''||'''Харъялагдах ACL-Груп:'''||\n"
+"||<<ШинэХуудас(HomepageReadWritePageTemplate,Хуудас (read/write),%(username)"
+"s)>>||[\"%(username)s/ReadWriteGroup\"]||\n"
+"||<<ШинэХуудас(HomepageReadPageTemplate,Хуудас (read-only),%(username)s)>>||"
+"[\"%(username)s/ReadGroup\"]||\n"
+"||<<ШинэХуудас(HomepagePrivatePageTemplate,Хуудас (privat),%(username)s)>>||"
+"nur %(username)s||\n"
+"\n"
+
+msgid "MyPages management"
+msgstr "Миний хуудасны менежмент"
+
+msgid "Your subscription to this page has been removed."
+msgstr "Таны энэ хуудасны Abonnement арилгагдсан байна."
+
+msgid "Can't remove regular expression subscription!"
+msgstr "Ердийн утгатай Abonnement арилахгүй байна."
 
 #, fuzzy
-msgid "Page has been renamed"
-msgstr "Хуудасны хандалтууд болон өөрчлөлтүүд"
-
-#, fuzzy
-msgid "Page has been deleted"
-msgstr "\"%s\" гэсэн хуудас амжилттай устгагдлаа!"
-
-#, fuzzy
-msgid "Page has been copied"
-msgstr "Хуудасны хандалтууд болон өөрчлөлтүүд"
-
-#, fuzzy
-msgid "A new attachment has been added"
-msgstr "Хавсралтын шинэ нэр"
-
-msgid "A page has been reverted to a previous state"
+msgid "Edit the subscription regular expressions in your settings."
 msgstr ""
+"Та өөрийнхөө ХэрэглэгчийнТохиргоо -нд Abonnement-ын Ердийн утгыгөөрчилнө үү."
 
 #, fuzzy
-msgid "A user has subscribed to a page"
+msgid "You need to be subscribed to unsubscribe."
 msgstr "Энэ хуудас нь бүртгэгдсэн хуудсуудын жагсаалтад нэмэгдлээ."
 
-msgid "A new account has been created"
-msgstr ""
+#, python-format
+msgid "(!) Only pages changed since '''%s''' are being displayed!"
+msgstr "(!) Зөвхөн '''%s''' -аас хойш өөрчлөгдсөн хуудсуудыг үзүүл!"
 
-#, fuzzy, python-format
 msgid ""
-"Dear Wiki user,\n"
-"\n"
-"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
-"change notification.\n"
-"\n"
-"The \"%(pagename)s\" page has been changed by %(editor)s:\n"
+"/!\\ The modification date you entered was not recognized and is therefore "
+"not considered for the search results!"
 msgstr ""
-"Эрхэм хүндэт Вики хэрэглэгч та,\n"
-"\n"
-" \"%(sitename)s\" гэсэн хуудас, категорийн өөрчлөлтийн талаар мэдээлэл "
-"авахаар бүртгэгдсэн байна.\n"
-"\n"
-"Дараахи хуудсанд %(editor)s гэдэг хэрэглэгч өөрчлөлт оруулсан байна:\n"
-"%(pagelink)s\n"
-"\n"
-
-msgid "New page:\n"
-msgstr "Шинэ хуудас:\n"
-
-msgid "No differences found!\n"
-msgstr "Өөрчлөлт олдсонгүй!\n"
-
-#, fuzzy, python-format
-msgid ""
-"Dear wiki user,\n"
-"\n"
-"You have subscribed to a wiki page \"%(sitename)s\" for change "
-"notification.\n"
-"\n"
-"The page \"%(pagename)s\" has been deleted by %(editor)s:\n"
-"\n"
-msgstr ""
-"Эрхэм хүндэт Вики хэрэглэгч та,\n"
-"\n"
-" \"%(sitename)s\" гэсэн хуудас, категорийн өөрчлөлтийн талаар мэдээлэл "
-"авахаар бүртгэгдсэн байна.\n"
-"\n"
-"Дараахи хуудсанд %(editor)s гэдэг хэрэглэгч өөрчлөлт оруулсан байна:\n"
-"%(pagelink)s\n"
-"\n"
-
-#, fuzzy, python-format
-msgid ""
-"Dear wiki user,\n"
-"\n"
-"You have subscribed to a wiki page \"%(sitename)s\" for change "
-"notification.\n"
-"\n"
-"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by %(editor)"
-"s:\n"
-msgstr ""
-"Эрхэм хүндэт Вики хэрэглэгч та,\n"
-"\n"
-" \"%(sitename)s\" гэсэн хуудас, категорийн өөрчлөлтийн талаар мэдээлэл "
-"авахаар бүртгэгдсэн байна.\n"
-"\n"
-"Дараахи хуудсанд %(editor)s гэдэг хэрэглэгч өөрчлөлт оруулсан байна:\n"
-"%(pagelink)s\n"
-"\n"
+"/!\\ Өгөгдсөн өөрчлөлт хийсэн огноо нь тодорхойгүй байгаа тул хайлтад "
+"хамрагдсангүй."
 
 #, python-format
-msgid "New user account created on %(sitename)s"
-msgstr ""
+msgid "Title Search: \"%s\""
+msgstr "Гарчгийн хайлт: \"%s\""
+
+#, python-format
+msgid "Advanced Search: \"%s\""
+msgstr "Өргөтгөсөн хайлт: \"%s\""
+
+#, python-format
+msgid "Full Text Search: \"%s\""
+msgstr "Бүрэн текст хайлт: \"%s\""
 
 #, python-format
 msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
-"\n"
-"    User name: %(username)s\n"
-"    Email address: %(useremail)s"
+"Your search query {{{\"%s\"}}} didn't return any results. Please change some "
+"terms and refer to HelpOnSearching for more information.%s"
 msgstr ""
+"Таны {{{\"%s\"}}} -аар хайсан хайлт тодорхой үр дүнд хүрсэнгүй.Зарим хайлтын "
+"ухагдахуунуудаа өөрчлөх болон нэмэлт мэдээлэл шаардлагатай бол "
+"ХайлтХийхТусламж -аас уншина уу. %s"
 
-#, fuzzy, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
-msgstr "%(pagename)s дахь <<Verbatim(attachment:)>>%(filename)s"
+msgid "(!) Consider performing a"
+msgstr "(!) Сайн бод доо,"
 
-#, python-format
+msgid "full-text search with your search terms"
+msgstr "Таны хайлтын ухагдахуунуудын дагуу бүрэн текстийн хайлт"
+
 msgid ""
-"Dear Wiki user,\n"
-"\n"
-"You have subscribed to a wiki page \"%(page_name)s\" for change "
-"notification. An attachment has been added to that page by %(editor)s. "
-"Following detailed information is available:\n"
-"\n"
-"Attachment name: %(attach_name)s\n"
-"Attachment size: %(attach_size)s\n"
+"(!) You're performing a title search that might not include all related "
+"results of your search query in this wiki. <<BR>>"
 msgstr ""
+"(!) Та гарчгийн хайлт хийж байна. Энэ нь магадгүй энэ викид байгаа таны "
+"хайлтын бүх шаардлагатай үр дүнг үзүүлж чадахгүй байж болох юм . <<BR>>"
 
-#, python-format
-msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
+msgid "Click here to perform a full-text search with your search terms!"
 msgstr ""
-"Өөрчлөлт:[%(sitename)s] %(trivial)s, Хуудас: \"%(pagename)s\" Хэрэглэгч: %"
-"(username)s"
+"Өгөгдсөн хайлтын ухагдхуунуудаар бүрэн текстийн хайлт хийхийн тулд энд дарна "
+"уу!"
 
-msgid "Trivial "
-msgstr "Ердийн"
+#, fuzzy
+msgid "Load"
+msgstr "Файлаа оруулах"
 
-#, python-format
-msgid ""
-"Attachment link: %(attach)s\n"
-"Page link: %(page)s\n"
-msgstr ""
+#, fuzzy
+msgid "Pagename not specified!"
+msgstr "Хавсралт файлын нэр алга байна!"
 
-msgid "FrontPage"
-msgstr "Эхний хуудас"
-
-msgid "RecentChanges"
-msgstr "Хамгийн сүүлийн өөрчлөлт"
-
-msgid "TitleIndex"
-msgstr "TitleIndex"
-
-msgid "WordIndex"
-msgstr "WortIndex"
-
-msgid "FindPage"
-msgstr "ХуудасОл"
-
-msgid "SiteNavigation"
-msgstr "ХуудасныНавигаци"
-
-msgid "HelpContents"
-msgstr "АгуулгынТусламж"
-
-msgid "HelpOnFormatting"
-msgstr "ФорматлахТусламж"
-
-msgid "WikiLicense"
-msgstr "ВикиЛиценз"
-
-msgid "MissingPage"
-msgstr "ОлдохгүйХуудас"
-
-msgid "MissingHomePage"
-msgstr "ОлдохгүйНүүрХуудас"
-
-msgid "Mon"
-msgstr "Да"
-
-msgid "Tue"
-msgstr "Мя"
-
-msgid "Wed"
-msgstr "Лх"
-
-msgid "Thu"
-msgstr "Пү"
-
-msgid "Fri"
-msgstr "Ба"
-
-msgid "Sat"
-msgstr "Бя"
-
-msgid "Sun"
-msgstr "Ня"
-
-msgid "AttachFile"
-msgstr "ФайлХавсаргах"
-
-msgid "DeletePage"
-msgstr "ХуудасУстгах"
-
-msgid "LikePages"
-msgstr "ТөстэйХуудас"
-
-msgid "LocalSiteMap"
-msgstr "СайтынБүтцийнЗураглал"
-
-msgid "RenamePage"
-msgstr "ХуудасНэрлэх"
-
-msgid "SpellCheck"
-msgstr "ДүрэмШалгах"
-
-msgid "Discussion"
-msgstr ""
-
-#, python-format
-msgid "Invalid include arguments \"%s\"!"
-msgstr "Буруу \"Include\"-arguments: \"%s\"!"
-
-#, python-format
-msgid "Nothing found for \"%s\"!"
-msgstr " \"%s\" гэсэн текст тэмдэглэгээ олдсонгүй!"
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "'%(filename)s' файл хавсаргагдсан байна."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Зураг '%(filename)s' хадгалагдлаа."
-
-#, python-format
-msgid "%(mins)dm ago"
-msgstr "%(mins)dm -ийн өмнө"
-
-msgid "(no bookmark set)"
-msgstr "(хавчуурга хийгдээгүй)"
-
-#, python-format
-msgid "(currently set to %s)"
-msgstr "(одоо %s)"
-
-msgid "Delete bookmark"
-msgstr "Хавчуурга устгах"
-
-msgid "Set bookmark"
-msgstr "Хавчуурга оруулах"
-
-msgid "[Bookmark reached]"
-msgstr "[Хавчуурганд хүрсэн]"
-
-msgid "Python Version"
-msgstr "Python хувилбар"
-
-msgid "MoinMoin Version"
-msgstr "MoinMoin хувилбар"
-
-#, python-format
-msgid "Release %s [Revision %s]"
-msgstr "Хувилбар %s [Revision %s]"
-
-msgid "4Suite Version"
-msgstr "4Suite хувилбар"
-
-msgid "Number of pages"
-msgstr "Хуудасны тоо"
-
-msgid "Number of system pages"
-msgstr "Системийн хуудасны тоо"
-
-msgid "Accumulated page sizes"
-msgstr "Цуглуулсан хуудасны хэмжээ"
-
-#, python-format
-msgid "Disk usage of %(data_dir)s/pages/"
-msgstr "Дискний ашиглалт %(data_dir)s/pages/"
-
-#, python-format
-msgid "Disk usage of %(data_dir)s/"
-msgstr "Дискний ашиглалт %(data_dir)s/"
-
-msgid "Entries in edit log"
-msgstr "Өөрчлөлтийн явцын мэдээлэл"
-
-msgid "NONE"
-msgstr "үгүй"
-
-msgid "Global extension macros"
-msgstr "Глобаль өргөтгөсөн макро"
-
-msgid "Local extension macros"
-msgstr "Локаль өргөтгөсөн макро"
-
-msgid "Global extension actions"
-msgstr "Глобаль өргөтгөл"
-
-msgid "Local extension actions"
-msgstr "Локаль өргөтгөл"
-
-msgid "Global parsers"
-msgstr "Глобаль парзер"
-
-msgid "Local extension parsers"
-msgstr "Локаль өргөтгөсөн парзер"
-
-msgid "Disabled"
-msgstr "Идэвхгүй"
-
-msgid "Enabled"
-msgstr "Идэвхтэй"
-
-msgid "index available"
-msgstr "Индэксжсэн"
-
-msgid "index unavailable"
-msgstr "Индексжээгүй"
-
-msgid "Xapian and/or Python Xapian bindings not installed"
-msgstr "Xapian ба/эсвэл Python Xapian bindings суулгаагүй"
-
-msgid "Xapian search"
-msgstr "Xapian-Хайлт"
-
-msgid "Stemming for Xapian"
-msgstr ""
-
-msgid "Active threads"
-msgstr "Active threads"
-
-msgid "Include system pages"
-msgstr "Системийн хуудсуудыг хамарсан"
-
-msgid "Exclude system pages"
-msgstr "Системийн хуудсуудыг хамраагүй"
-
-msgid "No wanted pages in this wiki."
-msgstr "Энэ вики-д таны хүссэн хуудас алга байна."
-
-#, python-format
-msgid "No quotes on %(pagename)s."
-msgstr " %(pagename)s хуудсанд ишлэл олдсонгүй."
-
-msgid "Markup"
-msgstr "Notation"
-
-msgid "Display"
-msgstr "Markup"
-
-msgid "Wiki configuration"
+msgid "Upload page content"
 msgstr ""
 
 msgid ""
-"This table shows all settings in this wiki that do not have default values. "
-"Settings that the configuration system doesn't know about are shown in "
-"''italic'', those may be due to third-party extensions needing configuration "
-"or settings that were removed from Moin."
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
+msgstr ""
+
+msgid "File to load page content from"
 msgstr ""
 
 #, fuzzy
-msgid "Variable name"
-msgstr "Файлын нэр"
-
-msgid "Setting"
-msgstr ""
-
-msgid "Search Titles"
-msgstr "Гарчиг хайх"
-
-msgid "Display context of search results"
-msgstr "Хайлтын үр дүнг үзүүлэх"
-
-msgid "Case-sensitive searching"
-msgstr "Том, бага үсгийн ялгааг анхаарах"
-
-msgid "Search Text"
-msgstr "Текстээр хайх"
-
-msgid "Description"
-msgstr ""
-
-msgid "No orphaned pages in this wiki."
-msgstr "No orphaned pages in this wiki."
-
-msgid "Search for items"
-msgstr "Нэгжээр хайх"
-
-msgid "containing all the following terms"
-msgstr "дараах бүх ухагдахуунуудыг агуулсан"
-
-msgid "containing one or more of the following terms"
-msgstr "дараах ухагдахуунуудаас нэг болон хэд хэдийн агуулсан"
-
-msgid "not containing the following terms"
-msgstr "дараах ухагдахуунуудыг агуулаагүй"
-
-msgid "last modified since (e.g. last 2 weeks)"
-msgstr "сүүлийн өөрчлөлт (Жбэл: 'сүүлийн 2 долоо хоног')"
-
-msgid "any category"
-msgstr ""
-
-msgid "any language"
-msgstr "бүх хэл"
-
-msgid "any mimetype"
-msgstr ""
-
-msgid "Categories"
-msgstr ""
-
-msgid "Language"
-msgstr "хэл"
-
-msgid "File Type"
-msgstr "файлын төрөл"
-
-msgid "Search only in titles"
-msgstr "Зөвхөн гарчгаар хайх"
-
-msgid "Case-sensitive search"
-msgstr "Том, бага үсгийн ялгаатай хайлт"
-
-msgid "Exclude underlay"
-msgstr "Underlay ороогүй"
-
-msgid "No system items"
-msgstr "System Items-гүй"
-
-msgid "Search in all page revisions"
-msgstr "Бүх хяналтын хувилбарт хайх"
-
-msgid "Go get it!"
-msgstr "Эхлэ!"
-
-msgid "Contents"
-msgstr "Агуулгын жагсаалт"
+msgid "Page Name"
+msgstr "Багцын нэр"
 
 #, python-format
-msgid "Unsupported navigation scheme '%(scheme)s'!"
-msgstr "Тодорхойгүй навигцийн схем: '%(scheme)s'!"
+msgid "Local Site Map for \"%s\""
+msgstr "\"%s\" -ийн локаль хуудасны бүтэц"
 
-msgid "No parent page found!"
-msgstr "Энэ хуудас дэд хуудас биш!"
+msgid "Charts are not available!"
+msgstr "Диаграм алга байна!"
 
-msgid "Wiki"
-msgstr "Вики"
-
-msgid "Slideshow"
-msgstr "Слайд үзүүлэх"
-
-msgid "Start"
-msgstr "Эхлэх"
+msgid "Do it."
+msgstr "Гүйцэтгэ"
 
 #, python-format
-msgid "Slide %(pos)d of %(size)d"
-msgstr " %(size)d -ийн хуудас: %(pos)d von "
+msgid "Execute action %(actionname)s?"
+msgstr "%(actionname)s үйлдлийг гүйцэтгэх үү?"
 
-msgid "Go To Page"
-msgstr "Хуудас руу оч"
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr "%(actionname)s үйлдэл энэ вики-д хамаарахгүй!"
+
+#, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "Та энэ %(actionname)s үйлдлийг энэ хуудас дээр гүйцэтгэх боломжгүй!"
 
 #, fuzzy
-msgid "File attachment browser"
-msgstr "Хавсралтын шинэ нэр"
-
-msgid "User account browser"
-msgstr ""
-
-#, python-format
-msgid ""
-"%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
-"missing."
-msgstr ""
-
-#, python-format
-msgid ""
-"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s=%"
-"(argument_value)s!"
-msgstr ""
-
-#, python-format
-msgid ""
-"Current configuration does not allow embedding of the file %(file)s because "
-"of its mimetype %(mimetype)s."
-msgstr ""
-
-msgid "Embedded"
-msgstr ""
-
-msgid "Missing password. Please enter user name and password."
-msgstr "Нууц үг алга байна. Хэрэглэгчийн нэр болон нууц үг оруулна уу."
-
-#, python-format
-msgid "LDAP server %(server)s failed."
-msgstr ""
-
-msgid "Failed to connect to database."
-msgstr ""
-
-#, fuzzy
-msgid "You need to log in."
-msgstr "Та логаут хийсэн байна."
-
-msgid ""
-"Please choose an account name now.\n"
-"If you choose an existing account name you will be asked for the\n"
-"password and be able to associate the account with your OpenID."
-msgstr ""
-
-msgid "Choose this name"
-msgstr ""
-
-msgid "This is not a valid username, choose a different one."
-msgstr ""
-
-msgid ""
-"The username you have chosen is already\n"
-"taken. If it is your username, enter your password below to associate\n"
-"the username with your OpenID. Otherwise, please choose a different\n"
-"username and leave the password field blank."
-msgstr ""
-
-msgid "Associate this name"
-msgstr ""
-
-msgid "Your account is now associated to your OpenID."
-msgstr ""
-
-msgid "The password you entered is not valid."
-msgstr ""
-
-msgid "Anonymous sessions need to be enabled for OpenID login."
-msgstr ""
-
-msgid "No OpenID."
-msgstr ""
-
-msgid ""
-"If you do not have an account yet, you can still log in with your OpenID and "
-"create one during login."
-msgstr ""
-
-#, python-format
-msgid ""
-"If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
-msgstr ""
-
-msgid "Could not contact botbouncer.com."
-msgstr ""
-
-msgid "User agent"
-msgstr "Хөтөчийн төрөл"
-
-msgid "Others"
-msgstr "Бусад"
-
-msgid "Distribution of User-Agent Types"
-msgstr "Хөтөчийн төрлөөрхи хандалтын хуваарьлалт"
+msgid "Only superuser is allowed to use this action."
+msgstr "Та энэ үйлдлийг хийж болохгүй."
 
 msgid "Views/day"
 msgstr "Уншигдсан/Өдөр"
@@ -2826,6 +3424,15 @@ msgstr "Огноо"
 msgid "# of hits"
 msgstr "Хандалтын тоо"
 
+msgid "User agent"
+msgstr "Хөтөчийн төрөл"
+
+msgid "Others"
+msgstr "Бусад"
+
+msgid "Distribution of User-Agent Types"
+msgstr "Хөтөчийн төрлөөрхи хандалтын хуваарьлалт"
+
 msgid "Page Size Distribution"
 msgstr "Хуудасны хэмжээний хуваарьлалт"
 
@@ -2835,31 +3442,24 @@ msgstr "Хуудасны хэмжээний дээд хязгаар [bytes]"
 msgid "# of pages of this size"
 msgstr "Хэмжээний энэ ангилал дахь хуудасны тоо"
 
-msgid "Options --pages and --search are mutually exclusive!"
-msgstr ""
+msgid "From"
+msgstr "Хэнээс"
 
-msgid "You must specify an output file!"
-msgstr ""
+msgid "To"
+msgstr "Хэнд"
 
-msgid "No pages specified using --pages or --search, assuming full package."
-msgstr ""
-
-msgid "All attachments included into the package."
-msgstr ""
-
-msgid "Output file already exists! Cowardly refusing to continue!"
-msgstr ""
+msgid "Content"
+msgstr "Агуулга"
 
 #, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Тодорхойгүй үйлдэл %(action_name)s."
+msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
+msgstr " '%(server)s'Мэйл сервер холбогдсонгүй, алдаа: %(reason)s"
 
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Та %(action_name)s үйлдлийг энэ хуудас дээр ажиллуулж болохгүй!"
+msgid "Mail not sent"
+msgstr "E-мэйл илгээгдсэнгүй"
 
-msgid "Login and try again."
-msgstr "Та эхлээд логин хийгээд дараа нь ахиад оролдоод үзнэ үү."
+msgid "Mail sent OK"
+msgstr "E-Mмэйл илгээгдлээ"
 
 #, python-format
 msgid ""
@@ -2868,159 +3468,31 @@ msgstr ""
 "\"%(content)s\" ийм агуулга энэ вики-д зөвшөөрөгдөөгүй тулхадгалах "
 "боломжгүйд уучлал өчье."
 
-msgid "[ATTACH]"
+msgid "anonymous"
 msgstr ""
 
-msgid "[RSS]"
-msgstr "[RSS]"
-
-msgid "[DELETED]"
-msgstr "[УСТГАГДСАН]"
-
-msgid "[UPDATED]"
-msgstr "[ШИНЭЧЛЭСЭН]"
-
-msgid "[RENAMED]"
-msgstr ""
-
-msgid "[CONFLICT]"
-msgstr ""
-
-msgid "[NEW]"
-msgstr "[ШИНЭ]"
-
-msgid "[DIFF]"
-msgstr "[DIFF]"
-
-msgid "[BOTTOM]"
-msgstr "[ДООД]"
-
-msgid "[TOP]"
-msgstr "[ДЭЭД]"
-
-msgid "Click to do a full-text search for this title"
-msgstr "Энд дарж ийшээ заасан хуудсуудыг харж болно"
-
-msgid "Logout"
-msgstr "Гарах"
-
-msgid "DeleteCache"
-msgstr "CacheУстгах"
-
-#, python-format
-msgid "(cached %s)"
-msgstr "(кэйшлэсэн %s)"
-
-msgid "Or try one of these actions:"
-msgstr "Эсвэл өөр сонголт хий:"
-
-msgid "Unsubscribe"
-msgstr "Бүртгүүлэхгүй"
-
-msgid "Home"
-msgstr "Нүүр"
-
-msgid "Clear message"
-msgstr "Мэссэж устгах"
-
-#, python-format
-msgid "last edited %(time)s by %(editor)s"
-msgstr "Сүүлийн өөрчлөлтийн огноо: %(time)s Өөрчилсөн: %(editor)s"
-
-#, python-format
-msgid "last modified %(time)s"
-msgstr "Сүүлийн өөрчлөлтийн огноо: %(time)s"
-
-msgid "Search:"
-msgstr "Хайлт:"
-
-msgid "Text"
-msgstr "Teкст"
-
-msgid "Titles"
-msgstr "Titel"
-
-msgid "Search"
-msgstr "Хайлт"
-
-msgid "More Actions:"
-msgstr "Бусад ...:"
+#, fuzzy
+#~ msgid "InterWikiMap"
+#~ msgstr "Wiki эх текст"
 
 #, fuzzy
-msgid "------------------------"
-msgstr "--------------------------"
-
-msgid "Raw Text"
-msgstr "Түүхий текст"
-
-msgid "Print View"
-msgstr "Хэвлэх хувилбар"
-
-msgid "Delete Cache"
-msgstr "Cache устгах"
-
-msgid "Delete Page"
-msgstr "Хуудас устгах"
-
-msgid "Like Pages"
-msgstr "Төстэй хуудсууд"
-
-msgid "Local Site Map"
-msgstr "Хуудасны бүтцийн зураглал"
-
-msgid "My Pages"
-msgstr "Миний хуудас"
-
-msgid "Subscribe User"
-msgstr "Хэрэглэгч бүртгэх"
-
-msgid "Remove Spam"
-msgstr "Spam зайлуулах"
-
-msgid "Package Pages"
-msgstr "Хуудас пакетлах"
-
-msgid "Render as Docbook"
-msgstr "Docbook болгон гаргах"
+#~ msgid "BadContent"
+#~ msgstr "Агуулга"
 
 #, fuzzy
-msgid "Sync Pages"
-msgstr "Миний хуудас"
-
-msgid "Do"
-msgstr "Эхлэ!"
+#~ msgid "LocalBadContent"
+#~ msgstr "Агуулга"
 
 #, fuzzy
-msgid "Comments"
-msgstr "Тайлбар"
+#~ msgid "EditedSystemPages"
+#~ msgstr "Системийн хуудсуудыг хамраагүй"
 
-msgid "Edit (Text)"
-msgstr "Өөрчлөх (Text)"
+#~ msgid "Created the package %s containing the pages %s."
+#~ msgstr "%s -ийг агуулсан %s багц үүсгэгдлээ."
 
-msgid "Edit (GUI)"
-msgstr "Өөрчлөх (GUI)"
-
-msgid "Immutable Page"
-msgstr "Хамгаалагдсан хуудас"
-
-msgid "Remove Link"
-msgstr "Линк устгах"
-
-msgid "Add Link"
-msgstr "Линк оруулах"
-
-#, python-format
-msgid "Show %s days."
-msgstr "%s хоног үзүүлэх."
-
-msgid "Wiki Markup"
-msgstr "Wiki эх текст"
-
-msgid "Page"
-msgstr "Хуудас"
-
-msgid "User"
-msgstr "Хэрэглэгч"
+#, fuzzy
+#~ msgid "You need to log in."
+#~ msgstr "Та логаут хийсэн байна."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
@@ -3188,9 +3660,6 @@ msgstr "Хэрэглэгч"
 
 #~ msgid "[%(lang)s] %(recipients)s: %(status)s"
 #~ msgstr "[%(lang)s] %(recipients)s: %(status)s"
-
-#~ msgid "UserPreferences"
-#~ msgstr "ХэрэглэгчийнТохиргоо"
 
 #~ msgid "Subscribe to trivial changes"
 #~ msgstr "Ердийн өөрчлөлтийг бүртгүүл"

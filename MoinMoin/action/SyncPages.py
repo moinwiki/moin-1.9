@@ -122,8 +122,8 @@ class ActionClass(object):
     def fix_params(self, params):
         """ Does some fixup on the parameters. """
         # Load the password
-        if "password" in self.request.form:
-            params["password"] = self.request.form["password"][0]
+        if "password" in self.request.values:
+            params["password"] = self.request.values["password"]
 
         # merge the pageList case into the pageMatch case
         if params["pageList"] is not None:
@@ -178,7 +178,7 @@ class ActionClass(object):
         params = self.fix_params(self.parse_page())
 
         try:
-            if "cancel" in self.request.form:
+            if "cancel" in self.request.values:
                 raise ActionStatus(_("Operation was canceled."), "error")
 
             if params["direction"] == UP:
