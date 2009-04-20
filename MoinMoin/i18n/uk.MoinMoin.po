@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-15 02:04+0100\n"
+"POT-Creation-Date: 2009-04-19 23:09+0200\n"
 "PO-Revision-Date: 2007-11-10 16:50+0300\n"
 "Last-Translator: Maxim V. Dziumanenko <dziumanenko@softprom.kiev.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -25,79 +25,19 @@ msgstr ""
 "X-Language-in-English: Ukrainian\n"
 "X-HasWikiMarkup: True\n"
 
-#, python-format
-msgid "Argument \"%s\" must be a boolean value, not \"%s\""
-msgstr "Аргумент \"%s\" має бути логічним значенням, а не \"%s\""
+msgid "The wiki is currently not reachable."
+msgstr "Вікі наразі недоступна."
+
+msgid "Invalid username or password."
+msgstr "Неправильне ім'я користувача чи пароль."
 
 #, python-format
-msgid "Argument must be a boolean value, not \"%s\""
-msgstr "Аргумент має бути логічним значенням, а не \"%s\""
-
-#, python-format
-msgid "Argument \"%s\" must be an integer value, not \"%s\""
-msgstr "Аргумент \"%s\" має бути цілим числом, а не \"%s\""
-
-#, python-format
-msgid "Argument must be an integer value, not \"%s\""
-msgstr "Аргумент має бути цілим числом, а не \"%s\""
-
-#, python-format
-msgid "Argument \"%s\" must be a floating point value, not \"%s\""
-msgstr "Аргумент \"%s\" має бути числом з рухомою комою, а не з \"%s\""
-
-#, python-format
-msgid "Argument must be a floating point value, not \"%s\""
-msgstr "Аргумент має бути числом з рухомою комою, а не з \"%s\""
-
-#, python-format
-msgid "Argument \"%s\" must be a complex value, not \"%s\""
-msgstr "Аргумент \"%s\" має бути комплексним числом, а не \"%s\""
-
-#, python-format
-msgid "Argument must be a complex value, not \"%s\""
-msgstr "Аргумент має бути комплексним числом, а не \"%s\""
-
-#, python-format
-msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
-msgstr "Аргумент \"%s\" має бути одним з \"%s\", а не \"%s\""
-
-#, python-format
-msgid "Argument must be one of \"%s\", not \"%s\""
-msgstr "Аргумент має бути одним з \"%s\", а не \"%s\""
-
-msgid "Too many arguments"
-msgstr "Надто багато аргументів"
-
-msgid "Cannot have arguments without name following named arguments"
+msgid ""
+"The remote wiki uses a different InterWiki name (%(remotename)s) internally "
+"than you specified (%(localname)s)."
 msgstr ""
-"Не можна вказувати аргументи без назви, за якими йдуть аргументи з назвами"
-
-#, python-format
-msgid "Argument \"%s\" is required"
-msgstr "Аргумент \"%s\" є обов'язковим"
-
-#, python-format
-msgid "No argument named \"%s\""
-msgstr "Немає аргументу з назвою \"%s\""
-
-#, python-format
-msgid "Expected \"=\" to follow \"%(token)s\""
-msgstr "За \"%(token)s\" очікувався символ \"=\""
-
-#, python-format
-msgid "Expected a value for key \"%(token)s\""
-msgstr "Для ключа \"%(token)s\" очікувалось значення"
-
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Невідома дія %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Ви не можете виконувати %(action_name)s на цій сторінці."
-
-msgid "Login and try again."
-msgstr "Увійдіть знову та спробуйте ще раз."
+"Віддалена вікі має іншу внутрішню назву ІнтерВікі (%(remotename)s) ніж "
+"вказана вами (%(localname)s)."
 
 msgid "Your changes are not saved!"
 msgstr "Ваші зміни не збережено!"
@@ -382,51 +322,42 @@ msgstr ""
 msgid "<unknown>"
 msgstr "<невідомо>"
 
-#, python-format
-msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
+#, fuzzy, python-format
+msgid ""
+"Login Name: %s\n"
+"\n"
+"Password recovery token: %s\n"
+"\n"
+"Password reset URL: %s/?action=recoverpass&name=%s&token=%s\n"
 msgstr ""
+"Ім'я: %s\n"
+"\n"
+"Квиток відновлення паролю: %s\n"
+"\n"
+"URL відновлення паролю: %s/?action=recoverpass&name=%s&token=%s\n"
 
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
-"search results!"
+"Somebody has requested to email you a password recovery token.\n"
+"\n"
+"If you lost your password, please go to the password reset URL below or\n"
+"go to the password recovery page again and enter your username and the\n"
+"recovery token.\n"
 msgstr ""
-"Зміст резервної копії цієї сторінки застарів та не буде включений у "
-"результати пошуку!"
 
 #, python-format
-msgid "Revision %(rev)d as of %(date)s"
-msgstr "Версія %(rev)d від %(date)s"
+msgid "[%(sitename)s] Your wiki account data"
+msgstr "[%(sitename)s] Дані вашого облікового рахунку wiki"
 
 #, python-format
-msgid "Redirected from page \"%(page)s\""
-msgstr "Перенаправлений сюди зі сторінки \"%(page)s\""
+msgid "Unknown action %(action_name)s."
+msgstr "Невідома дія %(action_name)s."
 
 #, python-format
-msgid "This page redirects to page \"%(page)s\""
-msgstr "Ця сторінка перенаправляє на сторінку \"%(page)s\""
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Ви не можете виконувати %(action_name)s на цій сторінці."
 
-msgid "Create New Page"
-msgstr "Створити сторінку"
-
-msgid "You are not allowed to view this page."
-msgstr "Ви не можете переглядати цю сторінку."
-
-msgid "The wiki is currently not reachable."
-msgstr "Вікі наразі недоступна."
-
-msgid "Invalid username or password."
-msgstr "Неправильне ім'я користувача чи пароль."
-
-#, python-format
-msgid ""
-"The remote wiki uses a different InterWiki name (%(remotename)s) internally "
-"than you specified (%(localname)s)."
-msgstr ""
-"Віддалена вікі має іншу внутрішню назву ІнтерВікі (%(remotename)s) ніж "
-"вказана вами (%(localname)s)."
-
-msgid "Text mode"
-msgstr "Текстовий режим"
+msgid "Login and try again."
+msgstr "Увійдіть знову та спробуйте ще раз."
 
 #, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
@@ -464,31 +395,323 @@ msgstr "Невідома функція %(func)s у рядку %(lineno)i."
 msgid "The file %s was not found in the package."
 msgstr "Файл %s не знайдено у пакеті."
 
-#, fuzzy, python-format
-msgid ""
-"Login Name: %s\n"
-"\n"
-"Password recovery token: %s\n"
-"\n"
-"Password reset URL: %s/?action=recoverpass&name=%s&token=%s\n"
+msgid "Text mode"
+msgstr "Текстовий режим"
+
+#, python-format
+msgid "Argument \"%s\" must be a boolean value, not \"%s\""
+msgstr "Аргумент \"%s\" має бути логічним значенням, а не \"%s\""
+
+#, python-format
+msgid "Argument must be a boolean value, not \"%s\""
+msgstr "Аргумент має бути логічним значенням, а не \"%s\""
+
+#, python-format
+msgid "Argument \"%s\" must be an integer value, not \"%s\""
+msgstr "Аргумент \"%s\" має бути цілим числом, а не \"%s\""
+
+#, python-format
+msgid "Argument must be an integer value, not \"%s\""
+msgstr "Аргумент має бути цілим числом, а не \"%s\""
+
+#, python-format
+msgid "Argument \"%s\" must be a floating point value, not \"%s\""
+msgstr "Аргумент \"%s\" має бути числом з рухомою комою, а не з \"%s\""
+
+#, python-format
+msgid "Argument must be a floating point value, not \"%s\""
+msgstr "Аргумент має бути числом з рухомою комою, а не з \"%s\""
+
+#, python-format
+msgid "Argument \"%s\" must be a complex value, not \"%s\""
+msgstr "Аргумент \"%s\" має бути комплексним числом, а не \"%s\""
+
+#, python-format
+msgid "Argument must be a complex value, not \"%s\""
+msgstr "Аргумент має бути комплексним числом, а не \"%s\""
+
+#, python-format
+msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
+msgstr "Аргумент \"%s\" має бути одним з \"%s\", а не \"%s\""
+
+#, python-format
+msgid "Argument must be one of \"%s\", not \"%s\""
+msgstr "Аргумент має бути одним з \"%s\", а не \"%s\""
+
+msgid "Too many arguments"
+msgstr "Надто багато аргументів"
+
+msgid "Cannot have arguments without name following named arguments"
 msgstr ""
-"Ім'я: %s\n"
-"\n"
-"Квиток відновлення паролю: %s\n"
-"\n"
-"URL відновлення паролю: %s/?action=recoverpass&name=%s&token=%s\n"
+"Не можна вказувати аргументи без назви, за якими йдуть аргументи з назвами"
+
+#, python-format
+msgid "Argument \"%s\" is required"
+msgstr "Аргумент \"%s\" є обов'язковим"
+
+#, python-format
+msgid "No argument named \"%s\""
+msgstr "Немає аргументу з назвою \"%s\""
+
+#, python-format
+msgid "Expected \"=\" to follow \"%(token)s\""
+msgstr "За \"%(token)s\" очікувався символ \"=\""
+
+#, python-format
+msgid "Expected a value for key \"%(token)s\""
+msgstr "Для ключа \"%(token)s\" очікувалось значення"
+
+#, python-format
+msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
+msgstr ""
 
 msgid ""
-"Somebody has requested to email you a password recovery token.\n"
-"\n"
-"If you lost your password, please go to the password reset URL below or\n"
-"go to the password recovery page again and enter your username and the\n"
-"recovery token.\n"
+"The backed up content of this page is deprecated and will not be included in "
+"search results!"
+msgstr ""
+"Зміст резервної копії цієї сторінки застарів та не буде включений у "
+"результати пошуку!"
+
+#, python-format
+msgid "Revision %(rev)d as of %(date)s"
+msgstr "Версія %(rev)d від %(date)s"
+
+#, python-format
+msgid "Redirected from page \"%(page)s\""
+msgstr "Перенаправлений сюди зі сторінки \"%(page)s\""
+
+#, python-format
+msgid "This page redirects to page \"%(page)s\""
+msgstr "Ця сторінка перенаправляє на сторінку \"%(page)s\""
+
+msgid "Create New Page"
+msgstr "Створити сторінку"
+
+msgid "You are not allowed to view this page."
+msgstr "Ви не можете переглядати цю сторінку."
+
+#, fuzzy
+msgid "Switch user"
+msgstr "Виберіть користувача"
+
+msgid "No user selected"
+msgstr "Користувача не вибрано"
+
+msgid ""
+"You can now change the settings of the selected user account; log out to get "
+"back to your account."
+msgstr ""
+
+msgid "You are the only user."
+msgstr "Ви єдиний користувач."
+
+msgid ""
+"As a superuser, you can temporarily assume the identity of another user."
+msgstr ""
+
+msgid "Select User"
+msgstr "Вибрати користувача"
+
+msgid "Change password"
+msgstr "Змінити пароль"
+
+msgid "Passwords don't match!"
+msgstr "Паролі не збігаються!"
+
+msgid "Please specify a password!"
+msgstr "Введіть пароль!"
+
+#, python-format
+msgid "Password not acceptable: %s"
+msgstr "Неприпустимий пароль: %s"
+
+msgid "Your password has been changed."
+msgstr "Ваш пароль було змінено."
+
+msgid "To change your password, enter a new password twice."
+msgstr "Щоб змінити пароль, введіть новий пароль двічі."
+
+msgid "Password"
+msgstr "Пароль"
+
+msgid "Password repeat"
+msgstr "Повтор паролю"
+
+msgid "OpenID settings"
+msgstr "Налаштування OpenID"
+
+msgid "Cannot remove all OpenIDs."
+msgstr ""
+
+msgid "The selected OpenIDs have been removed."
+msgstr ""
+
+msgid "No OpenID given."
+msgstr "Не вказано OpenID."
+
+msgid "OpenID is already present."
+msgstr ""
+
+msgid "Failed to resolve OpenID."
+msgstr ""
+
+msgid "OpenID discovery failure, not a valid OpenID."
 msgstr ""
 
 #, python-format
-msgid "[%(sitename)s] Your wiki account data"
-msgstr "[%(sitename)s] Дані вашого облікового рахунку wiki"
+msgid "OpenID error: %s."
+msgstr ""
+
+msgid "Verification canceled."
+msgstr "Перевірку скасовано."
+
+#, fuzzy
+msgid "This OpenID is already used for another account."
+msgstr "Цей OpenID вже використовується іншим користувачем."
+
+msgid "OpenID added successfully."
+msgstr "OpenID додано успішно."
+
+msgid "OpenID failure."
+msgstr ""
+
+msgid "Current OpenIDs"
+msgstr "Поточні OpenID"
+
+msgid "Remove selected"
+msgstr "Видалити позначені"
+
+msgid "Add OpenID"
+msgstr "Додати OpenID"
+
+msgid "OpenID verification requires that you click this button:"
+msgstr ""
+
+msgid "Notification"
+msgstr ""
+
+msgid "Notification settings saved!"
+msgstr ""
+
+#, fuzzy
+msgid "'''Email'''"
+msgstr "Ел.пошта"
+
+msgid "'''Jabber'''"
+msgstr ""
+
+msgid "'''Event type'''"
+msgstr ""
+
+msgid "Select the events you want to be notified about."
+msgstr ""
+
+msgid ""
+"Before you can be notified, you need to provide a way to contact you in the "
+"general preferences."
+msgstr ""
+
+#, fuzzy
+msgid "Subscribed events"
+msgstr "Стеження для користувача"
+
+#, fuzzy
+msgid "Subscribed wiki pages<<BR>>(one regex per line)"
+msgstr "Список сторінок, за якими стежити (один вираз на рядок)"
+
+msgid "Save"
+msgstr "Зберегти"
+
+msgid "Preferences"
+msgstr "Параметри"
+
+#, python-format
+msgid ""
+"Invalid user name {{{'%s'}}}.\n"
+"Name may contain any Unicode alpha numeric character, with optional one\n"
+"space between words. Group page name is not allowed."
+msgstr ""
+"Неприпустима назва користувача {{{'%s'}}}.\n"
+"Назва може містити літери та цифри будь-якої мови та, при бажанні, один "
+"пробіл між словами. Не можна використовувати назву групи."
+
+msgid "This user name already belongs to somebody else."
+msgstr "Це ім'я вже зайняте."
+
+msgid "Empty user name. Please enter a user name."
+msgstr "Порожнє ім'я користувача. Вкажіть ім'я користувача."
+
+msgid ""
+"Please provide your email address. If you lose your login information, you "
+"can get it by email."
+msgstr ""
+"Вкажіть вашу поштову адресу. Якщо ви втратите дані для реєстрації (входу у "
+"вики), ви зможете отримати їх поштою."
+
+msgid "This email already belongs to somebody else."
+msgstr "Це чужа поштова адреса."
+
+#, fuzzy
+msgid "This jabber id already belongs to somebody else."
+msgstr "Це чужа поштова адреса."
+
+#, python-format
+msgid "The theme '%(theme_name)s' could not be loaded!"
+msgstr "Не вдається завантажити тему '%(theme_name)s'!"
+
+msgid "User preferences saved!"
+msgstr "Параметри користувача записані!"
+
+msgid "Default"
+msgstr "Типовий"
+
+msgid "<Browser setting>"
+msgstr "<Параметри переглядача>"
+
+msgid "the one preferred"
+msgstr "типовим редактором"
+
+msgid "free choice"
+msgstr "пропонувати на вибір"
+
+msgid "Preferred theme"
+msgstr "Бажаний стиль"
+
+msgid "Editor Preference"
+msgstr "Типовий редактор"
+
+msgid "Editor shown on UI"
+msgstr "Пропонувати редагування"
+
+msgid "Time zone"
+msgstr "Часовий пояс"
+
+msgid "Your time is"
+msgstr "Час у вашій системі"
+
+msgid "Server time is"
+msgstr "Час на сервері"
+
+msgid "Date format"
+msgstr "Формат дати"
+
+msgid "Preferred language"
+msgstr "Бажана мова"
+
+msgid "General options"
+msgstr "Загальні параметри"
+
+msgid "Quick links"
+msgstr "Закладки"
+
+msgid "OpenID server"
+msgstr ""
+
+msgid "The selected websites have been removed."
+msgstr ""
+
+msgid "Trusted websites"
+msgstr ""
 
 msgid "Line"
 msgstr "Рядок"
@@ -502,125 +725,8 @@ msgstr "Видалення позначені так."
 msgid "Additions are marked like this."
 msgstr "Додавання позначені так."
 
-#, python-format
-msgid ""
-"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
-msgstr ""
-"Сторінку неможливо записати, тому що \"%(content)s\" заборонено у цьому wiki."
-
-#, python-format
-msgid ""
-"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
-"%(be)s results out of about %(pages)d pages."
-msgstr ""
-"Результати %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s з %(aboutHits)s %(bs)s%"
-"(hits)d%(be)s результати з приблизно %(pages)d сторінок."
-
-msgid "seconds"
-msgstr "секунд"
-
-msgid "Previous"
-msgstr "Попередня"
-
-msgid "Next"
-msgstr "Наступна"
-
-msgid "rev"
-msgstr "версія"
-
-msgid "current"
-msgstr "поточна"
-
-#, python-format
-msgid "last modified: %s"
-msgstr "остання зміна: %s"
-
-msgid "match"
-msgstr "відповідність"
-
-msgid "matches"
-msgstr "відповідностей"
-
-msgid "about"
-msgstr ""
-
-msgid "anonymous"
-msgstr ""
-
-msgid "Language"
-msgstr "Мова"
-
-msgid "<Browser setting>"
-msgstr "<Параметри переглядача>"
-
-msgid "Others"
-msgstr "Інші"
-
-msgid "Date"
-msgstr "Дата"
-
-msgid "Views/day"
-msgstr "Переглядів за день"
-
-msgid "Edits/day"
-msgstr "Редагувань за день"
-
-msgid "Page hits and edits"
-msgstr "Запити та виправлення сторінок"
-
-#, python-format
-msgid "%(chart_title)s for %(filterpage)s"
-msgstr "%(chart_title)s для %(filterpage)s"
-
-msgid ""
-"green=view\n"
-"red=edit"
-msgstr ""
-"зелений=переглядів\n"
-"червоний=виправлень"
-
-msgid "date"
-msgstr "дата"
-
-msgid "# of hits"
-msgstr "кількість звернень"
-
-msgid "Charts are not available!"
-msgstr "Діаграми недоступні!"
-
-msgid "Page Size Distribution"
-msgstr "Розподіл розміру сторінок"
-
-msgid "page size upper bound [bytes]"
-msgstr "межа розміру сторінок [у байтах]"
-
-msgid "# of pages of this size"
-msgstr "кількість сторінок цього розміру"
-
-msgid "User agent"
-msgstr "Переглядач"
-
-msgid "Distribution of User-Agent Types"
-msgstr "Розподіл переглядачів за типами"
-
-msgid "Could not contact botbouncer.com."
-msgstr ""
-
-msgid "Failed to connect to database."
-msgstr ""
-
-msgid "Missing password. Please enter user name and password."
-msgstr "Відсутній пароль. Введіть ім'я користувача й пароль."
-
-#, python-format
-msgid ""
-"If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
-msgstr ""
-
-#, python-format
-msgid "LDAP server %(server)s failed."
-msgstr ""
+msgid "Please log in first."
+msgstr "Спочатку необхідно увійти."
 
 msgid ""
 "Please choose an account name now.\n"
@@ -644,20 +750,7 @@ msgid ""
 "username and leave the password field blank."
 msgstr ""
 
-msgid "Password"
-msgstr "Пароль"
-
 msgid "Associate this name"
-msgstr ""
-
-#, python-format
-msgid "OpenID error: %s."
-msgstr ""
-
-msgid "Verification canceled."
-msgstr "Перевірку скасовано."
-
-msgid "OpenID failure."
 msgstr ""
 
 msgid "Your account is now associated to your OpenID."
@@ -667,16 +760,7 @@ msgstr ""
 msgid "The password you entered is not valid."
 msgstr "Введений вами пароль недійсний."
 
-msgid "OpenID verification requires that you click this button:"
-msgstr ""
-
 msgid "Anonymous sessions need to be enabled for OpenID login."
-msgstr ""
-
-msgid "Failed to resolve OpenID."
-msgstr ""
-
-msgid "OpenID discovery failure, not a valid OpenID."
 msgstr ""
 
 msgid "No OpenID."
@@ -687,49 +771,356 @@ msgid ""
 "create one during login."
 msgstr ""
 
-msgid "Page has been modified"
-msgstr "Сторінку було змінено"
-
-msgid "Page has been modified in a trivial fashion"
-msgstr "Сторінку було незначно змінено"
-
-#, fuzzy
-msgid "Page has been renamed"
-msgstr "Сторінку було перейменовано"
-
-#, fuzzy
-msgid "Page has been deleted"
-msgstr "Сторінку було видалено"
-
-#, fuzzy
-msgid "Page has been copied"
-msgstr "Сторінку було скопійовано"
-
-#, fuzzy
-msgid "A new attachment has been added"
-msgstr "Нове вкладення було додано"
-
-msgid "A page has been reverted to a previous state"
+msgid "Could not contact botbouncer.com."
 msgstr ""
 
-#, fuzzy
-msgid "A user has subscribed to a page"
-msgstr "Користувач стежить за сторінкою"
-
-msgid "A new account has been created"
-msgstr "Новий обліковий запис було створено"
+msgid "Missing password. Please enter user name and password."
+msgstr "Відсутній пароль. Введіть ім'я користувача й пароль."
 
 #, python-format
-msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
-msgstr "[%(sitename)s] %(username)s %(trivial)sоновив(ла) \"%(pagename)s\""
+msgid "LDAP server %(server)s failed."
+msgstr ""
 
-msgid "Trivial "
-msgstr "Незначна "
+msgid "Failed to connect to database."
+msgstr ""
 
 #, python-format
 msgid ""
-"Attachment link: %(attach)s\n"
-"Page link: %(page)s\n"
+"If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
+"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+msgstr ""
+
+#, fuzzy
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
+">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+msgstr ""
+" Виділити:: <<Verbatim('')>>''курсивом''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''жирним'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''жирним "
+"курсивом'''''<<Verbatim(''''')>>; <<Verbatim('')>>''змішаним ''<<Verbatim"
+"(''')>>'''''жирним'''<<Verbatim(''')>> та курсивом''<<Verbatim('')>>; "
+"<<Verbatim(----)>> горизонтальною рискою.\n"
+" Заголовки:: <<Verbatim(=)>> Рівень 1 <<Verbatim(=)>>; <<Verbatim(==)>> "
+"Рівень 2 <<Verbatim(==)>>; <<Verbatim(===)>> Рівень 3 <<Verbatim(===)>>;   "
+"<<Verbatim(====)>> Рівень 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Рівень 5 "
+"<<Verbatim(=====)>>.\n"
+" Списки:: пробіл та одне з: * ненумерований список; 1., a., A., i., I. "
+"нумерований список; 1.#n почати нумерацію з n; поодинокий пробіл - відступ.\n"
+" Посилання:: <<Verbatim(СловаВеликоїЛітери)>>; <<Verbatim([[ціль|"
+"текстпосилання]])>>.\n"
+" Таблиці:: || текст комірки |||| текст комірки розтягнутий на 2 колонки "
+"||;     після таблиць та заголовків не можна залишати пробіли.\n"
+"\n"
+"(!) Докладна довідка ДовідкаРедагування чи ДовідкаСинтаксис.\n"
+
+#, fuzzy
+msgid ""
+" Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
+"italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed ''<<Verbatim(''')"
+">>'''''bold'''<<Verbatim(''')>> and italics''<<Verbatim('')>>; <<Verbatim"
+"(----)>> horizontal rule.\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
+"#n start numbering at n; space alone indents.\n"
+" Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])"
+">>.\n"
+" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
+"white space allowed after tables or titles.\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
+msgstr ""
+" Виділити:: <<Verbatim('')>>''курсивом''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''жирним'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''жирним "
+"курсивом'''''<<Verbatim(''''')>>; <<Verbatim('')>>''змішаним ''<<Verbatim"
+"(''')>>'''''жирним'''<<Verbatim(''')>> та курсивом''<<Verbatim('')>>; "
+"<<Verbatim(----)>> горизонтальною рискою.\n"
+" Заголовки:: <<Verbatim(=)>> Рівень 1 <<Verbatim(=)>>; <<Verbatim(==)>> "
+"Рівень 2 <<Verbatim(==)>>; <<Verbatim(===)>> Рівень 3 <<Verbatim(===)>>;   "
+"<<Verbatim(====)>> Рівень 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Рівень 5 "
+"<<Verbatim(=====)>>.\n"
+" Списки:: пробіл та одне з: * ненумерований список; 1., a., A., i., I. "
+"нумерований список; 1.#n почати нумерацію з n; поодинокий пробіл - відступ.\n"
+" Посилання:: <<Verbatim(СловаВеликоїЛітери)>>; <<Verbatim([[ціль|"
+"текстпосилання]])>>.\n"
+" Таблиці:: || текст комірки |||| текст комірки розтягнутий на 2 колонки "
+"||;     після таблиць та заголовків не можна залишати пробіли.\n"
+"\n"
+"(!) Докладна довідка ДовідкаРедагування чи ДовідкаСинтаксис.\n"
+
+#, python-format
+msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
+msgstr "Очікувалось \"%(wanted)s\" після \"%(key)s\", а не \"%(token)s\""
+
+#, python-format
+msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
+msgstr "Очікувалось число \"%(key)s\" перед \"%(token)s\""
+
+#, python-format
+msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
+msgstr "Очікувалось число \"%(arg)s\" після \"%(key)s\""
+
+#, python-format
+msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
+msgstr "Очікувався код кольору \"%(arg)s\" після \"%(key)s\""
+
+msgid ""
+"Rendering of reStructured text is not possible, please install Docutils."
+msgstr ""
+"Форматування структурованого (reStructured) тексту неможливе, встановіть "
+"docutils."
+
+#, fuzzy
+msgid ""
+"{{{\n"
+"Emphasis: *italic* **bold** ``monospace``\n"
+"\n"
+"Headings: Heading 1  Heading 2  Heading 3\n"
+"          =========  ---------  ~~~~~~~~~\n"
+"\n"
+"Horizontal rule: ----\n"
+"\n"
+"Links: TrailingUnderscore_ `multi word with backticks`_ external_\n"
+"\n"
+".. _external: http://external-site.example.org/foo/\n"
+"\n"
+"Lists: * bullets; 1., a. numbered items.\n"
+"}}}\n"
+"(!) For more help, see the\n"
+"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
+"reStructuredText Quick Reference]].\n"
+msgstr ""
+"Виділення: <i>*курсив*</i> <b>**жирний**</b> ``моно``<br/>\n"
+"<br/><pre>\n"
+"Заголовки: Рівня 1  Рівня 2  Рівня 3\n"
+"          =========  ---------  ~~~~~~~~~\n"
+"\n"
+"Горизонтальний пунктир: ---- \n"
+"Посилання: ОднеСлово_ `багато слів`_ зовнішнє_ \n"
+"\n"
+".. _зовнішнє: http://external-site.net/foo/\n"
+"\n"
+"Списки: * точками; 1., a. з нумерацією.\n"
+"</pre>\n"
+"<br/>\n"
+"(!) Докладніше дивіться \n"
+"<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
+"reStructuredText Quick Reference\n"
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr "**Надто багато include **"
+
+#, python-format
+msgid "**You are not allowed to read the page: %s**"
+msgstr "**У вас немає прав для читання сторінки: %s**"
+
+#, fuzzy, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr "**Сторінку не знайдено: %s**"
+
+msgid "XSLT option disabled, please look at HelpOnConfiguration."
+msgstr "XSLT вимкнено, дивіться ДовідкаКонфігурування"
+
+msgid "XSLT processing is not available, please install 4suite 1.x."
+msgstr "Обробка XSLT неможлива без встановлення 4suite 1.x."
+
+#, python-format
+msgid "%(errortype)s processing error"
+msgstr "помилка обробки %(errortype)s"
+
+#, fuzzy
+msgid "Password is too short."
+msgstr "Скинути пароль"
+
+msgid "Password has not enough different characters."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr "Відсутній пароль. Введіть ім'я користувача й пароль."
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr ""
+
+msgid "Diffs"
+msgstr "Зміни"
+
+msgid "Info"
+msgstr "Інформація"
+
+msgid "Edit"
+msgstr "Правка"
+
+msgid "UnSubscribe"
+msgstr "ПрипинитиСтеження"
+
+msgid "Subscribe"
+msgstr "Стежити"
+
+msgid "Raw"
+msgstr "Wiki-розмітка"
+
+msgid "XML"
+msgstr "XML"
+
+msgid "Print"
+msgstr "Друк"
+
+msgid "View"
+msgstr "Вигляд"
+
+msgid "Up"
+msgstr "Вгору"
+
+msgid "Publish my email (not my wiki homepage) in author info"
+msgstr ""
+"Публікувати мою адресу електронної пошти (а не домашню wiki-сторінку) у "
+"інформації про автора"
+
+msgid "Open editor on double click"
+msgstr "При подвійному клацанні відкривати редактор"
+
+msgid "After login, jump to last visited page"
+msgstr "Після входу, переходити до останньої відвіданої сторінки"
+
+msgid "Show comment sections"
+msgstr "Показувати розділи коментарів"
+
+msgid "Show question mark for non-existing pagelinks"
+msgstr "Показувати знак питання поруч з посиланням на неіснуючі сторінки"
+
+msgid "Show page trail"
+msgstr "Показувати список переглянутих сторінок"
+
+msgid "Show icon toolbar"
+msgstr "Відображати панель значків"
+
+msgid "Show top/bottom links in headings"
+msgstr "Показувати верхні/нижні посилання у заголовках"
+
+msgid "Show fancy diffs"
+msgstr "Показувати відмінності з виділенням"
+
+msgid "Add spaces to displayed wiki names"
+msgstr "Розділяти wiki-назви пробілами"
+
+msgid "Remember login information"
+msgstr "Запам'ятати мене"
+
+msgid "Disable this account forever"
+msgstr "Забути мене назавжди"
+
+msgid "(Use FirstnameLastname)"
+msgstr "(використовуйте Ім'яПрізвище)"
+
+msgid "Alias-Name"
+msgstr "Псевдонім"
+
+msgid "Email"
+msgstr "Ел.пошта"
+
+msgid "Jabber ID"
+msgstr ""
+
+msgid "User CSS URL"
+msgstr "Використовувати CSS з URL"
+
+msgid "(Leave it empty for disabling user CSS)"
+msgstr "(Залиште порожнім для використання системної CSS)"
+
+msgid "Editor size"
+msgstr "Розмір вікна редактора"
+
+#, fuzzy
+msgid "Username"
+msgstr "Користувач"
+
+#, fuzzy
+msgid "Member of Groups"
+msgstr "Член Груп"
+
+msgid "Jabber"
+msgstr ""
+
+msgid "Action"
+msgstr "Дія"
+
+msgid "Disable user"
+msgstr "Вимкнути користувача"
+
+msgid "Enable user"
+msgstr "Увімкнути користувача"
+
+msgid "disabled"
+msgstr "вимкнено"
+
+msgid "Mail account data"
+msgstr "Надіслати дані рахунку"
+
+msgid "OpenID"
+msgstr ""
+
+msgid "Login"
+msgstr "Вхід"
+
+#, python-format
+msgid "Upload new attachment \"%(filename)s\""
+msgstr "Відвантажити нове вкладення \"%(filename)s\""
+
+#, python-format
+msgid "Inlined image: %(url)s"
+msgstr "Зображення у рядку: %(url)s"
+
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Створити малюнок \"%(filename)s (відкривати у новому вікні)\""
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Змінити малюнок %(filename)s (відкривати у новому вікні)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Малюнок-посилання: %(filename)s"
+
+msgid "Toggle line numbers"
+msgstr "Увімкнути/вимкнути нумерацію рядків"
+
+#, python-format
+msgid "Revert to revision %(rev)d."
+msgstr "Повернено версію %(rev)d."
+
+#, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "Перейменовано з '%(oldpagename)s'."
+
+msgid "Options --pages and --search are mutually exclusive!"
+msgstr ""
+
+msgid "You must specify an output file!"
+msgstr ""
+
+msgid "No pages specified using --pages or --search, assuming full package."
+msgstr ""
+
+msgid "All attachments included into the package."
+msgstr ""
+
+msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr ""
 
 #, fuzzy, python-format
@@ -823,6 +1214,51 @@ msgid ""
 "Attachment size: %(attach_size)s\n"
 msgstr ""
 
+#, python-format
+msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
+msgstr "[%(sitename)s] %(username)s %(trivial)sоновив(ла) \"%(pagename)s\""
+
+msgid "Trivial "
+msgstr "Незначна "
+
+#, python-format
+msgid ""
+"Attachment link: %(attach)s\n"
+"Page link: %(page)s\n"
+msgstr ""
+
+msgid "Page has been modified"
+msgstr "Сторінку було змінено"
+
+msgid "Page has been modified in a trivial fashion"
+msgstr "Сторінку було незначно змінено"
+
+#, fuzzy
+msgid "Page has been renamed"
+msgstr "Сторінку було перейменовано"
+
+#, fuzzy
+msgid "Page has been deleted"
+msgstr "Сторінку було видалено"
+
+#, fuzzy
+msgid "Page has been copied"
+msgstr "Сторінку було скопійовано"
+
+#, fuzzy
+msgid "A new attachment has been added"
+msgstr "Нове вкладення було додано"
+
+msgid "A page has been reverted to a previous state"
+msgstr ""
+
+#, fuzzy
+msgid "A user has subscribed to a page"
+msgstr "Користувач стежить за сторінкою"
+
+msgid "A new account has been created"
+msgstr "Новий обліковий запис було створено"
+
 #, fuzzy
 msgid "Attachment link"
 msgstr "Посилання до вкладення"
@@ -839,521 +1275,1153 @@ msgstr "Змінена сторінка"
 msgid "Page changed"
 msgstr "Сторінку змінено"
 
-#, fuzzy
-msgid ""
-" Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
-">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
-"italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed ''<<Verbatim(''')"
-">>'''''bold'''<<Verbatim(''')>> and italics''<<Verbatim('')>>; <<Verbatim"
-"(----)>> horizontal rule.\n"
-" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
-"===== Title 5 =====.\n"
-" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
-"#n start numbering at n; space alone indents.\n"
-" Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])"
-">>.\n"
-" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
-"white space allowed after tables or titles.\n"
-"\n"
-"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
+msgid "about"
 msgstr ""
-" Виділити:: <<Verbatim('')>>''курсивом''<<Verbatim('')>>; <<Verbatim(''')"
-">>'''жирним'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''жирним "
-"курсивом'''''<<Verbatim(''''')>>; <<Verbatim('')>>''змішаним ''<<Verbatim"
-"(''')>>'''''жирним'''<<Verbatim(''')>> та курсивом''<<Verbatim('')>>; "
-"<<Verbatim(----)>> горизонтальною рискою.\n"
-" Заголовки:: <<Verbatim(=)>> Рівень 1 <<Verbatim(=)>>; <<Verbatim(==)>> "
-"Рівень 2 <<Verbatim(==)>>; <<Verbatim(===)>> Рівень 3 <<Verbatim(===)>>;   "
-"<<Verbatim(====)>> Рівень 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Рівень 5 "
-"<<Verbatim(=====)>>.\n"
-" Списки:: пробіл та одне з: * ненумерований список; 1., a., A., i., I. "
-"нумерований список; 1.#n почати нумерацію з n; поодинокий пробіл - відступ.\n"
-" Посилання:: <<Verbatim(СловаВеликоїЛітери)>>; <<Verbatim([[ціль|"
-"текстпосилання]])>>.\n"
-" Таблиці:: || текст комірки |||| текст комірки розтягнутий на 2 колонки "
-"||;     після таблиць та заголовків не можна залишати пробіли.\n"
-"\n"
-"(!) Докладна довідка ДовідкаРедагування чи ДовідкаСинтаксис.\n"
-
-#, python-format
-msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
-msgstr "Очікувалось \"%(wanted)s\" після \"%(key)s\", а не \"%(token)s\""
-
-#, python-format
-msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
-msgstr "Очікувалось число \"%(key)s\" перед \"%(token)s\""
-
-#, python-format
-msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
-msgstr "Очікувалось число \"%(arg)s\" після \"%(key)s\""
-
-#, python-format
-msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
-msgstr "Очікувався код кольору \"%(arg)s\" після \"%(key)s\""
-
-msgid "XSLT option disabled, please look at HelpOnConfiguration."
-msgstr "XSLT вимкнено, дивіться ДовідкаКонфігурування"
-
-msgid "XSLT processing is not available, please install 4suite 1.x."
-msgstr "Обробка XSLT неможлива без встановлення 4suite 1.x."
-
-#, python-format
-msgid "%(errortype)s processing error"
-msgstr "помилка обробки %(errortype)s"
-
-msgid ""
-"Rendering of reStructured text is not possible, please install Docutils."
-msgstr ""
-"Форматування структурованого (reStructured) тексту неможливе, встановіть "
-"docutils."
-
-#, fuzzy
-msgid ""
-"{{{\n"
-"Emphasis: *italic* **bold** ``monospace``\n"
-"\n"
-"Headings: Heading 1  Heading 2  Heading 3\n"
-"          =========  ---------  ~~~~~~~~~\n"
-"\n"
-"Horizontal rule: ----\n"
-"\n"
-"Links: TrailingUnderscore_ `multi word with backticks`_ external_\n"
-"\n"
-".. _external: http://external-site.example.org/foo/\n"
-"\n"
-"Lists: * bullets; 1., a. numbered items.\n"
-"}}}\n"
-"(!) For more help, see the\n"
-"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
-"reStructuredText Quick Reference]].\n"
-msgstr ""
-"Виділення: <i>*курсив*</i> <b>**жирний**</b> ``моно``<br/>\n"
-"<br/><pre>\n"
-"Заголовки: Рівня 1  Рівня 2  Рівня 3\n"
-"          =========  ---------  ~~~~~~~~~\n"
-"\n"
-"Горизонтальний пунктир: ---- \n"
-"Посилання: ОднеСлово_ `багато слів`_ зовнішнє_ \n"
-"\n"
-".. _зовнішнє: http://external-site.net/foo/\n"
-"\n"
-"Списки: * точками; 1., a. з нумерацією.\n"
-"</pre>\n"
-"<br/>\n"
-"(!) Докладніше дивіться \n"
-"<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
-"reStructuredText Quick Reference\n"
-
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr "**Надто багато include **"
-
-#, python-format
-msgid "**You are not allowed to read the page: %s**"
-msgstr "**У вас немає прав для читання сторінки: %s**"
-
-#, fuzzy, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr "**Сторінку не знайдено: %s**"
-
-#, fuzzy
-msgid ""
-" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
-">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
-"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
-">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
-" Horizontal Rule:: <<Verbatim(----)>>\n"
-" Force Linebreak:: <<Verbatim(\\\\)>>\n"
-" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
-"===== Title 5 =====.\n"
-" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
-"items.\n"
-" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
-" Tables:: |= header text | cell text | more cell text |;\n"
-"\n"
-"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
-msgstr ""
-" Виділити:: <<Verbatim('')>>''курсивом''<<Verbatim('')>>; <<Verbatim(''')"
-">>'''жирним'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''жирним "
-"курсивом'''''<<Verbatim(''''')>>; <<Verbatim('')>>''змішаним ''<<Verbatim"
-"(''')>>'''''жирним'''<<Verbatim(''')>> та курсивом''<<Verbatim('')>>; "
-"<<Verbatim(----)>> горизонтальною рискою.\n"
-" Заголовки:: <<Verbatim(=)>> Рівень 1 <<Verbatim(=)>>; <<Verbatim(==)>> "
-"Рівень 2 <<Verbatim(==)>>; <<Verbatim(===)>> Рівень 3 <<Verbatim(===)>>;   "
-"<<Verbatim(====)>> Рівень 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Рівень 5 "
-"<<Verbatim(=====)>>.\n"
-" Списки:: пробіл та одне з: * ненумерований список; 1., a., A., i., I. "
-"нумерований список; 1.#n почати нумерацію з n; поодинокий пробіл - відступ.\n"
-" Посилання:: <<Verbatim(СловаВеликоїЛітери)>>; <<Verbatim([[ціль|"
-"текстпосилання]])>>.\n"
-" Таблиці:: || текст комірки |||| текст комірки розтягнутий на 2 колонки "
-"||;     після таблиць та заголовків не можна залишати пробіли.\n"
-"\n"
-"(!) Докладна довідка ДовідкаРедагування чи ДовідкаСинтаксис.\n"
-
-msgid "Preferences"
-msgstr "Параметри"
 
 #, python-format
 msgid ""
-"Invalid user name {{{'%s'}}}.\n"
-"Name may contain any Unicode alpha numeric character, with optional one\n"
-"space between words. Group page name is not allowed."
+"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
+"%(be)s results out of about %(pages)d pages."
 msgstr ""
-"Неприпустима назва користувача {{{'%s'}}}.\n"
-"Назва може містити літери та цифри будь-якої мови та, при бажанні, один "
-"пробіл між словами. Не можна використовувати назву групи."
+"Результати %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s з %(aboutHits)s %(bs)s%"
+"(hits)d%(be)s результати з приблизно %(pages)d сторінок."
 
-msgid "This user name already belongs to somebody else."
-msgstr "Це ім'я вже зайняте."
+msgid "seconds"
+msgstr "секунд"
 
-msgid "Empty user name. Please enter a user name."
-msgstr "Порожнє ім'я користувача. Вкажіть ім'я користувача."
+msgid "Previous"
+msgstr "Попередня"
 
-msgid ""
-"Please provide your email address. If you lose your login information, you "
-"can get it by email."
-msgstr ""
-"Вкажіть вашу поштову адресу. Якщо ви втратите дані для реєстрації (входу у "
-"вики), ви зможете отримати їх поштою."
+msgid "Next"
+msgstr "Наступна"
 
-msgid "This email already belongs to somebody else."
-msgstr "Це чужа поштова адреса."
+msgid "rev"
+msgstr "версія"
 
-#, fuzzy
-msgid "This jabber id already belongs to somebody else."
-msgstr "Це чужа поштова адреса."
+msgid "current"
+msgstr "поточна"
 
 #, python-format
-msgid "The theme '%(theme_name)s' could not be loaded!"
-msgstr "Не вдається завантажити тему '%(theme_name)s'!"
+msgid "last modified: %s"
+msgstr "остання зміна: %s"
 
-msgid "User preferences saved!"
-msgstr "Параметри користувача записані!"
+msgid "match"
+msgstr "відповідність"
 
-msgid "Default"
-msgstr "Типовий"
+msgid "matches"
+msgstr "відповідностей"
 
-msgid "the one preferred"
-msgstr "типовим редактором"
+msgid "RecentChanges"
+msgstr "ОстанніЗміни"
 
-msgid "free choice"
-msgstr "пропонувати на вибір"
+msgid "WikiTipOfTheDay"
+msgstr ""
 
-msgid "Save"
-msgstr "Зберегти"
+msgid "TitleIndex"
+msgstr "ПокажчикНазв"
 
-msgid "Preferred theme"
-msgstr "Бажаний стиль"
+msgid "WordIndex"
+msgstr "ПокажчикСлів"
 
-msgid "Editor Preference"
-msgstr "Типовий редактор"
+msgid "FindPage"
+msgstr "ЗнайтиСторінку"
 
-msgid "Editor shown on UI"
-msgstr "Пропонувати редагування"
+msgid "MissingPage"
+msgstr "ВідсутняСторінка"
 
-msgid "Time zone"
-msgstr "Часовий пояс"
-
-msgid "Your time is"
-msgstr "Час у вашій системі"
-
-msgid "Server time is"
-msgstr "Час на сервері"
-
-msgid "Date format"
-msgstr "Формат дати"
-
-msgid "Preferred language"
-msgstr "Бажана мова"
-
-msgid "General options"
-msgstr "Загальні параметри"
-
-msgid "Quick links"
-msgstr "Закладки"
+msgid "MissingHomePage"
+msgstr "ВідсутняДомашняСторінка"
 
 #, fuzzy
-msgid "Switch user"
-msgstr "Виберіть користувача"
+msgid "WikiHomePage"
+msgstr "ВідсутняДомашняСторінка"
 
-msgid "No user selected"
-msgstr "Користувача не вибрано"
+#, fuzzy
+msgid "WikiName"
+msgstr "Ім'я"
 
-msgid ""
-"You can now change the settings of the selected user account; log out to get "
-"back to your account."
+msgid "WikiWikiWeb"
 msgstr ""
 
-msgid "You are the only user."
-msgstr "Ви єдиний користувач."
+msgid "FrontPage"
+msgstr "Початок"
 
-msgid ""
-"As a superuser, you can temporarily assume the identity of another user."
-msgstr ""
-
-msgid "Select User"
-msgstr "Вибрати користувача"
-
-msgid "Change password"
-msgstr "Змінити пароль"
-
-msgid "Passwords don't match!"
-msgstr "Паролі не збігаються!"
-
-msgid "Please specify a password!"
-msgstr "Введіть пароль!"
-
-#, python-format
-msgid "Password not acceptable: %s"
-msgstr "Неприпустимий пароль: %s"
-
-msgid "Your password has been changed."
-msgstr "Ваш пароль було змінено."
-
-msgid "To change your password, enter a new password twice."
-msgstr "Щоб змінити пароль, введіть новий пароль двічі."
-
-msgid "Password repeat"
-msgstr "Повтор паролю"
-
-msgid "Notification"
-msgstr ""
-
-msgid "Notification settings saved!"
+msgid "WikiSandBox"
 msgstr ""
 
 #, fuzzy
-msgid "'''Email'''"
-msgstr "Ел.пошта"
+msgid "InterWiki"
+msgstr "Вікі"
 
-msgid "'''Jabber'''"
-msgstr ""
-
-msgid "'''Event type'''"
-msgstr ""
-
-msgid "Select the events you want to be notified about."
-msgstr ""
-
-msgid ""
-"Before you can be notified, you need to provide a way to contact you in the "
-"general preferences."
+msgid "AbandonedPages"
 msgstr ""
 
 #, fuzzy
-msgid "Subscribed events"
-msgstr "Стеження для користувача"
+msgid "OrphanedPages"
+msgstr "Змінена сторінка"
 
 #, fuzzy
-msgid "Subscribed wiki pages<<BR>>(one regex per line)"
-msgstr "Список сторінок, за якими стежити (один вираз на рядок)"
+msgid "WantedPages"
+msgstr "ЗнайтиСторінку"
 
-msgid "OpenID server"
+msgid "EventStats"
 msgstr ""
 
-msgid "The selected websites have been removed."
+msgid "EventStats/HitCounts"
 msgstr ""
 
-msgid "Trusted websites"
+msgid "EventStats/Languages"
 msgstr ""
 
-msgid "Remove selected"
-msgstr "Видалити позначені"
-
-msgid "OpenID settings"
-msgstr "Налаштування OpenID"
-
-msgid "Cannot remove all OpenIDs."
-msgstr ""
-
-msgid "The selected OpenIDs have been removed."
-msgstr ""
-
-msgid "No OpenID given."
-msgstr "Не вказано OpenID."
-
-msgid "OpenID is already present."
+msgid "EventStats/UserAgents"
 msgstr ""
 
 #, fuzzy
-msgid "This OpenID is already used for another account."
-msgstr "Цей OpenID вже використовується іншим користувачем."
+msgid "PageSize"
+msgstr "Розмір"
 
-msgid "OpenID added successfully."
-msgstr "OpenID додано успішно."
+#, fuzzy
+msgid "PageHits"
+msgstr "Сторінки"
 
-msgid "Current OpenIDs"
-msgstr "Поточні OpenID"
+#, fuzzy
+msgid "RandomPage"
+msgstr "ПерейменуватиСторінку"
 
-msgid "Add OpenID"
-msgstr "Додати OpenID"
+#, fuzzy
+msgid "XsltVersion"
+msgstr "Версія Python"
 
-msgid "Options --pages and --search are mutually exclusive!"
+msgid "FortuneCookies"
 msgstr ""
 
-msgid "You must specify an output file!"
+msgid "WikiLicense"
+msgstr "ЛіцензіяWiki"
+
+#, fuzzy
+msgid "CategoryCategory"
+msgstr "будь-яка категорія"
+
+#, fuzzy
+msgid "CategoryHomepage"
+msgstr "Категорії"
+
+#, fuzzy
+msgid "CategoryTemplate"
+msgstr "Категорії"
+
+msgid "HomepageTemplate"
 msgstr ""
 
-msgid "No pages specified using --pages or --search, assuming full package."
+msgid "HelpTemplate"
 msgstr ""
 
-msgid "All attachments included into the package."
+msgid "HomepageReadWritePageTemplate"
 msgstr ""
 
-msgid "Output file already exists! Cowardly refusing to continue!"
+msgid "HomepageReadPageTemplate"
+msgstr ""
+
+msgid "HomepagePrivatePageTemplate"
+msgstr ""
+
+msgid "HomepageGroupsTemplate"
+msgstr ""
+
+msgid "SlideShowHandOutTemplate"
 msgstr ""
 
 #, fuzzy
-msgid "Username"
+msgid "SlideShowTemplate"
+msgstr "Показ слайдів"
+
+msgid "SlideTemplate"
+msgstr ""
+
+msgid "SyncJobTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration"
+msgstr "ДовідкаФорматування"
+
+msgid "HelpOnConfiguration/EmailSupport"
+msgstr ""
+
+msgid "HelpOnConfiguration/SecurityPolicy"
+msgstr ""
+
+msgid "HelpOnConfiguration/FileAttachments"
+msgstr ""
+
+msgid "HelpOnConfiguration/SupplementationPage"
+msgstr ""
+
+msgid "HelpOnConfiguration/SurgeProtection"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration/UserPreferences"
+msgstr "ВашіНалаштування"
+
+msgid "HelpOnPackageInstaller"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUpdating"
+msgstr "ДовідкаФорматування"
+
+#, fuzzy
+msgid "HelpOnUpdatingPython"
+msgstr "ДовідкаФорматування"
+
+#, fuzzy
+msgid "HelpOnAdministration"
+msgstr "ДовідкаФорматування"
+
+msgid "HelpOnAuthentication"
+msgstr ""
+
+msgid "HelpOnAuthentication/ExternalCookie"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnMoinCommand"
+msgstr "ДовідкаФорматування"
+
+msgid "HelpOnMoinCommand/ExportDump"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNotification"
+msgstr "ДовідкаФорматування"
+
+#, fuzzy
+msgid "HelpOnSessions"
+msgstr "ДовідкаЗміст"
+
+#, fuzzy
+msgid "HelpOnUserHandling"
+msgstr "ДовідкаФорматування"
+
+#, fuzzy
+msgid "HelpOnXapian"
+msgstr "ДовідкаФорматування"
+
+msgid "HelpOnMoinWikiSyntax"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnCreoleSyntax"
+msgstr "ДовідкаЗміст"
+
+msgid "HelpOnFormatting"
+msgstr "ДовідкаФорматування"
+
+#, fuzzy
+msgid "MoinMoin"
+msgstr "Версія MoinMoin"
+
+msgid "HelpContents"
+msgstr "ДовідкаЗміст"
+
+msgid "HelpForBeginners"
+msgstr ""
+
+msgid "HelpForUsers"
+msgstr ""
+
+#, fuzzy
+msgid "HelpIndex"
+msgstr "ПокажчикНазв"
+
+msgid "HelpOnAccessControlLists"
+msgstr ""
+
+msgid "HelpOnAcl"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnActions"
+msgstr "ДовідкаЗміст"
+
+msgid "HelpOnActions/AttachFile"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnAdmonitions"
+msgstr "ДовідкаЗміст"
+
+#, fuzzy
+msgid "HelpOnAutoAdmin"
+msgstr "ДовідкаФорматування"
+
+#, fuzzy
+msgid "HelpOnCategories"
+msgstr "Категорії"
+
+msgid "HelpOnDictionaries"
+msgstr ""
+
+msgid "HelpOnEditLocks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnEditing"
+msgstr "ДовідкаФорматування"
+
+msgid "HelpOnEditing/SubPages"
+msgstr ""
+
+msgid "HelpOnGraphicalEditor"
+msgstr ""
+
+msgid "HelpOnHeadlines"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnLanguages"
+msgstr "Мова"
+
+#, fuzzy
+msgid "HelpOnLinking"
+msgstr "ДовідкаФорматування"
+
+msgid "HelpOnLinking/NotesLinks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnLists"
+msgstr "ДовідкаЗміст"
+
+#, fuzzy
+msgid "HelpOnLogin"
+msgstr "ДовідкаФорматування"
+
+msgid "HelpOnMacros"
+msgstr ""
+
+msgid "HelpOnMacros/EmbedObject"
+msgstr ""
+
+msgid "HelpOnMacros/ImageLink"
+msgstr ""
+
+msgid "HelpOnMacros/Include"
+msgstr ""
+
+msgid "HelpOnMacros/MailTo"
+msgstr ""
+
+msgid "HelpOnMacros/MonthCalendar"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNavigation"
+msgstr "ПерейтиПоСайту"
+
+msgid "HelpOnOpenIDProvider"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnPageCreation"
+msgstr "ДовідкаФорматування"
+
+msgid "HelpOnPageDeletion"
+msgstr ""
+
+msgid "HelpOnParsers"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText/RstPrimer"
+msgstr ""
+
+msgid "HelpOnProcessingInstructions"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnRules"
+msgstr "ДовідкаЗміст"
+
+#, fuzzy
+msgid "HelpOnSearching"
+msgstr "ДовідкаФорматування"
+
+#, fuzzy
+msgid "HelpOnSlideShows"
+msgstr "Показ слайдів"
+
+msgid "HelpOnSlideShows/000 Introduction"
+msgstr ""
+
+msgid "HelpOnSlideShows/100 Creating the slides"
+msgstr ""
+
+msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
+msgstr ""
+
+msgid "HelpOnSmileys"
+msgstr ""
+
+msgid "HelpOnSpam"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSpellCheck"
+msgstr "Орфографія"
+
+msgid "HelpOnSuperUser"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSynchronisation"
+msgstr "Розпочато синхронізацію -"
+
+msgid "HelpOnTables"
+msgstr ""
+
+msgid "HelpOnTemplates"
+msgstr ""
+
+msgid "HelpOnThemes"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUserPreferences"
+msgstr "ВашіНалаштування"
+
+msgid "HelpOnVariables"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnXmlPages"
+msgstr "ДовідкаФорматування"
+
+#, fuzzy
+msgid "HelpOnComments"
+msgstr "ДовідкаЗміст"
+
+#, fuzzy
+msgid "HelpOnSubscribing"
+msgstr "ПрипинитиСтеження"
+
+msgid "CamelCase"
+msgstr ""
+
+msgid "WikiCourse"
+msgstr ""
+
+msgid "WikiCourse/01 What is a MoinMoin wiki?"
+msgstr ""
+
+msgid "WikiCourse/02 Finding information"
+msgstr ""
+
+msgid "WikiCourse/03 Staying up to date"
+msgstr ""
+
+msgid "WikiCourse/04 Creating a wiki account"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/05 User preferences"
+msgstr "ВашіНалаштування"
+
+msgid "WikiCourse/06 Your own wiki homepage"
+msgstr ""
+
+msgid "WikiCourse/07 The text editor"
+msgstr ""
+
+msgid "WikiCourse/08 Hot Keys"
+msgstr ""
+
+msgid "WikiCourse/10 Text layout with wiki markup"
+msgstr ""
+
+msgid "WikiCourse/11 Paragraphs"
+msgstr ""
+
+msgid "WikiCourse/12 Headlines"
+msgstr ""
+
+msgid "WikiCourse/13 Lists"
+msgstr ""
+
+msgid "WikiCourse/14 Text styles"
+msgstr ""
+
+msgid "WikiCourse/15 Tables"
+msgstr ""
+
+msgid "WikiCourse/16 Wiki internal links"
+msgstr ""
+
+msgid "WikiCourse/17 External links"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/18 Attachments"
+msgstr "Нове вкладення"
+
+msgid "WikiCourse/19 Symbols"
+msgstr ""
+
+msgid "WikiCourse/20 Dynamic content"
+msgstr ""
+
+msgid "WikiCourse/21 Macros"
+msgstr ""
+
+msgid "WikiCourse/22 Parsers"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/23 Actions"
+msgstr "Інші дії:"
+
+msgid "WikiCourse/30 The graphical editor"
+msgstr ""
+
+msgid "WikiCourse/40 Creating more pages"
+msgstr ""
+
+msgid "WikiCourse/50 Wiki etiquette"
+msgstr ""
+
+msgid "WikiCourse/51 Applications"
+msgstr ""
+
+msgid "WikiCourse/52 Structure in the wiki"
+msgstr ""
+
+msgid "WikiCourseHandOut"
+msgstr ""
+
+msgid "Sun"
+msgstr "Ндл"
+
+msgid "Mon"
+msgstr "Пнд"
+
+msgid "Tue"
+msgstr "Втр"
+
+msgid "Wed"
+msgstr "Срд"
+
+msgid "Thu"
+msgstr "Чтв"
+
+msgid "Fri"
+msgstr "Птн"
+
+msgid "Sat"
+msgstr "Сбт"
+
+msgid "AttachFile"
+msgstr "ДодатиФайл"
+
+msgid "DeletePage"
+msgstr "ВидалитиСторінку"
+
+msgid "LikePages"
+msgstr "ПодібніСторінки"
+
+msgid "LocalSiteMap"
+msgstr "МапаСайту"
+
+msgid "RenamePage"
+msgstr "ПерейменуватиСторінку"
+
+msgid "SpellCheck"
+msgstr "Орфографія"
+
+msgid "Discussion"
+msgstr "Обговорення"
+
+msgid "[all]"
+msgstr "[всі]"
+
+msgid "[not empty]"
+msgstr "[не порожні]"
+
+msgid "[empty]"
+msgstr "[порожні]"
+
+msgid "filter"
+msgstr "фільтр"
+
+msgid "Wiki"
+msgstr "Вікі"
+
+msgid "Page"
+msgstr "Сторінка"
+
+msgid "User"
 msgstr "Користувач"
 
-#, fuzzy
-msgid "Member of Groups"
-msgstr "Член Груп"
-
-msgid "Email"
-msgstr "Ел.пошта"
-
-msgid "Jabber"
+msgid "[ATTACH]"
 msgstr ""
 
-msgid "Action"
-msgstr "Дія"
+msgid "[RSS]"
+msgstr "[RSS]"
 
-msgid "Disable user"
-msgstr "Вимкнути користувача"
+msgid "[DELETED]"
+msgstr "[ВИДАЛЕНО]"
 
-msgid "Enable user"
-msgstr "Увімкнути користувача"
+msgid "[UPDATED]"
+msgstr "[ОНОВЛЕНО]"
 
-msgid "disabled"
-msgstr "вимкнено"
+msgid "[RENAMED]"
+msgstr "[ПЕРЕЙМЕНОВАНО]"
 
-msgid "Mail account data"
-msgstr "Надіслати дані рахунку"
+msgid "[CONFLICT]"
+msgstr "[КОНФЛІКТ]"
 
-msgid "OpenID"
-msgstr ""
+msgid "[NEW]"
+msgstr "[НОВА]"
 
-msgid "Login"
-msgstr "Вхід"
+msgid "[DIFF]"
+msgstr "[ВІДМІННОСТІ]"
+
+msgid "[BOTTOM]"
+msgstr "[ВНИЗ]"
+
+msgid "[TOP]"
+msgstr "[ВГОРУ]"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Натисніть сюди для пошуку цієї назви всюди"
+
+msgid "Settings"
+msgstr "Налаштування"
+
+msgid "Logout"
+msgstr "Вийти"
+
+msgid "DeleteCache"
+msgstr "ОчиститиКеш"
 
 #, python-format
-msgid "Local Site Map for \"%s\""
-msgstr "Локальна мапа сайту для \"%s\""
+msgid "(cached %s)"
+msgstr "(кешовано %s)"
 
-msgid "Please log in first."
-msgstr "Спочатку необхідно увійти."
+msgid "Or try one of these actions:"
+msgstr "Або спробуйте зробити:"
 
-msgid "Please first create a homepage before creating additional pages."
-msgstr "Створіть домашню сторінку перед створенням інших сторінок."
+msgid "Unsubscribe"
+msgstr "Припинити стеження"
 
-#, fuzzy, python-format
-msgid ""
-"You can add some additional sub pages to your already existing homepage "
-"here.\n"
-"\n"
-"You can choose how open to other readers or writers those pages shall be,\n"
-"access is controlled by group membership of the corresponding group page.\n"
-"\n"
-"Just enter the sub page's name and click on the button to create a new "
-"page.\n"
-"\n"
-"Before creating access protected pages, make sure the corresponding group "
-"page\n"
-"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
-"creating\n"
-"the group pages.\n"
-"\n"
-"||'''Add a new personal page:'''||'''Related access control list "
-"group:'''||\n"
-"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
-"[[%(username)s/ReadWriteGroup]]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
-"(username)s/ReadGroup]]||\n"
-"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
-"(username)s only||\n"
-"\n"
-msgstr ""
-"Тут можна добавить вкладені сторінки до вашої домашньої сторінки.\n"
-"\n"
-"Ви вирішуєте чи можуть інші читати або писати на цих сторінках,\n"
-"доступ визначається членством у групі, що відповідає сторінці.\n"
-"\n"
-"Просто введіть назву сторінки та натисніть кнопку для її створення.\n"
-"\n"
-"Перед створенням захищених сторінок перевірте, що є сторінка групи\n"
-"та вона містить потрібних користувачів. Для створення сторінок групи\n"
-"скористайтесь зразком ШаблонСторінкиДляГрупиОсіб.\n"
-"\n"
-"||'''Додати нову персональну сторінку:'''||''Сторінка групи для керування "
-"доступом:'''||\n"
-"||<<NewPage(ШаблонПерсональноїСторінкиДляЧитанняЗапису, можна читати та "
-"писати,%(username)s)>>||[\"%(username)s/ReadWriteGroup\"]||\n"
-"||<<NewPage(ШаблонПерсональноїСторінкиДляЧитання,можна читати,%(username)s)"
-">>||[\"%(username)s/ReadGroup\"]||\n"
-"||<<NewPage(ШаблонПриватноїПерсональноїСторінки,особиста сторінка,%(username)"
-"s)>>||лише для %(username)s||\n"
-"\n"
+msgid "Home"
+msgstr "МояСторінка"
 
-msgid "MyPages management"
-msgstr "Керування сторінками МоїСторінки"
+msgid "Clear message"
+msgstr "Прибрати це повідомлення"
 
 #, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "Скористайтесь інтерфейсом користувача для %(actionname)s!"
+msgid "last edited %(time)s by %(editor)s"
+msgstr "остання зміна о %(time)s, користувач %(editor)s"
 
-msgid "TextCha: Wrong answer! Go back and try again..."
-msgstr "TextCha: Неправильна відповідь! Поверніться та спробуйте знову..."
+#, python-format
+msgid "last modified %(time)s"
+msgstr "остання зміна %(time)s"
 
-#, fuzzy, python-format
-msgid "You must login to use this action: %(action)s."
-msgstr "Зареєструйтесь, щоб мати доступ до: %(action)s."
+msgid "Search:"
+msgstr "Пошук:"
 
-msgid "You are not allowed to subscribe to a page you can't read."
-msgstr "Ви не можете стежити за сторінкою, яку заборонено читати."
+msgid "Text"
+msgstr "У тексті"
+
+msgid "Titles"
+msgstr "У заголовках"
+
+msgid "Search"
+msgstr "Шукати"
+
+msgid "More Actions:"
+msgstr "Інші дії:"
+
+msgid "------------------------"
+msgstr "------------------------"
+
+msgid "Raw Text"
+msgstr "Показати розмітку"
+
+msgid "Print View"
+msgstr "Для друку"
+
+msgid "Delete Cache"
+msgstr "Прибрати з кешу"
+
+msgid "Rename Page"
+msgstr "Перейменувати сторінку"
+
+msgid "Copy Page"
+msgstr "Копіювати сторінку"
+
+msgid "Delete Page"
+msgstr "Видалити сторінку"
+
+msgid "Like Pages"
+msgstr "Подібні сторінки"
+
+msgid "Local Site Map"
+msgstr "Мапа сайту"
+
+msgid "My Pages"
+msgstr "Мої сторінки"
+
+msgid "Subscribe User"
+msgstr "Стеження для користувача"
+
+msgid "Remove Spam"
+msgstr "Видалити спам"
+
+msgid "Revert to this revision"
+msgstr "Повернути до цієї версії"
+
+msgid "Package Pages"
+msgstr "Запакувати сторінки"
+
+msgid "Render as Docbook"
+msgstr "Створити Docbook"
+
+msgid "Sync Pages"
+msgstr "Синхронізувати сторінки"
+
+msgid "Do"
+msgstr "Виконати"
+
+msgid "Comments"
+msgstr "Коментар"
+
+msgid "Edit (Text)"
+msgstr "Змінити (текст): "
+
+msgid "Edit (GUI)"
+msgstr "Змінити (графічно)"
+
+msgid "Immutable Page"
+msgstr "Незмінна сторінка"
+
+msgid "Remove Link"
+msgstr "Видалити з закладок"
+
+msgid "Add Link"
+msgstr "Додати посилання"
+
+msgid "Attachments"
+msgstr "Вкладення"
+
+#, python-format
+msgid "Show %s days."
+msgstr "Показати зміни за %s днів."
+
+msgid "Wiki Markup"
+msgstr "Wiki-розмітка"
 
 #, fuzzy
-msgid "This wiki is not enabled for mail/Jabber processing."
-msgstr "У цьому wiki заборонено надсилання пошти."
-
-msgid "You must log in to use subscriptions."
-msgstr "Зареєструйтесь, щоб мати змогу стежити."
+msgid "File attachment browser"
+msgstr "Переглядач вкладень"
 
 #, fuzzy
-msgid ""
-"Add your email address or Jabber ID in your user settings to use "
-"subscriptions."
+msgid "User account browser"
+msgstr "Переглядач користувачів"
+
+msgid "Wiki configuration"
 msgstr ""
-"Щоб мати змогу стежити, додайте вашу поштову адресу до ВашіНалаштування."
 
-msgid "You are already subscribed to this page."
-msgstr "Тепер вже стежите за цією сторінкою."
+msgid ""
+"This table shows all settings in this wiki that do not have default values. "
+"Settings that the configuration system doesn't know about are shown in "
+"''italic'', those may be due to third-party extensions needing configuration "
+"or settings that were removed from Moin."
+msgstr ""
 
-msgid "You have been subscribed to this page."
-msgstr "Тепер ви стежите за цією сторінкою."
+#, fuzzy
+msgid "Variable name"
+msgstr "Файл"
 
-msgid "You could not get subscribed to this page."
-msgstr "Ви не можете стежити за цією сторінкою."
+#, fuzzy
+msgid "Setting"
+msgstr "Налаштування"
+
+msgid "Search Titles"
+msgstr "Пошук за заголовками"
+
+msgid "Display context of search results"
+msgstr "Відображати розширені результати пошуку"
+
+msgid "Case-sensitive searching"
+msgstr "Пошук з урахуванням регістру"
+
+msgid "Search Text"
+msgstr "Пошук у тексті"
+
+#, python-format
+msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
+msgstr "Уточніть що шукати замість {{{\"%s\"}}}"
+
+#, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Відвантажити вкладення '%(filename)s'."
+
+#, python-format
+msgid "Attachment '%(filename)s' deleted."
+msgstr "Вкладення '%(filename)s' видалено."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Малюнок '%(filename)s' збережено."
+
+#, python-format
+msgid "%(mins)dm ago"
+msgstr "%(mins)dхв. тому"
+
+msgid "(no bookmark set)"
+msgstr "(немає закладки)"
+
+#, python-format
+msgid "(currently set to %s)"
+msgstr "(встановлено на %s)"
+
+msgid "Delete bookmark"
+msgstr "Видалити закладку"
+
+msgid "Set bookmark"
+msgstr "Встановити закладку"
+
+msgid "[Bookmark reached]"
+msgstr "[Тут лежить закладка]"
+
+msgid "Python Version"
+msgstr "Версія Python"
+
+msgid "MoinMoin Version"
+msgstr "Версія MoinMoin"
+
+#, python-format
+msgid "Release %s [Revision %s]"
+msgstr "Випуск %s [виправлення %s]"
+
+msgid "4Suite Version"
+msgstr "Версія 4Suite"
+
+msgid "Number of pages"
+msgstr "Кількість сторінок"
+
+msgid "Number of system pages"
+msgstr "Кількість системних сторінок"
+
+msgid "Accumulated page sizes"
+msgstr "Загальний розмір сторінок"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr "%(data_dir)s/pages/ на диску"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/"
+msgstr "%(data_dir)s/ на диску"
+
+msgid "Entries in edit log"
+msgstr "Записів у журналі редагування"
+
+msgid "NONE"
+msgstr "НЕМАЄ"
+
+msgid "Global extension macros"
+msgstr "Глобальні додаткові макроси"
+
+msgid "Local extension macros"
+msgstr "Локальні додаткові макроси"
+
+msgid "Global extension actions"
+msgstr "Глобальні додаткові дії"
+
+msgid "Local extension actions"
+msgstr "Локальні додаткові дії"
+
+msgid "Global parsers"
+msgstr "Глобальні аналізатори"
+
+msgid "Local extension parsers"
+msgstr "Локальні додаткові аналізатори"
+
+msgid "Disabled"
+msgstr "Вимкнено"
+
+msgid "Enabled"
+msgstr "Увімкнено"
+
+msgid "index available"
+msgstr "покажчик доступний"
+
+msgid "index unavailable"
+msgstr "покажчик недоступний"
+
+msgid "Xapian and/or Python Xapian bindings not installed"
+msgstr "Не встановлено прив'язки Xapian та/або Python Xapian"
+
+msgid "N/A"
+msgstr "немає"
+
+msgid "Xapian search"
+msgstr "Система пошуку Xapian"
+
+msgid "Stemming for Xapian"
+msgstr "Stemming для Xapian"
+
+msgid "Active threads"
+msgstr "Активних потоків"
+
+msgid "No orphaned pages in this wiki."
+msgstr "У цьому wiki немає одиноких сторінок."
+
+#, python-format
+msgid "Invalid include arguments \"%s\"!"
+msgstr "Неправильні аргументи включення \"%s\"!"
+
+#, python-format
+msgid "Nothing found for \"%s\"!"
+msgstr "Нічого не знайдено для \"%s\"!"
+
+msgid "edit"
+msgstr "виправити"
+
+#, python-format
+msgid ""
+"%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
+"missing."
+msgstr ""
+
+#, python-format
+msgid ""
+"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s=%"
+"(argument_value)s!"
+msgstr ""
+
+#, python-format
+msgid ""
+"Current configuration does not allow embedding of the file %(file)s because "
+"of its mimetype %(mimetype)s."
+msgstr ""
+
+msgid "Embedded"
+msgstr "Вбудовано"
+
+msgid "Search for items"
+msgstr "Пошук за елементами"
+
+msgid "containing all the following terms"
+msgstr "містить усі наступні терміни"
+
+msgid "containing one or more of the following terms"
+msgstr "містить один або більше з наступних термінів"
+
+msgid "not containing the following terms"
+msgstr "не містить наступних термінів"
+
+msgid "last modified since (e.g. last 2 weeks)"
+msgstr "час останньої зміни (наприклад, минулі 2 тижні)"
+
+msgid "any category"
+msgstr "будь-яка категорія"
+
+msgid "any language"
+msgstr "будь-яка мова"
+
+msgid "any mimetype"
+msgstr "будь-який тип mime"
+
+msgid "Categories"
+msgstr "Категорії"
+
+msgid "Language"
+msgstr "Мова"
+
+msgid "File Type"
+msgstr "Тип файлу"
+
+msgid "Search only in titles"
+msgstr "Пошук лише за заголовками"
+
+msgid "Case-sensitive search"
+msgstr "Пошук з урахуванням регістру"
+
+msgid "Exclude underlay"
+msgstr "Виключити основу"
+
+msgid "No system items"
+msgstr "Без системних елементів"
+
+msgid "Search in all page revisions"
+msgstr "Пошук в усіх версіях сторінок"
+
+msgid "Go get it!"
+msgstr "Сходити отримати!"
+
+msgid "Include system pages"
+msgstr "Показати службові сторінки"
+
+msgid "Exclude system pages"
+msgstr "Прибрати службові сторінки"
+
+msgid "No wanted pages in this wiki."
+msgstr "У цьому wiki немає потрібних сторінок."
+
+msgid "Description"
+msgstr ""
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr ""
+"Запит пошуку {{{\"%s\"}}} є некоректним. Додаткову інформацію шукайте на "
+"сторінці ДовідкаПошук."
+
+msgid "Markup"
+msgstr "Розмітка"
+
+msgid "Display"
+msgstr "Перегляд"
+
+#, python-format
+msgid "No quotes on %(pagename)s."
+msgstr "Цитати відсутні на %(pagename)s."
+
+msgid "You need to provide a chart type!"
+msgstr "Вкажіть тип діаграми!"
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "Неправильний тип діаграми \"%s\"!"
+
+msgid "Contents"
+msgstr "Зміст"
+
+#, python-format
+msgid "Unsupported navigation scheme '%(scheme)s'!"
+msgstr "Непідтримувана схема навігації '%(scheme)s'!"
+
+msgid "No parent page found!"
+msgstr "Батьківська сторінка не існує!"
+
+msgid "Slideshow"
+msgstr "Показ слайдів"
+
+msgid "Start"
+msgstr "Початок"
+
+#, python-format
+msgid "Slide %(pos)d of %(size)d"
+msgstr "Слайд %(pos)d з %(size)d"
+
+#, python-format
+msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
+msgstr ""
+
+msgid "Go To Page"
+msgstr "Відкрити сторінку"
+
+msgid "You are not allowed to use this action."
+msgstr "Немає прав для цієї дії."
+
+#, python-format
+msgid "No pages like \"%s\"!"
+msgstr "Немає подібних до \"%s\" сторінок!"
+
+#, python-format
+msgid "Exactly one page like \"%s\" found, redirecting to page."
+msgstr "Знайдено одну сторінку, що схожа на \"%s\", відкривається..."
+
+#, python-format
+msgid "Pages like \"%s\""
+msgstr "Подібні до \"%s\" сторінки"
+
+#, python-format
+msgid "%(matchcount)d %(matches)s for \"%(title)s\""
+msgstr "%(matchcount)d %(matches)s для \"%(title)s\""
 
 msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "Не можна створювати сторінку без імені. Вкажіть ім'я сторінки."
 
-msgid "Do it."
-msgstr "Виконати."
+#, fuzzy, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "Зареєструйтесь, щоб мати доступ до: %(action)s."
+
+msgid "You must login to remove a quicklink."
+msgstr "Зареєструйтесь, щоб видалити посилання на сторінку."
+
+msgid "Your quicklink to this page has been removed."
+msgstr "Ваше посилання на цю сторінку видалено."
+
+msgid "Your quicklink to this page could not be removed."
+msgstr "Ваше посилання на цю сторінку не може бути видалено."
+
+msgid "You need to have a quicklink to this page to remove it."
+msgstr "Щоб видалити посилання на цю сторінку, воно має існувати."
+
+msgid ""
+"You need to manually go to your OpenID provider wiki\n"
+"and log in before you can use your OpenID. MoinMoin will\n"
+"never allow you to enter your password here.\n"
+"\n"
+"Once you have logged in, simply reload this page."
+msgstr ""
+
+msgid "OpenID Trust verification"
+msgstr ""
 
 #, python-format
-msgid "Execute action %(actionname)s?"
-msgstr "Виконати %(actionname)s?"
+msgid "The site %s has asked for your identity."
+msgstr ""
 
 #, python-format
-msgid "Action %(actionname)s is excluded in this wiki!"
-msgstr "%(actionname)s виконано у цьому wiki!"
+msgid ""
+"\n"
+"If you approve, the site represented by the trust root below will be\n"
+"told that you control the identity URL %s. (If you are using a delegated\n"
+"identity, the site will take care of reversing the\n"
+"delegation on its own.)"
+msgstr ""
 
-#, python-format
-msgid "You are not allowed to use action %(actionname)s on this page!"
-msgstr "Ви не можете робити %(actionname)s на цій сторінці!"
+msgid "Trust root"
+msgstr ""
+
+msgid "Identity URL"
+msgstr ""
+
+#, fuzzy
+msgid "Remember decision"
+msgstr "Запам'ятати вибір"
+
+#, fuzzy
+msgid "Remember this trust decision and don't ask again"
+msgstr "Запам'ятати цей вибір та не питати більше"
+
+msgid "Approve"
+msgstr "Підтвердити"
+
+msgid "Don't approve"
+msgstr "Не підтверджувати"
+
+msgid "OpenID not served"
+msgstr ""
+
+msgid ""
+"\n"
+"Unfortunately you have not created your homepage yet. Therefore,\n"
+"we cannot serve an OpenID for you. Please create your homepage first\n"
+"and then reload this page or click the button below to cancel this\n"
+"verification."
+msgstr ""
 
 msgid "If this account exists an email was sent."
 msgstr ""
@@ -1427,103 +2495,6 @@ msgid ""
 "username, the recovery token and a new password (twice) below."
 msgstr ""
 
-#, fuzzy
-msgid "Wiki Backup"
-msgstr "Wiki-розмітка"
-
-msgid ""
-"= Downloading a backup =\n"
-"\n"
-"Please note:\n"
-" * Store backups in a safe and secure place - they contain sensitive "
-"information.\n"
-" * Make sure your wiki configuration backup_* values are correct and "
-"complete.\n"
-" * Make sure the backup file you get contains everything you need in case of "
-"problems.\n"
-" * Make sure it is downloaded without problems.\n"
-"\n"
-"To get a backup, just click here:"
-msgstr ""
-
-msgid "Backup"
-msgstr "Зберегти копію"
-
-msgid "You are not allowed to do remote backup."
-msgstr "Ви не можете робити віддалену копію."
-
-#, python-format
-msgid "Unknown backup subaction: %s."
-msgstr "Невідома вкладена дія резервного копіювання: %s."
-
-msgid "You must login to add a quicklink."
-msgstr "Зареєструйтесь, щоб додати закладку."
-
-msgid "A quicklink to this page has been added for you."
-msgstr "Вам додане посилання на цю сторінку."
-
-msgid "A quicklink to this page could not be added for you."
-msgstr "Вам не може бути додане посилання на цю сторінку."
-
-msgid "You already have a quicklink to this page."
-msgstr "Ви вже встановили посилання на цю сторінку!"
-
-msgid "You need to provide a chart type!"
-msgstr "Вкажіть тип діаграми!"
-
-#, python-format
-msgid "Bad chart type \"%s\"!"
-msgstr "Неправильний тип діаграми \"%s\"!"
-
-msgid "Load"
-msgstr "Завантажити"
-
-msgid ""
-"No file content. Delete non ASCII characters from the file name and try "
-"again."
-msgstr ""
-"Неправильна назва файлу. Приберіть всі спец-символи з імені файлу та "
-"спробуйте знову."
-
-#, fuzzy
-msgid "Pagename not specified!"
-msgstr "Назву сторінки не вказано!"
-
-msgid "Upload page content"
-msgstr ""
-
-msgid ""
-"You can upload content for the page named below. If you change the page "
-"name, you can also upload content for another page. If the page name is "
-"empty, we derive the page name from the file name."
-msgstr ""
-
-msgid "File to load page content from"
-msgstr ""
-
-msgid "Comment"
-msgstr "Коментар"
-
-#, fuzzy
-msgid "Page Name"
-msgstr "Назва сторінки"
-
-#, fuzzy
-msgid "You are not allowed to create the supplementation page."
-msgstr "У вас немає прав для створення цієї сторінки!"
-
-msgid "You must login to remove a quicklink."
-msgstr "Зареєструйтесь, щоб видалити посилання на сторінку."
-
-msgid "Your quicklink to this page has been removed."
-msgstr "Ваше посилання на цю сторінку видалено."
-
-msgid "Your quicklink to this page could not be removed."
-msgstr "Ваше посилання на цю сторінку не може бути видалено."
-
-msgid "You need to have a quicklink to this page to remove it."
-msgstr "Щоб видалити посилання на цю сторінку, воно має існувати."
-
 #, python-format
 msgid "[%d attachments]"
 msgstr "[%d вкладень]"
@@ -1562,9 +2533,6 @@ msgstr "перемістити"
 
 msgid "get"
 msgstr "взяти"
-
-msgid "edit"
-msgstr "виправити"
 
 msgid "view"
 msgstr "показати"
@@ -1611,6 +2579,16 @@ msgstr "Непідтримувана дія ДодатиФайл: %s"
 msgid "Attachments for \"%(pagename)s\""
 msgstr "Вкладення для \"%(pagename)s\""
 
+msgid "TextCha: Wrong answer! Go back and try again..."
+msgstr "TextCha: Неправильна відповідь! Поверніться та спробуйте знову..."
+
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Неправильна назва файлу. Приберіть всі спец-символи з імені файлу та "
+"спробуйте знову."
+
 #, fuzzy
 msgid "You are not allowed to overwrite a file attachment of this page."
 msgstr "Ви не маєте прав на перезаписування вкладення до сторінки."
@@ -1632,10 +2610,6 @@ msgstr "Ви не можете зберігати малюнки на цій с�
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Ви не можете стирати вкладення на цій сторінці."
-
-#, python-format
-msgid "Attachment '%(filename)s' deleted."
-msgstr "Вкладення '%(filename)s' видалено."
 
 #, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -1771,96 +2745,107 @@ msgstr "Ви не маєте прав на перегляд цієї сторі�
 msgid "attachment:%(filename)s of %(pagename)s"
 msgstr "вкладення:%(filename)s з %(pagename)s"
 
-#, python-format
-msgid "Full Link List for \"%s\""
-msgstr "Повний список посилань для \"%s\""
+msgid "User account created! You can use this account to login now..."
+msgstr "Користувача створено! Можна входити..."
 
-#, python-format
-msgid "Subscribe users to the page %s"
-msgstr "Додати користувачів до списку стеження за сторінкою %s"
+msgid "TextCha (required)"
+msgstr "TextCha (обов'язково)"
 
-msgid "Enter user names (comma separated):"
-msgstr "Введіть імена користувачів (розділюються комами):"
+msgid "Create Profile"
+msgstr "Створити профіль"
 
-#, python-format
-msgid "Subscribed for %s:"
-msgstr "Отримує сповіщення про зміну %s:"
+msgid "Create Account"
+msgstr ""
 
-msgid "Not a user:"
-msgstr "Не є користувачем:"
+msgid "Editor"
+msgstr "Редактор"
 
-msgid "You are not allowed to perform this action."
-msgstr "Ви не можете виконувати цю дію."
+msgid "Pages"
+msgstr "Сторінки"
 
-msgid "You are not allowed to use this action."
-msgstr "Немає прав для цієї дії."
+msgid "Select Author"
+msgstr "Виберіть автора"
 
-msgid "Rename Page"
-msgstr "Перейменувати сторінку"
-
-msgid "This page is already deleted or was never created!"
-msgstr "Така сторінка вже стерта або ніколи не існувала!"
-
-msgid "Rename all /subpages too?"
-msgstr "Перейменувати також всі /підсторінки?"
-
-msgid "New name"
-msgstr "Нова назва"
-
-msgid "Optional reason for the renaming"
-msgstr "Причина перейменування (необов'язково)"
-
-msgid "Really rename this page?"
-msgstr "Дійсно перейменувати цю сторінку?"
-
-#, python-format
-msgid "No pages like \"%s\"!"
-msgstr "Немає подібних до \"%s\" сторінок!"
-
-#, python-format
-msgid "Exactly one page like \"%s\" found, redirecting to page."
-msgstr "Знайдено одну сторінку, що схожа на \"%s\", відкривається..."
-
-#, python-format
-msgid "Pages like \"%s\""
-msgstr "Подібні до \"%s\" сторінки"
-
-#, python-format
-msgid "%(matchcount)d %(matches)s for \"%(title)s\""
-msgstr "%(matchcount)d %(matches)s для \"%(title)s\""
-
-#, python-format
-msgid "Invalid filename \"%s\"!"
-msgstr "Некоректна назва файлу \"%s\"!"
-
-#, python-format
-msgid "Created the package %s containing the pages %s."
-msgstr "Створено пакунок %s зі сторінками %s."
+msgid "Revert all!"
+msgstr "Повернути все!"
 
 #, fuzzy
-msgid "Include all attachments?"
-msgstr "[%d вкладень]"
+msgid "Revert"
+msgstr "Повернути все!"
 
-msgid "Package pages"
-msgstr "Запакувати сторінки"
+msgid "You are not allowed to revert this page!"
+msgstr "У вас немає прав для повернення цієї сторінки!"
 
-msgid "Package name"
-msgstr "Назва пакунок"
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
+msgstr ""
+"Ви переглядали поточну версію цієї сторінки при виконанні вами операції "
+"повернення змін. Якщо ви бажаєте повернути старішу версію, спочатку "
+"перегляньте цю стару версію та знову зробіть повернення до неї."
 
-msgid "List of page names - separated by a comma"
-msgstr "Назви сторінок через кому "
+#, fuzzy
+msgid "Optional reason for reverting this page"
+msgstr "Причина копіювання (необов'язково)"
 
-msgid "Delete"
-msgstr "Видалити"
+#, fuzzy
+msgid "Really revert this page?"
+msgstr "Дійсно відновити цю сторінку?"
 
-msgid "Delete all /subpages too?"
-msgstr "Видалити також всі /підсторінки?"
+#, python-format
+msgid "(including %(localwords)d %(pagelink)s)"
+msgstr "(включаючи %(localwords)d %(pagelink)s)"
 
-msgid "Optional reason for the deletion"
-msgstr "Причина видалення (необов'язково)"
+#, python-format
+msgid ""
+"The following %(badwords)d words could not be found in the dictionary of %"
+"(totalwords)d words%(localwords)s and are highlighted below:"
+msgstr ""
+"%(badwords)d слів(а) не знайдено у словнику з %(totalwords)d слів %"
+"(localwords)s та показано тут:"
 
-msgid "Really delete this page?"
-msgstr "Дійсно видалити цю сторінку?"
+msgid "Add checked words to dictionary"
+msgstr "Додати перевірені слова до словника"
+
+msgid "No spelling errors found!"
+msgstr "Орфографічних помилок не знайдено!"
+
+msgid "You can't save spelling words."
+msgstr "Не можна перевіряти сторінку, яку заборонено читати."
+
+msgid "You can't check spelling on a page you can't read."
+msgstr "Не можна перевіряти сторінку, яку заборонено читати."
+
+msgid "You are not allowed to subscribe to a page you can't read."
+msgstr "Ви не можете стежити за сторінкою, яку заборонено читати."
+
+#, fuzzy
+msgid "This wiki is not enabled for mail/Jabber processing."
+msgstr "У цьому wiki заборонено надсилання пошти."
+
+msgid "You must log in to use subscriptions."
+msgstr "Зареєструйтесь, щоб мати змогу стежити."
+
+#, fuzzy
+msgid ""
+"Add your email address or Jabber ID in your user settings to use "
+"subscriptions."
+msgstr ""
+"Щоб мати змогу стежити, додайте вашу поштову адресу до ВашіНалаштування."
+
+msgid "You are already subscribed to this page."
+msgstr "Тепер вже стежите за цією сторінкою."
+
+msgid "You have been subscribed to this page."
+msgstr "Тепер ви стежите за цією сторінкою."
+
+msgid "You could not get subscribed to this page."
+msgstr "Ви не можете стежити за цією сторінкою."
+
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Скористайтесь інтерфейсом користувача для %(actionname)s!"
 
 msgid "You are now logged out."
 msgstr "Ви вийшли."
@@ -2016,176 +3001,24 @@ msgstr "Сторінка %s має конфлікти на віддаленій 
 msgid "Page %s merged with conflicts."
 msgstr "Сторінку %s об'єднано з конфліктами."
 
-msgid "Editor"
-msgstr "Редактор"
-
-msgid "Pages"
-msgstr "Сторінки"
-
-msgid "Select Author"
-msgstr "Виберіть автора"
-
-msgid "Revert all!"
-msgstr "Повернути все!"
-
 #, fuzzy
-msgid "Only superuser is allowed to use this action."
-msgstr "Це може робити лише адміністратор."
+msgid "You are not allowed to create the supplementation page."
+msgstr "У вас немає прав для створення цієї сторінки!"
 
-msgid "No older revisions available!"
-msgstr "Немає більш старих виправлень!"
+msgid "Delete"
+msgstr "Видалити"
 
-#, python-format
-msgid "Diff for \"%s\""
-msgstr "Відмінності у \"%s\""
+msgid "This page is already deleted or was never created!"
+msgstr "Така сторінка вже стерта або ніколи не існувала!"
 
-#, python-format
-msgid "Differences between revisions %d and %d"
-msgstr "Відмінності між версіями %d та %d"
+msgid "Delete all /subpages too?"
+msgstr "Видалити також всі /підсторінки?"
 
-#, python-format
-msgid "(spanning %d versions)"
-msgstr "(за %d версіями)"
+msgid "Optional reason for the deletion"
+msgstr "Причина видалення (необов'язково)"
 
-msgid "Revert to this revision"
-msgstr "Повернути до цієї версії"
-
-msgid "Previous change"
-msgstr "Попередня зміна"
-
-msgid "Next change"
-msgstr "Наступна зміна"
-
-#, python-format
-msgid "The page was saved %(count)d times, though!"
-msgstr "Сторінку збережено %(count)d раз!"
-
-msgid "(ignoring whitespace)"
-msgstr "(ігнорувати пробіли)"
-
-msgid "Ignore changes in the amount of whitespace"
-msgstr "Ігнорувати різницю у кількості пробілів"
-
-#, python-format
-msgid "(including %(localwords)d %(pagelink)s)"
-msgstr "(включаючи %(localwords)d %(pagelink)s)"
-
-#, python-format
-msgid ""
-"The following %(badwords)d words could not be found in the dictionary of %"
-"(totalwords)d words%(localwords)s and are highlighted below:"
-msgstr ""
-"%(badwords)d слів(а) не знайдено у словнику з %(totalwords)d слів %"
-"(localwords)s та показано тут:"
-
-msgid "Add checked words to dictionary"
-msgstr "Додати перевірені слова до словника"
-
-msgid "No spelling errors found!"
-msgstr "Орфографічних помилок не знайдено!"
-
-msgid "You can't save spelling words."
-msgstr "Не можна перевіряти сторінку, яку заборонено читати."
-
-msgid "You can't check spelling on a page you can't read."
-msgstr "Не можна перевіряти сторінку, яку заборонено читати."
-
-msgid "Copy Page"
-msgstr "Копіювати сторінку"
-
-msgid "Copy all /subpages too?"
-msgstr "Копіювати також усі /підсторінки?"
-
-msgid "Optional reason for the copying"
-msgstr "Причина копіювання (необов'язково)"
-
-msgid "Really copy this page?"
-msgstr "Дійсно копіювати цю сторінку?"
-
-#, fuzzy
-msgid "Revert"
-msgstr "Повернути все!"
-
-msgid "You are not allowed to revert this page!"
-msgstr "У вас немає прав для повернення цієї сторінки!"
-
-msgid ""
-"You were viewing the current revision of this page when you called the "
-"revert action. If you want to revert to an older revision, first view that "
-"older revision and then call revert to this (older) revision again."
-msgstr ""
-"Ви переглядали поточну версію цієї сторінки при виконанні вами операції "
-"повернення змін. Якщо ви бажаєте повернути старішу версію, спочатку "
-"перегляньте цю стару версію та знову зробіть повернення до неї."
-
-#, fuzzy
-msgid "Optional reason for reverting this page"
-msgstr "Причина копіювання (необов'язково)"
-
-#, fuzzy
-msgid "Really revert this page?"
-msgstr "Дійсно відновити цю сторінку?"
-
-msgid ""
-"You need to manually go to your OpenID provider wiki\n"
-"and log in before you can use your OpenID. MoinMoin will\n"
-"never allow you to enter your password here.\n"
-"\n"
-"Once you have logged in, simply reload this page."
-msgstr ""
-
-msgid "OpenID Trust verification"
-msgstr ""
-
-#, python-format
-msgid "The site %s has asked for your identity."
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"If you approve, the site represented by the trust root below will be\n"
-"told that you control the identity URL %s. (If you are using a delegated\n"
-"identity, the site will take care of reversing the\n"
-"delegation on its own.)"
-msgstr ""
-
-msgid "Trust root"
-msgstr ""
-
-msgid "Identity URL"
-msgstr ""
-
-#, fuzzy
-msgid "Remember decision"
-msgstr "Запам'ятати вибір"
-
-#, fuzzy
-msgid "Remember this trust decision and don't ask again"
-msgstr "Запам'ятати цей вибір та не питати більше"
-
-msgid "Approve"
-msgstr "Підтвердити"
-
-msgid "Don't approve"
-msgstr "Не підтверджувати"
-
-msgid "OpenID not served"
-msgstr ""
-
-msgid ""
-"\n"
-"Unfortunately you have not created your homepage yet. Therefore,\n"
-"we cannot serve an OpenID for you. Please create your homepage first\n"
-"and then reload this page or click the button below to cancel this\n"
-"verification."
-msgstr ""
-
-msgid "Please choose:"
-msgstr "Будь ласка, виберіть:"
-
-msgid "Settings"
-msgstr "Налаштування"
+msgid "Really delete this page?"
+msgstr "Дійсно видалити цю сторінку?"
 
 msgid "General Information"
 msgstr "Загальна інформація"
@@ -2203,23 +3036,18 @@ msgstr "Сповіщення про зміну цієї сторінки отр�
 msgid "This page links to the following pages:"
 msgstr "Ця сторінка посилається на:"
 
+msgid "Date"
+msgstr "Дата"
+
 msgid "Diff"
 msgstr "Порівняти"
+
+msgid "Comment"
+msgstr "Коментар"
 
 #, fuzzy
 msgid "to previous"
 msgstr "Попередня"
-
-#, python-format
-msgid "Revert to revision %(rev)d."
-msgstr "Повернено версію %(rev)d."
-
-#, python-format
-msgid "Renamed from '%(oldpagename)s'."
-msgstr "Перейменовано з '%(oldpagename)s'."
-
-msgid "N/A"
-msgstr "немає"
 
 msgid "Revision History"
 msgstr "Історія змін"
@@ -2238,6 +3066,212 @@ msgstr "Показати \"%(title)s\""
 msgid "General Page Infos"
 msgstr "Загальна довідка"
 
+msgid "Page hits and edits"
+msgstr "Запити та виправлення сторінок"
+
+msgid "You must login to add a quicklink."
+msgstr "Зареєструйтесь, щоб додати закладку."
+
+msgid "A quicklink to this page has been added for you."
+msgstr "Вам додане посилання на цю сторінку."
+
+msgid "A quicklink to this page could not be added for you."
+msgstr "Вам не може бути додане посилання на цю сторінку."
+
+msgid "You already have a quicklink to this page."
+msgstr "Ви вже встановили посилання на цю сторінку!"
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Wiki-розмітка"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "Зберегти копію"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Ви не можете робити віддалену копію."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Невідома вкладена дія резервного копіювання: %s."
+
+msgid "Please choose:"
+msgstr "Будь ласка, виберіть:"
+
+msgid "Rename all /subpages too?"
+msgstr "Перейменувати також всі /підсторінки?"
+
+msgid "New name"
+msgstr "Нова назва"
+
+msgid "Optional reason for the renaming"
+msgstr "Причина перейменування (необов'язково)"
+
+msgid "Really rename this page?"
+msgstr "Дійсно перейменувати цю сторінку?"
+
+msgid "Copy all /subpages too?"
+msgstr "Копіювати також усі /підсторінки?"
+
+msgid "Optional reason for the copying"
+msgstr "Причина копіювання (необов'язково)"
+
+msgid "Really copy this page?"
+msgstr "Дійсно копіювати цю сторінку?"
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr "Повний список посилань для \"%s\""
+
+msgid "No older revisions available!"
+msgstr "Немає більш старих виправлень!"
+
+#, python-format
+msgid "Diff for \"%s\""
+msgstr "Відмінності у \"%s\""
+
+#, python-format
+msgid "Differences between revisions %d and %d"
+msgstr "Відмінності між версіями %d та %d"
+
+#, python-format
+msgid "(spanning %d versions)"
+msgstr "(за %d версіями)"
+
+msgid "Previous change"
+msgstr "Попередня зміна"
+
+msgid "Next change"
+msgstr "Наступна зміна"
+
+#, python-format
+msgid "The page was saved %(count)d times, though!"
+msgstr "Сторінку збережено %(count)d раз!"
+
+msgid "(ignoring whitespace)"
+msgstr "(ігнорувати пробіли)"
+
+msgid "Ignore changes in the amount of whitespace"
+msgstr "Ігнорувати різницю у кількості пробілів"
+
+#, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr "Некоректна назва файлу \"%s\"!"
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d вкладень]"
+
+msgid "Package pages"
+msgstr "Запакувати сторінки"
+
+msgid "Package name"
+msgstr "Назва пакунок"
+
+msgid "List of page names - separated by a comma"
+msgstr "Назви сторінок через кому "
+
+#, python-format
+msgid "Subscribe users to the page %s"
+msgstr "Додати користувачів до списку стеження за сторінкою %s"
+
+msgid "Enter user names (comma separated):"
+msgstr "Введіть імена користувачів (розділюються комами):"
+
+#, python-format
+msgid "Subscribed for %s:"
+msgstr "Отримує сповіщення про зміну %s:"
+
+msgid "Not a user:"
+msgstr "Не є користувачем:"
+
+msgid "You are not allowed to perform this action."
+msgstr "Ви не можете виконувати цю дію."
+
+msgid "Please first create a homepage before creating additional pages."
+msgstr "Створіть домашню сторінку перед створенням інших сторінок."
+
+#, fuzzy, python-format
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
+"[[%(username)s/ReadWriteGroup]]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
+"(username)s/ReadGroup]]||\n"
+"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
+"(username)s only||\n"
+"\n"
+msgstr ""
+"Тут можна добавить вкладені сторінки до вашої домашньої сторінки.\n"
+"\n"
+"Ви вирішуєте чи можуть інші читати або писати на цих сторінках,\n"
+"доступ визначається членством у групі, що відповідає сторінці.\n"
+"\n"
+"Просто введіть назву сторінки та натисніть кнопку для її створення.\n"
+"\n"
+"Перед створенням захищених сторінок перевірте, що є сторінка групи\n"
+"та вона містить потрібних користувачів. Для створення сторінок групи\n"
+"скористайтесь зразком ШаблонСторінкиДляГрупиОсіб.\n"
+"\n"
+"||'''Додати нову персональну сторінку:'''||''Сторінка групи для керування "
+"доступом:'''||\n"
+"||<<NewPage(ШаблонПерсональноїСторінкиДляЧитанняЗапису, можна читати та "
+"писати,%(username)s)>>||[\"%(username)s/ReadWriteGroup\"]||\n"
+"||<<NewPage(ШаблонПерсональноїСторінкиДляЧитання,можна читати,%(username)s)"
+">>||[\"%(username)s/ReadGroup\"]||\n"
+"||<<NewPage(ШаблонПриватноїПерсональноїСторінки,особиста сторінка,%(username)"
+"s)>>||лише для %(username)s||\n"
+"\n"
+
+msgid "MyPages management"
+msgstr "Керування сторінками МоїСторінки"
+
+msgid "Your subscription to this page has been removed."
+msgstr "Стеження вами за цією сторінкою було припинено."
+
+msgid "Can't remove regular expression subscription!"
+msgstr "Не вдається видалити стеження за регулярним виразом!"
+
+#, fuzzy
+msgid "Edit the subscription regular expressions in your settings."
+msgstr "Виправте ВашіНалаштування, що містять регулярні вирази."
+
+msgid "You need to be subscribed to unsubscribe."
+msgstr ""
+"Щоб припинити стеження за сторінкою, треба щоб спочатку стеження було "
+"встановлено."
+
 #, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr "(!) Відображаються лише сторінки змінені з '''%s'''!"
@@ -2250,10 +3284,6 @@ msgstr ""
 "результатів пошуку!"
 
 #, python-format
-msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
-msgstr "Уточніть що шукати замість {{{\"%s\"}}}"
-
-#, python-format
 msgid "Title Search: \"%s\""
 msgstr "Пошук у заголовках: \"%s\""
 
@@ -2264,14 +3294,6 @@ msgstr "Розширений пошук: \"%s\""
 #, python-format
 msgid "Full Text Search: \"%s\""
 msgstr "Пошук у тексті: \"%s\""
-
-#, python-format
-msgid ""
-"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
-"for more information."
-msgstr ""
-"Запит пошуку {{{\"%s\"}}} є некоректним. Додаткову інформацію шукайте на "
-"сторінці ДовідкаПошук."
 
 #, python-format
 msgid ""
@@ -2297,563 +3319,95 @@ msgstr ""
 msgid "Click here to perform a full-text search with your search terms!"
 msgstr "Натисніть сюди для пошуку термінів в усьому тексті!"
 
-msgid "User account created! You can use this account to login now..."
-msgstr "Користувача створено! Можна входити..."
-
-msgid "(Use FirstnameLastname)"
-msgstr "(використовуйте Ім'яПрізвище)"
-
-msgid "TextCha (required)"
-msgstr "TextCha (обов'язково)"
-
-msgid "Create Profile"
-msgstr "Створити профіль"
-
-msgid "Create Account"
-msgstr ""
-
-msgid "Your subscription to this page has been removed."
-msgstr "Стеження вами за цією сторінкою було припинено."
-
-msgid "Can't remove regular expression subscription!"
-msgstr "Не вдається видалити стеження за регулярним виразом!"
+msgid "Load"
+msgstr "Завантажити"
 
 #, fuzzy
-msgid "Edit the subscription regular expressions in your settings."
-msgstr "Виправте ВашіНалаштування, що містять регулярні вирази."
+msgid "Pagename not specified!"
+msgstr "Назву сторінки не вказано!"
 
-msgid "You need to be subscribed to unsubscribe."
-msgstr ""
-"Щоб припинити стеження за сторінкою, треба щоб спочатку стеження було "
-"встановлено."
-
-#, fuzzy
-msgid "Password is too short."
-msgstr "Скинути пароль"
-
-msgid "Password has not enough different characters."
-msgstr ""
-
-#, fuzzy
-msgid ""
-"Password is too easy (password contains name or name contains password)."
-msgstr "Відсутній пароль. Введіть ім'я користувача й пароль."
-
-msgid "Password is too easy (keyboard sequence)."
-msgstr ""
-
-msgid "Diffs"
-msgstr "Зміни"
-
-msgid "Info"
-msgstr "Інформація"
-
-msgid "Edit"
-msgstr "Правка"
-
-msgid "UnSubscribe"
-msgstr "ПрипинитиСтеження"
-
-msgid "Subscribe"
-msgstr "Стежити"
-
-msgid "Raw"
-msgstr "Wiki-розмітка"
-
-msgid "XML"
-msgstr "XML"
-
-msgid "Print"
-msgstr "Друк"
-
-msgid "View"
-msgstr "Вигляд"
-
-msgid "Up"
-msgstr "Вгору"
-
-msgid "Publish my email (not my wiki homepage) in author info"
-msgstr ""
-"Публікувати мою адресу електронної пошти (а не домашню wiki-сторінку) у "
-"інформації про автора"
-
-msgid "Open editor on double click"
-msgstr "При подвійному клацанні відкривати редактор"
-
-msgid "After login, jump to last visited page"
-msgstr "Після входу, переходити до останньої відвіданої сторінки"
-
-msgid "Show comment sections"
-msgstr "Показувати розділи коментарів"
-
-msgid "Show question mark for non-existing pagelinks"
-msgstr "Показувати знак питання поруч з посиланням на неіснуючі сторінки"
-
-msgid "Show page trail"
-msgstr "Показувати список переглянутих сторінок"
-
-msgid "Show icon toolbar"
-msgstr "Відображати панель значків"
-
-msgid "Show top/bottom links in headings"
-msgstr "Показувати верхні/нижні посилання у заголовках"
-
-msgid "Show fancy diffs"
-msgstr "Показувати відмінності з виділенням"
-
-msgid "Add spaces to displayed wiki names"
-msgstr "Розділяти wiki-назви пробілами"
-
-msgid "Remember login information"
-msgstr "Запам'ятати мене"
-
-msgid "Disable this account forever"
-msgstr "Забути мене назавжди"
-
-msgid "Alias-Name"
-msgstr "Псевдонім"
-
-msgid "Jabber ID"
-msgstr ""
-
-msgid "User CSS URL"
-msgstr "Використовувати CSS з URL"
-
-msgid "(Leave it empty for disabling user CSS)"
-msgstr "(Залиште порожнім для використання системної CSS)"
-
-msgid "Editor size"
-msgstr "Розмір вікна редактора"
-
-msgid "Unsubscribe"
-msgstr "Припинити стеження"
-
-msgid "Home"
-msgstr "МояСторінка"
-
-msgid "[RSS]"
-msgstr "[RSS]"
-
-msgid "[DELETED]"
-msgstr "[ВИДАЛЕНО]"
-
-msgid "[UPDATED]"
-msgstr "[ОНОВЛЕНО]"
-
-msgid "[RENAMED]"
-msgstr "[ПЕРЕЙМЕНОВАНО]"
-
-msgid "[CONFLICT]"
-msgstr "[КОНФЛІКТ]"
-
-msgid "[NEW]"
-msgstr "[НОВА]"
-
-msgid "[DIFF]"
-msgstr "[ВІДМІННОСТІ]"
-
-msgid "[BOTTOM]"
-msgstr "[ВНИЗ]"
-
-msgid "[TOP]"
-msgstr "[ВГОРУ]"
-
-msgid "Click to do a full-text search for this title"
-msgstr "Натисніть сюди для пошуку цієї назви всюди"
-
-msgid "Logout"
-msgstr "Вийти"
-
-msgid "Clear message"
-msgstr "Прибрати це повідомлення"
-
-#, python-format
-msgid "last edited %(time)s by %(editor)s"
-msgstr "остання зміна о %(time)s, користувач %(editor)s"
-
-#, python-format
-msgid "last modified %(time)s"
-msgstr "остання зміна %(time)s"
-
-msgid "Search:"
-msgstr "Пошук:"
-
-msgid "Text"
-msgstr "У тексті"
-
-msgid "Titles"
-msgstr "У заголовках"
-
-msgid "Search"
-msgstr "Шукати"
-
-msgid "More Actions:"
-msgstr "Інші дії:"
-
-msgid "------------------------"
-msgstr "------------------------"
-
-msgid "Raw Text"
-msgstr "Показати розмітку"
-
-msgid "Print View"
-msgstr "Для друку"
-
-msgid "Delete Cache"
-msgstr "Прибрати з кешу"
-
-msgid "Delete Page"
-msgstr "Видалити сторінку"
-
-msgid "Like Pages"
-msgstr "Подібні сторінки"
-
-msgid "Local Site Map"
-msgstr "Мапа сайту"
-
-msgid "My Pages"
-msgstr "Мої сторінки"
-
-msgid "Subscribe User"
-msgstr "Стеження для користувача"
-
-msgid "Remove Spam"
-msgstr "Видалити спам"
-
-msgid "Package Pages"
-msgstr "Запакувати сторінки"
-
-msgid "Render as Docbook"
-msgstr "Створити Docbook"
-
-msgid "Sync Pages"
-msgstr "Синхронізувати сторінки"
-
-msgid "Do"
-msgstr "Виконати"
-
-msgid "Comments"
-msgstr "Коментар"
-
-msgid "Edit (Text)"
-msgstr "Змінити (текст): "
-
-msgid "Edit (GUI)"
-msgstr "Змінити (графічно)"
-
-msgid "Immutable Page"
-msgstr "Незмінна сторінка"
-
-msgid "Remove Link"
-msgstr "Видалити з закладок"
-
-msgid "Add Link"
-msgstr "Додати посилання"
-
-msgid "Attachments"
-msgstr "Вкладення"
-
-#, python-format
-msgid "Show %s days."
-msgstr "Показати зміни за %s днів."
-
-msgid "Wiki Markup"
-msgstr "Wiki-розмітка"
-
-msgid "DeleteCache"
-msgstr "ОчиститиКеш"
-
-#, python-format
-msgid "(cached %s)"
-msgstr "(кешовано %s)"
-
-msgid "Or try one of these actions:"
-msgstr "Або спробуйте зробити:"
-
-msgid "Wiki"
-msgstr "Вікі"
-
-msgid "Page"
-msgstr "Сторінка"
-
-msgid "User"
-msgstr "Користувач"
-
-msgid "[ATTACH]"
-msgstr ""
-
-#, fuzzy
-msgid "Variable name"
-msgstr "Файл"
-
-msgid "Description"
-msgstr ""
-
-#, python-format
-msgid "Upload new attachment \"%(filename)s\""
-msgstr "Відвантажити нове вкладення \"%(filename)s\""
-
-#, python-format
-msgid ""
-"%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
-"missing."
-msgstr ""
-
-#, python-format
-msgid ""
-"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s=%"
-"(argument_value)s!"
-msgstr ""
-
-#, python-format
-msgid ""
-"Current configuration does not allow embedding of the file %(file)s because "
-"of its mimetype %(mimetype)s."
-msgstr ""
-
-msgid "Embedded"
-msgstr "Вбудовано"
-
-msgid "Include system pages"
-msgstr "Показати службові сторінки"
-
-msgid "Exclude system pages"
-msgstr "Прибрати службові сторінки"
-
-msgid "Go To Page"
-msgstr "Відкрити сторінку"
-
-msgid "Markup"
-msgstr "Розмітка"
-
-msgid "Display"
-msgstr "Перегляд"
-
-msgid "Wiki configuration"
+msgid "Upload page content"
 msgstr ""
 
 msgid ""
-"This table shows all settings in this wiki that do not have default values. "
-"Settings that the configuration system doesn't know about are shown in "
-"''italic'', those may be due to third-party extensions needing configuration "
-"or settings that were removed from Moin."
+"You can upload content for the page named below. If you change the page "
+"name, you can also upload content for another page. If the page name is "
+"empty, we derive the page name from the file name."
+msgstr ""
+
+msgid "File to load page content from"
 msgstr ""
 
 #, fuzzy
-msgid "Setting"
-msgstr "Налаштування"
+msgid "Page Name"
+msgstr "Назва сторінки"
 
-msgid "Search for items"
-msgstr "Пошук за елементами"
+#, python-format
+msgid "Local Site Map for \"%s\""
+msgstr "Локальна мапа сайту для \"%s\""
 
-msgid "containing all the following terms"
-msgstr "містить усі наступні терміни"
+msgid "Charts are not available!"
+msgstr "Діаграми недоступні!"
 
-msgid "containing one or more of the following terms"
-msgstr "містить один або більше з наступних термінів"
+msgid "Do it."
+msgstr "Виконати."
 
-msgid "not containing the following terms"
-msgstr "не містить наступних термінів"
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr "Виконати %(actionname)s?"
 
-msgid "last modified since (e.g. last 2 weeks)"
-msgstr "час останньої зміни (наприклад, минулі 2 тижні)"
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr "%(actionname)s виконано у цьому wiki!"
 
-msgid "any category"
-msgstr "будь-яка категорія"
-
-msgid "any language"
-msgstr "будь-яка мова"
-
-msgid "any mimetype"
-msgstr "будь-який тип mime"
-
-msgid "Categories"
-msgstr "Категорії"
-
-msgid "File Type"
-msgstr "Тип файлу"
-
-msgid "Search only in titles"
-msgstr "Пошук лише за заголовками"
-
-msgid "Case-sensitive search"
-msgstr "Пошук з урахуванням регістру"
-
-msgid "Exclude underlay"
-msgstr "Виключити основу"
-
-msgid "No system items"
-msgstr "Без системних елементів"
-
-msgid "Search in all page revisions"
-msgstr "Пошук в усіх версіях сторінок"
-
-msgid "Go get it!"
-msgstr "Сходити отримати!"
+#, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "Ви не можете робити %(actionname)s на цій сторінці!"
 
 #, fuzzy
-msgid "File attachment browser"
-msgstr "Переглядач вкладень"
+msgid "Only superuser is allowed to use this action."
+msgstr "Це може робити лише адміністратор."
 
-#, fuzzy
-msgid "User account browser"
-msgstr "Переглядач користувачів"
+msgid "Views/day"
+msgstr "Переглядів за день"
 
-msgid "No wanted pages in this wiki."
-msgstr "У цьому wiki немає потрібних сторінок."
-
-#, python-format
-msgid "Unsupported navigation scheme '%(scheme)s'!"
-msgstr "Непідтримувана схема навігації '%(scheme)s'!"
-
-msgid "No parent page found!"
-msgstr "Батьківська сторінка не існує!"
-
-msgid "Slideshow"
-msgstr "Показ слайдів"
-
-msgid "Start"
-msgstr "Початок"
+msgid "Edits/day"
+msgstr "Редагувань за день"
 
 #, python-format
-msgid "Slide %(pos)d of %(size)d"
-msgstr "Слайд %(pos)d з %(size)d"
+msgid "%(chart_title)s for %(filterpage)s"
+msgstr "%(chart_title)s для %(filterpage)s"
 
-msgid "Contents"
-msgstr "Зміст"
+msgid ""
+"green=view\n"
+"red=edit"
+msgstr ""
+"зелений=переглядів\n"
+"червоний=виправлень"
 
-msgid "Search Titles"
-msgstr "Пошук за заголовками"
+msgid "date"
+msgstr "дата"
 
-msgid "Display context of search results"
-msgstr "Відображати розширені результати пошуку"
+msgid "# of hits"
+msgstr "кількість звернень"
 
-msgid "Case-sensitive searching"
-msgstr "Пошук з урахуванням регістру"
+msgid "User agent"
+msgstr "Переглядач"
 
-msgid "Search Text"
-msgstr "Пошук у тексті"
+msgid "Others"
+msgstr "Інші"
 
-#, python-format
-msgid "No quotes on %(pagename)s."
-msgstr "Цитати відсутні на %(pagename)s."
+msgid "Distribution of User-Agent Types"
+msgstr "Розподіл переглядачів за типами"
 
-msgid "Python Version"
-msgstr "Версія Python"
+msgid "Page Size Distribution"
+msgstr "Розподіл розміру сторінок"
 
-msgid "MoinMoin Version"
-msgstr "Версія MoinMoin"
+msgid "page size upper bound [bytes]"
+msgstr "межа розміру сторінок [у байтах]"
 
-#, python-format
-msgid "Release %s [Revision %s]"
-msgstr "Випуск %s [виправлення %s]"
-
-msgid "4Suite Version"
-msgstr "Версія 4Suite"
-
-msgid "Number of pages"
-msgstr "Кількість сторінок"
-
-msgid "Number of system pages"
-msgstr "Кількість системних сторінок"
-
-msgid "Accumulated page sizes"
-msgstr "Загальний розмір сторінок"
-
-#, python-format
-msgid "Disk usage of %(data_dir)s/pages/"
-msgstr "%(data_dir)s/pages/ на диску"
-
-#, python-format
-msgid "Disk usage of %(data_dir)s/"
-msgstr "%(data_dir)s/ на диску"
-
-msgid "Entries in edit log"
-msgstr "Записів у журналі редагування"
-
-msgid "NONE"
-msgstr "НЕМАЄ"
-
-msgid "Global extension macros"
-msgstr "Глобальні додаткові макроси"
-
-msgid "Local extension macros"
-msgstr "Локальні додаткові макроси"
-
-msgid "Global extension actions"
-msgstr "Глобальні додаткові дії"
-
-msgid "Local extension actions"
-msgstr "Локальні додаткові дії"
-
-msgid "Global parsers"
-msgstr "Глобальні аналізатори"
-
-msgid "Local extension parsers"
-msgstr "Локальні додаткові аналізатори"
-
-msgid "Disabled"
-msgstr "Вимкнено"
-
-msgid "Enabled"
-msgstr "Увімкнено"
-
-msgid "index available"
-msgstr "покажчик доступний"
-
-msgid "index unavailable"
-msgstr "покажчик недоступний"
-
-msgid "Xapian and/or Python Xapian bindings not installed"
-msgstr "Не встановлено прив'язки Xapian та/або Python Xapian"
-
-msgid "Xapian search"
-msgstr "Система пошуку Xapian"
-
-msgid "Stemming for Xapian"
-msgstr "Stemming для Xapian"
-
-msgid "Active threads"
-msgstr "Активних потоків"
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Відвантажити вкладення '%(filename)s'."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Малюнок '%(filename)s' збережено."
-
-#, python-format
-msgid "%(mins)dm ago"
-msgstr "%(mins)dхв. тому"
-
-msgid "(no bookmark set)"
-msgstr "(немає закладки)"
-
-#, python-format
-msgid "(currently set to %s)"
-msgstr "(встановлено на %s)"
-
-msgid "Delete bookmark"
-msgstr "Видалити закладку"
-
-msgid "Set bookmark"
-msgstr "Встановити закладку"
-
-msgid "[Bookmark reached]"
-msgstr "[Тут лежить закладка]"
-
-#, python-format
-msgid "Invalid include arguments \"%s\"!"
-msgstr "Неправильні аргументи включення \"%s\"!"
-
-#, python-format
-msgid "Nothing found for \"%s\"!"
-msgstr "Нічого не знайдено для \"%s\"!"
-
-msgid "No orphaned pages in this wiki."
-msgstr "У цьому wiki немає одиноких сторінок."
+msgid "# of pages of this size"
+msgstr "кількість сторінок цього розміру"
 
 msgid "From"
 msgstr "Від"
@@ -2874,111 +3428,33 @@ msgstr "Пошту не відправлено"
 msgid "Mail sent OK"
 msgstr "Пошту відправлено"
 
-msgid "[all]"
-msgstr "[всі]"
-
-msgid "[not empty]"
-msgstr "[не порожні]"
-
-msgid "[empty]"
-msgstr "[порожні]"
-
-msgid "filter"
-msgstr "фільтр"
-
-msgid "FrontPage"
-msgstr "Початок"
-
-msgid "RecentChanges"
-msgstr "ОстанніЗміни"
-
-msgid "TitleIndex"
-msgstr "ПокажчикНазв"
-
-msgid "WordIndex"
-msgstr "ПокажчикСлів"
-
-msgid "FindPage"
-msgstr "ЗнайтиСторінку"
-
-msgid "SiteNavigation"
-msgstr "ПерейтиПоСайту"
-
-msgid "HelpContents"
-msgstr "ДовідкаЗміст"
-
-msgid "HelpOnFormatting"
-msgstr "ДовідкаФорматування"
-
-msgid "WikiLicense"
-msgstr "ЛіцензіяWiki"
-
-msgid "MissingPage"
-msgstr "ВідсутняСторінка"
-
-msgid "MissingHomePage"
-msgstr "ВідсутняДомашняСторінка"
-
-msgid "Mon"
-msgstr "Пнд"
-
-msgid "Tue"
-msgstr "Втр"
-
-msgid "Wed"
-msgstr "Срд"
-
-msgid "Thu"
-msgstr "Чтв"
-
-msgid "Fri"
-msgstr "Птн"
-
-msgid "Sat"
-msgstr "Сбт"
-
-msgid "Sun"
-msgstr "Ндл"
-
-msgid "AttachFile"
-msgstr "ДодатиФайл"
-
-msgid "DeletePage"
-msgstr "ВидалитиСторінку"
-
-msgid "LikePages"
-msgstr "ПодібніСторінки"
-
-msgid "LocalSiteMap"
-msgstr "МапаСайту"
-
-msgid "RenamePage"
-msgstr "ПерейменуватиСторінку"
-
-msgid "SpellCheck"
-msgstr "Орфографія"
-
-msgid "Discussion"
-msgstr "Обговорення"
-
 #, python-format
-msgid "Inlined image: %(url)s"
-msgstr "Зображення у рядку: %(url)s"
+msgid ""
+"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
+msgstr ""
+"Сторінку неможливо записати, тому що \"%(content)s\" заборонено у цьому wiki."
 
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Створити малюнок \"%(filename)s (відкривати у новому вікні)\""
+msgid "anonymous"
+msgstr ""
 
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Змінити малюнок %(filename)s (відкривати у новому вікні)"
+#, fuzzy
+#~ msgid "InterWikiMap"
+#~ msgstr "Wiki-розмітка"
 
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Малюнок-посилання: %(filename)s"
+#, fuzzy
+#~ msgid "BadContent"
+#~ msgstr "Зміст"
 
-msgid "Toggle line numbers"
-msgstr "Увімкнути/вимкнути нумерацію рядків"
+#, fuzzy
+#~ msgid "LocalBadContent"
+#~ msgstr "Зміст"
+
+#, fuzzy
+#~ msgid "EditedSystemPages"
+#~ msgstr "Прибрати службові сторінки"
+
+#~ msgid "Created the package %s containing the pages %s."
+#~ msgstr "Створено пакунок %s зі сторінками %s."
 
 #~ msgid "You need to log in."
 #~ msgstr "Вам потібно увійти."
@@ -3147,9 +3623,6 @@ msgstr "Увімкнути/вимкнути нумерацію рядків"
 
 #~ msgid "[%(lang)s] %(recipients)s: %(status)s"
 #~ msgstr "[%(lang)s] %(recipients)s: %(status)s"
-
-#~ msgid "UserPreferences"
-#~ msgstr "ВашіНалаштування"
 
 #~ msgid "Subscribe to trivial changes"
 #~ msgstr "Стежити за незначними змінами"
