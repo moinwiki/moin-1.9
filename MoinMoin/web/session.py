@@ -46,12 +46,12 @@ class SessionService(object):
         raise NotImplementedError
 
 def _get_session_lifetime(request, userobj):
-    """ Get session lifetime for the user object userobj 
-    Cookie lifetime in hours, can be fractional. First tuple element is for anonymous sessions, 
-    second tuple element is for logged-in sessions. For anonymous sessions, 
-    t=0 means that they are disabled, t>0 means that many hours. 
-    For logged-in sessions, t>0 means that many hours, 
-    or forever if user checked 'remember_me', t<0 means -t hours and 
+    """ Get session lifetime for the user object userobj
+    Cookie lifetime in hours, can be fractional. First tuple element is for anonymous sessions,
+    second tuple element is for logged-in sessions. For anonymous sessions,
+    t=0 means that they are disabled, t>0 means that many hours.
+    For logged-in sessions, t>0 means that many hours,
+    or forever if user checked 'remember_me', t<0 means -t hours and
     ignore user 'remember_me' setting - you usually don't want to use t=0, it disables logged-in sessions."""
     lifetime = int(float(request.cfg.cookie_lifetime[userobj and userobj.valid]) * 3600)
     forever = 10 * 365 * 24 * 3600 # 10 years
