@@ -45,6 +45,21 @@ class SessionService(object):
         """
         raise NotImplementedError
 
+def _get_session_lifetime(request, userobj):
+    """ Get session lifetime for the user object userobj 
+    Cookie lifetime in hours, can be fractional. First tuple element is for anonymous sessions, 
+    second tuple element is for logged-in sessions. For anonymous sessions, 
+    t=0 means that they are disabled, t>0 means that many hours. 
+    For logged-in sessions, t>0 means that many hours, 
+    or forever if user checked 'remember_me', t<0 means -t hours and 
+    ignore user 'remember_me' setting - you usually don't want to use t=0, it disables logged-in sessions."""
+    lifetime = int(float(request.cfg.cookie_lifetime[userobj and userobj.valid]) * 3600)
+    forever = 10 * 365 * 24 * 3600 # 10 years
+
+    if userobj and userobj.valid and userobj.remember_me and lifetime > 0:
+        return forever
+    return abs(lifetime)
+
 class FileSessionService(SessionService):
     """
     This sample session service stores session information in a temporary
@@ -109,8 +124,7 @@ class FileSessionService(SessionService):
                 logging.debug("after auth: deleting session cookie!")
                 request.delete_cookie(self.cookie_name, path=cookie_path, domain=cfg.cookie_domain)
 
-        lifetime_h = cfg.cookie_lifetime[userobj and userobj.valid]
-        cookie_lifetime = int(float(lifetime_h) * 3600)
+        cookie_lifetime = _get_session_lifetime(request, userobj)
         if cookie_lifetime:
             cookie_expires = time.time() + cookie_lifetime
             # a secure cookie is not transmitted over unsecure connections:
