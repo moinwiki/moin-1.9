@@ -112,16 +112,15 @@ class FileSessionService(SessionService):
         lifetime_h = cfg.cookie_lifetime[userobj and userobj.valid]
         cookie_lifetime = int(float(lifetime_h) * 3600)
         if cookie_lifetime:
-            if session.new:
-                cookie_expires = time.time() + cookie_lifetime
-                # a secure cookie is not transmitted over unsecure connections:
-                cookie_secure = (cfg.cookie_secure or  # True means: force secure cookies
-                    cfg.cookie_secure is None and request.is_secure)  # None means: https -> secure cookie
-                logging.debug("user: %r, setting session cookie: %r" % (userobj, session.sid))
-                request.set_cookie(self.cookie_name, session.sid,
-                                   max_age=cookie_lifetime, expires=cookie_expires,
-                                   path=cookie_path, domain=cfg.cookie_domain,
-                                   secure=cookie_secure, httponly=cfg.cookie_httponly)
+            cookie_expires = time.time() + cookie_lifetime
+            # a secure cookie is not transmitted over unsecure connections:
+            cookie_secure = (cfg.cookie_secure or  # True means: force secure cookies
+                             cfg.cookie_secure is None and request.is_secure)  # None means: https -> secure cookie
+            logging.debug("user: %r, setting session cookie: %r" % (userobj, session.sid))
+            request.set_cookie(self.cookie_name, session.sid,
+                               max_age=cookie_lifetime, expires=cookie_expires,
+                                path=cookie_path, domain=cfg.cookie_domain,
+                               secure=cookie_secure, httponly=cfg.cookie_httponly)
 
             if session.should_save:
                 store = self._store_get(request)
