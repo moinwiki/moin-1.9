@@ -89,21 +89,20 @@ class TestEncodeAddress:
     def testComposite(self):
         """ mail.sendmail: encode address: 'Phrase <local@domain>' """
         address = u'Phrase <local@domain>'
-        phrase = str(Header(u'Phrase '.encode('utf-8'), self.charset))
-        expected = phrase + '<local@domain>'
+        expected = str(address)
         assert sendmail.encodeAddress(address, self.charset) == expected
 
     def testCompositeUnicode(self):
         """ mail.sendmail: encode Uncode address: 'ויקי <local@domain>' """
         address = u'ויקי <local@domain>'
-        phrase = str(Header(u'ויקי '.encode('utf-8'), self.charset))
-        expected = phrase + '<local@domain>'
+        phrase = str(Header(u'ויקי'.encode('utf-8'), self.charset))
+        expected = phrase + ' ' + '<local@domain>'
         assert sendmail.encodeAddress(address, self.charset) == expected
 
     def testEmptyPhrase(self):
         """ mail.sendmail: encode address with empty phrase: '<local@domain>' """
         address = u'<local@domain>'
-        expected = address.encode(config.charset)
+        expected = 'local@domain'
         assert sendmail.encodeAddress(address, self.charset) == expected
 
     def testEmptyAddress(self):
@@ -113,8 +112,7 @@ class TestEncodeAddress:
         case, but we don't do error checking for mail addresses.
         """
         address = u'Phrase <>'
-        phrase = str(Header(u'Phrase '.encode('utf-8'), self.charset))
-        expected = phrase + '<>'
+        expected = str(address)
         assert sendmail.encodeAddress(address, self.charset) == expected
 
     def testInvalidAddress(self):
@@ -125,7 +123,7 @@ class TestEncodeAddress:
         out.
         """
         address = u'Phrase <blah'
-        expected = address.encode(config.charset)
+        expected = str(address)
         assert sendmail.encodeAddress(address, self.charset) == expected
 
 coverage_modules = ['MoinMoin.mail.sendmail']
