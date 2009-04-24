@@ -32,15 +32,25 @@ def encodeAddress(address, charset):
     @rtype: string
     @return: encoded address
     """
-    composite = re.compile(r'(?P<phrase>.+)(?P<angle_addr>\<.*\>)', re.UNICODE)
+    assert isinstance(address, unicode)
+    composite = re.compile(r'(?P<phrase>.*?)(?P<blanks>\s*)\<(?P<addr>.*)\>', re.UNICODE)
     match = composite.match(address)
     if match:
-        phrase = match.group('phrase').encode(config.charset)
-        phrase = str(Header(phrase, charset))
-        angle_addr = match.group('angle_addr').encode(config.charset)
-        return phrase + angle_addr
+        phrase = match.group('phrase')
+        try:
+            str(phrase)  # is it pure ascii?
+        except UnicodeEncodeError:
+            phrase = phrase.encode(config.charset)
+            phrase = Header(phrase, charset)
+        blanks = match.group('blanks')
+        addr = match.group('addr')
+        if phrase:
+            return "%s%s<%s>" % (str(phrase), str(blanks), str(addr))
+        else:
+            return str(addr)
     else:
-        return address.encode(config.charset)
+        # a pure email address, should encode to ascii without problem
+        return str(address)
 
 
 def sendmail(request, to, subject, text, mail_from=None):
