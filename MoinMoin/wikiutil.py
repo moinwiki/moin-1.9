@@ -611,15 +611,15 @@ def join_wiki(wikiurl, wikitail):
 #############################################################################
 
 def isSystemPage(request, pagename):
-    """ Is this a system page? Uses AllSystemPagesGroup internally.
+    """ Is this a system page?
 
     @param request: the request object
     @param pagename: the page name
     @rtype: bool
     @return: true if page is a system page
     """
-    return (request.dicts.has_member('SystemPagesGroup', pagename) or
-        isTemplatePage(request, pagename))
+    from MoinMoin import i18n
+    return pagename in i18n.system_pages or isTemplatePage(request, pagename)
 
 
 def isTemplatePage(request, pagename):

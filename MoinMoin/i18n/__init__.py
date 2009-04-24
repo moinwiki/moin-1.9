@@ -31,6 +31,7 @@ from MoinMoin import log
 logging = log.getLogger(__name__)
 
 from MoinMoin import caching
+from MoinMoin.i18n import strings
 
 # This is a global for a reason: in persistent environments all languages in
 # use will be cached; Note: you have to restart if you update language data.
@@ -38,6 +39,11 @@ from MoinMoin import caching
 # key: language, value: language metadata
 # this gets loaded early and completely:
 languages = None
+
+# system_pages has a dictionary containing all english
+# system page names and also all translated system pages names as keys,
+# see also wikiutil.isSystemPage:
+system_pages = {}
 
 translations = {}
 
@@ -68,6 +74,9 @@ def i18n_init(request):
         if meta_cache.needsUpdate(i18n_dir):
             logging.debug("cache needs update")
             _languages = {}
+            _system_pages = {}
+            for pagename in strings.all_pages:
+                _system_pages[pagename] = ('en', pagename)
             for lang_file in glob.glob(po_filename(request, language='*', domain='MoinMoin')): # XXX only MoinMoin domain for now
                 language, domain, ext = os.path.basename(lang_file).split('.')
                 t = Translation(language, domain)
@@ -80,18 +89,28 @@ def i18n_init(request):
                 for key, value in t.info.items():
                     #logging.debug("meta key %s value %r" % (key, value))
                     _languages[language][key] = value.decode(encoding)
+                for pagename in strings.all_pages:
+                    try:
+                        pagename_translated = t.translation._catalog[pagename]
+                    except KeyError:
+                        pass
+                    else:
+                        _system_pages[pagename_translated] = (language, pagename)
             logging.debug("dumping language metadata to disk cache")
             try:
-                meta_cache.update(_languages)
+                meta_cache.update({
+                    'languages': _languages,
+                    'system_pages': _system_pages,
+                })
             except caching.CacheError:
                 pass
 
         if languages is None: # another thread maybe has done it before us
             try:
                 logging.debug("loading language metadata from disk cache")
-                _languages = meta_cache.content()
+                d = meta_cache.content()
                 if languages is None:
-                    languages = _languages
+                    globals().update(d)
             except caching.CacheError:
                 pass
     request.clock.stop('i18n_init')
