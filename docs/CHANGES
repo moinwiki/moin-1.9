@@ -16,7 +16,7 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
-Version 1.8.current:
+Version 1.8.3:
   Bug fixes:
     * AttachFile XSS fixes: move escaping to error_msg / upload_form
     * AttachFile move: add more escaping (maybe not XSS exploitable though)
