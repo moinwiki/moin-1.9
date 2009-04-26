@@ -15,8 +15,8 @@ except:
     patchlevel = 'release'
 
 project = "MoinMoin"
-release = '1.8.2'
-release_short = '182' # used for url_prefix_static
+release = '1.8.3'
+release_short = '183' # used for url_prefix_static
 revision = patchlevel
 
 def update():

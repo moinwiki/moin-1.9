@@ -93,12 +93,12 @@ class FarmConfig(DefaultConfig):
 
     # The URL prefix we use to access the static stuff (img, css, js).
     # NOT touching this is maybe the best way to handle this setting as moin
-    # uses a good internal default (something like '/moin_static182' for moin
-    # version 1.8.2).
+    # uses a good internal default (something like '/moin_static183' for moin
+    # version 1.8.3).
     # For Twisted and standalone server, the default will automatically work.
     # For others, you should make a matching server config (e.g. an Apache
     # Alias definition pointing to the directory with the static stuff).
-    #url_prefix_static = '/moin_static182'
+    #url_prefix_static = '/moin_static183'
 
 
     # Security ----------------------------------------------------------
