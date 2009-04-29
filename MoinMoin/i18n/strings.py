@@ -159,7 +159,6 @@ optional_help_pages = [
     _('HelpOnLogin'),
     _('HelpOnMacros'),
     _('HelpOnMacros/EmbedObject'),
-    _('HelpOnMacros/ImageLink'),
     _('HelpOnMacros/Include'),
     _('HelpOnMacros/MailTo'),
     _('HelpOnMacros/MonthCalendar'),
