@@ -672,8 +672,8 @@ class ThemeBase:
         cfg_css = [self._stylesheet_link(False, *stylesheet) for stylesheet in request.cfg.stylesheets]
 
         msie_css = """
-<!-- css only for MSIE browsers -->
-<!--[if IE]>
+<!-- css only for MS IE6/IE7 browsers -->
+<!--[if lt IE8]>
    %s
 <![endif]-->
 """ % self._stylesheet_link(True, 'all', 'msie')
