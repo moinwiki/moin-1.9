@@ -104,16 +104,42 @@ Version 1.9.0beta1:
       See HelpOnAuthentication.
 
 
-Version 1.8.current:
+Version 1.8.3:
   Bug fixes:
+    * AttachFile XSS fixes: move escaping to error_msg / upload_form
+    * AttachFile move: add more escaping (maybe not XSS exploitable though)
+    * email attachments import with xapian indexing enabled: fix AttributeError
+    * fix wrong links in attachment notifications
+    * AttachFile do=view: quote filename and pagename params for EmbedObject
+      macro call
+    * AttachFile: fix exception when someone just clicks on upload, without
+      giving a file
+    * ldap_login: use None as default value for ssl certs/keys (using '' for
+      the pathes lets it fail with Connect Error)
+    * release edit lock if someone saves an unchanged page
+    * fix sendmail.encodeAddress (do not [QP] encode blanks, do not un-
+      necessarily use [QP] encoding for pure ascii mail addresses)
     * Fixed docs bug: see HINT about secrets configuration at version 1.8.0
       (1.8.0 Other changes).
+    * backup action: add 'self' dummy argument for backup_exclude function
+    * login action: fix formatting of error messages
+    * unsubscribe action: add msg types so icons get displayed
+    * fix quoting for pagehits stats (info action) - was not working for pagenames with blanks
+    * macro.TableOfContents: bug fix for MoinMoinBugs/TableOfContentsIgnoresSectionNumbersPragma
 
   New features:
-    * ...
+    * added modernized_cms theme
+    * use url_prefix_fckeditor if you don't want to use the builtin FCKeditor
+      of moin, but a separate one at some specific url
+    * action.Load: added textcha feature
+    * add mumble protocol (nice and good quality F/OSS VOIP conference chat sw)
+    * ldap auth: new name_callback param to create a custom wiki username (not
+      the ldap login username).
 
   Other changes:
-    * ...
+    * add compatibility code for set to xapwrap.index (fix py 2.6 warnings)
+    * wikiutil: MIMETYPES_MORE extended for .md5 as text/plain
+
 
 Version 1.8.2:
   Bug fixes:

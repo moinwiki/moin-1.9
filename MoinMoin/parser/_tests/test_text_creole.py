@@ -327,7 +327,7 @@ You can use {{{brackets}}}
 }}}"""
         output = self.parse(raw)
         output = ''.join(output)
-        assert 'Example </p><pre>You can use {{{brackets}}}</pre>' in output
+        assert 'Example</p><pre>You can use {{{brackets}}}</pre>' in output
 
     def testManyNestingPreBrackets(self):
         """ tests two nestings  ({{{ }}} and {{{ }}}) in one line for the wiki parser
