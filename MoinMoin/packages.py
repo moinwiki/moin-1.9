@@ -3,7 +3,7 @@
     MoinMoin - Package Installer
 
     @copyright: 2005 MoinMoin:AlexanderSchremmer,
-                2007 MoinMoin:ReimarBauer
+                2007-2009 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -227,11 +227,11 @@ class ScriptEngine:
         _ = self.request.getText
         if self.themename is None:
             raise RuntimeScriptException(_("The theme name is not set."))
-        sa = getattr(self.request, "sareq", None)
-        if sa is None:
-            raise RuntimeScriptException(_("Installing theme files is only supported "
-                                           "for standalone type servers."))
-        htdocs_dir = sa.server.htdocs
+
+        from MoinMoin.web.static import STATIC_FILES_PATH as htdocs_dir
+        if not os.access(htdocs_dir, os.W_OK):
+            raise RuntimeScriptException(_("Theme files not installed! Write rights missing for %s.") % htdocs_dir)
+
         theme_file = os.path.join(htdocs_dir, self.themename,
                                   wikiutil.taintfilename(ftype),
                                   wikiutil.taintfilename(target))
