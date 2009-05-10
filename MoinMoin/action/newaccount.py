@@ -6,14 +6,12 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import user, wikiutil, util
+from MoinMoin import user, wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.widget import html
 from MoinMoin.security.textcha import TextCha
 from MoinMoin.auth import MoinAuth
 
-
-_debug = False
 
 def _create_user(request):
     _ = request.getText
@@ -84,8 +82,6 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
     theuser.save()
 
     result = _("User account created! You can use this account to login now...")
-    if _debug:
-        result = result + util.dumpFormData(form)
     return result
 
 
