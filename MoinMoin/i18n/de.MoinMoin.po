@@ -2311,7 +2311,9 @@ msgstr "Seite %(pos)d von %(size)d"
 
 #, python-format
 msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
-msgstr "<<%(macro_name)s: Ausführung fehlgeschlagen [%(error_msg)s] (siehe auch die Log-Datei)>>"
+msgstr ""
+"<<%(macro_name)s: Ausführung fehlgeschlagen [%(error_msg)s] (siehe auch die "
+"Log-Datei)>>"
 
 msgid "Go To Page"
 msgstr "Gehe zu Seite"
