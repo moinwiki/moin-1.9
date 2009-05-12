@@ -330,11 +330,11 @@ msgid ""
 "\n"
 "Password reset URL: %s/?action=recoverpass&name=%s&token=%s\n"
 msgstr ""
-"Nome de Login: %s\n"
+"Login: %s\n"
 "\n"
-"Senha do Nome: %s\n"
+"Token de recuperação da senha: %s\n"
 "\n"
-"URL do Login: %s/%s?action=login\n"
+"URL para reiniciar a senha: %s/%s?action=login\n"
 
 msgid ""
 "Somebody has requested to email you a password recovery token.\n"
@@ -516,7 +516,6 @@ msgstr ""
 msgid "Select User"
 msgstr "Selecionar Usuário"
 
-#, fuzzy
 msgid "Change password"
 msgstr "Mudar a senha"
 
@@ -567,13 +566,11 @@ msgstr "Falha em recuperar OpenIF, não é uma OpenID válida"
 msgid "OpenID error: %s."
 msgstr "Erro OpenID: %s."
 
-#, fuzzy
 msgid "Verification canceled."
 msgstr "Verificação cancelada."
 
-#, fuzzy
 msgid "This OpenID is already used for another account."
-msgstr "Esta página já está removida ou nunca foi criada!"
+msgstr "Este OpenID já está sendo usado por outra conta."
 
 msgid "OpenID added successfully."
 msgstr ""
@@ -601,7 +598,7 @@ msgstr ""
 
 #, fuzzy
 msgid "'''Email'''"
-msgstr "Email"
+msgstr "'''Email'''"
 
 msgid "'''Jabber'''"
 msgstr ""
@@ -617,13 +614,11 @@ msgid ""
 "general preferences."
 msgstr ""
 
-#, fuzzy
 msgid "Subscribed events"
-msgstr "Inscrever usuário"
+msgstr "Eventos inscritos"
 
-#, fuzzy
 msgid "Subscribed wiki pages<<BR>>(one regex per line)"
-msgstr "Páginas inscritas na wiki (uma expressão regular por linha)"
+msgstr "Páginas wiki inscritas<<BR>> (uma expressão regular por linha)"
 
 msgid "Save"
 msgstr "Salvar"
@@ -658,9 +653,8 @@ msgstr ""
 msgid "This email already belongs to somebody else."
 msgstr "Este email já pertence a alguém cadastrado neste site."
 
-#, fuzzy
 msgid "This jabber id already belongs to somebody else."
-msgstr "Este email já pertence a alguém cadastrado neste site."
+msgstr "Este jabber id já pertence a alguém cadastrado neste site."
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -937,9 +931,9 @@ msgstr ""
 msgid "**Maximum number of allowed includes exceeded**"
 msgstr "**O número máximo de inserções permitidas foi excedida**"
 
-#, fuzzy, python-format
+#, python-format
 msgid "**You are not allowed to read the page: %s**"
-msgstr "Você não tem permissão para renomear esta página!"
+msgstr "**Você não tem permissão para ler a página: %s**"
 
 #, python-format
 msgid "**Could not find the referenced page: %s**"
@@ -956,17 +950,15 @@ msgstr ""
 msgid "%(errortype)s processing error"
 msgstr "%(errortype)s erros de processamento"
 
-#, fuzzy
 msgid "Password is too short."
-msgstr "Senha muito curta"
+msgstr "Senha muito curta."
 
 msgid "Password has not enough different characters."
 msgstr "A senha não tem um número suficiente de caracteres diferentes"
 
-#, fuzzy
 msgid ""
 "Password is too easy (password contains name or name contains password)."
-msgstr "Senha não foi informada. Por favor, informe o nome do usuário e senha."
+msgstr "Senha muito fácil (a senha contém o nome, ou o nome contém a senha)."
 
 msgid "Password is too easy (keyboard sequence)."
 msgstr "Senha muito simples (seqüência de teclado)."
@@ -1059,11 +1051,9 @@ msgstr "(Deixe em branco para desabilitar a folha de estil CSS do usuário)"
 msgid "Editor size"
 msgstr "Tamanho do editor"
 
-#, fuzzy
 msgid "Username"
 msgstr "Usuário"
 
-#, fuzzy
 msgid "Member of Groups"
 msgstr "Membro dos Grupos"
 
@@ -1139,7 +1129,7 @@ msgstr ""
 msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "Arquivo de saída já existe! Covardemente recusando a continuar!"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear Wiki user,\n"
 "\n"
@@ -1148,14 +1138,12 @@ msgid ""
 "\n"
 "The \"%(pagename)s\" page has been changed by %(editor)s:\n"
 msgstr ""
-"Caro usuário Wiki,\n"
+"Prezado usuário,\n"
 "\n"
-"Você subscreveu uma página ou categoria em \"%(sitename)s\" para "
+"Você se inscreveu em uma página ou categoria wiki em \"%(sitename)s\" para "
 "notificações de alterações.\n"
 "\n"
-"A página seguinte foi alterada por %(editor)s:\n"
-"%(pagelink)s\n"
-"\n"
+"A página \"%(pagename)s\" foi alterada por %(editor)s:\n"
 
 msgid "New page:\n"
 msgstr "Nova página:\n"
@@ -1329,7 +1317,7 @@ msgid "matches"
 msgstr "acertos"
 
 msgid "RecentChanges"
-msgstr "AlteraçõesRecentes"
+msgstr "MudançasRecentes"
 
 msgid "WikiTipOfTheDay"
 msgstr ""
@@ -1915,7 +1903,7 @@ msgid "Click to do a full-text search for this title"
 msgstr "Clique aqui para fazer uma busca completa para este título"
 
 msgid "Settings"
-msgstr ""
+msgstr "Configurações"
 
 msgid "Logout"
 msgstr "Sair"
