@@ -308,6 +308,7 @@ class FORM(CompositeElement):
         'onreset': None,
         'onsubmit': None,
         'target': None,
+        'id': None,
     }
     _DEFAULT_ATTRS = {
         'method': 'POST',
@@ -551,6 +552,7 @@ class SELECT(CompositeElement):
         'onfocus': None,
         'size': None,
         'tabindex': None,
+        'id': None,
     }
 
 class SMALL(CompositeElement):

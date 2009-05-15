@@ -25,7 +25,7 @@ def getIntegerInput(request, fieldname, default=None, minval=None, maxval=None):
         return result
 
 
-def makeSelection(name, values, selectedval=None, size=1, multiple=False):
+def makeSelection(name, values, selectedval=None, size=1, multiple=False, enabled=True):
     """ Make a HTML <select> element named `name` from a value list.
         The list can either be a list of strings, or a list of
         (value, label) tuples.
@@ -33,7 +33,7 @@ def makeSelection(name, values, selectedval=None, size=1, multiple=False):
         `selectedval` is the value that should be pre-selected.
     """
     from MoinMoin.widget import html
-    result = html.SELECT(name=name, size="%d" % int(size), multiple=multiple)
+    result = html.SELECT(name=name, size="%d" % int(size), multiple=multiple, disabled=not enabled)
     for val in values:
         if not isinstance(val, type(())):
             val = (val, val)
@@ -44,7 +44,7 @@ def makeSelection(name, values, selectedval=None, size=1, multiple=False):
 
     return result
 
-def makeMultiSelection(name, values, selectedvals=None, size=5):
+def makeMultiSelection(name, values, selectedvals=None, size=5, enabled=True):
     """Make a HTML multiple <select> element with named `name` from a value list.
 
     The list can either be a list of strings, or a list of (value, label) tuples.
@@ -52,7 +52,7 @@ def makeMultiSelection(name, values, selectedvals=None, size=5):
 
     """
     from MoinMoin.widget import html
-    result = html.SELECT(name=name, size="%d" % int(size), multiple=True)
+    result = html.SELECT(name=name, size="%d" % int(size), multiple=True, disabled=not enabled)
     for val in values:
         if not isinstance(val, type(())):
             val = (val, val)
