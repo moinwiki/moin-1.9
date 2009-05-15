@@ -239,7 +239,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
         'rfc': '%a %b %d %H:%M:%S %Y & %a %b %d %Y',
     }
 
-    def _tz_select(self):
+    def _tz_select(self, enabled=True):
         """ Create time zone selection. """
         tz = 0
         if self.request.user.valid:
@@ -261,7 +261,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
                 ),
             ))
 
-        return util.web.makeSelection('tz_offset', options, str(tz))
+        return util.web.makeSelection('tz_offset', options, str(tz), 1, False, enabled)
 
 
     def _dtfmt_select(self):
@@ -279,7 +279,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
         return util.web.makeSelection('datetime_fmt', options, selected)
 
 
-    def _lang_select(self):
+    def _lang_select(self, enabled=True):
         """ Create language selection. """
         from MoinMoin import i18n
         _ = self._
@@ -291,7 +291,7 @@ space between words. Group page name is not allowed.""", wiki=True) % wikiutil.e
             name = lang[1]['x-language']
             options.append((lang[0], name))
 
-        return util.web.makeSelection('language', options, cur_lang)
+        return util.web.makeSelection('language', options, cur_lang, 1, False, enabled)
 
     def _theme_select(self):
         """ Create theme selection. """
