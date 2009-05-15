@@ -39,7 +39,7 @@ class Login:
             hint = authm.login_hint(request)
             if hint:
                 hints.append(hint)
-        self._form = html.FORM(action=action, name="loginform")
+        self._form = html.FORM(action=action, name="loginform", id="loginform")
         self._table = html.TABLE(border="0")
 
         # Use the user interface language and direction
@@ -67,19 +67,48 @@ class Login:
                 ),
             ])
 
+        # Restrict type of input available for OpenID input
+        # based on wiki configuration.
         if 'openid_identifier' in cfg.auth_login_inputs:
-            self.make_row(_('OpenID'), [
-                html.INPUT(
-                    type="text", size="32", name="openid_identifier",
-                    id="openididentifier"
-                ),
-            ])
+            if len(cfg.openidrp_allowed_op) == 1:
+                self.make_row(_('OpenID'), [
+                     html.INPUT(
+                         type="hidden", name="openid_identifier",
+                         value=cfg.openidrp_allowed_op[0]
+                     ),
+                ])
+            elif len(cfg.openidrp_allowed_op) > 1:
+                op_select = html.SELECT(name="openid_identifier",
+                    id="openididentifier")
+                for op_uri in cfg.openidrp_allowed_op:
+                    op_select.append(html.OPTION(value=op_uri).append(
+                        html.Raw(op_uri)))
 
+                self.make_row(_('OpenID'), [op_select,])
+            else:
+                self.make_row(_('OpenID'), [
+                    html.INPUT(
+                        type="text", size="32", name="openid_identifier",
+                        id="openididentifier"
+                    ),
+                ])
+
+        # Need both hidden field and submit values for auto-submit to work
         self.make_row('', [
+            html.INPUT(type="hidden", name="login", value=_('Login')),
             html.INPUT(
                 type="submit", name='login', value=_('Login')
             ),
         ])
+
+        # Automatically submit the form if only a single OpenID Provider is allowed
+        if 'openid_identifier' in cfg.auth_login_inputs and len(cfg.openidrp_allowed_op) == 1:
+            self._form.append("""<script type="text/javascript">
+<!--//
+document.getElementById("loginform").submit();
+//-->
+</script>
+""")
 
         return unicode(self._form)
 
