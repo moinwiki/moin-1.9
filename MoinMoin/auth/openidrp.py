@@ -28,9 +28,9 @@ class OpenIDAuth(BaseAuth):
                        forced_service=None,
                        idselector_com=None):
         BaseAuth.__init__(self)
-        self._modify_request = modify_request or (lambda x: None)
-        self._update_user = update_user or (lambda i, u: None)
-        self._create_user = create_user or (lambda i, u: None)
+        self._modify_request = modify_request or (lambda x, c: None)
+        self._update_user = update_user or (lambda i, u, c: None)
+        self._create_user = create_user or (lambda i, u, c: None)
         self._forced_service = forced_service
         self._idselector_com = idselector_com
         if forced_service:
@@ -44,10 +44,10 @@ class OpenIDAuth(BaseAuth):
                           auth_username=request.session['openid.id'])
             # invalid name
             u.name = ''
-            u = self._create_user(request.session['openid.info'], u)
+            u = self._create_user(request.session['openid.info'], u, request.cfg)
 
         if u:
-            self._update_user(request.session['openid.info'], u)
+            self._update_user(request.session['openid.info'], u, request.cfg)
 
             # just in case the wiki admin screwed up
             if (not user.isValidName(request, u.name) or
@@ -170,7 +170,7 @@ username and leave the password field blank.""")))
 
     def _handle_name_continuation(self, request):
         if not 'openid.id' in request.session:
-            return CancelLogin(None)
+            return CancelLogin(_('No OpenID found in session.'))
 
         _ = request.getText
         newname = request.form.get('username', '')
@@ -195,7 +195,7 @@ username and leave the password field blank.""")))
 
     def _handle_associate_continuation(self, request):
         if not 'openid.id' in request.session:
-            return CancelLogin()
+            return CancelLogin(_('No OpenID found in session.'))
 
         _ = request.getText
         username = request.form.get('username', '')
@@ -221,7 +221,7 @@ username and leave the password field blank.""")))
             return self._handle_name_continuation(request)
         elif oidstage == '3':
             return self._handle_associate_continuation(request)
-        return CancelLogin()
+        return CancelLogin(_('OpenID error: unknown continuation stage'))
 
     def _openid_form(self, request, form, oidhtml):
         _ = request.getText
@@ -278,7 +278,7 @@ document.getElementById("openid_message").submit();
             if oidreq is None:
                 return ContinueLogin(None, _('No OpenID.'))
 
-            self._modify_request(oidreq)
+            self._modify_request(oidreq, request.cfg)
 
             return_to = get_multistage_continuation_url(request, self.name,
                                                         {'oidstage': '1'})
