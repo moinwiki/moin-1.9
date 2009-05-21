@@ -13,6 +13,7 @@ from MoinMoin import wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.action import ActionBase
+from MoinMoin.security.textcha import TextCha
 
 class CopyPage(ActionBase):
     """ Copy page action
@@ -45,6 +46,11 @@ class CopyPage(ActionBase):
     def do_action(self):
         """ copy this page to "pagename" """
         _ = self._
+        # Currently we only check TextCha for upload (this is what spammers ususally do),
+        # but it could be extended to more/all attachment write access
+        if not TextCha(self.request).check_answer_from_form():
+            return status, _('TextCha: Wrong answer! Go back and try again...')
+
         form = self.form
         newpagename = form.get('newpagename', [u''])[0]
         newpagename = self.request.normalizePagename(newpagename)
@@ -84,6 +90,7 @@ class CopyPage(ActionBase):
             subpages = ' '.join(self.users_subpages)
 
             d = {
+                'textcha': TextCha(self.request).render(),
                 'subpage': subpages,
                 'subpages_checked': ('', 'checked')[self.request.form.get('subpages_checked', ['0'])[0] == '1'],
                 'subpage_label': _('Copy all /subpages too?'),
@@ -98,6 +105,7 @@ class CopyPage(ActionBase):
 <strong>%(querytext)s</strong>
 <br>
 <br>
+%(textcha)s
 <table>
     <tr>
     <dd>
@@ -132,12 +140,14 @@ class CopyPage(ActionBase):
 
         else:
             d = {
+                'textcha': TextCha(self.request).render(),
                 'pagename': wikiutil.escape(self.pagename, True),
                 'newname_label': _("New name"),
                 'comment_label': _("Optional reason for the copying"),
                 'buttons_html': buttons_html,
                 }
             return '''
+%(textcha)s
 <table>
     <tr>
         <td class="label"><label>%(newname_label)s</label></td>
