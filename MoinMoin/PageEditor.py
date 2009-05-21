@@ -24,6 +24,7 @@ from MoinMoin.Page import Page
 from MoinMoin.widget import html
 from MoinMoin.widget.dialog import Status
 from MoinMoin.logfile import editlog, eventlog
+from MoinMoin.mail.sendmail import encodeSpamSafeEmail
 from MoinMoin.support.python_compatibility import set
 from MoinMoin.util import filesys, timefuncs, web
 from MoinMoin.events import PageDeletedEvent, PageRenamedEvent, PageCopiedEvent, PageRevertedEvent
@@ -483,7 +484,8 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 
         # QuickHelp originally by Georg Mischler <schorsch@lightingwiki.com>
         markup = self.pi['format'] or request.cfg.default_markup
-        quickhelp = request.cfg.editor_quickhelp.get(markup, "")
+        parser = wikiutil.searchAndImportPlugin(self.request.cfg, "parser", markup)
+        quickhelp = getattr(parser, 'quickhelp', None)
         if quickhelp:
             request.write(request.formatter.div(1, id="editor-help"))
             request.write(_(quickhelp, wiki=True))
@@ -763,6 +765,7 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
         request = self.request
         now = self._get_local_timestamp()
         u = request.user
+        obfuscated_email_address = encodeSpamSafeEmail(u.email)
         signature = u.signature()
         variables = {
             'PAGE': self.page_name,
@@ -772,6 +775,7 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
             'USERNAME': signature,
             'USER': "-- %s" % signature,
             'SIG': "-- %s <<DateTime(%s)>>" % (signature, now),
+            'EMAIL': "<<MailTo(%s)>>" % (obfuscated_email_address)
         }
 
         if u.valid and u.name:

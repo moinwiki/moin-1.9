@@ -20,7 +20,6 @@ from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
 from MoinMoin.Page import Page
 from MoinMoin.action import AttachFile
 from MoinMoin import wikiutil
-from MoinMoin.support.python_compatibility import rsplit
 
 Dependencies = [] # this parser just depends on the raw text
 
@@ -170,9 +169,30 @@ class MoinWriter(html4css1.Writer):
                 setattr(self, attr, getattr(visitor, attr))
         self.output = html_escape_unicode(visitor.astext())
 
+# mark quickhelp as translatable
+_ = lambda x: x
+
 class Parser:
     caching = 1
     Dependencies = Dependencies # copy dependencies from module-scope
+    quickhelp = _("""\
+{{{
+Emphasis: *italic* **bold** ``monospace``
+
+Headings: Heading 1  Heading 2  Heading 3
+          =========  ---------  ~~~~~~~~~
+
+Horizontal rule: ----
+
+Links: TrailingUnderscore_ `multi word with backticks`_ external_
+
+.. _external: http://external-site.example.org/foo/
+
+Lists: * bullets; 1., a. numbered items.
+}}}
+(!) For more help, see the
+[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|reStructuredText Quick Reference]].
+""")
 
     def __init__(self, raw, request, **kw):
         self.raw = raw
@@ -379,10 +399,7 @@ class MoinTranslator(html4css1.HTMLTranslator):
                     node['classes'].append(prefix)
             else:
                 # Default case - make a link to a wiki page.
-                pagename = refuri
-                anchor = ''
-                if '#' in refuri:
-                    pagename, anchor = rsplit(refuri, '#', 1)
+                pagename, anchor = wikiutil.split_anchor(refuri)
                 page = Page(self.request, wikiutil.AbsPageName(self.formatter.page.page_name, pagename))
                 node['refuri'] = page.url(self.request, anchor=anchor)
                 if not page.exists():
@@ -612,3 +629,4 @@ class MoinDirectives:
 if ErrorParser: # fixup in case of missing docutils
     Parser = ErrorParser
 
+del _

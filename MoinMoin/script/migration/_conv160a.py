@@ -45,7 +45,7 @@ from MoinMoin.script.migration.migutil import opj, listdir, copy_file, move_file
 
 import mimetypes # this MUST be after wikiutil import!
 
-from _conv160b_wiki import convert_wiki
+from _conv160a_wiki import convert_wiki
 
 create_rev = True # create a <new> rev with the converted content of <new-1> rev?
 

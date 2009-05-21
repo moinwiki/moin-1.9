@@ -95,10 +95,11 @@ class AttachmentMatch(Match):
 class FoundPage:
     """ Represents a page in a search result """
 
-    def __init__(self, page_name, matches=None, page=None):
+    def __init__(self, page_name, matches=None, page=None, rev=0):
         self.page_name = page_name
         self.attachment = '' # this is not an attachment
         self.page = page
+        self.rev = rev
         if matches is None:
             matches = []
         self._matches = matches
@@ -184,9 +185,10 @@ class FoundPage:
 class FoundAttachment(FoundPage):
     """ Represents an attachment in search results """
 
-    def __init__(self, page_name, attachment, matches=None, page=None):
+    def __init__(self, page_name, attachment, matches=None, page=None, rev=0):
         self.page_name = page_name
         self.attachment = attachment
+        self.rev = rev
         self.page = page
         if matches is None:
             matches = []
@@ -199,9 +201,10 @@ class FoundAttachment(FoundPage):
 class FoundRemote(FoundPage):
     """ Represents an attachment in search results """
 
-    def __init__(self, wikiname, page_name, attachment, matches=None, page=None):
+    def __init__(self, wikiname, page_name, attachment, matches=None, page=None, rev=0):
         self.wikiname = wikiname
         self.page_name = page_name
+        self.rev = rev
         self.attachment = attachment
         self.page = page
         if matches is None:
@@ -330,15 +333,16 @@ class SearchResults:
                 displayHits = self.hits
 
             for page in displayHits:
+                # TODO handle interwiki search hits
                 if page.attachment:
                     querydict = {
                         'action': 'AttachFile',
                         'do': 'view',
                         'target': page.attachment,
                     }
-                elif page.page.rev and page.page.rev != page.page.getRevList()[0]:
+                elif page.rev and page.rev != page.page.getRevList()[0]:
                     querydict = {
-                        'rev': page.page.rev,
+                        'rev': page.rev,
                     }
                 else:
                     querydict = None
@@ -409,6 +413,7 @@ class SearchResults:
                 displayHits = self.hits
 
             for page in displayHits:
+                # TODO handle interwiki search hits
                 matchInfo = ''
                 if info:
                     matchInfo = self.formatInfo(f, page)
@@ -424,9 +429,9 @@ class SearchResults:
                     querydict = None
                 else:
                     fmt_context = self.formatContext(page, context, maxlines)
-                    if page.page.rev and page.page.rev != page.page.getRevList()[0]:
+                    if page.rev and page.rev != page.page.getRevList()[0]:
                         querydict = {
-                            'rev': page.page.rev,
+                            'rev': page.rev,
                         }
                     else:
                         querydict = None
@@ -819,16 +824,15 @@ def getSearchResults(request, query, hits, start, sort, estimated_hits):
     @param estimated_hits: if true, use this estimated hit count
     """
     result_hits = []
-    for wikiname, page, attachment, match in hits:
+    for wikiname, page, attachment, match, rev in hits:
         if wikiname in (request.cfg.interwikiname, 'Self'): # a local match
             if attachment:
-                result_hits.append(FoundAttachment(page.page_name,
-                    attachment, page=page, matches=match))
+                result_hits.append(FoundAttachment(page.page_name, attachment, matches=match, page=page, rev=rev))
             else:
-                result_hits.append(FoundPage(page.page_name, match, page))
+                result_hits.append(FoundPage(page.page_name, matches=match, page=page, rev=rev))
         else:
-            result_hits.append(FoundRemote(wikiname, page.page_name,
-                attachment, match, page))
+            page_name = page # for remote wikis, we have the page_name, not the page obj
+            result_hits.append(FoundRemote(wikiname, page_name, attachment, matches=match, rev=rev))
     elapsed = time.time() - start
     count = request.rootpage.getPageCount()
     return SearchResults(query, result_hits, count, elapsed, sort,
