@@ -5,6 +5,7 @@
     @copyright: 2007 MoinMoin:JohannesBerg
     @license: GNU GPL, see COPYING for details.
 """
+import logging
 from MoinMoin.util.moinoid import MoinOpenIDStore
 from MoinMoin import user
 from MoinMoin.auth import BaseAuth
@@ -71,6 +72,7 @@ class OpenIDAuth(BaseAuth):
         # that they want to use on this wiki
         # XXX: request nickname from OP and suggest using it
         # (if it isn't in use yet)
+        logging.log(logging.INFO, "running _get_account_name")
         _ = request.getText
         form.append(html.INPUT(type='hidden', name='oidstage', value='2'))
         table = html.TABLE(border='0')
@@ -135,16 +137,20 @@ username and leave the password field blank.""")))
         oidconsumer = consumer.Consumer(request.session,
                                         MoinOpenIDStore(request))
         query = {}
-        for key in request.form:
-            query[key] = request.form[key]
+        for key in request.values.keys():
+            #logging.log(logging.INFO, key + "=" + request.values.get(key))
+            query[key] = request.values.get(key)
         current_url = get_multistage_continuation_url(request, self.name,
                                                       {'oidstage': '1'})
         info = oidconsumer.complete(query, current_url)
         if info.status == consumer.FAILURE:
+            logging.log(logging.INFO, _("OpenID error: %s.") % info.message)
             return CancelLogin(_('OpenID error: %s.') % info.message)
         elif info.status == consumer.CANCEL:
+            logging.log(logging.INFO, _("OpenID verification canceled."))
             return CancelLogin(_('Verification canceled.'))
         elif info.status == consumer.SUCCESS:
+            logging.log(logging.INFO, _("OpenID success. id: %s") % info.identity_url)
             request.session['openid.id'] = info.identity_url
             request.session['openid.info'] = info
 
@@ -163,9 +169,11 @@ username and leave the password field blank.""")))
 
             # if no user found, then we need to ask for a username,
             # possibly associating an existing account.
-            request.session['openid.id'] = info.identity_url
+            logging.log(logging.INFO, "OpenID: No user found, prompting for username")
+            #request.session['openid.id'] = info.identity_url
             return MultistageFormLogin(self._get_account_name)
         else:
+            logging.log(logging.INFO, _("OpenID failure"))
             return CancelLogin(_('OpenID failure.'))
 
     def _handle_name_continuation(self, request):
@@ -214,13 +222,18 @@ username and leave the password field blank.""")))
             return MultistageFormLogin(assoc)
 
     def _handle_continuation(self, request):
-        oidstage = request.form.get('oidstage', '0')
+        _ = request.getText
+        oidstage = request.values.get('oidstage')
         if oidstage == '1':
+            logging.log(logging.INFO, _('OpenID: handle verify continuation'))
             return self._handle_verify_continuation(request)
         elif oidstage == '2':
+            logging.log(logging.INFO, _('OpenID: handle name continuation'))
             return self._handle_name_continuation(request)
         elif oidstage == '3':
+            logging.log(logging.INFO, _('OpenID: handle associate continuation'))
             return self._handle_associate_continuation(request)
+        logging.log(logging.INFO, _('OpenID: unknown continuation stage'))
         return CancelLogin(_('OpenID error: unknown continuation stage'))
 
     def _openid_form(self, request, form, oidhtml):
