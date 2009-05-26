@@ -105,5 +105,5 @@ class TestManagerMapping(object):
 
     def test_membersgroups(self):
         assert u'AdminGroup' in self.group_backend.membergroups(u'JohnDoe')
-        
+
 coverage_modules = ['MoinMoin.groups']
