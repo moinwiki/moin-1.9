@@ -54,7 +54,7 @@ class LoginHandler:
     def handle(self):
         _ = self._
         request = self.request
-        form = request.form
+        form = request.values
 
         error = None
 
