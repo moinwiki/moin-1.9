@@ -11,10 +11,12 @@ from py.test import raises
 
 from MoinMoin.groups import BackendManager
 
+
 class TestBackendManagerAPI(object):
     """
     This tastcase test Backend manager API
     """
+
     def setup_method(self, method):
         self.admin_group = frozenset([u'Admin', u'JohnDoe'])
         self.editor_group = frozenset([u'MainEditor', u'JohnDoe'])
@@ -63,4 +65,45 @@ class TestBackendManagerAPI(object):
         assert u'FruitGroup' not in john_doe_groups
 
 
+class TestManagerMapping(object):
+    """
+    This class tests mapping of the group names from a backend to the
+    moin and from the moin to a backend.
+
+    Here the simplest situation is considered. Moin expect groups to
+    be named as *Group, but backend stores group names without this prefix.
+
+    When group names are passed or retrieved from the backend they
+    should be mapped.
+    """
+
+    def setup_class(self):
+        self.admin_group = frozenset([u'Admin', u'JohnDoe'])
+        self.editor_group = frozenset([u'MainEditor', u'JohnDoe'])
+
+        # Group names here do not follow moin convention: they do not
+        # have group prefix.
+        groups = {u'Admin': self.admin_group,
+                  u'Editor': self.editor_group}
+
+        # Simply drop last five letters, what is length of word "Group"
+        mapper_to_backend = lambda group_name: group_name[:-5]
+        # Add "Group" postfix for every group name received from a backend
+        mapper_from_backend = lambda group_name: "%sGroup" % group_name
+
+        self.group_backend = BackendManager(backend=groups,
+                                            mapper_to_backend=mapper_to_backend,
+                                            mapper_from_backend=mapper_from_backend)
+
+
+    def test_getitem(self):
+        admin_group = self.group_backend[u'AdminGroup']
+        assert self.admin_group == admin_group
+
+    def test_contains(self):
+        assert u'AdminGroup' in self.group_backend
+
+    def test_membersgroups(self):
+        assert u'AdminGroup' in self.group_backend.membergroups(u'JohnDoe')
+        
 coverage_modules = ['MoinMoin.groups']

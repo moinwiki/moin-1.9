@@ -16,15 +16,41 @@ class BackendManager(object):
     group name. It provides access to groups of specific backend.
     """
 
-    def __init__(self, backend):
+    def __init__(self, backend, mapper_to_backend=None, mapper_from_backend=None):
         """
         Creates backend manager object.
+
+        XXX Decorators can be used for group name mapping.
 
         @type backend: group backend object.
         @param backend: the backend which provides access to the group
         definitions.
+
+        @type mapper_to_backend: function which takes one string as an
+        argument and returns a string
+        @param mapper_to_backend: function which maps moin group
+        name to the backend group name
+
+        @type mapper_from_backend: function which takes one string as an
+        argument and returns a string
+        @param mapper_from_backend: function which maps backend group
+        name to the moin group name
         """
         self._backend = backend
+
+        # XXX Should we check that *two* mapper functions are passed,
+        # and if not throw an exception?
+        if mapper_to_backend is not None:
+            self.mapper_to_backend = mapper_to_backend
+        else:
+            # Nothing to map, just return unmodified string
+            self.mapper_to_backend = lambda x: x
+
+        if mapper_from_backend is not None:
+            self.mapper_from_backend = mapper_from_backend
+        else:
+            # Nothing to map, just return unmodified string
+            self.mapper_from_backend = lambda x: x
 
     def __getitem__(self, group_name):
         """
@@ -33,13 +59,13 @@ class BackendManager(object):
         @type group_name: unicode string.
         @param group_name: name of the group which object to select.
         """
-        return self._backend[group_name]
+        return self._backend[self.mapper_to_backend(group_name)]
 
     def __iter__(self):
         """
         Iteration over group names.
         """
-        return iter(self._backend)
+        return (self.mapper_from_backend(group_name) for group_name in self._backend)
 
     def __contains__(self, group_name):
         """
@@ -48,7 +74,7 @@ class BackendManager(object):
         @type group_name: unicode string.
         @param group_name: name of the group which is checked for an containment.
         """
-        return group_name in self._backend
+        return self.mapper_to_backend(group_name) in self._backend
 
     def membergroups(self, member):
         """
@@ -57,7 +83,7 @@ class BackendManager(object):
         @return: list of group names in which member takes part in
         """
         return [group_name for group_name in self
-                         if member in self[group_name]]
+                if member in self[group_name]]
 
 
 class GroupManager(object):
