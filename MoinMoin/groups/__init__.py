@@ -53,6 +53,8 @@ class BackendManager(object):
     def membergroups(self, member):
         """
         List all groups where member is a member of.
+        @rtype: list of unicode strings
+        @return: list of group names in which member takes part in
         """
         return [group_name for group_name in self
                          if member in self[group_name]]
@@ -105,6 +107,8 @@ class GroupManager(object):
     def membergroups(self, member):
         """
         List all groups where member is a member of.
+        @rtype: list of unicode strings
+        @return: list of group names in which member takes part in
         """
         return [group_name for group_name in self
                          if member in self[group_name]]
