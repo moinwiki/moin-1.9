@@ -33,7 +33,7 @@ class LoginHandler:
         """
         _ = self._
         request = self.request
-        form = html.FORM(method='POST', name='logincontinue')
+        form = html.FORM(method='POST', name='logincontinue', action=self.pagename)
         form.append(html.INPUT(type='hidden', name='login', value='login'))
         form.append(html.INPUT(type='hidden', name='stage',
                                value=request._login_multistage_name))
