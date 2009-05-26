@@ -12,7 +12,7 @@ from MoinMoin import version
 from MoinMoin.util.chartypes import *
 
 # List of image types browser do support regulary
-browser_supported_images = ('gif', 'jpg', 'jpeg', 'png', 'bmp', 'ico', )
+browser_supported_images = ('gif', 'jpg', 'jpeg', 'png', 'bmp', 'ico',)
 
 # Parser to use mimetype text
 parser_text_mimetype = ('plain', 'csv', 'rst', 'docbook', 'latex', 'tex', 'html', 'css',
