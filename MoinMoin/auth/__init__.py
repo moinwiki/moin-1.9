@@ -158,8 +158,10 @@ def get_multistage_continuation_url(request, auth_name, extra_fields={}):
               'stage': auth_name}
     fields.update(extra_fields)
     if request.page:
+        logging.debug("request.page.url: " + request.page.url(request, querystr=fields))
         return request.page.url(request, querystr=fields)
     else:
+        logging.debug("request.abs_href: " + request.abs_href(**fields))
         return request.abs_href(**fields)
 
 class LoginReturn(object):

@@ -18,7 +18,7 @@ from MoinMoin.widget import html
 from MoinMoin.auth import CancelLogin, ContinueLogin
 from MoinMoin.auth import MultistageFormLogin, MultistageRedirectLogin
 from MoinMoin.auth import get_multistage_continuation_url
-
+from werkzeug.utils import url_encode
 
 class OpenIDAuth(BaseAuth):
     login_inputs = ['openid_identifier']
@@ -140,10 +140,14 @@ username and leave the password field blank.""")))
                                         MoinOpenIDStore(request))
         query = {}
         for key in request.values.keys():
-            #logging.debug(key + "=" + request.values.get(key))
             query[key] = request.values.get(key)
         current_url = get_multistage_continuation_url(request, self.name,
                                                       {'oidstage': '1'})
+                                                      # 'janrain_nonce': request.values.get('janrain_nonce')})
+        # Because the order of dict keys cannot be guaranteed, this last param must
+        # be appended in string form to make sure order of URL prams matches
+        # between current_url and the OpenID return_to value.
+        current_url += u'&' + url_encode({'janrain_nonce': request.values.get('janrain_nonce')})
         info = oidconsumer.complete(query, current_url)
         if info.status == consumer.FAILURE:
             logging.debug(_("OpenID error: %s.") % info.message)
