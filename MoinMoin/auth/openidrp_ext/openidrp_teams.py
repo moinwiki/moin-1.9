@@ -48,7 +48,7 @@ def openidrp_teams_create_user(info, u, cfg):
     teams_response = TeamsResponse.fromSuccessResponse(info)
     teams = teams_response.is_member
     if teams:
-        _save_teams_acl(u, teams)
+        _save_teams_acl(u, teams, cfg)
     return u
 
 def openidrp_teams_update_user(info, u, cfg):
