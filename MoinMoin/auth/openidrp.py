@@ -24,6 +24,7 @@ class OpenIDAuth(BaseAuth):
     login_inputs = ['openid_identifier']
     name = 'openid'
     logout_possible = True
+    auth_attribs = ()
 
     def __init__(self, modify_request=None,
                        update_user=None,
@@ -44,7 +45,8 @@ class OpenIDAuth(BaseAuth):
         if create:
             # pass in a created but unsaved user object
             u = user.User(request, auth_method=self.name,
-                          auth_username=request.session['openid.id'])
+                          auth_username=request.session['openid.id'],
+                          auth_attribs=self.auth_attribs)
             # invalid name
             u.name = ''
             u = self._create_user(request.session['openid.info'], u, request.cfg)
@@ -143,11 +145,6 @@ username and leave the password field blank.""")))
             query[key] = request.values.get(key)
         current_url = get_multistage_continuation_url(request, self.name,
                                                       {'oidstage': '1'})
-                                                      # 'janrain_nonce': request.values.get('janrain_nonce')})
-        # Because the order of dict keys cannot be guaranteed, this last param must
-        # be appended in string form to make sure order of URL prams matches
-        # between current_url and the OpenID return_to value.
-        #current_url += u'&' + url_encode({'janrain_nonce': request.values.get('janrain_nonce')})
         info = oidconsumer.complete(query, current_url)
         if info.status == consumer.FAILURE:
             logging.debug(_("OpenID error: %s.") % info.message)
@@ -164,7 +161,8 @@ username and leave the password field blank.""")))
             uid = user.getUserIdByOpenId(request, info.identity_url)
             if uid:
                 u = user.User(request, id=uid, auth_method=self.name,
-                              auth_username=info.identity_url)
+                              auth_username=info.identity_url,
+                              auth_attribs=self.auth_attribs)
             else:
                 u = None
 
@@ -198,7 +196,8 @@ username and leave the password field blank.""")))
         if not uid:
             # we can create a new user with this name :)
             u = user.User(request, auth_method=self.name,
-                          auth_username=request.session['openid.id'])
+                          auth_username=request.session['openid.id'],
+                          auth_attribs=self.auth_attribs)
             u.name = newname
             u = self._handle_user_data(request, u)
             return ContinueLogin(u)
@@ -218,7 +217,8 @@ username and leave the password field blank.""")))
             return self._handle_name_continuation(request)
         u = user.User(request, name=username, password=password,
                       auth_method=self.name,
-                      auth_username=request.session['openid.id'])
+                      auth_username=request.session['openid.id'],
+                      auth_attribs=self.auth_attribs)
         if u.valid:
             self._handle_user_data(request, u)
             return ContinueLogin(u, _('Your account is now associated to your OpenID.'))

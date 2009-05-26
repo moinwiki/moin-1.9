@@ -29,7 +29,7 @@ import pytz
 #    logout_possible = True
 #    auth_attribs = ['name', 'email', 'aliasname', 'language', 'tz_offset']
 
-OpenIDAuth.auth_attribs = ['name', 'email', 'aliasname', 'language', 'tz_offset']
+OpenIDAuth.auth_attribs = ('name', 'email', 'aliasname', 'language', 'tz_offset')
 
 def openidrp_sreg_modify_request(oidreq, cfg):
     oidreq.addExtension(SRegRequest(required=cfg.openidrp_sreg_required,
