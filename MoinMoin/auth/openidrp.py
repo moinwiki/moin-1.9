@@ -147,7 +147,7 @@ username and leave the password field blank.""")))
         # Because the order of dict keys cannot be guaranteed, this last param must
         # be appended in string form to make sure order of URL prams matches
         # between current_url and the OpenID return_to value.
-        current_url += u'&' + url_encode({'janrain_nonce': request.values.get('janrain_nonce')})
+        #current_url += u'&' + url_encode({'janrain_nonce': request.values.get('janrain_nonce')})
         info = oidconsumer.complete(query, current_url)
         if info.status == consumer.FAILURE:
             logging.debug(_("OpenID error: %s.") % info.message)
