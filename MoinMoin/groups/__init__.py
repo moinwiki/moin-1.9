@@ -16,7 +16,7 @@ class BackendManager(object):
     group name. It provides access to groups of specific backend.
     """
 
-    def __init__(self, backend, mapper_to_backend=None, mapper_from_backend=None):
+    def __init__(self, backend, mapper_to_backend=lambda x: x, mapper_from_backend=lambda x: x):
         """
         Creates backend manager object.
 
@@ -37,20 +37,8 @@ class BackendManager(object):
         name to the moin group name
         """
         self._backend = backend
-
-        # XXX Should we check that *two* mapper functions are passed,
-        # and if not throw an exception?
-        if mapper_to_backend is not None:
-            self.mapper_to_backend = mapper_to_backend
-        else:
-            # Nothing to map, just return unmodified string
-            self.mapper_to_backend = lambda x: x
-
-        if mapper_from_backend is not None:
-            self.mapper_from_backend = mapper_from_backend
-        else:
-            # Nothing to map, just return unmodified string
-            self.mapper_from_backend = lambda x: x
+        self.mapper_to_backend = mapper_to_backend
+        self.mapper_from_backend =  mapper_from_backend
 
     def __getitem__(self, group_name):
         """
