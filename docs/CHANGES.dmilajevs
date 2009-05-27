@@ -2,3 +2,4 @@ Version 1.9-groups-dmilajevs:
 
    New features:
    * Group backends. Group definitions can be stored outside of MoinMoin.
+   * MoinMoin.security.AccessControlList works with the new GroupManager.

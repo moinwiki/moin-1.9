@@ -14,6 +14,7 @@ work without setting them (like data_dir and underlay_dir).
 import os
 
 from MoinMoin.config.multiconfig import DefaultConfig
+from MoinMoin.groups import GroupManager
 
 
 class Config(DefaultConfig):
@@ -23,6 +24,8 @@ class Config(DefaultConfig):
     _base_dir = os.path.join(os.path.dirname(__file__), '../../tests/wiki')
     data_dir = os.path.join(_base_dir, "data")
     data_underlay_dir = os.path.join(_base_dir, "underlay")
+
+    group_manager = GroupManager([])
 
     #show_hosts = 1
 
