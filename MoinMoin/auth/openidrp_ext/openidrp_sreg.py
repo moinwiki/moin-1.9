@@ -23,18 +23,15 @@ from datetime import datetime, timedelta
 from pytz import timezone
 import pytz
 
-#class OpenIDSREGAuth(OpenIDAuth):
-#    login_inputs = ['openid_identifier']
-#    name = 'openid'
-#    logout_possible = True
-#    auth_attribs = ['name', 'email', 'aliasname', 'language', 'tz_offset']
-
 OpenIDAuth.auth_attribs = ('name', 'email', 'aliasname', 'language', 'tz_offset')
+
+openidrp_sreg_required = ['nickname', 'email', 'timezone']
+openidrp_sreg_optional = ['fullname', 'language']
+openidrp_sreg_username_field = 'nickname'
 
 def openidrp_sreg_modify_request(oidreq, cfg):
     oidreq.addExtension(SRegRequest(required=cfg.openidrp_sreg_required,
                                     optional=cfg.openidrp_sreg_optional))
-    return
 
 def openidrp_sreg_create_user(info, u, cfg):
     sreg = _openidrp_sreg_extract_values(info)
@@ -54,7 +51,6 @@ def openidrp_sreg_update_user(info, u, cfg):
             u.tz_offset = sreg['timezone']
         if sreg['fullname'] != '':
             u.fullname = sreg['fullname']
-    return
 
 def _openidrp_sreg_extract_values(info):
     # Pull SREG data here instead of asking user

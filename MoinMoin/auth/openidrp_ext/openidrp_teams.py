@@ -27,19 +27,12 @@ from MoinMoin import wikiutil
 from MoinMoin.PageEditor import PageEditor, conflict_markers
 from MoinMoin.Page import Page
 
-#class OpenIDTeamsAuth(OpenIDSREGAuth):
-#    login_inputs = ['openid_identifier']
-#    name = 'openid'
-#    logout_possible = True
-#    #auth_attribs = ['name', 'email', 'aliasname', 'language', 'tz_offset']
-
 def openidrp_teams_modify_request(oidreq, cfg):
     # Request Launchpad teams information, if configured
     # should also check supportsTeams() result
     #if teams_extension_avail and len(cfg.openidrp_authorized_teams) > 0:
     if len(cfg.openidrp_authorized_teams) > 0:
         oidreq.addExtension(TeamsRequest(cfg.openidrp_authorized_teams))
-    return
 
 def openidrp_teams_create_user(info, u, cfg):
     # Check for Launchpad teams data in response
@@ -57,7 +50,6 @@ def openidrp_teams_update_user(info, u, cfg):
     teams = teams_response.is_member
     if teams:
         _save_teams_acl(u, teams, cfg)
-    return
 
 # Take a list of Launchpad teams and add the user to the ACL pages
 # ACL group names cannot have "-" in them, although team names do.
