@@ -36,7 +36,7 @@ class TestGroupManagerACL:
         acl = security.AccessControlList(self.request.cfg, acl_rights)
 
         allow = acl.may(self.request, u"JoeDoe", "admin")
-        # JoeDoe has admin rights because he is a member of group FirstGroup     
+        # JoeDoe has admin rights because he is a member of group FirstGroup
         assert allow
 
         allow = acl.may(self.request, u"AnotherUser", "admin")
