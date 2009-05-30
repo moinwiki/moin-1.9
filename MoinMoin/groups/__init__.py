@@ -16,11 +16,13 @@ class BackendManager(object):
     group name. It provides access to groups of specific backend.
     """
 
-    def __init__(self, backend, mapper_to_backend=lambda x: x, mapper_from_backend=lambda x: x):
+    def __init__(self, request, backend, mapper_to_backend=lambda x: x, mapper_from_backend=lambda x: x):
         """
         Creates backend manager object.
 
         XXX Decorators can be used for group name mapping.
+
+        @param request: request object.
 
         @type backend: group backend object.
         @param backend: the backend which provides access to the group

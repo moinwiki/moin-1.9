@@ -25,7 +25,7 @@ class Config(DefaultConfig):
     data_dir = os.path.join(_base_dir, "data")
     data_underlay_dir = os.path.join(_base_dir, "underlay")
 
-    group_manager = GroupManager([])
+    group_manager = lambda self, request: GroupManager([])
 
     #show_hosts = 1
 
@@ -33,4 +33,3 @@ class Config(DefaultConfig):
 
     # used to check if it is really a wiki we may modify
     is_test_wiki = True
-

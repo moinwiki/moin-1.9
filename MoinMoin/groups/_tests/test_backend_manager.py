@@ -26,7 +26,8 @@ class TestBackendManagerAPI(object):
                   u'EditorGroup': self.editor_group,
                   u'FruitGroup': self.fruit_group}
 
-        self.group_backend = BackendManager(backend=groups)
+        self.group_backend = BackendManager(request=self.request,
+                                            backend=groups)
 
     def test_getitem(self):
         """
@@ -91,10 +92,10 @@ class TestManagerMapping(object):
         # Add "Group" postfix for every group name received from a backend
         mapper_from_backend = lambda group_name: "%sGroup" % group_name
 
-        self.group_backend = BackendManager(backend=groups,
+        self.group_backend = BackendManager(request=self.request,
+                                            backend=groups,
                                             mapper_to_backend=mapper_to_backend,
                                             mapper_from_backend=mapper_from_backend)
-
 
     def test_getitem(self):
         admin_group = self.group_backend[u'AdminGroup']
