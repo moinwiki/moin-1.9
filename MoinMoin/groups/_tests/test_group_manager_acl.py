@@ -23,9 +23,11 @@ class TestGroupManagerACL:
     def setup_class(self):
         groups = {u'FirstGroup': frozenset([u"ExampleUser", u"SecondUser", u"JoeDoe"]),
                   u'SecondGroup': frozenset([u"ExampleUser", u"ThirdUser"])}
-        group_manager = GroupManager([BackendManager(groups)])
 
-        self.Config.group_manager = group_manager
+        self.Config.group_manager = lambda self, request: GroupManager(backends=[BackendManager(request=request, backend=groups)])
+
+    def setup_method(self, method):
+        self.group_manager = self.request.cfg.group_manager(self.request)
 
     def testConfigBackendAcl(self):
         """
@@ -54,7 +56,8 @@ class TestGroupManagerACL:
                  }
 
         # create config group manager backend object
-        group_manager_backend = GroupManager(BackendManager([groups]))
+        group_manager_backend = GroupManager(BackendManager(request=self.request,
+                                                            backend=[groups]))
 
         # check that a group named 'A' is available via the config backend
         assert 'A' in group_manager_backend

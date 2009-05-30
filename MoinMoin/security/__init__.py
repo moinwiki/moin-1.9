@@ -308,7 +308,7 @@ class AccessControlList:
         else: # we have a #acl on the page (self.acl can be [] if #acl is empty!)
             acl = self.acl
 
-        group_manager = request.cfg.group_manager
+        group_manager = request.cfg.group_manager(request)
 
         allowed = None
         for entry, rightsdict in acl:
@@ -452,4 +452,3 @@ def parseACL(request, text):
     pi, dummy = wikiutil.get_processing_instructions(text)
     acl_lines = [args for verb, args in pi if verb == 'acl']
     return AccessControlList(request.cfg, acl_lines)
-

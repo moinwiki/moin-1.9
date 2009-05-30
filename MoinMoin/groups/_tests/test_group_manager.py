@@ -4,6 +4,7 @@
 MoinMoin.groups.GroupManager test
 
 @copyright: 2009 MoinMoin:DmitrijsMilajevs
+            2008 MoinMoin: MelitaMihaljevic
 @license: GPL, see COPYING for details
 """
 
@@ -11,20 +12,23 @@ from py.test import raises
 
 from MoinMoin.groups import BackendManager, GroupManager
 
-
 class TestGroupManagerAPI(object):
     """
     Performs test of the API of GroupManager.
     """
 
-    def setup_method(self, method):
+    from MoinMoin._tests import wikiconfig
+    class Config(wikiconfig.Config):
+        pass
+
+    def setup_class(self):
         self.admin_group = frozenset([u'Admin', u'JohnDoe'])
         self.editor_group = frozenset([u'MainEditor', u'JohnDoe'])
         self.fruit_group = frozenset([u'Apple', u'Banana', u'Cherry'])
 
-        first_backend = BackendManager({u'AdminGroup': self.admin_group,
-                                        u'EditorGroup': self.editor_group,
-                                        u'FruitGroup': self.fruit_group})
+        first_backend_groups = {u'AdminGroup': self.admin_group,
+                                u'EditorGroup': self.editor_group,
+                                u'FruitGroup': self.fruit_group}
 
         self.user_group = frozenset([u'JohnDoe', u'Bob', u'Joe'])
         self.city_group = frozenset([u'Bolzano', u'Riga', u'London'])
@@ -32,15 +36,18 @@ class TestGroupManagerAPI(object):
         # and added himself to AdminGroup
         self.second_admin_group = frozenset([u'TheHacker'])
 
-        second_backend = BackendManager({u'UserGroup': self.user_group,
-                                         u'CityGroup': self.city_group,
-                                         # Here group name clash occurs.
-                                         # AdminGroup is defined in both
-                                         # first_backend and second_backend.
-                                         u'AdminGroup': self.second_admin_group})
+        second_backend_groups = {u'UserGroup': self.user_group,
+                                 u'CityGroup': self.city_group,
+                                 # Here group name clash occurs.
+                                 # AdminGroup is defined in both
+                                 # first_backend and second_backend.
+                                 u'AdminGroup': self.second_admin_group}
 
-        self.group_manager = GroupManager(backends = [first_backend,
-                                                      second_backend])
+        self.Config.group_manager = lambda self, request: GroupManager(backends=[BackendManager(request, first_backend_groups),
+                                                                                 BackendManager(request, second_backend_groups)])
+
+    def setup_method(self, method):
+        self.group_manager = self.request.cfg.group_manager(self.request)
 
     def test_getitem(self):
         """
