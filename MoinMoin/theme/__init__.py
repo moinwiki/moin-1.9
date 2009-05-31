@@ -1011,12 +1011,7 @@ var search_hint = "%(search_hint)s";
             if action == 'SubscribeUser' and not request.user.may.admin(page.page_name):
                 data['action'] = 'show'
                 data['disabled'] = disabled
-
-            # PackagePages action only if user has write rights
-            if action == 'PackagePages' and not request.user.may.write(page.page_name):
-                data['action'] = 'show'
-                data['disabled'] = disabled
-
+            
             # Despam action enabled only for superusers
             if action == 'Despam' and not request.user.isSuperUser():
                 data['action'] = 'show'
