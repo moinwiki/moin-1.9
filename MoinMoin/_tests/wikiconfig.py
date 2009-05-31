@@ -25,7 +25,7 @@ class Config(DefaultConfig):
     data_dir = os.path.join(_base_dir, "data")
     data_underlay_dir = os.path.join(_base_dir, "underlay")
 
-    group_manager = lambda self, request: GroupManager([])
+    group_manager_init = lambda self, request: GroupManager([])
 
     #show_hosts = 1
 

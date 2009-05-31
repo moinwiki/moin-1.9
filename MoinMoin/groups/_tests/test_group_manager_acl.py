@@ -18,16 +18,11 @@ class TestGroupManagerACL:
 
     from MoinMoin._tests import wikiconfig
     class Config(wikiconfig.Config):
-        pass
+        def group_manager_init(self, request):
+            groups = {u'FirstGroup': frozenset([u"ExampleUser", u"SecondUser", u"JoeDoe"]),
+                      u'SecondGroup': frozenset([u"ExampleUser", u"ThirdUser"])}
 
-    def setup_class(self):
-        groups = {u'FirstGroup': frozenset([u"ExampleUser", u"SecondUser", u"JoeDoe"]),
-                  u'SecondGroup': frozenset([u"ExampleUser", u"ThirdUser"])}
-
-        self.Config.group_manager = lambda self, request: GroupManager(backends=[BackendManager(request=request, backend=groups)])
-
-    def setup_method(self, method):
-        self.group_manager = self.request.cfg.group_manager(self.request)
+            return GroupManager(backends=[BackendManager(request=request, backend=groups)])
 
     def testConfigBackendAcl(self):
         """
@@ -45,33 +40,5 @@ class TestGroupManagerACL:
         # AnotherUser has no read rights because he is not a member of group FirstGroup
         assert not allow
 
-    def testConfigBackend(self):
-        """
-        tests getting a group from the group manager, does group
-        membership tests.
-        """
-        # define config groups
-        groups = {'A': set(['a1', 'a2']),
-                  'B': set(['b1', 'b2']),
-                 }
-
-        # create config group manager backend object
-        group_manager_backend = GroupManager(BackendManager(request=self.request,
-                                                            backend=[groups]))
-
-        # check that a group named 'A' is available via the config backend
-        assert 'A' in group_manager_backend
-
-        # check that a group named 'C' is not available via the config backend
-        assert 'C' not in group_manager_backend
-
-        # get group object for a group named 'A'
-        group_A = group_manager_backend['A']
-
-        # check that a1 is a member of group A
-        assert 'a1' in group_A
-
-        # check that b1 is not a member of group A
-        assert 'b1' not in group_A
 
 coverage_modules = ['MoinMoin.groups']

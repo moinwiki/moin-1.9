@@ -308,15 +308,15 @@ class AccessControlList:
         else: # we have a #acl on the page (self.acl can be [] if #acl is empty!)
             acl = self.acl
 
-        group_manager = request.cfg.group_manager(request)
+        groups = request.groups
 
         allowed = None
         for entry, rightsdict in acl:
             if entry in self.special_users:
                 handler = getattr(self, "_special_"+entry, None)
                 allowed = handler(request, name, dowhat, rightsdict)
-            elif entry in group_manager:
-                if name in group_manager[entry]:
+            elif entry in groups:
+                if name in groups[entry]:
                     allowed = rightsdict.get(dowhat)
                 else:
                     for special in self.special_users:
