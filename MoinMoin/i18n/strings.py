@@ -20,7 +20,7 @@ _ = lambda x: x # dummy translation function
 
 # Some basic pages used for every language, but we only need them once in English (don't translate!):
 not_translated_system_pages = [
-    'SystemPagesSetup',
+    'LanguageSetup',
     'InterWikiMap',
     'BadContent',
     'LocalBadContent',
