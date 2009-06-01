@@ -674,7 +674,7 @@ class ThemeBase:
 
         msie_css = """
 <!-- css only for MS IE6/IE7 browsers -->
-<!--[if lt IE8]>
+<!--[if lt IE 8]>
    %s
 <![endif]-->
 """ % self._stylesheet_link(True, 'all', 'msie')
