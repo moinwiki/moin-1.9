@@ -128,3 +128,18 @@ class GroupManager(object):
         """
         return [group_name for group_name in self
                          if member in self[group_name]]
+
+    def update_cache(self):
+        for backend in self._backends:
+            try:
+                backend.update_cache()
+            except AttributeError:
+                pass
+
+    def load_cache(self):
+        for backend in self._backends:
+            try:
+                backend.load_cache()
+            except AttributeError:
+                # XXX Log that backend doesn't provide this service.
+                pass
