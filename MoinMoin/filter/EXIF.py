@@ -1105,12 +1105,12 @@ class Ratio:
         self.den = den
 
     def __repr__(self):
-        self.reduce()
+        self.reduce_size()
         if self.den == 1:
             return str(self.num)
         return '%d/%d' % (self.num, self.den)
 
-    def reduce(self):
+    def reduce_size(self):
         div = gcd(self.num, self.den)
         if div > 1:
             self.num = self.num / div

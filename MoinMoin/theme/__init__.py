@@ -674,7 +674,7 @@ class ThemeBase:
 
         msie_css = """
 <!-- css only for MS IE6/IE7 browsers -->
-<!--[if lt IE8]>
+<!--[if lt IE 8]>
    %s
 <![endif]-->
 """ % self._stylesheet_link(True, 'all', 'msie')
@@ -1009,11 +1009,6 @@ var search_hint = "%(search_hint)s";
 
             # SubscribeUser action enabled only if user has admin rights
             if action == 'SubscribeUser' and not request.user.may.admin(page.page_name):
-                data['action'] = 'show'
-                data['disabled'] = disabled
-
-            # PackagePages action only if user has write rights
-            if action == 'PackagePages' and not request.user.may.write(page.page_name):
                 data['action'] = 'show'
                 data['disabled'] = disabled
 
