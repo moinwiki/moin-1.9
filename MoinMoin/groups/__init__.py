@@ -131,15 +131,13 @@ class GroupManager(object):
 
     def update_cache(self):
         for backend in self._backends:
-            try:
-                backend.update_cache()
-            except AttributeError:
-                pass
+            update_cache = getattr(backend, 'update_cache', None)
+            if callable(update_cache):
+                update_cache()
+
 
     def load_cache(self):
         for backend in self._backends:
-            try:
-                backend.load_cache()
-            except AttributeError:
-                # XXX Log that backend doesn't provide this service.
-                pass
+            load_cache = getattr(backend, 'load_cache', None)
+            if callable(load_cache):
+                load_cache()
