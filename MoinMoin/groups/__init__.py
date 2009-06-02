@@ -98,7 +98,7 @@ class GroupManager(object):
         for backend in self._backends:
             if group_name in backend:
                 return backend[group_name]
-        raise KeyError("There is no such group")
+        raise KeyError("There is no such group %s" % group_name)
 
     def __iter__(self):
         """

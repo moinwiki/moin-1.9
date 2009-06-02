@@ -4,114 +4,148 @@
 
     @copyright: 2003-2004 by Juergen Hermann <jh@web.de>,
                 2007 by MoinMoin:ThomasWaldmann
+                2009 by MoinMoin:DmitrijsMilajevs
     @license: GNU GPL, see COPYING for details.
 
-    XXX Update docstrings
 """
 
 import py
 import re
 import shutil
 
+from py.test import raises
+
 from MoinMoin.groups.backends import wiki_group
 from MoinMoin import Page
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.user import User
-from MoinMoin._tests import append_page, become_trusted, create_page, create_random_string_list, nuke_page, nuke_user
+from MoinMoin._tests import append_page, become_trusted, create_page, create_random_string_list, nuke_page, nuke_user, wikiconfig
 from MoinMoin.groups import GroupManager
 
 class TestWikiGroupPage:
+    """
+    Test what backend extracts from a group page and what is ignored.
+    """
+
+    class Config(wikiconfig.Config):
+        def group_manager_init(self, request):
+            return GroupManager(backends=[wiki_group.Backend(request)])
 
     def testCamelCase(self):
-        """ wikidicts: initFromText: CamelCase links """
         text = """
  * CamelCase
 """
-        assert self.getMembers(text) == ['CamelCase']
+        assert u'CamelCase' in self.getGroup(text)
 
     def testExtendedName(self):
-        """ wikidicts: initFromText: extended names """
         text = """
  * extended name
 """
-        assert self.getMembers(text) == ['extended name']
+        assert u'extended name' in self.getGroup(text)
 
     def testExtendedLink(self):
-        """ wikidicts: initFromText: extended link """
         text = """
  * [[extended link]]
 """
-        assert self.getMembers(text) == ['extended link']
+        assert u'extended link' in self.getGroup(text)
 
     def testIgnoreSecondLevelList(self):
-        """ wikidicts: initFromText: ignore non first level items """
         text = """
   * second level
    * third level
     * forth level
      * and then some...
 """
-        assert self.getMembers(text) == []
+        assert len([x for x in self.getGroup(text)]) == 0
 
     def testIgnoreOther(self):
-        """ wikidicts: initFromText: ignore anything but first level list itmes """
         text = """
 = ignore this =
  * take this
 
 Ignore previous line and this text.
 """
-        assert self.getMembers(text) == ['take this']
+        assert u'take this' in self.getGroup(text)
 
     def testStripWhitespace(self):
-        """ wikidicts: initFromText: strip whitespace around items """
         text = """
  *   take this
 """
-        assert self.getMembers(text) == ['take this']
+        assert u'take this' in self.getGroup(text)
 
-    def getMembers(self, text):
-        group = wiki_group.Group(self.request, '')
-        group.initFromText(text)
-        return group.members()
+    def getGroup(self, text):
+        request = self.request
+        become_trusted(request)
+        create_page(request, u'SomeTestGroup', text)
+        group = request.groups[u'SomeTestGroup']
+        nuke_page(request, u'SomeTestGroup')
+        return group
 
 
 class TestWikiGroupBackend:
 
-    from MoinMoin._tests import wikiconfig
     class Config(wikiconfig.Config):
         def group_manager_init(self, request):
             return GroupManager(backends=[wiki_group.Backend(request)])
 
-    def testSystemPagesGroupInDicts(self):
-        """ wikidict: names in SystemPagesGroup should be in request.dicts
+    def setup_method(self, method):
 
-        Get a list of all pages, and check that the dicts list all of them.
+        become_trusted(self.request)
 
-        Assume that the SystemPagesGroup is in the data or the underlay dir.
-        """
-        assert Page.Page(self.request, 'SystemPagesGroup').exists(), "SystemPagesGroup is missing, Can't run test"
-        systemPages = wiki_group.Group(self.request, 'SystemPagesGroup')
-        #print repr(systemPages)
-        #print repr(self.request.dicts['SystemPagesGroup'])
-        for member in systemPages.members():
-            assert member in self.request.groups[u'SystemPagesGroup'], '%s should be in request.dict' % member
+        self.wiki_group_page_name = u'TestWikiGroup'
+        wiki_group_page_text = u"""
+ * Apple
+ * Banana
+ * OtherGroup"""
+        create_page(self.request, self.wiki_group_page_name, wiki_group_page_text)
 
-        assert 'SystemPagesInEnglishGroup' in self.request.groups
-        assert 'RecentChanges' in self.request.groups[u'SystemPagesGroup']
-        assert 'HelpContents' in self.request.groups[u'SystemPagesGroup']
+        self.other_group_page_name = u'OtherGroup'
+        other_group_page_text = u"""
+ * Admin
+ * Editor
+ * Apple"""
+        create_page(self.request, self.other_group_page_name, other_group_page_text)
+
+        self.third_group_page_name = u'ThirdGroup'
+        third_group_page_text = u' * Other'
+        create_page(self.request, self.third_group_page_name, third_group_page_text)
+
+    def teardown_method(self, method):
+        become_trusted(self.request)
+        nuke_page(self.request, self.wiki_group_page_name)
+        nuke_page(self.request, self.other_group_page_name)
+        nuke_page(self.request, self.third_group_page_name)
+
+    def testContainment(self):
+        groups = self.request.groups
+
+        assert u'Banana' in groups[u'TestWikiGroup']
+        assert u'Apple' in groups[u'TestWikiGroup']
+
+        assert u'Apple' in groups[u'OtherGroup']
+        assert u'Admin' in groups[u'OtherGroup']
+
+        apple_groups = groups.membergroups(u'Apple')
+        assert 2 == len(apple_groups), 'Groups must be automatically expanded'
+        assert u'TestWikiGroup' in apple_groups
+        assert u'OtherGroup' in apple_groups
+        assert u'ThirdGroup' not in apple_groups
+
+        raises(KeyError, lambda: groups[u'NotExistingssssGroup'])
+
+        assert u'ThirdGroup' in groups
 
     def testRenameGroupPage(self):
         """
-         tests if the dict cache for groups is refreshed after renaming a Group page
+         tests if the dict cache for groups is refreshed after
+         renaming a Group page
         """
         request = self.request
         become_trusted(request)
+
         page = create_page(request, u'SomeGroup', u" * ExampleUser")
         page.renamePage('AnotherGroup')
-        group = wiki_group.Group(request, '')
-        isgroup = request.cfg.cache.page_group_regexact.search
-        grouppages = request.rootpage.getPageList(user='', filter=isgroup)
+
         result = u'ExampleUser' in request.groups[u'AnotherGroup']
         nuke_page(request, u'AnotherGroup')
 
@@ -123,12 +157,12 @@ class TestWikiGroupBackend:
         """
         request = self.request
         become_trusted(request)
+
         page = create_page(request, u'SomeGroup', u" * ExampleUser")
-        page.copyPage(u'OtherGroup')
-        group = wiki_group.Group(request, '')
-        isgroup = request.cfg.cache.page_group_regexact.search
-        grouppages = request.rootpage.getPageList(user='', filter=isgroup)
-        result = u'ExampleUser' in request.groups[u'OtherGroup']
+        page.copyPage(u'SomeOtherGroup')
+
+        result = u'ExampleUser' in request.groups[u'SomeOtherGroup']
+
         nuke_page(request, u'OtherGroup')
         nuke_page(request, u'SomeGroup')
 
@@ -136,7 +170,8 @@ class TestWikiGroupBackend:
 
     def testAppendingGroupPage(self):
         """
-         tests scalability by appending a name to a large list of group members
+         tests scalability by appending a name to a large list of
+         group members
         """
         # long list of users
         page_content = [u" * %s" % member for member in create_random_string_list(length=15, count=30000)]
@@ -152,7 +187,8 @@ class TestWikiGroupBackend:
 
     def testUserAppendingGroupPage(self):
         """
-         tests appending a username to a large list of group members and user creation
+         tests appending a username to a large list of group members
+         and user creation
         """
         # long list of users
         page_content = [u" * %s" % member for member in create_random_string_list()]
@@ -175,7 +211,8 @@ class TestWikiGroupBackend:
 
     def testMemberRemovedFromGroupPage(self):
         """
-         tests appending a member to a large list of group members and recreating the page without the member
+         tests appending a member to a large list of group members and
+         recreating the page without the member
         """
         # long list of users
         page_content = [u" * %s" % member for member in create_random_string_list()]
