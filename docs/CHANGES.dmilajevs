@@ -3,5 +3,6 @@ Version 1.9-groups-dmilajevs:
    New features:
    * Group backends. Group definitions can be stored outside of MoinMoin.
    * MoinMoin.security.AccessControlList works with the new GroupManager.
-   * GroupDict became MoinMoin.groups.backends.wiki_pages.Backend
+   * GroupDict became MoinMoin.groups.backends.wiki_pages.Backend.
+   * wikiconfig_groups.py is used for the groups-related configuration.
 
