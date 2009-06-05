@@ -195,9 +195,11 @@ def macro_EmbedObject(macro, target=wikiutil.required_arg(unicode), pagename=Non
 }
 
     elif mt.major == 'application':
-        # workaround for the acroread not knowing the size to embed
+        # workaround for the acroread browser plugin not knowing the size to embed
+        # we use a width of 100% for the case that there is no width given.
+        # A height of 100% gives a fullscreen pdf file view without embedding it into the wikicontent.
         if mt.minor == 'pdf':
-            width = width or '800px'
+            width = width or '100%'
             height = height or '800px'
 
         embed_src = '''

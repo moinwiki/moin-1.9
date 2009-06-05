@@ -48,8 +48,11 @@ General syntax: moin [options] maint mkpagepacks [mkpagepacks-options]
         """ Calculates which pages should go into which package. """
         request = self.request
 
+        all_pages = set(request.rootpage.getPageList())
+        packaged_pages = set()
+
         languages = i18n.wikiLanguages()
-        pageset_names = ['all_pages', ] # TODO: refine later
+        pageset_names = i18n.strings.pagesets
         pageSets = {}
         for lang in languages:
             def trans(text, request=request, lang=lang, **kw):
@@ -71,7 +74,10 @@ General syntax: moin [options] maint mkpagepacks [mkpagepacks-options]
                 if pageset:
                     print key, len(pageset)
                     pageSets[key] = pageset
+                    packaged_pages |= pageset
 
+        not_packaged_pages = all_pages - packaged_pages
+        pageSets['00_needs_fixing'] = not_packaged_pages
         return pageSets
 
     def packagePages(self, pagelist, filename, function):
@@ -139,11 +145,11 @@ General syntax: moin [options] maint mkpagepacks [mkpagepacks-options]
         pageSets = self.buildPageSets()
 
         print "Creating packages ..."
-        generate_filename = lambda name: os.path.join('tests', 'wiki', 'underlay', 'pages', 'SystemPagesSetup', 'attachments', '%s.zip' % name)
+        generate_filename = lambda name: os.path.join('tests', 'wiki', 'underlay', 'pages', 'LanguageSetup', 'attachments', '%s.zip' % name)
         [self.packagePages(list(pages), generate_filename(name), "ReplaceUnderlay") for name, pages in pageSets.items()]
 
         print "Removing pagedirs of packaged pages ..."
-        dontkill = set(['SystemPagesSetup'])
+        dontkill = set(['LanguageSetup'])
         [self.removePages(list(pages - dontkill)) for name, pages in pageSets.items()]
 
         print "Finished."
