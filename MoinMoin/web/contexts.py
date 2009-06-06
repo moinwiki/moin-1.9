@@ -377,6 +377,13 @@ class AuxilaryMixin(object):
         return dicts
     dicts = EnvironProxy(dicts)
 
+    def groups(self):
+        """ Lazy initialize the groups on the first access """
+        groups = self.request.cfg.group_manager_init(self)
+        groups.load_cache()
+        return groups
+    groups = EnvironProxy(groups)
+
     def reset(self):
         self.current_lang = self.cfg.language_default
         if hasattr(self, '_fmt_hd_counters'):
