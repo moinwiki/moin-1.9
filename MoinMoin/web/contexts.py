@@ -369,12 +369,13 @@ class AuxilaryMixin(object):
         return UniqueIDGenerator(pagename=pagename)
     uid_generator = EnvironProxy(uid_generator)
 
-    def groups(self):
-        """ Lazy initialize the groups on the first access """
-        groups = self.request.cfg.group_manager_init(self)
-        groups.load_cache()
-        return groups
-    groups = EnvironProxy(groups)
+    def dicts(self):
+        """ Lazy initialize the dicts on the first access """
+        from MoinMoin import wikidicts
+        dicts = wikidicts.GroupDict(self)
+        dicts.load_dicts()
+        return dicts
+    dicts = EnvironProxy(dicts)
 
     def reset(self):
         self.current_lang = self.cfg.language_default

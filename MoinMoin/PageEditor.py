@@ -782,7 +782,7 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
             # Users can define their own variables via
             # UserHomepage/MyDict, which override the default variables.
             userDictPage = u.name + "/MyDict"
-            if userDictPage in request.groups:
+            if request.dicts.has_dict(userDictPage):
                 variables.update(request.dicts.dict(userDictPage))
 
         for name in variables:
