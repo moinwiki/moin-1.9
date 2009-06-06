@@ -98,7 +98,7 @@ class GroupManager(object):
         for backend in self._backends:
             if group_name in backend:
                 return backend[group_name]
-        raise KeyError("There is no such group")
+        raise KeyError("There is no such group %s" % group_name)
 
     def __iter__(self):
         """
@@ -128,3 +128,16 @@ class GroupManager(object):
         """
         return [group_name for group_name in self
                          if member in self[group_name]]
+
+    def update_cache(self):
+        for backend in self._backends:
+            update_cache = getattr(backend, 'update_cache', None)
+            if callable(update_cache):
+                update_cache()
+
+
+    def load_cache(self):
+        for backend in self._backends:
+            load_cache = getattr(backend, 'load_cache', None)
+            if callable(load_cache):
+                load_cache()
