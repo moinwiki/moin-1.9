@@ -10,11 +10,8 @@
 
 """
 
-import py
-import re
-import shutil
-
 from py.test import raises
+import re, shutil
 
 from MoinMoin.groups.backends import wiki_group
 from MoinMoin import Page, security
@@ -89,62 +86,59 @@ class TestWikiGroupBackend:
         def group_manager_init(self, request):
             return GroupManager(backends=[wiki_group.Backend(request)])
 
-    def setup_method(self, method):
-
+    def setup_class(self):
         become_trusted(self.request)
 
-        self.wiki_group_page_name = u'TestWikiGroup'
-        wiki_group_page_text = u"""
- * Apple
- * Banana
- * OtherGroup"""
-        create_page(self.request, self.wiki_group_page_name, wiki_group_page_text)
+        test_groups = {u'EditorGroup': [u'AdminGroup', u'John', u'JoeDoe', u'Editor'],
+                            u'AdminGroup': [u'Admin', u'Admin2', u'John'],
+                            u'OtherGroup': [u'SomethingOther']}
 
-        self.other_group_page_name = u'OtherGroup'
-        other_group_page_text = u"""
- * Admin
- * Editor
- * Apple"""
-        create_page(self.request, self.other_group_page_name, other_group_page_text)
+        self.expanded_groups = {u'EditorGroup': [u'Admin', u'Admin2', u'John',
+                                                 u'JoeDoe', u'Editor'],
+                                u'AdminGroup': [u'Admin', u'Admin2', u'John'],
+                                u'OtherGroup': [u'SomethingOther']}
 
-        self.third_group_page_name = u'ThirdGroup'
-        third_group_page_text = u' * Other'
-        create_page(self.request, self.third_group_page_name, third_group_page_text)
+        for (group, members) in test_groups.iteritems():
+            page_text = ' * %s' % '\n * '.join(members)
+            create_page(self.request, group, page_text)
 
-    def teardown_method(self, method):
+    def teardown_class(self):
         become_trusted(self.request)
-        nuke_page(self.request, self.wiki_group_page_name)
-        nuke_page(self.request, self.other_group_page_name)
-        nuke_page(self.request, self.third_group_page_name)
 
+        for group in self.expanded_groups:
+            nuke_page(self.request, group)
+        
     def test_contains(self):
         """
         Test group_wiki Backend and Group containment methods.
         """
         groups = self.request.groups
 
-        assert u'TestWikiGroup' in groups
-        assert u'Banana' in groups[u'TestWikiGroup']
-        assert u'Apple' in groups[u'TestWikiGroup']
-        assert u'Admin' in groups[u'TestWikiGroup'], 'Groups must be automatically expanded'
+        for (group, members) in self.expanded_groups.iteritems():
+            print group
+            assert group in groups
+            for member in members:
+                assert member in groups[group]
 
-        assert u'OtherGroup' in groups
-        assert u'Apple' in groups[u'OtherGroup']
-        assert u'Admin' in groups[u'OtherGroup']
-
-        assert u'NotExistingGroup' not in groups
         raises(KeyError, lambda: groups[u'NotExistingGroup'])
 
-        assert u'ThirdGroup' in groups
+    def test_iter(self):
+        groups = self.request.groups
+
+        for (group, members) in self.expanded_groups.iteritems():
+            returned_members = [x for x in groups[group]]
+            assert len(returned_members) == len(members)
+            for member in members:
+                assert member in returned_members
 
     def test_membergroups(self):
         groups = self.request.groups
 
-        apple_groups = groups.membergroups(u'Apple')
-        assert 2 == len(apple_groups)
-        assert u'TestWikiGroup' in apple_groups
-        assert u'OtherGroup' in apple_groups
-        assert u'ThirdGroup' not in apple_groups
+        john_groups = groups.membergroups(u'John')
+        assert 2 == len(john_groups)
+        assert u'EditorGroup' in john_groups
+        assert u'AdminGroup' in john_groups
+        assert u'ThirdGroup' not in john_groups
 
     def test_rename_group_page(self):
         """
@@ -334,18 +328,20 @@ class TestWikiGroupBackend:
         request = self.request
         become_trusted(request)
 
-        acl_rights = ["OtherGroup:read,write,delete,admin All:read"]
+        acl_rights = ["EditorGroup:read,write,delete,admin All:read"]
         acl = security.AccessControlList(request.cfg, acl_rights)
 
-        assert acl.may(request, u"Editor", "read")
-        assert acl.may(request, u"Editor", "write")
-        assert acl.may(request, u"Editor", "delete")
-        assert acl.may(request, u"Editor", "admin")
 
-        assert acl.may(request, u"Banana", "read")
-        assert not acl.may(request, u"Banana", "write")
-        assert not acl.may(request, u"Banana", "delete")
-        assert not acl.may(request, u"Banana", "admin")
+        for member in self.expanded_groups[u'EditorGroup']:
+            assert acl.may(request, member, "read")
+            assert acl.may(request, member, "write")
+            assert acl.may(request, member, "delete")
+            assert acl.may(request, member, "admin")
+
+        assert acl.may(request, u"Someone", "read")
+        assert not acl.may(request, u"Someone", "write")
+        assert not acl.may(request, u"Someone", "delete")
+        assert not acl.may(request, u"Someone", "admin")
 
 
 coverage_modules = ['MoinMoin.groups.backends.wiki_group']

@@ -32,6 +32,8 @@ class Group(object):
         @parm request: request object
         @parm group_name: group name (== group page name)
         """
+        self.request = request
+
         page = Page(request, group_name)
         if page.exists():
             arena = 'pagegroups'
@@ -55,11 +57,35 @@ class Group(object):
             # we have no such group
             raise KeyError
 
+    def _expand_group(self, group_name):
+        groups = self.request.groups
+        expanded_groups = set(group_name)
+        members = set()
+
+        for member in groups[group_name]:
+            if member not in expanded_groups and member in groups:
+                expanded_groups.add(member)
+                members.update(self._expand_group(member))
+            else:
+                members.add(member)
+        return members
+
     def _parse_page(self, text):
         """
         Parse <group_name> page and return members.
         """
-        return [match.group('member') for match in self.group_page_parse_re.finditer(text)]
+        groups = self.request.groups
+        unexpanded_members = [match.group('member') for match in self.group_page_parse_re.finditer(text)]
+
+        members = set()
+        # Expand possible recursive groups
+        for member in unexpanded_members:
+            if member in groups:
+                members.update(self._expand_group(member))
+            else:
+                members.add(member)
+
+        return members
 
     def __contains__(self, name):
         """
