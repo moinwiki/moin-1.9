@@ -107,7 +107,7 @@ class TestWikiGroupBackend:
 
         for group in self.expanded_groups:
             nuke_page(self.request, group)
-        
+
     def test_contains(self):
         """
         Test group_wiki Backend and Group containment methods.
