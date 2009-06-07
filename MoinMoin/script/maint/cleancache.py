@@ -56,7 +56,7 @@ General syntax: moin [options] maint cleancache
             ('charts', 'pagehits'),
             ('charts', 'useragents'),
             ('user', 'name2id'),
-            ('wikidicts', 'dicts_groups'),
+            ('wikidicts', 'dicts'),
         ]
         for arena, key in arena_key_list:
             caching.CacheEntry(request, arena, key, scope='wiki').remove()

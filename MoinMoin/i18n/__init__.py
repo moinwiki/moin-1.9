@@ -304,8 +304,8 @@ def getText(original, request, lang, **kw):
             language = languages[lang]['x-language-in-english']
             dictpagename = "%sDict" % language.replace(' ', '')
             dicts = request.dicts
-            if dicts.has_dict(dictpagename):
-                userdict = dicts.dict(dictpagename)
+            if dictpagename in dicts:
+                userdict = dicts[dictpagename]
                 translated = userdict[original]
             else:
                 raise KeyError

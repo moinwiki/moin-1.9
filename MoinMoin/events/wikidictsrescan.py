@@ -36,7 +36,7 @@ def handle_groupsdicts_changed(event):
 
     logging.debug("groupsdicts changed: %r, scan_dicts started", page.page_name)
     del request.dicts
-    gd = wikidicts.GroupDict(request)
+    gd = wikidicts.DictDict(request)
     gd.scan_dicts()
     logging.debug("groupsdicts changed: scan_dicts finished")
 
