@@ -13,10 +13,7 @@ from py.test import raises
 from MoinMoin.groups import BackendManager, GroupManager
 
 
-class TestGroupManagerAPI(object):
-    """
-    Performs test of the API of GroupManager.
-    """
+class TestGroupManager(object):
 
     from MoinMoin._tests import wikiconfig
     class Config(wikiconfig.Config):
@@ -30,8 +27,8 @@ class TestGroupManagerAPI(object):
 
         user_group = frozenset([u'JohnDoe', u'Bob', u'Joe'])
         city_group = frozenset([u'Bolzano', u'Riga', u'London'])
-        # Suppose, someone hacked second backend
-        # and added himself to AdminGroup
+
+        # Suppose, someone hacked second backend and added himself to AdminGroup
         second_admin_group = frozenset([u'TheHacker'])
 
         second_backend_groups = {u'UserGroup': user_group,
@@ -48,33 +45,25 @@ class TestGroupManagerAPI(object):
         self.groups = self.request.groups
 
     def test_getitem(self):
-        """
-        Tests __getitem__ API method. It should return a group by its name.
-        """
         assert self.request.cfg.fruit_group == self.groups[u'FruitGroup']
         raises(KeyError, lambda: self.groups[u'not existing group'])
 
     def test_clashed_getitem(self):
         """
-        This test check situation when groups with a same name are
-        defined in several backends. In this case, the only one
-        backend must be taken in consideration, that backend which is
-        defined first in the backends list.
+        Check the case when groups of the same name are defined in multiple
+        backends. __getitem__ should return the first match (backends are
+        considered in the order they are given in the backends list).
         """
         admin_group = self.groups[u'AdminGroup']
 
         assert self.request.cfg.admin_group == admin_group
 
-        # Nevertheless, TheHacker added himself to the second backend,
-        # it must not be taken into consideration, because AdminGroup is defined
-        # in first backend
+        # TheHacker added himself to the second backend, but that must not be
+        # taken into consideration, because AdminGroup is defined in first
+        # backend and we only use the first match.
         assert u'TheHacker' not in admin_group
 
     def test_iter(self):
-        """
-        Tests __iter__ API method. It should iterate over all groups
-        available via backends. It should avoid group name clashes.
-        """
         all_group_names = [group_name for group_name in self.groups]
 
         assert 5 == len(all_group_names)
@@ -82,19 +71,10 @@ class TestGroupManagerAPI(object):
         assert len(set(all_group_names)) == len(all_group_names)
 
     def test_contains(self):
-        """
-        Tests __contains__ API method. It should check if a group
-        called group_name is available via some backend.
-        """
         assert u'UserGroup' in self.groups
         assert u'not existing group' not in self.groups
 
     def test_membergroups(self):
-        """
-        Tests membergroups API method. It should lists all groups
-        where member is a member of. It should return a list of group
-        names.
-        """
         apple_groups = self.groups.membergroups(u'Apple')
         assert 1 == len(apple_groups)
         assert u'FruitGroup' in apple_groups
