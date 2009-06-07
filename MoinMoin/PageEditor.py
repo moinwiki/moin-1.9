@@ -782,8 +782,8 @@ Try a different name.""", wiki=True) % (wikiutil.escape(newpagename), )
             # Users can define their own variables via
             # UserHomepage/MyDict, which override the default variables.
             userDictPage = u.name + "/MyDict"
-            if request.dicts.has_dict(userDictPage):
-                variables.update(request.dicts.dict(userDictPage))
+            if userDictPage in request.dicts:
+                variables.update(request.dicts[userDictPage])
 
         for name in variables:
             text = text.replace('@%s@' % name, variables[name])
