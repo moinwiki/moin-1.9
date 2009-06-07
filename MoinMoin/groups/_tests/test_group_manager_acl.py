@@ -13,7 +13,7 @@ from MoinMoin.groups import BackendManager, GroupManager
 
 class TestGroupManagerACL:
     """
-    Test how GroupManager works with acl code.
+    Test how GroupManager works with the acl code.
     """
 
     from MoinMoin._tests import wikiconfig
@@ -42,3 +42,4 @@ class TestGroupManagerACL:
 
 
 coverage_modules = ['MoinMoin.groups']
+

@@ -12,10 +12,7 @@ from py.test import raises
 from MoinMoin.groups import BackendManager
 
 
-class TestBackendManagerAPI(object):
-    """
-    This tastcase test Backend manager API
-    """
+class TestBackendManager(object):
 
     def setup_method(self, method):
         self.admin_group = frozenset([u'Admin', u'JohnDoe'])
@@ -29,30 +26,18 @@ class TestBackendManagerAPI(object):
         self.group_backend = BackendManager(backend=groups)
 
     def test_getitem(self):
-        """
-        Test of the __getitem__ API method. It should return a group
-        object by the group name.
-        """
         assert self.admin_group == self.group_backend[u'AdminGroup']
         assert self.fruit_group == self.group_backend[u'FruitGroup']
 
         raises(KeyError, lambda: self.group_backend[u'not existing group'])
 
     def test_contains(self):
-        """
-        Test of the __contains__ API method. It checks if a group is
-        avaliable via this backend. Check is done by group's name.
-        """
         assert u'AdminGroup' in self.group_backend
         assert u'FruitGroup' in self.group_backend
 
         assert u'not existing group' not in self.group_backend
 
     def  test_membergroups(self):
-        """
-        Test of membergroups API method. It lists all groups where
-        member is a member of. It should  return a list of group names.
-        """
         apple_groups = self.group_backend.membergroups(u'Apple')
         assert 1 == len(apple_groups)
         assert u'FruitGroup' in apple_groups
@@ -67,28 +52,28 @@ class TestBackendManagerAPI(object):
 
 class TestManagerMapping(object):
     """
-    This class tests mapping of the group names from a backend to the
-    moin and from the moin to a backend.
+    Test group name mapping:
+        moin -> backend (e.g. "AdminGroup" -> "Admin")
+        backend -> moin (e.g. "Admin" -> "AdminGroup")
 
-    Here the simplest situation is considered. Moin expect groups to
-    be named as *Group, but backend stores group names without this prefix.
-
-    When group names are passed or retrieved from the backend they
-    should be mapped.
+    Moin expects group names to match the page_group_regex (e.g. "AdminGroup"),
+    but a backend might want to use different group names (e.g. just "Admin").
     """
 
     def setup_class(self):
         self.admin_group = frozenset([u'Admin', u'JohnDoe'])
         self.editor_group = frozenset([u'MainEditor', u'JohnDoe'])
 
-        # Group names here do not follow moin convention: they do not
-        # have group prefix.
+        # These backend group names do not follow moin convention:
         groups = {u'Admin': self.admin_group,
                   u'Editor': self.editor_group}
 
-        # Simply drop last five letters, what is length of word "Group"
+        # Simply drop the "Group" postfix for group names given to a backend.
+        # Note: in the real world, this would not work good enough:
         mapper_to_backend = lambda group_name: group_name[:-5]
-        # Add "Group" postfix for every group name received from a backend
+
+        # Add "Group" postfix for group names received from a backend.
+        # Note: in the real world, this would not work good enough:
         mapper_from_backend = lambda group_name: "%sGroup" % group_name
 
         self.group_backend = BackendManager(backend=groups,

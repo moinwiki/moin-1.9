@@ -1,9 +1,6 @@
 # -*- coding: iso-8859-1 -*-
-
 """
-MoinMoin - group definition access via various backends.
-
-TODO Group name mapping for the BackendManager.
+MoinMoin - group access via various backends.
 
 @copyright: 2009 DmitrijsMilajevs
 @license: GPL, see COPYING for details
@@ -12,31 +9,26 @@ TODO Group name mapping for the BackendManager.
 
 class BackendManager(object):
     """
-    BackendManager maps string to the Group object. String represents
-    group name. It provides access to groups of specific backend.
+    A BackendManager maps a group name to a Group object.
+    It provides access to groups of one specific backend.
     """
 
     def __init__(self, backend, mapper_to_backend=lambda x: x, mapper_from_backend=lambda x: x):
         """
-        Creates backend manager object.
+        Create backend manager object.
 
         XXX Decorators can be used for group name mapping.
 
         @param request: request object.
 
-        @type backend: group backend object.
-        @param backend: the backend which provides access to the group
-        definitions.
+        @param backend: the group backend which provides access to the
+                        group definitions.
 
-        @type mapper_to_backend: function which takes one string as an
-        argument and returns a string
-        @param mapper_to_backend: function which maps moin group
-        name to the backend group name
+        @param mapper_to_backend: a function mapping the moin group
+                                  name to the backend group name
 
-        @type mapper_from_backend: function which takes one string as an
-        argument and returns a string
-        @param mapper_from_backend: function which maps backend group
-        name to the moin group name
+        @param mapper_from_backend: a function mapping the backend
+                                    group name to the moin group name
         """
         self._backend = backend
         self.mapper_to_backend = mapper_to_backend
@@ -44,33 +36,32 @@ class BackendManager(object):
 
     def __getitem__(self, group_name):
         """
-        Selection of a group by its name.
+        Get a group by its name.
 
-        @type group_name: unicode string.
-        @param group_name: name of the group which object to select.
+        @param group_name: name of the group [unicode]
         """
         return self._backend[self.mapper_to_backend(group_name)]
 
     def __iter__(self):
         """
-        Iteration over group names.
+        Iterate over group names of the groups defined in this backend.
         """
         return (self.mapper_from_backend(group_name) for group_name in self._backend)
 
     def __contains__(self, group_name):
         """
-        Check if a group called group name is avaliable via this backend.
+        Check if a group called group_name is available in this backend.
 
-        @type group_name: unicode string.
-        @param group_name: name of the group which is checked for an containment.
+        @param group_name: name of the group [unicode]
         """
         return self.mapper_to_backend(group_name) in self._backend
 
     def membergroups(self, member):
         """
-        List all groups where member is a member of.
-        @rtype: list of unicode strings
-        @return: list of group names in which member takes part in
+        List all group names of the groups where <member> is a member of.
+
+        @param member: member name [unicode]
+        @return: list of group names [unicode]
         """
         return [group_name for group_name in self
                 if member in self[group_name]]
@@ -85,15 +76,16 @@ class GroupManager(object):
         """
         Create a group manager object.
 
-        @type backends: list of objects.
-        @param backend: group backends which are used to get access to the
-        group definitions.
+        @param backends: list of group backends which are used to get
+                         access to the group definitions.
         """
         self._backends = backends
 
     def __getitem__(self, group_name):
         """
-        Selection of a group by its name.
+        Get a group by its name. First match counts.
+
+        @param group_name: name of the group [unicode]
         """
         for backend in self._backends:
             if group_name in backend:
@@ -102,7 +94,7 @@ class GroupManager(object):
 
     def __iter__(self):
         """
-        Iteration over groups names.
+        Iterate over group names in all backends (filtering duplicates).
         """
         yielded_groups = set()
 
@@ -114,20 +106,24 @@ class GroupManager(object):
 
     def __contains__(self, group_name):
         """
-        Check if a group called group_name is defined.
+        Check if a group called group_name is available in any of the backends.
+
+        @param group_name: name of the group [unicode]
         """
         for backend in self._backends:
             if group_name in backend:
                 return True
+        return False
 
     def membergroups(self, member):
         """
-        List all groups where member is a member of.
-        @rtype: list of unicode strings
-        @return: list of group names in which member takes part in
+        List all group names of the groups where <member> is a member of.
+
+        @param member: member name [unicode]
+        @return: list of group names [unicode]
         """
         return [group_name for group_name in self
-                         if member in self[group_name]]
+                if member in self[group_name]]
 
     def update_cache(self):
         for backend in self._backends:
