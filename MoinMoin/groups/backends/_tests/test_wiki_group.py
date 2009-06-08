@@ -90,13 +90,19 @@ class TestWikiGroupBackend:
         become_trusted(self.request)
 
         test_groups = {u'EditorGroup': [u'AdminGroup', u'John', u'JoeDoe', u'Editor'],
-                            u'AdminGroup': [u'Admin', u'Admin2', u'John'],
-                            u'OtherGroup': [u'SomethingOther']}
+                       u'AdminGroup': [u'Admin', u'Admin2', u'John'],
+                       u'OtherGroup': [u'SomethingOther'],
+                       u'RecursiveGroup': [u'Something', u'OtherRecursiveGroup'],
+                       u'OtherRecursiveGroup': [u'RecursiveGroup', u'Anything'],
+                       u'ThirdRecursiveGroup': [u'ThirdRecursiveGroup', u'Banana']}
 
         self.expanded_groups = {u'EditorGroup': [u'Admin', u'Admin2', u'John',
                                                  u'JoeDoe', u'Editor'],
                                 u'AdminGroup': [u'Admin', u'Admin2', u'John'],
-                                u'OtherGroup': [u'SomethingOther']}
+                                u'OtherGroup': [u'SomethingOther'],
+                                u'RecursiveGroup': [u'Anything', u'Something'],
+                                u'OtherRecursiveGroup': [u'Anything', u'Something'],
+                                u'ThirdRecursiveGroup': [u'Banana']}
 
         for (group, members) in test_groups.iteritems():
             page_text = ' * %s' % '\n * '.join(members)
