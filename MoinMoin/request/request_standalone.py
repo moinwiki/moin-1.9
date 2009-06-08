@@ -7,11 +7,18 @@
     @license: GNU GPL, see COPYING for details.
 """
 import cgi
+import socket
+import errno
 
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
 from MoinMoin.request import RequestBase, RemoteClosedConnection
+
+# socket errors we just map to RemoteClosedConnection:
+socket_errors = [errno.ECONNABORTED, errno.ECONNRESET,
+                 errno.EPIPE, ]
+
 
 class Request(RequestBase):
     """ specialized on StandAlone Server (MoinMoin.server.server_standalone) requests """
@@ -81,15 +88,22 @@ class Request(RequestBase):
         data = self.encode(data)
         try:
             self.wfile.write(data)
-        except Exception:
-            raise RemoteClosedConnection()
+        except socket.error, err:
+            if err.args[0] in socket_errors:
+                raise RemoteClosedConnection()
+            raise
 
     def flush(self):
-        self.wfile.flush()
+        try:
+            self.wfile.flush()
+        except socket.error, err:
+            if err.args[0] in socket_errors:
+                raise RemoteClosedConnection()
+            raise
 
     def finish(self):
         RequestBase.finish(self)
-        self.wfile.flush()
+        self.flush()
 
     # Headers ----------------------------------------------------------
 
@@ -99,10 +113,15 @@ class Request(RequestBase):
         status = st_header.split(':', 1)[1].lstrip()
         status_code, status_msg = status.split(' ', 1)
         status_code = int(status_code)
-        self.sareq.send_response(status_code, status_msg)
-        for header in other_headers:
-            key, value = header.split(':', 1)
-            value = value.lstrip()
-            self.sareq.send_header(key, value)
-        self.sareq.end_headers()
+        try:
+            self.sareq.send_response(status_code, status_msg)
+            for header in other_headers:
+                key, value = header.split(':', 1)
+                value = value.lstrip()
+                self.sareq.send_header(key, value)
+            self.sareq.end_headers()
+        except socket.error, err:
+            if err.args[0] in socket_errors:
+                raise RemoteClosedConnection()
+            raise
 

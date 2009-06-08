@@ -158,4 +158,42 @@ class TestWikiConversion:
         for data, renames, expected in tests:
             assert convert_wiki(request, pagename, data, renames) == expected
 
+    def test_parser(self):
+        #py.test.skip("not wanted right now")
+        markup_15 = u"""\
+{{{#!html
+...
+}}}
+
+"""
+        expected_markup_160 = u"""\
+{{{#!html
+...
+}}}
+
+"""
+        markup_160 = convert_wiki(self.request, u'TestPage', markup_15, {})
+        #print markup_15 ; print "---" ; print markup_160
+        markup_160 = markup_160.replace('\r\n', '\n')
+        assert markup_160 == expected_markup_160
+
+
+    def test_pre(self):
+        #py.test.skip("not wanted right now")
+        markup_15 = u"""\
+{{{
+...
+}}}
+
+"""
+        expected_markup_160 = u"""\
+{{{
+...
+}}}
+
+"""
+        markup_160 = convert_wiki(self.request, u'TestPage', markup_15, {})
+        #print markup_15 ; print "---" ; print markup_160
+        markup_160 = markup_160.replace('\r\n', '\n')
+        assert markup_160 == expected_markup_160
 

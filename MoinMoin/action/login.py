@@ -64,13 +64,9 @@ class LoginHandler:
         if islogin: # user pressed login button
             if request._login_multistage:
                 return self.handle_multistage()
-            error = []
             if hasattr(request, '_login_messages'):
                 for msg in request._login_messages:
-                    error.append('<p>')
-                    error.append(msg)
-                error = ''.join(error)
-            request.theme.add_msg(error, "error")
+                    request.theme.add_msg(msg, "error")
             return self.page.send_page()
 
         else: # show login form

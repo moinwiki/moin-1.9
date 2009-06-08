@@ -38,6 +38,7 @@ class ParserTestCase(object):
         formatter.setPage(page)
         page.formatter = formatter
         request.formatter = formatter
+        request.page = page
         parser = CreoleParser(body, request, line_anchors=False)
         formatter.startContent('') # needed for _include_stack init
         output = request.redirectedOutput(parser.format, formatter)
@@ -83,15 +84,6 @@ class TestParagraphs(ParserTestCase):
 class TestHeadings(ParserTestCase):
     """ Test various heading problems """
 
-    def class_setup(self):
-        """ Require show_section_numbers = 0 to workaround counter
-        global state saved in request.
-        """
-        self.config = self.TestConfig(show_section_numbers=0)
-
-    def class_teardown(self):
-        del self.config
-
     def testIgnoreWhiteSpaceAroundHeadingText(self):
         """ parser.wiki: ignore white space around heading text
 
@@ -111,15 +103,6 @@ class TestHeadings(ParserTestCase):
 
 
 class TestTOC(ParserTestCase):
-
-    def class_setup(self):
-        """ Require show_section_numbers = 0 to workaround counter
-        global state saved in request.
-        """
-        self.config = self.TestConfig(show_section_numbers=0)
-
-    def class_teardown(self):
-        del self.config
 
     def testHeadingWithWhiteSpace(self):
         """ parser.wiki: TOC links to headings with white space
@@ -357,7 +340,7 @@ You can use {{{brackets}}}
 }}}"""
         output = self.parse(raw)
         output = ''.join(output)
-        assert 'Example </p><pre>You can use {{{brackets}}}</pre>' in output
+        assert 'Example</p><pre>You can use {{{brackets}}}</pre>' in output
 
     def testManyNestingPreBrackets(self):
         """ tests two nestings  ({{{ }}} and {{{ }}}) in one line for the wiki parser
@@ -427,9 +410,7 @@ class TestLinkingMarkup(ParserTestCase):
 
     def testAnchor(self):
         html = self.parse("{{#anchor}}")
-        assert '<a ' in html # must create a link
-        assert 'name="anchor"' in html
-        assert '></a>' in html
+        assert 'id="anchor"' in html
 
 coverage_modules = ['MoinMoin.parser.text_creole']
 

@@ -22,6 +22,10 @@ class HTTPAuth(BaseAuth):
     """ authenticate via http basic/digest/ntlm auth """
     name = 'http'
 
+    def __init__(self, autocreate=False):
+        self.autocreate = autocreate
+        BaseAuth.__init__(self)
+
     def request(self, request, user_obj, **kw):
         u = None
         _ = request.getText
@@ -72,7 +76,7 @@ class HTTPAuth(BaseAuth):
                 u = user.User(request, auth_username=username,
                               auth_method=self.name, auth_attribs=('name', 'password'))
 
-        if u:
+        if u and self.autocreate:
             u.create_or_update()
         if u and u.valid:
             return u, True # True to get other methods called, too
