@@ -16,7 +16,7 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
-Version 1.8.current:
+Version 1.8.4:
   Bug fixes:
     * ACL security: fix bug in hierarchical ACL processing, more restrictive
       sub page ACLs did not work if the current user name did not give a match
