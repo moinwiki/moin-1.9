@@ -41,6 +41,11 @@ class Group(object):
         """
         self.request = request
         self.group_name = group_name
+        self._load_group()
+
+    def _load_group(self):
+        request = self.request
+        group_name = self.group_name
 
         page = Page(request, group_name)
         if page.exists():
@@ -62,8 +67,7 @@ class Group(object):
                 self.members, self.member_groups = self._parse_page(text)
                 cache.update((self.members, self. member_groups))
         else:
-            # we have no such group
-            raise KeyError
+            raise KeyError("There is no such group page %s" % group_name)
 
     def _parse_page(self, text):
         """
@@ -136,7 +140,6 @@ class Group(object):
         for group_name in self.member_groups:
             if group_name not in processed_groups:
                 for member in groups[group_name]._iter(yielded_members, processed_groups):
-                    processed_groups.add(group_name)
                     if member not in yielded_members:
                         yield member
                         yielded_members.add(member)
