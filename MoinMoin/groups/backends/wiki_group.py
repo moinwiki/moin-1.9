@@ -19,33 +19,29 @@ from MoinMoin import caching, wikiutil
 from MoinMoin.Page import Page
 
 
-backend_type = "wiki"
-backend_name= "wiki_group"
-
-
 class Group(object):
-    backend_type = backend_type
-    backend_name = backend_name
 
     # * Member - ignore all but first level list items, strip
     # whitespace, strip free links markup. This is used for parsing
     # pages in order to find group page members
     group_page_parse_re = re.compile(ur'^ \* +(?:\[\[)?(?P<member>.+?)(?:\]\])? *$', re.MULTILINE | re.UNICODE)
 
-    def __init__(self, request, group_name):
+    def __init__(self, request, name, backend):
         """
         Initialize a wiki group.
 
         @parm request: request object
-        @parm group_name: group name (== group page name)
+        @parm name: group name (== group page name)
         """
         self.request = request
-        self.group_name = group_name
+        self.name = name
+        self.backend = backend
+
         self._load_group()
 
     def _load_group(self):
         request = self.request
-        group_name = self.group_name
+        group_name = self.name
 
         page = Page(request, group_name)
         if page.exists():
@@ -98,7 +94,7 @@ class Group(object):
         @param member: member name [unicode]
         @param processed_groups: groups which were checked for containment before [set]
         """
-        processed_groups.add(self.group_name)
+        processed_groups.add(self.name)
 
         if member in self.members:
             return True
@@ -106,7 +102,6 @@ class Group(object):
             groups = self.request.groups
             for group_name in self.member_groups:
                 if group_name not in processed_groups and groups[group_name]._contains(member, processed_groups):
-                    processed_groups.add(group_name)
                     return True
 
         return False
@@ -129,7 +124,7 @@ class Group(object):
         @param yielded_members: members which have been already yielded before [set]
         @param processed_groups: group names which have been iterated before [set]
         """
-        processed_groups.add(self.group_name)
+        processed_groups.add(self.name)
 
         for member in self.members:
             if member not in yielded_members:
@@ -152,14 +147,13 @@ class Group(object):
         return self._iter(set(), set())
 
     def __repr__(self):
-        return "<Group group_name=%s members=%s member_groups=%s>" %(self.group_name,
-                                                                     self.members,
-                                                                     self.member_groups)
+        return "<%s group_name=%s members=%s member_groups=%s>" % (self.__class__,
+                                                                   self.name,
+                                                                   self.members,
+                                                                   self.member_groups)
 
 
 class Backend(object):
-    backend_type = backend_type
-    backend_name = backend_name
 
     def __init__(self, request):
         """
@@ -185,5 +179,5 @@ class Backend(object):
         """
         Return wiki group backend object.
         """
-        return Group(self.request, group_name)
+        return Group(request=self.request, name=group_name, backend=self)
 
