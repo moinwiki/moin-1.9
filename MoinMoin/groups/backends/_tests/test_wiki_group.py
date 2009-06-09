@@ -350,5 +350,63 @@ class TestWikiGroupBackend:
         assert not acl.may(request, u"Someone", "admin")
 
 
+class TestWikiGroupNameMapping(object):
+    """
+    Test group name mapping:
+        moin -> backend (e.g. "AdminGroup" -> "VeryImportantAdminGroup")
+        backend -> moin (e.g. "VeryImportantAdminGroup" -> "AdminGroup")
+
+    Moin expects group names to match the page_group_regex (e.g. "AdminGroup"),
+    but a backend might want to use different group names (e.g. just "Admin").
+    """
+
+    class Config(wikiconfig.Config):
+
+        def group_manager_init(self, request):
+            backend = wiki_group.Backend(request)
+            backend.to_backend_name = lambda group_name: 'VeryImportant%s' % group_name
+            # Get rid of the prefix VeryImportant
+            # Note: In real set up it is more complicated.
+            backend.to_group_name = lambda backend_name: backend_name[13:]
+
+            return GroupManager(backends=[backend])
+
+    def setup_class(self):
+        become_trusted(self.request)
+
+        test_groups = {u'VeryImportantEditorGroup': [u'VeryImportantAdminGroup', u'John', u'JoeDoe', u'Editor'],
+                       u'VeryImportantAdminGroup': [u'Admin', u'Admin2', u'John']}
+
+        self.expanded_groups = {u'EditorGroup': [u'Admin', u'Admin2', u'John',
+                                                 u'JoeDoe', u'Editor'],
+                                u'AdminGroup': [u'Admin', u'Admin2', u'John']}
+
+        for (group, members) in test_groups.iteritems():
+            page_text = ' * %s' % '\n * '.join(members)
+            create_page(self.request, group, page_text)
+
+    def test_contains(self):
+        """
+        Test group_wiki Backend and Group containment methods.
+        """
+        groups = self.request.groups
+
+        for (group, members) in self.expanded_groups.iteritems():
+            print group
+            assert group in groups
+            for member in members:
+                assert member in groups[group]
+
+        raises(KeyError, lambda: groups[u'NotExistingGroup'])
+
+    def test_iter(self):
+        groups = self.request.groups
+
+        for (group, members) in self.expanded_groups.iteritems():
+            returned_members = [x for x in groups[group]]
+            assert len(returned_members) == len(members)
+            for member in members:
+                assert member in returned_members
+
 coverage_modules = ['MoinMoin.groups.backends.wiki_group']
 
