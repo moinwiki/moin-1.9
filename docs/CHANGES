@@ -16,6 +16,26 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
+Version 1.8.current:
+  Bug fixes:
+    * ACL security: fix bug in hierarchical ACL processing, more restrictive
+      sub page ACLs did not work if the current user name did not give a match
+      within the sub page ACL (instead, the less restrictive parent page ACL
+      was used).
+      Non-hierarchical ACL processing (the default) is NOT affected.
+    * Creole parser: fix spaces in multiline elements.
+    * Use msie.css only for Internet Explorer older than version 8, fixes
+      e.g. the double rendering of link icons.
+    * http auth: do auth_type comparisons case-insensitively (spec-compliant)
+
+  New features:
+    * EmbedObject macro: changed default width value for PDF files to 100%
+                         (use a recent Adobe Reader to make this work).
+    * CopyPage action: added a TextCha for it
+
+  Other changes:    
+    * Creole parser: Add second license: BSD
+
 Version 1.8.3:
   Bug fixes:
     * AttachFile XSS fixes: move escaping to error_msg / upload_form
