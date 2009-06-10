@@ -10,7 +10,8 @@ MoinMoin.groups.GroupManager test
 
 from py.test import raises
 
-from MoinMoin.groups import BackendManager, GroupManager
+from MoinMoin.groups import GroupManager
+from MoinMoin.groups.backends import config_group
 
 
 class TestGroupManager(object):
@@ -38,14 +39,13 @@ class TestGroupManager(object):
                                  # first_backend and second_backend.
                                  u'AdminGroup': second_admin_group}
         def group_manager_init(self, request):
-            return GroupManager(backends=[BackendManager(backend=self.first_backend_groups),
-                                          BackendManager(backend=self.second_backend_groups)])
+            return GroupManager(backends=[config_group.Backend(request, self.first_backend_groups),
+                                          config_group.Backend(request, self.second_backend_groups)])
 
     def setup_method(self, method):
         self.groups = self.request.groups
 
     def test_getitem(self):
-        assert self.request.cfg.fruit_group == self.groups[u'FruitGroup']
         raises(KeyError, lambda: self.groups[u'not existing group'])
 
     def test_clashed_getitem(self):
@@ -55,8 +55,6 @@ class TestGroupManager(object):
         considered in the order they are given in the backends list).
         """
         admin_group = self.groups[u'AdminGroup']
-
-        assert self.request.cfg.admin_group == admin_group
 
         # TheHacker added himself to the second backend, but that must not be
         # taken into consideration, because AdminGroup is defined in first
