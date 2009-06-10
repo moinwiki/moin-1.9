@@ -29,12 +29,12 @@ class Group(BaseGroup):
 
     def _load_group(self):
         request = self.request
-        backend_group_name = self.to_backend_name(self.name)
+        group_name = self.name
 
-        page = Page(request, backend_group_name)
+        page = Page(request, group_name)
         if page.exists():
             arena = 'pagegroups'
-            key = wikiutil.quoteWikinameFS(backend_group_name)
+            key = wikiutil.quoteWikinameFS(group_name)
             cache = caching.CacheEntry(request, arena, key, scope='wiki', use_pickle=True)
             try:
                 cache_mtime = cache.mtime()
@@ -51,7 +51,7 @@ class Group(BaseGroup):
                 self.members, self.member_groups = self._parse_page(text)
                 cache.update((self.members, self. member_groups))
         else:
-            raise KeyError("There is no such group page %s" % backend_group_name)
+            raise KeyError("There is no such group page %s" % group_name)
 
     def _parse_page(self, text):
         """
@@ -65,7 +65,7 @@ class Group(BaseGroup):
 
         for member in text_members:
             if self._backend.page_group_regex.match(member):
-                member_groups.add(self.to_group_name(member))
+                member_groups.add(member)
             else:
                 members_final.add(member)
 
@@ -75,12 +75,10 @@ class Group(BaseGroup):
 class Backend(BaseBackend):
 
     def __contains__(self, group_name):
-        backend_group_name = self.to_backend_name(group_name)
-        return self.page_group_regex.match(group_name) and Page(self.request, backend_group_name).exists()
+        return self.page_group_regex.match(group_name) and Page(self.request, group_name).exists()
 
     def __iter__(self):
-        backend_group_names = self.request.rootpage.getPageList(user='', filter=self.page_group_regex.search)
-        return (self.to_group_name(backend_group_name) for backend_group_name in backend_group_names)
+        return self.request.rootpage.getPageList(user='', filter=self.page_group_regex.search)
 
     def __getitem__(self, group_name):
         return Group(request=self.request, name=group_name, backend=self)
