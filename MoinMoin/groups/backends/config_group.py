@@ -19,7 +19,7 @@ class Group(BaseGroup):
         member_groups = set()
 
         for member in self._backend._groups[backend_group_name]:
-            if member in self._backend:
+            if member in self._backend._groups:
                 member_groups.add(self.to_group_name(member))
             else:
                 members_final.add(member)
