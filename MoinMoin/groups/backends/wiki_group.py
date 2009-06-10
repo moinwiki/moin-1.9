@@ -79,13 +79,14 @@ class Backend(BaseBackend):
 
         self.page_group_regex = request.cfg.cache.page_group_regexact
 
-    def _exists_group(self, group_name):
+    def __contains__(self, group_name):
         backend_group_name = self.to_backend_name(group_name)
         return self.page_group_regex.match(group_name) and Page(self.request, backend_group_name).exists()
 
-    def _get_group_names(self):
-        return self.request.rootpage.getPageList(user='', filter=self.page_group_regex.search)
+    def __iter__(self):
+        backend_group_names = self.request.rootpage.getPageList(user='', filter=self.page_group_regex.search)
+        return (self.to_group_name(backend_group_name) for backend_group_name in backend_group_names)
 
-    def _get_group(self, group_name):
+    def __getitem__(self, group_name):
         return Group(request=self.request, name=group_name, backend=self)
 

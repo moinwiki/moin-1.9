@@ -112,24 +112,22 @@ class BaseBackend(object):
         """
         Check if a group called <group_name> is available in this backend.
         """
-        return self._exists_group(group_name)
+        raise NotImplementedError()
 
     def __iter__(self):
         """
-        Iterate over group names of the groups defined in this backend.
+        Iterate over moin group names of the groups defined in this backend.
 
         @return: moin group names
         """
-        backend_group_names = self._get_group_names()
-        return (self.to_group_name(backend_group_name) for backend_group_name in backend_group_names)
+        raise NotImplementedError()
 
     def __getitem__(self, group_name):
         """
         Get a group by its moin group name.
         """
-        return self._get_group(group_name)
+        raise NotImplementedError()
 
-    # These methods should be overridden in children classes.
     def to_backend_name(self, group_name):
         """
         A function mapping the moin group name to the backend group name.
@@ -141,24 +139,4 @@ class BaseBackend(object):
         A function mapping the backend group name to the moin group name.
         """
         return backend_group_name
-
-    def _exists_group(self, group_name):
-        """
-        Check if the group <group_name> is defined in the backend.
-        """
-        raise NotImplementedError()
-
-    def _get_group(self, group_name):
-        """
-        Retrieve a <group_name> group members from the backend.
-
-        @return: a group with retrieved members. [Group]
-        """
-        raise NotImplementedError()
-
-    def _get_group_names(self):
-        """
-        Retrieve moin group names stored in the backend.
-        """
-        raise NotImplementedError()
 
