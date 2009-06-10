@@ -7,66 +7,6 @@ MoinMoin - group access via various backends.
 """
 
 
-class BackendManager(object):
-    """
-    A BackendManager maps a group name to a Group object.
-    It provides access to groups of one specific backend.
-    """
-
-    def __init__(self, backend, mapper_to_backend=lambda x: x, mapper_from_backend=lambda x: x):
-        """
-        Create backend manager object.
-
-        XXX Decorators can be used for group name mapping.
-
-        @param request: request object.
-
-        @param backend: the group backend which provides access to the
-                        group definitions.
-
-        @param mapper_to_backend: a function mapping the moin group
-                                  name to the backend group name
-
-        @param mapper_from_backend: a function mapping the backend
-                                    group name to the moin group name
-        """
-        self._backend = backend
-        self.mapper_to_backend = mapper_to_backend
-        self.mapper_from_backend =  mapper_from_backend
-
-    def __getitem__(self, group_name):
-        """
-        Get a group by its name.
-
-        @param group_name: name of the group [unicode]
-        """
-        return self._backend[self.mapper_to_backend(group_name)]
-
-    def __iter__(self):
-        """
-        Iterate over group names of the groups defined in this backend.
-        """
-        return (self.mapper_from_backend(group_name) for group_name in self._backend)
-
-    def __contains__(self, group_name):
-        """
-        Check if a group called group_name is available in this backend.
-
-        @param group_name: name of the group [unicode]
-        """
-        return self.mapper_to_backend(group_name) in self._backend
-
-    def membergroups(self, member):
-        """
-        List all group names of the groups where <member> is a member of.
-
-        @param member: member name [unicode]
-        @return: list of group names [unicode]
-        """
-        return [group_name for group_name in self
-                if member in self[group_name]]
-
-
 class GroupManager(object):
     """
     GroupManager manages several group backends.

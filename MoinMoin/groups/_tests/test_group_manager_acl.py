@@ -8,7 +8,8 @@ MoinMoin.groups.GroupManager ACL Tests
 """
 
 from MoinMoin import security
-from MoinMoin.groups import BackendManager, GroupManager
+from MoinMoin.groups import GroupManager
+from MoinMoin.groups.backends import config_group
 
 
 class TestGroupManagerACL:
@@ -22,7 +23,7 @@ class TestGroupManagerACL:
             groups = {u'FirstGroup': frozenset([u"ExampleUser", u"SecondUser", u"JoeDoe"]),
                       u'SecondGroup': frozenset([u"ExampleUser", u"ThirdUser"])}
 
-            return GroupManager(backends=[BackendManager(backend=groups)])
+            return GroupManager(backends=[config_group.Backend(request, groups)])
 
     def testConfigBackendAcl(self):
         """
