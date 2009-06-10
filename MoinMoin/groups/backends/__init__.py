@@ -140,3 +140,6 @@ class BaseBackend(object):
         """
         return backend_group_name
 
+    def __repr__(self):
+        return "<%s groups=%s>" % (self.__class__, [b for b in self] )
+

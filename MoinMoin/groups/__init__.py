@@ -137,3 +137,6 @@ class GroupManager(object):
             load_cache = getattr(backend, 'load_cache', None)
             if callable(load_cache):
                 load_cache()
+
+    def __repr__(self):
+        return "<%s backends=%s>" % (self.__class__, self._backends)
