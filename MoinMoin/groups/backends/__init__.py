@@ -19,7 +19,7 @@ class BaseGroup(object):
         """
         self.request = request
         self.name = name
-        self.backend = backend
+        self._backend = backend
 
         self.to_backend_name = backend.to_backend_name
         self.to_group_name = backend.to_group_name
@@ -107,6 +107,8 @@ class BaseBackend(object):
 
     def __init__(self, request):
         self.request = request
+        self.page_group_regex = request.cfg.cache.page_group_regexact
+
 
     def __contains__(self, group_name):
         """

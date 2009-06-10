@@ -12,4 +12,5 @@ from MoinMoin.groups.backends import wiki_group
 
 class Config(LocalConfig):
     group_manager_init = lambda self, request: GroupManager([wiki_group.Backend(request)])
+    config_groups = {}
 
