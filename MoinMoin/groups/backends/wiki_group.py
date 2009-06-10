@@ -64,7 +64,7 @@ class Group(BaseGroup):
         member_groups = set()
 
         for member in text_members:
-            if self.request.cfg.cache.page_group_regexact.match(member):
+            if self._backend.page_group_regex.match(member):
                 member_groups.add(self.to_group_name(member))
             else:
                 members_final.add(member)
@@ -73,11 +73,6 @@ class Group(BaseGroup):
 
 
 class Backend(BaseBackend):
-
-    def __init__(self, request):
-        super(Backend, self).__init__(request)
-
-        self.page_group_regex = request.cfg.cache.page_group_regexact
 
     def __contains__(self, group_name):
         backend_group_name = self.to_backend_name(group_name)
