@@ -20,6 +20,8 @@ class BaseGroup(object):
         self.request = request
         self.name = name
         self._backend = backend
+        self.members = None
+        self.member_groups = None
 
         self.to_backend_name = backend.to_backend_name
         self.to_group_name = backend.to_group_name

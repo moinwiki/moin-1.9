@@ -13,19 +13,20 @@
 from py.test import raises
 import re, shutil
 
+from  MoinMoin.groups.backends._tests import BackendTest, BackendTestMapping, Config
 from MoinMoin.groups.backends import wiki_group
 from MoinMoin import Page, security
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.user import User
-from MoinMoin._tests import append_page, become_trusted, create_page, create_random_string_list, nuke_page, nuke_user, wikiconfig
+from MoinMoin._tests import append_page, become_trusted, create_page, create_random_string_list, nuke_page, nuke_user
 from MoinMoin.groups import GroupManager
 
-class TestWikiGroupPage:
+class TestWikiGroupPageParser(object):
     """
     Test what backend extracts from a group page and what is ignored.
     """
 
-    class Config(wikiconfig.Config):
+    class Config(Config):
         def group_manager_init(self, request):
             return GroupManager(backends=[wiki_group.Backend(request)])
 
@@ -80,71 +81,24 @@ Ignore previous line and this text.
         return group
 
 
-class TestWikiGroupBackend:
+class TestWikiGroupBackend(BackendTest):
 
-    class Config(wikiconfig.Config):
+    class Config(Config):
         def group_manager_init(self, request):
             return GroupManager(backends=[wiki_group.Backend(request)])
 
     def setup_class(self):
         become_trusted(self.request)
 
-        test_groups = {u'EditorGroup': [u'AdminGroup', u'John', u'JoeDoe', u'Editor'],
-                       u'AdminGroup': [u'Admin', u'Admin2', u'John'],
-                       u'OtherGroup': [u'SomethingOther'],
-                       u'RecursiveGroup': [u'Something', u'OtherRecursiveGroup'],
-                       u'OtherRecursiveGroup': [u'RecursiveGroup', u'Anything'],
-                       u'ThirdRecursiveGroup': [u'ThirdRecursiveGroup', u'Banana']}
-
-        self.expanded_groups = {u'EditorGroup': [u'Admin', u'Admin2', u'John',
-                                                 u'JoeDoe', u'Editor'],
-                                u'AdminGroup': [u'Admin', u'Admin2', u'John'],
-                                u'OtherGroup': [u'SomethingOther'],
-                                u'RecursiveGroup': [u'Anything', u'Something'],
-                                u'OtherRecursiveGroup': [u'Anything', u'Something'],
-                                u'ThirdRecursiveGroup': [u'Banana']}
-
-        for (group, members) in test_groups.iteritems():
+        for (group, members) in self.test_groups.iteritems():
             page_text = ' * %s' % '\n * '.join(members)
             create_page(self.request, group, page_text)
 
     def teardown_class(self):
         become_trusted(self.request)
 
-        for group in self.expanded_groups:
+        for group in self.test_groups:
             nuke_page(self.request, group)
-
-    def test_contains(self):
-        """
-        Test group_wiki Backend and Group containment methods.
-        """
-        groups = self.request.groups
-
-        for (group, members) in self.expanded_groups.iteritems():
-            print group
-            assert group in groups
-            for member in members:
-                assert member in groups[group]
-
-        raises(KeyError, lambda: groups[u'NotExistingGroup'])
-
-    def test_iter(self):
-        groups = self.request.groups
-
-        for (group, members) in self.expanded_groups.iteritems():
-            returned_members = [x for x in groups[group]]
-            assert len(returned_members) == len(members)
-            for member in members:
-                assert member in returned_members
-
-    def test_membergroups(self):
-        groups = self.request.groups
-
-        john_groups = groups.membergroups(u'John')
-        assert 2 == len(john_groups)
-        assert u'EditorGroup' in john_groups
-        assert u'AdminGroup' in john_groups
-        assert u'ThirdGroup' not in john_groups
 
     def test_rename_group_page(self):
         """
@@ -263,46 +217,6 @@ class TestWikiGroupBackend:
 
         assert result
 
-    def test_wiki_backend_acl_allow(self):
-        """
-        Test if the wiki group backend works with acl code.
-        Check user which has rights.
-        """
-        request = self.request
-        become_trusted(request)
-
-        create_page(request, u'FirstGroup', u" * OtherUser")
-
-        acl_rights = ["FirstGroup:admin,read,write"]
-        acl = security.AccessControlList(request.cfg, acl_rights)
-
-        allow = acl.may(request, u"OtherUser", "admin")
-
-        nuke_page(request, u'FirstGroup')
-
-        assert allow, 'OtherUser has read rights because he is member of FirstGroup'
-
-    def test_wiki_backend_acl_deny(self):
-        """
-        Test if the wiki group backend works with acl code.
-        Check user which does not have rights.
-        """
-        request = self.request
-        become_trusted(request)
-
-        create_page(request, u'FirstGroup', u" * OtherUser")
-
-        acl_rights = ["FirstGroup:read,write"]
-        acl = security.AccessControlList(request.cfg, acl_rights)
-
-        other_user_allow = acl.may(request, u"OtherUser", "admin")
-        some_user_allow = acl.may(request, u"SomeUser", "read")
-
-        nuke_page(request, u'FirstGroup')
-
-        assert not other_user_allow, 'OtherUser does not have admin rights because it is not listed in acl'
-        assert not some_user_allow, 'SomeUser does not have admin read right because he is not listed in the FirstGroup'
-
     def test_wiki_backend_page_acl_append_page(self):
         """
         Test if the wiki group backend works with acl code.
@@ -328,85 +242,6 @@ class TestWikiGroupBackend:
 
         assert not has_rights_before, 'AnotherUser has no read rights because in the beginning he is not a member of a group page NewGroup'
         assert has_rights_after, 'AnotherUser must have read rights because after appendage he is member of NewGroup'
-
-
-    def test_wiki_backend_page_acl_with_all(self):
-        request = self.request
-        become_trusted(request)
-
-        acl_rights = ["EditorGroup:read,write,delete,admin All:read"]
-        acl = security.AccessControlList(request.cfg, acl_rights)
-
-
-        for member in self.expanded_groups[u'EditorGroup']:
-            assert acl.may(request, member, "read")
-            assert acl.may(request, member, "write")
-            assert acl.may(request, member, "delete")
-            assert acl.may(request, member, "admin")
-
-        assert acl.may(request, u"Someone", "read")
-        assert not acl.may(request, u"Someone", "write")
-        assert not acl.may(request, u"Someone", "delete")
-        assert not acl.may(request, u"Someone", "admin")
-
-
-class TestWikiGroupNameMapping(object):
-    """
-    Test group name mapping:
-        moin -> backend (e.g. "AdminGroup" -> "VeryImportantAdminGroup")
-        backend -> moin (e.g. "VeryImportantAdminGroup" -> "AdminGroup")
-
-    Moin expects group names to match the page_group_regex (e.g. "AdminGroup"),
-    but a backend might want to use different group names (e.g. just "Admin").
-    """
-
-    class Config(wikiconfig.Config):
-
-        def group_manager_init(self, request):
-            backend = wiki_group.Backend(request)
-            backend.to_backend_name = lambda group_name: 'VeryImportant%s' % group_name
-            # Get rid of the prefix VeryImportant
-            # Note: In real set up it is more complicated.
-            backend.to_group_name = lambda backend_name: backend_name[13:]
-
-            return GroupManager(backends=[backend])
-
-    def setup_class(self):
-        become_trusted(self.request)
-
-        test_groups = {u'VeryImportantEditorGroup': [u'VeryImportantAdminGroup', u'John', u'JoeDoe', u'Editor'],
-                       u'VeryImportantAdminGroup': [u'Admin', u'Admin2', u'John']}
-
-        self.expanded_groups = {u'EditorGroup': [u'Admin', u'Admin2', u'John',
-                                                 u'JoeDoe', u'Editor'],
-                                u'AdminGroup': [u'Admin', u'Admin2', u'John']}
-
-        for (group, members) in test_groups.iteritems():
-            page_text = ' * %s' % '\n * '.join(members)
-            create_page(self.request, group, page_text)
-
-    def test_contains(self):
-        """
-        Test group_wiki Backend and Group containment methods.
-        """
-        groups = self.request.groups
-
-        for (group, members) in self.expanded_groups.iteritems():
-            print group
-            assert group in groups
-            for member in members:
-                assert member in groups[group]
-
-        raises(KeyError, lambda: groups[u'NotExistingGroup'])
-
-    def test_iter(self):
-        groups = self.request.groups
-
-        for (group, members) in self.expanded_groups.iteritems():
-            returned_members = [x for x in groups[group]]
-            assert len(returned_members) == len(members)
-            for member in members:
-                assert member in returned_members
 
 coverage_modules = ['MoinMoin.groups.backends.wiki_group']
 
