@@ -32,19 +32,14 @@ class Group(BaseGroup):
 
 class Backend(BaseBackend):
 
-    def __init__(self, request, groups=None):
+    def __init__(self, request, groups):
         """
         @param groups: Dictionary of groups where key is group name,
         and value is list of members of that group.
-
-        If <groups> is not defined request.cfg.config_groups is used.
         """
         super(Backend, self).__init__(request)
 
-        if groups is not None:
-            self._groups = groups
-        else:
-            self._groups = request.cfg.config_groups
+        self._groups = groups
 
     def __contains__(self, group_name):
         backend_group_name = self.to_backend_name(group_name)

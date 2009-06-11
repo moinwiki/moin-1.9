@@ -21,8 +21,8 @@ class TestConfigBackend(BackendTest):
     class Config(wikiconfig.Config):
 
         def group_manager_init(self, request):
-            self.config_groups = BackendTest.test_groups
-            return GroupManager(config_group.Backend(request))
+            groups = BackendTest.test_groups
+            return GroupManager(config_group.Backend(request, groups))
 
 
 coverage_modules = ['MoinMoin.groups.backends.config_group']
