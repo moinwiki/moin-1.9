@@ -30,7 +30,7 @@ class TestWikiGroupPageParser(object):
     class Config(wikiconfig.Config):
 
         def group_manager_init(self, request):
-            return GroupManager(backends=[wiki_group.Backend(request)])
+            return GroupManager(wiki_group.Backend(request))
 
     def test_CamelCase(self):
         text = """
@@ -88,7 +88,7 @@ class TestWikiGroupBackend(BackendTest):
     class Config(wikiconfig.Config):
 
         def group_manager_init(self, request):
-            return GroupManager(backends=[wiki_group.Backend(request)])
+            return GroupManager(wiki_group.Backend(request))
 
     def setup_class(self):
         become_trusted(self.request)

@@ -12,7 +12,7 @@ class GroupManager(object):
     GroupManager manages several group backends.
     """
 
-    def __init__(self, backends):
+    def __init__(self, *backends):
         """
         Create a group manager object.
 
