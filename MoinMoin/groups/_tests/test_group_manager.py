@@ -41,8 +41,8 @@ class TestGroupManager(object):
                                  u'AdminGroup': second_admin_group}
 
         def group_manager_init(self, request):
-            return GroupManager(backends=[config_group.Backend(request, self.first_backend_groups),
-                                          config_group.Backend(request, self.second_backend_groups)])
+            return GroupManager(config_group.Backend(request, self.first_backend_groups),
+                                config_group.Backend(request, self.second_backend_groups))
 
     def setup_method(self, method):
         self.groups = self.request.groups

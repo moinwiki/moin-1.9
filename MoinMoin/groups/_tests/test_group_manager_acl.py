@@ -24,7 +24,7 @@ class TestGroupManagerACL:
             groups = {u'FirstGroup': frozenset([u"ExampleUser", u"SecondUser", u"JoeDoe"]),
                       u'SecondGroup': frozenset([u"ExampleUser", u"ThirdUser"])}
 
-            return GroupManager(backends=[config_group.Backend(request, groups)])
+            return GroupManager(config_group.Backend(request, groups))
 
     def testConfigBackendAcl(self):
         """
