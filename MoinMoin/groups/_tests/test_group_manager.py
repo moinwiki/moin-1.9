@@ -12,12 +12,13 @@ from py.test import raises
 
 from MoinMoin.groups import GroupManager
 from MoinMoin.groups.backends import config_group
+from MoinMoin._tests import wikiconfig
 
 
 class TestGroupManager(object):
 
-    from MoinMoin._tests import wikiconfig
     class Config(wikiconfig.Config):
+
         admin_group = frozenset([u'Admin', u'JohnDoe'])
         editor_group = frozenset([u'MainEditor', u'JohnDoe'])
         fruit_group = frozenset([u'Apple', u'Banana', u'Cherry'])
@@ -38,6 +39,7 @@ class TestGroupManager(object):
                                  # AdminGroup is defined in both
                                  # first_backend and second_backend.
                                  u'AdminGroup': second_admin_group}
+
         def group_manager_init(self, request):
             return GroupManager(backends=[config_group.Backend(request, self.first_backend_groups),
                                           config_group.Backend(request, self.second_backend_groups)])

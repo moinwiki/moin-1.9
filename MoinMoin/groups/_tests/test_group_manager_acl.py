@@ -10,6 +10,7 @@ MoinMoin.groups.GroupManager ACL Tests
 from MoinMoin import security
 from MoinMoin.groups import GroupManager
 from MoinMoin.groups.backends import config_group
+from MoinMoin._tests import wikiconfig
 
 
 class TestGroupManagerACL:
@@ -17,8 +18,8 @@ class TestGroupManagerACL:
     Test how GroupManager works with the acl code.
     """
 
-    from MoinMoin._tests import wikiconfig
     class Config(wikiconfig.Config):
+
         def group_manager_init(self, request):
             groups = {u'FirstGroup': frozenset([u"ExampleUser", u"SecondUser", u"JoeDoe"]),
                       u'SecondGroup': frozenset([u"ExampleUser", u"ThirdUser"])}

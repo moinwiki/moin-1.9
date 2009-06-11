@@ -4,7 +4,7 @@ MoinMoin - wiki group backend
 
 The wiki group backend enables you to define groups on wiki pages.  To
 find group pages, request.cfg.cache.page_group_regexact pattern is
-used.  To find group members, it parses theses pages and extracts the
+used.  To find group members, it parses these pages and extracts the
 first level list (wiki markup).
 
 @copyright: 2008 MoinMoin:ThomasWaldmann,
