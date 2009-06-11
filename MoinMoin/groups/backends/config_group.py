@@ -2,7 +2,7 @@
 """
 MoinMoin - config group backend
 
-The wiki group backend enables you to define groups in a configuration file.
+The config group backend enables you to define groups in a configuration file.
 
 @copyright: 2009 MoinMoin:DmitrijsMilajevs
 @license: GPL, see COPYING for details
@@ -10,7 +10,9 @@ The wiki group backend enables you to define groups in a configuration file.
 
 from MoinMoin.groups.backends import BaseGroup, BaseBackend
 
+
 class Group(BaseGroup):
+
     def _load_group(self):
         request = self.request
         backend_group_name = self.to_backend_name(self.name)
@@ -26,6 +28,7 @@ class Group(BaseGroup):
 
         self.members = members_final
         self.member_groups = member_groups
+
 
 class Backend(BaseBackend):
 

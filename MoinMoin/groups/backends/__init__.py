@@ -6,6 +6,7 @@ MoinMoin - base classes for group backends.
 @license: GPL, see COPYING for details
 """
 
+
 class BaseGroup(object):
 
     def __init__(self, request, name, backend):
@@ -80,17 +81,14 @@ class BaseGroup(object):
 
         for member in self.members:
             if member not in yielded_members:
-                yield member
                 yielded_members.add(member)
+                yield member
 
         groups = self.request.groups
         for group_name in self.member_groups:
             if group_name not in processed_groups:
                 for member in groups[group_name]._iter(yielded_members, processed_groups):
-                    if member not in yielded_members:
-                        yield member
-                        yielded_members.add(member)
-
+                    yield member
 
     def __iter__(self):
         """
@@ -110,7 +108,6 @@ class BaseBackend(object):
     def __init__(self, request):
         self.request = request
         self.page_group_regex = request.cfg.cache.page_group_regexact
-
 
     def __contains__(self, group_name):
         """
@@ -145,5 +142,5 @@ class BaseBackend(object):
         return backend_group_name
 
     def __repr__(self):
-        return "<%s groups=%s>" % (self.__class__, [b for b in self] )
+        return "<%s groups=%s>" % (self.__class__, [b for b in self])
 

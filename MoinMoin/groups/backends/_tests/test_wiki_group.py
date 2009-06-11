@@ -13,20 +13,22 @@
 from py.test import raises
 import re, shutil
 
-from  MoinMoin.groups.backends._tests import BackendTest, BackendTestMapping, Config
+from  MoinMoin.groups.backends._tests import BackendTest
 from MoinMoin.groups.backends import wiki_group
 from MoinMoin import Page, security
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.user import User
-from MoinMoin._tests import append_page, become_trusted, create_page, create_random_string_list, nuke_page, nuke_user
+from MoinMoin._tests import append_page, become_trusted, create_page, create_random_string_list, nuke_page, nuke_user, wikiconfig
 from MoinMoin.groups import GroupManager
+
 
 class TestWikiGroupPageParser(object):
     """
     Test what backend extracts from a group page and what is ignored.
     """
 
-    class Config(Config):
+    class Config(wikiconfig.Config):
+
         def group_manager_init(self, request):
             return GroupManager(backends=[wiki_group.Backend(request)])
 
@@ -83,7 +85,8 @@ Ignore previous line and this text.
 
 class TestWikiGroupBackend(BackendTest):
 
-    class Config(Config):
+    class Config(wikiconfig.Config):
+
         def group_manager_init(self, request):
             return GroupManager(backends=[wiki_group.Backend(request)])
 

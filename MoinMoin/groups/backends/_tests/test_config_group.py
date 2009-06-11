@@ -10,27 +10,20 @@
 
 """
 
-from  MoinMoin.groups.backends._tests import BackendTest, BackendTestMapping, Config
+from  MoinMoin.groups.backends._tests import BackendTest
 from MoinMoin.groups.backends import config_group
 from MoinMoin.groups import GroupManager
+from MoinMoin._tests import wikiconfig
+
 
 class TestConfigBackend(BackendTest):
 
-    class Config(Config):
+    class Config(wikiconfig.Config):
+
         def group_manager_init(self, request):
             self.config_groups = BackendTest.test_groups
             return GroupManager(backends=[config_group.Backend(request)])
 
-class TestConfigBackendMapping(TestConfigBackend):
-
-    class Config(Config):
-        def group_manager_init(self, request):
-            backend = config_group.Backend(request, TestConfigBackend.mapped_groups)
-
-            backend.to_backend_name = self.to_backend_name
-            backend.to_group_name = self.to_group_name
-
-            return GroupManager(backends=[backend])
 
 coverage_modules = ['MoinMoin.groups.backends.config_group']
 

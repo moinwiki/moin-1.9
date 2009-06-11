@@ -13,19 +13,11 @@
 from py.test import raises
 
 from MoinMoin import security
-from MoinMoin._tests import wikiconfig
 
-class Config(wikiconfig.Config):
-    # Simply drop the "Group" postfix for group names given to a backend.
-    # Note: in the real world, this would not work good enough:
-    to_backend_name = lambda self, group_name:  group_name[:-5]
-    # Add "Group" postfix for group names received from a backend.
-    # Note: in the real world, this would not work good enough:
-    to_group_name = lambda self, backend_name:'%sGroup' % backend_name
 
 class BackendTest(object):
 
-    test_groups = {u'EditorGroup': [u'AdminGroup', u'John', u'JoeDoe', u'Editor1'],
+    test_groups = {u'EditorGroup': [u'AdminGroup', u'John', u'JoeDoe', u'Editor1', u'John'],
                    u'AdminGroup': [u'Admin1', u'Admin2', u'John'],
                    u'OtherGroup': [u'SomethingOther'],
                    u'RecursiveGroup': [u'Something', u'OtherRecursiveGroup'],
@@ -40,21 +32,13 @@ class BackendTest(object):
                        u'OtherRecursiveGroup': [u'Anything', u'Something'],
                        u'ThirdRecursiveGroup': [u'Banana']}
 
-    # These backend group names do not follow moin convention:
-    mapped_groups = {u'Editor': [u'Admin', u'John', u'JoeDoe', u'Editor1'],
-                     u'Admin': [u'Admin1', u'Admin2', u'John'],
-                     u'Other': [u'SomethingOther'],
-                     u'Recursive': [u'Something', u'OtherRecursive'],
-                     u'OtherRecursive': [u'Recursive', u'Anything'],
-                     u'ThirdRecursive': [u'ThirdRecursive', u'Banana']}
-
     def test_contains(self):
         """
         Test group_wiki Backend and Group containment methods.
         """
         groups = self.request.groups
 
-        for (group, members) in self.expanded_groups.iteritems():
+        for group, members in self.expanded_groups.iteritems():
             print group
             assert group in groups
             for member in members:
@@ -65,7 +49,7 @@ class BackendTest(object):
     def test_iter(self):
         groups = self.request.groups
 
-        for (group, members) in self.expanded_groups.iteritems():
+        for group, members in self.expanded_groups.iteritems():
             returned_members = [x for x in groups[group]]
             assert len(returned_members) == len(members)
             for member in members:
@@ -127,23 +111,6 @@ class BackendTest(object):
         assert not acl.may(request, u"Someone", "write")
         assert not acl.may(request, u"Someone", "delete")
         assert not acl.may(request, u"Someone", "admin")
-
-class BackendTestMapping(BackendTest):
-    """
-    Test group name mapping:
-        moin -> backend (e.g. "AdminGroup" -> "ImportantAdminGroup")
-        backend -> moin (e.g. "ImportantAdminGroup" -> "AdminGroup")
-
-    Moin expects group names to match the page_group_regex (e.g. "AdminGroup"),
-    but a backend might want to use different group names (e.g. just "ImportantAdminGroup").
-    """
-    test_groups = {u'ImportantEditorGroup': [u'ImportantAdminGroup', u'John',
-                                             u'JoeDoe', u'Editor'],
-                   u'ImportantAdminGroup': [u'Admin', u'Admin2', u'John'],
-                   u'ImportantOtherGroup': [u'SomethingOther'],
-                   u'ImportantRecursiveGroup': [u'Something', u'ImportantOtherRecursiveGroup'],
-                   u'ImportantOtherRecursiveGroup': [u'ImportantRecursiveGroup', u'Anything'],
-                   u'ImportantThirdRecursiveGroup': [u'ImportantThirdRecursiveGroup', u'Banana']}
 
 
 coverage_modules = ['MoinMoin.groups.backends.config_group']
