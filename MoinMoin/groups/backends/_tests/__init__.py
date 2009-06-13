@@ -22,7 +22,9 @@ class BackendTest(object):
                    u'OtherGroup': [u'SomethingOther'],
                    u'RecursiveGroup': [u'Something', u'OtherRecursiveGroup'],
                    u'OtherRecursiveGroup': [u'RecursiveGroup', u'Anything'],
-                   u'ThirdRecursiveGroup': [u'ThirdRecursiveGroup', u'Banana']}
+                   u'ThirdRecursiveGroup': [u'ThirdRecursiveGroup', u'Banana'],
+                   u'EmptyGroup': []}
+
 
     expanded_groups = {u'EditorGroup': [u'Admin1', u'Admin2', u'John',
                                         u'JoeDoe', u'Editor1'],
@@ -30,7 +32,8 @@ class BackendTest(object):
                        u'OtherGroup': [u'SomethingOther'],
                        u'RecursiveGroup': [u'Anything', u'Something'],
                        u'OtherRecursiveGroup': [u'Anything', u'Something'],
-                       u'ThirdRecursiveGroup': [u'Banana']}
+                       u'ThirdRecursiveGroup': [u'Banana'],
+                       u'EmptyGroup': []}
 
     def test_contains(self):
         """
