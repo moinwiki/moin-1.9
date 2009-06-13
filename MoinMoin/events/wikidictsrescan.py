@@ -40,7 +40,3 @@ def handle_groupsdicts_changed(event):
     gd.scan_dicts()
     logging.debug("groupsdicts changed: scan_dicts finished")
 
-    logging.debug("groups changed: %r, update_cache started", page.page_name)
-    request.groups.update_cache()
-    logging.debug("groups changed: update_cache finished")
-
