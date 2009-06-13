@@ -15,14 +15,13 @@ class Group(BaseGroup):
 
     def _load_group(self):
         request = self.request
-        backend_group_name = self.to_backend_name(self.name)
 
         members_final = set()
         member_groups = set()
 
-        for member in self._backend._groups[backend_group_name]:
+        for member in self._backend._groups[self.name]:
             if member in self._backend._groups:
-                member_groups.add(self.to_group_name(member))
+                member_groups.add(member)
             else:
                 members_final.add(member)
 
@@ -42,12 +41,10 @@ class Backend(BaseBackend):
         self._groups = groups
 
     def __contains__(self, group_name):
-        backend_group_name = self.to_backend_name(group_name)
-        return self.page_group_regex.match(group_name) and backend_group_name in self._groups
+        return self.page_group_regex.match(group_name) and group_name in self._groups
 
     def __iter__(self):
-        backend_group_names = self._groups.keys()
-        return (self.to_group_name(backend_group_name) for backend_group_name in backend_group_names)
+        return iter(self._groups.keys())
 
     def __getitem__(self, group_name):
         return Group(request=self.request, name=group_name, backend=self)

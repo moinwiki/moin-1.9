@@ -24,9 +24,6 @@ class BaseGroup(object):
         self.members = None
         self.member_groups = None
 
-        self.to_backend_name = backend.to_backend_name
-        self.to_group_name = backend.to_group_name
-
         self._load_group()
 
     def _load_group(self):
@@ -128,18 +125,6 @@ class BaseBackend(object):
         Get a group by its moin group name.
         """
         raise NotImplementedError()
-
-    def to_backend_name(self, group_name):
-        """
-        A function mapping the moin group name to the backend group name.
-        """
-        return group_name
-
-    def to_group_name(self, backend_group_name):
-        """
-        A function mapping the backend group name to the moin group name.
-        """
-        return backend_group_name
 
     def __repr__(self):
         return "<%s groups=%s>" % (self.__class__, [b for b in self])
