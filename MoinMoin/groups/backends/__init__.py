@@ -29,9 +29,21 @@ class BaseGroup(object):
     def _load_group(self):
         """
         Fill in self.members, self.member_groups with data retrieved from the backend.
-        member_groups are moin group names.
         """
-        raise NotImplementedError()
+
+        request = self.request
+
+        members_final = set()
+        member_groups = set()
+
+        for member in self._backend._retrieve_members(self.name):
+            if self._backend.is_group(member):
+                member_groups.add(member)
+            else:
+                members_final.add(member)
+
+        self.members = members_final
+        self.member_groups = member_groups
 
     def _contains(self, member, processed_groups):
         """
@@ -106,6 +118,9 @@ class BaseBackend(object):
         self.request = request
         self.page_group_regex = request.cfg.cache.page_group_regexact
 
+    def is_group(self, member):
+        return self.page_group_regex.match(member)
+
     def __contains__(self, group_name):
         """
         Check if a group called <group_name> is available in this backend.
@@ -128,4 +143,7 @@ class BaseBackend(object):
 
     def __repr__(self):
         return "<%s groups=%s>" % (self.__class__, [b for b in self])
+
+    def _retrieve_members(self, group_name):
+        raise NotImplementedError()
 

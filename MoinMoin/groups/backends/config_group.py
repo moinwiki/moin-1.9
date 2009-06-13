@@ -12,21 +12,7 @@ from MoinMoin.groups.backends import BaseGroup, BaseBackend
 
 
 class Group(BaseGroup):
-
-    def _load_group(self):
-        request = self.request
-
-        members_final = set()
-        member_groups = set()
-
-        for member in self._backend._groups[self.name]:
-            if member in self._backend._groups:
-                member_groups.add(member)
-            else:
-                members_final.add(member)
-
-        self.members = members_final
-        self.member_groups = member_groups
+    pass
 
 
 class Backend(BaseBackend):
@@ -48,3 +34,7 @@ class Backend(BaseBackend):
 
     def __getitem__(self, group_name):
         return Group(request=self.request, name=group_name, backend=self)
+
+    def _retrieve_members(self, group_name):
+        return self._groups[group_name]
+

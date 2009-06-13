@@ -22,11 +22,6 @@ from MoinMoin.groups.backends import BaseGroup, BaseBackend
 
 class Group(BaseGroup):
 
-    # * Member - ignore all but first level list items, strip
-    # whitespace, strip free links markup. This is used for parsing
-    # pages in order to find group page members
-    group_page_parse_re = re.compile(ur'^ \* +(?:\[\[)?(?P<member>.+?)(?:\]\])? *$', re.MULTILINE | re.UNICODE)
-
     def _load_group(self):
         request = self.request
         group_name = self.name
@@ -47,39 +42,32 @@ class Group(BaseGroup):
                     raise caching.CacheError
             except caching.CacheError:
                 # either cache does not exist, is erroneous or not uptodate: recreate it
-                text = page.get_raw_body()
-                self.members, self.member_groups = self._parse_page(text)
+
+                super(Group, self)._load_group()
+
                 cache.update((self.members, self. member_groups))
         else:
             raise KeyError("There is no such group page %s" % group_name)
-
-    def _parse_page(self, text):
-        """
-        Parse <text> and return members and groups defined in the <text>
-        """
-        groups = self.request.groups
-
-        text_members = (match.group('member') for match in self.group_page_parse_re.finditer(text))
-        members_final = set()
-        member_groups = set()
-
-        for member in text_members:
-            if self._backend.page_group_regex.match(member):
-                member_groups.add(member)
-            else:
-                members_final.add(member)
-
-        return members_final, member_groups
 
 
 class Backend(BaseBackend):
 
     def __contains__(self, group_name):
-        return self.page_group_regex.match(group_name) and Page(self.request, group_name).exists()
+        return self.is_group(group_name) and Page(self.request, group_name).exists()
 
     def __iter__(self):
-        return self.request.rootpage.getPageList(user='', filter=self.page_group_regex.search)
+        return iter(self.request.rootpage.getPageList(user='', filter=self.page_group_regex.search))
 
     def __getitem__(self, group_name):
         return Group(request=self.request, name=group_name, backend=self)
+
+    # * Member - ignore all but first level list items, strip
+    # whitespace, strip free links markup. This is used for parsing
+    # pages in order to find group page members.
+    _group_page_parse_regex = re.compile(ur'^ \* +(?:\[\[)?(?P<member>.+?)(?:\]\])? *$', re.MULTILINE | re.UNICODE)
+
+    def _retrieve_members(self, group_name):
+        page = Page(self.request, group_name)
+        text = page.get_raw_body()
+        return [match.group('member') for match in self._group_page_parse_regex.finditer(text)]
 
