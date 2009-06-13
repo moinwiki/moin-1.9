@@ -65,18 +65,6 @@ class GroupManager(object):
         return [group_name for group_name in self
                 if member in self[group_name]]
 
-    def update_cache(self):
-        for backend in self._backends:
-            update_cache = getattr(backend, 'update_cache', None)
-            if callable(update_cache):
-                update_cache()
-
-    def load_cache(self):
-        for backend in self._backends:
-            load_cache = getattr(backend, 'load_cache', None)
-            if callable(load_cache):
-                load_cache()
-
     def __repr__(self):
         return "<%s backends=%s>" % (self.__class__, self._backends)
 
