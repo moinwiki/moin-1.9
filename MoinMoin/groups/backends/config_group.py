@@ -30,7 +30,7 @@ class Backend(BaseBackend):
         return self.page_group_regex.match(group_name) and group_name in self._groups
 
     def __iter__(self):
-        return iter(self._groups.keys())
+        return self._groups.iterkeys()
 
     def __getitem__(self, group_name):
         return Group(request=self.request, name=group_name, backend=self)
