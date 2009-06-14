@@ -37,15 +37,14 @@ class Group(BaseGroup):
                 # TODO: fix up-to-date check mtime granularity problems
                 if cache_mtime > page_mtime:
                     # cache is uptodate
-                    self.members, self.member_groups = cache.content()
+                    return cache.content()
                 else:
                     raise caching.CacheError
             except caching.CacheError:
                 # either cache does not exist, is erroneous or not uptodate: recreate it
-
-                super(Group, self)._load_group()
-
-                cache.update((self.members, self. member_groups))
+                members, member_groups = super(Group, self)._load_group()
+                cache.update((members, member_groups))
+                return members, member_groups
         else:
             raise KeyError("There is no such group page %s" % group_name)
 

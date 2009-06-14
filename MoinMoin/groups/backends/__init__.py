@@ -21,18 +21,12 @@ class BaseGroup(object):
         self.request = request
         self.name = name
         self._backend = backend
-        self.members = None
-        self.member_groups = None
-
-        self._load_group()
+        self.members, self.member_groups = self._load_group()
 
     def _load_group(self):
         """
         Fill in self.members, self.member_groups with data retrieved from the backend.
         """
-
-        request = self.request
-
         members_final = set()
         member_groups = set()
 
@@ -42,8 +36,7 @@ class BaseGroup(object):
             else:
                 members_final.add(member)
 
-        self.members = members_final
-        self.member_groups = member_groups
+        return members_final, member_groups
 
     def _contains(self, member, processed_groups):
         """
@@ -107,9 +100,9 @@ class BaseGroup(object):
 
     def __repr__(self):
         return "<%s name=%s members=%s member_groups=%s>" % (self.__class__,
-                                                                   self.name,
-                                                                   self.members,
-                                                                   self.member_groups)
+                                                             self.name,
+                                                             self.members,
+                                                             self.member_groups)
 
 
 class BaseBackend(object):
