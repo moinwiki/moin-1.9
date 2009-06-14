@@ -56,14 +56,9 @@ class GroupManager(object):
         return False
 
     def membergroups(self, member):
-        """
-        List all group names of the groups where <member> is a member of.
-
-        @param member: member name [unicode]
-        @return: list of group names [unicode]
-        """
-        return [group_name for group_name in self
-                if member in self[group_name]]
+        # Dirty hack just to make code works, after GroupManager
+        # becomes a backend itself, no need in this.
+        return self._backends[0].groups_with_member(member)
 
     def __repr__(self):
         return "<%s backends=%s>" % (self.__class__, self._backends)
