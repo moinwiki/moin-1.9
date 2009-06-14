@@ -44,7 +44,6 @@ def init(request):
     return context
 
 def init_group_manager(context):
-    from MoinMoin.groups import GroupManager
     context.groups = context.cfg.group_manager_init(context)
 
 def run(context):
