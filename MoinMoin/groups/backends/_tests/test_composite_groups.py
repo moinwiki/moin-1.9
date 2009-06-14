@@ -11,7 +11,7 @@ MoinMoin.groups.GroupManager test
 from py.test import raises
 
 from  MoinMoin.groups.backends._tests import BackendTest
-from MoinMoin.groups.backends import config_group, compose_group
+from MoinMoin.groups import ConfigGroups, CompositeGroups
 from MoinMoin._tests import wikiconfig
 from MoinMoin import security
 
@@ -22,7 +22,7 @@ class TestConfigBackend(BackendTest):
 
         def group_manager_init(self, request):
             groups = BackendTest.test_groups
-            return compose_group.Backend(request, config_group.Backend(request, groups))
+            return CompositeGroups(request, ConfigGroups(request, groups))
 
 
 class TestConfigGroup(object):
@@ -51,11 +51,9 @@ class TestConfigGroup(object):
                                  u'AdminGroup': second_admin_group}
 
         def group_manager_init(self, request):
-            return compose_group.Backend(request,
-                                         config_group.Backend(request,
-                                                              self.first_backend_groups),
-                                         config_group.Backend(request,
-                                                              self.second_backend_groups))
+            return CompositeGroups(request,
+                                   ConfigGroups(request, self.first_backend_groups),
+                                   ConfigGroups(request, self.second_backend_groups))
 
     def setup_method(self, method):
         self.groups = self.request.groups
@@ -88,4 +86,4 @@ class TestConfigGroup(object):
         assert u'not existing group' not in self.groups
 
 
-# coverage_modules = ['MoinMoin.groups.backend.compose_group']
+coverage_modules = ['MoinMoin.groups.backends.composite_groups']

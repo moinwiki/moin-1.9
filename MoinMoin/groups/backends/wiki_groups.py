@@ -49,7 +49,7 @@ class Group(BaseGroup):
             raise KeyError("There is no such group page %s" % group_name)
 
 
-class Backend(BaseBackend):
+class WikiGroups(BaseBackend):
 
     def __contains__(self, group_name):
         return self.is_group(group_name) and Page(self.request, group_name).exists()

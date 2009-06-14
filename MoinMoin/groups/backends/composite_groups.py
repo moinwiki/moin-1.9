@@ -9,7 +9,7 @@ MoinMoin - group access via various backends.
 from MoinMoin.groups.backends import BaseBackend
 
 
-class Backend(BaseBackend):
+class CompositeGroups(BaseBackend):
     """
     Manage several group backends.
     """
@@ -19,7 +19,7 @@ class Backend(BaseBackend):
         @param backends: list of group backends which are used to get
                          access to the group definitions.
         """
-        super(Backend, self).__init__(request)
+        super(CompositeGroups, self).__init__(request)
         self._backends = backends
 
     def __getitem__(self, group_name):
