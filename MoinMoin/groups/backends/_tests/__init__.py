@@ -42,7 +42,6 @@ class BackendTest(object):
         groups = self.request.groups
 
         for group, members in self.expanded_groups.iteritems():
-            print group
             assert group in groups
             for member in members:
                 assert member in groups[group]
@@ -53,15 +52,15 @@ class BackendTest(object):
         groups = self.request.groups
 
         for group, members in self.expanded_groups.iteritems():
-            returned_members = [x for x in groups[group]]
+            returned_members = list(groups[group])
             assert len(returned_members) == len(members)
             for member in members:
                 assert member in returned_members
 
-    def test_membergroups(self):
+    def test_groups_with_member(self):
         groups = self.request.groups
 
-        john_groups = list(groups.membergroups(u'John'))
+        john_groups = list(groups.groups_with_member(u'John'))
         assert 2 == len(john_groups)
         assert u'EditorGroup' in john_groups
         assert u'AdminGroup' in john_groups

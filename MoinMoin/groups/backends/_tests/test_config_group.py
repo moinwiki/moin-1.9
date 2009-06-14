@@ -12,7 +12,6 @@
 
 from  MoinMoin.groups.backends._tests import BackendTest
 from MoinMoin.groups.backends import config_group
-from MoinMoin.groups import GroupManager
 from MoinMoin._tests import wikiconfig
 
 
@@ -22,7 +21,7 @@ class TestConfigBackend(BackendTest):
 
         def group_manager_init(self, request):
             groups = BackendTest.test_groups
-            return GroupManager(config_group.Backend(request, groups))
+            return config_group.Backend(request, groups)
 
 
 coverage_modules = ['MoinMoin.groups.backends.config_group']

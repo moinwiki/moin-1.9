@@ -19,7 +19,6 @@ from MoinMoin import Page, security
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.user import User
 from MoinMoin._tests import append_page, become_trusted, create_page, create_random_string_list, nuke_page, nuke_user, wikiconfig
-from MoinMoin.groups import GroupManager
 
 
 class TestWikiGroupPageParser(object):
@@ -30,7 +29,7 @@ class TestWikiGroupPageParser(object):
     class Config(wikiconfig.Config):
 
         def group_manager_init(self, request):
-            return GroupManager(wiki_group.Backend(request))
+            return wiki_group.Backend(request)
 
     def test_CamelCase(self):
         text = """
@@ -88,7 +87,7 @@ class TestWikiGroupBackend(BackendTest):
     class Config(wikiconfig.Config):
 
         def group_manager_init(self, request):
-            return GroupManager(wiki_group.Backend(request))
+            return wiki_group.Backend(request)
 
     def setup_class(self):
         become_trusted(self.request)

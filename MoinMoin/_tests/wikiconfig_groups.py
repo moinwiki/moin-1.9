@@ -7,9 +7,8 @@ MoinMoin.groups related configuration is defined here.
 """
 
 from wikiconfig import LocalConfig
-from MoinMoin.groups import GroupManager
 from MoinMoin.groups.backends import wiki_group
 
 class Config(LocalConfig):
-    group_manager_init = lambda self, request: GroupManager(wiki_group.Backend(request))
+    group_manager_init = lambda self, request: wiki_group.Backend(request)
 
