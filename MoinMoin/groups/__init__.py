@@ -6,3 +6,7 @@ MoinMoin - group access via various backends.
 @license: GPL, see COPYING for details
 """
 
+from MoinMoin.groups.backends.wiki_groups import WikiGroups
+from MoinMoin.groups.backends.config_groups import ConfigGroups
+from MoinMoin.groups.backends.composite_groups import CompositeGroups
+

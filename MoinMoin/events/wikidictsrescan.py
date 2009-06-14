@@ -12,7 +12,6 @@ from MoinMoin import log
 logging = log.getLogger(__name__)
 
 from MoinMoin import events as ev
-from MoinMoin.groups.backends import wiki_group
 from MoinMoin import wikidicts
 
 def handle(event):

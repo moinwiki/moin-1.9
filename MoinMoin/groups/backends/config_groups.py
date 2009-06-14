@@ -15,14 +15,14 @@ class Group(BaseGroup):
     pass
 
 
-class Backend(BaseBackend):
+class ConfigGroups(BaseBackend):
 
     def __init__(self, request, groups):
         """
         @param groups: Dictionary of groups where key is group name,
         and value is list of members of that group.
         """
-        super(Backend, self).__init__(request)
+        super(ConfigGroups, self).__init__(request)
 
         self._groups = groups
 

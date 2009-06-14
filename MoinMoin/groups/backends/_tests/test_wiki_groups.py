@@ -14,7 +14,7 @@ from py.test import raises
 import re, shutil
 
 from  MoinMoin.groups.backends._tests import BackendTest
-from MoinMoin.groups.backends import wiki_group
+from MoinMoin.groups import WikiGroups
 from MoinMoin import Page, security
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.user import User
@@ -29,7 +29,7 @@ class TestWikiGroupPageParser(object):
     class Config(wikiconfig.Config):
 
         def group_manager_init(self, request):
-            return wiki_group.Backend(request)
+            return WikiGroups(request)
 
     def test_CamelCase(self):
         text = """
@@ -87,7 +87,7 @@ class TestWikiGroupBackend(BackendTest):
     class Config(wikiconfig.Config):
 
         def group_manager_init(self, request):
-            return wiki_group.Backend(request)
+            return WikiGroups(request)
 
     def setup_class(self):
         become_trusted(self.request)
@@ -245,5 +245,5 @@ class TestWikiGroupBackend(BackendTest):
         assert not has_rights_before, 'AnotherUser has no read rights because in the beginning he is not a member of a group page NewGroup'
         assert has_rights_after, 'AnotherUser must have read rights because after appendage he is member of NewGroup'
 
-coverage_modules = ['MoinMoin.groups.backends.wiki_group']
+coverage_modules = ['MoinMoin.groups.backends.wiki_groups']
 
