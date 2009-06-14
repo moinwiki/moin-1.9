@@ -140,3 +140,17 @@ class BaseBackend(object):
     def _retrieve_members(self, group_name):
         raise NotImplementedError()
 
+    def groups_with_member(self, member):
+        """
+        List all group names of groups containing <member>.
+
+        @param member: member name [unicode]
+        @return: list of group names [unicode]
+        """
+        for group_name in self:
+            try:
+                if member in self[group_name]:
+                    yield group_name
+            except KeyError:
+                pass
+

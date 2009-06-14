@@ -74,17 +74,5 @@ class TestGroupManager(object):
         assert u'UserGroup' in self.groups
         assert u'not existing group' not in self.groups
 
-    def test_membergroups(self):
-        apple_groups = self.groups.membergroups(u'Apple')
-        assert 1 == len(apple_groups)
-        assert u'FruitGroup' in apple_groups
-        assert u'AdminGroup' not in apple_groups
-
-        john_doe_groups = self.groups.membergroups(u'JohnDoe')
-        assert 3 == len(john_doe_groups)
-        assert u'EditorGroup' in john_doe_groups
-        assert u'AdminGroup' in john_doe_groups
-        assert u'UserGroup' in john_doe_groups
-        assert u'FruitGroup' not in john_doe_groups
 
 coverage_modules = ['MoinMoin.groups']

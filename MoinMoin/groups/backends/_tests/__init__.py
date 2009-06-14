@@ -61,7 +61,7 @@ class BackendTest(object):
     def test_membergroups(self):
         groups = self.request.groups
 
-        john_groups = groups.membergroups(u'John')
+        john_groups = list(groups.membergroups(u'John'))
         assert 2 == len(john_groups)
         assert u'EditorGroup' in john_groups
         assert u'AdminGroup' in john_groups
