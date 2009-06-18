@@ -25,18 +25,14 @@ class BaseGroup(object):
 
     def _load_group(self):
         """
-        Fill in self.members, self.member_groups with data retrieved from the backend.
+        Retrieve group data from the backend and filter it to members and group_members.
         """
-        members_final = set()
-        member_groups = set()
+        members_retrieved = set(self._backend._retrieve_members(self.name))
 
-        for member in self._backend._retrieve_members(self.name):
-            if self._backend.is_group(member):
-                member_groups.add(member)
-            else:
-                members_final.add(member)
+        member_groups = set(member for member in members_retrieved if self._backend.is_group(member))
+        members = members_retrieved - member_groups
 
-        return members_final, member_groups
+        return members, member_groups
 
     def _contains(self, member, processed_groups):
         """
