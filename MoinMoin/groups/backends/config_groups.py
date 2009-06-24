@@ -33,11 +33,11 @@ class ConfigGroups(BaseBackend):
         return self._groups.iterkeys()
 
     def __getitem__(self, group_name):
-        try:
-            return Group(request=self.request, name=group_name, backend=self)
-        except KeyError:
-            raise GroupDoesNotExistError(group_name)
+        return Group(request=self.request, name=group_name, backend=self)
 
     def _retrieve_members(self, group_name):
-        return self._groups[group_name]
+        try:
+            return self._groups[group_name]
+        except KeyError:
+            raise GroupDoesNotExistError(group_name)
 

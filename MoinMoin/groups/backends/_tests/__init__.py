@@ -97,7 +97,7 @@ class BackendTest(object):
         assert not other_user_allow, 'OtherUser does not have admin rights because it is not listed in acl'
         assert not some_user_allow, 'SomeUser does not have admin read right because he is not listed in the AdminGroup'
 
-    def test_wiki_backend_page_acl_with_all(self):
+    def test_backend_acl_with_all(self):
         request = self.request
 
         acl_rights = ["EditorGroup:read,write,delete,admin All:read"]
@@ -115,6 +115,14 @@ class BackendTest(object):
         assert not acl.may(request, u"Someone", "delete")
         assert not acl.may(request, u"Someone", "admin")
 
+    def test_backend_acl_not_existing_group(self):
+        request = self.request
+        assert u'NotExistingGroup' not in request.groups
+
+        acl_rights = ["NotExistingGroup:read,write,delete,admin All:read"]
+        acl = security.AccessControlList(request.cfg, acl_rights)
+
+        assert not acl.may(request, u"Someone", "write")
 
 coverage_modules = ['MoinMoin.groups.backends.config_group']
 
