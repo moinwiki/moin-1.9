@@ -141,10 +141,11 @@ class MoinOpenIDServer:
 
         # again, we never put an openid.server link on this page...
         # why are they here?
-        if cfg.openid_server_restricted_users_group:
-            request.dicts.addgroup(request, cfg.openid_server_restricted_users_group)
-            if not request.dicts.has_member(cfg.openid_server_restricted_users_group, received_name):
-                return False
+        groups = request.groups
+        openid_group_name = cfg.openid_server_restricted_users_group
+        if openid_group_name and \
+                not (openid_group_name in groups and received_name in groups[openid_group_name]):
+            return False
 
         return True
 

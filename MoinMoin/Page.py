@@ -1144,12 +1144,9 @@ class Page(object):
                         openid_username = self.pi['openid.user']
                         userid = user.getUserId(request, openid_username)
 
-                    if request.cfg.openid_server_restricted_users_group:
-                        request.dicts.addgroup(request,
-                                               request.cfg.openid_server_restricted_users_group)
-
-                    if userid is not None and not request.cfg.openid_server_restricted_users_group or \
-                      request.dicts.has_member(request.cfg.openid_server_restricted_users_group, openid_username):
+                    openid_group_name = request.cfg.openid_server_restricted_users_group
+                    if userid is not None and not openid_group_name or \
+                            (openid_group_name in request.groups and openid_username in request.groups[openid_group_name]):
                         html_head = '<link rel="openid2.provider" href="%s">' % \
                                         wikiutil.escape(request.getQualifiedURL(self.url(request,
                                                                                 querystr={'action': 'serveopenid'})), True)
