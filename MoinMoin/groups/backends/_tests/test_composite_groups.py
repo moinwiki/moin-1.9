@@ -11,7 +11,7 @@ MoinMoin.groups.GroupManager test
 from py.test import raises
 
 from  MoinMoin.groups.backends._tests import BackendTest
-from MoinMoin.groups import ConfigGroups, CompositeGroups
+from MoinMoin.groups import ConfigGroups, CompositeGroups, GroupDoesNotExistError
 from MoinMoin._tests import wikiconfig
 from MoinMoin import security
 
@@ -59,7 +59,7 @@ class TestConfigGroup(object):
         self.groups = self.request.groups
 
     def test_getitem(self):
-        raises(KeyError, lambda: self.groups[u'NotExistingGroup'])
+        raises(GroupDoesNotExistError, lambda: self.groups[u'NotExistingGroup'])
 
     def test_clashed_getitem(self):
         """

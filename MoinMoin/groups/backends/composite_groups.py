@@ -6,7 +6,7 @@ MoinMoin - group access via various backends.
 @license: GPL, see COPYING for details
 """
 
-from MoinMoin.groups.backends import BaseBackend
+from MoinMoin.groups.backends import BaseBackend, GroupDoesNotExistError
 
 
 class CompositeGroups(BaseBackend):
@@ -31,7 +31,7 @@ class CompositeGroups(BaseBackend):
         for backend in self._backends:
             if group_name in backend:
                 return backend[group_name]
-        raise KeyError("There is no such group %s" % group_name)
+        raise GroupDoesNotExistError(group_name)
 
     def __iter__(self):
         """

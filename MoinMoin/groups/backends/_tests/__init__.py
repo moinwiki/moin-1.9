@@ -13,6 +13,7 @@
 from py.test import raises
 
 from MoinMoin import security
+from MoinMoin.groups import GroupDoesNotExistError
 
 
 class BackendTest(object):
@@ -46,7 +47,7 @@ class BackendTest(object):
             for member in members:
                 assert member in groups[group]
 
-        raises(KeyError, lambda: groups[u'NotExistingGroup'])
+        raises(GroupDoesNotExistError, lambda: groups[u'NotExistingGroup'])
 
     def test_iter(self):
         groups = self.request.groups

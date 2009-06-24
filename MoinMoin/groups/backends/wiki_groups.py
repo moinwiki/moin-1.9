@@ -17,7 +17,7 @@ import re
 
 from MoinMoin import caching, wikiutil
 from MoinMoin.Page import Page
-from MoinMoin.groups.backends import BaseGroup, BaseBackend
+from MoinMoin.groups.backends import BaseGroup, BaseBackend, GroupDoesNotExistError
 
 
 class Group(BaseGroup):
@@ -46,7 +46,7 @@ class Group(BaseGroup):
                 cache.update((members, member_groups))
                 return members, member_groups
         else:
-            raise KeyError("There is no such group page %s" % group_name)
+            raise GroupDoesNotExistError(group_name)
 
 
 class WikiGroups(BaseBackend):
