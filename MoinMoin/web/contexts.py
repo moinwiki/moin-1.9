@@ -379,8 +379,7 @@ class AuxilaryMixin(object):
 
     def groups(self):
         """ Lazy initialize the groups on the first access """
-        groups = self.request.cfg.group_manager_init(self)
-        groups.load_cache()
+        groups = self.cfg.group_manager_init(self)
         return groups
     groups = EnvironProxy(groups)
 
