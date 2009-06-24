@@ -6,6 +6,11 @@ MoinMoin - base classes for group backends.
 @license: GPL, see COPYING for details
 """
 
+class GroupDoesNotExistError(Exception):
+    """
+    Raised when a group name is not found in the backend.
+    """
+    pass
 
 class BaseGroup(object):
 
@@ -147,6 +152,6 @@ class BaseBackend(object):
             try:
                 if member in self[group_name]:
                     yield group_name
-            except KeyError:
+            except GroupDoesNotExistError:
                 pass
 

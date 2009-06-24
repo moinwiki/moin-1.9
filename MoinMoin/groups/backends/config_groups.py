@@ -8,7 +8,7 @@ The config group backend enables you to define groups in a configuration file.
 @license: GPL, see COPYING for details
 """
 
-from MoinMoin.groups.backends import BaseGroup, BaseBackend
+from MoinMoin.groups.backends import BaseGroup, BaseBackend, GroupDoesNotExistError
 
 
 class Group(BaseGroup):
@@ -33,7 +33,10 @@ class ConfigGroups(BaseBackend):
         return self._groups.iterkeys()
 
     def __getitem__(self, group_name):
-        return Group(request=self.request, name=group_name, backend=self)
+        try:
+            return Group(request=self.request, name=group_name, backend=self)
+        except KeyError:
+            raise GroupDoesNotExistError(group_name)
 
     def _retrieve_members(self, group_name):
         return self._groups[group_name]

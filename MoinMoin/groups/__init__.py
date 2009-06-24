@@ -9,4 +9,5 @@ MoinMoin - group access via various backends.
 from MoinMoin.groups.backends.wiki_groups import WikiGroups
 from MoinMoin.groups.backends.config_groups import ConfigGroups
 from MoinMoin.groups.backends.composite_groups import CompositeGroups
+from MoinMoin.groups.backends import GroupDoesNotExistError
 
