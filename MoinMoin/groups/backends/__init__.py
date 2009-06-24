@@ -6,11 +6,12 @@ MoinMoin - base classes for group backends.
 @license: GPL, see COPYING for details
 """
 
+
 class GroupDoesNotExistError(Exception):
     """
     Raised when a group name is not found in the backend.
     """
-    pass
+
 
 class BaseGroup(object):
 
@@ -136,7 +137,7 @@ class BaseBackend(object):
         raise NotImplementedError()
 
     def __repr__(self):
-        return "<%s groups=%s>" % (self.__class__, [b for b in self])
+        return "<%s groups=%s>" % (self.__class__, list(self))
 
     def _retrieve_members(self, group_name):
         raise NotImplementedError()
