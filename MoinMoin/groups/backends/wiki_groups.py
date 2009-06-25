@@ -20,7 +20,7 @@ from MoinMoin.Page import Page
 from MoinMoin.groups.backends import BaseGroup, BaseBackend, GroupDoesNotExistError
 
 
-class Group(BaseGroup):
+class WikiGroup(BaseGroup):
 
     def _load_group(self):
         request = self.request
@@ -42,7 +42,7 @@ class Group(BaseGroup):
                     raise caching.CacheError
             except caching.CacheError:
                 # either cache does not exist, is erroneous or not uptodate: recreate it
-                members, member_groups = super(Group, self)._load_group()
+                members, member_groups = super(WikiGroup, self)._load_group()
                 cache.update((members, member_groups))
                 return members, member_groups
         else:
@@ -58,7 +58,7 @@ class WikiGroups(BaseBackend):
         return iter(self.request.rootpage.getPageList(user='', filter=self.page_group_regex.search))
 
     def __getitem__(self, group_name):
-        return Group(request=self.request, name=group_name, backend=self)
+        return WikiGroup(request=self.request, name=group_name, backend=self)
 
     # * Member - ignore all but first level list items, strip
     # whitespace, strip free links markup. This is used for parsing
