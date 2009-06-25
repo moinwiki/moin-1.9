@@ -648,7 +648,8 @@ def isSystemPage(request, pagename):
     @rtype: bool
     @return: true if page is a system page
     """
-    return (request.dicts.has_member('SystemPagesGroup', pagename) or
+    groups = request.groups
+    return (u'SystemPagesGroup' in groups and pagename in groups[u'SystemPagesGroup']) or
         isTemplatePage(request, pagename))
 
 
