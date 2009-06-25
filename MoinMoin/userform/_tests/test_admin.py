@@ -29,8 +29,7 @@ class TestAdmin:
 
         become_superuser(request)
 
-        assert not User(request, name=user_name).exists()
-        user = User(request, name=user_name, password=user_name).save()
+        User(request, name=user_name, password=user_name).save()
 
     def teardown_class(self):
         nuke_user(self.request, self.user_name)
