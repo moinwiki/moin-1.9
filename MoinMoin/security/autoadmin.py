@@ -69,14 +69,15 @@ class SecurityPolicy(Permissions):
     def admin(self, pagename):
         try:
             request = self.request
-            has_member = request.dicts.has_member
+            groups = request.groups
             username = request.user.name
             pagename = request.page.page_name
             mainpage = pagename.split('/')[0]
-            if username == mainpage and has_member('AutoAdminGroup', username):
+            if username == mainpage and u'AutoAdminGroup' in groups and username in groups[u'AutoAdminGroup']:
                 return True
-            groupname = "%s/AdminGroup" % mainpage
-            if has_member(groupname, username) and has_member('AutoAdminGroup', groupname):
+            group_name = "%s/AdminGroup" % mainpage
+            if group_name in groups and username in groups[group_name] and \
+                    u'AutoAdminGroup' in groups and group_name in groups[u'AutoAdminGroup']:
                 return True
         except AttributeError:
             pass # when we get called from xmlrpc, there is no request.page
