@@ -53,7 +53,7 @@ class BaseGroup(object):
         """
         processed_groups.add(self.name)
 
-        if member in self.members:
+        if member in self.members or member in self.member_groups:
             return True
         else:
             groups = self.request.groups

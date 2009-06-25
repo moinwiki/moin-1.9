@@ -49,6 +49,12 @@ class BackendTest(object):
 
         raises(GroupDoesNotExistError, lambda: groups[u'NotExistingGroup'])
 
+    def test_contains_group(self):
+        groups = self.request.groups
+
+        assert u'AdminGroup' in groups[u'EditorGroup']
+        assert u'EditorGroup' not in groups[u'AdminGroup']
+
     def test_iter(self):
         groups = self.request.groups
 
