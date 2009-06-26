@@ -12,8 +12,5 @@ from MoinMoin.datastruct.dicts import WikiDicts
 
 class Config(LocalConfig):
     group_manager_init = lambda self, request: WikiGroups(request)
+    dict_manager_init = lambda self, request: WikiDicts(request)
 
-    def dict_manager_init(self, request):
-        dicts = WikiDicts(request)
-        dicts.load_dicts()
-        return dicts
