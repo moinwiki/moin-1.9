@@ -12,7 +12,6 @@ from MoinMoin import log
 logging = log.getLogger(__name__)
 
 from MoinMoin import events as ev
-from MoinMoin import wikidicts
 
 def handle(event):
     # "changed" includes creation, deletion, renamed and copied
@@ -34,8 +33,7 @@ def handle_groupsdicts_changed(event):
     page = event.page
 
     logging.debug("groupsdicts changed: %r, scan_dicts started", page.page_name)
-    del request.dicts
-    gd = wikidicts.DictDict(request)
-    gd.scan_dicts()
+    request.dicts = request.cfg.dict_manager_init(request)
+    request.dicts.scan_dicts()
     logging.debug("groupsdicts changed: scan_dicts finished")
 

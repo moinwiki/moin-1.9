@@ -1,13 +1,13 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - MoinMoin.wikidicts tests
+    MoinMoin - MoinMoin.datastruct.dicts.backends.wiki_dicts tests
 
     @copyright: 2003-2004 by Juergen Hermann <jh@web.de>,
                 2007 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import wikidicts
+from MoinMoin.datastruct.dicts.backends import wiki_dicts
 from MoinMoin._tests import become_trusted, create_page, nuke_page
 
 class TestDictDict:
@@ -49,8 +49,8 @@ Next line has key with empty value
         dicts = self.request.dicts
 
         assert  u'SomeTestDict' in dicts
-        assert u'SomeNotExistingDict' not in  dicts
+        assert u'SomeNotExistingDict' not in dicts
 
 
-coverage_modules = ['MoinMoin.wikidicts']
+coverage_modules = ['MoinMoin.datastruct.dicts.backends.wiki_dicts']
 
