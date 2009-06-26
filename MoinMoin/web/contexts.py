@@ -371,9 +371,7 @@ class AuxilaryMixin(object):
 
     def dicts(self):
         """ Lazy initialize the dicts on the first access """
-        from MoinMoin import wikidicts
-        dicts = wikidicts.DictDict(self)
-        dicts.load_dicts()
+        dicts = self.cfg.dict_manager_init(self)
         return dicts
     dicts = EnvironProxy(dicts)
 

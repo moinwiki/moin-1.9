@@ -16,7 +16,7 @@ from MoinMoin import caching, Page
 DICTS_PICKLE_VERSION = 7
 
 
-class Dict(dict):
+class WikiDict(dict):
     """ Mapping of keys to values in a wiki page.
 
        How a Dict definition page should look like:
@@ -53,7 +53,7 @@ class Dict(dict):
         return "<Dict name=%r items=%r>" % (self.name, self.items())
 
 
-class DictDict:
+class WikiDicts:
     """ a dictionary of Dict objects
 
        Config:
@@ -90,7 +90,7 @@ class DictDict:
 
     def _adddict(self, request, dictname):
         """ add a new dict (will be read from the wiki page) """
-        self.dictdict[dictname] = Dict(request, dictname)
+        self.dictdict[dictname] = WikiDict(request, dictname)
 
     def __contains__(self, dictname):
         return self.dictdict.has_key(dictname)
