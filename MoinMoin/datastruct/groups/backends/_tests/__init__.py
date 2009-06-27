@@ -13,7 +13,7 @@
 from py.test import raises
 
 from MoinMoin import security
-from MoinMoin.groups import GroupDoesNotExistError
+from MoinMoin.datastruct.groups import GroupDoesNotExistError
 
 
 class BackendTest(object):

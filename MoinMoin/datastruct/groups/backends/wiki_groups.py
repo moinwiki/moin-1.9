@@ -17,10 +17,10 @@ import re
 
 from MoinMoin import caching, wikiutil
 from MoinMoin.Page import Page
-from MoinMoin.groups.backends import BaseGroup, BaseBackend, GroupDoesNotExistError
+from MoinMoin.datastruct.groups.backends import BaseGroup, BaseBackend, GroupDoesNotExistError
 
 
-class WikiGroup(BaseGroup):
+class WikiGroup(BaseGroup ):
 
     def _load_group(self):
         request = self.request

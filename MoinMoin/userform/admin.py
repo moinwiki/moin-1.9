@@ -14,7 +14,7 @@ from MoinMoin import user, wikiutil
 from MoinMoin.util.dataset import TupleDataset, Column
 from MoinMoin.Page import Page
 from MoinMoin.widget import html
-from MoinMoin.groups.backends.wiki_groups import WikiGroup
+from MoinMoin.datastruct.groups.backends.wiki_groups import WikiGroup
 
 
 def do_user_browser(request):

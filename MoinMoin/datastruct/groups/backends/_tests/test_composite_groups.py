@@ -10,8 +10,8 @@ MoinMoin.groups.GroupManager test
 
 from py.test import raises
 
-from  MoinMoin.groups.backends._tests import BackendTest
-from MoinMoin.groups import ConfigGroups, CompositeGroups, GroupDoesNotExistError
+from  MoinMoin.datastruct.groups.backends._tests import BackendTest
+from MoinMoin.datastruct.groups import ConfigGroups, CompositeGroups, GroupDoesNotExistError
 from MoinMoin._tests import wikiconfig
 from MoinMoin import security
 
@@ -86,4 +86,4 @@ class TestConfigGroup(object):
         assert u'not existing group' not in self.groups
 
 
-coverage_modules = ['MoinMoin.groups.backends.composite_groups']
+coverage_modules = ['MoinMoin.datastruct.groups.backends.composite_groups']

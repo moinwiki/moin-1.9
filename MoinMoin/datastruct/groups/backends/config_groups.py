@@ -8,7 +8,7 @@ The config group backend enables you to define groups in a configuration file.
 @license: GPL, see COPYING for details
 """
 
-from MoinMoin.groups.backends import BaseGroup, BaseBackend, GroupDoesNotExistError
+from MoinMoin.datastruct.groups.backends import BaseGroup, BaseBackend, GroupDoesNotExistError
 
 
 class Group(BaseGroup):

@@ -7,7 +7,7 @@ MoinMoin.groups related configuration is defined here.
 """
 
 from wikiconfig import LocalConfig
-from MoinMoin.groups import WikiGroups
+from MoinMoin.datastruct.groups import WikiGroups
 from MoinMoin.datastruct.dicts import WikiDicts
 
 class Config(LocalConfig):

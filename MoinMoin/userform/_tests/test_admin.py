@@ -8,7 +8,7 @@
 
 
 from MoinMoin.userform.admin import do_user_browser
-from MoinMoin.groups import ConfigGroups
+from MoinMoin.datastruct.groups import ConfigGroups
 from MoinMoin.user import User
 from MoinMoin.Page import Page
 from MoinMoin._tests import nuke_user, become_superuser, wikiconfig
