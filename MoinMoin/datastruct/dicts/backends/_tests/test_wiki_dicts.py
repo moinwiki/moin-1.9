@@ -7,8 +7,10 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+
 from MoinMoin.datastruct.dicts.backends import wiki_dicts
 from MoinMoin._tests import become_trusted, create_page, nuke_page
+
 
 class TestDictDict:
 
