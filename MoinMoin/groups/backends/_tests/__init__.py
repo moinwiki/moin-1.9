@@ -64,6 +64,13 @@ class BackendTest(object):
             for member in members:
                 assert member in returned_members
 
+    def test_get(self):
+        groups = self.request.groups
+
+        assert groups.get(u'AdminGroup')
+        assert u'NotExistingGroup' not in groups
+        assert groups.get(u'NotExistingGroup') is None
+
     def test_groups_with_member(self):
         groups = self.request.groups
 
@@ -129,6 +136,4 @@ class BackendTest(object):
         acl = security.AccessControlList(request.cfg, acl_rights)
 
         assert not acl.may(request, u"Someone", "write")
-
-coverage_modules = ['MoinMoin.groups.backends.config_group']
 
