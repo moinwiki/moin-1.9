@@ -50,7 +50,7 @@ class TextCha(object):
         cfg = request.cfg
         user = request.user
         disabled_group = cfg.textchas_disabled_group
-        if disabled_group and user.name and disabled_group in groups and user.name in groups[disabled_group]:
+        if disabled_group and user.name and user.name in groups.get(disabled_group, []):
             return None
         textchas = cfg.textchas
         if textchas:

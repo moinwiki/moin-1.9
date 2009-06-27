@@ -73,11 +73,11 @@ class SecurityPolicy(Permissions):
             username = request.user.name
             pagename = request.page.page_name
             mainpage = pagename.split('/')[0]
-            if username == mainpage and u'AutoAdminGroup' in groups and username in groups[u'AutoAdminGroup']:
+            if username == mainpage and username in groups.get(u'AutoAdminGroup', []):
                 return True
             group_name = "%s/AdminGroup" % mainpage
-            if group_name in groups and username in groups[group_name] and \
-                    u'AutoAdminGroup' in groups and group_name in groups[u'AutoAdminGroup']:
+            if (username in groups.get(group_name, []) and
+                group_name in groups.get(u'AutoAdminGroup', [])):
                 return True
         except AttributeError:
             pass # when we get called from xmlrpc, there is no request.page

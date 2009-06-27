@@ -141,10 +141,8 @@ class MoinOpenIDServer:
 
         # again, we never put an openid.server link on this page...
         # why are they here?
-        groups = request.groups
         openid_group_name = cfg.openid_server_restricted_users_group
-        if openid_group_name and \
-                not (openid_group_name in groups and received_name in groups[openid_group_name]):
+        if openid_group_name and received_name not in request.groups.get(openid_group_name, []):
             return False
 
         return True

@@ -29,8 +29,7 @@ class Settings(UserPrefBase):
         groups = self.request.groups
         openid_group_name = self.request.cfg.openid_server_restricted_users_group
 
-        if openid_group_name and \
-            not (openid_group_name in groups and self.request.user.name in groups[openid_group_name]):
+        if openid_group_name and self.request.user.name not in groups.get(openid_group_name, []):
                 return False
 
         return True
