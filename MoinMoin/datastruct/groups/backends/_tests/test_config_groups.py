@@ -10,8 +10,8 @@
 
 """
 
-from  MoinMoin.groups.backends._tests import BackendTest
-from MoinMoin.groups import ConfigGroups
+from  MoinMoin.datastruct.groups.backends._tests import BackendTest
+from MoinMoin.datastruct.groups import ConfigGroups
 from MoinMoin._tests import wikiconfig
 
 
@@ -24,5 +24,5 @@ class TestConfigBackend(BackendTest):
             return ConfigGroups(request, groups)
 
 
-coverage_modules = ['MoinMoin.groups.backends.config_groups']
+coverage_modules = ['MoinMoin.datastruct.groups.backends.config_groups']
 

@@ -13,8 +13,8 @@
 from py.test import raises
 import re, shutil
 
-from  MoinMoin.groups.backends._tests import BackendTest
-from MoinMoin.groups import WikiGroups
+from  MoinMoin.datastruct.groups.backends._tests import BackendTest
+from MoinMoin.datastruct.groups import WikiGroups
 from MoinMoin import Page, security
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.user import User
@@ -245,5 +245,5 @@ class TestWikiGroupBackend(BackendTest):
         assert not has_rights_before, 'AnotherUser has no read rights because in the beginning he is not a member of a group page NewGroup'
         assert has_rights_after, 'AnotherUser must have read rights because after appendage he is member of NewGroup'
 
-coverage_modules = ['MoinMoin.groups.backends.wiki_groups']
+coverage_modules = ['MoinMoin.datastruct.groups.backends.wiki_groups']
 
