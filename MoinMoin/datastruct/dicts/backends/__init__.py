@@ -6,12 +6,15 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+
 class DictDoesNotExistError(Exception):
     """
     Raised when a dict name is not found in the backend.
     """
 
+
 class BaseDict(object):
+
     def __init__(self, request, name, backend):
         """
         Initialize a dict.
@@ -32,11 +35,11 @@ class BaseDict(object):
     def __len__(self):
         return self._dict.__len__()
 
-    def __getitem__(self, *kargs):
-        return self._dict.__getitem__(*kargs)
+    def __getitem__(self, key):
+        return self._dict[key]
 
-    def get(self, *kargs):
-        return self._dict.get(*kargs)
+    def get(self, key, default=None):
+        return self._dict.get(key, default)
 
     def _load_dict(self):
         """

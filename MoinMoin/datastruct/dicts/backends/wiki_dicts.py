@@ -7,6 +7,8 @@
                 2009 MoinMoin:DmitrijsMilajevs
     @license: GNU GPL, see COPYING for details.
 """
+
+
 import re
 
 from MoinMoin import caching, wikiutil
@@ -27,7 +29,6 @@ class WikiDict(BaseDict):
         keyn:: ....
        any text ignored
     """
-
 
     def _load_dict(self):
         request = self.request

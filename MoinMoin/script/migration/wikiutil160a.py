@@ -649,8 +649,8 @@ def isSystemPage(request, pagename):
     @return: true if page is a system page
     """
     groups = request.groups
-    return (u'SystemPagesGroup' in groups and pagename in groups[u'SystemPagesGroup']) or \
-        isTemplatePage(request, pagename)
+    return ((u'SystemPagesGroup' in groups and pagename in groups[u'SystemPagesGroup']) or
+        isTemplatePage(request, pagename))
 
 
 def isTemplatePage(request, pagename):
