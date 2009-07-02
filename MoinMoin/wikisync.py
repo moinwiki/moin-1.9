@@ -310,10 +310,9 @@ class MoinLocalWiki(RemoteWiki):
 
     def getGroupItems(self, group_list):
         """ Returns all page names that are listed on the page group_list. """
-        from MoinMoin.wikidicts import Group
         pages = []
         for group_pagename in group_list:
-            pages.extend(Group(self.request, group_pagename).members())
+            pages.extend(request.groups.get(group_pagename, []))
         return [self.createSyncPage(x) for x in pages]
 
     def createSyncPage(self, page_name):
