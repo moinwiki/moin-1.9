@@ -69,6 +69,10 @@ def _check(request, pagename, username, right):
                 allowed = acl.may(request, username, right)
                 if allowed is not None:
                     return allowed
+                # If the item has an acl (even one that doesn't match) we *do not*
+                # check the parents. We only check the parents if there's no acl on
+                # the item at all.
+                break
         if not some_acl:
             allowed = cache.acl_rights_default.may(request, username, right)
             if allowed is not None:

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 23:09+0200\n"
+"POT-Creation-Date: 2009-05-12 12:01+0200\n"
 "PO-Revision-Date: 2008-11-01 11:35+0100\n"
 "Last-Translator: Radovan Garabík <rg-m18@kassiopeia.juls.savba.sk>\n"
 "Language-Team: Slovak\n"
@@ -25,19 +25,138 @@ msgstr ""
 "X-Language-in-English: Slovak\n"
 "X-HasWikiMarkup: True\n"
 
-msgid "The wiki is currently not reachable."
-msgstr "Táto wiki je momentálne nedostupná."
+#, python-format
+msgid "The package needs a newer version of MoinMoin (at least %s)."
+msgstr "Tento balíček si vyžaduje novšiu verziu MoinMoin (aspoň %s)."
 
-msgid "Invalid username or password."
-msgstr "Neplatné užívateľské meno alebo heslo."
+msgid "The theme name is not set."
+msgstr "Meno témy nie je zadané."
+
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
+msgstr ""
+
+#, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "Inštalácia „%(filename)s“ zlyhala."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr "Súbor %s nie je balíček pre MoinMoin."
+
+#, python-format
+msgid "The page %s does not exist."
+msgstr "Stránka %s neexistuje."
+
+msgid "Invalid package file header."
+msgstr "Neplatná hlavička balíčkového súboru."
+
+msgid "Package file format unsupported."
+msgstr "Formát balíčkového súboru nie je kompatibilný."
+
+#, python-format
+msgid "Unknown function %(func)s in line %(lineno)i."
+msgstr "Neznáma funkcia %(func)s na riadku %(lineno)i."
+
+#, python-format
+msgid "The file %s was not found in the package."
+msgstr "Súbor %s sa v tomto balíku nenašiel."
+
+msgid "<unknown>"
+msgstr "<neznámy>"
 
 #, python-format
 msgid ""
-"The remote wiki uses a different InterWiki name (%(remotename)s) internally "
-"than you specified (%(localname)s)."
+"Login Name: %s\n"
+"\n"
+"Password recovery token: %s\n"
+"\n"
+"Password reset URL: %s/?action=recoverpass&name=%s&token=%s\n"
 msgstr ""
-"Vzdialená wiki používa na vnútornú potrebu iný InterWiki názov (%(remotename)"
-"s), než ste zadali (%(localname)s)."
+"Prihlasovacie meno: %s\n"
+"\n"
+"Token pre obnovu hesla: %s\n"
+"\n"
+"URL pre resetovanie hesla: %s/?action=recoverpass&name=%s&token=%s\n"
+
+msgid ""
+"Somebody has requested to email you a password recovery token.\n"
+"\n"
+"If you lost your password, please go to the password reset URL below or\n"
+"go to the password recovery page again and enter your username and the\n"
+"recovery token.\n"
+msgstr ""
+"Niekto zadal požiadavku na odoslanie tokenu pre obnovu hesla.\n"
+"\n"
+"Ak ste zabudli heslo, navštívne URL pre resetovanie hesla alebo\n"
+"stránku pre obnovu hesla a zadajte svoje užívateľské meno\n"
+"a token pre obnovu.\n"
+
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr "[%(sitename)s] Údaje vášho wiki účtu"
+
+#, python-format
+msgid "Argument \"%s\" must be a boolean value, not \"%s\""
+msgstr "Argument „%s“ musí byť boolovská hodnota a nie „%s“"
+
+#, python-format
+msgid "Argument must be a boolean value, not \"%s\""
+msgstr "Argument musí byť booleanovská hodnota a nie „%s“"
+
+#, python-format
+msgid "Argument \"%s\" must be an integer value, not \"%s\""
+msgstr "Argument „%s“ musí byť celočíselná hodnota a nie „%s“"
+
+#, python-format
+msgid "Argument must be an integer value, not \"%s\""
+msgstr "Argument musí byť celočíselná hodnota a nie „%s“"
+
+#, python-format
+msgid "Argument \"%s\" must be a floating point value, not \"%s\""
+msgstr "Argument „%s“ musí byť reálne číslo a nie „%s“"
+
+#, python-format
+msgid "Argument must be a floating point value, not \"%s\""
+msgstr "Argument musí byť reálne číslo a nie „%s“"
+
+#, python-format
+msgid "Argument \"%s\" must be a complex value, not \"%s\""
+msgstr "Argument „%s“ musí byť komplexné číslo a nie „%s“"
+
+#, python-format
+msgid "Argument must be a complex value, not \"%s\""
+msgstr "Argument musí byť komplexné číslo a nie „%s“"
+
+#, python-format
+msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
+msgstr "Argument „%s“ musí byť jeden z „%s“ a nie „%s“"
+
+#, python-format
+msgid "Argument must be one of \"%s\", not \"%s\""
+msgstr "Argument musí byť jednou z hodnôt „%s“ a nie „%s“"
+
+msgid "Too many arguments"
+msgstr "Príliš veľa argumentov"
+
+msgid "Cannot have arguments without name following named arguments"
+msgstr "Nie je možné používať bezmenné argumenty po argumentoch s menami"
+
+#, python-format
+msgid "Argument \"%s\" is required"
+msgstr "Argument „%s“ je povinný"
+
+#, python-format
+msgid "No argument named \"%s\""
+msgstr "Žiadny argument nemá meno „%s“"
+
+#, python-format
+msgid "Expected \"=\" to follow \"%(token)s\""
+msgstr "Očakával sa znak „=“ po „%(token)s“"
+
+#, python-format
+msgid "Expected a value for key \"%(token)s\""
+msgstr "Očakávala sa hodnota pre kľúč „%(token)s“"
 
 msgid "Your changes are not saved!"
 msgstr "Uskutočnené zmeny sa neuložili!"
@@ -314,154 +433,6 @@ msgstr ""
 "aby ste sa vyhli editovacím konfliktom.'''<<BR>>\n"
 "Kliknite na tlačidlo Zrušiť, ak chctete opustiť editor."
 
-msgid "<unknown>"
-msgstr "<neznámy>"
-
-#, python-format
-msgid ""
-"Login Name: %s\n"
-"\n"
-"Password recovery token: %s\n"
-"\n"
-"Password reset URL: %s/?action=recoverpass&name=%s&token=%s\n"
-msgstr ""
-"Prihlasovacie meno: %s\n"
-"\n"
-"Token pre obnovu hesla: %s\n"
-"\n"
-"URL pre resetovanie hesla: %s/?action=recoverpass&name=%s&token=%s\n"
-
-msgid ""
-"Somebody has requested to email you a password recovery token.\n"
-"\n"
-"If you lost your password, please go to the password reset URL below or\n"
-"go to the password recovery page again and enter your username and the\n"
-"recovery token.\n"
-msgstr ""
-"Niekto zadal požiadavku na odoslanie tokenu pre obnovu hesla.\n"
-"\n"
-"Ak ste zabudli heslo, navštívne URL pre resetovanie hesla alebo\n"
-"stránku pre obnovu hesla a zadajte svoje užívateľské meno\n"
-"a token pre obnovu.\n"
-
-#, python-format
-msgid "[%(sitename)s] Your wiki account data"
-msgstr "[%(sitename)s] Údaje vášho wiki účtu"
-
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Neznáma akcia %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Nemáte oprávnenie použiť akciu %(action_name)s na tejto stránke."
-
-msgid "Login and try again."
-msgstr "Prihláste sa a skúste znovu."
-
-#, python-format
-msgid "The package needs a newer version of MoinMoin (at least %s)."
-msgstr "Tento balíček si vyžaduje novšiu verziu MoinMoin (aspoň %s)."
-
-msgid "The theme name is not set."
-msgstr "Meno témy nie je zadané."
-
-msgid "Installing theme files is only supported for standalone type servers."
-msgstr ""
-"Inštalovanie tematických súborov nie je kompatibilné so servermi v "
-"standalone móde."
-
-#, python-format
-msgid "Installation of '%(filename)s' failed."
-msgstr "Inštalácia „%(filename)s“ zlyhala."
-
-#, python-format
-msgid "The file %s is not a MoinMoin package file."
-msgstr "Súbor %s nie je balíček pre MoinMoin."
-
-#, python-format
-msgid "The page %s does not exist."
-msgstr "Stránka %s neexistuje."
-
-msgid "Invalid package file header."
-msgstr "Neplatná hlavička balíčkového súboru."
-
-msgid "Package file format unsupported."
-msgstr "Formát balíčkového súboru nie je kompatibilný."
-
-#, python-format
-msgid "Unknown function %(func)s in line %(lineno)i."
-msgstr "Neznáma funkcia %(func)s na riadku %(lineno)i."
-
-#, python-format
-msgid "The file %s was not found in the package."
-msgstr "Súbor %s sa v tomto balíku nenašiel."
-
-msgid "Text mode"
-msgstr "Textový mód"
-
-#, python-format
-msgid "Argument \"%s\" must be a boolean value, not \"%s\""
-msgstr "Argument „%s“ musí byť boolovská hodnota a nie „%s“"
-
-#, python-format
-msgid "Argument must be a boolean value, not \"%s\""
-msgstr "Argument musí byť booleanovská hodnota a nie „%s“"
-
-#, python-format
-msgid "Argument \"%s\" must be an integer value, not \"%s\""
-msgstr "Argument „%s“ musí byť celočíselná hodnota a nie „%s“"
-
-#, python-format
-msgid "Argument must be an integer value, not \"%s\""
-msgstr "Argument musí byť celočíselná hodnota a nie „%s“"
-
-#, python-format
-msgid "Argument \"%s\" must be a floating point value, not \"%s\""
-msgstr "Argument „%s“ musí byť reálne číslo a nie „%s“"
-
-#, python-format
-msgid "Argument must be a floating point value, not \"%s\""
-msgstr "Argument musí byť reálne číslo a nie „%s“"
-
-#, python-format
-msgid "Argument \"%s\" must be a complex value, not \"%s\""
-msgstr "Argument „%s“ musí byť komplexné číslo a nie „%s“"
-
-#, python-format
-msgid "Argument must be a complex value, not \"%s\""
-msgstr "Argument musí byť komplexné číslo a nie „%s“"
-
-#, python-format
-msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
-msgstr "Argument „%s“ musí byť jeden z „%s“ a nie „%s“"
-
-#, python-format
-msgid "Argument must be one of \"%s\", not \"%s\""
-msgstr "Argument musí byť jednou z hodnôt „%s“ a nie „%s“"
-
-msgid "Too many arguments"
-msgstr "Príliš veľa argumentov"
-
-msgid "Cannot have arguments without name following named arguments"
-msgstr "Nie je možné používať bezmenné argumenty po argumentoch s menami"
-
-#, python-format
-msgid "Argument \"%s\" is required"
-msgstr "Argument „%s“ je povinný"
-
-#, python-format
-msgid "No argument named \"%s\""
-msgstr "Žiadny argument nemá meno „%s“"
-
-#, python-format
-msgid "Expected \"=\" to follow \"%(token)s\""
-msgstr "Očakával sa znak „=“ po „%(token)s“"
-
-#, python-format
-msgid "Expected a value for key \"%(token)s\""
-msgstr "Očakávala sa hodnota pre kľúč „%(token)s“"
-
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Neplatný regulárny výraz pre zvýrazňovanie: „%(regex)s“: %(error)s"
@@ -491,754 +462,33 @@ msgstr "Vytvoriť novú stránku"
 msgid "You are not allowed to view this page."
 msgstr "Nemáte povolenie pozrieť si túto stránku."
 
-msgid "Switch user"
-msgstr "Prepnutie užívateľa"
+msgid "Text mode"
+msgstr "Textový mód"
 
-msgid "No user selected"
-msgstr "Nezvolený žiadny uživateľ"
+msgid "The wiki is currently not reachable."
+msgstr "Táto wiki je momentálne nedostupná."
 
-msgid ""
-"You can now change the settings of the selected user account; log out to get "
-"back to your account."
-msgstr ""
-"Teraz môžete zmeniť nastavenia vybraného užívateľa; odhláste sa aby ste sa "
-"dostali naspäť na svoj účet."
-
-msgid "You are the only user."
-msgstr "Ste jediný užívateľ"
-
-msgid ""
-"As a superuser, you can temporarily assume the identity of another user."
-msgstr ""
-
-msgid "Select User"
-msgstr "Vybrať Užívateľa"
-
-msgid "Change password"
-msgstr "Zmena hesla"
-
-msgid "Passwords don't match!"
-msgstr "Heslá sa nezhodujú!"
-
-msgid "Please specify a password!"
-msgstr "Zadajte, prosím, heslo!"
-
-#, python-format
-msgid "Password not acceptable: %s"
-msgstr "Heslo je neprijateľné: %s"
-
-msgid "Your password has been changed."
-msgstr "Vaše heslo bolo zmenené."
-
-msgid "To change your password, enter a new password twice."
-msgstr "Ak chcete zmeniť heslo, zadajte nové heslo dvakrát."
-
-msgid "Password"
-msgstr "Heslo"
-
-msgid "Password repeat"
-msgstr "Zopakovať heslo"
-
-msgid "OpenID settings"
-msgstr ""
-
-msgid "Cannot remove all OpenIDs."
-msgstr ""
-
-msgid "The selected OpenIDs have been removed."
-msgstr ""
-
-msgid "No OpenID given."
-msgstr ""
-
-msgid "OpenID is already present."
-msgstr ""
-
-msgid "Failed to resolve OpenID."
-msgstr ""
-
-msgid "OpenID discovery failure, not a valid OpenID."
-msgstr ""
-
-#, python-format
-msgid "OpenID error: %s."
-msgstr ""
-
-msgid "Verification canceled."
-msgstr "Overenie bolo zrušené."
-
-msgid "This OpenID is already used for another account."
-msgstr "Toto OpenID už bolo použité pre iný účet."
-
-msgid "OpenID added successfully."
-msgstr ""
-
-msgid "OpenID failure."
-msgstr ""
-
-msgid "Current OpenIDs"
-msgstr ""
-
-msgid "Remove selected"
-msgstr ""
-
-msgid "Add OpenID"
-msgstr ""
-
-msgid "OpenID verification requires that you click this button:"
-msgstr ""
-
-msgid "Notification"
-msgstr "Oznam"
-
-msgid "Notification settings saved!"
-msgstr "Uložené nastavenia oznamov!"
-
-msgid "'''Email'''"
-msgstr "'''Email'''"
-
-msgid "'''Jabber'''"
-msgstr "'''Jabber'''"
-
-msgid "'''Event type'''"
-msgstr "'''Typ udalosti'''"
-
-msgid "Select the events you want to be notified about."
-msgstr "Zvoľte si udalosť, o ktorej chcete byť informovaný."
-
-msgid ""
-"Before you can be notified, you need to provide a way to contact you in the "
-"general preferences."
-msgstr "Musíte poskytnúť spôsob kontaktu, ak chcete dostávať oznamy"
-
-msgid "Subscribed events"
-msgstr "Prihlásené udalosti"
-
-msgid "Subscribed wiki pages<<BR>>(one regex per line)"
-msgstr "Odoberianie wiki stránok<<BR>>(jeden regulárny výraz na riadok)"
-
-msgid "Save"
-msgstr "Uložiť"
-
-msgid "Preferences"
-msgstr "Nastavenia"
+msgid "Invalid username or password."
+msgstr "Neplatné užívateľské meno alebo heslo."
 
 #, python-format
 msgid ""
-"Invalid user name {{{'%s'}}}.\n"
-"Name may contain any Unicode alpha numeric character, with optional one\n"
-"space between words. Group page name is not allowed."
+"The remote wiki uses a different InterWiki name (%(remotename)s) internally "
+"than you specified (%(localname)s)."
 msgstr ""
-"Neplatné prihlasovacie meno „{{{%s}}}“.\n"
-"Prihlasovacie mená môžu obsahovať akýkoľvek Unicode alfanumerický znak\n"
-"s prípadnou jednou medzerou medzi slovami.\n"
-"Meno skupinovej stránky nie je povolené."
-
-msgid "This user name already belongs to somebody else."
-msgstr "Toto prihlasovacie meno patrí už niekomu inému."
-
-msgid "Empty user name. Please enter a user name."
-msgstr "Chýba meno užívateľa. Prosím, zadajte meno užívateľa a heslo."
-
-msgid ""
-"Please provide your email address. If you lose your login information, you "
-"can get it by email."
-msgstr ""
-"Zadajte, prosím, Vašu mailovú adresu. Ak stratíte svoje prihlasovacie údaje, "
-"môžu byť zaslané na uvedenú mailovú adresu."
-
-msgid "This email already belongs to somebody else."
-msgstr "Táto e-mailová adresa patrí už niekomu inému."
-
-msgid "This jabber id already belongs to somebody else."
-msgstr "Táto jabber adresa patrí už niekomu inému."
+"Vzdialená wiki používa na vnútornú potrebu iný InterWiki názov (%(remotename)"
+"s), než ste zadali (%(localname)s)."
 
 #, python-format
-msgid "The theme '%(theme_name)s' could not be loaded!"
-msgstr "Tému '%(theme_name)s' nebolo možné nahrať!"
-
-msgid "User preferences saved!"
-msgstr "Užívateľské nastavenia sú uložené!"
-
-msgid "Default"
-msgstr "Predvolené"
-
-msgid "<Browser setting>"
-msgstr "<Nastavenie prehliadača>"
-
-msgid "the one preferred"
-msgstr "len obľúbený"
-
-msgid "free choice"
-msgstr "možnosť voľby"
-
-msgid "Preferred theme"
-msgstr "Preferovaná téma"
-
-msgid "Editor Preference"
-msgstr "Preferovaný Editor"
-
-msgid "Editor shown on UI"
-msgstr "Editor zobrazený v užívateľskom rozhraní"
-
-msgid "Time zone"
-msgstr "Časová zóna"
-
-msgid "Your time is"
-msgstr "Váš čas je"
-
-msgid "Server time is"
-msgstr "Čas serveru je"
-
-msgid "Date format"
-msgstr "Formát dátumu"
-
-msgid "Preferred language"
-msgstr "Preferovaný jazyk"
-
-msgid "General options"
-msgstr "Všeobecné voľby"
-
-msgid "Quick links"
-msgstr "Rýchle odkazy"
-
-msgid "OpenID server"
-msgstr "OpenID server"
-
-msgid "The selected websites have been removed."
-msgstr ""
-
-msgid "Trusted websites"
-msgstr ""
-
-msgid "Line"
-msgstr "Riadok"
-
-msgid "No differences found!"
-msgstr "Nenašli sa žiadne rozdiely!"
-
-msgid "Deletions are marked like this."
-msgstr "Vymazané časti sa označujú takto."
-
-msgid "Additions are marked like this."
-msgstr "Pridané časti sa označujú takto."
-
-msgid "Please log in first."
-msgstr "Prosím, najskôr sa prihláste."
-
-msgid ""
-"Please choose an account name now.\n"
-"If you choose an existing account name you will be asked for the\n"
-"password and be able to associate the account with your OpenID."
-msgstr ""
-
-msgid "Name"
-msgstr "Meno"
-
-msgid "Choose this name"
-msgstr "Zvoľte si toto meno"
-
-msgid "This is not a valid username, choose a different one."
-msgstr "Toto nie je platné meno, zvoľte si iné."
-
-msgid ""
-"The username you have chosen is already\n"
-"taken. If it is your username, enter your password below to associate\n"
-"the username with your OpenID. Otherwise, please choose a different\n"
-"username and leave the password field blank."
-msgstr ""
-
-msgid "Associate this name"
-msgstr ""
-
-msgid "Your account is now associated to your OpenID."
-msgstr ""
-
-msgid "The password you entered is not valid."
-msgstr "Heslo je neplatné."
-
-msgid "Anonymous sessions need to be enabled for OpenID login."
-msgstr ""
-
-msgid "No OpenID."
-msgstr ""
-
-msgid ""
-"If you do not have an account yet, you can still log in with your OpenID and "
-"create one during login."
-msgstr ""
-
-msgid "Could not contact botbouncer.com."
-msgstr "Nemôžem sa spojiť s botbouncer.com."
-
-msgid "Missing password. Please enter user name and password."
-msgstr "Chýbajúce heslo. Prosím, zadajte, prihlasovacie meno a heslo."
+msgid "Unknown action %(action_name)s."
+msgstr "Neznáma akcia %(action_name)s."
 
 #, python-format
-msgid "LDAP server %(server)s failed."
-msgstr "LDAP server %(server)s zlyhal."
-
-msgid "Failed to connect to database."
-msgstr "Zlyhalo pripojenie k databáze."
-
-#, python-format
-msgid ""
-"If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
-msgstr ""
-
-msgid ""
-" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
-">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
-"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
-">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
-" Horizontal Rule:: <<Verbatim(----)>>\n"
-" Force Linebreak:: <<Verbatim(\\\\)>>\n"
-" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
-"===== Title 5 =====.\n"
-" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
-"items.\n"
-" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
-" Tables:: |= header text | cell text | more cell text |;\n"
-"\n"
-"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
-msgstr ""
-
-msgid ""
-" Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
-">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
-"italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed ''<<Verbatim(''')"
-">>'''''bold'''<<Verbatim(''')>> and italics''<<Verbatim('')>>; <<Verbatim"
-"(----)>> horizontal rule.\n"
-" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
-"===== Title 5 =====.\n"
-" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
-"#n start numbering at n; space alone indents.\n"
-" Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])"
-">>.\n"
-" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
-"white space allowed after tables or titles.\n"
-"\n"
-"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
-msgstr ""
-
-#, python-format
-msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
-msgstr "Očakávané \"%(wanted)s\" po \"%(key)s\", získáné \"%(token)s\""
-
-#, python-format
-msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
-msgstr "Očakávané celé číslo \"%(key)s\" pred \"%(token)s\""
-
-#, python-format
-msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
-msgstr "Očakávané celé číslo \"%(arg)s\" po \"%(key)s\""
-
-#, python-format
-msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
-msgstr "Očakávaná hodnota farby \"%(arg)s\" po \"%(key)s\""
-
-msgid ""
-"Rendering of reStructured text is not possible, please install Docutils."
-msgstr ""
-"Nie je možné zobraziť reStructured text, prosím, nainštalujte si Docutils."
-
-msgid ""
-"{{{\n"
-"Emphasis: *italic* **bold** ``monospace``\n"
-"\n"
-"Headings: Heading 1  Heading 2  Heading 3\n"
-"          =========  ---------  ~~~~~~~~~\n"
-"\n"
-"Horizontal rule: ----\n"
-"\n"
-"Links: TrailingUnderscore_ `multi word with backticks`_ external_\n"
-"\n"
-".. _external: http://external-site.example.org/foo/\n"
-"\n"
-"Lists: * bullets; 1., a. numbered items.\n"
-"}}}\n"
-"(!) For more help, see the\n"
-"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
-"reStructuredText Quick Reference]].\n"
-msgstr ""
-
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr "**Prekročený maximálny počet povolených includes**"
-
-#, python-format
-msgid "**You are not allowed to read the page: %s**"
-msgstr "**Nie ste oprávnený čítať stránku: %s ! **"
-
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr "**Odporúčanú stránku nemožno nájsť: %s**"
-
-msgid "XSLT option disabled, please look at HelpOnConfiguration."
-msgstr "XSLT nie je povolené, prosím, pozrite sa do HelpOnConfiguration."
-
-msgid "XSLT processing is not available, please install 4suite 1.x."
-msgstr "XSLT spracovanie nie je dostupné, prosím, nainštalujte si 4suite 1.x."
-
-#, python-format
-msgid "%(errortype)s processing error"
-msgstr "Chyba pri spracovávaní: \"%(errortype)s\""
-
-msgid "Password is too short."
-msgstr "Heslo je príliš krátke."
-
-msgid "Password has not enough different characters."
-msgstr "Heslo nemá dosť rôznych znakov."
-
-msgid ""
-"Password is too easy (password contains name or name contains password)."
-msgstr "Heslo je príliš jednoduché (obsahuje meno alebo opačne)."
-
-msgid "Password is too easy (keyboard sequence)."
-msgstr "Heslo je príliš jednoduché (postupnosť klávesov)"
-
-msgid "Diffs"
-msgstr "Rozdiely"
-
-msgid "Info"
-msgstr "Informácie"
-
-msgid "Edit"
-msgstr "Editovať"
-
-msgid "UnSubscribe"
-msgstr "ZrušiťOdoberanie"
-
-msgid "Subscribe"
-msgstr "Odoberať"
-
-msgid "Raw"
-msgstr "Zdroják"
-
-msgid "XML"
-msgstr "XML"
-
-msgid "Print"
-msgstr "Tlačiť"
-
-msgid "View"
-msgstr "Pozrieť si"
-
-msgid "Up"
-msgstr "Hore"
-
-msgid "Publish my email (not my wiki homepage) in author info"
-msgstr ""
-"Zverejniť moju emailovú adresu (nie moju domovskú wiki stránku) v "
-"informáciách o autorovi"
-
-msgid "Open editor on double click"
-msgstr "Editor sa otvára dvojklikom"
-
-msgid "After login, jump to last visited page"
-msgstr "Po prihlásení začať na poslednej navštívenej strane"
-
-msgid "Show comment sections"
-msgstr "Zobraziť komentáre"
-
-msgid "Show question mark for non-existing pagelinks"
-msgstr "Zobraziť otáznik pri odkazoch na neexistujúce stránky"
-
-msgid "Show page trail"
-msgstr "Zobraziť stopu stránok"
-
-msgid "Show icon toolbar"
-msgstr "Ukázať panel nástrojov s ikonami"
-
-msgid "Show top/bottom links in headings"
-msgstr "Zobraziť v záhlaví linky na hornú a dolnú časť stránky"
-
-msgid "Show fancy diffs"
-msgstr "Rozdiely zobraziť rôznofarebne"
-
-msgid "Add spaces to displayed wiki names"
-msgstr "Pridať medzery k zobrazených wiki menám"
-
-msgid "Remember login information"
-msgstr "Zapamätať si prihlasovacie údaje používateľa"
-
-msgid "Disable this account forever"
-msgstr "Navždy zakázať tento účet"
-
-msgid "(Use FirstnameLastname)"
-msgstr "(Použite MenoPriezvisko)"
-
-msgid "Alias-Name"
-msgstr "Pseudonym"
-
-msgid "Email"
-msgstr "Email"
-
-msgid "Jabber ID"
-msgstr "Jabber ID"
-
-msgid "User CSS URL"
-msgstr "URL vlastného CSS"
-
-msgid "(Leave it empty for disabling user CSS)"
-msgstr "(Nevypĺňajte, ak nechcete využiť vlastné CSS)"
-
-msgid "Editor size"
-msgstr "Veľkosť editora"
-
-msgid "Username"
-msgstr "Užívateľ"
-
-msgid "Member of Groups"
-msgstr "Člen kupín"
-
-msgid "Jabber"
-msgstr "Jabber"
-
-msgid "Action"
-msgstr "Akcia"
-
-msgid "Disable user"
-msgstr "Nepovoliť užívateľa"
-
-msgid "Enable user"
-msgstr "Povoliť užívateľa"
-
-msgid "disabled"
-msgstr "nepovolené"
-
-msgid "Mail account data"
-msgstr "Zašli mailom moje údaje o účte"
-
-msgid "OpenID"
-msgstr "OpenID"
-
-msgid "Login"
-msgstr "Prihlásenie"
-
-#, python-format
-msgid "Upload new attachment \"%(filename)s\""
-msgstr "Pridať novú prílohu „ %(filename)s “"
-
-#, python-format
-msgid "Inlined image: %(url)s"
-msgstr "Vložený obrázok : %(url)s"
-
-#, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Vytvoriť novú kresbu „ %(filename)s “ (v novom okne)"
-
-#, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Úprava obrázka %(filename)s (v novom okne)"
-
-#, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Klikateľná kresba %(filename)s"
-
-msgid "Toggle line numbers"
-msgstr "Prepnúť zobrazenia čísel riadkov"
-
-#, python-format
-msgid "Revert to revision %(rev)d."
-msgstr "Návrat k verzii %(rev)d."
-
-#, python-format
-msgid "Renamed from '%(oldpagename)s'."
-msgstr "Premenované z „ %(oldpagename)s “."
-
-msgid "Options --pages and --search are mutually exclusive!"
-msgstr "Voľby --pages a --search sa vzájomne vylučujú!"
-
-msgid "You must specify an output file!"
-msgstr "Musíte určiť výstupný súbor!"
-
-msgid "No pages specified using --pages or --search, assuming full package."
-msgstr ""
-"žiadna stránka neurčená pomocou --pages alebo --search, predpokladáme úplný "
-"balíček."
-
-msgid "All attachments included into the package."
-msgstr "Všetky prílohy boli zahrnuté v balíčku."
-
-msgid "Output file already exists! Cowardly refusing to continue!"
-msgstr "Výstupný súbor už existuje! Zbabelo odmietam pokračovať!"
-
-#, python-format
-msgid ""
-"Dear Wiki user,\n"
-"\n"
-"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
-"change notification.\n"
-"\n"
-"The \"%(pagename)s\" page has been changed by %(editor)s:\n"
-msgstr ""
-"Vážený užívateľ Wiki,\n"
-"\n"
-"Požiadali ste o zasielanie zmien wiki stránky alebo kategórie na \"%"
-"(sitename)s.\n"
-"\n"
-"Stránku %(pagename)s zmenil užívateľ %(editor)s:\n"
-
-msgid "New page:\n"
-msgstr "Nová stránka:\n"
-
-msgid "No differences found!\n"
-msgstr "Nenašli sa nijaké rozdiely!\n"
-
-#, python-format
-msgid ""
-"Dear wiki user,\n"
-"\n"
-"You have subscribed to a wiki page \"%(sitename)s\" for change "
-"notification.\n"
-"\n"
-"The page \"%(pagename)s\" has been deleted by %(editor)s:\n"
-"\n"
-msgstr ""
-"Vážený užívateľ Wiki,\n"
-"\n"
-"Požiadali ste o zasielanie zmien wiki stránky\n"
-"%(sitename)s.\n"
-"\n"
-"Stránka %(pagename)s bola vymazaná redaktorom %(editor)s:\n"
-
-#, python-format
-msgid ""
-"Dear wiki user,\n"
-"\n"
-"You have subscribed to a wiki page \"%(sitename)s\" for change "
-"notification.\n"
-"\n"
-"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by %(editor)"
-"s:\n"
-msgstr ""
-"Vážený užívateľ Wiki,\n"
-"\n"
-"Požiadali ste o zasielanie zmien wiki stránky\n"
-"%(sitename)s.\n"
-"\n"
-"Stránka \"%(pagename)s\" bola premenovaná z mena \"%(oldname)s\" redaktorom %"
-"(editor)s\n"
-
-#, python-format
-msgid "New user account created on %(sitename)s"
-msgstr "Nový užívateľ vytvorený na %(sitename)s"
-
-#, python-format
-msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
-"\n"
-"    User name: %(username)s\n"
-"    Email address: %(useremail)s"
-msgstr ""
-
-#, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
-msgstr "Nová príloha bola pridaná k stránke %(pagename)s na %(sitename)s"
-
-#, python-format
-msgid ""
-"Dear Wiki user,\n"
-"\n"
-"You have subscribed to a wiki page \"%(page_name)s\" for change "
-"notification. An attachment has been added to that page by %(editor)s. "
-"Following detailed information is available:\n"
-"\n"
-"Attachment name: %(attach_name)s\n"
-"Attachment size: %(attach_size)s\n"
-msgstr ""
-
-#, python-format
-msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
-msgstr ""
-"[%(sitename)s] %(trivial)sZmena stránky \"%(pagename)s\" užívateľom %"
-"(username)s"
-
-msgid "Trivial "
-msgstr "Drobná "
-
-#, python-format
-msgid ""
-"Attachment link: %(attach)s\n"
-"Page link: %(page)s\n"
-msgstr ""
-
-msgid "Page has been modified"
-msgstr "Stránka bola modifikovaná"
-
-msgid "Page has been modified in a trivial fashion"
-msgstr "Stránka bola mierne modifikovaná"
-
-msgid "Page has been renamed"
-msgstr "Stránka bola premenovaná"
-
-msgid "Page has been deleted"
-msgstr "Stránka bola vymazaná!"
-
-msgid "Page has been copied"
-msgstr "Stránka bola skopírovaná"
-
-msgid "A new attachment has been added"
-msgstr "Nová príloha bola pridaná"
-
-msgid "A page has been reverted to a previous state"
-msgstr "Stránka bola navrátená do predchádzajúceho stavu"
-
-msgid "A user has subscribed to a page"
-msgstr "Užívateľ sa prihlásil na odoberaniestránky."
-
-msgid "A new account has been created"
-msgstr "Nový účet bol vytvorený"
-
-msgid "Attachment link"
-msgstr "Linka na prílohu"
-
-msgid "Page link"
-msgstr "Linka na stránku"
-
-msgid "Changed page"
-msgstr "Zmenená stránka"
-
-msgid "Page changed"
-msgstr "Stránka bola zmenená"
-
-msgid "about"
-msgstr "približne"
-
-#, python-format
-msgid ""
-"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
-"%(be)s results out of about %(pages)d pages."
-msgstr ""
-"Výsledky %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s z %(aboutHits)s %(bs)s%(hits)d"
-"%(be)s výsledkov z približne %(pages)d stránok."
-
-msgid "seconds"
-msgstr "sekúnd"
-
-msgid "Previous"
-msgstr "Predchádzajúci"
-
-msgid "Next"
-msgstr "Ďalší"
-
-msgid "rev"
-msgstr "revízia"
-
-msgid "current"
-msgstr "aktuálny"
-
-#, python-format
-msgid "last modified: %s"
-msgstr "posledná zmena: %s"
-
-msgid "match"
-msgstr "zhoda"
-
-msgid "matches"
-msgstr "zhody"
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Nemáte oprávnenie použiť akciu %(action_name)s na tejto stránke."
+
+msgid "Login and try again."
+msgstr "Prihláste sa a skúste znovu."
 
 msgid "RecentChanges"
 msgstr "PoslednéZmeny"
@@ -1466,9 +716,6 @@ msgstr "RegisterStránok"
 msgid "HelpOnAccessControlLists"
 msgstr ""
 
-msgid "HelpOnAcl"
-msgstr ""
-
 #, fuzzy
 msgid "HelpOnActions"
 msgstr "ObsahPomocníka"
@@ -1530,9 +777,6 @@ msgid "HelpOnMacros"
 msgstr ""
 
 msgid "HelpOnMacros/EmbedObject"
-msgstr ""
-
-msgid "HelpOnMacros/ImageLink"
 msgstr ""
 
 msgid "HelpOnMacros/Include"
@@ -1772,6 +1016,422 @@ msgstr "KontrolaPravopisu"
 msgid "Discussion"
 msgstr "Diskusia"
 
+msgid "Password is too short."
+msgstr "Heslo je príliš krátke."
+
+msgid "Password has not enough different characters."
+msgstr "Heslo nemá dosť rôznych znakov."
+
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr "Heslo je príliš jednoduché (obsahuje meno alebo opačne)."
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr "Heslo je príliš jednoduché (postupnosť klávesov)"
+
+msgid "Diffs"
+msgstr "Rozdiely"
+
+msgid "Info"
+msgstr "Informácie"
+
+msgid "Edit"
+msgstr "Editovať"
+
+msgid "UnSubscribe"
+msgstr "ZrušiťOdoberanie"
+
+msgid "Subscribe"
+msgstr "Odoberať"
+
+msgid "Raw"
+msgstr "Zdroják"
+
+msgid "XML"
+msgstr "XML"
+
+msgid "Print"
+msgstr "Tlačiť"
+
+msgid "View"
+msgstr "Pozrieť si"
+
+msgid "Up"
+msgstr "Hore"
+
+msgid "Publish my email (not my wiki homepage) in author info"
+msgstr ""
+"Zverejniť moju emailovú adresu (nie moju domovskú wiki stránku) v "
+"informáciách o autorovi"
+
+msgid "Open editor on double click"
+msgstr "Editor sa otvára dvojklikom"
+
+msgid "After login, jump to last visited page"
+msgstr "Po prihlásení začať na poslednej navštívenej strane"
+
+msgid "Show comment sections"
+msgstr "Zobraziť komentáre"
+
+msgid "Show question mark for non-existing pagelinks"
+msgstr "Zobraziť otáznik pri odkazoch na neexistujúce stránky"
+
+msgid "Show page trail"
+msgstr "Zobraziť stopu stránok"
+
+msgid "Show icon toolbar"
+msgstr "Ukázať panel nástrojov s ikonami"
+
+msgid "Show top/bottom links in headings"
+msgstr "Zobraziť v záhlaví linky na hornú a dolnú časť stránky"
+
+msgid "Show fancy diffs"
+msgstr "Rozdiely zobraziť rôznofarebne"
+
+msgid "Add spaces to displayed wiki names"
+msgstr "Pridať medzery k zobrazených wiki menám"
+
+msgid "Remember login information"
+msgstr "Zapamätať si prihlasovacie údaje používateľa"
+
+msgid "Disable this account forever"
+msgstr "Navždy zakázať tento účet"
+
+msgid "Name"
+msgstr "Meno"
+
+msgid "(Use FirstnameLastname)"
+msgstr "(Použite MenoPriezvisko)"
+
+msgid "Alias-Name"
+msgstr "Pseudonym"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Jabber ID"
+msgstr "Jabber ID"
+
+msgid "User CSS URL"
+msgstr "URL vlastného CSS"
+
+msgid "(Leave it empty for disabling user CSS)"
+msgstr "(Nevypĺňajte, ak nechcete využiť vlastné CSS)"
+
+msgid "Editor size"
+msgstr "Veľkosť editora"
+
+msgid "Username"
+msgstr "Užívateľ"
+
+msgid "Member of Groups"
+msgstr "Člen kupín"
+
+msgid "Jabber"
+msgstr "Jabber"
+
+msgid "Action"
+msgstr "Akcia"
+
+msgid "Disable user"
+msgstr "Nepovoliť užívateľa"
+
+msgid "Enable user"
+msgstr "Povoliť užívateľa"
+
+msgid "disabled"
+msgstr "nepovolené"
+
+msgid "Mail account data"
+msgstr "Zašli mailom moje údaje o účte"
+
+msgid "Password"
+msgstr "Heslo"
+
+msgid "OpenID"
+msgstr "OpenID"
+
+msgid "Login"
+msgstr "Prihlásenie"
+
+msgid "Failed to connect to database."
+msgstr "Zlyhalo pripojenie k databáze."
+
+msgid "Could not contact botbouncer.com."
+msgstr "Nemôžem sa spojiť s botbouncer.com."
+
+msgid "Please log in first."
+msgstr "Prosím, najskôr sa prihláste."
+
+msgid "Missing password. Please enter user name and password."
+msgstr "Chýbajúce heslo. Prosím, zadajte, prihlasovacie meno a heslo."
+
+#, python-format
+msgid "LDAP server %(server)s failed."
+msgstr "LDAP server %(server)s zlyhal."
+
+#, python-format
+msgid ""
+"If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
+"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+msgstr ""
+
+msgid ""
+"Please choose an account name now.\n"
+"If you choose an existing account name you will be asked for the\n"
+"password and be able to associate the account with your OpenID."
+msgstr ""
+
+msgid "Choose this name"
+msgstr "Zvoľte si toto meno"
+
+msgid "This is not a valid username, choose a different one."
+msgstr "Toto nie je platné meno, zvoľte si iné."
+
+msgid ""
+"The username you have chosen is already\n"
+"taken. If it is your username, enter your password below to associate\n"
+"the username with your OpenID. Otherwise, please choose a different\n"
+"username and leave the password field blank."
+msgstr ""
+
+msgid "Associate this name"
+msgstr ""
+
+#, python-format
+msgid "OpenID error: %s."
+msgstr ""
+
+msgid "Verification canceled."
+msgstr "Overenie bolo zrušené."
+
+msgid "OpenID failure."
+msgstr ""
+
+msgid "Your account is now associated to your OpenID."
+msgstr ""
+
+msgid "The password you entered is not valid."
+msgstr "Heslo je neplatné."
+
+msgid "OpenID verification requires that you click this button:"
+msgstr ""
+
+msgid "Anonymous sessions need to be enabled for OpenID login."
+msgstr ""
+
+msgid "Failed to resolve OpenID."
+msgstr ""
+
+msgid "OpenID discovery failure, not a valid OpenID."
+msgstr ""
+
+msgid "No OpenID."
+msgstr ""
+
+msgid ""
+"If you do not have an account yet, you can still log in with your OpenID and "
+"create one during login."
+msgstr ""
+
+msgid "Change password"
+msgstr "Zmena hesla"
+
+msgid "Passwords don't match!"
+msgstr "Heslá sa nezhodujú!"
+
+msgid "Please specify a password!"
+msgstr "Zadajte, prosím, heslo!"
+
+#, python-format
+msgid "Password not acceptable: %s"
+msgstr "Heslo je neprijateľné: %s"
+
+msgid "Your password has been changed."
+msgstr "Vaše heslo bolo zmenené."
+
+msgid "To change your password, enter a new password twice."
+msgstr "Ak chcete zmeniť heslo, zadajte nové heslo dvakrát."
+
+msgid "Password repeat"
+msgstr "Zopakovať heslo"
+
+msgid "Switch user"
+msgstr "Prepnutie užívateľa"
+
+msgid "No user selected"
+msgstr "Nezvolený žiadny uživateľ"
+
+msgid ""
+"You can now change the settings of the selected user account; log out to get "
+"back to your account."
+msgstr ""
+"Teraz môžete zmeniť nastavenia vybraného užívateľa; odhláste sa aby ste sa "
+"dostali naspäť na svoj účet."
+
+msgid "You are the only user."
+msgstr "Ste jediný užívateľ"
+
+msgid ""
+"As a superuser, you can temporarily assume the identity of another user."
+msgstr ""
+
+msgid "Select User"
+msgstr "Vybrať Užívateľa"
+
+msgid "OpenID settings"
+msgstr ""
+
+msgid "Cannot remove all OpenIDs."
+msgstr ""
+
+msgid "The selected OpenIDs have been removed."
+msgstr ""
+
+msgid "No OpenID given."
+msgstr ""
+
+msgid "OpenID is already present."
+msgstr ""
+
+msgid "This OpenID is already used for another account."
+msgstr "Toto OpenID už bolo použité pre iný účet."
+
+msgid "OpenID added successfully."
+msgstr ""
+
+msgid "Current OpenIDs"
+msgstr ""
+
+msgid "Remove selected"
+msgstr ""
+
+msgid "Add OpenID"
+msgstr ""
+
+msgid "OpenID server"
+msgstr "OpenID server"
+
+msgid "The selected websites have been removed."
+msgstr ""
+
+msgid "Trusted websites"
+msgstr ""
+
+msgid "Preferences"
+msgstr "Nastavenia"
+
+#, python-format
+msgid ""
+"Invalid user name {{{'%s'}}}.\n"
+"Name may contain any Unicode alpha numeric character, with optional one\n"
+"space between words. Group page name is not allowed."
+msgstr ""
+"Neplatné prihlasovacie meno „{{{%s}}}“.\n"
+"Prihlasovacie mená môžu obsahovať akýkoľvek Unicode alfanumerický znak\n"
+"s prípadnou jednou medzerou medzi slovami.\n"
+"Meno skupinovej stránky nie je povolené."
+
+msgid "This user name already belongs to somebody else."
+msgstr "Toto prihlasovacie meno patrí už niekomu inému."
+
+msgid "Empty user name. Please enter a user name."
+msgstr "Chýba meno užívateľa. Prosím, zadajte meno užívateľa a heslo."
+
+msgid ""
+"Please provide your email address. If you lose your login information, you "
+"can get it by email."
+msgstr ""
+"Zadajte, prosím, Vašu mailovú adresu. Ak stratíte svoje prihlasovacie údaje, "
+"môžu byť zaslané na uvedenú mailovú adresu."
+
+msgid "This email already belongs to somebody else."
+msgstr "Táto e-mailová adresa patrí už niekomu inému."
+
+msgid "This jabber id already belongs to somebody else."
+msgstr "Táto jabber adresa patrí už niekomu inému."
+
+#, python-format
+msgid "The theme '%(theme_name)s' could not be loaded!"
+msgstr "Tému '%(theme_name)s' nebolo možné nahrať!"
+
+msgid "User preferences saved!"
+msgstr "Užívateľské nastavenia sú uložené!"
+
+msgid "Default"
+msgstr "Predvolené"
+
+msgid "<Browser setting>"
+msgstr "<Nastavenie prehliadača>"
+
+msgid "the one preferred"
+msgstr "len obľúbený"
+
+msgid "free choice"
+msgstr "možnosť voľby"
+
+msgid "Save"
+msgstr "Uložiť"
+
+msgid "Preferred theme"
+msgstr "Preferovaná téma"
+
+msgid "Editor Preference"
+msgstr "Preferovaný Editor"
+
+msgid "Editor shown on UI"
+msgstr "Editor zobrazený v užívateľskom rozhraní"
+
+msgid "Time zone"
+msgstr "Časová zóna"
+
+msgid "Your time is"
+msgstr "Váš čas je"
+
+msgid "Server time is"
+msgstr "Čas serveru je"
+
+msgid "Date format"
+msgstr "Formát dátumu"
+
+msgid "Preferred language"
+msgstr "Preferovaný jazyk"
+
+msgid "General options"
+msgstr "Všeobecné voľby"
+
+msgid "Quick links"
+msgstr "Rýchle odkazy"
+
+msgid "Notification"
+msgstr "Oznam"
+
+msgid "Notification settings saved!"
+msgstr "Uložené nastavenia oznamov!"
+
+msgid "'''Email'''"
+msgstr "'''Email'''"
+
+msgid "'''Jabber'''"
+msgstr "'''Jabber'''"
+
+msgid "'''Event type'''"
+msgstr "'''Typ udalosti'''"
+
+msgid "Select the events you want to be notified about."
+msgstr "Zvoľte si udalosť, o ktorej chcete byť informovaný."
+
+msgid ""
+"Before you can be notified, you need to provide a way to contact you in the "
+"general preferences."
+msgstr "Musíte poskytnúť spôsob kontaktu, ak chcete dostávať oznamy"
+
+msgid "Subscribed events"
+msgstr "Prihlásené udalosti"
+
+msgid "Subscribed wiki pages<<BR>>(one regex per line)"
+msgstr "Odoberianie wiki stránok<<BR>>(jeden regulárny výraz na riadok)"
+
 msgid "[all]"
 msgstr "[všetko]"
 
@@ -1784,571 +1444,77 @@ msgstr "[prázdne]"
 msgid "filter"
 msgstr "filter"
 
-msgid "Wiki"
-msgstr "Wiki"
-
-msgid "Page"
-msgstr "Stránka"
-
-msgid "User"
-msgstr "Užívateľ"
-
-msgid "[ATTACH]"
-msgstr "[[PRILOŽ]]"
-
-msgid "[RSS]"
-msgstr "[RSS]"
-
-msgid "[DELETED]"
-msgstr "[VYMAZANÉ]"
-
-msgid "[UPDATED]"
-msgstr "[AKTUALIZOVANÉ]"
-
-msgid "[RENAMED]"
-msgstr "[PREMENOVANÁ]"
-
-msgid "[CONFLICT]"
-msgstr "[KONFLIKT]"
-
-msgid "[NEW]"
-msgstr "[NOVÁ]"
-
-msgid "[DIFF]"
-msgstr "[ROZDIELY]"
-
-msgid "[BOTTOM]"
-msgstr "[DOLU]"
-
-msgid "[TOP]"
-msgstr "[HORE]"
-
-msgid "Click to do a full-text search for this title"
-msgstr "Ak chcete fulltextovo vyhľadávať tento názov, kliknite sem."
-
-msgid "Settings"
-msgstr "Nastavenia"
-
-msgid "Logout"
-msgstr "Odhlásenie"
-
-msgid "DeleteCache"
-msgstr "ZmazaťCache"
-
-#, python-format
-msgid "(cached %s)"
-msgstr "(kešované %s)"
-
-msgid "Or try one of these actions:"
-msgstr "Alebo skúste jednu z nasledujúcich akcií:"
-
-msgid "Unsubscribe"
-msgstr "Zrušiť odoberanie"
-
-msgid "Home"
-msgstr "Domovská stránka"
-
-msgid "Clear message"
-msgstr "Vymazať odkaz"
-
-#, python-format
-msgid "last edited %(time)s by %(editor)s"
-msgstr "poslednú editáciu z %(time)s uskutočnil %(editor)s"
-
-#, python-format
-msgid "last modified %(time)s"
-msgstr "posledná zmena %(time)s"
-
-msgid "Search:"
-msgstr "Hľadať:"
-
-msgid "Text"
-msgstr "Text"
-
-msgid "Titles"
-msgstr "Stránky"
-
-msgid "Search"
-msgstr "Hľadať"
-
-msgid "More Actions:"
-msgstr "Viac akcií:"
-
-msgid "------------------------"
-msgstr "------------------------"
-
-msgid "Raw Text"
-msgstr "Zdrojový text"
-
-msgid "Print View"
-msgstr "Verzia do tlače"
-
-msgid "Delete Cache"
-msgstr "Vymazať cache"
-
-msgid "Rename Page"
-msgstr "Premenovať stránku"
-
-msgid "Copy Page"
-msgstr "Skopírovať stránku"
-
-msgid "Delete Page"
-msgstr "Vymazať stránku"
-
-msgid "Like Pages"
-msgstr "Podobné stránky"
-
-msgid "Local Site Map"
-msgstr "Lokálna mapa stránok"
-
-msgid "My Pages"
-msgstr "Moja stránka"
-
-msgid "Subscribe User"
-msgstr "Prihlásiť užívateľa na odoberanie zmien."
-
-msgid "Remove Spam"
-msgstr "Odstrániť spam"
-
-msgid "Revert to this revision"
-msgstr "Vrátiť sa k tejto verzii"
-
-msgid "Package Pages"
-msgstr "Zabaliť stránky"
-
-msgid "Render as Docbook"
-msgstr "Konvertovať do Docbook"
-
-msgid "Sync Pages"
-msgstr "Synchronizovať stránky"
-
-msgid "Do"
-msgstr "Urobiť"
-
-msgid "Comments"
-msgstr "Komentár"
-
-msgid "Edit (Text)"
-msgstr "Editovať (textový mód)"
-
-msgid "Edit (GUI)"
-msgstr "Editovať (grafický mód)"
-
-msgid "Immutable Page"
-msgstr "Nemenná stránka"
-
-msgid "Remove Link"
-msgstr "Odstrániť odkaz"
-
-msgid "Add Link"
-msgstr "Pridať odkaz"
-
-msgid "Attachments"
-msgstr "Prílohy"
-
-#, python-format
-msgid "Show %s days."
-msgstr "Zobraziť %s d."
-
-msgid "Wiki Markup"
-msgstr "Značkovanie wiki"
-
-msgid "File attachment browser"
-msgstr "Prehliadač príloh"
-
-msgid "User account browser"
-msgstr "Prehliadač účtov"
-
-msgid "Wiki configuration"
-msgstr "Konfigurácia wiki"
-
-msgid ""
-"This table shows all settings in this wiki that do not have default values. "
-"Settings that the configuration system doesn't know about are shown in "
-"''italic'', those may be due to third-party extensions needing configuration "
-"or settings that were removed from Moin."
+msgid "anonymous"
 msgstr ""
 
-msgid "Variable name"
-msgstr "Názov premennej"
+msgid "Options --pages and --search are mutually exclusive!"
+msgstr "Voľby --pages a --search sa vzájomne vylučujú!"
 
-msgid "Setting"
-msgstr "Nastavenie"
+msgid "You must specify an output file!"
+msgstr "Musíte určiť výstupný súbor!"
 
-msgid "Search Titles"
-msgstr "Vyhľadávanie v názvoch stránok"
+msgid "No pages specified using --pages or --search, assuming full package."
+msgstr ""
+"žiadna stránka neurčená pomocou --pages alebo --search, predpokladáme úplný "
+"balíček."
 
-msgid "Display context of search results"
-msgstr "Zobraziť kontext výsledku vyhľadávania"
+msgid "All attachments included into the package."
+msgstr "Všetky prílohy boli zahrnuté v balíčku."
 
-msgid "Case-sensitive searching"
-msgstr "Rozlišovať pri vyhľadávaní veľkosť písmen"
-
-msgid "Search Text"
-msgstr "Hľadaj text"
-
-#, python-format
-msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
-msgstr "Použite, prosím, detailnejší vyhľadávací výraz namiesto „ {{{%s}}} “"
+msgid "Output file already exists! Cowardly refusing to continue!"
+msgstr "Výstupný súbor už existuje! Zbabelo odmietam pokračovať!"
 
 #, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Nahrať prílohu „ %(filename)s “."
+msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
+msgstr "Očakávané \"%(wanted)s\" po \"%(key)s\", získáné \"%(token)s\""
 
 #, python-format
-msgid "Attachment '%(filename)s' deleted."
-msgstr "Príloha „%(filename)s“ zmazaná."
+msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
+msgstr "Očakávané celé číslo \"%(key)s\" pred \"%(token)s\""
 
 #, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Obrázok „%(filename)s“ uložený."
+msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
+msgstr "Očakávané celé číslo \"%(arg)s\" po \"%(key)s\""
 
 #, python-format
-msgid "%(mins)dm ago"
-msgstr "Pred %(mins)dmin."
-
-msgid "(no bookmark set)"
-msgstr "(nezaložená nijaká záložka)"
-
-#, python-format
-msgid "(currently set to %s)"
-msgstr "(momentálna hodnota je : %s)"
-
-msgid "Delete bookmark"
-msgstr "Zmazať záložku"
-
-msgid "Set bookmark"
-msgstr "Vytvoriť záložku"
-
-msgid "[Bookmark reached]"
-msgstr "[Záložka dosiahnutá]"
-
-msgid "Python Version"
-msgstr "Verzia Pythonu"
-
-msgid "MoinMoin Version"
-msgstr "Verzia MoinMoin"
-
-#, python-format
-msgid "Release %s [Revision %s]"
-msgstr "Verzia %s [édition „ %s “]"
-
-msgid "4Suite Version"
-msgstr "Verzia 4Suite"
-
-msgid "Number of pages"
-msgstr "Počet stránok"
-
-msgid "Number of system pages"
-msgstr "Počet systémových stránok"
-
-msgid "Accumulated page sizes"
-msgstr "Súhrnná veľkosť stránok"
-
-#, python-format
-msgid "Disk usage of %(data_dir)s/pages/"
-msgstr "Využitie disku %(data_dir)s/pages/"
-
-#, python-format
-msgid "Disk usage of %(data_dir)s/"
-msgstr "Využitie disku %(data_dir)s/"
-
-msgid "Entries in edit log"
-msgstr "Záznamy v edit-logu"
-
-msgid "NONE"
-msgstr "ŽIADNY"
-
-msgid "Global extension macros"
-msgstr "Makrá globálneho rozšírenia"
-
-msgid "Local extension macros"
-msgstr "Makrá lokálneho rozšírenia"
-
-msgid "Global extension actions"
-msgstr "Akcie globálneho rozšírenia"
-
-msgid "Local extension actions"
-msgstr "Akcie lokálneho rozšírenia"
-
-msgid "Global parsers"
-msgstr "Globálne parsery"
-
-msgid "Local extension parsers"
-msgstr "Parsery lokálneho rozšírenia"
-
-msgid "Disabled"
-msgstr "Zakázané"
-
-msgid "Enabled"
-msgstr "Povolené"
-
-msgid "index available"
-msgstr "register je k dispozícii"
-
-msgid "index unavailable"
-msgstr "register nie je k dispozícii"
-
-msgid "Xapian and/or Python Xapian bindings not installed"
-msgstr "Xapian a/alebo Python Xapian rozšírenie nie sú nainštalované"
-
-msgid "N/A"
-msgstr "N/A"
-
-msgid "Xapian search"
-msgstr "Xapian vyhľadávanie"
-
-msgid "Stemming for Xapian"
-msgstr "Stemming pre Xapian"
-
-msgid "Active threads"
-msgstr "Aktívne vlákna"
-
-msgid "No orphaned pages in this wiki."
-msgstr "Žiadne osirotené stránky v tejto wiki."
-
-#, python-format
-msgid "Invalid include arguments \"%s\"!"
-msgstr "Neplatný argument pre include : „ %s “ !"
-
-#, python-format
-msgid "Nothing found for \"%s\"!"
-msgstr "K „ %s “ sa nič nenašlo!"
-
-msgid "edit"
-msgstr "editovať"
+msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
+msgstr "Očakávaná hodnota farby \"%(arg)s\" po \"%(key)s\""
 
 #, python-format
 msgid ""
-"%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
-"missing."
+"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
+"%(be)s results out of about %(pages)d pages."
 msgstr ""
+"Výsledky %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s z %(aboutHits)s %(bs)s%(hits)d"
+"%(be)s výsledkov z približne %(pages)d stránok."
+
+msgid "seconds"
+msgstr "sekúnd"
+
+msgid "Previous"
+msgstr "Predchádzajúci"
+
+msgid "Next"
+msgstr "Ďalší"
+
+msgid "rev"
+msgstr "revízia"
+
+msgid "current"
+msgstr "aktuálny"
 
 #, python-format
-msgid ""
-"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s=%"
-"(argument_value)s!"
-msgstr ""
+msgid "last modified: %s"
+msgstr "posledná zmena: %s"
 
-#, python-format
-msgid ""
-"Current configuration does not allow embedding of the file %(file)s because "
-"of its mimetype %(mimetype)s."
-msgstr ""
+msgid "match"
+msgstr "zhoda"
 
-msgid "Embedded"
-msgstr "Embedded"
+msgid "matches"
+msgstr "zhody"
 
-msgid "Search for items"
-msgstr "Hľadať položky"
-
-msgid "containing all the following terms"
-msgstr "obsahujúce všetky nasledujúce termíny"
-
-msgid "containing one or more of the following terms"
-msgstr "obsahujúce jeden alebo viacero nasledujúcich termínov"
-
-msgid "not containing the following terms"
-msgstr "neobsahujúce nasledujúce termíny"
-
-msgid "last modified since (e.g. last 2 weeks)"
-msgstr "posledná zmena (napr. pred 2 týždňami)"
-
-msgid "any category"
-msgstr "akákoľvek kategória"
-
-msgid "any language"
-msgstr "akýkoľvek jazyk"
-
-msgid "any mimetype"
-msgstr "akýkoľvek mimetype"
-
-msgid "Categories"
-msgstr "Kategórie"
-
-msgid "Language"
-msgstr "Jazyk"
-
-msgid "File Type"
-msgstr "Typ súboru"
-
-msgid "Search only in titles"
-msgstr "Vyhľadávať výhradne v názvoch stránok"
-
-msgid "Case-sensitive search"
-msgstr "Rozlišovať pri vyhľadávaní veľkosť písmen"
-
-msgid "Exclude underlay"
-msgstr "Vylúčiť underlay"
-
-msgid "No system items"
-msgstr "Nijaké systémové položky"
-
-msgid "Search in all page revisions"
-msgstr "Hľadať vo všetkých revidovaných stránkach"
-
-msgid "Go get it!"
-msgstr "Chytaj!"
-
-msgid "Include system pages"
-msgstr "Vrátane systémových stránok"
-
-msgid "Exclude system pages"
-msgstr "Okrem systémových stránok"
-
-msgid "No wanted pages in this wiki."
-msgstr "V tejto wiki neexistujú nijaké požadované stránky."
-
-msgid "Description"
-msgstr "Popis"
-
-#, python-format
-msgid ""
-"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
-"for more information."
-msgstr ""
-"Text, ktorý ste zadali do vyhľadávania, „ {{{%s}}} “, je nesprávny. Viac "
-"informácií nájdete na HelpOnSearching."
-
-msgid "Markup"
-msgstr "Markup"
-
-msgid "Display"
-msgstr "Zobraziť"
-
-#, python-format
-msgid "No quotes on %(pagename)s."
-msgstr "Žiadne citáty na stránke %(pagename)s."
-
-msgid "You need to provide a chart type!"
-msgstr "Musíte zadať typ diagramu!"
-
-#, python-format
-msgid "Bad chart type \"%s\"!"
-msgstr "Nesprávny typ diagramu \"%s\"!"
-
-msgid "Contents"
-msgstr "Obsah"
-
-#, python-format
-msgid "Unsupported navigation scheme '%(scheme)s'!"
-msgstr "Neznáma navigačná schéma „ %(scheme)s “ !"
-
-msgid "No parent page found!"
-msgstr "Rodičovská stránka sa nenašla!"
-
-msgid "Slideshow"
-msgstr "Prezentácia obrázkov"
-
-msgid "Start"
-msgstr "Začať"
-
-#, python-format
-msgid "Slide %(pos)d of %(size)d"
-msgstr "Strana %(pos)d z %(size)d "
-
-#, python-format
-msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
-msgstr ""
-
-msgid "Go To Page"
-msgstr "Ísť na stránku"
-
-msgid "You are not allowed to use this action."
-msgstr "Nemáte oprávnenie uskutočniť túto akciu."
-
-#, python-format
-msgid "No pages like \"%s\"!"
-msgstr "Žiadna stránka sa nepodobá na „%s“!"
-
-#, python-format
-msgid "Exactly one page like \"%s\" found, redirecting to page."
-msgstr ""
-"Našla sa len jedna podobná stránka ako „%s“, presmerovávam na túto stránku."
-
-#, python-format
-msgid "Pages like \"%s\""
-msgstr "Podobné stránky ako „%s“"
-
-#, python-format
-msgid "%(matchcount)d %(matches)s for \"%(title)s\""
-msgstr "%(matchcount)d %(matches)s pre „%(title)s“"
-
-msgid ""
-"Cannot create a new page without a page name.  Please specify a page name."
-msgstr ""
-"Nie je možné vytvoriť stránku bez udania mena. Prosím, zadajte meno stránky."
-
-#, python-format
-msgid "You must login to use this action: %(action)s."
-msgstr "Použiť akciu %(action)s možno až po prihlásení."
-
-msgid "You must login to remove a quicklink."
-msgstr "Musíte sa prihlásiť, aby ste mohli odstrániť rýchly odkaz."
-
-msgid "Your quicklink to this page has been removed."
-msgstr "Váš rýchly odkaz na túto stránku bol odstránený."
-
-msgid "Your quicklink to this page could not be removed."
-msgstr "Váš rýchly odkaz na túto stránku nemohol byť odstránený."
-
-msgid "You need to have a quicklink to this page to remove it."
-msgstr ""
-"Ak chcete odstrániť rýchly odkaz na túto stránku, musí nejaký najprv "
-"existovať."
-
-msgid ""
-"You need to manually go to your OpenID provider wiki\n"
-"and log in before you can use your OpenID. MoinMoin will\n"
-"never allow you to enter your password here.\n"
-"\n"
-"Once you have logged in, simply reload this page."
-msgstr ""
-
-msgid "OpenID Trust verification"
-msgstr ""
-
-#, python-format
-msgid "The site %s has asked for your identity."
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"If you approve, the site represented by the trust root below will be\n"
-"told that you control the identity URL %s. (If you are using a delegated\n"
-"identity, the site will take care of reversing the\n"
-"delegation on its own.)"
-msgstr ""
-
-msgid "Trust root"
-msgstr ""
-
-msgid "Identity URL"
-msgstr ""
-
-msgid "Remember decision"
-msgstr "Zapamätaj si rozhodnutie"
-
-msgid "Remember this trust decision and don't ask again"
-msgstr ""
-
-msgid "Approve"
-msgstr ""
-
-msgid "Don't approve"
-msgstr ""
-
-msgid "OpenID not served"
-msgstr ""
-
-msgid ""
-"\n"
-"Unfortunately you have not created your homepage yet. Therefore,\n"
-"we cannot serve an OpenID for you. Please create your homepage first\n"
-"and then reload this page or click the button below to cancel this\n"
-"verification."
-msgstr ""
+msgid "about"
+msgstr "približne"
 
 msgid "If this account exists an email was sent."
 msgstr "Ak existuje konto s týmto menom, dostanete naň email."
@@ -2424,6 +1590,339 @@ msgid ""
 msgstr ""
 
 #, python-format
+msgid "You must login to use this action: %(action)s."
+msgstr "Použiť akciu %(action)s možno až po prihlásení."
+
+msgid "Your subscription to this page has been removed."
+msgstr "Vaše odoberanie tejto stránky bolo zrušené."
+
+msgid "Can't remove regular expression subscription!"
+msgstr "Nie je možné zrušiť odoberanie definované regulárnym výrazom!"
+
+msgid "Edit the subscription regular expressions in your settings."
+msgstr "Upravte regulárne výrazy pre odoberané stránky vo Vašich nastaveniach."
+
+msgid "You need to be subscribed to unsubscribe."
+msgstr "Ak chcete zrušiť odoberanie, musíte byť najskôr prihlásený."
+
+msgid "Please choose:"
+msgstr "Prosím vyberte si:"
+
+msgid "Settings"
+msgstr "Nastavenia"
+
+msgid "Editor"
+msgstr "Editor"
+
+msgid "Pages"
+msgstr "Stránky"
+
+msgid "Select Author"
+msgstr "Výber autora"
+
+msgid "Revert all!"
+msgstr "Všetko vrátiť!"
+
+msgid "You are not allowed to use this action."
+msgstr "Nemáte oprávnenie uskutočniť túto akciu."
+
+msgid "No older revisions available!"
+msgstr "Neexistujú staršie verzie."
+
+#, python-format
+msgid "Diff for \"%s\""
+msgstr "Zmeny „ %s “"
+
+#, python-format
+msgid "Differences between revisions %d and %d"
+msgstr "Rozdiely medzi verziami %d a %d"
+
+#, python-format
+msgid "(spanning %d versions)"
+msgstr "(zahŕňajúce %d verzie)"
+
+msgid "Revert to this revision"
+msgstr "Vrátiť sa k tejto verzii"
+
+msgid "Previous change"
+msgstr "Predchádzajúca zmena"
+
+msgid "Next change"
+msgstr "Nijaká zmena"
+
+msgid "No differences found!"
+msgstr "Nenašli sa žiadne rozdiely!"
+
+#, python-format
+msgid "The page was saved %(count)d times, though!"
+msgstr "Ale veď táto stránka bola už uložená %(count)d ráz!"
+
+msgid "(ignoring whitespace)"
+msgstr "(bez ohľadu na medzery)"
+
+msgid "Ignore changes in the amount of whitespace"
+msgstr "Ignorovať zmeny v počte medzier"
+
+msgid "You must login to add a quicklink."
+msgstr "Musíte sa prihlásiť, aby ste mohli pridať rýchly odkaz."
+
+msgid "A quicklink to this page has been added for you."
+msgstr "Na túto stránku bol pre vás pridaný rýchly odkaz."
+
+msgid "A quicklink to this page could not be added for you."
+msgstr "Nebolo možné pridať rýchly odkaz na túto stránku pre vás."
+
+msgid "You already have a quicklink to this page."
+msgstr "Na túto stránku ste už vytvorili rýchly odkaz!"
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr "Zoznam všetkých odkazov pre „ %s “"
+
+#, python-format
+msgid "(including %(localwords)d %(pagelink)s)"
+msgstr "(vrátane %(localwords)d %(pagelink)s)"
+
+#, python-format
+msgid ""
+"The following %(badwords)d words could not be found in the dictionary of %"
+"(totalwords)d words%(localwords)s and are highlighted below:"
+msgstr ""
+"Nasledujúce %(badwords)d slová nebolo možné nájsť v slovníku %(totalwords)d "
+"slov %(localwords)s a sú zvýraznené nižšie:"
+
+msgid "Add checked words to dictionary"
+msgstr "Pridať skontrolované slová do slovníka"
+
+msgid "No spelling errors found!"
+msgstr "Nenašla sa nijaká pravopisná chyba!"
+
+msgid "You can't save spelling words."
+msgstr "Nemôžete uložiť spelling words"
+
+msgid "You can't check spelling on a page you can't read."
+msgstr "Nemôžete kontrolovať pravopis na stránke, ktorú nemôžete čítať."
+
+msgid "You must login to remove a quicklink."
+msgstr "Musíte sa prihlásiť, aby ste mohli odstrániť rýchly odkaz."
+
+msgid "Your quicklink to this page has been removed."
+msgstr "Váš rýchly odkaz na túto stránku bol odstránený."
+
+msgid "Your quicklink to this page could not be removed."
+msgstr "Váš rýchly odkaz na túto stránku nemohol byť odstránený."
+
+msgid "You need to have a quicklink to this page to remove it."
+msgstr ""
+"Ak chcete odstrániť rýchly odkaz na túto stránku, musí nejaký najprv "
+"existovať."
+
+msgid "Revert"
+msgstr "Vrátiť"
+
+msgid "You are not allowed to revert this page!"
+msgstr ""
+"Nemáte oprávnenie uskutočniť návrat k predchádzajúcej verzii tejto stránky!"
+
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
+msgstr ""
+"Prezerali ste aktuálnu verziu tejto stránky, keď ste klikli na funkciu "
+"Návrat.Ak sa chcete vrátiť k predchádzajúcej verzii tejto stránky,musíte "
+"najskôr otvoriť túto (staršiu) verziu a potomznovu použiť funkciu Návrat."
+
+msgid "Optional reason for reverting this page"
+msgstr "Dôvod tohto vrátenia (nepovinný)"
+
+msgid "Really revert this page?"
+msgstr "Naozaj vrátiť túto stránku?"
+
+msgid "Wiki Backup"
+msgstr "Zálohovanie wiki"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "Zálohovať"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Nemáte oprávnenie uskutočniť vzdialenú zálohu."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Neznáma subakcia zálohy: %s."
+
+msgid "Charts are not available!"
+msgstr "Diagramy nie sú dostupné!"
+
+msgid "You need to provide a chart type!"
+msgstr "Musíte zadať typ diagramu!"
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "Nesprávny typ diagramu \"%s\"!"
+
+msgid "This page is already deleted or was never created!"
+msgstr "Táto stránka už bola vymazaná alebo nikdy neexistovala!"
+
+#, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr "Neplatné meno súboru: „%s“ !"
+
+msgid "Include all attachments?"
+msgstr "Priložiť všetky prílohy?"
+
+msgid "Package pages"
+msgstr "Zbaliť stránky"
+
+msgid "Package name"
+msgstr "Meno balíku"
+
+msgid "List of page names - separated by a comma"
+msgstr "Zoznam názvov stránok - oddelených čiarkami"
+
+#, python-format
+msgid "No pages like \"%s\"!"
+msgstr "Žiadna stránka sa nepodobá na „%s“!"
+
+msgid "Rename Page"
+msgstr "Premenovať stránku"
+
+msgid "Rename all /subpages too?"
+msgstr "Premenovať aj všetky /podstránky?"
+
+msgid "New name"
+msgstr "Nové meno"
+
+msgid "Optional reason for the renaming"
+msgstr "Nepovinný dôvod tejto zmeny názvu"
+
+msgid "Really rename this page?"
+msgstr "Naozaj premenovať túto stránku?"
+
+msgid "Copy Page"
+msgstr "Skopírovať stránku"
+
+msgid "Copy all /subpages too?"
+msgstr "Skúpírovať aj všetky/podstránky?"
+
+msgid "Optional reason for the copying"
+msgstr "Dôvod tohto kopírovania (nepovinný)"
+
+msgid "Really copy this page?"
+msgstr "Naozaj chcete skopírovať túto stránkuk?"
+
+msgid "General Information"
+msgstr "Všeobecné informácie"
+
+#, python-format
+msgid "Page size: %d"
+msgstr "Veľkosť stránky: %d"
+
+msgid "SHA digest of this page's content is:"
+msgstr "SHA digest obsahu tejto stránky je:"
+
+msgid "The following users subscribed to this page:"
+msgstr "Na odoberanie tejto stránky sa prihlásili nasledujúci užívatelia:"
+
+msgid "This page links to the following pages:"
+msgstr "Táto stránka je prelinkovaná na nasledujúce stránky:"
+
+msgid "Date"
+msgstr "Dátum"
+
+msgid "Size"
+msgstr "Veľkosť"
+
+msgid "Diff"
+msgstr "Porovnať"
+
+msgid "Comment"
+msgstr "Komentár"
+
+msgid "view"
+msgstr "zobraziť"
+
+msgid "to previous"
+msgstr "k predchádzajúcemu"
+
+#, python-format
+msgid "Revert to revision %(rev)d."
+msgstr "Návrat k verzii %(rev)d."
+
+#, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "Premenované z „ %(oldpagename)s “."
+
+msgid "edit"
+msgstr "editovať"
+
+msgid "get"
+msgstr "získať"
+
+msgid "del"
+msgstr "vymazať"
+
+msgid "N/A"
+msgstr "N/A"
+
+msgid "Revision History"
+msgstr "História revízií"
+
+msgid "No log entries found."
+msgstr "Nenašli sa nijaké záznamy v logu"
+
+#, python-format
+msgid "Info for \"%s\""
+msgstr "Informácie o „ %s “"
+
+#, python-format
+msgid "Show \"%(title)s\""
+msgstr "Zobraziť : %(title)s"
+
+msgid "General Page Infos"
+msgstr "Všeobecné informácie o stránke"
+
+msgid "Page hits and edits"
+msgstr "Počet zobrazení a editovaní"
+
+msgid "Do it."
+msgstr "Makaj."
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr "Uskutočniť akciu %(actionname)s ?"
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr "Akcia %(actionname)s je na tejto wiki zakázaná!"
+
+#, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "Nemáte oprávnenie použiť túto akciu %(actionname)s na tejto stránke."
+
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Prosím, použite interaktívny interface užívateľa na uskutočnenie akcie %"
+"(actionname)s !"
+
+#, python-format
 msgid "[%d attachments]"
 msgstr "[%d prílohy]"
 
@@ -2453,17 +1952,8 @@ msgstr ""
 "NEUVÁDZAJTE URL odkazu {{{[get]}}}, \n"
 "pretože toto sa môže ľahko zmeniť."
 
-msgid "del"
-msgstr "vymazať"
-
 msgid "move"
 msgstr "presunúť"
-
-msgid "get"
-msgstr "získať"
-
-msgid "view"
-msgstr "zobraziť"
 
 msgid "unzip"
 msgstr "unzip"
@@ -2537,6 +2027,10 @@ msgstr "Nemáte oprávnenie uložiť kresbu na túto stránku."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Nemáte oprávnenie vymazať prílohy tejto stránky."
+
+#, python-format
+msgid "Attachment '%(filename)s' deleted."
+msgstr "Príloha „%(filename)s“ zmazaná."
 
 #, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -2659,9 +2153,6 @@ msgstr "Názov súboru"
 msgid "Modified"
 msgstr "Zmenený"
 
-msgid "Size"
-msgstr "Veľkosť"
-
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr "Neznámy typ súboru, nie je možné zobraziť jeho obsah na stránke."
 
@@ -2672,75 +2163,149 @@ msgstr "Nemáte oprávnenie pozrieť si prílohy z tejto stránky."
 msgid "attachment:%(filename)s of %(pagename)s"
 msgstr "<<Verbatim(attachment:)>> %(filename)s de %(pagename)s"
 
-msgid "User account created! You can use this account to login now..."
-msgstr "Užívateľský účet je vytvorený! Teraz sa môžete prihlásiť a..."
+msgid "Delete"
+msgstr "Vymazať"
 
-msgid "TextCha (required)"
-msgstr "TextCha (povinný)"
+msgid "Delete all /subpages too?"
+msgstr "Vymazať aj všetky /podstránky?"
 
-msgid "Create Profile"
-msgstr "Vytvoriť profil"
+msgid "Optional reason for the deletion"
+msgstr "Nepovinný dôvod tohto vymazania"
 
-msgid "Create Account"
-msgstr "Vytvoriť účet"
-
-msgid "Editor"
-msgstr "Editor"
-
-msgid "Pages"
-msgstr "Stránky"
-
-msgid "Select Author"
-msgstr "Výber autora"
-
-msgid "Revert all!"
-msgstr "Všetko vrátiť!"
-
-msgid "Revert"
-msgstr "Vrátiť"
-
-msgid "You are not allowed to revert this page!"
-msgstr ""
-"Nemáte oprávnenie uskutočniť návrat k predchádzajúcej verzii tejto stránky!"
-
-msgid ""
-"You were viewing the current revision of this page when you called the "
-"revert action. If you want to revert to an older revision, first view that "
-"older revision and then call revert to this (older) revision again."
-msgstr ""
-"Prezerali ste aktuálnu verziu tejto stránky, keď ste klikli na funkciu "
-"Návrat.Ak sa chcete vrátiť k predchádzajúcej verzii tejto stránky,musíte "
-"najskôr otvoriť túto (staršiu) verziu a potomznovu použiť funkciu Návrat."
-
-msgid "Optional reason for reverting this page"
-msgstr "Dôvod tohto vrátenia (nepovinný)"
-
-msgid "Really revert this page?"
-msgstr "Naozaj vrátiť túto stránku?"
+msgid "Really delete this page?"
+msgstr "Naozaj chcete vymazať túto stránku?"
 
 #, python-format
-msgid "(including %(localwords)d %(pagelink)s)"
-msgstr "(vrátane %(localwords)d %(pagelink)s)"
+msgid "(!) Only pages changed since '''%s''' are being displayed!"
+msgstr "(!) Zobrazujú sa len stránky zmenené od '''%s'''!"
+
+msgid ""
+"/!\\ The modification date you entered was not recognized and is therefore "
+"not considered for the search results!"
+msgstr ""
+"/!\\ Dátum zmeny, ktorý ste zadali, systém nerozpoznal a nebude sa preto "
+"brať do úvahy pri výsledkoch hľadania!"
+
+#, python-format
+msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
+msgstr "Použite, prosím, detailnejší vyhľadávací výraz namiesto „ {{{%s}}} “"
+
+#, python-format
+msgid "Title Search: \"%s\""
+msgstr "Vyhľadávanie „ %s “ v názvoch stránok"
+
+#, python-format
+msgid "Advanced Search: \"%s\""
+msgstr "Pokročilé vyhľadávanie: „ %s “"
+
+#, python-format
+msgid "Full Text Search: \"%s\""
+msgstr "Fultextové vyhľadávanie „ %s “ "
 
 #, python-format
 msgid ""
-"The following %(badwords)d words could not be found in the dictionary of %"
-"(totalwords)d words%(localwords)s and are highlighted below:"
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
 msgstr ""
-"Nasledujúce %(badwords)d slová nebolo možné nájsť v slovníku %(totalwords)d "
-"slov %(localwords)s a sú zvýraznené nižšie:"
+"Text, ktorý ste zadali do vyhľadávania, „ {{{%s}}} “, je nesprávny. Viac "
+"informácií nájdete na HelpOnSearching."
 
-msgid "Add checked words to dictionary"
-msgstr "Pridať skontrolované slová do slovníka"
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} didn't return any results. Please change some "
+"terms and refer to HelpOnSearching for more information.%s"
+msgstr ""
+"Vaše vyhľadávanie „ {{{%s}}} “ neprinieslo žiadne výsledky. Prosím, zmeňte "
+"zadané slová alebo sa obráťte na HelpOnSearching. %s"
 
-msgid "No spelling errors found!"
-msgstr "Nenašla sa nijaká pravopisná chyba!"
+msgid "(!) Consider performing a"
+msgstr "(!) Zvážte, či Vami hľadané slová/termíny"
 
-msgid "You can't save spelling words."
-msgstr "Nemôžete uložiť spelling words"
+msgid "full-text search with your search terms"
+msgstr "nezadáte do fultextového vyhľadávania."
 
-msgid "You can't check spelling on a page you can't read."
-msgstr "Nemôžete kontrolovať pravopis na stránke, ktorú nemôžete čítať."
+msgid ""
+"(!) You're performing a title search that might not include all related "
+"results of your search query in this wiki. <<BR>>"
+msgstr ""
+"(!) Práve uskutočňujete vyhľadávanie v názvoch stránok, ktoré nemusia "
+"zahŕňať všetkyrelevantné výsledky v tejto wiki. <<BR>>"
+
+msgid "Click here to perform a full-text search with your search terms!"
+msgstr ""
+"Ak chcete hľadané výrazy zadať do fultextového vyhľadávate, kliknite sem!"
+
+msgid "Please first create a homepage before creating additional pages."
+msgstr ""
+"Prosím, najskôr vytvorte domovskú stránku a až potom vytvorte dodatočné "
+"stránky."
+
+#, python-format
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
+"[[%(username)s/ReadWriteGroup]]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
+"(username)s/ReadGroup]]||\n"
+"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
+"(username)s only||\n"
+"\n"
+msgstr ""
+
+msgid "MyPages management"
+msgstr "Manažment MojeStránky"
+
+msgid "Only superuser is allowed to use this action."
+msgstr "Iba superužívateľ má oprávnenie uskutočniť túto akciu."
+
+#, python-format
+msgid "Subscribe users to the page %s"
+msgstr "Prihlásiť užívateľov na odoberanie stránky %s"
+
+msgid "Enter user names (comma separated):"
+msgstr "Zadajte mená užívateľov (oddelené čiarkami):"
+
+#, python-format
+msgid "Subscribed for %s:"
+msgstr "Odoberanie pre %s"
+
+msgid "Not a user:"
+msgstr "Nie je užívateľ:"
+
+msgid "You are not allowed to perform this action."
+msgstr "Nemáte oprávnenie uskutočniť túto akciu."
+
+#, python-format
+msgid "Exactly one page like \"%s\" found, redirecting to page."
+msgstr ""
+"Našla sa len jedna podobná stránka ako „%s“, presmerovávam na túto stránku."
+
+#, python-format
+msgid "Pages like \"%s\""
+msgstr "Podobné stránky ako „%s“"
+
+#, python-format
+msgid "%(matchcount)d %(matches)s for \"%(title)s\""
+msgstr "%(matchcount)d %(matches)s pre „%(title)s“"
+
+msgid "You are now logged out."
+msgstr "Momentálne ste odhlásený."
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr ""
@@ -2767,15 +2332,6 @@ msgstr "Prihlásili ste sa na odoberanie tejto stránky."
 
 msgid "You could not get subscribed to this page."
 msgstr "Nebolo možné zaregistrovať Vás na odoberanie tejto stránky."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Prosím, použite interaktívny interface užívateľa na uskutočnenie akcie %"
-"(actionname)s !"
-
-msgid "You are now logged out."
-msgstr "Momentálne ste odhlásený."
 
 #, python-format
 msgid "Rolled back changes to the page %s."
@@ -2935,300 +2491,6 @@ msgstr ""
 msgid "Page %s merged with conflicts."
 msgstr "Táto stránka %s bola zlúčená, pričom došlo ku rozporom."
 
-msgid "You are not allowed to create the supplementation page."
-msgstr "Nemáte oprávnenie vytvoriť doplňujúcu stránku."
-
-msgid "Delete"
-msgstr "Vymazať"
-
-msgid "This page is already deleted or was never created!"
-msgstr "Táto stránka už bola vymazaná alebo nikdy neexistovala!"
-
-msgid "Delete all /subpages too?"
-msgstr "Vymazať aj všetky /podstránky?"
-
-msgid "Optional reason for the deletion"
-msgstr "Nepovinný dôvod tohto vymazania"
-
-msgid "Really delete this page?"
-msgstr "Naozaj chcete vymazať túto stránku?"
-
-msgid "General Information"
-msgstr "Všeobecné informácie"
-
-#, python-format
-msgid "Page size: %d"
-msgstr "Veľkosť stránky: %d"
-
-msgid "SHA digest of this page's content is:"
-msgstr "SHA digest obsahu tejto stránky je:"
-
-msgid "The following users subscribed to this page:"
-msgstr "Na odoberanie tejto stránky sa prihlásili nasledujúci užívatelia:"
-
-msgid "This page links to the following pages:"
-msgstr "Táto stránka je prelinkovaná na nasledujúce stránky:"
-
-msgid "Date"
-msgstr "Dátum"
-
-msgid "Diff"
-msgstr "Porovnať"
-
-msgid "Comment"
-msgstr "Komentár"
-
-msgid "to previous"
-msgstr "k predchádzajúcemu"
-
-msgid "Revision History"
-msgstr "História revízií"
-
-msgid "No log entries found."
-msgstr "Nenašli sa nijaké záznamy v logu"
-
-#, python-format
-msgid "Info for \"%s\""
-msgstr "Informácie o „ %s “"
-
-#, python-format
-msgid "Show \"%(title)s\""
-msgstr "Zobraziť : %(title)s"
-
-msgid "General Page Infos"
-msgstr "Všeobecné informácie o stránke"
-
-msgid "Page hits and edits"
-msgstr "Počet zobrazení a editovaní"
-
-msgid "You must login to add a quicklink."
-msgstr "Musíte sa prihlásiť, aby ste mohli pridať rýchly odkaz."
-
-msgid "A quicklink to this page has been added for you."
-msgstr "Na túto stránku bol pre vás pridaný rýchly odkaz."
-
-msgid "A quicklink to this page could not be added for you."
-msgstr "Nebolo možné pridať rýchly odkaz na túto stránku pre vás."
-
-msgid "You already have a quicklink to this page."
-msgstr "Na túto stránku ste už vytvorili rýchly odkaz!"
-
-msgid "Wiki Backup"
-msgstr "Zálohovanie wiki"
-
-msgid ""
-"= Downloading a backup =\n"
-"\n"
-"Please note:\n"
-" * Store backups in a safe and secure place - they contain sensitive "
-"information.\n"
-" * Make sure your wiki configuration backup_* values are correct and "
-"complete.\n"
-" * Make sure the backup file you get contains everything you need in case of "
-"problems.\n"
-" * Make sure it is downloaded without problems.\n"
-"\n"
-"To get a backup, just click here:"
-msgstr ""
-
-msgid "Backup"
-msgstr "Zálohovať"
-
-msgid "You are not allowed to do remote backup."
-msgstr "Nemáte oprávnenie uskutočniť vzdialenú zálohu."
-
-#, python-format
-msgid "Unknown backup subaction: %s."
-msgstr "Neznáma subakcia zálohy: %s."
-
-msgid "Please choose:"
-msgstr "Prosím vyberte si:"
-
-msgid "Rename all /subpages too?"
-msgstr "Premenovať aj všetky /podstránky?"
-
-msgid "New name"
-msgstr "Nové meno"
-
-msgid "Optional reason for the renaming"
-msgstr "Nepovinný dôvod tejto zmeny názvu"
-
-msgid "Really rename this page?"
-msgstr "Naozaj premenovať túto stránku?"
-
-msgid "Copy all /subpages too?"
-msgstr "Skúpírovať aj všetky/podstránky?"
-
-msgid "Optional reason for the copying"
-msgstr "Dôvod tohto kopírovania (nepovinný)"
-
-msgid "Really copy this page?"
-msgstr "Naozaj chcete skopírovať túto stránkuk?"
-
-#, python-format
-msgid "Full Link List for \"%s\""
-msgstr "Zoznam všetkých odkazov pre „ %s “"
-
-msgid "No older revisions available!"
-msgstr "Neexistujú staršie verzie."
-
-#, python-format
-msgid "Diff for \"%s\""
-msgstr "Zmeny „ %s “"
-
-#, python-format
-msgid "Differences between revisions %d and %d"
-msgstr "Rozdiely medzi verziami %d a %d"
-
-#, python-format
-msgid "(spanning %d versions)"
-msgstr "(zahŕňajúce %d verzie)"
-
-msgid "Previous change"
-msgstr "Predchádzajúca zmena"
-
-msgid "Next change"
-msgstr "Nijaká zmena"
-
-#, python-format
-msgid "The page was saved %(count)d times, though!"
-msgstr "Ale veď táto stránka bola už uložená %(count)d ráz!"
-
-msgid "(ignoring whitespace)"
-msgstr "(bez ohľadu na medzery)"
-
-msgid "Ignore changes in the amount of whitespace"
-msgstr "Ignorovať zmeny v počte medzier"
-
-#, python-format
-msgid "Invalid filename \"%s\"!"
-msgstr "Neplatné meno súboru: „%s“ !"
-
-msgid "Include all attachments?"
-msgstr "Priložiť všetky prílohy?"
-
-msgid "Package pages"
-msgstr "Zbaliť stránky"
-
-msgid "Package name"
-msgstr "Meno balíku"
-
-msgid "List of page names - separated by a comma"
-msgstr "Zoznam názvov stránok - oddelených čiarkami"
-
-#, python-format
-msgid "Subscribe users to the page %s"
-msgstr "Prihlásiť užívateľov na odoberanie stránky %s"
-
-msgid "Enter user names (comma separated):"
-msgstr "Zadajte mená užívateľov (oddelené čiarkami):"
-
-#, python-format
-msgid "Subscribed for %s:"
-msgstr "Odoberanie pre %s"
-
-msgid "Not a user:"
-msgstr "Nie je užívateľ:"
-
-msgid "You are not allowed to perform this action."
-msgstr "Nemáte oprávnenie uskutočniť túto akciu."
-
-msgid "Please first create a homepage before creating additional pages."
-msgstr ""
-"Prosím, najskôr vytvorte domovskú stránku a až potom vytvorte dodatočné "
-"stránky."
-
-#, python-format
-msgid ""
-"You can add some additional sub pages to your already existing homepage "
-"here.\n"
-"\n"
-"You can choose how open to other readers or writers those pages shall be,\n"
-"access is controlled by group membership of the corresponding group page.\n"
-"\n"
-"Just enter the sub page's name and click on the button to create a new "
-"page.\n"
-"\n"
-"Before creating access protected pages, make sure the corresponding group "
-"page\n"
-"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
-"creating\n"
-"the group pages.\n"
-"\n"
-"||'''Add a new personal page:'''||'''Related access control list "
-"group:'''||\n"
-"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
-"[[%(username)s/ReadWriteGroup]]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
-"(username)s/ReadGroup]]||\n"
-"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
-"(username)s only||\n"
-"\n"
-msgstr ""
-
-msgid "MyPages management"
-msgstr "Manažment MojeStránky"
-
-msgid "Your subscription to this page has been removed."
-msgstr "Vaše odoberanie tejto stránky bolo zrušené."
-
-msgid "Can't remove regular expression subscription!"
-msgstr "Nie je možné zrušiť odoberanie definované regulárnym výrazom!"
-
-msgid "Edit the subscription regular expressions in your settings."
-msgstr "Upravte regulárne výrazy pre odoberané stránky vo Vašich nastaveniach."
-
-msgid "You need to be subscribed to unsubscribe."
-msgstr "Ak chcete zrušiť odoberanie, musíte byť najskôr prihlásený."
-
-#, python-format
-msgid "(!) Only pages changed since '''%s''' are being displayed!"
-msgstr "(!) Zobrazujú sa len stránky zmenené od '''%s'''!"
-
-msgid ""
-"/!\\ The modification date you entered was not recognized and is therefore "
-"not considered for the search results!"
-msgstr ""
-"/!\\ Dátum zmeny, ktorý ste zadali, systém nerozpoznal a nebude sa preto "
-"brať do úvahy pri výsledkoch hľadania!"
-
-#, python-format
-msgid "Title Search: \"%s\""
-msgstr "Vyhľadávanie „ %s “ v názvoch stránok"
-
-#, python-format
-msgid "Advanced Search: \"%s\""
-msgstr "Pokročilé vyhľadávanie: „ %s “"
-
-#, python-format
-msgid "Full Text Search: \"%s\""
-msgstr "Fultextové vyhľadávanie „ %s “ "
-
-#, python-format
-msgid ""
-"Your search query {{{\"%s\"}}} didn't return any results. Please change some "
-"terms and refer to HelpOnSearching for more information.%s"
-msgstr ""
-"Vaše vyhľadávanie „ {{{%s}}} “ neprinieslo žiadne výsledky. Prosím, zmeňte "
-"zadané slová alebo sa obráťte na HelpOnSearching. %s"
-
-msgid "(!) Consider performing a"
-msgstr "(!) Zvážte, či Vami hľadané slová/termíny"
-
-msgid "full-text search with your search terms"
-msgstr "nezadáte do fultextového vyhľadávania."
-
-msgid ""
-"(!) You're performing a title search that might not include all related "
-"results of your search query in this wiki. <<BR>>"
-msgstr ""
-"(!) Práve uskutočňujete vyhľadávanie v názvoch stránok, ktoré nemusia "
-"zahŕňať všetkyrelevantné výsledky v tejto wiki. <<BR>>"
-
-msgid "Click here to perform a full-text search with your search terms!"
-msgstr ""
-"Ak chcete hľadané výrazy zadať do fultextového vyhľadávate, kliknite sem!"
-
 msgid "Load"
 msgstr "Nahrať"
 
@@ -3250,30 +2512,82 @@ msgstr ""
 msgid "Page Name"
 msgstr "Meno stránky"
 
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr ""
+"Nie je možné vytvoriť stránku bez udania mena. Prosím, zadajte meno stránky."
+
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Lokálna mapa stránok pre \"%s\""
 
-msgid "Charts are not available!"
-msgstr "Diagramy nie sú dostupné!"
+msgid "You are not allowed to create the supplementation page."
+msgstr "Nemáte oprávnenie vytvoriť doplňujúcu stránku."
 
-msgid "Do it."
-msgstr "Makaj."
+msgid ""
+"You need to manually go to your OpenID provider wiki\n"
+"and log in before you can use your OpenID. MoinMoin will\n"
+"never allow you to enter your password here.\n"
+"\n"
+"Once you have logged in, simply reload this page."
+msgstr ""
+
+msgid "OpenID Trust verification"
+msgstr ""
 
 #, python-format
-msgid "Execute action %(actionname)s?"
-msgstr "Uskutočniť akciu %(actionname)s ?"
+msgid "The site %s has asked for your identity."
+msgstr ""
 
 #, python-format
-msgid "Action %(actionname)s is excluded in this wiki!"
-msgstr "Akcia %(actionname)s je na tejto wiki zakázaná!"
+msgid ""
+"\n"
+"If you approve, the site represented by the trust root below will be\n"
+"told that you control the identity URL %s. (If you are using a delegated\n"
+"identity, the site will take care of reversing the\n"
+"delegation on its own.)"
+msgstr ""
 
-#, python-format
-msgid "You are not allowed to use action %(actionname)s on this page!"
-msgstr "Nemáte oprávnenie použiť túto akciu %(actionname)s na tejto stránke."
+msgid "Trust root"
+msgstr ""
 
-msgid "Only superuser is allowed to use this action."
-msgstr "Iba superužívateľ má oprávnenie uskutočniť túto akciu."
+msgid "Identity URL"
+msgstr ""
+
+msgid "Remember decision"
+msgstr "Zapamätaj si rozhodnutie"
+
+msgid "Remember this trust decision and don't ask again"
+msgstr ""
+
+msgid "Approve"
+msgstr ""
+
+msgid "Don't approve"
+msgstr ""
+
+msgid "OpenID not served"
+msgstr ""
+
+msgid ""
+"\n"
+"Unfortunately you have not created your homepage yet. Therefore,\n"
+"we cannot serve an OpenID for you. Please create your homepage first\n"
+"and then reload this page or click the button below to cancel this\n"
+"verification."
+msgstr ""
+
+msgid "User account created! You can use this account to login now..."
+msgstr "Užívateľský účet je vytvorený! Teraz sa môžete prihlásiť a..."
+
+msgid "TextCha (required)"
+msgstr "TextCha (povinný)"
+
+msgid "Create Profile"
+msgstr "Vytvoriť profil"
+
+msgid "Create Account"
+msgstr "Vytvoriť účet"
 
 msgid "Views/day"
 msgstr "Počet zobrazení za deň"
@@ -3298,11 +2612,14 @@ msgstr "dátum"
 msgid "# of hits"
 msgstr "# zobrazení"
 
-msgid "User agent"
-msgstr "User agent"
+msgid "Language"
+msgstr "Jazyk"
 
 msgid "Others"
 msgstr "Ďalšie"
+
+msgid "User agent"
+msgstr "User agent"
 
 msgid "Distribution of User-Agent Types"
 msgstr "Rozdelenie podľa typov User-Agent"
@@ -3316,14 +2633,691 @@ msgstr "maximálna veľkosť stránky [bytes]"
 msgid "# of pages of this size"
 msgstr "# stránok s touto veľkosťou"
 
-msgid "From"
-msgstr "Od"
+msgid "Line"
+msgstr "Riadok"
 
-msgid "To"
-msgstr "Komu"
+msgid "Deletions are marked like this."
+msgstr "Vymazané časti sa označujú takto."
 
-msgid "Content"
+msgid "Additions are marked like this."
+msgstr "Pridané časti sa označujú takto."
+
+#, python-format
+msgid ""
+"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
+msgstr ""
+"Je nám ľúto, ale stránka sa nedá uložiť, pretože \"%(content)s\" táto wiki "
+"nepovoľuje. "
+
+msgid "Attachment link"
+msgstr "Linka na prílohu"
+
+msgid "Page link"
+msgstr "Linka na stránku"
+
+msgid "Changed page"
+msgstr "Zmenená stránka"
+
+msgid "Page changed"
+msgstr "Stránka bola zmenená"
+
+#, python-format
+msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
+msgstr ""
+"[%(sitename)s] %(trivial)sZmena stránky \"%(pagename)s\" užívateľom %"
+"(username)s"
+
+msgid "Trivial "
+msgstr "Drobná "
+
+#, python-format
+msgid ""
+"Attachment link: %(attach)s\n"
+"Page link: %(page)s\n"
+msgstr ""
+
+msgid "Page has been modified"
+msgstr "Stránka bola modifikovaná"
+
+msgid "Page has been modified in a trivial fashion"
+msgstr "Stránka bola mierne modifikovaná"
+
+msgid "Page has been renamed"
+msgstr "Stránka bola premenovaná"
+
+msgid "Page has been deleted"
+msgstr "Stránka bola vymazaná!"
+
+msgid "Page has been copied"
+msgstr "Stránka bola skopírovaná"
+
+msgid "A new attachment has been added"
+msgstr "Nová príloha bola pridaná"
+
+msgid "A page has been reverted to a previous state"
+msgstr "Stránka bola navrátená do predchádzajúceho stavu"
+
+msgid "A user has subscribed to a page"
+msgstr "Užívateľ sa prihlásil na odoberaniestránky."
+
+msgid "A new account has been created"
+msgstr "Nový účet bol vytvorený"
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
+"change notification.\n"
+"\n"
+"The \"%(pagename)s\" page has been changed by %(editor)s:\n"
+msgstr ""
+"Vážený užívateľ Wiki,\n"
+"\n"
+"Požiadali ste o zasielanie zmien wiki stránky alebo kategórie na \"%"
+"(sitename)s.\n"
+"\n"
+"Stránku %(pagename)s zmenil užívateľ %(editor)s:\n"
+
+msgid "New page:\n"
+msgstr "Nová stránka:\n"
+
+msgid "No differences found!\n"
+msgstr "Nenašli sa nijaké rozdiely!\n"
+
+#, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been deleted by %(editor)s:\n"
+"\n"
+msgstr ""
+"Vážený užívateľ Wiki,\n"
+"\n"
+"Požiadali ste o zasielanie zmien wiki stránky\n"
+"%(sitename)s.\n"
+"\n"
+"Stránka %(pagename)s bola vymazaná redaktorom %(editor)s:\n"
+
+#, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by %(editor)"
+"s:\n"
+msgstr ""
+"Vážený užívateľ Wiki,\n"
+"\n"
+"Požiadali ste o zasielanie zmien wiki stránky\n"
+"%(sitename)s.\n"
+"\n"
+"Stránka \"%(pagename)s\" bola premenovaná z mena \"%(oldname)s\" redaktorom %"
+"(editor)s\n"
+
+#, python-format
+msgid "New user account created on %(sitename)s"
+msgstr "Nový užívateľ vytvorený na %(sitename)s"
+
+#, python-format
+msgid ""
+"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
+"follow:\n"
+"\n"
+"    User name: %(username)s\n"
+"    Email address: %(useremail)s"
+msgstr ""
+
+#, python-format
+msgid "New attachment added to page %(pagename)s on %(sitename)s"
+msgstr "Nová príloha bola pridaná k stránke %(pagename)s na %(sitename)s"
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(page_name)s\" for change "
+"notification. An attachment has been added to that page by %(editor)s. "
+"Following detailed information is available:\n"
+"\n"
+"Attachment name: %(attach_name)s\n"
+"Attachment size: %(attach_size)s\n"
+msgstr ""
+
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
+">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+msgstr ""
+
+msgid "XSLT option disabled, please look at HelpOnConfiguration."
+msgstr "XSLT nie je povolené, prosím, pozrite sa do HelpOnConfiguration."
+
+msgid "XSLT processing is not available, please install 4suite 1.x."
+msgstr "XSLT spracovanie nie je dostupné, prosím, nainštalujte si 4suite 1.x."
+
+#, python-format
+msgid "%(errortype)s processing error"
+msgstr "Chyba pri spracovávaní: \"%(errortype)s\""
+
+msgid ""
+" Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
+"italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed ''<<Verbatim(''')"
+">>'''''bold'''<<Verbatim(''')>> and italics''<<Verbatim('')>>; <<Verbatim"
+"(----)>> horizontal rule.\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
+"#n start numbering at n; space alone indents.\n"
+" Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])"
+">>.\n"
+" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
+"white space allowed after tables or titles.\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
+msgstr ""
+
+msgid ""
+"Rendering of reStructured text is not possible, please install Docutils."
+msgstr ""
+"Nie je možné zobraziť reStructured text, prosím, nainštalujte si Docutils."
+
+msgid ""
+"{{{\n"
+"Emphasis: *italic* **bold** ``monospace``\n"
+"\n"
+"Headings: Heading 1  Heading 2  Heading 3\n"
+"          =========  ---------  ~~~~~~~~~\n"
+"\n"
+"Horizontal rule: ----\n"
+"\n"
+"Links: TrailingUnderscore_ `multi word with backticks`_ external_\n"
+"\n"
+".. _external: http://external-site.example.org/foo/\n"
+"\n"
+"Lists: * bullets; 1., a. numbered items.\n"
+"}}}\n"
+"(!) For more help, see the\n"
+"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
+"reStructuredText Quick Reference]].\n"
+msgstr ""
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr "**Prekročený maximálny počet povolených includes**"
+
+#, python-format
+msgid "**You are not allowed to read the page: %s**"
+msgstr "**Nie ste oprávnený čítať stránku: %s ! **"
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr "**Odporúčanú stránku nemožno nájsť: %s**"
+
+#, python-format
+msgid "Upload new attachment \"%(filename)s\""
+msgstr "Pridať novú prílohu „ %(filename)s “"
+
+#, python-format
+msgid ""
+"%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
+"missing."
+msgstr ""
+
+#, python-format
+msgid ""
+"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s=%"
+"(argument_value)s!"
+msgstr ""
+
+#, python-format
+msgid ""
+"Current configuration does not allow embedding of the file %(file)s because "
+"of its mimetype %(mimetype)s."
+msgstr ""
+
+msgid "Embedded"
+msgstr "Embedded"
+
+msgid "Search for items"
+msgstr "Hľadať položky"
+
+msgid "containing all the following terms"
+msgstr "obsahujúce všetky nasledujúce termíny"
+
+msgid "containing one or more of the following terms"
+msgstr "obsahujúce jeden alebo viacero nasledujúcich termínov"
+
+msgid "not containing the following terms"
+msgstr "neobsahujúce nasledujúce termíny"
+
+msgid "last modified since (e.g. last 2 weeks)"
+msgstr "posledná zmena (napr. pred 2 týždňami)"
+
+msgid "any category"
+msgstr "akákoľvek kategória"
+
+msgid "any language"
+msgstr "akýkoľvek jazyk"
+
+msgid "any mimetype"
+msgstr "akýkoľvek mimetype"
+
+msgid "Categories"
+msgstr "Kategórie"
+
+msgid "File Type"
+msgstr "Typ súboru"
+
+msgid "Search only in titles"
+msgstr "Vyhľadávať výhradne v názvoch stránok"
+
+msgid "Case-sensitive search"
+msgstr "Rozlišovať pri vyhľadávaní veľkosť písmen"
+
+msgid "Exclude underlay"
+msgstr "Vylúčiť underlay"
+
+msgid "No system items"
+msgstr "Nijaké systémové položky"
+
+msgid "Search in all page revisions"
+msgstr "Hľadať vo všetkých revidovaných stránkach"
+
+msgid "Go get it!"
+msgstr "Chytaj!"
+
+msgid "File attachment browser"
+msgstr "Prehliadač príloh"
+
+msgid "User account browser"
+msgstr "Prehliadač účtov"
+
+msgid "No orphaned pages in this wiki."
+msgstr "Žiadne osirotené stránky v tejto wiki."
+
+#, python-format
+msgid "Invalid include arguments \"%s\"!"
+msgstr "Neplatný argument pre include : „ %s “ !"
+
+#, python-format
+msgid "Nothing found for \"%s\"!"
+msgstr "K „ %s “ sa nič nenašlo!"
+
+msgid "Include system pages"
+msgstr "Vrátane systémových stránok"
+
+msgid "Exclude system pages"
+msgstr "Okrem systémových stránok"
+
+msgid "No wanted pages in this wiki."
+msgstr "V tejto wiki neexistujú nijaké požadované stránky."
+
+msgid "Python Version"
+msgstr "Verzia Pythonu"
+
+msgid "MoinMoin Version"
+msgstr "Verzia MoinMoin"
+
+#, python-format
+msgid "Release %s [Revision %s]"
+msgstr "Verzia %s [édition „ %s “]"
+
+msgid "4Suite Version"
+msgstr "Verzia 4Suite"
+
+msgid "Number of pages"
+msgstr "Počet stránok"
+
+msgid "Number of system pages"
+msgstr "Počet systémových stránok"
+
+msgid "Accumulated page sizes"
+msgstr "Súhrnná veľkosť stránok"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr "Využitie disku %(data_dir)s/pages/"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/"
+msgstr "Využitie disku %(data_dir)s/"
+
+msgid "Entries in edit log"
+msgstr "Záznamy v edit-logu"
+
+msgid "NONE"
+msgstr "ŽIADNY"
+
+msgid "Global extension macros"
+msgstr "Makrá globálneho rozšírenia"
+
+msgid "Local extension macros"
+msgstr "Makrá lokálneho rozšírenia"
+
+msgid "Global extension actions"
+msgstr "Akcie globálneho rozšírenia"
+
+msgid "Local extension actions"
+msgstr "Akcie lokálneho rozšírenia"
+
+msgid "Global parsers"
+msgstr "Globálne parsery"
+
+msgid "Local extension parsers"
+msgstr "Parsery lokálneho rozšírenia"
+
+msgid "Disabled"
+msgstr "Zakázané"
+
+msgid "Enabled"
+msgstr "Povolené"
+
+msgid "index available"
+msgstr "register je k dispozícii"
+
+msgid "index unavailable"
+msgstr "register nie je k dispozícii"
+
+msgid "Xapian and/or Python Xapian bindings not installed"
+msgstr "Xapian a/alebo Python Xapian rozšírenie nie sú nainštalované"
+
+msgid "Xapian search"
+msgstr "Xapian vyhľadávanie"
+
+msgid "Stemming for Xapian"
+msgstr "Stemming pre Xapian"
+
+msgid "Active threads"
+msgstr "Aktívne vlákna"
+
+msgid "Wiki configuration"
+msgstr "Konfigurácia wiki"
+
+msgid ""
+"This table shows all settings in this wiki that do not have default values. "
+"Settings that the configuration system doesn't know about are shown in "
+"''italic'', those may be due to third-party extensions needing configuration "
+"or settings that were removed from Moin."
+msgstr ""
+
+msgid "Variable name"
+msgstr "Názov premennej"
+
+msgid "Setting"
+msgstr "Nastavenie"
+
+#, python-format
+msgid "No quotes on %(pagename)s."
+msgstr "Žiadne citáty na stránke %(pagename)s."
+
+msgid "Markup"
+msgstr "Markup"
+
+msgid "Display"
+msgstr "Zobraziť"
+
+#, python-format
+msgid "Unsupported navigation scheme '%(scheme)s'!"
+msgstr "Neznáma navigačná schéma „ %(scheme)s “ !"
+
+msgid "No parent page found!"
+msgstr "Rodičovská stránka sa nenašla!"
+
+msgid "Wiki"
+msgstr "Wiki"
+
+msgid "Slideshow"
+msgstr "Prezentácia obrázkov"
+
+msgid "Start"
+msgstr "Začať"
+
+#, python-format
+msgid "Slide %(pos)d of %(size)d"
+msgstr "Strana %(pos)d z %(size)d "
+
+#, python-format
+msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
+msgstr ""
+
+msgid "Go To Page"
+msgstr "Ísť na stránku"
+
+msgid "Description"
+msgstr "Popis"
+
+msgid "Contents"
 msgstr "Obsah"
+
+msgid "Search Titles"
+msgstr "Vyhľadávanie v názvoch stránok"
+
+msgid "Display context of search results"
+msgstr "Zobraziť kontext výsledku vyhľadávania"
+
+msgid "Case-sensitive searching"
+msgstr "Rozlišovať pri vyhľadávaní veľkosť písmen"
+
+msgid "Search Text"
+msgstr "Hľadaj text"
+
+#, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Nahrať prílohu „ %(filename)s “."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Obrázok „%(filename)s“ uložený."
+
+#, python-format
+msgid "%(mins)dm ago"
+msgstr "Pred %(mins)dmin."
+
+msgid "(no bookmark set)"
+msgstr "(nezaložená nijaká záložka)"
+
+#, python-format
+msgid "(currently set to %s)"
+msgstr "(momentálna hodnota je : %s)"
+
+msgid "Delete bookmark"
+msgstr "Zmazať záložku"
+
+msgid "Set bookmark"
+msgstr "Vytvoriť záložku"
+
+msgid "[Bookmark reached]"
+msgstr "[Záložka dosiahnutá]"
+
+#, python-format
+msgid "Inlined image: %(url)s"
+msgstr "Vložený obrázok : %(url)s"
+
+#, python-format
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Vytvoriť novú kresbu „ %(filename)s “ (v novom okne)"
+
+#, python-format
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Úprava obrázka %(filename)s (v novom okne)"
+
+#, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Klikateľná kresba %(filename)s"
+
+msgid "Toggle line numbers"
+msgstr "Prepnúť zobrazenia čísel riadkov"
+
+msgid "[ATTACH]"
+msgstr "[[PRILOŽ]]"
+
+msgid "[RSS]"
+msgstr "[RSS]"
+
+msgid "[DELETED]"
+msgstr "[VYMAZANÉ]"
+
+msgid "[UPDATED]"
+msgstr "[AKTUALIZOVANÉ]"
+
+msgid "[RENAMED]"
+msgstr "[PREMENOVANÁ]"
+
+msgid "[CONFLICT]"
+msgstr "[KONFLIKT]"
+
+msgid "[NEW]"
+msgstr "[NOVÁ]"
+
+msgid "[DIFF]"
+msgstr "[ROZDIELY]"
+
+msgid "[BOTTOM]"
+msgstr "[DOLU]"
+
+msgid "[TOP]"
+msgstr "[HORE]"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Ak chcete fulltextovo vyhľadávať tento názov, kliknite sem."
+
+msgid "Logout"
+msgstr "Odhlásenie"
+
+msgid "Unsubscribe"
+msgstr "Zrušiť odoberanie"
+
+msgid "Home"
+msgstr "Domovská stránka"
+
+msgid "Clear message"
+msgstr "Vymazať odkaz"
+
+#, python-format
+msgid "last edited %(time)s by %(editor)s"
+msgstr "poslednú editáciu z %(time)s uskutočnil %(editor)s"
+
+#, python-format
+msgid "last modified %(time)s"
+msgstr "posledná zmena %(time)s"
+
+msgid "Search:"
+msgstr "Hľadať:"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "Titles"
+msgstr "Stránky"
+
+msgid "Search"
+msgstr "Hľadať"
+
+msgid "More Actions:"
+msgstr "Viac akcií:"
+
+msgid "------------------------"
+msgstr "------------------------"
+
+msgid "Raw Text"
+msgstr "Zdrojový text"
+
+msgid "Print View"
+msgstr "Verzia do tlače"
+
+msgid "Delete Cache"
+msgstr "Vymazať cache"
+
+msgid "Delete Page"
+msgstr "Vymazať stránku"
+
+msgid "Like Pages"
+msgstr "Podobné stránky"
+
+msgid "Local Site Map"
+msgstr "Lokálna mapa stránok"
+
+msgid "My Pages"
+msgstr "Moja stránka"
+
+msgid "Subscribe User"
+msgstr "Prihlásiť užívateľa na odoberanie zmien."
+
+msgid "Remove Spam"
+msgstr "Odstrániť spam"
+
+msgid "Package Pages"
+msgstr "Zabaliť stránky"
+
+msgid "Render as Docbook"
+msgstr "Konvertovať do Docbook"
+
+msgid "Sync Pages"
+msgstr "Synchronizovať stránky"
+
+msgid "Do"
+msgstr "Urobiť"
+
+msgid "Comments"
+msgstr "Komentár"
+
+msgid "Edit (Text)"
+msgstr "Editovať (textový mód)"
+
+msgid "Edit (GUI)"
+msgstr "Editovať (grafický mód)"
+
+msgid "Immutable Page"
+msgstr "Nemenná stránka"
+
+msgid "Remove Link"
+msgstr "Odstrániť odkaz"
+
+msgid "Add Link"
+msgstr "Pridať odkaz"
+
+msgid "Attachments"
+msgstr "Prílohy"
+
+#, python-format
+msgid "Show %s days."
+msgstr "Zobraziť %s d."
+
+msgid "Wiki Markup"
+msgstr "Značkovanie wiki"
+
+msgid "Page"
+msgstr "Stránka"
+
+msgid "User"
+msgstr "Užívateľ"
+
+msgid "DeleteCache"
+msgstr "ZmazaťCache"
+
+#, python-format
+msgid "(cached %s)"
+msgstr "(kešované %s)"
+
+msgid "Or try one of these actions:"
+msgstr "Alebo skúste jednu z nasledujúcich akcií:"
 
 #, python-format
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
@@ -3335,15 +3329,20 @@ msgstr "Email nebol odoslaný"
 msgid "Mail sent OK"
 msgstr "Email bol úspešne odoslaný"
 
-#, python-format
-msgid ""
-"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
-msgstr ""
-"Je nám ľúto, ale stránka sa nedá uložiť, pretože \"%(content)s\" táto wiki "
-"nepovoľuje. "
+msgid "From"
+msgstr "Od"
 
-msgid "anonymous"
-msgstr ""
+msgid "To"
+msgstr "Komu"
+
+msgid "Content"
+msgstr "Obsah"
+
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr ""
+#~ "Inštalovanie tematických súborov nie je kompatibilné so servermi v "
+#~ "standalone móde."
 
 #, fuzzy
 #~ msgid "InterWikiMap"
