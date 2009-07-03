@@ -7,8 +7,8 @@ MoinMoin.groups related configuration is defined here.
 """
 
 from wikiconfig import LocalConfig
-from MoinMoin.datastruct.groups import WikiGroups
-from MoinMoin.datastruct.dicts import WikiDicts
+from MoinMoin.datastruct import WikiGroups
+from MoinMoin.datastruct import WikiDicts
 
 class Config(LocalConfig):
     group_manager_init = lambda self, request: WikiGroups(request)

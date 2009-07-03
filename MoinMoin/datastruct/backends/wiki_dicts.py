@@ -13,7 +13,7 @@ import re
 
 from MoinMoin import caching, wikiutil
 from MoinMoin.Page import Page
-from MoinMoin.datastruct.dicts.backends import BaseDict, BaseDictBackend, DictDoesNotExistError
+from MoinMoin.datastruct.backends import BaseDict, BaseDictBackend, DictDoesNotExistError
 
 
 class WikiDict(BaseDict):

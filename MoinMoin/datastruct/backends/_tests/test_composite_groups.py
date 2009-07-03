@@ -1,7 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 
 """
-MoinMoin.groups.GroupManager test
+MoinMoin.datastruct.backends.composite_groups test
 
 @copyright: 2009 MoinMoin:DmitrijsMilajevs
             2008 MoinMoin: MelitaMihaljevic
@@ -10,8 +10,8 @@ MoinMoin.groups.GroupManager test
 
 from py.test import raises
 
-from  MoinMoin.datastruct.groups.backends._tests import BackendTest
-from MoinMoin.datastruct.groups import ConfigGroups, CompositeGroups, GroupDoesNotExistError
+from MoinMoin.datastruct.backends._tests import BackendTest
+from MoinMoin.datastruct import ConfigGroups, CompositeGroups, GroupDoesNotExistError
 from MoinMoin._tests import wikiconfig
 from MoinMoin import security
 
@@ -86,4 +86,4 @@ class TestConfigGroup(object):
         assert u'not existing group' not in self.groups
 
 
-coverage_modules = ['MoinMoin.datastruct.groups.backends.composite_groups']
+coverage_modules = ['MoinMoin.datastruct.backends.composite_groups']

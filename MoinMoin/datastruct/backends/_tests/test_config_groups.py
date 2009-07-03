@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - MoinMoin.groups.backends.wiki_group tests
+    MoinMoin - MoinMoin.backends.wiki_group tests
 
     @copyright: 2003-2004 by Juergen Hermann <jh@web.de>,
                 2007 by MoinMoin:ThomasWaldmann
@@ -10,8 +10,8 @@
 
 """
 
-from  MoinMoin.datastruct.groups.backends._tests import BackendTest
-from MoinMoin.datastruct.groups import ConfigGroups
+from  MoinMoin.datastruct.backends._tests import BackendTest
+from MoinMoin.datastruct import ConfigGroups
 from MoinMoin._tests import wikiconfig
 
 
@@ -24,5 +24,5 @@ class TestConfigBackend(BackendTest):
             return ConfigGroups(request, groups)
 
 
-coverage_modules = ['MoinMoin.datastruct.groups.backends.config_groups']
+coverage_modules = ['MoinMoin.datastruct.backends.config_groups']
 

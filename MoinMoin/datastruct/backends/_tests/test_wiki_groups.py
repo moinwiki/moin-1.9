@@ -1,20 +1,19 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - MoinMoin.groups.backends.wiki_group tests
+MoinMoin - MoinMoin.backends.wiki_group tests
 
-    @copyright: 2003-2004 by Juergen Hermann <jh@web.de>,
-                2007 by MoinMoin:ThomasWaldmann
-                2008 by MoinMoin:MelitaMihaljevic
-                2009 by MoinMoin:DmitrijsMilajevs
-    @license: GNU GPL, see COPYING for details.
-
+@copyright: 2003-2004 by Juergen Hermann <jh@web.de>,
+            2007 by MoinMoin:ThomasWaldmann
+            2008 by MoinMoin:MelitaMihaljevic
+            2009 by MoinMoin:DmitrijsMilajevs
+@license: GNU GPL, see COPYING for details.
 """
 
 from py.test import raises
 import re, shutil
 
-from  MoinMoin.datastruct.groups.backends._tests import BackendTest
-from MoinMoin.datastruct.groups import WikiGroups
+from  MoinMoin.datastruct.backends._tests import BackendTest
+from MoinMoin.datastruct import WikiGroups
 from MoinMoin import Page, security
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.user import User
@@ -245,5 +244,5 @@ class TestWikiGroupBackend(BackendTest):
         assert not has_rights_before, 'AnotherUser has no read rights because in the beginning he is not a member of a group page NewGroup'
         assert has_rights_after, 'AnotherUser must have read rights because after appendage he is member of NewGroup'
 
-coverage_modules = ['MoinMoin.datastruct.groups.backends.wiki_groups']
+coverage_modules = ['MoinMoin.datastruct.backends.wiki_groups']
 
