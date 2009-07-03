@@ -11,6 +11,7 @@ import py
 
 from MoinMoin.search import QueryError
 from MoinMoin.search.queryparser import QueryParser
+from MoinMoin.search import Xapian
 from MoinMoin import search
 
 
@@ -108,5 +109,26 @@ class TestSearch:
         assert 0 < len(result.hits) < helpon_count
 
 
+class TestXapianIndex:
+    """ search: test Xapian indexing """
+
+    def testIndex(self):
+        """ search: kicks off indexing for a single pages in Xapian """
+        
+        # AD - This only tests the the call to indexing doesn't raise.
+        
+        idx = Xapian.Index( self.request )
+        idx.indexPages( ['HomePageWiki'], mode='add' )
+        
+    def testIndexInNewThread(self):
+        """ search: kicks off indexing for a page in a new thread in Xapian"""
+
+        # AD - This only tests the the call to indexing doesn't raise.
+
+        idx = Xapian.Index( self.request )
+        idx.indexPagesInNewThread( ['HomePageWiki'], mode='add' )
+
+        
+        
 coverage_modules = ['MoinMoin.search']
 

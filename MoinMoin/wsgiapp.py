@@ -38,6 +38,11 @@ def init(request):
 
     context.lang = setup_i18n_postauth(context)
 
+    def finish():
+        pass
+    
+    context.finish = finish
+    
     context.reset()
 
     context.clock.stop('init')
@@ -68,6 +73,7 @@ def run(context):
         except MoinMoinFinish:
             return request
     finally:
+        context.finish()
         context.clock.stop('run')
 
 def remove_prefix(path, prefix=None):
