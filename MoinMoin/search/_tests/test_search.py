@@ -93,7 +93,7 @@ class TestSearch:
     def testTitleSearchNegativeTerm(self):
         """ search: title search for a AND expression with a negative term """
         helpon_count = len(search.searchPages(self.request, u"title:HelpOn").hits)
-        result = search.searchPages(self.request, u"title:HelpOn -title:Acl")
+        result = search.searchPages(self.request, u"title:HelpOn -title:AccessControlLists")
         assert len(result.hits) == helpon_count - 1 # finds all HelpOn* except one
 
     def testFullSearchNegatedFindAll(self):
