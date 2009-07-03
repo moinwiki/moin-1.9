@@ -34,9 +34,7 @@ class PackagePages:
 
     def allowed(self):
         """ Check if user is allowed to do this. """
-        may = self.request.user.may
-        return (not self.__class__.__name__ in self.request.cfg.actions_excluded and
-                may.write(self.pagename))
+        return not self.__class__.__name__ in self.request.cfg.actions_excluded
 
     def render(self):
         """ Render action

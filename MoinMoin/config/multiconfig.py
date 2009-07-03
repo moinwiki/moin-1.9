@@ -932,8 +932,8 @@ options_no_group_name = {
   )),
   # ==========================================================================
   'pages': ('Special page names', None, (
-    ('page_front_page', u'HelpOnLanguages',
-     "Name of the front page. We don't expect you to keep the default. Just read HelpOnLanguages in case you're wondering... [Unicode]"),
+    ('page_front_page', u'LanguageSetup',
+     "Name of the front page. We don't expect you to keep the default. Just read LanguageSetup in case you're wondering... [Unicode]"),
 
     # the following regexes should match the complete name when used in free text
     # the group 'all' shall match all, while the group 'key' shall match the key only
