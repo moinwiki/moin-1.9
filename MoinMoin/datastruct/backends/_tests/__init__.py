@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - MoinMoin.groups.backends base test classes.
+    MoinMoin - MoinMoin.datastruct.backends base test classes.
 
     @copyright: 2003-2004 by Juergen Hermann <jh@web.de>,
                 2007 by MoinMoin:ThomasWaldmann
@@ -13,7 +13,7 @@
 from py.test import raises
 
 from MoinMoin import security
-from MoinMoin.datastruct.groups import GroupDoesNotExistError
+from MoinMoin.datastruct import GroupDoesNotExistError
 
 
 class BackendTest(object):

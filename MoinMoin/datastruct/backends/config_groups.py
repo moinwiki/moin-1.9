@@ -8,14 +8,14 @@ The config group backend enables you to define groups in a configuration file.
 @license: GPL, see COPYING for details
 """
 
-from MoinMoin.datastruct.groups.backends import BaseGroup, BaseBackend, GroupDoesNotExistError
+from MoinMoin.datastruct.backends import BaseGroup, BaseGroupBackend, GroupDoesNotExistError
 
 
 class Group(BaseGroup):
     pass
 
 
-class ConfigGroups(BaseBackend):
+class ConfigGroups(BaseGroupBackend):
 
     def __init__(self, request, groups):
         """

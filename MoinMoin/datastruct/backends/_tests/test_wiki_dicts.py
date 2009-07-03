@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - MoinMoin.datastruct.dicts.backends.wiki_dicts tests
+    MoinMoin - MoinMoin.datastruct.backends.wiki_dicts tests
 
     @copyright: 2003-2004 by Juergen Hermann <jh@web.de>,
                 2007 by MoinMoin:ThomasWaldmann
@@ -8,7 +8,7 @@
 """
 
 
-from MoinMoin.datastruct.dicts.backends import wiki_dicts
+from MoinMoin.datastruct.backends import wiki_dicts
 from MoinMoin._tests import become_trusted, create_page, nuke_page
 
 
@@ -54,5 +54,5 @@ Next line has key with empty value
         assert u'SomeNotExistingDict' not in dicts
 
 
-coverage_modules = ['MoinMoin.datastruct.dicts.backends.wiki_dicts']
+coverage_modules = ['MoinMoin.datastruct.backends.wiki_dicts']
 
