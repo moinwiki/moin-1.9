@@ -12,7 +12,7 @@ MoinMoin - MoinMoin.backends.wiki_group tests
 from py.test import raises
 import re, shutil
 
-from  MoinMoin.datastruct.backends._tests import BackendTest
+from  MoinMoin.datastruct.backends._tests import GroupsBackendTest
 from MoinMoin.datastruct import WikiGroups
 from MoinMoin import Page, security
 from MoinMoin.PageEditor import PageEditor
@@ -81,7 +81,7 @@ Ignore previous line and this text.
         return group
 
 
-class TestWikiGroupBackend(BackendTest):
+class TestWikiGroupBackend(GroupsBackendTest):
 
     class Config(wikiconfig.Config):
 

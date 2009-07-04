@@ -6,10 +6,10 @@ MoinMoin - group access via various backends.
 @license: GPL, see COPYING for details
 """
 
-from MoinMoin.datastruct.backends import BaseGroupBackend, GroupDoesNotExistError
+from MoinMoin.datastruct.backends import BaseGroupsBackend, GroupDoesNotExistError
 
 
-class CompositeGroups(BaseGroupBackend):
+class CompositeGroups(BaseGroupsBackend):
     """
     Manage several group backends.
     """

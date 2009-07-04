@@ -10,22 +10,22 @@ MoinMoin.datastruct.backends.composite_groups test
 
 from py.test import raises
 
-from MoinMoin.datastruct.backends._tests import BackendTest
+from MoinMoin.datastruct.backends._tests import GroupsBackendTest
 from MoinMoin.datastruct import ConfigGroups, CompositeGroups, GroupDoesNotExistError
 from MoinMoin._tests import wikiconfig
 from MoinMoin import security
 
 
-class TestConfigBackend(BackendTest):
+class TestCompositeGroupsBackend(GroupsBackendTest):
 
     class Config(wikiconfig.Config):
 
         def group_manager_init(self, request):
-            groups = BackendTest.test_groups
+            groups = GroupsBackendTest.test_groups
             return CompositeGroups(request, ConfigGroups(request, groups))
 
 
-class TestConfigGroup(object):
+class TestCompositeGroup(object):
 
     class Config(wikiconfig.Config):
 

@@ -16,7 +16,7 @@ from MoinMoin import security
 from MoinMoin.datastruct import GroupDoesNotExistError
 
 
-class BackendTest(object):
+class GroupsBackendTest(object):
 
     test_groups = {u'EditorGroup': [u'AdminGroup', u'John', u'JoeDoe', u'Editor1', u'John'],
                    u'AdminGroup': [u'Admin1', u'Admin2', u'John'],
@@ -136,4 +136,27 @@ class BackendTest(object):
         acl = security.AccessControlList(request.cfg, acl_rights)
 
         assert not acl.may(request, u"Someone", "write")
+
+
+class DictsBackendTest(object):
+
+    dicts = {u'SomeTestDict': {u'First': u'first item',
+                            u'text with spaces': u'second item',
+                            u'Empty string': u'',
+                            u'Last': u'last item'}}
+
+    def test_getitem(self):
+        expected_dict = self.dicts[u'SomeTestDict']
+        dicts = self.request.dicts
+        test_dict = dicts[u'SomeTestDict']
+
+        assert len(test_dict) == len(expected_dict)
+        for key, value in expected_dict.items():
+            assert test_dict[key] == value
+
+    def test_contains(self):
+        dicts = self.request.dicts
+
+        assert u'SomeTestDict' in dicts
+        assert u'SomeNotExistingDict' not in dicts
 

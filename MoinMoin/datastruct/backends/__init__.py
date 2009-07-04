@@ -113,7 +113,7 @@ class BaseGroup(object):
                                                              self.member_groups)
 
 
-class BaseGroupBackend(object):
+class BaseGroupsBackend(object):
 
     def __init__(self, request):
         self.request = request
@@ -207,7 +207,7 @@ class BaseDict(object):
         return "<%r name=%r items=%r>" % (self.__class__, self.name, self._dict.items())
 
 
-class BaseDictBackend(object):
+class BaseDictsBackend(object):
 
     def __init__(self, request):
         self.request = request
