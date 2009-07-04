@@ -141,22 +141,27 @@ class GroupsBackendTest(object):
 class DictsBackendTest(object):
 
     dicts = {u'SomeTestDict': {u'First': u'first item',
-                            u'text with spaces': u'second item',
-                            u'Empty string': u'',
-                            u'Last': u'last item'}}
+                               u'text with spaces': u'second item',
+                               u'Empty string': u'',
+                               u'Last': u'last item'},
+             u'SomeOtherTestDict': {u'One': '1',
+                                    u'Two': '2'}}
 
     def test_getitem(self):
-        expected_dict = self.dicts[u'SomeTestDict']
+        expected_dicts = self.dicts
         dicts = self.request.dicts
-        test_dict = dicts[u'SomeTestDict']
 
-        assert len(test_dict) == len(expected_dict)
-        for key, value in expected_dict.items():
-            assert test_dict[key] == value
+        for dict_name, expected_dict in expected_dicts.items():
+            test_dict = dicts[dict_name]
+            assert len(test_dict) == len(expected_dict)
+            for key, value in expected_dict.items():
+                assert test_dict[key] == value
 
     def test_contains(self):
         dicts = self.request.dicts
 
-        assert u'SomeTestDict' in dicts
+        for key in self.dicts:
+            assert key in dicts
+
         assert u'SomeNotExistingDict' not in dicts
 
