@@ -56,8 +56,14 @@ General syntax: moin [options] maint cleancache
             ('charts', 'pagehits'),
             ('charts', 'useragents'),
             ('user', 'name2id'),
-            ('wikidicts', 'dicts'),
         ]
         for arena, key in arena_key_list:
             caching.CacheEntry(request, arena, key, scope='wiki').remove()
+
+        arena_scope_list =  [('pagedicts', 'wiki'),
+                             ('pagegroups', 'wiki'),
+        ]
+        for arena, scope in arena_scope_list:
+            for key caching.get_cache_list(request, arena, scope):
+                caching.CacheEntry(request, arena, key, scope=scope).remove()
 
