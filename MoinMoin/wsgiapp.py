@@ -40,9 +40,9 @@ def init(request):
 
     def finish():
         pass
-    
+
     context.finish = finish
-    
+
     context.reset()
 
     context.clock.stop('init')

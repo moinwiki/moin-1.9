@@ -47,7 +47,7 @@ def macro_WantedPages(macro):
         links = page.getPageLinks(request)
         is_deprecated = page.parse_processing_instructions(
                 ).get('deprecated', False)
-        
+
         for link in links:
             if not link in pages and request.user.may.read(link):
                 if is_deprecated:
