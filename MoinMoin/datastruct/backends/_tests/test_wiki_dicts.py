@@ -9,12 +9,15 @@
 """
 
 
-from  MoinMoin.datastruct.backends._tests import DictsBackendTest
+from MoinMoin.datastruct.backends._tests import DictsBackendTest
 from MoinMoin.datastruct.backends import wiki_dicts
 from MoinMoin._tests import become_trusted, create_page, nuke_page
 
 
-class TestWikiDicstBackend(DictsBackendTest):
+class TestWikiDictsBackend(DictsBackendTest):
+
+    # Suppose that default configuration for the dict_manager_init is
+    # used which is WikiDicts backend.
 
     def setup_class(self):
         request = self.request

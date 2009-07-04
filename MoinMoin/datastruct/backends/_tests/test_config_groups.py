@@ -10,7 +10,7 @@
 
 """
 
-from  MoinMoin.datastruct.backends._tests import GroupsBackendTest
+from MoinMoin.datastruct.backends._tests import GroupsBackendTest
 from MoinMoin.datastruct import ConfigGroups
 from MoinMoin._tests import wikiconfig
 

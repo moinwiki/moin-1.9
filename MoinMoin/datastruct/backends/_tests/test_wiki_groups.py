@@ -12,7 +12,7 @@ MoinMoin - MoinMoin.backends.wiki_group tests
 from py.test import raises
 import re, shutil
 
-from  MoinMoin.datastruct.backends._tests import GroupsBackendTest
+from MoinMoin.datastruct.backends._tests import GroupsBackendTest
 from MoinMoin.datastruct import WikiGroups
 from MoinMoin import Page, security
 from MoinMoin.PageEditor import PageEditor
@@ -25,10 +25,8 @@ class TestWikiGroupPageParser(object):
     Test what backend extracts from a group page and what is ignored.
     """
 
-    class Config(wikiconfig.Config):
-
-        def group_manager_init(self, request):
-            return WikiGroups(request)
+    # Suppose that default configuration for the group_manager_init is
+    # used which is WikiGroups backend.
 
     def test_CamelCase(self):
         text = """
