@@ -10,17 +10,17 @@
 
 """
 
-from  MoinMoin.datastruct.backends._tests import BackendTest
+from  MoinMoin.datastruct.backends._tests import GroupsBackendTest
 from MoinMoin.datastruct import ConfigGroups
 from MoinMoin._tests import wikiconfig
 
 
-class TestConfigBackend(BackendTest):
+class TestConfigGroupsBackend(GroupsBackendTest):
 
     class Config(wikiconfig.Config):
 
         def group_manager_init(self, request):
-            groups = BackendTest.test_groups
+            groups = GroupsBackendTest.test_groups
             return ConfigGroups(request, groups)
 
 

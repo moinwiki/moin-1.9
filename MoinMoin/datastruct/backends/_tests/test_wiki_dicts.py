@@ -4,15 +4,17 @@
 
     @copyright: 2003-2004 by Juergen Hermann <jh@web.de>,
                 2007 by MoinMoin:ThomasWaldmann
+                2009 by MoinMoin:DmitrijsMilajevs
     @license: GNU GPL, see COPYING for details.
 """
 
 
+from  MoinMoin.datastruct.backends._tests import DictsBackendTest
 from MoinMoin.datastruct.backends import wiki_dicts
 from MoinMoin._tests import become_trusted, create_page, nuke_page
 
 
-class TestDictDict:
+class TestWikiDicstBackend(DictsBackendTest):
 
     def setup_class(self):
         request = self.request
@@ -36,22 +38,6 @@ Next line has key with empty value
     def teardown_class(self):
         become_trusted(self.request)
         nuke_page(self.request, u'SomeTestDict')
-
-    def test_getitem(self):
-        dicts = self.request.dicts
-
-        some_test_dict = dicts['SomeTestDict']
-        assert len(some_test_dict) == 4
-        assert some_test_dict['First'] == 'first item'
-        assert some_test_dict['text with spaces'] == 'second item'
-        assert some_test_dict['Empty string'] == '' # XXX fails if trailing blank is missing
-        assert some_test_dict['Last'] == 'last item'
-
-    def test_contains(self):
-        dicts = self.request.dicts
-
-        assert  u'SomeTestDict' in dicts
-        assert u'SomeNotExistingDict' not in dicts
 
 
 coverage_modules = ['MoinMoin.datastruct.backends.wiki_dicts']

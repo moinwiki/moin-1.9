@@ -17,7 +17,7 @@ import re
 
 from MoinMoin import caching, wikiutil
 from MoinMoin.Page import Page
-from MoinMoin.datastruct.backends import BaseGroup, BaseGroupBackend, GroupDoesNotExistError
+from MoinMoin.datastruct.backends import BaseGroup, BaseGroupsBackend, GroupDoesNotExistError
 
 
 class WikiGroup(BaseGroup):
@@ -49,7 +49,7 @@ class WikiGroup(BaseGroup):
             raise GroupDoesNotExistError(group_name)
 
 
-class WikiGroups(BaseGroupBackend):
+class WikiGroups(BaseGroupsBackend):
 
     def __contains__(self, group_name):
         return self.is_group(group_name) and Page(self.request, group_name).exists()

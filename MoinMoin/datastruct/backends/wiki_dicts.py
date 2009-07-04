@@ -13,7 +13,7 @@ import re
 
 from MoinMoin import caching, wikiutil
 from MoinMoin.Page import Page
-from MoinMoin.datastruct.backends import BaseDict, BaseDictBackend, DictDoesNotExistError
+from MoinMoin.datastruct.backends import BaseDict, BaseDictsBackend, DictDoesNotExistError
 
 
 class WikiDict(BaseDict):
@@ -57,7 +57,7 @@ class WikiDict(BaseDict):
             raise DictDoesNotExistError(dict_name)
 
 
-class WikiDicts(BaseDictBackend):
+class WikiDicts(BaseDictsBackend):
     """ a dictionary of Dict objects
 
        Config:
