@@ -23,23 +23,24 @@ class TestGetVal:
     def teardown_class(self):
         nuke_page(self.request, self.pagename)
 
-    def _test_macro(self, name, args):
-        m = make_macro(self.request, self.page)
+    def _test_macro(self, name, args, page):
+        m = make_macro(self.request, page)
         return m.execute(name, args)
 
     def testGetValNoACLs(self):
         """ macro GetVal test: 'reads VAR' """
-        self.page = create_page(self.request, self.pagename, u' VAR:: This is an example')
-        result = self._test_macro(u'GetVal', "%s,%s" % (self.pagename, u'VAR'))
+        page = create_page(self.request, self.pagename, u' VAR:: This is an example')
+        result = self._test_macro(u'GetVal', "%s,%s" % (self.pagename, u'VAR'), page)
         assert result == "This is an example"
 
     def testGetValAfterADictPageIsDeleted(self):
         """ macro GetVal test: 'reads Dict var after another Dict is removed' """
         request = self.request
+        become_trusted(request)
         page = create_page(request, u'SomeDict', u" EXAMPLE:: This is an example text")
         page.deletePage()
         page = create_page(request, self.pagename, u' VAR:: This is a brand new example')
-        result = self._test_macro(u'GetVal', "%s,%s" % (self.pagename, u'VAR'))
+        result = self._test_macro(u'GetVal', "%s,%s" % (self.pagename, u'VAR'), page)
         nuke_page(request, u'SomeDict')
         assert result == "This is a brand new example"
 
