@@ -16,17 +16,15 @@ class CompositeDicts(BaseDictsBackend):
 
     def __init__(self, request, *backends):
         """
-        @param backends: list of group backends which are used to get
-                         access to the group definitions.
+        @param backends: list of dict backends which are used to get
+                         access to the dict definitions.
         """
         super(CompositeDicts, self).__init__(request)
         self._backends = backends
 
     def __getitem__(self, dict_name):
         """
-        Get a group by its name. First match counts.
-
-        @param group_name: name of the group [unicode]
+        Get a dict by its name. First match counts.
         """
         for backend in self._backends:
             if dict_name in backend:
@@ -36,8 +34,6 @@ class CompositeDicts(BaseDictsBackend):
     def __contains__(self, dict_name):
         """
         Check if a dict called dict_name is available in any of the backends.
-
-        @param dict_name: name of the dict [unicode]
         """
         for backend in self._backends:
             if dict_name in backend:
