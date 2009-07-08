@@ -13,11 +13,10 @@ first level list (wiki markup).
 @license: GPL, see COPYING for details
 """
 
-import re
-
 from MoinMoin import caching, wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.datastruct.backends import BaseGroup, BaseGroupsBackend, GroupDoesNotExistError
+from MoinMoin.datastruct.backends._formatters import GroupFormatter
 
 
 class WikiGroup(BaseGroup):
@@ -60,13 +59,9 @@ class WikiGroups(BaseGroupsBackend):
     def __getitem__(self, group_name):
         return WikiGroup(request=self.request, name=group_name, backend=self)
 
-    # * Member - ignore all but first level list items, strip
-    # whitespace, strip free links markup. This is used for parsing
-    # pages in order to find group page members.
-    _group_page_parse_regex = re.compile(ur'^ \* +(?:\[\[)?(?P<member>.+?)(?:\]\])? *$', re.MULTILINE | re.UNICODE)
-
     def _retrieve_members(self, group_name):
-        page = Page(self.request, group_name)
-        text = page.get_raw_body()
-        return [match.group('member') for match in self._group_page_parse_regex.finditer(text)]
+        formatter = GroupFormatter(self.request)
+        page = Page(self.request, group_name, formatter=formatter)
+        page.send_page(content_only=True)
+        return formatter.members
 
