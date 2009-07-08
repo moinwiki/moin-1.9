@@ -31,7 +31,7 @@ class ConfigDicts(BaseDictsBackend):
     def __getitem__(self, dict_name):
         return ConfigDict(request=self.request, name=dict_name, backend=self)
 
-    def _retrieve_members(self, dict_name):
+    def _retrieve_items(self, dict_name):
         try:
             return self._dicts[dict_name]
         except KeyError:

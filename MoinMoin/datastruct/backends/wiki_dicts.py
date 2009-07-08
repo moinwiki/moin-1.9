@@ -17,9 +17,10 @@ from MoinMoin.datastruct.backends import BaseDict, BaseDictsBackend, DictDoesNot
 
 
 class WikiDict(BaseDict):
-    """ Mapping of keys to values in a wiki page.
+    """
+    Mapping of keys to values in a wiki page.
 
-       How a Dict definition page should look like:
+    A dict definition page should look like:
 
        any text ignored
         key1:: value1
@@ -58,11 +59,12 @@ class WikiDict(BaseDict):
 
 
 class WikiDicts(BaseDictsBackend):
-    """ a dictionary of Dict objects
+    """
+    A dictionary of Dict objects
 
-       Config:
-           cfg.page_dict_regex
-               Default: ".*Dict$"  Defs$ Vars$ ???????????????????
+    Config:
+       cfg.page_dict_regex
+       Default: ".*Dict$"  Defs$ Vars$ ???????????????????
     """
 
     # Key:: Value - ignore all but key:: value pairs, strip whitespace, exactly one space after the :: is required
@@ -74,7 +76,7 @@ class WikiDicts(BaseDictsBackend):
     def __getitem__(self, dict_name):
         return WikiDict(request=self.request, name=dict_name, backend=self)
 
-    def _retrieve_members(self, dict_name):
+    def _retrieve_items(self, dict_name):
         page = Page(self.request, dict_name)
         text = page.get_raw_body()
         return dict([match.groups() for match in self._dict_page_parse_regex.finditer(text)])

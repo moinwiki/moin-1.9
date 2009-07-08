@@ -28,7 +28,6 @@ class BaseGroup(object):
         @param request
         @param name: moin group name
         @backend: backend object which created this object
-
         """
         self.request = request
         self.name = name
@@ -178,7 +177,6 @@ class BaseDict(object):
         @param request
         @param name: moin dict name
         @backend: backend object which created this object
-
         """
         self.request = request
         self.name = name
@@ -201,7 +199,7 @@ class BaseDict(object):
         """
         Retrieve dict data from the backend.
         """
-        return self._backend._retrieve_members(self.name)
+        return self._backend._retrieve_items(self.name)
 
     def __repr__(self):
         return "<%r name=%r items=%r>" % (self.__class__, self.name, self._dict.items())
@@ -228,6 +226,6 @@ class BaseDictsBackend(object):
         """
         raise NotImplementedError()
 
-    def _retrieve_members(self, dict_name):
+    def _retrieve_items(self, dict_name):
         raise NotImplementedError()
 
