@@ -36,6 +36,7 @@ def macro_WantedPages(macro):
 
     # build a dict of wanted pages
     wanted = {}
+    deprecated_links = []
     for name, page in pages.items():
         # Skip system pages, because missing translations are not wanted pages,
         # unless you are a translator and clicked "Include system pages"
@@ -44,12 +45,21 @@ def macro_WantedPages(macro):
 
         # Add links to pages which do not exist in pages dict
         links = page.getPageLinks(request)
+        is_deprecated = page.parse_processing_instructions(
+                ).get('deprecated', False)
+
         for link in links:
             if not link in pages and request.user.may.read(link):
+                if is_deprecated:
+                    deprecated_links.append(link)
                 if link in wanted:
                     wanted[link][name] = 1
                 else:
                     wanted[link] = {name: 1}
+
+    for link in deprecated_links:
+        if len(wanted[link]) == 1:
+            del wanted[link]
 
     # Check for the extreme case when there are no wanted pages
     if not wanted:

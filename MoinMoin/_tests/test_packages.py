@@ -17,7 +17,7 @@ from MoinMoin import user, wikiutil
 from MoinMoin.action import AttachFile
 from MoinMoin.action.PackagePages import PackagePages
 from MoinMoin.packages import Package, ScriptEngine, MOIN_PACKAGE_FILE, ZipPackage, packLine, unpackLine
-from MoinMoin._tests import become_superuser, create_page, nuke_page
+from MoinMoin._tests import become_trusted, become_superuser, create_page, nuke_page
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
 
@@ -137,6 +137,7 @@ class TestRealPackageInstallation:
         return zip_file
 
     def testAttachments_after_page_creation(self):
+        become_trusted(self.request)
         pagename = u'PackageTestPageCreatedFirst'
         page = create_page(self.request, pagename, u"This page has not yet an attachments dir")
         script = u"""MoinMoinPackage|1
@@ -154,6 +155,7 @@ Print|Thank you for using PackagePages!
         os.unlink(zip_file)
 
     def testAttachments_without_page_creation(self):
+        become_trusted(self.request)
         pagename = u"PackageAttachmentAttachWithoutPageCreation"
         script = u"""MoinMoinPackage|1
 AddAttachment|1_attachment|my_test.txt|%(pagename)s
