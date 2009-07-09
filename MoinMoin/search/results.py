@@ -118,6 +118,8 @@ class FoundPage:
             weight += match.weight()
             # More sophisticated things to be added, like increase
             # weight of near matches.
+        if self.page.parse_processing_instructions().get('deprecated', False):
+            weight = int(weight / 4) # rank it down
         return weight
 
     def add_matches(self, matches):
