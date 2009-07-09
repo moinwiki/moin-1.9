@@ -147,11 +147,7 @@ class TestExpandPrivateVariables(TestExpandUserName):
 
     def deleteCaches(self):
         """ Force the wiki to scan the test page into the dicts """
-#         if hasattr(self.request, 'dicts'):
-#             del self.request.dicts
-#         if hasattr(self.request.cfg, 'DICTS_DATA'):
-#             del self.request.cfg.DICTS_DATA
-        self.request.pages = {}
+        # New dicts does not require cache refresh.
 
     def deleteTestPage(self):
         """ Delete temporary page, bypass logs and notifications """

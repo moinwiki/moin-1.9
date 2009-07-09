@@ -1863,9 +1863,7 @@ class RootPage(Page):
             # WARNING: SLOW
             pages = self.getPageList(user='')
         else:
-            pages = self.request.pages
-            if not pages:
-                pages = self._listPages()
+            pages = self._listPages()
         count = len(pages)
         self.request.clock.stop('getPageCount')
 
