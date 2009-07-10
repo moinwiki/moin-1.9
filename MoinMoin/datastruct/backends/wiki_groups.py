@@ -16,7 +16,7 @@ first level list (wiki markup).
 from MoinMoin import caching, wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.datastruct.backends import BaseGroup, BaseGroupsBackend, GroupDoesNotExistError
-from MoinMoin.datastruct.backends._formatters import GroupFormatter
+from MoinMoin.formatter.groups import Formatter
 
 
 class WikiGroup(BaseGroup):
@@ -60,7 +60,7 @@ class WikiGroups(BaseGroupsBackend):
         return WikiGroup(request=self.request, name=group_name, backend=self)
 
     def _retrieve_members(self, group_name):
-        formatter = GroupFormatter(self.request)
+        formatter = Formatter(self.request)
         page = Page(self.request, group_name, formatter=formatter)
         page.send_page(content_only=True)
         return formatter.members

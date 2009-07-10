@@ -20,71 +20,10 @@ from MoinMoin.user import User
 from MoinMoin._tests import append_page, become_trusted, create_page, create_random_string_list, nuke_page, nuke_user, wikiconfig
 
 
-class TestWikiGroupPageParser(object):
-    """
-    Test what backend extracts from a group page and what is ignored.
-    """
+class TestWikiGroupBackend(GroupsBackendTest):
 
     # Suppose that default configuration for the group_manager_init is
     # used which is WikiGroups backend.
-
-    def test_CamelCase(self):
-        text = """
- * CamelCase
-"""
-        assert u'CamelCase' in self.get_group(text)
-
-    def test_extended_name(self):
-        text = """
- * extended name
-"""
-        assert u'extended name' in self.get_group(text)
-
-    def test_extended_link(self):
-        text = """
- * [[extended link]]
-"""
-        assert u'extended link' in self.get_group(text)
-
-    def test_ignore_second_level_list(self):
-        text = """
-  * second level
-   * third level
-    * forth level
-     * and then some...
-"""
-        assert len([x for x in self.get_group(text)]) == 0
-
-    def test_ignore_other(self):
-        text = """
-= ignore this =
- * take this
-
-Ignore previous line and this text.
-"""
-        assert u'take this' in self.get_group(text)
-
-    def test_strip_whitespace(self):
-        text = """
- *   take this
-"""
-        assert u'take this' in self.get_group(text)
-
-    def get_group(self, text):
-        request = self.request
-        become_trusted(request)
-        create_page(request, u'SomeTestGroup', text)
-        group = request.groups[u'SomeTestGroup']
-        nuke_page(request, u'SomeTestGroup')
-        return group
-
-
-class TestWikiGroupBackend(GroupsBackendTest):
-
-    class Config(wikiconfig.Config):
-
-        def group_manager_init(self, request):
-            return WikiGroups(request)
 
     def setup_class(self):
         become_trusted(self.request)
