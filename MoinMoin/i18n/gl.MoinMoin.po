@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-12 12:01+0200\n"
+"POT-Creation-Date: 2009-07-10 01:26+0200\n"
 "PO-Revision-Date: 2007-02-22 17:39-0300\n"
 "Last-Translator: Iván Méndez <imendez@udc.es>\n"
 "Language-Team: Galician <moin-devel@lists.sourceforge.net>\n"
@@ -25,135 +25,17 @@ msgstr ""
 "X-Direction: ltr\n"
 "X-HasWikiMarkup: True\n"
 
-#, python-format
-msgid "The package needs a newer version of MoinMoin (at least %s)."
+msgid "The wiki is currently not reachable."
 msgstr ""
-"O paquete require unha versión máis recente de MoinMoin (cando menos %s)"
 
-# 
-msgid "The theme name is not set."
-msgstr "Non se especificou o nome do tema."
-
-#, python-format
-msgid "Theme files not installed! Write rights missing for %s."
+msgid "Invalid username or password."
 msgstr ""
 
 #, python-format
-msgid "Installation of '%(filename)s' failed."
-msgstr "A instalación de '%(filename)s' errou."
-
-#, python-format
-msgid "The file %s is not a MoinMoin package file."
-msgstr "O arquivo %s non é un paquete de MoinMoin"
-
-#, python-format
-msgid "The page %s does not exist."
-msgstr "A páxina %s non existe!"
-
-msgid "Invalid package file header."
-msgstr "Encabezado de arquivo de paquete inválido."
-
-msgid "Package file format unsupported."
-msgstr "Formato de arquivo de paquete non soportado"
-
-#, python-format
-msgid "Unknown function %(func)s in line %(lineno)i."
-msgstr "Función %(func)s descoñecida na liña %(lineno)i."
-
-#, python-format
-msgid "The file %s was not found in the package."
-msgstr "Non se achou o arquivo %s no paquete."
-
-msgid "<unknown>"
-msgstr "<descoñecido>"
-
-#, fuzzy, python-format
 msgid ""
-"Login Name: %s\n"
-"\n"
-"Password recovery token: %s\n"
-"\n"
-"Password reset URL: %s/?action=recoverpass&name=%s&token=%s\n"
+"The remote wiki uses a different InterWiki name (%(remotename)s) internally "
+"than you specified (%(localname)s)."
 msgstr ""
-"Nome de ingreso: %s\n"
-"\n"
-"Contrasinal de ingreso: %s\n"
-"\n"
-"URL de ingreso: %s/%s?action=login\n"
-
-msgid ""
-"Somebody has requested to email you a password recovery token.\n"
-"\n"
-"If you lost your password, please go to the password reset URL below or\n"
-"go to the password recovery page again and enter your username and the\n"
-"recovery token.\n"
-msgstr ""
-
-#, python-format
-msgid "[%(sitename)s] Your wiki account data"
-msgstr "Os seus datos da conta do wiki en [%(sitename)s]"
-
-#, python-format
-msgid "Argument \"%s\" must be a boolean value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument must be a boolean value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument \"%s\" must be an integer value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument must be an integer value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument \"%s\" must be a floating point value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument must be a floating point value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument \"%s\" must be a complex value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument must be a complex value, not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Argument must be one of \"%s\", not \"%s\""
-msgstr ""
-
-msgid "Too many arguments"
-msgstr ""
-
-msgid "Cannot have arguments without name following named arguments"
-msgstr ""
-
-#, fuzzy, python-format
-msgid "Argument \"%s\" is required"
-msgstr "A conta \"%s\" está deshabilitada."
-
-#, fuzzy, python-format
-msgid "No argument named \"%s\""
-msgstr "Non hai ningunha páxina semellante a \"%s\"!"
-
-#, python-format
-msgid "Expected \"=\" to follow \"%(token)s\""
-msgstr "Agárdase \"=\" logo de \"%(token)s\""
-
-#, python-format
-msgid "Expected a value for key \"%(token)s\""
-msgstr "Agárdase un valor para a chave \"%(token)s\""
 
 msgid "Your changes are not saved!"
 msgstr "Os seus cambios NON se gravaron!"
@@ -438,12 +320,157 @@ msgstr ""
 "para evitar conflitos.'''<<BR>>\n"
 "Para abandonar o editor, prema o botón ''Cancelar''."
 
+msgid "<unknown>"
+msgstr "<descoñecido>"
+
+#, fuzzy, python-format
+msgid ""
+"Login Name: %s\n"
+"\n"
+"Password recovery token: %s\n"
+"\n"
+"Password reset URL: %s/?action=recoverpass&name=%s&token=%s\n"
+msgstr ""
+"Nome de ingreso: %s\n"
+"\n"
+"Contrasinal de ingreso: %s\n"
+"\n"
+"URL de ingreso: %s/%s?action=login\n"
+
+msgid ""
+"Somebody has requested to email you a password recovery token.\n"
+"\n"
+"If you lost your password, please go to the password reset URL below or\n"
+"go to the password recovery page again and enter your username and the\n"
+"recovery token.\n"
+msgstr ""
+
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr "Os seus datos da conta do wiki en [%(sitename)s]"
+
+#, fuzzy, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Executar a acción  %(actionname)s?"
+
+#, fuzzy, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Non ten permiso para usar a acción %(actionname)s nesta páxina."
+
+msgid "Login and try again."
+msgstr "Comece a sesión e probe de novo."
+
+#, python-format
+msgid "The package needs a newer version of MoinMoin (at least %s)."
+msgstr ""
+"O paquete require unha versión máis recente de MoinMoin (cando menos %s)"
+
+# 
+msgid "The theme name is not set."
+msgstr "Non se especificou o nome do tema."
+
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
+msgstr ""
+
+#, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "A instalación de '%(filename)s' errou."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr "O arquivo %s non é un paquete de MoinMoin"
+
+#, python-format
+msgid "The page %s does not exist."
+msgstr "A páxina %s non existe!"
+
+msgid "Invalid package file header."
+msgstr "Encabezado de arquivo de paquete inválido."
+
+msgid "Package file format unsupported."
+msgstr "Formato de arquivo de paquete non soportado"
+
+#, python-format
+msgid "Unknown function %(func)s in line %(lineno)i."
+msgstr "Función %(func)s descoñecida na liña %(lineno)i."
+
+#, python-format
+msgid "The file %s was not found in the package."
+msgstr "Non se achou o arquivo %s no paquete."
+
+msgid "Text mode"
+msgstr "Modo texto"
+
+#, python-format
+msgid "Argument \"%s\" must be a boolean value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument must be a boolean value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" must be an integer value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument must be an integer value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" must be a floating point value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument must be a floating point value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" must be a complex value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument must be a complex value, not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Argument must be one of \"%s\", not \"%s\""
+msgstr ""
+
+msgid "Too many arguments"
+msgstr ""
+
+msgid "Cannot have arguments without name following named arguments"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Argument \"%s\" is required"
+msgstr "A conta \"%s\" está deshabilitada."
+
+#, fuzzy, python-format
+msgid "No argument named \"%s\""
+msgstr "Non hai ningunha páxina semellante a \"%s\"!"
+
+#, python-format
+msgid "Expected \"=\" to follow \"%(token)s\""
+msgstr "Agárdase \"=\" logo de \"%(token)s\""
+
+#, python-format
+msgid "Expected a value for key \"%(token)s\""
+msgstr "Agárdase un valor para a chave \"%(token)s\""
+
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr ""
 
+#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will ranked lower in "
 "search results!"
 msgstr ""
 "O respaldo do contido desta páxina caducou e non se incluirá nos resultados "
@@ -467,31 +494,846 @@ msgstr "Crear unha nova páxina"
 msgid "You are not allowed to view this page."
 msgstr "Non ten permiso para ver esta páxina."
 
-msgid "Text mode"
-msgstr "Modo texto"
-
-msgid "The wiki is currently not reachable."
+msgid "Switch user"
 msgstr ""
 
-msgid "Invalid username or password."
+msgid "No user selected"
+msgstr ""
+
+msgid ""
+"You can now change the settings of the selected user account; log out to get "
+"back to your account."
+msgstr ""
+
+msgid "You are the only user."
+msgstr ""
+
+msgid ""
+"As a superuser, you can temporarily assume the identity of another user."
+msgstr ""
+
+msgid "Select User"
+msgstr "Elixir usuario"
+
+#, fuzzy
+msgid "Change password"
+msgstr "Contrasinal"
+
+msgid "Passwords don't match!"
+msgstr "Os contrasinais non coincidiron"
+
+msgid "Please specify a password!"
+msgstr "Por favor, ingrese un contrasinal!"
+
+#, python-format
+msgid "Password not acceptable: %s"
+msgstr ""
+
+msgid "Your password has been changed."
+msgstr ""
+
+msgid "To change your password, enter a new password twice."
+msgstr ""
+
+msgid "Password"
+msgstr "Contrasinal"
+
+msgid "Password repeat"
+msgstr "Repetir o contrasinal para validalo"
+
+msgid "OpenID settings"
+msgstr ""
+
+msgid "Cannot remove all OpenIDs."
+msgstr ""
+
+msgid "The selected OpenIDs have been removed."
+msgstr ""
+
+msgid "No OpenID given."
+msgstr ""
+
+msgid "OpenID is already present."
+msgstr ""
+
+msgid "Failed to resolve OpenID."
+msgstr ""
+
+msgid "OpenID discovery failure, not a valid OpenID."
+msgstr ""
+
+#, python-format
+msgid "OpenID error: %s."
+msgstr ""
+
+#, fuzzy
+msgid "Verification canceled."
+msgstr "Cancelou a súa edición."
+
+#, fuzzy
+msgid "This OpenID is already used for another account."
+msgstr "Esta páxina xa foi borrada ou nunca se creou"
+
+msgid "OpenID added successfully."
+msgstr ""
+
+msgid "OpenID failure."
+msgstr ""
+
+msgid "Current OpenIDs"
+msgstr ""
+
+msgid "Remove selected"
+msgstr ""
+
+msgid "Add OpenID"
+msgstr ""
+
+msgid "OpenID verification requires that you click this button:"
+msgstr ""
+
+msgid "Notification"
+msgstr ""
+
+msgid "Notification settings saved!"
+msgstr ""
+
+#, fuzzy
+msgid "'''Email'''"
+msgstr "Correo electrónico"
+
+msgid "'''Jabber'''"
+msgstr ""
+
+msgid "'''Event type'''"
+msgstr ""
+
+msgid "Select the events you want to be notified about."
+msgstr ""
+
+msgid ""
+"Before you can be notified, you need to provide a way to contact you in the "
+"general preferences."
+msgstr ""
+
+#, fuzzy
+msgid "Subscribed events"
+msgstr "Subscribir Usuario"
+
+#, fuzzy
+msgid "Subscribed wiki pages<<BR>>(one regex per line)"
+msgstr "Páxinas wiki subscritas (unha expresión regular por liña)"
+
+msgid "Save"
+msgstr "Gardar"
+
+msgid "Preferences"
+msgstr "Preferencias"
+
+#, python-format
+msgid ""
+"Invalid user name {{{'%s'}}}.\n"
+"Name may contain any Unicode alpha numeric character, with optional one\n"
+"space between words. Group page name is not allowed."
+msgstr ""
+"Nome de usuario non válido {{{'%s'}}}.\n"
+"O nome pode ter caracteres alfanuméricos Unicode, coa opción\n"
+"dun espazo entre palabras (non recomendado). Non se permite usar a palabra "
+"Grupo no nome dunha páxina."
+
+msgid "This user name already belongs to somebody else."
+msgstr "Este nome de usuario xa o emprega outra persoa."
+
+msgid "Empty user name. Please enter a user name."
+msgstr "Nome de usuario en branco. Por favor, introduza un nome de usuario"
+
+msgid ""
+"Please provide your email address. If you lose your login information, you "
+"can get it by email."
+msgstr ""
+"Por favor, indique o seu correo electrónico. Se perde a súa información de "
+"ingreso, pode obtela por medio do correo electrónico."
+
+msgid "This email already belongs to somebody else."
+msgstr "Este enderezo de correo electrónico xa é empregado por outra persoa."
+
+#, fuzzy
+msgid "This jabber id already belongs to somebody else."
+msgstr "Este enderezo de correo electrónico xa é empregado por outra persoa."
+
+#, python-format
+msgid "The theme '%(theme_name)s' could not be loaded!"
+msgstr "Non se puido cargar o tema '%(theme_name)s' !"
+
+msgid "User preferences saved!"
+msgstr "As opcións do usuario están gardadas!"
+
+msgid "Default"
+msgstr "Predeterminado"
+
+msgid "<Browser setting>"
+msgstr "<Configuración do navegador>"
+
+msgid "the one preferred"
+msgstr "o/a preferido/a"
+
+msgid "free choice"
+msgstr "elección libre"
+
+msgid "Preferred theme"
+msgstr "Tema preferido"
+
+msgid "Editor Preference"
+msgstr "Preferencias de editor"
+
+msgid "Editor shown on UI"
+msgstr "Editor para amosar"
+
+msgid "Time zone"
+msgstr "Zona horaria"
+
+msgid "Your time is"
+msgstr "A súa hora é"
+
+msgid "Server time is"
+msgstr "A hora do servidor é"
+
+msgid "Date format"
+msgstr "Formato de data"
+
+msgid "Preferred language"
+msgstr "Idioma preferido"
+
+msgid "General options"
+msgstr "Opcións xerais"
+
+msgid "Quick links"
+msgstr "Ligazóns rápidas"
+
+msgid "OpenID server"
+msgstr ""
+
+msgid "The selected websites have been removed."
+msgstr ""
+
+msgid "Trusted websites"
+msgstr ""
+
+msgid "Line"
+msgstr "Liña"
+
+msgid "No differences found!"
+msgstr "Non se acharon diferenzas!"
+
+msgid "Deletions are marked like this."
+msgstr "Os textos eliminados márcanse así."
+
+msgid "Additions are marked like this."
+msgstr "Os textos engadidos márcanse así."
+
+msgid "Please log in first."
+msgstr "Por favor, ingrese primeiro ao sistema."
+
+msgid ""
+"Please choose an account name now.\n"
+"If you choose an existing account name you will be asked for the\n"
+"password and be able to associate the account with your OpenID."
+msgstr ""
+
+msgid "Name"
+msgstr "Nome"
+
+msgid "Choose this name"
+msgstr ""
+
+msgid "This is not a valid username, choose a different one."
+msgstr ""
+
+msgid ""
+"The username you have chosen is already\n"
+"taken. If it is your username, enter your password below to associate\n"
+"the username with your OpenID. Otherwise, please choose a different\n"
+"username and leave the password field blank."
+msgstr ""
+
+msgid "Associate this name"
+msgstr ""
+
+msgid "Your account is now associated to your OpenID."
+msgstr ""
+
+msgid "The password you entered is not valid."
+msgstr ""
+
+msgid "Anonymous sessions need to be enabled for OpenID login."
+msgstr ""
+
+msgid "No OpenID."
+msgstr ""
+
+msgid ""
+"If you do not have an account yet, you can still log in with your OpenID and "
+"create one during login."
+msgstr ""
+
+msgid "Could not contact botbouncer.com."
+msgstr ""
+
+msgid "Missing password. Please enter user name and password."
+msgstr ""
+"Faltou introducir o contrasinal. Por favor, introduza o nome de usuario e o "
+"contrasinal"
+
+#, python-format
+msgid "LDAP server %(server)s failed."
+msgstr ""
+
+msgid "Failed to connect to database."
 msgstr ""
 
 #, python-format
 msgid ""
-"The remote wiki uses a different InterWiki name (%(remotename)s) internally "
-"than you specified (%(localname)s)."
+"If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
+"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+msgstr ""
+
+#, fuzzy
+msgid ""
+" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
+"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
+">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
+" Horizontal Rule:: <<Verbatim(----)>>\n"
+" Force Linebreak:: <<Verbatim(\\\\)>>\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
+"items.\n"
+" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
+" Tables:: |= header text | cell text | more cell text |;\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
+msgstr ""
+" Énfase:: <<Verbatim('')>>''cursiva''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''negra'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''negra "
+"cursiva'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mesturada ''<<Verbatim"
+"(''')>>'''''negra'''<<Verbatim(''')>> e cursiva''<<Verbatim('')>>; <<Verbatim"
+"(----)>> liña horizontal.\n"
+" Encabezados:: <<Verbatim(=)>> Título de nivel 1 <<Verbatim(=)>>; <<Verbatim"
+"(==)>> Título de nivel 2 <<Verbatim(==)>>; <<Verbatim(===)>> Título de nivel "
+"3 <<Verbatim(===)>>;   <<Verbatim(====)>> Título de nivel 4 <<Verbatim(====)"
+">>; <<Verbatim(=====)>> Título de nivel 5 <<Verbatim(=====)>>.\n"
+" Listaxes:: espazo e un destes: * viñetas; 1., a., A., i., I. elementos "
+"numerados; 1.#n comeza a numeración en n; un 'espazo' produce sangrado ou "
+"indentado.\n"
+" Ligazóns:: <<Verbatim(XuntaPalabrasConMaiúscula)>>; <<Verbatim([\"colchetes "
+"e comiñas duplas\"])>>; url; [url]; [url etiqueta].\n"
+" Táboas:: || texto de cela |||| texto de cela que ocupa dúas columnas ||;    "
+"non se permiten espazos despois das táboas ou os títulos.\n"
+
+#, fuzzy
+msgid ""
+" Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
+"italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed ''<<Verbatim(''')"
+">>'''''bold'''<<Verbatim(''')>> and italics''<<Verbatim('')>>; <<Verbatim"
+"(----)>> horizontal rule.\n"
+" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
+"===== Title 5 =====.\n"
+" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
+"#n start numbering at n; space alone indents.\n"
+" Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])"
+">>.\n"
+" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
+"white space allowed after tables or titles.\n"
+"\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
+msgstr ""
+" Énfase:: <<Verbatim('')>>''cursiva''<<Verbatim('')>>; <<Verbatim(''')"
+">>'''negra'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''negra "
+"cursiva'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mesturada ''<<Verbatim"
+"(''')>>'''''negra'''<<Verbatim(''')>> e cursiva''<<Verbatim('')>>; <<Verbatim"
+"(----)>> liña horizontal.\n"
+" Encabezados:: <<Verbatim(=)>> Título de nivel 1 <<Verbatim(=)>>; <<Verbatim"
+"(==)>> Título de nivel 2 <<Verbatim(==)>>; <<Verbatim(===)>> Título de nivel "
+"3 <<Verbatim(===)>>;   <<Verbatim(====)>> Título de nivel 4 <<Verbatim(====)"
+">>; <<Verbatim(=====)>> Título de nivel 5 <<Verbatim(=====)>>.\n"
+" Listaxes:: espazo e un destes: * viñetas; 1., a., A., i., I. elementos "
+"numerados; 1.#n comeza a numeración en n; un 'espazo' produce sangrado ou "
+"indentado.\n"
+" Ligazóns:: <<Verbatim(XuntaPalabrasConMaiúscula)>>; <<Verbatim([\"colchetes "
+"e comiñas duplas\"])>>; url; [url]; [url etiqueta].\n"
+" Táboas:: || texto de cela |||| texto de cela que ocupa dúas columnas ||;    "
+"non se permiten espazos despois das táboas ou os títulos.\n"
+
+#, python-format
+msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
+msgstr ""
+"Agardaba \"%(wanted)s\" despois de \"%(key)s\", mais achei \"%(token)s\""
+
+#, python-format
+msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
+msgstr "Agardaba un enteiro \"%(key)s\" antes de \"%(token)s\""
+
+#, python-format
+msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
+msgstr "Agardaba un enteiro \"%(arg)s\" despois de \"%(key)s\""
+
+#, python-format
+msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
+msgstr "Agardaba un valor de cor \"%(arg)s\" despois de \"%(key)s\""
+
+#, fuzzy
+msgid ""
+"Rendering of reStructured text is not possible, please install Docutils."
+msgstr ""
+"Non se puido mostrar o texto reEstruturado, por favor instale docutils."
+
+#, fuzzy
+msgid ""
+"{{{\n"
+"Emphasis: *italic* **bold** ``monospace``\n"
+"\n"
+"Headings: Heading 1  Heading 2  Heading 3\n"
+"          =========  ---------  ~~~~~~~~~\n"
+"\n"
+"Horizontal rule: ----\n"
+"\n"
+"Links: TrailingUnderscore_ `multi word with backticks`_ external_\n"
+"\n"
+".. _external: http://external-site.example.org/foo/\n"
+"\n"
+"Lists: * bullets; 1., a. numbered items.\n"
+"}}}\n"
+"(!) For more help, see the\n"
+"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
+"reStructuredText Quick Reference]].\n"
+msgstr ""
+"Énfase: <i>*itálica*</i> <b>**negra**</b> ``monoespaciada``<br/>\n"
+"<br/><pre>\n"
+"Encabezados: Encabezado 1  Encabezado 2  Encabezado 3\n"
+"             ============  ------------  ~~~~~~~~~~~~\n"
+"\n"
+"Líña horizontal: ---- \n"
+"Ligazóns: LiñaAlPisoFinal_ `varias palabras con comiñas`_ externos_ \n"
+"\n"
+".. _externos: http://no-exterior.net/foo/\n"
+"\n"
+"Listaxes: * viñetas; 1., a. enumeracións.\n"
+"</pre>\n"
+"<br/>\n"
+"(!) Para obter máis axuda, vaia a \n"
+"<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
+"Referencia rápida de reStructuredText\n"
+"</a>.\n"
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr "**Excedeuse o número máximo de 'incluídos' permitidos"
+
+#, fuzzy, python-format
+msgid "**You are not allowed to read the page: %s**"
+msgstr "Non ten permiso para reverter a unha versión anterior desta páxina!"
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr "**Non se achou a páxina referenciada: %s**"
+
+msgid "XSLT option disabled, please look at HelpOnConfiguration."
+msgstr "Opción XSLT non dispoñíbel, por favor vaia a AxudaSobreConfiguración."
+
+msgid "XSLT processing is not available, please install 4suite 1.x."
+msgstr "Procesamento XSLT non dispoñíbel, por favor instale 4suite 1.x."
+
+#, python-format
+msgid "%(errortype)s processing error"
+msgstr "%(errortype)s erro de procesamento"
+
+#, fuzzy
+msgid "Password is too short."
+msgstr "Repetir o contrasinal para validalo"
+
+msgid "Password has not enough different characters."
+msgstr ""
+
+#, fuzzy
+msgid ""
+"Password is too easy (password contains name or name contains password)."
+msgstr ""
+"Faltou introducir o contrasinal. Por favor, introduza o nome de usuario e o "
+"contrasinal"
+
+msgid "Password is too easy (keyboard sequence)."
+msgstr ""
+
+msgid "Diffs"
+msgstr "Diferenzas"
+
+msgid "Info"
+msgstr "Información"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "UnSubscribe"
+msgstr "Dessubscribirse"
+
+msgid "Subscribe"
+msgstr "Subscribirse"
+
+msgid "Raw"
+msgstr "Sen formato"
+
+msgid "XML"
+msgstr "XML"
+
+msgid "Print"
+msgstr "Imprimir"
+
+msgid "View"
+msgstr "Ver"
+
+msgid "Up"
+msgstr "Arriba"
+
+msgid "Publish my email (not my wiki homepage) in author info"
+msgstr ""
+"Publicar o meu correo electrónico (non a miña páxina wiki) na información de "
+"autor"
+
+msgid "Open editor on double click"
+msgstr "Abrir o editor premendo dúas veces"
+
+msgid "After login, jump to last visited page"
+msgstr ""
+
+msgid "Show comment sections"
+msgstr ""
+
+msgid "Show question mark for non-existing pagelinks"
+msgstr "Amosar o signo de interrogación en ligazóns a páxinas inexistentes"
+
+msgid "Show page trail"
+msgstr "Amosar ''camiño'' de últimas páxinas visitadas"
+
+msgid "Show icon toolbar"
+msgstr "Amosar íconas da barra de ferramentas"
+
+msgid "Show top/bottom links in headings"
+msgstr "Amosar as ligazóns arriba/abaixo nas cabeceiras"
+
+msgid "Show fancy diffs"
+msgstr "Amosar as diferenzas adornadas"
+
+msgid "Add spaces to displayed wiki names"
+msgstr "Engadir espazos entre os NomesWiki amosados"
+
+msgid "Remember login information"
+msgstr ""
+"Lembrar a súa información de ingreso (non será necesario volver introducir o "
+"usuario e o contrasinal mais pode ser un problema de seguranza en "
+"computadores compartidos)"
+
+msgid "Disable this account forever"
+msgstr ""
+"Desactivar esta conta para sempre (usualmente, só o fai un administrador)"
+
+#, fuzzy
+msgid "(Use FirstnameLastname)"
+msgstr ""
+"(Usa Nome''''''Apelido '''pegados''' e con Maiúsculas nas iniciais para "
+"facer un NomeWiki)"
+
+msgid "Alias-Name"
+msgstr "Alias-Nome"
+
+msgid "Email"
+msgstr "Correo electrónico"
+
+msgid "Jabber ID"
+msgstr ""
+
+msgid "User CSS URL"
+msgstr "URL de CSS do usuario (se non sabes que é o CSS, déixea en branco)"
+
+msgid "(Leave it empty for disabling user CSS)"
+msgstr "(Baleiro para desactivar o CSS do usuario)"
+
+msgid "Editor size"
+msgstr "Tamaño do editor"
+
+#, fuzzy
+msgid "Username"
+msgstr "Usuario"
+
+#, fuzzy
+msgid "Member of Groups"
+msgstr "Cantidade de páxinas"
+
+msgid "Jabber"
+msgstr ""
+
+msgid "Action"
+msgstr "Acción"
+
+#, fuzzy
+msgid "Disable user"
+msgstr "Desactivado"
+
+#, fuzzy
+msgid "Enable user"
+msgstr "Activado"
+
+#, fuzzy
+msgid "disabled"
+msgstr "Desactivado"
+
+#, fuzzy
+msgid "Mail account data"
+msgstr "Envíeme os datos da miña conta "
+
+msgid "OpenID"
+msgstr ""
+
+msgid "Login"
+msgstr "Ingresar"
+
+#, python-format
+msgid "Upload new attachment \"%(filename)s\""
+msgstr "Subir un novo anexo \"%(filename)s\""
+
+#, python-format
+msgid "Inlined image: %(url)s"
 msgstr ""
 
 #, fuzzy, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Executar a acción  %(actionname)s?"
+msgid "Create new drawing \"%(filename)s (opens in new window)\""
+msgstr "Crear un novo debuxo \"%(filename)s\""
 
 #, fuzzy, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Non ten permiso para usar a acción %(actionname)s nesta páxina."
+msgid "Edit drawing %(filename)s (opens in new window)"
+msgstr "Editar debuxo %(filename)s"
 
-msgid "Login and try again."
-msgstr "Comece a sesión e probe de novo."
+#, fuzzy, python-format
+msgid "Clickable drawing: %(filename)s"
+msgstr "Editar debuxo %(filename)s"
+
+msgid "Toggle line numbers"
+msgstr "[des]activar nros. de liña"
+
+#, python-format
+msgid "Revert to revision %(rev)d."
+msgstr "Revértese a revisión %(rev)d."
+
+#, fuzzy, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "Anexos para \"%(pagename)s\""
+
+msgid "Options --pages and --search are mutually exclusive!"
+msgstr ""
+
+msgid "You must specify an output file!"
+msgstr ""
+
+msgid "No pages specified using --pages or --search, assuming full package."
+msgstr ""
+
+msgid "All attachments included into the package."
+msgstr ""
+
+msgid "Output file already exists! Cowardly refusing to continue!"
+msgstr ""
+
+#, fuzzy, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
+"change notification.\n"
+"\n"
+"The \"%(pagename)s\" page has been changed by %(editor)s:\n"
+msgstr ""
+"Prezado usuario do Wiki,\n"
+"\n"
+"Subscribiuse a unha páxina ou a unha categoría do Wiki en \"%(sitename)s\" "
+"para que lle sexan notificados os cambios por correo.\n"
+"\n"
+"A seguinte páxina foi modificada por %(editor)s:\n"
+"%(pagelink)s\n"
+"\n"
+
+msgid "New page:\n"
+msgstr "Nova páxina:\n"
+
+msgid "No differences found!\n"
+msgstr "Non se acharon diferenzas!\n"
+
+#, fuzzy, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been deleted by %(editor)s:\n"
+"\n"
+msgstr ""
+"Prezado usuario do Wiki,\n"
+"\n"
+"Subscribiuse a unha páxina ou a unha categoría do Wiki en \"%(sitename)s\" "
+"para que lle sexan notificados os cambios por correo.\n"
+"\n"
+"A seguinte páxina foi modificada por %(editor)s:\n"
+"%(pagelink)s\n"
+"\n"
+
+#, fuzzy, python-format
+msgid ""
+"Dear wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(sitename)s\" for change "
+"notification.\n"
+"\n"
+"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by %(editor)"
+"s:\n"
+msgstr ""
+"Prezado usuario do Wiki,\n"
+"\n"
+"Subscribiuse a unha páxina ou a unha categoría do Wiki en \"%(sitename)s\" "
+"para que lle sexan notificados os cambios por correo.\n"
+"\n"
+"A seguinte páxina foi modificada por %(editor)s:\n"
+"%(pagelink)s\n"
+"\n"
+
+#, fuzzy, python-format
+msgid "New user account created on %(sitename)s"
+msgstr "Conta de usuario creada!"
+
+#, python-format
+msgid ""
+"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
+"follow:\n"
+"\n"
+"    User name: %(username)s\n"
+"    Email address: %(useremail)s"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "New attachment added to page %(pagename)s on %(sitename)s"
+msgstr "anexo:%(filename)s de %(pagename)s"
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page \"%(page_name)s\" for change "
+"notification. An attachment has been added to that page by %(editor)s. "
+"Following detailed information is available:\n"
+"\n"
+"Attachment name: %(attach_name)s\n"
+"Attachment size: %(attach_size)s\n"
+msgstr ""
+
+#, python-format
+msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
+msgstr ""
+"[%(sitename)s]  Actualización %(trivial)sde \"%(pagename)s\" por %(username)s"
+
+msgid "Trivial "
+msgstr "Trivial "
+
+#, python-format
+msgid ""
+"Attachment link: %(attach)s\n"
+"Page link: %(page)s\n"
+msgstr ""
+
+msgid "Page has been modified"
+msgstr ""
+
+msgid "Page has been modified in a trivial fashion"
+msgstr ""
+
+#, fuzzy
+msgid "Page has been renamed"
+msgstr "Accesos a e edicións da páxina"
+
+#, fuzzy
+msgid "Page has been deleted"
+msgstr "A páxina \"%s\" foi eliminada con éxito!"
+
+#, fuzzy
+msgid "Page has been copied"
+msgstr "Accesos a e edicións da páxina"
+
+#, fuzzy
+msgid "A new attachment has been added"
+msgstr "Novo anexo"
+
+msgid "A page has been reverted to a previous state"
+msgstr ""
+
+#, fuzzy
+msgid "A user has subscribed to a page"
+msgstr "Subscribiuse a esta páxina."
+
+#, fuzzy
+msgid "A new account has been created"
+msgstr "Conta de usuario creada!"
+
+#, fuzzy
+msgid "Attachment link"
+msgstr "Anexos"
+
+#, fuzzy
+msgid "Page link"
+msgstr "Páxinas semellantes a \"%s\""
+
+#, fuzzy
+msgid "Changed page"
+msgstr "Empaquetar páxinas"
+
+#, fuzzy
+msgid "Page changed"
+msgstr "Gardar os cambios"
+
+msgid "about"
+msgstr ""
+
+#, python-format
+msgid ""
+"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
+"%(be)s results out of about %(pages)d pages."
+msgstr ""
+
+#, fuzzy
+msgid "seconds"
+msgstr "%.2f segundos"
+
+#, fuzzy
+msgid "Previous"
+msgstr "Vista previa"
+
+#, fuzzy
+msgid "Next"
+msgstr "Texto"
+
+#, fuzzy
+msgid "rev"
+msgstr "reverter"
+
+msgid "current"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "last modified: %s"
+msgstr "última modificación %(time)s"
+
+msgid "match"
+msgstr "coincidencia"
+
+msgid "matches"
+msgstr "coincidencias"
 
 msgid "RecentChanges"
 msgstr "CambiosRecentes"
@@ -1013,446 +1855,6 @@ msgstr "CorrecciónOrtográfica"
 msgid "Discussion"
 msgstr ""
 
-#, fuzzy
-msgid "Password is too short."
-msgstr "Repetir o contrasinal para validalo"
-
-msgid "Password has not enough different characters."
-msgstr ""
-
-#, fuzzy
-msgid ""
-"Password is too easy (password contains name or name contains password)."
-msgstr ""
-"Faltou introducir o contrasinal. Por favor, introduza o nome de usuario e o "
-"contrasinal"
-
-msgid "Password is too easy (keyboard sequence)."
-msgstr ""
-
-msgid "Diffs"
-msgstr "Diferenzas"
-
-msgid "Info"
-msgstr "Información"
-
-msgid "Edit"
-msgstr "Editar"
-
-msgid "UnSubscribe"
-msgstr "Dessubscribirse"
-
-msgid "Subscribe"
-msgstr "Subscribirse"
-
-msgid "Raw"
-msgstr "Sen formato"
-
-msgid "XML"
-msgstr "XML"
-
-msgid "Print"
-msgstr "Imprimir"
-
-msgid "View"
-msgstr "Ver"
-
-msgid "Up"
-msgstr "Arriba"
-
-msgid "Publish my email (not my wiki homepage) in author info"
-msgstr ""
-"Publicar o meu correo electrónico (non a miña páxina wiki) na información de "
-"autor"
-
-msgid "Open editor on double click"
-msgstr "Abrir o editor premendo dúas veces"
-
-msgid "After login, jump to last visited page"
-msgstr ""
-
-msgid "Show comment sections"
-msgstr ""
-
-msgid "Show question mark for non-existing pagelinks"
-msgstr "Amosar o signo de interrogación en ligazóns a páxinas inexistentes"
-
-msgid "Show page trail"
-msgstr "Amosar ''camiño'' de últimas páxinas visitadas"
-
-msgid "Show icon toolbar"
-msgstr "Amosar íconas da barra de ferramentas"
-
-msgid "Show top/bottom links in headings"
-msgstr "Amosar as ligazóns arriba/abaixo nas cabeceiras"
-
-msgid "Show fancy diffs"
-msgstr "Amosar as diferenzas adornadas"
-
-msgid "Add spaces to displayed wiki names"
-msgstr "Engadir espazos entre os NomesWiki amosados"
-
-msgid "Remember login information"
-msgstr ""
-"Lembrar a súa información de ingreso (non será necesario volver introducir o "
-"usuario e o contrasinal mais pode ser un problema de seguranza en "
-"computadores compartidos)"
-
-msgid "Disable this account forever"
-msgstr ""
-"Desactivar esta conta para sempre (usualmente, só o fai un administrador)"
-
-msgid "Name"
-msgstr "Nome"
-
-#, fuzzy
-msgid "(Use FirstnameLastname)"
-msgstr ""
-"(Usa Nome''''''Apelido '''pegados''' e con Maiúsculas nas iniciais para "
-"facer un NomeWiki)"
-
-msgid "Alias-Name"
-msgstr "Alias-Nome"
-
-msgid "Email"
-msgstr "Correo electrónico"
-
-msgid "Jabber ID"
-msgstr ""
-
-msgid "User CSS URL"
-msgstr "URL de CSS do usuario (se non sabes que é o CSS, déixea en branco)"
-
-msgid "(Leave it empty for disabling user CSS)"
-msgstr "(Baleiro para desactivar o CSS do usuario)"
-
-msgid "Editor size"
-msgstr "Tamaño do editor"
-
-#, fuzzy
-msgid "Username"
-msgstr "Usuario"
-
-#, fuzzy
-msgid "Member of Groups"
-msgstr "Cantidade de páxinas"
-
-msgid "Jabber"
-msgstr ""
-
-msgid "Action"
-msgstr "Acción"
-
-#, fuzzy
-msgid "Disable user"
-msgstr "Desactivado"
-
-#, fuzzy
-msgid "Enable user"
-msgstr "Activado"
-
-#, fuzzy
-msgid "disabled"
-msgstr "Desactivado"
-
-#, fuzzy
-msgid "Mail account data"
-msgstr "Envíeme os datos da miña conta "
-
-msgid "Password"
-msgstr "Contrasinal"
-
-msgid "OpenID"
-msgstr ""
-
-msgid "Login"
-msgstr "Ingresar"
-
-msgid "Failed to connect to database."
-msgstr ""
-
-msgid "Could not contact botbouncer.com."
-msgstr ""
-
-msgid "Please log in first."
-msgstr "Por favor, ingrese primeiro ao sistema."
-
-msgid "Missing password. Please enter user name and password."
-msgstr ""
-"Faltou introducir o contrasinal. Por favor, introduza o nome de usuario e o "
-"contrasinal"
-
-#, python-format
-msgid "LDAP server %(server)s failed."
-msgstr ""
-
-#, python-format
-msgid ""
-"If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
-msgstr ""
-
-msgid ""
-"Please choose an account name now.\n"
-"If you choose an existing account name you will be asked for the\n"
-"password and be able to associate the account with your OpenID."
-msgstr ""
-
-msgid "Choose this name"
-msgstr ""
-
-msgid "This is not a valid username, choose a different one."
-msgstr ""
-
-msgid ""
-"The username you have chosen is already\n"
-"taken. If it is your username, enter your password below to associate\n"
-"the username with your OpenID. Otherwise, please choose a different\n"
-"username and leave the password field blank."
-msgstr ""
-
-msgid "Associate this name"
-msgstr ""
-
-#, python-format
-msgid "OpenID error: %s."
-msgstr ""
-
-#, fuzzy
-msgid "Verification canceled."
-msgstr "Cancelou a súa edición."
-
-msgid "OpenID failure."
-msgstr ""
-
-msgid "Your account is now associated to your OpenID."
-msgstr ""
-
-msgid "The password you entered is not valid."
-msgstr ""
-
-msgid "OpenID verification requires that you click this button:"
-msgstr ""
-
-msgid "Anonymous sessions need to be enabled for OpenID login."
-msgstr ""
-
-msgid "Failed to resolve OpenID."
-msgstr ""
-
-msgid "OpenID discovery failure, not a valid OpenID."
-msgstr ""
-
-msgid "No OpenID."
-msgstr ""
-
-msgid ""
-"If you do not have an account yet, you can still log in with your OpenID and "
-"create one during login."
-msgstr ""
-
-#, fuzzy
-msgid "Change password"
-msgstr "Contrasinal"
-
-msgid "Passwords don't match!"
-msgstr "Os contrasinais non coincidiron"
-
-msgid "Please specify a password!"
-msgstr "Por favor, ingrese un contrasinal!"
-
-#, python-format
-msgid "Password not acceptable: %s"
-msgstr ""
-
-msgid "Your password has been changed."
-msgstr ""
-
-msgid "To change your password, enter a new password twice."
-msgstr ""
-
-msgid "Password repeat"
-msgstr "Repetir o contrasinal para validalo"
-
-msgid "Switch user"
-msgstr ""
-
-msgid "No user selected"
-msgstr ""
-
-msgid ""
-"You can now change the settings of the selected user account; log out to get "
-"back to your account."
-msgstr ""
-
-msgid "You are the only user."
-msgstr ""
-
-msgid ""
-"As a superuser, you can temporarily assume the identity of another user."
-msgstr ""
-
-msgid "Select User"
-msgstr "Elixir usuario"
-
-msgid "OpenID settings"
-msgstr ""
-
-msgid "Cannot remove all OpenIDs."
-msgstr ""
-
-msgid "The selected OpenIDs have been removed."
-msgstr ""
-
-msgid "No OpenID given."
-msgstr ""
-
-msgid "OpenID is already present."
-msgstr ""
-
-#, fuzzy
-msgid "This OpenID is already used for another account."
-msgstr "Esta páxina xa foi borrada ou nunca se creou"
-
-msgid "OpenID added successfully."
-msgstr ""
-
-msgid "Current OpenIDs"
-msgstr ""
-
-msgid "Remove selected"
-msgstr ""
-
-msgid "Add OpenID"
-msgstr ""
-
-msgid "OpenID server"
-msgstr ""
-
-msgid "The selected websites have been removed."
-msgstr ""
-
-msgid "Trusted websites"
-msgstr ""
-
-msgid "Preferences"
-msgstr "Preferencias"
-
-#, python-format
-msgid ""
-"Invalid user name {{{'%s'}}}.\n"
-"Name may contain any Unicode alpha numeric character, with optional one\n"
-"space between words. Group page name is not allowed."
-msgstr ""
-"Nome de usuario non válido {{{'%s'}}}.\n"
-"O nome pode ter caracteres alfanuméricos Unicode, coa opción\n"
-"dun espazo entre palabras (non recomendado). Non se permite usar a palabra "
-"Grupo no nome dunha páxina."
-
-msgid "This user name already belongs to somebody else."
-msgstr "Este nome de usuario xa o emprega outra persoa."
-
-msgid "Empty user name. Please enter a user name."
-msgstr "Nome de usuario en branco. Por favor, introduza un nome de usuario"
-
-msgid ""
-"Please provide your email address. If you lose your login information, you "
-"can get it by email."
-msgstr ""
-"Por favor, indique o seu correo electrónico. Se perde a súa información de "
-"ingreso, pode obtela por medio do correo electrónico."
-
-msgid "This email already belongs to somebody else."
-msgstr "Este enderezo de correo electrónico xa é empregado por outra persoa."
-
-#, fuzzy
-msgid "This jabber id already belongs to somebody else."
-msgstr "Este enderezo de correo electrónico xa é empregado por outra persoa."
-
-#, python-format
-msgid "The theme '%(theme_name)s' could not be loaded!"
-msgstr "Non se puido cargar o tema '%(theme_name)s' !"
-
-msgid "User preferences saved!"
-msgstr "As opcións do usuario están gardadas!"
-
-msgid "Default"
-msgstr "Predeterminado"
-
-msgid "<Browser setting>"
-msgstr "<Configuración do navegador>"
-
-msgid "the one preferred"
-msgstr "o/a preferido/a"
-
-msgid "free choice"
-msgstr "elección libre"
-
-msgid "Save"
-msgstr "Gardar"
-
-msgid "Preferred theme"
-msgstr "Tema preferido"
-
-msgid "Editor Preference"
-msgstr "Preferencias de editor"
-
-msgid "Editor shown on UI"
-msgstr "Editor para amosar"
-
-msgid "Time zone"
-msgstr "Zona horaria"
-
-msgid "Your time is"
-msgstr "A súa hora é"
-
-msgid "Server time is"
-msgstr "A hora do servidor é"
-
-msgid "Date format"
-msgstr "Formato de data"
-
-msgid "Preferred language"
-msgstr "Idioma preferido"
-
-msgid "General options"
-msgstr "Opcións xerais"
-
-msgid "Quick links"
-msgstr "Ligazóns rápidas"
-
-msgid "Notification"
-msgstr ""
-
-msgid "Notification settings saved!"
-msgstr ""
-
-#, fuzzy
-msgid "'''Email'''"
-msgstr "Correo electrónico"
-
-msgid "'''Jabber'''"
-msgstr ""
-
-msgid "'''Event type'''"
-msgstr ""
-
-msgid "Select the events you want to be notified about."
-msgstr ""
-
-msgid ""
-"Before you can be notified, you need to provide a way to contact you in the "
-"general preferences."
-msgstr ""
-
-#, fuzzy
-msgid "Subscribed events"
-msgstr "Subscribir Usuario"
-
-#, fuzzy
-msgid "Subscribed wiki pages<<BR>>(one regex per line)"
-msgstr "Páxinas wiki subscritas (unha expresión regular por liña)"
-
 msgid "[all]"
 msgstr ""
 
@@ -1465,77 +1867,592 @@ msgstr ""
 msgid "filter"
 msgstr ""
 
-msgid "anonymous"
+msgid "Wiki"
+msgstr "Wiki"
+
+msgid "Page"
+msgstr "Páxina"
+
+msgid "User"
+msgstr "Usuario"
+
+msgid "[ATTACH]"
 msgstr ""
 
-msgid "Options --pages and --search are mutually exclusive!"
+msgid "[RSS]"
+msgstr "[RSS]"
+
+msgid "[DELETED]"
+msgstr "[ELIMINADA]"
+
+msgid "[UPDATED]"
+msgstr "[ACTUALIZADA]"
+
+msgid "[RENAMED]"
 msgstr ""
 
-msgid "You must specify an output file!"
+msgid "[CONFLICT]"
 msgstr ""
 
-msgid "No pages specified using --pages or --search, assuming full package."
+msgid "[NEW]"
+msgstr "[NOVA]"
+
+msgid "[DIFF]"
+msgstr "[DIFF]"
+
+msgid "[BOTTOM]"
+msgstr "[FINAL]"
+
+msgid "[TOP]"
+msgstr "[INICIO]"
+
+msgid "Click to do a full-text search for this title"
+msgstr ""
+"Efectuar unha busca de páxinas que ligan a esta (este título en contidos)"
+
+msgid "Settings"
 msgstr ""
 
-msgid "All attachments included into the package."
-msgstr ""
+msgid "Logout"
+msgstr "Saír"
 
-msgid "Output file already exists! Cowardly refusing to continue!"
-msgstr ""
+msgid "DeleteCache"
+msgstr "EliminarCaché"
 
 #, python-format
-msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
+msgid "(cached %s)"
+msgstr "(cached %s)"
+
+msgid "Or try one of these actions:"
+msgstr "Ou intenta unha destas accións: "
+
+msgid "Unsubscribe"
+msgstr "Des-subscribirse"
+
+msgid "Home"
+msgstr "Inicio"
+
+msgid "Clear message"
+msgstr "Quitar mensaxe"
+
+#, python-format
+msgid "last edited %(time)s by %(editor)s"
+msgstr "última edición %(time)s efectuada por %(editor)s"
+
+#, python-format
+msgid "last modified %(time)s"
+msgstr "última modificación %(time)s"
+
+msgid "Search:"
+msgstr "Buscar:"
+
+msgid "Text"
+msgstr "Texto"
+
+msgid "Titles"
+msgstr "Títulos"
+
+msgid "Search"
+msgstr "Busca"
+
+msgid "More Actions:"
+msgstr "Máis Accións"
+
+#, fuzzy
+msgid "------------------------"
+msgstr "-----------------"
+
+msgid "Raw Text"
+msgstr "Texto sen formato"
+
+msgid "Print View"
+msgstr "Vista de impresión"
+
+msgid "Delete Cache"
+msgstr "Eliminar caché"
+
+msgid "Rename Page"
+msgstr "Renomear páxina"
+
+#, fuzzy
+msgid "Copy Page"
+msgstr "As miñas páxinas"
+
+msgid "Delete Page"
+msgstr "Eliminar páxina"
+
+msgid "Like Pages"
+msgstr "Páxinas semellantes"
+
+msgid "Local Site Map"
+msgstr "Mapa do sitio"
+
+msgid "My Pages"
+msgstr "As miñas páxinas"
+
+msgid "Subscribe User"
+msgstr "Subscribir Usuario"
+
+msgid "Remove Spam"
+msgstr "Eliminar Spam"
+
+#, fuzzy
+msgid "Revert to this revision"
+msgstr "Revértese a revisión %(rev)d."
+
+msgid "Package Pages"
+msgstr "Empaquetar Páxinas"
+
+msgid "Render as Docbook"
+msgstr "Mostrar en Docbook"
+
+#, fuzzy
+msgid "Sync Pages"
+msgstr "As miñas páxinas"
+
+msgid "Do"
+msgstr "Facer"
+
+#, fuzzy
+msgid "Comments"
+msgstr "Comentario"
+
+msgid "Edit (Text)"
+msgstr "Edición (Texto)"
+
+msgid "Edit (GUI)"
+msgstr "Edición (GUI)"
+
+msgid "Immutable Page"
+msgstr "Páxina inmutábel"
+
+msgid "Remove Link"
+msgstr "Eliminar ligazón"
+
+msgid "Add Link"
+msgstr "Engadir ligazón"
+
+msgid "Attachments"
+msgstr "Anexos"
+
+#, python-format
+msgid "Show %s days."
+msgstr "Mostrar %s días."
+
+msgid "Wiki Markup"
+msgstr "Formato Wiki"
+
+#, fuzzy
+msgid "File attachment browser"
+msgstr "Novo anexo"
+
+#, fuzzy
+msgid "User account browser"
+msgstr "Conta de usuario creada!"
+
+msgid "Wiki configuration"
 msgstr ""
-"Agardaba \"%(wanted)s\" despois de \"%(key)s\", mais achei \"%(token)s\""
+
+msgid ""
+"This table shows all settings in this wiki that do not have default values. "
+"Settings that the configuration system doesn't know about are shown in "
+"''italic'', those may be due to third-party extensions needing configuration "
+"or settings that were removed from Moin."
+msgstr ""
+
+#, fuzzy
+msgid "Variable name"
+msgstr "Nome de arquivo"
+
+msgid "Setting"
+msgstr ""
+
+msgid "Search Titles"
+msgstr "Busca por títulos"
+
+msgid "Display context of search results"
+msgstr "Mostrar o contexto dos resultados da busca"
+
+msgid "Case-sensitive searching"
+msgstr "A busca é sensíbel a maiúsculas e minúsculas"
+
+msgid "Search Text"
+msgstr "Busca por texto"
 
 #, python-format
-msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
-msgstr "Agardaba un enteiro \"%(key)s\" antes de \"%(token)s\""
+msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
+msgstr "Por favor, use un termo de busca máis específico que {{{\"%s\"}}}"
 
 #, python-format
-msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
-msgstr "Agardaba un enteiro \"%(arg)s\" despois de \"%(key)s\""
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Subida (upload) do anexo '%(filename)s'."
 
 #, python-format
-msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
-msgstr "Agardaba un valor de cor \"%(arg)s\" despois de \"%(key)s\""
+msgid "Attachment '%(filename)s' deleted."
+msgstr "O anexo '%(filename)s' foi eliminado."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Debuxo '%(filename)s' gardado."
+
+#, python-format
+msgid "%(mins)dm ago"
+msgstr "hai %(mins)dm"
+
+msgid "(no bookmark set)"
+msgstr "(non hai marca persoal gardada)"
+
+#, python-format
+msgid "(currently set to %s)"
+msgstr "(actualmente configurado como %s)"
+
+#, fuzzy
+msgid "Delete bookmark"
+msgstr "Eliminar ligazón persoal"
+
+msgid "Set bookmark"
+msgstr "Establecer ligazón persoal"
+
+msgid "[Bookmark reached]"
+msgstr "[ligazón persoal acadada]"
+
+msgid "Python Version"
+msgstr "Versión de Python"
+
+msgid "MoinMoin Version"
+msgstr "Versión de MoinMoin"
+
+#, python-format
+msgid "Release %s [Revision %s]"
+msgstr "Versión (release) %s [Revisión %s]"
+
+msgid "4Suite Version"
+msgstr "Versión de 4Suite"
+
+msgid "Number of pages"
+msgstr "Cantidade de páxinas"
+
+msgid "Number of system pages"
+msgstr "Cantidade de páxinas do sistema"
+
+msgid "Accumulated page sizes"
+msgstr "Tamaño acumulado das páxinas"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr "Disco usado por %(data_dir)s/pages/"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/"
+msgstr "Disco usado por %(data_dir)s/"
+
+msgid "Entries in edit log"
+msgstr "Entradas no rexistro de edición"
+
+msgid "NONE"
+msgstr "NINGÚN"
+
+msgid "Global extension macros"
+msgstr "Macros de extensión global"
+
+msgid "Local extension macros"
+msgstr "Macros de extensión local"
+
+msgid "Global extension actions"
+msgstr "Accións de extensión global"
+
+msgid "Local extension actions"
+msgstr "Accións de extensión local"
+
+msgid "Global parsers"
+msgstr "Parsers globais"
+
+msgid "Local extension parsers"
+msgstr "Parsers de extensión local"
+
+msgid "Disabled"
+msgstr "Desactivado"
+
+msgid "Enabled"
+msgstr "Activado"
+
+msgid "index available"
+msgstr ""
+
+msgid "index unavailable"
+msgstr ""
+
+msgid "Xapian and/or Python Xapian bindings not installed"
+msgstr ""
+
+msgid "N/A"
+msgstr "Sen información"
+
+#, fuzzy
+msgid "Xapian search"
+msgstr "Busca"
+
+msgid "Stemming for Xapian"
+msgstr ""
+
+msgid "Active threads"
+msgstr "Filos (conversación) activos"
+
+msgid "No orphaned pages in this wiki."
+msgstr "Non hai páxinas orfas neste wiki."
+
+#, python-format
+msgid "Invalid include arguments \"%s\"!"
+msgstr "Argumentos incluídos non válidos \"%s\"!"
+
+#, python-format
+msgid "Nothing found for \"%s\"!"
+msgstr "Non se acharon coincidencias de \"%s\"!"
+
+msgid "edit"
+msgstr "editar"
 
 #, python-format
 msgid ""
-"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
-"%(be)s results out of about %(pages)d pages."
+"%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
+"missing."
+msgstr ""
+
+#, python-format
+msgid ""
+"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s=%"
+"(argument_value)s!"
+msgstr ""
+
+#, python-format
+msgid ""
+"Current configuration does not allow embedding of the file %(file)s because "
+"of its mimetype %(mimetype)s."
+msgstr ""
+
+msgid "Embedded"
 msgstr ""
 
 #, fuzzy
-msgid "seconds"
-msgstr "%.2f segundos"
+msgid "Search for items"
+msgstr "Busca por títulos"
 
-#, fuzzy
-msgid "Previous"
-msgstr "Vista previa"
-
-#, fuzzy
-msgid "Next"
-msgstr "Texto"
-
-#, fuzzy
-msgid "rev"
-msgstr "reverter"
-
-msgid "current"
+msgid "containing all the following terms"
 msgstr ""
+
+msgid "containing one or more of the following terms"
+msgstr ""
+
+msgid "not containing the following terms"
+msgstr ""
+
+msgid "last modified since (e.g. last 2 weeks)"
+msgstr ""
+
+msgid "any category"
+msgstr ""
+
+#, fuzzy
+msgid "any language"
+msgstr "Idioma preferido"
+
+msgid "any mimetype"
+msgstr ""
+
+msgid "Categories"
+msgstr ""
+
+msgid "Language"
+msgstr ""
+
+#, fuzzy
+msgid "File Type"
+msgstr "Nome de Arquivo"
+
+#, fuzzy
+msgid "Search only in titles"
+msgstr "Busca por títulos"
+
+#, fuzzy
+msgid "Case-sensitive search"
+msgstr "A busca é sensíbel a maiúsculas e minúsculas"
+
+msgid "Exclude underlay"
+msgstr ""
+
+#, fuzzy
+msgid "No system items"
+msgstr "Cantidade de páxinas do sistema"
+
+msgid "Search in all page revisions"
+msgstr ""
+
+msgid "Go get it!"
+msgstr ""
+
+msgid "Include system pages"
+msgstr "Incluír páxinas do sistema"
+
+msgid "Exclude system pages"
+msgstr "Excluír páxinas do sistema"
+
+msgid "No wanted pages in this wiki."
+msgstr "Non existen páxinas-por-crear neste wiki."
+
+msgid "Description"
+msgstr ""
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr ""
+
+msgid "Markup"
+msgstr "Formato"
+
+msgid "Display"
+msgstr "Mostrar"
+
+#, python-format
+msgid "No quotes on %(pagename)s."
+msgstr "Non hai citas en %(pagename)s."
+
+msgid "You need to provide a chart type!"
+msgstr "Debe indicar un tipo de gráfico"
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "Tipo de gráfico incorrecto \"%s\"!"
+
+msgid "Contents"
+msgstr "Táboa de contidos"
+
+#, python-format
+msgid "Unsupported navigation scheme '%(scheme)s'!"
+msgstr "Esquema de navegación '%(scheme)s' non soportado!"
+
+msgid "No parent page found!"
+msgstr "Non se achou unha páxina superior!"
+
+msgid "Slideshow"
+msgstr "Proxectar diapositivas"
+
+msgid "Start"
+msgstr "Comezar"
+
+#, python-format
+msgid "Slide %(pos)d of %(size)d"
+msgstr "Diapositiva %(pos)d de %(size)d"
+
+#, python-format
+msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
+msgstr ""
+
+msgid "Go To Page"
+msgstr "Ir á páxina"
+
+msgid "You are not allowed to use this action."
+msgstr "Non ten permiso para usar esta acción."
+
+#, python-format
+msgid "No pages like \"%s\"!"
+msgstr "Non hai ningunha páxina semellante a \"%s\"!"
+
+#, python-format
+msgid "Exactly one page like \"%s\" found, redirecting to page."
+msgstr ""
+"Encontrouse unha soa páxina semellante á \"%s\" encontrada. Redireccionando "
+"a esa páxina."
+
+#, python-format
+msgid "Pages like \"%s\""
+msgstr "Páxinas semellantes a \"%s\""
+
+#, python-format
+msgid "%(matchcount)d %(matches)s for \"%(title)s\""
+msgstr "%(matchcount)d %(matches)s de \"%(title)s\""
+
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr ""
+"Non é posíbel crear unha páxina sen nome. Por favor, déalle un nome á páxina."
 
 #, fuzzy, python-format
-msgid "last modified: %s"
-msgstr "última modificación %(time)s"
+msgid "You must login to use this action: %(action)s."
+msgstr ""
+"Debe iniciar a sesión (identificarse) para poder subscribirse. Pode facelo "
+"desde PreferenciasDoUsuario."
 
-msgid "match"
-msgstr "coincidencia"
+#, fuzzy
+msgid "You must login to remove a quicklink."
+msgstr ""
+"Debe comezar a sesión (identificarse) para engadir unha ligazón rápida. Pode "
+"facelo desde PreferenciasDoUsuario. "
 
-msgid "matches"
-msgstr "coincidencias"
+msgid "Your quicklink to this page has been removed."
+msgstr "Eliminou a súa ligazón rápida a esta páxina."
 
-msgid "about"
+#, fuzzy
+msgid "Your quicklink to this page could not be removed."
+msgstr "Eliminou a súa ligazón rápida a esta páxina."
+
+#, fuzzy
+msgid "You need to have a quicklink to this page to remove it."
+msgstr "Eliminou a súa ligazón rápida a esta páxina."
+
+msgid ""
+"You need to manually go to your OpenID provider wiki\n"
+"and log in before you can use your OpenID. MoinMoin will\n"
+"never allow you to enter your password here.\n"
+"\n"
+"Once you have logged in, simply reload this page."
+msgstr ""
+
+msgid "OpenID Trust verification"
+msgstr ""
+
+#, python-format
+msgid "The site %s has asked for your identity."
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"If you approve, the site represented by the trust root below will be\n"
+"told that you control the identity URL %s. (If you are using a delegated\n"
+"identity, the site will take care of reversing the\n"
+"delegation on its own.)"
+msgstr ""
+
+msgid "Trust root"
+msgstr ""
+
+msgid "Identity URL"
+msgstr ""
+
+#, fuzzy
+msgid "Remember decision"
+msgstr "Versión de Python"
+
+msgid "Remember this trust decision and don't ask again"
+msgstr ""
+
+msgid "Approve"
+msgstr ""
+
+msgid "Don't approve"
+msgstr ""
+
+msgid "OpenID not served"
+msgstr ""
+
+msgid ""
+"\n"
+"Unfortunately you have not created your homepage yet. Therefore,\n"
+"we cannot serve an OpenID for you. Please create your homepage first\n"
+"and then reload this page or click the button below to cancel this\n"
+"verification."
 msgstr ""
 
 msgid "If this account exists an email was sent."
@@ -1612,365 +2529,6 @@ msgid ""
 "username, the recovery token and a new password (twice) below."
 msgstr ""
 
-#, fuzzy, python-format
-msgid "You must login to use this action: %(action)s."
-msgstr ""
-"Debe iniciar a sesión (identificarse) para poder subscribirse. Pode facelo "
-"desde PreferenciasDoUsuario."
-
-#, fuzzy
-msgid "Your subscription to this page has been removed."
-msgstr "A súa subscrición a esta páxina foi eliminada."
-
-msgid "Can't remove regular expression subscription!"
-msgstr "Non se pode quitar a expresion regular (regex) de subscrición"
-
-#, fuzzy
-msgid "Edit the subscription regular expressions in your settings."
-msgstr "Edite a expresión regular de subscrición en PreferenciasDoUsuario"
-
-#, fuzzy
-msgid "You need to be subscribed to unsubscribe."
-msgstr "Subscribiuse a esta páxina."
-
-msgid "Please choose:"
-msgstr ""
-
-msgid "Settings"
-msgstr ""
-
-msgid "Editor"
-msgstr "Editor"
-
-msgid "Pages"
-msgstr "Páxinas"
-
-msgid "Select Author"
-msgstr "Elixir autor"
-
-msgid "Revert all!"
-msgstr "Desfacer todos os cambios!"
-
-msgid "You are not allowed to use this action."
-msgstr "Non ten permiso para usar esta acción."
-
-msgid "No older revisions available!"
-msgstr "Non hai revisións anteriores dispoñíbeis!"
-
-#, python-format
-msgid "Diff for \"%s\""
-msgstr "Diferenzas para \"%s\""
-
-#, python-format
-msgid "Differences between revisions %d and %d"
-msgstr "Diferenzas entre as revisións %d e %d"
-
-#, python-format
-msgid "(spanning %d versions)"
-msgstr "(abarca %d versións)"
-
-#, fuzzy
-msgid "Revert to this revision"
-msgstr "Revértese a revisión %(rev)d."
-
-#, fuzzy
-msgid "Previous change"
-msgstr "Vista previa"
-
-#, fuzzy
-msgid "Next change"
-msgstr "Gardar os cambios"
-
-msgid "No differences found!"
-msgstr "Non se acharon diferenzas!"
-
-#, python-format
-msgid "The page was saved %(count)d times, though!"
-msgstr "Aínda así, a páxina gardouse %(count)d veces!"
-
-msgid "(ignoring whitespace)"
-msgstr "(espazo en branco ignorado)"
-
-msgid "Ignore changes in the amount of whitespace"
-msgstr "Ignorar cambios na cantidade de espazos en branco"
-
-msgid "You must login to add a quicklink."
-msgstr ""
-"Debe comezar a sesión (identificarse) para engadir unha ligazón rápida. Pode "
-"facelo desde PreferenciasDoUsuario. "
-
-msgid "A quicklink to this page has been added for you."
-msgstr ""
-"Engadiuse unha ligazón a esta páxina a súa listaxe de ligazóns rápidas."
-
-#, fuzzy
-msgid "A quicklink to this page could not be added for you."
-msgstr ""
-"Engadiuse unha ligazón a esta páxina a súa listaxe de ligazóns rápidas."
-
-#, fuzzy
-msgid "You already have a quicklink to this page."
-msgstr "Xa gardou os cambios desta páxina!"
-
-#, python-format
-msgid "Full Link List for \"%s\""
-msgstr "Listaxe completa de ligazóns para \"%s\""
-
-#, python-format
-msgid "(including %(localwords)d %(pagelink)s)"
-msgstr "(incluídas %(localwords)d %(pagelink)s)"
-
-#, python-format
-msgid ""
-"The following %(badwords)d words could not be found in the dictionary of %"
-"(totalwords)d words%(localwords)s and are highlighted below:"
-msgstr ""
-"As seguintes %(badwords)d palabras non foron achadas no dicionario de %"
-"(totalwords)d palabras%(localwords)s e aparecen marcadas abaixo:"
-
-msgid "Add checked words to dictionary"
-msgstr "Engadir palabras seleccionadas ao dicionario"
-
-msgid "No spelling errors found!"
-msgstr "No se acharon erros de ortografía!"
-
-#, fuzzy
-msgid "You can't save spelling words."
-msgstr ""
-"Non pode realizar a corrección ortográfica nunha páxina que non pode ler."
-
-msgid "You can't check spelling on a page you can't read."
-msgstr ""
-"Non pode realizar a corrección ortográfica nunha páxina que non pode ler."
-
-#, fuzzy
-msgid "You must login to remove a quicklink."
-msgstr ""
-"Debe comezar a sesión (identificarse) para engadir unha ligazón rápida. Pode "
-"facelo desde PreferenciasDoUsuario. "
-
-msgid "Your quicklink to this page has been removed."
-msgstr "Eliminou a súa ligazón rápida a esta páxina."
-
-#, fuzzy
-msgid "Your quicklink to this page could not be removed."
-msgstr "Eliminou a súa ligazón rápida a esta páxina."
-
-#, fuzzy
-msgid "You need to have a quicklink to this page to remove it."
-msgstr "Eliminou a súa ligazón rápida a esta páxina."
-
-#, fuzzy
-msgid "Revert"
-msgstr "Desfacer todos os cambios!"
-
-msgid "You are not allowed to revert this page!"
-msgstr "Non ten permiso para reverter a unha versión anterior desta páxina!"
-
-msgid ""
-"You were viewing the current revision of this page when you called the "
-"revert action. If you want to revert to an older revision, first view that "
-"older revision and then call revert to this (older) revision again."
-msgstr ""
-
-#, fuzzy
-msgid "Optional reason for reverting this page"
-msgstr "Razón para renomear (opcional)"
-
-#, fuzzy
-msgid "Really revert this page?"
-msgstr "Realmente desexa eliminar esta páxina?"
-
-#, fuzzy
-msgid "Wiki Backup"
-msgstr "Formato Wiki"
-
-msgid ""
-"= Downloading a backup =\n"
-"\n"
-"Please note:\n"
-" * Store backups in a safe and secure place - they contain sensitive "
-"information.\n"
-" * Make sure your wiki configuration backup_* values are correct and "
-"complete.\n"
-" * Make sure the backup file you get contains everything you need in case of "
-"problems.\n"
-" * Make sure it is downloaded without problems.\n"
-"\n"
-"To get a backup, just click here:"
-msgstr ""
-
-msgid "Backup"
-msgstr "Copia de seguranza"
-
-msgid "You are not allowed to do remote backup."
-msgstr "Non ten permiso para facer arquivos de seguranza remotos."
-
-#, python-format
-msgid "Unknown backup subaction: %s."
-msgstr "Subacción de copia de seguranza descoñecida: %s."
-
-msgid "Charts are not available!"
-msgstr "Os gráficos non están dispoñíbeis."
-
-msgid "You need to provide a chart type!"
-msgstr "Debe indicar un tipo de gráfico"
-
-#, python-format
-msgid "Bad chart type \"%s\"!"
-msgstr "Tipo de gráfico incorrecto \"%s\"!"
-
-msgid "This page is already deleted or was never created!"
-msgstr "Esta páxina xa foi borrada ou nunca se creou"
-
-#, python-format
-msgid "Invalid filename \"%s\"!"
-msgstr "Nome de arquivo non válido \"%s\"!"
-
-#, fuzzy
-msgid "Include all attachments?"
-msgstr "[%d anexos]"
-
-msgid "Package pages"
-msgstr "Empaquetar páxinas"
-
-msgid "Package name"
-msgstr "Nome do paquete"
-
-msgid "List of page names - separated by a comma"
-msgstr "Listaxe de nomes de páxina - separados por coma"
-
-#, python-format
-msgid "No pages like \"%s\"!"
-msgstr "Non hai ningunha páxina semellante a \"%s\"!"
-
-msgid "Rename Page"
-msgstr "Renomear páxina"
-
-msgid "Rename all /subpages too?"
-msgstr ""
-
-msgid "New name"
-msgstr "Nome novo"
-
-msgid "Optional reason for the renaming"
-msgstr "Razón para renomear (opcional)"
-
-#, fuzzy
-msgid "Really rename this page?"
-msgstr "Realmente desexa eliminar esta páxina?"
-
-#, fuzzy
-msgid "Copy Page"
-msgstr "As miñas páxinas"
-
-msgid "Copy all /subpages too?"
-msgstr ""
-
-#, fuzzy
-msgid "Optional reason for the copying"
-msgstr "Razón para renomear (opcional)"
-
-#, fuzzy
-msgid "Really copy this page?"
-msgstr "Realmente desexa eliminar esta páxina?"
-
-msgid "General Information"
-msgstr "Información xeral"
-
-#, python-format
-msgid "Page size: %d"
-msgstr "Tamaño da páxina: %d"
-
-msgid "SHA digest of this page's content is:"
-msgstr "A sinatura SHA desta páxina é:"
-
-msgid "The following users subscribed to this page:"
-msgstr "Os seguintes usuarios están subscritos a esta páxina:"
-
-msgid "This page links to the following pages:"
-msgstr "Esta páxina liga coas seguintes:"
-
-msgid "Date"
-msgstr "Data"
-
-msgid "Size"
-msgstr "Tamaño"
-
-msgid "Diff"
-msgstr "Diferenzas"
-
-msgid "Comment"
-msgstr "Comentario"
-
-msgid "view"
-msgstr "ver"
-
-#, fuzzy
-msgid "to previous"
-msgstr "Vista previa"
-
-#, python-format
-msgid "Revert to revision %(rev)d."
-msgstr "Revértese a revisión %(rev)d."
-
-#, fuzzy, python-format
-msgid "Renamed from '%(oldpagename)s'."
-msgstr "Anexos para \"%(pagename)s\""
-
-msgid "edit"
-msgstr "editar"
-
-msgid "get"
-msgstr "obter"
-
-msgid "del"
-msgstr "eliminar"
-
-msgid "N/A"
-msgstr "Sen información"
-
-msgid "Revision History"
-msgstr "Historia de revisións"
-
-msgid "No log entries found."
-msgstr "Non se acharon entradas no rexistro!"
-
-#, python-format
-msgid "Info for \"%s\""
-msgstr "Información de \"%s\""
-
-#, python-format
-msgid "Show \"%(title)s\""
-msgstr "Ver \"%(title)s\""
-
-msgid "General Page Infos"
-msgstr "Información xeral da páxina"
-
-msgid "Page hits and edits"
-msgstr "Accesos a e edicións da páxina"
-
-msgid "Do it."
-msgstr "Faino."
-
-#, python-format
-msgid "Execute action %(actionname)s?"
-msgstr "Executar a acción  %(actionname)s?"
-
-#, python-format
-msgid "Action %(actionname)s is excluded in this wiki!"
-msgstr "A accion %(actionname)s non está presente neste wiki!"
-
-#, python-format
-msgid "You are not allowed to use action %(actionname)s on this page!"
-msgstr "Non ten permiso para usar a acción %(actionname)s nesta páxina."
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"¡Por favor, use a interface interactiva de usuario para a acción %"
-"(actionname)s!"
-
 #, python-format
 msgid "[%d attachments]"
 msgstr "[%d anexos]"
@@ -2002,8 +2560,17 @@ msgstr ""
 "'''NON''' use a URL da ligazón {{{[get]}}}, \n"
 "xa que pode cambiar facilmente e deixar de funcionar."
 
+msgid "del"
+msgstr "eliminar"
+
 msgid "move"
 msgstr ""
+
+msgid "get"
+msgstr "obter"
+
+msgid "view"
+msgstr "ver"
 
 msgid "unzip"
 msgstr "descomprimir"
@@ -2078,10 +2645,6 @@ msgstr "Non ten permiso para gardar debuxos nesta páxina."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Non ten permiso para borrar anexos nesta páxina."
-
-#, python-format
-msgid "Attachment '%(filename)s' deleted."
-msgstr "O anexo '%(filename)s' foi eliminado."
 
 #, fuzzy, python-format
 msgid "Attachment '%(new_pagename)s/%(new_filename)s' already exists."
@@ -2206,6 +2769,9 @@ msgstr "Nome de Arquivo"
 msgid "Modified"
 msgstr "Modificado"
 
+msgid "Size"
+msgstr "Tamaño"
+
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr "O tipo de arquivo é descoñecido e non se pode amosar este anexo."
 
@@ -2216,169 +2782,78 @@ msgstr "Non ten permiso para ver anexos desta páxina."
 msgid "attachment:%(filename)s of %(pagename)s"
 msgstr "anexo:%(filename)s de %(pagename)s"
 
-msgid "Delete"
-msgstr "Eliminar"
+msgid "User account created! You can use this account to login now..."
+msgstr ""
+"Creouse a conta de usuario! Pode usala para entrar agora mesmo no sistema..."
 
-msgid "Delete all /subpages too?"
+msgid "TextCha (required)"
 msgstr ""
 
-msgid "Optional reason for the deletion"
-msgstr "Razón para a eliminación (opcional)"
+msgid "Create Profile"
+msgstr "Crear perfil de usuario"
 
-msgid "Really delete this page?"
+msgid "Create Account"
+msgstr ""
+
+msgid "Editor"
+msgstr "Editor"
+
+msgid "Pages"
+msgstr "Páxinas"
+
+msgid "Select Author"
+msgstr "Elixir autor"
+
+msgid "Revert all!"
+msgstr "Desfacer todos os cambios!"
+
+#, fuzzy
+msgid "Revert"
+msgstr "Desfacer todos os cambios!"
+
+msgid "You are not allowed to revert this page!"
+msgstr "Non ten permiso para reverter a unha versión anterior desta páxina!"
+
+msgid ""
+"You were viewing the current revision of this page when you called the "
+"revert action. If you want to revert to an older revision, first view that "
+"older revision and then call revert to this (older) revision again."
+msgstr ""
+
+#, fuzzy
+msgid "Optional reason for reverting this page"
+msgstr "Razón para renomear (opcional)"
+
+#, fuzzy
+msgid "Really revert this page?"
 msgstr "Realmente desexa eliminar esta páxina?"
 
 #, python-format
-msgid "(!) Only pages changed since '''%s''' are being displayed!"
-msgstr ""
-
-msgid ""
-"/!\\ The modification date you entered was not recognized and is therefore "
-"not considered for the search results!"
-msgstr ""
-
-#, python-format
-msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
-msgstr "Por favor, use un termo de busca máis específico que {{{\"%s\"}}}"
-
-#, python-format
-msgid "Title Search: \"%s\""
-msgstr "Buscar por título: \"%s\""
-
-#, fuzzy, python-format
-msgid "Advanced Search: \"%s\""
-msgstr "Buscar por título: \"%s\""
-
-#, python-format
-msgid "Full Text Search: \"%s\""
-msgstr "Busca en contidos: \"%s\""
+msgid "(including %(localwords)d %(pagelink)s)"
+msgstr "(incluídas %(localwords)d %(pagelink)s)"
 
 #, python-format
 msgid ""
-"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
-"for more information."
+"The following %(badwords)d words could not be found in the dictionary of %"
+"(totalwords)d words%(localwords)s and are highlighted below:"
 msgstr ""
+"As seguintes %(badwords)d palabras non foron achadas no dicionario de %"
+"(totalwords)d palabras%(localwords)s e aparecen marcadas abaixo:"
 
-#, python-format
-msgid ""
-"Your search query {{{\"%s\"}}} didn't return any results. Please change some "
-"terms and refer to HelpOnSearching for more information.%s"
-msgstr ""
+msgid "Add checked words to dictionary"
+msgstr "Engadir palabras seleccionadas ao dicionario"
 
-msgid "(!) Consider performing a"
-msgstr ""
-
-msgid "full-text search with your search terms"
-msgstr ""
-
-msgid ""
-"(!) You're performing a title search that might not include all related "
-"results of your search query in this wiki. <<BR>>"
-msgstr ""
+msgid "No spelling errors found!"
+msgstr "No se acharon erros de ortografía!"
 
 #, fuzzy
-msgid "Click here to perform a full-text search with your search terms!"
+msgid "You can't save spelling words."
 msgstr ""
-"Efectuar unha busca de páxinas que ligan a esta (este título en contidos)"
+"Non pode realizar a corrección ortográfica nunha páxina que non pode ler."
 
-msgid "Please first create a homepage before creating additional pages."
-msgstr "Por favor, cree unha páxina persoal antes de crear páxinas adicionais."
-
-#, fuzzy, python-format
-msgid ""
-"You can add some additional sub pages to your already existing homepage "
-"here.\n"
-"\n"
-"You can choose how open to other readers or writers those pages shall be,\n"
-"access is controlled by group membership of the corresponding group page.\n"
-"\n"
-"Just enter the sub page's name and click on the button to create a new "
-"page.\n"
-"\n"
-"Before creating access protected pages, make sure the corresponding group "
-"page\n"
-"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
-"creating\n"
-"the group pages.\n"
-"\n"
-"||'''Add a new personal page:'''||'''Related access control list "
-"group:'''||\n"
-"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
-"[[%(username)s/ReadWriteGroup]]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
-"(username)s/ReadGroup]]||\n"
-"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
-"(username)s only||\n"
-"\n"
+msgid "You can't check spelling on a page you can't read."
 msgstr ""
-"Aquí pode engadir algunhas subpáxinas adicionais á súa páxina persoal xa "
-"creada.\n"
-"\n"
-"Pode decidir que abertas a outros lectores ou editores estarán as súas "
-"páxinas,\n"
-"o acceso contrólase mediante a pertenza a grupos da páxina de grupo "
-"correspondente.\n"
-"\n"
-"Simplemente introduza o nome da subpáxina e preme no botón para crear unha "
-"nova páxina.\n"
-"\n"
-"Antes de crear páxinas con proteción de acceso, asegúrese de que a páxina de "
-"grupo correspondente\n"
-"existe e contén os membros apropiados. Usa HomepageGroupsTemplate para "
-"crear\n"
-"páxinas de grupo.\n"
-"\n"
-"||'''Agregar unha nova páxina persoal:'''||'''Grupo listaxe control acceso "
-"asociado:'''||\n"
-"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
-"[\"%(username)s/ReadWriteGroup\"]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[\"%"
-"(username)s/ReadGroup\"]||\n"
-"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
-"(username)s unicamente||\n"
-"\n"
-
-# 
-msgid "MyPages management"
-msgstr "Administración de AsMiñasPáxinas"
-
-#, fuzzy
-msgid "Only superuser is allowed to use this action."
-msgstr "Non ten permiso para usar esta acción."
-
-#, python-format
-msgid "Subscribe users to the page %s"
-msgstr "Subscribir usuarios á páxina %s"
-
-msgid "Enter user names (comma separated):"
-msgstr ""
-
-#, python-format
-msgid "Subscribed for %s:"
-msgstr "Subscrit@ a %s:"
-
-msgid "Not a user:"
-msgstr "Non é un usuario:"
-
-msgid "You are not allowed to perform this action."
-msgstr "Non ten permiso para facer esta acción."
-
-#, python-format
-msgid "Exactly one page like \"%s\" found, redirecting to page."
-msgstr ""
-"Encontrouse unha soa páxina semellante á \"%s\" encontrada. Redireccionando "
-"a esa páxina."
-
-#, python-format
-msgid "Pages like \"%s\""
-msgstr "Páxinas semellantes a \"%s\""
-
-#, python-format
-msgid "%(matchcount)d %(matches)s for \"%(title)s\""
-msgstr "%(matchcount)d %(matches)s de \"%(title)s\""
-
-msgid "You are now logged out."
-msgstr "Saiu do sistema."
+"Non pode realizar a corrección ortográfica nunha páxina que non pode ler."
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Non ten permiso para se subscribir a unha páxina que non pode ver."
@@ -2411,6 +2886,15 @@ msgstr "Subscribiuse a esta páxina."
 #, fuzzy
 msgid "You could not get subscribed to this page."
 msgstr "Subscribiuse a esta páxina."
+
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"¡Por favor, use a interface interactiva de usuario para a acción %"
+"(actionname)s!"
+
+msgid "You are now logged out."
+msgstr "Saiu do sistema."
 
 #, fuzzy, python-format
 msgid "Rolled back changes to the page %s."
@@ -2542,6 +3026,338 @@ msgid "Page %s merged with conflicts."
 msgstr ""
 
 #, fuzzy
+msgid "You are not allowed to create the supplementation page."
+msgstr "Non ten permiso para reverter a unha versión anterior desta páxina!"
+
+msgid "Delete"
+msgstr "Eliminar"
+
+msgid "This page is already deleted or was never created!"
+msgstr "Esta páxina xa foi borrada ou nunca se creou"
+
+msgid "Delete all /subpages too?"
+msgstr ""
+
+msgid "Optional reason for the deletion"
+msgstr "Razón para a eliminación (opcional)"
+
+msgid "Really delete this page?"
+msgstr "Realmente desexa eliminar esta páxina?"
+
+msgid "General Information"
+msgstr "Información xeral"
+
+#, python-format
+msgid "Page size: %d"
+msgstr "Tamaño da páxina: %d"
+
+msgid "SHA digest of this page's content is:"
+msgstr "A sinatura SHA desta páxina é:"
+
+msgid "The following users subscribed to this page:"
+msgstr "Os seguintes usuarios están subscritos a esta páxina:"
+
+msgid "This page links to the following pages:"
+msgstr "Esta páxina liga coas seguintes:"
+
+msgid "Date"
+msgstr "Data"
+
+msgid "Diff"
+msgstr "Diferenzas"
+
+msgid "Comment"
+msgstr "Comentario"
+
+#, fuzzy
+msgid "to previous"
+msgstr "Vista previa"
+
+msgid "Revision History"
+msgstr "Historia de revisións"
+
+msgid "No log entries found."
+msgstr "Non se acharon entradas no rexistro!"
+
+#, python-format
+msgid "Info for \"%s\""
+msgstr "Información de \"%s\""
+
+#, python-format
+msgid "Show \"%(title)s\""
+msgstr "Ver \"%(title)s\""
+
+msgid "General Page Infos"
+msgstr "Información xeral da páxina"
+
+msgid "Page hits and edits"
+msgstr "Accesos a e edicións da páxina"
+
+msgid "You must login to add a quicklink."
+msgstr ""
+"Debe comezar a sesión (identificarse) para engadir unha ligazón rápida. Pode "
+"facelo desde PreferenciasDoUsuario. "
+
+msgid "A quicklink to this page has been added for you."
+msgstr ""
+"Engadiuse unha ligazón a esta páxina a súa listaxe de ligazóns rápidas."
+
+#, fuzzy
+msgid "A quicklink to this page could not be added for you."
+msgstr ""
+"Engadiuse unha ligazón a esta páxina a súa listaxe de ligazóns rápidas."
+
+#, fuzzy
+msgid "You already have a quicklink to this page."
+msgstr "Xa gardou os cambios desta páxina!"
+
+#, fuzzy
+msgid "Wiki Backup"
+msgstr "Formato Wiki"
+
+msgid ""
+"= Downloading a backup =\n"
+"\n"
+"Please note:\n"
+" * Store backups in a safe and secure place - they contain sensitive "
+"information.\n"
+" * Make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+" * Make sure the backup file you get contains everything you need in case of "
+"problems.\n"
+" * Make sure it is downloaded without problems.\n"
+"\n"
+"To get a backup, just click here:"
+msgstr ""
+
+msgid "Backup"
+msgstr "Copia de seguranza"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Non ten permiso para facer arquivos de seguranza remotos."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Subacción de copia de seguranza descoñecida: %s."
+
+msgid "Please choose:"
+msgstr ""
+
+msgid "Rename all /subpages too?"
+msgstr ""
+
+msgid "New name"
+msgstr "Nome novo"
+
+msgid "Optional reason for the renaming"
+msgstr "Razón para renomear (opcional)"
+
+#, fuzzy
+msgid "Really rename this page?"
+msgstr "Realmente desexa eliminar esta páxina?"
+
+msgid "Copy all /subpages too?"
+msgstr ""
+
+#, fuzzy
+msgid "Optional reason for the copying"
+msgstr "Razón para renomear (opcional)"
+
+#, fuzzy
+msgid "Really copy this page?"
+msgstr "Realmente desexa eliminar esta páxina?"
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr "Listaxe completa de ligazóns para \"%s\""
+
+msgid "No older revisions available!"
+msgstr "Non hai revisións anteriores dispoñíbeis!"
+
+#, python-format
+msgid "Diff for \"%s\""
+msgstr "Diferenzas para \"%s\""
+
+#, python-format
+msgid "Differences between revisions %d and %d"
+msgstr "Diferenzas entre as revisións %d e %d"
+
+#, python-format
+msgid "(spanning %d versions)"
+msgstr "(abarca %d versións)"
+
+#, fuzzy
+msgid "Previous change"
+msgstr "Vista previa"
+
+#, fuzzy
+msgid "Next change"
+msgstr "Gardar os cambios"
+
+#, python-format
+msgid "The page was saved %(count)d times, though!"
+msgstr "Aínda así, a páxina gardouse %(count)d veces!"
+
+msgid "(ignoring whitespace)"
+msgstr "(espazo en branco ignorado)"
+
+msgid "Ignore changes in the amount of whitespace"
+msgstr "Ignorar cambios na cantidade de espazos en branco"
+
+#, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr "Nome de arquivo non válido \"%s\"!"
+
+#, fuzzy
+msgid "Include all attachments?"
+msgstr "[%d anexos]"
+
+msgid "Package pages"
+msgstr "Empaquetar páxinas"
+
+msgid "Package name"
+msgstr "Nome do paquete"
+
+msgid "List of page names - separated by a comma"
+msgstr "Listaxe de nomes de páxina - separados por coma"
+
+#, python-format
+msgid "Subscribe users to the page %s"
+msgstr "Subscribir usuarios á páxina %s"
+
+msgid "Enter user names (comma separated):"
+msgstr ""
+
+#, python-format
+msgid "Subscribed for %s:"
+msgstr "Subscrit@ a %s:"
+
+msgid "Not a user:"
+msgstr "Non é un usuario:"
+
+msgid "You are not allowed to perform this action."
+msgstr "Non ten permiso para facer esta acción."
+
+msgid "Please first create a homepage before creating additional pages."
+msgstr "Por favor, cree unha páxina persoal antes de crear páxinas adicionais."
+
+#, fuzzy, python-format
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
+"[[%(username)s/ReadWriteGroup]]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
+"(username)s/ReadGroup]]||\n"
+"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
+"(username)s only||\n"
+"\n"
+msgstr ""
+"Aquí pode engadir algunhas subpáxinas adicionais á súa páxina persoal xa "
+"creada.\n"
+"\n"
+"Pode decidir que abertas a outros lectores ou editores estarán as súas "
+"páxinas,\n"
+"o acceso contrólase mediante a pertenza a grupos da páxina de grupo "
+"correspondente.\n"
+"\n"
+"Simplemente introduza o nome da subpáxina e preme no botón para crear unha "
+"nova páxina.\n"
+"\n"
+"Antes de crear páxinas con proteción de acceso, asegúrese de que a páxina de "
+"grupo correspondente\n"
+"existe e contén os membros apropiados. Usa HomepageGroupsTemplate para "
+"crear\n"
+"páxinas de grupo.\n"
+"\n"
+"||'''Agregar unha nova páxina persoal:'''||'''Grupo listaxe control acceso "
+"asociado:'''||\n"
+"||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
+"[\"%(username)s/ReadWriteGroup\"]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[\"%"
+"(username)s/ReadGroup\"]||\n"
+"||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
+"(username)s unicamente||\n"
+"\n"
+
+# 
+msgid "MyPages management"
+msgstr "Administración de AsMiñasPáxinas"
+
+#, fuzzy
+msgid "Your subscription to this page has been removed."
+msgstr "A súa subscrición a esta páxina foi eliminada."
+
+msgid "Can't remove regular expression subscription!"
+msgstr "Non se pode quitar a expresion regular (regex) de subscrición"
+
+#, fuzzy
+msgid "Edit the subscription regular expressions in your settings."
+msgstr "Edite a expresión regular de subscrición en PreferenciasDoUsuario"
+
+#, fuzzy
+msgid "You need to be subscribed to unsubscribe."
+msgstr "Subscribiuse a esta páxina."
+
+#, python-format
+msgid "(!) Only pages changed since '''%s''' are being displayed!"
+msgstr ""
+
+msgid ""
+"/!\\ The modification date you entered was not recognized and is therefore "
+"not considered for the search results!"
+msgstr ""
+
+#, python-format
+msgid "Title Search: \"%s\""
+msgstr "Buscar por título: \"%s\""
+
+#, fuzzy, python-format
+msgid "Advanced Search: \"%s\""
+msgstr "Buscar por título: \"%s\""
+
+#, python-format
+msgid "Full Text Search: \"%s\""
+msgstr "Busca en contidos: \"%s\""
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} didn't return any results. Please change some "
+"terms and refer to HelpOnSearching for more information.%s"
+msgstr ""
+
+msgid "(!) Consider performing a"
+msgstr ""
+
+msgid "full-text search with your search terms"
+msgstr ""
+
+msgid ""
+"(!) You're performing a title search that might not include all related "
+"results of your search query in this wiki. <<BR>>"
+msgstr ""
+
+#, fuzzy
+msgid "Click here to perform a full-text search with your search terms!"
+msgstr ""
+"Efectuar unha busca de páxinas que ligan a esta (este título en contidos)"
+
+#, fuzzy
 msgid "Load"
 msgstr "Subir"
 
@@ -2565,85 +3381,31 @@ msgstr ""
 msgid "Page Name"
 msgstr "Nome do paquete"
 
-msgid ""
-"Cannot create a new page without a page name.  Please specify a page name."
-msgstr ""
-"Non é posíbel crear unha páxina sen nome. Por favor, déalle un nome á páxina."
-
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Mapa local do sitio \"%s\""
 
-#, fuzzy
-msgid "You are not allowed to create the supplementation page."
-msgstr "Non ten permiso para reverter a unha versión anterior desta páxina!"
+msgid "Charts are not available!"
+msgstr "Os gráficos non están dispoñíbeis."
 
-msgid ""
-"You need to manually go to your OpenID provider wiki\n"
-"and log in before you can use your OpenID. MoinMoin will\n"
-"never allow you to enter your password here.\n"
-"\n"
-"Once you have logged in, simply reload this page."
-msgstr ""
-
-msgid "OpenID Trust verification"
-msgstr ""
+msgid "Do it."
+msgstr "Faino."
 
 #, python-format
-msgid "The site %s has asked for your identity."
-msgstr ""
+msgid "Execute action %(actionname)s?"
+msgstr "Executar a acción  %(actionname)s?"
 
 #, python-format
-msgid ""
-"\n"
-"If you approve, the site represented by the trust root below will be\n"
-"told that you control the identity URL %s. (If you are using a delegated\n"
-"identity, the site will take care of reversing the\n"
-"delegation on its own.)"
-msgstr ""
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr "A accion %(actionname)s non está presente neste wiki!"
 
-msgid "Trust root"
-msgstr ""
-
-msgid "Identity URL"
-msgstr ""
+#, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "Non ten permiso para usar a acción %(actionname)s nesta páxina."
 
 #, fuzzy
-msgid "Remember decision"
-msgstr "Versión de Python"
-
-msgid "Remember this trust decision and don't ask again"
-msgstr ""
-
-msgid "Approve"
-msgstr ""
-
-msgid "Don't approve"
-msgstr ""
-
-msgid "OpenID not served"
-msgstr ""
-
-msgid ""
-"\n"
-"Unfortunately you have not created your homepage yet. Therefore,\n"
-"we cannot serve an OpenID for you. Please create your homepage first\n"
-"and then reload this page or click the button below to cancel this\n"
-"verification."
-msgstr ""
-
-msgid "User account created! You can use this account to login now..."
-msgstr ""
-"Creouse a conta de usuario! Pode usala para entrar agora mesmo no sistema..."
-
-msgid "TextCha (required)"
-msgstr ""
-
-msgid "Create Profile"
-msgstr "Crear perfil de usuario"
-
-msgid "Create Account"
-msgstr ""
+msgid "Only superuser is allowed to use this action."
+msgstr "Non ten permiso para usar esta acción."
 
 msgid "Views/day"
 msgstr "Vistas/día"
@@ -2668,14 +3430,11 @@ msgstr "data"
 msgid "# of hits"
 msgstr "# de hits"
 
-msgid "Language"
-msgstr ""
+msgid "User agent"
+msgstr "Navegador ou axente"
 
 msgid "Others"
 msgstr "Outros"
-
-msgid "User agent"
-msgstr "Navegador ou axente"
 
 msgid "Distribution of User-Agent Types"
 msgstr "Distribución de tipos de axentes-de-Usuario (User-Agent)"
@@ -2689,773 +3448,15 @@ msgstr "límite superior do tamaño de páxina [bytes]"
 msgid "# of pages of this size"
 msgstr "# de páxinas deste tamaño"
 
-msgid "Line"
-msgstr "Liña"
-
-msgid "Deletions are marked like this."
-msgstr "Os textos eliminados márcanse así."
-
-msgid "Additions are marked like this."
-msgstr "Os textos engadidos márcanse así."
-
-#, python-format
-msgid ""
-"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
-msgstr ""
-"Síntoo mais non se gardou a páxina xa que  \"%(content)s\" non se permite "
-"neste wiki."
-
-#, fuzzy
-msgid "Attachment link"
-msgstr "Anexos"
-
-#, fuzzy
-msgid "Page link"
-msgstr "Páxinas semellantes a \"%s\""
-
-#, fuzzy
-msgid "Changed page"
-msgstr "Empaquetar páxinas"
-
-#, fuzzy
-msgid "Page changed"
-msgstr "Gardar os cambios"
-
-#, python-format
-msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
-msgstr ""
-"[%(sitename)s]  Actualización %(trivial)sde \"%(pagename)s\" por %(username)s"
-
-msgid "Trivial "
-msgstr "Trivial "
-
-#, python-format
-msgid ""
-"Attachment link: %(attach)s\n"
-"Page link: %(page)s\n"
+msgid "From"
 msgstr ""
 
-msgid "Page has been modified"
-msgstr ""
-
-msgid "Page has been modified in a trivial fashion"
+msgid "To"
 msgstr ""
 
 #, fuzzy
-msgid "Page has been renamed"
-msgstr "Accesos a e edicións da páxina"
-
-#, fuzzy
-msgid "Page has been deleted"
-msgstr "A páxina \"%s\" foi eliminada con éxito!"
-
-#, fuzzy
-msgid "Page has been copied"
-msgstr "Accesos a e edicións da páxina"
-
-#, fuzzy
-msgid "A new attachment has been added"
-msgstr "Novo anexo"
-
-msgid "A page has been reverted to a previous state"
-msgstr ""
-
-#, fuzzy
-msgid "A user has subscribed to a page"
-msgstr "Subscribiuse a esta páxina."
-
-#, fuzzy
-msgid "A new account has been created"
-msgstr "Conta de usuario creada!"
-
-#, fuzzy, python-format
-msgid ""
-"Dear Wiki user,\n"
-"\n"
-"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
-"change notification.\n"
-"\n"
-"The \"%(pagename)s\" page has been changed by %(editor)s:\n"
-msgstr ""
-"Prezado usuario do Wiki,\n"
-"\n"
-"Subscribiuse a unha páxina ou a unha categoría do Wiki en \"%(sitename)s\" "
-"para que lle sexan notificados os cambios por correo.\n"
-"\n"
-"A seguinte páxina foi modificada por %(editor)s:\n"
-"%(pagelink)s\n"
-"\n"
-
-msgid "New page:\n"
-msgstr "Nova páxina:\n"
-
-msgid "No differences found!\n"
-msgstr "Non se acharon diferenzas!\n"
-
-#, fuzzy, python-format
-msgid ""
-"Dear wiki user,\n"
-"\n"
-"You have subscribed to a wiki page \"%(sitename)s\" for change "
-"notification.\n"
-"\n"
-"The page \"%(pagename)s\" has been deleted by %(editor)s:\n"
-"\n"
-msgstr ""
-"Prezado usuario do Wiki,\n"
-"\n"
-"Subscribiuse a unha páxina ou a unha categoría do Wiki en \"%(sitename)s\" "
-"para que lle sexan notificados os cambios por correo.\n"
-"\n"
-"A seguinte páxina foi modificada por %(editor)s:\n"
-"%(pagelink)s\n"
-"\n"
-
-#, fuzzy, python-format
-msgid ""
-"Dear wiki user,\n"
-"\n"
-"You have subscribed to a wiki page \"%(sitename)s\" for change "
-"notification.\n"
-"\n"
-"The page \"%(pagename)s\" has been renamed from \"%(oldname)s\" by %(editor)"
-"s:\n"
-msgstr ""
-"Prezado usuario do Wiki,\n"
-"\n"
-"Subscribiuse a unha páxina ou a unha categoría do Wiki en \"%(sitename)s\" "
-"para que lle sexan notificados os cambios por correo.\n"
-"\n"
-"A seguinte páxina foi modificada por %(editor)s:\n"
-"%(pagelink)s\n"
-"\n"
-
-#, fuzzy, python-format
-msgid "New user account created on %(sitename)s"
-msgstr "Conta de usuario creada!"
-
-#, python-format
-msgid ""
-"Dear Superuser, a new user has just been created on %(sitename)s\". Details "
-"follow:\n"
-"\n"
-"    User name: %(username)s\n"
-"    Email address: %(useremail)s"
-msgstr ""
-
-#, fuzzy, python-format
-msgid "New attachment added to page %(pagename)s on %(sitename)s"
-msgstr "anexo:%(filename)s de %(pagename)s"
-
-#, python-format
-msgid ""
-"Dear Wiki user,\n"
-"\n"
-"You have subscribed to a wiki page \"%(page_name)s\" for change "
-"notification. An attachment has been added to that page by %(editor)s. "
-"Following detailed information is available:\n"
-"\n"
-"Attachment name: %(attach_name)s\n"
-"Attachment size: %(attach_size)s\n"
-msgstr ""
-
-#, fuzzy
-msgid ""
-" Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
-">>'''bold'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''bold "
-"italics'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''mixed ''<<Verbatim(**)"
-">>'''''bold'''<<Verbatim(**)>> and italics''<<Verbatim(//)>>;\n"
-" Horizontal Rule:: <<Verbatim(----)>>\n"
-" Force Linebreak:: <<Verbatim(\\\\)>>\n"
-" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
-"===== Title 5 =====.\n"
-" Lists:: * bullets; ** sub-bullets; # numbered items; ## numbered sub "
-"items.\n"
-" Links:: <<Verbatim([[target]])>>; <<Verbatim([[target|linktext]])>>.\n"
-" Tables:: |= header text | cell text | more cell text |;\n"
-"\n"
-"(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
-msgstr ""
-" Énfase:: <<Verbatim('')>>''cursiva''<<Verbatim('')>>; <<Verbatim(''')"
-">>'''negra'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''negra "
-"cursiva'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mesturada ''<<Verbatim"
-"(''')>>'''''negra'''<<Verbatim(''')>> e cursiva''<<Verbatim('')>>; <<Verbatim"
-"(----)>> liña horizontal.\n"
-" Encabezados:: <<Verbatim(=)>> Título de nivel 1 <<Verbatim(=)>>; <<Verbatim"
-"(==)>> Título de nivel 2 <<Verbatim(==)>>; <<Verbatim(===)>> Título de nivel "
-"3 <<Verbatim(===)>>;   <<Verbatim(====)>> Título de nivel 4 <<Verbatim(====)"
-">>; <<Verbatim(=====)>> Título de nivel 5 <<Verbatim(=====)>>.\n"
-" Listaxes:: espazo e un destes: * viñetas; 1., a., A., i., I. elementos "
-"numerados; 1.#n comeza a numeración en n; un 'espazo' produce sangrado ou "
-"indentado.\n"
-" Ligazóns:: <<Verbatim(XuntaPalabrasConMaiúscula)>>; <<Verbatim([\"colchetes "
-"e comiñas duplas\"])>>; url; [url]; [url etiqueta].\n"
-" Táboas:: || texto de cela |||| texto de cela que ocupa dúas columnas ||;    "
-"non se permiten espazos despois das táboas ou os títulos.\n"
-
-msgid "XSLT option disabled, please look at HelpOnConfiguration."
-msgstr "Opción XSLT non dispoñíbel, por favor vaia a AxudaSobreConfiguración."
-
-msgid "XSLT processing is not available, please install 4suite 1.x."
-msgstr "Procesamento XSLT non dispoñíbel, por favor instale 4suite 1.x."
-
-#, python-format
-msgid "%(errortype)s processing error"
-msgstr "%(errortype)s erro de procesamento"
-
-#, fuzzy
-msgid ""
-" Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
-">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
-"italics'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mixed ''<<Verbatim(''')"
-">>'''''bold'''<<Verbatim(''')>> and italics''<<Verbatim('')>>; <<Verbatim"
-"(----)>> horizontal rule.\n"
-" Headings:: = Title 1 =; == Title 2 ==; === Title 3 ===; ==== Title 4 ====; "
-"===== Title 5 =====.\n"
-" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
-"#n start numbering at n; space alone indents.\n"
-" Links:: <<Verbatim(JoinCapitalizedWords)>>; <<Verbatim([[target|linktext]])"
-">>.\n"
-" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
-"white space allowed after tables or titles.\n"
-"\n"
-"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
-msgstr ""
-" Énfase:: <<Verbatim('')>>''cursiva''<<Verbatim('')>>; <<Verbatim(''')"
-">>'''negra'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''negra "
-"cursiva'''''<<Verbatim(''''')>>; <<Verbatim('')>>''mesturada ''<<Verbatim"
-"(''')>>'''''negra'''<<Verbatim(''')>> e cursiva''<<Verbatim('')>>; <<Verbatim"
-"(----)>> liña horizontal.\n"
-" Encabezados:: <<Verbatim(=)>> Título de nivel 1 <<Verbatim(=)>>; <<Verbatim"
-"(==)>> Título de nivel 2 <<Verbatim(==)>>; <<Verbatim(===)>> Título de nivel "
-"3 <<Verbatim(===)>>;   <<Verbatim(====)>> Título de nivel 4 <<Verbatim(====)"
-">>; <<Verbatim(=====)>> Título de nivel 5 <<Verbatim(=====)>>.\n"
-" Listaxes:: espazo e un destes: * viñetas; 1., a., A., i., I. elementos "
-"numerados; 1.#n comeza a numeración en n; un 'espazo' produce sangrado ou "
-"indentado.\n"
-" Ligazóns:: <<Verbatim(XuntaPalabrasConMaiúscula)>>; <<Verbatim([\"colchetes "
-"e comiñas duplas\"])>>; url; [url]; [url etiqueta].\n"
-" Táboas:: || texto de cela |||| texto de cela que ocupa dúas columnas ||;    "
-"non se permiten espazos despois das táboas ou os títulos.\n"
-
-#, fuzzy
-msgid ""
-"Rendering of reStructured text is not possible, please install Docutils."
-msgstr ""
-"Non se puido mostrar o texto reEstruturado, por favor instale docutils."
-
-#, fuzzy
-msgid ""
-"{{{\n"
-"Emphasis: *italic* **bold** ``monospace``\n"
-"\n"
-"Headings: Heading 1  Heading 2  Heading 3\n"
-"          =========  ---------  ~~~~~~~~~\n"
-"\n"
-"Horizontal rule: ----\n"
-"\n"
-"Links: TrailingUnderscore_ `multi word with backticks`_ external_\n"
-"\n"
-".. _external: http://external-site.example.org/foo/\n"
-"\n"
-"Lists: * bullets; 1., a. numbered items.\n"
-"}}}\n"
-"(!) For more help, see the\n"
-"[[http://docutils.sourceforge.net/docs/user/rst/quickref.html|"
-"reStructuredText Quick Reference]].\n"
-msgstr ""
-"Énfase: <i>*itálica*</i> <b>**negra**</b> ``monoespaciada``<br/>\n"
-"<br/><pre>\n"
-"Encabezados: Encabezado 1  Encabezado 2  Encabezado 3\n"
-"             ============  ------------  ~~~~~~~~~~~~\n"
-"\n"
-"Líña horizontal: ---- \n"
-"Ligazóns: LiñaAlPisoFinal_ `varias palabras con comiñas`_ externos_ \n"
-"\n"
-".. _externos: http://no-exterior.net/foo/\n"
-"\n"
-"Listaxes: * viñetas; 1., a. enumeracións.\n"
-"</pre>\n"
-"<br/>\n"
-"(!) Para obter máis axuda, vaia a \n"
-"<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
-"Referencia rápida de reStructuredText\n"
-"</a>.\n"
-
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr "**Excedeuse o número máximo de 'incluídos' permitidos"
-
-#, fuzzy, python-format
-msgid "**You are not allowed to read the page: %s**"
-msgstr "Non ten permiso para reverter a unha versión anterior desta páxina!"
-
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr "**Non se achou a páxina referenciada: %s**"
-
-#, python-format
-msgid "Upload new attachment \"%(filename)s\""
-msgstr "Subir un novo anexo \"%(filename)s\""
-
-#, python-format
-msgid ""
-"%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
-"missing."
-msgstr ""
-
-#, python-format
-msgid ""
-"%(extension_name)s %(extension_type)s: Invalid %(argument_name)s=%"
-"(argument_value)s!"
-msgstr ""
-
-#, python-format
-msgid ""
-"Current configuration does not allow embedding of the file %(file)s because "
-"of its mimetype %(mimetype)s."
-msgstr ""
-
-msgid "Embedded"
-msgstr ""
-
-#, fuzzy
-msgid "Search for items"
-msgstr "Busca por títulos"
-
-msgid "containing all the following terms"
-msgstr ""
-
-msgid "containing one or more of the following terms"
-msgstr ""
-
-msgid "not containing the following terms"
-msgstr ""
-
-msgid "last modified since (e.g. last 2 weeks)"
-msgstr ""
-
-msgid "any category"
-msgstr ""
-
-#, fuzzy
-msgid "any language"
-msgstr "Idioma preferido"
-
-msgid "any mimetype"
-msgstr ""
-
-msgid "Categories"
-msgstr ""
-
-#, fuzzy
-msgid "File Type"
-msgstr "Nome de Arquivo"
-
-#, fuzzy
-msgid "Search only in titles"
-msgstr "Busca por títulos"
-
-#, fuzzy
-msgid "Case-sensitive search"
-msgstr "A busca é sensíbel a maiúsculas e minúsculas"
-
-msgid "Exclude underlay"
-msgstr ""
-
-#, fuzzy
-msgid "No system items"
-msgstr "Cantidade de páxinas do sistema"
-
-msgid "Search in all page revisions"
-msgstr ""
-
-msgid "Go get it!"
-msgstr ""
-
-#, fuzzy
-msgid "File attachment browser"
-msgstr "Novo anexo"
-
-#, fuzzy
-msgid "User account browser"
-msgstr "Conta de usuario creada!"
-
-msgid "No orphaned pages in this wiki."
-msgstr "Non hai páxinas orfas neste wiki."
-
-#, python-format
-msgid "Invalid include arguments \"%s\"!"
-msgstr "Argumentos incluídos non válidos \"%s\"!"
-
-#, python-format
-msgid "Nothing found for \"%s\"!"
-msgstr "Non se acharon coincidencias de \"%s\"!"
-
-msgid "Include system pages"
-msgstr "Incluír páxinas do sistema"
-
-msgid "Exclude system pages"
-msgstr "Excluír páxinas do sistema"
-
-msgid "No wanted pages in this wiki."
-msgstr "Non existen páxinas-por-crear neste wiki."
-
-msgid "Python Version"
-msgstr "Versión de Python"
-
-msgid "MoinMoin Version"
-msgstr "Versión de MoinMoin"
-
-#, python-format
-msgid "Release %s [Revision %s]"
-msgstr "Versión (release) %s [Revisión %s]"
-
-msgid "4Suite Version"
-msgstr "Versión de 4Suite"
-
-msgid "Number of pages"
-msgstr "Cantidade de páxinas"
-
-msgid "Number of system pages"
-msgstr "Cantidade de páxinas do sistema"
-
-msgid "Accumulated page sizes"
-msgstr "Tamaño acumulado das páxinas"
-
-#, python-format
-msgid "Disk usage of %(data_dir)s/pages/"
-msgstr "Disco usado por %(data_dir)s/pages/"
-
-#, python-format
-msgid "Disk usage of %(data_dir)s/"
-msgstr "Disco usado por %(data_dir)s/"
-
-msgid "Entries in edit log"
-msgstr "Entradas no rexistro de edición"
-
-msgid "NONE"
-msgstr "NINGÚN"
-
-msgid "Global extension macros"
-msgstr "Macros de extensión global"
-
-msgid "Local extension macros"
-msgstr "Macros de extensión local"
-
-msgid "Global extension actions"
-msgstr "Accións de extensión global"
-
-msgid "Local extension actions"
-msgstr "Accións de extensión local"
-
-msgid "Global parsers"
-msgstr "Parsers globais"
-
-msgid "Local extension parsers"
-msgstr "Parsers de extensión local"
-
-msgid "Disabled"
-msgstr "Desactivado"
-
-msgid "Enabled"
-msgstr "Activado"
-
-msgid "index available"
-msgstr ""
-
-msgid "index unavailable"
-msgstr ""
-
-msgid "Xapian and/or Python Xapian bindings not installed"
-msgstr ""
-
-#, fuzzy
-msgid "Xapian search"
-msgstr "Busca"
-
-msgid "Stemming for Xapian"
-msgstr ""
-
-msgid "Active threads"
-msgstr "Filos (conversación) activos"
-
-msgid "Wiki configuration"
-msgstr ""
-
-msgid ""
-"This table shows all settings in this wiki that do not have default values. "
-"Settings that the configuration system doesn't know about are shown in "
-"''italic'', those may be due to third-party extensions needing configuration "
-"or settings that were removed from Moin."
-msgstr ""
-
-#, fuzzy
-msgid "Variable name"
-msgstr "Nome de arquivo"
-
-msgid "Setting"
-msgstr ""
-
-#, python-format
-msgid "No quotes on %(pagename)s."
-msgstr "Non hai citas en %(pagename)s."
-
-msgid "Markup"
-msgstr "Formato"
-
-msgid "Display"
-msgstr "Mostrar"
-
-#, python-format
-msgid "Unsupported navigation scheme '%(scheme)s'!"
-msgstr "Esquema de navegación '%(scheme)s' non soportado!"
-
-msgid "No parent page found!"
-msgstr "Non se achou unha páxina superior!"
-
-msgid "Wiki"
-msgstr "Wiki"
-
-msgid "Slideshow"
-msgstr "Proxectar diapositivas"
-
-msgid "Start"
-msgstr "Comezar"
-
-#, python-format
-msgid "Slide %(pos)d of %(size)d"
-msgstr "Diapositiva %(pos)d de %(size)d"
-
-#, python-format
-msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
-msgstr ""
-
-msgid "Go To Page"
-msgstr "Ir á páxina"
-
-msgid "Description"
-msgstr ""
-
-msgid "Contents"
+msgid "Content"
 msgstr "Táboa de contidos"
-
-msgid "Search Titles"
-msgstr "Busca por títulos"
-
-msgid "Display context of search results"
-msgstr "Mostrar o contexto dos resultados da busca"
-
-msgid "Case-sensitive searching"
-msgstr "A busca é sensíbel a maiúsculas e minúsculas"
-
-msgid "Search Text"
-msgstr "Busca por texto"
-
-#, python-format
-msgid "Upload of attachment '%(filename)s'."
-msgstr "Subida (upload) do anexo '%(filename)s'."
-
-#, python-format
-msgid "Drawing '%(filename)s' saved."
-msgstr "Debuxo '%(filename)s' gardado."
-
-#, python-format
-msgid "%(mins)dm ago"
-msgstr "hai %(mins)dm"
-
-msgid "(no bookmark set)"
-msgstr "(non hai marca persoal gardada)"
-
-#, python-format
-msgid "(currently set to %s)"
-msgstr "(actualmente configurado como %s)"
-
-#, fuzzy
-msgid "Delete bookmark"
-msgstr "Eliminar ligazón persoal"
-
-msgid "Set bookmark"
-msgstr "Establecer ligazón persoal"
-
-msgid "[Bookmark reached]"
-msgstr "[ligazón persoal acadada]"
-
-#, python-format
-msgid "Inlined image: %(url)s"
-msgstr ""
-
-#, fuzzy, python-format
-msgid "Create new drawing \"%(filename)s (opens in new window)\""
-msgstr "Crear un novo debuxo \"%(filename)s\""
-
-#, fuzzy, python-format
-msgid "Edit drawing %(filename)s (opens in new window)"
-msgstr "Editar debuxo %(filename)s"
-
-#, fuzzy, python-format
-msgid "Clickable drawing: %(filename)s"
-msgstr "Editar debuxo %(filename)s"
-
-msgid "Toggle line numbers"
-msgstr "[des]activar nros. de liña"
-
-msgid "[ATTACH]"
-msgstr ""
-
-msgid "[RSS]"
-msgstr "[RSS]"
-
-msgid "[DELETED]"
-msgstr "[ELIMINADA]"
-
-msgid "[UPDATED]"
-msgstr "[ACTUALIZADA]"
-
-msgid "[RENAMED]"
-msgstr ""
-
-msgid "[CONFLICT]"
-msgstr ""
-
-msgid "[NEW]"
-msgstr "[NOVA]"
-
-msgid "[DIFF]"
-msgstr "[DIFF]"
-
-msgid "[BOTTOM]"
-msgstr "[FINAL]"
-
-msgid "[TOP]"
-msgstr "[INICIO]"
-
-msgid "Click to do a full-text search for this title"
-msgstr ""
-"Efectuar unha busca de páxinas que ligan a esta (este título en contidos)"
-
-msgid "Logout"
-msgstr "Saír"
-
-msgid "Unsubscribe"
-msgstr "Des-subscribirse"
-
-msgid "Home"
-msgstr "Inicio"
-
-msgid "Clear message"
-msgstr "Quitar mensaxe"
-
-#, python-format
-msgid "last edited %(time)s by %(editor)s"
-msgstr "última edición %(time)s efectuada por %(editor)s"
-
-#, python-format
-msgid "last modified %(time)s"
-msgstr "última modificación %(time)s"
-
-msgid "Search:"
-msgstr "Buscar:"
-
-msgid "Text"
-msgstr "Texto"
-
-msgid "Titles"
-msgstr "Títulos"
-
-msgid "Search"
-msgstr "Busca"
-
-msgid "More Actions:"
-msgstr "Máis Accións"
-
-#, fuzzy
-msgid "------------------------"
-msgstr "-----------------"
-
-msgid "Raw Text"
-msgstr "Texto sen formato"
-
-msgid "Print View"
-msgstr "Vista de impresión"
-
-msgid "Delete Cache"
-msgstr "Eliminar caché"
-
-msgid "Delete Page"
-msgstr "Eliminar páxina"
-
-msgid "Like Pages"
-msgstr "Páxinas semellantes"
-
-msgid "Local Site Map"
-msgstr "Mapa do sitio"
-
-msgid "My Pages"
-msgstr "As miñas páxinas"
-
-msgid "Subscribe User"
-msgstr "Subscribir Usuario"
-
-msgid "Remove Spam"
-msgstr "Eliminar Spam"
-
-msgid "Package Pages"
-msgstr "Empaquetar Páxinas"
-
-msgid "Render as Docbook"
-msgstr "Mostrar en Docbook"
-
-#, fuzzy
-msgid "Sync Pages"
-msgstr "As miñas páxinas"
-
-msgid "Do"
-msgstr "Facer"
-
-#, fuzzy
-msgid "Comments"
-msgstr "Comentario"
-
-msgid "Edit (Text)"
-msgstr "Edición (Texto)"
-
-msgid "Edit (GUI)"
-msgstr "Edición (GUI)"
-
-msgid "Immutable Page"
-msgstr "Páxina inmutábel"
-
-msgid "Remove Link"
-msgstr "Eliminar ligazón"
-
-msgid "Add Link"
-msgstr "Engadir ligazón"
-
-msgid "Attachments"
-msgstr "Anexos"
-
-#, python-format
-msgid "Show %s days."
-msgstr "Mostrar %s días."
-
-msgid "Wiki Markup"
-msgstr "Formato Wiki"
-
-msgid "Page"
-msgstr "Páxina"
-
-msgid "User"
-msgstr "Usuario"
-
-msgid "DeleteCache"
-msgstr "EliminarCaché"
-
-#, python-format
-msgid "(cached %s)"
-msgstr "(cached %s)"
-
-msgid "Or try one of these actions:"
-msgstr "Ou intenta unha destas accións: "
 
 #, python-format
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
@@ -3467,15 +3468,15 @@ msgstr "Correo electrónico NON enviado"
 msgid "Mail sent OK"
 msgstr "Correo electrónico ben enviado"
 
-msgid "From"
+#, python-format
+msgid ""
+"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
 msgstr ""
+"Síntoo mais non se gardou a páxina xa que  \"%(content)s\" non se permite "
+"neste wiki."
 
-msgid "To"
+msgid "anonymous"
 msgstr ""
-
-#, fuzzy
-msgid "Content"
-msgstr "Táboa de contidos"
 
 # 
 #~ msgid ""
