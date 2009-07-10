@@ -132,5 +132,6 @@ coverage_modules = ['MoinMoin.formatter',
                     'MoinMoin.formatter.dom_xml',
                     'MoinMoin.formatter.text_python',
                     'MoinMoin.formatter.pagelinks',
+                    'MoinMoin.formtter.groups',
                    ]
 
