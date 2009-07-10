@@ -45,7 +45,7 @@ class BaseGroup(object):
 
         return members, member_groups
 
-    def _contains(self, member, processed_groups):
+    def __contains__(self, member, processed_groups=None):
         """
         First check if <member> is part of this group and then check
         for every subgroup in this group.
@@ -56,6 +56,10 @@ class BaseGroup(object):
         @param member: member name [unicode]
         @param processed_groups: groups which were checked for containment before [set]
         """
+
+        if not processed_groups:
+            processed_groups = set()
+
         processed_groups.add(self.name)
 
         if member in self.members or member in self.member_groups:
@@ -63,18 +67,12 @@ class BaseGroup(object):
         else:
             groups = self.request.groups
             for group_name in self.member_groups:
-                if group_name not in processed_groups and groups[group_name]._contains(member, processed_groups):
+                if group_name not in processed_groups and group_name in groups and groups[group_name].__contains__(member, processed_groups):
                     return True
 
         return False
 
-    def __contains__(self, member):
-        """
-        Check if <member> is defined in this group. Checks also for subgroups.
-        """
-        return self._contains(member, set())
-
-    def _iter(self, yielded_members, processed_groups):
+    def __iter__(self, yielded_members=None, processed_groups=None):
         """
         Iterate first over members of this group, then over subgroups of this group.
 
@@ -86,6 +84,13 @@ class BaseGroup(object):
         @param yielded_members: members which have been already yielded before [set]
         @param processed_groups: group names which have been iterated before [set]
         """
+
+        if not processed_groups:
+            processed_groups = set()
+
+        if not yielded_members:
+            yielded_members = set()
+
         processed_groups.add(self.name)
 
         for member in self.members:
@@ -96,14 +101,11 @@ class BaseGroup(object):
         groups = self.request.groups
         for group_name in self.member_groups:
             if group_name not in processed_groups:
-                for member in groups[group_name]._iter(yielded_members, processed_groups):
-                    yield member
-
-    def __iter__(self):
-        """
-        Iterate over members of this group. Iterates also over subgroups if any.
-        """
-        return self._iter(set(), set())
+                if group_name in groups:
+                    for member in groups[group_name].__iter__(yielded_members, processed_groups):
+                        yield member
+                else:
+                    yield group_name
 
     def __repr__(self):
         return "<%s name=%s members=%s member_groups=%s>" % (self.__class__,

@@ -22,19 +22,21 @@ class GroupsBackendTest(object):
                    u'AdminGroup': [u'Admin1', u'Admin2', u'John'],
                    u'OtherGroup': [u'SomethingOther'],
                    u'RecursiveGroup': [u'Something', u'OtherRecursiveGroup'],
-                   u'OtherRecursiveGroup': [u'RecursiveGroup', u'Anything'],
+                   u'OtherRecursiveGroup': [u'RecursiveGroup', u'Anything', u'NotExistingGroup'],
                    u'ThirdRecursiveGroup': [u'ThirdRecursiveGroup', u'Banana'],
-                   u'EmptyGroup': []}
+                   u'EmptyGroup': [],
+                   u'CheckNotExistingGroup': [u'NotExistingGroup']}
 
 
     expanded_groups = {u'EditorGroup': [u'Admin1', u'Admin2', u'John',
                                         u'JoeDoe', u'Editor1'],
                        u'AdminGroup': [u'Admin1', u'Admin2', u'John'],
                        u'OtherGroup': [u'SomethingOther'],
-                       u'RecursiveGroup': [u'Anything', u'Something'],
-                       u'OtherRecursiveGroup': [u'Anything', u'Something'],
+                       u'RecursiveGroup': [u'Anything', u'Something', u'NotExistingGroup'],
+                       u'OtherRecursiveGroup': [u'Anything', u'Something', u'NotExistingGroup'],
                        u'ThirdRecursiveGroup': [u'Banana'],
-                       u'EmptyGroup': []}
+                       u'EmptyGroup': [],
+                       u'CheckNotExistingGroup': [u'NotExistingGroup']}
 
     def test_contains(self):
         """
