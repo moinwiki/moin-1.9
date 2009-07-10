@@ -1064,7 +1064,7 @@ class Page(object):
         if 'deprecated' in pi:
             # deprecated page, append last backup version to current contents
             # (which should be a short reason why the page is deprecated)
-            request.theme.add_msg(_('The backed up content of this page is deprecated and will ranked lower in search results!'), "warning")
+            request.theme.add_msg(_('The backed up content of this page is deprecated and will rank lower in search results!'), "warning")
 
             revisions = self.getRevList()
             if len(revisions) >= 2: # XXX shouldn't that be ever the case!? Looks like not.
