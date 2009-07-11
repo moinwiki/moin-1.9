@@ -1,50 +1,54 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - MoinMoin.formatter.groups
+    MoinMoin - MoinMoin.formatter.dicts
 
-    @copyright: 2009 MoinMoin:DmitrijsMilajevs
+    @copyright: 2005 MoinMoin:NirSoffer
+                2009 MoinMoin:DmitrijsMilajevs
     @license: GNU GPL, see COPYING for details.
 """
+
 
 from MoinMoin.formatter import FormatterBase
 from MoinMoin import wikiutil
 
+
 class Formatter(FormatterBase):
     """
-    Collect groups and format nothing
+    Collect definition lists and format nothing
     """
 
     def __init__(self, request, **kw):
         FormatterBase.__init__(self, request, **kw)
-        self.bullet_list_level = 0
-        self.inside_list_item = False
-        self.inside_link = False
-        self.members = []
-        self.new_member = ''
+        self.dict = {}
+        self.term = []
+        self.description = []
+        self.current = None
 
-    def bullet_list(self, on, **kw):
+    def definition_term(self, on):
         if on:
-            self.bullet_list_level += 1
+            self.term = []
+            self.current = 'term'
         else:
-            self.bullet_list_level -= 1
-
-        assert self.bullet_list_level >= 0
-
+            self.current = None
         return self.null()
 
-    def listitem(self, on, **kw):
-        if self.bullet_list_level == 1:
-            self.inside_list_item = on
-            if not on:
-                stripped_new_member = self.new_member.strip()
-                if stripped_new_member:
-                    self.members.append(stripped_new_member)
-            self.new_member = ''
+    def definition_desc(self, on):
+        if on:
+            self.description = []
+            self.current = 'description'
+        else:
+            term = ' '.join(self.term)
+            description = ' '.join(self.description)
+            self.dict[term] = description
+            self.current = None
         return self.null()
 
-    def text(self, text, **kw):
-        if self.bullet_list_level == 1 and self.inside_list_item: #and not self.inside_link:
-            self.new_member += text
+    def text(self, text):
+        if self.current:
+            text = text.strip()
+            if text:
+                attr = getattr(self, self.current)
+                attr.append(text)
         return self.null()
 
     def null(self, *args, **kw):
@@ -56,7 +60,7 @@ class Formatter(FormatterBase):
     strong = emphasis = underline = highlight = sup = sub = strike = null
     code = preformatted = small = big = code_area = code_line = null
     code_token = linebreak = paragraph = rule = icon = null
-    number_list = definition_list = definition_term = definition_desc = null
+    number_list = definition_list = bullet_list = listitem = null
     heading = table = pagelink = null
     table_row = table_cell = attachment_link = attachment_image = attachment_drawing = null
     transclusion = transclusion_param = null
