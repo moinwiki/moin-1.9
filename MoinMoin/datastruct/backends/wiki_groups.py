@@ -62,6 +62,18 @@ class WikiGroups(BaseGroupsBackend):
     def _retrieve_members(self, group_name):
         formatter = Formatter(self.request)
         page = Page(self.request, group_name, formatter=formatter)
-        page.send_page(content_only=True)
+        # send_special is set to True because acl of the page should
+        # not be processed to avoid infinite recursion in the
+        # following case.
+        #
+        # Consider page UserGroup content:
+        #
+        # #acl UserGroup:read,write,admin All:read
+        #
+        #  * ExampleUser
+        #  * TestGroup
+        #
+        page.send_page(content_only=True, send_special=True)
+
         return formatter.members
 
