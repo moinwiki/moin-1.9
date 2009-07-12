@@ -13,6 +13,9 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 from MoinMoin import config, user
 from MoinMoin.request import request_twisted, request_cli, request_standalone
 from MoinMoin.auth import BaseAuth
@@ -36,6 +39,7 @@ class HTTPAuth(BaseAuth):
         if user_obj:
             return user_obj, True
 
+        logging.debug("request: %r" % request)
         # for standalone, request authorization and verify it,
         # deny access if it isn't verified
         if isinstance(request, request_standalone.Request):
@@ -44,7 +48,9 @@ class HTTPAuth(BaseAuth):
             if auth:
                 auth = auth.split()[-1]
                 info = decodestring(auth).split(':', 1)
+                logging.debug("len(info) == %d" % len(info))
                 if len(info) == 2:
+                    logging.debug("username: %r" % info[0])
                     u = user.User(request, auth_username=info[0], password=info[1],
                                   auth_method=self.name, auth_attribs=[])
             if not u:
@@ -53,6 +59,7 @@ class HTTPAuth(BaseAuth):
         elif isinstance(request, request_twisted.Request):
             username = request.twistd.getUser().decode(config.charset)
             password = request.twistd.getPassword().decode(config.charset)
+            logging.debug("username: %r" % username)
             # when using Twisted http auth, we use username and password from
             # the moin user profile, so both can be changed by user.
             u = user.User(request, auth_username=username, password=password,
@@ -60,8 +67,10 @@ class HTTPAuth(BaseAuth):
         elif not isinstance(request, request_cli.Request):
             env = request.env
             auth_type = env.get('AUTH_TYPE', '').lower()
+            logging.debug("auth_type: %r" % auth_type)
             if auth_type in ['basic', 'digest', 'ntlm', 'negotiate', ]:
                 username = env.get('REMOTE_USER', '').decode(config.charset)
+                logging.debug("username: %r" % username)
                 if auth_type in ('ntlm', 'negotiate', ):
                     # converting to standard case so the user can even enter wrong case
                     # (added since windows does not distinguish between e.g.
@@ -71,14 +80,20 @@ class HTTPAuth(BaseAuth):
                     # this "normalizes" the login name from {meier, Meier, MEIER} to Meier
                     # put a comment sign in front of next line if you don't want that:
                     username = username.title()
+                    logging.debug("processed username: %r" % username)
                 # when using http auth, we have external user name and password,
                 # we don't use the moin user profile for those attributes.
                 u = user.User(request, auth_username=username,
                               auth_method=self.name, auth_attribs=('name', 'password'))
 
+        logging.debug("u: %r" % u)
         if u and self.autocreate:
+            logging.debug("autocreating user")
             u.create_or_update()
         if u and u.valid:
+            logging.debug("returning valid user %r" % u)
             return u, True # True to get other methods called, too
         else:
+            logging.debug("returning %r" % user_obj)
             return user_obj, True
+
