@@ -62,6 +62,9 @@ class WikiGroups(BaseGroupsBackend):
     def _retrieve_members(self, group_name):
         formatter = Formatter(self.request)
         page = Page(self.request, group_name, formatter=formatter)
+
+        request_page = getattr(self.request, "page", None)
+        self.request.page = page
         # send_special is set to True because acl of the page should
         # not be processed to avoid infinite recursion in the
         # following case.
@@ -74,6 +77,11 @@ class WikiGroups(BaseGroupsBackend):
         #  * TestGroup
         #
         page.send_page(content_only=True, send_special=True)
+
+        if request_page:
+            self.request.page = request_page
+        else:
+             del(self.request.page)
 
         return formatter.members
 
