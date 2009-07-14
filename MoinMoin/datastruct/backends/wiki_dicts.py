@@ -14,7 +14,6 @@ import re
 from MoinMoin import caching, wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.datastruct.backends import BaseDict, BaseDictsBackend, DictDoesNotExistError
-from MoinMoin.formatter.dicts import Formatter
 
 
 class WikiDict(BaseDict):
@@ -61,6 +60,9 @@ class WikiDict(BaseDict):
 
 class WikiDicts(BaseDictsBackend):
 
+    # Key:: Value - ignore all but key:: value pairs, strip whitespace, exactly one space after the :: is required
+    _dict_page_parse_regex = re.compile(ur'^ (?P<key>.+?):: (?P<val>.*?) *$', re.MULTILINE | re.UNICODE)
+
     def __contains__(self, dict_name):
         return self.is_dict_name(dict_name) and Page(self.request, dict_name).exists()
 
@@ -68,9 +70,15 @@ class WikiDicts(BaseDictsBackend):
         return WikiDict(request=self.request, name=dict_name, backend=self)
 
     def _retrieve_items(self, dict_name):
-        formatter = Formatter(self.request)
-        page = Page(self.request, dict_name, formatter=formatter)
-        page.send_page(content_only=True)
-
-        return formatter.dict
+        # XXX in Moin 2.0 regex should not be used instead use DOM
+        # tree to extract dict values. Also it should be possible to
+        # convert dict values to different markups (wiki-markup,
+        # creole...).
+        #
+        # Note that formatter which extracts dictionary from a
+        # page was developed. See
+        # http://hg.moinmo.in/moin/1.9-groups-dmilajevs/file/982f706482e7/MoinMoin/formatter/dicts.py
+        page = Page(self.request, dict_name)
+        text = page.get_raw_body()
+        return dict([match.groups() for match in self._dict_page_parse_regex.finditer(text)])
 
