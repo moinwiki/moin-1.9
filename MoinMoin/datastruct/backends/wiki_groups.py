@@ -81,7 +81,7 @@ class WikiGroups(BaseGroupsBackend):
         if request_page:
             self.request.page = request_page
         else:
-             del(self.request.page)
+            del self.request.page
 
         return formatter.members
 

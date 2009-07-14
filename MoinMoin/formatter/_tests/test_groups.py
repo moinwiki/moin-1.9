@@ -178,12 +178,12 @@ class TestGroupFormatterCreole(object):
 
     def test_ignore_not_first_level_list(self):
         text = """
- * first level
- ** second level
- *** [[SomeLink]]
- **** forth level
- ***** and then some...
- * again first level
+* first level
+** second level
+*** [[SomeLink]]
+**** forth level
+***** and then some...
+* again first level
 """
         members = self.get_members(text)
         assert len(members) == 2
