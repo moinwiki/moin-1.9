@@ -17,7 +17,6 @@ class Formatter(FormatterBase):
     def __init__(self, request, **kw):
         FormatterBase.__init__(self, request, **kw)
         self.bullet_list_level = 0
-        self.inside_list_item = False
         self.inside_link = False
         self.members = []
         self.new_member = ''
@@ -34,17 +33,26 @@ class Formatter(FormatterBase):
 
     def listitem(self, on, **kw):
         if self.bullet_list_level == 1:
-            self.inside_list_item = on
             if not on:
                 stripped_new_member = self.new_member.strip()
-                if stripped_new_member:
+                if stripped_new_member and not on:
                     self.members.append(stripped_new_member)
             self.new_member = ''
         return self.null()
 
     def text(self, text, **kw):
-        if self.bullet_list_level == 1 and self.inside_list_item: #and not self.inside_link:
+        if self.bullet_list_level == 1 and not self.inside_link:
             self.new_member += text
+        return self.null()
+
+    def pagelink(self, on, pagename='', page=None, **kw):
+        if self.bullet_list_level == 1:
+            self.inside_link = on
+            if not on:
+                if not pagename and page:
+                    pagename = page.page_name
+                pagename = wikiutil.normalize_pagename(pagename, self.request.cfg)
+                self.new_member += pagename
         return self.null()
 
     def null(self, *args, **kw):
@@ -57,7 +65,7 @@ class Formatter(FormatterBase):
     code = preformatted = small = big = code_area = code_line = null
     code_token = linebreak = paragraph = rule = icon = null
     number_list = definition_list = definition_term = definition_desc = null
-    heading = table = pagelink = null
+    heading = table = null
     table_row = table_cell = attachment_link = attachment_image = attachment_drawing = null
     transclusion = transclusion_param = null
 
