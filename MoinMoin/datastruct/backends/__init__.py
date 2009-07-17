@@ -40,92 +40,6 @@ class BaseGroup(object):
             raise NotImplementedError()
 
 
-class GreedyGroup(BaseGroup):
-
-    def __init__(self, request, name, backend):
-        super(GreedyGroup, self).__init__(request, name, backend)
-        self.members, self.member_groups = self._load_group()
-
-    def _load_group(self):
-        """
-        Retrieve group data from the backend and filter it to members and group_members.
-        """
-        members_retrieved = set(self._backend._retrieve_members(self.name))
-
-        member_groups = set(member for member in members_retrieved if self._backend.is_group_name(member))
-        members = members_retrieved - member_groups
-
-        return members, member_groups
-
-    def __contains__(self, member, processed_groups=None):
-        """
-        First check if <member> is part of this group and then check
-        for every subgroup in this group.
-
-        <processed_groups> is needed to avoid infinite recursion, if
-        groups are defined recursively.
-
-        @param member: member name [unicode]
-        @param processed_groups: groups which were checked for containment before [set]
-        """
-
-        if not processed_groups:
-            processed_groups = set()
-
-        processed_groups.add(self.name)
-
-        if member in self.members or member in self.member_groups:
-            return True
-        else:
-            groups = self.request.groups
-            for group_name in self.member_groups:
-                if group_name not in processed_groups and group_name in groups and groups[group_name].__contains__(member, processed_groups):
-                    return True
-
-        return False
-
-    def __iter__(self, yielded_members=None, processed_groups=None):
-        """
-        Iterate first over members of this group, then over subgroups of this group.
-
-        <yielded_members> and <processed_groups> are needed to avoid infinite recursion.
-        This can happen if there are two groups like these:
-           OneGroup: Something, OtherGroup
-           OtherGroup: OneGroup, SomethingOther
-
-        @param yielded_members: members which have been already yielded before [set]
-        @param processed_groups: group names which have been iterated before [set]
-        """
-
-        if not processed_groups:
-            processed_groups = set()
-
-        if not yielded_members:
-            yielded_members = set()
-
-        processed_groups.add(self.name)
-
-        for member in self.members:
-            if member not in yielded_members:
-                yielded_members.add(member)
-                yield member
-
-        groups = self.request.groups
-        for group_name in self.member_groups:
-            if group_name not in processed_groups:
-                if group_name in groups:
-                    for member in groups[group_name].__iter__(yielded_members, processed_groups):
-                        yield member
-                else:
-                    yield group_name
-
-    def __repr__(self):
-        return "<%s name=%s members=%s member_groups=%s>" % (self.__class__,
-                                                             self.name,
-                                                             self.members,
-                                                             self.member_groups)
-
-
 class BaseGroupsBackend(object):
 
     def __init__(self, request):
@@ -176,10 +90,135 @@ class BaseGroupsBackend(object):
                 pass
 
     def get(self, key, default=None):
-        if key in self:
+        try:
             return self[key]
-        else:
+        except GroupDoesNotExistError:
             return default
+
+
+class LazyGroup(BaseGroup):
+    """
+    A lazy group does not store members internally, but gets them from
+    a backend when needed.
+    """
+
+    def __init__(self, request, name, backend):
+        super(LazyGroup, self).__init__(request, name, backend)
+
+        if name not in backend:
+            raise GroupDoesNotExistError(name)
+
+    def __contains__(self, member, processed_groups=None):
+        # processed_groups are not used here but other group classes
+        # may expect this parameter.
+        return self._backend._group_has_member(self.name, member)
+
+    def __iter__(self, yielded_members=None, processed_groups=None):
+        # processed_groups are not used here but other group classes
+        # may expect this parameter.
+        if yielded_members is None:
+            yielded_members = set()
+
+        for member in self._backend._iter_group_members(self.name):
+            if member not in yielded_members:
+                yielded_members.add(member)
+                yield member
+
+
+class LazyGroupsBackend(BaseGroupsBackend):
+
+    def _iter_group_members(self, group_name):
+        raise NotImplementedError()
+
+    def _group_has_member(self, group_name, member):
+        raise NotImplementedError()
+
+
+class GreedyGroup(BaseGroup):
+
+    def __init__(self, request, name, backend):
+
+        super(GreedyGroup, self).__init__(request, name, backend)
+        self.members, self.member_groups = self._load_group()
+
+    def _load_group(self):
+        """
+        Retrieve group data from the backend and filter it to members and group_members.
+        """
+        members_retrieved = set(self._backend._retrieve_members(self.name))
+
+        member_groups = set(member for member in members_retrieved if self._backend.is_group_name(member))
+        members = members_retrieved - member_groups
+
+        return members, member_groups
+
+    def __contains__(self, member, processed_groups=None):
+        """
+        First check if <member> is part of this group and then check
+        for every subgroup in this group.
+
+        <processed_groups> is needed to avoid infinite recursion, if
+        groups are defined recursively.
+
+        @param member: member name [unicode]
+        @param processed_groups: groups which were checked for containment before [set]
+        """
+
+        if processed_groups is None:
+            processed_groups = set()
+
+        processed_groups.add(self.name)
+
+        if member in self.members or member in self.member_groups:
+            return True
+        else:
+            groups = self.request.groups
+            for group_name in self.member_groups:
+                if group_name not in processed_groups and group_name in groups and groups[group_name].__contains__(member, processed_groups):
+                    return True
+
+        return False
+
+    def __iter__(self, yielded_members=None, processed_groups=None):
+        """
+        Iterate first over members of this group, then over subgroups of this group.
+
+        <yielded_members> and <processed_groups> are needed to avoid infinite recursion.
+        This can happen if there are two groups like these:
+           OneGroup: Something, OtherGroup
+           OtherGroup: OneGroup, SomethingOther
+
+        @param yielded_members: members which have been already yielded before [set]
+        @param processed_groups: group names which have been iterated before [set]
+        """
+
+        if processed_groups is None:
+            processed_groups = set()
+
+        if yielded_members is None:
+            yielded_members = set()
+
+        processed_groups.add(self.name)
+
+        for member in self.members:
+            if member not in yielded_members:
+                yielded_members.add(member)
+                yield member
+
+        groups = self.request.groups
+        for group_name in self.member_groups:
+            if group_name not in processed_groups:
+                if group_name in groups:
+                    for member in groups[group_name].__iter__(yielded_members, processed_groups):
+                        yield member
+                else:
+                    yield group_name
+
+    def __repr__(self):
+        return "<%s name=%s members=%s member_groups=%s>" % (self.__class__,
+                                                             self.name,
+                                                             self.members,
+                                                             self.member_groups)
 
 
 class BaseDict(object):
