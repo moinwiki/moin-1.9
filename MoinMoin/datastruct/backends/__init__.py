@@ -21,23 +21,23 @@ class DictDoesNotExistError(Exception):
 
 class BaseGroup(object):
 
-        def __init__(self, request, name, backend):
-            """
-            Initialize a group.
+    def __init__(self, request, name, backend):
+        """
+        Initialize a group.
 
-            @param request
-            @param name: moin group name
-            @backend: backend object which created this object
-            """
-            self.request = request
-            self.name = name
-            self._backend = backend
+        @param request
+        @param name: moin group name
+        @backend: backend object which created this object
+        """
+        self.request = request
+        self.name = name
+        self._backend = backend
 
-        def __contains__(self, member, processed_groups=None):
-            raise NotImplementedError()
+    def __contains__(self, member, processed_groups=None):
+        raise NotImplementedError()
 
-        def __iter__(self, yielded_members=None, processed_groups=None):
-            raise NotImplementedError()
+    def __iter__(self, yielded_members=None, processed_groups=None):
+        raise NotImplementedError()
 
 
 class BaseGroupsBackend(object):
