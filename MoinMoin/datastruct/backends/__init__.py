@@ -21,17 +21,29 @@ class DictDoesNotExistError(Exception):
 
 class BaseGroup(object):
 
-    def __init__(self, request, name, backend):
-        """
-        Initialize a group.
+        def __init__(self, request, name, backend):
+            """
+            Initialize a group.
 
-        @param request
-        @param name: moin group name
-        @backend: backend object which created this object
-        """
-        self.request = request
-        self.name = name
-        self._backend = backend
+            @param request
+            @param name: moin group name
+            @backend: backend object which created this object
+            """
+            self.request = request
+            self.name = name
+            self._backend = backend
+
+        def __contains__(self, member, processed_groups=None):
+            raise NotImplementedError()
+
+        def __iter__(self, yielded_members=None, processed_groups=None):
+            raise NotImplementedError()
+
+
+class GreedyGroup(BaseGroup):
+
+    def __init__(self, request, name, backend):
+        super(GreedyGroup, self).__init__(request, name, backend)
         self.members, self.member_groups = self._load_group()
 
     def _load_group(self):
@@ -40,7 +52,7 @@ class BaseGroup(object):
         """
         members_retrieved = set(self._backend._retrieve_members(self.name))
 
-        member_groups = set(member for member in members_retrieved if self._backend.is_group(member))
+        member_groups = set(member for member in members_retrieved if self._backend.is_group_name(member))
         members = members_retrieved - member_groups
 
         return members, member_groups
@@ -120,7 +132,7 @@ class BaseGroupsBackend(object):
         self.request = request
         self.page_group_regex = request.cfg.cache.page_group_regexact
 
-    def is_group(self, member):
+    def is_group_name(self, member):
         return self.page_group_regex.match(member)
 
     def __contains__(self, group_name):

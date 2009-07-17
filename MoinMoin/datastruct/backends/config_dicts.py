@@ -23,7 +23,7 @@ class ConfigDicts(BaseDictsBackend):
         self._dicts = dicts
 
     def __contains__(self, dict_name):
-        return self.page_dict_regex.match(dict_name) and dict_name in self._dicts
+        return self.is_dict_name(dict_name) and dict_name in self._dicts
 
     def __iter__(self):
         return self._dicts.iterkeys()

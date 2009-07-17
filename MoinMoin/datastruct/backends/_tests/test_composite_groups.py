@@ -4,7 +4,6 @@
 MoinMoin.datastruct.backends.composite_groups test
 
 @copyright: 2009 MoinMoin:DmitrijsMilajevs
-            2008 MoinMoin: MelitaMihaljevic
 @license: GPL, see COPYING for details
 """
 
@@ -75,7 +74,7 @@ class TestCompositeGroup(object):
         assert u'TheHacker' not in admin_group
 
     def test_iter(self):
-        all_group_names = [group_name for group_name in self.groups]
+        all_group_names = list(self.groups)
 
         assert 5 == len(all_group_names)
         # There are no duplicates

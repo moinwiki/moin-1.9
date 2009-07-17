@@ -1,13 +1,9 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - MoinMoin.backends.wiki_group tests
+    MoinMoin - MoinMoin.backends.config_groups tests
 
-    @copyright: 2003-2004 by Juergen Hermann <jh@web.de>,
-                2007 by MoinMoin:ThomasWaldmann
-                2008 by MoinMoin:MelitaMihaljevic
-                2009 by MoinMoin:DmitrijsMilajevs
+    @copyright: 2009 by MoinMoin:DmitrijsMilajevs
     @license: GNU GPL, see COPYING for details.
-
 """
 
 from MoinMoin.datastruct.backends._tests import GroupsBackendTest

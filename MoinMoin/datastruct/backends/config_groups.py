@@ -8,10 +8,10 @@ The config group backend enables you to define groups in a configuration file.
 @license: GPL, see COPYING for details
 """
 
-from MoinMoin.datastruct.backends import BaseGroup, BaseGroupsBackend, GroupDoesNotExistError
+from MoinMoin.datastruct.backends import GreedyGroup, BaseGroupsBackend, GroupDoesNotExistError
 
 
-class Group(BaseGroup):
+class ConfigGroup(GreedyGroup):
     pass
 
 
@@ -27,13 +27,13 @@ class ConfigGroups(BaseGroupsBackend):
         self._groups = groups
 
     def __contains__(self, group_name):
-        return self.page_group_regex.match(group_name) and group_name in self._groups
+        return group_name in self._groups
 
     def __iter__(self):
         return self._groups.iterkeys()
 
     def __getitem__(self, group_name):
-        return Group(request=self.request, name=group_name, backend=self)
+        return ConfigGroup(request=self.request, name=group_name, backend=self)
 
     def _retrieve_members(self, group_name):
         try:
