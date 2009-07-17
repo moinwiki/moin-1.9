@@ -225,7 +225,8 @@ class BaseDict(object):
 
     def __init__(self, request, name, backend):
         """
-        Initialize a dict.
+        Initialize a dict. Dicts are greedy, it stores all keys and
+        items internally.
 
         @param request
         @param name: moin dict name
