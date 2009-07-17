@@ -15,11 +15,11 @@ first level list (wiki markup).
 
 from MoinMoin import caching, wikiutil
 from MoinMoin.Page import Page
-from MoinMoin.datastruct.backends import BaseGroup, BaseGroupsBackend, GroupDoesNotExistError
+from MoinMoin.datastruct.backends import GreedyGroup, BaseGroupsBackend, GroupDoesNotExistError
 from MoinMoin.formatter.groups import Formatter
 
 
-class WikiGroup(BaseGroup):
+class WikiGroup(GreedyGroup):
 
     def _load_group(self):
         request = self.request
@@ -51,7 +51,7 @@ class WikiGroup(BaseGroup):
 class WikiGroups(BaseGroupsBackend):
 
     def __contains__(self, group_name):
-        return self.is_group(group_name) and Page(self.request, group_name).exists()
+        return self.is_group_name(group_name) and Page(self.request, group_name).exists()
 
     def __iter__(self):
         return iter(self.request.rootpage.getPageList(user='', filter=self.page_group_regex.search))
