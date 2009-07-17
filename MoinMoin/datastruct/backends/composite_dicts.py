@@ -27,8 +27,10 @@ class CompositeDicts(BaseDictsBackend):
         Get a dict by its name. First match counts.
         """
         for backend in self._backends:
-            if dict_name in backend:
+            try:
                 return backend[dict_name]
+            except DictDoesNotExistError:
+                pass
         raise DictDoesNotExistError(dict_name)
 
     def __contains__(self, dict_name):

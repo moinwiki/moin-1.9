@@ -30,8 +30,8 @@ class TestCompositeDict(DictsBackendTest):
 
         def dict_manager_init(self, request):
             return CompositeDicts(request,
-                                  CompositeDicts(request, self.one_dict),
-                                  CompositeDicts(request, self.other_dict))
+                                  ConfigDicts(request, self.one_dict),
+                                  ConfigDicts(request, self.other_dict))
 
 
 coverage_modules = ['MoinMoin.datastruct.backends.composite_dicts']

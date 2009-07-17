@@ -29,8 +29,10 @@ class CompositeGroups(BaseGroupsBackend):
         @param group_name: name of the group [unicode]
         """
         for backend in self._backends:
-            if group_name in backend:
+            try:
                 return backend[group_name]
+            except GroupDoesNotExistError:
+                pass
         raise GroupDoesNotExistError(group_name)
 
     def __iter__(self):
