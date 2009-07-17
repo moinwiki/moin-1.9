@@ -8,7 +8,7 @@
 
 from MoinMoin.datastruct.backends._tests.test_config_groups import TestConfigGroupsBackend
 from MoinMoin.datastruct.backends._tests import GroupsBackendTest
-from MoinMoin.datastruct.backends.config_lazy_groups import LazyConfigGroups
+from MoinMoin.datastruct.backends.config_lazy_groups import ConfigLazyGroups
 from MoinMoin.datastruct import ConfigGroups, CompositeGroups, GroupDoesNotExistError
 from MoinMoin._tests import wikiconfig
 
@@ -27,7 +27,7 @@ class TestLazyConfigGroups(TestConfigGroupsBackend):
 
         def group_manager_init(self, request):
             groups = TestLazyConfigGroups.test_groups
-            return LazyConfigGroups(request, groups)
+            return ConfigLazyGroups(request, groups)
 
     def test_contains_group(self):
         pass
@@ -50,7 +50,7 @@ class TestCompositeAndLazyConfigGroups(GroupsBackendTest):
 
             return CompositeGroups(request,
                                    ConfigGroups(request, config_groups),
-                                   LazyConfigGroups(request, lazy_groups))
+                                   ConfigLazyGroups(request, lazy_groups))
 
 
 coverage_modules = ['MoinMoin.datastruct.backends.config_lazy_groups']
