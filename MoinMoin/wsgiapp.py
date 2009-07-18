@@ -247,7 +247,6 @@ class Application(object):
         try:
             request = self.Request(environ)
             context = init(request)
-            context.groups = context.cfg.groups(context)
             response = run(context)
             context.clock.stop('total')
         except HTTPException, e:
