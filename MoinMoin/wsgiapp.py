@@ -48,9 +48,6 @@ def init(request):
     context.clock.stop('init')
     return context
 
-def init_group_manager(context):
-    context.groups = context.cfg.group_manager_init(context)
-
 def run(context):
     """ Run a context trough the application. """
     context.clock.start('run')
@@ -250,7 +247,7 @@ class Application(object):
         try:
             request = self.Request(environ)
             context = init(request)
-            init_group_manager(context)
+            context.groups = context.cfg.groups(context)
             response = run(context)
             context.clock.stop('total')
         except HTTPException, e:

@@ -10,6 +10,6 @@ from wikiconfig import LocalConfig
 from MoinMoin.datastruct import WikiGroups, WikiDicts
 
 class Config(LocalConfig):
-    group_manager_init = lambda self, request: WikiGroups(request)
-    dict_manager_init = lambda self, request: WikiDicts(request)
+    groups = lambda self, request: WikiGroups(request)
+    dicts = lambda self, request: WikiDicts(request)
 

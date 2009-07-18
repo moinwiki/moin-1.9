@@ -28,7 +28,7 @@ class TestCompositeDict(DictsBackendTest):
         other_dict = {u'SomeOtherTestDict': {u'One': '1',
                                              u'Two': '2'}}
 
-        def dict_manager_init(self, request):
+        def dicts(self, request):
             return CompositeDicts(request,
                                   ConfigDicts(request, self.one_dict),
                                   ConfigDicts(request, self.other_dict))

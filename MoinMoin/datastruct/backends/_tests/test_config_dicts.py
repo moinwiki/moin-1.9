@@ -15,7 +15,7 @@ class TestConfigDictsBackend(DictsBackendTest):
 
     class Config(wikiconfig.Config):
 
-        def dict_manager_init(self, request):
+        def dicts(self, request):
             dicts = DictsBackendTest.dicts
             return ConfigDicts(request, dicts)
 

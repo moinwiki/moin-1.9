@@ -31,7 +31,7 @@ sys.path.insert(0, str(moindir))
 
 from MoinMoin.support.python_compatibility import set
 from MoinMoin.web.request import TestRequest, Client
-from MoinMoin.wsgiapp import Application, init, init_group_manager
+from MoinMoin.wsgiapp import Application, init
 from MoinMoin._tests import maketestwiki, wikiconfig
 
 coverage_modules = set()
@@ -72,7 +72,7 @@ def init_test_request(given_config=None, static_state=[False]):
     request = TestRequest()
     request.given_config = given_config
     request = init(request)
-    init_group_manager(request)
+    request.groups = request.cfg.groups(request)
     return request
 
 

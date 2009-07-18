@@ -371,13 +371,13 @@ class AuxilaryMixin(object):
 
     def dicts(self):
         """ Lazy initialize the dicts on the first access """
-        dicts = self.cfg.dict_manager_init(self)
+        dicts = self.cfg.dicts(self)
         return dicts
     dicts = EnvironProxy(dicts)
 
     def groups(self):
         """ Lazy initialize the groups on the first access """
-        groups = self.cfg.group_manager_init(self)
+        groups = self.cfg.groups(self)
         return groups
     groups = EnvironProxy(groups)
 

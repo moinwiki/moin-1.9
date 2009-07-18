@@ -24,7 +24,7 @@ class TestLazyConfigGroups(TestConfigGroupsBackend):
 
     class Config(wikiconfig.Config):
 
-        def group_manager_init(self, request):
+        def groups(self, request):
             groups = TestLazyConfigGroups.test_groups
             return ConfigLazyGroups(request, groups)
 
@@ -40,7 +40,7 @@ class TestCompositeAndLazyConfigGroups(GroupsBackendTest):
 
     class Config(wikiconfig.Config):
 
-        def group_manager_init(self, request):
+        def groups(self, request):
             config_groups = {u'EditorGroup': [u'AdminGroup', u'John', u'JoeDoe', u'Editor1', u'John'],
                              u'RecursiveGroup': [u'Something', u'OtherRecursiveGroup'],
                              u'OtherRecursiveGroup': [u'RecursiveGroup', u'Anything', u'NotExistingGroup'],
