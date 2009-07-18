@@ -46,10 +46,11 @@ class TextCha(object):
     def _get_textchas(self):
         """ get textchas from the wiki config for the user's language (or default_language or en) """
         request = self.request
+        groups = request.groups
         cfg = request.cfg
         user = request.user
         disabled_group = cfg.textchas_disabled_group
-        if disabled_group and user.name and request.dicts.has_member(disabled_group, user.name):
+        if disabled_group and user.name and user.name in groups.get(disabled_group, []):
             return None
         textchas = cfg.textchas
         if textchas:

@@ -1,0 +1,6 @@
+Version 1.9-groups-dmilajevs:
+
+   New features:
+   * Group and dict backends. Wiki, config and composite backends for both data structures.
+   * request.groups provides to access groups. request.dicts provides access to dicts.
+

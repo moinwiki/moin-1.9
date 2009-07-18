@@ -1,0 +1,27 @@
+    # This is a sample configuration snippet that shows moin's dicts configuration
+    # See HelpOnConfiguration for more info.
+
+    # The wiki_dicts backend is used by default.
+    def dicts(self, request):
+        from MoinMoin.datastruct import WikiDicts
+        return WikiDicts(request)
+
+    # Use only dicts defined in the configuration file.
+    def dicts(self, request):
+        from MoinMoin.datastruct import ConfigDicts
+        dicts = {u'OneDict': {u'first_key': u'first item',
+                              u'second_key': u'second item'},
+                 u'NumbersDict': {u'1': 'One',
+                                  u'2': 'Two'}}
+        return ConfigDicts(request, dicts)
+
+    # Use both config_dicts and wiki_dicts backends.
+    def dicts(self, request):
+        from MoinMoin.datastruct import ConfigDicts, WikiDicts, CompositeDicts
+        dicts = {u'OneDict': {u'first_key': u'first item',
+                              u'second_key': u'second item'},
+                 u'NumbersDict': {u'1': 'One',
+                                  u'2': 'Two'}}
+        return CompositeDicts(request,
+                              ConfigDicts(request, dicts),
+                              WikiDicts(request))

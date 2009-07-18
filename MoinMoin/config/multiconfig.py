@@ -17,6 +17,7 @@ from MoinMoin import log
 logging = log.getLogger(__name__)
 
 from MoinMoin import config, error, util, wikiutil, web
+from MoinMoin import datastruct
 from MoinMoin.auth import MoinAuth
 import MoinMoin.auth as authmodule
 import MoinMoin.events as events
@@ -697,6 +698,13 @@ class DefaultExpression(object):
 # information on the layout of this structure.
 #
 options_no_group_name = {
+  # ==========================================================================
+  'datastruct': ('Datastruct settings', None, (
+    ('dicts', lambda self, request: datastruct.WikiDicts(request),
+     "function f(self, request) that returns a backend which is used to access dicts definitions. See HelpOnDictionaries."),
+    ('groups', lambda self, request: datastruct.WikiGroups(request),
+     "function f(self, request) that returns a backend which is used to access groups definitions."),
+  )),
   # ==========================================================================
   'session': ('Session settings', "Session-related settings, see HelpOnSessions.", (
     ('session_service', DefaultExpression('web.session.FileSessionService()'),
