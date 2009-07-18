@@ -93,8 +93,8 @@ class GroupsBackendTest(object):
         acl = security.AccessControlList(request.cfg, acl_rights)
 
         for user in self.expanded_groups['AdminGroup']:
-            for action in ["read", "write", "admin"]:
-                assert acl.may(request, u"Admin1", action), '%s must have %s right because he is member of the AdminGroup' % (user, action)
+            for permission in ["read", "write", "admin"]:
+                assert acl.may(request, u"Admin1", permission), '%s must have %s permission because he is member of the AdminGroup' % (user, permission)
 
     def test_backend_acl_deny(self):
         """
@@ -107,8 +107,8 @@ class GroupsBackendTest(object):
         acl = security.AccessControlList(request.cfg, acl_rights)
 
         assert u"SomeUser" not in request.groups['AdminGroup']
-        for action in ["read", "write"]:
-            assert not acl.may(request, u"SomeUser", action), 'SomeUser must not have %s right because he is not listed in the AdminGroup' % action
+        for permission in ["read", "write"]:
+            assert not acl.may(request, u"SomeUser", permission), 'SomeUser must not have %s permission because he is not listed in the AdminGroup' % permission
 
         assert u'Admin1' in request.groups['AdminGroup']
         assert not acl.may(request, u"Admin1", "admin")
@@ -120,12 +120,12 @@ class GroupsBackendTest(object):
         acl = security.AccessControlList(request.cfg, acl_rights)
 
         for member in self.expanded_groups[u'EditorGroup']:
-            for action in ["read", "write", "delete", "admin"]:
-                assert acl.may(request, member, action)
+            for permission in ["read", "write", "delete", "admin"]:
+                assert acl.may(request, member, permission)
 
         assert acl.may(request, u"Someone", "read")
-        for action in ["write", "delete", "admin"]:
-            assert not acl.may(request, u"Someone", action)
+        for permission in ["write", "delete", "admin"]:
+            assert not acl.may(request, u"Someone", permission)
 
     def test_backend_acl_not_existing_group(self):
         request = self.request
