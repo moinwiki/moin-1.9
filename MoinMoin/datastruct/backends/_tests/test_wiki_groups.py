@@ -22,8 +22,8 @@ from MoinMoin._tests import append_page, become_trusted, create_page, create_ran
 
 class TestWikiGroupBackend(GroupsBackendTest):
 
-    # Suppose that default configuration for the group_manager_init is
-    # used which is WikiGroups backend.
+    # Suppose that default configuration for the groups is used which
+    # is WikiGroups backend.
 
     def setup_class(self):
         become_trusted(self.request)

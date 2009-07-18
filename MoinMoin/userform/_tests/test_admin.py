@@ -17,7 +17,7 @@ class TestAdmin:
 
     class Config(wikiconfig.Config):
 
-        def group_manager_init(self, request):
+        def groups(self, request):
             groups = {'OneGroup': ['TestUser, OtherUser'],
                       'OtherGroup': ['TestUser']}
             return ConfigGroups(request, groups)

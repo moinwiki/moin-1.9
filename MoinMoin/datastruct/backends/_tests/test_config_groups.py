@@ -15,7 +15,7 @@ class TestConfigGroupsBackend(GroupsBackendTest):
 
     class Config(wikiconfig.Config):
 
-        def group_manager_init(self, request):
+        def groups(self, request):
             groups = GroupsBackendTest.test_groups
             return ConfigGroups(request, groups)
 

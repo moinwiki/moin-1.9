@@ -19,7 +19,7 @@ class TestCompositeGroupsBackend(GroupsBackendTest):
 
     class Config(wikiconfig.Config):
 
-        def group_manager_init(self, request):
+        def groups(self, request):
             groups = GroupsBackendTest.test_groups
             return CompositeGroups(request, ConfigGroups(request, groups))
 
@@ -49,7 +49,7 @@ class TestCompositeGroup(object):
                                  # first_backend and second_backend.
                                  u'AdminGroup': second_admin_group}
 
-        def group_manager_init(self, request):
+        def groups(self, request):
             return CompositeGroups(request,
                                    ConfigGroups(request, self.first_backend_groups),
                                    ConfigGroups(request, self.second_backend_groups))
