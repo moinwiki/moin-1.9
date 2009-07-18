@@ -100,6 +100,21 @@ class LazyGroup(BaseGroup):
     """
     A lazy group does not store members internally, but gets them from
     a backend when needed.
+
+    Lazy group is made only of members. It can not consist of other groups.
+
+    For instance, this is a possible LazyGroup:
+
+     PossibleGroup
+      * OneMember
+      * OtherMember
+
+    This is a group which cannot be LazyGroup:
+
+     NotPossibleGroup
+      * OneMember
+      * OtherMember
+      * OtherGroup
     """
 
     def __init__(self, request, name, backend):

@@ -18,8 +18,7 @@ class TestLazyConfigGroups(TestConfigGroupsBackend):
     test_groups = {u'EditorGroup': [u'John', u'JoeDoe', u'Editor1'],
                    u'AdminGroup': [u'Admin1', u'Admin2', u'John'],
                    u'OtherGroup': [u'SomethingOther'],
-                   u'EmptyGroup': [],
-                   u'CheckNotExistingGroup': [u'NotExistingGroup']}
+                   u'EmptyGroup': []}
 
     expanded_groups = test_groups
 
@@ -30,7 +29,11 @@ class TestLazyConfigGroups(TestConfigGroupsBackend):
             return ConfigLazyGroups(request, groups)
 
     def test_contains_group(self):
-        pass
+        """
+        ConfigLazyGroups can not contain other group members.
+
+        This test does not have sense.
+        """
 
 
 class TestCompositeAndLazyConfigGroups(GroupsBackendTest):
