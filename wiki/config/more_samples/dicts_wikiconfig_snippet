@@ -2,12 +2,12 @@
     # See HelpOnConfiguration for more info.
 
     # The wiki_dicts backend is used by default.
-    def dict_manager_init(self, request):
+    def dicts(self, request):
         from MoinMoin.datastruct import WikiDicts
         return WikiDicts(request)
 
     # Use only dicts defined in the configuration file.
-    def dict_manager_init(self, request):
+    def dicts(self, request):
         from MoinMoin.datastruct import ConfigDicts
         dicts = {u'OneDict': {u'first_key': u'first item',
                               u'second_key': u'second item'},
@@ -16,7 +16,7 @@
         return ConfigDicts(request, dicts)
 
     # Use both config_dicts and wiki_dicts backends.
-    def dict_manager_init(self, request):
+    def dicts(self, request):
         from MoinMoin.datastruct import ConfigDicts, WikiDicts, CompositeDicts
         dicts = {u'OneDict': {u'first_key': u'first item',
                               u'second_key': u'second item'},
