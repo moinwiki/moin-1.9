@@ -87,25 +87,25 @@ General syntax: moin [options] maint mkpagepacks [mkpagepacks-options]
             os.remove(filename)
         except OSError:
             pass
+
+        existing_pages = [pagename for pagename in pagelist if Page(request, pagename).exists()]
+        if not existing_pages:
+            return
+
         zf = zipfile.ZipFile(filename, "w", COMPRESSION_LEVEL)
 
-        cnt = 0
         script = [packLine(['MoinMoinPackage', '1']), ]
 
-        for pagename in pagelist:
+        cnt = 0
+        for pagename in existing_pages:
             pagename = pagename.strip()
             page = Page(request, pagename)
-            if page.exists():
-                cnt += 1
-                script.append(packLine([function, str(cnt), pagename]))
-                timestamp = wikiutil.version2timestamp(page.mtime_usecs())
-                zi = zipfile.ZipInfo(filename=str(cnt), date_time=datetime.fromtimestamp(timestamp).timetuple()[:6])
-                zi.compress_type = COMPRESSION_LEVEL
-                zf.writestr(zi, page.get_raw_body().encode("utf-8"))
-            else:
-                #import sys
-                #print >>sys.stderr, "Could not find the page %s." % pagename.encode("utf-8")
-                pass
+            cnt += 1
+            script.append(packLine([function, str(cnt), pagename]))
+            timestamp = wikiutil.version2timestamp(page.mtime_usecs())
+            zi = zipfile.ZipInfo(filename=str(cnt), date_time=datetime.fromtimestamp(timestamp).timetuple()[:6])
+            zi.compress_type = COMPRESSION_LEVEL
+            zf.writestr(zi, page.get_raw_body().encode("utf-8"))
 
         script += [packLine(['Print', 'Installed MoinMaster page bundle %s.' % os.path.basename(filename)])]
 
