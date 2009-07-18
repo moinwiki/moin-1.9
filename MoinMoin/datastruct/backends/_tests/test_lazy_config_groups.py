@@ -32,7 +32,7 @@ class TestLazyConfigGroups(TestConfigGroupsBackend):
         """
         ConfigLazyGroups can not contain other group members.
 
-        This test does not have sense.
+        This test does not make sense.
         """
 
 
