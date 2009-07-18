@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-10 01:26+0200\n"
+"POT-Creation-Date: 2009-07-10 10:24+0200\n"
 "PO-Revision-Date: 2008-06-18 07:54+0900\n"
-"Last-Translator: MasatakeIwasaki\n"
+"Last-Translator: HiroshiIwasaki\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -466,12 +466,11 @@ msgstr "\"%(token)s\"キーに値がありません。"
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "不正な正規表現ハイライト: \"%(regex)s\": %(error)s"
 
-#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will ranked lower in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
-"このページのバックアップ保存された内容は\"deprecated\"であるため、検索結果に"
+"このページのバックアップ保存された内容は古いため、検索結果に"
 "は含まれません。"
 
 #, python-format
@@ -835,7 +834,6 @@ msgstr ""
 "(!) 詳細はHelpOnEditingや [\"シンタックスリファレンス\"]を参照してくださ"
 "い。\n"
 
-#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
@@ -867,7 +865,7 @@ msgstr ""
 " 表:: || セルテキスト |||| 2列にわたるセルテキスト ||、表やタイトルのあとには"
 "空白を入力しないでください。\n"
 "\n"
-"(!) 詳細はHelpOnEditingや [\"シンタックスリファレンス\"]を参照してくださ"
+"(!) 詳細は HelpOnEditing や [[シンタックスリファレンス]]を参照してくださ"
 "い。\n"
 
 #, python-format
@@ -1196,7 +1194,7 @@ msgstr ""
 msgid "New user account created on %(sitename)s"
 msgstr "%(sitename)s において新規ユーザアカウントが作成されました。"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Dear Superuser, a new user has just been created on %(sitename)s\". Details "
 "follow:\n"
@@ -1204,7 +1202,7 @@ msgid ""
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
 msgstr ""
-"以下のユーザが作成されました。\n"
+"スーパーユーザーさん、%(sitename)s\" において以下のユーザが作成されました。\n"
 "\n"
 "    ユーザ名: %(username)s\n"
 "    メールアドレス: %(useremail)s"
@@ -1345,13 +1343,11 @@ msgstr "存在しないページ"
 msgid "MissingHomePage"
 msgstr "存在しないホームページ"
 
-#, fuzzy
 msgid "WikiHomePage"
-msgstr "存在しないホームページ"
+msgstr "Wikiホームページ"
 
-#, fuzzy
 msgid "WikiName"
-msgstr "名前"
+msgstr "Wiki名"
 
 msgid "WikiWikiWeb"
 msgstr ""
@@ -1360,68 +1356,58 @@ msgid "FrontPage"
 msgstr "フロントページ"
 
 msgid "WikiSandBox"
-msgstr ""
+msgstr "Wikiサンドボックス"
 
-#, fuzzy
 msgid "InterWiki"
-msgstr "Wiki"
+msgstr "InterWiki"
 
 msgid "AbandonedPages"
-msgstr ""
+msgstr "見捨てられたページ"
 
-#, fuzzy
 msgid "OrphanedPages"
-msgstr "変更されたページ"
+msgstr "リンクされていないページ"
 
-#, fuzzy
 msgid "WantedPages"
-msgstr "親ページ"
+msgstr "作成が必要なページ"
 
 msgid "EventStats"
-msgstr ""
+msgstr "統計情報"
 
 msgid "EventStats/HitCounts"
-msgstr ""
+msgstr "統計情報/ヒットカウント"
 
 msgid "EventStats/Languages"
-msgstr ""
+msgstr "統計情報/言語"
 
 msgid "EventStats/UserAgents"
-msgstr ""
+msgstr "統計情報/ユーザーエージェント"
 
-#, fuzzy
 msgid "PageSize"
-msgstr "サイズ"
+msgstr "ページサイズ"
 
-#, fuzzy
 msgid "PageHits"
-msgstr "ページ"
+msgstr "ページヒット"
 
-#, fuzzy
 msgid "RandomPage"
-msgstr "ページ名変更"
+msgstr "ランダムページ"
 
-#, fuzzy
 msgid "XsltVersion"
-msgstr "Pythonのバージョン"
+msgstr ""
 
 msgid "FortuneCookies"
-msgstr ""
+msgstr "フォーチュンクッキー"
 
 msgid "WikiLicense"
 msgstr "Wikiライセンス"
 
-#, fuzzy
 msgid "CategoryCategory"
 msgstr "すべてのカテゴリー"
 
-#, fuzzy
 msgid "CategoryHomepage"
-msgstr "カテゴリー"
+msgstr ""
 
-#, fuzzy
 msgid "CategoryTemplate"
-msgstr "カテゴリー"
+msgstr ""
 
 msgid "HomepageTemplate"
 msgstr ""
@@ -1444,9 +1430,8 @@ msgstr ""
 msgid "SlideShowHandOutTemplate"
 msgstr ""
 
-#, fuzzy
 msgid "SlideShowTemplate"
-msgstr "スライドショー"
+msgstr ""
 
 msgid "SlideTemplate"
 msgstr ""
@@ -1454,9 +1439,8 @@ msgstr ""
 msgid "SyncJobTemplate"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnConfiguration"
-msgstr "書式のヘルプ"
+msgstr ""
 
 msgid "HelpOnConfiguration/EmailSupport"
 msgstr ""
@@ -1473,24 +1457,20 @@ msgstr ""
 msgid "HelpOnConfiguration/SurgeProtection"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnConfiguration/UserPreferences"
-msgstr "ユーザプレファレンス"
+msgstr ""
 
 msgid "HelpOnPackageInstaller"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnUpdating"
-msgstr "書式のヘルプ"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnUpdatingPython"
-msgstr "書式のヘルプ"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnAdministration"
-msgstr "書式のヘルプ"
+msgstr ""
 
 msgid "HelpOnAuthentication"
 msgstr ""
@@ -1498,42 +1478,35 @@ msgstr ""
 msgid "HelpOnAuthentication/ExternalCookie"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnMoinCommand"
-msgstr "書式のヘルプ"
+msgstr ""
 
 msgid "HelpOnMoinCommand/ExportDump"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnNotification"
-msgstr "メールで通知"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnSessions"
-msgstr "ヘルプの目次"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnUserHandling"
-msgstr "書式のヘルプ"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnXapian"
-msgstr "書式のヘルプ"
+msgstr ""
 
 msgid "HelpOnMoinWikiSyntax"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnCreoleSyntax"
-msgstr "ヘルプの目次"
+msgstr ""
 
 msgid "HelpOnFormatting"
 msgstr "書式のヘルプ"
 
-#, fuzzy
 msgid "MoinMoin"
-msgstr "MoinMoinのバージョン"
+msgstr ""
 
 msgid "HelpContents"
 msgstr "ヘルプの目次"
@@ -1544,31 +1517,26 @@ msgstr ""
 msgid "HelpForUsers"
 msgstr ""
 
-#, fuzzy
 msgid "HelpIndex"
-msgstr "タイトルインデックス"
+msgstr "ヘルプインデックス"
 
 msgid "HelpOnAccessControlLists"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnActions"
-msgstr "ヘルプの目次"
+msgstr ""
 
 msgid "HelpOnActions/AttachFile"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnAdmonitions"
-msgstr "ヘルプの目次"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnAutoAdmin"
-msgstr "書式のヘルプ"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnCategories"
-msgstr "カテゴリー"
+msgstr ""
 
 msgid "HelpOnDictionaries"
 msgstr ""
@@ -1576,9 +1544,8 @@ msgstr ""
 msgid "HelpOnEditLocks"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnEditing"
-msgstr "書式のヘルプ"
+msgstr ""
 
 msgid "HelpOnEditing/SubPages"
 msgstr ""
@@ -1589,24 +1556,20 @@ msgstr ""
 msgid "HelpOnHeadlines"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnLanguages"
-msgstr "言語"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnLinking"
-msgstr "書式のヘルプ"
+msgstr ""
 
 msgid "HelpOnLinking/NotesLinks"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnLists"
-msgstr "ヘルプの目次"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnLogin"
-msgstr "書式のヘルプ"
+msgstr ""
 
 msgid "HelpOnMacros"
 msgstr ""
@@ -1623,16 +1586,14 @@ msgstr ""
 msgid "HelpOnMacros/MonthCalendar"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnNavigation"
-msgstr "サイトナビゲーション"
+msgstr ""
 
 msgid "HelpOnOpenIDProvider"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnPageCreation"
-msgstr "書式のヘルプ"
+msgstr ""
 
 msgid "HelpOnPageDeletion"
 msgstr ""
@@ -1649,17 +1610,14 @@ msgstr ""
 msgid "HelpOnProcessingInstructions"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnRules"
-msgstr "ヘルプの目次"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnSearching"
-msgstr "書式のヘルプ"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnSlideShows"
-msgstr "スライドショー"
+msgstr ""
 
 msgid "HelpOnSlideShows/000 Introduction"
 msgstr ""
@@ -1676,16 +1634,14 @@ msgstr ""
 msgid "HelpOnSpam"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnSpellCheck"
-msgstr "スペルチェック"
+msgstr ""
 
 msgid "HelpOnSuperUser"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnSynchronisation"
-msgstr "同期開始 -"
+msgstr ""
 
 msgid "HelpOnTables"
 msgstr ""
@@ -1696,24 +1652,20 @@ msgstr ""
 msgid "HelpOnThemes"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnUserPreferences"
-msgstr "ユーザプレファレンス"
+msgstr ""
 
 msgid "HelpOnVariables"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnXmlPages"
-msgstr "書式のヘルプ"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnComments"
-msgstr "ヘルプの目次"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnSubscribing"
-msgstr "購読中止"
+msgstr ""
 
 msgid "CamelCase"
 msgstr ""
@@ -1733,9 +1685,8 @@ msgstr ""
 msgid "WikiCourse/04 Creating a wiki account"
 msgstr ""
 
-#, fuzzy
 msgid "WikiCourse/05 User preferences"
-msgstr "ユーザプレファレンス"
+msgstr ""
 
 msgid "WikiCourse/06 Your own wiki homepage"
 msgstr ""
@@ -1770,9 +1721,8 @@ msgstr ""
 msgid "WikiCourse/17 External links"
 msgstr ""
 
-#, fuzzy
 msgid "WikiCourse/18 Attachments"
-msgstr "ファイルの新規添付"
+msgstr ""
 
 msgid "WikiCourse/19 Symbols"
 msgstr ""
@@ -1786,9 +1736,8 @@ msgstr ""
 msgid "WikiCourse/22 Parsers"
 msgstr ""
 
-#, fuzzy
 msgid "WikiCourse/23 Actions"
-msgstr "その他のアクション:"
+msgstr ""
 
 msgid "WikiCourse/30 The graphical editor"
 msgstr ""
@@ -2050,7 +1999,6 @@ msgstr ""
 msgid "Variable name"
 msgstr ""
 
-#, fuzzy
 msgid "Setting"
 msgstr "設定"
 
@@ -3232,7 +3180,7 @@ msgstr "このアクションを行う権限がありません。"
 msgid "Please first create a homepage before creating additional pages."
 msgstr "最初にホームページを作成してください。"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "You can add some additional sub pages to your already existing homepage "
 "here.\n"
@@ -3273,9 +3221,9 @@ msgstr ""
 "||'''新しいパーソナルページの追加:'''||'''関連するアクセスコントロールリスト"
 "グループ:'''||\n"
 "||<<NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)>>||"
-"[\"%(username)s/ReadWriteGroup\"]||\n"
-"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[\"%"
-"(username)s/ReadGroup\"]||\n"
+"[[%(username)s/ReadWriteGroup]]||\n"
+"||<<NewPage(HomepageReadPageTemplate,read-only page,%(username)s)>>||[[%"
+"(username)s/ReadGroup]]||\n"
 "||<<NewPage(HomepagePrivatePageTemplate,private page,%(username)s)>>||%"
 "(username)s only||\n"
 "\n"
