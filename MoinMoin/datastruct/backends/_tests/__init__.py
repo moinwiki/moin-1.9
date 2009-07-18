@@ -92,9 +92,9 @@ class GroupsBackendTest(object):
         acl_rights = ["AdminGroup:admin,read,write"]
         acl = security.AccessControlList(request.cfg, acl_rights)
 
-        allow = acl.may(request, u"Admin1", "admin")
-
-        assert allow, 'Admin has read rights because he is member of AdminGroup'
+        for user in self.expanded_groups['AdminGroup']:
+            for action in ["read", "write", "admin"]:
+                assert acl.may(request, u"Admin1", action), '%s must have %s right because he is member of the AdminGroup' % (user, action)
 
     def test_backend_acl_deny(self):
         """
@@ -106,11 +106,12 @@ class GroupsBackendTest(object):
         acl_rights = ["AdminGroup:read,write"]
         acl = security.AccessControlList(request.cfg, acl_rights)
 
-        other_user_allow = acl.may(request, u"OtherUser", "admin")
-        some_user_allow = acl.may(request, u"SomeUser", "read")
+        assert u"SomeUser" not in request.groups['AdminGroup']
+        for action in ["read", "write"]:
+            assert not acl.may(request, u"SomeUser", action), 'SomeUser must not have %s right because he is not listed in the AdminGroup' % action
 
-        assert not other_user_allow, 'OtherUser does not have admin rights because it is not listed in acl'
-        assert not some_user_allow, 'SomeUser does not have admin read right because he is not listed in the AdminGroup'
+        assert u'Admin1' in request.groups['AdminGroup']
+        assert not acl.may(request, u"Admin1", "admin")
 
     def test_backend_acl_with_all(self):
         request = self.request
@@ -118,17 +119,13 @@ class GroupsBackendTest(object):
         acl_rights = ["EditorGroup:read,write,delete,admin All:read"]
         acl = security.AccessControlList(request.cfg, acl_rights)
 
-
         for member in self.expanded_groups[u'EditorGroup']:
-            assert acl.may(request, member, "read")
-            assert acl.may(request, member, "write")
-            assert acl.may(request, member, "delete")
-            assert acl.may(request, member, "admin")
+            for action in ["read", "write", "delete", "admin"]:
+                assert acl.may(request, member, action)
 
         assert acl.may(request, u"Someone", "read")
-        assert not acl.may(request, u"Someone", "write")
-        assert not acl.may(request, u"Someone", "delete")
-        assert not acl.may(request, u"Someone", "admin")
+        for action in ["write", "delete", "admin"]:
+            assert not acl.may(request, u"Someone", action)
 
     def test_backend_acl_not_existing_group(self):
         request = self.request
