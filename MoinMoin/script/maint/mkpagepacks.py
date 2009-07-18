@@ -145,7 +145,9 @@ General syntax: moin [options] maint mkpagepacks [mkpagepacks-options]
         pageSets = self.buildPageSets()
 
         print "Creating packages ..."
-        generate_filename = lambda name: os.path.join('tests', 'wiki', 'underlay', 'pages', 'LanguageSetup', 'attachments', '%s.zip' % name)
+        package_path = os.path.join('tests', 'wiki', 'underlay', 'pages', 'LanguageSetup', 'attachments')
+        os.mkdir(package_path)
+        generate_filename = lambda name: os.path.join(package_path, '%s.zip' % name)
         [self.packagePages(list(pages), generate_filename(name), "ReplaceUnderlay") for name, pages in pageSets.items()]
 
         print "Removing pagedirs of packaged pages ..."
