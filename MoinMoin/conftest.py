@@ -72,7 +72,6 @@ def init_test_request(given_config=None, static_state=[False]):
     request = TestRequest()
     request.given_config = given_config
     request = init(request)
-    request.groups = request.cfg.groups(request)
     return request
 
 
