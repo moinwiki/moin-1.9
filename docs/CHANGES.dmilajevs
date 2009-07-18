@@ -1,9 +1,6 @@
 Version 1.9-groups-dmilajevs:
 
    New features:
-   * Group backends. Group definitions can be stored outside of MoinMoin.
-   * MoinMoin.security.AccessControlList works with the new GroupManager.
-   * wikidicts provide only WikiDicts related functionality.
-   * Use request.dicts to access WikiDict and request.groups to access groups.
-   * request.dicts __contains__ must be used instead of has_dict and __getitem__ instead of dict.
+   * Group and dict backends. Wiki, config and composite backends for both data structures.
+   * request.groups provides to access groups. request.dicts provides access to dicts.
 
