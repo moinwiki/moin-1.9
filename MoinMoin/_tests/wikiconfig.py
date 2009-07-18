@@ -16,7 +16,7 @@ import os
 from MoinMoin.config.multiconfig import DefaultConfig
 
 
-class LocalConfig(DefaultConfig):
+class Config(DefaultConfig):
     sitename = u'Developer Test Wiki'
     logo_string = sitename
 
@@ -30,11 +30,4 @@ class LocalConfig(DefaultConfig):
 
     # used to check if it is really a wiki we may modify
     is_test_wiki = True
-
-try:
-    from wikiconfig_groups import Config
-except ImportError, err:
-    if not str(err).endswith('wikiconfig_groups'):
-        raise
-    Config = LocalConfig
 
