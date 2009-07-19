@@ -700,10 +700,10 @@ class DefaultExpression(object):
 options_no_group_name = {
   # ==========================================================================
   'datastruct': ('Datastruct settings', None, (
-    ('dicts', lambda self, request: datastruct.WikiDicts(request),
-     "function f(self, request) that returns a backend which is used to access dicts definitions. See HelpOnDictionaries."),
-    ('groups', lambda self, request: datastruct.WikiGroups(request),
-     "function f(self, request) that returns a backend which is used to access groups definitions."),
+    ('dicts', lambda cfg, request: datastruct.WikiDicts(request),
+     "function f(cfg, request) that returns a backend which is used to access dicts definitions."),
+    ('groups', lambda cfg, request: datastruct.WikiGroups(request),
+     "function f(cfg, request) that returns a backend which is used to access groups definitions."),
   )),
   # ==========================================================================
   'session': ('Session settings', "Session-related settings, see HelpOnSessions.", (
