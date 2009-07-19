@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-MoinMoin - base classes for datastruct backends.
+MoinMoin - base classes for datastructs.
 
 @copyright: 2009 MoinMoin:DmitrijsMilajevs
 @license: GPL, see COPYING for details
@@ -20,6 +20,10 @@ class DictDoesNotExistError(Exception):
 
 
 class BaseGroup(object):
+    """
+    Group is something which stores members. Groups are immutable. A
+    member is some arbitrary entity name (Unicode object).
+    """
 
     def __init__(self, request, name, backend):
         """
@@ -41,6 +45,10 @@ class BaseGroup(object):
 
 
 class BaseGroupsBackend(object):
+    """
+    Backend provides access to the group definitions for the other
+    MoinMoin code.
+    """
 
     def __init__(self, request):
         self.request = request
@@ -150,6 +158,11 @@ class LazyGroupsBackend(BaseGroupsBackend):
 
 
 class GreedyGroup(BaseGroup):
+    """
+    GreedyGroup gets all members during initialization and stores them internally.
+
+    Members of a group may be names of other groups.
+    """
 
     def __init__(self, request, name, backend):
 

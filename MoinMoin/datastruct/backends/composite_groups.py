@@ -2,6 +2,11 @@
 """
 MoinMoin - group access via various backends.
 
+The composite_groups is a backend that does not have direct storage,
+but composes other backends to a new one, so group definitions are
+retrieved from several backends. This allows to mix different
+backends.
+
 @copyright: 2009 DmitrijsMilajevs
 @license: GPL, see COPYING for details
 """
@@ -25,8 +30,6 @@ class CompositeGroups(BaseGroupsBackend):
     def __getitem__(self, group_name):
         """
         Get a group by its name. First match counts.
-
-        @param group_name: name of the group [unicode]
         """
         for backend in self._backends:
             try:
@@ -38,6 +41,10 @@ class CompositeGroups(BaseGroupsBackend):
     def __iter__(self):
         """
         Iterate over group names in all backends (filtering duplicates).
+
+        If a group with same name is defined in several backends, the
+        composite_groups backend yields only backend which is listed
+        earlier in self._backends.
         """
         yielded_groups = set()
 

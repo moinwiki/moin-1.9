@@ -1,8 +1,9 @@
 # -*- coding: iso-8859-1 -*-
 """
-MoinMoin - config group backend
+MoinMoin - config groups backend
 
-The config group backend enables you to define groups in a configuration file.
+The config_groups backend enables one to define groups and their
+members in a configuration file.
 
 @copyright: 2009 MoinMoin:DmitrijsMilajevs
 @license: GPL, see COPYING for details
