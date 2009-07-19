@@ -2,13 +2,19 @@
 """
 MoinMoin - wiki group backend
 
-The wiki group backend enables you to define groups on wiki pages.  To
-find group pages, request.cfg.cache.page_group_regexact pattern is
-used.  To find group members, it parses these pages and extracts the
-first level list (wiki markup).
+The wiki_groups backend allows to define groups on wiki pages. See
+SystemPagesGroup as example of a group page.
+
+Normally, the name of the group page has to end with Group like
+FriendsGroup. This lets MoinMoin recognize it as a group. This default
+pattern could be changed (e.g. for non-english languages etc.), see
+HelpOnConfiguration.
+
+MoinMoin.formatter.groups is used to extract group members from a
+page.
+
 
 @copyright: 2008 MoinMoin:ThomasWaldmann,
-            2008 MoinMoin:MelitaMihaljevic,
             2009 MoinMoin:DmitrijsMilajevs
 @license: GPL, see COPYING for details
 """
@@ -54,12 +60,18 @@ class WikiGroups(BaseGroupsBackend):
         return self.is_group_name(group_name) and Page(self.request, group_name).exists()
 
     def __iter__(self):
+        """
+        To find group pages, request.cfg.cache.page_group_regexact pattern is used.
+        """
         return iter(self.request.rootpage.getPageList(user='', filter=self.page_group_regex.search))
 
     def __getitem__(self, group_name):
         return WikiGroup(request=self.request, name=group_name, backend=self)
 
     def _retrieve_members(self, group_name):
+        """
+        MoinMoin.formatter.groups is used to extract group members from a page.
+        """
         formatter = Formatter(self.request)
         page = Page(self.request, group_name, formatter=formatter)
 
