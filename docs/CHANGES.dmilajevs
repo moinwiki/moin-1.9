@@ -2,5 +2,11 @@ Version 1.9-groups-dmilajevs:
 
    New features:
    * Group and dict backends. Wiki, config and composite backends for both data structures.
+
+   Admin Notes:
+   * New dicts and groups configuration options. See wiki/config/more_samples/dicts_wikiconfig_snippet and wiki/config/more_samples/groups_wikiconfig_snippet for configuration examples.
+
+   Developer notes:
    * request.groups provides to access groups. request.dicts provides access to dicts.
+   * 'SomeDict' in request.dicts must be used instead of has_dict() and request.dicts['SomeDict'] instead of dict().
 
