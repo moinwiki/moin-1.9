@@ -13,7 +13,7 @@ from MoinMoin.search import QueryError
 from MoinMoin.search.queryparser import QueryParser
 from MoinMoin.search import Xapian
 from MoinMoin import search
-
+from MoinMoin._tests import nuke_xapian_index
 
 class TestQueryParsing:
     """ search: query parser tests """
@@ -119,6 +119,7 @@ class TestXapianIndex:
 
         idx = Xapian.Index(self.request)
         idx.indexPages(['HomePageWiki'], mode='add')
+        nuke_xapian_index(self.request)
 
     def testIndexInNewThread(self):
         """ search: kicks off indexing for a page in a new thread in Xapian"""
@@ -127,6 +128,7 @@ class TestXapianIndex:
 
         idx = Xapian.Index(self.request)
         idx.indexPagesInNewThread(['HomePageWiki'], mode='add')
+        nuke_xapian_index(self.request)
 
 coverage_modules = ['MoinMoin.search']
 
