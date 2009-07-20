@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-10 01:26+0200\n"
+"POT-Creation-Date: 2009-07-10 10:24+0200\n"
 "PO-Revision-Date: 2008-05-23 03:00+0200\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -466,7 +466,7 @@ msgstr ""
 
 #, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will ranked lower in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr "Vsebina varnostne kopije je zastarela in ne bo upoštevana pri iskanju!"
 
