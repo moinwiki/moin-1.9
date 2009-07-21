@@ -1,12 +1,12 @@
-    # This is a sample configuration snippet that shows moin's groups configuration
+    # This is a sample configuration snippet that shows moin's groups configuration.
     # See HelpOnConfiguration for more info.
 
-    # The wiki_groups backend is used by default.
+    # WikiGroups backend gets groups from wiki pages and is used by default.
     def groups(self, request):
         from MoinMoin.datastruct import WikiGroups
         return WikiGroups(request)
 
-    # Use only groups defined in the configuration file.
+    # ConfigGroups uses groups defined in the configuration file.
     def groups(self, request):
         from MoinMoin.datastruct import ConfigGroups
         # Groups are defined here.
@@ -14,7 +14,7 @@
                   u'AdminGroup': [u'Admin1', u'Admin2', u'John']}
         return ConfigGroups(request, groups)
 
-    # Use both config_groups and wiki_groups backends.
+    # CompositeGroups to use both ConfigGroups and WikiGroups backends.
     def groups(self, request):
         from MoinMoin.datastruct import ConfigGroups, WikiGroups, CompositeGroups
         groups = {u'EditorGroup': [u'AdminGroup', u'John', u'JoeDoe', u'Editor1'],
