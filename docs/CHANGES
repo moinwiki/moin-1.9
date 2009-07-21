@@ -16,6 +16,35 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
+Version 1.9-groups-dmilajevs:
+
+   New features:
+   * Group and dict backends.
+     * WikiGroups and WikiDicts backends get data from wikipages. They
+       work similar to old wikidicts code.
+     * ConfigGroups and ConfigDicts backends get data from a
+       dictionary defined in a configuration file.
+     * CompositeGroups and CompositeDicts compose several backens,
+       so data may be retrieved from several sources. For example,
+       groups may be defined in configuration file and in wiki pages.
+   * cfg.groups is new and by default initializes wiki_groups backend.
+     See wiki/config/more_samples/groups_wikiconfig_snippet.
+   * cfg.dicts is new and by default initializes wiki_dicts backend.
+     See wiki/config/more_samples/groups_wikiconfig_snippet.
+   * http://master19.moinmo.in/HelpOnDictionaries was updated.
+   * New help page http://master19.moinmo.in/HelpOnGroups
+
+   Developer notes:
+   * request.groups provides access to groups.
+   * request.dicts provides access to dicts.
+   * Removed MoinMoin.wikidicts module. It was refactored and became
+     MoinMoin.datastruct.
+   * LazyGroup and LazyGroupsBackend base classes for implementing
+     backends which deal with huge amount of data. (Like LDAP
+     directory). Use MoinMoin/datastruct/backends/config_lazy_groups.py
+     as a draft for new  backends.
+   * See http://moinmo.in/Groups2009 for more details.
+
 Version 1.9.0beta2:
 
   Please note:
