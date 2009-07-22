@@ -385,7 +385,7 @@ class Macro:
         key = wikiutil.get_unicode(self.request, key, 'key')
         if page is None or key is None:
             raise ValueError("You need to give: pagename, key")
-        d = self.request.dicts.dict(page)
+        d = self.request.dicts[page]
         result = d.get(key, '')
         return self.formatter.text(result)
 

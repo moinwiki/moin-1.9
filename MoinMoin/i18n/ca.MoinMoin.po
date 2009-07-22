@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 23:09+0200\n"
+"POT-Creation-Date: 2009-07-10 10:24+0200\n"
 "PO-Revision-Date: 2008-07-30 17:24+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -357,10 +357,9 @@ msgstr "El paquet necessita una versió més nova del MoinMoin (almenys %s)."
 msgid "The theme name is not set."
 msgstr "No s'ha establert el nom del tema."
 
-msgid "Installing theme files is only supported for standalone type servers."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
 msgstr ""
-"La instal·lació de fitxers de tema només està implementada per a servidors "
-"de tipus individual."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -457,8 +456,9 @@ msgstr "S'esperava un valor per a la clau «%(token)s»"
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr ""
 
+#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
 "La còpia de seguretat dels continguts d'aquesta pàgina és obsoleta i no "
@@ -1514,9 +1514,6 @@ msgstr "ÍndexTítols"
 msgid "HelpOnAccessControlLists"
 msgstr ""
 
-msgid "HelpOnAcl"
-msgstr ""
-
 #, fuzzy
 msgid "HelpOnActions"
 msgstr "ContingutsAjuda"
@@ -1577,9 +1574,6 @@ msgid "HelpOnMacros"
 msgstr ""
 
 msgid "HelpOnMacros/EmbedObject"
-msgstr ""
-
-msgid "HelpOnMacros/ImageLink"
 msgstr ""
 
 msgid "HelpOnMacros/Include"
@@ -3359,6 +3353,12 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr ""
+#~ "La instal·lació de fitxers de tema només està implementada per a "
+#~ "servidors de tipus individual."
 
 #, fuzzy
 #~ msgid "InterWikiMap"

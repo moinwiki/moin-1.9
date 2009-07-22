@@ -17,7 +17,6 @@ from MoinMoin import wikiutil
 from MoinMoin.packages import unpackLine, packLine
 from MoinMoin.PageEditor import PageEditor, conflict_markers
 from MoinMoin.Page import Page
-from MoinMoin.wikidicts import Dict
 from MoinMoin.wikisync import TagStore, UnsupportedWikiException, SyncPage, NotAllowedException
 from MoinMoin.wikisync import MoinLocalWiki, MoinRemoteWiki, UP, DOWN, BOTH, MIMETYPE_MOIN
 from MoinMoin.support.python_compatibility import set
@@ -107,7 +106,7 @@ class ActionClass(object):
             "password": None,
         }
 
-        options.update(Dict(self.request, self.pagename))
+        options.update(request.dicts[self.pagename])
 
         # Convert page and group list strings to lists
         if options["pageList"] is not None:

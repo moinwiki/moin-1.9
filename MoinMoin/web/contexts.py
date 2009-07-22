@@ -371,11 +371,15 @@ class AuxilaryMixin(object):
 
     def dicts(self):
         """ Lazy initialize the dicts on the first access """
-        from MoinMoin import wikidicts
-        dicts = wikidicts.GroupDict(self)
-        dicts.load_dicts()
+        dicts = self.cfg.dicts(self)
         return dicts
     dicts = EnvironProxy(dicts)
+
+    def groups(self):
+        """ Lazy initialize the groups on the first access """
+        groups = self.cfg.groups(self)
+        return groups
+    groups = EnvironProxy(groups)
 
     def reset(self):
         self.current_lang = self.cfg.language_default

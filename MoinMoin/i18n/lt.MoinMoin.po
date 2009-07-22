@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 23:09+0200\n"
-"PO-Revision-Date: 2009-02-03 00:30+0200\n"
+"POT-Creation-Date: 2009-07-10 10:24+0200\n"
+"PO-Revision-Date: 2009-06-06 01:00+0200\n"
 "Last-Translator: Ernestas Liubarskij <e.liubarskij@gmail.com>\n"
 "Language-Team: Lithuanian <e.liubarskij@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -281,7 +281,7 @@ msgstr ""
 msgid ""
 "Other users will be ''blocked'' from editing this page until %(bumptime)s."
 msgstr ""
-"Kiti vartotojai bus ''užblokuoti'' nuo šio puslapio redagavimo iki %"
+"Kiti naudotojai bus ''užblokuoti'' nuo šio puslapio redagavimo iki %"
 "(bumptime)s."
 
 #, python-format
@@ -289,7 +289,7 @@ msgid ""
 "Other users will be ''warned'' until %(bumptime)s that you are editing this "
 "page."
 msgstr ""
-"Kiti vartotojai bus ''perspėti'' iki %(bumptime)s, kad jūs redaguojate šį "
+"Kiti naudotojai bus ''perspėti'' iki %(bumptime)s, kad jūs redaguojate šį "
 "puslapį."
 
 msgid "Use the Preview button to extend the locking period."
@@ -371,8 +371,9 @@ msgstr "Paketui reikia naujesnės MoinMoin versijos (bent %s)."
 msgid "The theme name is not set."
 msgstr "Tema nenustatyta."
 
-msgid "Installing theme files is only supported for standalone type servers."
-msgstr "Temos failų diegimas palaikomas tik savarankiško tipo serveriams."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
+msgstr "Temos failai neįdiegti! Trūksta rašymo teisių %s."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -469,8 +470,9 @@ msgstr "Raktui „%(token)s“ tikimasi reikšmės"
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Klaidinga paryškinimo reguliarioji išraiška „%(regex)s“: %(error)s"
 
+#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
 "Šio puslapio atsarginė kopija yra pasenusi ir nebus įtraukta į paieškos "
@@ -1326,7 +1328,7 @@ msgid "RecentChanges"
 msgstr "PaskutiniaiPakeitimai"
 
 msgid "WikiTipOfTheDay"
-msgstr ""
+msgstr "WikiDienosPatarimas"
 
 msgid "TitleIndex"
 msgstr "PavadinimųIndeksas"
@@ -1338,88 +1340,76 @@ msgid "FindPage"
 msgstr "IeškotiPuslapio"
 
 msgid "MissingPage"
-msgstr "TrūkstamiPuslapiai"
+msgstr "TrūkstamasPuslapis"
 
 msgid "MissingHomePage"
-msgstr "TrūkstamiNamųPuslapiai"
+msgstr "TrūkstamasNamųPuslapis"
 
-#, fuzzy
 msgid "WikiHomePage"
-msgstr "TrūkstamiNamųPuslapiai"
+msgstr "WikiNamųPuslapis"
 
-#, fuzzy
 msgid "WikiName"
-msgstr "Vardas"
+msgstr "WikiPavadinimas"
 
 msgid "WikiWikiWeb"
-msgstr ""
+msgstr "WikiWikiTinklas"
 
 msgid "FrontPage"
 msgstr "PirmasisPuslapis"
 
 msgid "WikiSandBox"
-msgstr ""
+msgstr "WikiSmėliadėžė"
 
-#, fuzzy
 msgid "InterWiki"
-msgstr "Wiki"
+msgstr "KitosWiki"
 
 msgid "AbandonedPages"
-msgstr ""
+msgstr "PasenęPuslapiai"
 
-#, fuzzy
 msgid "OrphanedPages"
-msgstr "Pakeistas puslapis"
+msgstr "VienišiPuslapiai"
 
-#, fuzzy
 msgid "WantedPages"
-msgstr "IeškotiPuslapio"
+msgstr "NorimiPuslapiai"
 
 msgid "EventStats"
-msgstr ""
+msgstr "ĮvykiųStatistika"
 
 msgid "EventStats/HitCounts"
-msgstr ""
+msgstr "ĮvykiųStatistika/AplankymųKiekis"
 
 msgid "EventStats/Languages"
-msgstr ""
+msgstr "ĮvykiųStatistika/Kalbos"
 
 msgid "EventStats/UserAgents"
-msgstr ""
+msgstr "ĮvykiųStatistika/NaudotojųAgentai"
 
-#, fuzzy
 msgid "PageSize"
-msgstr "Dydis"
+msgstr "PuslapiųDydžiai"
 
-#, fuzzy
 msgid "PageHits"
-msgstr "Puslapiai"
+msgstr "PuslapiųAplankymai"
 
-#, fuzzy
 msgid "RandomPage"
-msgstr "PervadintiPuslapį"
+msgstr "AtsitiktinisPuslapis"
 
-#, fuzzy
 msgid "XsltVersion"
-msgstr "Python versija"
+msgstr "XsltVersijaLT"
 
 msgid "FortuneCookies"
-msgstr ""
+msgstr "NaudingiPatarimai"
 
 msgid "WikiLicense"
 msgstr "WikiLicencija"
 
-#, fuzzy
 msgid "CategoryCategory"
-msgstr "bet kokia kategorija"
+msgstr ""
 
-#, fuzzy
 msgid "CategoryHomepage"
-msgstr "Kategorijos"
+msgstr ""
 
-#, fuzzy
 msgid "CategoryTemplate"
-msgstr "Kategorijos"
+msgstr ""
 
 msgid "HomepageTemplate"
 msgstr ""
@@ -1442,9 +1432,8 @@ msgstr ""
 msgid "SlideShowHandOutTemplate"
 msgstr ""
 
-#, fuzzy
 msgid "SlideShowTemplate"
-msgstr "Skaidrių peržiūra"
+msgstr ""
 
 msgid "SlideTemplate"
 msgstr ""
@@ -1452,9 +1441,8 @@ msgstr ""
 msgid "SyncJobTemplate"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnConfiguration"
-msgstr "PagalbaFormatavimo"
+msgstr ""
 
 msgid "HelpOnConfiguration/EmailSupport"
 msgstr ""
@@ -1477,17 +1465,14 @@ msgstr ""
 msgid "HelpOnPackageInstaller"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnUpdating"
-msgstr "PagalbaFormatavimo"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnUpdatingPython"
-msgstr "PagalbaFormatavimo"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnAdministration"
-msgstr "PagalbaFormatavimo"
+msgstr ""
 
 msgid "HelpOnAuthentication"
 msgstr ""
@@ -1495,45 +1480,38 @@ msgstr ""
 msgid "HelpOnAuthentication/ExternalCookie"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnMoinCommand"
-msgstr "PagalbaFormatavimo"
+msgstr ""
 
 msgid "HelpOnMoinCommand/ExportDump"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnNotification"
-msgstr "Pranešimas"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnSessions"
-msgstr "PagalbaTurinio"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnUserHandling"
-msgstr "PagalbaFormatavimo"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnXapian"
-msgstr "PagalbaFormatavimo"
+msgstr ""
 
 msgid "HelpOnMoinWikiSyntax"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnCreoleSyntax"
-msgstr "PagalbaTurinio"
+msgstr ""
 
 msgid "HelpOnFormatting"
 msgstr "PagalbaFormatavimo"
 
-#, fuzzy
 msgid "MoinMoin"
-msgstr "MoinMoin versija"
+msgstr "KasYraMoinMoin"
 
 msgid "HelpContents"
-msgstr "PagalbaTurinio"
+msgstr "PagalbosTurinys"
 
 msgid "HelpForBeginners"
 msgstr ""
@@ -1541,34 +1519,26 @@ msgstr ""
 msgid "HelpForUsers"
 msgstr ""
 
-#, fuzzy
 msgid "HelpIndex"
-msgstr "PavadinimųIndeksas"
+msgstr "PagalbosIndeksas"
 
 msgid "HelpOnAccessControlLists"
 msgstr ""
 
-msgid "HelpOnAcl"
-msgstr ""
-
-#, fuzzy
 msgid "HelpOnActions"
-msgstr "PagalbaTurinio"
+msgstr "PagalbaVeiksmų"
 
 msgid "HelpOnActions/AttachFile"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnAdmonitions"
-msgstr "PagalbaTurinio"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnAutoAdmin"
-msgstr "PagalbaFormatavimo"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnCategories"
-msgstr "Kategorijos"
+msgstr "PagalbaKategorijų"
 
 msgid "HelpOnDictionaries"
 msgstr ""
@@ -1576,45 +1546,37 @@ msgstr ""
 msgid "HelpOnEditLocks"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnEditing"
-msgstr "PagalbaFormatavimo"
+msgstr "PagalbaRedagavimo"
 
 msgid "HelpOnEditing/SubPages"
-msgstr ""
+msgstr "PagalbaRedagavimo/PoPuslapiai"
 
 msgid "HelpOnGraphicalEditor"
-msgstr ""
+msgstr "PagalbaGrafinioRedaktoriaus"
 
 msgid "HelpOnHeadlines"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnLanguages"
-msgstr "Kalba"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnLinking"
-msgstr "PagalbaFormatavimo"
+msgstr "PagalbaSaistymo"
 
 msgid "HelpOnLinking/NotesLinks"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnLists"
-msgstr "PagalbaTurinio"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnLogin"
-msgstr "PagalbaFormatavimo"
+msgstr "PagalbaPrisijungimo"
 
 msgid "HelpOnMacros"
 msgstr ""
 
 msgid "HelpOnMacros/EmbedObject"
-msgstr ""
-
-msgid "HelpOnMacros/ImageLink"
 msgstr ""
 
 msgid "HelpOnMacros/Include"
@@ -1626,23 +1588,20 @@ msgstr ""
 msgid "HelpOnMacros/MonthCalendar"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnNavigation"
-msgstr "SvetainėsNavigacija"
+msgstr "PagalbaNavigacijos"
 
-#, fuzzy
 msgid "HelpOnOpenIDProvider"
-msgstr "OpenID serveris"
+msgstr ""
 
-#, fuzzy
 msgid "HelpOnPageCreation"
-msgstr "PagalbaFormatavimo"
+msgstr "PagalbaPuslapioKūrimo"
 
 msgid "HelpOnPageDeletion"
 msgstr ""
 
 msgid "HelpOnParsers"
-msgstr ""
+msgstr "PagalbaAnalizatorių"
 
 msgid "HelpOnParsers/ReStructuredText"
 msgstr ""
@@ -1651,19 +1610,16 @@ msgid "HelpOnParsers/ReStructuredText/RstPrimer"
 msgstr ""
 
 msgid "HelpOnProcessingInstructions"
-msgstr ""
+msgstr "PagalbaApdorojimoInstrukcijų"
 
-#, fuzzy
 msgid "HelpOnRules"
-msgstr "PagalbaTurinio"
+msgstr "PagalbaLiniuočių"
 
-#, fuzzy
 msgid "HelpOnSearching"
-msgstr "PagalbaFormatavimo"
+msgstr "PagalbaPaieškos"
 
-#, fuzzy
 msgid "HelpOnSlideShows"
-msgstr "Skaidrių peržiūra"
+msgstr "PagalbaŠypsenėlių"
 
 msgid "HelpOnSlideShows/000 Introduction"
 msgstr ""
@@ -1675,49 +1631,43 @@ msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
 msgstr ""
 
 msgid "HelpOnSmileys"
-msgstr ""
+msgstr "PagalbaŠypsenėlių"
 
 msgid "HelpOnSpam"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnSpellCheck"
-msgstr "RašybosTikrinimas"
+msgstr ""
 
 msgid "HelpOnSuperUser"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnSynchronisation"
-msgstr "Sinchronizacija prasidėjo -"
+msgstr ""
 
 msgid "HelpOnTables"
 msgstr ""
 
 msgid "HelpOnTemplates"
-msgstr ""
+msgstr "PagalbaŠablonų"
 
 msgid "HelpOnThemes"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnUserPreferences"
-msgstr "Nuostatos"
+msgstr "PagalbaNaudotojoNuostatų"
 
 msgid "HelpOnVariables"
+msgstr "PagalbaKintamųjų"
+
+msgid "HelpOnXmlPages"
+msgstr "PagalbaXmlPuslapių"
+
+msgid "HelpOnComments"
 msgstr ""
 
-#, fuzzy
-msgid "HelpOnXmlPages"
-msgstr "PagalbaFormatavimo"
-
-#, fuzzy
-msgid "HelpOnComments"
-msgstr "PagalbaTurinio"
-
-#, fuzzy
 msgid "HelpOnSubscribing"
-msgstr "Atsisakyti prenumeratos"
+msgstr "PagalbaPrenumeratos"
 
 msgid "CamelCase"
 msgstr ""
@@ -1737,9 +1687,8 @@ msgstr ""
 msgid "WikiCourse/04 Creating a wiki account"
 msgstr ""
 
-#, fuzzy
 msgid "WikiCourse/05 User preferences"
-msgstr "Naudotojo nuostatos išsaugotos!"
+msgstr ""
 
 msgid "WikiCourse/06 Your own wiki homepage"
 msgstr ""
@@ -1774,9 +1723,8 @@ msgstr ""
 msgid "WikiCourse/17 External links"
 msgstr ""
 
-#, fuzzy
 msgid "WikiCourse/18 Attachments"
-msgstr "Naujas priedas"
+msgstr ""
 
 msgid "WikiCourse/19 Symbols"
 msgstr ""
@@ -1790,9 +1738,8 @@ msgstr ""
 msgid "WikiCourse/22 Parsers"
 msgstr ""
 
-#, fuzzy
 msgid "WikiCourse/23 Actions"
-msgstr "Daugiau veiksmų:"
+msgstr ""
 
 msgid "WikiCourse/30 The graphical editor"
 msgstr ""
@@ -2036,7 +1983,7 @@ msgid "Wiki Markup"
 msgstr "Wiki žymėjimas"
 
 msgid "File attachment browser"
-msgstr "Priedų rinkmenų naršyklė"
+msgstr "Priedų failų naršyklė"
 
 msgid "User account browser"
 msgstr "Naudotojų paskyrų naršyklė"
@@ -2342,6 +2289,8 @@ msgstr "Skaidrė %(pos)d iš %(size)d"
 #, python-format
 msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
 msgstr ""
+"<<%(macro_name)s: įvykdymas nepavyko [%(error_msg)s] (taip pat žiūrėkite "
+"žurnale)>>"
 
 msgid "Go To Page"
 msgstr "Eiti į puslapį"
@@ -3067,7 +3016,7 @@ msgid "SHA digest of this page's content is:"
 msgstr "SHA antspaudas šio puslapio turiniui yra:"
 
 msgid "The following users subscribed to this page:"
-msgstr "Šie vartotojai užsiprenumeravę šį puslapį:"
+msgstr "Naudotojai, užsiprenumeravę šį puslapį:"
 
 msgid "This page links to the following pages:"
 msgstr "Šis puslapis turi nuorodas į šiuos puslapius:"
@@ -3233,7 +3182,7 @@ msgstr "Puslapių vardų, atskirtų kableliu, sąrašas"
 
 #, python-format
 msgid "Subscribe users to the page %s"
-msgstr "Užprenumeruoti vartotojus puslapiui %s"
+msgstr "Užprenumeruoti naudotojus puslapiui %s"
 
 msgid "Enter user names (comma separated):"
 msgstr "Įveskite naudotojų vardus (atskirtus kableliais):"
@@ -3485,6 +3434,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anoniminis"
+
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr "Temos failų diegimas palaikomas tik savarankiško tipo serveriams."
 
 #, fuzzy
 #~ msgid "InterWikiMap"

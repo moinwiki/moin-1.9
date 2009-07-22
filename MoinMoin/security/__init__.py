@@ -69,6 +69,10 @@ def _check(request, pagename, username, right):
                 allowed = acl.may(request, username, right)
                 if allowed is not None:
                     return allowed
+                # If the item has an acl (even one that doesn't match) we *do not*
+                # check the parents. We only check the parents if there's no acl on
+                # the item at all.
+                break
         if not some_acl:
             allowed = cache.acl_rights_default.may(request, username, right)
             if allowed is not None:
@@ -307,19 +311,20 @@ class AccessControlList:
             acl = request.cfg.cache.acl_rights_default.acl
         else: # we have a #acl on the page (self.acl can be [] if #acl is empty!)
             acl = self.acl
-        is_group_member = request.dicts.has_member
-        group_re = request.cfg.cache.page_group_regexact
+
+        groups = request.groups
+
         allowed = None
         for entry, rightsdict in acl:
             if entry in self.special_users:
                 handler = getattr(self, "_special_"+entry, None)
                 allowed = handler(request, name, dowhat, rightsdict)
-            elif group_re.search(entry):
-                if is_group_member(entry, name):
+            elif entry in groups:
+                if name in groups[entry]:
                     allowed = rightsdict.get(dowhat)
                 else:
                     for special in self.special_users:
-                        if is_group_member(entry, special):
+                        if special in entry:
                             handler = getattr(self, "_special_" + special, None)
                             allowed = handler(request, name, dowhat, rightsdict)
                             break # order of self.special_users is important
@@ -451,4 +456,3 @@ def parseACL(request, text):
     pi, dummy = wikiutil.get_processing_instructions(text)
     acl_lines = [args for verb, args in pi if verb == 'acl']
     return AccessControlList(request.cfg, acl_lines)
-

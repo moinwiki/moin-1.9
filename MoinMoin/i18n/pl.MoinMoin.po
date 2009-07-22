@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 23:09+0200\n"
+"POT-Creation-Date: 2009-07-10 10:24+0200\n"
 "PO-Revision-Date: 2006-02-09 11:25+0100\n"
 "Last-Translator: Sergiusz Pawłowicz <moin@pawlowicz.name>\n"
 "Language-Team: Polish <moin@pawlowicz.name>\n"
@@ -368,9 +368,9 @@ msgstr "Pakiet wymaga serwera z nowszą wersją MoinMoin (przynajmniej %s)."
 msgid "The theme name is not set."
 msgstr "Nie wybrano żadnego wystroju"
 
-msgid "Installing theme files is only supported for standalone type servers."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
 msgstr ""
-"Instalacja plików wystroju jest wspierana tylko dla serwerów typu standalone."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -468,8 +468,9 @@ msgstr "Spodziewana wartość dla klucza \"%(token)s\""
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Niewłaściwe wyrażenie regularne podświetlania \"%(regex)s\": %(error)s"
 
+#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
 "Kopia zapasowa zawartości tej strony jest nieważna i nie będzie włączona do "
@@ -798,7 +799,7 @@ msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
-"Jeśli nie masz jeszcze hasła, <a href=\"%(userprefslink)s\">możesz je "
+"Jeśli nie masz jeszcze konta, <a href=\"%(userprefslink)s\">możesz je "
 "założyć teraz</a>. <a href=\"%(sendmypasswordlink)s\">Zapomniane hasło?</a>"
 
 msgid ""
@@ -1539,9 +1540,6 @@ msgstr "IndeksTytułów"
 msgid "HelpOnAccessControlLists"
 msgstr ""
 
-msgid "HelpOnAcl"
-msgstr ""
-
 #, fuzzy
 msgid "HelpOnActions"
 msgstr "PomocSpisTreści"
@@ -1603,9 +1601,6 @@ msgid "HelpOnMacros"
 msgstr ""
 
 msgid "HelpOnMacros/EmbedObject"
-msgstr ""
-
-msgid "HelpOnMacros/ImageLink"
 msgstr ""
 
 msgid "HelpOnMacros/Include"
@@ -3477,6 +3472,12 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr ""
+#~ "Instalacja plików wystroju jest wspierana tylko dla serwerów typu "
+#~ "standalone."
 
 #, fuzzy
 #~ msgid "InterWikiMap"

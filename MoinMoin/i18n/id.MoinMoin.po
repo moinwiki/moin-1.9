@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 23:09+0200\n"
+"POT-Creation-Date: 2009-07-10 10:24+0200\n"
 "PO-Revision-Date: 2006-10-07 23:19+0700\n"
 "Last-Translator: Fajrin Azis <fajrin.azis@gmail.com>\n"
 "Language-Team: Indonesian <id@ll.com>\n"
@@ -375,8 +375,9 @@ msgstr "Paket ini membutuhkan MoinMoin versi terbaru (sekurangnya %s)."
 msgid "The theme name is not set."
 msgstr "Nama tema tidak di set."
 
-msgid "Installing theme files is only supported for standalone type servers."
-msgstr "Menginstal berkas tema hanya didukung untuk server jenis standalone."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
+msgstr ""
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -473,8 +474,9 @@ msgstr "Diharapkan nilai untuk kunci \"%(token)s\""
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr ""
 
+#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
 "Backup isi halaman ini sudah usang dan tidak akan disertakan dalam hasil "
@@ -1550,9 +1552,6 @@ msgstr "IndeksJudul"
 msgid "HelpOnAccessControlLists"
 msgstr ""
 
-msgid "HelpOnAcl"
-msgstr ""
-
 #, fuzzy
 msgid "HelpOnActions"
 msgstr "DaftarBantuan"
@@ -1613,9 +1612,6 @@ msgid "HelpOnMacros"
 msgstr ""
 
 msgid "HelpOnMacros/EmbedObject"
-msgstr ""
-
-msgid "HelpOnMacros/ImageLink"
 msgstr ""
 
 msgid "HelpOnMacros/Include"
@@ -3461,6 +3457,11 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr ""
+#~ "Menginstal berkas tema hanya didukung untuk server jenis standalone."
 
 #, fuzzy
 #~ msgid "InterWikiMap"

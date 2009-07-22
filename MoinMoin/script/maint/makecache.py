@@ -19,11 +19,10 @@ This script allows you to create cache files in data/pages/PageName/cache/
 and /data/cache directories
 
 You will usually do this after changing MoinMoin code and calling "maint cleancache", by either upgrading
-version, installing or removing macros or changing the regex expression for dicts.
+version, installing or removing macros.
 
 text_html is the name of the cache file used for compiled pages formatted
-by the wiki text to html formatter, A dict file does cache the pages which
-do fit to the page_group_regex variable.
+by the wiki text to html formatter.
 
 Detailed Instructions:
 ======================

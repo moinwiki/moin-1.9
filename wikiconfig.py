@@ -37,8 +37,9 @@ class LocalConfig(multiconfig.DefaultConfig):
     surge_action_limits = None # no surge protection
     sitename = u'MoinMoin DesktopEdition'
     logo_string = u'<img src="%s/common/moinmoin.png" alt="MoinMoin Logo">' % url_prefix_static
-    page_front_page = u'FrontPage' # change to some better value
     # ^^^ DON'T TOUCH THIS EXCEPT IF YOU KNOW WHAT YOU DO ^^^
+
+    #page_front_page = u'FrontPage' # change to some better value
 
     # Add your configuration items here.
     secrets = 'This string is NOT a secret, please make up your own, long, random secret string!'

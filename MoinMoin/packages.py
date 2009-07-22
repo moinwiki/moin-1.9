@@ -371,13 +371,8 @@ class ScriptEngine:
         self._extractToFile(filename, pagefile)
 
         # Clear caches
-        try:
-            del self.request.cfg.DICTS_DATA
-        except AttributeError:
-            pass
-        self.request.pages = {}
-        caching.CacheEntry(self.request, 'wikidicts', 'dicts_groups', scope='wiki').remove()
-        page.clean_acl_cache()
+        # TODO Code from MoinMoin/script/maint/cleancache.py may be used
+        page.clean_acl_cache() # It is not necessary should be removed.
 
     def runScript(self, commands):
         """ Runs the commands.

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 23:09+0200\n"
+"POT-Creation-Date: 2009-07-10 10:24+0200\n"
 "PO-Revision-Date: 2008-12-03 14:24+0100\n"
 "Last-Translator: Jörg Cassens <moinmoin-nb@cassens.org>\n"
 "Language-Team: Norwegian <moinmoin-nb@cassens.org>\n"
@@ -366,8 +366,9 @@ msgstr "Pakken trenger en nyere versjon av MoinMoin (minst %s)."
 msgid "The theme name is not set."
 msgstr "Temanavnet er ikke satt."
 
-msgid "Installing theme files is only supported for standalone type servers."
-msgstr "Installere ny temafiler er kun støttet i enkeltstående sørvere."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
+msgstr ""
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -464,8 +465,9 @@ msgstr "Forventet en verdi for variablen \"%(token)s\""
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Ugyldig fremhevende regulær uttrykk \"%(regex)s\": %(error)s"
 
+#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
 "Det tidligere innholdet av denne siden er foreldet og vil ikke bli tatt med "
@@ -1541,9 +1543,6 @@ msgstr "TittelIndeks"
 msgid "HelpOnAccessControlLists"
 msgstr ""
 
-msgid "HelpOnAcl"
-msgstr ""
-
 #, fuzzy
 msgid "HelpOnActions"
 msgstr "HjelpInnhold"
@@ -1605,9 +1604,6 @@ msgid "HelpOnMacros"
 msgstr ""
 
 msgid "HelpOnMacros/EmbedObject"
-msgstr ""
-
-msgid "HelpOnMacros/ImageLink"
 msgstr ""
 
 msgid "HelpOnMacros/Include"
@@ -3468,6 +3464,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "ukjent bruker"
+
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr "Installere ny temafiler er kun støttet i enkeltstående sørvere."
 
 #, fuzzy
 #~ msgid "InterWikiMap"

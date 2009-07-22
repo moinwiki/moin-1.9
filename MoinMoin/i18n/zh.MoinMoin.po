@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 23:09+0200\n"
+"POT-Creation-Date: 2009-07-10 10:24+0200\n"
 "PO-Revision-Date: 2008-10-06 11:09+0800\n"
 "Last-Translator: Jiang Xin <worldhello.net@gmail.com>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -351,8 +351,9 @@ msgstr "此安装包需要更新版本的MoinMoin (至少 %s)。"
 msgid "The theme name is not set."
 msgstr "主题名未设置。"
 
-msgid "Installing theme files is only supported for standalone type servers."
-msgstr "只有独立型服务器才支持安装主题文件。"
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
+msgstr ""
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -449,8 +450,9 @@ msgstr "键\"%(token)s\"应该有对应的值"
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "无效的加亮效果正则表达式 \"%(regex)s\"：%(error)s"
 
+#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr "建议您不再使用此页的备份内容，备份将不会出现在搜索结果中！"
 
@@ -1497,9 +1499,6 @@ msgstr "标题索引"
 msgid "HelpOnAccessControlLists"
 msgstr ""
 
-msgid "HelpOnAcl"
-msgstr ""
-
 #, fuzzy
 msgid "HelpOnActions"
 msgstr "帮助目录"
@@ -1561,9 +1560,6 @@ msgid "HelpOnMacros"
 msgstr ""
 
 msgid "HelpOnMacros/EmbedObject"
-msgstr ""
-
-msgid "HelpOnMacros/ImageLink"
 msgstr ""
 
 msgid "HelpOnMacros/Include"
@@ -3372,6 +3368,10 @@ msgstr "抱歉，由于\"%(content)s\"在本维基被禁止，网页不能存储
 
 msgid "anonymous"
 msgstr "匿名"
+
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr "只有独立型服务器才支持安装主题文件。"
 
 #, fuzzy
 #~ msgid "InterWikiMap"

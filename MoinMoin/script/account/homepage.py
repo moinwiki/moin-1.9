@@ -6,7 +6,7 @@ MoinMoin - creates user homepage for existing accounts
 @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import user, wikidicts
+from MoinMoin import user
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.script import MoinScript
@@ -31,7 +31,7 @@ To create the homepage of one user use the --name argument. For adding homepages
 give the --group page argument. Or with --all-users you create homepages for ALL users.
 2. To respect ACLs  give the --user argument.
 3. Optionally you may want to use a template page by the --template_page argument.
-With e.g. #acl @ME@:read,write,delete,revert Default on the template page you can define 
+With e.g. #acl @ME@:read,write,delete,revert Default on the template page you can define
 acl rights for the user. @EMAIL@ becomes expanded to the users obfuscated mail address.
 """
 
@@ -108,8 +108,7 @@ CategoryHomepage
         if self.options.user_homepage:
             members = [self.options.user_homepage, ]
         elif self.options.name_of_group_page:
-            user_group = wikidicts.Group(request, self.options.name_of_group_page)
-            members = user_group.members()
+            members = request.groups.get(self.options.name_of_group_page, [])
         elif self.options.all_users:
             uids = user.getUserList(request)
             members = [user.User(request, uid).name for uid in uids]

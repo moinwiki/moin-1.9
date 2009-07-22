@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 23:09+0200\n"
+"POT-Creation-Date: 2009-07-10 10:24+0200\n"
 "PO-Revision-Date: 2008-08-22 02:05+0300\n"
 "Last-Translator: Dror Livne <livne.dror@gmail.com>\n"
 "Language-Team: Hebrew <moin-user@lists.sourceforge.net>\n"
@@ -353,8 +353,9 @@ msgstr "החבילה זקוקה לגרסה חדשה יותר של MoinMoin (לפ
 msgid "The theme name is not set."
 msgstr "שם ערכת הנושא לא נקבע."
 
-msgid "Installing theme files is only supported for standalone type servers."
-msgstr "התקנת קבצי ערכות נושא נתמכת רק לשרתי standalone."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
+msgstr ""
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -451,8 +452,9 @@ msgstr "ציפיתי לערך למפתח \"%(token)s\""
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "הביטוי הרגולרי \"%(regex)s\" שנבחר להדגשה שגוי: %(error)s"
 
+#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr "גרסאות הגיבוי של הדף לא יכללו בתוצאות החיפוש"
 
@@ -1504,9 +1506,6 @@ msgstr "מפתח כותרות"
 msgid "HelpOnAccessControlLists"
 msgstr ""
 
-msgid "HelpOnAcl"
-msgstr ""
-
 #, fuzzy
 msgid "HelpOnActions"
 msgstr "תוכן עזרה"
@@ -1568,9 +1567,6 @@ msgid "HelpOnMacros"
 msgstr ""
 
 msgid "HelpOnMacros/EmbedObject"
-msgstr ""
-
-msgid "HelpOnMacros/ImageLink"
 msgstr ""
 
 msgid "HelpOnMacros/Include"
@@ -3373,6 +3369,10 @@ msgstr "סליחה, אין אפשרות לשמור את הדף כי \"%(content)
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr "התקנת קבצי ערכות נושא נתמכת רק לשרתי standalone."
 
 #, fuzzy
 #~ msgid "InterWikiMap"
