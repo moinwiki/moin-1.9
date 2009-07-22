@@ -84,7 +84,7 @@ class Login:
                     op_select.append(html.OPTION(value=op_uri).append(
                         html.Raw(op_uri)))
 
-                self.make_row(_('OpenID'), [op_select,])
+                self.make_row(_('OpenID'), [op_select, ])
             else:
                 self.make_row(_('OpenID'), [
                     html.INPUT(
