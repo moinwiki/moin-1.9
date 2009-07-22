@@ -57,7 +57,7 @@ def _openidrp_sreg_extract_values(info):
     sreg_resp = SRegResponse.fromSuccessResponse(info)
     sreg = {'nickname': '', 'email': '', 'fullname': '',
             'dob': '0000-00-00', 'gender': '', 'postcode': '',
-            'country': '', 'language': '', 'timezone' : ''}
+            'country': '', 'language': '', 'timezone': ''}
     if sreg_resp:
         if sreg_resp.get('nickname'):
             sreg['nickname'] = sreg_resp.get('nickname')
