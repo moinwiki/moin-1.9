@@ -114,21 +114,17 @@ class TestXapianIndex:
 
     def testIndex(self):
         """ search: kicks off indexing for a single pages in Xapian """
-
-        # AD - This only tests the the call to indexing doesn't raise.
-
-        idx = Xapian.Index(self.request)
-        idx.indexPages(['HomePageWiki'], mode='add')
+        # This only tests that the call to indexing doesn't raise.
         nuke_xapian_index(self.request)
+        idx = Xapian.Index(self.request)
+        idx.indexPages(mode='add') # slow: builds an index of all pages
 
     def testIndexInNewThread(self):
         """ search: kicks off indexing for a page in a new thread in Xapian"""
-
-        # AD - This only tests the the call to indexing doesn't raise.
-
-        idx = Xapian.Index(self.request)
-        idx.indexPagesInNewThread(['HomePageWiki'], mode='add')
+        # This only tests that the call to indexing doesn't raise.
         nuke_xapian_index(self.request)
+        idx = Xapian.Index(self.request)
+        idx.indexPagesInNewThread(mode='add') # slow: builds an index of all pages
 
 coverage_modules = ['MoinMoin.search']
 
