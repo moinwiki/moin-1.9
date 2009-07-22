@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 23:09+0200\n"
+"POT-Creation-Date: 2009-07-10 10:24+0200\n"
 "PO-Revision-Date: 2006-02-11 12:20-0800\n"
 "Last-Translator: Hristo Iliev <hristo@phys.uni-sofia.bg>\n"
 "Language-Team: Bulgarian <moin-devel@lists.sourceforge.net>\n"
@@ -365,10 +365,9 @@ msgstr "Този пакет изисква по-нова версия на MoinM
 msgid "The theme name is not set."
 msgstr "Името на темата не е настроено."
 
-msgid "Installing theme files is only supported for standalone type servers."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
 msgstr ""
-"Инсталирането на файлове от теми се поддържа само на сървъри от "
-"самостоятелен тип."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -466,8 +465,9 @@ msgstr "Очаква се стойност на ключа \"%(token)s\""
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr ""
 
+#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
 "Архивното съдържание на тази страница е твърде остаряло и няма да бъде "
@@ -1544,9 +1544,6 @@ msgstr "ЗаглавенУказател"
 msgid "HelpOnAccessControlLists"
 msgstr ""
 
-msgid "HelpOnAcl"
-msgstr ""
-
 #, fuzzy
 msgid "HelpOnActions"
 msgstr "ПомощСъдържание"
@@ -1607,9 +1604,6 @@ msgid "HelpOnMacros"
 msgstr ""
 
 msgid "HelpOnMacros/EmbedObject"
-msgstr ""
-
-msgid "HelpOnMacros/ImageLink"
 msgstr ""
 
 msgid "HelpOnMacros/Include"
@@ -3463,6 +3457,12 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr ""
+#~ "Инсталирането на файлове от теми се поддържа само на сървъри от "
+#~ "самостоятелен тип."
 
 #, fuzzy
 #~ msgid "InterWikiMap"

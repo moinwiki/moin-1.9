@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 23:09+0200\n"
+"POT-Creation-Date: 2009-07-10 10:24+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rakesh Pandit <rakesh.pandit@gmail.com>\n"
 "Language-Team: Hindi\n"
@@ -335,8 +335,9 @@ msgstr "प्रस्तावली को मोइनमोइन के �
 msgid "The theme name is not set."
 msgstr "विषय नाम निश्चित नही है"
 
-msgid "Installing theme files is only supported for standalone type servers."
-msgstr "प्रतिस्थापन विषय फाइलें केवल विशेष मुख्य प्रकार के कम्प्यूटर के लिए हैं।"
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
+msgstr ""
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -434,7 +435,7 @@ msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr ""
 
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
 
@@ -1390,9 +1391,6 @@ msgstr ""
 msgid "HelpOnAccessControlLists"
 msgstr ""
 
-msgid "HelpOnAcl"
-msgstr ""
-
 #, fuzzy
 msgid "HelpOnActions"
 msgstr "क्रिया"
@@ -1447,9 +1445,6 @@ msgid "HelpOnMacros"
 msgstr ""
 
 msgid "HelpOnMacros/EmbedObject"
-msgstr ""
-
-msgid "HelpOnMacros/ImageLink"
 msgstr ""
 
 msgid "HelpOnMacros/Include"
@@ -3185,6 +3180,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr "प्रतिस्थापन विषय फाइलें केवल विशेष मुख्य प्रकार के कम्प्यूटर के लिए हैं।"
 
 #~ msgid "Created the package %s containing the pages %s."
 #~ msgstr "%s पेकेज को बनाया जिसमे %s पृष्ट है।"

@@ -48,8 +48,11 @@ General syntax: moin [options] maint mkpagepacks [mkpagepacks-options]
         """ Calculates which pages should go into which package. """
         request = self.request
 
+        all_pages = set(request.rootpage.getPageList())
+        packaged_pages = set()
+
         languages = i18n.wikiLanguages()
-        pageset_names = ['all_pages', ] # TODO: refine later
+        pageset_names = i18n.strings.pagesets
         pageSets = {}
         for lang in languages:
             def trans(text, request=request, lang=lang, **kw):
@@ -71,7 +74,10 @@ General syntax: moin [options] maint mkpagepacks [mkpagepacks-options]
                 if pageset:
                     print key, len(pageset)
                     pageSets[key] = pageset
+                    packaged_pages |= pageset
 
+        not_packaged_pages = all_pages - packaged_pages
+        pageSets['00_needs_fixing'] = not_packaged_pages
         return pageSets
 
     def packagePages(self, pagelist, filename, function):
@@ -81,25 +87,25 @@ General syntax: moin [options] maint mkpagepacks [mkpagepacks-options]
             os.remove(filename)
         except OSError:
             pass
+
+        existing_pages = [pagename for pagename in pagelist if Page(request, pagename).exists()]
+        if not existing_pages:
+            return
+
         zf = zipfile.ZipFile(filename, "w", COMPRESSION_LEVEL)
 
-        cnt = 0
         script = [packLine(['MoinMoinPackage', '1']), ]
 
-        for pagename in pagelist:
+        cnt = 0
+        for pagename in existing_pages:
             pagename = pagename.strip()
             page = Page(request, pagename)
-            if page.exists():
-                cnt += 1
-                script.append(packLine([function, str(cnt), pagename]))
-                timestamp = wikiutil.version2timestamp(page.mtime_usecs())
-                zi = zipfile.ZipInfo(filename=str(cnt), date_time=datetime.fromtimestamp(timestamp).timetuple()[:6])
-                zi.compress_type = COMPRESSION_LEVEL
-                zf.writestr(zi, page.get_raw_body().encode("utf-8"))
-            else:
-                #import sys
-                #print >>sys.stderr, "Could not find the page %s." % pagename.encode("utf-8")
-                pass
+            cnt += 1
+            script.append(packLine([function, str(cnt), pagename]))
+            timestamp = wikiutil.version2timestamp(page.mtime_usecs())
+            zi = zipfile.ZipInfo(filename=str(cnt), date_time=datetime.fromtimestamp(timestamp).timetuple()[:6])
+            zi.compress_type = COMPRESSION_LEVEL
+            zf.writestr(zi, page.get_raw_body().encode("utf-8"))
 
         script += [packLine(['Print', 'Installed MoinMaster page bundle %s.' % os.path.basename(filename)])]
 
@@ -139,11 +145,13 @@ General syntax: moin [options] maint mkpagepacks [mkpagepacks-options]
         pageSets = self.buildPageSets()
 
         print "Creating packages ..."
-        generate_filename = lambda name: os.path.join('tests', 'wiki', 'underlay', 'pages', 'SystemPagesSetup', 'attachments', '%s.zip' % name)
+        package_path = os.path.join('tests', 'wiki', 'underlay', 'pages', 'LanguageSetup', 'attachments')
+        os.mkdir(package_path)
+        generate_filename = lambda name: os.path.join(package_path, '%s.zip' % name)
         [self.packagePages(list(pages), generate_filename(name), "ReplaceUnderlay") for name, pages in pageSets.items()]
 
         print "Removing pagedirs of packaged pages ..."
-        dontkill = set(['SystemPagesSetup'])
+        dontkill = set(['LanguageSetup'])
         [self.removePages(list(pages - dontkill)) for name, pages in pageSets.items()]
 
         print "Finished."

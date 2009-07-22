@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 23:09+0200\n"
-"PO-Revision-Date: 2009-04-20 00:54+0200\n"
+"POT-Creation-Date: 2009-07-10 10:24+0200\n"
+"PO-Revision-Date: 2009-05-12 13:11+0200\n"
 "Last-Translator: Jean-Philippe Guérard <fevrier@tigreraye.org>\n"
 "Language-Team: Français\n"
 "MIME-Version: 1.0\n"
@@ -272,7 +272,8 @@ msgstr ""
 "Vous n'avez pas modifié le contenu de cette page, elle n'a pas été "
 "enregistrée !"
 
-msgid "You can't change ACLs on this page since you have no admin rights on it!"
+msgid ""
+"You can't change ACLs on this page since you have no admin rights on it!"
 msgstr ""
 "Vous ne pouvez pas modifier la liste de contrôle d'accès (ACL) de cette "
 "page, car vous n'en avez pas les droits d'administration !"
@@ -304,7 +305,8 @@ msgstr ""
 "êtes en train d'éditer cette page."
 
 msgid "Use the Preview button to extend the locking period."
-msgstr "Utilisez le bouton « Aperçu » pour prolonger la période de verrouillage."
+msgstr ""
+"Utilisez le bouton « Aperçu » pour prolonger la période de verrouillage."
 
 #, python-format
 msgid ""
@@ -386,10 +388,11 @@ msgstr ""
 msgid "The theme name is not set."
 msgstr "Le nom du thème n'est pas défini."
 
-msgid "Installing theme files is only supported for standalone type servers."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
 msgstr ""
-"L'installation de fichiers de thème n'est compatible qu'avec les serveurs de "
-"type autonome."
+"Les fichiers des thèmes ne sont pas installés ! Il manque les droits "
+"d'écriture sur %s."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -490,8 +493,9 @@ msgstr ""
 "L'expression rationnelle de surlignage : « %(regex)s » est incorrecte : %"
 "(error)s"
 
+#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
 "Le contenu sauvegardé de cette page est obsolète et ne sera pas inclus dans "
@@ -531,7 +535,8 @@ msgstr ""
 msgid "You are the only user."
 msgstr "Vous êtes le seul utilisateur."
 
-msgid "As a superuser, you can temporarily assume the identity of another user."
+msgid ""
+"As a superuser, you can temporarily assume the identity of another user."
 msgstr ""
 "En tant que superutilisateur, vous pouvez vous connecter temporairement sous "
 "l'identité d'un autre utilisateur."
@@ -919,7 +924,8 @@ msgstr "Un entier « %(arg)s » était attendu après « %(key)s »"
 msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
 msgstr "Une couleur « %(arg)s » était attendue après « %(key)s »"
 
-msgid "Rendering of reStructured text is not possible, please install Docutils."
+msgid ""
+"Rendering of reStructured text is not possible, please install Docutils."
 msgstr ""
 "Le rendu du format reStructuredText n'est pas possible. Veuillez installer "
 "docutils."
@@ -971,7 +977,8 @@ msgstr "** Vous n'êtes pas autorisé à lire la page : %s ! **"
 
 #, python-format
 msgid "**Could not find the referenced page: %s**"
-msgstr "**Impossible de trouver la page à laquelle il est fait référence : %s**"
+msgstr ""
+"**Impossible de trouver la page à laquelle il est fait référence : %s**"
 
 msgid "XSLT option disabled, please look at HelpOnConfiguration."
 msgstr "L'option XSLT a été désactivée, consultez l'AideDeParamétrage."
@@ -991,7 +998,8 @@ msgstr "Mot de passe trop court."
 msgid "Password has not enough different characters."
 msgstr "Le mot de passe ne contient pas assez de caractères différents."
 
-msgid "Password is too easy (password contains name or name contains password)."
+msgid ""
+"Password is too easy (password contains name or name contains password)."
 msgstr ""
 "Mot de passe trop simple (le mot de passe contient le nom, ou bien le nom "
 "est contenu dans le mot de passe)."
@@ -1111,7 +1119,7 @@ msgid "disabled"
 msgstr "désactivé"
 
 msgid "Mail account data"
-msgstr "Envoi de vos identifiants de connexion"
+msgstr "Envoi des identifiants de connexion"
 
 msgid "OpenID"
 msgstr "identifiant OpenID"
@@ -1518,7 +1526,7 @@ msgid "HelpOnMoinCommand"
 msgstr "AideDesCommandesMoin"
 
 msgid "HelpOnMoinCommand/ExportDump"
-msgstr "AideDesCommandesMoin/ExportHTML"
+msgstr "AideDesCommandesMoin/ExportDump"
 
 msgid "HelpOnNotification"
 msgstr "AideDesNotifications"
@@ -1557,9 +1565,6 @@ msgid "HelpIndex"
 msgstr "IndexDeL'Aide"
 
 msgid "HelpOnAccessControlLists"
-msgstr "AideDesListesDeContrôleD'Accès"
-
-msgid "HelpOnAcl"
 msgstr "AideDesListesDeContrôleD'Accès"
 
 msgid "HelpOnActions"
@@ -1615,9 +1620,6 @@ msgstr "AideDesMacros"
 
 msgid "HelpOnMacros/EmbedObject"
 msgstr "AideDesMacros/EmbedObject"
-
-msgid "HelpOnMacros/ImageLink"
-msgstr "AideDesMacros/ImageLink"
 
 msgid "HelpOnMacros/Include"
 msgstr "AideDesMacros/Include"
@@ -2332,8 +2334,8 @@ msgstr "Transparent %(pos)d sur %(size)d "
 #, python-format
 msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
 msgstr ""
-"<<%(macro_name)s: échec de l'exécution [%(error_msg)s] (conultez également le "
-"journal de bord)>>"
+"<<%(macro_name)s: échec de l'exécution [%(error_msg)s] (conultez également "
+"le journal de bord)>>"
 
 msgid "Go To Page"
 msgstr "Aller à la page"
@@ -2359,7 +2361,8 @@ msgstr "%(matchcount)d %(matches)s pour « %(title)s »"
 
 msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
-msgstr "Impossible de créer une page sans nom. Veuillez indiquer un nom de page."
+msgstr ""
+"Impossible de créer une page sans nom. Veuillez indiquer un nom de page."
 
 #, python-format
 msgid "You must login to use this action: %(action)s."
@@ -2375,7 +2378,8 @@ msgid "Your quicklink to this page could not be removed."
 msgstr "Votre lien rapide vers cette page n'a pu être supprimé."
 
 msgid "You need to have a quicklink to this page to remove it."
-msgstr "Il doit y avoir un lien rapide sur cette page pour pouvoir le supprimer."
+msgstr ""
+"Il doit y avoir un lien rapide sur cette page pour pouvoir le supprimer."
 
 msgid ""
 "You need to manually go to your OpenID provider wiki\n"
@@ -2776,7 +2780,8 @@ msgid "Size"
 msgstr "Taille"
 
 msgid "Unknown file type, cannot display this attachment inline."
-msgstr "Type de fichier inconnu, impossible d'afficher son contenu dans la page."
+msgstr ""
+"Type de fichier inconnu, impossible d'afficher son contenu dans la page."
 
 msgid "You are not allowed to view attachments of this page."
 msgstr "Vous n'êtes pas autorisé à voir les pièces jointes de cette page."
@@ -2889,7 +2894,8 @@ msgstr "Il n'a pas été possible de vous abonner à cette page."
 
 #, python-format
 msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "Utilisez l'interface interactive pour exécuter l'action %(actionname)s !"
+msgstr ""
+"Utilisez l'interface interactive pour exécuter l'action %(actionname)s !"
 
 msgid "You are now logged out."
 msgstr "Vous êtes maintenant déconnecté."
@@ -3033,7 +3039,8 @@ msgstr ""
 msgid ""
 "This is the first synchronisation between the local and the remote wiki for "
 "the page %s."
-msgstr "Première synchronisation de la page %s entre les wikis local et distant."
+msgstr ""
+"Première synchronisation de la page %s entre les wikis local et distant."
 
 #, python-format
 msgid ""
@@ -3387,7 +3394,8 @@ msgstr ""
 "de ne pas contenir toutes les pages du wiki relatives à ce sujet. <<BR>>"
 
 msgid "Click here to perform a full-text search with your search terms!"
-msgstr "Cliquez ici pour appliquer cette recherche au texte des pages du wiki !"
+msgstr ""
+"Cliquez ici pour appliquer cette recherche au texte des pages du wiki !"
 
 msgid "Load"
 msgstr "Charger"
@@ -3510,3 +3518,15 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anonyme"
+
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr ""
+#~ "L'installation de fichiers de thème n'est compatible qu'avec les serveurs "
+#~ "de type autonome."
+
+#~ msgid "HelpOnAcl"
+#~ msgstr "AideDesListesDeContrôleD'Accès"
+
+#~ msgid "HelpOnMacros/ImageLink"
+#~ msgstr "AideDesMacros/ImageLink"

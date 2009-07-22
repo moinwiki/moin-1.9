@@ -85,15 +85,8 @@ class TestInterWiki:
             assert wikiutil.join_wiki(baseurl, pagename) == url
 
 
-class TestSystemPagesGroup:
-    def testSystemPagesGroupNotEmpty(self):
-        assert self.request.dicts.members('SystemPagesGroup')
-
 class TestSystemPage:
     systemPages = (
-        # First level, on SystemPagesGroup
-        'SystemPagesInEnglishGroup',
-        # Second level, on one of the pages above
         'RecentChanges',
         'TitleIndex',
         )

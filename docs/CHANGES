@@ -16,7 +16,7 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
-Version 1.9.0beta2:
+Version 1.9.0.current:
 
   Please note:
   * This is a BETA version, not meant for production usage, but just to
@@ -28,6 +28,60 @@ Version 1.9.0beta2:
     We know that translations and system / help pages are not yet finished and
     that  they still require much more work.
     Please see http://master19.moinmo.in/ and help cleaning up there.
+
+  New features:
+  * HINT: We now offer different sized sets of system/help pages and the default
+    underlay just contains a single page: LanguageSetup. You need to be
+    superuser, visit that page and then install the language packs you like
+    (minimum is the essential set for English).
+  * HINT: LanguageSetup is the default page_front_page, you need to change that
+    after installing language packs (see above).
+  * New modular group and dict data access, you can use group and dict 
+    backend modules to access group and dict data stored anywhere you like.
+    Currently we provide these backends:
+      * WikiGroups and WikiDicts backends get data from wikipages. They work
+        similar to old wikidicts code (but with less caching issues :).
+      * ConfigGroups and ConfigDicts backends get data from a dictionary
+        defined in the wiki config.
+      * CompositeGroups and CompositeDicts compose several backends, so data
+        may be retrieved from several sources. For example, groups may be
+        defined in the wiki config and on wiki pages.
+    * Using cfg.groups and cfg.dicts, you can define the backend to use to
+      access group and dict information (default: WikiGroups / WikiDicts
+      backend).
+      See wiki/config/more_samples/ directory (groups_wikiconfig_snippet and
+      dicts_wikiconfig_snippet).
+    * See also the new HelpOnDictionaries and HelpOnGroups help pages.
+  * "moin ... account homepage" script to create user homepages.
+  * Theme packages: do_copythemefile now copies theme files to
+    MoinMoin/web/static/htdocs.
+
+  Bug fixes:
+  * Fixed MoinMoinBugs/DeprecatedIsNotRespected (search ranking, WantedPages).
+  * web.session: fixed MoinMoinBugs/1.9_session_lifetime_for_user. We do
+    refresh the session cookie now on each request.
+  * web.session: fixed MoinMoinBugs/1.9_remember_me_broken.
+  * Fix superuser functionality (broken in previous 1.9 betas).
+  * fixes misc. crashes / exceptions
+
+  Other changes:
+  * ImageLink page has been killed (ImageLink macro is gone since 1.6.1).
+  * replace our text_irssi parser with a wrapper around pygments' irc highlighter
+
+  Developer notes:
+  * groups and dicts API changes:
+    * request.groups and request.dicts provide access to groups and dicts.
+    * MoinMoin.wikidicts is gone, please use MoinMoin.datastruct.
+    * LazyGroup and LazyGroupsBackend base classes for implementing backends
+      which potentially deal with huge amounts of data (like a LDAP directory).
+      Use MoinMoin/datastruct/backends/config_lazy_groups.py as a draft for
+      new backends.
+    * See http://moinmo.in/Groups2009 for more details.
+  * i18n: new approach for defining sets of system/help pages (see i18n.strings).
+    CheckTranslation, page packager, wikiutil.isSystemPage() use those sets.
+
+
+Version 1.9.0beta2:
 
   New features:
   * Added modernized_cms theme (hides most wiki widgets from modernized if the
@@ -102,6 +156,27 @@ Version 1.9.0beta1:
       looked at REMOTE_USER environment variable and relied on the server
       doing the authentication (could be http basic auth or any other auth).
       See HelpOnAuthentication.
+
+
+Version 1.8.4:
+  Bug fixes:
+    * ACL security: fix bug in hierarchical ACL processing, more restrictive
+      sub page ACLs did not work if the current user name did not give a match
+      within the sub page ACL (instead, the less restrictive parent page ACL
+      was used).
+      Non-hierarchical ACL processing (the default) is NOT affected.
+    * Creole parser: fix spaces in multiline elements.
+    * Use msie.css only for Internet Explorer older than version 8, fixes
+      e.g. the double rendering of link icons.
+    * http auth: do auth_type comparisons case-insensitively (spec-compliant)
+
+  New features:
+    * EmbedObject macro: changed default width value for PDF files to 100%
+                         (use a recent Adobe Reader to make this work).
+    * CopyPage action: added a TextCha for it
+
+  Other changes:    
+    * Creole parser: Add second license: BSD
 
 
 Version 1.8.3:

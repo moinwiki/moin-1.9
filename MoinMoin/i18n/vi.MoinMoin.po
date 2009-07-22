@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 23:09+0200\n"
+"POT-Creation-Date: 2009-07-10 10:24+0200\n"
 "PO-Revision-Date: 2004-11-19 21:03+0800\n"
 "Last-Translator: Nam T. Nguyen <nnt@nntsoft.com>\n"
 "Language-Team: Vietnamese <moin-devel@lists.sourceforge.net>\n"
@@ -26,23 +26,24 @@ msgstr ""
 "X-HasWikiMarkup: True\n"
 
 msgid "The wiki is currently not reachable."
-msgstr ""
+msgstr "Hiện không thể vào được wiki."
 
 msgid "Invalid username or password."
-msgstr ""
+msgstr "Tên đăng nhập hoặc mật khẩu bất hợp lệ."
 
 #, python-format
 msgid ""
 "The remote wiki uses a different InterWiki name (%(remotename)s) internally "
 "than you specified (%(localname)s)."
 msgstr ""
+"Wiki ở xa dùng một tên InterWiki khác (%(remotename)s) với tên mà bạn chỉ "
+"định (%(localname)s)."
 
-#, fuzzy
 msgid "Your changes are not saved!"
-msgstr "Bạn chưa thay đổi nội dung trang nên không cần lưu lại!"
+msgstr "Thay đổi của bạn không được lưu!"
 
 msgid "You are not allowed to edit this page."
-msgstr "Bạn không thể sửa trang này."
+msgstr "Bạn không được phép sửa trang này."
 
 msgid "Page is immutable!"
 msgstr "Trang này không thể được thay đổi!"
@@ -50,26 +51,25 @@ msgstr "Trang này không thể được thay đổi!"
 msgid "Cannot edit old revisions!"
 msgstr "Không thể sửa phiên bản cũ!"
 
-#, fuzzy
 msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr ""
-"Thời gian dành riêng cho bạn đã hết, bạn có thể sẽ gặp sự cố trong việc "
+"Thời gian dành riêng cho bạn đã hết. Hãy sẵn sàng đối mặt với xung đột khi "
 "chỉnh sửa trang!"
 
 msgid "Page name is too long, try shorter name."
-msgstr ""
+msgstr "Tên trang quá dài, hãy thử tên ngắn hơn."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Draft of \"%(pagename)s\""
-msgstr "Xem qua trang \"%(pagename)s\""
+msgstr "Bản nháp của \"%(pagename)s\""
 
 #, python-format
 msgid "Edit \"%(pagename)s\""
-msgstr "Sửa trang \"%(pagename)s\""
+msgstr "Sửa đổi \"%(pagename)s\""
 
 #, python-format
 msgid "Preview of \"%(pagename)s\""
-msgstr "Xem qua trang \"%(pagename)s\""
+msgstr "Xem thử \"%(pagename)s\""
 
 #, python-format
 msgid "Your edit lock on %(lock_page)s has expired!"
@@ -89,27 +89,23 @@ msgstr "Người khác đã xoá trang này trong khi bạn đang sửa!"
 msgid "Someone else changed this page while you were editing!"
 msgstr "Người khác đã thay đổi trang này trong khi bạn đang sửa!"
 
-#, fuzzy
 msgid ""
 "Someone else saved this page while you were editing!\n"
 "Please review the page and save then. Do not save this page as it is!"
 msgstr ""
 "Người khác đã lưu trang này trong khi bạn đang sửa!\n"
-"Vui lòng xem phần diff của trang tại %(difflink)s để biết họ đã thay đổi "
-"những gì.\n"
-"Sau đó bạn có thể thêm vào những thay đổi của bạn."
+"Vui lòng xem lại trang rồi hẵng lưu. Đừng lưu trang ngay lúc này!"
 
-#, fuzzy
 msgid "[Content loaded from draft]"
-msgstr "[Nội dung trang được đọc trong %s]"
+msgstr "[Nội dung trang được nạp từ nháp]"
 
 #, python-format
 msgid "[Content of new page loaded from %s]"
-msgstr "[Nội dung trang được đọc trong %s]"
+msgstr "[Nội dung trang mới được nạp từ %s]"
 
 #, python-format
 msgid "[Template %s not found]"
-msgstr "[Không tìm thấy mẫu %s]"
+msgstr "[Không tìm thấy tiêu bản %s]"
 
 #, python-format
 msgid "[You may not read %s]"
@@ -123,10 +119,15 @@ msgid ""
 "somehow without saving it.''' A draft gets saved for you when you do a "
 "preview, cancel an edit or unsuccessfully save."
 msgstr ""
+"'''<<BR>>Bản nháp của bạn dựa trên phiên bản %(draft_rev)d (đã lưu %"
+"(draft_timestamp_str)s) có thể được nạp thay vì dùng phiên bản hiện tại %"
+"(page_rev)d bằng cách ấn nút nạp bản nháp - trong trường hợp bạn đã làm mất "
+"nội dung chỉnh sửa cuối mà chưa lưu nó.''' Một bản nháp được lưu cho bạn khi "
+"bạn thực hiện việc xem thử, hủy bỏ chỉnh sửa hoặc lưu không thành công."
 
 #, python-format
 msgid "Describe %s here."
-msgstr "Diễn giải %s ở đây."
+msgstr "Mô tả %s ở đây."
 
 msgid "Check Spelling"
 msgstr "Kiểm tra chính tả"
@@ -135,7 +136,7 @@ msgid "Save Changes"
 msgstr "Lưu các thay đổi"
 
 msgid "Cancel"
-msgstr "Huỷ bỏ"
+msgstr "Hủy bỏ"
 
 #, python-format
 msgid ""
@@ -150,18 +151,17 @@ msgstr ""
 "đổi."
 
 msgid "Preview"
-msgstr "Xem qua"
+msgstr "Xem thử"
 
 msgid "GUI Mode"
-msgstr ""
+msgstr "Chế độ GUI"
 
 msgid "Load Draft"
-msgstr ""
+msgstr "Nạp bản nháp"
 
 msgid "Trivial change"
 msgstr "Thay đổi nhỏ nhặt"
 
-#, fuzzy
 msgid "Comment:"
 msgstr "Chú thích"
 
@@ -170,21 +170,19 @@ msgstr "<Không thêm>"
 
 #, python-format
 msgid "Add to: %(category)s"
-msgstr ""
+msgstr "Thêm vào: %(category)s"
 
 msgid "Remove trailing whitespace from each line"
-msgstr "Xoá khoảng trắng ở cuối dòng"
+msgstr "Xóa khoảng trắng ở cuối mỗi dòng"
 
 msgid "Edit was cancelled."
-msgstr "Các chỉnh sửa đã bị huỷ."
+msgstr "Các chỉnh sửa đã bị hủy bỏ."
 
-#, fuzzy
 msgid "You can't copy to an empty pagename."
-msgstr "Bạn không thể lưu trang trắng."
+msgstr "Bạn không thể sao chép tới một tên trang trống."
 
-#, fuzzy
 msgid "You are not allowed to copy this page!"
-msgstr "Bạn không thể sửa trang này!"
+msgstr "Bạn không được phép sao chép trang này!"
 
 #, python-format
 msgid ""
@@ -194,58 +192,58 @@ msgid ""
 msgstr ""
 "'''Đã có trang {{{'%s'}}}.'''\n"
 "\n"
-"Vui lòng dùng tên khác."
+"Hãy thử dùng tên khác."
 
 #, python-format
 msgid "Could not copy page because of file system error: %s."
-msgstr ""
+msgstr "Không thể sao chép trang vì lỗi hệ thống tập tin: %s."
 
-#, fuzzy
 msgid "You are not allowed to rename this page!"
-msgstr "Bạn không thể hoàn nguyên phiên bản cũ của trang này!"
+msgstr "Bạn không được phép đổi tên trang này!"
 
-#, fuzzy
 msgid "You can't rename to an empty pagename."
-msgstr "Bạn không thể lưu trang trắng."
+msgstr "Bạn không thể đổi tên thành tên trang trống."
 
 #, python-format
 msgid "Could not rename page because of file system error: %s."
-msgstr ""
+msgstr "Không thể đổi tên trang vì lỗi hệ thống tập tin: %s."
 
-#, fuzzy
 msgid "You are not allowed to delete this page!"
-msgstr "Bạn không thể hoàn nguyên phiên bản cũ của trang này!"
+msgstr "Bạn không được phép xóa trang này!"
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr "Cám ơn bạn vì những sửa đổi. Sự quan tâm của bạn rất được cảm kích."
+msgstr ""
+"Cảm ơn bạn đã tham gia sửa đổi. Sự quan tâm của bạn luôn được tôn trọng."
 
 #, python-format
 msgid "Page \"%s\" was successfully deleted!"
-msgstr "Trang \"%s\" đã được xoá!"
+msgstr "Trang \"%s\" đã được xóa!"
 
 #, python-format
 msgid "Page could not get locked. Unexpected error (errno=%d)."
-msgstr ""
+msgstr "Trang này không thể khóa được. Lỗi không mong đợi (errno=%d)."
 
 msgid "Page could not get locked. Missing 'current' file?"
-msgstr ""
+msgstr "Trang này không thể khóa được. Thiếu tập tin 'hiện tại'?"
 
 #, python-format
 msgid ""
 "Unable to determine current page revision from the 'current' file. The page %"
 "s is damaged and cannot be edited right now."
 msgstr ""
+"Không thể xác định phiên bản trang hiện tại từ tập tin 'hiện tại'. Trang %s "
+"đã bị hư hỏng và không thể chỉnh sửa vào lúc này."
 
 #, python-format
 msgid "Cannot save page %s, no storage space left."
-msgstr ""
+msgstr "Không thể lưu %s, không còn đủ dung lượng."
 
 #, python-format
 msgid "An I/O error occurred while saving page %s (errno=%d)"
-msgstr ""
+msgstr "Một lỗi I/O đã xảy ra khi đang lưu %s (errno=%d)"
 
 msgid "You are not allowed to edit this page!"
-msgstr "Bạn không thể sửa trang này!"
+msgstr "Bạn không được phép chỉnh sửa trang này!"
 
 msgid "You cannot save empty pages."
 msgstr "Bạn không thể lưu trang trắng."
@@ -357,7 +355,8 @@ msgstr ""
 msgid "The theme name is not set."
 msgstr ""
 
-msgid "Installing theme files is only supported for standalone type servers."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
 msgstr ""
 
 #, fuzzy, python-format
@@ -456,8 +455,9 @@ msgstr "Dự đoán \"%(token)s\" sẽ chứa giá trị nào đó"
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr ""
 
+#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
 "Nội dung lưu của trang này đã lạc hậu và sẽ không được hiển thị trong kết "
@@ -1517,9 +1517,6 @@ msgstr "Tựa chỉ mục"
 msgid "HelpOnAccessControlLists"
 msgstr ""
 
-msgid "HelpOnAcl"
-msgstr ""
-
 #, fuzzy
 msgid "HelpOnActions"
 msgstr "Trang chỉ dẫn"
@@ -1579,9 +1576,6 @@ msgid "HelpOnMacros"
 msgstr ""
 
 msgid "HelpOnMacros/EmbedObject"
-msgstr ""
-
-msgid "HelpOnMacros/ImageLink"
 msgstr ""
 
 msgid "HelpOnMacros/Include"

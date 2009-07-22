@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 23:09+0200\n"
+"POT-Creation-Date: 2009-07-10 10:24+0200\n"
 "PO-Revision-Date: 2009-03-24 20:06+0100\n"
 "Last-Translator: Roel Huybrechts <mail@rulus.be>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -376,10 +376,9 @@ msgstr ""
 msgid "The theme name is not set."
 msgstr "De naam van het thema is niet ingesteld."
 
-msgid "Installing theme files is only supported for standalone type servers."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
 msgstr ""
-"Thema bestanden installeren wordt alleen door alleenstaande servers "
-"ondersteund."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -478,8 +477,9 @@ msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr ""
 "Ongeldige reguliere expressie voor het markeren \"%(regex)s\":%(error)s"
 
+#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
 "De reservekopie van de inhoud van deze pagina is achterhaald en zal niet "
@@ -1556,9 +1556,6 @@ msgstr "IndexVanTitels"
 msgid "HelpOnAccessControlLists"
 msgstr ""
 
-msgid "HelpOnAcl"
-msgstr ""
-
 #, fuzzy
 msgid "HelpOnActions"
 msgstr "HelpInhoud"
@@ -1620,9 +1617,6 @@ msgid "HelpOnMacros"
 msgstr ""
 
 msgid "HelpOnMacros/EmbedObject"
-msgstr ""
-
-msgid "HelpOnMacros/ImageLink"
 msgstr ""
 
 msgid "HelpOnMacros/Include"
@@ -3512,6 +3506,12 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anoniem"
+
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr ""
+#~ "Thema bestanden installeren wordt alleen door alleenstaande servers "
+#~ "ondersteund."
 
 #, fuzzy
 #~ msgid "InterWikiMap"

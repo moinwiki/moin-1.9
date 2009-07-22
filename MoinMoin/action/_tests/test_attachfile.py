@@ -56,7 +56,10 @@ class TestAttachFile:
         """
         Tests if AttachFile.getFilename creates the attachment dir on self.requesting
         """
+        become_trusted(self.request)
+
         filename = ""
+
         file_exists = os.path.exists(AttachFile.getFilename(self.request, self.pagename, filename))
 
         nuke_page(self.request, self.pagename)

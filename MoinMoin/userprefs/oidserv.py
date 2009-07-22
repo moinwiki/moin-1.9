@@ -26,10 +26,10 @@ class Settings(UserPrefBase):
         if not self.request.cfg.openid_server_enabled:
             return False
 
-        grp = self.request.cfg.openid_server_restricted_users_group
-        if grp:
-            self.request.dicts.addgroup(self.request, grp)
-            if not self.request.dicts.has_member(grp, self.request.user.name):
+        groups = self.request.groups
+        openid_group_name = self.request.cfg.openid_server_restricted_users_group
+
+        if openid_group_name and self.request.user.name not in groups.get(openid_group_name, []):
                 return False
 
         return True

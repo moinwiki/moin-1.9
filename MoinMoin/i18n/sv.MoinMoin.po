@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 23:09+0200\n"
-"PO-Revision-Date: 2009-02-02 09:00+0200\n"
-"Last-Translator: thomas@marquart.se\n"
+"POT-Creation-Date: 2009-07-10 10:24+0200\n"
+"PO-Revision-Date: 2009-07-11 16:05+0200\n"
+"Last-Translator: Thomas Marquart <thomas@marquart.se>\n"
 "Language-Team: Swedish <moin-user@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -367,8 +367,9 @@ msgstr "Paketet kräver en nyare version av MoinMoin (minst %s)."
 msgid "The theme name is not set."
 msgstr "Temanamnet är inte angivet."
 
-msgid "Installing theme files is only supported for standalone type servers."
-msgstr "Installation av temafiler stöds bara på servrar av fristående typ."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
+msgstr "Temats filer installerades inte! Saknar rättigheter att skriva på %s."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -466,11 +467,11 @@ msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Ogiltigt reguliärt uttryck för emfas \"%(regex)s\": %(error)s"
 
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
-"Reservkopians innehåll av den här sidan är oönskat och kommer inte att "
-"finnas med i sökresultat!"
+"Reservkopians innehåll av den här sidan tas avstånd ifrån och kommer att "
+"rankas lägre i sökresultat!"
 
 #, python-format
 msgid "Revision %(rev)d as of %(date)s"
@@ -830,7 +831,6 @@ msgstr ""
 "\n"
 "(!) För mer hjälp, se HjälpMedÄndringar.\n"
 
-#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
@@ -857,12 +857,12 @@ msgstr ""
 "====; ===== Rubrik 5 =====.\n"
 " Listor:: mellanslag plus en av: * punkter; 1., a., A., i., I. numrerade "
 "punkter; 1.#n börja numrering på n; enbart mellanslag indenterar.\n"
-" Länkar:: <<Verbatim(SkrivOrdIhopMedStoraBokstäver)>>; <<Verbatim([[url|"
+" Länkar:: <<Verbatim(SkrivIhopOrdMedStoraBokstäver)>>; <<Verbatim([[url|"
 "länkens text]])>>.\n"
 " Tabeller:: || celltext |||| celltext som sträcker sig över 2 kolumner ||;  "
 "inga efterföljande mellanslag är tillåtna efter tabeller och rubriker.\n"
 "\n"
-"(!) För mer hjälp, se HjälpMedÄndringar.\n"
+"(!) För mer hjälp, se HjälpMedÄndringar eller HjälpMedMoinWikiSyntax.\n"
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
@@ -1310,7 +1310,7 @@ msgid "RecentChanges"
 msgstr "SenasteÄndringar"
 
 msgid "WikiTipOfTheDay"
-msgstr ""
+msgstr "DagensWikiTips"
 
 msgid "TitleIndex"
 msgstr "TitelRegister"
@@ -1327,475 +1327,419 @@ msgstr "SaknadSida"
 msgid "MissingHomePage"
 msgstr "SaknadStartSida"
 
-#, fuzzy
 msgid "WikiHomePage"
-msgstr "SaknadStartSida"
+msgstr "WikiHemsida"
 
-#, fuzzy
 msgid "WikiName"
-msgstr "Namn"
+msgstr "WikiNamn"
 
 msgid "WikiWikiWeb"
-msgstr ""
+msgstr "WikiWikiWebb"
 
 msgid "FrontPage"
 msgstr "StartSida"
 
 msgid "WikiSandBox"
-msgstr ""
+msgstr "WikiSandLåda"
 
-#, fuzzy
 msgid "InterWiki"
-msgstr "Wiki"
+msgstr "InterWiki"
 
 msgid "AbandonedPages"
-msgstr ""
+msgstr "ÖvergivnaSidor"
 
-#, fuzzy
 msgid "OrphanedPages"
-msgstr "Ändrad sida"
+msgstr "FöräldrarlösaSidor"
 
-#, fuzzy
 msgid "WantedPages"
-msgstr "SökSida"
+msgstr "SaknadSida"
 
 msgid "EventStats"
-msgstr ""
+msgstr "HändelseStatistik"
 
 msgid "EventStats/HitCounts"
-msgstr ""
+msgstr "HändelseStatistik/SidStorlek"
 
 msgid "EventStats/Languages"
-msgstr ""
+msgstr "HändelseStatistik/Språk"
 
 msgid "EventStats/UserAgents"
-msgstr ""
+msgstr "HändelseStatistik/AnvändarAgenter"
 
-#, fuzzy
 msgid "PageSize"
-msgstr "Storlek"
+msgstr "SidStorlek"
 
-#, fuzzy
 msgid "PageHits"
-msgstr "Sidor"
+msgstr "TräffAntal"
 
-#, fuzzy
 msgid "RandomPage"
-msgstr "BytNamn"
+msgstr "SlumpmässigSida"
 
-#, fuzzy
 msgid "XsltVersion"
-msgstr "Python-version"
+msgstr "XsltVersion"
 
 msgid "FortuneCookies"
-msgstr ""
+msgstr "LyckoKakor"
 
 msgid "WikiLicense"
 msgstr "WikiLicens"
 
-#, fuzzy
 msgid "CategoryCategory"
-msgstr "vilken kategori som helst"
+msgstr "KategoriKategori"
 
-#, fuzzy
 msgid "CategoryHomepage"
-msgstr "Kategorier"
+msgstr "KategoriHemsida"
 
-#, fuzzy
 msgid "CategoryTemplate"
-msgstr "Kategorier"
+msgstr "KategoriMall"
 
 msgid "HomepageTemplate"
-msgstr ""
+msgstr "HemsidaMall"
 
 msgid "HelpTemplate"
-msgstr ""
+msgstr "HjälpMall"
 
 msgid "HomepageReadWritePageTemplate"
-msgstr ""
+msgstr "HemsidaLäsSkrivSidaMall"
 
 msgid "HomepageReadPageTemplate"
-msgstr ""
+msgstr "HemsidaLäsSidaMall"
 
 msgid "HomepagePrivatePageTemplate"
-msgstr ""
+msgstr "HemsidaPrivatSidaMall"
 
 msgid "HomepageGroupsTemplate"
-msgstr ""
+msgstr "HemsidaGruppMall"
 
 msgid "SlideShowHandOutTemplate"
-msgstr ""
+msgstr "BildspelHandoutMall"
 
-#, fuzzy
 msgid "SlideShowTemplate"
-msgstr "Bildspel"
+msgstr "BildspelMall"
 
 msgid "SlideTemplate"
-msgstr ""
+msgstr "BildMall"
 
 msgid "SyncJobTemplate"
-msgstr ""
+msgstr "SynkJobbMall"
 
-#, fuzzy
 msgid "HelpOnConfiguration"
-msgstr "HjälpMedFormatering"
+msgstr "HjälpMedKonfiguration"
 
 msgid "HelpOnConfiguration/EmailSupport"
-msgstr ""
+msgstr "HjälpMedKonfiguration/EpostStöd"
 
 msgid "HelpOnConfiguration/SecurityPolicy"
-msgstr ""
+msgstr "HjälpMedKonfiguration/SäkerhetsPolicy"
 
 msgid "HelpOnConfiguration/FileAttachments"
-msgstr ""
+msgstr "HjälpMedKonfiguration/FilBilagor"
 
 msgid "HelpOnConfiguration/SupplementationPage"
-msgstr ""
+msgstr "HjälpMedKonfiguration/TilläggsSida"
 
 msgid "HelpOnConfiguration/SurgeProtection"
-msgstr ""
+msgstr "HjälpMedKonfiguration/SvallSkydd"
 
-#, fuzzy
 msgid "HelpOnConfiguration/UserPreferences"
-msgstr "AnvändarInställningar"
+msgstr "HjälpMedKonfiguration/AnvändarInställningar"
 
 msgid "HelpOnPackageInstaller"
-msgstr ""
+msgstr "HjälpMedPaketInstalleraren"
 
-#, fuzzy
 msgid "HelpOnUpdating"
-msgstr "HjälpMedFormatering"
+msgstr "HjälpMedUppdatering"
 
-#, fuzzy
 msgid "HelpOnUpdatingPython"
-msgstr "HjälpMedFormatering"
+msgstr "HjälpMedUppdateraPython"
 
-#, fuzzy
 msgid "HelpOnAdministration"
-msgstr "HjälpMedFormatering"
+msgstr "HjälpMedAdministration"
 
 msgid "HelpOnAuthentication"
-msgstr ""
+msgstr "HjälpMedAutentisering"
 
 msgid "HelpOnAuthentication/ExternalCookie"
-msgstr ""
+msgstr "HjälpMedAutentisering/ExternKaka"
 
-#, fuzzy
 msgid "HelpOnMoinCommand"
-msgstr "HjälpMedFormatering"
+msgstr "HjälpMedMoinKommando"
 
 msgid "HelpOnMoinCommand/ExportDump"
-msgstr ""
+msgstr "HjälpMedMoinKommando/ExportTipp"
 
-#, fuzzy
 msgid "HelpOnNotification"
-msgstr "Meddelande"
+msgstr "HjälpMedMeddelande"
 
-#, fuzzy
 msgid "HelpOnSessions"
-msgstr "HjälpInnehåll"
+msgstr "HjälpMedSessioner"
 
-#, fuzzy
 msgid "HelpOnUserHandling"
-msgstr "HjälpMedFormatering"
+msgstr "HjälpMedAnvändarhantering"
 
-#, fuzzy
 msgid "HelpOnXapian"
-msgstr "HjälpMedFormatering"
+msgstr "HjälpMedXapian"
 
 msgid "HelpOnMoinWikiSyntax"
-msgstr ""
+msgstr "HjälpMedMoinWikiSyntax"
 
-#, fuzzy
 msgid "HelpOnCreoleSyntax"
-msgstr "HjälpInnehåll"
+msgstr "HjälpMedCreoleSyntax"
 
 msgid "HelpOnFormatting"
 msgstr "HjälpMedFormatering"
 
-#, fuzzy
 msgid "MoinMoin"
-msgstr "MoinMoin-version"
+msgstr "MoinMoin"
 
 msgid "HelpContents"
 msgstr "HjälpInnehåll"
 
 msgid "HelpForBeginners"
-msgstr ""
+msgstr "HjälpFörNybörjare"
 
 msgid "HelpForUsers"
-msgstr ""
+msgstr "HjälpFörAnvändare"
 
-#, fuzzy
 msgid "HelpIndex"
-msgstr "TitelRegister"
+msgstr "HjälpIndex"
 
 msgid "HelpOnAccessControlLists"
-msgstr ""
+msgstr "HjälpMedÅtkomstListor"
 
-msgid "HelpOnAcl"
-msgstr ""
-
-#, fuzzy
 msgid "HelpOnActions"
-msgstr "HjälpInnehåll"
+msgstr "HjälpMedÅtgärder"
 
 msgid "HelpOnActions/AttachFile"
-msgstr ""
+msgstr "HjälpMedÅtgärder/BifogaFil"
 
-#, fuzzy
 msgid "HelpOnAdmonitions"
-msgstr "HjälpInnehåll"
+msgstr "HjälpMedVarningar"
 
-#, fuzzy
 msgid "HelpOnAutoAdmin"
-msgstr "HjälpMedFormatering"
+msgstr "HjälpMedAutoAdmin"
 
-#, fuzzy
 msgid "HelpOnCategories"
-msgstr "Kategorier"
+msgstr "HjälpMedKategorier"
 
 msgid "HelpOnDictionaries"
-msgstr ""
+msgstr "HjälpMedOrdbok"
 
 msgid "HelpOnEditLocks"
-msgstr ""
+msgstr "HjälpMedRedigeringsLås"
 
-#, fuzzy
 msgid "HelpOnEditing"
-msgstr "HjälpMedFormatering"
+msgstr "HjälpMedÄndringar"
 
 msgid "HelpOnEditing/SubPages"
-msgstr ""
+msgstr "HjälpMedÄndringar/UnderSidor"
 
 msgid "HelpOnGraphicalEditor"
-msgstr ""
+msgstr "HjälpMedGrafiskaEditorn"
 
 msgid "HelpOnHeadlines"
-msgstr ""
+msgstr "HjälpMedRubriker"
 
-#, fuzzy
 msgid "HelpOnLanguages"
-msgstr "Språk"
+msgstr "HjälpMedSpråk"
 
-#, fuzzy
 msgid "HelpOnLinking"
-msgstr "HjälpMedFormatering"
+msgstr "HjälpMedLänkar"
 
 msgid "HelpOnLinking/NotesLinks"
-msgstr ""
+msgstr "HjälpMedLänkar/NotLänkar"
 
-#, fuzzy
 msgid "HelpOnLists"
-msgstr "HjälpInnehåll"
+msgstr "HjälpMedListor"
 
-#, fuzzy
 msgid "HelpOnLogin"
-msgstr "HjälpMedFormatering"
+msgstr "HjälpMedLogin"
 
 msgid "HelpOnMacros"
-msgstr ""
+msgstr "HjälpMedMakron"
 
 msgid "HelpOnMacros/EmbedObject"
-msgstr ""
-
-msgid "HelpOnMacros/ImageLink"
-msgstr ""
+msgstr "HjälpMedMakron/ByggInObjekt"
 
 msgid "HelpOnMacros/Include"
-msgstr ""
+msgstr "HjälpMedMakron/Inkludera"
 
 msgid "HelpOnMacros/MailTo"
-msgstr ""
+msgstr "HjälpMedMakron/MejlaTill"
 
 msgid "HelpOnMacros/MonthCalendar"
-msgstr ""
+msgstr "HjälpMedMakron/MånadsKalender"
 
-#, fuzzy
 msgid "HelpOnNavigation"
-msgstr "PlatsNavigering"
+msgstr "HjälpMedNavigering"
 
-#, fuzzy
 msgid "HelpOnOpenIDProvider"
-msgstr "OpenID-server"
+msgstr "HjälpMedOpenIDProvider"
 
-#, fuzzy
 msgid "HelpOnPageCreation"
-msgstr "HjälpMedFormatering"
+msgstr "HjälpMedSkapaSidor"
 
 msgid "HelpOnPageDeletion"
-msgstr ""
+msgstr "HjälpMedSidRadering"
 
 msgid "HelpOnParsers"
-msgstr ""
+msgstr "HjälpMedParsers"
 
 msgid "HelpOnParsers/ReStructuredText"
-msgstr ""
+msgstr "HjälpMedParsers/ReStruktureradText"
 
 msgid "HelpOnParsers/ReStructuredText/RstPrimer"
-msgstr ""
+msgstr "HjälpMedParsers/ReStruktureradText/RstLathund"
 
 msgid "HelpOnProcessingInstructions"
-msgstr ""
+msgstr "HjälpMedDirektiv"
 
-#, fuzzy
 msgid "HelpOnRules"
-msgstr "HjälpInnehåll"
+msgstr "HjälpMedRegler"
 
-#, fuzzy
 msgid "HelpOnSearching"
-msgstr "HjälpMedFormatering"
+msgstr "HjälpMedSök"
 
-#, fuzzy
 msgid "HelpOnSlideShows"
-msgstr "Bildspel"
+msgstr "HjälpMedBildspel"
 
 msgid "HelpOnSlideShows/000 Introduction"
-msgstr ""
+msgstr "HjälpMedBildspel/000 Inledning"
 
 msgid "HelpOnSlideShows/100 Creating the slides"
-msgstr ""
+msgstr "HjälpMedbildspel/100 Att skapa slides"
 
 msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
-msgstr ""
+msgstr "HjälpMedBildspel/900 Sist: Att köra ditt bildspel"
 
 msgid "HelpOnSmileys"
-msgstr ""
+msgstr "HjälpMedSmilisar"
 
 msgid "HelpOnSpam"
-msgstr ""
+msgstr "HjälpMedSpam"
 
-#, fuzzy
 msgid "HelpOnSpellCheck"
-msgstr "StavningsKontroll"
+msgstr "HjälpMedStavningsKontroll"
 
 msgid "HelpOnSuperUser"
-msgstr ""
+msgstr "HjälpMedSuperUser"
 
-#, fuzzy
 msgid "HelpOnSynchronisation"
-msgstr "Synkronisering startat -"
+msgstr "HjälpMedSynkronisering"
 
 msgid "HelpOnTables"
-msgstr ""
+msgstr "HjälpMedTabeller"
 
 msgid "HelpOnTemplates"
-msgstr ""
+msgstr "HjälpMedMallar"
 
 msgid "HelpOnThemes"
-msgstr ""
+msgstr "HjälpMedTeman"
 
-#, fuzzy
 msgid "HelpOnUserPreferences"
-msgstr "AnvändarInställningar"
+msgstr "HjälpMedAnvändarInställningar"
 
 msgid "HelpOnVariables"
-msgstr ""
+msgstr "HjälpMedVariabler"
 
-#, fuzzy
 msgid "HelpOnXmlPages"
-msgstr "HjälpMedFormatering"
+msgstr "HjälpMedXmlSidor"
 
-#, fuzzy
 msgid "HelpOnComments"
-msgstr "HjälpInnehåll"
+msgstr "HjälpMedKommentarer"
 
-#, fuzzy
 msgid "HelpOnSubscribing"
-msgstr "Avsluta prenumeration"
+msgstr "HjälpMedPrenumeration"
 
 msgid "CamelCase"
-msgstr ""
+msgstr "CamelCaseSv"
 
 msgid "WikiCourse"
-msgstr ""
+msgstr "WikiKursSv"
 
 msgid "WikiCourse/01 What is a MoinMoin wiki?"
-msgstr ""
+msgstr "WikiKursSv/01 Vad är en MoinMoin wiki?"
 
 msgid "WikiCourse/02 Finding information"
-msgstr ""
+msgstr "WikiKursSv/02 Att hitta information"
 
 msgid "WikiCourse/03 Staying up to date"
-msgstr ""
+msgstr "WikiKursSv/03 Håll dig uppdaterad"
 
 msgid "WikiCourse/04 Creating a wiki account"
-msgstr ""
+msgstr "WikiKursSv/04 Att skapa ett konto"
 
-#, fuzzy
 msgid "WikiCourse/05 User preferences"
-msgstr "AnvändarInställningar"
+msgstr "WikiKursSv/05 Användarinställningar"
 
 msgid "WikiCourse/06 Your own wiki homepage"
-msgstr ""
+msgstr "WikiKursSv/06 Din egen hemsida i wikin"
 
 msgid "WikiCourse/07 The text editor"
-msgstr ""
+msgstr "WikiKursSv/07 Texteditorn"
 
 msgid "WikiCourse/08 Hot Keys"
-msgstr ""
+msgstr "WikiKursSv/08 Genvägar med tangentbordet"
 
 msgid "WikiCourse/10 Text layout with wiki markup"
-msgstr ""
+msgstr "WikiKursSv/10 Textformatering med wiki-syntax"
 
 msgid "WikiCourse/11 Paragraphs"
-msgstr ""
+msgstr "WikiKursSv/11 Paragrafer"
 
 msgid "WikiCourse/12 Headlines"
-msgstr ""
+msgstr "WikiKursSv/12 Rubriker"
 
 msgid "WikiCourse/13 Lists"
-msgstr ""
+msgstr "WikiKursSv/13 Listor"
 
 msgid "WikiCourse/14 Text styles"
-msgstr ""
+msgstr "WikiKursSv/14 Textstilar"
 
 msgid "WikiCourse/15 Tables"
-msgstr ""
+msgstr "WikiKursSv/15 Tabeller"
 
 msgid "WikiCourse/16 Wiki internal links"
-msgstr ""
+msgstr "WikiKursSv/16 Länkar inom wikin"
 
 msgid "WikiCourse/17 External links"
-msgstr ""
+msgstr "WikiKursSv/17 Externa länkar"
 
-#, fuzzy
 msgid "WikiCourse/18 Attachments"
-msgstr "Ny bilaga"
+msgstr "WikiKursSv/18 Bilagor"
 
 msgid "WikiCourse/19 Symbols"
-msgstr ""
+msgstr "WikiKursSv/19 Symboler"
 
 msgid "WikiCourse/20 Dynamic content"
-msgstr ""
+msgstr "WikiKursSv/20 Dynamisk innehåll"
 
 msgid "WikiCourse/21 Macros"
-msgstr ""
+msgstr "WikiKursSv/21 Makron"
 
 msgid "WikiCourse/22 Parsers"
-msgstr ""
+msgstr "WikiKursSv/22 Parsrar"
 
-#, fuzzy
 msgid "WikiCourse/23 Actions"
-msgstr "Fler åtgärder:"
+msgstr "WikiKursSv/23 Åtgärder"
 
 msgid "WikiCourse/30 The graphical editor"
-msgstr ""
+msgstr "WikiKursSv/30 Grafiska editorn"
 
 msgid "WikiCourse/40 Creating more pages"
-msgstr ""
+msgstr "WikiKursSv/40 Att skapa fler sidor"
 
 msgid "WikiCourse/50 Wiki etiquette"
-msgstr ""
+msgstr "WikiKursSv/50 Wiki etiquette"
 
 msgid "WikiCourse/51 Applications"
-msgstr ""
+msgstr "WikiKursSv/51 Applikationer"
 
 msgid "WikiCourse/52 Structure in the wiki"
-msgstr ""
+msgstr "WikiKursSv/52 Struktur i wikin"
 
 msgid "WikiCourseHandOut"
-msgstr ""
+msgstr "WikiKursSvHandout"
 
 msgid "Sun"
 msgstr "sön"
@@ -2327,6 +2271,7 @@ msgstr "Bild %(pos)d av %(size)d"
 #, python-format
 msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
 msgstr ""
+"<<%(macro_name)s: gick inte att köra: [%(error_msg)s] (se även loggarna)>>"
 
 msgid "Go To Page"
 msgstr "Gå till sida"
@@ -3461,6 +3406,16 @@ msgstr ""
 
 msgid "anonymous"
 msgstr "anonym"
+
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr "Installation av temafiler stöds bara på servrar av fristående typ."
+
+#~ msgid "HelpOnAcl"
+#~ msgstr "HjälpMedAcl"
+
+#~ msgid "HelpOnMacros/ImageLink"
+#~ msgstr "HjälpMedMakron/BildLänk"
 
 #, fuzzy
 #~ msgid "InterWikiMap"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 23:09+0200\n"
+"POT-Creation-Date: 2009-07-10 10:24+0200\n"
 "PO-Revision-Date: 2008-08-15 10:04-0500\n"
 "Last-Translator: Igor Támara <igor@tamaraptino.org>\n"
 "Language-Team: Spanish <moin-devel@lists.sourceforge.net>\n"
@@ -381,11 +381,9 @@ msgstr "El paquete requiere una versión más reciente de MoinMoin (al menos %s)
 msgid "The theme name is not set."
 msgstr "No se ha especificado el nombre del tema."
 
-# 
-msgid "Installing theme files is only supported for standalone type servers."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
 msgstr ""
-"La instalación de archivos de temas sólo es soportada en servidores de tipo "
-"independiente (standalone)."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -484,8 +482,9 @@ msgstr "Se esperaba un valor para la llave \"%(token)s\""
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "expresión regular inválida \"%(regex)s\":·%(error)s"
 
+#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
 "¡El respaldo del contenido de esta página ha caducado y no se incluirá en "
@@ -1557,9 +1556,6 @@ msgstr "ÍndicePorTítulos"
 msgid "HelpOnAccessControlLists"
 msgstr ""
 
-msgid "HelpOnAcl"
-msgstr ""
-
 #, fuzzy
 msgid "HelpOnActions"
 msgstr "ContenidosDeAyuda"
@@ -1621,9 +1617,6 @@ msgid "HelpOnMacros"
 msgstr ""
 
 msgid "HelpOnMacros/EmbedObject"
-msgstr ""
-
-msgid "HelpOnMacros/ImageLink"
 msgstr ""
 
 msgid "HelpOnMacros/Include"
@@ -3477,6 +3470,13 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+# 
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr ""
+#~ "La instalación de archivos de temas sólo es soportada en servidores de "
+#~ "tipo independiente (standalone)."
 
 #, fuzzy
 #~ msgid "InterWikiMap"

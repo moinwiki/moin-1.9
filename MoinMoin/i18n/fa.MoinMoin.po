@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 23:09+0200\n"
+"POT-Creation-Date: 2009-07-10 10:24+0200\n"
 "PO-Revision-Date: 2005-07-22 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -370,8 +370,9 @@ msgstr "این بسته نیازمند نسخه جدیدتری از موین م�
 msgid "The theme name is not set."
 msgstr "نام قالب گرافیکی ذکر نشده اسا."
 
-msgid "Installing theme files is only supported for standalone type servers."
-msgstr "نصب قالب تنها در سرویس‌دهنده‌های مستقل پشتیبانی میشود."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
+msgstr ""
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -468,8 +469,9 @@ msgstr "مقداری برای \"%(token)s\" لازم است"
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "پر رنگ شدن نامعتبر \"%(regex)s\": %(error)s"
 
+#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
 "نسخه پشتیبانی گرفته شده از این صفحه نامناسب است و در نتایج جستجو لحاظ نخواهد "
@@ -1549,9 +1551,6 @@ msgstr "فهرست موضوعات"
 msgid "HelpOnAccessControlLists"
 msgstr ""
 
-msgid "HelpOnAcl"
-msgstr ""
-
 #, fuzzy
 msgid "HelpOnActions"
 msgstr "عناوین راهنما"
@@ -1613,9 +1612,6 @@ msgid "HelpOnMacros"
 msgstr ""
 
 msgid "HelpOnMacros/EmbedObject"
-msgstr ""
-
-msgid "HelpOnMacros/ImageLink"
 msgstr ""
 
 msgid "HelpOnMacros/Include"
@@ -3465,6 +3461,10 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr "نصب قالب تنها در سرویس‌دهنده‌های مستقل پشتیبانی میشود."
 
 #, fuzzy
 #~ msgid "InterWikiMap"

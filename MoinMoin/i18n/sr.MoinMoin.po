@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 23:09+0200\n"
+"POT-Creation-Date: 2009-07-10 10:24+0200\n"
 "PO-Revision-Date: 2008-05-12 15:58-0400\n"
 "Last-Translator: Igor Miletic <grejigl-gnomeprevod@yahoo.ca>\n"
 "Language-Team: Serbian <fedora-trans-sr@redhat.com>\n"
@@ -371,9 +371,9 @@ msgstr "Пакет захтева новије издање MoinMoin-а (бар 
 msgid "The theme name is not set."
 msgstr "Име теме није постављено."
 
-msgid "Installing theme files is only supported for standalone type servers."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
 msgstr ""
-"Инсталирање датотека тема је подржано само за самостојеће врсте сервера."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -470,8 +470,9 @@ msgstr "Очекивана вредност за кључ „%(token)s“"
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Неисправни регуларни израз за наглашавање „%(regex)s“: %(error)s"
 
+#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
 "Резервне копије ове странице су застареле и неће бити укључене у резултате "
@@ -1560,9 +1561,6 @@ msgstr "ИндексНаслова"
 msgid "HelpOnAccessControlLists"
 msgstr ""
 
-msgid "HelpOnAcl"
-msgstr ""
-
 #, fuzzy
 msgid "HelpOnActions"
 msgstr "HelpContents"
@@ -1624,9 +1622,6 @@ msgid "HelpOnMacros"
 msgstr ""
 
 msgid "HelpOnMacros/EmbedObject"
-msgstr ""
-
-msgid "HelpOnMacros/ImageLink"
 msgstr ""
 
 msgid "HelpOnMacros/Include"
@@ -3469,6 +3464,11 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr ""
+#~ "Инсталирање датотека тема је подржано само за самостојеће врсте сервера."
 
 #, fuzzy
 #~ msgid "InterWikiMap"

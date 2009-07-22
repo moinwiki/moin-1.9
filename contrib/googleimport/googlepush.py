@@ -1,7 +1,6 @@
-#! /usr/bin/env python
+#!/usr/bin/env python
 
 # needs darcs.idyll.org/~t/projects/twill-latest.tar.gz
-
 
 import sys
 from textwrap import wrap

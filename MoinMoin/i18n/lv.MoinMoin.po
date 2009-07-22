@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 23:09+0200\n"
+"POT-Creation-Date: 2009-07-10 10:24+0200\n"
 "PO-Revision-Date: 2008-05-10 22:31+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000 AT AT AT AT gmail SPAM NO NO DOT "
 "NO SPAM com>\n"
@@ -371,10 +371,9 @@ msgstr "Sainim nepieciešama jaunāka MoinMoin versija (vismaz %s)."
 msgid "The theme name is not set."
 msgstr "Tēmas nosaukums nav uzstādīts."
 
-msgid "Installing theme files is only supported for standalone type servers."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
 msgstr ""
-"Tēmu failu instalēšana ir atbalstīta tikai savrupiem (\"standalone\") "
-"serveriem."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -471,8 +470,9 @@ msgstr "Nepieciešama vērtība atslēgai \"%(token)s\""
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Nepareiza izcelšanas regulārā izteiksme \"%(regex)s\": %(error)s"
 
+#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
 "Saglabātais lapas saturs ir novecojis un netiks iekļauts meklēšanas "
@@ -1323,65 +1323,56 @@ msgstr "IztrūkstošaLapa"
 msgid "MissingHomePage"
 msgstr "IztrūkstošaMājasLapa"
 
-#, fuzzy
 msgid "WikiHomePage"
-msgstr "IztrūkstošaMājasLapa"
+msgstr "VikiMājasLapa"
 
-#, fuzzy
 msgid "WikiName"
-msgstr "Vārds"
+msgstr "VikiVārds"
 
 msgid "WikiWikiWeb"
-msgstr ""
+msgstr "VikiVikiTīmeklis"
 
 msgid "FrontPage"
 msgstr "SākumLapa"
 
 msgid "WikiSandBox"
-msgstr ""
+msgstr "VikiSmilškaste"
 
-#, fuzzy
 msgid "InterWiki"
-msgstr "Viki"
+msgstr "StarpViki"
 
 msgid "AbandonedPages"
-msgstr ""
+msgstr "PamestāsLapas"
 
-#, fuzzy
 msgid "OrphanedPages"
-msgstr "Mainīta lapa"
+msgstr "BāreņLapas"
 
-#, fuzzy
 msgid "WantedPages"
-msgstr "MeklētLapu"
+msgstr "MeklētāsLapas"
 
 msgid "EventStats"
-msgstr ""
+msgstr "NotikumuStatistika"
 
 msgid "EventStats/HitCounts"
-msgstr ""
+msgstr "NotikumuStatistika/TrāpījumuSkaits"
 
 msgid "EventStats/Languages"
-msgstr ""
+msgstr "NotikumuStatistika/Valodas"
 
 msgid "EventStats/UserAgents"
-msgstr ""
+msgstr "NotikumuStatistika/LietotājuAģenti"
 
-#, fuzzy
 msgid "PageSize"
-msgstr "Izmērs"
+msgstr "LapasIzmērs"
 
-#, fuzzy
 msgid "PageHits"
-msgstr "Lapas"
+msgstr "LapuTrāpījumi"
 
-#, fuzzy
 msgid "RandomPage"
-msgstr "PārdēvētLapu"
+msgstr "PatvaļīgaLapu"
 
-#, fuzzy
 msgid "XsltVersion"
-msgstr "Python versija"
+msgstr "XsltVersija"
 
 msgid "FortuneCookies"
 msgstr ""
@@ -1390,19 +1381,19 @@ msgid "WikiLicense"
 msgstr "VikiLicence"
 
 msgid "CategoryCategory"
-msgstr ""
+msgstr "KategorijasKategorija"
 
 msgid "CategoryHomepage"
-msgstr ""
+msgstr "KategorijasMājasLapa"
 
 msgid "CategoryTemplate"
-msgstr ""
+msgstr "KategorijasVeidne"
 
 msgid "HomepageTemplate"
-msgstr ""
+msgstr "MājasLapasVeidne"
 
 msgid "HelpTemplate"
-msgstr ""
+msgstr "PalīdzībasVeidne"
 
 msgid "HomepageReadWritePageTemplate"
 msgstr ""
@@ -1419,9 +1410,8 @@ msgstr ""
 msgid "SlideShowHandOutTemplate"
 msgstr ""
 
-#, fuzzy
 msgid "SlideShowTemplate"
-msgstr "Slīdrāde"
+msgstr "SlīdrādesVeidne"
 
 msgid "SlideTemplate"
 msgstr ""
@@ -1429,9 +1419,8 @@ msgstr ""
 msgid "SyncJobTemplate"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnConfiguration"
-msgstr "FormatēšanasPalīdzība"
+msgstr "KonfigurēšanasPalīdzība"
 
 msgid "HelpOnConfiguration/EmailSupport"
 msgstr ""
@@ -1526,9 +1515,6 @@ msgstr "VirsrakstuRādītājs"
 msgid "HelpOnAccessControlLists"
 msgstr ""
 
-msgid "HelpOnAcl"
-msgstr ""
-
 #, fuzzy
 msgid "HelpOnActions"
 msgstr "PalīdzībasSaturaRādītājs"
@@ -1591,9 +1577,6 @@ msgstr ""
 msgid "HelpOnMacros/EmbedObject"
 msgstr ""
 
-msgid "HelpOnMacros/ImageLink"
-msgstr ""
-
 msgid "HelpOnMacros/Include"
 msgstr ""
 
@@ -1634,13 +1617,11 @@ msgstr ""
 msgid "HelpOnRules"
 msgstr "PalīdzībasSaturaRādītājs"
 
-#, fuzzy
 msgid "HelpOnSearching"
-msgstr "FormatēšanasPalīdzība"
+msgstr "MeklēšanasPalīdzība"
 
-#, fuzzy
 msgid "HelpOnSlideShows"
-msgstr "Slīdrāde"
+msgstr "SlīdrādesPalīdzība"
 
 msgid "HelpOnSlideShows/000 Introduction"
 msgstr ""
@@ -1657,16 +1638,14 @@ msgstr ""
 msgid "HelpOnSpam"
 msgstr ""
 
-#, fuzzy
 msgid "HelpOnSpellCheck"
-msgstr "Pareizrakstība"
+msgstr "PareizrakstībasPalīdzība"
 
 msgid "HelpOnSuperUser"
-msgstr ""
+msgstr "SuperlietotājaPalīdzība"
 
-#, fuzzy
 msgid "HelpOnSynchronisation"
-msgstr "Sinhronizēšana sākusies -"
+msgstr "SinhronizēšanasPalīdzība"
 
 msgid "HelpOnTables"
 msgstr ""
@@ -3400,6 +3379,12 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr ""
+#~ "Tēmu failu instalēšana ir atbalstīta tikai savrupiem (\"standalone\") "
+#~ "serveriem."
 
 #, fuzzy
 #~ msgid "InterWikiMap"

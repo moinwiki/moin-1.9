@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 23:09+0200\n"
+"POT-Creation-Date: 2009-07-10 10:24+0200\n"
 "PO-Revision-Date: 2008-06-13 18:25+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
@@ -369,9 +369,9 @@ msgstr "Paketti tarvitsee uudemman version MoinMoinista (vähintään %s)."
 msgid "The theme name is not set."
 msgstr "Ulkoasun nimeä ei ole asetettu."
 
-msgid "Installing theme files is only supported for standalone type servers."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
 msgstr ""
-"Ulkoasutiedostojen asennus on tuettu vain erillistyyppisillä palvelimilla."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -469,8 +469,9 @@ msgstr "Odotettiin arvoa avaimelle \"%(token)s\""
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Virheellinen korostava säännöllinen lauseke \"%(regex)s\": %(error)s"
 
+#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
 "Tämän sivun varmuuskopioitu sisältö on vanhentunut eikä sitä sisällytetä "
@@ -1544,9 +1545,6 @@ msgstr "SivuHakemisto"
 msgid "HelpOnAccessControlLists"
 msgstr ""
 
-msgid "HelpOnAcl"
-msgstr ""
-
 #, fuzzy
 msgid "HelpOnActions"
 msgstr "OhjeSisällys"
@@ -1608,9 +1606,6 @@ msgid "HelpOnMacros"
 msgstr ""
 
 msgid "HelpOnMacros/EmbedObject"
-msgstr ""
-
-msgid "HelpOnMacros/ImageLink"
 msgstr ""
 
 msgid "HelpOnMacros/Include"
@@ -3487,6 +3482,11 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr ""
+#~ "Ulkoasutiedostojen asennus on tuettu vain erillistyyppisillä palvelimilla."
 
 #, fuzzy
 #~ msgid "InterWikiMap"

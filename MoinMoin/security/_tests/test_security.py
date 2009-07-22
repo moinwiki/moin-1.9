@@ -245,10 +245,14 @@ class TestPageAcls(object):
     """
     mainpage_name = u'AclTestMainPage'
     subpage_name = u'AclTestMainPage/SubPage'
+    item_rwforall = u'EveryoneMayReadWriteMe'
+    subitem_4boss = u'EveryoneMayReadWriteMe/OnlyTheBossMayWMe'
     pages = [
         # pagename, content
         (mainpage_name, u"#acl JoeDoe:\n#acl JaneDoe:read,write\nFoo!"),
         (subpage_name, u"FooFoo!"),
+        (item_rwforall, u"#acl All:read,write\nMay be read from and written to by anyone"),
+        (subitem_4boss, u"#acl JoeDoe:read,write\nOnly JoeDoe (the boss) may write"),
     ]
 
     from MoinMoin._tests import wikiconfig
@@ -294,6 +298,8 @@ class TestPageAcls(object):
             (True,  self.subpage_name, u'JoeDoe', []), # by inherited acl from main page
             (False, self.subpage_name, u'JaneDoe', ['read', 'write']), # by default acl
             (True,  self.subpage_name, u'JaneDoe', ['read', 'write']), # by inherited acl from main page
+            (True,  self.subitem_4boss, u'AnyUser', ['read']), # by after acl
+            (True,  self.subitem_4boss, u'JoeDoe', ['read', 'write']), # by item acl
         ]
 
         for hierarchic, pagename, username, may in tests:

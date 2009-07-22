@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-19 23:09+0200\n"
+"POT-Creation-Date: 2009-07-10 10:24+0200\n"
 "PO-Revision-Date: 2008-08-30 19:48+0200\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-user@lists.sourceforge.net>\n"
@@ -376,10 +376,9 @@ msgstr "Das Paket erfordert eine neuere Version von MoinMoin (mindestens %s)."
 msgid "The theme name is not set."
 msgstr "Theme-Name ist nicht gesetzt."
 
-msgid "Installing theme files is only supported for standalone type servers."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
 msgstr ""
-"Das Installieren von Theme-Dateien wird nur für Server-Typ standalone "
-"unterstützt."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -478,11 +477,11 @@ msgstr ""
 "Ungültiger regulärer Ausdruck zur Hervorhebung \"%(regex)s\": %(error)s"
 
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
 "Der Inhalt der letzten Sicherungskopie ist veraltet und wird von der "
-"Volltextsuche ignoriert!"
+"Volltextsuche mit niedrigerem Rang aufgeführt!"
 
 #, python-format
 msgid "Revision %(rev)d as of %(date)s"
@@ -1433,28 +1432,28 @@ msgid "HelpTemplate"
 msgstr "HilfeVorlage"
 
 msgid "HomepageReadWritePageTemplate"
-msgstr ""
+msgstr "HomepageReadWritePageTemplate"
 
 msgid "HomepageReadPageTemplate"
-msgstr ""
+msgstr "HomepageReadPageTemplate"
 
 msgid "HomepagePrivatePageTemplate"
-msgstr ""
+msgstr "HomepagePrivatePageTemplate"
 
 msgid "HomepageGroupsTemplate"
-msgstr ""
+msgstr "HomepageGroupsTemplate"
 
 msgid "SlideShowHandOutTemplate"
-msgstr ""
+msgstr "SlideShowHandOutTemplate"
 
 msgid "SlideShowTemplate"
-msgstr ""
+msgstr "SlideShowTemplate"
 
 msgid "SlideTemplate"
-msgstr ""
+msgstr "SlideTemplate"
 
 msgid "SyncJobTemplate"
-msgstr ""
+msgstr "SyncJobTemplate"
 
 msgid "HelpOnConfiguration"
 msgstr "HilfeZurKonfiguration"
@@ -1517,7 +1516,7 @@ msgid "HelpOnMoinWikiSyntax"
 msgstr "HilfeZurMoinWikiSyntax"
 
 msgid "HelpOnCreoleSyntax"
-msgstr ""
+msgstr "HilfeZurCreoleSyntax"
 
 msgid "HelpOnFormatting"
 msgstr "HilfeZumFormatieren"
@@ -1539,9 +1538,6 @@ msgstr "HilfeIndex"
 
 msgid "HelpOnAccessControlLists"
 msgstr "HilfeZuAccessControlLists"
-
-msgid "HelpOnAcl"
-msgstr ""
 
 msgid "HelpOnActions"
 msgstr "HilfeZuAktionen"
@@ -1595,9 +1591,6 @@ msgid "HelpOnMacros"
 msgstr "HilfeZuMakros"
 
 msgid "HelpOnMacros/EmbedObject"
-msgstr ""
-
-msgid "HelpOnMacros/ImageLink"
 msgstr ""
 
 msgid "HelpOnMacros/Include"
@@ -2311,7 +2304,9 @@ msgstr "Seite %(pos)d von %(size)d"
 
 #, python-format
 msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
-msgstr "<<%(macro_name)s: Ausführung fehlgeschlagen [%(error_msg)s] (siehe auch die Log-Datei)>>"
+msgstr ""
+"<<%(macro_name)s: Ausführung fehlgeschlagen [%(error_msg)s] (siehe auch die "
+"Log-Datei)>>"
 
 msgid "Go To Page"
 msgstr "Gehe zu Seite"
