@@ -78,7 +78,7 @@ class TestWikiGroupBackend(GroupsBackendTest):
         become_trusted(request)
 
         # long list of users
-        page_content = [u" * %s" % member for member in create_random_string_list(length=15, count=30000)]
+        page_content = [u" * %s" % member for member in create_random_string_list(length=15, count=1234)]
         test_user = create_random_string_list(length=15, count=1)[0]
         create_page(request, u'UserGroup', "\n".join(page_content))
         append_page(request, u'UserGroup', u' * %s' % test_user)
