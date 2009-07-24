@@ -45,8 +45,7 @@ import threading
 
 __all__ = ['BaseSCGIServer']
 
-class NoDefault(object):
-    pass
+from flup.server import NoDefault
 
 # The main classes use this name for logging.
 LoggerName = 'scgi-wsgi'
@@ -278,7 +277,7 @@ class BaseSCGIServer(object):
                  multithreaded=True, multiprocess=False,
                  bindAddress=('localhost', 4000), umask=None,
                  allowedServers=NoDefault,
-                 loggingLevel=logging.INFO, debug=True):
+                 loggingLevel=logging.INFO, debug=False):
         """
         scriptName is the initial portion of the URL path that "belongs"
         to your application. It is used to determine PATH_INFO (which doesn't
@@ -443,8 +442,8 @@ class BaseSCGIServer(object):
             assert type(response_headers) is list, 'Headers must be a list'
             if __debug__:
                 for name,val in response_headers:
-                    assert type(name) is str, 'Header names must be strings'
-                    assert type(val) is str, 'Header values must be strings'
+                    assert type(name) is str, 'Header name "%s" must be a string' % name
+                    assert type(val) is str, 'Value of header "%s" must be a string' % name
 
             headers_set[:] = [status, response_headers]
             return write
@@ -501,7 +500,7 @@ class BaseSCGIServer(object):
         if scriptName is NoDefault:
             # Pull SCRIPT_NAME/PATH_INFO from environment, with empty defaults
             if not environ.has_key('SCRIPT_NAME'):
-                environ['SCRIPT_INFO'] = ''
+                environ['SCRIPT_NAME'] = ''
             if not environ.has_key('PATH_INFO') or not environ['PATH_INFO']:
                 if reqUri is not None:
                     environ['PATH_INFO'] = reqUri[0]
