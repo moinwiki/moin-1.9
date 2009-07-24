@@ -62,6 +62,6 @@ General syntax: moin [options] maint cleancache
                              ('pagegroups', 'wiki'),
         ]
         for arena, scope in arena_scope_list:
-            for key caching.get_cache_list(request, arena, scope):
+            for key in caching.get_cache_list(request, arena, scope):
                 caching.CacheEntry(request, arena, key, scope=scope).remove()
 

@@ -27,6 +27,7 @@ import re, time, os
 from MoinMoin import action, config, util
 from MoinMoin import wikiutil, i18n
 from MoinMoin.Page import Page
+from MoinMoin.datastruct.backends.wiki_dicts import WikiDict
 
 
 names = ["TitleSearch", "WordIndex", "TitleIndex", "GoTo",
@@ -380,12 +381,18 @@ class Macro:
 
     def macro_GetVal(self, page=None, key=None):
         page = wikiutil.get_unicode(self.request, page, 'page')
-        if not self.request.user.may.read(page):
-            raise ValueError("You don't have enough rights on this page")
+
         key = wikiutil.get_unicode(self.request, key, 'key')
         if page is None or key is None:
             raise ValueError("You need to give: pagename, key")
-        d = self.request.dicts[page]
+
+        d = self.request.dicts.get(page, {})
+
+        # Check acl only if dictionary is defined on a wiki page.
+        if isinstance(d, WikiDict) and not self.request.user.may.read(page):
+            raise ValueError("You don't have enough rights on this page")
+
         result = d.get(key, '')
+
         return self.formatter.text(result)
 

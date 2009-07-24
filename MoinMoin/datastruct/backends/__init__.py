@@ -311,3 +311,9 @@ class BaseDictsBackend(object):
     def _retrieve_items(self, dict_name):
         raise NotImplementedError()
 
+    def get(self, key, default=None):
+        try:
+            return self[key]
+        except DictDoesNotExistError:
+            return default
+
