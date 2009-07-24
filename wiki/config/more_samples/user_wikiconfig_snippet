@@ -1,0 +1,52 @@
+    # This is a sample configuration snippet that shows how to configure user
+    # and user preferences related functionality.
+
+    #userprefs_disabled = [] # allow disabling certain userpreferences plugins
+
+    #user_homewiki = u'Self' # interwiki name for where user homepages are located
+
+    #password_checker = None
+    #user_email_unique = True # do we check whether a user's email is unique?
+    #user_jid_unique = True # do we check whether a user's email is unique?
+
+    #tz_offset = 0.0 # default time zone offset in hours from UTC
+
+    #quicklinks_default = [] # preload user quicklinks with this page list
+    #subscribed_pages_default = [] # preload user subscribed pages with this page list
+
+    #user_checkbox_defaults = {'mailto_author': 0,
+    #                          'edit_on_doubleclick': 0,
+    #                          'remember_last_visit': 0,
+    #                          'show_comments': 0,
+    #                          'show_nonexist_qm': 0, # nonexist_qm
+    #                          'show_page_trail': 1,
+    #                          'show_toolbar': 1,
+    #                          'show_topbottom': 0,
+    #                          'show_fancy_diff': 1,
+    #                          'wikiname_add_spaces': 0,
+    #                          'remember_me': 1,
+    #                         }
+
+    # don't let the user change those
+    #user_checkbox_disable = [] # ['disabled', ]
+
+    # remove those checkboxes:
+    #user_checkbox_remove = [] # ['remember_me', 'disabled', ]
+
+    #user_form_defaults = {# key: default - do NOT remove keys from here!
+    #    'name': '',
+    #    'aliasname': '',
+    #    'password': '',
+    #    'password2': '',
+    #    'email': '',
+    #    'jid': '',
+    #    'css_url': '',
+    #    'edit_rows': "20",
+    #}
+
+    # don't let the user change those, but show them:
+    #user_form_disable = [] # ['name', 'aliasname', 'email', ]
+
+    # remove those completely:
+    #user_form_remove = [] # ['password', 'password2', ]
+

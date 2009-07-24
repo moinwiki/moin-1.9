@@ -1,0 +1,36 @@
+TWikiDrawPlugin Sources
+-----------------------
+
+NOTE: You don't need to compile this, a precompiled applet can be found in
+      wiki/htdocs/applets/TWikiDrawPlugin
+
+This is a modified source tree of TWikiDrawPlugin of 29 Jan 2003 - 21:47
+adding:
+
+ - basename argument
+ - indexed PNG support
+ - xhtml conform image maps
+ - corrects object stacking order for the map
+
+To build this plugin from sources you need the following:
+ * JDK 1.2 or later version (http://java.sun.com/downloads)
+ * Ant 1.5.4 or later version (http://ant.apache.org/)
+
+To build just run change current directory to /contrib/TWikiDrawPlugin
+and run Ant. Ant automatically loads build.xml from current directory 
+and creates a twikidraw.jar in /contrib/TWikiDrawPlugin/build directory.
+
+TODO:
+ * look at http://moinmo.in/MoinMoinTodo/Release%201.5 - see
+   the "Unfinished" section for more todo stuff relating to TWikiDraw
+ * make some bash script that invokes the build process and puts the resulting
+   applet into wiki/htdocs/applets/TWikiDrawPlugin
+ * document build requirements
+ * test with some Java enabled browser if it works :)
+
+Applet tested on:
+ * Windows XP SP 1 / Sun JDK 1.4.2 / IE 6.0 and Mozilla Firefox 1.5
+
+References:
+ - Original site: http://twiki.org/cgi-bin/view/Plugins/TWikiDrawPlugin
+ - Moin changes: http://moinmo.in/OliverGraf/TWikiDrawPlugin
