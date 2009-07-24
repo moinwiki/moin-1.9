@@ -16,6 +16,10 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
+Version 1.8.current:
+  Other changes:
+    * moin maint cleancache purges now also drafts
+
 Version 1.8.4:
   Bug fixes:
     * ACL security: fix bug in hierarchical ACL processing, more restrictive
