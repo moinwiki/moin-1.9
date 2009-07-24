@@ -304,7 +304,6 @@ class ScriptEngine:
                 pass
             else:
                 self.msg += u"%(pagename)s added \n" % {"pagename": pagename}
-                page.clean_acl_cache()
         else:
             self.msg += u"action add revision: not enough rights - nothing done \n"
 
@@ -372,7 +371,6 @@ class ScriptEngine:
 
         # Clear caches
         # TODO Code from MoinMoin/script/maint/cleancache.py may be used
-        page.clean_acl_cache() # It is not necessary should be removed.
 
     def runScript(self, commands):
         """ Runs the commands.

@@ -1599,12 +1599,6 @@ class Page(object):
 
         return Page(self.request, self.page_name, rev=lastRevision).parseACL()
 
-    def clean_acl_cache(self):
-        """
-        Clean ACL cache entry of this page (used by PageEditor on save)
-        """
-        pass # should not be necessary any more as the new cache watches edit-log for changes
-
     # Text format -------------------------------------------------------
 
     def encodeTextMimeType(self, text):
