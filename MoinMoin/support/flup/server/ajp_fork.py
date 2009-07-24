@@ -1,37 +1,43 @@
-# Copyright (c) 2005, 2006 Allan Saddi <allan@saddi.com>
-# All rights reserved.
-#
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions
-# are met:
-# 1. Redistributions of source code must retain the above copyright
-#    notice, this list of conditions and the following disclaimer.
-# 2. Redistributions in binary form must reproduce the above copyright
-#    notice, this list of conditions and the following disclaimer in the
-#    documentation and/or other materials provided with the distribution.
-#
-# THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
-# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-# ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
-# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
-# OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-# HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
-# OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-# SUCH DAMAGE.
-#
-# $Id$
-
 """
+.. highlight:: python
+   :linenothreshold: 5
+
+.. highlight:: bash
+   :linenothreshold: 5
+
 ajp - an AJP 1.3/WSGI gateway.
 
+:copyright: Copyright (c) 2005, 2006 Allan Saddi <allan@saddi.com>
+  All rights reserved.
+:license:
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+
+ 1. Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+
+ THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS **AS IS** AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ SUCH DAMAGE.
+
 For more information about AJP and AJP connectors for your web server, see
-<http://jakarta.apache.org/tomcat/connectors-doc/>.
+http://jakarta.apache.org/tomcat/connectors-doc/.
 
 For more information about the Web Server Gateway Interface, see
-<http://www.python.org/peps/pep-0333.html>.
+http://www.python.org/peps/pep-0333.html.
 
 Example usage:
 
@@ -50,7 +56,7 @@ can be used by a wrapper script to determine if the python script should be
 re-run. When a SIGINT or SIGTERM is received, the script exits with status
 code 0, possibly indicating a normal exit.
 
-Example wrapper script:
+Example wrapper script::
 
   #!/bin/sh
   STATUS=42
@@ -59,14 +65,14 @@ Example wrapper script:
     STATUS=$?
   done
 
-Example workers.properties (for mod_jk):
+Example workers.properties (for mod_jk)::
 
   worker.list=foo
   worker.foo.port=8009
   worker.foo.host=localhost
   worker.foo.type=ajp13
 
-Example httpd.conf (for mod_jk):
+Example httpd.conf (for mod_jk)::
 
   JkWorkersFile /path/to/workers.properties
   JkMount /* foo
@@ -98,11 +104,11 @@ class WSGIServer(BaseAJPServer, PreforkServer):
     implement. :)
 
     Of course you will need an AJP1.3 connector for your webserver (e.g.
-    mod_jk) - see <http://jakarta.apache.org/tomcat/connectors-doc/>.
+    mod_jk) - see http://jakarta.apache.org/tomcat/connectors-doc/.
     """
     def __init__(self, application, scriptName='', environ=None,
                  bindAddress=('localhost', 8009), allowedServers=None,
-                 loggingLevel=logging.INFO, debug=True, **kw):
+                 loggingLevel=logging.INFO, debug=False, **kw):
         """
         scriptName is the initial portion of the URL path that "belongs"
         to your application. It is used to determine PATH_INFO (which doesn't
@@ -159,10 +165,6 @@ class WSGIServer(BaseAJPServer, PreforkServer):
                          self._hupReceived and ' (reload requested)' or '')
 
         return ret
-
-def factory(global_conf, host=None, port=None, **local):
-    import paste_factory
-    return paste_factory.helper(WSGIServer, global_conf, host, port, **local)
 
 if __name__ == '__main__':
     def test_app(environ, start_response):

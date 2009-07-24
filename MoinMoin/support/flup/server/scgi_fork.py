@@ -1,39 +1,45 @@
-# Copyright (c) 2005, 2006 Allan Saddi <allan@saddi.com>
-# All rights reserved.
-#
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions
-# are met:
-# 1. Redistributions of source code must retain the above copyright
-#    notice, this list of conditions and the following disclaimer.
-# 2. Redistributions in binary form must reproduce the above copyright
-#    notice, this list of conditions and the following disclaimer in the
-#    documentation and/or other materials provided with the distribution.
-#
-# THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
-# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-# ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
-# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
-# OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-# HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
-# OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-# SUCH DAMAGE.
-#
-# $Id$
-
 """
+.. highlight:: python
+   :linenothreshold: 5
+
+.. highlight:: bash
+   :linenothreshold: 5
+
 scgi - an SCGI/WSGI gateway.
 
+:copyright: Copyright (c) 2005, 2006 Allan Saddi <allan@saddi.com>
+  All rights reserved.
+:license:
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+
+ 1. Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+
+ THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS **AS IS** AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ SUCH DAMAGE.
+
 For more information about SCGI and mod_scgi for Apache1/Apache2, see
-<http://www.mems-exchange.org/software/scgi/>.
+http://www.mems-exchange.org/software/scgi/.
 
 For more information about the Web Server Gateway Interface, see
-<http://www.python.org/peps/pep-0333.html>.
+http://www.python.org/peps/pep-0333.html.
 
-Example usage:
+Example usage::
 
   #!/usr/bin/env python
   import sys
@@ -50,7 +56,7 @@ can be used by a wrapper script to determine if the python script should be
 re-run. When a SIGINT or SIGTERM is received, the script exits with status
 code 0, possibly indicating a normal exit.
 
-Example wrapper script:
+Example wrapper script::
 
   #!/bin/sh
   STATUS=42
@@ -66,7 +72,8 @@ __version__ = '$Revision$'
 import logging
 import socket
 
-from flup.server.scgi_base import BaseSCGIServer, Connection, NoDefault
+from flup.server import NoDefault
+from flup.server.scgi_base import BaseSCGIServer, Connection
 from flup.server.preforkserver import PreforkServer
 
 __all__ = ['WSGIServer']
@@ -74,9 +81,9 @@ __all__ = ['WSGIServer']
 class WSGIServer(BaseSCGIServer, PreforkServer):
     """
     SCGI/WSGI server. For information about SCGI (Simple Common Gateway
-    Interface), see <http://www.mems-exchange.org/software/scgi/>.
+    Interface), see http://www.mems-exchange.org/software/scgi/.
 
-    This server is similar to SWAP <http://www.idyll.org/~t/www-tools/wsgi/>,
+    This server is similar to SWAP http://www.idyll.org/~t/www-tools/wsgi/,
     another SCGI/WSGI server.
 
     It differs from SWAP in that it isn't based on scgi.scgi_server and
@@ -90,7 +97,7 @@ class WSGIServer(BaseSCGIServer, PreforkServer):
     def __init__(self, application, scriptName=NoDefault, environ=None,
                  bindAddress=('localhost', 4000), umask=None,
                  allowedServers=None,
-                 loggingLevel=logging.INFO, debug=True, **kw):
+                 loggingLevel=logging.INFO, debug=False, **kw):
         """
         scriptName is the initial portion of the URL path that "belongs"
         to your application. It is used to determine PATH_INFO (which doesn't
@@ -110,7 +117,7 @@ class WSGIServer(BaseSCGIServer, PreforkServer):
         the umask is to be changed to before the socket is created in the
         filesystem. After the socket is created, the previous umask is
         restored.
-        
+
         allowedServers must be None or a list of strings representing the
         IPv4 addresses of servers allowed to connect. None means accept
         connections from anywhere.
@@ -154,10 +161,6 @@ class WSGIServer(BaseSCGIServer, PreforkServer):
                          self._hupReceived and ' (reload requested)' or '')
 
         return ret
-
-def factory(global_conf, host=None, port=None, **local):
-    import paste_factory
-    return paste_factory.helper(WSGIServer, global_conf, host, port, **local)
 
 if __name__ == '__main__':
     def test_app(environ, start_response):

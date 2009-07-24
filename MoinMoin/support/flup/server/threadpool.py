@@ -28,7 +28,6 @@ __author__ = 'Allan Saddi <allan@saddi.com>'
 __version__ = '$Revision$'
 
 import sys
-import thread
 import threading
 
 class ThreadPool(object):
@@ -47,9 +46,30 @@ class ThreadPool(object):
         self._workQueue = []
         self._idleCount = self._workerCount = maxSpare
 
+        self._threads = []
+        self._stop = False
+
         # Start the minimum number of worker threads.
         for i in range(maxSpare):
-            thread.start_new_thread(self._worker, ())
+            self._start_new_thread()
+            
+    def _start_new_thread(self):
+        t = threading.Thread(target=self._worker)
+        self._threads.append(t)
+        t.setDaemon(True)
+        t.start()
+        return t
+        
+    def shutdown(self):
+        """shutdown all workers."""
+        self._lock.acquire()
+        self._stop = True
+        self._lock.notifyAll()
+        self._lock.release()
+
+        # wait for all threads to finish
+        for t in self._threads:
+            t.join()
 
     def addJob(self, job, allowQueuing=True):
         """
@@ -71,7 +91,7 @@ class ThreadPool(object):
                   self._workerCount < self._maxThreads:
                 self._workerCount += 1
                 self._idleCount += 1
-                thread.start_new_thread(self._worker, ())
+                self._start_new_thread()
 
             # Hand off the job.
             if self._idleCount or allowQueuing:
@@ -88,34 +108,38 @@ class ThreadPool(object):
         Worker thread routine. Waits for a job, executes it, repeat.
         """
         self._lock.acquire()
-        while True:
-            while not self._workQueue:
-                self._lock.wait()
+        try:
+            while True:
+                while not self._workQueue and not self._stop:
+                    self._lock.wait()
+                
+                if self._stop:
+                    return
 
-            # We have a job to do...
-            job = self._workQueue.pop(0)
+                # We have a job to do...
+                job = self._workQueue.pop(0)
 
-            assert self._idleCount > 0
-            self._idleCount -= 1
+                assert self._idleCount > 0
+                self._idleCount -= 1
 
+                self._lock.release()
+
+                try:
+                    job.run()
+                except:
+                    # FIXME: This should really be reported somewhere.
+                    # But we can't simply report it to stderr because of fcgi
+                    pass
+
+                self._lock.acquire()
+
+                if self._idleCount == self._maxSpare:
+                    break # NB: lock still held
+                self._idleCount += 1
+                assert self._idleCount <= self._maxSpare
+
+            # Die off...
+            assert self._workerCount > self._maxSpare
+            self._workerCount -= 1
+        finally:
             self._lock.release()
-
-            try:
-                job.run()
-            except:
-                # FIXME: This should really be reported somewhere.
-                # But we can't simply report it to stderr because of fcgi
-                pass
-
-            self._lock.acquire()
-
-            if self._idleCount == self._maxSpare:
-                break # NB: lock still held
-            self._idleCount += 1
-            assert self._idleCount <= self._maxSpare
-
-        # Die off...
-        assert self._workerCount > self._maxSpare
-        self._workerCount -= 1
-
-        self._lock.release()

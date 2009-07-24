@@ -109,6 +109,10 @@ class ThreadedServer(object):
 
         # Return bool based on whether or not SIGHUP was received.
         return self._hupReceived
+        
+    def shutdown(self):
+        """Wait for running threads to finish."""
+        self._threadPool.shutdown()
 
     def _mainloopPeriodic(self):
         """

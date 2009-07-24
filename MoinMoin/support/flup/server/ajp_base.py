@@ -41,10 +41,9 @@ import time
 import thread
 import threading
 
-__all__ = ['BaseAJPServer']
+from flup.server import NoDefault
 
-class NoDefault(object):
-    pass
+__all__ = ['BaseAJPServer']
 
 # Packet header prefixes.
 SERVER_PREFIX = '\x12\x34'
@@ -752,7 +751,7 @@ class BaseAJPServer(object):
     def __init__(self, application, scriptName='', environ=None,
                  multithreaded=True, multiprocess=False,
                  bindAddress=('localhost', 8009), allowedServers=NoDefault,
-                 loggingLevel=logging.INFO, debug=True):
+                 loggingLevel=logging.INFO, debug=False):
         """
         scriptName is the initial portion of the URL path that "belongs"
         to your application. It is used to determine PATH_INFO (which doesn't
@@ -886,8 +885,8 @@ class BaseAJPServer(object):
             assert type(response_headers) is list, 'Headers must be a list'
             if __debug__:
                 for name,val in response_headers:
-                    assert type(name) is str, 'Header names must be strings'
-                    assert type(val) is str, 'Header values must be strings'
+                    assert type(name) is str, 'Header name "%s" must be a string' % name
+                    assert type(val) is str, 'Value of header "%s" must be a string' % name
 
             headers_set[:] = [status, response_headers]
             return write

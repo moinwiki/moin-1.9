@@ -64,7 +64,7 @@ class WSGIServer(BaseFCGIServer, SingleServer):
     """
     def __init__(self, application, environ=None,
                  bindAddress=None, umask=None, multiplexed=False,
-                 debug=True, roles=(FCGI_RESPONDER,), **kw):
+                 debug=False, roles=(FCGI_RESPONDER,), forceCGI=False, **kw):
         """
         environ, if present, must be a dictionary-like object. Its
         contents will be copied into application's environ. Useful
@@ -87,7 +87,8 @@ class WSGIServer(BaseFCGIServer, SingleServer):
                                 umask=umask,
                                 multiplexed=multiplexed,
                                 debug=debug,
-                                roles=roles)
+                                roles=roles,
+                                forceCGI=forceCGI)
         for key in ('jobClass', 'jobArgs'):
             if kw.has_key(key):
                 del kw[key]
@@ -120,10 +121,6 @@ class WSGIServer(BaseFCGIServer, SingleServer):
         self._cleanupSocket(sock)
 
         return ret
-
-def factory(global_conf, host=None, port=None, **local):
-    import paste_factory
-    return paste_factory.helper(WSGIServer, global_conf, host, port, **local)
 
 if __name__ == '__main__':
     def test_app(environ, start_response):

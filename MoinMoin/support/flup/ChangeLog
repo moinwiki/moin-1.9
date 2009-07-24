@@ -1,3 +1,52 @@
+2009-06-05  Allan Saddi  <allan@saddi.com>
+
+	* Fix bug in scgi servers that occurs when SCRIPT_NAME is missing.
+	  Thanks to Jon Nelson for finding the problem!
+
+2009-05-29  Allan Saddi  <allan@saddi.com>
+
+	* Let all the active requests to finish before quitting. Thanks
+	  to Anand Chitipothu for the patch!
+
+2009-05-26  Allan Saddi  <allan@saddi.com>
+
+	* Release 1.0.2
+
+2009-05-18  Allan Saddi  <allan@saddi.com>
+
+	* Import Paste factories (and dependencies...) from PasteScript
+
+2009-05-04  Allan Saddi  <allan@saddi.com>
+
+	* Be tolerant of EAGAIN when sending messages to parent process.
+
+2009-02-02  Allan Saddi  <allan@saddi.com>
+
+	* Add forceCGI keyword argument to FastCGI servers to
+	  programmatically force CGI behavior.
+
+	* Merge Tommi Virtanen's "single server" (sequential server)
+	  patch.
+
+2008-12-03  Allan Saddi  <allan@saddi.com>
+
+	* Update ez_setup.py.
+
+2008-09-26  Allan Saddi  <allan@saddi.com>
+
+	* Re-seed random module after each fork.
+
+2008-09-11  Allan Saddi  <allan@saddi.com>
+
+	* Add an indication as to which header fails assertion when
+	  passing in non-string header names and/or values.
+
+2008-08-20  Allan Saddi  <allan@saddi.com>
+
+	* Add support for setting umask for UNIX domain sockets from
+	  paste.server_factory implementations. Thanks to Michal Suszko
+	  for the patch.
+
 2008-07-23  Allan Saddi  <allan@saddi.com>
 
 	* Add support for configuring UNIX domain sockets (for servers that

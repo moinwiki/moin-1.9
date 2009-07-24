@@ -33,6 +33,8 @@ import socket
 import select
 import errno
 import signal
+import random
+import time
 
 try:
     import fcntl
@@ -97,6 +99,9 @@ class PreforkServer(object):
         # free to process requests.
         self._children = {}
 
+        self._children_to_purge = []
+        self._last_purge = 0
+
     def run(self, sock):
         """
         The main loop. Pass a socket that is ready to accept() client
@@ -124,15 +129,17 @@ class PreforkServer(object):
             r = [x['file'] for x in self._children.values()
                  if x['file'] is not None]
 
-            if len(r) == len(self._children):
+            if len(r) == len(self._children) and not self._children_to_purge:
                 timeout = None
             else:
                 # There are dead children that need to be reaped, ensure
-                # that they are by timing out, if necessary.
+                # that they are by timing out, if necessary. Or there are some
+                # children that need to die.
                 timeout = 2
 
+            w = (time.time() > self._last_purge + 10) and self._children_to_purge or []
             try:
-                r, w, e = select.select(r, [], [], timeout)
+                r, w, e = select.select(r, w, [], timeout)
             except select.error, e:
                 if e[0] != errno.EINTR:
                     raise
@@ -160,6 +167,20 @@ class PreforkServer(object):
                             d['file'].close()
                             d['file'] = None
                             d['avail'] = False
+
+            for child in w:
+                # purging child
+                child.send('bye, bye')
+                del self._children_to_purge[self._children_to_purge.index(child)]
+                self._last_purge = time.time()
+
+                # Try to match it with a child. (Do we need a reverse map?)
+                for pid,d in self._children.items():
+                    if child is d['file']:
+                        d['file'].close()
+                        d['file'] = None
+                        d['avail'] = False
+                break
 
             # Reap children.
             self._reapChildren()
@@ -307,10 +328,37 @@ class PreforkServer(object):
         """Override to provide access control."""
         return True
 
+    def _notifyParent(self, parent, msg):
+        """Send message to parent, ignoring EPIPE and retrying on EAGAIN"""
+        while True:
+            try:
+                parent.send(msg)
+                return True
+            except socket.error, e:
+                if e[0] == errno.EPIPE:
+                    return False # Parent is gone
+                if e[0] == errno.EAGAIN:
+                    # Wait for socket change before sending again
+                    select.select([], [parent], [])
+                else:
+                    raise
+                
     def _child(self, sock, parent):
         """Main loop for children."""
         requestCount = 0
-        
+
+        # Re-seed random module
+        preseed = ''
+        # urandom only exists in Python >= 2.4
+        if hasattr(os, 'urandom'):
+            try:
+                preseed = os.urandom(16)
+            except NotImplementedError:
+                pass
+        # Have doubts about this. random.seed will just hash the string
+        random.seed('%s%s%s' % (preseed, os.getpid(), time.time()))
+        del preseed
+
         while True:
             # Wait for any activity on the main socket or parent socket.
             r, w, e = select.select([sock, parent], [], [])
@@ -339,12 +387,7 @@ class PreforkServer(object):
                 continue
 
             # Notify parent we're no longer available.
-            try:
-                parent.send('\x00')
-            except socket.error, e:
-                # If parent is gone, finish up this request.
-                if e[0] != errno.EPIPE:
-                    raise
+            self._notifyParent(parent, '\x00')
 
             # Do the job.
             self._jobClass(clientSock, addr, *self._jobArgs).run()
@@ -356,13 +399,8 @@ class PreforkServer(object):
                     break
                 
             # Tell parent we're free again.
-            try:
-                parent.send('\xff')
-            except socket.error, e:
-                if e[0] == errno.EPIPE:
-                    # Parent is gone.
-                    return
-                raise
+            if not self._notifyParent(parent, '\xff'):
+                return # Parent is gone.
 
     # Signal handlers
 
@@ -377,16 +415,24 @@ class PreforkServer(object):
         # Do nothing (breaks us out of select and allows us to reap children).
         pass
 
+    def _usr1Handler(self, signum, frame):
+        self._children_to_purge = [x['file'] for x in self._children.values()
+                                   if x['file'] is not None]
+
     def _installSignalHandlers(self):
         supportedSignals = [signal.SIGINT, signal.SIGTERM]
         if hasattr(signal, 'SIGHUP'):
             supportedSignals.append(signal.SIGHUP)
+        if hasattr(signal, 'SIGUSR1'):
+            supportedSignals.append(signal.SIGUSR1)
 
         self._oldSIGs = [(x,signal.getsignal(x)) for x in supportedSignals]
 
         for sig in supportedSignals:
             if hasattr(signal, 'SIGHUP') and sig == signal.SIGHUP:
                 signal.signal(sig, self._hupHandler)
+            elif hasattr(signal, 'SIGUSR1') and sig == signal.SIGUSR1:
+                signal.signal(sig, self._usr1Handler)
             else:
                 signal.signal(sig, self._intHandler)
 
