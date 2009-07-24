@@ -164,3 +164,18 @@ class DictsBackendTest(object):
 
         assert u'SomeNotExistingDict' not in dicts
 
+    def test_get(self):
+        dicts = self.request.dicts
+
+        for dict_name in self.dicts:
+            assert dicts.get(dict_name)
+
+        assert u'SomeNotExistingDict' not in dicts
+        assert dicts.get(u'SomeNotExistingDict') is None
+
+        for dict_name, expected_dict in self.dicts.items():
+            test_dict = dicts[dict_name]
+            for key, value in expected_dict.items():
+                assert u'SomeNotExistingKey' not in test_dict
+                assert test_dict.get(u'SomeNotExistingKey') is None
+
