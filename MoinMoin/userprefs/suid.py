@@ -26,7 +26,7 @@ class Settings(UserPrefBase):
         self.name = 'suid'
 
     def allowed(self):
-        return (self.request.cfg.auth_have_login and
+        return (self.request.user.auth_method in self.request.cfg.auth_can_logout and
                UserPrefBase.allowed(self) and self.request.user.isSuperUser())
 
     def handle_form(self):
