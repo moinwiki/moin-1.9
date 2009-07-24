@@ -83,7 +83,7 @@ class TestGroupFormatterWikiMarkup(object):
         assert 'first level' in members
         assert 'again first level' in members
 
-    def test_intended_list(self):
+    def test_indented_list(self):
         text = """
     * first level
      * second level
@@ -190,7 +190,7 @@ class TestGroupFormatterCreole(object):
         assert 'first level' in members
         assert 'again first level' in members
 
-    def test_intended_list(self):
+    def test_indented_list(self):
         text = """
     * first level
     ** second level

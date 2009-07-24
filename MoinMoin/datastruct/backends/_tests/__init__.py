@@ -72,6 +72,7 @@ class GroupsBackendTest(object):
         assert groups.get(u'AdminGroup')
         assert u'NotExistingGroup' not in groups
         assert groups.get(u'NotExistingGroup') is None
+        assert groups.get(u'NotExistingGroup', []) == []
 
     def test_groups_with_member(self):
         groups = self.request.groups
@@ -172,10 +173,13 @@ class DictsBackendTest(object):
 
         assert u'SomeNotExistingDict' not in dicts
         assert dicts.get(u'SomeNotExistingDict') is None
+        assert dicts.get(u'SomeNotExistingDict', {}) == {}
+
 
         for dict_name, expected_dict in self.dicts.items():
             test_dict = dicts[dict_name]
             for key, value in expected_dict.items():
                 assert u'SomeNotExistingKey' not in test_dict
                 assert test_dict.get(u'SomeNotExistingKey') is None
+                assert test_dict.get(u'SomeNotExistingKey', {}) == {}
 

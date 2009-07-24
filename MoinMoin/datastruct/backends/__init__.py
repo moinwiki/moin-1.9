@@ -98,6 +98,11 @@ class BaseGroupsBackend(object):
                 pass
 
     def get(self, key, default=None):
+        """
+        Return the group named <key> if key is in the backend, else
+        default. If default is not given, it defaults to None, so that
+        this method never raises a GroupDoesNotExistError.
+        """
         try:
             return self[key]
         except GroupDoesNotExistError:
@@ -275,6 +280,11 @@ class BaseDict(object):
         return self._dict[key]
 
     def get(self, key, default=None):
+        """
+        Return the value if key is in the dictionary, else default. If
+        default is not given, it defaults to None, so that this method
+        never raises a KeyError.
+        """
         return self._dict.get(key, default)
 
     def _load_dict(self):
@@ -312,6 +322,11 @@ class BaseDictsBackend(object):
         raise NotImplementedError()
 
     def get(self, key, default=None):
+        """
+        Return the dictionary named <key> if key is in the backend,
+        else default. If default is not given, it defaults to None, so
+        that this method never raises a DictDoesNotExistError.
+        """
         try:
             return self[key]
         except DictDoesNotExistError:

@@ -28,7 +28,7 @@ class TestWikiGroupBackend(GroupsBackendTest):
     def setup_class(self):
         become_trusted(self.request)
 
-        for (group, members) in self.test_groups.iteritems():
+        for group, members in self.test_groups.iteritems():
             page_text = ' * %s' % '\n * '.join(members)
             create_page(self.request, group, page_text)
 
