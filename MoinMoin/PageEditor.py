@@ -1120,7 +1120,6 @@ Please review the page and save then. Do not save this page as it is!""")
             trivial = kw.get('trivial', 0)
             # write the page file
             mtime_usecs, rev = self._write_file(newtext, action, comment, extra, deleted=deleted)
-            self.clean_acl_cache()
             self._save_draft(None, None) # everything fine, kill the draft for this page
 
             if notify:
