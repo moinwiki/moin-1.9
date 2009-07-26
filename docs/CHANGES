@@ -55,6 +55,16 @@ Version 1.9.0.current:
   * "moin ... account homepage" script to create user homepages.
   * Theme packages: do_copythemefile now copies theme files to
     MoinMoin/web/static/htdocs.
+  * OpenID: Support for Simple Registration (SREG) extension.
+    Basic profile fields can be copied from OpenID provider when logging in.
+  * OpenID: Support for Teams extension.
+    If your OpenID provider supports the Teams extension (i.e. Launchpad),
+    MoinMoin can be configured to generate 
+  * OpenID: Ability to accept logins from specific OpenID providers.
+    Login form changes based on configuration for better usability:
+    * 0 providers: normal text input box for OpenID URL
+    * 1 provider: hidden field, automatic form submission with JavaScript
+    * 2+ providers: select field, uses directed identity
 
   Bug fixes:
   * Fixed MoinMoinBugs/DeprecatedIsNotRespected (search ranking, WantedPages).
@@ -63,10 +73,17 @@ Version 1.9.0.current:
   * web.session: fixed MoinMoinBugs/1.9_remember_me_broken.
   * Fix superuser functionality (broken in previous 1.9 betas).
   * fixes misc. crashes / exceptions
+  * OpenID: request processing now works with new WSGI refactoring.
+  * OpenID: always return error messages with CancelLogin if OpenID process fails.
 
   Other changes:
   * ImageLink page has been killed (ImageLink macro is gone since 1.6.1).
   * replace our text_irssi parser with a wrapper around pygments' irc highlighter
+  * Added disabled state for HTML select fields.
+  * Allowed disabling of timezone and language user prefs if they are
+    part of the user's login fields (i.e. OpenID SREG).
+  * Added option to disable local registration links and direct user
+    to registration page at an OpenID provider instead.
 
   Developer notes:
   * groups and dicts API changes:
