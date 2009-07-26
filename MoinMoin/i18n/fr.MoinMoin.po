@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-10 10:24+0200\n"
-"PO-Revision-Date: 2009-05-12 13:11+0200\n"
+"POT-Creation-Date: 2009-07-27 00:57+0200\n"
+"PO-Revision-Date: 2009-07-19 20:30+0200\n"
 "Last-Translator: Jean-Philippe Guérard <fevrier@tigreraye.org>\n"
 "Language-Team: Français\n"
 "MIME-Version: 1.0\n"
@@ -493,13 +493,12 @@ msgstr ""
 "L'expression rationnelle de surlignage : « %(regex)s » est incorrecte : %"
 "(error)s"
 
-#, fuzzy
 msgid ""
 "The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
-"Le contenu sauvegardé de cette page est obsolète et ne sera pas inclus dans "
-"les résultats d'une recherche !"
+"Le contenu sauvegardé de cette page est obsolète et sera moins bien classé "
+"dans les résultats de recherches !"
 
 #, python-format
 msgid "Revision %(rev)d as of %(date)s"
@@ -797,11 +796,43 @@ msgstr ""
 msgid "Associate this name"
 msgstr "Associer à ce nom"
 
+#, fuzzy
+msgid "OpenID verification canceled."
+msgstr "La vérification a été annulée."
+
+#, fuzzy, python-format
+msgid "OpenID success. id: %s"
+msgstr "Identifiant OpenID ajouté avec succès."
+
+#, fuzzy
+msgid "OpenID failure"
+msgstr "Échec OpenID."
+
+#, fuzzy
+msgid "No OpenID found in session."
+msgstr "Pas d'identifiant OpenID entré."
+
 msgid "Your account is now associated to your OpenID."
 msgstr "Votre compte est maintenant associé à votre identifiant OpenID."
 
 msgid "The password you entered is not valid."
 msgstr "Le mot de passe entré est incorrect."
+
+#, fuzzy
+msgid "OpenID: handle verify continuation"
+msgstr "Vérification de la confiance OpenID"
+
+msgid "OpenID: handle name continuation"
+msgstr ""
+
+msgid "OpenID: handle associate continuation"
+msgstr ""
+
+msgid "OpenID: unknown continuation stage"
+msgstr ""
+
+msgid "OpenID error: unknown continuation stage"
+msgstr ""
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
 msgstr ""
@@ -832,14 +863,18 @@ msgstr "Panne du serveur LDAP %(server)s."
 msgid "Failed to connect to database."
 msgstr "Échec de la connexion à la base de donnée."
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+"one now</a>. "
 msgstr ""
 "Si vous n'avez pas de compte, <a href=\"%(userprefslink)s\">vous pouvez en "
 "créer un maintenant</a>. <a href=\"%(sendmypasswordlink)s\">Mot de passe "
 "oublié ?</a>"
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+msgstr ""
 
 msgid ""
 " Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
@@ -1596,6 +1631,10 @@ msgstr "AideDeL'Édition/SousPages"
 
 msgid "HelpOnGraphicalEditor"
 msgstr "AideDeL'ÉditeurGraphique"
+
+#, fuzzy
+msgid "HelpOnGroups"
+msgstr "AideDesMacros"
 
 msgid "HelpOnHeadlines"
 msgstr "AideDesTitres"
@@ -3332,6 +3371,17 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "Gestion de MesPages"
+
+#, fuzzy
+msgid "page package"
+msgstr "Page modifiée"
+
+msgid "Choose:"
+msgstr ""
+
+#, python-format
+msgid "Install language packs for '%s'"
+msgstr ""
 
 msgid "Your subscription to this page has been removed."
 msgstr "Votre abonnement à cette page a été supprimé."
