@@ -7,7 +7,7 @@ MoinMoin - cleancache script
 @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import caching
+from MoinMoin import caching, user
 from MoinMoin.Page import Page
 from MoinMoin.script import MoinScript
 
@@ -64,4 +64,9 @@ General syntax: moin [options] maint cleancache
         for arena, scope in arena_scope_list:
             for key in caching.get_cache_list(request, arena, scope):
                 caching.CacheEntry(request, arena, key, scope=scope).remove()
+
+        # clean drafts of users
+        uids = user.getUserList(request)
+        for key in uids:
+            caching.CacheEntry(request, 'drafts', key, scope='wiki').remove()
 
