@@ -20,13 +20,21 @@ from MoinMoin.util.dataset import TupleDataset, Column
 from MoinMoin.widget.browser import DataBrowserWidget
 
 def execute(pagename, request):
-    if not request.user or not request.user.isSuperUser():
-        return ''
     _ = request.getText
+    if not request.user or not request.user.isSuperUser():
+        msg = _('Only superuser is allowed to use this action.')
+        request.theme.add_msg(msg, "error")
+        request.page.send_page()
+        return ''
     fmt = request.html_formatter
     language_setup_page = 'LanguageSetup'
     not_translated_system_pages = 'not_translated_system_pages.zip'
     files = AttachFile._get_files(request, language_setup_page)
+    if not files:
+        msg = _('No page packages found.')
+        request.theme.add_msg(msg, "error")
+        request.page.send_page()
+        return ''
     wiki_languages = list(set([lang_file.split('_')[0] for lang_file in files]) - set(['00']))
     wiki_languages.sort()
 
