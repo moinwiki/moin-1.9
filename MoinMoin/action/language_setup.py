@@ -61,7 +61,7 @@ def execute(pagename, request):
         if attachment.endswith(not_translated_system_pages):
             attachment = 'English_not_translated_system_pages.zip'
         install_link = ''
-        querystr = {'action': 'InstallLanguage', 'target': attachment, 'language': lang}
+        querystr = {'action': 'language_setup', 'target': attachment, 'language': lang}
         if AttachFile.exists(request, language_setup_page, attachment):
             install_link = request.page.link_to(request, label_install, querystr=querystr)
         data.addRow((pageset_name, install_link))
@@ -72,7 +72,7 @@ def execute(pagename, request):
 
     fmt = request.formatter
     lang_links = [request.page.link_to_raw(request, _lang,
-                                        querystr={'action': 'InstallLanguage',
+                                        querystr={'action': 'language_setup',
                                                   'language': _lang,
                                                   'pageset': pageset_name, })
                   for _lang in wiki_languages]
