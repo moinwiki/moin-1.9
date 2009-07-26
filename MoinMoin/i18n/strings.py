@@ -151,6 +151,7 @@ optional_help_pages = [
     _('HelpOnEditing'), # used by edit action!
     _('HelpOnEditing/SubPages'),
     _('HelpOnGraphicalEditor'),
+    _('HelpOnGroups'),
     _('HelpOnHeadlines'),
     _('HelpOnLanguages'),
     _('HelpOnLinking'),
