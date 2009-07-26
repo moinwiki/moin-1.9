@@ -19,7 +19,7 @@ a {color: maroon;}
 a:hover {color: red;}
 
 a.nonexistent:visited, a.badinterwiki:visited,
-a.nonexistent, a.badinterwiki {color: $404040;}
+a.nonexistent, a.badinterwiki {color: #404040;}
 
 a.www:before {content: url(../img/moin-www.png); margin: 0 0.2em;}
 a.http:before {content: url(../img/moin-www.png); margin: 0 0.2em;}
