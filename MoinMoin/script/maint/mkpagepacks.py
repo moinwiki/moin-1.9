@@ -146,7 +146,11 @@ General syntax: moin [options] maint mkpagepacks [mkpagepacks-options]
 
         print "Creating packages ..."
         package_path = os.path.join('tests', 'wiki', 'underlay', 'pages', 'LanguageSetup', 'attachments')
-        os.mkdir(package_path)
+        try:
+            # create attachment dir in case it is not there:
+            os.mkdir(package_path)
+        except OSError:
+            pass
         generate_filename = lambda name: os.path.join(package_path, '%s.zip' % name)
         [self.packagePages(list(pages), generate_filename(name), "ReplaceUnderlay") for name, pages in pageSets.items()]
 
