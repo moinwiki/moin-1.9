@@ -16,7 +16,7 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
-Version 1.9.0.current:
+Version 1.9.0beta3:
 
   Please note:
   * This is a BETA version, not meant for production usage, but just to

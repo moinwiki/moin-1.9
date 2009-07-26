@@ -15,7 +15,7 @@ except:
     patchlevel = 'release'
 
 project = "MoinMoin"
-release = '1.9.0beta2'
+release = '1.9.0beta3'
 release_short = '190' # used for url_prefix_static
 revision = patchlevel
 
