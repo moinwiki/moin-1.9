@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-10 10:24+0200\n"
+"POT-Creation-Date: 2009-07-27 00:57+0200\n"
 "PO-Revision-Date: 2008-06-27 22:39+0200\n"
 "Last-Translator: Novica Nakov\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
@@ -768,11 +768,43 @@ msgstr ""
 msgid "Associate this name"
 msgstr "Поврзи го ова име"
 
+#, fuzzy
+msgid "OpenID verification canceled."
+msgstr "Проверката е откажана."
+
+#, fuzzy, python-format
+msgid "OpenID success. id: %s"
+msgstr "OpenID е успешно додаден."
+
+#, fuzzy
+msgid "OpenID failure"
+msgstr "Неуспех на OpenID."
+
+#, fuzzy
+msgid "No OpenID found in session."
+msgstr "Нема OpenID."
+
 msgid "Your account is now associated to your OpenID."
 msgstr "Вашата сметка сега е поврзана со Вашиот OpenID."
 
 msgid "The password you entered is not valid."
 msgstr "Лозинката која ја внесовте не е важечка."
+
+#, fuzzy
+msgid "OpenID: handle verify continuation"
+msgstr "Проверка на довербата на OpenID"
+
+msgid "OpenID: handle name continuation"
+msgstr ""
+
+msgid "OpenID: handle associate continuation"
+msgstr ""
+
+msgid "OpenID: unknown continuation stage"
+msgstr ""
+
+msgid "OpenID error: unknown continuation stage"
+msgstr ""
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
 msgstr "За пријавување со OpenID треба да биде овозоможена анонимна сесија."
@@ -800,13 +832,17 @@ msgstr "LDAP серверот %(server)s не успеа."
 msgid "Failed to connect to database."
 msgstr "Поврзувањето со базата не успеа."
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+"one now</a>. "
 msgstr ""
 "Ако немате сметка, <a href=\"%(userprefslink)s\">можете сега да отворите</"
 "a>. <a href=\"%(sendmypasswordlink)s\">Ја заборавивте лозинката?</a>"
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+msgstr ""
 
 msgid ""
 " Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
@@ -1586,6 +1622,10 @@ msgstr ""
 
 msgid "HelpOnGraphicalEditor"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnGroups"
+msgstr "Помош"
 
 msgid "HelpOnHeadlines"
 msgstr ""
@@ -3297,6 +3337,17 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "Уредување на моите страници"
+
+#, fuzzy
+msgid "page package"
+msgstr "Променета страница"
+
+msgid "Choose:"
+msgstr ""
+
+#, python-format
+msgid "Install language packs for '%s'"
+msgstr ""
 
 msgid "Your subscription to this page has been removed."
 msgstr "Вашата претплата за оваа страница е откажана."

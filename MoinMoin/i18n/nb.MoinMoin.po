@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-10 10:24+0200\n"
+"POT-Creation-Date: 2009-07-27 00:57+0200\n"
 "PO-Revision-Date: 2008-12-03 14:24+0100\n"
 "Last-Translator: Jörg Cassens <moinmoin-nb@cassens.org>\n"
 "Language-Team: Norwegian <moinmoin-nb@cassens.org>\n"
@@ -762,11 +762,43 @@ msgstr ""
 msgid "Associate this name"
 msgstr "Forbind dette navnet"
 
+#, fuzzy
+msgid "OpenID verification canceled."
+msgstr "Verifiseringen ble avbrutt."
+
+#, fuzzy, python-format
+msgid "OpenID success. id: %s"
+msgstr "OpenID ble lagt til."
+
+#, fuzzy
+msgid "OpenID failure"
+msgstr "Feil med OpenID"
+
+#, fuzzy
+msgid "No OpenID found in session."
+msgstr "Ingen OpenID gitt."
+
 msgid "Your account is now associated to your OpenID."
 msgstr "Din brukerkonto er nå koblet med OpenID."
 
 msgid "The password you entered is not valid."
 msgstr "Passordet du oppga er ikke gyldig."
+
+#, fuzzy
+msgid "OpenID: handle verify continuation"
+msgstr "OpenID trust verifikasjon"
+
+msgid "OpenID: handle name continuation"
+msgstr ""
+
+msgid "OpenID: handle associate continuation"
+msgstr ""
+
+msgid "OpenID: unknown continuation stage"
+msgstr ""
+
+msgid "OpenID error: unknown continuation stage"
+msgstr ""
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
 msgstr "Anonyme sesjoner må være satt opp for OpenID pålogging."
@@ -794,13 +826,17 @@ msgstr "Feil med LDAP sørver %(server)s."
 msgid "Failed to connect to database."
 msgstr "Mislyktes med databasetilkobling."
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+"one now</a>. "
 msgstr ""
 "Hvis du ikke ha en brukernavn <a href=\"%(userprefslink)s\">kan du opprette "
 "den nå</a>. <a href=\"%(sendmypasswordlink)s\">Glemt passord?</a>"
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+msgstr ""
 
 msgid ""
 " Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
@@ -1577,6 +1613,10 @@ msgstr ""
 
 msgid "HelpOnGraphicalEditor"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnGroups"
+msgstr "HjelpInnhold"
 
 msgid "HelpOnHeadlines"
 msgstr ""
@@ -3286,6 +3326,17 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "Administrer mine sider"
+
+#, fuzzy
+msgid "page package"
+msgstr "Endret side"
+
+msgid "Choose:"
+msgstr ""
+
+#, python-format
+msgid "Install language packs for '%s'"
+msgstr ""
 
 msgid "Your subscription to this page has been removed."
 msgstr "Din abonnement av denne siden er avbestilt."
