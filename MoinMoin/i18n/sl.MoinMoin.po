@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-10 10:24+0200\n"
+"POT-Creation-Date: 2009-07-27 00:57+0200\n"
 "PO-Revision-Date: 2008-05-23 03:00+0200\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -758,11 +758,43 @@ msgstr ""
 msgid "Associate this name"
 msgstr "Poveži to ime"
 
+#, fuzzy
+msgid "OpenID verification canceled."
+msgstr "Preverjanje je bilo preklicana."
+
+#, fuzzy, python-format
+msgid "OpenID success. id: %s"
+msgstr "OpenID je bil uspešno dodan."
+
+#, fuzzy
+msgid "OpenID failure"
+msgstr "Napaka pri OpenID."
+
+#, fuzzy
+msgid "No OpenID found in session."
+msgstr "OpenID ni podan."
+
 msgid "Your account is now associated to your OpenID."
 msgstr "Vaš uporabniški račun je sedaj povezan z vašim OpenID."
 
 msgid "The password you entered is not valid."
 msgstr "Geslo, ki ste ga vnesli, ni veljavno."
+
+#, fuzzy
+msgid "OpenID: handle verify continuation"
+msgstr "Preverjanje zaupanja OpenID"
+
+msgid "OpenID: handle name continuation"
+msgstr ""
+
+msgid "OpenID: handle associate continuation"
+msgstr ""
+
+msgid "OpenID: unknown continuation stage"
+msgstr ""
+
+msgid "OpenID error: unknown continuation stage"
+msgstr ""
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
 msgstr "Za prijavo prek OpenID morajo biti anonimne seje omogočene."
@@ -790,13 +822,17 @@ msgstr "Strežnik LDAP %(server)s ne deluje."
 msgid "Failed to connect to database."
 msgstr "Neuspešna priključitev na podatkovno bazo."
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+"one now</a>. "
 msgstr ""
 "Če ga še nimate, lahko <a href=\"%(userprefslink)s\">ustvarite uporabniški "
 "račun</a>. <a href=\"%(sendmypasswordlink)s\">Ste pozabili geslo?</a>"
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+msgstr ""
 
 msgid ""
 " Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
@@ -1575,6 +1611,10 @@ msgstr ""
 
 msgid "HelpOnGraphicalEditor"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnGroups"
+msgstr "PomočPriVsebini"
 
 msgid "HelpOnHeadlines"
 msgstr ""
@@ -3290,6 +3330,17 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "Upravljanje z MyPages"
+
+#, fuzzy
+msgid "page package"
+msgstr "Spremenjena stran"
+
+msgid "Choose:"
+msgstr ""
+
+#, python-format
+msgid "Install language packs for '%s'"
+msgstr ""
 
 msgid "Your subscription to this page has been removed."
 msgstr "Naročilo na obvestila s te strani je bilo umaknjeno."

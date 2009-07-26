@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-10 10:24+0200\n"
+"POT-Creation-Date: 2009-07-27 00:57+0200\n"
 "PO-Revision-Date: 2006-02-09 11:25+0100\n"
 "Last-Translator: Sergiusz Pawłowicz <moin@pawlowicz.name>\n"
 "Language-Team: Polish <moin@pawlowicz.name>\n"
@@ -762,11 +762,43 @@ msgstr ""
 msgid "Associate this name"
 msgstr "Połącz ten identyfikator"
 
+#, fuzzy
+msgid "OpenID verification canceled."
+msgstr "Weryfikcja została anulowana"
+
+#, fuzzy, python-format
+msgid "OpenID success. id: %s"
+msgstr "OpenID pomyślnie dodany."
+
+#, fuzzy
+msgid "OpenID failure"
+msgstr "Awaria OpenID."
+
+#, fuzzy
+msgid "No OpenID found in session."
+msgstr "Nie podano OpenID."
+
 msgid "Your account is now associated to your OpenID."
 msgstr "Twoje konto jest teraz połączone z OpenID."
 
 msgid "The password you entered is not valid."
 msgstr "Wpisane hasło nie jest poprawne."
+
+#, fuzzy
+msgid "OpenID: handle verify continuation"
+msgstr "Weryfikacja zaufania OpenID"
+
+msgid "OpenID: handle name continuation"
+msgstr ""
+
+msgid "OpenID: handle associate continuation"
+msgstr ""
+
+msgid "OpenID: unknown continuation stage"
+msgstr ""
+
+msgid "OpenID error: unknown continuation stage"
+msgstr ""
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
 msgstr "Aby logowanie OpenID działało, należy włączyć anonimowe sesje."
@@ -794,13 +826,17 @@ msgstr "Serwer LDAP %(server)s zawiódł."
 msgid "Failed to connect to database."
 msgstr "Niepowodzenie przy łączeniu się z bazą danych."
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+"one now</a>. "
 msgstr ""
 "Jeśli nie masz jeszcze konta, <a href=\"%(userprefslink)s\">możesz je "
 "założyć teraz</a>. <a href=\"%(sendmypasswordlink)s\">Zapomniane hasło?</a>"
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+msgstr ""
 
 msgid ""
 " Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
@@ -1574,6 +1610,10 @@ msgstr ""
 
 msgid "HelpOnGraphicalEditor"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnGroups"
+msgstr "PomocSpisTreści"
 
 msgid "HelpOnHeadlines"
 msgstr ""
@@ -3290,6 +3330,17 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "Zarządzanie MyPages"
+
+#, fuzzy
+msgid "page package"
+msgstr "Zmieniona strona"
+
+msgid "Choose:"
+msgstr ""
+
+#, python-format
+msgid "Install language packs for '%s'"
+msgstr ""
 
 msgid "Your subscription to this page has been removed."
 msgstr "Twoja subskrybcja tej strony została usunięta."

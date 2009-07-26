@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-10 10:24+0200\n"
+"POT-Creation-Date: 2009-07-27 00:57+0200\n"
 "PO-Revision-Date: 2008-11-01 11:35+0100\n"
 "Last-Translator: Radovan Garabík <rg-m18@kassiopeia.juls.savba.sk>\n"
 "Language-Team: Slovak\n"
@@ -751,11 +751,41 @@ msgstr ""
 msgid "Associate this name"
 msgstr ""
 
+#, fuzzy
+msgid "OpenID verification canceled."
+msgstr "Overenie bolo zrušené."
+
+#, fuzzy, python-format
+msgid "OpenID success. id: %s"
+msgstr "OpenID chyba: %s."
+
+#, fuzzy
+msgid "OpenID failure"
+msgstr "OpenID server"
+
+msgid "No OpenID found in session."
+msgstr ""
+
 msgid "Your account is now associated to your OpenID."
 msgstr ""
 
 msgid "The password you entered is not valid."
 msgstr "Heslo je neplatné."
+
+msgid "OpenID: handle verify continuation"
+msgstr ""
+
+msgid "OpenID: handle name continuation"
+msgstr ""
+
+msgid "OpenID: handle associate continuation"
+msgstr ""
+
+msgid "OpenID: unknown continuation stage"
+msgstr ""
+
+msgid "OpenID error: unknown continuation stage"
+msgstr ""
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
 msgstr ""
@@ -781,13 +811,17 @@ msgstr "LDAP server %(server)s zlyhal."
 msgid "Failed to connect to database."
 msgstr "Zlyhalo pripojenie k databáze."
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+"one now</a>. "
 msgstr ""
 "Ak nemáte konto, <a href=\"%(userprefslink)s\">môžete si ho  vytvoriť</a>. "
 "<a href=\"%(sendmypasswordlink)s\">Zabudli ste heslo?</a>"
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+msgstr ""
 
 msgid ""
 " Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
@@ -1487,6 +1521,10 @@ msgstr ""
 
 msgid "HelpOnGraphicalEditor"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnGroups"
+msgstr "PomocnSAkciami"
 
 msgid "HelpOnHeadlines"
 msgstr ""
@@ -3130,6 +3168,17 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "Manažment MojeStránky"
+
+#, fuzzy
+msgid "page package"
+msgstr "Zmenená stránka"
+
+msgid "Choose:"
+msgstr ""
+
+#, python-format
+msgid "Install language packs for '%s'"
+msgstr ""
 
 msgid "Your subscription to this page has been removed."
 msgstr "Vaše odoberanie tejto stránky bolo zrušené."
