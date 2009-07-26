@@ -1,0 +1,12 @@
+NOTES for bundled flup:
+=======================
+This directory contains the flup WSGI adapter package. 
+
+The shipped version is available via mercurial checkout:
+
+hg clone -r af072c39193e http://hg.saddi.com/flup-server
+
+Thanks to Allan Saddi <allan@saddi.com> for writing flup and to
+the unnamed contributor <tv@inoi.fi> for the single-thread patch.
+
+
