@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-10 10:24+0200\n"
+"POT-Creation-Date: 2009-07-27 00:57+0200\n"
 "PO-Revision-Date: 2008-06-14 22:44+0800\n"
 "Last-Translator: Rux Li <rux.li3@gmail.com>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
@@ -730,11 +730,41 @@ msgstr ""
 msgid "Associate this name"
 msgstr "連結此名稱"
 
+#, fuzzy
+msgid "OpenID verification canceled."
+msgstr "驗證已取消。"
+
+#, fuzzy, python-format
+msgid "OpenID success. id: %s"
+msgstr "OpenID 新增成功。"
+
+#, fuzzy
+msgid "OpenID failure"
+msgstr "OpenID 失敗"
+
+msgid "No OpenID found in session."
+msgstr ""
+
 msgid "Your account is now associated to your OpenID."
 msgstr "你的帳號已連結到你的 OpenID"
 
 msgid "The password you entered is not valid."
 msgstr "密碼不正確。"
+
+msgid "OpenID: handle verify continuation"
+msgstr ""
+
+msgid "OpenID: handle name continuation"
+msgstr ""
+
+msgid "OpenID: handle associate continuation"
+msgstr ""
+
+msgid "OpenID: unknown continuation stage"
+msgstr ""
+
+msgid "OpenID error: unknown continuation stage"
+msgstr ""
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
 msgstr "匿名會談必須啟動才能用 OpenID 登入。"
@@ -760,13 +790,17 @@ msgstr ""
 msgid "Failed to connect to database."
 msgstr "連結資料庫失敗。"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+"one now</a>. "
 msgstr ""
 "如果您沒有帳號，您可以<a href=\"%(userprefslink)s\">新增帳號</a>。<a href=\"%"
 "(sendmypasswordlink)s\">忘了您的密碼？</a>"
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+msgstr ""
 
 #, fuzzy
 msgid ""
@@ -1524,6 +1558,10 @@ msgstr ""
 
 msgid "HelpOnGraphicalEditor"
 msgstr ""
+
+#, fuzzy
+msgid "HelpOnGroups"
+msgstr "說明"
 
 msgid "HelpOnHeadlines"
 msgstr ""
@@ -3172,6 +3210,17 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "管理我的頁面"
+
+#, fuzzy
+msgid "page package"
+msgstr "改變過的頁面"
+
+msgid "Choose:"
+msgstr ""
+
+#, python-format
+msgid "Install language packs for '%s'"
+msgstr ""
 
 msgid "Your subscription to this page has been removed."
 msgstr "取消訂閱完成。"

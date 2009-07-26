@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-10 10:24+0200\n"
+"POT-Creation-Date: 2009-07-27 00:57+0200\n"
 "PO-Revision-Date: 2009-06-06 01:00+0200\n"
 "Last-Translator: Ernestas Liubarskij <e.liubarskij@gmail.com>\n"
 "Language-Team: Lithuanian <e.liubarskij@gmail.com>\n"
@@ -769,11 +769,43 @@ msgstr ""
 msgid "Associate this name"
 msgstr "Susieti šį pavadinimą"
 
+#, fuzzy
+msgid "OpenID verification canceled."
+msgstr "Patikrinimas atšauktas."
+
+#, fuzzy, python-format
+msgid "OpenID success. id: %s"
+msgstr "OpenID sėkmingai pridėtas"
+
+#, fuzzy
+msgid "OpenID failure"
+msgstr "OpenID klaida."
+
+#, fuzzy
+msgid "No OpenID found in session."
+msgstr "Nepateiktas joks OpenID."
+
 msgid "Your account is now associated to your OpenID."
 msgstr "Jūsų paskyra dabar susieta su jūsų OpenID."
 
 msgid "The password you entered is not valid."
 msgstr "Įvestas netinkamas slaptažodis."
+
+#, fuzzy
+msgid "OpenID: handle verify continuation"
+msgstr "OpenID Trust patikrinimas"
+
+msgid "OpenID: handle name continuation"
+msgstr ""
+
+msgid "OpenID: handle associate continuation"
+msgstr ""
+
+msgid "OpenID: unknown continuation stage"
+msgstr ""
+
+msgid "OpenID error: unknown continuation stage"
+msgstr ""
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
 msgstr "OpenID prisijungimui turi būti aktyvinti anoniminiai seansai."
@@ -801,13 +833,17 @@ msgstr "LDAP serverio %(server)s klaida."
 msgid "Failed to connect to database."
 msgstr "Nepavyko prisijungti prie duomenų bazės."
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+"one now</a>. "
 msgstr ""
 "Jei dar neturite paskyros, <a href=\"%(userprefslink)s\">galite sukurti ją "
 "dabar</a>. <a href=\"%(sendmypasswordlink)s\">Pamiršote savo slaptažodį?</a>"
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+msgstr ""
 
 msgid ""
 " Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
@@ -1554,6 +1590,10 @@ msgstr "PagalbaRedagavimo/PoPuslapiai"
 
 msgid "HelpOnGraphicalEditor"
 msgstr "PagalbaGrafinioRedaktoriaus"
+
+#, fuzzy
+msgid "HelpOnGroups"
+msgstr "PagalbaLiniuočių"
 
 msgid "HelpOnHeadlines"
 msgstr ""
@@ -3255,6 +3295,17 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "MyPages valdymas"
+
+#, fuzzy
+msgid "page package"
+msgstr "Pakeistas puslapis"
+
+msgid "Choose:"
+msgstr ""
+
+#, python-format
+msgid "Install language packs for '%s'"
+msgstr ""
 
 msgid "Your subscription to this page has been removed."
 msgstr "Jūsų šio puslapio prenumerata buvo atšaukta."
