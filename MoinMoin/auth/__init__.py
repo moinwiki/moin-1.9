@@ -362,11 +362,15 @@ class GivenAuth(BaseAuth):
             u = user.User(request, auth_username=auth_username,
                           auth_method=self.name, auth_attribs=('name', 'password'))
 
+        logging.debug("u: %r" % u)
         if u and self.autocreate:
+            logging.debug("autocreating user")
             u.create_or_update()
         if u and u.valid:
+            logging.debug("returning valid user %r" % u)
             return u, True # True to get other methods called, too
         else:
+            logging.debug("returning %r" % user_obj)
             return user_obj, True
 
 

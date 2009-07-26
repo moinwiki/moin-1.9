@@ -158,6 +158,11 @@ Version 1.9.0beta1:
       See HelpOnAuthentication.
 
 
+Version 1.8.current:
+  Other changes:
+    * moin maint cleancache purges now also drafts
+
+
 Version 1.8.4:
   Bug fixes:
     * ACL security: fix bug in hierarchical ACL processing, more restrictive
