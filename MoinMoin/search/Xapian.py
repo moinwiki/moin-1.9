@@ -311,29 +311,22 @@ class Index(BaseIndex):
         """
         while True:
             try:
-                searcher, timestamp = self.request.cfg.xapian_searchers.pop()
+                connection, timestamp = self.request.cfg.xapian_searchers.pop()
                 if timestamp != self.mtime():
-                    searcher.close()
+                    connection.close()
                 else:
                     break
             except IndexError:
-                searcher = xapidx.ReadOnlyIndex(self.dir)
-                searcher.configure(self.prefixMap, self.indexValueMap)
+                connection = xappy.SearchConnection(self.dir)
                 timestamp = self.mtime()
                 break
 
         kw = {}
-        if sort == 'weight':
-            # XXX: we need real weight here, like _moinSearch
-            # (TradWeight in xapian)
-            kw['sortByRelevence'] = True
-            kw['sortKey'] = 'revision'
         if sort == 'page_name':
-            kw['sortKey'] = 'pagename'
+            kw['sortby'] = 'pagename'
 
-        hits = searcher.search(query, valuesWanted=['pagename',
-            'attachment', 'mtime', 'wikiname', 'revision'], **kw)
-        self.request.cfg.xapian_searchers.append((searcher, timestamp))
+        hits = connection.search(query, 0, 1000, **kw) # XXX which value should be for the endrank parameter (now it is 1000)?
+        self.request.cfg.xapian_searchers.append((connection, timestamp))
         return hits
 
     def _do_queued_updates(self, request, amount=5):
