@@ -1,0 +1,54 @@
+Dear MoinMoin i18n maintainer / translator,
+
+You get this mail because one of the MoinMoin wiki engine's i18n files
+lists you as maintainer of it.
+
+By maintaining "%(lang)s", you do great work and all MoinMoin users say
+"Thank you" for that (or at least think it ;)!
+
+We are planning to do a new major release (1.9.0) soon, with quite some
+attractive new features and lots of cleanup.
+
+See http://moinmo.in/MoinMoinTodo/Release%%201.9 for our planned release schedule.
+
+As it is unlikely that all translators will catch up, we'll just take what we
+have at release time. If you fix your stuff early, it'll likely make it into
+initial release - if not, you'll have some more chances for every maintenance
+release we'll do.
+
+
+What we need
+============
+
+We need your help again for updating the following (high priority and
+most important stuff is on top of the list):
+
+[X] IMPORTANT NOTES (please read!): http://moinmo.in/MoinDev/Translation
+    (please subscribe to that page, so you get notified on changes)
+
+    We have a nice new tool for checking a translation of the system/help
+    pages, try it there:
+
+    http://master19.moinmo.in/MoinI18n/%(lang)s?action=CheckTranslation
+
+    It also helps you to translate important pages first.
+
+[X] http://master19.moinmo.in/MoinI18n/%(lang)s page (source for the .po file)
+
+
+Please, after translating the current stuff, keep an eye on the master wiki
+(or if you prefer email, maybe subscribe to MoinI18n/de - this page is usually
+touched by moin development if something changed).
+
+In case you can't do language maintenance any more:
+Please remove yourself from the MoinI18n/%(lang)s page by putting ***vacant***
+into the Last-Translator: metadata field.
+
+If you have questions, please contact us on the wiki or IRC channel #moin on
+server chat.freenode.net.
+
+Thanks,
+
+The MoinMoin development team
+
+
