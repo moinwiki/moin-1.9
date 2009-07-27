@@ -15,6 +15,7 @@ from xapian import Query
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
+import MoinMoin.support.xappy as xappy
 from MoinMoin.support.xapwrap import document as xapdoc
 from MoinMoin.support.xapwrap import index as xapidx
 from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
@@ -41,6 +42,68 @@ class UnicodeQuery(Query):
             nargs.append(term)
 
         Query.__init__(self, *nargs, **kwargs)
+
+class MoinIndexerConnection(xappy.IndexerConnection):
+
+    def __init__(self, *args, **kwargs):
+
+        super(MoinIndexerConnection, self).__init__(*args, **kwargs)
+
+        self._define_fields_actions()
+
+    def _define_fields_actions(self):
+        # XXX: Terms for fields
+        SORTABLE = xappy.FieldActions.SORTABLE
+        INDEX_EXACT = xappy.FieldActions.INDEX_EXACT
+        INDEX_FREETEXT = xappy.FieldActions.INDEX_FREETEXT
+        STORE_CONTENT = xappy.FieldActions.STORE_CONTENT
+
+        self.add_field_action('wikiname', SORTABLE)
+        self.add_field_action('wikiname', INDEX_EXACT)
+        self.add_field_action('wikiname', STORE_CONTENT)
+
+        self.add_field_action('pagename', SORTABLE)
+        self.add_field_action('pagename', INDEX_EXACT)
+        self.add_field_action('pagename', STORE_CONTENT)
+
+        self.add_field_action('attachment', SORTABLE)
+        self.add_field_action('attachment', INDEX_EXACT)
+        self.add_field_action('attachment', STORE_CONTENT)
+
+        self.add_field_action('mtime', SORTABLE, type='float')
+
+        self.add_field_action('revision', SORTABLE, type='float')
+#         self.add_term('revision', 'XREV')
+
+        self.add_field_action('mimetype ', INDEX_EXACT)
+#         self.add_term('mimetype', 'T')
+
+        self.add_field_action('title', SORTABLE)
+        self.add_field_action('title', INDEX_FREETEXT, weight=5)
+#         self.add_term('title', 'S')
+
+        self.add_field_action('content', INDEX_FREETEXT, spell=True)
+
+        self.add_field_action('fulltittle',  INDEX_EXACT)
+#         self.add_term('fulltitle', 'XFT')
+
+        self.add_field_action('domain',  INDEX_EXACT)
+#         self.add_term('domain', 'XDOMAIN')
+
+        self.add_field_action('lang ',  INDEX_EXACT)
+#         self.add_term('lang', 'L')
+
+        self.add_field_action('stem_lang ',  INDEX_EXACT)
+#         self.add_term('lang', 'XSTEMLANG')
+
+        self.add_field_action('author',  INDEX_EXACT)
+#         self.add_term('author', 'A')
+
+        self.add_field_action('linkto',  INDEX_EXACT)
+#         self.add_term('linkto', 'XLINKTO')
+
+        self.add_field_action('category',  INDEX_EXACT)
+#         self.add_term('category', 'XCAT')
 
 
 ##############################################################################
@@ -427,10 +490,10 @@ class Index(BaseIndex):
         if wikiutil.isSystemPage(self.request, page.page_name):
             yield 'system'
 
-    def _index_page(self, request, writer, pagename, mode='update'):
+    def _index_page(self, request, connection, pagename, mode='update'):
         """ Index a page - assumes that the write lock is acquired
 
-        @arg writer: the index writer object
+        @arg connection: the Indexer connection object
         @arg pagename: a page name
         @arg mode: 'add' = just add, no checks
                    'update' = check if already in index and update if needed (mtime)
@@ -438,13 +501,16 @@ class Index(BaseIndex):
         p = Page(request, pagename)
         if request.cfg.xapian_index_history:
             for rev in p.getRevList():
-                updated = self._index_page_rev(request, writer, Page(request, pagename, rev=rev), mode=mode)
+                updated = self._index_page_rev(request, connection, Page(request, pagename, rev=rev), mode=mode)
                 logging.debug("updated page %r rev %d (updated==%r)" % (pagename, rev, updated))
                 if not updated:
                     # we reached the revisions that are already present in the index
                     break
         else:
-            self._index_page_rev(request, writer, p, mode=mode)
+            self._index_page_rev(request, connection, p, mode=mode)
+
+    def _index_attachement(self):
+        # XXX: refactor and call it from _index_page
 
         from MoinMoin.action import AttachFile
         wikiname = request.cfg.interwikiname or u"Self"
@@ -507,10 +573,10 @@ class Index(BaseIndex):
                     id = writer.index(doc)
         #writer.flush()
 
-    def _index_page_rev(self, request, writer, page, mode='update'):
+    def _index_page_rev(self, request, connection, page, mode='update'):
         """ Index a page revision - assumes that the write lock is acquired
 
-        @arg writer: the index writer object
+        @arg connection: the Indexer connection object
         @arg page: a page object
         @arg mode: 'add' = just add, no checks
                    'update' = check if already in index and update if needed (mtime)
@@ -529,62 +595,53 @@ class Index(BaseIndex):
         updated = False
 
         if mode == 'update':
-            # from #xapian: if you generate a special "unique id" term,
-            # you can just call database.replace_document(uid_term, doc)
-            # -> done in xapwrap.index.Index.index()
-            query = xapidx.RawQuery(xapdoc.makePairForWrite('itemid', itemid))
-            enq, mset, docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', 'wikiname', ])
-            if docs:
-                doc = docs[0] # there should be only one
-                uid = doc['uid']
-                docmtime = long(doc['values']['mtime'])
+            try:
+                doc = connection.get_document(itemid)
+                docmtime = long(doc.data['mtime'])
                 updated = mtime > docmtime
-                logging.debug("uid %r: mtime %r > docmtime %r == updated %r" % (uid, mtime, docmtime, updated))
-            else:
-                uid = None
+                logging.debug("itemid %r: mtime %r > docmtime %r == updated %r" % (itemid, mtime, docmtime, updated))
+            except KeyError:
                 updated = True
+                doc = xappy.UnprocessedDocument()
+                doc.id = itemid
+
         elif mode == 'add':
             updated = True
+            doc = xappy.UnprocessedDocument()
+            doc.id = itemid
+
+
         logging.debug("%s %r" % (pagename, updated))
+
         if updated:
-            xwname = xapdoc.SortKey('wikiname', wikiname)
-            xpname = xapdoc.SortKey('pagename', pagename)
-            xattachment = xapdoc.SortKey('attachment', '') # this is a real page, not an attachment
-            xmtime = xapdoc.SortKey('mtime', str(mtime))
-            xrev = xapdoc.SortKey('revision', revision)
-            xtitle = xapdoc.TextField('title', pagename, True) # prefixed
+            doc.fields.append(xappy.Field('wikiname', wikiname))
+            doc.fields.append(xappy.Field('pagename', pagename))
+            doc.fields.append(xappy.Field('attachment', '')) # this is a real page, not an attachment
+            doc.fields.append(xappy.Field('mtime', str(mtime)))
+            doc.fields.append(xappy.Field('revision', revision))
+            doc.fields.append(xappy.Field('title', pagename))
+
+            doc.fields.append(xappy.Field('lang', language))
+            doc.fields.append(xappy.Field('stem_lang', stem_language))
+            doc.fields.append(xappy.Field('fulltitle', pagename))
+            doc.fields.append(xappy.Field('revision', revision))
+            doc.fields.append(xappy.Field('author', author))
+
             mimetype = 'text/%s' % page.pi['format']  # XXX improve this
-            xkeywords = [xapdoc.Keyword('itemid', itemid),
-                    xapdoc.Keyword('lang', language),
-                    xapdoc.Keyword('stem_lang', stem_language),
-                    xapdoc.Keyword('fulltitle', pagename),
-                    xapdoc.Keyword('revision', revision),
-                    xapdoc.Keyword('author', author),
-                ] + \
-                [xapdoc.Keyword('mimetype', mt) for mt in [mimetype, ] + mimetype.split('/')]
+            doc.fields.extend([xappy.Field('mimetype', mt) for mt in [mimetype, ] + mimetype.split('/')])
 
-            for pagelink in page.getPageLinks(request):
-                xkeywords.append(xapdoc.Keyword('linkto', pagelink))
-            for category in categories:
-                xkeywords.append(xapdoc.Keyword('category', category))
-            for domain in domains:
-                xkeywords.append(xapdoc.Keyword('domain', domain))
-            xcontent = xapdoc.TextField('content', page.get_raw_body())
-            doc = xapdoc.Document(textFields=(xcontent, xtitle),
-                                  keywords=xkeywords,
-                                  sortFields=(xpname, xattachment,
-                                      xmtime, xwname, xrev),
-                                 )
-            doc.analyzerFactory = getWikiAnalyzerFactory(request,
-                    stem_language)
+            doc.fields.extend([xappy.Field('linkto', pagelink) for pagelink in page.getPageLinks(request)])
+            doc.fields.extend([xappy.Field('category', category) for category in categories])
+            doc.fields.extend([xappy.Field('domain', domain) for domain in domains])
 
-            if mode == 'update':
-                logging.debug("%s (replace %r)" % (pagename, uid))
-                doc.uid = uid
-                id = writer.index(doc)
-            elif mode == 'add':
-                logging.debug("%s (add)" % (pagename, ))
-                id = writer.index(doc)
+            doc.fields.append(xappy.Field('content', page.get_raw_body()))
+
+            # XXX Stemming
+            # doc.analyzerFactory = getWikiAnalyzerFactory(request, stem_language)
+
+            logging.debug("%s (replace %r)" % (pagename, itemid))
+            connection.replace(doc)
+
         return updated
 
     def _remove_item(self, request, writer, page, attachment=None):
@@ -638,18 +695,21 @@ class Index(BaseIndex):
 
         try:
             self.touch()
-            writer = xapidx.Index(self.dir, True)
-            writer.configure(self.prefixMap, self.indexValueMap)
+            connection = MoinIndexerConnection(self.dir)
+            # writer.configure(self.prefixMap, self.indexValueMap)
             pages = request.rootpage.getPageList(user='', exists=1)
             logging.debug("indexing all (%d) pages..." % len(pages))
             for pagename in pages:
-                self._index_page(request, writer, pagename, mode=mode)
+                self._index_page(request, connection, pagename, mode=mode)
             if files:
                 logging.debug("indexing all files...")
                 for fname in files:
                     fname = fname.strip()
-                    self._index_file(request, writer, fname, mode)
-            writer.close()
+                    # XXX refactor _index_file
+                    # self._index_file(request, connection, fname, mode)
+            connection.flush()
+            connection.close()
         finally:
-            writer.__del__()
+            pass
+            #connection.__del__()
 
