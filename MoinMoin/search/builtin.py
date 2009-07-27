@@ -516,34 +516,22 @@ class Search:
         if index and self.query.xapian_wanted():
             clock.start('_xapianSearch')
             try:
-                from MoinMoin.support import xapwrap
 
                 clock.start('_xapianQuery')
                 query = self.query.xapian_term(self.request, index.allterms)
                 description = str(query)
                 logging.debug("_xapianSearch: query = %r" % description)
-                query = xapwrap.index.QObjQuery(query)
-                enq, mset, hits = index.search(query, sort=self.sort,
-                        historysearch=self.historysearch)
+                hits = index.search(query, sort=self.sort,
+                                    historysearch=self.historysearch)
                 clock.stop('_xapianQuery')
-
                 logging.debug("_xapianSearch: finds: %r" % hits)
-                def dict_decode(d):
-                    """ decode dict values to unicode """
-                    for key in d:
-                        d[key] = d[key].decode(config.charset)
-                    return d
-                pages = [dict_decode(hit['values']) for hit in hits]
+
+                pages = [hit.data for hit in hits]
                 logging.debug("_xapianSearch: finds pages: %r" % pages)
 
-                self._xapianEnquire = enq
-                self._xapianMset = mset
                 self._xapianIndex = index
             except BaseIndex.LockedException:
                 pass
-            #except AttributeError:
-            #    pages = []
-
             try:
                 # xapian handled the full query
                 if not self.query.xapian_need_postproc():
@@ -627,22 +615,14 @@ class Search:
         hits = []
         revisionCache = {}
         fs_rootpage = self.fs_rootpage
+
         for hit in pages:
-            if 'values' in hit:
-                valuedict = hit['values']
-                uid = hit['uid']
-            else:
-                valuedict = hit
-                uid = None
 
-            wikiname = valuedict['wikiname']
-            pagename = valuedict['pagename']
-            attachment = valuedict['attachment']
-
-            if 'revision' in valuedict and valuedict['revision']:
-                revision = int(valuedict['revision'])
-            else:
-                revision = 0
+            uid = hit.id
+            wikiname = hit.data['wikiname'][0]
+            pagename = hit.data['pagename'][0]
+            attachment = hit.data['attachment'][0]
+            revision = int(hit.data.get('revision', [0])[0])
             logging.debug("_getHits processing %r %r %d %r" % (wikiname, pagename, revision, attachment))
 
             if wikiname in (self.request.cfg.interwikiname, 'Self'): # THIS wiki
