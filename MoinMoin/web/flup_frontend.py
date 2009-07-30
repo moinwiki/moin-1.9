@@ -76,7 +76,7 @@ if have_flup:
             multi = server_type in ('threaded', 'forking')
 
             mod = self.server_types[server_type]
-            mod = __import__(mod, fromlist=['WSGIServer'])
+            mod = __import__(mod, globals(), locals(), ['WSGIServer'])
             WSGIServerWrapped = mod.WSGIServer
 
             class WSGIServer(WSGIServerWrapped):
