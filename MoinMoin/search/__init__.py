@@ -14,7 +14,7 @@ from MoinMoin import log
 logging = log.getLogger(__name__)
 
 from MoinMoin.search.queryparser import QueryParser, QueryError
-from MoinMoin.search.builtin import Search
+from MoinMoin.search.builtin import MoinSearch, XapianSearch
 
 def searchPages(request, query, sort='weight', mtime=None, historysearch=None, **kw):
     """ Search the text of all pages for query.
@@ -32,6 +32,11 @@ def searchPages(request, query, sort='weight', mtime=None, historysearch=None, *
     """
     if isinstance(query, str) or isinstance(query, unicode):
         query = QueryParser(**kw).parse_query(query)
-    return Search(request, query, sort, mtime=mtime,
-            historysearch=historysearch).run()
+
+    if request.cfg.xapian_search:
+        searcher = XapianSearch
+    else:
+        searcher = MoinSearch
+
+    return searcher(request, query, sort, mtime=mtime, historysearch=historysearch).run()
 
