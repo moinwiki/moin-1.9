@@ -1,0 +1,118 @@
+
+This file mainly contains tests for error handling conditions.
+
+
+>>> from datastructures import *
+>>> from fieldactions import *
+>>> from indexerconnection import *
+
+
+Open a connection for indexing:
+>>> iconn = IndexerConnection('foo')
+
+>>> iconn.add_field_action('title', FieldActions.STORE_CONTENT)
+>>> iconn.add_field_action('text', FieldActions.STORE_CONTENT)
+
+>>> iconn.add_field_action('text', FieldActions.INDEX_FREETEXT, language='en',
+...                        spell=True, stop=('basic',))
+
+>>> iconn.add_field_action('tag', FieldActions.TAG)
+>>> iconn.add_field_action('tag2', FieldActions.TAG)
+
+
+
+>>> for i in xrange(20):
+...     doc = UnprocessedDocument()
+...     doc.fields.append(Field('text', 'This is basic test document %d.' % i))
+...     doc.fields.append(Field('title', 'Test document %d' % i))
+...     id = iconn.add(doc)
+
+Test getting and setting metadata:
+>>> iconn.get_metadata('foo')
+''
+>>> iconn.set_metadata('foo', 'bar')
+>>> iconn.get_metadata('foo')
+'bar'
+
+>>> iconn.flush()
+
+Now, open a search connection:
+>>> sconn = SearchConnection('foo')
+
+Now, parse a simple query.
+>>> q = sconn.query_parse('document')
+>>> results = sconn.search(q, 0, 20)
+>>> [result.id for result in results]
+['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', '10', '11', '12', '13']
+
+>>> result = results.get_hit(0)
+>>> result.summarise('text')
+'This is basic test <b>document</b> 0.'
+>>> result.summarise('title')
+'Test <b>document</b> 0'
+
+The maxlen (in characters) can be specified:
+>>> result.summarise('text', 5)
+'This..'
+
+If it's specified as a string (eg, unconverted output from a webapp) it should
+still work:
+>>> result.summarise('text', '5')
+'This..'
+
+
+Asking for a summary of a field which isn't known will raise a KeyError.
+
+>>> result.summarise('titl')
+Traceback (most recent call last):
+...
+KeyError: 'titl'
+
+
+Asking for a top tags of a field when no fields were specified for counting
+tags will raise a SearchError.
+
+>>> results.get_top_tags('title', 100)
+Traceback (most recent call last):
+...
+SearchError: Field 'title' was not specified for getting tags
+
+
+Asking for tags in a field which wasn't indexed for tagging will return an
+error:
+
+>>> results = sconn.search(q, 0, 20, gettags='title')
+Traceback (most recent call last):
+...
+SearchError: Field 'title' was not indexed for tagging
+
+
+Asking for top tags of a field which wasn't specified for counting tags will
+raise a SearchError.
+
+>>> results = sconn.search(q, 0, 20, gettags='tag')
+>>> results.get_top_tags('tag', 100)
+[]
+>>> results.get_top_tags('tag2', 100)
+Traceback (most recent call last):
+...
+SearchError: Field 'tag2' was not specified for getting tags
+>>> results.get_top_tags('text', 100)
+Traceback (most recent call last):
+...
+SearchError: Field 'text' was not specified for getting tags
+
+
+Asking for suggested facets if none were calculated raises a SearchError:
+>>> results.get_suggested_facets('text')
+Traceback (most recent call last):
+...
+SearchError: Facet selection wasn't enabled when the search was run
+
+
+Test getting metadata:
+>>> sconn.get_metadata('foo1')
+''
+>>> sconn.get_metadata('foo')
+'bar'
+

@@ -1,0 +1,40 @@
+
+
+>>> float_to_string(0)
+'\x80'
+>>> float_to_string(-0)
+'\x80'
+
+>>> float_to_string(2 ** -1023)
+'\x8f\xe4'
+>>> float_to_string(2 ** -1024)
+'\x8f\xe0'
+>>> float_to_string(2 ** -1074)
+'\x8f\x18'
+>>> float_to_string(2 ** -1075)
+'\x80'
+
+>>> float_to_string(-(2 ** -1024))
+'p\x1e'
+>>> float_to_string(-(2 ** -1023))
+'p\x1a'
+>>> float_to_string(-(2 ** -1074))
+'p\xe6'
+>>> float_to_string(-(2 ** -1075))
+'\x80'
+
+Check that the values in test_vals sort in the right order.  And then test with their negations.
+>>> pos_test_vals = (0, 2 ** -1075, 2 ** -1074, 2 ** -1023, 0.000001, 0.000002, 0.000005, 0.1, 0.2, 0.5, 1, 1.1, 1.8, 2, 1024.5, 2 ** 1022)
+>>> test_vals = [-val for val in pos_test_vals]
+>>> test_vals.reverse()
+>>> test_vals.extend(pos_test_vals)
+>>> prev_val = test_vals[0]
+>>> for val in test_vals:
+...     m_prev_val = float_to_string(prev_val)
+...     m_val = float_to_string(val)
+...     if val == prev_val:
+...         assert(m_val == m_prev_val)
+...     else:
+...         assert(val > prev_val)
+...         assert(m_val > m_prev_val)
+...     prev_val = val
