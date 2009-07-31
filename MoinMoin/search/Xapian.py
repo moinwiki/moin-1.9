@@ -15,9 +15,7 @@ from xapian import Query
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
-import MoinMoin.support.xappy as xappy
-from MoinMoin.support.xapwrap import document as xapdoc
-from MoinMoin.support.xapwrap import index as xapidx
+from MoinMoin.support import xappy
 from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
 
 from MoinMoin.Page import Page
@@ -52,58 +50,30 @@ class MoinIndexerConnection(xappy.IndexerConnection):
         self._define_fields_actions()
 
     def _define_fields_actions(self):
-        # XXX: Terms for fields
         SORTABLE = xappy.FieldActions.SORTABLE
         INDEX_EXACT = xappy.FieldActions.INDEX_EXACT
         INDEX_FREETEXT = xappy.FieldActions.INDEX_FREETEXT
         STORE_CONTENT = xappy.FieldActions.STORE_CONTENT
 
-        self.add_field_action('wikiname', SORTABLE)
         self.add_field_action('wikiname', INDEX_EXACT)
         self.add_field_action('wikiname', STORE_CONTENT)
-
-        self.add_field_action('pagename', SORTABLE)
         self.add_field_action('pagename', INDEX_EXACT)
         self.add_field_action('pagename', STORE_CONTENT)
-
-        self.add_field_action('attachment', SORTABLE)
         self.add_field_action('attachment', INDEX_EXACT)
         self.add_field_action('attachment', STORE_CONTENT)
-
-        self.add_field_action('mtime', SORTABLE, type='float')
-
-        self.add_field_action('revision', SORTABLE, type='float')
-#         self.add_term('revision', 'XREV')
-
+        self.add_field_action('mtime', INDEX_EXACT)
+        self.add_field_action('revision', STORE_CONTENT)
+        self.add_field_action('revision',  INDEX_EXACT)
         self.add_field_action('mimetype ', INDEX_EXACT)
-#         self.add_term('mimetype', 'T')
-
-        self.add_field_action('title', SORTABLE)
         self.add_field_action('title', INDEX_FREETEXT, weight=5)
-#         self.add_term('title', 'S')
-
         self.add_field_action('content', INDEX_FREETEXT, spell=True)
-
         self.add_field_action('fulltittle',  INDEX_EXACT)
-#         self.add_term('fulltitle', 'XFT')
-
         self.add_field_action('domain',  INDEX_EXACT)
-#         self.add_term('domain', 'XDOMAIN')
-
         self.add_field_action('lang ',  INDEX_EXACT)
-#         self.add_term('lang', 'L')
-
         self.add_field_action('stem_lang ',  INDEX_EXACT)
-#         self.add_term('lang', 'XSTEMLANG')
-
         self.add_field_action('author',  INDEX_EXACT)
-#         self.add_term('author', 'A')
-
         self.add_field_action('linkto',  INDEX_EXACT)
-#         self.add_term('linkto', 'XLINKTO')
-
         self.add_field_action('category',  INDEX_EXACT)
-#         self.add_term('category', 'XCAT')
 
 
 ##############################################################################
@@ -232,45 +202,10 @@ class WikiAnalyzer:
 #############################################################################
 
 class Index(BaseIndex):
-    """ A Xapian index """
-    indexValueMap = {
-        # mapping the value names we can easily fetch from the index to
-        # integers required by xapian. 0 and 1 are reserved by xapwrap!
-        'pagename': 2,
-        'attachment': 3,
-        'mtime': 4,
-        'wikiname': 5,
-        'revision': 6,
-    }
-    prefixMap = {
-        # http://svn.xapian.org/*checkout*/trunk/xapian-applications/omega/docs/termprefixes.txt
-        'author': 'A',
-        'date': 'D',              # numeric format: YYYYMMDD or "latest" - e.g. D20050224 or Dlatest
-                                  #G   newsGroup (or similar entity - e.g. a web forum name)
-        'hostname': 'H',
-        'keyword': 'K',
-        'lang': 'L',              # ISO Language code
-                                  #M   Month (numeric format: YYYYMM)
-                                  #N   ISO couNtry code (or domaiN name)
-                                  #P   Pathname
-                                  #Q   uniQue id
-        'raw': 'R',               # Raw (i.e. unstemmed) term
-        'title': 'S',             # Subject (or title)
-        'mimetype': 'T',
-        'url': 'U',               # full URL of indexed document - if the resulting term would be > 240
-                                  # characters, a hashing scheme is used to prevent overflowing
-                                  # the Xapian term length limit (see omindex for how to do this).
-                                  #W   "weak" (approximately 10 day intervals, taken as YYYYMMD from
-                                  #  the D term, and changing the last digit to a '2' if it's a '3')
-                                  #X   longer prefix for user-defined use
-        'linkto': 'XLINKTO',      # this document links to that document
-        'stem_lang': 'XSTEMLANG', # ISO Language code this document was stemmed in
-        'category': 'XCAT',       # category this document belongs to
-        'fulltitle': 'XFT',       # full title
-        'domain': 'XDOMAIN',      # standard or underlay
-        'revision': 'XREV',       # revision of page
-                                  #Y   year (four digits)
-    }
+
+    # XXX This is needed for a query parser. Since xappy uses
+    # different terms, it is better to use xappy's query parser.
+    prefixMap = {'title': 'S'}
 
     def __init__(self, request):
         self._check_version()
@@ -278,6 +213,7 @@ class Index(BaseIndex):
 
     def _check_version(self):
         """ Checks if the correct version of Xapian is installed """
+        # XXX xappy checks version on import! 
         # every version greater than or equal to XAPIAN_MIN_VERSION is allowed
         XAPIAN_MIN_VERSION = (1, 0, 0)
         major, minor, revision = xapian.major_version(), xapian.minor_version(), xapian.revision()
@@ -303,7 +239,8 @@ class Index(BaseIndex):
         return BaseIndex.exists(self) and os.listdir(self.dir)
 
     def _search(self, query, sort='weight', historysearch=0):
-        """ Perform the search using xapian (read-lock acquired)
+        """
+        Perform the search using xapian (read-lock acquired)
 
         @param query: the search query objects
         @keyword sort: the sorting of the results (default: 'weight')
@@ -317,22 +254,20 @@ class Index(BaseIndex):
                 else:
                     break
             except IndexError:
-                searcher = xapidx.ReadOnlyIndex(self.dir)
-                searcher.configure(self.prefixMap, self.indexValueMap)
+                searcher = xappy.SearchConnection(self.dir)
                 timestamp = self.mtime()
                 break
 
         kw = {}
-        if sort == 'weight':
-            # XXX: we need real weight here, like _moinSearch
-            # (TradWeight in xapian)
-            kw['sortByRelevence'] = True
-            kw['sortKey'] = 'revision'
         if sort == 'page_name':
-            kw['sortKey'] = 'pagename'
+            kw['sortby'] = 'pagename'
 
-        hits = searcher.search(query, valuesWanted=['pagename',
-            'attachment', 'mtime', 'wikiname', 'revision'], **kw)
+        # Try to get first 1000 hits.
+        hits = searcher.search(query, 0, 1000, **kw)
+        # If there are more hits, get them all
+        if hits.more_matches:
+            hits = searcher.search(query, 0, hits.matches_upper_bound, **kw)
+
         self.request.cfg.xapian_searchers.append((searcher, timestamp))
         return hits
 
