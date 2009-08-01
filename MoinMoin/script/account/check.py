@@ -87,12 +87,6 @@ General syntax: moin [options] account check [check-options]
         self._addFlag("wikinames",
             "Convert user account names to wikinames (camel-case)."
         )
-        self._addFlag("lastsaved",
-            "Normally the account most recently USED will"
-            " survive and the others will be disabled."
-            " Using --lastsaved, the account most recently"
-            " SAVED will survive."
-        )
         self._addFlag("save",
             "If specified as LAST option, will allow the other"
             " options to save user accounts back to disk."
@@ -154,15 +148,7 @@ General syntax: moin [options] account check [check-options]
                 print "- would be disabled."
 
     def getsortvalue(self, uid, user):
-        t_ls = float(user.last_saved) # when user did last SAVE of his account data
-        if self.options.lastsaved:
-            return t_ls
-        else: # last USED (we check the page trail for that)
-            try:
-                t_lu = float(os.path.getmtime(os.path.join(self.request.cfg.user_dir, "%s.trail" % uid)))
-            except OSError:
-                t_lu = t_ls # better than having nothing
-            return t_lu
+        return float(user.last_saved) # when user did last SAVE of his account data
 
     def process(self, uidlist):
         sortlist = []
