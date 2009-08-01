@@ -206,15 +206,15 @@ class AndExpression(BaseExpression):
                 return True
         return False
 
-    def xapian_term(self, request, allterms):
+    def xapian_term(self, request, connection):
         # sort negated terms
         terms = []
         not_terms = []
         for term in self._subterms:
             if not term.negated:
-                terms.append(term.xapian_term(request, allterms))
+                terms.append(term.xapian_term(request, connection))
             else:
-                not_terms.append(term.xapian_term(request, allterms))
+                not_terms.append(term.xapian_term(request, connection))
 
         # prepare query for not negated terms
         if not terms:
@@ -363,13 +363,17 @@ class TextSearch(BaseExpression):
     def xapian_need_postproc(self):
         return self.case
 
-    def xapian_term(self, request, allterms):
+    def xapian_term(self, request, connection):
+        # XXX next version of xappy (>0.5) will provide Query class
+        # it should be used.
         if self.use_re:
-            # basic regex matching per term
-            terms = [term for term in allterms() if self.search_re.match(term)]
-            if not terms:
-                return Query()
-            queries = [Query(Query.OP_OR, terms)]
+            # XXX
+            pass
+#             basic regex matching per term
+#             terms = [term for term in allterms() if self.search_re.match(term)]
+#             if not terms:
+#                 return Query()
+#             queries = [Query(Query.OP_OR, terms)]
         else:
             analyzer = Xapian.WikiAnalyzer(request=request, language=request.cfg.language_default)
             terms = self._pattern.split()
@@ -377,18 +381,22 @@ class TextSearch(BaseExpression):
             # all parsed wikiwords, AND'ed
             queries = []
             stemmed = []
-            for t in terms:
+
+            for term in terms:
                 if request.cfg.xapian_stemming:
                     # stemmed OR not stemmed
-                    tmp = []
-                    for w, s, pos in analyzer.tokenize(t, flat_stemming=False):
-                        tmp.append(UnicodeQuery(Query.OP_OR, (w, s)))
+                    t = []
+                    for w, s, pos in analyzer.tokenize(term, flat_stemming=False):
+                        query_word = connection.query_field('content', w)
+                        query_stemmed = connection.query_field('content', s)
+                        # XXX UnicodeQuery was used here!
+                        t.append(Query(Query.OP_OR, [query_word, query_stemmed]))
                         stemmed.append(s)
-                    t = tmp
                 else:
                     # just not stemmed
-                    t = [UnicodeQuery(w) for w, pos in analyzer.tokenize(t)]
-                queries.append(Query(Query.OP_AND, t))
+                    t = [connection.query_field('content', w) for w, pos in analyzer.tokenize(term)]
+
+                queries.append(Query(connection.OP_AND, t))
 
             if not self.case and stemmed:
                 new_pat = ' '.join(stemmed)
@@ -397,8 +405,9 @@ class TextSearch(BaseExpression):
 
         # titlesearch OR parsed wikiwords
         return Query(Query.OP_OR,
-                (self.titlesearch.xapian_term(request, allterms),
-                    Query(Query.OP_AND, queries)))
+                     # XXX allterms for titlesearch
+                     [self.titlesearch.xapian_term(request, []),
+                      Query(Query.OP_AND, queries)])
 
 
 class TitleSearch(BaseExpression):

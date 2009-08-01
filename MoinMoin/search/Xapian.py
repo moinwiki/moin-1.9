@@ -213,7 +213,7 @@ class Index(BaseIndex):
 
     def _check_version(self):
         """ Checks if the correct version of Xapian is installed """
-        # XXX xappy checks version on import! 
+        # XXX xappy checks version on import!
         # every version greater than or equal to XAPIAN_MIN_VERSION is allowed
         XAPIAN_MIN_VERSION = (1, 0, 0)
         major, minor, revision = xapian.major_version(), xapian.minor_version(), xapian.revision()
@@ -263,6 +263,7 @@ class Index(BaseIndex):
             kw['sortby'] = 'pagename'
 
         # Try to get first 1000 hits.
+        query = query.xapian_term(self.request, searcher)
         hits = searcher.search(query, 0, 1000, **kw)
         # If there are more hits, get them all
         if hits.more_matches:
@@ -292,14 +293,6 @@ class Index(BaseIndex):
             self.remove_queue.remove([item])
 
         writer.close()
-
-    def allterms(self):
-        """ Fetches all terms in the Xapian index """
-        db = xapidx.ExceptionTranslater.openIndex(True, self.dir)
-        i = db.allterms_begin()
-        while i != db.allterms_end():
-            yield i.get_term()
-            i.next()
 
     def termpositions(self, uid, term):
         """ Fetches all positions of a term in a document
