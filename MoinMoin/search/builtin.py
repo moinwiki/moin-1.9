@@ -634,8 +634,7 @@ class XapianSearch(BaseSearch):
         clock.start('_xapianSearch')
         try:
             clock.start('_xapianQuery')
-            query = self.query.xapian_term(self.request, index.allterms)
-            search_results = index.search(query, sort=self.sort, historysearch=self.historysearch)
+            search_results = index.search(self.query, sort=self.sort, historysearch=self.historysearch)
             clock.stop('_xapianQuery')
             logging.debug("_xapianSearch: finds: %r" % search_results)
             self._xapianIndex = index
@@ -648,7 +647,7 @@ class XapianSearch(BaseSearch):
                   'wikiname': r.data['wikiname'][0],
                   'pagename': r.data['pagename'][0],
                   'attachment': r.data['attachment'][0],
-                  'revision': r.data['revision'][0]}
+                  'revision': r.data.get('revision',[0])[0]}
                  for r in search_results]
 
         try:
