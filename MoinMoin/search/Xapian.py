@@ -59,6 +59,7 @@ class MoinIndexerConnection(xappy.IndexerConnection):
         self.add_field_action('wikiname', STORE_CONTENT)
         self.add_field_action('pagename', INDEX_EXACT)
         self.add_field_action('pagename', STORE_CONTENT)
+        self.add_field_action('pagename', SORTABLE)
         self.add_field_action('attachment', INDEX_EXACT)
         self.add_field_action('attachment', STORE_CONTENT)
         self.add_field_action('mtime', INDEX_EXACT)
