@@ -9,6 +9,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 from MoinMoin import wikiutil
+from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.action import ActionBase
 
@@ -36,7 +37,7 @@ class revert(ActionBase):
     def check_condition(self):
         """ checks valid page and rev """
         _ = self._
-        if not self.request.rev:
+        if not self.request.rev or Page(self.request, self.pagename).current_rev() == self.request.rev:
             # same string as in PageEditor...
             note = _('You were viewing the current revision of this page when you called the revert action. '
                      'If you want to revert to an older revision, first view that older revision and '
