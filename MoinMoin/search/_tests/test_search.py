@@ -7,13 +7,15 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+
 import py
 
 from MoinMoin.search import QueryError
 from MoinMoin.search.queryparser import QueryParser
 from MoinMoin.search import Xapian
 from MoinMoin import search
-from MoinMoin._tests import nuke_xapian_index
+from MoinMoin._tests import nuke_xapian_index, wikiconfig
+
 
 class TestQueryParsing:
     """ search: query parser tests """
@@ -62,10 +64,13 @@ class TestQueryParsing:
     def testQueryParserExceptions(self):
         """ search: test the query parser """
         parser = QueryParser()
+
         def _test(q):
             py.test.raises(QueryError, parser.parse_query, q)
+
         for query in ['""', '(', ')', '(a or b']:
             yield _test, query
+
 
 class TestSearch:
     """ search: test search """
@@ -108,23 +113,45 @@ class TestSearch:
         result = search.searchPages(self.request, u"HelpOn -ACL")
         assert 0 < len(result.hits) < helpon_count
 
+    def test_title_search(self):
 
-class TestXapianIndex:
+        query = QueryParser(titlesearch=True).parse_query('Moin')
+        result = search.searchPages(self.request, query, sort='page_name')
+
+
+class TestXapianIndex(TestSearch):
     """ search: test Xapian indexing """
+    # XXX skip it if xapian is not available
 
-    def testIndex(self):
+    class Config(wikiconfig.Config):
+
+        xapian_search = True
+
+    def setup_class(self):
         """ search: kicks off indexing for a single pages in Xapian """
         # This only tests that the call to indexing doesn't raise.
         nuke_xapian_index(self.request)
         idx = Xapian.Index(self.request)
         idx.indexPages(mode='add') # slow: builds an index of all pages
 
-    def testIndexInNewThread(self):
-        """ search: kicks off indexing for a page in a new thread in Xapian"""
+    def teardown_class(self):
+        nuke_xapian_index(self.request)
+
+
+class TestXapianInNewThread(object):
+    """ search: test Xapian indexing """
+    # XXX skip it if xapian is not available
+
+    def setup_class(self):
+        """ search: kicks off indexing for a single pages in Xapian """
         # This only tests that the call to indexing doesn't raise.
         nuke_xapian_index(self.request)
         idx = Xapian.Index(self.request)
         idx.indexPagesInNewThread(mode='add') # slow: builds an index of all pages
+
+    def teardown_class(self):
+        nuke_xapian_index(self.request)
+
 
 coverage_modules = ['MoinMoin.search']
 
