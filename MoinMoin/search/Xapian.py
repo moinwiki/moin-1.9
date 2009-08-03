@@ -318,45 +318,43 @@ class Index(BaseIndex):
             mtime = os.path.getmtime(filename)
             mtime = wikiutil.timestamp2version(mtime)
             if mode == 'update':
-                query = xapidx.RawQuery(xapdoc.makePairForWrite('itemid', itemid))
-                enq, mset, docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', 'wikiname', ])
-                if docs:
-                    doc = docs[0] # there should be only one
-                    uid = doc['uid']
-                    docmtime = long(doc['values']['mtime'])
+                try:
+                    doc = connection.get_document(itemid)
+                    docmtime = long(doc.data['mtime'])
                     updated = mtime > docmtime
-                    logging.debug("uid %r: mtime %r > docmtime %r == updated %r" % (uid, mtime, docmtime, updated))
-                else:
-                    uid = None
+                    logging.debug("itemid %r: mtime %r > docmtime %r == updated %r" % (itemid, mtime, docmtime, updated))
+                except KeyError:
                     updated = True
+                    doc = xappy.UnprocessedDocument()
+                    doc.id = itemid
+                    updated = mtime > docmtime
+
             elif mode == 'add':
                 updated = True
+                doc = xappy.UnprocessedDocument()
+                doc.id = itemid
+
             logging.debug("%s %r" % (filename, updated))
+
             if updated:
-                xitemid = xapdoc.Keyword('itemid', itemid)
-                mimetype, file_content = self.contentfilter(filename)
-                xwname = xapdoc.SortKey('wikiname', request.cfg.interwikiname or u"Self")
-                xpname = xapdoc.SortKey('pagename', fs_rootpage)
-                xattachment = xapdoc.SortKey('attachment', filename) # XXX we should treat files like real pages, not attachments
-                xmtime = xapdoc.SortKey('mtime', str(mtime))
-                xrev = xapdoc.SortKey('revision', '0')
+                doc.fields.append(xappy.Field('wikiname', wikiname))
+                doc.fields.append(xappy.Field('pagename', fs_rootpage))
+                doc.fields.append(xappy.Field('attachment', filename)) # XXX we should treat files like real pages, not attachments
+
+                doc.fields.append(xappy.Field('mtime', str(mtime)))
+                doc.fields.append(xappy.Field('revision', '0'))
                 title = " ".join(os.path.join(fs_rootpage, filename).split("/"))
-                xtitle = xapdoc.Keyword('title', title)
-                xmimetypes = [xapdoc.Keyword('mimetype', mt) for mt in [mimetype, ] + mimetype.split('/')]
-                xcontent = xapdoc.TextField('content', file_content)
-                doc = xapdoc.Document(textFields=(xcontent, ),
-                                      keywords=xmimetypes + [xtitle, xitemid, ],
-                                      sortFields=(xpname, xattachment,
-                                          xmtime, xwname, xrev, ),
-                                     )
-                doc.analyzerFactory = getWikiAnalyzerFactory()
-                if mode == 'update':
-                    logging.debug("%s (replace %r)" % (filename, uid))
-                    doc.uid = uid
-                    id = writer.index(doc)
-                elif mode == 'add':
-                    logging.debug("%s (add)" % (filename, ))
-                    id = writer.index(doc)
+                doc.fields.append(xappy.Field('title', title))
+
+                mimetype, file_content = self.contentfilter(filename)
+                doc.fields.extend([xappy.Field('mimetype', mt) for mt in [mimetype, ] + mimetype.split('/')])
+                doc.fields.append(xappy.Field('content', file_content))
+
+                # Stemming
+                # doc.analyzerFactory = getWikiAnalyzerFactory()
+
+                connection.replace(doc)
+
         except (OSError, IOError):
             pass
 
@@ -437,12 +435,14 @@ class Index(BaseIndex):
         else:
             self._index_page_rev(request, connection, p, mode=mode)
 
-    def _index_attachement(self):
-        # XXX: refactor and call it from _index_page
+        self._index_attachments(request, connection, pagename, mode)
 
+    def _index_attachments(self, request, connection, pagename, mode='update'):
         from MoinMoin.action import AttachFile
+
         wikiname = request.cfg.interwikiname or u"Self"
         # XXX: Hack until we get proper metadata
+        p = Page(request, pagename)
         language, stem_language = self._get_languages(p)
         domains = tuple(self._get_domains(p))
         updated = False
@@ -450,56 +450,45 @@ class Index(BaseIndex):
         attachments = AttachFile._get_files(request, pagename)
         for att in attachments:
             filename = AttachFile.getFilename(request, pagename, att)
-            att_itemid = "%s:%s//%s" % (wikiname, pagename, att)
+            itemid = "%s:%s//%s" % (wikiname, pagename, att)
             mtime = wikiutil.timestamp2version(os.path.getmtime(filename))
             if mode == 'update':
-                query = xapidx.RawQuery(xapdoc.makePairForWrite('itemid', att_itemid))
-                enq, mset, docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', ])
-                logging.debug("##%r %r" % (filename, docs))
-                if docs:
-                    doc = docs[0] # there should be only one
-                    uid = doc['uid']
-                    docmtime = long(doc['values']['mtime'])
+                try:
+                    doc = connection.get_document(itemid)
+                    docmtime = long(doc.data['mtime'])
                     updated = mtime > docmtime
-                    logging.debug("uid %r: mtime %r > docmtime %r == updated %r" % (uid, mtime, docmtime, updated))
-                else:
-                    uid = None
+                except KeyError:
                     updated = True
+                    doc = xappy.UnprocessedDocument()
+                    doc.id = itemid
             elif mode == 'add':
                 updated = True
+                doc = xappy.UnprocessedDocument()
+                doc.id = itemid
+
             logging.debug("%s %s %r" % (pagename, att, updated))
+
             if updated:
-                xatt_itemid = xapdoc.Keyword('itemid', att_itemid)
-                xpname = xapdoc.SortKey('pagename', pagename)
-                xwname = xapdoc.SortKey('wikiname', request.cfg.interwikiname or u"Self")
-                xattachment = xapdoc.SortKey('attachment', att) # this is an attachment, store its filename
-                xmtime = xapdoc.SortKey('mtime', str(mtime))
-                xrev = xapdoc.SortKey('revision', '0')
-                xtitle = xapdoc.Keyword('title', '%s/%s' % (pagename, att))
-                xlanguage = xapdoc.Keyword('lang', language)
-                xstem_language = xapdoc.Keyword('stem_lang', stem_language)
+                doc.fields.append(xappy.Field('wikiname', wikiname))
+                doc.fields.append(xappy.Field('pagename', pagename))
+                doc.fields.append(xappy.Field('attachment', att))
+
+                doc.fields.append(xappy.Field('mtime', str(mtime)))
+                doc.fields.append(xappy.Field('revision', '0'))
+                doc.fields.append(xappy.Field('title', '%s/%s' % (pagename, att)))
+
+                doc.fields.append(xappy.Field('lang', language))
+                doc.fields.append(xappy.Field('stem_lang', stem_language))
+                doc.fields.append(xappy.Field('fulltitle', pagename))
+
                 mimetype, att_content = self.contentfilter(filename)
-                xmimetypes = [xapdoc.Keyword('mimetype', mt) for mt in [mimetype, ] + mimetype.split('/')]
-                xcontent = xapdoc.TextField('content', att_content)
-                xtitle_txt = xapdoc.TextField('title', '%s/%s' % (pagename, att), True)
-                xfulltitle = xapdoc.Keyword('fulltitle', pagename)
-                xdomains = [xapdoc.Keyword('domain', domain) for domain in domains]
-                doc = xapdoc.Document(textFields=(xcontent, xtitle_txt),
-                                      keywords=xdomains + xmimetypes + [xatt_itemid,
-                                          xtitle, xlanguage, xstem_language,
-                                          xfulltitle, ],
-                                      sortFields=(xpname, xattachment, xmtime,
-                                          xwname, xrev, ),
-                                     )
-                doc.analyzerFactory = getWikiAnalyzerFactory(request, stem_language)
-                if mode == 'update':
-                    logging.debug("%s (replace %r)" % (pagename, uid))
-                    doc.uid = uid
-                    id = writer.index(doc)
-                elif mode == 'add':
-                    logging.debug("%s (add)" % (pagename, ))
-                    id = writer.index(doc)
-        #writer.flush()
+                doc.fields.extend([xappy.Field('mimetype', mt) for mt in [mimetype, ] + mimetype.split('/')])
+                doc.fields.append(xappy.Field('content', att_content))
+                doc.fields.extend([xappy.Field('domain', domain) for domain in domains])
+
+                # XXX Stemming
+                # doc.analyzerFactory = getWikiAnalyzerFactory(request, stem_language)
+                connection.replace(doc)
 
     def _index_page_rev(self, request, connection, page, mode='update'):
         """ Index a page revision - assumes that the write lock is acquired
@@ -552,7 +541,6 @@ class Index(BaseIndex):
             doc.fields.append(xappy.Field('lang', language))
             doc.fields.append(xappy.Field('stem_lang', stem_language))
             doc.fields.append(xappy.Field('fulltitle', pagename))
-            doc.fields.append(xappy.Field('revision', revision))
             doc.fields.append(xappy.Field('author', author))
 
             mimetype = 'text/%s' % page.pi['format']  # XXX improve this
