@@ -106,6 +106,28 @@ class BaseExpression:
     def xapian_wanted(self):
         return False
 
+    def _get_query_for_search_re(self, connection, field_to_check=None):
+        """
+        Return a query which satisfy self.search_re for field values.
+        If field_to_check is given check values only for that field.
+        """
+        queries = []
+
+        documents = connection.get_all_documents()
+        for document in documents:
+            data = document.data
+            if field_to_check:
+                # Check only field with given name
+                if self.search_re.match(data[field_to_check]):
+                    queries.append(connection.query_field(field_to_check, data[field_to_check]))
+            else:
+                # Check all fields
+                for field, value in data.iteritems():
+                    if self.search_re.match(value):
+                        queries.append(connection.query_field(field, value))
+
+        return Query(Query.OP_OR, queries)
+
     def __unicode__(self):
         neg = self.negated and '-' or ''
         return u'%s%s"%s"' % (neg, self._tag, unicode(self._pattern))
@@ -367,13 +389,7 @@ class TextSearch(BaseExpression):
         # XXX next version of xappy (>0.5) will provide Query class
         # it should be used.
         if self.use_re:
-            # XXX
-            pass
-#             basic regex matching per term
-#             terms = [term for term in allterms() if self.search_re.match(term)]
-#             if not terms:
-#                 return Query()
-#             queries = [Query(Query.OP_OR, terms)]
+            queries = [self._get_query_for_search_re(connection)]
         else:
             analyzer = Xapian.WikiAnalyzer(request=request, language=request.cfg.language_default)
             terms = self._pattern.split()
@@ -476,19 +492,8 @@ class TitleSearch(BaseExpression):
 
     def xapian_term(self, request, allterms):
         if self.use_re:
-            # basic regex matching per term
-            terms = []
-            found = False
-            for term in allterms():
-                if term[:4] == 'XFT:':
-                    found = True
-                    if self.search_re.findall(term[4:]):
-                        terms.append(Query(term, 100))
-                elif found:
-                    break
-            if not terms:
-                return Query()
-            queries = [Query(Query.OP_OR, terms)]
+            # XXX weight for a query!
+            queries = [self._get_query_for_search_re(connection, 'fulltitle')]
         else:
             analyzer = Xapian.WikiAnalyzer(request=request,
                     language=request.cfg.language_default)
@@ -527,8 +532,21 @@ class TitleSearch(BaseExpression):
         return Query(Query.OP_AND, queries)
 
 
-class LinkSearch(BaseExpression):
+class BaseFieldSearch(BaseExpression):
+
+    _field_to_search = None
+
+    def xapian_term(self, request, allterms):
+        if self.use_re:
+            return self._get_query_for_search_re(connection, self._field_to_search)
+        else:
+            return connection.query_field(_field_to_search, self.pattern)
+
+
+class LinkSearch(BaseFieldSearch):
     """ Search the term in the pagelinks """
+
+    _field_to_search = 'linkto'
 
     def __init__(self, pattern, use_re=False, case=True):
         """ Init a link search
@@ -611,30 +629,11 @@ class LinkSearch(BaseExpression):
     def xapian_need_postproc(self):
         return self.case
 
-    def xapian_term(self, request, allterms):
-        prefix = Xapian.Index.prefixMap['linkto']
-        if self.use_re:
-            # basic regex matching per term
-            terms = []
-            found = None
-            n = len(prefix)
-            for term in allterms():
-                if prefix == term[:n]:
-                    found = True
-                    if self.search_re.match(term[n+1:]):
-                        terms.append(term)
-                elif found:
-                    continue
 
-            if not terms:
-                return Query()
-            return Query(Query.OP_OR, terms)
-        else:
-            return UnicodeQuery('%s:%s' % (prefix, self.pattern))
-
-
-class LanguageSearch(BaseExpression):
+class LanguageSearch(BaseFieldSearch):
     """ Search the pages written in a language """
+
+    _field_to_search = 'lang'
 
     def __init__(self, pattern, use_re=False, case=True):
         """ Init a language search
@@ -695,28 +694,6 @@ class LanguageSearch(BaseExpression):
     def xapian_need_postproc(self):
         return False # case-sensitivity would make no sense
 
-    def xapian_term(self, request, allterms):
-        prefix = Xapian.Index.prefixMap['lang']
-        if self.use_re:
-            # basic regex matching per term
-            terms = []
-            found = None
-            n = len(prefix)
-            for term in allterms():
-                if prefix == term[:n]:
-                    found = True
-                    if self.search_re.match(term[n:]):
-                        terms.append(term)
-                elif found:
-                    continue
-
-            if not terms:
-                return Query()
-            return Query(Query.OP_OR, terms)
-        else:
-            pattern = self.pattern
-            return UnicodeQuery('%s%s' % (prefix, pattern))
-
 
 class CategorySearch(TextSearch):
     """ Search the pages belonging to a category """
@@ -756,30 +733,20 @@ class CategorySearch(TextSearch):
         return self.case
 
     def xapian_term(self, request, allterms):
-        prefix = Xapian.Index.prefixMap['category']
+        # XXX Probably, it is a good idea to inherit this class from
+        # BaseFieldSearch and get rid of this definition
         if self.use_re:
-            # basic regex matching per term
-            terms = []
-            found = None
-            n = len(prefix)
-            for term in allterms():
-                if prefix == term[:n]:
-                    found = True
-                    if self.search_re.match(term[n+1:]):
-                        terms.append(term)
-                elif found:
-                    continue
-
-            if not terms:
-                return Query()
-            return Query(Query.OP_OR, terms)
+            return self._get_query_for_search_re(connection, 'category')
         else:
             pattern = self._pattern.lower()
-            return UnicodeQuery('%s:%s' % (prefix, pattern))
+            # XXX UnicodeQuery was used
+            return connection.query_field('category', pattern)
 
 
-class MimetypeSearch(BaseExpression):
+class MimetypeSearch(BaseFieldSearch):
     """ Search for files belonging to a specific mimetype """
+
+    _field_to_search = 'mimetype'
 
     def __init__(self, pattern, use_re=False, case=True):
         """ Init a mimetype search
@@ -820,31 +787,11 @@ class MimetypeSearch(BaseExpression):
     def xapian_need_postproc(self):
         return False # case-sensitivity would make no sense
 
-    def xapian_term(self, request, allterms):
-        prefix = Xapian.Index.prefixMap['mimetype']
-        if self.use_re:
-            # basic regex matching per term
-            terms = []
-            found = None
-            n = len(prefix)
-            for term in allterms():
-                if prefix == term[:n]:
-                    found = True
-                    if self.search_re.match(term[n:]):
-                        terms.append(term)
-                elif found:
-                    continue
 
-            if not terms:
-                return Query()
-            return Query(Query.OP_OR, terms)
-        else:
-            pattern = self._pattern
-            return UnicodeQuery('%s%s' % (prefix, pattern))
-
-
-class DomainSearch(BaseExpression):
+class DomainSearch(BaseFieldSearch):
     """ Search for pages belonging to a specific domain """
+
+    _field_to_search = 'domain'
 
     def __init__(self, pattern, use_re=False, case=True):
         """ Init a domain search
@@ -902,28 +849,6 @@ class DomainSearch(BaseExpression):
 
     def xapian_need_postproc(self):
         return False # case-sensitivity would make no sense
-
-    def xapian_term(self, request, allterms):
-        prefix = Xapian.Index.prefixMap['domain']
-        if self.use_re:
-            # basic regex matching per term
-            terms = []
-            found = None
-            n = len(prefix)
-            for term in allterms():
-                if prefix == term[:n]:
-                    found = True
-                    if self.search_re.match(term[n+1:]):
-                        terms.append(term)
-                elif found:
-                    continue
-
-            if not terms:
-                return Query()
-            return Query(Query.OP_OR, terms)
-        else:
-            pattern = self._pattern
-            return UnicodeQuery('%s:%s' % (prefix, pattern))
 
 
 ##############################################################################

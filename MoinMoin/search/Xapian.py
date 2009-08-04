@@ -66,15 +66,21 @@ class MoinIndexerConnection(xappy.IndexerConnection):
         self.add_field_action('revision', STORE_CONTENT)
         self.add_field_action('revision',  INDEX_EXACT)
         self.add_field_action('mimetype ', INDEX_EXACT)
+        self.add_field_action('mimetype', STORE_CONTENT)
         self.add_field_action('title', INDEX_FREETEXT, weight=5)
         self.add_field_action('content', INDEX_FREETEXT, spell=True)
-        self.add_field_action('fulltittle',  INDEX_EXACT)
+        self.add_field_action('fulltitle',  INDEX_EXACT)
+        self.add_field_action('fulltitle', STORE_CONTENT)
         self.add_field_action('domain',  INDEX_EXACT)
+        self.add_field_action('domain', STORE_CONTENT)
         self.add_field_action('lang ',  INDEX_EXACT)
+        self.add_field_action('lang', STORE_CONTENT)
         self.add_field_action('stem_lang ',  INDEX_EXACT)
         self.add_field_action('author',  INDEX_EXACT)
         self.add_field_action('linkto',  INDEX_EXACT)
+        self.add_field_action('linkto', STORE_CONTENT)
         self.add_field_action('category',  INDEX_EXACT)
+        self.add_field_action('category', STORE_CONTENT)
 
 
 ##############################################################################
@@ -238,6 +244,17 @@ class Index(BaseIndex):
     def exists(self):
         """ Check if the Xapian index exists """
         return BaseIndex.exists(self) and os.listdir(self.dir)
+
+    def get_all_documents(self):
+        """
+        Return all the documents in the xapian index.
+        """
+        connection = xappy.SearchConnection(self.dir)
+        document_count = connection.get_doccount()
+        query = connection.query_all()
+        hits = connection.search(query, 0, document_count)
+        connection.close()
+        return hits
 
     def _search(self, query, sort='weight', historysearch=0):
         """
