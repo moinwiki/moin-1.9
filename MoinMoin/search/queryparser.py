@@ -648,7 +648,6 @@ class LanguageSearch(BaseExpression):
         self.negated = 0
         self.use_re = use_re
         self.case = False       # not case-sensitive!
-        self.xapian_called = False
         self._build_re(self._pattern, use_re=use_re, case=case)
 
         self._tag = 'language:'
@@ -697,7 +696,6 @@ class LanguageSearch(BaseExpression):
         return False # case-sensitivity would make no sense
 
     def xapian_term(self, request, allterms):
-        self.xapian_called = True
         prefix = Xapian.Index.prefixMap['lang']
         if self.use_re:
             # basic regex matching per term
@@ -758,7 +756,6 @@ class CategorySearch(TextSearch):
         return self.case
 
     def xapian_term(self, request, allterms):
-        self.xapian_called = True
         prefix = Xapian.Index.prefixMap['category']
         if self.use_re:
             # basic regex matching per term
@@ -795,7 +792,6 @@ class MimetypeSearch(BaseExpression):
         self.negated = 0
         self.use_re = use_re
         self.case = False # not case-sensitive!
-        self.xapian_called = False
         self._build_re(self._pattern, use_re=use_re, case=case)
 
         self._tag = 'mimetype:'
@@ -825,7 +821,6 @@ class MimetypeSearch(BaseExpression):
         return False # case-sensitivity would make no sense
 
     def xapian_term(self, request, allterms):
-        self.xapian_called = True
         prefix = Xapian.Index.prefixMap['mimetype']
         if self.use_re:
             # basic regex matching per term
@@ -862,7 +857,6 @@ class DomainSearch(BaseExpression):
         self.negated = 0
         self.use_re = use_re
         self.case = False # not case-sensitive!
-        self.xapian_called = False
         self._build_re(self._pattern, use_re=use_re, case=case)
 
         self._tag = 'domain:'
@@ -910,7 +904,6 @@ class DomainSearch(BaseExpression):
         return False # case-sensitivity would make no sense
 
     def xapian_term(self, request, allterms):
-        self.xapian_called = True
         prefix = Xapian.Index.prefixMap['domain']
         if self.use_re:
             # basic regex matching per term
