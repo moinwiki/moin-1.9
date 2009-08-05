@@ -76,15 +76,43 @@ class TestSearch:
     """ search: test search """
     doesnotexist = u'jfhsdaASDLASKDJ'
 
-    def testTitleSearchFrontPage(self):
-        """ search: title search for FrontPage """
-        result = search.searchPages(self.request, u"title:FrontPage")
-        assert len(result.hits) == 1
+    def test_prefix_search(self):
+
+        def simple_test(prefix, term):
+            result = search.searchPages(self.request, u"%s:%s" % (prefix, term))
+            assert result.hits
+            result = search.searchPages(self.request, u"%s:%s" % (prefix, self.doesnotexist))
+            assert not result.hits
+
+        def re_test(prefix, term):
+            result = search.searchPages(self.request, ur"%s:re:\b%s\b" % (prefix, term))
+            assert result.hits
+            result = search.searchPages(self.request, ur"%s:re:\b%s\b" % (prefix, self.doesnotexist))
+            assert not result.hits
+
+        def case_test(prefix, term):
+            result = search.searchPages(self.request, u"%s:case:%s" % (prefix, term))
+            assert result.hits
+            result = search.searchPages(self.request, u"%s:case:%s" % (prefix, term.lower()))
+            assert not result.hits
+
+        def case_re_test(prefix, term):
+            result = search.searchPages(self.request, ur"%s:case:re:\%s\b" % (prefix, term))
+            assert result.hits
+            result = search.searchPages(self.request, ur"%s:case:re:\%s\b" % (prefix, term.lower()))
+            assert not result.hits
+
+        for prefix, term in [('title', 'FrontPage'), ('linkto', 'FrontPage'), ('category', 'CategoryHomepage')]:
+            for test in [simple_test, re_test, case_test, case_re_test]:
+                yield '%s %s' % (prefix, test.func_name), test, prefix, term
 
     def testTitleSearchAND(self):
         """ search: title search with AND expression """
         result = search.searchPages(self.request, u"title:Help title:Index")
         assert len(result.hits) == 1
+
+        result = search.searchPages(self.request, u"title:Help title:%s" % self.doesnotexist)
+        assert len(result.hits) == 0
 
     def testTitleSearchOR(self):
         """ search: title search with OR expression """
