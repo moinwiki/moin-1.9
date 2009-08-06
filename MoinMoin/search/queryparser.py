@@ -24,6 +24,7 @@ try:
 except ImportError:
     pass
 
+
 class QueryError(ValueError):
     """ error raised for problems when parsing the query """
 
@@ -31,6 +32,7 @@ class QueryError(ValueError):
 #############################################################################
 ### query objects
 #############################################################################
+
 
 class BaseExpression:
     """ Base class for all search terms """
@@ -857,6 +859,7 @@ class DomainSearch(BaseFieldSearch):
 ##############################################################################
 ### Parse Query
 ##############################################################################
+
 
 class QueryParser:
     """

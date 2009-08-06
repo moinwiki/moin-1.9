@@ -16,6 +16,7 @@ logging = log.getLogger(__name__)
 from MoinMoin.search.queryparser import QueryParser, QueryError
 from MoinMoin.search.builtin import MoinSearch, XapianSearch
 
+
 def searchPages(request, query, sort='weight', mtime=None, historysearch=None, **kw):
     """ Search the text of all pages for query.
 

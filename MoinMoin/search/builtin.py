@@ -25,6 +25,7 @@ from MoinMoin.search.queryparser import Match, TextMatch, TitleMatch
 # Search Engine Abstraction
 ##############################################################################
 
+
 class UpdateQueue:
     """ Represents a locked page queue on the disk
 
@@ -405,9 +406,12 @@ class BaseIndex:
         from MoinMoin.security import Permissions
         from MoinMoin.logfile import editlog
         r = ScriptContext(request.url)
+
         class SecurityPolicy(Permissions):
+
             def read(self, *args, **kw):
                 return True
+
         r.user.may = SecurityPolicy(r.user)
         r.editlog = editlog.EditLog(r)
         return r
@@ -432,6 +436,7 @@ class BaseIndex:
 ##############################################################################
 ### Searching
 ##############################################################################
+
 
 class BaseSearch(object):
     """ A search run """
@@ -557,6 +562,7 @@ class BaseSearch(object):
         logging.debug("_getHits returning %r." % hits)
         return hits
 
+
 class MoinSearch(BaseSearch):
 
     def __init__(self, request, query, sort='weight', mtime=None, historysearch=0, pages=None):
@@ -647,7 +653,7 @@ class XapianSearch(BaseSearch):
                   'wikiname': r.data['wikiname'][0],
                   'pagename': r.data['pagename'][0],
                   'attachment': r.data['attachment'][0],
-                  'revision': r.data.get('revision',[0])[0]}
+                  'revision': r.data.get('revision', [0])[0]}
                  for r in search_results]
 
         try:
