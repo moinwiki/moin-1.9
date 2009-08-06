@@ -103,9 +103,6 @@ class BaseExpression:
             self.search_re = re.compile(pattern, flags)
             self.pattern = pattern
 
-    def xapian_wanted(self):
-        return False
-
     def _get_query_for_search_re(self, connection, field_to_check=None):
         """
         Return a query which satisfy self.search_re for field values.
@@ -118,15 +115,21 @@ class BaseExpression:
             data = document.data
             if field_to_check:
                 # Check only field with given name
-                if self.search_re.match(data[field_to_check]):
-                    queries.append(connection.query_field(field_to_check, data[field_to_check]))
+                if field_to_check in data:
+                    term = data[field_to_check][0]
+                    if self.search_re.match(term):
+                        queries.append(connection.query_field(field_to_check, term))
             else:
                 # Check all fields
                 for field, value in data.iteritems():
-                    if self.search_re.match(value):
-                        queries.append(connection.query_field(field, value))
+                    term = value[0]
+                    if self.search_re.match(term):
+                        queries.append(connection.query_field(field, term))
 
         return Query(Query.OP_OR, queries)
+
+    def xapian_wanted(self):
+        return False
 
     def __unicode__(self):
         neg = self.negated and '-' or ''
@@ -312,9 +315,9 @@ class OrExpression(AndExpression):
                 matches.extend(result)
         return matches
 
-    def xapian_term(self, request, allterms):
+    def xapian_term(self, request, connection):
         # XXX: negated terms managed by _moinSearch?
-        return Query(Query.OP_OR, [term.xapian_term(request, allterms) for term in self._subterms])
+        return Query(Query.OP_OR, [term.xapian_term(request, connection) for term in self._subterms])
 
 
 class TextSearch(BaseExpression):
@@ -422,7 +425,7 @@ class TextSearch(BaseExpression):
         # titlesearch OR parsed wikiwords
         return Query(Query.OP_OR,
                      # XXX allterms for titlesearch
-                     [self.titlesearch.xapian_term(request, []),
+                     [self.titlesearch.xapian_term(request, connection),
                       Query(Query.OP_AND, queries)])
 
 
@@ -490,7 +493,7 @@ class TitleSearch(BaseExpression):
     def xapian_need_postproc(self):
         return self.case
 
-    def xapian_term(self, request, allterms):
+    def xapian_term(self, request, connection):
         if self.use_re:
             # XXX weight for a query!
             queries = [self._get_query_for_search_re(connection, 'fulltitle')]
@@ -536,11 +539,11 @@ class BaseFieldSearch(BaseExpression):
 
     _field_to_search = None
 
-    def xapian_term(self, request, allterms):
+    def xapian_term(self, request, connection):
         if self.use_re:
             return self._get_query_for_search_re(connection, self._field_to_search)
         else:
-            return connection.query_field(_field_to_search, self.pattern)
+            return connection.query_field(self._field_to_search, self.pattern)
 
 
 class LinkSearch(BaseFieldSearch):
@@ -732,7 +735,7 @@ class CategorySearch(TextSearch):
     def xapian_need_postproc(self):
         return self.case
 
-    def xapian_term(self, request, allterms):
+    def xapian_term(self, request, connection):
         # XXX Probably, it is a good idea to inherit this class from
         # BaseFieldSearch and get rid of this definition
         if self.use_re:

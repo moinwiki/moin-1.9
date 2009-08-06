@@ -41,6 +41,19 @@ class UnicodeQuery(Query):
 
         Query.__init__(self, *nargs, **kwargs)
 
+
+class MoinSearchConnection(xappy.SearchConnection):
+
+    def get_all_documents(self):
+        """
+        Return all the documents in the xapian index.
+        """
+        document_count = self.get_doccount()
+        query = self.query_all()
+        hits = self.search(query, 0, document_count)
+        return hits
+
+
 class MoinIndexerConnection(xappy.IndexerConnection):
 
     def __init__(self, *args, **kwargs):
@@ -245,17 +258,6 @@ class Index(BaseIndex):
         """ Check if the Xapian index exists """
         return BaseIndex.exists(self) and os.listdir(self.dir)
 
-    def get_all_documents(self):
-        """
-        Return all the documents in the xapian index.
-        """
-        connection = xappy.SearchConnection(self.dir)
-        document_count = connection.get_doccount()
-        query = connection.query_all()
-        hits = connection.search(query, 0, document_count)
-        connection.close()
-        return hits
-
     def _search(self, query, sort='weight', historysearch=0):
         """
         Perform the search using xapian (read-lock acquired)
@@ -272,7 +274,7 @@ class Index(BaseIndex):
                 else:
                     break
             except IndexError:
-                searcher = xappy.SearchConnection(self.dir)
+                searcher = MoinSearchConnection(self.dir)
                 timestamp = self.mtime()
                 break
 
