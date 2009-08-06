@@ -17,7 +17,7 @@ from MoinMoin import search
 from MoinMoin._tests import nuke_xapian_index, wikiconfig
 
 
-class TestQueryParsing:
+class TestQueryParsing(object):
     """ search: query parser tests """
 
     def testQueryParser(self):
@@ -72,7 +72,7 @@ class TestQueryParsing:
             yield _test, query
 
 
-class TestSearch:
+class TestSearch(object):
     """ search: test search """
     doesnotexist = u'jfhsdaASDLASKDJ'
 
@@ -105,6 +105,15 @@ class TestSearch:
         for prefix, term in [('title', 'FrontPage'), ('linkto', 'FrontPage'), ('category', 'CategoryHomepage')]:
             for test in [simple_test, re_test, case_test, case_re_test]:
                 yield '%s %s' % (prefix, test.func_name), test, prefix, term
+
+        for prefix, term in [('mimetype', 'text/text')]:
+            for test in [simple_test, re_test]:
+                yield '%s %s' % (prefix, test.func_name), test, prefix, term
+
+        for prefix, term in [('language', 'en'), ('domain', 'system')]:
+            for test in [simple_test]:
+                yield '%s %s' % (prefix, test.func_name), test, prefix, term
+
 
     def testTitleSearchAND(self):
         """ search: title search with AND expression """
@@ -147,7 +156,7 @@ class TestSearch:
         result = search.searchPages(self.request, query, sort='page_name')
 
 
-class TestXapianIndex(TestSearch):
+class TestXapianSearch(TestSearch):
     """ search: test Xapian indexing """
     # XXX skip it if xapian is not available
 
@@ -166,7 +175,7 @@ class TestXapianIndex(TestSearch):
         nuke_xapian_index(self.request)
 
 
-class TestXapianInNewThread(object):
+class TestXapianIndexingInNewThread(object):
     """ search: test Xapian indexing """
     # XXX skip it if xapian is not available
 
