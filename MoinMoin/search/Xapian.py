@@ -25,6 +25,7 @@ from MoinMoin.search.builtin import BaseIndex
 
 class UnicodeQuery(Query):
     """ Xapian query object which automatically encodes unicode strings """
+
     def __init__(self, *args, **kwargs):
         """
         @keyword encoding: specifiy the encoding manually (default: value of config.charset)
@@ -77,28 +78,29 @@ class MoinIndexerConnection(xappy.IndexerConnection):
         self.add_field_action('attachment', STORE_CONTENT)
         self.add_field_action('mtime', INDEX_EXACT)
         self.add_field_action('revision', STORE_CONTENT)
-        self.add_field_action('revision',  INDEX_EXACT)
+        self.add_field_action('revision', INDEX_EXACT)
         self.add_field_action('mimetype ', INDEX_EXACT)
         self.add_field_action('mimetype', STORE_CONTENT)
         self.add_field_action('title', INDEX_FREETEXT, weight=5)
         self.add_field_action('content', INDEX_FREETEXT, spell=True)
-        self.add_field_action('fulltitle',  INDEX_EXACT)
+        self.add_field_action('fulltitle', INDEX_EXACT)
         self.add_field_action('fulltitle', STORE_CONTENT)
-        self.add_field_action('domain',  INDEX_EXACT)
+        self.add_field_action('domain', INDEX_EXACT)
         self.add_field_action('domain', STORE_CONTENT)
-        self.add_field_action('lang ',  INDEX_EXACT)
+        self.add_field_action('lang ', INDEX_EXACT)
         self.add_field_action('lang', STORE_CONTENT)
-        self.add_field_action('stem_lang ',  INDEX_EXACT)
-        self.add_field_action('author',  INDEX_EXACT)
-        self.add_field_action('linkto',  INDEX_EXACT)
+        self.add_field_action('stem_lang ', INDEX_EXACT)
+        self.add_field_action('author', INDEX_EXACT)
+        self.add_field_action('linkto', INDEX_EXACT)
         self.add_field_action('linkto', STORE_CONTENT)
-        self.add_field_action('category',  INDEX_EXACT)
+        self.add_field_action('category', INDEX_EXACT)
         self.add_field_action('category', STORE_CONTENT)
 
 
 ##############################################################################
 ### Tokenizer
 ##############################################################################
+
 
 def getWikiAnalyzerFactory(request=None, language='en'):
     """ Returns a WikiAnalyzer instance
@@ -107,6 +109,7 @@ def getWikiAnalyzerFactory(request=None, language='en'):
     @keyword language: stemming language iso code, defaults to 'en'
     """
     return (lambda: WikiAnalyzer(request, language))
+
 
 class WikiAnalyzer:
     """ A text analyzer for wiki syntax
@@ -171,7 +174,6 @@ class WikiAnalyzer:
                     for w, p in self.raw_tokenize_word(mw, mp):
                         yield (w, p)
 
-
     def raw_tokenize(self, value):
         """ Yield a stream of words from a string.
 
@@ -220,6 +222,7 @@ class WikiAnalyzer:
 #############################################################################
 ### Indexing
 #############################################################################
+
 
 class Index(BaseIndex):
 

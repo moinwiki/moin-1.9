@@ -56,8 +56,7 @@ class TestQueryParsing(object):
             ('no"', '["no""]'),
             ("'no", "[\"'no\"]"),
             ("no'", "[\"no'\"]"),
-            ('"no\'', '[""no\'"]')
-            ]:
+            ('"no\'', '[""no\'"]')]:
             result = parser.parse_query(query)
             assert str(result) == wanted
 
@@ -113,7 +112,6 @@ class TestSearch(object):
         for prefix, term in [('language', 'en'), ('domain', 'system')]:
             for test in [simple_test]:
                 yield '%s %s' % (prefix, test.func_name), test, prefix, term
-
 
     def testTitleSearchAND(self):
         """ search: title search with AND expression """
