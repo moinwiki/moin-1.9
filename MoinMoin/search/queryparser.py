@@ -508,26 +508,25 @@ class TitleSearch(BaseExpression):
             # all parsed wikiwords, ANDed
             queries = []
             stemmed = []
-            for t in terms:
+            for term in terms:
                 if request.cfg.xapian_stemming:
                     # stemmed OR not stemmed
-                    tmp = []
-                    for w, s, pos in analyzer.tokenize(t, flat_stemming=False):
-                        tmp.append(Query(Query.OP_OR,
-                            [UnicodeQuery('%s%s' %
-                                    (Xapian.Index.prefixMap['title'], j),
-                                    100)
-                                for j in (w, s)]))
+                    t = []
+                    for w, s, pos in analyzer.tokenize(term, flat_stemming=False):
+                        # XXX weight for a query 100!
+                        query_word = connection.query_field('title', w)
+                        query_stemmed = connection.query_field('title', s)
+
+                        # XXX UnicodeQuery was used here!
+                        t.append(Query(Query.OP_OR, [query_word, query_stemmed]))
                         stemmed.append(s)
-                    t = tmp
                 else:
                     # just not stemmed
-                    t = [UnicodeQuery(
-                                '%s%s' % (Xapian.Index.prefixMap['title'], w),
-                                100)
-                            for w, pos in analyzer.tokenize(t)]
+                    # XXX weight for a query 100!
+                    # XXX UnicodeQuery was used here!
+                    t = [connection.query_field('title', w) for w, pos in analyzer.tokenize(term)]
 
-                queries.append(Query(Query.OP_AND, t))
+                queries.append(Query(Query.OP_OR, t))
 
             if not self.case and stemmed:
                 new_pat = ' '.join(stemmed)

@@ -226,10 +226,6 @@ class WikiAnalyzer:
 
 class Index(BaseIndex):
 
-    # XXX This is needed for a query parser. Since xappy uses
-    # different terms, it is better to use xappy's query parser.
-    prefixMap = {'title': 'S'}
-
     def __init__(self, request):
         self._check_version()
         BaseIndex.__init__(self, request)
