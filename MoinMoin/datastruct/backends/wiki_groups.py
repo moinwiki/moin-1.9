@@ -18,7 +18,6 @@ page.
             2009 MoinMoin:DmitrijsMilajevs
 @license: GPL, see COPYING for details
 """
-import math
 
 from MoinMoin import caching, wikiutil
 from MoinMoin.Page import Page
@@ -44,7 +43,7 @@ class WikiGroup(GreedyGroup):
                 #
                 # cache_mtime is float while page_mtime is integer
                 # The comparision needs to be done on the lowest type of both
-                if math.floor(cache_mtime) > math.floor(page_mtime):
+                if int(cache_mtime) > int(page_mtime):
                     # cache is uptodate
                     return cache.content()
                 else:
