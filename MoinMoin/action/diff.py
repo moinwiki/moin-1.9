@@ -118,12 +118,12 @@ def execute(pagename, request):
     title = f.text(title)
 
     # Revision list starts from 2...
-    if oldrev == min(revlist):
+    if oldrev <= min(revlist):
         disable_prev = u' disabled="disabled"'
     else:
         disable_prev = u''
 
-    if newrev == max(revlist):
+    if newrev >= max(revlist):
         disable_next = u' disabled="disabled"'
     else:
         disable_next = u''
