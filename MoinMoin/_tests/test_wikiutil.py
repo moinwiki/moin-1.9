@@ -9,7 +9,9 @@
 
 import py
 
-from MoinMoin import wikiutil
+from MoinMoin import config, wikiutil
+
+from werkzeug import MultiDict
 
 
 class TestQueryStringSupport:
@@ -21,17 +23,13 @@ class TestQueryStringSupport:
     ]
     def testParseQueryString(self):
         for qstr, expected_str, expected_unicode in self.tests:
-            assert wikiutil.parseQueryString(qstr, want_unicode=False) == expected_str
-            assert wikiutil.parseQueryString(qstr, want_unicode=True) == expected_unicode
-            assert wikiutil.parseQueryString(unicode(qstr), want_unicode=False) == expected_str
-            assert wikiutil.parseQueryString(unicode(qstr), want_unicode=True) == expected_unicode
+            assert wikiutil.parseQueryString(qstr) == MultiDict(expected_unicode)
+            assert wikiutil.parseQueryString(unicode(qstr)) == MultiDict(expected_unicode)
 
     def testMakeQueryString(self):
         for qstr, in_str, in_unicode in self.tests:
-            assert wikiutil.parseQueryString(wikiutil.makeQueryString(in_unicode, want_unicode=False), want_unicode=False) == in_str
-            assert wikiutil.parseQueryString(wikiutil.makeQueryString(in_str, want_unicode=False), want_unicode=False) == in_str
-            assert wikiutil.parseQueryString(wikiutil.makeQueryString(in_unicode, want_unicode=True), want_unicode=True) == in_unicode
-            assert wikiutil.parseQueryString(wikiutil.makeQueryString(in_str, want_unicode=True), want_unicode=True) == in_unicode
+            assert wikiutil.parseQueryString(wikiutil.makeQueryString(in_unicode)) == MultiDict(in_unicode)
+            assert wikiutil.parseQueryString(wikiutil.makeQueryString(in_str)) == MultiDict(in_unicode)
 
 
 class TestTickets:
@@ -87,15 +85,8 @@ class TestInterWiki:
             assert wikiutil.join_wiki(baseurl, pagename) == url
 
 
-class TestSystemPagesGroup:
-    def testSystemPagesGroupNotEmpty(self):
-        assert self.request.dicts.members('SystemPagesGroup')
-
 class TestSystemPage:
     systemPages = (
-        # First level, on SystemPagesGroup
-        'SystemPagesInEnglishGroup',
-        # Second level, on one of the pages above
         'RecentChanges',
         'TitleIndex',
         )
@@ -972,5 +963,81 @@ class TestRelativeTools:
     def _check_rel_pagename(self, current_page, absolute_page, relative_page):
         assert relative_page == wikiutil.RelPageName(current_page, absolute_page)
 
+
+class TestNormalizePagename(object):
+
+    def testPageInvalidChars(self):
+        """ request: normalize pagename: remove invalid unicode chars
+
+        Assume the default setting
+        """
+        test = u'\u0000\u202a\u202b\u202c\u202d\u202e'
+        expected = u''
+        result = wikiutil.normalize_pagename(test, self.request.cfg)
+        assert result == expected
+
+    def testNormalizeSlashes(self):
+        """ request: normalize pagename: normalize slashes """
+        cases = (
+            (u'/////', u''),
+            (u'/a', u'a'),
+            (u'a/', u'a'),
+            (u'a/////b/////c', u'a/b/c'),
+            (u'a b/////c d/////e f', u'a b/c d/e f'),
+            )
+        for test, expected in cases:
+            result = wikiutil.normalize_pagename(test, self.request.cfg)
+            assert result == expected
+
+    def testNormalizeWhitespace(self):
+        """ request: normalize pagename: normalize whitespace """
+        cases = (
+            (u'         ', u''),
+            (u'    a', u'a'),
+            (u'a    ', u'a'),
+            (u'a     b     c', u'a b c'),
+            (u'a   b  /  c    d  /  e   f', u'a b/c d/e f'),
+            # All 30 unicode spaces
+            (config.chars_spaces, u''),
+            )
+        for test, expected in cases:
+            result = wikiutil.normalize_pagename(test, self.request.cfg)
+            assert result == expected
+
+    def testUnderscoreTestCase(self):
+        """ request: normalize pagename: underscore convert to spaces and normalized
+
+        Underscores should convert to spaces, then spaces should be
+        normalized, order is important!
+        """
+        cases = (
+            (u'         ', u''),
+            (u'  a', u'a'),
+            (u'a  ', u'a'),
+            (u'a  b  c', u'a b c'),
+            (u'a  b  /  c  d  /  e  f', u'a b/c d/e f'),
+            )
+        for test, expected in cases:
+            result = wikiutil.normalize_pagename(test, self.request.cfg)
+            assert result == expected
+
+class TestGroupPages(object):
+
+    def testNormalizeGroupName(self):
+        """ request: normalize pagename: restrict groups to alpha numeric Unicode
+
+        Spaces should normalize after invalid chars removed!
+        """
+        cases = (
+            # current acl chars
+            (u'Name,:Group', u'NameGroup'),
+            # remove than normalize spaces
+            (u'Name ! @ # $ % ^ & * ( ) + Group', u'Name Group'),
+            )
+        for test, expected in cases:
+            # validate we are testing valid group names
+            if wikiutil.isGroupPage(test, self.request.cfg):
+                result = wikiutil.normalize_pagename(test, self.request.cfg)
+                assert result == expected
 
 coverage_modules = ['MoinMoin.wikiutil']

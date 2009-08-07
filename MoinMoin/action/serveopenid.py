@@ -18,7 +18,7 @@ from openid.cryptutil import randomString
 from openid.server import server
 from openid.message import IDENTIFIER_SELECT
 from MoinMoin.widget import html
-from MoinMoin.request import MoinMoinFinish
+from MoinMoin.web.request import MoinMoinFinish
 
 def execute(pagename, request):
     return MoinOpenIDServer(pagename, request).handle()
@@ -31,9 +31,8 @@ class MoinOpenIDServer:
 
     def serveYadisEP(self, endpoint_url):
         request = self.request
-        hdrs = ['Content-type: application/xrds+xml']
+        request.content_type = 'application/xrds+xml'
 
-        request.emit_http_headers(hdrs)
         user_url = request.getQualifiedURL(request.page.url(request))
         self.request.write("""\
 <?xml version="1.0" encoding="UTF-8"?>
@@ -79,9 +78,8 @@ class MoinOpenIDServer:
 
     def serveYadisIDP(self, endpoint_url):
         request = self.request
-        hdrs = ['Content-type: application/xrds+xml']
+        request.content_type = 'application/xrds+xml'
 
-        request.emit_http_headers(hdrs)
         user_url = request.getQualifiedURL(request.page.url(request))
         self.request.write("""\
 <?xml version="1.0" encoding="UTF-8"?>
@@ -143,10 +141,9 @@ class MoinOpenIDServer:
 
         # again, we never put an openid.server link on this page...
         # why are they here?
-        if cfg.openid_server_restricted_users_group:
-            request.dicts.addgroup(request, cfg.openid_server_restricted_users_group)
-            if not request.dicts.has_member(cfg.openid_server_restricted_users_group, received_name):
-                return False
+        openid_group_name = cfg.openid_server_restricted_users_group
+        if openid_group_name and received_name not in request.groups.get(openid_group_name, []):
+            return False
 
         return True
 
@@ -190,7 +187,7 @@ class MoinOpenIDServer:
         server_url = request.getQualifiedURL(
                          request.page.url(request, querystr={'action': 'serveopenid'}))
 
-        yadis_type = form.get('yadis', [None])[0]
+        yadis_type = form.get('yadis')
         if yadis_type == 'ep':
             return self.serveYadisEP(server_url)
         elif yadis_type == 'idp':
@@ -198,7 +195,7 @@ class MoinOpenIDServer:
 
         # if the identity is set it must match the server URL
         # sort of arbitrary, but we have to have some restriction
-        identity = form.get('openid.identity', [None])[0]
+        identity = form.get('openid.identity')
         if identity == IDENTIFIER_SELECT:
             identity, server_url = self._make_identity()
             if not identity:
@@ -217,7 +214,7 @@ class MoinOpenIDServer:
         openidsrv = server.Server(store, op_endpoint=server_url)
 
         answer = None
-        if form.has_key('dontapprove'):
+        if 'dontapprove' in form:
             answer = self.handle_response(False, username, identity)
             if answer is None:
                 return
@@ -227,8 +224,8 @@ class MoinOpenIDServer:
                 return
         else:
             query = {}
-            for key in form.keys():
-                query[key] = form[key][0]
+            for key in form:
+                query[key] = form[key]
             try:
                 openidreq = openidsrv.decodeRequest(query)
             except Exception, e:
@@ -249,10 +246,9 @@ class MoinOpenIDServer:
             else:
                 answer = openidsrv.handleRequest(openidreq)
         webanswer = openidsrv.encodeResponse(answer)
-        headers = ['Status: %d OpenID status' % webanswer.code]
+        request.status = '%d OpenID status' % webanswer.code
         for hdr in webanswer.headers:
-            headers += [hdr+': '+webanswer.headers[hdr]]
-        request.emit_http_headers(headers)
+            request.headers.add(hdr, webanswer.headers[hdr])
         request.write(webanswer.body)
         raise MoinMoinFinish
 
@@ -266,7 +262,7 @@ class MoinOpenIDServer:
         if session_nonce is not None:
             del self.request.session['openidserver.nonce']
         # use empty string if nothing was sent
-        form_nonce = form.get('nonce', [''])[0]
+        form_nonce = form.get('nonce', '')
         if session_nonce != form_nonce:
             self.request.makeForbidden403()
             self.request.write('invalid nonce')
@@ -285,7 +281,7 @@ class MoinOpenIDServer:
             return openidreq.answer(False)
 
 
-        if form.get('remember', ['no'])[0] == 'yes':
+        if form.get('remember', 'no') == 'yes':
             if not hasattr(request.user, 'openid_trusted_roots'):
                 request.user.openid_trusted_roots = []
             request.user.openid_trusted_roots.append(strbase64(openidreq.trust_root))
@@ -324,7 +320,6 @@ never allow you to enter your password here.
 Once you have logged in, simply reload this page.'''))
             return
 
-        request.emit_http_headers()
         request.theme.send_title(_("OpenID Trust verification"), pagename=request.page.page_name)
         # Start content (important for RTL support)
         request.write(request.formatter.startContent("content"))
@@ -397,7 +392,6 @@ delegation on its own.)''') % openidreq.identity)
         request = self.request
         _ = self._
 
-        request.emit_http_headers()
         request.theme.send_title(_("OpenID not served"), pagename=request.page.page_name)
         # Start content (important for RTL support)
         request.write(request.formatter.startContent("content"))

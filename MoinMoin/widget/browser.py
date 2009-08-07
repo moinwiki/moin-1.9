@@ -75,8 +75,8 @@ class DataBrowserWidget(base.Widget):
 
         value = None
         name = '%sfilter%d' % (self.data_id, idx)
-        if name in self.request.form:
-            value = self.request.form[name][0]
+        if name in self.request.values:
+            value = self.request.values.getlist(name)
         while row:
             option = row[idx]
             if isinstance(option, tuple):
@@ -109,7 +109,7 @@ class DataBrowserWidget(base.Widget):
 
         result = []
         if method:
-            result.append(fmt.rawHTML('<form action="%s/%s" method="%s" name="%sform">' % (self.request.getScriptname(), wikiutil.quoteWikinameURL(self.request.page.page_name), method, self.data_id)))
+            result.append(fmt.rawHTML('<form action="%s/%s" method="%s" name="%sform">' % (self.request.script_root, wikiutil.quoteWikinameURL(self.request.page.page_name), method, self.data_id)))
         result.append(fmt.div(1))
 
         havefilters = False
@@ -154,8 +154,8 @@ class DataBrowserWidget(base.Widget):
             if havefilters:
                 for idx in range(len(row)):
                     name = '%sfilter%d' % (self.data_id, idx)
-                    if name in self.request.form:
-                        filters[idx] = self.request.form[name][0]
+                    if name in self.request.values:
+                        filters[idx] = self.request.getlist(name)
                         if filters[idx] == self._all:
                             filters[idx] = None
 

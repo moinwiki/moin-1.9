@@ -15,7 +15,6 @@ from MoinMoin.util import lock, pickle
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.packages import unpackLine, packLine
-from MoinMoin.support.multicall import MultiCall
 
 
 MIMETYPE_MOIN = "text/wiki"
@@ -249,7 +248,7 @@ class MoinRemoteWiki(RemoteWiki):
 
     def create_multicall_object(self):
         """ Generates an object that can be used like a MultiCall instance. """
-        return MultiCall(self.connection)
+        return xmlrpclib.MultiCall(self.connection)
 
     def prepare_multicall(self):
         """ Can be used to return initial calls that e.g. authenticate the user.
@@ -281,7 +280,7 @@ class MoinRemoteWiki(RemoteWiki):
                    "pagelist": self.pagelist,
                    "mark_deleted": True}
         if self.token:
-            m = MultiCall(self.connection)
+            m = xmlrpclib.MultiCall(self.connection)
             m.applyAuthToken(self.token)
             m.getAllPagesEx(options)
             tokres, pages = m()
@@ -311,10 +310,9 @@ class MoinLocalWiki(RemoteWiki):
 
     def getGroupItems(self, group_list):
         """ Returns all page names that are listed on the page group_list. """
-        from MoinMoin.wikidicts import Group
         pages = []
         for group_pagename in group_list:
-            pages.extend(Group(self.request, group_pagename).members())
+            pages.extend(request.groups.get(group_pagename, []))
         return [self.createSyncPage(x) for x in pages]
 
     def createSyncPage(self, page_name):

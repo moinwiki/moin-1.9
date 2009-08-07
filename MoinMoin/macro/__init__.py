@@ -20,10 +20,14 @@
 from MoinMoin.util import pysupport
 modules = pysupport.getPackageModules(__file__)
 
+from MoinMoin import log
+logging = log.getLogger(__name__)
+
 import re, time, os
 from MoinMoin import action, config, util
 from MoinMoin import wikiutil, i18n
 from MoinMoin.Page import Page
+from MoinMoin.datastruct.backends.wiki_dicts import WikiDict
 
 
 names = ["TitleSearch", "WordIndex", "TitleIndex", "GoTo",
@@ -91,17 +95,6 @@ class Macro:
         # Initialized on execute
         self.name = None
 
-    def _wrap(self, function, args, fixed=[]):
-        try:
-            return wikiutil.invoke_extension_function(self.request, function,
-                                                      args, fixed)
-        except ValueError, e:
-            return self.format_error(e)
-
-    def format_error(self, err):
-        """ format an error object for output instead of normal macro output """
-        return self.formatter.text(u'<<%s: %s>>' % (self.name, err.args[0]))
-
     def execute(self, macro_name, args):
         """ Get and execute a macro
 
@@ -112,20 +105,34 @@ class Macro:
         try:
             call = wikiutil.importPlugin(self.cfg, 'macro', macro_name,
                                          function='macro_%s' % macro_name)
-            execute = lambda _self, _args: _self._wrap(call, _args, [self])
+            execute = lambda _self, _args: wikiutil.invoke_extension_function(
+                                               _self.request, call, _args, [_self])
         except wikiutil.PluginAttributeError:
             # fall back to old execute() method, no longer recommended
             execute = wikiutil.importPlugin(self.cfg, 'macro', macro_name)
         except wikiutil.PluginMissingError:
             try:
                 call = getattr(self, 'macro_%s' % macro_name)
-                execute = lambda _self, _args: _self._wrap(call, _args)
+                execute = lambda _self, _args: wikiutil.invoke_extension_function(
+                                                   _self.request, call, _args, [])
             except AttributeError:
                 if macro_name in i18n.wikiLanguages():
                     execute = self.__class__._m_lang
                 else:
                     raise ImportError("Cannot load macro %s" % macro_name)
-        return execute(self, args)
+        try:
+            return execute(self, args)
+        except Exception, err:
+            # we do not want that a faulty macro aborts rendering of the page
+            # and makes the wiki UI unusable (by emitting a Server Error),
+            # thus, in case of exceptions, we just log the problem and return
+            # some standard text.
+            logging.exception("Macro %s raised an exception:" % self.name)
+            _ = self.request.getText
+            return self.formatter.text(_('<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>') % {
+                   'macro_name': self.name,
+                   'error_msg': err.args[0], # note: str(err) or unicode(err) does not work for py2.4/5/6
+                 })
 
     def _m_lang(self, text):
         """ Set the current language for page content.
@@ -192,7 +199,7 @@ class Macro:
         _ = self._
         request = self.request
         fmt = self.formatter
-        allpages = int(self.form.get('allpages', [0])[0]) != 0
+        allpages = int(request.values.get('allpages', 0)) != 0
         # Get page list readable by current user, filter by isSystemPage if needed
         if allpages:
             pages = request.rootpage.getPageList()
@@ -281,7 +288,7 @@ class Macro:
         """
         _ = self._
         html = [
-            u'<form method="get" action="%s/%s"><div>' % (self.request.getScriptname(), wikiutil.quoteWikinameURL(self.formatter.page.page_name)),
+            u'<form method="get" action="%s"><div>' % self.request.href(self.formatter.page.page_name),
             u'<div>',
             u'<input type="hidden" name="action" value="goto">',
             u'<input type="text" name="target" size="30">',
@@ -374,12 +381,18 @@ class Macro:
 
     def macro_GetVal(self, page=None, key=None):
         page = wikiutil.get_unicode(self.request, page, 'page')
-        if not self.request.user.may.read(page):
-            raise ValueError("You don't have enough rights on this page")
+
         key = wikiutil.get_unicode(self.request, key, 'key')
         if page is None or key is None:
             raise ValueError("You need to give: pagename, key")
-        d = self.request.dicts.dict(page)
+
+        d = self.request.dicts.get(page, {})
+
+        # Check acl only if dictionary is defined on a wiki page.
+        if isinstance(d, WikiDict) and not self.request.user.may.read(page):
+            raise ValueError("You don't have enough rights on this page")
+
         result = d.get(key, '')
+
         return self.formatter.text(result)
 

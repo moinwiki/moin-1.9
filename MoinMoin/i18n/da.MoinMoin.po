@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-26 21:29+0200\n"
+"POT-Creation-Date: 2009-07-27 00:57+0200\n"
 "PO-Revision-Date: 2007-04-22 18:50+0100\n"
 "Last-Translator: Jonas Smedegaard <dr@jones.dk>\n"
 "Language-Team: Danish <moin-devel@lists.sourceforge.net>\n"
@@ -343,16 +343,26 @@ msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] Dine wiki brugerprofil-oplysninger"
 
 #, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Ukendt rutine %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Du har ikke lov til at anvende %(action_name)s på denne side!"
+
+msgid "Login and try again."
+msgstr "Log på og prøv igen."
+
+#, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
 msgstr "Pakken kræver en nyere version af MoinMoin (mindst %s)."
 
 msgid "The theme name is not set."
 msgstr "Temaets navn er ikke anbiget."
 
-msgid "Installing theme files is only supported for standalone type servers."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
 msgstr ""
-"Installering af temafiler er kun understøttet for server-typen \"standalone"
-"\"."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -450,8 +460,9 @@ msgstr "Forventede en værdi for variablen \"%(token)s\""
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr ""
 
+#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
 "Det tidligere indhold af denne side er forældet og vil ikke blive inkluderet "
@@ -711,9 +722,8 @@ msgstr "Slettet tekst er markeret som her."
 msgid "Additions are marked like this."
 msgstr "Tilføjelser er markeret som her."
 
-#, fuzzy
-msgid "You need to log in."
-msgstr "Du er nu logget ud."
+msgid "Please log in first."
+msgstr "Log venligst på først."
 
 msgid ""
 "Please choose an account name now.\n"
@@ -740,10 +750,39 @@ msgstr ""
 msgid "Associate this name"
 msgstr ""
 
+#, fuzzy
+msgid "OpenID verification canceled."
+msgstr "Handlingen blev afbrudt."
+
+#, python-format
+msgid "OpenID success. id: %s"
+msgstr ""
+
+msgid "OpenID failure"
+msgstr ""
+
+msgid "No OpenID found in session."
+msgstr ""
+
 msgid "Your account is now associated to your OpenID."
 msgstr ""
 
 msgid "The password you entered is not valid."
+msgstr ""
+
+msgid "OpenID: handle verify continuation"
+msgstr ""
+
+msgid "OpenID: handle name continuation"
+msgstr ""
+
+msgid "OpenID: handle associate continuation"
+msgstr ""
+
+msgid "OpenID: unknown continuation stage"
+msgstr ""
+
+msgid "OpenID error: unknown continuation stage"
 msgstr ""
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
@@ -773,7 +812,11 @@ msgstr ""
 #, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+"one now</a>. "
+msgstr ""
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
 
 #, fuzzy
@@ -827,7 +870,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Fremhævelser:: <<Verbatim('')>>''kursiv''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''fed'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''fed "
@@ -1098,17 +1141,6 @@ msgstr "Tilbagefør til udgave %(rev)d."
 msgid "Renamed from '%(oldpagename)s'."
 msgstr "Omdøbt fra '%(oldpagename)s'."
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Ukendt rutine %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Du har ikke lov til at anvende %(action_name)s på denne side!"
-
-msgid "Login and try again."
-msgstr "Log på og prøv igen."
-
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr ""
 
@@ -1314,11 +1346,11 @@ msgstr "resultat"
 msgid "matches"
 msgstr "resultater"
 
-msgid "FrontPage"
-msgstr "ForSide"
-
 msgid "RecentChanges"
 msgstr "SenesteRettelser"
+
+msgid "WikiTipOfTheDay"
+msgstr ""
 
 msgid "TitleIndex"
 msgstr "TitelListe"
@@ -1329,23 +1361,477 @@ msgstr "OrdListe"
 msgid "FindPage"
 msgstr "FindSide"
 
-msgid "SiteNavigation"
-msgstr "SiteNavigering"
-
-msgid "HelpContents"
-msgstr "HjælpIndhold"
-
-msgid "HelpOnFormatting"
-msgstr "HjælpTilFormatering"
-
-msgid "WikiLicense"
-msgstr "WikiLicens"
-
 msgid "MissingPage"
 msgstr "ManglendeSide"
 
 msgid "MissingHomePage"
 msgstr "ManglendeHjemmeSide"
+
+#, fuzzy
+msgid "WikiHomePage"
+msgstr "ManglendeHjemmeSide"
+
+#, fuzzy
+msgid "WikiName"
+msgstr "Navn"
+
+msgid "WikiWikiWeb"
+msgstr ""
+
+msgid "FrontPage"
+msgstr "ForSide"
+
+msgid "WikiSandBox"
+msgstr ""
+
+#, fuzzy
+msgid "InterWiki"
+msgstr "Wiki"
+
+msgid "AbandonedPages"
+msgstr ""
+
+#, fuzzy
+msgid "OrphanedPages"
+msgstr "Pakkesider"
+
+#, fuzzy
+msgid "WantedPages"
+msgstr "FindSide"
+
+msgid "EventStats"
+msgstr ""
+
+msgid "EventStats/HitCounts"
+msgstr ""
+
+msgid "EventStats/Languages"
+msgstr ""
+
+msgid "EventStats/UserAgents"
+msgstr ""
+
+#, fuzzy
+msgid "PageSize"
+msgstr "Størrelse"
+
+#, fuzzy
+msgid "PageHits"
+msgstr "Sider"
+
+#, fuzzy
+msgid "RandomPage"
+msgstr "OmdøbSide"
+
+#, fuzzy
+msgid "XsltVersion"
+msgstr "Python-version"
+
+msgid "FortuneCookies"
+msgstr ""
+
+msgid "WikiLicense"
+msgstr "WikiLicens"
+
+msgid "CategoryCategory"
+msgstr ""
+
+msgid "CategoryHomepage"
+msgstr ""
+
+msgid "CategoryTemplate"
+msgstr ""
+
+msgid "HomepageTemplate"
+msgstr ""
+
+msgid "HelpTemplate"
+msgstr ""
+
+msgid "HomepageReadWritePageTemplate"
+msgstr ""
+
+msgid "HomepageReadPageTemplate"
+msgstr ""
+
+msgid "HomepagePrivatePageTemplate"
+msgstr ""
+
+msgid "HomepageGroupsTemplate"
+msgstr ""
+
+msgid "SlideShowHandOutTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "SlideShowTemplate"
+msgstr "Slideshow"
+
+msgid "SlideTemplate"
+msgstr ""
+
+msgid "SyncJobTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration"
+msgstr "HjælpTilFormatering"
+
+msgid "HelpOnConfiguration/EmailSupport"
+msgstr ""
+
+msgid "HelpOnConfiguration/SecurityPolicy"
+msgstr ""
+
+msgid "HelpOnConfiguration/FileAttachments"
+msgstr ""
+
+msgid "HelpOnConfiguration/SupplementationPage"
+msgstr ""
+
+msgid "HelpOnConfiguration/SurgeProtection"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration/UserPreferences"
+msgstr "BrugerProfil"
+
+msgid "HelpOnPackageInstaller"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUpdating"
+msgstr "HjælpTilFormatering"
+
+#, fuzzy
+msgid "HelpOnUpdatingPython"
+msgstr "HjælpTilFormatering"
+
+#, fuzzy
+msgid "HelpOnAdministration"
+msgstr "HjælpTilFormatering"
+
+msgid "HelpOnAuthentication"
+msgstr ""
+
+msgid "HelpOnAuthentication/ExternalCookie"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnMoinCommand"
+msgstr "HjælpTilFormatering"
+
+msgid "HelpOnMoinCommand/ExportDump"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNotification"
+msgstr "HjælpTilFormatering"
+
+#, fuzzy
+msgid "HelpOnSessions"
+msgstr "HjælpIndhold"
+
+#, fuzzy
+msgid "HelpOnUserHandling"
+msgstr "HjælpTilFormatering"
+
+#, fuzzy
+msgid "HelpOnXapian"
+msgstr "HjælpTilFormatering"
+
+msgid "HelpOnMoinWikiSyntax"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnCreoleSyntax"
+msgstr "HjælpIndhold"
+
+msgid "HelpOnFormatting"
+msgstr "HjælpTilFormatering"
+
+#, fuzzy
+msgid "MoinMoin"
+msgstr "MoinMoin-version"
+
+msgid "HelpContents"
+msgstr "HjælpIndhold"
+
+msgid "HelpForBeginners"
+msgstr ""
+
+msgid "HelpForUsers"
+msgstr ""
+
+#, fuzzy
+msgid "HelpIndex"
+msgstr "TitelListe"
+
+msgid "HelpOnAccessControlLists"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnActions"
+msgstr "HjælpIndhold"
+
+msgid "HelpOnActions/AttachFile"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnAdmonitions"
+msgstr "HjælpIndhold"
+
+#, fuzzy
+msgid "HelpOnAutoAdmin"
+msgstr "HjælpTilFormatering"
+
+msgid "HelpOnCategories"
+msgstr ""
+
+msgid "HelpOnDictionaries"
+msgstr ""
+
+msgid "HelpOnEditLocks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnEditing"
+msgstr "HjælpTilFormatering"
+
+msgid "HelpOnEditing/SubPages"
+msgstr ""
+
+msgid "HelpOnGraphicalEditor"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnGroups"
+msgstr "HjælpIndhold"
+
+msgid "HelpOnHeadlines"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnLanguages"
+msgstr "Sprog"
+
+#, fuzzy
+msgid "HelpOnLinking"
+msgstr "HjælpTilFormatering"
+
+msgid "HelpOnLinking/NotesLinks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnLists"
+msgstr "HjælpIndhold"
+
+#, fuzzy
+msgid "HelpOnLogin"
+msgstr "HjælpTilFormatering"
+
+msgid "HelpOnMacros"
+msgstr ""
+
+msgid "HelpOnMacros/EmbedObject"
+msgstr ""
+
+msgid "HelpOnMacros/Include"
+msgstr ""
+
+msgid "HelpOnMacros/MailTo"
+msgstr ""
+
+msgid "HelpOnMacros/MonthCalendar"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNavigation"
+msgstr "SiteNavigering"
+
+msgid "HelpOnOpenIDProvider"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnPageCreation"
+msgstr "HjælpTilFormatering"
+
+msgid "HelpOnPageDeletion"
+msgstr ""
+
+msgid "HelpOnParsers"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText/RstPrimer"
+msgstr ""
+
+msgid "HelpOnProcessingInstructions"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnRules"
+msgstr "HjælpIndhold"
+
+#, fuzzy
+msgid "HelpOnSearching"
+msgstr "HjælpTilFormatering"
+
+#, fuzzy
+msgid "HelpOnSlideShows"
+msgstr "Slideshow"
+
+msgid "HelpOnSlideShows/000 Introduction"
+msgstr ""
+
+msgid "HelpOnSlideShows/100 Creating the slides"
+msgstr ""
+
+msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
+msgstr ""
+
+msgid "HelpOnSmileys"
+msgstr ""
+
+msgid "HelpOnSpam"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSpellCheck"
+msgstr "StaveKontrol"
+
+msgid "HelpOnSuperUser"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSynchronisation"
+msgstr "Synkronisering påbegyndt."
+
+msgid "HelpOnTables"
+msgstr ""
+
+msgid "HelpOnTemplates"
+msgstr ""
+
+msgid "HelpOnThemes"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUserPreferences"
+msgstr "BrugerProfil"
+
+msgid "HelpOnVariables"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnXmlPages"
+msgstr "HjælpTilFormatering"
+
+#, fuzzy
+msgid "HelpOnComments"
+msgstr "HjælpIndhold"
+
+#, fuzzy
+msgid "HelpOnSubscribing"
+msgstr "Afmeld abonnement"
+
+msgid "CamelCase"
+msgstr ""
+
+msgid "WikiCourse"
+msgstr ""
+
+msgid "WikiCourse/01 What is a MoinMoin wiki?"
+msgstr ""
+
+msgid "WikiCourse/02 Finding information"
+msgstr ""
+
+msgid "WikiCourse/03 Staying up to date"
+msgstr ""
+
+msgid "WikiCourse/04 Creating a wiki account"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/05 User preferences"
+msgstr "BrugerProfil"
+
+msgid "WikiCourse/06 Your own wiki homepage"
+msgstr ""
+
+msgid "WikiCourse/07 The text editor"
+msgstr ""
+
+msgid "WikiCourse/08 Hot Keys"
+msgstr ""
+
+msgid "WikiCourse/10 Text layout with wiki markup"
+msgstr ""
+
+msgid "WikiCourse/11 Paragraphs"
+msgstr ""
+
+msgid "WikiCourse/12 Headlines"
+msgstr ""
+
+msgid "WikiCourse/13 Lists"
+msgstr ""
+
+msgid "WikiCourse/14 Text styles"
+msgstr ""
+
+msgid "WikiCourse/15 Tables"
+msgstr ""
+
+msgid "WikiCourse/16 Wiki internal links"
+msgstr ""
+
+msgid "WikiCourse/17 External links"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/18 Attachments"
+msgstr "Ny vedhæftning"
+
+msgid "WikiCourse/19 Symbols"
+msgstr ""
+
+msgid "WikiCourse/20 Dynamic content"
+msgstr ""
+
+msgid "WikiCourse/21 Macros"
+msgstr ""
+
+msgid "WikiCourse/22 Parsers"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/23 Actions"
+msgstr "Flere Rutiner:"
+
+msgid "WikiCourse/30 The graphical editor"
+msgstr ""
+
+msgid "WikiCourse/40 Creating more pages"
+msgstr ""
+
+msgid "WikiCourse/50 Wiki etiquette"
+msgstr ""
+
+msgid "WikiCourse/51 Applications"
+msgstr ""
+
+msgid "WikiCourse/52 Structure in the wiki"
+msgstr ""
+
+msgid "WikiCourseHandOut"
+msgstr ""
+
+msgid "Sun"
+msgstr "søn"
 
 msgid "Mon"
 msgstr "man"
@@ -1364,9 +1850,6 @@ msgstr "fre"
 
 msgid "Sat"
 msgstr "lør"
-
-msgid "Sun"
-msgstr "søn"
 
 msgid "AttachFile"
 msgstr "VedhæftFil"
@@ -1866,6 +2349,10 @@ msgstr "Begyndelse"
 msgid "Slide %(pos)d of %(size)d"
 msgstr "Slide %(pos)d ud af %(size)d"
 
+#, python-format
+msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
+msgstr ""
+
 msgid "Go To Page"
 msgstr "Gå til siden"
 
@@ -2123,16 +2610,16 @@ msgstr "Vedhæftninger til \"%(pagename)s\""
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 
-#, fuzzy
-msgid "You are not allowed to overwrite a file attachment of this page."
-msgstr "Du har ikke lov til at se vedhæftninger til denne side."
-
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
 msgstr ""
 "Intet indhold i fil. Slet ikke-ASCII tegn (specielle bogstaver og tegn) fra "
 "filnavnet og prøv igen."
+
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Du har ikke lov til at se vedhæftninger til denne side."
 
 #, python-format
 msgid ""
@@ -2725,10 +3212,6 @@ msgstr "Ignorér forskelle i antal mellemrum"
 msgid "Invalid filename \"%s\"!"
 msgstr "Forkert filnavn \"%s\"!"
 
-#, python-format
-msgid "Created the package %s containing the pages %s."
-msgstr "Oprettede pakken %s indeholdende siderne %s."
-
 #, fuzzy
 msgid "Include all attachments?"
 msgstr "[%d·vedhæftninger]"
@@ -2758,9 +3241,6 @@ msgstr "Ikke en bruger:"
 
 msgid "You are not allowed to perform this action."
 msgstr "Du har ikke lov til at udføre denne rutine."
-
-msgid "Please log in first."
-msgstr "Log venligst på først."
 
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Opret venligst en hjemmeside før du opretter flere sider"
@@ -2819,6 +3299,17 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "MineSider administration"
+
+#, fuzzy
+msgid "page package"
+msgstr "Pakkesider"
+
+msgid "Choose:"
+msgstr ""
+
+#, python-format
+msgid "Install language packs for '%s'"
+msgstr ""
 
 msgid "Your subscription to this page has been removed."
 msgstr "Dit abonnement på denne side er blevet fjernet."
@@ -3003,6 +3494,35 @@ msgid "anonymous"
 msgstr ""
 
 #~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr ""
+#~ "Installering af temafiler er kun understøttet for server-typen "
+#~ "\"standalone\"."
+
+#, fuzzy
+#~ msgid "InterWikiMap"
+#~ msgstr "Wiki-opmærkning"
+
+#, fuzzy
+#~ msgid "BadContent"
+#~ msgstr "Indhold"
+
+#, fuzzy
+#~ msgid "LocalBadContent"
+#~ msgstr "Indhold"
+
+#, fuzzy
+#~ msgid "EditedSystemPages"
+#~ msgstr "Udelad systemsider"
+
+#~ msgid "Created the package %s containing the pages %s."
+#~ msgstr "Oprettede pakken %s indeholdende siderne %s."
+
+#, fuzzy
+#~ msgid "You need to log in."
+#~ msgstr "Du er nu logget ud."
+
+#~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
 #~ "Files: %(filecount)d, Directories: %(dircount)d"
 #~ msgstr ""
@@ -3166,9 +3686,6 @@ msgstr ""
 
 #~ msgid "[%(lang)s] %(recipients)s: %(status)s"
 #~ msgstr "[%(lang)s]·%(recipients)s:·%(status)s"
-
-#~ msgid "UserPreferences"
-#~ msgstr "BrugerProfil"
 
 #~ msgid "Subscribe to trivial changes"
 #~ msgstr "Abonnér på simple rettelser"

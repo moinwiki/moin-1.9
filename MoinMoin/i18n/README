@@ -34,8 +34,9 @@ _("english string") - xgettext can extract these strings automatically from
 the files listed in POTFILES.in.
 
 As not all strings appear in the source code, there is an additional
-file i18n/dummy.py that contains strings that need to be translated, but
-do not appear in src otherwise or are not found by gettext.
+file i18n/strings.py that contains strings that need to be translated, but
+do not appear in src otherwise or are not found by gettext or need to be
+organized somehow.
 
 
 

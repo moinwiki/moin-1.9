@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-26 21:29+0200\n"
+"POT-Creation-Date: 2009-07-27 00:57+0200\n"
 "PO-Revision-Date: 2006-02-09 11:25+0100\n"
 "Last-Translator: Sergiusz Pawłowicz <moin@pawlowicz.name>\n"
 "Language-Team: Polish <moin@pawlowicz.name>\n"
@@ -351,15 +351,26 @@ msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] Twoje dane czytelnika"
 
 #, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Nieznana akcja %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Nie możesz wykonać %(action_name)s na niniejszej stronie."
+
+msgid "Login and try again."
+msgstr "Zaloguj się i spróbuj ponownie."
+
+#, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
 msgstr "Pakiet wymaga serwera z nowszą wersją MoinMoin (przynajmniej %s)."
 
 msgid "The theme name is not set."
 msgstr "Nie wybrano żadnego wystroju"
 
-msgid "Installing theme files is only supported for standalone type servers."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
 msgstr ""
-"Instalacja plików wystroju jest wspierana tylko dla serwerów typu standalone."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -457,8 +468,9 @@ msgstr "Spodziewana wartość dla klucza \"%(token)s\""
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Niewłaściwe wyrażenie regularne podświetlania \"%(regex)s\": %(error)s"
 
+#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
 "Kopia zapasowa zawartości tej strony jest nieważna i nie będzie włączona do "
@@ -716,8 +728,8 @@ msgstr "Usunięcia zostały oznaczone w ten sposób."
 msgid "Additions are marked like this."
 msgstr "Dodatki zostały oznaczone w ten sposób."
 
-msgid "You need to log in."
-msgstr "Musisz się zalogować."
+msgid "Please log in first."
+msgstr "Proszę się najpierw zalogować."
 
 msgid ""
 "Please choose an account name now.\n"
@@ -750,11 +762,43 @@ msgstr ""
 msgid "Associate this name"
 msgstr "Połącz ten identyfikator"
 
+#, fuzzy
+msgid "OpenID verification canceled."
+msgstr "Weryfikcja została anulowana"
+
+#, fuzzy, python-format
+msgid "OpenID success. id: %s"
+msgstr "OpenID pomyślnie dodany."
+
+#, fuzzy
+msgid "OpenID failure"
+msgstr "Awaria OpenID."
+
+#, fuzzy
+msgid "No OpenID found in session."
+msgstr "Nie podano OpenID."
+
 msgid "Your account is now associated to your OpenID."
 msgstr "Twoje konto jest teraz połączone z OpenID."
 
 msgid "The password you entered is not valid."
 msgstr "Wpisane hasło nie jest poprawne."
+
+#, fuzzy
+msgid "OpenID: handle verify continuation"
+msgstr "Weryfikacja zaufania OpenID"
+
+msgid "OpenID: handle name continuation"
+msgstr ""
+
+msgid "OpenID: handle associate continuation"
+msgstr ""
+
+msgid "OpenID: unknown continuation stage"
+msgstr ""
+
+msgid "OpenID error: unknown continuation stage"
+msgstr ""
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
 msgstr "Aby logowanie OpenID działało, należy włączyć anonimowe sesje."
@@ -782,13 +826,17 @@ msgstr "Serwer LDAP %(server)s zawiódł."
 msgid "Failed to connect to database."
 msgstr "Niepowodzenie przy łączeniu się z bazą danych."
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+"one now</a>. "
 msgstr ""
-"Jeśli nie masz jeszcze hasła, <a href=\"%(userprefslink)s\">możesz je "
+"Jeśli nie masz jeszcze konta, <a href=\"%(userprefslink)s\">możesz je "
 "założyć teraz</a>. <a href=\"%(sendmypasswordlink)s\">Zapomniane hasło?</a>"
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+msgstr ""
 
 msgid ""
 " Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
@@ -819,6 +867,7 @@ msgstr ""
 "(!) Aby uzyskać więcej pomocy, obejrzyj HelpOnEditing lub "
 "HelpOnCreoleSyntax.\n"
 
+#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
@@ -834,7 +883,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Wyróżnienie:: <<Verbatim('')>>''kursywa''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''pogrubienie'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''pogrubienie "
@@ -1095,17 +1144,6 @@ msgstr "Przywrócono wersję %(rev)d."
 msgid "Renamed from '%(oldpagename)s'."
 msgstr "Zmieniono nazwę z  '%(oldpagename)s'."
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Nieznana akcja %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Nie możesz wykonać %(action_name)s na niniejszej stronie."
-
-msgid "Login and try again."
-msgstr "Zaloguj się i spróbuj ponownie."
-
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr "Opcje --pages i --search wzajemnie się wykluczają!"
 
@@ -1311,11 +1349,11 @@ msgstr "porównanie"
 msgid "matches"
 msgstr "porównania"
 
-msgid "FrontPage"
-msgstr "StronaGłówna"
-
 msgid "RecentChanges"
 msgstr "OstatnieZmiany"
+
+msgid "WikiTipOfTheDay"
+msgstr ""
 
 msgid "TitleIndex"
 msgstr "IndeksTytułów"
@@ -1326,23 +1364,482 @@ msgstr "IndeksSłów"
 msgid "FindPage"
 msgstr "ZnajdźStronę"
 
-msgid "SiteNavigation"
-msgstr "NawigacjaSerwisu"
-
-msgid "HelpContents"
-msgstr "PomocSpisTreści"
-
-msgid "HelpOnFormatting"
-msgstr "PomocPrzyFormatowaniu"
-
-msgid "WikiLicense"
-msgstr "LicencjaWiki"
-
 msgid "MissingPage"
 msgstr "NieistniejącaStrona"
 
 msgid "MissingHomePage"
 msgstr "NieistniejącaStronaDomowa"
+
+#, fuzzy
+msgid "WikiHomePage"
+msgstr "NieistniejącaStronaDomowa"
+
+#, fuzzy
+msgid "WikiName"
+msgstr "Nazwa"
+
+msgid "WikiWikiWeb"
+msgstr ""
+
+msgid "FrontPage"
+msgstr "StronaGłówna"
+
+msgid "WikiSandBox"
+msgstr ""
+
+#, fuzzy
+msgid "InterWiki"
+msgstr "Wiki"
+
+msgid "AbandonedPages"
+msgstr ""
+
+#, fuzzy
+msgid "OrphanedPages"
+msgstr "Zmieniona strona"
+
+#, fuzzy
+msgid "WantedPages"
+msgstr "ZnajdźStronę"
+
+msgid "EventStats"
+msgstr ""
+
+msgid "EventStats/HitCounts"
+msgstr ""
+
+msgid "EventStats/Languages"
+msgstr ""
+
+msgid "EventStats/UserAgents"
+msgstr ""
+
+#, fuzzy
+msgid "PageSize"
+msgstr "Rozmiar"
+
+#, fuzzy
+msgid "PageHits"
+msgstr "Strony"
+
+#, fuzzy
+msgid "RandomPage"
+msgstr "ZmieńNazwę"
+
+#, fuzzy
+msgid "XsltVersion"
+msgstr "Wersja języka Python"
+
+msgid "FortuneCookies"
+msgstr ""
+
+msgid "WikiLicense"
+msgstr "LicencjaWiki"
+
+#, fuzzy
+msgid "CategoryCategory"
+msgstr "dowolna kategoria"
+
+#, fuzzy
+msgid "CategoryHomepage"
+msgstr "Kategorie"
+
+#, fuzzy
+msgid "CategoryTemplate"
+msgstr "Kategorie"
+
+msgid "HomepageTemplate"
+msgstr ""
+
+msgid "HelpTemplate"
+msgstr ""
+
+msgid "HomepageReadWritePageTemplate"
+msgstr ""
+
+msgid "HomepageReadPageTemplate"
+msgstr ""
+
+msgid "HomepagePrivatePageTemplate"
+msgstr ""
+
+msgid "HomepageGroupsTemplate"
+msgstr ""
+
+msgid "SlideShowHandOutTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "SlideShowTemplate"
+msgstr "Pokaz slajdów"
+
+msgid "SlideTemplate"
+msgstr ""
+
+msgid "SyncJobTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration"
+msgstr "PomocPrzyFormatowaniu"
+
+msgid "HelpOnConfiguration/EmailSupport"
+msgstr ""
+
+msgid "HelpOnConfiguration/SecurityPolicy"
+msgstr ""
+
+msgid "HelpOnConfiguration/FileAttachments"
+msgstr ""
+
+msgid "HelpOnConfiguration/SupplementationPage"
+msgstr ""
+
+msgid "HelpOnConfiguration/SurgeProtection"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration/UserPreferences"
+msgstr "PreferencjeCzytelnika"
+
+msgid "HelpOnPackageInstaller"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUpdating"
+msgstr "PomocPrzyFormatowaniu"
+
+#, fuzzy
+msgid "HelpOnUpdatingPython"
+msgstr "PomocPrzyFormatowaniu"
+
+#, fuzzy
+msgid "HelpOnAdministration"
+msgstr "PomocPrzyFormatowaniu"
+
+msgid "HelpOnAuthentication"
+msgstr ""
+
+msgid "HelpOnAuthentication/ExternalCookie"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnMoinCommand"
+msgstr "PomocPrzyFormatowaniu"
+
+msgid "HelpOnMoinCommand/ExportDump"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNotification"
+msgstr "Powiadamianie"
+
+#, fuzzy
+msgid "HelpOnSessions"
+msgstr "PomocSpisTreści"
+
+#, fuzzy
+msgid "HelpOnUserHandling"
+msgstr "PomocPrzyFormatowaniu"
+
+#, fuzzy
+msgid "HelpOnXapian"
+msgstr "PomocPrzyFormatowaniu"
+
+msgid "HelpOnMoinWikiSyntax"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnCreoleSyntax"
+msgstr "PomocSpisTreści"
+
+msgid "HelpOnFormatting"
+msgstr "PomocPrzyFormatowaniu"
+
+#, fuzzy
+msgid "MoinMoin"
+msgstr "Wersja MoinMoin"
+
+msgid "HelpContents"
+msgstr "PomocSpisTreści"
+
+msgid "HelpForBeginners"
+msgstr ""
+
+msgid "HelpForUsers"
+msgstr ""
+
+#, fuzzy
+msgid "HelpIndex"
+msgstr "IndeksTytułów"
+
+msgid "HelpOnAccessControlLists"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnActions"
+msgstr "PomocSpisTreści"
+
+msgid "HelpOnActions/AttachFile"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnAdmonitions"
+msgstr "PomocSpisTreści"
+
+#, fuzzy
+msgid "HelpOnAutoAdmin"
+msgstr "PomocPrzyFormatowaniu"
+
+#, fuzzy
+msgid "HelpOnCategories"
+msgstr "Kategorie"
+
+msgid "HelpOnDictionaries"
+msgstr ""
+
+msgid "HelpOnEditLocks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnEditing"
+msgstr "PomocPrzyFormatowaniu"
+
+msgid "HelpOnEditing/SubPages"
+msgstr ""
+
+msgid "HelpOnGraphicalEditor"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnGroups"
+msgstr "PomocSpisTreści"
+
+msgid "HelpOnHeadlines"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnLanguages"
+msgstr "Język"
+
+#, fuzzy
+msgid "HelpOnLinking"
+msgstr "PomocPrzyFormatowaniu"
+
+msgid "HelpOnLinking/NotesLinks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnLists"
+msgstr "PomocSpisTreści"
+
+#, fuzzy
+msgid "HelpOnLogin"
+msgstr "PomocPrzyFormatowaniu"
+
+msgid "HelpOnMacros"
+msgstr ""
+
+msgid "HelpOnMacros/EmbedObject"
+msgstr ""
+
+msgid "HelpOnMacros/Include"
+msgstr ""
+
+msgid "HelpOnMacros/MailTo"
+msgstr ""
+
+msgid "HelpOnMacros/MonthCalendar"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNavigation"
+msgstr "NawigacjaSerwisu"
+
+#, fuzzy
+msgid "HelpOnOpenIDProvider"
+msgstr "Serwer OpenID"
+
+#, fuzzy
+msgid "HelpOnPageCreation"
+msgstr "PomocPrzyFormatowaniu"
+
+msgid "HelpOnPageDeletion"
+msgstr ""
+
+msgid "HelpOnParsers"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText/RstPrimer"
+msgstr ""
+
+msgid "HelpOnProcessingInstructions"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnRules"
+msgstr "PomocSpisTreści"
+
+#, fuzzy
+msgid "HelpOnSearching"
+msgstr "PomocPrzyFormatowaniu"
+
+#, fuzzy
+msgid "HelpOnSlideShows"
+msgstr "Pokaz slajdów"
+
+msgid "HelpOnSlideShows/000 Introduction"
+msgstr ""
+
+msgid "HelpOnSlideShows/100 Creating the slides"
+msgstr ""
+
+msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
+msgstr ""
+
+msgid "HelpOnSmileys"
+msgstr ""
+
+msgid "HelpOnSpam"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSpellCheck"
+msgstr "SprawdźPisownię"
+
+msgid "HelpOnSuperUser"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSynchronisation"
+msgstr "Synchronizacja rozpoczęta -"
+
+msgid "HelpOnTables"
+msgstr ""
+
+msgid "HelpOnTemplates"
+msgstr ""
+
+msgid "HelpOnThemes"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUserPreferences"
+msgstr "PreferencjeCzytelnika"
+
+msgid "HelpOnVariables"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnXmlPages"
+msgstr "PomocPrzyFormatowaniu"
+
+#, fuzzy
+msgid "HelpOnComments"
+msgstr "PomocSpisTreści"
+
+#, fuzzy
+msgid "HelpOnSubscribing"
+msgstr "Zrezygnuj z subskrybcji"
+
+msgid "CamelCase"
+msgstr ""
+
+msgid "WikiCourse"
+msgstr ""
+
+msgid "WikiCourse/01 What is a MoinMoin wiki?"
+msgstr ""
+
+msgid "WikiCourse/02 Finding information"
+msgstr ""
+
+msgid "WikiCourse/03 Staying up to date"
+msgstr ""
+
+msgid "WikiCourse/04 Creating a wiki account"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/05 User preferences"
+msgstr "PreferencjeCzytelnika"
+
+msgid "WikiCourse/06 Your own wiki homepage"
+msgstr ""
+
+msgid "WikiCourse/07 The text editor"
+msgstr ""
+
+msgid "WikiCourse/08 Hot Keys"
+msgstr ""
+
+msgid "WikiCourse/10 Text layout with wiki markup"
+msgstr ""
+
+msgid "WikiCourse/11 Paragraphs"
+msgstr ""
+
+msgid "WikiCourse/12 Headlines"
+msgstr ""
+
+msgid "WikiCourse/13 Lists"
+msgstr ""
+
+msgid "WikiCourse/14 Text styles"
+msgstr ""
+
+msgid "WikiCourse/15 Tables"
+msgstr ""
+
+msgid "WikiCourse/16 Wiki internal links"
+msgstr ""
+
+msgid "WikiCourse/17 External links"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/18 Attachments"
+msgstr "Nowy załącznik"
+
+msgid "WikiCourse/19 Symbols"
+msgstr ""
+
+msgid "WikiCourse/20 Dynamic content"
+msgstr ""
+
+msgid "WikiCourse/21 Macros"
+msgstr ""
+
+msgid "WikiCourse/22 Parsers"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/23 Actions"
+msgstr "Więcej operacji:"
+
+msgid "WikiCourse/30 The graphical editor"
+msgstr ""
+
+msgid "WikiCourse/40 Creating more pages"
+msgstr ""
+
+msgid "WikiCourse/50 Wiki etiquette"
+msgstr ""
+
+msgid "WikiCourse/51 Applications"
+msgstr ""
+
+msgid "WikiCourse/52 Structure in the wiki"
+msgstr ""
+
+msgid "WikiCourseHandOut"
+msgstr ""
+
+msgid "Sun"
+msgstr "nie"
 
 msgid "Mon"
 msgstr "pon"
@@ -1361,9 +1858,6 @@ msgstr "pią"
 
 msgid "Sat"
 msgstr "sob"
-
-msgid "Sun"
-msgstr "nie"
 
 msgid "AttachFile"
 msgstr "ZałączPlik"
@@ -1852,7 +2346,7 @@ msgid "Bad chart type \"%s\"!"
 msgstr "Nieprawidłowy rodzaj wykresu \"%s\"!"
 
 msgid "Contents"
-msgstr "Spis Treści"
+msgstr "PomocSpisTreści"
 
 #, python-format
 msgid "Unsupported navigation scheme '%(scheme)s'!"
@@ -1870,6 +2364,10 @@ msgstr "Start"
 #, python-format
 msgid "Slide %(pos)d of %(size)d"
 msgstr "Slajd %(pos)d z %(size)d"
+
+#, python-format
+msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
+msgstr ""
 
 msgid "Go To Page"
 msgstr "Idź do strony"
@@ -2147,14 +2645,14 @@ msgstr "Załączniki do \"%(pagename)s\""
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: Zła odpowiedź! Wróć i spróbuj ponownie..."
 
-msgid "You are not allowed to overwrite a file attachment of this page."
-msgstr "Nie możesz zastąpić istniejącego załącznika na tej stronie."
-
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
 msgstr ""
 "W pliku nie ma nic. Skasuj wszystkie dziwne znaczki i spróbuj ponownie."
+
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Nie możesz zastąpić istniejącego załącznika na tej stronie."
 
 #, python-format
 msgid ""
@@ -2746,10 +3244,6 @@ msgstr "Ignoruj zmiany w ilości spacji"
 msgid "Invalid filename \"%s\"!"
 msgstr "Nieprawidłowa nazwa pliku \"%s\"!"
 
-#, python-format
-msgid "Created the package %s containing the pages %s."
-msgstr "Utworzono pakiet %s zawierający strony %s."
-
 msgid "Include all attachments?"
 msgstr "Zawrzeć wszystkie załączniki?"
 
@@ -2778,9 +3272,6 @@ msgstr "Nie-użytkownik:"
 
 msgid "You are not allowed to perform this action."
 msgstr "Nie możesz wykonać tej akcji."
-
-msgid "Please log in first."
-msgstr "Proszę się najpierw zalogować."
 
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Proszę utowrzyć stronę domową przed stworzeniem dodatkowych stron."
@@ -2840,6 +3331,17 @@ msgstr ""
 msgid "MyPages management"
 msgstr "Zarządzanie MyPages"
 
+#, fuzzy
+msgid "page package"
+msgstr "Zmieniona strona"
+
+msgid "Choose:"
+msgstr ""
+
+#, python-format
+msgid "Install language packs for '%s'"
+msgstr ""
+
 msgid "Your subscription to this page has been removed."
 msgstr "Twoja subskrybcja tej strony została usunięta."
 
@@ -2882,7 +3384,7 @@ msgid ""
 "Your search query {{{\"%s\"}}} didn't return any results. Please change some "
 "terms and refer to HelpOnSearching for more information.%s"
 msgstr ""
-"Twoje zapytanie {{{\"%s\"}}} nie dało żadnych wyników. Zmień niektóre "
+"Twoje zapytanie {{{\"%s\"}}} nie dałoz żadnych wyników. Zmień niektóre "
 "warunki i zobacz HelpOnSearching, by uzyskać więcej informacji.%s"
 
 msgid "(!) Consider performing a"
@@ -3020,7 +3522,35 @@ msgstr ""
 "nie są dozwolone w tym wiki."
 
 msgid "anonymous"
-msgstr "anonimowy"
+msgstr ""
+
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr ""
+#~ "Instalacja plików wystroju jest wspierana tylko dla serwerów typu "
+#~ "standalone."
+
+#, fuzzy
+#~ msgid "InterWikiMap"
+#~ msgstr "Język oznaczeń wiki"
+
+#, fuzzy
+#~ msgid "BadContent"
+#~ msgstr "Zawartość"
+
+#, fuzzy
+#~ msgid "LocalBadContent"
+#~ msgstr "Zawartość"
+
+#, fuzzy
+#~ msgid "EditedSystemPages"
+#~ msgstr "Pomiń strony systemowe"
+
+#~ msgid "Created the package %s containing the pages %s."
+#~ msgstr "Utworzono pakiet %s zawierający strony %s."
+
+#~ msgid "You need to log in."
+#~ msgstr "Musisz się zalogować."
 
 #~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
@@ -3198,9 +3728,6 @@ msgstr "anonimowy"
 
 #~ msgid "[%(lang)s] %(recipients)s: %(status)s"
 #~ msgstr "[%(lang)s] %(recipients)s: %(status)s"
-
-#~ msgid "UserPreferences"
-#~ msgstr "PreferencjeCzytelnika"
 
 #~ msgid "Subscribe to trivial changes"
 #~ msgstr "Zasubksrybuj drobne zmiany"

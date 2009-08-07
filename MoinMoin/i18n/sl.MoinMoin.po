@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-26 21:29+0200\n"
+"POT-Creation-Date: 2009-07-27 00:57+0200\n"
 "PO-Revision-Date: 2008-05-23 03:00+0200\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -346,16 +346,26 @@ msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] Podatki o vašem viki uporabniškem imenu (računu)"
 
 #, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Neznana akcija %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Akcije %(action_name)s nad to stranjo vam ni dovoljeno izvesti!"
+
+msgid "Login and try again."
+msgstr "Prijavite se in poskusite ponovno."
+
+#, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
 msgstr "Paket potrebuje novejšo inačico MoinMoin (vsaj %s)."
 
 msgid "The theme name is not set."
 msgstr "Ime teme (izgleda) ni nastavljeno."
 
-msgid "Installing theme files is only supported for standalone type servers."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
 msgstr ""
-"Namestitev datotek teme (izgleda) je podprto le za samostoječi tip "
-"strežnikov."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -454,8 +464,9 @@ msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr ""
 "Neveljaven regularni izraz za poudarjanje besedila \"%(regex)s\": %(error)s"
 
+#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr "Vsebina varnostne kopije je zastarela in ne bo upoštevana pri iskanju!"
 
@@ -713,8 +724,8 @@ msgstr "Zbrisani deli so označeni takole."
 msgid "Additions are marked like this."
 msgstr "Dodani deli so označeni takole."
 
-msgid "You need to log in."
-msgstr "Treba se je prijaviti."
+msgid "Please log in first."
+msgstr "Prosimo, da se najprej prijavite."
 
 msgid ""
 "Please choose an account name now.\n"
@@ -747,11 +758,43 @@ msgstr ""
 msgid "Associate this name"
 msgstr "Poveži to ime"
 
+#, fuzzy
+msgid "OpenID verification canceled."
+msgstr "Preverjanje je bilo preklicana."
+
+#, fuzzy, python-format
+msgid "OpenID success. id: %s"
+msgstr "OpenID je bil uspešno dodan."
+
+#, fuzzy
+msgid "OpenID failure"
+msgstr "Napaka pri OpenID."
+
+#, fuzzy
+msgid "No OpenID found in session."
+msgstr "OpenID ni podan."
+
 msgid "Your account is now associated to your OpenID."
 msgstr "Vaš uporabniški račun je sedaj povezan z vašim OpenID."
 
 msgid "The password you entered is not valid."
 msgstr "Geslo, ki ste ga vnesli, ni veljavno."
+
+#, fuzzy
+msgid "OpenID: handle verify continuation"
+msgstr "Preverjanje zaupanja OpenID"
+
+msgid "OpenID: handle name continuation"
+msgstr ""
+
+msgid "OpenID: handle associate continuation"
+msgstr ""
+
+msgid "OpenID: unknown continuation stage"
+msgstr ""
+
+msgid "OpenID error: unknown continuation stage"
+msgstr ""
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
 msgstr "Za prijavo prek OpenID morajo biti anonimne seje omogočene."
@@ -779,13 +822,17 @@ msgstr "Strežnik LDAP %(server)s ne deluje."
 msgid "Failed to connect to database."
 msgstr "Neuspešna priključitev na podatkovno bazo."
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+"one now</a>. "
 msgstr ""
 "Če ga še nimate, lahko <a href=\"%(userprefslink)s\">ustvarite uporabniški "
 "račun</a>. <a href=\"%(sendmypasswordlink)s\">Ste pozabili geslo?</a>"
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+msgstr ""
 
 msgid ""
 " Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
@@ -820,6 +867,7 @@ msgstr ""
 "\n"
 "(!) Več o tem: HelpOnEditing, HelpOnCreoleSyntax.\n"
 
+#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
@@ -835,7 +883,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Poudarki:: <<Verbatim('')>>''kurziva''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''polkrepko'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''polkrepko in "
@@ -1094,17 +1142,6 @@ msgstr "Povrni v stanje različice %(rev)d."
 msgid "Renamed from '%(oldpagename)s'."
 msgstr "Preimenovano z '%(oldpagename)s'."
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Neznana akcija %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Akcije %(action_name)s nad to stranjo vam ni dovoljeno izvesti!"
-
-msgid "Login and try again."
-msgstr "Prijavite se in poskusite ponovno."
-
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr "Opciji --pages in --search se izključujeta!"
 
@@ -1314,11 +1351,11 @@ msgstr "zadetek"
 msgid "matches"
 msgstr "zadetkov"
 
-msgid "FrontPage"
-msgstr "PrvaStran"
-
 msgid "RecentChanges"
 msgstr "ZadnjeSpremembe"
+
+msgid "WikiTipOfTheDay"
+msgstr ""
 
 msgid "TitleIndex"
 msgstr "KazaloNaslovov"
@@ -1329,23 +1366,481 @@ msgstr "KazaloBesed"
 msgid "FindPage"
 msgstr "PoiščiStran"
 
-msgid "SiteNavigation"
-msgstr "Navigacija"
-
-msgid "HelpContents"
-msgstr "PomočPriVsebini"
-
-msgid "HelpOnFormatting"
-msgstr "PomočPriOblikovanju"
-
-msgid "WikiLicense"
-msgstr "VikiLicenca"
-
 msgid "MissingPage"
 msgstr "ManjkajočeStrani"
 
 msgid "MissingHomePage"
 msgstr "ManjkajočeOsebneStrani"
+
+#, fuzzy
+msgid "WikiHomePage"
+msgstr "ManjkajočeOsebneStrani"
+
+#, fuzzy
+msgid "WikiName"
+msgstr "Ime"
+
+msgid "WikiWikiWeb"
+msgstr ""
+
+msgid "FrontPage"
+msgstr "PrvaStran"
+
+msgid "WikiSandBox"
+msgstr ""
+
+#, fuzzy
+msgid "InterWiki"
+msgstr "Viki"
+
+msgid "AbandonedPages"
+msgstr ""
+
+#, fuzzy
+msgid "OrphanedPages"
+msgstr "Spremenjena stran"
+
+#, fuzzy
+msgid "WantedPages"
+msgstr "PoiščiStran"
+
+msgid "EventStats"
+msgstr ""
+
+msgid "EventStats/HitCounts"
+msgstr ""
+
+msgid "EventStats/Languages"
+msgstr ""
+
+msgid "EventStats/UserAgents"
+msgstr ""
+
+#, fuzzy
+msgid "PageSize"
+msgstr "Velikost"
+
+#, fuzzy
+msgid "PageHits"
+msgstr "Strani"
+
+#, fuzzy
+msgid "RandomPage"
+msgstr "PreimenujStran"
+
+#, fuzzy
+msgid "XsltVersion"
+msgstr "Različica interpreterja Python"
+
+msgid "FortuneCookies"
+msgstr ""
+
+msgid "WikiLicense"
+msgstr "VikiLicenca"
+
+#, fuzzy
+msgid "CategoryCategory"
+msgstr "katerakoli kategorija"
+
+#, fuzzy
+msgid "CategoryHomepage"
+msgstr "Kategorije"
+
+#, fuzzy
+msgid "CategoryTemplate"
+msgstr "Kategorije"
+
+msgid "HomepageTemplate"
+msgstr ""
+
+msgid "HelpTemplate"
+msgstr ""
+
+msgid "HomepageReadWritePageTemplate"
+msgstr ""
+
+msgid "HomepageReadPageTemplate"
+msgstr ""
+
+msgid "HomepagePrivatePageTemplate"
+msgstr ""
+
+msgid "HomepageGroupsTemplate"
+msgstr ""
+
+msgid "SlideShowHandOutTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "SlideShowTemplate"
+msgstr "Samodejna predstava"
+
+msgid "SlideTemplate"
+msgstr ""
+
+msgid "SyncJobTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration"
+msgstr "PomočPriOblikovanju"
+
+msgid "HelpOnConfiguration/EmailSupport"
+msgstr ""
+
+msgid "HelpOnConfiguration/SecurityPolicy"
+msgstr ""
+
+msgid "HelpOnConfiguration/FileAttachments"
+msgstr ""
+
+msgid "HelpOnConfiguration/SupplementationPage"
+msgstr ""
+
+msgid "HelpOnConfiguration/SurgeProtection"
+msgstr ""
+
+msgid "HelpOnConfiguration/UserPreferences"
+msgstr ""
+
+msgid "HelpOnPackageInstaller"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUpdating"
+msgstr "PomočPriOblikovanju"
+
+#, fuzzy
+msgid "HelpOnUpdatingPython"
+msgstr "PomočPriOblikovanju"
+
+#, fuzzy
+msgid "HelpOnAdministration"
+msgstr "PomočPriOblikovanju"
+
+msgid "HelpOnAuthentication"
+msgstr ""
+
+msgid "HelpOnAuthentication/ExternalCookie"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnMoinCommand"
+msgstr "PomočPriOblikovanju"
+
+msgid "HelpOnMoinCommand/ExportDump"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNotification"
+msgstr "Obvestila"
+
+#, fuzzy
+msgid "HelpOnSessions"
+msgstr "PomočPriVsebini"
+
+#, fuzzy
+msgid "HelpOnUserHandling"
+msgstr "PomočPriOblikovanju"
+
+#, fuzzy
+msgid "HelpOnXapian"
+msgstr "PomočPriOblikovanju"
+
+msgid "HelpOnMoinWikiSyntax"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnCreoleSyntax"
+msgstr "PomočPriVsebini"
+
+msgid "HelpOnFormatting"
+msgstr "PomočPriOblikovanju"
+
+#, fuzzy
+msgid "MoinMoin"
+msgstr "Različica MoinMoin"
+
+msgid "HelpContents"
+msgstr "PomočPriVsebini"
+
+msgid "HelpForBeginners"
+msgstr ""
+
+msgid "HelpForUsers"
+msgstr ""
+
+#, fuzzy
+msgid "HelpIndex"
+msgstr "KazaloNaslovov"
+
+msgid "HelpOnAccessControlLists"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnActions"
+msgstr "PomočPriVsebini"
+
+msgid "HelpOnActions/AttachFile"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnAdmonitions"
+msgstr "PomočPriVsebini"
+
+#, fuzzy
+msgid "HelpOnAutoAdmin"
+msgstr "PomočPriOblikovanju"
+
+#, fuzzy
+msgid "HelpOnCategories"
+msgstr "Kategorije"
+
+msgid "HelpOnDictionaries"
+msgstr ""
+
+msgid "HelpOnEditLocks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnEditing"
+msgstr "PomočPriOblikovanju"
+
+msgid "HelpOnEditing/SubPages"
+msgstr ""
+
+msgid "HelpOnGraphicalEditor"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnGroups"
+msgstr "PomočPriVsebini"
+
+msgid "HelpOnHeadlines"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnLanguages"
+msgstr "Jezik"
+
+#, fuzzy
+msgid "HelpOnLinking"
+msgstr "PomočPriOblikovanju"
+
+msgid "HelpOnLinking/NotesLinks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnLists"
+msgstr "PomočPriVsebini"
+
+#, fuzzy
+msgid "HelpOnLogin"
+msgstr "PomočPriOblikovanju"
+
+msgid "HelpOnMacros"
+msgstr ""
+
+msgid "HelpOnMacros/EmbedObject"
+msgstr ""
+
+msgid "HelpOnMacros/Include"
+msgstr ""
+
+msgid "HelpOnMacros/MailTo"
+msgstr ""
+
+msgid "HelpOnMacros/MonthCalendar"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNavigation"
+msgstr "Navigacija"
+
+#, fuzzy
+msgid "HelpOnOpenIDProvider"
+msgstr "Strežnik OpenID"
+
+#, fuzzy
+msgid "HelpOnPageCreation"
+msgstr "PomočPriOblikovanju"
+
+msgid "HelpOnPageDeletion"
+msgstr ""
+
+msgid "HelpOnParsers"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText/RstPrimer"
+msgstr ""
+
+msgid "HelpOnProcessingInstructions"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnRules"
+msgstr "PomočPriVsebini"
+
+#, fuzzy
+msgid "HelpOnSearching"
+msgstr "PomočPriOblikovanju"
+
+#, fuzzy
+msgid "HelpOnSlideShows"
+msgstr "Samodejna predstava"
+
+msgid "HelpOnSlideShows/000 Introduction"
+msgstr ""
+
+msgid "HelpOnSlideShows/100 Creating the slides"
+msgstr ""
+
+msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
+msgstr ""
+
+msgid "HelpOnSmileys"
+msgstr ""
+
+msgid "HelpOnSpam"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSpellCheck"
+msgstr "PreveriČrkovanje"
+
+msgid "HelpOnSuperUser"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSynchronisation"
+msgstr "Sinhronizacija se je začela -"
+
+msgid "HelpOnTables"
+msgstr ""
+
+msgid "HelpOnTemplates"
+msgstr ""
+
+msgid "HelpOnThemes"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUserPreferences"
+msgstr "Nastavitve"
+
+msgid "HelpOnVariables"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnXmlPages"
+msgstr "PomočPriOblikovanju"
+
+#, fuzzy
+msgid "HelpOnComments"
+msgstr "PomočPriVsebini"
+
+#, fuzzy
+msgid "HelpOnSubscribing"
+msgstr "Preklic naročenosti"
+
+msgid "CamelCase"
+msgstr ""
+
+msgid "WikiCourse"
+msgstr ""
+
+msgid "WikiCourse/01 What is a MoinMoin wiki?"
+msgstr ""
+
+msgid "WikiCourse/02 Finding information"
+msgstr ""
+
+msgid "WikiCourse/03 Staying up to date"
+msgstr ""
+
+msgid "WikiCourse/04 Creating a wiki account"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/05 User preferences"
+msgstr "Uporabniške nastavitve so shranjene!"
+
+msgid "WikiCourse/06 Your own wiki homepage"
+msgstr ""
+
+msgid "WikiCourse/07 The text editor"
+msgstr ""
+
+msgid "WikiCourse/08 Hot Keys"
+msgstr ""
+
+msgid "WikiCourse/10 Text layout with wiki markup"
+msgstr ""
+
+msgid "WikiCourse/11 Paragraphs"
+msgstr ""
+
+msgid "WikiCourse/12 Headlines"
+msgstr ""
+
+msgid "WikiCourse/13 Lists"
+msgstr ""
+
+msgid "WikiCourse/14 Text styles"
+msgstr ""
+
+msgid "WikiCourse/15 Tables"
+msgstr ""
+
+msgid "WikiCourse/16 Wiki internal links"
+msgstr ""
+
+msgid "WikiCourse/17 External links"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/18 Attachments"
+msgstr "Nova priponka"
+
+msgid "WikiCourse/19 Symbols"
+msgstr ""
+
+msgid "WikiCourse/20 Dynamic content"
+msgstr ""
+
+msgid "WikiCourse/21 Macros"
+msgstr ""
+
+msgid "WikiCourse/22 Parsers"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/23 Actions"
+msgstr "Druge možnosti:"
+
+msgid "WikiCourse/30 The graphical editor"
+msgstr ""
+
+msgid "WikiCourse/40 Creating more pages"
+msgstr ""
+
+msgid "WikiCourse/50 Wiki etiquette"
+msgstr ""
+
+msgid "WikiCourse/51 Applications"
+msgstr ""
+
+msgid "WikiCourse/52 Structure in the wiki"
+msgstr ""
+
+msgid "WikiCourseHandOut"
+msgstr ""
+
+msgid "Sun"
+msgstr "ned"
 
 msgid "Mon"
 msgstr "pon"
@@ -1364,9 +1859,6 @@ msgstr "pet"
 
 msgid "Sat"
 msgstr "sob"
-
-msgid "Sun"
-msgstr "ned"
 
 msgid "AttachFile"
 msgstr "PripniDatoteko"
@@ -1875,6 +2367,10 @@ msgstr "Začni"
 msgid "Slide %(pos)d of %(size)d"
 msgstr "Slika %(pos)d od %(size)d"
 
+#, python-format
+msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
+msgstr ""
+
 msgid "Go To Page"
 msgstr "Pojdi na stran"
 
@@ -2149,16 +2645,16 @@ msgstr "Priponke na strani \"%(pagename)s\""
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: Napačen odgovor! Pojdi nazaj in poskusi znova..."
 
-msgid "You are not allowed to overwrite a file attachment of this page."
-msgstr ""
-"Datotečne priponke na tej strani vam ni dovoljeno prepisati z novo vsebino."
-
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
 msgstr ""
 "Prazna vsebina. Odstranite ne-ASCII znake z imena datoteke in poskusite "
 "znova."
+
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr ""
+"Datotečne priponke na tej strani vam ni dovoljeno prepisati z novo vsebino."
 
 #, python-format
 msgid ""
@@ -2751,10 +3247,6 @@ msgstr "Ne upoštevaj razlik v številu presledkov"
 msgid "Invalid filename \"%s\"!"
 msgstr "Neveljavno ime datoteke \"%s\"!"
 
-#, python-format
-msgid "Created the package %s containing the pages %s."
-msgstr "Tvorjen je paket %s, ki vsebuje strani %s."
-
 msgid "Include all attachments?"
 msgstr "Z vsemi priponkami?"
 
@@ -2783,9 +3275,6 @@ msgstr "Ni uporabnik:"
 
 msgid "You are not allowed to perform this action."
 msgstr "Te akcije vam ni dovoljeno izvesti."
-
-msgid "Please log in first."
-msgstr "Prosimo, da se najprej prijavite."
 
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Prosimo, da naredite domačo stran preden dodajate druge strani."
@@ -2841,6 +3330,17 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "Upravljanje z MyPages"
+
+#, fuzzy
+msgid "page package"
+msgstr "Spremenjena stran"
+
+msgid "Choose:"
+msgstr ""
+
+#, python-format
+msgid "Install language packs for '%s'"
+msgstr ""
 
 msgid "Your subscription to this page has been removed."
 msgstr "Naročilo na obvestila s te strani je bilo umaknjeno."
@@ -3021,3 +3521,31 @@ msgstr ""
 
 msgid "anonymous"
 msgstr ""
+
+#~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr ""
+#~ "Namestitev datotek teme (izgleda) je podprto le za samostoječi tip "
+#~ "strežnikov."
+
+#, fuzzy
+#~ msgid "InterWikiMap"
+#~ msgstr "Označevanje viki"
+
+#, fuzzy
+#~ msgid "BadContent"
+#~ msgstr "Vsebina"
+
+#, fuzzy
+#~ msgid "LocalBadContent"
+#~ msgstr "Vsebina"
+
+#, fuzzy
+#~ msgid "EditedSystemPages"
+#~ msgstr "Brez sistemskih strani"
+
+#~ msgid "Created the package %s containing the pages %s."
+#~ msgstr "Tvorjen je paket %s, ki vsebuje strani %s."
+
+#~ msgid "You need to log in."
+#~ msgstr "Treba se je prijaviti."

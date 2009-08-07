@@ -32,26 +32,6 @@ CHILD_PREFIX_LEN = len(CHILD_PREFIX)
 ### Getting data from user/Sending data to user
 #############################################################################
 
-def decodeWindowsPath(text):
-    """ Decode Windows path names correctly. This is needed because many CGI
-    servers follow the RFC recommendation and re-encode the path_info variable
-    according to the file system semantics.
-
-    @param text: the text to decode, string
-    @rtype: unicode
-    @return: decoded text
-    """
-
-    import locale
-    cur_charset = locale.getdefaultlocale()[1]
-    try:
-        return unicode(text, 'utf-8')
-    except UnicodeError:
-        try:
-            return unicode(text, cur_charset, 'replace')
-        except LookupError:
-            return unicode(text, 'iso-8859-1', 'replace')
-
 def decodeUnknownInput(text):
     """ Decode unknown input, like text attachments
 
@@ -564,7 +544,7 @@ def load_wikimap(request):
         for line in lines:
             if not line or line[0] == '#': continue
             try:
-                line = "%s %s/InterWiki" % (line, request.getScriptname())
+                line = "%s %s/InterWiki" % (line, request.script_root)
                 wikitag, urlprefix, dummy = line.split(None, 2)
             except ValueError:
                 pass
@@ -574,9 +554,9 @@ def load_wikimap(request):
         del lines
 
         # add own wiki as "Self" and by its configured name
-        _interwiki_list['Self'] = request.getScriptname() + '/'
+        _interwiki_list['Self'] = request.script_root + '/'
         if request.cfg.interwikiname:
-            _interwiki_list[request.cfg.interwikiname] = request.getScriptname() + '/'
+            _interwiki_list[request.cfg.interwikiname] = request.script_root + '/'
 
         # save for later
         request.cfg.cache.interwiki_list = _interwiki_list
@@ -635,7 +615,7 @@ def resolve_wiki(request, wikiurl):
     if _interwiki_list.has_key(wikiname):
         return (wikiname, _interwiki_list[wikiname], pagename, False)
     else:
-        return (wikiname, request.getScriptname(), "/InterWiki", True)
+        return (wikiname, request.script_root, "/InterWiki", True)
 
 def join_wiki(wikiurl, wikitail):
     """
@@ -668,7 +648,7 @@ def isSystemPage(request, pagename):
     @rtype: bool
     @return: true if page is a system page
     """
-    return (request.dicts.has_member('SystemPagesGroup', pagename) or
+    return (pagename in request.groups.get(u'SystemPagesGroup', []) or
         isTemplatePage(request, pagename))
 
 
@@ -1542,7 +1522,7 @@ def link_tag(request, params, text=None, formatter=None, on=None, **kw):
     if text is None:
         text = params # default
     if formatter:
-        url = "%s/%s" % (request.getScriptname(), params)
+        url = "%s/%s" % (request.script_root, params)
         # formatter.url will escape the url part
         if on is not None:
             tag = formatter.url(on, url, css_class, **kw)
@@ -1561,7 +1541,7 @@ def link_tag(request, params, text=None, formatter=None, on=None, **kw):
                 attrs += ' id="%s"' % id
             if name:
                 attrs += ' name="%s"' % name
-            tag = '<a%s href="%s/%s">' % (attrs, request.getScriptname(), params)
+            tag = '<a%s href="%s/%s">' % (attrs, request.script_root, params)
             if not on:
                 tag = "%s%s</a>" % (tag, text)
         request.log("Warning: wikiutil.link_tag called without formatter and without request.html_formatter. tag=%r" % (tag, ))

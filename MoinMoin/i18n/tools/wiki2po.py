@@ -3,7 +3,7 @@
     get latest translation page content from the wiki and write it to *.po
 """
 
-master_url = "http://master18.moinmo.in/?action=xmlrpc2"
+master_url = "http://master19.moinmo.in/?action=xmlrpc2"
 
 DOMAIN = "MoinMoin"
 
