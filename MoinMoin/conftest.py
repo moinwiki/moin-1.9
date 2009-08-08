@@ -81,6 +81,13 @@ def init_test_request(given_config=None, static_state=[False]):
 
 # py.test customization starts here
 
+# py.test-1.0 provides "funcargs" natively
+def pytest_funcarg__request(request):
+    # note the naminng clash: py.test's funcarg-request object
+    # and the request we provide are totally separate things
+    cls = request._pyfuncitem.getparent(py.test.collect.Module)
+    return cls.request
+
 class MoinTestFunction(py.test.collect.Function):
     def execute(self, target, *args):
         request = self.parent.request
