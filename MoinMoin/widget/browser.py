@@ -89,10 +89,13 @@ class DataBrowserWidget(base.Widget):
         del unique[0]
         unique.sort()
         result = [self._makeoption(item, item == value) for item in unique]
-        common = [None, None, None]
-        common[0] = self._makeoption(self._all, value == self.__all, self.__all)
-        common[1] = self._makeoption(self._empty, value == self.__empty, self.__empty)
-        common[2] = self._makeoption(self._notempty, value == self.__notempty, self.__notempty)
+        common = []
+        common.append(self._makeoption(self._all, value == self.__all, self.__all))
+        if '' in unique:
+            common.extend([
+                self._makeoption(self._empty, value == self.__empty, self.__empty),
+                self._makeoption(self._notempty, value == self.__notempty, self.__notempty),
+            ])
         return '\n'.join(common + result)
 
     def _format(self, formatter=None, method=None):
