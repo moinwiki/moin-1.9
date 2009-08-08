@@ -7,15 +7,17 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+
 import py
 
 from MoinMoin.search import QueryError
 from MoinMoin.search.queryparser import QueryParser
 from MoinMoin.search import Xapian
 from MoinMoin import search
-from MoinMoin._tests import nuke_xapian_index
+from MoinMoin._tests import nuke_xapian_index, wikiconfig
 
-class TestQueryParsing:
+
+class TestQueryParsing(object):
     """ search: query parser tests """
 
     def testQueryParser(self):
@@ -54,32 +56,70 @@ class TestQueryParsing:
             ('no"', '["no""]'),
             ("'no", "[\"'no\"]"),
             ("no'", "[\"no'\"]"),
-            ('"no\'', '[""no\'"]')
-            ]:
+            ('"no\'', '[""no\'"]')]:
             result = parser.parse_query(query)
             assert str(result) == wanted
 
     def testQueryParserExceptions(self):
         """ search: test the query parser """
         parser = QueryParser()
+
         def _test(q):
             py.test.raises(QueryError, parser.parse_query, q)
+
         for query in ['""', '(', ')', '(a or b']:
             yield _test, query
 
-class TestSearch:
+
+class TestSearch(object):
     """ search: test search """
     doesnotexist = u'jfhsdaASDLASKDJ'
 
-    def testTitleSearchFrontPage(self):
-        """ search: title search for FrontPage """
-        result = search.searchPages(self.request, u"title:FrontPage")
-        assert len(result.hits) == 1
+    def test_prefix_search(self):
+
+        def simple_test(prefix, term):
+            result = search.searchPages(self.request, u"%s:%s" % (prefix, term))
+            assert result.hits
+            result = search.searchPages(self.request, u"%s:%s" % (prefix, self.doesnotexist))
+            assert not result.hits
+
+        def re_test(prefix, term):
+            result = search.searchPages(self.request, ur"%s:re:\b%s\b" % (prefix, term))
+            assert result.hits
+            result = search.searchPages(self.request, ur"%s:re:\b%s\b" % (prefix, self.doesnotexist))
+            assert not result.hits
+
+        def case_test(prefix, term):
+            result = search.searchPages(self.request, u"%s:case:%s" % (prefix, term))
+            assert result.hits
+            result = search.searchPages(self.request, u"%s:case:%s" % (prefix, term.lower()))
+            assert not result.hits
+
+        def case_re_test(prefix, term):
+            result = search.searchPages(self.request, ur"%s:case:re:\%s\b" % (prefix, term))
+            assert result.hits
+            result = search.searchPages(self.request, ur"%s:case:re:\%s\b" % (prefix, term.lower()))
+            assert not result.hits
+
+        for prefix, term in [('title', 'FrontPage'), ('linkto', 'FrontPage'), ('category', 'CategoryHomepage')]:
+            for test in [simple_test, re_test, case_test, case_re_test]:
+                yield '%s %s' % (prefix, test.func_name), test, prefix, term
+
+        for prefix, term in [('mimetype', 'text/text')]:
+            for test in [simple_test, re_test]:
+                yield '%s %s' % (prefix, test.func_name), test, prefix, term
+
+        for prefix, term in [('language', 'en'), ('domain', 'system')]:
+            for test in [simple_test]:
+                yield '%s %s' % (prefix, test.func_name), test, prefix, term
 
     def testTitleSearchAND(self):
         """ search: title search with AND expression """
         result = search.searchPages(self.request, u"title:Help title:Index")
         assert len(result.hits) == 1
+
+        result = search.searchPages(self.request, u"title:Help title:%s" % self.doesnotexist)
+        assert len(result.hits) == 0
 
     def testTitleSearchOR(self):
         """ search: title search with OR expression """
@@ -108,23 +148,45 @@ class TestSearch:
         result = search.searchPages(self.request, u"HelpOn -ACL")
         assert 0 < len(result.hits) < helpon_count
 
+    def test_title_search(self):
 
-class TestXapianIndex:
+        query = QueryParser(titlesearch=True).parse_query('Moin')
+        result = search.searchPages(self.request, query, sort='page_name')
+
+
+class TestXapianSearch(TestSearch):
     """ search: test Xapian indexing """
+    # XXX skip it if xapian is not available
 
-    def testIndex(self):
+    class Config(wikiconfig.Config):
+
+        xapian_search = True
+
+    def setup_class(self):
         """ search: kicks off indexing for a single pages in Xapian """
         # This only tests that the call to indexing doesn't raise.
         nuke_xapian_index(self.request)
         idx = Xapian.Index(self.request)
         idx.indexPages(mode='add') # slow: builds an index of all pages
 
-    def testIndexInNewThread(self):
-        """ search: kicks off indexing for a page in a new thread in Xapian"""
+    def teardown_class(self):
+        nuke_xapian_index(self.request)
+
+
+class TestXapianIndexingInNewThread(object):
+    """ search: test Xapian indexing """
+    # XXX skip it if xapian is not available
+
+    def setup_class(self):
+        """ search: kicks off indexing for a single pages in Xapian """
         # This only tests that the call to indexing doesn't raise.
         nuke_xapian_index(self.request)
         idx = Xapian.Index(self.request)
         idx.indexPagesInNewThread(mode='add') # slow: builds an index of all pages
+
+    def teardown_class(self):
+        nuke_xapian_index(self.request)
+
 
 coverage_modules = ['MoinMoin.search']
 

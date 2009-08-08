@@ -1,0 +1,20 @@
+
+
+>>> import datetime, parsedate
+>>> date_to_string(datetime.date(1999, 12, 13))
+'19991213'
+
+>>> test_date_inputs=['1066.11.05', '19700211', '19991213', '20070513']
+>>> test_dates = []
+>>> for date in test_date_inputs:
+...     test_dates.append(parsedate.date_from_string(date))
+>>> prev_val = test_dates[0]
+>>> for val in test_dates:
+...     m_prev_val = date_to_string(prev_val)
+...     m_val = date_to_string(val)
+...     if val == prev_val:
+...         assert(m_val == m_prev_val)
+...     else:
+...         assert(val > prev_val)
+...         assert(m_val > m_prev_val)
+...     prev_val = val

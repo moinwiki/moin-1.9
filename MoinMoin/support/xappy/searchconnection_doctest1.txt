@@ -1,0 +1,131 @@
+
+>>> from datastructures import *
+>>> from fieldactions import *
+>>> from indexerconnection import *
+
+
+Open a connection for indexing:
+>>> iconn = IndexerConnection('foo')
+
+>>> iconn.add_field_action('author', FieldActions.STORE_CONTENT)
+>>> iconn.add_field_action('title', FieldActions.STORE_CONTENT)
+>>> iconn.add_field_action('category', FieldActions.STORE_CONTENT)
+>>> iconn.add_field_action('text', FieldActions.STORE_CONTENT)
+
+>>> iconn.add_field_action('author', FieldActions.INDEX_FREETEXT, weight=2)
+>>> iconn.add_field_action('title', FieldActions.INDEX_FREETEXT, weight=5)
+>>> iconn.add_field_action('category', FieldActions.INDEX_EXACT)
+>>> iconn.add_field_action('category', FieldActions.SORTABLE)
+>>> iconn.add_field_action('category', FieldActions.COLLAPSE)
+>>> iconn.add_field_action('text', FieldActions.INDEX_FREETEXT, language='en')
+
+Add a set of documents:
+
+>>> for i in xrange(200):
+...     doc = UnprocessedDocument()
+...     doc.fields.append(Field('author', 'Richard Boulton'))
+...     doc.fields.append(Field('category', 'Cat %d' % ((i + 5) % 20)))
+...     doc.fields.append(Field('text', 'This document is a basic test document.'))
+...     doc.fields.append(Field('title', 'Test document %d' % i))
+...     doc.fields.append(Field('text', 'More test text about this document.'))
+...     id = iconn.add(doc)
+
+We can get a document from the indexer connection, even before flushing, by
+using the get_document method.  If the id specified is not found, an error is
+raised.
+>>> iconn.get_document('1').data['category']
+['Cat 6']
+>>> print iconn.get_document('1000').data['category']
+Traceback (most recent call last):
+...
+KeyError: "Unique ID '1000' not found"
+
+If we open a search connection for a database which doesn't exist, we get an
+exception:
+>>> sconn = SearchConnection('notpresent')
+Traceback (most recent call last):
+...
+DatabaseOpeningError: Couldn't detect type of database
+
+If we open a search connection before flushing, we can't see the recent
+modifications:
+>>> sconn = SearchConnection('foo')
+>>> sconn.get_document('1').data['category']
+Traceback (most recent call last):
+...
+KeyError: "Unique ID '1' not found"
+
+
+
+Finally, we get round to flushing the indexer:
+>>> iconn.flush()
+
+We still can't see the document from the search connection.
+>>> sconn.get_document('1').data['category']
+Traceback (most recent call last):
+...
+KeyError: "Unique ID '1' not found"
+
+Now, open a new search connection - we can see the document:
+>>> sconn = SearchConnection('foo')
+>>> sconn.get_document('1').data['category']
+['Cat 6']
+
+>>> q = sconn.query_parse('document')
+>>> results = sconn.search(q, 0, 30)
+>>> len(results)
+30
+>>> [result.id for result in results]
+['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '1a', '1b', '1c', '1d']
+
+>>> result = results.get_hit(0)
+>>> result.data['text']
+['This document is a basic test document.', 'More test text about this document.']
+>>> result.highlight('text')
+['This <b>document</b> is a basic test <b>document</b>.', 'More test text about this <b>document</b>.']
+>>> result.summarise('text')
+'This <b>document</b> is a basic test <b>document</b>.\nMore test text about this <b>document</b>.'
+>>> result.summarise('text', maxlen=20)
+'This <b>document</b> is a ..'
+>>> result.summarise('title', maxlen=20)
+'Test <b>document</b> 0'
+
+
+If we collapse on categories, we just get the top result in each category:
+>>> [result.id for result in sconn.search(q, 0, 30, collapse='category')]
+['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', '10', '11', '12', '13']
+
+We can't collapse on categories which we're indexed for it:
+>>> [result.id for result in sconn.search(q, 0, 30, collapse='author')]
+Traceback (most recent call last):
+...
+SearchError: Field 'author' was not indexed for collapsing
+
+If we sort by category, we get a different order of results:
+>>> [':'.join((result.id, result.data['category'][0])) for result in sconn.search(q, 0, 30, sortby='-category')]
+['4:Cat 9', '18:Cat 9', '2c:Cat 9', '40:Cat 9', '54:Cat 9', '68:Cat 9', '7c:Cat 9', '90:Cat 9', 'a4:Cat 9', 'b8:Cat 9', '3:Cat 8', '17:Cat 8', '2b:Cat 8', '3f:Cat 8', '53:Cat 8', '67:Cat 8', '7b:Cat 8', '8f:Cat 8', 'a3:Cat 8', 'b7:Cat 8', '2:Cat 7', '16:Cat 7', '2a:Cat 7', '3e:Cat 7', '52:Cat 7', '66:Cat 7', '7a:Cat 7', '8e:Cat 7', 'a2:Cat 7', 'b6:Cat 7']
+
+We can sort in ascending order instead:
+>>> [':'.join((result.id, result.data['category'][0])) for result in sconn.search(q, 0, 30, sortby='+category')]
+['f:Cat 0', '23:Cat 0', '37:Cat 0', '4b:Cat 0', '5f:Cat 0', '73:Cat 0', '87:Cat 0', '9b:Cat 0', 'af:Cat 0', 'c3:Cat 0', '10:Cat 1', '24:Cat 1', '38:Cat 1', '4c:Cat 1', '60:Cat 1', '74:Cat 1', '88:Cat 1', '9c:Cat 1', 'b0:Cat 1', 'c4:Cat 1', '5:Cat 10', '19:Cat 10', '2d:Cat 10', '41:Cat 10', '55:Cat 10', '69:Cat 10', '7d:Cat 10', '91:Cat 10', 'a5:Cat 10', 'b9:Cat 10']
+
+Ascending order is the default, so we don't actually need the '+':
+>>> [':'.join((result.id, result.data['category'][0])) for result in sconn.search(q, 0, 30, sortby='category')]
+['f:Cat 0', '23:Cat 0', '37:Cat 0', '4b:Cat 0', '5f:Cat 0', '73:Cat 0', '87:Cat 0', '9b:Cat 0', 'af:Cat 0', 'c3:Cat 0', '10:Cat 1', '24:Cat 1', '38:Cat 1', '4c:Cat 1', '60:Cat 1', '74:Cat 1', '88:Cat 1', '9c:Cat 1', 'b0:Cat 1', 'c4:Cat 1', '5:Cat 10', '19:Cat 10', '2d:Cat 10', '41:Cat 10', '55:Cat 10', '69:Cat 10', '7d:Cat 10', '91:Cat 10', 'a5:Cat 10', 'b9:Cat 10']
+
+
+
+We can't collapse on categories which we're indexed for it:
+>>> [result.id for result in sconn.search(q, 0, 30, sortby='author')]
+Traceback (most recent call last):
+...
+SearchError: Field 'author' was not indexed for sorting
+
+
+We can collapse and sort in a single search:
+>>> [':'.join((result.id, result.data['category'][0])) for result in sconn.search(q, 0, 30, collapse="category", sortby='-category')]
+['4:Cat 9', '3:Cat 8', '2:Cat 7', '1:Cat 6', '0:Cat 5', '13:Cat 4', '12:Cat 3', '11:Cat 2', 'e:Cat 19', 'd:Cat 18', 'c:Cat 17', 'b:Cat 16', 'a:Cat 15', '9:Cat 14', '8:Cat 13', '7:Cat 12', '6:Cat 11', '5:Cat 10', '10:Cat 1', 'f:Cat 0']
+
+
+Tidy up after ourselves:
+>>> sconn.close()
