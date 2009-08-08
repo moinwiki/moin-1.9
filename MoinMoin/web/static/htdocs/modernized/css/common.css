@@ -38,6 +38,7 @@ a.mailto:before {content: url(../img/moin-email.png); margin: 0 0.2em;}
 a.attachment:before {content: url(../img/moin-attach.png); margin: 0 0.2em;}
 a.badinterwiki:before {content: url(../img/moin-inter.png); margin: 0 0.2em;}
 a.interwiki:before {content: url(../img/moin-inter.png); margin: 0 0.2em;}
+a.TextAction:before {content: url(../img/moin-action.png); margin: 0 0.2em;}
 
 li p {
 	margin: .25em 0;
