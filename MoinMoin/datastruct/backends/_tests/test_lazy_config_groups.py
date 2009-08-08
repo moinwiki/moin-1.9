@@ -6,14 +6,13 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin.datastruct.backends._tests.test_config_groups import TestConfigGroupsBackend
 from MoinMoin.datastruct.backends._tests import GroupsBackendTest
 from MoinMoin.datastruct.backends.config_lazy_groups import ConfigLazyGroups
 from MoinMoin.datastruct import ConfigGroups, CompositeGroups, GroupDoesNotExistError
 from MoinMoin._tests import wikiconfig
 
 
-class TestLazyConfigGroups(TestConfigGroupsBackend):
+class TestLazyConfigGroups(GroupsBackendTest):
 
     test_groups = {u'EditorGroup': [u'John', u'JoeDoe', u'Editor1'],
                    u'AdminGroup': [u'Admin1', u'Admin2', u'John'],
