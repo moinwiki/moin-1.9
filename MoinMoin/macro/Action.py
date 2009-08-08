@@ -39,7 +39,7 @@ def macro_Action(macro, action=u'show', text=None, _kwargs=None):
         _kwargs['action'] = action
         url = page.url(macro.request, querystr=_kwargs)
         return ''.join([
-            macro.formatter.url(1, url, css='TextAction'),
+            macro.formatter.url(1, url, css='action'),
             macro.formatter.text(text),
             macro.formatter.url(0),
         ])
