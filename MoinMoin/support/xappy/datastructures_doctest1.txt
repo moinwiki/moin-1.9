@@ -1,0 +1,30 @@
+
+>>> from fieldmappings import FieldMappings
+>>> maps = FieldMappings()
+
+Make a processed document.
+>>> doc = ProcessedDocument(maps)
+
+>>> print doc.id
+None
+>>> doc.id = '1'
+>>> print doc.id
+1
+>>> doc.id = '_'
+>>> print doc.id
+_
+
+>>> print repr(doc.data)
+{}
+>>> doc.data['foo'] = ['1', '2']
+>>> print repr(doc.data)
+{'foo': ['1', '2']}
+
+
+Adding terms which are too long gives an error straight-away.
+
+>>> maps.add_prefix('foo')
+>>> doc.add_term('foo', 'a' * 250)
+Traceback (most recent call last):
+...
+IndexerError: Field 'foo' is too long: maximum length 220 - was 252 ('XAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
