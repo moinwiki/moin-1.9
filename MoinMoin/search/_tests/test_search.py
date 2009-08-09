@@ -12,7 +12,6 @@ import py
 
 from MoinMoin.search import QueryError
 from MoinMoin.search.queryparser import QueryParser
-from MoinMoin.search import Xapian
 from MoinMoin import search
 from MoinMoin._tests import nuke_xapian_index, wikiconfig
 
@@ -156,7 +155,6 @@ class TestSearch(object):
 
 class TestXapianSearch(TestSearch):
     """ search: test Xapian indexing """
-    # XXX skip it if xapian is not available
 
     class Config(wikiconfig.Config):
 
@@ -164,6 +162,10 @@ class TestXapianSearch(TestSearch):
 
     def setup_class(self):
         """ search: kicks off indexing for a single pages in Xapian """
+
+        py.test.importorskip('xappy')
+
+
         # This only tests that the call to indexing doesn't raise.
         nuke_xapian_index(self.request)
         idx = Xapian.Index(self.request)
@@ -175,10 +177,12 @@ class TestXapianSearch(TestSearch):
 
 class TestXapianIndexingInNewThread(object):
     """ search: test Xapian indexing """
-    # XXX skip it if xapian is not available
 
     def setup_class(self):
         """ search: kicks off indexing for a single pages in Xapian """
+
+        py.test.importorskip('xappy')
+
         # This only tests that the call to indexing doesn't raise.
         nuke_xapian_index(self.request)
         idx = Xapian.Index(self.request)
