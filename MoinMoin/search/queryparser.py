@@ -667,16 +667,8 @@ class LanguageSearch(BaseFieldSearch):
 
     def search(self, page):
         logging.debug("LanguageSearch searching page %r for (negated = %r) %r" % (page.page_name, self.negated, self._pattern))
-        match = False
-        body = page.getPageHeader()
 
-        comma = re.compile(',')
-        iterator = comma.finditer(self.pattern)
-        temp = 0
-        for m_obj in iterator:
-            if re.findall('#language %s' % self.pattern[temp:m_obj.end()-2], body):
-                match = True
-            temp = m_obj.end()
+        match = self.pattern == page.pi['language']
 
         # Decide what to do with the results.
         if self.negated:
