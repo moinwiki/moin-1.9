@@ -248,13 +248,15 @@ class BaseIndex:
         if now:
             self._do_queued_updates_InNewThread()
 
-    def indexPages(self, files=None, mode='update'):
-        """ Index all pages (and files, if given)
+    def indexPages(self, files=None, mode='update', pages=None):
+        """ Index pages (and files, if given)
 
         Can be called only from a script. To index pages during a user
         request, use indexPagesInNewThread.
-        @keyword files: iterator or list of files to index additionally
-        @keyword mode: set the mode of indexing the pages, either 'update', 'add' or 'rebuild'
+
+        @param files: iterator or list of files to index additionally
+        @param mode: set the mode of indexing the pages, either 'update', 'add' or 'rebuild'
+        @param pages: list of pages to index, if not given, all pages are indexed
         """
         if not self.lock.acquire(1.0):
             logging.warning("can't index: can't acquire lock")
@@ -263,15 +265,15 @@ class BaseIndex:
             self._unsign()
             start = time.time()
             request = self._indexingRequest(self.request)
-            self._index_pages(request, files, mode)
+            self._index_pages(request, files, mode, pages=pages)
             logging.info("indexing completed successfully in %0.2f seconds." %
                         (time.time() - start))
             self._sign()
         finally:
             self.lock.release()
 
-    def indexPagesInNewThread(self, files=None, mode='update'):
-        """ Index all pages in a new thread
+    def indexPagesInNewThread(self, files=None, mode='update', pages=None):
+        """ Index pages in a new thread
 
         Should be called from a user request. From a script, use indexPages.
         """
@@ -280,7 +282,7 @@ class BaseIndex:
             return
 
         from threading import Thread
-        indexThread = Thread(target=self._index_pages, args=(self.request, files, mode))
+        indexThread = Thread(target=self._index_pages, args=(self.request, files, mode, pages))
         indexThread.setDaemon(True)
 
         # Join the index thread after current request finish, prevent
@@ -294,7 +296,7 @@ class BaseIndex:
         self.request.finish = joinDecorator(self.request.finish)
         indexThread.start()
 
-    def _index_pages(self, request, files=None, mode='update'):
+    def _index_pages(self, request, files=None, mode='update', pages=None):
         """ Index all pages (and all given files)
 
         This should be called from indexPages or indexPagesInNewThread only!
@@ -306,9 +308,11 @@ class BaseIndex:
         and this method must release it when it finishes or fails.
 
         @param request: current request
-        @keyword files: iterator or list of files to index additionally
-        @keyword mode: set the mode of indexing the pages, either 'update',
+        @param files: iterator or list of files to index additionally
+        @param mode: set the mode of indexing the pages, either 'update',
         'add' or 'rebuild'
+        @param pages: list of pages to index, if not given, all pages are indexed
+
         """
         raise NotImplemented('...')
 

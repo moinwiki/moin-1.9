@@ -247,22 +247,14 @@ class TestXapianSearch(TestSearch):
 
     def setup_method(self, method):
 
-        py.test.importorskip('MoinMoin.support.xappy')
-        from MoinMoin.search.Xapian import Index, MoinIndexerConnection
+        try:
+            from MoinMoin.search.Xapian import Index
+        except ImportError:
+            py.test.skip('xapian is not installed')
 
         nuke_xapian_index(self.request)
-
         index = Index(self.request)
-        assert index.lock.acquire(1.0)
-        try:
-            connection = MoinIndexerConnection(index.dir)
-            index._unsign()
-            for page in self.pages:
-                index._index_page(self.request, connection, page, mode='add')
-            index._sign()
-        finally:
-            index.lock.release()
-            connection.close()
+        index.indexPages(mode='add', pages=self.pages)
 
     def teardown_method(self, method):
         nuke_xapian_index(self.request)
@@ -271,17 +263,20 @@ class TestXapianSearch(TestSearch):
 class TestXapianIndexingInNewThread(object):
     """ search: test Xapian indexing """
 
+    class Config(wikiconfig.Config):
+
+        xapian_search = True
+
     def test_index_in_new_thread(self):
         """ search: kicks off indexing for a single pages in Xapian """
-        py.test.skip('XXX takes a lot of time')
+        try:
+            from MoinMoin.search.Xapian import Index
+        except ImportError:
+            py.test.skip('xapian is not installed')
 
-        py.test.importorskip('MoinMoin.support.xappy')
-        from MoinMoin.search import Xapian
-
-        # This only tests that the call to indexing doesn't raise.
         nuke_xapian_index(self.request)
-        idx = Xapian.Index(self.request)
-        idx.indexPagesInNewThread(mode='add') # slow: builds an index of all pages
+        index = Index(self.request)
+        index.indexPagesInNewThread(mode='add')
 
         nuke_xapian_index(self.request)
 
