@@ -13,7 +13,7 @@ import py
 from MoinMoin.search import QueryError
 from MoinMoin.search.queryparser import QueryParser
 from MoinMoin import search
-from MoinMoin._tests import nuke_xapian_index, wikiconfig
+from MoinMoin._tests import nuke_xapian_index, wikiconfig, become_trusted, create_page, nuke_page
 
 
 class TestQueryParsing(object):
@@ -74,43 +74,129 @@ class TestSearch(object):
     """ search: test search """
     doesnotexist = u'jfhsdaASDLASKDJ'
 
-    def test_prefix_search(self):
+    pages = {'SearchTestPage': 'this is test page',
+             'SearchTestLinks': 'SearchTestPage',
+             'SearchTestLinksLowerCase': 'searchtestpage',
+             'SearchTestOtherLinks': 'SearchTestLinks'}
 
-        def simple_test(prefix, term):
-            result = search.searchPages(self.request, u"%s:%s" % (prefix, term))
-            assert result.hits
-            result = search.searchPages(self.request, u"%s:%s" % (prefix, self.doesnotexist))
-            assert not result.hits
+    def setup_class(self):
+        become_trusted(self.request)
 
-        def re_test(prefix, term):
-            result = search.searchPages(self.request, ur"%s:re:\b%s\b" % (prefix, term))
-            assert result.hits
-            result = search.searchPages(self.request, ur"%s:re:\b%s\b" % (prefix, self.doesnotexist))
-            assert not result.hits
+        for page, text in self.pages.iteritems():
+            create_page(self.request, page, text)
 
-        def case_test(prefix, term):
-            result = search.searchPages(self.request, u"%s:case:%s" % (prefix, term))
-            assert result.hits
-            result = search.searchPages(self.request, u"%s:case:%s" % (prefix, term.lower()))
-            assert not result.hits
+    def teardown_class(self):
+        for page in self.pages:
+            nuke_page(self.request, page)
 
-        def case_re_test(prefix, term):
-            result = search.searchPages(self.request, ur"%s:case:re:\%s\b" % (prefix, term))
-            assert result.hits
-            result = search.searchPages(self.request, ur"%s:case:re:\%s\b" % (prefix, term.lower()))
-            assert not result.hits
+    def search(self, query):
+        return search.searchPages(self.request, query)
 
-        for prefix, term in [('title', 'FrontPage'), ('linkto', 'FrontPage'), ('category', 'CategoryHomepage')]:
-            for test in [simple_test, re_test, case_test, case_re_test]:
-                yield '%s %s' % (prefix, test.func_name), test, prefix, term
+    def test_title_search_simple(self):
+        result = self.search(u'title:SearchTestPage')
+        assert len(result.hits) == 1
 
-        for prefix, term in [('mimetype', 'text/text')]:
-            for test in [simple_test, re_test]:
-                yield '%s %s' % (prefix, test.func_name), test, prefix, term
+        result = self.search(u'title:LanguageSetup')
+        assert len(result.hits) == 1
 
-        for prefix, term in [('language', 'en'), ('domain', 'system')]:
-            for test in [simple_test]:
-                yield '%s %s' % (prefix, test.func_name), test, prefix, term
+        result = self.search(u'title:SearchTestNotExisting')
+        assert not result.hits
+
+    def test_title_search_re(self):
+        result = self.search(ur'title:re:\bSearchTest')
+        assert len(result.hits) == 4
+
+        result = self.search(ur'title:re:\bSearchTest\b')
+        assert not result.hits
+
+    def test_title_search_case(self):
+        result = self.search(u'title:case:SearchTestPage')
+        assert len(result.hits) == 1
+
+        result = self.search(u'title:case:searchtestpage')
+        assert not result.hits
+
+    def test_title_search_case_re(self):
+        result = self.search(ur'title:case:re:\bSearchTestPage\b')
+        assert len(result.hits) == 1
+
+        result = self.search(ur'title:case:re:\bsearchtestpage\b')
+        assert not result.hits
+
+    def test_linkto_search_simple(self):
+        result = self.search(u'linkto:SearchTestPage')
+        assert len(result.hits) == 1
+
+        result = self.search(u'linkto:SearchTestNotExisting')
+        assert not result.hits
+
+    def test_linkto_search_re(self):
+        result = self.search(ur'linkto:re:\bSearchTest')
+        assert len(result.hits) == 2
+
+        result = self.search(ur'linkto:re:\bSearchTest\b')
+        assert not result.hits
+
+    def test_linkto_search_case(self):
+        result = self.search(u'linkto:case:SearchTestPage')
+        assert len(result.hits) == 1
+
+        result = self.search(u'linkto:case:searchtestpage')
+        assert not result.hits
+
+    def test_linkto_search_case_re(self):
+        result = self.search(ur'linkto:case:re:\bSearchTestPage\b')
+        assert len(result.hits) == 1
+
+        result = self.search(ur'linkto:case:re:\bsearchtestpage\b')
+        assert not result.hits
+
+    def test_category_search_simple(self):
+        result = self.search(u'category:CategoryHomepage')
+        assert result.hits
+
+        result = self.search(u'category:CategorySearchTestNotExisting')
+        assert not result.hits
+
+    def test_category_search_re(self):
+        result = self.search(ur'category:re:\bCategoryHomepage\b')
+        assert result.hits
+
+        result = self.search(ur'category:re:\bCategoryHomepa\b')
+        assert not result.hits
+
+    def test_category_search_case(self):
+        result = self.search(u'category:case:CategoryHomepage')
+        assert result.hits
+
+        result = self.search(u'category:case:categoryhomepage')
+        assert not result.hits
+
+    def test_category_search_case_re(self):
+        result = self.search(ur'category:case:re:\bCategoryHomepage\b')
+        assert result.hits
+
+        result = self.search(ur'category:case:re:\bcategoryhomepage\b')
+        assert not result.hits
+
+    def test_mimetype_search_simple(self):
+        result = self.search(u'mimetype:text/text')
+        assert result.hits
+
+    def test_mimetype_search_re(self):
+        result = self.search(ur'mimetype:re:\btext/text\b')
+        assert result.hits
+
+        result = self.search(ur'category:re:\bCategoryHomepa\b')
+        assert not result.hits
+
+    def test_language_search_simple(self):
+        result = self.search(u'language:en')
+        assert result.hits
+
+    def test_domain_search_simple(self):
+        result = self.search(u'domain:system')
+        assert result.hits
 
     def testTitleSearchAND(self):
         """ search: title search with AND expression """
@@ -118,7 +204,7 @@ class TestSearch(object):
         assert len(result.hits) == 1
 
         result = search.searchPages(self.request, u"title:Help title:%s" % self.doesnotexist)
-        assert len(result.hits) == 0
+        assert not result.hits
 
     def testTitleSearchOR(self):
         """ search: title search with OR expression """
@@ -148,7 +234,6 @@ class TestSearch(object):
         assert 0 < len(result.hits) < helpon_count
 
     def test_title_search(self):
-
         query = QueryParser(titlesearch=True).parse_query('Moin')
         result = search.searchPages(self.request, query, sort='page_name')
 
@@ -160,35 +245,44 @@ class TestXapianSearch(TestSearch):
 
         xapian_search = True
 
-    def setup_class(self):
-        """ search: kicks off indexing for a single pages in Xapian """
+    def setup_method(self, method):
 
-        py.test.importorskip('xappy')
+        py.test.importorskip('MoinMoin.support.xappy')
+        from MoinMoin.search.Xapian import Index, MoinIndexerConnection
 
-
-        # This only tests that the call to indexing doesn't raise.
         nuke_xapian_index(self.request)
-        idx = Xapian.Index(self.request)
-        idx.indexPages(mode='add') # slow: builds an index of all pages
 
-    def teardown_class(self):
+        index = Index(self.request)
+        assert index.lock.acquire(1.0)
+        try:
+            connection = MoinIndexerConnection(index.dir)
+            index._unsign()
+            for page in self.pages:
+                index._index_page(self.request, connection, page, mode='add')
+            index._sign()
+        finally:
+            index.lock.release()
+            connection.close()
+
+    def teardown_method(self, method):
         nuke_xapian_index(self.request)
 
 
 class TestXapianIndexingInNewThread(object):
     """ search: test Xapian indexing """
 
-    def setup_class(self):
+    def test_index_in_new_thread(self):
         """ search: kicks off indexing for a single pages in Xapian """
+        py.test.skip('XXX takes a lot of time')
 
-        py.test.importorskip('xappy')
+        py.test.importorskip('MoinMoin.support.xappy')
+        from MoinMoin.search import Xapian
 
         # This only tests that the call to indexing doesn't raise.
         nuke_xapian_index(self.request)
         idx = Xapian.Index(self.request)
         idx.indexPagesInNewThread(mode='add') # slow: builds an index of all pages
 
-    def teardown_class(self):
         nuke_xapian_index(self.request)
 
 
