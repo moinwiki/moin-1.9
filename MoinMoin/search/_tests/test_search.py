@@ -12,7 +12,7 @@ import py
 
 from MoinMoin.search import QueryError
 from MoinMoin.search.queryparser import QueryParser
-from MoinMoin import search
+from MoinMoin.search.builtin import MoinSearch, XapianSearch
 from MoinMoin._tests import nuke_xapian_index, wikiconfig, become_trusted, create_page, nuke_page
 
 
@@ -70,27 +70,42 @@ class TestQueryParsing(object):
             yield _test, query
 
 
-class TestSearch(object):
+class BaseSearchTest(object):
     """ search: test search """
     doesnotexist = u'jfhsdaASDLASKDJ'
 
     pages = {'SearchTestPage': 'this is test page',
              'SearchTestLinks': 'SearchTestPage',
              'SearchTestLinksLowerCase': 'searchtestpage',
-             'SearchTestOtherLinks': 'SearchTestLinks'}
+             'SearchTestOtherLinks': 'SearchTestLinks',
+             'LanguageSetup': None,
+             'CategoryHomepage': None,
+             'HomePageWiki': None,
+             'FrontPage': None,
+             'RecentChanges': None,
+             'HelpOnCreoleSyntax': None,
+             'HelpIndex': None}
 
     def setup_class(self):
         become_trusted(self.request)
 
         for page, text in self.pages.iteritems():
-            create_page(self.request, page, text)
+            if text:
+                create_page(self.request, page, text)
 
     def teardown_class(self):
-        for page in self.pages:
-            nuke_page(self.request, page)
+        for page, text in self.pages.iteritems():
+            if text:
+                nuke_page(self.request, page)
+
+    def get_seracher(self, query):
+        raise NotImplementedError
 
     def search(self, query):
-        return search.searchPages(self.request, query)
+        if isinstance(query, str) or isinstance(query, unicode):
+            query = QueryParser().parse_query(query)
+
+        return self.get_searcher(query).run()
 
     def test_title_search_simple(self):
         result = self.search(u'title:SearchTestPage')
@@ -153,46 +168,46 @@ class TestSearch(object):
 
     def test_category_search_simple(self):
         result = self.search(u'category:CategoryHomepage')
-        assert result.hits
+        assert len(result.hits) == 1
 
         result = self.search(u'category:CategorySearchTestNotExisting')
         assert not result.hits
 
     def test_category_search_re(self):
         result = self.search(ur'category:re:\bCategoryHomepage\b')
-        assert result.hits
+        assert len(result.hits) == 1
 
         result = self.search(ur'category:re:\bCategoryHomepa\b')
         assert not result.hits
 
     def test_category_search_case(self):
         result = self.search(u'category:case:CategoryHomepage')
-        assert result.hits
+        assert len(result.hits) == 1
 
         result = self.search(u'category:case:categoryhomepage')
         assert not result.hits
 
     def test_category_search_case_re(self):
         result = self.search(ur'category:case:re:\bCategoryHomepage\b')
-        assert result.hits
+        assert len(result.hits) == 1
 
         result = self.search(ur'category:case:re:\bcategoryhomepage\b')
         assert not result.hits
 
     def test_mimetype_search_simple(self):
         result = self.search(u'mimetype:text/text')
-        assert result.hits
+        assert len(result.hits) == 1
 
     def test_mimetype_search_re(self):
         result = self.search(ur'mimetype:re:\btext/text\b')
-        assert result.hits
+        assert len(result.hits) == 1
 
         result = self.search(ur'category:re:\bCategoryHomepa\b')
         assert not result.hits
 
     def test_language_search_simple(self):
         result = self.search(u'language:en')
-        assert result.hits
+        assert len(result.hits) == 10
 
     def test_domain_search_simple(self):
         result = self.search(u'domain:system')
@@ -200,50 +215,48 @@ class TestSearch(object):
 
     def testTitleSearchAND(self):
         """ search: title search with AND expression """
-        result = search.searchPages(self.request, u"title:Help title:Index")
+        result = self.search(u"title:Help title:Index")
         assert len(result.hits) == 1
 
-        result = search.searchPages(self.request, u"title:Help title:%s" % self.doesnotexist)
+        result = self.search(u"title:Help title:%s" % self.doesnotexist)
         assert not result.hits
 
     def testTitleSearchOR(self):
         """ search: title search with OR expression """
-        result = search.searchPages(self.request, u"title:FrontPage or title:RecentChanges")
+        result = self.search(u"title:FrontPage or title:RecentChanges")
         assert len(result.hits) == 2
 
     def testTitleSearchNegatedFindAll(self):
         """ search: negated title search for some pagename that does not exist results in all pagenames """
-        result = search.searchPages(self.request, u"-title:%s" % self.doesnotexist)
-        assert len(result.hits) > 100 # XXX should be "all"
+        result = self.search(u"-title:%s" % self.doesnotexist)
+        assert len(result.hits) == len(self.pages)
 
     def testTitleSearchNegativeTerm(self):
         """ search: title search for a AND expression with a negative term """
-        helpon_count = len(search.searchPages(self.request, u"title:HelpOn").hits)
-        result = search.searchPages(self.request, u"title:HelpOn -title:AccessControlLists")
-        assert len(result.hits) == helpon_count - 1 # finds all HelpOn* except one
+        result = self.search(u"-title:FrontPage")
+        assert len(result.hits) == len(self.pages) - 1
 
     def testFullSearchNegatedFindAll(self):
         """ search: negated full search for some string that does not exist results in all pages """
-        result = search.searchPages(self.request, u"-%s" % self.doesnotexist)
-        assert len(result.hits) > 100 # XXX should be "all"
-
-    def testFullSearchNegativeTerm(self):
-        """ search: full search for a AND expression with a negative term """
-        helpon_count = len(search.searchPages(self.request, u"HelpOn").hits)
-        result = search.searchPages(self.request, u"HelpOn -ACL")
-        assert 0 < len(result.hits) < helpon_count
+        result = self.search(u"-%s" % self.doesnotexist)
+        assert len(result.hits) == len(self.pages)
 
     def test_title_search(self):
         query = QueryParser(titlesearch=True).parse_query('Moin')
-        result = search.searchPages(self.request, query, sort='page_name')
+        result = self.search(query)
+        assert len(result.hits) == 1
 
 
-class TestXapianSearch(TestSearch):
+class TestMoinSearch(BaseSearchTest):
+    def get_searcher(self, query):
+        pages = [{'pagename': page, 'attachment': '', 'wikiname': 'Self', } for page in self.pages]
+        return MoinSearch(self.request, query, pages=pages)
+
+class TestXapianSearch(BaseSearchTest):
     """ search: test Xapian indexing """
 
-    class Config(wikiconfig.Config):
-
-        xapian_search = True
+    def get_searcher(self, query):
+        return XapianSearch(self.request, query)
 
     def setup_method(self, method):
 
