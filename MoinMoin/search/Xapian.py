@@ -605,8 +605,8 @@ class Index(BaseIndex):
                 logging.debug('attachment %s from %s removed from index' %
                     (doc['values']['attachment'], doc['values']['pagename']))
 
-    def _index_pages(self, request, files=None, mode='update'):
-        """ Index all pages (and all given files)
+    def _index_pages(self, request, files=None, mode='update', pages=None):
+        """ Index pages (and all given files)
 
         This should be called from indexPages or indexPagesInNewThread only!
 
@@ -617,10 +617,14 @@ class Index(BaseIndex):
         and this method must release it when it finishes or fails.
 
         @param request: the current request
-        @keyword files: an optional list of files to index
-        @keyword mode: how to index the files, either 'add', 'update' or
-                       'rebuild'
+        @param files: an optional list of files to index
+        @param mode: how to index the files, either 'add', 'update' or 'rebuild'
+        @param pages: list of pages to index, if not given, all pages are indexed
+
         """
+        if pages is None:
+            # Index all pages
+            pages = request.rootpage.getPageList(user='', exists=1)
 
         # rebuilding the DB: delete it and add everything
         if mode == 'rebuild':
@@ -629,10 +633,8 @@ class Index(BaseIndex):
             mode = 'add'
 
         try:
-            self.touch()
             connection = MoinIndexerConnection(self.dir)
-            # writer.configure(self.prefixMap, self.indexValueMap)
-            pages = request.rootpage.getPageList(user='', exists=1)
+            self.touch()
             logging.debug("indexing all (%d) pages..." % len(pages))
             for pagename in pages:
                 self._index_page(request, connection, pagename, mode=mode)
@@ -640,11 +642,8 @@ class Index(BaseIndex):
                 logging.debug("indexing all files...")
                 for fname in files:
                     fname = fname.strip()
-                    # XXX refactor _index_file
-                    # self._index_file(request, connection, fname, mode)
+                    self._index_file(request, connection, fname, mode)
             connection.flush()
-            connection.close()
         finally:
-            pass
-            #connection.__del__()
+            connection.close()
 
