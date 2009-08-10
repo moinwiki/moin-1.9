@@ -242,7 +242,7 @@ class BaseSearchTest(object):
         assert len(result.hits) == len(self.pages)
 
     def test_title_search(self):
-        query = QueryParser(titlesearch=True).parse_query('Moin')
+        query = QueryParser(titlesearch=True).parse_query('FrontPage')
         result = self.search(query)
         assert len(result.hits) == 1
 
@@ -272,6 +272,27 @@ class TestXapianSearch(BaseSearchTest):
     def teardown_method(self, method):
         nuke_xapian_index(self.request)
 
+    def test_xapian_term(self):
+
+        from MoinMoin.search.Xapian import MoinSearchConnection
+
+        parser = QueryParser()
+        connection = MoinSearchConnection('tests/wiki/data/cache/xapian/index') # XXX Index location should not be hardcoded!
+        prefixes = {'title:': ['', 're:', 'case:', 'case:re:'],
+                    'linkto:': ['', 're:', 'case:', 'case:re:'],
+                    'category:': ['re:', 'case:', 'case:re:'],
+                    'mimetype:': ['re:'],
+                    'language:': [''],
+                    'domain:': ['']}
+
+        def test_query(query):
+            print query
+            assert not parser.parse_query(query).xapian_term(self.request, connection).empty()
+
+        for prefix, modifiers in prefixes.iteritems():
+            for modifier in modifiers:
+                query = ''.join([prefix, modifier, 'something'])
+                yield test_query, query
 
 class TestXapianIndexingInNewThread(object):
     """ search: test Xapian indexing """
