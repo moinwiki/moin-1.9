@@ -258,6 +258,10 @@ class TestXapianSearch(BaseSearchTest):
     def get_searcher(self, query):
         return XapianSearch(self.request, query)
 
+    def get_moin_search_connection(self):
+        from MoinMoin.search.Xapian import MoinSearchConnection
+        return  MoinSearchConnection('tests/wiki/data/cache/xapian/index') # XXX Index location should not be hardcoded!
+
     def setup_method(self, method):
 
         try:
@@ -272,12 +276,18 @@ class TestXapianSearch(BaseSearchTest):
     def teardown_method(self, method):
         nuke_xapian_index(self.request)
 
+    def test_get_all_documents(self):
+        connection = self.get_moin_search_connection()
+        documents = connection.get_all_documents()
+
+        assert len(self.pages) == len(documents)
+        for document in documents:
+            assert document.data['pagename'][0] in self.pages.keys()
+
     def test_xapian_term(self):
-
-        from MoinMoin.search.Xapian import MoinSearchConnection
-
         parser = QueryParser()
-        connection = MoinSearchConnection('tests/wiki/data/cache/xapian/index') # XXX Index location should not be hardcoded!
+        connection = self.get_moin_search_connection()
+
         prefixes = {'title:': ['', 're:', 'case:', 'case:re:'],
                     'linkto:': ['', 're:', 'case:', 'case:re:'],
                     'category:': ['re:', 'case:', 'case:re:'],
