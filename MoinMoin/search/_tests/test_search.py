@@ -15,6 +15,11 @@ from MoinMoin.search.queryparser import QueryParser
 from MoinMoin.search.builtin import MoinSearch, XapianSearch
 from MoinMoin._tests import nuke_xapian_index, wikiconfig, become_trusted, create_page, nuke_page
 
+if py.version != '1.0.0':
+    # There are some generative tests, which won't run on older versions!
+    # XXX These tests should be refactored to be able to be run with older versions of py.
+    py.test.skip('Currently py version 1.0.0 is needed')
+
 
 class TestQueryParsing(object):
     """ search: query parser tests """
