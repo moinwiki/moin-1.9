@@ -293,21 +293,22 @@ class TestXapianSearch(BaseSearchTest):
         parser = QueryParser()
         connection = self.get_moin_search_connection()
 
-        prefixes = {'title:': ['', 're:', 'case:', 'case:re:'],
-                    'linkto:': ['', 're:', 'case:', 'case:re:'],
-                    'category:': ['re:', 'case:', 'case:re:'],
-                    'mimetype:': ['re:'],
-                    'language:': [''],
-                    'domain:': ['']}
+        prefixes = {'': (['', 're:', 'case:', 'case:re:'], 'SearchTestPage'),
+                    'title:': (['', 're:', 'case:', 'case:re:'], 'SearchTestPage'),
+                    'linkto:': (['', 're:', 'case:', 'case:re:'], 'FrontPage'),
+                    'category:': (['', 're:', 'case:', 'case:re:'], 'CategoryHomepage'),
+                    'mimetype:': (['', 're:'], 'text/creole'),
+                    'language:': ([''], 'en'),
+                    'domain:': ([''], 'system')}
 
         def test_query(query):
-            print query
             assert not parser.parse_query(query).xapian_term(self.request, connection).empty()
 
-        for prefix, modifiers in prefixes.iteritems():
+        for prefix, data in prefixes.iteritems():
+            modifiers, term = data
             for modifier in modifiers:
-                query = ''.join([prefix, modifier, 'something'])
-                yield test_query, query
+                query = ''.join([prefix, modifier, term])
+                yield query, test_query, query
 
 class TestXapianIndexingInNewThread(object):
     """ search: test Xapian indexing """
