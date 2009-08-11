@@ -103,7 +103,7 @@ class BaseSearchTest(object):
             if text:
                 nuke_page(self.request, page)
 
-    def get_seracher(self, query):
+    def get_searcher(self, query):
         raise NotImplementedError
 
     def search(self, query):
@@ -253,9 +253,11 @@ class BaseSearchTest(object):
 
 
 class TestMoinSearch(BaseSearchTest):
+
     def get_searcher(self, query):
         pages = [{'pagename': page, 'attachment': '', 'wikiname': 'Self', } for page in self.pages]
         return MoinSearch(self.request, query, pages=pages)
+
 
 class TestXapianSearch(BaseSearchTest):
     """ search: test Xapian indexing """
@@ -309,6 +311,7 @@ class TestXapianSearch(BaseSearchTest):
             for modifier in modifiers:
                 query = ''.join([prefix, modifier, term])
                 yield query, test_query, query
+
 
 class TestXapianIndexingInNewThread(object):
     """ search: test Xapian indexing """
