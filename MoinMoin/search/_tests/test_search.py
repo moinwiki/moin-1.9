@@ -79,17 +79,17 @@ class BaseSearchTest(object):
     """ search: test search """
     doesnotexist = u'jfhsdaASDLASKDJ'
 
-    pages = {'SearchTestPage': 'this is test page',
-             'SearchTestLinks': 'SearchTestPage',
-             'SearchTestLinksLowerCase': 'searchtestpage',
-             'SearchTestOtherLinks': 'SearchTestLinks',
-             'LanguageSetup': None,
-             'CategoryHomepage': None,
-             'HomePageWiki': None,
-             'FrontPage': None,
-             'RecentChanges': None,
-             'HelpOnCreoleSyntax': None,
-             'HelpIndex': None}
+    pages = {u'SearchTestPage': u'this is test page',
+             u'SearchTestLinks': u'SearchTestPage',
+             u'SearchTestLinksLowerCase': u'searchtestpage',
+             u'SearchTestOtherLinks': u'SearchTestLinks',
+             u'LanguageSetup': None,
+             u'CategoryHomepage': None,
+             u'HomePageWiki': None,
+             u'FrontPage': None,
+             u'RecentChanges': None,
+             u'HelpOnCreoleSyntax': None,
+             u'HelpIndex': None}
 
     def setup_class(self):
         become_trusted(self.request)
@@ -113,9 +113,9 @@ class BaseSearchTest(object):
         return self.get_searcher(query).run()
 
     def test_title_search_simple(self):
-        searches = {'title:SearchTestPage': 1,
-                    'title:LanguageSetup': 1,
-                    'title:SearchTestNotExisting': 0}
+        searches = {u'title:SearchTestPage': 1,
+                    u'title:LanguageSetup': 1,
+                    u'title:SearchTestNotExisting': 0}
 
         def test(query, res_count):
             result = self.search(query)
@@ -297,13 +297,13 @@ class TestXapianSearch(BaseSearchTest):
         parser = QueryParser()
         connection = self.get_moin_search_connection()
 
-        prefixes = {'': (['', 're:', 'case:', 'case:re:'], 'SearchTestPage'),
-                    'title:': (['', 're:', 'case:', 'case:re:'], 'SearchTestPage'),
-                    'linkto:': (['', 're:', 'case:', 'case:re:'], 'FrontPage'),
-                    'category:': (['', 're:', 'case:', 'case:re:'], 'CategoryHomepage'),
-                    'mimetype:': (['', 're:'], 'text/creole'),
-                    'language:': ([''], 'en'),
-                    'domain:': ([''], 'system')}
+        prefixes = {u'': ([u'', u're:', u'case:', u'case:re:'], u'SearchTestPage'),
+                    u'title:': ([u'', u're:', u'case:', u'case:re:'], u'SearchTestPage'),
+                    u'linkto:': ([u'', u're:', u'case:', u'case:re:'], u'FrontPage'),
+                    u'category:': ([u'', u're:', u'case:', u'case:re:'], u'CategoryHomepage'),
+                    u'mimetype:': ([u'', u're:'], u'text/creole'),
+                    u'language:': ([u''], u'en'),
+                    u'domain:': ([u''], u'system')}
 
         def test_query(query):
             assert not parser.parse_query(query).xapian_term(self.request, connection).empty()
