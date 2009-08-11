@@ -8,7 +8,7 @@
 """
 
 
-import py
+import py, os
 
 from MoinMoin.search import QueryError
 from MoinMoin.search.queryparser import QueryParser
@@ -267,7 +267,7 @@ class TestXapianSearch(BaseSearchTest):
 
     def get_moin_search_connection(self):
         from MoinMoin.search.Xapian import MoinSearchConnection
-        return  MoinSearchConnection('tests/wiki/data/cache/xapian/index') # XXX Index location should not be hardcoded!
+        return  MoinSearchConnection(os.path.join(self.request.cfg.cache_dir, 'xapian/index'))
 
     def setup_method(self, method):
 
