@@ -113,14 +113,16 @@ class BaseSearchTest(object):
         return self.get_searcher(query).run()
 
     def test_title_search_simple(self):
-        result = self.search(u'title:SearchTestPage')
-        assert len(result.hits) == 1
+        searches = {'title:SearchTestPage': 1,
+                    'title:LanguageSetup': 1,
+                    'title:SearchTestNotExisting': 0}
 
-        result = self.search(u'title:LanguageSetup')
-        assert len(result.hits) == 1
+        def test(query, res_count):
+            result = self.search(query)
+            assert len(result.hits) == res_count
 
-        result = self.search(u'title:SearchTestNotExisting')
-        assert not result.hits
+        for query, res_count in searches.iteritems():
+            yield query, test, query, res_count
 
     def test_title_search_re(self):
         result = self.search(ur'title:re:\bSearchTest')
