@@ -54,6 +54,12 @@ class MoinSearchConnection(xappy.SearchConnection):
         hits = self.search(query, 0, document_count)
         return hits
 
+    def get_all_documents_with_field(self, field, field_value):
+        document_count = self.get_doccount()
+        query = self.query_field(field, field_value)
+        hits = self.search(query, 0, document_count)
+        return hits
+
 
 class MoinIndexerConnection(xappy.IndexerConnection):
 
@@ -95,6 +101,7 @@ class MoinIndexerConnection(xappy.IndexerConnection):
         self.add_field_action('linkto', STORE_CONTENT)
         self.add_field_action('category', INDEX_EXACT)
         self.add_field_action('category', STORE_CONTENT)
+        self.add_field_action('mtime', STORE_CONTENT)
 
 
 ##############################################################################
@@ -281,12 +288,13 @@ class Index(BaseIndex):
         if sort == 'page_name':
             kw['sortby'] = 'pagename'
 
-        # Try to get first 1000 hits.
+        # Refresh connection, since it may be outdated.
+        searcher.reopen()
         query = query.xapian_term(self.request, searcher)
-        hits = searcher.search(query, 0, 1000, **kw)
-        # If there are more hits, get them all
-        if hits.more_matches:
-            hits = searcher.search(query, 0, hits.matches_upper_bound, **kw)
+
+        # Get maximum possible amount of hits from xappy, which is number of documents in the index.
+        document_count = searcher.get_doccount()
+        hits = searcher.search(query, 0, document_count, **kw)
 
         self.request.cfg.xapian_searchers.append((searcher, timestamp))
         return hits
@@ -294,24 +302,23 @@ class Index(BaseIndex):
     def _do_queued_updates(self, request, amount=5):
         """ Assumes that the write lock is acquired """
         self.touch()
-        writer = xapidx.Index(self.dir, True)
-        writer.configure(self.prefixMap, self.indexValueMap)
-
+        connection = MoinIndexerConnection(self.dir)
         # do all page updates
         pages = self.update_queue.pages()[:amount]
         for name in pages:
-            self._index_page(request, writer, name, mode='update')
+            self._index_page(request, connection, name, mode='update')
             self.update_queue.remove([name])
 
         # do page/attachment removals
         items = self.remove_queue.pages()[:amount]
         for item in items:
-            _item = item.split('//')
-            p = Page(request, _item[0])
-            self._remove_item(request, writer, p, _item[1])
+            assert len(item.split('//')) == 2
+            pagename,  attachment = item.split('//')
+            page = Page(request, pagename)
+            self._remove_item(request, connection, page, attachment)
             self.remove_queue.remove([item])
 
-        writer.close()
+        connection.close()
 
     def termpositions(self, uid, term):
         """ Fetches all positions of a term in a document
@@ -319,11 +326,7 @@ class Index(BaseIndex):
         @param uid: document id of the item in the xapian index
         @param term: the term as a string
         """
-        db = xapidx.ExceptionTranslater.openIndex(True, self.dir)
-        pos = db.positionlist_begin(uid, term)
-        while pos != db.positionlist_end(uid, term):
-            yield pos.get_termpos()
-            pos.next()
+        raise NotImplementedError, "XXX xappy doesn't require this"
 
     def _index_file(self, request, writer, filename, mode='update'):
         """ index a file as it were a page named pagename
@@ -522,6 +525,12 @@ class Index(BaseIndex):
         pagename = page.page_name
         mtime = page.mtime_usecs()
         revision = str(page.get_real_rev())
+        if revision == '99999999':
+            # XXX
+            # While page is being created with MoinMoin._tests.create_page, it is indexed and has revision 99999999.
+            # This magic number is taken from http://hg.moinmo.in/moin/1.9/file/dce251f8cfc3/MoinMoin/Page.py#l307
+            # Note that a page object which create_page returns will have right revision!
+            revision = '0'
         itemid = "%s:%s:%s" % (wikiname, pagename, revision)
         author = page.edit_info().get('editor', '?')
         # XXX: Hack until we get proper metadata
@@ -579,31 +588,26 @@ class Index(BaseIndex):
 
         return updated
 
-    def _remove_item(self, request, writer, page, attachment=None):
+    def _remove_item(self, request, connection, page, attachment=None):
         wikiname = request.cfg.interwikiname or u'Self'
         pagename = page.page_name
 
         if not attachment:
-            # Remove all revisions and attachments from the index
-            query = xapidx.RawQuery(xapidx.makePairForWrite(
-                self.prefixMap['fulltitle'], pagename))
-            enq, mset, docs = writer.search(query, valuesWanted=['pagename',
-                'attachment', ])
-            for doc in docs:
-                writer.delete_document(doc['uid'])
-                logging.debug('%s removed from xapian index' %
-                        doc['values']['pagename'])
+
+            search_connection = MoinSearchConnection(self.dir)
+            docs_to_delete = search_connection.get_all_documents_with_field('fulltitle', pagename)
+            ids_to_delete = [d.id for d in docs_to_delete]
+            search_connection.close()
+
+            for id in ids_to_delete:
+                connection.delete(id)
+                logging.debug('%s removed from xapian index' % pagename)
         else:
             # Only remove a single attachment
-            query = xapidx.RawQuery(xapidx.makePairForWrite('itemid',
-                "%s:%s//%s" % (wikiname, pagename, attachment)))
-            enq, mset, docs = writer.search(query, valuesWanted=['pagename',
-                'attachment', ])
-            if docs:
-                doc = docs[0] # there should be only one
-                writer.delete_document(doc['uid'])
-                logging.debug('attachment %s from %s removed from index' %
-                    (doc['values']['attachment'], doc['values']['pagename']))
+            id = "%s:%s//%s" % (wikiname, pagename, attachment)
+            connection.delete(id)
+
+            logging.debug('attachment %s from %s removed from index' % (attachment, pagename))
 
     def _index_pages(self, request, files=None, mode='update', pages=None):
         """ Index pages (and all given files)
