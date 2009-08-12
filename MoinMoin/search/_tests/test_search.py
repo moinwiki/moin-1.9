@@ -8,7 +8,7 @@
 """
 
 
-import py, os
+import py, os, time
 
 from MoinMoin.search import QueryError
 from MoinMoin.search.queryparser import QueryParser
@@ -253,6 +253,18 @@ class BaseSearchTest(object):
         result = self.search(query)
         assert len(result.hits) == 1
 
+    def test_create_page(self):
+        self.pages['TestCreatePage'] = 'some text' # Moin serarch must search this page
+        create_page(self.request, 'TestCreatePage', self.pages['TestCreatePage'])
+        time.sleep(1) # Wait while created pages are being indexed in other thread.
+        result = self.search(u'TestCreatePage')
+
+        nuke_page(self.request, 'TestCreatePage')
+        time.sleep(1) # Wait while the xapian index is being updated.
+        del self.pages['TestCreatePage']
+
+        assert len(result.hits) == 1
+
 
 class TestMoinSearch(BaseSearchTest):
 
@@ -263,6 +275,10 @@ class TestMoinSearch(BaseSearchTest):
 
 class TestXapianSearch(BaseSearchTest):
     """ search: test Xapian indexing """
+
+    class Config(wikiconfig.Config):
+
+        xapian_search = True
 
     def get_searcher(self, query):
         return XapianSearch(self.request, query)
