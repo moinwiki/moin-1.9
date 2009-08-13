@@ -317,7 +317,7 @@ class TestXapianSearch(BaseSearchTest):
                     u'title:': ([u'', u're:', u'case:', u'case:re:'], u'SearchTestPage'),
                     u'linkto:': ([u'', u're:', u'case:', u'case:re:'], u'FrontPage'),
                     u'category:': ([u'', u're:', u'case:', u'case:re:'], u'CategoryHomepage'),
-                    u'mimetype:': ([u'', u're:'], u'text/creole'),
+                    u'mimetype:': ([u'', u're:'], u'text/text'),
                     u'language:': ([u''], u'en'),
                     u'domain:': ([u''], u'system')}
 
