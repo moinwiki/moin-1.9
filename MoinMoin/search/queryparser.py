@@ -118,15 +118,15 @@ class BaseExpression:
             if field_to_check:
                 # Check only field with given name
                 if field_to_check in data:
-                    term = data[field_to_check][0]
-                    if self.search_re.match(term):
-                        queries.append(connection.query_field(field_to_check, term))
+                    for term in data[field_to_check]:
+                        if self.search_re.match(term):
+                            queries.append(connection.query_field(field_to_check, term))
             else:
                 # Check all fields
-                for field, value in data.iteritems():
-                    term = value[0]
-                    if self.search_re.match(term):
-                        queries.append(connection.query_field(field, term))
+                for field, terms in data.iteritems():
+                    for term in terms:
+                        if self.search_re.match(term):
+                            queries.append(connection.query_field(field_to_check, term))
 
         return Query(Query.OP_OR, queries)
 
@@ -713,8 +713,11 @@ class CategorySearch(TextSearch):
                   directly below some comment lines.
         """
         kwargs['use_re'] = True
+        # XXX This breaks xapian_term because xapian index stores just categories (without "-----").
+        # Thus, self._get_query_for_search_re() can not mach anything, and empty query is returned.
         TextSearch._build_re(self,
-                r'(?m)(^-----*\s*\r?\n)(^##.*\r?\n)*^(?!##)(.*)\b%s\b' % pattern, **kwargs)
+                             r'(?m)(^-----*\s*\r?\n)(^##.*\r?\n)*^(?!##)(.*)\b%s\b' % pattern,
+                             **kwargs)
 
     def costs(self):
         return 5000 # cheaper than a TextSearch
@@ -734,7 +737,7 @@ class CategorySearch(TextSearch):
         if self.use_re:
             return self._get_query_for_search_re(connection, 'category')
         else:
-            pattern = self._pattern.lower()
+            pattern = self._pattern
             # XXX UnicodeQuery was used
             return connection.query_field('category', pattern)
 
