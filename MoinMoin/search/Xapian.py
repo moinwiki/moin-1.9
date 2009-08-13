@@ -424,7 +424,7 @@ class Index(BaseIndex):
         if not prev or prev == 1:
             return []
         # for CategoryFoo, group 'all' matched CategoryFoo, group 'key' matched just Foo
-        return [m.group('all').lower() for m in self.request.cfg.cache.page_category_regex.finditer(body[pos:])]
+        return [m.group('all') for m in self.request.cfg.cache.page_category_regex.finditer(body[pos:])]
 
     def _get_domains(self, page):
         """ Returns a generator with all the domains the page belongs to
