@@ -79,7 +79,7 @@ class BaseSearchTest(object):
     """ search: test search """
     doesnotexist = u'jfhsdaASDLASKDJ'
 
-    pages = {u'SearchTestPage': u'this is test page',
+    pages = {u'SearchTestPage': u'this is a test page',
              u'SearchTestLinks': u'SearchTestPage',
              u'SearchTestLinksLowerCase': u'searchtestpage',
              u'SearchTestOtherLinks': u'SearchTestLinks',
