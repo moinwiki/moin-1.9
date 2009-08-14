@@ -406,16 +406,16 @@ class BaseIndex:
 
         @param request: current request
         """
-        from MoinMoin.web.contexts import ScriptContext
+        import copy
         from MoinMoin.security import Permissions
         from MoinMoin.logfile import editlog
-        r = ScriptContext(request.url)
 
         class SecurityPolicy(Permissions):
 
             def read(self, *args, **kw):
                 return True
 
+        r = copy.copy(request)
         r.user.may = SecurityPolicy(r.user)
         r.editlog = editlog.EditLog(r)
         return r
