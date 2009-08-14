@@ -202,12 +202,12 @@ class BaseSearchTest(object):
         assert not result.hits
 
     def test_mimetype_search_simple(self):
-        result = self.search(u'mimetype:text/text')
-        assert len(result.hits) == 1
+        result = self.search(u'mimetype:text/wiki')
+        assert len(result.hits) == 10
 
     def test_mimetype_search_re(self):
-        result = self.search(ur'mimetype:re:\btext/text\b')
-        assert len(result.hits) == 1
+        result = self.search(ur'mimetype:re:\btext/wiki\b')
+        assert len(result.hits) == 10
 
         result = self.search(ur'category:re:\bCategoryHomepa\b')
         assert not result.hits
@@ -256,6 +256,7 @@ class BaseSearchTest(object):
     def test_create_page(self):
         self.pages['TestCreatePage'] = 'some text' # Moin serarch must search this page
         create_page(self.request, 'TestCreatePage', self.pages['TestCreatePage'])
+
         time.sleep(1) # Wait while created pages are being indexed in other thread.
         result = self.search(u'TestCreatePage')
 
@@ -317,7 +318,7 @@ class TestXapianSearch(BaseSearchTest):
                     u'title:': ([u'', u're:', u'case:', u'case:re:'], u'SearchTestPage'),
                     u'linkto:': ([u'', u're:', u'case:', u'case:re:'], u'FrontPage'),
                     u'category:': ([u'', u're:', u'case:', u'case:re:'], u'CategoryHomepage'),
-                    u'mimetype:': ([u'', u're:'], u'text/text'),
+                    u'mimetype:': ([u'', u're:'], u'text/wiki'),
                     u'language:': ([u''], u'en'),
                     u'domain:': ([u''], u'system')}
 
