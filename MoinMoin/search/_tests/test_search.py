@@ -115,6 +115,8 @@ class BaseSearchTest(object):
     def test_title_search_simple(self):
         searches = {u'title:SearchTestPage': 1,
                     u'title:LanguageSetup': 1,
+                    u'title:HelpIndex': 1,
+                    u'title:Help': 2,
                     u'title:SearchTestNotExisting': 0}
 
         def test(query, res_count):
@@ -220,10 +222,13 @@ class BaseSearchTest(object):
         result = self.search(u'domain:system')
         assert result.hits
 
-    def testTitleSearchAND(self):
+    def test_search_and(self):
         """ search: title search with AND expression """
-        result = self.search(u"title:Help title:Index")
+        result = self.search(u"title:HelpOnCreoleSyntax lang:en")
         assert len(result.hits) == 1
+
+        result = self.search(u"title:HelpOnCreoleSyntax lang:de")
+        assert len(result.hits) == 0
 
         result = self.search(u"title:Help title:%s" % self.doesnotexist)
         assert not result.hits

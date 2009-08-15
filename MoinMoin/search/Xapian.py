@@ -217,7 +217,6 @@ class WikiAnalyzer:
                                 yield both at once as a tuple (False)
         """
         for word, pos in self.raw_tokenize(value):
-            word = word.lower() # transform it into what xapian wants
             if flat_stemming:
                 yield (word, pos)
                 if self.stemmer:
@@ -636,8 +635,8 @@ class Index(BaseIndex):
                 os.unlink(os.path.join(self.dir, f))
             mode = 'add'
 
+        connection = MoinIndexerConnection(self.dir)
         try:
-            connection = MoinIndexerConnection(self.dir)
             self.touch()
             logging.debug("indexing all (%d) pages..." % len(pages))
             for pagename in pages:
