@@ -34,13 +34,29 @@ class QueryError(ValueError):
 #############################################################################
 
 
-class BaseExpression:
+class BaseExpression(object):
     """ Base class for all search terms """
 
     _tag = ""
 
-    def __init__(self):
+    def __init__(self, pattern, use_re=False, case=False):
+        """ Init a text search
+
+        @param pattern: pattern to search for, ascii string or unicode
+        @param use_re: treat pattern as re of plain text, bool
+        @param case: do case sensitive search, bool
+        """
+        self._pattern = unicode(pattern)
         self.negated = 0
+        self.use_re = use_re
+        self.case = case
+
+        if use_re:
+            self._tag += 're:'
+        if case:
+            self._tag += 'case:'
+
+        self._build_re(self._pattern, use_re=use_re, case=case)
 
     def __str__(self):
         return unicode(self).encode(config.charset, 'replace')
@@ -355,17 +371,9 @@ class TextSearch(BaseExpression):
         @param use_re: treat pattern as re of plain text, bool
         @param case: do case sensitive search, bool
         """
-        self._pattern = unicode(pattern)
-        self.negated = 0
-        self.use_re = use_re
-        self.case = case
-        self._build_re(self._pattern, use_re=use_re, case=case)
+        super(TextSearch, self).__init__(pattern, use_re, case)
+
         self.titlesearch = TitleSearch(self._pattern, use_re=use_re, case=case)
-        self._tag = ''
-        if use_re:
-            self._tag += 're:'
-        if case:
-            self._tag += 'case:'
 
     def costs(self):
         return 10000
@@ -437,24 +445,7 @@ class TextSearch(BaseExpression):
 class TitleSearch(BaseExpression):
     """ Term searches in pattern in page title only """
 
-    def __init__(self, pattern, use_re=False, case=False):
-        """ Init a title search
-
-        @param pattern: pattern to search for, ascii string or unicode
-        @param use_re: treat pattern as re of plain text, bool
-        @param case: do case sensitive search, bool
-        """
-        self._pattern = unicode(pattern)
-        self.negated = 0
-        self.use_re = use_re
-        self.case = case
-        self._build_re(self._pattern, use_re=use_re, case=case)
-
-        self._tag = 'title:'
-        if use_re:
-            self._tag += 're:'
-        if case:
-            self._tag += 'case:'
+    _tag = 'title:'
 
     def costs(self):
         return 100
@@ -535,6 +526,7 @@ class BaseFieldSearch(BaseExpression):
 class LinkSearch(BaseFieldSearch):
     """ Search the term in the pagelinks """
 
+    _tag = 'linkto:'
     _field_to_search = 'linkto'
 
     def __init__(self, pattern, use_re=False, case=True):
@@ -544,21 +536,11 @@ class LinkSearch(BaseFieldSearch):
         @param use_re: treat pattern as re of plain text, bool
         @param case: do case sensitive search, bool
         """
-        # used for search in links
-        self._pattern = pattern
-        # used for search in text
-        self._textpattern = '(' + self._pattern.replace('/', '|') + ')'
-        self.negated = 0
-        self.use_re = use_re
-        self.case = case
-        self.textsearch = TextSearch(self._textpattern, use_re=1, case=case)
-        self._build_re(unicode(pattern), use_re=use_re, case=case)
 
-        self._tag = 'linkto:'
-        if use_re:
-            self._tag += 're:'
-        if case:
-            self._tag += 'case:'
+        super(LinkSearch, self).__init__(pattern, use_re, case)
+
+        self._textpattern = '(' + pattern.replace('/', '|') + ')' # used for search in text
+        self.textsearch = TextSearch(self._textpattern, use_re=True, case=case)
 
     def costs(self):
         return 5000 # cheaper than a TextSearch
@@ -594,27 +576,18 @@ class LinkSearch(BaseFieldSearch):
 class LanguageSearch(BaseFieldSearch):
     """ Search the pages written in a language """
 
+    _tag = 'language:'
     _field_to_search = 'lang'
 
-    def __init__(self, pattern, use_re=False, case=True):
+    def __init__(self, pattern, use_re=False, case=False):
         """ Init a language search
 
         @param pattern: pattern to search for, ascii string or unicode
         @param use_re: treat pattern as re of plain text, bool
         @param case: do case sensitive search, bool
         """
-        # iso language code, always lowercase
-        self._pattern = pattern.lower()
-        self.negated = 0
-        self.use_re = use_re
-        self.case = False       # not case-sensitive!
-        self._build_re(self._pattern, use_re=use_re, case=case)
-
-        self._tag = 'language:'
-        if use_re:
-            self._tag += 're:'
-        if case:
-            self._tag += 'case:'
+        # iso language code, always lowercase and not case-sensitive
+        super(LanguageSearch, self).__init__(pattern.lower(), use_re, case=False)
 
     def costs(self):
         return 5000 # cheaper than a TextSearch
@@ -632,11 +605,12 @@ class LanguageSearch(BaseFieldSearch):
 class CategorySearch(TextSearch):
     """ Search the pages belonging to a category """
 
-    def __init__(self, *args, **kwargs):
-        TextSearch.__init__(self, *args, **kwargs)
-        self.titlesearch = None
+    _tag = 'category:'
 
-        self._tag = 'category:'
+    def __init__(self, pattern, use_re=False, case=True):
+        super(CategorySearch, self).__init__(pattern, use_re, case=case)
+
+        self.titlesearch = None
 
     def _build_re(self, pattern, **kwargs):
         """ match categories like this:
@@ -680,26 +654,18 @@ class CategorySearch(TextSearch):
 class MimetypeSearch(BaseFieldSearch):
     """ Search for files belonging to a specific mimetype """
 
+    _tag = 'mimetype:'
     _field_to_search = 'mimetype'
 
-    def __init__(self, pattern, use_re=False, case=True):
+    def __init__(self, pattern, use_re=False, case=False):
         """ Init a mimetype search
 
         @param pattern: pattern to search for, ascii string or unicode
         @param use_re: treat pattern as re of plain text, bool
         @param case: do case sensitive search, bool
         """
-        self._pattern = pattern.lower()
-        self.negated = 0
-        self.use_re = use_re
-        self.case = False # not case-sensitive!
-        self._build_re(self._pattern, use_re=use_re, case=case)
-
-        self._tag = 'mimetype:'
-        if use_re:
-            self._tag += 're:'
-        if case:
-            self._tag += 'case:'
+        # always lowercase and not case-sensitive
+        super(MimetypeSearch, self).__init__(pattern.lower(), use_re, case=False)
 
     def costs(self):
         return 5000 # cheaper than a TextSearch
@@ -720,26 +686,18 @@ class MimetypeSearch(BaseFieldSearch):
 class DomainSearch(BaseFieldSearch):
     """ Search for pages belonging to a specific domain """
 
+    _tag = 'domain:'
     _field_to_search = 'domain'
 
-    def __init__(self, pattern, use_re=False, case=True):
+    def __init__(self, pattern, use_re=False, case=False):
         """ Init a domain search
 
         @param pattern: pattern to search for, ascii string or unicode
         @param use_re: treat pattern as re of plain text, bool
         @param case: do case sensitive search, bool
         """
-        self._pattern = pattern.lower()
-        self.negated = 0
-        self.use_re = use_re
-        self.case = False # not case-sensitive!
-        self._build_re(self._pattern, use_re=use_re, case=case)
-
-        self._tag = 'domain:'
-        if use_re:
-            self._tag += 're:'
-        if case:
-            self._tag += 'case:'
+        # always lowercase and not case-sensitive
+        super(DomainSearch, self).__init__(pattern.lower(), use_re, case=False)
 
     def costs(self):
         return 5000 # cheaper than a TextSearch
