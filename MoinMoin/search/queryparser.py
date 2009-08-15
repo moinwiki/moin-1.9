@@ -484,7 +484,7 @@ class BaseFieldSearch(BaseExpression):
         if self.use_re:
             return self._get_query_for_search_re(connection, self._field_to_search)
         else:
-            return connection.query_field(self._field_to_search, self.pattern)
+            return connection.query_field(self._field_to_search, self._pattern)
 
 
 class LinkSearch(BaseFieldSearch):
