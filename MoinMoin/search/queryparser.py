@@ -60,6 +60,9 @@ class BaseExpression:
         """
         return None
 
+    def _get_matches(self, page):
+        raise NotImplementedError
+
     def search(self, page):
         """ Search a page
 
@@ -68,10 +71,23 @@ class BaseExpression:
         other terms must call this method to aggregate the results.
         This Base class returns True (Match()) if not negated.
         """
+        logging.debug("%s searching page %r for (negated = %r) %r" % (self.__class__, page.page_name, self.negated, self._pattern))
+
+        matches = self._get_matches(page)
+
+        # Decide what to do with the results.
         if self.negated:
-            return [Match()]
-        else:
-            return None
+            if matches:
+                result = None
+            else:
+                result = [Match()] # represents "matched" (but as it was a negative match, we have nothing to show)
+        else: # not negated
+            if matches:
+                result = matches
+            else:
+                result = None
+        logging.debug("%s returning %r" % (self.__class__, result))
+        return result
 
     def costs(self):
         """ Return estimated time to calculate this term
@@ -354,8 +370,7 @@ class TextSearch(BaseExpression):
     def highlight_re(self):
         return u"(%s)" % self.pattern
 
-    def search(self, page):
-        logging.debug("TextSearch searching page %r for (negated = %r) %r" % (page.page_name, self.negated, self._pattern))
+    def _get_matches(self, page):
         matches = []
 
         # Search in page name
@@ -369,19 +384,7 @@ class TextSearch(BaseExpression):
         for match in self.search_re.finditer(body):
             matches.append(TextMatch(re_match=match))
 
-        # Decide what to do with the results.
-        if self.negated:
-            if matches:
-                result = None
-            else:
-                result = [Match()] # represents "matched" (but as it was a negative match, we have nothing to show)
-        else: # not negated
-            if matches:
-                result = matches
-            else:
-                result = None
-        logging.debug("TextSearch returning %r" % result)
-        return result
+        return matches
 
     def xapian_wanted(self):
         # XXX: Add option for term-based matching
@@ -469,25 +472,14 @@ class TitleSearch(BaseExpression):
             return result
         return filter
 
-    def search(self, page):
+    def _get_matches(self, page):
         """ Get matches in page name """
-        logging.debug("TitleSearch searching page %r for (negated = %r) %r" % (page.page_name, self.negated, self._pattern))
         matches = []
+
         for match in self.search_re.finditer(page.page_name):
             matches.append(TitleMatch(re_match=match))
 
-        if self.negated:
-            if matches:
-                result = None
-            else:
-                result = [Match()] # represents "matched" (but as it was a negative match, we have nothing to show)
-        else: # not negated
-            if matches:
-                result = matches
-            else:
-                result = None
-        logging.debug("TitleSearch returning %r" % result)
-        return result
+        return matches
 
     def xapian_wanted(self):
         return True # only easy regexps possible
@@ -575,37 +567,24 @@ class LinkSearch(BaseFieldSearch):
         if case:
             self._tag += 'case:'
 
-    def _build_re(self, pattern, use_re=False, case=False):
-        """ Make a regular expression out of a text pattern """
-        flags = case and re.U or (re.I | re.U)
-        if use_re:
-            self.search_re = re.compile(pattern, flags)
-            self.pattern = pattern
-            self.static = False
-        else:
-            self.pattern = pattern
-            self.static = True
-
     def costs(self):
         return 5000 # cheaper than a TextSearch
 
     def highlight_re(self):
         return u"(%s)" % self._textpattern
 
-    def search(self, page):
+    def _get_matches(self, page):
         # Get matches in page links
-        logging.debug("LinkSearch searching page %r for (negated = %r) %r" % (page.page_name, self.negated, self._pattern))
         matches = []
-        Found = True
 
+        # XXX in python 2.5 any() may be used.
+        found = False
         for link in page.getPageLinks(page.request):
-            if ((self.static and self.pattern == link) or
-                (not self.static and self.search_re.match(link))):
+            if self.search_re.match(link):
+                found = True
                 break
-        else:
-            Found = False
 
-        if Found:
+        if found:
             # Search in page text
             results = self.textsearch.search(page)
             if results:
@@ -613,19 +592,7 @@ class LinkSearch(BaseFieldSearch):
             else: # This happens e.g. for pages that use navigation macros
                 matches.append(TextMatch(0, 0))
 
-        # Decide what to do with the results.
-        if self.negated:
-            if matches:
-                result = None
-            else:
-                result = [Match()] # represents "matched" (but as it was a negative match, we have nothing to show)
-        else: # not negated
-            if matches:
-                result = matches
-            else:
-                result = None
-        logging.debug("LinkSearch returning %r" % result)
-        return result
+        return matches
 
     def xapian_wanted(self):
         return True # only easy regexps possible
@@ -665,24 +632,12 @@ class LanguageSearch(BaseFieldSearch):
     def highlight_re(self):
         return u""
 
-    def search(self, page):
-        logging.debug("LanguageSearch searching page %r for (negated = %r) %r" % (page.page_name, self.negated, self._pattern))
+    def _get_matches(self, page):
 
-        match = self.pattern == page.pi['language']
-
-        # Decide what to do with the results.
-        if self.negated:
-            if match:
-                result = None
-            else:
-                result = [Match()] # represents "matched" (but as it was a negative match, we have nothing to show)
-        else: # not negated
-            if match:
-                result = [Match()] # represents "matched" (but we have nothing to show)
-            else:
-                result = None
-        logging.debug("LanguageSearch returning %r" % result)
-        return result
+        if self.pattern == page.pi['language']:
+            return [Match()]
+        else:
+            return []
 
     def xapian_wanted(self):
         return True # only easy regexps possible
@@ -772,13 +727,14 @@ class MimetypeSearch(BaseFieldSearch):
     def highlight_re(self):
         return u""
 
-    def search(self, page):
+    def _get_matches(self, page):
+
         page_mimetype = u'text/%s' % page.pi['format']
-        matches = self.search_re.search(page_mimetype)
-        if matches and not self.negated or not matches and self.negated:
+
+        if self.search_re.search(page_mimetype):
             return [Match()]
         else:
-            return None
+            return []
 
     def xapian_wanted(self):
         return True # only easy regexps possible
@@ -817,8 +773,7 @@ class DomainSearch(BaseFieldSearch):
     def highlight_re(self):
         return u""
 
-    def search(self, page):
-        logging.debug("DomainSearch searching page %r for (negated = %r) %r" % (page.page_name, self.negated, self._pattern))
+    def _get_matches(self, page):
         checks = {'underlay': page.isUnderlayPage,
                   'standard': page.isStandardPage,
                   'system': lambda page=page: wikiutil.isSystemPage(page.request, page.page_name),
@@ -829,19 +784,10 @@ class DomainSearch(BaseFieldSearch):
         except KeyError:
             match = False
 
-        # Decide what to do with the results.
-        if self.negated:
-            if match:
-                result = None
-            else:
-                result = [Match()] # represents "matched" (but as it was a negative match, we have nothing to show)
-        else: # not negated
-            if match:
-                result = [Match()] # represents "matched" (but we have nothing to show)
-            else:
-                result = None
-        logging.debug("DomainSearch returning %r" % result)
-        return result
+        if match:
+            return [Match()]
+        else:
+            return []
 
     def xapian_wanted(self):
         return True # only easy regexps possible
