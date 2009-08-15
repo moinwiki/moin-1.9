@@ -158,9 +158,6 @@ class BaseExpression(object):
 
         return Query(Query.OP_OR, queries)
 
-    def xapian_wanted(self):
-        return False
-
     def xapian_need_postproc(self):
         return self.case
 
@@ -246,12 +243,6 @@ class AndExpression(BaseExpression):
                 result.append(highlight_re)
 
         return u'|'.join(result)
-
-    def xapian_wanted(self):
-        wanted = True
-        for term in self._subterms:
-            wanted = wanted and term.xapian_wanted()
-        return wanted
 
     def xapian_need_postproc(self):
         for term in self._subterms:
@@ -387,10 +378,6 @@ class TextSearch(BaseExpression):
 
         return matches
 
-    def xapian_wanted(self):
-        # XXX: Add option for term-based matching
-        return not self.use_re
-
     def xapian_term(self, request, connection):
         # XXX next version of xappy (>0.5) will provide Query class
         # it should be used.
@@ -455,9 +442,6 @@ class TitleSearch(BaseExpression):
             matches.append(TitleMatch(re_match=match))
 
         return matches
-
-    def xapian_wanted(self):
-        return True # only easy regexps possible
 
     def xapian_term(self, request, connection):
         if self.use_re:
@@ -555,9 +539,6 @@ class LinkSearch(BaseFieldSearch):
 
         return matches
 
-    def xapian_wanted(self):
-        return True # only easy regexps possible
-
 
 class LanguageSearch(BaseFieldSearch):
     """ Search the pages written in a language """
@@ -582,9 +563,6 @@ class LanguageSearch(BaseFieldSearch):
             return [Match()]
         else:
             return []
-
-    def xapian_wanted(self):
-        return True # only easy regexps possible
 
 
 class CategorySearch(TextSearch):
@@ -619,9 +597,6 @@ class CategorySearch(TextSearch):
 
     def highlight_re(self):
         return u'(\\b%s\\b)' % self._pattern
-
-    def xapian_wanted(self):
-        return True # only easy regexps possible
 
     def xapian_term(self, request, connection):
         # XXX Probably, it is a good idea to inherit this class from
@@ -660,9 +635,6 @@ class MimetypeSearch(BaseFieldSearch):
         else:
             return []
 
-    def xapian_wanted(self):
-        return True # only easy regexps possible
-
 
 class DomainSearch(BaseFieldSearch):
     """ Search for pages belonging to a specific domain """
@@ -696,9 +668,6 @@ class DomainSearch(BaseFieldSearch):
             return [Match()]
         else:
             return []
-
-    def xapian_wanted(self):
-        return True # only easy regexps possible
 
 
 ##############################################################################
