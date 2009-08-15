@@ -682,12 +682,12 @@ class convert_tree(visitor):
         found = False
         need_indent = False
         pending = []
-        
+
         # If this is a empty list item, we just terminate the line
         if node.childNodes.length == 0:
             self.text.append(self.new_line)
             return
-        
+
         for i in node.childNodes:
             name = i.localName
 
