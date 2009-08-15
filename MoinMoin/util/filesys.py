@@ -7,7 +7,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import sys, os, shutil, time, errno
+import sys, os, shutil, time, errno, random
 from stat import S_ISDIR, ST_MODE, S_IMODE
 
 from MoinMoin import log
@@ -42,12 +42,41 @@ def rename(oldname, newname):
     rename, then unlock when finished.
     """
     if os.name == 'nt':
-        if os.path.isfile(newname):
-            try:
-                os.remove(newname)
-            except OSError:
-                pass # let os.rename give us the error (if any)
-    os.rename(oldname, newname)
+        # Windows "rename" taken from Mercurial's util.py. Thanks!
+        try:
+            os.rename(oldname, newname)
+        except OSError, err:
+            # On windows, rename to existing file is not allowed, so we
+            # must delete destination first. But if a file is open, unlink
+            # schedules it for delete but does not delete it. Rename
+            # happens immediately even for open files, so we rename
+            # destination to a temporary name, then delete that. Then
+            # rename is safe to do.
+            # The temporary name is chosen at random to avoid the situation
+            # where a file is left lying around from a previous aborted run.
+            # The usual race condition this introduces can't be avoided as
+            # we need the name to rename into, and not the file itself. Due
+            # to the nature of the operation however, any races will at worst
+            # lead to the rename failing and the current operation aborting.
+
+            if err.errno != errno.EEXIST:
+                raise
+
+            def tempname(prefix):
+                for tries in xrange(10):
+                    temp = '%s-%08x' % (prefix, random.randint(0, 0xffffffff))
+                    if not os.path.exists(temp):
+                        return temp
+                raise IOError, (errno.EEXIST, "No usable temporary filename found")
+
+            temp = tempname(newname)
+            os.rename(newname, temp)
+            os.unlink(temp)
+            os.rename(oldname, newname)
+    else:
+        # POSIX: just do it :)
+        os.rename(oldname, newname)
+
 
 def touch(name):
     if sys.platform == 'win32':
