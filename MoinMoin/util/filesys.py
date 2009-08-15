@@ -77,6 +77,40 @@ def rename(oldname, newname):
         # POSIX: just do it :)
         os.rename(oldname, newname)
 
+rename_overwrite = rename
+
+def rename_no_overwrite(oldname, newname, delete_old=False):
+    """ Multiplatform rename
+
+    This kind of rename is doing things differently: it fails if newname
+    already exists. This is the usual thing on win32, but not on posix.
+
+    If delete_old is True, oldname is removed in any case (even if the
+    rename did not succeed).
+    """
+    if os.name == 'nt':
+        try:
+            try:
+                os.rename(oldname, newname)
+                success = True
+            except:
+                success = False
+                raise
+        finally:
+            if not success and delete_old:
+                os.unlink(oldname)
+    else:
+        try:
+            try:
+                os.link(oldname, newname)
+                success = True
+            except:
+                success = False
+                raise
+        finally:
+            if success or delete_old:
+                os.unlink(oldname)
+
 
 def touch(name):
     if sys.platform == 'win32':
