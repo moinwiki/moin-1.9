@@ -37,6 +37,10 @@ class QueryError(ValueError):
 class BaseExpression(object):
     """ Base class for all search terms """
 
+    # costs is estimated time to calculate this term.
+    # Number is relative to other terms and has no real unit.
+    # It allows to do the fast searches first.
+    costs = 0
     _tag = ""
 
     def __init__(self, pattern, use_re=False, case=False):
@@ -105,14 +109,6 @@ class BaseExpression(object):
         logging.debug("%s returning %r" % (self.__class__, result))
         return result
 
-    def costs(self):
-        """ Return estimated time to calculate this term
-
-        Number is relative to other terms and has no real unit.
-        It allows to do the fast searches first.
-        """
-        return 0
-
     def highlight_re(self):
         """ Return a regular expression of what the term searches for
 
@@ -180,21 +176,18 @@ class AndExpression(BaseExpression):
 
     def __init__(self, *terms):
         self._subterms = list(terms)
-        self._costs = 0
-        for t in self._subterms:
-            self._costs += t.costs()
         self.negated = 0
 
     def append(self, expression):
         """ Append another term """
         self._subterms.append(expression)
-        self._costs += expression.costs()
 
     def subterms(self):
         return self._subterms
 
+    @property
     def costs(self):
-        return self._costs
+        return sum([t.costs for t in self._subterms])
 
     def __unicode__(self):
         result = ''
@@ -232,9 +225,7 @@ class AndExpression(BaseExpression):
         return None
 
     def sortByCost(self):
-        tmp = [(term.costs(), term) for term in self._subterms]
-        tmp.sort()
-        self._subterms = [item[1] for item in tmp]
+        self._subterms.sort(key=lambda t: t.costs)
 
     def search(self, page):
         """ Search for each term, cheap searches first """
@@ -364,6 +355,8 @@ class TextSearch(BaseExpression):
     additional TitleSearch term.
     """
 
+    costs = 10000
+
     def __init__(self, pattern, use_re=False, case=False):
         """ Init a text search
 
@@ -374,9 +367,6 @@ class TextSearch(BaseExpression):
         super(TextSearch, self).__init__(pattern, use_re, case)
 
         self.titlesearch = TitleSearch(self._pattern, use_re=use_re, case=case)
-
-    def costs(self):
-        return 10000
 
     def highlight_re(self):
         return u"(%s)" % self.pattern
@@ -446,9 +436,7 @@ class TitleSearch(BaseExpression):
     """ Term searches in pattern in page title only """
 
     _tag = 'title:'
-
-    def costs(self):
-        return 100
+    costs = 100
 
     def pageFilter(self):
         """ Page filter function for single title search """
@@ -528,6 +516,7 @@ class LinkSearch(BaseFieldSearch):
 
     _tag = 'linkto:'
     _field_to_search = 'linkto'
+    costs = 5000 # cheaper than a TextSearch
 
     def __init__(self, pattern, use_re=False, case=True):
         """ Init a link search
@@ -541,9 +530,6 @@ class LinkSearch(BaseFieldSearch):
 
         self._textpattern = '(' + pattern.replace('/', '|') + ')' # used for search in text
         self.textsearch = TextSearch(self._textpattern, use_re=True, case=case)
-
-    def costs(self):
-        return 5000 # cheaper than a TextSearch
 
     def highlight_re(self):
         return u"(%s)" % self._textpattern
@@ -578,6 +564,7 @@ class LanguageSearch(BaseFieldSearch):
 
     _tag = 'language:'
     _field_to_search = 'lang'
+    costs = 5000 # cheaper than a TextSearch
 
     def __init__(self, pattern, use_re=False, case=False):
         """ Init a language search
@@ -589,9 +576,6 @@ class LanguageSearch(BaseFieldSearch):
         # iso language code, always lowercase and not case-sensitive
         super(LanguageSearch, self).__init__(pattern.lower(), use_re, case=False)
 
-    def costs(self):
-        return 5000 # cheaper than a TextSearch
-
     def _get_matches(self, page):
 
         if self.pattern == page.pi['language']:
@@ -602,10 +586,12 @@ class LanguageSearch(BaseFieldSearch):
     def xapian_wanted(self):
         return True # only easy regexps possible
 
+
 class CategorySearch(TextSearch):
     """ Search the pages belonging to a category """
 
     _tag = 'category:'
+    costs = 5000 # cheaper than a TextSearch
 
     def __init__(self, pattern, use_re=False, case=True):
         super(CategorySearch, self).__init__(pattern, use_re, case=case)
@@ -631,9 +617,6 @@ class CategorySearch(TextSearch):
                              r'(?m)(^-----*\s*\r?\n)(^##.*\r?\n)*^(?!##)(.*)\b%s\b' % pattern,
                              **kwargs)
 
-    def costs(self):
-        return 5000 # cheaper than a TextSearch
-
     def highlight_re(self):
         return u'(\\b%s\\b)' % self._pattern
 
@@ -656,6 +639,7 @@ class MimetypeSearch(BaseFieldSearch):
 
     _tag = 'mimetype:'
     _field_to_search = 'mimetype'
+    costs = 5000 # cheaper than a TextSearch
 
     def __init__(self, pattern, use_re=False, case=False):
         """ Init a mimetype search
@@ -666,9 +650,6 @@ class MimetypeSearch(BaseFieldSearch):
         """
         # always lowercase and not case-sensitive
         super(MimetypeSearch, self).__init__(pattern.lower(), use_re, case=False)
-
-    def costs(self):
-        return 5000 # cheaper than a TextSearch
 
     def _get_matches(self, page):
 
@@ -688,6 +669,7 @@ class DomainSearch(BaseFieldSearch):
 
     _tag = 'domain:'
     _field_to_search = 'domain'
+    costs = 5000 # cheaper than a TextSearch
 
     def __init__(self, pattern, use_re=False, case=False):
         """ Init a domain search
@@ -698,9 +680,6 @@ class DomainSearch(BaseFieldSearch):
         """
         # always lowercase and not case-sensitive
         super(DomainSearch, self).__init__(pattern.lower(), use_re, case=False)
-
-    def costs(self):
-        return 5000 # cheaper than a TextSearch
 
     def _get_matches(self, page):
         checks = {'underlay': page.isUnderlayPage,
