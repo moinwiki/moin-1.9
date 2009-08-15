@@ -149,6 +149,9 @@ class BaseExpression:
     def xapian_wanted(self):
         return False
 
+    def xapian_need_postproc(self):
+        return self.case
+
     def __unicode__(self):
         neg = self.negated and '-' or ''
         return u'%s%s"%s"' % (neg, self._tag, unicode(self._pattern))
@@ -390,9 +393,6 @@ class TextSearch(BaseExpression):
         # XXX: Add option for term-based matching
         return not self.use_re
 
-    def xapian_need_postproc(self):
-        return self.case
-
     def xapian_term(self, request, connection):
         # XXX next version of xappy (>0.5) will provide Query class
         # it should be used.
@@ -479,9 +479,6 @@ class TitleSearch(BaseExpression):
 
     def xapian_wanted(self):
         return True # only easy regexps possible
-
-    def xapian_need_postproc(self):
-        return self.case
 
     def xapian_term(self, request, connection):
         if self.use_re:
@@ -593,9 +590,6 @@ class LinkSearch(BaseFieldSearch):
     def xapian_wanted(self):
         return True # only easy regexps possible
 
-    def xapian_need_postproc(self):
-        return self.case
-
 
 class LanguageSearch(BaseFieldSearch):
     """ Search the pages written in a language """
@@ -635,10 +629,6 @@ class LanguageSearch(BaseFieldSearch):
     def xapian_wanted(self):
         return True # only easy regexps possible
 
-    def xapian_need_postproc(self):
-        return False # case-sensitivity would make no sense
-
-
 class CategorySearch(TextSearch):
     """ Search the pages belonging to a category """
 
@@ -675,9 +665,6 @@ class CategorySearch(TextSearch):
 
     def xapian_wanted(self):
         return True # only easy regexps possible
-
-    def xapian_need_postproc(self):
-        return self.case
 
     def xapian_term(self, request, connection):
         # XXX Probably, it is a good idea to inherit this class from
@@ -729,9 +716,6 @@ class MimetypeSearch(BaseFieldSearch):
     def xapian_wanted(self):
         return True # only easy regexps possible
 
-    def xapian_need_postproc(self):
-        return False # case-sensitivity would make no sense
-
 
 class DomainSearch(BaseFieldSearch):
     """ Search for pages belonging to a specific domain """
@@ -778,9 +762,6 @@ class DomainSearch(BaseFieldSearch):
 
     def xapian_wanted(self):
         return True # only easy regexps possible
-
-    def xapian_need_postproc(self):
-        return False # case-sensitivity would make no sense
 
 
 ##############################################################################
