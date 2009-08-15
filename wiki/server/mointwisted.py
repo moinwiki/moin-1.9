@@ -33,7 +33,6 @@ import sys, os
 # Debug mode - show detailed error reports
 #os.environ['MOIN_DEBUG'] = '1'
 
-
 from MoinMoin.server.server_twisted import TwistedConfig, makeApp
 
 
