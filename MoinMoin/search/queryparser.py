@@ -254,6 +254,7 @@ class AndExpression(BaseExpression):
         # sort negated terms
         terms = []
         not_terms = []
+
         for term in self._subterms:
             if not term.negated:
                 terms.append(term.xapian_term(request, connection))
@@ -261,28 +262,18 @@ class AndExpression(BaseExpression):
                 not_terms.append(term.xapian_term(request, connection))
 
         # prepare query for not negated terms
-        if not terms:
-            t1 = None
-        elif len(terms) == 1:
-            t1 = Query(terms[0])
+        if terms:
+            query = Query(Query.OP_AND, terms)
         else:
-            t1 = Query(Query.OP_AND, terms)
+            query = Query('') # MatchAll
 
         # prepare query for negated terms
-        if not not_terms:
-            t2 = None
-        elif len(not_terms) == 1:
-            t2 = Query(not_terms[0])
+        if not_terms:
+            query_negated = Query(Query.OP_OR, not_terms)
         else:
-            t2 = Query(Query.OP_OR, not_terms)
+            query_negated = Query()
 
-        if t1 and not t2:
-            return t1
-        elif t2 and not t1:
-            return Query(Query.OP_AND_NOT, Query(""), t2)  # Query("") == MatchAll
-        else:
-            # yes, link not negated and negated terms' query with a AND_NOT query
-            return Query(Query.OP_AND_NOT, t1, t2)
+        return Query(Query.OP_AND_NOT, query, query_negated)
 
 
 class OrExpression(AndExpression):
@@ -474,6 +465,7 @@ class TitleSearch(BaseExpression):
                     # XXX UnicodeQuery was used here!
                     t = [connection.query_field('title', w) for w, pos in analyzer.tokenize(term)]
 
+                # XXX what should be there OR or AND?!
                 queries.append(Query(Query.OP_OR, t))
 
             if not self.case and stemmed:
