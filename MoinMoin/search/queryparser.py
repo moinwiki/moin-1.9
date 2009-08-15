@@ -459,10 +459,6 @@ class TitleSearch(BaseExpression):
     def costs(self):
         return 100
 
-    def highlight_re(self):
-        return u'' # do not highlight text with stuff from titlesearch,
-                   # was: return u"(%s)" % self._pattern
-
     def pageFilter(self):
         """ Page filter function for single title search """
         def filter(name):
@@ -629,9 +625,6 @@ class LanguageSearch(BaseFieldSearch):
     def costs(self):
         return 5000 # cheaper than a TextSearch
 
-    def highlight_re(self):
-        return u""
-
     def _get_matches(self, page):
 
         if self.pattern == page.pi['language']:
@@ -724,9 +717,6 @@ class MimetypeSearch(BaseFieldSearch):
     def costs(self):
         return 5000 # cheaper than a TextSearch
 
-    def highlight_re(self):
-        return u""
-
     def _get_matches(self, page):
 
         page_mimetype = u'text/%s' % page.pi['format']
@@ -769,9 +759,6 @@ class DomainSearch(BaseFieldSearch):
 
     def costs(self):
         return 5000 # cheaper than a TextSearch
-
-    def highlight_re(self):
-        return u""
 
     def _get_matches(self, page):
         checks = {'underlay': page.isUnderlayPage,
