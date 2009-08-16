@@ -187,6 +187,20 @@ class AndExpression(BaseExpression):
             result += self.operator + unicode(t)
         return u'[' + result[len(self.operator):] + u']'
 
+    def _filter(self, terms, name):
+        """ A function that returns True if all terms filter name """
+        result = None
+        for term in terms:
+            _filter = term.pageFilter()
+            t = _filter(name)
+            if t is True:
+                result = True
+            elif t is False:
+                result = False
+                break
+        logging.debug("pageFilter AND returns %r" % result)
+        return result
+
     def pageFilter(self):
         """ Return a page filtering function
 
@@ -198,23 +212,7 @@ class AndExpression(BaseExpression):
         self.sortByCost()
         terms = [term for term in self._subterms if isinstance(term, TitleSearch)]
         if terms:
-            # Create and return a filter function
-            def filter(name):
-                """ A function that returns True if all terms filter name """
-                result = None
-                for term in terms:
-                    _filter = term.pageFilter()
-                    t = _filter(name)
-                    if t is False:
-                        result = False
-                        break
-                    elif t is True:
-                        result = True
-                logging.debug("pageFilter AND returns %r" % result)
-                return result
-            return filter
-
-        return None
+            return lambda name: self._filter(terms, name)
 
     def sortByCost(self):
         self._subterms.sort(key=lambda t: t.costs)
@@ -276,33 +274,19 @@ class OrExpression(AndExpression):
 
     operator = ' or '
 
-    def pageFilter(self):
-        """ Return a page filtering function
-
-        This function is used to filter page list before we search it.
-
-        Return a function that gets a page name, and return bool, or None.
-        """
-        # Sort terms by cost, then get all title searches
-        self.sortByCost()
-        terms = [term for term in self._subterms if isinstance(term, TitleSearch)]
-        if terms:
-            # Create and return a filter function
-            def filter(name):
-                """ A function that returns True if any term filters name """
-                result = None
-                for term in terms:
-                    _filter = term.pageFilter()
-                    t = _filter(name)
-                    if t is True:
-                        return True
-                    elif t is False:
-                        result = False
-                logging.debug("pageFilter OR returns %r" % result)
-                return result
-            return filter
-
-        return None
+    def _filter(self, terms, name):
+        """ A function that returns True if any term filters name """
+        result = None
+        for term in terms:
+            _filter = term.pageFilter()
+            t = _filter(name)
+            if t is True:
+                result = True
+                break
+            elif t is False:
+                result = False
+        logging.debug("pageFilter OR returns %r" % result)
+        return result
 
     def search(self, page):
         """ Search page with terms
