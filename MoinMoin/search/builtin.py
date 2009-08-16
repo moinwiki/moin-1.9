@@ -18,8 +18,7 @@ logging = log.getLogger(__name__)
 from MoinMoin import wikiutil, config
 from MoinMoin.Page import Page
 from MoinMoin.util import lock, filesys
-from MoinMoin.search.results import getSearchResults
-from MoinMoin.search.queryparser import Match, TextMatch, TitleMatch
+from MoinMoin.search.results import getSearchResults, Match, TextMatch, TitleMatch, getSearchResults
 
 ##############################################################################
 # Search Engine Abstraction
