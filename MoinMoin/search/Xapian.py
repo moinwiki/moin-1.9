@@ -524,12 +524,6 @@ class Index(BaseIndex):
         pagename = page.page_name
         mtime = page.mtime_usecs()
         revision = str(page.get_real_rev())
-        if revision == '99999999':
-            # XXX
-            # While page is being created with MoinMoin._tests.create_page, it is indexed and has revision 99999999.
-            # This magic number is taken from http://hg.moinmo.in/moin/1.9/file/dce251f8cfc3/MoinMoin/Page.py#l307
-            # Note that a page object which create_page returns will have right revision!
-            revision = '0'
         itemid = "%s:%s:%s" % (wikiname, pagename, revision)
         author = page.edit_info().get('editor', '?')
         # XXX: Hack until we get proper metadata
