@@ -60,7 +60,7 @@ class BaseExpression(object):
         if case:
             self._tag += 'case:'
 
-        self._build_re(self._pattern, use_re=use_re, case=case)
+        self.pattern, self.search_re = self._build_re(self._pattern, use_re=use_re, case=case)
 
     def __str__(self):
         return unicode(self).encode(config.charset, 'replace')
@@ -119,19 +119,14 @@ class BaseExpression(object):
     def _build_re(self, pattern, use_re=False, case=False, stemmed=False):
         """ Make a regular expression out of a text pattern """
         flags = case and re.U or (re.I | re.U)
-        if use_re:
-            try:
-                self.search_re = re.compile(pattern, flags)
-            except re.error:
-                pattern = re.escape(pattern)
-                self.pattern = pattern
-                self.search_re = re.compile(pattern, flags)
-            else:
-                self.pattern = pattern
-        else:
+
+        try:
+            search_re = re.compile(pattern, flags)
+        except re.error:
             pattern = re.escape(pattern)
-            self.search_re = re.compile(pattern, flags)
-            self.pattern = pattern
+            search_re = re.compile(pattern, flags)
+
+        return pattern, search_re
 
     def _get_query_for_search_re(self, connection, field_to_check=None):
         """
@@ -339,17 +334,6 @@ class TextSearch(BaseExpression):
 
     costs = 10000
 
-    def __init__(self, pattern, use_re=False, case=False):
-        """ Init a text search
-
-        @param pattern: pattern to search for, ascii string or unicode
-        @param use_re: treat pattern as re of plain text, bool
-        @param case: do case sensitive search, bool
-        """
-        super(TextSearch, self).__init__(pattern, use_re, case)
-
-        self.titlesearch = TitleSearch(self._pattern, use_re=use_re, case=case)
-
     def highlight_re(self):
         return u"(%s)" % self.pattern
 
@@ -357,10 +341,9 @@ class TextSearch(BaseExpression):
         matches = []
 
         # Search in page name
-        if self.titlesearch:
-            results = self.titlesearch.search(page)
-            if results:
-                matches.extend(results)
+        results = TitleSearch(self._pattern, use_re=self.use_re, case=self.case)._get_matches(page)
+        if results:
+            matches.extend(results)
 
         # Search in page body
         body = page.get_raw_body()
@@ -398,16 +381,14 @@ class TextSearch(BaseExpression):
 
                 queries.append(Query(connection.OP_AND, t))
 
+            # XXX Is it required to change pattern and search_re here?
             if not self.case and stemmed:
                 new_pat = ' '.join(stemmed)
                 self._pattern = new_pat
-                self._build_re(new_pat, use_re=False, case=self.case, stemmed=True)
+                self.pattern, self.search_re = self._build_re(new_pat, use_re=False, case=self.case, stemmed=True)
 
-        # titlesearch OR parsed wikiwords
-        return Query(Query.OP_OR,
-                     # XXX allterms for titlesearch
-                     [self.titlesearch.xapian_term(request, connection),
-                      Query(Query.OP_AND, queries)])
+        title_query = TitleSearch(self._pattern, use_re=self.use_re, case=self.case).xapian_term(request, connection)
+        return Query(Query.OP_OR, [title_query, Query(Query.OP_AND, queries)])
 
 
 class TitleSearch(BaseExpression):
@@ -557,18 +538,14 @@ class LanguageSearch(BaseFieldSearch):
             return []
 
 
-class CategorySearch(TextSearch):
+class CategorySearch(BaseFieldSearch):
     """ Search the pages belonging to a category """
 
     _tag = 'category:'
+    _field_to_search = 'category'
     costs = 5000 # cheaper than a TextSearch
 
-    def __init__(self, pattern, use_re=False, case=True):
-        super(CategorySearch, self).__init__(pattern, use_re, case=case)
-
-        self.titlesearch = None
-
-    def _build_re(self, pattern, **kwargs):
+    def _get_matches(self, page):
         """ match categories like this:
             ... some page text ...
             ----
@@ -580,12 +557,16 @@ class CategorySearch(TextSearch):
                   must be on a single line either directly below the ---- or
                   directly below some comment lines.
         """
-        kwargs['use_re'] = True
-        # XXX This breaks xapian_term because xapian index stores just categories (without "-----").
-        # Thus, self._get_query_for_search_re() can not mach anything, and empty query is returned.
-        TextSearch._build_re(self,
-                             r'(?m)(^-----*\s*\r?\n)(^##.*\r?\n)*^(?!##)(.*)\b%s\b' % pattern,
-                             **kwargs)
+        matches = []
+
+        pattern = r'(?m)(^-----*\s*\r?\n)(^##.*\r?\n)*^(?!##)(.*)\b%s\b' % self.pattern
+        search_re = self._build_re(pattern, use_re=self.use_re, case=self.case)[1] # we need only a regexp, but not a pattern
+
+        body = page.get_raw_body()
+        for match in search_re.finditer(body):
+            matches.append(TextMatch(re_match=match))
+
+        return matches
 
     def highlight_re(self):
         return u'(\\b%s\\b)' % self._pattern

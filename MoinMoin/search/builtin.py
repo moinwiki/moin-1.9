@@ -672,7 +672,7 @@ class XapianSearch(BaseSearch):
         finally:
             clock.stop('_xapianSearch')
 
-        # some postprocessing by _moinSearch is required
-        return MoinSearch(self.request, self.query, self.sort, self.mtime, self.historysearch, pages=None)._search()
+        # some postprocessing by MoinSearch is required
+        return MoinSearch(self.request, self.query, self.sort, self.mtime, self.historysearch, pages=pages)._search()
 
 
