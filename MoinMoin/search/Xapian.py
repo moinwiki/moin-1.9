@@ -238,9 +238,8 @@ class Index(BaseIndex):
 
     def _check_version(self):
         """ Checks if the correct version of Xapian is installed """
-        # XXX xappy checks version on import!
         # every version greater than or equal to XAPIAN_MIN_VERSION is allowed
-        XAPIAN_MIN_VERSION = (1, 0, 0)
+        XAPIAN_MIN_VERSION = (1, 0, 6)
         major, minor, revision = xapian.major_version(), xapian.minor_version(), xapian.revision()
         if (major, minor, revision) >= XAPIAN_MIN_VERSION:
             return
