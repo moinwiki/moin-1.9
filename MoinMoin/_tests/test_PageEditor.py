@@ -168,6 +168,7 @@ class TestSave(object):
 
     def teardown_method(self, method):
         self.request.cfg.event_handlers = self.old_handlers
+        nuke_page(self.request, u'AutoCreatedMoinMoinTemporaryTestPageFortestSave')
 
     def testSaveAbort(self):
         """Test if saveText() is interrupted if PagePreSave event handler returns Abort"""

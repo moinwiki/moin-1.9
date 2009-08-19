@@ -20,7 +20,11 @@
 import py
 #py.test.skip("broken")
 
+from MoinMoin import i18n
+i18n_wikiLanguages = i18n.wikiLanguages
+# convert_wiki overwrites i18n.wikiLanguages, we revert this change for following tests
 from MoinMoin.script.migration._conv160a_wiki import convert_wiki
+i18n.wikiLanguages = i18n_wikiLanguages
 
 class TestWikiConversion:
     """ test the wiki markup conversion 1.6.0a -> 1.6.0 """
