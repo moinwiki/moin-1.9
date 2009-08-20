@@ -17,7 +17,6 @@ from MoinMoin import user
 from MoinMoin.action.AttachFile import add_attachment, AttachmentAlreadyExists
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
-from MoinMoin.request.request_cli import Request as RequestCLI
 # python, at least up to 2.4, ships a broken parser for headers
 from MoinMoin.support.HeaderFixed import decode_header
 
@@ -184,7 +183,7 @@ def get_pagename_content(request, msg):
         generate_summary = True
         pagename = pagename[1:].lstrip()
 
-    pagename = request.normalizePagename(pagename)
+    pagename = wikiutil.normalize_pagename(pagename, request.cfg)
 
     if choose_html and msg['html']:
         content = "{{{#!html\n%s\n}}}" % msg['html'].replace("}}}", "} } }")
@@ -313,11 +312,12 @@ def import_mail_from_message(request, message):
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
-        url = sys.argv[1]
+        request_url = sys.argv[1]
     else:
-        url = 'localhost/'
+        request_url = None
 
-    request = RequestCLI(url=url)
+    from MoinMoin.web.contexts import ScriptContext
+    request = ScriptContext(url=request_url)
 
     try:
         import_mail_from_file(request, infile)
