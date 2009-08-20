@@ -115,7 +115,7 @@ class TestWikiConversion:
             # macros
             ('[[BR]]', {}, '<<BR>>'),
             ('[[FullSearch(wtf)]]', {}, '<<FullSearch(wtf)>>'),
-            (u'[[ImageLink(t�st.png)]]', {}, u'[[attachment:t�st.png|{{attachment:t�st.png}}]]'),
+            (u'[[ImageLink(töst.png)]]', {}, u'[[attachment:töst.png|{{attachment:töst.png}}]]'),
             ('[[ImageLink(test.png,OtherPage)]]', {}, '[[OtherPage|{{attachment:test.png}}]]'),
             ('[[ImageLink(test.png,OtherPage,width=123,height=456)]]', {}, '[[OtherPage|{{attachment:test.png||width=123, height=456}}]]'),
             ('[[ImageLink(test.png,OtherPage,width=123,height=456,alt=alttext)]]', {}, '[[OtherPage|{{attachment:test.png|alttext|width=123, height=456}}]]'),
