@@ -206,14 +206,6 @@ class Index(BaseIndex):
 
         connection.close()
 
-    def termpositions(self, uid, term):
-        """ Fetches all positions of a term in a document
-
-        @param uid: document id of the item in the xapian index
-        @param term: the term as a string
-        """
-        raise NotImplementedError, "XXX xappy doesn't require this"
-
     def _index_file(self, request, writer, filename, mode='update'):
         """ index a file as it were a page named pagename
             Assumes that the write lock is acquired
