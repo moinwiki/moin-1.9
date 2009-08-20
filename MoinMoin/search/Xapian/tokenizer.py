@@ -98,20 +98,23 @@ class WikiAnalyzer(object):
                     for word, pos in self.raw_tokenize_word(m.group("word"), m.start()):
                         yield word, pos
 
-    def tokenize(self, value, flat_stemming=True):
-        """ Yield a stream of lower cased raw and stemmed words from a string.
+    def tokenize(self, value):
+        """
+        Yield a stream of raw and stemmed words from a string.
 
         @param value: string to split, must be an unicode object or a list of
                       unicode objects
-        @keyword flat_stemming: whether to yield stemmed terms automatically
-                                with the natural forms (True) or
-                                yield both at once as a tuple (False)
         """
+        if self.stemmer:
+            def stemmer(value):
+                stemmed = self.stemmer(value)
+                if stemmed != value:
+                    return stemmed
+                else:
+                    return ''
+        else:
+            stemmer = lambda v: ''
+
         for word, pos in self.raw_tokenize(value):
-            if flat_stemming:
-                yield (word, pos)
-                if self.stemmer:
-                    yield (self.stemmer(word), pos)
-            else:
-                yield (word, self.stemmer(word), pos)
+                yield word, stemmer(word)
 
