@@ -1,29 +1,32 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - xapian search engine
+    MoinMoin - xapian search engine indexing
 
     @copyright: 2006-2008 MoinMoin:ThomasWaldmann,
                 2006 MoinMoin:FranzPletz
+                2009 MoinMoin:DmitrijsMilajevs
     @license: GNU GPL, see COPYING for details.
 """
 
 import os, re
-
 import xapian
-from xapian import Query
 
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
 from MoinMoin.support import xappy
 from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
+from MoinMoin.search.builtin import BaseIndex
 
 from MoinMoin.Page import Page
 from MoinMoin import config, wikiutil
-from MoinMoin.search.builtin import BaseIndex
 
 
-class UnicodeQuery(Query):
+class Query(xapian.Query):
+    pass
+
+
+class UnicodeQuery(xapian.Query):
     """ Xapian query object which automatically encodes unicode strings """
 
     def __init__(self, *args, **kwargs):
@@ -102,132 +105,6 @@ class MoinIndexerConnection(xappy.IndexerConnection):
         self.add_field_action('linkto', STORE_CONTENT)
         self.add_field_action('category', INDEX_EXACT)
         self.add_field_action('category', STORE_CONTENT)
-
-
-##############################################################################
-### Tokenizer
-##############################################################################
-
-
-def getWikiAnalyzerFactory(request=None, language='en'):
-    """ Returns a WikiAnalyzer instance
-
-    @keyword request: current request object
-    @keyword language: stemming language iso code, defaults to 'en'
-    """
-    return (lambda: WikiAnalyzer(request, language))
-
-
-class WikiAnalyzer:
-    """ A text analyzer for wiki syntax
-
-    The purpose of this class is to anaylze texts/pages in wiki syntax
-    and yield yielding single terms for xapwrap to feed into the xapian
-    database.
-    """
-
-    singleword = r"[%(u)s][%(l)s]+" % {
-                     'u': config.chars_upper,
-                     'l': config.chars_lower,
-                 }
-
-    singleword_re = re.compile(singleword, re.U)
-    wikiword_re = re.compile(WikiParser.word_rule, re.UNICODE|re.VERBOSE)
-
-    token_re = re.compile(
-        r"(?P<company>\w+[&@]\w+)|" + # company names like AT&T and Excite@Home.
-        r"(?P<email>\w+([.-]\w+)*@\w+([.-]\w+)*)|" +    # email addresses
-        r"(?P<acronym>(\w\.)+)|" +          # acronyms: U.S.A., I.B.M., etc.
-        r"(?P<word>\w+)",                   # words (including WikiWords)
-        re.U)
-
-    dot_re = re.compile(r"[-_/,.]")
-    mail_re = re.compile(r"[-_/,.]|(@)")
-    alpha_num_re = re.compile(r"\d+|\D+")
-
-    # XXX limit stuff above to xapdoc.MAX_KEY_LEN
-    # WORD_RE = re.compile('\\w{1,%i}' % MAX_KEY_LEN, re.U)
-
-    def __init__(self, request=None, language=None):
-        """
-        @param request: current request
-        @param language: if given, the language in which to stem words
-        """
-        self.stemmer = None
-        if request and request.cfg.xapian_stemming and language:
-            try:
-                stemmer = xapian.Stem(language)
-                # we need this wrapper because the stemmer returns a utf-8
-                # encoded string even when it gets fed with unicode objects:
-                self.stemmer = lambda word: stemmer(word).decode('utf-8')
-            except xapian.InvalidArgumentError:
-                # lang is not stemmable or not available
-                pass
-
-    def raw_tokenize_word(self, word, pos):
-        """ try to further tokenize some word starting at pos """
-        yield (word, pos)
-        if self.wikiword_re.match(word):
-            # if it is a CamelCaseWord, we additionally try to tokenize Camel, Case and Word
-            for m in re.finditer(self.singleword_re, word):
-                mw, mp = m.group(), pos + m.start()
-                for w, p in self.raw_tokenize_word(mw, mp):
-                    yield (w, p)
-        else:
-            # if we have Foo42, yield Foo and 42
-            for m in re.finditer(self.alpha_num_re, word):
-                mw, mp = m.group(), pos + m.start()
-                if mw != word:
-                    for w, p in self.raw_tokenize_word(mw, mp):
-                        yield (w, p)
-
-    def raw_tokenize(self, value):
-        """ Yield a stream of words from a string.
-
-        @param value: string to split, must be an unicode object or a list of
-                      unicode objects
-        """
-        if isinstance(value, list): # used for page links
-            for v in value:
-                yield (v, 0)
-        else:
-            tokenstream = re.finditer(self.token_re, value)
-            for m in tokenstream:
-                if m.group("acronym"):
-                    yield (m.group("acronym").replace('.', ''), m.start())
-                elif m.group("company"):
-                    yield (m.group("company"), m.start())
-                elif m.group("email"):
-                    displ = 0
-                    for word in self.mail_re.split(m.group("email")):
-                        if word:
-                            yield (word, m.start() + displ)
-                            displ += len(word) + 1
-                elif m.group("word"):
-                    for word, pos in self.raw_tokenize_word(m.group("word"), m.start()):
-                        yield word, pos
-
-    def tokenize(self, value, flat_stemming=True):
-        """ Yield a stream of lower cased raw and stemmed words from a string.
-
-        @param value: string to split, must be an unicode object or a list of
-                      unicode objects
-        @keyword flat_stemming: whether to yield stemmed terms automatically
-                                with the natural forms (True) or
-                                yield both at once as a tuple (False)
-        """
-        for word, pos in self.raw_tokenize(value):
-            if flat_stemming:
-                yield (word, pos)
-                if self.stemmer:
-                    yield (self.stemmer(word), pos)
-            else:
-                yield (word, self.stemmer(word), pos)
-
-
-#############################################################################
-### Indexing
-#############################################################################
 
 
 class Index(BaseIndex):
