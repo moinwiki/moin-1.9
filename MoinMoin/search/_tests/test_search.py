@@ -89,6 +89,7 @@ class BaseSearchTest(object):
              u'FrontPage': None,
              u'RecentChanges': None,
              u'HelpOnCreoleSyntax': None,
+             u'HelpOnEditing': None,
              u'HelpIndex': None}
 
     def setup_class(self):
@@ -116,7 +117,8 @@ class BaseSearchTest(object):
         searches = {u'title:SearchTestPage': 1,
                     u'title:LanguageSetup': 1,
                     u'title:HelpIndex': 1,
-                    u'title:Help': 2,
+                    u'title:Help': 3,
+                    u'title:HelpOn': 2,
                     u'title:SearchTestNotExisting': 0}
 
         def test(query, res_count):
@@ -205,18 +207,18 @@ class BaseSearchTest(object):
 
     def test_mimetype_search_simple(self):
         result = self.search(u'mimetype:text/wiki')
-        assert len(result.hits) == 10
+        assert len(result.hits) == 11
 
     def test_mimetype_search_re(self):
         result = self.search(ur'mimetype:re:\btext/wiki\b')
-        assert len(result.hits) == 10
+        assert len(result.hits) == 11
 
         result = self.search(ur'category:re:\bCategoryHomepa\b')
         assert not result.hits
 
     def test_language_search_simple(self):
         result = self.search(u'language:en')
-        assert len(result.hits) == 10
+        assert len(result.hits) == 11
 
     def test_domain_search_simple(self):
         result = self.search(u'domain:system')
@@ -247,6 +249,9 @@ class BaseSearchTest(object):
         """ search: title search for a AND expression with a negative term """
         result = self.search(u"-title:FrontPage")
         assert len(result.hits) == len(self.pages) - 1
+
+        result = self.search(u"-title:HelpOn")
+        assert len(result.hits) == len(self.pages) - 2
 
     def testFullSearchNegatedFindAll(self):
         """ search: negated full search for some string that does not exist results in all pages """

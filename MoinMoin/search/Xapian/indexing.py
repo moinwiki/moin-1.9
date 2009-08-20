@@ -17,6 +17,7 @@ logging = log.getLogger(__name__)
 from MoinMoin.support import xappy
 from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
 from MoinMoin.search.builtin import BaseIndex
+from MoinMoin.search.Xapian.tokenizer import WikiAnalyzer
 
 from MoinMoin.Page import Page
 from MoinMoin import config, wikiutil
@@ -91,7 +92,8 @@ class MoinIndexerConnection(xappy.IndexerConnection):
         self.add_field_action('revision', INDEX_EXACT)
         self.add_field_action('mimetype', INDEX_EXACT)
         self.add_field_action('mimetype', STORE_CONTENT)
-        self.add_field_action('title', INDEX_FREETEXT, weight=5)
+        self.add_field_action('title', INDEX_FREETEXT, weight=100)
+        self.add_field_action('title', STORE_CONTENT)
         self.add_field_action('content', INDEX_FREETEXT, spell=True)
         self.add_field_action('fulltitle', INDEX_EXACT)
         self.add_field_action('fulltitle', STORE_CONTENT)
@@ -105,6 +107,15 @@ class MoinIndexerConnection(xappy.IndexerConnection):
         self.add_field_action('linkto', STORE_CONTENT)
         self.add_field_action('category', INDEX_EXACT)
         self.add_field_action('category', STORE_CONTENT)
+
+class StemmedField(xappy.Field):
+
+    def __init__(self, name, value, request):
+
+        analyzer = WikiAnalyzer(request=request, language=request.cfg.language_default)
+        tokens = analyzer.tokenize(value)
+        value = ''.join(('%s %s' % (word, stemmed) for word, stemmed in analyzer.tokenize(value)))
+        super(StemmedField, self).__init__(name, value)
 
 
 class Index(BaseIndex):
@@ -241,14 +252,11 @@ class Index(BaseIndex):
                 doc.fields.append(xappy.Field('mtime', str(mtime)))
                 doc.fields.append(xappy.Field('revision', '0'))
                 title = " ".join(os.path.join(fs_rootpage, filename).split("/"))
-                doc.fields.append(xappy.Field('title', title))
+                doc.fields.append(StemmedField('title', title, request))
 
                 mimetype, file_content = self.contentfilter(filename)
                 doc.fields.extend([xappy.Field('mimetype', mt) for mt in [mimetype, ] + mimetype.split('/')])
-                doc.fields.append(xappy.Field('content', file_content))
-
-                # Stemming
-                # doc.analyzerFactory = getWikiAnalyzerFactory()
+                doc.fields.append(StemmedField('content', file_content, request))
 
                 connection.replace(doc)
 
@@ -372,7 +380,7 @@ class Index(BaseIndex):
 
                 doc.fields.append(xappy.Field('mtime', str(mtime)))
                 doc.fields.append(xappy.Field('revision', '0'))
-                doc.fields.append(xappy.Field('title', '%s/%s' % (pagename, att)))
+                doc.fields.append(StemmedField('title', '%s/%s' % (pagename, att), request))
 
                 doc.fields.append(xappy.Field('lang', language))
                 doc.fields.append(xappy.Field('stem_lang', stem_language))
@@ -380,11 +388,9 @@ class Index(BaseIndex):
 
                 mimetype, att_content = self.contentfilter(filename)
                 doc.fields.extend([xappy.Field('mimetype', mt) for mt in [mimetype, ] + mimetype.split('/')])
-                doc.fields.append(xappy.Field('content', att_content))
+                doc.fields.append(StemmedField('content', att_content, request))
                 doc.fields.extend([xappy.Field('domain', domain) for domain in domains])
 
-                # XXX Stemming
-                # doc.analyzerFactory = getWikiAnalyzerFactory(request, stem_language)
                 connection.replace(doc)
 
     def _index_page_rev(self, request, connection, page, mode='update'):
@@ -433,7 +439,7 @@ class Index(BaseIndex):
             doc.fields.append(xappy.Field('attachment', '')) # this is a real page, not an attachment
             doc.fields.append(xappy.Field('mtime', str(mtime)))
             doc.fields.append(xappy.Field('revision', revision))
-            doc.fields.append(xappy.Field('title', pagename))
+            doc.fields.append(StemmedField('title', pagename, request))
 
             doc.fields.append(xappy.Field('lang', language))
             doc.fields.append(xappy.Field('stem_lang', stem_language))
@@ -446,11 +452,7 @@ class Index(BaseIndex):
             doc.fields.extend([xappy.Field('linkto', pagelink) for pagelink in page.getPageLinks(request)])
             doc.fields.extend([xappy.Field('category', category) for category in categories])
             doc.fields.extend([xappy.Field('domain', domain) for domain in domains])
-
-            doc.fields.append(xappy.Field('content', page.get_raw_body()))
-
-            # XXX Stemming
-            # doc.analyzerFactory = getWikiAnalyzerFactory(request, stem_language)
+            doc.fields.append(StemmedField('content', page.get_raw_body(), request))
 
             logging.debug("%s (replace %r)" % (pagename, itemid))
             connection.replace(doc)
