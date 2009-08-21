@@ -206,6 +206,25 @@ class Index(BaseIndex):
 
         connection.close()
 
+    def _get_document(self, connection, doc_id, mtime, mode):
+        document = None
+
+        if mode == 'update':
+            try:
+                doc = connection.get_document(doc_id)
+                docmtime = long(doc.data['mtime'][0])
+                if mtime > docmtime:
+                    document = doc
+            except KeyError:
+                document = xappy.UnprocessedDocument()
+                document.id = doc_id
+        elif mode == 'add':
+            document = xappy.UnprocessedDocument()
+            document.id = doc_id
+
+        return document
+
+
     def _index_file(self, request, writer, filename, mode='update'):
         """ index a file as it were a page named pagename
             Assumes that the write lock is acquired
@@ -217,26 +236,12 @@ class Index(BaseIndex):
             itemid = "%s:%s" % (wikiname, os.path.join(fs_rootpage, filename))
             mtime = os.path.getmtime(filename)
             mtime = wikiutil.timestamp2version(mtime)
-            if mode == 'update':
-                try:
-                    doc = connection.get_document(itemid)
-                    docmtime = long(doc.data['mtime'])
-                    updated = mtime > docmtime
-                    logging.debug("itemid %r: mtime %r > docmtime %r == updated %r" % (itemid, mtime, docmtime, updated))
-                except KeyError:
-                    updated = True
-                    doc = xappy.UnprocessedDocument()
-                    doc.id = itemid
-                    updated = mtime > docmtime
 
-            elif mode == 'add':
-                updated = True
-                doc = xappy.UnprocessedDocument()
-                doc.id = itemid
+            doc = self._get_document(connection, itemid, mtime, mode)
 
-            logging.debug("%s %r" % (filename, updated))
+            logging.debug("%s %r" % (filename, doc))
 
-            if updated:
+            if doc:
                 doc.fields.append(xappy.Field('wikiname', wikiname))
                 doc.fields.append(xappy.Field('pagename', fs_rootpage))
                 doc.fields.append(xappy.Field('attachment', filename)) # XXX we should treat files like real pages, not attachments
@@ -349,23 +354,12 @@ class Index(BaseIndex):
             filename = AttachFile.getFilename(request, pagename, att)
             itemid = "%s:%s//%s" % (wikiname, pagename, att)
             mtime = wikiutil.timestamp2version(os.path.getmtime(filename))
-            if mode == 'update':
-                try:
-                    doc = connection.get_document(itemid)
-                    docmtime = long(doc.data['mtime'])
-                    updated = mtime > docmtime
-                except KeyError:
-                    updated = True
-                    doc = xappy.UnprocessedDocument()
-                    doc.id = itemid
-            elif mode == 'add':
-                updated = True
-                doc = xappy.UnprocessedDocument()
-                doc.id = itemid
 
-            logging.debug("%s %s %r" % (pagename, att, updated))
+            doc = self._get_document(connection, itemid, mtime, mode)
 
-            if updated:
+            logging.debug("%s %s %r" % (pagename, att, doc))
+
+            if doc:
                 doc.fields.append(xappy.Field('wikiname', wikiname))
                 doc.fields.append(xappy.Field('pagename', pagename))
                 doc.fields.append(xappy.Field('attachment', att))
@@ -404,28 +398,12 @@ class Index(BaseIndex):
         language, stem_language = self._get_languages(page)
         categories = self._get_categories(page)
         domains = tuple(self._get_domains(page))
-        updated = False
 
-        if mode == 'update':
-            try:
-                doc = connection.get_document(itemid)
-                docmtime = long(doc.data['mtime'])
-                updated = mtime > docmtime
-                logging.debug("itemid %r: mtime %r > docmtime %r == updated %r" % (itemid, mtime, docmtime, updated))
-            except KeyError:
-                updated = True
-                doc = xappy.UnprocessedDocument()
-                doc.id = itemid
+        doc = self._get_document(connection, itemid, mtime, mode)
 
-        elif mode == 'add':
-            updated = True
-            doc = xappy.UnprocessedDocument()
-            doc.id = itemid
+        logging.debug("%s %r" % (pagename, doc))
 
-
-        logging.debug("%s %r" % (pagename, updated))
-
-        if updated:
+        if doc:
             doc.fields.append(xappy.Field('wikiname', wikiname))
             doc.fields.append(xappy.Field('pagename', pagename))
             doc.fields.append(xappy.Field('attachment', '')) # this is a real page, not an attachment
@@ -449,7 +427,7 @@ class Index(BaseIndex):
             logging.debug("%s (replace %r)" % (pagename, itemid))
             connection.replace(doc)
 
-        return updated
+        return bool(doc)
 
     def _remove_item(self, request, connection, page, attachment=None):
         wikiname = request.cfg.interwikiname or u'Self'

@@ -265,15 +265,16 @@ class BaseSearchTest(object):
 
     def test_create_page(self):
         self.pages['TestCreatePage'] = 'some text' # Moin serarch must search this page
-        create_page(self.request, 'TestCreatePage', self.pages['TestCreatePage'])
 
+        create_page(self.request, 'TestCreatePage', self.pages['TestCreatePage'])
         time.sleep(1) # Wait while created pages are being indexed in other thread.
+
         result = self.search(u'TestCreatePage')
 
         nuke_page(self.request, 'TestCreatePage')
         time.sleep(1) # Wait while the xapian index is being updated.
-        del self.pages['TestCreatePage']
 
+        del self.pages['TestCreatePage']
         assert len(result.hits) == 1
 
 
