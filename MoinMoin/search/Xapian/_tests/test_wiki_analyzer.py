@@ -6,6 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+
 from MoinMoin._tests import wikiconfig
 
 
@@ -81,3 +82,26 @@ class TestWikiAnalyzerStemmedSeveralWords(TestWikiAnalyzer):
 
         xapian_stemming = True
 
+class TestWikiAnalyzerStemmedHelpOnEditing(TestWikiAnalyzer):
+
+    word = u'HelpOnEditing'
+    words = {u'helponediting': u'helponedit',
+             u'help': u'',
+             u'on': u'',
+             u'editing': u'edit'}
+
+    class Config(wikiconfig.Config):
+
+        xapian_stemming = True
+
+
+class TestWikiAnalyzerStemmedCategoryHomepage(TestWikiAnalyzer):
+
+    word = u'CategoryHomepage'
+    words = {u'categoryhomepage': u'categoryhomepag',
+             u'category': u'categori',
+             u'homepage': u'homepag'}
+
+    class Config(wikiconfig.Config):
+
+        xapian_stemming = True

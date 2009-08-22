@@ -509,8 +509,6 @@ class BaseSearch(object):
         """
         Get all matches
 
-        XXX xappy highlight functionality should be used for Xapian search!
-
         @param page: the current page instance
         """
         if page:
@@ -534,6 +532,7 @@ class BaseSearch(object):
 
             if wikiname in (self.request.cfg.interwikiname, 'Self'): # THIS wiki
                 page = Page(self.request, pagename, rev=revision)
+
                 if not self.historysearch and revision:
                     revlist = page.getRevList()
                     # revlist can be empty if page was nuked/renamed since it was included in xapian index
@@ -541,6 +540,7 @@ class BaseSearch(object):
                         # nothing there at all or not the current revision
                         logging.debug("no history search, skipping non-current revision...")
                         continue
+
                 if attachment:
                     # revision currently is 0 ever
                     if pagename == fs_rootpage: # not really an attachment
@@ -553,13 +553,12 @@ class BaseSearch(object):
                     matches = self._get_match(page=page, uid=uid)
                     logging.debug("self._get_match %r" % matches)
                     if matches:
-                        if not self.historysearch and \
-                                pagename in revisionCache and \
-                                revisionCache[pagename][0] < revision:
+                        if not self.historysearch and  pagename in revisionCache and revisionCache[pagename][0] < revision:
                             hits.remove(revisionCache[pagename][1])
                             del revisionCache[pagename]
                         hits.append((wikiname, page, attachment, matches, revision))
                         revisionCache[pagename] = (revision, hits[-1])
+
             else: # other wiki
                 hits.append((wikiname, pagename, attachment, None, revision))
         logging.debug("_getHits returning %r." % hits)
@@ -658,7 +657,6 @@ class XapianSearch(BaseSearch):
                   'attachment': r.data['attachment'][0],
                   'revision': r.data.get('revision', [0])[0]}
                  for r in search_results]
-
         try:
             if not self.query.xapian_need_postproc():
                 # xapian handled the full query

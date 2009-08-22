@@ -319,23 +319,27 @@ class BaseTextFieldSearch(BaseExpression):
 
             for term in self._pattern.split():
                 query_term = connection.query_field(self._field_to_search, term)
-
                 tokens = analyzer.tokenize(term)
 
                 if request.cfg.xapian_stemming:
-                    query_tokens = Query(OP_AND,
-                                         [Query(OP_OR,
-                                                [connection.query_field(self._field_to_search, token),
-                                                 connection.query_field(self._field_to_search, stemmed)]) for token, stemmed in tokens if token != term])
-
-                    stemmed.extend(stemmed for term, stemmed in analyzer.tokenize(term))
-
+                    query_token = []
+                    for token, stemmed_ in tokens:
+                        if token != term.lower():
+                            if stemmed_:
+                                query_token.append(Query(OP_OR,
+                                                         [connection.query_field(self._field_to_search, token),
+                                                          connection.query_field(self._field_to_search, stemmed_)]))
+#                                 stemmed.append('(%s|%s)' % (token, stemmed_))
+                            else:
+                                query_token.append(connection.query_field(self._field_to_search, token))
+#                                 stemmed.append(token)
+                    query_tokens = Query(OP_AND, query_token)
                 else:
-                    tokens = analyzer.tokenize(term)
-                    query_tokens = Query(OP_AND, [connection.query_field(self._field_to_search, token) for token, stemmed in tokens if token != term])
+                    query_tokens = Query(OP_AND, [connection.query_field(self._field_to_search, token) for token, stemmed_ in tokens if token != term.lower()])
 
                 queries.append(Query(OP_OR, [query_term, query_tokens]))
 
+            # XXX broken wrong regexp is built!
             if not self.case and stemmed:
                 new_pat = ' '.join(stemmed)
                 self._pattern = new_pat

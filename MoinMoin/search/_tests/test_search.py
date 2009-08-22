@@ -85,6 +85,7 @@ class BaseSearchTest(object):
              u'SearchTestLinks': u'SearchTestPage',
              u'SearchTestLinksLowerCase': u'searchtestpage',
              u'SearchTestOtherLinks': u'SearchTestLinks',
+             u'TestEdit': u'TestEdit',
              u'LanguageSetup': None,
              u'CategoryHomepage': None,
              u'HomePageWiki': None,
@@ -121,7 +122,9 @@ class BaseSearchTest(object):
                     u'title:HelpIndex': 1,
                     u'title:Help': 3,
                     u'title:HelpOn': 2,
-                    u'title:SearchTestNotExisting': 0}
+                    u'title:SearchTestNotExisting': 0,
+                    u'title:FrontPage': 1,
+                    u'title:HelpOnEditing': 1}
 
         def test(query, res_count):
             result = self.search(query)
@@ -209,18 +212,18 @@ class BaseSearchTest(object):
 
     def test_mimetype_search_simple(self):
         result = self.search(u'mimetype:text/wiki')
-        assert len(result.hits) == 11
+        assert len(result.hits) == 12
 
     def test_mimetype_search_re(self):
         result = self.search(ur'mimetype:re:\btext/wiki\b')
-        assert len(result.hits) == 11
+        assert len(result.hits) == 12
 
         result = self.search(ur'category:re:\bCategoryHomepa\b')
         assert not result.hits
 
     def test_language_search_simple(self):
         result = self.search(u'language:en')
-        assert len(result.hits) == 11
+        assert len(result.hits) == 12
 
     def test_domain_search_simple(self):
         result = self.search(u'domain:system')
@@ -279,12 +282,18 @@ class BaseSearchTest(object):
         del self.pages['TestCreatePage']
         assert len(result.hits) == 1
 
-
 class TestMoinSearch(BaseSearchTest):
 
     def get_searcher(self, query):
         pages = [{'pagename': page, 'attachment': '', 'wikiname': 'Self', } for page in self.pages]
         return MoinSearch(self.request, query, pages=pages)
+
+    def test_stemming(self):
+        result = self.search(u"title:edit")
+        assert len(result.hits) == 2
+
+        result = self.search(u"title:editing")
+        assert len(result.hits) == 1
 
 
 class TestXapianSearch(BaseSearchTest):
@@ -336,7 +345,9 @@ class TestXapianSearch(BaseSearchTest):
                     u'domain:': ([u''], u'system')}
 
         def test_query(query):
-            assert not parser.parse_query(query).xapian_term(self.request, connection).empty()
+            query_ = parser.parse_query(query).xapian_term(self.request, connection)
+            print str(query_)
+            assert not query_.empty()
 
         for prefix, data in prefixes.iteritems():
             modifiers, term = data
@@ -344,6 +355,27 @@ class TestXapianSearch(BaseSearchTest):
                 query = ''.join([prefix, modifier, term])
                 yield query, test_query, query
 
+    def test_stemming(self):
+        result = self.search(u"title:edit")
+        assert len(result.hits) == 1
+
+        result = self.search(u"title:editing")
+        assert len(result.hits) == 1
+
+
+class TestXapianSearchStemmed(TestXapianSearch):
+
+    class Config(wikiconfig.Config):
+
+        xapian_search = True
+        xapian_stemming = True
+
+    def test_stemming(self):
+        result = self.search(u"title:edit")
+        assert len(result.hits) == 2
+
+        result = self.search(u"title:editing")
+        assert len(result.hits) == 2
 
 class TestXapianIndexingInNewThread(object):
     """ search: test Xapian indexing """
