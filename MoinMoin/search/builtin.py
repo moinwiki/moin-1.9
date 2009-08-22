@@ -18,12 +18,12 @@ logging = log.getLogger(__name__)
 from MoinMoin import wikiutil, config
 from MoinMoin.Page import Page
 from MoinMoin.util import lock, filesys
-from MoinMoin.search.results import getSearchResults
-from MoinMoin.search.queryparser import Match, TextMatch, TitleMatch
+from MoinMoin.search.results import getSearchResults, Match, TextMatch, TitleMatch, getSearchResults
 
 ##############################################################################
 # Search Engine Abstraction
 ##############################################################################
+
 
 class UpdateQueue:
     """ Represents a locked page queue on the disk
@@ -247,13 +247,15 @@ class BaseIndex:
         if now:
             self._do_queued_updates_InNewThread()
 
-    def indexPages(self, files=None, mode='update'):
-        """ Index all pages (and files, if given)
+    def indexPages(self, files=None, mode='update', pages=None):
+        """ Index pages (and files, if given)
 
         Can be called only from a script. To index pages during a user
         request, use indexPagesInNewThread.
-        @keyword files: iterator or list of files to index additionally
-        @keyword mode: set the mode of indexing the pages, either 'update', 'add' or 'rebuild'
+
+        @param files: iterator or list of files to index additionally
+        @param mode: set the mode of indexing the pages, either 'update', 'add' or 'rebuild'
+        @param pages: list of pages to index, if not given, all pages are indexed
         """
         if not self.lock.acquire(1.0):
             logging.warning("can't index: can't acquire lock")
@@ -262,15 +264,15 @@ class BaseIndex:
             self._unsign()
             start = time.time()
             request = self._indexingRequest(self.request)
-            self._index_pages(request, files, mode)
+            self._index_pages(request, files, mode, pages=pages)
             logging.info("indexing completed successfully in %0.2f seconds." %
                         (time.time() - start))
             self._sign()
         finally:
             self.lock.release()
 
-    def indexPagesInNewThread(self, files=None, mode='update'):
-        """ Index all pages in a new thread
+    def indexPagesInNewThread(self, files=None, mode='update', pages=None):
+        """ Index pages in a new thread
 
         Should be called from a user request. From a script, use indexPages.
         """
@@ -279,7 +281,7 @@ class BaseIndex:
             return
 
         from threading import Thread
-        indexThread = Thread(target=self._index_pages, args=(self.request, files, mode))
+        indexThread = Thread(target=self._index_pages, args=(self.request, files, mode, pages))
         indexThread.setDaemon(True)
 
         # Join the index thread after current request finish, prevent
@@ -293,7 +295,7 @@ class BaseIndex:
         self.request.finish = joinDecorator(self.request.finish)
         indexThread.start()
 
-    def _index_pages(self, request, files=None, mode='update'):
+    def _index_pages(self, request, files=None, mode='update', pages=None):
         """ Index all pages (and all given files)
 
         This should be called from indexPages or indexPagesInNewThread only!
@@ -305,9 +307,11 @@ class BaseIndex:
         and this method must release it when it finishes or fails.
 
         @param request: current request
-        @keyword files: iterator or list of files to index additionally
-        @keyword mode: set the mode of indexing the pages, either 'update',
+        @param files: iterator or list of files to index additionally
+        @param mode: set the mode of indexing the pages, either 'update',
         'add' or 'rebuild'
+        @param pages: list of pages to index, if not given, all pages are indexed
+
         """
         raise NotImplemented('...')
 
@@ -401,13 +405,16 @@ class BaseIndex:
 
         @param request: current request
         """
-        from MoinMoin.web.contexts import ScriptContext
+        import copy
         from MoinMoin.security import Permissions
         from MoinMoin.logfile import editlog
-        r = ScriptContext(request.url)
+
         class SecurityPolicy(Permissions):
+
             def read(self, *args, **kw):
                 return True
+
+        r = copy.copy(request)
         r.user.may = SecurityPolicy(r.user)
         r.editlog = editlog.EditLog(r)
         return r
@@ -433,11 +440,11 @@ class BaseIndex:
 ### Searching
 ##############################################################################
 
-class Search:
+
+class BaseSearch(object):
     """ A search run """
 
-    def __init__(self, request, query, sort='weight', mtime=None,
-            historysearch=0):
+    def __init__(self, request, query, sort='weight', mtime=None, historysearch=0):
         """
         @param request: current request
         @param query: search query objects tree
@@ -455,194 +462,74 @@ class Search:
 
     def run(self):
         """ Perform search and return results object """
+
         start = time.time()
-        if self.request.cfg.xapian_search:
-            hits = self._xapianSearch()
-            logging.debug("_xapianSearch found %d hits" % len(hits))
-        else:
-            hits = self._moinSearch()
-            logging.debug("_moinSearch found %d hits" % len(hits))
+        hits, estimated_hits = self._search()
 
         # important - filter deleted pages or pages the user may not read!
         if not self.filtered:
             hits = self._filter(hits)
             logging.debug("after filtering: %d hits" % len(hits))
 
-        # when xapian was used, we can estimate the numer of matches
-        # Note: hits can't be estimated by xapian with historysearch enabled
-        if not self.request.cfg.xapian_index_history and hasattr(self, '_xapianMset'):
-            _ = self.request.getText
-            mset = self._xapianMset
-            m_lower = mset.get_matches_lower_bound()
-            m_estimated = mset.get_matches_estimated()
-            m_upper = mset.get_matches_upper_bound()
-            estimated_hits = (m_estimated == m_upper and m_estimated == m_lower
-                              and '' or _('about'), m_estimated)
-        else:
-            estimated_hits = None
+        return self._get_search_results(hits, start, estimated_hits)
 
-        return getSearchResults(self.request, self.query, hits, start,
-                self.sort, estimated_hits)
-
-    # ----------------------------------------------------------------
-    # Private!
-
-    def _xapianIndex(request):
-        """ Get the xapian index if possible
-
-        @param request: current request
+    def _search(self):
         """
-        try:
-            from MoinMoin.search.Xapian import Index
-            index = Index(request)
-        except ImportError:
-            return None
+        Search pages.
 
-        if index.exists():
-            return index
+        Return list of tuples (wikiname, page object, attachment,
+        matches, revision) and estimated number of search results (If
+        there is no estimate, None should be returned).
 
-    _xapianIndex = staticmethod(_xapianIndex)
-
-    def _xapianSearch(self):
-        """ Search using Xapian
-
-        Get a list of pages using fast xapian search and
-        return moin search in those pages if needed.
+        The list may contain deleted pages or pages the user may not read.
         """
-        clock = self.request.clock
-        pages = None
-        index = self._xapianIndex(self.request)
+        raise NotImplementedError()
 
-        if index and self.query.xapian_wanted():
-            clock.start('_xapianSearch')
-            try:
-                from MoinMoin.support import xapwrap
-
-                clock.start('_xapianQuery')
-                query = self.query.xapian_term(self.request, index.allterms)
-                description = str(query)
-                logging.debug("_xapianSearch: query = %r" % description)
-                query = xapwrap.index.QObjQuery(query)
-                enq, mset, hits = index.search(query, sort=self.sort,
-                        historysearch=self.historysearch)
-                clock.stop('_xapianQuery')
-
-                logging.debug("_xapianSearch: finds: %r" % hits)
-                def dict_decode(d):
-                    """ decode dict values to unicode """
-                    for key in d:
-                        d[key] = d[key].decode(config.charset)
-                    return d
-                pages = [dict_decode(hit['values']) for hit in hits]
-                logging.debug("_xapianSearch: finds pages: %r" % pages)
-
-                self._xapianEnquire = enq
-                self._xapianMset = mset
-                self._xapianIndex = index
-            except BaseIndex.LockedException:
-                pass
-            #except AttributeError:
-            #    pages = []
-
-            try:
-                # xapian handled the full query
-                if not self.query.xapian_need_postproc():
-                    clock.start('_xapianProcess')
-                    try:
-                        return self._getHits(hits, self._xapianMatch)
-                    finally:
-                        clock.stop('_xapianProcess')
-            finally:
-                clock.stop('_xapianSearch')
-        elif not index:
-            # we didn't use xapian in this request because we have no index,
-            # so we can just disable it until admin builds an index and
-            # restarts moin processes
-            self.request.cfg.xapian_search = 0
-
-        # some postprocessing by _moinSearch is required
-        return self._moinSearch(pages)
-
-    def _xapianMatchDecider(self, term, pos):
-        """ Returns correct Match object for a Xapian match
-
-        @param term: the term as string
-        @param pos: starting position of the match
+    def _filter(self, hits):
         """
-        if term[0] == 'S': # TitleMatch
-            return TitleMatch(start=pos, end=pos+len(term)-1)
-        else: # TextMatch (incl. headers)
-            return TextMatch(start=pos, end=pos+len(term))
+        Filter out deleted or acl protected pages
 
-    def _xapianMatch(self, uid, page=None):
-        """ Get all relevant Xapian matches per document id
-
-        @param uid: the id of the document in the xapian index
+        @param hits: list of hits
         """
-        positions = {}
-        term = self._xapianEnquire.get_matching_terms_begin(uid)
-        while term != self._xapianEnquire.get_matching_terms_end(uid):
-            term_name = term.get_term()
-            for pos in self._xapianIndex.termpositions(uid, term.get_term()):
-                if pos not in positions or \
-                        len(positions[pos]) < len(term_name):
-                    positions[pos] = term_name
-            term.next()
-        matches = [self._xapianMatchDecider(term, pos) for pos, term
-            in positions.iteritems()]
+        userMayRead = self.request.user.may.read
+        fs_rootpage = self.fs_rootpage + "/"
+        thiswiki = (self.request.cfg.interwikiname, 'Self')
+        filtered = [(wikiname, page, attachment, match, rev)
+                for wikiname, page, attachment, match, rev in hits
+                    if (not wikiname in thiswiki or
+                       page.exists() and userMayRead(page.page_name) or
+                       page.page_name.startswith(fs_rootpage)) and
+                       (not self.mtime or self.mtime <= page.mtime_usecs()/1000000)]
+        return filtered
 
-        if not matches:
-            return [Match()] # dummy for metadata, we got a match!
+    def _get_search_results(self, hits, start, estimated_hits):
+        return getSearchResults(self.request, self.query, hits, start, self.sort, estimated_hits)
 
-        return matches
-
-    def _moinSearch(self, pages=None):
-        """ Search pages using moin's built-in full text search
-
-        Return list of tuples (page, match). The list may contain
-        deleted pages or pages the user may not read.
-
-        @keyword pages: optional list of pages to search in
+    def _get_match(self, page=None, uid=None):
         """
-        self.request.clock.start('_moinSearch')
-        if pages is None:
-            # if we are not called from _xapianSearch, we make a full pagelist,
-            # but don't search attachments (thus attachment name = '')
-            pages = [{'pagename': p, 'attachment': '', 'wikiname': 'Self', } for p in self._getPageList()]
-        hits = self._getHits(pages, self._moinMatch)
-        self.request.clock.stop('_moinSearch')
-        return hits
+        Get all matches
 
-    def _moinMatch(self, page, uid=None):
-        """ Get all matches from regular moinSearch
+        XXX xappy highlight functionality should be used for Xapian search!
 
         @param page: the current page instance
         """
         if page:
             return self.query.search(page)
 
-    def _getHits(self, pages, matchSearchFunction):
-        """ Get the hit tuples in pages through matchSearchFunction """
+    def _getHits(self, pages):
+        """ Get the hit tuples in pages through _get_match """
         logging.debug("_getHits searching in %d pages ..." % len(pages))
         hits = []
         revisionCache = {}
         fs_rootpage = self.fs_rootpage
         for hit in pages:
-            if 'values' in hit:
-                valuedict = hit['values']
-                uid = hit['uid']
-            else:
-                valuedict = hit
-                uid = None
 
-            wikiname = valuedict['wikiname']
-            pagename = valuedict['pagename']
-            attachment = valuedict['attachment']
+            uid = hit.get('uid')
+            wikiname = hit['wikiname']
+            pagename = hit['pagename']
+            attachment = hit['attachment']
+            revision = int(hit.get('revision', 0))
 
-            if 'revision' in valuedict and valuedict['revision']:
-                revision = int(valuedict['revision'])
-            else:
-                revision = 0
             logging.debug("_getHits processing %r %r %d %r" % (wikiname, pagename, revision, attachment))
 
             if wikiname in (self.request.cfg.interwikiname, 'Self'): # THIS wiki
@@ -660,11 +547,11 @@ class Search:
                         page = Page(self.request, "%s/%s" % (fs_rootpage, attachment))
                         hits.append((wikiname, page, None, None, revision))
                     else:
-                        matches = matchSearchFunction(page=None, uid=uid)
+                        matches = self._get_match(page=None, uid=uid)
                         hits.append((wikiname, page, attachment, matches, revision))
                 else:
-                    matches = matchSearchFunction(page=page, uid=uid)
-                    logging.debug("matchSearchFunction %r returned %r" % (matchSearchFunction, matches))
+                    matches = self._get_match(page=page, uid=uid)
+                    logging.debug("self._get_match %r" % matches)
                     if matches:
                         if not self.historysearch and \
                                 pagename in revisionCache and \
@@ -677,6 +564,34 @@ class Search:
                 hits.append((wikiname, pagename, attachment, None, revision))
         logging.debug("_getHits returning %r." % hits)
         return hits
+
+
+class MoinSearch(BaseSearch):
+
+    def __init__(self, request, query, sort='weight', mtime=None, historysearch=0, pages=None):
+        super(MoinSearch, self).__init__(request, query, sort, mtime, historysearch)
+
+        self.pages = pages
+
+    def _search(self):
+        """
+        Search pages using moin's built-in full text search
+
+        The list may contain deleted pages or pages the user may not
+        read.
+
+        if self.pages is not None, searches in that pages.
+        """
+        self.request.clock.start('_moinSearch')
+
+        # if self.pages is none, we make a full pagelist, but don't
+        # search attachments (thus attachment name = '')
+        pages = self.pages or [{'pagename': p, 'attachment': '', 'wikiname': 'Self', } for p in self._getPageList()]
+
+        hits = self._getHits(pages)
+        self.request.clock.stop('_moinSearch')
+
+        return hits, None
 
     def _getPageList(self):
         """ Get list of pages to search in
@@ -694,19 +609,69 @@ class Search:
         else:
             return self.request.rootpage.getPageList(user='', exists=0)
 
-    def _filter(self, hits):
-        """ Filter out deleted or acl protected pages
 
-        @param hits: list of hits
+class XapianSearch(BaseSearch):
+
+    def _xapianIndex(request):
+        """ Get the xapian index if possible
+
+        @param request: current request
         """
-        userMayRead = self.request.user.may.read
-        fs_rootpage = self.fs_rootpage + "/"
-        thiswiki = (self.request.cfg.interwikiname, 'Self')
-        filtered = [(wikiname, page, attachment, match, rev)
-                for wikiname, page, attachment, match, rev in hits
-                    if (not wikiname in thiswiki or
-                       page.exists() and userMayRead(page.page_name) or
-                       page.page_name.startswith(fs_rootpage)) and
-                       (not self.mtime or self.mtime <= page.mtime_usecs()/1000000)]
-        return filtered
+        try:
+            from MoinMoin.search.Xapian import Index
+            index = Index(request)
+        except ImportError:
+            return None
+
+        if index.exists():
+            return index
+
+    _xapianIndex = staticmethod(_xapianIndex)
+
+    def _search(self):
+        """ Search using Xapian
+
+        Get a list of pages using fast xapian search and
+        return moin search in those pages if needed.
+        """
+        clock = self.request.clock
+        pages = None
+        index = self._xapianIndex(self.request)
+
+        assert index, 'XXX Assume that index exist, actually we should have thrown an exception, so MoinSearch could be used instead'
+
+        clock.start('_xapianSearch')
+        try:
+            clock.start('_xapianQuery')
+            search_results = index.search(self.query, sort=self.sort, historysearch=self.historysearch)
+            clock.stop('_xapianQuery')
+            logging.debug("_xapianSearch: finds: %r" % search_results)
+            self._xapianIndex = index
+        except BaseIndex.LockedException:
+            pass
+
+        # XXX must search_results be decoded?
+
+        pages = [{'uid': r.id,
+                  'wikiname': r.data['wikiname'][0],
+                  'pagename': r.data['pagename'][0],
+                  'attachment': r.data['attachment'][0],
+                  'revision': r.data.get('revision', [0])[0]}
+                 for r in search_results]
+
+        try:
+            if not self.query.xapian_need_postproc():
+                # xapian handled the full query
+                clock.start('_xapianProcess')
+                try:
+                    _ = self.request.getText
+                    return self._getHits(pages), (search_results.estimate_is_exact and '' or _('about'), search_results.matches_estimated)
+                finally:
+                    clock.stop('_xapianProcess')
+        finally:
+            clock.stop('_xapianSearch')
+
+        # some postprocessing by MoinSearch is required
+        return MoinSearch(self.request, self.query, self.sort, self.mtime, self.historysearch, pages=pages)._search()
+
 
