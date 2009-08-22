@@ -224,36 +224,56 @@ class Index(BaseIndex):
 
         return document
 
+    def _add_fields_to_document(self, request, document, fields=None, multivalued_fields=None):
+
+        fields_to_stem = ['title', 'content']
+
+        if fields is None:
+            fields = {}
+        if multivalued_fields is None:
+            multivalued_fields = {}
+
+        for field, value in fields.iteritems():
+            document.fields.append(xappy.Field(field, value))
+            if field in fields_to_stem:
+                document.fields.append(StemmedField(field, value, request))
+
+        for field, values in multivalued_fields.iteritems():
+            for value in values:
+                document.fields.append(xappy.Field(field, value))
+
 
     def _index_file(self, request, writer, filename, mode='update'):
         """ index a file as it were a page named pagename
             Assumes that the write lock is acquired
         """
+        fields = {}
+        multivalued_fields = {}
+
+        wikiname = request.cfg.interwikiname or u"Self"
         fs_rootpage = 'FS' # XXX FS hardcoded
 
         try:
-            wikiname = request.cfg.interwikiname or u'Self'
             itemid = "%s:%s" % (wikiname, os.path.join(fs_rootpage, filename))
-            mtime = os.path.getmtime(filename)
-            mtime = wikiutil.timestamp2version(mtime)
+            mtime = wikiutil.timestamp2version(os.path.getmtime(filename))
 
             doc = self._get_document(connection, itemid, mtime, mode)
-
             logging.debug("%s %r" % (filename, doc))
 
             if doc:
-                doc.fields.append(xappy.Field('wikiname', wikiname))
-                doc.fields.append(xappy.Field('pagename', fs_rootpage))
-                doc.fields.append(xappy.Field('attachment', filename)) # XXX we should treat files like real pages, not attachments
-
-                doc.fields.append(xappy.Field('mtime', str(mtime)))
-                doc.fields.append(xappy.Field('revision', '0'))
-                title = " ".join(os.path.join(fs_rootpage, filename).split("/"))
-                doc.fields.append(StemmedField('title', title, request))
-
                 mimetype, file_content = self.contentfilter(filename)
-                doc.fields.extend([xappy.Field('mimetype', mt) for mt in [mimetype, ] + mimetype.split('/')])
-                doc.fields.append(StemmedField('content', file_content, request))
+
+                fields['wikiname'] = wikiname
+                fields['pagename'] = fs_rootpage
+                fileds['attachment'] = filename # XXX we should treat files like real pages, not attachments
+                fields['mtime'] = str(mtime)
+                fields['revision'] = '0'
+                fields['title'] = " ".join(os.path.join(fs_rootpage, filename).split("/"))
+                fields['content'] = file_content
+
+                multivalued_fileds['mimetype'] = [mt for mt in [mimetype] + mimetype.split('/')]
+
+                self._add_fields_to_document(request, doc, fields, multivalued_fields, stemed_fields)
 
                 connection.replace(doc)
 
@@ -342,40 +362,37 @@ class Index(BaseIndex):
     def _index_attachments(self, request, connection, pagename, mode='update'):
         from MoinMoin.action import AttachFile
 
-        wikiname = request.cfg.interwikiname or u"Self"
-        # XXX: Hack until we get proper metadata
-        p = Page(request, pagename)
-        language, stem_language = self._get_languages(p)
-        domains = tuple(self._get_domains(p))
-        updated = False
+        fields = {}
+        multivalued_fields = {}
 
-        attachments = AttachFile._get_files(request, pagename)
-        for att in attachments:
-            filename = AttachFile.getFilename(request, pagename, att)
+        wikiname = request.cfg.interwikiname or u"Self"
+        page = Page(request, pagename)
+
+        for att in AttachFile._get_files(request, pagename):
             itemid = "%s:%s//%s" % (wikiname, pagename, att)
+            filename = AttachFile.getFilename(request, pagename, att)
             mtime = wikiutil.timestamp2version(os.path.getmtime(filename))
 
             doc = self._get_document(connection, itemid, mtime, mode)
-
             logging.debug("%s %s %r" % (pagename, att, doc))
 
             if doc:
-                doc.fields.append(xappy.Field('wikiname', wikiname))
-                doc.fields.append(xappy.Field('pagename', pagename))
-                doc.fields.append(xappy.Field('attachment', att))
-
-                doc.fields.append(xappy.Field('mtime', str(mtime)))
-                doc.fields.append(xappy.Field('revision', '0'))
-                doc.fields.append(StemmedField('title', '%s/%s' % (pagename, att), request))
-
-                doc.fields.append(xappy.Field('lang', language))
-                doc.fields.append(xappy.Field('stem_lang', stem_language))
-                doc.fields.append(xappy.Field('fulltitle', pagename))
-
                 mimetype, att_content = self.contentfilter(filename)
-                doc.fields.extend([xappy.Field('mimetype', mt) for mt in [mimetype, ] + mimetype.split('/')])
-                doc.fields.append(StemmedField('content', att_content, request))
-                doc.fields.extend([xappy.Field('domain', domain) for domain in domains])
+
+                fields['wikiname'] = wikiname
+                fileds['pagename'] = pagename
+                fileds['attachment'] = att
+                fields['mtime'] = str(mtime)
+                fileds['revision'] = '0'
+                fields['title'] = '%s/%s' % (pagename, att)
+                fields['content'] = att_content
+                fileds['fulltitle'] = pagename
+                fields['lang'], fields['stem_lang'] = self._get_languages(page)
+
+                multivalued_fileds['mimetype'] = [mt for mt in [mimetype] + mimetype.split('/')]
+                multivalued_fields['domain'] = self._get_domains(page)
+
+                self._add_fields_to_document(request, doc, fields, multivalued_fields)
 
                 connection.replace(doc)
 
@@ -388,43 +405,40 @@ class Index(BaseIndex):
                    'update' = check if already in index and update if needed (mtime)
         """
         request.page = page
-        wikiname = request.cfg.interwikiname or u"Self"
         pagename = page.page_name
-        mtime = page.mtime_usecs()
+
+        fields = {}
+        multivalued_fields = {}
+
+        wikiname = request.cfg.interwikiname or u"Self"
         revision = str(page.get_real_rev())
         itemid = "%s:%s:%s" % (wikiname, pagename, revision)
-        author = page.edit_info().get('editor', '?')
-        # XXX: Hack until we get proper metadata
-        language, stem_language = self._get_languages(page)
-        categories = self._get_categories(page)
-        domains = tuple(self._get_domains(page))
+        mtime = page.mtime_usecs()
 
         doc = self._get_document(connection, itemid, mtime, mode)
-
         logging.debug("%s %r" % (pagename, doc))
 
         if doc:
-            doc.fields.append(xappy.Field('wikiname', wikiname))
-            doc.fields.append(xappy.Field('pagename', pagename))
-            doc.fields.append(xappy.Field('attachment', '')) # this is a real page, not an attachment
-            doc.fields.append(xappy.Field('mtime', str(mtime)))
-            doc.fields.append(xappy.Field('revision', revision))
-            doc.fields.append(StemmedField('title', pagename, request))
-
-            doc.fields.append(xappy.Field('lang', language))
-            doc.fields.append(xappy.Field('stem_lang', stem_language))
-            doc.fields.append(xappy.Field('fulltitle', pagename))
-            doc.fields.append(xappy.Field('author', author))
-
             mimetype = 'text/%s' % page.pi['format']  # XXX improve this
-            doc.fields.extend([xappy.Field('mimetype', mt) for mt in [mimetype, ] + mimetype.split('/')])
 
-            doc.fields.extend([xappy.Field('linkto', pagelink) for pagelink in page.getPageLinks(request)])
-            doc.fields.extend([xappy.Field('category', category) for category in categories])
-            doc.fields.extend([xappy.Field('domain', domain) for domain in domains])
-            doc.fields.append(StemmedField('content', page.get_raw_body(), request))
+            fields['wikiname'] = wikiname
+            fields['pagename'] = pagename
+            fields['attachment'] = '' # this is a real page, not an attachment
+            fields['mtime'] = str(mtime)
+            fields['revision'] = revision
+            fields['title'] = pagename
+            fields['content'] = page.get_raw_body()
+            fields['fulltitle'] = pagename
+            fields['lang'], fields['stem_lang'] = self._get_languages(page)
+            fields['author'] = page.edit_info().get('editor', '?')
 
-            logging.debug("%s (replace %r)" % (pagename, itemid))
+            multivalued_fields['mimetype'] = [mt for mt in [mimetype] + mimetype.split('/')]
+            multivalued_fields['domain'] = self._get_domains(page)
+            multivalued_fields['linkto'] = page.getPageLinks(request)
+            multivalued_fields['category'] = self._get_categories(page)
+
+            self._add_fields_to_document(request, doc, fields, multivalued_fields)
+
             connection.replace(doc)
 
         return bool(doc)
