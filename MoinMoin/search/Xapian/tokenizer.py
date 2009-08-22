@@ -100,7 +100,7 @@ class WikiAnalyzer(object):
 
     def tokenize(self, value):
         """
-        Yield a stream of raw and stemmed words from a string.
+        Yield a stream of raw lower cased and stemmed words from a string.
 
         @param value: string to split, must be an unicode object or a list of
                       unicode objects
@@ -116,5 +116,7 @@ class WikiAnalyzer(object):
             stemmer = lambda v: ''
 
         for word, pos in self.raw_tokenize(value):
-                yield word, stemmer(word)
+            # Xapian stemmer expects lowercase input
+            word = word.lower()
+            yield word, stemmer(word)
 

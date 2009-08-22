@@ -12,11 +12,11 @@ from MoinMoin._tests import wikiconfig
 class TestWikiAnalyzer(object):
 
     word = u'HelpOnMoinTesting'
-    words = {word: u'',
-             u'Help': u'',
-             u'On': u'',
-             u'Moin': u'',
-             u'Testing': u''}
+    words = {word.lower(): u'',
+             u'help': u'',
+             u'on': u'',
+             u'moin': u'',
+             u'testing': u''}
 
     def setup_class(self):
         try:
@@ -35,19 +35,15 @@ class TestWikiAnalyzer(object):
             assert token in words
             assert words[token] == stemmed
 
-    def test_first_token(self):
-        tokens = list(self.analyzer.tokenize(self.word))
-        assert tokens[0][0] == self.word, 'The first token must be the word itself'
-
 
 class TestWikiAnalyzerStemmed(TestWikiAnalyzer):
 
     word = u'HelpOnMoinTesting'
-    words = {word: u'HelpOnMoinTest',
-             u'Help': u'',
-             u'On': u'',
-             u'Moin': u'',
-             u'Testing': u'Test'}
+    words = {word.lower(): u'helponmointest',
+             u'help': u'',
+             u'on': u'',
+             u'moin': u'',
+             u'testing': u'test'}
 
     class Config(wikiconfig.Config):
 
@@ -57,35 +53,31 @@ class TestWikiAnalyzerStemmed(TestWikiAnalyzer):
 class TestWikiAnalyzerSeveralWords(TestWikiAnalyzer):
 
     word = u'HelpOnMoinTesting OtherWikiWord'
-    words = {u'HelpOnMoinTesting': u'',
-             u'Help': u'',
-             u'On': u'',
-             u'Moin': u'',
-             u'Testing': u'',
-             u'OtherWikiWord': u'',
-             u'Other': u'',
-             u'Wiki': u'',
-             u'Word': u''}
+    words = {u'helponmointesting': u'',
+             u'help': u'',
+             u'on': u'',
+             u'moin': u'',
+             u'testing': u'',
+             u'otherwikiword': u'',
+             u'other': u'',
+             u'wiki': u'',
+             u'word': u''}
 
-    def test_first_token(self):
-        pass
 
 class TestWikiAnalyzerStemmedSeveralWords(TestWikiAnalyzer):
 
     word = u'HelpOnMoinTesting OtherWikiWord'
-    words = {u'HelpOnMoinTesting': u'HelpOnMoinTest',
-             u'Help': u'',
-             u'On': u'',
-             u'Moin': u'',
-             u'Testing': u'Test',
-             u'OtherWikiWord': u'',
-             u'Other': u'',
-             u'Wiki': u'',
-             u'Word': u''}
+    words = {u'helponmointesting': u'helponmointest',
+             u'help': u'',
+             u'on': u'',
+             u'moin': u'',
+             u'testing': u'test',
+             u'otherwikiword': u'',
+             u'other': u'',
+             u'wiki': u'',
+             u'word': u''}
 
     class Config(wikiconfig.Config):
 
         xapian_stemming = True
 
-    def test_first_token(self):
-        pass
