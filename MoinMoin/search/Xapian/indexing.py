@@ -113,8 +113,10 @@ class StemmedField(xappy.Field):
     def __init__(self, name, value, request):
 
         analyzer = WikiAnalyzer(request=request, language=request.cfg.language_default)
+
         tokens = analyzer.tokenize(value)
-        value = ''.join(('%s %s' % (word, stemmed) for word, stemmed in analyzer.tokenize(value)))
+        value = ' '.join(unicode('%s %s' % (word, stemmed)).strip() for word, stemmed in analyzer.tokenize(value))
+
         super(StemmedField, self).__init__(name, value)
 
 
