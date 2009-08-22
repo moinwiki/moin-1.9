@@ -14,11 +14,13 @@ from MoinMoin.search import QueryError
 from MoinMoin.search.queryparser import QueryParser
 from MoinMoin.search.builtin import MoinSearch, XapianSearch
 from MoinMoin._tests import nuke_xapian_index, wikiconfig, become_trusted, create_page, nuke_page
+from MoinMoin.wikiutil import Version
 
-if py.version != '1.0.0':
+PY_MIN_VERSION = '1.0.0'
+if Version(version=py.version) < Version(version=PY_MIN_VERSION):
     # There are some generative tests, which won't run on older versions!
     # XXX These tests should be refactored to be able to be run with older versions of py.
-    py.test.skip('Currently py version 1.0.0 is needed')
+    py.test.skip('Currently py version %s is needed' % PY_MIN_VERSION)
 
 
 class TestQueryParsing(object):
