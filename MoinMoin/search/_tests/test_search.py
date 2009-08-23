@@ -282,6 +282,7 @@ class BaseSearchTest(object):
         del self.pages['TestCreatePage']
         assert len(result.hits) == 1
 
+
 class TestMoinSearch(BaseSearchTest):
 
     def get_searcher(self, query):
@@ -376,6 +377,7 @@ class TestXapianSearchStemmed(TestXapianSearch):
 
         result = self.search(u"title:editing")
         assert len(result.hits) == 2
+
 
 class TestXapianIndexingInNewThread(object):
     """ search: test Xapian indexing """

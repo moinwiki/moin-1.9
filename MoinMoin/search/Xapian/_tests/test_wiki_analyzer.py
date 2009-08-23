@@ -82,6 +82,7 @@ class TestWikiAnalyzerStemmedSeveralWords(TestWikiAnalyzer):
 
         xapian_stemming = True
 
+
 class TestWikiAnalyzerStemmedHelpOnEditing(TestWikiAnalyzer):
 
     word = u'HelpOnEditing'

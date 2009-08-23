@@ -13,6 +13,7 @@ import xapian
 from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
 from MoinMoin import config
 
+
 class WikiAnalyzer(object):
     """ A text analyzer for wiki syntax
 
@@ -106,6 +107,7 @@ class WikiAnalyzer(object):
                       unicode objects
         """
         if self.stemmer:
+
             def stemmer(value):
                 stemmed = self.stemmer(value)
                 if stemmed != value:
