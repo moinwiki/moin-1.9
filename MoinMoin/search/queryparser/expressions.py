@@ -305,6 +305,7 @@ class OrExpression(AndExpression):
         # XXX: negated terms managed by _moinSearch?
         return Query(OP_OR, [term.xapian_term(request, connection) for term in self._subterms])
 
+
 class BaseTextFieldSearch(BaseExpression):
 
     _field_to_search = None
@@ -393,6 +394,7 @@ class TitleSearch(BaseTextFieldSearch):
 
     def pageFilter(self):
         """ Page filter function for single title search """
+
         def filter(name):
             match = self.search_re.search(name)
             result = bool(self.negated) ^ bool(match)

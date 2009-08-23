@@ -15,7 +15,6 @@ from MoinMoin import log
 logging = log.getLogger(__name__)
 
 from MoinMoin.support import xappy
-from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
 from MoinMoin.search.builtin import BaseIndex
 from MoinMoin.search.Xapian.tokenizer import WikiAnalyzer
 
@@ -108,13 +107,13 @@ class MoinIndexerConnection(xappy.IndexerConnection):
         self.add_field_action('category', INDEX_EXACT)
         self.add_field_action('category', STORE_CONTENT)
 
+
 class StemmedField(xappy.Field):
 
     def __init__(self, name, value, request):
 
         analyzer = WikiAnalyzer(request=request, language=request.cfg.language_default)
 
-        tokens = analyzer.tokenize(value)
         value = ' '.join(unicode('%s %s' % (word, stemmed)).strip() for word, stemmed in analyzer.tokenize(value))
 
         super(StemmedField, self).__init__(name, value)
@@ -172,16 +171,17 @@ class Index(BaseIndex):
                 timestamp = self.mtime()
                 break
 
-        kw = {}
-        if sort == 'page_name':
-            kw['sortby'] = 'pagename'
-
         # Refresh connection, since it may be outdated.
         searcher.reopen()
         query = query.xapian_term(self.request, searcher)
 
         # Get maximum possible amount of hits from xappy, which is number of documents in the index.
         document_count = searcher.get_doccount()
+
+        kw = {}
+        if sort == 'page_name':
+            kw['sortby'] = 'pagename'
+
         hits = searcher.search(query, 0, document_count, **kw)
 
         self.request.cfg.xapian_searchers.append((searcher, timestamp))
@@ -201,7 +201,7 @@ class Index(BaseIndex):
         items = self.remove_queue.pages()[:amount]
         for item in items:
             assert len(item.split('//')) == 2
-            pagename,  attachment = item.split('//')
+            pagename, attachment = item.split('//')
             page = Page(request, pagename)
             self._remove_item(request, connection, page, attachment)
             self.remove_queue.remove([item])
@@ -244,8 +244,7 @@ class Index(BaseIndex):
             for value in values:
                 document.fields.append(xappy.Field(field, value))
 
-
-    def _index_file(self, request, writer, filename, mode='update'):
+    def _index_file(self, request, connection, filename, mode='update'):
         """ index a file as it were a page named pagename
             Assumes that the write lock is acquired
         """
@@ -267,15 +266,15 @@ class Index(BaseIndex):
 
                 fields['wikiname'] = wikiname
                 fields['pagename'] = fs_rootpage
-                fileds['attachment'] = filename # XXX we should treat files like real pages, not attachments
+                fields['attachment'] = filename # XXX we should treat files like real pages, not attachments
                 fields['mtime'] = str(mtime)
                 fields['revision'] = '0'
                 fields['title'] = " ".join(os.path.join(fs_rootpage, filename).split("/"))
                 fields['content'] = file_content
 
-                multivalued_fileds['mimetype'] = [mt for mt in [mimetype] + mimetype.split('/')]
+                multivalued_fields['mimetype'] = [mt for mt in [mimetype] + mimetype.split('/')]
 
-                self._add_fields_to_document(request, doc, fields, multivalued_fields, stemed_fields)
+                self._add_fields_to_document(request, doc, fields, multivalued_fields)
 
                 connection.replace(doc)
 
@@ -348,16 +347,16 @@ class Index(BaseIndex):
         @arg mode: 'add' = just add, no checks
                    'update' = check if already in index and update if needed (mtime)
         """
-        p = Page(request, pagename)
+        page = Page(request, pagename)
         if request.cfg.xapian_index_history:
-            for rev in p.getRevList():
+            for rev in page.getRevList():
                 updated = self._index_page_rev(request, connection, Page(request, pagename, rev=rev), mode=mode)
                 logging.debug("updated page %r rev %d (updated==%r)" % (pagename, rev, updated))
                 if not updated:
                     # we reached the revisions that are already present in the index
                     break
         else:
-            self._index_page_rev(request, connection, p, mode=mode)
+            self._index_page_rev(request, connection, page, mode=mode)
 
         self._index_attachments(request, connection, pagename, mode)
 
@@ -382,16 +381,16 @@ class Index(BaseIndex):
                 mimetype, att_content = self.contentfilter(filename)
 
                 fields['wikiname'] = wikiname
-                fileds['pagename'] = pagename
-                fileds['attachment'] = att
+                fields['pagename'] = pagename
+                fields['attachment'] = att
                 fields['mtime'] = str(mtime)
-                fileds['revision'] = '0'
+                fields['revision'] = '0'
                 fields['title'] = '%s/%s' % (pagename, att)
                 fields['content'] = att_content
-                fileds['fulltitle'] = pagename
+                fields['fulltitle'] = pagename
                 fields['lang'], fields['stem_lang'] = self._get_languages(page)
 
-                multivalued_fileds['mimetype'] = [mt for mt in [mimetype] + mimetype.split('/')]
+                multivalued_fields['mimetype'] = [mt for mt in [mimetype] + mimetype.split('/')]
                 multivalued_fields['domain'] = self._get_domains(page)
 
                 self._add_fields_to_document(request, doc, fields, multivalued_fields)
@@ -456,13 +455,13 @@ class Index(BaseIndex):
             ids_to_delete = [d.id for d in docs_to_delete]
             search_connection.close()
 
-            for id in ids_to_delete:
-                connection.delete(id)
+            for id_ in ids_to_delete:
+                connection.delete(id_)
                 logging.debug('%s removed from xapian index' % pagename)
         else:
             # Only remove a single attachment
-            id = "%s:%s//%s" % (wikiname, pagename, attachment)
-            connection.delete(id)
+            id_ = "%s:%s//%s" % (wikiname, pagename, attachment)
+            connection.delete(id_)
 
             logging.debug('attachment %s from %s removed from index' % (attachment, pagename))
 
@@ -489,8 +488,8 @@ class Index(BaseIndex):
 
         # rebuilding the DB: delete it and add everything
         if mode == 'rebuild':
-            for f in os.listdir(self.dir):
-                os.unlink(os.path.join(self.dir, f))
+            for fname in os.listdir(self.dir):
+                os.unlink(os.path.join(self.dir, fname))
             mode = 'add'
 
         connection = MoinIndexerConnection(self.dir)
