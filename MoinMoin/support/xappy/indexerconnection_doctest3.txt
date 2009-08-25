@@ -1,0 +1,86 @@
+
+>>> from datastructures import *
+>>> from fieldactions import *
+>>> from searchconnection import *
+
+
+Open a connection for indexing:
+>>> iconn = IndexerConnection('foo')
+
+We have to wipe out any old actions on the field to change the actions:
+>>> iconn.add_field_action('author', FieldActions.STORE_CONTENT)
+>>> iconn.add_field_action('title', FieldActions.STORE_CONTENT)
+>>> iconn.add_field_action('title', FieldActions.INDEX_FREETEXT, weight=5, language='en', nopos=True)
+>>> iconn.add_field_action('category', FieldActions.INDEX_EXACT)
+>>> iconn.add_field_action('category', FieldActions.SORTABLE)
+>>> iconn.add_field_action('category', FieldActions.COLLAPSE)
+>>> iconn.add_field_action('text', FieldActions.INDEX_FREETEXT, language='en')
+>>> iconn.add_field_action('other', FieldActions.INDEX_FREETEXT)
+>>> iconn.add_field_action('date', FieldActions.STORE_CONTENT)
+>>> iconn.add_field_action('date', FieldActions.SORTABLE, type='date')
+>>> iconn.add_field_action('date', FieldActions.COLLAPSE)
+>>> iconn.add_field_action('price', FieldActions.STORE_CONTENT)
+>>> iconn.add_field_action('price', FieldActions.SORTABLE, type='float')
+>>> iconn.add_field_action('price', FieldActions.COLLAPSE)
+
+Build up a document:
+>>> doc = UnprocessedDocument()
+>>> doc.fields.append(Field('author', 'Richard Boulton'))
+>>> doc.fields.append(Field('category', 'Test document'))
+>>> doc.fields.append(Field('title', 'Test document 1'))
+>>> doc.fields.append(Field('text', 'This document is a basic test document.'))
+
+Process it:
+>>> pdoc = iconn.process(doc)
+>>> pdoc.data
+{'title': ['Test document 1'], 'author': ['Richard Boulton']}
+
+
+If we add a field which is specified as a SORTABLE date which doesn't contain
+a valid date, an error will be raised when we try to process the date:
+>>> doc.fields.append(Field('date', 'An invalid date - this will generate an error when processed.'))
+>>> iconn.process(doc)
+Traceback (most recent call last):
+...
+IndexerError: Value supplied to field 'date' must be a valid date: was 'An invalid date - this will generate an error when processed.': error is 'Unrecognised date format'
+
+
+If we add a field which is specified as a SORTABLE float which doesn't contain
+a valid floating point number, an error will be raised when we try to process
+the number:
+>>> doc.fields[-1] = Field('price', 'An invalid float - this will generate an error when processed.')
+>>> iconn.process(doc)
+Traceback (most recent call last):
+...
+IndexerError: Value supplied to field 'price' must be a valid floating point number: was 'An invalid float - this will generate an error when processed.'
+
+
+We can access the Xapian document representation of the processed document to
+double check that this document has been indexed as we wanted:
+>>> xdoc = pdoc.prepare()
+>>> import cPickle
+>>> cPickle.loads(xdoc.get_data()) == pdoc.data
+True
+>>> [(term.term, term.wdf, [pos for pos in term.positer]) for term in xdoc.termlist()]
+[('1', 5, []), ('XA1', 5, []), ('XAdocument', 5, []), ('XAtest', 5, []), ('XB:Test document', 0, []), ('XCa', 1, [14]), ('XCbasic', 1, [15]), ('XCdocument', 2, [12, 17]), ('XCis', 1, [13]), ('XCtest', 1, [16]), ('XCthis', 1, [11]), ('ZXAdocument', 5, []), ('ZXAtest', 5, []), ('ZXCa', 1, []), ('ZXCbasic', 1, []), ('ZXCdocument', 2, []), ('ZXCis', 1, []), ('ZXCtest', 1, []), ('ZXCthis', 1, []), ('Za', 1, []), ('Zbasic', 1, []), ('Zdocument', 7, []), ('Zis', 1, []), ('Ztest', 6, []), ('Zthis', 1, []), ('a', 1, [14]), ('basic', 1, [15]), ('document', 7, [12, 17]), ('is', 1, [13]), ('test', 6, [16]), ('this', 1, [11])]
+>>> [(value.num, value.value) for value in xdoc.values()]
+[(0, 'Test document')]
+
+We can add terms directly to the processed document, specifying the wdf and position:
+>>> pdoc.add_term('text', 'newterm1', wdfinc=17, positions=200)
+>>> pdoc.add_term('text', 'newterm2', wdfinc=17, positions=(201, 202))
+>>> [(term.term, term.wdf, [pos for pos in term.positer]) for term in xdoc.termlist()]
+[('1', 5, []), ('XA1', 5, []), ('XAdocument', 5, []), ('XAtest', 5, []), ('XB:Test document', 0, []), ('XCa', 1, [14]), ('XCbasic', 1, [15]), ('XCdocument', 2, [12, 17]), ('XCis', 1, [13]), ('XCnewterm1', 17, [200]), ('XCnewterm2', 17, [201, 202]), ('XCtest', 1, [16]), ('XCthis', 1, [11]), ('ZXAdocument', 5, []), ('ZXAtest', 5, []), ('ZXCa', 1, []), ('ZXCbasic', 1, []), ('ZXCdocument', 2, []), ('ZXCis', 1, []), ('ZXCtest', 1, []), ('ZXCthis', 1, []), ('Za', 1, []), ('Zbasic', 1, []), ('Zdocument', 7, []), ('Zis', 1, []), ('Ztest', 6, []), ('Zthis', 1, []), ('a', 1, [14]), ('basic', 1, [15]), ('document', 7, [12, 17]), ('is', 1, [13]), ('test', 6, [16]), ('this', 1, [11])]
+
+We can set the data directly too, as long as we set it to a dictionary:
+>>> pdoc.data = {'Empty': 'nothing'}
+>>> pdoc.data
+{'Empty': 'nothing'}
+>>> pdoc.data = None
+Traceback (most recent call last):
+...
+TypeError: Cannot set data to any type other than a dict
+
+We can also get a representation of a processed document (though it only tells us the ID number):
+>>> pdoc
+<ProcessedDocument(None)>
