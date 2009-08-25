@@ -118,7 +118,7 @@ class PluginScript(MoinScript):
                 kwargs['port'] = self.options.port
 
             if self.options.start:
-                daemon = Daemon('moin', pidfile, run_server, [], kwargs)
+                daemon = Daemon('moin', pidfile, run_server, **kwargs)
                 daemon.do_start()
             else:
                 run_server(**kwargs)
