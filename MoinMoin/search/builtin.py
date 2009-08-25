@@ -649,8 +649,8 @@ class XapianSearch(BaseSearch):
         except BaseIndex.LockedException:
             pass
 
-        # XXX must search_results be decoded?
-
+        # Note: .data is (un)pickled inside xappy, so we get back exactly what
+        #       we had put into it at indexing time (including unicode objects).
         pages = [{'uid': r.id,
                   'wikiname': r.data['wikiname'][0],
                   'pagename': r.data['pagename'][0],
