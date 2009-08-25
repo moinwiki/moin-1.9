@@ -128,8 +128,12 @@ def switch_user(uid, gid=None):
         raise RuntimeError("can't change uid/gid to %s/%s" % (uid, gid))
     logging.info("Running as uid/gid %d/%d" % (uid, gid))
 
-def run_server(host='localhost', port=8080, docs=True,
-               threaded=True, debug='off', user=None, group=None):
+def run_server(hostname='localhost', port=8080,
+               docs=True,
+               debug='off',
+               user=None, group=None,
+               threaded=True,
+               **kw):
     """ Run a standalone server on specified host/port. """
     application = make_application(shared=docs)
 
@@ -145,8 +149,11 @@ def run_server(host='localhost', port=8080, docs=True,
         # thread then will just terminate when an exception happens
         threaded = False
 
-    run_simple(host, port, application, threaded=threaded,
+    run_simple(hostname=hostname, port=port,
+               application=application,
+               threaded=threaded, 
                use_debugger=(debug == 'web'),
                passthrough_errors=(debug == 'external'),
-               request_handler=RequestHandler)
+               request_handler=RequestHandler,
+               **kw)
 
