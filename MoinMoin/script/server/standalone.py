@@ -149,6 +149,9 @@ class DefaultConfig(object):
     port = 8080
 
     # either multi-thread or multi-process (not both):
+    # threaded = True, processes = 1 is usually what you want
+    # threaded = False, processes = 10 (for example) can be rather slow
+    # thus, if you need a forking server, maybe rather use apache/mod-wsgi!
     threaded = True
     processes = 1
 
