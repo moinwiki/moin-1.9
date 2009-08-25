@@ -157,6 +157,10 @@ class DefaultConfig(object):
     extra_files = None
     reloader_interval = 1
 
-    # use this later instead of our middleware-setup in MoinMoin.web.static:
+    # we can't use static_files to replace our own middleware setup for moin's
+    # static files, because we also need the setup with other servers (like
+    # apache), not just when using werkzeug's run_simple server.
+    # But you can use it if you need to serve other static files you just need
+    # with the standalone wikiserver.
     static_files = None
 
