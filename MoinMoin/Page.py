@@ -961,14 +961,15 @@ class Page(object):
         pi['acl'] = security.AccessControlList(request.cfg, acl)
         return pi
 
-    def send_raw(self, content_disposition=None):
+    def send_raw(self, content_disposition=None, mimetype=None):
         """ Output the raw page data (action=raw).
             With no content_disposition, the browser usually just displays the
             data on the screen, with content_disposition='attachment', it will
             offer a dialogue to save it to disk (used by Save action).
+            Supplied mimetype overrides default text/plain.
         """
         request = self.request
-        request.mimetype = 'text/plain'
+        request.mimetype = mimetype or 'text/plain'
         if self.exists():
             # use the correct last-modified value from the on-disk file
             # to ensure cacheability where supported. Because we are sending
