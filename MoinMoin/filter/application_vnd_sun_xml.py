@@ -21,8 +21,8 @@ def execute(indexobj, filename):
         data = zf.read("content.xml")
         zf.close()
         data = " ".join(rx_stripxml.sub(" ", data).split())
-    except RuntimeError, err:
-        logging.error(str(err))
+    except (zipfile.BadZipfile, RuntimeError), err:
+        logging.error("%s [%s]" % (str(err), filename))
         data = ""
     return data.decode('utf-8')
 
