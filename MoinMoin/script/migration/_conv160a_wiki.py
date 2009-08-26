@@ -322,7 +322,7 @@ class Converter(Parser):
         pagename, fname = AttachFile.absoluteName(fname, self.pagename)
         from_this_page = pagename == self.pagename
         fname = self._replace(('FILE', pagename, fname))
-        #fname = wikiutil.url_unquote(fname, want_unicode=True)
+        #fname = wikiutil.url_unquote(fname)
         #fname = self._replace(('FILE', pagename, fname))
         pagename = self._replace(('PAGE', pagename))
         if from_this_page:

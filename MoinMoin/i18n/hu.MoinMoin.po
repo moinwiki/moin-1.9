@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-26 21:29+0200\n"
+"POT-Creation-Date: 2009-07-27 00:57+0200\n"
 "PO-Revision-Date: 2006-06-15 15:55+0200\n"
-"Last-Translator: jmarton@omikk.bme.hu, arostas@omikk.bme.hu\n"
+"Last-Translator: MARTON Jozsef <jmarton@omikk.bme.hu>\n"
 "Language-Team: Hungarian <HU@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -26,16 +26,18 @@ msgstr ""
 "X-Direction: ltr\n"
 
 msgid "The wiki is currently not reachable."
-msgstr ""
+msgstr "Ez a wiki jelenleg nem érhető el"
 
 msgid "Invalid username or password."
-msgstr ""
+msgstr "Érvénytelen felhasználónév vagy jelszó."
 
 #, python-format
 msgid ""
 "The remote wiki uses a different InterWiki name (%(remotename)s) internally "
 "than you specified (%(localname)s)."
 msgstr ""
+"A távoli wiki másik InterWiki nevet használ (%(remotename)s) mint amit "
+"megadott (%(localname)s)."
 
 msgid "Your changes are not saved!"
 msgstr "A változtatások nem lettek elmentve!"
@@ -55,9 +57,9 @@ msgstr "A zárolás lejárt. Emiatt szerkesztési ütközésekre számíthat!"
 msgid "Page name is too long, try shorter name."
 msgstr "A lap neve től hosszú, kérjük adjon meg egy rövidebbet!"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Draft of \"%(pagename)s\""
-msgstr "A(z) \"%(pagename)s\" lap nézete"
+msgstr "A(z) \"%(pagename)s\" lap tervezete"
 
 #, python-format
 msgid "Edit \"%(pagename)s\""
@@ -95,9 +97,8 @@ msgstr ""
 "Kérjük nézze át a lapot és csak azután mentse el!\n"
 "A változásokat megtekintheti a(z) %(difflink)s különbségeinek oldalán."
 
-#, fuzzy
 msgid "[Content loaded from draft]"
-msgstr "[Az új lap tartalma a(z) %s mintából töltődött be]"
+msgstr "[A tartalom a(z) %s tervezetből töltődött be]"
 
 #, python-format
 msgid "[Content of new page loaded from %s]"
@@ -151,7 +152,7 @@ msgid "GUI Mode"
 msgstr "GUI mód"
 
 msgid "Load Draft"
-msgstr ""
+msgstr "Tervezet betöltése"
 
 msgid "Trivial change"
 msgstr "Lényegtelen változtatás"
@@ -172,13 +173,12 @@ msgstr "A sorvégi szóközök eltávolítása"
 msgid "Edit was cancelled."
 msgstr "A szerkesztés visszavonva."
 
-#, fuzzy
 msgid "You can't copy to an empty pagename."
-msgstr "Nem nevezheti át egy üres lap nevére."
+msgstr "Nem másolhatja át üres nevű lapra."
 
 #, fuzzy
 msgid "You are not allowed to copy this page!"
-msgstr "Nem szerkesztheti ezt a lapot!"
+msgstr "Nem másolhatja ezt a lapot!"
 
 #, python-format
 msgid ""
@@ -190,24 +190,22 @@ msgstr ""
 "\n"
 "Próbáljon más nevet adni a lapnak."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Could not copy page because of file system error: %s."
-msgstr "Állományrendszer-hiba (%s) miatt nem sikerült az átnevezés."
+msgstr "Állományrendszer-hiba (%s) miatt nem sikerült a másolás."
 
-#, fuzzy
 msgid "You are not allowed to rename this page!"
-msgstr "Nem állíthatja vissza ezt a lapot!"
+msgstr "Nem nevezheti át ezt a lapot!"
 
 msgid "You can't rename to an empty pagename."
-msgstr "Nem nevezheti át egy üres lap nevére."
+msgstr "Nem nevezheti át üres névre."
 
 #, python-format
 msgid "Could not rename page because of file system error: %s."
 msgstr "Állományrendszer-hiba (%s) miatt nem sikerült az átnevezés."
 
-#, fuzzy
 msgid "You are not allowed to delete this page!"
-msgstr "Nem állíthatja vissza ezt a lapot!"
+msgstr "Nem törölheti ezt a lapot!"
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr "Köszönjük, hogy változtatásaival hozzájárult a lap tökéletesítéséhez."
@@ -247,7 +245,7 @@ msgid "You already saved this page!"
 msgstr "Már mentette ezt az oldalt!"
 
 msgid "You already edited this page! Please do not use the back button."
-msgstr ""
+msgstr "Már szerkesztette ezt a lapot. Kérem, ne hazsnálja a Vissza gombot."
 
 msgid "You did not change the page content, not saved!"
 msgstr "Nem változtatta meg a lapot, ezért nem is mentettük el!"
@@ -259,7 +257,7 @@ msgstr ""
 "adminisztrátori joga!"
 
 msgid "Notifications sent to:"
-msgstr ""
+msgstr "Értesítő üzenet kiküldve: "
 
 #, python-format
 msgid ""
@@ -311,7 +309,7 @@ msgstr ""
 msgid "<unknown>"
 msgstr "<ismeretlen>"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
@@ -320,8 +318,8 @@ msgid ""
 "Password reset URL: %s/?action=recoverpass&name=%s&token=%s\n"
 msgstr ""
 "Belépési név: %s \n"
-"Belépési jelszó: %s\n"
-"Belépési URL: %s/%s?action=login\n"
+"Jelszóváltoztatási zseton (token): %s\n"
+"Jelszóváltoztatási URL: %s/?action=recoverpass&name=%s&token=%s\n"
 
 msgid ""
 "Somebody has requested to email you a password recovery token.\n"
@@ -330,10 +328,26 @@ msgid ""
 "go to the password recovery page again and enter your username and the\n"
 "recovery token.\n"
 msgstr ""
+"Valaki jelszóváltoztatási zseton (token) elküldését kérte az Ön részére.\n"
+"\n"
+"Ha elfelejtette a jelszavát, kérjük, látogassa meg a lenti URL-t, \n"
+"vagy látogasson el újra a jelszóváltoztatási lapra, és írja be\n"
+"a felhazsnálói nevét és a zseton kódját.\n"
 
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] a wiki azonosítójának adata"
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Ismeretlen akció: %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Ezen a lapon nem használhatja a %(action_name)s műveletet!"
+
+msgid "Login and try again."
+msgstr "Lépjen be, majd próbálja újra."
 
 #, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
@@ -342,9 +356,9 @@ msgstr "A csomaghoz újabb (legalább %s) verziójú MoinMoin''''''ra van szüks
 msgid "The theme name is not set."
 msgstr "A téma neve nincs beállítva."
 
-msgid "Installing theme files is only supported for standalone type servers."
-msgstr ""
-"A téma-fájlok telepítése csak a standalone típusú szervereknél támogatott."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
+msgstr "A téma fájlok nincsenek telepítve. Hiányzó írási jog %s."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -425,9 +439,9 @@ msgstr ""
 msgid "Argument \"%s\" is required"
 msgstr ""
 
-#, fuzzy, python-format
+#, python-format
 msgid "No argument named \"%s\""
-msgstr "A(z) \"%s\" laphoz nincs hasonló!"
+msgstr "A(z) \"%s\" argumentum nem létezik!"
 
 #, python-format
 msgid "Expected \"=\" to follow \"%(token)s\""
@@ -441,8 +455,9 @@ msgstr "A(z) \"%(token)s\" értéke hiányzik"
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr ""
 
+#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
 "A lap elmentett tartalma elavult, s ezért nem szerepel majd a keresések "
@@ -467,10 +482,10 @@ msgid "You are not allowed to view this page."
 msgstr "A lap megtekintése nem engedélyezett."
 
 msgid "Switch user"
-msgstr ""
+msgstr "Felhasználó váltása"
 
 msgid "No user selected"
-msgstr ""
+msgstr "Nem választott ki felhasználót"
 
 msgid ""
 "You can now change the settings of the selected user account; log out to get "
@@ -487,9 +502,8 @@ msgstr ""
 msgid "Select User"
 msgstr "Kiválasztott felhasználó"
 
-#, fuzzy
 msgid "Change password"
-msgstr "Jelszó"
+msgstr "Jelszó változtatása"
 
 msgid "Passwords don't match!"
 msgstr "A jelszavak nem egyeznek!"
@@ -499,13 +513,13 @@ msgstr "Kérjük adja meg a jelszót!"
 
 #, python-format
 msgid "Password not acceptable: %s"
-msgstr ""
+msgstr "A jelszó nem megfelelő: %s"
 
 msgid "Your password has been changed."
-msgstr ""
+msgstr "A jelszava megváltozott."
 
 msgid "To change your password, enter a new password twice."
-msgstr ""
+msgstr "A jelszó megváltoztatásához adjon meg egy újat kétszer."
 
 msgid "Password"
 msgstr "Jelszó"
@@ -538,13 +552,11 @@ msgstr ""
 msgid "OpenID error: %s."
 msgstr ""
 
-#, fuzzy
 msgid "Verification canceled."
-msgstr "A szerkesztés visszavonva."
+msgstr "A megerősítés megszakítva."
 
-#, fuzzy
 msgid "This OpenID is already used for another account."
-msgstr "Ezt a lapot már törölték, vagy soha nem is hozták létre!"
+msgstr "Ezt az OpenID-t már használja egy másik felhasználói fiók!"
 
 msgid "OpenID added successfully."
 msgstr ""
@@ -570,7 +582,6 @@ msgstr ""
 msgid "Notification settings saved!"
 msgstr ""
 
-#, fuzzy
 msgid "'''Email'''"
 msgstr "E-levél"
 
@@ -588,9 +599,8 @@ msgid ""
 "general preferences."
 msgstr ""
 
-#, fuzzy
 msgid "Subscribed events"
-msgstr "Előfizetés (csoportos)"
+msgstr "Előfizetett események"
 
 #, fuzzy
 msgid "Subscribed wiki pages<<BR>>(one regex per line)"
@@ -629,9 +639,8 @@ msgstr ""
 msgid "This email already belongs to somebody else."
 msgstr "Ezt a levélcímet már más bejegyezte."
 
-#, fuzzy
 msgid "This jabber id already belongs to somebody else."
-msgstr "Ezt a levélcímet már más bejegyezte."
+msgstr "Ezt a jabber címet már más bejegyezte."
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -703,9 +712,8 @@ msgstr "A törléseket így jelöljük."
 msgid "Additions are marked like this."
 msgstr "A kiegészítéseket így jelöljük."
 
-#, fuzzy
-msgid "You need to log in."
-msgstr "A sütit letöröltük. Ön kilépett."
+msgid "Please log in first."
+msgstr "Először be kell jelentkeznie."
 
 msgid ""
 "Please choose an account name now.\n"
@@ -732,10 +740,39 @@ msgstr ""
 msgid "Associate this name"
 msgstr ""
 
+#, fuzzy
+msgid "OpenID verification canceled."
+msgstr "A megerősítés megszakítva."
+
+#, python-format
+msgid "OpenID success. id: %s"
+msgstr ""
+
+msgid "OpenID failure"
+msgstr ""
+
+msgid "No OpenID found in session."
+msgstr ""
+
 msgid "Your account is now associated to your OpenID."
 msgstr ""
 
 msgid "The password you entered is not valid."
+msgstr ""
+
+msgid "OpenID: handle verify continuation"
+msgstr ""
+
+msgid "OpenID: handle name continuation"
+msgstr ""
+
+msgid "OpenID: handle associate continuation"
+msgstr ""
+
+msgid "OpenID: unknown continuation stage"
+msgstr ""
+
+msgid "OpenID error: unknown continuation stage"
 msgstr ""
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
@@ -765,7 +802,11 @@ msgstr ""
 #, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+"one now</a>. "
+msgstr ""
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
 
 #, fuzzy
@@ -821,7 +862,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Kiemelés:: <<Verbatim('')>>''kurzív''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''félkövér'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''félkövér "
@@ -1079,17 +1120,6 @@ msgstr "A(z) %(rev)d. módosításra való visszaállás."
 msgid "Renamed from '%(oldpagename)s'."
 msgstr "A(z) \"%(pagename)s\" lap mellékletei"
 
-#, fuzzy, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Végrehajtja a %(actionname)s műveletet?"
-
-#, fuzzy, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Ezen a lapon nem használhatja a %(actionname)s műveletet!"
-
-msgid "Login and try again."
-msgstr "Lépjen be, majd próbálja újra."
-
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr ""
 
@@ -1289,11 +1319,11 @@ msgstr "találat"
 msgid "matches"
 msgstr "találatok"
 
-msgid "FrontPage"
-msgstr "KezdőLap"
-
 msgid "RecentChanges"
 msgstr "ÚjabbVáltozások"
+
+msgid "WikiTipOfTheDay"
+msgstr ""
 
 msgid "TitleIndex"
 msgstr "CímJegyzék"
@@ -1304,23 +1334,475 @@ msgstr "SzóJegyzék"
 msgid "FindPage"
 msgstr "KeresőLap"
 
-msgid "SiteNavigation"
-msgstr "HelyiNavigáció"
-
-msgid "HelpContents"
-msgstr "SegédletTartalomjegyzék"
-
-msgid "HelpOnFormatting"
-msgstr "FormázásiSegédlet"
-
-msgid "WikiLicense"
-msgstr "WikiEngedélyek"
-
 msgid "MissingPage"
 msgstr "HiányzóLap"
 
 msgid "MissingHomePage"
 msgstr "HiányzóHonlap"
+
+#, fuzzy
+msgid "WikiHomePage"
+msgstr "HiányzóHonlap"
+
+#, fuzzy
+msgid "WikiName"
+msgstr "Név"
+
+msgid "WikiWikiWeb"
+msgstr ""
+
+msgid "FrontPage"
+msgstr "KezdőLap"
+
+msgid "WikiSandBox"
+msgstr ""
+
+#, fuzzy
+msgid "InterWiki"
+msgstr "Wiki"
+
+msgid "AbandonedPages"
+msgstr ""
+
+#, fuzzy
+msgid "OrphanedPages"
+msgstr "Oldalak csomagolása"
+
+#, fuzzy
+msgid "WantedPages"
+msgstr "KeresőLap"
+
+msgid "EventStats"
+msgstr ""
+
+msgid "EventStats/HitCounts"
+msgstr ""
+
+msgid "EventStats/Languages"
+msgstr ""
+
+msgid "EventStats/UserAgents"
+msgstr ""
+
+#, fuzzy
+msgid "PageSize"
+msgstr "Méret"
+
+#, fuzzy
+msgid "PageHits"
+msgstr "Oldal"
+
+#, fuzzy
+msgid "RandomPage"
+msgstr "LapÁtnevezés"
+
+#, fuzzy
+msgid "XsltVersion"
+msgstr "Python változat"
+
+msgid "FortuneCookies"
+msgstr ""
+
+msgid "WikiLicense"
+msgstr "WikiEngedélyek"
+
+msgid "CategoryCategory"
+msgstr ""
+
+msgid "CategoryHomepage"
+msgstr ""
+
+msgid "CategoryTemplate"
+msgstr ""
+
+msgid "HomepageTemplate"
+msgstr ""
+
+msgid "HelpTemplate"
+msgstr ""
+
+msgid "HomepageReadWritePageTemplate"
+msgstr ""
+
+msgid "HomepageReadPageTemplate"
+msgstr ""
+
+msgid "HomepagePrivatePageTemplate"
+msgstr ""
+
+msgid "HomepageGroupsTemplate"
+msgstr ""
+
+msgid "SlideShowHandOutTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "SlideShowTemplate"
+msgstr "Diavetítés"
+
+msgid "SlideTemplate"
+msgstr ""
+
+msgid "SyncJobTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration"
+msgstr "FormázásiSegédlet"
+
+msgid "HelpOnConfiguration/EmailSupport"
+msgstr ""
+
+msgid "HelpOnConfiguration/SecurityPolicy"
+msgstr ""
+
+msgid "HelpOnConfiguration/FileAttachments"
+msgstr ""
+
+msgid "HelpOnConfiguration/SupplementationPage"
+msgstr ""
+
+msgid "HelpOnConfiguration/SurgeProtection"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration/UserPreferences"
+msgstr "FelhasználóiBeállítások"
+
+msgid "HelpOnPackageInstaller"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUpdating"
+msgstr "FormázásiSegédlet"
+
+#, fuzzy
+msgid "HelpOnUpdatingPython"
+msgstr "FormázásiSegédlet"
+
+#, fuzzy
+msgid "HelpOnAdministration"
+msgstr "FormázásiSegédlet"
+
+msgid "HelpOnAuthentication"
+msgstr ""
+
+msgid "HelpOnAuthentication/ExternalCookie"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnMoinCommand"
+msgstr "FormázásiSegédlet"
+
+msgid "HelpOnMoinCommand/ExportDump"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNotification"
+msgstr "FormázásiSegédlet"
+
+#, fuzzy
+msgid "HelpOnSessions"
+msgstr "SegédletTartalomjegyzék"
+
+#, fuzzy
+msgid "HelpOnUserHandling"
+msgstr "FormázásiSegédlet"
+
+#, fuzzy
+msgid "HelpOnXapian"
+msgstr "FormázásiSegédlet"
+
+msgid "HelpOnMoinWikiSyntax"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnCreoleSyntax"
+msgstr "SegédletTartalomjegyzék"
+
+msgid "HelpOnFormatting"
+msgstr "FormázásiSegédlet"
+
+#, fuzzy
+msgid "MoinMoin"
+msgstr "MoinMoin (MoinMoinLap) változat"
+
+msgid "HelpContents"
+msgstr "SegédletTartalomjegyzék"
+
+msgid "HelpForBeginners"
+msgstr ""
+
+msgid "HelpForUsers"
+msgstr ""
+
+#, fuzzy
+msgid "HelpIndex"
+msgstr "CímJegyzék"
+
+msgid "HelpOnAccessControlLists"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnActions"
+msgstr "SegédletTartalomjegyzék"
+
+msgid "HelpOnActions/AttachFile"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnAdmonitions"
+msgstr "SegédletTartalomjegyzék"
+
+#, fuzzy
+msgid "HelpOnAutoAdmin"
+msgstr "FormázásiSegédlet"
+
+msgid "HelpOnCategories"
+msgstr ""
+
+msgid "HelpOnDictionaries"
+msgstr ""
+
+msgid "HelpOnEditLocks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnEditing"
+msgstr "FormázásiSegédlet"
+
+msgid "HelpOnEditing/SubPages"
+msgstr ""
+
+msgid "HelpOnGraphicalEditor"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnGroups"
+msgstr "SegédletTartalomjegyzék"
+
+msgid "HelpOnHeadlines"
+msgstr ""
+
+msgid "HelpOnLanguages"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnLinking"
+msgstr "FormázásiSegédlet"
+
+msgid "HelpOnLinking/NotesLinks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnLists"
+msgstr "SegédletTartalomjegyzék"
+
+#, fuzzy
+msgid "HelpOnLogin"
+msgstr "FormázásiSegédlet"
+
+msgid "HelpOnMacros"
+msgstr ""
+
+msgid "HelpOnMacros/EmbedObject"
+msgstr ""
+
+msgid "HelpOnMacros/Include"
+msgstr ""
+
+msgid "HelpOnMacros/MailTo"
+msgstr ""
+
+msgid "HelpOnMacros/MonthCalendar"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNavigation"
+msgstr "HelyiNavigáció"
+
+msgid "HelpOnOpenIDProvider"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnPageCreation"
+msgstr "FormázásiSegédlet"
+
+msgid "HelpOnPageDeletion"
+msgstr ""
+
+msgid "HelpOnParsers"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText/RstPrimer"
+msgstr ""
+
+msgid "HelpOnProcessingInstructions"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnRules"
+msgstr "SegédletTartalomjegyzék"
+
+#, fuzzy
+msgid "HelpOnSearching"
+msgstr "FormázásiSegédlet"
+
+#, fuzzy
+msgid "HelpOnSlideShows"
+msgstr "Diavetítés"
+
+msgid "HelpOnSlideShows/000 Introduction"
+msgstr ""
+
+msgid "HelpOnSlideShows/100 Creating the slides"
+msgstr ""
+
+msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
+msgstr ""
+
+msgid "HelpOnSmileys"
+msgstr ""
+
+msgid "HelpOnSpam"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSpellCheck"
+msgstr "HelyesírásEllenőrzés"
+
+msgid "HelpOnSuperUser"
+msgstr ""
+
+msgid "HelpOnSynchronisation"
+msgstr ""
+
+msgid "HelpOnTables"
+msgstr ""
+
+msgid "HelpOnTemplates"
+msgstr ""
+
+msgid "HelpOnThemes"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUserPreferences"
+msgstr "FelhasználóiBeállítások"
+
+msgid "HelpOnVariables"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnXmlPages"
+msgstr "FormázásiSegédlet"
+
+#, fuzzy
+msgid "HelpOnComments"
+msgstr "SegédletTartalomjegyzék"
+
+#, fuzzy
+msgid "HelpOnSubscribing"
+msgstr "Leiratkozás"
+
+msgid "CamelCase"
+msgstr ""
+
+msgid "WikiCourse"
+msgstr ""
+
+msgid "WikiCourse/01 What is a MoinMoin wiki?"
+msgstr ""
+
+msgid "WikiCourse/02 Finding information"
+msgstr ""
+
+msgid "WikiCourse/03 Staying up to date"
+msgstr ""
+
+msgid "WikiCourse/04 Creating a wiki account"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/05 User preferences"
+msgstr "FelhasználóiBeállítások"
+
+msgid "WikiCourse/06 Your own wiki homepage"
+msgstr ""
+
+msgid "WikiCourse/07 The text editor"
+msgstr ""
+
+msgid "WikiCourse/08 Hot Keys"
+msgstr ""
+
+msgid "WikiCourse/10 Text layout with wiki markup"
+msgstr ""
+
+msgid "WikiCourse/11 Paragraphs"
+msgstr ""
+
+msgid "WikiCourse/12 Headlines"
+msgstr ""
+
+msgid "WikiCourse/13 Lists"
+msgstr ""
+
+msgid "WikiCourse/14 Text styles"
+msgstr ""
+
+msgid "WikiCourse/15 Tables"
+msgstr ""
+
+msgid "WikiCourse/16 Wiki internal links"
+msgstr ""
+
+msgid "WikiCourse/17 External links"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/18 Attachments"
+msgstr "Új melléklet"
+
+msgid "WikiCourse/19 Symbols"
+msgstr ""
+
+msgid "WikiCourse/20 Dynamic content"
+msgstr ""
+
+msgid "WikiCourse/21 Macros"
+msgstr ""
+
+msgid "WikiCourse/22 Parsers"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/23 Actions"
+msgstr "További műveletek:"
+
+msgid "WikiCourse/30 The graphical editor"
+msgstr ""
+
+msgid "WikiCourse/40 Creating more pages"
+msgstr ""
+
+msgid "WikiCourse/50 Wiki etiquette"
+msgstr ""
+
+msgid "WikiCourse/51 Applications"
+msgstr ""
+
+msgid "WikiCourse/52 Structure in the wiki"
+msgstr ""
+
+msgid "WikiCourseHandOut"
+msgstr ""
+
+msgid "Sun"
+msgstr "Vasárnap"
 
 msgid "Mon"
 msgstr "Hétfő"
@@ -1339,9 +1821,6 @@ msgstr "Péntek"
 
 msgid "Sat"
 msgstr "Szombat"
-
-msgid "Sun"
-msgstr "Vasárnap"
 
 msgid "AttachFile"
 msgstr "ÁllományCsatolás"
@@ -1851,6 +2330,10 @@ msgstr "Kezdet"
 msgid "Slide %(pos)d of %(size)d"
 msgstr "%(pos)d. dia, mérete: %(size)d"
 
+#, python-format
+msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
+msgstr ""
+
 msgid "Go To Page"
 msgstr "Ugrás a laphoz"
 
@@ -2107,16 +2590,16 @@ msgstr "A(z) \"%(pagename)s\" lap mellékletei"
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr ""
 
-#, fuzzy
-msgid "You are not allowed to overwrite a file attachment of this page."
-msgstr "A mellékletek megtekintése nem engedélyezett ennél a lapnál."
-
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
 msgstr ""
 "Hibás az állománynév. Kérjük törölje a nem-ASCII karaktereket az "
 "állománynévből, és próbálja újra."
+
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "A mellékletek megtekintése nem engedélyezett ennél a lapnál."
 
 #, python-format
 msgid ""
@@ -2698,10 +3181,6 @@ msgstr "A szóközmennyiség változásának figyelmen kívül hagyása"
 msgid "Invalid filename \"%s\"!"
 msgstr "Érvénytelen fájlnév: \"%s\""
 
-#, python-format
-msgid "Created the package %s containing the pages %s."
-msgstr "%s nevű csomag, mely tartalmazza a(z) %s oldalakat, létre lett hozva."
-
 #, fuzzy
 msgid "Include all attachments?"
 msgstr "[%d melléklet]"
@@ -2731,9 +3210,6 @@ msgstr "Nem felhasználó:"
 
 msgid "You are not allowed to perform this action."
 msgstr "Ezt a műveletet nem hajthatja végre."
-
-msgid "Please log in first."
-msgstr "Először be kell jelentkeznie."
 
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Mielőtt további oldalakat készít kérjük, készítse el a honlapját!"
@@ -2788,6 +3264,17 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "Saját (személyes) lapok kezelése"
+
+#, fuzzy
+msgid "page package"
+msgstr "Oldalak csomagolása"
+
+msgid "Choose:"
+msgstr ""
+
+#, python-format
+msgid "Install language packs for '%s'"
+msgstr ""
 
 #, fuzzy
 msgid "Your subscription to this page has been removed."
@@ -2972,6 +3459,35 @@ msgid "anonymous"
 msgstr ""
 
 #~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr ""
+#~ "A téma-fájlok telepítése csak a standalone típusú szervereknél támogatott."
+
+#, fuzzy
+#~ msgid "InterWikiMap"
+#~ msgstr "Wiki-jelölés"
+
+#, fuzzy
+#~ msgid "BadContent"
+#~ msgstr "Tartalomjegyzék"
+
+#, fuzzy
+#~ msgid "LocalBadContent"
+#~ msgstr "Tartalomjegyzék"
+
+#, fuzzy
+#~ msgid "EditedSystemPages"
+#~ msgstr "A rendszerlapok ne szerepeljenek"
+
+#~ msgid "Created the package %s containing the pages %s."
+#~ msgstr ""
+#~ "%s nevű csomag, mely tartalmazza a(z) %s oldalakat, létre lett hozva."
+
+#, fuzzy
+#~ msgid "You need to log in."
+#~ msgstr "A sütit letöröltük. Ön kilépett."
+
+#~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
 #~ "Files: %(filecount)d, Directories: %(dircount)d"
 #~ msgstr ""
@@ -3138,9 +3654,6 @@ msgstr ""
 
 #~ msgid "[%(lang)s] %(recipients)s: %(status)s"
 #~ msgstr "[%(lang)s] %(recipients)s: %(status)s"
-
-#~ msgid "UserPreferences"
-#~ msgstr "FelhasználóiBeállítások"
 
 #~ msgid "Subscribe to trivial changes"
 #~ msgstr "Előfizetés a lényegtelen változásokra"

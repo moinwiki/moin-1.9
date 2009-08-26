@@ -297,7 +297,7 @@ class Emitter:
                 # link to an attachment
                 scheme = m.group('attach_scheme')
                 attachment = m.group('attach_addr')
-                url = wikiutil.url_unquote(attachment, want_unicode=True)
+                url = wikiutil.url_unquote(attachment)
                 text = self.get_text(node)
                 return ''.join([
                         self.formatter.attachment_link(1, url),
@@ -321,7 +321,7 @@ class Emitter:
         if m:
             if m.group('page_name'):
                 # inserted anchors
-                url = wikiutil.url_unquote(target, want_unicode=True)
+                url = wikiutil.url_unquote(target)
                 if target.startswith('#'):
                     return self.formatter.anchordef(url[1:])
                 # default to images
@@ -331,14 +331,14 @@ class Emitter:
                 # external link
                 address = m.group('extern_addr')
                 proto = m.group('extern_proto')
-                url = wikiutil.url_unquote(address, want_unicode=True)
+                url = wikiutil.url_unquote(address)
                 return self.formatter.image(
                     src=url, alt=text, html_class='external_image')
             elif m.group('attach_scheme'):
                 # link to an attachment
                 scheme = m.group('attach_scheme')
                 attachment = m.group('attach_addr')
-                url = wikiutil.url_unquote(attachment, want_unicode=True)
+                url = wikiutil.url_unquote(attachment)
                 if scheme == 'image':
                     return self.formatter.attachment_image(
                         url, alt=text, html_class='image')
@@ -350,19 +350,19 @@ class Emitter:
                 # interwiki link
                 pass
 #        return "".join(["{{", self.formatter.text(target), "}}"])
-        url = wikiutil.url_unquote(node.content, want_unicode=True)
+        url = wikiutil.url_unquote(node.content)
         return self.formatter.attachment_inlined(url, text)
 
 # Not used
 #    def drawing_emit(self, node):
-#        url = wikiutil.url_unquote(node.content, want_unicode=True)
+#        url = wikiutil.url_unquote(node.content)
 #        text = self.get_text(node)
 #        return self.formatter.attachment_drawing(url, text)
 
 # Not used
 #    def figure_emit(self, node):
 #        text = self.get_text(node)
-#        url = wikiutil.url_unquote(node.content, want_unicode=True)
+#        url = wikiutil.url_unquote(node.content)
 #        return ''.join([
 #            self.formatter.rawHTML('<div class="figure">'),
 #            self.get_image(url, text), self.emit_children(node),

@@ -18,16 +18,21 @@
     Additionally to the usual stuff, we provide an ActionBase class here with
     some of the usual base functionality for an action, like checking
     actions_excluded, making and checking tickets, rendering some form,
-    displaying errors and doing stuff after an action.
+    displaying errors and doing stuff after an action. Also utility functions
+    regarding actions are located here.
 
     @copyright: 2000-2004 Juergen Hermann <jh@web.de>,
                 2006 MoinMoin:ThomasWaldmann
+                2008 MoinMoin:FlorianKrupicka
     @license: GNU GPL, see COPYING for details.
 """
+
+import re
 
 from MoinMoin.util import pysupport
 from MoinMoin import config, wikiutil
 from MoinMoin.Page import Page
+from MoinMoin.support.python_compatibility import set
 
 # create a list of extension actions from the package directory
 modules = pysupport.getPackageModules(__file__)
@@ -88,7 +93,7 @@ class ActionBase:
             return True
         # Require a valid ticket. Make outside attacks harder by
         # requiring two full HTTP transactions
-        ticket = self.form.get('ticket', [''])[0]
+        ticket = self.form.get('ticket', '')
         return wikiutil.checkTicket(self.request, ticket)
 
     # UI ---------------------------------------------------------------------
@@ -134,19 +139,17 @@ class ActionBase:
 
         d = {
             'method': self.method,
-            'baseurl': self.request.getScriptname(),
+            'url': self.request.href(self.pagename),
             'enctype': self.enctype,
             'error_html': error_html,
             'actionname': self.actionname,
-            'pagename': self.pagename,
-            'pagename_quoted': wikiutil.quoteWikinameURL(self.pagename),
             'ticket_html': ticket_html,
             'user_html': self.get_form_html(buttons_html),
         }
 
         form_html = '''
 %(error_html)s
-<form action="%(baseurl)s/%(pagename_quoted)s" method="%(method)s" enctype="%(enctype)s">
+<form action="%(url)s" method="%(method)s" enctype="%(enctype)s">
 <div>
 <input type="hidden" name="action" value="%(actionname)s">
 %(ticket_html)s
@@ -227,23 +230,28 @@ class ActionBase:
 
 # Builtin Actions ------------------------------------------------------------
 
+MIMETYPE_CRE = re.compile('[a-zA-Z0-9.+\-]{1,100}/[a-zA-Z0-9.+\-]{1,100}')
+
 def do_raw(pagename, request):
     """ send raw content of a page (e.g. wiki markup) """
     if not request.user.may.read(pagename):
         Page(request, pagename).send_page()
     else:
         rev = request.rev or 0
-        Page(request, pagename, rev=rev).send_raw()
+        mimetype = request.values.get('mimetype', None)
+        if mimetype and not MIMETYPE_CRE.match(mimetype):
+            mimetype = None
+        Page(request, pagename, rev=rev).send_raw(mimetype=mimetype)
 
-def do_show(pagename, request, content_only=0, count_hit=1, cacheable=1, print_mode=0):
-    """ show a page, either current revision or the revision given by rev form value.
+def do_show(pagename, request, content_only=0, count_hit=1, cacheable=1, print_mode=0, mimetype=u'text/html'):
+    """ show a page, either current revision or the revision given by "rev=" value.
         if count_hit is non-zero, we count the request for statistics.
     """
     # We must check if the current page has different ACLs.
     if not request.user.may.read(pagename):
         Page(request, pagename).send_page()
     else:
-        mimetype = request.form.get('mimetype', [u"text/html"])[0]
+        mimetype = request.values.get('mimetype', mimetype)
         rev = request.rev or 0
         if rev == 0:
             request.cacheable = cacheable
@@ -254,22 +262,19 @@ def do_show(pagename, request, content_only=0, count_hit=1, cacheable=1, print_m
         )
 
 def do_format(pagename, request):
-    """ send a page using a specific formatter given by mimetype form key.
+    """ send a page using a specific formatter given by "mimetype=" value.
         Since 5.5.2006 this functionality is also done by do_show, but do_format
         has a default of text/plain when no format is given.
         It also does not count in statistics and also does not set the cacheable flag.
         DEPRECATED: remove this action when we don't need it any more for compatibility.
     """
-    if 'mimetype' not in request.form:
-        request.form['mimetype'] = [u"text/plain"]
-    do_show(pagename, request, count_hit=0, cacheable=0)
+    do_show(pagename, request, count_hit=0, cacheable=0, mimetype=u'text/plain')
 
 def do_content(pagename, request):
     """ same as do_show, but we only show the content """
     # XXX temporary fix to make it work until Page.send_page gets refactored
-    request.setHttpHeader("Content-Type: text/html; charset=%s" % config.charset)
-    request.setHttpHeader('Status: 200 OK')
-    request.emit_http_headers()
+    request.mimetype = 'text/html'
+    request.status_code = 200
     do_show(pagename, request, count_hit=0, content_only=1)
 
 def do_print(pagename, request):
@@ -283,10 +288,10 @@ def do_recall(pagename, request):
 def do_refresh(pagename, request):
     """ Handle refresh action """
     # Without arguments, refresh action will refresh the page text_html cache.
-    arena = request.form.get('arena', ['Page.py'])[0]
+    arena = request.values.get('arena', 'Page.py')
     if arena == 'Page.py':
         arena = Page(request, pagename)
-    key = request.form.get('key', ['text_html'])[0]
+    key = request.values.get('key', 'text_html')
 
     # Remove cache entry (if exists), and send the page
     from MoinMoin import caching
@@ -296,27 +301,71 @@ def do_refresh(pagename, request):
 
 def do_goto(pagename, request):
     """ redirect to another page """
-    target = request.form.get('target', [''])[0]
+    target = request.values.get('target', '')
     request.http_redirect(Page(request, target).url(request))
 
 # Dispatching ----------------------------------------------------------------
-def getNames(cfg):
-    if not hasattr(cfg.cache, 'action_names'):
-        lnames = names[:]
-        lnames.extend(wikiutil.getPlugins('action', cfg))
-        cfg.cache.action_names = lnames # remember it
-    return cfg.cache.action_names
+def get_names(config):
+    """ Get a list of known actions.
 
-def getHandler(request, action, identifier="execute"):
-    """ return a handler function for a given action or None """
+    @param config: a config object
+    @rtype: set
+    @return: set of known actions
+    """
+    if not hasattr(config.cache, 'action_names'):
+        actions = names[:]
+        actions.extend(wikiutil.getPlugins('action', config))
+        actions = set([action for action in actions
+                      if not action in config.actions_excluded])
+        config.cache.action_names = actions # remember it
+    return config.cache.action_names
+
+def getHandler(cfg, action, identifier="execute"):
+    """ return a handler function for a given action or None.
+
+    TODO: remove request dependency
+    """
     # check for excluded actions
-    if action in request.cfg.actions_excluded:
+    if action in cfg.actions_excluded:
         return None
 
     try:
-        handler = wikiutil.importPlugin(request.cfg, "action", action, identifier)
+        handler = wikiutil.importPlugin(cfg, "action", action, identifier)
     except wikiutil.PluginMissingError:
         handler = globals().get('do_' + action)
 
     return handler
+
+def get_available_actions(config, page, user):
+        """ Get a list of actions available on a particular page
+        for a particular user.
+
+        The set does not contain actions that starts with lower case.
+        Themes use this set to display the actions to the user.
+
+        @param config: a config object (for the per-wiki actions)
+        @param page: the page to which the actions should apply
+        @param user: the user which wants to apply an action
+        @rtype: set
+        @return: set of avaiable actions
+        """
+        if not user.may.read(page.page_name):
+            return []
+
+
+        actions = get_names(config)
+
+        # Filter non ui actions (starts with lower case letter)
+        actions = [action for action in actions if not action[0].islower()]
+
+        # Filter actions by page type, acl and user state
+        excluded = []
+        if (page.isUnderlayPage() and not page.isStandardPage()) or \
+                not user.may.write(page.page_name) or \
+                not user.may.delete(page.page_name):
+                # Prevent modification of underlay only pages, or pages
+                # the user can't write and can't delete
+                excluded = [u'RenamePage', u'DeletePage', ] # AttachFile must NOT be here!
+        return set([action for action in actions if not action in excluded])
+
 

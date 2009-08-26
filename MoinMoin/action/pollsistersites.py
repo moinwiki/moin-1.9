@@ -54,5 +54,5 @@ def execute(pagename, request):
         except TypeError: # catch bug in python 2.5: "EnvironmentError expected at most 3 arguments, got 4"
             status.append(u"Site: %s Status: Not updated." % sistername)
 
-    request.emit_http_headers(["Content-Type: text/plain; charset=UTF-8"])
+    request.mimetype = 'text/plain'
     request.write("\r\n".join(status).encode("utf-8"))

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-26 21:29+0200\n"
+"POT-Creation-Date: 2009-07-27 00:57+0200\n"
 "PO-Revision-Date: 2008-09-13 23:53+0200\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -357,14 +357,26 @@ msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] Данные вашей учетной записи wiki"
 
 #, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Неизвестное действие %(action_name)s ."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Вам нельзя делать %(action_name)s на этой странице!"
+
+msgid "Login and try again."
+msgstr "Войдите и повторите еще раз."
+
+#, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
 msgstr "Этому пакету нужна более новая версия МойнМойн (как минимум %s)."
 
 msgid "The theme name is not set."
 msgstr "Имя темы не задано."
 
-msgid "Installing theme files is only supported for standalone type servers."
-msgstr "Установка тем допустима только на автономных серверах."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
+msgstr ""
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -466,8 +478,9 @@ msgstr "Нужно значение для ключа \"%(token)s\""
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Неправильное регулярное выражение подсветки \"%(regex)s\": %(error)s"
 
+#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr "Сохраненная версия страницы устарела и не войдет в результаты поиска!"
 
@@ -725,8 +738,8 @@ msgstr "Удаления помечены так."
 msgid "Additions are marked like this."
 msgstr "Добавления помечены так."
 
-msgid "You need to log in."
-msgstr "Вам необходимо войти в систему."
+msgid "Please log in first."
+msgstr "Сперва войдите, пожалуйста."
 
 msgid ""
 "Please choose an account name now.\n"
@@ -760,11 +773,43 @@ msgstr ""
 msgid "Associate this name"
 msgstr "Связать это имя"
 
+#, fuzzy
+msgid "OpenID verification canceled."
+msgstr "Проверка отменена."
+
+#, fuzzy, python-format
+msgid "OpenID success. id: %s"
+msgstr "OpenID успешно добавлен."
+
+#, fuzzy
+msgid "OpenID failure"
+msgstr "Ошибка OpenID."
+
+#, fuzzy
+msgid "No OpenID found in session."
+msgstr "Не задано ни одного OpenID."
+
 msgid "Your account is now associated to your OpenID."
 msgstr "Ваша учетная запись связана с вашим OpenID."
 
 msgid "The password you entered is not valid."
 msgstr "Введенный вами пароль не верен."
+
+#, fuzzy
+msgid "OpenID: handle verify continuation"
+msgstr "Проверка OpenID Trust"
+
+msgid "OpenID: handle name continuation"
+msgstr ""
+
+msgid "OpenID: handle associate continuation"
+msgstr ""
+
+msgid "OpenID: unknown continuation stage"
+msgstr ""
+
+msgid "OpenID error: unknown continuation stage"
+msgstr ""
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
 msgstr "Для входа по OpenID должны быть включены анонимные сессии."
@@ -792,14 +837,18 @@ msgstr "LDAP-сервер %(server)s недоступен."
 msgid "Failed to connect to database."
 msgstr "Ошибка при соединении с базой данных."
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+"one now</a>. "
 msgstr ""
 "Если у вас нет учетной записи, <a href=\"%(userprefslink)s\">вы можете "
 "создать его сейчас</a>. <a href=\"%(sendmypasswordlink)s\">Забыли ваш пароль?"
 "</a>"
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+msgstr ""
 
 msgid ""
 " Emphasis:: <<Verbatim(//)>>''italics''<<Verbatim(//)>>; <<Verbatim(**)"
@@ -832,6 +881,7 @@ msgstr ""
 " Таблицы:: |= текст заголовка ячейки |ячейка|ещё ячейка|;\n"
 "(!) Подробная помощь КакРедактировать и HelpOnCreoleSyntax.\n"
 
+#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
@@ -847,7 +897,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Выделение:: <<Verbatim('')>>''курсивом''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''жирным'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''жирным "
@@ -1112,17 +1162,6 @@ msgstr "Возвращена версия %(rev)d."
 msgid "Renamed from '%(oldpagename)s'."
 msgstr "Переименовано из '%(oldpagename)s'."
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Неизвестное действие %(action_name)s ."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Вам нельзя делать %(action_name)s на этой странице!"
-
-msgid "Login and try again."
-msgstr "Войдите и повторите еще раз."
-
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr "Опции --pages и --search взаимно исключаемы!"
 
@@ -1329,11 +1368,11 @@ msgstr "совпадение"
 msgid "matches"
 msgstr "совпадений"
 
-msgid "FrontPage"
-msgstr "Начало"
-
 msgid "RecentChanges"
 msgstr "ПоследниеИзменения"
+
+msgid "WikiTipOfTheDay"
+msgstr ""
 
 msgid "TitleIndex"
 msgstr "АлфавитныйУказатель"
@@ -1344,23 +1383,482 @@ msgstr "ПредметныйУказатель"
 msgid "FindPage"
 msgstr "НайтиСтраницу"
 
-msgid "SiteNavigation"
-msgstr "НавигацияПоСайту"
-
-msgid "HelpContents"
-msgstr "ПомощьПоГлавам"
-
-msgid "HelpOnFormatting"
-msgstr "КакФорматировать"
-
-msgid "WikiLicense"
-msgstr "ВикиЛицензия"
-
 msgid "MissingPage"
 msgstr "НетСтраницы"
 
 msgid "MissingHomePage"
 msgstr "НетДомашнейСтраницы"
+
+#, fuzzy
+msgid "WikiHomePage"
+msgstr "НетДомашнейСтраницы"
+
+#, fuzzy
+msgid "WikiName"
+msgstr "Полное имя"
+
+msgid "WikiWikiWeb"
+msgstr ""
+
+msgid "FrontPage"
+msgstr "Начало"
+
+msgid "WikiSandBox"
+msgstr ""
+
+#, fuzzy
+msgid "InterWiki"
+msgstr "Вики"
+
+msgid "AbandonedPages"
+msgstr ""
+
+#, fuzzy
+msgid "OrphanedPages"
+msgstr "Измененная страница"
+
+#, fuzzy
+msgid "WantedPages"
+msgstr "НайтиСтраницу"
+
+msgid "EventStats"
+msgstr ""
+
+msgid "EventStats/HitCounts"
+msgstr ""
+
+msgid "EventStats/Languages"
+msgstr ""
+
+msgid "EventStats/UserAgents"
+msgstr ""
+
+#, fuzzy
+msgid "PageSize"
+msgstr "Размер"
+
+#, fuzzy
+msgid "PageHits"
+msgstr "Страницы"
+
+#, fuzzy
+msgid "RandomPage"
+msgstr "ПереименоватьСтраницу"
+
+#, fuzzy
+msgid "XsltVersion"
+msgstr "Версия Python"
+
+msgid "FortuneCookies"
+msgstr ""
+
+msgid "WikiLicense"
+msgstr "ВикиЛицензия"
+
+#, fuzzy
+msgid "CategoryCategory"
+msgstr "любая категория"
+
+#, fuzzy
+msgid "CategoryHomepage"
+msgstr "Категории"
+
+#, fuzzy
+msgid "CategoryTemplate"
+msgstr "Категории"
+
+msgid "HomepageTemplate"
+msgstr ""
+
+msgid "HelpTemplate"
+msgstr ""
+
+msgid "HomepageReadWritePageTemplate"
+msgstr ""
+
+msgid "HomepageReadPageTemplate"
+msgstr ""
+
+msgid "HomepagePrivatePageTemplate"
+msgstr ""
+
+msgid "HomepageGroupsTemplate"
+msgstr ""
+
+msgid "SlideShowHandOutTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "SlideShowTemplate"
+msgstr "Презентация"
+
+msgid "SlideTemplate"
+msgstr ""
+
+msgid "SyncJobTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration"
+msgstr "КакФорматировать"
+
+msgid "HelpOnConfiguration/EmailSupport"
+msgstr ""
+
+msgid "HelpOnConfiguration/SecurityPolicy"
+msgstr ""
+
+msgid "HelpOnConfiguration/FileAttachments"
+msgstr ""
+
+msgid "HelpOnConfiguration/SupplementationPage"
+msgstr ""
+
+msgid "HelpOnConfiguration/SurgeProtection"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration/UserPreferences"
+msgstr "ВашиНастройки"
+
+msgid "HelpOnPackageInstaller"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUpdating"
+msgstr "КакФорматировать"
+
+#, fuzzy
+msgid "HelpOnUpdatingPython"
+msgstr "КакФорматировать"
+
+#, fuzzy
+msgid "HelpOnAdministration"
+msgstr "КакФорматировать"
+
+msgid "HelpOnAuthentication"
+msgstr ""
+
+msgid "HelpOnAuthentication/ExternalCookie"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnMoinCommand"
+msgstr "КакФорматировать"
+
+msgid "HelpOnMoinCommand/ExportDump"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNotification"
+msgstr "Уведомление"
+
+#, fuzzy
+msgid "HelpOnSessions"
+msgstr "ПомощьПоГлавам"
+
+#, fuzzy
+msgid "HelpOnUserHandling"
+msgstr "КакФорматировать"
+
+#, fuzzy
+msgid "HelpOnXapian"
+msgstr "КакФорматировать"
+
+msgid "HelpOnMoinWikiSyntax"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnCreoleSyntax"
+msgstr "ПомощьПоГлавам"
+
+msgid "HelpOnFormatting"
+msgstr "КакФорматировать"
+
+#, fuzzy
+msgid "MoinMoin"
+msgstr "Версия МойнМойн"
+
+msgid "HelpContents"
+msgstr "ПомощьПоГлавам"
+
+msgid "HelpForBeginners"
+msgstr ""
+
+msgid "HelpForUsers"
+msgstr ""
+
+#, fuzzy
+msgid "HelpIndex"
+msgstr "АлфавитныйУказатель"
+
+msgid "HelpOnAccessControlLists"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnActions"
+msgstr "ПомощьПоГлавам"
+
+msgid "HelpOnActions/AttachFile"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnAdmonitions"
+msgstr "ПомощьПоГлавам"
+
+#, fuzzy
+msgid "HelpOnAutoAdmin"
+msgstr "КакФорматировать"
+
+#, fuzzy
+msgid "HelpOnCategories"
+msgstr "Категории"
+
+msgid "HelpOnDictionaries"
+msgstr ""
+
+msgid "HelpOnEditLocks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnEditing"
+msgstr "КакФорматировать"
+
+msgid "HelpOnEditing/SubPages"
+msgstr ""
+
+msgid "HelpOnGraphicalEditor"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnGroups"
+msgstr "ПомощьПоГлавам"
+
+msgid "HelpOnHeadlines"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnLanguages"
+msgstr "Язык"
+
+#, fuzzy
+msgid "HelpOnLinking"
+msgstr "КакФорматировать"
+
+msgid "HelpOnLinking/NotesLinks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnLists"
+msgstr "ПомощьПоГлавам"
+
+#, fuzzy
+msgid "HelpOnLogin"
+msgstr "КакФорматировать"
+
+msgid "HelpOnMacros"
+msgstr ""
+
+msgid "HelpOnMacros/EmbedObject"
+msgstr ""
+
+msgid "HelpOnMacros/Include"
+msgstr ""
+
+msgid "HelpOnMacros/MailTo"
+msgstr ""
+
+msgid "HelpOnMacros/MonthCalendar"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNavigation"
+msgstr "НавигацияПоСайту"
+
+#, fuzzy
+msgid "HelpOnOpenIDProvider"
+msgstr "OpenID сервер"
+
+#, fuzzy
+msgid "HelpOnPageCreation"
+msgstr "КакФорматировать"
+
+msgid "HelpOnPageDeletion"
+msgstr ""
+
+msgid "HelpOnParsers"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText/RstPrimer"
+msgstr ""
+
+msgid "HelpOnProcessingInstructions"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnRules"
+msgstr "ПомощьПоГлавам"
+
+#, fuzzy
+msgid "HelpOnSearching"
+msgstr "КакФорматировать"
+
+#, fuzzy
+msgid "HelpOnSlideShows"
+msgstr "Презентация"
+
+msgid "HelpOnSlideShows/000 Introduction"
+msgstr ""
+
+msgid "HelpOnSlideShows/100 Creating the slides"
+msgstr ""
+
+msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
+msgstr ""
+
+msgid "HelpOnSmileys"
+msgstr ""
+
+msgid "HelpOnSpam"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSpellCheck"
+msgstr "Правописание"
+
+msgid "HelpOnSuperUser"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSynchronisation"
+msgstr "Синхронизация началась -"
+
+msgid "HelpOnTables"
+msgstr ""
+
+msgid "HelpOnTemplates"
+msgstr ""
+
+msgid "HelpOnThemes"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUserPreferences"
+msgstr "ВашиНастройки"
+
+msgid "HelpOnVariables"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnXmlPages"
+msgstr "КакФорматировать"
+
+#, fuzzy
+msgid "HelpOnComments"
+msgstr "ПомощьПоГлавам"
+
+#, fuzzy
+msgid "HelpOnSubscribing"
+msgstr "Отписаться"
+
+msgid "CamelCase"
+msgstr ""
+
+msgid "WikiCourse"
+msgstr ""
+
+msgid "WikiCourse/01 What is a MoinMoin wiki?"
+msgstr ""
+
+msgid "WikiCourse/02 Finding information"
+msgstr ""
+
+msgid "WikiCourse/03 Staying up to date"
+msgstr ""
+
+msgid "WikiCourse/04 Creating a wiki account"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/05 User preferences"
+msgstr "ВашиНастройки"
+
+msgid "WikiCourse/06 Your own wiki homepage"
+msgstr ""
+
+msgid "WikiCourse/07 The text editor"
+msgstr ""
+
+msgid "WikiCourse/08 Hot Keys"
+msgstr ""
+
+msgid "WikiCourse/10 Text layout with wiki markup"
+msgstr ""
+
+msgid "WikiCourse/11 Paragraphs"
+msgstr ""
+
+msgid "WikiCourse/12 Headlines"
+msgstr ""
+
+msgid "WikiCourse/13 Lists"
+msgstr ""
+
+msgid "WikiCourse/14 Text styles"
+msgstr ""
+
+msgid "WikiCourse/15 Tables"
+msgstr ""
+
+msgid "WikiCourse/16 Wiki internal links"
+msgstr ""
+
+msgid "WikiCourse/17 External links"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/18 Attachments"
+msgstr "Новое вложение"
+
+msgid "WikiCourse/19 Symbols"
+msgstr ""
+
+msgid "WikiCourse/20 Dynamic content"
+msgstr ""
+
+msgid "WikiCourse/21 Macros"
+msgstr ""
+
+msgid "WikiCourse/22 Parsers"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/23 Actions"
+msgstr "Другие действия:"
+
+msgid "WikiCourse/30 The graphical editor"
+msgstr ""
+
+msgid "WikiCourse/40 Creating more pages"
+msgstr ""
+
+msgid "WikiCourse/50 Wiki etiquette"
+msgstr ""
+
+msgid "WikiCourse/51 Applications"
+msgstr ""
+
+msgid "WikiCourse/52 Structure in the wiki"
+msgstr ""
+
+msgid "WikiCourseHandOut"
+msgstr ""
+
+msgid "Sun"
+msgstr "Вс"
 
 msgid "Mon"
 msgstr "Пн"
@@ -1379,9 +1877,6 @@ msgstr "Пт"
 
 msgid "Sat"
 msgstr "Сб"
-
-msgid "Sun"
-msgstr "Вс"
 
 msgid "AttachFile"
 msgstr "ВложитьФайл"
@@ -1889,6 +2384,10 @@ msgstr "Начало"
 msgid "Slide %(pos)d of %(size)d"
 msgstr "Кадр %(pos)d из %(size)d"
 
+#, python-format
+msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
+msgstr ""
+
 msgid "Go To Page"
 msgstr "Перейти к странице"
 
@@ -2169,15 +2668,15 @@ msgstr "Вложения для \"%(pagename)s\""
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: Неправильный ответ! Вернитесь и попробуйте еще раз"
 
-msgid "You are not allowed to overwrite a file attachment of this page."
-msgstr "Вам нельзя переписывать вложения на этой странице."
-
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
 msgstr ""
 "Неправильное имя файла. Уберите все не-ASCII символы из имени файла и "
 "попробуйте снова."
+
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Вам нельзя переписывать вложения на этой странице."
 
 #, python-format
 msgid ""
@@ -2769,10 +3268,6 @@ msgstr "Игнорировать разницу в количестве проб
 msgid "Invalid filename \"%s\"!"
 msgstr "Неправильное имя файла \"%s\"!"
 
-#, python-format
-msgid "Created the package %s containing the pages %s."
-msgstr "Создан пакет %s со страницами %s."
-
 msgid "Include all attachments?"
 msgstr "Включить все вложения?"
 
@@ -2801,9 +3296,6 @@ msgstr "Не пользователь:"
 
 msgid "You are not allowed to perform this action."
 msgstr "Вам нельзя это делать."
-
-msgid "Please log in first."
-msgstr "Сперва войдите, пожалуйста."
 
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Создайте домашнюю страницу перед созданием других страниц."
@@ -2859,6 +3351,17 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "Управление Моими Страницами"
+
+#, fuzzy
+msgid "page package"
+msgstr "Измененная страница"
+
+msgid "Choose:"
+msgstr ""
+
+#, python-format
+msgid "Install language packs for '%s'"
+msgstr ""
 
 msgid "Your subscription to this page has been removed."
 msgstr "Ваша подписка на эту страницу удалена."
@@ -3039,6 +3542,32 @@ msgid "anonymous"
 msgstr ""
 
 #~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr "Установка тем допустима только на автономных серверах."
+
+#, fuzzy
+#~ msgid "InterWikiMap"
+#~ msgstr "Вики-разметка"
+
+#, fuzzy
+#~ msgid "BadContent"
+#~ msgstr "Содержание"
+
+#, fuzzy
+#~ msgid "LocalBadContent"
+#~ msgstr "Содержание"
+
+#, fuzzy
+#~ msgid "EditedSystemPages"
+#~ msgstr "Убрать служебные страницы"
+
+#~ msgid "Created the package %s containing the pages %s."
+#~ msgstr "Создан пакет %s со страницами %s."
+
+#~ msgid "You need to log in."
+#~ msgstr "Вам необходимо войти в систему."
+
+#~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
 #~ "Files: %(filecount)d, Directories: %(dircount)d"
 #~ msgstr ""
@@ -3212,9 +3741,6 @@ msgstr ""
 
 #~ msgid "[%(lang)s] %(recipients)s: %(status)s"
 #~ msgstr "[%(lang)s] %(recipients)s: %(status)s"
-
-#~ msgid "UserPreferences"
-#~ msgstr "ВашиНастройки"
 
 #~ msgid "Subscribe to trivial changes"
 #~ msgstr "Подписаться на незначительные исправления"

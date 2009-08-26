@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-26 21:29+0200\n"
+"POT-Creation-Date: 2009-07-27 00:57+0200\n"
 "PO-Revision-Date: 2007-11-05 22:11+0100\n"
 "Last-Translator: Václav Haisman <v.haisman@sh.cvut.cz>\n"
 "Language-Team: Czech <moin@lists.sourceforge.net>\n"
@@ -343,14 +343,26 @@ msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s údaje o Vašem účtu"
 
 #, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Neznámá akce %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Nemáte oprávnění spustit na této stránce akci %(action_name)s."
+
+msgid "Login and try again."
+msgstr "Přihlašte se a zkuste to znovu."
+
+#, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
 msgstr "Balíček vyžaduje novější verzi MoinMoin (alespoň %s)."
 
 msgid "The theme name is not set."
 msgstr "Název vzhledu není nastaveno."
 
-msgid "Installing theme files is only supported for standalone type servers."
-msgstr "Instalace souborů vzhledu je podporováno jen na standalone serverech."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
+msgstr ""
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -447,8 +459,9 @@ msgstr "Je očekávána hodnota klíče \"%(token)s\""
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr ""
 
+#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
 "Záložní obsah této stránky již není podporován a nebude zahrnut ve "
@@ -708,9 +721,8 @@ msgstr "Smazané věci jsou označeny takto."
 msgid "Additions are marked like this."
 msgstr "Nové věci jsou označeny takto."
 
-#, fuzzy
-msgid "You need to log in."
-msgstr "Jste nyní odhlášeni."
+msgid "Please log in first."
+msgstr "Nejdříve se přihlašte."
 
 msgid ""
 "Please choose an account name now.\n"
@@ -737,10 +749,39 @@ msgstr ""
 msgid "Associate this name"
 msgstr ""
 
+#, fuzzy
+msgid "OpenID verification canceled."
+msgstr "Operace byla zrušena."
+
+#, python-format
+msgid "OpenID success. id: %s"
+msgstr ""
+
+msgid "OpenID failure"
+msgstr ""
+
+msgid "No OpenID found in session."
+msgstr ""
+
 msgid "Your account is now associated to your OpenID."
 msgstr ""
 
 msgid "The password you entered is not valid."
+msgstr ""
+
+msgid "OpenID: handle verify continuation"
+msgstr ""
+
+msgid "OpenID: handle name continuation"
+msgstr ""
+
+msgid "OpenID: handle associate continuation"
+msgstr ""
+
+msgid "OpenID: unknown continuation stage"
+msgstr ""
+
+msgid "OpenID error: unknown continuation stage"
 msgstr ""
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
@@ -770,7 +811,11 @@ msgstr ""
 #, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+"one now</a>. "
+msgstr ""
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
 
 #, fuzzy
@@ -824,7 +869,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Zvýraznění:: <<Verbatim('')>>''kurzíva''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''tučně'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''tučně "
@@ -1090,17 +1135,6 @@ msgstr "Vrátit se k verzi %(rev)d."
 msgid "Renamed from '%(oldpagename)s'."
 msgstr "Přejmenováno z '%(oldpagename)s'."
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Neznámá akce %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Nemáte oprávnění spustit na této stránce akci %(action_name)s."
-
-msgid "Login and try again."
-msgstr "Přihlašte se a zkuste to znovu."
-
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr ""
 
@@ -1306,11 +1340,11 @@ msgstr "nález"
 msgid "matches"
 msgstr "nálezů"
 
-msgid "FrontPage"
-msgstr "HlavniStranka"
-
 msgid "RecentChanges"
 msgstr "PosledniZmeny"
+
+msgid "WikiTipOfTheDay"
+msgstr ""
 
 msgid "TitleIndex"
 msgstr "RejstrikStranek"
@@ -1321,23 +1355,477 @@ msgstr "RejstrikSlov"
 msgid "FindPage"
 msgstr "NajdiStranku"
 
-msgid "SiteNavigation"
-msgstr "StromUmisteni"
-
-msgid "HelpContents"
-msgstr "HelpObsah"
-
-msgid "HelpOnFormatting"
-msgstr "HelpFormatovani"
-
-msgid "WikiLicense"
-msgstr "LicenceWiki"
-
 msgid "MissingPage"
 msgstr "ChybejiciStranka"
 
 msgid "MissingHomePage"
 msgstr "ChybejiciDomovskaStranka"
+
+#, fuzzy
+msgid "WikiHomePage"
+msgstr "ChybejiciDomovskaStranka"
+
+#, fuzzy
+msgid "WikiName"
+msgstr "Jméno"
+
+msgid "WikiWikiWeb"
+msgstr ""
+
+msgid "FrontPage"
+msgstr "HlavniStranka"
+
+msgid "WikiSandBox"
+msgstr ""
+
+#, fuzzy
+msgid "InterWiki"
+msgstr "Wiki"
+
+msgid "AbandonedPages"
+msgstr ""
+
+#, fuzzy
+msgid "OrphanedPages"
+msgstr "Zbalit stránky"
+
+#, fuzzy
+msgid "WantedPages"
+msgstr "NajdiStranku"
+
+msgid "EventStats"
+msgstr ""
+
+msgid "EventStats/HitCounts"
+msgstr ""
+
+msgid "EventStats/Languages"
+msgstr ""
+
+msgid "EventStats/UserAgents"
+msgstr ""
+
+#, fuzzy
+msgid "PageSize"
+msgstr "Velikost"
+
+#, fuzzy
+msgid "PageHits"
+msgstr "Stránek"
+
+#, fuzzy
+msgid "RandomPage"
+msgstr "PřejmenovatStránku"
+
+#, fuzzy
+msgid "XsltVersion"
+msgstr "Verze Python"
+
+msgid "FortuneCookies"
+msgstr ""
+
+msgid "WikiLicense"
+msgstr "LicenceWiki"
+
+msgid "CategoryCategory"
+msgstr ""
+
+msgid "CategoryHomepage"
+msgstr ""
+
+msgid "CategoryTemplate"
+msgstr ""
+
+msgid "HomepageTemplate"
+msgstr ""
+
+msgid "HelpTemplate"
+msgstr ""
+
+msgid "HomepageReadWritePageTemplate"
+msgstr ""
+
+msgid "HomepageReadPageTemplate"
+msgstr ""
+
+msgid "HomepagePrivatePageTemplate"
+msgstr ""
+
+msgid "HomepageGroupsTemplate"
+msgstr ""
+
+msgid "SlideShowHandOutTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "SlideShowTemplate"
+msgstr "Prezentace"
+
+msgid "SlideTemplate"
+msgstr ""
+
+msgid "SyncJobTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration"
+msgstr "HelpFormatovani"
+
+msgid "HelpOnConfiguration/EmailSupport"
+msgstr ""
+
+msgid "HelpOnConfiguration/SecurityPolicy"
+msgstr ""
+
+msgid "HelpOnConfiguration/FileAttachments"
+msgstr ""
+
+msgid "HelpOnConfiguration/SupplementationPage"
+msgstr ""
+
+msgid "HelpOnConfiguration/SurgeProtection"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration/UserPreferences"
+msgstr "NastaveniUzivatele"
+
+msgid "HelpOnPackageInstaller"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUpdating"
+msgstr "HelpFormatovani"
+
+#, fuzzy
+msgid "HelpOnUpdatingPython"
+msgstr "HelpFormatovani"
+
+#, fuzzy
+msgid "HelpOnAdministration"
+msgstr "HelpFormatovani"
+
+msgid "HelpOnAuthentication"
+msgstr ""
+
+msgid "HelpOnAuthentication/ExternalCookie"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnMoinCommand"
+msgstr "HelpFormatovani"
+
+msgid "HelpOnMoinCommand/ExportDump"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNotification"
+msgstr "HelpFormatovani"
+
+#, fuzzy
+msgid "HelpOnSessions"
+msgstr "HelpObsah"
+
+#, fuzzy
+msgid "HelpOnUserHandling"
+msgstr "HelpFormatovani"
+
+#, fuzzy
+msgid "HelpOnXapian"
+msgstr "HelpFormatovani"
+
+msgid "HelpOnMoinWikiSyntax"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnCreoleSyntax"
+msgstr "HelpObsah"
+
+msgid "HelpOnFormatting"
+msgstr "HelpFormatovani"
+
+#, fuzzy
+msgid "MoinMoin"
+msgstr "Verze MoinMoin"
+
+msgid "HelpContents"
+msgstr "HelpObsah"
+
+msgid "HelpForBeginners"
+msgstr ""
+
+msgid "HelpForUsers"
+msgstr ""
+
+#, fuzzy
+msgid "HelpIndex"
+msgstr "RejstrikStranek"
+
+msgid "HelpOnAccessControlLists"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnActions"
+msgstr "HelpObsah"
+
+msgid "HelpOnActions/AttachFile"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnAdmonitions"
+msgstr "HelpObsah"
+
+#, fuzzy
+msgid "HelpOnAutoAdmin"
+msgstr "HelpFormatovani"
+
+msgid "HelpOnCategories"
+msgstr ""
+
+msgid "HelpOnDictionaries"
+msgstr ""
+
+msgid "HelpOnEditLocks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnEditing"
+msgstr "HelpFormatovani"
+
+msgid "HelpOnEditing/SubPages"
+msgstr ""
+
+msgid "HelpOnGraphicalEditor"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnGroups"
+msgstr "HelpObsah"
+
+msgid "HelpOnHeadlines"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnLanguages"
+msgstr "Jazyk"
+
+#, fuzzy
+msgid "HelpOnLinking"
+msgstr "HelpFormatovani"
+
+msgid "HelpOnLinking/NotesLinks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnLists"
+msgstr "HelpObsah"
+
+#, fuzzy
+msgid "HelpOnLogin"
+msgstr "HelpFormatovani"
+
+msgid "HelpOnMacros"
+msgstr ""
+
+msgid "HelpOnMacros/EmbedObject"
+msgstr ""
+
+msgid "HelpOnMacros/Include"
+msgstr ""
+
+msgid "HelpOnMacros/MailTo"
+msgstr ""
+
+msgid "HelpOnMacros/MonthCalendar"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNavigation"
+msgstr "StromUmisteni"
+
+msgid "HelpOnOpenIDProvider"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnPageCreation"
+msgstr "HelpFormatovani"
+
+msgid "HelpOnPageDeletion"
+msgstr ""
+
+msgid "HelpOnParsers"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText/RstPrimer"
+msgstr ""
+
+msgid "HelpOnProcessingInstructions"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnRules"
+msgstr "HelpObsah"
+
+#, fuzzy
+msgid "HelpOnSearching"
+msgstr "HelpFormatovani"
+
+#, fuzzy
+msgid "HelpOnSlideShows"
+msgstr "Prezentace"
+
+msgid "HelpOnSlideShows/000 Introduction"
+msgstr ""
+
+msgid "HelpOnSlideShows/100 Creating the slides"
+msgstr ""
+
+msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
+msgstr ""
+
+msgid "HelpOnSmileys"
+msgstr ""
+
+msgid "HelpOnSpam"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSpellCheck"
+msgstr "KontrolaPravopisu"
+
+msgid "HelpOnSuperUser"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSynchronisation"
+msgstr "Synchronizace začala -"
+
+msgid "HelpOnTables"
+msgstr ""
+
+msgid "HelpOnTemplates"
+msgstr ""
+
+msgid "HelpOnThemes"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUserPreferences"
+msgstr "NastaveniUzivatele"
+
+msgid "HelpOnVariables"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnXmlPages"
+msgstr "HelpFormatovani"
+
+#, fuzzy
+msgid "HelpOnComments"
+msgstr "HelpObsah"
+
+#, fuzzy
+msgid "HelpOnSubscribing"
+msgstr "Odhlásit"
+
+msgid "CamelCase"
+msgstr ""
+
+msgid "WikiCourse"
+msgstr ""
+
+msgid "WikiCourse/01 What is a MoinMoin wiki?"
+msgstr ""
+
+msgid "WikiCourse/02 Finding information"
+msgstr ""
+
+msgid "WikiCourse/03 Staying up to date"
+msgstr ""
+
+msgid "WikiCourse/04 Creating a wiki account"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/05 User preferences"
+msgstr "NastaveniUzivatele"
+
+msgid "WikiCourse/06 Your own wiki homepage"
+msgstr ""
+
+msgid "WikiCourse/07 The text editor"
+msgstr ""
+
+msgid "WikiCourse/08 Hot Keys"
+msgstr ""
+
+msgid "WikiCourse/10 Text layout with wiki markup"
+msgstr ""
+
+msgid "WikiCourse/11 Paragraphs"
+msgstr ""
+
+msgid "WikiCourse/12 Headlines"
+msgstr ""
+
+msgid "WikiCourse/13 Lists"
+msgstr ""
+
+msgid "WikiCourse/14 Text styles"
+msgstr ""
+
+msgid "WikiCourse/15 Tables"
+msgstr ""
+
+msgid "WikiCourse/16 Wiki internal links"
+msgstr ""
+
+msgid "WikiCourse/17 External links"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/18 Attachments"
+msgstr "Nová příloha"
+
+msgid "WikiCourse/19 Symbols"
+msgstr ""
+
+msgid "WikiCourse/20 Dynamic content"
+msgstr ""
+
+msgid "WikiCourse/21 Macros"
+msgstr ""
+
+msgid "WikiCourse/22 Parsers"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/23 Actions"
+msgstr "Další akce:"
+
+msgid "WikiCourse/30 The graphical editor"
+msgstr ""
+
+msgid "WikiCourse/40 Creating more pages"
+msgstr ""
+
+msgid "WikiCourse/50 Wiki etiquette"
+msgstr ""
+
+msgid "WikiCourse/51 Applications"
+msgstr ""
+
+msgid "WikiCourse/52 Structure in the wiki"
+msgstr ""
+
+msgid "WikiCourseHandOut"
+msgstr ""
+
+msgid "Sun"
+msgstr "Ne"
 
 msgid "Mon"
 msgstr "Po"
@@ -1356,9 +1844,6 @@ msgstr "Pá"
 
 msgid "Sat"
 msgstr "So"
-
-msgid "Sun"
-msgstr "Ne"
 
 msgid "AttachFile"
 msgstr "PřipojitSoubor"
@@ -1857,6 +2342,10 @@ msgstr "Start"
 msgid "Slide %(pos)d of %(size)d"
 msgstr "Strana %(pos)d z %(size)d"
 
+#, python-format
+msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
+msgstr ""
+
 msgid "Go To Page"
 msgstr "Jít na stránku"
 
@@ -2111,14 +2600,14 @@ msgstr "Přílohy k  \"%(pagename)s\""
 msgid "TextCha: Wrong answer! Go back and try again..."
 msgstr "TextCha: Špatná odpověď! Jdi zpět a zkus to znova..."
 
-#, fuzzy
-msgid "You are not allowed to overwrite a file attachment of this page."
-msgstr "Nemáte dostatečná práva k prohlížení příloh na této stránce."
-
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
 msgstr "Soubor bez obsahu. Smažte ne-ASCII znaky ze souboru a zkuste to znovu."
+
+#, fuzzy
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Nemáte dostatečná práva k prohlížení příloh na této stránce."
 
 #, python-format
 msgid ""
@@ -2701,10 +3190,6 @@ msgstr "Ignorovat změny v počtu mezer (bílých míst)"
 msgid "Invalid filename \"%s\"!"
 msgstr "Neplatný název souboru \"%s\"!"
 
-#, python-format
-msgid "Created the package %s containing the pages %s."
-msgstr "Vytvořen balíček %s obsahující stránky %s."
-
 #, fuzzy
 msgid "Include all attachments?"
 msgstr "[%d přílohy]"
@@ -2734,9 +3219,6 @@ msgstr "Není uživatel:"
 
 msgid "You are not allowed to perform this action."
 msgstr "Nemáte dovoleno provést tuto akci."
-
-msgid "Please log in first."
-msgstr "Nejdříve se přihlašte."
 
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Prosím, nejdříve vytvořte domovskou stránku."
@@ -2791,6 +3273,17 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "Správa MyPages"
+
+#, fuzzy
+msgid "page package"
+msgstr "Zbalit stránky"
+
+msgid "Choose:"
+msgstr ""
+
+#, python-format
+msgid "Install language packs for '%s'"
+msgstr ""
 
 msgid "Your subscription to this page has been removed."
 msgstr "Váš odběr této stránky byl zrušen."
@@ -2973,6 +3466,34 @@ msgid "anonymous"
 msgstr ""
 
 #~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr ""
+#~ "Instalace souborů vzhledu je podporováno jen na standalone serverech."
+
+#, fuzzy
+#~ msgid "InterWikiMap"
+#~ msgstr "Značkování Wiki"
+
+#, fuzzy
+#~ msgid "BadContent"
+#~ msgstr "Obsah"
+
+#, fuzzy
+#~ msgid "LocalBadContent"
+#~ msgstr "Obsah"
+
+#, fuzzy
+#~ msgid "EditedSystemPages"
+#~ msgstr "Vyjma systémových stránek"
+
+#~ msgid "Created the package %s containing the pages %s."
+#~ msgstr "Vytvořen balíček %s obsahující stránky %s."
+
+#, fuzzy
+#~ msgid "You need to log in."
+#~ msgstr "Jste nyní odhlášeni."
+
+#~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
 #~ "Files: %(filecount)d, Directories: %(dircount)d"
 #~ msgstr ""
@@ -3135,9 +3656,6 @@ msgstr ""
 
 #~ msgid "[%(lang)s] %(recipients)s: %(status)s"
 #~ msgstr "[%(lang)s] %(recipients)s: %(status)s"
-
-#~ msgid "UserPreferences"
-#~ msgstr "NastaveniUzivatele"
 
 #~ msgid "Subscribe to trivial changes"
 #~ msgstr "Odebírat při minimálních změnách"

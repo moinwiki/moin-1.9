@@ -21,7 +21,11 @@
 import py
 #py.test.skip("broken")
 
+from MoinMoin import i18n
+i18n_wikiLanguages = i18n.wikiLanguages
+# convert_wiki overwrites i18n.wikiLanguages, we revert this change for following tests
 from MoinMoin.script.migration._conv160_wiki import convert_wiki
+i18n.wikiLanguages = i18n_wikiLanguages
 
 class TestWikiConversion:
     """ test the wiki markup conversion 1.5.8 -> 1.6.0 """
@@ -111,7 +115,7 @@ class TestWikiConversion:
             # macros
             ('[[BR]]', {}, '<<BR>>'),
             ('[[FullSearch(wtf)]]', {}, '<<FullSearch(wtf)>>'),
-            (u'[[ImageLink(töst.png)]]', {}, u'[[attachment:töst.png|{{attachment:töst.png}}]]'),
+            (u'[[ImageLink(tÃ¶st.png)]]', {}, u'[[attachment:tÃ¶st.png|{{attachment:tÃ¶st.png}}]]'),
             ('[[ImageLink(test.png,OtherPage)]]', {}, '[[OtherPage|{{attachment:test.png}}]]'),
             ('[[ImageLink(test.png,OtherPage,width=123,height=456)]]', {}, '[[OtherPage|{{attachment:test.png||width=123, height=456}}]]'),
             ('[[ImageLink(test.png,OtherPage,width=123,height=456,alt=alttext)]]', {}, '[[OtherPage|{{attachment:test.png|alttext|width=123, height=456}}]]'),
