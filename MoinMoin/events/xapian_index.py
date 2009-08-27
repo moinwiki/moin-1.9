@@ -7,15 +7,21 @@
 """
 import MoinMoin.events as ev
 
+def _get_index(request):
+    try:
+        from MoinMoin.search.Xapian import Index
+        return Index(request)
+    except ImportError:
+        pass
+
 def handle_renamed(event):
     """Updates Xapian index when a page changes its name"""
 
     request = event.request
 
     if request.cfg.xapian_search:
-        from MoinMoin.search.Xapian import Index
-        index = Index(request)
-        if index.exists():
+        index = _get_index(request)
+        if index and index.exists():
             index.remove_item(event.old_page.page_name, now=0)
             index.update_page(event.page.page_name)
 
@@ -26,9 +32,8 @@ def handle_copied(event):
     request = event.request
 
     if request.cfg.xapian_search:
-        from MoinMoin.search.Xapian import Index
-        index = Index(request)
-        if index.exists():
+        index = _get_index(request)
+        if index and index.exists():
             index.update_page(event.page.page_name)
 
 def handle_changed(event, deleted=False):
@@ -37,9 +42,8 @@ def handle_changed(event, deleted=False):
     request = event.request
 
     if request.cfg.xapian_search:
-        from MoinMoin.search.Xapian import Index
-        index = Index(request)
-        if index.exists():
+        index = _get_index(request)
+        if index and index.exists():
             if deleted:
                 index.remove_item(event.page.page_name)
             else:
@@ -58,9 +62,8 @@ def handle_attached(event):
     request = event.request
 
     if request.cfg.xapian_search:
-        from MoinMoin.search.Xapian import Index
-        index = Index(request)
-        if index.exists():
+        index = _get_index(request)
+        if index and index.exists():
             index.update_page(event.pagename)
 
 
