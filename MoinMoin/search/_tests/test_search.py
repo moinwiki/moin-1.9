@@ -10,7 +10,7 @@
 
 import py, os, time
 
-from MoinMoin.search import QueryError
+from MoinMoin.search import QueryError, _get_searcher
 from MoinMoin.search.queryparser import QueryParser
 from MoinMoin.search.builtin import MoinSearch
 from MoinMoin._tests import nuke_xapian_index, wikiconfig, become_trusted, create_page, nuke_page
@@ -94,6 +94,8 @@ class BaseSearchTest(object):
              u'HelpOnCreoleSyntax': None,
              u'HelpOnEditing': None,
              u'HelpIndex': None}
+
+    searcher_class = None
 
     def setup_class(self):
         become_trusted(self.request)
@@ -282,8 +284,13 @@ class BaseSearchTest(object):
         del self.pages['TestCreatePage']
         assert len(result.hits) == 1
 
+    def test_get_searcher(self):
+        assert isinstance(_get_searcher(self.request, ''), self.searcher_class)
+
 
 class TestMoinSearch(BaseSearchTest):
+
+    searcher_class = MoinSearch
 
     def get_searcher(self, query):
         pages = [{'pagename': page, 'attachment': '', 'wikiname': 'Self', } for page in self.pages]
@@ -316,8 +323,10 @@ class TestXapianSearch(BaseSearchTest):
 
         try:
             from MoinMoin.search.Xapian import XapianIndex
+            from MoinMoin.search.Xapian.search import XapianSearch
+            self.searcher_class = XapianSearch
+
         except ImportError, error:
-            print str(error)
             if not str(error).startswith('Xapian '):
                 raise
 
@@ -404,6 +413,14 @@ class TestXapianIndexingInNewThread(object):
 
         nuke_xapian_index(self.request)
 
+class TestGetSearcher(object):
+
+    class Config(wikiconfig.Config):
+
+        xapian_search = True
+
+    def test_get_searcher(self):
+        assert isinstance(_get_searcher(self.request, ''), MoinSearch), 'Xapian index is not created, despite the configuration, MoinSearch mist be used!'
 
 coverage_modules = ['MoinMoin.search']
 
