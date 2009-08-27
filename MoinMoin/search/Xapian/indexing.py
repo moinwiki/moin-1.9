@@ -440,7 +440,11 @@ class Index(BaseIndex):
 
             self._add_fields_to_document(request, doc, fields, multivalued_fields)
 
-            connection.replace(doc)
+            try:
+                connection.replace(doc)
+            except xappy.IndexerError, err:
+                logging.warning("IndexerError at %r %r %r (%s)" % (
+                    wikiname, pagename, revision, str(err)))
 
         return bool(doc)
 
