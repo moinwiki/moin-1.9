@@ -18,7 +18,8 @@ from MoinMoin.search.builtin import MoinSearch
 
 
 def searchPages(request, query, sort='weight', mtime=None, historysearch=None, **kw):
-    """ Search the text of all pages for query.
+    """
+    Search the text of all pages for query.
 
     @param request: current request
     @param query: the expression (string or query objects) we want to search for
@@ -31,17 +32,34 @@ def searchPages(request, query, sort='weight', mtime=None, historysearch=None, *
     @rtype: SearchResults instance
     @return: search results
     """
-    if isinstance(query, str) or isinstance(query, unicode):
-        query = QueryParser(**kw).parse_query(query)
 
-    searcher = MoinSearch
+    return _get_searcher(request, query, sort, mtime, historysearch, **kw).run()
+
+
+def _get_searcher(request, query, sort='weight', mtime=None, historysearch=None, **kw):
+    """
+    Return a searcher object according to the configuration.
+    """
+    query = _parse_query(query, **kw)
+    searcher = None
 
     if request.cfg.xapian_search:
         try:
-            from MoinMoin.search.Xapian.search import XapianSearch
-            searcher = XapianSearch
+            from MoinMoin.search.Xapian.search import XapianSearch, IndexDoesNotExistError
+            searcher = XapianSearch(request, query, sort, mtime=mtime, historysearch=historysearch)
         except ImportError, error:
             logging.warning("%s. Either disable Xapian completetly in your wikiconfig or upgrade your Xapian installation" % str(error))
+        except IndexDoesNotExistError:
+            logging.warning("Xapian index does not exist. Please crate it. Slow moin search is used.")
 
-    return searcher(request, query, sort, mtime=mtime, historysearch=historysearch).run()
+    if searcher is None:
+        searcher = MoinSearch(request, query, sort, mtime=mtime, historysearch=historysearch)
+
+    return searcher
+
+def _parse_query(query, **kw):
+    if isinstance(query, str) or isinstance(query, unicode):
+        query = QueryParser(**kw).parse_query(query)
+
+    return query
 

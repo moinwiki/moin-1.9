@@ -17,6 +17,9 @@ logging = log.getLogger(__name__)
 from MoinMoin.search.builtin import BaseSearch, MoinSearch, BaseIndex
 from MoinMoin.search.Xapian.indexing import XapianIndex
 
+class IndexDoesNotExistError(Exception):
+    pass
+
 class XapianSearch(BaseSearch):
 
     def __init__(self, request, query, sort='weight', mtime=None, historysearch=0):
@@ -31,8 +34,10 @@ class XapianSearch(BaseSearch):
         """
         index = XapianIndex(self.request)
 
-        if index.exists():
-            return index
+        if not index.exists():
+            raise IndexDoesNotExistError
+
+        return index
 
     def _search(self):
         """ Search using Xapian
@@ -41,10 +46,7 @@ class XapianSearch(BaseSearch):
         return moin search in those pages if needed.
         """
         clock = self.request.clock
-        pages = None
         index = self.index
-
-        assert index, 'XXX Assume that index exist, actually we should have thrown an exception, so MoinSearch could be used instead'
 
         clock.start('_xapianSearch')
         try:
