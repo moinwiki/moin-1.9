@@ -12,7 +12,7 @@ import py, os, time
 
 from MoinMoin.search import QueryError
 from MoinMoin.search.queryparser import QueryParser
-from MoinMoin.search.builtin import MoinSearch, XapianSearch
+from MoinMoin.search.builtin import MoinSearch
 from MoinMoin._tests import nuke_xapian_index, wikiconfig, become_trusted, create_page, nuke_page
 from MoinMoin.wikiutil import Version
 
@@ -305,6 +305,7 @@ class TestXapianSearch(BaseSearchTest):
         xapian_search = True
 
     def get_searcher(self, query):
+        from MoinMoin.search.Xapian.search import XapianSearch
         return XapianSearch(self.request, query)
 
     def get_moin_search_connection(self):
@@ -314,12 +315,16 @@ class TestXapianSearch(BaseSearchTest):
     def setup_method(self, method):
 
         try:
-            from MoinMoin.search.Xapian import Index
-        except ImportError:
+            from MoinMoin.search.Xapian import XapianIndex
+        except ImportError, error:
+            print str(error)
+            if not str(error).startswith('Xapian '):
+                raise
+
             py.test.skip('xapian is not installed')
 
         nuke_xapian_index(self.request)
-        index = Index(self.request)
+        index = XapianIndex(self.request)
         index.indexPages(mode='add', pages=self.pages)
 
     def teardown_method(self, method):

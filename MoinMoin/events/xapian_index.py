@@ -9,8 +9,8 @@ import MoinMoin.events as ev
 
 def _get_index(request):
     try:
-        from MoinMoin.search.Xapian import Index
-        return Index(request)
+        from MoinMoin.search.Xapian import XapianIndex
+        return XapianIndex(request)
     except ImportError:
         pass
 

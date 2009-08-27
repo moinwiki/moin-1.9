@@ -6,9 +6,13 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-
+import py
 from MoinMoin._tests import wikiconfig
 
+try:
+    from MoinMoin.search.Xapian.tokenizer import WikiAnalyzer
+except ImportError:
+    py.test.skip('xapian is not installed')
 
 class TestWikiAnalyzer(object):
 
@@ -20,11 +24,7 @@ class TestWikiAnalyzer(object):
              u'testing': u''}
 
     def setup_class(self):
-        try:
-            from MoinMoin.search import Xapian
-            self.analyzer = Xapian.WikiAnalyzer(request=self.request, language=self.request.cfg.language_default)
-        except ImportError:
-            py.test.skip('xapian is not installed')
+        self.analyzer = WikiAnalyzer(request=self.request, language=self.request.cfg.language_default)
 
     def test_tokenize(self):
         words = self.words
