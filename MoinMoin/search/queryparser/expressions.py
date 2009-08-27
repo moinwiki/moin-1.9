@@ -21,7 +21,7 @@ from MoinMoin.search.results import Match, TitleMatch, TextMatch
 
 try:
     from MoinMoin.search import Xapian
-    from MoinMoin.search.Xapian import Query, UnicodeQuery
+    from MoinMoin.search.Xapian import Query
 
     OP_AND = Query.OP_AND
     OP_OR = Query.OP_OR

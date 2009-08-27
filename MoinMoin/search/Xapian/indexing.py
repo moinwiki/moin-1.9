@@ -119,25 +119,8 @@ class StemmedField(xappy.Field):
         super(StemmedField, self).__init__(name, value)
 
 
-class Index(BaseIndex):
+class XapianIndex(BaseIndex):
 
-    def __init__(self, request):
-        self._check_version()
-        BaseIndex.__init__(self, request)
-
-    def _check_version(self):
-        """ Checks if the correct version of Xapian is installed """
-        # every version greater than or equal to XAPIAN_MIN_VERSION is allowed
-        XAPIAN_MIN_VERSION = (1, 0, 6)
-        major, minor, revision = xapian.major_version(), xapian.minor_version(), xapian.revision()
-        if (major, minor, revision) >= XAPIAN_MIN_VERSION:
-            return
-
-        from MoinMoin.error import ConfigurationError
-        raise ConfigurationError(('MoinMoin needs at least Xapian version '
-                '%d.%d.%d to work correctly. Either disable Xapian '
-                'completetly in your wikiconfig or upgrade your Xapian %d.%d.%d '
-                'installation!') % (XAPIAN_MIN_VERSION + (major, minor, revision)))
 
     def _main_dir(self):
         """ Get the directory of the xapian index """

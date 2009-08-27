@@ -14,7 +14,7 @@ from MoinMoin import log
 logging = log.getLogger(__name__)
 
 from MoinMoin.search.queryparser import QueryParser, QueryError
-from MoinMoin.search.builtin import MoinSearch, XapianSearch
+from MoinMoin.search.builtin import MoinSearch
 
 
 def searchPages(request, query, sort='weight', mtime=None, historysearch=None, **kw):
@@ -34,10 +34,14 @@ def searchPages(request, query, sort='weight', mtime=None, historysearch=None, *
     if isinstance(query, str) or isinstance(query, unicode):
         query = QueryParser(**kw).parse_query(query)
 
+    searcher = MoinSearch
+
     if request.cfg.xapian_search:
-        searcher = XapianSearch
-    else:
-        searcher = MoinSearch
+        try:
+            from MoinMoin.search.Xapian.search import XapianSearch
+            searcher = XapianSearch
+        except ImportError, error:
+            logging.warning("%s. Either disable Xapian completetly in your wikiconfig or upgrade your Xapian installation" % str(error))
 
     return searcher(request, query, sort, mtime=mtime, historysearch=historysearch).run()
 

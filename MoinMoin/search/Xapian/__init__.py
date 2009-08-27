@@ -7,5 +7,5 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin.search.Xapian.indexing import Index, Query, UnicodeQuery, MoinSearchConnection, MoinIndexerConnection
+from MoinMoin.search.Xapian.indexing import XapianIndex, Query, MoinSearchConnection, MoinIndexerConnection
 from MoinMoin.search.Xapian.tokenizer import WikiAnalyzer
