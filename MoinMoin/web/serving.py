@@ -151,7 +151,7 @@ def run_server(hostname='localhost', port=8080,
 
     run_simple(hostname=hostname, port=port,
                application=application,
-               threaded=threaded, 
+               threaded=threaded,
                use_debugger=(debug == 'web'),
                passthrough_errors=(debug == 'external'),
                request_handler=RequestHandler,
