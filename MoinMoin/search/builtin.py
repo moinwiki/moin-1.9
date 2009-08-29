@@ -25,7 +25,7 @@ from MoinMoin.search.results import getSearchResults, Match, TextMatch, TitleMat
 ##############################################################################
 
 
-class UpdateQueue:
+class PageQueue:
     """
     Represents a locked page queue on the disk
     """
@@ -124,8 +124,8 @@ class BaseIndex:
         lock_dir = os.path.join(main_dir, 'index-lock')
         self.lock = lock.WriteLock(lock_dir, timeout=3600.0, readlocktimeout=60.0)
         #self.read_lock = lock.ReadLock(lock_dir, timeout=3600.0)
-        self.update_queue = UpdateQueue(request, main_dir, 'update-queue')
-        self.remove_queue = UpdateQueue(request, main_dir, 'remove-queue')
+        self.update_queue = PageQueue(request, main_dir, 'update-queue')
+        self.remove_queue = PageQueue(request, main_dir, 'remove-queue')
 
         # Disabled until we have a sane way to build the index with a
         # queue in small steps.
