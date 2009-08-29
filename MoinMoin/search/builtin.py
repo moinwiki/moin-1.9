@@ -25,7 +25,7 @@ from MoinMoin.search.results import getSearchResults, Match, TextMatch, TitleMat
 ##############################################################################
 
 
-class PageQueue:
+class PageQueue(object):
     """
     Represents a locked page queue on the disk
     """
@@ -105,7 +105,7 @@ class PageQueue:
         return False
 
 
-class BaseIndex:
+class BaseIndex(object):
     """ Represents a search engine index """
 
     class LockedException(Exception):

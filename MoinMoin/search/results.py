@@ -93,7 +93,7 @@ class AttachmentMatch(Match):
     pass
 
 
-class FoundPage:
+class FoundPage(object):
     """ Represents a page in a search result """
 
     def __init__(self, page_name, matches=None, page=None, rev=0):
@@ -229,7 +229,7 @@ class FoundRemote(FoundPage):
 ############################################################################
 
 
-class SearchResults:
+class SearchResults(object):
     """ Manage search results, supply different views
 
     Search results can hold valid search results and format them for
