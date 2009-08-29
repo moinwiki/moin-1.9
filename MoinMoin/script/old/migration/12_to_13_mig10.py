@@ -13,7 +13,7 @@
 
         3. make sure that from_encoding and to_encoding matches your needs (see
            beginning of script below and config.charset in moin_config.py) and
-           run python2.3 12_to_13_mig10.py from your working dir
+           run python 12_to_13_mig10.py from your working dir
 
         4. If there was no error, you will find:
             data.pre-mig10 - the script renames your data directory copy to that name

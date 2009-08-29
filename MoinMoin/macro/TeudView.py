@@ -34,7 +34,7 @@ def macro_TeudView(macro):
     pagename = macro.formatter.page.page_name
 
     if 'module' in macro.form:
-        modname = macro.form["module"][0]
+        modname = macro.form["module"]
         try:
             obj = pydoc.locate(modname)
         except pydoc.ErrorDuringImport, value:

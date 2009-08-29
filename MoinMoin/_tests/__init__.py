@@ -115,3 +115,9 @@ def make_macro(request, page):
     p.form = request.form
     m = macro.Macro(p)
     return m
+
+def nuke_xapian_index(request):
+    """ completely delete everything in xapian index dir """
+    fpath = os.path.join(request.cfg.cache_dir, 'xapian')
+    if os.path.exists(fpath):
+        shutil.rmtree(fpath, True)

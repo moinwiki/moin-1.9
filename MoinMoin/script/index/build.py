@@ -59,6 +59,6 @@ class PluginScript(IndexScript):
     """ Xapian index build script class """
 
     def command(self):
-        from MoinMoin.search.Xapian import Index
-        Index(self.request).indexPages(self.files, self.options.mode)
+        from MoinMoin.search.Xapian import XapianIndex
+        XapianIndex(self.request).indexPages(self.files, self.options.mode)
 

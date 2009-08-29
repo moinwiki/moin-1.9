@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-26 21:29+0200\n"
+"POT-Creation-Date: 2009-07-27 00:57+0200\n"
 "PO-Revision-Date: 2008-06-13 18:25+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
@@ -351,15 +351,27 @@ msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] Wiki-tunnuksesi tiedot"
 
 #, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Tuntematon toiminto %(action_name)s."
+
+#, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr ""
+"Sinulla ei ole oikeutta käyttää toimintoa %(action_name)s tällä sivulla!"
+
+msgid "Login and try again."
+msgstr "Kirjaudu sisään ja yritä uudelleen."
+
+#, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
 msgstr "Paketti tarvitsee uudemman version MoinMoinista (vähintään %s)."
 
 msgid "The theme name is not set."
 msgstr "Ulkoasun nimeä ei ole asetettu."
 
-msgid "Installing theme files is only supported for standalone type servers."
+#, python-format
+msgid "Theme files not installed! Write rights missing for %s."
 msgstr ""
-"Ulkoasutiedostojen asennus on tuettu vain erillistyyppisillä palvelimilla."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -457,8 +469,9 @@ msgstr "Odotettiin arvoa avaimelle \"%(token)s\""
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Virheellinen korostava säännöllinen lauseke \"%(regex)s\": %(error)s"
 
+#, fuzzy
 msgid ""
-"The backed up content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will rank lower in "
 "search results!"
 msgstr ""
 "Tämän sivun varmuuskopioitu sisältö on vanhentunut eikä sitä sisällytetä "
@@ -716,8 +729,8 @@ msgstr "Poistot on merkattu näin."
 msgid "Additions are marked like this."
 msgstr "Lisäykset on merkattu näin."
 
-msgid "You need to log in."
-msgstr "Sinun on kirjauduttava sisään."
+msgid "Please log in first."
+msgstr "Kirjaudu ensin sisään."
 
 msgid ""
 "Please choose an account name now.\n"
@@ -751,11 +764,43 @@ msgstr ""
 msgid "Associate this name"
 msgstr "Liitä tämä tunnus"
 
+#, fuzzy
+msgid "OpenID verification canceled."
+msgstr "Varmennus peruttiin."
+
+#, fuzzy, python-format
+msgid "OpenID success. id: %s"
+msgstr "OpenID:n lisääminen onnistui."
+
+#, fuzzy
+msgid "OpenID failure"
+msgstr "OpenID-toimintahäiriö."
+
+#, fuzzy
+msgid "No OpenID found in session."
+msgstr "Mitään OpenID:tä ei annettu."
+
 msgid "Your account is now associated to your OpenID."
 msgstr "Käyttäjätunnuksesi on nyt liitetty OpenID:hesi."
 
 msgid "The password you entered is not valid."
 msgstr "Syöttämäsi salasana on virheellinen."
+
+#, fuzzy
+msgid "OpenID: handle verify continuation"
+msgstr "OpenID-luottamuksenvarmennus"
+
+msgid "OpenID: handle name continuation"
+msgstr ""
+
+msgid "OpenID: handle associate continuation"
+msgstr ""
+
+msgid "OpenID: unknown continuation stage"
+msgstr ""
+
+msgid "OpenID error: unknown continuation stage"
+msgstr ""
 
 msgid "Anonymous sessions need to be enabled for OpenID login."
 msgstr "Anonyymit istunnot on otettava käyttöön OpenID-kirjautumista varten."
@@ -783,14 +828,18 @@ msgstr "Tiedonvaihto LDAP-palvelimen %(server)s kanssa ei onnistunut."
 msgid "Failed to connect to database."
 msgstr "Tietokantaan yhdistäminen epäonnistui."
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
-"one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+"one now</a>. "
 msgstr ""
 "Jos sinulla ei ole käyttäjätunnusta, <a href=\"%(userprefslink)s\">voit "
 "luoda sen nyt</a>. <a href=\"%(sendmypasswordlink)s\">Unohditko salasanasi?</"
 "a>"
+
+#, python-format
+msgid "<a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
+msgstr ""
 
 # TODO: Translate HelpOnCreoleSyntax
 msgid ""
@@ -824,6 +873,7 @@ msgstr ""
 "\n"
 "(!) Lisää ohjeita sivuilla OhjeMuokkauksesta tai HelpOnCreoleSyntax.\n"
 
+#, fuzzy
 msgid ""
 " Emphasis:: <<Verbatim('')>>''italics''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''bold'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''bold "
@@ -839,7 +889,7 @@ msgid ""
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
 "white space allowed after tables or titles.\n"
 "\n"
-"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+"(!) For more help, see HelpOnEditing or HelpOnMoinWikiSyntax.\n"
 msgstr ""
 " Korostus:: <<Verbatim('')>>''kursiivi''<<Verbatim('')>>; <<Verbatim(''')"
 ">>'''lihavoitu'''<<Verbatim(''')>>; <<Verbatim(''''')>>'''''lihavoitu "
@@ -1100,18 +1150,6 @@ msgstr "Palauta versio %(rev)d."
 msgid "Renamed from '%(oldpagename)s'."
 msgstr "Uudelleennimetty sivusta '%(oldpagename)s'."
 
-#, python-format
-msgid "Unknown action %(action_name)s."
-msgstr "Tuntematon toiminto %(action_name)s."
-
-#, python-format
-msgid "You are not allowed to do %(action_name)s on this page."
-msgstr ""
-"Sinulla ei ole oikeutta käyttää toimintoa %(action_name)s tällä sivulla!"
-
-msgid "Login and try again."
-msgstr "Kirjaudu sisään ja yritä uudelleen."
-
 msgid "Options --pages and --search are mutually exclusive!"
 msgstr "Valintoja --pages ja --search ei voi käyttää samanaikaisesti!"
 
@@ -1316,11 +1354,11 @@ msgstr "osuma"
 msgid "matches"
 msgstr "osumaa"
 
-msgid "FrontPage"
-msgstr "EtuSivu"
-
 msgid "RecentChanges"
 msgstr "UusimmatMuutokset"
+
+msgid "WikiTipOfTheDay"
+msgstr ""
 
 msgid "TitleIndex"
 msgstr "SivuHakemisto"
@@ -1331,23 +1369,482 @@ msgstr "SanaHakemisto"
 msgid "FindPage"
 msgstr "SivuHaku"
 
-msgid "SiteNavigation"
-msgstr "TienViittoja"
-
-msgid "HelpContents"
-msgstr "OhjeSisällys"
-
-msgid "HelpOnFormatting"
-msgstr "OhjeMuotoilusta"
-
-msgid "WikiLicense"
-msgstr "WikiLisenssi"
-
 msgid "MissingPage"
 msgstr "PuuttuvaSivu"
 
 msgid "MissingHomePage"
 msgstr "PuuttuvaKotisivu"
+
+#, fuzzy
+msgid "WikiHomePage"
+msgstr "PuuttuvaKotisivu"
+
+#, fuzzy
+msgid "WikiName"
+msgstr "Nimi"
+
+msgid "WikiWikiWeb"
+msgstr ""
+
+msgid "FrontPage"
+msgstr "EtuSivu"
+
+msgid "WikiSandBox"
+msgstr ""
+
+#, fuzzy
+msgid "InterWiki"
+msgstr "Wiki"
+
+msgid "AbandonedPages"
+msgstr ""
+
+#, fuzzy
+msgid "OrphanedPages"
+msgstr "Muutettu sivu"
+
+#, fuzzy
+msgid "WantedPages"
+msgstr "SivuHaku"
+
+msgid "EventStats"
+msgstr ""
+
+msgid "EventStats/HitCounts"
+msgstr ""
+
+msgid "EventStats/Languages"
+msgstr ""
+
+msgid "EventStats/UserAgents"
+msgstr ""
+
+#, fuzzy
+msgid "PageSize"
+msgstr "Koko"
+
+#, fuzzy
+msgid "PageHits"
+msgstr "Sivut"
+
+#, fuzzy
+msgid "RandomPage"
+msgstr "UudelleennimeäSivu"
+
+#, fuzzy
+msgid "XsltVersion"
+msgstr "Python, versio"
+
+msgid "FortuneCookies"
+msgstr ""
+
+msgid "WikiLicense"
+msgstr "WikiLisenssi"
+
+#, fuzzy
+msgid "CategoryCategory"
+msgstr "mikä tahansa kategoria"
+
+#, fuzzy
+msgid "CategoryHomepage"
+msgstr "Kategoriat"
+
+#, fuzzy
+msgid "CategoryTemplate"
+msgstr "Kategoriat"
+
+msgid "HomepageTemplate"
+msgstr ""
+
+msgid "HelpTemplate"
+msgstr ""
+
+msgid "HomepageReadWritePageTemplate"
+msgstr ""
+
+msgid "HomepageReadPageTemplate"
+msgstr ""
+
+msgid "HomepagePrivatePageTemplate"
+msgstr ""
+
+msgid "HomepageGroupsTemplate"
+msgstr ""
+
+msgid "SlideShowHandOutTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "SlideShowTemplate"
+msgstr "Diaesitys"
+
+msgid "SlideTemplate"
+msgstr ""
+
+msgid "SyncJobTemplate"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration"
+msgstr "OhjeMuotoilusta"
+
+msgid "HelpOnConfiguration/EmailSupport"
+msgstr ""
+
+msgid "HelpOnConfiguration/SecurityPolicy"
+msgstr ""
+
+msgid "HelpOnConfiguration/FileAttachments"
+msgstr ""
+
+msgid "HelpOnConfiguration/SupplementationPage"
+msgstr ""
+
+msgid "HelpOnConfiguration/SurgeProtection"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnConfiguration/UserPreferences"
+msgstr "KäyttäjäAsetukset"
+
+msgid "HelpOnPackageInstaller"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUpdating"
+msgstr "OhjeMuotoilusta"
+
+#, fuzzy
+msgid "HelpOnUpdatingPython"
+msgstr "OhjeMuotoilusta"
+
+#, fuzzy
+msgid "HelpOnAdministration"
+msgstr "OhjeMuotoilusta"
+
+msgid "HelpOnAuthentication"
+msgstr ""
+
+msgid "HelpOnAuthentication/ExternalCookie"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnMoinCommand"
+msgstr "OhjeMuotoilusta"
+
+msgid "HelpOnMoinCommand/ExportDump"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNotification"
+msgstr "Ilmoitus"
+
+#, fuzzy
+msgid "HelpOnSessions"
+msgstr "OhjeSisällys"
+
+#, fuzzy
+msgid "HelpOnUserHandling"
+msgstr "OhjeMuotoilusta"
+
+#, fuzzy
+msgid "HelpOnXapian"
+msgstr "OhjeMuotoilusta"
+
+msgid "HelpOnMoinWikiSyntax"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnCreoleSyntax"
+msgstr "OhjeSisällys"
+
+msgid "HelpOnFormatting"
+msgstr "OhjeMuotoilusta"
+
+#, fuzzy
+msgid "MoinMoin"
+msgstr "MoinMoin, versio"
+
+msgid "HelpContents"
+msgstr "OhjeSisällys"
+
+msgid "HelpForBeginners"
+msgstr ""
+
+msgid "HelpForUsers"
+msgstr ""
+
+#, fuzzy
+msgid "HelpIndex"
+msgstr "SivuHakemisto"
+
+msgid "HelpOnAccessControlLists"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnActions"
+msgstr "OhjeSisällys"
+
+msgid "HelpOnActions/AttachFile"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnAdmonitions"
+msgstr "OhjeSisällys"
+
+#, fuzzy
+msgid "HelpOnAutoAdmin"
+msgstr "OhjeMuotoilusta"
+
+#, fuzzy
+msgid "HelpOnCategories"
+msgstr "Kategoriat"
+
+msgid "HelpOnDictionaries"
+msgstr ""
+
+msgid "HelpOnEditLocks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnEditing"
+msgstr "OhjeMuotoilusta"
+
+msgid "HelpOnEditing/SubPages"
+msgstr ""
+
+msgid "HelpOnGraphicalEditor"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnGroups"
+msgstr "OhjeSisällys"
+
+msgid "HelpOnHeadlines"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnLanguages"
+msgstr "Kieli"
+
+#, fuzzy
+msgid "HelpOnLinking"
+msgstr "OhjeMuotoilusta"
+
+msgid "HelpOnLinking/NotesLinks"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnLists"
+msgstr "OhjeSisällys"
+
+#, fuzzy
+msgid "HelpOnLogin"
+msgstr "OhjeMuotoilusta"
+
+msgid "HelpOnMacros"
+msgstr ""
+
+msgid "HelpOnMacros/EmbedObject"
+msgstr ""
+
+msgid "HelpOnMacros/Include"
+msgstr ""
+
+msgid "HelpOnMacros/MailTo"
+msgstr ""
+
+msgid "HelpOnMacros/MonthCalendar"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnNavigation"
+msgstr "TienViittoja"
+
+#, fuzzy
+msgid "HelpOnOpenIDProvider"
+msgstr "OpenID-palvelin"
+
+#, fuzzy
+msgid "HelpOnPageCreation"
+msgstr "OhjeMuotoilusta"
+
+msgid "HelpOnPageDeletion"
+msgstr ""
+
+msgid "HelpOnParsers"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText"
+msgstr ""
+
+msgid "HelpOnParsers/ReStructuredText/RstPrimer"
+msgstr ""
+
+msgid "HelpOnProcessingInstructions"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnRules"
+msgstr "OhjeSisällys"
+
+#, fuzzy
+msgid "HelpOnSearching"
+msgstr "OhjeMuotoilusta"
+
+#, fuzzy
+msgid "HelpOnSlideShows"
+msgstr "Diaesitys"
+
+msgid "HelpOnSlideShows/000 Introduction"
+msgstr ""
+
+msgid "HelpOnSlideShows/100 Creating the slides"
+msgstr ""
+
+msgid "HelpOnSlideShows/900 Last but not least: Running your presentation"
+msgstr ""
+
+msgid "HelpOnSmileys"
+msgstr ""
+
+msgid "HelpOnSpam"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSpellCheck"
+msgstr "OikoLue"
+
+msgid "HelpOnSuperUser"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnSynchronisation"
+msgstr "Synkronisointi aloitettu -"
+
+msgid "HelpOnTables"
+msgstr ""
+
+msgid "HelpOnTemplates"
+msgstr ""
+
+msgid "HelpOnThemes"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnUserPreferences"
+msgstr "KäyttäjäAsetukset"
+
+msgid "HelpOnVariables"
+msgstr ""
+
+#, fuzzy
+msgid "HelpOnXmlPages"
+msgstr "OhjeMuotoilusta"
+
+#, fuzzy
+msgid "HelpOnComments"
+msgstr "OhjeSisällys"
+
+#, fuzzy
+msgid "HelpOnSubscribing"
+msgstr "Poista tilaus"
+
+msgid "CamelCase"
+msgstr ""
+
+msgid "WikiCourse"
+msgstr ""
+
+msgid "WikiCourse/01 What is a MoinMoin wiki?"
+msgstr ""
+
+msgid "WikiCourse/02 Finding information"
+msgstr ""
+
+msgid "WikiCourse/03 Staying up to date"
+msgstr ""
+
+msgid "WikiCourse/04 Creating a wiki account"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/05 User preferences"
+msgstr "KäyttäjäAsetukset"
+
+msgid "WikiCourse/06 Your own wiki homepage"
+msgstr ""
+
+msgid "WikiCourse/07 The text editor"
+msgstr ""
+
+msgid "WikiCourse/08 Hot Keys"
+msgstr ""
+
+msgid "WikiCourse/10 Text layout with wiki markup"
+msgstr ""
+
+msgid "WikiCourse/11 Paragraphs"
+msgstr ""
+
+msgid "WikiCourse/12 Headlines"
+msgstr ""
+
+msgid "WikiCourse/13 Lists"
+msgstr ""
+
+msgid "WikiCourse/14 Text styles"
+msgstr ""
+
+msgid "WikiCourse/15 Tables"
+msgstr ""
+
+msgid "WikiCourse/16 Wiki internal links"
+msgstr ""
+
+msgid "WikiCourse/17 External links"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/18 Attachments"
+msgstr "Uusi liitetiedosto"
+
+msgid "WikiCourse/19 Symbols"
+msgstr ""
+
+msgid "WikiCourse/20 Dynamic content"
+msgstr ""
+
+msgid "WikiCourse/21 Macros"
+msgstr ""
+
+msgid "WikiCourse/22 Parsers"
+msgstr ""
+
+#, fuzzy
+msgid "WikiCourse/23 Actions"
+msgstr "Lisää toimintoja:"
+
+msgid "WikiCourse/30 The graphical editor"
+msgstr ""
+
+msgid "WikiCourse/40 Creating more pages"
+msgstr ""
+
+msgid "WikiCourse/50 Wiki etiquette"
+msgstr ""
+
+msgid "WikiCourse/51 Applications"
+msgstr ""
+
+msgid "WikiCourse/52 Structure in the wiki"
+msgstr ""
+
+msgid "WikiCourseHandOut"
+msgstr ""
+
+msgid "Sun"
+msgstr "su"
 
 msgid "Mon"
 msgstr "ma"
@@ -1366,9 +1863,6 @@ msgstr "pe"
 
 msgid "Sat"
 msgstr "la"
-
-msgid "Sun"
-msgstr "su"
 
 msgid "AttachFile"
 msgstr "LiitäTiedosto"
@@ -1876,6 +2370,10 @@ msgstr "Aloita"
 msgid "Slide %(pos)d of %(size)d"
 msgstr "Dia %(pos)d / %(size)d"
 
+#, python-format
+msgid "<<%(macro_name)s: execution failed [%(error_msg)s] (see also the log)>>"
+msgstr ""
+
 msgid "Go To Page"
 msgstr "Siirry sivulle"
 
@@ -2157,15 +2655,15 @@ msgstr ""
 "TextCha: Väärä vastaus! Napsauta selaimen Edellinen-painiketta ja tallenna "
 "sivu uudelleen."
 
-msgid "You are not allowed to overwrite a file attachment of this page."
-msgstr "Sinulla ei ole oikeutta korvata tämän sivun liitetiedostoja."
-
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
 msgstr ""
 "Ei tiedostosisältöä. Poista muut kuin ASCII-merkit nimestä ja yritä "
 "uudelleen."
+
+msgid "You are not allowed to overwrite a file attachment of this page."
+msgstr "Sinulla ei ole oikeutta korvata tämän sivun liitetiedostoja."
 
 #, python-format
 msgid ""
@@ -2759,10 +3257,6 @@ msgstr "Jätä huomioimatta muutokset tyhjätilamerkkien määrässä"
 msgid "Invalid filename \"%s\"!"
 msgstr "Kelvoton tiedostonimi \"%s\"!"
 
-#, python-format
-msgid "Created the package %s containing the pages %s."
-msgstr "Luotu paketti %s sivu(i)sta %s."
-
 msgid "Include all attachments?"
 msgstr "Sisällytetäänkö kaikki liitetiedostot?"
 
@@ -2791,9 +3285,6 @@ msgstr "Ei käyttäjä:"
 
 msgid "You are not allowed to perform this action."
 msgstr "Sinulla ei ole oikeutta suorittaa tätä toimintoa."
-
-msgid "Please log in first."
-msgstr "Kirjaudu ensin sisään."
 
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Luo kotisivu, ennen kuin luot muita sivuja."
@@ -2850,6 +3341,17 @@ msgstr ""
 
 msgid "MyPages management"
 msgstr "Omien sivujen hallinta"
+
+#, fuzzy
+msgid "page package"
+msgstr "Muutettu sivu"
+
+msgid "Choose:"
+msgstr ""
+
+#, python-format
+msgid "Install language packs for '%s'"
+msgstr ""
 
 msgid "Your subscription to this page has been removed."
 msgstr "Tilauksesi tälle sivulle on poistettu."
@@ -3033,6 +3535,33 @@ msgid "anonymous"
 msgstr ""
 
 #~ msgid ""
+#~ "Installing theme files is only supported for standalone type servers."
+#~ msgstr ""
+#~ "Ulkoasutiedostojen asennus on tuettu vain erillistyyppisillä palvelimilla."
+
+#, fuzzy
+#~ msgid "InterWikiMap"
+#~ msgstr "Wiki-merkintä"
+
+#, fuzzy
+#~ msgid "BadContent"
+#~ msgstr "Sisältö"
+
+#, fuzzy
+#~ msgid "LocalBadContent"
+#~ msgstr "Sisältö"
+
+#, fuzzy
+#~ msgid "EditedSystemPages"
+#~ msgstr "Ohita järjestelmäsivut"
+
+#~ msgid "Created the package %s containing the pages %s."
+#~ msgstr "Luotu paketti %s sivu(i)sta %s."
+
+#~ msgid "You need to log in."
+#~ msgstr "Sinun on kirjauduttava sisään."
+
+#~ msgid ""
 #~ "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
 #~ "Files: %(filecount)d, Directories: %(dircount)d"
 #~ msgstr ""
@@ -3210,9 +3739,6 @@ msgstr ""
 
 #~ msgid "[%(lang)s] %(recipients)s: %(status)s"
 #~ msgstr "[%(lang)s] %(recipients)s: %(status)s"
-
-#~ msgid "UserPreferences"
-#~ msgstr "KäyttäjäAsetukset"
 
 #~ msgid "Subscribe to trivial changes"
 #~ msgstr "Tilaa vähäisetkin muutokset"

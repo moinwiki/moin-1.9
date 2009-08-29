@@ -46,7 +46,7 @@ def form_get(request, name, default='', escaped=False):
     @param default: value if not present (default: '')
     @param escaped: if True, escape value so it can be used for html generation (default: False)
     """
-    value = request.form.get(name, [default])[0]
+    value = request.values.get(name, default)
     if escaped:
         value = wikiutil.escape(value, quote=True)
     return value
@@ -166,7 +166,7 @@ def advanced_ui(macro):
 
     # the dialogue
     return f.rawHTML('\n'.join([
-        u'<form method="get" action="%s/%s">' % (macro.request.getScriptname(), wikiutil.quoteWikinameURL(macro.request.formatter.page.page_name)),
+        u'<form method="get" action="%s">' % macro.request.href(macro.request.formatter.page.page_name),
         u'<div>',
         u'<input type="hidden" name="action" value="fullsearch">',
         u'<input type="hidden" name="advancedsearch" value="1">',

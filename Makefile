@@ -13,33 +13,25 @@ all:
 
 install-docs:
 	-mkdir build
-	wget -U MoinMoin/Makefile -O build/INSTALL.html "http://master18.moinmo.in/MoinMoin/InstallDocs?action=print"
+	wget -U MoinMoin/Makefile -O build/INSTALL.html "http://master19.moinmo.in/InstallDocs?action=print"
 	sed \
-		-e 's#href="/#href="http://master18.moinmo.in/#g' \
-		-e 's#http://[a-z\.]*/wiki/classic/#/wiki/classic/#g' \
-		-e 's#http://[a-z\.]*/wiki/modern/#/wiki/modern/#g' \
-		-e 's#http://[a-z\.]*/wiki/rightsidebar/#/wiki/rightsidebar/#g' \
-		-e 's#/wiki/classic/#wiki/htdocs/classic/#g' \
-		-e 's#/wiki/modern/#wiki/htdocs/modern/#g' \
-		-e 's#/wiki/rightsidebar/#wiki/htdocs/rightsidebar/#g' \
+		-e 's#href="/#href="http://master19.moinmo.in/#g' \
+		-e 's#http://master19.moinmo.in/moin_static.../#../MoinMoin/web/static/htdocs/#g' \
+		-e 's#http://static.moinmo.in/moin_static.../#../MoinMoin/web/static/htdocs/#g' \
         build/INSTALL.html >docs/INSTALL.html
 	-rm build/INSTALL.html
 
-	wget -U MoinMoin/Makefile -O build/UPDATE.html "http://master18.moinmo.in/HelpOnUpdating?action=print"
+	wget -U MoinMoin/Makefile -O build/UPDATE.html "http://master19.moinmo.in/HelpOnUpdating?action=print"
 	sed \
-		-e 's#href="/#href="http://master18.moinmo.in/#g' \
-		-e 's#http://[a-z\.]*/wiki/classic/#/wiki/classic/#g' \
-		-e 's#http://[a-z\.]*/wiki/modern/#/wiki/modern/#g' \
-		-e 's#http://[a-z\.]*/wiki/rightsidebar/#/wiki/rightsidebar/#g' \
-		-e 's#/wiki/classic/#wiki/htdocs/classic/#g' \
-		-e 's#/wiki/modern/#wiki/htdocs/modern/#g' \
-		-e 's#/wiki/rightsidebar/#wiki/htdocs/rightsidebar/#g' \
+		-e 's#href="/#href="http://master19.moinmo.in/#g' \
+		-e 's#http://master19.moinmo.in/moin_static.../#../MoinMoin/web/static/htdocs/#g' \
+		-e 's#http://static.moinmo.in/moin_static.../#../MoinMoin/web/static/htdocs/#g' \
         build/UPDATE.html >docs/UPDATE.html
 	-rm build/UPDATE.html
 	-rmdir build
 
 interwiki:
-	wget -U MoinMoin/Makefile -O $(share)/data/intermap.txt "http://master18.moinmo.in/InterWikiMap?action=raw"
+	wget -U MoinMoin/Makefile -O $(share)/data/intermap.txt "http://master19.moinmo.in/InterWikiMap?action=raw"
 	chmod 664 $(share)/data/intermap.txt
 
 check-tabs:
@@ -47,26 +39,30 @@ check-tabs:
 
 # Create documentation
 epydoc: patchlevel
-	@epydoc -o ../html-1.8 --name=MoinMoin --url=http://moinmo.in/ --graph=all --graph-font=Arial MoinMoin
+	@epydoc -o ../html-1.9 --name=MoinMoin --url=http://moinmo.in/ --graph=all --graph-font=Arial MoinMoin
 
 # Create new underlay directory from MoinMaster
 # Should be used only on TW machine
 underlay:
 	rm -rf $(share)/underlay
-	MoinMoin/script/moin.py --config-dir=/srv/moin/cfg/1.8 --wiki-url=master18.moinmo.in/ maint globaledit
-	MoinMoin/script/moin.py --config-dir=/srv/moin/cfg/1.8 --wiki-url=master18.moinmo.in/ maint reducewiki --target-dir=$(share)/underlay
+	MoinMoin/script/moin.py --config-dir=/srv/moin/cfg/1.9 --wiki-url=http://master19.moinmo.in/ maint globaledit
+	MoinMoin/script/moin.py --config-dir=/srv/moin/cfg/1.9 --wiki-url=http://master19.moinmo.in/ maint reducewiki --target-dir=$(share)/underlay
 	rm -rf $(share)/underlay/pages/InterWikiMap
 	rm -rf $(share)/underlay/pages/MoinPagesEditorGroup
 	cd $(share); rm -f underlay.tar; tar cf underlay.tar underlay
 
 pagepacks:
 	@python MoinMoin/_tests/maketestwiki.py
-	@MoinMoin/script/moin.py --config-dir=MoinMoin/_tests maint mkpagepacks
+	@MoinMoin/script/moin.py --config-dir=MoinMoin/_tests --wiki-url=http://localhost/ maint mkpagepacks
 	cd $(share) ; rm -rf underlay
 	cp -a $(testwiki)/underlay $(share)/
 	
 dist:
 	-rm MANIFEST
+	-rm -rf tests/wiki
+	-rm -rf wiki/data/cache/{__metalock__,__session__,wikiconfig}
+	->wiki/data/event-log
+	->wiki/data/edit-log
 	python setup.py sdist
 
 # Create patchlevel module
