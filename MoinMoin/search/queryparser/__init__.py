@@ -24,7 +24,7 @@ class QueryError(ValueError):
     """ error raised for problems when parsing the query """
 
 
-class QueryParser:
+class QueryParser(object):
     """
     Converts a String into a tree of Query objects.
     """
