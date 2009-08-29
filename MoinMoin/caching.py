@@ -3,7 +3,7 @@
     MoinMoin caching module
 
     @copyright: 2001-2004 by Juergen Hermann <jh@web.de>,
-                2006-2008 MoinMoin:ThomasWaldmann,
+                2006-2009 MoinMoin:ThomasWaldmann,
                 2008 MoinMoin:ThomasPfaff
     @license: GNU GPL, see COPYING for details.
 """
@@ -20,7 +20,7 @@ from MoinMoin.util import filesys, lock, pickle, PICKLE_PROTOCOL
 
 
 class CacheError(Exception):
-    """ raised if we have trouble reading or writing to the cache """
+    """ raised if we have trouble locking, reading or writing """
     pass
 
 
@@ -32,6 +32,9 @@ def get_arena_dir(request, arena, scope):
         return os.path.join(request.cfg.cache_dir, request.cfg.siteid, arena)
     elif scope == 'farm':
         return os.path.join(request.cfg.cache_dir, '__common__', arena)
+    elif scope == 'dir':
+        # arena is a specific directory, just use it
+        return arena
     return None
 
 
@@ -55,6 +58,7 @@ class CacheEntry:
                           'item' - an item local cache
                           'wiki' - a wiki local cache
                           'farm' - a cache for the whole farm
+                          'dir' - just use some specific directory
             @param do_locking: if there should be a lock, normally True
             @param use_pickle: if data should be pickled/unpickled (nice for arbitrary cache content)
             @param use_encode: if data should be encoded/decoded (nice for readable cache files)
@@ -69,13 +73,8 @@ class CacheEntry:
             os.makedirs(self.arena_dir)
         self._fname = os.path.join(self.arena_dir, key)
 
-        if self.locking:
-            self.lock_dir = os.path.join(self.arena_dir, '__lock__')
-            self.rlock = lock.LazyReadLock(self.lock_dir, 60.0)
-            self.wlock = lock.LazyWriteLock(self.lock_dir, 60.0)
-
         # used by file-like api:
-        self._lock = None  # either self.rlock or self.wlock
+        self._lock = None  # either a read or a write lock
         self._fileobj = None  # open cache file object
         self._tmp_fname = None  # name of temporary file (used for write)
         self._mode = None  # mode of open file object
@@ -132,21 +131,46 @@ class CacheEntry:
 
         return needsupdate
 
-    def _determine_locktype(self, mode):
-        """ return the correct lock object for a specific file access mode """
-        if self.locking:
-            if 'r' in mode:
-                lock = self.rlock
-            if 'w' in mode or 'a' in mode:
-                lock = self.wlock
-        else:
-            lock = None
-        return lock
+    def lock(self, mode, timeout=1.0):
+        """
+        acquire a lock for <mode> ("r" or "w").
+        we just raise a CacheError if this doesn't work.
+
+        Note:
+         * .open() calls .lock(), .close() calls .unlock() if do_locking is True.
+         * if you need to do a read-modify-write, you want to use a CacheEntry
+           with do_locking=False and manually call .lock('w') and .unlock().
+        """
+        lock_dir = os.path.join(self.arena_dir, '__lock__')
+        if 'r' in mode:
+            self._lock = lock.LazyReadLock(lock_dir, 60.0)
+        elif 'w' in mode:
+            self._lock = lock.LazyWriteLock(lock_dir, 60.0)
+        acquired = self._lock.acquire(timeout)
+        if not acquired:
+            err = "Can't acquire %s lock in %s" % (mode, lock_dir)
+            logging.error(err)
+            raise CacheError(err)
+
+    def unlock(self):
+        """
+        release the lock.
+        """
+        if self._lock:
+            self._lock.release()
+            self._lock = None
 
     # file-like interface ----------------------------------------------------
 
     def open(self, filename=None, mode='r', bufsize=-1):
         """ open the cache for reading/writing
+
+        Typical usage:
+            try:
+                cache.open('r')  # open file, create locks
+                data = cache.read()
+            finally:
+                cache.close()  # important to close file and remove locks
 
         @param filename: must be None (default - automatically determine filename)
         @param mode: 'r' (read, default), 'w' (write)
@@ -158,39 +182,32 @@ class CacheEntry:
         """
         assert self._fileobj is None, 'caching: trying to open an already opened cache'
         assert filename is None, 'caching: giving a filename is not supported (yet?)'
-
-        self._lock = self._determine_locktype(mode)
+        assert 'r' in mode or 'w' in mode, 'caching: mode must contain "r" or "w"'
 
         if 'b' not in mode:
             mode += 'b'  # we want to use binary mode, ever!
         self._mode = mode  # for self.close()
 
-        if not self.locking or self.locking and self._lock.acquire(1.0):
-            try:
-                if 'r' in mode:
-                    filename = self._fname
-                    self._fileobj = open(filename, mode, bufsize)
-                elif 'w' in mode:
-                    # we do not write content to old inode, but to a new file
-                    # so we don't need to lock when we just want to read the file
-                    # (at least on POSIX, this works)
-                    filename = None
-                    fd, filename = tempfile.mkstemp('.tmp', self.key, self.arena_dir)
-                    self._tmp_fname = filename
-                    self._fileobj = os.fdopen(fd, mode, bufsize)
-                else:
-                    raise ValueError("caching: mode does not contain 'r' or 'w'")
-            except IOError, err:
-                if self.locking:
-                    self._lock.release()
-                    self._lock = None
-                logging.error("Can't open cache file %s [%s]" % (filename, str(err)))
-                raise CacheError(str(err))
-        else:
-            err = "Can't acquire read/write lock in %s" % self.lock_dir
-            logging.error(err)
-            raise CacheError(err)
-
+        if self.locking:
+            self.lock(mode)
+        try:
+            if 'r' in mode:
+                filename = self._fname
+                self._fileobj = open(filename, mode, bufsize)
+            elif 'w' in mode:
+                # we do not write content to old inode, but to a new file
+                # so we don't need to lock when we just want to read the file
+                # (at least on POSIX, this works)
+                filename = None
+                fd, filename = tempfile.mkstemp('.tmp', self.key, self.arena_dir)
+                self._tmp_fname = filename
+                self._fileobj = os.fdopen(fd, mode, bufsize)
+        except IOError, err:
+            if 'w' in mode:
+                # IOerror for 'r' can be just a non-existing file, do not log that,
+                # but if open fails for 'w', we likely have some bigger problem:
+                logging.error(str(err))
+            raise CacheError(str(err))
 
     def read(self, size=-1):
         """ read data from cache file
@@ -209,18 +226,17 @@ class CacheEntry:
 
     def close(self):
         """ close cache file (and release lock, if any) """
-        if self._fileobj:
-            self._fileobj.close()
-            self._fileobj = None
-            if 'w' in self._mode:
-                filesys.chmod(self._tmp_fname, 0666 & config.umask) # fix mode that mkstemp chose
-                # this is either atomic or happening with real locks set:
-                filesys.rename(self._tmp_fname, self._fname)
-
-        if self._lock:
+        try:
+            if self._fileobj:
+                self._fileobj.close()
+                self._fileobj = None
+                if 'w' in self._mode:
+                    filesys.chmod(self._tmp_fname, 0666 & config.umask) # fix mode that mkstemp chose
+                    # this is either atomic or happening with real locks set:
+                    filesys.rename(self._tmp_fname, self._fname)
+        finally:
             if self.locking:
-                self._lock.release()
-            self._lock = None
+                self.unlock()
 
     # ------------------------------------------------------------------------
 
@@ -266,16 +282,15 @@ class CacheEntry:
             raise CacheError(str(err))
 
     def remove(self):
-        if not self.locking or self.locking and self.wlock.acquire(1.0):
+        if self.locking:
+            self.lock('w')
+        try:
             try:
-                try:
-                    os.remove(self._fname)
-                except OSError:
-                    pass
-            finally:
-                if self.locking:
-                    self.wlock.release()
-        else:
-            logging.error("Can't acquire write lock in %s" % self.lock_dir)
+                os.remove(self._fname)
+            except OSError:
+                pass
+        finally:
+            if self.locking:
+                self.unlock()
 
 
