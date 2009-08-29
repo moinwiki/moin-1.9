@@ -184,7 +184,7 @@ class CacheEntry:
                 if self.locking:
                     self._lock.release()
                     self._lock = None
-                logging.error("Can't open cache file %s [%s]" % (filename, str(err))
+                logging.error("Can't open cache file %s [%s]" % (filename, str(err)))
                 raise CacheError(str(err))
         else:
             err = "Can't acquire read/write lock in %s" % self.lock_dir
