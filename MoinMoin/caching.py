@@ -168,21 +168,28 @@ class CacheEntry:
         if not self.locking or self.locking and self._lock.acquire(1.0):
             try:
                 if 'r' in mode:
-                    self._fileobj = open(self._fname, mode, bufsize)
+                    filename = self._fname
+                    self._fileobj = open(filename, mode, bufsize)
                 elif 'w' in mode:
                     # we do not write content to old inode, but to a new file
                     # so we don't need to lock when we just want to read the file
                     # (at least on POSIX, this works)
-                    fd, self._tmp_fname = tempfile.mkstemp('.tmp', self.key, self.arena_dir)
+                    filename = None
+                    fd, filename = tempfile.mkstemp('.tmp', self.key, self.arena_dir)
+                    self._tmp_fname = filename
                     self._fileobj = os.fdopen(fd, mode, bufsize)
                 else:
                     raise ValueError("caching: mode does not contain 'r' or 'w'")
-            finally:
+            except IOError, err:
                 if self.locking:
                     self._lock.release()
                     self._lock = None
+                logging.error("Can't open cache file %s [%s]" % (filename, str(err)))
+                raise CacheError(str(err))
         else:
-            logging.error("Can't acquire read/write lock in %s" % self.lock_dir)
+            err = "Can't acquire read/write lock in %s" % self.lock_dir
+            logging.error(err)
+            raise CacheError(err)
 
 
     def read(self, size=-1):
