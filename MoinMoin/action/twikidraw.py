@@ -12,7 +12,7 @@
                 2005-2009 MoinMoin:ReimarBauer,
     @license: GNU GPL, see COPYING for details.
 """
-import os, time
+import os, re, time
 
 from MoinMoin import log
 logging = log.getLogger(__name__)
