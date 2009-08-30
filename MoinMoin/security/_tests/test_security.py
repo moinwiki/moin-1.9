@@ -197,6 +197,10 @@ class TestAcl(object):
         """ security: applying acl by user name"""
         # This acl string...
         acl_rights = [
+            "-MinusGuy:read "
+            "+MinusGuy:read "
+            "+PlusGuy:read "
+            "-PlusGuy:read "
             "Admin1,Admin2:read,write,delete,revert,admin  "
             "Admin3:read,write,admin  "
             "JoeDoe:read,write  "
@@ -226,6 +230,10 @@ class TestAcl(object):
             # All other users - every one not mentioned in the acl lines
             ('All', ('read', )),
             ('Anonymous', ('read', )),
+            # we check whether ACL processing stops for a user/right match
+            # with ACL modifiers
+            ('MinusGuy', ()),
+            ('PlusGuy', ('read', )),
             )
 
         # Check rights
