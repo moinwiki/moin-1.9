@@ -96,11 +96,11 @@ class Formatter(text_html.Formatter):
         # Todo get it to start the drawing editor on a click
         try:
             attachment_drawing = wikiutil.importPlugin(self.request.cfg, 'action',
-                                              self.request.cfg.drawing_action, 'attachment_drawing')
+                                              self.request.cfg.drawing_action, 'gedit_drawing')
             return attachment_drawing(self, url, text, **kw)
         except (wikiutil.PluginMissingError, wikiutil.PluginAttributeError):
             return url
-        
+
     def icon(self, type):
         return self.request.theme.make_icon(type, title='smiley:%s' % type)
 
