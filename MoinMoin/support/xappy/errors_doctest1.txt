@@ -1,0 +1,34 @@
+Xappy exports all the xapian errors as "XapianFooError", corresponding to
+xapian.FooError.  Firstly, we need to test that we can catch one of these
+errors.  Lets play with DatabaseLockError because it's easy to generate.
+
+>>> import xappy
+
+>>> db1 = xappy.IndexerConnection('foo')
+
+>>> try:
+...     db2 = xappy.IndexerConnection('foo')
+... except xappy.XapianDatabaseLockError:
+...     print "Got XapianDatabaseLockError"
+Got XapianDatabaseLockError
+
+
+Xappy also modifies all the Xapian errors so that they inherit from
+xappy.XapianError, so we can catch all Xapian errors this way:
+
+>>> try:
+...     db2 = xappy.IndexerConnection('foo')
+... except xappy.XapianError:
+...     print "Got XapianError"
+Got XapianError
+
+
+xappy.XapianError is a subclass of xappy.SearchEngineError, so all errors from
+xappy can be caught using xappy.SearchEngineError:
+
+>>> try:
+...     db2 = xappy.IndexerConnection('foo')
+... except xappy.SearchEngineError:
+...     print "Got SearchEngineError"
+Got SearchEngineError
+
