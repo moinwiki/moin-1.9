@@ -93,20 +93,14 @@ class Formatter(text_html.Formatter):
         return self.image(**kw)
 
     def attachment_drawing(self, url, text, **kw):
-        _ = self.request.getText
-        # TODO: this 'text' argument is kind of superfluous, replace by using alt=... kw arg
-        if 'alt' not in kw or not kw['alt']:
-            kw['alt'] = text
-        # we force the title here, needed later for html>wiki converter
-        kw['title'] = "drawing:%s" % wikiutil.quoteWikinameURL(url)
-        pagename = self.page.page_name
-        if '/' in url:
-            pagename, target = AttachFile.absoluteName(url, pagename)
-            url = url.split('/')[-1]
-        url += '.png'
-        kw['src'] = AttachFile.getAttachUrl(pagename, url, self.request, addts=1)
-        return self.image(**kw)
-
+        # Todo get it to start the drawing editor on a click
+        try:
+            attachment_drawing = wikiutil.importPlugin(self.request.cfg, 'action',
+                                              self.request.cfg.drawing_action, 'attachment_drawing')
+            return attachment_drawing(self, url, text, **kw)
+        except (wikiutil.PluginMissingError, wikiutil.PluginAttributeError):
+            return url
+        
     def icon(self, type):
         return self.request.theme.make_icon(type, title='smiley:%s' % type)
 
