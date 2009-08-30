@@ -4,8 +4,6 @@
 
     This action is used to call twikidraw
 
-    it is just a thin wrapper around it.
-
     @copyright: 2001 by Ken Sugino (sugino@mediaone.net),
                 2001-2004 by Juergen Hermann <jh@web.de>,
                 2005 MoinMoin:AlexanderSchremmer,
@@ -35,6 +33,54 @@ def _write_stream(content, stream, bufsize=8192):
         logging.error("unsupported content object: %r" % content)
         raise
 
+def attachment_drawing(self, url, text, **kw):
+    # This is called for displaying a clickable drawing image by text_html formatter.
+    # XXX text arg is unused!
+    _ = self.request.getText
+    pagename, drawing = AttachFile.absoluteName(url, self.page.page_name)
+    containername = wikiutil.taintfilename(drawing) + ".tdraw"
+
+    drawing_url = AttachFile.getAttachUrl(pagename, containername, self.request, drawing=drawing, upload=True)
+    ci = AttachFile.ContainerItem(self.request, pagename, containername)
+    if not ci.exists():
+        title = _('Create new drawing "%(filename)s (opens in new window)"') % {'filename': drawing}
+        img = self.icon('attachimg')  # TODO: we need a new "drawimg" in similar grey style and size
+        css = 'nonexistent'
+        return self.url(1, drawing_url, css=css, title=title) + img + self.url(0)
+
+    title = _('Edit drawing %(filename)s (opens in new window)') % {'filename': self.text(drawing)}
+    kw['src'] = src = ci.member_url(drawing + u'.png')
+    kw['css'] = 'drawing'
+
+    try:
+        mapfile = ci.get(drawing + u'.map')
+        map = mapfile.read()
+        mapfile.close()
+    except (KeyError, IOError, OSError):
+        map = ''
+    if map:
+        # we have a image map. inline it and add a map ref to the img tag
+        mapid = 'ImageMapOf' + drawing
+        map = map.replace('%MAPNAME%', mapid)
+        # add alt and title tags to areas
+        map = re.sub(r'href\s*=\s*"((?!%TWIKIDRAW%).+?)"', r'href="\1" alt="\1" title="\1"', map)
+        map = map.replace('%TWIKIDRAW%"', '%s" alt="%s" title="%s"' % (drawing_url, title, title))
+        # unxml, because 4.01 concrete will not validate />
+        map = map.replace('/>', '>')
+        title = _('Clickable drawing: %(filename)s') % {'filename': self.text(drawing)}
+        if 'title' not in kw:
+            kw['title'] = title
+        if 'alt' not in kw:
+            kw['alt'] = kw['title']
+        kw['usemap'] = '#'+mapid
+        return map + self.image(**kw)
+    else:
+        if 'title' not in kw:
+            kw['title'] = title
+        if 'alt' not in kw:
+            kw['alt'] = kw['title']
+        return self.url(1, drawing_url) + self.image(**kw) + self.url(0)
+
 def execute(pagename, request):
     _ = request.getText
     if not request.user.may.read(pagename):
@@ -44,7 +90,7 @@ def execute(pagename, request):
     if not target:
         request.write('<p>%s</p>' % _("Empty target given."))
         return
-   
+
     do = request.values.get('do', '')
     if do == 'save':
         if not request.user.may.write(pagename):
