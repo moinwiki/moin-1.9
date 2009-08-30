@@ -18,10 +18,11 @@ from MoinMoin import log
 logging = log.getLogger(__name__)
 
 from MoinMoin import wikiutil
-from MoinMoin.action import AttachFile
+from MoinMoin.action import AttachFile, do_show
 from MoinMoin.Page import Page
 
 action_name = __name__.split('.')[-1]
+
 
 def _write_stream(content, stream, bufsize=8192):
     if hasattr(content, 'read'): # looks file-like
@@ -81,20 +82,27 @@ def attachment_drawing(self, url, text, **kw):
             kw['alt'] = kw['title']
         return self.url(1, drawing_url) + self.image(**kw) + self.url(0)
 
-def execute(pagename, request):
-    _ = request.getText
-    if not request.user.may.read(pagename):
-        request.write('<p>%s</p>' % _('You are not allowed to view this page.'))
-        return
-    target = request.values.get('target', '')
-    if not target:
-        request.write('<p>%s</p>' % _("Empty target given."))
-        return
 
-    do = request.values.get('do', '')
-    if do == 'save':
+class TwikiDraw(object):
+    """ twikidraw action """
+    def __init__(self, request, pagename, target):
+        self._ = request.getText
+        self.request = request
+        self.pagename = pagename
+        self.target = target
+
+    def render_msg(self, msg, msgtype):
+        """ Called to display some message (can also be the action form) """
+        self.request.theme.add_msg(msg, msgtype)
+        do_show(self.pagename, self.request)
+
+    def save(self):
+        _ = self._
+        pagename = self.pagename
+        request = self.request
         if not request.user.may.write(pagename):
             return _('You are not allowed to save a drawing on this page.')
+
         file_upload = request.files.get('filepath')
         if not file_upload:
             # This might happen when trying to upload file names
@@ -125,20 +133,26 @@ def execute(pagename, request):
             filecontent = filecontent.read()
 
         ci.put(basename + ext, filecontent, content_length)
-        return None, None
+        #return _("Thank you for your changes. Your attention to detail is appreciated.")
 
-    url = request.getQualifiedURL()
-    now = time.time()
-    htdocs = "%s%s" % (request.cfg.url_prefix_static, "/applets/TWikiDrawPlugin")
-    ci = AttachFile.ContainerItem(request, pagename, target + '.tdraw')
-    drawpath = ci.member_url(target + '.draw')
-    pngpath = ci.member_url(target + '.png')
-    pagelink = request.href(pagename, action=action_name, ts=now)
-    helplink = Page(request, "HelpOnActions/AttachFile").url(request)
-    savelink = request.href(pagename, action=action_name, do='save', target=target)
-    timestamp = '&amp;ts=%s' % now
 
-    html = '''<h2> %(editdrawing)s </h2>
+    def render(self):
+        _ = self._
+        request = self.request
+        pagename = self.pagename
+        target = self.target
+        url = request.getQualifiedURL()
+        now = time.time()
+        htdocs = "%s%s" % (request.cfg.url_prefix_static, "/applets/TWikiDrawPlugin")
+        ci = AttachFile.ContainerItem(request, pagename, target + '.tdraw')
+        drawpath = ci.member_url(target + '.draw')
+        pngpath = ci.member_url(target + '.png')
+        pagelink = request.href(pagename, action=action_name, ts=now)
+        helplink = Page(request, "HelpOnActions/AttachFile").url(request)
+        savelink = request.href(pagename, action=action_name, do='save', target=target)
+        timestamp = '&amp;ts=%s' % now
+
+        html = '''<h2> %(editdrawing)s </h2>
 <p>
 <img src="%(pngpath)s%(timestamp)s">
 <applet code="CH.ifa.draw.twiki.TWikiDraw.class"
@@ -166,11 +180,35 @@ def execute(pagename, request):
     'editdrawing': _("Edit drawing")
     }
 
-    title = "%s:%s" % (pagename, target)
-    request.theme.send_title(title, page=request.page, pagename=pagename)
-    request.write(request.formatter.startContent("content"))
-    request.write(request.formatter.rawHTML(html))
-    request.write(request.formatter.endContent())
-    request.theme.send_footer(pagename)
-    request.theme.send_closing_html()
+        title = "%s:%s" % (pagename, target)
+        request.theme.send_title(title, page=request.page, pagename=pagename)
+        request.write(request.formatter.startContent("content"))
+        request.write(request.formatter.rawHTML(html))
+        request.write(request.formatter.endContent())
+        request.theme.send_footer(pagename)
+        request.theme.send_closing_html()
+
+
+def execute(pagename, request):
+    _ = request.getText
+    msg = None
+    if not request.user.may.read(pagename):
+        msg = '<p>%s</p>' % _('You are not allowed to view this page.')
+        TwikiDraw(request, pagename, target).render_msg(msg, 'error')
+        return
+
+    target = request.values.get('target', '')
+    if not target:
+        msg = '<p>%s</p>' % _("Empty target given.")
+        TwikiDraw(request, pagename, target).render_msg(msg, 'error')
+        return
+
+    do = request.values.get('do', '')
+    if do == 'save' and request.user.may.write(pagename):
+        msg = TwikiDraw(request, pagename, target).save()
+        TwikiDraw(request, pagename, target).render_msg(msg, 'error')
+        return
+
+    TwikiDraw(request, pagename, target).render()
+
 
