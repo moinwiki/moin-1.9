@@ -89,13 +89,13 @@ def getAttachUrl(pagename, filename, request, addts=0, escaped=0, do='get', draw
             url = request.href(pagename, rename=wikiutil.taintfilename(filename),
                                action=action_name)
         else:
-            url = request.href(pagename, rename=wikiutil.taintfilename(filename),
-                               drawing=drawing, action=action_name)
+            url = request.href(pagename,
+                               target=drawing, action=request.cfg.drawing_action)
     else:
         if not drawing:
             url = request.href(pagename, target=filename, action=action_name, do=do)
         else:
-            url = request.href(pagename, drawing=drawing, action=action_name)
+            url = request.href(pagename, target=drawing, action=request.cfg.drawing_action)
     return url
 
 
@@ -395,47 +395,6 @@ def send_link_rel(request, pagename):
         request.write(u'<link rel="Appendix" title="%s" href="%s">\n' % (
                       wikiutil.escape(fname, 1), url))
 
-
-def send_hotdraw(pagename, request):
-    _ = request.getText
-
-    now = time.time()
-    pubpath = request.cfg.url_prefix_static + "/applets/TWikiDrawPlugin"
-    basename = request.values['drawing']
-    ci = ContainerItem(request, pagename, basename + '.tdraw')
-    drawpath = ci.member_url(basename + '.draw')
-    pngpath = ci.member_url(basename + '.png')
-    pagelink = request.href(pagename, action=action_name, ts=now)
-    helplink = Page(request, "HelpOnActions/AttachFile").url(request)
-    savelink = request.href(pagename, action=action_name, do='savedrawing')
-    #savelink = Page(request, pagename).url(request) # XXX include target filename param here for twisted
-                                           # request, {'savename': request.values['drawing']+'.draw'}
-    #savelink = '/cgi-bin/dumpform.bat'
-
-    timestamp = '&amp;ts=%s' % now
-
-    request.write('<h2>' + _("Edit drawing") + '</h2>')
-    request.write("""
-<p>
-<img src="%(pngpath)s%(timestamp)s">
-<applet code="CH.ifa.draw.twiki.TWikiDraw.class"
-        archive="%(pubpath)s/twikidraw.jar" width="640" height="480">
-<param name="drawpath" value="%(drawpath)s">
-<param name="pngpath"  value="%(pngpath)s">
-<param name="savepath" value="%(savelink)s">
-<param name="basename" value="%(basename)s">
-<param name="viewpath" value="%(pagelink)s">
-<param name="helppath" value="%(helplink)s">
-<strong>NOTE:</strong> You need a Java enabled browser to edit the drawing example.
-</applet>
-</p>""" % {
-    'pngpath': pngpath, 'timestamp': timestamp,
-    'pubpath': pubpath, 'drawpath': drawpath,
-    'savelink': savelink, 'pagelink': pagelink, 'helplink': helplink,
-    'basename': wikiutil.escape(basename, 1),
-})
-
-
 def send_uploadform(pagename, request):
     """ Send the HTML code for the list of already stored attachments and
         the file upload form.
@@ -487,10 +446,6 @@ def send_uploadform(pagename, request):
 
     if not writeable:
         request.write('<p>%s</p>' % _('You are not allowed to attach a file to this page.'))
-
-    if writeable and request.values.get('drawing'):
-        send_hotdraw(pagename, request)
-
 
 #############################################################################
 ### Web interface for file upload, viewing and deletion
@@ -633,47 +588,6 @@ class ContainerItem:
 
     def exists(self):
         return os.path.exists(self.container_filename)
-
-def _do_savedrawing(pagename, request):
-    _ = request.getText
-
-    if not request.user.may.write(pagename):
-        return _('You are not allowed to save a drawing on this page.')
-
-    file_upload = request.files.get('filepath')
-    if not file_upload:
-        # This might happen when trying to upload file names
-        # with non-ascii characters on Safari.
-        return _("No file content. Delete non ASCII characters from the file name and try again.")
-
-    filename = request.form['filename']
-    basepath, basename = os.path.split(filename)
-    basename, ext = os.path.splitext(basename)
-
-    ci = ContainerItem(request, pagename, basename + '.tdraw')
-    filecontent = file_upload.stream
-    content_length = None
-    if ext == '.draw': # TWikiDraw POSTs this first
-        _addLogEntry(request, 'ATTDRW', pagename, basename + '.tdraw')
-        ci.truncate()
-        filecontent = filecontent.read() # read file completely into memory
-        filecontent = filecontent.replace("\r", "")
-    elif ext == '.map':
-        # touch attachment directory to invalidate cache if new map is saved
-        attach_dir = getAttachDir(request, pagename)
-        os.utime(attach_dir, None)
-        filecontent = filecontent.read() # read file completely into memory
-        filecontent = filecontent.strip()
-    else:
-        #content_length = file_upload.content_length
-        # XXX gives -1 for wsgiref :( If this is fixed, we could use the file obj,
-        # without reading it into memory completely:
-        filecontent = filecontent.read()
-
-    ci.put(basename + ext, filecontent, content_length)
-
-    request.write("OK")
-
 
 def _do_del(pagename, request):
     _ = request.getText
