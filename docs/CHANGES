@@ -16,7 +16,7 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
-Version 1.9.0beta3:
+Version 1.9.0current:
 
   Please note:
   * This is a BETA version, not meant for production usage, but just to
@@ -28,6 +28,29 @@ Version 1.9.0beta3:
     We know that translations and system / help pages are not yet finished and
     that  they still require much more work.
     Please see http://master19.moinmo.in/ and help cleaning up there.
+
+  New features:
+  * Moin's Xapian based search code was refactored:
+    * It is now based on the xappy library (see MoinMoin.support.xappy).
+    * Minimum Xapian requirement is 1.0.6 now.
+    * Outdated and unmaintained xapwrap lib was removed.
+  * raw action mimetype support: ...?action=raw&mimetype=text/css
+
+  Bug fixes:
+  * Bug with "language:en" was fixed for the Moin search. Now language:
+    behaves like described on HelpOnSearching.
+  * flup_frontend: __import__ compatibility fix for python 2.4
+  * wiki_groups and wiki_dicts caching fix.
+  * Fixed moin server standalone --start.
+
+  Other changes:
+  * HINT: simplify wikiserver configuration by using same names as werkzeug's
+    run_simple() call.
+  * Removed moin account check's --lastsaved option, it is default now
+    (checking last use with trail file did not work in 1.9 anyway).
+
+
+Version 1.9.0beta3:
 
   New features:
   * HINT: We now offer different sized sets of system/help pages and the default
