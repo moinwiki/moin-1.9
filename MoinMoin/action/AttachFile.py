@@ -689,8 +689,8 @@ def _do_del(pagename, request):
     _addLogEntry(request, 'ATTDEL', pagename, filename)
 
     if request.cfg.xapian_search:
-        from MoinMoin.search.Xapian import Index
-        index = Index(request)
+        from MoinMoin.search.Xapian import XapianIndex
+        index = XapianIndex(request)
         if index.exists:
             index.remove_item(pagename, filename)
 

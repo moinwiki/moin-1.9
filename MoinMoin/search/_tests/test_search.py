@@ -403,12 +403,12 @@ class TestXapianIndexingInNewThread(object):
     def test_index_in_new_thread(self):
         """ search: kicks off indexing for a single pages in Xapian """
         try:
-            from MoinMoin.search.Xapian import Index
+            from MoinMoin.search.Xapian import XapianIndex
         except ImportError:
             py.test.skip('xapian is not installed')
 
         nuke_xapian_index(self.request)
-        index = Index(self.request)
+        index = XapianIndex(self.request)
         index.indexPagesInNewThread(mode='add')
 
         nuke_xapian_index(self.request)
