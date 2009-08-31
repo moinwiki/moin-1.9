@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Builds the "JHotDraw Draw" demo application and demo applet. -->
+<project name="build-anywikidraw" default="all" basedir=".">
+    <target name="init">
+        <property name="version" value="0.13.3"/>
+        <property name="project.jhotdraw.src" value="../../../../JHotDraw/current/trunk/jhotdraw7/src/main/java"/>
+        <property name="lib" value="lib"/>
+        <property name="src.main" value="src/main/java"/>
+        <property name="guide" value="guide"/>
+        <property name="src.jhotdraw" value="src/jhotdraw7/java"/>
+        <property name="build" value="build/classes"/>
+        <property name="dist.final" value="dist"/>
+        <property name="dist" value="dist/AnyWikiDraw ${version}"/>
+        <property name="dist.guide" value="dist/AnyWikiDraw ${version}/guide"/>
+        <property name="author" value="Werner Randelshofer, AnyWikiDraw.org"/>
+        <property name="keystore.file" value="../../../../_Keystore/JavaKeystore"/>
+        <property name="keystore.alias" value="werner"/>
+        <property name="keystore.storepass" value="werner"/>
+        <property name="version" value="0.11"/>
+    </target>
+    <target name="clean" depends="init">
+        <delete dir="${build}" />
+    </target>
+    <target name="copy sources from JHotDraw project" depends="init">
+        <!--delete dir="${src.jhotdraw}">
+            <exclude name="**/.*"/>
+            <exclude name="**/.*/**"/>
+        </delete-->
+        <mkdir dir="${src.jhotdraw}"/>
+        <copy todir="${src.jhotdraw}" overwrite="true">
+            <fileset dir="${project.jhotdraw.src}">
+            <exclude name="**/.*"/>
+            <exclude name="**/.*/**"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="app.compile" depends="init,clean">
+        <mkdir dir="${build}"/>
+        <javac
+                destdir="${build}"
+                srcdir="${src.main}:${src.jhotdraw}"
+                debug="true"
+                source="1.5"
+                optimize="true"
+                encoding="UTF-8"
+         >
+            <classpath path="${lib}/java_30.zip"/>
+            <classpath path="${lib}/quaqua.jar"/>
+            <classpath path="${lib}/MRJAdapter.jar"/>
+            <classpath path="${lib}/swing-layout.jar"/>
+
+            <include name="org/anywikidraw/any/Main.java"/> 
+            <include name="net/n3/nanoxml/StdXMLParser.java" />
+        </javac>
+
+        <copy todir="${build}/org/anywikidraw/any">
+            <fileset dir="${src.main}">
+                <include name="org/anywikidraw/any/*.properties"/>
+                <include name="org/anywikidraw/any/**/*.png"/>
+            </fileset>
+        </copy>
+        <copy todir="${build}">
+            <fileset dir="${src.jhotdraw}" >
+                <include name="org/jhotdraw/app/action/images/*.png"/>
+                <include name="org/jhotdraw/app/Label*.properties"/>
+
+                <include name="org/jhotdraw/gui/Label*.properties"/>
+
+                <include name="org/jhotdraw/draw/Label*.properties"/>
+                <include name="org/jhotdraw/draw/action/images/*.png"/>
+
+                <include name="org/jhotdraw/samples/svg/action/images/*.png"/>
+                <include name="org/jhotdraw/samples/svg/Label*.properties"/>
+
+                <include name="org/jhotdraw/undo/images/*.png"/>
+                <include name="org/jhotdraw/undo/Label*.properties"/>
+            </fileset>
+        </copy>
+        <echo file="${build}/org/anywikidraw/any/version.txt"
+            message="${version}"/>
+    </target>
+    <target name="app.jar" depends="init,app.compile">
+        <mkdir dir="${dist}"/>
+        <unjar src="${lib}/MRJAdapter.jar" dest="${build}"/>
+        <unjar src="${lib}/appframework-0.30.jar" dest="${build}"/>
+        <unjar src="${lib}/quaqua.jar" dest="${build}"/>
+        <unjar src="${lib}/swing-layout.jar" dest="${build}"/>
+        <unjar src="${lib}/swing-worker.jar" dest="${build}"/>
+        <jar destfile="${dist}/AnyWikiDraw.jar" basedir="${build}"
+        index="true" compress="false">
+            <manifest>
+                <attribute name="Built-By" value="${author}"/>
+                <attribute name="Main-Class" value="org.anywikidraw.any.Main"/>
+            </manifest>
+        </jar>
+        <copy todir="${dist}">
+            <fileset dir="${lib}">
+                <include name="lib*.jnilib"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="app.run-jar" depends="init">
+        <java fork="true" jar="${dist}/AnyWikiDraw.jar">
+        </java>
+    </target>
+   <target name="app.run-compiled" depends="init">
+        <java fork="true"
+        classname="org.anywikidraw.any.Main" 
+        >
+            <classpath>
+                <path path="${build}"/>
+                <fileset dir="${lib}">
+                    <include name="*.jar"/>
+                </fileset>
+            </classpath>
+            <jvmarg value="-Djava.library.path=${lib}"/>
+        </java>
+    </target>
+    <target name="dist" depends="clean">
+
+        <!-- create a directory for the demo -->
+        <mkdir dir="${dist.guide}"/>
+
+        <!-- copy files needed for the demo -->
+        <copy todir="${dist.guide}">
+            <fileset dir="${guide}">
+                <exclude name="**/.*"/>
+            </fileset>
+        </copy>
+
+        <!-- include the source code in the distro as required by the GPL license -->
+        <tar destfile="${dist}/src.tar.bz" compression="bzip2">
+            <fileset dir="..">
+                <include name="AnyWikiDraw/**"/>
+                <exclude name="**/.*"/>
+                <exclude name="AnyWikiDraw/build/**"/>
+                <exclude name="AnyWikiDraw/dist/**"/>
+            </fileset>
+        </tar>
+
+
+        <zip file="${dist.final}/anywikidraw-${version}.zip">
+            <fileset dir="${dist.final}">
+                <include name="AnyWikiDraw ${version}/**"/>
+                <exclude name="**/.*"/>
+            </fileset>
+        </zip>
+    </target>
+</project>
