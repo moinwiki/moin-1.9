@@ -19,6 +19,7 @@ from MoinMoin.Page import Page
 ### Results
 ############################################################################
 
+
 class Match(object):
     """ Base class for all Matches (found pieces of pages).
 
@@ -92,7 +93,7 @@ class AttachmentMatch(Match):
     pass
 
 
-class FoundPage:
+class FoundPage(object):
     """ Represents a page in a search result """
 
     def __init__(self, page_name, matches=None, page=None, rev=0):
@@ -227,7 +228,8 @@ class FoundRemote(FoundPage):
 ### Search results formatting
 ############################################################################
 
-class SearchResults:
+
+class SearchResults(object):
     """ Manage search results, supply different views
 
     Search results can hold valid search results and format them for
@@ -674,8 +676,8 @@ class SearchResults:
         """
         _ = self.request.getText
         f = self.formatter
-
         querydict = wikiutil.parseQueryString(self.request.query_string)
+
         def page_url(n):
             querydict.update({'from': n * hitsPerPage})
             return self.request.page.url(self.request, querydict, escape=0)
@@ -691,10 +693,9 @@ class SearchResults:
         # previous page available
         if cur_page > 0:
             textlinks.append(''.join([
-                f.url(1, href=page_url(cur_page-1)),
-                f.text(_('Previous')),
-                f.url(0)
-            ]))
+                        f.url(1, href=page_url(cur_page-1)),
+                        f.text(_('Previous')),
+                        f.url(0)]))
         else:
             textlinks.append('')
 
@@ -715,8 +716,7 @@ class SearchResults:
             textlinks.append(''.join([
                 f.url(1, href=page_url(cur_page+1)),
                 f.text(_('Next')),
-                f.url(0)
-            ]))
+                f.url(0)]))
         else:
             textlinks.append('')
 

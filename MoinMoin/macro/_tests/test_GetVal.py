@@ -47,9 +47,9 @@ class TestGetVal:
     def testGetValACLs(self):
         """ macro GetVal test: 'cant read VAR on an ACL protected page' """
         py.test.skip("user has no rights to create acl pages")
-        self.page = create_page(self.request, self.pagename,
-                                '#acl SomeUser:read,write All:delete\n VAR:: This is an example')
-        result = self._test_macro(u'GetVal', "%s,%s" % (self.pagename, u'VAR'))
+        page = create_page(self.request, self.pagename,
+                           '#acl SomeUser:read,write All:delete\n VAR:: This is an example')
+        result = self._test_macro(u'GetVal', "%s,%s" % (self.pagename, u'VAR'), page)
         assert result == "&lt;&lt;GetVal: You don't have enough rights on this page&gt;&gt;"
 
 coverage_modules = ['MoinMoin.macro.GetVal']

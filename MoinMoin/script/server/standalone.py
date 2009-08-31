@@ -34,8 +34,8 @@ class PluginScript(MoinScript):
             help="Set the port to listen on. Default: 8080"
         )
         self.parser.add_option(
-            "--interface", dest="interface",
-            help="Set the ip to listen on. Use \"\" for all interfaces. Default: localhost"
+            "--hostname", "--interface", dest="hostname",
+            help="Set the ip/hostname to listen on. Use \"\" for all interfaces. Default: localhost"
         )
         self.parser.add_option(
             "--start", dest="start", action="store_true",
@@ -88,33 +88,43 @@ class PluginScript(MoinScript):
                     raise
 
             # intialize some defaults if missing
-            for option in ('docs', 'user', 'group', 'port', 'interface', 'debug'):
-                if not hasattr(Config, option):
-                    value = getattr(DefaultConfig, option)
-                    setattr(Config, option, value)
+            kwargs = {}
+            for option in ('user', 'group',
+                           'hostname', 'port',
+                           'threaded', 'processes',
+                           'debug', 'use_evalex',
+                           'use_reloader', 'extra_files', 'reloader_interval',
+                           'docs', 'static_files', ):
+                if hasattr(Config, option):
+                    kwargs[option] = getattr(Config, option)
+                else:
+                    # usually inheriting from DefaultConfig should make this superfluous,
+                    # but who knows what users write into their config...
+                    kwargs[option] = getattr(DefaultConfig, option)
 
-            # override with cmdline options
+            # override config settings with cmdline options:
             if self.options.docs:
-                Config.docs = self.options.docs
+                kwargs['docs'] = self.options.docs
             if self.options.user:
-                Config.user = self.options.user
+                kwargs['user'] = self.options.user
             if self.options.group:
-                Config.group = self.options.group
-            if self.options.port:
-                Config.port = self.options.port
-            if self.options.interface is not None: # needs to work for "" value also
-                Config.interface = self.options.interface
+                kwargs['group'] = self.options.group
             if self.options.debug:
-                Config.debug = self.options.debug
+                kwargs['debug'] = self.options.debug
+
+            if self.options.hostname is not None: # needs to work for "" value also
+                kwargs['hostname'] = self.options.hostname
+            if self.options.port:
+                kwargs['port'] = self.options.port
 
             if self.options.start:
-                daemon = Daemon('moin', pidfile, run_server, Config)
+                daemon = Daemon('moin', pidfile, run_server, **kwargs)
                 daemon.do_start()
             else:
-                run_server(Config.interface, Config.port, Config.docs,
-                           debug=Config.debug, user=Config.user, group=Config.group)
+                run_server(**kwargs)
 
-class DefaultConfig:
+
+class DefaultConfig(object):
     # where the static data is served from - you can either use:
     # docs = True  # serve the builtin static data from MoinMoin/web/static/htdocs/
     # docs = '/where/ever/you/like/to/keep/htdocs'  # serve it from the given path
@@ -122,9 +132,38 @@ class DefaultConfig:
     #               # you serve them in some other working way)
     docs = True
 
+    # user and group to run moin as:
     user = None
     group = None
-    port = 8080
-    interface = 'localhost'
+
+    # debugging options: 'off', 'web', 'external'
     debug = 'off'
+
+    # should the exception evaluation feature be enabled?
+    use_evalex = True
+
+    # Werkzeug run_simple arguments below here:
+
+    # hostname/ip and port the server listens on:
+    hostname = 'localhost'
+    port = 8080
+
+    # either multi-thread or multi-process (not both):
+    # threaded = True, processes = 1 is usually what you want
+    # threaded = False, processes = 10 (for example) can be rather slow
+    # thus, if you need a forking server, maybe rather use apache/mod-wsgi!
+    threaded = True
+    processes = 1
+
+    # automatic code reloader - needs testing!
+    use_reloader = False
+    extra_files = None
+    reloader_interval = 1
+
+    # we can't use static_files to replace our own middleware setup for moin's
+    # static files, because we also need the setup with other servers (like
+    # apache), not just when using werkzeug's run_simple server.
+    # But you can use it if you need to serve other static files you just need
+    # with the standalone wikiserver.
+    static_files = None
 
