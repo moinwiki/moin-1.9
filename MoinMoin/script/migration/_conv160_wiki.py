@@ -28,6 +28,7 @@
 import re
 
 from MoinMoin import i18n
+i18n.wikiLanguages = lambda: {}
 
 from MoinMoin import config, wikiutil, macro
 from MoinMoin.action import AttachFile
