@@ -27,6 +27,8 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+import re
+
 from MoinMoin.util import pysupport
 from MoinMoin import config, wikiutil
 from MoinMoin.Page import Page
@@ -228,13 +230,18 @@ class ActionBase:
 
 # Builtin Actions ------------------------------------------------------------
 
+MIMETYPE_CRE = re.compile('[a-zA-Z0-9.+\-]{1,100}/[a-zA-Z0-9.+\-]{1,100}')
+
 def do_raw(pagename, request):
     """ send raw content of a page (e.g. wiki markup) """
     if not request.user.may.read(pagename):
         Page(request, pagename).send_page()
     else:
         rev = request.rev or 0
-        Page(request, pagename, rev=rev).send_raw()
+        mimetype = request.values.get('mimetype', None)
+        if mimetype and not MIMETYPE_CRE.match(mimetype):
+            mimetype = None
+        Page(request, pagename, rev=rev).send_raw(mimetype=mimetype)
 
 def do_show(pagename, request, content_only=0, count_hit=1, cacheable=1, print_mode=0, mimetype=u'text/html'):
     """ show a page, either current revision or the revision given by "rev=" value.
