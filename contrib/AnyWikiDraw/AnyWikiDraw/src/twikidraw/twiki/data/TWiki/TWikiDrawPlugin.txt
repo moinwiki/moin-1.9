@@ -1,0 +1,200 @@
+%META:TOPICINFO{author="TWikiContributor" date="1144799477" format="1.0" version="1.1"}%
+---+!! <nop>%TOPIC%
+<!--
+
+   PLEASE DO NOT EDIT THIS TOPIC
+
+   It is automatically generated from the subversion repository, and any changes
+   you make will simply be overwritten the next time a release is generated.
+
+   Instead, you could check your fix in, raise a bug in the Bugs web, or mail thge author.
+-->
+
+%TOC%
+
+This plugin encapsulates the <nop>TWikiDraw Java Applet first developed by TWiki:Main/PeterThoeny from the original <nop>JHotDraw.
+
+<nop>JHotDraw is a simple drawing editor that supports drawing in a style similar to that found in MS Powerpoint and MS Word. Various shaped figures can be placed in the drawing and text annotations joined to them.
+
+<img src="%ATTACHURLPATH%/screenshot.png" alt="screenshot.png" />
+
+Unique to <nop>%TOPIC%, a drawing can also have a "map" which makes figures in the drawing sensitive to the mouse cursor. A map is automatically added to an image when a URL is attached to any of the figures.
+
+How you edit a drawing depends on whether the drawing has a map and the setting of the "EDIT_BUTTON" option. A drawing with no map can be edited simply by clicking on the drawing. A drawing with a map can be edited by clicking the edit button or, failing that, on the boundary of the image.
+
+Browser support for Java 1.1 or later required.
+
+---++ Syntax Rules
+
+	* Write the command =%<nop>DRAWING{name}%= anywhere in a TWiki topic. You can name the drawing anything you like, allowed characters are =A-Z a-z 0-9 _ - .= . If you have only one drawing in the topic you can simply write =%<nop>DRAWING%= .
+
+---+++ Tools
+
+The tools on the left create or manipulate figures.
+| <img src="%ATTACHURLPATH%/SEL1.gif" width="24" height="24" alt="Selection"> | selects, moves or resizes a figure; the shift-key toggles the selection. Dragging the selection tool in the background selects the figures within the dragged rectangle. |
+| <img src="%ATTACHURLPATH%/TEXT1.gif" width="24" height="24" alt="Text"> | creates a new or edits an existing text figure |
+| <img src="%ATTACHURLPATH%/ATEXT1.gif" width="24" height="24" alt="Connected Text"> | creates a new text figure and attaches it to the clicked figure. Once a text figure is attached it remains connected to the figure. |
+| <img src="%ATTACHURLPATH%/RECT1.gif" width="24" height="24" alt="Rectangle"> | creates a rectangle figure |
+| <img src="%ATTACHURLPATH%/RRECT1.gif" width="24" height="24" alt="Round Rectangle"> | creates a round rectangle figure |
+| <img src="%ATTACHURLPATH%/ELLIPSE1.gif" width="24" height="24" alt="Ellipse"> | creates an ellipse figure |
+| <img src="%ATTACHURLPATH%/LINE1.gif" width="24" height="24" alt="Line"> | creates a line figure |
+| <img src="%ATTACHURLPATH%/CONN1.gif" width="24" height="24" alt="Connection Line"> | creates or adjusts connections between figures. A connection is split into segments by dragging a point on the connection. To join two segments click the end point of a segment |
+| <img src="%ATTACHURLPATH%/OCONN1.gif" width="24" height="24" alt="Elbow Connection Line"> | creates an elbow connection and offers the same features as the ordinary connection tool |
+| <img src="%ATTACHURLPATH%/SCRIBBL1.gif" width="24" height="24" alt="Scribble"> | creates a scribble figure; dragging the mouse creates a smooth line while successive clicks yields a polyline figure. A two-button click terminates the figure. |
+| <img src="%ATTACHURLPATH%/POLYGON1.gif" width="24" height="24" alt="Polygon"> | creates a polygon figure; dragging the mouse creates a smooth border while successive clicks yields a polyline border. A two-button click or the ESCAPE key terminates the figure. |
+| <img src="%ATTACHURLPATH%/BORDDEC1.gif" width="24" height="24" alt="Border"> | decorates the clicked figure with a border |
+| <img src="%ATTACHURLPATH%/URL1.gif" width="24" height="24" alt="URL"> | adds a sensitive area to the figure that will redirect to a URL. If an image contains any sensitive areas it can only be selected for edit by clicking on the boundary or (if enabled) the attached Edit button. You can use wikiwords and web.topic wiki link expressions as well as full URLs. |
+
+---+++ Handles
+
+When selected, figures provide different handles to manipulate them.
+	* the white squares let you to manipulate the shape of a figure
+	* the green squares on connections let you to reconnect them with another figure.
+	* the yellow circles on polygon figures let you change the size and rotation of the figure
+	* yellow circles on rounded rectangles let you change the radius of the corners
+	* the yellow circles on connections let you manipulate the position of connection segments.
+
+---+++ Commands
+
+Commands are invoked from the button bar at the bottom or from the menu bar at the top.
+
+The standard commands that are provided include cut, copy, paste, duplicate, delete, group, ungroup, bring to front, and send to back.
+
+
+---+++ Attributes
+
+Attributes, such as fill color, text color or arrow tip, can be changed through the attributes menus.
+
+---++ <nop>%TOPIC% Settings
+
+	* Set SHORTDESCRIPTION = Java Applet based drawing editor
+Extra colors to be added to the menu of colors in the applet, as a comma-separated list with colors in HTML format (see TWiki.StandardColors)
+	* Set EXTRA_COLORS = Aquamarine=#70DB93,New Tan=#EBC79E,Sea Green=#238E68,Motorola Blue=#3ff
+Set to 1 if an "Edit" button is to be generated attached to the image. You will still be able to edit it by clicking on the boundary of the image.
+	* Set EDIT_BUTTON = 1
+Edit text defined here so you can change it for local languages. Text is shown when you hover over the image, and for the edit button. %<nop>F% will be replaced by the drawing name.
+	* Set EDIT_TEXT = Edit drawing '%F%' (requires a Java 1.1 enabled browser)
+
+---+++ Plugin Installation Instructions
+
+	* Download the ZIP file from the Plugin web (see below). Contents:
+	| *File:* | *Description:* |
+   | ==data/TWiki/TWikiDrawPlugin.txt== |  |
+   | ==lib/TWiki/Plugins/TWikiDrawPlugin.pm== |  |
+   | ==lib/TWiki/Plugins/TWikiDrawPlugin/source.zip== | Zip of java sources |
+   | ==pub/TWiki/TWikiDrawPlugin/ATEXT1.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/ATEXT2.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/ATEXT3.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/BORDDEC1.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/BORDDEC2.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/BORDDEC3.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/CONN1.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/CONN2.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/CONN3.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/DIAMOND2.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/DIAMOND3.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/ELLIPSE1.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/ELLIPSE2.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/ELLIPSE3.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/ERASER2.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/ERASER3.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/example.draw== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/example.map== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/example.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/LINE1.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/LINE2.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/LINE3.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/OCONN1.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/OCONN2.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/OCONN3.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/PERT2.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/PERT3.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/POLYGON1.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/POLYGON2.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/POLYGON3.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/RECT1.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/RECT2.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/RECT3.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/RRECT1.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/RRECT2.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/RRECT3.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/SCRIBBL1.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/SCRIBBL2.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/SCRIBBL3.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/SEL1.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/SEL2.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/SEL3.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/TEXT1.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/TEXT2.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/TEXT3.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/TOBACK2.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/TOBACK3.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/TOFRONT2.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/TOFRONT3.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/TRIANGLE2.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/TRIANGLE3.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/URL1.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/URL2.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/URL3.gif== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/screenshot.png== |  |
+   | ==pub/TWiki/TWikiDrawPlugin/twikidraw.jar== | JAR file for applet |
+   | ==templates/twikidraw.tmpl== | Template for drawing editor |
+   | ==templates/twikidraw.pattern.tmpl== | Template for drawing editor, pattern skin |
+
+	* Unzip ==%TOPIC%.zip== in your twiki installation directory.
+	* (Dakar) Visit =configure= in your TWiki installation, and enable the plugin in the {Plugins} section.
+	* To test if the plugin is correctly installed, view this topic in the installation and you should see a placeholder box below. Click on it.<br />
+	%DRAWING{empty}%
+	* Here's an example using an image map. Move the mouse over the image and watch the status bar.
+	%DRAWING{example}%
+
+---+++ Known Problems
+If you add a map to a drawing by setting a URL on any of the figures a map file is created. If you subsequently remove all the URLs from figures in the drawing the map still exists, but is now empty. There is no way to remove the map other than by manually moving the attachment.
+
+---+++ Plugin Info
+
+|  Plugin Author: | TWiki:Main/CrawfordCurrie http://www.c-dot.co.uk |
+|  Plugin Version: | 9800 |
+|  Change History: | |
+|  8570 | <a rel='nofollow' href='http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item1528'>Item1528</a>  Minor pattern skin template update for TWikiDrawPlugin |
+|  8569 | <a rel='nofollow' href='http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item1528'>Item1528</a>  Adding pattern skin template to TWikiDrawPlugin |
+|  7926 | <a rel='nofollow' href='http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item1206'>Item1206</a>  minor formatting fix |
+|  7907 | <a rel='nofollow' href='http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item1206'>Item1206</a>  merged minor documentation fixes that were causing confusion about latest version of the plugin. |
+|  7761 | <a rel='nofollow' href='http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item1124'>Item1124</a>  checked in jar file, even though it is built, because most people don't have ANT and it's a source of error for people using SVN checkouts. |
+|  6340 | <a rel='nofollow' href='http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item196'>Item196</a>  added screenshot to TWikiDrawPlugin |
+|  5245 | Added anchor support to wikilinks |
+|  5243 | Added support for web.topic wiki links, and remove url encoding, which was breaking |
+|  5223 | Documentation fixes, adding gifs. |
+|  5057 | Minor changes for prettification, and added ,v files |
+|  5053 | Validated XHTML |
+|  5051 | Updated template for Cairo |
+|  5049 | Updates for 2004 Cairo release |
+|  5048 | Cairo readiness |
+|  4878 | Various minor fixes, and added stand-alone (first) version |
+|  4788 | Added "overwrite" to installation copy |
+|  4781 | Moved topic to TWiki web, incorporated changes from Dev topic |
+|  4777 | Initial revision |
+|  11 Mar 2005 | Fixes for: text not sticking to boxes, blank lines in text, and lost text styles |
+|  22 Nov 2004 | Unicode fixes courtesy of Won-kyu Park |
+|  16 Aug 2004 | Map support finally released |
+|  17 Feb 2003 | Bug fixes; incoporated TWiki:Main/BertrandDelacretaz's fix for too many colours in GIF. He had problems when saving images from macosx / JDK 1.3.1 and modified the applet to reduce the number of colors before converting to GIF, if needed. Without this he would sometimes get the "too many colors for a GIF" error when saving drawings. |
+|  30 Sep 2002 | Add support for URLs, EXTRA_COLORS, fixed a number of outstanding bugs |
+|  20 Feb 2002 | Merged TWiki:Main/RobWalker's fixes for text attached to figures |
+|  01 Oct 2001 | Updated this text |
+|  23 Sep 2001 | Initial version |
+|  Dependencies: | Java 1.1 enabled browser<br />None |
+|  Plugin Home: | http://TWiki.org/cgi-bin/view/Plugins/%TOPIC% |
+|  Feedback: | http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev |
+|  Appraisal: | http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal |
+
+__Related Topics:__ %TWIKIWEB%.TWikiPreferences, %TWIKIWEB%.TWikiPlugins
+
+	* %TOPIC% is based on Erich Gamma's <nop>JHotDraw 5.1. (<nop>JHotDraw is copyright 1996, 1997 by <a href="http://www.ifa.ch/">IFA Informatik</a> and Erich Gamma, erich_gamma@acm.org . _It is hereby granted that this software can be used, copied, modified, and distributed without fee provided that this copyright notice appears in all copies._ )
+	* %TOPIC% uses <a href="http://www.acme.com/java/">ACME Labs</a>' <nop>GifEncoder to convert a drawing into a GIF file format. (<nop>GifEncoder is Copyright &copy;1996,1998 by Jef Poskanzer, jef@acme.com . All rights reserved. _<font size="-6"> THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. )</font>_
+	* %TOPIC% uses some ideas of <a href="http://www.eng.untech.com/serg/bin/KmWiki?Load=FrontPage">KmWiki</a> drawing applet.
+	* Copyright 2000 by Peter Thoeny, Peter@Thoeny.com. It is hereby granted that this software can be used, copied, modified, and distributed without fee provided that this copyright notice appears in all copies.
+	* Modifications Copyright &copy; 2001 Motorola. All Rights Reserved.
+	* Modifications &copy; 2003-2004 Copyright Crawford Currie http://www.c-dot.co.uk
+ 
+-- TWiki:Main/CrawfordCurrie - 23:02:51 12 April 2006
+

@@ -1,0 +1,79 @@
+%META:TOPICINFO{author="StephaneLenclud" date="1202953345" format="1.1" reprev="1.2" version="1.2"}%
+---+!! <nop>%TOPIC%
+
+<nop>AnyWikiDraw</nop> adds support for drawing directly into a Wiki page.
+
+The following file formats are supported:
+
+   * Scaleable Vector Graphics (.svg, .svgz). &#8211;
+     Use this file format, if you want to create an illustration, for example a street map. SVG retains the structure of a drawing, which allows to edit existing drawings efficiently. SVG drawings can be scaled and edited multiple times without loss of quality. Files with the extension .svgz are compressed versions of the .svg files.
+
+   * Portable Network Graphics (PNG). &#8211;
+     Use this file format, if you want to retouch a picture, for example, a photograph of your home. PNG does not retain the structure of a drawing. If you intend to add structured drawing elements to a photograph (like captions, or line drawings), consider pasting the PNG image into an SVG file, and adding these drawing elements using SVG. PNG images degrade in quality if they are scaled. PNG images can be edited multiple times without loss of quality. 
+
+   * Joint Photographics Expert Group (JPEG). &#8211;
+     This file format is often used to publish photographs, because it is able to compress them highly. If possible, convert the photograph into PNG for photo retouching, or paste it into an SVG image before adding structural drawing elements to it. JPEG images degrade in quality if they are scaled, or if they are edited multiple times. 
+
+This plugin is very similar in functionality to the TWiki:Plugins.TWikiDrawPlugin. 
+In a future version, it may be used as a replacement for the !TWikiDrawPlugin.
+
+<nop>AnyWikiDraw</nop> is available for other Wikis as well, currently <nop>TWiki</nop>, <nop>MediaWiki</nop> and <nop>PmWiki</nop> are supported.
+
+The main project site of !AnyWikiDraw is at Sourceforge.net: http://sourceforge.net/projects/anywikidraw/
+
+__Warning:__ This is an experimental plugin. Data loss may occur. Install it only on a Wiki system that does not contain critical data.
+
+
+
+%TOC%
+
+---++ Syntax Rules
+
+<verbatim>
+   %ANYWIKIDRAW{ "drawing.svg" width="240" height="320"}%
+   %AWDRAW{ "drawing.svg" width="240" height="320"}%
+</verbatim>
+
+   * The parameter =drawing.svg= specifies the name of the drawing file.
+   * The drawing file can have one of the following extensions .draw, .svg, .svgz, .png, .jpg.
+   * If you specify a drawing file that does not yet exist in your Wiki, the drawing is created  the first time you save a drawing.
+   * The parameter width specifies the width of the drawing.
+   * The parameter height specifies the height of the drawing.
+ 
+
+---++ Examples
+
+---++ Plugin Settings
+
+---++ Installation Instructions
+
+   * Download on of the archive and unpack into your TWiki installation directory.
+   * Fix your files access right.
+
+---++ Plugin Info
+
+|  Plugin Author: | TWiki:Main.WernerRandelshofer |
+|  Copyright: | &copy; 2007, TWiki:Main.WernerRandelshofer |
+|  License: | Client-side code: LGPL ([[http://www.gnu.org/licenses/lgpl.html][Lesser GNU General Public License]]) and/or CC-By 3.0 ([[http://creativecommons.org/licenses/by/3.0/][Creative Commons Attribution 3.0]]). Server-side code: GPL ([[http://www.gnu.org/copyleft/gpl.html][GNU General Public License]]).  |
+|  Plugin Version: | 30 Aug 2007 (V1.000) |
+|  Change History: | <!-- versions below in reverse order -->&nbsp; |
+|  14 Feb 2008: | Proper packaging and code cleaning by TWiki:Main.StephaneLenclud |
+|  30 Aug 2007: | Initial version |
+|  TWiki Dependency: | $TWiki::Plugins::VERSION 1.1 |
+|  CPAN Dependencies: | none |
+|  Other Dependencies: | none |
+|  Perl Version: | 5.005 |
+|  [[TWiki:Plugins/Benchmark][Benchmarks]]: | %TWIKIWEB%.GoodStyle nn%, %TWIKIWEB%.FormattedSearch nn%, %TOPIC% nn% |
+|  Plugin Home: | http://TWiki.org/cgi-bin/view/Plugins/%TOPIC% |
+|  Feedback: | http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev |
+|  Appraisal: | http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal |
+
+__Related Topics:__ %TWIKIWEB%.TWikiPlugins, %TWIKIWEB%.DeveloperDocumentationCategory, %TWIKIWEB%.AdminDocumentationCategory, %TWIKIWEB%.TWikiPreferences
+
+-- TWiki:Main.WernerRandelshofer - 30 Aug 2007
+
+
+
+%META:FILEATTACHMENT{name="example.draw" attachment="example.draw" attr="" comment="TWiki Draw draw file" date="1180861883" path="/~werni/twiki/pub/TWiki/AnyWikiDrawPlugin/example.draw" size="28830" stream="/~werni/twiki/pub/TWiki/AnyWikiDrawPlugin/example.draw" user="Main.WernerRandelshofer" version="1"}%
+%META:FILEATTACHMENT{name="example.map" attachment="example.map" attr="" comment="TWiki Draw map file" date="1180861884" path="/~werni/twiki/pub/TWiki/AnyWikiDrawPlugin/example.map" size="3724" stream="/~werni/twiki/pub/TWiki/AnyWikiDrawPlugin/example.map" user="Main.WernerRandelshofer" version="1"}%
+%META:FILEATTACHMENT{name="example.gif" attachment="example.gif" attr="" comment="TWiki Draw GIF file" date="1180861885" path="/~werni/twiki/pub/TWiki/AnyWikiDrawPlugin/example.gif" size="10175" stream="/~werni/twiki/pub/TWiki/AnyWikiDrawPlugin/example.gif" user="Main.WernerRandelshofer" version="1"}%
