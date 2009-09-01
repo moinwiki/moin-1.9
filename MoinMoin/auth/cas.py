@@ -71,17 +71,8 @@ class CASAuth(BaseAuth):
 
     def __init__(self, auth_server, login_path="/login", logout_path="/logout", validate_path="/validate"):
         BaseAuth.__init__(self)
-        self.auth_server = auth_server
-        self.login_path = login_path
-        self.logout_path = logout_path
-        self.validate_path = validate_path
-
-        paths = {
-            'login_path': self.login_path,
-            'logout_path': self.logout_path,
-            'validate_path': self.validate_path,
-        }
-        self.cas = PyCAS(self.auth_server, **paths)
+        self.cas = PyCAS(auth_server, login_path=login_path,
+                         validate_path=validate_path, logout_path=logout_path)
 
     def request(self, request, user_obj, **kw):
         ticket = request.args.get('ticket')
