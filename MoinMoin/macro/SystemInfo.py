@@ -127,7 +127,7 @@ class SystemInfo:
         row(_('Local extension parsers'),
             ', '.join(wikiutil.wikiPlugins('parser', self.macro.cfg)) or nonestr)
 
-        from MoinMoin.search import XapianSearch
+        from MoinMoin.search.Xapian.indexing import XapianIndex
         xapState = (_('Disabled'), _('Enabled'))
         idxState = (_('index available'), _('index unavailable'))
 
@@ -142,9 +142,9 @@ class SystemInfo:
         xapRow += ', %s' % xapVersion
 
         if xapian and xapian_enabled:
-            idx = XapianSearch._xapianIndex(request)
-            available = idx and idxState[0] or idxState[1]
-            mtime = _('last modified: %s') % (idx and
+            idx = XapianIndex(request)
+            available = idx.exists() and idxState[0] or idxState[1]
+            mtime = _('last modified: %s') % (idx.exists() and
                 request.user.getFormattedDateTime(idx.mtime()) or _('N/A'))
             xapRow += ', %s, %s' % (available, mtime)
 
