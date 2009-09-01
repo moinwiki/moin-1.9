@@ -127,7 +127,7 @@ class SystemInfo:
         row(_('Local extension parsers'),
             ', '.join(wikiutil.wikiPlugins('parser', self.macro.cfg)) or nonestr)
 
-        from MoinMoin.search.builtin import XapianSearch
+        from MoinMoin.search import XapianSearch
         xapState = (_('Disabled'), _('Enabled'))
         idxState = (_('index available'), _('index unavailable'))
 
