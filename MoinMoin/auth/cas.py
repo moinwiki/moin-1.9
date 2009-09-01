@@ -22,33 +22,31 @@ from MoinMoin import user, wikiutil
 class PyCAS(object):
     """A class for working with a CAS server."""
 
-    def __init__(self, url, renew=False, **kwords):
+    def __init__(self, url, renew=False, login_path='/login', logout_path='/logout',
+                 validate_path='/validate'):
         self.url = url
         self.renew = renew
-        self.paths = {
-            'login_path': '/login',
-            'logout_path': '/login',
-            'validate_path': '/validate',
-        }
-        self.paths.update(kwords)
+        self.login_path = login_path
+        self.logout_path = logout_path
+        self.validate_path = validate_path
 
     def login_url(self, service):
         """Return the login URL for the given service."""
-        base = self.url + self.paths['login_path'] + '?service=' + urllib.quote_plus(service)
+        base = self.url + self.login_path + '?service=' + urllib.quote_plus(service)
         if self.renew:
             base += "&renew=true"
         return base
 
     def logout_url(self, url=None):
         """Return the logout URL."""
-        base = self.url + self.paths['logout_path']
+        base = self.url + self.logout_path
         if url:
             base += '?url=' + urllib.quote_plus(url)
         return base
 
     def validate_url(self, service, ticket):
         """Return the validation URL for the given service. (For CAS 1.0)"""
-        base = self.url + self.paths['validate_path'] + '?service=' + urllib.quote_plus(service) + '&ticket=' + urllib.quote_plus(ticket)
+        base = self.url + self.validate_path + '?service=' + urllib.quote_plus(service) + '&ticket=' + urllib.quote_plus(ticket)
         if self.renew:
             base += "&renew=true"
         return base
