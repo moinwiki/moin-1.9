@@ -96,7 +96,7 @@ def attachment_drawing(self, url, text, **kw):
         if 'alt' not in kw:
             kw['alt'] = kw['title']
         kw['usemap'] = '#'+mapid
-        return map + self.image(**kw)
+        return self.url(1, drawing_url) + map + self.image(**kw) + self.url(0)
     else:
         if 'title' not in kw:
             kw['title'] = title
