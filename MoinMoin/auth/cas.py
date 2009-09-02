@@ -23,12 +23,13 @@ class PyCAS(object):
     """A class for working with a CAS server."""
 
     def __init__(self, server_url, renew=False, login_path='/login', logout_path='/logout',
-                 validate_path='/validate'):
+                 validate_path='/validate', coding='utf-8'):
         self.server_url = server_url
         self.renew = renew
         self.login_path = login_path
         self.logout_path = logout_path
         self.validate_path = validate_path
+        self.coding = coding
 
     def login_url(self, service):
         """Return the login URL for the given service."""
@@ -57,7 +58,7 @@ class PyCAS(object):
         valid = f.readline()
         valid = valid.strip() == 'yes'
         user = f.readline().strip()
-
+        user = user.decode(self.coding)
         return valid, user
 
 
