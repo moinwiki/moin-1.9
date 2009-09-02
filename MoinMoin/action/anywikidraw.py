@@ -195,7 +195,7 @@ class AnyWikiDraw(object):
            <param name="DrawingWidth" value="800"/>
            <param name="DrawingHeight" value="600"/>
            <param name="DrawingURL" value="%(target_url)s"/>
-           <param name="PageURL" value="%(url)s/%(pagename)s/">
+           <param name="PageURL" value="%(url)s/%(pagename)s">
            <param name="UploadURL" value="%(pagename)s?action=anywikidraw&do=save&target=%(target)s.svg"/>
 
            <!-- The following parameters are used to configure the drawing applet -->
