@@ -201,8 +201,19 @@ def macro_EmbedObject(macro, target=wikiutil.required_arg(unicode), pagename=Non
         if mt.minor == 'pdf':
             width = width or '100%'
             height = height or '800px'
-
-        embed_src = '''
+            embed_src = '''
+<object %(ob_data)s %(ob_type)s %(ob_width)s %(ob_height)s %(ob_align)s>
+<p>%(alt)s</p>
+</object>''' % {
+    "ob_data": _check_object_value("data", url),
+    "ob_width": _check_object_value("width", width),
+    "ob_height": _check_object_value("height", height),
+    "ob_type": _check_object_value("type", mime_type),
+    "ob_align": _check_object_value("align", align),
+    "alt": wikiutil.escape(alt),
+}
+        else:
+            embed_src = '''
 <object %(ob_data)s %(ob_type)s %(ob_width)s %(ob_height)s %(ob_align)s>
 %(movie)s%(quality)s%(wmode)s%(autostart)s%(play)s%(loop)s%(menu)s<p>%(alt)s</p>
 </object>''' % {
