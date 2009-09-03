@@ -43,7 +43,7 @@ def gedit_drawing(self, url, text, **kw):
     # we force the title here, needed later for html>wiki converter
     kw['title'] = "drawing:%s" % wikiutil.quoteWikinameURL(url)
     pagename, drawing = AttachFile.absoluteName(url, self.page.page_name)
-    containername = wikiutil.taintfilename(drawing) + ".tdraw"
+    containername = wikiutil.taintfilename(drawing) + ".adraw"
     drawing_url = AttachFile.getAttachUrl(pagename, containername, self.request, drawing=drawing, upload=True)
     ci = AttachFile.ContainerItem(self.request, pagename, containername)
     if not ci.exists():
@@ -59,7 +59,7 @@ def attachment_drawing(self, url, text, **kw):
     # XXX text arg is unused!
     _ = self.request.getText
     pagename, drawing = AttachFile.absoluteName(url, self.page.page_name)
-    containername = wikiutil.taintfilename(drawing) + ".tdraw"
+    containername = wikiutil.taintfilename(drawing) + ".adraw"
 
     drawing_url = AttachFile.getAttachUrl(pagename, containername, self.request, drawing=drawing, upload=True)
     ci = AttachFile.ContainerItem(self.request, pagename, containername)
@@ -136,11 +136,11 @@ class AnyWikiDraw(object):
         basename, ext = os.path.splitext(basename)
         basename = basename.replace('.svg', '')
 
-        ci = AttachFile.ContainerItem(request, pagename, basename + '.tdraw')
+        ci = AttachFile.ContainerItem(request, pagename, basename + '.adraw')
         filecontent = file_upload.stream
         content_length = None
         if ext == '.svg': # TWikiDraw POSTs this first
-            AttachFile._addLogEntry(request, 'ATTDRW', pagename, basename + '.tdraw')
+            AttachFile._addLogEntry(request, 'ATTDRW', pagename, basename + '.adraw')
             ci.truncate()
             filecontent = filecontent.read() # read file completely into memory
             filecontent = filecontent.replace("\r", "")
@@ -169,7 +169,7 @@ class AnyWikiDraw(object):
         drawing_name = ''
 
         htdocs = "%s%s" % (request.cfg.url_prefix_static, '/applets/anywikidraw')
-        ci = AttachFile.ContainerItem(request, pagename, target + '.tdraw')
+        ci = AttachFile.ContainerItem(request, pagename, target + '.adraw')
         if ci.exists():
             drawing_name = "%s.svg" % target
             target_url = ci.member_url(target + '.svg')
