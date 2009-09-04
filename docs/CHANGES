@@ -17,8 +17,27 @@ Known main issues:
     editor_default = 'text'  # internal default, just for completeness
 
 Version 1.8.current:
+  Bug fixes:
+    * PDF embedding: fix html, works better with PDF browser plugins now.
+    * Fix typo in rightsidebar CSS.
+    * Action revert: avoids reverting to a deleted current revision.
+    * Action diff: enable prev/next button only in the range of given revisions.
+    * fuid: keep same fake_mtime for intervals of max_staleness duration.
+    * Fixes a bug with empty list items in the GUI editor.
+    * Improve filesys.rename compatibility code (win32).
+    * Fix locking for CacheEntry.
+    * Xapian indexing: catch exception when a bad zip file is encountered.
+
+  New features:
+    * Added CAS authentication.
+
   Other changes:
-    * moin maint cleancache purges now also drafts
+    * HTTP auth: added debug logging.
+    * Minor LDAP auth improvements.
+    * Include only necessary browser autofilter options.
+    * moin maint cleancache purges now drafts, too.
+    * Add gopher and apt protocols to url_schemas.
+
 
 Version 1.8.4:
   Bug fixes:
