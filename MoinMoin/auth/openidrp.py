@@ -195,7 +195,7 @@ username and leave the password field blank.""")))
 
     def _handle_associate_continuation(self, request):
         if not 'openid.id' in request.session:
-            return CancelLogin()
+            return CancelLogin(None)
 
         _ = request.getText
         username = request.form.get('username', [''])[0]
@@ -221,7 +221,7 @@ username and leave the password field blank.""")))
             return self._handle_name_continuation(request)
         elif oidstage == '3':
             return self._handle_associate_continuation(request)
-        return CancelLogin()
+        return CancelLogin(None)
 
     def _openid_form(self, request, form, oidhtml):
         _ = request.getText
