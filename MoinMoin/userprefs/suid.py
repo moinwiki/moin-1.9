@@ -89,7 +89,7 @@ class Settings(UserPrefBase):
                                           'assume the identity of another user.')))
 
         ticket = wikiutil.createTicket(self.request)
-        self.make_row('Select User', [self._user_select()], valign="top")
+        self.make_row(_('Select User'), [self._user_select()], valign="top")
         form.append(html.INPUT(type="hidden", name="ticket", value="%s" % ticket))
         if not self._only:
             buttons = [html.INPUT(type="submit", name="select_user",
