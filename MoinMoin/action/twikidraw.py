@@ -20,6 +20,7 @@ logging = log.getLogger(__name__)
 from MoinMoin import wikiutil
 from MoinMoin.action import AttachFile, do_show
 from MoinMoin.Page import Page
+from MoinMoin.security.textcha import TextCha
 
 action_name = __name__.split('.')[-1]
 
@@ -121,6 +122,8 @@ class TwikiDraw(object):
         _ = self._
         pagename = self.pagename
         request = self.request
+        if not TextCha(request).check_answer_from_form():
+            return _('TextCha: Wrong answer! Go back and try again...')
         if not request.user.may.write(pagename):
             return _('You are not allowed to save a drawing on this page.')
 
@@ -172,7 +175,9 @@ class TwikiDraw(object):
         helplink = Page(request, "HelpOnActions/AttachFile").url(request)
         savelink = request.href(pagename, action=action_name, do='save', target=target)
         timestamp = '&amp;ts=%s' % now
-
+        question = ''
+        if TextCha(self.request).is_enabled():
+            question = TextCha(self.request).question
         html = '''<h2> %(editdrawing)s </h2>
 <p>
 <img src="%(pngpath)s%(timestamp)s">
@@ -184,6 +189,7 @@ class TwikiDraw(object):
 <param name="basename" value="%(basename)s">
 <param name="viewpath" value="%(url)s/%(pagename)s/">
 <param name="helppath" value="%(helplink)s">
+<param name="textchaquestion" value="%(textchaquestion)s">
 <strong>NOTE:</strong> You need a Java enabled browser to edit the drawing example.
 </applet>
 </p>''' % {
@@ -198,7 +204,8 @@ class TwikiDraw(object):
     'helplink': helplink,
     'savelink': savelink,
     'basename': wikiutil.escape(target, 1),
-    'editdrawing': _("Edit drawing")
+    'editdrawing': _("Edit drawing"),
+    'textchaquestion': question,
     }
 
         title = "%s:%s" % (pagename, target)
