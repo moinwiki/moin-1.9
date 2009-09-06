@@ -301,11 +301,17 @@ class MoinCookieSessionIDHandler(SessionIDHandler):
         SessionIDHandler.__init__(self)
         self.cookie_name = cookie_name
 
-    def _make_cookie(self, request, cookie_name, cookie_string, maxage, expires):
+    def _make_cookie(self, request, cookie_name, cookie_string, maxage, expires, http_only=False):
         """ create an appropriate cookie """
         cookie = Cookie.SimpleCookie()
         cfg = request.cfg
         cookie[cookie_name] = cookie_string
+        if http_only:
+            try:
+                # needs python 2.6 httponly Cookie support:
+                cookie[cookie_name]['httponly'] = True
+            except Cookie.CookieError:
+                pass
         cookie[cookie_name]['max-age'] = maxage
         if cfg.cookie_domain:
             cookie[cookie_name]['domain'] = cfg.cookie_domain
@@ -324,11 +330,11 @@ class MoinCookieSessionIDHandler(SessionIDHandler):
             cookie[cookie_name]['secure'] = True
         return cookie.output()
 
-    def _set_cookie(self, request, cookie_string, expires):
+    def _set_cookie(self, request, cookie_string, expires, http_only=False):
         """ Set cookie, raw helper. """
         lifetime = int(expires - time.time())
         cookie = self._make_cookie(request, self.cookie_name, cookie_string,
-                                   lifetime, expires)
+                                   lifetime, expires, http_only)
         # Set cookie
         request.setHttpHeader(cookie)
         # IMPORTANT: Prevent caching of current page and cookie
@@ -336,7 +342,7 @@ class MoinCookieSessionIDHandler(SessionIDHandler):
 
     def set(self, request, session_name, expires):
         """ Set moin_session cookie """
-        self._set_cookie(request, session_name, expires)
+        self._set_cookie(request, session_name, expires, http_only=True)
         logging.debug("setting cookie with session_name %r, expiry %r" % (session_name, expires))
 
     def get(self, request):
