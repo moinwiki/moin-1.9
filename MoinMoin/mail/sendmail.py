@@ -106,6 +106,8 @@ def sendmail(request, to, subject, text, mail_from=None):
     msg['Date'] = formatdate()
     msg['Message-ID'] = make_msgid()
     msg['Subject'] = Header(subject, charset)
+    # See RFC 3834 section 5:
+    msg['Auto-Submitted'] = 'auto-generated'
 
     if cfg.mail_sendmail:
         # Set the BCC.  This will be stripped later by sendmail.
