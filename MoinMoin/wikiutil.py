@@ -937,6 +937,8 @@ MIMETYPES_MORE = {
  '.conf': 'text/plain',
  '.irc': 'text/plain',
  '.md5': 'text/plain',
+ '.csv': 'text/csv',
+ '.flv': 'video/x-flv',
 }
 [mimetypes.add_type(mimetype, ext, True) for ext, mimetype in MIMETYPES_MORE.items()]
 
