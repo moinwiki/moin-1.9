@@ -31,7 +31,6 @@ msgid "Invalid username or password."
 msgstr "Ugyldig brukernavn eller passord."
 
 #, python-format
-#, python-format
 msgid ""
 "The remote wiki uses a different InterWiki name (%(remotename)s) internally "
 "than you specified (%(localname)s)."
@@ -361,7 +360,6 @@ msgid "Installation of '%(filename)s' failed."
 msgstr "Installasjonen av '%(filename)s' mislyktes."
 
 #, python-format
-#, python-format
 msgid "The file %s is not a MoinMoin package file."
 msgstr "Filen %s er ikke en MoinMoin pakkefil."
 
@@ -380,7 +378,6 @@ msgid "Unknown function %(func)s in line %(lineno)i."
 msgstr "Ukjent funksjon %(func)s på linje %(lineno)i."
 
 #, python-format
-#, python-format
 msgid "The file %s was not found in the package."
 msgstr "Filen %s ble ikke funnet i pakken."
 
@@ -388,46 +385,37 @@ msgid "Text mode"
 msgstr "Tekstmodus"
 
 #, python-format
-#, python-format
 msgid "Argument \"%s\" must be a boolean value, not \"%s\""
 msgstr "Argumentet \"%s\" må være en boolsk verdi, ikke \"%s\""
 
-#, python-format
 #, python-format
 msgid "Argument must be a boolean value, not \"%s\""
 msgstr "Argumentet må være en boolsk verdi, ikke \"%s\""
 
 #, python-format
-#, python-format
 msgid "Argument \"%s\" must be an integer value, not \"%s\""
 msgstr "Argumentet \"%s\" må være et heltall, ikke \"%s\""
 
-#, python-format
 #, python-format
 msgid "Argument must be an integer value, not \"%s\""
 msgstr "Argumentet må være et heltall, ikke \"%s\""
 
 #, python-format
-#, python-format
 msgid "Argument \"%s\" must be a floating point value, not \"%s\""
 msgstr "Argumentet \"%s\" må være et flyttall, ikke \"%s\""
 
-#, python-format
 #, python-format
 msgid "Argument must be a floating point value, not \"%s\""
 msgstr "Argumentet må være et flyttall, ikke \"%s\""
 
 #, python-format
-#, python-format
 msgid "Argument \"%s\" must be a complex value, not \"%s\""
 msgstr "Argumentet \"%s\" må være et komplekst tall, ikke \"%s\""
 
 #, python-format
-#, python-format
 msgid "Argument must be a complex value, not \"%s\""
 msgstr "Argumentet må være et komplekst tall, ikke \"%s\""
 
-#, python-format
 #, python-format
 msgid "Argument \"%s\" must be one of \"%s\", not \"%s\""
 msgstr "Argumentet \"%s\" må være et av \"%s\", ikke \"%s\""
@@ -458,7 +446,6 @@ msgstr "Forventet et \"=\" etter \"%(token)s\""
 msgid "Expected a value for key \"%(token)s\""
 msgstr "Forventet en verdi for variablen \"%(token)s\""
 
-#, python-format
 #, python-format
 msgid "Invalid highlighting regular expression \"%(regex)s\": %(error)s"
 msgstr "Ugyldig regulært utrykk for markering \"%(regex)s\": %(error)s"
@@ -623,7 +610,6 @@ msgid "Preferences"
 msgstr "Preferanser"
 
 #, python-format
-#, python-format
 msgid ""
 "Invalid user name {{{'%s'}}}.\n"
 "Name may contain any Unicode alpha numeric character, with optional one\n"
@@ -784,14 +770,12 @@ msgid "Missing password. Please enter user name and password."
 msgstr "Passordet mangler. Vær vennlig å oppgi brukernavn og passord."
 
 #, python-format
-#, python-format
 msgid "LDAP server %(server)s failed."
 msgstr "LDAP server %(server)s feilet."
 
 msgid "Failed to connect to database."
 msgstr "Mislyktes med databasetilkobling."
 
-#, python-format
 #, python-format
 msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
@@ -816,18 +800,17 @@ msgid ""
 "\n"
 "(!) For more help, see HelpOnEditing or HelpOnCreoleSyntax.\n"
 msgstr ""
-" Utheving:: <<Verbatim(//)>>''kursiv''<<Verbatim(//)>>; "
-"<<Verbatim(**)>>'''fet'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''fet "
-"kursiv'''''<<Verbatim(//**)>>; <<Verbatim(//)>>''blandet "
-"''<<Verbatim(**)>>'''''fet'''<<Verbatim(**)>> og kursiv''<<Verbatim(//)>>; "
-"<<Verbatim(----)>> vannrett strek.\n"
+" Utheving:: <<Verbatim(//)>>''kursiv''<<Verbatim(//)>>; <<Verbatim(**)"
+">>'''fet'''<<Verbatim(**)>>; <<Verbatim(**//)>>'''''fet kursiv'''''<<Verbatim"
+"(//**)>>; <<Verbatim(//)>>''blandet ''<<Verbatim(**)>>'''''fet'''<<Verbatim"
+"(**)>> og kursiv''<<Verbatim(//)>>; <<Verbatim(----)>> vannrett strek.\n"
 " Tvungen linjeskift:: <<Verbatim(\\\\)>>\n"
 " Overskrifter:: <<Verbatim(=)>> Tittel 1 <<Verbatim(=)>>; <<Verbatim(==)>> "
 "Tittel 2 <<Verbatim(==)>>; <<Verbatim(===)>> Tittel 3 <<Verbatim(===)>>;   "
 "<<Verbatim(====)>> Tittel 4 <<Verbatim(====)>>; <<Verbatim(=====)>> Tittel 5 "
 "<<Verbatim(=====)>>.\n"
-" Lister:: mellomrom og: * asterisk; 1., a., A., i., I. nummererte emner; "
-"1.#n begynn nummerering ved n; kun mellomrom gir innrykk.\n"
+" Lister:: mellomrom og: * asterisk; 1., a., A., i., I. nummererte emner; 1."
+"#n begynn nummerering ved n; kun mellomrom gir innrykk.\n"
 " Lenker:: <<Verbatim(SammenSatteOrd)>>; <<Verbatim([\"firkantparentes og "
 "sitattegn\"])>>; url; [url]; [url beskrivende navn].\n"
 " Tabeller:: || celletekst |||| celletekst over to kolonner ||;    "
@@ -928,11 +911,9 @@ msgid "**Maximum number of allowed includes exceeded**"
 msgstr "**Maksimalt antall includes er oversteget**"
 
 #, python-format
-#, python-format
 msgid "**You are not allowed to read the page: %s**"
 msgstr "**Du har ikke tillatelse til å lese denne siden: %s**"
 
-#, python-format
 #, python-format
 msgid "**Could not find the referenced page: %s**"
 msgstr "**Fant ikke den refererte siden: %s**"
@@ -1091,11 +1072,9 @@ msgid "Create new drawing \"%(filename)s (opens in new window)\""
 msgstr "Opprett ny tegning \"%(filename)s (åpnes i nytt vindu)\""
 
 #, python-format
-#, python-format
 msgid "Edit drawing %(filename)s (opens in new window)"
 msgstr "Endre tegningen %(filename)s (åpnes i nytt vindu)"
 
-#, python-format
 #, python-format
 msgid "Clickable drawing: %(filename)s"
 msgstr "Endre tegningen \"%(filename)s\""
@@ -1112,11 +1091,9 @@ msgid "Renamed from '%(oldpagename)s'."
 msgstr "Vedlegg for \"%(oldpagename)s\""
 
 #, python-format
-#, python-format
 msgid "Unknown action %(action_name)s."
 msgstr "Ukjent hanling %(action_name)s."
 
-#, python-format
 #, python-format
 msgid "You are not allowed to do %(action_name)s on this page."
 msgstr "Du har ikke tillatelse til å utføre %(action_name)s på denne siden!"
@@ -1140,7 +1117,6 @@ msgid "Output file already exists! Cowardly refusing to continue!"
 msgstr "Valgt fil eksisterer allerede! Nekter å fortsette!"
 
 #, python-format
-#, python-format
 msgid ""
 "Dear Wiki user,\n"
 "\n"
@@ -1151,7 +1127,8 @@ msgid ""
 msgstr ""
 "Kjære, wiki-bruker.\n"
 "\n"
-"Du har abonnert på endringer av wiki-siden eller kategorien \"%(sitename)s\".\n"
+"Du har abonnert på endringer av wiki-siden eller kategorien \"%(sitename)s"
+"\".\n"
 "\n"
 "Siden \"%(pagename)s\" har blitt endret av %(editor)s:\n"
 "\n"
@@ -1162,7 +1139,6 @@ msgstr "Ny side:\n"
 msgid "No differences found!\n"
 msgstr "Fant ingen endringer!\n"
 
-#, python-format
 #, python-format
 msgid ""
 "Dear wiki user,\n"
@@ -1181,7 +1157,6 @@ msgstr ""
 "\n"
 
 #, python-format
-#, python-format
 msgid ""
 "Dear wiki user,\n"
 "\n"
@@ -1199,11 +1174,9 @@ msgstr ""
 "\n"
 
 #, python-format
-#, python-format
 msgid "New user account created on %(sitename)s"
 msgstr "Ny brukerkonto opprettet på  %(sitename)s"
 
-#, python-format
 #, python-format
 msgid ""
 "Dear Superuser, a new user has just been created on %(sitename)s\". Details "
@@ -1212,18 +1185,16 @@ msgid ""
 "    User name: %(username)s\n"
 "    Email address: %(useremail)s"
 msgstr ""
-"Dear Superbruker, en ny bruker har akkurat blitt opprettet på %(sitename)s\". "
-"Detaljer følger:\n"
+"Dear Superbruker, en ny bruker har akkurat blitt opprettet på %(sitename)s"
+"\". Detaljer følger:\n"
 "\n"
 "    Brukernavn: %(username)s\n"
 "    Epostadresse: %(useremail)s"
 
 #, python-format
-#, python-format
 msgid "New attachment added to page %(pagename)s on %(sitename)s"
 msgstr "Nytt vedlegg lagt til side: %(pagename)s på %(sitename)s"
 
-#, python-format
 #, python-format
 msgid ""
 "Dear Wiki user,\n"
@@ -1246,14 +1217,13 @@ msgstr ""
 "Vedleggets størrelse: %(attach_size)s\n"
 
 #, python-format
-#, python-format
 msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
-msgstr "[%(sitename)s] %(trivial)sOppdatering av \"%(pagename)s\" av %(username)s"
+msgstr ""
+"[%(sitename)s] %(trivial)sOppdatering av \"%(pagename)s\" av %(username)s"
 
 msgid "Trivial "
 msgstr "Mindre "
 
-#, python-format
 #, python-format
 msgid ""
 "Attachment link: %(attach)s\n"
@@ -1476,7 +1446,6 @@ msgid "DeleteCache"
 msgstr "SlettCache"
 
 #, python-format
-#, python-format
 msgid "(cached %s)"
 msgstr "(cached %s)"
 
@@ -1692,11 +1661,9 @@ msgid "Accumulated page sizes"
 msgstr "Sammenlagt sidestørrelse"
 
 #, python-format
-#, python-format
 msgid "Disk usage of %(data_dir)s/pages/"
 msgstr "Diskplass brukt av %(data_dir)s/sider/"
 
-#, python-format
 #, python-format
 msgid "Disk usage of %(data_dir)s/"
 msgstr "Diskplass brukt av %(data_dir)s/"
@@ -1768,7 +1735,6 @@ msgid "edit"
 msgstr "Rediger"
 
 #, python-format
-#, python-format
 msgid ""
 "%(extension_name)s %(extension_type)s: Required argument %(argument_name)s "
 "missing."
@@ -1784,7 +1750,6 @@ msgstr ""
 "%(extension_name)s %(extension_type)s: Ugyldig %(argument_name)s=%"
 "(argument_value)s!"
 
-#, python-format
 #, python-format
 msgid ""
 "Current configuration does not allow embedding of the file %(file)s because "
@@ -1860,7 +1825,6 @@ msgid "Description"
 msgstr "Beskrivelse"
 
 #, python-format
-#, python-format
 msgid ""
 "Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
 "for more information."
@@ -1932,7 +1896,6 @@ msgid ""
 msgstr "Kan ikke opprette en ny side uten navn. Oppgi navn på siden."
 
 #, python-format
-#, python-format
 msgid "You must login to use this action: %(action)s."
 msgstr "Du må logge inn for å utføre denne operasjonen: %(action)s."
 
@@ -1967,7 +1930,6 @@ msgstr ""
 msgid "OpenID Trust verification"
 msgstr "OpenID trust verifikasjon"
 
-#, python-format
 #, python-format
 msgid "The site %s has asked for your identity."
 msgstr "Siden %s har spurt om din identitet."
@@ -2442,11 +2404,10 @@ msgid "You could not get subscribed to this page."
 msgstr "Du kan ikke abonnerer på denne siden."
 
 #, python-format
-#, python-format
 msgid "Please use the interactive user interface to use action %(actionname)s!"
 msgstr ""
-"Vennligst bruk det interaktive brukergrensesnittet for aksjonen %"
-"(actionname)s!"
+"Vennligst bruk det interaktive brukergrensesnittet for aksjonen %(actionname)"
+"s!"
 
 msgid "You are now logged out."
 msgstr "Du er nå logget ut."
@@ -2497,7 +2458,6 @@ msgid "Synchronisation started -"
 msgstr "Synkronisering startet -"
 
 #, python-format
-#, python-format
 msgid ""
 "Got a list of %s local and %s remote pages. This results in %s pages to "
 "process."
@@ -2506,11 +2466,9 @@ msgstr ""
 "sider som skal prosesseres."
 
 #, python-format
-#, python-format
 msgid "After filtering: %s pages"
 msgstr "Etter filtrering: %s sider"
 
-#, python-format
 #, python-format
 msgid "Skipped page %s because of no write access to local page."
 msgstr "Hoppet over side %s grunnet manglende skrivetilgang til lokal side."
@@ -2520,16 +2478,13 @@ msgid "Deleted page %s locally."
 msgstr "Slettet side %s lokalt."
 
 #, python-format
-#, python-format
 msgid "Error while deleting page %s locally:"
 msgstr "Feil under sletting av side %s lokalt:"
 
 #, python-format
-#, python-format
 msgid "Deleted page %s remotely."
 msgstr "Slettet side %s eksternt."
 
-#, python-format
 #, python-format
 msgid "Error while deleting page %s remotely:"
 msgstr "Feil under sletting av side %s eksternt:"
@@ -2551,7 +2506,6 @@ msgstr ""
 "Vennligst slett i en av wiki-ene eller bruk samme mime type og prøv igjen."
 
 #, python-format
-#, python-format
 msgid ""
 "The item %s was renamed locally. This is not implemented yet. Therefore the "
 "full synchronisation history is lost for this page."
@@ -2560,16 +2514,13 @@ msgstr ""
 "erden komplette synkroniseringshistorien tapt for denne siden."
 
 #, python-format
-#, python-format
 msgid "Synchronising page %s with remote page %s ..."
 msgstr "Synkroniserer side %s med ekstern side %s ..."
 
 #, python-format
-#, python-format
 msgid "The page %s was deleted remotely but changed locally."
 msgstr "Siden %s ble slettet eksternt men endret lokalt."
 
-#, python-format
 #, python-format
 msgid ""
 "The page %s could not be synced. The remote page was renamed. This is not "
@@ -2580,11 +2531,10 @@ msgstr ""
 "synkronisert."
 
 #, python-format
-#, python-format
 msgid "Skipped page %s because of a locally or remotely unresolved conflict."
-msgstr "Hoppet over siden %s på grunn av en lokal eller ekstern uløst konflikt."
+msgstr ""
+"Hoppet over siden %s på grunn av en lokal eller ekstern uløst konflikt."
 
-#, python-format
 #, python-format
 msgid ""
 "This is the first synchronisation between the local and the remote wiki for "
@@ -2593,7 +2543,6 @@ msgstr ""
 "Dette er den første synkroniseringen mellom den lokale og den eksterne siden "
 "for siden %s."
 
-#, python-format
 #, python-format
 msgid ""
 "The page %s could not be merged because you are not allowed to modify the "
@@ -2606,7 +2555,6 @@ msgstr ""
 msgid "Page %s successfully merged."
 msgstr "Siden %s sammenført med suksess."
 
-#, python-format
 #, python-format
 msgid "Page %s contains conflicts that were introduced on the remote side."
 msgstr "Siden %s inneholder konflikter fra den eksterne siden."
@@ -2797,7 +2745,6 @@ msgid "Ignore changes in the amount of whitespace"
 msgstr "Ignorer endringer i antall mellomrom"
 
 #, python-format
-#, python-format
 msgid "Invalid filename \"%s\"!"
 msgstr "Ugyldig filnavn \"%s\"!"
 
@@ -2908,7 +2855,6 @@ msgid "You need to be subscribed to unsubscribe."
 msgstr "Du må ha abonnert for å kunne avbestille."
 
 #, python-format
-#, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
 msgstr "(!) Kun sider endret siden '''%s''' vises!"
 
@@ -2928,11 +2874,9 @@ msgid "Advanced Search: \"%s\""
 msgstr "Avansert søk: \"%s\""
 
 #, python-format
-#, python-format
 msgid "Full Text Search: \"%s\""
 msgstr "Fritekst-søk etter \"%s\""
 
-#, python-format
 #, python-format
 msgid ""
 "Your search query {{{\"%s\"}}} didn't return any results. Please change some "
@@ -2980,7 +2924,6 @@ msgid "Page Name"
 msgstr "Pakkenavn"
 
 #, python-format
-#, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Lokal sidekart for \"%s\""
 
@@ -2991,16 +2934,13 @@ msgid "Do it."
 msgstr "Gjør det."
 
 #, python-format
-#, python-format
 msgid "Execute action %(actionname)s?"
 msgstr "Utfør operasjon %(actionname)s?"
 
 #, python-format
-#, python-format
 msgid "Action %(actionname)s is excluded in this wiki!"
 msgstr "Handling %(actionname)s er eksludert fra denne wikien!"
 
-#, python-format
 #, python-format
 msgid "You are not allowed to use action %(actionname)s on this page!"
 msgstr ""

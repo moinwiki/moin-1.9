@@ -787,7 +787,7 @@ msgid ""
 "If you do not have an account, <a href=\"%(userprefslink)s\">you can create "
 "one now</a>. <a href=\"%(sendmypasswordlink)s\">Forgot your password?</a>"
 msgstr ""
-"Jeśli nie masz jeszcze hasła, <a href=\"%(userprefslink)s\">możesz je "
+"Jeśli nie masz jeszcze konta, <a href=\"%(userprefslink)s\">możesz je "
 "założyć teraz</a>. <a href=\"%(sendmypasswordlink)s\">Zapomniane hasło?</a>"
 
 msgid ""

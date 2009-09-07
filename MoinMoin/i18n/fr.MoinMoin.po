@@ -629,7 +629,7 @@ msgid ""
 "general preferences."
 msgstr ""
 "Avant de pouvoir être averti, vous devez donner un moyen de vous "
-"contacterdans les préférences générales"
+"contacter dans les préférences générales"
 
 msgid "Subscribed events"
 msgstr "Évènements auxquels vous êtes abonnés"
@@ -1073,7 +1073,7 @@ msgid "Email"
 msgstr "Adresse électronique"
 
 msgid "Jabber ID"
-msgstr "Indentifiant Jabber"
+msgstr "Identifiant Jabber"
 
 msgid "User CSS URL"
 msgstr "URL du style CSS personnel"
