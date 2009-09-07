@@ -16,7 +16,7 @@ Known main issues:
     editor_force = True
     editor_default = 'text'  # internal default, just for completeness
 
-Version 1.8.current:
+Version 1.8.5:
   Bug fixes:
     * Attachment links: fix processing of attributes (e.g. 'target', 'title')
     * Upgrade FCKeditor from 2.6.4 to 2.6.4.1.
