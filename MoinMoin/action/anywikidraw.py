@@ -51,7 +51,7 @@ def gedit_drawing(self, url, text, **kw):
         img = self.icon('attachimg')  # TODO: we need a new "drawimg" in similar grey style and size
         css = 'nonexistent'
         return self.url(1, drawing_url, css=css, title=title) + img + self.url(0)
-    kw['src'] = ci.member_url(drawing + u'.png')
+    kw['src'] = ci.member_url('drawing.png')
     return self.image(**kw)
 
 def attachment_drawing(self, url, text, **kw):
@@ -70,11 +70,11 @@ def attachment_drawing(self, url, text, **kw):
         return self.url(1, drawing_url, css=css, title=title) + img + self.url(0)
 
     title = _('Edit drawing %(filename)s (opens in new window)') % {'filename': self.text(drawing)}
-    kw['src'] = src = ci.member_url(drawing + u'.png')
+    kw['src'] = src = ci.member_url('drawing.png')
     kw['css'] = 'drawing'
 
     try:
-        mapfile = ci.get(drawing + u'.map')
+        mapfile = ci.get('drawing.map')
         map = mapfile.read()
         mapfile.close()
     except (KeyError, IOError, OSError):
@@ -125,7 +125,6 @@ class AnyWikiDraw(object):
         if not request.user.may.write(pagename):
             return _('You are not allowed to save a drawing on this page.')
         file_upload = request.files.get('filepath')
-        print "file_upload: %s" % file_upload
         if not file_upload:
             # This might happen when trying to upload file names
             # with non-ascii characters on Safari.
@@ -134,13 +133,12 @@ class AnyWikiDraw(object):
         filename = request.form['filename']
         basepath, basename = os.path.split(filename)
         basename, ext = os.path.splitext(basename)
-        basename = basename.replace('.svg', '')
 
-        ci = AttachFile.ContainerItem(request, pagename, basename + '.adraw')
+        ci = AttachFile.ContainerItem(request, pagename, target + '.adraw')
         filecontent = file_upload.stream
         content_length = None
         if ext == '.svg': # TWikiDraw POSTs this first
-            AttachFile._addLogEntry(request, 'ATTDRW', pagename, basename + '.adraw')
+            AttachFile._addLogEntry(request, 'ATTDRW', pagename, target + '.adraw')
             ci.truncate()
             filecontent = filecontent.read() # read file completely into memory
             filecontent = filecontent.replace("\r", "")
@@ -157,7 +155,7 @@ class AnyWikiDraw(object):
             filecontent = filecontent.read()
 
         if filecontent:
-            ci.put(basename + ext, filecontent, content_length)
+            ci.put('drawing' + ext, filecontent, content_length)
 
     def render(self):
         _ = self._
@@ -172,7 +170,7 @@ class AnyWikiDraw(object):
         ci = AttachFile.ContainerItem(request, pagename, target + '.adraw')
         if ci.exists():
             drawing_name = "%s.svg" % target
-            target_url = ci.member_url(target + '.svg')
+            target_url = ci.member_url('drawing.svg')
 
         html = """
     <h2> %(editdrawing)s </h2>
@@ -196,7 +194,7 @@ class AnyWikiDraw(object):
            <param name="DrawingHeight" value="600"/>
            <param name="DrawingURL" value="%(target_url)s"/>
            <param name="PageURL" value="%(url)s/%(pagename)s">
-           <param name="UploadURL" value="%(pagename)s?action=anywikidraw&do=save&target=%(target)s.svg"/>
+           <param name="UploadURL" value="%(pagename)s?action=anywikidraw&do=save&target=%(target)s"/>
 
            <!-- The following parameters are used to configure the drawing applet -->
            <param name="Locale" value="en"/>
