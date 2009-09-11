@@ -35,9 +35,10 @@ Version 1.9.0current:
     * Minimum Xapian requirement is 1.0.6 now.
     * Outdated and unmaintained xapwrap lib was removed.
   * raw action mimetype support: ...?action=raw&mimetype=text/css
-  * new config variable drawing_action for selecting a action for drawings
-  * the drawing applet of TWikiDraw refactored to an action.
-  * AnyWikiDraw applet and source added and a new drawing action anywikidraw
+  * new config variable drawing_action for selecting the drawing action
+  * the AttachFile TWikiDraw code refactored to an action.
+  * TextCha feature added to TWikiDraw
+  * AnyWikiDraw applet and source also added a new drawing action anywikidraw
 
   Bug fixes:
   * Bug with "language:en" was fixed for the Moin search. Now language:
