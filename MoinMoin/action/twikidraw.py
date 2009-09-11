@@ -53,7 +53,7 @@ def gedit_drawing(self, url, text, **kw):
         img = self.icon('attachimg')  # TODO: we need a new "drawimg" in similar grey style and size
         css = 'nonexistent'
         return self.url(1, drawing_url, css=css, title=title) + img + self.url(0)
-    kw['src'] = ci.member_url(drawing + u'.png')
+    kw['src'] = ci.member_url('drawing.png')
     return self.image(**kw)
 
 def attachment_drawing(self, url, text, **kw):
@@ -72,11 +72,11 @@ def attachment_drawing(self, url, text, **kw):
         return self.url(1, drawing_url, css=css, title=title) + img + self.url(0)
 
     title = _('Edit drawing %(filename)s (opens in new window)') % {'filename': self.text(drawing)}
-    kw['src'] = src = ci.member_url(drawing + u'.png')
+    kw['src'] = src = ci.member_url('drawing.png')
     kw['css'] = 'drawing'
 
     try:
-        mapfile = ci.get(drawing + u'.map')
+        mapfile = ci.get('drawing.map')
         map = mapfile.read()
         mapfile.close()
     except (KeyError, IOError, OSError):
@@ -122,6 +122,7 @@ class TwikiDraw(object):
         _ = self._
         pagename = self.pagename
         request = self.request
+        target = self.target
         if not TextCha(request).check_answer_from_form():
             return _('TextCha: Wrong answer! Go back and try again...')
         if not request.user.may.write(pagename):
@@ -136,11 +137,11 @@ class TwikiDraw(object):
         filename = request.form['filename']
         basepath, basename = os.path.split(filename)
         basename, ext = os.path.splitext(basename)
-        ci = AttachFile.ContainerItem(request, pagename, basename + '.tdraw')
+        ci = AttachFile.ContainerItem(request, pagename, target + '.tdraw')
         filecontent = file_upload.stream
         content_length = None
         if ext == '.draw': # TWikiDraw POSTs this first
-            AttachFile._addLogEntry(request, 'ATTDRW', pagename, basename + '.tdraw')
+            AttachFile._addLogEntry(request, 'ATTDRW', pagename, target + '.tdraw')
             ci.truncate()
             filecontent = filecontent.read() # read file completely into memory
             filecontent = filecontent.replace("\r", "")
@@ -156,7 +157,7 @@ class TwikiDraw(object):
             # without reading it into memory completely:
             filecontent = filecontent.read()
 
-        ci.put(basename + ext, filecontent, content_length)
+        ci.put('drawing' + ext, filecontent, content_length)
         #return _("Thank you for your changes. Your attention to detail is appreciated.")
 
 
@@ -169,8 +170,8 @@ class TwikiDraw(object):
         now = time.time()
         htdocs = "%s%s" % (request.cfg.url_prefix_static, "/applets/TWikiDrawPlugin")
         ci = AttachFile.ContainerItem(request, pagename, target + '.tdraw')
-        drawpath = ci.member_url(target + '.draw')
-        pngpath = ci.member_url(target + '.png')
+        drawpath = ci.member_url('drawing.draw')
+        pngpath = ci.member_url('drawing.png')
         pagelink = request.href(pagename, action=action_name, ts=now)
         helplink = Page(request, "HelpOnActions/AttachFile").url(request)
         savelink = request.href(pagename, action=action_name, do='save', target=target)
