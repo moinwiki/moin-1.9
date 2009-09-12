@@ -1,0 +1,181 @@
+/*
+ * Single page slide show styles
+ *
+ * Copy SlideShow.css to your theme's css/ directory.
+ *
+ * copyright: 2008 Thomas Waldmann
+ * license: GNU GPL, see COPYING for details
+ */
+
+li p {margin: 0;} /* Workaround for moin's bad list html */
+
+html {
+    background-color: white;
+    color: black;
+    font-family: Arial, Lucida Grande, sans-serif;
+    font-size: 20pt;
+}
+
+body {
+    margin: 1em;
+    padding: 20px;
+}
+
+/* Slide heading */
+h1 {font-size: 32pt; color: #33F;}
+h1:before {content:url(../../common/moinmoin.png); padding-right:10px; display: inline-block; vertical-align: middle;}
+
+/* Slide content */
+
+#content {margin-left: 20pt; margin-right: 0;}
+#content[dir="rtl"] {margin-left: 0; margin-right: 20pt;}
+
+h2 { font-size: 28pt; color: #000;}
+h3 { font-size: 24pt; color: #000;}
+h4 { font-size: 18pt; color: #000;}
+h5 { font-size: 16pt; color: #000;}
+h6 { font-size: 14pt; color: #000;}
+
+li { margin: 12pt; }
+
+a { color: #69F; }
+a:visited { color: #69F; }
+a.nonexistent, a.badinterwiki { color: #666; }
+
+tt { font-size: 18pt; }
+pre { font-size: 14pt; }
+sup, sub { font-size: 14pt; }
+
+pre {
+    border: 1pt dashed #222;
+    padding: 5pt;
+    white-space: pre;
+    background-color: #DDF;
+    color: #444;
+}
+
+
+/* Navigation */
+
+#navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    color: #EEE;
+    font-size: 14pt;
+}
+
+#navigation ul {
+    margin: 0;
+    padding: 6pt;
+    text-align: center;
+}
+
+#navigation li {
+    display: inline;
+    margin: 0 2pt;
+    padding: 0;
+}
+
+#navigation a {
+    text-decoration: none;
+    color: #ddd;
+}
+
+#navigation a:hover {
+    color: #bbb;
+}
+
+#navigation .current {
+    color: #888;
+}
+
+
+#date {
+    position: fixed;
+    bottom: 0.5em;
+    left: 2em;
+    right: 0;
+    font-size: 12pt;
+    clear: both;
+    display: inline;
+    margin: 0;
+    padding: 0;
+    color: #6C7680;
+}
+
+#author {
+    position: fixed;
+    bottom: 0.5em;
+    left: 2em;
+    right: 0;
+    text-align: center;
+    font-size: 12pt;
+    clear: both;
+    display: inline;
+    margin: 0;
+    padding: 0;
+    color: #6C7680;
+}
+
+#counter {
+    position: fixed;
+    bottom: 0.5em;
+    left: 2em;
+    right: 0;
+    text-align: right;
+    font-size: 12pt;
+    clear: both;
+    display: inline;
+    margin: 0;
+    padding: 0;
+    color: #6C7680;
+}
+
+/* CSS for ParserBase */
+
+div.codearea { /* the div makes the border */
+	margin: 0.5em 0;
+	padding: 0;
+	border: 1pt dashed #222;
+	background-color: #EEF;
+	color: #444;
+}
+
+div.codearea pre { /* the pre has no border and is inside the div */
+	margin: 0;
+	padding: 10pt;
+	border: none;
+}
+
+a.codenumbers { /* format of the line numbering link */
+	margin: 0pt;
+	font-size: 10pt;
+	color: #888;
+        display: none; /* rather annoying to see the link */
+}
+
+/* format of certain syntax spans */
+div.codearea pre span.LineNumber {color: #444;}
+div.codearea pre span.ID         {color: #000;}
+div.codearea pre span.Operator   {color: #000;}
+div.codearea pre span.Char       {color: #048;}
+div.codearea pre span.Comment    {color: green;}
+div.codearea pre span.Number     {color: red;}
+div.codearea pre span.String     {color: magenta;}
+div.codearea pre span.SPChar     {color: #00C;}
+div.codearea pre span.ResWord    {color: #39F;}
+div.codearea pre span.ConsWord   {color: #088; font-weight: bold;}
+div.codearea pre span.Error      {color: #F88; border: solid 1.5pt #FF0000;}
+div.codearea pre span.ResWord2   {color: #69F; font-weight: bold;}
+div.codearea pre span.Special    {color: #00F;}
+div.codearea pre span.Preprc     {color: #839;}
+
+@media print {
+    #navigation {
+        display: none;
+    }
+}
