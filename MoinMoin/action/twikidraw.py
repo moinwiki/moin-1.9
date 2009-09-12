@@ -17,7 +17,7 @@ import os, re
 from MoinMoin import log
 logging = log.getLogger(__name__)
 
-from MoinMoin import wikiutil
+from MoinMoin import wikiutil, config
 from MoinMoin.action import AttachFile, do_show
 from MoinMoin.Page import Page
 from MoinMoin.security.textcha import TextCha
@@ -79,17 +79,18 @@ def attachment_drawing(self, url, text, **kw):
         mapfile = ci.get('drawing.map')
         map = mapfile.read()
         mapfile.close()
+        map = map.decode(config.charset)
     except (KeyError, IOError, OSError):
-        map = ''
+        map = u''
     if map:
         # we have a image map. inline it and add a map ref to the img tag
-        mapid = 'ImageMapOf' + drawing
-        map = map.replace('%MAPNAME%', mapid)
+        mapid = u'ImageMapOf' + drawing
+        map = map.replace(u'%MAPNAME%', mapid)
         # add alt and title tags to areas
-        map = re.sub(r'href\s*=\s*"((?!%TWIKIDRAW%).+?)"', r'href="\1" alt="\1" title="\1"', map)
-        map = map.replace('%TWIKIDRAW%"', '%s" alt="%s" title="%s"' % (drawing_url, title, title))
+        map = re.sub(ur'href\s*=\s*"((?!%TWIKIDRAW%).+?)"', ur'href="\1" alt="\1" title="\1"', map)
+        map = map.replace(u'%TWIKIDRAW%"', u'%s" alt="%s" title="%s"' % (drawing_url, title, title))
         # unxml, because 4.01 concrete will not validate />
-        map = map.replace('/>', '>')
+        map = map.replace(u'/>', u'>')
         title = _('Clickable drawing: %(filename)s') % {'filename': self.text(drawing)}
         if 'title' not in kw:
             kw['title'] = title

@@ -77,16 +77,17 @@ def attachment_drawing(self, url, text, **kw):
         mapfile = ci.get('drawing.map')
         map = mapfile.read()
         mapfile.close()
+        map = map.decode(config.charset)
     except (KeyError, IOError, OSError):
-        map = ''
+        map = u''
     if map:
         # ToDo mapid must become uniq
         # we have a image map. inline it and add a map ref to the img tag
-        mapid = 'ImageMapOf' + drawing
-        map = map.replace('id="%s.svg"' % drawing, '')
-        map = map.replace('name="%s.svg"' % drawing, 'name="%s"' % mapid)
+        mapid = u'ImageMapOf' + drawing
+        map = map.replace(u'id="%s.svg"' % drawing, '')
+        map = map.replace(u'name="%s.svg"' % drawing, u'name="%s"' % mapid)
         # unxml, because 4.01 concrete will not validate />
-        map = map.replace('/>', '>')
+        map = map.replace(u'/>', u'>')
         title = _('Clickable drawing: %(filename)s') % {'filename': self.text(drawing)}
         if 'title' not in kw:
             kw['title'] = title
