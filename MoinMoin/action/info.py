@@ -143,7 +143,13 @@ def execute(pagename, request):
                     if line.action == 'ATTNEW':
                         actions.append(render_action(_('view'), {'action': 'AttachFile', 'do': 'view', 'target': '%s' % filename}))
                     elif line.action == 'ATTDRW':
-                        actions.append(render_action(_('edit'), {'action': 'AttachFile', 'drawing': '%s' % filename.replace(".tdraw", "")}))
+                        if filename.endswith('.tdraw'):
+                            action = 'twikidraw'
+                            target = filename[:-6]
+                        elif filename.endswith('.adraw'):
+                            action = 'anywikidraw'
+                            target = filename[:-6]
+                        actions.append(render_action(_('edit'), dict(action=action, target=target)))
 
                     actions.append(render_action(_('get'), {'action': 'AttachFile', 'do': 'get', 'target': '%s' % filename}))
                     if request.user.may.delete(pagename):
