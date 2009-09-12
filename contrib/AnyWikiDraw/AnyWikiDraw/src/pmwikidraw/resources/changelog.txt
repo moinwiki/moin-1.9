@@ -1,0 +1,56 @@
+2.362 - 2nd May 2007
+---------------------
+- Fixed issue with Java 6 runtime [null pointers thrown when PmWikiDraw applet begins]
+- Added support for PmWiki running with EnableDirectDownload=0 set.
+
+2.361 - 14th March 2005
+--------------------------
+- Fixed fault with reading drawing files, bufferedReader.ready() is *not* reliable!
+
+2.36 - 10th March 2005
+--------------------------
++ Added Pen/Text/Fill colour buttons and configured system to default to the last selected one.
+! Added Save + Continue menu option for long drawing sessions :)
++ Re-wired File menu options so ALT-x,  Ctrl-Q, Ctrl-S now work, when discarding + exiting and 'confirm dialog' is now presented.
+- Fixed 'Select All' so cut/copy + paste now paste back in the correct [reversed] order.
++ Drag Select now ignores grid constraints making it slightly easier to select things.
+- Grouping is now selection order independant, i.e. the relative depths of objects pre-grouping are retained within the new group
+  please note that this new group of objects will have different layers relative to the drawing as they did prior to grouping, so un-grouping
+  won't put them back in the same order... undo'ing should do however :)
+
+2.352 - 12th February 2005
+--------------------------
++ Support for PmWiki Farms, added new configuration parameter that can specify which 'pub' folder to use explicitly.
+  Seems odd I need to do this but apparently its the 'correct' way to do things in PmWiki.
++ Modified the 'scribble' tool to have two modes, 'assisted' which respects grid settings and allows for 'elasticated' lines 
+  and 'freehand' which is ideal for scribbling quick messages.
+  
+2.351B - 5th January 2005
+-------------------------
+- Modified DrawingConversion code to 'fix' Textfigures now their borders work. Version 2.35 had the effect of giving all TextFigures
+  black borders on load. Now the conversion code rewrites the drawing to give TextFigures borders of colour 'none'. IFF no border
+  is currently defined.
+- Incremented drawing version id for above fix.
+- Symbol libraries are now loaded through the drawing conversion code.
+- Updated sample symbol libraries to use the new drawing version-id.
+
+2.35B
+------
+! Image resources are now 'relative' meaning that drawings can (theoretically) be moved
+  between wikis.  This does of course assume that you have the same images available under
+  the pub/drawing path :) - Future modification will be to provide a way to configure a 'shared'
+  resource location between wikis.
++ Symbol libraries can now be added to local PmWikiDraw installations.  These contain previously
+  created symbols that are imported directly into the drawing as grouped figures.
+- TextFigures can now have their frame colour set independantly from their text colour. Allowing for proper
+  label like behaviour
+    
+2.342B
+------
+- Fixed VM compatibility bug that stopped PmWikiDraw working with 1.3 VMs.
+
+Key 
+------
+- Bug fix
++ New Feature
+! Feature request fullfillment

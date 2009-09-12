@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!-- Note that this config file has some intentional errors.
+     It tries to set fields that don't exist, and it fails
+     to set some fields on some objects. -->
+<ship-config>
+  <!-- Note that we don't have to load a config for everything.
+       We might want to load a ship-config that only has a weapons
+       section, or one that only has a propulsion section.  It should
+       still work with our implementation of Conf.java -->
+  <weapons>
+    <main-energy-beam setting="slaughter" power="1.21 Giga watts"/>
+    <secondary-energy-beam setting="stun"/>
+    <energy-torpedo setting="double-whammy"/>
+    <combat-computer sub-system="prime-directive" state="disabled"/>
+    <secondary-torpedo setting="single-whammy">
+      <ammo-type name="energetic" quantity="25"/>
+    </secondary-torpedo>
+  </weapons>
+  <propulsion>
+    <starboard-warp-drive space-time-setting="Kerr"/>
+    <port-warp-drive
+      containment-field="30%"
+      space-time-setting="Kerr-Schild"/>
+  </propulsion>
+  <defense>
+    <force-field setting="double-polarized"
+       frequency="randomized"/>
+    <ecm setting="wag-the-dog"/>
+  </defense>
+  <life-support>
+    <atmosphere>
+      <engineering level="100%" scent="coffee" race="human"/>
+      <bridge level="110%" scent="rarified" race="lgm"/>
+      <hydroponics level="90%" scent="carrot" race="guinea-pig"/>
+    </atmosphere>
+  </life-support>
+</ship-config>

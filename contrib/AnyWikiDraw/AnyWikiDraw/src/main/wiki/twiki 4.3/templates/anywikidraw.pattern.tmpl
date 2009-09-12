@@ -1,0 +1,35 @@
+%TMPL:INCLUDE{"oops"}%
+
+
+
+%TMPL:DEF{"titleaction"}% AnyWikiDraw: %TMPL:END%
+
+
+
+%TMPL:DEF{"heading"}% Edit <nop>AnyWikiDraw figure '%PARAM1%' %TMPL:END%
+
+
+
+%TMPL:DEF{"message"}%<img src="%ATTACHURLPATH%/%PARAM1%.gif" border="2" title="%PARAM1%" alt="Image of drawing %PARAM1%" />
+<applet code="CH.ifa.draw.twiki.TWikiDraw.class" archive="%PUBURLPATH%/%TWIKIWEB%/AnyWikiDrawPlugin/TWikiDraw/twikidraw.jar" width="100%" height="40">
+<param name="drawpath" value="%ATTACHURLPATH%/%PARAM1%.draw" />
+<param name="gifpath"  value="%ATTACHURLPATH%/%PARAM1%.gif" />
+<param name="extracolors"  value="%WEB% background=%WEBBGCOLOR%,%TWIKIDRAWPLUGIN_EXTRA_COLORS%" />
+<param name="savepath" value="%SCRIPTURLPATH{"upload"}%/%WEB%/%TOPIC%" />
+<param name="viewpath" value="%SCRIPTURLPATH{"view"}%/%WEB%/%TOPIC%" />
+<param name="helppath" value="%SCRIPTURLPATH{"view"}%/%TWIKIWEB%/AnyWikiDrawPlugin" />
+</applet>
+
+%ICON{"warning"}% You need a Java 1.5 enabled browser to edit the drawing '%PARAM1%'.
+
+%ICON{"warning"}% If you have edited this drawing before, it may be necessary to reload the drawing in the editor, due to URL caching. <br />
+It may also be necessary to reload the originating topic after you have finished editing and saving this drawing, to see the updated figure.
+
+%ICON{"key"}% It is important that you are authenticated (are logged in) while editing, otherwise your changes may be lost. <br />
+%WIKITOOLNAME% currently thinks you are '<nop>%USERINFO{format="$wikiname"}%'.
+
+%ICON{"help"}% You can get help on <nop>AnyWikiDraw by visiting the <a target="AnyWikiDrawPlugin" onclick="return launchWindow('%TWIKIWEB%','AnyWikiDrawPlugin')" href="%SCRIPTURLPATH{"view"}%/%TWIKIWEB%/AnyWikiDrawPlugin"><nop>AnyWikiDrawPlugin page</a> (opens in new window).%TMPL:END%
+
+
+
+%TMPL:DEF{"topicactionbuttons"}%<a href="%SCRIPTURLPATH{"view"}%/%WEB%/%TOPIC%">%MAKETEXT{"Cancel"}%</a>%TMPL:END%
