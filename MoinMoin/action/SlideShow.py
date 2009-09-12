@@ -112,12 +112,18 @@ class SlidePage(Page):
 
     def titleAt(self, number):
         """ Return the title of slide number """
-        return self.slideIndex()[number - 1][0]
+        try:
+            return self.slideIndex()[number - 1][0]
+        except IndexError:
+            return 1
 
     def bodyAt(self, number):
         """ Return the body of slide number """
-        start, end = self.slideIndex()[number - 1][1:]
-        return self.get_raw_body()[start:end]
+        try:
+            start, end = self.slideIndex()[number - 1][1:]
+            return self.get_raw_body()[start:end]
+        except IndexError:
+            return self.get_raw_body()
 
     # Private ----------------------------------------------------------------
 
