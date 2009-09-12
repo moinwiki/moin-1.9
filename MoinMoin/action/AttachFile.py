@@ -318,6 +318,10 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
                 links.append(fmt.url(1, getAttachUrl(pagename, file, request, drawing=base)) +
                              fmt.text(label_edit) +
                              fmt.url(0))
+            elif ext == '.adraw':
+                links.append(fmt.url(1, getAttachUrl(pagename, file, request, drawing=base)) +
+                             fmt.text(label_edit) +
+                             fmt.url(0))
             else:
                 links.append(fmt.url(1, getAttachUrl(pagename, file, request, do='view')) +
                              fmt.text(label_view) +
