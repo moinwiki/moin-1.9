@@ -39,6 +39,7 @@ Version 1.9.0current:
   * the AttachFile TWikiDraw code refactored to an action.
   * TextCha feature added to TWikiDraw
   * AnyWikiDraw applet and source also added a new drawing action anywikidraw
+  * SlideShow action and css from moin/extensions for modernized theme added
 
   Bug fixes:
   * Bug with "language:en" was fixed for the Moin search. Now language:
