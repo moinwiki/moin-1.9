@@ -1,0 +1,7 @@
+
+    com.wombatinvasion.pmwikidraw.PmWikiDrawing 2 1 
+        org.jhotdraw.figures.GroupFigure 4 
+            org.jhotdraw.figures.RectangleFigure "attributes" "attributes" 2 "FillColor" "Color" 51 153 0 "FrameColor" "Color" 255 199 158 0 0 30 60  
+            org.jhotdraw.figures.RectangleFigure "attributes" "attributes" 2 "FillColor" "Color" 255 255 255 "FrameColor" "Color" 255 199 158 30 0 30 60  
+            org.jhotdraw.figures.RectangleFigure "attributes" "attributes" 2 "FillColor" "Color" 255 102 51 "FrameColor" "Color" 255 199 158 60 0 30 60  
+            org.jhotdraw.figures.RectangleFigure "attributes" "attributes" 1 "FillColor" "Color" 255 199 158 0 0 90 60    
