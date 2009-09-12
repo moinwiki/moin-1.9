@@ -80,14 +80,11 @@ def attachment_drawing(self, url, text, **kw):
     except (KeyError, IOError, OSError):
         map = ''
     if map:
-        # XXX check how that is done by josef
+        # ToDo mapid must become uniq
         # we have a image map. inline it and add a map ref to the img tag
         mapid = 'ImageMapOf' + drawing
         map = map.replace('id="%s.svg"' % drawing, '')
         map = map.replace('name="%s.svg"' % drawing, 'name="%s"' % mapid)
-        # add alt and title tags to areas
-        #map = re.sub(r'href\s*=\s*"((?!%TWIKIDRAW%).+?)"', r'href="\1" alt="\1" title="\1"', map)
-        #map = map.replace('%TWIKIDRAW%"', '%s" alt="%s" title="%s"' % (drawing_url, title, title))
         # unxml, because 4.01 concrete will not validate />
         map = map.replace('/>', '>')
         title = _('Clickable drawing: %(filename)s') % {'filename': self.text(drawing)}
