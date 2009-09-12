@@ -39,7 +39,10 @@ def execute(script, data_dir, rev):
                     if ext != '.gif':
                         # get rid of the gif (TWikiDraw will (re)create
                         # a .png when someone edits the drawing)
-                        tar.add(filename, basename + ext)
+                        # we use drawing.* as tar member filenames EVER, so the
+                        # member filenames do not need to be changed when the
+                        # tar container file gets renamed:
+                        tar.add(filename, 'drawing' + ext)
                     os.remove(filename)
                 except OSError, err:
                     if err.errno != errno.ENOENT:
