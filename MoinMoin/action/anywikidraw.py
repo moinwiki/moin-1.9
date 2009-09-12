@@ -134,7 +134,7 @@ class AnyWikiDraw(object):
         ci = AttachFile.ContainerItem(request, pagename, target + '.adraw')
         filecontent = file_upload.stream
         content_length = None
-        if ext == '.svg': # TWikiDraw POSTs this first
+        if ext == '.svg': # AnyWikiDraw POSTs this first
             AttachFile._addLogEntry(request, 'ATTDRW', pagename, target + '.adraw')
             ci.truncate()
             filecontent = filecontent.read() # read file completely into memory
@@ -159,61 +159,53 @@ class AnyWikiDraw(object):
         request = self.request
         pagename = self.pagename
         target = self.target
-        url = request.getQualifiedURL()
-        target_url = ''
-        drawing_name = ''
-
-        htdocs = "%s%s" % (request.cfg.url_prefix_static, '/applets/anywikidraw')
         ci = AttachFile.ContainerItem(request, pagename, target + '.adraw')
         if ci.exists():
-            drawing_name = "%s.svg" % target
-            target_url = ci.member_url('drawing.svg')
+            drawurl = ci.member_url('drawing.svg')
+        else:
+            drawurl = ''
+        pageurl = request.href(pagename)
+        saveurl = request.href(pagename, action=action_name, do='save', target=target)
+        helpurl = request.href("HelpOnActions/AttachFile")
+        #if TextCha(request).is_enabled():
+        #    textchaquestion = TextCha(request).question
+        #else:
+        #    textchaquestion = ''
 
         html = """
-    <h2> %(editdrawing)s </h2>
-<!--
-    Document   : anywikidraw_for_twiki_demo
-    Created on : May 13, 2008, 7:32:27 AM
-    Author     : werni
-    Version    : $Id: anywikidraw_for_twiki_demo.html 107 2009-06-15 19:33:05Z rawcoder $
+<p>
+<applet code="org.anywikidraw.twiki.TWikiDrawingApplet.class" codebase="."
+        archive="%(htdocs)s/applets/anywikidraw/lib/AnyWikiDrawForTWiki.jar" width="800" height="620">
 
-    adjusted for MoinMoin 2009-08-29 ReimarBauer
--->
-        <applet codebase="."
-                archive="%(htdocs)s/lib/AnyWikiDrawForTWiki.jar"
-                code=org.anywikidraw.twiki.TWikiDrawingApplet.class
-                width="800" height="600">
+    <!-- The following parameters are used to tell AnyWikiDraw how to communicate with MoinMoin. -->
+    <param name="DrawingName" value="%(basename)s.svg">
+    <param name="DrawingURL" value="%(drawurl)s">
+    <param name="DrawingWidth" value="640">
+    <param name="DrawingHeight" value="480">
+    <param name="PageURL" value="%(pageurl)s">
+    <param name="UploadURL" value="%(saveurl)s">
 
-           <!-- The following parameters are used to tell AnyWikiDraw how to communicate with MoinMoin.
-           -->
-           <param name="DrawingName" value="%(target)s.svg"/>
-           <param name="DrawingWidth" value="800"/>
-           <param name="DrawingHeight" value="600"/>
-           <param name="DrawingURL" value="%(target_url)s"/>
-           <param name="PageURL" value="%(url)s/%(pagename)s">
-           <param name="UploadURL" value="%(pagename)s?action=anywikidraw&do=save&target=%(target)s"/>
+    <!-- The following parameters are used to configure the drawing applet -->
+    <param name="Locale" value="en">
 
-           <!-- The following parameters are used to configure the drawing applet -->
-           <param name="Locale" value="en"/>
+    <!-- The following parameters are used to configure Sun's Java Plug-In -->
+    <param name="codebase_lookup" value="false">
+    <param name="classloader_cache" value="false">
+    <param name="java_arguments" value="-Djnlp.packEnabled=true">
+    <param name="boxborder" value="false">
+    <param name="centerimage" value="true">
+    <strong>NOTE:</strong> You need a Java enabled browser to edit the drawing.
+</applet>
+</p>
+""" % dict(
+    htdocs=request.cfg.url_prefix_static,
+    basename=wikiutil.escape(target, 1),
+    drawurl=wikiutil.escape(drawurl, 1),
+    pageurl=wikiutil.escape(pageurl, 1),
+    saveurl=wikiutil.escape(saveurl, 1),
+)
 
-           <!-- The following parameters are used to configure Sun's Java Plug-In -->
-           <param name="codebase_lookup" value="false"/>
-           <param name="classloader_cache" value="false"/>
-           <param name="java_arguments" value="-Djnlp.packEnabled=true"/>
-           <param name="image" value="lib/Splash.gif"/>
-           <param name="boxborder" value="false"/>
-           <param name="centerimage" value="true"/>
-        </applet>
-""" % {'htdocs': htdocs,
-       'pagename': pagename,
-       'target': target,
-       'drawing_name': drawing_name,
-       'target_url': target_url,
-       'url': url,
-       'editdrawing': _('Edit drawing'),
-       }
-
-        title = '%s:%s' % (pagename, target)
+        title = '%s %s:%s' % (_('Edit drawing'), pagename, target)
         request.theme.send_title(title, page=request.page, pagename=pagename)
         request.write(request.formatter.startContent("content"))
         request.write(request.formatter.rawHTML(html))
