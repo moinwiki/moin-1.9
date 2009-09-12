@@ -5,22 +5,6 @@ MoinMoin - SlideShow action
 Treat a wiki page as a set of slides.  Displays a single slide at a
 time, along with a navigation aid.
 
-A slide show page uses headings level 1 to define slides::
-#pragma date Sept 04 2009
-#pragma Your Name
-
-    General introduction or comments
-
-    = Slide 1 =
-    Slide 1 contents
-
-    = Slide 2 =
-    Slide 2 contents ...
-
-Selecting SlideShow from the "More Actions" menu will display the
-first slide with navigation links at the top of the screen.
-Move between slides by clicking the links or with the arrow keys.
-
 @copyright: 2005 Jim Clark,
             2005 Nir Soffer,
             2008 MoinMoin:ThomasWaldmann,
