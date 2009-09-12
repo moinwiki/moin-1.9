@@ -82,13 +82,12 @@ def absoluteName(url, pagename):
     else:
         return u"/".join(pieces[:-1]), pieces[-1]
 
-def getAttachUrl(pagename, filename, request, addts=0, escaped=0, do='get', drawing='', upload=False):
-    """ Get URL that points to attachment `filename` of page `pagename`. """
+def getAttachUrl(pagename, filename, request, addts=0, escaped=0, do='get', drawing=''):
+    """ Get URL that points to attachment `filename` of page `pagename`.
+        For upload url (files, not drawings), call with do='upload_form'.
+    """
     if not drawing:
-        if upload:
-            url = request.href(pagename, action=action_name, rename=wikiutil.taintfilename(filename))
-        else:
-            url = request.href(pagename, action=action_name, do=do, target=filename)
+        url = request.href(pagename, action=action_name, do=do, target=filename)
     else:
         url = request.href(pagename, action=request.cfg.drawing_action, target=drawing)
     return url
@@ -416,8 +415,8 @@ def send_uploadform(pagename, request):
 <dl>
 <dt>%(upload_label_file)s</dt>
 <dd><input type="file" name="file" size="50"></dd>
-<dt>%(upload_label_rename)s</dt>
-<dd><input type="text" name="rename" size="50" value="%(rename)s"></dd>
+<dt>%(upload_label_target)s</dt>
+<dd><input type="text" name="target" size="50" value="%(target)s"></dd>
 <dt>%(upload_label_overwrite)s</dt>
 <dd><input type="checkbox" name="overwrite" value="1" %(overwrite_checked)s></dd>
 </dl>
@@ -432,8 +431,8 @@ def send_uploadform(pagename, request):
     'url': request.href(pagename),
     'action_name': action_name,
     'upload_label_file': _('File to upload'),
-    'upload_label_rename': _('Rename to'),
-    'rename': wikiutil.escape(request.values.get('rename', ''), 1),
+    'upload_label_target': _('Rename to'),
+    'target': wikiutil.escape(request.values.get('target', ''), 1),
     'upload_label_overwrite': _('Overwrite existing attachment of same name'),
     'overwrite_checked': ('', 'checked')[request.form.get('overwrite', '0') == '1'],
     'upload_button': _('Upload'),
@@ -510,10 +509,8 @@ def _do_upload(pagename, request):
     if overwrite and not request.user.may.delete(pagename):
         return _('You are not allowed to overwrite a file attachment of this page.')
 
-    rename = form.get('rename', u'').strip()
-    if rename:
-        target = rename
-    else:
+    target = form.get('target', u'').strip()
+    if not target:
         target = file_upload.filename or u''
 
     target = wikiutil.clean_input(target)

@@ -44,7 +44,7 @@ def gedit_drawing(self, url, text, **kw):
     kw['title'] = "drawing:%s" % wikiutil.quoteWikinameURL(url)
     pagename, drawing = AttachFile.absoluteName(url, self.page.page_name)
     containername = wikiutil.taintfilename(drawing) + ".adraw"
-    drawing_url = AttachFile.getAttachUrl(pagename, containername, self.request, drawing=drawing, upload=True)
+    drawing_url = AttachFile.getAttachUrl(pagename, containername, self.request, drawing=drawing)
     ci = AttachFile.ContainerItem(self.request, pagename, containername)
     if not ci.exists():
         title = _('Create new drawing "%(filename)s (opens in new window)"') % {'filename': drawing}
@@ -61,7 +61,7 @@ def attachment_drawing(self, url, text, **kw):
     pagename, drawing = AttachFile.absoluteName(url, self.page.page_name)
     containername = wikiutil.taintfilename(drawing) + ".adraw"
 
-    drawing_url = AttachFile.getAttachUrl(pagename, containername, self.request, drawing=drawing, upload=True)
+    drawing_url = AttachFile.getAttachUrl(pagename, containername, self.request, drawing=drawing)
     ci = AttachFile.ContainerItem(self.request, pagename, containername)
     if not ci.exists():
         title = _('Create new drawing "%(filename)s (opens in new window)"') % {'filename': drawing}

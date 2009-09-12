@@ -623,7 +623,7 @@ class Formatter(FormatterBase):
                 title = "attachment:%s" % url
                 css = 'attachment'
             else:
-                target = AttachFile.getAttachUrl(pagename, fname, self.request, upload=True)
+                target = AttachFile.getAttachUrl(pagename, fname, self.request, do='upload_form')
                 title = _('Upload new attachment "%(filename)s"') % {'filename': fname}
                 css = 'attachment nonexistent'
             return self.url(on, target, css=css, title=title)
@@ -637,7 +637,7 @@ class Formatter(FormatterBase):
         exists = AttachFile.exists(self.request, pagename, fname)
         if exists:
             kw['css'] = 'attachment'
-            kw['src'] = AttachFile.getAttachUrl(pagename, filename, self.request, addts=1)
+            kw['src'] = AttachFile.getAttachUrl(pagename, fname, self.request, addts=1)
             title = _('Inlined image: %(url)s') % {'url': self.text(url)}
             if not 'title' in kw:
                 kw['title'] = title
@@ -649,7 +649,7 @@ class Formatter(FormatterBase):
             title = _('Upload new attachment "%(filename)s"') % {'filename': fname}
             img = self.icon('attachimg')
             css = 'nonexistent'
-            target = AttachFile.getAttachUrl(pagename, fname, self.request, upload=True)
+            target = AttachFile.getAttachUrl(pagename, fname, self.request, do='upload_form')
             return self.url(1, target, css=css, title=title) + img + self.url(0)
 
     def attachment_drawing(self, url, text, **kw):

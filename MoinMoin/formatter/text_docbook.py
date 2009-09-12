@@ -422,8 +422,7 @@ class Formatter(FormatterBase):
             return self.text("[attachment:%s]" % url)
         else:
             return self.image(
-                src=AttachFile.getAttachUrl(pagename, filename,
-                                            self.request, addts=1),
+                src=AttachFile.getAttachUrl(pagename, filename, self.request, addts=1),
                 attachment_title=url,
                 **kw)
 

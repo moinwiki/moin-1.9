@@ -66,14 +66,4 @@ class TestAttachFile:
 
         assert file_exists
 
-    def test_getAttachUrl(self):
-        """
-        Tests if AttachFile.getAttachUrl taints a filename
-        """
-        filename = "<test2.txt>"
-        expect = "rename=_test2.txt_"
-        result = AttachFile.getAttachUrl(self.pagename, filename, self.request, upload=True)
-
-        assert expect in result
-
 coverage_modules = ['MoinMoin.action.AttachFile']
