@@ -12,7 +12,7 @@
                 2005-2009 MoinMoin:ReimarBauer,
     @license: GNU GPL, see COPYING for details.
 """
-import os, re, time
+import os, re
 
 from MoinMoin import log
 logging = log.getLogger(__name__)
@@ -166,50 +166,47 @@ class TwikiDraw(object):
         request = self.request
         pagename = self.pagename
         target = self.target
-        url = request.getQualifiedURL()
-        now = time.time()
-        htdocs = "%s%s" % (request.cfg.url_prefix_static, "/applets/TWikiDrawPlugin")
         ci = AttachFile.ContainerItem(request, pagename, target + '.tdraw')
-        drawpath = ci.member_url('drawing.draw')
-        pngpath = ci.member_url('drawing.png')
-        pagelink = request.href(pagename, action=action_name, ts=now)
-        helplink = Page(request, "HelpOnActions/AttachFile").url(request)
-        savelink = request.href(pagename, action=action_name, do='save', target=target)
-        timestamp = '&amp;ts=%s' % now
-        question = ''
-        if TextCha(self.request).is_enabled():
-            question = TextCha(self.request).question
-        html = '''<h2> %(editdrawing)s </h2>
-<p>
-<img src="%(pngpath)s%(timestamp)s">
-<applet code="CH.ifa.draw.twiki.TWikiDraw.class"
-        archive="%(htdocs)s/twikidraw.jar" width="640" height="480">
-<param name="drawpath" value="%(drawpath)s">
-<param name="pngpath"  value="%(pngpath)s">
-<param name="savepath" value="%(savelink)s">
-<param name="basename" value="%(basename)s">
-<param name="viewpath" value="%(url)s/%(pagename)s/">
-<param name="helppath" value="%(helplink)s">
-<param name="textchaquestion" value="%(textchaquestion)s">
-<strong>NOTE:</strong> You need a Java enabled browser to edit the drawing example.
-</applet>
-</p>''' % {
-    'pagename': pagename,
-    'url': url,
-    'target': target,
-    'pngpath': pngpath,
-    'timestamp': timestamp,
-    'htdocs': htdocs,
-    'drawpath': drawpath,
-    'pagelink': pagelink,
-    'helplink': helplink,
-    'savelink': savelink,
-    'basename': wikiutil.escape(target, 1),
-    'editdrawing': _("Edit drawing"),
-    'textchaquestion': question,
-    }
+        if ci.exists():
+            drawurl = ci.member_url('drawing.draw')
+            pngurl = ci.member_url('drawing.png')
+        else:
+            drawurl = 'drawing.draw'
+            pngurl = 'drawing.png'
+        pageurl = request.href(pagename)
+        saveurl = request.href(pagename, action=action_name, do='save', target=target)
+        helpurl = request.href("HelpOnActions/AttachFile")
+        if TextCha(request).is_enabled():
+            textchaquestion = TextCha(request).question
+        else:
+            textchaquestion = ''
 
-        title = "%s:%s" % (pagename, target)
+        html = """
+<p>
+<applet code="CH.ifa.draw.twiki.TWikiDraw.class"
+        archive="%(htdocs)s/applets/TWikiDrawPlugin/twikidraw.jar" width="640" height="480">
+    <param name="drawpath" value="%(drawurl)s">
+    <param name="pngpath"  value="%(pngurl)s">
+    <param name="savepath" value="%(saveurl)s">
+    <param name="basename" value="%(basename)s">
+    <param name="viewpath" value="%(pageurl)s">
+    <param name="helppath" value="%(helpurl)s">
+    <param name="textchaquestion" value="%(textchaquestion)s">
+    <strong>NOTE:</strong> You need a Java enabled browser to edit the drawing.
+</applet>
+</p>
+""" % dict(
+    htdocs=request.cfg.url_prefix_static,
+    basename=wikiutil.escape(target, 1),
+    drawurl=wikiutil.escape(drawurl, 1),
+    pngurl=wikiutil.escape(pngurl, 1),
+    pageurl=wikiutil.escape(pageurl, 1),
+    saveurl=wikiutil.escape(saveurl, 1),
+    helpurl=wikiutil.escape(helpurl, 1),
+    textchaquestion=wikiutil.escape(textchaquestion, 1),
+)
+
+        title = "%s %s:%s" % (_("Edit drawing"), pagename, target)
         request.theme.send_title(title, page=request.page, pagename=pagename)
         request.write(request.formatter.startContent("content"))
         request.write(request.formatter.rawHTML(html))
