@@ -84,18 +84,13 @@ def absoluteName(url, pagename):
 
 def getAttachUrl(pagename, filename, request, addts=0, escaped=0, do='get', drawing='', upload=False):
     """ Get URL that points to attachment `filename` of page `pagename`. """
-    if upload:
-        if not drawing:
-            url = request.href(pagename, rename=wikiutil.taintfilename(filename),
-                               action=action_name)
+    if not drawing:
+        if upload:
+            url = request.href(pagename, action=action_name, rename=wikiutil.taintfilename(filename))
         else:
-            url = request.href(pagename,
-                               target=drawing, action=request.cfg.drawing_action)
+            url = request.href(pagename, action=action_name, do=do, target=filename)
     else:
-        if not drawing:
-            url = request.href(pagename, target=filename, action=action_name, do=do)
-        else:
-            url = request.href(pagename, target=drawing, action=request.cfg.drawing_action)
+        url = request.href(pagename, action=request.cfg.drawing_action, target=drawing)
     return url
 
 
