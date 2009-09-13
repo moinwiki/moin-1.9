@@ -306,7 +306,7 @@ class SlideshowAction:
         text = _('Edit')
         if self.request.user.may.write(self.page.page_name):
             return self.linkToPage(text, 'action=edit', title=_('Edit slide show'))
-        return self.disabledLink(text, title=_("you may need to login to edit this page"))
+        return self.disabledLink(text, title=_("You are not allowed to edit this page."))
 
     def item_navigation_quit(self):
         _ = self.request.getText
@@ -325,12 +325,12 @@ class SlideshowAction:
     def item_navigation_back(self):
         _ = self.request.getText
         number = self.previous_slide()
-        return self.linkToSlide(number, text=self.backIcon(), title=_('Show previous slide (back arrow)'))
+        return self.linkToSlide(number, text=self.backIcon(), title=_('Show previous slide (left arrow)'))
 
     def item_navigation_forward(self):
         _ = self.request.getText
         number = self.next_slide()
-        return self.linkToSlide(number, self.forwardIcon(), title=_('Show next slide (forward arrow)'))
+        return self.linkToSlide(number, self.forwardIcon(), title=_('Show next slide (right arrow)'))
 
     def item_forward_key(self, forward=True):
         return (self.leftArrowKey, self.rightArrowKey)[self.adaptToLanguage(forward)]
